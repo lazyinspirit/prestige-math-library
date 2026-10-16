@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-holomorphic-primitive-on-star-shaped-domain.json
 id: thm-holomorphic-primitive-on-star-shaped-domain
 kind: theorem
 title: "Every holomorphic function on a star-shaped domain has a primitive"
@@ -7,18 +9,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-goursat-triangle-theorem, prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain, cor-complex-differentiability-implies-continuity]
+deps: [def-star-shaped-open-subset-of-rn, thm-complex-coordinate-isometry-and-topology-transport, thm-goursat-triangle-theorem, prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain, cor-complex-differentiability-implies-continuity]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-sonnet-5"
-    verdict: pass
-    date: 2026-08-17
-  audited: 2026-08-17
 sources:
   scraped: []
   references:
@@ -35,7 +30,7 @@ $$F(z)=\int_{\ell_{az}}f(\zeta)\,d\zeta.$$
 
 ## Facts & Assumptions
 
-**Given:** An open set $U$ star-shaped with respect to $a\in U$, and a holomorphic $f:U\to\mathbb C$.
+**Given:** A set $U$ open for $d_{\mathbb C}$ and star-shaped with respect to $a\in U$, meaning that $\Phi[U]$ is open and star-shaped at $\Phi(a)$ in [[def-star-shaped-open-subset-of-rn]]. This is equivalent to containment of every segment from $a$ to a point of $U$, by [[thm-complex-coordinate-isometry-and-topology-transport]]. We have and a holomorphic $f:U\to\mathbb C$.
 
 [L1] A holomorphic function is continuous ([[cor-complex-differentiability-implies-continuity]]).
 

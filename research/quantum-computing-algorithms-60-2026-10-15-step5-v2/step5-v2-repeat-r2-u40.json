@@ -1,0 +1,116 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "40",
+  "input_sha256": "0dcbd0a3bad305a51883069ad019f8ebfa82ba1896fba313da0308bdccaf067a",
+  "decisions": [
+    {
+      "id": "lem-qa-16-query-unitary-normal-form",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "53c3c7c63e73d743faa801f7d15c44bd06f6849066543b73e5f4109d97f58d07",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The cited standard-query Definition permits a=0, whose address set is the singleton empty word, not the numeric label 1. Thus step 2.1 specifies an undefined routing operation for an allowed algorithm, leaving its general normal-form construction unproved. Replaced the scratch address by the first legal computational-basis label; positive register dimension guarantees it exists, including the empty word at zero qubits. XOR fixes the plus target at that address, so routing and inverse routing preserve every inactive branch with one unconditional call.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-16-query-unitary-normal-form",
+      "disposition": "repaired",
+      "post_sha256": "63ca45af364c2761b18172d9121051faa9e26a758335838206640d3fbf895479",
+      "review_context_sha256": "48798611d2d40b09628df6d8d001cd3262d1dcc7b7c3fff5b5dd1065618ab8a0",
+      "reason": "Checked the complete proof against the current query-algorithm and standard-XOR Definitions, deferred-measurement Statement and proof, and positive-dimensional register and basis interfaces. Finite nonoracle dilations preserve reference correlations; retained histories permit input-independent routing. The corrected scratch label is legal at zero address qubits. X applied to the plus state is exactly the identity, so inverse routing restores scratch without a controlled unknown-oracle call. Induction over T slots preserves the output law, also for T=0. This is a repair review by its author, not independent acceptance. The Statement and all dependencies remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "lem-qa-16-query-unitary-normal-form",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "53c3c7c63e73d743faa801f7d15c44bd06f6849066543b73e5f4109d97f58d07",
+      "defect_type": "logic",
+      "severity": "fatal",
+      "location": "proof-step",
+      "step": "2.1",
+      "subclass": "invalid-witness",
+      "disposition": "fixed",
+      "pre_sha256": "6558a78533308d8fd773ebc0d7f2bd29943f806891718274ad6cb56d8dca9370",
+      "post_sha256": "63ca45af364c2761b18172d9121051faa9e26a758335838206640d3fbf895479",
+      "reason": "The literal scratch address i_0=1 is absent from a zero-qubit address register. Selecting the first computational-basis label makes the inactive-slot witness legal for every allowed address size and leaves the Statement intact."
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update",
+      "id": "lem-qa-16-query-unitary-normal-form",
+      "reason": "This repair changes only the assigned draft proof and its owning contract. No Statement or Definition changes, new interfaces, or potentially defective published uses were identified."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/lem-qa-16-query-unitary-normal-form.md",
+      "research/quantum-computing-algorithms-60-2026-10-15-batch-40.proof-contracts.json"
+    ],
+    "exact_change": "Step 2.1 now selects the first computational-basis label, explicitly the empty word for zero address qubits, and cites positive register dimension. The owning contract mirrors the derivation and updates empty, one, and nonempty-choice boundary evidence and repair notes; historical template-review hashes remain unaltered and do not certify this repair.",
+    "local_evidence": [
+      {
+        "path": "items/def-qa-standard-bit-query.md",
+        "locator": "Definition: a,b>=0 and address words in {0,1}^a"
+      },
+      {
+        "path": "items/def-qc-register-and-computational-basis.md",
+        "locator": "Definition: register dimension is positive; zero-qubit register is C with basis {1}"
+      },
+      {
+        "path": "items/thm-qc-deferred-measurement.md",
+        "locator": "Statement and Proof: coherent finite instruments preserve branch maps on data and arbitrary reference registers"
+      },
+      {
+        "path": "library/quantum-algorithms/adversary-methods-and-quantum-query-complexity.md",
+        "locator": "Page interface: ordinary XOR queries, with nonoracle gate and preparation costs separate"
+      }
+    ],
+    "interface_comparison": "Recovered exact pre-edit bytes by reversing only the two proof replacements, verified both the frozen itemHashGuard and assigned judge hash, and compared the complete original/current Statement sections directly: byte-identical. No downstream examination is triggered.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-40.proof-contracts.json --strict --items lem-qa-16-query-unitary-normal-form --json",
+        "exit_code": 0,
+        "result": "ok:true; one selected contract, zero errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-16-query-unitary-normal-form.md --json",
+        "exit_code": 0,
+        "result": "one checked proof; zero failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-qa-16-query-unitary-normal-form.md --json",
+        "exit_code": 0,
+        "result": "one checked item; zero errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-qa-16-query-unitary-normal-form.md",
+        "exit_code": 0,
+        "result": "1 items, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run quantum-computing-algorithms-60-2026-10-15 --items lem-qa-16-query-unitary-normal-form",
+        "exit_code": 0,
+        "result": "Copied the current post_sha256 and review_context_sha256 immediately after completing the mathematical repair review."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Engine collection and ordinary independent rejudgment; no judge, gate cycle, stamp, or certification launched."
+  }
+}

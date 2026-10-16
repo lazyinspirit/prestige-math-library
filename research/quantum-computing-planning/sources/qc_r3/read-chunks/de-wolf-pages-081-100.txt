@@ -1,0 +1,1443 @@
+===== PDF PAGE 81 =====
+
+all possible
+�r
+2
+�
+edges having both endpoints in R. We will call the vertex for set R marked if it
+contains one edge of a triangle. If there is at least one triangle in the graph, then the fraction of
+marked vertices is at least ε ≈(r/n)2.
+The setup cost will be S =
+�r+1
+2
+�
+: for an edge (R, R′) of the Johnson graph we query the
+�r+1
+2
+�
+
+possible edges induced by the r + 1 H-vertices of R ∪R′. The update cost will be U = 2r −2,
+because if we remove one vertex i from R then we have to remove information about r −1 edges
+in H, and if we add a new j to R we have to query r −1 new edges in H.
+Getting a good upper bound for the checking cost C requires some more work—namely Grover
+search plus another quantum walk! Suppose we are given a set R of r vertices. How do we decide
+whether R contains an edge of a triangle? If we can efficiently decide, for a given u and R, whether
+R contains vertices v, w such that u, v, w form a triangle in H, then we could combine this with a
+Grover search over all n possible vertices u of H. Given u and R, let us design a subroutine based on
+another quantum walk, this time on the Johnson graph J(r, r2/3). Each vertex of this Johnson graph
+corresponds to a subset R′ ⊆R of r′ = r2/3 vertices. Its spectral gap is δ′ = r/r′(r −r′) ≈1/r2/3.
+We’ll mark R′ if it contains vertices v, w such that u, v, w form a triangle. If there is at least one
+triangle involving u and some v, w ∈R, then the fraction of marked vertices R′ in J(r, r2/3) is at
+least ε′ ≈(r′/r)2 = 1/r2/3. For this subroutine, the setup cost is O(r2/3) (for each v ∈R′, query
+whether (u, v) is an edge in H); the update cost is O(1) (if we replace v in R by w, then we need
+to “unquery” edge (u, v) and query edge (u, w)); and the checking cost is 0. Plugging this into
+Eq. (8.2), we can decide for a fixed u whether there exist two vertices in R′ that complete u to a
+triangle, using O(r2/3) queries. Let’s ignore the small error probability of the latter subroutine (it
+can be dealt with, but that’s technical). We combine this with Grover search over all n vertices u
+to get C = O(√nr2/3).
+Plugging these S, U, and C into Eq. (8.2), the overall cost of a quantum walk algorithm for
+triangle-finding is
+
+S + 1
+√ε
+
+�
+C + 1
+√
+
+δ
+U
+�
+= O
+�
+r2 + n
+
+r (√nr2/3 + r3/2)
+�
+.
+
+This is O(n13/10) if we set r = n3/5 [193]. The quantum walk algorithm ends with a superposition
+where most of the amplitude sits on sets R containing one edge of a triangle (i.e., two vertices of
+H that are part of a triangle). Now a measurement of that final state gives us such a set R with
+high probability, and then it’s relatively cheap to find the third vertex of the triangle by another
+Grover search over the n −r vertices of H that are not in R.
+The exponent 13/10 can be slightly improved further [43, 173, 152], and the best known exponent
+is 5/4 [172]. The optimal quantum query complexity for triangle-finding is an open question; the
+best lower bound is only Ω(n). The optimal quantum time complexity of this problem is still open.
+
+Exercises
+
+1. Let d < n, and P be the projector on a d-dimensional subspace V ⊆Rn that is spanned by
+orthonormal vectors v1, . . . , vd. This means that Pv = v for all v ∈V , and Pw = 0 for all w
+that are orthogonal to V .
+
+(a) Show that P can be written in Dirac notation as P = �d
+i=1 |vi⟩⟨vi|.
+
+(b) Show that R = 2P −I is a reflection through the subspace corresponding to P, i.e.,
+Rv = v for all v in that subspace, and Rw = −w for all w orthogonal to that subspace.
+
+69
+
+
+===== PDF PAGE 82 =====
+
+2. Let G be a d-regular graph that is bipartite, so its vertex set V = [N] can be partitioned
+into disjoint sets A and B, and all its edges are in A × B. Give an eigenvector with eigen-
+value 1 of the associated N × N normalized adjacency matrix P, and another eigenvector
+with eigenvalue −1.
+
+3. This exercise is about obtaining a quantum algorithm for finding collisions with a slightly
+different quantum walk. Consider the problem of Section 8.3.2: we can query elements of
+the sequence of integers x0, . . . , xn−1, and want to find distinct i and j such that xi = xj (or
+report that there are no collisions). Again consider the Johnson graph J(n, r), for some r to
+be optimized over later. Deviating from Section 8.3.2, now call a vertex R marked if there
+exist i ∈R and j ∈{0, . . . , n −1} \ R such that xi = xj. Show that we can find a marked
+vertex in this graph with high probability using O(n2/3) queries to x. You may ignore small
+error probabilities, for example when using Grover’s algorithm. Be explicit about what data
+you store about x at each vertex R.
+
+4. (H) Let A, B, and C be n × n matrices with real entries. We’d like to decide whether or not
+AB = C. Of course, you could multiply A and B and compare the result with C, but matrix
+multiplication is expensive (the current best algorithm takes time roughly O(n2.38)).
+
+(a) Give a classical randomized algorithm that verifies whether AB = C (with success prob-
+ability at least 2/3) using O(n2) steps, using the fact that matrix-vector multiplication
+can be done in O(n2) steps.
+(b) Show that if we have query-access to the entries of the matrices (i.e., oracles that map
+i, j, 0 �→i, j, Ai,j and similarly for B and C), then every classical algorithm needs at least
+Ω(n2) queries to detect a difference between AB and C with error probability ≤1/3.
+(c) Give a quantum walk algorithm that verifies whether AB = C (with success probability
+at least 2/3) using O(n5/3) queries to matrix-entries.
+
+5. A 3-SAT instance ϕ over n Boolean variables x1, . . . , xn is a formula which is the AND of a
+number of clauses, each of which is an OR of 3 variables or their negations. For example,
+ϕ(x1, . . . , x4) = (x1 ∨x2 ∨x3) ∧(x2 ∨x3 ∨x4) is a 3-SAT formula with 2 clauses. A satisfying
+assignment is a setting of the n variables such that ϕ(x1, . . . , xn) = 1 (i.e, TRUE). You may
+assume the number of clauses is at most some polynomial in n. In general it is NP-hard to
+find a satisfying assignment to such a formula. Brute force would try out all 2n possible truth-
+assignments, but something much better is possible: consider the following simple algorithm
+of Sch¨oning [232], which is a classical random walk on the set of all N = 2n truth assignments:
+
+Start with a uniformly random x ∈{0, 1}n.
+Repeat the following at most 3n times: if ϕ(x) = 1 then STOP, else find the leftmost
+clause that is false, randomly choose one of its 3 variables and flip its value.
+
+One can show that this algorithm has probability at least (3/4)n/
+√
+
+5n of finding a satisfying
+assignment (if ϕ is satisfiable). You may assume this without proof.
+
+(a) Use the above to give a classical algorithm that finds a satisfying assignment with high
+probability in time (4/3)n · p(n), where p(n) is some polynomial factor.
+(b) (H) Give a quantum algorithm that finds a satisfying assignment (with high probability)
+in time
+�
+
+(4/3)n · p(n).
+
+70
+
+
+===== PDF PAGE 83 =====
+
+Chapter 9
+
+Hamiltonian Simulation
+
+9.1
+Hamiltonians
+
+Thus far, we have viewed the dynamics of quantum systems from the perspective of unitary trans-
+formations: apart from measurement, the only way a quantum state (i.e., a vector of amplitudes)
+can change is by multiplication with a unitary matrix, for instance a 2-qubit gate tensored with
+identities on the other qubits. But which unitary will actually occur in a given physical system?
+This is determined by the Hamiltonian of the system, which is the observable H corresponding to
+the total energy in the system. The expectation value ⟨ψ|H|ψ⟩is called the energy of state |ψ⟩.
+Typically, this total energy is the sum of several different terms, corresponding to kinetic energy,
+potential energy, etc. Also typically, it is the sum of many local terms that each act on only a few
+of the particles (qubits) of the system, for example if all interactions are between pairs of particles.
+One can think of the Hamiltonian H as describing the physical characteristics of the system.
+These do not determine the initial state |ψ(0)⟩of the system, but they do determine the evolution of
+the state in time, i.e., the state |ψ(t)⟩as a function of the time-parameter t, given initial state |ψ(0)⟩.
+This is governed by the most important equation in quantum mechanics: the Schr¨odinger equation.
+It is a linear differential equation that relates the time-derivative of the current state to that state
+itself and to the Hamiltonian:
+
+iℏd|ψ(t)⟩
+
+dt
+= H|ψ(t)⟩.
+
+Here ℏis a very small (at least in standard units) yet very important physical constant: Planck’s
+constant divided by 2π. We can set it to 1 by choosing appropriate units, and hence will ignore it
+from now on. In general H may itself change with t, but for simplicity we will only consider here
+the case where H is time-independent. Then, if we start in some state |ψ(0)⟩, the solution to this
+differential equation is the following unitary evolution of the state:1
+
+|ψ(t)⟩= U|ψ(0)⟩,
+where U = e−iHt.
+
+So evolution for time t induced by Hamiltonian H, corresponds to applying the unitary matrix
+e−iH t times. Note, however, that t need not be integer here: this evolution is continuous in time,
+in contrast to the discrete picture one gets from the circuit model with elementary quantum gates.
+
+1Applying a function, for instance f(x) = e−ix, to a normal matrix means applying f to its eigenvalues: if A has
+diagonalization V DV −1 then f(A) = V f(D)V −1, where f(D) is the diagonal matrix obtained by applying f to the
+diagonal entries of D. For example, if A = �
+
+j λjajaT
+j and f(x) = e−ix, then f(A) = �
+
+j e−iλjaja∗
+j. Note that if A
+is Hermitian, then e−iA is unitary: it maps aj to e−iλjaj.
+
+71
+
+
+===== PDF PAGE 84 =====
+
+In areas like quantum chemistry (i.e., the study of properties of molecules and their interaction)
+and material sciences, it is often important to figure out how a quantum system will evolve from
+some given initial state, for instance starting from a basis state.2 This is typically hard to do on
+classical computers, since the number of parameters (amplitudes) is exponential in the number of
+particles. However, a quantum computer is like a universal quantum system, and should be able
+to efficiently simulate every efficient quantum process, in the same way that a classical universal
+Turing machine can efficiently simulate other (classical) physical processes.3 In fact, this was the
+main reason why Feynman invented quantum computers: as a controllable quantum system that
+can be used to simulate other quantum systems.
+In order to realize that idea, we need methods to efficiently implement the unitary evolution
+that is induced by a given Hamiltonian. In other words, we need methods to implement U = e−iHt
+
+as a quantum circuit of gates (say, up to some small error ε 4), and to apply this to a given initial
+state |ψ⟩.
+For simplicity we’ll ignore the minus sign in Hamiltonian simulation, implementing
+U = eiHt rather than e−iHt. This is known as the problem of “Hamiltonian simulation”:
+
+given H, t, and ε, find a small circuit �U that is ε-close to U = eiHt.
+
+Note that we’re asking for a unitary �U that works for every possible |ψ⟩, since the operator-norm
+error is defined by a worst-case |ψ⟩. In some cases it is possible to improve the solution by making
+use of specific properties of the |ψ⟩that we start from, but in this chapter we’ll just focus on finding
+a �U that works for all |ψ⟩.
+In this chapter we will cover several methods for Hamiltonian simulation. We will also assume
+that our quantum system consists of n qubits. Some physical systems, for instance electron spins,
+naturally correspond to qubits. More complicated Hilbert spaces, for instance with basis states la-
+beled by the positions (x, y, z coordinates) of all particles involved, can be encoded (approximately)
+in binary to reduce them to the case of qubits. This encoding can be done in many ways; much
+of the art in quantum chemistry is in how best to do this for specific systems, but we won’t study
+that here (see for instance [81]).
+
+9.2
+Method 1: Lie-Suzuki-Trotter methods
+
+Note that an n-qubit Hamiltonian is a 2n×2n matrix, which is huge even for moderate n. Typically
+in Hamiltonian simulation we are dealing with very structured Hamiltonians that have a much
+
+2It is also very important in chemistry to be able to find out global properties of a given Hamiltonian like its
+lowest energy, a.k.a. ground state energy. Unfortunately this problem seems to be hard to solve (in fact it is so-called
+QMA-hard, see Chapter 14) even for a quantum computer, even for the special case of 2-local Hamiltonians [165, 156].
+3In Chapter 13 we will see that it is actually possible to classically simulate quantum computers (and hence
+quantum systems more generally) with a polynomial amount of space, but our best methods still use an exponential
+amount of time. If factoring a large integer is a hard problem for classical computers (which is widely believed),
+then Shor’s efficient quantum factoring algorithm (Chapter 5) implies that it is impossible to simulate a quantum
+computer in polynomial time on a classical computer.
+4If n-qubit unitary �U (e.g., a quantum circuit with not too many gates) is meant to approximate n-qubit unitary U,
+
+then we can measure the error by the operator norm of their difference
+���U −�U
+���= maxψ
+���U|ψ⟩−�U|ψ⟩
+���. However,
+
+we will also see simulation methods that allow some auxiliary qubits, say a of them, which start in state |0a⟩and
+should end in something close to state |0a⟩. In this case �U acts on more qubits than U, so we cannot use the operator
+norm of their difference; instead we can measure the error on the subspace of (n + a)-qubit states where the last a
+
+qubits are |0⟩: maxψ
+���(U|ψ⟩)|0a⟩−�U(|ψ⟩|0a⟩)
+���. This way of measuring error still allows you to analyze a sequence
+
+of approximate unitaries using triangle inequality in a way that the errors add up at most linearly (as in Ex 4.4).
+
+72
+
+
+===== PDF PAGE 85 =====
+
+shorter classical description. Suppose our Hamiltonian is of the form H = �m
+j=1 Hj, where m is
+not too big (say, polynomial in n) and each Hj acts only on a few of the n qubits. For concreteness
+assume each Hj acts non-trivially on only two of the qubits.5 Such a Hamiltonian is called 2-local.
+Note that, for fixed t, the unitary eiHjt is really just a 2-qubit gate, acting like identity on the other
+n −2 qubits; this 2-qubit gate could in turn be constructed from CNOTs and single-qubit gates.
+Our goal is to implement U = eiHt = ei �
+j Hjt. It is now tempting to view this exponential
+of a sum of matrices as a product �m
+j=1 eiHjt, which is just a product of m 2-qubit gates. If all
+terms Hj are diagonal, or if there is some basis in which all terms are diagonal (equivalently, if
+all Hj commute), then this indeed works out. However, in general matrix exponentials do not
+work that way: eA+B need not equal eAeB if A and B do not commute (see Exercise 1). The
+Lie-Suzuki-Trotter decomposition gives us a way to handle this. It uses the fact that if A and B
+have small operator norm, then eA+B and eAeB are approximately equal: eA+B = eAeB +E, where
+the error-term E is a matrix whose operator norm is O(∥A∥· ∥B∥).6
+
+How can we use this to approximate U by a circuit �U of 2-qubit gates? Assume each of the terms
+Hj has operator norm ≤1 (see Exercise 2 for why such normalization matters). First consider the
+simple case m = 2, so H = H1 +H2. We can now implement U = eiHt by doing a little bit of H1, a
+little bit of H2, a little bit of H1, etc. More precisely, for every integer r ≥1 of our choice, we have
+
+U = eiHt = (eiHt/r)r = (eiH1t/r+iH2t/r)r = (eiH1t/reiH2t/r + E)r.
+(9.1)
+
+Here the error-term E has norm ∥E∥= O(∥iH1t/r∥· ∥iH2t/r∥) = O(∥H1∥· ∥H2∥t2/r2).
+Our
+approximating circuit will be �U = (eiH1t/reiH2t/r)r, which uses 2r = O(t2/ε) 2-qubit gates. Since
+errors in a product of unitaries add at most linearly (see Exercise 4.4), we have approximation error
+���U −�U
+���≤r∥E∥= O(∥H1∥· ∥H2∥t2/r) = O(t2/r).
+
+Choosing r = O(t2/ε), we can make this error ≤ε.
+The same idea works for the general case where we have m > 2 Hamiltonian terms:
+
+U = eiHt = (eiHt/r)r = (eiH1t/r+···+iHmt/r)r = (eiH1t/r · · · eiHmt/r + E)r,
+(9.2)
+
+where ∥E∥= O(m2t2/r2) (Exercise 3). Choosing r = O(m2t2/ε), we have an approximating circuit
+�U = (eiH1t/r · · · eiHmt/r)r with mr = O(m3t2/ε) 2-qubit gates, and error
+���U −�U
+���≤r∥E∥≤ε.
+This is the first-order Lie-Suzuki-Trotter approach to Hamiltonian simulation, due to Lloyd [182].
+The number of gates of the circuit �U depends quadratically on the time t for which we want to
+simulate the evolution, which is not optimal. One can do fancier higher-order Lie-Suzuki-Trotter
+decompositions that make the dependence on t nearly linear, but we won’t explain those here (see
+Exercise 4). Instead we will describe two methods below with linear t-dependence. The number of
+gates of �U depends polynomially on ε; this can be very much improved as well, as we will see.7
+
+5This means H can be described efficiently by m 4 × 4 matrices, rather than by a 2n × 2n matrix. A different
+assumption that is often made on Hamiltonians and that we will see later, is that H is s-sparse, meaning each of the
+2n columns has at most s nonzero entries, and we have some efficient “sparse access” to these nonzero entries. Note
+that if H = �
+
+j Hj and each Hj acts on only 2 qubits (so it’s effectively a 4 × 4 matrix)), then H is 4m-sparse. Thus,
+roughly speaking, the locality assumption implies the sparsity assumption.
+6A non-rigorous but reasonably convincing way to see this is to approximate the term eM by its first-order Taylor
+series I + M, which is a good approximation if M has small norm (the error of the approximation will be quadratic
+in that norm). Then eAeB −eA+B ≈(I + A)(I + B) −(I + A + B) = AB. In case you ever need it: the so-called
+Baker-Campbell-Hausdorff formula gives a much more precise expression.
+7While the upper bounds on the number of gates for Trotter methods are theoretically worse (in their dependence
+
+73
+
+
+===== PDF PAGE 86 =====
+
+9.3
+Method 2: Linear combination of unitaries (LCU)
+
+Here we will describe a method for Hamiltonian simulation whose complexity depends linearly on
+the time t for which we want to evolve the state, and only logarithmically on the desired error ε.
+Let’s start with a more general problem. Suppose we have a 2n × 2n matrix M and an n-qubit
+state |ψ⟩, and we would like to prepare the state M|ψ⟩/∥M|ψ⟩∥. Here M need not be unitary, but
+suppose we can write M as a linear combination of m unitaries V0, . . . , Vm−1:8
+
+M =
+
+m−1
+�
+
+j=0
+αjVj,
+
+with the αj being nonnegative reals (we can always absorb complex phases into the Vj).
+Let
+∥α∥1 = �
+j αj, and let W be a unitary acting on ⌈log m⌉qubits that maps
+
+W : |0⟩�→
+1
+�
+
+∥α∥1
+
+m−1
+�
+
+j=0
+
+√αj|j⟩.
+
+We don’t care what W does on other states than the all-0 state (so we are not fully specifying W;
+every unitary W that maps |0⟩as above will work for LCU). Suppose each Vj is an “easy” unitary,
+for instance a 2-qubit gate tensored with identity on the other n −2 qubits, or a small circuit.
+Also suppose we can implement these unitaries in a controlled way: we have access to a 2-register
+unitary
+
+V =
+
+m−1
+�
+
+j=0
+|j⟩⟨j| ⊗Vj.
+
+This maps |j⟩|ϕ⟩�→|j⟩Vj|ϕ⟩, and we can think of the first register as “selecting” which unitary Vj
+to apply to the second register.9
+
+We want to use V and W to implement M on a given state |ψ⟩. Consider the following algorithm:
+
+1. Start with two-register state |0⟩|ψ⟩, where the first register has ⌈log m⌉qubits.
+
+2. Apply W to the first register.
+
+3. Apply V to the whole state.
+
+4. Apply W −1 to the first register.
+
+A small calculation (see Exercise 7) shows that the resulting state can be written as
+
+1
+∥α∥1
+|0⟩M|ψ⟩+
+
+�
+
+1 −∥M|ψ⟩∥2
+
+∥α∥2
+1
+|ϕ⟩,
+(9.3)
+
+on t and ε) than the other two methods explained in this chapter, in practice Trotter is quite competitive [90]. Trotter
+also has the advantages of being relatively simple and of not requiring any auxiliary qubits.
+8In fact every M can be written in such a way, because the 4n n-qubit Pauli matrices (each of which is unitary)
+form a basis for the linear space of all 2n × 2n matrices. See Appendix A.9.
+9In the literature, this V is often called “select-V .” One might expect the cost of V to be not much higher than
+the costliest Vj, just like the cost of a classical “if A then B, else C” statement is not much bigger than the largest of
+the costs of B and C. However, if we measure circuit size, then the cost of V could be roughly the sum of the costs
+of the Vjs because circuits for each Vj should be “included” in the circuit for V .
+
+74
+
+
+===== PDF PAGE 87 =====
+
+where |ϕ⟩is some other normalized state that we don’t care about, but that has no support on
+basis states where the first register is |0⟩(i.e., all such basis states have amplitude 0 in |ϕ⟩). Note
+that the state of (9.3) has norm 1, because the squared norm of the first term is ∥M|ψ⟩∥2/∥α∥2
+1.
+If we were to measure the first register, the probability of outcome 0 is p = ∥M|ψ⟩∥2/∥α∥2
+1.
+In case of that measurement outcome, the second register would collapse to the normalized ver-
+sion of M|ψ⟩, as desired. The success probability p may be small, but we could use O(1/√p) =
+O(∥α∥1/∥M|ψ⟩∥) rounds of amplitude amplification to amplify the part of the state that starts
+with |0⟩.10 Thus we would prepare (the normalized version of) M|ψ⟩in the second register. Unfor-
+tunately this usage of amplitude amplification assumes the ability to implement a unitary (as well
+as its inverse) to prepare |ψ⟩from a known initial state, say |0⟩. Regular amplitude amplification
+won’t work if instead of a unitary that prepares |ψ⟩we just have one copy of the state |ψ⟩available,
+which is the typical situation in Hamiltonian simulation. However, Exercise 9 gives us a variant
+called oblivious amplitude amplification, which circumvents this problem: it works even with just
+one copy of |ψ⟩, as long as M is proportional to a unitary (or close to that). Fortunately, this is
+the situation when we use LCU for Hamiltonian simulation, where M ≈eiHt.
+
+9.3.1
+Hamiltonian simulation via LCU
+
+Recall that our goal is to efficiently implement the unitary eiHt that is induced by a given Hamil-
+tonian H, normalized so that ∥H∥≤1. The following approach is due to Berry et al. [56, 57, 58].
+Suppose, somewhat paradoxically, that we can write out the Hermitian matrix H as a linear com-
+bination of unitaries: H = �
+j αjVj. For example, if H is the sum of m 2-local terms like before,
+then every 2-local term can be written as the sum of at most 16 n-qubit Pauli matrices (each of
+which is unitary and acts non-trivially on only two qubits). Thus we would decompose H as a
+sum of at most 16m unitaries, each acting non-trivially on only two of the n qubits. The sum of
+coefficients ∥α∥1 will be O(m).
+Using the Taylor series ex = �∞
+k=0 xk/k!, we write the unitary we want to implement as
+
+eiHt =
+
+∞
+�
+
+k=0
+
+(iHt)k
+
+k!
+=
+
+∞
+�
+
+k=0
+
+(it)k
+
+k!
+
+
+
+�
+
+j∈[m]
+αjVj
+
+
+
+
+
+k
+
+=
+
+∞
+�
+
+k=0
+
+(it)k
+
+k!
+
+�
+
+j1,...,jk∈[m]
+αj1 · · · αjkVj1 · · · Vjk.
+(9.4)
+
+Note that if each Vj is easy to implement and k is not too big, then the product Vj1 · · · Vjk is also
+not too hard to implement. For example, if each Vj is one elementary gate (tensored with identity
+on the non-affected qubits), then that product is a circuit of only k elementary gates.
+Exercise 10 shows that if we truncate the Taylor series at k = O(t + log(1/ε)), dropping the
+terms of higher order, then the induced error (i.e., the dropped part) has operator norm at most ε.
+Accordingly, we can take the part of the right-hand side of Eq. (9.4) for k = O(t+log(1/ε)) and then
+use the linear combination of unitaries approach to approximately implement eiHt. The unitaries
+in this decomposition are of the form Vj1,...,jk = ikVj1 · · · Vjk; let
+
+V =
+�
+
+j1,...,jk
+|j1, . . . , jk⟩⟨j1, . . . , jk| ⊗Vj1,...,jk
+
+denote the controlled operation of the Vj1,...,jk unitaries, each of which involves k Vj’s; we can also
+think of V as k applications of the basic controlled unitary V = �
+j |j⟩⟨j| ⊗iVj. The corresponding
+
+10If we do not know the value of p in advance, then we can try out exponentially decreasing guesses for p, like we
+do for Grover’s algorithm in Chapter 7 when we don’t know the number of solutions.
+
+75
+
+
+===== PDF PAGE 88 =====
+
+nonnegative coefficients in the decomposition of Eq. (9.4) are
+
+βj1,...,jk = tk
+
+k!αj1 · · · αjk,
+for k ≤O(t + log(1/ε)).
+
+These β-coefficients add up to
+
+∥β∥1 =
+
+O(t+log(1/ε))
+�
+
+k=0
+
+tk
+
+k!
+
+�
+
+j1,...,jk
+αj1 · · · αjk ≤
+
+∞
+�
+
+k=0
+
+tk
+
+k!
+
+�
+
+j1,...,jk
+αj1 · · · αjk =
+
+∞
+�
+
+k=0
+
+(t∥α∥1)k
+
+k!
+= et∥α∥1,
+
+so straightforward application of the LCU method with oblivious amplitude amplification uses
+O(∥β∥1) = O(et∥α∥1) applications of V and V−1, each of which involves as k = O(t + log(1/ε))
+applications of the basic controlled unitary V or its inverse.
+The logarithmic ε-dependence of the complexity of the above method is excellent. The expo-
+nential dependence on t∥α∥1 is quite terrible for large t, but not too bad for very small t. So
+what we’ll do if we want to do a simulation for large t, is to divide that t into b = t∥α∥1 blocks
+of time τ = 1/∥α∥1 each, run the above algorithm for time τ with error ε′ = ε/b, and then glue
+b time-τ simulations together. This will simulate (eiHτ)b = eiHt, with error ≤bε′ = ε. The cost
+of each time-τ simulation is O(eτ∥α∥1) = O(1) applications of V and V−1, each of which involves
+O(τ +log(1/ε′)) = O(log(t∥α∥1/ε)) applications of the V and V −1. The overall cost will be b times
+that, since we’ll run b subsequent time-τ simulations in order to implement a time-t simulation.
+To give a more concrete example, consider again the special case where H = �
+i Hi consists of
+2-local terms, so the unitaries Vj in the induced linear combination of unitaries H = �m
+j=1 αjVj
+only act nontrivially on 2 qubits each. Then we approximate the time-τ unitary eiHτ by a linear
+combination of unitaries
+
+M =
+
+O(τ+log(1/ε′))
+�
+
+k=0
+
+�
+
+j1,...,jk∈[m]
+βj1,...,jkVj1,...,jk,
+(9.5)
+
+where each Vj1,...,jk is a product of k = O(τ + log(1/ε′)) = O(log(t∥α∥1/ε)) 2-qubit gates. We can
+implement this using the linear combination of unitaries approach, and repeat this b = t∥α∥1 times.
+The cost of the unitary W is typically relatively small (see Exercise 8), so we can ε-approximate
+the unitary eiHt using a circuit of roughly O(t∥α∥1 log(t∥α∥1/ε)) = O(mt log(mt/ε)) applications
+of V and V −1, and slightly more other 2-qubit gates. Note that the cost depends linearly on the
+evolution-time t, and logarithmically on the error ε, both of which are much better than Lie-Suzuki-
+Trotter methods.
+
+9.4
+Method 3: Transforming block-encoded matrices
+
+In this section we’ll describe a recent approach that is very general and flexible. Suppose A is an
+n-qubit matrix with operator norm ∥A∥≤1, and we can implement an (n + 1)-qubit unitary
+
+U =
+�A
+·
+·
+·
+
+�
+.
+(9.6)
+
+The ‘·’s are unspecified 2n × 2n-dimensional matrices, the only constraint on which is that U is
+unitary. Such a U is called a unitary block-encoding of A. Note that
+
+U : |0⟩|ψ⟩�→|0⟩A|ψ⟩+ |1⟩|ϕ⟩,
+
+76
+
+
+===== PDF PAGE 89 =====
+
+where we can’t say much about the (subnormalized) state |ϕ⟩. Written more technically, the defining
+property of such a block-encoding is (⟨0| ⊗I)U(|0⟩⊗I) = A, where the first register is one qubit.
+More generally we can define an a-qubit block-encoding of A, which is an (a + n)-qubit unitary U
+with the property that (⟨0a| ⊗I)U(|0a⟩⊗I) = A.
+
+Example 1: LCU does block-encoding.
+From Eq. (9.3) we can see that LCU (without the final
+amplitude amplification) implements a ⌈log m⌉-qubit block-encoding of the matrix A = M/∥α∥1.
+
+Example 2: Block-encoding a sparse Hermitian matrix.
+Let A be a 2n × 2n Hermitian
+matrix of operator norm ∥A∥≤1 that is s-sparse, so each row and column of A has at most s
+nonzero entries (for simplicity assume exactly s nonzero entries). Since this matrix A is still an
+exponentially large object, we have to be careful how we can access such sparse matrices. First, we
+assume we can query the entries of A in the usual way: we have an oracle
+
+OA : |i, j⟩|0⟩�→|i, j⟩|Aij⟩,
+
+where we assume the last register has sufficiently many qubits to write down the complex en-
+try Aij either exactly or with sufficiently many bits of precision. Of course, since A is sparse,
+Aij will actually be 0 for most (i, j). Let ν(j, ℓ) ∈{0, . . . , N −1} denote the location of the ℓ-th
+nonzero entry of the j-th column of A; so the s nonzero entries in the j-th column are at positions
+ν(j, 0), . . . , ν(j, s−1). We also assume we have another oracle that allows us to find these locations:
+
+OA,loc : |j, ℓ⟩�→|j, ν(j, ℓ)⟩.
+
+Here both registers have n qubits. We think of ℓ∈{0, . . . , s −1} as an n-bit integer whose most
+significant bits are 0; of course, the unitary OA,loc will also do something when ℓ≥s, but we don’t
+care about that (this is an incomplete specification of the unitary OA,loc, similar to how in LCU
+we only specified what the unitary W does on the all-0 state, not on other states). We also assume
+we can run O−1
+A
+and O−1
+A,loc. Together these assumptions are called having “sparse access” to A.
+We will now show how to implement a block-encoding of the matrix A/s. Exercise 11 shows
+how we can implement two (2n + 1)-qubit unitaries that create superpositions over the locations of
+the nonzero entries in the j-th column and i-th row of A, respectively:
+
+W1 : |0⟩|0n⟩|j⟩�→1
+√s|0⟩
+�
+
+k:Akj̸=0
+|k, j⟩,
+W3 : |0⟩|0n⟩|i⟩�→1
+√s
+
+�
+
+ℓ:Aiℓ̸=0
+|0⟩|i, ℓ⟩,
+
+using one OA,loc-query and a few other A-independent gates. We can also implement the following
+unitary using one query to each of OA and O−1
+A , and a few other A-independent gates (and some
+auxiliary qubits that start and end in |0⟩):
+
+W2 : |0⟩|k, j⟩�→Akj|0⟩|k, j⟩+
+�
+
+1 −|Akj|2|1⟩|k, j⟩.
+
+By following the action on initial state |0n+1j⟩step-by-step (Exercise 11), one can show that the
+(0n+1i, 0n+1j)-entry of U = W −1
+3 W2W1 equals Aij/s. In other words, U is an (n + a)-qubit block-
+encoding of matrix A/s for some a (depending on how many auxiliary qubits are actually used).
+
+77
+
+
+===== PDF PAGE 90 =====
+
+How can we use a given block-encoding U of A? Suppose that for some function f : R →R we
+want to implement a unitary V that looks like
+
+V =
+�f(A)
+·
+·
+·
+
+�
+,
+
+using a small number of applications of the block-encoding of A. Here we don’t care what subma-
+trices sit at the ‘·’ entries of U or V , as long as the upper-left block of V is f(A) and V as a whole
+is unitary. For example, in Hamiltonian simulation A would be the Hamiltonian H and f(x) would
+be eixt, so that we are effectively implementing f(H) = eiHt. In the HHL algorithm in the next
+chapter, f(x) will be 1/x, so that we effectively implement A−1.
+It turns out that we can implement a good approximation of V efficiently if we have a low-degree
+polynomial P approximating f. The idea is that we can let P act on the eigenvalues of A, thus
+transforming a block-encoding of A into one of P(A). We state without proof the following theorem
+by Gily´en et al. [127, follows by applying their Theorem 56 to the real and to the imaginary part
+of the polynomial], which extends work of Low et al. [187, 188, 186, 189].
+
+Theorem 1 Let P : [−1, 1] →{c ∈C | |c| ≤1/4} be a degree-d polynomial, and let U be a
+unitary a-qubit block-encoding of Hermitian matrix A. We can implement a unitary O(a)-qubit
+block-encoding V of P(A) using d applications of U and U−1, one controlled application of U, and
+O(ad) other 2-qubit gates.
+
+This theorem can be generalized to a powerful technique called “quantum singular-value trans-
+formation” (QSVT) [127], where A can be an arbitrary matrix, non-Hermitian and even non-square.
+
+9.4.1
+Hamiltonian simulation via transforming block-encoded matrices
+
+Let’s see how we can use Theorem 1 for Hamiltonian simulation for a given sparse Hamiltonian H.
+Like in Section 9.3.1, we approximate the function f(x) = eixt using a polynomial P of degree
+d = O(t + log(1/ε)), which is the first d terms of the Taylor series of f (see Exercise 10), divided
+by 4(1 + ε) to ensure that its range satisfies the condition of Theorem 1. If H is s-sparse and
+we have sparse access to it, then Example 2 of Section 9.4 shows how to efficiently implement a
+block-encoding U of the scaled Hamiltonian H/s, using O(1) queries to H and O(n) other gates.
+Note that evolving Hamiltonian H for time t is the same as evolving H/s for time st. Theorem 1
+now gives us a block-encoding V of P(H) ≈1
+
+4eiHt. This V invokes U and U−1 O(st + log(1/ε))
+times, and maps:
+
+V : |0⟩|ψ⟩�→|0⟩P(H)|ψ⟩+ |ϕ⟩,
+
+where |ϕ⟩has no support on basis states starting with |0⟩.
+Since P(H) ≈
+1
+4eiHt is essentially
+proportional to a unitary, we can now apply O(1) rounds of oblivious amplitude amplification to
+boost the factor 1
+
+4 to essentially 1, using only one copy of |ψ⟩.
+This implements the desired unitary eiHt on one copy of |ψ⟩, up to small error. The complexity
+of ε-precise Hamiltonian simulation of an s-sparse Hamiltonian H of operator norm ≤1 then
+becomes O(st + log(1/ε)) queries to H and O(n(st + log(1/ε))) 2-qubit gates.
+
+78
+
+
+===== PDF PAGE 91 =====
+
+Exercises
+
+1. Compute the following four 2 × 2 unitaries: ei π
+
+2 Z, ei π
+
+2 X, ei π
+
+2 Xei π
+
+2 Z, and ei π
+
+2 (X+Z).
+Here X and Z are the usual Pauli matrices.
+
+Comment: Note that ei π
+
+2 Xei π
+
+2 Z ̸= ei π
+
+2 (X+Z), illustrating the issue that Trotter methods deal with.
+
+2. Suppose we want to implement a certain unitary U, and we can do that by switching on a
+Hamiltonian H for some time t: U = e−iHt. Now suppose H′ is another Hamiltonian, with
+100 times as much energy as H: H′ = 100H. Show that using H′ we can implement U a 100
+times faster than with H.
+
+Comment: This exercise is about time in the physical sense of the word, not about “time complexity” in the
+
+sense of circuit size. It shows why some kind of normalization of H is needed if we want to talk about the time
+
+it takes to implement something. We can always “speed up” a computation by a factor k if we can multiply
+
+our Hamiltonian with a factor k (which is like injecting k times as much energy).
+
+3. (H) This exercise justifies the error bound of Eq. (9.2). Let H1, . . . , Hm satisfy ∥Hj∥≤1
+and let δ > 0 be small (in Eq. (9.2) we’d set δ = t/r). Show that there is a constant c,
+independent of δ and H1, . . . , Hm, such that
+
+eiH1δ+···+iHmδ = eiH1δ · · · eiHmδ + E,
+
+for some E of norm ∥E∥≤cδ2 �m−1
+j=1 j.
+
+4. (H) This exercise gives a version of Trotter methods with a better dependence of the circuit-
+size on the evolution-time t and the approximation error ε than the O(t2/ε) 2-qubit gates
+of basic Trotter (Section 9.2). Let A, B be Hermitian matrices of the same dimension and
+operator norm ∥A∥, ∥B∥≤1. You may assume the following fact without proof11: for every
+η ∈[0, 1] there exists a matrix E of operator norm ∥E∥= O(η3) such that
+
+eiη(A+B) = eiηA/2eiηBeiηA/2 + E.
+(9.7)
+
+Suppose H = H1 + H2 is an n-qubit Hamiltonian where H1, H2 are 2-local terms of operator
+norm ≤1. For every t ≥0 and ε ∈(0, 1/2), give a circuit �U of O(t1.5/√ε) 2-qubit gates that
+approximates the unitary U = eiHt up to error ε (i.e.,
+���U −�U
+���≤ε). Every 2-qubit unitary
+counts as a 2-qubit gate here (don’t worry about writing out in CNOTs and 1-qubit gates).
+
+5. Consider the simple case of the linear-combination-of-unitaries trick where m = 2 and M =
+V0+V1. Describe the unitaries V and W, and track how the initial state |0⟩|ψ⟩changes through
+the 4-step algorithm in Section 9.3 (you don’t have enough information to fully describe the
+final state because you only know what W does on basis state |0⟩, but you should end with
+something of the form Eq. (9.3)).
+
+6.
+(a) Write the gate G =
+1
+√
+
+2
+
+�1
+−i
+i
+−1
+
+�
+as a linear combination of the Pauli matrices (see
+
+Appendix A.9).
+
+11This fact can be proved by taking 2nd-order Taylor expansions of the four exponentials involved in Eq. (9.7),
+and showing that the left- and right-hand sides match up to O(η3) terms. But you don’t need to provide that proof.
+In the formula used for basic Trotter, the right-hand side was eiηAeiηB with a bigger error term, of norm O(η2).
+
+79
+
+
+===== PDF PAGE 92 =====
+
+(b) Suppose you want to implement G via LCU, using the linear combination of (a). What
+are W|0⟩and V ?
+
+(c) Consider the final state after the 4-step algorithm of Section 9.3. Calculate the part of
+that state that starts with |0⟩(without writing out that final state fully!)
+
+7. (H) Give a calculation to justify that the 4-step algorithm in Section 9.3 indeed always
+produces a state of the form of Eq. (9.3).
+
+8. Let v ∈[−1, 1]N be a vector with real entries, of dimension N = 2n, indexed by i ∈{0, 1}n.
+Suppose we can query the entries of this vector by a unitary that maps
+
+Ov : |i⟩|0p⟩�→|i⟩|vi⟩,
+
+so where the binary representation of the i-th entry of v is written into the second register.
+We assume this second register has p qubits, and the numbers vi can all be written exactly
+with p bits of precision (it doesn’t matter how, but for concreteness say that the first bit
+indicates the sign of the number, followed by the p −1 most significant bits after the decimal
+
+dot). Our goal is to prepare the n-qubit quantum state |ψ⟩=
+1
+∥v∥
+
+�
+
+i∈{0,1}n
+vi|i⟩.
+
+(a) Show how you can implement the following 3-register map (where the third register is
+one qubit) using one application of Ov and one of O−1
+v , and some v-independent unitaries
+(you don’t need to draw detailed circuits for these unitaries, nor worry about how to
+write those in terms of elementary gates).
+
+|i⟩|0p⟩|0⟩�→|i⟩|0p⟩(vi|0⟩+
+�
+
+1 −v2
+i |1⟩).
+
+(b) Suppose you apply the map of (a) to a uniform superposition over all i ∈{0, 1}n. Write
+the resulting state, and calculate the probability that measuring the last qubit in the
+computational basis gives outcome 0.
+
+(c) What is the resulting 3-register state if the previous measurement gave outcome 0?
+
+(d) Assume you know ∥v∥exactly.
+Give an algorithm that prepares |ψ⟩exactly, using
+
+O
+
+�√
+
+N
+∥v∥
+
+�
+
+applications of Ov and O−1
+v , and some v-independent unitaries.
+
+9. (H) This exercise explains oblivious amplitude amplification.
+Let M be an n-qubit unitary. We start from |Ψ⟩= |0a⟩|ψ⟩for unknown n-qubit state |ψ⟩.
+Our goal is to prepare the state |Φ⟩= |0a⟩M|ψ⟩(this |Φ⟩is the analogue of the “good state”
+in amplitude amplification). Let U be an (a+n)-qubit unitary, independent of |ψ⟩, such that
+
+U|Ψ⟩= sin(θ)|Φ⟩+ cos(θ)|Φ⊥⟩,
+
+where θ is some angle that’s independent of |ψ⟩, while |Φ⊥⟩is some normalized state that
+depends on |ψ⟩and has no support on basis states starting with 0a (this |Φ⊥⟩is the analogue
+of the “bad state”). If θ is close to π/2, then we can just apply U to our starting state |Ψ⟩
+and measure the first register; we’ll see 0a with probability sin(θ)2 ≈1 and in that case end
+up with the desired state |Φ⟩. But suppose θ is quite small. Here we will see how we can
+amplify the angle θ to roughly π/2, without assuming a unitary to prepare |Ψ⟩.
+
+80
+
+
+===== PDF PAGE 93 =====
+
+(a) Let S be the 2-dimensional space spanned by |Φ⟩and |Φ⊥⟩. Let R = (I −2|0a⟩⟨0a|) ⊗I
+be a unitary that puts a ‘−’ in front of every basis state that starts with 0a. Show that
+R, restricted to S, is a reflection through |Φ⊥⟩.
+
+(b) Define |Ψ⊥⟩= U−1 �
+cos(θ)|Φ⟩−sin(θ)|Φ⊥⟩
+�
+. Show U|Ψ⟩and U|Ψ⊥⟩are orthogonal.
+
+One can also show with a bit more work [56, Lemma 3.7] the stronger statement that
+|Ψ⊥⟩has no support on basis states starting with 0a. You may assume this fact without
+proof in the remainder of this exercise.
+
+(c) Show that −URU−1, restricted to S, is a reflection through U|Ψ⟩(note the minus sign!)
+
+(d) Show that (−URU−1R)kU|0a⟩|ψ⟩= sin((2k + 1)θ)|Φ⟩+ cos((2k + 1)θ)|Φ⊥⟩.
+
+(e) How large should we take k in order to end up with (approximately) the state |Φ⟩?
+
+NB: If you know θ exactly, then you can even exactly prepare |Φ⟩(along the lines of Exercise 7.5) but
+
+you don’t need to show that.
+
+10. (H) Let ε ∈(0, 1/2]. Show that you can choose a sufficiently large constant c (independent
+of t and ε) such that for all Hermitian H with operator norm ∥H∥≤1, we have
+
+������
+eiHt −
+
+c(t+log(1/ε))−1
+�
+
+k=0
+
+(iHt)k
+
+k!
+
+������
+=
+
+������
+
+∞
+�
+
+k=c(t+log(1/ε))
+
+(iHt)k
+
+k!
+
+������
+≤ε.
+
+11. This exercise looks at the details of block-encoding an s-sparse matrix A with ∥A∥≤1 from
+Section 9.4. Assume for simplicity that the entries of A are real and can each be written
+down exactly with p bits of precision, that each row and column contains exactly s non-zero
+entries (indexed by 0, . . . , s −1), and that s is a power of 2.
+
+(a) Show how to implement W1 using an OA,loc-query and a few other A-independent gates.
+For simplicity you may assume s is a power of 2 here, and you can use arbitrary single-
+qubit gates, possibly controlled by another qubit.
+(Note that the same method allows to implement W3.)
+
+(b) (H) Show how to implement W2 using an OA-query, an O−1
+A -query, and a few other
+A-independent gates (you may use auxiliary qubits as long as those start and end in
+|0⟩).
+
+(c) Show that the (0n+1i, 0n+1j)-entry of W −1
+3 W1 is 1/s if Aij ̸= 0, and is 0 if Aij = 0.
+
+(d) Show that the (0n+1i, 0n+1j)-entry of W −1
+3 W2W1 is exactly Aij/s.
+
+12.
+(a) Give a quantum circuit on n + 1 qubits that uses O(n) gates, no auxiliary qubits, and
+computes the parity of the first n bits, in the sense that it maps
+
+|x⟩|0⟩�→|x⟩|
+
+n
+�
+
+i=1
+xi mod 2⟩for all x ∈{0, 1}n.
+
+(b) Let P = Z ⊗Z ⊗· · · ⊗Z be an n-qubit Hamiltonian, where Z is the usual phase-flip
+Pauli matrix. What is the result of applying matrix P to an n-qubit basis state |x⟩?
+
+81
+
+
+===== PDF PAGE 94 =====
+
+(c) Fix some positive real number t.
+Let U = eiPt be the n-qubit unitary induced by
+applying the above Hamiltonian for time t (via the Schr¨odinger equation, dropping the
+minus sign in the exponent like in Section 9.1). What is the result of applying U to an
+n-qubit basis state |x⟩?
+
+(d) (H) Give a quantum circuit with O(n) gates that implements U exactly using one aux-
+iliary qubit that starts and ends in |0⟩. You may use arbitrary single-qubit gates, which
+may be controlled by another qubit.
+
+(e) (H) Now suppose P is a product of n arbitrary Pauli matrices, not necessarily all-Z.
+Show how to implement U = eiPt.
+
+13. Suppose you have a classical description of an n-qubit Hamiltonian H that is the sum of
+m = n2 2-local terms. Assume the eigenvalues of the Hermitian matrix H lie in [0, 1), and
+can all be written exactly with 2 log n bits of precision. You would like to exactly determine the
+smallest eigenvalue λmin of H, corresponding to unknown n-qubit eigenstate |ψmin⟩. You’re
+given (as a quantum state) an n-qubit state |ψ⟩that has a significant overlap with |ψmin⟩:
+|⟨ψ|ψmin⟩|2 ≥0.7.
+Give a polynomial-size quantum circuit that, with probability ≥2/3,
+outputs λmin exactly.
+
+NB: You don’t need to write down the circuit to the last detail; a clear description of the different parts of the
+
+circuit (possibly with some reference to details in the lecture notes) suffices.
+
+82
+
+
+===== PDF PAGE 95 =====
+
+Chapter 10
+
+The HHL Algorithm
+
+10.1
+The linear-system problem
+
+In this chapter we present the Harrow-Hassidim-Lloyd (HHL [141]) algorithm for solving large
+systems of linear equations. Such a system is given by an N × N matrix A with real or complex
+entries, and an N-dimensional nonzero vector b. Assume for simplicity that N = 2n. The linear-
+system problem is
+
+LSP: find an N-dimensional vector x such that Ax = b.
+
+Solving large systems of linear equations is extremely important in many computational problems
+in industry, in science, in optimization, in machine learning, etc. In many applications it suffices
+to find a vector ˜x that is close to the actual solution x.
+We will assume A is invertible (equivalently, has rank N) in order to guarantee the existence
+of a unique solution vector x, which is then just A−1b. This assumption is just for simplicity: if
+A does not have full rank, then the methods below would still allow to invert it on its support,
+replacing A−1 by the “Moore-Penrose pseudoinverse.”
+The HHL algorithm can solve “well-behaved” large linear systems very fast (under certain
+assumptions), but in a rather weak sense: instead of outputting the N-dimensional solution vector
+x itself, its goal is to output the n-qubit state
+
+|x⟩:=
+1
+∥x∥
+
+N−1
+�
+
+i=0
+xi|i⟩,
+
+or some other n-qubit state close to |x⟩.
+This state |x⟩has the solution vector as its vector
+of amplitudes, up to normalization and global phase. This is called the quantum linear-system
+problem:
+
+QLSP: find an n-qubit state |˜x⟩for which there is a θ ∈[0, 2π) such that
+��|x⟩−eiθ|˜x⟩
+��≤ε and Ax = b.
+
+Note that the QLSP is an inherently quantum problem, since the goal is to produce an n-qubit
+state whose amplitude-vector (up to normalization and up to ε-error) is a solution to the linear
+system. In general this is not as useful as just having the N-dimensional vector x written out on
+a piece of paper, but in some cases where we only want some partial information about x, it may
+suffice to just (approximately) construct |x⟩.
+
+83
+
+
+===== PDF PAGE 96 =====
+
+We will assume without loss of generality that A is Hermitian (see Exercise 1). Let us state the
+more restrictive assumptions that will make the linear system “well-behaved” and suitable for the
+HHL algorithm:
+
+1. We have a unitary that can prepare the vector b as an n-qubit quantum state |b⟩=
+1
+∥b∥
+�
+i bi|i⟩
+using a circuit of B 2-qubit gates. We also assume for simplicity that ∥b∥= 1.
+
+2. The matrix A is s-sparse and we have sparse access to it, like in Section 9.4. Such sparsity
+is not essential to the algorithm, and could be replaced by other properties that enable an
+efficient block-encoding of A.
+
+3. The matrix A is well-conditioned: the ratio between its largest and smallest singular value
+is at most some κ.1 For simplicity, assume the smallest singular value is ≥1/κ while the
+largest is ≤1. In other words, all eigenvalues of A lie in the interval [−1, −1/κ] ∪[1/κ, 1].
+The smaller the “condition number” κ is, the better it will be for the algorithm. Let’s assume
+our algorithm knows κ, or at least knows a reasonable upper bound on κ.
+
+10.2
+The basic HHL algorithm for linear systems
+
+Let us start with some intuition. The solution vector x that we are looking for is A−1b, so we
+would like to apply A−1 to b. Because A is assumed to be Hermitian, it has spectral decomposition
+A = �N−1
+j=0 λjaja∗
+j, where the vectors aj are an orthonormal basis of eigenvectors for the whole
+N-dimensional space, and λj ∈R are the corresponding eigenvalues. Then the map A−1 is the
+same as the map aj �→
+1
+λj aj: we just want to multiply the eigenvector aj with the scalar 1/λj.
+The vector b can also be written as a linear combination of the eigenvectors aj: b = �
+j βjaj (we
+don’t need to know the coefficients βj for what follows). We want to apply A−1 to b to obtain
+A−1b = �
+j βj 1
+
+λj aj, normalized, as an n-qubit quantum state.
+
+Unfortunately the maps A and A−1 are not unitary (unless |λj| = 1 for all j), so we cannot just
+apply A−1 as a quantum operation to state |b⟩to get state |x⟩. Fortunately U = eiA = �
+j eiλjaja∗
+j
+is unitary, and has the same eigenvectors as A and A−1. We can implement U and powers of U by
+Hamiltonian simulation, and then use phase estimation (Section 4.6) to estimate the λj associated
+with eigenvector |aj⟩with some small approximation error (for the present sketch, assume for
+simplicity that the eigenvalues are in [0, 1) and that the approximation error is 0). Conditioned on
+our estimate of λj we can then rotate an auxiliary |0⟩-qubit to
+1
+κλj |0⟩+
+�
+
+1 −
+1
+(κλj)2 |1⟩(this is a
+
+valid state because |κλj| ≥1). Next we undo the phase estimation to set the register that contained
+the estimate back to |0⟩. Suppressing the auxiliary qubits containing the temporary results of the
+phase estimation (these qubits start and end in state |0⟩), we have now unitarily mapped
+
+|aj⟩|0⟩�→|aj⟩
+
+�
+1
+κλj
+|0⟩+
+
+�
+
+1 −
+1
+(κλj)2 |1⟩
+
+�
+
+.
+
+1This ratio is called the condition number. Note that the assumption that A is invertible is equivalent to having
+a finite condition number. The stronger assumption that the condition number is small, intuitively says that A is
+invertible in a stable or robust way, so that small errors (say due to noise or to finite-precision rounding) don’t lead
+to massive errors in the solution vector x.
+
+84
+
+
+===== PDF PAGE 97 =====
+
+If we prepare a copy of |b⟩|0⟩= �
+j βj|aj⟩|0⟩and apply the above unitary map to it, then we obtain
+
+�
+
+j
+βj|aj⟩
+
+�
+1
+κλj
+|0⟩+
+
+�
+
+1 −
+1
+(κλj)2 |1⟩
+
+�
+
+= 1
+
+κ
+
+�
+
+j
+βj
+1
+λj
+|aj⟩
+
+�
+��
+�
+∝|x⟩
+
+|0⟩+ |ϕ⟩|1⟩,
+(10.1)
+
+where we don’t care about the (subnormalized) state |ϕ⟩.
+Note that because �
+j |βj/λj|2 ≥
+�
+j |βj|2 = 1, the norm of the part of the state ending in qubit |0⟩is at least 1/κ.
+Accord-
+ingly, we can now apply O(κ) rounds of amplitude amplification to amplify this part of the state
+to have amplitude essentially 1. This prepares state |x⟩to good approximation, as intended.
+This rough sketch (which Exercise 2 asks you to make more precise) is the basic idea of HHL.
+It leads to an algorithm that produces a state |˜x⟩that is ε-close to |x⟩, using roughly κ2s/ε queries
+to A and roughly κ(sκn/ε + B) other 2-qubit gates.
+
+10.3
+Improving the efficiency of the HHL algorithm
+
+The complexity of the above basic HHL algorithm can be improved further. Gily´en et al. [127]
+used the singular-value transformation technique of Section 9.4 to implement A−1, improving on
+an LCU construction due to Childs et al. [88]. We would like to apply the function f(x) = 1/x to
+a block-encoding of A in order to get a block-encoding of A−1 (up to normalization) that we can
+then apply to |b⟩|0⟩.
+The function f(x) = 1/x is not itself a polynomial, so we need to approximate it by a low-degree
+polynomial in order to be able to apply Theorem 1 of Chapter 9. Childs et al. [88, Lemmas 17-19]
+constructed such a polynomial, as we sketch now. They start from the following function with
+b = O(κ2 log(κ/ε)):
+1 −(1 −x2)b
+
+x
+.
+
+This is in fact a polynomial of degree D = 2b−1, because the numerator is a polynomial of degree 2b
+where all terms have degree ≥1, so we can divide out the x of the denominator. Since (1 −x2)b is
+close to 0 for x ∈[−1, 1] (unless |x| ≈0), this polynomial is indeed close to 1/x for x ∈[−1, 1] (we
+won’t care about the case |x| ≈0 because we’ll apply this polynomial to a matrix whose eigenvalues
+aren’t very close to 0). More precisely, this polynomial is ε/2-close to 1/x whenever x lies in the
+interval Eκ = [−1, −1/κ]∪[1/κ, 1]. Its range on this domain is [−κ, −1]∪[1, κ] (ignoring the small ε
+for simplicity). See Figure 10.1 for illustration.
+Like every degree-D polynomial, it can be written exactly as a sum of the first D + 1 Cheby-
+shev polynomials of the first kind.2 Childs et al. show that the coefficients in this sum decrease
+quickly for larger degree, and that dropping the Chebyshev polynomials of degree higher than
+d = O(κ log(κ/ε)) incurs only small error ε/2. The resulting degree-d polynomial p ε-approximates
+1/x on the interval Eκ, and its largest value (in absolute value) on this domain is κ. Now define the
+polynomial P = p/(4κ). This has the same degree d as the polynomial p, but a range [−1/4, 1/4]
+that fits the assumption of Theorem 1 of Chapter 9 (there’s a trick to ensure the values of P are
+within that range even for x ≈0, which we’ll skip here).
+
+2These univariate polynomials are defined recursively as follows: T0(x) = 1, T1(x) = x, and Td+1 = 2xTd(x) −
+Td−1(x). Note that Td has degree d, and maps [−1, 1] to [−1, 1]. The polynomials T0, . . . , TD are linearly independent
+(even orthonormal in a certain way) and hence span the set of all univariate polynomials of degree ≤D.
+
+85
+
+
+===== PDF PAGE 98 =====
+
+−1
+−1/κ
+0
+1/κ
+1
+x
+
+−κ
+
+−1
+
+0
+
+1
+
+κ
+
+y
+
+Figure 10.1: Low-degree polynomial approximation of 1/x on the domain Eκ = [−1, 1]\[−1/κ, 1/κ]
+
+As we saw in Section 9.4, we can implement a block-encoding of the s-sparse matrix A/s using
+O(1) sparse-access queries to A and O(n) other gates. Using a factor O(s) more work, there is
+way to turn this into a block-encoding of A itself; alternatively, we could directly invert the matrix
+A/s, whose singular values are ≥1/(κs). We now apply Theorem 1 with this block-encoding of A,
+and the polynomial P = p/(4(1 + ε)κ), of degree d = O(κ log(κ/ε)). Note that all eigenvalues of A
+lie in the interval Eκ, where p(x) ≈1/x, hence p(A) ≈A−1 and P(A) ≈
+1
+4κA−1. Theorem 1 then
+gives us a block-encoding of P(A), at the expense of running the block-encoding of A O(d) times.
+Using O(κ) rounds of amplitude amplification on top of this, we can get rid of the 1/(4κ) factor
+and end up with essentially the state A−1|b⟩, normalized.3 This gives a quantum algorithm that
+solves the QLSP using O(dκs) = O(κ2s log(κ/ε)) queries to A, and O(κs(κn log(κ/ε)+B)) 2-qubit
+gates. Note that compared to basic HHL, the dependence on 1/ε has been improved from linear
+to logarithmic. The dependence on κ can be improved from quadratic to linear, using a technique
+called “variable-time amplitude amplification” [16, 88, 83, 179] that we won’t explain here.
+
+The HHL algorithm can in some cases solve the QLSP exponentially faster than classical algo-
+rithms can solve the LSP. In particular, if the sparsity s, the condition number κ, and the cost B of
+preparing |b⟩are all ≤polylog(N), and the allowed error is ε ≥2−polylog(N), then this improved
+version of the HHL algorithm uses polylog(N) queries and gates to solve (in a quantum way) an
+N-dimensional linear system. It can also be used for other tasks, for instance approximately solving
+differential equations and other applications in scientific computing, see the lecture notes of Lin
+Lin [178] and references therein.
+
+3Note that we need to assume a unitary to prepare |b⟩here, having just one copy of |b⟩is not enough.
+We
+cannot use oblivious amplitude amplification here because that assumes we have a block-encoding of a matrix that
+is proportional to a unitary (or close to that), which A−1 is not.
+
+86
+
+
+===== PDF PAGE 99 =====
+
+Exercises
+
+1. Suppose we are given an arbitrary invertible N ×N matrix A and an N-dimensional vector b.
+
+(a) Give a Hermitian 2N ×2N matrix A′ (depending on A but not on b) and 2N-dimensional
+vector b′ (depending on b but not on A), such that a solution x to the linear system
+Ax = b can be read off from a solution to the system A′x′ = b′.
+
+(b) How does the condition number of your A′ relate to that of A?
+
+2. This exercise asks you to add more details to the sketch of the basic HHL algorithm given at
+the start of Section 10.2. For simplicity we will only count queries, not gates.
+
+(a) Use Hamiltonian simulation and phase estimation to implement the following unitary
+map:
+|aj⟩|0⟩�→|aj⟩| �λj⟩,
+
+where | �λj⟩is a superposition over estimates of λj, which (if measured) gives with prob-
+ability ≥0.99 an estimator ℓ∈[−1, 1] such that |λj −ℓ| ≤ε/κ. Your implementation is
+allowed to use O(κs/ε + log(κ/ε)) queries to the sparse matrix A. You may invoke the
+best Hamiltonian simulator for sparse matrices from Section 9.4.
+
+(b) Show that the basic HHL algorithm can be implemented using O(κ2s/ε + κ log(κ/ε))
+sparse-access queries to A. To make your life easier, you may assume that | �λj⟩is just
+one basis state, so one estimator which is close to λj rather than a superposition over
+estimators (and hence the success probability 0.99 is actually 1). You may also assume
+for simplicity that the amplitude amplification at the end works perfectly.
+
+3. Suppose A and B are sparse, well-conditioned, Hermitian N × N matrices, and we can
+efficiently generate unit vector b ∈RN as a quantum state |b⟩= �N−1
+i=0 bi|i⟩. Here we will see
+how we can efficiently find the solution to the linear system ABx = b as a quantum state |x⟩.
+
+More precisely, assume N = 2n. Assume we have a unitary circuit to produce the n-qubit
+state |b⟩with a number of elementary gates that’s polynomial in n. Let sA and sB be the
+sparsities of the matrices A and B, respectively, and κA and κB be their condition numbers
+(ratio of largest over smallest singular value). You may assume (like in the 3rd item at the end
+of Section 10.1) that the singular values of A are in the interval [1/κA, 1], and the singular
+values of B are in the interval [1/κB, 1].
+Let x ∈CN be B−1A−1b, which is the unique
+solution to the linear system ABx = b. Show how you can produce an n-qubit state |˜x⟩that
+is ε-close (in the usual Euclidean distance) to the n-qubit state |x⟩=
+1
+∥x∥
+�
+i∈{0,1}n xi|i⟩, using
+a number of queries (to matrix entries) and elementary gates that is polynomial in sA, sB,
+κA, κB, 1/ε, and n.
+
+Comment: Again, the point here is to avoid the polynomial dependence on the dimension N that classical
+
+linear solvers would have, and replace that by a polynomial dependence on n = log N.
+
+87
+
+
+===== PDF PAGE 100 =====
+
+88
+

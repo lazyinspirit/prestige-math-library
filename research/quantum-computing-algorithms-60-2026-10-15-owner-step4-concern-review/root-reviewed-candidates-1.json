@@ -1,0 +1,147 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "focused-current-source-owner-review",
+  "coverage": "Only listed current sources and the cited interfaces described in each reason; no new judgment or native execution coverage. Source untouched. Admission waits for genuine frozen initial evidence and current keep verdicts.",
+  "entries": [
+    {
+      "batch": "5",
+      "concern_index": 0,
+      "id": "lem-qc-positive-choi-matrix-yields-kraus-operators",
+      "concern": {
+        "id": "lem-qc-positive-choi-matrix-yields-kraus-operators",
+        "concern": "Proof 2.1 first discusses the '(i,α),(j,β) entry' of the Choi operator and then says 'The same entry of Σ_a K_a E_ij K_a†'. The latter operator acts on K and has indices (α,β), rather than product indices (i,α),(j,β). The displayed coefficient calculation is correct, but the entry comparison is mistyped; it should compare that Choi entry with the (α,β) entry of the Kraus output.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:53:39.021352+00:00",
+      "reason": "The two operators act on different spaces. A Choi entry has paired input/output indices, while K_a E_ij K_a dagger is an output-space operator. Its alpha,beta entry equals that Choi coefficient. The argument is sound after explicitly typing this entry; current Proof2.1 says the same entry without that distinction.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "The same entry of $\\sum_aK_aE_{ij}K_a^\\dagger$ is",
+          "proposed_replacement": "The $(\\alpha,\\beta)$ entry of $\\sum_aK_aE_{ij}K_a^\\dagger$ is"
+        }
+      ]
+    },
+    {
+      "batch": "6",
+      "concern_index": 0,
+      "id": "thm-qc-channel-composition-hybrid-bound",
+      "concern": {
+        "id": "thm-qc-channel-composition-hybrid-bound",
+        "concern": "The Statement assumes only 'finite-dimensional channels', whereas Given adds 'Nonzero finite-dimensional H0,H1,H2'. The cited channel definition allows zero-dimensional spaces, but def-qc-diamond-norm defines its norm only for nonzero input and output spaces. For H0=H1=0 and H2=C, the unique maps at both stages are channels, yet the displayed diamond norms are outside their defined domain. The Statement needs the nonzero-space hypothesis already used by its proof.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:53:39.021513+00:00",
+      "reason": "The channel Definition permits zero-dimensional spaces and its trace condition is vacuous for a zero input. The diamond-norm Definition requires both spaces nonzero. H0=H1=0,H2=C satisfies the channel premise but makes every displayed map-norm outside that Definition. The proof Given already has precisely the needed nonzero hypothesis; put it in the Statement and let the native same-owner repairer trace all actual consumers.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "Let $\\Phi_0,\\Psi_0:",
+          "proposed_replacement": "Let $H_0,H_1,H_2$ be nonzero finite-dimensional complex Hilbert spaces, and let $\\Phi_0,\\Psi_0:"
+        }
+      ]
+    },
+    {
+      "batch": "6",
+      "concern_index": 1,
+      "id": "thm-qc-diamond-norm-ancilla-dimension-bound",
+      "concern": {
+        "id": "thm-qc-diamond-norm-ancilla-dimension-bound",
+        "concern": "Proof 1.2 introduces compressed Schmidt vectors x′,y′ and immediately uses 'each map I⊗V_x and I⊗V_y', but never defines V_x,V_y or their domains. The intended isometries C^m→Z sending the standard basis to the respective padded ancilla Schmidt families immediately close the argument. Their definition should precede the displayed compression identity.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:53:39.021592+00:00",
+      "reason": "Schmidt compression uses two distinct isometric ancilla embeddings. Current1.2 never defines V_x or V_y, although the following displayed equation uses both. Define V_x,V_y:C^m->Z by sending each standard basis vector to its respective padded orthonormal ancilla Schmidt vector, and define xprime,yprime from corresponding coefficients and H-side vectors. m<=min(dimH,dimZ) ensures the padding and embeddings exist. No statement change is needed.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "obtaining $x',y'\\in H\\otimes\\mathbb C^m$. The tensor-map",
+          "proposed_replacement": "obtaining $x',y'\\in H\\otimes\\mathbb C^m$. Define $V_x,V_y:\\mathbb C^m\\to Z$ to send the standard basis to the respective padded orthonormal ancilla Schmidt families, so $x=(I_H\\otimes V_x)x'$ and $y=(I_H\\otimes V_y)y'$. The tensor-map"
+        }
+      ]
+    },
+    {
+      "batch": "6",
+      "concern_index": 2,
+      "id": "thm-qc-channel-tensor-error-bound",
+      "concern": {
+        "id": "thm-qc-channel-tensor-error-bound",
+        "concern": "Proof 2.1 chooses X_i on H_i⊗C^(dim H_i), but describes its output as 'Φ_1(X_1)⊗Φ_2(X_2)'. Each Φ_i is defined only on L(H_i), so these expressions are not typed as written. They must denote (Φ_i⊗id)(X_i). The surrounding ancilla and wire-reordering argument makes the intended correction immediate.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:53:39.021713+00:00",
+      "reason": "Current2.1 chooses X_i on H_i tensor C^(dim H_i), while Phi_i has domain L(H_i). Thus Phi_i(X_i) is not typed. The actual attaining outputs are amplified maps (Phi_i tensor id)(X_i). The factor permutation and trace-norm product argument then proves the same lower bound. Existing Statement is unchanged.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "$\\Phi_1(X_1)\\otimes\\Phi_2(X_2)$ by [L5]",
+          "proposed_replacement": "$(\\Phi_1\\otimes\\operatorname{id}_{\\mathbb C^{\\dim H_1}})(X_1)\\otimes(\\Phi_2\\otimes\\operatorname{id}_{\\mathbb C^{\\dim H_2}})(X_2)$ by [L5]"
+        }
+      ]
+    },
+    {
+      "batch": "9",
+      "concern_index": 0,
+      "id": "thm-qc-terminal-measurement-circuit-equivalence",
+      "concern": {
+        "id": "thm-qc-terminal-measurement-circuit-equivalence",
+        "concern": "Proof step 4.1 says, “Conditional outputs agree after division when that common probability is positive,” immediately after computing the joint probability of history h and terminal POVM outcome z. Only a terminal POVM is specified, and a POVM does not determine a conditional output state. The theorem's stated preterminal history-branch equality and joint-law conclusion are supported; this sentence needs to identify preterminal history-conditioned outputs or explicitly specify a common terminal instrument.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:53:39.021808+00:00",
+      "reason": "Current4.1 first computes joint h,z probabilities from terminal effects, then claims conditional outputs after dividing that common probability. A POVM specifies probabilities but no terminal instrument/output. Earlier3.1 proves equal preterminal h-branch operators. State precisely that the preterminal history-conditioned outputs agree on positive history probability, rather than attributing post-POVM outputs to a POVM.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "Conditional outputs agree after division when that common probability is positive;",
+          "proposed_replacement": "The preterminal data-reference outputs conditioned on history $h$ agree after dividing their equal branch operators by the common positive history probability;"
+        }
+      ]
+    },
+    {
+      "batch": "11",
+      "concern_index": 0,
+      "id": "lem-qc-unitary-group-cayley-charts",
+      "concern": {
+        "id": "lem-qc-unitary-group-cayley-charts",
+        "concern": "The Statement says the Frobenius metric induces 'a normalized volume probability μ_F' and that 'Its null sets are exactly the sets that are Lebesgue-null in these charts,' without stating AC_ω or specifying the measure domain. Facts A1 and Proof 6.1 explicitly require AC_ω and establish the criterion for Borel sets; both published measure suppliers distinguish their Borel measures from their completions. The Statement should carry the choice hypothesis and clarify whether its null-set assertion concerns Borel sets, completed sets, or outer-null sets. The geometric manifold assertion itself is unaffected.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:53:39.021884+00:00",
+      "reason": "Read the full Cayley lemma: the geometric part has no choice use, but volume construction explicitly uses A1=AC_omega and F6/F7 in6.1. That step proves the null criterion only for Borel sets, matching the stated supplier interfaces. The Statement omits AC_omega on its volume branch and quantifies over unrestricted null sets. Preserve the geometric assertion, make the AC_omega dependence explicit only for measure existence, and specify Borel sets in the null-set criterion. Keep the richer optional full-AC Haar identification. Native supplier owner must trace affected direct/indirect/nonlogical consumers.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "The Frobenius inner product induces a smooth Riemannian metric and a normalized volume probability $\\mu_F$. Its null sets are exactly the sets that are Lebesgue-null in these charts.",
+          "proposed_replacement": "The Frobenius inner product induces a smooth Riemannian metric. Under AC$_\\omega$, its volume density defines a normalized Borel volume probability $\\mu_F$; a Borel subset is $\\mu_F$-null exactly when its intersection with every chart has Lebesgue-null coordinate image."
+        }
+      ]
+    },
+    {
+      "batch": "12",
+      "concern_index": 0,
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "concern": {
+        "id": "thm-qc-solovay-kitaev-bit-complexity",
+        "concern": "Proof 5.1 says that the conditioning-bit bounds add along a derived-name chain and concludes query cost O(J(b+B+log L_J+1)^max(c,3)). The cited interval lemma's square-root construction instead requests approximately twice the output precision, which would multiply precision through nested layers. The additive bound needs an explicit conditioned square-root estimate for the positive balanced-branch radicand r/2. Since r > τ_j, the identity |√x−√y| = |x−y|/(√x+√y) supplies the required b+O(log(1/τ_j)) input precision. State this estimate and its use before summing guard bits; the stated complexity conclusion appears recoverable.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:53:39.021952+00:00",
+      "reason": "Read full bit-complexity theorem. Current5.1 adds conditioning bits along a derived-name chain, but its generic square-root routine can instead double requested precision at each layer. The balanced branch3.1 has r>tau_j, so its radicand r/2>tau_j/2 is away from zero. The identity abs(sqrt(x)-sqrt(y))=abs(x-y)/(sqrt(x)+sqrt(y)), with input error small enough to keep x,y>=tau_j/4, supplies additive b+O(log(1/tau_j)) input precision. A conditioned implementation must be stated explicitly before summing guard bits; preserve the advertised polynomial exponent, branch convention and every source premise. No statement change is needed. This is a focused repair proposal, not a completed implementation or new judgment.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "Each such query uses one parent matrix query at the required guard precision;",
+          "proposed_replacement": "In the balanced branch the only small square-root radicand is $x=r/2>\\tau_j/2$. Enclose it with width at most $2^{-b}\\sqrt{\\tau_j}/16$ and also at most $\\tau_j/4$; both endpoints are then at least $\\tau_j/4$. The identity $|\\sqrt{x}-\\sqrt{y}|=|x-y|/(\\sqrt{x}+\\sqrt{y})$ shows that rational-endpoint square-root bisection to $b+O(1)$ output bits needs only $b+O(\\log(1/\\tau_j)+1)$ input bits, rather than doubling the parent precision. Endpoint bisection takes polynomial bit time as in [F4]. Use this conditioned routine for $\\sqrt{r/2}$ and the Lipschitz norm evaluation in [F4] for normalizations. Each such query uses one parent matrix query at the required guard precision;"
+        }
+      ]
+    }
+  ]
+}

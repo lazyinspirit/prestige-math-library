@@ -1,0 +1,1776 @@
+[
+  {
+    "order": 2272,
+    "id": "quantum-optimization-sdp-and-variational-algorithms",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Quantum Optimization, Semidefinite Programs, and Variational Algorithms",
+    "companion": "quantum-optimization-sdp-and-variational-algorithms-examples",
+    "requires": [
+      "quantum-spectral-estimation-and-matrix-functions",
+      "quantum-sampling-expectation-and-monte-carlo",
+      "robust-covariance-and-high-dimensional-stability",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "hilbert-space-geometry-and-riesz-representation",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "measurements-povms-and-instruments",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "channels-kraus-choi-and-stinespring-representations",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "controlled-gates-phase-and-entanglement",
+      "registers-tensor-products-and-partial-trace",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "amplitude-estimation-and-counting",
+      "block-encoding-linear-systems-and-variable-time-amplification",
+      "block-encodings",
+      "compactness-in-metric-spaces",
+      "continuous-time-quantum-walks",
+      "convex-and-semicontinuous-functions-on-rn",
+      "countability-and-uncountability",
+      "darboux-lhopital-and-taylor",
+      "effective-numberings-reductions-resources-and-randomness",
+      "fubini-and-change-of-variables",
+      "further-trigonometric-identities-and-inverses",
+      "inner-product-spaces-and-orthogonality",
+      "lebesgue-measure-on-euclidean-space",
+      "local-asymptotic-normality-contiguity-and-efficiency",
+      "metric-spaces",
+      "probability-spaces-random-variables-and-expectation",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "quantum-fourier-transform-circuits",
+      "quantum-phase-estimation",
+      "qubitization-and-optimal-hamiltonian-simulation",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "rn-as-a-normed-space",
+      "sine-cosine-and-the-definition-of-pi",
+      "the-complex-exponential-and-eulers-formula",
+      "the-exponential-function",
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "lem-qa-30-hermitian-product-trace-real",
+        "kind": "lemma",
+        "title": "Trace of a product of Hermitian matrices is real",
+        "statement": "For Hermitian matrices $A,B\\in\\mathbb C^{n\\times n}$, $n\\ge0$, the trace $\\operatorname{tr}(AB)$ is real.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "prop-adjoint-algebra",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Joran van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Use an orthonormal basis, the conjugate-transpose matrix of an adjoint, adjoint product reversal, and rectangular trace cyclicity."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom."
+      },
+      {
+        "id": "lem-qa-30-positive-product-trace-nonnegative",
+        "kind": "lemma",
+        "title": "Trace of a product of positive semidefinite matrices is nonnegative",
+        "statement": "If $P,Q\\in\\mathbb C^{n\\times n}$ are positive semidefinite, then $\\operatorname{tr}(PQ)\\ge0$ for every $n\\ge0$.",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-trace-of-a-square-matrix",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Joran van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Use the nonnegative square root, cyclicity, and the quadratic-form definition; include dimension zero."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom."
+      },
+      {
+        "id": "alg-qa-30-capped-generalized-minimum",
+        "dependency_level": 9,
+        "kind": "algorithm",
+        "title": "Finite capped quantum quantile minimum",
+        "deps": [
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-reflection",
+          "def-qc-projective-measurement"
+        ],
+        "justified_by": [
+          "thm-qa-30-generalized-minimum-guarantee"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers, Appendix C",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "statement": "Supply a finite coherent sampler $V$, its inverse, an exactly ordered finite score/label encoding, and a reversible exact comparison circuit. Supply controlled versions when used, the all-zero input reflection $R_0=I-2|0\\rangle\\langle0|$, and the reflection $R_v=I-2\\Pi_v$ for the predicate score strictly smaller than an incumbent $v$. Each preparation retains its value/label work; every named access, comparison, reflection, gate and numerical precision cost is charged. The input quantile parameter is an integer $N\\ge1$, with rational confidence $0<\\delta<1$.\n\nA trial first samples an incumbent using $V$. Set its charged counter to one. To search for an improvement, use stages $j=0,1,\\ldots$, with $K_j=\\lceil(3/2)^j\\rceil$ and worst-case stage charge $4K_j+4$ for preparation/inverse/reflection calls. Before starting a stage that would exceed $100000\\lceil\\sqrt N\\rceil$ total charge, stop the trial and return its incumbent. Otherwise charge that amount and do the following:\n\n1. Take one fresh direct sample. If its score is strictly smaller, replace the incumbent and restart at $j=0$.\n2. If not, draw at most five independent blocks of $\\lceil\\log_2K_j\\rceil$ unbiased bits and use the first resulting integer $q<K_j$. If every draw is out of range, treat this stage as failed and increase $j$. For $K_j=1$ the zero-bit draw is $q=0$.\n3. If an index was accepted, prepare a fresh $V|0\\rangle$, apply $q$ copies of $-VR_0V^\\dagger R_v$, and measure the score/label. Verify the same exact comparison. On improvement replace the incumbent and restart at $j=0$; otherwise increase $j$.\n\nRun $R$ independent trials, where $R$ is the least positive integer for which the exact rational comparison $8^{-R}\\le\\delta$ holds; find it by repeated rational multiplication and comparison. Return their least measured score and label. The loop is finite because $8^R\\ge1+7R$ by the binomial theorem. Integer square-root ceilings use integer squaring comparisons; powers, ceilings, comparisons, and bit generation have their finite classical costs. The query theorem is [[thm-qa-30-generalized-minimum-guarantee]].",
+        "proof_obligations": [
+          "Execute the explicit finite current Definition with its stated supplied access, cap, precision and cost contracts; use its cited local correctness suppliers."
+        ]
+      },
+      {
+        "id": "def-qa-30-sdp-primal-dual-pair",
+        "kind": "definition",
+        "title": "Finite semidefinite primal-dual pair",
+        "statement": "Fix integers $n\\ge0$ and $m\\ge0$, Hermitian matrices $C,A_1,\\ldots,A_m\\in\\mathbb C^{n\\times n}$, and $b=(b_1,\\ldots,b_m)\\in\\mathbb R^m$. The **primal semidefinite program** is\n$$\\sup\\{\\operatorname{tr}(CX):X\\in\\mathbb C^{n\\times n},\\ X\\succeq0,\\ \\operatorname{tr}(A_jX)\\le b_j\\ (1\\le j\\le m)\\},$$\nand its declared **dual program** is\n$$\\inf\\{b\\cdot y:y\\in\\mathbb R^m,\\ y_j\\ge0,\\ \\sum_{j=1}^m y_jA_j-C\\succeq0\\}.$$\nHere $X\\succeq0$ and $D\\succeq0$ mean positive semidefinite in the finite-dimensional quadratic-form sense. By [[lem-qa-30-hermitian-product-trace-real]], all displayed trace objectives and constraints are real. Primal and dual feasibility, boundedness, attainment, trace bounds, sparsity, and normalizations such as $A_1=I,b_1=R$ are separate promises and do not follow from this definition.\n\nThe sign convention is maximize for the primal, minimize for the dual, $\\le$ for primal scalar constraints, nonnegative dual multipliers, and dual slack $\\sum_jy_jA_j-C\\succeq0$.",
+        "deps": [
+          "def-trace-of-a-square-matrix",
+          "def-non-negative-and-positive-operator",
+          "def-real-and-complex-inner-product-space",
+          "def-qc-dirac-notation-conversion",
+          "lem-qa-30-hermitian-product-trace-real"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1609.05537v5",
+              "url": "https://arxiv.org/pdf/1609.05537"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "Check real-valuedness of traces of products of Hermitian matrices in these constraints.",
+          "Distinguish primal and dual variables and signs; state dimensions and finite-dimensional positivity convention."
+        ],
+        "unresolved_obligations": []
+      },
+      {
+        "id": "lem-qa-30-capamplify-state-output-bound",
+        "kind": "lemma",
+        "title": "Capped randomized amplitude amplification preserves a flagged output",
+        "statement": "Let $V$ be a supplied finite-dimensional unitary preparation, $\\Pi$ a supplied success projector, and $|0\\rangle$ the declared initial vector. For every unit vector $|\\phi\\rangle$ on the sampler register, supply a two-outcome flag-only measurement instrument: its good outcome has probability $\\|\\Pi|\\phi\\rangle\\|^2$ and returns the normalized branch $\\Pi|\\phi\\rangle/\\|\\Pi|\\phi\\rangle\\|$ when nonzero; its bad outcome returns the normalized $(I-\\Pi)|\\phi\\rangle$ branch when nonzero. It leaves every score, label, and work register unmeasured, and its implementation and cost are declared. Let $p=\\|\\Pi V|0\\rangle\\|^2\\ge p_{\\rm low}>0$, where $p_{\\rm low}$ is a supplied positive rational, and let $0<\\rho<1$ be a supplied rational failure target. A Grover iteration is $G=(2|\\psi\\rangle\\langle\\psi|-I)(I-2\\Pi)$, where $|\\psi\\rangle=V|0\\rangle$, using the supplied exact reflections.\n\nSet $K=\\lceil1/\\sqrt{p_{\\rm low}}\\rceil$ and let $N$ be the least positive integer for which the exact rational comparison $(15/16)^N\\le\\rho$ holds. These choices are finite: $K$ is found by integer squaring comparisons, and repeated multiplication by $15/16$ terminates because its powers tend to zero. If $p_{\\rm low}\\ge1/2$, take at most $N$ fresh preparations and apply the flag-only instrument to each, returning the first good branch or FAIL. Otherwise set $b=\\lceil\\log_2K\\rceil$; in each of at most $N$ rounds, prepare $V|0\\rangle$ and measure only the flag. Return its good branch if present. After a bad outcome, draw $b$ fair bits to obtain $J$ uniformly in $\\{0,\\ldots,2^b-1\\}$. If $J<K$, prepare a fresh $V|0\\rangle$, apply $J$ Grover iterations, and measure only the flag; return its good branch if present. The events $J\\ge K$ and a failed amplified flag count as a failed round. Return FAIL only after the cap. This procedure returns the normalized good projection $\\Pi V|0\\rangle/\\sqrt p$ up to global phase with probability at least $1-\\rho$. Its preparation, inverse, reflection, verifier, random-bit, and output costs are charged; the calls to $V,V^*$ and reflections are $O(p_{\\rm low}^{-1/2}(1+\\ln(1/\\rho)))$.",
+        "deps": [
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-projective-measurement",
+          "def-qc-reflection",
+          "thm-qc-reflection-unitary-involution",
+          "thm-exponential-is-strictly-increasing",
+          "def-natural-logarithm",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, Høyer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Prove the two-dimensional good/bad rotation, the uniform integer-iteration mean bound, conditional output-state preservation, and finite-round failure bound."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom."
+      },
+      {
+        "id": "lem-qa-30-normalized-hermitian-observable-effects",
+        "kind": "lemma",
+        "title": "Normalized Hermitian observable defines a two-outcome POVM",
+        "statement": "Let $M=M^*$ act on a finite-dimensional nonzero complex inner-product space and suppose $\\|M\\|\\le1$. Then $E_+=(I+M)/2$ and $E_-=(I-M)/2$ are effects summing to $I$. For a density operator $\\rho$, the two outcomes assigned values $+1$ and $-1$ have mean $\\operatorname{tr}(M\\rho)$.",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-real-and-complex-inner-product-space",
+          "def-trace-of-an-endomorphism",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-non-negative-and-positive-operator",
+          "def-qc-finite-positive-effect-family",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-density-operator",
+          "def-qc-dirac-notation-conversion",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "lem-qa-30-positive-product-trace-nonnegative",
+          "lem-qa-30-hermitian-product-trace-real",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Diagonalize M and use each eigenvalue in [−1,1] to prove 0≤E_±≤I and E_++E_−=I.",
+          "Use trace linearity and Tr(ρ)=1 to compute Tr(E_+ρ)−Tr(E_-ρ)=Tr(Mρ), with the declared Dirac/trace convention."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-30-mmw-game",
+        "kind": "definition",
+        "title": "Matrix multiplicative-weights game and update",
+        "statement": "For $n\\ge1$, a round count $T\\ge1$, and Hermitian losses $M_1,\\ldots,M_T\\in\\mathbb C^{n\\times n}$ with $-I\\preceq M_t\\preceq I$, choose $0<\\eta\\le1$. Define $S_0=0$, $S_t=\\sum_{s=1}^tM_s$, $W_t=e^{-\\eta S_{t-1}}$, and $\\rho_t=W_t/\\operatorname{tr}(W_t)$. The round cost is $\\operatorname{tr}(M_t\\rho_t)$. The exponential is the finite-dimensional Hermitian spectral functional calculus. Loss matrices, access to them, and the classical or quantum work to construct them are input costs.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "def-self-adjoint-and-normal-endomorphism",
+          "prop-adjoint-algebra",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-real-and-complex-inner-product-space",
+          "def-non-negative-and-positive-operator",
+          "def-trace-of-a-square-matrix",
+          "def-qc-dirac-notation-conversion",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-functional-calculus-for-a-normal-endomorphism",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-qc-density-operator",
+          "lem-qa-30-hermitian-product-trace-real"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Prove W_t is positive definite and Tr(W_t)>0 by the spectral theorem.",
+          "Derive ρ_t⪰0 and Tr(ρ_t)=1.",
+          "Distinguish update indexing and sign conventions from the cited MMW presentation."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-30-normalized-sdp-strong-duality",
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Normalized Hermitian inequality SDPs have equal primal and dual values",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "lem-qa-30-hermitian-product-trace-real",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-operator-characterisations",
+          "def-trace-of-a-square-matrix",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-heine-borel-rn",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-extreme-value-metric",
+          "def-metric-interior-closure-boundary",
+          "thm-strict-separation-of-a-point-from-a-closed-convex-set"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Joran van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds, Section 2",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge0$ and $m\\ge1$ be finite integers. Consider the Hermitian inequality-form primal and dual of [[def-qa-30-sdp-primal-dual-pair]], with $\\|A_j\\|,\\|C\\|\\le1$, $A_1=I$, and $b_1=R>0$. Suppose the primal feasible set is nonempty. Then that set is compact, the primal supremum is attained, and the primal and dual values satisfy\n$$p^*=d^*\\in[-R,R].$$\nThe dual has a feasible point whose coordinates are all strictly positive and whose matrix slack is positive definite. No strict primal feasibility is required. Dual optimal attainment remains a separate promise: if a dual optimum $y^*$ with $\\|y^*\\|_1\\le r$, $r\\ge1$, is supplied, then $b\\cdot y^*=p^*$ with the same norm bound.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "None; finite-dimensional compactness and separation are used without any sequence of witness choices."
+      },
+      {
+        "id": "thm-qa-30-generalized-minimum-guarantee",
+        "dependency_level": 11,
+        "kind": "theorem",
+        "title": "Quantile minimum and coherent-score nondomination guarantee",
+        "deps": [
+          "alg-qa-30-capped-generalized-minimum",
+          "lem-qa-30-capamplify-state-output-bound",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "thm-exponential-is-strictly-increasing",
+          "def-natural-logarithm",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers, Appendix C, generalized minimum finding",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "For the finite sampler in [[alg-qa-30-capped-generalized-minimum]], with integer quantile parameter $N\\ge1$ and rational confidence $0<\\delta<1$, put $q(v)=\\Pr(\\text{score}<v)$. With probability at least $1-\\delta$ the returned score $v$ satisfies $q(v)<1/N$. If the minimum score has probability at least $1/N$, the returned score is a minimum. The algorithm uses $O(\\sqrt N(1+\\ln(1/\\delta)))$ preparation/inverse/reflection calls on every branch; comparisons, finite arithmetic, gates and output are additional charged coordinates.\n\nFor the coherent-score version, suppose $V$ preserves a uniform index $j\\in[m]$ and its estimate is bad with probability at most $\\nu$ on each index. Let $Q$ bound all sampler, inverse and controlled sampler calls in the algorithm at confidence $\\delta/2$. If $\\nu\\le(\\delta/(16Q))^2$, running with $N=m$ returns, with probability at least $1-\\delta$, a good label whose score is not strictly greater than every good label at any one index. Individual good labels need not have appreciable probability. This guarantee uses the actual coherent sampler and its inverse; it does not supply them or infer inverse access from postselection.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ]
+      },
+      {
+        "id": "thm-qa-30-sdp-weak-duality",
+        "kind": "theorem",
+        "title": "Weak duality for the finite SDP pair",
+        "statement": "For every primal-feasible $X$ and dual-feasible $y$ in [[def-qa-30-sdp-primal-dual-pair]], $\\operatorname{tr}(CX)\\le b\\cdot y$. More precisely,\n$$b\\cdot y-\\operatorname{tr}(CX)=\\sum_{j=1}^m y_j\\bigl(b_j-\\operatorname{tr}(A_jX)\\bigr)+\\operatorname{tr}\\!\\left(\\left(\\sum_{j=1}^m y_jA_j-C\\right)X\\right),$$\nand every term on the right is nonnegative.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-qc-dirac-notation-conversion",
+          "lem-qa-30-positive-product-trace-nonnegative"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Show the scalar constraint terms are nonnegative because y_j≥0.",
+          "For positive semidefinite P,Q, write Tr(PQ)=Tr(P^{1/2}QP^{1/2})≥0 using cyclicity and the nonnegative square-root theorem.",
+          "Conclude weak duality without assuming strong duality or optimizer attainment."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-30-exp-quadratic-bound",
+        "kind": "lemma",
+        "title": "Scalar exponential bound for bounded losses",
+        "statement": "For $0<\\eta\\le1$ and $x\\in[-1,1]$,\n$$\\exp(-\\eta x)\\le1-\\eta x+\\eta^2.$$\nConsequently, if $M=M^*$ and $-I\\preceq M\\preceq I$, then $\\exp(-\\eta M)\\preceq I-\\eta M+\\eta^2I$.",
+        "deps": [
+          "def-qa-30-mmw-game",
+          "def-qa-30-sdp-primal-dual-pair",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-real-and-complex-inner-product-space",
+          "def-functional-calculus-for-a-normal-endomorphism",
+          "def-non-negative-and-positive-operator",
+          "def-qc-dirac-notation-conversion",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-series-has-infinite-radius",
+          "def-factorial-and-falling-factorial",
+          "def-integer-power",
+          "lem-power-monotone",
+          "thm-geometric-series"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Use the scalar Taylor series with a remainder bound on |ηx|≤1, then apply the Hermitian spectral theorem eigenvalue by eigenvalue.",
+          "State the chosen constant and verify it controls both signs of x."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-30-mmw-regret-bound",
+        "kind": "theorem",
+        "title": "Matrix multiplicative-weights regret bound",
+        "statement": "Let $n\\ge1$, $T\\ge1$, $0<\\eta\\le1$, and let $M_1,\\ldots,M_T$ be Hermitian with $-I\\preceq M_t\\preceq I$. For the update of [[def-qa-30-mmw-game]],\n$$\\sum_{t=1}^T\\operatorname{tr}(M_t\\rho_t)\\le\\lambda_{\\min}\\!\\left(\\sum_{t=1}^TM_t\\right)+\\eta T+\\frac{\\ln n}{\\eta}.$$",
+        "deps": [
+          "def-qa-30-mmw-game",
+          "lem-qa-30-exp-quadratic-bound",
+          "lem-finite-dimensional-golden-thompson-trace-inequality",
+          "def-trace-of-a-square-matrix",
+          "def-qc-dirac-notation-conversion",
+          "lem-qa-30-positive-product-trace-nonnegative",
+          "lem-qa-30-hermitian-product-trace-real",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "prop-trace-is-linear",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-series-has-infinite-radius",
+          "def-factorial-and-falling-factorial",
+          "def-natural-logarithm",
+          "thm-exponential-is-strictly-increasing",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Define the partition function Z_t=Tr exp(−ηΣ_{s≤t}M_s); bound successive ratios using Golden–Thompson and the scalar exponential estimate.",
+          "Lower-bound Z_{T+1} by exp(−ηλ_min(ΣM_t)) and upper-bound the initial potential by n.",
+          "Combine logarithms and divide by η, checking whether the stated η² constant changes the additive ηT term."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-30-mmw-dual-output-feasibility",
+        "kind": "lemma",
+        "title": "No-failure MMW rounds yield an approximate dual-feasible vector",
+        "statement": "Let $n,m\\ge1$ and consider a primal-dual pair with $A_1=I_n$, $b_1=R>0$, $\\|A_j\\|,\\|C\\|\\le1$, and a dual optimum attained by some vector of $\\ell_1$ norm at most $r\\ge1$. Set $w=r+1$. Suppose for $t=1,\\ldots,T$ the MMW update uses losses\n$$M_t=\\frac{\\sum_jy_{t,j}A_j-C}{w},$$\nwhere $y_t\\ge0$, $\\|y_t\\|_1\\le r$, $b\\cdot y_t\\le\\alpha$, and supplied estimates satisfy $|\\widetilde a_{t,j}-\\operatorname{tr}(A_j\\rho_t)|\\le\\theta$, $|\\widetilde c_t-\\operatorname{tr}(C\\rho_t)|\\le\\theta$, and $\\sum_jy_{t,j}\\widetilde a_{t,j}-\\widetilde c_t\\ge-w\\theta$. If $0<\\eta\\le1$ and $\\gamma\\ge w(2\\theta+\\eta+\\ln(n)/(\\eta T))$, then $\\bar y=\\gamma e_1+T^{-1}\\sum_ty_t$ is dual feasible and $b\\cdot\\bar y\\le\\alpha+\\gamma R$.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "def-qa-30-mmw-game",
+          "lem-qa-30-exp-quadratic-bound",
+          "thm-qa-30-mmw-regret-bound",
+          "lem-qa-30-positive-product-trace-nonnegative"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Joran van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Derive the actual loss lower bound from the finite trace errors, apply the local MMW regret bound, shift by A₁=I, and track the objective increment."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom."
+      },
+      {
+        "id": "def-qa-30-variational-quantum-algorithm",
+        "kind": "definition",
+        "title": "Parameterized variational quantum objective",
+        "statement": "A finite **variational quantum algorithm (VQA)** specifies a parameter domain $\\Theta\\subseteq\\mathbb R^p$, a supplied parameterized finite circuit $U(\\theta)$, finitely many prepared density operators $\\rho_k$, Hermitian observables $O_k$, real-valued functions $f_k$ on the corresponding expectation ranges, and the objective\n$$C(\\theta)=\\sum_{k=1}^N f_k\\!\\left(\\operatorname{tr}(O_kU(\\theta)\\rho_kU(\\theta)^*)\\right).$$\nThe convention is root inner product linear in the first argument and Dirac expectation $\\langle\\psi|O|\\psi\\rangle_D=\\operatorname{tr}(O\\rho)$. State how each $\\rho_k$ is prepared, the measurement/shot model and finite precision, the classical optimizer, its stopping rule, the output, and every circuit, inverse, controlled access, observable, measurement, arithmetic, and state-preparation cost. The definition asserts no optimizer existence, convergence, global optimality, or quantum advantage.",
+        "deps": [
+          "def-qc-density-operator",
+          "def-qc-quantum-channel",
+          "def-qc-circuit-denotational-semantics",
+          "def-trace-of-a-square-matrix",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-povm-and-outcome-law",
+          "lem-qa-30-hermitian-product-trace-real",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Show each trace is real when O_k is Hermitian and the output state is positive with unit trace.",
+          "State the finite shot/noise and parameter precision model and charge each circuit evaluation.",
+          "Do not silently assume that the classical optimizer finds a global minimizer.",
+          "Charge preparation of every ρ_k and the parameterized ansatz circuit at each classical objective/gradient query."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-30-estimated-polytope-threshold-soundness",
+        "dependency_level": 6,
+        "kind": "lemma",
+        "title": "Estimated SDP polytopes and sound bounded-dual threshold exclusion",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "lem-qa-30-positive-product-trace-nonnegative",
+          "lem-qa-30-mmw-dual-output-feasibility"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers, Lemma 6 and Meta-Algorithm 1",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $n,m\\ge1$ and let $C,A_1,\\ldots,A_m\\in\\mathbb C^{n\\times n}$ be Hermitian with $\\|A_j\\|,\\|C\\|\\le1$, $A_1=I_n$, and $b_1=R>0$, as in the primal-dual pair definition. Suppose the dual minimum is attained by $y^*\\ge0$ with $\\|y^*\\|_1\\le r$, $r\\ge1$, and write $v_D=b\\cdot y^*$. Fix a threshold $\\alpha$ and tolerance $\\theta\\ge0$, and put $w=r+1$. For any density matrix $\\rho$, set $a_j=\\operatorname{tr}(A_j\\rho)$ and $c=\\operatorname{tr}(C\\rho)$. Given estimates satisfying $|\\widetilde a_j-a_j|,|\\widetilde c-c|\\le\\theta$, define\n$$P_q(\\rho)=\\{y\\ge0:b\\cdot y\\le\\alpha,\\ a\\cdot y-c\\ge-q\\},$$\n$$\\widetilde P(\\rho)=\\{y\\ge0:b\\cdot y\\le\\alpha,\\ \\|y\\|_1\\le r,\\ \\widetilde a\\cdot y\\ge\\widetilde c-w\\theta\\}.$$\nThen\n$$P_0(\\rho)\\cap\\{\\|y\\|_1\\le r\\}\\subseteq\\widetilde P(\\rho)\\subseteq P_{2w\\theta}(\\rho)\\cap\\{\\|y\\|_1\\le r\\}.$$\nIf $X=R\\rho$, the rightmost trace slack is $2Rw\\theta\\le4Rr\\theta$.\nIf $\\widetilde P(\\rho)$ is empty, then $\\alpha<v_D$.\n\nFor the MMW conclusion, fix $T\\ge1$ and $0<\\eta\\le1$. At each round $t=1,\\ldots,T$, let $\\rho_t$ be the exact MMW density matrix generated from the preceding losses with parameter $\\eta$, and set $a_{t,j}=\\operatorname{tr}(A_j\\rho_t)$, $c_t=\\operatorname{tr}(C\\rho_t)$. Suppose the estimates obey $|\\widetilde a_{t,j}-a_{t,j}|,|\\widetilde c_t-c_t|\\le\\theta$. Define $\\widetilde P_t=\\widetilde P(\\rho_t)$ using these estimates. If every round returns $y_t\\in\\widetilde P_t$, use losses $M_t=(\\sum_jy_{t,j}A_j-C)/w$ and the exact Gibbs update, and take $\\gamma\\ge w(2\\theta+\\eta+\\ln(n)/(\\eta T))$, then $\\bar y=\\gamma e_1+T^{-1}\\sum_ty_t$ is dual feasible with objective at most $\\alpha+\\gamma R$. More generally, if a round oracle returns a vector in $\\widetilde P_t$ or returns `EMPTY` only when $\\widetilde P_t=\\varnothing$, every all-good threshold execution either has an `EMPTY` round certifying $\\alpha<v_D$, or has all rounds produce that feasible dual vector. No dense primal-output assertion is inferred from bounded-polytope emptiness.\n\nFor adaptively chosen thresholds, losses, states and repeated subroutines,\nif every invoked classical-output block has its asserted conditional good\nprobability and the predictable per-call bad-probability budgets sum to at\nmost $\\delta$ on every execution, all of these implications hold\nsimultaneously with probability at least $1-\\delta$. Independence is not\nneeded.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ]
+      },
+      {
+        "id": "def-qa-30-classical-optimizer-interface",
+        "kind": "definition",
+        "title": "Classical optimizer interface for hybrid algorithms",
+        "statement": "A **classical optimizer interface** for a hybrid algorithm is a finite classical procedure that receives a specified set of finite-precision estimates of an objective $C(\\theta)$ or its derivatives, chooses the next parameter query, and terminates under a stated stopping rule with a declared output. Its interface records query precision, output encoding, classical operation/bit costs, initialization, and stopping behavior. Any convergence or sample-complexity theorem must separately state and prove assumptions such as convexity, smoothness, parameter-domain geometry, bounded noise, and initialization. A generic VQA objective is not assumed convex, and the existence of an optimizer interface supplies no rate.\n\nThis is an abstract contract: it does not select gradient descent, certify a global minimum, or provide an optimization oracle without an explicit finite procedure.",
+        "deps": [
+          "def-qa-30-variational-quantum-algorithm"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1809.00643v4",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "State the exact oracle precision and number of calls for a claimed optimizer theorem.",
+          "Check the objective assumptions against the actual parameterized circuit; do not assume a nonconvex VQA landscape is convex."
+        ],
+        "unresolved_obligations": []
+      },
+      {
+        "id": "def-qa-30-qaoa-circuit-and-objective",
+        "kind": "definition",
+        "title": "QAOA circuit and expected combinatorial objective",
+        "statement": "Let $G=(V,E)$ be a finite simple undirected graph, $p\\ge1$, and $\\gamma_1,\\ldots,\\gamma_p,\\beta_1,\\ldots,\\beta_p\\in\\mathbb R$. On $|V|$ qubits define\n$$C_G=\\sum_{(u,v)\\in E}\\frac{I-Z_uZ_v}{2},\\qquad B_G=\\sum_{v\\in V}X_v.$$\nPrepare $|+\\rangle^{\\otimes |V|}$ and apply, in the declared right-to-left product convention,\n$$U_{G,p}(\\gamma,\\beta)=\\prod_{j=p}^{1}e^{-i\\beta_jB_G}e^{-i\\gamma_jC_G}.$$\nThe output state is $|\\psi_{G,p}(\\gamma,\\beta)\\rangle=U_{G,p}|+\\rangle^{\\otimes|V|}$ and the objective is $\\langle\\psi|C_G|\\psi\\rangle_D$. Measuring every qubit in the computational basis returns a random bitstring, hence a cut. Each cost and mixer exponential, graph-input access, parameter encoding, state preparation, measurement, repetition, and classical optimizer cost must be supplied and charged; this definition is not a guarantee of a maximum cut or approximation ratio.",
+        "deps": [
+          "def-qa-30-variational-quantum-algorithm",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-register-and-computational-basis",
+          "def-qc-pauli-matrices",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qc-projective-measurement-outcome-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            },
+            {
+              "title": "Edward Farhi, Jeffrey Goldstone, and Sam Gutmann, A Quantum Approximate Optimization Algorithm (arXiv:1411.4028v1)",
+              "url": "https://arxiv.org/pdf/1411.4028"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Check each edge term is the 0/1 indicator of a cut in the computational basis.",
+          "Derive the expectation as an average cut score and distinguish it from the maximum cut value.",
+          "State gate implementation, graph loading, parameter precision and measurement cost."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-30-vqe-rayleigh-objective",
+        "kind": "definition",
+        "title": "Variational eigenvalue objective",
+        "statement": "Let $H=H^*$ be a Hermitian matrix on a nonzero finite-dimensional complex space, let $|\\psi_0\\rangle$ be a unit vector, and let $U(\\theta)$ be a supplied unitary ansatz. The variational eigenvalue objective is\n$$E(\\theta)=\\langle\\psi(\\theta)|H|\\psi(\\theta)\\rangle_D,\\qquad |\\psi(\\theta)\\rangle=U(\\theta)|\\psi_0\\rangle.$$\nThe target ground energy is $E_0=\\min\\sigma(H)$. The spectral theorem makes $E_0$ well-defined and each normalized state energy real. No ansatz coverage or optimizer convergence follows from this objective definition. Charge input-state preparation, each ansatz and observable call, measurements, shots, optimizer arithmetic, and output precision.",
+        "deps": [
+          "def-qa-30-variational-quantum-algorithm",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-dirac-notation-conversion",
+          "lem-qa-30-hermitian-product-trace-real"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Translate Dirac expectation to the root linear-first convention and expand the state in an orthonormal eigenbasis."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-30-two-sparse-estimated-oracle",
+        "dependency_level": 12,
+        "kind": "lemma",
+        "title": "Two-sparse estimated SDP oracle from coherent labels",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "lem-qa-30-estimated-polytope-threshold-soundness",
+          "thm-qa-30-generalized-minimum-guarantee"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Joran van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds, Section 2.3, Lemmas 15–16",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "Consider the normalized SDP of [[def-qa-30-sdp-primal-dual-pair]], with $m\\ge1$, $A_1=I$, $b_1=R>0$, $\\|A_i\\|,\\|C\\|\\le1$, and a dual optimum $v_D$ attained by a nonnegative vector of norm at most $r\\ge1$. Fix a density matrix $\\rho$, let $a_i=\\operatorname{tr}(A_i\\rho)$ and $c=\\operatorname{tr}(C\\rho)$, and supply rational $\\alpha,r,\\theta,b_i,\\widetilde c$ with $\\theta\\ge0$ and $|\\widetilde c-c|\\le\\theta$. At each index $i$, a coherent sampler, preserving its work and supplying its inverse, has a nonempty set $S_i$ of supported rational good labels $a_i'$ satisfying the uniform indexed bound $|a_i'-a_i|\\le\\theta$. Put $c'=\\widetilde c-(r+1)\\theta$.\n\nUse the good-label robust-minimum guarantee of [[thm-qa-30-generalized-minimum-guarantee]] for each of the two finite score orders defined in the proof: its selected good score $s_*$ satisfies, for every index $i$, the existence of a label in $S_i$ with score at least $s_*$. The theorem's operator-norm cleaning and hybrid prerequisites for sampler errors must be supplied; mere high marginal probability of a good trace label is not substituted for them.\n\nThere is a finite procedure using two such minima and rational comparisons which, on their joint good event, returns either:\n\n- a rational $y\\ge0$ with at most two nonzero coordinates, $\\|y\\|_1\\le r$, $b\\cdot y\\le\\alpha$, and $a\\cdot y-c\\ge-2(r+1)\\theta$; or\n- `EMPTY`, implying $\\alpha<v_D$.\n\nMore strongly, a nonempty set $\\{y\\ge0:b\\cdot y\\le\\alpha,\\ \\|y\\|_1\\le r,\\ a\\cdot y\\ge c\\}$ rules out `EMPTY` on that event. `EMPTY` need not mean emptiness for every good estimate table. Multiplying the trace residual by $R$ gives slack at most $2R(r+1)\\theta\\le4Rr\\theta$. If each supplied robust minimum costs $\\widetilde O(\\sqrt m)$ coherent sampler and inverse calls, the procedure has the same query order. Charge those calls, their controlled versions and reflections, scalar-estimate preparation, exact score arithmetic, and output arithmetic at their supplied costs; no sampler, reflection or memory interface is free. Failure probabilities include both minimum calls and the scalar/cleaning events.\n\nFor fixed rational point data, the same geometry gives a complete two-sparse feasibility procedure using one membership search and two exact minima. Every feasible vector of prescribed positive norm $N$ has a two-sparse feasible replacement of the same norm.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "None; all choices are finite or explicit, and interpolation is on real intervals."
+      },
+      {
+        "id": "thm-qa-30-parameter-shift-rule",
+        "kind": "theorem",
+        "title": "Parameter-shift derivative for a Pauli generator",
+        "statement": "Suppose one parameter occurs in exactly one gate $U_j(\\theta)=e^{-i\\theta P/2}$ with $P=P^*$ and $P^2=I$, while all other circuit factors, the input state, and the Hermitian observable are independent of $\\theta$. Then for each linear expectation term $C(\\theta)$,\n$$\\partial_\\theta C(\\theta)=\\frac12\\bigl(C(\\theta+\\pi/2)-C(\\theta-\\pi/2)\\bigr).$$\nThe identity is exact. Finite-shot estimates of the two shifted terms have separate sampling and measurement costs.",
+        "deps": [
+          "def-qa-30-variational-quantum-algorithm",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-dirac-notation-conversion",
+          "def-qa-19-finite-matrix-dynamics",
+          "def-functional-calculus-for-a-normal-endomorphism",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-eulers-formula",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-quarter-turn-values-and-shift-formulas"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Write each expectation as a finite trigonometric polynomial of θ with frequencies at most one because the generator eigenvalues are ±1/2.",
+          "Differentiate that expression and verify the shifted difference equals the derivative.",
+          "For sums/compositions, apply linearity/chain rule only under the stated cost form; do not generalize to arbitrary generators without a new spectral-gap formula."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-30-qaoa-expectation-bound",
+        "kind": "theorem",
+        "title": "QAOA objective is an expected feasible score only",
+        "statement": "For the finite graph and circuit of [[def-qa-30-qaoa-circuit-and-objective]], the QAOA objective lies between the minimum and maximum feasible cut sizes, and each computational-basis measurement returns a feasible cut. This expected-value statement alone implies no universal approximation ratio, global optimizer, or advantage guarantee.",
+        "deps": [
+          "def-qa-30-qaoa-circuit-and-objective",
+          "def-qc-projective-measurement",
+          "thm-qc-projective-measurement-outcome-law",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            },
+            {
+              "title": "Edward Farhi, Jeffrey Goldstone, and Sam Gutmann, A Quantum Approximate Optimization Algorithm (arXiv:1411.4028v1)",
+              "url": "https://arxiv.org/pdf/1411.4028"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Expand the expectation over the finite measurement distribution and use the pointwise cut-score bounds.",
+          "Give or cite no unsupported universal convergence, approximation-ratio, or quantum-advantage claim."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-30-vqe-rayleigh-ritz-guarantee",
+        "kind": "theorem",
+        "title": "VQE Rayleigh–Ritz upper bound and equality case",
+        "statement": "For every ansatz parameter $\\theta$, $E(\\theta)\\ge E_0$, with equality exactly when $|\\psi(\\theta)\\rangle$ lies in the ground eigenspace of $H$. Thus a VQE evaluation gives an upper bound on the ground energy, but an ansatz family or classical optimizer need not reach $E_0$.",
+        "deps": [
+          "def-qa-30-vqe-rayleigh-objective",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Expand in an orthonormal eigenbasis and express E(θ)−E_0 as Σ_j(λ_j−E_0)|c_j|².",
+          "Characterize equality by support only on the minimum-eigenvalue eigenspace; allow degeneracy."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-30-sdp-reference-state-access",
+        "kind": "definition",
+        "title": "SDP maximally entangled reference-state access",
+        "statement": "For an integer matrix dimension $d\\ge1$, define the maximally entangled reference vector\n$$|\\Phi_d\\rangle=d^{-1/2}\\sum_{i=0}^{d-1}|i\\rangle|i\\rangle$$\non two ordered $d$-dimensional registers. The access contract supplies a finite preparation unitary $V_\\Phi$, its inverse, width/ancillas, input encoding, and costs $C_\\Phi$, satisfying $V_\\Phi(|0\\rangle|0\\rangle|0^a\\rangle)=|\\Phi_d\\rangle|0^a\\rangle$ exactly in the declared encoding. Its action on other inputs is any supplied unitary completion; the inverse is that of the complete unitary. When $d=2^q$, a concrete preparation applies $H$ to each of the $q$ first-register qubits and then CNOT from each first-register qubit to its matching second-register qubit, using exactly $q$ Hadamards and $q$ CNOTs on $2q$ wires. For other $d$, $V_\\Phi$ and its cost are supplied inputs satisfying the same preparation equation; unused encoded labels have zero output amplitude, and no padding is allowed unless its effect on traces is accounted for.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-circuit-cost-model",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Derive the uniform superposition after H^⊗q and verify that the CNOT layer copies each basis label, giving d^(-1/2)Σ_i|i,i⟩.",
+          "For non-power-of-two d, specify an exact preparation procedure, output support and cost; do not pad the Gibbs operator in a way that changes its trace without accounting for the added eigenvalues.",
+          "Charge V_Φ,V_Φ†, input encoding, any finite gate synthesis, and width/ancilla costs."
+        ],
+        "unresolved_obligations": [
+          "No general efficient circuit for arbitrary non-power-of-two d is claimed; retain C_Φ unless a separate construction and cost proof is supplied."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-30-finite-grid-quantum-subgradient",
+        "dependency_level": 12,
+        "kind": "lemma",
+        "title": "A finite-grid quantum subgradient from approximate values",
+        "deps": [
+          "def-subgradient-and-subdifferential",
+          "thm-riemann-fubini-on-product-rectangles",
+          "lem-chernoff-bound-for-independent-bernoulli-trials",
+          "thm-qa-exact-binary-qft-circuit-correct",
+          "def-qa-cyclic-quantum-fourier-transform",
+          "lem-qa-13-pi-rational-bounds",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn, Gilyen, Gribling, de Wolf, Convex optimization using quantum oracles, Lemmas 14–21 and Theorem 23",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $1\\le d\\le n$, let $C\\subseteq\\mathbb R^d$, and let $f:C\\to\\mathbb R$ be convex. Let $r_1,L>0$ and suppose $f$ is $L$-Lipschitz on a neighborhood of $[-2r_1,2r_1]^d\\subset C$, with every point there having a subgradient in $\\mathbb R^d$ of norm at most $L$. Let $0<\\rho\\le1/3$, $\\rho_0=99\\rho/100$, $0<\\delta\\le nr_1L/\\rho_0$, and $r_2=\\sqrt{\\delta r_1\\rho_0/(nL)}$. A deterministic clean value oracle approximates $f$ to error at most $\\delta$ on the finite query grids.\n\nChoose a finite uniform grid of cell centers of $[-r_1,r_1]^d$, with $2^b$ cells per coordinate and mesh $h_0=2r_1/2^b\\le(\\rho/1000)r_2^2/(8n^2r_1)$. Sample one center $z$ uniformly using $b$ independent fair bits per coordinate, and keep it fixed across all subsequent runs. Put $a=2r_2/n$, $B=La$, $m=\\max\\{5,\\lceil\\log_2(B/(28\\pi\\delta))\\rceil\\}$, $M=2^m$, and $B_*=28\\pi\\delta M$. On each independent run prepare the uniform product grid $u_i=(j_i+1/2)/M-1/2$, apply phase $\\exp(2\\pi iM\\widetilde f(z+au)/(3B_*))$ with clean uncomputation, apply the negative-sign QFT to each coordinate, and decode signed integers $y_i$ as $3B_*y_i/(aM)$. Use at least $18\\ln(1000n/\\rho)+3$ independent runs and coordinate medians. A total implemented-phase operator error at most $1/1000$ per run is permitted.\n\nWith probability at least $1-\\rho$, the resulting vector $v\\in\\mathbb R^d$ satisfies, simultaneously for every $y\\in C$,\n$$f(y)\\ge f(0)+\\langle v,y\\rangle-(23n)^2\\sqrt{\\frac{\\delta L}{\\rho_0r_1}}\\|y\\|-2L\\sqrt n\\,r_1.$$\nThe number of value-oracle and inverse calls is $O(\\log(n/\\rho))$. Random bits, phases, QFT gates, arithmetic, and output costs are separate.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "None; finite-dimensional geometry and finite oracle circuits suffice."
+      },
+      {
+        "id": "lem-qa-30-sdp-trace-mean-ratio-identity",
+        "kind": "lemma",
+        "title": "Flagged trace ratio returns a Gibbs-state observable mean",
+        "statement": "Let $G=G^*$ and $M=M^*$ be $d\\times d$ matrices with $d\\ge1$ and $\\|M\\|\\le1$. Set $g=e^{-G/2}$, $B>0$, and $\\rho_G=e^{-G}/\\operatorname{tr}(e^{-G})$. Prepare $|\\Phi_d\\rangle$, apply a block whose top-left amplitude is $g/B$ to the first register, then a block whose squared top-left compression is $(I+M/2)/4$ to that register. Let $p_M$ be the probability that all work flags are zero. Let $p_0$ be the corresponding probability when $M=0$. Then $p_0>0$ and\n$$\\frac{p_M}{p_0}=1+\\frac12\\operatorname{tr}(M\\rho_G).$$",
+        "deps": [
+          "def-qa-30-sdp-reference-state-access",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "prop-trace-is-linear",
+          "lem-qa-30-hermitian-product-trace-real"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "Joran van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Compute both finite success probabilities from the maximally entangled vectorization identity and use trace cyclicity."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom."
+      },
+      {
+        "id": "def-qa-30-quantum-membership-separation-model",
+        "kind": "definition",
+        "title": "Quantum convex membership and weak-separation model",
+        "statement": "Let $B(x,t)=\\{z\\in\\mathbb R^n:\\|z-x\\|_2\\le t\\}$ and let $B(K,t)=\\bigcup_{x\\in K}B(x,t)$ for $t\\ge0$; $B(K,-t)$ denotes the inward erosion consisting of points whose radius-$t$ ball is contained in $K$. A convex body is a closed convex set with nonempty interior. Assume rationally encoded $0<r\\le R$ and $B(0,r)\\subseteq K\\subseteq B(0,R)$. The deterministic weak-membership oracle $\\mathrm{MEM}_{\\varepsilon,0}(K)$ is queried at a finite-precision point $y$ and must correctly assert either $y\\in B(K,\\varepsilon)$ or $y\\notin B(K,-\\varepsilon)$. In the overlap it may return either valid assertion. The coherent interface is a supplied reversible Boolean unitary with a fixed deterministic completion on every encoded input, together with its inverse and any controlled forms used.\n\nA weak separation oracle $\\mathrm{SEP}_{\\eta,\\rho}(K)$, queried at $y$, with probability at least $1-\\rho$, either asserts $y\\in B(K,\\eta)$ or asserts $y\\notin B(K,-\\eta)$ and returns a unit vector $g$ satisfying $\\langle g,z\\rangle\\le\\langle g,y\\rangle+\\eta$ for every $z\\in B(K,-\\eta)$. The membership-to-separation algorithm is promised only on the query domain in its theorem; no unique answer is required in the boundary bands. A finite unit-normal encoding may be a nonzero rational vector v with the normalization g=v/||v|| interpreted exactly; rational bisection supplies an upper norm bound N between ||v|| and2||v|| when a classical reduction requires rational halfspaces. Radius, point, unit-normal and offset encodings and all query/inverse/gate/bit costs are part of the contract.\n\nThis specifies oracle behavior; a membership-to-separation theorem and any separation-to-optimization composition are separate claims with their own hypotheses.",
+        "deps": [
+          "def-qa-30-classical-optimizer-interface",
+          "def-qc-coherent-function-oracle",
+          "def-qc-inverse-unitary-access"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1809.00643v4",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "Execute the explicit finite current Definition with its stated supplied access, cap, precision and cost contracts; use its cited local correctness suppliers."
+        ],
+        "unresolved_obligations": []
+      },
+      {
+        "id": "def-qa-30-sdp-sparse-oracle-model",
+        "kind": "definition",
+        "title": "Sparse SDP matrix access and computational model",
+        "statement": "For $d\\times d$ matrices with at most $s$ nonzero entries in each row, fix a padded slot set $\\{1,\\ldots,s\\}$ and an invalid-slot sentinel $\\bot$. The index oracle is the basis permutation\n$$O_I|k,\\ell,z\\rangle=|k,\\ell,z\\mathbin{\\mathrm{XOR}}j_{k,\\ell}\\rangle,$$\nwhere $j_{k,\\ell}$ is the encoded column of the $\\ell$th nonzero in row $k$, or $\\bot$ for padding. The value oracle XORs the finite binary encoding of the real and imaginary parts of the matrix entry into a target register. Specify the completion on invalid row/slot encodings, arithmetic precision/rounding, and whether inverse/controlled calls and reverse-location queries are supplied. Sparse sums $\\sum_j y_jA_j$ require a separate access implementation; entry oracles do not automatically supply it.\n\nRecord matrix sparsity and norms, classical input/preprocessing/output time, matrix-entry queries, sparse-sum and QRAM access, circuit gates, width, ancillas, state preparation, and coefficient-bit costs separately. If QRAM is used, state its unitary address/memory action and charge its construction, updates and queries. Query complexity is not standard-gate complexity without an implementation of each oracle.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "def-qc-coherent-function-oracle",
+          "def-qc-circuit-cost-model",
+          "def-qc-inverse-unitary-access",
+          "def-qc-controlled-unitary-access",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1609.05537v5",
+              "url": "https://arxiv.org/pdf/1609.05537"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Prove all index/value maps reversible on every input basis state and specify exact arithmetic/rounding.",
+          "Separate matrix-entry queries, sparse-sum access, QRAM, quantum gates, classical control, and state preparation.",
+          "Do not identify oracle complexity with a standard gate complexity without implementing the oracle."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-30-quantum-membership-to-separation",
+        "kind": "algorithm",
+        "title": "Quantum membership-to-separation procedure",
+        "statement": "This finite algorithm takes a convex body, a rational query point and radii, a precision/failure budget, and supplied coherent deterministic weak-membership access with inverse. It returns IN when the membership interface certifies that branch; otherwise it returns a finite-precision weak separating normal and halfspace or an explicitly distinguished INVALID, RANDOM_FAIL, or FAILURE branch. The algorithm charges the membership oracle and inverse, all controlled queries, point rotations, numerical arithmetic, random sampling, phase estimation, QFTs, output bits, and every gate.",
+        "deps": [
+          "def-qa-30-quantum-membership-separation-model",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1809.00643v4",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "Execute the explicit finite current Definition with its stated supplied access, cap, precision and cost contracts; use its cited local correctness suppliers."
+        ],
+        "unresolved_obligations": []
+      },
+      {
+        "id": "lem-qa-30-centroid-weak-separation-optimization",
+        "dependency_level": 15,
+        "kind": "lemma",
+        "title": "Query-only optimization from weak separation by centroid cuts",
+        "deps": [
+          "def-qa-30-quantum-membership-separation-model",
+          "thm-brunn-minkowski-for-compact-convex-sets",
+          "thm-jensen-inequality-for-expectation",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn, Gilyen, Gribling, de Wolf, Convex optimization using quantum oracles, Lemmas 14–21 and Theorem 23",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume countable choice, with positive rationally encoded radii and accuracy/failure parameters. Let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body, let $0<\\zeta\\le R$, $0<\\nu\\le1/3$, and let $c$ be a unit objective vector with supplied finite rational approximations to any requested error. Put\n$$\\tau=\\zeta/8,\\qquad s=r\\tau/(16R),\\qquad \\eta=s/(100n).$$\nLet $T$ be the least integer with $(3/4)^T(2R)^n<(2s/n)^n$, and $B$ the least positive integer with $2^B\\tau\\ge8R$. There is a finite classical procedure using at most $BT=O(n\\log(nR/s)(1+\\log(R/\\zeta)))$ calls to $\\mathrm{SEP}_{\\eta,\\nu/(2BT)}(K)$ that, with probability at least $1-\\nu$, returns $y\\in B(K,\\zeta)$ with\n$$\\langle c,y\\rangle\\ge\\max_{x\\in K}\\langle c,x\\rangle-\\zeta.$$\nThe normal encoding must supply a nonzero rational direction $u$ for its unit normal $u/\\|u\\|$; a rational $N$ with $\\|u\\|\\le N\\le2\\|u\\|$ can be computed by bisection. Query points and polytope arithmetic are rational. Computing exact centroids by exhaustive finite triangulation is allowed and charged separately: this result asserts no polynomial arithmetic, gate, or bit-time bound.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "Countable choice is used for the stated Brunn–Minkowski, Lebesgue-volume and integration suppliers; no arbitrary-index choice is used."
+      },
+      {
+        "id": "lem-qa-30-membership-height-geometry",
+        "dependency_level": 15,
+        "kind": "lemma",
+        "title": "Height geometry and weak-membership binary search",
+        "deps": [
+          "def-qa-30-quantum-membership-separation-model",
+          "def-subgradient-and-subdifferential",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-heine-borel-rn",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn, Gilyen, Gribling, de Wolf, Convex optimization using quantum oracles, Lemmas 14–21 and Theorem 23",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body in $\\mathbb R^n$, $n\\ge2$. In any rotated coordinates set $C=\\{y:\\exists t,(y,t)\\in K\\}$ and $h(y)=\\min\\{t:(y,t)\\in K\\}$. Then $h$ is convex, finite on $B(0,r)$, and $L=2R/r$-Lipschitz on $B(0,r/2)$. Every interior point of $C$ has a subgradient, and every such subgradient at a point in the interior of this ball has norm at most $L$.\n\nFor $\\|y\\|\\le r/2$, a $\\mathrm{MEM}_{\\varepsilon,0}$ query at $(y,t)$, $t\\le-r/2$, has these implications: an IN answer implies $t\\ge h(y)-3R\\varepsilon/r$; an OUT answer implies $t\\le h(y)+2R\\varepsilon/r$. Hence binary search on $[-R,-r/2]$, returning its final upper endpoint when its width is at most $\\delta/3$, approximates $h(y)$ within $\\delta$ if $\\varepsilon\\le r\\delta/(3R)$. It uses $O(1+\\log(R/\\delta))$ membership queries and has a clean coherent implementation using the same order of queries and inverse queries.\n\nFinally, if $x=-\\|x\\|e_n$ receives OUT and $h(y)\\ge h(0)+\\langle v,y\\rangle-a\\|y\\|-b$ on $C$, then $s=(-v,1)/\\|(-v,1)\\|$ satisfies $\\langle s,z\\rangle\\ge\\langle s,x\\rangle-aR-b-2R\\varepsilon/r$ for every $z\\in K$.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "None; finite-dimensional geometry and finite oracle circuits suffice."
+      },
+      {
+        "id": "thm-qa-30-quantum-membership-separation-cost",
+        "kind": "theorem",
+        "title": "Quantum weak-separation query bound",
+        "statement": "Let $n\\ge1$, with rationally encoded radii, precision and failure budgets as in the model, and let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body, $0<\\eta\\le R$, and $0<\\rho\\le1/3$. The completed deterministic coherent oracle $\\mathrm{MEM}_{\\varepsilon,0}(K)$ and its inverse are supplied, with\n$$\\varepsilon\\le\\eta(58n)^{-9/2}(r/R)^3(\\eta/R)^2\\rho.$$\nUnder the finite encoding and numerical-error budgets of [[alg-qa-30-quantum-membership-to-separation]], that procedure implements $\\mathrm{SEP}_{\\eta,\\rho}(K)$ using\n$$O\\!\\left(\\log(n/\\rho)\\log\\!\\left((n/\\rho)(R/\\eta)(R/r)\\right)\\right)$$\nmembership and inverse queries combined. The promise applies to all encoded query points; in particular it applies throughout the bounded rational localization queries used below. The oracle completion need not be unique in the weak boundary band.\n\nFor the optimization composition assume countable choice. Given $0<\\zeta\\le R$, $0<\\nu\\le1/3$, and a unit objective with costed rational approximations, use $\\tau,s,\\eta_*,T,B$ from [[lem-qa-30-centroid-weak-separation-optimization]] and $\\rho_* =\\nu/(2BT)$. Membership access at any precision\n$$\\varepsilon_*\\le\\eta_*(58n)^{-9/2}(r/R)^3(\\eta_*/R)^2\\rho_*$$\nthen returns, with probability at least $1-\\nu$, a point $y\\in B(K,\\zeta)$ satisfying $\\langle c,y\\rangle\\ge\\max_{x\\in K}\\langle c,x\\rangle-\\zeta$, with at most $BT$ times the preceding per-separation membership-query bound, evaluated at $(\\eta_*,\\rho_*)$. This is $\\widetilde O(n)$ membership queries, where the suppressed factors are logarithmic in $n,R/r,R/\\zeta,1/\\nu$. It implies the corresponding weak-optimization guarantee over $B(K,-\\zeta)$. Output, QFT/phase gates, rotations, numerical precision, centroid computation, and all classical arithmetic/bit costs are additional. No polynomial-time centroid implementation is asserted.",
+        "deps": [
+          "alg-qa-30-quantum-membership-to-separation",
+          "def-qa-30-quantum-membership-separation-model",
+          "lem-qa-30-membership-height-geometry",
+          "lem-qa-30-finite-grid-quantum-subgradient",
+          "lem-qa-30-centroid-weak-separation-optimization",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn, Gilyen, Gribling, de Wolf, Convex optimization using quantum oracles, Lemmas 14–21 and Theorem 23",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            },
+            {
+              "title": "Lee, Sidford, Vempala, Efficient convex optimization with membership oracles, Section 4, Theorem 15",
+              "url": "https://arxiv.org/pdf/1706.07357"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "unresolved_obligations": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Countable choice is used only for the classical volume-based optimization composition; the separation construction uses finite grids and finite-dimensional geometry."
+      },
+      {
+        "id": "thm-qa-30-smooth-fourier-approximation",
+        "dependency_level": 16,
+        "kind": "theorem",
+        "title": "Certified finite smooth Fourier approximation and LCU normalization",
+        "deps": [
+          "def-principal-inverse-sine-and-cosine",
+          "thm-principal-inverse-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "thm-qa-22-lcu-block-encoding-correctness",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers, Appendix B, Lemma 37 and Theorem 40",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $r,\\Delta,B>0$, $0<e\\le B/2$, and\n$f(x_0+x)=\\sum_{k\\ge0}a_kx^k$ with\n$\\sum_k|a_k|(r+\\Delta)^k\\le B$. Put $\\nu=\\Delta/(r+\\Delta)$,\n$x=\\ln(32B/e)$, and choose\n$$K=\\lceil\\nu^{-1}\\ln(16B/e)\\rceil+2,\\quad L=\\lceil\\nu^{-2}x\\rceil+2,\\quad M=\\lceil\\nu^{-1}x\\rceil+2.$$\nUse the exact finite arcsine convolutions and binomial expansion in OP8\nSmoothFourier. The exact truncated coefficients $c_s$ have\n$\\sum_s|c_s|\\le B$, $|s|\\le2M$, and give an approximation to $f$ within\n$e/8$ throughout $[x_0-r,x_0+r]$.\nRounding all complex coefficients with total absolute error at most $e/16$\ngives error below $e/4$ and coefficient norm at most $B+e/16$.\nThere are $O(M+1)$ distinct signed frequencies. In an LCU SELECT their\nlargest evolution time is $O(\\Delta^{-1}\\ln(B/e))$.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ]
+      },
+      {
+        "id": "lem-qa-30-spectral-minimum-shift",
+        "dependency_level": 17,
+        "kind": "lemma",
+        "title": "Coherent spectral minimum and a frozen Gibbs energy shift",
+        "deps": [
+          "thm-qa-28-spectral-estimation-guarantee",
+          "thm-qa-28-spectral-law-measurement",
+          "thm-qa-phase-estimation-success-and-tail",
+          "thm-qa-30-generalized-minimum-guarantee",
+          "def-qa-30-sdp-reference-state-access",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "cor-differentiable-implies-continuous",
+          "cor-mean-value-theorem",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "lem-qa-13-pi-rational-bounds"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds, Section 2.2 and Appendix C",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $H=H^*$ have dimension $d\\ge1$, with supplied rational $K\\ge0$ and $\\|H\\|\\le K$. Supply a costed exact preparation of $|\\Phi_d\\rangle$, controlled Hamiltonian evolutions, their inverses, and the input and success reflections used by generalized minimum finding. Let rational $0<\\delta<1$, $T=2K+1$, and let $Q_{\\rm cap}$ bound the sampler, inverse and controlled sampler calls of [[thm-qa-30-generalized-minimum-guarantee]] at confidence $\\delta/2$. Choose\n$$0<\\nu\\le\\frac{\\delta^2}{10^{12}d(Q_{\\rm cap}+1)^2}.$$\nThere is a finite coherent spectral sampler whose rational label is within $1/8$ of its eigenvalue with bad probability at most $\\nu$ at every preserved spectral index. Generalized minimum finding with $N=d$ returns, with probability at least $1-\\delta$, a rational $s$ satisfying\n$$\\lambda_{\\min}(H)-1/8\\le s\\le\\lambda_{\\min}(H)+1/8.$$\nMeasure $s$ once, put $\\widetilde\\lambda=s-1/8$, and freeze\n$$G=H-(\\widetilde\\lambda-3/2)I.$$\nOn that event $I\\preceq G$, $\\lambda_{\\min}(G)\\le2$, and $\\|G\\|\\le K+|\\widetilde\\lambda-3/2|$. This one measurement and its resulting parameters are fixed before the round's coherent indexed trace circuits are constructed.\n\nThe minimum step uses $O(\\sqrt d(1+\\ln(1/\\delta)))$ complete spectral-sampler, inverse and reflection calls. Each sampler includes repeated costed reference preparation where invoked, all QPE powers, controlled gates, coherent decoding, median computation and history storage. One QPE trial has total physical Hamiltonian-evolution time $O(1)$ in the power-evolution model. A sparse-simulation substitution such as $\\widetilde O(d_HK)$ per trial is conditional on an independently supplied evolution-cost theorem and does not acquire a second factor of $K$ from this application. Query counts imply no unproved total quantum-gate bound.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "None; the argument uses finite spectral decompositions, finite circuits and explicit finite probability bounds."
+      },
+      {
+        "id": "alg-qa-30-sdp-gibbs-purification",
+        "kind": "algorithm",
+        "title": "Sparse-oracle Gibbs-state purification",
+        "statement": "Input a finite Hermitian matrix $H$, a nonnegative coefficient $\\eta$, a rational certified bound $K\\ge\\|\\eta H\\|$, dimension $d\\ge1$, costed reference preparation $\\Phi_d$, controlled sparse evolution circuits and their inverses, an output accuracy, and shift-confidence and implementation budgets. For the optional normalized-output branch, supply $\\varepsilon_{out}>0$ and a rational amplification failure target $0<\\rho<1$. All access, coefficient generation, rotations, arithmetic, precision synthesis, reference preparation and memory operations have declared costs. The supplied finite decoded matrix may approximate the target matrix only with a stated operator-norm error budget included below.\n\n1. **Freeze the energy shift.** Choose $0<e\\le1/2$ and an exact finite decoded Hermitian $\\widehat L$ with $\\|\\widehat L-\\eta H\\|\\le\\delta\\le\\min(1/8,e/100)$ and certified norm bound $K+\\delta$. Run the explicit finite coherent spectral sampler and capped generalized minimum procedure in [[lem-qa-30-spectral-minimum-shift]] on $\\widehat L$. Measure its rational output once, set $\\widetilde\\lambda=s-1/8$, and freeze the decoded $\\widehat G=\\widehat L-(\\widetilde\\lambda-3/2)I$ and target $G=\\eta H-(\\widetilde\\lambda-3/2)I$, their norm certificates and all ensuing circuit parameters. On the shift good event the decoded minimum is in $[3/2,7/4]$; the variational bound $|\\lambda_{min}(\\widehat L)-\\lambda_{min}(\\eta H)|\\le\\delta$ puts the target minimum in $[1,2]$. For $\\eta=0$ the normalized output is the supplied $\\Phi_d$ directly. A shift failure belongs to the declared confidence budget.\n2. **Generate the finite block.** Choose $0<e\\le1/2$ and a rational $K_G\\ge\\max(\\|G\\|,\\|\\widehat G\\|)/2$. Construct the block for $\\widehat G$ and include its target perturbation $\\|e^{-\\widehat G/2}-e^{-G/2}\\|\\le\\delta/2$ in the allocated error. For $f(x)=e^{-x/2}$ use $x_0=K_G+1/2$, $r=K_G$, $\\Delta=1/2$, $B=1$. Its Taylor coefficients are $a_k=e^{-x_0/2}(-1/2)^k/k!$. Execute the finite arcsine convolution, truncation, signed-binomial coefficient construction, coefficient rounding and normalization in [[thm-qa-30-smooth-fourier-approximation]]. Use its explicit finite $K,L,M$ cutoffs, enlarged by certified upper enclosures when necessary. Prepare the finite coefficient vector, apply the signed-frequency controlled evolutions, unprepare it and dilute the clean flag to common normalization $B_G^+=1+e/8$. Allocate coefficient, rotation, evolution and decoded-matrix errors so the final successful compression differs from $e^{-G/2}/B_G^+$ by at most $e$. Their sum is an input certificate, and every circuit is retained with its actual adjoint and controlled implementation.\n3. **Unmeasured flag interface.** Prepare $\\Phi_d$ and apply the block on its first factor. The ideal zero-work vector is $((e^{-G/2}/B_G^+)\\otimes I)\\Phi_d$, with probability $\\operatorname{tr}(e^{-G})/[d(B_G^+)^2]$. Return this entire unmeasured circuit and its actual inverse when a coherent flagged sampler is requested. A caller constructing indexed trace samplers reuses these frozen parameters; it does not rerun ShiftMin within that sampler.\n4. **Optional normalized output.** To output a normalized purification, use step 2 with accuracy $0<e\\le\\min(1,\\varepsilon_{out})/(10000\\sqrt d)$, invoke the finite direct-sample/random-iteration capped amplification construction of [[lem-qa-30-capamplify-state-output-bound]] with lower floor $1/(64d)$ and failure target $\\rho$, and measure only its supplied good/bad flag. On a good outcome return the normalized flag branch; on cap failure return explicit `FAIL`. Do not measure score, label, or work registers in this branch. The amplification lemma supplies the finite success and branch-state contract; no exact Grover peak or unbounded rejection loop is used. A caller needing an inverse uses the unmeasured circuit from step 3, rather than an inverse of this measured conditional output.\n\nThe identity energy shift changes no normalized Gibbs state. Non-power-of-two dimensions use the declared $C_\\Phi$ input. The algorithm supplies no uncharged matrix exponential, spectral projector, coefficient oracle or sparse-sum oracle. Its successful-vector and normalized-state bounds are proved separately in [[thm-qa-30-sdp-gibbs-state-error-cost]].",
+        "deps": [
+          "def-qa-30-sdp-sparse-oracle-model",
+          "def-qa-30-sdp-reference-state-access",
+          "lem-qa-30-spectral-minimum-shift",
+          "thm-qa-30-smooth-fourier-approximation",
+          "alg-qa-22-lcu-block-encoding",
+          "lem-qa-30-capamplify-state-output-bound",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access"
+        ],
+        "justified_by": [
+          "thm-qa-30-sdp-gibbs-state-error-cost"
+        ],
+        "dependency_level": 18,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1806.01838",
+              "url": "https://arxiv.org/pdf/1806.01838"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "Execute the explicit finite current Definition with its stated supplied access, cap, precision and cost contracts; use its cited local correctness suppliers."
+        ],
+        "unresolved_obligations": []
+      },
+      {
+        "id": "thm-qa-30-sdp-gibbs-state-error-cost",
+        "kind": "theorem",
+        "title": "Gibbs purification error and resource bound",
+        "statement": "Let the ideal unnormalized Gibbs amplitude on the reference state be $|v\\rangle=((e^{-G/2}/B)\\otimes I)|\\Phi_d\\rangle$ with ideal flag probability $p_G=\\|v\\|^2>0$, where $B>0$ is the declared block-encoding normalization. Suppose the implemented flagged preparation has good-branch vector $|\\widetilde v\\rangle$ with $\\|\\widetilde v-v\\|\\le\\zeta$, and assume $0\\le\\zeta\\le\\sqrt{p_G}/2$. Then its normalized conditional state is within $2\\zeta/\\sqrt{p_G}$ in vector norm of the ideal Gibbs purification. Its actual success probability is at least $p_G/4$. There exists a positive rational $q$ with $p_G/8<q<p_G/4$. CapAmplify supplied any certified such $q$ returns that implemented good ray with probability at least $2/3$ using $O(p_G^{-1/2})$ preparation, inverse, and reflection calls. The floor certificate is a supplied input to this call; obtaining and verifying it are separately charged and are not an exact trace oracle. The total cost also includes QSVT/block access, phase compilation, reference preparation, and all gate/precision costs.",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-functional-calculus-for-a-normal-endomorphism",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "lem-rat-embeds-dense",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-factorial-and-falling-factorial",
+          "thm-complex-exponential-addition-and-real-extension",
+          "alg-qa-30-sdp-gibbs-purification",
+          "thm-qa-28-matrix-function-error-cost",
+          "lem-qa-30-capamplify-state-output-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1806.01838",
+              "url": "https://arxiv.org/pdf/1806.01838"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Apply the QSVT operator error theorem, bound the unnormalized vector error on the maximally entangled input, and prove the normalized-state perturbation inequality.",
+          "Include all simulation, phase compilation, success amplification and state-preparation errors in ζ; provide a lower bound for p_G."
+        ],
+        "unresolved_obligations": [
+          "The paper-specific degree, spectral interval, success lower bound, and error allocation must be instantiated before this conditional theorem yields the source complexity."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-30-flagged-trace-error-and-cost",
+        "dependency_level": 23,
+        "kind": "theorem",
+        "title": "Flagged Gibbs trace estimation: errors, probability floors and charged access",
+        "deps": [
+          "lem-qa-30-sdp-trace-mean-ratio-identity",
+          "thm-qa-30-smooth-fourier-approximation",
+          "alg-qa-relative-probability-estimation",
+          "thm-qa-relative-probability-guarantee"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers: Better upper and lower bounds, Sections 2.2–2.3",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $d\\ge1$, $0<\\theta\\le1/4$, and let a frozen finite Hermitian matrix $G$ satisfy $1\\le\\lambda_{\\min}(G)\\le2$ and a supplied finite norm bound. Let $A=A^*$ with $\\|A\\|\\le1$, $Z=\\operatorname{tr}(e^{-G})$, $\\rho_G=e^{-G}/Z$, and $F_A=\\frac12\\sqrt{I+A/2}$. Choose $0<e\\le\\min(1/2,\\theta/(100000d))$ and the common normalizations $B_G^+=B_A^+=1+e/8$. Supply finite successful blocks approximating $e^{-G/2}/B_G^+$ and $F_A/B_A^+$ in operator norm within $e$. The baseline observable block approximates $I/(2B_A^+)$ within $e$, using the same normalizations. Supply their unitary circuits, inverses, controlled versions, and the reference preparation $|\\Phi_d\\rangle=d^{-1/2}\\sum_{k=1}^d|k,k\\rangle$ at declared cost $C_\\Phi$.\n\nLet $V_A$ prepare the reference and apply the Gibbs block followed by the observable block on its first factor, with distinct work registers; success means both work registers zero. Define $V_0$ with the baseline observable block. Supply a rational $c_{\\rm rel}$ satisfying $\\theta/72<c_{\\rm rel}\\le\\theta/36$ and rational failure budgets in $(0,1)$. Apply [[alg-qa-relative-probability-estimation]] separately to their actual probabilities $q_A,q_0$, with floor $1/(1024d)$ and relative tolerance $c_{\\rm rel}$. Form $2(\\widehat q_A/\\widehat q_0-1)$, allowing additive rounding error at most $\\theta/4$, and clip to $[-1,1]$. On the joint relative-estimation good event, the result estimates $\\operatorname{tr}(A\\rho_G)$ within $\\theta$.\n\nThe ideal probabilities satisfy $p_0\\ge1/(64d)$ and $p_A\\ge1/(128d)$; the actual probabilities both exceed $1/(1024d)$. ShiftMin's measured parameters must be frozen once per MMW round before making an indexed trace sampler. A finite coherent implementation retains every internal history and provides an inverse of its entire circuit, without an inverse of a normalized postselected Gibbs state.\n\nWith primitive cost $Q_{\\rm flag}$ for each complete preparation, inverse or controlled preparation, including reference preparation inside each call, the number of primitive accesses is $\\widetilde O(\\sqrt d/\\theta)$ with confidence logarithms. Thus their charged cost is $\\widetilde O((\\sqrt d/\\theta)Q_{\\rm flag})$. Controlled reflections, all AE/QFT operations and coherent arithmetic, comparisons, divisions, rounding and history work are additional charged quantum operations unless included in the declared primitive cost. This query bound alone implies no matching total quantum-gate bound; that stronger profile requires efficient implementations of every such operation and its precision budget.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "None; the argument uses finite-dimensional operators, finite circuits and explicit finite error budgets."
+      },
+      {
+        "id": "alg-qa-30-sdp-matrix-expectation-oracle",
+        "kind": "algorithm",
+        "title": "Coherent SDP matrix-expectation oracle",
+        "statement": "Input rational parameters $0<\\tau\\le2$ and $0<\\delta<1$, a choice of repeated controlled-$Q$ or supplied controlled-power QA13 access with its declared costs, and an explicit finite purification circuit $V_\\rho$ preparing a unit vector whose reduced state on register $S$ is $\\rho$, together with its inverse and any controlled versions. Also supply a finite unitary dilation $W_M$ of the two-outcome POVM $E_\\pm=(I\\pm M)/2$ for a Hermitian contraction $M$, with an output bit and all work registers. Prepare the purification, apply $W_M$ to $S$, and keep the outcome bit coherent; the resulting finite sampler has values $+1$ and $-1$. Supply this signed sampler’s inverse, controlled calls, good and initial-state reflections, observable access, and all value/output encodings. Apply [[alg-qa-29-quantum-expectation-estimation]] to this sampler on $[-1,1]$ with rational target $\\varepsilon=\\tau/2$ and failure probability $\\delta$, using the selected access mode. Return its classical estimate $\\widetilde\\mu$ together with the constructed coherent signed-sampler circuit and its declared access/cost description. The sampling tolerance $\\tau/2$ reserves the other half of the requested tolerance $\\tau$ for a purification-bias allowance in the consuming theorem. No inverse preparation is inferred from a measured postselected Gibbs state.\n\nThis procedure is distinct from the flagged-trace ratio route inside the sparse SDP solver; that route is specified by the solver's frozen round factory and trace-label construction. Every purification, observable, inverse, controlled call, dilation, measurement and compilation cost is separately charged.",
+        "deps": [
+          "thm-qa-30-sdp-gibbs-state-error-cost",
+          "alg-qa-29-quantum-expectation-estimation",
+          "def-qc-projective-measurement",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "lem-qa-30-normalized-hermitian-observable-effects"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1504.06987v3",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "Execute the explicit finite current Definition with its stated supplied access, cap, precision and cost contracts; use its cited local correctness suppliers."
+        ],
+        "unresolved_obligations": []
+      },
+      {
+        "id": "lem-qa-30-mmw-to-sdp-feasibility",
+        "kind": "lemma",
+        "title": "Matrix-weights regret implies SDP threshold feasibility",
+        "statement": "Consider a nonempty normalized finite Hermitian SDP with $n,m\\ge1$, $R>0$, $A_1=I$, $b_1=R$, $\\|A_j\\|,\\|C\\|\\le1$, and a dual optimum attained by a vector of $\\ell_1$ norm at most $r\\ge1$. For the finite threshold construction require rationally encoded $b_j,R,r,e$, with $0<e<R/4$. Write $v$ for its common primal/dual optimum and set $w=r+1$, with\n$$\\ell=\\ln(\\max(2,n)),\\quad\\theta=e/(24Rr),\\quad T=\\left\\lceil36w^2R^2\\ell/e^2\\right\\rceil,\\quad\\eta=\\sqrt{\\ell/T}.$$\nFor a rational threshold $\\alpha$, use exact losses $M_t=(\\sum_jy_{t,j}A_j-C)/w$ and ideal round densities $\\rho_t\\propto\\exp(-\\eta\\sum_{s<t}M_s)$. Implement the round trace labels by the frozen flagged-trace construction and its controlled/inverse access from [[thm-qa-30-flagged-trace-error-and-cost]], including the bad-label/operator-hybrid budget required by [[lem-qa-30-two-sparse-estimated-oracle]]. On the joint good event, the finite threshold loop has exactly these alternatives:\n\n- A round returns `EMPTY`, which implies $\\alpha<v$; its `HIGHER` response is a threshold exclusion.\n- All $T$ rounds return two-sparse weights. Then $\\bar y=(e/R)e_1+T^{-1}\\sum_ty_t$ is dual feasible, its matrix slack is at least $(e/(2R))I$, and $b\\cdot\\bar y\\le\\alpha+e$.\n\nExact rational returned weights and their finite average may be retained without coefficient rounding. If the predictable conditional bad-probability budgets of the actual adaptive calls sum to at most $\\delta$, both implications hold simultaneously with probability at least $1-\\delta$. Unproved numerical failures or absent access implementations are not covered by this probability premise. Bounded-dual emptiness is used for threshold exclusion; it does not assert an unproved dense primal certificate.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "lem-qa-30-normalized-sdp-strong-duality",
+          "thm-qa-30-mmw-regret-bound",
+          "lem-qa-30-estimated-polytope-threshold-soundness",
+          "lem-qa-30-two-sparse-estimated-oracle",
+          "thm-qa-30-flagged-trace-error-and-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers, Lemma 6 and Meta-Algorithm 1",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "unresolved_obligations": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-30-sdp-binary-search-correctness",
+        "kind": "theorem",
+        "title": "Binary search converts certified SDP thresholds to additive optimization",
+        "statement": "For the normalized nonempty SDP and bounded attained dual optimum of [[lem-qa-30-mmw-to-sdp-feasibility]], let $0<\\varepsilon<2R$, $e=\\varepsilon/8$, and supply that lemma's finite threshold oracle. On its good event `LOWER` supplies a feasible dual of objective at most $\\alpha+e$, and `HIGHER` implies $\\alpha<\\mathrm{OPT}$. Initialize $lo=-R,hi=R$, obtain a `LOWER` vector at threshold $R+e$, and store it. For at most $L=\\lceil\\log_2(16R/\\varepsilon)\\rceil+2$ midpoint calls, stop when $hi-lo\\le\\varepsilon/2$; on `LOWER` store its vector and put $hi=\\min(hi,\\alpha+e)$, and on `HIGHER` put $lo=\\max(lo,\\alpha-e)$. Then the stored vector is dual feasible and has objective at most $\\mathrm{OPT}+\\varepsilon$. There are $O(1+\\log(R/\\varepsilon))$ threshold calls. Per-call conditional bad probability at most $\\delta/(L+1)$ gives total failure at most $\\delta$, even for adaptive inputs.\n\nAn uncertain result with no proved oracle guarantee returns explicit `FAIL`. No tolerance refinement is required on a good execution. For $\\varepsilon\\ge2R$ return $e_1$ directly. If $R=0$ and the primal is nonempty, the same vector has objective zero and is optimal. In dimension zero return the zero dual vector. These branches precede every division by $R$.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "lem-qa-30-normalized-sdp-strong-duality",
+          "lem-qa-30-mmw-to-sdp-feasibility"
+        ],
+        "justified_by": [],
+        "dependency_level": 25,
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers, Meta-Algorithm 1 and Theorem 1",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "unresolved_obligations": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-30-sdp-matrix-expectation-cost",
+        "kind": "theorem",
+        "title": "SDP matrix-expectation estimation error and cost",
+        "statement": "Let $M=M^*$ with $\\|M\\|\\le1$, and let the coherent signed sampler from [[alg-qa-30-sdp-matrix-expectation-oracle]] be supplied. For additive tolerance $0<\\tau\\le2$ and failure $0<\\delta<1$, supply rational $\\tau/2<t\\le\\tau$ and $\\delta/2<\\beta\\le\\delta$, and run that procedure at inputs $(t,\\beta)$. The QA29 estimator returns an estimate of $\\operatorname{tr}(M\\rho)$ within $\\tau$ with probability at least $1-\\delta$ in either declared QA13 access mode. In repeated controlled-$Q$ access it uses $O(\\tau^{-1}(1+\\ln(1/\\delta)))$ coherent sampler/reflection rounds; in supplied controlled-power access sum the separately declared power-query costs. When the supplied purification is itself an approximate Gibbs purification at vector error $\\xi\\le\\tau/4$, the expectation bias is at most $2\\xi$; use its rational sampling tolerance $t/2\\le\\tau/2$ to keep total error at most $\\tau$. In an SDP iteration, use a union bound across all $m$ observables and charge each Gibbs preparation/inverse, observable access, controlled call, and state/phase implementation.",
+        "deps": [
+          "alg-qa-30-sdp-matrix-expectation-oracle",
+          "thm-qa-29-quantum-expectation-error-cost",
+          "thm-qa-30-sdp-gibbs-state-error-cost",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-qc-dirac-notation-conversion",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 25,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1504.06987v3",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Apply QA29 after the ±1 encoding, use a union bound across m observables, and combine measurement and purification errors.",
+          "Substitute the per-iteration tolerance into the total rounds and include all state/oracle costs."
+        ],
+        "unresolved_obligations": [
+          "The theorem gives an access-parameterized estimator; the advertised SDP query exponent requires the source’s concrete oracle realization and precision schedule."
+        ],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-30-quantum-sdp-solver",
+        "kind": "algorithm",
+        "title": "Sparse-oracle quantum SDP algorithm",
+        "statement": "Input finite binary Hermitian matrices $A_1,\\ldots,A_m,C$ and rational $b,R,r,\\varepsilon$, with $\\varepsilon>0$, $m\\ge1$, $A_1=I$, $b_1=R\\ge0$, $\\|A_j\\|,\\|C\\|\\le1$, a nonempty primal, and an attained optimal dual of $\\ell_1$ norm at most $r\\ge1$. Supply the total finite sparse XOR location/value interfaces of [[def-qa-30-sdp-sparse-oracle-model]], the costed reference preparation $\\Phi_n$, and declared finite reversible arithmetic, controlled evolution, inverses, reflections and synthesis budgets. The output is a classical sparse dual list or explicit `FAIL`; the confidence target is rational $0<\\delta<1$ (use $\\delta=1/3$). Every memory, QRAM, reference, arithmetic and output cost is recorded. The separate resource theorem substitutes actual sparse-evolution implementations; no matrix function or sparse-sum oracle is implicit.\n\n**Boundary branches.** In dimension zero return the zero dual vector. For $R=0$ or $\\varepsilon\\ge2R$ return $e_1$. These branches precede all divisions by $R$. Otherwise put $e=\\varepsilon/8$, $L=\\lceil\\log_2(16R/\\varepsilon)\\rceil+2$, $w=r+1$, and\n$$\\ell=\\ln(\\max(2,n)),\\quad \\theta=e/(24Rr),\\quad T=\\lceil36w^2R^2\\ell/e^2\\rceil,\\quad\\eta=\\sqrt{\\ell/T}.$$\nComputable-real constants such as $\\eta$ are not exact value-oracle outputs: choose certified finite rational enclosures and round common scalar coefficients to the precision allocated to each decoded Hermitian sum and its simulated evolutions. Integer cutoffs use certified upper enclosures, so a conservative larger $T$ is allowed with the same $\\eta=\\sqrt{\\ell/T}$. No equality comparison with a transcendental number is required. The ideal densities and regret argument use the displayed real parameters; every decoded-matrix error is included in the finite block-error and whole-circuit hybrid budgets below.\n\n**Derived sparse access.** At round $t$, store the previous two-sparse rational lists and form $S_{t-1}=\\sum_{u<t}M_u$, $M_u=(\\sum_jy_{u,j}A_j-C)/w$. To answer a row query, enumerate all constituent support lists and the identity column, sort their finite column labels, merge duplicates and retain every distinct union column, including columns whose combined value is zero. Pad with distinct labels. Never test a real sum for exact zero. Round common real scalar coefficients with certified total norm error and compute exact finite decoded entry sums; this preserves Hermiticity and transposed support lists. The sorted-support construction of [[lem-qa-25-sorted-xor-sparse-access-isometries]] allows these listed zeros and constructs the clean block access. Actual row scanning, sorting, value arithmetic and inverse/control calls are charged. Allocate decoded-matrix error before each evolution so its Duhamel error $|u|\\|H-\\widetilde H\\|$ and all simulation errors meet the allocated circuit slot budget. The clean-subspace hybrid in [[lem-qa-25-clean-subspace-unitary-hybrid]] applies to the actual finite implementations. A QRAM profile supplies its address/memory unitary and its construction/update costs explicitly.\n\n**Frozen round factory.** At the start of each round, choose the exact finite Hermitian decoded $\\widehat L_t$ with $\\|\\widehat L_t-\\eta S_{t-1}\\|\\le\\delta_t\\le\\min(1/8,e_f/100)$. Run the finite ShiftMin construction of [[lem-qa-30-spectral-minimum-shift]] on $\\widehat L_t$ with its certified norm bound, measure its rational lower shift once and freeze both $\\widehat G=\\widehat L_t-(\\widetilde\\lambda-3/2)I$ and the target $G=\\eta S_{t-1}-(\\widetilde\\lambda-3/2)I$, their norm bounds, Fourier lists, normalization and all precisions. The minimum-eigenvalue variational bound transfers the shift margin to the target: both minima lie in $[1,2]$. Implement the decoded block, including its at-most-$e_f/200$ positive-exponential perturbation against the target in the final block-error budget. Execute steps 2–3 of [[alg-qa-30-sdp-gibbs-purification]] with these frozen matrices and shift to build the unmeasured Gibbs block; do not repeat its shift-measurement step. For each observable $A$, build the finite Fourier block for $F_A=\\frac12\\sqrt{I+A/2}$ with $x_0=0,r=1,\\Delta=1/2,B=1$ and coefficients $a_k=\\frac12\\binom{1/2}{k}2^{-k}$. Use $e_f\\le\\min(1/2,\\theta/(100000n))$ and the SAME $B_A^+=B_G^+=1+e_f/8$ in numerator and baseline. The baseline block is $I/(2B_A^+)$.\n\n**Trace label.** Compose the frozen Gibbs block and observable block on the first half of $\\Phi_n$, with distinct work registers. Estimate the two actual all-zero probabilities with [[alg-qa-relative-probability-estimation]], floor $1/(1024n)$ and relative tolerance $\\theta/36$. Return $2(\\widehat q_A/\\widehat q_0-1)$ rounded with error at most $\\theta/4$ and clipped to $[-1,1]$; a zero denominator on a bad path returns the fixed label zero. Use its finite worst-case cap and the supplied `efficient-grid` fixed-precision rounding mode. For an indexed trace sampler preserve the uniform index, all AE/QPE targets, comparison bits, stop flags, coins, rounded values and history; defer internal measurements and pad stopped branches by identities. Its inverse is the reverse of this entire circuit. No inverse of a normalized postselected state is used. All coherent division, comparison, rounding and history are quantum gates and work, separately charged. [[thm-qa-30-flagged-trace-error-and-cost]] supplies the conditional accuracy and probability floors.\n\n**Diagonal mode.** When every input is diagonal, the caller may select the scalar flag implementation instead of Fourier evolution. Evaluate the finite decoded round energy $\\widehat L_t(i)$ using the stored sum of at most $2t+1$ diagonal values. Round to absolute error at most $1/8$, retain the uniform index, run the same capped robust minimum, measure its label $s$ once, and freeze $\\widehat g_i=\\widehat L_t(i)-s+3/2$. Its confidence uses the round's shift budget. Set the common coefficient approximation error $\\delta_t\\le\\min(1/8,\\mu/100)$, $\\mu\\le\\theta/(100000n)$. On the shift good event target and decoded minima are in $[1,2]$. For observable entry $a_i$, prepare a scalar flag with probability within $\\mu$ of $(1+a_i/2)e^{-g_i}/4$, using the finite decoded energy; the baseline uses $a_i=0$ and the same shift. Compute the exponential as follows. Put $B=\\lceil\\log_2(32/\\mu)\\rceil$ by rational doubling comparisons. For $\\widehat g_i\\ge B$ use zero. Otherwise double an integer $h$ from two until $3^B B^h/h!\\le\\mu/64$, then evaluate its exact rational Taylor polynomial through degree $h-1$ and round once. Clip to $[0,1]$. To implement the flag, bisect an angle interval $[0,\\pi/2]$ using fixed absolute-$\\mu/32$ Taylor enclosures of its midpoint $\\sin^2$; stop on comparison overlap or after the fixed $O(\\log(1/\\mu))$ width cap, then implement the finite encoded angle by binary-controlled rotations with its allocated synthesis error. Retain/uncompute all arithmetic as stipulated for the full inverse. The factorial test passes by $h=O(\\log^2(1/\\mu))$; the cost theorem proves this schedule and its ratio/error budget. Use the same RelProb floor, relative tolerance, coherent history, score oracle and outer loop as in general mode. This diagonal factory replaces the spectral/Fourier factory; its arithmetic costs remain explicitly charged.\n\n**Two-sparse round oracle.** First measure a scalar trace label $\\widetilde c$ for $C$. Put $c'=\\widetilde c-w\\theta$. Execute the explicit rational region, membership, determinant-based angular order, interpolation and scale recovery in the proof of [[lem-qa-30-two-sparse-estimated-oracle]]. If $\\alpha\\ge0,c'\\le0$, return zero. Otherwise run [[alg-qa-30-capped-generalized-minimum]] twice with $N=m$ on the two score orders of that lemma. Both orders assign score zero to every point inside its region; outside points use the oppositely oriented angular orders, compared by rational half-plane and determinant tests. No arctangent equality test or preliminary search miss is needed. If either selected point lies in the region, return its scaled one-coordinate vector. Otherwise intersect its selected pair's segment with the closed rational halfspaces and recover its positive scale by the lemma's explicit formulas. If the segment interval is empty return `EMPTY`. If successful return its rational weights, merging repeated indices. `EMPTY` is a bounded-error complete-oracle response: on the joint good event it implies $\\alpha<\\mathrm{OPT}$. A low-level failure with no proved contract returns `FAIL` instead.\n\n**Threshold$(\\alpha,e,\\delta_{call})$.** Initialize $S_0=0$. Set $\\beta=\\delta_{call}/(10T)$. For $t=1,\\ldots,T$:\n\n1. Build the frozen round factory with shift failure at most $\\beta$ and scalar $C$ trace failure at most $\\beta$.\n2. Let $Q_{min}$ be the deterministic sampler-call cap of one generalized minimum at confidence $\\beta/2$. Give each indexed trace label bad probability at most $\\nu\\le(\\beta/(16Q_{min}))^2$, by allocating its relative-estimation and implementation errors accordingly. Retain its history and fixed-index access as above. Allocate any remaining whole-minimum implementation hybrid error within its $\\beta$ failure budget. Run both minima at total failure at most $\\beta$ each. These are the good-label/cleaning hypotheses of [[thm-qa-30-generalized-minimum-guarantee]], rather than a union bound over unmeasured labels.\n3. On `EMPTY` return `HIGHER`. On a successful weight list store $y_t$, compute $M_t$, and update its sparse list. An absent access certificate or other unsupported numerical failure returns `FAIL`.\n\nAfter $T$ successful rounds return `LOWER` with the exact rational sparse list $\\bar y=(e/R)e_1+T^{-1}\\sum_ty_t$. Retain its finite rational coefficients; no feasibility-preserving rounding is inferred. The oracle's conditional bad probability is at most $\\delta_{call}$ by the adaptive union bound. Its `HIGHER` implication and `LOWER` reserve margin are [[lem-qa-30-mmw-to-sdp-feasibility]].\n\n**Outer search.** Set $lo=-R$, $hi=R$, $\\delta_{call}=\\delta/(L+1)$. Call Threshold at $R+e$ and store its `LOWER` vector; any other outcome returns `FAIL`. For at most $L$ midpoint calls, stop when $hi-lo\\le\\varepsilon/2$. At $\\alpha=(lo+hi)/2$, on `LOWER` store its vector and put $hi=\\min(hi,\\alpha+e)$; on `HIGHER` put $lo=\\max(lo,\\alpha-e)$; on `FAIL` return `FAIL`. Return the stored vector, or `FAIL` if the fixed cap is exhausted before the stopping test. The invariant and finite cap are proved in [[thm-qa-30-sdp-binary-search-correctness]]; no tolerance refinement is needed on a good path. Check finite rational nonnegativity and objective arithmetic before output; PSD feasibility is supplied by the proved MMW reserve, without a free dense spectral checker.\n\nConfidence budgets are predictable functions of finite prior histories. The first-bad-call union bound covers the adaptive search. Capped search/statistical errors belong to their proved bad events; unproved access or arithmetic failures do not certify infeasibility. Output contains at most $2T+1$ nonzero coordinates after merging, and no dense primal matrix is produced.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "def-qa-30-sdp-sparse-oracle-model",
+          "def-qa-30-sdp-reference-state-access",
+          "alg-qa-30-sdp-gibbs-purification",
+          "lem-qa-30-spectral-minimum-shift",
+          "thm-qa-30-smooth-fourier-approximation",
+          "thm-qa-30-flagged-trace-error-and-cost",
+          "alg-qa-relative-probability-estimation",
+          "alg-qa-30-capped-generalized-minimum",
+          "thm-qa-30-generalized-minimum-guarantee",
+          "lem-qa-30-two-sparse-estimated-oracle",
+          "lem-qa-30-mmw-to-sdp-feasibility",
+          "thm-qa-30-sdp-binary-search-correctness",
+          "lem-qa-25-sorted-xor-sparse-access-isometries",
+          "lem-qa-25-clean-subspace-unitary-hybrid"
+        ],
+        "justified_by": [
+          "thm-qa-30-quantum-sdp-solver-guarantee",
+          "thm-qa-30-quantum-sdp-solver-cost"
+        ],
+        "dependency_level": 26,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1809.00643v4",
+              "url": "https://arxiv.org/pdf/1809.00643"
+            },
+            {
+              "title": "https://arxiv.org/pdf/1504.06987v3",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "Execute the explicit finite current Definition with its stated supplied access, cap, precision and cost contracts; use its cited local correctness suppliers."
+        ],
+        "unresolved_obligations": []
+      },
+      {
+        "id": "thm-qa-30-quantum-sdp-solver-guarantee",
+        "kind": "theorem",
+        "title": "Quantum SDP additive-optimality guarantee",
+        "statement": "For rational accuracy $\\varepsilon>0$ and the normalized sparse finite SDP promises specified by QA30—$\\|A_j\\|,\\|C\\|\\le1$, $A_1=I$, $b_1=R\\ge0$, nonempty primal (whose trace is therefore at most $R$), attained dual optimum with an optimal vector of $\\ell_1$ norm at most $r\\ge1$, and maximum matrix sparsity $s$—[[alg-qa-30-quantum-sdp-solver]], with its declared finite precision, controlled/inverse access, reference preparation, arithmetic and synthesis implementations, returns with probability at least $2/3$ a feasible dual vector of objective at most $\\mathrm{OPT}+\\varepsilon$. More generally its declared rational confidence target $0<\\delta<1$ gives probability at least $1-\\delta$.\n\nIt outputs a classical sparse dual list, with at most $2T+1$ nonzero coordinates before merging across the final threshold's rounds. It does not output a dense primal matrix. Finite arithmetic, state preparation, memory and controlled/inverse operations have their actual costs; the resource theorem states the resulting query profile and its separate gate-cost boundary. No unproved numerical or access implementation is a premise supplied by a source title alone.",
+        "deps": [
+          "alg-qa-30-quantum-sdp-solver",
+          "lem-qa-30-normalized-sdp-strong-duality",
+          "lem-qa-30-spectral-minimum-shift",
+          "thm-qa-30-smooth-fourier-approximation",
+          "thm-qa-30-flagged-trace-error-and-cost",
+          "thm-qa-30-generalized-minimum-guarantee",
+          "lem-qa-30-two-sparse-estimated-oracle",
+          "lem-qa-30-mmw-to-sdp-feasibility",
+          "thm-qa-30-sdp-binary-search-correctness"
+        ],
+        "justified_by": [],
+        "dependency_level": 27,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "unresolved_obligations": [],
+        "proof_strategy": "direct",
+        "axiom_use": "None; finite-dimensional convex separation, explicit finite circuits and finite conditional probability suffice."
+      },
+      {
+        "id": "thm-qa-30-sparse-sdp-resource-substitution",
+        "dependency_level": 27,
+        "kind": "theorem",
+        "title": "Sparse evolution substitution gives the quantum SDP and diagonal LP query bounds",
+        "deps": [
+          "alg-qa-30-quantum-sdp-solver",
+          "def-qa-30-sdp-sparse-oracle-model",
+          "def-qa-30-sdp-reference-state-access",
+          "lem-qa-25-sorted-xor-sparse-access-isometries",
+          "lem-qa-25-clean-subspace-unitary-hybrid",
+          "thm-qa-25-qubitized-simulation-resource-bound",
+          "thm-qa-25-small-time-aware-simulator-correctness",
+          "thm-qa-30-smooth-fourier-approximation",
+          "lem-qa-30-spectral-minimum-shift",
+          "thm-qa-30-flagged-trace-error-and-cost",
+          "thm-qa-30-generalized-minimum-guarantee",
+          "lem-qa-30-two-sparse-estimated-oracle",
+          "lem-qa-30-mmw-to-sdp-feasibility",
+          "thm-qa-30-sdp-binary-search-correctness",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-qa-19-matrix-exponential-unitary-properties",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "cor-taylor-remainder-bound",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "van Apeldoorn et al., Quantum SDP-solvers, Sections 2.2–2.4 and Appendix D",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "statement": "Consider the finite sparse input and normalized SDP promises of [[alg-qa-30-quantum-sdp-solver]], with dimension $n\\ge1$, $m\\ge1$, sparsity capacity $s\\ge1$, $R>0$, $r\\ge1$, and nontrivial accuracy $0<\\varepsilon<2R$. Put $Q=Rr/\\varepsilon$. Supply successful certified implementations of the sparse encoding, controlled evolution, finite rotations and arithmetic, with their error budgets as in that algorithm. Its matrix input-query bound, including the derived sparse sums, is\n$$\\widetilde O\\bigl(\\sqrt{nm}\\,s^2Q^8\\bigr).$$\nFor diagonal input matrices there is a scalar flagged-trace implementation with matrix input-query bound\n$$\\widetilde O\\bigl(\\sqrt{nm}\\,Q^5\\bigr).$$\nThe tilde suppresses logarithms in dimension, sparsity, accuracy and the declared failure budgets. The zero-dimension and coarse-accuracy boundary branches have the direct costs stated by the algorithm. The diagonal improvement uses scalar entry evaluation and approximate minimum finding, rather than substituting $s=1$ in the general bound.\n\nThese are matrix-query bounds. Let $N_{f,t}=\\widetilde O(\\sqrt{nm}/\\theta)$ count complete flag-circuit accesses in threshold round $t$, and let $N_{s,t}=\\widetilde O(\\sqrt n)$ count its spectral-shift sampler accesses. Every access includes its actual forward, inverse or controlled implementation. If $C_\\Phi$ prices each reference preparation or reversal, $F_t$ is the once-per-round factory cost, $G_{f,t},G_{s,t}$ price the remaining gates of those complete primitives, and $A_t$ prices the remaining estimator/minimum/score arithmetic and classical control, the corresponding charged gate/time record is\n$$\\sum_{t=1}^T\\bigl[F_t+N_{f,t}(C_\\Phi+G_{f,t})+N_{s,t}(C_\\Phi+G_{s,t})+A_t\\bigr]+G_{\\rm QRAM}+W,$$\ntimes the declared number of threshold calls. Here $G_{\\rm QRAM}$ is the actual memory construction, update and access cost if QRAM is used, and $W$ is output and record writing. Omit a separately written cost if it is already included in a primitive price. In particular reference preparation is repeatedly charged, totaling $\\widetilde O(\\sqrt{nm}Q^3C_\\Phi)$ per threshold run. Phase-list generation, coefficient bits, finite value arithmetic, preparation, precision synthesis, work and descriptions are included at their actual prices. The source's same-order gate conclusion holds when these explicit costs fit its stated model and the respective query envelope; no such fit follows from matrix-query counts alone.",
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "axiom_use": "None; all support lists, precision schedules, circuits, and resource sums are finite."
+      },
+      {
+        "id": "thm-qa-30-quantum-sdp-solver-cost",
+        "kind": "theorem",
+        "title": "Quantum SDP query bound and QRAM cost boundary",
+        "statement": "For rational accuracy $\\varepsilon>0$, under the normalized finite sparse-input promises and complete finite implementations of [[thm-qa-30-quantum-sdp-solver-guarantee]], the solver uses\n$$\\widetilde O\\!\\left(\\sqrt{nm}\\,s^2\\max(1,Rr/\\varepsilon)^8\\right)$$\nqueries to the original matrix input oracles. For diagonal LPs its separate scalar flag implementation uses $\\widetilde O(\\sqrt{nm}\\max(1,Rr/\\varepsilon)^5)$ queries. Logarithms in dimensions, precision and confidence, including the outer threshold calls, are suppressed. The direct boundary branches require only their stated output costs.\n\nThe source's same-order gate conclusion holds in its stated computational model only when all actual nonquery costs fit that envelope. A standard-circuit implementation must charge the derived sparse-row scans/sorts and value arithmetic, simulator phase generation and precision synthesis, repeated reference preparation, coefficient tables and PREPARE, reversible probability rounding/division and comparisons, history and control, QRAM construction/update/access if used, output bits and classical preprocessing. Query complexity alone does not prove this gate bound. For arbitrary $n$, the reference price is repeated $\\widetilde O(\\sqrt{nm}\\max(1,Rr/\\varepsilon)^3)$ times per threshold run, rather than incurred once.",
+        "deps": [
+          "alg-qa-30-quantum-sdp-solver",
+          "thm-qa-30-quantum-sdp-solver-guarantee",
+          "thm-qa-30-sparse-sdp-resource-substitution",
+          "def-qa-30-sdp-sparse-oracle-model",
+          "def-qa-30-sdp-reference-state-access",
+          "thm-qa-30-smooth-fourier-approximation"
+        ],
+        "justified_by": [],
+        "dependency_level": 28,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "The complete focused local proof and explicit supplier interfaces are in the current canonical item; retain its probability, approximation and resource boundaries."
+        ],
+        "unresolved_obligations": [],
+        "proof_strategy": "direct",
+        "axiom_use": "None; the proof sums finite circuit costs and explicit finite error budgets."
+      }
+    ]
+  },
+  {
+    "order": 2273,
+    "id": "quantum-optimization-sdp-and-variational-algorithms-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Quantum Optimization, Semidefinite Programs, and Variational Algorithms — Examples",
+    "companion": "quantum-optimization-sdp-and-variational-algorithms",
+    "requires": [
+      "quantum-optimization-sdp-and-variational-algorithms",
+      "measurements-povms-and-instruments",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-30-sdp-weak-duality",
+        "kind": "example",
+        "title": "A one-constraint scalar SDP and its dual",
+        "statement": "Take $n=m=1$, $A_1=C=[1]$, and $b_1=1$. The primal is maximize $x$ subject to $x\\ge0$ and $x\\le1$, so its feasible set is $[0,1]$ and its attained optimum is $1$. The dual is minimize $y$ subject to $y\\ge0$ and $y-1\\ge0$, so its feasible set is $[1,\\infty)$ and its attained optimum is $1$. Every feasible pair obeys weak duality.",
+        "deps": [
+          "def-qa-30-sdp-primal-dual-pair",
+          "thm-qa-30-sdp-weak-duality"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/1705.01843v4",
+              "url": "https://arxiv.org/pdf/1705.01843v4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Check primal/dual signs, feasible sets, objective values, and distinguish weak from strong duality."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-30-variational-global-optimum",
+        "kind": "counterexample",
+        "title": "A variational circuit family may miss the optimum",
+        "statement": "A variational circuit family is guaranteed to contain a ground state of every finite Hermitian Hamiltonian.",
+        "deps": [
+          "def-qa-30-variational-quantum-algorithm",
+          "thm-qa-30-vqe-rayleigh-ritz-guarantee",
+          "def-qa-30-vqe-rayleigh-objective"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Compute the ansatz energy range and ground energy and show the strict gap; this refutes a universal global-optimum claim."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-30-vqe-and-qaoa-objectives",
+        "kind": "example",
+        "title": "VQE and MaxCut-QAOA objective calculation",
+        "statement": "For VQE, take $H=Z_1+2Z_2$ and the two-qubit ansatz $|\\psi(\\theta,\\phi)\\rangle=R_y(\\theta)|0\\rangle\\otimes R_y(\\phi)|0\\rangle$, where $R_y(t)|0\\rangle=\\cos(t/2)|0\\rangle+\\sin(t/2)|1\\rangle$. Its energy is $E(\\theta,\\phi)=\\cos\\theta+2\\cos\\phi$. At $(\\theta,\\phi)=(\\pi/2,0)$ the energy is $2$, while at $(\\pi,\\pi)$ the ansatz is $|11\\rangle$ and reaches the ground energy $-3$.\n\nFor QAOA take the one-edge graph $V=\\{1,2\\}$, $E=\\{(1,2)\\}$, depth $p=1$, $\\gamma=\\pi/2$, $\\beta=\\pi/8$. Starting from $|++\\rangle$, the cost phase is $\\operatorname{diag}(1,-i,-i,1)$ in the order $00,01,10,11$; the mixer $R_x(2\\beta)\\otimes R_x(2\\beta)$ produces $-i(|01\\rangle+|10\\rangle)/\\sqrt2$. Thus the output distribution gives probability $1/2$ to each cut string $01,10$, zero to $00,11$, and expected cut value $1$.",
+        "deps": [
+          "thm-qa-30-vqe-rayleigh-ritz-guarantee",
+          "def-qa-30-qaoa-circuit-and-objective",
+          "thm-qa-30-qaoa-expectation-bound",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qc-projective-measurement-outcome-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "https://arxiv.org/pdf/2012.09265v2",
+              "url": "https://arxiv.org/pdf/2012.09265"
+            },
+            {
+              "title": "Edward Farhi, Jeffrey Goldstone, and Sam Gutmann, A Quantum Approximate Optimization Algorithm (arXiv:1411.4028v1)",
+              "url": "https://arxiv.org/pdf/1411.4028"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Verify the Rayleigh upper bound and show that a finite-depth objective value is not by itself a universal optimizer guarantee."
+        ],
+        "unresolved_obligations": [],
+        "axiom_use": "None; the argument is finite-dimensional algebra, finite probability, or finite circuit reasoning and uses no choice axiom.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

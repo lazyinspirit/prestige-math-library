@@ -1,0 +1,35 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "pack": "pack-0001",
+  "lane": 1,
+  "input_sha256": "c2fd1bcbbf29be4bb0e718b730583595bdd8fd5cc81ea9fe61d7cbd7773c63b9",
+  "decisions": [
+    {
+      "id": "alg-qa-13-certified-count-output-rounding",
+      "disposition": "sound",
+      "reason": "The revised classical-bit-cost definition charges the algorithm's finite exact rational computations without imposing an efficiency bound. The current rounding lemma proves termination and the 2/3 error guarantee for precisely the r loop, h loop and ceiling output already specified here, with the same public integer hypotheses. Neither assigned supplier event invalidates this consumer; its bytes are preserved.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked by elementary alternating-series estimates and integer rounding, reading items/alg-qa-13-certified-count-output-rounding.md, items/def-qa-classical-bit-cost.md, items/lem-qa-13-certified-count-output-rounding.md, items/thm-principal-inverse-tangent-calculus.md, items/thm-alternating-series-test.md and items/lem-qa-13-pi-rational-bounds.md. The principal-arctangent theorem explicitly includes pi/4=sum((-1)^k/(2k+1)), so |pi-4S_h|<=4/(2h+1). For y>0 the true x=2*pi*y/M lies strictly inside (0,8), and the prescribed argument intervals contain x with radii tending to zero. R_(r+1)/R_r=64/((2r+4)(2r+3)) tends to zero, so a finite r has N*R_r<1/24; for that fixed r, D_r is finite and positive, so the h loop terminates. For t in [0,8], the cosine tail after r>=4 is bounded by R_r, since successive omitted term magnitudes have ratios at most 64/((2r+4)(2r+3))<1 and tend to zero. Factoring differences of powers bounds |C_r(x)-C_r(x_h)| by D_r*rho_h. Thus z=N*(1-cos(x))/2=N*sin^2(pi*y/M) lies in [u,v] with v-u=N*(D_r*rho_h+R_r)<1/24. Choose n=floor(z+1/2); then |n-z|<=1/2, so every point of [u,v] is within 1/2+1/24<2/3 of n. The eligible integer interval [v-2/3,u+2/3] therefore contains n, and q=ceil(v-2/3) lies in it, proving |q-z|<=2/3. The y=0 branch returns exactly z=0. All arithmetic is on finite integer representations, implementable by finite-alphabet multitape transitions with its actual work charged; no unit-cost rational-operation or polynomial-time assertion is used. No external source was consulted or claimed as read.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "ee80e77c5d970ec35a0b4fb8ad29bc7290f1975d786de36ece50006cfa0f1e1d",
+          "affected_use": "The input paragraph charges every exact sum, factorial, comparison and ceiling operation as classical bit work under def-qa-classical-bit-cost.",
+          "reason": "The revised definition counts actual fixed-alphabet multitape-machine transitions, including public-data encoding, comparison, postprocessing and output. Finite integer arithmetic implements all the prescribed rational calculations and rational comparisons, and integer division implements the final ceiling. These costs remain charged rather than treated as unit-cost operations. The algorithm neither reads a hidden abstract instance encoding nor claims a time bound or oracle-processing exemption, so the clarified cost model leaves this use valid."
+        },
+        {
+          "event_key": "1439b1346366190e271435824c330877cb4cc0333e5f237fd43ffba903915c9b",
+          "affected_use": "The justified_by entry and final Definition sentence use lem-qa-13-certified-count-output-rounding to establish termination and the error guarantee of the prescribed interval procedure.",
+          "reason": "The current lemma retains exactly N>=1, even M>=2, 0<=y<M and |q-N*sin^2(pi*y/M)|<=2/3, with no polynomial bit bound. Its fact F11 identifies this algorithm's exact instructions; proof steps 1.1 and 2.1 establish enclosure and termination for its R_r and h tests, and step 3.1 proves that its q=ceil(v-2/3) is eligible. The added exact cyclotomic identity imposes no additional input restriction and is unnecessary to execute this rational-only procedure. The supplier therefore still justifies this specific algorithm, rather than merely an unrelated existence assertion."
+        }
+      ],
+      "affected_use": "Only the exact-arithmetic cost convention and the existing justified_by termination/error reference are implicated by the two assigned events; both remain applicable to the unchanged rational-interval instructions.",
+      "invalidated_claim": "No claim is invalidated: the same admitted inputs yield a terminating rational procedure with the stated integer rounding guarantee, and all actual classical bit work remains charged.",
+      "minimality": "No edit is mathematically necessary, so edits is empty and the complete item remains identical to the frozen assignment carrier. No shared metadata was changed; no downstream discovery or unresolved mathematical obligation remains for this lane.",
+      "edits": []
+    }
+  ]
+}

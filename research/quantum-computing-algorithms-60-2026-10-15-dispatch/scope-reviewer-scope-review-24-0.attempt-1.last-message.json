@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "24",
+  "round": 0,
+  "reviewed_items": [
+    "lem-qc-countable-compact-null-union",
+    "lem-qc-open-cube-is-not-null",
+    "def-qc-projective-chord-distance",
+    "def-qc-projective-space-atlas",
+    "lem-qc-projective-chord-distance-formula",
+    "thm-qc-projective-chart-dimension",
+    "lem-qc-signed-ray-packing-code",
+    "def-qc-clean-ancilla-output-projection",
+    "def-qc-state-preparation-cost-model",
+    "alg-qc-isometry-unitary-completion",
+    "alg-qc-state-preparation",
+    "thm-qc-continuous-parameter-state-preparation-lower-bound",
+    "thm-qc-finite-width-topology-count",
+    "lem-qc-prefix-norm-rotation-identities",
+    "thm-qc-discrete-alphabet-approximate-preparation-lower-bound",
+    "thm-qc-finite-alphabet-exact-nonuniversality",
+    "thm-qc-isometry-completion-and-synthesis",
+    "thm-qc-state-preparation-rotation-level-upper-bound",
+    "thm-qc-amplitude-table-precision-and-compilation",
+    "thm-qc-state-preparation-cost",
+    "ex-qc-amplitude-table-state-preparation-cost"
+  ],
+  "reviewed_pages": [
+    "state-preparation-isometry-synthesis-and-limits",
+    "state-preparation-isometry-synthesis-and-limits-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch and its direct supplier interfaces were reviewed. The listed defects can be resolved in one focused local repair; no unresolved outside-scope prerequisite gap requires escalation at this review.",
+  "findings": [
+    {
+      "id": "alg-qc-state-preparation",
+      "type": "prerequisite",
+      "reason": "The procedure uses C(R_y(θ)) and P_φ as executable gates, but the controlled-access supplier makes availability and cost operation-model assumptions, while circuit syntax specifies a finite fixed-matrix alphabet. State the ideal continuous gate families and their occurrence costs explicitly; retain the no finite-alphabet claim."
+    },
+    {
+      "id": "thm-qc-amplitude-table-precision-and-compilation",
+      "type": "prerequisite",
+      "reason": "A1 applies to a supplied exact one-qubit/CNOT factorization, but the Given clause supplies only bounded-arity unitary blocks. Cite the exact QSD supplier and derive the fixed-arity factor bound, or make the factorization an explicit hypothesis."
+    },
+    {
+      "id": "lem-qc-countable-compact-null-union",
+      "type": "local",
+      "reason": "Step 1.1 uses the infinite geometric-series increment bound Σ_{j≥0} η2^{-j-5}=η/16 without deriving it. Add a finite-partial-sum bound and pass to the nonnegative series supplier."
+    },
+    {
+      "id": "lem-qc-open-cube-is-not-null",
+      "type": "local",
+      "reason": "Step 2.1 uses the same unproved infinite geometric-series increment bound, Σ_{i≥0} s^m2^{-i-5}=s^m/16. Add its finite-partial-sum justification."
+    },
+    {
+      "id": "thm-qc-continuous-parameter-state-preparation-lower-bound",
+      "type": "prerequisite",
+      "reason": "Step 3.1 needs countability of finite tuples of gate-family labels, charts, and rational cube coordinates. F10 establishes countability and density of Q, but the finite-product coding is not stated; cite the pairing supplier or give the encoding."
+    },
+    {
+      "id": "thm-qc-finite-alphabet-exact-nonuniversality",
+      "type": "prerequisite",
+      "reason": "Step 1.1 codes descriptions by pairing their length and index in N×N, but supplies no pairing result or code. Cite the pairing supplier or give an explicit pairing."
+    },
+    {
+      "id": "ex-qc-amplitude-table-state-preparation-cost",
+      "type": "local",
+      "reason": "Verification step 1.1 gives the incorrect squared-norm sum 1/2+0+1/4+1/4. Each of the four amplitudes has squared modulus 1/4; correct the displayed calculation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-qc-prefix-norm-rotation-identities",
+      "decision": "accept",
+      "reason": "Uses only the prefix-radius and angle identities; the continuous gate-model clarification does not change them."
+    },
+    {
+      "id": "thm-qc-state-preparation-rotation-level-upper-bound",
+      "decision": "accept",
+      "reason": "Its Toffoli ladder, controlled rotation, and phase counts are compatible with the explicitly stated continuous gate families."
+    },
+    {
+      "id": "thm-qc-amplitude-table-precision-and-compilation",
+      "decision": "repair",
+      "reason": "The local repair must supply an exact one-qubit/CNOT factorization for each fixed-arity block, using the QSD supplier or an explicit factorization hypothesis."
+    },
+    {
+      "id": "thm-qc-state-preparation-cost",
+      "decision": "accept",
+      "reason": "Its claim is expressly limited to continuous-angle gates and makes no finite-alphabet implementation or bit-time claim."
+    },
+    {
+      "id": "ex-qc-amplitude-table-state-preparation-cost",
+      "decision": "repair",
+      "reason": "Correct the local squared-norm arithmetic; its angles and relative phase are otherwise compatible."
+    },
+    {
+      "id": "alg-qa-22-lcu-block-encoding",
+      "decision": "accept",
+      "reason": "Uses QC24 as an optional exact continuous-angle PREPARE construction and separately supplies or charges its inverse and other accesses."
+    },
+    {
+      "id": "def-qa-21-lcu-input-and-access-model",
+      "decision": "accept",
+      "reason": "Requires a fully specified PREPARE unitary and separately charges its inverse and access costs; QC24 is an optional continuous-rotation implementation."
+    },
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "decision": "accept",
+      "reason": "Uses QC24 only to prepare an explicit coefficient table and keeps PREPARE, SELECT, inverses, and costs explicit."
+    },
+    {
+      "id": "alg-qa-25-sparse-hamiltonian-block-encoding",
+      "decision": "accept",
+      "reason": "Its actual input is a separately supplied and costed uniform-preparation unitary; it does not invoke the QC24 procedure."
+    },
+    {
+      "id": "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+      "decision": "accept",
+      "reason": "The proof uses the supplied uniform-preparation unitary through the QA25 algorithm, not the QC24 procedure."
+    },
+    {
+      "id": "def-qa-34-output-and-cost-types",
+      "decision": "accept",
+      "reason": "Distinguishes exact continuous-rotation costs from finite-gate approximation and keeps preparation and access charges explicit."
+    },
+    {
+      "id": "state-preparation-isometry-synthesis-and-limits",
+      "decision": "accept",
+      "reason": "Its overview remains accurate with the continuous operation model made explicit."
+    },
+    {
+      "id": "state-preparation-isometry-synthesis-and-limits-examples",
+      "decision": "accept",
+      "reason": "Its example uses the stated prefix rotations and phase operation; only the squared-norm calculation needs repair."
+    },
+    {
+      "id": "qubitization-and-optimal-hamiltonian-simulation",
+      "decision": "accept",
+      "reason": "The page treats state preparation as an explicitly charged resource and makes no free controlled-access or finite-gate claim."
+    }
+  ]
+}

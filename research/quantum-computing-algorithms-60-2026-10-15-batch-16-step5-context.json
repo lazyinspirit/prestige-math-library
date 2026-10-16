@@ -1,0 +1,331 @@
+{
+  "group": "r",
+  "batches": [
+    "16"
+  ],
+  "pages_read": [
+    "stabilizer-circuits-and-gottesman-knill-simulation",
+    "stabilizer-circuits-and-gottesman-knill-simulation-examples"
+  ],
+  "items_read": [
+    "def-qc-pauli-measurement-branch-semantics",
+    "lem-qc-pauli-measurement-projectors",
+    "lem-qc-stabilizer-maximal-isotropic-self-dual",
+    "def-qc-stabilizer-subgroup",
+    "lem-qc-pauli-measurement-defines-an-instrument",
+    "lem-qc-pauli-measurement-positive-branch-is-density",
+    "lem-qc-zero-probability-branch",
+    "def-qc-adaptive-pauli-circuit-tree",
+    "def-qc-stabilizer-state",
+    "lem-qc-stabilizer-subgroup-label-space-and-order",
+    "lem-qc-stabilizer-average-projector",
+    "def-qc-stabilizer-tableau",
+    "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+    "lem-qc-computational-basis-stabilizer-tableau",
+    "lem-qc-tableau-clifford-update",
+    "lem-qc-tableau-deterministic-sign",
+    "thm-qc-stabilizer-projector-rank-and-code-dimension",
+    "lem-qc-deterministic-stabilizer-measurement",
+    "lem-qc-random-measurement-stabilizer-update",
+    "alg-qc-stabilizer-exact-simulator",
+    "thm-qc-tableau-measurement-update",
+    "thm-qc-gottesman-knill-exact-simulation",
+    "ex-qc-stabilizer-x-measurement-branches"
+  ],
+  "conventions": [
+    {
+      "convention": "For Hermitian M with M²=I, outcome b uses P_b=(I+(-1)^b M)/2 and probability Tr(ρP_b). The conditional state is P_bρP_b/p_b only for p_b>0; a zero-probability branch receives ⊥, meaning no assigned conditional density operator. At n=0 the admitted observables are ±I on C.",
+      "fixed_by": "def-qc-pauli-measurement-branch-semantics",
+      "matters_for": [
+        "lem-qc-zero-probability-branch",
+        "lem-qc-deterministic-stabilizer-measurement",
+        "lem-qc-random-measurement-stabilizer-update",
+        "thm-qc-tableau-measurement-update",
+        "ex-qc-stabilizer-x-measurement-branches"
+      ]
+    },
+    {
+      "convention": "A stabilizer subgroup is abelian, consists of Hermitian Pauli operators, and excludes -I. Its rank is the binary dimension of its label span.",
+      "fixed_by": "def-qc-stabilizer-subgroup",
+      "matters_for": [
+        "lem-qc-stabilizer-subgroup-label-space-and-order",
+        "lem-qc-stabilizer-average-projector",
+        "thm-qc-stabilizer-projector-rank-and-code-dimension",
+        "def-qc-stabilizer-state"
+      ]
+    },
+    {
+      "convention": "Rows store exact operators P(k,x,z)=i^k X^x Z^z, with k modulo four, coordinate order (x,z), and Hermiticity criterion k≡x·z modulo two. A generator tableau stores n commuting Hermitian rows with independent labels and excludes -I; destabilizers are optional.",
+      "fixed_by": "def-qc-stabilizer-tableau",
+      "matters_for": [
+        "lem-qc-tableau-clifford-update",
+        "lem-qc-tableau-deterministic-sign",
+        "lem-qc-random-measurement-stabilizer-update",
+        "alg-qc-stabilizer-exact-simulator"
+      ]
+    },
+    {
+      "convention": "The pure stabilizer state is a ray in the common +1 fixed space of a rank-n subgroup; a normalized vector is only a representative.",
+      "fixed_by": "def-qc-stabilizer-state",
+      "matters_for": [
+        "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+        "lem-qc-deterministic-stabilizer-measurement",
+        "thm-qc-tableau-measurement-update",
+        "thm-qc-gottesman-knill-exact-simulation"
+      ]
+    },
+    {
+      "convention": "Adaptive control is a finite rooted tree. Gate nodes have one successor; measurement edges are labelled 0 and 1. Zero-weight edges have no conditional state and their descendants are not evaluated.",
+      "fixed_by": "def-qc-adaptive-pauli-circuit-tree",
+      "matters_for": [
+        "alg-qc-stabilizer-exact-simulator",
+        "thm-qc-gottesman-knill-exact-simulation"
+      ]
+    },
+    {
+      "convention": "Circuit wires j=0,…,n-1 correspond to Pauli wires a=j+1. The simulator stores generator rows only and uses fresh fair bits exactly for anticommuting measurement cases.",
+      "fixed_by": "alg-qc-stabilizer-exact-simulator",
+      "matters_for": [
+        "thm-qc-gottesman-knill-exact-simulation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-qc-stabilizer-subgroup-label-space-and-order",
+      "statement": "For a stabilizer subgroup S on n≥0 qubits, the label restriction is injective, its image L is an isotropic F₂-subspace, its dimension depends only on S, and |S|=2^dim L.",
+      "used_by": [
+        "lem-qc-stabilizer-average-projector",
+        "thm-qc-stabilizer-projector-rank-and-code-dimension",
+        "lem-qc-deterministic-stabilizer-measurement",
+        "lem-qc-tableau-deterministic-sign",
+        "lem-qc-random-measurement-stabilizer-update",
+        "thm-qc-stabilizer-projector-and-dimension",
+        "thm-qc-stabilizer-logical-pauli-quotient-dimension"
+      ]
+    },
+    {
+      "id": "lem-qc-stabilizer-maximal-isotropic-self-dual",
+      "statement": "If L≤F₂^(2n) is isotropic with r=dim L under the standard symplectic form, then dim L⊥=2n-r. Consequently r≤n, and if r=n then L⊥=L.",
+      "used_by": [
+        "thm-qc-stabilizer-projector-rank-and-code-dimension",
+        "lem-qc-deterministic-stabilizer-measurement",
+        "lem-qc-tableau-deterministic-sign"
+      ]
+    },
+    {
+      "id": "lem-qc-stabilizer-average-projector",
+      "statement": "For a stabilizer subgroup S, Π_S=|S|⁻¹∑g∈S g is self-adjoint and idempotent, with image exactly the common +1 fixed space. If this image is spanned by a unit vector ψ, then Π_S=|ψ⟩⟨ψ|.",
+      "used_by": [
+        "thm-qc-stabilizer-projector-rank-and-code-dimension",
+        "thm-qc-stabilizer-projector-and-dimension",
+        "thm-qc-graph-state-unique-stabilizer-ray"
+      ]
+    },
+    {
+      "id": "thm-qc-stabilizer-projector-rank-and-code-dimension",
+      "statement": "For a rank-r stabilizer subgroup S on n qubits, Tr(Π_S)=dim_C im Π_S=2^n/|S|=2^(n-r). In particular, rank n gives a one-dimensional common fixed space.",
+      "used_by": [
+        "def-qc-stabilizer-state",
+        "lem-qc-deterministic-stabilizer-measurement",
+        "lem-qc-random-measurement-stabilizer-update",
+        "thm-qc-stabilizer-projector-and-dimension",
+        "thm-qc-graph-state-unique-stabilizer-ray"
+      ]
+    },
+    {
+      "id": "lem-qc-pauli-measurement-projectors",
+      "statement": "For a density operator ρ and Hermitian Pauli M with M²=I on a nonzero finite-dimensional complex inner-product space, P_b=(I+(-1)^b M)/2 are complementary orthogonal projections, and p_b=Tr(ρP_b) satisfy p_b≥0 and p_0+p_1=1.",
+      "used_by": [
+        "lem-qc-pauli-measurement-defines-an-instrument",
+        "lem-qc-pauli-measurement-positive-branch-is-density",
+        "lem-qc-zero-probability-branch",
+        "def-qc-adaptive-pauli-circuit-tree",
+        "lem-qc-anticommuting-stabilizer-measurement-is-fair"
+      ]
+    },
+    {
+      "id": "lem-qc-random-measurement-stabilizer-update",
+      "statement": "For n independent stabilizer generators fixing a unit vector ψ, if Hermitian M anticommutes with g₁, replace g₁ by (-1)^b M and each other anticommuting g_j by g_jg₁. For either outcome b, the updated rows generate a rank-n stabilizer subgroup for P_bψ/‖P_bψ‖.",
+      "used_by": [
+        "alg-qc-stabilizer-exact-simulator",
+        "thm-qc-tableau-measurement-update",
+        "ex-qc-stabilizer-x-measurement-branches"
+      ]
+    },
+    {
+      "id": "thm-qc-tableau-measurement-update",
+      "statement": "For a rank-n stabilizer tableau and Hermitian Pauli measurement M, the tableau rule gives exactly the projective instrument branches: anticommuting cases have two probability-1/2 outcomes with the pivot-update conditional states; commuting cases give the unique probability-one signed outcome, unchanged state, and no normalized state for the opposite branch.",
+      "used_by": [
+        "thm-qc-gottesman-knill-exact-simulation"
+      ]
+    },
+    {
+      "id": "thm-qc-gottesman-knill-exact-simulation",
+      "statement": "For finite adaptive H,S,S†,CNOT and Hermitian-Pauli circuits on n≥0 ordered qubits from computational-basis input, the generator-tableau simulator samples exactly the transcript and final-ray distribution. With T quantum instructions and C_cl controller bit operations per branch, time is O((n+1)²+T(n+1)³+C_cl), tableau/elimination workspace is O((n+1)²), and transcript storage is O(T).",
+      "used_by": [
+        "ex-qc-stabilizer-x-measurement-branches"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Availability of finite orthonormal bases for the instrument argument.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Adjoint identities in the stabilizer-average projector proof.",
+      "opened": true
+    },
+    {
+      "id": "def-dimension",
+      "used_for": "Finite binary rank and dimension conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-field-and-its-order",
+      "used_for": "Field order in the stabilizer subgroup cardinality calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Matrix products, identity operators, and elementary projector calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Matrix domains and indexing.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Self-adjointness and quadratic-form requirements in complete positivity and branch positivity.",
+      "opened": true
+    },
+    {
+      "id": "def-subgroup",
+      "used_for": "Identity, multiplication, and inverse closure of stabilizer subgroups.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Finite diagonal sums, trace linearity calculations, and Pauli tensor traces.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Basis-independent trace and use of orthonormal eigenbases.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-space",
+      "used_for": "Binary label-space operations and subspace reasoning.",
+      "opened": true
+    },
+    {
+      "id": "lem-cardinality-of-a-finite-dimensional-space-over-a-finite-field",
+      "used_for": "|L|=2^r, including r=0.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-reindexing-and-fubini",
+      "used_for": "Factoring computational-basis trace sums into one-qubit diagonal sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-trace-of-an-idempotent-is-the-dimension-of-its-image",
+      "used_for": "Identifying projector trace with integer image dimension over C.",
+      "opened": true
+    },
+    {
+      "id": "prop-trace-is-linear",
+      "used_for": "Trace-one normalization of positive-probability branches.",
+      "opened": true
+    },
+    {
+      "id": "thm-dimension-of-a-linear-subspace",
+      "used_for": "Finite basis extension without choice and equality of subspaces with equal finite dimensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Nonnegative eigenvalues and orthonormal diagonalization, including the zero-trace implication.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "The symplectic annihilator dimension formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Branch trace identities and trace preservation for every operator.",
+      "opened": true
+    },
+    {
+      "id": "thm-z-mod-p-is-a-field",
+      "used_for": "The field structure of F₂.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Ordered wires, chronological unitary action, and separate classical resource charges are preserved. The adaptive measurement tree is defined locally rather than attributed to unitary circuit syntax."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Dirac expressions respect the root inner product linear in its first argument. Pure branch probabilities use the stated projection-norm identity."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Projective measurements permit zero projections. The local proof establishes complete positivity for every finite ancilla and trace preservation for every operator, matching the instrument definition; zero-weight conditional states remain undefined."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "pauli-and-clifford-groups-binary-symplectic-tableaux",
+      "faithful": true,
+      "note": "Exact modulo-four phases, X-before-Z multiplication, binary symplectic commutation, and Hermitian phase parity are preserved. H, S, inverse-S, and CNOT updates agree with these conventions; n=0 is supplied separately."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "Density operators have nonzero finite-dimensional domains and trace one. Stabilizer states are rays, with unit representatives used only through their well-defined rank-one density projectors."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "The displayed X,Y,Z,H,S matrices and Y=iXZ convention match the measurement example and phase-aware gate updates."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Tensor order, computational-basis normalization, big-endian encoding, and the empty tensor register C are preserved. The circuit-to-Pauli wire-index conversion is explicit."
+    },
+    {
+      "from": "stabilizer-css-codes-syndromes-and-procedures",
+      "to": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "faithful": true,
+      "note": "The code projector theorem uses the same independent-label rank and exclusion of -I. The logical quotient theorem uses the isotropic label image and code dimension within their stated n≥1 domain."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "faithful": true,
+      "note": "The unique-ray theorem establishes a normalized graph state, independent commuting generators, and exclusion of -I before applying the average-projector and rank formulas. Its empty-graph case agrees with the one-dimensional empty register."
+    }
+  ]
+}

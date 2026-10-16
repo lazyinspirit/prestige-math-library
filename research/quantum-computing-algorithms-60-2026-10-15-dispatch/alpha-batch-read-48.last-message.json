@@ -1,0 +1,266 @@
+{
+  "group": "h",
+  "batches": ["48"],
+  "pages_read": [
+    "quantum-singular-value-transformation",
+    "quantum-singular-value-transformation-examples"
+  ],
+  "items_read": [
+    "def-qa-24-pue-svd-data",
+    "lem-qa-24-pue-svd-invariant-subspaces",
+    "def-qa-24-singular-value-transform",
+    "alg-qa-24-qsvt",
+    "lem-qa-24-singular-transform-basis-independence",
+    "thm-qa-24-projector-phase-implementation",
+    "thm-qa-24-qsvt-query-count",
+    "thm-qa-24-qsvt-singular-space-action",
+    "lem-qa-24-qsvt-robustness-amplitude-bound",
+    "thm-qa-24-real-polynomial-extraction",
+    "thm-qa-24-qsvt-error-and-resource-bound",
+    "cex-qa-24-parity-violation",
+    "ex-qa-24-rank-one-pue"
+  ],
+  "conventions": [
+    {
+      "convention": "The PUE map is A:H_R→H_L, Ax=Π_L Ux, with H_R=ran Π_R and H_L=ran Π_L. Only positive singular pairs enter its SVD sum; kernel bases are independent, and empty spaces and sums are allowed.",
+      "fixed_by": "def-qa-24-pue-svd-data",
+      "matters_for": [
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "def-qa-24-singular-value-transform",
+        "thm-qa-24-qsvt-singular-space-action",
+        "lem-qa-24-qsvt-robustness-amplitude-bound"
+      ]
+    },
+    {
+      "convention": "The root inner product is linear in its first argument; |u⟩⟨v| sends x to ⟨x,v⟩root u.",
+      "fixed_by": "def-qa-24-pue-svd-data",
+      "matters_for": [
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-qsvt-singular-space-action",
+        "cex-qa-24-parity-violation"
+      ]
+    },
+    {
+      "convention": "Odd transforms map H_R to H_L and omit zero-singular cross terms. Even right and left transforms act on their respective spaces and include p(0) times the corresponding kernel projection.",
+      "fixed_by": "def-qa-24-singular-value-transform",
+      "matters_for": [
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "cex-qa-24-parity-violation"
+      ]
+    },
+    {
+      "convention": "QSVT uses the Hermitian-reflection signal W_R(x)=[[x,√(1−x²)],[√(1−x²),−x]]. Chronology starts with phase φ_d on the right space, then alternates U and U*, ending with phase φ_0; the scalar matrix product acts right to left.",
+      "fixed_by": "alg-qa-24-qsvt",
+      "matters_for": [
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction",
+        "ex-qa-24-rank-one-pue"
+      ]
+    },
+    {
+      "convention": "The projector-phase gadget requires explicitly supplied control-first C(2Π−I), a clean ancilla, and exact H and R_z gates. External control acts on the middle rotation; reflection calls remain unconditional with respect to that external branch.",
+      "fixed_by": "thm-qa-24-projector-phase-implementation",
+      "matters_for": [
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction",
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ]
+    },
+    {
+      "convention": "Block-encoding error is measured on the normalized compression. Scalar approximation is required on the target's positive singular values and at zero; phase-slot errors are operator-norm errors between unitaries.",
+      "fixed_by": "thm-qa-24-qsvt-error-and-resource-bound",
+      "matters_for": [
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-24-qsvt-singular-space-action",
+      "statement": "On every positive two-dimensional singular plane the QSVT sequence is exactly U_Φ(σ_j). Its odd compressed block is (P_Φ)^SV_odd(A); its even right compressed block is (P_Φ)^SV_R(A), including P_Φ(0) on ker A. Bounded real parity polynomials are obtained by coherent Φ/−Φ extraction.",
+      "used_by": [
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-real-polynomial-extraction",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "ex-qa-24-rank-one-pue"
+      ]
+    },
+    {
+      "id": "lem-qa-24-pue-svd-invariant-subspaces",
+      "statement": "For 0<σ_j<1, U has matrix [[σ_j,√(1−σ_j²)],[√(1−σ_j²),−σ_j]] between the declared input and output singular-plane bases. Unit singular values give lines; kernels and residual complements are separately specified, with U mapping each source block onto its corresponding output block.",
+      "used_by": [
+        "thm-qa-24-qsvt-singular-space-action",
+        "ex-qa-24-rank-one-pue"
+      ]
+    },
+    {
+      "id": "lem-qa-24-qsvt-robustness-amplitude-bound",
+      "statement": "Let A,B:H_R→H_L be contractions between the same finite-dimensional complex-inner-product spaces, let P be the scalar polynomial of an exact degree-d QSVT phase sequence, and put δ=‖A−B‖op. Then ‖P^SV(A)−P^SV(B)‖op≤4d√δ for the corresponding odd or even transforms. At d=0 the difference is zero.",
+      "used_by": [
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ]
+    },
+    {
+      "id": "thm-qa-24-qsvt-query-count",
+      "statement": "A degree-d uncontrolled sequence uses exactly d alternating signal calls, split as ⌈d/2⌉ calls to U and ⌊d/2⌋ calls to U*, and d+1 projector-phase operations. Control against identity uses no controlled signal call for even d and one for odd d; Φ/−Φ selection shares the unconditional signal list.",
+      "used_by": [
+        "thm-qa-24-real-polynomial-extraction",
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ]
+    },
+    {
+      "id": "lem-qa-24-singular-transform-basis-independence",
+      "statement": "The odd singular-value transform and both even singular-value transforms are independent of the chosen singular-vector bases; positive singular spaces are canonically paired by A/σ, and kernel terms use canonical projections.",
+      "used_by": [
+        "thm-qa-24-qsvt-singular-space-action",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ]
+    },
+    {
+      "id": "thm-qa-24-projector-phase-implementation",
+      "statement": "With the stated controlled-reflection access and clean ancilla, e^{iφ(2Π−I)} is implemented exactly using two controlled-reflection calls, one variable phase rotation, and constant additional one-qubit overhead, returning the ancilla to zero.",
+      "used_by": [
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Complete orthonormal singular bases and positive-term SVD formulas, including zero-rank and zero-dimensional cases.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Root-linear-first pairing, conjugate symmetry, positivity, and induced length.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Adjoint identities for PUE maps, singular vectors, padding, and unitary completions.",
+      "opened": true
+    },
+    {
+      "id": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+      "used_for": "Existence and uniqueness of A* and identification A*=Π_R U* restricted to H_L.",
+      "opened": true
+    },
+    {
+      "id": "prop-adjoint-algebra",
+      "used_for": "Product reversal, involution, scalar conjugation, and self-adjointness calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Norm preservation and invertibility of unitary factors and padding isometries.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-isometry-characterisations",
+      "used_for": "U*=U inverse and preservation of inner products.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-projection",
+      "used_for": "Range/complement decompositions, canonical kernel projections, and contractive compression.",
+      "opened": true
+    },
+    {
+      "id": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+      "used_for": "Projection contraction, singular-plane normalization, and orthogonal-block error estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Unit-vector estimates and the zero-domain norm convention.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Operator error bounds obtained from vector triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Product telescoping and contraction bounds in perturbation and implementation-error proofs.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "quantum-singular-value-transformation",
+      "concern": "The first prose paragraph writes '$sigma=0$' rather than a sigma command or Unicode σ. This renders a product of letter variables instead of the singular-value symbol used elsewhere.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-qa-28-matrix-function-error-cost",
+      "finding": "In thm-qa-28-matrix-function-error-cost, Proof 2.1 says: 'By [F3]–[F4], replacing the exact signal block A by Ã changes the ideal transform p_j^SV by at most 4d_j√ε_BE.' The cited lem-qa-24-qsvt-robustness-amplitude-bound assumes that its polynomial P is the scalar polynomial of an exact QSVT phase sequence. A general real bounded target p_j is instead extracted as Re P by the Φ/−Φ wrapper and need not itself be such a scalar polynomial. The stated bound follows by applying the lemma separately to the two exact branch polynomials and averaging, but this extension is not stated in the citing proof.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "block-encodings",
+      "faithful": true,
+      "note": "The square compression and rectangular isometric-padding interfaces preserve normalized block error and the additional normalization promise α≥‖A‖."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "quantum-signal-processing",
+      "faithful": true,
+      "note": "Signal sign, phase order, admissibility, exact real completion, phase factorization, and the controlled i^d conversion scalar agree."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Rank-one operators consistently use the root-linear-first Dirac conversion."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Reflection signs and control-first blocks agree; inverse and controlled access are explicitly supplied and separately charged."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "The chronological procedure gives the stated right-to-left matrix product; extraction is described as a compressed block."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Query counts remain separate from gates, ancillas, compilation, classical phase generation, and bit costs."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "quantum-singular-value-transformation",
+      "faithful": true,
+      "note": "Signed Hermitian eigenvalues are reconciled with parity singular transforms. The simulator explicitly averages the two branch perturbation bounds and retains controlled-call and reflection costs."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "quantum-singular-value-transformation",
+      "faithful": true,
+      "note": "Pseudoinversion uses the adjoint PUE with swapped projectors, giving the required left-to-right singular-vector action. Signal counts and implementation errors remain separate."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "quantum-singular-value-transformation",
+      "faithful": false,
+      "note": "The parity and Hermitian functional-calculus interfaces agree. The error theorem directly applies the exact-sequence perturbation lemma to a real extracted polynomial without stating the two-branch averaging extension; see the alert."
+    }
+  ]
+}

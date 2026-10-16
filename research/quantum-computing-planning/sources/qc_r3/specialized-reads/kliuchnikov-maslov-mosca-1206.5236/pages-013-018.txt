@@ -1,0 +1,930 @@
+===== PDF PAGE 13 =====
+
+In summary, to check the second part of Lemma 2 we need to consider all possible values for the
+integer coefficients of x and y modulo 23. There are two additional constraints on them. The first
+one is |x|2 + |y|2 = 2m. Since we assumed m ≥4, we can write necessary conditions to satisfy this
+constraint, in terms of the quadratic forms, as:
+
+P (x) ≡−P (y)
+�
+mod 23�
+,
+
+Q (x) ≡−Q (y)
+�
+mod 23�
+.
+
+The second constraint is gde
+�
+|x|2�
+= gde
+�
+|y|2�
+and gde
+�
+|x|2�
+≤1. To check it, we use the same
+
+approach as in the example with gde
+�
+|x + y|2�
+= 4.
+
+We have now introduced the necessary notions required to prove Lemma 3.
+
+Proof. Our proof is an exhaustive verification, assisted by a computer search. We rewrite the statement
+of the lemma formally as follows:
+
+Gj =
+�
+(x, y) ∈Z [ω] × Z [ω]
+∃m ≥4 s.t. |x|2 + |y|2 = 2m,
+
+gde (x) = gde (y) = j
+
+�
+, j ∈{0, 1} ,
+
+for all (x, y) ∈Gj, for all s ∈{1, 2, 3} there exists k ∈{0, 1, 2, 3}
+
+such that gde
+���x + ωky
+��2�
+= s + j.
+
+
+
+
+
+
+
+
+
+
+
+
+(14)
+
+The sets Gj are infinite, so it is impossible to perform the check directly. As we illustrated with an
+
+example, equality gde
+���x + ωky
+��2�
+= s + j depends only on the values of the integer coordinates of
+
+x and y modulo 23. If the sets Gj were also defined in terms of the residues modulo 23 we could just
+check the lemma in terms of equivalence classes corresponding to different residuals. More precisely,
+the equivalence relation ∼we would use is:
+
+3
+�
+
+p=0
+xpωp ∼
+
+3
+�
+
+p=0
+ypωp
+def
+⇐⇒for all p ∈{0, 1, 2, 3} : xp ≡yp
+�
+mod 23�
+.
+
+To address the issue, we introduce sets Qj that include Gj as subsets:
+
+Qj =
+
+
+
+
+
+
+(x, y) ∈Z [ω] × Z [ω]
+gde (x) = gde (y) = j
+P (x) + P (y) ≡0
+�
+mod 23�
+
+Q (x) + Q (y) ≡0
+�
+mod 23�
+
+
+
+
+, j ∈{0, 1} .
+
+Therefore, in terms of the equivalence classes with respect to the above defined relation ∼the more
+general problem can be verified in a finite number of steps. However, the number of equivalence classes
+is large. This is why we employ a computer search that performs verification of all cases. To rewrite
+(14) into conditions in terms of the equivalence classes it suffices to replace Gj by Qj, replace x and y
+by their equivalence classes, and replace Z [ω] by the set of equivalence classes Z [ω] / ∼.
+
+Algorithm 2 verifies Lemma 3. We use bar (e.g., x and y) to represent 4-dimensional vectors with
+entries in Z8, the ring of residues modulo 8. The definition of bilinear forms, multiplication by ω and
+the relations gde
+�
+|·|2�
+= 1, 2, 3, 4 extend to x and y. We implemented Algorithm 2 and the result of
+its execution is true. This completes the proof.
+
+13
+
+
+===== PDF PAGE 14 =====
+
+Algorithm 2 Verification of Lemma 3.
+Output: Returns true if the statement of Lemma 3 is correct; otherwise, returns false.
+
+▷Here, Gj,a,b is the set of all residue vectors x such that gde(x) = j, P (x) = a, Q (x) = b.
+for all x1, x2, x3, x4 ∈{0, . . . , 7} do
+▷generate possible residue vectors;
+x ←(x1, x2, x3, x4)
+j ←gde(|x|2), a ←P (x) , b ←Q (x)
+if j ∈{0, 1} then
+
+add x to Gj,a,b
+end if
+end for
+for all j ∈{0, 1}, ax ∈{0, 7}, bx ∈{0, 7} do
+
+ay ←−ax mod 8, by ←−bx mod 8
+▷consider only those pairs that
+for all (x, y) ∈Gj,ax,bx × Gj,ay,by do
+▷satisfy necessary conditions;
+for all d ∈{1, 2, 3} do
+
+state ←unfound
+for all k ∈{0, 1, 2, 3} do
+
+t ←x + ωky
+if gde(
+��t
+��2) = d + j then
+state ←found
+end if
+end for
+if state = unfound then
+
+return false
+end if
+end for
+end for
+end for
+return true
+
+6
+Implementation
+
+Our C++ implementation of Algorithm 1 is available online at http://code.google.com/p/sqct/.
+
+7
+Experimental results
+
+Table 2 summarizes the results of first obtaining an approximation of the given rotation matrix by a
+unitary over the ring Z[ 1
+√
+
+2, i] using our implementation of the Solovay-Kitaev algorithm [1, 9], and
+then decomposing it into a circuit using the exact synthesis Algorithm 1 presented in this paper. We
+note that the implementation of our synthesis Algorithm 1 (runtimes found in the column tdecomp)
+is significantly faster than the implementation of the Solovay-Kitaev algorithm used to approximate
+the unitary (runtimes reported in the column tapprox). Furthermore, we were able to calculate ap-
+proximating circuits using 5 to 7 iterations of the Solovay-Kitaev algorithm followed by our synthesis
+algorithm. The total runtime to approximate and decompose unitaries ranged from approximately
+11 to 600 seconds, correspondingly, featuring best approximating errors on the order of 10−50, and
+circuits with up to millions of gates. Actual specifications of all circuits reported, as well as those
+synthesized but not explicitly included in the Table 2, due to space constraints, may be obtained from
+http://qcirc.iqc.uwaterloo.ca/.
+
+14
+
+
+===== PDF PAGE 15 =====
+
+Figure 2:
+Circuit implementing the controlled-Rz(φ) gate. Upper qubit is the control, middle qubit
+is the target, and bottom qubit is the ancilla.
+
+On each step Algorithm 1 chooses from one of four small circuits: H, HT, HT2 (=HP), and HT3 to
+reduce sde. In practice, Pauli-Z gate is often easier to implement than either Phase or T gate. The
+cost of P† and T† gates is usually the same as that of the respective P and T gates. We took this
+into account by writing circuit HT3 using an equivalent and cheaper form HZT†. This significantly
+reduces the number of Phase gates required to implement a unitary. If there is no preference between
+the choice of P or Z, or P is preferred to Z, the HPT could be used in place of HT3.
+
+The RAM memory requirement during unitary approximation stage for our implementation is 2.1GB.
+In our experiments we used a single core of the Intel Core i7-2600 (3.40GHz) processor.
+
+The experimental results reported may be utilized in the construction of an approximate implementa-
+tion of the Quantum Fourier Transform (QFT). Figure 2 shows a circuit that employs the technique
+from [10] to implement the controlled-Rz(φ) using a single ancillary qubit. Note that |0⟩is the eigen-
+vector of Rz(φ) with the eigenvalue 1, thus this construction works correctly; moreover, no phase is
+introduced. Such controlled rotations are used in the standard implementation of the QFT [3]. The
+advantage of such a circuit is that it introduces only a small additive constant overhead on the number
+of gates required to turn an uncontrolled rotation into a controlled rotation. Indeed, the number of T
+gates (those are more complex in the fault tolerant implementations than the Clifford gates [8]) required
+for the exact implementation of the Fredkin gate, being 7 [5], is small compared to the number of T
+gates required (the T-counts in the circuits we synthesize are provably minimal for the unitary being
+implemented) in the approximations of the individual single-qubit rotations, Table 2. In comparison
+to other approaches to constructing a controlled gate out of an uncontrolled gate, such as replacing
+each gate in the circuit by its controlled version, or using the decomposition provided by Lemma 5.1
+in [2] (achieving a two-qubit controlled gate using three single-qubit uncontrolled gates, that has the
+expected effect of roughly tripling the number of T gates), the proposed approach where a single ancilla
+is employed appears to be beneficial.
+
+We approximate the controlled-Rz(φ) by replacing Rz(φ) with its approximation R′
+z(φ). To evaluate
+the quality of such approximation we need to take into account that ancillary qubit is always initialized
+to |0⟩and that the controlled rotation is a part of a larger circuit. For this reason, we computed the
+completely bounded trace norm [11] of the difference of the channels corresponding to the controlled-
+ΨRz(φ) and its approximation using ΨR′z(φ). Both channels map the space of two qubit density matrices
+into the space of three qubit density matrices, as one of the inputs is fixed.
+
+To compute the completely bounded trace norm we used the semidefinite program (SDP) described in
+[11]. Usual 64-bit machine precision was not enough for our purposes, so we used package SDPA-GMP
+[12] that employs The GNU Multiple Precision Arithmetic Library to solve SDP. Also, Mathematica
+was used to generate files with the description of SDP problems in the input format of SDPA-GMP. We
+found that for all unitaries in Table 2 the ratio of completely bounded trace norm of ΨRz(φ) −ΨR′
+z(φ)
+and trace distance between Rz( π
+
+2n ) and its approximation belongs to the interval [2.82842, 2.98741]. In
+other words, the numerical value of the approximation error for the controlled rotations using the trace
+norm is roughly three times that for the corresponding single-qubit rotations using the trace distance
+(as per Table 2).
+
+15
+
+
+===== PDF PAGE 16 =====
+
+Table 2: Results of the approximation of Rz(ϕ) =
+
+�
+e−iϕ
+0
+
+0
+eiϕ
+
+�
+
+by our implementation. Column
+
+NI contains the number of iterations used by the Solovay-Kitaev algorithm, ng—total number of gates
+(sum of the next four columns), nT —number of T and T† gates, nH—number of Hadamard gates,
+nP —number of P and P† gates, nP l—number of Pauli gates (note that the combined number of
+Pauli-X and Pauli-Y is never more than three for any of the circuits, so nP l is dominated by Pauli-
+Z gates), dist—trace distance to approximation, tapprox—time spent on the unitary approximation
+using the Solovay-Kitaev algorithm (in seconds), tdecomp—time spent on the decomposition of the
+approximating unitary into circuit, per Algorithm 1 (in seconds). Circuit specifications are available
+at http://qcirc.iqc.uwaterloo.ca/.
+
+U
+NI
+ng
+nT
+nH
+nP
+nP l
+dist
+tapprox
+tdecomp
+
+Rz
+�π
+
+16
+�
+
+0
+74
+28
+27
+2
+17
+1.34296 × 10−3
+0.09180
+0.00022
+
+1
+342
+132
+132
+1
+77
+4.61204 × 10−5
+0.12238
+0.00079
+
+2
+1683
+670
+670
+1
+342
+5.68176 × 10−7
+0.22369
+0.00391
+
+3
+8197
+3284
+3283
+0
+1630
+2.97644 × 10−10
+0.83023
+0.02077
+
+4
+35819
+14312
+14311
+3
+7193
+3.64068 × 10−15
+2.91120
+0.12453
+
+Rz
+�π
+
+32
+�
+
+0
+64
+24
+23
+2
+15
+3.92540 × 10−4
+0.01805
+0.00021
+
+1
+314
+124
+123
+2
+65
+1.34267 × 10−5
+0.05238
+0.00074
+
+2
+1388
+556
+556
+0
+276
+4.65743 × 10−7
+0.31252
+0.00321
+
+3
+7493
+3000
+2999
+1
+1493
+1.10252 × 10−10
+0.90493
+0.01950
+
+4
+35113
+14054
+14053
+2
+7004
+2.69806 × 10−15
+2.96710
+0.12122
+
+Rz
+�π
+
+64
+�
+
+0
+54
+22
+23
+2
+7
+8.05585 × 10−4
+0.08827
+0.00020
+
+1
+344
+136
+136
+3
+69
+9.57729 × 10−6
+0.12163
+0.00080
+
+2
+1414
+564
+564
+3
+283
+1.97877 × 10−7
+0.38928
+0.00326
+
+3
+7769
+3086
+3087
+3
+1593
+1.08884 × 10−10
+0.98522
+0.01954
+
+4
+35456
+14170
+14171
+2
+7113
+3.00267 × 10−15
+3.05440
+0.12384
+
+Rz
+�π
+
+128
+�
+
+0
+72
+28
+29
+1
+14
+9.59916 × 10−4
+0.08822
+0.00023
+
+1
+344
+136
+137
+3
+68
+1.79353 × 10−5
+0.12143
+0.00081
+
+2
+1588
+634
+634
+4
+316
+3.67734 × 10−7
+0.39048
+0.00368
+
+3
+7519
+3004
+3005
+2
+1508
+4.23657 × 10−10
+0.98045
+0.01890
+
+4
+34388
+13722
+13722
+2
+6942
+1.32046 × 10−14
+2.86740
+0.11832
+
+Rz
+�π
+
+256
+�
+
+0
+71
+28
+29
+2
+12
+5.06207 × 10−4
+0.01819
+0.00023
+
+1
+326
+136
+136
+2
+52
+1.08919 × 10−5
+0.05474
+0.00079
+
+2
+1389
+566
+567
+3
+253
+2.00138 × 10−7
+0.30498
+0.00332
+
+3
+7900
+3174
+3175
+3
+1548
+2.91716 × 10−10
+0.91405
+0.02060
+
+4
+38188
+15290
+15291
+1
+7606
+8.87785 × 10−15
+2.98030
+0.13545
+
+Rz
+�π
+
+512
+�
+
+0
+76
+30
+29
+2
+15
+3.62591 × 10−4
+0.01749
+0.00023
+
+1
+319
+126
+126
+2
+65
+1.95491 × 10−5
+0.05171
+0.00075
+
+2
+1722
+680
+680
+2
+360
+2.76529 × 10−7
+0.30618
+0.00396
+
+3
+8122
+3242
+3242
+2
+1636
+1.87476 × 10−10
+0.92576
+0.02109
+
+4
+34974
+13992
+13992
+1
+6989
+5.66762 × 10−15
+3.16060
+0.11920
+
+Rz
+�
+π
+1024
+�
+
+0
+0
+0
+0
+0
+0
+2.16938 × 10−3
+0.08622
+0.00005
+
+1
+264
+106
+105
+2
+51
+5.57373 × 10−5
+0.13615
+0.00063
+
+2
+1541
+622
+622
+3
+294
+1.74595 × 10−7
+0.23445
+0.00366
+
+3
+6791
+2722
+2722
+1
+1346
+5.39912 × 10−11
+0.82811
+0.01703
+
+4
+32983
+13188
+13188
+1
+6606
+5.54995 × 10−16
+2.98480
+0.11494
+
+16
+
+
+===== PDF PAGE 17 =====
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+2
+4
+6
+8
+10
+12
+14
+
+log10 �1�Ε�
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+log10 ��gates �
+
+U
+Dawson ' s SK
+Ours SK
+
+R z �Π�16�
+�
+�
+
+R z �Π�64�
+�
+�
+
+R z �Π�256�
+�
+�
+
+R z �Π�1024�
+�
+�
+
+Figure 3: Comparison between ours and Dawson’s implementations of the Solovay-Kitaev algorithm.
+Vertical axis shows log10 of the number of gates and horizontal axis shows log10 (1/ϵ), where ϵ is the
+projective trace distance between unitary and its approximation.
+
+We also performed a comparison to Dawson’s implementation of the Solovay-Kitaev algorithm (see
+Figure 3) available at http://gitorious.org/quantum-compiler/.
+We ran Dawson’s code using
+the gate library {H, T} with the maximal sequence length equal to 22 and tile width equal to 0.14.
+During this experiment, the memory usage was around 6 GB. For the purpose of the comparison
+gate counts for our implementation are also provided in the {H, T} library (Z=T4 and P=T2). We
+used projective trace distance to measure quality of approximation as it is the one used in Dawson’s
+code. Because of the larger epsilon net used in our implementation we were able to achieve better
+approximation quality using fewer iterations of the Solovay-Kitaev algorithm.
+Usage of The GNU
+Multiple Precision Arithmetic Library allowed us to achieve precision up to 10−50 while Dawson’s code
+encounters convergence problem when precision reaches 10−8. The latter explains behaviour of the last
+set of points in the experimental results for Dawson’s code reported in Figure 3.
+
+Two other experiments that we performed with Dawson’s code are a resynthesis of the circuits generated
+by it using our exact decomposition algorithm. We first resynthesised circuits that were generated by
+Dawson’s code using the {H,T} library.
+In most cases, the gate counts reduced by about 10-20%
+(our resulting circuits were further decomposed such as to use the {H, T} gate library). In the other
+experiment we used {H, T, P, Z} gate library with Dawson’s implementation. In this case, we were
+able to run Dawson’s code with the sequences of length 9 only, and it used 6 GB of memory. The gate
+counts, using our algorithm, decreased by about 40-60%.
+
+17
+
+
+===== PDF PAGE 18 =====
+
+8
+Conclusion
+
+In this paper, we studied quantum circuits over the Clifford and T library. We proved that in the single-
+qubit case the set of unitaries over the ring Z[ 1
+√
+
+2, i] is equivalent to the set of unitaries computable
+by the Clifford and T circuits. We generalized this statement to conjecture that in the n-qubit case
+the sets of unitaries computable by the Clifford and T circuits and those over the ring Z[ 1
+√
+
+2, i] are
+equivalent, as long as a single ancillary qubit residing in the state |0⟩is supplied. While we did not
+prove this conjecture, we showed the necessity of ancilla.
+
+We have also presented a single-qubit synthesis algorithm that uses Pauli, H, P, and T gates. Our
+algorithm is asymptotically optimal in both its performance guarantee, and its complexity. The algo-
+rithm generates circuits with a provably minimal number of Hadamard and T gates. Furthermore, our
+experiments suggest that the P-counts may also be minimal. The total number of times Pauli-X and
+Pauli-Y gates are used in any given circuit generated by the algorithm is limited to at most three. As
+such, our algorithm is likely optimal (up to, possibly, a small additive constant on some of the gate
+counts, that, in turn, may be corrected by re-synthesizing the lookup table using a different/suitable
+circuit cost metric) in all parameters, except, possibly, Pauli-Z count.
+
+Acknowledgements
+
+We wish to thank Martin Roetteler for helpful discussions.
+
+Authors supported in part by the Intelligence Advanced Research Projects Activity (IARPA) via De-
+partment of Interior National Business Center Contract number DllPC20l66. The U.S. Government is
+authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any copy-
+right annotation thereon. Disclaimer: The views and conclusions contained herein are those of the
+authors and should not be interpreted as necessarily representing the official policies or endorsements,
+either expressed or implied, of IARPA, DoI/NBC or the U.S. Government.
+
+This material is based upon work partially supported by the National Science Foundation (NSF), during
+D. Maslov’s assignment at the Foundation. Any opinion, findings, and conclusions or recommendations
+expressed in this material are those of the author(s) and do not necessarily reflect the views of the
+National Science Foundation.
+
+Michele Mosca is also supported by Canada’s NSERC, MITACS, CIFAR, and CFI. IQC and Perimeter
+Institute are supported in part by the Government of Canada and the Province of Ontario.
+
+References
+
+[1] C. Dawson, and M. Nielsen. The Solovay-Kitaev algorithm. Quantum Information and Computation
+6:81–95, 2006, quant-ph/0505030.
+
+[2] A. Barenco, C. H. Bennett, R. Cleve, D. P. DiVincenzo, N. Margolus, P. Shor, T. Sleator, J. Smolin,
+and H. Weinfurter. Elementary gates for quantum computation. Physical Review A 52, 3457–3467,
+1995, quant-ph/9503016.
+
+[3] M. Nielsen and I. Chuang. Quantum Computation and Quantum Information. Cambridge University
+Press, 2000.
+
+[4] H. K. Cummins, G. Llewellyn, and J. A. Jones. Tackling Systematic Errors in Quantum Logic Gates
+with Composite Rotations. Physical Review A 67, 042308, 2003, quant-ph/0208092.
+
+18
+

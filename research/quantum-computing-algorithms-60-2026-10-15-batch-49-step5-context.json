@@ -1,0 +1,332 @@
+{
+  "group": "i",
+  "batches": [
+    "49"
+  ],
+  "pages_read": [
+    "qubitization-and-optimal-hamiltonian-simulation",
+    "qubitization-and-optimal-hamiltonian-simulation-examples"
+  ],
+  "items_read": [
+    "lem-qa-25-isometry-error-implies-trace-distance",
+    "lem-qa-25-parity-path-transfer",
+    "def-qa-25-qubitization-access-model",
+    "def-qa-25-hamiltonian-simulation-polynomial",
+    "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+    "thm-qa-25-qubitization-signal-sequence",
+    "thm-qa-25-bounded-error-parity-query-lower-bound",
+    "alg-qa-25-qubitized-hamiltonian-simulation",
+    "lem-qa-25-sorted-xor-sparse-access-isometries",
+    "lem-qa-25-clean-subspace-unitary-hybrid",
+    "alg-qa-25-sparse-hamiltonian-block-encoding",
+    "thm-qa-25-sparse-no-fast-forwarding-lower-bound",
+    "alg-qa-25-small-time-aware-simulator",
+    "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+    "lem-qa-25-jacobi-anger-truncation",
+    "thm-qa-25-qubitized-simulation-correctness",
+    "thm-qa-25-small-time-aware-simulator-correctness",
+    "thm-qa-25-qubitized-simulation-resource-bound",
+    "ex-qa-25-two-dimensional-block-encoding",
+    "ex-qa-25-parity-no-fast-forwarding",
+    "ex-qa-25-chebyshev-truncation"
+  ],
+  "conventions": [
+    {
+      "convention": "An exact Hermitian block encoding has J*UJ=K/α with K self-adjoint and α>0; U itself need not be Hermitian. Forward, inverse, controlled and reflection access are separate supplied operations.",
+      "fixed_by": "def-qa-25-qubitization-access-model",
+      "matters_for": [
+        "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+        "thm-qa-25-qubitization-signal-sequence",
+        "alg-qa-25-qubitized-hamiltonian-simulation",
+        "thm-qa-25-qubitized-simulation-resource-bound"
+      ]
+    },
+    {
+      "convention": "The signal reflection is 2Π−I. Scalar QSP uses the Hermitian-reflection matrix with entries x, sqrt(1−x²), sqrt(1−x²), −x; conversion from the SU(2) convention retains i^d under control.",
+      "fixed_by": "def-qa-25-qubitization-access-model",
+      "matters_for": [
+        "thm-qa-25-qubitization-signal-sequence",
+        "alg-qa-25-qubitized-hamiltonian-simulation"
+      ]
+    },
+    {
+      "convention": "The target is exp(−iτx), τ=αt. Its truncation is E−iO, with E real even and O real odd; the coefficient branch applies the relative phase −i.",
+      "fixed_by": "def-qa-25-hamiltonian-simulation-polynomial",
+      "matters_for": [
+        "alg-qa-25-qubitized-hamiltonian-simulation",
+        "lem-qa-25-jacobi-anger-truncation",
+        "thm-qa-25-qubitized-simulation-correctness",
+        "ex-qa-25-chebyshev-truncation"
+      ]
+    },
+    {
+      "convention": "Simulation accuracy concerns the clean-input isometry, including retained output-work leakage. It does not promise exact cleanup or full-space approximation on dirty-work inputs.",
+      "fixed_by": "alg-qa-25-qubitized-hamiltonian-simulation",
+      "matters_for": [
+        "thm-qa-25-qubitized-simulation-correctness",
+        "thm-qa-25-small-time-aware-simulator-correctness",
+        "lem-qa-25-clean-subspace-unitary-hybrid"
+      ]
+    },
+    {
+      "convention": "Sorted-XOR mode permits distinct sorted support supersets containing listed zeros, requires transposition-compatible supports, pads the system to 2^ceil(log₂(N+d)), and charges O(log(d+1)) location calls. Supplied in-place permutations are a separate stronger interface.",
+      "fixed_by": "lem-qa-25-sorted-xor-sparse-access-isometries",
+      "matters_for": [
+        "alg-qa-25-sparse-hamiltonian-block-encoding",
+        "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+        "thm-qa-25-qubitized-simulation-resource-bound"
+      ]
+    },
+    {
+      "convention": "For α|t|≤ε, the wrapper returns identity. The near-optimal degree estimate applies to the nontrivial branch α|t|>ε with 0<ε<1.",
+      "fixed_by": "alg-qa-25-small-time-aware-simulator",
+      "matters_for": [
+        "lem-qa-25-jacobi-anger-truncation",
+        "thm-qa-25-small-time-aware-simulator-correctness",
+        "thm-qa-25-qubitized-simulation-resource-bound"
+      ]
+    },
+    {
+      "convention": "The sparse lower bound concerns dyadically rounded path matrices in the row-location/value XOR model, at time πn/2, with clean-input error at most 1/3. It is not a lower bound for arbitrary block-encoding access.",
+      "fixed_by": "thm-qa-25-sparse-no-fast-forwarding-lower-bound",
+      "matters_for": [
+        "ex-qa-25-parity-no-fast-forwarding",
+        "thm-qa-25-qubitized-simulation-resource-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-qa-25-jacobi-anger-truncation",
+      "statement": "For real τ and integer d≥0, the degree-d Jacobi–Anger Chebyshev truncation has uniform error at most 2Σ(k>d)|J_k(τ)|, bounded by 2(|τ|/2)^(d+1)/((d+1)!(1−|τ|/(2(d+2)))) when |τ|/(2(d+2))<1. In the regime |τ|>ε, a passing OP4 degree exists with d=O(|τ|+ln(1/ε)/ln(e+ln(1/ε)/|τ|)).",
+      "used_by": [
+        "thm-qa-25-qubitized-simulation-correctness",
+        "thm-qa-25-qubitized-simulation-resource-bound",
+        "ex-qa-25-chebyshev-truncation"
+      ]
+    },
+    {
+      "id": "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+      "statement": "For an exact Hermitian block encoding, each eigenvalue x=λ/α with |x|<1 has paired input/output signal bases in which U has matrix [[x,s],[s,−x]], s=sqrt(1−x²), and U* has the reverse-basis action. At |x|=1 the complement is absent; x=0 is an ordinary two-dimensional signal plane.",
+      "used_by": [
+        "thm-qa-25-qubitization-signal-sequence",
+        "ex-qa-25-two-dimensional-block-encoding"
+      ]
+    },
+    {
+      "id": "thm-qa-25-qubitization-signal-sequence",
+      "statement": "The standard-form qubiterate has signal eigenvalues exp(±i arccos(λ/α)), with collapsed endpoint eigenlines. Alternating U,U* and projector phases gives scalar Hermitian-reflection QSP on the paired spaces and clean compression PΦ(K/α).",
+      "used_by": [
+        "alg-qa-25-qubitized-hamiltonian-simulation"
+      ]
+    },
+    {
+      "id": "thm-qa-25-qubitized-simulation-correctness",
+      "statement": "For exact access or the bounded-block-error variant satisfying the algorithm's post-degree budget, rational t and 0<ε≤1, a successful execution returns a unitary dilation with clean-input isometry error at most ε from the zero-work embedding of exp(−itH). Tracing out work gives reference-system trace-distance error at most ε.",
+      "used_by": [
+        "thm-qa-25-small-time-aware-simulator-correctness",
+        "thm-qa-25-qubitized-simulation-resource-bound"
+      ]
+    },
+    {
+      "id": "lem-qa-25-sorted-xor-sparse-access-isometries",
+      "statement": "Under the stated sorted sparse XOR interface, positive entry bound h, and costed uniform preparation and exact arithmetic, a unitary clean block encodes (H⊕0)/(dh). Its actual adjoint and coherent controlled versions each use O(log(d+1)) location calls and O(1) value calls.",
+      "used_by": [
+        "alg-qa-25-sparse-hamiltonian-block-encoding",
+        "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+        "thm-qa-25-qubitized-simulation-resource-bound",
+        "thm-qa-26-hhl-query-cost",
+        "thm-qa-30-sparse-sdp-resource-substitution"
+      ]
+    },
+    {
+      "id": "lem-qa-25-clean-subspace-unitary-hybrid",
+      "statement": "If ||UJ−JV||≤η for an isometry J and unitaries U,V, then ||U*J−JV*||≤η, also with references and coherent controls. For actual unitaries U_j and ideal unitaries V_j with local clean-input errors η_j, the product clean-input error is at most Ση_j.",
+      "used_by": [
+        "def-qa-26-hhl-access-model",
+        "thm-qa-26-hhl-query-cost",
+        "alg-qa-27-cks-variable-time-linear-solver",
+        "thm-qa-30-sparse-sdp-resource-substitution"
+      ]
+    },
+    {
+      "id": "lem-qa-25-isometry-error-implies-trace-distance",
+      "statement": "For finite-dimensional isometries V,W:H→K⊗E with ||V−W||≤δ, every density matrix on H⊗R, for nonzero finite-dimensional R, gives reduced output trace distance at most δ.",
+      "used_by": [
+        "thm-qa-25-qubitized-simulation-correctness",
+        "thm-qa-25-small-time-aware-simulator-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-25-parity-path-transfer",
+      "statement": "For n≥1, the weighted parity-path matrix H_x with weights sqrt(i(n+1−i))/n has operator norm at most one and exp(−iH_xπn/2)|0,0⟩=(−i)^n|n,parity(x)⟩.",
+      "used_by": [
+        "thm-qa-25-sparse-no-fast-forwarding-lower-bound",
+        "ex-qa-25-parity-no-fast-forwarding"
+      ]
+    },
+    {
+      "id": "thm-qa-25-bounded-error-parity-query-lower-bound",
+      "statement": "Any quantum query algorithm that, on every x∈{0,1}^n, outputs parity(x) with error at most 1/3 using the coherent XOR oracle for x makes at least n/2 oracle queries.",
+      "used_by": [
+        "thm-qa-25-sparse-no-fast-forwarding-lower-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Singular-basis arguments for operator and trace norms, reference amplification, and clean-subspace hybrids.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Finite Hermitian eigenbases, density-matrix decomposition, signal eigenvectors, and scalar-to-operator simulation estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Unit modulus of imaginary exponentials and quarter-turn phases in path transfer and simulation.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Factoring scalar exponentials in path transfer and the Jacobi–Anger expansion.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-exponential",
+      "used_for": "The exponential power-series convention used to derive the Bessel expansion.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-exponential-series-converges-everywhere",
+      "used_for": "Absolute convergence supporting the exponential-series product and regrouping.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Adjoint identities in the paired signal-space calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-promise-problem",
+      "used_for": "Correctness on every input of the full Boolean-cube parity promise.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Circuit-product error estimates, clean-subspace hybrids, and the Duhamel perturbation estimate.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Operator-error sums obtained from the vector triangle inequality.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-is-entire-with-derivative-itself",
+      "used_for": "The small-time scalar exponential estimate in the truncation lemma.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+      "concern": "Facts [F5] attributes to def-qc-dirac-notation-conversion the formula that |u⟩⟨v| contributes matrix entry ⟨e_i,u⟩⟨v,e_j⟩. Under the explicitly stated root convention, linear in the first argument, this equals conjugate(u_i) v_j, whereas the cited definition gives u_i conjugate(v_j). For example, u=i e_1 and v=e_1 make [F5] give −i instead of i. Proof 2.1 uses the correct overlap order, so the theorem's conclusion survives, but the Facts block contains a false coordinate identity and misstates its supplier.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "ex-qa-25-parity-no-fast-forwarding",
+      "concern": "Facts [F3] describes the cited sparse-no-fast-forwarding theorem as a lower bound for 'the full path family', and Proof 2.1 says the exact-weight example 'is the n=2 instance of the constant-normalization family in [F3]'. The cited theorem instead states its lower bound for the dyadically rounded matrices. At n=2 its b is 5 and q_1=q_2=23/32, giving normalization 23/16; this example uses weights 1/sqrt(2), normalization sqrt(2), and exact time-π endpoint transfer. The exact-weight calculations are sound, but the identification with the cited rounded family is false.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "The sorted sparse interface preserves total XOR oracles, finite exact value codes, sentinels, and separate access costs; it does not infer in-place permutations."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "quantum-singular-value-transformation",
+      "faithful": true,
+      "note": "Odd/even transforms, kernel terms, real extraction, normalized block error, and the 4d sqrt(block-error) robustness estimate are used with their stated qualifications."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "block-encodings",
+      "faithful": true,
+      "note": "Compression error is normalized; normalization and forward/inverse/controlled implementation costs remain separate."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "quantum-signal-processing",
+      "faithful": true,
+      "note": "Reflection signs, phase order, parity, controlled scalar phases, and successful numerical-synthesis error budgets agree. Arithmetic complexity is not promoted to Turing bit complexity."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Inverse and controlled access are explicit, and the −i coefficient phase and i^d convention conversion are retained under control."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The parity argument uses input-independent inter-query circuits and correctness on every promised input; quantum query counts remain separate from circuit generation and bit costs."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": false,
+      "note": "The sparse correctness theorem's [F5] reverses the root-coordinate conjugations relative to def-qc-dirac-notation-conversion. Its actual Proof 2.1 overlap is correct; the precise mismatch is recorded in concerns."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "continuous-time-quantum-walks",
+      "faithful": true,
+      "note": "Finite spectral evolution and its unitary derivative are used with the exp(−itH) sign. Path transfer is proved locally."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "XOR oracles are total involutions; compute-copy-uncompute charges reversal, and controlled XOR evaluation is constructed with ordinary queries."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "state-preparation-isometry-synthesis-and-limits",
+      "faithful": true,
+      "note": "Uniform preparation, its inverse, arithmetic and flag rotations are supplied and costed. No coherent loading or finite-alphabet synthesis follows from a classical table."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "faithful": true,
+      "note": "The complete clean projector, reflection sign, correction −WRW*RW and 10 sqrt(η) retained-leakage estimate match the robust OAA supplier."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "qubitization-and-optimal-hamiltonian-simulation",
+      "faithful": true,
+      "note": "HHL uses the sorted-XOR bridge with h=1, rationally rounds simulation times, retains actual work, and uses literal adjoints and clean-subspace hybrids. Its loose query estimate follows from the sharper QA25 bound."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "qubitization-and-optimal-hamiltonian-simulation",
+      "faithful": true,
+      "note": "CKS retains supplied-permutation and optional sorted-XOR costs, explicit finite-value budgets, clean-input simulation, actual reversals and separate phase-generation/gate hypotheses."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "qubitization-and-optimal-hamiltonian-simulation",
+      "faithful": true,
+      "note": "Sparse SDP substitution uses transposition-compatible sorted support unions with listed zeros, rational simulation-time approximation, original-label reference preparation, and clean-subspace hybrids with retained work."
+    }
+  ]
+}

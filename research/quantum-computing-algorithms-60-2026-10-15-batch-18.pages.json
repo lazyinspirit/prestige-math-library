@@ -1,0 +1,904 @@
+[
+  {
+    "order": 2200,
+    "id": "classical-and-quantum-error-correcting-codes",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Classical and Quantum Error-Correcting Codes",
+    "companion": "classical-and-quantum-error-correcting-codes-examples",
+    "requires": [
+      "algebraic-extensions-degree-and-finite-fields",
+      "congruences-and-the-chinese-remainder-theorem",
+      "hilbert-space-geometry-and-riesz-representation",
+      "inner-product-spaces-and-orthogonality",
+      "linear-independence-bases-and-dimension",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "registers-tensor-products-and-partial-trace",
+      "vector-spaces-and-subspaces"
+    ],
+    "items": [
+      {
+        "id": "thm-qc-full-column-rank-matrix-image-has-dimension",
+        "kind": "theorem",
+        "title": "A full-column-rank matrix has image dimension equal to its number of columns",
+        "deps": [
+          "def-linear-map",
+          "def-linear-subspace",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "lem-standard-basis-of-f-n",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $F$ be a field, let $n,k\\in\\mathbb N$, and let $G\\in M_{n\\times k}(F)$. Regard $G$ as the linear map $T_G:F^k\\to F^n$, $x\\mapsto Gx$, using column vectors. If the columns of $G$ are linearly independent, then $\\operatorname{im}T_G$ is a $k$-dimensional linear subspace of $F^n$. This includes $k=0$ and $n=0$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.2",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-linear-isometry-preserves-inner-products",
+        "title": "Finite complex linear isometries preserve inner products",
+        "kind": "lemma",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-classical-linear-code-over-finite-field",
+        "kind": "definition",
+        "title": "Classical linear code over a finite field",
+        "deps": [
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "def-dimension",
+          "def-finite-field-and-its-order",
+          "def-linear-subspace",
+          "def-vector-space",
+          "lem-standard-basis-of-f-n",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-qc-full-column-rank-matrix-image-has-dimension"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimension $n$, $0\\le k\\le n$ ([[lem-standard-basis-of-f-n]], [[thm-dimension-of-a-linear-subspace]]). A **classical linear code over $F$** with a specified encoding is the data $(F,n,C,\\operatorname{Enc})$, where $\\operatorname{Enc}:F^k\\to C$ is a linear isomorphism. Such an isomorphism exists because $\\dim_F F^k=k$ and finite-dimensional vector spaces of equal dimension are isomorphic ([[cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension]]). The field is part of the data: notation $F_q$ does not identify the field with $\\mathbb Z/q\\mathbb Z$; that quotient is a field only when $q$ is prime.\n\nIf $C=\\{0\\}$, then $k=0$, $F^0=\\{0\\}$, and the encoding is the unique map between these zero spaces. If an encoding is represented by a full-column-rank matrix $G\\in M_{n\\times k}(F)$, its image has dimension $k$ by [[thm-qc-full-column-rank-matrix-image-has-dimension]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.6 and 7.15",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "def-qc-dual-of-a-finite-field-linear-code",
+        "kind": "definition",
+        "title": "Bilinear dual of a finite-field linear code",
+        "deps": [
+          "def-linear-subspace",
+          "def-qc-classical-linear-code-over-finite-field"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "For $x,y\\in F^n$, define the standard **bilinear dot product** $x\\cdot y:=\\sum_{j<n}x_jy_j$. For any linear subspace $C\\le F^n$ ([[def-linear-subspace]])—in particular, the codeword subspace of a classical linear code as in [[def-qc-classical-linear-code-over-finite-field]]—its **dual code** is\n\n$$C^\\perp:=\\{y\\in F^n: x\\cdot y=0\\text{ for every }x\\in C\\}.$$\n\nThis is a bilinear pairing over $F$; it is not a positive-definite or Hermitian inner product. The proof that $C^\\perp$ is a linear subspace, has dimension $n-k$, and satisfies $(C^\\perp)^\\perp=C$ is [[thm-qc-dual-code-dimension-and-double-dual]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.1",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "def-qc-hamming-weight-distance-and-linear-code-distance",
+        "kind": "definition",
+        "title": "Hamming weight and distance of a finite-field linear code",
+        "deps": [
+          "def-qc-classical-linear-code-over-finite-field",
+          "thm-well-ordering-principle"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$, define its **minimum distance** by $d(C):=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)$. This minimum exists because its nonempty set of values lies in $\\{1,\\ldots,n\\}$ and the natural numbers are well ordered ([[thm-well-ordering-principle]]). For the zero code $C=\\{0\\}$, set $d(C):=n+1$ by convention; this sentinel exceeds every possible Hamming weight and makes the usual radius statements vacuously valid for distinct codewords.\n\nThe code parameters are written $[n,k,d]_q$, where $q=|F|$ and $d=d(C)$. This notation records a finite-field alphabet and does not imply that $F=\\mathbb Z/q\\mathbb Z$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§37.1–37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.6 and 7.15",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "def-qc-quantum-code-isometry-and-code-projector",
+        "kind": "definition",
+        "title": "Quantum code as an isometric encoding and its code projector",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-linear-map",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "thm-qc-isometric-encoding-projector"
+        ],
+        "statement": "Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register interface. A **quantum code** is an isometric encoding $V:\\mathcal H_L\\to\\mathcal H_P$. Its **code subspace** is $\\mathcal C:=\\operatorname{im}V$, its logical dimension is $K:=\\dim\\mathcal H_L$, and its physical block length is the number $n$ of tensor factors. When each physical factor is a qubit, $\\mathcal H_P\\cong(\\mathbb C^2)^{\\otimes n}$; a logical $k$-qubit register has $K=2^k$. Require $K\\ge1$.\n\nUsing the root library's adjoint convention, the **code projector** is $P:=VV^*\\in\\operatorname{End}(\\mathcal H_P)$. The theorem [[thm-qc-isometric-encoding-projector]] proves $V^*V=I_{\\mathcal H_L}$, $P^*=P=P^2$, and $\\operatorname{im}P=\\mathcal C$, including one-dimensional logical spaces and the full-space code.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1, 36.3, and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.1 and 7.4.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "thm-qc-dual-code-dimension-and-double-dual",
+        "kind": "theorem",
+        "title": "Dimension and double-dual identity for finite-field code duals",
+        "deps": [
+          "def-dimension",
+          "def-linear-map",
+          "def-linear-subspace",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "lem-standard-basis-of-f-n",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-rank-nullity",
+          "thm-row-rank-equals-column-rank"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Let $F$ be a finite field, $n\\in\\mathbb N$, and let $D\\le F^n$ be a linear subspace ([[def-linear-subspace]]) of dimension $r$. Then $D^\\perp$ is a linear subspace of dimension $n-r$, and $(D^\\perp)^\\perp=D$. In particular this holds for every classical linear code, including $D=\\{0\\}$ and $D=F^n$ ([[def-qc-classical-linear-code-over-finite-field]]).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.1",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.6 and 7.15",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-hamming-distance-is-a-metric-and-code-distance",
+        "kind": "theorem",
+        "title": "Hamming distance is a metric and linear-code distance is minimum nonzero weight",
+        "deps": [
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-hamming-weight-distance-and-linear-code-distance"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "For every finite field $F$ and $n\\in\\mathbb N$, $d_H(x,y)=\\operatorname{wt}(x-y)$ is a metric on $F^n$. If $n\\ge1$ and $C\\le F^n$ is the codeword subspace of a classical linear code, then for nonzero $C$, $\\min_{x\\ne y\\in C}d_H(x,y)=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)=d(C)$. For $C=\\{0\\}$ there are no distinct codewords, and the distance parameter is the stated convention $n+1$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§37.1–37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.6 and 7.15",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-isometric-encoding-projector",
+        "kind": "theorem",
+        "title": "An isometric quantum encoding gives an orthogonal code projector",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-linear-map",
+          "def-qc-quantum-code-isometry-and-code-projector",
+          "def-real-and-complex-inner-product-space",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "lem-qc-linear-isometry-preserves-inner-products",
+          "prop-adjoint-algebra",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-rank-nullity",
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $0\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1 and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.1 and 7.4.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-generator-and-parity-check-matrices",
+        "kind": "definition",
+        "title": "Generator and parity-check matrices over a finite field",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "thm-qc-dual-code-dimension-and-double-dual"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "Let $C\\le F^n$ have dimension $k$. A **generator matrix** for $C$ is a matrix $G\\in M_{n\\times k}(F)$ with linearly independent columns and column space $C$. A **parity-check matrix** for $C$ is a matrix $H\\in M_{(n-k)\\times n}(F)$ with linearly independent rows and nullspace $C$. With column-vector conventions, $G:F^k\\to F^n$ and $H:F^n\\to F^{n-k}$; the product $HG$ is defined and is the zero matrix. Existence for every code, the identity $HG=0$, and the boundary shapes are proved in [[thm-qc-generator-and-parity-check-matrix-existence]].\n\nThe row vectors of $H$, identified with their coordinate columns by transpose and the bilinear dot product, span $C^\\perp$. No Hermitian conjugation is used. The matrices have shapes $n\\times k$ and $(n-k)\\times n$, including $n\\times0$ and $0\\times n$ matrices.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.2",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "def-qc-local-operator-support-and-weight",
+        "kind": "definition",
+        "title": "Support and weight of an operator on a finite register",
+        "deps": [
+          "def-qc-quantum-code-isometry-and-code-projector",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-wire-permutation-is-unitary"
+        ],
+        "dependency_level": 4,
+        "justified_by": [
+          "lem-qc-local-operator-support-is-permutation-invariant"
+        ],
+        "statement": "Fix an ordered physical register $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ with finite-dimensional factors. For $S\\subseteq[n]:=\\{0,\\ldots,n-1\\}$, form $\\mathcal H_S$ and $\\mathcal H_{S^c}$ in the inherited order, and let $\\Pi_S:\\mathcal H_P\\to\\mathcal H_S\\otimes\\mathcal H_{S^c}$ be the declared bijective wire permutation. An operator $E\\in\\operatorname{End}(\\mathcal H_P)$ is **supported in $S$** if there is $E_S\\in\\operatorname{End}(\\mathcal H_S)$ with\n\n$$\\Pi_S E\\Pi_S^{-1}=E_S\\otimes I_{S^c}.$$\n\nIts **weight** is $\\operatorname{wt}(E):=\\min\\{|S|:E\\text{ is supported in }S\\}$. The minimum exists because the full set $[n]$ supports every operator and $[n]$ has finitely many subsets. Let $\\mathcal H_\\varnothing=\\mathbb C$; scalar identity operators have weight zero. The weight is invariant under reordering the tensor factors by their declared wire permutation ([[lem-qc-local-operator-support-is-permutation-invariant]]).\n\nHere $E_S\\otimes I_{S^c}$ is the tensor map of [[def-qc-tensor-map]]. The product factors may have arbitrary finite dimensions; qubits are the special case $\\dim\\mathcal H_j=2$ for every $j$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1, 36.3, and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.1, 7.4.1, and 7.7",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "lem-qc-classical-code-distance-disjoint-error-balls",
+        "kind": "lemma",
+        "title": "Hamming balls below half the code distance are disjoint",
+        "deps": [
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "thm-qc-hamming-distance-is-a-metric-and-code-distance"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "Let $C\\le F^n$ have distance parameter $d=d(C)$ and put $t=\\lfloor(d-1)/2\\rfloor$. For distinct codewords $c,c'\\in C$, the closed Hamming balls $B_t(c):=\\{r:d_H(r,c)\\le t\\}$ and $B_t(c')$ are disjoint.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-quantum-code-distance-and-error-detection",
+        "kind": "definition",
+        "title": "Detectable operators and distance of a finite-register quantum code",
+        "deps": [
+          "def-qc-local-operator-support-and-weight",
+          "def-qc-quantum-code-isometry-and-code-projector",
+          "thm-qc-isometric-encoding-projector"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "lem-qc-detectability-is-linear-and-encoding-invariant"
+        ],
+        "statement": "Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P)$ is **detectable by the code** if there is a scalar $\\lambda_E\\in\\mathbb C$ such that\n\n$$PEP=\\lambda_E P.$$\n\nWhen $K\\ge2$, define the **quantum distance** by\n\n$$d:=\\min\\{\\operatorname{wt}(E):E\\in\\operatorname{End}(\\mathcal H_P),\\ PEP\\notin\\mathbb C P\\},$$\n\nwhere $\\mathbb C P:=\\{\\lambda P:\\lambda\\in\\mathbb C\\}$.\n\nWhen $K=1$, set $d:=n+1$ by convention; the non-detectable set is empty in that case, as proved in [[lem-qc-detectability-is-linear-and-encoding-invariant]]. The same theorem proves that the minimum for $K\\ge2$ exists, the condition is linear in $E$, and changing $V$ to $VU$ for a logical unitary $U$ leaves $d$ unchanged.\n\nThis definition distinguishes detection from recovery: no recovery map or correction criterion is asserted here. In particular the distance theorem on this page only proves detection below $d$; correction maps are deferred to QC19.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1, 36.3, and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.1 and 7.4.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "lem-qc-local-operator-support-is-permutation-invariant",
+        "kind": "lemma",
+        "title": "Operator support weight is invariant under wire permutation",
+        "deps": [
+          "def-qc-local-operator-support-and-weight",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-wire-permutation-is-unitary"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "Let the source register have ordered factors $\\mathcal H_0,\\ldots,\\mathcal H_{n-1}$, and let the target register have factors in the QC02 order $\\mathcal H_{\\sigma(0)},\\ldots,\\mathcal H_{\\sigma(n-1)}$. Let $\\Pi_\\sigma$ be the corresponding wire bijection and set $E':=\\Pi_\\sigma E\\Pi_\\sigma^{-1}$. An original factor labeled $i$ is in target position $\\sigma^{-1}(i)$. Thus $E$ is supported in $S$ exactly when $E'$ is supported in $\\sigma^{-1}(S)$; consequently $\\operatorname{wt}(E')=\\operatorname{wt}(E)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1, 36.3, and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.1 and 7.7",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-generator-and-parity-check-matrix-existence",
+        "kind": "theorem",
+        "title": "Every finite-field linear code has generator and parity-check matrices",
+        "deps": [
+          "def-dimension",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-qc-generator-and-parity-check-matrices",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "thm-qc-dual-code-dimension-and-double-dual"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "Let $C\\le F^n$ have dimension $k$. There are matrices $G\\in M_{n\\times k}(F)$ and $H\\in M_{(n-k)\\times n}(F)$ such that the columns of $G$ form a basis of $C$, the rows of $H$ form a basis of $C^\\perp$ after transpose identification, $\\ker H=C$, and $HG=0$. This includes $k=0$ and $k=n$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.2",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-classical-error-syndrome",
+        "kind": "definition",
+        "title": "Syndrome of a received word over a finite field",
+        "deps": [
+          "def-qc-generator-and-parity-check-matrices",
+          "thm-qc-generator-and-parity-check-matrix-existence"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "lem-qc-detectability-is-linear-and-encoding-invariant",
+        "kind": "lemma",
+        "title": "Detectable operators form a subspace and quantum distance is well defined",
+        "deps": [
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-qc-local-operator-support-and-weight",
+          "def-qc-quantum-code-distance-and-error-detection",
+          "def-qc-quantum-code-isometry-and-code-projector",
+          "prop-adjoint-algebra",
+          "prop-orthogonal-projection-formula-and-linearity",
+          "thm-qc-isometric-encoding-projector",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "Let $P$ be the code projector of an isometric encoding into an $n$-factor register and let $K$ be the logical dimension. Then:\n\n1. The set $\\mathcal D(P):=\\{E:PEP\\in\\mathbb C P\\}$ of detectable operators is a complex linear subspace of $\\operatorname{End}(\\mathcal H_P)$.\n2. Replacing the encoding $V$ by $VU$ for any unitary $U$ on $\\mathcal H_L$ leaves $P$, detectability, and distance unchanged.\n3. If $K=1$, every operator is detectable, so the distance convention $n+1$ is appropriate. If $K\\ge2$, a non-detectable operator of weight at most $n$ exists, while every weight-zero operator is detectable; hence the minimum defining distance exists and lies in $\\{1,\\ldots,n\\}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1, 36.3, and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.1 and 7.4.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-classical-syndrome-is-error-only",
+        "kind": "lemma",
+        "title": "A received-word syndrome depends only on the error vector",
+        "deps": [
+          "def-qc-classical-error-syndrome",
+          "thm-qc-generator-and-parity-check-matrix-existence"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "For a codeword $c\\in C$, an error $e\\in F^n$, and received word $r=c+e$, the syndrome satisfies $s(r)=He$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-equal-syndrome-errors-differ-by-a-codeword",
+        "kind": "lemma",
+        "title": "Equal classical syndromes imply a codeword difference",
+        "deps": [
+          "def-qc-classical-error-syndrome",
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "thm-qc-generator-and-parity-check-matrix-existence"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "Let $e,f\\in F^n$ and let $H$ be a parity-check matrix of $C$. If $He=Hf$, then $e-f\\in C$. If also $\\operatorname{wt}(e),\\operatorname{wt}(f)\\le t$ and $2t<d(C)$, then $e=f$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-quantum-distance-detects-low-weight-errors",
+        "kind": "theorem",
+        "title": "Every operator below the quantum code distance is detectable",
+        "deps": [
+          "def-qc-quantum-code-distance-and-error-detection",
+          "lem-qc-detectability-is-linear-and-encoding-invariant"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "For a finite-register quantum code of distance $d$, every operator $E$ with $\\operatorname{wt}(E)<d$ is detectable: $PEP=\\lambda_E P$ for some $\\lambda_E\\in\\mathbb C$. No correction-map conclusion is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1, 36.3, and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.4.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-classical-distance-correction-and-erasure-radius",
+        "kind": "theorem",
+        "title": "Classical distance gives error detection, unique decoding, and erasure recovery",
+        "deps": [
+          "def-qc-classical-error-syndrome",
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "lem-qc-classical-code-distance-disjoint-error-balls",
+          "lem-qc-classical-syndrome-is-error-only",
+          "lem-qc-equal-syndrome-errors-differ-by-a-codeword",
+          "thm-qc-generator-and-parity-check-matrix-existence"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "statement": "Let $C\\le F^n$ have distance parameter $d=d(C)$ and let $t=\\lfloor(d-1)/2\\rfloor$. Then:\n\n1. Every nonzero error $e$ of weight less than $d$ is detected by a parity-check matrix: $He\\ne0$.\n2. If $r=c+e$ for $c\\in C$ and $\\operatorname{wt}(e)\\le t$, then $c$ is the unique codeword $c'\\in C$ with $\\operatorname{wt}(r-c')\\le t$; moreover distinct errors of weight at most $t$ have distinct syndromes.\n3. If the erased coordinate set $S\\subseteq\\{0,\\ldots,n-1\\}$ is known and $|S|<d$, at most one codeword agrees with the received word outside $S$.\n\nThese are detection, unique-decoding, and erasure-uniqueness guarantees. They do not assert an efficient decoder or a complexity bound.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§37.1–37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qc-binary-repetition-code-syndrome-table",
+        "kind": "example",
+        "title": "Binary three-bit repetition code and its syndrome table",
+        "deps": [
+          "def-qc-classical-error-syndrome",
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-generator-and-parity-check-matrices",
+          "thm-qc-classical-distance-correction-and-erasure-radius",
+          "thm-qc-generator-and-parity-check-matrix-existence",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "statement": "Work over $F=\\mathbb F_2=\\mathbb Z/2\\mathbb Z$. Let $C=\\{000,111\\}\\le F^3$, with column-vector generator and parity-check matrices\n\n$$G=\\begin{bmatrix}1\\\\1\\\\1\\end{bmatrix},\\qquad H=\\begin{bmatrix}1&1&0\\\\0&1&1\\end{bmatrix}.$$\n\nThe code has parameters $[3,1,3]_2$. The four error vectors of weight at most one have distinct syndromes $He$, giving a unique correction table.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1 and 37.1–37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2201,
+    "id": "classical-and-quantum-error-correcting-codes-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Classical and Quantum Error-Correcting Codes — Examples",
+    "companion": "classical-and-quantum-error-correcting-codes",
+    "requires": [
+      "classical-and-quantum-error-correcting-codes"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-quantum-repetition-projector-and-distance-boundary",
+        "kind": "example",
+        "title": "Quantum repetition subspace projector and a distance-one boundary error",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-qc-local-operator-support-and-weight",
+          "def-qc-quantum-code-distance-and-error-detection",
+          "def-qc-quantum-code-isometry-and-code-projector",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-detectability-is-linear-and-encoding-invariant",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-isometric-encoding-projector",
+          "thm-qc-quantum-distance-detects-low-weight-errors"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "statement": "Use the ordered three-qubit tensor basis $u_{x_0x_1x_2}$ supplied by the QC02 register interface. Set the logical space to $Q_2=\\mathbb C^2$ with the standard pairing $\\langle z,w\\rangle=\\sum_{r<2}z_r\\overline{w_r}$, and let $e_0,e_1$ be its standard basis. Define $V e_0=u_{000}$, $V e_1=u_{111}$. The code projector is diagonal in this basis, with diagonal entry $1$ at $000,111$ and $0$ elsewhere. Define $E_Xu_{x_0x_1x_2}=u_{(1-x_0)x_1x_2}$ and $E_Zu_{x_0x_1x_2}=(-1)^{x_0}u_{x_0x_1x_2}$. Then $E_X$ is detectable but $E_Z$ is not; the code has distance $1$, and the boundary operator has weight exactly $d$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.3 and 37.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.1 and 7.4.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qc-binary-hamming-code-syndrome-table",
+        "kind": "example",
+        "title": "The binary [7,4,3] Hamming code and its single-error syndromes",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-qc-classical-error-syndrome",
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-generator-and-parity-check-matrices",
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "lem-standard-basis-of-f-n",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-qc-classical-distance-correction-and-erasure-radius",
+          "thm-qc-full-column-rank-matrix-image-has-dimension",
+          "thm-rank-nullity",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "statement": "Over $F_2=\\mathbb Z/2\\mathbb Z$, take the column-vector matrices\n\n$$G=\\begin{bmatrix}1&1&0&1\\\\1&0&1&1\\\\0&1&1&1\\\\1&0&0&0\\\\0&1&0&0\\\\0&0&1&0\\\\0&0&0&1\\end{bmatrix},\\qquad H=\\begin{bmatrix}1&0&0&1&1&0&1\\\\0&1&0&1&0&1&1\\\\0&0&1&0&1&1&1\\end{bmatrix}.$$\n\nThe code $C=\\operatorname{im}G=\\ker H$ has parameters $[7,4,3]_2$. The syndrome of a single-bit error is the corresponding column of $H$; the seven syndromes are the seven nonzero vectors of $F_2^3$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§37.1.2–37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §7.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qc-repetition-three-syndrome-table",
+        "kind": "example",
+        "title": "Repetition-code syndrome, known erasures, and unlocated errors",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "def-qc-classical-error-syndrome",
+          "def-qc-generator-and-parity-check-matrices",
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "thm-qc-classical-distance-correction-and-erasure-radius",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "statement": "Use the binary repetition code $C=\\{000,111\\}$ and $H=\\begin{bmatrix}1&1&0\\\\0&1&1\\end{bmatrix}$. A single middle-bit error in $111$ gives $r=101$ and a syndrome identifying that error. Two known erasures at coordinates $0,1$ still leave a unique completion when coordinate $2$ is received. By contrast, two unlocated errors in $000$ can produce $r=110$, which lies closer to the wrong codeword $111$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, §§36.1 and 37.1–37.1.3",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.6 and 7.4.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qc-short-reed-solomon-syndrome-table",
+        "kind": "example",
+        "title": "A short Reed–Solomon code over $F_5$ and its symbol-error syndromes",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-qc-classical-error-syndrome",
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-generator-and-parity-check-matrices",
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-qc-classical-distance-correction-and-erasure-radius",
+          "thm-qc-full-column-rank-matrix-image-has-dimension",
+          "thm-rank-nullity",
+          "thm-row-rank-equals-column-rank",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "statement": "In $F_5=\\mathbb Z/5\\mathbb Z$, evaluate the degree-less-than-two polynomials $f(x)=a+bx$ at $0,1,2,3$. This gives the Reed–Solomon evaluation code\n\n$$C=\\{(a,a+b,a+2b,a+3b):a,b\\in F_5\\}\\subseteq F_5^4,$$\n\nwith encoding $(a,b)\\mapsto(a,a+b,a+2b,a+3b)$ and generator/parity-check matrices\n\n$$G=\\begin{bmatrix}1&0\\\\1&1\\\\1&2\\\\1&3\\end{bmatrix},\\qquad H=\\begin{bmatrix}4&3&2&1\\\\0&3&4&3\\end{bmatrix}.$$\n\nIt has parameters $[4,2,3]_5$. Its four parity-check columns give distinct projective directions, so every one-symbol error value at every position has a distinct syndrome.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Madhu Sudan, Essential Coding Theory, MIT 6.895, Lecture 5, “Reed-Solomon Codes” (Fall 2004)",
+              "url": "https://ocw.mit.edu/courses/6-895-essential-coding-theory-fall-2004/84d8b31edc51751920d3cf5fe57dea0e_lect05slx4.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7, §§7.6 and 7.15",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

@@ -1,0 +1,385 @@
+{
+  "group": "p",
+  "batches": [
+    "12"
+  ],
+  "pages_read": [
+    "approximate-universality-and-solovay-kitaev",
+    "approximate-universality-and-solovay-kitaev-examples"
+  ],
+  "items_read": [
+    "def-qc-effective-unitary-matrix-input",
+    "def-qc-inverse-closed-dense-su2-gate-set",
+    "lem-qc-fixed-dimension-interval-arithmetic",
+    "lem-qc-irrational-rotation-dense-on-circle",
+    "lem-qc-su2-near-identity-logarithm",
+    "lem-qc-compact-su2-base-net",
+    "lem-qc-pauli-vector-multiplication",
+    "lem-qc-su2-balanced-commutator",
+    "lem-qc-two-axis-su2-generation",
+    "lem-qc-clifford-t-projective-density",
+    "lem-qc-commutator-error-cancellation",
+    "alg-qc-solovay-kitaev-unitary-compiler",
+    "thm-qc-solovay-kitaev-error-and-resource-bound",
+    "thm-qc-solovay-kitaev-bit-complexity",
+    "thm-qc-fixed-arity-unitary-error-budget",
+    "thm-qc-controlled-phase-approximation",
+    "ex-qc-solovay-kitaev-error-budget"
+  ],
+  "conventions": [
+    {
+      "convention": "Gate labels denote exact SU(2) matrices. The compiler package is finite, inverse-closed and dense, with rational 0 < η₀ < 1/4096 and a supplied finite word net covering within η₀/4.",
+      "fixed_by": "def-qc-inverse-closed-dense-su2-gate-set",
+      "matters_for": [
+        "alg-qc-solovay-kitaev-unitary-compiler",
+        "thm-qc-solovay-kitaev-error-and-resource-bound",
+        "thm-qc-solovay-kitaev-bit-complexity"
+      ]
+    },
+    {
+      "convention": "A target Cauchy name takes unary precision b and returns rational entry approximations with error at most 2⁻ᵇ; these approximants need not be unitary. Exact-real handles and Cauchy names are distinct interfaces.",
+      "fixed_by": "def-qc-effective-unitary-matrix-input",
+      "matters_for": [
+        "thm-qc-solovay-kitaev-bit-complexity"
+      ]
+    },
+    {
+      "convention": "The ideal recursion starts at level zero, uses ηⱼ₊₁ = 64ηⱼ^(3/2), and returns BCB*C*A. Exact comparisons and logarithms are ideal unit-cost operations.",
+      "fixed_by": "alg-qc-solovay-kitaev-unitary-compiler",
+      "matters_for": [
+        "thm-qc-solovay-kitaev-error-and-resource-bound",
+        "thm-qc-solovay-kitaev-bit-complexity"
+      ]
+    },
+    {
+      "convention": "With the supplied Pauli Y sign, (u·σ)(v·σ) = (u·v)I + i(u×v)·σ and [iu·σ,iv·σ] = −2i(u×v)·σ.",
+      "fixed_by": "lem-qc-pauli-vector-multiplication",
+      "matters_for": [
+        "lem-qc-su2-balanced-commutator",
+        "lem-qc-two-axis-su2-generation",
+        "lem-qc-clifford-t-projective-density",
+        "thm-qc-solovay-kitaev-bit-complexity"
+      ]
+    },
+    {
+      "convention": "Bit complexity includes reading the complete positive binary numerator/denominator encoding of ε, which need not be reduced, and printing the expanded word. Gate coordinates have fixed algebraic descriptions.",
+      "fixed_by": "thm-qc-solovay-kitaev-bit-complexity",
+      "matters_for": [
+        "thm-qc-solovay-kitaev-bit-complexity"
+      ]
+    },
+    {
+      "convention": "Fixed-arity compilation assumes a supplied exact no-ancilla decomposition with m ≥ 1 one-qubit factors. Its scalar phase belongs to the entire unconditional block.",
+      "fixed_by": "thm-qc-fixed-arity-unitary-error-budget",
+      "matters_for": [
+        "thm-qc-controlled-phase-approximation",
+        "ex-qc-solovay-kitaev-error-budget"
+      ]
+    },
+    {
+      "convention": "Controlled phase uses control-first lexicographic basis order. Replacing the three phase gates by Rz representatives multiplies CPθ by e^(−iθ/4); an additional control turns this scalar into a relative phase.",
+      "fixed_by": "thm-qc-controlled-phase-approximation",
+      "matters_for": [
+        "thm-qc-controlled-phase-approximation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qc-solovay-kitaev-error-and-resource-bound",
+      "statement": "For a fixed inverse-closed dense G ⊂ SU(2) and a certified base net of radius 0 < η₀ < 64⁻², the compiler returns, for 0 < ε ≤ η₀, a word W with ‖U−W‖ ≤ ε. Level-j length is at most L₀5ʲ; shared exact-real arithmetic uses O(3ʲ), separately from expanded output.",
+      "used_by": [
+        "thm-qc-solovay-kitaev-bit-complexity",
+        "thm-qc-fixed-arity-unitary-error-budget",
+        "ex-qc-solovay-kitaev-error-budget"
+      ]
+    },
+    {
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "statement": "For the fixed algebraic gate package and base-net certificate, and a target Cauchy name of query time at most (b+1)^c, a deterministic implementation outputs W with ‖U−W‖ ≤ ε, length O(log^(log₍₃/₂₎5)(1/ε)), and bit time O((N+sε)^(c+10)), including input reading and expanded output.",
+      "used_by": [
+        "lem-qa-33-finite-dimensional-unitary-synthesis",
+        "lem-qc-vmw-finite-precision-sk-compiler"
+      ]
+    },
+    {
+      "id": "thm-qc-fixed-arity-unitary-error-budget",
+      "statement": "For a supplied exact no-ancilla decomposition of U ∈ U(2^k) with m ≥ 1 one-qubit factors and c exact CNOTs, compiling the special-unitary factors to ε/m gives min|λ|=1 ‖U−λC‖ ≤ ε, gate count c+O(m log^(log₍₃/₂₎5)(m/ε)), and event-value change at most 2ε for every unit input and nonnegative contraction.",
+      "used_by": [
+        "thm-qc-controlled-phase-approximation",
+        "thm-qc-amplitude-table-precision-and-compilation"
+      ]
+    },
+    {
+      "id": "lem-qc-su2-balanced-commutator",
+      "statement": "If D ∈ SU(2) and 0 ≤ ‖D−I‖ ≤ η ≤ 1/16, there are V,W ∈ SU(2) with ‖V−I‖, ‖W−I‖ ≤ √η and ‖D−VWV*W*‖ ≤ 40η^(3/2).",
+      "used_by": [
+        "alg-qc-solovay-kitaev-unitary-compiler",
+        "thm-qc-solovay-kitaev-error-and-resource-bound",
+        "thm-qc-solovay-kitaev-bit-complexity"
+      ]
+    },
+    {
+      "id": "lem-qc-commutator-error-cancellation",
+      "statement": "For the four stated SU(2) matrices, 0 ≤ η ≤ 1/16, factors within √η of I and approximants within η, the commutator difference is at most 4η^(3/2)+2η² ≤ 5η^(3/2).",
+      "used_by": [
+        "alg-qc-solovay-kitaev-unitary-compiler",
+        "thm-qc-solovay-kitaev-error-and-resource-bound",
+        "thm-qc-solovay-kitaev-bit-complexity"
+      ]
+    },
+    {
+      "id": "lem-qc-clifford-t-projective-density",
+      "statement": "The normalized lifts h=iH and t=e^(−iπ/8)T lie in SU(2) and generate a dense subgroup of SU(2); therefore the projective classes of H,T generate a dense subgroup of PU(2).",
+      "used_by": [
+        "lem-qa-33-normalized-clifford-t-su2-package-dense",
+        "lem-qc-clifford-t-determinant-one-approximants",
+        "lem-qc-scalar-phase-completes-clifford-t-universality"
+      ]
+    },
+    {
+      "id": "lem-qc-fixed-dimension-interval-arithmetic",
+      "statement": "Under the stated fixed-dimension, polynomial-Cauchy input and conditioning hypotheses, the listed dyadic routines enclose their exact answers to diameter at most 2⁻ᵖ in O((p+B+1)^max(c,3)) bit operations; square roots include zero.",
+      "used_by": [
+        "thm-qc-solovay-kitaev-bit-complexity",
+        "lem-qa-33-finite-dimensional-unitary-synthesis",
+        "lem-qc-vmw-fh-density-and-base-net",
+        "lem-qc-vmw-finite-precision-sk-compiler",
+        "lem-qc-fixed-arity-polynomial-cauchy-gate-decomposition"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-effective-binary-encoding-and-decoder",
+      "used_for": "Encoding and total-decoder conventions for effective inputs and dyadic routines.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Operator norm, unitary invariance, and local-to-register error estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Product, power-series, commutator and telescoping error bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-integer-part",
+      "used_for": "Fractional parts, integer approximation and ceiling conventions.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Euler form, unit-modulus exponentials and rotation formulas.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Exponential addition and real-exponential compatibility.",
+      "opened": true
+    },
+    {
+      "id": "thm-kernel-and-fibres-of-complex-exponential",
+      "used_for": "Angular representatives and integer-period identification.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-parametrize-the-unit-circle",
+      "used_for": "Angular parametrization, determinant phases and SU(2) exponential representatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Continuity and sine bounds used in rotation and commutator estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Unitary diagonalization, logarithm structure and nonnegative-effect square roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-is-entire-with-derivative-itself",
+      "used_for": "Differentiating the scalar exponential-logarithm identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-termwise-differentiation-of-complex-power-series",
+      "used_for": "Differentiating the logarithm power series inside the unit disk.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-complex-derivatives",
+      "used_for": "Derivative of the exponential composed with the logarithm series.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-complex-derivatives",
+      "used_for": "Product and quotient differentiation in the logarithm proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-zero-complex-derivative-on-a-domain-implies-constant",
+      "used_for": "Showing exp(L(z))/(1+z) is constant on the unit disk.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-differentiability-implies-continuity",
+      "used_for": "Continuity of the logarithm series along the angular path.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Real logarithm inverse convention and recursion-depth formulas.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Principal-angle bounds and Clifford+T trigonometric inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-cofunction-supplementary-and-reflection-identities",
+      "used_for": "The elementary sin(π/6)=1/2 derivation.",
+      "opened": true
+    },
+    {
+      "id": "thm-double-angle-and-power-reduction-identities",
+      "used_for": "The near-identity angular bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "A continuous integer-valued angular discrepancy is constant.",
+      "opened": true
+    },
+    {
+      "id": "thm-closed-unit-ball-compact-iff-finite-dimensional",
+      "used_for": "Compactness of SU(2), finite nets and attainment of phase minima.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The inequality |sin t| ≤ |t|.",
+      "opened": true
+    },
+    {
+      "id": "def-number-field",
+      "used_for": "Identifying Q(x) as a number field in the density proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-algebraic-integer-minimal-polynomial-criterion",
+      "used_for": "The nonintegral monic minimal polynomial excludes a root-of-unity trace.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Double-angle calculations in the Clifford+T density proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Exact quarter-turn values in the Clifford+T trace calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Solving the error recurrence and bounding recursion depth.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "The event-effect hypothesis in the fixed-arity error budget.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Constructing the nonnegative effect square root eigenvalue by eigenvalue.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Vector, operator and event-probability error estimates.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "concern": "Proof 5.1 says that the conditioning-bit bounds add along a derived-name chain and concludes query cost O(J(b+B+log L_J+1)^max(c,3)). The cited interval lemma's square-root construction instead requests approximately twice the output precision, which would multiply precision through nested layers. The additive bound needs an explicit conditioned square-root estimate for the positive balanced-branch radicand r/2. Since r > τ_j, the identity |√x−√y| = |x−y|/(√x+√y) supplies the required b+O(log(1/τ_j)) input precision. State this estimate and its use before summing guard bits; the stated complexity conclusion appears recoverable.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "approximate-universality-and-solovay-kitaev",
+      "to": "continuous-gate-universality-and-exact-synthesis",
+      "faithful": true,
+      "note": "The fixed-arity theorem assumes a supplied exact factorization and explicitly leaves universal factorization existence to QC11; it imports no improved numeric CNOT bound."
+    },
+    {
+      "from": "approximate-universality-and-solovay-kitaev",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "The controlled-phase definition and global-phase-under-control identity match the control-first matrices and conjugate phase correction used here."
+    },
+    {
+      "from": "approximate-universality-and-solovay-kitaev",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "Exact Pauli matrices, Y orientation and H,T phases agree with the local products, normalized lifts and axis conjugations."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "The finite-set QFT theorem uses the exact-real compiler with a rational tolerance inside its certified range, retains whole-circuit phases, and disclaims angle-generation bit time and outer-controlled compilation."
+    },
+    {
+      "from": "qma-verification-and-local-hamiltonian",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "Normalized Clifford+T density is quoted correctly. Finite-dimensional synthesis invokes the finite-bit theorem on unconditional SU(2) factors and retains its fixed algebraic package and base-net requirements."
+    },
+    {
+      "from": "algorithm-composition-precision-and-dequantization",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "The output/cost definition cites the ideal compiler as a separate finite-gate approximation contract and makes no bit-time inference."
+    },
+    {
+      "from": "clifford-t-exact-and-approximate-synthesis",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "Determinant-one approximants use projective density as stated, then independently prove the finite-index and scalar-sign corrections."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "The page retains this prerequisite as background; its listed items make no direct stronger invocation of an assigned compiler result."
+    },
+    {
+      "from": "noise-fault-tolerance-concatenation-and-thresholds",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "The scalar-phase universality lemma uses precisely projective Clifford+T density and irrational-circle density, adding its scalar generator separately."
+    },
+    {
+      "from": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "The VMW suppliers establish their own algebraic dense package and fixed net, invoke the finite-bit compiler, and distinguish fixed hardcoded decomposition choices from variable-input equality tests."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "The compilation theorem supplies bounded-arity exact factorization counts, compiles complete unconditional blocks, and explicitly asserts no uniform angle-computation or compiler bit-time bound."
+    }
+  ]
+}

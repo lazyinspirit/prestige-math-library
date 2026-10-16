@@ -1,0 +1,565 @@
+===== PDF PAGE 7 =====
+
+U
+
+U1
+U4
+
+V2
+
+U7
+
+∼=
+U2
+
+V1
+
+U5
+
+V3
+
+U8
+
+U3
+U6
+U9
+
+���
+�
+�
+�
+�
+�
+�
+
+�
+�
+�
+�
+�
+�
+�
+���
+
+Figure 1:
+A typical quantum logic circuit. Information flows from left to right, and the higher wires
+represent higher order qubits. The quantum operation performed by this circuit is (U7 ⊗U8 ⊗U9)(I2 ⊗
+V3)(V2 ⊗I2)(U4 ⊗U5 ⊗U6)(I2 ⊗V1)(U1 ⊗U2 ⊗U3), and the last factor is outlined above. Note that when
+the matrix A · B is applied to vector ⃗v, this is equivalent to applying the matrix B first, followed by the
+matrix A. Therefore, the formulas describing quantum circuits must be read right to left.
+
+2.4
+Circuit Equivalences
+
+Rather than begin the statement of every theorem with “let U1,U2,... be unitary operators...,” we are going
+to use diagrams of quantum logic circuits and circuit equivalences. An equivalence of circuits in which all
+gates are fully specified can be checked by multiplying matrices. However, in addition to fully specified
+gates, our circuit diagrams will contain the following generic, or under-specified gates:
+
+Notation.
+An equivalence of circuits containing generic gates will mean that for any specification (i.e.,
+parameter values) of the gates on one side, there exists a specification of the gates on the other such that
+the circuits compute the same operator. Generic gates used in this paper are limited to the following:
+
+A generic unitary gate.
+
+Rz
+An Rz gate without a specified angular parameter; conventions for Rx, Ry are similar.
+
+∆
+A generic diagonal gate.
+
+A generic scalar multiplication (uncontrolled gate implemented by “doing nothing.”)
+
+We may restate Equation 7 as an equivalence of generic circuits.
+
+Theorem 1 : The ZYZ decomposition [3].
+
+∼=
+Rz
+Ry
+Rz
+
+Similarly, we also allow underspecified states.
+
+Notation. We shall interpret a circuit with underspecified states and generic gates as an assertion that for
+any specification of the underspecified input and output states, some specification of the generic gates cir-
+cuit that performs as advertised. We shall denote a completely unspecified state as | ⟩, and an unspecified
+bitstring state as |∗⟩.
+
+For example, we may restate Equation 9 in this manner.
+
+Theorem 2 : Preparation of one-qubit states.
+
+| ⟩
+Rz
+Ry
+|∗⟩
+
+We shall use a backslash to denote that a given wire may carry an arbitrary number of qubits (quantum
+bus). In the sequel, we seek backslashed analogues of Theorems 1 and 2.
+
+7
+
+
+===== PDF PAGE 8 =====
+
+3
+Quantum Conditionals and the Quantum Multiplexor
+
+Classical conditionals can be described by the if-then-else construction: if the predicate is true,
+perform the action specified in the then clause, if it is false, perform the action specified in the else
+clause. At the gate level, such an operation might be performed by first processing the two clauses in
+parallel, then multiplexing the output. To form the quantum analogue, we replace the predicate by a qubit,
+replace true and false by |1⟩and |0⟩, and demand that the actions corresponding to clauses be unitary.
+The resulting “quantum conditional” operator U will then be unitary. In particular, when selecting based
+on a coherent superposition α0 |0⟩+ α1 |1⟩, it will generate a linear combination of the then and else
+outcomes. Below, we shall use the term quantum multiplexor to refer to the circuit block implementing a
+quantum conditional.
+
+Notation.
+We shall say that a gate U is a quantum multiplexor with select qubits S if it preserves any
+bitstring state |b⟩carried by S. In this case, we denote U in quantum logic circuit diagrams by “□” on each
+select qubit, connected by a vertical line to a gate on the remaining data (read-write) qubits.
+
+In the event that a multiplexor has a single select bit, and the select bit is most significant, the matrix of
+the quantum multiplexor is block diagonal.
+
+U =
+�U0
+U1
+
+�
+(13)
+
+The multiplexor will apply U0 or U1 to the data qubits according as the select qubit carries |0⟩or |1⟩. To
+express such a block diagonal decomposition, we shall use the notation U = U0 ⊕U1 that is standard in
+linear algebra. More generally, let V be a multiplexor with s select qubits and a d-qubit wide data bus. If
+the select bits are most significant, the matrix of V will be block diagonal, with 2s blocks of size 2d ×2d.
+The j-th block Vj is the operator applied to the data bits when the select bits carry |j⟩.
+In general, a gate depicted as a quantum multiplexor need not read or modify as many qubits as in-
+dicated on a diagram. For example, a multiplexor which performs the same operation on the data bits
+regardless of what the select bits carry can be implemented as an operation on the data bits alone. We give
+a less trivial example below: a multiplexor which applies a different scalar multiplication for each value of
+the select bits can be implemented as a diagonal operator applied to the select bits.
+
+Theorem 3 : Recognizing diagonals.
+
+\
+
+∼=
+\
+∆
+
+Indeed, both circuits represent diagonal matrices in which each diagonal entry is repeated (at least)
+twice. In the former case, the repetition is due to a multiplexed scalar acting on the least significant qubit,
+and in the latter there is no attempt to modify the least significant qubit.
+We now clarify the meaning of multiplexed generic gates in circuit diagrams, like that in the above
+circuit equivalence.
+
+Notation.
+Let G be a generic gate. A specification U of a multiplexed-G gate can be any quantum
+multiplexor which effects a potentially different specification of G on the data qubits for each bitstring
+appearing on the select qubits. Of course, select qubits may carry a superposition of several bitstring
+states, in which case the behavior of the multiplexed gate is defined by linearity.
+
+8
+
+
+===== PDF PAGE 9 =====
+
+3.1
+Quantum Multiplexors on Two Qubits
+
+Perhaps the simplest quantum multiplexor is the Controlled-NOT (CNOT) gate.
+
+CNOT = I ⊕σx =
+
+
+
+
+
+
+
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+1
+0
+0
+1
+0
+
+
+
+
+
+=
+•
+����
+
+(14)
+
+On bitstring states, the CNOT flips the second (data) bit if the first (select) bit is |1⟩, hence the name
+Controlled-NOT. The CNOT is so common in quantum circuits that it has its own notation: a “•” on the
+select qubit connected by a vertical line to an “⊕” on the data qubit. This notation is motivated by the
+characterization of the CNOT by the formula |b1⟩|b2⟩�→|b1⟩|b1 XOR b2⟩. Several CNOTs are depicted
+in Figure 3.
+The CNOT, together with the one-qubit gates defined in §2, forms a universal gate library for quantum
+circuits.4 In particular, we can use it as a building block to help construct more complicated multiplexors.
+For example, we can implement the multiplexor Rz(θ0)⊕Rz(θ1) by the following circuit.
+
+•
+•
+
+Rz( θ0+θ1
+
+2
+)
+����
+Rz( θ0−θ1
+
+2
+)
+����
+
+In fact, the exact same statement holds if we replace Rz by Ry (this can be verified by multiplying four
+matrices). We summarize the result with a circuit equivalence.
+
+Theorem 4 : Demultiplexing a singly-multiplexed Ry or Rz.
+
+∼=
+
+•
+•
+
+Rk
+Rk
+����
+Rk
+����
+
+A similar decomposition exists for any U ⊕V where U,V are one-qubit gates. The idea is to first
+unconditionally apply V on the less significant qubit, and then apply A = UV †, conditioned on the more
+significant qubit. Decompositions for such controlled-A operators are well known [3, 9]. Indeed, if we
+write A = eitRz(α)Ry(β)Rz(γ) by Theorem 1, then U ⊕V is implemented by the following circuit.
+
+•
+eit/2
+•
+Rz(t)
+
+V
+Rz(γ)
+Ry(β/2)
+����
+Ry(−β/2)
+Rz(−α+γ
+
+2 )
+����
+Rz( α−γ
+
+2 )
+
+Since V is a generic unitary, it can absorb adjacent one-qubit boxes, simplifying the circuit. We re-
+express the result as a circuit equivalence.
+
+Theorem 5 : Decompositions of a two-qubit multiplexor [3]
+
+•
+•
+Rz
+∼=
+∼=
+
+•
+
+∆
+����
+Ry
+Rz
+����
+Rz
+����
+Ry
+
+Proof. The first equivalence is just a re-statement of what we have already seen; the second follows from
+it by applying a CNOT on the right to both sides and extracting a diagonal operator. ■
+
+4This was first shown in [12]. The results in the present work also constitute a complete proof.
+
+9
+
+
+===== PDF PAGE 10 =====
+
+3.2
+The Multiplexor Extension Property
+
+The theory of n-qubit quantum multiplexors begins with the observation that whole circuits and even circuit
+equivalences can be multiplexed. This observation has non-quantum origins and can be exemplified by
+comparing two expressions involving conditionals in terms of a classical bit s.
+
+• if (s) A0 ·B0 else A1 ·B1
+
+• As · Bs. Here As means if (s) A0 else A1, with the syntax and semantics of (s?A0:A1) in
+the C programming language.
+
+Indeed, one can either make a whole expression conditional on s or make each term conditional on s —
+the two behaviors will be identical. Similarly, one can multiplex a whole equation (with two different
+instantiations of every term) or multiplex each of its terms. The same applies to quantum multiplexing by
+linearity.
+
+Multiplexor Extension Property (MEP). Let C ≡D be an equivalence of quantum circuits. Let C′ be
+obtained from C by adding a wire which acts as a multiplexor control for every generic gate in C, and let
+D′ be obtained from D similarly. Then C′ ≡D′.
+
+Consider the special case of quantum multiplexors with a single data bit, but arbitrarily many select
+bits. We seek to implement such multiplexors via CNOTs and one-qubit gates, beginning with the following
+decomposition.
+
+Theorem 6 : ZYZ decomposition for single-data-bit multiplexors.
+
+\
+
+∼=
+\
+
+∼=
+\
+∆
+
+Rz
+Ry
+Rz
+Rz
+Ry
+Rz
+
+Proof. Apply the MEP to Theorem 1, and Theorem 3 to the result. ■
+
+The diagonal gate appearing on the right can be recursively decomposed.
+
+Theorem 7 : Decomposition of diagonal operators [8].
+
+∆
+∼=
+
+∆
+∼=
+
+Rz
+∼=
+
+Rz
+
+\
+\
+\
+\
+∆
+
+Proof. The first equivalence asserts that any diagonal gate can be expressed as a multiplexor of diagonal
+gates. This is true because diagonal gates possess the block-diagonal structure characteristic of multiplex-
+ors, with each block being diagonal. The second equivalence amounts to the MEP applied to the obvious
+fact that a one-qubit gate given by a diagonal matrix is a scalar multiple of an Rz gate. The third follows
+from Theorem 3. ■
+
+It remains to decompose the other gates appearing on the right in the circuit diagram of Theorem 6.
+We shall call these gates multiplexed Rz (or Ry) gates,5 as, e.g., the rightmost would apply a different Rz
+gate to the data qubit for each classical configuration of the select bits. While efficient implementations are
+known [8, 21], the usual derivations involve large matrices and Gray codes.
+
+5Other authors have used the term uniformly-controlled rotations to describe these gates [21].
+
+10
+
+
+===== PDF PAGE 11 =====
+
+•
+•
+•
+•
+•
+•
+•
+•
+∼=
+∼=
+
+Rz
+Rz
+����
+Rz
+����
+Rz
+����
+Rz
+����
+����
+����
+Rz
+����
+Rz
+����
+
+��
+�
+�
+�
+
+�
+�
+�
+�
+��
+
+��
+�
+�
+�
+
+�
+�
+�
+�
+��
+
+Figure 2: The recursive decomposition of a multiplexed Rz gate. The boxed CNOT gates may be canceled.
+
+Theorem 8 : Demultiplexing multiplexed Rk gates, k = y,z [8, 21].
+
+•
+•
+\
+∼= \
+
+Rk
+Rk
+����
+Rk
+����
+
+Proof. Apply the MEP to Theorem 4. ■
+
+It is worth noting that since every gate appearing in Theorem 8 is symmetric, the order of gates in
+this decomposition may be reversed. Recursive application of Theorem 8 can decompose any multiplexed
+rotation into basic gates. In the process, some CNOT gates cancel, as is illustrated in Figure 2. The final
+CNOT count is 2k, for k select bits.
+
+4
+The Preparation of Quantum States
+
+We present an asymptotically-optimal technique for the initialization of a quantum register. The problem
+has been known for some time in quantum computing, and it was considered in [11, 20, 26] after the
+original formulation [10] of the quantum circuit model. It is also a computational primitive in designing
+larger quantum circuits.
+
+Theorem 9 : Disentangling a qubit. An arbitrary (n +1)-qubit state can be converted into a separable
+(i.e., unentangled) state by a circuit shown below. The resulting state is a tensor product involving a desired
+basis state (|0⟩or |1⟩) on the less significant qubit.
+
+| ⟩
+\
+
+Rz
+Ry
+|∗⟩
+
+Proof. We show how to produce |0⟩on the least significant bit; the case of |1⟩is similar. Let |ψ⟩be
+an arbitrary (n + 1)-qubit state. Divide the 2n+1-element vector |ψ⟩into 2n contiguous 2-element blocks.
+Each is to be interpreted as a two-dimensional complex vector, and the c-th is to be labeled |ψc⟩. We now
+determine rc,tc,ϕc,θc as in Equation 9.
+
+Rz(−ϕc)Ry(−θc)|ψc⟩= rceitc |0⟩
+(15)
+
+Let |ψ′⟩be the n-qubit state given by the 2n-element row vector with c-th entry rceitc, and let U be the block
+diagonal sum �
+c Ry(−θc)Rz(−ϕc). Then U |φ⟩= |φ′⟩|0⟩, and U may be implemented by a multiplexed Rz
+gate followed by a multiplexed Ry. ■
+
+We may apply Theorem 8 to implement the (n +1)-bit circuit given above with 2n+1 CNOT gates. A
+slight optimization is possible given that the gates on the right-hand size in Theorem 8 can be optionally
+
+11
+
+
+===== PDF PAGE 12 =====
+
+reversed, as explained above. Indeed, if we reverse the decomposition of the multiplexed Ry gate, its first
+gate (CNOT) will cancel with the last gate (CNOT) from the decomposed multiplexed Rz gates. Thus, only
+2n+1 −2 CNOT gates are needed.
+Applying Theorem 9 recursively can reduce a given n-qubit quantum state |ψ⟩to a scalar multiple of a
+desired bitstring state |b⟩; the resulting circuit C uses 2n+1 −2n CNOT gates. To go from |b⟩to |ψ⟩, apply
+the gates of C in reverse order and inverted. We shall call this the inverse circuit, C†.
+The state preparation technique can be used to decompose an arbitrary unitary operator U. The idea is
+to construct a circuit for U† by iteratively applying state preparation. Indeed, an operator is entirely deter-
+mined by its behavior on basis vectors. To this end, each iteration needs to implement the correct behavior
+on a new basis vector while preserving the behavior on previously processed basis vectors. This idea has
+been tried before [20, 31], but with methods less efficient than Theorem 9. We outline the procedure below.
+
+• At step 0, apply Theorem 9 to find a circuit C0 that maps U |0⟩to a scalar multiple of |0⟩. Let
+U1 = C0U.
+
+• At step j, apply Theorem 9 to find a circuitCj that maps U |j⟩to a scalar multiple of |j⟩. Importantly,
+the construction of Cj and the previous steps of the algorithm ensure Cj |i⟩= |i⟩for all i < j. Define
+Uj+1 = CjUj.
+
+• U2n−1 will be diagonal, and may be implemented by a circuit D via Theorem 7.
+
+• Finally, U = C0†C1† ...C2n−2†D
+
+Thus 2n −1 state preparation steps and 1 diagonal operator are used. The final CNOT count is 2×4n −
+(2n + 3) × 2n + 2n. For n > 2, we improve upon the best previously published technique to decompose
+unitary operators column by column [31], as can be seen in Table 1.
+
+5
+A Functional Decomposition for Quantum Logic
+
+Below we introduce a decomposition for quantum logic that is analogous to the well-known Shannon
+decomposition of Boolean functions (f = xi fxi=1 + ¯xi fxi=0). It expresses an arbitrary n-qubit quantum
+operator in terms of (n −1)-qubit operators (cofactors) by means of quantum multiplexors. Applying this
+decomposition recursively yields a synthesis algorithm, for which we compute gate counts.
+
+5.1
+The Cosine-Sine Decomposition
+
+We recall the Cosine-Sine Decomposition from matrix algebra.6 It has been used explicitly and regularly
+to build quantum circuits [30, 21] and has also been employed inadvertently [32, 6].
+The CSD states that an even-dimensional unitary matrix U ∈Cℓ×ℓcan be decomposed into smaller
+unitaries A1,A2,B1,B2 and real diagonal matrices C,S such that C2 +S2 = Iℓ/2.
+
+U =
+�A1
+B1
+
+��C
+−S
+S
+C
+
+��A2
+B2
+
+�
+
+For 2 × 2 matrices U, we may extract scalars out of the left and right factors to recover Theorem 1. For
+larger U, the left and right factors A j ⊕B j are quantum multiplexors controlled by the most significant
+qubit which determines whether A j or B j is to be applied to the lower order qubits. The central factor has
+
+6Source code for computing the CSD can be obtained from Matlab by typing “which gsvd” at a Matlab command prompt. On
+most laptops this numerical computation scales to ten-qubit quantum operators, i.e., 1024×1024 matrices.
+
+12
+

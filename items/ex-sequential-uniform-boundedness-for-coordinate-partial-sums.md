@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/ex-sequential-uniform-boundedness-for-coordinate-partial-sums.json
 id: ex-sequential-uniform-boundedness-for-coordinate-partial-sums
 kind: example
 title: "Coordinate partial sums on c_0"
 status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
-deps: [thm-sequential-uniform-boundedness-under-countable-choice, def-c-zero-and-ell-infinity, cor-cauchy-reals-lub-complete, def-banach-space, def-bounded-linear-operator, def-operator-norm, def-linear-combination-and-span, rem-real-and-complex-normed-space-convention, lem-complex-conjugation-and-modulus-laws, def-axiom-schema-of-replacement]
+deps: [thm-sequential-uniform-boundedness-under-countable-choice, def-c-zero-and-ell-infinity, cor-cauchy-reals-lub-complete, def-banach-space, def-bounded-linear-operator, def-operator-norm, def-linear-combination-and-span, def-complex-norm-and-complex-normed-space, lem-complex-conjugation-and-modulus-laws, def-axiom-schema-of-replacement, def-norm-and-normed-space, lem-complex-norm-realification-is-a-real-norm]
 justified_by: []
 forward_refs: []
 external_refs: []
@@ -16,12 +18,6 @@ provenance:
   proof: ai-altered
 generation:
   role: example
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   scraped: []
   references:
@@ -43,7 +39,7 @@ Then $X$ is Banach, each $P_N:X\to X$ is bounded linear, $P_Nx\to x$ for each $x
 
 [F2] Every nonempty bounded-above set of reals has a supremum ([[cor-cauchy-reals-lub-complete]]); applying this to negatives also supplies infima of nonempty bounded-below sets.
 
-[F3] Complex norms use the modulus; norm-metric completeness has the same meaning over either scalar field ([[rem-real-and-complex-normed-space-convention]]). Modulus is definite, multiplicative, and subadditive ([[lem-complex-conjugation-and-modulus-laws]]).
+[F3] Complex norms use the modulus; norm-metric completeness uses $d(x,y)=\|x-y\|$ over either scalar field ([[def-complex-norm-and-complex-normed-space]], [[def-norm-and-normed-space]], [[lem-complex-norm-realification-is-a-real-norm]]). Modulus is definite, multiplicative, and subadditive ([[lem-complex-conjugation-and-modulus-laws]]).
 
 [F4] Replacement forms the image of a set under a uniquely specified assignment ([[def-axiom-schema-of-replacement]]).
 

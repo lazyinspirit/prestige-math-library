@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-norm-preserving-extension-from-any-subspace.json
 id: thm-norm-preserving-extension-from-any-subspace
 kind: theorem
 title: "A bounded linear functional on an arbitrary subspace extends with the same norm, without assuming the subspace is closed"
@@ -7,9 +9,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-axiom-of-choice, thm-hahn-banach-norm-preserving-extension,
-       thm-complex-hahn-banach-norm-preserving-extension,
-       rem-real-and-complex-normed-space-convention]
+deps: [def-axiom-of-choice, thm-hahn-banach-norm-preserving-extension, thm-complex-hahn-banach-norm-preserving-extension, def-complex-norm-and-complex-normed-space, def-norm-and-normed-space]
 justified_by: []
 proof_strategy: direct
 sources:
@@ -19,16 +19,6 @@ sources:
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, Corollary 4.15 and Theorem 4.14"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
 ---
 
 ## Statement
@@ -51,7 +41,7 @@ No closedness hypothesis on $M$ is needed.
 
 [L2] In the complex case, a bounded linear functional on a subspace extends with the same norm ([[thm-complex-hahn-banach-norm-preserving-extension]]).
 
-[L3] The page's normed-space language is read over either scalar field by the convention of [[rem-real-and-complex-normed-space-convention]].
+[L3] The page's normed-space language is read over $\mathbb R$ by [[def-norm-and-normed-space]] and over $\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].
 
 ## Proof
 

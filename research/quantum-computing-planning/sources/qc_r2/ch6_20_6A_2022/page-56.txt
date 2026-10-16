@@ -1,0 +1,76 @@
+50
+Quantum Algorithms
+
+excited edges with boundary points at the positions of the Ising vortices. There is a poly-
+time classical algorithm that finds the minimal chain. In 3D, there is an Ising vortex
+on an edge if there are an odd number of J = −1 faces that meed at that edge. These
+vortices form closed loops, and each spin configuration has a domain wall of excited faces
+bounded by the vortex loops. To minimize the energy, then, we find the minimum area
+surface with a specified 1D boundary; this problem is NP-hard. Finding the minimum
+energy configuration is hard because there are many ways for the domain walls to be
+“pinned” — stuck at local minima in the energy, such that many spins need to flip at
+once to find a lower energy configuration. Local searching for the global energy minimum
+fails.
+In fact, there are also NP-hard spin glass problems in 2D, if we introduce local mag-
+netic field terms in H as well as antiferromagnetic terms. For example, on a square
+lattice consider
+
+H = −
+�
+
+⟨ij⟩
+JijZiZj −
+�
+
+i
+hiZi
+(6.238)
+
+where Jij ∈{1, 0, −1} and hi ∈{1, 0, −1}. The local magnetic field {hi} compounds
+the frustration: Each spin wants to align with the local field, but by doing so the edge
+connecting the spins might become excited.
+So we see that minimizing the energy of a geometrially 2-local classical Hamiltonian
+can be NP-hard because of frustration — there is no way to satisfy all the clauses and
+there are many local minima of the energy that are not global minima. In the quantum
+local Hamiltonian problem, we have H = �
+a Ha where the {Ha} might not be mutually
+commuting; hence we might expect the problem to be even harder— that the Ha’s
+cannot be simultaneously diagonalized compounds the frustration even further. Indeed
+the ground state could be highly entangled, with no succinct classical description. Let’s
+try to characterize the hardness of the quantum problem.
+
+6.10.3 The quantum k-local Hamiltonian problem
+
+Let H = �
+a Ha be an n-qubit Hamiltonian that is k-local — each Ha acts nontrivially
+on at most k qubits, where k is a constant, and ||Ha|| ≤h = constant. The 2k × 2k
+
+matrix Ha is specified to poly(n) bits of precision.
+We are promised that the ground state energy E0 , the lowest eigenvalue of H, satisfies
+either
+
+1. E0 ≤Elow, or
+2. E0 > Ehigh,
+
+where Ehigh −Elow >
+1
+poly(n).
+We are to output:
+
+f(H) =
+
+�
+1
+if E0 ≤Elow,
+
+0
+if E0 > Ehigh.
+(6.239)
+
+Note that in the formulation of the problem, there is a promise gap so that we can
+answer the YES/NO question by determining E0 to 1/poly(n) accuracy.
+We already know that this problem is NP-hard, even in the special case where H is
+classical (all Ha commute). Also recall there is a class analogous to NP for randomized
+computation (MA) and quantum computation (QMA): A language L is in QMA if there
+
+

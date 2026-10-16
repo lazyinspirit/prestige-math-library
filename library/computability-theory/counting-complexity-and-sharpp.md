@@ -6,4 +6,4 @@ items: [def-sharpp-and-gap-p-functions, def-number-sat, prop-number-sat-is-in-sh
 examples: [fs-sharpp-is-a-language-class, fs-every-many-one-reduction-is-parsimonious]
 ---
 
-This draft page develops the assigned conventions and keeps every resource, type, and quantifier explicit.
+This page develops the assigned conventions and keeps every resource, type, and quantifier explicit.

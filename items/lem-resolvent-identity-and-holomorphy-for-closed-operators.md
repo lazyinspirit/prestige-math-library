@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-resolvent-identity-and-holomorphy-for-closed-operators.json
 id: lem-resolvent-identity-and-holomorphy-for-closed-operators
 kind: lemma
 title: Resolvent identity and holomorphy for a closed operator
@@ -6,7 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1
-deps: [def-resolvent-of-a-closed-operator, lem-neumann-series-and-small-perturbations-of-bounded-inverses, lem-composition-operator-norm-inequality, def-bounded-linear-operator, def-operator-norm, def-banach-space, rem-real-and-complex-normed-space-convention, def-complex-differentiability-holomorphic-and-entire, thm-complex-exponential-is-entire-with-derivative-itself, def-complex-exponential, lem-canonical-banach-complexification-of-a-real-banach-space]
+deps: [def-resolvent-of-a-closed-operator, lem-neumann-series-and-small-perturbations-of-bounded-inverses, lem-composition-operator-norm-inequality, def-bounded-linear-operator, def-operator-norm, def-banach-space, def-complex-norm-and-complex-normed-space, def-complex-differentiability-holomorphic-and-entire, thm-complex-exponential-is-entire-with-derivative-itself, def-complex-exponential, lem-canonical-banach-complexification-of-a-real-banach-space]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -20,18 +22,12 @@ sources:
     - title: "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)"
       url: "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf"
       locator: 'Chapter II Section 4.a, the resolvent equation and Taylor expansion quoted in the proof of Theorem 4.6, printed pp. 101-104'
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 ---
 
 ## Statement
 
 Let $X$ be a Banach space over $\mathbb K\in\{\mathbb R,\mathbb C\}$
-([[def-banach-space]], [[rem-real-and-complex-normed-space-convention]]) and let
+([[def-banach-space]], [[def-complex-norm-and-complex-normed-space]]) and let
 $A:D(A)\subseteq X\to X$ be a closed linear operator with resolvent
 $R(\lambda,A)=(\lambda I-A)^{-1}\in\mathcal B(X)$ for $\lambda\in\rho(A)$
 ([[def-resolvent-of-a-closed-operator]]). Then:

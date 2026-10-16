@@ -1,0 +1,106 @@
+6.9 Classical simulation of slightly entangling quantum computations
+45
+
+the two neighboring sites where U acts, and γ labels states in the Schmidt decomposition
+across the cut just to the right.
+The SVD of an N ×N matrix can be computed in time O(N3) on a classical computer.
+In the case of Mij
+αγ, for which N = dD, this is time O(d3D3). In general, the middle index
+b would be summed over N(= dD) values. But if the Schmidt rank stays bounded by D,
+the matrix ∆has at most D nonzero eigenvalues. We may identify (P ′i)αβ = (V †
+L
+√
+
+∆)i
+αβ
+and (Q′j)βγ = (
+√
+
+∆VR)j
+βγ, where β is summed over D values, completing the update of
+the MPS. The point is that when U acts on neighboring sites labeled a, a + 1, we need
+not update the Schmidt states to the left of site a or to the right of site a + 1.
+Acting on a product state, any 2-qudit state acting across a given cut can produce a
+state with Schmidt number at most d2 across that cut.
+
+-figure-
+
+This can be achieved by a SWAP gate acting on two maximally entangled pairs, one
+on each side of the cut. Likewise, acting on a state with Schmidt number D, the two-
+qudit gate can increase the Schmidt number to at most d2D . This means that, starting
+with a product state, a circuit in which no more than G gates act across any particular
+cut creates a state with Schmidt number at most D = (d2)G across that cut. (We can
+simulate a 2-qudit gate U acting across the cut by swapping the qubits until they are at
+adjacent sites on either side of the cut, applying U, and then swapping back. Only U,
+not the swaps, increases the Schmidt number, and it increases it by at most the factor
+d2.) The quantum state admits an efficient MPS classical description provided that the
+Schmidt number D is bounded above by poly(n) across every cut, and furthermore this
+description can be efficiently updated each time a quantum gate is applied. It follows
+that a quantum computation acting on n qubits can be simulated efficiently by a classical
+computer if the initial state of the quantum computer is a product state, and the number
+of gates that act across each cut (for some ordering of the qubits) is O(log n), since in
+that case we have D ≤(d2)O(log n) = nO(log d2).
+We should also note that, for an MPS, local measurements of the qudits in the chain
+are easy to simulate. First let’s impose the proper normalization condition on the state
+|ψ⟩:
+
+|ψ⟩=
+�
+
+i1,..in
+tr
+�
+P i1
+1 P i2
+2 ..P in
+n
+�
+|i1i2..in⟩
+(6.228)
+
+=⇒⟨ψ|ψ⟩=
+�
+
+i1,..in
+
+���tr
+�
+P i1
+1 P i2
+2 ..P in
+n
+����
+2
+,
+
+which is conveniently written as
+
+�
+
+i1,..in
+tr
+��
+P i1
+1 ⊗P i1∗
+1
+��
+P i2
+2 ⊗P i2∗
+2
+�
+..
+�
+P in
+n ⊗P in∗
+n
+��
+= tr(E1E2, , En),
+(6.229)
+
+where Ek = �
+ik P ik
+k ⊗P ik∗
+k
+is a D2 × D2 matrix. The expectation value of a product
+
+

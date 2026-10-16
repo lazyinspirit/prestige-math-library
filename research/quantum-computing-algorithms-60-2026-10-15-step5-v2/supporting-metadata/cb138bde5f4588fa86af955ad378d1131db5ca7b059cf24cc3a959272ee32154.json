@@ -1,0 +1,1146 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qa-expected-query-cost",
+    "def-qa-finite-branch-output-law",
+    "thm-qa-promise-preserving-query-reduction-composition",
+    "ex-qa-promise-and-cost-models"
+  ],
+  "contracts": {
+    "def-qa-expected-query-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $M=0$, the only history is the empty history with weight one, so $\\Omega_0$ is a finite probability space by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the length-$M$ histories form a finite probability space. Each has finitely many successors, so their length-$(M+1)$ extensions form a finite set. For each parent history $h$, the total weight of its children is $w(h)\\sum_o p_h(o)=w(h)$ by [A1]. Summing over the finite parent set by [F4] shows that the extended weights again sum to one. Thus $\\Omega_{M+1}$ is a finite probability space.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 establish the base and successor cases; induction [F5] proves that every $\\Omega_M$ is a finite probability space.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F5",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For any length-$M$ history $h$, the sum of the weights of its length-$(M+1)$ extensions is $w(h)\\sum_o p_h(o)=w(h)$ by [A1]. Therefore projection to length-$M$ prefixes preserves every prefix's probability weight.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The count $C_M$ is a function on the finite set $\\Omega_M$, so it is a finite real random variable by [F2]. Every additional step either adds one query or is a nonquery or idle step; consequently, under the prefix projection, $C_M\\le C_{M+1}$ pathwise.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F3] and the prefix-marginal identity in step 3.2, the expectation of $C_M$ computed on the length-$(M+1)$ tree equals its length-$M$ expectation. The pointwise inequality in step 4.1 and nonnegative transition weights then give $\\mathbb E[C_M]\\le\\mathbb E[C_{M+1}]$. Each expectation is finite because $0\\le C_M\\le M$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "Each $C_M$ is bounded between $0$ and $M$, so its finite-space expectation is a finite nonnegative real by [F1] and [F3]. Step 3.1 supplies a normalized prefix space for every $M$, and [A2] therefore makes the displayed supremum well-defined in $[0,\\infty]$.",
+          "step": "5.2",
+          "inputs": [
+            "A2",
+            "F1",
+            "F3",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For round length bounded by $K\\ge1$, pad every round by idle steps so its end is a length-$KR$ prefix after $R$ rounds. These round-end indices are cofinal in $\\mathbb N$: for every $M$ choose $R$ with $KR\\ge M$. By step 5.1 the expected counts are nondecreasing, so $\\sup_R\\mathbb E[C_{KR}]=\\sup_M\\mathbb E[C_M]$. This proves the finite-round claim without applying a finite-space theorem to an unbounded total count.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F3",
+            "step 5.1",
+            "choose",
+            "algebra",
+            "discharge-induction: step 3.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the single empty history at M=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 covers a zero-query prefix and its monotone extension."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 6.1 cover one successor step and the K=1 round endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 cover deterministic idle extensions and zero-query branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition takes a supremum of nonnegative finite-prefix expectations, explicitly permitting infinite expected cost. It states no approximation bound on a real precision interval whose endpoint would need a separate limiting proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "Definition uses the monotone finite-prefix counts C_M and their supremum, including M=0 and infinite expected cost. It asserts no asymptotic running-time or real-interval endpoint theorem; the supremum is the definition of this resource coordinate.",
+            "item_sha256": "950a672d8bb1b7ff1f582a5721ee3ad8954c917adf3fde2f9de3a677523a9ec0",
+            "row_sha256": "e585b918aef3bddb951234606ab66271166a29b6000922a28ac455de68bb6804",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-early.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 6.1 use finite histories and choose a natural R for a given M; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an equivalence or iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an equivalence or iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "quantum-query-one-fair-bit-then-conditional-query",
+          "asserts": "5.1 By [F3] and the prefix-marginal identity in step 3.2, the expectation of $C_M$ computed on the length-$(M+1)$ tree equals its length-$M$ expectation. The pointwise inequality in step 4.1 and nonnegative transition weights then give $\\mathbb E[C_M]\\le\\mathbb E[C_{M+1}]$. Each expectation is finite because $0\\le C_M\\le M$. [F1, F3, step 3.2, step 4.1, algebra]",
+          "claim": "Finite prefix normalization, prefix marginal consistency, monotonicity, and a finite expected query count.",
+          "checked_in": "Steps 1.2, 2.1, 3.2, 4.1, and 5.1",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "The five finite probability, random-variable, expectation, finite-sum, and induction supplier statements were read. They are published local root items; the proof does not presume a probability measure on infinite histories.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently checked Verification 1.1–6.1 and all five cited local supplier statements. Prefix weights normalize by finite induction; projection sums preserve each parent weight, so finite expectations are monotone with 0 <= E[C_M] <= M. Supremum is explicitly in extended nonnegative reals and does not assert an infinite-path probability measure. M=0, zero-query and halted idle branches, unbounded supremum, and K=1 are covered. Fixed K>=1 makes padded round endpoints cofinal, proving equality of the two suprema. Only finite choices and a natural endpoint R are used; no AC. Reader and refuter report no finding. No mathematical defect found."
+      }
+    },
+    "thm-qa-promise-preserving-query-reduction-composition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-promise-preserving-reduction",
+          "source_section": "Definition",
+          "quote": "For promise problems $(Y,N)$ and $(Y',N')$ in [[def-promise-problem]], a polynomial-time many-one promise reduction is a total polynomial-time function $f$ satisfying $f(Y)\\subseteq Y'$ and $f(N)\\subseteq N'$. There is no condition on $f$ outside $Y\\cup N$.\n\nA polynomial-time oracle promise reduction is a polynomially clocked deterministic oracle machine $M$ which solves $(Y,N)$ for **every** total language $B$ satisfying $Y'\\subseteq B$ and $B\\cap N'=\\varnothing$. This uses binary, consistent membership completions: an off-promise word may have either bit, but repeated queries to that word receive the same bit. The clock is uniform over all completions.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-task-and-promise-domain",
+          "source_section": "Definition",
+          "quote": "A **decision task** is a root promise pair $(Y,N)$ of disjoint subsets of $\\{0,1\\}^*$, as in [[def-promise-problem]]: its promise domain is $Y\\cup N$, and the required output is yes on $Y$ and no on $N$. No correctness condition is imposed outside that promise.\n\nA **search task** is a pair $(D,R)$ where $D\\subseteq\\{0,1\\}^*$ is the promise domain and $R\\subseteq\\{0,1\\}^*\\times\\{0,1\\}^*$ is a witness relation. On each $z\\in D$, a correct solver must output a binary string $w$ with $(z,w)\\in R$. It has no output obligation for $z\\notin D$. Unlike a decision task, a search task need not divide its promise into yes and no sets.\n\nFor either task, an input encoding and input-length convention are specified separately; correctness is required only for encoded inputs in the declared promise.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-quantum-query-algorithm",
+          "source_section": "Definition",
+          "quote": "For each encoded instance length $n$ and explicitly declared public data $p$, a **quantum query algorithm** is a specified finite circuit protocol on its query and work registers, fixed independently of the hidden instance $z$ at fixed $(n,p)$. The hidden encoding labels the oracle instance; it is not supplied as a readable input register. A register is a finite-dimensional complex inner-product space with its ordered computational basis; an $r$-qubit register uses the lexicographic bit-string basis, with the first wire most significant ([[def-qc-register-and-computational-basis]]). The finite promise-computation model [[def-qc-promise-computation-model]] supplies the public-classical-input, zero-initialized ancillary-register, ordered-output-tuple, and final-predicate conventions. Its classical input and terminal predicate receive only the declared public data, not the hidden encoding. Circuit syntax fixes the ordered wires and finite gate list [[def-qc-circuit-syntax-and-register-order]], and its denotation fixes the chronological gate composition [[def-qc-circuit-denotational-semantics]]. The execution tree starts in the standard public-input basis state with all other registers zero. Any explicit preparation interface is executed as a specified finite prefix of unitary or instrument nodes of this tree, with its preparation calls and other resource costs charged under the declared access contract. Intermediate measurements and classical feed-forward are represented by finite trees of instrument outcomes and branch-specific unitary operations. In the ordinary oracle-only model, all preparation operations, nonoracle gates and instruments, branch-control rules, and terminal output rules are independent of the hidden instance at fixed $(n,p)$; later operations may depend on observed outcomes. For each instantiated oracle, [[def-qa-finite-branch-output-law]] gives the normalized output law of this tree with its public classical input. The output is interpreted according to the decision bit or search relation in [[def-qa-task-and-promise-domain]].\n\nIn the ordinary oracle-only model, hidden-instance dependence enters only through the designated oracle calls. Explicit public parameters and arithmetic inputs remain available when the task declares them. Any additional instance-dependent state preparation or data-access operation is a separately declared and charged resource. Oracle-only lower bounds compare instances with the same public data and without such additional input access; the hidden encoding itself supplies none.\n\nA **$T$-query algorithm** has at most $T$ designated calls to the oracle $U_{f_z}$ of [[def-qa-promise-query-instance]] and [[def-qc-coherent-function-oracle]] on every execution branch for every promised $z\\in P_n$. Calls count once each; gates in the circuit outside those designated calls are not query calls. Uniformity is asserted only when the family satisfies [[def-qc-uniform-circuit-family]]. A controlled call has the block action in [[def-qc-controlled-unitary-access]] and is available only when the access contract explicitly supplies and charges it. An inverse call to this XOR oracle has the same action as an ordinary call by [[thm-qc-reversible-xor-oracle-unitary]]; inverses of other unitaries use the separate availability and charge convention in [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-classical-query-algorithm",
+          "source_section": "Definition",
+          "quote": "A **classical query algorithm** is a finite decision procedure for a fixed encoded instance length $n$ and explicitly declared public data $p$, whose query actions are to the total function $f_z$ of [[def-qa-promise-query-instance]]. The procedure is fixed independently of the hidden instance $z$ at fixed $(n,p)$. Its encoding in [[def-qa-input-encoding-and-size]] labels the instance and determines its size; it does not provide a readable copy of the hidden encoding. Each query chooses an address from $n,p$, earlier replies, and any random bits used so far; it receives the entire $b(n)$-bit reply $f_z(x)$ as one query answer. The address choices may be adaptive. Its terminal output is determined by the same public data, replies, and random tape.\n\nIn the ordinary oracle-only model, all dependence on the hidden instance is through these replies. Public parameters such as register widths, a supplied marked count, or an explicit arithmetic input may be used only when the task declares them. A lower bound in the oracle-only model fixes the declared public data across the hidden instances it compares. Additional input-access or preparation capabilities must be explicitly declared with their charges; they are extra resources, not supplied by the hidden instance encoding.\n\nFor a randomized algorithm, each branch is determined by the public data, oracle replies, and its finite random tape; the fair-bit tape convention for a bounded-time probabilistic machine is supplied by [[def-probabilistic-polynomial-time-machine-interface]]. The query model itself imposes no polynomial bit-time bound. A query bound is a worst-case bound over promised inputs and every random branch; classical computation between queries is charged separately only when a bit-cost model is specified.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-exact-promise-correctness",
+          "source_section": "Definition",
+          "quote": "For a decision task $(Y,N)$ from [[def-qa-task-and-promise-domain]], a solver is **exact** if its normalized output law assigns probability one to yes on every encoded $z\\in Y$ and probability one to no on every encoded $z\\in N$. For a search task $(D,R)$ from the same definition, it is exact if, for every encoded $z\\in D$, its normalized output law assigns probability one to outputs $w$ satisfying $(z,w)\\in R$. These are per-instance requirements; no correctness is asserted outside the promise.\n\nThe solver is one of the quantum algorithms in [[def-qa-quantum-query-algorithm]] or classical algorithms in [[def-qa-classical-query-algorithm]]. For a quantum solver, its output weights are the normalized finite-branch law of [[def-qa-finite-branch-output-law]]. For a randomized classical solver, they are the probabilities induced by its declared finite random-tape law. Exactness does not follow merely from a circuit or algorithm description; it is a condition on its output law.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-bounded-error-promise-correctness",
+          "source_section": "Definition",
+          "quote": "A quantum or classical solver in [[def-qa-quantum-query-algorithm]] and [[def-qa-classical-query-algorithm]] for a decision task $(Y,N)$ of [[def-qa-task-and-promise-domain]] has **bounded error** (with the QA convention) if its normalized output law assigns probability at least $2/3$ to the correct answer for every encoded promised instance. A search solver has bounded error if, for every encoded $z$ in its domain $D$, its output law assigns probability at least $2/3$ to outputs $w$ satisfying $(z,w)\\in R$. The guarantee is worst-case per instance, not averaged over an input distribution. The constant $2/3$ is a convention; amplification and its query/access cost are separate results.\n\nFor quantum algorithms the success event is evaluated from the normalized finite-branch output law of [[def-qa-finite-branch-output-law]]. Its normalization follows from the finite instrument and unitary branches in that definition; the success threshold remains a per-instance condition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-quantum-query-complexity",
+          "source_section": "Definition",
+          "quote": "For a $T$-query quantum algorithm [[def-qa-quantum-query-algorithm]] at input length $n$, its **worst-case quantum query cost** is the maximum number of designated oracle calls over all promised instances in $P_n$ and all measurement branches. When $P_n$ is empty, define this cost to be $0$. For nonempty $P_n$, a finite circuit and finite branch sets ensure that this maximum exists; a solver whose branch counts are not uniformly bounded has infinite worst-case query cost. An expected-query bound is the separate quantity defined by [[def-qa-expected-query-cost]].\n\nIn the pure query model, ordinary gates outside the oracle calls are uncharged by the query coordinate. If a task also reports gate, preparation, measurement, or classical costs, those are separate coordinates. Bounded-error query cost uses the same worst-case maximum; its success threshold is the per-instance condition in [[def-qa-bounded-error-promise-correctness]], not an average over oracle inputs.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qa-classical-query-complexity",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]] at input length $n$, its **worst-case classical query cost** is the maximum number of oracle calls over every promised instance and every random tape. When there are no promised instances of length $n$, define this cost to be $0$. If those counts are not uniformly bounded, the cost is infinite. One query returns the full value $f_z(x)$, regardless of its bit width. Expected-query bounds are reported separately using [[def-qa-expected-query-cost]].\n\nFor a bounded-error classical solver, the query cost is still worst-case over inputs and random tapes; the success requirement is the per-instance probability in [[def-qa-bounded-error-promise-correctness]]. Distributional input averages and expected query counts are different quantities.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qa-nonoracle-gate-cost",
+          "source_section": "Definition",
+          "quote": "Given the circuit-family model and cost record in [[def-qc-circuit-cost-model]] and elementary gate alphabet in [[def-qc-elementary-circuit-resources]], a query circuit [[def-qa-quantum-query-algorithm]] has **nonoracle gate cost** equal to the maximum number of elementary gates outside designated black-box query calls on any branch. It counts preparation gates, ancilla operations, inverse gates, and every other stated nonoracle gate, including identity operations if the declared syntax counts them. It does not count a black-box query as an elementary gate; if the oracle is implemented from a supplied circuit, that implementation's gates are charged under the declared resource model.\n\nNon-input registers start in $|0\\rangle$. Any nonzero initial state or data-access resource must name its preparation/access model and charge that cost. Measurements, classical feed-forward, circuit-description length, and classical bit operations are reported in the selected QC resource convention rather than silently assigned zero cost. Query count and gate count are separate coordinates.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qa-classical-bit-cost",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]], bit-operation cost is the number of transitions of a declared multitape Turing machine over a fixed finite alphabet; the $k$-tape transition reads and writes one symbol on each of its $k\\ge1$ tapes and moves each head once per transition ([[def-multitape-and-nondeterministic-machines]]). It includes random-bit generation, any encoding work actually performed by that machine on declared public data or received replies, address formation, reading and writing every bit of an oracle reply, comparison/postprocessing, and writing the classical output. The abstract instance encoding in [[def-qa-input-encoding-and-size]] fixes the size parameter; it supplies neither a readable hidden input nor an encoding procedure to execute. The fair-bit machine convention is supplied by [[def-probabilistic-polynomial-time-machine-interface]]. The oracle invocation itself is one separately counted query action; its returned bits are not free to process.\n\nFor a query with an $a(n)$-bit address and a $b(n)$-bit reply, the machine's charged work includes forming the address and processing the $b(n)$ reply symbols. A claimed time bound also specifies whether it is worst-case over promised inputs and random tapes, as in [[def-probabilistic-polynomial-time-machine-interface]]. Query, nonoracle quantum gate, measurement, and classical bit costs remain distinct.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qa-input-encoding-and-size",
+          "source_section": "Definition",
+          "quote": "An input encoding is an injective map $\\operatorname{enc}$ from the declared instance set into $\\{0,1\\}^*$. The input size of an instance $z$ is $n:=|\\operatorname{enc}(z)|$. If task instances are already binary strings, the default encoding is the identity. The encoding is part of the task specification, and any length or padding convention must be stated.\n\nFor a task family, let $P_n$ denote the encoded instances of length $n$ that lie in its promise domain, with the decision sides or search relation inherited from [[def-qa-task-and-promise-domain]]. A statement indexed by input length $n$ concerns only $P_n$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-qc-reversible-xor-oracle-unitary",
+          "source_section": "Statement",
+          "quote": "For every total Boolean function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$, including noninjective functions, the coherent XOR oracle $O_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle$ is unitary and satisfies $O_f^2=I$. Hence $O_f^{-1}=O_f$.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the decision case, $z\\in Y_S$ implies $r(z)\\in Y_T$, and $z\\in N_S$ implies $r(z)\\in N_T$, by [F1]. Thus every source-promised input is transformed to a target-promised input.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the search case, $z\\in D_S$ implies $r(z)\\in D_T$ by the Statement's instance-map hypothesis. Therefore the target solver's correctness guarantee applies to $r(z)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "On a source-promised input $z$, execute the initialization protocol [A3]. Its target public parameters and initial registers are exactly those for $A$ on $r(z)$, so the empty-target-query prefixes agree. No freely readable hidden encoding is used. For an explicitly public source input, the decision reduction terminates by [F1], or the search instance computation terminates by [A2], and its input preparation is charged separately. In the oracle-only case the exact initialization is supplied by [A3] under the actual source interface.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "A2",
+            "A3",
+            "F3",
+            "F4",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Assume the first $j$ target-query actions have produced the same classical history and, in the quantum case, the same state on all query and workspace registers. The between-query operations and their measurement branches are then identical. At the next call, direct access supplies the same action; exact simulation [A1] supplies the same full action. If it is controlled, [F12] fixes its block action and [A1] supplies that variant. If it is an inverse XOR query, [F13] identifies it with the ordinary query already supplied by [A1]. Hence the executions agree through query $j+1$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F12",
+            "F13",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.3–1.4 prove agreement after every one of the finite, at most $T$, query calls; any final nonquery operations and output predicate are then the same. Therefore the output laws agree.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "step 1.4",
+            "discharge-induction: step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By steps 1.1–1.2, the target solver is applied only to promised target instances; by step 2.1 the output law is unchanged. Hence its exact success probability one or bounded-error success probability at least $2/3$ transfers to each source input. In the search case, the exact output-lifting protocol [A3] maps every successful target witness to the source witness required by [A2]; in the decision case, the output bit remains the correct side.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "A2",
+            "A3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "On any branch with $k\\le T$ target calls, direct access uses $k\\le T$ source calls for those calls, and exact simulation uses at most $\\sum_{j=1}^{k}s=sk\\le sT$. In the zero-extra-query case [A3], these are all source oracle calls. In the additive variant, initialization and lifting add at most $u+v$, giving $u+T+v$ or $u+sT+v$. Taking the worst case over promised inputs and branches yields each bound, including $T=0$ or $s=0$; for an empty source promise the cost is zero under [F7]–[F8].",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A3",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 3.2 counts every source oracle invocation, including any used to obtain initialization data or lift a witness. Classical work on legitimately available binary data [F11], preparation and state transformations, simulation gates, reply processing and output writing retain the separate coordinates in [F9]–[F10]. Paying a bit or gate charge does not grant a read of a hidden encoding; access must satisfy [A3]. Thus neither a reduction map alone nor separate nonquery cost accounting certifies an uncharged target oracle or hidden-input computation.",
+          "step": "4.1",
+          "inputs": [
+            "A3",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.3",
+            "step 3.2",
+            "discharge-induction: step 2.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 show that only promised source instances create target obligations; empty promises are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 covers k=0 with an empty query sum and the stated zero-call bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.2 gives T and sT when a branch has one target call."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 3.2 cover off-promise inputs, direct access, and s=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no endpoint, limit, or asymptotic parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.4 follows a finite sequence of supplied query actions; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as an equivalence or iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as an equivalence or iff."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "supplier_observations": "All cited QA task, solver, correctness, cost, and complexity definitions were authored in this pair; root promise-reduction and encoding interfaces were read. Controlled access and XOR inverse semantics were checked against actual QC suppliers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently read full Statement, assumptions and Proof 1.1–4.1 and all 13 actual supplier statements. Decision total polynomial-time reduction preserves both yes and no promises; search r maps domains and computable total L lifts every valid target witness, without an efficiency assertion. A3 supplies exact executable initialization and lifting under source public data/history, so computability alone never grants hidden-encoding reads. A1 requires exact full-register action including workspace and controlled variant, with unrelated registers untouched. Induction preserves target states/output laws; decision success transfers and search success is at least the target guarantee (failed witnesses may also lift successfully). Branchwise k<=T and at most s replacements give s*k<=s*T; additive u,v charges cover initialization/lifting. Checked T=0, s=0, empty source promise, noninjective r, off-promise inputs, inverse XOR calls and per-instance 2/3 threshold. Bit/gate resources remain separate and no arbitrary choice is used. No reader/refuter finding or mathematical defect."
+      }
+    },
+    "ex-qa-promise-and-cost-models": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-task-and-promise-domain",
+          "source_section": "Definition",
+          "quote": "A **decision task** is a root promise pair $(Y,N)$ of disjoint subsets of $\\{0,1\\}^*$, as in [[def-promise-problem]]: its promise domain is $Y\\cup N$, and the required output is yes on $Y$ and no on $N$. No correctness condition is imposed outside that promise.\n\nA **search task** is a pair $(D,R)$ where $D\\subseteq\\{0,1\\}^*$ is the promise domain and $R\\subseteq\\{0,1\\}^*\\times\\{0,1\\}^*$ is a witness relation. On each $z\\in D$, a correct solver must output a binary string $w$ with $(z,w)\\in R$. It has no output obligation for $z\\notin D$. Unlike a decision task, a search task need not divide its promise into yes and no sets.\n\nFor either task, an input encoding and input-length convention are specified separately; correctness is required only for encoded inputs in the declared promise.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-promise-query-instance",
+          "source_section": "Definition",
+          "quote": "For each encoded promised instance $z\\in P_n$ of length $n$ (with $P_n$ as in [[def-qa-input-encoding-and-size]] and its task promise as in [[def-qa-task-and-promise-domain]]), a **query instance** specifies nonnegative integer widths $a(n),b(n)$ and a total function\n$$\nf_z:\\{0,1\\}^{a(n)}\\to\\{0,1\\}^{b(n)}.\n$$\nThe promise restricts which $z$ are legal; it does not restrict the address domain of $f_z$. Bit strings label the big-endian computational basis: for a word $x=(x_0,\\ldots,x_{r-1})$, its slot is $\\sum_{k<r}x_k2^{r-1-k}$, with the empty word in slot $0$ ([[def-qc-ordered-bitstring-encoding]]). Ket and bra notation uses the root convention $\\langle x|y\\rangle_D=\\langle y,x\\rangle_{\\rm root}$ ([[def-qc-dirac-notation-conversion]]). Its standard quantum query is the coherent XOR oracle from [[def-qc-coherent-function-oracle]], acting on those ordered register bases:\n$$\nU_{f_z}|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f_z(x)\\rangle,\n$$\nwhere $\\oplus$ is coordinatewise addition modulo two, $x$ is an $a(n)$-bit address, and $y$ is a $b(n)$-bit target. One invocation is one query, regardless of the output width. A supplied matrix or a classical description of $f_z$ does not itself supply a circuit decomposition, state preparation, or controlled access at zero cost.\n\nThe access contract must specify whether controlled calls are supplied: a controlled call is the explicitly granted block operation $\\operatorname{diag}(I,U)$ ([[def-qc-controlled-unitary-access]]) and does not follow from an ordinary black-box call. For this standard XOR oracle, $U_{f_z}^{\\dagger}=U_{f_z}$ by [[thm-qc-reversible-xor-oracle-unitary]], so an inverse query is the same operation as one ordinary query. Inverse access to any other unitary operation has its own explicitly declared availability and charge ([[def-qc-inverse-unitary-access]]). An explicit matrix or classical description supplies no free circuit implementation, preparation, or data loading; those costs are recorded under the declared circuit and gate resource coordinates ([[def-qc-circuit-cost-model]], [[def-qc-elementary-circuit-resources]]).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-quantum-query-algorithm",
+          "source_section": "Definition",
+          "quote": "For each encoded instance length $n$ and explicitly declared public data $p$, a **quantum query algorithm** is a specified finite circuit protocol on its query and work registers, fixed independently of the hidden instance $z$ at fixed $(n,p)$. The hidden encoding labels the oracle instance; it is not supplied as a readable input register. A register is a finite-dimensional complex inner-product space with its ordered computational basis; an $r$-qubit register uses the lexicographic bit-string basis, with the first wire most significant ([[def-qc-register-and-computational-basis]]). The finite promise-computation model [[def-qc-promise-computation-model]] supplies the public-classical-input, zero-initialized ancillary-register, ordered-output-tuple, and final-predicate conventions. Its classical input and terminal predicate receive only the declared public data, not the hidden encoding. Circuit syntax fixes the ordered wires and finite gate list [[def-qc-circuit-syntax-and-register-order]], and its denotation fixes the chronological gate composition [[def-qc-circuit-denotational-semantics]]. The execution tree starts in the standard public-input basis state with all other registers zero. Any explicit preparation interface is executed as a specified finite prefix of unitary or instrument nodes of this tree, with its preparation calls and other resource costs charged under the declared access contract. Intermediate measurements and classical feed-forward are represented by finite trees of instrument outcomes and branch-specific unitary operations. In the ordinary oracle-only model, all preparation operations, nonoracle gates and instruments, branch-control rules, and terminal output rules are independent of the hidden instance at fixed $(n,p)$; later operations may depend on observed outcomes. For each instantiated oracle, [[def-qa-finite-branch-output-law]] gives the normalized output law of this tree with its public classical input. The output is interpreted according to the decision bit or search relation in [[def-qa-task-and-promise-domain]].\n\nIn the ordinary oracle-only model, hidden-instance dependence enters only through the designated oracle calls. Explicit public parameters and arithmetic inputs remain available when the task declares them. Any additional instance-dependent state preparation or data-access operation is a separately declared and charged resource. Oracle-only lower bounds compare instances with the same public data and without such additional input access; the hidden encoding itself supplies none.\n\nA **$T$-query algorithm** has at most $T$ designated calls to the oracle $U_{f_z}$ of [[def-qa-promise-query-instance]] and [[def-qc-coherent-function-oracle]] on every execution branch for every promised $z\\in P_n$. Calls count once each; gates in the circuit outside those designated calls are not query calls. Uniformity is asserted only when the family satisfies [[def-qc-uniform-circuit-family]]. A controlled call has the block action in [[def-qc-controlled-unitary-access]] and is available only when the access contract explicitly supplies and charges it. An inverse call to this XOR oracle has the same action as an ordinary call by [[thm-qc-reversible-xor-oracle-unitary]]; inverses of other unitaries use the separate availability and charge convention in [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-exact-promise-correctness",
+          "source_section": "Definition",
+          "quote": "For a decision task $(Y,N)$ from [[def-qa-task-and-promise-domain]], a solver is **exact** if its normalized output law assigns probability one to yes on every encoded $z\\in Y$ and probability one to no on every encoded $z\\in N$. For a search task $(D,R)$ from the same definition, it is exact if, for every encoded $z\\in D$, its normalized output law assigns probability one to outputs $w$ satisfying $(z,w)\\in R$. These are per-instance requirements; no correctness is asserted outside the promise.\n\nThe solver is one of the quantum algorithms in [[def-qa-quantum-query-algorithm]] or classical algorithms in [[def-qa-classical-query-algorithm]]. For a quantum solver, its output weights are the normalized finite-branch law of [[def-qa-finite-branch-output-law]]. For a randomized classical solver, they are the probabilities induced by its declared finite random-tape law. Exactness does not follow merely from a circuit or algorithm description; it is a condition on its output law.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-quantum-query-complexity",
+          "source_section": "Definition",
+          "quote": "For a $T$-query quantum algorithm [[def-qa-quantum-query-algorithm]] at input length $n$, its **worst-case quantum query cost** is the maximum number of designated oracle calls over all promised instances in $P_n$ and all measurement branches. When $P_n$ is empty, define this cost to be $0$. For nonempty $P_n$, a finite circuit and finite branch sets ensure that this maximum exists; a solver whose branch counts are not uniformly bounded has infinite worst-case query cost. An expected-query bound is the separate quantity defined by [[def-qa-expected-query-cost]].\n\nIn the pure query model, ordinary gates outside the oracle calls are uncharged by the query coordinate. If a task also reports gate, preparation, measurement, or classical costs, those are separate coordinates. Bounded-error query cost uses the same worst-case maximum; its success threshold is the per-instance condition in [[def-qa-bounded-error-promise-correctness]], not an average over oracle inputs.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-nonoracle-gate-cost",
+          "source_section": "Definition",
+          "quote": "Given the circuit-family model and cost record in [[def-qc-circuit-cost-model]] and elementary gate alphabet in [[def-qc-elementary-circuit-resources]], a query circuit [[def-qa-quantum-query-algorithm]] has **nonoracle gate cost** equal to the maximum number of elementary gates outside designated black-box query calls on any branch. It counts preparation gates, ancilla operations, inverse gates, and every other stated nonoracle gate, including identity operations if the declared syntax counts them. It does not count a black-box query as an elementary gate; if the oracle is implemented from a supplied circuit, that implementation's gates are charged under the declared resource model.\n\nNon-input registers start in $|0\\rangle$. Any nonzero initial state or data-access resource must name its preparation/access model and charge that cost. Measurements, classical feed-forward, circuit-description length, and classical bit operations are reported in the selected QC resource convention rather than silently assigned zero cost. Query count and gate count are separate coordinates.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-classical-bit-cost",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]], bit-operation cost is the number of transitions of a declared multitape Turing machine over a fixed finite alphabet; the $k$-tape transition reads and writes one symbol on each of its $k\\ge1$ tapes and moves each head once per transition ([[def-multitape-and-nondeterministic-machines]]). It includes random-bit generation, any encoding work actually performed by that machine on declared public data or received replies, address formation, reading and writing every bit of an oracle reply, comparison/postprocessing, and writing the classical output. The abstract instance encoding in [[def-qa-input-encoding-and-size]] fixes the size parameter; it supplies neither a readable hidden input nor an encoding procedure to execute. The fair-bit machine convention is supplied by [[def-probabilistic-polynomial-time-machine-interface]]. The oracle invocation itself is one separately counted query action; its returned bits are not free to process.\n\nFor a query with an $a(n)$-bit address and a $b(n)$-bit reply, the machine's charged work includes forming the address and processing the $b(n)$ reply symbols. A claimed time bound also specifies whether it is worst-case over promised inputs and random tapes, as in [[def-probabilistic-polynomial-time-machine-interface]]. Query, nonoracle quantum gate, measurement, and classical bit costs remain distinct.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-promise-preserving-reduction",
+          "source_section": "Definition",
+          "quote": "For promise problems $(Y,N)$ and $(Y',N')$ in [[def-promise-problem]], a polynomial-time many-one promise reduction is a total polynomial-time function $f$ satisfying $f(Y)\\subseteq Y'$ and $f(N)\\subseteq N'$. There is no condition on $f$ outside $Y\\cup N$.\n\nA polynomial-time oracle promise reduction is a polynomially clocked deterministic oracle machine $M$ which solves $(Y,N)$ for **every** total language $B$ satisfying $Y'\\subseteq B$ and $B\\cap N'=\\varnothing$. This uses binary, consistent membership completions: an off-promise word may have either bit, but repeated queries to that word receive the same bit. The clock is uniform over all completions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-clifford-t-gate-library",
+          "source_section": "Definition",
+          "quote": "Let $\\omega=e^{i\\pi/4}$. The one-qubit generators and exact matrices in the\nordered computational basis are\n\n$$H=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad T=\\begin{pmatrix}1&0\\\\0&\\omega\\end{pmatrix},\\qquad T^\\dagger=\\begin{pmatrix}1&0\\\\0&\\omega^{-1}\\end{pmatrix}.$$\n\nOn basis vectors, $H|q\\rangle=(|0\\rangle+(-1)^q|1\\rangle)/\\sqrt2$ and\n$T^k|q\\rangle=\\omega^{kq}|q\\rangle$ for $q\\in\\{0,1\\}$.\n\nWrite $S=T^2=\\operatorname{diag}(1,i)$ and\n$Z=T^4=\\operatorname{diag}(1,-1)$. Pauli $X,Y,Z$ are as in\n[[def-qc-pauli-matrices]]. On two ordered wires,\n$\\operatorname{CNOT}|a,b\\rangle=|a,b\\mathbin\\oplus a\\rangle$; the first wire\nis control and the second target. A circuit is a finite chronological word of\nthese gates at stated wire positions; its matrix is the product with later\ngates on the left. No extra wire or controlled-$T$ operation is implicit.\n\nThe scalar phase $\\omega I$ is an allowed Clifford phase in the one-qubit\nmatrix-word convention. Its scalar factor is retained in exact matrix products;\nthe convention that an overall scalar does not affect a resource count is\nstated separately from matrix equality. It does not grant a controlled-$T$\noperation or allow a scalar on a target wire to be discarded under control.\n\nThe exact one-qubit H/T algebra is generated by $H,T,T^\\dagger$; $S$ and $Z$\nare aliases for the displayed powers. The distinction between exact matrix\nequality and [[def-qc-global-phase-equivalence|global-phase equivalence]] is\nmaintained. Resource costs are supplied by\n[[def-qc-elementary-circuit-resources]] and remain separate from this matrix\ndefinition.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qa-finite-branch-output-law",
+          "source_section": "Definition",
+          "quote": "Fix an encoded input $x$ and a finite rooted execution tree on the same declared finite register $H_n$ at every node. Its root state is the density operator of the standard input basis state with zero-initialized work registers. Every nonterminal node is either a unitary endomorphism $U:H_n\\to H_n$ or a finite instrument $(\\mathcal I_a)_{a\\in\\Omega_h}$ whose branch maps are from $\\mathcal L(H_n)$ to $\\mathcal L(H_n)$. The observed outcome label $a$ is retained for classical feed-forward, while a hidden Kraus label is not a branch. The tree has finite depth and finite outcome sets.\n\nAssign the root weight $w(\\varnothing)=1$. At a unitary edge set $\\rho_{h'}=U\\rho_hU^\\dagger$ and $w(h')=w(h)$. At an instrument node set $q_{h,a}=\\operatorname{tr}(\\mathcal I_a(\\rho_h))$ and $w(ha)=w(h)q_{h,a}$. If $q_{h,a}>0$, set $\\rho_{ha}=\\mathcal I_a(\\rho_h)/q_{h,a}$; if $q_{h,a}=0$, that child and its descendants have weight zero and contribute no state or output weight. The instrument and conditional-state conventions are those of [[def-qc-instrument-and-conditional-state]].\n\nAt each positive-weight leaf $\\ell$, the ordered output wires have a fixed length $m$ and are disjoint from the remaining wires $W_\\ell$. For $z\\in\\{0,1\\}^m$ and a bit string $v$ on $W_\\ell$, let $e_{\\ell,z,v}$ be the full-register computational-basis vector with those bits in their declared wire positions. Define the leaf output weight and total output law by\n$$q_\\ell(z):=\\sum_{v\\in\\{0,1\\}^{|W_\\ell|}}\\langle \\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle_{\\rm root},\\qquad P(z\\mid x):=\\sum_{\\ell\\text{ positive-weight leaf}}w(\\ell)q_\\ell(z).$$\nThe classical output predicate $A_n(x,z)$ selects the acceptance event by summing $P(z\\mid x)$ over the finite set of accepted strings. This definition extends the terminal-output convention of [[def-qc-promise-computation-model]] to finite instrument branches; the verification proves that $P(\\cdot\\mid x)$ is a normalized probability law and every acceptance probability lies in $[0,1]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the root pairing linear in its first argument, and let $u\\in H$ satisfy $\\|u\\|=1$. Define $P_u:=|u\\rangle\\langle u|$ by the root-linear-first Dirac convention. Then $P_u$ is self-adjoint and idempotent, has one-dimensional range, is non-negative, and has trace one. In particular, $P_u$ is a density operator.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A multitape machine computes $r(x)=xx$ by copying $x$ twice, using $O(|x|+1)$ transitions under [F7], so $r$ is total and polynomial time. Moreover, $r(0)=00\\in Y_T$ and $r(1)=11\\in N_T$, giving $r(Y_S)\\subseteq Y_T$ and $r(N_S)\\subseteq N_T$. Thus $r$ is a promise-preserving reduction by [F8]. No image condition is needed for source strings outside $\\{0,1\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the search reduction, the only promised source input is $z=0$, and $r(0)=00\\in D_T$. Every valid target witness is $v\\in\\{0,1\\}$, so $L(0,v)=0v$ is either $00$ or $01$ and satisfies $R_S(0,L(0,v))$. Both maps are total as defined on all binary strings, even though witness validity is required only on the promise.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For every four-bit $z=u\\mathbin{\\|}v$, the table assigns one two-bit value to address 0 and one to address 1, so $f_z$ is total on its two-address domain. Starting at target $00$, the oracle call at address 0 returns $00\\oplus f_z(0)=u$; it is one invocation and therefore one query by [F2]–[F3].",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The full output state after the oracle call is the basis vector $\\psi=|0\\rangle|u\\rangle$, which is a unit vector by orthonormality [F12]. Its rank-one projector $\\rho=|\\psi\\rangle\\langle\\psi|$ is a density operator by [F14]. For output word $y$ and remaining address bit $a$, the product basis is orthonormal by [F12], so $\\langle e_{y,a},\\psi\\rangle=1$ exactly when $(y,a)=(u,0)$ and is zero otherwise. The projector formula [F13] gives $\\rho e_{y,a}=\\langle e_{y,a},\\psi\\rangle\\psi$; root first-linearity and conjugate symmetry therefore give $\\langle\\rho e_{y,a},e_{y,a}\\rangle=\\langle e_{y,a},\\psi\\rangle\\langle\\psi,e_{y,a}\\rangle=|\\langle e_{y,a},\\psi\\rangle|^2$. Summing over the unmeasured address bit as in [F10] gives output weight one at $u$ and zero elsewhere. If $u=00$ the rule answers yes; if $u=11$ it answers no, so the solver is exact on the promise by [F4]. For off-promise $u\\in\\{01,10\\}$ the same rule outputs no, but the decision task imposes no condition there; the two total completions assigning either answer on these inputs agree on $Y\\cup N$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F10",
+            "F12",
+            "F13",
+            "F14",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The matrix in [F9] satisfies $H^2=\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ by finite row-by-column multiplication [F11]. Therefore the two extra gates in the second circuit return the first target bit to its initial value before the same oracle call. The target entering $U_{f_z}$ is again $00$, so both query circuits have the same output law and one query; their nonoracle gate counts are 0 and 2 by [F5]–[F6].",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F9",
+            "F11",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives the reduction's linear transition bound in the table. In either query circuit, the fixed two-bit reply and one-bit output rule take $O(1)$ transitions. These transition counts are separate from the one oracle query and from the quantum gate counts by [F7].",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 2.2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 make correctness obligations only on the displayed finite promises."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example table gives the reduction zero oracle queries; step 1.1 verifies its map."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1 verify the single query and its exact output law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 cover off-promise completion and the identity H^2=I."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no endpoint, limit, or asymptotic parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.3 construct only finite total maps and a finite two-address oracle; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an equivalence or iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an equivalence or iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "quantum-query-two-bit-reply-one-query-and-hadamard-cancellation",
+          "asserts": "2.2 The matrix in [F9] satisfies $H^2=\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ by finite row-by-column multiplication [F11]. Therefore the two extra gates in the second circuit return the first target bit to its initial value before the same oracle call. The target entering $U_{f_z}$ is again $00$, so both query circuits have the same output law and one query; their nonoracle gate counts are 0 and 2 by [F5]–[F6]. [F5, F6, F9, F11, step 1.3, algebra]",
+          "claim": "The finite oracle table is total and the query, gate, and output counts match the displayed table.",
+          "checked_in": "Steps 1.3, 2.1, and 2.2",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "All reductions, total oracle values, output weights, H^2, and resource rows are checked directly in the local finite example; exact supplier excerpts are regenerated from its labeled facts.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Read Example/table, all six Verification steps and all 15 actual cited supplier interfaces. r(x)=xx is total and linearly computable; r(0)=00 and r(1)=11 give both decision sides. Constant search map r(z)=00 and total lift L(z,v)=0v send each target witness 0/1 to 00/01 on the sole promised source. Definitional iff relations specify exactly those finite pairs; no extra equivalence theorem is asserted. For every one of 16 four-bit inputs both addresses have two-bit replies; address-zero query from target 00 yields u. Root-linear-first projector diagonal is the squared modulus and its unmeasured-address sum is the point mass at u. u=00 and u=11 give exact promised decisions; 01/10 are unrestricted completions. Direct multiplication gives H^2=I so both circuits have the same law and one query, while declared gate counts are 0/2. No extra ancillas; measurement/readout of two bits and constant postprocessing are distinct from the oracle call. Copying public x costs O(|x|) on a multitape machine. Empty/off-promise strings do not acquire correctness obligations. No AC. Reader/refuter findings empty; no defect found. Contract quotation refreshed to the actual computational-basis theorem Statement: the zero-qubit scalar basis is a separate convention, not an identification with the d=1 register; no mathematical consumer change is needed."
+      }
+    },
+    "def-qa-finite-branch-output-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-promise-computation-model",
+          "source_section": "Definition",
+          "quote": "Let $\\Pi=(Y,N)$ be a promise problem: $Y,N\\subseteq\\{0,1\\}^*$ are disjoint, and no answer is required outside $Y\\cup N$ ([[def-promise-problem]]). For every input length $n\\ge0$, let $a(n)\\in\\mathbb N$ be the number of auxiliary qubits. The $n$ input wires are ordered with the first wire most significant: for $x=(x_0,\\ldots,x_{n-1})$, $|x\\rangle$ is the computational-basis vector indexed by\n$$\\operatorname{enc}_n(x)=\\sum_{k<n}x_k2^{n-1-k}$$\n([[def-qc-register-and-computational-basis]], [[def-qc-ordered-bitstring-encoding]]). The auxiliary register has $a(n)$ wires and is initialized to $|0^{a(n)}\\rangle$. When $n=0$ or $a(n)=0$, the corresponding zero-qubit register is the one-dimensional space $\\mathbb C$, not the zero vector space.\n\nFor each $n$, a finite circuit $C_n$ acts on the ordered register of $n+a(n)$ wires and has the unitary denotation $U_{C_n}$ specified by [[def-qc-circuit-syntax-and-register-order]] and [[def-qc-circuit-denotational-semantics]]. The circuit syntax designates an ordered tuple of distinct output-wire indices; an acceptance specification uses that same tuple $O_n$, whose indices lie in $\\{0,\\ldots,n+a(n)-1\\}$. It consists of this tuple and a total predicate $A_n(x,z)\\in\\{0,1\\}$ for $x\\in\\{0,1\\}^n$ and $z\\in\\{0,1\\}^{|O_n|}$. The tuple may be empty; then its measured output set contains only the empty word. Auxiliary wires are initialized to zero, but this definition does not require them to return to zero after the computation; that stronger clean-ancilla condition is defined in [[def-qc-clean-and-dirty-ancillas]].\n\nA **finite quantum promise computation** is the data $(\\Pi,(C_n)_{n\\ge0},a,O,A)$ with these registers and predicates. Its output is classical: measure only the named output wires in the computational basis and accept exactly when $A_n(x,z)=1$. No intermediate measurement is part of this base model. Unless a full-list uniformity condition is imposed separately, the family need not be generated uniformly. When uniformity or cost is claimed, $A$ is supplied by one fixed deterministic Turing machine with an explicit polynomial worst-case time bound in the encoded pair $(x,z)$ ([[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], [[def-worst-case-time-and-space-complexity]]). This is a mathematical finite-circuit model and makes no assertion about physical realization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex-inner-product space, let $K$ be a finite-dimensional complex-inner-product space, and let $\\Omega$ be a finite nonempty outcome set. A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive ([[def-qc-completely-positive-map]]) and\n\n$$\\sum_{a\\in\\Omega}\\operatorname{tr}_K(\\mathcal I_a(X))=\\operatorname{tr}_H(X)\\qquad\\text{for every }X\\in\\mathcal L(H).$$\n\nFor a density operator $\\rho$ on $H$ (nonnegative with trace one, [[def-qc-density-operator]]), define the outcome weight $p_a(\\rho):=\\operatorname{tr}_K(\\mathcal I_a(\\rho))$. The **conditional state** for outcome $a$ is\n\n$$\\rho_a:=\\begin{cases}\\mathcal I_a(\\rho)/p_a(\\rho),&p_a(\\rho)>0,\\\\[2pt]\\bot,&p_a(\\rho)=0.\\end{cases}$$\n\nHere $\\bot$ is a symbol meaning that no conditional density operator is assigned; it is not a state. Positivity and normalization of the outcome weights, and density of every positive-probability conditional state, are proved in [[thm-qc-instrument-outcome-law-normalizes]] and [[thm-qc-instrument-conditional-state-is-density]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-instrument-outcome-law-normalizes",
+          "source_section": "Statement",
+          "quote": "For a finite instrument $(\\mathcal I_a)_{a\\in\\Omega}$ and a density operator $\\rho$ on its input space, the branch weights $p_a=\\operatorname{tr}(\\mathcal I_a(\\rho))$ form a probability distribution on $\\Omega$.",
+          "uses": [
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-instrument-conditional-state-is-density",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be an input density operator for a finite instrument $(\\mathcal I_a)_{a\\in\\Omega}$, and let $p_a=\\operatorname{tr}(\\mathcal I_a(\\rho))$. If $p_a>0$, then the conditional operator $\\rho_a=\\mathcal I_a(\\rho)/p_a$ is a density operator on the instrument's output space.",
+          "uses": [
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the root pairing linear in its first argument, and let $u\\in H$ satisfy $\\|u\\|=1$. Define $P_u:=|u\\rangle\\langle u|$ by the root-linear-first Dirac convention. Then $P_u$ is self-adjoint and idempotent, has one-dimensional range, is non-negative, and has trace one. In particular, $P_u$ is a density operator.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-circuit-syntax-and-register-order",
+          "source_section": "Definition",
+          "quote": "Write $\\mathcal Q_n$ for the ordered tensor product of $n$ copies of the two-level register from [[def-qc-register-and-computational-basis]], with $\\mathcal Q_0=\\mathbb C$. Fix a finite gate alphabet $G$. Each $g\\in G$ has an arity $r(g)\\ge1$ and a specified unitary $U_g:\\mathcal Q_{r(g)}\\to\\mathcal Q_{r(g)}$. An operation model states which listed gates may be called and what access or cost is assigned to them; the matrix $U_g$ by itself is only the mathematical gate data.\n\nFor $n\\ge0$, the circuit wire set is $[n]=\\{0,\\ldots,n-1\\}$ in its displayed order and its state space is $\\mathcal Q_n$. The computational basis word $x=(x_0,\\ldots,x_{n-1})$ is assigned slot $\\operatorname{enc}_n(x)$ from [[def-qc-ordered-bitstring-encoding]], so wire $0$ is the most significant bit and the empty register has its single basis vector in slot $0$.\n\nA gate occurrence on the $n$ wires is a pair $(g,(w_0,\\ldots,w_{r(g)-1}))$ with distinct wire labels $w_j\\in[n]$; the tuple order is the input and output factor order of the local gate. A layer is a finite ordered list of gate occurrences whose wire supports are pairwise disjoint. A unitary circuit is a finite chronological list $L_1,\\ldots,L_d$ of such layers, with $L_1$ applied first and $L_d$ last; $d=0$ is the empty circuit. Its input, output, and terminally measured wires are specified as ordered lists without repetitions in $[n]$. This syntax specifies finite data only; the semantic action of gates on the full register is defined separately.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The standard input register vector and zero-work-register vector are supplied by [F1]; they are computational-basis vectors and hence unit vectors by [F9]–[F10]. Their combined basis vector is unit by the same orthonormal product-basis fact. Its rank-one projector is a density operator by [F11], so the root state has trace one and is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F9",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\rho$ is a density operator and $U$ is a unitary endomorphism node, then [F12] supplies the unitary denotation for circuit blocks; any other unitary edge is explicit in [A1]. The operator $U\\rho U^\\dagger$ is self-adjoint by [F6] and $\\rho^\\dagger=\\rho$. For every $v$, the adjoint identity gives $\\langle U\\rho U^\\dagger v,v\\rangle=\\langle\\rho U^\\dagger v,U^\\dagger v\\rangle\\ge0$. Cyclicity and [F7] give $\\operatorname{tr}(U\\rho U^\\dagger)=\\operatorname{tr}(\\rho U^\\dagger U)=\\operatorname{tr}(\\rho)=1$. Thus the successor state is a density operator and the edge preserves its branch weight.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "At an instrument node with density input $\\rho_h$, [F3] gives $q_{h,a}\\ge0$ and $\\sum_aq_{h,a}=1$. If $q_{h,a}>0$, [F4] gives a density operator at that child; if $q_{h,a}=0$, the child weight is zero and no conditional state is used. Therefore the sum of child weights is $w(h)\\sum_aq_{h,a}=w(h)$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At depth zero the frontier consists only of the root, whose weight is one and whose state is a density operator by step 1.1. Assume the same assertions for a finite frontier. At each live unitary node, step 1.2 preserves the state property and weight; at each instrument node, step 1.3 gives density states on positive children and preserves the sum of child weights. For the induction, carry an already-terminal positive-weight node forward along a single identity-unitary edge, retaining its state and weight; carry a zero-weight terminal node forward at weight zero without assigning a state. These padding edges add no outcome branch. Summing over the finite frontier by [F13] shows that the next frontier again has total weight one and a density state at every positive-weight node.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F13",
+            "base",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $D$ be the maximum depth of the original tree. Repeating the extension from step 2.1 carries each earlier positive-weight leaf to depth $D$ without changing its state, weight, or assigned output wires; zero-weight leaves remain weight zero and have no assigned state. The base and successor cases are those in step 2.1, so induction [F14] reaches this common frontier. Therefore the original positive-weight leaves have total weight one and density-operator states.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "F14",
+            "discharge-induction: step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At a positive-weight leaf, each pair $(z,v)$ specifies exactly one full computational-basis word because the output-wire tuple has distinct indices and $W_\\ell$ is its complement. Conversely every full word has exactly one such pair. Thus [F9]–[F10] make the vectors $e_{\\ell,z,v}$ a complete orthonormal basis. Each $\\langle\\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle$ is nonnegative by [F5], and their finite sum over $(z,v)$ is $\\operatorname{tr}(\\rho_\\ell)=1$ by [F8]. Therefore $q_\\ell(z)\\ge0$ and $\\sum_zq_\\ell(z)=1$, including the empty-output or empty-work-register cases.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Summing the definition of $P(z\\mid x)$ over all output strings and interchanging its finite leaf and output sums by [F13] gives $\\sum_zP(z\\mid x)=\\sum_\\ell w(\\ell)\\sum_zq_\\ell(z)=\\sum_\\ell w(\\ell)=1$ by steps 3.1 and 4.1. Each term is nonnegative, so any predicate-selected subset has probability between zero and one. The terminal marginal is normalized directly by the basis-and-trace calculation in step 4.1; instrument branch normalization and conditional-state density use [F3] and [F4] in step 1.3.",
+          "step": "5.1",
+          "inputs": [
+            "F13",
+            "step 3.1",
+            "step 4.1",
+            "algebra",
+            "discharge-induction: step 2.1",
+            "F3",
+            "F4",
+            "step 1.3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 includes empty output and empty unmeasured-register boundaries."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 assigns zero weight to zero-probability instrument branches."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include a single leaf with normalized weight one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 4.1 cover zero-probability branches and zero-qubit output/work registers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches16-30",
+            "reason": "Verification 1.3 explicitly omits conditional states at q=0 and preserves weight at q=1. Steps 4.1–5.1 prove nonnegative normalized leaf/output sums; an empty acceptance subset has probability 0 and the full output set has probability 1.",
+            "item_sha256": "d1fde56ff3d11c9fca7d069cd04c98dc1021632d0ef4570fada2a67a28b5bfb6",
+            "row_sha256": "5eb0b6e60e7cd0cb07a719f0300403972aad4d90937fa9011517a621719e675f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches16-30.md"
+          },
+          "evidence": "Verification 1.3 explicitly omits conditional states at q=0 and preserves weight at q=1. Steps 4.1–5.1 prove nonnegative normalized leaf/output sums; an empty acceptance subset has probability 0 and the full output set has probability 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use finite frontiers and finite sums, with only finite-depth induction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an equivalence or iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an equivalence or iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "quantum-query-one-leaf-computational-basis-output",
+          "asserts": "4.1 At a positive-weight leaf, each pair $(z,v)$ specifies exactly one full computational-basis word because the output-wire tuple has distinct indices and $W_\\ell$ is its complement. Conversely every full word has exactly one such pair. Thus [F9]–[F10] make the vectors $e_{\\ell,z,v}$ a complete orthonormal basis. Each $\\langle\\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle$ is nonnegative by [F5], and their finite sum over $(z,v)$ is $\\operatorname{tr}(\\rho_\\ell)=1$ by [F8]. Therefore $q_\\ell(z)\\ge0$ and $\\sum_zq_\\ell(z)=1$, including the empty-output or empty-work-register cases. [A1, F5, F8, F9, F10, step 3.1]",
+          "claim": "Terminal marginal law for a basis state, including summation over a finite unmeasured register.",
+          "checked_in": "Steps 3.1 and 4.1",
+          "fixture_version": 1
+        },
+        {
+          "check": "quantum-query-two-outcome-instrument-branch-mixture",
+          "asserts": "1.3 At an instrument node with density input $\\rho_h$, [F3] gives $q_{h,a}\\ge0$ and $\\sum_aq_{h,a}=1$. If $q_{h,a}>0$, [F4] gives a density operator at that child; if $q_{h,a}=0$, the child weight is zero and no conditional state is used. Therefore the sum of child weights is $w(h)\\sum_aq_{h,a}=w(h)$. [F2, F3, F4, algebra]",
+          "claim": "Finite branch weights multiply conditional output weights and preserve normalization.",
+          "checked_in": "Steps 1.3, 2.1, and 5.1",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "See batch-25 cross-batch dependency input for actual QC register, circuit, instrument, and trace supplier observations. The local proof avoids both flawed QC projective-measurement and POVM-normalization proof paths.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Read Definition and all seven Verification steps plus all 20 cited dependencies, including complete instrument normalization/conditional-density proofs and root-linear-first adjoint, cyclic trace, unit projector and orthonormal product basis interfaces. On positive branches U rho U* remains density; CP branch traces sum to one and division occurs only at q>0. Zero-probability descendants are inert and have no state. Identity padding preserves earlier terminal states, weights and output wires up to maximum depth; zero terminal weights remain zero without a state. Complete basis (z,v) indexing normalizes each leaf, finite summation normalizes the mixture and bounds predicate events. Root-only tree, zero-qubit register, empty output/work tuple, deterministic and zero-probability branches satisfy the same proof. Finite induction and finite sums require no AC. Reader clarification changes only steps 2.1 and 3.1; reconstructing the original from archived pre-reader contract claims gives exactly the immutable pre SHA256 3a435f65135faf842ab104e44f0892d7e1724f99a94064a037ea5d9ddfae01b9, while current bytes match post SHA256 16ef6b651559d1e24b4478e98bdbd5fb9193ff625d17e91370bab50d50559931. Accept this nonfatal clarification; no Definition, dependencies or consumer interface changed. Contract quotation refreshed to the actual computational-basis theorem Statement: the zero-qubit scalar basis is a separate convention, not an identification with the d=1 register; no mathematical consumer change is needed."
+      }
+    }
+  }
+}

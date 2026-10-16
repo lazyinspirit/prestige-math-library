@@ -1,0 +1,385 @@
+===== PDF PAGE 13 =====
+
+circuit Q|x| to the state |x⟩⟨x|, and then measuring the output qubit with respect to the standard
+basis. The measurement results 0 and 1 are interpreted as yes and no (or accept and reject), respec-
+tively. The events that Q accepts x and Q rejects x are understood to have associated probabilities
+determined in this way.
+
+BQP
+Let A = (Ayes, Ano) be a promise problem and let a, b : N →[0, 1] be functions.
+Then A ∈BQP(a, b) if and only if there exists a polynomial-time generated family of
+quantum circuits Q = {Qn : n ∈N}, where each circuit Qn takes n input qubits and
+produces one output qubit, that satisfies the following properties:
+
+1. if x ∈Ayes then Pr[Q accepts x] ≥a(|x|), and
+
+2. if x ∈Ano then Pr[Q accepts x] ≤b(|x|).
+
+The class BQP is defined as BQP = BQP(2/3, 1/3).
+
+Similar to BPP, there is nothing special about the particular choice of error probability 1/3, other
+than that it is a constant strictly smaller than 1/2. This is made clear in the next section.
+There are several problems known to be in BQP but not known (and generally not believed)
+to be in BPP. Decision-problem variants of the integer factoring and discrete logarithm problems,
+shown to be in BQP by Shor [94], are at present the most important and well-known examples.
+
+IV.2
+Error reduction for BQP
+
+When one speaks of the flexibility, or robustness, of BQP with respect to error bounds, it is meant
+that the class BQP(a, b) is invariant under a wide range of “reasonable” choices of the functions a
+and b. The following proposition states this more precisely.
+
+Proposition 3 (Error reduction for BQP). Suppose that a, b : N →[0, 1] are polynomial-time com-
+putable functions and p : N →N is a polynomial-bounded function such that a(n) −b(n) ≥1/p(n)
+for all but finitely many n ∈N. Then for every choice of a polynomial-bounded function q : N →N
+satisfying q(n) ≥2 for all but finitely many n ∈N, it holds that
+
+BQP(a, b) = BQP = BQP
+�
+1 −2−q, 2−q�
+.
+
+The above proposition may be proved in the same standard way that similar statements are
+proved for classical probabilistic computations: by repeating a given computation some large (but
+still polynomial) number of times, overwhelming statistical evidence is obtained so as to give the
+correct answer with an extremely small probability of error. It is straightforward to represent this
+sort of repeated computation within the quantum circuit model in such a way that the require-
+ments of the definition of BQP are satisfied.
+
+IV.3
+Simulating classical computations with quantum circuits
+
+It should not be surprising that quantum computers can efficiently simulate classical computers—
+for quantum information generalizes classical information, and it would be absurd if there were a
+loss of computational power in moving to a more general model. This intuition may be confirmed
+by observing the containment BPP ⊆BQP. Here an advantage of working with the general quan-
+tum circuit model arises: for if one truly believes the Universality Theorem, there is almost nothing
+to prove.
+
+13
+
+
+===== PDF PAGE 14 =====
+
+X1
+
+X2
+
+|1⟩
+
+Tr
+
+Tr
+
+Y
+
+NAND gate
+
+X
+
+|0⟩
+
+D
+Y1
+
+Y2
+
+FANOUT gate
+
+|0⟩
+H
+D
+Y
+
+Random bit
+
+Figure 7: Quantum circuit implementations of a NAND gate, a FANOUT gate, and a random bit.
+The phase-damping gates, denoted by D, are only included for aesthetic reasons: they force the
+purely classical behavior that would be expected of classical gates, but are not required for the
+quantum simulation of BPP.
+
+Observe first that the complexity class P may be defined in terms of Boolean circuit families
+in a similar manner to BQP. In particular, a given promise problem A = (Ayes, Ano) is in P if and
+only if there exists a polynomial-time generated family C = {Cn : n ∈N} of Boolean circuits,
+where each circuit Cn takes n input bits and outputs 1 bit, such that
+
+1. C(x) = 1 for all x ∈Ayes, and
+
+2. C(x) = 0 for all x ∈Ano.
+
+A Boolean circuit-based definition of BPP may be given along similar lines: a given promise prob-
+lem A = (Ayes, Ano) is in BPP if and only if there exists a polynomial-bounded function r and a
+polynomial-time generated family C = {Cn : n ∈N} of Boolean circuits, where each circuit Cn
+takes n + r(n) input bits and outputs 1 bit, such that
+
+1. Pr[C(x, y) = 1] ≥2/3 for all x ∈Ayes, and
+
+2. Pr[C(x, y) = 1] ≤1/3 for all x ∈Ano,
+
+where y ∈Σr(|x|) is chosen uniformly at random in both cases.
+In both definitions, the circuit family C includes circuits composed of constant-size Boolean
+logic gates—which for the sake of brevity may be assumed to be composed of NAND gates and
+FANOUT gates. (FANOUT operations must be modelled as gates for the sake of the simulation.)
+For the randomized case, it may be viewed that the random bits y ∈Σr(|x|) are produced by gates
+that take no input and output a single uniform random bit. As NAND gates, FANOUT gates,
+and random bits are easily implemented with quantum gates, as illustrated in Figure 7, the circuit
+family C can be simulated gate-by-gate to obtain a quantum circuit family Q = {Qn : n ∈N} for
+A that satisfies the definition of BQP. It follows that BPP ⊆BQP.
+
+IV.4
+The BQP subroutine theorem
+
+There is an important issue regarding the above definition of BQP, which is that it is not an in-
+herently “clean” definition with respect to the modularization of algorithms. The BQP subroutine
+theorem of Bennett, Brassard, Bernstein and Vazirani [28] addresses this issue.
+
+14
+
+
+===== PDF PAGE 15 =====
+
+Suppose that it is established that a particular promise problem A is in BQP, which by def-
+inition means that there must exist an efficient quantum algorithm (represented by a family of
+quantum circuits) for A. It is then natural to consider the use of that algorithm as a subroutine in
+other quantum algorithms for more complicated problems, and one would like to be able to do
+this without worrying about the specifics of the original algorithm. Ideally, the algorithm for A
+should function as an oracle for A, as defined in Section III.4.
+A problem arises, however, when queries to an algorithm for A are made in superposition.
+Whereas it is quite common and useful to consider quantum algorithms that query oracles in
+superposition, a given BQP algorithm for A is only guaranteed to work correctly on classical
+inputs. It could be, for instance, that some algorithm for A begins by applying phase-damping
+gates to all of its input qubits, or perhaps this happens inadvertently as a result of the computation.
+Perhaps it is too much to ask that the existence of a BQP algorithm for A admits a subroutine
+having the characteristics of an oracle for A?
+The BQP subroutine theorem establishes that, up to exponentially small error, this is not too
+much to ask: the existence of an arbitrary BQP algorithm for A implies the existence of a “clean”
+subroutine for A with the characteristics of an oracle. A precise statement of the theorem follows.
+
+Theorem 4 (BQP subroutine theorem). Suppose A = (Ayes, Ano) is a promise problem in BQP. Then
+for any choice of a polynomial-bounded function p there exists a polynomial-bounded function q and a
+polynomial-time generated family of unitary quantum circuits {Rn : n ∈N} with the following proper-
+ties:
+
+1. Each circuit Rn implements a unitary operation Un on n + q(n) + 1 qubits.
+
+2. For every x ∈Ayes and a ∈Σ it holds that
+
+⟨x, 0m, a ⊕1|Un|x, 0m, a⟩≥1 −2−p(n)
+
+for n = |x| and m = q(n).
+
+3. For every x ∈Ano and a ∈Σ it holds that
+
+⟨x, 0m, a|Un|x, 0m, a⟩≥1 −2−p(n)
+
+for n = |x| and m = q(n).
+
+The proof of this theorem is remarkably simple: given a BQP algorithm for A, one first uses
+Proposition 3 to obtain a circuit family Q having exponentially small error for A. The circuit
+illustrated in Figure 8 then implements a unitary operation with the desired properties. This is
+essentially a bounded-error quantum adaptation of a classic construction that allows arbitrary
+deterministic computations to be performed reversibly [27, 97].
+The following corollary expresses the main implication of the BQP subroutine theorem in
+complexity-theoretic terms.
+
+Corollary 5. BQPBQP = BQP.
+
+IV.5
+Classical upper bounds on BQP
+
+There is no known way to efficiently simulate quantum computers with classical computers—and
+there would be little point in seeking to build quantum computers if there were. Nevertheless,
+
+15
+
+
+===== PDF PAGE 16 =====
+
+Qn
+Q−1
+n
+|x⟩
+
+|0m⟩
+
+|a⟩
+
+Figure 8: A unitary quantum circuit approximating an oracle-gate implementation of a BQP com-
+putation. Here Qn is a unitary purification of a circuit having exponentially small error for some
+problem in BQP.
+
+some insight into the limitations of quantum computers may be gained by establishing contain-
+ments of BQP in the smallest classical complexity classes where this is possible.
+The strongest containment known at this time is given by counting complexity. Counting com-
+plexity began with Valiant’s work [99] on the complexity of computing the permanent, and was
+further developed and applied in many papers (including [22, 48, 96], among many others).
+The basic notion of counting complexity that is relevant to this article is as follows. Given
+a polynomial-time nondeterministic Turing machine M and input string x ∈Σ∗, one denotes by
+#M(x) the number of accepting computation paths of M on x, and by #M(x) the number of rejecting
+computation paths of M on x. A function f : Σ∗→Z is then said to be a GapP function if there
+exists a polynomial-time nondeterministic Turing machine M such that f(x) = #M(x) −#M(x)
+for all x ∈Σ∗.
+A variety of complexity classes can be specified in terms of GapP functions. For example, a
+promise problem A = (Ayes, Ano) is in PP if and only if there exists a function f ∈GapP such
+that f(x) > 0 for all x ∈Ayes and f(x) ≤0 for all x ∈Ano. The remarkable closure properties of
+GapP functions allows many interesting facts to be proved about such classes. Fortnow’s survey
+[51] on counting complexity explains many of these properties and gives several applications of
+the theory of GapP functions. The following closure property is used below.
+
+GapP–multiplication of matrices. Let p, q : N →N be polynomial-bounded functions. Suppose
+that for each n ∈N a sequence of p(n) complex-valued matrices is given:
+
+An,1, An,2, . . . , An,p(n),
+
+each having rows and columns indexed by strings in Σq(n). Suppose further that there exist func-
+tions f, g ∈GapP such that
+
+f(1n, 1k, x, y) = Re (An,k[x, y])
+
+g(1n, 1k, x, y) = Im (An,k[x, y])
+
+for all n ∈N, k ∈{1, . . . , p(n)}, and x, y ∈Σq(n). Then there exist functions F, G ∈GapP such that
+
+F(1n, x, y) = Re
+�
+(An,p(n) · · · An,1)[x, y]
+�
+
+G(1n, x, y) = Im
+�
+(An,p(n) · · · An,1)[x, y]
+�
+
+for all n ∈N and x, y ∈Σq(n). In other words, if there exist two GapP functions describing the real
+and imaginary parts of the entries of a polynomial sequence of matrices, then the same is true of
+the product of these matrices.
+
+16
+
+
+===== PDF PAGE 17 =====
+
+Now, suppose that Q = {Qn : n ∈N} is a polynomial-time generated family of quantum
+circuits. For each n ∈N, let us assume the quantum circuit Qn consists of gates Gn,1, . . . , Gn,p(n)
+for some polynomial bounded function p, labelled in an order that respects the topology of the
+circuit. By tensoring these gates with the identity operation on qubits they do not touch, and
+using the natural matrix representation of quantum operations, it is possible to obtain matrices
+Mn,1, . . . , Mn,p(n) with the property that
+
+Mn,p(n) · · · Mn,1 vec(ρ) = vec(Qn(ρ))
+
+for every possible input density matrix ρ to the circuit. The probability that Qn accepts a given
+input x is then
+⟨1, 1|
+�
+Mn,p(n) · · · Mn,1
+�
+|x, x⟩,
+
+which is a single entry in the product of the matrices.
+By padding matrices with rows and columns of zeroes, it may be assumed that each matrix
+Mn,k has rows and columns indexed by strings of length q(n) for some polynomial-bounded func-
+tion q. The assumption that the family Q is polynomial-time generated then allows one to easily
+conclude that there exist GapP functions f and g so that
+
+f(1n, 1k, x, y) = 1
+
+2ℜ(Mn,k[x, y])
+
+g(1n, 1k, x, y) = 1
+
+2ℑ(Mn,k[x, y])
+
+for all n ∈N, k ∈{1, . . . , p(n)}, and x, y ∈Σq(n). (Note that his fact makes use of the observation
+that the natural matrix representation of all of the gates listed in Section III.2 have entries whose
+real and imaginary parts come from the set {−1, −1/2, 0, 1/2, 1}. The numbers ±1/2 are only
+needed for the Hadamard gates.) By the property of GapP functions above, it follows that there
+exists a GapP function F such that
+
+Pr[Q accepts x] = F(x)
+
+2p(|x|) .
+
+The containment BQP ⊆PP follows easily. This containment was first proved by Adleman,
+DeMarrais, and Huang [8] using a different method, and was first argued using counting com-
+plexity along similar lines to the above proof by Fortnow and Rogers [52]. There are two known
+ways that this upper bound can be improved. Using the fact that BQP algorithms have bounded
+error, Fortnow and Rogers [52] proved that BQP is contained in a (somewhat obscure) counting
+complexity class called AWPP, which implies the following theorem.
+
+Theorem 6. PPBQP = PP.
+
+Another improvement comes from the observation that the above proof that BQP ⊆PP makes no
+use of the bounded-error assumption of BQP. It follows that an unbounded error variant of BQP
+is equal to PP.
+
+PQP
+Let A = (Ayes, Ano) be a promise problem. Then A ∈PQP if and only if there exists
+a polynomial-time generated family of quantum circuits Q = {Qn : n ∈N}, where
+each circuit Qn takes n input qubits and produces one output qubit, that satisfies the
+following properties. If x ∈Ayes then Pr[Q accepts x] > 1/2; and if x ∈Ano then
+Pr[Q accepts x] ≤1/2.
+
+Theorem 7. PQP = PP.
+
+17
+
+
+===== PDF PAGE 18 =====
+
+IV.6
+Oracle results involving BQP
+
+It is difficult to prove separations among quantum complexity classes for apparently the same rea-
+sons that this is so for classical complexity classes. For instance, one clearly cannot hope to prove
+BPP ̸= BQP when major collapses such as NC = PP or P = PSPACE are still not disproved. In
+some cases, however, separations among quantum complexity classes can be proved in relativized
+settings, meaning that the separation holds in the presence of some cleverly defined oracle. The
+following oracle results are among several that are known:
+
+1. There exists an oracle A such that BQPA ̸⊆MAA [18, 31, 101]. Such an oracle A intuitively
+encodes a problem that is solvable using a quantum computer but is not even efficiently
+verifiable with a classical computer. As the containment BPP ⊆BQP holds relative to every
+oracle, this implies that BPPA ⊊BQPA for this particular choice of A.
+
+2. There is an oracle A such that NPA ̸⊆BQPA [28]. In less formal terms: a quantum computer
+cannot find a needle in an exponentially large haystack in polynomial time. This result
+formalizes a critically important idea, which is that a quantum computer can only solve a
+given search problem efficiently if it is able to exploit that problem’s structure. It is easy to
+define an oracle search problem represented by A that has no structure whatsoever, which
+allows the conclusion NPA ̸⊆BQPA to be drawn. It is not currently known whether the NP-
+complete problems, in the absence of an oracle, have enough structure to be solved efficiently
+by quantum computers; but there is little hope and no indication whatsoever that this should
+be so. It is therefore a widely believed conjecture that NP ̸⊆BQP.
+
+3. There is an oracle A such that SZKA ̸⊆BQPA [1, 6]. This result is similar in spirit to the
+previous one, but is technically more difficult and rules out the existence of quantum algo-
+rithms for unstructured collision detection problems. The graph isomorphism problem and
+various problems that arise in cryptography are examples of collision detection problems.
+Once again, it follows that quantum algorithms can only solve such problems if their struc-
+ture can be exploited. It is a major open question in quantum computing whether the graph
+isomorphism problem is in BQP.
+
+V
+Quantum proofs
+
+There are many quantum complexity classes of interest beyond BQP. This section concerns one
+such class, which is a quantum computational analogue of NP. The class is known as QMA, short
+for quantum Merlin–Arthur, and is based on the notion of a quantum proof: a quantum state that
+plays the role of a certificate or witness to a quantum computer that functions as a verification
+procedure. Interest in both the class QMA and the general notion of quantum proofs is primarily
+based on the fundamental importance of efficient verification in computational complexity. The
+notion of a quantum proof was first proposed by Knill [71] and consider more formally by Kitaev
+(presented at a talk in 1999 [67] and later published in [68]).
+
+V.1
+Definition of QMA
+
+The definition of QMA is inspired by the standard definition of NP included in Section II.1 of
+this article. This definition is of course equivalent to the other well-known definition of NP based
+on nondeterministic Turing machines, but is much better-suited to consideration in the quantum
+setting—for nondeterminism is arguably a non-physical notion that does not naturally extend to
+
+18
+

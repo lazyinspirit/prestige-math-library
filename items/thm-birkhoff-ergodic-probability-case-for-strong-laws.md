@@ -1,14 +1,10 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-birkhoff-ergodic-probability-case-for-strong-laws.json
 id: thm-birkhoff-ergodic-probability-case-for-strong-laws
 kind: theorem
 title: Birkhoff's theorem for an ergodic probability system
 deps: ["lem-finite-probability-maximal-ergodic-inequality", "def-ergodic-measure-preserving-system", "thm-integrals-are-invariant-under-measure-preserving-maps", "thm-arithmetic-and-lattice-operations-preserve-measurability", "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable", "thm-linearity-of-the-lebesgue-integral-on-l-one", "thm-integral-triangle-inequality", "thm-dominated-convergence", "thm-finite-and-countable-subadditivity-of-measures"]
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: 'Durrett, Probability: Theory and Examples, 5th ed., Theorem 6.2.1 and its complete proof, printed pp.335–337; ergodic specialization proved without conditional expectation'
@@ -34,7 +30,7 @@ If $T$ is an ergodic measure-preserving transformation of a probability space an
 1. $cf$ is measurable for every real scalar $c$;
 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;
 3. if $f+g$ is pointwise defined, then $f+g$ is measurable;
-4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
+4. with the total function-product convention declared in that theorem, the pointwise product $fg$ is measurable.
 
 [F3] [[thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]]: Let $(X,\mathcal{A})$ be a measurable space and let $f_n : X \to \overline{\mathbb{R}}$ be measurable for every $n \in \mathbb{N}$. Then the functions
 

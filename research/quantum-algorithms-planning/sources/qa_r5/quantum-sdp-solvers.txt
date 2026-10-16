@@ -1,0 +1,6428 @@
+
+
+=== PDF PAGE 1 ===
+Quantum SDP-Solvers: Better upper and lower bounds
+Joran van Apeldoorn1, Andr´as Gily´en1, Sander Gribling1, and Ronald de Wolf2
+1QuSoft, CWI, Amsterdam, the Netherlands. {apeldoor,gilyen,gribling}@cwi.nl
+2QuSoft, CWI and University of Amsterdam, the Netherlands. rdewolf@cwi.nl
+Brand˜ao and Svore [BS17] recently gave quantum algorithms for approximately
+solving semideﬁnite programs, which in some regimes are faster than the best-
+possible classical algorithms in terms of the dimension n of the problem and the
+number m of constraints, but worse in terms of various other parameters. In this
+paper we improve their algorithms in several ways, getting better dependence on
+those other parameters. To this end we develop new techniques for quantum al-
+gorithms, for instance a general way to eﬃciently implement smooth functions of
+sparse Hamiltonians, and a generalized minimum-ﬁnding procedure.
+We also show limits on this approach to quantum SDP-solvers, for instance for
+combinatorial optimization problems that have a lot of symmetry. Finally, we prove
+some general lower bounds showing that in the worst case, the complexity of every
+quantum LP-solver (and hence also SDP-solver) has to scale linearly with mn when
+m ≈n, which is the same as classical.
+Accepted in Quantum 2020-01-28, click title to verify. Published under CC-BY 4.0.
+1
+arXiv:1705.01843v4  [quant-ph]  12 Feb 2020
+
+
+=== PDF PAGE 2 ===
+Contents
+1
+Introduction
+3
+1.1
+Semideﬁnite programs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+1.2
+Classical solvers for LPs and SDPs . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+1.3
+Quantum SDP-solvers: the Brand˜ao-Svore algorithm . . . . . . . . . . . . . . . .
+5
+1.4
+Our results
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+1.4.1
+Improved quantum SDP-solver . . . . . . . . . . . . . . . . . . . . . . . .
+6
+1.4.2
+Tools that may be of more general interest
+. . . . . . . . . . . . . . . . .
+7
+1.4.3
+Lower bounds . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+2
+An improved quantum SDP-solver
+10
+2.1
+The Arora-Kale framework for solving SDPs . . . . . . . . . . . . . . . . . . . . .
+11
+2.2
+Approximating the expectation value Tr(Aρ) using a quantum algorithm . . . . .
+16
+2.2.1
+General approach . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+2.2.2
+The special case of diagonal matrices – for LP-solving . . . . . . . . . . .
+18
+2.2.3
+General case – for SDP-solving . . . . . . . . . . . . . . . . . . . . . . . .
+19
+2.3
+An eﬃcient 2-sparse oracle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+2.4
+Total runtime . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+26
+3
+Downside of this method: general oracles are restrictive
+28
+3.1
+Sparse oracles are restrictive . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+29
+3.2
+General width-bounds are restrictive for certain SDPs . . . . . . . . . . . . . . .
+30
+4
+Lower bounds on the quantum query complexity
+35
+5
+Conclusion
+38
+A Classical estimation of the expectation value Tr(Aρ)
+42
+B Implementing smooth functions of Hamiltonians
+46
+B.1
+Implementation of smooth functions of Hamiltonians: general results . . . . . . .
+48
+B.2
+Applications of smooth functions of Hamiltonians . . . . . . . . . . . . . . . . . .
+55
+C Generalized minimum-ﬁnding algorithm
+58
+D Sparse matrix summation
+65
+D.1 A lower bound
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+65
+D.2 An upper bound
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+66
+E Equivalence of R, r, and ε−1
+66
+2
+
+
+=== PDF PAGE 3 ===
+1
+Introduction
+1.1
+Semideﬁnite programs
+In the last decades, particularly since the work of Gr¨otschel, Lov´asz, and Schrijver [GLS88],
+semideﬁnite programs (SDPs) have become an important tool for designing eﬃcient optimization
+and approximation algorithms. SDPs generalize the better-known linear programs (LPs), but
+(like LPs) they are still eﬃciently solvable. Thanks to their stronger expressive power, SDPs
+can sometimes give better approximation algorithms than LPs.
+The basic form of an SDP is the following:
+max
+Tr(CX)
+(1)
+s.t.
+Tr(AjX) ≤bj
+for all j ∈[m],
+X ⪰0,
+where [m] := {1, . . . , m}.
+The input to the problem consists of Hermitian n × n matrices
+C, A1, . . . , Am and reals b1, . . . , bm. For normalization purposes we assume ∥C∥, ∥Aj∥≤1. The
+number of constraints is m (we do not count the standard X ⪰0 constraint for this). The
+variable X of this SDP is an n × n positive semideﬁnite (psd) matrix. LPs correspond to the
+case where all matrices are diagonal.
+A famous example is the algorithm of Goemans and Williamson [GW95] for approximating
+the size of a maximum cut in a graph G = ([n], E): the maximum, over all subsets S of vertices,
+of the number of edges between S and its complement ¯S. Computing MAXCUT(G) exactly is
+NP-hard. It corresponds to the following integer program
+max
+1
+2
+X
+{i,j}∈E
+(1 −vivj)
+s.t.
+vj ∈{+1, −1}
+for all j ∈[n],
+using the fact that (1 −vivj)/2 = 1 if vi and vj are diﬀerent signs, and (1 −vivj)/2 = 0 if they
+are the same. We can relax this integer program by replacing the signs vj by unit vectors, and
+replacing the product vivj in the objective function by the dot product vT
+i vj. We can implicitly
+optimize over such vectors (of unspeciﬁed dimension) by explicitly optimizing over an n×n psd
+matrix X whose diagonal entries are 1. This X is the Gram matrix of the vectors v1, . . . , vn, so
+Xij = vT
+i vj. The resulting SDP is
+max
+1
+2
+X
+{i,j}∈E
+(1 −Xij)
+s.t.
+Tr(EjjX) = 1
+for all j ∈[n],
+X ⪰0,
+where Ejj is the n × n matrix that has a 1 at the (j, j)-entry, and 0s elsewhere.
+This SDP is a relaxation of a maximization problem, so it may overshoot the correct value,
+but Goemans and Williamson showed that an optimal solution to the SDP can be rounded to
+a cut in G whose size is within a factor ≈0.878 of MAXCUT(G) (which is optimal under the
+Unique Games Conjecture [KKMO07]). This SDP can be massaged into the form of (1) by
+replacing the equality Tr(EjjX) = 1 by inequality Tr(EjjX) ≤1 (so m = n) and letting C be
+a properly normalized version of the Laplacian of G.
+3
+
+
+=== PDF PAGE 4 ===
+1.2
+Classical solvers for LPs and SDPs
+Ever since Dantzig’s development of the simplex algorithm for solving LPs in the 1940s [Dan51],
+much work has gone into ﬁnding faster solvers, ﬁrst for LPs and then also for SDPs. The sim-
+plex algorithm for LPs (with some reasonable pivot rule) is usually fast in practice, but has
+worst-case exponential runtime. The ellipsoid method and interior-point methods can solve
+LPs and SDPs in polynomial time; they will typically approximate the optimal value to arbi-
+trary precision [GLS81, NN94]. The best known general SDP-solvers [LSW15] approximate the
+optimal value OPT of such an SDP up to additive error ε, with complexity
+O(m(m2 + nω + mns) polylog(m, n, R, 1/ε)),
+where ω ∈[2, 2.373) is the (still unknown) optimal exponent for matrix multiplication; s is
+the sparsity: the maximal number of non-zero entries per row of the input matrices; and R
+is an upper bound on the trace of an optimal X.1 The assumption here is that the rows and
+columns of the matrices of SDP (1) can be accessed as adjacency lists: we can query, say, the
+ℓth non-zero entry of the kth row of matrix Aj in constant time.
+Arora and Kale [AK16] gave an alternative way to approximate OPT, using a matrix version
+of the “multiplicative weights update” method.2 In Section 2.1 we will describe their framework
+in more detail, but in order to describe our result we will start with an overly simpliﬁed sketch
+here. The algorithm goes back and forth between candidate solutions to the primal SDP and
+to the corresponding dual SDP, whose variables are non-negative reals y1, . . . , ym:
+min
+bT y
+(2)
+s.t.
+m
+X
+j=1
+yjAj −C ⪰0,
+y ≥0.
+Under assumptions that will be satisﬁed everywhere in this paper, strong duality applies: the
+primal SDP (1) and dual SDP (2) will have the same optimal value OPT. The algorithm does a
+binary search for OPT by trying diﬀerent guesses α for it. Suppose we have ﬁxed some α, and
+want to ﬁnd out whether α is bigger or smaller than OPT. Start with some candidate solution
+X(1) for the primal, for example a multiple of the identity matrix (X(1) has to be psd but need
+not be a feasible solution to the primal). This X(1) induces the following polytope:
+Pε(X(1)) := {y ∈Rm : bT y ≤α,
+Tr
+
+
+ m
+X
+j=1
+yjAj −C
+
+X(1)
+
+≥−ε,
+y ≥0}.
+This polytope can be thought of as a relaxation of the feasible region of the dual SDP with
+the extra constraint that OPT ≤α: instead of requiring that P
+j yjAj −C is psd, we merely
+1See Lee, Sidford, and Wong [LSW15, Section 10.2 of arXiv version 2], and note that our m, n are their n, m,
+their S is our mns, and their M is our R. The bounds for other SDP-solvers that we state later also include
+another parameter r; it follows from the assumptions of [LSW15, Theorem 45 of arXiv version 2] that in their
+setting r ≤mR, and hence r is absorbed in the logO(1)(mnR/ε) factor.
+2See also [AHK12] for a subsequent survey; the same algorithm was independently discovered around the same
+time in the context of learning theory [TRW05, WK12]. In the optimization community, ﬁrst-order methods for
+semideﬁnite programming have been considered for instance in [Ren16, Ren19].
+4
+
+
+=== PDF PAGE 5 ===
+require that its inner product with the particular psd matrix X(1) is not too negative. The
+algorithm then calls an “oracle” that provides a y(1) ∈Pε(X(1)), or outputs “fail” if P0(X(1)) is
+empty (how to eﬃciently implement such an oracle depends on the application). In the “fail”
+case we know there is no dual-feasible y with objective value ≤α, so we can increase our guess
+α for OPT, and restart. In case the oracle produced a y(1), this is used to deﬁne a Hermitian
+matrix H(1) and a new candidate solution X(2) for the primal, which is proportional to e−H(1).
+Then the oracle for the polytope Pε(X(2)) induced by this X(2) is called to produce a candidate
+y(2) ∈Pε(X(2)) for the dual (or “fail”), this is used to deﬁne H(2) and X(3) proportional to
+e−H(2), and so on.
+Surprisingly, the average of the dual candidates y(1), y(2), . . . converges to a nearly-dual-
+feasible solution. Let R be an upper bound on the trace of an optimal X of the primal, r be
+an upper bound on the sum of entries of an optimal y for the dual, and w∗be the “width” of
+the oracle for a certain SDP: the maximum of
+Pm
+j=1 yjAj −C
+ over all psd matrices X and all
+vectors y that the oracle may output for the corresponding polytope Pε(X). In general we will
+not know the width of an oracle exactly, but only an upper bound w ≥w∗, that may depend
+on the SDP; this is, however, enough for the Arora-Kale framework. In Section 2.1 we will
+show that without loss of generality we can assume the oracle returns a y such that ∥y∥1 ≤r.
+Because we assumed ∥Aj∥, ∥C∥≤1, we have w∗≤r + 1 as an easy width-bound. General
+properties of the multiplicative weights update method guarantee that after T = eO(w2R2/ε2)
+iterations3, if no oracle call yielded “fail”, then the vector 1
+T
+PT
+t=1 y(t) is close to dual-feasible
+and satisﬁes bT y ≤α. This vector can then be turned into a dual-feasible solution by tweaking
+its ﬁrst coordinate, certifying that OPT ≤α + ε, and we can decrease our guess α for OPT
+accordingly.
+The framework of Arora and Kale is really a meta-algorithm, because it does not specify
+how to implement the oracle. They themselves provide oracles that are optimized for special
+cases, which allows them to give a very low width-bound for these speciﬁc SDPs. For example
+for the MAXCUT SDP, they obtain a solver with near-linear runtime in the number of edges of
+the graph. They also observed that the algorithm can be made more eﬃcient by not explicitly
+calculating the matrix X(t) in each iteration: the algorithm can still be made to work if instead
+of providing the oracle with X(t), we feed it good estimates of Tr(AjX(t)) and Tr(CX(t)). Arora
+and Kale do not describe oracles for general SDPs, but as we show at the end of Section 2.4
+(using Appendix A to estimate Tr(AjX(t)) and Tr(CX(t))), one can get a general classical
+SDP-solver in their framework with complexity
+eO
+ 
+nms
+Rr
+ε
+4
++ ns
+Rr
+ε
+7 !
+.
+(3)
+Compared to the complexity of the SDP-solver of [LSW15], this has much worse dependence
+on R and ε, but better dependence on m and n.
+Using the Arora-Kale framework is thus
+preferable over standard SDP-solvers for the case where Rr is small compared to mn, and a
+rough approximation to OPT (say, small constant ε) is good enough. It should be noted that for
+many speciﬁc cases, Arora and Kale get signiﬁcantly better upper bounds than (3) by designing
+oracles that are speciﬁcally optimized for those cases.
+1.3
+Quantum SDP-solvers: the Brand˜ao-Svore algorithm
+Given the speed-ups that quantum computers give over classical computers for various prob-
+lems [Sho97, Gro96, DHHM06, Amb07, HHL09], it is natural to ask whether quantum computers
+3The e
+O(·) notation hides polylogarithmic factors in all parameters.
+5
+
+
+=== PDF PAGE 6 ===
+can solve LPs and SDPs more eﬃciently as well. Very little was known about this, until recently
+when Brand˜ao and Svore [BS17] discovered quantum algorithms that signiﬁcantly outperform
+classical SDP-solvers in certain regimes. Because of the general importance of quickly solving
+LPs and SDPs, and the limited number of quantum algorithms that have been found so far,
+this is a very interesting development.
+The key idea of the Brand˜ao-Svore algorithm is to take the Arora-Kale approach and to
+replace two of its steps by more eﬃcient quantum subroutines. First, given a vector y(t−1), it
+turns out one can use “Gibbs sampling” to prepare the new primal candidate X(t) ∝e−H(t−1)
+as a log(n)-qubit quantum state ρ(t) := X(t)/Tr(X(t)) in much less time than needed to compute
+X(t) as an n × n matrix. Second, one can eﬃciently implement the oracle for Pε(X(t)) based
+on a number of copies of ρ(t), using those copies to estimate Tr(Ajρ(t)) and Tr(AjX(t)) when
+needed (note that Tr(Aρ) is the expectation value of operator A for the quantum state ρ). This
+is based on something called “Jaynes’s principle.” The resulting oracle is weaker than what
+is used classically, in the sense that it outputs a sample j ∼yj/∥y∥1 rather than the whole
+vector y. However, such sampling still suﬃces to make the algorithm work (it also means we
+can assume the vector y(t) to be quite sparse).
+Using these ideas, Brand˜ao and Svore obtain a quantum SDP-solver of complexity
+eO(√mns2R32/δ18),
+with multiplicative error 1 ± δ for the special case where bj ≥1 for all j ∈[m], and OPT ≥1
+(the latter assumption allows them to convert additive error ε to multiplicative error δ) [BS17,
+Corollary 5 in arXiv version 4]. They describe a reduction to transform a general SDP of the
+form (1) to this special case, but that reduction signiﬁcantly worsens the dependence of the
+complexity on the parameters R, r, and δ.
+Note that compared to the runtime (3) of our general instantiation of the original Arora-
+Kale framework, there are quadratic improvements in both m and n, corresponding to the two
+quantum modiﬁcations made to Arora-Kale. However, the dependence on R, r, s and 1/ε is
+much worse now than in (3). This quantum algorithm thus provides a speed-up only in regimes
+where R, r, s, 1/ε are fairly small compared to mn (ﬁnding good examples of SDPs in such
+regimes is an open problem).
+1.4
+Our results
+In this paper we present two sets of results: improvements to the Brand˜ao-Svore algorithm,
+and better lower bounds for the complexity of quantum LP-solvers (and hence for quantum
+SDP-solvers as well).
+1.4.1
+Improved quantum SDP-solver
+Our quantum SDP-solver, like the Brand˜ao-Svore algorithm, works by quantizing some aspects
+of the Arora-Kale algorithm. However, the way we quantize is diﬀerent and faster than theirs.
+First, we give a more eﬃcient procedure to estimate the quantities Tr(Ajρ(t)) required by the
+oracle. Instead of ﬁrst preparing some copies of Gibbs state ρ(t) ∝e−H(t−1) as a mixed state,
+we coherently prepare a puriﬁcation of ρ(t), which can then be used to estimate Tr(Ajρ(t))
+more eﬃciently using amplitude-estimation techniques. Also, our puriﬁed Gibbs sampler has
+logarithmic dependence on the error, which is exponentially better than the Gibbs sampler of
+Poulin and Wocjan [PW09b] that Brand˜ao and Svore invoke. Chowdhury and Somma [CS17]
+also gave a Gibbs sampler with logarithmic error-dependence, but assuming query access to the
+entries of
+√
+H rather than H itself.
+6
+
+
+=== PDF PAGE 7 ===
+Second, we have a diﬀerent implementation of the oracle, without using Gibbs sampling
+or Jaynes’s principle (though, as mentioned above, we still use puriﬁed Gibbs sampling for
+approximating the Tr(Aρ) quantities). We observe that the vector y(t) can be made very sparse:
+two non-zero entries suﬃce.4 We then show how we can eﬃciently ﬁnd such a 2-sparse vector
+(rather than merely sampling from it) using two applications of a new generalization of the
+well-known quantum minimum-ﬁnding algorithm of D¨urr and Høyer [DH96], which is based on
+Grover search [Gro96].
+These modiﬁcations both simplify and speed up the quantum SDP-solver, resulting in com-
+plexity
+eO(√mns2(Rr/ε)8).
+The dependence on m, n, and s is the same as in Brand˜ao-Svore, but our dependence on R, r,
+and 1/ε is substantially better. Note that each of the three parameters R, r, and 1/ε now occurs
+with the same 8th power in the complexity. This is no coincidence: as we show in Appendix E,
+these three parameters can all be traded for one another, in the sense that we can massage the
+SDP to make each one of them small at the expense of making the others proportionally bigger.
+These trade-oﬀs suggest we should actually think of Rr/ε as one parameter of the primal-dual
+pair of SDPs, not three separate parameters. For the special case of LPs, we can improve the
+runtime to
+eO(√mn(Rr/ε)5).
+Like in Brand˜ao-Svore, our quantum oracle produces very sparse vectors y, in our case even
+of sparsity 2. This means that after T iterations, the ﬁnal ε-optimal dual-feasible vector (which
+is a slightly tweaked version of the average of the T y-vectors produced in the T iterations)
+has only O(T) non-zero entries. Such sparse vectors have some advantages, for example they
+take much less space to store than arbitrary y ∈Rm. In fact, to get a sublinear runtime in
+terms of m, this is necessary. However, this sparsity of the algorithm’s output also points to a
+weakness of these methods: if every ε-optimal dual-feasible vector y has many non-zero entries,
+then the number of iterations needs to be large. For example, if every ε-optimal dual-feasible
+vector y has Ω(m) non-zero entries, then these methods require T = Ω(m) iterations before they
+can reach an ε-optimal dual-feasible vector. Since T = O
+
+R2r2
+ε2
+ln(n)
+
+this would imply that
+Rr
+ε = Ω(
+p
+m/ ln(n)), and hence many classical SDP-solvers would have a better complexity than
+our quantum SDP-solver. As we show in Section 3, this will actually be the case for families of
+SDPs that have a lot of symmetry.
+1.4.2
+Tools that may be of more general interest
+Along the way to our improved SDP-solver, we developed some new techniques that may be of
+independent interest. These are mostly tucked away in appendices, but here we will highlight
+two.
+Implementing smooth functions of a given Hamiltonian.
+Let f : R →C be a function.
+In Appendix B we describe a general technique to apply a function f(H) of a sparse Hamilto-
+4Independently of us, Ben-David, Eldar, Garg, Kothari, Natarajan, and Wright (at MIT), and separately
+Ambainis observed that in the special case where all bj are at least 1, the oracle can even be made 1-sparse, and
+the one entry can be found using one Grover search over m points (in both cases personal communication 2017).
+The same happens implicitly in our Section 2.3 in this case. However, in general 2 non-zero entries are necessary
+in y.
+7
+
+
+=== PDF PAGE 8 ===
+nian H to a given state |φ⟩.5 Roughly speaking, what applying f(H) to |φ⟩means, is that we
+want a unitary circuit that maps |0⟩|φ⟩to |0⟩f(H)|φ⟩+ |1⟩|∗⟩. If need be, we can then combine
+this with amplitude ampliﬁcation to boost the |0⟩f(H)|φ⟩part of the state. If the function f
+can be approximated well by a low-degree Fourier series, then our preparation will be eﬃcient
+in the sense of using few queries to H and few other gates. The novelty of our approach is that
+we construct a good Fourier series from the polynomial that approximates f (for example a
+truncated Taylor series for f). Our Theorem 40 can be easily applied to various smooth func-
+tions without using involved integral approximations, unlike previous works building on similar
+techniques. Our most general result, Corollary 42, only requires that the function f can be
+nicely approximated locally around each possible eigenvalue of H, improving on Theorem 40.
+In this paper we mostly care about the function f(x) = e−x, which is what we want for
+generating a puriﬁcation of the Gibbs state corresponding to H; and the function f(x) = √x,
+which is what we use for estimating quantities like Tr(Aρ). However, our techniques apply
+much more generally than to these two functions. For example, they also simplify the analysis
+of the improved linear-systems solver of Childs et al. [CKS17], where the relevant function is
+f(x) = 1/x. As in their work, the Linear Combination of Unitaries technique of Childs et
+al. [CW12, BCC+15, BCK15] is a crucial tool for us.
+A generalized minimum-ﬁnding algorithm.
+D¨urr and Høyer [DH96] showed how to ﬁnd
+the minimal value of a function f : [N] →R using O(
+√
+N) queries to f, by repeatedly using
+Grover search to ﬁnd smaller and smaller elements of the range of f. In Appendix C we describe
+a more general minimum-ﬁnding procedure. Suppose we have a unitary U which prepares a
+quantum state U|0⟩= PN
+k=1 |ψk⟩|xk⟩, where the |ψk⟩are unnormalized states. Our procedure
+can ﬁnd the minimum value xk∗among the xk’s that have support in the second register, using
+roughly O(1/∥ψk∗∥) applications of U and U−1. Also, upon ﬁnding the minimal value k∗the
+procedure actually outputs the normalized state proportional to |ψk∗⟩|xk∗⟩. This immediately
+gives the D¨urr-Høyer result as a special case, if we take U to produce U|0⟩=
+1
+√
+N
+PN
+k=1 |k⟩|f(k)⟩
+using one query to f.
+Unlike D¨urr-Høyer, we need not assume direct query access to the
+individual values f(k).
+More interestingly for us, for a given n-dimensional Hamiltonian H, if we combine our
+minimum-ﬁnder with phase estimation using unitary U = eiH on one half of a maximally
+entangled state, then we obtain an algorithm for estimating the smallest eigenvalue of H (and
+preparing its ground state) using roughly O(√n) applications of phase estimation with U. A
+similar result on approximating the smallest eigenvalue of a Hamiltonian was already shown
+by Poulin and Wocjan [PW09a], but we improve on their analysis to be able to apply it as a
+subroutine in our procedure to estimate Tr(Ajρ).
+1.4.3
+Lower bounds
+What about lower bounds for quantum SDP-solvers? Brand˜ao and Svore already proved that a
+quantum SDP-solver has to make Ω(√n + √m) queries to the input matrices, for some SDPs.
+Their lower bound is for a family of SDPs where s, R, r, 1/ε are all constant, and is by reduction
+from a search problem.
+In this paper we prove lower bounds that are quantitatively stronger in m and n, but for
+SDPs with non-constant R and r. The key idea is to consider a Boolean function F on N = abc
+5Here a univariate function f : R →C is applied to a Hermitian matrix H in the standard way, by acting
+on the eigenvalues of H: if H has diagonalization H = U −1DU, with D the diagonal matrix of H’s eigenvalues,
+then f(H) is the matrix U −1f(D)U, where the diagonal matrix f(D) is obtained from D by applying f to its
+diagonal entries.
+8
+
+
+=== PDF PAGE 9 ===
+input bits that is the composition of an a-bit majority function with a b-bit OR function with a
+c-bit majority function. The known quantum query complexities of majority and OR, combined
+with composition properties of the adversary lower bound, imply that every quantum algorithm
+that computes this function requires Ω(a
+√
+b c) queries. We deﬁne a family of LPs with non-
+constant R and r such that a constant-error approximation of OPT computes F. Choosing a,
+b, and c appropriately, this implies a lower bound of
+Ω
+q
+max{n, m}(min{n, m})3/2
+
+queries to the entries of the input matrices for quantum LP-solvers. Since LPs are SDPs with
+sparsity s = 1, we get the same lower bound for quantum SDP-solvers. If m and n are of
+the same order, this lower bound is Ω(mn), the same scaling with mn as the classical general
+instantiation of Arora-Kale (3). In particular, this shows that we cannot have an O(√mn) upper
+bound without simultaneously having polynomial dependence on Rr/ε. The construction of our
+lower bound implies that for the case m ≈n, this polynomial dependence has to be at least
+(Rr/ε)1/4.
+Subsequent work.
+Following the ﬁrst version of our paper, improvements in the runtime of
+quantum SDP-solvers were obtained in [BKL+19, vAG19a], the latter providing a runtime of
+eO
+
+(√m + √n Rr
+ϵ )s
+
+Rr
+ϵ
+4
+. For the special case of LP-solving, where s = 1, [vAG19b] further
+improved the runtime to eO
+
+(√m + √n)
+
+Rr
+ϵ
+3
+.
+In a diﬀerent algorithmic direction, Kerenidis and Prakash [KP18] recently obtained a quan-
+tum interior-point method for solving SDPs and LPs. It is hard to compare the latter algorithm
+to the other SDP-solvers for two reasons. First, the output of their algorithm consists only of
+almost-feasible solutions to the primal and dual (their algorithm has a polynomial dependence
+on the distance to feasibility). It is therefore not clear what their output means for the opti-
+mal value of the SDPs. Secondly, the runtime of their algorithm depends polynomially on the
+condition number of the matrices that the interior point method encounters, and no explicit
+bounds for these condition numbers are given.
+Our results on implementing smooth functions of a given Hamiltonian have been extended
+to more general input models (block-encodings) in [GSLW19].
+This recent paper builds on
+some of our techniques, but achieves slightly improved complexities by directly implementing
+the transformations without using Hamiltonian simulation as a subroutine.
+Recently van Apeldoorn et al. [vAGGdW20] and Chakrabarti et al. [CCLW20] developed
+quantum algorithms for general black-box convex optimization, where one optimizes over a
+general convex set K, and the access to K is via membership and/or separation oracles. Since
+we work in a model where we are given access directly to the constraints deﬁning the problem,
+our results are incomparable to theirs.
+Organization.
+The paper is organized as follows. In Section 2 we start with a description
+of the Arora-Kale framework for SDP-solvers, and then we describe how to quantize diﬀerent
+aspects of it to obtain a quantum SDP-solver with better dependence on R, r, and 1/ε (or
+rather, on Rr/ε) than Brand˜ao and Svore got.
+In Section 3 we describe the limitations of
+primal-dual SDP-solvers using general oracles (not optimized for speciﬁc SDPs) that produce
+sparse dual solutions y: if good solutions are dense, this puts a lower bound on the number
+of iterations needed.
+In Section 4 we give our lower bounds.
+A number of the proofs are
+relegated to the appendices: how to classically approximate Tr(Ajρ) (Appendix A), how to
+9
+
+
+=== PDF PAGE 10 ===
+eﬃciently implement smooth functions of Hamiltonians on a quantum computer (Appendix B),
+our generalized method for minimum-ﬁnding (Appendix C), upper and lower bounds on how
+eﬃciently we can query entries of sums of sparse matrices (Appendix D), and how to trade oﬀ
+the parameters R, r, and 1/ε against each other (Appendix E).
+2
+An improved quantum SDP-solver
+Here we describe our quantum SDP-solver. In Section 2.1 we describe the framework designed
+by Arora and Kale for solving semideﬁnite programs. As in the recent work by Brand˜ao and
+Svore, we use this framework to design an eﬃcient quantum algorithm for solving SDPs. In
+particular, we show that the key subroutine needed in the Arora-Kale framework can be imple-
+mented eﬃciently on a quantum computer. Our implementation uses diﬀerent techniques than
+the quantum algorithm of Brand˜ao and Svore, allowing us to obtain a faster algorithm. The
+techniques required for this subroutine are developed in Sections 2.2 and 2.3. In Section 2.4 we
+put everything together to prove the main theorem of this section (the notation is explained
+below):
+Theorem 1. Instantiating Meta-Algorithm 1 using the trace calculation algorithm from Sec-
+tion 2.2 and the oracle from Section 2.3 (with width-bound w := r + 1), and using this to do a
+binary search for OPT ∈[−R, R] (using diﬀerent guesses α for OPT), gives a quantum algo-
+rithm for solving SDPs of the form (1), which (with high probability) produces a feasible solution
+y to the dual program which is optimal up to an additive error ε, and uses
+eO
+ 
+√nms2
+Rr
+ε
+8 !
+queries to the input matrices and the same order of other gates.
+Notation/Assumptions.
+We use log to denote the logarithm in base 2. We denote the all-
+zero matrix and vector by 0 and the all-one vector by 1. Throughout we assume each element
+of the input matrices can be represented by a bitstring of size poly(log n, log m). We use s as
+the sparsity of the input matrices, that is, the maximum number of non-zero entries in a row (or
+column) of any of the matrices C, A1, . . . , Am is s. Recall that for normalization purposes we
+assume ∥A1∥, . . . , ∥Am∥, ∥C∥≤1. We furthermore assume that A1 = I and b1 = R, that is, the
+trace of primal-feasible solutions is bounded by R (and hence also the trace of primal-optimal
+solutions is bounded by R). The analogous quantity for the dual SDP (2), an upper bound
+on Pm
+j=1 yj for an optimal dual solution y, will be denoted by r. However, we do not add the
+constraint Pm
+j=1 yj ≤r to the dual. We will assume r ≥1. For r to be well-deﬁned we have to
+make the explicit assumption that the optimal solution in the dual is attained. In Section 3 it
+will be necessary to work with the best possible upper bounds: we let R∗be the smallest trace
+of an optimal solution to SDP (1), and we let r∗be the smallest ℓ1-norm of an optimal solution
+to the dual. These quantities are well-deﬁned; indeed, both the primal and dual optimum are
+attained: the dual optimum is attained by assumption, and due to the assumption A1 = I, the
+dual SDP is strictly feasible, which means that the optimum in (1) is attained.
+Unless speciﬁed otherwise, we always consider additive error. In particular, an ε-optimal
+solution to an SDP will be a feasible solution whose objective value is within additive error ε
+of the optimum.
+Input oracles:
+We assume sparse black-box access to the elements of matrices C, A1, . . . , Am
+deﬁned in the following way: for input (j, k, ℓ) ∈({0}∪[m])×[n]×[s] we can query the location
+10
+
+
+=== PDF PAGE 11 ===
+and value of the ℓth non-zero entry in the kth row of the matrix Aj (where j = 0 would indicate
+the C matrix).
+Speciﬁcally in the quantum case, as described in [BCK15], we assume access to an oracle OI
+which serves the purpose of sparse access. OI calculates the indexAj : [n] × [s] →[n] function,
+which for input (k, ℓ) gives the column index of the ℓth non-zero element in the kth row of Aj.
+We assume this oracle computes the index “in place”:
+OI|j, k, ℓ⟩= |j, k, indexAj(k, ℓ)⟩.
+(4)
+(In the degenerate case where the kth row has fewer than ℓnon-zero entries, indexAj(k, ℓ) is
+deﬁned to be ℓtogether with some special symbol.) We also assume we can apply the inverse
+of OI.
+We also need another oracle OM, returning a bitstring representation of (Aj)ki for any
+j ∈{0} ∪[m] and k, i ∈[n]:
+OM|j, k, i, z⟩= |j, k, i, z ⊕(Aj)ki⟩.
+(5)
+The slightly unusual “in place” deﬁnition of oracle OI is not too demanding. In particular,
+if instead we had an oracle that computed the non-zero entries of a row in order, then we
+could implement both OI and its inverse using log(s) queries (we can compute ℓfrom k and
+indexAj(k, ℓ) using binary search) [BCK15].
+Computational model:
+As our computational model, we assume a slight relaxation of the
+usual quantum circuit model: a classical control system that can run quantum subroutines. We
+limit the classical control system so that its number of operations is at most a polylogarithmic
+factor bigger than the gate complexity of the quantum subroutines, i.e., if the quantum sub-
+routines use C gates, then the classical control system may not use more than O(C polylog(C))
+operations.
+When we talk about gate complexity, we count the number of two-qubit quantum gates
+needed for implementation of the quantum subroutines. Additionally, we assume for simplicity
+that there exists a unit-cost QRAM gate that allows us to store and retrieve qubits in a memory,
+by means of a swap of two registers indexed by another register:
+QRAM : |i, x, r1, . . . , rK⟩7→|i, ri, r1, . . . , ri−1, x, ri+1, . . . , rK⟩,
+where the registers r1, . . . , rK are only accessible through this gate. The QRAM gate can be
+seen as a quantum analogue of pointers in classical computing. The only place where we need
+QRAM is in Appendix D, for a data structure that allows eﬃcient access to the non-zero entries
+of a sum of sparse matrices; for the special case of LP-solving it is not needed.
+2.1
+The Arora-Kale framework for solving SDPs
+In this section we give a short introduction to the Arora-Kale framework for solving semideﬁnite
+programs. We refer to [AK16, AHK12] for a more detailed description and omitted proofs.
+The key building block is the Matrix Multiplicative Weights (MMW) algorithm introduced
+by Arora and Kale in [AK16]. The MMW algorithm can be seen as a strategy for you in a game
+between you and an adversary. We ﬁrst introduce the game. There is a number of rounds T.
+In each round you present a density matrix ρ to an adversary, the adversary replies with a loss
+matrix M satisfying −I ⪯M ⪯I. After each round you have to pay Tr(Mρ). Your objective
+is to pay as little as possible. The MMW algorithm is a strategy for you that allows you to
+lose not too much, in a sense that is made precise below. In Algorithm 1 we state the MMW
+algorithm, the following theorem shows the key property of the output of the algorithm.
+11
+
+
+=== PDF PAGE 12 ===
+Input Parameter η ≤1, number of rounds T.
+Rules In each round player 1 (you) presents a density matrix ρ, player 2 (the adversary) replies
+with a matrix M satisfying −I ⪯M ⪯I.
+Output A sequence of symmetric n×n matrices M(1), . . . , M(T) s.t. −I ⪯M(t) ⪯I, for t ∈[T]
+and a sequence of n × n psd matrices ρ(1), . . . , ρ(T) satisfying Tr
+
+ρ(t)
+= 1 for t ∈[T].
+Strategy of player 1:
+Take ρ(1) := I/n
+In round t:
+1. Show the density matrix ρ(t) to the adversary.
+2. Obtain the loss matrix M(t) from the adversary.
+3. Update the density matrix as follows:
+ρ(t+1) := exp
+ 
+−η
+t
+X
+τ=1
+M(τ)
+!,
+Tr
+ 
+exp
+ 
+−η
+t
+X
+τ=1
+M(τ)
+!!
+Algorithm 1: Matrix Multiplicative Weights (MMW) Algorithm
+Theorem 2 ([AK16, Theorem 3.1]). For every adversary, the sequence ρ(1), . . . , ρ(T) of density
+matrices constructed using the Matrix Multiplicative Weights Algorithm (1) satisﬁes
+T
+X
+t=1
+Tr
+
+M(t)ρ(t)
+≤λmin
+ T
+X
+t=1
+M(t)
+!
++ η
+T
+X
+t=1
+Tr
+
+(M(t))2ρ(t)
++ ln(n)
+η
+.
+Arora and Kale use the MMW algorithm to construct an SDP-solver. For that, they con-
+struct an adversary who promises to satisfy an additional condition: in each round t, the
+adversary returns a matrix M(t) whose trace inner product with the density matrix ρ(t) is
+non-negative. The above theorem shows that then, after T rounds, the average of the adver-
+sary’s responses satisﬁes the stronger condition that its smallest eigenvalue is not too negative:
+λmin
+
+1
+T
+PT
+t=1 M(t)
+≥−η −ln(n)
+ηT . More explicitly, the MMW algorithm is used to build a vector
+y ≥0 such that
+1
+T
+T
+X
+t=1
+M(t) ∝
+m
+X
+j=1
+yjAj −C
+and bT y ≤α. That is, the smallest eigenvalue of the matrix Pm
+j=1 yjAj −C is only slightly
+below zero and y’s objective value is at most α. Since A1 = I, increasing the ﬁrst coordinate
+of y makes the smallest eigenvalue of P
+j yjAj −C bigger, so that this matrix becomes psd
+and hence dual-feasible. By the above we know how much the minimum eigenvalue has to be
+shifted, and with the right choice of parameters it can be shown that this gives a dual-feasible
+vector y that satisﬁes bT y ≤α + ε. In order to present the algorithm formally, we require some
+deﬁnitions.
+Given a candidate solution X ⪰0 for the primal problem (1) and a parameter ε ≥0, deﬁne
+12
+
+
+=== PDF PAGE 13 ===
+the polytope
+Pε(X) := {y ∈Rm : bT y ≤α,
+Tr
+
+
+ m
+X
+j=1
+yjAj −C
+
+X
+
+≥−ε,
+y ≥0}.
+One can verify the following:
+Lemma 3 ([AK16, Lemma 4.2]). If for a given candidate solution X ⪰0 the polytope P0(X)
+is empty, then a scaled version of X is primal-feasible and of objective value at least α.
+The Arora-Kale framework for solving SDPs uses the MMW algorithm where the role of the
+adversary is taken by an ε-approximate oracle:
+Input An n×n psd matrix X, a number α ∈[−R, R], and the description of an SDP as in (1).
+Output Either the Oracleε returns a vector y from the polytope Pε(X) or it outputs “fail”.
+It may only output fail if P0(X) = ∅.
+Algorithm 2: Deﬁnition of an ε-approximate Oracleε for maximization SDPs
+As we will see later, the runtime of the Arora-Kale framework depends on a property of the
+oracle called the width:
+Deﬁnition 4 (Width of Oracleε). The width of Oracleε for an SDP is the smallest w∗≥
+0 such that for every X ⪰0 and α ∈[−R, R], the vector y returned by Oracleε satisﬁes
+
+Pm
+j=1 yjAj −C
+ ≤w∗.
+In practice, the width of an oracle is not always known. However, it suﬃces to work with
+an upper bound w ≥w∗: as we can see in Meta-Algorithm 1, the purpose of the width is to
+rescale the matrix M(t) in such a way that it forms a valid response for the adversary in the
+MMW algorithm. The following theorem shows the correctness of the Arora-Kale primal-dual
+meta-algorithm for solving SDPs, stated in Meta-Algorithm 1:
+Theorem 5 ([AK16, Theorem 4.7]). Suppose we are given an SDP of the form (1) with input
+matrices A1 = I, A2, . . . , Am and C having operator norm at most 1, and input reals b1 =
+R, b2, . . . , bm. Assume Meta-Algorithm 1 does not output “fail” in any of the rounds, then the
+returned vector y is feasible for the dual (2) with objective value at most α + ε. If Oracleε/3
+outputs “fail” in the t-th round then a suitably scaled version of X(t) is primal-feasible with
+objective value at least α.
+The SDP-solver uses T =
+l9w2R2 ln(n)
+ε2
+m
+iterations. In each iteration several steps have to
+be taken. The most expensive two steps are computing the matrix exponential of the matrix
+−ηH(t) and the application of the oracle. Note that the only purpose of computing the matrix
+exponential is to allow the oracle to compute the values Tr(AjX) for all j and Tr(CX), since the
+polytope depends on X only through those values. To obtain faster algorithms it is important
+to note, as was done already by Arora and Kale, that the primal-dual algorithm also works if
+we provide a (more accurate) oracle with approximations of Tr(AjX). Let aj := Tr(Ajρ) =
+13
+
+
+=== PDF PAGE 14 ===
+Input The input matrices and reals of SDP (1) and trace bound R. The current guess α of
+the optimal value of the dual (2). An additive error tolerance ε > 0. An ε
+3-approximate
+oracle Oracleε/3 as in Algorithm 2 with width-bound w.
+Output Either “Lower” and a vector y ∈Rm
++ feasible for (2) with bT y ≤α + ε
+or “Higher” and a symmetric n×n matrix X that, when scaled suitably, is primal-feasible
+with objective value at least α.
+T :=
+l9w2R2 ln(n)
+ε2
+m
+.
+η :=
+q
+ln(n)
+T .
+ρ(1) := I/n
+for t = 1, . . . , T do
+Run Oracleε/3 with X(t) = Rρ(t).
+if Oracleε/3 outputs “fail” then
+return “Higher” and a description of X(t).
+end if
+Let y(t) be the vector generated by Oracleε/3.
+Set M(t) = 1
+w
+Pm
+j=1 y(t)
+j Aj −C
+
+.
+Deﬁne H(t) = Pt
+τ=1 M(τ).
+Update the state matrix as follows: ρ(t+1) := exp
+
+−ηH(t)
+/Tr
+
+exp
+
+−ηH(t)
+.
+end for
+If Oracleε/3 does not output “fail” in any of the T rounds, then output the dual solution
+y = ε
+Re1 + 1
+T
+PT
+t=1 y(t) where e1 = (1, 0, . . . , 0) ∈Rm.
+Meta-Algorithm 1: Primal-Dual Algorithm for solving SDPs
+Tr(AjX)/Tr(X) and c := Tr(Cρ) = Tr(CX)/Tr(X). Then, given a list of reals ˜a1, . . . , ˜am, ˜c
+and a parameter θ ≥0, such that |˜aj −aj| ≤θ for all j, and |˜c −c| ≤θ, we deﬁne the polytope
+˜P(˜a1, . . . , ˜am, ˜c −(r + 1)θ) := {y ∈Rm : bT y ≤α,
+m
+X
+j=1
+yj ≤r,
+m
+X
+j=1
+˜ajyj ≥˜c −(r + 1)θ
+y ≥0}.
+For convenience we will denote ˜a = (˜a1, . . . , ˜am) and c′ := ˜c −(r + 1)θ. Notice that ˜P also
+contains a new type of constraint: P
+j yj ≤r. Recall that r is deﬁned as a positive real such
+that there exists an optimal solution y to SDP (2) with ∥y∥1 ≤r. Hence, using that P0(X) is
+a relaxation of the feasible region of the dual (with bound α on the objective value), we may
+restrict our oracle to return only such y:
+P0(X) ̸= ∅⇒P0(X) ∩{y ∈Rm :
+m
+X
+j=1
+yj ≤r} ̸= ∅.
+The beneﬁt of this restriction is that an oracle that always returns a vector with bounded ℓ1-
+norm automatically has a width w∗≤r + 1, due to the assumptions on the norms of the input
+14
+
+
+=== PDF PAGE 15 ===
+matrices. The downside of this restriction is that the analogue of Lemma 3 does not hold for
+P0(X) ∩{y ∈Rm : P
+j yj ≤r}.6
+The following shows that an oracle that always returns a vector y ∈˜P(˜a, c′) if one exists, is
+a 4Rrθ-approximate oracle as deﬁned in Algorithm 2.
+Lemma 6. Let ρ = X/Tr(X) where Tr(X) ≤R. Let ˜a1, . . . , ˜am and ˜c be θ-approximations of
+Tr(A1ρ), . . . , Tr(Amρ) and Tr(Cρ) respectively. Then the following holds:
+P0(X) ∩{y ∈Rm :
+m
+X
+j=1
+yj ≤r} ⊆˜P(˜a, c′) ⊆P4Rrθ(X).
+Proof. First, suppose y ∈P0(X) ∩{y ∈Rm : P
+j yj ≤r}. We then have y ∈˜P(˜a, c′) because
+m
+X
+j=1
+˜ajyj −˜c ≥
+m
+X
+j=1
+(˜aj −Tr(Ajρ))yj −(˜c −Tr(Cρ)) ≥−θ∥y∥1 −θ ≥−(r + 1)θ,
+where in the ﬁrst inequality we subtracted Pm
+j=1 Tr(Ajρ)yj −Tr(Cρ) ≥0.
+Next, suppose y ∈˜P(˜a, c′). We show that y ∈P4Rrθ(X). Indeed, since |Tr(Ajρ) −˜aj| ≤θ
+we have
+Tr
+
+
+
+
+m
+X
+j=1
+yjAj −C
+
+ρ
+
+≥
+
+
+m
+X
+j=1
+˜ajyj + ˜c
+
+−(r + 1)θ ≥−(2 + r + ∥y∥1)θ ≥−4rθ
+where the last inequality used our assumptions r ≥1 and ∥y∥1 ≤r. Hence
+Tr
+
+
+
+
+m
+X
+j=1
+yjAj −C
+
+X
+
+≥−4rTr(X)θ ≥−4Rrθ.
+For the latter inequality we used Tr(X) ≤R.
+We have now seen the Arora-Kale framework for solving SDPs.
+To obtain a quantum
+SDP-solver it remains to provide a quantum oracle subroutine.
+By the above discussion it
+suﬃces to set θ = ε/(12Rr) and to use an oracle that is based on θ-approximations of Tr(Aρ)
+(for A ∈{A1, . . . , Am, C}), since with that choice of θ we have P4Rrθ(X) = Pε/3(X). In the
+section below we ﬁrst give a quantum algorithm for approximating Tr(Aρ) eﬃciently (see also
+Appendix A for a classical algorithm). Then, in Section 2.3, we provide an oracle using those
+estimates. The oracle will be based on a simple geometric idea and can be implemented both on
+a quantum computer and on a classical computer (of course, resulting in diﬀerent runtimes). In
+Section 2.4 we conclude with an overview of the runtime of our quantum SDP-solver. We want
+to stress that our solver is meant to work for any SDP. In particular, our oracle does not use
+the structure of a speciﬁc SDP. As we will show in Section 3, any oracle that works for all SDPs
+necessarily has a large width-bound. To obtain quantum speedups for a speciﬁc class of SDPs
+it will be necessary to develop oracles tuned to that problem, we view this as an important
+direction for future work. Recall from the introduction that Arora and Kale also obtain fast
+classical algorithms for problems such as MAXCUT by developing specialized oracles.
+6Using several transformations of the SDP, from Appendix E and Lemma 2 of [BS17], one can show that there
+is a way to remove the need for this restriction. Hence, after these modiﬁcations, if for a given candidate solution
+X ⪰0 the oracle outputs that the set P0(X) is empty, then a scaled version of X is primal feasible for this new
+SDP, with objective value at least α. This scaled version of X can be modiﬁed to a near-feasible solution to the
+original SDP (it will be psd, but it might violate the linear constraints a little bit) with nearly the same objective
+value.
+15
+
+
+=== PDF PAGE 16 ===
+2.2
+Approximating the expectation value Tr(Aρ) using a quantum algorithm
+In this section we give an eﬃcient quantum algorithm to approximate quantities of the form
+Tr(Aρ).
+We are going to work with Hermitian matrices A, H ∈Cn×n, such that ρ is the
+Gibbs state e−H/Tr
+
+e−H
+. Note the analogy with quantum physics: in physics terminology
+Tr(Aρ) is simply called the “expectation value” of A for a quantum system in a thermal state
+corresponding to H.
+The general approach is to separately estimate Tr
+
+Ae−H
+and Tr
+
+e−H
+, and then to use
+the ratio of these estimates as an approximation of Tr(Aρ) = Tr
+
+Ae−H
+/Tr
+
+e−H
+.
+Both
+estimations are done using state preparation to prepare a pure state with a ﬂag, such that
+the probability that the ﬂag is 0 is proportional to the quantity we want to estimate, and
+then to use amplitude estimation to estimate that probability. Below in Section 2.2.1 we ﬁrst
+describe the general approach. In Section 2.2.2 we then instantiate this for the special case
+where all matrices are diagonal, which is the relevant case for LP-solving. In Section 2.2.3 we
+handle the general case of arbitrary matrices (needed for SDP-solving); the state-preparation
+part will be substantially more involved there, because in the general case we need not know
+the diagonalizing bases for A and H, and A and H may not be simultaneously diagonalizable.
+2.2.1
+General approach
+To start, consider the following lemma about the multiplicative approximation error of a ratio
+of two real numbers that are given by multiplicative approximations:
+Lemma 7. Let 0 ≤θ ≤1 and let α, ˜α, Z, ˜Z be positive real numbers such that |α −˜α| ≤αθ/3
+and |Z −˜Z| ≤Zθ/3. Then
+
+α
+Z −˜α
+˜Z
+ ≤θ α
+Z
+Proof. The inequality can be proven as follows
+
+α
+Z −˜α
+˜Z
+ =
+
+α ˜Z −˜αZ
+Z ˜Z
+ =
+
+α ˜Z −αZ + αZ −˜αZ
+Z ˜Z
+ ≤
+
+α ˜Z −αZ
+Z ˜Z
+ +
+
+αZ −˜αZ
+Z ˜Z
+ ≤αθ
+3 ˜Z + αθ
+3 ˜Z ≤θ α
+Z
+where the last step used ˜Z ≥2
+3Z.
+Corollary 8. Let A be such that ∥A∥≤1. A multiplicative θ
+9-approximation of both Tr
+
+I
+4e−H
+and Tr
+ I+A/2
+4
+e−H
+suﬃces to get an additive θ-approximation of Tr(Ae−H)
+Tr(e−H) .
+Proof. According to Lemma 7 by dividing the two multiplicative approximations we get
+θ
+3
+Tr
+ I+A/2
+4
+e−H
+Tr
+
+I
+4e−H
+
+= θ
+3
+
+1 +
+Tr
+
+A
+2 e−H
+Tr(e−H)
+
+≤θ
+3
+
+1 + ∥A∥
+2
+
+≤θ/2,
+i.e., an additive θ/2-approximation of
+1 +
+Tr
+
+A
+2 e−H
+Tr(e−H) ,
+which yields an additive θ-approximation to Tr
+
+Ae−H
+/Tr
+
+e−H
+.
+16
+
+
+=== PDF PAGE 17 ===
+It thus suﬃces to separately approximate both quantities from the corollary. Notice that
+both are of the form Tr
+ I+A/2
+4
+e−H
+, the ﬁrst with the actual A, the second with A = 0.
+Furthermore, a multiplicative θ/9-approximation to both can be achieved by approximating
+both up to an additive error θTr
+
+e−H
+/72, since Tr
+
+I
+8e−H
+≤Tr
+ I+A/2
+4
+e−H
+.
+For now, let us assume we can construct a unitary UA,H such that if we apply it to the
+state |0 . . . 0⟩then we get a probability Tr((I+A/2)e−H)
+4n
+of outcome 0 when measuring the ﬁrst
+qubit. That is:
+∥(⟨0| ⊗I)UA,H|0 . . . 0⟩∥2 =
+Tr
+
+(I + A/2)e−H
+4n
+.
+(To clarify the notation: if |ψ⟩is a 2-register state, then (⟨0|⊗I)|ψ⟩is the (unnormalized) state
+in the 2nd register that results from projecting on |0⟩in the 1st register.)
+In practice we will not be able to construct such a UA,H exactly, instead we will construct
+a ˜UA,H that yields a suﬃciently close approximation of the correct probability. When we have
+access to such a unitary, the following lemma allows us to use amplitude estimation to estimate
+the probability and hence Tr
+ I+A/2
+4
+e−H
+up to the desired error.
+Lemma 9. Suppose we have a unitary U acting on q qubits such that U|0 . . . 0⟩= |0⟩|ψ⟩+ |Φ⟩
+with (⟨0| ⊗I)|Φ⟩= 0 and ∥ψ∥2 = p ≥pmin for some known bound pmin. Let µ ∈(0, 1] be the
+allowed multiplicative error in our estimation of p. Then with O
+
+1
+µ√pmin
+
+uses of U and U−1
+and using O
+
+q
+µ√pmin
+
+gates on the q qubits and some ancilla qubits, we obtain a ˜p such that
+|p −˜p| ≤µp with probability at least 4/5.
+Proof. We use the amplitude-estimation algorithm of [BHMT02, Theorem 12] with M applica-
+tions of U and U−1. This provides an estimate ˜p of p, that with probability at least 8/π2 > 4/5
+satisﬁes
+|p −˜p| ≤2π
+p
+p(1 −p)
+M
++ π2
+M2 ≤π
+M
+
+2√p + π
+M
+
+.
+Choosing M the smallest power of 2 such that M ≥3π/(µ√pmin), with probability at least 4/5
+we get
+|p −˜p| ≤µ
+√pmin
+3
+
+2√p + µ
+√pmin
+3
+
+≤µ
+√p
+3 (3√p) ≤µp.
+The q factor in the gate complexity comes from the implementation of the amplitude ampli-
+ﬁcation steps needed in amplitude estimation. The gate complexity of the whole amplitude-
+estimation procedure is dominated by this contribution, proving the ﬁnal gate complexity.
+Corollary 10. Suppose we are given the positive numbers z ≤Tr
+
+e−H
+, θ ∈(0, 1], and unitary
+circuits ˜UA′,H for A′ = 0 and A′ = A with ∥A∥≤1, each acting on at most q qubits such that
+
+(⟨0| ⊗I) ˜UA′,H|0 . . . 0⟩
+
+2 −
+Tr
+
+(I + A′/2)e−H
+4n
+
+≤
+θz
+144n.
+Applying the procedure of Lemma 9 to ˜UA′,H (both for A′ = 0 and for A′ = A) with pmin =
+z
+9n
+and µ = θ/19, and combining the results using Corollary 8 yields an additive θ-approximation
+of Tr(Aρ) with probability at least 4/5. The procedure uses
+O
+1
+θ
+rn
+z
+
+applications of ˜UA,H, ˜U0,H and their inverses, and O
+
+q
+θ
+q
+n
+z
+
+additional gates.
+17
+
+
+=== PDF PAGE 18 ===
+Proof. First note that since I + A′/2 ⪰I/2, we have
+t :=
+Tr
+
+(I + A′/2)e−H
+4n
+≥
+Tr
+
+e−H
+8n
+,
+and thus
+
+(⟨0| ⊗I) ˜UA′,H|0 . . . 0⟩
+
+2 −t
+ ≤
+θz
+144n ≤θ
+18 ·
+Tr
+
+e−H
+8n
+≤θ
+18t ≤t
+18.
+(6)
+Therefore
+(⟨0| ⊗I) ˜UA′,H|0 . . . 0⟩
+
+2 ≥
+
+1 −1
+18
+
+t ≥
+
+1 −1
+18
+Tr
+
+e−H
+8n
+>
+Tr
+
+e−H
+9n
+≥z
+9n =: pmin.
+Also by (6) we have
+(⟨0| ⊗I) ˜UA′,H|0 . . . 0⟩
+
+2 ≤
+
+1 + θ
+18
+
+t ≤19
+18t.
+Therefore using Lemma 9 and setting µ = θ/19, with probability at least 4/5 we get a ˜p
+satisfying
+˜p −
+(⟨0| ⊗I) ˜UA′,H|0 . . . 0⟩
+
+2 ≤θ
+19 ·
+(⟨0| ⊗I) ˜UA′,H|0 . . . 0⟩
+
+2 ≤θ
+18t.
+(7)
+By combining (6)-(7) and using the triangle inequality we get
+|t −˜p| ≤θ
+9t,
+so that Corollary 8 can indeed be applied. The complexity statement follows from Lemma 9
+and our choices of pmin and µ.
+Notice the 1/√z ≥1/
+q
+Tr(e−H) factor in the complexity statement of the last corollary. To
+make sure this factor is not too large, we would like to ensure Tr
+
+e−H
+= Ω(1). This can be
+achieved by substituting H+ = H −λminI, where λmin is the smallest eigenvalue of H. It is
+easy to verify that this will not change the value Tr
+
+Ae−H/Tr
+
+e−H
+.
+It remains to show how to compute λmin and how to apply ˜UA,H. Both of these steps are
+considerably easier in the case where all matrices are diagonal, so we will consider this case
+ﬁrst.
+2.2.2
+The special case of diagonal matrices – for LP-solving
+In this section we consider diagonal matrices, assuming oracle access to H of the following form:
+OH|i⟩|z⟩= |i⟩|z ⊕Hii⟩
+and similarly for A. Notice that this kind of oracle can easily be constructed from the general
+sparse matrix oracle (5) that we assume access to.
+Lemma 11. Let A, H ∈Rn×n be diagonal matrices such that ∥A∥≤1 and H ⪰0, and let
+µ > 0 be an error parameter. Then there exists a unitary ˜UA,H such that
+
+(⟨0| ⊗I) ˜UA,H|0 . . . 0⟩
+
+2 −Tr
+I + A/2
+4n
+e−H
+ ≤µ,
+which uses 1 quantum query to A and H and O(logO(1)(1/µ) + log(n)) other gates.
+18
+
+
+=== PDF PAGE 19 ===
+Proof. First we prepare the state Pn
+i=1 |i⟩/√n with O(log(n)) one- and two-qubit gates. If n
+is a power of 2 we do this by applying log2(n) Hadamard gates on |0⟩⊗log2(n); in the general
+case it is still possible to prepare the state Pn
+i=1 |i⟩/√n with O(log(n)) two-qubit gates, for
+example by preparing the state Pk
+i=1 |i⟩/
+√
+k for k = 2⌈log2(n)⌉and then using (exact) amplitude
+ampliﬁcation in order to remove the i > n from the superposition.
+Then we query the diagonal values of H and A to get the state Pn
+i=1 |i⟩|Hii⟩|Aii⟩/√n. Using
+these binary values we apply a ﬁnite-precision arithmetic circuit to prepare
+1
+√n
+n
+X
+i=1
+|i⟩|Hii⟩|Aii⟩|βi⟩, where βi := arcsin
+
+
+s
+1 + Aii/2
+4
+e−Hii + δi
+
+/π, and |δi| ≤µ.
+The error δi is because we only write down a ﬁnite number of bits b1.b2b3 . . . blog(8/µ). Due to
+our choice of A and H, we know that βi lies in [0, 1]. We proceed by ﬁrst adding an ancilla
+qubit initialized to |1⟩in front of the state, then we apply log(8/µ) controlled rotations to this
+qubit: for each bj = 1 we apply a rotation by angle π2−j. In other words, if b1 = 1, then we
+rotate |1⟩fully to |0⟩. If b2 = 1, then we rotate halfway, and we proceed further by halving the
+angle for each subsequent bit. We will end up with the state:
+1
+√n
+n
+X
+i=1
+
+
+s
+1 + Aii/2
+4
+e−Hii + δi |0⟩+
+s
+1 −1 + Aii/2
+4
+e−Hii −δi |1⟩
+
+|i⟩|Aii⟩|Hii⟩|βi⟩.
+It is now easy to see that the squared norm of the |0⟩-part of this state is as required:
+
+1
+√n
+n
+X
+i=1
+s
+1 + Aii/2
+4eHii
++ δi |i⟩
+
+2
+= 1
+n
+n
+X
+i=1
+1 + Aii/2
+4
+e−Hii + δi
+
+=
+Tr
+
+(I + A/2)e−H
+4n
++
+n
+X
+i=1
+δi
+n ,
+which is an additive µ-approximation since
+Pn
+i=1
+δi
+n
+ ≤µ.
+Corollary 12. For A, H ∈Rn×n diagonal matrices with ∥A∥≤1, an additive θ-approximation
+of
+Tr(Aρ) =
+Tr
+
+Ae−H
+Tr(e−H)
+can be computed using O
+ √n
+θ
+
+queries to A and H, and eO
+ √n
+θ
+
+other gates.
+Proof. Since H is a diagonal matrix, its eigenvalues are exactly its diagonal entries.
+Using
+the quantum minimum-ﬁnding algorithm of D¨urr and Høyer [DH96] one can ﬁnd (with high
+success probability) the minimum λmin of the diagonal entries using O(√n) queries to the matrix
+elements. Applying Lemma 11 and Corollary 10 to H+ = H −λminI, with z = 1, gives the
+stated bound.
+2.2.3
+General case – for SDP-solving
+In this section we will extend the ideas from the last section to non-diagonal matrices. There
+are a few complications that arise in this more general case. These mostly follow from the fact
+that we now do not know the eigenvectors of H and A, which were the basis states before,
+and that these eigenvectors might not be the same for both matrices. For example, to ﬁnd the
+minimal eigenvalue of H, we can no longer simply minimize over its diagonal entries. To solve
+this, in Appendix C we develop new techniques that generalize minimum-ﬁnding.
+19
+
+
+=== PDF PAGE 20 ===
+Furthermore, the unitary ˜UA,H in the LP case could be seen as applying the operator
+s
+I + A/2
+4
+e−H
+to a superposition of its eigenvectors. This is also more complicated in the general setting, due
+to the fact that the eigenvectors are no longer the basis states. In Appendix B we develop
+general techniques to apply smooth functions of Hamiltonians to a state. Among other things,
+this will be used to create an eﬃcient puriﬁed Gibbs sampler.
+Our Gibbs sampler uses similar methods to the work of Chowdhury and Somma [CS17]
+for achieving logarithmic dependence on the precision. However, the result of [CS17] cannot
+be applied to our setting, because it implicitly assumes access to an oracle for
+√
+H instead of
+H. Although their paper describes a way to construct such an oracle, it comes with a large
+overhead: they construct an oracle for
+√
+H′ =
+√
+H + νI, where ν ∈R+ is some possibly large
+positive number. This shifting can have a huge eﬀect on Z′ = Tr
+
+e−H′
+= e−νTr
+
+e−H
+, which
+can be prohibitive due to the
+p
+1/Z′ factor in the runtime, which blows up exponentially in ν.
+In the following lemma we show how to implement ˜UA,H using the techniques we developed
+in Appendix B.
+Lemma 13. Let A, H ∈Cn×n be Hermitian matrices such that ∥A∥≤1 and I ⪯H ⪯KI for
+a known K ∈R+. Assume A is s-sparse and H is d-sparse with s ≤d. Let µ > 0 be an error
+parameter. Then there exists a unitary ˜UA,H such that
+
+(⟨0| ⊗I) ˜UA,H|0 . . . 0⟩
+
+2 −Tr
+I + A/2
+4n
+e−H
+ ≤µ
+that uses eO(Kd) queries to A and H, and the same order of other gates.
+Proof. The basic idea is that we ﬁrst prepare a maximally entangled state Pn
+i=1 |i⟩|i⟩/√n, and
+then apply the (norm-decreasing) maps e−H/2 and
+q
+I+A/2
+4
+to the ﬁrst register. Note that we
+can assume without loss of generality that µ ≤1, otherwise the statement is trivial.
+Let ˜W0 = (⟨0| ⊗I) ˜W(|0⟩⊗I) be a µ/5-approximation of the map e−H/2 (in operator norm)
+implemented by using Theorem 43, and let ˜V0 = (⟨0| ⊗I) ˜V (|0⟩⊗I) be a µ/5-approximation
+of the map
+q
+I+A/2
+4
+implemented by using Theorem 40. We deﬁne ˜UA,H := ˜V ˜W, noting that
+there is a hidden ⊗I factor in both ˜V and ˜W corresponding to their respective ancilla qubit.
+As in the linear programming case, we are interested in the probability p of measuring outcome
+00 in the ﬁrst register (i.e., the two “ﬂag” qubits) after applying ˜UA,H. We will analyze this in
+terms of these operators below.
+p :=
+(⟨00| ⊗I) ˜UA,H(|00⟩⊗I)
+n
+X
+i=1
+|i⟩|i⟩
+√n
+
+2
+=
+
+˜V0 ˜W0
+n
+X
+i=1
+|i⟩|i⟩
+√n
+
+2
+= 1
+n
+n
+X
+i=1
+⟨i| ˜W †
+0 ˜V †
+0 ˜V0 ˜W0|i⟩
+= 1
+nTr
+ ˜W †
+0 ˜V †
+0 ˜V0 ˜W0
+
+= 1
+nTr
+ ˜V †
+0 ˜V0 ˜W0 ˜W †
+0
+
+(8)
+20
+
+
+=== PDF PAGE 21 ===
+Now we show that the above quantity is a good approximation of
+1
+nTr
+I + A/2
+4
+e−H
+
+.
+(9)
+For this we show that ˜V †
+0 ˜V0 ≈(I + A/2)/4 and ˜W0 ˜W †
+0 ≈e−H. To see this, ﬁrst note that for
+all matrices B, ˜B with ∥B∥≤1, we have
+B†B −˜B† ˜B
+ =
+(B† −˜B†)B + B†(B −˜B) −(B† −˜B†)(B −˜B)
+
+≤
+(B† −˜B†)B
+ +
+B†(B −˜B)
+ +
+(B† −˜B†)(B −˜B)
+
+≤
+B† −˜B†∥B∥+
+B†
+B −˜B
+ +
+B† −˜B†
+B −˜B
+
+≤2
+B −˜B
+ +
+B −˜B
+
+2.
+Since µ ≤1, and hence 2µ/5 + (µ/5)2 ≤µ/2, this implies (with B = e−H/2 and ˜B = ˜W †
+0) that
+e−H −˜W0 ˜W †
+0
+ ≤µ/2, and also (with B =
+p
+(I + A/2)/4 and ˜B = ˜V0)
+(I+A/2)/4 −˜V †
+0 ˜V0
+ ≤
+µ/2. Let ∥·∥1 denote the trace norm (a.k.a. Schatten 1-norm). Note that for all C, D, ˜C, ˜D:
+Tr(CD) −Tr
+ ˜C ˜D
+ ≤
+CD −˜C ˜D
+
+1
+=
+(C −˜C)D + C(D −˜D) −(C −˜C)(D −˜D)
+
+1
+≤
+(C −˜C)D
+
+1 +
+C(D −˜D)
+
+1 +
+(C −˜C)(D −˜D)
+
+1
+≤
+C −˜C
+∥D∥1 +
+D −˜D
+
+
+∥C∥1 +
+C −˜C
+
+1
+
+.
+Which, in our case (setting C = (I + A/2)/4, D = e−H, ˜C = ˜V †
+0 ˜V0, and ˜D = ˜W0 ˜W †
+0) implies
+that
+Tr
+
+(I + A/2)e−H/4
+
+−Tr
+ ˜V †
+0 ˜V0 ˜W0 ˜W †
+0
+ ≤(µ/2)Tr
+
+e−H
++ (µ/2)(1/2 + µ/2)n.
+Dividing both sides by n and using equation (8) then implies
+Tr
+
+(I + A/2)e−H
+/(4n) −p
+ ≤µ
+2
+Tr
+
+e−H
+n
++ µ
+2
+1
+2 + µ
+2
+
+≤µ
+2 + µ
+2
+= µ.
+This proves the correctness of ˜UA,H. It remains to show that the complexity statement holds.
+To show this we only need to specify how to implement the map
+q
+I+A/2
+4
+using Theorem 40 (see
+Appendix B), since the map eH/2 is already dealt with in Theorem 43. To use Theorem 40, we
+choose x0 := 0, K := 1 and r := 1, since ∥A∥≤1. Observe that
+q
+1+x/2
+4
+= 1
+2
+P∞
+k=0
+ 1/2
+k
+  x
+2
+k
+whenever |x| ≤1. Also let δ = 1/2, so r + δ = 3
+2 and 1
+2
+P∞
+k=0
+
+ 1/2
+k
+
+
+3
+4
+k ≤1 =: B. Recall that
+˜V denotes the unitary that Theorem 40 constructs. Since we choose the precision parameter
+to be µ/5 = Θ(µ), Theorem 40 shows ˜V can be implemented using O
+
+d log2(1/µ)
+
+queries and
+O
+
+d log2(1/µ)
+h
+log(n) + log2.5(1/µ)
+i
+gates. This cost is negligible compared to the cost of our
+implementation of e−H/2 with µ/5 precision: Theorem 43 uses O
+
+Kd log2(K/µ)
+
+queries and
+O
+
+Kd log2(Kd/µ)
+h
+log(n) + log2.5(Kd/µ)
+i
+gates to implement ˜W.
+21
+
+
+=== PDF PAGE 22 ===
+Corollary 14. Let A, H ∈Cn×n be Hermitian matrices such that ∥A∥≤1 and ∥H∥≤K for
+a known bound K ∈R+. Assume A is s-sparse and H is d-sparse with s ≤d. An additive
+θ-approximation of
+Tr(Aρ) =
+Ae−H
+Tr(e−H)
+can be computed using eO
+ √ndK
+θ
+
+queries to A and H, while using the same order of other gates.
+Proof. Start by computing an estimate ˜λmin of λmin(H), the minimum eigenvalue of H, up to
+additive error ε = 1/2 using Lemma 50. We deﬁne H+ := H −(˜λmin −3/2)I, so that I ⪯H+
+but 2I ⊀H+.
+Applying Lemma 13 and Corollary 10 to H+ with z = e−2 gives the stated bound.
+2.3
+An eﬃcient 2-sparse oracle
+To motivate the problem below, recall from the end of Section 2.1 that ˜aj is an additive θ-
+approximation to Tr(Ajρ), ˜c is an additive θ-approximation to Tr(Cρ) and c′ = ˜c −rθ −θ. We
+ﬁrst describe a simpliﬁed version of our quantum 2-sparse oracle (Lemma 16) that assumes access
+to a unitary acting as |j⟩|0⟩|0⟩7→|j⟩|˜aj⟩|ψj⟩, where |ψj⟩is some workspace state depending
+on j.
+At the end of this section we then discuss how to modify the analysis when we are given an
+oracle that acts as |j⟩|0⟩|0⟩7→|j⟩P
+i βi
+j|˜ai
+j⟩|ψi
+j⟩where each |˜ai
+j⟩is an approximation of aj and
+the amplitudes βi
+j are such that measuring the second register with high probability returns an
+˜ai
+j which is θ-close to aj. We do so since the output of the trace-estimation procedure of the
+previous section is of this more complicated form.
+Our goal is to ﬁnd a y ∈˜P(˜a, c′), i.e., a y such that
+∥y∥1 ≤r
+bT y ≤α
+˜aT y ≥c′
+y ≥0.
+Our ﬁrst observation is that the polytope ˜P(˜a, c′) is extremely simple: it has only three non-
+trivial constraints and, if it is non-empty, then it contains a point with at most 2 non-zero
+coordinates. The latter follows from general properties of linear programs: any feasible LP
+with at most k constraints has a k-sparse optimal solution (see, e.g., [Sch86, Ch. 7]). Note that
+non-emptiness of ˜P(˜a, c′) is equivalent to the optimal value of
+min
+1T y s.t. bT y ≤α, ˜aT y ≥c′, y ≥0
+(10)
+being at most r (the latter being an LP with only 2 non-trivial constraints). We will give an
+alternative, constructive proof that we can obtain a 2-sparse solution in Lemma 15. This will
+also illustrate the intuition behind the deﬁnition of our 2-sparse oracle.
+Before doing so, let us give a ﬁrst naive approach to ﬁnd a y ∈˜P(˜a, c′) which will not be
+suﬃciently eﬃcient for our purposes. Using the formulation in Equation (10), we could attempt
+to ﬁnd a y ∈˜P(˜a, c′) by solving O(m2) linear programs with only 2 variables and 2 constraints
+each (these LPs are obtained from (10) by setting all but 2 variables equal to zero) and searching
+for an optimal solution whose value is at most r. Here each linear program is determined by
+the values ˜aj, bj and c′, and thus we can decide if ˜P(˜a, c′) is non-empty using O(m2) classical
+time (given these values).
+22
+
+
+=== PDF PAGE 23 ===
+We use a more sophisticated approach to show that O(m) classical operations (and queries)
+suﬃce. Our approach is amenable to a quantum speedup: it also implies that only eO(√m)
+quantum queries suﬃce. In particular, we now show how to reduce the problem of ﬁnding a
+y ∈˜P(˜a, c′) to ﬁnding a convex combination of points (bj, ˜aj) that lies within a certain region
+of the plane.
+First observe that if α ≥0 and c′ ≤0, then y = 0 is a solution and our oracle can return
+it. From now on we will assume that α < 0 or c′ > 0. Then for a feasible point y we may write
+y = Nq with N = ∥y∥1 > 0 and hence ∥q∥1 = 1. So we are looking for an N and a q such that
+bT q ≤α/N
+(11)
+˜aT q ≥c′/N
+∥q∥1 = 1
+q ≥0
+0 < N ≤r.
+We can now view q ∈Rm
++ as the coeﬃcients of a convex combination of the points pi = (bi, ˜ai)
+in the plane. We want such a combination that lies to the upper left of gN = (α/N, c′/N) for
+some 0 < N ≤r. Let GN denote the upper-left quadrant of the plane starting at gN.
+Lemma 15. If there is a y ∈˜P(˜a, c′), then there is a 2-sparse y′ ∈˜P(˜a, c′) such that ∥y∥1 =
+∥y′∥1.
+Proof. Let y ∈˜P(˜a, c′), and N = ∥y∥1. Consider pi = (bi, ˜ai) and g = (α/N, c′/N) as before,
+and write q = y/N such that Pm
+j=1 qj = 1, q ≥0.
+The vector q certiﬁes that a convex
+combination of the points pi lies in GN. But then there exist j, k ∈[m] such that the line
+segment pjpk intersects GN. All points on this line segment are convex combinations of pj and
+pk, hence there is a convex combination of pj and pk that lies in GN. This gives a 2-sparse q′,
+and y′ = Nq′ ∈˜P(˜a, c′).
+We can now restrict our search to 2-sparse y. Let G = S
+N∈(0,r] GN, see Figure 1 for the
+shape of G. Then we want to ﬁnd two points pj, pk that have a convex combination in G, since
+this implies that a scaled version of their convex combination gives a y ∈˜P(˜a, c′) with ∥y∥1 ≤r
+(this scaling can be computed eﬃciently given pj and pk).
+Furthermore, regarding the possible (non-)emptiness of G we know the following by Lemma 6
+and Lemma 15:
+• If P0(X) ∩{y ∈Rm : P
+j yj ≤r} is non-empty, then some convex combination of two of
+the pj’s lies in G.
+• If P4Rrθ(X) ∩{y ∈Rm : P
+j yj ≤r} is empty, then no convex combination of the pj’s lies
+in G.
+We ﬁrst prove a simpliﬁed version of the main result of this section. The analysis below applies
+if there are m points pj = (bj, ˜aj), where j ∈[m], and we are given a unitary which acts as
+|j⟩|0⟩|0⟩7→|j⟩|˜aj⟩|ψj⟩.
+We later prove the result for more general oracles, which may give
+superpositions of approximations instead of just the one value ˜aj.
+23
+
+
+=== PDF PAGE 24 ===
+(a) α < 0, c′ < 0
+(b) α < 0, c′ ≥0
+(c) α ≥0, c′ < 0
+(d) α ≥0, c′ ≥0
+Figure 1: The region G in light blue. The borders of two quadrants GN have been drawn by thick dashed
+blue lines. The red dot at the beginning of the arrow is the point (α/r, c′/r).
+Lemma 16 (Simple version). There is an algorithm that returns a 2-sparse vector q (with q ≥0
+and ∥q∥1 = 1) such that Pm
+j=1 qjpj ∈G, if one exists, using one search and two minimizations
+over the m points pj = (bj, ˜aj). This gives a classical algorithm that uses O(m) calls to the
+subroutine that gives the entries of ˜a, and O(m) other operations; and a quantum algorithm that
+(in order to solve the problem with high probability) uses O(√m) calls to an (exact quantum)
+subroutine that gives the entries of ˜a, and eO(√m) other gates.
+Proof. The algorithm can be summarized as follows:
+1. Check if α ≥0 and c′ ≤0. If so, then return q = 0.
+2. Check if there is a pi ∈G. If so, then return q = ei
+3. Find pj, pk so that the line segment pjpk goes through G and return the corresponding q.
+4. If the ﬁrst three steps did not return a vector q, then output ‘Fail’.
+The main realization is that in step 3 we can search separately for pj and pk. We explain
+this in more detail below, but ﬁrst we will need a better understanding of the shape of G (see
+Figure 1 for illustration). The shape of G depends on the sign of α and c′.
+24
+
+
+=== PDF PAGE 25 ===
+(a) If α < 0 and c′ < 0. The corner point of G is (α/r, c′/r). One edge goes up vertically and
+an other follows the line segment λ · (α, c′) for λ ∈[1/r, ∞) starting at the corner.
+(b) If α < 0 and c′ ≥0. Here GN ⊆Gr for N ≤r. So G = Gr. The corner point is again
+(α/r, c′/r), but now one edge goes up vertically and one goes to the left horizontally.
+(c) If α ≥0 and c′ ≤0. This is the case where y = 0 is a solution, G is the whole plane and
+has no corner.
+(d) If α ≥0 and c′ > 0. The corner point of G is again (α/r, c′/r). From there one edge goes
+to the left horizontally and one edge follows the line segment λ · (α, c′) for λ ∈[1/r, ∞).
+Since G is always an intersection of at most 2 halfspaces, steps 1-2 of the algorithm are
+easy to perform. In step 1 we handle case (c) by simply returning y = 0. For the other cases
+(α/r, c′/r) is the corner point of G and the two edges are simple lines. Hence in step 2 we can
+easily search through all the points to ﬁnd out if there is one lying in G; since G is a very simple
+region, this only amounts to checking on which side of the two lines a point lies.
+L2
+L1
+pj
+pk
+∠L2ℓk
+∠L1L2
+∠ℓjL1
+(α/r, c′/r)
+Figure 2: Illustration of G with the points pj, pk and the angles ∠ℓjL1, ∠L1L2, ∠L2ℓk drawn in. Clearly the
+line pjpk only crosses G when the total angle is less than π.
+Now, if we cannot ﬁnd a single point in G in step 2, then we need a combination of two
+points in step 3. Let L1, L2 be the edges of G and let ℓj and ℓk be the line segments from
+(α/r, c′/r) to pj and pk, respectively. Then, as can be seen in Figure 2, the line segment pjpk
+goes through G if and only if (up to relabeling pj and pk) ∠ℓjL1 + ∠L1L2 + ∠L2ℓk ≤π. Since
+∠L1L2 is ﬁxed, we can simply look for a j such that ∠ℓjL1 is minimized and a k such that
+∠L2ℓk is minimized. If pjpk does not pass through G for this pair of points, then it does not for
+any of the pairs of points.
+Notice that these minimizations can be done separately and hence can be done in the stated
+complexity. Given the minimizing points pj and pk, it is easy to check if they give a solution by
+calculating the angle between ℓj and ℓk. The coeﬃcients of the convex combination q are then
+easy to compute.
+25
+
+
+=== PDF PAGE 26 ===
+We now consider the more general case where we are given access to a unitary which for
+each j provides a superposition over diﬀerent values ˜aj. We do so because the trace estimation
+procedure of Corollary 14 provides an oracle of this form.
+Lemma 16 (General version). Assume that we are given an oracle that acts as
+|j⟩|0⟩|0⟩7→|j⟩
+X
+i
+βi
+j|˜ai
+j⟩|ψi
+j⟩
+where each |˜ai
+j⟩is an approximation of aj and the amplitudes βi
+j are such that measuring the
+second register with high probability returns an ˜ai
+j which is θ-close to aj.
+There is a quantum algorithm that uses eO(√m) calls to the oracle described above, and the
+same order of two-qubit gates, and (with high probability) has the following guarantees.
+• If P0(X) ∩{y ∈Rm : P
+j yj ≤r} is non-empty, then the algorithm returns a 2-sparse
+vector in P4Rrθ(X) ∩{y ∈Rm : P
+j yj ≤r}.
+• If P4Rrθ(X) ∩{y ∈Rm : P
+j yj ≤r} is empty, then the algorithm correctly concludes that
+P0(X) ∩{y ∈Rm : P
+j yj ≤r} is empty.
+Proof. Since we can exponentially reduce the probability that we obtain an ˜ai
+j which is further
+than θ away from aj, we will for simplicity assume that for all i, j we have |˜ai
+j −aj| ≤θ; the
+neglected exponentially small probabilities will only aﬀect the analysis in negligible ways.
+Note that while we do not allow our quantum algorithm enough time to obtain classical
+descriptions of all ˜ajs (we aim for a runtime of eO(√m)), we do have enough time to compute
+˜c once initially (after this measurement, G is well-deﬁned). Knowing ˜c, we can compute the
+angles deﬁned by the points pi
+j = (bj, ˜ai
+j) with respect to the corner point of (α/r, (˜c −θ)/r −θ)
+and the lines L1, L2 (see Figure 2). We now apply our generalized minimum-ﬁnding algorithm
+with runtime eO(√m) (see Theorem 49) starting with a uniform superposition over the js to
+ﬁnd k, ℓ∈[m] and points pi
+k and pi′
+ℓapproximately minimizing the respective angles to lines
+L1, L2. Here ‘approximately minimizing’ means that there is no j ∈[m] such that for all i′′ the
+angle of pi′′
+j = (bj, ˜ai′′
+j ) with L1 is smaller than that of pi
+k with L1 (and similar for ℓand L2).
+From this point on we can simply consider the model in the simple version of this lemma, since
+by the analysis above there exists an approximation ˜a ∈Rm with ˜ak = ˜ai
+k and ˜aℓ= ˜ai′
+ℓand
+where k and ℓare the correct minimizers.
+It follows from Lemma 6 and Lemma 15 that if P0(X) ∩{y ∈Rm : P
+j yj ≤r} is non-
+empty, then some convex combination of (˜aℓ, bℓ) and (˜ak, bk) lies in G. On the other hand, if
+P4Rrθ(X) ∩{y ∈Rm : P
+j yj ≤r} is empty, then the same lemmas guarantee that we correctly
+conclude that P0(X) ∩{y ∈Rm : P
+j yj ≤r} is empty.
+2.4
+Total runtime
+We are now ready to add our quantum implementations of the trace calculations and the oracle
+to the classical Arora-Kale framework.
+Theorem 1. Instantiating Meta-Algorithm 1 using the trace calculation algorithm from Sec-
+tion 2.2 and the oracle from Section 2.3 (with width-bound w := r + 1), and using this to do a
+binary search for OPT ∈[−R, R] (using diﬀerent guesses α for OPT), gives a quantum algo-
+rithm for solving SDPs of the form (1), which (with high probability) produces a feasible solution
+y to the dual program which is optimal up to an additive error ε, and uses
+eO
+ 
+√nms2
+Rr
+ε
+8 !
+26
+
+
+=== PDF PAGE 27 ===
+queries to the input matrices and the same order of other gates.
+Proof. Using our implementations of the diﬀerent building blocks, it remains to calculate what
+the total complexity will be when they are used together.
+Cost of the oracle for H(t). The ﬁrst problem in each iteration is to obtain access to an
+oracle for H(t). In each iteration the oracle will produce a y(t) that is at most 2-sparse,
+and hence in the (t + 1)th iteration, H(t) is a linear combination of 2t of the Aj matrices
+and the C matrix.
+We can write down a sparse representation of the coeﬃcients of the linear combination
+that gives H(t) in each iteration by adding the new terms coming from y(t). This will
+clearly not take longer than eO(T), since there are only a constant number of terms to
+add for our oracle. As we will see, this term will not dominate the complexity of the full
+algorithm.
+Using such a sparse representation of the coeﬃcients, one query to a sparse representation
+of H(t) will cost eO(st) queries to the input matrices and eO(st) other gates. For a detailed
+explanation and a matching lower bound, see Appendix D.
+Cost of the oracle for Tr(Ajρ). In each iteration M(t) is made to have operator norm at
+most 1. This means that
+−ηH(t) ≤η
+t
+X
+τ=1
+M(τ) ≤ηt.
+Furthermore we know that H(t) is at most d := s(2t + 1)-sparse. Calculating Tr(Ajρ) for
+one index j up to an additive error of θ := ε/(12Rr) can be done using the algorithm
+from Corollary 14. This will take
+eO
+√n∥H∥d
+θ
+
+= eO
+ 
+√nsηt2Rr
+ε
+!
+queries to the oracle for H(t) and the same order of other gates. Since each query to H(t)
+takes eO(st) queries to the input matrices, this means that
+eO
+ 
+√ns2 ηt3Rr
+ε
+!
+queries to the input matrices will be made, and the same order of other gates, for each
+approximation of a Tr(Ajρ) (and similarly for approximating Tr(Cρ)).
+Total cost of one iteration. Lemma 16 tells us that we will use
+eO(√m) calculations of
+Tr(Ajρ), and the same order of other gates, to calculate a classical description of a 2-
+sparse y(t). This brings the total cost of one iteration to
+eO
+ 
+√nms2 ηt3Rr
+ε
+!
+queries to the input matrices, and the same order of other gates.
+27
+
+
+=== PDF PAGE 28 ===
+Total quantum runtime for SDPs. Since w ≤r + 1 we can set T = eO
+
+R2r2
+ε2
+
+. With η =
+q
+ln(n)
+T , summing over all iterations in one run of the algorithm gives a total cost of
+eO
+ T
+X
+t=1
+√nms2 ηt3Rr
+ε
+!
+= eO
+ 
+√nms2 ηT 4Rr
+ε
+!
+= eO
+ 
+√nms2
+Rr
+ε
+8!
+queries to the input matrices and the same order of other gates.
+Total quantum runtime for LPs.
+The ﬁnal complexity of our algorithm contains a factor
+eO(sT) that comes from the sparsity of the H(t) matrix. This assumes that when we add the
+input matrices together, the rows become less sparse. This need not happen for certain SDPs.
+For example, in the SDP relaxation of MAXCUT, the H(t) will always be d-sparse, where d
+is the degree of the graph. A more important class of examples is that of linear programs:
+since LPs have diagonal Aj and C, their sparsity is s = 1, and even the sparsity of the H(t)
+is always 1. This, plus the fact that the traces can be computed without a factor ∥H∥in the
+complexity (as shown in Corollary 12 in Section 2.2.2), means that our algorithm solves LPs
+with
+eO
+ 
+√nm
+Rr
+ε
+5!
+queries to the input matrices and the same order of other gates.
+Total classical runtime. Using the classical techniques for trace estimation from Appendix A,
+and the classical version of our oracle (Lemma 16), we are also able to give a general classical
+instantiation of the Arora-Kale framework. The ﬁnal complexity will then be
+eO
+ 
+nms
+Rr
+ε
+4
++ ns
+Rr
+ε
+7!
+.
+The better dependence on Rr/ε and s, compared to our quantum algorithm, comes from the
+fact that we now have the time to write down intermediate results explicitly. For example, we
+do not need to recalculate parts of H(t) for every new query to it, instead we can just calculate
+it once at the start of the iteration by adding M(t) to H(t−1) and writing down the result.
+Further remarks.
+We want to stress again that our solver is meant to work for all SDPs.
+In particular, it does not use the structure of a speciﬁc SDP. As we show in the next section,
+every oracle that works for all SDPs must have large width. To obtain quantum speedups for a
+speciﬁc class of SDPs, it will be necessary to develop oracles tuned to that problem. We view
+this as an important direction for future work. Recall from the introduction that Arora and
+Kale also obtain fast classical algorithms for problems such as MAXCUT by doing exactly that:
+they develop specialized oracles for those problems.
+3
+Downside of this method: general oracles are restrictive
+In this section we show some of the limitations of a method that uses sparse or general oracles,
+i.e., ones that are not optimized for the properties of speciﬁc SDPs. We will start by discussing
+28
+
+
+=== PDF PAGE 29 ===
+sparse oracles in the next section. We will use a counting argument to show that sparse solutions
+cannot hold too much information about a problem’s solution. In Section 3.2 we will show that
+width-bounds that do not depend on the speciﬁc structure of an SDP are for many problems
+not eﬃcient. As in the rest of the paper, we will assume the notation of Section 2, in particular
+of Meta-Algorithm 1.
+3.1
+Sparse oracles are restrictive
+Lemma 17. If, for some speciﬁc SDP of the form (1), every ε-optimal dual-feasible vector has
+at least ℓnon-zero elements, then the width w of any k-sparse Oracleε/3 for this SDP is such
+that Rw
+ε = Ω
+q
+ℓ
+k ln(n)
+
+.
+Proof. The vector ¯y returned by Meta-Algorithm 1 is, by construction, the average of T vectors
+y(t) that are all k-sparse, plus one extra 1-sparse term of ε
+Re1, and hence ℓ≤kT +1. The stated
+bound on Rw
+ε
+then follows directly by combining this inequality with T = O(R2w2
+ε2
+ln(n)).
+The oracle presented in Section 2.3 always provides a 2-sparse vector y. This implies that
+if an SDP requires an ℓ-sparse dual solution, we must have Rw
+ε
+= Ω(
+p
+ℓ/ ln(n)). This in turn
+means that the upper bound on the runtime of our algorithm will be of order ℓ4√nms2. This
+is clearly bad if ℓis of the order n or m.
+Of course it could be the case that almost every SDP of interest has a sparse approximate
+dual solution (or can easily be rewritten so that it does), and hence sparseness might be not a
+restriction at all. However, as we will see below, this is not the case. We will prove that for
+certain kinds of SDPs, no “useful” dual solution can be very sparse. Intuitively, a dual solution
+to an SDP is “useful” if it can be turned into a solution of the problem that the SDP is trying
+to solve. We make this more precise in the deﬁnition below.
+Deﬁnition 18. A problem is deﬁned by a function f that, for every element p of the problem
+domain D, gives a subset of the solution space S, consisting of the solutions that are considered
+correct. We say a family of SDPs, {SDP (p)}p∈D, solves the problem via the dual if there is an
+ε ≥0 and a function g such that for every p ∈D and every ε-optimal dual-feasible vector y(p)
+to SDP (p):
+g(y(p)) ∈f(p).
+In other words, an ε-optimal dual solution can be converted into a correct solution of the original
+problem without more knowledge of p.
+For these kinds of SDP families we will prove a lower bound on the sparsity of the dual
+solutions. The idea for this bound is as follows. If you have a lot of diﬀerent instances that
+require diﬀerent solutions, but the SDPs are equivalent up to permuting the constraints and
+the coordinates of Rn, then a dual solution should have a lot of unique permutations and hence
+cannot be too sparse.
+Theorem 19. Consider a problem and a family of SDPs as in Deﬁnition 18. Let T ⊆D be
+such that for all p, q ∈T :
+• f(p) ∩f(q) = ∅. That is, a solution to p is not a solution to q and vice versa.
+• The number of constraints m and the primal variable size n are the same for SDP (p) and
+SDP (q).
+29
+
+
+=== PDF PAGE 30 ===
+• Let A(p)
+j
+be the constraints of SDP (p) and A(q)
+j
+those from SDP (q) (and deﬁne C(p), C(q),
+b(p)
+j , and b(q)
+j
+in the same manner). Then there exist σ ∈Sn, π ∈Sm s.t. σ−1A(p)
+π(j)σ = A(q)
+j
+(and σ−1C(p)σ = C(q), b(p)
+π(j) = b(q)
+j ). That is, the SDPs are the same up to permutations
+of the labels of the constraints and permutations of the coordinates of Rn.
+If y(p) is an ε-optimal dual-feasible vector to SDP (p) for some p ∈T , then y(p) is at least
+log(|T |)
+log m -dense (i.e., has at least that many non-zero entries).
+Proof. We ﬁrst observe that, with SDP (p) and SDP (q) as in the lemma, if y(p) is an ε-optimal
+dual-feasible vector of SDP (p), then y(q) deﬁned by
+y(q)
+j
+:= y(p)
+π(j) = π(y(p))j
+is an ε-optimal dual vector for SDP (q). Here we use the fact that a permutation of the n co-
+ordinates in the primal does not aﬀect the dual solutions. Since f(p) ∩f(q) = ∅we know that
+g(y(p)) ̸= g(y(q)) and so y(p) ̸= y(q). Since this is true for every q in T , there should be at least
+|T | diﬀerent vectors y(q) = π(y(p)).
+A k-sparse vector can have k diﬀerent non-zero entries and hence the number of possible
+unique permutations of that vector is at most
+ 
+m
+k
+!
+k! =
+m!
+(m −k)! =
+m
+Y
+t=m−k+1
+t ≤mk
+so
+log |T |
+log m ≤k.
+Example.
+Consider the (s, t)-mincut problem, i.e., the dual of the (s, t)-maxﬂow. Speciﬁcally,
+consider a simple instance of this problem: the union of two complete graphs of size z+1, where
+s is in one subgraph and t in the other. Let the other vertices be labeled by {1, 2, . . . , 2z}. Every
+assignment of the labels over the two halves gives a unique mincut, in terms of which labels
+fall on which side of the cut. There is exactly one partition of the vertices in two sets that cuts
+no edges (namely the partition consists of the two complete graphs), and every other partition
+cuts at least z edges. Hence a z/2-approximate cut is a mincut. This means that there are
+ 2z
+z
+
+problems that require a diﬀerent output. So for every family of SDPs that is symmetric under
+permutation of the vertices and for which a z/2-approximate dual solution gives an (s, t)-mincut,
+the sparsity of a z/2-approximate dual solution is at least7
+log
+ 2z
+z
+
+log m ≥
+z
+log m,
+where we used that
+ 2z
+z
+ ≥
+22z
+2√z. In particular this holds for the standard linear programming
+formulation of the (s, t)-maxﬂow/(s, t)-mincut problem.
+3.2
+General width-bounds are restrictive for certain SDPs
+In this section we will show that width-bounds can be restrictive when they do not consider the
+speciﬁc structure of an SDP.
+7Here m is the number of constraints, not the number of edges in the graph.
+30
+
+
+=== PDF PAGE 31 ===
+Deﬁnition 20. An algorithm O is called a general oracle if, when provided with an error param-
+eter ε, it correctly implements an Oracleε (as in Algorithm 2) for all inputs. We use Oε to denote
+the algorithm provided by O with error parameter ε ﬁxed. A function w(n, m, s, r, R, ε) is called
+a general width-bound for a general oracle if, for every 0 < ε < 1/2, the value w(n, m, s, r, R, ε)
+is a correct width-bound (see Deﬁnition 4) for Oε for every SDP with parameters n, m, s, r, and
+R. In particular, the function w may not depend on the structure of the input A1, . . . , Am, C,
+b or on the value of α.
+We will show that general width-bounds need to scale with r∗(recall that r∗denotes the
+smallest ℓ1-norm of an optimal solution to the dual). We then go on to show that if two SDPs
+in a class can be combined to get another element of that class in a natural manner, then, under
+some mild conditions, r∗will be of the order n and m for some instances of the class.
+We start by showing, for speciﬁcally constructed LPs, a lower bound on the width of any
+oracle. Although these LPs will not solve any useful problem, every general width-bound should
+also apply to these LPs. This gives a lower bound on general width-bounds.
+Lemma 21. For every n ≥3, m ≥3, s ≥1, R∗≥1, r∗> 0, there is an SDP with these
+parameters such that for any 0 ≤ε ≤1/2 any Oracleε for this SDP has width at least r∗/2.
+Proof. We will construct an LP for n = m = 3. This is enough to prove the lemma since
+LPs are a subclass of SDPs and we can increase n, m, and s by adding more dimensions and
+s-dense SDP constraints that do not inﬂuence the analysis below. For some k > 0, consider the
+following LP
+max
+(1, 0, 0)x
+s.t.
+
+
+1
+1
+1
+1/k
+1
+0
+−1
+0
+−1
+
+x ≤
+
+
+R
+0
+−R
+
+
+x ≥0
+where the ﬁrst row is the primal trace constraint. Notice that x1 = x2 = 0 due to the second
+constraint. This implies that OPT = 0 and, due to the last constraint, that x3 ≥R. Notice
+that (0, 0, R) is actually an optimal solution, so R∗= R.
+To calculate r∗, look at the dual of the LP:
+min
+(R, 0, −R)y
+s.t.
+
+
+1
+1/k
+−1
+1
+1
+0
+1
+0
+−1
+
+y ≥
+
+
+1
+0
+0
+
+
+y ≥0,
+due to strong duality its optimal value is 0 as well. This implies y1 = y3, so the ﬁrst constraint
+becomes y2 ≥k. This in turn implies r∗≥k, which is actually attained (by y = (0, k, 0)) so
+r∗= k.
+Since the oracle and width-bound should work for every x ∈R3
++ and every α, they should
+in particular work for x = (R, 0, 0) and α = 0. In this case the polytope for the oracle becomes
+Pε(x) := {y ∈Rm : y1 −y3 ≤0,
+y1 −y3 + y2/k ≥1 −ε/R,
+y ≥0}.
+31
+
+
+=== PDF PAGE 32 ===
+since bT y = y1 −y3, cT x = 1, aT
+1 x = 1, aT
+2 x = 1/k and aT
+3 x = −1. This implies that for every
+y ∈Pε(x), we have y2 ≥k(1 −ε/R) ≥k/2 = r∗/2, where the second inequality follows from
+the assumptions that ε ≤1/2 and R ≥1.
+Notice that the term
+
+m
+X
+j=1
+yjAj −C
+
+in the deﬁnition of width for an SDP becomes
+AT y −c
+
+∞
+in the case of an LP. In our case, due to the second constraint in the dual, we know that
+AT y −c
+
+∞≥y1 + y2 ≥r∗
+2
+for every vector y from Pε(x). This shows that any oracle has width at least r∗/2 for this
+LP.
+Corollary 22. For every general width-bound w(n, m, s, r, R, ε), if n, m ≥3, s ≥1, r > 0,
+R > 1, and ε ≤1/2, then
+w(n, m, s, r, R, ε) ≥r
+2.
+Proof. Consider the LP given by Lemma 21 with r∗= r. Using a general oracle with general
+width-bound w for this LP implies the corollary.
+Note that this bound applies to both our algorithm and the one given by Brand˜ao and
+Svore. It turns out that for many classes of SDPs it is natural to assume that m, r∗, and R∗
+grow linearly with n, and that the “logical” choice of ε also scales linearly with n. We now
+argue that this is for instance the case when SDPs in a class combine in a natural manner. As
+an example, consider the MAXCUT problem. For, e.g., d-regular graphs the MAXCUT value
+grows linearly with the number of vertices n. Therefore, one is generally interested in ﬁnding
+a constant multiplicative approximation to the optimal value. For d-regular graphs this would
+thus translate to an additive error which scales linearly with the number of vertices. We argue
+below that for the SDP-relaxation it is also natural to assume that r and R grow linearly in n.
+Take for example two SDP-relaxations for the MAXCUT problem on two graphs G(1) and G(2)
+(on n(1) and n(2) vertices, respectively):
+max
+Tr
+
+L(G(1))X(1)
+s.t.
+Tr
+
+X(1)
+≤n(1)
+Tr
+
+EjjX(1)
+≤1 for j = 1, . . . , n(1)
+X(1) ⪰0
+max
+Tr
+
+L(G(2))X(2)
+s.t.
+Tr
+
+X(2)
+≤n(2)
+Tr
+
+EjjX(2)
+≤1 for j = 1, . . . , n(2)
+X(2) ⪰0
+Where L(G) is the Laplacian of a graph. Note that this is not normalized to operator norm
+≤1, but for simplicity we ignore this here. If we denote the direct sum of two matrices by ⊕,
+that is
+A ⊕B =
+"
+A
+0
+0
+B
+#
+,
+then, for the disjoint union of the two graphs, we have
+L(G(1) ∪G(2)) = L(G(1)) ⊕L(G(2)).
+32
+
+
+=== PDF PAGE 33 ===
+This, plus the fact that the trace distributes over direct sums of matrices, means that the SDP
+relaxation for MAXCUT on G(1) ∪G(2) is the same as a natural combination of the two separate
+maximizations:
+max
+Tr
+
+L(G(1))X(1)
++ Tr
+
+L(G(2))X(2)
+s.t.
+Tr
+
+X(1)
++ Tr
+
+X(2)
+≤n(1) + n(2)
+Tr
+
+EjjX(1)
+≤1 for j = 1, . . . , n(1)
+Tr
+
+EjjX(2)
+≤1 for j = 1, . . . , n(2)
+X(1), X(2) ⪰0.
+It is easy to see that the new value of n is n(1) + n(2), the new value of m is m(1) + m(2) −1
+and the new value of R∗is n(1) + n(2) = R∗(1) + R∗(2). Likewise, it is natural to assume that
+the desired approximation error for the combined SDP is the sum of the desired errors for the
+individual SDPs: starting with feasible solutions X(i) that are ε(i)-approximate solutions to the
+two SDP-relaxations (i = 1, 2), the matrix X(1) ⊕X(2) is an (ε(1) + ε(2))-approximate solution
+to the combined SDP. It remains to see what happens to r∗, and so, for general width-bounds,
+what happens to w. As we will see later in this section, under some mild conditions, these kind
+of combinations imply that there are MAXCUT-relaxation SDPs for which r∗also increases
+linearly, but this requires a bit more work.
+Deﬁnition 23. We say that a class of SDPs (each with an associated allowed approximation
+error) is combinable if there is a k ≥0 so that for every two elements in this class, (SDP (a), ε(a))
+and (SDP (b), ε(b)), there is an instance in the class, (SDP (c), ε(c)), that is a combination of the
+two in the following sense:
+• C(c) = C(a) ⊕C(b).
+• A(c)
+j
+= A(a)
+j
+⊕A(b)
+j
+and b(c)
+j
+= b(a)
+j
++ b(b)
+j
+for j ∈[k].
+• A(c)
+j
+= A(a)
+j
+⊕0 and b(c)
+j
+= b(a)
+j
+for j = k + 1, . . . , m(a).
+• A(c)
+m(a)+j−k = 0 ⊕A(b)
+j
+and b(c)
+m(a)+j−k = b(b)
+j
+for j = k + 1, . . . , m(b).
+• ε(c) = ε(a) + ε(b).
+In other words, some ﬁxed set of constraints are summed pairwise, and the remaining constraints
+get added separately.
+The motivation for the above deﬁnition reﬂects the following: if X(a) and X(b) are feasi-
+ble solutions to SDP (a) and SDP (b) that are ε(a)-approximate and ε(b)-approximate solutions
+respectively, then X(a) ⊕X(b) is an (ε(a) + ε(b))-approximate solution to SDP (c).
+Furthermore, note that this is a natural generalization of the combining property of the
+MAXCUT relaxations (in that case k = 1 to account for the constraint giving the trace bound).
+Theorem 24. If a class of SDPs is combinable and there is an element SDP (1) for which every
+optimal dual solution has the property that
+m
+X
+j=k+1
+ym ≥δ
+33
+
+
+=== PDF PAGE 34 ===
+for some δ > 0, then there is a sequence (SDP (t), ε(t))t∈N in the class such that R∗(t)r∗(t)
+ε(t)
+increases
+linearly in n(t), m(t) and t, and SDP (t) is the t-fold combination of SDP (1) with itself.
+Proof. The sequence we will consider is the t-fold combination of SDP (1) with itself. If SDP (1) is
+max
+Tr(CX)
+s.t.
+Tr(AjX) ≤bj
+for j ∈[m(1)],
+X ⪰0
+min
+m(1)
+X
+j=1
+bjyj
+s.t.
+m(1)
+X
+j=1
+yjAj −C ⪰0,
+y ≥0
+then SDP (t) is
+max
+t
+X
+i=1
+Tr(CXi)
+s.t.
+t
+X
+i=1
+Tr(AjXi) ≤tbj
+for j ∈[k],
+Tr(AjXi) ≤bj
+for j = k + 1, . . . , m(1) and i = 1, . . . , t
+Xi ⪰0
+for all i = 1, . . . , t
+with dual
+min
+k
+X
+j=1
+tbjyj +
+t
+X
+i=1
+m(1)
+X
+j=k+1
+bjyi
+j
+s.t.
+k
+X
+j=1
+yjAj +
+m(1)
+X
+j=k+1
+yi
+jAj ⪰C for i = 1, . . . , t
+y, yi ≥0.
+First, let us consider the value of OPT(t). Let X(1) be an optimal solution to SDP (1) and
+for all i ∈[t] let Xi = X(1). Since these Xi form a feasible solution to SDP (t), this shows
+that OPT(t) ≥t · OPT(1). Furthermore, let y(1) be an optimal dual solution of SDP (1), then
+(y(1)
+1 , . . . , y(1)
+k ) ⊕
+
+y(1)
+k+1, · · · , y(1)
+m(1)
+⊕t is a feasible dual solution for SDP (t) with objective value
+t · OPT(1), so OPT(t) = t · OPT(1).
+Next, let us consider the value of r∗(t). Let ˜y ⊕y1 ⊕· · · ⊕yt be an optimal dual solution for
+SDP (t), split into the parts of y that correspond to diﬀerent parts of the combination. Then
+˜y ⊕yi is a feasible dual solution for SDP (1) and hence bT (˜y ⊕yi) ≥OPT(1). On the other hand
+we have
+t · OPT(1) = OPT(t) =
+t
+X
+i=1
+bT (˜y ⊕yi),
+this implies that each term in the sum is actually equal to OPT(1). But if (˜y ⊕yi) is an optimal
+dual solution of SDP (1) then
+(˜y ⊕yi)
+
+1 ≥r∗(1) by deﬁnition and
+yi
+1 ≥δ. We conclude that
+r∗(t) ≥r∗(1) −δ + tδ.
+Now we know the behavior of r∗under combinations, let us look at the primal to ﬁnd a
+similar statement for R∗(t). Deﬁne a new SDP, [
+SDP
+(t), in which all the constraints are summed
+34
+
+
+=== PDF PAGE 35 ===
+when combining, that is, in Deﬁnition 23 we take k = n(1), however, contrary to that deﬁnition,
+we even sum the psd constraints:
+max
+t
+X
+i=1
+Tr(CXi)
+s.t.
+t
+X
+i=1
+Tr(AjXi) ≤tbj
+for j ∈[m(1)],
+t
+X
+i=1
+Xi ⪰0.
+This SDP has the same objective function as SDP (t) but a larger feasible region: every feasible
+X1, . . . , Xt for SDP (t) is also feasible for [
+SDP
+(t). However, by a change of variables, X :=
+Pt
+i=1 Xi, it is easy to see that [
+SDP
+(t) is simply a scaled version of SDP (1). So, [
+SDP
+(t) has
+optimal value t · OPT(1). Since optimal solutions to [
+SDP
+(t) are scaled optimal solutions to
+SDP (1), we have ˆR∗(t) = t · R∗(1). Combining the above, it follows that every optimal solution
+to SDP (t) is optimal to [
+SDP
+(t) as well, and hence has trace at least t·R∗(1), so R∗(t) ≥t·R∗(1).
+We conclude that
+R∗(t)r∗(t)
+ε(t)
+≥tR∗(1)(r∗(1) + (t −1)δ)
+tε(1)
+= Ω(t)
+and n(t) = tn(1), m(t) = t(m(1) −k) + k.
+This shows that for many natural SDP formulations for combinatorial problems, such as
+the MAXCUT relaxation or LPs that have to do with resource management, R∗r∗/ε increases
+linearly in n and m for some instances. Hence, using R∗≤R and Lemma 21, Rw/ε grows at
+least linearly when a general width-bound is used.
+4
+Lower bounds on the quantum query complexity
+In this section we will show that every LP-solver (and hence every SDP-solver) that can distin-
+guish two optimal values with high probability needs Ω
+p
+max{n, m}(min{n, m})3/2
+quantum
+queries in the worst case.
+For the lower bound on LP-solving we will give a reduction from a composition of Majority
+and OR functions.
+Deﬁnition 25. Given input bits Zijℓ∈{0, 1}a×b×c the problem of calculating
+MAJa(
+ORb(MAJc(Z111, . . . , Z11c), . . . , MAJc(Z1b1, . . . , Z1bc)),
+. . . ,
+ORb(MAJc(Za11, . . . , Za1c), . . . , MAJc(Zab1, . . . , Zabc))
+)
+with the promise that
+• Each inner MAJc is a boundary case, in other words Pc
+ℓ=1Zijℓ∈{c/2, c/2+1} for all i, j.
+• The outer MAJa is a boundary case, in other words, if ˜Z ∈{0, 1}a is the bitstring that
+results from all the OR calculations, then | ˜Z| ∈{a/2, a/2 + 1}.
+is called the promise MAJa-ORb-MAJc problem.
+35
+
+
+=== PDF PAGE 36 ===
+Lemma 26. It takes at least Ω(a
+√
+b c) queries to the input to solve the promise MAJa-ORb-MAJc
+problem.
+Proof. The promise version of MAJk is known to require Ω(k) quantum queries. Likewise, it is
+known that the ORk function requires Ω(
+√
+k) queries. Furthermore, the adversary bound tells
+us that query complexity is multiplicative under composition of functions; Kimmel [Kim13,
+Lemma A.3 (Lemma 6 in the arXiv version)] showed that this even holds for promise functions.
+Lemma 27. Determining the value
+a
+X
+i=1
+max
+j∈[b]
+c
+X
+ℓ=1
+Zijℓ,
+for a Z from the promise MAJa-ORb-MAJc problem up to additive error ε = 1/3, solves the
+promise MAJa-ORb-MAJc problem.
+Proof. Notice that due to the ﬁrst promise, Pc
+ℓ=1 Zijℓ∈{c/2, c/2 + 1} for all i ∈[a], j ∈[b].
+This implies that
+• If the ith OR is 0, then all of its inner MAJ functions are 0 and hence
+max
+j∈[b]
+c
+X
+ℓ=1
+Zijℓ= c
+2.
+• If the ith OR is 1, then at least one of its inner MAJ functions is 1 and hence
+max
+j∈[b]
+c
+X
+ℓ=1
+Zijℓ= c
+2 + 1.
+Now, if we denote the string of outcomes of the OR functions by ˜Z ∈{0, 1}a, then
+a
+X
+i=1
+max
+j∈[b]
+c
+X
+ℓ=1
+Zijℓ= ac
+2 + | ˜Z|.
+Hence determining the left-hand side will determine | ˜Z|; this Hamming weight is either a
+2 if the
+full function evaluates to 0, or a
+2 + 1 if it evaluates to 1.
+Lemma 28. For an input Z ∈{0, 1}a×b×c there is an LP with m = c + a and n = c + ab for
+which the optimal value is
+a
+X
+i=1
+max
+j∈[b]
+c
+X
+ℓ=1
+Zijℓ.
+Furthermore, a query to an entry of the input matrix or vector costs at most 1 query to Z.
+Proof. Let Z(i) be the matrix one gets by ﬁxing the ﬁrst index of Z and putting the entries in
+a c × b matrix, so Z(i)
+ℓj = Zijℓ. We deﬁne the following LP:
+OPT = max
+c
+X
+k=1
+wk
+s.t.
+
+
+I
+−Z1
+· · ·
+−Za
+0
+1T
+0
+...
+0
+1T
+
+
+
+
+w
+v(1)
+...
+v(a)
+
+
+≤
+
+
+0
+1
+...
+1
+
+
+v1, . . . , va ∈Rb
++, w ∈Rc
++.
+36
+
+
+=== PDF PAGE 37 ===
+Notice every Z(i) is of size c × b, so that indeed m = c + a and n = c + ab.
+For every i ∈[a] there is a constraint that says
+b
+X
+j=1
+v(i)
+j
+≤1.
+The constraints involving w say that for every k ∈[c]
+wk ≤
+a
+X
+i=1
+b
+X
+j=1
+v(i)
+j Z(i)
+kj =
+a
+X
+i=1
+(Z(i)v(i))k,
+where (Z(i)v(i))k is the kth entry of the matrix-vector product Z(i)v(i). Clearly, for an optimal
+solution these constraints will be satisﬁed with equality, since in the objective function wk has
+a positive weight. Summing over k on both sides, we get the equality
+OPT =
+c
+X
+k=1
+wk
+=
+c
+X
+k=1
+a
+X
+i=1
+(Z(i)v(i))k
+=
+a
+X
+i=1
+c
+X
+k=1
+(Z(i)v(i))k
+=
+a
+X
+i=1
+Z(i)v(i)
+1,
+so in the optimum
+Z(i)v(i)
+1 will be maximized.
+Note that we can use the ℓ1-norm as a
+shorthand for the sum over vector elements since all elements are positive. In particular, the
+value of
+Z(i)v(i)
+1 is given by
+max
+Z(i)v(i)
+1
+s.t.
+v(i)
+1 ≤1
+v(i) ≥0.
+Now ∥Z(i)v(i)∥1 will be maximized by putting all weight in v(i) on the index that corresponds
+to the column of Z(i) that has the highest Hamming weight. In particular in the optimum
+∥Z(i)v(i)∥1 = maxj∈[b]
+Pc
+ℓ=1 Z(i)
+ℓj . Putting everything together gives:
+OPT =
+a
+X
+i=1
+Z(i)v(i)
+1 =
+a
+X
+i=1
+max
+j∈[b]
+c
+X
+ℓ=1
+Z(i)
+ℓj =
+a
+X
+i=1
+max
+j∈[b]
+c
+X
+ℓ=1
+Zijℓ.
+Theorem 29. There is a family of LPs, with m ≤n and two possible integer optimal values,
+that require at least Ω(√n m3/2) quantum queries to the input to distinguish those two values.
+Proof. Let a = c = m/2 and b = n−c
+a
+= 2n
+m −1, so that n = c+ab and m = c+a. By Lemma 28
+there exists an LP with n = c + ab and m = c + a that calculates
+a
+X
+i=1
+max
+j∈[b]
+c
+X
+ℓ=1
+Zijℓ
+37
+
+
+=== PDF PAGE 38 ===
+for an input Z to the promise MAJa-ORb-MAJc problem. By Lemma 27, calculating this value
+will solve the promise MAJa-ORb-MAJc problem. By Lemma 26 the promise MAJa-ORb-MAJc
+problem takes Ω(a
+√
+b c) quantum queries in the worst case. This implies a lower bound of
+Ω
+
+m2
+r n
+m
+
+= Ω(m3/2√n)
+quantum queries on solving these LPs.
+Corollary 30. Distinguishing two optimal values of an LP (and hence also of an SDP) with
+additive error ε < 1/2 requires
+Ω
+q
+max{n, m}(min{n, m})3/2
+
+quantum queries to the input matrices in the worst case.
+Proof. This follows from Theorem 29 and LP duality.
+It is important to note that the parameters R and r from the Arora-Kale algorithm are
+not constant in this family of LPs (R, r = Θ(min{n, m}2) here), and hence this lower bound
+does not contradict the scaling with √mn of the complexity of our SDP-solver or Brand˜ao and
+Svore’s. Since we show in the appendix that one can always rewrite the LP (or SDP) so that 2
+of the parameters R, r, ε are constant, the lower bound implies that any algorithm with a sub-
+linear dependence on m or n has to depend at least polynomially on Rr/ε. For example, the
+above family of LPs shows that an algorithm with a √mn dependence has to have an (Rr/ε)κ
+factor in its complexity with κ ≥1/4. It remains an open question whether a lower bound of
+Ω(√mn) can be proven for a family of LPs/SDPs where ε, R and r all constant.
+5
+Conclusion
+In this paper we gave better algorithms and lower bounds for quantum SDP-solvers, improving
+upon recent work of Brand˜ao and Svore [BS17]. Here are a few directions for future work:
+• Better upper bounds.
+The runtime of our algorithm, like the earlier algorithm of
+Brand˜ao and Svore, has better dependence on m and n than the best classical SDP-solvers,
+but worse dependence on s and on Rr/ε. In subsequent work (see the introduction), these
+dependencies have been improved, but there is room for further improvement.
+• Applications of our algorithm. As mentioned, both our and Brand˜ao-Svore’s quan-
+tum SDP-solvers only improve upon the best classical algorithms for a speciﬁc regime of
+parameters, namely where mn ≫Rr/ε. Unfortunately, we don’t know particularly inter-
+esting problems in combinatorial optimization in this regime. As shown in Section 3, many
+natural SDP formulations will not fall into this regime. However, it would be interesting
+to ﬁnd useful SDPs for which our algorithm gives a signiﬁcant speed-up.
+• New algorithms. As in the work by Arora and Kale, it might be more promising to look
+at oracles (now quantum) that are designed for speciﬁc SDPs. Such oracles could build
+on the techniques developed here, or develop totally new techniques. It might also be
+possible to speed up other classical SDP solvers, for example those based on interior-point
+methods.
+• Better lower bounds. Our lower bounds are probably not optimal, particularly for the
+case where m and n are not of the same order. The most interesting case would be to get
+lower bounds that are simultaneously tight in the parameters m, n, s, and Rr/ε.
+38
+
+
+=== PDF PAGE 39 ===
+Acknowledgments.
+An earlier version of this paper appeared in the proceedings of the
+FOCS’17 conference [vAGGdW17].
+We thank Fernando Brand˜ao for sending us several drafts of [BS17] and for answering our
+many questions about their algorithms. We thank Stacey Jeﬀery for pointing us to [Kim13], and
+Andris Ambainis and Robin Kothari for useful discussions and comments. Thanks to Monique
+Laurent for ﬁnding a bug in an earlier version, which we ﬁxed. We also thank the anonymous
+referees of FOCS’17 and Quantum for very helpful comments that improved the presentation.
+JvA and SG are supported by the Netherlands Organization for Scientiﬁc Research (NWO),
+grant number 617.001.351. AG and RdW are supported by ERC Consolidator Grant 615307-
+QPROGRESS. RdW is also partially supported by NWO through Gravitation-grant Quantum
+Software Consortium - 024.003.037, and through QuantERA project QuantAlgo 680-91-034.
+References
+[AHK12]
+Sanjeev Arora, Elad Hazan, and Satyen Kale. The multiplicative weights update
+method: a meta-algorithm and applications. Theory of Computing, 8(6):121–164,
+2012. 4, 11
+[AK16]
+Sanjeev Arora and Satyen Kale.
+A combinatorial, primal-dual approach to
+semideﬁnite programs.
+Journal of the ACM, 63(2):12:1–12:35, 2016.
+Earlier
+version in STOC’07. 4, 11, 12, 13, 42
+[Amb07]
+Andris Ambainis.
+Quantum walk algorithm for element distinctness.
+SIAM
+Journal on Computing, 37(1):210–239, 2007. Earlier version in FOCS’04. arXiv:
+quant-ph/0311001 5
+[vAG19a]
+Joran van Apeldoorn and Andr´as Gily´en. Improvements in quantum SDP-solving
+with applications. In Proceedings of the 46th International Colloquium on Au-
+tomata, Languages, and Programming (ICALP), pages 99:1–99:15, 2019. arXiv:
+1804.05058 9
+[vAG19b]
+Joran van Apeldoorn and Andr´as Gily´en.
+Quantum algorithms for zero-sum
+games. arXiv: 1904.03180, 2019. 9
+[vAGGdW17] Joran van Apeldoorn, Andr´as Gily´en, Sander Gribling, and Ronald de Wolf.
+Quantum SDP-solvers: Better upper and lower bounds. In Proceedings of the
+58th IEEE Symposium on Foundations of Computer Science (FOCS), pages 403–
+414, 2017. arXiv: 1705.01843 39
+[vAGGdW20] Joran van Apeldoorn, Andr´as Gily´en, Sander Gribling, and Ronald de Wolf.
+Convex optimization using quantum oracles.
+Quantum, 4:220, 2020.
+arXiv:
+1809.00643 9
+[AS08]
+Noga Alon and Joel H. Spencer. The Probabilistic Method. Wiley-Interscience,
+third edition, 2008. 49
+[BBHT98]
+Michel Boyer, Gilles Brassard, Peter Høyer, and Alain Tapp.
+Tight bounds
+on quantum searching. Fortschritte der Physik, 46(4–5):493–505, 1998. arXiv:
+quant-ph/9605034 56, 60, 62
+[BCC+15]
+Dominic W. Berry, Andrew M. Childs, Richard Cleve, Robin Kothari, and
+Rolando D. Somma. Simulating Hamiltonian dynamics with a truncated Taylor
+series. Physical Review Letters, 114(9):090502, 2015. arXiv: 1412.4687 8, 46,
+50
+39
+
+
+=== PDF PAGE 40 ===
+[BCK15]
+Dominic W. Berry, Andrew M. Childs, and Robin Kothari. Hamiltonian sim-
+ulation with nearly optimal dependence on all parameters.
+In Proceedings of
+the 56th IEEE Symposium on Foundations of Computer Science (FOCS), pages
+792–809, 2015. arXiv: 1501.01715 8, 11, 46, 47, 50
+[BHMT02]
+Gilles Brassard, Peter Høyer, Michele Mosca, and Alain Tapp. Quantum am-
+plitude ampliﬁcation and estimation. In Quantum Computation and Quantum
+Information: A Millennium Volume, volume 305 of Contemporary Mathematics
+Series, pages 53–74. AMS, 2002. arXiv: quant-ph/0005055 17, 58
+[BKL+19]
+Fernando G. S. L. Brand˜ao, Amir Kalev, Tongyang Li, Cedric Yen-Yu Lin,
+Krysta M. Svore, and Xiaodi Wu.
+Quantum SDP solvers: Large speed-ups,
+optimality, and applications to quantum learning. In Proceedings of the 46th
+International Colloquium on Automata, Languages, and Programming (ICALP),
+pages 27:1–27:14, 2019. arXiv: 1710.02581 9
+[BS17]
+Fernando G. S. L. Brand˜ao and Krysta M. Svore. Quantum speed-ups for solving
+semideﬁnite programs. In Proceedings of the 58th IEEE Symposium on Founda-
+tions of Computer Science (FOCS), pages 415–426, 2017. arXiv: 1609.05537 1,
+6, 15, 38, 39
+[CCLW20]
+Shouvanik Chakrabarti, Andrew M. Childs, Tongyang Li, and Xiaodi Wu. Quan-
+tum algorithms and lower bounds for convex optimization. Quantum, 4:221, 2020.
+arXiv: 1809.01731 9
+[CEMM98]
+Richard Cleve, Artur Ekert, Chiara Macchiavello, and Michele Mosca. Quantum
+algorithms revisited.
+Proceedings of the Royal Society A, 454(1969):339–354,
+1998. arXiv: quant-ph/9708016 63
+[CKS17]
+Andrew M. Childs, Robin Kothari, and Rolando D. Somma. Quantum algorithm
+for systems of linear equations with exponentially improved dependence on pre-
+cision. SIAM Journal on Computing, 46(6):1920–1950, 2017. arXiv: 1511.02306
+8, 46, 47, 58
+[CS17]
+Anirban Narayan Chowdhury and Rolando D. Somma. Quantum algorithms for
+Gibbs sampling and hitting-time estimation. Quantum Information and Com-
+putation, 17(1&2):41–64, 2017. arXiv: 1603.02940 6, 20, 46, 56
+[CW12]
+Andrew M. Childs and Nathan Wiebe.
+Hamiltonian simulation using linear
+combinations of unitary operations. Quantum Information and Computation,
+12(11&12):901–924, 2012. arXiv: 1202.5822 8, 46, 50
+[Dan51]
+George B. Dantzig. Maximization of a linear function of variables subject to
+linear inequalities. In Activity Analysis of Production and Allocation, Cowles
+Commission Monograph No. 13, pages 339–347. John Wiley & Sons Inc., New
+York, N. Y., 1951. 4
+[DH96]
+Christoph D¨urr and Peter Høyer. A quantum algorithm for ﬁnding the minimum.
+arXiv: quant-ph/9607014, 1996. 7, 8, 19, 58, 59, 63
+[DHHM06]
+Christoph D¨urr, Mark Heiligman, Peter Høyer, and Mehdi Mhalla.
+Quan-
+tum query complexity of some graph problems. SIAM Journal on Computing,
+35(6):1310–1328, 2006. Earlier version in ICALP’04. arXiv: quant-ph/0401091
+5
+[GLS81]
+Martin Gr¨otschel, L´aszl´o Lov´asz, and Alexander Schrijver. The ellipsoid method
+and its consequences in combinatorial optimization. Combinatorica, 1(2):169–
+197, 1981. 4
+40
+
+
+=== PDF PAGE 41 ===
+[GLS88]
+Martin Gr¨otschel, L´aszl´o Lov´asz, and Alexander Schrijver. Geometric Algorithms
+and Combinatorial Optimization. Springer, 1988. 3
+[GR02]
+Lov Grover and Terry Rudolph.
+Creating superpositions that correspond to
+eﬃciently integrable probability distributions. arXiv: quant-ph/0208112, 2002.
+51
+[Gro96]
+Lov K. Grover. A fast quantum mechanical algorithm for database search. In
+Proceedings of the 28th ACM Symposium on the Theory of Computing (STOC),
+pages 212–219, 1996. arXiv: quant-ph/9605043 5, 7
+[GSLW19]
+Andr´as Gily´en, Yuan Su, Guang Hao Low, and Nathan Wiebe. Quantum sin-
+gular value transformation and beyond: exponential improvements for quantum
+matrix arithmetics. In Proceedings of the 51st ACM Symposium on the Theory
+of Computing (STOC), pages 193–204, 2019. arXiv: 1806.01838 9
+[GW95]
+Michel X. Goemans and David P. Williamson. Improved approximation algo-
+rithms for maximum cut and satisﬁability problems using semideﬁnite program-
+ming. Journal of the ACM, 42(6):1115–1145, 1995. Earlier version in STOC’94.
+3
+[HHL09]
+Aram W. Harrow, Avinatan Hassidim, and Seth Lloyd.
+Quantum algorithm
+for linear systems of equations. Physical Review Letters, 103(15):150502, 2009.
+arXiv: 0811.3171 5, 58
+[Kim13]
+Shelby Kimmel. Quantum adversary (upper) bound. Chicago Journal of Theo-
+retical Computer Science, 2013:4:1–14, 2013. Earlier version in ICALP’12. arXiv:
+1101.0797 36, 39
+[KKMO07]
+Subhash Khot, Guy Kindler, Elchanan Mossel, and Ryan O’Donnell. Optimal
+inapproximability results for MAX-CUT and other 2-variable CSPs?
+SIAM
+Journal on Computing, 37(1):319–357, 2007. Earlier version in FOCS’04. 3
+[KP18]
+Iordanis Kerenidis and Anupam Prakash. A quantum interior point method for
+LPs and SDPs. arXiv: 1808.09266, 2018. 9
+[LC17]
+Guang Hao Low and Isaac L. Chuang. Optimal Hamiltonian simulation by quan-
+tum signal processing.
+Physical Review Letters, 118(1):010501, 2017.
+arXiv:
+1606.02685 47
+[LC19]
+Guang Hao Low and Isaac L. Chuang. Hamiltonian simulation by qubitization.
+Quantum, 3:163, 2019. arXiv: 1610.06546 47
+[LSW15]
+Yin Tat Lee, Aaron Sidford, and Sam Chiu-wai Wong. A faster cutting plane
+method and its implications for combinatorial and convex optimization.
+In
+Proceedings of the 56th IEEE Symposium on Foundations of Computer Science
+(FOCS), pages 1049–1065, 2015. arXiv: 1508.04874 4, 5
+[NC00]
+Michael A. Nielsen and Isaac L. Chuang. Quantum computation and quantum
+information. Cambridge University Press, 2000. 63
+[NN94]
+Y. Nesterov and A. Nemirovski. Interior-point polynomial algorithms in convex
+programming, volume 13 of SIAM Studies in Applied Mathematics. Society for
+Industrial and Applied Mathematics (SIAM), 1994. 4
+[PW09a]
+David Poulin and Pawel Wocjan. Preparing ground states of quantum many-
+body systems on a quantum computer. Physical Review Letters, 102(13):130503,
+2009. arXiv: 0809.2705 8, 63
+41
+
+
+=== PDF PAGE 42 ===
+[PW09b]
+David Poulin and Pawel Wocjan. Sampling from the thermal quantum Gibbs
+state and evaluating partition functions with a quantum computer.
+Physical
+Review Letters, 103(22):220502, 2009. arXiv: 0905.2199 6
+[Ren16]
+James Renegar. “Eﬃcient” subgradient methods for general convex optimization.
+SIAM Journal on Computing, 26(4):2649–2676, 2016. arXiv: 1605.08712 4
+[Ren19]
+James Renegar. Accelerated ﬁrst-order methods for hyperbolic programming.
+Mathematical Programming, 173(1):1–35, 2019. arXiv: 1512.07569 4
+[Sch86]
+Alexander Schrijver. Theory of Linear and Integer Programming. John Wiley &
+Sons, Inc., New York, NY, USA, 1986. 22
+[Sho97]
+Peter W. Shor. Polynomial-time algorithms for prime factorization and discrete
+logarithms on a quantum computer. SIAM Journal on Computing, 26(5):1484–
+1509, 1997. Earlier version in FOCS’94. arXiv: quant-ph/9508027 5
+[TRW05]
+Koji Tsuda, Gunnar R¨atsch, and Manfred K. Warmuth. Matrix exponentiated
+gradient updates for on-line learning and Bregman projection. Journal of Ma-
+chine Learning Research, 6:995–1018, 2005. Earlier version in NIPS’04. 4
+[WK12]
+Manfred K. Warmuth and Dima Kuzmin. Online variance minimization. Machine
+Learning, 87(1):1–32, 2012. Earlier version in COLT’06. 4
+A
+Classical estimation of the expectation value Tr(Aρ)
+To provide contrast to Section 2.2, here we describe a classical procedure to eﬃciently estimate
+Tr(Aρ) where A is a Hermitian matrix such that ∥A∥≤1, and ρ = exp(−H)/Tr(exp(−H)) for
+some Hermitian matrix H. The results in this section can be seen as a generalization of [AK16,
+Section 7]. The key observation is that if we are given a Hermitian matrix B ⪰0, and if we
+take a random vector u = (u1, . . . , un) where ui ∈{±1} is uniformly distributed, then, using
+E[ui] = 0, E[u2
+i ] = 1, we have
+E
+h
+uT √
+BA
+√
+Bu
+i
+= E
+h
+Tr
+√
+BA
+√
+BuuT i
+= Tr
+√
+BA
+√
+BE[uuT ]
+
+= Tr
+√
+BA
+√
+BI
+
+= Tr(AB).
+We now show that uT √
+BA
+√
+Bu is highly concentrated around its mean by Chebyshev’s in-
+equality.
+Lemma 31. Given a Hermitian matrix A, with ||A|| ≤1, a psd matrix B, and a parameter
+0 < θ ≤1. With probability 1 −1/16, the average of k = O
+ 1/θ2 independent samples from
+the distribution uT √
+BA
+√
+Bu is at most θTr(B) away from Tr(AB). Here u = (ui) and each
+ui ∈{±1} is i.i.d. uniformly distributed.
+Proof. We let Fk be the random variable 1
+k
+Pk
+i=1(u(i))T √
+BA
+√
+Bu(i), where each of the vectors
+u(i) ∈{±1}n is sampled from the distribution described above. By the above it is clear that
+E[Fk] = Tr(AB).
+We will use Chebyshev’s inequality which, in our setting, states that for every t > 0
+Pr
+ |Fk −Tr(AB)| ≥tσk
+ ≤1
+t2 ,
+(12)
+here σ2
+k is the variance of Fk.
+We will now upper bound the variance of Fk.
+First note
+that var(Fk) = 1
+kvar(uT √
+BA
+√
+Bu). It therefore suﬃces to upper bound the variance σ2 of
+42
+
+
+=== PDF PAGE 43 ===
+uT √
+BA
+√
+Bu. We ﬁrst write
+σ2 = var(uT √
+BA
+√
+Bu) = E
+h
+(uT √
+BA
+√
+Bu)2i
+−E
+h
+uT √
+BA
+√
+Bu
+i2
+= E
+
+
+n
+X
+i,j,k,l=1
+uiujukul(
+√
+BA
+√
+B)ij(
+√
+BA
+√
+B)kl
+
+
+|
+{z
+}
+(∗)
+−Tr(
+√
+BA
+√
+B)2.
+We then calculate (∗) using E[ui] = 0, E[u2
+i ] = 1, and the independence of the ui’s:
+(∗) =
+X
+i̸=j
+(
+√
+BA
+√
+B)ij
+
+(
+√
+BA
+√
+B)ij + (
+√
+BA
+√
+B)ji
+
++
+n
+X
+i,k=1
+(
+√
+BA
+√
+B)ii(
+√
+BA
+√
+B)kk
+=
+X
+i̸=j
+2(
+√
+BA
+√
+B)2
+ij + Tr(
+√
+BA
+√
+B)2.
+Therefore, using Cauchy-Schwarz, we have
+σ2 = (∗) −Tr(
+√
+BA
+√
+B)2 =
+X
+i̸=j
+2(
+√
+BA
+√
+B)2
+ij ≤
+X
+i,j
+2(
+√
+BA
+√
+B)2
+ij
+= 2Tr((
+√
+BA
+√
+B)2) = 2|⟨ABA, B⟩| ≤2|⟨ABA, ABA⟩|1/2|⟨B, B⟩|1/2
+= 2Tr
+
+A2BA2B
+1/2Tr
+
+B21/2 ≤2Tr
+
+BA2B
+1/2Tr
+
+B21/2 ≤2Tr
+
+B2
+≤2Tr(B)2,
+where on the last line we use ∥A∥≤1 and Tr(AY ) ≤∥A∥Tr(Y ) for any Y ⪰0, in particular
+for BA2B and B2.
+It follows that σ2
+k ≤2Tr(B)2/k. Chebyshev’s inequality (12) therefore shows that for k =
+⌈32/θ2⌉and t = 4,
+Pr
+ |Fk −Tr(AB)| ≥θTr(B)
+ ≤1
+16.
+A simple computation shows that the success probability in the above lemma can be boosted
+to 1 −δ by picking the median of O(log(1/δ)) repetitions. To show this, let K = ⌈log(1/δ)⌉
+and for each i ∈[K] let (Fk)i be the average of k samples of uT √
+BA
+√
+Bu. Let zK denote the
+median of those K numbers. We have
+Pr
+ |zK −Tr(AB)| ≥θTr(B)
+ = Pr
+ zK ≥θTr(B) + Tr(AB)
+
+|
+{z
+}
+(∗)
++Pr
+ zK ≤−θTr(B) + Tr(AB)
+
+We upper bound (∗):
+(∗) ≤
+X
+I⊆[K]:|I|≥K/2
+Y
+i∈I
+Pr
+ (Fk)i ≥θTr(B) + Tr(AB)
+
+≤(|{I ⊆[K] : |I| ≥K/2}|)
+ 1
+16
+K/2
+= 2K−1
+1
+4
+K
+≤1
+2
+1
+2
+log(1/δ)
+= 1
+2δ.
+Analogously, one can show that Pr
+ zK ≤−θTr(B) + Tr(AB)
+ ≤1
+2δ. Hence
+Pr
+ |zK −Tr(AB)| ≥θTr(B)
+ ≤δ.
+This proves the following lemma:
+43
+
+
+=== PDF PAGE 44 ===
+Lemma 32. Given a Hermitian matrix A, with ||A|| ≤1, a psd matrix B, and parameters 0 <
+δ ≤1/2 and 0 < θ ≤1. Using k = O
+
+log(1
+δ)/θ2
+samples from the distribution uT √
+BA
+√
+Bu,
+one can ﬁnd an estimate of Tr(AB) that, with probability 1 −δ, has additive error at most
+θTr(B). Here u = (ui) and the ui ∈{±1} are i.i.d. uniformly distributed.
+Looking back at Meta-Algorithm 1, we would like to apply the above lemma to B =
+exp(−H).8
+Since it is expensive to compute the exponent of a matrix, it is of interest to
+consider samples from vT Av, where v is an approximation of
+√
+Bu.
+Say
+
+√
+Bu −v
+ ≤κ and, as always, ∥A∥≤1. Then
+|uT √
+BA
+√
+Bu −vT Av| = |uT √
+BA
+√
+Bu −uT √
+BAv + uT √
+BAv −vT Av|
+≤|uT √
+BA
+√
+Bu −uT √
+BAv| + |uT √
+BAv −vT Av|
+= |uT √
+BA(
+√
+Bu −v)| + |(
+√
+Bu −v)T Av|
+≤
+uT √
+BA
+
+
+√
+Bu −v
+ +
+
+√
+Bu −v
+∥Av∥
+≤
+
+√
+Bu
+∥A∥κ + κ∥A∥∥v∥
+≤κ(
+
+√
+Bu
+ + ∥v∥)
+≤κ(
+
+√
+Bu
+ +
+
+√
+Bu + v −
+√
+Bu
+)
+≤κ
+
+√
+Bu
+ +
+
+√
+Bu
+ +
+
+√
+Bu −v
+
+
+≤2κ
+
+√
+Bu
+ + κ2
+Now observe that we are interested in
+Tr(A exp(−H))
+Tr(exp(−H))
+= Tr(A exp(−H + γI))
+Tr(exp(−H + γI)) .
+Suppose an upper bound K on ∥H∥is known, then we can consider H′ = H −KI which satisﬁes
+H′ ⪯0. It follows that ∥exp(−H′)∥≥1 and, with B = exp(−H′), therefore ∥
+√
+B∥≤∥B∥≤
+Tr(B). Hence, taking κ ≤min{θ/∥u∥, ∥
+√
+Bu∥} = θ/∥u∥,9 we ﬁnd
+|uT √
+BA
+√
+Bu −vT Av| ≤2κ
+
+√
+Bu
+ + κ2 ≤3κ
+
+√
+Bu
+ ≤3κ
+
+√
+B
+∥u∥≤3θ∥B∥≤3θTr(B).
+This shows that the additional error incurred by sampling from vT Av is proportional to θTr(B).
+Finally, a κ-approximation of
+√
+Bu, with κ = θ/∥u∥can be obtained by using the truncated
+Taylor series of exp(−H′/2) of degree p = max{2e∥H′∥, log
+ √n
+θ
+
+}:
+exp(−H′/2) −
+p
+X
+i=0
+(H′/2)i
+i!
+ =
+
+∞
+X
+i=p+1
+(H′/2)i
+i!
+
+≤
+∞
+X
+j=p+1
+∥H′∥j
+j!
+≤
+∞
+X
+j=p+1
+e∥H′∥
+j
+j
+≤
+e∥H′∥
+p + 1
+p+1
+1
+1 −
+ e∥H′∥
+(p+1)
+ ≤
+1
+2
+p
+= θ/√n,
+8For ease of notation, we write H for ηH.
+9Here we assume that θ ≤1. Then, since λmin(B) ≥1, we trivially have θ/∥u∥≤1/√n ≤√n ≤∥
+√
+Bu∥.
+44
+
+
+=== PDF PAGE 45 ===
+Lemma 33. Given a Hermitian s-sparse matrix A, with ||A|| ≤1, a psd matrix B = exp(−H)
+with H ⪯0, for a d-sparse H, and parameters 0 < δ ≤1/2 and 0 < θ ≤1. With probability
+1 −δ, using k = O
+
+log(1
+δ)/θ2
+samples from the distribution vT Av, one can ﬁnd an estimate
+that is at most θTr(B) away from Tr(AB). Here
+v =
+p
+X
+i=0
+(H/2)i
+i!
+u
+where p = O(max{∥H∥, log
+ √n
+θ
+
+}), and u = (uj) where the uj ∈{±1} are i.i.d. uniformly
+distributed.
+Lemma 34. Given m Hermitian s-sparse n × n matrices A1 = I, A2, . . . , Am, with ∥Aj∥≤1
+for all j, a Hermitian d-sparse n × n matrix H with ∥H∥≤K, and parameters 0 < δ ≤
+1/2 and 0 < θ ≤1. With probability 1 −δ, we can compute θ-approximations a1, . . . , am of
+Tr(A1B)/Tr(B), . . . , Tr(AmB)/Tr(B) where B = exp(−H), using
+O
+ 
+log(m
+δ )
+θ2
+max
+(
+K, log
+ √n
+θ
+!)
+dn + log(m
+δ )
+θ2
+msn
+!
+queries to the entries of A1, . . . , Am, H and arithmetic operations.
+Proof. As observed above, for every matrix A,
+Tr(A exp(−H))
+Tr(exp(−H))
+= Tr(A exp(−H + γI))
+Tr(exp(−H + γI)) .
+Lemma 33 states that for B′ = exp(−H + KI) and A ∈{A1, . . . , Am} using k = O
+ log(m
+δ )/θ2
+samples from the distribution vT Av, one can ﬁnd an estimate that is at most θTr(B) away from
+Tr(AB) with probability 1 −δ/m. Here
+v =
+p
+X
+i=0
+((H −KI)/2)i
+i!
+u
+where p = O(max{K, log
+ √n
+θ
+
+}), and u = (uj) with the uj ∈{±1} i.i.d. uniformly distributed.
+Observe that the k samples from vT Av are really obtained from k samples of vectors u = (uj)
+combined with some post-processing, namely obtaining v = Pp
+i=0
+((H−KI)/2)i
+i!
+u and two more
+sparse matrix vector products.
+We can therefore obtain k samples from each of vT A1v, . . . , vT Amv by once calculating
+k vectors v = Pp
+i=0
+((H−KI)/2)i
+i!
+u, and then, for each of the m matrices Aj computing the k
+products vT Ajv. The k vectors v can be constructed using
+O
+ 
+log(m
+δ )
+θ2
+max
+(
+K, log
+ √n
+θ
+!)
+dn
+!
+queries to the entries of H and arithmetic operations. The mk matrix vector products can be
+computed using
+O
+ 
+log(m
+δ )
+θ2
+msn
+!
+arithmetic operations and queries to the entries of A1, . . . , Am and H.
+This leads to total
+complexity
+O
+ 
+log(m
+δ )
+θ2
+max
+(
+K, log
+ √n
+θ
+!)
+dn + log(m
+δ )
+θ2
+msn
+!
+45
+
+
+=== PDF PAGE 46 ===
+for computing k samples from each of vT A1v, . . . , vT Amv.
+The results of Lemma 33 say that for each j, using those k samples of vT Ajv we can
+construct a θTr(B′)/4-approximation a′
+j of Tr(AjB′), with probability 1−δ/(2m). Therefore, by
+a union bound, with probability 1 −δ/2 we can construct θTr(B′)/4-approximations a′
+1, . . . , a′
+m
+of Tr(A1B′), . . . , Tr(AmB′). Therefore, for each j, with probability at least 1−δ, by Lemma 7 we
+have that aj = a′
+j/a′
+1 is a θ-approximation of Tr(AjB′)/Tr(B′), and hence it is a θ-approximation
+of Tr(AjB)/Tr(B).
+B
+Implementing smooth functions of Hamiltonians
+In this appendix we show how to eﬃciently implement smooth functions of a given Hamiltonian.
+First we explain what we mean by a function of a Hamiltonian H ∈Cn×n, i.e., a Hermitian
+matrix.
+Since Hermitian matrices are diagonalizable using a unitary matrix, we can write
+H = U†diag(λ)U, where λ ∈Rn is the vector of eigenvalues. Then for a function f : R →C
+we deﬁne f(H) := U†diag(f(λ))U with a slight abuse of notation, where we apply f to the
+eigenvalues in λ one-by-one.
+Note that if we approximate f by ˜f, then
+ ˜f(H) −f(H)
+ =
+diag( ˜f(λ)) −diag(f(λ))
+. Suppose D ⊆R is such that λ ∈Dn, then we can upper bound this
+norm by the maximum of | ˜f(x) −f(x)| over x ∈D. Finally we note that D = [−∥H∥, ∥H∥] is
+always a valid choice.
+The main idea of the method presented below, is to implement a map ˜f(H), where ˜f is a
+good (ﬁnite) Fourier approximation of f for all x ∈[−∥H∥, ∥H∥]. The novelty in our approach
+is that we construct a Fourier approximation based on some polynomial approximation. In the
+special case, when f is analytic and ∥H∥is less than the radius of convergence of the Taylor
+series, we can obtain good polynomial approximation functions simply by truncating the Taylor
+series, with logarithmic dependence on the precision parameter.
+Finally we implement the
+Fourier series using Hamiltonian simulation and the Linear Combination of Unitaries (LCU)
+trick [CW12, BCC+15, BCK15].
+This approach was already used in several earlier papers, particularly in [CKS17, CS17].
+There the main technical diﬃculty was to obtain a good truncated Fourier series. This is a non-
+trivial task, since on top of the approximation error, one needs to optimize two other parameters
+of the Fourier approximation that determine the complexity of implementation, namely:
+• the largest time parameter t that appears in some Fourier term e−itH, and
+• the total weight of the coeﬃcients, by which we mean the 1-norm of the vector of coeﬃ-
+cients.
+Earlier works used clever integral approximations and involved calculus to construct a good
+Fourier approximation for a speciﬁc function f. We are not aware of a general result.
+In contrast, our Theorem 40 and Corollary 42 avoids the usage of any integration. It obtains
+a low-weight Fourier approximation function using the Taylor series. The described method is
+completely general, and has the nice property that the maximal time parameter t depends
+logarithmically on the desired approximation precision. Since it uses the Taylor series, it is easy
+to apply to a wide range of smooth functions.
+The circuit we describe for the implementation of the linear operator f(H) : Cn →Cn is
+going to depend on the speciﬁc function f, but not on H; the H-dependence is only coming
+from Hamiltonian simulation. Since the circuit for a speciﬁc f can be constructed in advance,
+we do not need to worry about the (polynomial) cost of constructing the circuit, making the
+analysis simpler. When we describe gate complexity, we count the number of two-qubit gates
+needed for a quantum circuit implementation, just as in Section 2.
+46
+
+
+=== PDF PAGE 47 ===
+Since this appendix presents stand-alone results, here we will deviate slightly from the
+notation used throughout the rest of the paper, to conform to the standard notation used in the
+literature (for example, ε, r, θ and a have a diﬀerent meaning in this appendix). For simplicity
+we also assume, that the Hamiltonian H acts on Cn, where n is a power of 2. Whenever we
+write log(formula) in some complexity statement we actually mean log2(2 + formula) in order
+to avoid incorrect near-0 or even negative expressions in complexity bounds that would appear
+for small values of the formula.
+Hamiltonian simulation.
+We implement each term in a Fourier series using a Hamilto-
+nian simulation algorithm, and combine the terms using the LCU Lemma.
+Speciﬁcally we
+use [BCK15], but in fact our techniques would work with any kind of Hamiltonian simula-
+tion algorithm.10 The following deﬁnition describes what we mean by controlled Hamiltonian
+simulation.
+Deﬁnition 35. Let M = 2J for some J ∈N, γ ∈R and ϵ ≥0. We say that the unitary
+W :=
+M−1
+X
+m=−M
+|m⟩⟨m| ⊗eimγH
+implements controlled (M, γ)-simulation of the Hamiltonian H, where |m⟩denotes a (signed)
+bitstring |bJbJ−1 . . . b0⟩such that m = −bJ2J +PJ−1
+j=0 bj2j. The unitary ˜W implements controlled
+(M, γ, ε)-simulation of the Hamiltonian H, if
+ ˜W −W
+ ≤ε.
+Note that in this deﬁnition we assume that both positive and negative powers of eiH are
+simulated. This is necessary for our Fourier series, but sometimes we use only positive powers,
+e.g., for phase estimation; in that case we can simply ignore the negative powers.
+The following lemma is inspired by the techniques of [CKS17]. It calculates the cost of such
+controlled Hamiltonian simulation in terms of queries to the input oracles (4)-(5) as described
+in Section 2.
+Lemma 36. Let H ∈Cn×n be a d-sparse Hamiltonian. Suppose we know an upper bound K ∈
+R+ on the norm of H, i.e., ∥H∥≤K, and let τ := MγK. If ε > 0 and γ = Ω(1/(Kd)), then
+a controlled (M, γ, ε)-simulation of H can be implemented using O(τd log(τ/ε)/ log log(τ/ε))
+queries and O
+
+τd log(τ/ε)/ log log(τ/ε)
+h
+log(n) + log
+5
+2 (τ/ε)
+i
+gates.
+Proof. We use the results of [BCK15, Lemma 9-10], which tell us that a d-sparse Hamiltonian
+H can be simulated for time t with ε precision in the operator norm using
+O
+
+(t∥H∥maxd + 1)
+log(t∥H∥/ε)
+log log(t∥H∥/ε)
+
+(13)
+queries and gate complexity
+O
+
+(t∥H∥maxd + 1)
+log(t∥H∥/ε)
+log log(t∥H∥/ε)
+h
+log(n) + log
+5
+2 (t∥H∥/ε)
+i
+.
+(14)
+10For example there is a more recent method for Hamiltonian simulation [LC19, LC17] that could possibly
+improve on some of the log factors we get from [BCK15], but one could even consider completely diﬀerent input
+models allowing diﬀerent simulation methods.
+47
+
+
+=== PDF PAGE 48 ===
+Now we use a standard trick to remove log factors from the implementation cost, and write
+the given unitary W as the product of some increasingly precisely implemented controlled
+Hamiltonian simulation unitaries. For b ∈{0, 1} let us introduce the projector |b⟩⟨b|j := I2j ⊗
+|b⟩⟨b| ⊗I2J−j, where J = log(M). Observe that
+W =
+
+|1⟩⟨1|J ⊗e−i2JγH + |0⟩⟨0|J ⊗I
+ J−1
+Y
+j=0
+
+|1⟩⟨1|j ⊗ei2jγH + |0⟩⟨0|j ⊗I
+
+.
+(15)
+The j-th operator e±i2jγH in the product (15) can be implemented with 2j−J−1ϵ preci-
+sion using O
+
+2jγKd log
+
+2jγK
+ε2j−J−1
+
+/ log log
+
+2jγK
+ε2j−J−1
+
+= O(2jγKd log(τ/ϵ)/ log log(τ/ϵ)) queries
+by (13) and using O(2jd log(τ/ϵ)/ log log(τ/ϵ)[log(n) + log
+5
+2 (τ/ϵ)]) gates by (14). Let us de-
+note by ˜W the concatenation of all these controlled Hamiltonian simulation unitaries. Adding
+up the costs we see that our implementation of ˜W uses O(τd log(τ/ε)/ log log(τ/ε)) queries
+and has gate complexity O
+
+τd log(τ/ε)/ log log(τ/ε)
+h
+log(n) + log
+5
+2 (τ/ε)
+i
+. Using the triangle
+inequality repeatedly, it is easy to see that
+W −˜W
+ ≤PJ
+j=0 2j−J−1ε ≤ε.
+B.1
+Implementation of smooth functions of Hamiltonians: general results
+The ﬁrst lemma we prove provides the basis for our approach. It shows how to turn a polynomial
+approximation of a function f on the interval [−1, 1] into a nice Fourier series in an eﬃcient
+way, while not increasing the weight of coeﬃcients. This is useful, because we can implement a
+function given by a Fourier series using the LCU Lemma, but only after scaling it down with
+the weight of the coeﬃcients.
+Lemma 37. Let δ, ε ∈(0, 1) and f : R →C s.t.
+f(x)−PK
+k=0 akxk ≤ε/4 for all x ∈
+[−1 + δ, 1 −δ]. Then ∃c ∈C2M+1 such that
+
+f(x) −
+M
+X
+m=−M
+cme
+iπm
+2 x
+
+≤ε
+for all x ∈[−1 + δ, 1 −δ], where M = max
+
+2
+l
+ln
+ 4∥a∥1
+ε
+
+1
+δ
+m
+, 0
+
+and ∥c∥1 ≤∥a∥1. Moreover c can
+be eﬃciently calculated on a classical computer in time poly(K, M, log(1/ε)).
+Proof. Let us introduce the notation ∥f∥∞= sup{|f(x)| : x ∈[−1+δ, 1−δ]}. First we consider
+the case when ∥a∥1 < ε/2. Then ∥f∥∞≤
+f(x) −PK
+k=0 akxk
+∞+
+PK
+k=0 akxk
+∞< ε/4+ε/2 <
+ε. So in this case the statement holds with M = 0 and c = 0, i.e., even with an empty sum.
+From now on we assume ∥a∥1 ≥ε/2. We are going to build up our approximation gradually.
+Our ﬁrst approximate function ˜f1(x) := PK
+k=0 akxk satisﬁes
+f −˜f1
+
+∞≤ε/4 by assumption.
+In order to construct a Fourier series, we will work towards a linear combination of sines.
+To that end, note that ∀x ∈[−1, 1]:
+˜f1(x) = PK
+k=0 ak
+ arcsin(sin(xπ/2))
+π/2
+k. Let b(k) denote the
+series of coeﬃcients such that
+ arcsin(y)
+π/2
+k = P∞
+ℓ=0 b(k)
+ℓyℓfor all y ∈[−1, 1]. For k = 1 the
+coeﬃcients are just
+2
+π times the coeﬃcients of the Taylor series of arcsin so we know that
+b(1)
+2ℓ= 0 while b(1)
+2ℓ+1 =
+ 2ℓ
+ℓ
+ 2−2ℓ
+2ℓ+1
+2
+π. Since
+ arcsin(y)
+π/2
+k+1=
+ arcsin(y)
+π/2
+kP∞
+ℓ=0 b(1)
+ℓyℓ
+, we obtain the
+formula b(k+1)
+ℓ
+= Pℓ
+ℓ′=0 b(k)
+ℓ′ b(1)
+ℓ−ℓ′, so one can recursively calculate each b(k). As b(1) ≥0 one can
+48
+
+
+=== PDF PAGE 49 ===
+use the above identity inductively to show that b(k) ≥0. Therefore
+b(k)
+1 = P∞
+ℓ=0 b(k)
+ℓ1ℓ=
+ arcsin(1)
+π/2
+k = 1. Using the above deﬁnitions and observations we can rewrite
+∀x ∈[−1, 1] : ˜f1(x) =
+K
+X
+k=0
+ak
+∞
+X
+ℓ=0
+b(k)
+ℓ
+sinℓ(xπ/2).
+To obtain the second approximation function, we want to truncate the summation over ℓat
+L = ln
+ 4∥a∥1
+ε
+
+1
+δ2 in the above formula. We ﬁrst estimate the tail of the sum. We are going to
+use that for all δ ∈[0, 1]: sin((1 −δ)π/2) ≤1 −δ2. For all k ∈N and x ∈[−1 + δ, 1 −δ] we have:
+
+∞
+X
+ℓ=⌈L⌉
+b(k)
+ℓ
+sinℓ(xπ/2)
+
+≤
+∞
+X
+ℓ=⌈L⌉
+b(k)
+ℓ
+sinℓ(xπ/2)
+
+≤
+∞
+X
+ℓ=⌈L⌉
+b(k)
+ℓ
+1 −δ2
+ℓ
+≤
+
+1 −δ2L
+∞
+X
+ℓ=⌈L⌉
+b(k)
+ℓ
+≤
+
+1 −δ2L
+≤e−δ2L
+=
+ε
+4∥a∥1
+.
+Thus we have
+ ˜f1 −˜f2
+
+∞≤ε/4 for
+˜f2(x) :=
+K
+X
+k=0
+ak
+⌊L⌋
+X
+ℓ=0
+b(k)
+ℓ
+sinℓ(xπ/2).
+To obtain our third approximation function, we will approximate sinℓ(xπ/2). First observe that
+sinℓ(z) =
+ 
+e−iz −eiz
+−2i
+!ℓ
+=
+ i
+2
+ℓ
+ℓ
+X
+m=0
+(−1)m
+ 
+ℓ
+m
+!
+eiz(2m−ℓ)
+(16)
+which, as we will show (for M′ much larger than
+√
+ℓ) is very well approximated by
+ i
+2
+ℓ
+⌊ℓ/2⌋+M′
+X
+m=⌈ℓ/2⌉−M′
+(−1)m
+ 
+ℓ
+m
+!
+eiz(2m−ℓ).
+Truncating the summation in (16) based on this approximation reduces the maximal time evolu-
+tion parameter (i.e., the maximal value of the parameter t in the exp(izt) terms) quadratically.
+To make this approximation precise, we use Chernoﬀ’s inequality [AS08, A.1.7] for the binomial
+distribution, or more precisely its corollary for sums of binomial coeﬃcients, stating
+ℓ
+X
+m=⌈ℓ/2+M′⌉
+2−ℓ
+ 
+ℓ
+m
+!
+≤e−2(M′)2
+ℓ
+.
+49
+
+
+=== PDF PAGE 50 ===
+Let M′ =
+l
+ln
+ 4∥a∥1
+ε
+
+1
+δ
+m
+and suppose ℓ≤L, then this bound implies that
+⌊ℓ/2⌋−M′
+X
+m=0
+2−ℓ
+ 
+ℓ
+m
+!
+=
+ℓ
+X
+m=⌈ℓ/2⌉+M′
+2−ℓ
+ 
+ℓ
+m
+!
+≤e−2(M′)2
+ℓ
+≤e−2(M′)2
+L
+≤
+ 
+ε
+4∥a∥1
+!2
+≤
+ε
+4∥a∥1
+,
+(17)
+where for the last inequality we use the assumption ε ≤2∥a∥1. By combining (16) and (17) we
+get that for all ℓ≤L
+
+sinℓ(z) −
+ i
+2
+ℓ
+⌊ℓ/2⌋+M′
+X
+m=⌈ℓ/2⌉−M′
+(−1)m
+ 
+ℓ
+m
+!
+eiz(2m−ℓ)
+
+∞
+≤
+ε
+2∥a∥1
+.
+Substituting z = xπ/2 into this bound we can see that
+ ˜f2 −˜f3
+
+∞≤ε/2, for
+˜f3(x) :=
+K
+X
+k=0
+ak
+⌊L⌋
+X
+ℓ=0
+b(k)
+ℓ
+ i
+2
+ℓ
+⌊ℓ/2⌋+M′
+X
+m=⌈ℓ/2⌉−M′
+(−1)m
+ 
+ℓ
+m
+!
+e
+iπx
+2 (2m−ℓ),
+(18)
+using PK
+k=0 |ak| P⌊L⌋
+ℓ=0
+b(k)
+ℓ
+ ≤PK
+k=0 |ak| = ∥a∥1. Therefore we can conclude that ˜f3 is an ε-
+approximation to f:
+f −˜f3
+
+∞≤
+f −˜f1
+
+∞+
+ ˜f1 −˜f2
+
+∞+
+ ˜f2 −˜f3
+
+∞≤ε.
+Observe that in (18) the largest value of |m−ℓ| in the exponent is upper bounded by 2M′ = M.
+So by rearranging the terms in ˜f3 we can write ˜f3(x) = PM
+m=−M cme
+iπm
+2 x. Now let us ﬁx a value
+k in the ﬁrst summation of (18). Observe that after taking the absolute value of each term, the
+last two summations still yield a value ≤1, since
+b(k)
+1 = 1 and Pℓ
+m=0
+  ℓ
+m
+ = 2ℓ. It follows
+that ∥c∥1 ≤∥a∥1. From the construction of the proof, it is easy to see that (an ε-approximation
+of) c can be calculated in time poly(K, M, log(1/ε)).
+Now we present the Linear Combination of Unitaries (LCU) Lemma [CW12, BCC+15,
+BCK15], which we will use for combining the Fourier terms in our quantum circuit. Since we
+intend to use LCU for implementing non-unitary operations, we describe a version without the
+ﬁnal amplitude ampliﬁcation step. We provide a short proof for completeness.
+Lemma 38 (LCU Lemma [CW12, BCC+15, BCK15]). Let U1, U2, . . . , Um be unitaries on a
+Hilbert space H, and L = Pm
+i=1 aiUi, where a ∈Rm
++ \{0}. Let V = Pm
+i=1 |i⟩⟨i|⊗Ui and A ∈Cm×m
+be a unitary such that A|0⟩= Pm
+i=1
+q ai
+∥a∥1 |i⟩. Then
+L
+∥a∥1 = (⟨0| ⊗I)
+
+A† ⊗I
+
+V (A ⊗I)(|0⟩⊗I),
+i.e., for every |ψ⟩∈H we have
+
+A† ⊗I
+
+V (A ⊗I)|0⟩|ψ⟩= |0⟩
+L
+∥a∥1 |ψ⟩+ |Φ⊥⟩, where the vector
+|Φ⊥⟩satisﬁes (|0⟩⟨0| ⊗I)|Φ⊥⟩= 0.
+Proof.
+(⟨0| ⊗I)(A† ⊗I)V (A ⊗I)|0⟩|ψ⟩=
+  m
+X
+i=1
+s
+ai
+∥a∥1
+⟨i|
+!
+⊗I
+!
+V
+m
+X
+i=1
+s
+ai
+∥a∥1
+|i⟩|ψ⟩
+=
+  m
+X
+i=1
+s
+ai
+∥a∥1
+⟨i|
+!
+⊗I
+! m
+X
+i=1
+s
+ai
+∥a∥1
+|i⟩Ui|ψ⟩
+=
+m
+X
+i=1
+ai
+∥a∥1
+Ui|ψ⟩
+=
+L
+∥a∥1
+|ψ⟩
+50
+
+
+=== PDF PAGE 51 ===
+The next result summarizes how to eﬃciently implement a Fourier series of a Hamiltonian.
+Lemma 39. Suppose f(x) = PM−1
+m=−M cmeimγx, for a given c ∈C2M \ {0}. We can construct a
+unitary ˜U which implements the operator f(H)
+∥c∥1 = PM−1
+m=−M
+cm
+∥c∥1 eimγH with ε precision, i.e., such
+that
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −f(H)
+∥c∥1
+ ≤ε,
+using O(M(log(M) + 1)) two-qubit gates and a single use of a circuit implementing controlled
+(M, γ, ε)-simulation of H.
+Proof. This is a direct corollary of Lemma 38. To work out the details, note that we can always
+extend c with some 0 values, so we can assume without loss of generality that M is a power of
+2. This is useful, because then we can represent each m ∈[−M, M −1] as a (J + 1)-bit signed
+integer for J = log(M).
+The implementation of the operator A in Lemma 38 does not need any queries and it can be
+constructed exactly using O(M(log(M)+1)) two-qubit gates, e.g., by the techniques of [GR02].
+We sketch the basic idea which is based on induction. For J = 1 the operator A is just a
+two-qubit unitary. Suppose we proved the claim for bitstrings of length J and want to prove
+the claim for length J + 1. Let a ∈R2J+1
++
+be such that ∥a∥1 = 1 and deﬁne ˜a ∈R2J
++ such that
+˜ab = ab,0 + ab,1 for all bitstrings b ∈{0, 1}J. Then we have a circuit ˜A that uses O(2J(J + 1))
+gates and satisﬁes √˜ab = ⟨b| ˜A|0 . . . 0⟩for all b ∈{0, 1}J. We can add an extra |0⟩-qubit and
+implement a controlled rotation gate Rb on it for each b ∈{0, 1}J. Let Rb have rotation angle
+arccos
+q
+ab,0/˜ab
+
+and be controlled by b. It is easy to see that the new unitary A satisﬁes
+√ab′ = ⟨b′|A|0 . . . 0⟩for each b′ ∈{0, 1}J. Each Rb can be implemented using O(J) two-qubit
+gates and ancilla qubits, justifying the gate complexity and concluding the induction.
+What remains is to implement the operator V = PM−1
+m=−M |m⟩⟨m|⊗cm
+|cm|eimγH from Lemma 38.
+We implement V = PW in two steps, where P = PM−1
+m=−M |m⟩⟨m| ⊗
+cm
+|cm|I. This P can be
+implemented exactly using O(M(log(M) + 1)) gates simply by building a controlled gate that
+adds the right phase for each individual bitstring. Since the bitstring on which we want to do a
+controlled operation has length log(M) + 1, each controlled operation can be constructed using
+O(log(M)+1) gates and ancilla qubits resulting in the claimed gate complexity. We use a circuit
+implementing controlled (M, γ, ε)-simulation of H, denoted by ˜W, which is an ε-approximation
+of W by deﬁnition.
+Finally ˜U := (A† ⊗I)P ˜W(A ⊗I). This yields an ε-precise implementation, since
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −f(H)
+∥c∥1
+ =
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −(⟨0| ⊗I)(A† ⊗I)PW(A ⊗I)(|0⟩⊗I)
+
+≤
+ ˜U −(A† ⊗I)PW(A ⊗I)
+
+=
+(A† ⊗I)P ˜W(A ⊗I) −(A† ⊗I)PW(A ⊗I)
+
+=
+ ˜W −W
+ ≤ε.
+Now we can state the main result of this appendix, which tells us how to eﬃciently turn a
+function (provided with its Taylor series) of a Hamiltonian H, into a quantum circuit by using
+controlled Hamiltonian simulation.
+In the following theorem we assume that the eigenvalues of H lie in a radius-r ball around
+x0. The main idea is that if even r + δ is less than the radius of convergence of the Taylor
+51
+
+
+=== PDF PAGE 52 ===
+series, then we can obtain an ε-approximation of f by truncating the series at logarithmically
+high powers. B will be an upper bound on the absolute value of the function within the r + δ
+ball around x0, in particular ∥f(H)/B∥≤1. Therefore we can implement f(H)/B as a block
+of some larger unitary. It turns out that apart from the norm and sparsity of H and precision
+parameters, the complexity depends on the ratio of δ and r.
+Theorem 40 (Implementing a smooth function of a Hamiltonian). Let x0 ∈R and r > 0 be
+such that f(x0 + x) = P∞
+ℓ=0 aℓxℓfor all x ∈[−r, r]. Suppose B > 0 and δ ∈(0, r] are such that
+P∞
+ℓ=0(r + δ)ℓ|aℓ| ≤B. If ∥H −x0I∥≤r and ε ∈
+
+0, 1
+2
+i
+, then we can implement a unitary ˜U
+such that
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −f(H)
+B
+ ≤ε, using O(r/δ log(r/(δε)) log(1/ε)) gates and a single
+use of a circuit for controlled (O(r log(1/ε)/δ), O(1/r), ε/2)-simulation of H.
+Suppose we are given K such that ∥H∥≤K and r = O(K). If, furthermore, H is d-sparse
+and is accessed via oracles (4)-(5), then the whole circuit can be implemented using
+O
+Kd
+δ log
+K
+δε
+
+log
+1
+ε
+
+queries and O
+Kd
+δ log
+K
+δε
+
+log
+1
+ε
+
+log(n)+log
+5
+2
+K
+δε
+
+gates.
+Proof. The basic idea is to combine Lemma 37 and Lemma 39 and apply them to a transformed
+version of the function. First we deﬁne δ′ := δ/(r + δ), which is at most 1/2 by assumption.
+Then, for all ℓ∈N let bℓ:= aℓ(r + δ)ℓand deﬁne the function g : [−1 + δ′, 1 −δ′] →R by
+g(y) := P∞
+ℓ=0 bℓyℓso that
+f(x0 + x) = g(x/(r + δ))
+for all x ∈[−r, r].
+(19)
+Now we set L :=
+l
+1
+δ′ log
+
+8
+ε
+m
+. Then for all y ∈[−1 + δ′, 1 −δ′]
+g(y) −
+L−1
+X
+ℓ=0
+bℓyℓ
+ =
+
+∞
+X
+ℓ=L
+bℓyℓ
+
+≤
+∞
+X
+ℓ=L
+bℓ(1 −δ′)ℓ
+≤(1 −δ′)L
+∞
+X
+ℓ=L
+|bℓ|
+≤
+ 1 −δ′LB
+≤e−δ′LB
+≤εB
+8 .
+We would now like to obtain a Fourier-approximation of g for all y ∈[−1 + δ′, 1 −δ′], with
+precision ε′ = εB
+2 . Let b′ := (b0, b1, . . . , bL−1) and observe that ∥b′∥1 ≤∥b∥1 ≤B. We ap-
+ply Lemma 37 to the function g, using the polynomial approximation corresponding to the
+truncation to the ﬁrst L terms, i.e., using the coeﬃcients in b′.
+Then we obtain a Fourier
+ε′-approximation ˜g(y) := PM
+m=−M ˜cme
+iπm
+2 y of g, with
+M = O
+ 1
+δ′ log
+∥b′∥1
+ε′
+
+= O
+r
+δ log
+1
+ε
+
+such that the vector of coeﬃcients ˜c ∈C2M+1 satisﬁes ∥˜c∥1 ≤∥b′∥1 ≤∥b∥1 ≤B. Let
+˜f(x0 + x) := ˜g
+
+x
+r + δ
+
+=
+M
+X
+m=−M
+˜cme
+iπm
+2(r+δ)x;
+52
+
+
+=== PDF PAGE 53 ===
+by (19) we see that ˜f is an ε′-precise Fourier approximation of f on the interval [x0 −r, x0 + r].
+To transform this Fourier series to its ﬁnal form, we note that ˜f(z) = PM
+m=−M ˜cme
+iπm
+2(r+δ)(z−x0),
+so by deﬁning cm := ˜cme−
+iπm
+2(r+δ)x0 we get a Fourier series in z, while preserving ∥c∥1 = ∥˜c∥1 ≤B.
+In the trivial case, when c = 0, we choose a unitary ˜U, such that it maps the |0⟩ancilla state
+to |1⟩, then clearly (⟨0| ⊗I) ˜U(|0⟩⊗I) = 0 = ˜f(H). Clearly such a ˜U can be implemented using
+O(1) gates and 0 queries. Otherwise we can apply Lemma 39 to this modiﬁed Fourier series to
+construct a unitary circuit ˜V implementing an ε
+2-approximation of ˜f(H)/∥c∥1. We can further
+scale down the amplitude of the |0⟩-part of the output by a factor of ∥c∥1/B ≤1, to obtain an
+approximation of ˜f(H)/B as follows. We simply add an additional ancilla qubit initialized to
+|0⟩on which we act with the one-qubit unitary
+Rot :=
+
+
+
+
+∥c∥1
+B
+r
+1 −∥c∥2
+1
+B2
+−
+r
+1 −∥c∥2
+1
+B2
+∥c∥1
+B
+
+
+
+.
+Finally we deﬁne ˜U := Rot ⊗˜V , and deﬁne |0⟩|0⟩as the new success indicator, where the ﬁrst
+qubit is the new ancilla. We show that ˜U implements f(H)/B with ε precision: (if c = 0, let
+us use the deﬁnition ˜f(H)/∥c∥1 := 0)
+(⟨0|⟨0| ⊗I) ˜U(|0⟩|0⟩⊗I) −f(H)
+B
+ ≤
+(⟨0|⟨0| ⊗I) ˜U(|0⟩|0⟩⊗I) −
+˜f(H)
+B
+ +
+
+˜f(H)
+B
+−f(H)
+B
+
+= ∥c∥1
+B
+(⟨0| ⊗I) ˜V (|0⟩⊗I) −
+˜f(H)
+∥c∥1
+ +
+
+˜f(H) −f(H)
+B
+
+≤∥c∥1
+B
+ε
+2 + ε′
+B
+≤ε.
+Lemma 39 uses O(M log(M + 1)) = O(r/δ log(1/ε) log(r/(δε))) gates and a single use of a
+controlled (M, γ = π/(2r + 2δ), ε/2)-simulation of H. If ∥H∥= O(K), we can use Lemma 36
+to conclude O
+
+MγKd log
+
+1
+ε
+
+log
+
+MγK
+ε
+log
+
+1
+ε
+
+= O
+
+Kd
+δ log
+
+K
+δε
+
+log
+
+1
+ε
+
+query and
+O
+
+MγKd log
+1
+ε
+
+log
+MγK
+ε
+log
+1
+ε
+
+log(n) + log
+5
+2
+MγK
+ε
+log
+1
+ε
+
+= O
+Kd
+δ log
+K
+δε
+
+log
+1
+ε
+
+log(n) + log
+5
+2
+K
+δε
+
+gate complexity.
+Finally note that the polynomial cost of calculating c that is required by
+Lemma 37 does not aﬀect the query complexity or the circuit size, it only aﬀects the description
+of the circuit.
+Remark 41. Note that in the above theorem we can relax the criterion ∥H −x0I∥≤r. Suppose
+we have an orthogonal projector Π, which projects to eigenvectors with eigenvalues in [x0−r, x0+
+r], i.e., [H, Π] = 0 and ∥Π(H −x0I)Π∥≤r. Then the circuit ˜U constructed in Theorem 40
+satisﬁes
+Π
+
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −f(H)
+B
+
+Π
+ ≤ε.
+The following corollary shows how to implement functions piecewise in small “patches” using
+Remark 41. The main idea is to ﬁrst estimate the eigenvalues of H up to θ precision, and then
+implement the function using the Taylor series centered around a point close to the eigenvalue.
+53
+
+
+=== PDF PAGE 54 ===
+This approach has multiple advantages. First, the function may not have a Taylor series
+that is convergent over the whole domain of possible eigenvalues of H. Even if there is such a
+series, it can have very poor convergence properties, making B large and therefore requiring a
+lot of amplitude ampliﬁcation. Nevertheless, for small enough neighborhoods the Taylor series
+always converges quickly, overcoming this diﬃculty.
+Corollary 42. Suppose (xℓ) ∈RL and r, θ ∈R+ are such that the spectrum of H lies in the
+domain SL
+ℓ=1[xℓ−(r −2θ), xℓ+ (r + 2θ)].11 Suppose there exist coeﬃcients a(ℓ)
+k
+∈R such that
+for all ℓ∈[L] and x ∈[−r, r] we have f(xℓ+ x) = P∞
+k=0 a(ℓ)
+k xk, and P∞
+k=0(r + δ)k|a(ℓ)
+k | ≤B for
+some ﬁxed δ ∈[0, r] and B > 0. If ∥H∥≤K and ε ∈
+
+0, 1
+2
+i
+, then we can implement a unitary
+˜U such that
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −f(H)
+B
+ ≤ε,
+using O(Lr/δ log(r/(δε)) log(1/ε) + log(K/θ) log log(K/(θε))) gates, and with O(log(1/ε)) uses
+of an (O(1/θ), π/K, Ω(ε2/ log(1/ε)))-simulation of H and a single use of a circuit for controlled
+(O(r log(1/ε)/δ), O(1/r), ε/2)-simulation of H. If r = O(K), θ ≤r/4, θ = Ω(δ), ∥H∥≤K,
+H is d-sparse and is accessed via oracles (4)-(5), then the circuit can be implemented using
+O
+Kd
+δ log
+K
+δε
+
+log
+1
+ε
+
+queries and O
+Kd
+δ log
+K
+δε
+
+log
+1
+ε
+
+log(n)+log
+5
+2
+K
+δε
+
+gates.
+Sketch of the proof. We start by performing phase estimation on eiH with ≈θ resolution in
+phase. We boost the success probability by taking the median outcome of O(log(1/ε)) par-
+allel repetitions, so that we get a worse-than-θ estimation with probability at most O(ε2).
+This way the boosted phase estimation circuit is O(ε)-close in operator norm to an “idealized”
+phase estimation unitary that never makes approximation error greater than θ (for more de-
+tails on this type of argument, see the proof of Lemma 50). Phase estimation uses controlled
+(O(K/θ), π/K, Ω(ε2/ log(1/ε)))-simulation of H and a Fourier transform on O(log(K/θ))-bit
+numbers which can be implemented using O(log(K/θ) log log(K/(θε))) gates. The probability-
+boosting uses O(log(1/ε)) repetitions. Controlled on the phase estimate ˜λ that we obtained, we
+implement a 1/B-scaled version of the corresponding function “patch” f(x)|[xℓ−r,xℓ+r] centered
+around arg min |xℓ−˜λ| using Theorem 40 and Remark 41. The additional gate complexities
+of the “patches” add up to O(Lr/δ log(r/(δε)) log(1/ε)), but since each “patch” uses the same
+controlled (O(r log(1/ε)/δ), O(1/r), ε/2)-simulation of H, we only need to implement that once.
+Finally we uncompute phase estimation.12 For the ﬁnal complexity, note that we can assume
+without loss of generality that L(r −2θ) = O(K), since otherwise we can just remove some
+redundant intervals from the domain. Hence Lr = O(K) and Lemma 36 implies the stated
+complexities.
+This corollary is essentially as general and eﬃcient as we can hope for. Let D denote the
+domain of possible eigenvalues of H. If we want to implement a reasonably smooth function f,
+then it probably satisﬁes the following: there is some r = Ω(1), such that for each x ∈D,
+11This way, even if we make θ error during the estimation of an eigenvalue λi, the closest xℓwill still contain
+λi in its radius-r neighborhood.
+12Note that phase estimation on some eigenvector of eiH can produce a superposition of diﬀerent estimates
+of the phase.
+If some intervals [xℓ−r, xℓ+ r] overlap for ℓand ℓ′, those estimates could lead to diﬀerent
+implementations of f(H) (one based on the coeﬃcients a(ℓ)
+k
+and one based on a(ℓ′)
+k
+). However, this causes no
+diﬃculty; since we used the same normalization 1/B for all implementations, both implementations lead to
+essentially the same state after postselecting on the |0⟩ancilla state.
+54
+
+
+=== PDF PAGE 55 ===
+the Taylor series in the radius-r neighborhood of x converges quickly, more precisely the Tay-
+lor coeﬃcients a(x)
+k
+for the x-centered series satisfy P∞
+k=0 |a(x)
+k |rk = O(∥f∥∞), where we deﬁne
+∥f∥∞:= supx∈D |f(x)|. If this is the case, covering D with radius-O(r) intervals, choosing
+θ = Θ(r) and δ = Θ(r), Corollary 42 provides an eO(∥H∥d) query and gate complexity imple-
+mentation of f(H)/B, where B = O(∥f∥∞). The value of B is optimal up to constant factors,
+since f(H)/B must have norm at most 1.
+Also the ∥H∥d factor in the complexity is very
+reasonable, and we achieve the logarithmic error dependence which is the primary motivation
+of the related techniques. An application along the lines of this discussion can be found in
+Lemma 46.
+Also note that in the above corollary we added up the gate complexities of the diﬀerent
+“patches.” Since these gates prepare the Fourier coeﬃcients of the function corresponding to
+the diﬀerent Taylor series at diﬀerent points, one could use this structure to implement all
+coeﬃcients with a single circuit. This can potentially result in much smaller circuit sizes, which
+could be beneﬁcial when the input model allows more eﬃcient Hamiltonian simulation (which
+then would no longer be the bottleneck in the complexity).
+B.2
+Applications of smooth functions of Hamiltonians
+In this subsection we use the input model for the d-sparse matrix H as described at the start of
+Section 2. We calculate the implementation cost in terms of queries to the input oracles (4)-(5),
+but it is easy to convert the results to more general statements as in the previous subsection.
+The following theorem shows how to eﬃciently implement the function e−H for some H ⪰I.
+We use this result in the proof of Lemma 13 to estimate expectation values of the quantum
+state ρ = e−H/Tr
+
+e−H
+(for the application we ensure that H ⪰I by adding some multiple of
+I).
+Theorem 43. Suppose that I ⪯H and we are given K ∈R+ such that ∥H∥≤2K.
+If
+ε ∈(0, 1/3), then we can implement a unitary ˜U such that
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −e−H ≤ε
+using
+O
+
+Kd log
+K
+ε
+
+log
+1
+ε
+
+queries and O
+
+Kd log
+K
+ε
+
+log
+1
+ε
+
+log(n) + log
+5
+2
+K
+ε
+
+gates.
+Proof. In order to use Theorem 40 we set x0 := K + 1/2 so that ∥H −x0I∥≤K =: r, and use
+the function
+f(x0 + x) = e−x0−x = e−x0e−x = e−x0
+∞
+X
+ℓ=0
+(−x)ℓ
+ℓ!
+.
+We choose δ := 1/2 so that e−x0 P∞
+ℓ=0
+(r+δ)ℓ
+ℓ!
+= e−x0 P∞
+ℓ=0
+xℓ
+0
+ℓ! = 1, therefore we set B := 1.
+Theorem 40 tells us that we can implement a unitary ˜U, such that ˜f(H) := (⟨0| ⊗I) ˜U(|0⟩⊗I)
+is an ε-approximation of f(H)/B = e−H, using
+O
+
+Kd log
+K
+ε
+
+log
+1
+ε
+
+queries and O
+
+Kd log
+K
+ε
+
+log
+1
+ε
+
+log(n) + log
+5
+2
+K
+ε
+
+gates.
+To conclude this appendix, we now sketch the proofs of a few interesting consequences of
+the earlier results in this appendix. These will, however, not be used in the body of the paper.
+First, we show how to use the above subroutine together with amplitude ampliﬁcation
+to prepare a Gibbs state with cost depending logarithmically on the precision parameter, as
+shown by the following lemma. To our knowledge this is the ﬁrst Gibbs sampler that achieves
+55
+
+
+=== PDF PAGE 56 ===
+logarithmic dependence on the precision parameter without assuming access to the entries of
+√
+H as in [CS17]. This can mean a signiﬁcant reduction in complexity; for more details see the
+introduction of Section 2.2.3.
+Lemma 44. We can probabilistically prepare a puriﬁed Gibbs state |˜γ⟩AB such that with high
+probability
+TrB(|˜γ⟩⟨˜γ|AB) −e−H/Tr
+
+e−H
+1 ≤ε holds, using an expected cost eO
+q
+n/Tr(e−H)
+
+times the complexity of Theorem 43. If we are given a number z ≤Tr
+
+e−H
+, then we can also
+prepare |˜γ⟩AB in a unitary fashion with cost eO
+p
+n/z
+
+times the complexity of Theorem 43.
+Sketch of proof. First we show how to prepare a puriﬁed sub-normalized Gibbs state. Then we
+use the exponential search algorithm of Boyer et al. [BBHT98] (with exponentially decreasing
+guesses for the norm a of the subnormalized Gibbs state, and hence exponentially increasing
+number of amplitude ampliﬁcation steps) to postselect on this sub-normalized state in a similar
+fashion as in Algorithm 3. There is a possible caveat here: if we postselect on a state with norm
+a, then it gets rescaled by 1/a and its preparation error is rescaled by 1/a as well. Therefore
+during the rounds of the search algorithm we always increase the precision of implementation to
+compensate for the increased (error) ampliﬁcation. Since the success of postselection in a round
+is upper bounded by the square of O(a · #{ampliﬁcation steps in the round}), the probability
+for the postselection to succeed in any of the early rounds is small.
+Now we describe how to prepare a puriﬁed sub-normalized Gibbs state. We use the decom-
+position H = Pn
+j=1 Ej|φj⟩⟨φj|, where {|φj⟩: j ∈[n]} is an orthonormal eigenbasis of H. Due
+to the invariance of maximally entangled states under transformations of the form W ⊗W ∗for
+unitary W, we have
+1
+√n
+n−1
+X
+j=0
+|j⟩A|j⟩B =
+1
+√n
+n
+X
+j=1
+|φj⟩A|φ∗
+j⟩B.
+(20)
+Suppose we can implement a unitary U such that (⟨0| ⊗I)U(|0⟩⊗I) = e−H/2. If we apply U to
+the A-register of the state (20), then we get a state |γ⟩such that TrB((⟨0| ⊗I)|γ⟩⟨γ|(|0⟩⊗I)) =
+e−H/n.
+If we implement e−H/2 with suﬃcient precision using Theorem 43 in the exponential search
+algorithm, then after O
+q
+n/Tr(e−H)
+
+rounds of amplitude ampliﬁcation, with high probability
+we obtain a Gibbs state using the claimed expected runtime.
+If we also know a lower bound z ≤Tr
+
+e−H
+, then we have an upper bound on the expected
+runtime, therefore we can turn the procedure into a unitary circuit using standard techniques.
+We can also recover the Gibbs sampler of Chowdhury and Somma [CS17]: if we apply
+our Corollary 42 to the function e−x2 assuming access to
+√
+H for some psd matrix H, then
+we get a Gibbs sampler for the state e−H/Tr(e−H), similar to [CS17]. The advantage of the
+presented approach is that it avoids the usage of involved integral transformations, and can be
+presented without writing down a single integral sign, also due to our general results the proof
+is signiﬁcantly shorter. Before we prove the precise statement in Lemma 46, we need some
+preparation for the application of Corollary 42:
+Lemma 45. For all k ∈N we have
+∂k+1
+x
+e−x2 = −2x∂k
+xe−x2 −2k∂k−1
+x
+e−x2
+(21)
+and for all x ∈R
+∂k
+xe−x2 ≤(2|x| + 2k)ke−x2.
+(22)
+56
+
+
+=== PDF PAGE 57 ===
+Therefore
+∞
+X
+k=0
+∂k
+xe−x2
+k!
+ 1
+8e
+k
+≤2.
+(23)
+Proof. We prove both claims by induction. ∂0
+xe−x2 = e−x2, ∂1
+xe−x2 = −2xe−x2 and ∂2
+xe−x2 =
+4x2e−x2 −2e−x2, so (21) holds for k = 1. Suppose (21) holds for k, we prove the inductive step
+as follows:
+∂k+2
+x
+e−x2 = ∂x
+
+∂k+1
+x
+e−x2 (21)
+= ∂x
+
+−2x∂k
+xe−x2−2k∂k−1
+x
+e−x2
+= −2x∂k+1
+x
+e−x2−2(k + 1)∂k
+xe−x2.
+Similarly, observe that (22) holds for k = 0 and k = 1. Suppose (22) holds for k, then we show
+the induction step as follows:
+∂k+1
+x
+e−x2
+(21)
+=
+−2x∂k
+xe−x2 −2k∂k−1
+x
+e−x2
+≤
+2x∂k
+xe−x2 +
+2k∂k−1
+x
+e−x2
+(22)
+≤2|x|(2|x| + 2k)ke−x2 + 2k(2|x| + 2(k −1))k−1e−x2
+≤(2|x| + 2(k + 1))k+1e−x2.
+Finally, using the previous two statements we can prove (23) by the following calculation:
+∞
+X
+k=0
+∂k
+xe−x2
+k!
+ 1
+8e
+k (22)
+≤
+∞
+X
+k=0
+(2|x| + 2k)ke−x2
+k!
+ 1
+8e
+k
+≤
+∞
+X
+k=0
+(4|x|)ke−x2
+k!
+ 1
+8e
+k
++
+∞
+X
+k=1
+(4k)ke−x2
+k!
+ 1
+8e
+k
+≤e−x2
+ ∞
+X
+k=0
+1
+k!
+4|x|
+8e
+k
++
+∞
+X
+k=1
+1
+k!
+4k
+8e
+k!
+≤e−x2
+ 
+e
+|x|
+2e +
+∞
+X
+k=1
+1
+√
+2π
+ e
+k
+k k
+2e
+k!
+= e−(|x|−1
+4e)
+2
+e( 1
+4e)
+2
++ e−x2
+√
+2π
+≤e( 1
+4e)
+2
++
+1
+√
+2π
+≤2.
+Lemma 46. Suppose we know a K > 1 such that ∥H∥≤K. If ε ∈(0, 1/3), then we can
+implement a unitary ˜U such that
+(⟨0| ⊗I) ˜U(|0⟩⊗I) −e−H2/2
+ ≤ε using
+O
+
+Kd log
+K
+ε
+
+log
+1
+ε
+
+queries and O
+
+Kd log
+K
+ε
+
+log
+1
+ε
+
+log(n) + log
+5
+2
+K
+ε
+
+gates.
+Proof. We apply Corollary 42 to the function e−x2. For this let L0 := ⌈32K⌉, L := 2L0 + 1 and
+let xℓ:= (ℓ−1 −L0)/32 for all ℓ∈[L]. We choose r := 1/32, δ := θ := 1/128 and B = 2 so
+that the conditions of Corollary 42 are satisﬁed, as shown by Lemma 45. Indeed r +δ ≤1/(8e),
+hence for all ℓ∈[L] we have P∞
+k=0 a(ℓ)
+k (r + δ)k ≤2 = B as we can see by (23). Since δ = Θ(1),
+Corollary 42 provides the desired complexity.
+57
+
+
+=== PDF PAGE 58 ===
+We can use the above lemma to prepare Gibbs states in a similar way to Lemma 44. In
+case we have access to
+√
+H, the advantage of this method is that the dependence on ∥H∥is
+reduced to
+p
+∥H∥.
+Improved HHL algorithm.
+Our techniques can also be applied to the Harrow-Hassidim-
+Lloyd (HHL) algorithm [HHL09] in order to gain improvements in a similar manner to Childs
+et al. [CKS17]. The problem the HHL algorithm solves is the following. Suppose we have a
+circuit U preparing a quantum state |b⟩(say, starting from |0⟩), and have d-sparse oracle access
+to a non-singular Hamiltonian H. The task is to prepare a quantum state, that ε-approximates
+H−1|b⟩/
+H−1|b⟩
+. For simplicity here we only count the number of uses of U and the number
+of queries to H. Childs et al. [CKS17] present two diﬀerent methods for achieving this, one
+based on Hamiltonian simulation, and another directly based on quantum walks. Under the
+conditions ∥H∥≤1 and
+H−1 ≤κ, the former makes O
+
+κ
+p
+log(κ/ε)
+
+uses of U and has
+query complexity O(dκ2 log2.5(κ/ε)). The latter makes O(κ log(dκ/ε)) uses of U and has query
+complexity O(dκ2 log2(dκ/ε)).
+Now we provide a sketch of how to solve the HHL problem with O(κ) uses of U and with
+query complexity O(dκ2 log2(κ/ε)) using our techniques. The improvement on both previously
+mentioned results is not very large, but our proof is signiﬁcantly shorter thanks to our general
+Theorem 40 and Corollary 42.
+To solve the HHL problem we need to implement the function H−1, i.e., apply the function
+f(x) = 1/x to H. Due to the constraints on H, the eigenvalues of H lie in the union of the
+intervals [−1, −1/κ] and [1/κ, 1]. We ﬁrst assume that the eigenvalues actually lie in [1/κ, 1].
+In this case we can easily implement the function 1/x by Theorem 40 using the Taylor series
+around 1:
+(1 + z)−1 =
+1
+1 + z =
+∞
+X
+k=0
+(−1)kzk.
+(24)
+As H−1 = (I + (H −I))−1, we are interested in the eigenvalues of H −I. The eigenvalues of
+H −I lie in the interval [−1+1/κ, 0], so we choose r := 1−1/κ and δ := 1/(2κ). By substituting
+z := −1 + 1/(2κ) in (24), we can see that B := 2κ satisﬁes the conditions of Theorem 40. Let
+ε′ ∈(0, 1/2), then Theorem 40 provides an O(dκ log(κ/ε′) log(1/ε′))-query implementation of
+an ε′-approximation of the operator H−1/(2κ), since ∥H∥≤1. We can proceed similarly when
+the eigenvalues of H −I lie in the interval [−1, −1/κ], and we can combine the two cases using
+Corollary 42.
+Setting ε′ := cε/κ for an appropriate constant c and using amplitude ampliﬁcation, we can
+prepare an ε-approximation of the state H−1|b⟩/
+H−1|b⟩
+ as required by HHL using O(κ) am-
+plitude ampliﬁcation steps. Therefore we use U at most O(κ) times and make O
+
+dκ2 log2(κ/ε)
+
+queries.
+C
+Generalized minimum-ﬁnding algorithm
+In this appendix we describe our generalized quantum minimum-ﬁnding algorithm, which we
+are going to apply to ﬁnding an approximation of the ground state energy of a Hamiltonian.
+This algorithm generalizes the results of D¨urr and Høyer [DH96] in a manner similar to the way
+amplitude ampliﬁcation [BHMT02] generalizes Grover search: we do not need to assume the
+ability to query individual elements of the search space, we just need to be able to generate a
+superposition over the search space. The algorithm also has the beneﬁt over binary search that
+it removes a logarithmic factor from the complexity.
+58
+
+
+=== PDF PAGE 59 ===
+The backbone of our analysis will be the meta-algorithm below from [DH96]. The meta-
+algorithm ﬁnds the minimal element in the range of the random variable X by sampling, where
+by “range” we mean the values which occur with non-zero probability. We assume X has ﬁnite
+range.
+Input A discrete random variable X with ﬁnite range.
+Output The minimal value xmin in the range of X.
+Init t ←0; s0 ←∞
+Repeat until st is minimal in the range of X
+1. t ←t + 1
+2. Sample a value st according to the conditional distribution Pr(X = st | X < st−1).
+Meta-Algorithm 2: Minimum-ﬁnding
+Note that the above algorithm will always ﬁnd the minimum, since the obtained samples
+are strictly decreasing.
+Lemma 47. Let X be a ﬁnite discrete random variable whose range of values is x1 < x2 <
+. . . < xN. Let S(X) = {s1, s2, . . . } denote the random set of values obtained via sampling during
+a run of Meta-Algorithm 2 with input random variable X. If k ∈[N], then
+Pr(xk ∈S(X)) = Pr(X = xk)
+Pr(X ≤xk).
+Proof. The intuition of the proof is to show that, whenever Pr(st−1 > xk) > 0, we have
+Pr(st = xk | t ∈[N] is the ﬁrst time such that st ≤xk) = Pr(X = xk)
+Pr(X ≤xk).
+(25)
+To formulate the statement more precisely13 we consider a ﬁxed value t ∈[N]. For notational
+convenience let x := xk, xN+1 := ∞, we prove (25) by:
+Pr(st = x | st ≤x ∧st−1 > x) =
+Pr(st = x)
+Pr(st ≤x ∧st−1 > x)
+=
+X
+xℓ>x
+Pr(st = x ∧st−1 = xℓ)
+Pr(st ≤x ∧st−1 > x)
+=
+X
+xℓ>x
+Pr(st = x ∧st−1 = xℓ)
+Pr(st ≤x ∧st−1 = xℓ)
+Pr(st ≤x ∧st−1 = xℓ)
+Pr(st ≤x ∧st−1 > x)
+=
+X
+xℓ>x
+Pr(st = x | st−1 = xℓ)Pr(st−1 = xℓ)
+Pr(st ≤x | st−1 = xℓ)Pr(st−1 = xℓ)
+Pr(st ≤x ∧st−1 = xℓ)
+Pr(st ≤x ∧st−1 > x)
+=
+X
+xℓ>x
+Pr(X = x)
+Pr(X ≤x)
+Pr(st−1 = xℓ)
+Pr(st−1 = xℓ)
+Pr(st ≤x ∧st−1 = xℓ)
+Pr(st ≤x ∧st−1 > x)
+= Pr(X = x)
+Pr(X ≤x)
+Pr(st−1 > x)
+Pr(st−1 > x).
+13Throughout this proof, whenever a fraction is 0/0, we simply interpret it as 0. Therefore we also interpret
+conditional probabilities, conditioned on events that happen with probability 0, as 0.
+59
+
+
+=== PDF PAGE 60 ===
+This is enough to conclude the proof, since there is always a smallest t ∈[N] such that st ≤x,
+as the algorithm always ﬁnds the minimum in at most N steps. So we can ﬁnish the proof by
+Pr(x ∈S(X)) =
+N
+X
+t=1
+Pr(st = x)
+=
+N
+X
+t=1
+Pr(st = x | st ≤x ∧st−1 > x)Pr(st ≤x ∧st−1 > x)
+= Pr(X = x)
+Pr(X ≤x)
+N
+X
+t=1
+Pr(st ≤x ∧st−1 > x)
+= Pr(X = x)
+Pr(X ≤x)Pr(∃t ∈[N]: st ≤x ∧st−1 > x)
+= Pr(X = x)
+Pr(X ≤x).
+Now we describe our generalized minimum-ﬁnding algorithm which is based on Meta-
+Algorithm 2.
+We take some unitary U, and replace X by the distribution obtained if we
+measured the second register of U|0⟩. We implement conditional sampling via amplitude ampli-
+ﬁcation and the use of the exponential search algorithm of Boyer et al. [BBHT98]. If a unitary
+prepares the state |0⟩|φ⟩+|1⟩|ψ⟩where ∥φ∥2 +∥ψ∥2 = 1, then this exponential search algorithm
+built on top of amplitude ampliﬁcation prepares the state |1⟩|ψ⟩probabilistically using an ex-
+pected number of O(1/∥ψ∥) applications of U and U−1 (we will skip the details here, which are
+straightforward modiﬁcations of [BBHT98]).
+Input A number M and a unitary U, acting on q qubits, such that U|0⟩= PN
+k=1 |ψk⟩|xk⟩, where
+xk is a binary string representing some number and |ψk⟩is an unnormalized quantum state
+on the ﬁrst register. Let x1 < x2 < . . . < xN and deﬁne X to be the random variable
+with Pr(X = xk) = ∥ψk∥2.
+Output Some |ψk⟩|xk⟩for a (hopefully) small k.
+Init t ←0; s0 ←∞
+While the total number of applications of U and U−1 does not exceed M:
+1. t ←t + 1
+2. Use the exponential search algorithm with amplitude ampliﬁcation on states such that
+xk < st−1 to obtain a sample |ψk⟩|xk⟩.
+3. st ←xk
+Algorithm 3: Generalized minimum-ﬁnding
+Lemma 48. There exists C ∈R+, such that if we run Algorithm 3 indeﬁnitely (setting M =
+∞), then for every U and xk the expected number of uses of U and U−1 before obtaining a
+sample x ≤xk is at most
+C
+√
+Pr(X≤xk).
+Proof. Let X<xℓdenote the random variable for which Pr(X<xℓ= x) = Pr(X = x | X < xℓ).
+60
+
+
+=== PDF PAGE 61 ===
+The expected number of uses of U±1 in Algorithm 3 before obtaining a value x ≤xk is
+E
+h
+#uses of U±1 for ﬁnding x≤xk
+i
+=
+N−1
+X
+i=0
+E
+h
+#uses of U±1 in the i-th round before x≤xk
+i
+=1+
+N−1
+X
+i=1
+N
+X
+ℓ=k+1
+Pr(si =xℓ)E
+h
+#uses of U±1 for sampling X<xℓ
+i
+=1+
+N
+X
+ℓ=k+1
+Pr(xℓ∈S(X)) E
+h
+#uses of U±1 for sampling X<xℓ
+i
+=1+
+N
+X
+ℓ=k+1
+Pr(X = xℓ)
+Pr(X ≤xℓ)O
+ 
+1
+p
+Pr(X < xℓ)
+!
+= O
+
+
+N
+X
+ℓ=k+1
+Pr(X = xℓ)
+Pr(X ≤xℓ)
+1
+p
+Pr(X < xℓ)
+
+
+= O
+ 
+1
+p
+Pr(X ≤xk)
+!
+,
+where the last equality follows from Equation (30) below. The constant C from the lemma
+is the constant hidden by the O. The remainder of this proof consists of proving (30) using
+elementary calculus. Let us introduce the notation p0 := Pr(X ≤xk) and for all j ∈[N −k] let
+pj := Pr(X = xk+j). Then the expression inside the O on the second-to-last line above becomes
+N
+X
+ℓ=k+1
+Pr(X = xℓ)
+Pr(X ≤xℓ)
+s
+1
+Pr(X < xℓ) =
+N−k
+X
+j=1
+pj
+Pj
+i=0 pi
+s
+1
+Pj−1
+i=0 pi
+.
+(26)
+The basic idea is that we treat the expression on the right-hand side of (26) as an integral
+approximation sum for the integral
+R 1
+p0 z−3/2dz, and show that it is actually always less than
+the value of this integral. We proceed by showing that subdivision always increases the sum.
+Let us ﬁx some ℓ∈[N −k] and deﬁne
+p′
+i =
+
+
+
+
+
+
+
+pi
+for i ∈{0, 1, . . . , ℓ−1}
+pi/2
+for i ∈{ℓ, ℓ+ 1}
+pi−1
+for i ∈{ℓ+ 2, . . . , N −k + 1}
+and observe that
+N−k+1
+X
+j=1
+p′
+j
+Pj
+i=0 p′
+i
+s
+1
+Pj−1
+i=0 p′
+i
+−
+N−k
+X
+j=1
+pj
+Pj
+i=0 pi
+s
+1
+Pj−1
+i=0 pi
+=
+p′
+ℓ
+Pℓ
+i=0 p′
+i
+s
+1
+Pℓ−1
+i=0 p′
+i
++
+p′
+ℓ+1
+Pℓ+1
+i=0 p′
+i
+s
+1
+Pℓ
+i=0 p′
+i
+−
+pℓ
+Pℓ
+i=0 pi
+s
+1
+Pℓ−1
+i=0 pi
+=
+pℓ/2
+pℓ/2 + Pℓ−1
+i=0 pi
+s
+1
+Pℓ−1
+i=0 pi
++
+pℓ/2
+pℓ+ Pℓ−1
+i=0 pi
+s
+1
+pℓ/2 + Pℓ−1
+i=0 pi
+−
+pℓ
+pℓ+ Pℓ−1
+i=0 pi
+s
+1
+Pℓ−1
+i=0 pi
+.
+(27)
+We show that (27) is ≥0 after simplifying the expression by substituting a := Pℓ−1
+i=0 pi and
+b := pℓ/2:
+b
+a + b
+r1
+a +
+b
+a + 2b
+s
+1
+a + b −
+2b
+a + 2b
+r1
+a =
+
+a + b −√a
+√
+a + b
+
+b
+(a + b)3/2(a + 2b)
+≥0.
+(28)
+61
+
+
+=== PDF PAGE 62 ===
+Let us ﬁx some parameter δ > 0. Recursively applying this halving procedure for diﬀerent
+indices, we can ﬁnd some J ∈N and ˜p ∈RJ+1
++
+such that PJ
+j=0 ˜pj = 1, ˜p0 = p0 and ˜pj ≤δ for
+all j ∈[J], moreover
+N−k
+X
+j=1
+pj
+Pj
+i=0 pi
+s
+1
+Pj−1
+i=0 pi
+≤
+J
+X
+j=1
+˜pj
+Pj
+i=0 ˜pi
+s
+1
+Pj−1
+i=0 ˜pi
+.
+Observe that for all j ∈[J]
+s
+1
+Pj−1
+i=0 ˜pi
+=
+s
+1
+Pj
+i=0 ˜pi
+v
+u
+u
+t
+Pj
+i=0 ˜pi
+Pj−1
+i=0 ˜pi
+=
+s
+1
+Pj
+i=0 ˜pi
+s
+1 +
+˜pj
+Pj−1
+i=0 ˜pi
+≤
+s
+1
+Pj
+i=0 ˜pi
+s
+1 + δ
+˜p0
+≤
+s
+1
+Pj
+i=0 ˜pi
+
+1 + δ
+p0
+
+.
+(29)
+Therefore
+N−k
+X
+j=1
+pj
+Pj
+i=0 pi
+s
+1
+Pj−1
+i=0 pi
+≤
+J
+X
+j=1
+˜pj
+Pj
+i=0 ˜pi
+s
+1
+Pj−1
+i=0 ˜pi
+(by (29)) ≤
+J
+X
+j=1
+˜pj
+Pj
+i=0 ˜pi
+s
+1
+Pj
+i=0 ˜pi
+
+1 + δ
+p0
+
+=
+
+1 + δ
+p0
+
+J
+X
+j=1
+˜pj
+Pj
+i=0 ˜pi
+3/2
+=
+
+1 + δ
+p0
+
+J
+X
+j=1
+Z Pj
+i=0 ˜pi
+Pj−1
+i=0 ˜pi
+1
+Pj
+i=0 ˜pi
+3/2 dz
+≤
+
+1 + δ
+p0
+
+J
+X
+j=1
+Z Pj
+i=0 ˜pi
+Pj−1
+i=0 ˜pi
+z−3
+2 dz
+=
+
+1 + δ
+p0
+ Z 1
+p0
+z−3
+2 dz
+=
+
+1 + δ
+p0
+h
+−2z−1
+2
+i1
+p0
+≤
+
+1 + δ
+p0
+ 
+2
+√p0
+!
+.
+Since this inequality holds for every δ > 0, we can conclude using (26) that
+N
+X
+ℓ=k+1
+Pr(X = xℓ)
+Pr(X ≤xℓ)
+s
+1
+Pr(X < xℓ) ≤
+2
+√p0
+=
+2
+p
+Pr(X ≤xk).
+(30)
+It is not too hard to work out the constant by following the proof of [BBHT98] providing
+something like C ≈25. The following theorem works with any C satisfying Lemma 48.
+Theorem 49 (Generalized Minimum-Finding). If we run Algorithm 3 with input satisfying
+M ≥4C/
+p
+Pr(X ≤x) for C as in Lemma 48 and a unitary U that acts on q qubits, then at
+termination we obtain an xi from the range of X that satisﬁes xi ≤x with probability at least
+3
+4. Moreover the success probability can be boosted to at least 1 −δ with O(log(1/δ)) repetitions.
+This uses at most M applications of U and U−1 and O(qM) other gates.
+62
+
+
+=== PDF PAGE 63 ===
+Proof. Let xk be the largest value in the range of X such that xk ≤x. Then Lemma 48 says
+that the expected number of applications of U and U−1 before ﬁnding a value xi ≤xk is at
+most C/
+p
+Pr(X ≤xk) = C/
+p
+Pr(X ≤x), therefore by the Markov inequality we know that the
+probability that we need to use U and U−1 at least 4C/
+p
+Pr(X ≤x) times is at most 1/4. The
+boosting of the success probability can be done using standard techniques, e.g., by repeating
+the whole procedure O(log(1/δ)) times and taking the minimum of the outputs.
+The number of applications of U and U−1 follows directly form the algorithms description.
+Then, for the number of other gates, each amplitude ampliﬁcation step needs to implement
+a binary comparison and a reﬂection through the |0⟩state, both of which can be constructed
+using O(q) elementary gates, giving a total of O(qM) gates.
+Note that this result is a generalization of D¨urr and Høyer [DH96]: if we can create a
+uniform superposition over N values x1 < x2 < . . . < xN, then Pr(X ≤x1) = 1/N and
+therefore Theorem 49 guarantees that we can ﬁnd the minimum with high probability with
+O(
+√
+N) steps.
+Now we describe an application of this generalized search algorithm that we need in the
+paper.
+This ﬁnal lemma in this appendix describes how to estimate the smallest eigenvalue of a
+Hamiltonian. A similar result was shown by Poulin and Wocjan [PW09a], but we improve on
+the analysis to ﬁt our framework better. We assume sparse oracle access to the Hamiltonian H
+as described in Section 2, and will count queries to these oracles. We use some of the techniques
+introduced in Appendix B.
+Lemma 50. If H = Pn
+j=1 Ej|φj⟩⟨φj|, with eigenvalues E1 ≤E2 ≤. . . ≤En, is such that
+∥H∥≤K, ε ≤K/2, and H is given in d-sparse oracle form, then we can obtain an estimate E
+such that |E1 −E| ≤ε, with probability at least 2/3, using
+O
+ 
+Kd√n
+ε
+log2
+Kn
+ε
+!
+queries and O
+ 
+Kd√n
+ε
+log
+9
+2
+Kn
+ε
+!
+gates.
+Proof. The general idea is as follows: we prepare a maximally entangled state on two registers,
+and apply phase estimation [NC00, Section 5.2][CEMM98] to the ﬁrst register with respect to
+the unitary eπiH/K. We then use Theorem 49 to ﬁnd the minimal phase. In order to guarantee
+correctness we need to account for all the approximation errors coming from approximate imple-
+mentations. This causes some technical diﬃculty, since the approximation errors can introduce
+phase estimates that are much less than the true minimum. We need to make sure that the
+minimum-ﬁnding algorithm ﬁnds these faulty estimates only with a tiny probability.
+We ﬁrst initialize two log(n)-qubit registers in a maximally entangled state
+1
+√n
+Pn−1
+j=0 |j⟩|j⟩.
+This can be done for example using log(n) Hadamard and CNOT gates, when n is a power of
+two. Due to the invariance of maximally entangled states under transformations of the form
+W ⊗W ∗for unitary W, we have that
+1
+√n
+n−1
+X
+j=0
+|j⟩|j⟩=
+1
+√n
+n
+X
+j=1
+|φj⟩|φ∗
+j⟩.
+Let T := 2⌈log( K
+ε )+2⌉and ﬁrst assume that we have access to a perfect unitary V which
+implements V = PT−1
+t=0 |t⟩⟨t| ⊗eπtiH/K. Let ej := EjT/2K. If we apply phase estimation to the
+quantum state |φj⟩using V , then we get some superposition of phase estimates |e⟩in the ﬁrst
+register. This superposition has the property, that a measurement in the computational basis
+reveals an e such that |e −ej| ≤3 with high probability, so that the estimate E := e2K/T
+63
+
+
+=== PDF PAGE 64 ===
+would satisfy |E −Ej| = |e −ej|2K/T ≤3ε/4 < ε. If we repeat phase estimation O(log(n))
+times (on the same state |φj⟩), and take the median of the estimates (in superposition), then we
+obtain a more concentrated superposition of estimates e such that a measurement would reveal
+an |e −ej| ≤3 with probability at least 1 −b/n, for some b = Θ(1).
+Since in our maximally entangled state |φj⟩is entangled with |φ∗
+j⟩on the second register,
+applying phase estimation to the ﬁrst register in superposition does not cause interference. Let
+us denote by U the unitary corresponding to the above preparation-estimation-boost procedure.
+Deﬁne Π to be the projector which projects to the subspace of estimation values |e⟩such that
+there is a j ∈[n] with |e −ej| ≤ε. By the non-interference argument we can see that, after
+applying U, the probability that we get an estimation e such that |e−ej| > 3 is at most b/n for
+all j ∈[n], moreover ∥(I −Π)U|0⟩∥2 ≤b/n. Also let Π1 denote the projector which projects to
+phase estimates that yield e such that |e−e1| ≤3. It is easy to see that ∥Π1U|0⟩∥2 ≥1/n−b/n2.
+Now let us replace V by ˜V implemented via Lemma 36, such that ∥V −˜V ∥≤c′/(n log(n))
+for some c′ = Θ(1). Let ˜U denote the circuit that we obtain from U by replacing V with ˜V .
+Since in the repeated phase-estimation procedure we use V in total O(log(n)) times, by using
+the triangle inequality we see that ∥U −˜U∥≤c/(2n), where c = Θ(1). We use the well-known
+fact that if two unitaries are δ-close in operator norm, and they are applied to the same quantum
+state, then the measurement statistics of the resulting states are 2δ-close. Therefore we can
+upper bound the diﬀerence in probability of getting outcome (I −Π):
+∥(I −Π) ˜U|0⟩∥2 −∥(I −Π)U|0⟩∥2 ≤2∥U|0⟩−˜U|0⟩∥≤c/n,
+hence ∥(I −Π) ˜U|0⟩∥2 ≤(b+c)/n, and we can prove similarly that ∥Π1 ˜U|0⟩∥2 ≥1/n−(b+c)/n.
+Now let |ψ⟩:= (I −Π) ˜U|0⟩/∥(I −Π) ˜U|0⟩∥be the state that we would get after post-
+selecting on the (I −Π)-outcome of the projective measurement Π.
+For small enough b, c
+we have that ∥|ψ⟩−˜U|0⟩∥= O(
+p
+(b + c)/n) by the triangle inequality. Thus there exists an
+idealized unitary U′ such that |ψ⟩= U′|0⟩, and ∥˜U −U′∥= O(
+p
+(b + c)/n).
+Observe that
+∥Π1U′|0⟩∥2 = ∥|ψ⟩∥2 ≥∥Π1 ˜U|0⟩∥2 ≥1/n −(b + c)/n.
+Now suppose (b + c) ≤1/2 and we run the generalized minimum-ﬁnding algorithm of
+Theorem 49 using U′ with M = 6C√n. Since
+Pr(e ≤e1 + 3) ≥
+Π1U′|0⟩
+2 ≥(1 −b −c)/n ≥1/(2n) > 4/(9n)
+we will obtain an estimate e such that e ≤e1 + 3, with probability at least 3/4. But since
+Π|ψ⟩= |ψ⟩, we ﬁnd that any estimate that we might obtain satisﬁes e ≥e1 −3. So an estimate
+e ≤e1 + 3 always satisﬁes |e −e1| ≤3.
+The problem is that we only have access to ˜U as a quantum circuit. Let CMF ( ˜U) denote
+the circuit that we get from Theorem 49 when using it with ˜U and deﬁne similarly CMF (U′)
+for U′. Since we use ˜U a total of O(√n) times in CMF ( ˜U) and
+ ˜U −U′ = O(
+q
+(b + c)/n), we get that
+CMF ( ˜U) −CMF (U′)
+ = O(
+√
+b + c).
+Therefore the measurement statistics of the two circuits diﬀer by at most O(
+√
+b + c). Choosing
+b, c small enough constants ensures that CMF ( ˜U) outputs a proper estimate e such that |e−e1| ≤
+3 with probability at least 2/3. As we have shown at the beginning of the proof, such an e
+yields an ε-approximation of E1 via E := e2K/T.
+The query complexity has an O(Td log(Tn)) = O(Kd/ε log(Kn/ε)) factor coming from the
+implementation of ˜V by Lemma 36. This gets multiplied with O(log(n)) by the boosting of
+phase estimation, and by O(√n) due to the minimum-ﬁnding algorithm. The gate complex-
+ity is dominated by the cost O(Kd/ε log7/2(Kn/ε)) of implementing ˜V , multiplied with the
+O(√n log(n)) factor as for the query complexity.
+64
+
+
+=== PDF PAGE 65 ===
+Note that the minimum-ﬁnding algorithm of Theorem 49 can also be used for state prepa-
+ration. If we choose 2ε less than the energy-gap of the Hamiltonian, then upon ﬁnding the
+approximation of the ground state energy we also prepare an approximate ground state. The
+precision of this state preparation can be improved with logarithmic cost, as can be seen from
+the proof of Lemma 50.
+D
+Sparse matrix summation
+As seen in Section 2, the Arora-Kale algorithm requires an approximation of exp(−ηH(t)) where
+H(t) is a sum of matrices. To keep this section general we simplify the notation. Let H be the
+sum of k diﬀerent d-sparse matrices M:
+H =
+k
+X
+i=1
+Mi
+In this section we study the complexity of one oracle call to H, given access to respective oracles
+for the matrices M1, . . . , Mk. Here we assume that the oracles for the Mi are given in sparse
+matrix form, as deﬁned in Section 2. In particular, the goal is to construct a procedure that
+acts as a similar sparse matrix oracle for H. We will only focus on the oracle that computes the
+non-zero indices of H, since the oracle that gives element access is easy to compute by summing
+the separate oracles.
+In the remainder of this section we only consider one row of H. We denote this row by RH
+and the corresponding rows of the matrices Mi by Ri. Notice that such a row is given as an
+ordered list of integers, where the integers are the non-zero indices in Ri. Then RH will again be
+an ordered list of integers, containing all integers in the Ri lists once (i.e., RH does not contain
+duplicates).
+D.1
+A lower bound
+We show a lower bound on the query complexity of the oracle OI
+H described above by observing
+that determining the number of elements in a row of H solves the majority function. Notice
+that, given access to OI
+H, we can decide whether there are at least a certain number of non-zero
+elements in a row of H.
+Lemma 51. Given k + 1 ordered lists of integers R0, . . . , Rk, each of length at most d. Let RH
+be the merged list that is ordered and contains every element in the lists Ri only once (i.e., we
+remove duplicates). Deciding whether |RH| ≤d + dk
+2 or |RH| ≥d + dk
+2 + 1 takes Ω(dk) quantum
+queries to the input lists in general.
+Proof. We prove this by a reduction from MAJ on dk elements. Let Z ∈{0, 1}d×k be a Boolean
+string. It is known that it takes at least Ω(dk) quantum queries to Z to decide whether |Z| ≤dk
+2
+or |Z| ≥dk
+2 + 1. Now let R0, R1, . . . , Rk be lists of length d deﬁned as follows:
+• R0[j] = j(k + 1) for j = 1, . . . , d.
+• Ri[j] = j(k + 1) + jZij for j = 1, . . . , r and i = 1, . . . , k.
+By construction, if Zij = 1, then the value of the entry Ri[j] is unique in the lists R0, . . . , Rk,
+and if Zij = 0 then Ri[j] = R0[j]. So in RH there will be one element for each element in R0
+and one element for each bit in Zij that is one. The length of RH is therefore d + |Z|. Hence,
+distinguishing between |RH| ≤d + dk
+2 and |RH| ≥d + dk
+2 + 1 would solve the MAJ problem and
+therefore requires at least Ω(dk) queries to the lists in general.
+65
+
+
+=== PDF PAGE 66 ===
+Corollary 52. Implementing a query to a sparse matrix oracle OI
+H for
+H =
+k
+X
+j=i
+Mj
+where each Mj is d-sparse, requires Ω(dk) queries to the OI
+Mj in general.
+D.2
+An upper bound
+We ﬁrst show that an oracle for the non-zero indices of H can be constructed eﬃciently clas-
+sically. The important observation is that in the classical case we can write down the oracle
+once and store it in memory. Hence, we can create an oracle for H as follows. We start from
+the oracle of M1 and then we “add” the oracle of M2, then that of M2, etc. By “adding” the
+oracle Mi to H = Pi−1
+j=1 Mj, we mean that, per row, we insert the non-zero indices in the list of
+Mi into that of H (if it is not already there). When an eﬃcient data structure (for example a
+binary heap) is used, then such insertions can be done in polylog time. This shows that in the
+classical case such an oracle can be made in time eO(ndk). Note that in the application we are
+interested in, Meta-algorithm 1, in each iteration t only one new matrix M(t) ‘arrives’, hence
+from the oracle for H(t−1) an oracle for H(t) can be constructed in time eO(nd).
+The quantum case is similar, but we need to add all the matrices together each time a query
+to OI
+H is made, since writing down each row of H in every iteration would take Ω(n) operations.
+To implement one such query to OI
+H, in particular to the tth entry of RH, start with an
+empty heap and add all elements of R1 to it. Continue with the elements of R2, but this time,
+for each element ﬁrst check if it is already present, if not, add it, if it is, just continue. Overall
+this will take O(dk) insertions and searches in the data structure and hence eO(dk) operations.
+We end up with a full description of RH. We can then ﬁnd the index of the tth non-zero element
+from this and uncompute the whole description. Similarly, we need to be able to compute the
+inverse function since we need an in-place calculation. Given an index i of a non-zero element
+in RH, we can compute all the indices for RH as above, and ﬁnd where i is in the heap to ﬁnd
+the corresponding value of t.
+E
+Equivalence of R, r, and ε−1
+In this section we will prove the equivalence of the three parameters R, r and ε−1 in the Arora-
+Kale meta-algorithm.
+That is, we will show any two of the three parameters can be made
+constant by increasing the third. Therefore, Rr
+ε as a whole is the interesting parameter. This
+appendix is structured as a set of reductions, in each case we will denote the parameters of the
+new SDP with a tilde.
+Lemma 53. Let 0 < ε ≤1. For every SDP with R, r ≥1, there is an SDP with parameters
+˜R = 1 and ˜r = r such that a solution to that SDP with precision ˜ε = ε
+R provides a solution with
+precision ε to the original SDP.
+Proof. Let ˜Aj = Aj, ˜C = C and ˜b =
+b
+R. Now clearly ˜R = 1, but ]
+OPT = OPT/R. Hence
+determining ]
+OPT up to additive error ˜ε = ε
+R will determine OPT up to additive error ε. Notice
+that the feasible region of the dual did not change, so ˜r = r.
+Lemma 54. Let 0 < ε ≤1. For every SDP with R, r ≥1, there is an SDP with parameters
+˜R = R
+ε and ˜r = r such that a solution to that SDP with precision ˜ε = 1 provides a solution with
+precision ε to the original SDP.
+66
+
+
+=== PDF PAGE 67 ===
+Proof. Let ˜Aj = Aj, ˜C = C and ˜b = b
+ε. Now ˜R = R
+ε and ]
+OPT = OPT/ε. Hence determining
+]
+OPT up to additive error ˜ε = 1 will determine OPT up to additive error ε. Notice that again
+the feasible region of the dual did not change, so ˜r = r.
+Lemma 55. Let 0 < ε ≤1. For every SDP with R, r ≥1, there is an SDP with parameters
+˜R = R and ˜r = 1 such that a solution to that SDP with precision ˜ε = ε
+r provides a solution with
+precision ε to the original SDP.
+Proof. Let ˜Aj = Aj, ˜b = b and ˜C = 1
+rC. Now ˜r = 1 and ]
+OPT = OPT/r. Hence determining
+]
+OPT up to additive error ˜ε = ε
+r will determine OPT up to additive error ε. Since r ≥1 and
+∥C∥≤1, we ﬁnd ∥˜C∥≤1 as required. Notice that the feasible region of the primal did not
+change, so ˜R = R.
+At this point we would like to state the last reduction by setting ˜C = 1
+εC, but this would
+not guarantee that ∥˜C∥≤1. Instead we give an algorithm that performs multiple calls to an
+SDP-solver, each of which has constant ε but higher r.
+Lemma 56. Assume an SDP-solver that costs
+C(n, m, s, R, ε, r)
+to solve one SDP with precision ε, and assume that C is non-decreasing in r. Every SDP with
+parameters R, r ≥1 can be solved up to precision 0 < ε ≤1 with cost
+log( 1
+ε)
+X
+k=1
+C
+
+n + 1, m + 1, s, R + 4 log
+1
+ε
+
+, 1, 2k(r + 1)
+
+,
+by solving log
+
+1
+ε
+
+SDPs, where the k-th SDP is solved up to precision ˜ε = 1 and has parameters
+˜n = n + 1, ˜m = m + 1, ˜R = O
+
+R + 4 log
+1
+ε
+
+, ˜r ≤2k(r + 1),
+and input matrices with elements described by bitstrings of length poly(log n, log m, log
+
+1
+ε
+
+). Fur-
+thermore, if C(n, m, s, R, 1, r) = poly(n, m, s, R, r), then the above cost is poly(n, m, s, R, r/eps).
+Proof. The high-level idea is that we want to learn a small interval in which the optimum lies,
+whilst using a “big” precision of 1. We do so as follows: given an interval [L, U] with the promise
+that OPT ∈[L, U], we formulate another SDP for which a 1-approximation of the optimum
+learns us a new, smaller, interval [L′, U′] such that OPT ∈[L′, U′]. We will moreover have
+U′ −L′ ≤1
+2(U −L). In the remainder of the proof we ﬁrst show how to do this reformulation,
+we then use this technique to prove the lemma.
+Given an SDP p, given in the form of Equation (1), of which we know an interval [L, U] such
+that OPT ∈[L, U] (with 0 < U −L ≤1), we can write down an equivalent SDP p′ such that
+an optimal solution of p corresponds one-to-one to an optimal solution of p′, and the optimum
+67
+
+
+=== PDF PAGE 68 ===
+of p′ lies in [0, 4]:
+(p′)
+max
+Tr
+  
+0
+0
+0
+1
+!
+˜X
+!
+s.t.
+Tr
+  
+−C
+0
+0
+U−L
+4
+!
+˜X
+!
+≤−L,
+Tr
+  
+Aj
+0
+0
+0
+!
+˜X
+!
+≤bj
+for all j ∈[m],
+˜X ⪰0,
+here the variable ˜X is of size (n+1)×(n+1), and should be thought of as ˜X =
+ 
+X
+·
+·
+z
+!
+, where
+X is the variable of the original SDP: an n × n positive semideﬁnite matrix. Observe that by
+assumption, for every feasible X of the original SDP, L ≤Tr(CX) ≤U. Therefore, the ﬁrst
+constraint implies 0 ≤z ≤4 and hence the new optimum lies between 0 and 4, and the new
+trace bound is ˜R = R + 4. We now determine ˜r. The dual of the above program is given by:
+(d′)
+min
+−Ly0 +
+m
+X
+j=1
+bjyj
+s.t.
+ 
+−C
+0
+0
+U−L
+4
+!
+y0 +
+m
+X
+j=1
+ 
+Aj
+0
+0
+0
+!
+yj ⪰
+ 
+0
+0
+0
+1
+!
+y ≥0.
+Claim 57. An optimal solution ˜y to d′ is of the form ˜y =
+4
+U−L(1, y) where y is an optimal
+solution to d, the dual of p.
+The proof of the claim is deferred to the end of this section. The claim implies that ˜r =
+4
+U−L(1 + r). We also have
+OPT = L + OPT′ U −L
+4
+,
+and hence, a 1-approximation to OPT′ gives a U−L
+4 -approximation to OPT.
+We now use the above technique to prove the lemma. Assume an SDP of the form (1) is
+given. By assumption, ∥C∥≤1 and therefore OPT ∈[−R, R]. Calling the SDP-solver on
+this problem with ε = 1 will give us an estimate of OPT up to additive error 1. Call this
+estimate OPT0, then OPT ∈[OPT0 −1, OPT0 + 1] =: [L0, U0]. We now deﬁne a new SDP
+p′ as above, with U = U0, L = L0 (notice U0 −L0 ≤2). By the above, solving p′ with ˜ε = 1
+determines a new interval [L1, U1] of length at most 2U0−L0
+4
+such that OPT ∈[L1, U1]. We use
+the interval [L1, U1] to build a new SDP p′ and solve that with ˜ε = 1 to get an interval [L2, U2].
+Repeating this procedure k = log
+
+1
+ε
+
++1 times determines an interval [Lk, Uk] of length at most
+1
+2k (U0 −L0) ≤ε. Hence, we have determined the optimum of p up to an additive error of ε.
+The total time needed for this procedure is at most
+log( 1
+ε)
+X
+k=1
+C
+
+n + 1, m + 1, s, R + 4 log
+1
+ε
+
+, 1, 2k(r + 1)
+
+.
+68
+
+
+=== PDF PAGE 69 ===
+Proof of Claim 57. First observe that the linear matrix inequality in d′ implies the inequality
+y0 U−L
+4
+≥1 and hence y0 ≥
+4
+U−L. Suppose we ﬁx a value y0 (with y0 ≥
+4
+U−L) in d′, then the
+resulting SDP is of the form
+(d′′)
+−Ly0 + min
+X
+j
+bjyj
+s.t.
+m
+X
+j=1
+yjAj ⪰y0C,
+y ≥0.
+and hence, an optimal solution ˜y to d′′ is of the form ˜y = y0y where y is an optimal solution to d.
+It follows that an optimal solution to d′ is of the form (y0, y0y) where y is an optimal solution
+to d. Observe that the optimal value of d′ as a function of y0 is of the form y0·(−L+OPT). Since
+by assumption OPT ≥L, the objective is increasing (linearly) with y0 and hence y0 =
+4
+U−L is
+optimal.
+69

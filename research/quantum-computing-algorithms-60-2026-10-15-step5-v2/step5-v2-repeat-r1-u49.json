@@ -1,0 +1,93 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "49",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "d27b108570586b04e343935654af7d75e67cbb08245b9474332bdddb89695306",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Proof 1.1 asserts the column state without following the actual supplier circuit. From |0,j>, the defined O_c(D tensor I) receives |k,j>, whereas its promised action is on |j,k>. This is a genuine failure, not merely an unsupported description: take H=I_2, d_H=h=1, valid labels 1,2 in equal four-label registers, D swapping labels 0 and 1, and both supplied location permutations swapping (2,1) with (2,2) and fixing every other pair. These satisfy all promised valid-slot actions. V_L prepares |1,1> and |2,2>, but V_R prepares |1,1> and |1,2>. The exact value rotation therefore gives clean block diag(1,0), instead of H=I_2. The fatal defect is the incorrect circuit-to-state inference and false resulting block identity. Repair requires a Definition change in the unassigned algorithm supplier; that repair remains open and this decision does not assert closure.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+      "disposition": "unaffected",
+      "post_sha256": "9b39d44052f8309a2174268b3a1b89c1ed131bc08dcf6229bd6d966a9813d588",
+      "review_context_sha256": "2d1ea48a96d91d79234f3fa0d26685e62862186c0d6d79561a709186740101fd",
+      "reason": "The carrier is unchanged, not mathematically accepted: its supplied-permutation claim is false for the explicit I_2 witness in the decision. A proof-only change cannot establish that unchanged claim about the current algorithm. The h=0 branch is sound; for h>0 the row/column Cauchy-Schwarz bound gives norm at most d_H h, the flag columns are orthonormal, and the root overlap with the right amplitude first gives H_ij/(d_H h) when the intended column state is actually prepared. The sorted-XOR supplier constructs that state directly with clean work and the declared logarithmic query counts, so the optional branch is sound. Current F5 already reads <u,e_i>_root <e_j,v>_root, matching the coordinate supplier; the historical digest's conjugation defect is absent. Read the owning contract's citations, derivations and boundary evidence and the home-page interface. The necessary supplier Definition correction is outside the dispatch's assigned-file scope and remains an owner obligation. No theorem weakening or misleading local proof repair was made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+      "supplier": "alg-qa-25-sparse-hamiltonian-block-encoding",
+      "locus": "Proof 1.1 and supplier Definition, displayed V_R circuit",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "open",
+      "reason": "The declared column permutation receives reversed input registers, and the I_2 witness yields diag(1,0). Route the supplier Definition repair to its frontier owner, then return the assigned theorem for review against that corrected interface. This unit has not repaired or closed the defect.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "blocked_by_assigned_file_scope",
+    "repair_complete": false,
+    "owner_route": "Frontier owner of alg-qa-25-sparse-hamiltonian-block-encoding; this is a draft supplier, not published-consumer maintenance.",
+    "minimal_supplier_repair": {
+      "path": "items/alg-qa-25-sparse-hamiltonian-block-encoding.md",
+      "section": "Definition",
+      "source_excerpt": "V_R=O_c(D_{d_H}\\otimes I)",
+      "proposed_replacement": "V_R=O_c\\,\\mathrm{SWAP}(D_{d_H}\\otimes I)",
+      "justification": "The inserted SWAP sends each prepared |k,j> to |j,k>, so the supplied O_c produces |kappa(j,k),j>. It adds a separately costed known register permutation and changes no oracle-call counts or hypotheses. Updating the theorem's step 1.1 to display this intermediate state would make the repaired supplier use explicit; update the owning contract's exact Definition quote and derivation mirrors under the shared-write lock. This is a proposal, not an applied repair."
+    },
+    "remaining_obligations": [
+      "Obtain owner routing or explicit scope extension before editing the supplier algorithm; the dispatch currently authorizes only the assigned theorem and its necessary owning metadata.",
+      "After the supplier Definition repair, examine every direct dependency/reference consumer and actual page use, including the assigned theorem and alg-qa-27-cks-variable-time-linear-solver; these are discovery candidates, not asserted defects. Populate the downstream examination inventory for the actual interface-change event.",
+      "Review the assigned theorem against the repaired supplier, run its focused checks and final proof-layout after any item edits, and immediately capture fresh review-context hashes. The present hashes bind the defective unchanged supplier state.",
+      "Keep this confirmed fatal finding open until the supplier repair and necessary consumer examination are complete; no independent review of a repair has occurred."
+    ],
+    "checks": [
+      {
+        "command": "inline python3 exact finite-permutation witness, no files written",
+        "exit_code": 0,
+        "result": "For H=I_2, d_H=h=1, D=(0 1), and O_r=O_c=((2,1) (2,2)), current clean block is [[1,0],[0,0]]; proposed SWAP-corrected block is [[1,0],[0,1]]. Both exact assertions passed. This verifies only this witness, not the general repaired construction."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-25-sparse-hamiltonian-block-encoding-correctness.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; direct strategy passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qa-25-sparse-hamiltonian-block-encoding-correctness.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qa-25-sparse-hamiltonian-block-encoding-correctness.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects. No item edits were made."
+      }
+    ],
+    "propagation": "No Statement or Definition was edited, so downstream is empty. The supplier correction and its future consumer inventory are explicitly pending owner work.",
+    "published_consumer_findings": "None established in this unit; no published-ledger update is proposed."
+  }
+}

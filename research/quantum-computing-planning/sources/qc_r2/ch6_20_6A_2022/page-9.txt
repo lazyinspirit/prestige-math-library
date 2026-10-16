@@ -1,0 +1,173 @@
+6.1 Some Quantum Algorithms
+3
+
+In the Deutsch–Jozsa problem, we are presented with a quantum black box that com-
+putes a function taking n bits to 1,
+
+f : {0, 1}n →{0, 1},
+(6.6)
+
+and we have it on good authority that f is either constant (f(x) = c for all x) or
+balanced (f(x) = 0 for exactly 1
+
+2 of the possible input values). We are to solve the
+decision problem: Is f constant or balanced?
+In fact, we can solve this problem, too, accessing the box only once, using the same
+circuit as for Deutsch’s problem (but with x expanded from one bit to n bits). We note
+that if we apply n Hadamard gates in parallel to n-qubits.
+
+H(n) = H ⊗H ⊗. . . ⊗H,
+(6.7)
+
+then the n-qubit state transforms as
+
+H(n) : |x⟩→
+
+n
+�
+
+i=1
+
+
+
+1
+√
+
+2
+
+�
+
+yi={0,1}
+(−1)xiyi|yi⟩
+
+
+
+≡
+1
+2n/2
+
+2n−1
+�
+
+y=0
+(−1)x·y|y⟩,
+(6.8)
+
+where x, y represent n-bit strings, and x · y denotes the bitwise AND (or mod 2 scalar
+product)
+
+x · y = (x1 ∧y1) ⊕(x2 ∧y2) ⊕. . . ⊕(xn ∧yn).
+(6.9)
+
+Acting on the input (|0⟩)n|1⟩, the action of the circuit is
+
+(|0⟩)n|1⟩→
+
+�
+1
+2n/2
+
+2n−1
+�
+
+x=0
+|x⟩
+
+�
+1
+√
+
+2(|0⟩−|1⟩)
+
+→
+
+�
+1
+2n/2
+
+2n−1
+�
+
+x=0
+(−1)f(x)|x⟩
+
+�
+1
+√
+
+2(|0⟩−|1⟩)
+
+→
+
+
+
+1
+
+2n
+
+2n−1
+�
+
+x=0
+
+2n−1
+�
+
+y=0
+(−1)f(x)(−1)x·y|y⟩
+
+
+
+1
+√
+
+2(|0⟩−|1⟩)
+(6.10)
+
+Now let us evaluate the sum
+
+1
+2n
+
+2n−1
+�
+
+x=0
+(−1)f(x)(−1)x·y.
+(6.11)
+
+If f is a constant function, the sum is
+
+(−1)f(x)
+�
+1
+2n
+
+2n−1
+�
+
+x=0
+(−1)x·y
+�
+
+= (−1)f(x)δy,0;
+(6.12)
+
+it vanishes unless y = 0. Hence, when we measure the n-bit register, we obtain the result
+|y = 0⟩≡(|0⟩)n with probability one. But if the function is balanced, then for y = 0,
+the sum becomes
+
+1
+2n
+
+2n−1
+�
+
+x=0
+(−1)f(x) = 0,
+(6.13)
+
+(because half of the terms are (+1) and half are (−1)). Therefore, the probability of
+obtaining the measurement outcome |y = 0⟩is zero.
+
+

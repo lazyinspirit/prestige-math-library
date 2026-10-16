@@ -1,0 +1,71 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "focused-current-source-owner-review",
+  "coverage": "Only listed current sources and the explicitly described dependency interfaces. No source edit, native coverage or new judgment. Admission waits for genuine frozen initial evidence and current keep verdicts.",
+  "entries": [
+    {
+      "batch": "14",
+      "concern_index": 0,
+      "id": "thm-qc-bounded-error-amplification-correct",
+      "concern": {
+        "id": "thm-qc-bounded-error-amplification-correct",
+        "concern": "The Statement says, 'Whenever the base interface declares clean or dirty ancillary registers satisfying the corresponding exact contract, each such register's count is multiplied by r(n).' Proof 4.1 asserts preservation without requiring these registers to avoid the first n input wires. The cited cost definition permits an arbitrary declared data/ancilla partition. At n=1 take the gate-free identity circuit on one input wire, declare D empty and that wire A, with target I_C. Its exact dirty contract holds. Choose output wire 0, YES={1}, NO={0}, α=2/3, β=1/3, s=3, δ=1/4, giving r=72. The repeated circuit is the input-copy CNOT fanout. On the purported repeated dirty register it maps |1,0,...,0> to |1,1,...,1>, so it is not I and does not satisfy the asserted repeated dirty contract. The probability amplification remains valid; the ancillary-contract conclusion needs an explicit restriction or a separate treatment of partitions intersecting input wires.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:55:44.760634+00:00",
+      "reason": "Read full amplification algorithm, theorem and current cost Definition. The arbitrary cost-instance data/ancilla partition is not required to avoid the first n input wires. For n=1, identity on one wire has the exact dirty contract with D empty and A that wire, target scalar identity. The valid identity YES={1},NO={0},alpha=2/3,beta=1/3,s=3,delta=1/4 instance has r=72 and amplification unitary equal to CNOT fanout. On the repeated declared all-ancilla register its value on |1,0,...,0> is |1,1,...,1>, so it is not the identity demanded by the repeated dirty contract. Probability amplification and resource equalities survive, but the unrestricted ancilla-interface assertion is false. Native same-owner supplier repair must preserve the richest sound counts and distinguish registers touched by copying, tracing all actual consumers if the Statement changes. Do not alter the general cost Definition just to exclude this legitimate cost instance.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "Whenever the base interface declares clean or dirty ancillary registers satisfying the corresponding exact contract, each such register's count is multiplied by $r(n)$;",
+          "proposed_replacement": "For a base clean or dirty interface whose declared ancillary register is disjoint from the first $n$ input wires, the input-copy stage acts only on data, and the corresponding exact contract is preserved with its declared register count multiplied by $r(n)$;"
+        },
+        {
+          "source_excerpt": "Base clean/dirty auxiliary contracts, when present, are preserved on each disjoint block and hence their declared counts are multiplied by $r$;",
+          "proposed_replacement": "For the declared interfaces covered by the Statement, the input-copy CNOTs act only on the repeated data registers. On the declared ancillary registers the copy unitary is the identity; composing it with the $r$ blockwise exact contracts therefore preserves the clean or dirty return condition, with data target equal to the product of the base targets composed after that copy unitary. Their declared counts are multiplied by $r$;"
+        }
+      ]
+    },
+    {
+      "batch": "17",
+      "concern_index": 0,
+      "id": "alg-qc-dense-coding",
+      "concern": {
+        "id": "alg-qc-dense-coding",
+        "concern": "The Definition says, “The four decoded output weights in the correctness theorem are positive/deterministic as computed there.” For each fixed input, the correctness proof computes one weight equal to one and three equal to zero. The wording should distinguish the four possible input cases from the four outcome weights for one input.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:55:44.760724+00:00",
+      "reason": "Read the full four-step dense-coding procedure. For each fixed input bit pair its decoding is deterministic: the matching outcome has weight1 and the three others0. The Definition contradicts its own zero-outcome convention by calling the four weights positive. Clarify that each of the four possible input cases has one matching weight1 and three0; preserve all operation instructions and bit conventions. Native same-owner repair checks actual correctness consumers because this is Definition text.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "The four decoded output\nweights in the correctness theorem are positive/deterministic as computed\nthere.",
+          "proposed_replacement": "For each of the four possible input pairs, the decoded output equals that pair with weight one and the other three outcomes have weight zero, as computed in the correctness theorem."
+        }
+      ]
+    },
+    {
+      "batch": "17",
+      "concern_index": 1,
+      "id": "thm-qc-teleportation-reference-stability",
+      "concern": {
+        "id": "thm-qc-teleportation-reference-stability",
+        "concern": "F11 invokes “take a finite basis and apply Gram--Schmidt,” and Proof 1.1 uses the resulting orthonormal basis of arbitrary R. This prerequisite has no cited supplier or declared dependency; the tensor-register definition requires a supplied orthonormal basis rather than establishing its existence. The standard finite-dimensional argument closes the mathematics, but the implicit Gram--Schmidt dependency should be declared.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:55:44.760771+00:00",
+      "reason": "Read full teleportation reference proof and the actual orthonormal-basis existence corollary. F11 uses arbitrary finite-dimensional R and chooses an orthonormal basis in1.1, but gives only the words apply Gram--Schmidt, without its required local supplier or dependency. The existing published corollary supplies exactly this fact, including the zero-dimensional empty-basis case; R=0 has no normalized theorem instance. Cite it at F11 and declare it in deps. Statement and mathematical procedure remain unchanged.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "[F11] Since $R$ is finite-dimensional, it has a finite ordered orthonormal basis: take a finite basis and apply Gram--Schmidt.",
+          "proposed_replacement": "[F11] Since $R$ is finite-dimensional, it has a finite ordered orthonormal basis by [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]."
+        }
+      ]
+    }
+  ]
+}

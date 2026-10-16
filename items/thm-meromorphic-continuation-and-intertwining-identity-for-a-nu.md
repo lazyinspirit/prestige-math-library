@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-meromorphic-continuation-and-intertwining-identity-for-a-nu.json
 id: thm-meromorphic-continuation-and-intertwining-identity-for-a-nu
 kind: theorem
 title: Meromorphic continuation and intertwining identity for A(nu)
@@ -6,34 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 6
-deps:
-  - def-standard-intertwining-operator-for-sl2-r
-  - def-normalized-principal-series-i-epsilon-nu
-  - thm-compact-picture-of-the-sl2-principal-series
-  - lem-k-type-decomposition-of-the-sl2-principal-series
-  - lem-sl2-raising-and-lowering-formulas-in-the-compact-picture
-  - lem-k-type-eigenvalue-recurrence-for-the-sl2-intertwiner
-  - def-axiom-of-choice
-  - lem-ac-supplies-countable-and-dependent-choice-for-banach-integration
-  - thm-iwasawa-decomposition-for-sl2-r
-  - def-iwasawa-and-minimal-parabolic-data-for-sl2-r
-  - thm-algebra-of-derivatives
-  - thm-chain-rule
-  - lem-complex-integration-by-parts-on-intervals-and-decaying-lines
-  - thm-weierstrass-m-test-for-complex-function-series
-  - thm-uniform-derivative-limit-on-a-closed-interval
-  - thm-p-series-rational
-  - thm-cauchy-integral-formula-and-cauchy-estimates-for-banach-valued-holomorphic-functions
-  - rem-real-and-complex-normed-space-convention
-  - lem-complex-conjugation-and-modulus-laws
-  - def-complex-metric-convergence-and-continuity
-  - def-the-one-dimensional-torus-and-normalized-haar-integral
-  - thm-extreme-value-metric
-  - cor-complex-differentiability-implies-continuity
-  - thm-complex-plane-is-complete
-  - def-banach-space
-  - thm-identity-theorem-holomorphic-functions
-  - cor-zero-derivative-implies-constant
+deps: [def-standard-intertwining-operator-for-sl2-r, def-normalized-principal-series-i-epsilon-nu, thm-compact-picture-of-the-sl2-principal-series, lem-k-type-decomposition-of-the-sl2-principal-series, lem-sl2-raising-and-lowering-formulas-in-the-compact-picture, lem-k-type-eigenvalue-recurrence-for-the-sl2-intertwiner, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, thm-iwasawa-decomposition-for-sl2-r, def-iwasawa-and-minimal-parabolic-data-for-sl2-r, thm-algebra-of-derivatives, thm-chain-rule, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-weierstrass-m-test-for-complex-function-series, thm-uniform-derivative-limit-on-a-closed-interval, thm-p-series-rational, thm-cauchy-integral-formula-and-cauchy-estimates-for-banach-valued-holomorphic-functions, def-complex-norm-and-complex-normed-space, lem-complex-conjugation-and-modulus-laws, def-complex-metric-convergence-and-continuity, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-extreme-value-metric, cor-complex-differentiability-implies-continuity, thm-complex-plane-is-complete, def-banach-space, thm-identity-theorem-holomorphic-functions, cor-zero-derivative-implies-constant]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -49,13 +24,6 @@ sources:
     - title: "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (AMS GSM 155; author's PDF)"
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§7.4, Proposition 7.4.3(3) (statement p. 294, discussion pp. 301–302) and Exercise 7.4.12 (p. 302): unitary-character equivalence, with construction of the inverse-character intertwiner left as an exercise"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 ---
 
 ## Statement
@@ -78,7 +46,7 @@ Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\varepsilon\in\{0,1\}
 
 [F4] AC supplies countable choice, which is the countable-choice premise of complex integration by parts and the Cauchy integral estimates ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[def-axiom-of-choice]]).
 
-[F5] The usual modulus makes $\mathbb C$ a complex normed space ([[rem-real-and-complex-normed-space-convention]], [[lem-complex-conjugation-and-modulus-laws]]); its norm metric is $d(z,w)=|z-w|$ ([[def-complex-metric-convergence-and-continuity]]), which is complete ([[thm-complex-plane-is-complete]]), so $\mathbb C$ is a complex Banach space by [[def-banach-space]]. The Banach-valued Cauchy theorem therefore gives Taylor expansions and coefficient estimates for scalar holomorphic functions on discs ([[thm-cauchy-integral-formula-and-cauchy-estimates-for-banach-valued-holomorphic-functions]]).
+[F5] The usual modulus makes $\mathbb C$ a complex normed space ([[def-complex-norm-and-complex-normed-space]], [[lem-complex-conjugation-and-modulus-laws]]); its norm metric is $d(z,w)=|z-w|$ ([[def-complex-metric-convergence-and-continuity]]), which is complete ([[thm-complex-plane-is-complete]]), so $\mathbb C$ is a complex Banach space by [[def-banach-space]]. The Banach-valued Cauchy theorem therefore gives Taylor expansions and coefficient estimates for scalar holomorphic functions on discs ([[thm-cauchy-integral-formula-and-cauchy-estimates-for-banach-valued-holomorphic-functions]]).
 
 [F6] Complex integration by parts on a period interval gives rapid decay of Fourier coefficients of a smooth periodic function ([[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]]). The Weierstrass M-test, uniform derivative-limit theorem, and convergence of $\sum_{m\ge1}m^{-2}$ justify uniform convergence and termwise angular differentiation ([[thm-weierstrass-m-test-for-complex-function-series]], [[thm-uniform-derivative-limit-on-a-closed-interval]], [[thm-p-series-rational]]).
 

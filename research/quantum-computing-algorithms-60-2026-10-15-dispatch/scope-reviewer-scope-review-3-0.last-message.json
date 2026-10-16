@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "3",
+  "round": 0,
+  "reviewed_items": [
+    "def-qc-density-operator",
+    "def-qc-finite-positive-effect-family",
+    "def-qc-pure-state-and-ray",
+    "lem-qc-complete-effect-family-members-are-effects",
+    "thm-qc-density-operator-existence",
+    "thm-qc-ray-projector-well-defined-and-bijective",
+    "thm-qc-schmidt-decomposition",
+    "def-qc-ensemble-and-purification",
+    "thm-qc-density-spectral-ensemble",
+    "thm-qc-ensemble-barycenter-is-density",
+    "thm-qc-purification-existence-and-unitary-equivalence",
+    "thm-qc-rank-one-density-operator",
+    "thm-qc-ensemble-purification-correspondence",
+    "thm-qc-density-operator-convexity",
+    "thm-qc-purification-minimal-environment-dimension",
+    "ex-qc-bell-state-schmidt-reduction"
+  ],
+  "reviewed_pages": [
+    "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+    "pure-and-mixed-states-ensembles-and-schmidt-decomposition-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved scope and page prerequisites agree with the current plan. Request one local repair bundle for proof and prerequisite omissions, the unsupported ensemble-nonuniqueness claim, and the AC declarations. The published SVD supplier issue is reported separately; the assigned consumer can be repaired to use only the positive singular-vector result it actually needs.",
+  "findings": [
+    {
+      "id": "thm-singular-value-decomposition",
+      "type": "outside-batch",
+      "reason": "Published supplier proof step 3.1 extends the positive left-singular orthonormal family to a full basis using only cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, which guarantees some orthonormal basis, not extension of a prescribed family. The smallest missing fact is that a finite orthonormal family extends to an orthonormal basis, derivable by decomposing its span and choosing an orthonormal basis of the complement. Assigned use is thm-qc-schmidt-decomposition steps 1.1–2.1; indirect batch consumers are thm-qc-purification-existence-and-unitary-equivalence step 1.2, thm-qc-ensemble-purification-correspondence step 1.1, and thm-qc-purification-minimal-environment-dimension step 1.1. Their uses need only the positive singular families and expansion, but the full published supplier proof should be reconciled by the owner."
+    },
+    {
+      "id": "thm-qc-ray-projector-well-defined-and-bijective",
+      "type": "local",
+      "reason": "Step 1.2 calls P_u the orthogonal projection onto C u and later uses the residual property from def-orthogonal-projection without establishing it. Add the short calculation that z-P_u z is orthogonal to u, hence to C u."
+    },
+    {
+      "id": "thm-qc-schmidt-decomposition",
+      "type": "local",
+      "reason": "Step 1.1 applies SVD to a coefficient matrix C but never defines the associated linear map. Define T_C z by (T_C z)_i = sum_k c_ik z_k, verify its standard matrix is C, and derive the coefficient formula from the SVD. Use only the proved positive singular-vector families, or supply the missing orthonormal-extension argument."
+    },
+    {
+      "id": "thm-qc-density-operator-convexity",
+      "type": "local",
+      "reason": "Step 1.1 constructs a finite ensemble, but the item neither lists nor cites def-qc-ensemble-and-purification; [F1] only defines density operators. Add the ensemble definition as a direct dependency and cite it, or prove convexity directly."
+    },
+    {
+      "id": "thm-qc-density-spectral-ensemble",
+      "type": "local",
+      "reason": "This item and thm-qc-purification-existence-and-unitary-equivalence, thm-qc-rank-one-density-operator, thm-qc-ensemble-purification-correspondence, and thm-qc-purification-minimal-environment-dimension add def-axiom-of-choice and [A1] as inherited from current spectral/SVD routes. The inspected current spectral and SVD arguments use finite-dimensional bases, finite extensions, and finite selections; the claimed thm-algebraic-embedding-extension route is absent from their current dependencies. Remove these AC premises and edges or identify the exact current proof step that uses arbitrary-index choice."
+    },
+    {
+      "id": "def-qc-density-operator",
+      "type": "local",
+      "reason": "Its remark and the A-page summary say ensemble descriptions need not be unique, but the assigned items and Bell example exhibit only one decomposition of I_2/2. Add a second explicit decomposition in the B example, such as the computational and ± bases, and cite it here and in the summary."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-qc-pure-state-and-ray",
+      "decision": "accept",
+      "reason": "Its projector well-definedness result remains unchanged by the requested proof clarification."
+    },
+    {
+      "id": "thm-qc-density-spectral-ensemble",
+      "decision": "repair",
+      "reason": "Recheck its ray-projector use at step 2.1 and remove the unsupported inherited AC premise."
+    },
+    {
+      "id": "thm-qc-rank-one-density-operator",
+      "decision": "repair",
+      "reason": "Recheck its ray-projector use at steps 1.1–2.1 and remove the unsupported inherited AC premise."
+    },
+    {
+      "id": "thm-qc-schmidt-decomposition",
+      "decision": "repair",
+      "reason": "Define the coefficient map explicitly and make its SVD use depend only on the proved positive singular-vector families, or prove the required extension locally."
+    },
+    {
+      "id": "thm-qc-purification-existence-and-unitary-equivalence",
+      "decision": "repair",
+      "reason": "Its Schmidt use at step 1.2 is sound for the positive families; remove the unsupported inherited AC premise."
+    },
+    {
+      "id": "thm-qc-ensemble-purification-correspondence",
+      "decision": "repair",
+      "reason": "Its Schmidt use at step 1.1 is sound for the positive families; remove the unsupported inherited AC premise."
+    },
+    {
+      "id": "thm-qc-purification-minimal-environment-dimension",
+      "decision": "repair",
+      "reason": "Its Schmidt use at step 1.1 is sound for the positive families; remove the unsupported inherited AC premise."
+    },
+    {
+      "id": "ex-qc-bell-state-schmidt-reduction",
+      "decision": "repair",
+      "reason": "Add the second I_2/2 ensemble decomposition needed to substantiate the assigned nonuniqueness claim."
+    }
+  ]
+}

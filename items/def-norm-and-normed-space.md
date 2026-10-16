@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-hopf-hecke-75-2026-10-15-owner/published-repairs/def-norm-and-normed-space.json
 id: def-norm-and-normed-space
 kind: definition
 title: "A norm on a real vector space, the induced metric, and the dictionary with the metric axioms"
@@ -7,18 +9,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-vector-space, def-function-space, def-linear-map, def-metric-space, lem-metric-nonnegativity, def-metric-topology, lem-bounded-remetrisation, rem-metric-axiom-conventions, def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-complete-ordered-field, lem-vector-space-elementary-consequences]
+deps: [def-vector-space, def-function-space, def-linear-map, def-metric-space, lem-metric-nonnegativity, def-metric-topology, lem-bounded-remetrisation, def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-complete-ordered-field, lem-vector-space-elementary-consequences]
 justified_by: []
 aliases: []
 landmark: true
-verification:
-  precheck: n/a
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-10
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -55,8 +49,8 @@ $\lVert v\rVert$ for $N(v)$; when several are, the norm is always named.
 
 **The values of a norm are real numbers.** The codomain is $\mathbb{R}$, so
 $N(v)$ is an honest element of the complete ordered field and no infinite value
-is permitted. This is the same convention [[rem-metric-axiom-conventions]]
-records for metrics.
+is permitted. The same real-valued codomain is required of a metric by
+[[def-metric-space]].
 
 ### Nonnegativity is a theorem, not an axiom
 
@@ -123,8 +117,9 @@ strictly weaker than the corresponding statement about a norm.
   ([[lem-vector-space-elementary-consequences]]) gives $N(0_V) = |0|\,N(v) = 0$.
   Only the direction "$N(v) = 0$ implies $v = 0_V$" is a genuine assumption, and
   dropping it gives what is usually called a seminorm, a notion this library does
-  not use. The situation is exactly the one [[rem-metric-axiom-conventions]]
-  describes for (M1) and the pseudometric.
+  not use. The analogous weakening in [[def-metric-space]] retains symmetry and the
+  triangle inequality but replaces separation by $p(x,x)=0$; that defines a
+  pseudometric.
 
 - **The zero space carries exactly one norm.** If $V = \{0_V\}$ then the only
   function $V \to \mathbb{R}$ satisfying (N1) is the one with value $0$, and it

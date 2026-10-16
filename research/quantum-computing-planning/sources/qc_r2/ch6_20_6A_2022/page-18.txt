@@ -1,0 +1,79 @@
+12
+Quantum Algorithms
+
+and d = (k −j) is the “distance” between the qubits.
+In the case n = 3, the QFT is constructed from three H gates and three controlled-R
+gates. For general n, the obvious generalization of this circuit requires n H gates and
+�n
+2
+�
+= 1
+
+2n(n−1) controlled R’s. A two qubit gate is applied to each pair of qubits, again
+with controlled relative phase π/2d, where d is the “distance” between the qubits. Thus
+the circuit family that implements QFT has a size of order (log N)2.
+We can reduce the circuit complexity to linear in log N if we are willing to settle for
+an implementation of fixed accuracy, because the two-qubit gates acting on distantly
+separated qubits contribute only exponentially small phases. If we drop the gates acting
+on pairs with distance greater than m, than each term in eq. (6.52) is replaced by an
+approximation to m bits of accuracy; the total error in xy/2n is certainly no worse than
+n2−m, so we can achieve accuracy ε in xy/2n with m ≥log n/ε. If we retain only the gates
+acting on qubit pairs with distance m or less, then the circuit size is mn ∼n log n/ε.
+In fact, if we are going to measure in the computational basis immediately after
+implementing the QFT (or its inverse), a further simplification is possible – no two-qubit
+gates are needed at all! We first remark that the controlled – Rd gate acts symmetrically
+on the two qubits – it acts trivially on |00⟩, |01⟩, and |10⟩, and modifies the phase of |11⟩
+by eiθd. Thus, we can interchange the “control” and “target” bits without modifying the
+gate. With this change, our circuit for the 3-qubit QFT can be redrawn as:
+
+|x2⟩
+
+|x1⟩
+
+|x0⟩
+
+|y0⟩
+
+|y1⟩
+
+|y2⟩
+
+s
+s
+
+s
+
+H
+
+R1
+H
+
+R2
+R1
+H
+
+Once we have measured |y0⟩, we know the value of the control bit in the controlled-R1
+gate that acted on the first two qubits. Therefore, we will obtain the same probability
+distribution of measurement outcomes if, instead of applying controlled-R1 and then
+measuring, we instead measure y0 first, and then apply (R1)y0 to the next qubit, condi-
+tioned on the outcome of the measurement of the first qubit. Similarly, we can replace
+the controlled-R1 and controlled-R2 gates acting on the third qubit by the single qubit
+rotation
+
+(R2)y0(R1)y1,
+(6.58)
+
+(that is, a rotation with relative phase π(.y1y0)) after the values of y1 and y0 have been
+measured.
+Altogether then, if we are going to measure after performing the QFT, only n
+Hadamard gates and n −1 single-qubit rotations are needed to implement it. The QFT
+is remarkably simple!
+
+6.3 Factoring
+
+6.3.1 Factoring as period finding
+
+What does the factoring problem (finding the prime factors of a large composite positive
+integer) have to do with periodicity? There is a well-known (randomized) reduction of
+
+

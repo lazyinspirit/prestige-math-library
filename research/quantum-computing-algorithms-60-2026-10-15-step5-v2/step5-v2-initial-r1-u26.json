@@ -1,0 +1,71 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "26",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "ex-qa-oracle-conversion-and-uncomputation",
+      "model": "gpt-6-luna",
+      "context_sha256": "44415df991d623ce336da7b6561edc5ec182b2ca8e56b4d2c06848f1e2382a4b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.2 silently changes tensor order from x,y,r to x,r,y. This is a notation/order defect: the labeled address-work state, Hadamard signs, and uniform measurement conclusion are correct after the explicit permutation. Repaired both displays in x,y,r order without changing any circuit, hypothesis, or conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-qa-oracle-conversion-and-uncomputation",
+      "disposition": "repaired",
+      "post_sha256": "30f3512cb6cbe672e0238c5cecefe6af281907a0fccb759cd1c6c933011d8d08",
+      "review_context_sha256": "089a262901bc2938743a1015b40111dd012409bc6fefa7e3aaf03a657d5f631b",
+      "reason": "Checked three CNOTs on arbitrary target bits and their linear extension, the explicit two-bit Toffoli computation, phase kickback, both corrected x,y,r states, and controlled constant phase. Hadamard on the incomplete circuit gives normalized orthogonal residual work states with equal address probabilities. Only step 2.2 changed; Example, interfaces, dependencies, and page remain unchanged. This is verification of my repair, not independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "quantum-computing-algorithms-60-2026-10-15-step5-initial-r1-u26-register-order",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T05:32:40.712688+00:00",
+        "class": "accuracy",
+        "subclass": "ill-typed-claim",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "ex-qa-oracle-conversion-and-uncomputation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "26",
+        "subclass_note": "Verification 2.2 silently displayed x,r,y tensors for an x,y,r input. The labeled circuit calculation was correct after a permutation; both equations now retain x,y,r throughout. This corrects notation, without changing the algorithm, Example, hypotheses, or probability claims.",
+        "item_sha256": "30f3512cb6cbe672e0238c5cecefe6af281907a0fccb759cd1c6c933011d8d08"
+      },
+      "reason": "Proposed new nonfatal register-order record for controller merge; no shared ledger was edited."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Proof-only repair in Verification 2.2: both three-qubit displays now retain address,target,work order x,y,r, and the trailing justification cites F11. The pre-H state is (|0>_x|->_y|0>_r-|1>_x|->_y|1>_r)/sqrt(2); H_x gives (|0>_x|->_y|->_r+|1>_x|->_y|+>_r)/sqrt(2). Both address probabilities are 1/2. No procedure or Example claim was weakened.",
+    "Checked all five verification steps against actual supplier interfaces: standard XOR query, phase query and kickback, binary dot product, its Toffoli procedure and correctness theorem, exact clean-ancilla restoration, CNOT and Toffoli actions, exact Hadamard matrix, ordered computational bases, Dirac notation, controlled global phase, and resource accounting. Relevant supplier files are items/<dependency-id>.md; the two owning pages are library/quantum-algorithms/reversible-arithmetic-and-oracle-conversion.md and its -examples companion. No external source was consulted; these finite tensor calculations are familiar. No axiom of choice is used.",
+    "Under the shared-write lock, reread the current batch-26 proof contract and updated only this item's step-2-2 claim, its F11 input, and F11 citation uses. Preserved the earlier risk-review and boundary evidence. The first strict check identified the two pending F11 mappings; after synchronization it passed with zero errors and warnings.",
+    "PASS (exit 0): node tools/tsx-run.mjs tools/precheck.mts items/ex-qa-oracle-conversion-and-uncomputation.md \u2014 1 checked, 0 failing.",
+    "PASS (exit 0): node tools/rendercheck.mjs items/ex-qa-oracle-conversion-and-uncomputation.md \u2014 1 file; math and YAML parse under the actual renderer.",
+    "PASS (exit 0), after the final item edit: node tools/proof-layout.mjs items/ex-qa-oracle-conversion-and-uncomputation.md \u2014 1 item, 5 steps, 0 defects.",
+    "PASS (exit 0): node tools/finite-smoke.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-26.proof-contracts.json --items ex-qa-oracle-conversion-and-uncomputation \u2014 1 bounded check, 0 errors. This supports the explicit finite examples, not a general proof.",
+    "PASS (exit 0): node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-26.proof-contracts.json --strict --items ex-qa-oracle-conversion-and-uncomputation \u2014 1/1 checked, 0 errors, 0 warnings.",
+    "The Example section, dependencies, and page interfaces are unchanged. This item has no Statement or Definition section; no supplier-interface event or downstream inventory is triggered. No created item, published defect, published-ledger update, gate diagnostic, or unresolved mathematical obligation. Independent rejudgment remains with the engine."
+  ],
+  "supporting_evidence": {
+    "research/quantum-computing-algorithms-60-2026-10-15-batch-26.proof-contracts.json": "6f7c15124da078ced55bc74e48a38fe216baca0176a5aa31443d351d90f92026"
+  }
+}

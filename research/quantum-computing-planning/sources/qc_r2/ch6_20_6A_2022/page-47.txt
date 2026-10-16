@@ -1,0 +1,70 @@
+6.8 Using quantum computers to simulate quantum physics
+41
+
+The algorithm is efficient: the quantum circuit size is
+
+O
+�
+23mh2(nT)2�
+= O(n3cn2).
+(6.213)
+
+However, if we want to estimate (say) the ground state energy E0 to polynomial
+accuracy in quantum polynomial time, we must be able to prepare a state |ψ⟩whose
+overlap with the ground state |E0⟩is no worse than polynomially small:
+
+|⟨E0|ψ⟩|2 > 1/poly(n).
+(6.214)
+
+If that is the case, we can get a good estimate of E0 in only polynomially many trials.
+As a bonus, when we obtain the value E0 for the measured eigenvalue E0, then we have
+projected state |ψ⟩onto the ground state |E0⟩, and therefore we can compute further
+properties of |E0⟩, such as the distribution Prob(a) = ⟨E0|Πa|E0⟩, where Πa is projector
+onto eigenspace of an efficiently measurable observable.
+The catch is that the overlap of a randomly chosen n-qubit state with |E0⟩is expo-
+nentially small, so preparing |ψ⟩with a polynomially small overlap is not necessarily
+easy. One way we might attempt to construct a state with a significant overlap with the
+ground state is by appealing to the quantum adiabatic theorem. We prepare the ground
+state of a Hamiltonian Heasy whose ground state is easy to find classically. Then we
+simulate Schroedinger evolution governed by a time-dependent Hamiltonian H(t) such
+that
+
+H(0) = Heasy,
+H(T) = Hhard,
+0 ≤t ≤T,
+(6.215)
+
+where Hhard is the Hamiltonian whose ground state we wish to construct. For example,
+we might choose
+
+H(t) = (1 −t/T)Heasy + (t/T)Hhard.
+(6.216)
+
+The quantum adiabatic theorem says that if |ψ(0)⟩has a large overlap with the ground
+state of Heasy, then |ψ(T) has a large overlap with the ground state of Hhard, if T is long
+enough (i.e. the Hamiltonian H(t) changes slowly enough). But how slow is slow enough?
+Let E0(t) denote the energy of the ground state of H(t) and let E1(t) denote the energy
+of the first excited state of H(t). Define ∆= mint∈[0,T](E1(t) −E0(t)); we say ∆is the
+minimum energy gap between the ground and first excited state. Then the adiabatic
+theorem says that T > A/∆c is slow enough, where A and c are constants independent
+of the number of qubits n. Therefore, we have a complete polynomial algorithm for
+computing the ground state energy of a local Hamiltonian to polynomial accuracy in
+polynomial time provided that
+
+∆=
+1
+poly(n).
+(6.217)
+
+But if ∆becomes exponentially small in n during the evolution in which H(t) interpo-
+lates between Heasy and Hhard, then this algorithm may require exponential time.
+Unfortunately, we’ll see that it follows from weak complexity-theoretic assumptions
+that there are local Hamiltonians for which computing ground state energy is hard even
+for a quantum computer. (For example, otherwise we would be able to solve efficiently
+any problem in NP using a quantum computer, which seems unlikely.) So the minimum
+energy gap ∆must be smaller than polynomially small in such cases.
+On the other hand, it is reasonable to be hopeful that computing ground state en-
+ergy for quantum systems will be an important application of quantum computing. For
+example, as previously note, chemists say it is valuable to compute the energy of the
+
+

@@ -1,0 +1,1952 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qc-register-and-computational-basis",
+    "lem-qc-trace-pairing-nondegenerate",
+    "def-qc-ordered-bitstring-encoding",
+    "def-qc-tensor-register-and-permutation",
+    "thm-qc-computational-basis-orthonormal",
+    "def-qc-partial-trace",
+    "def-qc-tensor-map",
+    "lem-qc-tensor-product-basis-and-dimension",
+    "thm-qc-bitstring-index-is-bijection",
+    "thm-qc-partial-trace-characterization-and-basis-independence",
+    "thm-qc-tensor-map-composition-and-adjoint",
+    "thm-qc-wire-permutation-is-unitary",
+    "thm-qc-partial-trace-positive-and-trace-preserving",
+    "ex-qc-register-endian-partial-trace"
+  ],
+  "contracts": {
+    "def-qc-register-and-computational-basis": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Definition declares the zero-qubit register to be C with basis {1}; it is distinct from C^0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Definition explicitly distinguishes the zero vector space C^0 from the positive-dimensional register Q_d."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: The least admitted d is 1, for which the standard coordinate basis has one vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The n=0 convention is a one-dimensional register, not the zero space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-qc-trace-pairing-nondegenerate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-coordinate-column-and-matrix-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B=(b_0,\\ldots,b_{n-1})$ be an ordered basis of $V$. The unique\ncoordinates $v=\\sum_{j<n}x_jb_j$ form the **coordinate column**\n$[v]_{\\mathcal B}\\in M_{n\\times1}(F)$, whose $j$-th entry is $x_j$.\n\nLet $\\mathcal C=(c_0,\\ldots,c_{m-1})$ be an ordered basis of $W$ and let\n$T:V\\to W$ be linear. The **matrix of $T$ relative to $\\mathcal B$ and\n$\\mathcal C$** is the matrix\n$[T]_{\\mathcal B}^{\\mathcal C}\\in M_{m\\times n}(F)$ whose $j$-th column is\n$[T(b_j)]_{\\mathcal C}$. Equivalently, if\n$T(b_j)=\\sum_{i<m}t_{ij}c_i$, then\n$([T]_{\\mathcal B}^{\\mathcal C})_{ij}=t_{ij}$.\n\nFor an empty ordered basis, these definitions give the unique coordinate column\nor matrix of the corresponding zero-sized shape.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-units",
+          "source_section": "Definition",
+          "quote": "For indices $a,b$ in the same finite index set, the **Kronecker delta** is\n\n$$\\delta_{ab}:=\\begin{cases}1,&a=b,\\\\0,&a\\ne b.\\end{cases}$$\n\nLet $i<m$ and $j<n$. The **matrix unit** $E_{ij}\\in M_{m\\times n}(F)$ is the\nmatrix whose $(r,s)$-entry is\n\n$$(E_{ij})_{rs}:=\\delta_{ri}\\delta_{sj}.$$\n\nThus $E_{ij}$ has entry $1$ in position $(i,j)$ and entry $0$ everywhere else.\nWhen a dimension is zero, no index of that dimension exists and there are no\nmatrix units of the corresponding shape.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-matrix-of-a-composite-is-the-product",
+          "source_section": "Statement",
+          "quote": "Let $T:U\\to V$ and $S:V\\to W$ be linear, with ordered bases $\\mathcal B$ of\n$U$, $\\mathcal C$ of $V$, and $\\mathcal D$ of $W$. Then\n\n$$[S\\circ T]_{\\mathcal B}^{\\mathcal D}=[S]_{\\mathcal C}^{\\mathcal D}[T]_{\\mathcal B}^{\\mathcal C}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]), let\n$n \\in \\mathbb{N}$ and let $v : n \\to V$ be a finite list\n([[def-linear-combination-and-span]]).\n\n1. **The span of the image of a list.** Whether or not $v$ is injective,\n   $$\\operatorname{span}(v[n]) \\;=\\; \\Bigl\\{\\, \\sum_{i<n}\\lambda_i v_i \\;:\\; \\lambda : n \\to F \\,\\Bigr\\} .$$\n2. **Coordinates.** $v$ is an ordered basis of $V$ ([[def-linear-basis]]) **if and\n   only if** for every $x \\in V$ there is **exactly one** $\\lambda : n \\to F$ with\n   $x = \\sum_{i<n}\\lambda_i v_i$. When that holds, this $\\lambda$ is called the\n   **coordinate list of $x$ with respect to the ordered basis $v$**, and\n   $\\lambda_i$ its **$i$-th coordinate**.\n\nThe coordinate list is attached to the **ordered** basis and not to the basis as\na set: reordering the list permutes the coordinates of every vector, as the\ncompanion page shows on a worked example in $\\mathbb{R}^{2}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\dim V=0$, [F1] gives $V=\\{0\\}$, so its only endomorphism is $D=0$. Assume henceforth $\\dim V=m>0$ and choose an ordered basis.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If every entry of the matrix of $D$ were zero, [F2] would make $D$ vanish on every basis vector and hence on every vector. Thus if $D\\ne0$ there are indices $i,j<m$ with matrix entry $D_{ij}\\ne0$. Define $A(\\sum_{k<m}a_kb_k):=a_i b_j$ using the ordered basis chosen in step 1.1. Unique coordinates [F7] make this well-defined; for scalars $\\alpha,\\beta$ and vectors with coordinate lists $(a_k)$ and $(c_k)$, the coordinate list of their linear combination is $(\\alpha a_k+\\beta c_k)$, so the formula gives $A(\\alpha x+\\beta y)=\\alpha A(x)+\\beta A(y)$. Thus $A$ is an endomorphism. Its matrix sends $b_i$ to $b_j$ and every other basis vector to $0$, so that matrix is $E_{ji}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F7",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], the matrix of $D\\circ A$ is $[D][A]=[D]E_{ji}$. Row-by-column multiplication [F5] gives $([D]E_{ji})_{kk}=D_{kj}\\delta_{ik}$, so every diagonal entry is $0$ except the $(i,i)$ entry, which is $D_{ij}$. By [F6], $\\operatorname{tr}(D\\circ A)=D_{ij}\\ne0$. This contradicts the hypothesis for every $A$. Therefore $D=0$, including the zero-dimensional case from step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F4",
+            "F5",
+            "F6",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 1.1 handles dim V=0, where the only endomorphism D is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The implication includes D=0 and separately treats V=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: For dim V=1, step 2.1 chooses the sole nonzero matrix entry and its matrix-unit witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The zero-dimensional endomorphism space is handled explicitly; any nonzero D has a nonzero entry."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qc-ordered-bitstring-encoding": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Definition sets {0,1}^0={()} and enc_0(())=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The all-zero word has index zero by the displayed finite sum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: For n=1, the formula gives enc_1(0)=0 and enc_1(1)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The empty word and all-zero words are covered by the sum convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qc-tensor-register-and-permutation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tensor-product-basis-from-bases",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. If $M$ is free with basis $(e_i)_{i\\in I}$ and $N$ is free with basis $(f_j)_{j\\in J}$, then $M\\otimes_RN$ is free with basis\n\n$$\\bigl(e_i\\otimes f_j\\bigr)_{(i,j)\\in I\\times J}.$$\n\nEquivalently, the canonical map $R^{(I\\times J)}\\to M\\otimes_RN$ sending the standard basis vector at $(i,j)$ to $e_i\\otimes f_j$ is an isomorphism. This includes an empty basis in either factor.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M_1,\\ldots,M_k$ be a finite list of $R$-modules. Any parenthesized tensor product\n\n$$T=M_1\\otimes_R\\cdots\\otimes_RM_k$$\n\nrepresents $R$-multilinear maps from $M_1\\times\\cdots\\times M_k$: for every $R$-module $P$, composition with $(m_1,\\ldots,m_k)\\mapsto m_1\\otimes\\cdots\\otimes m_k$ is a bijection from $\\operatorname{Hom}_R(T,P)$ to the set of multilinear maps into $P$. Different parenthesizations are connected by the unique isomorphism preserving pure tensors.\n\nFor $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]), let\n$n \\in \\mathbb{N}$ and let $v : n \\to V$ be a finite list\n([[def-linear-combination-and-span]]).\n\n1. **The span of the image of a list.** Whether or not $v$ is injective,\n   $$\\operatorname{span}(v[n]) \\;=\\; \\Bigl\\{\\, \\sum_{i<n}\\lambda_i v_i \\;:\\; \\lambda : n \\to F \\,\\Bigr\\} .$$\n2. **Coordinates.** $v$ is an ordered basis of $V$ ([[def-linear-basis]]) **if and\n   only if** for every $x \\in V$ there is **exactly one** $\\lambda : n \\to F$ with\n   $x = \\sum_{i<n}\\lambda_i v_i$. When that holds, this $\\lambda$ is called the\n   **coordinate list of $x$ with respect to the ordered basis $v$**, and\n   $\\lambda_i$ its **$i$-th coordinate**.\n\nThe coordinate list is attached to the **ordered** basis and not to the basis as\na set: reordering the list permutes the coordinates of every vector, as the\ncompanion page shows on a worked example in $\\mathbb{R}^{2}$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-tensor-product-of-modules-by-generators-and-relations",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a unital ring, $M$ a right $R$-module, and $N$ a left $R$-module. Let\n\n$$F:=\\mathbb Z^{(M\\times N)}$$\n\nbe the free $\\mathbb Z$-module on the set $M\\times N$ ([[def-free-module-on-a-set-and-standard-basis]], [[thm-universal-property-of-free-modules]]), and write $e_{(m,n)}$ for its standard basis elements. The additive group of $F$ is abelian. Let $H$ be the subgroup generated ([[def-generated-subgroup]]) by all elements\n\n$$e_{(m+m',n)}-e_{(m,n)}-e_{(m',n)},$$\n\n$$e_{(m,n+n')}-e_{(m,n)}-e_{(m,n')},$$\n\nand\n\n$$e_{(mr,n)}-e_{(m,rn)}$$\n\nas $m,m'$ range over $M$, $n,n'$ over $N$, and $r$ over $R$. Since every subgroup of an abelian group is normal, the quotient group $F/H$ is defined ([[def-quotient-group]]). The **tensor product of $M$ and $N$ over $R$** is\n\n$$M\\otimes_RN:=F/H.$$\n\nThe coset of $e_{(m,n)}$ is the **elementary tensor** $m\\otimes n$. Every tensor is a finite sum of elementary tensors, because every element of $F$ is a finite $\\mathbb Z$-linear combination of basis elements and integer coefficients may be absorbed into either additive variable. The defining relations give\n\n$$(m+m')\\otimes n=m\\otimes n+m'\\otimes n,\\qquad m\\otimes(n+n')=m\\otimes n+m\\otimes n',$$\n\nand\n\n$$(mr)\\otimes n=m\\otimes(rn).$$\n\nIn particular $0\\otimes n=0=m\\otimes0$. No $R$-module structure on $M\\otimes_RN$ is part of this arbitrary-ring definition; at this stage it is an abelian group.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-commutative-ring-module-structure-on-a-tensor-product",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M,N$ be $R$-modules. The abelian group $M\\otimes_RN$ has a unique $R$-module structure for which\n\n$$r(m\\otimes n)=(rm)\\otimes n=m\\otimes(rn)$$\n\nfor every $r\\in R$, $m\\in M$, and $n\\in N$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M_1,\\ldots,M_k$ be a finite list of $R$-modules. Any parenthesized tensor product\n\n$$T=M_1\\otimes_R\\cdots\\otimes_RM_k$$\n\nrepresents $R$-multilinear maps from $M_1\\times\\cdots\\times M_k$: for every $R$-module $P$, composition with $(m_1,\\ldots,m_k)\\mapsto m_1\\otimes\\cdots\\otimes m_k$ is a bijection from $\\operatorname{Hom}_R(T,P)$ to the set of multilinear maps into $P$. Different parenthesizations are connected by the unique isomorphism preserving pure tensors.\n\nFor $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=0$, the declared space is $\\mathbb C$ with its usual pairing and basis $\\{1\\}$. For $n>0$, repeated use of [F1] and the associativity identifications in [F2] shows that the lexicographically ordered elementary product vectors form a basis of the tensor space. If one factor basis is empty, the product basis is empty and the tensor space is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use the coordinates in this product basis to define the pairing by the standard coordinate formula of [F3]. The basis gives unique coordinates by [F5], so this is a well-defined sesquilinear positive-definite pairing. It is linear first and conjugate-linear second by [F3] and [F4].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $x_k=\\sum_{i_k}x_{k,i_k}e_{k,i_k}$ and $y_k=\\sum_{i_k}y_{k,i_k}e_{k,i_k}$ in the supplied bases, using their unique coordinates [F5]. Multilinearity of elementary tensors [F6], applied one factor at a time, gives the coefficient $\\prod_k x_{k,i_k}$ of each product-basis vector in $\\bigotimes_k x_k$, and similarly $\\prod_k y_{k,i_k}$ for $\\bigotimes_k y_k$. The standard coordinate formula [F3] therefore gives $\\sum_{(i_0,\\ldots,i_{n-1})}\\prod_k x_{k,i_k}\\overline{y_{k,i_k}}$. Repeated finite distributivity factors this as $\\prod_k\\sum_{i_k}x_{k,i_k}\\overline{y_{k,i_k}}$, which is the displayed product formula. For $n=0$ both expressions are $1$; if a factor has dimension $0$, the product basis is empty and both the tensor pairing and product over factor pairings are $0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The product formula depends only on the factor pairings. Any other supplied orthonormal bases therefore give the same pairing on elementary tensors; elementary tensors span by [F1], so sesquilinearity makes the pairings equal everywhere.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The factor permutation in the Definition sends the product basis bijectionally to the product basis in the reordered factors. Unique coordinates [F5] make its linear extension well-defined, and [F7] makes that extension linear; applying the inverse permutation to basis vectors gives the inverse linear map. For the empty list the definition is already the identity.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Definition declares the empty tensor product C with basis {1} and identity permutation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: A zero-dimensional factor gives an empty product basis and zero tensor space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: The one-factor list retains that factor and its supplied orthonormal basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The proof treats both an empty factor list and a zero-dimensional factor."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qc-computational-basis-orthonormal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by\n\n$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$\n\nThen:\n\n1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.\n\nEvery index runs from $0$, so the coordinates of an element of $F^{n}$ are\n$x_0, \\dots, x_{n-1}$ and no statement above is restricted to $n \\ge 1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $j,k<d$, the coordinate formula in [F1] gives $\\langle e_j,e_k\\rangle_{\\rm root}=\\sum_{r<d}\\delta_{rj}\\delta_{rk}$, which equals $1$ when $j=k$ and $0$ when $j\\ne k$. Thus the listed vectors are orthonormal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] the same vectors form a basis, so they are an orthonormal basis. For $d=1$ the formula has one vector and still gives norm $1$; the zero-qubit register is precisely this one-dimensional case.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The zero-qubit register is C with the one-element orthonormal basis {1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The register condition d>=1 excludes C^0; the theorem separately states the one-dimensional zero-qubit case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 2.1 explicitly covers d=1 and the one-vector basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The one-dimensional boundary is checked directly from the coordinate inner product."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qc-partial-trace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]), let\n$n \\in \\mathbb{N}$ and let $v : n \\to V$ be a finite list\n([[def-linear-combination-and-span]]).\n\n1. **The span of the image of a list.** Whether or not $v$ is injective,\n   $$\\operatorname{span}(v[n]) \\;=\\; \\Bigl\\{\\, \\sum_{i<n}\\lambda_i v_i \\;:\\; \\lambda : n \\to F \\,\\Bigr\\} .$$\n2. **Coordinates.** $v$ is an ordered basis of $V$ ([[def-linear-basis]]) **if and\n   only if** for every $x \\in V$ there is **exactly one** $\\lambda : n \\to F$ with\n   $x = \\sum_{i<n}\\lambda_i v_i$. When that holds, this $\\lambda$ is called the\n   **coordinate list of $x$ with respect to the ordered basis $v$**, and\n   $\\lambda_i$ its **$i$-th coordinate**.\n\nThe coordinate list is attached to the **ordered** basis and not to the basis as\na set: reordering the list permutes the coordinates of every vector, as the\ncompanion page shows on a worked example in $\\mathbb{R}^{2}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each basis vector $e_{i'}$ of $H_A$, prescribe $S e_{i'}=\\sum_{i<a}(\\sum_{j<b}R_{(i,j),(i',j)})e_i$. Each inner and outer sum is finite; when $b=0$ its inner sum is $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the ordered-basis coordinate property [F2], these prescribed images extend uniquely to a linear map $S:H_A\\to H_A$, and its matrix has exactly the displayed entries. Each entry is linear in the entries of $R$, so the resulting assignment $R\\mapsto S$ is linear. This defines $\\operatorname{Tr}_B$ even when either basis is empty.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: If dim H_B=0, the defining sum is empty and equals zero; the proof also covers H_A=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Definition assigns the empty contraction to zero and handles an empty output basis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: If dim H_B=1, the contraction has exactly one summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The proof handles empty input or output bases and finite contractions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qc-tensor-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M_1,\\ldots,M_k$ be a finite list of $R$-modules. Any parenthesized tensor product\n\n$$T=M_1\\otimes_R\\cdots\\otimes_RM_k$$\n\nrepresents $R$-multilinear maps from $M_1\\times\\cdots\\times M_k$: for every $R$-module $P$, composition with $(m_1,\\ldots,m_k)\\mapsto m_1\\otimes\\cdots\\otimes m_k$ is a bijection from $\\operatorname{Hom}_R(T,P)$ to the set of multilinear maps into $P$. Different parenthesizations are connected by the unique isomorphism preserving pure tensors.\n\nFor $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=0$, the prescribed map is the identity on $\\mathbb C$. For $n>0$, the function $(x_0,\\ldots,x_{n-1})\\mapsto T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}$ is linear in each argument: replacing any $x_k$ by $a x_k+b y_k$ replaces its image by $aT_kx_k+bT_ky_k$ by [F3], and tensoring is linear in that factor.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the multilinear function in step 1.1 has a unique linear extension from the tensor product, which is the map in the Definition. If a factor is zero-dimensional, every elementary tensor is zero and these tensors span by [F1], so the tensor product and its unique extension are zero; the displayed rule still holds.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Definition sets the empty tensor map to the identity z->z on C."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The proof states that a zero-dimensional factor makes the tensor product zero and the unique map is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: For one factor, the tensor map is the original map by the defining action."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The proof treats both empty lists and zero-dimensional factors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-qc-tensor-product-basis-and-dimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tensor-product-basis-from-bases",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. If $M$ is free with basis $(e_i)_{i\\in I}$ and $N$ is free with basis $(f_j)_{j\\in J}$, then $M\\otimes_RN$ is free with basis\n\n$$\\bigl(e_i\\otimes f_j\\bigr)_{(i,j)\\in I\\times J}.$$\n\nEquivalently, the canonical map $R^{(I\\times J)}\\to M\\otimes_RN$ sending the standard basis vector at $(i,j)$ to $e_i\\otimes f_j$ is an isomorphism. This includes an empty basis in either factor.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-tensor-products-of-finite-free-modules-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and $m,n\\in\\mathbb N$. The standard finite free modules satisfy\n\n$$R^m\\otimes_RR^n\\cong R^{mn},$$\n\nwith the tensor products of standard basis vectors corresponding to the standard basis indexed by $m\\times n$.\n\nIf $F$ is a field and $V,W$ are finite-dimensional $F$-vector spaces, then\n\n$$\\dim_F(V\\otimes_FW)=(\\dim_FV)(\\dim_FW).$$\n\nBoth assertions include a zero rank or zero-dimensional factor.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M_1,\\ldots,M_k$ be a finite list of $R$-modules. Any parenthesized tensor product\n\n$$T=M_1\\otimes_R\\cdots\\otimes_RM_k$$\n\nrepresents $R$-multilinear maps from $M_1\\times\\cdots\\times M_k$: for every $R$-module $P$, composition with $(m_1,\\ldots,m_k)\\mapsto m_1\\otimes\\cdots\\otimes m_k$ is a bijection from $\\operatorname{Hom}_R(T,P)$ to the set of multilinear maps into $P$. Different parenthesizations are connected by the unique isomorphism preserving pure tensors.\n\nFor $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, the declared tensor space is $\\mathbb C$, its product basis is $\\{1\\}$, and its dimension is $1$, the empty product. If $n=1$, the statement is exactly the supplied orthonormal basis of that factor.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $n\\ge2$, repeated application of [F2] and the parenthesization identifications in [F4] shows that the elementary tensors of the factor bases form a basis indexed by the Cartesian product of their index sets. By [F1], the inner product of two such basis tensors is the product of their factor inner products; it is $1$ for equal tuples and $0$ for unequal tuples. Therefore this basis is orthonormal.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Repeated application of [F3] gives the product of the factor dimensions. If any $d_k=0$, [F2] makes the product basis empty and both sides are zero; the empty and one-factor cases were handled in step 1.1. Thus the formula holds in every finite case.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 1.1 identifies the empty tensor basis as {1} in C and dimension 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: Steps 1.2 and 2.1 show a zero-dimensional factor gives an empty basis and dimension zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 1.1 states the one-factor case is the supplied orthonormal basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The statement and proof include empty lists, one-factor lists, and zero-dimensional factors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qc-bitstring-index-is-bijection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $n=0$, the domain has just the empty word and the codomain is $\\{0,\\ldots,2^0-1\\}=\\{0\\}$. By [F1], its index is $0$, so the map is bijective.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume the result for $n$. For a word of length $n+1$, write its first bit as $b\\in\\{0,1\\}$ and its remaining word as $y\\in\\{0,1\\}^n$. Splitting the first term from the sum in [F1] gives $\\operatorname{enc}_{n+1}(b,y)=b2^n+\\operatorname{enc}_n(y)$. By the induction hypothesis, the tail index ranges bijectively over $\\{0,\\ldots,2^n-1\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $b=0$, the resulting indices are exactly $0,\\ldots,2^n-1$. If $b=1$, they are exactly $2^n,\\ldots,2^{n+1}-1$. The two intervals are disjoint and their union is the full target, so equality of two encoded indices forces the first bits to agree and every target index is attained. For either fixed first bit, injectivity and surjectivity of the tail encoding give the corresponding claims for the remaining word.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], the base case and induction step prove bijectivity for all $n\\ge0$. A permutation $\\sigma$ of the bit positions is a bijection on words, with inverse the permutation $\\sigma^{-1}$; composing it with the basis labeling in [F2] therefore permutes the basis [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "F2",
+            "F3",
+            "F4",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 1.1 proves the n=0 singleton-domain case directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The all-zero word maps to zero by the encoding formula; n=0 is covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: At n=1 the induction formula gives the two target indices 0 and 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The induction step handles leading zero bits and the empty-word base case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qc-partial-trace-characterization-and-basis-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-trace-pairing-nondegenerate",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex vector space. If $D:V\\to V$ is linear\nand $\\operatorname{tr}(D\\circ A)=0$ for every linear map $A:V\\to V$, then $D=0$.\nEquivalently, the trace pairing $(D,A)\\mapsto\\operatorname{tr}(D\\circ A)$\nhas the property that its only first input pairing to zero with every second\ninput is $D=0$. This includes the zero space.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-matrix-of-a-composite-is-the-product",
+          "source_section": "Statement",
+          "quote": "Let $T:U\\to V$ and $S:V\\to W$ be linear, with ordered bases $\\mathcal B$ of\n$U$, $\\mathcal C$ of $V$, and $\\mathcal D$ of $W$. Then\n\n$$[S\\circ T]_{\\mathcal B}^{\\mathcal D}=[S]_{\\mathcal C}^{\\mathcal D}[T]_{\\mathcal B}^{\\mathcal C}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F8], choose ordered orthonormal bases $(e_i)_{i<a}$ of $H_A$ and $(f_j)_{j<b}$ of $H_B$, and set $S=\\operatorname{Tr}_B(R)$. For any $T\\in\\operatorname{End}(H_A)$, [F1], [F6] and [F7] give $\\operatorname{tr}(S\\circ T)=\\sum_{i,i'<a}\\sum_{j<b} R_{(i,j),(i',j)}T_{i'i}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the product basis, [F2] gives the matrix entry $T_{i'i}\\delta_{j'j}$ of $T\\otimes I$. By [F6] and [F7], $\\operatorname{tr}(R\\circ(T\\otimes I))=\\sum_{i,j}\\sum_{i',j'}R_{(i,j),(i',j')}T_{i'i}\\delta_{j'j}=\\sum_{i,i',j}R_{(i,j),(i',j)}T_{i'i}$, which is the same finite sum as in step 1.1. Thus $S$ satisfies the displayed trace identity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $S'$ is any other map value at $R$ satisfying the identity for every $T$, then $\\operatorname{tr}((S-S')\\circ T)=0$ for every $T$. Apply [F5] on $H_A$ to obtain $S=S'$. Since this holds for every $R$, the trace identity characterizes the partial-trace map uniquely.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Repeat steps 1.1 and 2.1 with any other ordered orthonormal basis of $H_B$. The right-hand side is the trace of the same endomorphism $R\\circ(T\\otimes I_{H_B})$, and [F4] makes that trace basis-independent. Step 3.1 then forces the resulting partial-trace operator to equal $S$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $H_B=0$, the product space and $R$ are zero, [F1] is the empty sum, and both sides of the trace identity are $0$. If $H_A=0$, the input and output endomorphism spaces contain only the zero map, so the same identity and uniqueness hold.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 5.1 verifies both H_A=0 and H_B=0, including empty sums and zero traces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The two zero-dimensional factor cases are checked in step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: The trace-pairing argument and finite-basis expansion apply when either factor has dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The theorem proves uniqueness and basis independence and explicitly handles zero factors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qc-tensor-map-composition-and-adjoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On an elementary tensor $\\bigotimes_{k<n}x_k$, the left side of the composition identity equals $\\bigotimes_{k<n}S_k(T_kx_k)$ by [F1], which is the value of the right side. Since elementary tensors span by [F2], the two linear maps are equal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F6], choose orthonormal bases for the finite factor spaces. For elementary tensors $x=\\bigotimes_{k<n}x_k$ and $y=\\bigotimes_{k<n}y_k$, the product pairing in [F2] and the factor adjoint identities in [F4] give $\\langle(\\bigotimes_kT_k)x,y\\rangle =\\prod_k\\langle T_kx_k,y_k\\rangle =\\prod_k\\langle x_k,T_k^*y_k\\rangle =\\langle x,\\bigotimes_kT_k^*y_k\\rangle$. The pairing is extended using the first-linear convention [F5].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The tensor map $\\bigotimes_{k<n}I_{H_k}$ fixes every elementary tensor by [F1]. The identity map does too; spanning in [F2] gives equality. If $n=0$, both maps are the identity on $\\mathbb C$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Sesquilinearity and spanning extend the identity in step 1.2 to all $x,y$. By existence and uniqueness in [F3] and the defining condition [F4], $(\\bigotimes_kT_k)^*=\\bigotimes_kT_k^*$. For $n=0$ both sides are the identity on $\\mathbb C$; zero-dimensional factors are covered because the product bases may be empty.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Statement and proof identify the empty tensor map as I_C and its adjoint as itself."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 3.1 notes that empty product bases cover zero-dimensional factors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: The defining action gives the one-factor composition, identity, and adjoint laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The proof uses finite product bases and explicitly includes zero-dimensional factors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qc-wire-permutation-is-unitary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $P_\\sigma$ sends each product-basis vector to exactly one product-basis vector, and the inverse permutation sends it back. Thus the basis assignment extends to a bijective linear map whose inverse is $P_{\\sigma^{-1}}$. The empty list gives the identity on $\\mathbb C$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write an arbitrary vector as $\\sum_\\alpha c_\\alpha e_\\alpha$ in the orthonormal product basis from [F2]. Its squared norm is $\\sum_\\alpha|c_\\alpha|^2$. The map permutes that basis, so its image has the same coefficients in a permuted orthonormal basis and the same squared norm. Thus $P_\\sigma$ is a linear isometry. If a factor is zero-dimensional, both tensor spaces are zero and the unique map between them is bijective and isometric.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "When the source and target are the same register, steps 1.1 and 2.1 give an invertible linear isometry of that space, hence a unitary operator by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Definition and proof make the empty permutation the identity on C."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: Step 2.1 handles a zero-dimensional factor: both tensor spaces are zero and the unique map is bijective and isometric."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: For one factor, the only permutation acts as the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The proof treats empty lists and zero-dimensional factors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qc-partial-trace-positive-and-trace-preserving": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-partial-trace-characterization-and-basis-independence",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional complex inner-product spaces $H_A,H_B$, the partial\ntrace $\\operatorname{Tr}_B:\\operatorname{End}(H_A\\otimes H_B)\\to\n\\operatorname{End}(H_A)$ is the unique linear map satisfying\n\n$$\\operatorname{tr}\\bigl((\\operatorname{Tr}_B R)\\circ T\\bigr)=\\operatorname{tr}\\bigl(R\\circ(T\\otimes I_{H_B})\\bigr)\\quad\\text{for every }R\\in\\operatorname{End}(H_A\\otimes H_B)\\text{ and }T\\in\\operatorname{End}(H_A).$$\n\nHere $I_{H_B}$ is the identity map $y\\mapsto y$ on $H_B$; $\\operatorname{End}$\nis the notation defined in [[def-qc-partial-trace]].\n\nIts coordinate formula is independent of the chosen ordered orthonormal basis\nof $H_B$. The assertion includes zero-dimensional factors.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-composition-and-identity-linear-maps",
+          "source_section": "Statement",
+          "quote": "The identity map of a vector space is linear. If $T:U\\to V$ and $S:V\\to W$\nare linear maps over the same field, then $S\\circ T:U\\to W$ is linear.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F10], choose ordered orthonormal bases $(e_i)$ and $(f_j)$ for $H_A,H_B$, and write $S=\\operatorname{Tr}_B(R)$. Since $R$ is self-adjoint by [F1], [F2] gives $R_{(i,j),(i',j)}=\\overline{R_{(i',j),(i,j)}}$. Summing over $j$ in [F3] yields $S_{ii'}=\\overline{S_{i'i}}$, so $S$ is self-adjoint. The product basis is orthonormal by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F10",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x=\\sum_i x_i e_i$, [F3] and [F6] give $\\langle Sx,x\\rangle=\\sum_{i,i',j}R_{(i,j),(i',j)}x_{i'}\\overline{x_i}$. For each fixed $j$, the coefficient of $e_i\\otimes f_j$ in $R(x\\otimes f_j)$ is $\\sum_{i'}R_{(i,j),(i',j)}x_{i'}$; orthonormality [F5] therefore gives $\\langle R(x\\otimes f_j),x\\otimes f_j\\rangle=\\sum_{i,i'}R_{(i,j),(i',j)}x_{i'}\\overline{x_i}$. Summing these equalities over $j$ yields $\\langle Sx,x\\rangle=\\sum_j\\langle R(x\\otimes f_j),x\\otimes f_j\\rangle$. Each summand is nonnegative by [F1], hence $\\langle Sx,x\\rangle\\ge0$ for every $x$. Together with step 1.1, the definition in [F1] gives $S\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In [F4] set $T=I_{H_A}$. By [F7], $I_{H_A}\\otimes I_{H_B}$ fixes every elementary tensor; these span by the product-basis result [F5], so it is $I_{H_A\\otimes H_B}$. Therefore [F4] gives $\\operatorname{tr}(S\\circ I_{H_A})=\\operatorname{tr}(R\\circ I_{H_A\\otimes H_B})$. By [F8] the composites are $S$ and $R$, so their traces are equal by [F9]. Empty bases give empty traces $0$ on zero-dimensional factors, so the equality holds there as well.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Proof: The Statement and proof explicitly include zero-dimensional factors and their empty traces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: If H_A or H_B is zero, the partial trace is the zero operator and both traces are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof: The coordinate positivity and trace calculations hold for one-dimensional factors with one basis index."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The proof covers zero input/output spaces and the zero non-negative operator."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "ex-qc-register-endian-partial-trace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-dirac-notation-coordinate-identity",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces with ordered\northonormal bases $E=(e_j)_{j<n}$ and $F=(f_i)_{i<m}$. Let $T:H\\to K$ be\nlinear ([[def-linear-map]]), and write $T_{ij}$ for the $(i,j)$ entry of its\nmatrix in these bases.\nThen, for every $z\\in H$,\n\n$$Tz=\\sum_{j<n}\\sum_{i<m}T_{ij}\\langle z,e_j\\rangle_{H,\\mathrm{root}}f_i,\n\\qquad T=\\sum_{j<n}\\sum_{i<m}T_{ij}|f_i\\rangle\\langle e_j|.$$\n\nFor $x\\in K$ and $y\\in H$, the rank-one map $|x\\rangle\\langle y|$ has\ncoordinate matrix $[x]_F[y]_E^\\dagger$, where $M^\\dagger=\\overline M^{\\mathsf T}$.\nIts amplitude satisfies\n$\\langle x|T|y\\rangle_D=\\langle Ty,x\\rangle_{K,\\mathrm{root}}$.\nAll sums are empty when an index dimension is zero, and the identities include\nthose cases.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-partial-trace-characterization-and-basis-independence",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional complex inner-product spaces $H_A,H_B$, the partial\ntrace $\\operatorname{Tr}_B:\\operatorname{End}(H_A\\otimes H_B)\\to\n\\operatorname{End}(H_A)$ is the unique linear map satisfying\n\n$$\\operatorname{tr}\\bigl((\\operatorname{Tr}_B R)\\circ T\\bigr)=\\operatorname{tr}\\bigl(R\\circ(T\\otimes I_{H_B})\\bigr)\\quad\\text{for every }R\\in\\operatorname{End}(H_A\\otimes H_B)\\text{ and }T\\in\\operatorname{End}(H_A).$$\n\nHere $I_{H_B}$ is the identity map $y\\mapsto y$ on $H_B$; $\\operatorname{End}$\nis the notation defined in [[def-qc-partial-trace]].\n\nIts coordinate formula is independent of the chosen ordered orthonormal basis\nof $H_B$. The assertion includes zero-dimensional factors.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\operatorname{enc}_3(1,0,1)=1\\cdot2^2+0\\cdot2^1+1\\cdot2^0=5$. By [F2], $5$ is one of the eight three-bit register slots.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the ordered product basis, $|\\Phi^+\\rangle$ has coordinate column $v=(1,0,0,1)^{\\mathsf T}/\\sqrt2$. Orthonormality [F3] gives $\\langle\\Phi^+,\\Phi^+\\rangle=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4]–[F5], the coordinate matrix of $R$ is $vv^\\dagger$. Its only nonzero entries are $1/2$ at $(00,00),(00,11),(11,00),(11,11)$, so it is the displayed matrix.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6] and this matrix, $(\\operatorname{Tr}_B R)_{00}=R_{00,00}+R_{01,01}=1/2$ and $(\\operatorname{Tr}_B R)_{01}=R_{00,10}+R_{01,11}=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The other entries are $(\\operatorname{Tr}_B R)_{10}=R_{10,00}+R_{11,01}=0$ and $(\\operatorname{Tr}_B R)_{11}=R_{10,10}+R_{11,11}=1/2$. Hence $\\operatorname{Tr}_B R=\\operatorname{diag}(1/2,1/2)$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F7], this contraction is the intrinsic partial trace, and [F8] gives the output trace $1/2+1/2=1$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item fixes a positive-dimensional register and a length-three word; it has no empty-input parameter."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof: The displayed Bell-projector matrix has zero off-diagonal output entries, all computed explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This worked example fixes two qubits and a three-bit word; it has no one-dimensional factor parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof: The item verifies a sparse rank-one matrix and its exact contraction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no ordered interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Proof: The argument uses only fixed finite data and explicitly available finite bases; it invokes no arbitrary-index choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    }
+  }
+}

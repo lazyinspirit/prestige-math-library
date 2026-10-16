@@ -1,0 +1,1376 @@
+
+
+=== PDF PAGE 1 ===
+arXiv:1010.4458v2  [quant-ph]  14 Nov 2010
+Variable time amplitude ampliﬁcation and a faster quantum
+algorithm for solving systems of linear equations
+Andris Ambainis∗
+Abstract
+We present two new quantum algorithms. Our ﬁrst algorithm is a generalization of amplitude
+ampliﬁcation to the case when parts of the quantum algorithm that is being ampliﬁed stop at
+diﬀerent times.
+Our second algorithm uses the ﬁrst algorithm to improve the running time of Harrow et al.
+algorithm for solving systems of linear equations from O(κ2 log N) to O(κ log3 κ log N) where κ
+is the condition number of the system of equations.
+1
+Introduction
+Solving large systems of linear equations is a very common problem in scientiﬁc computing, with
+many applications. Until recently, it was thought that quantum algorithms cannot achieve a sub-
+stantial speedup for this problem, because the coeﬃcient matrix A is of size N 2 and it may be
+necessary to access all or most of coeﬃcients in A to compute x - which requires time Ω(N 2).
+Recently, Harrow, Hassidim and Lloyd [5] discovered a surprising quantum algorithm that allows
+to solve systems of linear equations in time O(log N) - in an unconventional sense. Namely, the
+algorithm of [5] generates the quantum state |x⟩= PN
+i=1 xi|i⟩with the coeﬃcients xi being equal to
+the values of variables in the solution x = (x1, x2, . . . , xN) of the system Ax = b.
+The Harrow-Hassidim-Lloyd algorithm among the most interesting new results in quantum al-
+gorithms, because systems of linear equations have many applications in all ﬁelds of science. For
+example, this algorithm has been used to design quantum algorithms for solving diﬀerential equations
+[7, 3].
+Besides N, the running time of the algorithms for systems of linear equations (both classical
+and quantum algorithms) depends on another parameter κ, the condition number of matrix A. The
+condition number is deﬁned as the ratio between the largest and the smallest singular value of A:
+κ = maxi,j
+|µi|
+|µj| where µi are the singular values of A.
+In the case of sparse classical matrices, the best classical algorithm runs in time O(√κN) [8] while
+the HHL quantum algorithm runs in time O(κ2 log N), with an exponentially better dependence on
+N but worse-than-classical dependence on κ.
+In this paper, we present a better quantum algorithm, with the running time O(κ log3 κ log N).
+To construct our algorithm, we introduce a new tool, the variable-time quantum amplitude ampliﬁca-
+tion which allows to amplify the success probability of quantum algorithms in which some branches
+of the computation stop earlier than other branches.
+The conventional amplitude ampliﬁcation
+[4] would wait for all branches to stop - possibly resulting in a substantial ineﬃciency. Our new
+algorithm ampliﬁes the success probability in multiple stages and takes advantage of the parts of
+∗Faculty of Computing, University of Latvia, Raina bulv. 19, Riga, LV-1586, Latvia, ambainis@lu.lv. Supported
+by ESF project 1DP/1.1.1.2.0/09/APIA/VIAA/044, FP7 Marie Curie Grant PIRG02-GA-2007-224886 and FP7 FET-
+Open project QCS.
+1
+
+
+=== PDF PAGE 2 ===
+computation which stop earlier. We expect that this new method will be useful for building other
+quantum algorithms.
+The dependence of our quantum algorithm for solving systems of linear equations on κ is almost
+optimal. Harrow et al. [5] show that, unless BQP = PSPACE, time of Ω(κ1−o(1)) is necessary for
+generating the state |x⟩that describes the solution of the system.
+2
+Overview of main results
+2.1
+Variable time amplitude ampliﬁcation
+Informally, our result is as follows. Consider a quantum algorithm A which may stop at one of
+several times t1, . . . , tm. (In the case of systems of linear equations, these times corresponding to m
+runs of eigenvalue estimation with increasing precision and increasing number of steps.) To indicate
+the outcome, A has an extra register O with 3 possible values: 0, 1 and 2. 1 indicates the outcome
+that should be ampliﬁed. 0 indicates that the computation has stopped at this branch but did not
+the desired outcome 1. 2 indicates that the computation at this branch has not stopped yet.
+Let pi be the probability of the algorithm stopping at time ti (with either the outcome 0 or
+outcome 1). The average stopping time of A (the l2 average) is
+Tav =
+sX
+i
+pit2
+i .
+Tmax denotes the maximum possible running time of the algorithm (which is equal to tm). Let
+αgood|1⟩O|ψgood⟩+ αbad|0⟩O|ψbad⟩
+be the algorithm’s output state after all branches of the computation have stopped. Our goal is to
+obtain |ψgood⟩with a high probability. Let psucc = |αgood|2 be the probability of obtaining this state
+via algorithm A.
+Our main result is
+Theorem 1 We can construct a quantum algorithm A′ invoking A several times, for total time
+O
+
+Tmax
+p
+log Tmax +
+Tav
+√psucc
+log1.5 Tmax
+
+that produces a state α|1⟩⊗|ψgood⟩+ β|0⟩⊗|ψ′⟩with probability |α|2 ≥1/2 as the output1
+In contrast, the usual amplitude ampliﬁcation [4] would run for time O( Tmax
+√psucc ). Our algorithm
+A′ provides an improvement, whenever Tav is substantially smaller than Tmax. By repeating A′
+O(log 1
+ǫ) times, we can obtain |ψgood⟩with a probability at least 1 −ǫ.
+Our algorithm A′ is optimal, up to the factor of log Tmax.
+If the algorithm A has just one
+stopping time T = Tav = Tmax, then amplitude ampliﬁcation cannot be performed with fewer than
+O(
+T
+√psucc ) steps. Thus, the term of
+Tav
+√psucc is necessary. The term Tmax is also necessary because, in
+some branch of computation, A can run for Tmax steps.
+More details are given in section 3. First, in subsection 3.1, we give a precise deﬁnition of how a
+quantum algorithm could stop at diﬀerent times. Then, in subsections 3.2 and 3.3, we give a proof
+of Theorem 1.
+1The ﬁrst bit of the output state indicates whether we have the desired state |ψgood⟩or not. Since |α|2 ≥1/2, we
+get |ψgood⟩with probability at least 1/2.
+2
+
+
+=== PDF PAGE 3 ===
+2.2
+Systems of linear equations
+We consider solving a system of linear equations Ax = b where A = (aij)i,j∈[N], x = (xi)i∈[N],
+b = (bi)i∈[N]. We assume that A is Hermitian. As shown in [5], this assumption is without the loss
+of generality.
+Let |vi⟩be the eigenvectors of A and λi be their eigenvalues. Similarly to [5], we assume that
+all λi satisfy 1
+κ ≤λi ≤1 for some known κ. We can then transform the state |b⟩= Pn
+i=1 bi|i⟩into
+|x⟩= Pn
+i=1 xi|i⟩as follows:
+1. If, in terms of eigenvectors |vi⟩of A, we have |b⟩= P
+i ci|vi⟩, then |x⟩= P
+i
+ci
+λi |vi⟩.
+2. By eigenvalue estimation, we can create the state |b′⟩= P
+i ci|vi⟩|˜λi⟩where ˜λi are the estimates
+of the true eigenvalues.
+3. We then create the state
+|b′′⟩=
+X
+i
+ci|vi⟩|˜λi⟩
+ 
+1
+κ˜λi
+|1⟩+
+r
+1 −
+1
+κ2˜λ2 |0⟩
+!
+.
+(1)
+Conditional on the last bit being 1, the rest of state is P
+i
+ci
+˜λi |vi⟩|˜λi⟩which can be turned into
+an approximation of |x⟩by running eigenvalue estimation in reverse and uncomputing ˜λi.
+4. We then amplify the part of state which has the last qubit equal to 1 (using amplitude ampli-
+ﬁcation) and obtain a good approximation of |x⟩with a high probability.
+Theorem 2 [5] Let C be such that the evolution of the Hamiltonian H for time T can be simulated
+in time C min(T, 1). Then, we can generate |ψ′⟩satisfying ∥ψ −ψ′∥≤ǫ in time ( Cκ2
+ǫ ).
+The main term in the running time, κ2 is generated as a product of two κ’s. First, for ∥ψ−ψ′∥≤ǫ,
+it suﬃce that the estimates ˜λi satisfy |λi −˜λi| = O(ǫ˜λi). Since λi = Ω(1/κ), this means |λi −˜λi| =
+O( ǫ
+κ). To estimate λi within error O( ǫ
+κ), we need to run H for time O( κ
+ǫ ). Second, for amplitude
+ampliﬁcation, we may need to repeat the algorithm generating |b′′⟩O(κ) times - resulting in the
+total running time O(κ2/ǫ).
+For eigenvalue estimation, the worst case is when all of most of λi are small (of order Θ(1/κ)).
+Then, |λi −˜λi| = Θ( ǫ
+κ). and eigenvalue estimation with the right precision indeed requires time
+Θ( κ
+ǫ ).
+For amplitude ampliﬁcation, the worst case is if most or all of λi are large (constant). Then, the
+coeﬃcients
+1
+κ˜λi can be of order Θ(1/κ) and Θ(κ) repetitions are required for amplitude ampliﬁcation.
+We now observe that the two Θ(κ)’s appear in the opposite cases. One of them appears when
+λi is small (λi ≈κ) but the other appears when λi is large (λi ≈1).
+If all eigenvalues are of roughly similar magnitude (e.g., λ ∈[a, 2a] for some a), the running time
+becomes O(κ/ǫ) because we can do eigenvalue estimation in time to error ǫa in O(1/aǫ) and, for
+eigenvalue ampliﬁcation, it suﬃces to repeat the generation of |b′′⟩O(κa) times (since the amplitude
+of 1 in the last qubit of |b′⟩is at least
+1
+κa for every vi). Thus, the running time is
+O
+ 1
+aǫ
+
+· O(κa) = O
+κ
+ǫ
+
+.
+The problem is to achieve a similar running time in the general case (when the eigenvalues λi can
+range from κ to 1).
+To do that, we ﬁrst design a version of eigenvalue estimation in which some branches of com-
+putation (corresponding to eigenvectors with larger eigenvalues λi) terminate earlier than others.
+Namely, we start by running it for O(1) steps. If we see that the estimate ˜λi for the eigenvalue is
+3
+
+
+=== PDF PAGE 4 ===
+such that the allowed error O(ǫ˜λi) is more than the expected error of the current run of eigenvalue
+estimation, we stop.
+Otherwise, we run eigenvalue estimation again, doubling its running time.
+This doubles the precision achieved by eigenvalue estimation. We continue this until the precision
+of current estimate becomes better than the allowed error of O(ǫ˜λi).
+This gives a quantum algorithm in which diﬀerent branches of computation stop at diﬀerent
+times. We apply our variable-time amplitude ampliﬁcation to this quantum algorithm. This gives
+us
+Theorem 3 Let C be such that the evolution of the Hamiltonian H for time T can be simulated in
+time C min(T, 1). Then, we can generate |ψ′⟩satisfying ∥ψ −ψ′∥≤ǫ in time
+O
+ 
+Cκ log3 κ
+ǫ
+ǫ3
+log2 1
+ǫ
+!
+.
+We give more details in section 4.
+3
+Variable-time amplitude ampliﬁcation
+3.1
+Model
+How can a quantum algorithm have diﬀerent branches of computation stopping at diﬀerent times?
+We start by giving a precise deﬁnition of that.
+We require the state space of A to be of the form H = Ho⊗Hc be the Hilbert space of A, consisting
+of the 0-1-2 valued outcome register Ho and the rest of the Hilbert space Hc. Let |ψ1⟩, . . . , |ψm⟩be
+the states of A at times t1, . . . , tm. We insist on the following consistency requirements.
+1. For each i ∈{1, . . . , m}, the description of the algorithm must deﬁne a subspace Hi of Ho in
+which the computation has stopped. Those subspaces must satisfy
+H1 ⊆H2 . . . ⊆Hm = Hc.
+2. The state |ψi⟩can be expressed as
+|ψi⟩= αi,0|0⟩⊗|ψi,0⟩+ αi,1|1⟩⊗|ψi,1⟩+ αi,2|2⟩⊗|ψi,2⟩,
+with |ψi,0⟩∈Hi, |ψi,1⟩∈Hi and |ψi,2⟩∈Ho ∩(Hi)⊥. (When i = m, we have |ψm,0⟩= |ψbad⟩,
+|ψm,1⟩= |ψgood⟩, |ψm,2⟩= −→0 .)
+3. We must have
+PHi|ψi+1,0⟩= |ψi,0⟩and PHi|ψi+1,1⟩= |ψi,1⟩.
+That is, the part of the state where the computation stopped at time ti should not change
+after that.
+The success probability of A is psucc = |αm,1|2. We also deﬁne psucc,i = |αi,1|2, the probability of A
+succeeding before time ti. The probability of A stopping at time ti or earlier is
+pstop,≤i = |αi,0|2 + |αi,1|2.
+The probability of A stopping at exactly time ti is pstop,1 = pstop,≤1 for i = 1 and pstop,i =
+pstop,≤i −pstop,≤i−1 for i > 1. We will also use the probability of A stopping later than time ti,
+deﬁned as
+pstop,>i = |αi,2|2 = 1 −pstop,≤i.
+4
+
+
+=== PDF PAGE 5 ===
+The average stopping time of A (the l2 average) is
+Tav =
+sX
+i
+pit2
+i .
+The maximum stopping time of A is Tmax = tm. Our goal is to amplify the success probability to
+Ω(1), by running A for time O
+
+Tmax log0.5 Tmax +
+Tav
+√psucc log1.5 Tmax
+
+.
+3.2
+Tools
+Our variable-time amplitude ampliﬁcation uses two subroutines. Thr ﬁrst is a result by Aaronson
+and Ambainis [1] who gave a tighter analysis of the usual amplitude ampliﬁcation algorithm [4].
+We say that an algorithm A produces a quantum state |ψ⟩with probability p if the following is
+true:
+• The algorithm has two output registers R and S (and, possibly some more auxiliary registers);
+• Measuring R gives 1 with probability p and, conditional on this measurement result, the S
+register is in state |ψ⟩.
+Lemma 1 [1] Let A be a quantum algorithm that outputs a state |ψ⟩with probability2 δ ≤ǫ where
+ǫ is known. Furthermore, let
+m ≤
+π
+4 arcsin√ǫ −1
+2.
+(2)
+Then, there is an algorithm A′ which uses 2m + 1 calls to A and A−1 and outputs a state |ψ⟩with
+probability
+δnew ≥
+
+1 −(2m + 1)2
+3
+δ
+
+(2m + 1)2δ.
+(3)
+The algorithm A′ is just the standard amplitude ampliﬁcation [4] but its analysis is tighter.
+According to the usual analysis, amplitude ampliﬁcation increases the success probability from δ
+to Ω(1) in 2m + 1 = O( 1
+√
+δ) repetitions. In other words, 2m + 1 repetitions increase the success
+probability Ω((2m + 1)2) times. Lemma 1 achieves an increase of almost (2m + 1)2 times, without
+the big-Ωfactor.
+This is useful if we have an algorithm with k levels of amplitude ampliﬁcation nested one inside
+another. Then, with the usual amplitude ampliﬁcation, a big-Ωconstant of c would result in a ck
+factor in the running time. Using Lemma 1 avoids that.
+Our second subroutine is a version of amplitude estimation from [2].
+Theorem 4 [4, 2] There is a procedure Estimate(A, c, p, k) which, given a constant c, 0 < c ≤1
+and a quantum algorithm A (with the promise that the probability ǫ that the algorithm A outputs
+1 is either 0 or at least a given value p) outputs an estimate ˜ǫ of the probability ǫ such that, with
+probability at least 1 −
+1
+2k , we have
+(i) |ǫ −˜ǫ| < c˜ǫ if ǫ ≥p;
+(ii) ˜ǫ = 0 if ǫ = 0.
+The procedure Estimate(A, c, p, k) uses the expected number of
+Θ
+ 
+k
+
+1 + log log 1
+p
+ s
+1
+max(ǫ, p)
+!
+evaluations of A.
+2[1] requires the probability to be exactly ǫ but the proof works without changes if the probability is less than the
+given ǫ.
+5
+
+
+=== PDF PAGE 6 ===
+3.3
+The state generation algorithm
+We now describe our state generation algorithm. Without the loss of generality, we assume that the
+stopping times of A are ti = 2i for i ∈{0, . . . , m} for some m. We present a sequence of algorithms
+Ai, with the algorithm Ai generating an approximation of the state
+|ψ′
+i⟩=
+αi,1
+p
+|αi,1|2 + |αi,2|2 |1⟩⊗|ψi,1⟩+
+αi,2
+p
+|αi,1|2 + |αi,2|2 |2⟩⊗|ψi,2⟩,
+in the following sense: the algorithm Ai outputs a state
+|ψ′′
+i ⟩= √ri|ψ′
+i⟩+
+√
+1 −ri|0⟩⊗|φi⟩
+(4)
+for some |φi⟩and some ri satisfying ri ≥1/9m. (To avoid the problem with nested amplitude
+ampliﬁcation described in section 3.2, we only require ri ≥1/9m instead of ri = Ω(1).)
+The algorithm Ai uses Ai−1 as the subroutine. It is deﬁned in two steps. First, we deﬁne an
+auxiliary algorithm Bi.
+1. If i = 0, Bi runs A for 1 step and outputs the output state of A.
+2. If i > 0, Bi runs Ai−1 which outputs |ψ′′
+i−1⟩. Bi then executes A for time steps from 2i−1 to
+2i on the parts of the state |ψ′′
+i−1⟩where the outcome register is 2 (the computation is not
+ﬁnished).
+Algorithm 1: Algorithm Bi
+Let pi = Estimate(Bi, c, 1
+κ, log m + 5). Then, Ai is as follows.
+1. If p >
+1
+9m, Ai = Bi.
+2. If p ≤
+1
+9m, Ai = Amplify(Bi, k) for the smallest k satisfying
+1
+9m ≤(2k + 1)2p ≤1
+m.
+Algorithm 2: Algorithm Ai
+The overall algorithm A′ is given as Algorithm 3.
+1. Run Estimate to obtain p0 = Estimate(B0, c, 1
+κ, log m + 5).
+2. For each i = 1, 2, . . ., m:
+(a) Use pi−1 to deﬁne Ai and Bi.
+(b) If i < m, run Estimate to obtain pi = Estimate(Bi, c, 1
+κ, log m + 5).
+Amplify Am to the success probability at least 1/2 and output the output state of the ampliﬁed
+Am.
+Algorithm 3: Algorithm A′
+We now analyze the running times of algorithms Ai. Let Ti denote the running time of Ai. Let
+ri be as deﬁned in equation (4) and let r′
+i be a similar quantity for the output state of Bi. Then, we
+have
+6
+
+
+=== PDF PAGE 7 ===
+Lemma 2
+Ti ≤
+
+1 +
+1
+3m −1
+ √ri
+p
+r′
+i
+ Ti−1 + 2i−1
+.
+(5)
+Proof: The running time of Bi is Ti−1 + 2i−1. If Ai = Bi, then the running time of Ai is the same
+and, also ri = r′
+i (because the two algorithms output the same state). If Ai is an ampliﬁed version
+of Bi, then:
+1. The running time of Ai is (2k + 1)(Ti−1 + 2i−1).
+2. By Lemma 1, we have ri ≥(1 −
+1
+3m)(2k + 1)2r′
+i which implies
+(2k + 1) ≤(1 +
+1
+3m −1)
+√ri
+p
+r′
+i
+.
+Applying (5) recursively, we get
+Tm ≤
+
+1 +
+1
+3m −1
+m
+m
+X
+i=1
+
+
+m
+Y
+j=i
+√ri
+p
+r′
+i
+
+2i−1.
+(6)
+The ﬁrst multiplier,
+
+1 +
+1
+3m−1
+m
+can be upper-bounded by a constant. We now bound the product
+Qm
+j=i
+√ri
+√
+r′
+i .
+Lemma 3
+m
+Y
+j=i
+√ri
+p
+r′
+i
+≤3
+
+1 +
+rpstop,>i
+psucc
+
+.
+Proof: We consider the quantities
+oj = |⟨1 ⊗ψi,1|ψ′′
+i ⟩|2
+for j = i, i + 1, . . . , m. For j = i, we have
+oi = ri|⟨1 ⊗ψi,1|ψ′
+i⟩|2 = ri
+|αi,1|2
+|αi,1|2 + |αi,2|2 = ri
+psucc,i
+psucc,i + pstop,>i
+.
+(7)
+For j > i, we have oj = oj−1 ri
+r′
+i because ampliﬁcation increases the probability of the ”good” part
+of the state (which includes |1 ⊗ψi,1⟩) ri
+r′
+i times. Finally, we have
+om = rm
+psucc,i
+psucc
+which follows similarly to (7). Putting all of this together, we have
+m
+Y
+j=i
+ri
+r′
+i
+= om
+oi
+= rm
+ri
+· psucc,i + pstop,>i
+psucc,i
+.
+By taking the square roots from both sides and observing that rm
+ri is at most 9 (because rm ≤
+1
+m
+and ri ≥
+1
+9m), we get
+m
+Y
+j=i
+√ri
+p
+r′
+i
+≤3
+r
+1 + pstop,>i
+psucc
+.
+7
+
+
+=== PDF PAGE 8 ===
+The Lemma follows by using √1 + x ≤1 + √x.
+By applying Lemma 3 to each term in (6), we get
+Tm ≤C
+m
+X
+i=1
+
+1 +
+rpstop,>i
+psucc
+
+2i−1 = C
+m
+X
+i=1
+2i−1 + C
+Pm
+i=1 2i−1√pstop,>i
+√psucc
+.
+The ﬁrst sum can be upper bounded by 2i = O(Tmax). For the second sum, in its numerator, we
+have
+m
+X
+i=1
+2i−1√pstop,>i =
+m
+X
+i=1
+q
+22i−2pstop,>i ≤mTav = Tav log Tmax
+where the inequality follows because each term
+p
+22i−2pstop,>i is at most Tav. Thus, the algorithm
+Am runs in time
+O
+
+Tmax +
+Tav
+√psucc
+log Tmax
+
+.
+The algorithm A′ ampliﬁes Am from a success probability of rm ≥
+1
+9m to a success probability Ω(1).
+This increases the running time by a factor of O(√m) = O(√log Tmax).
+4
+Faster algorithm for solving systems of linear equations
+4.1
+Unique-answer eigenvalue estimation
+For our algorithm, we need a version of eigenvalue estimation that is guaranteed to output exactly
+the same estimate with a high probability.
+The standard version of eigenvalue estimation [6, p.
+118] runs U = e−iH up to 2n times and, if the input is an eigenstate |ψ⟩: H|ψ⟩= λ|ψ⟩, outputs
+x ∈{0, π
+2n , 2π
+2n , . . . , (2n−1)π
+2n
+} with probability
+p(x) =
+1
+22n
+sin2 2n(λ −x)
+sin2(λ −x)
+(8)
+(equation (7.1.30) from [6]).
+We now consider an algorithm that runs the standard eigenvalue
+estimation kuniq times and takes the most frequent answer xmaj.
+Lemma 4 For kuniq = O( 1
+ǫ2 log 1
+ǫ), we have
+1. If |λ −x| ≤
+1−ǫ
+2n+1 , then Pr[xmaj = x] ≥1 −ǫ.
+2. If λ ∈[x + 1−ǫ
+2n+1 , x + 1+ǫ
+2n+1 ], then Pr[xmaj ∈{x, x + 1}] ≥1 −ǫ.
+Proof: In the ﬁrst case, (8) is at least (1 + ǫ) 4
+π2 for the correct x and less than
+4
+π2 for any other
+x. Repeating eigenvalue estimation O( 1
+ǫ2 ) times and taking the majority allows to distinguish the
+correct x with a ﬁxed probability (say 3/4) and repeating it O( 1
+ǫ2 log 1
+ǫ) times allows to determine
+the correct x with a probability at least 1 −ǫ.
+In the second case, the two values x and x + 1 are output with probability at least (1 −ǫ) 4
+π2
+each. In contrast, for any other y = mπ
+2n , m ∈{0, 1, . . ., 2n −1}, we have
+|y −λ| ≥1 −ǫ
+2n+1 π + 1
+2n π = 3 −ǫ
+2n+1 π.
+This implies
+p(y) ≤
+1
+22n
+1
+sin2 (3−ǫ)
+2n+1 π
+= (1 + o(1))
+4
+(3 −ǫ)2π2 .
+8
+
+
+=== PDF PAGE 9 ===
+Thus, there is a constant gap between p(x) or p(x + 1) and p(y) for any other y. In this case,
+taking majority of O(log 1
+ǫ) runs of eigenvalue estimation is suﬃcient to produce x or x + 1 with a
+probability at least 1 −ǫ.
+We refer to this algorithm as UniqueEst(H, 2n, ǫ).
+When we use UniqueEst as a subroutine in algorithm 5, we need the answer to be unique (as
+in the ﬁrst case) and not one of two high-probability answers (as in the second case). To deal with
+that, we will replace H with H + δπ
+2n I for a randomly chosen δ ∈[0, 1]. The eigenvalue becomes
+λ′ = λ + δπ
+2n and, with probability 1 −ǫ,
+λ′ ∈
+x −1−ǫ
+2
+2n
+π, x + 1−ǫ
+2
+2n
+π
+
+for some integer x. This allows to achieve the ﬁrst case for all eigenvalues, except a small random
+fraction of them.
+4.2
+Main algorithm
+We now show that Theorem 1 implies our main result, Theorem 3. We start by describing a variable
+running time Algorithm 4. This algorithm uses the following registers:
+• The input register I which holds the input state |x⟩(and is also used for the output state);
+• The outcome register O, with basis states |0⟩, |1⟩and |2⟩(as described in the setup for variable-
+time amplitude ampliﬁcation);
+• The step register S, with basis states |1⟩, |2⟩, . . ., |2m⟩(to prevent interference between various
+branches of computation).
+• The estimation register E, which is used for eigenvalue estimation (which is a subroutine for
+our algorithm).
+HI, HO, HS and HE denote the Hilbert spaces of the respective registers.
+From now on, we refer to ǫ appearing in Theorem 3 as ǫfinal. ǫ without a subscript is an error
+parameter for subroutines of algorithm 4 (which we will choose at the end of the proof so that the
+overall error in the output state is at most ǫfinal).
+Our main algorithm is Algorithm 5 which consists of applying variable-time amplitude ampliﬁ-
+cation to Algorithm 4.
+We claim that, conditional on the output register being |1⟩O, the output state of Algorithm 4 is
+close to
+|ψideal⟩=
+X
+i
+αi|vi⟩I ⊗
+ 1
+κλi
+|1⟩O ⊗|2ji⟩S
+
+.
+(10)
+Variable-time amplitude ampliﬁcation then generates a state that is close to
+|ψideal⟩
+∥ψideal∥. Fourier trans-
+form in the last step of algorithm 5 then eﬀectively erases the S register. Conditional on S being
+in |0⟩S after the Fourier transform, the algorithm’s output state is close to our desired output state
+|x⟩
+∥x∥, where
+|x⟩=
+X
+i
+αi|vi⟩I.
+Finally, performing Fourier transform and measuring produces |0⟩S with probability 1/m. Because
+of that, the success probability of algorithm 5 needs to be ampliﬁed. This adds a factor of O(√m)
+to the running time, if we would like to obtain the result state with probability Ω(1) and a factor of
+O(√m log 1
+ǫ) if we would like to obtain it with probability at least 1 −ǫ.
+9
+
+
+=== PDF PAGE 10 ===
+Input: parameters x1, . . . , xm ∈[0, 1], Hamiltonian H.
+1. Initialize O to |2⟩, S to |1⟩and E to |0⟩. Set j = 1.
+2. Let m = ⌈log2
+κ
+ǫ ⌉.
+3. Repeat until j > m:
+Stage j:
+(a) Let H′ = H + xjπ
+2j I. Using the registers I and S, run bf UniqueEst(H′, 2j, ǫ). Let λ′ be
+the estimate output by UniqueEst and let λ = λ′ −xjπ
+2j .
+(b) If ǫλ >
+1
+2j+1 , perform the transformation
+|2⟩O ⊗|1⟩S →1
+κλ|1⟩O ⊗|2j⟩S +
+s
+1 −
+1
+(κλ)2 |0⟩O ⊗|2j⟩S.
+(9)
+(c) Run UniqueEst in reverse, to erase the intermediate information.
+(d) Check if the register E is in the correct initial state |0⟩E. If not, apply |2⟩O ⊗|1⟩S →
+|0⟩O ⊗|2j + 1⟩S on the outcome register O.
+(e) If the outcome register O is in the state |2⟩, increase j by 1 and go to step 2.
+Algorithm 4: State generation algorithm
+Input: Hamiltonian H.
+1. Generate uniformly random x1, . . . , xm ∈[0, 1].
+2. Apply variable-time amplitude ampliﬁcation to Algorithm 4, with H and x1, . . . , xm as the
+input.
+3. Apply a transformation mapping |2j⟩S →|j⟩S to the S register. After that, apply Fourier
+transform Fm to the S register and measure. If the result is 0, output the state in the I
+register. Otherwise, stop without outputting a quantum state.
+Algorithm 5: Main algorithm
+Approximation guarantees. We now give a formal proof that the output state of Algorithm
+4 is close to the desired output state (10).
+Let |vi⟩be an eigenvector and λi be an eigenvalue. For each j, the unique-value eigenvalue
+estimation either outputs one estimate ˜λi,j or one of two estimates ˜λi,j and ˜λi,j −1
+2j with a high
+probability (at least 1 −ǫ). Let ji be the smallest j for which the estimate ˜λ = ˜λi,j satisﬁes the
+condition ǫ˜λ ≥
+1
+2j+1 in step 3b. We call vi and λi good if, for j = ji the unique-value eigenvalue
+estimation outputs one estimate ˜λi,j with a high probability. Otherwise, we call λi bad. For both
+good and bad λi, we denote ˜λi = ˜λi,ji.
+We claim that the part of ﬁnal state Algorithm 4 that has |1⟩in the output register O is close to
+|ψ′⟩=
+X
+i
+αi|vi⟩I ⊗
+ 1
+κ˜λi
+|1⟩O ⊗|2ji⟩S
+
+and |ψ′⟩is, in turn, close to the state |ψideal⟩deﬁned by equation (10).
+10
+
+
+=== PDF PAGE 11 ===
+The next two lemmas quantify these claims. Let
+δ =
+X
+i:λi bad
+|αi|2
+quantify the size of the part of the state |ψ′⟩that consists of bad eigenvectors.
+Lemma 5 Let |ψ⟩be the output state of Algorithm 4 and let P1 be the projection to the subspace
+where the outcome register O is in the state |1⟩. Then, we have
+∥P1|ψ⟩−|ψ′⟩∥≤((2m + 37)ǫ + 30δ)∥ψ′∥.
+Proof: In section 4.3.
+Lemma 6
+∥|ψ′⟩−|ψideal⟩∥≤
+2ǫ
+1 + 2ǫ∥ψideal∥.
+Proof: In section 4.3.
+When x1, . . . , xm ∈[0, 1] are chosen uniformly at random, the probability of any given vi being
+bad is of order O(ǫ). Thus, E[δ] = O(ǫ) and
+E∥P1|ψ⟩−|ψideal⟩∥= O(mǫ∥ψideal∥)
+with the expectation taken over the random choice of x1, . . . , xm ∈[0, 1].
+To achieve an error of at most ǫfinal, we choose ǫ = Θ(ǫfinal/m).
+Running time. We now bound the running time of Algorithm 4. We start with two lemmas
+bounding the average running time Tav and success probability pav.
+Lemma 7 Tav, the l2-average running time of Algorithm 4, is of the order
+O
+
+
+sX
+i
+|αi|222jik2
+uniq
+
+.
+(11)
+where kuniq is the quantity from Lemma 4.
+Proof: In section 4.4.
+Lemma 8 psucc, the success probability of Algorithm 4, is
+Ω
+ X
+i
+|αi|2 ǫ222ji
+κ2
+!
+.
+(12)
+Proof: In section 4.4.
+By dividing the two expressions above one by another, we get
+Corollary 1
+Tav
+√psucc
+= O
+κ
+ǫ kuniq
+
+.
+11
+
+
+=== PDF PAGE 12 ===
+By Theorem 1, the running time of algorithm 5 is
+O
+
+Tmax
+p
+log Tmax +
+Tav
+√psucc
+log1.5 Tmax
+
+.
+Since Tmax = O(2m) = O( κ
+ǫ ), we have Tmax ≤
+Tav
+√psucc and the running time is
+O
+
+Tav
+√psucc
+log1.5 Tmax
+
+= O
+κ
+ǫ kuniq log1.5 κ
+ǫ
+
+= O
+ mκ
+ǫfinal
+kuniq log1.5 κ
+ǫ
+
+,
+with the 2nd equality following from ǫ = Θ(ǫfinal/m). Since algorithm 5 needs to be repeated
+O(√m log
+1
+ǫfinal ) times, the overall running time is
+O
+m1.5κ
+ǫfinal
+kuniq log1.5 κ
+ǫ log
+1
+ǫfinal
+
+= O
+ 
+κ log3 κ
+ǫ
+ǫ3
+final
+log2
+1
+ǫfinal
+!
+,
+with the equality following from m = O(log κ
+ǫ ).
+4.3
+Proofs of Lemmas about the quality of output state
+Proof: [of Lemma 5] Let |vi⟩be an eigenstate of A. Then, the eigenvalue estimation leaves |vi⟩
+unchanged (and produces an estimate for the eigenvalue λi in the E register). This means that the
+algorithm above maps |x⟩= P
+i αi|vi⟩to
+X
+i
+αi|vi⟩I ⊗|φi⟩O,S,E
+where
+|φi⟩O,S,E = |1⟩O ⊗|φ′
+i⟩S,E + |0⟩O ⊗|φ′′
+i ⟩S,E.
+We will show:
+• If |vi⟩is good, then |φ′
+i⟩S,E is close to
+1
+κ˜λi |2ji⟩S ⊗|0⟩E.
+• If |vi⟩is bad, then ∥φ′
+i∥does not become too large (and, therefore, does not make too big
+contribution to ∥P1|ψ⟩−|ψ′′⟩∥).
+These two statements are quantiﬁed by two claims below: Claim 2 and Claim 5. The Lemma follows
+by combining these two claims and the fact that the sum of |αi|2 over all bad i is equal to δ.
+Before proving Claims 2 and 5, we prove a claim that bounds ˜λi (and will be used in the proofs
+of both Claim 2 and Claim 5).
+Claim 1 Let j = ji. Then
+1
+ǫ2j+1 ≤˜λi ≤
+1
+ǫ + 3
+2
+ 1
+2j .
+Proof: The ﬁrst inequality follows immediately. For the second inequality, since j > ji −1, we have
+˜λi,j−1 ≤
+1
+ǫ2j .
+This means that the actual eigenvalue λ satisﬁes
+λ ≤(1 + ǫ) 1
+ǫ2j =
+1
+ǫ2j + 1
+2j
+12
+
+
+=== PDF PAGE 13 ===
+and
+˜λi,j ≤(1 + ǫ)λ ≤
+1
+ǫ2j + 1
+2j +
+1
+2j+1 .
+As a consequence to this claim, we have
+1
+˜λi
+≥
+
+2
+2 + 3ǫ
+
+ǫ2j.
+Claim 2 If |vi⟩is good,
+|φ′
+i⟩−
+1
+κ˜λi
+|1⟩O ⊗|2ji⟩S ⊗|0⟩E
+
+2
+≤(2m + 37)ǫC
+where C = ( 1
+κ˜λi )2.
+Proof: We express |φ′
+i⟩= P
+j |2j⟩S ⊗|φi,j⟩E. Furthermore, we group the terms of |φ′
+i⟩in a following
+way:
+|φ′
+i⟩= |φ<⟩+ |φ=⟩+ |φ>⟩
+where
+|φ<⟩=
+X
+j<ji
+|2j⟩S ⊗|φi,j⟩E,
+|φ=⟩= ⊗|2ji⟩S ⊗|φi,ji⟩E,
+|φ>⟩=
+X
+j>ji
+|2j⟩S ⊗|φi,j⟩E.
+We have
+|φ′
+i⟩−
+1
+κ˜λi
+|2ji⟩S ⊗|0⟩E
+
+2
+=
+∥φ<∥2 +
+|φ=⟩−
+1
+κ˜λi
+|2ji⟩S ⊗|0⟩E
+
+2
++ ∥φ>∥2.
+We ﬁrst show that ∥φ<∥and ∥φ>∥are not too large.
+For j < ji, the eigenvalue estimation outputs an answer that is more than ˜λi,j with probability
+at most ǫ. Therefore, the probability of step (3b) being executed is at most ǫ. Moreover, if this step
+is executed, the estimate λ′ for the eigenvalue is at least
+1
+ǫ2j . Therefore, the coeﬃcient of |1⟩O in (9)
+is
+1
+κλ′ ≤2j+1ǫ
+κ
+.
+By summing over all j < ji, we get
+∥φ<∥2 =
+X
+j<ji
+∥φ′
+i,j∥2 =
+X
+j<ji
+2j+1ǫ
+κ
+2
+ǫ ≤1
+3
+2ji+1ǫ
+κ
+2
+ǫ,
+with the inequality following from the formula for the sum of a geometric progression. By using the
+right hand side of Claim 1, we get
+∥φ<∥2 ≤4ǫ
+3
+
+1 + 3ǫ
+2
+2
+C
+where C = ( 1
+κ˜λi )2. If ǫ < 0.1, we can upper-bound this by 1.6ǫC.
+13
+
+
+=== PDF PAGE 14 ===
+For j > ji, we have ∥φi,j∥2 ≤ǫj−ji. (We only reach stage j if, in every previous stage k, eigenvalue
+estimation outputs an estimate that is smaller than ˜λi. For each k ∈{ji, ji + 1, . . . , j −1}, this
+happens with probability at most ǫ.)
+Therefore,
+∥φ>∥2 =
+X
+j>ji
+∥φ′
+i,j∥2 ≤
+X
+j>ji
+2j+1ǫ
+κ
+2
+ǫj−ji ≤
+4
+
+1 + 3ǫ
+2
+2
+C
+∞
+X
+j=1
+(4ǫ)j = 16
+
+1 + 3ǫ
+2
+2
+ǫ
+1 −4ǫC
+where the 2nd inequality follows from the right hand side of Claim 1 and the last equality follows
+from the formula for the sum of a geometric progression. If ǫ < 0.1, we can upper bound this by
+36ǫC. Thus, both ∥φ<∥2 and ∥φ>∥2 are small enough.
+For |φ=⟩, we ﬁrst estimate the probability that algorithm reaches stage ji.
+Claim 3 Algorithm 4 reaches stage ji with probability at least 1 −2(m −1)ǫ.
+Proof: For each j < ji, the eigenvalue estimation may produce an incorrect answer with probability
+at most ǫ. This may lead to transformation (9) being executed with probability at most ǫ. Moreover,
+this causes some disturbance for the next step, when eigenvalue estimation is uncomputed. Let |ψ⟩
+be the output of the eigenvalue estimation. We can split |ψ⟩= |ψ′⟩+ |ψ′′⟩where |ψ′⟩consists of
+estimates λ which are smaller than the one in the condition of step 3b and |ψ′′⟩consists of estimates
+that are greater than or equal to the one in the condition. Then, ∥ψ′′∥2 ≤ǫ and, conditional on
+outcome register being |2⟩, the estimation register is in the state |ψ′⟩. If the estimation register was
+in the state |ψ⟩, uncomputing the eigenvalue estimation would lead to the correct initial state |0⟩. If
+it is in the state |ψ′⟩, then, after uncomputing the eigenvalue estimation, E can be in a basis state
+diﬀerent from |0⟩with probability at most ∥ψ −ψ′∥2 = ∥ψ′′∥2 ≤ǫ.
+Thus, the probability of the computation terminating for a ﬁxed j < ji is at most 2ǫ. The
+probability of that happening for some j < ji is at most 2(ji −1)ǫ < 2(m −1)ǫ.
+We now assume that the algorithm is started from stage ji.
+Claim 4 If Algorithm 4 is started from stage ji (instead of stage 1), then
+|φi,ji⟩E −1
+κ˜λ
+|0⟩E
+
+2
+≤ǫ
+
+1 + 3ǫ
+2
+
+C.
+Proof: Let
+|ψ⟩=
+X
+λ
+αλ|λ⟩
+be the output of the eigenvalue estimation in stage ji. Then, |α˜λi|2 ≥1−ǫ and ∥|ψ⟩−α˜λi| ˜λi⟩∥2 ≤ǫ.
+Conditional on O being mapped to |1⟩, the estimation register E is in the state
+|ψ′⟩=
+X
+λ
+βλ|λ⟩
+where βλ = αλ
+κλ when λ ≥
+1
+ǫ2j+1 and βλ = 0 otherwise. By Claim 1, we have
+1
+λ ∈[0, ǫ2j+1] ⊆
+
+0,
+
+2 + 3ǫ
+2
+ 1
+˜λ
+
+.
+When λ ≥
+1
+ǫ2j+1 , this implies
+βλ −αλ
+κ˜λ
+ =
+
+αλ
+κλ −αλ
+κ˜λ
+ ≤
+
+1 + 3ǫ
+2
+ αλ
+κ˜λ
+.
+14
+
+
+=== PDF PAGE 15 ===
+When λ <
+1
+ǫ2j+1 , we have βλ = 0 and
+βλ −αλ
+κ˜λ
+ = αλ
+κ˜λ
+.
+By summing over all λ ̸= ˜λ, we get
+ψ′ −1
+κ˜λ
+ψ
+
+2
+≤
+
+1 + 3ǫ
+2
+
+C
+X
+λ:λ̸=˜λ
+|αλ|2 ≤
+
+1 + 3ǫ
+2
+
+ǫC.
+Therefore, (conditional on the outcome register being |1⟩) uncomputing UniqueEst leads to a state
+|ϕ⟩E with
+ϕ −1
+κ˜λ
+|0⟩
+
+2
+≤ǫ
+
+1 + 3ǫ
+2
+
+C.
+Since the algorithm might not reach stage ji with probability at most 2(m −1)ǫ, we have to
+combine the error bounds from Claims 3 and 4. This gives us
+|φi,ji⟩E −1
+κ˜λ
+|0⟩E
+ ≤ǫ
+
+2m −1 + 3ǫ
+2
+
+C.
+Combining this with bounds of 1.6ǫC and 36ǫC on ∥ψ<∥and ∥ψ>∥completes the proof of Claim
+2.
+Claim 5 If |vi⟩is bad,
+∥φ′
+i∥2 ≤30C
+where C = ( 1
+κ ˜λi)2.
+Proof: We express
+|φ′
+i⟩= |φ≤⟩+ |φ>⟩
+where
+|φ≤⟩=
+X
+j≤ji+1
+|2j⟩S ⊗|φi,j⟩E,
+|φ>⟩=
+X
+j>ji+1
+|2j⟩S ⊗|φi,j⟩E.
+We have
+∥φ≤∥2 ≤
+
+1
+κǫ2ji+2
+2
+≤16
+
+1 + 3ǫ
+2
+2
+C.
+(13)
+Here, the ﬁrst inequality follows from the amplitude of |1⟩in (9) being
+1
+κλ, λ ≥
+1
+ǫ2j+1 and j ≤ji + 1.
+The second inequality follows from Claim 1.
+Starting from stage j + 1, the probability of algorithm obtaining λ <
+1
+2j+1ǫ is at most ǫ at each
+stage. Therefore (similarly to the proof of Claim 2),
+∥φ>∥2 =
+X
+j>ji+1
+∥φ′
+i,j∥2 ≤
+X
+j>ji+1
+2j+1ǫ
+κ
+2
+ǫj−ji−1 ≤
+2ji+2ǫ
+κ
+2 ∞
+X
+j=1
+(4ǫ)j ≤
+16
+
+1 + 3ǫ
+2
+2
+C
+∞
+X
+j=1
+(4ǫ)j = 16
+
+1 + 3ǫ
+2
+2
+4ǫ
+1 −4ǫC.
+(14)
+15
+
+
+=== PDF PAGE 16 ===
+The claim follows by putting equations (13) and (14) together and using ǫ < 0.01.
+Proof: [of Lemma 6] We have
+|λi −˜λi| ≤1 + ǫ
+2j+1 ≤(1 + ǫ)ǫ˜λi,
+with the ﬁrst inequality following from the correctness of the unique-output eigenvalue estimation
+and the second inequality following from the deﬁnition of ˜λi. Let δ = (1 + ǫ)ǫ.
+If |λi −˜λi| ≤δ ˜λi, then
+
+1
+λi
+−1
+˜λi
+ ≤
+δ
+1 −δ
+1
+˜λi
+.
+Therefore, we have ∥|ψ′⟩−|ψideal⟩∥≤
+δ
+1−δ ∥|ψideal⟩∥and
+δ
+1 −δ =
+(1 + ǫ)ǫ
+1 −(1 + ǫ)ǫ <
+2ǫ
+1 −2ǫ.
+4.4
+Proofs of Lemmas about the running time of Algorithm 4
+Proof: [of Lemma 7] We ﬁrst consider the case when the input state |x⟩is an eigenstate |vi⟩of H.
+Let pstop,j be the probability that Algorithm 4 stops after stage j. Then, the square of l2 average
+running time of Algorithm 4 is of the order
+O
+
+X
+j
+pstop,j22jk2
+uniq
+
+
+(15)
+since, in ﬁrst j stages we use amplitude ampliﬁcation for time
+kuniq(2 + 22 + . . . + 2j) = kuniq(2j+1 −2) = O(kuniq2j).
+Let j ≥ji + 1. The probability that, in the jth run of eigenvalue estimation, the algorithm does not
+stop is at most ǫ. Therefore, pji+k ≤ǫk−1 and the expression in (15) is at most k2
+uniq times
+22(ji+1) +
+∞
+X
+j=ji+2
+ǫj−ji−122j < 22(ji+1) + 22(ji+1)
+∞
+X
+j=1
+(4ǫ)j = O(22ji).
+If |x⟩= P
+i αi|vi⟩, the square of l2-average of the number of steps is of the order
+O
+ X
+i
+|αi|222jik2
+uniq
+!
+because, each subspace of the form |vi⟩⊗HA ⊗HS ⊗HE stays invariant throughout the algorithm
+and, thus, can be treated separately. Taking square root ﬁnishes the proof.
+Proof: [of Lemma 8] Again, we can treat each subspace of the form |vi⟩⊗HA⊗HS ⊗HE separately.
+As shown in the proof of Claim 2, the probability of the algorithm stopping before stage ji is at
+most 2(ji −1)ǫ ≤2(m −1)ǫ. Therefore, the algorithm stops at stage ji or ji + 1 with a probability
+that is at least a constant. The probability of algorithm stopping succesfully (i.e., producing |1⟩in
+an outcome register) is
+1
+κ2λ2 . By Claim 1, we have λ = O(
+1
+ǫ2ji ). This implies that the probability
+of the algorithm stopping successfully is O( ǫ222ji
+κ2
+).
+16
+
+
+=== PDF PAGE 17 ===
+References
+[1] S. Aaronson, A. Ambainis, Quantum search of spatial regions. Theory of Computing, 1:47-79,
+2005. Also quant-ph/0303041.
+[2] A. Ambainis. Quantum search with variable times. Theory of Computing Systems, 47(3): 786-
+807, 2010. Earlier versions in STACS’08 and quant-ph/0609188.
+[3] D. Berry. Quantum algorithms for solving linear diﬀerential equations. arXiv:1010.2745.
+[4] G. Brassard, P. Høyer, M. Mosca, A. Tapp. Quantum amplitude ampliﬁcation and estimation.
+In Quantum Computation and Quantum Information Science, AMS Contemporary Mathematics
+Series, 305:53-74, 2002. Also quant-ph/0005055.
+[5] A. Harrow, A. Hassidim, S. Lloyd, Quantum algorithm for linear systems of equations. Physical
+Review Letters, 15(103):150502, 2009. Also arXiv:0811.3171.
+[6] P. Kaye, R. Laﬂamme, M. Mosca. An Introduction to Quantum Computing. Cambridge Univer-
+sity Press, 2007.
+[7] S. K. Leyton, T. J. Osborne. A quantum algorithm to solve nonlinear diﬀerential equations.
+arXiv:0812.4423.
+[8] J. Shewchuk. An introduction to the conjugate gradient method without the agonizing pain.
+Technical Report CMU-CS-94-125, School of Computer Science, Carnegie Mellon University,
+1994.
+17

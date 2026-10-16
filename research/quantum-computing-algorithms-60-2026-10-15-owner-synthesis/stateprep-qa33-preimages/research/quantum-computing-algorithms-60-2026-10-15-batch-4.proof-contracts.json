@@ -1,0 +1,2386 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qc-projective-measurement",
+    "def-qc-povm-and-outcome-law",
+    "thm-qc-projective-measurement-outcome-law",
+    "def-qc-finite-outcome-probability-kernel",
+    "lem-qc-finite-ancilla-amplification-is-block-map",
+    "thm-qc-finite-naimark-isometric-compression",
+    "thm-qc-povm-probabilities-normalize",
+    "thm-qc-projective-conditional-state",
+    "def-qc-completely-positive-map",
+    "thm-qc-finite-outcome-law-is-a-probability-kernel",
+    "def-qc-instrument-and-conditional-state",
+    "thm-qc-instrument-outcome-law-normalizes",
+    "thm-qc-luders-instrument-of-a-povm-is-valid",
+    "thm-qc-zero-probability-branch-has-no-conditioned-state",
+    "thm-qc-instrument-conditional-state-is-density",
+    "thm-qc-nonselective-instrument-output-is-density",
+    "ex-qc-zero-probability-projective-branch"
+  ],
+  "contracts": {
+    "def-qc-projective-measurement": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits a one-outcome family; its finite sum then has one summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "def-qc-povm-and-outcome-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits a one-outcome family; its finite sum then has one summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-projective-measurement-outcome-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that $$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$, $$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Fix $a$. Set $\\tau_a=P_a\\rho P_a$. Self-adjointness of $P_a$ and $\\rho$ gives $\\langle\\tau_ax,y\\rangle=\\langle\\rho P_ax,P_ay\\rangle=\\langle x,\\tau_ay\\rangle$ for all $x,y$, so $\\tau_a$ is self-adjoint. It is nonnegative, since $\\langle\\tau_ax,x\\rangle=\\langle\\rho P_ax,P_ax\\rangle\\ge0$ for every $x$ by [F6]–[F7]. By [F2], $\\tau_a$ has nonnegative diagonal entries in an orthonormal basis, so [F5] gives $\\operatorname{tr}(\\tau_a)\\ge0$. By [F3] and $P_a^2=P_a$, $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)=\\operatorname{tr}(P_a\\rho P_a)=\\operatorname{tr}(\\tau_a)\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "By [F4], the resolution of the identity in [F1], and [F6], $\\sum_a p_\\rho(a)=\\operatorname{tr}(\\rho\\sum_aP_a)=\\operatorname{tr}(\\rho I_H)=\\operatorname{tr}(\\rho)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For each $a$, $1-p_\\rho(a)=\\sum_{b\\ne a}p_\\rho(b)\\ge0$ by step 1.1, with the empty sum interpreted as $0$ when $\\Omega=\\{a\\}$. Therefore every weight is at most one and, by step 1.1, belongs to $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement proves the probability bounds including weights 0 and 1; no zero weight is divided by."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "def-qc-finite-outcome-probability-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits a one-outcome family; its finite sum then has one summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "lem-qc-finite-ancilla-amplification-is-block-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "Its **computational basis** is the ordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The inner product is linear in the first argument and conjugate-linear in the second, and on elementary tensors it is $$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "The elementary tensors of the factor bases, ordered lexicographically, form an orthonormal basis of the tensor register",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-vector-space-of-linear-maps",
+          "source_section": "Definition",
+          "quote": "For $S,T\\in\\mathcal L(V,W)$ and $\\lambda\\in F$, define pointwise operations by $$(S+T)(v):=S(v)+T(v),\\qquad (\\lambda T)(v):=\\lambda T(v).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-linear-maps-form-a-vector-space",
+          "source_section": "Statement",
+          "quote": "If $V$ and $W$ are vector spaces over a field $F$, then $\\mathcal L(V,W)$ is a vector space over $F$ under pointwise addition and scalar multiplication.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "A function $T:V\\to W$ is **linear** when",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "$V$ is **finite-dimensional over $F$** when it has a **finite** basis",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "source_section": "Statement",
+          "quote": "For $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Choose finite bases $u_1,\\ldots,u_n$ of $H$ and $v_1,\\ldots,v_m$ of $K$, which exist by [F7]. By [F1]–[F3], $(u_\\alpha\\otimes e_j)_{\\alpha,j}$ and $(v_\\beta\\otimes e_j)_{\\beta,j}$ are bases of $H\\otimes R$ and $K\\otimes R$. For each $j,\\alpha$, uniquely expand $X(u_\\alpha\\otimes e_j)=\\sum_{i<r,\\,\\beta}c_{\\beta i;\\alpha j}u_\\beta\\otimes e_i$. Define $X_{ij}u_\\alpha=\\sum_\\beta c_{\\beta i;\\alpha j}u_\\beta$ and extend linearly from the basis of $H$. Linearity of $X$ gives the required block formula on every $x\\in H$. Any other family satisfying it has the same coefficients on every product-basis vector, hence each block agrees on the basis $u_\\alpha$ and is equal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "On each product-basis vector $v_\\beta\\otimes e_j$, prescribe the image $\\sum_i\\Phi(X_{ij})v_\\beta\\otimes e_i$. Since these product vectors are a basis, there exists a unique linear operator $Y$ on $K\\otimes R$ with those values. By linearity this gives the displayed rule for all $y\\in K$. Define $\\Phi^{(r)}(X)=Y$. Uniqueness of the blocks from step 1.1 and uniqueness of an operator from its values on a basis show that this definition is unambiguous.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "For $X,X'\\in\\mathcal L(H\\otimes R)$, their block families are respectively $[X_{ij}]$ and $[X'_{ij}]$. The defining action on the product basis shows that the blocks of $sX+tX'$ are $sX_{ij}+tX'_{ij}$ for any scalars $s,t\\in\\mathbb C$. Applying the linearity of $\\Phi$ from [F6] gives blocks $s\\Phi(X_{ij})+t\\Phi(X'_{ij})$, which are exactly the blocks of $s\\Phi^{(r)}(X)+t\\Phi^{(r)}(X')$. Equality on a basis yields $\\Phi^{(r)}(sX+tX')=s\\Phi^{(r)}(X)+t\\Phi^{(r)}(X')$. When $r=1$, the tensor-unit identifications from [F8] send $x\\mapsto x\\otimes e_0$ and $y\\mapsto y\\otimes e_0$. By [F3], they send bases bijectively to the product bases; [F1]–[F2] show they preserve inner products, so they are unitary. Under them the sole block is $X_{00}=u_H^{-1}Xu_H$, and the sole output block is $\\Phi(X_{00})$. Hence $u_K^{-1}\\Phi^{(1)}(X)u_K=\\Phi(u_H^{-1}Xu_H)$, which is the original map under these identifications.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement permits zero-dimensional H or K; empty product bases and unique zero maps are included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement includes zero operators and zero-dimensional spaces; uniqueness is equality on the product basis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement or Definition includes r=1 and the canonical one-dimensional ancilla identification."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement uses only finite bases and block coefficients, with no rank or invertibility hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof for the Statement chooses only finite bases of given finite-dimensional spaces; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-finite-naimark-isometric-compression": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "A **finite POVM** on $H$ with outcomes $\\Omega$ is a family $E=(E_a)_{a\\in\\Omega}$ with each $E_a$ nonnegative and $\\sum_{a\\in\\Omega}E_a=I_H",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that $$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "Its **computational basis** is the ordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The inner product is linear in the first argument and conjugate-linear in the second, and on elementary tensors it is $$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "The elementary tensors of the factor bases, ordered lexicographically, form an orthonormal basis of the tensor register",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "For finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and $x\\in K$, define the rank-one linear map $$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let $T:V\\to V$ be non-negative. Then there exists a unique non-negative operator $R:V\\to V$ such that $$R^2=T.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that $$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$ for every $v\\in V$ and $w\\in W$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$, $$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces $H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map** $\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to K_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For elementary tensors, [F7] and the tensor-map formula [F15] give $Q_a(x\\otimes e_c)=\\delta_{a,c}x\\otimes e_a$. Therefore $Q_a^2=Q_a$, $Q_aQ_b=0$ when $a\\ne b$, and $\\sum_aQ_a=I$ on every product-basis vector; equality on the basis from [F6] gives these operator identities. For elementary tensors $x\\otimes e_c,y\\otimes e_d$, orthonormality and the product inner product give $\\langle Q_a(x\\otimes e_c),y\\otimes e_d\\rangle=\\delta_{a,c}\\delta_{a,d}\\langle x,y\\rangle=\\langle x\\otimes e_c,Q_a(y\\otimes e_d)\\rangle$. Sesquilinearity and spanning by [F6] extend this identity to all vectors, so uniqueness of adjoints [F11] gives $Q_a^*=Q_a$. By [F2], $(Q_a)$ is a projective measurement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "F11",
+            "F13",
+            "F15"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Put $M_a=E_a^{1/2}$ using [F9]. Each summand $x\\mapsto M_ax\\otimes e_{j(a)}$ is linear by [F15], so $V$ is linear. For $x,y\\in H$, orthogonality of the register labels and the product inner product give $\\langle Vx,Vy\\rangle=\\sum_a\\langle M_ax,M_ay\\rangle=\\left\\langle x,\\left(\\sum_aM_a^*M_a\\right)y\\right\\rangle=\\langle x,y\\rangle$, because $M_a$ is self-adjoint by [F8]–[F9], so $M_a^*M_a=E_a$, and [F1] gives $\\sum_aE_a=I_H$. The adjoint identities [F10]–[F11] also give $\\langle Vx,Vy\\rangle=\\langle x,V^*Vy\\rangle$. For fixed $y$, set $x=(V^*V-I_H)y$; then $\\|x\\|^2=0$, so positive definiteness [F13] implies $(V^*V-I_H)y=0$. Since $y$ was arbitrary, $V^*V=I_H$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F13",
+            "F15"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Fix $b\\in\\Omega$. Step 1.1's action formula and the definition of $V$ give $Q_bVx=M_bx\\otimes e_{j(b)}$. For all $x,y\\in H$, the adjoint identity [F10] and product inner product [F5] yield $\\langle V^*Q_bVx,y\\rangle=\\langle Q_bVx,Vy\\rangle=\\langle M_bx,M_by\\rangle=\\langle x,E_by\\rangle$, where the last equality uses self-adjointness from [F8]–[F9], which gives $M_b^*M_b=E_b$. If $T=V^*Q_bV-E_b$, then $\\langle Tx,y\\rangle=0$ for every $x,y$. Taking $y=Tx$ gives $\\|Tx\\|^2=0$, so [F13] implies $Tx=0$ for every $x$; hence $V^*Q_bV=E_b$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F13",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "For every $z\\in H\\otimes R$, [F10] gives $\\langle V\\rho V^*z,z\\rangle=\\langle\\rho V^*z,V^*z\\rangle\\ge0$ by [F3] and [F8], so $V\\rho V^*$ is nonnegative. Also $\\dim(H\\otimes R)=r\\dim H>0$ by [F4] and [F6]. In bases, rectangular trace cyclicity [F12] and [F14] give $\\operatorname{tr}(V\\rho V^*)=\\operatorname{tr}(V^*V\\rho)=\\operatorname{tr}(\\rho)=1$ by step 1.2 and [F3]. Therefore $V\\rho V^*$ is a density operator on the nonzero space $H\\otimes R$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F10",
+            "F12",
+            "F14",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Step 1.1 proves $(Q_a)$ is a projective measurement and step 2.2 proves $V\\rho V^*$ is a density operator. Thus [F16] identifies its $b$-outcome weight as $\\operatorname{tr}(V\\rho V^*Q_b)$. Rectangular trace cyclicity [F12] and [F14] rewrite this as $\\operatorname{tr}(V^*Q_bV\\rho)$; step 2.1 makes that $\\operatorname{tr}(E_b\\rho)=\\operatorname{tr}(\\rho E_b)$, using [F12] once more on $H$. The final expression is the original POVM weight by [F1], proving the claimed equality.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F12",
+            "F14",
+            "F16",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-povm-probabilities-normalize": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "A **finite POVM** on $H$ with outcomes $\\Omega$ is a family $E=(E_a)_{a\\in\\Omega}$ with each $E_a$ nonnegative and $\\sum_{a\\in\\Omega}E_a=I_H",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let $T:V\\to V$ be non-negative. Then there exists a unique non-negative operator $R:V\\to V$ such that $$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$, $$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Fix $a\\in\\Omega$. Let $M_a=E_a^{1/2}$ be the nonnegative square root supplied by [F2]. For every $x\\in H$, $\\langle M_a\\rho M_ax,x\\rangle=\\langle\\rho M_ax,M_ax\\rangle\\ge0$ by [F7]–[F8], so $M_a\\rho M_a$ is nonnegative. By [F3] it is diagonal with nonnegative entries in an orthonormal basis, hence its trace is nonnegative by [F6]. By [F4] and $M_a^2=E_a$, $p_\\rho(a)=\\operatorname{tr}(\\rho E_a)=\\operatorname{tr}(M_a\\rho M_a)\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Linearity of trace [F5] and the completeness relation in [F1] give $\\sum_{a\\in\\Omega}p_\\rho(a)=\\operatorname{tr}(\\rho\\sum_aE_a)=\\operatorname{tr}(\\rho I_H)=\\operatorname{tr}(\\rho)=1$ by [F7] and [F6].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For fixed $a$, $1-p_\\rho(a)=\\sum_{b\\in\\Omega,\\,b\\ne a}p_\\rho(b)\\ge0$ by step 1.1; if $\\Omega=\\{a\\}$ this is the empty sum $0$. Thus $p_\\rho(a)\\le1$, and together with step 1.1 each weight lies in $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement proves the probability bounds including weights 0 and 1; no zero weight is divided by."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-projective-conditional-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that $$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$, $$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Set $\\tau_a=P_a\\rho P_a$. Self-adjointness of $P_a$ and $\\rho$ gives $\\langle\\tau_ax,y\\rangle=\\langle\\rho P_ax,P_ay\\rangle=\\langle x,\\tau_ay\\rangle$ for all $x,y$, so $\\tau_a$ is self-adjoint. For every $x\\in H$, $\\langle\\tau_ax,x\\rangle=\\langle\\rho P_ax,P_ax\\rangle\\ge0$ by [F5] and [F6], so $\\tau_a$ is nonnegative. Since $p_a>0$ is real, scaling the same pairing identity by $1/p_a$ makes $\\rho_a=\\tau_a/p_a$ self-adjoint; its quadratic form is nonnegative as well, so $\\rho_a$ is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "By [F3] and $P_a^2=P_a$, $\\operatorname{tr}(\\tau_a)=\\operatorname{tr}(P_a\\rho P_a)=\\operatorname{tr}(\\rho P_a^2)=p_a$ by [F2]. Hence [F4] gives $\\operatorname{tr}(\\rho_a)=p_a/p_a=1$, so $\\rho_a$ is a density operator by [F5].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For every $x\\in H$, $\\rho_a x=P_a(\\rho P_ax)/p_a$ is of the form $P_a y$ with $y=\\rho P_ax/p_a$. By [F7], every such vector lies in $\\operatorname{im}(P_a)$, so $\\operatorname{im}(\\rho_a)\\subseteq\\operatorname{im}(P_a)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes p_a>0 before division; no conditional state is asserted for p_a=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement divides only when p_a>0; p_a=0 is excluded and p_a=1 is allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "def-qc-completely-positive-map": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits zero-dimensional H or K; the full operator spaces and their block maps remain well-defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement or Definition includes r=1 and the canonical one-dimensional ancilla identification."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition imposes no rank, invertibility, or strict-positivity condition on the linear map."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-finite-outcome-law-is-a-probability-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-finite-outcome-probability-kernel",
+          "source_section": "Definition",
+          "quote": "For the POVM outcome weights from [[def-qc-povm-and-outcome-law]], define the candidate kernel by $$K_E(\\rho,S):=\\sum_{a\\in S}\\operatorname{tr}(\\rho E_a),\\qquad S\\subseteq\\Omega.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-povm-probabilities-normalize",
+          "source_section": "Statement",
+          "quote": "$$p_\\rho(a)=\\operatorname{tr}(\\rho E_a)\\in[0,1]\\quad\\text{for each }a\\in\\Omega,\\qquad \\sum_{a\\in\\Omega}p_\\rho(a)=1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Fix $\\rho\\in\\mathcal D(H)$. By [F2], the weights $p_\\rho(a)$ are nonnegative and sum to one, so [F3] gives a finite probability space on $\\Omega$. Its probability for an event $S$ is $\\sum_{a\\in S}p_\\rho(a)$, which equals $K_E(\\rho,S)$ by [F1]. Thus the kernel value at each input is a probability measure on the finite outcome set.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Fix $S\\subseteq\\Omega$ and use the ordered basis defining the matrix coordinates. In those coordinates, each summand is $\\operatorname{tr}(\\rho E_a)=\\sum_{i,j}\\rho_{ij}(E_a)_{ji}$ by [F4] and the row-by-column product formula [F8]; it is a finite linear combination of coordinate projections $\\rho\\mapsto\\rho_{ij}$. The projections are continuous in the matrix-coordinate topology, so each summand and the finite sum $g_S(\\rho)=K_E(\\rho,S)$ are continuous.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F8"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For every open $U\\subseteq\\mathbb R$, continuity in step 1.2 makes $g_S^{-1}(U)$ open and hence Borel. The collection of subsets $B\\subseteq\\mathbb R$ for which $g_S^{-1}(B)$ is Borel is a $\\sigma$-algebra, because inverse images preserve complements and countable unions; it contains every open set by the same continuity. It therefore contains the Borel $\\sigma$-algebra, proving that $g_S$ is Borel measurable.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Let $\\lambda\\in[0,1]$ and $\\rho,\\sigma\\in\\mathcal D(H)$. The operator $\\lambda\\rho+(1-\\lambda)\\sigma$ is nonnegative by its quadratic form and [F7], and has trace one by [F6] and [F5], so it lies in $\\mathcal D(H)$. Applying [F5] to the finite sum in [F1] gives $K_E(\\lambda\\rho+(1-\\lambda)\\sigma,S)=\\lambda K_E(\\rho,S)+(1-\\lambda)K_E(\\sigma,S)$. This proves affinity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement proves the probability bounds including weights 0 and 1; no zero weight is divided by."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "def-qc-instrument-and-conditional-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits a one-outcome family; its finite sum then has one summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-instrument-outcome-law-normalizes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "The quantifier includes $r=1$; complete positivity therefore implies positivity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For each $a$, complete positivity [F1]–[F2] at $r=1$ sends the nonnegative input $\\rho$ from [F5] to a nonnegative $\\tau_a:=\\mathcal I_a(\\rho)$ in the sense of [F6]. By [F3], $\\tau_a$ has nonnegative diagonal entries in an orthonormal basis, and [F4] therefore gives $p_a=\\operatorname{tr}(\\tau_a)\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Apply the trace-preservation identity in [F1] to $X=\\rho$. It gives $\\sum_{a\\in\\Omega}p_a=\\operatorname{tr}(\\rho)=1$ by [F5]. Thus the nonnegative branch weights sum to one.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any $a$, $1-p_a=\\sum_{b\\ne a}p_b\\ge0$ by step 1.1, including the empty sum when $\\Omega=\\{a\\}$. Hence $p_a\\in[0,1]$ for every outcome, and the weights form a finite probability distribution.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement proves the probability bounds including weights 0 and 1; no zero weight is divided by."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-luders-instrument-of-a-povm-is-valid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "A **finite POVM** on $H$ with outcomes $\\Omega$ is a family $E=(E_a)_{a\\in\\Omega}$ with each $E_a$ nonnegative and $\\sum_{a\\in\\Omega}E_a=I_H",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "The quantifier includes $r=1$; complete positivity therefore implies positivity.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-finite-ancilla-amplification-is-block-map",
+          "source_section": "Statement",
+          "quote": "Thus the block rule $[X_{ij}]\\mapsto[\\Phi(X_{ij})]$ defines a well-defined linear map on the full operator space.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let $T:V\\to V$ be non-negative. Then there exists a unique non-negative operator $R:V\\to V$ such that $$R^2=T.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-vector-space-of-linear-maps",
+          "source_section": "Definition",
+          "quote": "For $S,T\\in\\mathcal L(V,W)$ and $\\lambda\\in F$, define pointwise operations by $$(S+T)(v):=S(v)+T(v),\\qquad (\\lambda T)(v):=\\lambda T(v).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-linear-maps-form-a-vector-space",
+          "source_section": "Statement",
+          "quote": "If $V$ and $W$ are vector spaces over a field $F$, then $\\mathcal L(V,W)$ is a vector space over $F$ under pointwise addition and scalar multiplication.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-composition-and-identity-linear-maps",
+          "source_section": "Statement",
+          "quote": "If $T:U\\to V$ and $S:V\\to W$ are linear maps over the same field, then $S\\circ T:U\\to W$ is linear.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$, $$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The inner product is linear in the first argument and conjugate-linear in the second, and on elementary tensors it is $$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For each $a$, $X\\mapsto M_aXM_a$ takes $\\mathcal L(H)$ to $\\mathcal L(H)$ by composition of linear maps [F8]. For $X,Y\\in\\mathcal L(H)$, scalars $s,t\\in\\mathbb C$, and $v\\in H$, evaluate at $v$ to obtain $M_a((sX+tY)(M_av))=sM_aXM_av+tM_aYM_av$. By the pointwise operations [F6]–[F7], this is $s\\mathcal I_a(X)v+t\\mathcal I_a(Y)v$, so $\\mathcal I_a$ is complex-linear.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Fix any finite $r$ and a nonnegative $X$ on $H\\otimes\\mathbb C^r$ in the sense of [F12]. By [F4], the extended branch map sends its blocks to $M_aX_{ij}M_a$. Let $S_a$ be the block-diagonal operator with $M_a$ on every diagonal block and zero off the diagonal. By the block product formula [F11], $(S_aXS_a)_{ij}=\\sum_{k,\\ell}(S_a)_{ik}X_{k\\ell}(S_a)_{\\ell j}=M_aX_{ij}M_a$, so the extension is $S_aXS_a$. Write $z=\\sum_jz_j\\otimes e_j$ and $w=\\sum_jw_j\\otimes e_j$ in the product basis. The product inner product [F13] gives $\\langle S_az,w\\rangle=\\sum_j\\langle M_az_j,w_j\\rangle=\\sum_j\\langle z_j,M_aw_j\\rangle=\\langle z,S_aw\\rangle$, since $M_a$ is self-adjoint by [F5]; hence $S_a$ is self-adjoint. Therefore $\\langle S_aXS_az,z\\rangle=\\langle XS_az,S_az\\rangle\\ge0$ by [F12]. The extension is nonnegative for every $r$, so [F3] gives complete positivity of each $\\mathcal I_a$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F11",
+            "F12",
+            "F13"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any $X\\in\\mathcal L(H)$, rectangular trace cyclicity [F9] and $M_a^2=E_a$ give $\\operatorname{tr}(\\mathcal I_a(X))=\\operatorname{tr}(M_aXM_a)=\\operatorname{tr}(XM_a^2)=\\operatorname{tr}(XE_a)$. By [F10] and completeness in [F1], $\\sum_a\\operatorname{tr}(\\mathcal I_a(X))=\\operatorname{tr}(X\\sum_aE_a)=\\operatorname{tr}(X)$. Thus the family satisfies the instrument trace condition [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F9",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No probability interval or endpoint parameter occurs in this Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-zero-probability-branch-has-no-conditioned-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "The quantifier includes $r=1$; complete positivity therefore implies positivity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Since $\\mathcal I_a$ is completely positive, its $r=1$ extension sends the nonnegative $\\rho$ from [F5] to the nonnegative operator $\\tau:=\\mathcal I_a(\\rho)$ by [F2], with nonnegativity as defined in [F6]. By [F3], $\\tau$ is diagonal with entries $\\lambda_j\\ge0$ in an orthonormal basis. Its trace is $\\sum_j\\lambda_j=0$ by the hypothesis and [F1], [F4]; a finite sum of nonnegative numbers is zero only when every $\\lambda_j=0$. Hence $\\tau=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The instrument definition [F1] assigns $\\bot$ when $p_a=0$. The algebraic quotient $\\mathcal I_a(\\rho)/p_a$ would have zero denominator, so it is not a normalized conditional density state.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement handles p_a=0 explicitly and assigns the bottom symbol without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement covers p_a=0 and explicitly does not normalize that branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-instrument-conditional-state-is-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "The quantifier includes $r=1$; complete positivity therefore implies positivity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-instrument-outcome-law-normalizes",
+          "source_section": "Statement",
+          "quote": "For a finite instrument $(\\mathcal I_a)_{a\\in\\Omega}$ and a density operator $\\rho$ on its input space, the branch weights $p_a=\\operatorname{tr}(\\mathcal I_a(\\rho))$ form a probability distribution on $\\Omega$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The outcome-law theorem [F3] shows that $p_a$ is the probability of branch $a$; the hypothesis $p_a>0$ selects a positive-probability branch.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Put $\\tau_a=\\mathcal I_a(\\rho)$. By [F1]–[F2] and [F5]–[F6], $\\tau_a$ is nonnegative. Since $p_a>0$ is real and $\\tau_a$ is self-adjoint, for all $u,v$ one has $\\langle(\\tau_a/p_a)u,v\\rangle=p_a^{-1}\\langle\\tau_a u,v\\rangle=p_a^{-1}\\langle u,\\tau_a v\\rangle=\\langle u,(\\tau_a/p_a)v\\rangle$, so $\\tau_a/p_a$ is self-adjoint. Division by $p_a>0$ also preserves nonnegativity of every quadratic form. Thus $\\rho_a=\\tau_a/p_a$ is nonnegative by [F6].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "By the definition in [F1], $\\operatorname{tr}(\\tau_a)=p_a$. Linearity [F4] gives $\\operatorname{tr}(\\rho_a)=p_a^{-1}\\operatorname{tr}(\\tau_a)=1$. Thus $\\rho_a$ is a density operator by [F5]. The hypothesis $p_a>0$ also forces the output space to be nonzero, since its zero space has only trace-zero endomorphisms.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes p_a>0 before division; no conditional state is asserted for p_a=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement divides only when p_a>0; p_a=0 is excluded and p_a=1 is allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-qc-nonselective-instrument-output-is-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-instrument-outcome-law-normalizes",
+          "source_section": "Statement",
+          "quote": "For a finite instrument $(\\mathcal I_a)_{a\\in\\Omega}$ and a density operator $\\rho$ on its input space, the branch weights $p_a=\\operatorname{tr}(\\mathcal I_a(\\rho))$ form a probability distribution on $\\Omega$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-zero-probability-branch-has-no-conditioned-state",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal I_a)_{a\\in\\Omega}$ be a finite instrument and let $\\rho$ be an input density operator. If $p_a=\\operatorname{tr}(\\mathcal I_a(\\rho))=0$, then $\\mathcal I_a(\\rho)=0$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "The quantifier includes $r=1$; complete positivity therefore implies positivity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For each $a$, $\\tau_a=\\mathcal I_a(\\rho)$ is nonnegative by [F1], [F4], and [F6]–[F7]. Therefore for every $x$ the quadratic form of $\\bar\\rho=\\sum_a\\tau_a$ is $\\sum_a\\langle\\tau_ax,x\\rangle\\ge0$, so $\\bar\\rho$ is nonnegative by [F7]. By [F5] and [F2], $\\operatorname{tr}(\\bar\\rho)=\\sum_a\\operatorname{tr}(\\tau_a)=\\sum_ap_a=1$. Hence $\\bar\\rho$ is a density operator; its trace one also shows the output space is nonzero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "If $p_a>0$, the instrument definition [F1] gives $p_a\\rho_a=\\tau_a$. If $p_a=0$, [F3] gives $\\tau_a=0$. Summing these equalities over the finite outcome set yields $\\bar\\rho=\\sum_{a:p_a>0}p_a\\rho_a$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition or Statement permits zero effects, projections, inputs, or branch maps; no strict-positivity assumption is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits one outcome; its finite sum has one term and the complementary sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows zero or rank-deficient effects and projections and uses only its displayed finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement proves the probability bounds including weights 0 and 1; no zero weight is divided by."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof or Definition uses fixed finite families and finite-dimensional suppliers; it invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "ex-qc-zero-probability-projective-branch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "$V$ is **finite-dimensional over $F$** when it has a **finite** basis",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that $$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$ for every $v\\in V$ and $w\\in W$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that $$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "A **finite POVM** on $H$ with outcomes $\\Omega$ is a family $E=(E_a)_{a\\in\\Omega}$ with each $E_a$ nonnegative and $\\sum_{a\\in\\Omega}E_a=I_H",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "source_section": "Statement",
+          "quote": "Let $(E_a)_{a\\in\\Omega}$ be a finite POVM on $H$, and let $M_a=E_a^{1/2}$ be the nonnegative square root of each effect.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-qc-zero-probability-branch-has-no-conditioned-state",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal I_a)_{a\\in\\Omega}$ be a finite instrument and let $\\rho$ be an input density operator. If $p_a=\\operatorname{tr}(\\mathcal I_a(\\rho))=0$, then $\\mathcal I_a(\\rho)=0$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let $T:V\\to V$ be non-negative. Then there exists a unique non-negative operator $R:V\\to V$ such that $$R^2=T.$$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For $x=(x_0,x_1)$ and $y=(y_0,y_1)$, [F1] gives $\\langle P_0x,y\\rangle=x_0\\overline{y_0}=\\langle x,P_0y\\rangle$ and $\\langle P_1x,y\\rangle=x_1\\overline{y_1}=\\langle x,P_1y\\rangle$. By [F4], both matrices are self-adjoint. Direct multiplication [F3] gives $P_0^2=P_0$, $P_1^2=P_1$, $P_0P_1=P_1P_0=0$, and $P_0+P_1=I$. Their quadratic forms are $|x_0|^2$ and $|x_1|^2$, which are nonnegative by [F1]; hence both are nonnegative by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The matrix $\\rho=P_0$ is nonnegative by step 1.1 and has trace $1$ by [F13]. Since $H$ is nonzero and finite-dimensional by [F2], [F6] makes $\\rho$ a density operator.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "F13",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "The identities in step 1.1 show that $(P_0,P_1)$ is a projective measurement by [F7]. Each $P_a$ is nonnegative and the pair sums to $I$, so $E_a=P_a$ is also a finite POVM by [F8].",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "The outcome weights are $p_0=\\operatorname{tr}(\\rho P_0)=\\operatorname{tr}(P_0^2)=1$ and $p_1=\\operatorname{tr}(\\rho P_1)=\\operatorname{tr}(P_0P_1)=0$, using [F3] and [F13]. They are probabilities by [F9].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F9",
+            "F13",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "claim": "Since each $P_a$ is nonnegative and satisfies $P_a^2=P_a$ by step 1.1, uniqueness of the nonnegative square root [F14] gives $P_a^{1/2}=P_a$. Applying [F10] to $E_a=P_a$ therefore gives the Lüders branch maps $\\mathcal I_a(X)=P_aXP_a$ and proves that they form an instrument.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F8",
+            "F10",
+            "F14",
+            "step 1.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Matrix multiplication [F3] gives $\\mathcal I_0(\\rho)=P_0$ and $\\mathcal I_1(\\rho)=P_1P_0P_1=0$. Thus $\\mathcal I_0(\\rho)/p_0=P_0$ is a density operator by steps 2.1 and 3.1, whereas [F11] assigns $\\bot$ to the outcome-$1$ conditional value because $p_1=0$. The zero-branch theorem [F12] confirms that no conditional density operator is assigned there.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F11",
+            "F12",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a finite nonempty outcome set or a nonzero state space; no empty outcome family is in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example computes the zero outcome and its zero instrument output."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes a two-outcome measurement and makes no one-outcome claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example verifies the rank-one state and zero branch directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example computes endpoint weights p_0=1 and p_1=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example fixes two matrices and uses only finite arithmetic; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition is not an if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    }
+  }
+}

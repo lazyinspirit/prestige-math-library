@@ -1,0 +1,2683 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-21-pure-state-trace-distance-from-vector-error",
+    "lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians",
+    "def-qa-21-clean-ancilla-postselection",
+    "thm-qa-21-clean-ancilla-postselection-probability-law",
+    "def-qa-21-lcu-input-and-access-model",
+    "alg-qa-21-lcu-block-encoding",
+    "def-qa-21-oblivious-reflection",
+    "def-qa-21-truncated-taylor-lcu",
+    "thm-qa-21-lcu-block-correctness",
+    "alg-qa-21-one-step-oblivious-amplification",
+    "thm-qa-21-taylor-tail-bound",
+    "thm-qa-21-oblivious-amplification-block-identity",
+    "lem-qa-21-robust-one-step-oaa-isometry",
+    "alg-qa-21-segmented-taylor-simulation",
+    "thm-qa-21-taylor-simulation-error-and-cost",
+    "ex-qa-21-cancelling-normalization-padding",
+    "cex-qa-21-unknown-input-reflection",
+    "ex-qa-21-two-term-lcu-postselection"
+  ],
+  "contracts": {
+    "lem-qa-21-pure-state-trace-distance-from-vector-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inner-product-norm",
+          "source_section": "Definition",
+          "quote": "For a vector $v$ in a real or complex inner product space, define its **inner-product norm** by\n\n$$\\lVert v\\rVert:=\\sqrt{\\langle v,v\\rangle}.$$\n\nPositive definiteness in [[def-inner-product-space]] makes the radicand a nonnegative real, and [[thm-nth-roots-exist]] supplies its unique nonnegative square root. The notation therefore defines one real number $\\lVert v\\rVert\\ge0$. Its norm axioms are established in [[cor-triangle-inequality-for-inner-product-norm]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-trace-norm",
+          "source_section": "Definition",
+          "quote": "Let $A:H\\to K$ be a linear map ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces. Its singular values are the eigenvalues of\n$|A|:=\\sqrt{A^*A}:H\\to H$, counted with multiplicity, as defined in\n[[def-singular-values-of-an-endomorphism]]. Define the **trace norm**, or\nSchatten-$1$ norm, by\n\n$$\\|A\\|_1:=\\sum_{j<\\dim H}s_j(A).$$\n\nThe sum includes zero singular values and is $0$ when $H$ is the zero space.\nFor this definition, $A$ may be rectangular; the singular values are those of\n$|A|$ on the domain $H$. The spectral trace formula is proved in\n[[thm-qc-trace-norm-spectral-formula]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-trace-norm-spectral-formula",
+          "source_section": "Statement",
+          "quote": "For every linear map $A:H\\to K$ ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces,\n\n$$\\|A\\|_1=\\operatorname{tr}_H\\!\\left(\\sqrt{A^*A}\\right).$$\n\nHere $A^*A$ and its non-negative square root are endomorphisms of the domain\n$H$; the trace is taken on $H$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $c:=\\langle u|v\\rangle_D$ and $s:=\\sqrt{1-|c|^2}$. By [F3], $0\\le s\\le1$. If $s=0$, equality in Cauchy–Schwarz makes $v$ a unit scalar multiple of $u$, so $P_v=P_u$ and $D(P_u,P_v)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose $s>0$ and set $e:=(v-cu)/s$. The Dirac convention makes $\\langle u|e\\rangle_D=0$, and direct expansion gives $\\|e\\|=1$. In the orthonormal basis $(u,e)$ of their span, $P_u-P_v$ has matrix $\\begin{pmatrix}s^2&-cs\\\\-\\overline c\\,s&-s^2\\end{pmatrix}$; it is zero on the orthogonal complement. This Hermitian matrix has trace $0$ and determinant $-s^2$, hence eigenvalues $s,-s$. By [F4]–[F6], $\\|P_u-P_v\\|_1=2s$, so $D(P_u,P_v)=s$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For either case, $\\|u-v\\|^2=2-2\\operatorname{Re}c\\ge2(1-|c|)$, while $s^2=(1-|c|)(1+|c|)\\le2(1-|c|)$. Thus $D(P_u,P_v)=s\\le\\|u-v\\|$, including the $s=0$ case from step 1.1.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A unit vector is required, so the zero-dimensional space has no input instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats s=0, including equal rays."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In a one-dimensional space any two unit vectors are scalar multiples, so step 1.1 gives s=0 and zero distance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 obtains eigenvalues s and −s on the span and zero on its orthogonal complement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include parallel and orthogonal unit-vector cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "equal and orthogonal qubit states",
+          "method": "exact inner-product and eigenvalue calculation",
+          "input": {
+            "u": "|0⟩",
+            "v": [
+              "|0⟩",
+              "|1⟩"
+            ]
+          },
+          "calculation": "For v=u, D=0 and ||u−v||=0. For v=|1⟩, D=1 and ||u−v||=√2.",
+          "expected": {
+            "inequality_holds": true,
+            "orthogonal_trace_distance": 1
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-trace-norm",
+          "source_section": "Definition",
+          "quote": "Let $A:H\\to K$ be a linear map ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces. Its singular values are the eigenvalues of\n$|A|:=\\sqrt{A^*A}:H\\to H$, counted with multiplicity, as defined in\n[[def-singular-values-of-an-endomorphism]]. Define the **trace norm**, or\nSchatten-$1$ norm, by\n\n$$\\|A\\|_1:=\\sum_{j<\\dim H}s_j(A).$$\n\nThe sum includes zero singular values and is $0$ when $H$ is the zero space.\nFor this definition, $A$ may be rectangular; the singular values are those of\n$|A|$ on the domain $H$. The spectral trace formula is proved in\n[[thm-qc-trace-norm-spectral-formula]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-trace-norm-spectral-formula",
+          "source_section": "Statement",
+          "quote": "For every linear map $A:H\\to K$ ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces,\n\n$$\\|A\\|_1=\\operatorname{tr}_H\\!\\left(\\sqrt{A^*A}\\right).$$\n\nHere $A^*A$ and its non-negative square root are endomorphisms of the domain\n$H$; the trace is taken on $H$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-partial-trace-characterization-and-basis-independence",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional complex inner-product spaces $H_A,H_B$, the partial\ntrace $\\operatorname{Tr}_B:\\operatorname{End}(H_A\\otimes H_B)\\to\n\\operatorname{End}(H_A)$ is the unique linear map satisfying\n\n$$\\operatorname{tr}\\bigl((\\operatorname{Tr}_B R)\\circ T\\bigr)=\\operatorname{tr}\\bigl(R\\circ(T\\otimes I_{H_B})\\bigr)\\quad\\text{for every }R\\in\\operatorname{End}(H_A\\otimes H_B)\\text{ and }T\\in\\operatorname{End}(H_A).$$\n\nHere $I_{H_B}$ is the identity map $y\\mapsto y$ on $H_B$; $\\operatorname{End}$\nis the notation defined in [[def-qc-partial-trace]].\n\nIts coordinate formula is independent of the chosen ordered orthonormal basis\nof $H_B$. The assertion includes zero-dimensional factors.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If either tensor factor is zero-dimensional, then $X=0$ and the claimed inequality follows from the empty coordinate sum in [F4]; assume both factors are nonzero for the rest of the proof. For any Hermitian $Z$ on a nonzero finite-dimensional complex-inner-product space, [F3] gives an orthonormal eigenbasis $(e_i)$ with eigenvalues $\\lambda_i$. The adjoint identity [F11] and conjugate symmetry make $\\lambda_i=\\langle Ze_i,e_i\\rangle=\\langle e_i,Ze_i\\rangle=\\overline{\\lambda_i}$, so each $\\lambda_i$ is real. For every Hermitian $Y$ with $\\|Y\\|\\le1$, [F12] gives $\\operatorname{tr}(ZY)=\\sum_i\\lambda_i\\langle Ye_i,e_i\\rangle_{\\rm root}$. Again [F11] makes each diagonal entry real, and [F8]–[F9] put it in $[-1,1]$. Thus $|\\operatorname{tr}(ZY)|\\le\\sum_i|\\lambda_i|=\\|Z\\|_1$: in the eigenbasis, $Z^\\dagger Z$ has eigenvalues $\\lambda_i^2$, so [F2] its nonnegative square root has eigenvalues $|\\lambda_i|$, and [F1], [F2], [F12] give the trace norm sum. Equality is attained by the Hermitian contraction acting by $\\operatorname{sgn}(\\lambda_i)$ on each $e_i$ (and by $0$ when $\\lambda_i=0$). Hence $\\|Z\\|_1=\\sup_{Y=Y^\\dagger,\\ \\|Y\\|\\le1}|\\operatorname{tr}(ZY)|$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "F11",
+            "F12"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Formula [F4] shows $\\operatorname{Tr}_E X$ is Hermitian: transposing and conjugating its $(i,i')$ entry gives $\\sum_j\\overline{X_{(i',j),(i,j)}}=\\sum_jX_{(i,j),(i',j)}$. If $Y=Y^\\dagger$ and $\\|Y\\|\\le1$, choose an orthonormal basis $(f_j)$ of $H_E$ by [F10] and write arbitrary $\\xi=\\sum_jx_j\\otimes f_j$ and $\\zeta=\\sum_jy_j\\otimes f_j$. The product inner product and tensor-map action [F6]–[F7] give $\\langle(Y\\otimes I_E)\\xi,\\zeta\\rangle=\\sum_j\\langle Yx_j,y_j\\rangle=\\sum_j\\langle x_j,Yy_j\\rangle=\\langle\\xi,(Y\\otimes I_E)\\zeta\\rangle$ by self-adjointness and [F11], so $Y\\otimes I_E$ is Hermitian. Also [F6]–[F8] give $\\|(Y\\otimes I_E)\\xi\\|^2=\\sum_j\\|Yx_j\\|^2\\le\\sum_j\\|x_j\\|^2=\\|\\xi\\|^2$, so $\\|Y\\otimes I_E\\|\\le1$.",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For the remaining nonzero-factor case, apply the variational identity in step 1.1 to $\\operatorname{Tr}_E X$. For each allowed $Y$, [F5] and step 1.2 give $|\\operatorname{tr}((\\operatorname{Tr}_E X)Y)|=|\\operatorname{tr}(X(Y\\otimes I_E))|\\le\\|X\\|_1$, using step 1.1 for the Hermitian contraction $Y\\otimes I_E$. Taking the supremum proves the claimed inequality.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles either zero-dimensional tensor factor by the empty coordinate sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly proves the inequality when X=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For H_A=H_E=ℂ the partial trace is the same scalar and the inequality is equality; the coordinate formulas of steps 1.1–2.1 specialize to this case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes zero and repeated eigenvalues through the sign contraction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 bounds every Hermitian contraction, including contractions attaining equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use finite orthonormal eigen/product bases supplied by [F3] and [F10]; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional retained factor",
+          "method": "exact diagonal matrices",
+          "input": {
+            "H_A": "ℂ",
+            "H_E": "ℂ²",
+            "X": "diag(1,−1)"
+          },
+          "calculation": "Tr_E X=1+(−1)=0, so ||Tr_E X||₁=0≤||X||₁=2.",
+          "expected": {
+            "left_trace_norm": 0,
+            "right_trace_norm": 2
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "def-qa-21-clean-ancilla-postselection": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition states the branch rule for unit vectors; if A⊗S is zero, no unit-vector input exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition explicitly assigns no conditional vector when p₀=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For φ=|0_A⟩⊗ψ with unit ψ, the Definition gives q=ψ and p₀=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition is independent of any spectral or eigenvalue multiplicity assumptions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition distinguishes p₀=0 from positive p₀, including p₀=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "clean zero branch",
+          "method": "exact basis coordinates",
+          "input": {
+            "A": "one qubit",
+            "S": "one qubit",
+            "phi": "|00⟩"
+          },
+          "calculation": "J†phi=|0⟩, p₀=1, and p⊥=0 by the stated branch Definition.",
+          "expected": {
+            "p0": 1,
+            "pperp": 0
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-21-clean-ancilla-postselection-probability-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-21-clean-ancilla-postselection",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a finite register with distinguished unit computational-basis vector $|0_A\\rangle$ (unit by [[thm-qc-computational-basis-orthonormal]]), let $S$ be a finite-dimensional complex-inner-product space, and define the isometry $J:S\\to A\\otimes S$ by $Jx=|0_A\\rangle\\otimes x$. The product inner product makes $J$ an isometry; [[lem-qc-linear-isometry-adjoint-identities]] gives $J^\\dagger J=I_S$, and [[thm-qc-isometric-encoding-projector]] makes $\\Pi_0:=JJ^\\dagger$ the orthogonal projection onto its image. On elementary tensors this is $|0_A\\rangle\\langle0_A|\\otimes I_S$ by the convention of [[def-qc-tensor-map]]. For a unit vector $\\phi\\in A\\otimes S$, define its zero-branch vector $q:=J^\\dagger\\phi$, zero-branch weight $p_0:=\\|q\\|^2$, and complementary-branch weight $p_\\perp:=\\|(I-\\Pi_0)\\phi\\|^2$. When $p_0>0$, the conditional system vector is $q/\\sqrt{p_0}$; when $p_0=0$, no conditional vector is assigned. This definition fixes only the clean-ancilla two-outcome branch rule used on this page; it makes no physical realization claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-linear-isometry-adjoint-identities",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces and let\n$V:H\\to K$ be a linear isometry. Then $V^\\dagger V=I_H$. If $V$ is also\nsurjective, then $VV^\\dagger=I_K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-inner-product-norm",
+          "source_section": "Definition",
+          "quote": "For a vector $v$ in a real or complex inner product space, define its **inner-product norm** by\n\n$$\\lVert v\\rVert:=\\sqrt{\\langle v,v\\rangle}.$$\n\nPositive definiteness in [[def-inner-product-space]] makes the radicand a nonnegative real, and [[thm-nth-roots-exist]] supplies its unique nonnegative square root. The notation therefore defines one real number $\\lVert v\\rVert\\ge0$. Its norm axioms are established in [[cor-triangle-inequality-for-inner-product-norm]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "From the product inner product [F2] and unit norm [F5], $\\|Jx\\|^2=\\langle |0_A\\rangle\\otimes x,|0_A\\rangle\\otimes x\\rangle=\\|x\\|^2$ for every $x$, so $J$ is an isometry by its definition in [F3]. Therefore $J^\\dagger J=I_S$ by [F3]. It follows that $\\Pi_0=JJ^\\dagger$ is self-adjoint and idempotent, $\\Pi_0\\phi=Jq$, and $\\phi=\\Pi_0\\phi+(I-\\Pi_0)\\phi$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The two summands are orthogonal because $\\Pi_0(I-\\Pi_0)=0$ and $\\Pi_0^\\dagger=\\Pi_0$. Expanding their squared norm by [F4] gives $1=\\|\\phi\\|^2=\\|\\Pi_0\\phi\\|^2+\\|(I-\\Pi_0)\\phi\\|^2=\\|q\\|^2+p_\\perp=p_0+p_\\perp$. Both summands are nonnegative, so each lies in $[0,1]$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $p_0>0$, then $\\|q/\\sqrt{p_0}\\|^2=p_0/p_0=1$. If $p_0=0$, definiteness of the inner-product norm gives $q=0$, so normalization is undefined and the definition correctly assigns no conditional vector.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A unit vector φ is required; the zero tensor space has no input instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats p₀=0 and proves q=0 with no conditional vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For φ=|0_A⟩⊗ψ with unit ψ, steps 1.1–2.1 give p₀=1 and p⊥=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The orthogonal decomposition in steps 1.1–2.1 has no nondegeneracy hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 cover p₀=0 and p₀=1, and normalize only positive branches."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Bell-vector branch weights",
+          "method": "exact tensor coordinates",
+          "input": {
+            "phi": "(|00⟩+|11⟩)/√2"
+          },
+          "calculation": "The zero branch is |0⟩/√2, with p₀=1/2; the complement has p⊥=1/2.",
+          "expected": {
+            "sum": 1,
+            "conditional_vector": "|0⟩"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "def-qa-21-lcu-input-and-access-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires m≥1 and α>0, so an empty list or zero coefficient norm is outside the access model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero coefficients are assigned ω_j=1 and have zero prepared amplitude in the Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: For m=1, q=0 and the index register is the declared one-dimensional register."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: Distinct ordered labels remain distinct even when terms or product unitaries coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition separately excludes α=0 and specifies padded indices and all access costs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single-term zero-qubit index",
+          "method": "exact access definition",
+          "input": {
+            "m": 1,
+            "term": "cV",
+            "c": "1"
+          },
+          "calculation": "q=ceil(log₂1)=0, α=1, PREPARE is the scalar identity on the one-dimensional index space, and SELECT applies V.",
+          "expected": {
+            "index_qubits": 0,
+            "alpha": 1
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "alg-qa-21-lcu-block-encoding": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The procedure inherits m≥1 and α>0 from its input Definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Procedure specifies a complete unitary composition even when the represented matrix has a zero branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, the inherited index register has zero qubits and the same three-unitary definition applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Procedure preserves distinct supplied term labels; no independence assumption is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Procedure makes no postselection or deterministic output claim and charges inverse calls."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single-term unitary block",
+          "method": "exact access composition",
+          "input": {
+            "m": 1,
+            "P": "I",
+            "SELECT": "V"
+          },
+          "calculation": "W=P†SELECT P=V; with unitary V the clean-ancilla block is V.",
+          "expected": {
+            "block": "V"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "def-qa-21-oblivious-reflection": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A zero projector is allowed; the Definition then gives R₀=I."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a one-dimensional clean-ancilla space with Π₀=I, the Definition gives R₀=−I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: For one ancilla qubit and Π₀=|0⟩⟨0|, R₀=diag(−1,1) on the ancilla."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition applies to the full clean subspace regardless of its rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two invariant subspaces receive the explicit signs stated in the Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one clean ancilla qubit",
+          "method": "exact 2×2 matrix",
+          "input": {
+            "Pi": "diag(1,0)"
+          },
+          "calculation": "R₀=I−2Pi=diag(−1,1), and R₀²=I.",
+          "expected": {
+            "unitary_involution": true
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "def-qa-21-truncated-taylor-lcu": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires m≥1; it still permits Λ=0 and K=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If Λ|h|=0, the Definition gives M_K=I and s_K=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: For m=1, K=0, the product list is the empty tuple with coefficient 1 and unitary I."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated products remain distinct ordered tuple labels by the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: K=0 is included, and q=0 padding may be retained with zero amplitude."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "m=1 first-order Taylor list",
+          "method": "exact coefficient expansion",
+          "input": {
+            "H": "aV",
+            "K": 1,
+            "h": "h"
+          },
+          "calculation": "The list contains (1,I) and (−iha,V), with listed coefficient norm 1+|ha|.",
+          "expected": {
+            "term_count": 2
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-21-lcu-block-correctness": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "alg-qa-21-lcu-block-encoding",
+          "source_section": "Definition",
+          "quote": "**Input:** An LCU representation and complete PREPARE and SELECT unitaries from [[def-qa-21-lcu-input-and-access-model]], including their stated work-register and padded-index behavior.\n\n**Procedure:** On the coefficient/work ancillas and system, apply PREPARE, then SELECT, then PREPARE$^\\dagger$. Return the complete unitary $W=P^\\dagger S_{\\rm sel}P$. Charge each call and any separately supplied inverse or controlled form. No measurement or deterministic state-output guarantee is part of this procedure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-21-clean-ancilla-postselection",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a finite register with distinguished unit computational-basis vector $|0_A\\rangle$ (unit by [[thm-qc-computational-basis-orthonormal]]), let $S$ be a finite-dimensional complex-inner-product space, and define the isometry $J:S\\to A\\otimes S$ by $Jx=|0_A\\rangle\\otimes x$. The product inner product makes $J$ an isometry; [[lem-qc-linear-isometry-adjoint-identities]] gives $J^\\dagger J=I_S$, and [[thm-qc-isometric-encoding-projector]] makes $\\Pi_0:=JJ^\\dagger$ the orthogonal projection onto its image. On elementary tensors this is $|0_A\\rangle\\langle0_A|\\otimes I_S$ by the convention of [[def-qc-tensor-map]]. For a unit vector $\\phi\\in A\\otimes S$, define its zero-branch vector $q:=J^\\dagger\\phi$, zero-branch weight $p_0:=\\|q\\|^2$, and complementary-branch weight $p_\\perp:=\\|(I-\\Pi_0)\\phi\\|^2$. When $p_0>0$, the conditional system vector is $q/\\sqrt{p_0}$; when $p_0=0$, no conditional vector is assigned. This definition fixes only the clean-ancilla two-outcome branch rule used on this page; it makes no physical realization claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-21-clean-ancilla-postselection-probability-law",
+          "source_section": "Statement",
+          "quote": "With the notation of [[def-qa-21-clean-ancilla-postselection]], every unit vector $\\phi$ has $p_0,p_\\perp\\in[0,1]$ and $p_0+p_\\perp=1$. If $p_0>0$, the assigned conditional vector $q/\\sqrt{p_0}$ is a unit vector; if $p_0=0$, then $q=0$ and no conditional vector exists.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $\\beta_j=\\sqrt{|c_j|/\\alpha}$ and $\\omega_j=c_j/|c_j|$ for $c_j\\ne0$ (take $\\omega_j=1$ when $c_j=0$). PREPARE gives $e^{i\\theta}\\sum_{j<m}\\beta_j|j,0_{\\rm work}\\rangle$ from the all-zero ancilla. After SELECT, the $j$th component is $e^{i\\theta}\\beta_j|j,0_{\\rm work}\\rangle\\otimes\\omega_jV_j\\psi$. The all-zero matrix element of PREPARE$^\\dagger$ on $|j,0_{\\rm work}\\rangle$ is $e^{-i\\theta}\\beta_j$ by [F1], so the global phase cancels and $J^\\dagger WJ\\psi=\\sum_j\\beta_j^2\\omega_jV_j\\psi=M\\psi/\\alpha$. Padded invalid indices have zero prepared amplitude. Since this holds for every $\\psi$, it proves the block identity; orthonormality [F5] validates these basis matrix elements.",
+          "inputs": [
+            "L1",
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply [F3] to $\\phi=WJ\\psi$: its zero-branch vector is $J^\\dagger WJ\\psi=M\\psi/\\alpha$. Its branch weight is therefore $\\|M\\psi\\|^2/\\alpha^2$, and [F4] makes this a valid probability in $[0,1]$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\|M\\psi\\|>0$, division of the branch vector by its norm gives $M\\psi/\\|M\\psi\\|$. If $M\\psi=0$, the weight is zero and [F4] forbids assigning a normalized conditional vector to that branch.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The LCU hypothesis requires m≥1 and α>0; the empty/zero-normalization list is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats Mψ=0 and prohibits a normalized state for the zero branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one term, the zero-qubit index-register case is included by [F2] and the sum in step 1.1 has one term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid for repeated terms and zero coefficients because labels are summed separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 cover branch weights 0 and 1 and positive-branch normalization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "duplicate one-dimensional identity terms",
+          "method": "exact 1×1 unitary access",
+          "input": {
+            "terms": [
+              "(1,I)",
+              "(1,I)"
+            ],
+            "prepare": "(|0⟩+|1⟩)/√2",
+            "system_state": "1"
+          },
+          "calculation": "α=2, SELECT=I, W=P†IP=I and J†WJ=1=M/α; the branch weight is 1.",
+          "expected": {
+            "block": 1,
+            "probability": 1
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "alg-qa-21-one-step-oblivious-amplification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Procedure requires a unitary W and a declared clean-ancilla injection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Procedure is a finite unitary composition even when M=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: The two-W/one-inverse composition is unchanged for a one-dimensional system."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: No eigenvalue, rank, or nondegeneracy condition is imposed by the Procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: The minus phase and controlled-access condition are explicitly retained in the Procedure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "primitive-call counts",
+          "method": "expand W=P†SELECT P in the specified chronological circuit",
+          "input": {
+            "segments": 1
+          },
+          "calculation": "Two W and one W† produce 3 PREPARE, 3 PREPARE†, 2 SELECT, 1 SELECT† and 2 reflection calls.",
+          "expected": {
+            "prepare": 3,
+            "prepare_dagger": 3,
+            "select": 2,
+            "select_dagger": 1,
+            "reflections": 2
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-21-taylor-tail-bound": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qa-21-truncated-taylor-lcu",
+          "source_section": "Definition",
+          "quote": "Let $H=\\sum_{j=0}^{m-1}a_jV_j$ on a finite-dimensional complex-inner-product space, with $m\\ge1$, real $a_j$ and Hermitian unitaries $V_j$, and put $\\Lambda=\\sum_j|a_j|$. For real $h$ and integer $K\\ge0$, define\n$$M_K(h):=\\sum_{k=0}^{K}\\frac{(-ihH)^k}{k!}.$$\nIts ordered product-term LCU list has one empty tuple for $k=0$, with coefficient $1$ and unitary $I$, and for each $1\\le k\\le K$ and ordered tuple $(j_1,\\ldots,j_k)$ has coefficient\n$$c_{k,\\mathbf j}:=\\frac{(-i)^k h^k a_{j_1}\\cdots a_{j_k}}{k!}$$\nand unitary $V_{j_1}\\cdots V_{j_k}$. Distinct tuples remain distinct entries even if their product unitaries coincide. The absolute coefficient sum of this listed representation is\n$$s_K(h):=\\sum_{k=0}^{K}\\frac{(\\Lambda|h|)^k}{k!}.$$\n\nWhenever $s_K(h)\\le2$, append two distinct identity entries with coefficients $+q$ and $-q$, where $q=(2-s_K(h))/2$. They leave the represented matrix unchanged and raise the listed absolute coefficient sum to exactly $2$. If $q=0$, the zero-weight entries may be retained with zero preparation amplitude or omitted. The polynomial, coefficient phases, ordered tuple index, and any numerical precision used to generate them are part of the finite input/access record; no term product, coefficient table, PREPARE circuit, or SELECT circuit is free.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qa-19-finite-matrix-dynamics",
+          "source_section": "Definition",
+          "quote": "In this page a **Hamiltonian** is a self-adjoint endomorphism $H$ of a\nfinite-dimensional complex inner-product space $V$; no physical postulate is\npart of the term. Let $\\sigma(H)$ be the set of its distinct eigenvalues and\nlet $P_\\lambda$ be the orthogonal projection onto the $\\lambda$-eigenspace.\nFor real time $t$, define the finite matrix evolution\n\n$$U_H(t):=\\sum_{\\lambda\\in\\sigma(H)}e^{-it\\lambda}P_\\lambda = f_t(H),\\qquad f_t(\\lambda)=e^{-it\\lambda}.$$\n\nThe second expression uses the finite spectral functional calculus\n[[def-functional-calculus-for-a-normal-endomorphism]]. If $V$ is the zero\nspace, the spectrum is empty and the empty sum is the unique endomorphism,\nwhich is also the identity on $V$. This definition specifies a mathematical\nunitary from a finite matrix; it makes no claim that the operation has an\nefficient circuit or a free access cost.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], choose an orthonormal eigenbasis of $H$ with eigenvalues $\\lambda$. For a unit eigenvector $u_\\lambda$, $|\\lambda|=\\|Hu_\\lambda\\|=\\|\\sum_j a_jV_ju_\\lambda\\|\\le\\sum_j|a_j|\\|V_ju_\\lambda\\|=\\Lambda$ by [F2]–[F4]. On this basis, [L1] and [L2] make the difference diagonal with scalar entries $\\sum_{k=0}^K(-ih\\lambda)^k/k!-\\exp(-ih\\lambda)$.",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Since $x\\ge0$, the finite Taylor coefficient sum obeys $0\\le s_K=\\sum_{k=0}^Kx^k/k!\\le\\sum_{k=0}^{\\infty}x^k/k!=e^x$ by [L1] and [F5]. If $x\\le\\ln2$, [F7] gives $s_K\\le e^x\\le2$.",
+          "inputs": [
+            "L1",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $n=K+1$. The absolute scalar-series tail at eigenvalue $\\lambda$ is at most $\\sum_{k=n}^{\\infty}(|h||\\lambda|)^k/k!$. Writing $k=n+j$ and using $(n+j)!\\ge n!j!$ bounds this by $(|h||\\lambda|)^n/n!\\sum_{j=0}^{\\infty}(|h||\\lambda|)^j/j!=e^{|h||\\lambda|}(|h||\\lambda|)^n/n!$ by [F5]–[F6]. If the diagonal error has entries $d_i$ in the eigenbasis and $z=\\sum_i z_i u_i$, then its squared output norm is $\\sum_i|d_i|^2|z_i|^2\\le(\\max_i|d_i|)^2\\|z\\|^2$; an eigenbasis vector attaining the finite maximum gives equality in the operator norm [F4]. Hence the operator norm is $\\max_i|d_i|$. Since $0\\le|h||\\lambda_i|\\le x$, the monotonicity of $e^u$ and $u^n$ on nonnegative reals gives $e^{|h||\\lambda_i|}|h|^n|\\lambda_i|^n/n!\\le e^xx^n/n!$. Taking the maximum proves the stated tail bound.",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Assume $x\\le\\ln2$, so $e^x\\le2$ by [F7]. Let $L=\\ln(1/\\eta)$. The exponential series gives $2<e<3$: its first two terms sum to $2$, while $1/k!\\le2^{-(k-1)}$ for $k\\ge2$, with strict inequality for $k\\ge3$, so the remaining sum is less than $1$. Thus $\\exp(0)=1<2<\\exp(1)=e$ by [F5], and the strict increase and inverse relation in [F7] give $0<\\ln2<1$. If $L<1$, $n=10$ gives $2x^{10}/10!<2/10!<1/3<e^{-1}<\\eta$. If $L\\ge1$, take $n=\\lceil16eL/\\ln(e+L)\\rceil$. For $z\\ge1$, $g(z)=\\sqrt z-\\ln z$ has derivative $g'(z)=(\\sqrt z-2)/(2z)$, so it decreases up to $z=4$ and increases thereafter. Since $e>2$, $\\exp(2)=e^2>4$, hence $\\ln4<2$ by [F7]; thus $g(z)\\ge g(4)=2-\\ln4>0$. Also $e+L\\le(e+1)L<4L$, so $16L\\ge(\\ln2)(e+L)$. These inequalities give $n/(e\\ln2)\\ge16L/(\\ln(e+L)\\ln2)\\ge\\sqrt{e+L}$, and therefore $n\\ln(n/(e\\ln2))\\ge8eL\\ge L+\\ln2$ (since $e>2$, $L\\ge1$, and $\\ln2<1$). For the factorial estimate, monotonicity of $\\ln s$ gives $\\ln(n!)=\\sum_{k=1}^n\\ln k\\ge\\int_1^n\\ln s\\,ds=n\\ln n-n+1$, so $n!\\ge(n/e)^n$. Thus $2x^n/n!\\le2(e\\ln2/n)^n\\le e^{-L}=\\eta$. In both cases $n=O(1+L/\\ln(e+L))$. Since $\\ln(e+e^L)\\le L+\\ln2\\le e+L$, this is also $O(1+L/\\ln\\ln(e+e^L))$, the displayed order after changing logarithm bases. Hence $K=n-1$ has the stated order.",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonzero system and m≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For x=0, step 2.1 gives zero remainder and step 1.2 gives s_K=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes to a single eigenvalue on a one-dimensional space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a full eigenbasis with multiplicities; the bound depends only on |λ|≤Λ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 include x=ln2 and split all 0<η<1 into L<1 and L≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a finite eigenbasis supplied by [F1], with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-time scalar Hamiltonian",
+          "method": "exact scalar evaluation",
+          "input": {
+            "H": "[1]",
+            "h": 0,
+            "K": 0
+          },
+          "calculation": "M₀(0)=1=e⁰, so both operator error and the tail bound are 0.",
+          "expected": {
+            "error": 0,
+            "tail_bound": 0
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-21-oblivious-amplification-block-identity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "alg-qa-21-one-step-oblivious-amplification",
+          "source_section": "Definition",
+          "quote": "**Input:** A unitary $W$ on coefficient/work ancillas and system, explicit inverse access to $W$, the reflection $R_0=I-2\\Pi_0$ of [[def-qa-21-oblivious-reflection]], and an operator $M$ satisfying $J^\\dagger WJ=M/2$ for the clean injection $Jx=|0_{\\rm anc}\\rangle\\otimes x$.\n\n**Procedure:** Chronologically apply $W$, then $R_0$, then $W^\\dagger$, then $R_0$, then $W$. The resulting unitary is\n$$C:=-WR_0W^\\dagger R_0W.$$\nThe scalar $-1$ is an explicit phase correction; it is not omitted when this procedure is controlled. The circuit uses two $W$ calls, one $W^\\dagger$ call, and two reflection calls. A controlled invocation requires the declared controlled forward, inverse, reflection, and phase-correction gates. This procedure makes no measurement and asserts no exact ancilla cleanup for a nonunitary or approximate $M$; the robust clean-input guarantee is proved separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qa-21-oblivious-reflection",
+          "source_section": "Definition",
+          "quote": "Let $A$ be the full coefficient and PREPARE-work ancilla register in [[def-qa-21-lcu-input-and-access-model]], let $S$ be the system, and let $J:S\\to A\\otimes S$ be the clean injection of [[def-qa-21-clean-ancilla-postselection]]. Set $\\Pi_0:=JJ^\\dagger$; [[thm-qc-isometric-encoding-projector]] makes this the orthogonal projection onto the image of $J$. Its basis formula is $\\Pi_0=|0_A\\rangle\\langle0_A|\\otimes I_S$, where $|0_A\\rangle$ is unit by [[thm-qc-computational-basis-orthonormal]] and the tensor action is that of [[def-qc-tensor-map]]. Define\n$$R_0:=I-2\\Pi_0.$$\nThus $R_0$ acts as $-I$ on the clean-ancilla subspace and as $+I$ on its orthogonal complement; it acts identically on the unknown system state. In the convention of [[def-qc-reflection]], $R_0=S_{\\Pi_0}$, while that item writes $R_{\\Pi_0}=2\\Pi_0-I=-R_0$. These signs are distinct inside controlled blocks: if only the controlled $R_{\\Pi_0}$ is supplied, implement controlled $R_0$ with the exact control-$Z$ correction of [[thm-qc-reflection-unitary-involution]] and charge that gate. A projector-reflection call and its controlled form are explicit access operations, not free consequences of a state vector.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-linear-isometry-adjoint-identities",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces and let\n$V:H\\to K$ be a linear isometry. Then $V^\\dagger V=I_H$. If $V$ is also\nsurjective, then $VV^\\dagger=I_K$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $B=J^\\dagger WJ=M/2$. By [F3]–[F5], $J^\\dagger J=I$ and $\\Pi=JJ^\\dagger$ is the stated orthogonal projection; hence $J^\\dagger\\Pi=J^\\dagger$ and $\\Pi J=J$. By [L1]–[F2], the three-use circuit is the stated unitary circuit with two reflections.",
+          "inputs": [
+            "L1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Expand $(I-2\\Pi)$ twice inside $J^\\dagger W(I-2\\Pi)W^\\dagger(I-2\\Pi)WJ$. Since $W$ is unitary, [F3] gives $WW^\\dagger=W^\\dagger W=I$, and [F4] gives $\\Pi^2=\\Pi$. The four terms compress to $B-2B-2B+4BB^\\dagger B=-3B+4BB^\\dagger B$: respectively, use $W^\\dagger W=I$, $\\Pi J=J$, $J^\\dagger\\Pi=J^\\dagger$, and $\\Pi=JJ^\\dagger$. Substituting $B=M/2$ gives $-\\tfrac32M+\\tfrac12MM^\\dagger M$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $M$ is unitary, then $MM^\\dagger M=M$, so the block is $-M$. For arbitrary $M$, step 2.1 proves only the compression identity; it contains no estimate for $(I-\\Pi)WR_0W^\\dagger R_0WJ$.",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition: For a zero system space both sides are the unique zero endomorphism; the algebraic identity remains valid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the polynomial identity for M=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The compression expansion in steps 1.1–2.1 is unchanged for a one-dimensional system."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: No spectrum or rank condition is used in the finite operator expansion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 records the unitary-M case and limits the general claim to the projected block."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unitary one-dimensional target block",
+          "method": "exact 2×2 matrix multiplication",
+          "input": {
+            "J": "|0⟩⟨·|",
+            "W": "[[1/2,√3/2],[√3/2,−1/2]]",
+            "M": 1
+          },
+          "calculation": "With R₀=diag(−1,1), the projected block of WR₀W†R₀W is −1, matching the stated polynomial.",
+          "expected": {
+            "projected_block": -1
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-21-robust-one-step-oaa-isometry": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "alg-qa-21-one-step-oblivious-amplification",
+          "source_section": "Definition",
+          "quote": "**Input:** A unitary $W$ on coefficient/work ancillas and system, explicit inverse access to $W$, the reflection $R_0=I-2\\Pi_0$ of [[def-qa-21-oblivious-reflection]], and an operator $M$ satisfying $J^\\dagger WJ=M/2$ for the clean injection $Jx=|0_{\\rm anc}\\rangle\\otimes x$.\n\n**Procedure:** Chronologically apply $W$, then $R_0$, then $W^\\dagger$, then $R_0$, then $W$. The resulting unitary is\n$$C:=-WR_0W^\\dagger R_0W.$$\nThe scalar $-1$ is an explicit phase correction; it is not omitted when this procedure is controlled. The circuit uses two $W$ calls, one $W^\\dagger$ call, and two reflection calls. A controlled invocation requires the declared controlled forward, inverse, reflection, and phase-correction gates. This procedure makes no measurement and asserts no exact ancilla cleanup for a nonunitary or approximate $M$; the robust clean-input guarantee is proved separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qa-21-oblivious-amplification-block-identity",
+          "source_section": "Statement",
+          "quote": "Let $J:S\\to A\\otimes S$ be the clean-ancilla isometry $Jx=|0_{\\rm anc}\\rangle\\otimes x$, let $\\Pi=JJ^\\dagger$ be the orthogonal projection onto its image, and set $R_0=I-2\\Pi$. Let $W$ be unitary and assume $J^\\dagger WJ=M/2$. For the chronological circuit $WR_0W^\\dagger R_0W$,\n$$J^\\dagger WR_0W^\\dagger R_0WJ=-\\frac{3}{2}M+\\frac12MM^\\dagger M.$$\nIf $M$ is unitary, this projected block is $-M$. The identity alone gives no bound on leakage outside the clean-ancilla subspace for a nonunitary $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-21-oblivious-reflection",
+          "source_section": "Definition",
+          "quote": "Let $A$ be the full coefficient and PREPARE-work ancilla register in [[def-qa-21-lcu-input-and-access-model]], let $S$ be the system, and let $J:S\\to A\\otimes S$ be the clean injection of [[def-qa-21-clean-ancilla-postselection]]. Set $\\Pi_0:=JJ^\\dagger$; [[thm-qc-isometric-encoding-projector]] makes this the orthogonal projection onto the image of $J$. Its basis formula is $\\Pi_0=|0_A\\rangle\\langle0_A|\\otimes I_S$, where $|0_A\\rangle$ is unit by [[thm-qc-computational-basis-orthonormal]] and the tensor action is that of [[def-qc-tensor-map]]. Define\n$$R_0:=I-2\\Pi_0.$$\nThus $R_0$ acts as $-I$ on the clean-ancilla subspace and as $+I$ on its orthogonal complement; it acts identically on the unknown system state. In the convention of [[def-qc-reflection]], $R_0=S_{\\Pi_0}$, while that item writes $R_{\\Pi_0}=2\\Pi_0-I=-R_0$. These signs are distinct inside controlled blocks: if only the controlled $R_{\\Pi_0}$ is supplied, implement controlled $R_0$ with the exact control-$Z$ correction of [[thm-qc-reflection-unitary-involution]] and charge that gate. A projector-reflection call and its controlled form are explicit access operations, not free consequences of a state vector.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-linear-isometry-adjoint-identities",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces and let\n$V:H\\to K$ be a linear isometry. Then $V^\\dagger V=I_H$. If $V$ is also\nsurjective, then $VV^\\dagger=I_K$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F10], $J^\\dagger J=I$ and $\\Pi$ is an orthogonal projection. By the circuit order in [L1], the factors in $C$ are unitary by [F2]–[F4], so $CJ$ is an isometry. Put $D:=J^\\dagger CJ$. By [F1] and the minus sign in $C$, $D=3M/2-MM^\\dagger M/2$. Write $E=M-V$. For every unit vector $x$, $\\|Mx\\|\\le\\|Vx\\|+\\|Ex\\|\\le1+\\eta$, so $\\|M\\|\\le1+\\eta$ by [F5]. For each endomorphism $T$ of the nonzero space $S$, Cauchy–Schwarz gives $\\|Tx\\|=\\max_{\\|y\\|=1}|\\langle Tx,y\\rangle|$ (with $Tx=0$ immediate), hence $\\|T\\|=\\max_{\\|x\\|=\\|y\\|=1}|\\langle Tx,y\\rangle|$. The adjoint identity interchanges the unit vectors, so $\\|T^\\dagger\\|=\\|T\\|$; in particular $\\|M^\\dagger\\|\\le1+\\eta$ and $\\|E^\\dagger\\|=\\|E\\|\\le\\eta$.",
+          "inputs": [
+            "L1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $VV^\\dagger V=V$, $MM^\\dagger M-V=(M-V)M^\\dagger M+V(M^\\dagger-V^\\dagger)M+VV^\\dagger(M-V)$. For every unit vector, apply the vector triangle inequality [F6] and [F7] to these three terms; using $\\|E^\\dagger\\|=\\|E\\|\\le\\eta$ and $\\|V\\|=\\|V^\\dagger\\|=1$ from [F4] gives $\\|MM^\\dagger M-V\\|\\le\\eta((1+\\eta)^2+(1+\\eta)+1)$. Maximizing over unit vectors by [F5], $\\|D-V\\|\\le\\frac32\\eta+\\frac12\\eta((1+\\eta)^2+(1+\\eta)+1)\\le4\\eta$ for $\\eta\\le1/100$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Let $L=(I-\\Pi)CJ$. Since $\\Pi=JJ^\\dagger$ and $J^\\dagger J=I$ by [F10], $CJ=JD+L$ and $J^\\dagger L=J^\\dagger(I-JJ^\\dagger)CJ=J^\\dagger CJ-(J^\\dagger J)J^\\dagger CJ=0$. Hence both cross terms vanish in $(CJ)^\\dagger CJ=(JD+L)^\\dagger(JD+L)$, and $D^\\dagger D+L^\\dagger L=(CJ)^\\dagger CJ=I$ because $C$ and $J$ are isometries. Thus $L^\\dagger L=I-D^\\dagger D$ and $\\|L\\|^2=\\|I-D^\\dagger D\\|$ by [F7].",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "F10",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Set $\\delta=\\|D-V\\|\\le4\\eta$ by step 2.1. For every unit vector $x$, $\\|Dx\\|\\le\\|Vx\\|+\\|(D-V)x\\|\\le1+\\delta$, so $\\|D\\|\\le1+\\delta$. Since $V^\\dagger V=I$, $I-D^\\dagger D=(V-D)^\\dagger D+V^\\dagger(V-D)$; the vector triangle inequality [F6] and [F7] therefore give $\\|(I-D^\\dagger D)x\\|\\le\\delta\\|D\\|+\\delta\\le\\delta(2+\\delta)$ for unit $x$. Maximizing by [F5], $\\|I-D^\\dagger D\\|\\le\\delta(2+\\delta)\\le4\\eta(2+4\\eta)\\le9\\eta$. Thus $\\|L\\|\\le3\\sqrt{\\eta}$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "From $CJ-JV=J(D-V)+L$, for every unit $x$ the vector triangle inequality [F6] and the isometry of $J$ in [F10] give $\\|(CJ-JV)x\\|\\le\\|D-V\\|+\\|L\\|\\le4\\eta+3\\sqrt\\eta$. Maximizing by [F5] and using $\\eta\\le1/100$ yields $\\|CJ-JV\\|\\le10\\sqrt\\eta$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For any finite reference space $R$, choose an orthonormal basis $(e_j)$ by [F9] and write $\\xi=\\sum_jx_j\\otimes e_j$. By [F8], $\\|(CJ-JV)\\otimes I_R\\,\\xi\\|^2=\\sum_j\\|(CJ-JV)x_j\\|^2\\le(10\\sqrt\\eta)^2\\sum_j\\|x_j\\|^2=(10\\sqrt\\eta)^2\\|\\xi\\|^2$. Thus the same clean-input isometry bound holds with any finite reference, including entangled inputs.",
+          "inputs": [
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement explicitly assumes a nonzero system space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The estimate includes η=0; steps 2.1–4.1 then give zero leakage and zero isometry error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The operator norm proof in steps 1.1–5.1 applies to a one-dimensional system."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: No spectral nondegeneracy is assumed; the proof uses operator identities and norms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the allowed endpoint η=1/100 in its numerical bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses a finite reference ON basis from [F9], not an infinite choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact one-dimensional target block",
+          "method": "exact 2×2 matrix multiplication",
+          "input": {
+            "J": "|0⟩⟨·|",
+            "W": "[[1/2,√3/2],[√3/2,−1/2]]",
+            "M": "V=1",
+            "eta": 0
+          },
+          "calculation": "The uncorrected OAA block is −1; the explicit phase correction yields +1 with zero leakage, matching the η=0 bound.",
+          "expected": {
+            "isometry_error": 0,
+            "leakage": 0
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "alg-qa-21-segmented-taylor-simulation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires m≥1 and a nonzero system space; the empty term list is not an input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Certified interval branch returns exact identity with no oracle calls whenever t=0 or Lambda=0; it also permits a positive small-time input with certified error at most epsilon/3, without a real-zero decision."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: The algorithm accepts m=1 and its ordered Taylor list includes the zero-qubit index case when a segment has one term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: Distinct ordered product tuples remain distinct even when term products coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval branch covers S=0 without equality tests; the segmented branch certifies x<=ln2, epsilon in(0,1), and factorial schedule 4/n!<=eta. Full error and conditional access costs retain their stated boundaries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact identity branch",
+          "method": "procedure branch inspection",
+          "input": {
+            "t": 0,
+            "Lambda": 1
+          },
+          "calculation": "Step 1 returns I before selecting r or K and makes no query calls.",
+          "expected": {
+            "operator": "I",
+            "queries": 0
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-21-taylor-simulation-error-and-cost": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "alg-qa-21-segmented-taylor-simulation",
+          "source_section": "Definition",
+          "quote": "**Inputs:** A finite list $H=\\sum_{j=0}^{m-1}a_jV_j$ on a nonzero finite-dimensional complex system space, where $m\\ge1$, $a_j\\in\\mathbb R$ and each $V_j$ is a supplied Hermitian unitary; real time $t$ and rational $0<\\epsilon<1$ with finite exact descriptions; and complete PREPARE/SELECT, inverse, and cost interfaces from [[def-qa-21-lcu-input-and-access-model]] for the Taylor list selected below. For the certified procedure the real descriptions supply arbitrarily tight rational interval enclosures for $S=\\Lambda|t|$ and $S/\\ln2$, where $\\Lambda=\\sum_j|a_j|$. Exact coefficient phases and the required unitary/circuit access for the selected list are separate supplied data; interval names alone do not provide them. Arithmetic, refinement, description and generation costs are charged separately. No efficient classical compiler is asserted.\n\nFor the **indexed term-query implementation**, additionally supply the complete unitary $T(|j\\rangle\\otimes x)=|j\\rangle\\otimes V_jx$ for $j<m$, acting as identity at padded term indices, together with every controlled or inverse form actually used and its separate costs. A call to this coherent multiplexer is one indexed term query. Individual accesses to the separate $V_j$ do not grant this operation: when it is assembled from individual controlled $V_j$, each multiplexed call uses $m$ equality-controlled individual calls, and all label tests, routing, phase gates and work are charged. With an independently supplied Taylor SELECT, only its declared internal resource record applies.\n\n**Procedure:**\n\n1. Refine an enclosure $[S_-,S_+]$ of $S=\\Lambda|t|$ until its width is less than $\\epsilon/8$, intersecting with the known nonnegative half-line. If $S_+\\le\\epsilon/4$, return the exact identity circuit with no oracle calls and the certificate $S\\le\\epsilon/4$. Otherwise $S\\ge S_->\\epsilon/8$, and proceed. This requires no exact equality test on interval-described reals; every $t=0$ or $\\Lambda=0$ input takes the identity branch.\n2. In the remaining branch put $q=S/\\ln2$. In the ideal exact-arithmetic variant set $r=\\max(1,\\lceil q\\rceil)$. In the certified variant refine an enclosure $[q_-,q_+]$ until its width is less than $1$, then set $r=\\max(1,\\lceil q_+\\rceil)$. Either choice has $r\\ge1$, $\\Lambda|t|/r\\le\\ln2$, and $r<q+2$. Set $h=t/r$ and $\\eta=\\epsilon^2/(1600r^2)$. All refinement and segment-count costs are recorded.\n3. Set $n=1$ and successively double $n$ until the exact rational comparison $4/n!\\le\\eta$ holds; compute the factorial by finite integer multiplication and set $K=n-1$. This finite scheduler has no real-equality test or unbounded refinement at a fixed failed order. Since $x=\\Lambda|h|\\le\\ln2<1$, the tail in [[thm-qa-21-taylor-tail-bound]] is at most $2/n!\\le\\eta/2$. Its factorial estimate gives the stated logarithmic-over-double-logarithmic order, including the factor of at most two from doubling. Charge the factorial and coefficient arithmetic.\n4. Expand $M_K(h)$ into the ordered product-term LCU list of [[def-qa-21-truncated-taylor-lcu]]. The certificate $\\Lambda|h|\\le\\ln2$ and [[thm-qa-21-taylor-tail-bound]] prove $s_K\\le2$ analytically. Add two distinct identity terms $+qI,-qI$ with $q=(2-s_K)/2$, retaining zero-weight padding labels if needed; the matrix is unchanged and the listed norm is exactly $2$. Under the indexed term-query implementation, implement each Taylor SELECT using at most $K$ controlled indexed term queries: process tuple positions from $K$ down to $1$, condition each call on a valid tuple having that position, and use its term label. Compute/uncompute those labels in charged work registers. This reverse execution order yields the displayed product $V_{j_1}\\cdots V_{j_k}$. Apply the coefficient phase separately and act as identity on padding and unused labels. The adjoint SELECT reverses this sequence and uses the declared inverse calls.\n5. For each of the $r$ segments, allocate a fresh clean register containing the expanded-term index and every PREPARE work wire. Build $W=P^\\dagger S_{\\rm sel}P$ using the exact coefficient phases and the padded invalid-index behavior. Apply the phase-corrected chronological circuit $W,R_0,W^\\dagger,R_0,W$, with $R_0=I-2\\Pi_0$ on the complete clean coefficient/work register. Thus the segment unitary is $-WR_0W^\\dagger R_0W$, with two reflection calls, two forward $W$ calls, and one inverse call.\n6. Compose the $r$ segment circuits in time order. Retain every segment's coefficient/work register in the output dilation; do not measure or claim exact cleanup. The output is the finite unitary/access-circuit description together with the chosen $r,K$, coefficient table or generator, and resource record.\n\nThe default procedure is uncontrolled. A controlled variant is defined only when controlled access to every component is supplied; the known minus sign is applied as a phase on the outer control, not discarded. If a compiled implementation is used, the per-call operator-norm error bounds $\\delta_i$ must satisfy the certified sum $\\sum_i\\delta_i\\le\\delta_{\\rm impl}\\le\\epsilon/2$. The exact-access variant has $\\delta_{\\rm impl}=0$. Every PREPARE, SELECT, inverse, reflection, control, coefficient, table, precision, wire, and gate cost remains explicit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qa-21-truncated-taylor-lcu",
+          "source_section": "Definition",
+          "quote": "Let $H=\\sum_{j=0}^{m-1}a_jV_j$ on a finite-dimensional complex-inner-product space, with $m\\ge1$, real $a_j$ and Hermitian unitaries $V_j$, and put $\\Lambda=\\sum_j|a_j|$. For real $h$ and integer $K\\ge0$, define\n$$M_K(h):=\\sum_{k=0}^{K}\\frac{(-ihH)^k}{k!}.$$\nIts ordered product-term LCU list has one empty tuple for $k=0$, with coefficient $1$ and unitary $I$, and for each $1\\le k\\le K$ and ordered tuple $(j_1,\\ldots,j_k)$ has coefficient\n$$c_{k,\\mathbf j}:=\\frac{(-i)^k h^k a_{j_1}\\cdots a_{j_k}}{k!}$$\nand unitary $V_{j_1}\\cdots V_{j_k}$. Distinct tuples remain distinct entries even if their product unitaries coincide. The absolute coefficient sum of this listed representation is\n$$s_K(h):=\\sum_{k=0}^{K}\\frac{(\\Lambda|h|)^k}{k!}.$$\n\nWhenever $s_K(h)\\le2$, append two distinct identity entries with coefficients $+q$ and $-q$, where $q=(2-s_K(h))/2$. They leave the represented matrix unchanged and raise the listed absolute coefficient sum to exactly $2$. If $q=0$, the zero-weight entries may be retained with zero preparation amplitude or omitted. The polynomial, coefficient phases, ordered tuple index, and any numerical precision used to generate them are part of the finite input/access record; no term product, coefficient table, PREPARE circuit, or SELECT circuit is free.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-21-taylor-tail-bound",
+          "source_section": "Statement",
+          "quote": "Let $H=\\sum_{j<m}a_jV_j$ be a finite-dimensional self-adjoint Hamiltonian on a nonzero complex-inner-product space, with $m\\ge1$, written with real $a_j$ and Hermitian unitaries $V_j$, and set $\\Lambda=\\sum_j|a_j|$. For real $h$, integer $K\\ge0$, and $x=\\Lambda|h|$,\n$$\\left\\|M_K(h)-e^{-ihH}\\right\\|\\le e^x\\frac{x^{K+1}}{(K+1)!}.$$\nThe Taylor coefficient sum $s_K=\\sum_{k=0}^Kx^k/k!$ satisfies $s_K\\le e^x\\le2$ when $x\\le\\ln2$. If $0<\\eta<1$ and $x\\le\\ln2$, there is a $K=O\\!\\left(1+\\frac{\\log(1/\\eta)}{\\log\\log(e+1/\\eta)}\\right)$ for which the right-hand side is at most $\\eta$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-21-lcu-block-correctness",
+          "source_section": "Statement",
+          "quote": "Let $M=\\sum_{j<m}c_jV_j$ be a finite LCU representation with $\\alpha=\\sum_j|c_j|>0$, let $W$ be the unitary from [[alg-qa-21-lcu-block-encoding]], and let $Jx=|0_{\\rm anc}\\rangle\\otimes x$ include every coefficient and PREPARE-work ancilla. Then\n$$J^\\dagger WJ=M/\\alpha.$$\nFor every unit input vector $\\psi$, the clean-ancilla zero-branch vector is $M\\psi/\\alpha$ and its postselection weight, under [[def-qa-21-clean-ancilla-postselection]], is $\\|M\\psi\\|^2/\\alpha^2$. If this weight is positive, the conditional system vector is $M\\psi/\\|M\\psi\\|$; if it is zero, the conditional vector is undefined.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-21-oblivious-amplification-block-identity",
+          "source_section": "Statement",
+          "quote": "Let $J:S\\to A\\otimes S$ be the clean-ancilla isometry $Jx=|0_{\\rm anc}\\rangle\\otimes x$, let $\\Pi=JJ^\\dagger$ be the orthogonal projection onto its image, and set $R_0=I-2\\Pi$. Let $W$ be unitary and assume $J^\\dagger WJ=M/2$. For the chronological circuit $WR_0W^\\dagger R_0W$,\n$$J^\\dagger WR_0W^\\dagger R_0WJ=-\\frac{3}{2}M+\\frac12MM^\\dagger M.$$\nIf $M$ is unitary, this projected block is $-M$. The identity alone gives no bound on leakage outside the clean-ancilla subspace for a nonunitary $M$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-21-robust-one-step-oaa-isometry",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a nonzero finite-dimensional system space, let $A$ be the complete clean-ancilla register, let $Jx=|0_A\\rangle\\otimes x$, and put $\\Pi=JJ^\\dagger$, $R_0=I-2\\Pi$. Suppose $W$ is unitary, $J^\\dagger WJ=M/2$, $V:S\\to S$ is unitary, and $\\|M-V\\|\\le\\eta\\le1/100$. For\n$$C:=-WR_0W^\\dagger R_0W$$\none has the clean-input isometry bound\n$$\\|CJ-JV\\|\\le10\\sqrt{\\eta}.$$\nThe estimate includes residual ancilla leakage; it does not assert exact cleanup for nonzero $\\eta$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-19-finite-matrix-dynamics",
+          "source_section": "Definition",
+          "quote": "In this page a **Hamiltonian** is a self-adjoint endomorphism $H$ of a\nfinite-dimensional complex inner-product space $V$; no physical postulate is\npart of the term. Let $\\sigma(H)$ be the set of its distinct eigenvalues and\nlet $P_\\lambda$ be the orthogonal projection onto the $\\lambda$-eigenspace.\nFor real time $t$, define the finite matrix evolution\n\n$$U_H(t):=\\sum_{\\lambda\\in\\sigma(H)}e^{-it\\lambda}P_\\lambda = f_t(H),\\qquad f_t(\\lambda)=e^{-it\\lambda}.$$\n\nThe second expression uses the finite spectral functional calculus\n[[def-functional-calculus-for-a-normal-endomorphism]]. If $V$ is the zero\nspace, the spectrum is empty and the empty sum is the unique endomorphism,\nwhich is also the identity on $V$. This definition specifies a mathematical\nunitary from a finite matrix; it makes no claim that the operation has an\nefficient circuit or a free access cost.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-20-simulation-error-and-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space and let $H=H^*$ be a specified endomorphism. Its exact time-$t$ evolution is $U_H(t)=e^{-itH}$ as defined by [[def-qa-19-finite-matrix-dynamics]]. The notation $\\|T\\|$ denotes the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. A **Hamiltonian simulator at encoded time $t$ and tolerance $0<\\epsilon<1$** is a declared procedure whose output is a unitary $W$ on the stated target register satisfying $\\|W-U_H(t)\\|\\le\\epsilon$. If its circuit uses auxiliary registers, the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] must make the induced target unitary $W$ well-defined; the error is measured on that target unitary. The scalar time and tolerance have exact finite descriptions under the declared input convention; their description lengths are recorded.\n\nThe resource record lists, separately, the number of calls to each named oracle, controlled calls, inverse calls, elementary gate occurrences, clean and dirty ancillary wires, coefficient bits, full circuit-description bits, and classical generation time. A coordinate not supplied by the access contract is unavailable, not zero. No matrix description supplies a circuit, oracle, controlled call, inverse call, or term exponential for free; uniform-family and cost conventions are those of [[def-qc-uniform-circuit-family]], [[def-qc-circuit-cost-model]], [[def-qc-controlled-unitary-access]], and [[def-qc-inverse-unitary-access]]. No polynomial resource bound is asserted by this definition.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-qa-21-pure-state-trace-distance-from-vector-error",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space and let $u,v\\in H$ be unit vectors. Write $P_u=|u\\rangle\\langle u|$ and $P_v=|v\\rangle\\langle v|$ using the Dirac convention of [[def-qc-dirac-notation-conversion]], and define their trace distance by $D(P_u,P_v):=\\tfrac12\\|P_u-P_v\\|_1$, where $\\|\\cdot\\|_1$ is the trace norm of [[def-qc-trace-norm]]. Then\n$$D(P_u,P_v)\\le \\|u-v\\|.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_E$ be finite-dimensional complex inner-product spaces and let $X=X^\\dagger$ be an endomorphism of $H_A\\otimes H_E$. Then\n$$\\|\\operatorname{Tr}_E X\\|_1\\le\\|X\\|_1.$$\nThe trace norm and partial trace are those of [[def-qc-trace-norm]] and [[def-qc-partial-trace]]. If either factor is zero-dimensional, both sides are zero.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the identity branch let $S=\\Lambda|t|\\le\\epsilon/4<1/4$. In an orthonormal eigenbasis as in [F2], each Hamiltonian eigenvalue satisfies $|\\lambda|\\le\\Lambda$. Its scalar-series error obeys $|e^{-it\\lambda}-1|\\le\\sum_{k\\ge1}S^k/k!\\le\\sum_{k\\ge1}S^k=S/(1-S)\\le\\epsilon/(4-\\epsilon)\\le\\epsilon/3$. The diagonal norm calculation in [F2] proves $\\|I-U_H(t)\\|\\le\\epsilon/3$, and the error is zero if $t=0$ or $\\Lambda=0$. Otherwise step 1 of [L1] certifies $S>\\epsilon/8$, so no equality test is needed; step 2 chooses a finite $r$ with $x:=\\Lambda|t|/r\\le\\ln2$. Hence $s_K\\le e^x\\le2$, and cancelling padding makes the norm exactly $2$ without changing $M_K$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "F1",
+            "F2",
+            "F6",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], the padded circuit has block $M_K(h)/2$. The uncorrected amplified block is $-3M_K(h)/2+M_K(h)M_K(h)^\\dagger M_K(h)/2$ by [F4], so the explicit phase correction in [L1] gives the corresponding opposite-sign block; [F5] supplies the needed full isometry estimate including leakage. The Taylor-tail rule gives $\\|M_K(h)-U_H(h)\\|\\le\\eta$, and $\\eta\\le1/1600<1/100$. Apply [F5] with $V=U_H(h)$ to obtain a clean-input isometry error at most $10\\sqrt\\eta=\\epsilon/(4r)$ for each segment, including any finite reference and all earlier retained registers.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The factorial schedule terminates because $n!$ tends to infinity and $\\eta$ is a positive rational. To bound its order, put $L=\\ln(4/\\eta)>1$. For $N=\\lceil16eL/\\ln(e+L)\\rceil$, the inequalities $\\ln(e+L)\\le\\sqrt{e+L}$ and $e+L<4L$ used in [F2]'s factorial argument give $N/e\\ge\\sqrt{e+L}$. Thus $N\\ln(N/e)\\ge8eL\\ge L$, and $N!\\ge(N/e)^N\\ge4/\\eta$. The first successful power of two $n$ is less than $2N$, since the preceding power is below $N$ if it failed. Consequently $K=n-1=O(1+\\log(1/\\eta)/\\log\\log(e+1/\\eta))$. The rule uses only a finite integer loop, and its cost is a separate classical coordinate. For the error estimates, $e^xx^n/n!\\le2/n!\\le\\eta/2\\le\\eta$ because $x\\le\\ln2<1$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "L1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ideal segment maps each input to the same system evolution $U_H(h)$ and a fresh zero register. Telescoping the $r$ compositions, every intervening exact segment is an isometry and has norm $1$, so the total access-circuit isometry error is at most $r\\epsilon/(4r)=\\epsilon/4$. The ideal system factor is $U_H(h)^r=U_H(t)$ by [F6].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Replacing the exact access calls by their compiled unitaries changes the full circuit in operator norm by at most the sum of their per-call errors: expand the product difference as a telescoping sum and use norm $1$ for each unitary factor. The declared sum is at most $\\epsilon/2$ by [L1]. The triangle inequality therefore gives $\\|V_{\\rm impl}J_{\\rm in}-J_{\\rm out}U_H(t)\\|\\le\\epsilon/4+\\epsilon/2=3\\epsilon/4\\le\\epsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "First take a pure unit input, including any finite reference. The segmented isometry bound in step 3.1, or the identity-branch bound in step 1.1 tensored with that reference, gives vector error at most $\\epsilon$. For the identity branch, write a system-reference vector as $\\sum_jx_j\\otimes f_j$ in an orthonormal reference basis [F15]; [F11] makes its squared error the sum $\\sum_j\\|(I-U_H(t))x_j\\|^2\\le(\\epsilon/3)^2\\sum_j\\|x_j\\|^2$, justifying that extension explicitly. Then [F12] bounds the joint pure-state trace distance by $\\epsilon$. The difference of the two joint density operators is Hermitian, so applying partial-trace contractivity [F13] over all work registers preserves this bound.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F15"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For a general input density operator, [F8]–[F9] give an orthonormal eigenbasis $(e_j)$ with nonnegative eigenvalues $\\lambda_j$; [F14] and trace one imply $\\sum_j\\lambda_j=1$. Take an auxiliary reference space with orthonormal basis $(f_j)$, which exists by [F15], and set $\\Psi=\\sum_j\\sqrt{\\lambda_j}\\,e_j\\otimes f_j$. By the product inner product [F11], $\\|\\Psi\\|^2=\\sum_j\\lambda_j=1$. In the product basis, its projector has entries $X_{(i,j),(i',j')}=\\sqrt{\\lambda_i\\lambda_{i'}}\\,\\mathbf1_{i=j}\\mathbf1_{i'=j'}$. The coordinate rule [F10] gives $(\\operatorname{Tr}_{\\rm ref}X)_{ii'}=\\sum_jX_{(i,j),(i',j)}$, which is $\\lambda_i$ if $i=i'$ and $0$ otherwise, exactly the matrix of $\\rho$. Thus $\\Psi$ purifies $\\rho$. Apply step 4.1 with the original reference and this purifying reference, then trace out the work registers and the purifying register; [F13] again preserves the bound. Therefore the reduced outputs for $\\rho$ differ in trace distance by at most $\\epsilon$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F13",
+            "F14",
+            "F15",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "In each segment the chronological OAA circuit has two forward $W$ factors, one $W^\\dagger$ factor, and two reflections [L1]. Expanding each $W=P^\\dagger S_{\\rm sel}P$ gives three PREPARE and three PREPARE$^\\dagger$ calls, two SELECT and one SELECT$^\\dagger$ call per segment. In the indexed term-query implementation [L1], a length-$k$ tuple acts by processing its labels in reverse order, so its $K$ conditionally active positions implement exactly $V_{j_1}\\cdots V_{j_k}$. The phase and invalid-label rules are separately specified. Thus each SELECT or its adjoint uses at most $K$ controlled indexed term calls and the total is at most $3rK$. If only individual controlled $V_j$ are used to assemble a multiplexer, apply the $j$th unitary conditioned on label equality, for every $j<m$: exactly one block is active on each valid label, so this implements the same direct sum with at most $m$ individual calls per indexed call. This gives $3rmK$ individual calls with the declared label/routing/phase costs; no such decomposition bound is inferred for an arbitrary supplied SELECT. The expanded coefficient list has $N_K=\\sum_{k=0}^Km^k$ ordered terms and two retained padding labels, giving the stated widths. Internal work and all other resource coordinates are charged as in [F7]. The identity branch has no queries or retained segment registers.",
+          "step": "6.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonzero system; density operators are defined on nonzero spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Certified interval branch returns exact identity with no oracle calls whenever t=0 or Lambda=0; it also permits a positive small-time input with certified error at most epsilon/3, without a real-zero decision."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: The local error, purification and query-count arguments apply to a one-dimensional system and m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 allow repeated Hamiltonian eigenvalues and density eigenvalues."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval branch covers S=0 without equality tests; the segmented branch certifies x<=ln2, epsilon in(0,1), and factorial schedule 4/n!<=eta. Full error and conditional access costs retain their stated boundaries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses finite eigen/reference bases supplied by [F9] and [F15]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity branch",
+          "method": "exact branch substitution",
+          "input": {
+            "H": "0",
+            "t": 1,
+            "epsilon": "1/2"
+          },
+          "calculation": "Λ=0 selects identity; U_H(t)=I, so operator error and reduced trace distance are 0 and term-query counts are 0.",
+          "expected": {
+            "operator_error": 0,
+            "trace_distance": 0,
+            "term_queries": 0
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "ex-qa-21-cancelling-normalization-padding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-21-truncated-taylor-lcu",
+          "source_section": "Definition",
+          "quote": "Let $H=\\sum_{j=0}^{m-1}a_jV_j$ on a finite-dimensional complex-inner-product space, with $m\\ge1$, real $a_j$ and Hermitian unitaries $V_j$, and put $\\Lambda=\\sum_j|a_j|$. For real $h$ and integer $K\\ge0$, define\n$$M_K(h):=\\sum_{k=0}^{K}\\frac{(-ihH)^k}{k!}.$$\nIts ordered product-term LCU list has one empty tuple for $k=0$, with coefficient $1$ and unitary $I$, and for each $1\\le k\\le K$ and ordered tuple $(j_1,\\ldots,j_k)$ has coefficient\n$$c_{k,\\mathbf j}:=\\frac{(-i)^k h^k a_{j_1}\\cdots a_{j_k}}{k!}$$\nand unitary $V_{j_1}\\cdots V_{j_k}$. Distinct tuples remain distinct entries even if their product unitaries coincide. The absolute coefficient sum of this listed representation is\n$$s_K(h):=\\sum_{k=0}^{K}\\frac{(\\Lambda|h|)^k}{k!}.$$\n\nWhenever $s_K(h)\\le2$, append two distinct identity entries with coefficients $+q$ and $-q$, where $q=(2-s_K(h))/2$. They leave the represented matrix unchanged and raise the listed absolute coefficient sum to exactly $2$. If $q=0$, the zero-weight entries may be retained with zero preparation amplitude or omitted. The polynomial, coefficient phases, ordered tuple index, and any numerical precision used to generate them are part of the finite input/access record; no term product, coefficient table, PREPARE circuit, or SELECT circuit is free.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The hypothesis $s_K\\le2$ gives $q=(2-s_K)/2\\ge0$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The two appended terms add $qI-qI=0$ to the matrix and add $|q|+|-q|=2q=2-s_K$ to the coefficient norm. The new norm is therefore $s_K+(2-s_K)=2$, including $q=0$.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the stated example, $\\Lambda=1$, $x=\\ln2$, and $K=0$, so $M_0=I$ and $s_0=1$. Hence $q=1/2$; the three coefficients sum to $1$ and their absolute values sum to $1+1/2+1/2=2$.",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a supplied finite Taylor LCU."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes q=0 when s_K=2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the one-term K=0 example exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: The padding labels remain distinct even when both terms implement I."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover s_K=2 and all 0≤s_K<2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-term K=0 padding",
+          "method": "exact coefficient arithmetic",
+          "input": {
+            "H": "I",
+            "h": "ln 2",
+            "K": 0
+          },
+          "calculation": "M₀=I, s₀=1 and q=1/2; coefficients (1,1/2,−1/2) sum to 1 and absolute values sum to 2.",
+          "expected": {
+            "matrix": 1,
+            "coefficient_norm": 2
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "cex-qa-21-unknown-input-reflection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-reflection",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection on $H$. Fix the two signs\n\n$$R_\\Pi:=2\\Pi-I,\\qquad S_\\Pi:=I-2\\Pi=-R_\\Pi.$$\n\nThus $R_\\Pi$ acts as $+I$ on $\\operatorname{ran}\\Pi$ and $-I$ on $\\ker\\Pi$; $S_\\Pi$ reverses those signs. They are not interchangeable inside a controlled block. For a unit vector $\\psi$, the rank-one reflection is $R_\\psi=2|\\psi\\rangle\\langle\\psi|-I$ with the Dirac convention of [[def-qc-dirac-notation-conversion]].\n\nAn access model counts a direct reflection as one primitive call only when that call is explicitly declared. Controlled reflection access is a separate declaration. If $|0\\rangle$ is a specified unit input in the same space $H$, the state is prepared as $\\psi=U|0\\rangle$ for a declared unitary $U$, and a reflection is implemented by conjugating $R_0=2|0\\rangle\\langle0|-I$, the construction is $UR_0U^\\dagger$ and its cost must include the calls to $U$, $R_0$, and $U^\\dagger$. A state vector or matrix description alone implies neither an efficient reflection nor inverse access.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-linear-isometry-preserves-inner-products",
+          "source_section": "Statement",
+          "quote": "Let $V:H\\to K$ be a linear isometry between finite-dimensional complex inner-product spaces whose pairings are linear in the first argument. Then $\\langle Vx,Vy\\rangle_K=\\langle x,y\\rangle_H$ for all $x,y\\in H$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-21-oblivious-reflection",
+          "source_section": "Definition",
+          "quote": "Let $A$ be the full coefficient and PREPARE-work ancilla register in [[def-qa-21-lcu-input-and-access-model]], let $S$ be the system, and let $J:S\\to A\\otimes S$ be the clean injection of [[def-qa-21-clean-ancilla-postselection]]. Set $\\Pi_0:=JJ^\\dagger$; [[thm-qc-isometric-encoding-projector]] makes this the orthogonal projection onto the image of $J$. Its basis formula is $\\Pi_0=|0_A\\rangle\\langle0_A|\\otimes I_S$, where $|0_A\\rangle$ is unit by [[thm-qc-computational-basis-orthonormal]] and the tensor action is that of [[def-qc-tensor-map]]. Define\n$$R_0:=I-2\\Pi_0.$$\nThus $R_0$ acts as $-I$ on the clean-ancilla subspace and as $+I$ on its orthogonal complement; it acts identically on the unknown system state. In the convention of [[def-qc-reflection]], $R_0=S_{\\Pi_0}$, while that item writes $R_{\\Pi_0}=2\\Pi_0-I=-R_0$. These signs are distinct inside controlled blocks: if only the controlled $R_{\\Pi_0}$ is supplied, implement controlled $R_0$ with the exact control-$Z$ correction of [[thm-qc-reflection-unitary-involution]] and charge that gate. A projector-reflection call and its controlled form are explicit access operations, not free consequences of a state vector.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Assume for contradiction that such a unitary $U$ exists as the one fixed implementation replacing the explicitly declared reflection access of [F6]. Compare the unit inputs $|0\\rangle_P\\otimes|0\\rangle_T$ and $|+\\rangle_P\\otimes|0\\rangle_T$, where $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$. Their inner product is $1/\\sqrt2$ by [F1] and [F5].",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The required output for the first input is $-|0\\rangle_P\\otimes|0\\rangle_T$, since $S_0|0\\rangle=-|0\\rangle$. For the second, $2|+\\rangle\\langle+|0\\rangle=|0\\rangle+|1\\rangle$, so $S_+|0\\rangle=-|1\\rangle$ and the output is $-|+\\rangle_P\\otimes|1\\rangle_T$. These computations use [F2]–[F3].",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The two required outputs have inner product zero because $\\langle0|1\\rangle=0$ on $T$, by [F1] and [F5]. But [F4] says $U$ preserves the input inner product $1/\\sqrt2$. This contradiction proves that no such fixed unitary exists.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes two nonzero qubit registers and unit vectors."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero program/target vectors are excluded by the unit-vector interface."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use the explicit one-qubit basis and normalized |+⟩."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No spectral or multiplicity parameter is present in the fixed two-state witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The witness compares input overlap 1/√2 with required output overlap 0 in steps 1.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "program-state overlap contradiction",
+          "method": "exact inner products",
+          "input": {
+            "programs": [
+              "|0⟩",
+              "|+⟩"
+            ],
+            "target": "|0⟩"
+          },
+          "calculation": "The inputs have overlap 1/√2; required outputs are −|00⟩ and −|+1⟩, whose overlap is 0.",
+          "expected": {
+            "unitary_preservation_contradicted": true
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "ex-qa-21-two-term-lcu-postselection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-21-lcu-block-correctness",
+          "source_section": "Statement",
+          "quote": "Let $M=\\sum_{j<m}c_jV_j$ be a finite LCU representation with $\\alpha=\\sum_j|c_j|>0$, let $W$ be the unitary from [[alg-qa-21-lcu-block-encoding]], and let $Jx=|0_{\\rm anc}\\rangle\\otimes x$ include every coefficient and PREPARE-work ancilla. Then\n$$J^\\dagger WJ=M/\\alpha.$$\nFor every unit input vector $\\psi$, the clean-ancilla zero-branch vector is $M\\psi/\\alpha$ and its postselection weight, under [[def-qa-21-clean-ancilla-postselection]], is $\\|M\\psi\\|^2/\\alpha^2$. If this weight is positive, the conditional system vector is $M\\psi/\\|M\\psi\\|$; if it is zero, the conditional vector is undefined.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-21-clean-ancilla-postselection",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a finite register with distinguished unit computational-basis vector $|0_A\\rangle$ (unit by [[thm-qc-computational-basis-orthonormal]]), let $S$ be a finite-dimensional complex-inner-product space, and define the isometry $J:S\\to A\\otimes S$ by $Jx=|0_A\\rangle\\otimes x$. The product inner product makes $J$ an isometry; [[lem-qc-linear-isometry-adjoint-identities]] gives $J^\\dagger J=I_S$, and [[thm-qc-isometric-encoding-projector]] makes $\\Pi_0:=JJ^\\dagger$ the orthogonal projection onto its image. On elementary tensors this is $|0_A\\rangle\\langle0_A|\\otimes I_S$ by the convention of [[def-qc-tensor-map]]. For a unit vector $\\phi\\in A\\otimes S$, define its zero-branch vector $q:=J^\\dagger\\phi$, zero-branch weight $p_0:=\\|q\\|^2$, and complementary-branch weight $p_\\perp:=\\|(I-\\Pi_0)\\phi\\|^2$. When $p_0>0$, the conditional system vector is $q/\\sqrt{p_0}$; when $p_0=0$, no conditional vector is assigned. This definition fixes only the clean-ancilla two-outcome branch rule used on this page; it makes no physical realization claim.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-21-clean-ancilla-postselection-probability-law",
+          "source_section": "Statement",
+          "quote": "With the notation of [[def-qa-21-clean-ancilla-postselection]], every unit vector $\\phi$ has $p_0,p_\\perp\\in[0,1]$ and $p_0+p_\\perp=1$. If $p_0>0$, the assigned conditional vector $q/\\sqrt{p_0}$ is a unit vector; if $p_0=0$, then $q=0$ and no conditional vector exists.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The absolute coefficient sum is $\\alpha=|1|+|2|=3$. The real rotation $P=\\begin{pmatrix}1/\\sqrt3&-\\sqrt{2/3}\\\\\\sqrt{2/3}&1/\\sqrt3\\end{pmatrix}$ is unitary because its columns have norm one and inner product zero by [F2]; it sends $|0\\rangle$ to the required prepared index state. SELECT is unitary because it is block diagonal with blocks $I$ and $Z$, and direct multiplication of the matrices in [F1] gives $I^\\dagger I=Z^\\dagger Z=I$. Thus the access satisfies [F3].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], $M=I+2Z$ is diagonal with entries $3,-1$, so [F3] gives the projected block $M/3=\\operatorname{diag}(1,-1/3)$ and branch vector $a|0\\rangle-(b/3)|1\\rangle$. Orthonormality in [F2] makes its squared norm $p_0=|a|^2+|b|^2/9$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $|a|^2+|b|^2=1$, $p_0=1-(8/9)|b|^2$. The bounds $0\\le|b|^2\\le1$ give $1/9\\le p_0\\le1$; equality occurs at $a=0$ and $b=0$, respectively. Thus the branch is nonzero for every unit input and [F4] gives the stated conditional vector.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty two-term LCU and qubit registers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves p₀≥1/9, so the zero branch cannot occur."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint inputs |0⟩ and |1⟩ in step 3.1 attain p₀=1 and p₀=1/9."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: The displayed diagonal block has distinct entries 1 and −1/3; no degeneracy assumption is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the minimum and maximum p₀ over all unit input amplitudes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary selection from a nonempty family; all finite lists and registers are supplied explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this implication direction has no separate obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two endpoint inputs",
+          "method": "exact probability substitution",
+          "input": {
+            "terms": "I+2Z",
+            "inputs": [
+              "|0⟩",
+              "|1⟩"
+            ]
+          },
+          "calculation": "For |0⟩ the branch vector is |0⟩ and p₀=1; for |1⟩ it is −|1⟩/3 and p₀=1/9.",
+          "expected": {
+            "probabilities": [
+              1,
+              0.1111111111111111
+            ]
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    }
+  }
+}

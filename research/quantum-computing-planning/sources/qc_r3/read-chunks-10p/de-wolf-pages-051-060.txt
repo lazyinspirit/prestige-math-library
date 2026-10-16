@@ -1,0 +1,752 @@
+===== PDF PAGE 51 =====
+
+Moreover, as explained in the previous chapter, the quantum Fourier transform can be im-
+plemented using O((log N)2) steps. Accordingly, Shor’s algorithm finds a factor of N using an
+expected number of O((log N)2(log log N)2 log log log N) gates, which is only slightly worse than
+quadratic in the input-length.
+
+5.3
+Shor’s period-finding algorithm
+
+Now we will show how Shor’s algorithm finds the period r of the function f, given a “black-box” that
+maps |a⟩|0n⟩�→|a⟩|f(a)⟩. We can always efficiently pick some q = 2ℓsuch that N2 < q ≤2N2.
+Then we can implement the Fourier transform Fq using O((log N)2) gates. Let Of denote the
+unitary that maps |a⟩|0n⟩�→|a⟩|f(a)⟩, where the first register consists of ℓqubits, and the second
+of n = ⌈log N⌉qubits.
+
+|0⟩
+
+...
+
+|0⟩
+
+|0⟩
+
+|0⟩
+
+measure
+
+measure
+
+...
+Fq
+
+...
+...
+
+Of
+
+Fq
+
+Figure 5.1: Shor’s period-finding algorithm
+
+Shor’s period-finding algorithm is illustrated in Figure 5.1.2 Start with |0ℓ⟩|0n⟩. Apply the
+QFT (or just ℓHadamard gates) to the first register to build the uniform superposition
+
+1
+√q
+
+q−1
+�
+
+a=0
+|a⟩|0n⟩.
+
+The second register still consists of zeroes. Now use the “black-box” to compute f(a) in quantum
+parallel:
+1
+√q
+
+q−1
+�
+
+a=0
+|a⟩|f(a)⟩.
+
+Observing the second register gives some value f(s), with s < r. Let m be the number of elements
+of {0, . . . , q −1} that map to the observed value f(s). Because f(a) = f(s) iff a = s mod r, the
+a of the form a = jr + s (0 ≤j < m) are exactly the a for which f(a) = f(s). Thus the first
+register collapses to a superposition of |s⟩, |r + s⟩, |2r + s⟩, |3r + s⟩, . . .; this superposition runs until
+
+2Notice the resemblance of the basic structure (Fourier, f-evaluation, Fourier) with the basic structure of Simon’s
+algorithm (Hadamard, query, Hadamard). This is not a coincidence, because Shor was inspired by reading Simon’s
+paper. The number of qubits used is roughly 3 log N: log q ≈2 log N qubits for the first register, and ⌈log N⌉for the
+second register. This number can be reduced to slightly more than 2 log N qubits [40, 138]. Accordingly, to factor
+for instance a 2048-bit integer N, slightly more than 4096 (perfect) qubits suffice.
+
+39
+
+
+===== PDF PAGE 52 =====
+
+the last number of the form jr + s that is < q, let’s define m to be the number of elements in
+this superposition, i.e., the number of integers j such that jr + s ∈{0, . . . , q −1} (depending on s,
+this m will be ⌈q/r⌉or ⌊q/r⌋). The second register collapses to the classical state |f(s)⟩. We can
+now ignore the second register, and have in the first:
+
+1
+√m
+
+m−1
+�
+
+j=0
+|jr + s⟩.
+
+Applying the QFT again gives
+
+1
+√m
+
+m−1
+�
+
+j=0
+
+1
+√q
+
+q−1
+�
+
+b=0
+e2πi (jr+s)b
+
+q
+|b⟩=
+1
+√mq
+
+q−1
+�
+
+b=0
+e2πi sb
+
+q
+
+
+
+
+m−1
+�
+
+j=0
+e2πi jrb
+
+q
+
+
+
+|b⟩.
+
+We want to see which |b⟩have amplitudes with large squared absolute value—those are the b we are
+likely to see if we now measure. Using that �m−1
+j=0 zj = (1−zm)/(1−z) for z ̸= 1 (see Appendix B),
+we compute:
+
+m−1
+�
+
+j=0
+e2πi jrb
+
+q =
+
+m−1
+�
+
+j=0
+
+�
+e2πi rb
+
+q
+�j
+=
+
+
+
+
+
+
+m
+if e2πi rb
+
+q = 1
+
+1−e2πi mrb
+
+q
+
+1−e2πi rb
+
+q
+if e2πi rb
+
+q ̸= 1
+(5.1)
+
+Easy case: r divides q.
+Let us do an easy case first. Suppose r divides q, so the whole period
+“fits” an integer number of times in the domain {0, . . . , q −1} of f, and m = q/r. For the first
+case of Eq. (5.1), note that e2πirb/q = 1 iff rb/q is an integer iff b is a multiple of q/r. Such b will
+have squared amplitude equal to (m/√mq)2 = m/q = 1/r. Since there are exactly r such basis
+states b, together they have all the amplitude: the sum of squares of those amplitudes is 1, so
+the amplitudes of b that are not integer multiples of q/r must all be 0. Thus we are left with a
+superposition where only the b that are integer multiples of q/r have nonzero amplitude. Observing
+this final superposition gives some random multiple b = cq/r, with c a uniformly random number
+in {0, . . . , r −1}. Thus we get a b such that
+
+b
+q = c
+
+r,
+
+where b and q are known to the algorithm, and c and r are not. There are ϕ(r) ∈Ω(r/ log log r)
+numbers smaller than r that are coprime to r [140, Theorem 328], so c will be coprime to r with
+probability Ω(1/ log log r) ≥Ω(1/ log log N).
+Accordingly, an expected number of O(log log N)
+repetitions of the procedure of this section suffices to obtain a b = cq/r with c coprime to r.3 Once
+we have such a b, we can obtain r as the denominator by writing b/q in lowest terms. Of course,
+our algorithm doesn’t actually know whether c and r are coprime in some particular run of the
+algorithm, but it can efficiently check if the purported factors gcd(xr/2 +1, N) and gcd(xr/2 −1, N)
+are actual factors of N by division (which, like multiplication, can be done classically with a near-
+linear number of gates).
+
+3The number of required f-evaluations for period-finding can actually be reduced from O(log log N) to O(1).
+
+40
+
+
+===== PDF PAGE 53 =====
+
+Hard case: r does not divide q.
+Because our q is a power of 2, it is actually quite likely that
+r does not divide q. However, the same algorithm will still yield with high probability a b which
+is close to a multiple of q/r. Note that q/r is no longer an integer, and m = ⌊q/r⌋, possibly +1.
+All calculations up to and including Eq. (5.1) are still valid. Using |1 −eiθ| = 2| sin(θ/2)|, we can
+rewrite the absolute value of the second case of Eq. (5.1) to
+
+|1 −e2πi mrb
+
+q |
+
+|1 −e2πi rb
+
+q |
+= | sin(πmrb/q)|
+
+| sin(πrb/q)| .
+
+The right-hand side is the ratio of two sine-functions of b, where the numerator oscillates much
+faster than the denominator because of the additional factor of m. Note that the denominator is
+close to 0 (making the ratio large) iff b is close to an integer multiple of q/r. For most of those b,
+the numerator won’t be close to 0. Hence, roughly speaking, the ratio will be small if b is far from
+an integer multiple of q/r, and large for most b that are close to a multiple of q/r. Doing the
+calculation precisely, one can show that with probability at least 4/π2 (see [241, 206] for details)
+the measurement yields a b such that
+����
+b
+q −c
+
+r
+
+����≤1
+
+2q,
+
+for a random c ∈{0, . . . , r −1}. Equivalently, |b −cq/r| ≤1/2, so the measurement outcome b will
+be an integer multiple of q/r rounded up or down to an integer. As in the easy case, b and q are
+known to us while c and r are unknown.
+Because the known ratio b/q is now not exactly equal to the unknown ratio c/r, we cannot just
+try to find r by writing b/q in lowest terms like we did in the easy case. However, two distinct
+fractions, each with denominator ≤N, must be at least 1/N2 > 1/q apart.4 Therefore c/r is the
+only fraction with denominator ≤N at distance ≤1/2q from the known ratio b/q. Applying a
+classical method called “continued-fraction expansion” to b/q efficiently gives us the fraction with
+denominator ≤N that is closest to b/q (see next section). This fraction must be c/r. Again, c and
+r will be coprime with probability Ω(1/ log log r), in which case writing c/r in lowest terms gives r.
+
+5.4
+Continued fractions
+
+Let [a0, a1, a2, . . .] (finite or infinite) denote the real number
+
+a0 +
+1
+a1 +
+1
+a2+ 1
+
+...
+
+This is called a continued fraction (CF). The ai are the partial quotients. We assume these to be
+positive natural numbers ([140, p.131] calls such CF “simple”). [a0, . . . , an] is the n-th convergent of
+the fraction. [140, Theorem 149 & 157] gives a simple way to compute numerator and denominator
+of the n-th convergent from the partial quotients:
+
+If
+p0 = a0,
+p1 = a1a0 + 1,
+pn = anpn−1 + pn−2
+q0 = 1,
+q1 = a1,
+qn = anqn−1 + qn−2
+
+4Consider two fractions c/r and c′/r′ with integer c, c′, r, r′, and r, r′ ≤N. If c/r ̸= c′/r′ then cr′ −c′r is a nonzero
+integer, and hence |c/r −c′/r′| = |(cr′ −c′r)/rr′| ≥1/|rr′| ≥1/N 2.
+
+41
+
+
+===== PDF PAGE 54 =====
+
+then [a0, . . . , an] = pn
+
+qn
+. Moreover, this fraction is in lowest terms.
+
+Note that qn increases at least exponentially with n (because qn ≥2qn−2). Given a real number x,
+the following “algorithm” gives a continued fraction expansion of x [140, p.135]:
+
+a0 := ⌊x⌋,
+x1 := 1/(x −a0)
+a1 := ⌊x1⌋,
+x2 := 1/(x1 −a1)
+a2 := ⌊x2⌋,
+x3 := 1/(x2 −a2)
+. . .
+
+Informally, we just take the integer part of the number as the partial quotient and continue with the
+inverse of the decimal part of the number. The convergents of the CF approximate x as follows [140,
+Theorem 164 & 171]:
+
+If x = [a0, a1, . . .] then
+����x −pn
+
+qn
+
+����< 1
+
+q2n
+.
+
+Recall that qn increases exponentially with n, so this convergence is quite fast. Moreover, pn/qn
+provides the best approximation of x among all fractions with denominator ≤qn [140, Theorem 181]:
+
+If n > 1, q ≤qn, p/q ̸= pn/qn, then
+����x −pn
+
+qn
+
+����<
+����x −p
+
+q
+
+����.
+
+Exercises
+
+1. This exercise is about efficient classical implementation of modular exponentiation.
+
+(a) (H) Given n-bit numbers x and N, compute the whole sequence
+x0 mod N, x1 mod N, x2 mod N, x4 mod N, x8 mod N, x16 mod N, . . . , x2n−1 mod N,
+using O(n2 log(n) log log(n)) steps.
+
+(b) Suppose n-bit number a can be written as a = an−1 . . . a1a0 in binary. Express xa mod
+N as a product of the numbers computed in part (a).
+
+(c) Show that you can compute f(a) = xa mod N in O(n2 log(n) log log(n)) steps.
+
+2. Consider the function f(a) = 7a mod 10.
+
+(a) What is the period r of f?
+
+(b) Show how Shor’s algorithm finds the period of f, using a Fourier transform over q = 128
+elements.
+Write down all intermediate superpositions of the algorithm for this case
+(don’t just copy the general expressions from the notes, but instantiate them with actual
+numbers as much as possible, incl. with the value of the period found in (a)). You may
+assume you’re lucky, meaning the first run of the algorithm already gives a measurement
+outcome b = cq/r with c coprime to r.
+
+3. (H) This exercise explains basic RSA encryption. Suppose Alice wants to allow other people
+to send encrypted messages to her, such that she is the only one who can decrypt them.
+She believes that factoring an n-bit number can’t be done efficiently (efficient = in time
+polynomial in n). So in particular, she doesn’t believe in quantum computing.
+
+42
+
+
+===== PDF PAGE 55 =====
+
+Alice chooses two large random prime numbers, p and q, and computes their product N =
+p · q (a typical size is to have N a number of n = 2048 bits, which corresponds to both p
+and q being numbers of roughly 1024 bits). She computes the so-called Euler ϕ-function:
+ϕ(N) = (p −1)(q −1); she also chooses an encryption exponent e, which doesn’t share any
+nontrivial factor with ϕ(N) (i.e., e and ϕ(N) are coprime). Group theory guarantees there is
+an efficiently computable decryption exponent d such that de = 1 mod ϕ(N). The public key
+consists of e and N (Alice puts this on her homepage), while the secret key consists of d and
+the factorization of N. Any number m ∈{1, . . . , N −1} that is coprime to N, can be used as
+a message. There are ϕ(N) such m, and these numbers form a group under the operation of
+multiplication mod N. The number of bits n = ⌈log N⌉of N is the maximal length (in bits)
+of a message m and also the length (in bits) of the encryption. The encryption function is
+defined as C(m) = me mod N, and the decryption function is D(c) = cd mod N.
+
+(a) Give a randomized algorithm by which Alice can efficiently generate the secret and public
+key.
+
+(b) Show that Bob can efficiently compute the encoding C(m) of the message m that he
+wants to send to Alice, knowing the public key but not the private key.
+
+(c) Show that D(C(m)) = m for all possible messages.
+
+(d) Show that Alice can efficiently decrypt the encryption C(m) she receives from Bob.
+
+(e) Show that if Charlie could factor N, then he could efficiently decrypt Bob’s message.
+
+43
+
+
+===== PDF PAGE 56 =====
+
+44
+
+
+===== PDF PAGE 57 =====
+
+Chapter 6
+
+Hidden Subgroup Problem
+
+6.1
+Hidden Subgroup Problem
+
+6.1.1
+Group theory reminder
+
+A group G consists of a set of elements (which is usually denoted by G as well) and an operation
+◦: G × G →G (often written as addition or multiplication), such that
+
+1. the operation is associative: g ◦(h ◦k) = (g ◦h) ◦k for all g, h, k ∈G;
+
+2. there is an identity element e ∈G satisfying e ◦g = g ◦e = g for every g ∈G;
+
+3. and every g ∈G has an inverse g−1 ∈G, such that g ◦g−1 = g−1 ◦g = e (if the group
+operation is written as addition, then g−1 is written as −g).
+
+We often abbreviate g ◦h to gh. The group is Abelian (or commutative) if gh = hg for all g, h ∈G.
+Simple examples of finite additive Abelian groups are G = {0, 1}n with bitwise addition mod 2
+as the group operation, and G = ZN, the “cyclic group” of integers mod N. The set G = Z∗
+N is
+the multiplicative group consisting of all integers in {1, . . . , N −1} that are coprime to N, with
+multiplication mod N as the group operation.1 An important example of a non-Abelian group is
+the “symmetric group” Sn, which is the group of n! permutations of n elements, using composition
+as the group operation.
+A subgroup H of G, denoted H ≤G, is a subset of G that is itself a group, i.e., it contains e
+and is closed under taking products and inverses. A (left) coset of H is a set gH = {gh | h ∈H},
+i.e., a translation of H by the element g. All cosets of H have size |H|, and it is easy to show that
+two cosets gH and g′H are either equal or disjoint, so the set of cosets partitions G into equal-sized
+parts.2 Note that g and g′ are in the same coset of H iff g−1g′ ∈H.
+If T ⊆G, then we use ⟨T⟩to denote the set of elements of G that we can write as products of
+elements from T and their inverses. This H = ⟨T⟩is a subgroup of G, and T is called a generating
+set of H. Note that adding one more element t ̸∈⟨T⟩to T at least doubles the size of the generated
+subgroup, because H and tH are disjoint and H ∪tH ⊆⟨T ∪{t}⟩. This implies that every H ≤G
+
+1Euler’s ϕ-function counts the number of elements of {1, . . . , N −1} that are coprime to N, so |Z∗
+N| = ϕ(N).
+Note that for prime p, the multiplicative Abelian group Z∗
+p is isomorphic to the additive group Zp−1. However, for
+general N, Z∗
+N need not be isomorphic to Zϕ(N).
+2This also proves Lagrange’s theorem for finite groups: if H ≤G then |H| divides |G|.
+
+45
+
+
+===== PDF PAGE 58 =====
+
+has a generating set of size ≤log |H| ≤log |G|. We abbreviate ⟨{γ}⟩to ⟨γ⟩, which is the cyclic
+group generated by γ; every cyclic group of size N is isomorphic to ZN.
+
+6.1.2
+Definition and some instances of the HSP
+
+The Hidden Subgroup Problem is the following:
+
+Given a known group G and a function f : G →S where S is some finite set.
+Suppose f has the property that there exists a subgroup H ≤G such that f is constant
+within each coset, and distinct on different cosets: f(g) = f(g′) iff gH = g′H.
+Goal: find H.
+
+We assume f can be computed efficiently, meaning in time polynomial in log |G| (the latter is the
+number of bits needed to describe an input g ∈G for f). Since H may be large, “finding H”
+typically means finding a generating set for H.
+This looks like a rather abstract algebraic problem, but many important problems can be written
+as an instance of the HSP. We will start with some examples where G is Abelian.
+
+Simon’s problem.
+This is a very natural instance of HSP. Here G is the additive group Zn
+2 =
+{0, 1}n of size 2n, H = {0, s} for a “hidden” s ∈{0, 1}n, and f satisfies f(x) = f(y) iff x −y ∈H.
+Clearly, finding the generator of H (i.e., finding s) solves Simon’s problem.
+
+Period-finding.
+As we saw in Chapter 5, we can factor a large number N if we can solve the
+following: given an x that is coprime to N and associated function f : Z →Z∗
+N by f(a) = xa mod N,
+find the period r of f.3
+Since ⟨x⟩is a size-r subgroup of the group Z∗
+N, the period r divides
+|Z∗
+N| = ϕ(N). Hence we can restrict the domain of f to Zϕ(N).
+Period-finding is an instance of the HSP as follows. Let G = Zϕ(N) and consider its subgroup
+H = ⟨r⟩of all multiples of r up to ϕ(N) (i.e., H = rZϕ(N) = {0, r, 2r, . . . , ϕ(N) −r}). Note that
+because of its periodicity, f is constant on each coset s + H of H, and distinct on different cosets.
+Also, f is efficiently computable by repeated squaring. Since the hidden subgroup H is generated
+by r, finding the generator of H solves the period-finding problem.
+
+Discrete logarithm.
+Another problem often used in classical public-key cryptography is the
+discrete logarithm problem: given a generator γ of a cyclic multiplicative group C of size N (so
+C = {γa | a ∈{0, . . . , N −1}}), and A ∈C, can we find the unique a ∈{0, 1, . . . , N −1} such that
+γa = A? This a is called the discrete logarithm of A (w.r.t. generator γ). It is generally believed
+that classical computers need time roughly exponential in log N to compute a from A (and one
+can actually prove this in a model where we can only implement group operations via some “black-
+box” [242]). This assumption underlies for instance the security of Diffie-Hellman key exchange
+(where C = Z∗
+p for some large prime p, see Exercise 3), as well as elliptic-curve cryptography.
+Discrete log is an instance of the HSP as follows. We take G = ZN × ZN and define function
+f : G →C by f(x, y) = γxA−y, which is efficiently computable by repeated squaring. For group
+elements g1 = (x1, y1), g2 = (x2, y2) ∈G we have
+
+f(g1) = f(g2) ⇐⇒γx1−ay1 = γx2−ay2 ⇐⇒(x1 −x2) = a(y1 −y2) mod N ⇐⇒g1 −g2 ∈⟨(a, 1)⟩.
+
+3This r is also known as the order of the element x in the group Z∗
+N, so this problem is also known as order-finding.
+
+46
+
+
+===== PDF PAGE 59 =====
+
+Let H be the subgroup of G generated by the element (a, 1), then we have an instance of the HSP.
+Finding the generator of the hidden subgroup H gives us a, solving the discrete log problem.
+
+6.2
+An efficient quantum algorithm if G is Abelian
+
+In this section we show that HSPs where G (and hence H) is Abelian, and where f is efficiently
+computable, can be solved efficiently by a quantum algorithm. This generalizes Shor’s factoring
+algorithm, and will also give an efficient quantum algorithm for computing discrete logarithms.
+
+6.2.1
+Representation theory and the quantum Fourier transform
+
+We start by quickly explaining the basics of representation theory. The idea here is to replace
+group elements by matrices, so that linear algebra can be used as a tool in group theory. A d-
+dimensional representation of a multiplicative group G is a map ρ : g �→ρ(g) from G to the set of
+d × d invertible complex matrices, satisfying ρ(gh) = ρ(g)ρ(h) for all g, h ∈G. The latter property
+makes the map ρ a homomorphism. It need not be an isomorphism (i.e., bijective), for example
+the constant-1 function is a trivial representation of any group. A representation of G is irreducible
+if it cannot be decomposed further into the direct sum of lower-dimensional representations of G.
+A 1-dimensional representation of G is called a character of G (sometimes linear character). Note
+that a character χ is irreducible, and the complex values χ(g) must have modulus 1 in finite groups,
+because |χ(gk)| = |χ(g)|k for all integers k. For example, the multiplicative group Z2 = {1, −1}
+(which would isomorphically be Z2 = {0, 1} when written additively) has two characters: the χ
+that maps both elements to 1, and the χ that maps 1 to 1 and −1 to −1.
+In the remainder of this section we will restrict attention to the case where G is Abelian
+(and usually finite). In the Abelian case the characters are exactly the irreducible representations
+(irreps): there are no irreps of dimension > 1. The “Basis Theorem” of group theory says that
+every finite Abelian group G is isomorphic to a direct product ZN1 × · · · × ZNℓof cyclic groups.
+First consider just one cyclic group ZN, written additively. Consider the discrete Fourier transform
+(Chapter 4), which is an N × N matrix. Ignoring the normalizing factor of 1/
+√
+
+N, its k-th column
+may be viewed as a map χk : ZN →C defined by χk(j) = ωjk
+N , where ωN = e2πi/N. Note that
+χk(j+j′) = χk(j)χk(j′), so χk is actually a 1-dimensional representation (i.e., a character) of ZN. In
+fact, the N characters corresponding to the N columns of the Fourier matrix are all the characters
+of ZN. For Abelian groups G that are (isomorphic to) a product ZN1 × · · · × ZNℓof cyclic groups,
+the |G| = N1 · · · Nℓcharacters are just the products of the characters of the individual cyclic groups
+ZNj. Note that the characters are pairwise orthogonal.
+The set of all characters of G forms a group �G with the operation of pointwise multiplication.
+This is called the dual group of G. If H ≤G, then the following is a subgroup of �G of size |G|/|H|:
+
+H⊥= {χk | χk(h) = 1 for all h ∈H}.
+
+Let us interpret the quantum Fourier transform in terms of the characters. For k ∈ZN, define the
+state whose amplitudes are the (normalized) values of χk:
+
+|χk⟩=
+1
+√
+
+N
+
+N−1
+�
+
+j=0
+χk(j)|j⟩=
+1
+√
+
+N
+
+N−1
+�
+
+j=0
+ωjk
+N |j⟩.
+
+47
+
+
+===== PDF PAGE 60 =====
+
+With this notation, the QFT just maps the standard (computational) basis of CN to the orthonor-
+mal basis corresponding to the characters:
+
+FN : |k⟩�→|χk⟩.
+
+As we saw in Chapter 4, this map can be implemented by an efficient quantum circuit if N is a
+power of 2. The QFT corresponding to a group G that is isomorphic to ZN1 × · · · × ZNℓis just the
+tensor product of the QFTs for the individual cyclic groups. For example, the QFT corresponding
+to Z2 is the Hadamard gate H, so the QFT corresponding to Zn
+2 is H⊗n (which is of course very
+different from the QFT corresponding to Z2n).
+
+6.2.2
+A general algorithm for Abelian HSP
+
+The following is an efficient quantum algorithm for solving the HSP for some Abelian group G
+(written additively) and function f : G →S. This algorithm, sometimes called the “standard
+algorithm” for HSP, was first observed by Kitaev [164] (inspired by Shor’s algorithm) and worked
+out further by many, for instance Mosca and Ekert [202].
+
+1. Start with |0⟩|0⟩, where the two registers have dimension |G| and |S|, respectively.
+
+2. Create a uniform superposition over G in the first register:
+1
+�
+
+|G|
+
+�
+
+g∈G
+|g⟩|0⟩.
+
+3. Compute f in superposition:
+1
+�
+
+|G|
+
+�
+
+g∈G
+|g⟩|f(g)⟩.
+
+4. Measure the second register. This yields some value f(s) for unknown s ∈G. The first
+register collapses to a superposition over the g with the same f-value as s (i.e., the coset
+
+s + H):
+1
+�
+
+|H|
+
+�
+
+h∈H
+|s + h⟩.
+
+5. Apply the QFT corresponding to G to this state, giving
+1
+�
+
+|H|
+
+�
+
+h∈H
+|χs+h⟩.
+
+6. Measure and output the resulting g.
+
+The key to understanding this algorithm is to observe that step 5 maps the uniform superposition
+over the coset s + H to a uniform superposition over the labels of H⊥:
+
+1
+�
+
+|H|
+
+�
+
+h∈H
+|χs+h⟩=
+1
+�
+
+|H||G|
+
+�
+
+h∈H
+
+�
+
+g∈G
+χs+h(g)|g⟩
+
+=
+1
+�
+
+|H||G|
+
+�
+
+g∈G
+χs(g)
+�
+
+h∈H
+χh(g)|g⟩=
+
+�
+
+|H|
+
+|G|
+
+�
+
+g:χg∈H⊥
+χs(g)|g⟩,
+
+where the last equality follows from the orthogonality of characters of the group H (note that χg
+restricted to H is a character of H, and it’s the constant-1 character iff χg ∈H⊥):
+
+�
+
+h∈H
+χh(g) =
+�
+
+h∈H
+χg(h) =
+�|H|
+if χg ∈H⊥
+
+0
+if χg ̸∈H⊥
+
+48
+

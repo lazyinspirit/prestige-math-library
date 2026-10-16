@@ -1,0 +1,267 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "focused-current-source-owner-review",
+  "coverage": "Actual full named sources and explicitly indicated prerequisite interfaces. No source edit, new judgment or native execution coverage. Native same owner must repair/check actual changed interfaces and their consumers.",
+  "entries": [
+    {
+      "batch": "50",
+      "concern_index": 0,
+      "id": "alg-qa-26-hhl-phase-estimation",
+      "concern": {
+        "id": "alg-qa-26-hhl-phase-estimation",
+        "concern": "Definition step 2 says to set t_j and allocate η_j 'to both its forward controlled call S_H(t_j,η_j) and its reverse call', then proceeds to the negative-sign QFT. It does not explicitly instruct applying the forward call or name its control wire. The intended operation is readily reconstructed from the cited QPE algorithm: apply the call controlled by q_{L−1−j}. State this explicitly to make the defining procedure executable without reconstruction.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.714Z",
+      "reason": "Read complete HHL algorithm and actual QPE procedure. Its step2 allocates forward/reverse budgets but omits the forward call itself and the control wire. Actual QPE instruction3 uses q_(m-1-j) for power2^j. Insert the forward controlled simulation with the same convention before the inverse QFT. Preserve sine window, time grid, signed decoding and all work/error budgets; same native owner checks actual Definition consumers.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "to both its forward controlled call $S_H(t_j,\\eta_j)$ and its reverse call. Apply the negative-sign QFT,",
+          "proposed_replacement": "to both its forward controlled call $S_H(t_j,\\eta_j)$ and its reverse call. For each such $j$, apply that forward call controlled by phase wire $q_{L-1-j}$ to the system and its retained simulator work. Apply the negative-sign QFT,"
+        }
+      ]
+    },
+    {
+      "batch": "54",
+      "concern_index": 0,
+      "id": "lem-qa-30-membership-height-geometry",
+      "concern": {
+        "id": "lem-qa-30-membership-height-geometry",
+        "concern": "The final Statement claims that if h(y) ≥ h(0)+⟨v,y⟩−a‖y‖−b on C, then the normalized separator obeys ⟨s,z⟩ ≥ ⟨s,x⟩−aR−b−2Rε/r, but imposes no nonnegativity condition on a. Counterexample: n=2, K=[−1,1]^2, r=1, R=2, ε=1/100, x=(0,−1), v=0, a=−1 and b=1. Here C=[−1,1], h(y)=−1, and the premise is −1 ≥ −2+|y|, valid throughout C. OUT at x is a valid weak-membership answer because x is not in the ε-erosion. The prescribed s=(0,1) and z=(0,−1) give left side −1, whereas the claimed right side is −1/25. Proof 6.1 uses −a‖y‖ ≥ −aR, which requires a ≥ 0. The consuming membership-separation theorem supplies positive error coefficients, but the lemma's unrestricted claim is false as written.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.714Z",
+      "reason": "Read full height geometry lemma. The proof substitutes -a norm(y)>=-aR, which fails for negative a. The reader witness K=[-1,1]^2,r1,R2,epsilon1/100,x=(0,-1),v0,a-1,b1 has h=-1 and satisfies the premise on C=[-1,1], but conclusion at z=x requires-1>=-1/25. Thus the Statement is false as written. Make the error coefficient a nonnegative as intended by the consuming separator theorem, retaining all geometric/binary-search conclusions. The same owner must check actual Statement consumers. In6.1 note that b>=0 follows already by evaluating its premise at y0, so dividing by norm(-v,1)>=1 uses a nonnegative total error budget.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "Finally, if $x=-\\|x\\|e_n$ receives OUT and",
+          "proposed_replacement": "Finally, let $a\\ge0$. If $x=-\\|x\\|e_n$ receives OUT and"
+        },
+        {
+          "source_excerpt": "Write $z=(y,t)\\in K$. The approximate-subgradient inequality gives",
+          "proposed_replacement": "Write $z=(y,t)\\in K$. Evaluating the approximate-subgradient premise at $y=0$ gives $b\\ge0$. Since $a\\ge0$ and $\\|y\\|\\le R$, that inequality gives"
+        }
+      ]
+    },
+    {
+      "batch": "55",
+      "concern_index": 0,
+      "id": "ex-qa-cyclic-discrete-log-fourier-sample",
+      "concern": {
+        "id": "ex-qa-cyclic-discrete-log-fourier-sample",
+        "concern": "The body begins directly with 'Work in the multiplicative group' after the frontmatter and has no '## Example' heading. SCHEMA.md prescribes that heading for example items. The displayed arithmetic and recovery calculation are consistent.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.715Z",
+      "reason": "Read actual example frontmatter and beginning/body. Its kind is example, but its mathematical exposition has no Example heading after frontmatter, contrary to SCHEMA. Insert that heading only; preserve all arithmetic, probabilities, source metadata and displayed recovery.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "Work in the multiplicative group",
+          "proposed_replacement": "## Example\n\nWork in the multiplicative group"
+        }
+      ]
+    },
+    {
+      "batch": "56",
+      "concern_index": 0,
+      "id": "lem-qa-32-indexed-to-full-list-conversion",
+      "concern": {
+        "id": "lem-qa-32-indexed-to-full-list-conversion",
+        "concern": "Proof 2.1 says to query the type and predecessors of 'each of the at most q(n) nodes', whereas the Statement bounds only non-input nodes by q(n). The complete list can have n+q(n) nodes and must also describe its input nodes. Enumerating all n+q(n) nodes, or emitting the n input records separately, closes this small counting gap without changing the result.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.715Z",
+      "reason": "Read full indexed conversion lemma. Its Statement bounds only non-input nodes by q(n), while2.1 enumerates at most q(n) nodes and later itself permits indices n+q(n). Enumerate all at most n+q(n) nodes including input records. This retains polynomial time, complete list output, zero-input case and exact same circuit.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "each of the at most $q(n)$ nodes",
+          "proposed_replacement": "each of the at most $n+q(n)$ nodes, including input nodes,"
+        }
+      ]
+    },
+    {
+      "batch": "56",
+      "concern_index": 1,
+      "id": "alg-qa-32-simon-query-rank-test",
+      "concern": {
+        "id": "alg-qa-32-simon-query-rank-test",
+        "concern": "The Definition ends with asserted resource properties: 'exactly n+2 oracle queries, 2n(n+2) ordinary Hadamard gates ... and O(n^3) classical bit operations'. The task's algorithm convention places complexity properties in separate proved results. The correctness theorem already proves the query and elimination bounds; the remaining direct counts should likewise be stated there.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.715Z",
+      "reason": "Read complete Simon algorithm and actual correctness theorem. Its Definition includes unproved complexity assertions; the correctness theorem already proves n+2 queries and O(n^3) elimination but should also state/prove its immediate2n(n+2) Hadamard and2(n+2) readout counts. Replace the algorithm resource claim by a reference to that result and move all counts there, retaining the defined procedure unchanged. Native same owner handles that direct theorem consumer and preserves all approved counts.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "This procedure uses exactly $n+2$ oracle queries, $2n(n+2)$ ordinary Hadamard gates, two finite measurement readouts per run, and $O(n^3)$ classical bit operations for elimination.",
+          "proposed_replacement": "The operation counts and correctness of this procedure are established in [[thm-qa-32-simon-sample-rank-correctness]]."
+        }
+      ]
+    },
+    {
+      "batch": "57",
+      "concern_index": 0,
+      "id": "lem-qa-33-uniform-programmed-circuit-interpreter",
+      "concern": {
+        "id": "lem-qa-33-uniform-programmed-circuit-interpreter",
+        "concern": "Statement pads the program to L(n) fixed-width gate records, but Proof 1.1 says 'For each output position i≤L(n)' and returns the 'ith bit of its padded record string', then concatenates L(n) Boolean circuits. A record has multiple bits, including wire addresses, so this construction computes only the first L(n) bits rather than the complete program. Indexing all bits of the polynomial-length padded string closes the proof gap.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.715Z",
+      "reason": "Read full interpreter proof and record-format Statement. It pads L(n) records of multiple bits, then1.1 wrongly generates only L(n) output bits. Define the full padded bit length B(n) from record width and enumerate all B(n) bit circuits. Record width is O(1+log(W(n)+1)), so B remains polynomial and the advertised result/cost are unchanged.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "For each output position $i\\le L(n)$,",
+          "proposed_replacement": "Let $B(n)$ be the total bit length of the $L(n)$ padded fixed-width records, including all type and address fields. It is polynomial because each record has $O(1+\\log(W(n)+1))$ bits. For each output bit position $i\\le B(n)$,"
+        },
+        {
+          "source_excerpt": "each constant $1,\\ldots,L(n)$",
+          "proposed_replacement": "each constant $1,\\ldots,B(n)$"
+        },
+        {
+          "source_excerpt": "concatenate the $L(n)$ circuits.",
+          "proposed_replacement": "concatenate the $B(n)$ circuits."
+        }
+      ]
+    },
+    {
+      "batch": "57",
+      "concern_index": 1,
+      "id": "def-qa-33-witness-verifier-interface",
+      "concern": {
+        "id": "def-qa-33-witness-verifier-interface",
+        "concern": "The Definition calls A_n 'a clean-ancilla register' and repeatedly calls its initially zero wires 'clean ancillas', while citing def-qc-clean-and-dirty-ancillas. That supplier defines a clean ancilla by exact terminal return to zero for a declared target unitary; zero initialization alone is explicitly insufficient in def-qc-circuit-cost-model. The verifier interface supplies initialization but no return contract, and general verification need not restore those wires. The page summary repeats the terminology.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.715Z",
+      "reason": "Read full witness interface and actual clean/dirty cost contract. The verifier specifies zero initialization, with no exact terminal-return requirement; its work may hold computation garbage or measured outputs. Calling that a clean-ancilla register misstates the cited exact return contract. Use zero-initialized auxiliary register/wires and state that no terminal return is required. Retain arbitrary witnesses, acceptance effect and cost model. Native same owner checks actual Definition consumers and same-page summary wording; do not impose a new return restriction on QMA.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "a clean-ancilla register",
+          "proposed_replacement": "a zero-initialized auxiliary register"
+        },
+        {
+          "source_excerpt": "the clean ancillas start in",
+          "proposed_replacement": "the auxiliary wires start in"
+        },
+        {
+          "source_excerpt": "Thus this definition adds an explicit quantum witness register",
+          "proposed_replacement": "No terminal return-to-zero contract is imposed on these auxiliary wires. Thus this definition adds an explicit quantum witness register"
+        }
+      ]
+    },
+    {
+      "batch": "57",
+      "concern_index": 2,
+      "id": "lem-qa-33-kkr-two-qubit-propagation-restriction",
+      "concern": {
+        "id": "lem-qa-33-kkr-two-qubit-propagation-restriction",
+        "concern": "The Statement calls 4D_−,D_−,D_−,2D_+ the 'legal-clock matrix on the adjacent coordinates' c_(t−1),c_t. These are equivalent endpoint representatives only after compression to S_prop1, as the surrounding proof intends. They are not the principal matrices on the full legal-clock space: in physical sector 00, the displayed local terms give endpoint diagonal entries 1/8 and off-diagonal entries −2, whereas 4D_− has diagonal entries 2. Proof 1.1 similarly says the snapshot quadratic forms contribute endpoint diagonal entries 'in physical clock coordinates' without explicitly retaining the compression qualification. The distinction is explicit in the source's restriction argument: [KKR, §5, PDF pp. 12–15](https://arxiv.org/pdf/quant-ph/0406180).",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.716Z",
+      "reason": "Read full KKR two-qubit restriction lemma. Its1.1 starts with Pi1 but calls effective snapshot endpoint representatives physical-clock matrices, and Statement similarly omits compression on that assertion. Directly from displayed H_time, the principal endpoint diagonal in sector00 is1/8, whereas4Dminus has diagonal2; the latter arises after summing the three-snapshot forms under correct one-qubit propagation. Qualify these as equivalent quadratic-form representatives after compression to S_prop1, then retain the1/L normalized block-history form and all gap bounds. Native same owner checks actual Statement consumers; do not change physical Hamiltonian terms.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "the legal-clock matrix on the adjacent coordinates",
+          "proposed_replacement": "after compression to $S_{prop1}$, an equivalent endpoint quadratic-form representative on the adjacent coordinates"
+        },
+        {
+          "source_excerpt": "so the two parts contribute $a_b$ to the two endpoint diagonal entries in physical clock coordinates.",
+          "proposed_replacement": "so, on $S_{prop1}$, the two snapshot sums are represented by $a_b$ on the two endpoint diagonal entries before the common block normalization."
+        },
+        {
+          "source_excerpt": "the off-diagonal entries in physical coordinates.",
+          "proposed_replacement": "the off-diagonal entries of that same compressed quadratic-form representative."
+        }
+      ]
+    },
+    {
+      "batch": "57",
+      "concern_index": 3,
+      "id": "thm-qa-33-2-local-hamiltonian-qma-complete",
+      "concern": {
+        "id": "thm-qa-33-2-local-hamiltonian-qma-complete",
+        "concern": "Proof 1.1 says to 'pad each segment ... to length L' and then sets T=(T2+1)L−1 with controlled-Z gates at lL. Those times require L−1 one-qubit steps in each segment before, between, and after the controlled-Z gates. Padding the one-qubit segments to L steps instead gives controlled-Z times l(L+1) and total length (T2+1)L+T2. The intended L−1 padding is an immediate correction, but the written instructions do not produce the asserted schedule.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.716Z",
+      "reason": "Read full QMA-completeness construction. If each of the T2+1 one-qubit segments has L steps, separated CZ gates lie at l(L+1) and total steps are(T2+1)L+T2. The asserted lL and T=(T2+1)L-1 instead require L-1 one-qubit steps per segment. Its L is already strictly larger than every needed segment, so pad to L-1 and preserve the schedule, KKR locality, polynomial length and energy bounds.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "pad each segment with exact idle identity matrices on a fixed work wire to length $L$,",
+          "proposed_replacement": "pad each one-qubit segment with exact idle identity matrices on a fixed work wire to length $L-1$,"
+        }
+      ]
+    },
+    {
+      "batch": "60",
+      "concern_index": 0,
+      "id": "lem-qa-36-history-path-restricted-gap",
+      "concern": {
+        "id": "lem-qa-36-history-path-restricted-gap",
+        "concern": "Proof 5.1 establishes that every x orthogonal to v has Rayleigh quotient at least t/(4N²), then says every such quotient is at least E₁−E₀ and concludes E₁−E₀ ≥ t/(4N²). Those two lower bounds alone do not imply the conclusion. Explicitly choose an E₁ eigenvector, whose quotient equals E₁−E₀. This immediately closes the proof without changing the claim.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.716Z",
+      "reason": "Read full restricted history-gap proof. It establishes all Rayleigh quotients on v-perp are>=t/(4N²), then says those quotients also are>=E1-E0. Those two lower bounds alone do not order E1-E0. Choose a normalized E1 eigenvector, orthogonal to the simple ground vector by the cited finite spectral theorem; its quotient equals E1-E0, giving the required inequality and same1/(48N²) constant.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "every such $x$ has quotient at least $E_1-E_0$. Thus",
+          "proposed_replacement": "choose $x$ to be a unit eigenvector for $E_1$, orthogonal to $v$. Its quotient is exactly $E_1-E_0$, so the established lower bound applies to this $x$. Thus"
+        }
+      ]
+    },
+    {
+      "batch": "60",
+      "concern_index": 1,
+      "id": "ex-qa-36-two-gate-history-state",
+      "concern": {
+        "id": "ex-qa-36-two-gate-history-state",
+        "concern": "The Statement says “Take the one-qubit circuit U₁=X, U₂=Z” and calls K=4, N=6 the prescribed padding. The cited construction accepts a full-list uniform circuit under def-qc-uniform-circuit-family, whose gate labels are exactly H,T,T†,CNOT. X and Z therefore require an explicit macro-gate interpretation for this illustration; expanding them into the declared syntax changes the listed gate count and padding. The displayed six-transition history-state calculation itself is correct.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:09:22.716Z",
+      "reason": "Read full two-gate example and its cited full-list history-construction interface. X and Z are exact one-qubit matrices, but not labels of the QC14 input syntax, so the stated K4,N6 are macro-step padding, not the literal fixed-alphabet count. Preserve the entire six-transition history calculation by explicitly identifying it as an algebraic two-macro-gate illustration of the propagation formula. Exact expansion X=HT^4H,Z=T^4 is available in the declared alphabet, but its actual gate count and padding differ. Correct Example/Verification headings too; native same owner checks if any actual consumer relies on the example.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "## Statement",
+          "proposed_replacement": "## Example"
+        },
+        {
+          "source_excerpt": "Take the one-qubit circuit $U_1=X$, $U_2=Z$ and tolerance $\\varepsilon=1$. The prescribed padding has",
+          "proposed_replacement": "Take the algebraic one-qubit macro-gate circuit $U_1=X$, $U_2=Z$ and tolerance $\\varepsilon=1$. Applying the propagation formula at this macro-step level gives"
+        },
+        {
+          "source_excerpt": "## Proof",
+          "proposed_replacement": "## Verification"
+        },
+        {
+          "source_excerpt": "The padding count is $K=",
+          "proposed_replacement": "At the algebraic macro-step level, the padding count is $K="
+        }
+      ]
+    }
+  ]
+}

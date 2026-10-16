@@ -1,19 +1,15 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-weak-and-strict-separation.json
 id: def-weak-and-strict-separation
 kind: definition
 title: Weak, strict, and strong separation
 status: published
 origin: pipeline
-deps: [def-dual-space-of-a-normed-space, rem-real-and-complex-normed-space-convention]
+deps: [def-dual-space-of-a-normed-space]
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: Theo Buehler and Dietmar Salamon, Functional Analysis, §2.3.3

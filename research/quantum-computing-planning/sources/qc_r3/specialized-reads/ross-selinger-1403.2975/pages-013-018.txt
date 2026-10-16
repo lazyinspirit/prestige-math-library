@@ -1,0 +1,613 @@
+===== PDF PAGE 13 =====
+
+So our task is to find an operator U of the form (12), satisfying (10), and such that the denominator exponent of
+u is as small as possible. It is useful to first re-express (10) as a property of u. Let z = e−iθ/2. Using u†u + t†t = 1
+and z†z = 1, we have
+
+∥Rz(θ) −U∥2 = ∥u −z∥2 + ∥t∥2 = (u −z)†(u −z) + t†t = u†u + t†t −z†u −u†z + z†z = 2 −2 Re(z†u).
+
+So (10) is equivalent to 2 −2 Re(z†u) ⩽ε2, or equivalently, Re(z†u) ⩾1 −ε2
+
+2 . If we identify the complex numbers
+z = x + yi and u = a + bi with 2-dimensional real vectors ⃗z = (x, y)T and ⃗u = (a, b)T , then Re(z†u) is just their
+inner product ⃗z · ⃗u, and therefore (10) is equivalent to
+
+⃗z · ⃗u ⩾1 −ε2
+
+2 .
+(13)
+
+In summary, the approximate synthesis problem reduces to the following:
+
+Problem 7.4. Given an angle θ and a precision ε > 0, find u, t ∈D[ω] such that
+
+(a) t†t + u†u = 1,
+
+(b) ⃗z · ⃗u ⩾1 −ε2/2, where z = e−iθ/2, with notation as above,
+
+(c) and such that u has the smallest denominator exponent we can find.
+
+7.2
+Reduction to a grid problem and a Diophantine equation
+
+As we will now show, Problem 7.4 can be reduced to a scaled grid problem and a Diophantine equation, and therefore
+it can be efficiently solved by the methods of Sections 5 and 6. Let D be the closed unit disk, regarded either as a
+subset of C or of R2.
+
+Lemma 7.5. If u, t ∈D[ω] and t†t + u†u = 1, then u ∈D and u• ∈D.
+
+Proof. Note that u†u = 1 −t†t ⩽1, so u ∈D. Similarly, (u•)†(u•) = 1 −(t•)†(t•) ⩽1, so u• ∈D.
+
+The condition ⃗z · ⃗u ⩾1 −ε2/2 from Problem 7.4(b) defines a certain subset of the unit disk, which we call the
+ε-region for θ:
+
+Rε = {⃗u ∈D | ⃗u · ⃗z ⩾1 −ε2
+
+2 }.
+
+D
+
+i
+
+1
+
+⃗z
+
+ε2
+
+2
+
+Rε
+
+θ
+2
+(14)
+
+By Lemma 7.5 and Problem 7.4(b), a necessary condition for a solution to Problem 7.4 is that u ∈Rε and u• ∈D.
+This is an instance of a scaled two-dimensional grid problem; note that both the ε-region and the unit disk are
+convex, and are effectively given in the sense of Remark 5.4. Therefore, by Proposition 5.22, there exists an efficient
+algorithm that enumerates all such u in increasing order of least denominator exponent.
+For each u ∈D[ω] satisfying the grid problem, it remains to check whether the equation t†t + u†u = 1 has a
+solution t ∈D[ω]. This is equivalent to solving the Diophantine equation
+
+t†t = 1 −u†u,
+
+which is of the form (9). Let ξ = 1 −u†u ∈D[
+√
+
+2], and write ξ•ξ =
+n
+2ℓ, where n ∈Z and ℓ∈N. By Theorem 6.2,
+there is an efficient algorithm that can solve this equation (or determine that no solution exists), given a prime
+factorization of n.
+
+13
+
+
+===== PDF PAGE 14 =====
+
+7.3
+The main algorithm
+
+Putting together the results of Sections 7.1 and 7.2, we obtain the following algorithm for solving the approximate
+synthesis problem:
+
+Algorithm 7.6. Given θ and ε, let A = Rε be the ε-region, and let B = D be the unit disk.
+
+1. Use Proposition 5.22 to enumerate the infinite sequence of solutions to the scaled grid problem u ∈A and
+u• ∈B, where u ∈D[ω], in the order of increasing least denominator exponent k.
+
+2. For each such solution u:
+
+(a) Let ξ = 1 −u†u ∈D[
+√
+
+2], and write ξ•ξ = n
+
+2ℓ, where n ∈Z and ℓ⩾0 is minimal.
+
+(b) Attempt to find a prime factorization of n. If n ̸= 0 but no prime factorization is found, skip step 2(c)
+and continue with the next u.
+
+(c) Use the algorithm of Theorem 6.2 to solve the equation t†t = ξ. If a solution t exists, go to step 3;
+otherwise, continue with the next u.
+
+3. Define U as in equation (12), let U ′ = T UT †, and use the exact synthesis algorithm of [10] to find a Clifford+T
+circuit implementing either U or U ′, whichever has smaller T -count. Output this circuit and stop.
+
+8
+Analysis of the algorithm
+
+8.1
+Correctness
+
+Proposition 8.1 (Correctness). If Algorithm 7.6 terminates, then it yields a valid solution to the approximate
+synthesis problem, i.e., it yields a Clifford+T circuit approximating Rz(θ) up to ε.
+
+Proof. By construction. By steps 2(a) and 2(c) of the algorithm, we have t†t + u†u = 1, so U is unitary. By step 1
+of the algorithm, u belongs to the ε-region, so (13) holds. This implies that U satisfies (10). Moreover, as noted in
+Lemma 7.3, U ′ also satisfies (10), so whichever of these operators is returned approximates Rz(θ) up to ε.
+
+8.2
+Optimality
+
+The optimality of the algorithm hinges on step 2(b), “attempt to find a prime factorization of n”. In the presence of
+a factoring oracle (such as a quantum computer), this can always be done. In this case, Algorithm 7.6 is guaranteed
+to find an optimal solution to the approximate synthesis problem. In the absence of a factoring oracle, we must
+potentially discard some candidate solutions u, until we find one for which n can be factored. We analyze these two
+situations in Propositions 8.2 and 8.8.
+
+Proposition 8.2 (Optimality in the presence of a factoring oracle). In the presence of an oracle for integer factoring,
+the circuit returned by Algorithm 7.6 has the smallest T -count of any single-qubit Clifford+T circuit approximating
+Rz(θ) up to ε.
+
+Proof. By construction, step 1 of the algorithm enumerates all solutions u of the scaled grid problem in order of
+increasing denominator exponent k. Step 2(a) always succeeds, and step 2(b) always succeeds by using the factoring
+oracle. By Theorem 6.2, step 2(c) succeeds if and only if the equation t†t + u†u = 1 has a solution. Therefore, when
+step 2(c) succeeds, the algorithm has found a solution of Problem 7.4 for which u has the lowest possible denominator
+exponent k. Let m be the T -count of the final solution. By Lemma 7.3, we have m = 2k −2, except when k = 0, in
+which case m = 0.
+To show that this T -count is minimal, let ¯U be any solution of the approximate synthesis problem with T -count
+¯m. By Lemma 7.2, we may assume without loss of generality that
+
+¯U =
+�
+¯u −¯t†
+¯t
+¯u†
+
+�
+.
+
+Let ¯k be the denominator exponent of ¯u. By minimality of k, we have k ⩽¯k, hence m ⩽¯m.
+
+14
+
+
+===== PDF PAGE 15 =====
+
+We emphasize that the optimality in Proposition 8.2 is absolute, i.e., not merely asymptotic or up to an additive
+constant. Of all the Clifford+T operators approximating Rz(θ) to within ε, the algorithm finds one with the lowest
+T -count.
+To analyze the algorithm in the absence of a factoring oracle, we must address the question of how many candidates
+must be generated before steps 2(b) and 2(c) of the algorithm succeed. In this case, the algorithm may still use any
+classical algorithm to try to factor the number n in step 2(b), but the amount of effort extended on any particular
+n must be capped. In our complexity analysis for this case, in Proposition 8.8 below, we conservatively assume that
+the only n that the algorithm can successfully factor are those n that are already prime. In reality the algorithm
+might do a little better. In order to complete the analysis, we must rely on a number-theoretic assumption about
+the distribution of prime numbers.
+
+Hypothesis 8.3. Each number n produced in step 2(a) of Algorithm 7.6 is asymptotically as likely to be prime
+as a randomly chosen odd number of comparable size. Moreover, the primality of each n can be modelled as an
+independent random event.
+
+Lemma 8.4. Each of the numbers n produced in step 2(a) of Algorithm 7.6 satisfies n ⩾0, and either n = 0 or
+n ≡1 (mod 8).
+
+Proof. See Appendix D.
+
+Lemma 8.5. Let u be a candidate produced in step 1 of Algorithm 7.6, let k be its least denominator exponent, and
+let n be the integer computed in step 2(a). Then n ⩽4k.
+
+Proof. By assumption, we can write u = v/
+√
+
+2k, where v ∈Z[ω].
+From step 2(a) of the algorithm, we have
+ξ = 1 −u†u =
+1
+2k (2k −v†v) =
+α
+2k , where α ∈Z[
+√
+
+2]. Therefore ξ•ξ = α•α
+
+22k =
+n
+2ℓ. Since α•α is an integer and ℓis
+minimal, we have ℓ⩽2k. Also, by assumption, both u and u• are in the unit disk, so u†u ⩽1 and (u•)†(u•) ⩽1. It
+follows that 0 ⩽ξ, ξ• ⩽1, hence ξ•ξ ⩽1. Therefore,
+n
+2ℓ⩽1, which implies n ⩽2ℓ⩽4k as claimed.
+
+Lemma 8.6. Let b > 0 be an arbitrary fixed constant. Then for a ⩾1,
+
+∞
+�
+
+x=1
+
+�
+1 −
+1
+a + b ln x
+
+�x
+= O(a).
+
+Proof. See Appendix E.
+
+Definition 8.7. Let U ′, U ′′ be two solutions of the approximate synthesis problem of the form
+
+U ′ =
+�
+u′ −t′†
+
+t′
+u′†
+
+�
+,
+U ′′ =
+�
+u′′ −t′′†
+
+t′′
+u′′†
+
+�
+.
+(15)
+
+We say that U ′ and U ′′ are equivalent solutions if u′ = u′′.
+
+Proposition 8.8 (Near-optimality in the absence of a factoring oracle). Let m be the T -count of the solution of the
+approximate synthesis problem found by Algorithm 7.6 in the absence of an oracle for integer factoring. Then
+
+(a) The approximate synthesis problem has an expected number of at most O(log(1/ε)) non-equivalent solutions
+with T -count less than m.
+
+(b) The expected value of m is m′′ + O(log(log(1/ε))), where m′ and m′′ are the T -counts of the optimal and
+second-to-optimal solutions of the approximate synthesis problem (up to equivalence), and m′ ⩽m′′.
+
+Proof. If ε ⩾|1 −eiπ/8|, then by Lemma 7.2, there is a solution with T -count 0, and the algorithm easily finds it. In
+this case, there is nothing to show. So assume without loss of generality that ε < |1 −eiπ/8|. Then by Lemma 7.2,
+all solutions are of the form (12).
+(a) Consider the list u1, u2, . . . of candidates generated in step 1 of the algorithm. Let k1, k2, . . . be their respective
+least denominator exponents, and let n1, n2, . . . be the corresponding integers calculated in step 2(a). By Lemma 8.5,
+we have nj ⩽4kj for all j. By Hypothesis 8.3, the probability that nj is prime is asymptotically no smaller than that
+of a randomly chosen odd integer less than 4kj, which, by the well-known prime number theorem, is greater than
+
+pj :=
+2
+ln(4kj) =
+1
+kj ln 2.
+(16)
+
+15
+
+
+===== PDF PAGE 16 =====
+
+Note that u1 and u2 are two distinct solutions to the scaled grid problem of step 1 of the algorithm. Since the
+candidates are enumerated in order of increasing denominator exponent, k2 is a denominator exponent for both u1
+and u2. It follows by Lemma 5.24 that there are at least 2ℓ+ 1 distinct candidates of denominator exponent k2 + 2ℓ,
+for all ℓ⩾0. In other words, for all j, if j ⩽2ℓ+1, we have kj ⩽k2 +2ℓ. In particular, this holds for ℓ= ⌊1+log2 j⌋,
+and therefore,
+kj ⩽k2 + 2(1 + log2 j).
+(17)
+
+Combining (17) with (16), we have
+
+pj ⩾
+1
+(k2 + 2(1 + log2 j)) ln 2 =
+1
+(k2 + 2) ln 2 + 2 ln j
+(18)
+
+Let j0 be the smallest index such that nj0 is prime. By Hypothesis 8.3, we can treat the primality of each nj as an
+independent random event. Therefore,
+
+P(j0 > j)
+=
+P(n1, . . . , nj are not prime)
+⩽
+(1 −p1)(1 −p2) · · · (1 −pj)
+
+⩽
+(1 −pj)j
+
+⩽
+�
+1 −
+1
+(k2 + 2) ln 2 + 2 ln j
+
+�j
+.
+
+The expected value of j0 is
+
+E(j0) =
+
+∞
+�
+
+j=0
+P(j0 > j) ⩽1 +
+
+∞
+�
+
+j=1
+
+�
+1 −
+1
+(k2 + 2) ln 2 + 2 ln j
+
+�j
+= O(k2),
+(19)
+
+where we have used Lemma 8.6 to estimate the sum.
+Next, we will estimate k2. The width of the ε-region Rε, as shown in (14), is ε2/2 at the widest point, and we
+can inscribe a disk of radius r = ε2/4 in it. Also, the closed unit disk D has radius R = 1. It follows by Lemma 5.23
+that the scaled grid problem for Rε and D, as in step 1 of the algorithm, has at least two solutions, provided that
+
+rR = ε2
+
+4 ⩾(1 +
+√
+
+2)2
+
+2k
+,
+(20)
+
+or equivalently, provided that
+k ⩾2 + 2 log2(1 +
+√
+
+2) + 2 log2(1/ε).
+(21)
+
+We therefore have k2 ⩽k for all k satisfying (21). It follows that
+
+k2 = O(log(1/ε)),
+(22)
+
+and therefore, using (19), also
+E(j0) = O(log(1/ε)).
+(23)
+
+To finish the proof of part (a), recall that j0 was defined to be the smallest index such that nj0 is prime. This
+ensures that step 2(b) of the algorithm succeeds for the candidate uj0. Furthermore, we have n ≡1 (mod 8) by
+Lemma 8.4, and therefore the equation t†t = ξ has a solution by Proposition C.26. Hence the remaining steps of the
+algorithm also succeed for uj0.
+Now let r be the number of non-equivalent solutions of the approximate synthesis problem of T -count strictly
+less than m. As noted above, any such solution U is of the form (12). Then the least denominator exponent of u
+is strictly smaller than kj0, so that u = uj for some j < j0. In this way, each of the r non-equivalent solutions is
+mapped to a different index j < j0. It follows that r < j0, and hence E(r) ⩽E(j0) = O(log(1/ε)), as was to be
+shown.
+(b) Let U ′ be an optimal solution of the approximate synthesis problem, and let U ′′ be optimal among the solutions
+that are not equivalent to U ′. Let u′ and u′′ be as in (15), and let k′, k′′ be the least denominator exponents of u′
+
+and u′′, respectively, with k′ ⩽k′′. Let k2 and j0 be as in the proof of part (a). Note that, by definition, k2 ⩽k′′. Let
+k be the least denominator exponent of the solution of the approximate synthesis problem found by the algorithm.
+Then k ⩽kj0. Using (17), we have
+
+k ⩽kj0 ⩽k2 + 2(1 + log2 j0) ⩽k′′ + 2(1 + log2 j0).
+
+16
+
+
+===== PDF PAGE 17 =====
+
+Recall from Lemma 7.3 that 2k −2 ⩽m ⩽2k, and similarly 2k′′ −2 ⩽m′′ ⩽2k′′. Hence m ⩽2k ⩽2k′′ + 4(1 +
+log2 j0) ⩽m′′ + 6 + 4 log2 j0. These calculations apply to any one run of the algorithm. Taking expected values over
+many randomized runs, we therefore have
+
+E(m) ⩽m′′ + 6 + 4E(log2 j0) ⩽m′′ + 6 + 4 log2 E(j0).
+(24)
+
+Note that we have used the law E(log j0) ⩽log(E(j0)), which holds because log is a concave function. Combining
+(24) with (23), we therefore have the desired result:
+
+E(m) = m′′ + O(log(log(1/ε))).
+(25)
+
+Remark 8.9. In the near-optimal case of Proposition 8.8, our algorithm can additionally be used to compute a firm
+lower bound for the T -count of any solution of the approximate synthesis problem for the given θ and ε. Namely, the
+algorithm can consider the first candidate uj for which the Diophantine equation solver does not fail — i.e., either it
+solves the equation or it times out. If kj is the least denominator exponent of uj, then a lower bound for the T -count
+is 2kj −2 (or 0 when kj = 0). Note that this is not the usual information-theoretic lower bound that applies in the
+average case, but an actual lower bound for each particular problem instance.
+
+8.3
+Worst-case behavior
+
+In [14], an approximate synthesis algorithms for z-rotations was given that always returns a solution of T -count at
+most K + 4 log2(1/ε), where K is a constant approximately equal to 10. We note that Algorithm 7.6 enumerates
+all the solutions of the grid problem for the ε-region, whereas the algorithm of [14] only enumerates a subset of the
+solutions. Also, Algorithm 7.6 can solve the Diophantine equation in all the cases in which the algorithm of [14] can
+solve it. It follows that in all cases, the solution returned by Algorithm 7.6 is at least as good as that returned by
+the algorithm of [14]. In particular, Algorithm 7.6 always returns a solution of T -count at most K + 4 log2(1/ε).
+Moreover, it is known from [14, Section 9], that there are certain combinations of θ and ε for which this T -count is
+actually optimal to within a constant number of gates. Thus our algorithm’s performance is K + 4 log2(1/ε) in the
+worst case, but this worst case behavior is only achieved in those cases where it is actually optimal.
+One may ask whether a more precise statement can be made about the angles θ for which this worst-case behavior
+occurs. We believe that this is indeed possible. Let Q(
+√
+
+2) be the field of rational numbers extended with
+√
+
+2.
+
+Conjecture 8.10. Fix an angle θ, and consider the T -count as ε →0. Then the T -count behaves as K + 4 log2(1/ε)
+when tan θ
+
+2 ∈Q(
+√
+
+2), and as K + 3 log2(1/ε) otherwise.
+
+Giving a rigorous proof of this conjecture is beyond the scope of this paper and probably difficult, but we will
+sketch a plausibility argument. We believe that the first part, showing that the T -count behaves no better than
+K + 4 log2(1/ε) when tan θ
+
+2 ∈Q(
+√
+
+2), could be made rigorous without too much difficulty. In addition, we also offer
+experimental evidence supporting Conjecture 8.10 in Section 10.
+The essential point is this. Consider the grid associated to a convex bounded set B as in Figure 5. Note that the
+slope r of any line passing through two grid points satisfies r ∈Q(
+√
+
+2) (unless the line is vertical, in which case the
+slope is infinite). Conversely, fix some real number r. Let us call a line of slope r a grid line if it passes through at
+least one grid point. We first wish to show that if r ∈Q(
+√
+
+2), then the set of grid lines is discrete, i.e., there is a
+minimum distance between each pair of grid lines. To see why this is so, note that r ∈1
+
+nZ[
+√
+
+2] for some n ∈Z. Each
+grid line is uniquely determined by its y-intercept, i.e., its point of intersection with the y-axis. Consider a grid line
+with y-intercept b, and passing through the grid point u ∈Z[ω]. Using Lemma 5.5, we can assume without loss of
+generality that u = α+βi, where α, β ∈Z[
+√
+
+2]; the case where u = α+βi+ω is analogous. Then we have b = β −rα,
+and therefore b ∈1
+
+nZ[
+√
+
+2]. Moreover, the line with y-intercept b• and slope r• contains u•, and therefore intersects
+B. Since B is bounded, it follows that b• lies in a certain finite interval B′ of real numbers determined only by B
+and r•. The two relations b ∈1
+
+nZ[
+√
+
+2] and b• ∈B′ determine a one-dimensional grid problem, and therefore the set
+of solutions is discrete. This shows that the set of grid lines is discrete when r ∈Q(
+√
+
+2).
+Recall from (14) that for given θ and ε, the ε-region is bounded by a circular arc and a straight line. The slope
+of the straight line is r = −1/ tan θ
+
+2, and is independent of ε. If r ∈Q(
+√
+
+2), then the ε-region is “parallel” to the grid
+lines of slope r, as shown in Figure 5(a). In this case, the number of solutions to the grid problem is not dominated
+by the area, but by the width of the ε-region. More specifically, for the scaled grid problem of Algorithm 7.6 to have
+a solution for a given denominator exponent k, it is a necessary condition that the ε-region intersects some grid line.
+The distance between the grid lines scales as
+1
+2k , and the width of the ε-region is ε2
+
+2 , and therefore, we expect the
+
+17
+
+
+===== PDF PAGE 18 =====
+
+(a)
+
+Rε
+
+β
+
+α
+
+b
+r
+
+u
+
+(b)
+
+u•
+
+r•
+
+B
+
+b•
+
+B′
+
+Figure 5: Part (a) shows the grid points and grid lines (of slope r ∈Q(
+√
+
+2)) for a convex set B. Part (b) shows the
+set B and the dual grid lines (of slope r•), all of whose y-intercepts lie in an interval B′.
+
+ε-region to intersect at least one grid line when
+1
+2k ⩽cε2, for some constant c. Equivalently k ⩾K + 2 log 1
+
+ε. By
+Lemmas 7.3 and 9.7, the T -count scales as 2k, i.e., K + 4 log 1
+
+ε.
+On the other hand, if r ̸∈Q(
+√
+
+2), then the set of grid lines is dense, and in this case, it appears that the solution
+to the grid problem is dominated by the area of the ε-region. In this case, the number of grid points per area scales
+as 4k, and the area of the ε-region is proportional to ε3; hence we expect a grid point to fall in the ε-region when
+1
+4k ⩽cε3, or equivalently, 2k ⩾K + 3 log 1
+
+ε, yielding the typical T -count of K + 3 log 1
+
+ε in that case.
+
+8.4
+Time complexity of the algorithm
+
+Proposition 8.11 (Complexity). Algorithm 7.6 runs in expected time O(polylog(1/ε)). This is true whether or not
+a factorization oracle is used.
+
+Proof. Let M be the uprightness of the ε-region. Let j0 be the average number of candidates tried in steps 2(a)–(c)
+of the algorithm, and let kj0 be the least denominator exponent of the final candidate. Let n be the largest integer
+that appears in step 2(a) of the algorithm.
+By Proposition 5.22, step 1 of the algorithm requires O(log(1/M)) arithmetic operations, plus a constant number
+per candidate. For each of the j0 candidates, step 2(a) requires O(1) arithmetic operations. Step 2(b) also requires
+O(1) arithmetic operations, either due to the use of a factoring oracle, or else, because we can put an arbitrary fixed
+bound on the amount of effort invested in factoring any given integer. At minimum, this will succeed when the
+integer in question is prime, which is sufficient for the estimates of Proposition 8.8. Step 2(c) requires O(polylog(n))
+operations by Theorem 6.2. Finally, step 3 requires O(kj0) arithmetic operations; see, e.g., Theorem 5.1 of [7]. So
+the total expected number of arithmetic operations is
+
+O(log(1/M)) + j0 · O(polylog(n)) + O(kj0).
+(26)
+
+Recall that the ε-region Rε, shown in (14), contains a disk of radius ε2/4. Hence, area(Rε) ⩾
+π
+16ε4. On the other
+hand, the square [−1, 1] × [−1, 1] is a (not very tight) bounding box for Rε. It follows that
+
+M = up(Rε) =
+area(Rε)
+area(BBox(Rε)) = Ω(ε4),
+
+hence log(1/M) = O(log(1/ε)). From (23), the expected value of j0 is O(log(1/ε)). Combining (17) with (22), we
+therefore have
+kj0 ⩽k2 + 2(1 + log2 j0) = O(log(1/ε)) + O(log(log(1/ε))) = O(log(1/ε)).
+
+From Lemma 8.5, and the fact that candidates are enumerated in order of increasing denominator exponent, we have
+n ⩽4kj0, hence
+polylog(n) = O(poly(kj0)) = O(polylog(1/ε)).
+
+Combining all of these estimates with (26), the expected number of arithmetic operations for the algorithm is
+O(polylog(1/ε)).
+Moreover, each individual arithmetic operation can be performed with precision O(log(1/ε)),
+
+18
+

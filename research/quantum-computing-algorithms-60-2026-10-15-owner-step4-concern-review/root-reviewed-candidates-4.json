@@ -1,0 +1,31 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "focused-current-source-owner-review",
+  "coverage": "Only actual named theorem and canonical storage supplier. Source untouched; native workers must independently verify and repair.",
+  "entries": [
+    {
+      "batch": "42",
+      "concern_index": 0,
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "concern": {
+        "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "concern": "Proof 3.3 bounds monochromatic consecutive windows only at levels \u2113 < H, then concludes that \u201cevery search during one Johnson replacement then uses at most D=2s+1 entries per level.\u201d This does not establish the bound at the highest level H: its initial traversal can visit the entire level-H list, and excluding long consecutive runs of promotion bits in level H\u22121 does not bound the total number of promoted nodes. Step 4.1 defines bad seeds solely by bucket occupancy and those run events, so the assertion that capped operations agree with ideal operations on every good configuration, subsequently used in 5.1\u20136.1, lacks this highest-level case. A separate highest-level occupancy argument is needed. I checked the cited Ambainis source, \u00a76.2, PDF pp. 28\u201329 (https://arxiv.org/pdf/quant-ph/0311001); its consecutive-run discussion does not resolve this total-occupancy issue. This finding concerns the support supplied by the current proof, not a counterexample to the final asymptotic theorem.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:58:06.075914+00:00",
+      "reason": "Read full QRAM gate-cost theorem and actual canonical skip-list Definition. Proof3.3 controls runs only at levels belowH, but highest-level search can traverse the whole levelH list. The existing good-seed definition contains no bound on that total occupancy, so its implication to capped/ideal agreement is missing. With s=8m<=d and H independent d-wise-fair promotion families, for s distinct selected keys the probability all reach heightH is2^(-Hs). The factorial moment gives Pr(X_H>=s)<=choose(r,s)2^(-Hs)<=1/s!<=2^(1-s), using r<=2^H. Add this event to the bad seeds; its extra O((N+2)^-8) term preserves the stated O(N^-7 logN) error bound and asymptotic resource conclusions. Highest-level occupancy<s remains below cap2s+1 through one insertion/deletion. Native proof owner must check all later uses and actual endpoint caps; this is a concrete repair proposal, not completed native proof coverage.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "If no such run occurs, deleting one node can merge at most two shorter equal-bit runs,",
+          "proposed_replacement": "Let $X_H$ count the selected keys of height $H$. For each set of $s\\le d$ distinct selected keys, independence within each promotion family and between the $H$ families gives probability $2^{-Hs}$ that all reach height $H$. Thus $\\Pr(X_H\\ge s)\\le\\mathbb E\\binom{X_H}{s}=\\binom rs2^{-Hs}\\le1/s!\\le2^{1-s}$, since $r\\le2^H$. A union bound for the two list orders bounds this highest-level occupancy event by $4(N+2)^{-8}$. If neither that event nor any of the preceding run events occurs, deleting one node can merge at most two shorter equal-bit runs,"
+        },
+        {
+          "source_excerpt": "Call a seed bad for $S$ if some bucket has occupancy at least $C$ or the run event of step 3.3 occurs. Its probability is $\\eta_N\\le 2N(N+2)^{-16}+4rH(N+2)^{-8}=O(N^{-7}\\log N)$",
+          "proposed_replacement": "Call a seed bad for $S$ if some bucket has occupancy at least $C$, a run event of step 3.3 occurs, or the highest-level count is at least $s$. Its probability is $\\eta_N\\le 2N(N+2)^{-16}+(4rH+4)(N+2)^{-8}=O(N^{-7}\\log N)$"
+        }
+      ]
+    }
+  ]
+}

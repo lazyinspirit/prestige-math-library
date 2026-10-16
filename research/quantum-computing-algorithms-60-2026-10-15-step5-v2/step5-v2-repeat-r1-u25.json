@@ -1,0 +1,96 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "ex-qa-promise-and-cost-models",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "82977c8f66a45a2b303bc6b0bf61688667236b28a891e9263b7c007743bcf494",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F12 cited only the register definition and the coordinate-register orthonormality theorem. Neither supplies the tensor inner product or orthonormality required in step 2.1 for the three-qubit state and its projector diagonals. This missing dependency citation is essential to the density/output-law argument. Repaired F12 and deps using the existing tensor-register inner product and proved product-basis lemma, whose hypotheses hold for three Q_2 factors.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-qa-promise-and-cost-models",
+      "disposition": "repaired",
+      "post_sha256": "8393f47cbfcb0d4f9b5156243b44e688afd14b6d4c459c8b3ef0dfbbf1de0d5c",
+      "review_context_sha256": "0606342325143b753407ba174496179f0a0857e781353b6a15e9535cb74c769d",
+      "reason": "Checked both promise reductions, total two-address XOR action, all six Verification steps, cited interfaces and owning pages. Each Q_2 basis is orthonormal; the tensor definition and product-basis lemma now cited in F12 give three-factor basis inner products as products of Kronecker deltas. Thus psi is unit, its projector is a density operator, and the root-linear-first diagonal formula summed over the address gives the point mass at u. Direct multiplication gives H^2=I; the query/gate costs are 1 and 0/2, with constant reply processing. Updated owning manifest and exact contract citations under the shared lock. This is repair-author verification, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-qa-promise-and-cost-models",
+      "locus": "facts-block",
+      "location": "F12 and Verification step 2.1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "The three-qubit orthonormality premise was attributed to a theorem restricted to Q_d. F12 now explicitly uses def-qc-tensor-register-and-permutation and lem-qc-tensor-product-basis-and-dimension. Both suppliers were added to item/manifest deps and exact proof-contract citations. No published-consumer defect was found.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "sources_consulted": [
+      "items/def-qc-register-and-computational-basis.md, Definition",
+      "items/thm-qc-computational-basis-orthonormal.md, Statement and complete Proof",
+      "items/def-qc-tensor-register-and-permutation.md, Definition and complete Proof steps 1.1-5.1",
+      "items/lem-qc-tensor-product-basis-and-dimension.md, Statement and complete Proof steps 1.1-2.1",
+      "Remaining directly cited supplier interfaces and both owning pages"
+    ],
+    "mathematical_check": "The tensor pairing of basis words b,c is the product of delta(b_k,c_k), hence delta(b,c). With e_{y,a} in physical address-then-target order, its overlap with psi is delta(a,0)delta(y,u). The projector diagonal is the squared modulus; the unmeasured-address sum is delta(y,u). All constructions are finite; no AC is needed.",
+    "interface_comparison": "There is no Statement or Definition section before or after the edit. The Example and Verification remain unchanged. Only F12 and deps changed; no supplier interface changed and no prerequisite was created, so downstream examination is not triggered.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-25.proof-contracts.json --items ex-qa-promise-and-cost-models --strict",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-qa-promise-and-cost-models.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failed"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-qa-promise-and-cost-models.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-25.proof-contracts.json --items ex-qa-promise-and-cost-models --json",
+        "exit_code": 0,
+        "result": "All 16 two-address/two-bit-output functions passed explicit XOR and H-H matrix fixtures; bounded sanity evidence only"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-qa-promise-and-cost-models.md",
+        "exit_code": 0,
+        "result": "1 item, 6 steps, 0 defects"
+      },
+      {
+        "command": "node tools/manifest-deps.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-25.pages.json",
+        "exit_code": 0,
+        "result": "15 items, 0 normalized, 0 errors"
+      }
+    ],
+    "published_ledger_proposals": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects evidence and performs ordinary certification/rejudgment; no judgment, stamp or certificate was written."
+  }
+}

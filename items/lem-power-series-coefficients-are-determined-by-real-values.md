@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-power-series-coefficients-are-determined-by-real-values.json
 id: lem-power-series-coefficients-are-determined-by-real-values
 kind: lemma
 title: Banach-valued power series are determined by their real values
@@ -6,7 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0
-deps: [def-series-and-absolute-convergence-in-a-normed-space, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention]
+deps: [def-series-and-absolute-convergence-in-a-normed-space, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, lem-complex-norm-realification-is-a-real-norm]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -20,18 +22,12 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: 'Chapter 2 Section 2.3, the identity theorem for holomorphic functions quoted in Theorem 2.25, step 5, printed p. 64'
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 ---
 
 ## Statement
 
 Let $Y$ be a complex normed vector space
-([[rem-real-and-complex-normed-space-convention]]), let $z_0\in\mathbb R$,
+([[def-complex-norm-and-complex-normed-space]]), let $z_0\in\mathbb R$,
 $r>0$, and let $(a_n)_{n\ge0},(b_n)_{n\ge0}\subseteq Y$ be such that both
 series $\sum_{n\ge0}a_n(z-z_0)^n$ and $\sum_{n\ge0}b_n(z-z_0)^n$ converge in
 $Y$ for every complex $z$ with $|z-z_0|<r$
@@ -49,7 +45,7 @@ principle is used.
 
 [L2] In a normed space $\|u+v\|\le\|u\|+\|v\|$ and $\|\lambda v\|=|\lambda|\,\|v\|$, and $\|w\|\ge0$ with $\|w\|=0$ only for $w=0$; consequently $|\|u\|-\|v\||\le\|u-v\|$ ([[def-norm-and-normed-space]]).
 
-[L3] A complex normed space is a complex vector space with a norm satisfying the same separation and triangle clauses, absolute homogeneity being read with the complex modulus; every estimate that uses only these clauses is valid over either scalar field ([[rem-real-and-complex-normed-space-convention]]).
+[L3] A complex normed space is a complex vector space with a norm satisfying the same separation and triangle clauses, absolute homogeneity being read with the complex modulus; every estimate that uses only these clauses is valid over either scalar field ([[def-complex-norm-and-complex-normed-space]]). On realification the same function is a real norm with the same metric ([[lem-complex-norm-realification-is-a-real-norm]]), so the nonnegativity and reverse-triangle estimates of [L2] also apply to $Y$.
 
 ## Proof
 

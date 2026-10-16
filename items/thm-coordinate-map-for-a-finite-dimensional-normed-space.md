@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-coordinate-map-for-a-finite-dimensional-normed-space.json
 id: thm-coordinate-map-for-a-finite-dimensional-normed-space
 kind: theorem
 title: "A chosen algebraic basis identifies a finite-dimensional normed space with a coordinate space"
@@ -7,17 +9,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-linear-basis, thm-unique-coordinates-with-respect-to-an-ordered-basis,
-       def-topological-isomorphism-of-normed-spaces, thm-all-norms-on-rn-are-equivalent,
-       thm-complex-numbers-are-the-real-coordinate-plane,
-       rem-real-and-complex-normed-space-convention]
+deps: [def-norm-and-normed-space, lem-of-abs-value, lem-of-triangle-inequality, def-finite-sum, lem-finite-sum-laws, def-linear-basis, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-topological-isomorphism-of-normed-spaces, thm-all-norms-on-rn-are-equivalent, thm-complex-numbers-are-the-real-coordinate-plane, def-complex-norm-and-complex-normed-space, def-realification-of-a-complex-vector-space, lem-complex-modulus-of-real-embedding-equals-real-absolute-value, lem-complex-norm-realification-is-a-real-norm, lem-complex-coordinate-l1-is-a-norm]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -31,7 +27,7 @@ pipeline_run: frontier-29
 ## Statement
 
 Let $X$ be a normed space over $\mathbb K \in \{\mathbb R,\mathbb C\}$, read in
-the complex case by [[rem-real-and-complex-normed-space-convention]]. Let
+the real case by [[def-norm-and-normed-space]] and the complex case by [[def-complex-norm-and-complex-normed-space]]. Let
 $e:n\to X$ be an ordered basis ([[def-linear-basis]]), and write $e_j:=e(j)$.
 Give $\mathbb K^n$ its coordinate $\ell^1$ norm
 
@@ -52,11 +48,15 @@ Then $T$ is a topological isomorphism of normed spaces in the sense of
 
 [L2] A topological isomorphism of normed spaces is a bounded linear bijection whose inverse is bounded ([[def-topological-isomorphism-of-normed-spaces]]).
 
-[L3] For $m\ge1$, every norm on $\mathbb R^m$ is equivalent to the Euclidean norm ([[thm-all-norms-on-rn-are-equivalent]]).
+[L3] For $m\ge1$, every norm on $\mathbb R^m$ is equivalent to the Euclidean norm, and any two norms on $\mathbb R^m$ are equivalent ([[thm-all-norms-on-rn-are-equivalent]]).
 
 [L4] The map $\Phi:\mathbb C\to\mathbb R^2$, $\Phi(a+bi)=(a,b)$, is a bijection with the stated coordinate arithmetic ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
-[L5] The complex case is read with the same norm axioms and with scalar absolute value replaced by the complex modulus ([[rem-real-and-complex-normed-space-convention]]).
+[L5] Complex norms have full complex absolute homogeneity ([[def-complex-norm-and-complex-normed-space]]). Their realifications carry the same norm and metric ([[def-realification-of-a-complex-vector-space]], [[lem-complex-modulus-of-real-embedding-equals-real-absolute-value]], [[lem-complex-norm-realification-is-a-real-norm]]). The coordinate $\ell^1$ function is a complex norm, including $n=0$ ([[lem-complex-coordinate-l1-is-a-norm]]).
+
+[F1] Real absolute value is definite, multiplicative and subadditive ([[lem-of-abs-value]], [[lem-of-triangle-inequality]]).
+
+[F2] Finite real sums distribute over addition and scaling and preserve inequalities ([[def-finite-sum]], [[lem-finite-sum-laws]]).
 
 ## Proof
 
@@ -66,13 +66,13 @@ Then $T$ is a topological isomorphism of normed spaces in the sense of
 
 1.2 $T$ is linear, because finite sums and scalar multiplication distribute over the coordinate formula: $T(\lambda a+b)=\sum_{j<n}(\lambda a_j+b_j)e_j=\lambda\sum_{j<n}a_je_j+\sum_{j<n}b_je_j =\lambda T(a)+T(b)$. [given, algebra]
 
-1.3 In the complex case $\mathbb K=\mathbb C$, write $\Psi:\mathbb C^n\to\mathbb R^{2n}$ for the coordinatewise real-imaginary-part map from [L4]. Define $$N_{\mathbb R}(u,v):=\|T(u_0+iv_0,\dots,u_{n-1}+iv_{n-1})\|.$$ By [L4] and [L5] this is a real norm on $\mathbb R^{2n}$. If $n=0$ the inverse is again bounded trivially. If $n\ge1$, [L3] applied to $\mathbb R^{2n}$ gives $c>0$ with $$c\|(u,v)\|_2\le N_{\mathbb R}(u,v)$$ for every $(u,v)\in\mathbb R^{2n}$. Also $|u_j+iv_j|\le |u_j|+|v_j|\le \sqrt2\,(u_j^2+v_j^2)^{1/2}$, so $$\|(u_0+iv_0,\dots,u_{n-1}+iv_{n-1})\|_1\le \sqrt{2n}\,\|(u,v)\|_2.$$ Hence $$\|a\|_1\le \frac{\sqrt{2n}}{c}\,\|T(a)\| \qquad (a\in\mathbb C^n),$$ which is the boundedness of $T^{-1}$. [L3, L4, L5, algebra]
+2.1 In the complex case, [L5] makes both $P(a):=\|a\|_1$ and $N(a):=\|T(a)\|$ real norms on $(\mathbb C^n)_{\mathbb R}$: for $N$, separation uses injectivity in step 1.1, and homogeneity and the triangle inequality use step 1.2 and the norm on $X$. The coordinate map $\Psi(a)=(\operatorname{Re}a_0,\operatorname{Im}a_0,\ldots,\operatorname{Re}a_{n-1},\operatorname{Im}a_{n-1})$ is a real-linear bijection by [L4], so $P\circ\Psi^{-1}$ and $N\circ\Psi^{-1}$ are real norms on $\mathbb R^{2n}$. If $n\ge1$, the pairwise equivalence clause of [L3] gives a positive real $c$ such that $cP(a)\le N(a)$ for every $a$. Thus $\|T^{-1}x\|_1\le c^{-1}\|x\|$. If $n=0$, both spaces consist only of zero by [L1], and the inverse is bounded with bound zero. [L1, L3, L4, L5, step 1.1, step 1.2, algebra]
 
-2.1 Put $C:=\sum_{j<n}\|e_j\|$, a finite real. Then $$\|T(a)\|=\left\|\sum_{j<n}a_je_j\right\|\le\sum_{j<n}|a_j|\,\|e_j\| \le C\sum_{j<n}|a_j|=C\|a\|_1,$$ so $T$ is bounded. [step 1.2, given, algebra]
+2.2 Put $C:=\sum_{j<n}\|e_j\|$, a finite real. Then $$\|T(a)\|=\left\|\sum_{j<n}a_je_j\right\|\le\sum_{j<n}|a_j|\,\|e_j\| \le C\sum_{j<n}|a_j|=C\|a\|_1,$$ so $T$ is bounded. [step 1.2, given, algebra]
 
-2.2 In the real case $\mathbb K=\mathbb R$, the pullback $N(a):=\|T(a)\|$ is a norm on $\mathbb R^n$: definiteness uses step 1.1, and the triangle and homogeneity axioms come from the norm axioms on $X$ and the linearity of $T$. If $n=0$, then $\mathbb R^0=\{0\}$ and the inverse of $T$ is the zero map, hence bounded. If $n\ge1$, [L3] gives $c>0$ with $c\|a\|_1\le N(a)=\|T(a)\|$ for every $a\in\mathbb R^n$, so $\|T^{-1}x\|_1\le c^{-1}\|x\|$ for every $x\in X$. Thus $T^{-1}$ is bounded in the real case. [step 1.1, step 1.2, L3, choose]
+2.3 In the real case $\mathbb K=\mathbb R$, the coordinate $P(a)=\sum_{j<n}|a_j|$ is a real norm: absolute-value definiteness, multiplicativity, and the triangle inequality give the three axioms by finite summation, including the empty list. The pullback $N(a):=\|T(a)\|$ is a norm on $\mathbb R^n$: definiteness uses step 1.1, and the triangle and homogeneity axioms come from the norm axioms on $X$ and the linearity of $T$. If $n=0$, then $\mathbb R^0=\{0\}$ and the inverse of $T$ is the zero map, hence bounded. If $n\ge1$, [L3] gives $c>0$ with $c\|a\|_1\le N(a)=\|T(a)\|$ for every $a\in\mathbb R^n$, so $\|T^{-1}x\|_1\le c^{-1}\|x\|$ for every $x\in X$. Thus $T^{-1}$ is bounded in the real case. [step 1.1, step 1.2, L3, F1, F2, choose]
 
-3.1 Steps 1.1, 1.2, 1.3, 2.1, and 2.2 verify the three clauses of [L2]. Therefore $T$ is a topological isomorphism of normed spaces. [L2, step 1.1, step 1.2, step 1.3, step 2.1, step 2.2] ∎
+3.1 Steps 1.1, 1.2, 2.1, 2.2, and 2.3 verify the three clauses of [L2]. Therefore $T$ is a topological isomorphism of normed spaces. [L2, step 1.1, step 1.2, step 2.1, step 2.2, step 2.3] ∎
 
 ## Remarks
 

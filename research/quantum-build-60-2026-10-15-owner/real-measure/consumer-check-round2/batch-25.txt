@@ -1,0 +1,476 @@
+FILE thm-riemann-bilinear-relations
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]), as required by the
+symplectic-basis, holomorphic-dimension, and wedge-period suppliers. Let $X$ be a
+compact connected Riemann surface of genus $g$, with its complex orientation,
+the fixed one-polygon symplectic basis $a_1,b_1,\ldots,a_g,b_g$ of
+$H_1(X;\mathbb Z)$, and the fixed continuous side-loop representatives
+$A_i,B_i$ supplied by
+[[thm-symplectic-homology-basis-compact-riemann-surface]]. Let
+$\Omega(X)=\Omega^1(X)$ be the $g$-dimensional complex vector space of
+holomorphic differentials ([[lem-holomorphic-differentials-form-a-g-dimensional-space]]),
+and let $P$ be the period pairing on this basis from
+[[def-period-pairing-and-period-lattice]]. For closed smooth complex $1$-forms
+when $g\ge1$, write $\Pi_\alpha$ and
+$$S(\alpha,\beta):=\sum_{i=1}^g\bigl(\Pi_\alpha(a_i)\Pi_\beta(b_i)-\Pi_\alpha(b_i)\Pi_\beta(a_i)\bigr)$$
+as in [[lem-cut-surface-and-boundary-jumps-of-primitives]] and
+[[thm-symplectic-period-formula-for-wedge-integrals]]. For $g=0$ this sum is
+empty. For a holomorphic $\omega$, the period lemma identifies
+$\Pi_\omega(\gamma)=P(\gamma,\omega)$.
+
+1. **Normalized basis.** The $\mathbb C$-linear map
+   $$\mathcal A: \Omega(X)\longrightarrow\mathbb C^g, \qquad \omega\longmapsto(P(a_1,\omega),\ldots,P(a_g,\omega))$$
+   is an isomorphism. Thus there is a unique basis
+   $\omega_1,\ldots,\omega_g$ with $P(a_i,\omega_j)=\delta_{ij}$. The
+   **period matrix** in this normalization is the $g\times g$ matrix
+   $\Pi_{ij}:=P(b_i,\omega_j)$.
+2. **First bilinear relation.** $\Pi$ is symmetric if and only if
+   $S(\omega,\eta)=0$ for every pair of holomorphic differentials
+   $\omega,\eta\in\Omega(X)$.
+3. **Second bilinear relation.** $\operatorname{Im}\Pi$ is positive definite
+   if and only if
+   $$iS(\omega,\bar\omega)=i\int_X\omega\wedge\bar\omega>0$$
+   for every nonzero holomorphic differential $\omega$. Here $\bar\omega$ is
+   its conjugate smooth $(0,1)$-form.
+4. **Period lattice.** The homomorphism
+   $$e:H_1(X;\mathbb Z)\longrightarrow\Omega(X)^*, \qquad e(\gamma)(\omega):=P(\gamma,\omega),$$
+   is injective. Its image $\Lambda$ is the full lattice generated over
+   $\mathbb Z$ by the $2g$ real-linearly independent vectors
+   $e(a_1),e(b_1),\ldots,e(a_g),e(b_g)$. In the coordinates on $\Omega(X)^*$
+   dual to the normalized basis,
+   $$\Lambda=\mathbb Z^g+\Pi\mathbb Z^g\subseteq\mathbb C^g,$$
+   and $\Omega(X)^*/\Lambda$ is a compact real $2g$-torus. For $g=0$, all
+bases and matrices here are empty, $\Omega(X)=H_1(X;\mathbb Z)=0$, and we
+use the rank-zero lattice convention $\Lambda=\{0\}$ in the zero vector
+space; the quotient is a point. Positive definiteness of the empty matrix is
+understood by the usual quadratic-form condition on nonzero vectors, which is
+vacuous in dimension zero.
+
+LINE 144 [F8] A linear map between two $g$-dimensional vector spaces is represented by
+a square matrix after choosing a basis; a square matrix with zero kernel is
+invertible, including the empty $0\times0$ case
+([[def-vector-space]], [[def-dimension]], [[def-linear-map]],
+[[thm-invertible-matrix-theorem]]).
+
+FILE thm-riemann-lebesgue-lemma-on-lca-groups
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]) and Dependent Choice ([[def-dependent-choice]]). Let $G$ be a locally compact Hausdorff abelian group with Haar measure $m_G$ and dual $\widehat G$. For every $f\in L^1(G,m_G)$ its Fourier transform satisfies
+$$\widehat f\in C_0(\widehat G),\qquad \|\widehat f\|_\infty\le\|f\|_1 .$$
+Thus $f\mapsto\widehat f$ maps $L^1(G,m_G)$ into the Banach space $C_0(\widehat G)$, and the vanishing at infinity is uniform, not merely along sequences.
+
+LINE 51 [F3] Real $C_c(G)$ is dense in real $L^1(G,m_G)$. Applying this separately to $\operatorname{Re}f$ and $\operatorname{Im}f$ gives $a_n,b_n\in C_c(G;\mathbb R)$ with both $L^1$ errors tending to zero; hence $g_n=a_n+ib_n\in C_c(G;\mathbb C)$ satisfies $\|f-g_n\|_1\le\|\operatorname{Re}f-a_n\|_1+\|\operatorname{Im}f-b_n\|_1\to0$ ([[thm-c-c-is-dense-in-l-p-for-radon-measures]]).
+
+[F4] Assume the Axiom of Choice and Dependent Choice. In $A^+=\mathbb C\oplus A$ the characters are exactly $q(z,h)=z$ and $h_\gamma^+(z,h)=z+\widehat h(\gamma)$, the Gelfand transform $\chi\mapsto\chi(0,f)$ of $(0,f)$ is continuous on the compact Hausdorff space $\Delta(A^+)$, $q(0,f)=0$ and $h_\gamma^+(0,f)=\widehat f(\gamma)$, and $\Delta(A^+)$ is homeomorphic to $\widehat G\cup\{q\}$ with $\widehat G$ carrying its compact-open topology ([[lem-lca-scalar-unitization-character-space-and-spectrum]], [[def-gelfand-transform]], [[thm-maximal-ideal-space-is-compact-hausdorff]], [[def-axiom-of-choice]]).
+
+## Proof
+
+LINE 61 1.2 (Norm bound.) For every $\gamma\in\widehat G$, $|\widehat f(\gamma)|\le\int_G|f(x)|\,|\gamma(x)|\,dm_G(x)=\|f\|_1$, so $\|\widehat f\|_\infty\le\|f\|_1$. [F1]
+
+1.3 (Compact superlevel sets.) Let $F:\Delta(A^+)\to\mathbb C$ be the Gelfand transform $F(\chi):=\chi(0,f)$. By [F4], $F$ is continuous, $\Delta(A^+)$ is compact, $F(h_\gamma^+)=\widehat f(\gamma)$ and $F(q)=0$. For $\varepsilon>0$ the set $L_\varepsilon:=\{\chi\in\Delta(A^+):|F(\chi)|\ge\varepsilon\}$ is closed in $\Delta(A^+)$, hence compact, and it does not contain $q$; therefore $L_\varepsilon=\{\gamma\in\widehat G:|\widehat f(\gamma)|\ge\varepsilon\}$ is a compact subset of $\widehat G$ for its compact-open topology. Thus every superlevel set of $|\widehat f|$ is compact. [F4]
+
+2.1 (Continuity in general.) Choose $g_n\in C_c(G;\mathbb C)$ with $\|f-g_n\|_1\to0$ by [F3]. Then $\|\widehat g_n-\widehat f\|_\infty\le\|g_n-f\|_1\to0$ by [F1], so $\widehat f$ is the uniform limit of the continuous functions $\widehat g_n$ of step 1.1; hence $\widehat f$ is continuous. [F1, F3, step 1.1]
+
+FILE thm-riemann-roch-compact-riemann-surfaces
+
+STATEMENT Assume the full Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact Riemann surface of topological genus $g$, let $D$ be a divisor on $X$, and put $E_D:=\mathcal O_X(D)$ and $F_D:=K_X\otimes E_D^*$, where $K_X:=\Lambda^{1,0}T^*X$ is the canonical holomorphic line bundle ([[def-divisor-principal-and-canonical-divisor-riemann-surface]], [[def-line-bundle-associated-to-a-divisor]], [[thm-serre-duality-compact-riemann-surfaces]]). Write $h^q(X,G):=\dim_{\mathbb C}H^q(X,G)$ when finite, $\ell(D):=\dim H^0(X,E_D)$, $i(D):=\dim H^1(X,E_D)$, and $\chi(E_D):=\ell(D)-i(D)$ ([[thm-finiteness-cohomology-compact-riemann-surface]]). Then:
+
+1. The spaces $H^0(X,E_D)$, $H^1(X,E_D)$, and $H^0(X,F_D)$ are finite-dimensional, and $i(D)=h^0(X,F_D)$ ([[thm-finiteness-cohomology-compact-riemann-surface]], [[thm-serre-duality-compact-riemann-surfaces]]).
+
+2. The intrinsic Riemann–Roch formula is
+$$\ell(D)-h^0(X,F_D)=\chi(E_D)=\deg D+1-g.$$
+
+3. There exists a nonzero meromorphic differential on $X$. For any such differential $\eta$, let $K_\eta:=(\eta)$ be its canonical divisor. The isomorphism $\mathcal O_X(K_\eta)\cong K_X$ identifies $H^0(X,F_D)$ with $L(K_\eta-D)$, so $i(D)=\ell(K_\eta-D)$ and the formula becomes
+$$\ell(D)-\ell(K_\eta-D)=\deg D+1-g.$$
+This expression is independent of the differential, and the identity is invariant under replacing $D$ by a linearly equivalent divisor. For $D=0$, it gives $\ell(0)=1$, $i(0)=g$, and $\chi(\mathcal O_X)=1-g$.
+
+LINE 39     - title: Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81, Springer 1981), translated by Bruce Gilligan
+      url: http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf
+      locator: "§§16.7–16.9, printed pp. 129–130: the skyscraper exact sequence, finiteness of H^0 and H^1, the D=0 case, and induction over positive and negative point coefficients to obtain dim H^0(O_D)-dim H^1(O_D)=1-g+deg D"
+    - title: Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)
+      url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
+
+FILE thm-riemann-solver-for-strictly-convex-scalar-flux
+
+STATEMENT Assume Countable Choice ([[def-countable-choice]]) for the analytic prerequisites used below.
+
+Let $f\in C^2(\mathbb R)$ be strictly convex and let $u_L,u_R\in\mathbb R$.
+The unique Kruzhkov entropy solution of the Riemann problem
+([[def-self-similar-riemann-problem]]) is:
+
+(i) if $u_L>u_R$, the shock
+$$u(t,x)=\begin{cases}u_L,&x<st,\\u_R,&x>st,\end{cases}\qquad s=\frac{f(u_R)-f(u_L)}{u_R-u_L};$$
+
+(ii) if $u_L<u_R$, the centred rarefaction
+$$u(t,x)=\begin{cases}u_L,&x/t\le f'(u_L),\\(f')^{-1}(x/t),&f'(u_L)<x/t<f'(u_R),\\u_R,&x/t\ge f'(u_R).\end{cases}$$
+
+Here $f'$ is continuous and strictly increasing, so its inverse on
+$[f'(u_L),f'(u_R)]$ is continuous; it need not be differentiable, and the
+rarefaction may have a cusp when $f''$ vanishes. Both profiles satisfy the weak
+conservation law, all Kruzhkov entropy inequalities, and the strong local $L^1$
+initial trace. Uniqueness in the bounded Kruzhkov class follows from
+[[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]]. If
+$u_L=u_R$, the constant solution is the unique one
+([[def-scalar-conservation-law-and-flux]], [[def-kruzhkov-entropy-solution]]).
+
+LINE 66 [F2] Interface computation at a single jump: for a piecewise $C^1$ function with one interface and speed $s$, the weak residual against a test function supported near the interface equals $-\int_\Gamma\varphi\,\bigl([u]\nu_t+[f(u)]\nu_x\bigr)dS$; in one dimension with the graph $x=st$, $[u]\nu_t+[f]\nu_x=\bigl([f]-s[u]\bigr)/\sqrt{1+s^2}$. Thus Rankine--Hugoniot $s[u]=[f]$ makes the residual vanish there, and across a continuous interface (equal traces of $u$, hence of $f(u)$) the contribution vanishes identically ([[thm-rankine-hugoniot-jump-condition]]).
+
+[F3] Chord criterion at a jump: a piecewise $C^1$ weak solution with a single nontrivial jump of speed $s$ satisfies the entropy inequality for every convex $C^2$ pair if and only if $F(z)(u^+-u^-)\ge0$ for all $z$ between the states, where $F(z)=f(z)-f(u^-)-s(z-u^-)$ ([[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]).
+
+[F4] Strict convexity: $f'$ is strictly increasing by the secant argument in [[cor-lax-shock-inequalities-for-convex-scalar-laws]], so $f'(u_L)<f'(u_R)$ when $u_L<u_R$ and the inverse $(f')^{-1}\colon[f'(u_L),f'(u_R)]\to[u_L,u_R]$ is continuous, strictly increasing; the graph of $f$ lies strictly below every chord on the interior of its interval ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]], [[thm-differentiable-convex-functions-and-monotone-derivatives]]).
+
+LINE 84 
+
+2.1 **The shock is entropic.** With $u^-=u_L$, $u^+=u_R$ and speed $s$, the function $F(z)=f(z)-f(u_L)-s(z-u_L)$ satisfies $F(u_L)=F(u_R)=0$, and by strict convexity [F4] the graph of $f$ lies strictly below the chord through $(u_L,f(u_L))$, $(u_R,f(u_R))$ on $(u_R,u_L)$; that chord has slope $s$, so $F(z)<0$ for $z\in(u_R,u_L)$. Since $u_R-u_L<0$, $F(z)(u_R-u_L)\ge0$ on $[u_R,u_L]$, and the chord criterion [F3] gives the entropy inequality for every convex $C^2$ pair. [F3, F4, step 1.1]
+
+
+
+FILE thm-riesz-measure-is-positive-radon
+
+STATEMENT Assume Dependent Choice. Let $\Omega\subseteq\mathbb C$ be a complex domain and
+let $u:\Omega\to[-\infty,\infty)$ be subharmonic on $\Omega$, with the
+distributional Riesz functional
+$\mu_u(\varphi)=\frac{1}{2\pi}\int_\Omega u\,\Delta\varphi\,dA$ of
+[[def-riesz-measure-subharmonic-function]]. Then:
+
+1. $\mu_u(\varphi)\ge0$ for every real-valued $\varphi\in C_c^\infty(\Omega)$
+   with $\varphi\ge0$;
+2. there is exactly one positive Radon measure $\nu$ on $\Omega$ with
+   $$\mu_u(\varphi)=\int_\Omega\varphi\,d\nu\qquad(\varphi\in C_c^\infty(\Omega)).$$
+
+Dependent Choice is used for the Riesz–Markov–Kakutani representation of the
+extended functional and for its uniqueness; the mollification,
+distributional-compatibility, density and dominated-convergence steps use only
+Countable Choice, which Dependent Choice implies, and the remaining steps are
+choice-free.
+
+LINE 142 the regular distributions of $f_\varepsilon$ converge weakly to $T$: for every
+$\psi\in C_c^\infty(\Omega)$ one has $\int f_\varepsilon\psi\to T(\psi)$ as
+$\varepsilon\to0^+$ ([[thm-mollifier-approximation-in-distributions]]).
+
+[F9] Distributional differentiation is continuous linear on $\mathcal D'(\Omega)$
+
+LINE 229 2.2 For $z$ in the open set $\Omega_\varepsilon:=\{z\in\Omega:\overline B(z,3\varepsilon)\subseteq\Omega\}$ define $u_\varepsilon(z):=\int_{\mathbb R^2}u(z-y)\rho_\varepsilon(y)\,dy$; this set equals $\Omega$ when $\Omega=\mathbb C$. It is open: for any of its points, [F15] gives a positive margin for the compact ball $\overline B(z,3\varepsilon)$ inside $\Omega$, and every sufficiently small translate of that ball stays inside $\Omega$. In general the integrand lives on the compact set $z-\overline B(0,2\varepsilon)\subseteq B(z,3\varepsilon)\subseteq\Omega$. For each such $z$, choose a relatively compact open $W\subseteq\Omega$ containing $z-\overline B(0,2\varepsilon)$ and all its sufficiently small translates. Replacing $u$ by its product with $\mathbf 1_W$, extended by zero outside $\Omega$ (locally integrable on $\mathbb R^2$ by [F2]), [F7] and step 1.2 show that $u_\varepsilon\in C^\infty(\Omega_\varepsilon)$ with every derivative given by the convolution of $u$ against the corresponding derivative of $\rho_\varepsilon$; the values are finite real numbers, since $u\in L^1$ near $z-\overline B(0,2\varepsilon)$. [F2, F7, step 1.2]
+
+3.1 The mollified function satisfies the submean inequality on $\Omega_\varepsilon$: if $a\in\Omega_\varepsilon$ and $\overline D(a,r)\subseteq\Omega_\varepsilon$, then $\overline D(a,r+2\varepsilon)\subseteq\Omega$ — for $|w-a|\le r$ one has $w\in\Omega_\varepsilon$, and for $r<|w-a|\le r+2\varepsilon$ the point $v:=a+r(w-a)/|w-a|$ lies in $\overline D(a,r)\subseteq\Omega_\varepsilon$, so $B(v,3\varepsilon)\subseteq\Omega$ while $|w-v|=|w-a|-r\le2\varepsilon<3\varepsilon$ gives $w\in B(v,3\varepsilon)\subseteq\Omega$ — hence $\overline D(a-y,r)\subseteq\overline D(a,r+2\varepsilon)\subseteq\Omega$ for every $|y|\le2\varepsilon$; applying the submean inequality of [F3] at the centre $a-y$, multiplying by $\rho_\varepsilon(y)\ge0$ and integrating over $|y|\le2\varepsilon$ with Tonelli and Fubini [F11] applied to the positive and negative parts (the absolute double integral is at most $2\pi\|\rho_\varepsilon\|_\infty\int_{\overline D(a,r+2\varepsilon)}|u|\,dA<\infty$ by [F2]) gives $u_\varepsilon(a)\le\frac1{2\pi}\int_0^{2\pi}u_\varepsilon(a+re^{it})\,dt$. [F2, F3, F11, step 2.2, algebra]
+
+3.2 As $\varepsilon\to0^+$ the regular distributions of $u_\varepsilon$ converge weakly to $T_u$ on $\Omega$: the local convolution of [F8] with $T:=T_u$ is exactly $x\mapsto T_u(\rho_\varepsilon(x-\cdot))=\int_\Omega u(y)\rho_\varepsilon(x-y)\,dy=u_\varepsilon(x)$ on $V_\varepsilon=\{x:x-\operatorname{supp}\rho_\varepsilon\subseteq\Omega\}$, and $V_\varepsilon\supseteq\Omega_\varepsilon$ because $x-\overline B(0,2\varepsilon)\subseteq B(x,3\varepsilon)\subseteq\Omega$ for $x\in\Omega_\varepsilon$; hence $\langle T_{u_\varepsilon},\psi\rangle\to\langle T_u,\psi\rangle$ for every $\psi\in C_c^\infty(\Omega)$. [F8, step 1.2, step 2.1, step 2.2]
+
+LINE 231 3.1 The mollified function satisfies the submean inequality on $\Omega_\varepsilon$: if $a\in\Omega_\varepsilon$ and $\overline D(a,r)\subseteq\Omega_\varepsilon$, then $\overline D(a,r+2\varepsilon)\subseteq\Omega$ — for $|w-a|\le r$ one has $w\in\Omega_\varepsilon$, and for $r<|w-a|\le r+2\varepsilon$ the point $v:=a+r(w-a)/|w-a|$ lies in $\overline D(a,r)\subseteq\Omega_\varepsilon$, so $B(v,3\varepsilon)\subseteq\Omega$ while $|w-v|=|w-a|-r\le2\varepsilon<3\varepsilon$ gives $w\in B(v,3\varepsilon)\subseteq\Omega$ — hence $\overline D(a-y,r)\subseteq\overline D(a,r+2\varepsilon)\subseteq\Omega$ for every $|y|\le2\varepsilon$; applying the submean inequality of [F3] at the centre $a-y$, multiplying by $\rho_\varepsilon(y)\ge0$ and integrating over $|y|\le2\varepsilon$ with Tonelli and Fubini [F11] applied to the positive and negative parts (the absolute double integral is at most $2\pi\|\rho_\varepsilon\|_\infty\int_{\overline D(a,r+2\varepsilon)}|u|\,dA<\infty$ by [F2]) gives $u_\varepsilon(a)\le\frac1{2\pi}\int_0^{2\pi}u_\varepsilon(a+re^{it})\,dt$. [F2, F3, F11, step 2.2, algebra]
+
+3.2 As $\varepsilon\to0^+$ the regular distributions of $u_\varepsilon$ converge weakly to $T_u$ on $\Omega$: the local convolution of [F8] with $T:=T_u$ is exactly $x\mapsto T_u(\rho_\varepsilon(x-\cdot))=\int_\Omega u(y)\rho_\varepsilon(x-y)\,dy=u_\varepsilon(x)$ on $V_\varepsilon=\{x:x-\operatorname{supp}\rho_\varepsilon\subseteq\Omega\}$, and $V_\varepsilon\supseteq\Omega_\varepsilon$ because $x-\overline B(0,2\varepsilon)\subseteq B(x,3\varepsilon)\subseteq\Omega$ for $x\in\Omega_\varepsilon$; hence $\langle T_{u_\varepsilon},\psi\rangle\to\langle T_u,\psi\rangle$ for every $\psi\in C_c^\infty(\Omega)$. [F8, step 1.2, step 2.1, step 2.2]
+
+3.3 Classical compatibility: for every $\varepsilon>0$ and every $\varphi\in C_c^\infty(\Omega_\varepsilon)$ one has $\langle\Delta T_{u_\varepsilon},\varphi\rangle=\int_\Omega\varphi\,\Delta u_\varepsilon\,dA$. Indeed $u_\varepsilon\in C^\infty(\Omega_\varepsilon)$ by step 2.2, so the $\mathrm{AC}_\omega$ clause of [F9] applied on the open set $\Omega_\varepsilon$ to $\partial_x\partial_xu_\varepsilon$ and $\partial_y\partial_yu_\varepsilon$ and added gives $\Delta T_{u_\varepsilon}=T_{\Delta u_\varepsilon}$ there, and only values on $\Omega_\varepsilon$ are tested. [F9, step 1.2, step 2.2]
+
+FILE thm-rnp-lipschitz-differentiability-characterization
+
+STATEMENT Assume the Axiom of Choice. A Banach space $X$ has the Radon--Nikodym
+property if and only if every Lipschitz map $F:[0,1]\to X$ is norm
+differentiable at Lebesgue-almost every $t\in(0,1)$; that is, for almost every
+such $t$ there is an $F'(t)\in X$ for which
+
+$$\lim_{h\to0}\left\|\frac{F(t+h)-F(t)}h-F'(t)\right\|=0.$$
+
+LINE 88 3.1 Prepare a common set of vector Lebesgue points. Choose integrable simple $s_m$ with $\int\|f-s_m\|\to0$ as in [L4]. Passing to a subsequence if necessary, the scalar errors $e_m=\|f-s_m\|$ converge to zero almost everywhere: choose least indices with $L^1$ errors below $2^{-2m}$, and the sets where the corresponding pointwise error exceeds $2^{-m}$ have summable measures, so their tail unions decrease to a null set. Extend $e_m$ and the finitely many indicator functions of the level sets of $s_m$ by zero outside $[0,1]$. Apply [L5] to every one of this countable family and remove the union of their exceptional null sets. At each remaining interior point $t$, every $e_m$ differentiates by interval averages, $e_m(t)\to0$, and [L4, L5, step 2.1, choose]
+
+$$\lim_{r\to0^+}\frac1{2r}\int_{t-r}^{t+r}\|s_m(u)-s_m(t)\|\,du=0$$
+
+for every $m$; the last equality follows by writing the finite-valued $s_m$ on its level sets and differentiating their indicators.
+
+LINE 96 4.1 Differentiate the indefinite Bochner integral in norm. At a point $t$ retained in step 3.1, for fixed $m$ the triangle inequality gives [L5, step 2.1, step 3.1]
+
+$$\limsup_{r\to0^+}\frac1{2r}\int_{t-r}^{t+r}\|f(u)-f(t)\|\,du\leq2e_m(t).$$
+
+Indeed the three terms are the average of $e_m(u)$, the average of $\|s_m(u)-s_m(t)\|$, and $e_m(t)$. Letting $m\to\infty$ makes the right side zero. For nonzero $h$ small enough that $t+h\in[0,1]$, step 2.1 now yields
+
+FILE thm-round-annulus-conformal-parameter-is-complete-invariant
+
+STATEMENT Assume Countable Choice. For $0<r<R<\infty$ let $A(r,R)=\{z:r<|z|<R\}$ and let $\Gamma_{r,R}$ be the family of paths with interior in $A(r,R)$ joining the two boundary circles. Define the **conformal parameter**
+$$M(A(r,R)):=\lambda(\Gamma_{r,R})=\frac1{2\pi}\log\frac Rr,$$
+the extremal length of the joining family ([[thm-modulus-rectangle-and-annulus]]); it is the classical conformal modulus of a round annulus in the normalization for which the connecting-family modulus is $1/M=2\pi/\log(R/r)$ in the reciprocal library convention of [[def-extremal-length-and-curve-family-modulus]]. Then:
+
+(i) For $0<r<R<\infty$ and $0<r'<R'<\infty$, $A(r,R)$ and $A(r',R')$ are conformally equivalent ([[def-conformal-equivalence-and-automorphism-group]]) if and only if $M(A(r,R))=M(A(r',R'))$, equivalently $R/r=R'/r'$. When the parameters agree, $z\mapsto(r'/r)z$ is a conformal equivalence.
+
+(ii) Let $D^*=\{0<|z|<1\}$ and let $\Gamma_{D^*}$ be the family of paths $\gamma:[0,1]\to\mathbb C$ with $\gamma(0)=0$, $\gamma(1)\in\partial\mathbb D$, and $\gamma((0,1))\subseteq D^*$. Then the limiting conformal parameter is infinite:
+$$M(D^*):=\lambda(\Gamma_{D^*})=+\infty.$$
+
+(iii) The punctured disc $D^*$ is not conformally equivalent to any round annulus $A(r,R)$ with $0<r<R<\infty$, nor to the unit disc $\mathbb D$, nor to the plane $\mathbb C$. The punctured plane $\mathbb C^*$ is likewise not conformally equivalent to any round annulus.
+
+LINE 60 
+[F2] For a finite round annulus,
+$$\lambda(\Gamma_{r,R})=\frac1{2\pi}\log\frac Rr,\qquad \lambda(\Theta_{r,R}^{+})=\frac{2\pi}{\log(R/r)},$$
+where $\Theta_{r,R}^{+}$ is the family of rectifiable closed paths in $A(r,R)$ with winding number $1$ about $0$ ([[thm-modulus-rectangle-and-annulus]]).
+
+
+LINE 61 [F2] For a finite round annulus,
+$$\lambda(\Gamma_{r,R})=\frac1{2\pi}\log\frac Rr,\qquad \lambda(\Theta_{r,R}^{+})=\frac{2\pi}{\log(R/r)},$$
+where $\Theta_{r,R}^{+}$ is the family of rectifiable closed paths in $A(r,R)$ with winding number $1$ about $0$ ([[thm-modulus-rectangle-and-annulus]]).
+
+[F3] A conformal equivalence preserves extremal lengths of path families whose full traces lie in its domains ([[thm-extremal-length-conformal-invariance-and-monotonicity]]).
+
+LINE 101 1.6 If a biholomorphism $h:\mathbb D\to D^*$ existed, then $h$ would be nowhere zero. By [F12], the disc is homologically simply connected, so [F10] supplies a holomorphic $g:\mathbb D\to\mathbb C$ with $e^{g(z)}=h(z)$. Set $L(w)=g(h^{-1}(w))$ on $D^*$. Then $e^{L(w)}=w$, and [F10] gives $L'(w)=1/w$. Integrating around the positively oriented circle $|w|=1/2\subset D^*$, [F11] gives $0=\int L'(w)\,dw=\int dw/w=2\pi i$, a contradiction. [F10, F11, F12, given, construct, algebra]
+
+2.1 Conversely, let $h:A(r,R)\to A(r',R')$ be a biholomorphism. By step 1.1, it maps $\Theta_{r,R}^{+}$ onto one of the two target sign families. Conformal invariance [F3] and the sign equality in step 1.2 give $\displaystyle \lambda(\Theta_{r,R}^{+})=\lambda(\Theta_{r',R'}^{+}).$ Using [F2], this is $\displaystyle \frac{2\pi}{\log(R/r)}=\frac{2\pi}{\log(R'/r')}.$ Both logarithms are positive by [F9]; cancellation and strict monotonicity in [F9] give $R/r=R'/r'$. This proves (i). [F2, F3, F9, step 1.1, step 1.2]
+
+2.2 Let $\rho$ be any Borel density on $A(\varepsilon_n,1)$ with $0<A(\rho)<\infty$, and extend it by zero to a Borel density $\widetilde\rho$ on $D^*$. Its area is unchanged. Step 1.4 and [F8] show $\displaystyle \ell_{\widetilde\rho}(\Gamma_{D^*})\ge\ell_\rho(\Gamma_{\varepsilon_n,1}),$ because every path contains the annular subpath and the endpoint values carry no length mass. Thus the extremal-length quotient of $\widetilde\rho$ on $\Gamma_{D^*}$ is at least the quotient of $\rho$ on $\Gamma_{\varepsilon_n,1}$. Taking suprema and applying [F2] yields $\displaystyle \lambda(\Gamma_{D^*})\ge\lambda(\Gamma_{\varepsilon_n,1})=\frac{\log(2^n)}{2\pi}=\frac{n\log2}{2\pi}.$ As $n$ is unbounded and $\log2>0$, this proves $M(D^*)=+\infty$. [F1, F2, F8, F9, step 1.4, given]
+
+LINE 105 2.2 Let $\rho$ be any Borel density on $A(\varepsilon_n,1)$ with $0<A(\rho)<\infty$, and extend it by zero to a Borel density $\widetilde\rho$ on $D^*$. Its area is unchanged. Step 1.4 and [F8] show $\displaystyle \ell_{\widetilde\rho}(\Gamma_{D^*})\ge\ell_\rho(\Gamma_{\varepsilon_n,1}),$ because every path contains the annular subpath and the endpoint values carry no length mass. Thus the extremal-length quotient of $\widetilde\rho$ on $\Gamma_{D^*}$ is at least the quotient of $\rho$ on $\Gamma_{\varepsilon_n,1}$. Taking suprema and applying [F2] yields $\displaystyle \lambda(\Gamma_{D^*})\ge\lambda(\Gamma_{\varepsilon_n,1})=\frac{\log(2^n)}{2\pi}=\frac{n\log2}{2\pi}.$ As $n$ is unbounded and $\log2>0$, this proves $M(D^*)=+\infty$. [F1, F2, F8, F9, step 1.4, given]
+
+2.3 Define $\Theta_{D^*}^{+}$ and $\Theta_{\mathbb C^*}^{+}$ as the families of rectifiable closed paths of winding $+1$ in the indicated domains. For every $n\ge1$, $\Theta_{A(2^{-n},1)}^{+}\subseteq\Theta_{D^*}^{+}$ and $\Theta_{A(2^{-n},2^n)}^{+}\subseteq\Theta_{\mathbb C^*}^{+}$. These subannular families have full traces in the larger domains, so [F1] and monotonicity [F3] give $\displaystyle 0\le\lambda(\Theta_{D^*}^{+})\le\frac{2\pi}{n\log2},\qquad 0\le\lambda(\Theta_{\mathbb C^*}^{+})\le\frac{2\pi}{2n\log2}.$ Letting $n$ grow proves both extremal lengths are zero. By step 1.2 the corresponding winding-$-1$ families also have extremal length zero. [F1, F2, F3, F9, step 1.2]
+
+3.1 If either $\Omega=D^*$ or $\Omega=\mathbb C^*$ were conformally equivalent to a finite round annulus $A(r,R)$, step 1.1 would map its winding-one family onto one of the two target sign families. Conformal invariance [F3] and step 1.2 would then equate its zero extremal length from step 2.3 with the strictly positive value $2\pi/\log(R/r)$ in [F2], a contradiction. This proves both finite-annulus exclusions in (iii). [F2, F3, step 1.1, step 1.2, step 2.3]
+
+LINE 71 
+[F7] Complex conjugation is a Euclidean isometry, sends the winding number of a closed contour to its negative, and preserves the supremum defining extremal length after pulling back the density. Its area change is $|\det D\overline z|=1$ ([[lem-complex-conjugation-and-modulus-laws]], [[prop-arc-length-under-lipschitz-maps-and-euclidean-similarities]], [[def-complex-line-integral-over-a-rectifiable-path]], [[thm-riemann-stieltjes-linearity-and-additivity]], [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]], [[thm-continuous-preimages-of-borel-sets-are-borel]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F8] For every nonnegative Borel density, length on a path is the integral along an arc-length parametrization and is additive over subpath intervals. A zero extension from a Borel subdomain is Borel and preserves area; endpoint values do not affect path length because the arc-length Stieltjes measure is atomless ([[lem-rho-length-and-extremal-length-are-well-defined]], [[thm-borel-sigma-algebra-of-a-subspace-is-the-trace]]).
+
+FILE thm-self-dual-indecomposable-cyclotomic-klr-projectives-give-the-lower-global-basis
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited through the based-quotient, generic global-basis, projection and canonical crystal suppliers.
+
+For a symmetric Cartan datum normalized by $d_i=1$, over any
+characteristic-zero field, and the SAME finite loopless quiver with arbitrary
+edge multiplicities and $Q_{ij}=(-1)^{h_{ij}}(u-v)^{h_{ij}+h_{ji}}$ as the
+generic global theorem, use the STANDARD homogeneous first-strand quotient and
+RIGHT append. The vacuum-normalized isomorphism
+$\phi:K_0(\mathrm{Proj}\,R^\Lambda)\to V_A(\Lambda)$ maps the classes of
+normalized $\#$-self-dual indecomposable cyclotomic projectives bijectively
+onto the lower global basis. The normalization is by projective HOM duality and
+normalized simple heads, not by finite vector duality or a half-trace shift.
+The projective with RIGHT crystal label $c\in B(\Lambda)$ maps to
+$G^-_\Lambda(c)$. Every such projective is the surviving extension of a
+generic normalized cover, with the raw map $\pi_\Lambda\circ*$ and the
+FIRST/RIGHT label cancellation proved in the based-quotient lemma. The
+uniqueness is at the level of normalized indecomposable projective isomorphism
+classes; this is not an assertion that its generic lift is unique. No
+arbitrary-parameter based extension is asserted.
+
+LINE 49 normalized simple heads, not by finite vector duality or a half-trace shift.
+The projective with RIGHT crystal label $c\in B(\Lambda)$ maps to
+$G^-_\Lambda(c)$. Every such projective is the surviving extension of a
+generic normalized cover, with the raw map $\pi_\Lambda\circ*$ and the
+FIRST/RIGHT label cancellation proved in the based-quotient lemma. The
+
+LINE 92 2.1 Surjectivity. Conversely the quantum global projection theorem [F2] supplies a generic global vector lifting every lower global vector of $V_A(\Lambda)$, and the generic theorem supplies its normalized generic cover; mirroring if necessary to use the raw first/right convention, its extension has that nonzero class and is a normalized indecomposable cover. Hence the assignment is surjective onto the lower basis. [step 1.1, F2]
+
+3.1 Bijectivity and labels. The integral $K_0$ isomorphism and its free normalized projective basis make the assignment injective; the RIGHT crystal label identification of [F3] shows that the projective with RIGHT label $c\in B(\Lambda)$ maps to $G^-_\Lambda(c)$, with the FIRST/RIGHT label cancellation proved in the based-quotient lemma. The uniqueness is at the level of normalized indecomposable projective isomorphism classes, not of generic lifts, and no arbitrary-parameter based extension is asserted. The Axiom of Choice is inherited through the generic global-basis and projection contracts of [F2], and the based-quotient and canonical crystal identifications of [F1] and [F3]. [step 2.1, F1, F2, F3] ∎
+
+FILE thm-smirnov-maximum-principle
+
+STATEMENT Let $0<p\le\infty$ and let $f\in N^+(\mathbb D)$ with boundary function
+$f^*$ (as in [[thm-nevanlinna-boundary-values-and-log-integrability]]). If
+$f^*\in L^p(\mathbb T,m)$ then $f\in H^p(\mathbb D)$ and
+$$\|f\|_{H^p}=\|f^*\|_p\quad(0<p<\infty),\qquad \|f\|_\infty=\|f^*\|_\infty.$$
+Consequently a function of $N^+(\mathbb D)$ lies in $H^p(\mathbb D)$ exactly
+when its boundary function lies in $L^p$, with equality of norms; this is
+written $N^+\cap L^p=H^p$. (The statement is false with $N$ in place of $N^+$:
+the reciprocal $1/S_\mu$ of a nonconstant singular inner function lies in $N$
+with unimodular boundary values, but is not bounded on $\mathbb D$ and hence
+not in $H^\infty$.)
+
+LINE 32     - title: "R. K. Srivastava, Lecture Notes on Hardy Spaces (MA650, IIT Guwahati), §6.3"
+      url: "https://fac.iitg.ac.in/rksri/MA650%20Advanced%20Hardy%20Spaces%20Notes.pdf"
+      locator: "The Nevanlinna (N) and Smirnov (N+) classes, printed pp. 64-69: the maximum principle for $N^+$ and the counterexample $1/S_\\mu$ for $N$."
+---
+
+
+LINE 37 ## Statement
+
+Let $0<p\le\infty$ and let $f\in N^+(\mathbb D)$ with boundary function
+$f^*$ (as in [[thm-nevanlinna-boundary-values-and-log-integrability]]). If
+$f^*\in L^p(\mathbb T,m)$ then $f\in H^p(\mathbb D)$ and
+
+LINE 41 $f^*\in L^p(\mathbb T,m)$ then $f\in H^p(\mathbb D)$ and
+$$\|f\|_{H^p}=\|f^*\|_p\quad(0<p<\infty),\qquad \|f\|_\infty=\|f^*\|_\infty.$$
+Consequently a function of $N^+(\mathbb D)$ lies in $H^p(\mathbb D)$ exactly
+when its boundary function lies in $L^p$, with equality of norms; this is
+written $N^+\cap L^p=H^p$. (The statement is false with $N$ in place of $N^+$:
+
+LINE 43 Consequently a function of $N^+(\mathbb D)$ lies in $H^p(\mathbb D)$ exactly
+when its boundary function lies in $L^p$, with equality of norms; this is
+written $N^+\cap L^p=H^p$. (The statement is false with $N$ in place of $N^+$:
+the reciprocal $1/S_\mu$ of a nonconstant singular inner function lies in $N$
+with unimodular boundary values, but is not bounded on $\mathbb D$ and hence
+
+LINE 50 ## Facts & Assumptions
+
+**Given:** Countable choice, $0<p\le\infty$ and $f\in N^+(\mathbb D)$ whose boundary function satisfies $f^*\in L^p(\mathbb T,m)$.
+
+[L1] For nonzero $f$, $N^+$ membership means $f\in N(\mathbb D)$, $\log|f^*|\in L^1$ and $\log|f(z)|\le P[\log|f^*|](z)$ for all $z$; and $f_r\to f^*$ $m$-almost everywhere ([[def-smirnov-class-on-the-disc]], [[thm-nevanlinna-boundary-values-and-log-integrability]]).
+
+LINE 52 **Given:** Countable choice, $0<p\le\infty$ and $f\in N^+(\mathbb D)$ whose boundary function satisfies $f^*\in L^p(\mathbb T,m)$.
+
+[L1] For nonzero $f$, $N^+$ membership means $f\in N(\mathbb D)$, $\log|f^*|\in L^1$ and $\log|f(z)|\le P[\log|f^*|](z)$ for all $z$; and $f_r\to f^*$ $m$-almost everywhere ([[def-smirnov-class-on-the-disc]], [[thm-nevanlinna-boundary-values-and-log-integrability]]).
+
+[L2] Convex Jensen for the probability density $P(z,\zeta)dm(\zeta)$: for the convex function $t\mapsto e^{pt}$ and an integrable real $u$ with $e^{pu}\in L^1(P\,dm)$, $e^{p\int P(z,\zeta)u(\zeta)dm(\zeta)}\le\int P(z,\zeta)e^{pu(\zeta)}dm(\zeta)$; in particular with $u=\log|f^*|$ one has $|f(z)|^p\le P[|f^*|^p](z)$ whenever $\log|f^*|\in L^1$ and $|f^*|^p\in L^1$ ([[thm-jensen-inequality-for-expectation]], [[def-poisson-integral-of-finite-boundary-measure]], [[def-smirnov-class-on-the-disc]]).
+
+LINE 72 2.2 The case $p=\infty$. If $f^*\in L^\infty$, then $\log|f^*|\le\log\|f^*\|_\infty$ a.e., so $P[\log|f^*|]\le\log\|f^*\|_\infty$ and the defining inequality of [L1] gives $|f(z)|\le\|f^*\|_\infty$ for every $z$, that is $f\in H^\infty$ with $\|f\|_\infty\le\|f^*\|_\infty$. Conversely, $f^*$ is an a.e. limit of the radial functions $f_r$, so $|f^*|\le\sup_{z\in\mathbb D}|f(z)|=\|f\|_\infty$ a.e. and $\|f^*\|_\infty\le\|f\|_\infty$; hence $\|f\|_\infty=\|f^*\|_\infty$. [step 1.1, L1, algebra]
+
+3.1 Assembly and sharpness for $N$. Steps 1.1, 2.1 and 2.2 prove $N^+\cap L^p=H^p$ with equality of norms for every $0<p\le\infty$: if $f\in N^+$ and $f^*\in L^p$ then $f\in H^p$ with the stated norm identity, and the reverse inclusion $H^p\subseteq N^+$ is in the definition of $N^+$. The sharpness assertion is [L5]: the reciprocal of a nonconstant singular inner function lies in $N$ with unimodular boundary values, so $N\cap L^\infty\ne H^\infty$, showing that the maximum principle fails for $N$. [step 1.1, step 2.1, step 2.2, L5] ∎
+
+FILE thm-smooth-up-to-the-boundary-density-on-smooth-domains
+
+STATEMENT Assume the Axiom of Choice. Let $k\ge1$, $1\le p<\infty$,
+$\mathbb K\in\{\mathbb R,\mathbb C\}$, and let $\Omega\subset\mathbb R^n$ be a
+bounded $C^k$ domain in the graph sense of
+[[def-bounded-c-k-domain-and-boundary-charts]]. Then the set of restrictions
+to $\Omega$ of functions in $C_c^\infty(\mathbb R^n;\mathbb K)$ is dense in
+$W^{k,p}(\Omega;\mathbb K)$: for every $u\in W^{k,p}(\Omega;\mathbb K)$ and
+every $\delta>0$ there is $\varphi\in C_c^\infty(\mathbb R^n;\mathbb K)$ with
+$\|\varphi|_\Omega-u\|_{W^{k,p}(\Omega)}<\delta$.
+
+The exponent range is $1\le p<\infty$; the result asserts no density in the
+$W^{k,\infty}$ norm, and it does not hold on arbitrary open sets, as the
+companion examples page shows.
+
+LINE 79 2.2 For each $\varepsilon>0$ the convolution $v_\varepsilon:=\rho_\varepsilon*F$ is of class $C^\infty$ on $\mathbb R^n$ by the smoothness clause of [F3], and $\operatorname{supp}v_\varepsilon\subseteq\operatorname{supp}F+\operatorname{supp}\rho_\varepsilon\subseteq\operatorname{supp}F+\overline B_\varepsilon(0)$ is compact, first because the support of a convolution is contained in the sum of the supports and then because $\operatorname{supp}F$ is compact; hence $v_\varepsilon\in C_c^\infty(\mathbb R^n;\mathbb K)$ and its restriction is an admissible approximant. [F3, step 1.1, step 1.2]
+
+3.1 For each $\alpha$ with $|\alpha|\le k$, $\|\rho_\varepsilon*(D^\alpha F)-D^\alpha F\|_{L^p(\mathbb R^n)}\to0$ as $\varepsilon\to0^+$: for $\mathbb K=\mathbb R$ this is the real convergence of [F5] applied to the $L^1$ approximate identity of [F4] and the class $D^\alpha F\in L^p$; for $\mathbb K=\mathbb C$ the complex interface of [F6] applies to $D^\alpha F$ directly, a real class being a complex class. [F4, F5, F6, step 2.1]
+
+4.1 By the norm formula of [F8] and step 3.1, the smooth convolutions converge in the whole-space Sobolev norm: $\|\rho_\varepsilon*F-F\|_{W^{k,p}(\mathbb R^n)}^p=\sum_{|\alpha|\le k}\|\rho_\varepsilon*(D^\alpha F)-D^\alpha F\|_{L^p(\mathbb R^n)}^p\to0$. [F8, step 2.1, step 3.1]
+
+FILE thm-spectral-multiplicity-model-for-separable-abelian-von-neumann-algebras
+
+STATEMENT Assume AC. Let $\mathcal A\subseteq\mathcal B(H)$ be an abelian concrete
+von Neumann algebra on a nonzero separable complex Hilbert space $H$. There
+exist a bounded self-adjoint operator $S\in\mathcal A$ with
+$\mathcal A=W^*(S)$, a nonempty compact set $K=\sigma(S)\subseteq\mathbb R$,
+a nonzero finite regular Borel measure $\mu$ on $K$, and a Borel function
+$$m:K\longrightarrow\{1,2,3,\ldots\}\cup\{\infty\}$$
+(whose values are immaterial on a $\mu$-null set) such that, for the measurable
+field $H_t=\mathbb C^{m(t)}$ when $m(t)<\infty$ and $H_t=\ell^2(\mathbb N)$
+when $m(t)=\infty$, there is a unitary
+$$U:H\longrightarrow\int_K^\oplus H_t\,d\mu(t)$$
+with
+$$USU^{-1}=M_t,\qquad U\mathcal A U^{-1}=\{M_f:f\in L^\infty(K,\mu)\}.$$
+For this fixed generator $S$, every such spectral model has the same measure
+class on $K$ and the same multiplicity function $\mu$-almost everywhere.
+Changing $S$ can change the spectral coordinate and is not part of the
+uniqueness assertion. Inner products are linear in their first variable.
+
+LINE 133 
+[F15] Measurable functions remain measurable under Borel composition and the listed arithmetic operations, including the real-imaginary formulas for complex operations; continuous maps have Borel preimages. Complex conjugation and modulus obey their Euclidean algebraic laws ([[def-measurable-function-between-measurable-spaces]], [[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]], [[thm-continuous-preimages-of-borel-sets-are-borel]], [[def-complex-lp-and-euclidean-test-function-conventions]], [[def-complex-conjugate-real-imaginary-part-and-modulus]], [[lem-complex-conjugation-and-modulus-laws]]).
+
+[F16] AC implies DC and countable choice, which are the hypotheses of the regularity and $C_c$-density suppliers in [F8] ([[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]]).
+
+FILE thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\ge2$ and let $D_n^-=(\pi_n,\mathcal H_n^+)$ and $D_n^+=(\pi_n^-,\mathcal H_n^-)$ be the holomorphic and antiholomorphic discrete-series models of [[def-holomorphic-and-antiholomorphic-discrete-series-models]]. Every matrix coefficient $g\mapsto\langle\pi_n(g)v,w\rangle$ with $v,w$ K-finite belongs to $L^2(G)$ for the fixed Haar measure in [[lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r]], for each of $D_n^-$ and $D_n^+$. Moreover, each of $D_n^-$ and $D_n^+$ is unitarily equivalent to a closed $G$-invariant subspace of the left regular representation $\lambda$ on $L^2(G)$ ([[def-left-and-right-regular-unitary-representations]]).
+
+LINE 40 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\ge2$ and let $D_n^-=(\pi_n,\mathcal H_n^+)$ and $D_n^+=(\pi_n^-,\mathcal H_n^-)$ be the holomorphic and antiholomorphic discrete-series models of [[def-holomorphic-and-antiholomorphic-discrete-series-models]]. Every matrix coefficient $g\mapsto\langle\pi_n(g)v,w\rangle$ with $v,w$ K-finite belongs to $L^2(G)$ for the fixed Haar measure in [[lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r]], for each of $D_n^-$ and $D_n^+$. Moreover, each of $D_n^-$ and $D_n^+$ is unitarily equivalent to a closed $G$-invariant subspace of the left regular representation $\lambda$ on $L^2(G)$ ([[def-left-and-right-regular-unitary-representations]]).
+
+## Facts & Assumptions
+
+LINE 46 **Given:** AC; the holomorphic and antiholomorphic models for $n\ge2$; the fixed left Haar measure and KAK formula; and the left regular representation on $L^2(G)$.
+
+[F1] In $D_n^-$, $e_j:=f_{n,j}/N_j$, where $N_j=\|f_{n,j}\|_n$, is a complete orthonormal K-basis, $\pi_n(k_\theta)e_j=\chi_j(k_\theta)e_j$ with $\chi_j(k_\theta)=e^{-i(n+2j)\theta}$, and every K-finite vector is a finite linear combination of the $e_j$. The model is a strongly continuous unitary representation. These are the weighted-space and invariant-area conclusions ([[def-holomorphic-and-antiholomorphic-discrete-series-models]], [[lem-the-weighted-discrete-series-space-is-a-hilbert-space]], [[lem-the-weighted-area-form-is-sl2-r-invariant]]); the norm constants are calculated in step 1.2.
+
+[F2] The normalized extremal coefficient is $\langle\pi_n(a_t)e_0,e_0\rangle=\cosh(t/2)^{-n}$, and coefficients between enveloping-algebra translates of $e_0$ obey the stated exponential decay ([[lem-k-type-coefficient-formulas-for-the-sl2-discrete-and-principal-series]]). The general polynomial formula needed below is derived in step 1.2.
+
+LINE 68 **Given:** The assumptions and notation of the Statement.
+
+1.1 By [F1], a finite-dimensional K-invariant span decomposes into finitely many characters of $K=\mathrm{SO}(2)$, and the corresponding character spaces in $D_n^-$ are precisely the lines $\mathbb C e_j$. Hence every K-finite $v,w\in\mathcal H_n^+$ has finite expansions in this basis. [F1, algebra]
+
+1.2 In the Cayley coordinate $w=(z-i)/(z+i)$, put $F_f(w)=(z+i)^nf(z)$, so $F_{f_{n,j}}=w^j$. Substitution of $z=i(1+w)/(1-w)$ in the weighted integral gives $\|f\|_n^2=2^{2-2n}\int_{\mathbb D}|F_f(w)|^2(1-|w|^2)^{n-2}dA(w)$: the factors are $z+i=2i/(1-w)$, $y=(1-|w|^2)/|1-w|^2$, and $|dz/dw|^2=4/|1-w|^4$. Polar integration therefore gives $N_j^2=2^{2-2n}\pi B_j$, where $B_j=\int_0^1x^j(1-x)^{n-2}dx$. For every real $t$, write $r=\tanh(t/2)$. The inverse-action formula in [F1] gives $F_{\pi_n(a_t)f_{n,j}}(w)=\cosh(t/2)^{-n}(w-r)^j(1-rw)^{-n-j}$. Expand the polynomial numerator and the denominator by the geometric-series derivatives; since $|r|<1$, the resulting power series converges absolutely and uniformly on $|w|\le1$. Its coefficient of $w^k$ is $\cosh(t/2)^{-n}Q_{jk}(r)$, with $Q_{jk}(r)=\sum_{p=0}^{\min(j,k)}(-1)^{j-p}\binom jp\binom{n+j+k-p-1}{k-p}r^{j+k-2p}$. Uniform convergence permits integration against $\bar w^k(1-|w|^2)^{n-2}$; angular orthogonality leaves precisely that coefficient times $N_k^2$. Hence $\langle\pi_n(a_t)f_{n,j},f_{n,k}\rangle=\cosh(t/2)^{-n}Q_{jk}(r)N_k^2$, and $Q_{j0}(r)=(-r)^j$. At $j=k=0$ this agrees with [F2]. [F1, F2, F6, algebra, A1]
+
+LINE 78 4.1 Applying [F3] to $|\Phi(e_j)|^2$ and setting $r=\tanh(t/2)$ yields $\|\Phi(e_j)\|_2^2=2\pi\frac{B_0}{B_j}\int_0^\infty\tanh(t/2)^{2j}\cosh(t/2)^{-2n}\sinh(t)\,dt=2\pi\frac{B_0}{B_j}\,2B_j=4\pi B_0=\frac{4\pi}{n-1}$. Indeed, $\sinh(t)dt=4r(1-r^2)^{-2}dr$, $\cosh(t/2)^{-2n}=(1-r^2)^n$, and $x=r^2$ reduces the radial integral to $2\int_0^1x^j(1-x)^{n-2}dx=2B_j$. Each $B_j$ is finite and positive, and $B_0=1/(n-1)$. Also, $(\lambda(k_\theta)\Phi(e_j))(g)=\Phi(e_j)(k_{-\theta}g)=\langle\pi_n(g^{-1}k_\theta)e_j,e_0\rangle=\chi_j(k_\theta)\Phi(e_j)(g)$. If $j\ne k$, choose $\theta$ with $\chi_j(k_\theta)\ne\chi_k(k_\theta)$; unitarity of $\lambda$ then gives $\langle\Phi(e_j),\Phi(e_k)\rangle=\chi_j(k_\theta)\overline{\chi_k(k_\theta)}\langle\Phi(e_j),\Phi(e_k)\rangle$, so this inner product is zero. Thus, for $C_n:=4\pi/(n-1)$ and every K-finite $v=\sum_jv_je_j$, $\|\Phi(v)\|_2^2=C_n\sum_j|v_j|^2=C_n\|v\|^2$. [F1, F3, F4, step 3.1, algebra, A1]
+
+5.1 The K-finite span is dense in $\mathcal H_n^+$ by [F1]. Therefore $C_n^{-1/2}\Phi$ extends uniquely by continuity to a linear isometry $J_n^-:\mathcal H_n^+\to L^2(G)$. Its image is closed: if $J_n^-v_m$ converges, the isometry identity makes $(v_m)$ Cauchy, and completeness of $\mathcal H_n^+$ gives a limit whose image is the stated range limit. [F1, step 4.1, algebra, A1]
+
+6.1 For any $v\in\mathcal H_n^+$, choose K-finite $v_m\to v$. Then $J_n^-v_m\to J_n^-v$ in $L^2(G)$, so [F5] gives a subsequence converging almost everywhere to a representative of $J_n^-v$. At every $g\in G$, unitarity gives $\langle\pi_n(g^{-1})v_m,e_0\rangle\to\langle\pi_n(g^{-1})v,e_0\rangle$; hence $J_n^-v$ is almost everywhere equal to $C_n^{-1/2}\langle\pi_n(g^{-1})v,e_0\rangle$. For $h\in G$, the coefficient identity $C_n^{-1/2}\langle\pi_n(g^{-1})\pi_n(h)v,e_0\rangle=C_n^{-1/2}\langle\pi_n((h^{-1}g)^{-1})v,e_0\rangle=(\lambda(h)J_n^-v)(g)$ holds almost everywhere, using preservation of null sets by left translation. Thus $J_n^-\pi_n(h)=\lambda(h)J_n^-$; since $\pi_n(h)$ is onto, the closed range of $J_n^-$ is G-invariant. [F1, F4, F5, step 5.1, algebra]
+
+LINE 80 5.1 The K-finite span is dense in $\mathcal H_n^+$ by [F1]. Therefore $C_n^{-1/2}\Phi$ extends uniquely by continuity to a linear isometry $J_n^-:\mathcal H_n^+\to L^2(G)$. Its image is closed: if $J_n^-v_m$ converges, the isometry identity makes $(v_m)$ Cauchy, and completeness of $\mathcal H_n^+$ gives a limit whose image is the stated range limit. [F1, step 4.1, algebra, A1]
+
+6.1 For any $v\in\mathcal H_n^+$, choose K-finite $v_m\to v$. Then $J_n^-v_m\to J_n^-v$ in $L^2(G)$, so [F5] gives a subsequence converging almost everywhere to a representative of $J_n^-v$. At every $g\in G$, unitarity gives $\langle\pi_n(g^{-1})v_m,e_0\rangle\to\langle\pi_n(g^{-1})v,e_0\rangle$; hence $J_n^-v$ is almost everywhere equal to $C_n^{-1/2}\langle\pi_n(g^{-1})v,e_0\rangle$. For $h\in G$, the coefficient identity $C_n^{-1/2}\langle\pi_n(g^{-1})\pi_n(h)v,e_0\rangle=C_n^{-1/2}\langle\pi_n((h^{-1}g)^{-1})v,e_0\rangle=(\lambda(h)J_n^-v)(g)$ holds almost everywhere, using preservation of null sets by left translation. Thus $J_n^-\pi_n(h)=\lambda(h)J_n^-$; since $\pi_n(h)$ is onto, the closed range of $J_n^-$ is G-invariant. [F1, F4, F5, step 5.1, algebra]
+
+7.1 Complex conjugation $C:\mathcal H_n^+\to\mathcal H_n^-$ is antiunitary and satisfies $C\pi_n(h)=\pi_n^-(h)C$ by the model definition. Complex conjugation $C_G$ on $L^2(G)$ is antiunitary and commutes with $\lambda(h)$, because $\lambda(h)$ acts by real-variable translation. The complex-linear map $J_n^+:=C_GJ_n^-C^{-1}$ is therefore an isometric intertwiner of $D_n^+$ with $\lambda$, with closed G-invariant range. The same conjugation identity shows that every K-finite matrix coefficient of $D_n^+$ is the complex conjugate of one for $D_n^-$, so it too lies in $L^2(G)$. [F1, F4, step 6.1, algebra] ∎
+
+LINE 82 6.1 For any $v\in\mathcal H_n^+$, choose K-finite $v_m\to v$. Then $J_n^-v_m\to J_n^-v$ in $L^2(G)$, so [F5] gives a subsequence converging almost everywhere to a representative of $J_n^-v$. At every $g\in G$, unitarity gives $\langle\pi_n(g^{-1})v_m,e_0\rangle\to\langle\pi_n(g^{-1})v,e_0\rangle$; hence $J_n^-v$ is almost everywhere equal to $C_n^{-1/2}\langle\pi_n(g^{-1})v,e_0\rangle$. For $h\in G$, the coefficient identity $C_n^{-1/2}\langle\pi_n(g^{-1})\pi_n(h)v,e_0\rangle=C_n^{-1/2}\langle\pi_n((h^{-1}g)^{-1})v,e_0\rangle=(\lambda(h)J_n^-v)(g)$ holds almost everywhere, using preservation of null sets by left translation. Thus $J_n^-\pi_n(h)=\lambda(h)J_n^-$; since $\pi_n(h)$ is onto, the closed range of $J_n^-$ is G-invariant. [F1, F4, F5, step 5.1, algebra]
+
+7.1 Complex conjugation $C:\mathcal H_n^+\to\mathcal H_n^-$ is antiunitary and satisfies $C\pi_n(h)=\pi_n^-(h)C$ by the model definition. Complex conjugation $C_G$ on $L^2(G)$ is antiunitary and commutes with $\lambda(h)$, because $\lambda(h)$ acts by real-variable translation. The complex-linear map $J_n^+:=C_GJ_n^-C^{-1}$ is therefore an isometric intertwiner of $D_n^+$ with $\lambda$, with closed G-invariant range. The same conjugation identity shows that every K-finite matrix coefficient of $D_n^+$ is the complex conjugate of one for $D_n^-$, so it too lies in $L^2(G)$. [F1, F4, step 6.1, algebra] ∎
+
+FILE thm-square-minus-predictable-quadratic-variation-is-a-martingale
+
+STATEMENT Assume AC. For every real square-integrable martingale $M$, the process $Z_n=M_n^2-\langle M\rangle_n$ is a martingale with $Z_0=M_0^2$. Also $W_n=(M_n-M_0)^2-\langle M\rangle_n$ is a martingale starting at zero. The initial variable $M_0$ may be random and need not vanish.
+
+LINE 56 1.1 Put $D_n=M_n-M_{n-1}$ for $n\ge1$. It is in $L^2$ by $D_n^2\le2M_n^2+2M_{n-1}^2$, and its conditional mean given $\mathcal F_{n-1}$ is zero. Cauchy–Schwarz gives $E|M_{n-1}D_n|\le(E M_{n-1}^2)^{1/2}(E D_n^2)^{1/2}<\infty$. The factor $M_{n-1}$ is finite and known at time $n-1$, so taking-out is legitimate and gives $E[M_{n-1}D_n\mid\mathcal F_{n-1}]=M_{n-1}E[D_n\mid\mathcal F_{n-1}]=0$. [given, F2, F3, F4]
+
+2.1 For the finite integral and conditional linearity used here, augment every finite disjoint nonnegative-simple display by its zero-coefficient complement. Intersections of two augmented displays partition the space and carry equal coefficients on nonempty cells, so finite additivity and $0\cdot(+\infty)=0$ prove representation independence. Common refinements give simple addition and monotonicity; scalar zero is direct and positive scalars are termwise. Supremum over simple minorants, increasing simple approximation and the sets $\{f_j\ge cs\}$ for $0<c<1$ give monotone convergence and nonnegative additivity. Positive/negative and real/imaginary decompositions give finite $L^1$ linearity; substituting these facts at the base validates the event-integral construction and algebra of the cited conditional expectations. The square and bracket are adapted and integrable, hence so is $Z$. Expand $M_n^2-M_{n-1}^2=2M_{n-1}D_n+D_n^2$. Every term is integrable. Conditional linearity and step 1.1 give $E[M_n^2-M_{n-1}^2\mid\mathcal F_{n-1}]=E[D_n^2\mid\mathcal F_{n-1}]=\langle M\rangle_n-\langle M\rangle_{n-1}$. The last difference is known at time $n-1$. Subtracting it and conditioning the known $Z_{n-1}$ proves $E[Z_n\mid\mathcal F_{n-1}]=Z_{n-1}$. The initial bracket is zero, so $Z_0=M_0^2$. [F1, F5, F6, F7, F8, step 1.1, construct]
+
+3.1 Set $N_n=M_n-M_0$. Since $M_0$ is $\mathcal F_0$-measurable, it is known for every $\mathcal F_n$. Linearity gives $E[N_{n+1}\mid\mathcal F_n]=M_n-M_0=N_n$. Also $N_n^2\le2M_n^2+2M_0^2$ is integrable, so $N$ is a square-integrable martingale with $N_0=0$. Its increments equal $D_n$, hence $\langle N\rangle=\langle M\rangle$ as classes. Apply the already proved step 2.1 to $N$ to conclude that $W=N^2-\langle M\rangle$ is a martingale with $W_0=0$. AC is inherited from CE and bracket version construction; no unproved assertion about the product $M_0M_n$ is used. [given, F1, F5, F6, F7, F8, F9, step 2.1] ∎
+
+LINE 46 
+[F8] Finite real sums and products are measurable. [[thm-arithmetic-and-lattice-operations-preserve-measurability]].
+
+[F9] AC supplies the inherited conditional-expectation existence and any stated choice of versions. [[def-axiom-of-choice]].
+
+FILE thm-strong-markov-property-of-brownian-motion
+
+STATEMENT Assume the Axiom of Choice. Let $B$ be a standard Brownian motion
+[[def-brownian-motion]] with usual augmentation $(\mathcal F_t)$
+[[def-natural-and-usual-augmented-brownian-filtrations]], and let $\tau$ be a
+stopping time for $(\mathcal F_t)$ with $\tau<\infty$ almost surely
+[[def-continuous-time-stopping-time]]. Let $\mu$ be Wiener measure
+[[def-wiener-measure-on-continuous-path-space]] and, for a bounded Borel
+functional $\Phi$ on the product space $\mathbb R^{[0,\infty)}$, put
+$$\Psi_\Phi(x):=\int_{C([0,\infty),\mathbb R)}\Phi(x+w)\,\mu(dw),\qquad x\in\mathbb R .$$
+Here the product sigma-algebra is, by definition, the sigma-algebra generated
+by all finite coordinate cylinders. In this theorem "Borel functional" means
+measurable for this product sigma-algebra, not the possibly larger Borel
+sigma-algebra of the uncountable product topology.
+
+Use the following measurable-version convention at random times. Put
+$\tau_n=2^{-n}\lceil2^n\tau\rceil$ on $\{\tau<\infty\}$ and $\tau_n=\infty$
+otherwise. For each $u\ge0$, let $V_u$ be the finite limit of
+$B_{\tau_n+u}$ if that limit exists and $\tau<\infty$, and zero otherwise;
+each approximating variable is set to zero when $\tau_n=\infty$.
+Write $B_\tau=V_0$ and $(B_{\tau+u})_{u\ge0}=V$ in the assertions below.
+On one measurable probability-one event these agree with the literal path
+values simultaneously for all $u$, by path continuity. On an
+everywhere-continuous realization this convention changes only the event
+$\{\tau=\infty\}$. Under the usual augmentation the exceptional ambient
+null event belongs to $\mathcal F_0$, so this normalization preserves
+adaptedness as well as all almost-sure identities.
+
+Then:
+
+1. $B_\tau$ is $\mathcal F_\tau$-measurable, and the increment process
+   $Z:=(B_{\tau+t}-B_\tau)_{t\ge0}$ is independent of $\mathcal F_\tau$; its
+   finite-dimensional marginals are those of Wiener measure.
+2. For every bounded Borel functional $\Phi$ on $\mathbb R^{[0,\infty)}$,
+   $$E\bigl[\Phi\bigl((B_{\tau+t})_{t\ge0}\bigr)\bigm|\mathcal F_\tau\bigr] =\Psi_\Phi(B_\tau)\quad\text{almost surely}.$$
+   Equivalently, the conditional law of the shifted future path given
+   $\mathcal F_\tau$ is Wiener measure translated by $B_\tau$.
+
+LINE 72 [F4] Brownian paths are continuous on a probability-one event; by the product-topology convention in the statement, coordinatewise convergence is convergence in the product topology, and continuous functions preserve it. [[def-brownian-motion]]
+
+[F5] Conditional-expectation versions are characterized by their event integrals and are unique almost surely; monotone and dominated convergence pass limits through integrals; nonnegative Borel functions are increasing limits of nonnegative simple functions; bounded real functions are handled by positive and negative parts. [[def-conditional-expectation-as-an-ae-class]] [[lem-conditional-expectation-is-unique-almost-surely]] [[thm-monotone-convergence-for-the-integral]] [[thm-dominated-convergence]] [[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]]
+
+[F6] By the product-sigma convention in the statement, the half-line coordinate cylinders $\{z:z(t_1)\le c_1,\dots,z(t_k)\le c_k\}$ together with the whole space (the empty cylinder) form a pi-system that generates the product sigma-algebra. A lambda-system containing a pi-system contains the generated sigma-algebra. [[thm-dynkin-pi-lambda]]
+
+LINE 98 6.1 Let $\mathcal D$ be the class of product-measurable sets $\Gamma$ for which $\int_A1_\Gamma((B_{\tau+u}))\,dP=\int_A\Psi_{1_\Gamma}(B_\tau)\,dP$ for every $A\in\mathcal F_\tau$. Then $\mathcal D$ is a lambda-system: it contains the whole product space because $\Psi_{1}=\Psi_\Phi$ for $\Phi\equiv1$ is the constant $1$; it is closed under complements by subtracting the two finite identities; and it is closed under countable disjoint unions: first add the identities for the first $m$ disjoint sets, then use [F5] to pass to their union by monotone convergence on both sides. By step 5.1 it contains every half-line cylinder, which together with the empty cylinder form a generating pi-system, so [F6] gives $\mathcal D$ equal to the whole product sigma-algebra. [F5, F6, step 5.1]
+
+7.1 For a bounded nonnegative Borel $\Phi$ with simple functionals $s_m\uparrow\Phi$, step 6.1 and linearity of the integral give $\int_As_m((B_{\tau+u}))\,dP=\int_A\Psi_{s_m}(B_\tau)\,dP$ for every $A\in\mathcal F_\tau$; monotone convergence [F5] on both sides, using $\Psi_{s_m}(x)\uparrow\Psi_\Phi(x)$ pointwise and the Borel measurability of $\Psi_\Phi$ from [F7], gives $\int_A\Phi((B_{\tau+u}))\,dP=\int_A\Psi_\Phi(B_\tau)\,dP$. Since $\Psi_\Phi(B_\tau)$ is bounded and $\mathcal F_\tau$-measurable by step 2.1 and [F7], [F5]'s uniqueness identifies it with $E[\Phi((B_{\tau+u}))|\mathcal F_\tau]$; splitting a bounded real $\Phi$ into positive and negative parts extends the identity to all bounded Borel $\Phi$. This is assertion 2. [F5, F7, step 2.1, step 6.1]
+
+8.1 For assertion 1, fix a cylinder $\Gamma_0$ and put $\Phi_0(u):=1_{\Gamma_0}((u(t_i)-u(0))_{i\le k})$ with $\Gamma_0$ a Borel subset of the finite coordinate space; the coordinate $u(0)$ is the translation offset. For every $x$ one has $\Phi_0(x+w)=1_{\Gamma_0}((w(t_i)-w(0))_{i\le k})$, independent of $x$, so $\Psi_{\Phi_0}(x)=\mu_{\mathrm{cyl}}(\Gamma_0):=\mu(\{w:(w(t_i)-w(0))_{i\le k}\in\Gamma_0\})$ is a constant; step 7.1 gives $P(A\cap\{Z\in\Gamma_0\})=\mu_{\mathrm{cyl}}(\Gamma_0)P(A)$ for every $A\in\mathcal F_\tau$, and taking $A=\Omega$ shows that the finite-dimensional marginals of $Z$ are those of Wiener measure. The class of product-measurable sets satisfying $P(A\cap\{Z\in\Gamma\})=P(A)P(Z\in\Gamma)$ for all $A\in\mathcal F_\tau$ is a lambda-system containing the cylinder pi-system, hence by [F6] equals the product sigma-algebra, so $Z$ is independent of $\mathcal F_\tau$ and its law on the product sigma-algebra has the finite-dimensional marginals of Wiener measure. [F6, step 2.1, step 7.1]
+
+FILE thm-strong-parabolic-maximum-principle
+
+STATEMENT Assume Countable Choice. Let $Q=\Omega\times(0,T]$ be a parabolic cylinder
+with $\Omega$ bounded, let $u\in C^{2,1}(\overline Q)$ satisfy
+$u_t-\Delta u\le0$ in $Q$, and suppose the maximum $M:=\max_{\overline Q}u$ is
+attained at a point $(x_0,t_0)$ with $x_0\in\Omega$ and $0<t_0\le T$. Let
+$\Omega_0$ be the connected component of $\Omega$ containing $x_0$. Then
+$$u=M\quad\text{on }\Omega_0\times(0,t_0].$$
+
+LINE 58 attained at a point $(x_0,t_0)$ with $x_0\in\Omega$ and $0<t_0\le T$. Let
+$\Omega_0$ be the connected component of $\Omega$ containing $x_0$. Then
+$$u=M\quad\text{on }\Omega_0\times(0,t_0].$$
+
+## Facts & Assumptions
+
+LINE 103 3.1 Fix $y\in\Omega_0$ and $s\in(0,t_0)$. By [F7] choose a polygonal, hence Lipschitz, path $\gamma:[0,1]\to\Omega_0$ from $x_0$ to $y$, with compact image $K$, and put $t_1:=s/2$, so that $0<t_1<t_0\le T$ and $s\in[t_1,t_0)$. By [F6] there are $\rho>0$ with $E_\rho(R)\subseteq Q$ for every $R\in K\times[t_1,t_0]$, and a chain $P_0=(x_0,t_0),P_1,\dots,P_N=(y,s)$ inside $K\times[t_1,t_0]$ with $P_{j+1}\in E_\rho(P_j)$ for all $j<N$. Since $u(x_0,t_0)=M$, induction on $j$ using step 2.1 gives $P_j\in S$ for every $j$, and in particular $u(y,s)=M$. [step 2.1, F6, F7, given]
+
+4.1 Since $y\in\Omega_0$ and $s\in(0,t_0)$ were arbitrary, step 3.1 gives $u=M$ on $\Omega_0\times(0,t_0)$, and continuity of $u$ on $\overline Q$ extends this to the closed time level $\Omega_0\times(0,t_0]$, which is the claim. The only selections made are finitely many real parameters and one integer $N$; Countable Choice is used only through the measure, integration and compactness suppliers named in [F1]–[F8]. [step 3.1, given] ∎

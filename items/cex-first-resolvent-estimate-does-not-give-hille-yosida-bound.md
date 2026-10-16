@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/cex-first-resolvent-estimate-does-not-give-hille-yosida-bound.json
 id: cex-first-resolvent-estimate-does-not-give-hille-yosida-bound
 kind: counterexample
 title: "A first resolvent estimate does not ensure the prescribed semigroup bound"
@@ -6,19 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11
-deps:
-  - def-dependent-choice
-  - cor-finite-dimensional-normed-spaces-are-banach
-  - cor-two-less-than-e-less-than-three
-  - def-bounded-linear-operator
-  - def-complex-numbers-and-arithmetic
-  - def-matrix-product-and-identity-matrix
-  - def-operator-norm
-  - def-product-norms-on-finitely-many-normed-spaces
-  - def-resolvent-of-a-closed-operator
-  - lem-exponential-series-of-a-bounded-operator
-  - rem-real-and-complex-normed-space-convention
-  - thm-hille-yosida-generation-theorem
+deps: [def-dependent-choice, cor-finite-dimensional-normed-spaces-are-banach, cor-two-less-than-e-less-than-three, def-bounded-linear-operator, def-complex-numbers-and-arithmetic, def-matrix-product-and-identity-matrix, def-operator-norm, def-product-norms-on-finitely-many-normed-spaces, def-resolvent-of-a-closed-operator, lem-exponential-series-of-a-bounded-operator, def-complex-norm-and-complex-normed-space, thm-hille-yosida-generation-theorem]
 justified_by: []
 aliases: []
 landmark: false
@@ -26,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)"
@@ -42,7 +27,7 @@ sources:
 
 Assume Dependent Choice ([[def-dependent-choice]]). Let $X=\mathbb C^2$ over the complex field ([[def-complex-numbers-and-arithmetic]]) have the maximum product norm
 $$\|(z_1,z_2)\|_\infty=\max(|z_1|,|z_2|)$$
-([[def-product-norms-on-finitely-many-normed-spaces]], [[rem-real-and-complex-normed-space-convention]]); this finite-dimensional normed space is Banach ([[cor-finite-dimensional-normed-spaces-are-banach]]). Let $A\in\mathcal B(X)$ ([[def-bounded-linear-operator]]) be the matrix
+([[def-product-norms-on-finitely-many-normed-spaces]], [[def-complex-norm-and-complex-normed-space]]); this finite-dimensional normed space is Banach ([[cor-finite-dimensional-normed-spaces-are-banach]]). Let $A\in\mathcal B(X)$ ([[def-bounded-linear-operator]]) be the matrix
 $$A=\begin{pmatrix}-1&4\\0&-1\end{pmatrix},\qquad D(A)=X.$$
 For $M=25/16$ and $\omega=0$, every $\lambda>0$ lies in $\rho(A)$ and the first resolvent estimate
 $$\|R(\lambda,A)\|_\infty\le \frac{M}{\lambda}$$
@@ -60,7 +45,7 @@ Thus a first-power resolvent estimate alone does not ensure the semigroup bound 
 
 **Given:** Dependent Choice; $X=\mathbb C^2$ with the maximum product norm, $A=\begin{pmatrix}-1&4\\0&-1\end{pmatrix}$ on $D(A)=X$, and $M=25/16$, $\omega=0$.
 
-[F1] The maximum product norm on $\mathbb C^2$ is $\|(z_1,z_2)\|_\infty=\max(|z_1|,|z_2|)$, with complex scalar homogeneity read using the complex modulus ([[def-product-norms-on-finitely-many-normed-spaces]], [[rem-real-and-complex-normed-space-convention]]). The complex scalar field is $\mathbb C$ ([[def-complex-numbers-and-arithmetic]]).
+[F1] The maximum product norm on $\mathbb C^2$ is $\|(z_1,z_2)\|_\infty=\max(|z_1|,|z_2|)$, with complex scalar homogeneity read using the complex modulus ([[def-product-norms-on-finitely-many-normed-spaces]], [[def-complex-norm-and-complex-normed-space]]). The complex scalar field is $\mathbb C$ ([[def-complex-numbers-and-arithmetic]]).
 
 [F2] Every finite-dimensional normed space over $\mathbb C$ is Banach ([[cor-finite-dimensional-normed-spaces-are-banach]]).
 

@@ -1,0 +1,2549 @@
+{
+  "version": 1,
+  "kind": "same-owner-focused-measurement-premise-repair-and-consumer-closure",
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "42",
+  "focused_cycle": 2,
+  "cycle_limit": "Second/final focused repair cycle per root instruction; no new native review or repair round.",
+  "original_session_id": "01a141b2-8276-7a11-8b09-2caa7c2e77fd",
+  "current_session_id": "01a141b2-8276-7a11-8b09-2caa7c2e77fd",
+  "original_session_home": "research/quantum-computing-algorithms-60-2026-10-15-scope-review/batch-42/scope-repairer-session",
+  "identity_basis": "Successful native scope-repair-42-1 result session_id matches the current CODEX_SESSION_ID and consumer-closure-1 evidence.",
+  "native_result_path": "research/quantum-computing-algorithms-60-2026-10-15-dispatch/scope-repairer-scope-repair-42-1.result.json",
+  "completion_status": "focused-repair-and-consumer-closure-completed-for-root-review",
+  "native_acceptance_claimed": false,
+  "recertification_claimed": false,
+  "native_artifacts_modified": false,
+  "confirmed_defect": {
+    "id": "thm-qa-18-reversible-search-cost",
+    "loci": [
+      "F16",
+      "Proof 3.1",
+      "alg-qa-18-reversible-walk-finding: marked/unmarked tests"
+    ],
+    "reason": "PVM effects and their outcome weights do not select a conditional-state instrument. An effect-compatible disturbing unmarked branch would invalidate the retained-state recurrence.",
+    "minimal_repair": "Select the marked Lüders instrument locally in the algorithm, realize it via clean coherent check/fresh computational Lüders flag readout/inverse check, and derive the pure conditional state locally with actual instrument suppliers."
+  },
+  "actual_changed_definition_statement_scope": [
+    {
+      "id": "alg-qa-18-reversible-walk-finding",
+      "path": "items/alg-qa-18-reversible-walk-finding.md",
+      "genuine_before_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/alg-qa-18-reversible-walk-finding.md",
+      "before_interfaces": [
+        "## Definition\n\nThis is the finite-generation and execution procedure OP2 in `research/quantum-algorithms-planning/operational-contracts.md`, section “OP2 — MNRS approximate reflection and finite tolerant recursive finding”, transcribed with its declared constants and charged branches.\n\n**Input.** A finite ergodic reversible row chain $(X,P,\\pi)$ with $\\pi_x>0$, a supplied positive lower absolute-gap bound $\\delta_0$, a coherent marked predicate with promise $\\pi(\\mathcal M)=0$ or $\\pi(\\mathcal M)\\ge\\varepsilon_0>0$, a coherent marked-bit check of cost $C$, and a failure target $\\rho\\in(0,1)$. Write $|\\sqrt\\pi\\rangle=\\sum_{x\\in X}\\sqrt{\\pi_x}|x\\rangle$ and let $T|x\\rangle=|x\\rangle\\sum_y\\sqrt{P_{xy}}|y\\rangle$ be the row isometry of [[def-qa-17-szegedy-transition-isometry]]. The supplied clean preparation $A_\\pi$ maps its specified blank input to the **stationary edge state**\n$$|\\pi_{\\rm edge}\\rangle=T|\\sqrt\\pi\\rangle=\\sum_{x\\in X}\\sqrt{\\pi_x}|x\\rangle\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,$$\nreturns all its work registers to their specified blank states, and has charged cost $S$. The row-access interface of [[def-qa-17-walk-access-model]] supplies the row-preparation unitary $V_P$, its inverse, controlled forward and inverse calls, the clean-state reflection $R_0$ and its controlled call, and the swap $S$ and its controlled call. On the clean-work logical walk space these implement $R_A=2TT^*-I=V_PR_0V_P^*$, $U=SR_A$, and $W=U^2$, with each constituent charged. Supply controlled calls to $W$ and $W^*$ for the coherent QPE circuits and an exact controlled $R_A$ for the all-zero branch. A single bound $U_0$ covers each controlled $W$ or $W^*$ call and the controlled $R_A$ call, including their factorwise implementation costs. A matrix $P$ alone supplies none of these circuits.\n\n**Approximate stationary reflection $R(\\beta)$.** Set $\\Delta_0=2\\sqrt{\\delta_0}$, $s=\\lceil\\log_2(4\\pi/\\Delta_0)\\rceil$, and $k=\\max(1,\\lceil\\log_2(2/\\beta)\\rceil)$, using certified interval arithmetic for real constants and ceilings. Append $k$ separate $s$-bit zero phase registers. Coherently execute the finite QPE circuit prefix from [[alg-qa-quantum-phase-estimation]] on $W$ in each register, using the declared controlled powers. This prefix is a unitary circuit on the full walk register and is executed on arbitrary walk states, including superpositions; the eigenvector input in the QPE analysis is not a restriction on the circuit's action. Do not measure these phase registers. If at least one phase register is nonzero, apply $-I$ to the walk state. If all are zero, apply the exact controlled row-space reflection $R_A=2TT^*-I$ using the charged row-preparation, inverse, and clean-state reflection calls. Reverse the $k$ coherent QPE prefixes in reverse chronological order, using the supplied controlled inverse powers. Charge $2k(2^s-1)$ controlled $W$ and $W^*$ calls, the controlled $R_A$ branch, all-zero comparisons, phase-register gates, and the allocated classical arithmetic. The all-zero branch is required: $W$ has the extra zero-phase subspace $A^\\perp\\cap B^\\perp$, where $R_A=-I$, while $R_A=+I$ on the stationary state.\n\n**Recursive circuit $A_i$.** Let $\\gamma=1/120$, $\\beta_i=18\\gamma/(4\\pi^3i^2)$ for $i\\ge1$, and $A_0=I$. For $i>0$, allocate a fresh $K_i$ for $R(\\beta_i)$ and execute chronologically: (i) $A_{i-1}$, the marked phase flip, and $A_{i-1}^\\dagger$; (ii) coherently test every older $K_j$, $j<i$, applying $-I$ if any is nonzero and otherwise applying $R(\\beta_i)$ on the walk and fresh $K_i$; compute and uncompute the control predicate; (iii) apply $A_{i-1}$. An inverse means the exact reversed finite gate list, not a reset of measured work.\n\n**Tolerant finding wrapper.** If $\\varepsilon_0\\ge1/2$, take $n_s=\\lceil\\ln(1/\\rho)/\\ln2\\rceil$ fresh stationary samples, verify each label, return the first marked label, and output `NO MARKED` if all fail. Otherwise, let $t_{\\max}$ be the least integer $t\\ge0$ such that $3^t\\arcsin\\sqrt{\\varepsilon_0}\\ge\\pi/4$. Determine it by certified interval comparison or the exact-algebraic threshold test; equality takes the $\\ge$ branch. Let $n_{\\rm out}=\\lceil20\\ln(1/\\rho)\\rceil+20$. In each outer trial:\n\n1. Prepare a fresh stationary sample, test its first label, and return it if marked.\n2. Prepare a fresh stationary walk state with all $K_1,\\ldots,K_{t_{\\max}}$ zero.\n3. For $i=1,\\ldots,t_{\\max}$, apply $A_i$, measure marked/unmarked, and on a marked outcome verify and return the label. On an unmarked outcome retain the conditional current state and all auxiliary registers, and continue; do not reprepare or reset them.\n4. If no level succeeds, discard the trial and begin the next fresh outer trial.\n\nIf all trials fail, output `NO MARKED`. Every loop has a finite cap; all confidence calculations, comparisons, reversible predicates, retained auxiliary space, state preparation, update, inverse, controlled, reflection, and check costs are charged. In the $\\varepsilon_0\\ge1/2$ branch, the cap above gives false-negative probability at most $\\rho$; in the other branch correctness and the sharper cost are proved separately in [[thm-qa-18-reversible-search-cost]]."
+      ],
+      "current_interfaces": [
+        "## Definition\n\nThis is the finite-generation and execution procedure OP2 in `research/quantum-algorithms-planning/operational-contracts.md`, section “OP2 — MNRS approximate reflection and finite tolerant recursive finding”, transcribed with its declared constants and charged branches.\n\n**Input.** A finite ergodic reversible row chain $(X,P,\\pi)$ with $\\pi_x>0$, a supplied positive lower absolute-gap bound $\\delta_0$, a coherent marked predicate with promise $\\pi(\\mathcal M)=0$ or $\\pi(\\mathcal M)\\ge\\varepsilon_0>0$, a coherent marked-bit check of cost $C$, and a failure target $\\rho\\in(0,1)$. Write $|\\sqrt\\pi\\rangle=\\sum_{x\\in X}\\sqrt{\\pi_x}|x\\rangle$ and let $T|x\\rangle=|x\\rangle\\sum_y\\sqrt{P_{xy}}|y\\rangle$ be the row isometry of [[def-qa-17-szegedy-transition-isometry]]. The supplied clean preparation $A_\\pi$ maps its specified blank input to the **stationary edge state**\n$$|\\pi_{\\rm edge}\\rangle=T|\\sqrt\\pi\\rangle=\\sum_{x\\in X}\\sqrt{\\pi_x}|x\\rangle\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,$$\nreturns all its work registers to their specified blank states, and has charged cost $S$. The row-access interface of [[def-qa-17-walk-access-model]] supplies the row-preparation unitary $V_P$, its inverse, controlled forward and inverse calls, the clean-state reflection $R_0$ and its controlled call, and the swap $S$ and its controlled call. On the clean-work logical walk space these implement $R_A=2TT^*-I=V_PR_0V_P^*$, $U=SR_A$, and $W=U^2$, with each constituent charged. Supply controlled calls to $W$ and $W^*$ for the coherent QPE circuits and an exact controlled $R_A$ for the all-zero branch. A single bound $U_0$ covers each controlled $W$ or $W^*$ call and the controlled $R_A$ call, including their factorwise implementation costs. A matrix $P$ alone supplies none of these circuits.\n\n**Marked check and retained-state instrument.** Write $m(x)=\\mathbf1_{\\mathcal M}(x)$. The supplied exact coherent check is a unitary $B_{\\mathcal M}$ with separately supplied inverse and specified fresh flag $F$ and scratch $J$. On the declared logical encoding it satisfies, for every $x\\in X$, $b\\in\\{0,1\\}$, and vector $\\eta$ of all existing remaining registers,\n$$B_{\\mathcal M}(|x\\rangle|\\eta\\rangle|b\\rangle_F|0\\rangle_J)=|x\\rangle|\\eta\\rangle|b\\mathbin\\oplus m(x)\\rangle_F|0\\rangle_J.$$\nIts unitary extension outside the logical encoding is supplied too. Thus it preserves the first label and every existing walk, phase, data, and work auxiliary on clean new scratch. In the relevant query/check cost coordinates, $C$ bounds each forward and inverse check call; declare the flag-readout cost separately and include it in $C$ in any coordinate that counts readout as a check. A flag readout uses no value-oracle query. Gate, output-bit, and new flag/scratch costs are separately priced.\n\nOn the whole existing register space set $\\Pi_1=\\Pi_{\\mathcal M}=(\\sum_{x\\in\\mathcal M}|x\\rangle\\langle x|)\\otimes I_{\\rm rest}$ and $\\Pi_0=I-\\Pi_{\\mathcal M}$, with identity on every existing auxiliary, including every retained $K_j$. Every marked/unmarked test below uses the **specified Lüders instrument**\n$$\\mathcal I_a(Z)=\\Pi_aZ\\Pi_a,\\qquad a\\in\\{0,1\\},$$\nin the sense of [[def-qc-instrument-and-conditional-state]]: its positive-probability conditional density is $\\mathcal I_a(Z)/\\operatorname{tr}(\\mathcal I_a(Z))$; no conditional state is assigned when that trace is zero. Execute the test by appending $|0\\rangle_F|0\\rangle_J$, applying $B_{\\mathcal M}$, reading only the fresh flag with the explicitly chosen computational-basis Lüders maps $Y\\mapsto Q_aYQ_a$, where $Q_a=I\\otimes|a\\rangle\\langle a|_F\\otimes I_J$, storing $a$ in the classical output record, and applying $B_{\\mathcal M}^*$ to return the fresh flag and scratch to zero. Retain every pre-existing register; on an unmarked result read no finer first-label information. A marked result may then be followed by label readout and verification for output. Charge one forward check, one inverse check, and one flag readout per test, hence $O(C)$ in the stated query/check profile. The recursive marked phase flip is implemented by $B_{\\mathcal M}$, a phase $-1$ on flag $1$, and $B_{\\mathcal M}^*$, also with both calls charged.\n\n**Approximate stationary reflection $R(\\beta)$.** Set $\\Delta_0=2\\sqrt{\\delta_0}$, $s=\\lceil\\log_2(4\\pi/\\Delta_0)\\rceil$, and $k=\\max(1,\\lceil\\log_2(2/\\beta)\\rceil)$, using certified interval arithmetic for real constants and ceilings. Append $k$ separate $s$-bit zero phase registers. Coherently execute the finite QPE circuit prefix from [[alg-qa-quantum-phase-estimation]] on $W$ in each register, using the declared controlled powers. This prefix is a unitary circuit on the full walk register and is executed on arbitrary walk states, including superpositions; the eigenvector input in the QPE analysis is not a restriction on the circuit's action. Do not measure these phase registers. If at least one phase register is nonzero, apply $-I$ to the walk state. If all are zero, apply the exact controlled row-space reflection $R_A=2TT^*-I$ using the charged row-preparation, inverse, and clean-state reflection calls. Reverse the $k$ coherent QPE prefixes in reverse chronological order, using the supplied controlled inverse powers. Charge $2k(2^s-1)$ controlled $W$ and $W^*$ calls, the controlled $R_A$ branch, all-zero comparisons, phase-register gates, and the allocated classical arithmetic. The all-zero branch is required: $W$ has the extra zero-phase subspace $A^\\perp\\cap B^\\perp$, where $R_A=-I$, while $R_A=+I$ on the stationary state.\n\n**Recursive circuit $A_i$.** Let $\\gamma=1/120$, $\\beta_i=18\\gamma/(4\\pi^3i^2)$ for $i\\ge1$, and $A_0=I$. For $i>0$, allocate a fresh $K_i$ for $R(\\beta_i)$ and execute chronologically: (i) $A_{i-1}$, the marked phase flip, and $A_{i-1}^\\dagger$; (ii) coherently test every older $K_j$, $j<i$, applying $-I$ if any is nonzero and otherwise applying $R(\\beta_i)$ on the walk and fresh $K_i$; compute and uncompute the control predicate; (iii) apply $A_{i-1}$. An inverse means the exact reversed finite gate list, not a reset of measured work.\n\n**Tolerant finding wrapper.** If $\\varepsilon_0\\ge1/2$, take $n_s=\\lceil\\ln(1/\\rho)/\\ln2\\rceil$ fresh stationary samples, verify each label, return the first marked label, and output `NO MARKED` if all fail. Otherwise, let $t_{\\max}$ be the least integer $t\\ge0$ such that $3^t\\arcsin\\sqrt{\\varepsilon_0}\\ge\\pi/4$. Determine it by certified interval comparison or the exact-algebraic threshold test; equality takes the $\\ge$ branch. Let $n_{\\rm out}=\\lceil20\\ln(1/\\rho)\\rceil+20$. In each outer trial:\n\n1. Prepare a fresh stationary sample, test its first label, and return it if marked.\n2. Prepare a fresh stationary walk state with all $K_1,\\ldots,K_{t_{\\max}}$ zero.\n3. For $i=1,\\ldots,t_{\\max}$, apply $A_i$, execute the marked/unmarked Lüders test specified above, and on a marked outcome read, verify, and return the label. On an unmarked outcome retain the conditional current state and all auxiliary registers, and continue; do not reprepare or reset them.\n4. If no level succeeds, discard the trial and begin the next fresh outer trial.\n\nIf all trials fail, output `NO MARKED`. Every loop has a finite cap; all confidence calculations, comparisons, reversible predicates, retained auxiliary space, state preparation, update, inverse, controlled, reflection, and check costs are charged. In the $\\varepsilon_0\\ge1/2$ branch, the cap above gives false-negative probability at most $\\rho$; in the other branch correctness and the sharper cost are proved separately in [[thm-qa-18-reversible-search-cost]]."
+      ],
+      "interface_changed_this_cycle": true,
+      "original_native_interfaces": [
+        "## Definition\n\nThis is the finite-generation and execution procedure OP2 in `research/quantum-algorithms-planning/operational-contracts.md`, section “OP2 — MNRS approximate reflection and finite tolerant recursive finding”, transcribed with its declared constants and charged branches.\n\n**Input.** A finite ergodic reversible row chain $(X,P,\\pi)$ with $\\pi_x>0$, a lower absolute-gap bound $\\delta_0>0$, a coherent marked predicate with promise $\\pi(\\mathcal M)=0$ or $\\pi(\\mathcal M)\\ge\\varepsilon_0>0$, a charged stationary walk-state preparation $A_\\pi$ of cost $S$, row/update circuits with their inverse and controlled access implementing $W=U^2$ at cost $U$, a coherent marked-bit check at cost $C$, and a failure target $\\rho\\in(0,1)$. The matrix $P$ alone supplies no state preparation or transition circuit.\n\n**Approximate stationary reflection $R(\\beta)$.** Set $\\Delta_0=2\\sqrt{\\delta_0}$, $s=\\lceil\\log_2(4\\pi/\\Delta_0)\\rceil$, and $k=\\max(1,\\lceil\\log_2(2/\\beta)\\rceil)$, using certified interval arithmetic for real constants and ceilings. Append $k$ separate $s$-bit zero phase registers. Coherently execute QA07 phase estimation on $W$ in each register, constructing controlled powers from the declared controlled $W$ access. If at least one phase register is nonzero, apply $-I$ to the walk state. If all are zero, apply the exact row-space reflection $R_A=2TT^*-I$ using the charged row-preparation, inverse, and zero-state reflection calls. Reverse the $k$ phase-estimation circuits in reverse chronological order. Charge $2k(2^s-1)$ controlled walk/inverse constituent calls, the controlled $R_A$ branch, all-zero comparisons, phase-register gates, and the allocated classical arithmetic. The all-zero branch is required: $W$ has the extra zero-phase subspace $A^\\perp\\cap B^\\perp$, where $R_A=-I$, while $R_A=+I$ on the stationary state.\n\n**Recursive circuit $A_i$.** Let $\\gamma=1/120$, $\\beta_i=18\\gamma/(4\\pi^3i^2)$ for $i\\ge1$, and $A_0=I$. For $i>0$, allocate a fresh $K_i$ for $R(\\beta_i)$ and execute chronologically: (i) $A_{i-1}$, the marked phase flip, and $A_{i-1}^\\dagger$; (ii) coherently test every older $K_j$, $j<i$, applying $-I$ if any is nonzero and otherwise applying $R(\\beta_i)$ on the walk and fresh $K_i$; compute and uncompute the control predicate; (iii) apply $A_{i-1}$. An inverse means the exact reversed finite gate list, not a reset of measured work.\n\n**Tolerant finding wrapper.** If $\\varepsilon_0\\ge1/2$, take $n_s=\\lceil\\ln(1/\\rho)/\\ln2\\rceil$ fresh stationary samples, verify each label, return the first marked label, and output `NO MARKED` if all fail. Otherwise, let $t_{\\max}$ be the least integer $t\\ge0$ such that $3^t\\arcsin\\sqrt{\\varepsilon_0}\\ge\\pi/4$. Determine it by certified interval comparison or the exact-algebraic threshold test; equality takes the $\\ge$ branch. Let $n_{\\rm out}=\\lceil20\\ln(1/\\rho)\\rceil+20$. In each outer trial:\n\n1. Prepare a fresh stationary sample, test its first label, and return it if marked.\n2. Prepare a fresh stationary walk state with all $K_1,\\ldots,K_{t_{\\max}}$ zero.\n3. For $i=1,\\ldots,t_{\\max}$, apply $A_i$, measure marked/unmarked, and on a marked outcome verify and return the label. On an unmarked outcome retain the conditional current state and all auxiliary registers, and continue; do not reprepare or reset them.\n4. If no level succeeds, discard the trial and begin the next fresh outer trial.\n\nIf all trials fail, output `NO MARKED`. Every loop has a finite cap; all confidence calculations, comparisons, reversible predicates, retained auxiliary space, state preparation, update, inverse, controlled, reflection, and check costs are charged. In the $\\varepsilon_0\\ge1/2$ branch, the cap above gives false-negative probability at most $\\rho$; in the other branch correctness and the sharper cost are proved separately in [[thm-qa-18-reversible-search-cost]]."
+      ],
+      "change_scope": "Added the local exact clean coherent-check and Lüders-instrument definition and the wrapper reference to it; all other algorithm clauses retained.",
+      "current_deps": [
+        "def-qa-18-marked-set-and-stationary-mass",
+        "def-qa-17-absolute-spectral-gap",
+        "def-qa-17-szegedy-transition-isometry",
+        "def-qa-17-szegedy-walk",
+        "def-qa-17-walk-access-model",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-reflection",
+        "def-qc-projective-measurement",
+        "def-qc-instrument-and-conditional-state",
+        "def-qc-elementary-circuit-resources",
+        "alg-qa-quantum-phase-estimation",
+        "def-qa-eigenphase-estimation-model",
+        "thm-qa-17-walk-access-cost"
+      ],
+      "current_justified_by": []
+    },
+    {
+      "id": "thm-qa-18-reversible-search-cost",
+      "path": "items/thm-qa-18-reversible-search-cost.md",
+      "genuine_before_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/thm-qa-18-reversible-search-cost.md",
+      "before_interfaces": [
+        "## Statement\n\nLet $(X,P,\\pi)$ be a finite ergodic reversible chain with actual absolute spectral gap $\\delta_{\\rm act}\\in(0,1]$. Supply the algorithm with a certified lower bound $\\delta_0\\in(0,\\delta_{\\rm act}]$ and suppose the marked set is empty or has stationary mass at least the promised lower bound $\\varepsilon_0\\in(0,1]$. Let $S_0$ be the cost of preparing the stationary walk state, $U_0$ a common upper bound for one controlled $W$ or $W^*$ update and the exact controlled row-space reflection $R_A$ used by the construction, and $C$ the cost of a coherent marked check. For $0<\\varepsilon_0<1/2$, one outer trial of [[alg-qa-18-reversible-walk-finding]] with gap input $\\delta_0$ has one-sided error, finds a marked state with a fixed positive probability when one exists, and uses\n\n$$S_0+O\\!\\left(\\frac{1}{\\sqrt{\\varepsilon_0}}\\left(\\frac{U_0}{\\sqrt{\\delta_0}}+C\\right)\\right).$$\n\nin the corresponding query/update/check cost coordinates. The capped wrapper with failure target $\\rho\\in(0,1)$ uses $O((S_0+\\varepsilon_0^{-1/2}(U_0/\\sqrt{\\delta_0}+C))(1+\\ln(1/\\rho)))$ in that profile. When $\\varepsilon_0\\ge1/2$, its direct-sampling branch uses $O((S_0+C)(1+\\ln(1/\\rho)))$. If the actual gap is supplied exactly, one may set $\\delta_0=\\delta_{\\rm act}$ and recover the exact-gap form. For gate, width, precision, and bit-time coordinates, the phase-register gates, controlled reflection, comparisons, numerical generation, and retained workspace are charged separately."
+      ],
+      "current_interfaces": [
+        "## Statement\n\nLet $(X,P,\\pi)$ be a finite ergodic reversible chain with actual absolute spectral gap $\\delta_{\\rm act}\\in(0,1]$. Supply the algorithm with a certified lower bound $\\delta_0\\in(0,\\delta_{\\rm act}]$ and suppose the marked set is empty or has stationary mass at least the promised lower bound $\\varepsilon_0\\in(0,1]$. Let $S_0$ be the cost of preparing the stationary walk state, $U_0$ a common upper bound for one controlled $W$ or $W^*$ update and the exact controlled row-space reflection $R_A$ used by the construction, and $C$ the cost of a coherent marked check. For $0<\\varepsilon_0<1/2$, one outer trial of [[alg-qa-18-reversible-walk-finding]] with gap input $\\delta_0$ has one-sided error, finds a marked state with a fixed positive probability when one exists, and uses\n\n$$S_0+O\\!\\left(\\frac{1}{\\sqrt{\\varepsilon_0}}\\left(\\frac{U_0}{\\sqrt{\\delta_0}}+C\\right)\\right).$$\n\nin the corresponding query/update/check cost coordinates. The capped wrapper with failure target $\\rho\\in(0,1)$ uses $O((S_0+\\varepsilon_0^{-1/2}(U_0/\\sqrt{\\delta_0}+C))(1+\\ln(1/\\rho)))$ in that profile. When $\\varepsilon_0\\ge1/2$, its direct-sampling branch uses $O((S_0+C)(1+\\ln(1/\\rho)))$. If the actual gap is supplied exactly, one may set $\\delta_0=\\delta_{\\rm act}$ and recover the exact-gap form. For gate, width, precision, and bit-time coordinates, the phase-register gates, controlled reflection, comparisons, numerical generation, and retained workspace are charged separately."
+      ],
+      "interface_changed_this_cycle": false,
+      "original_native_interfaces": [
+        "## Statement\n\nLet $(X,P,\\pi)$ be a finite ergodic reversible chain with absolute spectral gap $\\delta\\in(0,1]$. Suppose the marked set is empty or has stationary mass at least $\\varepsilon\\in(0,1]$. Let $S_0$ be the cost of preparing the stationary walk state, $U_0$ a common upper bound for one controlled $W$ update (with inverse access) and the exact controlled row-space reflection $R_A$ used by the construction, and $C$ the cost of a coherent marked check. For $0<\\varepsilon<1/2$, one outer trial of [[alg-qa-18-reversible-walk-finding]] has one-sided error, finds a marked state with a fixed positive probability when one exists, and uses\n\n$$S_0+O\\!\\left(\\frac{1}{\\sqrt\\varepsilon}\\left(\\frac{U_0}{\\sqrt\\delta}+C\\right)\\right).$$\n\nin the corresponding query/update/check cost coordinates. The capped wrapper with failure target $\\rho\\in(0,1)$ uses $O((S_0+\\varepsilon^{-1/2}(U_0/\\sqrt\\delta+C))(1+\\ln(1/\\rho)))$ in that profile. When $\\varepsilon\\ge1/2$, its direct-sampling branch uses $O(S_0(1+\\ln(1/\\rho)))$. For gate, width, precision, and bit-time coordinates, the phase-register gates, controlled reflection, comparisons, numerical generation, and retained workspace are charged separately."
+      ],
+      "change_scope": "Statement unchanged. PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle.",
+      "current_deps": [
+        "alg-qa-18-reversible-walk-finding",
+        "def-qa-18-marked-set-and-stationary-mass",
+        "def-qa-17-absolute-spectral-gap",
+        "thm-qa-17-absolute-gap-eigenvalue-characterization",
+        "thm-qa-17-szegedy-spectral-mapping",
+        "thm-qa-17-discriminant-self-adjoint",
+        "alg-qa-quantum-phase-estimation",
+        "def-qa-eigenphase-estimation-model",
+        "def-qa-circular-phase-distance",
+        "lem-qa-phase-estimation-outcome-kernel",
+        "lem-qa-phase-estimation-geometric-sum",
+        "lem-qa-phase-estimation-sine-chord-bounds",
+        "thm-qa-phase-estimation-exact-grid",
+        "thm-qa-phase-estimation-superposition-law",
+        "thm-qa-phase-estimation-access-cost",
+        "cor-basel-sum-by-residues",
+        "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+        "def-principal-inverse-sine-and-cosine",
+        "thm-triple-angle-identities",
+        "cor-trigonometric-parity-and-pythagorean-identity",
+        "cor-sine-and-cosine-are-one-lipschitz",
+        "thm-double-angle-and-power-reduction-identities",
+        "def-qc-projective-measurement",
+        "thm-qc-projective-measurement-outcome-law",
+        "def-qc-instrument-and-conditional-state",
+        "thm-qc-projective-conditional-state",
+        "thm-qc-luders-instrument-of-a-povm-is-valid",
+        "def-qc-povm-and-outcome-law",
+        "def-non-negative-and-positive-operator",
+        "thm-non-negative-square-root-exists-and-is-unique",
+        "def-qc-dirac-notation-conversion",
+        "def-trace-of-an-endomorphism",
+        "cor-triangle-inequality-for-inner-product-norm",
+        "lem-reverse-triangle-inequality-in-a-normed-space",
+        "thm-sine-cosine-signs-monotonicity-and-ranges",
+        "thm-quarter-turn-values-and-shift-formulas"
+      ],
+      "current_justified_by": []
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-query-cost",
+      "path": "items/thm-qa-18-element-distinctness-query-cost.md",
+      "genuine_before_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/thm-qa-18-element-distinctness-query-cost.md",
+      "before_interfaces": [
+        "## Statement\n\nLet $N\\ge4$, $f:[N]\\to\\mathcal V$ be given by the coherent value oracle in [[def-qa-18-element-distinctness-johnson-walk]], and suppose some distinct $a,b$ satisfy $f(a)=f(b)$. For any $2\\le r\\le\\lfloor N/2\\rfloor$, the lazy Johnson walk has absolute gap $\\delta=N/[2r(N-r)]$, marked stationary mass at least $\\varepsilon=r(r-1)/[N(N-1)]$, stored-vertex setup value-query cost $r$, elementary replacement-update cost $2$, and check cost $0$. The controlled row-access construction of [[lem-qa-18-johnson-stored-data-query-access]] supplies stationary edge-state setup at most $r+2$, controlled row reflection at most $4$, and controlled two-reflection walk/inverse at most $8$ value queries. The reversible-walk finding theorem therefore gives a constant-success marked-subset finder with\n\n$$r+O\\!\\left(\\frac{N}{\\sqrt r}\\right)$$\n\nvalue queries. Taking $r=\\min\\{\\lfloor N/2\\rfloor,\\max\\{2,\\lfloor N^{2/3}\\rfloor\\}\\}$ gives $O(N^{2/3})$ queries. A measured marked subset contains a colliding pair among its stored values, which can be output without further value queries; comparison gates are separate resources."
+      ],
+      "current_interfaces": [
+        "## Statement\n\nLet $N\\ge4$, $f:[N]\\to\\mathcal V$ be given by the coherent value oracle in [[def-qa-18-element-distinctness-johnson-walk]], and suppose some distinct $a,b$ satisfy $f(a)=f(b)$. For any $2\\le r\\le\\lfloor N/2\\rfloor$, the lazy Johnson walk has absolute gap $\\delta=N/[2r(N-r)]$, marked stationary mass at least $\\varepsilon=r(r-1)/[N(N-1)]$, stored-vertex setup value-query cost $r$, elementary replacement-update cost $2$, and check cost $0$. The controlled row-access construction of [[lem-qa-18-johnson-stored-data-query-access]] supplies stationary edge-state setup at most $r+2$, controlled row reflection at most $4$, and controlled two-reflection walk/inverse at most $8$ value queries. The reversible-walk finding theorem therefore gives a constant-success marked-subset finder with\n\n$$r+O\\!\\left(\\frac{N}{\\sqrt r}\\right)$$\n\nvalue queries. Taking $r=\\min\\{\\lfloor N/2\\rfloor,\\max\\{2,\\lfloor N^{2/3}\\rfloor\\}\\}$ gives $O(N^{2/3})$ queries. A measured marked subset contains a colliding pair among its stored values, which can be output without further value queries; comparison gates are separate resources."
+      ],
+      "interface_changed_this_cycle": false,
+      "original_native_interfaces": [
+        "## Statement\n\nLet $N\\ge4$, $f:[N]\\to\\mathcal V$ be given by the coherent value oracle in [[def-qa-18-element-distinctness-johnson-walk]], and suppose some distinct $a,b$ satisfy $f(a)=f(b)$. For any $2\\le r\\le\\lfloor N/2\\rfloor$, the lazy Johnson walk has absolute gap $\\delta=N/[2r(N-r)]$, marked stationary mass at least $\\varepsilon=r(r-1)/[N(N-1)]$, stored-vertex setup value-query cost $r$, elementary replacement-update cost $2$, and check cost $0$. The controlled row-access construction of [[lem-qa-18-johnson-stored-data-query-access]] supplies stationary edge-state setup at most $r+2$, controlled row reflection at most $4$, and controlled two-reflection walk/inverse at most $8$ value queries. The reversible-walk finding theorem therefore gives a constant-success marked-subset finder with\n\n$$r+O\\!\\left(\\frac{N}{\\sqrt r}\\right)$$\n\nvalue queries. Taking $r=\\min\\{\\lfloor N/2\\rfloor,\\max\\{2,\\lfloor N^{2/3}\\rfloor\\}\\}$ gives $O(N^{2/3})$ queries. A measured marked subset contains a colliding pair among its stored values, which can be output without further value queries; comparison gates are separate resources."
+      ],
+      "change_scope": "Statement unchanged. Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+      "current_deps": [
+        "def-qa-18-element-distinctness-johnson-walk",
+        "thm-qa-18-reversible-search-cost",
+        "lem-qa-18-johnson-walk-spectrum",
+        "lem-qa-18-johnson-stored-data-query-access"
+      ],
+      "current_justified_by": []
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+      "genuine_before_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+      "before_interfaces": [
+        "## Statement\n\nFix an encoding of values in $[M]$ by $b=O(\\log(M+1))$ bits and take the parameter $r$ from [[thm-qa-18-element-distinctness-query-cost]]. For $N\\ge4096$, the finite canonical storage of [[def-qa-18-canonical-skip-list-for-element-distinctness]] has hash-table lookup, rank/select, complement-unranking, value insertion/deletion, and collision-check subroutines with $\\operatorname{polylog}(N+M)$ QRAM gate-time when their bounded searches do not overrun; the table uses $O(N^{2/3}\\log^3(N+M))$ memory bits. A fixed threshold $N_0\\ge4096$ is chosen below; the search uses this storage for $N\\ge N_0$ and direct value comparison for the finite range $4\\le N<N_0$.\n\nFor $N\\ge N_0$, let $G_{\\rm subset}$ be the gate-time of the supplied uniform $r$-subset preparation. Assume an explicit compatible realization of the controlled/inverse Johnson-walk access used by reversible finding exists on this canonical storage, uses the local operations proved below, and preserves the hash seed. Let $G_{\\rm row}$ be the maximum gate-time of one charged walk-update unit in that realization, including the forward, inverse, controlled, reflection, and swap capabilities supplied for the lazy Johnson walk in [[def-qa-17-walk-access-model]] and any encoding conversion. Under this explicit interface assumption, the complete search has value-query cost $O(N^{2/3})$ and gate-time\n\n$$G_{\\rm subset}+O\\!\\left(r\\operatorname{polylog}(N+M)+N^{2/3}\\bigl(G_{\\rm row}+\\operatorname{polylog}(N+M)\\bigr)\\right).$$\n\nThe local storage operations are proved below; this item does not construct the compatible full row-access circuit or derive polylogarithmic bounds for $G_{\\rm subset}$ and $G_{\\rm row}$. The unconditional $O(N^{2/3}\\operatorname{polylog}(N+M))$ gate-time conclusion requires $G_{\\rm subset}=O(N^{2/3}\\operatorname{polylog}(N+M))$ and $G_{\\rm row}=O(\\operatorname{polylog}(N+M))$.\n\nThe phase-estimation part of this gate-time profile uses the ideal continuous-rotation submodel of [[thm-qa-phase-estimation-access-cost]], where each exact controlled phase is one gate occurrence. Any synthesis overhead for a fixed finite gate alphabet is a separate cost.\n\nFor a Boolean value circuit with $G$ non-input gates, $E$ input-port uses, $D$ explicit layers, maximum per-wire layer fanout $F$, and $m$ output bits, one reversible XOR value query uses at most $6G+4E+m$ ordinary gate occurrences and has the explicit schedule depth\n\n$$2D\\bigl(2\\lceil\\log_2(F+1)\\rceil+3\\bigr)+2\\lceil\\log_2(m+1)\\rceil+1.$$\n\nThis is the written depth of the supplied schedule under [[def-qc-elementary-circuit-resources]]. It does not claim minimum-layer depth or include the other ordinary gates used by the walk data structure."
+      ],
+      "current_interfaces": [
+        "## Statement\n\nFix an encoding of values in $[M]$ by $b=O(\\log(M+1))$ bits and take the parameter $r$ from [[thm-qa-18-element-distinctness-query-cost]]. For $N\\ge4096$, the finite canonical storage of [[def-qa-18-canonical-skip-list-for-element-distinctness]] has hash-table lookup, rank/select, complement-unranking, value insertion/deletion, and collision-check subroutines with $\\operatorname{polylog}(N+M)$ QRAM gate-time when their bounded searches do not overrun; the table uses $O(N^{2/3}\\log^3(N+M))$ memory bits. A fixed threshold $N_0\\ge4096$ is chosen below; the search uses this storage for $N\\ge N_0$ and direct value comparison for the finite range $4\\le N<N_0$.\n\nFor $N\\ge N_0$, let $G_{\\rm subset}$ be the gate-time of the supplied uniform $r$-subset preparation. Assume an explicit compatible realization of the controlled/inverse Johnson-walk access used by reversible finding exists on this canonical storage, uses the local operations proved below, and preserves the hash seed. Let $G_{\\rm row}$ be the maximum gate-time of one charged walk-update unit in that realization, including the forward, inverse, controlled, reflection, and swap capabilities supplied for the lazy Johnson walk in [[def-qa-17-walk-access-model]] and any encoding conversion. Under this explicit interface assumption, the complete search has value-query cost $O(N^{2/3})$ and gate-time\n\n$$G_{\\rm subset}+O\\!\\left(r\\operatorname{polylog}(N+M)+N^{2/3}\\bigl(G_{\\rm row}+\\operatorname{polylog}(N+M)\\bigr)\\right).$$\n\nThe local storage operations are proved below; this item does not construct the compatible full row-access circuit or derive polylogarithmic bounds for $G_{\\rm subset}$ and $G_{\\rm row}$. The unconditional $O(N^{2/3}\\operatorname{polylog}(N+M))$ gate-time conclusion requires $G_{\\rm subset}=O(N^{2/3}\\operatorname{polylog}(N+M))$ and $G_{\\rm row}=O(\\operatorname{polylog}(N+M))$.\n\nThe phase-estimation part of this gate-time profile uses the ideal continuous-rotation submodel of [[thm-qa-phase-estimation-access-cost]], where each exact controlled phase is one gate occurrence. Any synthesis overhead for a fixed finite gate alphabet is a separate cost.\n\nFor a Boolean value circuit with $G$ non-input gates, $E$ input-port uses, $D$ explicit layers, maximum per-wire layer fanout $F$, and $m$ output bits, one reversible XOR value query uses at most $6G+4E+m$ ordinary gate occurrences and has the explicit schedule depth\n\n$$2D\\bigl(2\\lceil\\log_2(F+1)\\rceil+3\\bigr)+2\\lceil\\log_2(m+1)\\rceil+1.$$\n\nThis is the written depth of the supplied schedule under [[def-qc-elementary-circuit-resources]]. It does not claim minimum-layer depth or include the other ordinary gates used by the walk data structure."
+      ],
+      "interface_changed_this_cycle": false,
+      "original_native_interfaces": [
+        "## Statement\n\nFix an encoding of values in $[M]$ by $b=O(\\log(M+1))$ bits and take the parameter $r$ from [[thm-qa-18-element-distinctness-query-cost]]. For $N\\ge4096$, the finite canonical storage of [[def-qa-18-canonical-skip-list-for-element-distinctness]] has hash-table lookup, rank/select, complement-unranking, value insertion/deletion, and collision-check subroutines with $\\operatorname{polylog}(N+M)$ QRAM gate-time when their bounded searches do not overrun; the table uses $O(N^{2/3}\\log^3(N+M))$ memory bits. A fixed threshold $N_0\\ge4096$ is chosen below; the search uses this storage for $N\\ge N_0$ and direct value comparison for the finite range $4\\le N<N_0$.\n\nFor $N\\ge N_0$, let $G_{\\rm subset}$ be the gate-time of the supplied uniform $r$-subset preparation. Assume an explicit compatible realization of the controlled/inverse Johnson-walk access used by reversible finding exists on this canonical storage, uses the local operations proved below, and preserves the hash seed. Let $G_{\\rm row}$ be the maximum gate-time of one charged walk-update unit in that realization, including the forward, inverse, controlled, reflection, and swap capabilities supplied for the lazy Johnson walk in [[def-qa-17-walk-access-model]] and any encoding conversion. Under this explicit interface assumption, the complete search has value-query cost $O(N^{2/3})$ and gate-time\n\n$$G_{\\rm subset}+O\\!\\left(r\\operatorname{polylog}(N+M)+N^{2/3}\\bigl(G_{\\rm row}+\\operatorname{polylog}(N+M)\\bigr)\\right).$$\n\nThe local storage operations are proved below; this item does not construct the compatible full row-access circuit or derive polylogarithmic bounds for $G_{\\rm subset}$ and $G_{\\rm row}$. The unconditional $O(N^{2/3}\\operatorname{polylog}(N+M))$ gate-time conclusion requires $G_{\\rm subset}=O(N^{2/3}\\operatorname{polylog}(N+M))$ and $G_{\\rm row}=O(\\operatorname{polylog}(N+M))$.\n\nThe phase-estimation part of this gate-time profile uses the ideal continuous-rotation submodel of [[thm-qa-phase-estimation-access-cost]], where each exact controlled phase is one gate occurrence. Any synthesis overhead for a fixed finite gate alphabet is a separate cost.\n\nFor a Boolean value circuit with $G$ non-input gates, $E$ input-port uses, $D$ explicit layers, maximum per-wire layer fanout $F$, and $m$ output bits, one reversible XOR value query uses at most $6G+4E+m$ ordinary gate occurrences and has the explicit schedule depth\n\n$$2D\\bigl(2\\lceil\\log_2(F+1)\\rceil+3\\bigr)+2\\lceil\\log_2(m+1)\\rceil+1.$$\n\nThis is the written depth of the supplied schedule under [[def-qc-elementary-circuit-resources]]. It does not claim minimum-layer depth or include the other ordinary gates used by the walk data structure."
+      ],
+      "change_scope": "Statement unchanged. The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+      "current_deps": [
+        "thm-qa-18-element-distinctness-query-cost",
+        "thm-qa-18-reversible-search-cost",
+        "thm-qa-phase-estimation-access-cost",
+        "def-qa-18-random-access-gate-model",
+        "def-qa-18-element-distinctness-johnson-walk",
+        "def-qa-18-canonical-skip-list-for-element-distinctness",
+        "def-qa-17-walk-access-model",
+        "def-qc-coherent-function-oracle",
+        "def-boolean-circuit-size-depth-fanin-and-basis",
+        "alg-qc-reversible-embedding",
+        "thm-qc-reversible-embedding-cost",
+        "thm-qc-reversible-embedding-parallel-depth",
+        "def-qc-elementary-circuit-resources",
+        "def-qc-toffoli-and-fredkin",
+        "thm-existence-of-finite-fields",
+        "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+        "thm-qc-projective-measurement-outcome-law",
+        "cor-triangle-inequality-for-inner-product-norm",
+        "lem-reverse-triangle-inequality-in-a-normed-space"
+      ],
+      "current_justified_by": []
+    }
+  ],
+  "actual_changed_interface_ids_this_cycle": [
+    "alg-qa-18-reversible-walk-finding"
+  ],
+  "theorem_statements_changed_this_cycle": [],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-18-reversible-walk-finding",
+      "locator": "Definition: Marked check and retained-state instrument; wrapper instruction 3; final theorem backlink",
+      "disposition": "repaired-and-focused-checked",
+      "reason": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference.",
+      "path": "items/alg-qa-18-reversible-walk-finding.md"
+    },
+    {
+      "id": "thm-qa-18-reversible-search-cost",
+      "locator": "F16, F21; Proof 1.3, 2.3, 3.1–3.2, 5.1",
+      "disposition": "repaired-and-focused-checked",
+      "reason": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle.",
+      "path": "items/thm-qa-18-reversible-search-cost.md"
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-query-cost",
+      "locator": "F3–F4; Proof 1.2, 2.1",
+      "disposition": "repaired-and-focused-checked",
+      "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+      "path": "items/thm-qa-18-element-distinctness-query-cost.md"
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "locator": "Statement; Proof 2.3, 3.3, 4.1",
+      "disposition": "repaired-and-focused-checked",
+      "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+      "path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md"
+    },
+    {
+      "id": "ex-qa-18-johnson-walk-parameters",
+      "locator": "F2; Proof 1.1–2.1",
+      "disposition": "focused-checked-no-edit",
+      "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+      "path": "items/ex-qa-18-johnson-walk-parameters.md"
+    },
+    {
+      "id": "ex-qa-18-element-distinctness-unique-collision",
+      "locator": "F1–F2; Proof 1.1–1.2",
+      "disposition": "focused-checked-no-edit",
+      "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+      "path": "items/ex-qa-18-element-distinctness-unique-collision.md"
+    },
+    {
+      "id": "quantum-walk-search-and-element-distinctness",
+      "locator": "Full retained A-page inventory and both summary paragraphs",
+      "disposition": "focused-checked-no-edit",
+      "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+      "path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md"
+    },
+    {
+      "id": "quantum-walk-search-and-element-distinctness-examples",
+      "locator": "Full retained B-page inventory and summary",
+      "disposition": "focused-checked-no-edit",
+      "reason": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims.",
+      "path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md"
+    }
+  ],
+  "instrument_realization": {
+    "projectors": "Pi_1=(sum_{x in M}|x><x|) tensor I_rest; Pi_0=I-Pi_1, with I_rest on every existing walk, phase, data and work auxiliary.",
+    "clean_check_interface": "B_M(|x>|eta>|b>_F|0>_J)=|x>|eta>|b xor m(x)>_F|0>_J on the declared logical encoding, for arbitrary existing auxiliary vector eta; complete unitary extension and inverse are supplied.",
+    "instructions": [
+      "Append only fresh zero flag and blank scratch.",
+      "Apply B_M.",
+      "Measure only the new flag with explicitly selected computational Lüders branches Y -> Q_a Y Q_a.",
+      "Store the classical outcome a.",
+      "Apply B_M inverse, which clears the fresh flag and scratch.",
+      "Continue with every old register retained; do not measure the first label on an unmarked branch. Read and verify a label only for marked output."
+    ],
+    "branch_map": "Z -> Pi_a Z Pi_a on the original registers.",
+    "pure_state_calculation": "psi|0,0> -> sum_a Pi_a psi|a,0>; chosen flag branch -> Pi_a psi|a,0>; inverse -> Pi_a psi|0,0>. Its density trace is sum_j |(Pi_a psi)_j|^2=||Pi_a psi||^2. On a positive branch the unit vector is Pi_a psi/||Pi_a psi||; a zero-probability branch has no assigned state.",
+    "validity": "Each Pi_a is a nonnegative projection, its own unique nonnegative square root; the two form a POVM. The actual square-root Lüders-instrument theorem supplies validity, and the actual projective conditional-state theorem supplies density/range for this selected rule. Generic PVM suppliers are used only for effect properties and weights.",
+    "contractivity": "v=Pi v+(I-Pi)v is an orthogonal decomposition, so ||Pi v||^2<=||v||^2 independently of measurement disturbance.",
+    "cost": "One forward B_M, one inverse B_M and one flag readout are charged separately per test. C bounds forward/inverse in relevant query/check coordinates and the readout if that coordinate counts readout as a check. Readout has zero value-oracle queries. Thus total is O(C) in the stated profile; gates/readout bits/workspace are separately priced. Marked phase flip uses B_M, flag phase, B_M inverse.",
+    "retained_state_use": "Theorem Proof 3.1 now explicitly invokes Proof 1.3 for the actual conditional projection on all retained registers. Its normalization estimate, angles, success constants and recurrence are otherwise untouched."
+  },
+  "suppliers_read_fully": [
+    {
+      "id": "def-qc-projective-measurement",
+      "path": "items/def-qc-projective-measurement.md"
+    },
+    {
+      "id": "thm-qc-projective-measurement-outcome-law",
+      "path": "items/thm-qc-projective-measurement-outcome-law.md"
+    },
+    {
+      "id": "def-qc-instrument-and-conditional-state",
+      "path": "items/def-qc-instrument-and-conditional-state.md"
+    },
+    {
+      "id": "thm-qc-projective-conditional-state",
+      "path": "items/thm-qc-projective-conditional-state.md"
+    },
+    {
+      "id": "thm-qc-luders-instrument-of-a-povm-is-valid",
+      "path": "items/thm-qc-luders-instrument-of-a-povm-is-valid.md"
+    },
+    {
+      "id": "def-qc-povm-and-outcome-law",
+      "path": "items/def-qc-povm-and-outcome-law.md"
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "path": "items/thm-non-negative-square-root-exists-and-is-unique.md"
+    },
+    {
+      "id": "def-qc-pure-state-and-ray",
+      "path": "items/def-qc-pure-state-and-ray.md"
+    },
+    {
+      "id": "def-qc-dirac-notation-conversion",
+      "path": "items/def-qc-dirac-notation-conversion.md"
+    }
+  ],
+  "focused_check_order": [
+    "actual PVM and instrument supplier statements/proofs",
+    "alg-qa-18-reversible-walk-finding",
+    "thm-qa-18-reversible-search-cost",
+    "lem-qa-18-johnson-stored-data-query-access",
+    "thm-qa-18-element-distinctness-query-cost",
+    "thm-qa-18-element-distinctness-qr-access-gate-cost",
+    "ex-qa-18-johnson-walk-parameters",
+    "ex-qa-18-element-distinctness-unique-collision",
+    "quantum-walk-search-and-element-distinctness",
+    "quantum-walk-search-and-element-distinctness-examples"
+  ],
+  "retained_native_consumers": [
+    {
+      "id": "alg-qa-18-reversible-walk-finding",
+      "native_retained_entry": {
+        "id": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "alg-qa-18-reversible-walk-finding"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "alg-qa-18-reversible-walk-finding"
+          ],
+          [
+            "thm-qa-18-reversible-search-cost",
+            "alg-qa-18-reversible-walk-finding"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "alg-qa-18-reversible-walk-finding"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-reversible-search-cost",
+            "alg-qa-18-reversible-walk-finding"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "alg-qa-18-szegedy-phase-detection",
+      "native_retained_entry": {
+        "id": "alg-qa-18-szegedy-phase-detection",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "alg-qa-18-szegedy-phase-detection"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "alg-qa-18-szegedy-phase-detection"
+          ],
+          [
+            "lem-qa-18-absorbing-walk-discriminant-decomposition",
+            "alg-qa-18-szegedy-phase-detection"
+          ],
+          [
+            "lem-qa-18-symmetric-compressed-walk-bound",
+            "alg-qa-18-szegedy-phase-detection"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "alg-qa-18-szegedy-phase-detection"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-absorbing-walk-discriminant-decomposition",
+            "alg-qa-18-szegedy-phase-detection"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-symmetric-compressed-walk-bound",
+            "alg-qa-18-szegedy-phase-detection"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "cex-qa-18-query-cost-is-not-gate-cost",
+      "native_retained_entry": {
+        "id": "cex-qa-18-query-cost-is-not-gate-cost",
+        "path": [
+          "def-qa-18-random-access-gate-model",
+          "cex-qa-18-query-cost-is-not-gate-cost"
+        ],
+        "paths": [
+          [
+            "def-qa-18-random-access-gate-model",
+            "cex-qa-18-query-cost-is-not-gate-cost"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-random-access-gate-model",
+            "cex-qa-18-query-cost-is-not-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "def-qa-18-canonical-skip-list-for-element-distinctness",
+      "native_retained_entry": {
+        "id": "def-qa-18-canonical-skip-list-for-element-distinctness",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "def-qa-18-canonical-skip-list-for-element-distinctness"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "def-qa-18-canonical-skip-list-for-element-distinctness"
+          ],
+          [
+            "def-qa-18-random-access-gate-model",
+            "def-qa-18-canonical-skip-list-for-element-distinctness"
+          ],
+          [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "def-qa-18-canonical-skip-list-for-element-distinctness"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "def-qa-18-canonical-skip-list-for-element-distinctness"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-random-access-gate-model",
+            "def-qa-18-canonical-skip-list-for-element-distinctness"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "def-qa-18-canonical-skip-list-for-element-distinctness"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "def-qa-18-classical-hitting-time",
+      "native_retained_entry": {
+        "id": "def-qa-18-classical-hitting-time",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-classical-hitting-time"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-classical-hitting-time"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-classical-hitting-time"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "def-qa-18-element-distinctness-johnson-walk",
+      "native_retained_entry": {
+        "id": "def-qa-18-element-distinctness-johnson-walk",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "ex-qa-18-element-distinctness-unique-collision",
+      "native_retained_entry": {
+        "id": "ex-qa-18-element-distinctness-unique-collision",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "ex-qa-18-element-distinctness-unique-collision"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          [
+            "lem-qa-18-johnson-walk-spectrum",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          [
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-walk-spectrum",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-element-distinctness-unique-collision"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "ex-qa-18-johnson-walk-parameters",
+      "native_retained_entry": {
+        "id": "ex-qa-18-johnson-walk-parameters",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "ex-qa-18-johnson-walk-parameters"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          [
+            "lem-qa-18-johnson-walk-spectrum",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          [
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-walk-spectrum",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-element-distinctness-query-cost",
+            "ex-qa-18-johnson-walk-parameters"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "lem-qa-18-absorbing-walk-discriminant-decomposition",
+      "native_retained_entry": {
+        "id": "lem-qa-18-absorbing-walk-discriminant-decomposition",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "lem-qa-18-absorbing-walk-discriminant-decomposition"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "lem-qa-18-absorbing-walk-discriminant-decomposition"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "lem-qa-18-absorbing-walk-discriminant-decomposition"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "lem-qa-18-johnson-stored-data-query-access",
+      "native_retained_entry": {
+        "id": "lem-qa-18-johnson-stored-data-query-access",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "lem-qa-18-johnson-stored-data-query-access"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-stored-data-query-access"
+          ],
+          [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-stored-data-query-access"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-stored-data-query-access"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-stored-data-query-access"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "lem-qa-18-johnson-walk-spectrum",
+      "native_retained_entry": {
+        "id": "lem-qa-18-johnson-walk-spectrum",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "lem-qa-18-johnson-walk-spectrum"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-walk-spectrum"
+          ],
+          [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-walk-spectrum"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-walk-spectrum"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "lem-qa-18-johnson-walk-spectrum"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "lem-qa-18-symmetric-compressed-walk-bound",
+      "native_retained_entry": {
+        "id": "lem-qa-18-symmetric-compressed-walk-bound",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "lem-qa-18-symmetric-compressed-walk-bound"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "lem-qa-18-symmetric-compressed-walk-bound"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "lem-qa-18-symmetric-compressed-walk-bound"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "thm-qa-18-classical-spectral-hitting-bound",
+      "native_retained_entry": {
+        "id": "thm-qa-18-classical-spectral-hitting-bound",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-classical-hitting-time",
+          "thm-qa-18-classical-spectral-hitting-bound"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-classical-hitting-time",
+            "thm-qa-18-classical-spectral-hitting-bound"
+          ],
+          [
+            "def-qa-18-classical-hitting-time",
+            "thm-qa-18-classical-spectral-hitting-bound"
+          ],
+          [
+            "lem-qa-18-symmetric-compressed-walk-bound",
+            "thm-qa-18-classical-spectral-hitting-bound"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-classical-hitting-time",
+            "thm-qa-18-classical-spectral-hitting-bound"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-classical-hitting-time",
+            "thm-qa-18-classical-spectral-hitting-bound"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-symmetric-compressed-walk-bound",
+            "thm-qa-18-classical-spectral-hitting-bound"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "thm-qa-18-detection-correctness-cost",
+      "native_retained_entry": {
+        "id": "thm-qa-18-detection-correctness-cost",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "alg-qa-18-szegedy-phase-detection",
+          "thm-qa-18-detection-correctness-cost"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "alg-qa-18-szegedy-phase-detection",
+            "thm-qa-18-detection-correctness-cost"
+          ],
+          [
+            "lem-qa-18-absorbing-walk-discriminant-decomposition",
+            "thm-qa-18-detection-correctness-cost"
+          ],
+          [
+            "lem-qa-18-symmetric-compressed-walk-bound",
+            "thm-qa-18-detection-correctness-cost"
+          ],
+          [
+            "alg-qa-18-szegedy-phase-detection",
+            "thm-qa-18-detection-correctness-cost"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "alg-qa-18-szegedy-phase-detection",
+            "thm-qa-18-detection-correctness-cost"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-absorbing-walk-discriminant-decomposition",
+            "thm-qa-18-detection-correctness-cost"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-symmetric-compressed-walk-bound",
+            "thm-qa-18-detection-correctness-cost"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "alg-qa-18-szegedy-phase-detection",
+            "thm-qa-18-detection-correctness-cost"
+          ],
+          "intersects_focused_instrument_closure": false,
+          "disposition": "retained-unaffected-by-this-defect",
+          "reason": "The retained path is outside the changed finding-instrument premise. Its carriers and uses receive no new mathematical verdict in this focused cycle; the path and earlier closure are preserved.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "native_retained_entry": {
+        "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "def-qa-18-random-access-gate-model",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "def-qa-18-canonical-skip-list-for-element-distinctness",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "lem-qa-18-johnson-walk-spectrum",
+            "thm-qa-18-element-distinctness-query-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          [
+            "thm-qa-18-element-distinctness-query-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-random-access-gate-model",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-canonical-skip-list-for-element-distinctness",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-walk-spectrum",
+            "thm-qa-18-element-distinctness-query-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-element-distinctness-query-cost",
+            "thm-qa-18-element-distinctness-qr-access-gate-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-query-cost",
+      "native_retained_entry": {
+        "id": "thm-qa-18-element-distinctness-query-cost",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "thm-qa-18-element-distinctness-query-cost"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          [
+            "lem-qa-18-johnson-walk-spectrum",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "def-qa-18-element-distinctness-johnson-walk",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-walk-spectrum",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "thm-qa-18-reversible-search-cost",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "lem-qa-18-johnson-stored-data-query-access",
+            "thm-qa-18-element-distinctness-query-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    },
+    {
+      "id": "thm-qa-18-reversible-search-cost",
+      "native_retained_entry": {
+        "id": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "thm-qa-18-reversible-search-cost"
+        ],
+        "paths": [
+          [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "thm-qa-18-reversible-search-cost"
+          ],
+          [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost"
+          ]
+        ]
+      },
+      "path_dispositions": [
+        {
+          "path": [
+            "def-qa-18-marked-set-and-stationary-mass",
+            "thm-qa-18-reversible-search-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        },
+        {
+          "path": [
+            "alg-qa-18-reversible-walk-finding",
+            "thm-qa-18-reversible-search-cost"
+          ],
+          "intersects_focused_instrument_closure": true,
+          "disposition": "focused-checked",
+          "reason": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle.",
+          "prior_closure_path": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/consumer-closure-1.json"
+        }
+      ]
+    }
+  ],
+  "actual_discovery_closure": {
+    "method": "Fresh read-only projection of actual id/aliases/deps/justified_by plus body references over items; exact batch-ID occurrences in library and articles; follow outgoing uses from the changed algorithm and repaired supplier theorem without revisiting nodes. Add explicit semantic direct uses in query/gate consumer check records. No validator, gate, level reconciliation or broad mathematical re-audit performed.",
+    "items_scanned_for_discovery": 30944,
+    "aliases_for_algorithm": {},
+    "current_outgoing_edges": [
+      {
+        "supplier": "thm-qa-18-reversible-search-cost",
+        "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "kind": "deps",
+        "raw_target": "thm-qa-18-reversible-search-cost",
+        "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+        "locator": "frontmatter.deps",
+        "disposition": "repaired-and-focused-checked",
+        "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+      },
+      {
+        "supplier": "thm-qa-18-reversible-search-cost",
+        "consumer": "alg-qa-18-reversible-walk-finding",
+        "kind": "body-reference",
+        "raw_target": "thm-qa-18-reversible-search-cost",
+        "source_path": "items/alg-qa-18-reversible-walk-finding.md",
+        "locator": "actual item body",
+        "disposition": "repaired-and-focused-checked",
+        "consumer_evidence": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference."
+      },
+      {
+        "supplier": "thm-qa-18-reversible-search-cost",
+        "consumer": "thm-qa-18-element-distinctness-query-cost",
+        "kind": "deps",
+        "raw_target": "thm-qa-18-reversible-search-cost",
+        "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+        "locator": "frontmatter.deps",
+        "disposition": "repaired-and-focused-checked",
+        "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+      },
+      {
+        "supplier": "thm-qa-18-reversible-search-cost",
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "kind": "page-placement-or-prose",
+        "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+        "locator": "frontmatter inventory / page prose",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+      },
+      {
+        "supplier": "thm-qa-18-element-distinctness-query-cost",
+        "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "kind": "deps",
+        "raw_target": "thm-qa-18-element-distinctness-query-cost",
+        "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+        "locator": "frontmatter.deps",
+        "disposition": "repaired-and-focused-checked",
+        "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+      },
+      {
+        "supplier": "thm-qa-18-element-distinctness-query-cost",
+        "consumer": "ex-qa-18-element-distinctness-unique-collision",
+        "kind": "deps",
+        "raw_target": "thm-qa-18-element-distinctness-query-cost",
+        "source_path": "items/ex-qa-18-element-distinctness-unique-collision.md",
+        "locator": "frontmatter.deps",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible."
+      },
+      {
+        "supplier": "thm-qa-18-element-distinctness-query-cost",
+        "consumer": "ex-qa-18-johnson-walk-parameters",
+        "kind": "deps",
+        "raw_target": "thm-qa-18-element-distinctness-query-cost",
+        "source_path": "items/ex-qa-18-johnson-walk-parameters.md",
+        "locator": "frontmatter.deps",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied."
+      },
+      {
+        "supplier": "thm-qa-18-element-distinctness-query-cost",
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "kind": "page-placement-or-prose",
+        "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+        "locator": "frontmatter inventory / page prose",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+      },
+      {
+        "supplier": "ex-qa-18-johnson-walk-parameters",
+        "consumer": "quantum-walk-search-and-element-distinctness-examples",
+        "kind": "page-placement-or-prose",
+        "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md",
+        "locator": "frontmatter inventory / page prose",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims."
+      },
+      {
+        "supplier": "ex-qa-18-element-distinctness-unique-collision",
+        "consumer": "quantum-walk-search-and-element-distinctness-examples",
+        "kind": "page-placement-or-prose",
+        "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md",
+        "locator": "frontmatter inventory / page prose",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims."
+      },
+      {
+        "supplier": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "kind": "page-placement-or-prose",
+        "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+        "locator": "frontmatter inventory / page prose",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+      },
+      {
+        "supplier": "alg-qa-18-reversible-walk-finding",
+        "consumer": "thm-qa-18-reversible-search-cost",
+        "kind": "deps",
+        "raw_target": "alg-qa-18-reversible-walk-finding",
+        "source_path": "items/thm-qa-18-reversible-search-cost.md",
+        "locator": "frontmatter.deps",
+        "disposition": "repaired-and-focused-checked",
+        "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+      },
+      {
+        "supplier": "alg-qa-18-reversible-walk-finding",
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "kind": "page-placement-or-prose",
+        "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+        "locator": "frontmatter inventory / page prose",
+        "disposition": "focused-checked-no-edit",
+        "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+      }
+    ],
+    "path_dispositions": [
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost"
+        ],
+        "consumer": "thm-qa-18-reversible-search-cost",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost"
+        ],
+        "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost"
+        ],
+        "consumer": "thm-qa-18-element-distinctness-query-cost",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost"
+        ],
+        "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-element-distinctness-unique-collision"
+        ],
+        "consumer": "ex-qa-18-element-distinctness-unique-collision",
+        "disposition": "focused-checked-no-edit",
+        "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-element-distinctness-unique-collision",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-element-distinctness-unique-collision.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-element-distinctness-unique-collision",
+          "quantum-walk-search-and-element-distinctness-examples"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness-examples",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-element-distinctness-unique-collision",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-element-distinctness-unique-collision.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible."
+          },
+          {
+            "supplier": "ex-qa-18-element-distinctness-unique-collision",
+            "consumer": "quantum-walk-search-and-element-distinctness-examples",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-johnson-walk-parameters"
+        ],
+        "consumer": "ex-qa-18-johnson-walk-parameters",
+        "disposition": "focused-checked-no-edit",
+        "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-johnson-walk-parameters",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-johnson-walk-parameters.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-johnson-walk-parameters",
+          "quantum-walk-search-and-element-distinctness-examples"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness-examples",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-johnson-walk-parameters",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-johnson-walk-parameters.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied."
+          },
+          {
+            "supplier": "ex-qa-18-johnson-walk-parameters",
+            "consumer": "quantum-walk-search-and-element-distinctness-examples",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-reversible-search-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "thm-qa-18-reversible-search-cost",
+            "kind": "deps",
+            "raw_target": "alg-qa-18-reversible-walk-finding",
+            "source_path": "items/thm-qa-18-reversible-search-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "PVM suppliers give outcome weights only. The specified instrument and its validity/conditional-state suppliers give the selected update; the local clean-check calculation gives branch vector Pi_a psi and conditional Pi_a psi/||Pi_a psi|| when nonzero. Orthogonal decomposition proves contractivity independently. Thus the retained-state recurrence uses its actual conditional branch, and two check calls plus readout fit O(C). The Statement, success probabilities and S0+C high-mass bound are unchanged this cycle."
+          },
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "alg-qa-18-reversible-walk-finding",
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost"
+        ],
+        "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "alg-qa-18-reversible-walk-finding"
+        ],
+        "consumer": "alg-qa-18-reversible-walk-finding",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "alg-qa-18-reversible-walk-finding",
+            "kind": "body-reference",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/alg-qa-18-reversible-walk-finding.md",
+            "locator": "actual item body",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "alg-qa-18-reversible-walk-finding",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "alg-qa-18-reversible-walk-finding",
+            "kind": "body-reference",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/alg-qa-18-reversible-walk-finding.md",
+            "locator": "actual item body",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference."
+          },
+          {
+            "supplier": "alg-qa-18-reversible-walk-finding",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost"
+        ],
+        "consumer": "thm-qa-18-element-distinctness-query-cost",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost"
+        ],
+        "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-element-distinctness-unique-collision"
+        ],
+        "consumer": "ex-qa-18-element-distinctness-unique-collision",
+        "disposition": "focused-checked-no-edit",
+        "reason": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-element-distinctness-unique-collision",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-element-distinctness-unique-collision.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-element-distinctness-unique-collision",
+          "quantum-walk-search-and-element-distinctness-examples"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness-examples",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-element-distinctness-unique-collision",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-element-distinctness-unique-collision.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "The unique-pair inclusion probability and r+O(N/sqrt(r)) value-query expression are unchanged. Forward/inverse marked checks and flag readout still have zero value queries, so the balanced query example is compatible."
+          },
+          {
+            "supplier": "ex-qa-18-element-distinctness-unique-collision",
+            "consumer": "quantum-walk-search-and-element-distinctness-examples",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-johnson-walk-parameters"
+        ],
+        "consumer": "ex-qa-18-johnson-walk-parameters",
+        "disposition": "focused-checked-no-edit",
+        "reason": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-johnson-walk-parameters",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-johnson-walk-parameters.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "ex-qa-18-johnson-walk-parameters",
+          "quantum-walk-search-and-element-distinctness-examples"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness-examples",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "ex-qa-18-johnson-walk-parameters",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-element-distinctness-query-cost",
+            "source_path": "items/ex-qa-18-johnson-walk-parameters.md",
+            "locator": "frontmatter.deps",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "This example uses the unchanged marked-fraction part of the query theorem. Supplying its clean Lüders check changes no subset count, spectrum, multiplicity or marked fraction; the indirect search interface remains satisfied."
+          },
+          {
+            "supplier": "ex-qa-18-johnson-walk-parameters",
+            "consumer": "quantum-walk-search-and-element-distinctness-examples",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-18-element-distinctness-query-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "thm-qa-18-element-distinctness-query-cost",
+            "kind": "deps",
+            "raw_target": "thm-qa-18-reversible-search-cost",
+            "source_path": "items/thm-qa-18-element-distinctness-query-cost.md",
+            "locator": "frontmatter.deps",
+            "disposition": "repaired-and-focused-checked",
+            "consumer_evidence": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+          },
+          {
+            "supplier": "thm-qa-18-element-distinctness-query-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      },
+      {
+        "root": "thm-qa-18-reversible-search-cost",
+        "path": [
+          "thm-qa-18-reversible-search-cost",
+          "quantum-walk-search-and-element-distinctness"
+        ],
+        "consumer": "quantum-walk-search-and-element-distinctness",
+        "disposition": "focused-checked-no-edit",
+        "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise.",
+        "hop_checks": [
+          {
+            "supplier": "thm-qa-18-reversible-search-cost",
+            "consumer": "quantum-walk-search-and-element-distinctness",
+            "kind": "page-placement-or-prose",
+            "source_path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+            "locator": "frontmatter inventory / page prose",
+            "disposition": "focused-checked-no-edit",
+            "consumer_evidence": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+          }
+        ]
+      }
+    ],
+    "algorithm_backlink": {
+      "path": [
+        "thm-qa-18-reversible-search-cost",
+        "alg-qa-18-reversible-walk-finding"
+      ],
+      "kind": "nonlogical correctness/cost reference",
+      "disposition": "focused-checked-compatible",
+      "reason": "The check preserves every existing register on clean fresh scratch, and its supplied inverse clears only the fresh flag/scratch after explicitly computational Lüders readout. Every marked/unmarked test selects Pi_a Z Pi_a, with no finer unmarked label readout. The theorem backlink now supplies the explicitly proved conditional-vector rule and the same O(C) measurement/check costs; it remains a nonlogical property reference."
+    },
+    "semantic_uses": [
+      {
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-element-distinctness-query-cost"
+        ],
+        "locator": "Proof 1.2, exact clean check interface via F3",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "Proof 1.2 explicitly supplies the self-inverse XOR collision-bit permutation of the already stored list. On valid encoded vertices it is the required exact clean marked check; identity on all other registers preserves retained work. Forward/inverse and the fresh-flag readout issue zero value queries, so C=0 in the value-query coordinate is justified and the query bound is unchanged."
+      },
+      {
+        "path": [
+          "alg-qa-18-reversible-walk-finding",
+          "thm-qa-18-element-distinctness-qr-access-gate-cost"
+        ],
+        "locator": "Proof 2.3, specified finding instrument; Proof 4.1 finding costs",
+        "disposition": "repaired-and-focused-checked",
+        "reason": "The stored collision counter supplies a reversible fresh-flag nonzero test with comparison scratch uncomputed. Its inverse has the same polylogarithmic QRAM/gate cost, and the prescribed fresh-flag readout completes the retained-state instrument. The search call/check count and the polylogarithmic local overhead are unchanged up to constants. Complete compatible seed-preserving controlled/inverse row access, G_subset/G_row and the separate synthesis/gate/query conditions remain explicit assumptions."
+      }
+    ],
+    "outside_dispositions": [],
+    "outside_source_proposals": []
+  },
+  "page_checks": [
+    {
+      "id": "quantum-walk-search-and-element-distinctness",
+      "locator": "Full retained A-page inventory and both summary paragraphs",
+      "disposition": "focused-checked-no-edit",
+      "reason": "All 16 A items remain in place. The page separates state preparation, checking, control, gate, precision and query costs and states full compatible row access as an input. The locally selected instrument implements the finding claim without modifying any page promise."
+    },
+    {
+      "id": "quantum-walk-search-and-element-distinctness-examples",
+      "locator": "Full retained B-page inventory and summary",
+      "disposition": "focused-checked-no-edit",
+      "reason": "All 3 B items remain in place. The companion describes only spectra, marked fractions, balanced query counts and the parity query-versus-gate distinction; the local measurement clarification changes none of these claims."
+    }
+  ],
+  "retained_scope_boundaries": {
+    "domain": "The original finite ergodic reversible-chain domain and positive stationary law are unchanged; no restriction to uniform or lazy chains was added.",
+    "geometry_and_controls": "Stationary edge preparation, full-space coherent QPE including arbitrary superpositions, exact RA on the all-zero branch, controlled/inverse factors and all retained K registers are preserved.",
+    "parameters": "Certified/exact real numerical-resource conventions and all-real detection bracket scope are unchanged. No finite exact encoding, automatic computable certificate or effective compiler for arbitrary noncomputable reals is inferred; supplied ideal operations remain oracle assumptions with separately priced work.",
+    "costs": "Existing S0+C high-mass bound is preserved; low-mass asymptotics change only by constant factors for the explicit check/inverse/readout. Zero value-query check cost remains zero in the query consumer.",
+    "singleton": "Detection algorithm/theorem were not edited. Root singleton clause and sole-label exact predicate branch and separate singleton cost are preserved; no singleton lambda2 claim added.",
+    "query_gate_separation": "Query, ordinary gates, QRAM calls, output/readout, retained width, exact phase gates, finite-alphabet synthesis and full row-access assumptions remain separate.",
+    "generic_measurements": "No generic PVM, POVM or instrument source was modified. This repair chooses a local instrument; it imposes no blanket disturbance postulate.",
+    "inventory": "All original 19 items and both retained A/B pages remain in place. Outside42 sources are read-only."
+  },
+  "concrete_source_changed_paths": [
+    "items/alg-qa-18-reversible-walk-finding.md",
+    "items/thm-qa-18-reversible-search-cost.md",
+    "items/thm-qa-18-element-distinctness-query-cost.md",
+    "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md"
+  ],
+  "genuine_before_paths": [
+    "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/alg-qa-18-reversible-walk-finding.md",
+    "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/thm-qa-18-reversible-search-cost.md",
+    "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/thm-qa-18-element-distinctness-query-cost.md",
+    "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-walk/before/consumer-closure-2/items/thm-qa-18-element-distinctness-qr-access-gate-cost.md"
+  ],
+  "before_archive_method": "Exclusive-create exact bytes of the current genuine source before its first edit in this cycle. Earlier before/consumer-closure-1 archives and all native artifacts preserved.",
+  "fresh_writer_guards": [
+    {
+      "at": "2026-10-15T23:16:21.798915+00:00",
+      "runtime_state": ".autopilot/quantum-computing-algorithms-60-2026-10-15/state.json",
+      "active_batch42_dispatches": [],
+      "all_active_native_dispatches": [],
+      "engine_paused": true,
+      "archived_sources": [
+        "alg-qa-18-reversible-walk-finding",
+        "thm-qa-18-reversible-search-cost"
+      ]
+    },
+    {
+      "at": "2026-10-15T23:18:16.001004+00:00",
+      "runtime_state": ".autopilot/quantum-computing-algorithms-60-2026-10-15/state.json",
+      "active_batch42_dispatches": [],
+      "archived_sources": [
+        "thm-qa-18-element-distinctness-query-cost",
+        "thm-qa-18-element-distinctness-qr-access-gate-cost"
+      ]
+    }
+  ],
+  "final_layout": {
+    "command": "node tools/proof-layout.mjs items/alg-qa-18-reversible-walk-finding.md items/thm-qa-18-reversible-search-cost.md items/thm-qa-18-element-distinctness-query-cost.md items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+    "exit_code": 0,
+    "output": "proof-layout: 4 items, 25 steps, 0 defects",
+    "after_final_source_edits": true
+  },
+  "tests_run": false,
+  "gates_run": false,
+  "hashes_computed": false,
+  "unresolved_blockers": [],
+  "outside_source_proposals": [],
+  "completed_at": "2026-10-15T23:20:39.051067+00:00",
+  "counts": {
+    "changed_source_files": 4,
+    "changed_original_interfaces_this_cycle": 1,
+    "retained_consumers": 17,
+    "retained_paths": 55,
+    "retained_paths_intersecting_focused_closure": 28,
+    "focused_item_and_page_checks": 8,
+    "discovered_paths": 26,
+    "outside_consumers": 0,
+    "unresolved_blockers": 0
+  }
+}

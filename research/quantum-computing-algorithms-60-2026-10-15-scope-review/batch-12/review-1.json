@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "12",
+  "round": 1,
+  "reviewed_items": [
+    "def-qc-effective-unitary-matrix-input",
+    "def-qc-inverse-closed-dense-su2-gate-set",
+    "lem-qc-fixed-dimension-interval-arithmetic",
+    "lem-qc-irrational-rotation-dense-on-circle",
+    "lem-qc-su2-near-identity-logarithm",
+    "lem-qc-compact-su2-base-net",
+    "lem-qc-pauli-vector-multiplication",
+    "lem-qc-su2-balanced-commutator",
+    "lem-qc-two-axis-su2-generation",
+    "lem-qc-clifford-t-projective-density",
+    "lem-qc-commutator-error-cancellation",
+    "alg-qc-solovay-kitaev-unitary-compiler",
+    "thm-qc-solovay-kitaev-error-and-resource-bound",
+    "thm-qc-solovay-kitaev-bit-complexity",
+    "thm-qc-fixed-arity-unitary-error-budget",
+    "thm-qc-controlled-phase-approximation",
+    "ex-qc-solovay-kitaev-error-budget"
+  ],
+  "reviewed_pages": [
+    "approximate-universality-and-solovay-kitaev",
+    "approximate-universality-and-solovay-kitaev-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round-0 findings are resolved, including the corrected word-length upper bound; listed consumers use upper bounds or separate cost interfaces. Round 1 still has unresolved proof-support and algorithm well-definedness obligations, so escalate to the owner rather than request another repair.",
+  "findings": [
+    {
+      "id": "lem-qc-clifford-t-projective-density",
+      "type": "local",
+      "reason": "Step 1.1 asserts x² = 1 − √2/2 without deriving or citing the double-angle identity and exact positive value cos(π/4) = √2/2. This is needed for the polynomial in Step 2.1 and the irrationality argument in Step 3.1."
+    },
+    {
+      "id": "thm-qc-fixed-arity-unitary-error-budget",
+      "type": "prerequisite",
+      "reason": "Step 3.1 telescopes in the full 2^k-dimensional circuit but uses the one-qubit compiler errors as full-register slot errors. It does not justify that identity extension and wire permutation preserve (or bound) the operator norm of each local difference. The available supplier lem-qa-tensor-extension-preserves-operator-norm is not cited or listed in deps; consumers include thm-qc-controlled-phase-approximation and thm-qc-amplitude-table-precision-and-compilation."
+    },
+    {
+      "id": "alg-qc-solovay-kitaev-unitary-compiler",
+      "type": "local",
+      "reason": "The Definition selects the least J with η_J ≤ ε and calls the balanced-commutator lemma on D and η_{j−1} without establishing those preconditions or linking a well-definedness result; justified_by is empty. The assigned resource theorem supplies the needed level-existence and residual-bound arguments in Steps 1.1 and 3.1, but the algorithm does not identify it as its justification."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-34-error-budget-allocation",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definition does not assert exact SK word length; the corrected upper-bound contract suffices."
+    },
+    {
+      "id": "alg-qa-34-modfkv-low-rank-description",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not use an exact SK word length."
+    },
+    {
+      "id": "alg-qa-34-rejection-sampler-linear-combination",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not use an exact SK word length."
+    },
+    {
+      "id": "cex-qa-34-state-output-not-amplitude-list",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definition does not rely on exact SK word length."
+    },
+    {
+      "id": "cex-qa-34-tang-without-sampling-access",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "def-qa-34-end-to-end-error-contract",
+      "decision": "accept",
+      "reason": "Its interface uses the output-and-cost model, not an exact SK length."
+    },
+    {
+      "id": "def-qa-34-heralded-verification-contract",
+      "decision": "accept",
+      "reason": "Its interface uses the output-and-cost model, not an exact SK length."
+    },
+    {
+      "id": "def-qa-34-l2-sample-query-access",
+      "decision": "accept",
+      "reason": "Its interface uses the output-and-cost model, not an exact SK length."
+    },
+    {
+      "id": "def-qa-34-output-and-cost-types",
+      "decision": "accept",
+      "reason": "It names a separate finite-gate approximation and resource contract without asserting exact word length."
+    },
+    {
+      "id": "ex-qa-34-heralded-success-branch",
+      "decision": "accept",
+      "reason": "Its route through the cost and verification definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "ex-qa-34-three-stage-budget",
+      "decision": "accept",
+      "reason": "Its route through the error-budget definition does not rely on exact SK word length."
+    },
+    {
+      "id": "ex-qc-solovay-kitaev-error-budget",
+      "decision": "accept",
+      "reason": "Its corrected hypotheses support the phase and telescoping arguments; it does not use exact compiler length."
+    },
+    {
+      "id": "lem-qa-33-finite-dimensional-unitary-synthesis",
+      "decision": "accept",
+      "reason": "It uses the finite-precision theorem's polynomial-time and polynomial-output bounds, not an exact level length."
+    },
+    {
+      "id": "lem-qa-33-fixed-arity-local-measurement-synthesis",
+      "decision": "accept",
+      "reason": "Its route through finite-dimensional synthesis uses polynomial resource bounds, not exact SK length."
+    },
+    {
+      "id": "lem-qa-33-uniform-programmed-circuit-interpreter",
+      "decision": "accept",
+      "reason": "Its route through finite-dimensional synthesis uses polynomial resource bounds, not exact SK length."
+    },
+    {
+      "id": "lem-qa-34-exponential-gram-concentration",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "lem-qa-34-modfkv-sampling-gram-bound",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "lem-qa-34-normalized-vector-distribution-tv-bound",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "lem-qc-vmw-finite-precision-sk-compiler",
+      "decision": "accept",
+      "reason": "It uses polynomial finite-precision time and output-length bounds; the corrected upper bound suffices."
+    },
+    {
+      "id": "prop-qa-34-sample-inner-product-estimator",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "rem-qa-34-dequantization-scope",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definition does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-33-2-local-hamiltonian-qma-complete",
+      "decision": "accept",
+      "reason": "Its route through finite-dimensional synthesis uses polynomial resource bounds, not exact SK length."
+    },
+    {
+      "id": "thm-qa-33-5-local-hamiltonian-qma-complete",
+      "decision": "accept",
+      "reason": "Its route through finite-dimensional synthesis uses polynomial resource bounds, not exact SK length."
+    },
+    {
+      "id": "thm-qa-33-local-hamiltonian-in-qma",
+      "decision": "accept",
+      "reason": "Its route through finite-dimensional synthesis uses polynomial resource bounds, not exact SK length."
+    },
+    {
+      "id": "thm-qa-34-adaptive-failure-union-bound",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-34-channel-hybrid-bound",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-34-classical-output-writing-lower-bound",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definition does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-34-error-budget-allocation-correctness",
+      "decision": "accept",
+      "reason": "Its route through the error-budget algorithm does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-34-linear-combination-sampler-correct-and-cost",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-34-modfkv-low-rank-approximation",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definition does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-34-tensor-error-bound",
+      "decision": "accept",
+      "reason": "Its route through the output-and-cost definitions does not rely on exact SK word length."
+    },
+    {
+      "id": "thm-qa-qft-finite-gate-set-compile-cost",
+      "decision": "accept",
+      "reason": "Its direct compiler use requires only an error guarantee and an O(log^3.97) length bound."
+    },
+    {
+      "id": "thm-qc-amplitude-table-precision-and-compilation",
+      "decision": "escalate",
+      "reason": "Its Step 1.2 applies the fixed-arity result; that supplier's local-factor norm extension remains unresolved."
+    },
+    {
+      "id": "thm-qc-controlled-phase-approximation",
+      "decision": "escalate",
+      "reason": "Steps 2.2 and 4.1 apply the fixed-arity result; that supplier's local-factor norm extension remains unresolved."
+    },
+    {
+      "id": "thm-qc-fixed-arity-unitary-error-budget",
+      "decision": "escalate",
+      "reason": "Its corrected SK length input is sufficient, but Step 3.1 has the unresolved local-factor norm-extension prerequisite."
+    },
+    {
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "decision": "accept",
+      "reason": "Its proof and Statement use the SK length as an upper bound, not an equality; its certified branch comparison is explicit."
+    },
+    {
+      "id": "thm-qc-solovay-kitaev-error-and-resource-bound",
+      "decision": "accept",
+      "reason": "The corrected at-most length Statement now matches the proof's recurrence; downstream use requires only that upper bound."
+    },
+    {
+      "id": "thm-qc-bqtisp-to-ptisp-simulation",
+      "decision": "accept",
+      "reason": "Its route through the finite-precision compiler uses polynomial resource bounds, not exact SK length."
+    },
+    {
+      "id": "thm-qc-counting-hierarchy-time-space-lower-bound",
+      "decision": "accept",
+      "reason": "Its route through the simulation uses compiler overhead bounds, not exact SK length."
+    },
+    {
+      "id": "lem-qc-scalar-phase-completes-clifford-t-universality",
+      "decision": "escalate",
+      "reason": "Step 1.2 uses the projective-density conclusion whose proof has the unresolved exact trigonometric evaluation."
+    },
+    {
+      "id": "lem-qc-clifford-t-determinant-one-approximants",
+      "decision": "escalate",
+      "reason": "Steps 1.1–1.2 use projective density to establish density of determinant-one words."
+    },
+    {
+      "id": "lem-qa-33-normalized-clifford-t-su2-package-dense",
+      "decision": "escalate",
+      "reason": "Its Fact F1 and Step 2.1 use the projective-density conclusion whose proof remains unsupported."
+    }
+  ]
+}

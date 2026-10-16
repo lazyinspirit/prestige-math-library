@@ -1,0 +1,170 @@
+arXiv:quant-ph/9611025v2  15 Nov 1996
+
+Fault-Tolerant Quantum Computation With Constant Error
+
+D. Aharonov∗
+M. Ben-Or†
+
+Abstract
+
+In the past year many developments had taken place in the area of quantum error corrections.
+Recently Shor showed how to perform fault tolerant quantum computation when, η, the probability for
+a fault in one time step per qubit or per gate, is logarithmically small. This paper improves this bound
+and shows how to perform fault tolerant quantum computation when the error probability, η, is smaller
+than some constant threshold, η0. The cost is polylogarithmic in time and space, and no measurements
+are used during the quantum computation. The same result is shown also for quantum circuits which
+operate on nearest neighbors only.
+To achieve this noise resistance, we use concatenated quantum error correcting codes. The scheme
+presented is general, and works with any quantum code, conditioned that the code satisfies some re-
+strictions, namely that it is a “proper quantum code”. The constant threshold η0 is a function of the
+parameters of the specific proper code used.
+We present two explicit classes of proper quantum codes. The first example of proper quantum codes
+generalizes classical secret sharing with polynomials. The second uses a known class of quantum codes
+and converts it to a proper code. This class is defined over a field with p elements, which means that
+the elementary quantum particle is not a qubit but a “qupit”.
+We estimate the threshold η0 to be ≃10−6. Hopefully, this paper motivates a search for proper
+quantum codes with higher thresholds, at which point quantum computation becomes practical.
+
+1
+Introduction
+
+Quantum computation is believed to be more powerful than classical computation, mainly due to
+the celebrated Shor algorithm[20]. It is yet unclear whether and how quantum computers will be
+physically realizable,[16, 9, 7] but as any physical system, they in principle will be subjected to noise,
+such as decoherence[24, 23, 17], and inaccuracies. Without error corrections, the effect of noise can
+ruin the entire computation[23, 6], so we need to protect the computation against quantum noise.
+Already the question of protecting quantum information is harder than the classical analog because
+one should also protect the quantum correlations between the quantum bits (qubits). However, it
+was shown [4, 22] that good quantum error correcting codes exist, a result which was followed by
+many explicit examples(ex: [18, 15]). This does not immediately imply the existence of noise resistant
+quantum computation, since the computation causes the effect of faults to spread. Recently Shor[19]
+showed how to use quantum codes in order to perform fault tolerant quantum computation when the
+noise rate, or the fault probability each time step, per qubit or gate, is polylogarithmically small. In
+this paper, we close the gap and show how to perform fault tolerant quantum computation in the
+presence of constant noise rate, with polylogarithmic cost in time and size.
+
+∗Institutes of Physics and Computer science, The Hebrew University, Jerusalem, Israel, E-mail: doria@cs.huji.ac.il
+†Institute of Computer science, The Hebrew University, Jerusalem, Israel, E-mail: benor@cs.huji.ac.il
+
+1
+
+
+
+
+
+The error corrections which where described so far used a combination of classical and quantum
+operations. We would like to define a model of noisy quantum computation[1], such that errors and
+error corrections can be described entirely inside this model. Working in the correct model will enable
+to prove the result of this paper. Sequential quantum computation can not be noise resistant[1], so
+we work with quantum circuits[8, 25], and since the state of a noisy quantum system is in general
+a probability distribution over pure states, i.e. a mixed state, and not merely a pure state as in the
+standard model, we use quantum circuits with mixed states[3]. Since noise is a dynamic process which
+depends on time, the circuit will be divided to levels, or time steps. Unlike Yao[25] we allow qubits to
+be input and output at different times to the circuit. This is crucial, since with the restriction that all
+qubits are initialized at time 0, it is not possible to compute fault tolerantly without an exponential
+blowup in the size of the circuit[2]. Between the time steps, we add the noise process, which is a
+probabilistic process: each qubit or gate undergoes a fault with independent probability η per step,
+and η is referred to as the noise rate. The list of times and places where faults had occurred, namely
+the fault path, is random, and naturally, the function that the circuit computes is a weighted average
+over the noise process.
+
+Computing on encoded states: Let us first describe how one can protect quantum information
+against noise, using quantum error correcting codes[4, 22].
+The idea behind these codes is, as in
+classical linear block codes, to spread the state of one qubit on a number of qubits, called a “block”,
+such that even if some of the qubits in a block are damaged, the state of the system can be recovered
+from the other correct qubits. If we want to preserve the state of n qubits, we encode it on n blocks.
+The whole state should be recoverable if not too many errors occurred in each block. Quantum codes
+that can correct d faults have the property that if not more than d faults occurred in each block, there
+is some operation that can recover the encoded state given the damaged state. The difference from
+classical codes is that the quantum correlations should be recovered as well, and not only the logical
+states of the qubits. However, it turns out that applying classical error corrections in one basis of the
+Quantum space can correct the logical states, while applying classical error corrections in some other
+basis corresponds to corrections of the quantum correlations.
+In order to protect a quantum computation against faults, one can try to compute on encoded
+states, and not on the states themselves, using quantum codes. The circuit M1 which will compute
+on encoded states is defined as a simulation of the original circuit M0. A qubit in the original circuit
+transforms to a block of qubits in the simulating circuit, and each time step transforms to a working
+period of several time steps.
+To simulate the computation done in the t′th time step in M0, we
+will apply in M1 the analog computation, on encoded states. Each gate in M0 will transform to
+some “procedure” in M1, which computes this gate on encoded states. The procedure might require
+ancilla qubits, so these are added to the circuit M1, and are initialized only when needed. If M1 is
+initialized with some encoded state, we expect this state to evolve by the computation along some
+“trajectory”, such that at the end of each working period it encodes the correct corresponding state
+of M0. The input and output to M1 will simply be a duplication of the inputs and outputs of M0, on
+the corresponding blocks. We will therefore need to add on each block, before computation begins,
+an initialization procedure, that transforms the duplicated input, i.e a string of 0′s or a string of 1′s,
+to the encoding state |S0 >, or |S1 >. At the end of the computation we will need the opposite
+transformation, so we will use a reading Procedure that transforms a block in the state |S0 > or |S1 >
+back to a string of 0’s or 1′s.
+Computing on encoded quantum states does not automatically provide protection against faults,
+since errors accumulate, and when the damage has effected too many qubits in one block, the correct
+state is no longer recoverable. In order to be able to correct the state, error corrections should be
+applied all the time, so that the error can not accumulate. Therefore in each working period in M1 we
+will add a step of error corrections of each block. The working period will be divided to two stages:
+a computation stage and a correction stage. The idea is therefore to apply alternately computation
+stages and correction stages, hoping that during the computation stage the damage that accumulated
+is still small enough so that the corrections are still able to correct it. One should notice that this
+
+2
+
+
+
+
+
+“hope” not always comes true. During the computation faults can “spread” to places not in the fault
+path. This spread can happen if a gate operates on a damaged qubit and some “correct” qubits- in
+general, this can cause all the qubits that participate in the gate to be damaged. If for example, a gate
+procedure consists of one gate operating on the whole block, than one fault is already unrecoverable.
+The procedures should be designed in such a way that a fault can not effect all the qubits in the block.
+In general, a fault at time t in qubit q can effect qubit q′ at time t′ > t if there is a path in the circuit
+connecting the points (q, t) and (q′, t′). Since we want to be able to correct after each computation
+stage, We can define the “spread” of a procedure as the maximal number of qubits in each block in
+the output of the procedure, which are effected by a fault that happened in this procedure. If we
+use only procedures with small spread, then if not too many errors happened during the computation
+stage in each procedure, the error corrections will still be able to correct the damage using the other
+undamaged qubits. We are actually looking for a pair of a quantum code which can correct d errors,
+and a corresponding set of universal gates, such that their procedures, with respect to the code,
+allow one fault to spread to at most d qubits. Since the error corrections, initialization, and reading
+procedures are also subjected to faults, we need them to have small spread too. Such codes, with the
+corresponding universal set of gates, will be called quantum computation codes.
+We now want to show that the reliability of the simulating circuit is larger than the original
+circuit. In the original circuit, if one fault occurred the computation failed, but the simulating circuit
+can tolerate a number of errors, say k, in each procedure, since the error corrections correct them
+afterwards. The effective noise rate of M1 is thus the probability for more than k errors in a procedure,
+and it will be smaller than the actual noise rate η, if the parameters are chosen correctly. However, it
+seems that an improvement from a constant noise rate to polynomially small effective noise rate, as
+we need for fault tolerance, is hard to get in the above scheme. In [19] it is shown how to apply the
+above scheme, with a specific quantum computation code, to achieve fault tolerance when the noise
+rate η is taken to be logarithmically small.
+
+Improvement to constant noise rate To improve this result, we use concatenated simulations,
+which generalizes the works of Gacs [10] to the quantum case. The idea is that since the simulating
+circuit is also a circuit, it’s effective noise rate can be improved by simulating it again, and so on
+for several levels. Even a very small improvement in each level will suffice since the improvement is
+exponential in the number of levels. Such a small improvement can be achieved when using a code of
+constant block size, if the noise rate is smaller than some threshold η0. Note, that each level simulates
+the error corrections in the simulated level, and adds error corrections in the current level. The final
+circuit thus includes error corrections of all the levels, where the computation of error corrections
+of high levels is corrected all the time in small levels. The lower the level, the more often are error
+corrections of this level applied. This is in correspondence with the fact that lower levels work on
+smaller blocks, that are more likely to be quickly damaged. The whole scheme relies heavily on the
+fact that the places where errors occur are random and independent. Most of the faults will probably
+be corrected by error corrections in the first level, and if this does not work, than using other blocks
+which where corrected in the first level, the error will probably be corrected in the second level. The
+probability that the highest blocks can not be recoverable is polynomially small.
+Not any quantum computation code can be used in the above scheme. There are two restrictions:(1)
+When applying the simulation, we replace the gates by fault tolerant procedures. Since we want to
+simulate the new circuit as well, we need that these procedures use gates that can be replaced by fault
+tolerant procedures as well. Hence the universal set of gates associated with the quantum computation
+code that we use, must have fault tolerant procedures which use gates from the same universal set of
+gates. This is the “closeness” restriction. (2) Let us consider a two level simulation. If a simulated
+error correction operates on an encoded wrong word, it clearly corrects it. But what happens if it gets
+as an input some state which does not encode any word? The simulated error correction “understands”
+only encoded words. If we demand that error correction in the lower level corrects any state to some
+word in the code, than the input for the error correction of the upper level will maybe be wrong but
+it will be an encoded word, so it can be understood and corrected by the upper level. The second
+
+3
+

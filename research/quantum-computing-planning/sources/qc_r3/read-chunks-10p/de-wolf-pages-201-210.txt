@@ -1,0 +1,783 @@
+===== PDF PAGE 201 =====
+
+168]: if the initial error-rate of the quantum hardware can be brought down below some constant
+(known as the “fault-tolerance threshold,” though it depends on the assumed noise model, the
+allowed gate set, and the code used, it is not one number), then we can use software-solutions
+like quantum error-correcting codes and fault-tolerant computing to ensure that we can quantum
+compute for long periods of time without serious errors.
+Much research has gone into finding the best value for this fault-tolerance threshold, under
+realistic assumptions on the noise. The more efficient our basic quantum error-correcting codes
+are (i.e., the smaller C and D), the higher (= better) the value of the threshold is. Currently the
+best rigorous lower bounds for the threshold are around 0.1% for reasonable assumptions on the
+noise, but there is numerical evidence that even a few percent might be tolerable (there are also
+some largish upper bounds known on the threshold value, e.g. [157]). The existence of a constant
+threshold is actually one of the most important results in the area of quantum computing, and is
+the main answer to the quantum-computing skeptics mentioned at the start of this chapter: as long
+as experimentalists manage to implement basic operations with an error below that threshold, in
+a scalable way, then we should be able to build large-scale quantum computers.5 This is starting
+to happen [128], and as far as we know there is no fundamental reason why we shouldn’t be able
+to do this at scale. It is, however, an extremely hard engineering problem.
+
+Exercises
+
+1. (H) Let E be an arbitrary 1-qubit unitary. We know that it can be written as
+
+E = α0I + α1X + α2Y + α3Z,
+
+for some complex coefficients αi. Show that �3
+i=0 |αi|2 = 1.
+
+2.
+(a) Write the 1-qubit Hadamard transform H as a linear combination of the four Pauli
+matrices.
+
+(b) Suppose an H-error happens on the first qubit of α|0⟩+ β|1⟩using the 9-qubit code.
+Give the various steps in the error-correction procedure that corrects this error.
+
+3. Give a quantum circuit for the encoding of Shor’s 9-qubit code, i.e., a circuit that maps
+|008⟩�→|0⟩and |108⟩�→|1⟩. Explain why the circuit works.
+
+4. Shor’s 9-qubit code allows to correct a bit flip and/or a phase flip on one of its 9 qubits.
+Below we give a 4-qubit code which allows to detect a bitflip and/or a phaseflip. By this we
+mean that after the detection procedure we either have the original uncorrupted state back,
+or we know that an error occurred (though we do not know which one). The logical 0 and 1
+are encoded as:
+
+|0⟩= 1
+
+2(|00⟩+ |11⟩) ⊗(|00⟩+ |11⟩)
+
+|1⟩= 1
+
+2(|00⟩−|11⟩) ⊗(|00⟩−|11⟩)
+
+(a) Give a procedure (either as a circuit or as sufficiently-detailed pseudo-code) that detects
+a bitflip error on one of the 4 qubits of α|0⟩+ β|1⟩.
+
+5This is of course assuming our simple model of independent noise on each physical qubit is not too far off; if the
+noise can be correlated in devious ways, then it becomes much harder (though often still possible) to protect against.
+
+189
+
+
+===== PDF PAGE 202 =====
+
+(b) Give a procedure (either as a circuit or as sufficiently-detailed pseudo-code) that detects
+a phaseflip error on one of the 4 qubits of α|0⟩+ β|1⟩.
+
+(c) Does that mean that we can now detect any unitary 1-qubit error on one of the 4 qubits?
+Explain your answer.
+
+5. This exercise is about the Steane code, which (as you’ll show) encodes 1 logical qubit into 7
+physical qubits, and can correct an error on any one of the 7 physical qubits.
+
+(a) Consider the subspace C ⊆{0, 1}7 spanned by the 3 elements 0001111, 0110011, 1010101.
+Write out a list of the 8 elements of C.
+
+(b) Let C′ = {c⊕17 | c ∈C} be the set of binary complements of C. It is easy to verify that
+the minimal Hamming distance between any two elements of C ∪C′ is at least 3 (you
+may assume this without proof in your answer). Show that there exists a procedure
+that, for every c ∈C ∪C′, maps Xj|c⟩|0⟩�→Xj|c⟩|j⟩, where j ∈{1, . . . , 7} (so the
+bitflip-error acts on the j-th qubit, and the procedure finds out the location j) and the
+second register consists of a number of initially-|0⟩qubits. You don’t have to write out
+the details, just argue clearly why such a procedure exists.
+
+(c) The Steane code is defined by the two logical basis states
+
+|0⟩=
+1
+√
+
+8
+
+�
+
+c∈C
+|c⟩
+and
+|1⟩=
+1
+√
+
+8
+
+�
+
+c′∈C′
+|c′⟩
+
+What is the 7-qubit unitary X on the physical qubits that corresponds to the logical
+X-gate? In other words, what simple 7-qubit unitary maps |b⟩�→|1 −b⟩?
+
+(d) Show that there exists a quantum procedure (which may involve measurements in the
+computational basis) that identifies and corrects a bitflip-error on any one of the 7 qubits,
+i.e., that maps Xj(α|0⟩+ β|1⟩)|0⟩�→(α|0⟩+ β|1⟩)|j⟩.
+
+(e) (H) Show that there exists a quantum procedure (which may involve measurements in
+the computational basis) that identifies and corrects a phaseflip-error on any one of the
+7 qubits, i.e., that maps Zj(α|0⟩+ β|1⟩)|0⟩�→(α|0⟩+ β|1⟩)|j⟩.
+
+6. (H) Show that there cannot be a quantum code that encodes one logical qubit into 2k physical
+qubits while being able to correct errors on up to k of the physical qubits.
+
+7. Suppose we have a qubit whose density matrix is ρ = α0I + α1X + α2Y + α3Z, where
+α0, α1, α2, α3 are real coefficients and I, X, Y, Z are the Pauli matrices.
+
+(a) Show that α0 = 1/2.
+
+(b) Depolarizing noise (of strength p ∈[0, 1]) acts on a qubit as follows: with probability
+1 −p nothing happens to the qubit, and with probability p the qubit is replaced by the
+“completely mixed state” of a qubit, whose density matrix is I/2.
+Show that depolarizing noise on the above qubit doesn’t change the coefficient α0, but
+shrinks each of α1, α2, α3 by a factor of 1 −p.
+
+8. Consider a quantum-error correcting code that encodes k qubits (and n −k |0⟩s) into an
+n-qubit codeword state, via the unitary encoding map
+
+U : |x, 0n−k⟩�→|C(x)⟩, where x ∈{0, 1}k, and |C(x)⟩need not be a basis state.
+
+190
+
+
+===== PDF PAGE 203 =====
+
+A “weight-w Pauli error” is the tensor product of n Pauli matrices, of which at most w are
+not identity (e.g., something like X ⊗I ⊗Z ⊗I ⊗I if w = 2 and n = 5). Suppose that there is
+a unitary map S on 3n qubits that can identify every weight-w Pauli error E on a codeword,
+by writing the name of E (the “error syndrome,” which we can think of as a 2n-bit string
+”E”, for example writing 00 for I, 10 for X, 01 for Z, 11 for Y ) in a second register that’s
+initially 02n. In other words, for every x ∈{0, 1}k and weight-w Pauli error E, this S maps
+
+S : (E|C(x)⟩)|02n⟩�→(E|C(x)⟩)|”E”⟩.
+
+(a) Show that if x and y are k-bit strings, and E and F are weight-w Pauli errors, then the
+n-qubit states E|C(x)⟩and F|C(y)⟩are orthogonal unless both x = y and E = F.
+
+(b) Prove the inequality 2k
+w
+�
+
+i=0
+
+�n
+i
+
+�
+3i ≤2n.
+
+Comment: This inequality implies a lower bound on the required number of qubits n, in terms of the
+
+number of encoded qubits k and the weight w of errors that you can correct, but you don’t need to
+
+derive that consequence.
+
+9. In this exercise we will see that the argument about concatenating the classical 3-bit code at
+the end of Section 21.2 still works if the initial error rate is p ≤1/2 −ε for some ε > 0.
+
+(a) Define the function f as f(p) = 3p2(1 −p) + p3. Show that if p = 1/2 −ε for some
+ε ∈[0, 1/6], then f(p) ≤1/2 −(13/9)ε.
+
+(b) Show that there is an m = O(log(1/ε)) such that m levels of concatenation reduce the
+error to pm < 1/3.
+
+(c) Show that m + k levels of concatenation reduce the error to something exponentially
+small in 2k.
+
+(d) How many bits are used to encode one logical bit in the scheme from (c)?
+
+191
+
+
+===== PDF PAGE 204 =====
+
+192
+
+
+===== PDF PAGE 205 =====
+
+Appendix A
+
+Some Useful Linear Algebra
+
+In this appendix we quickly introduce the basic elements of linear algebra, most of which will be
+used somewhere or other in these notes.
+
+A.1
+Vector spaces
+
+A vector space V over a field F is a set of objects (called vectors) satisfying that if v, w ∈V , then
+cv + dw ∈V for all c, d ∈F. In other words, V is closed under addition and scalar multiplication.
+A (linear) subspace W is a subset W ⊆V which is itself a vector space (i.e., closed under addition
+and scalar multiplication). For example, V = Cd is the d-dimensional complex vector space, which
+is the set of all column vectors of d complex numbers. The set W ⊆V of vectors whose first two
+entries are 0 is a subspace of V . As another example, the set V = {0, 1}d of d-bit vectors, with
+entrywise addition modulo 2, is a linear space. The field here is F2 = {0, 1}. The set W ⊆V of
+vectors whose first two entries are equal is a subspace of V .
+A set of vectors v1, . . . , vm ∈V is linearly independent if the only way to get �m
+i=1 aivi equal
+to the zero-vector 0, is to set a1 = · · · = am = 0. The span (over field F) of a set of vectors
+S = {v1, . . . , vm} ⊆V is the set span(S) of vectors that can be written as a linear combination
+�m
+i=1 aivi (with coefficients a1, . . . , am ∈F). A basis for V is a linearly independent set S of vectors
+such that span(S) = V . One can show that all bases of V have the same size; this size is called
+the dimension of V . If we fix an ordered basis S = (v1, . . . , vm), then every w ∈V can be written
+uniquely as a linear combination �m
+i=1 wivi with coefficients wi, and can also be written (in that
+basis) as (w1, . . . , wm). The support of such a w is the set {i | wi ̸= 0} of locations where w is
+nonzero. For example, the support of w = (1, 5, 0, 4) is {1, 2, 4} if we number the locations starting
+from 1 (we will also sometimes number positions from 0 in these notes).
+
+A.2
+Matrices
+
+Matrices represent linear maps between two vector spaces with particular bases. We assume famil-
+iarity with the basic rules of matrix addition and multiplication. We use Aij for the (i, j)-entry of
+a matrix A, and AT for its transpose, which has AT
+ij = Aji. We use Id to denote the d × d identity
+matrix, which has 1s on its diagonal and 0s elsewhere; we usually omit the subscript d when the
+dimension is clear from context. If A is square and there is a matrix B such that AB = BA = I,
+
+193
+
+
+===== PDF PAGE 206 =====
+
+then we use A−1 to denote this B, which is called the inverse of A (and is unique if it exists). Note
+that (AB)−1 = B−1A−1.
+In the remainder of this appendix we will mostly consider the complex field. If A is a matrix
+(not necessarily square), then A∗denotes its conjugate transpose (or adjoint): the matrix obtained
+by transposing A and taking the complex conjugates of all entries. Note that (AB)∗= B∗A∗.
+Physicists usually write A† (pronounced “A-dagger”) instead of A∗, but in these notes we will stick
+with the A∗notation that is common in mathematics.
+
+A.3
+Inner product and norms for vectors
+
+For vectors v, w with real or complex entries, we use ⟨v|w⟩= v∗w = �
+i v∗
+i wi for their inner
+product.1 The combination of the vector space V with this inner product is called a Hilbert space.
+Two vectors v, w are orthogonal if ⟨v|w⟩= 0. A set {vi} of vectors is called orthogonal if all vectors
+are pairwise orthogonal: ⟨vi|vj⟩= 0 if i ̸= j. If additionally the vectors all have norm 1, then the
+set is called orthonormal.
+The inner product induces a vector norm ∥v∥=
+�
+
+⟨v|v⟩=
+��
+i |vi|2.
+This is the usual
+Euclidean norm (or “length” of the vector). The norm in turn induces a distance ∥v −w∥between
+vectors v and w. Note that distance and inner product are closely related:
+
+∥v −w∥2 = ⟨v −w|v −w⟩= ∥v∥2 + ∥w∥2 −⟨v|w⟩−⟨w|v⟩.
+
+In particular, for unit vectors v and w the real part of their inner product equals 1 −1
+
+2∥v −w∥2.
+Hence unit vectors that are close together have an inner product close to 1, and vice versa. The
+Cauchy-Schwarz inequality gives |⟨v|w⟩| ≤∥v∥· ∥w∥(see also Appendix B).
+The outer product of v and w is the matrix vw∗.
+
+A.4
+Unitary matrices
+
+Below we will restrict attention to square matrices, unless explicitly mentioned otherwise.
+A matrix A is unitary if A−1 = A∗. The following conditions are equivalent:
+
+1. A is unitary
+
+2. A preserves inner product: ⟨Av|Aw⟩= ⟨v|w⟩for all v, w
+
+3. A preserves norm: ∥Av∥= ∥v∥for all v
+
+4. ∥Av∥= 1 if ∥v∥= 1
+
+(1) implies (2) because if A is unitary then A∗A = I, and hence ⟨Av|Aw⟩= (v∗A∗)Aw = ⟨v|w⟩. (2)
+implies (1) as follows: if A is not unitary then A∗A ̸= I, so then there is a w such that A∗Aw ̸= w
+and, hence, a v such that ⟨v|w⟩̸= ⟨v|A∗Aw⟩= ⟨Av|Aw⟩, contradicting (2). Clearly (2) implies (3).
+Moreover, (3) implies that A preserves the real part of the inner product via the following identity:
+
+∥v + w∥2 = ∥v∥2 + ∥w∥2 + ⟨v|w⟩+ ⟨w|v⟩= ∥v∥2 + ∥w∥2 + 2R(⟨v|w⟩).
+
+1Here we follow a physics convention by conjugating the entries of the first vector; mathematicians usually conju-
+gate the entries of the second vector, defining ⟨v|w⟩= �
+
+i viw∗
+i .
+
+194
+
+
+===== PDF PAGE 207 =====
+
+Similarly it preserves the imaginary part of the inner product, so (3) implies (2). The equivalence
+of (3) and (4) is obvious.
+Note that by (4), the eigenvalues of a unitary matrix have absolute value 1.
+
+A.5
+Diagonalization and singular values
+
+The complex number λ is an eigenvalue of (square) matrix A if there is some nonzero vector v
+(called an eigenvector) such that Av = λv. The set of such eigenvalues is called the spectrum of A.
+Matrices A and B are similar if there is an invertible matrix S such that A = SBS−1. Note
+that if Av = λv, then BS−1v = λS−1v, so similar matrices have the same eigenvalues. Schur’s
+triangularization theorem states that every matrix A is similar to an upper triangular matrix:
+A = UTU−1 for some unitary U and upper triangular T. Since similar matrices have the same
+eigenvalues and the eigenvalues of an upper triangular matrix are exactly its diagonal entries, the
+diagonal of T has the eigenvalues of A.
+A matrix D is diagonal if Dij = 0 whenever i ̸= j. Let S be some matrix satisfying AS = SD
+for some diagonal matrix D. Let vi be the i-th column of S and λi be the i-th entry on the diagonal
+of D, then
+
+
+
+
+
+
+...
+...
+Av1
+· · ·
+Avd
+...
+...
+
+
+
+
+
+
+
+�
+��
+�
+AS
+
+=
+
+
+
+
+
+
+
+...
+...
+λ1v1
+· · ·
+λdvd
+...
+...
+
+
+
+
+
+
+
+�
+��
+�
+SD
+
+,
+
+and we see that vi is an eigenvector of A associated with eigenvalue λi. Conversely, if v1, . . . , vd are
+eigenvectors of A with eigenvalues λ1, . . . , λd, then we have AS = SD, where S has the vi as columns
+and D is the diagonal matrix of λi. We call a square matrix A diagonalizable if it is similar to some
+diagonal matrix D: A = SDS−1. This D then has A’s eigenvalues λi on its diagonal, some of which
+may be zero. Note that A is diagonalizable iff it has a linearly independent set of d eigenvectors.
+These eigenvectors will form the columns of S, giving AS = SD, and linear independence ensures
+that S has an inverse, giving A = SDS−1. A matrix A is unitarily diagonalizable iff it can be
+diagonalized via a unitary matrix U: A = UDU−1. If the columns of U are the vectors ui, and the
+diagonal entries of D are λi, then we can also write A = �
+i λiuiu∗
+i ; this is sometimes called the
+spectral decomposition of A. By the same argument as before, A will be unitarily diagonalizable iff
+it has an orthonormal set of d eigenvectors.
+A matrix A is normal if it commutes with its conjugate transpose (A∗A = AA∗). For example,
+unitary matrices are normal. If A is normal and A = UTU−1 for some upper triangular T (which
+must exist because of Schur’s triangularization theorem), then T = U−1AU and T ∗= U−1A∗U, so
+TT ∗= U−1AA∗U = U−1A∗AU = T ∗T. Hence T is normal and upper triangular, which implies
+(with a little work) that T is diagonal. This shows that normal matrices are unitarily diagonalizable.
+Conversely, if A is unitarily diagonalizable as UDU−1, then AA∗= UDD∗U∗= UD∗DU−1 = A∗A,
+so then A is normal. Thus a matrix is normal iff it is unitarily diagonalizable. If A is not normal,
+it may still be diagonalizable via a non-unitary S, for example:
+�1
+1
+0
+2
+
+�
+
+�
+��
+�
+A
+
+=
+�1
+1
+0
+1
+
+�
+
+�
+��
+�
+S
+
+·
+�1
+0
+0
+2
+
+�
+
+�
+��
+�
+D
+
+·
+�1
+−1
+0
+1
+
+�
+
+�
+��
+�
+S−1
+
+.
+
+195
+
+
+===== PDF PAGE 208 =====
+
+If A = UDU−1 then A∗= UD∗U−1, so the eigenvalues of A∗are the complex conjugates of the
+eigenvalues of A.
+An important class of normal (and hence unitarily diagonalizable) matrices are the Hermitian
+matrices, which are the ones satisfying A = A∗. Note that the last line of the previous paragraph
+implies that the eigenvalues of Hermitian matrices are real.
+A Hermitian matrix A is called positive semidefinite (resp. positive definite), if all its eigenvalues
+are nonnegative (resp. positive). An equivalent definition is that A is positive semidefinite (psd) iff
+there exists a matrix C such that A = C∗C (in other words, there exist vectors ci such that for all
+i, j, we have Aij = ⟨ci|cj⟩). A useful and easy to prove property is that A is psd iff Tr(AB) ≥0 for
+all psd matrices B. By defining A ⪰B iff A−B is positive semidefinite, we obtain a partial ordering
+on the set of all Hermitian matrices. If all eigenvalues are 0 or 1, then A is called a projection (or
+projection matrix or projector). This is equivalent to requiring A2 = A.
+
+Not all matrices are diagonalizable, for instance A =
+�0
+1
+0
+0
+
+�
+is not. However, every matrix
+
+has a singular value decomposition (SVD), which is almost as useful as a diagonalization. We will
+derive this below for an arbitrary (not necessarily square) matrix A. Since A∗A is psd, we can write
+A∗A = V DV −1 for some unitary V whose columns vi are the orthonormal eigenvectors of A∗A,
+and some nonnegative diagonal matrix D with the corresponding eigenvalues. The entries σi of the
+matrix Σ =
+√
+
+D are called the singular values of A (some of which may be zero). Define vectors
+ui = Avi/σi. Note that the ui form an orthonormal system because u∗
+i uj = v∗
+i (A∗Avj)/σiσj =
+v∗
+i (σ2
+j vj)/σiσj, which is 1 if i = j and 0 if i ̸= j.
+Hence the matrix U that has these ui’s as
+columns is unitary. We have U = AV Σ−1, so we can write A = UΣV −1, which is the SVD of A.
+Equivalently, we can write A = �
+i σiuiv∗
+i . This derivation of the SVD A = UΣV −1 can easily be
+extended to arbitrary m × n matrices A; U will be an m × m unitary, Σ will be m × n (padded
+with 0s if the rank of A is < m, n), and V will be an n × n unitary.
+
+A.6
+Tensor products
+
+If A = (Aij) is an m×n matrix and B an m′×n′ matrix, then their tensor product (a.k.a. Kronecker
+product) is the mm′ × nn′ matrix
+
+A ⊗B =
+
+
+
+
+
+
+
+
+A11B
+· · ·
+A1nB
+A21B
+· · ·
+A2nB
+...
+Am1B
+· · ·
+AmnB
+
+
+
+
+
+
+.
+
+For example:
+
+�
+1
+√
+
+2
+1
+√
+
+2
+1
+√
+
+2
+−1
+√
+
+2
+
+�
+
+⊗
+�
+0
+1
+−1
+0
+
+�
+=
+
+
+
+
+
+
+
+
+0
+1
+√
+
+2
+0
+1
+√
+
+2
+−1
+√
+
+2
+0
+−1
+√
+
+2
+0
+0
+1
+√
+
+2
+0
+−1
+√
+
+2
+−1
+√
+
+2
+0
+1
+√
+
+2
+0
+
+
+
+
+
+
+.
+
+Note that the tensor product of two numbers (i.e., 1 × 1 matrices) is itself just a number, and the
+tensor product of two column vectors is itself a column vector.
+The following properties of the tensor product are easily verified:
+
+196
+
+
+===== PDF PAGE 209 =====
+
+• c(A ⊗B) = (cA) ⊗B = A ⊗(cB) for all scalars c
+
+• (A⊗B)∗= A∗⊗B∗, and similarly for inverse and transpose (note that the order of the tensor
+factors doesn’t change).
+
+• A ⊗(B + C) = (A ⊗B) + (A ⊗C)
+
+• A ⊗(B ⊗C) = (A ⊗B) ⊗C
+
+• (A ⊗B)(C ⊗D) = (AC) ⊗(BD)
+
+Different vector spaces can also be combined using tensor products. If V and V ′ are vector spaces of
+dimension d and d′ with basis {v1, . . . , vd} and {v′
+1, . . . , v′
+d′}, respectively, then their tensor product
+space is the d · d′-dimensional space W = V ⊗V ′ spanned by {vi ⊗v′
+j | 1 ≤i ≤d, 1 ≤j ≤d′}.
+Applying a linear operation A to V and B to V ′ corresponds to applying the tensor product A ⊗B
+to the tensor product space W.
+
+A.7
+Trace
+
+The trace of a square matrix A is the sum of its diagonal entries: Tr(A) = �
+i Aii. Some important
+and easily verified properties of Tr(A) are:
+
+• Tr(A + B) = Tr(A) + Tr(B)
+
+• Tr(AB) = Tr(BA), which is known as the “cyclic property” or “cyclicity” of the trace.
+For example, Tr(Avv∗) = v∗Av.
+
+• Tr(A) is the sum of the eigenvalues of A.2
+
+(This follows from Schur and the previous item: Tr(A) = Tr(UTU−1) = Tr(U−1UT) =
+Tr(T) = �
+i λi)
+
+• Tr(A ⊗B) = Tr(A)Tr(B)
+
+A.8
+Rank
+
+The rank of a matrix A (over a field F) is the size of a largest linearly independent set of rows
+of A (linear independence taken over F). Unless mentioned otherwise, we take F to be the field
+of complex numbers. We say that A has full rank if its rank equals its dimension. The following
+properties are all easy to show:
+
+• rank(A) = rank(A∗)
+
+• rank(A) equals the number of nonzero singular values of A (counting multiplicity)
+
+• rank(A + B) ≤rank(A) + rank(B)
+
+• rank(AB) ≤min{rank(A), rank(B)}
+
+• rank(A ⊗B) = rank(A) · rank(B)
+
+• A has an inverse iff A has full rank
+
+2The product of the eigenvalues is the determinant of A, but we will rarely use that in these notes.
+
+197
+
+
+===== PDF PAGE 210 =====
+
+A.9
+The Pauli matrices
+
+The four Pauli matrices are:
+
+I =
+�1
+0
+0
+1
+
+�
+, X =
+�0
+1
+1
+0
+
+�
+, Y =
+�0
+−i
+i
+0
+
+�
+, and Z =
+�1
+0
+0
+−1
+
+�
+.
+
+Note that each Pauli matrix P is both unitary and Hermitian, and hence self-inverse: P −1 = P.
+This implies that their eigenvalues are in {−1, 1}. Distinct non-identity Paulis anti-commute: if
+P, Q ∈{X, Y, Z} are distinct then PQ = −QP. Note that Y = iXZ. Also, products of two distinct
+Pauli matrices have trace 0.
+Define the Hilbert-Schmidt inner product on the space of d × d matrices as ⟨A, B⟩= 1
+
+dTr(A∗B).
+With respect to this inner product (for d = 2), the four Pauli matrices form an orthonormal set.
+This implies that every complex 2 × 2 matrix A can be written as a linear combination of the Pauli
+matrices:
+A = α0I + α1X + α2Y + α3Z,
+
+with complex coefficients αi. If A is Hermitian, then these coefficients will be real.
+We can also consider the n-qubit Paulis, which are n-fold tensor products of the above 2 × 2
+Paulis. For example X ⊗Z ⊗I ⊗Y ⊗Z is a 5-qubit Pauli. There are 4n n-qubit Paulis, since we
+have 4 possibilities for each of the n tensor factors, and these 4n matrices form an orthonormal set
+w.r.t. Hilbert-Schmidt inner product. Accordingly, every 2n ×2n matrix A can be written uniquely
+as a linear combination of the 4n n-qubit Paulis. Again, if A is Hermitian, then the 4n coefficients
+will be real.
+
+A.10
+Dirac notation
+
+Physicists often write their linear algebra in Dirac notation, and we will follow that custom for
+denoting quantum states. In this notation we write |v⟩= v and ⟨v| = v∗. The first is called a ket,
+the second a bra. Some points about this notation:
+
+• ⟨v|w⟩= ⟨v||w⟩: inner products are bra-ket (“bracket”) products.
+
+• If matrix A is unitarily diagonalizable, then A = �
+i λi|vi⟩⟨vi| for some orthonormal set of
+eigenvectors {vi}.
+
+• |v⟩⟨v| ⊗|w⟩⟨w| = (|v⟩⊗|w⟩)(⟨v| ⊗⟨w|), the latter is often abbreviated to |v⟩⊗|w⟩⟨v| ⊗⟨w|.
+Abbreviating the latter further by omitting the tensor product leads to dangerous ambiguity,
+though sometimes it’s still clear from context.
+
+• (U|v⟩)∗= ⟨v|U∗and (|u⟩⊗|v⟩)∗= ⟨u| ⊗⟨v| (the ordering of tensor factors doesn’t change).
+
+• Don’t write kets inside of other kets or bras: the notation ⟨u|(α|v⟩+ β|w⟩)⟩doesn’t really
+make sense.
+
+198
+

@@ -11,8 +11,8 @@ deps: [def-frobenius-matrix-norm, def-operator-norm-on-a-finite-dimensional-inne
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
   precheck: pass
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner-step4-published-alerts/unitary-invariance/repair-receipt.json
 sources:
   scraped: []
   references:
@@ -67,7 +67,7 @@ $A$, where $r=\operatorname{rank}A$; write $\sigma_1=0$ when $r=0$.
 
 1.3 Right invariance of the Frobenius norm. For unitary $Z\in M_n(\mathbb F)$, the $i$-th row of $AZ$ is $\operatorname{row}_i(A)Z$, and by [L4] applied to $Z^{*}$, $\lVert\operatorname{row}_i(A)Z\rVert_2=\lVert\operatorname{row}_i(A)\rVert_2$ for every $i<m$; summing over $i$ gives $\lVert AZ\rVert_F^{2}=\sum_{i<m}\lVert\operatorname{row}_i(A)\rVert_2^{2}=\lVert A\rVert_F^{2}$. [L4, algebra]
 
-1.4 Singular values of $UAV$. If $A=U_0\Sigma V_0^{*}$ is the decomposition of [L1], then $UAV=(UU_0)\Sigma(V^{*}V_0)=(UU_0)\Sigma(V_0^{*}V)^{*}$, and by [L5] the factors $UU_0$ and $V_0^{*}V$ are unitary, so this is a singular value decomposition of $UAV$ with the same singular values as $A$. [L1, L5, algebra]
+1.4 Singular values of $UAV$. If $A=U_0\Sigma V_0^{*}$ is the decomposition of [L1], then $UAV=(UU_0)\Sigma(V_0^{*}V)=(UU_0)\Sigma(V^{*}V_0)^{*}$, and by [L5] the factors $UU_0$ and $V^{*}V_0$ are unitary, so this is a singular value decomposition of $UAV$ with the same singular values as $A$. [L1, L5, algebra]
 
 2.1 From [L1], $A=U\Sigma V^{*}$, so steps 1.2 and 1.3 give $\lVert A\rVert_F^{2}=\lVert U\Sigma V^{*}\rVert_F^{2}=\lVert\Sigma\rVert_F^{2}$, and the diagonal entries of $\Sigma$ are $\sigma_1,\dots,\sigma_r$ followed by zeros, so $\lVert\Sigma\rVert_F^{2}=\sigma_1^{2}+\cdots+\sigma_r^{2}$ by the entry formula of [[def-frobenius-matrix-norm]]. This is claim 2. [L1, step 1.2, step 1.3, algebra]
 

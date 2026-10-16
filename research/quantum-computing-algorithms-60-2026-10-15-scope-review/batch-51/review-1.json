@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "51",
+  "round": 1,
+  "reviewed_items": [
+    "lem-qa-27-even-sign-window",
+    "def-qa-27-variable-time-model",
+    "def-qa-27-block-encoded-qlsp",
+    "lem-qa-27-lcu-projected-block-identity",
+    "lem-qa-27-supported-pseudoinverse-target",
+    "alg-qa-27-qsvt-pseudoinverse",
+    "def-qa-27-cks-sparse-oracle-model",
+    "thm-qa-27-pseudoinverse-polynomial-degree",
+    "lem-qa-coherent-amplitude-grid-rounding",
+    "alg-qa-relative-probability-estimation",
+    "thm-qa-relative-probability-guarantee",
+    "alg-qa-27-capped-lower-bound-amplification",
+    "lem-qa-27-capped-lower-bound-amplification",
+    "lem-qa-27-low-target-amplification",
+    "thm-qa-27-vtaa-amplification",
+    "thm-qa-27-qsvt-inverse-state-cost",
+    "alg-qa-27-cks-variable-time-linear-solver",
+    "lem-qa-27-cks-stopping-time-instantiation",
+    "thm-qa-27-cks-linear-condition-guarantee",
+    "ex-qa-27-sparse-diagonal-qlsp",
+    "ex-qa-27-fixed-vs-variable-time-cost"
+  ],
+  "reviewed_pages": [
+    "block-encoding-linear-systems-and-variable-time-amplification",
+    "block-encoding-linear-systems-and-variable-time-amplification-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The prior QSVT phase, CKS work-state, simulator-error, and gate-scope findings are substantively addressed. The retained Fourier-table branch still does not establish the LCU normalization for its rounded coefficient table; this is the second review, so owner reconciliation is required.",
+  "findings": [
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "type": "prerequisite",
+      "reason": "In `fourier-table` mode, αφ is defined from the unrounded c_jk, but PREPARE/SELECT use rounded coefficients c̃_jk. The LCU supplier requires normalization matching the 1-norm of the coefficients actually supplied, including cancellation padding; the algorithm neither certifies Σ|c̃_jk|≤αφ nor recomputes αφ after rounding. Also, k=0 gives c_jk=0, while the supplier's coefficient-phase rule requires nonzero coefficients and the algorithm does not omit or handle zero terms. Specify the nonzero rounded list, its certified 1-norm bound and padding before claiming this normalized LCU block."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "decision": "escalate",
+      "reason": "The efficient-qsvt path addresses the prior findings; the fourier-table LCU normalization prerequisite remains unresolved."
+    },
+    {
+      "id": "ex-qa-27-fixed-vs-variable-time-cost",
+      "decision": "accept",
+      "reason": "It conditions the fixed-time comparison on a successful phase-product check and makes no universal speedup claim."
+    },
+    {
+      "id": "lem-qa-27-cks-stopping-time-instantiation",
+      "decision": "accept",
+      "reason": "Its guarantees are expressly for efficient-qsvt mode; the clean-work condition, good-or-unfinished projector, and aggregate value/simulator error proof are explicit."
+    },
+    {
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "decision": "accept",
+      "reason": "Its query and gate claims are restricted to efficient-qsvt mode with explicit access, implementation, and error-budget conditions."
+    },
+    {
+      "id": "thm-qa-27-pseudoinverse-polynomial-degree",
+      "decision": "accept",
+      "reason": "Its proof links the peeling output to the completed pair and establishes the returned-phase product check."
+    },
+    {
+      "id": "thm-qa-27-qsvt-inverse-state-cost",
+      "decision": "accept",
+      "reason": "It explicitly requires the successful phase-product check and includes that verified sequence in its error argument."
+    },
+    {
+      "id": "block-encoding-linear-systems-and-variable-time-amplification",
+      "decision": "escalate",
+      "reason": "Its Fourier-table summary claims normalized PREPARE amplitudes and local/common cancelling padding without the rounded-table 1-norm prerequisite established."
+    },
+    {
+      "id": "block-encoding-linear-systems-and-variable-time-amplification-examples",
+      "decision": "accept",
+      "reason": "Its examples' arithmetic and fixed-time assumptions are unaffected by the Fourier-table branch."
+    }
+  ]
+}

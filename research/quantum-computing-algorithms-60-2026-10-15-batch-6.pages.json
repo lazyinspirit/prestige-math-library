@@ -1,0 +1,1273 @@
+[
+  {
+    "order": 2176,
+    "id": "trace-distance-fidelity-and-information-limits",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Trace Distance, Fidelity, and Information Limits",
+    "companion": "trace-distance-fidelity-and-information-limits-examples",
+    "requires": [
+      "channels-kraus-choi-and-stinespring-representations",
+      "compactness-in-metric-spaces",
+      "diagonalisation-and-the-minimal-polynomial",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "haar-measure-existence-and-uniqueness",
+      "hilbert-space-geometry-and-riesz-representation",
+      "linear-independence-bases-and-dimension",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "measurements-povms-and-instruments",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "registers-tensor-products-and-partial-trace",
+      "relations-functions-and-quotients",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "uniform-spaces"
+    ],
+    "items": [
+      {
+        "id": "thm-qc-unitary-group-compact",
+        "kind": "theorem",
+        "title": "Unitary Group Compact",
+        "statement": "For every positive integer $d$, the unitary group\n$$U(d):=\\{U\\in M_d(\\mathbb C):U^*U=I_d\\}$$\nis a compact Hausdorff topological group in the Euclidean topology inherited from the real and imaginary parts of its matrix entries.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "thm-heine-borel-rn",
+          "thm-compactness-agrees-with-metric-compactness",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "thm-finite-dimensional-isometry-characterisations",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-multiplication-laws",
+          "def-topological-group",
+          "def-group",
+          "def-compact-space",
+          "def-hausdorff-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§7.2, PDF pp.408–434; finite-dimensional unitary-group context; compactness is proved locally."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-diamond-norm",
+        "kind": "definition",
+        "title": "Diamond Norm",
+        "statement": "Let $H,K$ be nonzero finite-dimensional complex Hilbert spaces and let $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. For each finite $r\\ge1$, the induced trace norm of the amplification is\n$$\\|\\Phi\\otimes\\operatorname{id}_{\\mathbb C^r}\\|_{1\\to1}:=\\sup_{X\\ne0}\\frac{\\| (\\Phi\\otimes\\operatorname{id}_{\\mathbb C^r})(X)\\|_1}{\\|X\\|_1},$$\nwhere $X\\in\\mathcal L(H\\otimes\\mathbb C^r)$ and $\\|\\cdot\\|_1$ is the finite-dimensional trace norm ([[def-qc-trace-norm]]). The **diamond norm** (the completely bounded trace norm) is\n$$\\|\\Phi\\|_\\diamond:=\\sup_{r\\ge1}\\|\\Phi\\otimes\\operatorname{id}_{\\mathbb C^r}\\|_{1\\to1}.$$\nThere is no factor $1/2$ in this map norm. The finite-dimensional ancilla theorem [[thm-qc-diamond-norm-ancilla-dimension-bound]] proves the supremum is finite, is attained, and can be capped at $r=\\dim H$.",
+        "deps": [
+          "def-qc-trace-norm"
+        ],
+        "justified_by": [
+          "thm-qc-diamond-norm-ancilla-dimension-bound"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.3.2–3.3.4, PDF pp.174–204; Def.3.43, Prop.3.44, Thm.3.46, Prop.3.48, Thm.3.49"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qc-fidelity",
+        "kind": "definition",
+        "title": "Fidelity",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **root fidelity** is\n$$F(\\rho,\\sigma):=\\|\\sqrt\\rho\\,\\sqrt\\sigma\\|_1,$$\nwhere $\\sqrt\\rho$ and $\\sqrt\\sigma$ are the unique non-negative square roots and $\\|\\cdot\\|_1$ is the finite-dimensional trace norm ([[def-qc-trace-norm]]). This library uses root fidelity; the squared quantity $F(\\rho,\\sigma)^2$ is called squared fidelity.",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-qc-trace-norm",
+          "def-qc-density-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.2.1–3.2.3, PDF pp.147–171"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.1–2, PDF pp.36–40; complete cross-read qc_r2 ledger, summary/corroboration only"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qc-trace-distance",
+        "kind": "definition",
+        "title": "Trace Distance",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **trace distance** is\n$$D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1,$$\nwhere $\\|\\cdot\\|_1$ is the trace norm ([[def-qc-trace-norm]]). The factor $1/2$ is part of this state-distance convention. The diamond norm below is an unhalved norm on maps.",
+        "deps": [
+          "def-qc-trace-norm",
+          "def-qc-density-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.1.1–3.1.2, PDF pp.133–146"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.2, PDF pp.39–41; raw trace norm and optimal-measurement discussion"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-faithful-state-dominates-positive-operator",
+        "kind": "lemma",
+        "title": "Faithful State Dominates Positive Operator",
+        "statement": "Let $H$ be finite-dimensional, let $\\sigma$ be a density operator that is positive definite on $H$, and let $X$ be a non-negative endomorphism of $H$. Then there is a finite real $c\\ge0$ such that $X\\le c\\sigma$.",
+        "deps": [
+          "def-qc-density-operator",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§2.1.2–2.1.3, PDF pp.69–83; positive-operator and support conventions. The finite domination/support arguments are proved locally."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-symmetric-subspace-projector",
+        "kind": "definition",
+        "title": "Symmetric Subspace Projector",
+        "statement": "Let $H$ be a finite-dimensional complex Hilbert space, let $k\\ge1$, and let $H^{\\otimes k}$ use the ordered tensor product register and factor permutation convention of [[def-qc-tensor-register-and-permutation]]. For $\\pi\\in S_k$, let $U_\\pi$ be the resulting unitary that permutes the $k$ tensor factors according to $\\pi$. Define\n$$\\Pi_{\\mathrm{sym},k}:=\\frac1{k!}\\sum_{\\pi\\in S_k}U_\\pi.$$\nThe **symmetric subspace** is $\\operatorname{Sym}^k(H):=\\{v\\in H^{\\otimes k}:U_\\tau v=v\\text{ for every }\\tau\\in S_k\\}$. For $k=0$, the tensor unit is one-dimensional and $\\Pi_{\\mathrm{sym},0}:=I$.\n\nThe permutation average is the orthogonal projector onto $\\operatorname{Sym}^k(H)$ by [[lem-qc-symmetric-subspace-average-is-projector]].",
+        "deps": [
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [
+          "lem-qc-symmetric-subspace-average-is-projector"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§7.1.1 Proposition 7.1, PDF pp.392–393"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-fidelity-root-formula-equivalence",
+        "kind": "lemma",
+        "title": "The two root-fidelity trace expressions agree",
+        "statement": "For density operators $\\rho,\\sigma$ on a finite-dimensional complex Hilbert space,\n$$\\|\\sqrt\\rho\\,\\sqrt\\sigma\\|_1=\\operatorname{tr}\\sqrt{\\sqrt\\rho\\,\\sigma\\,\\sqrt\\rho}.$$",
+        "deps": [
+          "def-qc-fidelity",
+          "def-qc-trace-norm",
+          "thm-singular-value-decomposition",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.2.1–3.2.3, PDF pp.147–171"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-trace-norm-tensor-product",
+        "kind": "lemma",
+        "title": "Trace norm of a tensor product",
+        "statement": "For finite-dimensional complex-inner-product spaces $H_1,K_1,H_2,K_2$ and linear maps $A:H_1\\to K_1$, $B:H_2\\to K_2$,\n$$\\|A\\otimes B\\|_1=\\|A\\|_1\\,\\|B\\|_1.$$\nThe equality includes zero maps and zero-dimensional factors.",
+        "deps": [
+          "def-qc-trace-norm",
+          "thm-singular-value-decomposition",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§1.1.3, trace norm and singular-value decomposition; the tensor-product formula is proved locally."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-positive-marginals-imply-joint-support",
+        "kind": "lemma",
+        "title": "Positive Marginals Imply Joint Support",
+        "statement": "Let $H$ be finite-dimensional, let $Y\\ge0$ act on $H\\otimes H$, and let $S\\subseteq H$ be a subspace. If both partial-trace marginals of $Y$ are supported on $S$, then $\\operatorname{supp}Y\\subseteq S\\otimes S$; equivalently, $Y=(P_S\\otimes P_S)Y(P_S\\otimes P_S)$, where $P_S$ is the orthogonal projection onto $S$.",
+        "deps": [
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-orthogonal-projection",
+          "prop-orthogonal-projection-formula-and-linearity",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§2.1.2–2.1.3, PDF pp.69–83; positive-operator and support conventions. The finite domination/support arguments are proved locally."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-pure-state-trace-distance",
+        "kind": "lemma",
+        "title": "Pure state trace distance",
+        "statement": "For unit vectors $u,v$ in a finite-dimensional complex Hilbert space, let $P_u=|u\\rangle\\langle u|$ and $P_v=|v\\rangle\\langle v|$. Then\n$$D(P_u,P_v)=\\sqrt{1-|\\langle u|v\\rangle_D|^2},$$\nwhere $\\langle\\cdot|\\cdot\\rangle_D$ is the Dirac pairing converted from the root library's first-argument-linear inner product.",
+        "deps": [
+          "def-qc-trace-distance",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-hermitian-trace-norm-positive-negative-parts",
+          "def-real-and-complex-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapters 1–3; finite-dimensional adaptation specified in this contract"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.2, PDF pp.39–41; pure-state trace-norm calculation (2.155)–(2.158)"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-symmetric-subspace-average-is-projector",
+        "kind": "lemma",
+        "title": "The permutation average is the symmetric-subspace projector",
+        "statement": "Let $H$ be finite-dimensional and let $k\\ge1$. The average $\\Pi_{\\mathrm{sym},k}=\\frac1{k!}\\sum_{\\pi\\in S_k}U_\\pi$ is self-adjoint and idempotent, with range exactly $\\operatorname{Sym}^k(H)=\\{v:U_\\tau v=v\\ \\forall\\tau\\in S_k\\}$. For $k=0$ on the tensor unit, $\\Pi_{\\mathrm{sym},0}=I$ and its range is the full tensor unit.",
+        "deps": [
+          "def-qc-symmetric-subspace-projector",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§7.1.1 Proposition 7.1 and §7.2, PDF pp.392–401, 423–434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-diamond-norm-ancilla-dimension-bound",
+        "kind": "theorem",
+        "title": "Diamond Norm Ancilla Dimension Bound",
+        "statement": "Let $H,K$ be nonzero finite-dimensional complex Hilbert spaces, $d=\\dim H$, and let $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be linear. Then\n$$\\|\\Phi\\|_\\diamond=\\|\\Phi\\otimes\\operatorname{id}_{\\mathbb C^d}\\|_{1\\to1},$$\nand the latter induced norm is attained on some rank-one operator $R_{x,y}:z\\mapsto\\langle z,y\\rangle_{\\rm root}x$ with unit vectors $x,y\\in H\\otimes\\mathbb C^d$.",
+        "deps": [
+          "def-qc-diamond-norm",
+          "thm-singular-value-decomposition",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-an-endomorphism",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "lem-qc-tensor-products-of-operator-matrix-units-form-a-basis",
+          "thm-heine-borel-rn",
+          "thm-qc-schmidt-decomposition",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-qc-trace-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.3.2–3.3.4, PDF pp.174–204; Def.3.43, Prop.3.44, Thm.3.46, Prop.3.48, Thm.3.49"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-helstrom-binary-discrimination",
+        "kind": "theorem",
+        "title": "Helstrom Binary Discrimination",
+        "statement": "Let $\\rho,\\sigma$ be density operators on a finite-dimensional complex Hilbert space. If they are presented with equal prior probability, the greatest success probability of any binary measurement for identifying the state is\n$$\\frac12(1+D(\\rho,\\sigma)).$$\nThe binary projective measurement whose first effect is the spectral projection of $\\Delta=\\rho-\\sigma$ onto its strictly positive eigenspaces attains this value.",
+        "deps": [
+          "def-qc-trace-distance",
+          "def-qc-povm-and-outcome-law",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-hermitian-trace-norm-positive-negative-parts",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.1.1–3.1.2, PDF pp.133–146"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.2, PDF pp.39–41; raw trace norm and optimal-measurement discussion"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-trace-distance-range-and-equality",
+        "kind": "theorem",
+        "title": "Trace Distance Range And Equality",
+        "statement": "For finite-dimensional density operators $\\rho,\\sigma$,\n$$0\\le D(\\rho,\\sigma)\\le1.$$\nMoreover, $D(\\rho,\\sigma)=0$ iff $\\rho=\\sigma$, and $D(\\rho,\\sigma)=1$ iff their supports are orthogonal.",
+        "deps": [
+          "def-qc-trace-distance",
+          "def-qc-density-operator",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-hermitian-trace-norm-positive-negative-parts",
+          "thm-singular-value-decomposition",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.1.1–3.1.2, PDF pp.133–146"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.2, PDF pp.39–41; raw trace norm and optimal-measurement discussion"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-symmetric-power-irreducible",
+        "kind": "lemma",
+        "title": "Symmetric Power Irreducible",
+        "statement": "For every positive integer $d$ and integer $k\\ge0$, the natural unitary action of $U(d)$ on $\\operatorname{Sym}^k(\\mathbb C^d)$ is irreducible.",
+        "deps": [
+          "def-qc-symmetric-subspace-projector",
+          "thm-qc-unitary-group-compact",
+          "lem-qc-symmetric-subspace-average-is-projector",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§7.2 proof of Theorem 7.28, PDF pp.423–434; local weight-space proof supplied here."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-measurement-variation-at-most-trace-distance",
+        "kind": "theorem",
+        "title": "Measurement Variation At Most Trace Distance",
+        "statement": "Let $\\rho,\\sigma$ be density operators on a finite-dimensional complex Hilbert space and let $\\{E_a\\}_{a\\in\\mathcal A}$ be any finite POVM. If $p_a=\\operatorname{tr}(\\rho E_a)$ and $q_a=\\operatorname{tr}(\\sigma E_a)$, then\n$$\\frac12\\sum_{a\\in\\mathcal A}|p_a-q_a|\\le D(\\rho,\\sigma).$$\nThe two-effect projective measurement from the Holevo–Helstrom theorem attains equality.",
+        "deps": [
+          "def-qc-trace-distance",
+          "def-qc-povm-and-outcome-law",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-hermitian-trace-norm-positive-negative-parts",
+          "thm-qc-helstrom-binary-discrimination",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.1.1–3.1.2, PDF pp.133–146"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.2, PDF pp.39–41; raw trace norm and optimal-measurement discussion"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-broadcasting-family",
+        "kind": "definition",
+        "title": "Broadcasting Family",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, let $\\mathcal D(H)$ be its density operators (nonnegative operators of trace one; [[def-qc-density-operator]]), and let $S\\subseteq\\mathcal D(H)$ be any set, finite or infinite. A **broadcaster** for $S$ is one quantum channel $B:\\mathcal L(H)\\to\\mathcal L(H\\otimes H)$ (completely positive and trace-preserving; [[def-qc-quantum-channel]]) such that for every $\\rho\\in S$,\n$$\\operatorname{Tr}_1(B(\\rho))=\\rho\\quad\\text{and}\\quad\\operatorname{Tr}_2(B(\\rho))=\\rho.$$\nHere $\\operatorname{Tr}_1$ and $\\operatorname{Tr}_2$ are the partial traces over the indicated output factors ([[def-qc-partial-trace]]). The joint output may be correlated; this definition does not require $B(\\rho)=\\rho\\otimes\\rho$.",
+        "deps": [
+          "def-qc-quantum-channel",
+          "def-qc-partial-trace",
+          "def-qc-density-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Howard Barnum, Carlton M. Caves, Christopher A. Fuchs, Richard Jozsa, and Benjamin Schumacher, Noncommuting Mixed States Cannot Be Broadcast",
+              "url": "https://arxiv.org/pdf/quant-ph/9511010",
+              "locator": "Complete paper, PDF pp.2–10; pair statement/construction p.3, fidelity and invertible-state proof Eqs.(4)–(31), pp.4–10"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-fidelity-purification-characterization",
+        "kind": "theorem",
+        "title": "Fidelity Purification Characterization",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma\\in\\mathcal D(H)$. For every auxiliary space $R$ with $\\dim R\\ge\\dim H$, a **purification** of $\\rho$ on $H\\otimes R$ means a unit vector $x$ with $\\operatorname{Tr}_R(|x\\rangle\\langle x|)=\\rho$. Then\n$$F(\\rho,\\sigma)=\\max\\{|\\langle x,y\\rangle|:x,y\\in H\\otimes R,\\ \\|x\\|=\\|y\\|=1,\\ \\operatorname{Tr}_R|x\\rangle\\langle x|=\\rho,\\ \\operatorname{Tr}_R|y\\rangle\\langle y|=\\sigma\\}.$$\nIn particular, the maximum is attained with $R\\cong H$.",
+        "deps": [
+          "def-qc-fidelity",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-qc-tensor-register-and-permutation",
+          "def-dimension",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-singular-value-decomposition",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-polar-decomposition",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.2.1–3.2.3, PDF pp.147–171"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.1–2, PDF pp.36–40; complete cross-read qc_r2 ledger, summary/corroboration only"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-symmetric-subspace-dimension-and-haar-moment",
+        "kind": "theorem",
+        "title": "Symmetric Subspace Dimension And Haar Moment",
+        "statement": "Assume the axiom-of-choice branch used by [[cor-normalized-haar-probability-on-a-compact-group]]. For integers $d\\ge1$ and $k\\ge0$, put $N_k=\\binom{k+d-1}{d-1}$. Then $\\dim\\operatorname{Sym}^k(\\mathbb C^d)=N_k$, and if $\\mu$ is the probability measure on the unit sphere obtained by pushing normalized Haar probability on $U(d)$ through $U\\mapsto Ue_1$, then\n$$\\int |u\\rangle\\langle u|^{\\otimes k}\\,d\\mu(u)=\\frac{1}{N_k}\\Pi_{\\mathrm{sym},k}.$$\nFor $k=0$, the tensor power and projector are the identity on the one-dimensional tensor unit.",
+        "deps": [
+          "def-qc-symmetric-subspace-projector",
+          "lem-qc-symmetric-power-irreducible",
+          "thm-qc-unitary-group-compact",
+          "cor-normalized-haar-probability-on-a-compact-group",
+          "def-axiom-of-choice",
+          "lem-qc-symmetric-subspace-average-is-projector",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "def-trace-of-an-endomorphism",
+          "thm-qc-ray-projector-well-defined-and-bijective"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§§7.1.1–7.2, PDF pp.392–434; symmetric-subspace dimension and Haar/spherical-moment route."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-trace-distance-channel-contractivity",
+        "kind": "theorem",
+        "title": "Trace Distance Channel Contractivity",
+        "statement": "For every finite-dimensional quantum channel $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ and every pair of density operators $\\rho,\\sigma$ on $H$,\n$$D(\\Phi(\\rho),\\Phi(\\sigma))\\le D(\\rho,\\sigma).$$",
+        "deps": [
+          "def-qc-trace-distance",
+          "def-qc-quantum-channel",
+          "thm-qc-measurement-variation-at-most-trace-distance",
+          "thm-qc-helstrom-binary-discrimination",
+          "thm-qc-kraus-choi-equivalence",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "thm-non-negative-operator-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.1.1–3.1.2, PDF pp.133–146"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-fidelity-classical-measurement-minimum",
+        "kind": "lemma",
+        "title": "Fidelity classical measurement minimum",
+        "statement": "For states $\\rho,\\sigma$ on a nonzero finite-dimensional complex Hilbert space $H$, let a finite POVM be a finite family $(E_a)_{a=1}^n$ of nonnegative operators summing to $I_H$. Then\n$$F(\\rho,\\sigma)=\\min_{(E_a)}\\sum_{a=1}^n\\sqrt{\\operatorname{tr}(\\rho E_a)\\operatorname{tr}(\\sigma E_a)}.$$\nThe minimum is attained by a projective measurement with $d=\\dim H$ rank-one outcomes.",
+        "deps": [
+          "def-qc-fidelity",
+          "def-qc-trace-norm",
+          "def-qc-povm-and-outcome-law",
+          "thm-qc-fidelity-purification-characterization",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-non-negative-operator-characterisations",
+          "thm-singular-value-decomposition",
+          "def-qc-density-operator",
+          "lem-qc-fidelity-root-formula-equivalence",
+          "thm-qc-unitary-group-compact",
+          "thm-heine-borel-rn",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-trace-of-an-endomorphism",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-matrix-product-and-identity-matrix",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 3 fidelity: measurement characterization and Fuchs–van de Graaf inequalities"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-optimal-cloner-attains-bound",
+        "kind": "lemma",
+        "title": "Optimal Cloner Attains Bound",
+        "statement": "Assume the choice branch in [[thm-qc-symmetric-subspace-dimension-and-haar-moment]]. Let $d\\ge1$ and $1\\le n\\le m$. Write $N_r=\\binom{r+d-1}{d-1}$ and let $\\Pi_{\\rm sym,r}$ project onto $\\operatorname{Sym}^r(\\mathbb C^d)$. For any fixed output density operator $\\omega$ on $(\\mathbb C^d)^{\\otimes m}$, the map\n$$\\Phi(X)=\\frac{N_n}{N_m}\\Pi_{\\rm sym,m}(X\\otimes I^{\\otimes(m-n)})\\Pi_{\\rm sym,m}+\\operatorname{tr}((I-\\Pi_{\\rm sym,n})X)\\,\\omega$$\nis a channel and satisfies $\\operatorname{tr}(\\Phi(|u\\rangle\\langle u|^{\\otimes n})|u\\rangle\\langle u|^{\\otimes m})=N_n/N_m$ for every unit $u\\in\\mathbb C^d$.",
+        "deps": [
+          "def-qc-symmetric-subspace-projector",
+          "thm-qc-symmetric-subspace-dimension-and-haar-moment",
+          "thm-qc-kraus-map-completely-positive",
+          "def-qc-quantum-channel",
+          "def-qc-density-operator",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-axiom-of-choice",
+          "lem-qc-symmetric-subspace-average-is-projector",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Eq.(7.231)–(7.233), PDF p.434"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-optimal-cloning-worst-case-upper-bound",
+        "kind": "lemma",
+        "title": "Optimal Cloning Worst Case Upper Bound",
+        "statement": "Assume the choice branch in [[thm-qc-symmetric-subspace-dimension-and-haar-moment]]. Let $d\\ge1$ and $1\\le n\\le m$. Every channel $\\Phi:\\mathcal L((\\mathbb C^d)^{\\otimes n})\\to\\mathcal L((\\mathbb C^d)^{\\otimes m})$ has\n$$\\inf_{\\|u\\|=1}F\\!\\left(\\Phi(|u\\rangle\\langle u|^{\\otimes n}),|u\\rangle\\langle u|^{\\otimes m}\\right)^2\\le\\frac{N_n}{N_m},\\qquad N_r=\\binom{r+d-1}{d-1}.$$",
+        "deps": [
+          "def-qc-symmetric-subspace-projector",
+          "thm-qc-symmetric-subspace-dimension-and-haar-moment",
+          "def-qc-quantum-channel",
+          "def-qc-fidelity",
+          "def-axiom-of-choice",
+          "lem-qc-symmetric-subspace-average-is-projector",
+          "thm-singular-value-decomposition",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "thm-qc-kraus-choi-equivalence",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Thm.7.28 proof, PDF pp.433–434"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-channel-diamond-norm-one",
+        "kind": "theorem",
+        "title": "Channel Diamond Norm One",
+        "statement": "Every quantum channel $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ between nonzero finite-dimensional complex Hilbert spaces has $\\|\\Phi\\|_\\diamond=1$.",
+        "deps": [
+          "def-qc-diamond-norm",
+          "def-qc-quantum-channel",
+          "thm-qc-diamond-norm-ancilla-dimension-bound",
+          "thm-qc-kraus-choi-equivalence",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "thm-qc-kraus-map-completely-positive",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "def-qc-trace-norm",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "lem-qc-tensor-products-of-operator-matrix-units-form-a-basis",
+          "thm-non-negative-operator-characterisations",
+          "thm-singular-value-decomposition",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-qc-density-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.3.2–3.3.4, PDF pp.174–204; Def.3.43, Prop.3.44, Thm.3.46, Prop.3.48, Thm.3.49"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-fidelity-range-equality-and-products",
+        "kind": "theorem",
+        "title": "Fidelity range equality and products",
+        "statement": "For finite-dimensional density operators $\\rho,\\sigma$,\n$$0\\le F(\\rho,\\sigma)\\le1,\\qquad F(\\rho,\\sigma)=1\\iff\\rho=\\sigma,\\qquad F(\\rho,\\sigma)=0\\iff\\operatorname{supp}\\rho\\perp\\operatorname{supp}\\sigma.$$\nFor density operators $\\rho,\\sigma$ on $H$ and $\\tau,\\omega$ on $K$,\n$$F(\\rho\\otimes\\tau,\\sigma\\otimes\\omega)=F(\\rho,\\sigma)F(\\tau,\\omega).$$",
+        "deps": [
+          "def-qc-fidelity",
+          "thm-qc-fidelity-purification-characterization",
+          "thm-singular-value-decomposition",
+          "def-qc-density-operator",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "lem-qc-trace-norm-tensor-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapters 1–3; finite-dimensional adaptation specified in this contract"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-channel-composition-hybrid-bound",
+        "kind": "theorem",
+        "title": "Channel Composition Hybrid Bound",
+        "statement": "Let $H_0,H_1,H_2$ be nonzero finite-dimensional complex Hilbert spaces, and let $\\Phi_0,\\Psi_0:\\mathcal L(H_0)\\to\\mathcal L(H_1)$ and $\\Phi_1,\\Psi_1:\\mathcal L(H_1)\\to\\mathcal L(H_2)$ be finite-dimensional channels. Then\n$$\\|\\Psi_1\\circ\\Psi_0-\\Phi_1\\circ\\Phi_0\\|_\\diamond\\le\\|\\Psi_0-\\Phi_0\\|_\\diamond+\\|\\Psi_1-\\Phi_1\\|_\\diamond.$$",
+        "deps": [
+          "def-qc-diamond-norm",
+          "def-qc-quantum-channel",
+          "thm-qc-channel-diamond-norm-one",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-qc-diamond-norm-ancilla-dimension-bound",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "lem-qc-tensor-products-of-operator-matrix-units-form-a-basis"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.3.2–3.3.4, PDF pp.174–204; Def.3.43, Prop.3.44, Thm.3.46, Prop.3.48, Thm.3.49"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-fidelity-data-processing-and-equality",
+        "kind": "theorem",
+        "title": "Fidelity Data Processing",
+        "statement": "For every finite-dimensional channel $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ and states $\\rho,\\sigma\\in\\mathcal D(H)$,\n$$F(\\rho,\\sigma)\\le F(\\Phi(\\rho),\\Phi(\\sigma)).$$\nNo general equality characterization is asserted.",
+        "deps": [
+          "def-qc-fidelity",
+          "def-qc-quantum-channel",
+          "thm-qc-fidelity-purification-characterization",
+          "thm-qc-finite-stinespring-dilation",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.2.1–3.2.3, PDF pp.147–171"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-fuchs-van-de-graaf",
+        "kind": "theorem",
+        "title": "Fuchs Van De Graaf",
+        "statement": "For density operators $\\rho,\\sigma$ on a nonzero finite-dimensional complex Hilbert space,\n$$1-F(\\rho,\\sigma)\\le D(\\rho,\\sigma)\\le\\sqrt{1-F(\\rho,\\sigma)^2},$$\nwhere $F$ is root fidelity and $D(\\rho,\\sigma)=\\tfrac12\\|\\rho-\\sigma\\|_1$.",
+        "deps": [
+          "def-qc-trace-distance",
+          "def-qc-fidelity",
+          "lem-qc-fidelity-classical-measurement-minimum",
+          "lem-qc-pure-state-trace-distance",
+          "thm-qc-fidelity-purification-characterization",
+          "thm-qc-trace-distance-channel-contractivity",
+          "thm-qc-isometry-partial-trace-is-channel",
+          "def-qc-partial-trace",
+          "thm-qc-measurement-variation-at-most-trace-distance"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.2.1–3.2.3, PDF pp.147–171"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.6.1–2, PDF pp.36–40; complete cross-read qc_r2 ledger, summary/corroboration only"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-optimal-universal-pure-state-cloning-bound",
+        "kind": "theorem",
+        "title": "Optimal Universal Pure State Cloning Bound",
+        "statement": "Assume the choice branch used by the normalized Haar moment theorem. For $d\\ge1$ and $1\\le n\\le m$, the largest possible worst-case squared root fidelity of a channel from $n$ identical $d$-dimensional input registers to $m$ output registers is\n$$\\frac{N_n}{N_m},\\qquad N_r=\\binom{r+d-1}{d-1}.$$\nFor $n=1,m=2$ this value is $2/(d+1)$.",
+        "deps": [
+          "lem-qc-optimal-cloning-worst-case-upper-bound",
+          "lem-qc-optimal-cloner-attains-bound",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Thm.7.28 and proof, PDF pp.432–434"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-pure-state-no-cloning",
+        "kind": "theorem",
+        "title": "Pure State No Cloning",
+        "statement": "Let $S$ be a set of pure-state rays in a nonzero finite-dimensional Hilbert space $H$. If one channel maps every pure-state projector $P_\\psi$ with ray $\\psi\\in S$ to $P_\\psi\\otimes P_\\psi$, then every pair of rays in $S$ is identical or orthogonal. Consequently no channel exactly clones all pure states when $\\dim H\\ge2$; when $\\dim H=1$, the unique ray is cloned by the one-dimensional isometry.",
+        "deps": [
+          "def-qc-quantum-channel",
+          "def-qc-partial-trace",
+          "thm-qc-finite-stinespring-dilation",
+          "thm-qc-isometry-partial-trace-is-channel",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "thm-qc-schmidt-decomposition",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Thm.7.28 and proof, §7.2, PDF pp.432–434"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Ch.1 Exercise 12, PDF pp.23–24; Appendix C hint 12, PDF p.203, pure-state no-cloning context only"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-channel-tensor-error-bound",
+        "kind": "theorem",
+        "title": "Channel Tensor Error Bound",
+        "statement": "For nonzero finite-dimensional complex Hilbert spaces $H_i,K_i$ and linear maps $\\Phi_i:\\mathcal L(H_i)\\to\\mathcal L(K_i)$, $i=1,2$,\n$$\\|\\Phi_1\\otimes\\Phi_2\\|_\\diamond=\\|\\Phi_1\\|_\\diamond\\|\\Phi_2\\|_\\diamond.$$\nConsequently, if $\\Phi_i,\\Psi_i:\\mathcal L(H_i)\\to\\mathcal L(K_i)$ are channels, then\n$$\\|\\Phi_1\\otimes\\Phi_2-\\Psi_1\\otimes\\Psi_2\\|_\\diamond\\le\\|\\Phi_1-\\Psi_1\\|_\\diamond+\\|\\Phi_2-\\Psi_2\\|_\\diamond.$$",
+        "deps": [
+          "def-qc-diamond-norm",
+          "def-qc-quantum-channel",
+          "thm-qc-diamond-norm-ancilla-dimension-bound",
+          "thm-qc-channel-diamond-norm-one",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "thm-qc-wire-permutation-is-unitary",
+          "lem-qc-tensor-products-of-operator-matrix-units-form-a-basis",
+          "thm-singular-value-decomposition",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "lem-qc-trace-norm-tensor-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.3.2–3.3.4, tensor-product and composition properties."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-exact-mixed-state-cloning-fidelity-criterion",
+        "kind": "theorem",
+        "title": "Exact Mixed State Cloning Fidelity Criterion",
+        "statement": "Let $\\rho_0,\\rho_1$ be finite-dimensional density operators. If one channel $\\Phi$ satisfies $\\Phi(\\rho_i)=\\rho_i\\otimes\\rho_i$ for $i=0,1$, then $F(\\rho_0,\\rho_1)\\in\\{0,1\\}$. Therefore the inputs are identical or have orthogonal supports.",
+        "deps": [
+          "def-qc-fidelity",
+          "def-qc-quantum-channel",
+          "thm-qc-fidelity-data-processing-and-equality",
+          "thm-qc-fidelity-range-equality-and-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.2.1–3.2.3, PDF pp.147–171"
+            },
+            {
+              "title": "Howard Barnum, Carlton M. Caves, Christopher A. Fuchs, Richard Jozsa, and Benjamin Schumacher, Noncommuting Mixed States Cannot Be Broadcast",
+              "url": "https://arxiv.org/pdf/quant-ph/9511010",
+              "locator": "Complete paper, PDF pp.2–10; pair statement/construction p.3, fidelity and invertible-state proof Eqs.(4)–(31), pp.4–10"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-full-rank-pair-no-broadcasting",
+        "kind": "theorem",
+        "title": "Full Rank Pair No Broadcasting",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex Hilbert space and let $\\rho_0,\\rho_1$ be positive-definite density operators on $H$. One channel $B:\\mathcal L(H)\\to\\mathcal L(H\\otimes H)$ broadcasts both states if and only if $\\rho_0\\rho_1=\\rho_1\\rho_0$.",
+        "deps": [
+          "def-qc-broadcasting-family",
+          "def-qc-fidelity",
+          "thm-qc-fidelity-data-processing-and-equality",
+          "lem-qc-fidelity-classical-measurement-minimum",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-qc-trace-norm-spectral-formula",
+          "def-qc-density-operator",
+          "def-qc-dirac-notation-conversion",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "thm-qc-isometry-partial-trace-is-channel",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-polar-decomposition",
+          "thm-qc-kraus-map-completely-positive",
+          "thm-qc-trace-preserving-kraus-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Howard Barnum, Carlton M. Caves, Christopher A. Fuchs, Richard Jozsa, and Benjamin Schumacher, Noncommuting Mixed States Cannot Be Broadcast",
+              "url": "https://arxiv.org/pdf/quant-ph/9511010",
+              "locator": "Complete paper, PDF pp.2–10; pair statement/construction p.3, fidelity and invertible-state proof Eqs.(4)–(31), pp.4–10"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-singular-pair-no-broadcasting",
+        "kind": "theorem",
+        "title": "Singular Pair No Broadcasting",
+        "statement": "For any two density operators $\\rho_0,\\rho_1$ on a nonzero finite-dimensional $H$, one channel broadcasts both if and only if $[\\rho_0,\\rho_1]=0$.",
+        "deps": [
+          "def-qc-broadcasting-family",
+          "def-qc-quantum-channel",
+          "def-qc-completely-positive-map",
+          "thm-qc-full-rank-pair-no-broadcasting",
+          "lem-qc-faithful-state-dominates-positive-operator",
+          "lem-qc-positive-marginals-imply-joint-support",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-qc-density-operator",
+          "def-qc-partial-trace",
+          "def-qc-dirac-notation-conversion",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-kraus-map-completely-positive",
+          "thm-qc-trace-preserving-kraus-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Howard Barnum, Carlton M. Caves, Christopher A. Fuchs, Richard Jozsa, and Benjamin Schumacher, Noncommuting Mixed States Cannot Be Broadcast",
+              "url": "https://arxiv.org/pdf/quant-ph/9511010",
+              "locator": "Complete paper, PDF pp.2–10; pair statement/construction p.3, fidelity and invertible-state proof Eqs.(4)–(31), pp.4–10"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-state-family-no-broadcasting-iff-commuting",
+        "kind": "theorem",
+        "title": "State Family No Broadcasting Iff Commuting",
+        "statement": "Let $S$ be any family, finite or infinite, of density operators on a nonzero finite-dimensional complex Hilbert space $H$. One common channel broadcasts every member of $S$ if and only if every pair of members commutes.",
+        "deps": [
+          "def-qc-broadcasting-family",
+          "thm-qc-singular-pair-no-broadcasting",
+          "thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-density-operator",
+          "thm-qc-kraus-map-completely-positive",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-tensor-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Howard Barnum, Carlton M. Caves, Christopher A. Fuchs, Richard Jozsa, and Benjamin Schumacher, Noncommuting Mixed States Cannot Be Broadcast",
+              "url": "https://arxiv.org/pdf/quant-ph/9511010",
+              "locator": "Complete paper, PDF pp.2–10; pair statement/construction p.3, fidelity and invertible-state proof Eqs.(4)–(31), pp.4–10"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2177,
+    "id": "trace-distance-fidelity-and-information-limits-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Trace Distance, Fidelity, and Information Limits — Examples",
+    "companion": "trace-distance-fidelity-and-information-limits",
+    "requires": [
+      "trace-distance-fidelity-and-information-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-orthogonal-state-trace-distance",
+        "kind": "example",
+        "title": "Trace distance of orthogonal pure states",
+        "statement": "Let $H=\\mathbb C^2$ with orthonormal computational basis $|0\\rangle,|1\\rangle$, and set $\\rho=|0\\rangle\\langle0|$ and $\\sigma=|1\\rangle\\langle1|$. Their trace distance is maximal, and the computational-basis projective measurement distinguishes them with total variation one.",
+        "deps": [
+          "thm-qc-trace-distance-range-and-equality",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-trace-distance",
+          "thm-singular-value-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§3.1.1–3.1.2, PDF pp.133–146"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

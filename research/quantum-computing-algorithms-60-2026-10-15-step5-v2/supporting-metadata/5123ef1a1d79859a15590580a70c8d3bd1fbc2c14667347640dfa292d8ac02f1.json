@@ -1,0 +1,630 @@
+[
+  {
+    "order": 2280,
+    "id": "algorithm-composition-precision-and-dequantization",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Algorithm Composition, Precision Budgets, and Dequantization",
+    "companion": "algorithm-composition-precision-and-dequantization-examples",
+    "requires": [
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "state-preparation-isometry-synthesis-and-limits",
+      "channels-kraus-choi-and-stinespring-representations",
+      "trace-distance-fidelity-and-information-limits",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "finite-probability-spaces-and-random-variables",
+      "approximate-universality-and-solovay-kitaev",
+      "measurements-povms-and-instruments"
+    ],
+    "items": [
+      {
+        "id": "def-qa-34-threshold-band-svd-target",
+        "kind": "definition",
+        "title": "Threshold-band singular-value approximation",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "def-orthogonal-projection",
+          "def-frobenius-matrix-norm"
+        ],
+        "dependency_level": 0,
+        "local_order": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-34-best-frobenius-rank-k-approximation",
+        "kind": "theorem",
+        "title": "Truncated singular values give the best Frobenius rank-k approximation",
+        "deps": [
+          "def-frobenius-matrix-norm",
+          "def-orthogonal-projection",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 0,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alan Frieze, Ravi Kannan, and Santosh Vempala, Fast Monte-Carlo Algorithms for Finding Low-Rank Approximations, author manuscript (22 October 1998), section 4.1, PDF page 6",
+              "url": "https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/FriezeKV-lowrank.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-34-product-state-error-bound",
+        "kind": "theorem",
+        "title": "Tensor-product state errors add under trace distance",
+        "deps": [
+          "def-qc-density-operator",
+          "def-qc-trace-norm",
+          "def-trace-of-an-endomorphism",
+          "def-qc-trace-distance",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-trace-norm-tensor-product",
+          "thm-non-negative-operator-characterisations",
+          "thm-qc-measurement-variation-at-most-trace-distance",
+          "thm-qc-trace-norm-duality-and-norm-properties"
+        ],
+        "dependency_level": 5,
+        "local_order": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-34-end-to-end-error-contract",
+        "kind": "definition",
+        "title": "End-to-end channel and output error contract",
+        "deps": [
+          "def-qc-quantum-channel",
+          "def-qc-diamond-norm",
+          "def-qc-trace-distance",
+          "def-qc-density-operator",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-circuit-cost-model",
+          "def-qa-34-output-and-cost-types"
+        ],
+        "dependency_level": 15,
+        "local_order": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-34-channel-hybrid-bound",
+        "kind": "theorem",
+        "title": "Hybrid bound for a composed channel circuit",
+        "deps": [
+          "def-qa-34-end-to-end-error-contract",
+          "thm-qc-channel-composition-hybrid-bound",
+          "thm-qc-diamond-norm-ancilla-dimension-bound",
+          "thm-qc-measurement-variation-at-most-trace-distance",
+          "thm-qc-channels-compose-and-tensor",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "def-qc-density-operator",
+          "def-qc-trace-norm",
+          "def-trace-of-an-endomorphism",
+          "def-qc-completely-positive-map",
+          "def-qc-quantum-channel",
+          "thm-non-negative-operator-characterisations"
+        ],
+        "dependency_level": 16,
+        "local_order": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-34-tensor-error-bound",
+        "kind": "theorem",
+        "title": "Tensor-product channel error bound",
+        "deps": [
+          "def-qa-34-end-to-end-error-contract",
+          "def-qc-density-operator",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-quantum-channel",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-channel-tensor-error-bound",
+          "thm-qc-channels-compose-and-tensor",
+          "thm-qa-34-channel-hybrid-bound"
+        ],
+        "dependency_level": 17,
+        "local_order": 6,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "induction"
+      },
+      {
+        "id": "alg-qa-34-error-budget-allocation",
+        "kind": "algorithm",
+        "title": "Allocate local error budgets through a pipeline",
+        "deps": [
+          "def-qa-34-end-to-end-error-contract",
+          "def-qa-34-output-and-cost-types"
+        ],
+        "dependency_level": 16,
+        "local_order": 7,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-34-output-and-cost-types",
+        "kind": "definition",
+        "title": "Classical output, quantum-state output, and access costs",
+        "deps": [
+          "def-qc-circuit-cost-model",
+          "def-qc-density-operator",
+          "def-qc-state-preparation-cost-model",
+          "alg-qc-state-preparation",
+          "thm-qc-state-preparation-cost",
+          "alg-qc-solovay-kitaev-unitary-compiler",
+          "thm-qc-solovay-kitaev-error-and-resource-bound"
+        ],
+        "dependency_level": 14,
+        "local_order": 8,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-34-heralded-verification-contract",
+        "kind": "definition",
+        "title": "Heralded success and conditional verification contract",
+        "deps": [
+          "def-qc-quantum-acceptance-probability",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-density-operator",
+          "def-qa-34-output-and-cost-types",
+          "thm-qc-instrument-outcome-law-normalizes",
+          "thm-qc-instrument-conditional-state-is-density"
+        ],
+        "dependency_level": 15,
+        "local_order": 9,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-34-l2-sample-query-access",
+        "kind": "definition",
+        "title": "\u21132 sample/query access to vectors and matrices",
+        "deps": [
+          "def-qa-34-output-and-cost-types",
+          "def-finite-probability-space-and-event",
+          "def-independence-of-finite-random-variables",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-frobenius-matrix-norm"
+        ],
+        "dependency_level": 15,
+        "local_order": 10,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-34-classical-output-writing-lower-bound",
+        "kind": "theorem",
+        "title": "Writing an N-bit output costs at least N bit operations",
+        "deps": [
+          "def-qa-34-output-and-cost-types"
+        ],
+        "dependency_level": 15,
+        "local_order": 11,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-34-modfkv-low-rank-description",
+        "kind": "algorithm",
+        "title": "ModFKV low-rank description procedure",
+        "deps": [
+          "def-qa-34-l2-sample-query-access"
+        ],
+        "dependency_level": 16,
+        "local_order": 12,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qa-34-rejection-sampler-linear-combination",
+        "kind": "algorithm",
+        "title": "Finite rejection sampler for a linear combination",
+        "deps": [
+          "def-qa-34-l2-sample-query-access",
+          "def-finite-probability-space-and-event",
+          "def-independence-of-finite-random-variables",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 16,
+        "local_order": 13,
+        "justified_by": [
+          "thm-qa-34-linear-combination-sampler-correct-and-cost"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-34-modfkv-sampling-gram-bound",
+        "kind": "lemma",
+        "title": "Two-stage \u21132 sampling controls Gram matrices",
+        "deps": [
+          "def-qa-34-l2-sample-query-access",
+          "def-frobenius-matrix-norm",
+          "def-finite-probability-space-and-event",
+          "def-independence-of-finite-random-variables",
+          "lem-finite-probability-basic-laws",
+          "thm-markov-inequality"
+        ],
+        "dependency_level": 16,
+        "local_order": 14,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-34-normalized-vector-distribution-tv-bound",
+        "kind": "lemma",
+        "title": "Squared-vector distributions are close in total variation",
+        "deps": [
+          "def-qa-34-l2-sample-query-access",
+          "def-qa-34-end-to-end-error-contract",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 16,
+        "local_order": 15,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-qa-34-sample-inner-product-estimator",
+        "kind": "proposition",
+        "title": "Estimate an inner product from \u21132-sampling access",
+        "deps": [
+          "def-qa-34-l2-sample-query-access",
+          "def-finite-probability-space-and-event",
+          "def-independence-of-finite-random-variables",
+          "lem-finite-probability-basic-laws",
+          "thm-chebyshev-inequality",
+          "thm-finite-union-bound"
+        ],
+        "dependency_level": 16,
+        "local_order": 16,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-34-adaptive-failure-union-bound",
+        "kind": "theorem",
+        "title": "Adaptive conditional failure budgets compose by a union bound",
+        "deps": [
+          "def-qa-34-heralded-verification-contract",
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws",
+          "def-independence-of-finite-random-variables",
+          "lem-exponential-dominates-one-plus-x"
+        ],
+        "dependency_level": 16,
+        "local_order": 17,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-34-error-budget-allocation-correctness",
+        "kind": "theorem",
+        "title": "Allocated local errors meet the global budget",
+        "deps": [
+          "alg-qa-34-error-budget-allocation",
+          "thm-qa-34-channel-hybrid-bound",
+          "thm-qa-34-adaptive-failure-union-bound",
+          "def-qa-34-end-to-end-error-contract",
+          "def-qa-34-output-and-cost-types",
+          "def-qc-circuit-cost-model"
+        ],
+        "dependency_level": 17,
+        "local_order": 18,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-34-linear-combination-sampler-correct-and-cost",
+        "kind": "theorem",
+        "title": "Correctness and cost of the linear-combination sampler",
+        "deps": [
+          "alg-qa-34-rejection-sampler-linear-combination",
+          "def-qa-34-l2-sample-query-access",
+          "def-finite-probability-space-and-event",
+          "def-independence-of-finite-random-variables",
+          "lem-finite-probability-basic-laws",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-qa-34-adaptive-failure-union-bound",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 17,
+        "local_order": 19,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-34-exponential-gram-concentration",
+        "kind": "lemma",
+        "title": "Exponential Frobenius concentration for normalized Gram sampling",
+        "deps": [
+          "lem-qa-34-modfkv-sampling-gram-bound",
+          "def-finite-probability-space-and-event",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-markov-inequality"
+        ],
+        "dependency_level": 17,
+        "local_order": 20,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-34-two-sketch-threshold-band-bound",
+        "kind": "lemma",
+        "title": "A deterministic threshold-band bound for two Gram sketches",
+        "deps": [
+          "def-qa-34-threshold-band-svd-target",
+          "thm-singular-value-decomposition",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 1,
+        "local_order": 21,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-34-modfkv-low-rank-approximation",
+        "kind": "theorem",
+        "title": "ModFKV low-rank approximation supplier",
+        "deps": [
+          "alg-qa-34-modfkv-low-rank-description",
+          "def-qa-34-l2-sample-query-access",
+          "def-qa-34-threshold-band-svd-target",
+          "lem-qa-34-modfkv-sampling-gram-bound",
+          "lem-qa-34-exponential-gram-concentration",
+          "lem-qa-34-two-sketch-threshold-band-bound",
+          "thm-qa-34-best-frobenius-rank-k-approximation",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 18,
+        "local_order": 22,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-34-tang-recommendation-sampler",
+        "kind": "theorem",
+        "title": "Tang's conditional recommendation sampler",
+        "deps": [
+          "def-qa-34-l2-sample-query-access",
+          "def-qa-34-end-to-end-error-contract",
+          "def-qa-34-output-and-cost-types",
+          "def-qa-34-threshold-band-svd-target",
+          "lem-qa-34-normalized-vector-distribution-tv-bound",
+          "prop-qa-34-sample-inner-product-estimator",
+          "alg-qa-34-rejection-sampler-linear-combination",
+          "thm-qa-34-linear-combination-sampler-correct-and-cost",
+          "alg-qa-34-modfkv-low-rank-description",
+          "thm-qa-34-modfkv-low-rank-approximation",
+          "lem-qa-34-two-sketch-threshold-band-bound",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-countable-product-of-probability-spaces",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "cor-first-borel-cantelli-lemma-for-events"
+        ],
+        "dependency_level": 19,
+        "local_order": 23,
+        "justified_by": [],
+        "axiom_use": "Countable choice and dependent choice are assumed in the Statement and used through F5 in step 3.1 to form the joint probability law of the potential adaptive row-sample batches. Full arbitrary-index choice is not assumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-qa-34-dequantization-scope",
+        "kind": "remark",
+        "title": "Dequantization is relative to the input access and output task",
+        "deps": [
+          "thm-qa-34-tang-recommendation-sampler",
+          "def-qa-34-output-and-cost-types"
+        ],
+        "dependency_level": 20,
+        "local_order": 24,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2281,
+    "id": "algorithm-composition-precision-and-dequantization-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Algorithm Composition, Precision Budgets, and Dequantization \u2014 Examples",
+    "companion": "algorithm-composition-precision-and-dequantization",
+    "requires": [
+      "algorithm-composition-precision-and-dequantization"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-34-three-stage-budget",
+        "kind": "example",
+        "title": "A three-stage precision budget",
+        "deps": [
+          "alg-qa-34-error-budget-allocation",
+          "thm-qa-34-channel-hybrid-bound",
+          "def-qc-density-operator",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-povm-and-outcome-law",
+          "def-non-negative-and-positive-operator"
+        ],
+        "dependency_level": 17,
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-34-state-output-not-amplitude-list",
+        "kind": "counterexample",
+        "title": "Quantum-state output does not mean an amplitude list was written",
+        "deps": [
+          "def-qa-34-output-and-cost-types",
+          "thm-qa-34-classical-output-writing-lower-bound"
+        ],
+        "dependency_level": 16,
+        "local_order": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-34-heralded-success-branch",
+        "kind": "example",
+        "title": "Heralded success and the zero-success branch",
+        "deps": [
+          "def-qa-34-heralded-verification-contract",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-completely-positive-map",
+          "def-qc-density-operator"
+        ],
+        "dependency_level": 16,
+        "local_order": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-34-tang-without-sampling-access",
+        "kind": "counterexample",
+        "title": "Entry queries alone do not provide Tang's sampling access",
+        "deps": [
+          "def-qa-34-l2-sample-query-access",
+          "def-qa-34-end-to-end-error-contract",
+          "thm-qa-34-tang-recommendation-sampler"
+        ],
+        "dependency_level": 20,
+        "local_order": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

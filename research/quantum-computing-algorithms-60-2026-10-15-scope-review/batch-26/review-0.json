@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "26",
+  "round": 0,
+  "reviewed_items": [
+    "def-qa-binary-field-f2",
+    "def-qa-binary-dot-product",
+    "alg-qa-reversible-binary-dot-product",
+    "thm-qa-reversible-binary-dot-product-correct-and-cost",
+    "def-qa-standard-bit-query",
+    "def-qa-phase-query",
+    "thm-qa-phase-kickback",
+    "thm-qa-compute-copy-uncompute-clean-query",
+    "thm-qa-global-phase-under-control",
+    "thm-qa-bit-query-to-phase-query",
+    "thm-qa-controlled-phase-query-to-bit-query",
+    "ex-qa-oracle-conversion-and-uncomputation"
+  ],
+  "reviewed_pages": [
+    "reversible-arithmetic-and-oracle-conversion",
+    "reversible-arithmetic-and-oracle-conversion-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed both complete pages, all 12 assigned items, approved QA02 scope, and actual direct supplier claims/proofs. Request one local repair cycle for the two findings below; the remaining arguments and scope are sound.",
+  "findings": [
+    {
+      "id": "f2-quotient-exhaustiveness",
+      "type": "local",
+      "reason": "In def-qa-binary-field-f2, Verification 1.1 proves [0]₂ and [1]₂ are distinct but not that every residue class is one of them; the conclusion that the quotient has exactly two classes and the tables in 2.1 therefore lack exhaustiveness. Add a local parity/remainder argument (each integer r = 2q + ε for ε∈{0,1}); retain the Definition and the separate field-axiom obligation."
+    },
+    {
+      "id": "explicit-gate-alphabet",
+      "type": "prerequisite",
+      "reason": "The exact gate-count claims and circuit instructions use CNOT, X and H, but the actual circuit syntax leaves the finite alphabet and allowed operations model-dependent. The CNOT supplier defines its unitary action, and the one-qubit supplier defines matrices; neither establishes that these labels are callable members of the selected alphabet. Explicitly state the local gate-model premise for the affected uses, preserving the separation between oracle calls and gate occurrences. Affected items: alg-qa-reversible-binary-dot-product, thm-qa-reversible-binary-dot-product-correct-and-cost, thm-qa-compute-copy-uncompute-clean-query, thm-qa-bit-query-to-phase-query, thm-qa-controlled-phase-query-to-bit-query, ex-qa-oracle-conversion-and-uncomputation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-qa-binary-dot-product",
+      "decision": "accept",
+      "reason": "Its parity-to-quotient argument uses the two operation tables and no field axioms; the missing carrier-exhaustiveness proof is local to its supplier."
+    },
+    {
+      "id": "alg-qa-reversible-binary-dot-product",
+      "decision": "repair",
+      "reason": "The instructions use CNOT; make its availability in the declared gate alphabet explicit."
+    },
+    {
+      "id": "thm-qa-reversible-binary-dot-product-correct-and-cost",
+      "decision": "repair",
+      "reason": "The exact CNOT count needs CNOT to be a listed gate in the stated circuit model."
+    },
+    {
+      "id": "thm-qa-compute-copy-uncompute-clean-query",
+      "decision": "repair",
+      "reason": "The generic copy step uses CNOT; state its availability in the model used for the gate-occurrence count."
+    },
+    {
+      "id": "thm-qa-bit-query-to-phase-query",
+      "decision": "repair",
+      "reason": "The exact two-gate preparation requires X and H as callable gate labels, not only defined matrices."
+    },
+    {
+      "id": "thm-qa-controlled-phase-query-to-bit-query",
+      "decision": "repair",
+      "reason": "The two-H implementation requires H as a callable gate label; controlled phase access is already explicit."
+    },
+    {
+      "id": "ex-qa-oracle-conversion-and-uncomputation",
+      "decision": "repair",
+      "reason": "The example circuits use CNOT and H; state the gate-model convention that makes those operations available."
+    }
+  ]
+}

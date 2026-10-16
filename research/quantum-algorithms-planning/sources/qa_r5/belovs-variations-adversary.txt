@@ -1,0 +1,2803 @@
+
+
+=== PDF PAGE 1 ===
+arXiv:1504.06943v1  [quant-ph]  27 Apr 2015
+Variations on Quantum Adversary
+Aleksandrs Belovs∗
+Abstract
+The (negative-weighted) quantum adversary bound is a tight characterisation of the
+quantum query complexity for any partial function [28, 38]. We analyse the extent to which
+this bound can be generalised. Ambainis et al. [3] and Lee et al. [34] generalised this bound
+to the state generation and state conversion problems, respectively. Using the ideas by Lee
+et al., we get even further generalisations of the bound.
+We obtain a version of the bound for general input oracles, which are just arbitrary
+unitaries. We also generalise the bound to the problem of implementing arbitrary unitary
+transformations. Similarly to the bound by Lee et al., our bound is a lower bound for exact
+transformation and an upper bound for approximate transformation. This version of the
+bound possesses the tight composition property.
+Using this construction, we also obtain lower bounds on the quantum query complexity
+of functions and relations with general input oracles.
+1
+Introduction
+General (negative-weighted) adversary method is one of the most interesting developments in
+quantum query algorithms. This is a concise semideﬁnite optimisation problem that tightly (up
+to a constant factor) characterises the bounded-error quantum query complexity of evaluating
+any function f : D →[m] with D ⊆[q]n.
+The adversary bound originates from the hybrid method, which was used by Bennett et
+al. [15] to show a tight Ω(√n) lower bound on quantum search. The hybrid method proceeds by
+analysing the weights with which the quantum algorithm queries diﬀerent variables for various
+inputs, and ﬁnds a pair of inputs that the algorithm fails to distinguish.
+This idea was further reﬁned by Ambainis in the ﬁrst (unweighted) version of the adversary
+bound [1]. Instead of searching for one pair of inputs, the adversary method studies many pairs
+and shows that any algorithm has to make many queries in order to distinguish all of them
+simultaneously. The unweighted adversary bound is more powerful than the hybrid method,
+and it is easy to use due to its attractive combinatorial formulation. This resulted in a large
+number of applications: [25, 17, 21, 24] to name a few. Soon afterwards came the positive-
+weighted version of the bound [2, 45]. In 2004 ˇSpalek and Szegedy [42] mentioned 7 diﬀerent
+versions of the bound and proved they all are equivalent.
+The next important step was done by Høyer et al. [28].
+Starting with the semideﬁnite
+formulation of the positive-weighted adversary bound by Barnum et al. [4], they showed that
+the same expression still yields a lower bound if one replaces non-negative entries by arbitrary
+real numbers. This negative-weighted version of the bound is strictly more powerful than the
+positive-weighted one, but it is also harder to apply.
+In a series of papers [40, 37, 38], Reichardt et al. surprisingly proved that the negative-
+weighted version of the bound is tight: The dual formulation of the bound (which is equal
+∗Faculty of Computing, University of Latvia.
+1
+
+
+=== PDF PAGE 2 ===
+to the primal formulation due to strong duality) can be transformed into a quantum query
+algorithm with the same complexity! Thus, instead of devising a quantum query algorithm, one
+may come up with a feasible solution to the dual adversary bound.
+The negative-weighted adversary bound has been used to prove lower bounds [14, 13, 12],
+but more frequently to prove upper bounds, in particular using the learning graph approach [6].
+For instance, the adversary bound was used to construct quantum algorithms for formula eval-
+uation [40, 39, 44], ﬁnding subgraphs [33, 11, 32], k-distinctness problem [5], and in learning
+and property testing [8, 9].
+One of the main features of the dual adversary bound is that it provides an “idealised”
+analogue of a quantum query algorithm. Its complexity equals the complexity of a bounded-
+error algorithm, but it behaves as if it were error-free: Feasible solutions for a function f and
+a function g can be combined into a feasible solution for the composed function f ◦g, whose
+complexity is the product of the two. This is known as the tight composition property, and it is
+at the heart of the formula evaluation algorithm by Reichardt and ˇSpalek [40]. Thus, for a ﬁxed
+Boolean function f, evaluation of the quantum query complexity of the composed function f d
+is a routine computation now. Let us note that no classical counterpart to this construction is
+known. For instance, the randomised query complexity of f d is still unknown even when f is
+the majority function on 3 bits [36, 35].
+The adversary bound was later generalised to the state generation problem by Ambainis et
+al. [3], and to the state conversion problem by Lee et al. [34]. In the latter problem, one is given
+oracle access to a string x ∈[q]n, and the task is to transform the initial state ρx into the target
+state σx for all x. This generalisation comes with additional subtleties. The complexity of eval-
+uating a Boolean function f has a jump at error ε = 1/2: It is trivial for ε = 1/2, but becomes
+complicated for any smaller error parameter. State generation problem can have various jumps
+even at small values of ε (for example, consider the state generation problem with the target
+states σx = √1 −ε|0⟩A + √ε|f(x)⟩B in the space A ⊕B). The adversary bound, whose value
+for each problem is just one real number, cannot account for all these jumps, and, consequently,
+cannot be tight for all values of ε. Lee et al. bypassed this complication by constructing a
+bound that is semi-tight: It is still an upper bound for approximate transformation, but it is
+a lower bound only for exact transformation. A lower bound for approximate transformation
+can be obtained by minimising the semi-tight bound over all target states that are suﬃciently
+close to the exact target state σx. The semi-tight bound for state conversion is stated in terms
+of the ﬁltered γ2-norm, which is a generalisation of the usual γ2-norm.
+Besides this, the paper by Lee et al. [34] has a number of additional important ideas. The
+proof of the upper bound was signiﬁcantly simpliﬁed by introducing easy and powerful Eﬀective
+Spectral Gap Lemma, which can be also used independently [7, 10]. Next, unlike [28], the lower
+bound is proven directly in the dual form, essentially showing that the adversary bound is a
+semideﬁnite relaxation of a quantum query algorithm. This proof is not only shorter, but also
+gives an algorithmic interpretation of the coeﬃcients of the dual adversary bound.
+Main Results
+The aim of this paper is to give a more general and reﬁned treatment of the
+ideas introduced by Lee et al. in [34], and to analyse some of their consequences.
+First, all of the aforementioned variants of the adversary bound only work for a very re-
+stricted variant of the input oracle, which we call the standard input oracle. It is of the form
+|j⟩|0⟩7→|j⟩|xj⟩, where x = (xj) ∈[q]n is the input string. We show that the same results hold
+if we replace this restricted oracle by a general input oracle, which is just an arbitrary unitary
+transformation. This highlights the essence of the construction by removing the details arising
+from the special case of the input oracle. General oracles naturally appear in applications. For
+instance, the well-known phase detection procedure (see Theorem 2 below) is clearly of this
+2
+
+
+=== PDF PAGE 3 ===
+form.
+Second, we generalise the adversary bound from the state conversion problem to the problem
+of implementing arbitrary unitary transformations. This problem has also appeared in applica-
+tions, as an example, we can mention simulation of sparse Hamiltonians, see [16] and references
+therein.
+Our version of the adversary bound also has the tight composition property. We prove it
+for composition of procedures, as well as for direct sums and tensor products. This variant of
+the tight composition property can be helpful in applications, for instance, in nested quantum
+walks [29]. This property also facilitates modular approach, in which parts of the construction,
+like the input and the output of the algorithm, can be studied independently and combined in
+various ways.
+Finally, we use these general tools to give lower bounds on the quantum query complexity
+of functions and relations (problems with many possible outputs for each input). Up to our
+knowledge, the case of relations has not been studied previously even for the standard input
+oracle. We prove that the adversary bound still gives a tight lower bound for bounded-error
+function evaluation with general input oracles. We also show a similar result for evaluation of
+relations, provided that the output of the algorithm can be eﬃciently tested.
+Outline and Other Results
+Our version of the adversary bound is based on another gen-
+eralisation of the γ2-norm, which we call relative γ2-norm. We deﬁne the relative γ2-norm and
+prove a number of its properties in Section 3. With this notion, our adversary bounds for state
+conversion and unitary implementation attain a very concise form.
+The proof of the semi-tightness of our adversary bound for state conversion in Section 4.1
+is essentially a reﬁned version of the corresponding proofs by Lee et al. [34]. The bound for
+the unitary implementation problem in Section 4.2 is genuinely new, and proceeds by a simple
+reduction to state conversion. The tight composition results easily follow from the corresponding
+properties of the relative γ2-norm.
+In Section 4.3, we formulate a version of our adversary bound for the fractional query
+complexity model. The latter is equivalent [23] to the continuous-time query model1, which is
+a well-known competitor of the discrete-time query model [27]. For standard input oracles, the
+continuous- and discrete-time query models are known to be equivalent [43, 34]. Curiously, this
+result was shown using the adversary bound. For general oracles, however, the corresponding
+query complexities can diﬀer substantially.
+In Section 5.1, we study input oracles that generate quantum states. This is an intermediate
+step between general and standard input oracles. It is reasonable to assume that subroutines
+of a quantum algorithm can communicate in quantum states, not only classical messages, so
+this model is worth studying. For example, Eisentr¨ager et al. [26] gave a very nice treatment of
+the continuous HSP with input oracles that generate quantum states. We give two versions of
+the bound, one easier to use, but not tight, and another one semi-tight, but harder to use. In
+Section 5.2, we compare the performance of both bounds on a simple problem: exact amplitude
+ampliﬁcation. In addition, we show that the adversary bound for unitary implementation is
+more precise than the adversary bound for state conversion.
+Lower bounds on quantum query complexity of relations in Section 6.1 are obtained by
+optimising the adversary bound over all possible target states. In Section 6.2, we show that the
+adversary bound tightly characterises bounded-error quantum query complexity of functions.
+In the spirit of modular approach, we prove this by constructing an explicit solution to the
+1Strictly speaking, this was only shown for the standard input oracle, but the corresponding proof easily
+carries to the general case.
+3
+
+
+=== PDF PAGE 4 ===
+adversary bound for the “puriﬁcation” problem: Given an oracle that generates a noisy state,
+generate the corresponding exact state.
+We end the paper with a number of open problems.
+2
+Preliminaries
+If not said otherwise, a vector space is a ﬁnite-dimensional complex inner product space. They
+are denoted by calligraphic letters. We assume that each vector space has a ﬁxed orthonormal
+basis, and we often identify an operator with the corresponding matrix. The inner product is
+denoted by ⟨·, ·⟩. A∗stands for the adjoint linear operator, and A[[i, j]] for the (i, j)th entry of
+the matrix A. A ◦B stands for the Hadamard (entry-wise) product of matrices. IX stands for
+the identity operator in X. All projectors are orthogonal projectors. We often treat scalars as
+1 × 1 matrices.
+For a linear operator A: X2 →X1, we have the singular value decomposition A = Pk
+i=1 σiuiv∗
+i ,
+where k is the rank of A, σi are positive reals, {ui} is an orthonormal family (not necessarily
+complete) of vectors in X1, and {vi} is an orthonormal family in X2. σi, ui and vi are called the
+singular values, left singular vectors and right singular vectors of A, respectively. The spectral
+norm of A is ∥A∥= maxi σi, and the trace norm is ∥A∥tr = P
+i σi.
+A quantum register is identiﬁed with the corresponding vector space.
+A quantum state
+is a unit vector in this space (we only consider pure states). If two vector spaces X and Y
+are isomorphic, we assume that there is an implicit isomorphism between the two.
+If Y is
+additionally a register and ψ ∈X, we use notation |ψ⟩Y to denote the image of ψ under this
+isomorphism.
+This is to help to keep track to which of the isomorphic registers the vector
+belongs. If {ej} is the standard orthonormal basis of X, we use a shorthand |j⟩X instead of
+|ej⟩X .
+We use 1P to denote the indicator variable, that equals 1 if P is true, and equals 0 otherwise.
+Quantum Query Algorithms
+Let X be a vector space. A quantum algorithm with oracle
+O acting on X has the state space of the form S ⊕(X ⊗W).
+The algorithm is a unitary
+transformation of the form
+U0 →eO±1 →U1 →eO±1 →· · · →UT−1 →eO±1 →UT ,
+(1)
+where Ui are arbitrary unitaries on S ⊕(X ⊗W) independent of O, and each eO±1 is a query
+to the input oracle. It can be either a direct query, eO = IS + O ⊗IW, or a reverse query,
+eO−1 = IS+O∗⊗IW. Using standard techniques, any quantum query algorithm can be converted
+into this form. The oracle O should be interpreted as the input of the algorithm, and we often
+call it the input oracle. It can be replaced by an arbitrary unitary on X, and, for diﬀerent
+choices, the algorithm implements a diﬀerent unitary. The number T is the query complexity of
+the algorithm, and our objective is to minimise it.
+Technical Results
+The following two lemmata are used in the proof Theorem 11.
+Lemma 1 (Eﬀective Spectral Gap Lemma [34]). Let Π1 and Π2 be two projectors in the same
+vector space, and R1 = 2Π1 −I and R2 = 2Π2 −I be the reﬂections about their images. For
+δ ≥0, let Pδ be the projector onto the span of all eigenvectors of R2R1 that have eigenvalues
+eiθ with |θ| ≤δ. Then, for any vector w in the kernel of Π1, we have
+∥PδΠ2w∥≤δ
+2∥w∥.
+4
+
+
+=== PDF PAGE 5 ===
+The following algorithm approximately reﬂects about the eigenvalue 1 eigenspace of the
+input oracle. It is an easy consequence of the phase estimation algorithm.
+Theorem 2 (Phase Detection [30, 22]). For any vector space X, precision δ > 0, and error ε >
+0, there exists a quantum algorithm with an oracle O on X satisfying the following properties:
+• For each unit ψ ∈X satisfying Oψ = ψ, the algorithm leaves ψ intact.
+• For each unit ψ ∈X satisfying Pδψ = 0, the algorithm maps ψ into a state φ satisfying
+∥ψ + φ∥≤ε. Here Pδ denotes the projector onto the space spanned by the eigenvectors of
+O having eigenvalues eiθ with |θ| ≤δ.
+• The algorithm uses O(1
+δ log 1
+ε) queries.
+3
+Relative γ2-norm
+In this section, we deﬁne the relative γ2-norm, and prove some of its properties. This is a
+generalisation of the usual and ﬁltered γ2-norms. Most of our results in the paper are stated in
+terms of this bound.
+Deﬁnition 3 (Relative γ2-norm). Let X1, X2, Z1 and Z2 be vector spaces, and D1 and D2 be
+sets of labels. Let A = {Axy} and ∆= {∆xy}, where x ∈D1 and y ∈D2, be two families of
+linear operators: Axy : Z2 →Z1 and ∆xy : X2 →X1. The relative γ2-norm,
+γ2(A|∆) = γ2(Axy | ∆xy)x∈D1, y∈D2,
+is deﬁned as the optimal value of the following optimisation problem, where Υx and Φy are
+linear operators,
+minimise
+max
+n
+maxx∈D1 ∥Υx∥2 , maxy∈D2 ∥Φy∥2o
+(2a)
+subject to
+Axy = Υ∗
+x(∆xy ⊗IW)Φy
+for all x ∈D1 and y ∈D2;
+(2b)
+W is a vector space,
+Υx : Z1 →X1 ⊗W,
+Φy : Z2 →X2 ⊗W.
+(2c)
+This is a generalisation of the usual γ2-norm, also known as Schur (Hadamard) product
+operator norm [18]. Namely, for a D1 × D2 matrix A, the γ2-norm of A is deﬁned by
+γ2(A) = γ2
+ A[[x, y]] | 1
+
+x∈D1,y∈D2,
+with all Axy and ∆xy being one-dimensional. Moreover, if all Axy = axy and ∆xy = δxy are
+one-dimensional, and all δxy are non-zero, then the relative γ2-norm can be reduced to the usual
+one:
+γ2(axy | δxy)x∈D1,y∈D2 = γ2
+axy
+δxy
+
+x∈D1,y∈D2
+.
+(3)
+The ﬁltered γ2-norm of [34] can be also expressed in this form.
+Let Z = {Z1, . . . , Zn}
+be a family of D1 × D2 matrices. Then, the ﬁltered γ2-norm of A with respect to Z can be
+deﬁned as γ2(A[[x, y]] | ∆xy)x∈D1,y∈D2, where all ∆xy are diagonal n × n matrices given by
+∆xy[[i, i]] = Zi[[x, y]]. We will not explicitly use this deﬁnition in our paper.
+Proposition 4. For a ﬁxed family ∆, γ2(A|∆) is ﬁnite on the linear space of families of matrices
+A = {Axy} satisfying Axy = 0 whenever ∆xy = 0. Moreover, it is a vector norm on this space,
+that is, for all families A and B satisfying γ2(A|∆), γ2(B|∆) < +∞, and any complex c, we
+have
+5
+
+
+=== PDF PAGE 6 ===
+(a) positivity: γ2(A|∆) ≥0 with γ2(A|∆) = 0 iﬀA = 0;
+(b) homogeneity: γ2(cAxy | ∆xy)x∈D1,y∈D2 = |c| γ2(A|∆); and
+(c) triangle inequality: γ2(Axy + Bxy | ∆xy)x∈D1,y∈D2 ≤γ2(A|∆) + γ2(B|∆).
+In particular, this norm is continuous when restricted to this space. The triangle inequality is
+also valid for inﬁnite sums and integrals.
+Proof. Property (a) trivial. Next, let {Υx}, {Φy} and {Υ′
+x}, {Φ′
+y} be optimal solutions to (2)
+for the matrices A and B with objective values W and W ′, respectively. Then, {
+p
+|c| Υx} and
+
+c
+√
+|c| Φy
+	
+is a feasible solution for the matrix cA with objective value |c| W. Also, the block
+matrices
+n
+Υx
+Υ′
+x
+o
+and
+n Φy
+Φ′
+y
+o
+form a feasible solution for the family A + B with objective
+value at most W + W ′.
+It is obvious that the condition (∆xy = 0) =⇒(Axy = 0) is necessary for the ﬁniteness of
+γ2(A|∆). Let us prove its suﬃciency. Assume there is exactly one non-zero matrix in {Axy}, let
+it be Aij, and, moreover, Aij = ψφ∗for some unit vectors ψ ∈Z1 and φ ∈Z2. We have ∆ij ̸= 0.
+Let u and v be its left and right singular vectors with maximal singular value, i.e. u and v are
+unit vectors and u∗∆ijv = ∥∆ij∥. Then Υi =
+uψ∗
+√
+∥∆ij∥and Φj =
+vφ∗
+√
+∥∆ij∥is a feasible solution
+to (2) with objective value 1/∥∆ij∥. From Points (b) and (c) of the current proposition, we get
+the following crude upper bound:
+γ2(Axy|∆xy) ≤
+X
+x∈D1,y∈D2
+∥Axy∥tr
+∥∆xy∥,
+(4)
+where 0/0 = 0.
+As a vector norm on a ﬁnite-dimensional vector space, γ2(A|∆) is continuous in A, when
+restricted to the subspace where it is ﬁnite. By continuity, the triangle inequality is also valid
+for inﬁnite sums and integrals (as for limits of ﬁnite sums).
+Similarly to the ordinary γ2-norm, relative γ2-norm can be stated as a semideﬁnite optimi-
+sation problem (SDP). As a consequence, it admits an equivalent dual formulation. We describe
+it for the case when all Axy are one-dimensional. Let A = (axy) be a complex D1 × D2 matrix,
+and ∆xy be as in Deﬁnition 3. For a complex D1 × D2 matrix Γ = (γxy), let Γ ◦∆denote the
+D1 × D2 block matrix with blocks γxy∆xy (thus, Γ ◦∆: CD2 ⊗X2 →CD1 ⊗X1). The following
+proposition is proven in Appendix A.1:
+Proposition 5. In the above notation, γ2(axy|∆xy)x∈D1,y∈D2 is equal to the optimal value of
+the following optimisation problem:
+maximise
+∥Γ ◦A∥
+subject to
+∥Γ ◦∆∥≤1,
+with the optimisation over D1 × D2 complex matrices Γ.
+Let us end this section with some additional properties of the relative γ2-norm, which we
+use in the paper.
+Proposition 6. We have the following properties of the relative γ2 norm (omitted subscripts
+stand for x ∈D1, y ∈D2):
+(a) striking out rows and columns: γ2(Axy|∆xy)x∈E1,y∈E2 ≤γ2(Axy|∆xy) when E1 ⊆D1 and
+E2 ⊆D2 ;
+6
+
+
+=== PDF PAGE 7 ===
+(b) duplicating rows and columns: γ2(Axy|∆xy)(x,a)∈D1×E1, (y,b)∈D2×E2 = γ2(Axy|∆xy);
+(c) entry-wise lower bound: γ2(Axy|∆xy) ≥
+max
+x∈D1,y∈D2
+∥Axy∥
+∥∆xy∥, where 0/0 = 0;
+in particular, reﬂexivity: γ2(Axy|Axy) = 1 if at least one Axy is non-zero;
+(d) linear transformations: γ2(U ∗
+xAxyVy | ∆xy) ≤maxx ∥Ux∥maxy ∥Vy∥γ2(Axy|∆xy);
+and γ2(Axy|∆xy) ≤maxx ∥Ux∥maxy ∥Vy∥γ2(Axy | U ∗
+x∆xyVy);
+in particular, for any non-zero c: γ2(Axy | c∆xy) = 1
+|c|γ2(Axy|∆xy);
+(e) composition property: γ2(Axy|∆xy) ≤γ2(Axy|Bxy) γ2(Bxy|∆xy);
+(f) direct sum property: γ2(Axy ⊕Bxy | ∆xy ⊕Exy) ≤max
+
+γ2(Axy|∆xy), γ2(Bxy|Exy)
+	
+;
+in particular, γ2(Axy ⊕Bxy | ∆xy) = max
+
+γ2(Axy|∆xy), γ2(Bxy|∆xy)
+	
+;
+(g) tensor product property: γ2(Axy ⊗Bxy | ∆xy ⊗Exy) ≤γ2(Axy|∆xy) γ2(Bxy|Exy);
+(h) “Hadamard product” property: γ2
+ B[[x, y]]Axy | ∆xy
+
+≤γ2(B) γ2(Axy|∆xy).
+Proof. Properties (a) and (b) are straightforward: One can use a feasible solution to γ2(Axy|∆xy)
+for the other problem.
+For (c), let {Υx} and {Φy} be a feasible solution to γ2(Axy|∆xy), and x ∈D1 and y ∈D2
+attain the maximum on the right-hand side of (c). Then, ∥Axy∥≤∥Υx∥∥∆xy∥∥Φy∥, hence,
+at least one of ∥Υx∥2 and ∥Φy∥2 is at least
+∥Axy∥
+∥∆xy∥.
+For the second statement, one can use
+Υx = Φy = I as a feasible solution.
+For (d), ﬁrst note that by multiplying all Ux and dividing all Vy by the same positive
+real number, we may assume that maxx ∥Ux∥2 = maxy ∥Vy∥2 = maxx ∥Ux∥maxy ∥Vy∥. Next,
+let {Υx} and {Φy} be a feasible solution to γ2(Axy|∆xy).
+Then, {ΥxUx} and {ΦyVy} is a
+feasible solution to γ2(U ∗
+xAxyVy | ∆xy). Similarly, if {Υx} and {Φy} is a feasible solution to
+γ2(Axy | U ∗
+x∆xyVy), then
+Axy = Υ∗
+x((U ∗
+x∆xyVy) ⊗IW)Φy = [(Ux ⊗IW)Υx]∗(∆xy ⊗IW) [(Vy ⊗IW)Φy].
+For (e), let {Υx} and {Φy} be a feasible solution to γ2(Axy|Bxy), and {Υ′
+x} and {Φ′
+y} be a
+feasible solution to γ2(Bxy|∆xy). Then, for some W and W′:
+Axy = Υ∗
+x(Bxy ⊗IW)Φy = Υ∗
+x(Υ′∗
+x (∆x,y ⊗IW′)Φ′
+y ⊗IW)Φy
+=
+
+(Υ′
+x ⊗IW)Υx
+∗(∆x,y ⊗IW⊗W′)
+
+(Φ′
+y ⊗IW)Φy
+
+.
+For (f) and (g), let {Υx} and {Φy} be a feasible solution to γ2(Axy|∆xy), and {Υ′
+x} and
+{Φ′
+y} be a feasible solution to γ2(Bxy|Exy). We may assume that both solutions use the same
+space W. Then,
+Axy ⊕Bxy = [Υx ⊕Υ′
+x]∗((∆xy ⊕Exy) ⊗IW) [Φy ⊕Φ′
+y],
+and
+Axy ⊗Bxy = [Υx ⊗Υ′
+x]∗((∆xy ⊗Exy) ⊗IW⊗W)[Φy ⊗Φ′
+y].
+For the second part of (f), note that γ2(Axy ⊕Bxy|∆xy ⊕∆xy) = γ2(Axy ⊕Bxy|∆xy), and that
+γ2(Axy|∆xy) ≤γ2(Axy ⊕Bxy|∆xy) and γ2(Bxy|∆xy) ≤γ2(Axy ⊕Bxy|∆xy) due to property (d).
+Property (h) is a special case of (g) with one-dimensional matrices Bxy = B[[x, y]] and
+Exy = 1.
+7
+
+
+=== PDF PAGE 8 ===
+4
+General Oracles
+In this section, we deﬁne the adversary bound for problems with general input oracles, which are
+just arbitrary unitary transformations. In Section 4.1, we study the state conversion problem,
+and, in Section 4.2, the unitary implementation problem. We prove that the adversary bound
+is semi-tight.
+In Section 4.2, we also derive the tight composition property for the unitary
+implementation problem. In Section 4.3, we consider the fractional query model.
+4.1
+State Conversion
+In this section, we study the following problem.
+Deﬁnition 7 (State Conversion). Let X and Z be vector spaces, and D be some ﬁnite set of
+labels. For each x ∈D, a unitary operator Ox in X, and two unit vectors ρx and σx in Z are
+ﬁxed.2 In the state conversion problem (Ox, ρx, σx)x∈D, the task is to construct a quantum
+algorithm with an oracle O on X satisfying the following constraint. Assume Z is embedded
+into the state space S ⊕(X ⊗W) of the algorithm in some way (all choices are equivalent). For
+each x ∈D, if O is replaced by Ox, the algorithm transforms ρx into σx. The complexity of the
+problem is the minimal number of queries used by an algorithm that solves this task.
+We often omit the subindex x ∈D if it is clear from the context.
+Most of the problems we study in this paper are based on this deﬁnition by imposing
+additional constraints on Ox, ρx or σx. For instance, the state generation problem (Ox, σx)x∈D
+is deﬁned as the state conversion problem where all ρx = ρ0 for some ﬁxed ρ0 ∈Z (the exact
+choice of ρ0 is not relevant).
+It will be sometimes convenient to relax the condition of D being ﬁnite. The complexity of
+the problem is then understood as the supremum over all ﬁnite subproblems. The idea is that
+quantum algorithms are continuous, hence, we can study the problem on a ﬁnite ε-net (as an
+example, see the proof of Theorem 17).
+We consider both the exact and the approximate versions of this problem. In the latter, some
+error parameter ε > 0 is given, and the algorithm may end its work in some state σ′
+x satisfying
+∥σx−σ′
+x∥≤ε. In this section, we develop a bound for this problem with the following semi-tight
+behaviour: It is a lower bound on the exact complexity of the problem and an upper bound on
+the approximate complexity of the problem.
+Deﬁnition 8. For a state conversion problem (Ox, ρx, σx)x∈D, its adversary bound is deﬁned
+as
+ADV±(Ox, ρx, σx)x∈D = γ2
+
+⟨ρx, ρy⟩−⟨σx, σy⟩
+ Ox −Oy
+
+x,y∈D .
+(5)
+Thus, the adversary bound equals the optimal value of the following optimisation problem:
+minimise
+max
+n
+maxx∈D ∥ux∥2 , maxy∈D ∥vy∥2o
+(6a)
+subject to
+⟨ρx, ρy⟩−⟨σx, σy⟩=
+D
+ux,
+ (Ox −Oy) ⊗IW
+
+vy
+E
+for all x, y ∈D;
+(6b)
+W is a vector space,
+ux, vy ∈X ⊗W.
+(6c)
+Remark 9. One may replace all Ox −Oy in (5) and (6b) by IX −O∗
+xOy. This is equivalent as
+Ox −Oy = Ox(IX −O∗
+xOy), and Ox can be absorbed into ux (Proposition 6(d)).
+2This notation is borrowed from [34]. Note that ρx and σx are not mixed states.
+8
+
+
+=== PDF PAGE 9 ===
+Theorem 10. Assume that a state conversion problem (Ox, ρx, σx)x∈D can be solved exactly in
+T queries. Then, ADV±(Ox, ρx, σx)x∈D ≤T.
+Proof. Assume the vectors {ρx} are transformed into the vectors {σx} by the algorithm in (1).
+Its state space is S ⊕(X ⊗W), and Z is embedded into it. For each x ∈D, consider the sequence
+of quantum states
+ρ(0)
+x
+= ρx,
+ρ(1)
+x ,
+ρ(2)
+x ,
+. . .
+ρ(T−1)
+x
+,
+ρ(T)
+x ,
+(7)
+where ρ(i)
+x
+is deﬁned as the state of the quantum algorithm in (1) just before the application
+of Ui.
+As ⟨σx, σy⟩=
+
+ρ(T)
+x , ρ(T)
+y
+
+for all x, y ∈D, the problems ADV±(Ox, ρx, σx)x∈D and
+ADV± Ox, ρ(0)
+x , ρ(T)
+x
+
+x∈D are equal.
+Note that the state conversion problem (Ox, ρ(i)
+x , ρ(i+1)
+x
+)x∈D is solved exactly in 1 query. It
+suﬃces to prove the statement of the theorem for each of them, and the general case then
+follows from the triangle inequality of Proposition 4 by telescoping. More precisely, if {u(i)
+x }
+and {v(i)
+y } is a solution to (6) for the problem
+ Ox, ρ(i)
+x , ρ(i+1)
+x
+
+x∈D, then the solution for the
+problem (Ox, ρx, σx)x∈D is given by
+ux =
+MT−1
+i=0 u(i)
+x
+and
+vy =
+MT−1
+i=0 v(i)
+y .
+(8)
+For each i, in dependence on whether the query is direct or reverse,
+either
+ρ(i+1)
+x
+= (IS ⊕Ox ⊗IW)Uiρ(i)
+x ,
+or
+ρ(i+1)
+x
+= (IS ⊕O∗
+x ⊗IW)Uiρ(i)
+x
+holds for all x ∈D. We consider the ﬁrst case, the second case being similar. We have (where
+Π is the projector onto X ⊗W, and Π⊥is the projector onto S):
+D
+ρ(i)
+x , ρ(i)
+y
+E
+−
+D
+ρ(i+1)
+x
+, ρ(i+1)
+y
+E
+=
+D
+Uiρ(i)
+x , Uiρ(i)
+y
+E
+−
+D
+(IS ⊕Ox ⊗IW)Uiρ(i)
+x , (IS ⊕Oy ⊗IW)Uiρ(i)
+y
+E
+=
+D
+Π⊥Uiρ(i)
+x , Π⊥Uiρ(i)
+y
+E
++
+D
+(Ox ⊗IW)ΠUiρ(i)
+x , (Ox ⊗IW)ΠUiρ(i)
+y
+E
+−
+D
+Π⊥Uiρ(i)
+x , Π⊥Uiρ(i)
+y
+E
+−
+D
+(Ox ⊗IW)ΠUiρ(i)
+x , (Oy ⊗IW)ΠUiρ(i)
+y
+E
+=
+D
+(Ox ⊗IW)ΠUiρ(i)
+x ,
+ (Ox −Oy) ⊗IW
+
+ΠUiρ(i)
+y
+E
+.
+Thus, we can take
+u(i)
+x = (Ox ⊗IW)ΠUiρ(i)
+x
+and
+v(i)
+y
+= ΠUiρ(i)
+y
+(9)
+as a feasible solution to (6) for the problem
+ Ox, ρ(i)
+x , ρ(i+1)
+x
+
+. The norms of these vectors do not
+exceed 1.
+To get a lower bound for the approximate version of the problem, one can optimise over all
+possible target vectors. For the general case, it is possible to use ideas from [34, Section 4.2].
+We will use this approach in Section 6 for more speciﬁc problems.
+Theorem 11. Let (Ox, ρx, σx)x∈D be a state conversion problem with ADV±(Ox, ρx, σx) < +∞,
+and 0 < ε ≤ADV±(Ox, ρx, σx) be a real number. Then, there exists a quantum algorithm with
+oracle O that, for each x ∈D, if O is replaced by Ox, transforms the state ρx into a state σ′
+x
+satisfying ∥σx −σ′
+x∥≤ε. The algorithm makes O
+ ADV±(Ox, ρx, σx) ε−2 log 1
+ε
+
+queries.
+9
+
+
+=== PDF PAGE 10 ===
+As shown by Kothari [31], the term ε−2 in Theorem 11 cannot be improved. We brieﬂy
+describe the corresponding construction here. Consider the following state-generation problem
+with a standard oracle Ox encoding a string x ∈{0, 1}n (see Deﬁnition 23). The space Z is
+a direct sum of a one-dimensional space A, and a qubit B. The corresponding target state is
+σx =
+p
+1 −1/n|0⟩A +
+p
+1/n|parity(x)⟩B. It can be shown that ADV±(Ox, σx) = O(1), while
+any quantum algorithm that generates σx with error ≪
+p
+1/n has to make Ω(n) queries.
+Proof of Theorem 11. The algorithm is strongly inspired by the algorithm in [34]. Let W, {ux}
+and {vy} be a feasible solution to (6) with the objective value W = ADV±(Ox, ρx, σx). The
+state space of the algorithm is Z ⊕S ⊕A ⊕B. Here the register S is isomorphic to Z, and the
+registers A and B are isomorphic to X ⊗W.
+Let ε′ = ε/4. For each x ∈D, deﬁne the unit vectors tx+ and tx−by tx± =
+1
+√
+2
+ |ρx⟩Z±|σx⟩S
+
+,
+and the following (non-normalised) vector
+ψx = tx−+
+p
+W/2
+ε′
+ |vx⟩A −|(Ox ⊗IW)vx⟩B
+
+.
+Let Λ be the projector onto the orthogonal complement of the span of the vectors {ψx}x∈D. Let
+Πx be the projector onto the orthogonal complement of the span of the vectors |v⟩A −|(Ox ⊗
+IW)v⟩B over all v ∈X ⊗W. Let Ux = (2Πx −I)(2Λ −I).
+Our algorithm executes the phase detection algorithm from Theorem 2 with the oracle
+O = Ux, precision δ = ε′2/W and error ε′. After that, the algorithm swaps the register Z and
+S. We claim that this algorithm performs the required transformation in the register Z.
+Let us ﬁrst check the query complexity of the algorithm. The transformation 2Λ−I requires
+no queries as it is independent of O. The transformation 2Πx−I can be implemented in 2 queries.
+The query complexity of the algorithm now follows from Theorem 2.
+Now, let us prove the correctness of the algorithm.
+Fix an element x ∈D, and, as in
+Theorem 2, let Pδ denote the projection onto the eigenvectors of Ux having eigenvalues eiθ with
+|θ| ≤δ. Denote P ⊥
+δ = I −Pδ.
+Claim 12. We have ∥P ⊥
+0 tx+∥≤ε′.
+Proof. Consider the vector
+ϕ = tx+ −
+ε′
+√
+2W
+ |(O∗
+x ⊗IW)ux⟩A + |ux⟩B
+
+.
+First, tx+ is close to the normalised ϕ. Indeed, using (6a), we have
+K =
+
+ε′
+√
+2W
+ |(O∗
+x ⊗IW)ux⟩A + |ux⟩B
+
+2
+≤ε′2.
+Thus, ⟨tx+, ϕ⟩2 /∥ϕ∥2 = 1/(1 + K) ≥1 −ε′2. Next, we show that Uxϕ = ϕ, which proves the
+claim. For this, note that for all y ∈D,
+⟨ϕ, ψy⟩= 1
+2
+
+⟨ρx, ρy⟩−⟨σx, σy⟩−
+D
+ux,
+ (Ox −Oy) ⊗IW
+
+vy
+E
+= 0
+by (6b). This implies Λϕ = ϕ. Next, note that
+|(O∗
+x ⊗IW)ux⟩A + |ux⟩B = |w⟩A + |(Ox ⊗IW)w⟩B
+for w = (O∗
+x ⊗IW)ux. Thus, this vector is orthogonal to |w⟩A −|(Ox ⊗IW)w⟩B, as well as to
+|v⟩A −|(Ox ⊗IW)v⟩B for all v ⊥w. Hence, Πxϕ = ϕ. Together, this proves that Uxϕ = ϕ.
+10
+
+
+=== PDF PAGE 11 ===
+Claim 13. For all δ > 0, we have ∥Pδtx−∥≤δ
+2
+p
+1 + W 2/ε′2.
+Proof. This is a simple application of Lemma 1 with Π1 = Λ, Π2 = Πx and w = ψx.
+Now we can prove the correctness of the algorithm.
+Let P denote the phase detection
+subroutine used in our algorithm. Then,
+P|ρx⟩Z −|σx⟩S
+ =
+1
+√
+2
+P(tx++tx−)−(tx+−tx−)
+ ≤
+1
+√
+2
+Ptx+−tx+
++ 1
+√
+2
+Ptx−+tx−
+. (10)
+By Theorem 2 and Claim 12, the ﬁrst term of (10) is at most
+√
+2∥P ⊥
+0 tx+∥≤
+√
+2ε′. For the
+second term, by the same theorem and Claim 13, we have
+1
+√
+2
+Ptx−+ tx−
+ ≤
+1
+√
+2
+PP ⊥
+δ tx−+ P ⊥
+δ tx−
+ +
+√
+2 ∥Pδtx−∥≤ε′
+√
+2
++ δ
+√
+2
+r
+1 + W 2
+ε′2 .
+Thus, we have the following estimate on (10):
+P|ρx⟩Z −|σx⟩S
+ ≤
+√
+2ε′ + ε′
+√
+2
++ δ
+√
+2
+r
+1 + W 2
+ε′2 ≤ε′√
+2 + 1
+√
+2
+
++
+ε′2
+√
+2W
+r
+2W 2
+ε′2 < 4ε′ = ε.
+This ﬁnishes the proof of Theorem 11.
+4.2
+Unitary Implementation and Composition
+In this section, we study a variation of the problem from the last section.
+Deﬁnition 14 (Unitary Implementation). Let X and Z be vector spaces, and D be some ﬁnite
+set of labels. For each x ∈D, a unitary Ox in X and a unitary Vx in Z are ﬁxed. In the unitary
+implementation problem (Ox, Vx)x∈D, the task is to construct a quantum algorithm with an
+oracle O on X such that, for each x ∈D, if O is replaced by Ox, the algorithm implements Vx
+on Z. (Again, Z is embedded into the space of the algorithm.)
+This problem is essentially a special case of the state conversion problem. Indeed, we can
+deﬁne the set of labels D′ as consisting of pairs (x, ρ) with x ∈D and ρ being a unit vector in
+Z. Then, for a label (x, ρ) ∈D′, we deﬁne
+Ox,ρ = Ox,
+ρx,ρ = ρ,
+and
+σx,ρ = Vxρ.
+(11)
+This state conversion problem is equivalent to the unitary implementation problem. But as
+there are many correlations between triples with the same x, we can obtain a slightly more
+compact formulation of the bound.
+Deﬁnition 15. For a unitary implementation problem (Ox, Vx)x∈D, its adversary bound is
+ADV±(Ox, Vx)x∈D = γ2
+ Vx −Vy | Ox −Oy
+
+x,y∈D .
+(12)
+With this deﬁnition, we regain the results of Section 4.1 in the new settings.
+Theorem 16. Assume that a unitary implementation problem (Ox, Vx)x∈D can be solved exactly
+in T queries. Then, ADV±(Ox, Vx)x∈D ≤T.
+11
+
+
+=== PDF PAGE 12 ===
+Proof. Consider the corresponding state conversion problem deﬁned in (11), and the proof of
+Theorem 10 on this instance. For a ﬁxed x, let Υ′
+x map a vector ρ ∈Z into the vector ux,ρ, that
+is the feasible solution (8) corresponding to the pair (x, ρ) ∈D′. Similarly, deﬁne Φy : ρ 7→vy,ρ.
+From (8) and (9), it is apparent that both these transformations are linear. As ∥ux,ρ∥2 ≤T for
+all unit ρ ∈Z, we get that ∥Υ′
+x∥2 ≤T. Similarly, ∥Φy∥2 ≤T.
+By (6b), for all x, y ∈D and unit ρ, ρ′ ∈Z, we have
+D
+Υ′
+xρ′,
+ (Ox −Oy) ⊗IW
+
+Φyρ
+E
+=
+
+ρ′, ρ
+
+−
+
+Vxρ′, Vyρ
+
+,
+(13)
+or, as ρ and ρ′ are arbitrary,
+Υ′
+x
+∗ (Ox −Oy) ⊗IW
+
+Φy = I −V ∗
+x Vy.
+(14)
+Thus, Υx = Υ′
+xV ∗
+x and Φy form a feasible solution to (2) with objective value at most T.
+Theorem 17. Let (Ox, Vx) be a unitary implementation problem with ﬁnite ADV±(Ox, Vx)x∈D,
+and ε > 0 be a real number. Then, there exists a quantum algorithm with oracle O that, for
+each x ∈D, if O is replaced by Ox, implements an isometry V ′
+x from Z to the state space of the
+algorithm, such that ∥Vx −V ′
+x∥≤ε. The algorithm makes O
+ ADV±(Ox, Vx) ε−2 log 1
+ε
+
+queries.
+Proof. This theorem is proven by a direct reduction to Theorem 11. Let Υx and Φy be the
+optimal solution to (2) for ADV±(Ox, Vx). For x ∈D and a unit ρ ∈Z, deﬁne vectors
+ux,ρ = ΥxVxρ
+and
+vy,ρ = Φyρ.
+As in (13) and (14), we get that this is a feasible solution to the optimisation problem (6) for
+the state conversion problem (11). Also, its objective value is at most ADV±(Ox, Vx).
+More precisely, in order to apply Theorem 11, we need a ﬁnite D′ in the state conversion
+problem (11). This is achieved by a standard argument, which we write down explicitly here,
+and will use implicitly further in the paper. Select a ﬁnite ε-net on Z and apply Theorem 11
+for the vectors ρ in the net. Let A be the resulting algorithm. For arbitrary ρ ∈Z, let ρ′ be
+the vector in the net closest to ρ. Then,
+∥Aρ −Vxρ∥≤∥Aρ −Aρ′∥+ ∥Aρ′ −Vxρ′∥+ ∥Vxρ′ −Vxρ∥≤3ε.
+Replacing ε by ε/3, we obtain the required result.
+A nice property of (12), compared to Deﬁnition 8, is its symmetry of the input and the
+output. It makes possible various applications of the composition property from Proposition 6.
+In particular, the following result is straightforward:
+Proposition 18. Let D be a set of labels, (Ox, Vx)x∈D and (Vx, Wx)x∈D be unitary implemen-
+tation problems. Then, ADV±(Ox, Wx) ≤ADV±(Ox, Vx) ADV±(Vx, Wx).
+A computational interpretation of Proposition 18 is as follows. Assume we want to imple-
+ment (Ox, Wx) with constant error. Assume we also know solutions to the adversary bounds
+of (Ox, Vx) and (Vx, Wx) with objective values T1 and T2, respectively. One approach is to use
+Theorem 17 to get an O(T2) query algorithm B for the problem (Vx, Wx). Then, we can use
+Theorem 17 again to get an algorithm A for the problem (Ox, Vx) and use it as an oracle for
+B. In order for this to work, we must set the error of the algorithm A to ε ≪1/T2. Thus, the
+complexity of one execution of A becomes eO(T1T 2
+2 ), and the total complexity of the algorithm
+becomes eO(T1T 3
+2 ).
+12
+
+
+=== PDF PAGE 13 ===
+Proposition 18 shows that we can actually get an algorithm with complexity O(T1T2) instead,
+thus saving a T 2
+2 factor!
+This is more impressive than the logarithmic savings for function
+evaluation. Moreover, if we only have an approximate algorithm for the problem (Ox, Vx), and
+don’t know a solution to the adversary bound, we, in general, cannot amplify the precision of
+the algorithm, and cannot compose the two procedure at all.
+It is possible to get other results in the spirit of Proposition 18.
+The next proposition
+corresponds to the observation that the query complexity of implementing two subroutines in
+superposition equals the complexity of the hardest of them, and that implementing a tensor
+product of them is at most the sum of the complexities of the two.
+Proposition 19. Let D be a set of labels, (Ox, Vx)x∈D and (Ox, Wx)x∈D be unitary implemen-
+tation problems. Then,
+ADV±(Ox, Vx ⊕Wx) = max
+
+ADV±(Ox, Vx), ADV±(Ox, Wx)
+	
+and
+ADV±(Ox, Vx ⊗Wx) ≤ADV±(Ox, Vx) + ADV±(Ox, Wx).
+Proof. The ﬁrst equation immediately follows from Proposition 6(f). For the second inequality,
+using Propositions 4(c) and 6(g), we have (all relative γ2-norms are on x, y ∈D):
+ADV±(Ox, Vx ⊗Wx) = γ2
+ Vx ⊗Wx −Vy ⊗Wy | Ox −Oy
+
+≤γ2
+ Vx ⊗Wx −Vy ⊗Wx | Ox −Oy
+
++ γ2
+ Vy ⊗Wx −Vy ⊗Wy | Ox −Oy
+
+≤γ2
+ Vx −Vy | Ox −Oy
+
+γ2(Wx | 1) + γ2
+ Wx −Wy | Ox −Oy
+
+γ2(Vy | 1)
+≤ADV±(Ox, Vx) + ADV±(Ox, Wx),
+since from ∥Wx∥= 1 we get γ2(Wx | 1)x,y∈D = 1, and similarly for γ2(Vy | 1).
+With this machinery, it is also easy to introduce costs of various subroutines in a way similar
+to [37]:
+Proposition 20. Let D be a set of labels, (Ox, V (i)
+x )x∈D, for i ∈[n], and (Ox, Wx)x∈D be unitary
+implementation problems. Then,
+ADV±(Ox, Wx) ≤γ2
+
+Wx −Wy
+
+M
+i∈[n]
+V (i)
+x
+−V (i)
+y
+ADV± Ox, V (i)
+x
+
+
+x,y∈D
+.
+Intuitively, the last expression means that it costs ADV± Ox, V (i)
+x
+
+queries to execute the
+subroutine that implements V (i)
+x .
+Proof. By Propositions 4(b) and 6(f), we have
+γ2
+M
+i∈[n]
+V (i)
+x
+−V (i)
+y
+ADV± Ox, V (i)
+x
+
+ Ox −Oy
+
+x,y∈D
+= 1,
+and the statement follows from Proposition 6(e).
+13
+
+
+=== PDF PAGE 14 ===
+4.3
+Fractional Query Model
+In this section, we brieﬂy discuss how the results of the previous sections can be applied for the
+fractional query model. The fractional query model is equivalent to the more known continuous
+query model for the standard input oracle [23, 16]. A similar equivalence still holds for general
+input oracles. Let us consider the unitary implementation problem, the state conversion problem
+being similar.
+Let D be a set of labels. For x ∈D, we have to implement a unitary Vx. This time, instead
+of the input oracle Ox, we have an input Hamiltonian Hx, which is an arbitrary Hermitian
+operator. A query algorithm alternates unitary transformations and executions of the input
+Hamiltonian. The algorithm can execute the input Hamiltonian for arbitrary time t > 0, which
+results in the application of the unitary e−iHt. The complexity of the algorithm is the total
+execution time of the input Hamiltonian.
+We may assume that all applications of the input Hamiltonian have some small duration t.
+The adversary bound of this problem is then equal to
+lim
+t→+0 t γ2
+
+Vx −Vy
+ e−iHxt −e−iHyt
+x,y∈D = lim
+t→+0 γ2
+
+Vx −Vy
+ e−iHxt −IX
+t
+−e−iHyt −IX
+t
+
+x,y∈D,
+where we used Proposition 6(d). Clearly,
+lim
+t→+0
+e−iHxt −IX
+t
+= d
+dt e−iHxt
+t=0 = −iHx.
+Using Lemma 21 below and Proposition 4(b), the adversary bound of implementation of {Vx}
+in the fractional query model with input Hamiltonians {Hx} is given by
+γ2
+ Vx −Vy | Hx −Hy
+
+x,y∈D .
+Lemma 21. Let D1 and D2 be ﬁnite sets of labels, and R ⊆D1 × D2. Consider the subspace
+M of families of matrices ∆= {∆xy}x∈D1,y∈D2 satisfying ∆xy = 0 for all (x, y) ∈R. Let M0
+denote the subset of all {∆xy} ∈M satisfying ∆xy ̸= 0 for all (x, y) /∈R. For a ﬁxed family
+A = {Axy}x∈D1,y∈D2, the function ∆7→γ2(A|∆) of ∆on M, is continuous in all points of M0.
+Proof. If Axy ̸= 0 for some (x, y) ∈R, then γ2(A|∆) = +∞on all M, hence, it is continuous.
+Let us now assume that Axy = 0 for all (x, y) ∈R.
+Fix a parameter δ > 0, and denote by Mδ the subset of all {∆xy} ∈M satisfying ∥∆xy∥> δ
+for all (x, y) /∈R. We will show that γ2(A|∆) is uniformly continuous on Mδ. As δ is arbitrary,
+this proves that γ2(A|∆) is continuous on M0.
+Let ∆= {∆xy} and ∆′ = {∆′
+xy} be two families in Mδ. Let {Υx} and {Φy} be an optimal
+solution to γ2(A|∆). Then, by Proposition 4(c), where the relative γ2-norms are with respect
+to x ∈D1, y ∈D2,
+γ2(A|∆′) ≤γ2
+
+Υ∗
+x(∆′
+xy ⊗IW)Φy
+ ∆′
+xy
+
++ γ2
+
+Υ∗
+x
+ (∆xy −∆′
+xy) ⊗IW
+
+Φy
+ ∆′
+xy
+
+≤γ2(A|∆) + γ2
+
+Υ∗
+x
+ (∆xy −∆′
+xy) ⊗IW
+
+Φy
+ ∆′
+xy
+
+.
+Applying (4) twice, we see that
+γ2
+
+Υ∗
+x
+ (∆xy −∆′
+xy) ⊗IW
+
+Φy
+ ∆′
+xy
+
+≤|D1| · |D2|
+δ
+max
+x,y
+Υ∗
+x
+ (∆xy −∆′
+xy) ⊗IW
+
+Φy
+
+tr
+≤|D1| · |D2|
+δ
+max
+x,y
+ dim Z1∥Υ∗
+x∥∥Φy∥∥∆xy −∆′
+xy∥
+
+≤
+|D1| · |D2| P
+xy ∥Axy∥tr
+δ2
+dim Z1 max
+x,y ∥∆xy −∆′
+xy∥.
+14
+
+
+=== PDF PAGE 15 ===
+As we can exchange ∆and ∆′, γ2(A|∆) is uniformly continuous on Mδ.
+Let us note that, in general, γ2(A|∆) is not continuous in ∆outside M0.
+Indeed, let
+A = (axy) be a 01-matrix. By Proposition 6(c), γ2
+ axy|axy
+
+= 1. Now let ε > 0 be a small real
+number, and ∆xy = (δxy) be deﬁned by δxy = 1 if axy = 1, and δxy = ε if axy = 0. In this case,
+using (3), γ2
+ axy|δxy
+
+= γ2(A). Finally, it is possible to construct a 01-matrix with arbitrary
+large γ2-norm, for example, γ2 ( 1 0
+1 1 ) > 1.
+5
+State-Generating Oracles
+In this section, we study a more speciﬁc problem, in which we are given an oracle that prepares
+some quantum state, or a direct sum of a number of such oracles. An important special case is
+the standard input oracle that encodes a sting x ∈[q]n. This oracle is used by most of quantum
+algorithms and previous research on quantum adversaries, starting with the hybrid method and
+ending with [34], focused on this case.
+We proceed by applying general results of Section 4 to this special case. We get two diﬀerent
+formulations of the adversary bound for this problem. The ﬁrst formulation is easier to use,
+and it has composability properties similar to Proposition 18, but it can be much larger than
+the true adversary bound. Another one is a tight characterisation of the adversary bound, but
+it is also harder to use.
+In Section 5.2, we compare performance of both bounds on a simple problem, and show
+that, although the bounds we got in Theorems 11 and 17 are similar, the bound for unitary
+implementation is more precise for some problems.
+5.1
+Deﬁnitions and Bounds
+In this section, we will work with the following input oracle:
+Deﬁnition 22 (State-Generating Oracle). Let X be a vector space with a ﬁxed unit vector
+e0 ∈X. An oracle Ox generates a state ψx iﬀOxe0 = ψx.
+We will also consider direct sums of such oracles. That is, let J = Cn, and Ox acting on
+J ⊗X is decomposable into Ox = L
+j∈[n] Ox,j, where each Ox,j acts on X and generates a state
+ψx,j. In particular, we have Ox|j⟩J |0⟩X = |j⟩J |ψx,j⟩X for all j ∈[n].
+The convention is that the algorithm works for any oracle generating the states ψx,j. The
+case n = 1 is the fundamental one, and the general case can be reduced to it by Proposition 6(f).
+We will assume that e0 is orthogonal to all ψx,j. This is without loss of generality, as one can
+always add one more dimension to X. The most common variant of the state-generating oracle
+is as follows.
+Deﬁnition 23 (Oracle Encoding a String). Let X has orthonormal basis e0, . . . , eq. A standard
+oracle Ox encoding a string x = (xj) ∈[q]n is a state-generating oracle of Deﬁnition 22 with
+ψx,j = exj.
+Let H be an arbitrary vector space.
+A noisy oracle eOx encoding a string x ∈[q]n is a
+state-generating oracle with each ψx,j ∈X ⊗H satisfying ∥(Πxj ⊗IH)ψx,j∥2 ≥1
+2 + Ω(1). Here
+Πa is the projector eae∗
+a on X.
+If the input oracle Ox of a state conversion or a unitary implementation problem is a
+state-generating oracle, we replace it by the list of the corresponding vectors, i.e., we write
+ {ψx,j}j∈[n], ρx, σx
+
+x∈D or
+ {ψx,j}j∈[n], Vx
+
+x∈D. We omit the subscripts if they are clear from
+the context. For instance, for the standard input oracle, we get the problem
+ {exj}, ρx, σx
+
+15
+
+
+=== PDF PAGE 16 ===
+studied in [34]. Our task in this section is to provide estimates on the adversary bound with
+state-generating oracles.
+Proposition 24. For a state conversion
+ {ψx,j}j∈[n], ρx, σx
+
+x∈D and a unitary implementation
+ {ψx,j}j∈[n], Vx
+
+x∈D problems, we have the following estimates:
+ADV± {ψx,j}, ρx, σx
+
+≤γ2
+
+⟨ρx, ρy⟩−⟨σx, σy⟩
+
+M
+j∈[n]
+ 1 −⟨ψx,j, ψy,j⟩
+
+x,y∈D
+(15)
+ADV± {ψx,j}, Vx
+
+≤γ2
+
+Vx −Vy
+
+M
+j∈[n]
+ 1 −⟨ψx,j, ψy,j⟩
+
+x,y∈D
+.
+(16)
+The direct sum in (15) and (16) stands for an n × n diagonal matrix.
+Proof. Let D′ denote the label set of the state conversion problem corresponding to
+ {ψx,j}, σx
+
+,
+i.e., each label consists of x ∈D and the choice of a unitary Ox = L
+j∈[n] Ox,j preparing the
+vectors ψx,j. By Theorem 11, for each j ∈[n], we have γ2
+ 1−⟨ψx,j, ψy,j⟩| Ox,j−Oy,j
+
+x,y∈D′ ≤1.
+By Proposition 6(f),
+γ2
+M
+j∈[n](1 −⟨ψx,j, ψy,j⟩)
+ Ox −Oy
+
+x,y∈D′ ≤1.
+The statement now follows from Points (b) and (e) of Proposition 6.
+Inspired by this result, let us denote by g
+Adv
+ {ψx,j}, ρx, σx
+
+and g
+Adv
+ {ψx,j}, Vx
+
+the right-
+hand sides of (15) and (16), respectively.
+An equivalent formulation of g
+Adv
+ {ψx,j}, ρx, σx
+
+,
+which is closer in form to the usual formulation of the dual adversary bound, is
+minimise
+max
+x∈D max
+nX
+j∈[n] ∥ux,j∥2,
+X
+j∈[n] ∥vx,j∥2o
+(17a)
+subject to
+X
+j∈[n] ⟨ux,j, vy,j⟩
+ 1 −⟨ψx,j, ψy,j⟩
+
+= ⟨ρx, ρy⟩−⟨σx, σy⟩
+for all x, y ∈D. (17b)
+W is a vector space,
+ux,j, vy,j ∈W.
+(17c)
+This bound has some nice properties. It is easier than the general deﬁnition of ADV± {ψx,j}, ρx, σx
+
+.
+For a state generation problem, it has a symmetry between the input and the output, like the
+expression in (12). In particular, it can be composed with itself akin Proposition 18.
+Inspired by this symmetry, one might guess that this is a tight bound on ADV± {ψx,j}, ρx, σx
+
+.
+But it turns out that it is not tight, as we will show in Section 5.2. On the other hand, there
+is one important special case, when it is.
+Proposition 25. Assume that D ⊆[q]n, and a state conversion problem
+ {exj}j∈[n], ρx, σx
+
+x∈D
+with the standard oracle is given. Then, ADV± {exj}, ρx, σx
+
+≥1
+2 g
+Adv
+ {exj}, ρx, σx
+
+, that is,
+ADV± {exj}, ρx, σx
+
+≥1
+2 γ2
+
+⟨ρx, ρy⟩−⟨σx, σy⟩
+
+M
+j∈[n] 1xj̸=yj
+
+x,y∈D
+.
+A similar result holds for the unitary implementation problem.
+Thus, we obtain the formulation of the adversary bound from [34].
+16
+
+
+=== PDF PAGE 17 ===
+Proof. Similarly to the proof of Proposition 24, it suﬃces to show that
+γ2
+ Ox,j −Oy,j | 1xj̸=yj
+
+x,y∈D′ ≤2.
+To show this, note that the block matrices Υx =
+ O∗
+x,j
+IX
+
+and Φy =
+
+IX
+−Oy,j
+
+form a feasible
+solution to (2) in this case.
+There is an alternative way to estimate ADV±({ψx,j}, σx). For ψ ∈X, orthogonal to e0,
+let R(ψ) = IX −(e0 −ψ)(e0 −ψ)∗be the reﬂection through the orthogonal complement of
+(e0 −ψ)/
+√
+2.
+Proposition 26. For a unitary implementation problem
+ {ψx,j}j∈[n], Vx
+
+x∈D, we have
+1
+2 ADV± {ψx,j}, Vx
+
+≤γ2
+
+Vx −Vy
+
+M
+j∈[n]
+ R(ψx,j) −R(ψy,j)
+
+x,y∈D
+≤ADV± {ψx,j}, Vx
+
+.
+Proof. The ﬁrst inequality, similarly to Proposition 24, is a consequence of
+γ2
+ R(ψx,j) −R(ψy,j) | Ox,j −Oy,j
+
+x,y∈D′ ≤2.
+The latter follows from Theorem 16, as given an oracle Ox,j mapping e0 into ψx,j, one can reﬂect
+about (e0 −ψx,j)/
+√
+2 in two queries. (Recall that we assumed that ψx,j is orthogonal to e0.)
+For the second inequality, note that R(ψx,j) transforms e0 into ψx,j, and, thus, is a valid
+Ox,j from Deﬁnition 22.
+5.2
+Comparison of The Bounds
+In this section, we analyse the performance of bounds from Section 5.1 on the following simple
+problem. Let n = 1, and consider the following state generation problem (ψx, σx)x∈D, where we
+are given an oracle that generates a state ψx, and the task is to generate σx. For simplicity, we
+assume all vectors have real entries.
+The problem is parametrised by a positive real number α, that we assume to be small. The
+set of labels D has a special label 0. For all x ∈D \ {0}, we have ⟨ψx, ψ0⟩= cos α. The target
+states satisfy σx = σy and σx ⊥σ0 for all x, y ̸= 0. For simplicity, we assume that α = π/(4k)
+for a positive integer k.
+Claim 27. The above problem can be solved exactly in O(1/α) queries.
+Proof. This is an application of exact quantum amplitude ampliﬁcation [20]. For completeness,
+let us describe the algorithm. Start in the state ψ0 and repeatedly reﬂect about ψ0 and ψx. If
+x = 0, the state ψ0 remains intact. If x ̸= 0, each iteration of two reﬂections performs a rotation
+by angle 2α in the plane spanned by ψ0 and ψx. Thus, after k iterations, the state φ of the
+algorithm is orthogonal to ψ0. Attach a fresh qubit containing 0 if φ = ψ0 and 1 if φ ⊥ψ0, and
+run the whole procedure in reverse.
+Claim 28. For the above problem, we have g
+Adv(ψx, σx) = Θ(1/α2).
+Proof. Let x be an arbitrary non-zero element of D. Note that 1 −⟨ψx, ψ0⟩= 1 −cos α ≈α2.
+On the other hand, 1 −⟨σx, σ0⟩= 1. Hence, by Proposition 6(c), g
+Adv(ψx, σx) = Ω(1/α2).
+To get the upper bound, use the following matrices as a feasible solution
+Υ0 = Φx =
+1/√1 −cos α
+0
+
+and
+Φ0 = Υx =
+
+0
+1/√1 −cos α
+
+for all x ̸= 0.
+17
+
+
+=== PDF PAGE 18 ===
+Thus, Claim 28 shows that the estimate in Proposition 24 is not tight. On, the other hand,
+we know that the estimate from Proposition 26 is tight, and we will show an explicit solution.
+For this, the following easy lemma is useful. We omit the proof.
+Lemma 29. Let Rψ and Rφ be reﬂections about the orthogonal complements of vectors ψ and
+φ in X. Let S ⊆X be the span of ψ and φ, and let α be the angle between them. The diﬀerence
+Rψ −Rφ is zero on S⊥, and it has eigenvalues ±2 sin α on S with eigenvectors that are the
+bisectors of ψ and φ⊥, the latter complement taken in S.
+Claim 30. For x ∈D, let us denote Rx = R(ψx) the reﬂection through the orthogonal comple-
+ment of ψ′
+x = (e0 −ψx)/
+√
+2. Then, γ2(1 −⟨σx, σy⟩| Rx −Ry)x,y∈D = Θ(1/α).
+Proof. Note that, for x ̸= 0, the angle between ψ′
+x and ψ′
+0 is β ≈α/
+√
+2.
+By Lemma 29,
+R0 −Rx has eigenvalues ±2 sin β with the eigenvectors being the bisectors of ψ′
+0
+⊥and ψ′
+x. From
+Proposition 6(c), we get a lower bound γ2
+ 1 −⟨σx, σy⟩| Rx −Ry
+
+≥1/(2 sin β) = Ω(1/α).
+Let ϕx be the eigenvector of R0 −Rx with eigenvalue 2 sin β.
+If α is small, the angle
+between ϕx and ψ′
+0 is around π/4. Note that c =
+
+ϕx, (R0 −Rx)ψ′
+0
+
+is independent of x, and
+c ≈
+√
+2 sin β ≈α. Thus, we can take the following feasible solution
+Υ0 =
+ψ′
+0/√c
+0
+
+,
+Φx =
+ϕx/√c
+0
+
+,
+Φ0 =
+
+0
+ψ′
+0/√c
+
+,
+and
+Υx =
+
+0
+ϕx/√c
+
+to show that γ2
+ 1−⟨σx, σy⟩| Rx−Ry
+
+= O(1/α). (Here we used that Rx−Ry is self-adjoint.)
+This proves that Proposition 26 is more precise than Proposition 24 for vectors that are
+close to each other. Essentially, this is because ∥Rx −R0∥scales as α, whereas 1 −⟨ψx, ψ0⟩
+scales as α2. On the other hand, since the location of the eigenvectors of Rx −Ry depends on
+both x and y, it is hard to “catch” them by a solution {Υx}, {Φy} with parts that depend on
+x and y separetely.
+This has other consequences. This time, consider a diﬀerent state generation problem. Let
+D = {0, 1}, ⟨ψ0, ψ1⟩= cos α, and ⟨σ0, σ1⟩= cos γ, where γ satisﬁes 1 −cos γ = sin α, that is,
+γ ≈√α. As in Claim 30, we get that
+γ2
+ 1 −⟨σx, σy⟩| Rx −Ry
+
+x,y∈D = Θ(1).
+(18)
+On the other hand, by the proof of the same claim, for any unitaries V0 and V1 that transform
+ρ0 into σ0 and σ1, respectively, we have that
+γ2
+ Vx −Vy | Rx −Ry
+
+x,y∈D = Θ(1/√α).
+(19)
+Thus, comparing (18) and (19), we arrive at a paradoxical conclusion: The adversary bound
+allows generation of σ0 and σ1 in a constant number of queries, but simultaneously prohibits
+any unitary that would perform this task! Or, to put it less dramatically, Theorem 16 is more
+precise than Theorem 10.
+Also, in sight of (19) and Theorem 16, an algorithm (like the one in Theorem 11) that
+performs the transformation in (18) with error ≪√α has to make Ω(1/√α) queries. This
+shows that the ε−2 term in the complexity estimate of Theorem 11 cannot be improved to less
+than ε−1.
+18
+
+
+=== PDF PAGE 19 ===
+6
+Evaluation of Functions and Relations
+In this section, we study the problem of evaluating relations and functions with emphasis on
+lower bounds. In Section 6.1, we obtain lower bounds by optimising the adversary bound for
+state generation over the set of allowed target states and taking the dual. Our approach in
+Section 6.2 is more interesting. We show that the adversary bound is a lower bound not only
+for the exact version of the problem, but also for the approximate one in two cases: When we
+evaluate a function; or when we evaluate a relation, provided that we can eﬀectively test the
+output of the algorithm. This is done by constructing the adversary bound for the problem of
+outputting the exact solution, given an oracle that prepares an approximate solution.
+6.1
+Deﬁnitions and Basic Bounds
+Deﬁnition 31 (Evaluation of Relation). Let X be a vector space, D be a set of labels, and
+{Ox}x∈D be a collection of input oracles on X.
+Assume also that there is given a relation
+r: D →[m]. A quantum algorithm that evaluates the relation r with input oracles {Ox} is
+any state-generating algorithm from Deﬁnition 7 with Z = Y ⊗H, where Y = Cm and H is
+arbitrary, that satisﬁes the following condition. The state ρx equals some ﬁxed ρ0 for all x ∈D,
+and (Πr(x) ⊗IH)σx = σx for all x ∈D. Here Πr(x) is the projector P
+a∈r(x) eae∗
+a in Y.
+Evaluation of a function is a special case of this deﬁnition with |r(x)| = 1 for all x ∈D.
+We say that the above algorithm has error ε if ∥(Πr(x) ⊗IH)σx∥2 ≥1−ε for all x ∈D. Note
+that this notion is diﬀerent than the one assumed in Sections 4 and 5, but it is conventional in
+quantum algorithms.
+Throughout the section, we use notation ∆= (∆xy)x,y∈D for the collection of matrices
+∆xy = Ox −Oy. Using Deﬁnition 31 and Theorem 10, it is straightforward to lower bound
+the query complexity of evaluation of a relation. The lower bound is given by the following
+optimisation problem:
+minimise
+max
+n
+maxx∈D ∥ux∥2 , maxy∈D ∥vy∥2o
+(20a)
+subject to
+1 −
+X
+a∈[m] ⟨σx,a, σy,a⟩=
+
+ux,
+ ∆xy ⊗IW
+
+vy
+
+for all x, y ∈D;
+(20b)
+X
+a/∈r(x) ∥σx,a∥2 ≤ε
+for all x ∈D;
+(20c)
+H, W are vector spaces,
+ux, vy ∈X ⊗W,
+σx,a ∈H.
+(20d)
+Indeed, this is the adversary bound (6) with the optimisation over σx = L
+a∈[m] σx,a.
+The
+condition (20b) with x = y implies ∥σx∥2 = 1.
+Taking the dual, we obtain the following
+formulation:
+maximise
+λmax
+ Γ −εN
+
+(21a)
+subject to
+∥Γ ◦∆∥≤1 ;
+(21b)
+Γ ⪯N ◦Ea
+for all a ∈[m].
+(21c)
+Here Γ is a Hermitian D × D matrix, and N is a diagonal D × D matrix with non-negative real
+entries. Next, λmax stands for the maximal eigenvalue, thus, ∥Γ∥= max{λmax(Γ), λmax(−Γ)}.
+The diagonal D×D matrix Ea is deﬁned by Ea[[x, x]] = 1a/∈r(x). The Hadamard product in (21b)
+is deﬁned as in Proposition 5.
+19
+
+
+=== PDF PAGE 20 ===
+When ε = 0, the optimisation problem can be slightly simpliﬁed (where Γ[[r−1(a), r−1(a)]]
+stands for the corresponding submatrix of Γ):
+maximise
+λmax
+ Γ
+
+(22a)
+subject to
+∥Γ ◦∆∥≤1 ;
+(22b)
+Γ[[r−1(a), r−1(a)]] ⪯0
+for all a ∈[m].
+(22c)
+(Compare condition (22c) with condition (25c) from the functional case.) The dual formulations
+in (21) and (22) are derived in Appendices A.2 and A.3. Thus, we obtain:
+Theorem 32. A lower bound on evaluating a relation r with input oracles {Ox} and error ε is
+given by (21). A lower bound on exact evaluation is given by (22).
+By Theorem 11, the approximate bound is essentially tight if one can tolerate a slightly
+larger error in the upper bound.
+We can also get a lower bound for the average-case error. In this case, a probability distribu-
+tion px is given on D, and the algorithm must have error at most ε on average, when the input x
+is sampled from p. In notation of Deﬁnition 31, the requirement is P
+x∈D px∥(Πr(x) ⊗IH)σx∥2 ≥
+1 −ε. The following result is proven in Appendix A.4.
+Theorem 33. The quantum query complexity of evaluating a relation r with input oracles {Ox},
+probability distribution px on the set of inputs D, and average error ε, is lower bounded by the
+following optimisation problem:
+maximise
+u∗Γu −εη
+(23a)
+subject to
+∥Γ ◦∆∥≤1 ;
+(23b)
+Γ ◦(uu∗) ⪯ηP ◦Ea
+for all a ∈[m];
+(23c)
+where the optimisation is over D × D Hermitian matrix Γ, unit vector u ∈CD, and real η ≥0.
+The matrix P = diag(px), and ∆and Ea are as in (21).
+Now assume we have the standard input oracle as in Deﬁnition 23. Without loss of generality,
+without loss of generality D = [q]n, as we may always say that x ∈[q]n \ D is in relation with
+all a ∈[m]. Next, by Proposition 25, we may replace ∆xy in (20b) by L
+j∈[n] 1xj̸=yj. Using the
+same dual, and simplifying slightly, we obtain the following version of the bound.
+Corollary 34. Let r: [q]n →[m] be a relation. The quantum query complexity of evaluating r
+with the standard input oracle is given by (21) and (22) for the approximate and exact versions
+of the problem, respectively, where the conditions (21b) and (22b) are replaced by
+∥Γ ◦∆j∥≤1
+for all j ∈[n],
+and the [q]n ×[q]n matrix ∆j is given by ∆j[[x, y]] = 1xj̸=yj. The complexity in the average-error
+case is given by (23) with (23b) replaced by the same condition.
+6.2
+Puriﬁers
+As we mentioned in the introduction, the usual adversary bound is tight for bounded-error
+function evaluation, but it is only semi-tight for general state conversion problems. In this
+section, we give an explanation of this phenomenon and show that this is still true for general
+input oracles. Our method can be extended to other problems. For instance, we show that the
+20
+
+
+=== PDF PAGE 21 ===
+adversary bound is tight for approximate evaluation of relations, provided that we can eﬃciently
+test the output of the algorithm.
+The functional case is based on the following state generation problem. Let Y and H be
+vector spaces. The input vector ψx ∈Y ⊗H, when Y is measured, gives one of the basis vector
+with high probability. The target vector is the corresponding basis vector. We show that if the
+problem has a bounded gap, its adversary bound is constant. More precisely, we consider the
+following two cases:
+• Let n = 2, and the standard basis of Y be {e0, e1}. Assume there exist constants c, δ with
+0 < c −δ < c + δ < 1, such that, for each input vector ψx, either ∥Π1ψx∥2 ≤c −δ, or
+∥Π1ψx∥2 ≥c + δ, where Πi = (eie∗
+i ) ⊗IH. In the ﬁrst case we deﬁne σx = e0, and in the
+second case σx = e1.
+• Let n be arbitrary, Y have the standard basis {e1, . . . , en}, and δ > 0 be a constant. For
+each x ∈D, there exists i ∈[n] such that ∥Πiψx∥2 ≥1/2 + δ. The corresponding target
+state is σx = ei.
+Theorem 35. For both of the above state generation problems, we have
+γ2
+ 1 −⟨σx, σy⟩| 1 −⟨ψx, ψy⟩
+
+x,y∈D = O(1).
+Note that in this case 1 −⟨σx, σy⟩= 1σx̸=σy. We give the proof at the end of this section.
+Depending on the point of view, this result can be interpreted in two ways.
+Corollary 36. Let Ox be the standard input oracle encoding a string x ∈[q]n as in Deﬁnition 23.
+Assume A is a quantum algorithm implementing a unitary Vx in T queries to Ox for all x ∈
+D ⊆[q]n. Then, the unitary Vx can be approximated to arbitrary constant precision in O(T)
+queries to a noisy oracle eOx.
+A usual implementation of Vx with the noisy oracle reduces the error of the noisy oracle to
+≪1/T by O(log T) repetitions, giving an algorithm with complexity O(T log T). The previous
+corollary removes this logarithmic factor.
+Proof. By Theorem 16 and Proposition 25, we have
+γ2
+
+Vx −Vy
+
+M
+j∈[n] 1xj̸=yj
+
+x,y∈D ≤2T.
+On the other hand, the states ψx,j generated by the noisy oracle eOx satisfy the conditions of
+Theorem 35, so using this theorem and Proposition 6(f),
+γ2
+M
+j∈[n] 1xj̸=yj
+
+M
+j∈[n](1 −⟨ψx,j, ψy,j⟩)
+
+x,y∈D = O(1).
+The statement now follows from Proposition 6(e), Proposition 24 and Theorem 17.
+Another implication of Theorem 35 is our promised result about the tightness of the adver-
+sary bound for bounded-error function evaluation.
+Theorem 37. Let f : D →[m] be a function, and {Ox}x∈D be a collection of input oracles.
+The adversary bound
+γ2
+ 1f(x)̸=g(x) | Ox −Oy
+
+x,y∈D
+(24)
+characterises the bounded-error quantum query complexity of evaluating f with the general oracle
+{Ox}x∈D up to a constant factor.
+21
+
+
+=== PDF PAGE 22 ===
+Proof. The adversary bound gives an upper bound by Theorem 11. For the lower bound, let A
+be an optimal algorithm that evaluates f with bounded error in T queries. Let ψx be the ﬁnal
+state of A on the input x ∈D. By Theorem 10,
+γ2
+ 1 −⟨ψx, ψy⟩| Ox −Oy
+
+x,y∈D ≤T.
+The vectors ψx satisfy the conditions of Theorem 35, hence,
+γ2
+ 1f(x)̸=f(y) | 1 −⟨ψx, ψy⟩
+
+x,y∈D = O(1).
+Using Proposition 6(e), we get the statement of the theorem.
+Applying Proposition 5 to (24) and simplifying (or using (22)), we get the following formu-
+lation of the adversary bound for function evaluation:
+maximise
+∥Γ∥
+(25a)
+subject to
+∥Γ ◦∆∥≤1 ;
+(25b)
+Γ[[f −1(a), f −1(a)]] = 0
+for all a ∈[m];
+(25c)
+with notation as in (21).
+In general, we cannot obtain an analogue of Theorem 35 for approximate evaluation of
+relations. The reason is ambiguity. Assume there is an element x ∈D in relation with all
+[m] \ {1}, and an element y ∈D in relation with all [m] \ {2}. Given a uniform superposition
+over all elements of [m] as the input state, should we amplify for the ﬁrst or for the second case?
+But assume we can eﬀectively test a solution for a relation r. That is, there exists a bounded-
+error quantum algorithm that, given oracle access to Ox, and an element a ∈[m], accepts iﬀ
+a ∈r(x). This is a common scenario, especially in so-called search problems. For instance,
+consider the relation r between [q]n, where n ≫q, and the set of 2-subsets of [n]. A string
+x ∈[q]n is in relation with {a, b} ⊂[n] iﬀxa = xb. If q is large, it is not easy to ﬁnd a pair {a, b}
+in relation with x, but, having a pair, it is trivial to test it. Having this situation in mind, we
+state the following result.
+Theorem 38. Assume Z is a vector space, and δ > 0. Let {ψx, Πx}x∈D be a collection of unit
+vectors and projectors in Z such that ∥Πxψx∥2 ≥δ for all x. For each x, let Rx be the reﬂection
+IZ −2Πx. Then, there exist a vector space H, and a collection {σx}x∈D of unit vectors in Z ⊗H
+such that (Πx ⊗IH)σx = σx for all x, and
+γ2
+
+1 −⟨σx, σy⟩
+ (1 −⟨ψx, ψy⟩) ⊕(Rx −Ry)
+
+x,y∈D ≤2
+δ .
+We will give the proof later. Actually, it is easy to improve the bound slightly.
+Corollary 39. In the settings of Theorem 38, let Ox be an oracle generating the state ψx.
+Then,
+γ2
+
+1 −⟨σx, σy⟩
+ (Ox −Oy) ⊕(Rx −Ry)
+
+x,y∈D = O
+ 1
+√
+δ
+
+.
+(26)
+Proof. By amplitude ampliﬁcation [20], in O(1/
+√
+δ) queries to Ox, we can generate a state
+ψ′
+x ∈Z ⊗H such that ∥(Πx ⊗IH)ψ′
+x∥2 = Ω(1). By Theorem 10, and Points (c) and (f) of
+Proposition 6, we have
+γ2
+
+(1 −
+
+ψ′
+x, ψ′
+y
+
+) ⊕(Rx −Ry)
+ (Ox −Oy) ⊕(Rx −Ry)
+
+x,y∈D = O
+ 1
+√
+δ
+
+.
+Now compose it, using Proposition 6(e), with the bound from Theorem 38 applied to the vectors
+ψ′
+x.
+22
+
+
+=== PDF PAGE 23 ===
+The Ox −Oy term in (26) cannot be replaced with 1−⟨ψx, ψy⟩due to the reasons explained
+in Section 5.2.
+Our main consequence of Theorem 38 is that, in this case, it is possible to replace bound (21)
+with an easier bound (22), when analysing approximate evaluation of relations.
+Theorem 40. Let r: D →[m] be a relation, and {Ox}x∈D be a collection of input oracles. Let
+P be the value of the adversary bound (22), which also equals (20) with ε = 0. Assume that
+there exists a bounded-error quantum algorithm that, given oracle access to Ox and a ∈[m],
+tests whether a ∈r(x) in o(P) queries. Then, Ω(P) is a lower bound on the quantum query
+complexity of evaluating r with general input oracles {Ox} and error 1 −Ω(1).
+Proof. The proof is similar to the one of Theorem 37, but this one is a slightly more complicated
+jigsaw puzzle.
+Let A be an optimal algorithm that evaluates r with error 1−δ in T queries, where δ = Ω(1).
+Our aim is to show that T = Ω(P). Let Y ⊗H be the space of the algorithm A, where Y = Cm.
+Let ψx ∈Y ⊗H be the ﬁnal state of A on the input x ∈D. By Theorem 10,
+γ2
+ 1 −⟨ψx, ψy⟩| Ox −Oy
+
+x,y∈D ≤T.
+(27)
+Now we apply Theorem 38 with Πx = Πr(x) ⊗IH, where Πr(x) is as in Deﬁnition 31. This gives
+γ2
+
+1 −⟨σx, σy⟩
+ (1 −⟨ψx, ψy⟩) ⊕(Rx −Ry)
+
+x,y∈D = O(1)
+(28)
+for some vectors σx satisfying the constraints of Theorem 38.
+For a ∈[m], let fa: D →{0, 1} be deﬁned by fa(x) = 1a∈r(x). For the reﬂections Rx in (28),
+we have
+Rx −Ry =
+M
+a∈[m] 2(−1)fa(x) · 1fa(x)̸=fa(y)
+
+⊗IH.
+We know that each fa can be evaluated in some number S = o(P) queries to Ox, hence, by
+Theorem 37 and Proposition 6(f),
+γ2
+M
+a∈[m] 1fa(x)̸=fa(y)
+ Ox −Oy
+
+x,y,∈D
+= O(S).
+Hence, using Points (g) and (d) of Proposition 6, we have γ2
+ Rx −Ry | Ox −Oy
+
+x,y,∈D = O(S).
+Combining this with (27) using Proposition 6(f), we arrive at
+γ2
+
+(1 −⟨ψx, ψy⟩) ⊕(Rx −Ry) | Ox −Oy
+
+x,y,∈D = O(S + T).
+Finally, combining this with (28) using Proposition 6(e), we get
+γ2
+ 1 −⟨σx, σy⟩| Ox −Oy
+
+x,y,∈D = O(S + T).
+The left-hand side gives a feasible solution to the optimisation problem in (20) with ε = 0.
+Since P is deﬁned as the optimal solution to that problem, P = O(S + T), and as S = o(P),
+we get T = Ω(P).
+We now prove both our technical results.
+23
+
+
+=== PDF PAGE 24 ===
+Proof of Theorem 38. Our construction is inspired by the following simple algorithm: Generate
+the state ψx, then, conditioned on being orthogonal to Πx, generate another copy of ψx, and
+repeat. After inﬁnitely many repetitions, we obtain a state σx satisfying the constraints. But
+as the “bad” part of the state becomes exponentially small through the course of the algorithm,
+we manage to improve the complexity from +∞to 2/δ.
+It is most convenient to describe the construction using inﬁnite-dimensional σx. Namely, we
+take
+σx = (Πxψx) ⊗
+ ∞
+M
+k=0
+(Π⊥
+x ψx)⊗k
+
+,
+where Π⊥
+x = IX −Πx. This corresponds to the ﬁnal state of the above inﬁnite algorithm up to
+rearrangement of the registers. We have
+⟨σx, σy⟩= ⟨Πxψx, Πyψy⟩
+∞
+X
+k=0
+
+Π⊥
+x ψx, Π⊥
+y ψy
+k =
+⟨Πxψx, Πyψy⟩
+1 −
+
+Π⊥
+x ψx, Π⊥
+y ψy
+ .
+(29)
+In particular, ∥σx∥= 1. In order to proceed, we need the following technical result.
+Lemma 41. Assume X is a matrix with γ2(X) < 1. Let Y be the matrix of the same size
+deﬁned by Y [[i, j]] = 1/(1 −X[[i, j]]). Then, γ2(Y ) ≤1/(1 −γ2(X)).
+Proof. By Proposition 6(c), |X[[i, j]]| < 1 for all i and j, hence, the matrix Y is well-deﬁned.
+Then, using the triangle inequality and Proposition 6(h),
+γ2(Y ) = γ2
+ ∞
+X
+k=0
+X[[i, j]]k
+
+i,j
+≤
+∞
+X
+k=0
+γ2(X)k =
+1
+1 −γ2(X).
+As γ2
+ 
+Π⊥
+x ψx, Π⊥
+y ψy
+
+x,y∈D ≤1 −δ, we get from Lemma 41 that
+γ2
+ 
+1
+1 −
+
+Π⊥
+x ψx, Π⊥
+y ψy
+
+!
+x,y∈D
+≤1
+δ .
+(30)
+Next, it is easy to check that
+1 −
+
+Πxψx, Πyψy
+
+−
+
+Π⊥
+x ψx, Π⊥
+y ψy
+
+=
+
+1 −⟨ψx, ψy⟩
+
++ (Πxψx −Π⊥
+x ψx)∗
+Πx −Πy
+
+ψy,
+hence, using that Πx −Πy = −1
+2(Rx −Ry),
+γ2
+
+1 −
+
+Πxψx, Πyψy
+
+−
+
+Π⊥
+x ψx, Π⊥
+y ψy
+  (1 −⟨ψx, ψy⟩) ⊕(Rx −Ry)
+
+x,y∈D ≤2.
+(31)
+Hence, combining (30) and (31) via Proposition 6(h), and using (29), we get
+γ2
+
+1 −⟨σx, σy⟩
+ (1 −⟨ψx, ψy⟩) ⊕(Rx −Ry)
+
+x,y∈D ≤2
+δ .
+It remains to explain how to make σx ﬁnite-dimensional. Recall our assumption on D being
+ﬁnite. Using a standard dimensional argument, there exist vectors τx ∈CD such that
+⟨τx, τy⟩=
+ ∞
+M
+k=0
+(Π⊥
+x ψx)⊗k,
+∞
+M
+k=0
+(Π⊥
+y ψy)⊗k
+
+for all x, y ∈D. Thus, we can take σx = (Πxψx) ⊗τx.
+24
+
+
+=== PDF PAGE 25 ===
+Proof of Theorem 35. Using an analogue of (3), we see that it suﬃces to show that
+γ2
+
+1σx̸=σy
+1 −⟨ψx, ψy⟩
+
+x,y∈D
+= O(1),
+where 0/0 = 0. It is not hard to show that γ2(1σx̸=σy)x,y∈D ≤2. Thus, by Proposition 6(h),
+it suﬃces to prove that γ2(Y ) = O(1) for some matrix Y such that Y [[x, y]] = 1/(1 −⟨ψx, ψy⟩)
+for all x, y satisfying σx ̸= σy. By Lemma 41, it suﬃces to ﬁnd a D × D matrix X such that
+X[[x, y]] = ⟨ψx, ψy⟩whenever σx ̸= σy, and γ2(X) = 1 −Ω(1).
+In the ﬁrst case of the state conversion problem, we deﬁne X[[x, y]] = ⟨φx, φy⟩, where φx ∈
+X ⊗H is given by
+φx =
+(√α Π0ψx + √β Π1ψx,
+if ∥Π1ψx∥2 ≤c −δ;
+1
+√α Π0ψx +
+1
+√β Π1ψx,
+if ∥Π1ψx∥2 ≥c + δ;
+(32)
+for
+α =
+r
+1 −c −δ
+1 −c + δ
+and
+β =
+r
+c + δ
+c −δ .
+It is clear that ⟨φx, φy⟩= ⟨ψx, ψy⟩whenever σx ̸= σy, i.e., the deﬁnitions of φx and φy are
+given by diﬀerent cases in (32). Now assume ∥Π1ψx∥2 = c −δ −s for some s ≥0. Then,
+∥φx∥2 = (1−c+δ +s)α+(c−δ −s)β ≤(1−c+δ)α+(c−δ)β =
+p
+(1 −c)2 −δ2 +
+p
+c2 −δ2 < 1.
+Similarly, if ∥Π1ψx∥2 = c + δ + s for some s ≥0, then
+∥φx∥2 = 1 −c −δ −s
+α
++ c + δ + s
+β
+≤1 −c −δ
+α
++ c + δ
+β
+=
+p
+(1 −c)2 −δ2 +
+p
+c2 −δ2 < 1.
+Thus, γ2(X) is bounded away from 1, and this ﬁnishes the proof for the ﬁrst case.
+The second case is similar. Now X has the standard basis {e1, . . . , en}, and let Y be a space
+with the standard basis {e0, e1, e2}. We deﬁne X[[x, y]] = ⟨ux, vy⟩, where ux, vx ∈Y ⊗X ⊗H
+are deﬁned as follows. For a ﬁxed x, let i ∈[n] be such that ∥Πiψx∥2 ≥1/2 + δ. Then,
+ux = |0⟩Y +
+√
+2δ |1⟩Y
+1 + 2δ
+⊗|Πiψx⟩X⊗H +
+X
+j∈[n]\{i}
+
+|0⟩Y +
+√
+2δ |2⟩Y
+
+⊗|Πjψx⟩X⊗H,
+and
+vx = |0⟩Y +
+√
+2δ |2⟩Y
+1 + 2δ
+⊗|Πiψx⟩X⊗H +
+X
+j∈[n]\{i}
+
+|0⟩Y +
+√
+2δ |1⟩Y
+
+⊗|Πjψx⟩X⊗H,
+It is not hard to check that ⟨ux, vy⟩= ⟨ψx, ψy⟩whenever σx ̸= σy. Also, both ∥ux∥2 and ∥vx∥2
+are bounded by
+1
+1 + 2δ ∥Πiψx∥2 + (1 + 2δ)∥ψx −Πiψx∥2 ≤1/2 + δ
+1 + 2δ + (1 + 2δ)(1/2 −δ) = 1 −2δ2.
+Thus, γ2(X) is bounded away from 1, and the second case is proven.
+25
+
+
+=== PDF PAGE 26 ===
+7
+Future Directions
+In this section, we mention some possible future research directions.
+• Besides the additive quantum adversary, which we studied in this paper, ˇSpalek [41]
+developed multiplicative quantum adversary.
+Ambainis et al. [3] generalised it to the
+state generation problem. However, it would be interesting to understand whether the
+multiplicative adversary can be obtained in the style of [34], i.e., as a relaxation of a
+quantum algorithm. Can any of the theory developed in this paper be applied to it? Are
+there other possible relaxations worth studying?
+• In Section 5.2, we showed that the adversary bound for unitary implementation is more
+precise than the adversary bound for state conversion. How big is the separation? Can
+more convenient forms of Proposition 26 be obtained?
+• What are the conditions when eﬀective puriﬁers exist? In other words, when does the
+adversary bound provide a lower bound not only for the exact, but also for the approximate
+version of the problem?
+• Finally, it would be interesting to obtain some applications for the theory presented in
+this paper, particularly, for the bounds developed in Section 6.1.
+One theoretical problem, for which these tools may be appropriate, is development of the
+quantum theory for composition of relations.
+We brieﬂy deﬁne the problem, for simplicity
+focusing on a special case of evaluating a function f : [q]n →[m], when superpositions are
+allowed as inputs. The algorithm is given an oracle Ox that generates states ψx,j ∈Y ⊗H,
+where Y = Cq. For X ⊆[q], let ΠX = P
+a∈X eae∗
+a.
+The function is given as a sequence of rules ˜f(X1, . . . , Xn) = a with Xj ⊆[q] and a ∈[m].
+Each of these rules means that the algorithm must output a whenever (ΠXj ⊗IH)ψx,j = ψx,j
+for all j ∈[n]. For example, for the OR function, we may consider the rules of the form
+g
+OR
+ {0, 1}, . . . , {0, 1}, {1}, {0, 1}, . . . , {0, 1}
+
+= 1,
+and
+g
+OR
+ {0}, . . . , {0}
+
+= 0.
+(33)
+For randomised algorithms, this problem is equivalent to the evaluation of the underlying
+usual function, since, when an input variable is accessed, it “collapses” to one of the elements
+of [q].
+Quantumly, the situation is very diﬀerent.
+If the algorithm works with the oracle
+generating the state |0⟩and the oracle generating |1⟩, this does not mean it works with an
+oracle that prepares some superposition of the two states.
+As a lower bound for this problem, it is possible to take the adversary bound for the under-
+lying usual function, i.e., when the input oracle can only generate basis states. From (17), it is
+easy to obtain the following upper bound:
+minimise
+max
+X
+max
+X
+j∈[n] ∥uX,j∥2 ,
+X
+j∈[n] ∥vX,j∥2
+
+(34a)
+subject to
+X
+j∈[n] ⟨uX,j, vY,j⟩= 1
+whenever f(X) ̸= f(Y );
+(34b)
+⟨uX,j, vY,j⟩= 0
+whenever Xj ∩Yj ̸= ∅;
+(34c)
+where X and Y range over all rules of the function f. For some functions, the bound in (34)
+can be obtained for free from the usual adversary bound. For instance, from a solution to the
+adversary bound for the OR function, we get an algorithm for g
+OR given by (33). It would be
+interesting to get a precise characterisation of the complexity of this problem.
+26
+
+
+=== PDF PAGE 27 ===
+Acknowledgements
+I am grateful to Robin Kothari for various discussions and many useful suggestions, as well as
+for sharing his manuscript [31]. I thank Troy Lee for useful comments.
+The author is supported by FP7 FET Proactive project QALGO. Parts of this work was done
+while at CSAIL, Massachusetts Institute of Technology, USA, supported by Scott Aaronson’s
+Alan T. Waterman Award from the National Science Foundation, and at CQT, Singapore. The
+author thanks Miklos Santha for hospitality.
+References
+[1] A. Ambainis. Quantum lower bounds by quantum arguments. Journal of Computer and
+System Sciences, 64(4):750–767, 2002. Earlier: STOC’00, arXiv:quant-ph/0002066.
+[2] A. Ambainis. Polynomial degree vs. quantum query complexity. In Proc. of 44th IEEE
+FOCS, pages 230–239, 2003. arXiv:quant-ph/0305028.
+[3] A. Ambainis, L. Magnin, M. R¨otteler, and J. Roland.
+Symmetry-assisted adversaries
+for quantum state generation.
+In Proc. of 26th IEEE CCC, pages 167–177, 2011.
+arXiv:1012.2112.
+[4] H. Barnum, M. Saks, and M. Szegedy. Quantum decision trees and semi-deﬁnite program-
+ming. In Proc. of 18th IEEE CCC, pages 179–193, 2003.
+[5] A. Belovs. Learning-graph-based quantum algorithm for k-distinctness. In Proc. of 53rd
+IEEE FOCS, pages 207–216, 2012. arXiv:1205.1534.
+[6] A. Belovs. Span programs for functions with constant-sized 1-certiﬁcates. In Proc. of 44th
+ACM STOC, pages 77–84, 2012. arXiv:1105.4024.
+[7] A. Belovs. Quantum walks and electric networks. arXiv:1302.3143, 2013.
+[8] A. Belovs. Quantum algorithms for learning symmetric juntas via the adversary bound. In
+Proc. of 29th IEEE CCC, pages 22–31, 2014. arXiv:1311.6777.
+[9] A. Belovs and E. Blais. Quantum algorithm for monotonicity testing on the hypercube.
+arXiv:1503.02868, 2015.
+[10] A. Belovs, A. M. Childs, S. Jeﬀery, R. Kothari, and F. Magniez. Time-eﬃcient quantum
+walks for 3-distinctness. In Proc. of 40th ICALP, Part I, volume 7965 of LNCS, pages
+105–122. Springer, 2013.
+[11] A. Belovs and B. W. Reichardt. Span programs and quantum algorithms for st-connectivity
+and claw detection. In Proc. of 20th ESA, volume 7501 of LNCS, pages 193–204, 2012.
+arXiv:1203.2603.
+[12] A. Belovs and A. Rosmanis. Adversary lower bounds for the collision and the set equality
+problems. arXiv:1310.5185, 2013.
+[13] A. Belovs and A. Rosmanis. On the power of non-adaptive learning graphs. Computational
+Complexity, 23(2):323–354, 2014. Earlier: CCC’13, arXiv:1210.3279.
+[14] A. Belovs and R. ˇSpalek. Adversary lower bound for the k-sum problem. In Proc. of 4th
+ACM ITCS, pages 323–328, 2013. arXiv:1206.6528.
+27
+
+
+=== PDF PAGE 28 ===
+[15] C. H. Bennett, E. Bernstein, G. Brassard, and U. Vazirani.
+Strengths and weak-
+nesses of quantum computing.
+SIAM Journal on Computing, 26(5):1510–1523, 1997.
+arXiv:quant-ph/9701001.
+[16] D. W. Berry, A. M. Childs, R. Cleve, R. Kothari, and R. D. Somma. Exponential improve-
+ment in precision for simulating sparse Hamiltonians. In Proc. of 46th ACM STOC, pages
+283–292, 2014. arXiv:1312.1414.
+[17] A. Berzina, A. Dubrovsky, R. Freivalds, L. Lace, and O. Scegulnaja.
+Quantum query
+complexity for some graph problems. In Proc. of 30th SOFSEM, volume 2932 of LNCS,
+pages 140–150. Springer, 2004.
+[18] R. Bhatia. Positive deﬁnite matrices. Princeton University Press, 2009.
+[19] S. Boyd and L. Vandenberghe. Convex optimization. Cambridge University Press, 2004.
+[20] G. Brassard, P. Høyer, M. Mosca, and A. Tapp.
+Quantum amplitude ampliﬁcation
+and estimation.
+In Quantum Computation and Quantum Information:
+A Millennium
+Volume, volume 305 of AMS Contemporary Mathematics Series, pages 53–74, 2002.
+arXiv:quant-ph/0005055.
+[21] H. Buhrman and R. ˇSpalek. Quantum veriﬁcation of matrix products. In Proc. of 17th
+ACM-SIAM SODA, pages 880–889, 2006. arXiv:quant-ph/0409035.
+[22] R. Cleve, A. Ekert, C. Macchiavello, and M. Mosca. Quantum algorithms revisited. Proceed-
+ings of the Royal Society of London A: Mathematical, Physical and Engineering Sciences,
+454(1969):339–354, 1998. arXiv:quant-ph/9708016.
+[23] R. Cleve, D. Gottesman, M. Mosca, R. D. Somma, and D. Yonge-Mallo. Eﬃcient discrete-
+time simulations of continuous-time quantum query algorithms.
+In Proc. of 41st ACM
+STOC, pages 409–416, 2009. arXiv:0811.4428.
+[24] S. D¨orn and T. Thierauf. The quantum query complexity of algebraic properties. In Proc.
+of 16th FCT, volume 4639 of LNCS, pages 250–260. Springer, 2007. arXiv:0705.1446.
+[25] C. D¨urr, M. Heiligman, P. Høyer, and M. Mhalla. Quantum query complexity of some
+graph problems. In Proc. of 31st ICALP, volume 3142 of LNCS, pages 481–493. Springer,
+2004. arXiv:quant-ph/0401091.
+[26] K. Eisentr¨ager, S. Hallgren, A. Kitaev, and F. Song. A quantum algorithm for computing
+the unit group of an arbitrary degree number ﬁeld. In Proc. of 46th ACM STOC, pages
+293–302, 2014.
+[27] E. Farhi and S. Gutmann. Analog analogue of a digital quantum computation. Physical
+Review A, 57(4):2403, 1998. arXiv:quant-ph/9612026.
+[28] P. Høyer, T. Lee, and R. ˇSpalek. Negative weights make adversaries stronger. In Proc. of
+39th ACM STOC, pages 526–535, 2007. arXiv:quant-ph/0611054.
+[29] S. Jeﬀery, R. Kothari, and F. Magniez. Nested quantum walks with quantum data struc-
+tures. In Proc. of 24th ACM-SIAM SODA, pages 1474–1485, 2013. arXiv:1210.1199.
+[30] A.
+Kitaev.
+Quantum
+measurements
+and
+the
+Abelian
+stabilizer
+problem.
+arXiv:quant-ph/9511026, 1995.
+28
+
+
+=== PDF PAGE 29 ===
+[31] R. Kothari. Semideﬁnite programming characterization of bounded-error quantum query
+complexity. Manuscript.
+[32] F. Le Gall, H. Nishimura, and S. Tani. Quantum algorithms for ﬁnding constant-sized sub-
+hypergraphs. In Proc. of 20th COCOON, volume 8591 of LNCS, pages 429–440. Springer,
+2014. arXiv:1310.4127.
+[33] T. Lee, F. Magniez, and M. Santha.
+Improved quantum query algorithms for triangle
+ﬁnding and associativity testing. In Proc. of 24th ACM-SIAM SODA, pages 1486–1502,
+2013. arXiv:1210.1014.
+[34] T. Lee, R. Mittal, B. W. Reichardt, R. ˇSpalek, and M. Szegedy. Quantum query complexity
+of state conversion. In Proc. of 52nd IEEE FOCS, pages 344–353, 2011. arXiv:1011.3020.
+[35] N. Leonardos. An improved lower bound for the randomized decision tree complexity of
+recursive majority. In Proc. of 40th ICALP, Part I, volume 7965 of LNCS, pages 303–314.
+Springer, 2013. ECCC:2012/099.
+[36] F. Magniez, A. Nayak, M. Santha, and D. Xiao. Improved bounds for the randomized
+decision tree complexity of recursive majority. In Proc. of 38th ICALP, volume 6755 of
+LNCS, pages 317–329. Springer, 2011. ECCC:2010/192.
+[37] B. W. Reichardt. Span programs and quantum query complexity: The general adversary
+bound is nearly tight for every Boolean function. In Proc. of 50th IEEE FOCS, pages
+544–551, 2009. arXiv:0904.2759.
+[38] B. W. Reichardt. Reﬂections for quantum query algorithms. In Proc. of 22nd ACM-SIAM
+SODA, pages 560–569, 2011. arXiv:1005.1601.
+[39] B. W. Reichardt.
+Span-program-based quantum algorithm for evaluating unbalanced
+formulas.
+In Proc. of 6th TQC, volume 6745 of LNCS, pages 73–103. Springer, 2014.
+arXiv:0907.1622.
+[40] B. W. Reichardt and R. ˇSpalek. Span-program-based quantum algorithm for evaluating
+formulas. Theory of Computing, 8:291–319, 2012. Earlier: STOC’08, arXiv:0710.2630.
+[41] R. ˇSpalek. The multiplicative quantum adversary. In Proc. of 23rd IEEE CCC, pages
+237–248, 2008. arXiv:quant-ph/0703237.
+[42] R. ˇSpalek and M. Szegedy. All quantum adversary methods are equivalent. Theory of
+Computing, 2:1–18, 2006. Earlier: ICALP’05, arXiv:quant-ph/0409116.
+[43] D.
+Yonge-Mallo.
+Adversary
+lower
+bounds
+in
+the
+Hamiltonian
+oracle
+model.
+arXiv:1108.2479, 2011.
+[44] B. Zhan, S. Kimmel, and A. Hassidim. Super-polynomial quantum speed-ups for Boolean
+evaluation trees with hidden structure. In Proc. of 3rd ACM ITCS, pages 249–265, 2012.
+arXiv:1101.0796.
+[45] S. Zhang.
+On the power of Ambainis lower bounds.
+Theoretical Computer Science,
+339(2):241–256, 2005. arXiv:quant-ph/0311060.
+29
+
+
+=== PDF PAGE 30 ===
+A
+Duality
+In this appendix, we derive all the dual formulations stated in the paper. Our treatment of
+convex duality is based on [19, Chapter 5]. We construct the dual by explicitly writing down
+the Lagrangian and transforming it. Thus, weak duality (the maximisation problem bounds the
+minimisation problem from below) is apparent. To prove strong duality (their optimal values
+are equal), we rely on Slater’s condition. The latter says that strong duality holds if one of the
+optimisation problems is convex and strictly feasible, i.e. there exists a feasible solution making
+all the inequalities in the problem strict.
+We assume the reader is familiar with basic properties of semideﬁnite matrices. We use
+notation ⟨A, B⟩= tr A∗B for the inner product of matrices. The main property we use is that
+if A is Hermitian, then ⟨X, A⟩≥0 for all X ⪰0 if and only if A ⪰0.
+A.1
+Proof of Proposition 5
+Let us restate the problem for the case when all Axy are one-dimensional.
+minimise
+max
+n
+maxx∈D1 ∥ux∥2 , maxy∈D2 ∥vy∥2o
+subject to
+axy =
+
+ux,
+ ∆xy ⊗IW
+
+vy
+
+for all x ∈D1 and y ∈D2;
+W is a vector space,
+ux ∈X1 ⊗W,
+vy ∈X2 ⊗W.
+If there exist x and y such that ∆xy = 0 but axy ̸= 0, then both formulations of the problem
+have optimal value +∞, so we may assume that axy = 0 whenever ∆xy = 0.
+Assume that D1 and D2 are disjoint, and let eD = D1 ∪D2. We may decompose ux = L
+i ux,i
+and vy = L
+j vy,j, where ux,i, vy,j ∈W, and i and j run through the elements of the bases of
+X1 and X2, respectively. Let X be the Gram matrix of the vectors {ux,i} and {vy,j}. We treat
+X as a eD × eD block-matrix with blocks Xxy. That is, if x, y ∈D1, then Xxy : X1 →X1 is given
+by Xxy[[i, j]] = ⟨ux,i, ux,j⟩. The remaining three cases x ∈D1, y ∈D2; x ∈D2, y ∈D1; and
+x, y ∈D2 are similar. With this change, the optimisation problem reads as follows:
+minimise
+t
+(35a)
+subject to
+tr Xzz ≤t
+for all z ∈eD ;
+(35b)
+axy = ⟨Xxy, ∆xy⟩
+for all x ∈D1 and y ∈D2;
+(35c)
+t ∈R,
+X ⪰0.
+(35d)
+We have the following Lagrangian
+L(t, X, µ, λ) = t +
+X
+z∈e
+D
+µz(tr Xzz −t) +
+X
+x∈D1,y∈D2
+2Re
+
+λxy
+ axy −⟨Xxy, ∆xy⟩
+
+,
+where Re stands for the real part. It is not hard to see that, for all µz ≥0 and λxy ∈C,
+inf
+t∈R, X⪰0 L(t, X, µ, λ)
+is a lower bound on the optimal value of (35). Rearranging, we have
+L(t, X, µ, λ) = 2Re
+
+X
+x∈D1,y∈D2
+λxyaxy
+
++ t
+
+1 −
+X
+z∈e
+D
+µz
+
++ ⟨X, W(λ, µ)⟩,
+30
+
+
+=== PDF PAGE 31 ===
+where W(λ, µ) is the block-matrix of the same form as X, deﬁned by
+ W(λ, µ)
+
+xy =
+
+
+
+
+
+
+
+
+
+
+
+−λxy∆xy,
+if x ∈D1 and y ∈D2;
+−(λxy∆xy)∗,
+if x ∈D2 and y ∈D1;
+µxI,
+if x = y;
+0,
+otherwise.
+(36)
+In particular, W is Hermitian. Thus, we see that the following dual problem gives a lower bound
+on the optimal value of (35):
+maximise
+2Re
+X
+x∈D1,y∈D2 λxyaxy
+
+(37a)
+subject to
+X
+z∈e
+D µz = 1 ;
+(37b)
+W(λ, µ) ⪰0 ;
+(37c)
+µz ≥0,
+λxy ∈C
+for all z ∈eD, x ∈D1 and y ∈D2.
+(37d)
+By Slater’s condition, as (35) is convex and strictly feasible, the optimisation problems (35)
+and (37) have equal optimal values.
+We can simplify (37). Let u ∈CD1 and v ∈CD2 be vectors satisfying |u[[x]]|2 = µx and
+|v[[y]]|2 = µy for all x and y. As W(λ, µ) ⪰0, we may assume that λxy = 0 whenever µxµy = 0.
+Deﬁne γxy = λxy/(u[[x]]∗v[[y]]), where 0/0 = 0. Let us form the D1 × D2 matrices A = (axy)
+and Γ = (γxy). Taking the Hadamard product of (37c) with an appropriate rank-1 positive-
+semideﬁnite matrix (and treating z ∈eD with µz = 0 separately), we have that (37c) is equivalent
+to
+
+I
+Γ ◦∆
+(Γ ◦∆)∗
+I
+
+⪰0,
+which in turn is equivalent to ∥Γ ◦∆∥≤1.
+On the other hand, the objective value (37a) is equal to 2Re
+ u∗(Γ ◦A)v
+
+subject to ∥u∥2 +
+∥v∥2 = 1. The maximum of this expression is ∥Γ ◦A∥. Thus, we get the dual formulation of
+Proposition 5.
+A.2
+Derivation of (21)
+Here we assume that ε > 0. The case ε = 0 is considered in Appendix A.3. In our derivation,
+we use ∆xy = IX −O∗
+xOy. By Remark 9, this choice is equivalent to ∆xy = Ox −Oy, and it also
+does not aﬀect (21b). This choice has an important property ∆xy = ∆∗
+yx.
+We transform the optimisation problem (20) in a way similar to Appendix A.1. Let D′ be a
+disjoint copy of D. For x ∈D, let x′ denote the corresponding element of D′, and let eD = D∪D′.
+Using a transformation similar to Appendix A.1, we see that (20) is equivalent to
+minimise
+t
+(38a)
+subject to
+tr Xzz ≤t
+for all z ∈eD ;
+(38b)
+1 −
+X
+a∈[m] Y [[x, y]] =
+
+Xxy′, ∆xy
+
+for all x, y ∈D ;
+(38c)
+X
+a/∈r(x) Ya[[x, x]] ≤ε
+for all x ∈D ;
+(38d)
+t ∈R,
+X ⪰0,
+Ya ⪰0
+for all a ∈[m];
+(38e)
+where the optimisation is over D × D positive-semideﬁnite matrices Ya, and X is of the same
+form as in Appendix A.1. That is, X is a eD × eD block matrix with each block acting on X.
+31
+
+
+=== PDF PAGE 32 ===
+The Lagrangian is equal to
+t +
+X
+z∈e
+D
+µz(tr Xzz −t)
++
+X
+x,y∈D
+2Re
+
+λxy
+
+1 −
+X
+a∈[m]
+Ya[[x, y]] −
+
+Xxy′, ∆xy
+
++
+X
+x∈D
+2ηx
+ X
+a/∈r(x)
+Ya[[x, x]] −ε
+
+,
+where µz ≥0, ηx ≥0, and λxy ∈C. After rearrangement, we get
+2
+X
+x,y∈D
+λxy −2ε
+X
+x∈D
+ηx + t
+
+1 −
+X
+z∈e
+D
+µz
+
++
+
+X, W(λ, µ)
+
++
+X
+a
+
+Ya, 2H ◦Ea −Λ −Λ∗
+.
+Here, W(λ, µ) is deﬁned as in (36), H = diag(ηx), Ea = diag(1a/∈r(x))x∈D and Λ = (λxy)x,y∈D.
+This gives the following dual problem:
+maximise
+2
+X
+x,y∈D Re λxy −ε
+X
+x∈D ηx
+
+(39a)
+subject to
+X
+z∈e
+D µz = 1;
+W(λ, µ) ⪰0;
+(39b)
+Λ + Λ∗⪯2 H ◦Ea
+for all a ∈[m];
+(39c)
+µz ≥0,
+ηx ≥0,
+λxy ∈C
+for all z ∈eD and x, y ∈D.
+(39d)
+By Slater’s condition, the optimal values of (38) and (39) are equal.
+Recall that ∆xy = ∆∗
+yx for all x, y ∈D. This means that if (µ, η, λ) is a feasible solution
+to (39), then so is (µ′, η, λ′), where µ′
+x = µx′, µ′
+x′ = µx and λ′
+xy = λ∗
+yx for all x, y ∈D. Moreover,
+the corresponding objective values are equal. Since a convex combination of the two is still a
+feasible solution, we may assume, without loss of generality, that λxy = λ∗
+yx and µx = µx′ for
+all x, y ∈D. In particular, Λ is Hermitian.
+As in Appendix A.1, let u ∈CD be a vector satisfying |u[[x]]|2 = µx for all x ∈D. Again,
+we deﬁne γxy = λxy/(u[[x]]∗u[[y]]) and νx = ηx/µx.
+A transformation similar to the one in
+Appendix A.1 shows that (39) is equivalent to (21), where N = diag(νx).
+A.3
+Derivation of (22)
+The derivation is similar to Appendix A.2. This time, instead of (38), we have the following
+optimisation problem
+minimise
+t
+(40a)
+subject to
+tr Xzz ≤t
+for all z ∈eD ;
+(40b)
+1 −
+X
+a∈r(x)∩r(y) Y [[x, y]] =
+
+Xxy′, ∆xy
+
+for all x, y ∈D ;
+(40c)
+t ∈R,
+X ⪰0,
+Ya ⪰0
+for all a ∈[m];
+(40d)
+with the diﬀerence that Ya is an r−1(a) × r−1(a) matrix. The Lagrangian equals
+t +
+X
+z∈e
+D
+µz(tr Xzz −t) +
+X
+x,y∈D
+2Re
+
+λxy
+
+1 −
+X
+a∈r(x)∩r(y)
+Ya[[x, y]] −
+
+Xxy′, ∆xy
+
+,
+where µz ≥0, and λxy ∈C. After rearrangement, we get
+2
+X
+x,y∈D
+Re λxy + t
+
+1 −
+X
+z∈e
+D
+µz
+
++ ⟨X, W(λ, µ)⟩+
+X
+a
+
+Ya, −Λa −Λ∗
+a
+
+,
+where Λa = Λ[[r−1(a), r−1(a)]]. Using the same transformation as in Appendix A.2, we get that
+the optimal values of (40) and (22) are equal.
+32
+
+
+=== PDF PAGE 33 ===
+A.4
+Proof of Theorem 33
+Using the same construction as in Appendix A.2, we get the following optimisation problem:
+minimise
+t
+(41a)
+subject to
+tr Xzz ≤t
+for all z ∈eD ;
+(41b)
+1 −
+X
+a∈[m] Y [[x, y]] =
+
+Xxy′, ∆xy
+
+for all x, y ∈D ;
+(41c)
+X
+x∈D
+px
+X
+a/∈r(x) Ya[[x, x]] ≤ε
+(41d)
+t ∈R,
+X ⪰0,
+Ya ⪰0
+for all a ∈[m].
+(41e)
+This gives the dual
+maximise
+2
+X
+x,y∈D Re λxy −εη
+
+(42a)
+subject to
+X
+z∈e
+D µz = 1;
+W(λ, µ) ⪰0;
+(42b)
+Λ + Λ∗⪯2 ηP ◦Ea
+for all a ∈[m];
+(42c)
+µz ≥0,
+η ≥0,
+λxy ∈C
+for all z ∈eD and x, y ∈D.
+(42d)
+Again, we may assume that λxy = λ∗
+yx and µx = µx′. Using transformations similar to Ap-
+pendix A.2, we get that (42) is equivalent to (23).
+33

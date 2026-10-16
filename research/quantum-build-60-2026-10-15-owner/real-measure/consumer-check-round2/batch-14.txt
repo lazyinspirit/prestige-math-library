@@ -1,0 +1,359 @@
+FILE lem-holm-rejection-events-are-measurable
+
+STATEMENT Let $m\ge1$, let $p_1,\ldots,p_m:\mathcal X\to[0,1]$ be p-value statistics on a measurable data space $(\mathcal X,\mathcal A)$, and fix $\alpha\in[0,1]$. Define $R_\alpha(x)$ by the lexicographic ordering and passing-prefix formulas of [[alg-holm-step-down-procedure]], applied here to these statistics whether or not they are null-valid. These formulas are well-defined for every input in $[0,1]^m$: the ordering is unique, the tested denominators are positive, and the admissible prefix lengths include $0$. Then each rejection event $D_i(\alpha):=\{x\in\mathcal X:i\in R_\alpha(x)\}$ belongs to $\mathcal A$.
+
+LINE 42 
+[F4] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: sums and scalar multiples of measurable real-valued functions are measurable whenever defined; hence differences of measurable real-valued functions are measurable.
+
+[F5] [[def-measurable-function-between-measurable-spaces]]: a map is measurable when the preimage of each measurable target set belongs to the source sigma-algebra.
+
+FILE lem-integrable-signed-function-integration-against-density
+
+STATEMENT Let $\mu$ be a positive measure, let $p:X\to[0,\infty)$ be finite-valued
+and measurable, and suppose $P(A)=\int_Ap\,d\mu$ is a probability measure.
+If $f:X\to\mathbb R$ is measurable and $|f|\le M$ for some finite
+$M\ge0$, then $f$ is integrable under $P$, $fp$ is integrable under $\mu$,
+and
+$$\int_X f\,dP=\int_X fp\,d\mu.$$
+
+LINE 56 
+[F3] [[prop-closure-properties-of-measurable-functions-used-by-the-integral]]:
+the positive and negative parts $f^+,f^-$ of a real measurable $f$ are
+measurable.
+
+
+LINE 68 [F6] [[def-integrable-real-and-complex-functions-and-their-integrals]]:
+$f$ is integrable when $\int|f|$ is finite, and its integral is
+$\int f^+-\int f^-$. 
+
+[F7] [[thm-linearity-of-the-lebesgue-integral-on-l-one]]: integrable
+
+LINE 79 **Proof technique:** direct.
+
+1.1 By [F1] and [F8], $\int p\,d\mu=P(X)=1$. The functions $f^+,f^-$ are measurable by [F3] and satisfy $0\le f^+,f^-\le M$. Products $f^+p$ and $f^-p$ are measurable by [F4]. [F1, F3, F4, F8, given]
+
+2.1 Monotonicity [F5], [F1], and [F8] give $\int f^\pm\,dP\le M P(X)=M$ and $\int f^\pm p\,d\mu\le M\int p\,d\mu=M$. Hence $f^+,f^-$ are integrable under $P$ and $f^+p,f^-p$ are integrable under $\mu$ by [F6]. [F1, F5, F6, F8, step 1.1]
+
+LINE 81 1.1 By [F1] and [F8], $\int p\,d\mu=P(X)=1$. The functions $f^+,f^-$ are measurable by [F3] and satisfy $0\le f^+,f^-\le M$. Products $f^+p$ and $f^-p$ are measurable by [F4]. [F1, F3, F4, F8, given]
+
+2.1 Monotonicity [F5], [F1], and [F8] give $\int f^\pm\,dP\le M P(X)=M$ and $\int f^\pm p\,d\mu\le M\int p\,d\mu=M$. Hence $f^+,f^-$ are integrable under $P$ and $f^+p,f^-p$ are integrable under $\mu$ by [F6]. [F1, F5, F6, F8, step 1.1]
+
+2.2 Apply [F2] separately to the nonnegative measurable functions $f^+$ and $f^-$. It gives $\int f^+\,dP=\int f^+p\,d\mu$ and $\int f^-\,dP=\int f^-p\,d\mu$. [F2, step 1.1]
+
+LINE 83 2.1 Monotonicity [F5], [F1], and [F8] give $\int f^\pm\,dP\le M P(X)=M$ and $\int f^\pm p\,d\mu\le M\int p\,d\mu=M$. Hence $f^+,f^-$ are integrable under $P$ and $f^+p,f^-p$ are integrable under $\mu$ by [F6]. [F1, F5, F6, F8, step 1.1]
+
+2.2 Apply [F2] separately to the nonnegative measurable functions $f^+$ and $f^-$. It gives $\int f^+\,dP=\int f^+p\,d\mu$ and $\int f^-\,dP=\int f^-p\,d\mu$. [F2, step 1.1]
+
+3.1 Subtract the second equality in step 2.2 from the first. By [F6] and [F7], both sides are the integrals of the corresponding signed functions, so $\int f\,dP=\int fp\,d\mu$. [F6, F7, step 2.1, step 2.2, algebra] ∎
+
+LINE 59 
+[F4] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: the
+product of finite real measurable functions is measurable.
+
+
+FILE lem-integral-of-a-divergence-of-an-l-one-c-one-field-vanishes
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\ge1$ and
+let $F\in C^1(\mathbb R^n;\mathbb R^n)$ ([[def-divergence-and-curl-of-a-c1-vector-field]])
+satisfy $|F|\in L^1(\lambda_n)$ (the meaning of vector integrability $F\in L^1$) and $\operatorname{div}F\in L^1(\lambda_n)$, where
+$\lambda_n$ is $n$-dimensional Lebesgue measure
+([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], [[def-l-one-of-a-measure]]).
+Then
+
+$$\int_{\mathbb R^n}\operatorname{div}F\,d\lambda_n=0 .$$
+
+Both integrability hypotheses are used: $F\in L^1$ is what dominates the cutoff
+term $\langle D\chi_R,F\rangle$, and $\operatorname{div}F\in L^1$ is both
+the integrand whose integral is computed and its own dominating function. The
+conclusion fails if $F\in L^1$ is dropped (a compactly supported $C^1$ function
+$h$ with $\int h=1$ has $F(x)=\int_{-\infty}^xh$, so $F\in C^1$ has
+$F'=h\in L^1$ but $F\notin L^1$ and $\int_{\mathbb R}F'=1$), and without
+$\operatorname{div}F\in L^1$ the displayed integral need not be defined. No decay of the flux is asserted beyond the two stated integrabilities.
+
+LINE 82 1.1 Insert the cutoff: by [F2] with $r=1$, $R=2$ choose $\chi:\mathbb R^n\to[0,1]$ smooth with $\chi=1$ on $\overline B_1(0)$ and $\chi=0$ outside $B_2(0)$; for $R>0$ set $\chi_R(x):=\chi(x/R)$, so that $\chi_R$ is $C^1$ with $0\le\chi_R\le1$, $\chi_R=1$ on $\overline B_R(0)$ and $\chi_R=0$ outside $B_{2R}(0)$; the chain rule [F4] applied to the map $x\mapsto x/R$ gives $D\chi_R(x)=R^{-1}(D\chi)(x/R)$, so with $C_\chi:=\sup_{\mathbb R^n}|D\chi|<\infty$ by [F10] on $\overline B_2(0)$, since $D\chi=0$ off that ball one has $|D\chi_R(x)|\le C_\chi/R$ for every $x$ and every $R>0$. [choose, construct, F2, F4, F10]
+
+2.1 The cutoff divergence integrates to zero: fix $R>0$; the field $\chi_RF$ is $C^1$ on $\mathbb R^n$ and vanishes outside the compact set $\overline B_{2R}(0)$; if $n\ge2$, apply [F1] on the open ball $\Omega=B_{3R}(0)$, a bounded $C^1$ domain whose closure contains $\operatorname{supp}(\chi_RF)$ in its interior, where the boundary term vanishes because $\chi_RF=0$ on $\partial\Omega$, so that $\int_\Omega\operatorname{div}(\chi_RF)\,d\lambda_n=0$ and hence, the integrand vanishing off $\Omega$, also $\int_{\mathbb R^n}\operatorname{div}(\chi_RF)\,d\lambda_n=0$; if $n=1$, put $g:=\chi_RF\in C^1(\mathbb R)$, so $g$ vanishes outside $(-2R,2R)$, and with $a:=-3R$, $b:=3R$ the derivative $g'$ is continuous on $[a,b]$, hence bounded and Darboux integrable, [F6] gives $\int_a^bg'=g(b)-g(a)=0$, [F7] makes this Darboux integral equal to the Riemann integral of $g'$ over $[a,b]$, [F8] applied on the box $Q=[a,b]$ makes that Riemann integral equal to the Lebesgue integral $\int_{[a,b]}g'\,d\lambda_1$, and $g'=0$ on $\mathbb R\setminus[a,b]$, so [F9] applied to the positive and negative parts gives $\int_{\mathbb R}g'\,d\lambda_1=\int_{[a,b]}g'\,d\lambda_1=0$; in both cases $\int_{\mathbb R^n}\operatorname{div}(\chi_RF)\,d\lambda_n=0$. [F1, F6, F7, F8, F9, step 1.1, F11]
+
+3.1 Expand and let $R\to\infty$: by [F3] one has pointwise $\operatorname{div}(\chi_RF)=\langle D\chi_R,F\rangle+\chi_R\operatorname{div}F$, and each of the three functions lies in $L^1(\lambda_n)$, the left side because it is continuous with compact support, $\chi_R\operatorname{div}F$ because $|\chi_R\operatorname{div}F|\le|\operatorname{div}F|$, and $\langle D\chi_R,F\rangle$ because step 1.1 gives $|\langle D\chi_R,F\rangle|\le(C_\chi/R)|F|$; by linearity of the Lebesgue integral on $L^1(\lambda_n)$, $\int_{\mathbb R^n}\operatorname{div}(\chi_RF)\,d\lambda_n=\int_{\mathbb R^n}\chi_R\operatorname{div}F\,d\lambda_n+\int_{\mathbb R^n}\langle D\chi_R,F\rangle\,d\lambda_n$ for every $R>0$, with left-hand side $0$ by step 2.1; as $R\to\infty$ through positive integers (so $R\ge1$), the functions $\chi_R\operatorname{div}F$ converge pointwise to $\operatorname{div}F$ and are dominated by $|\operatorname{div}F|\in L^1(\lambda_n)$, while $\langle D\chi_R,F\rangle$ converge pointwise to $0$ and are dominated by $C_\chi|F|\in L^1(\lambda_n)$, so [F5] gives $\int_{\mathbb R^n}\chi_R\operatorname{div}F\,d\lambda_n\to\int_{\mathbb R^n}\operatorname{div}F\,d\lambda_n$ and $\int_{\mathbb R^n}\langle D\chi_R,F\rangle\,d\lambda_n\to0$; passing to the limit gives $0=\int_{\mathbb R^n}\operatorname{div}F\,d\lambda_n+0$, which is the claim. [step 1.1, step 2.1, F3, F5] ∎ 
+
+FILE lem-iv-observed-contrasts-equal-potential-outcome-contrasts
+
+STATEMENT In an IV setup satisfying consistency, exclusion, and joint instrument
+independence, let $\tau=Y(1)-Y(0)$. Then
+$$E[A\mid Z=1]-E[A\mid Z=0]=E[A(1)-A(0)]$$
+and $E[Y\mid Z=1]-E[Y\mid Z=0]=E[(A(1)-A(0))\tau]$.
+No monotonicity or relevance condition is needed for these equalities; positivity
+of both instrument atoms and integrability are part of the setup.
+
+LINE 62 are measurable whenever pointwise defined.
+([[thm-arithmetic-and-lattice-operations-preserve-measurability]])
+
+[F4] The Lebesgue integral is linear on integrable functions.
+
+FILE lem-k-type-coefficient-formulas-for-the-sl2-discrete-and-principal-series
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]).
+
+**(a) Discrete series.** Let $n\ge2$, let $u_n=f_{n,0}/\|f_{n,0}\|_n\in D_n^-$ be the normalized extremal vector of [[def-holomorphic-and-antiholomorphic-discrete-series-models]], and let $c_n(g)=\langle\pi_n(g)u_n,u_n\rangle$ be its matrix coefficient ([[def-matrix-coefficient-of-a-unitary-representation]]). Then for all $\tau\in\mathbb R$,
+$$c_n(a_\tau)=\cosh(\tau/2)^{-n}.$$
+Moreover, for every $X,Y\in U(\mathfrak g_{\mathbb C})$ there is $C=C(n,X,Y)>0$ such that
+$$\bigl|\langle\pi_n(g)Xu_n,Yu_n\rangle\bigr|\le C\,e^{-n|\tau|/2}\qquad(g=k_1a_\tau k_2).$$
+
+**(b) Limits and unitary principal series.** In the compact picture of $I_{1,0}$ ([[thm-compact-picture-of-the-sl2-principal-series]], [[thm-unitarity-of-the-sl2-unitary-principal-series]], [[def-limits-of-discrete-series-for-sl2-r]]), let $\Pi_0$ be the unitary action on $L^2_1(K)$ and $f_1(k_\theta)=e^{i\theta}$ the normalized weight-one vector. Then
+$$\langle\Pi_0(a_\tau)f_1,f_1\rangle=\operatorname{sech}(\tau/2)=\frac{2}{e^{\tau/2}+e^{-\tau/2}}.$$
+Consequently $\int_0^\infty|\langle\Pi_0(a_\tau)f_1,f_1\rangle|^2\sinh\tau\,d\tau=+\infty$, and this matrix coefficient is not in $L^2(G)$ by the KAK formula ([[lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r]]).
+
+More generally, for every odd integer $m$ and every real spectral parameter $s$, let $c_{m,s}(\tau)=\langle\Pi_{is}(a_\tau)f_m,f_m\rangle$ in the unitary compact picture of $I_{1,is}$. Then for an absolute constant $C>0$,
+$$|c_{m,s}(\tau)|\le C(1+|\tau|)e^{-|\tau|/2}\qquad(\tau\in\mathbb R).$$
+
+LINE 41 Assume the Axiom of Choice ([[def-axiom-of-choice]]).
+
+**(a) Discrete series.** Let $n\ge2$, let $u_n=f_{n,0}/\|f_{n,0}\|_n\in D_n^-$ be the normalized extremal vector of [[def-holomorphic-and-antiholomorphic-discrete-series-models]], and let $c_n(g)=\langle\pi_n(g)u_n,u_n\rangle$ be its matrix coefficient ([[def-matrix-coefficient-of-a-unitary-representation]]). Then for all $\tau\in\mathbb R$,
+$$c_n(a_\tau)=\cosh(\tau/2)^{-n}.$$
+Moreover, for every $X,Y\in U(\mathfrak g_{\mathbb C})$ there is $C=C(n,X,Y)>0$ such that
+
+LINE 69 [F6] For continuous nonnegative K-bi-invariant functions, $\int_G\psi(g)dg=2\pi\int_0^\infty\psi(a_\tau)\sinh\tau\,d\tau$ ([[lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r]]).
+
+[F7] The positive-weight limit vector $f_1$ is a unit vector in the $D_1^+$ summand of $I_{1,0}$ ([[def-limits-of-discrete-series-for-sl2-r]]).
+
+[A1] AC is inherited through the weighted and compact-picture constructions ([[def-axiom-of-choice]]).
+
+FILE lem-k-type-eigenvalue-recurrence-for-the-sl2-intertwiner
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\varepsilon\in\{0,1\}$, let $\nu\in\mathbb C$ with $\operatorname{Re}\nu>0$, and let $c_r(\nu)$ be the eigenvalue of $A(\nu)$ on the $K$-type $f_r$ for each $r\equiv\varepsilon\pmod2$ in [[def-standard-intertwining-operator-for-sl2-r]]. Then, for every such $r$,
+$$(r+1+\nu)c_{r+2}(\nu)=(r+1-\nu)c_r(\nu),\qquad c_{-r}(\nu)=(-1)^r c_r(\nu).$$
+When $r+1+\nu\ne0$, the first identity is equivalently
+$$c_{r+2}(\nu)=c_r(\nu)\frac{r+1-\nu}{r+1+\nu};$$
+at a zero denominator the cross-multiplied identity is the meaning of the recurrence. The scalar eigenvalues have the closed form
+$$c_r(\nu)=(-i)^r\sqrt\pi\,\Gamma(\nu/2)\Gamma((\nu+1)/2)\frac{1}{\Gamma((\nu+r+1)/2)}\frac{1}{\Gamma((\nu-r+1)/2)},$$
+where reciprocal Gamma is understood as its entire continuation, so this formula is valid for $\operatorname{Re}\nu>0$ and its right side gives the meromorphic continuation of each scalar eigenvalue. Define the two base scalars
+$$b_0(\nu)=\int_{\mathbb R}(1+u^2)^{-(1+\nu)/2}du,\qquad b_1(\nu)=\int_{\mathbb R}(u-i)(1+u^2)^{-(2+\nu)/2}du.$$
+Then $b_0=\sqrt\pi\Gamma(\nu/2)/\Gamma((\nu+1)/2)$ and $b_1=-i\sqrt\pi\Gamma((\nu+1)/2)/\Gamma((\nu+2)/2)$. For $\varepsilon=0$, $c_0=b_0$ is the base eigenvalue and $b_1$ is only a formal odd scalar; for $\varepsilon=1$, $c_1=b_1$ is the base eigenvalue and $b_0$ is only a formal even scalar.
+
+For $m\in\mathcal W_\varepsilon$, $m\ge1$, the exceptional zero sets are exact: at $\nu=m$, $c_r(m)=0$ exactly for allowed $r$ with $|r|\ge m+1$; at $\nu=-m$, $c_r(-m)=0$ exactly for allowed $r$ with $|r|\le m-1$. In particular $c_{m-1}(m)\ne0$ and $c_{m+1}(-m)$ is finite and nonzero.
+
+LINE 101 1.2 Differentiate the right-$G$ intertwining identity in [F1] along real Lie-algebra directions and extend complex-linearly as in [F3]. Applying $A(\nu)L_{E_+}^{\nu}=L_{E_+}^{-\nu}A(\nu)$ to $f_r$ gives $(r+1+\nu)c_{r+2}(\nu)=(r+1-\nu)c_r(\nu)$. This cross-multiplied identity holds even when $r+1+\nu=0$; division gives the ratio form only when that denominator is nonzero. [F1, F2, F3, algebra]
+
+1.3 The even function $q_0$ is in $L^1(\mathbb R)$. For measurable $E$, write $\int_E q_0=\int_{\mathbb R}q_0\chi_E$; split real and imaginary parts into positive and negative parts, use [F8] for measurability of their restrictions, and use $|q_0\chi_E|\le |q_0|$ and [F7, F8] for integrability. The singleton $\{0\}$ is null by the degenerate interval case of [F9]; its complex integral is zero by applying the nonnegative null-integral result in [F9] to the four restricted parts and recombining by [F10]. The three indicators of $(-\infty,0)$, $\{0\}$, and $(0,\infty)$ sum to $1$, so [F10] splits the full integral into these subset integrals. Reflection $u\mapsto-u$ in [F6] equates the two open half-line integrals, giving $b_0=2\int_0^\infty q_0(u)\,du$. The inverse change of variables for $t=u^2/(1+u^2)$ is $u=\sqrt{t/(1-t)}$ with derivative $1/(2\sqrt t(1-t)^{3/2})$. Applying [F6] to this inverse diffeomorphism and the $L^1$ function $q_0$ gives $b_0=B(1/2,\nu/2)$; these Beta parameters have positive real parts because $\operatorname{Re}\nu>0$. By [F4], this equals $\sqrt\pi\,\Gamma(\nu/2)/\Gamma((\nu+1)/2)$. [F1, F4, F6, F7, F8, F9, F10, A1, algebra]
+
+2.1 Put $h_1(u)=(1+u^2)^{-1-\nu/2}$. Both $h_1$ and $u h_1$ are in $L^1$: pointwise $|h_1(u)|\le |(u-i)h_1(u)|$ and $|u h_1(u)|\le |(u-i)h_1(u)|$, and the latter is the absolutely integrable formal base integrand by step 1.1. Reflection in [F6] sends $u h_1(u)$ to its negative, so its full integral is zero. The same indicator splitting, reflection and null-singleton argument as in step 1.3 give $\int_{\mathbb R}h_1=2\int_0^\infty h_1$. The inverse substitution from step 1.3 now gives $\int_{\mathbb R}h_1=B(1/2,(\nu+1)/2)$; these Beta parameters have positive real parts because $\operatorname{Re}\nu>0$. By linearity and [F4], $b_1=\int_{\mathbb R}(u-i)h_1(u)\,du=-i\sqrt\pi\,\Gamma((\nu+1)/2)/\Gamma((\nu+2)/2)$. Thus $c_0=b_0$ when $\varepsilon=0$ and $c_1=b_1$ when $\varepsilon=1$; the other scalar is only a formal base integral. [F1, F4, F6, F7, F8, F9, F10, step 1.1, step 1.3, algebra]
+
+FILE lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]) and use the conventions of [[def-iwasawa-and-minimal-parabolic-data-for-sl2-r]]. Fix the left Haar measure $dg$ of [[thm-iwasawa-decomposition-for-sl2-r]], so in NAK coordinates it is $e^{-s}\,dx\,ds\,dk$ with normalized Haar probability $dk$ on $K$. Write $a_t=\operatorname{diag}(e^{t/2},e^{-t/2})$ for $t\ge0$.
+
+For every continuous nonnegative $K$-bi-invariant function $\psi:G\to[0,\infty)$, the following equality holds for extended nonnegative integrals:
+$$\int_G\psi(g)\,dg=2\pi\int_0^\infty\psi(a_t)\sinh(t)\,dt.$$
+
+Consequently, for every continuous complex-valued $K$-bi-invariant function $\varphi$ and $p\in\{1,2\}$,
+$$\int_G|\varphi(g)|^p\,dg=2\pi\int_0^\infty|\varphi(a_t)|^p\sinh(t)\,dt,$$
+with extended values; thus $\varphi\in L^p(G)$ exactly when the radial integral is finite. If $\varphi\in L^1(G)$, the same formula holds for the absolutely convergent complex integral of $\varphi$. More generally, if $\varphi$ is continuous and satisfies $\varphi(k_1gk_2)=\chi_1(k_1)\chi_2(k_2)\varphi(g)$ for continuous unitary characters $\chi_i:K\to S^1$, then $|\varphi|$ is $K$-bi-invariant and the same $L^1$ and $L^2$ criteria apply.
+
+LINE 74 3.1 The inverse Cayley map is $z=i(1+w)/(1-w)$; it satisfies $\operatorname{Im}z=(1-|w|^2)/|1-w|^2$ and $|dz/dw|^2=4/|1-w|^4$. Hence $dx\,dy/y^2=4\,du\,dv/(1-|w|^2)^2$ for $w=u+iv$. On the disk with the nonnegative real radius removed, $w=\rho e^{i\theta}$ is a $C^1$ diffeomorphism from $(0,1)\times(0,2\pi)$ with Jacobian $\rho$; the omitted radius is a countable union of compact subsegments on which the weight is bounded, and the origin is a singleton, so both have zero weighted measure. By [F3]–[F4], and with $r=2\operatorname{artanh}\rho$ so $d\rho=(1-\rho^2)dr/2$, one has $4\rho\,d\rho\,d\theta/(1-\rho^2)^2=2\rho\,dr\,d\theta/(1-\rho^2)=\sinh(r)\,dr\,d\theta$. The integrand is independent of $\theta$, whose interval has length $2\pi$. This proves the extended radial identity, including the zero function and the endpoint $r=0$, which contributes no atom. [F3, F4, step 2.1, algebra]
+
+4.1 Apply the nonnegative identity to $|\varphi|^p$ for $p=1,2$ to obtain both extended $L^p$ formulas and their finiteness criteria by [F5]. When $\varphi\in L^1$, its real and imaginary positive and negative parts are continuous nonnegative $K$-bi-invariant functions; applying the identity to those four parts and recombining gives the absolutely convergent formula for $\varphi$. For the character-equivariant case, $|\chi_i(k)|=1$, hence $|\varphi(k_1gk_2)|=|\varphi(g)|$, and the same $L^p$ conclusions follow. [F5, step 2.1, step 3.1, algebra] ∎
+
+FILE lem-kde-evaluation-is-a-measurable-statistic
+
+STATEMENT Fix $x\in\mathbb R^d$, $h>0$, $n\ge1$, and a Borel normalized kernel $K$.
+The evaluation map
+$$T_x:(\mathbb R^d)^n\to\mathbb R,\qquad (z_1,\ldots,z_n)\mapsto\frac1{nh^d}\sum_{i=1}^nK\!\left(\frac{x-z_i}{h}\right)$$
+is measurable for the finite product Borel sigma-algebra. Hence it is a
+statistic on the iid density experiment.
+
+LINE 50 
+[F4] Finite sums and scalar multiples of real measurable functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+## Proof
+
+FILE lem-kde-jointly-measurable-in-sample-and-evaluation-point
+
+STATEMENT For a Borel normalized kernel $K$, $h>0$ and $n\ge1$, the map
+$$Q_h:(\mathbb R^d)^n\times\mathbb R^d\to\mathbb R,\qquad (z_1,\ldots,z_n,x)\mapsto\frac1{nh^d}\sum_{i=1}^n K\!\left(\frac{x-z_i}{h}\right)$$
+is Borel measurable for the finite product Borel sigma-algebra.
+
+LINE 51 [F3] Scalar multiples and finite sums of real measurable functions are
+measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F4] For positive integers $a,b$, $\mathcal B(\mathbb R^a)\otimes\mathcal B(\mathbb R^b)=\mathcal B(\mathbb R^{a+b})$ under the coordinate identification ([[thm-borel-products-of-euclidean-spaces-are-euclidean-borel]]).
+
+FILE lem-l-one-of-a-second-countable-group-is-separable
+
+STATEMENT Assume the Axiom of Choice. Let $G$ be a second-countable locally compact Hausdorff group with a fixed left Haar measure $\mu$ ([[def-second-countable-space]], [[def-left-haar-integral-and-left-haar-measure]], [[def-complex-haar-lp-spaces-and-compactly-supported-functions]]). Then $L^1(G,\mu;\mathbb C)$ is a separable Banach space. There is a countable Borel algebra $\mathcal A_0$ generating the Borel sigma-algebra of $G$ such that the $\mathbb Q(i)$-linear span of $\{\mathbf 1_A:A\in\mathcal A_0,\ \mu(A)<\infty\}$ is dense in $L^1(G)$. Moreover, the image of $C_c(G;\mathbb C)$ in $L^1(G)$ contains a countable dense subset.
+
+LINE 109 5.1 Let $\mathcal E=\{A\in\mathcal A_0:\mu(A)<\infty\}$ and let $D_0$ consist of all finite $\mathbb Q(i)$-linear combinations of $\mathbf 1_A$ with $A\in\mathcal E$. The family $\mathcal E$ is countable as a subset of $\mathcal A_0$; the alphabet $C=\mathbb Q(i)\times\mathcal E$ is at most countable by [F4,F5]. Every finite power $C^m$, including the one-point $C^0$, is at most countable by [F4]. AC gives Countable Choice by [F6], so [F4] makes $\bigcup_{m\in\mathbb N}C^m$, the set of finite lists of coefficient/set pairs, at most countable. Its image under the finite-sum map is $D_0$, so $D_0$ is countable. Each generator indicator is integrable because its set has finite measure, and finite linear combinations remain in $L^1$. For $h\in L^1(G)$ and $\epsilon>0$, choose $f\in C_c(G)$ with $\|h-f\|_1<\epsilon/2$ by [F1], then choose $d\in D_0$ with $\|f-d\|_1<\epsilon/2$ by step 4.1. The triangle inequality gives $\|h-d\|_1<\epsilon$, so $D_0$ is dense in $L^1(G)$. [F1, F4, F5, F6, step 3.1, step 4.1]
+
+6.1 The set $D_0\times\mathbb N_{>0}$ is countable by [F4]. For each $(d,k)$ in it, density of $C_c(G)$ in $L^1(G)$ gives a nonempty set of $c\in C_c(G)$ with $\|c-d\|_1<1/k$. AC's implication of Countable Choice [F6] selects one such $c_{d,k}$ for every pair. The resulting set of functions is countable; for any $h\in L^1(G)$ and $\epsilon>0$, choose $d\in D_0$ with $\|h-d\|_1<\epsilon/2$ and then $k$ with $1/k<\epsilon/2$. It follows that $\|h-c_{d,k}\|_1<\epsilon$, so their image in $L^1(G)$ is a countable dense subset contained in the image of $C_c(G)$. [F1, F4, F5, F6, step 5.1]
+
+7.1 Step 5.1 proves separability of $L^1(G)$, and [F1] gives its completeness, so it is a separable Banach space. Steps 3.1 and 5.1 give the asserted generating Borel algebra and dense $\mathbb Q(i)$-linear span, while step 6.1 gives the countable dense subset from $C_c(G)$. [F1, step 3.1, step 5.1, step 6.1] ∎
+
+FILE lem-largest-summand-bound-for-symmetric-independent-variables
+
+STATEMENT Let $Y_1,\ldots,Y_n$ be independent symmetric real random variables, $n\ge1$, and $S_n=\sum_{k=1}^nY_k$. For $t>0$,
+$$\mathbb P(|S_n|\ge t)\ge\tfrac12\mathbb P(\max_{k\le n}|Y_k|\ge t).$$
+The same bound holds when both inequalities inside the probabilities are strict. If the $Y_k$ are IID and $p=\mathbb P(|Y_1|>t)$, then
+$$\mathbb P(|S_n|>t)\ge\tfrac12(1-(1-p)^n)\ge\tfrac12(1-e^{-np}).$$
+
+LINE 37 [F2] [[thm-independent-random-elements-have-product-joint-law]]: Let $n\ge1$, and let $X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$ for $i<n$ be independent random elements. Define $X=(X_0,\dots,X_{n-1}):\Omega\to\prod_{i<n}S_i.$ Then $X$ is a random element of $\left(\prod_{i<n}S_i,\bigotimes_{i<n}\Sigma_i\right)$, and its law is the finite product of the marginal laws: $\mathbb P_X=\bigotimes_{i<n}\mathbb P_{X_i}.$
+
+[F3] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then: 1. $cf$ is measurable for every real scalar $c$; 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable; 3. if $f+g$ is pointwise defined, then $f+g$ is measurable; 4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
+
+## Proof
+
+FILE lem-lca-lone-convolution-is-a-commutative-banach-star-algebra
+
+STATEMENT Assume Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group
+with Haar measure $m_G$, and let $A=L^1(G,m_G)$. For $f,g\in A$ define
+$$(f*g)(x):=\int_G f(y)\,g(x-y)\,dm_G(y),\qquad f^*(x):=\overline{f(-x)} .$$
+Then (1) for $m_G$-a.e. $x$ the integral converges absolutely and defines a
+class in $A$ independent of the chosen representatives, with
+$$\|f*g\|_1\le\|f\|_1\|g\|_1;$$
+(2) convolution is bilinear, associative and commutative, $*$ is an isometric
+involution with $f^{**}=f$ and $(f*g)^*=g^**f^*$, and $A$ is complete in
+$\|\cdot\|_1$; hence $A$ is a commutative Banach $*$-algebra. No
+$\sigma$-finiteness of $m_G$ is assumed: the proof reduces the two $\sigma$-compact
+essential supports to a $\sigma$-finite product and extends by zero. $A$ has an
+identity exactly when $G$ is discrete, proved later on this page.
+
+LINE 72 [F3] If $S,T\subseteq G$ are $\sigma$-compact, then so is $S+T$ (the image of the $\sigma$-compact $S\times T$ under the continuous addition map), and the product measure space $S\times(S+T)$ with $m_G\otimes m_G$ is $\sigma$-finite: $S\times(S+T)$ is a countable union of products of compact, hence finite-measure, sets ([[def-compactness-variants]], [[thm-finite-products-of-compact-spaces]], [[thm-compactness-under-continuous-maps]], [[def-left-haar-integral-and-left-haar-measure]]). Tonelli's theorem and Fubini's theorem for $L^1$ functions apply on this product ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
+
+[F4] $C_c(G)$ is dense in $A$ ([[thm-c-c-is-dense-in-l-p-for-radon-measures]]), and two Radon measures with equal integrals of every real $C_c$ function agree on all Borel sets ([[thm-rmk-uniqueness-among-radon-measures]]); an $L^1$ density defines a finite measure with total variation controlled by its $L^1$ norm ([[thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]]). Such density measures are Radon: approximate the density in $L^1$ by $C_c$ functions and transfer finite-measure regularity with the total-variation error bound. Applying RMK uniqueness to the positive and negative parts of its real and imaginary density therefore shows that a function $\varphi\in A$ with $\int_G\varphi h\,dm_G=0$ for every $h\in C_c(G)$ vanishes $m_G$-a.e. ([[def-dependent-choice]]).
+
+[F5] $A$ is complete in $\|\cdot\|_1$, and $\|\cdot\|_1$ is computed on representatives and descends to the quotient ([[thm-riesz-fischer-completeness-of-l-p]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]); translations preserve $C_c$ ([[lem-translations-preserve-compactly-supported-continuous-functions]]).
+
+FILE lem-lca-scalar-unitization-character-space-and-spectrum
+
+STATEMENT Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact
+Hausdorff abelian group with Haar measure $m_G$, $A=L^1(G,m_G)$ and let
+$A^+=\mathbb C\oplus A$ with
+$$(z,f)(w,g)=(zw,\ zg+wf+f*g),\qquad (z,f)^*=(\bar z,f^*),\qquad \|(z,f)\|=|z|+\|f\|_1 .$$
+Then: (1) $A^+$ is a unital commutative complex Banach algebra (it is a Banach
+$*$-algebra with $\|(z,f)^*\|=\|(z,f)\|$), and its characters are exactly
+$q(z,f)=z$ and $h_\gamma^+(z,f)=z+\widehat f(\gamma)$, $\gamma\in\widehat G$;
+(2) $\sigma_{A^+}(0,f)=\{0\}\cup\widehat f(\widehat G)$ for every $f\in A$;
+(3) $A$ has an identity if and only if $G$ is discrete, and then the identity
+is $m_G(\{0\})^{-1}\mathbf 1_{\{0\}}$; (4) $\Delta(A^+)$ is homeomorphic to
+$\widehat G\cup\{q\}$, which is the one-point compactification of $\widehat G$
+when $G$ is nondiscrete, while for discrete $G$ it is
+$\widehat G\sqcup\{q\}$ with $q$ isolated; (5) $A$ is semisimple in the sense
+that $\widehat f\equiv0$ implies $f=0$.
+
+LINE 66 Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact
+Hausdorff abelian group with Haar measure $m_G$, $A=L^1(G,m_G)$ and let
+$A^+=\mathbb C\oplus A$ with
+$$(z,f)(w,g)=(zw,\ zg+wf+f*g),\qquad (z,f)^*=(\bar z,f^*),\qquad \|(z,f)\|=|z|+\|f\|_1 .$$
+Then: (1) $A^+$ is a unital commutative complex Banach algebra (it is a Banach
+
+LINE 68 $A^+=\mathbb C\oplus A$ with
+$$(z,f)(w,g)=(zw,\ zg+wf+f*g),\qquad (z,f)^*=(\bar z,f^*),\qquad \|(z,f)\|=|z|+\|f\|_1 .$$
+Then: (1) $A^+$ is a unital commutative complex Banach algebra (it is a Banach
+$*$-algebra with $\|(z,f)^*\|=\|(z,f)\|$), and its characters are exactly
+$q(z,f)=z$ and $h_\gamma^+(z,f)=z+\widehat f(\gamma)$, $\gamma\in\widehat G$;
+
+LINE 70 Then: (1) $A^+$ is a unital commutative complex Banach algebra (it is a Banach
+$*$-algebra with $\|(z,f)^*\|=\|(z,f)\|$), and its characters are exactly
+$q(z,f)=z$ and $h_\gamma^+(z,f)=z+\widehat f(\gamma)$, $\gamma\in\widehat G$;
+(2) $\sigma_{A^+}(0,f)=\{0\}\cup\widehat f(\widehat G)$ for every $f\in A$;
+(3) $A$ has an identity if and only if $G$ is discrete, and then the identity
+
+LINE 71 $*$-algebra with $\|(z,f)^*\|=\|(z,f)\|$), and its characters are exactly
+$q(z,f)=z$ and $h_\gamma^+(z,f)=z+\widehat f(\gamma)$, $\gamma\in\widehat G$;
+(2) $\sigma_{A^+}(0,f)=\{0\}\cup\widehat f(\widehat G)$ for every $f\in A$;
+(3) $A$ has an identity if and only if $G$ is discrete, and then the identity
+is $m_G(\{0\})^{-1}\mathbf 1_{\{0\}}$; (4) $\Delta(A^+)$ is homeomorphic to
+
+LINE 73 (2) $\sigma_{A^+}(0,f)=\{0\}\cup\widehat f(\widehat G)$ for every $f\in A$;
+(3) $A$ has an identity if and only if $G$ is discrete, and then the identity
+is $m_G(\{0\})^{-1}\mathbf 1_{\{0\}}$; (4) $\Delta(A^+)$ is homeomorphic to
+$\widehat G\cup\{q\}$, which is the one-point compactification of $\widehat G$
+when $G$ is nondiscrete, while for discrete $G$ it is
+
+LINE 81 ## Facts & Assumptions
+
+**Given:** The Axiom of Choice and Dependent Choice, a locally compact Hausdorff abelian group $G$ with Haar measure $m_G$, $A=L^1(G,m_G)$ with its convolution, involution and norm ([[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-integrable-real-and-complex-functions-and-their-integrals]]), the product $A^+=\mathbb C\oplus A$ with the operations displayed above, and its character space $\Delta(A^+)$.
+
+[F1] $A^+$ is a unital commutative complex Banach algebra with $\|(z,f)\|=|z|+\|f\|_1$ ([[def-unital-banach-algebra]], [[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]]); every character of a nonzero unital commutative Banach algebra is unital and satisfies $|\chi|\le\|\cdot\|$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra]]).
+
+LINE 83 **Given:** The Axiom of Choice and Dependent Choice, a locally compact Hausdorff abelian group $G$ with Haar measure $m_G$, $A=L^1(G,m_G)$ with its convolution, involution and norm ([[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-integrable-real-and-complex-functions-and-their-integrals]]), the product $A^+=\mathbb C\oplus A$ with the operations displayed above, and its character space $\Delta(A^+)$.
+
+[F1] $A^+$ is a unital commutative complex Banach algebra with $\|(z,f)\|=|z|+\|f\|_1$ ([[def-unital-banach-algebra]], [[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]]); every character of a nonzero unital commutative Banach algebra is unital and satisfies $|\chi|\le\|\cdot\|$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra]]).
+
+[F2] The nonzero multiplicative linear functionals on $A$ are exactly $f\mapsto\widehat f(\gamma)$ for $\gamma\in\widehat G$ ([[lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations]]), and under this bijection the topology of pointwise convergence on $A$ equals the compact-open topology of $\widehat G$ ([[lem-lca-lone-character-topology-is-the-compact-open-topology]]).
+
+LINE 89 [F3] $\sigma(a)=\{\chi(a):\chi\in\Delta\}$ for every element $a$ of a commutative unital Banach algebra, and this spectrum is a nonempty compact subset of $\mathbb C$ ([[thm-spectrum-as-character-values]], [[thm-spectrum-is-nonempty-compact-and-norm-bounded]]); the spectral radius satisfies $r(a)=\lim_n\|a^n\|^{1/n}=\max\{|\lambda|:\lambda\in\sigma(a)\}$ ([[thm-spectral-radius-formula]], [[def-spectral-radius]]).
+
+[F4] $\Delta(A^+)$ is compact Hausdorff and the Gelfand transform is injective exactly on the semisimple part: its kernel is the Jacobson radical ([[thm-maximal-ideal-space-is-compact-hausdorff]], [[def-gelfand-transform]], [[thm-kernel-of-the-gelfand-transform-is-the-radical]], [[def-jacobson-radical-and-semisimple-commutative-banach-algebra]]).
+
+[F5] Holomorphic functional calculus and the holomorphic spectral mapping theorem are available in the unital Banach algebra $A^+$, and for a normal operator $T$ one has $\|T\|=r(T)$ ([[def-holomorphic-functional-calculus]], [[thm-holomorphic-spectral-mapping]], [[cor-normal-operator-norm-equals-spectral-radius]]).
+
+LINE 91 [F4] $\Delta(A^+)$ is compact Hausdorff and the Gelfand transform is injective exactly on the semisimple part: its kernel is the Jacobson radical ([[thm-maximal-ideal-space-is-compact-hausdorff]], [[def-gelfand-transform]], [[thm-kernel-of-the-gelfand-transform-is-the-radical]], [[def-jacobson-radical-and-semisimple-commutative-banach-algebra]]).
+
+[F5] Holomorphic functional calculus and the holomorphic spectral mapping theorem are available in the unital Banach algebra $A^+$, and for a normal operator $T$ one has $\|T\|=r(T)$ ([[def-holomorphic-functional-calculus]], [[thm-holomorphic-spectral-mapping]], [[cor-normal-operator-norm-equals-spectral-radius]]).
+
+[F6] $m_G$ is positive on nonempty open sets and finite on compact sets, and if $G$ is nondiscrete then $m_G(\{0\})=0$; conversely $m_G(\{0\})>0$ forces $G$ discrete: if $m_G(\{0\})=c>0$ then translation invariance makes every point an atom of mass $c$, so a compact neighbourhood $K$ satisfies $c\,|K|\le m_G(K)<+\infty$ and is finite, and a finite Hausdorff neighbourhood of $0$ contains an open neighbourhood of $0$ inside which $\{0\}$ is open ([[lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets]], [[def-left-haar-integral-and-left-haar-measure]], [[def-radon-measure-on-an-lch-space]]).
+
+LINE 109 **Proof technique:** direct.
+
+1.1 ($A^+$ is a unital commutative Banach $*$-algebra.) Bilinearity, associativity, commutativity and the involution laws of the product $(z,f)(w,g)=(zw,zg+wf+f*g)$ follow from the corresponding laws of convolution in $A$ and the fact that $(z,f)=z(1,0)+(0,f)$ with $(1,0)$ a unit; the norm is submultiplicative because $\|(z,f)(w,g)\|_1\le|z||w|+|z|\|g\|_1+|w|\|f\|_1+\|f\|_1\|g\|_1=(|z|+\|f\|_1)(|w|+\|g\|_1)$, and $A^+=\mathbb C\oplus A$ with the $\ell^1$-norm is complete because $\mathbb C$ and $A$ are. Moreover $\|(z,f)^*\|=|\bar z|+\|f^*\|_1=|z|+\|f\|_1=\|(z,f)\|$ by the isometry of the involution. [F1]
+
+
+
+LINE 113 
+
+1.2 (Characters of $A^+$.) Let $\chi$ be a character of $A^+$. Since $\chi$ is unital, $\chi(z,0)=z$. Let $h:=\chi|_{A}$ be the restriction to the ideal $\{0\}\oplus A$, identified with $A$. If $h=0$ then $\chi(z,f)=z=q(z,f)$. If $h\ne0$, then $h$ is a nonzero multiplicative linear functional on $A$, so by [F2] there is a unique $\gamma\in\widehat G$ with $h(f)=\widehat f(\gamma)$ for all $f$; hence $\chi(z,f)=z+\widehat f(\gamma)=h_\gamma^+(z,f)$. Conversely $q$ is the character of the quotient $A^+/(A)$ and each $h_\gamma^+$ is a character: $h_\gamma^+((z,f)(w,g))=zw+\widehat{zg+wf+f*g}(\gamma)=zw+z\widehat g(\gamma)+w\widehat f(\gamma)+\widehat f(\gamma)\widehat g(\gamma)$ by linearity and the convolution identity of [F8], which is the product of $h_\gamma^+(z,f)$ and $h_\gamma^+(w,g)$. [F1, F2, F8]
+
+
+
+LINE 121 
+
+2.1 (The spectrum.) By [F3] applied to $A^+$ and the character list of step 1.2, $\sigma_{A^+}(0,f)=\{\chi(0,f):\chi\in\Delta(A^+)\}=\{0\}\cup\{\widehat f(\gamma):\gamma\in\widehat G\}$. [F3, step 1.2]
+
+
+
+LINE 129 
+
+2.3 (The character space of $A^+$.) By [F4] the space $\Delta(A^+)$ is compact Hausdorff and by step 1.2 the map sending $\gamma$ to $h_\gamma^+$ and the point $q$ to the restriction character is a bijection onto $\Delta(A^+)$. The topology is the topology of pointwise convergence on $A^+$: a net $h_{\gamma_i}^+\to h_{\gamma_0}^+$ iff $\widehat f(\gamma_i)\to\widehat f(\gamma_0)$ for all $f\in A$, which by [F2] is exactly the compact-open convergence $\gamma_i\to\gamma_0$; hence the restriction of the homeomorphism to $\widehat G$ identifies $\widehat G$ with the open subspace $\Delta(A^+)\setminus\{q\}$. [F2, F4, step 1.2]
+
+
+
+LINE 133 
+
+3.1 (Semisimplicity of $A$.) For $f\in L^1(G)$ and $g\in L^2(G)$ choose $\sigma$-compact essential supports $S_f,S_g$ using [F9], and set $S=S_f+S_g$, also $\sigma$-compact and of $\sigma$-finite Haar measure. The measurable function $H(t,x):=|f(x)|\,|g(t-x)|$ on $S\times S_f$ has, by Minkowski [F10] and translation isometry [F9], $\left\|\int_{S_f}|f(x)|\,|g(\cdot-x)|\,dm_G(x)\right\|_{L^2(S)}\le\int_{S_f}|f(x)|\,\|g(\cdot-x)\|_{L^2(S)}\,dm_G(x)=\|f\|_1\|g\|_2$. The integral on the left is finite a.e.; therefore the defining convolution integral $(f*g)(t):=\int_G f(x)g(t-x)\,dm_G(x)$ converges absolutely for a.e. $t$ and determines an $L^2$ class with $\|f*g\|_2\le\|f\|_1\|g\|_2$. Thus $\lambda(f)g:=f*g$ is a well-defined bounded linear operator and $\|\lambda(f)\|\le\|f\|_1$. For $f_1,f_2\in L^1$ and $g\in C_c(G)\subset L^1\cap L^2$, the L$^1$ convolution associativity supplier gives $(f_1*f_2)*g=f_1*(f_2*g)$ a.e.; the L$^1$ and L$^2$ definitions here use the same a.e.-defined convolution integrals, and both sides are in $L^2$ by the bound just proved. Since $C_c(G)$ is dense in $L^2$ [F9] and all three convolution operators are bounded, this identity extends to every $g\in L^2$. Hence $\lambda(f_1*f_2)=\lambda(f_1)\lambda(f_2)$, and $\lambda^+:A^+\to\mathcal B(L^2)$, $\lambda^+(z,f)=zI+\lambda(f)$, is a unital algebra homomorphism. For $g,h\in L^2(G)$, the integral of $|f(x)g(y)h(x+y)|$ over $S_f\times S_g$ is bounded by $\|f\|_1\|g\|_2\|h\|_2$: for each $x$, Cauchy--Schwarz and translation isometry give $\int_G|g(y)h(x+y)|\,dm_G(y)\le\|g\|_2\|h\|_2$, and then integrate against $|f(x)|$. Thus Fubini [F11] and the substitution $z=x-y$ yield $\langle\lambda(f)g,h\rangle=\int_G\int_G f(y)g(z)\overline{h(y+z)}\,dm_G(z)\,dm_G(y)=\langle g,\lambda(f^*)h\rangle$. Here the last equality follows from $(f^**h)(z)=\int_G\overline{f(-w)}h(z-w)\,dm_G(w)=\int_G\overline{f(y)}h(z+y)\,dm_G(y)$ by the inversion-invariant Haar substitution $y=-w$. Therefore $\lambda(f)^*=\lambda(f^*)$; in particular, $f=f^*$ makes $\lambda(f)$ self-adjoint and hence normal. The representation is faithful: if $\lambda(f)=0$, then $f*u_U=\lambda(f)u_U=0$ for every approximate-identity function $u_U\in C_c(G)\subset L^2(G)$, while $f*u_U\to f$ in $A$ by [F8], so $f=0$. For self-adjoint $f=f^*$, the unital homomorphism $\lambda^+$ gives spectral inclusion $\sigma_{\mathcal B(L^2)}(\lambda(f))\subseteq\sigma_{A^+}(0,f)=\{0\}\cup\widehat f(\widehat G)$ by step 2.1; as $\lambda(f)$ is normal, [F5] yields $\|\lambda(f)\|=r(\lambda(f))\le\sup_{\gamma\in\widehat G}|\widehat f(\gamma)|$. Thus $\widehat f\equiv0$ implies $\lambda(f)=0$ and then $f=0$ for every self-adjoint $f$. For arbitrary $f$, $f^* * f$ is self-adjoint and $\widehat{f^* * f}=\overline{\widehat f}\,\widehat f=|\widehat f|^2$ by [F8]; if $\widehat f\equiv0$, the preceding self-adjoint case gives $f^* * f=0$, and the adjoint identity gives $\lambda(f)^*\lambda(f)=\lambda(f^* * f)=0$, whence $\lambda(f)=0$ and faithfulness gives $f=0$. Therefore $A$ is semisimple and (5) holds. [F1, F5, F8, F9, F10, F11, step 2.1]
+
+
+
+LINE 137 
+
+4.1 (Isolation of $q$ and the one-point compactification.) If $G$ is discrete then by step 1.3 $A$ has an identity $u$ with $\widehat u\equiv1$; the continuous function $\chi\mapsto\chi(1,-u)$ on $\Delta(A^+)$ equals $1$ at $q$ and $0$ at every $h_\gamma^+$, so $\{q\}$ is open and $q$ is isolated. If $G$ is nondiscrete, suppose $q$ were isolated; then $\widehat G\cong\Delta(A^+)\setminus\{q\}$ would be compact, and we choose finitely many $f_1,\dots,f_m\in A$ with $\bigcup_j\{\widehat f_j\ne0\}=\widehat G$ (a finite subcover of the cover by the open sets $\{\widehat f\ne0\}$). Put $b:=\sum_jf_j*f_j^*$, so $\widehat b=\sum_j|\widehat f_j|^2>0$ on $\widehat G$ and, $\widehat G$ being compact, $\widehat b\ge c>0$ there; by step 2.1, $\sigma_{A^+}(0,b)=\{0\}\cup\widehat b(\widehat G)\subseteq\{0\}\cup[c,\infty)$. By [F5] applied to the function that is $0$ near $0$ and $1$ near $[c,\infty)$, the element $e:=\varphi(0,b)$ is an idempotent of $A^+$ with $h_\gamma^+(e)=\varphi(\widehat b(\gamma))=1$ for every $\gamma$ and $q(e)=\varphi(0)=0$; thus $e\in A$ and $\widehat{e*f}=\widehat e\widehat f=\widehat f$ for every $f\in A$. Semisimplicity (step 3.1) gives $e*f=f$ for all $f$, so $e$ is an identity of $A$, contradicting step 2.2. Hence $q$ is not isolated, $\Delta(A^+)\setminus\{q\}$ is dense, and $\Delta(A^+)$ is the one-point compactification of its open dense subspace $\widehat G$: neighbourhoods of $q$ are exactly the complements of compact subsets of $\widehat G$ ([[def-one-point-compactification]]). [F4, F5, step 2.1, step 2.2, step 3.1, step 2.3]
+
+
+
+FILE lem-levy-maximal-inequality-for-independent-tail-sums
+
+STATEMENT Let $X_1,\ldots,X_n$ be independent real random variables, $n\ge1$, with $S_k=\sum_{j=1}^kX_j$. Let $l>0$ and $0\le\delta<1$. If
+$$\mathbb P\left(\left|\sum_{j=i}^nX_j\right|\ge l/2\right)\le\delta\quad(1\le i\le n),$$
+then
+$$\mathbb P(\max_{k\le n}|S_k|\ge l)\le\frac\delta{1-\delta}.$$
+No centering or moment assumption is required.
+
+LINE 36 [F1] [[thm-grouping-independent-sigma-algebras]]: Let $(\mathcal F_i)_{i\in I}$ be an independent family of sigma-algebras on a probability space, and let $J_0,\dots,J_{m-1}\subseteq I$ be pairwise disjoint index sets. For each $r<m$, define $\mathcal G_r:=\sigma\left(\bigcup_{i\in J_r}\mathcal F_i\right).$ Then the sigma-algebras $\mathcal G_0,\dots,\mathcal G_{m-1}$ are independent.
+
+[F2] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then: 1. $cf$ is measurable for every real scalar $c$; 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable; 3. if $f+g$ is pointwise defined, then $f+g$ is measurable; 4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
+
+## Proof
+
+FILE lem-localized-curved-patch-measure-transform-decay
+
+STATEMENT Assume Countable Choice. Let $n\ge2$, let $U\subseteq\mathbb R^{n-1}$ be open, $h\in C^\infty(U)$, $a\in C_c^\infty(U)$, let $S=\operatorname{graph}h$ carry the graph surface measure $\sigma$, and put $d\mu:=a(y)\sqrt{1+|\nabla h(y)|^2}\,dy$ (the localization of $\sigma$ by the pullback of $a$). If $\det D^2h\neq0$ on $\operatorname{supp}a$, then $|\check\mu(x)|=\left|\int e^{2\pi i(x'\cdot y+x_nh(y))}a(y)\sqrt{1+|\nabla h(y)|^2}\,dy\right|\le C_a(1+|x|)^{-(n-1)/2}$ for all $x=(x',x_n)\in\mathbb R^n$, with $C_a$ depending on $a,h,n$. More generally, if $S$ is a smooth hypersurface and $\mu=\varphi\sigma$ for $\varphi\in C_c^\infty(\mathbb R^n)$ whose restriction to $S$ has compact support in $S$, with the Gaussian curvature of $S$ nonvanishing on $S\cap\operatorname{supp}\varphi$, then the same decay holds.
+
+LINE 63 **Proof technique:** direct; use finitely many neighbourhoods of directions and retain stationary points in slightly enlarged spatial patches.
+
+1.1 Put $d=n-1$, $b=a\sqrt{1+|\nabla h|^2}$ and $K=\operatorname{supp}a$. Choose a compact neighbourhood $K^+$ of $K$ inside $U$ on which $D^2h$ is invertible. This exists by continuity and a finite cover of $K$. Every derivative of $h$ needed below is bounded there. For $x=\rho\omega$, $\rho\ge1$ and $\omega\in S^{n-1}$, the phase is $\psi_\omega(y)=\omega'\cdot y+\omega_nh(y)$ and the integral is $\int e^{2\pi i\rho\psi_\omega}b$. Its gradient is $\omega'+\omega_n\nabla h$. At a zero in $K^+$, $|\omega_n|=(1+|\nabla h|^2)^{-1/2}$, so the Hessian $\omega_nD^2h$ is invertible with uniformly bounded inverse. [given, F3, F4, algebra]
+
+2.1 Fix a direction $\omega_0$. Its zeros in $K^+$ are isolated by the inverse theorem in [F2]. Only finitely many lie in a smaller compact neighbourhood of $K$: otherwise compactness gives an accumulating zero in $K^+$, contradicting local invertibility. Surround these finitely many zeros by disjoint small balls compactly contained in $K^+$, on which $\nabla h$ is injective; choose smaller concentric balls around the zeros. Every remaining point of $K$ has nonzero phase gradient at $\omega_0$. A fixed finite smooth partition on a neighbourhood of $K$ therefore splits $b$ into amplitudes supported either in these zero balls or on a compact set where $|\nabla\psi_{\omega_0}|\ge c>0$. [F2, F4, step 1.1]
+
+LINE 65 1.1 Put $d=n-1$, $b=a\sqrt{1+|\nabla h|^2}$ and $K=\operatorname{supp}a$. Choose a compact neighbourhood $K^+$ of $K$ inside $U$ on which $D^2h$ is invertible. This exists by continuity and a finite cover of $K$. Every derivative of $h$ needed below is bounded there. For $x=\rho\omega$, $\rho\ge1$ and $\omega\in S^{n-1}$, the phase is $\psi_\omega(y)=\omega'\cdot y+\omega_nh(y)$ and the integral is $\int e^{2\pi i\rho\psi_\omega}b$. Its gradient is $\omega'+\omega_n\nabla h$. At a zero in $K^+$, $|\omega_n|=(1+|\nabla h|^2)^{-1/2}$, so the Hessian $\omega_nD^2h$ is invertible with uniformly bounded inverse. [given, F3, F4, algebra]
+
+2.1 Fix a direction $\omega_0$. Its zeros in $K^+$ are isolated by the inverse theorem in [F2]. Only finitely many lie in a smaller compact neighbourhood of $K$: otherwise compactness gives an accumulating zero in $K^+$, contradicting local invertibility. Surround these finitely many zeros by disjoint small balls compactly contained in $K^+$, on which $\nabla h$ is injective; choose smaller concentric balls around the zeros. Every remaining point of $K$ has nonzero phase gradient at $\omega_0$. A fixed finite smooth partition on a neighbourhood of $K$ therefore splits $b$ into amplitudes supported either in these zero balls or on a compact set where $|\nabla\psi_{\omega_0}|\ge c>0$. [F2, F4, step 1.1]
+
+3.1 Shrink a neighbourhood $V$ of $\omega_0$ in the direction sphere. On the nonstationary support, continuity keeps the gradient at least $c/2$. For each zero ball, the implicit theorem provides a smooth critical point $z(\omega)$ remaining in its smaller ball for $\omega\in V$. Injectivity of $\nabla h$ and $\omega_n\ne0$ ensure it is the only critical point in the larger ball. By shrinking the ball and $V$, Taylor's formula makes $|\nabla\psi_\omega(y)|\ge c_0|y-z(\omega)|$ near that point uniformly: subtract the gradient at $z$ and use uniform closeness of the Hessian to its invertible value at $(\omega_0,z(\omega_0))$. On the compact remainder of the ball the gradient stays bounded below after further shrinking $V$. All required derivatives and Hessian inverses are uniformly bounded. [F1, F2, step 1.1, step 2.1, algebra]

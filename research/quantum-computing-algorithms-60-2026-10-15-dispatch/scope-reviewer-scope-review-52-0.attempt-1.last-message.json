@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "52",
+  "round": 0,
+  "reviewed_items": [
+    "thm-qa-28-polynomial-matrix-function-error",
+    "def-qa-28-state-spectral-distribution",
+    "lem-qa-28-normalized-function-target",
+    "def-qa-28-spectral-estimation-access",
+    "alg-qa-28-phase-spectral-estimation",
+    "alg-qa-28-median-spectral-estimation",
+    "thm-qa-28-spectral-law-measurement",
+    "alg-qa-28-qsvt-matrix-function",
+    "thm-qa-28-matrix-function-error-cost",
+    "thm-qa-28-spectral-estimation-guarantee",
+    "ex-qa-28-exponential-polynomial",
+    "ex-qa-28-two-level-spectral-estimate"
+  ],
+  "reviewed_pages": [
+    "quantum-spectral-estimation-and-matrix-functions",
+    "quantum-spectral-estimation-and-matrix-functions-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Reviewed both assigned pages, all 12 items, approved scope, and relevant supplier claims and proofs. Local repairs are needed. A separate proof gap in an outside-batch consumer requires owner action.",
+  "findings": [
+    {
+      "id": "thm-qa-28-spectral-estimation-guarantee#step-2.1",
+      "type": "prerequisite",
+      "reason": "The cited log identities give ln(8/7) as an integral but do not establish the lower bound 1/8 needed for the Chernoff estimate. Add a proof, for example by MVT using thm-integral-logarithm-derivative-and-normalisation and cor-mean-value-theorem."
+    },
+    {
+      "id": "lem-qa-30-spectral-minimum-shift#step-2.1",
+      "type": "outside-batch",
+      "reason": "This outside-batch consumer repeats the unsupported ln(8/7) lower bound and cites [F7], which is absent from its Facts section. Owner repair is required; the same derivative-and-MVT argument can supply the missing bound."
+    },
+    {
+      "id": "alg-qa-28-qsvt-matrix-function#Definition",
+      "type": "prerequisite",
+      "reason": "The supplied block encoding of H/alpha has no stated normalization parameter, while thm-qa-28-matrix-function-error-cost assumes its compression approximates H/alpha. Specify a unit-normalized encoding of H/alpha, or align both interfaces to an alpha-normalized encoding of H."
+    },
+    {
+      "id": "alg-qa-28-phase-spectral-estimation#Definition",
+      "type": "local",
+      "reason": "The input names a system register but not its initial state or who invokes and charges A_psi. Specify that the register is already in psi and the caller charges preparation, or include preparation in this procedure and update its wrapper to avoid duplication."
+    },
+    {
+      "id": "thm-qa-28-spectral-law-measurement#F4",
+      "type": "local",
+      "reason": "The projective-measurement outcome law establishes probabilities, not the conditional Lüders branch. Cite the QPE algorithm's specified instrument branch or derive the normalized branch directly from v_y."
+    },
+    {
+      "id": "ex-qa-28-two-level-spectral-estimate#step-1.2",
+      "type": "local",
+      "reason": "The proof invokes sine continuity and IVT without stating those premises. A local repair can avoid them: since F3 says sine is positive before its first positive zero pi and sin(4)<0, pi must be less than 4."
+    },
+    {
+      "id": "ex-qa-28-exponential-polynomial#Facts",
+      "type": "local",
+      "reason": "The Facts section assigns [F4] to two different claims. Rename or remove the unused functional-calculus label so proof references are unambiguous."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-28-median-spectral-estimation",
+      "decision": "accept",
+      "reason": "It prepares a fresh eigenstate before invoking phase estimation, matching an explicit prepared-state input condition."
+    },
+    {
+      "id": "thm-qa-28-spectral-law-measurement",
+      "decision": "repair",
+      "reason": "The conditional-state calculation is sound under the QPE Lüders branch, but F4 must cite that branch rather than attribute it to the outcome-law theorem."
+    },
+    {
+      "id": "thm-qa-28-spectral-estimation-guarantee",
+      "decision": "repair",
+      "reason": "It consumes the phase-estimation procedure and also needs the missing integral lower-bound proof at step 2.1."
+    },
+    {
+      "id": "ex-qa-28-two-level-spectral-estimate",
+      "decision": "repair",
+      "reason": "Its prepared input is compatible with the phase interface; step 1.2 needs the local sine-zero argument described in the finding."
+    },
+    {
+      "id": "quantum-spectral-estimation-and-matrix-functions",
+      "decision": "accept",
+      "reason": "Its summary already states that state preparation and the matrix scale are explicit."
+    },
+    {
+      "id": "thm-qa-28-matrix-function-error-cost",
+      "decision": "accept",
+      "reason": "Its compressed-block hypothesis explicitly requires approximation to H/alpha, consistent once the algorithm states the encoding normalization."
+    },
+    {
+      "id": "ex-qa-28-exponential-polynomial",
+      "decision": "repair",
+      "reason": "Its alpha=1 exact dilation and supplied phase lists fit the QSVT interface; its duplicate [F4] label still needs repair."
+    },
+    {
+      "id": "lem-qa-30-spectral-minimum-shift",
+      "decision": "escalate",
+      "reason": "Outside the assigned source scope; its step 2.1 has an independent missing-F7 and integral-bound proof gap for owner repair."
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "16",
+  "round": 0,
+  "reviewed_items": [
+    "def-qc-pauli-measurement-branch-semantics",
+    "lem-qc-pauli-measurement-projectors",
+    "lem-qc-stabilizer-maximal-isotropic-self-dual",
+    "def-qc-stabilizer-subgroup",
+    "lem-qc-pauli-measurement-defines-an-instrument",
+    "lem-qc-pauli-measurement-positive-branch-is-density",
+    "lem-qc-zero-probability-branch",
+    "def-qc-adaptive-pauli-circuit-tree",
+    "def-qc-stabilizer-state",
+    "lem-qc-stabilizer-subgroup-label-space-and-order",
+    "lem-qc-stabilizer-average-projector",
+    "def-qc-stabilizer-tableau",
+    "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+    "lem-qc-computational-basis-stabilizer-tableau",
+    "lem-qc-tableau-clifford-update",
+    "lem-qc-tableau-deterministic-sign",
+    "thm-qc-stabilizer-projector-rank-and-code-dimension",
+    "lem-qc-deterministic-stabilizer-measurement",
+    "lem-qc-random-measurement-stabilizer-update",
+    "alg-qc-stabilizer-exact-simulator",
+    "thm-qc-tableau-measurement-update",
+    "thm-qc-gottesman-knill-exact-simulation",
+    "ex-qc-stabilizer-x-measurement-branches"
+  ],
+  "reviewed_pages": [
+    "stabilizer-circuits-and-gottesman-knill-simulation",
+    "stabilizer-circuits-and-gottesman-knill-simulation-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and its direct supplier statements and proofs were reviewed. The approved page scope is retained. Several local prerequisite, indexing, and complexity defects need one repair round; none requires an outside-batch repair.",
+  "findings": [
+    {
+      "id": "def-qc-pauli-measurement-branch-semantics",
+      "type": "prerequisite",
+      "reason": "Its justified_by lemmas depend on this definition for the projector formula and branch data, creating a prerequisite cycle. State the projector, density, and instrument results in those lemmas from explicit M, rho, and P_b hypotheses, preserving their conclusions."
+    },
+    {
+      "id": "def-qc-stabilizer-subgroup",
+      "type": "prerequisite",
+      "reason": "The definition's justified_by label-space lemma depends on the definition. Rank is already defined as the dimension of the span of all labels; treat isotropy and subgroup order as later results and remove this justification cycle."
+    },
+    {
+      "id": "lem-qc-stabilizer-maximal-isotropic-self-dual",
+      "type": "prerequisite",
+      "reason": "The statement includes n=0, while its symplectic-form supplier's proof only establishes nondegeneracy for n>=1. Add the zero-space case explicitly without narrowing the statement."
+    },
+    {
+      "id": "lem-qc-stabilizer-subgroup-label-space-and-order",
+      "type": "prerequisite",
+      "reason": "The statement covers n=0, but the cited quotient-isomorphism and Hermitian-phase results apply to n>=1. Prove the zero-qubit case from the scalar Pauli convention: excluding -I leaves S={I}, with singleton label image and order 1."
+    },
+    {
+      "id": "lem-qc-deterministic-stabilizer-measurement",
+      "type": "prerequisite",
+      "reason": "The unrestricted-n statement uses quotient and phase results scoped to n>=1. Add a zero-qubit case using the scalar Pauli convention and make that supplier explicit in deps."
+    },
+    {
+      "id": "lem-qc-tableau-deterministic-sign",
+      "type": "prerequisite",
+      "reason": "The statement also covers n=0, but its quotient and Hermitian-phase suppliers are scoped to n>=1. Prove the empty-row case directly: the row product is I and the Hermitian measured Pauli is ±I."
+    },
+    {
+      "id": "lem-qc-computational-basis-stabilizer-tableau",
+      "type": "prerequisite",
+      "reason": "The input bits use indices 0..n-1, while the phase-aware Pauli supplier labels wires 1..n. The claimed Z_0 row is undefined under that supplier convention. State the rows as s_{j+1}=(-1)^{x_j}Z_{j+1} and d_{j+1}=X_{j+1}."
+    },
+    {
+      "id": "alg-qc-stabilizer-exact-simulator",
+      "type": "prerequisite",
+      "reason": "Circuit wires are 0-based but tableau Clifford updates take 1-based wires; no translation is specified. Add the mapping j↦j+1, define S† as S*, and give the explicit root-to-leaf loop and successor transition for gate and measurement nodes."
+    },
+    {
+      "id": "thm-qc-gottesman-knill-exact-simulation",
+      "type": "local",
+      "reason": "T may be zero, yet the time bound then omits the O((n+1)^2) work to initialize and output dense signed rows. Include an initialization/output term, for example O((n+1)^2 + T(n+1)^3 + C_cl)."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-qc-pauli-measurement-branch-semantics",
+      "decision": "accept",
+      "reason": "The same projector, branch-weight, and instrument claims follow from the requested standalone supporting lemmas."
+    },
+    {
+      "id": "lem-qc-zero-probability-branch",
+      "decision": "accept",
+      "reason": "Its zero-trace argument remains valid with the explicit projector formula and repaired projector result."
+    },
+    {
+      "id": "def-qc-adaptive-pauli-circuit-tree",
+      "decision": "accept",
+      "reason": "Its branch probabilities and zero-edge convention remain supported by the same formulas and conclusions."
+    },
+    {
+      "id": "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+      "decision": "accept",
+      "reason": "Its conjugation and equal-norm argument still applies to the unchanged projectors."
+    },
+    {
+      "id": "lem-qc-stabilizer-average-projector",
+      "decision": "accept",
+      "reason": "Its finite-group average proof remains valid once the zero-qubit order case is established."
+    },
+    {
+      "id": "thm-qc-stabilizer-projector-rank-and-code-dimension",
+      "decision": "accept",
+      "reason": "Its explicit n=0 trace case is sound once the label-order and isotropic-dimension lemmas cover n=0."
+    },
+    {
+      "id": "def-qc-stabilizer-state",
+      "decision": "accept",
+      "reason": "Its existence and uniqueness claim remains supplied by the unchanged projector-rank result."
+    },
+    {
+      "id": "lem-qc-deterministic-stabilizer-measurement",
+      "decision": "repair",
+      "reason": "Add the zero-qubit scalar-Pauli case; its positive-dimensional argument is otherwise valid."
+    },
+    {
+      "id": "lem-qc-tableau-deterministic-sign",
+      "decision": "repair",
+      "reason": "Add the zero-qubit empty-system case; its positive-dimensional phase-recovery argument is otherwise valid."
+    },
+    {
+      "id": "lem-qc-random-measurement-stabilizer-update",
+      "decision": "accept",
+      "reason": "Its statement assumes n>=1, so the zero-qubit supplier-scope gap does not affect this update."
+    },
+    {
+      "id": "lem-qc-computational-basis-stabilizer-tableau",
+      "decision": "repair",
+      "reason": "Align its row indices with the 1-based Pauli-wire convention; the basis-state and pairing calculations otherwise hold."
+    },
+    {
+      "id": "alg-qc-stabilizer-exact-simulator",
+      "decision": "repair",
+      "reason": "Specify the finite tree traversal and convert each 0-based circuit wire to the 1-based tableau wire."
+    },
+    {
+      "id": "thm-qc-tableau-measurement-update",
+      "decision": "accept",
+      "reason": "Its random/deterministic case split remains valid once the deterministic lemmas supply their zero-qubit cases."
+    },
+    {
+      "id": "thm-qc-gottesman-knill-exact-simulation",
+      "decision": "repair",
+      "reason": "Its induction and distribution claim are sound; repair the initialization/output cost term and use the corrected tableau initialization and gate-wire mapping."
+    },
+    {
+      "id": "ex-qc-stabilizer-x-measurement-branches",
+      "decision": "accept",
+      "reason": "The example is the n=1 case and its branch probabilities, signs, and impossible repeated outcome check out."
+    },
+    {
+      "id": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "decision": "accept",
+      "reason": "The listed repairs preserve the approved A-page scope and its full result set."
+    },
+    {
+      "id": "stabilizer-circuits-and-gottesman-knill-simulation-examples",
+      "decision": "accept",
+      "reason": "The worked X-measurement example remains unchanged in substance."
+    }
+  ]
+}

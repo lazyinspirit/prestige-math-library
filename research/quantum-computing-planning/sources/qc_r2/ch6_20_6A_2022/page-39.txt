@@ -1,0 +1,77 @@
+6.7 The Grover Algorithm Is Optimal
+33
+
+that calls the oracle T times. We place no restriction on the circuit aside from specifying
+the number of queries; in particular, we place no limit on the number of quantum gates.
+This circuit is applied to an initial state |ψ(0)⟩, producing a final state
+
+|ψω(t)⟩= U(ω, T)|ψ(0)⟩.
+(6.173)
+
+Now we are to perform a measurement designed to distinguish among the N possible
+values of ω. If we are to be able to perfectly distinguish among the possible values, the
+states |ψω(t)⟩must all be mutually orthogonal, and if we are to distinguish correctly
+with high probability, they must be nearly orthogonal.
+Now, if the states {|ψω⟩are an orthonormal basis, then, for any fixed normalized
+vector |ϕ⟩,
+
+N−1
+�
+
+ω=0
+∥|ψω⟩−|ϕ⟩∥2≥2N −2
+√
+
+N.
+(6.174)
+
+(The sum is minimized if |ϕ⟩is the equally weighted superposition of all the basis
+elements, |ϕ⟩=
+1
+√
+
+N
+�
+ω |ψω⟩, as you can show by invoking a Lagrange multiplier to
+perform the constrained extremization.) Our strategy will be to choose the state |ϕ⟩
+suitably so that we can use this inequality to learn something about the number T of
+oracle calls.
+Our circuit with T queries builds a unitary transformation
+
+U(ω, T) = U ωU T U ωU T−1 . . . U ωU 1,
+(6.175)
+
+where U ω is the oracle transformation, and the U t’s are arbitrary non-oracle transforma-
+tions. For our state |ϕ(T)⟩we will choose the result of applying U(ω, T) to |ψ(0)⟩, except
+with each U ω replaced by I; that is, the same circuit, but with all queries submitted to
+the “empty oracle.” Hence,
+
+|ϕ(T)⟩= U T U T−1 . . . U 2U 1|ψ(0)⟩,
+(6.176)
+
+while
+
+|ψω(T)⟩= U ωU T U ωU T−1 . . . U ωU 1|ψ(0)⟩.
+(6.177)
+
+To compare |ϕ(T)⟩and |ψω(T)⟩, we appeal to our previous analysis of the effect of errors
+on the accuracy of a circuit, regarding the ω oracle as an “erroneous” implementation
+of the empty oracle. The norm of the error vector in the t-th step is
+
+∥|E(ω, t)⟩∥=∥(U ω −I)|ϕ(t)⟩∥
+
+= 2|⟨ω|ϕ(t)⟩|,
+(6.178)
+
+since U ω = I −2|ω⟩⟨ω|. After T queries we have
+
+∥|ψω(T)⟩−|ϕ(T)⟩∥≤2
+
+T
+�
+
+t=1
+|⟨ω|ϕ(t)⟩|.
+(6.179)
+
+

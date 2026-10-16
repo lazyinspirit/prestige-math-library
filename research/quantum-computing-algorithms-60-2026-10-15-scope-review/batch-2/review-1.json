@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "2",
+  "round": 1,
+  "reviewed_items": [
+    "def-qc-register-and-computational-basis",
+    "lem-qc-trace-pairing-nondegenerate",
+    "def-qc-ordered-bitstring-encoding",
+    "def-qc-tensor-register-and-permutation",
+    "thm-qc-computational-basis-orthonormal",
+    "def-qc-partial-trace",
+    "def-qc-tensor-map",
+    "lem-qc-tensor-product-basis-and-dimension",
+    "thm-qc-bitstring-index-is-bijection",
+    "thm-qc-partial-trace-characterization-and-basis-independence",
+    "thm-qc-tensor-map-composition-and-adjoint",
+    "thm-qc-wire-permutation-is-unitary",
+    "thm-qc-partial-trace-positive-and-trace-preserving",
+    "ex-qc-register-endian-partial-trace"
+  ],
+  "reviewed_pages": [
+    "registers-tensor-products-and-partial-trace",
+    "registers-tensor-products-and-partial-trace-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The Round 0 finding is resolved: the bitstring theorem now lists and cites computational-basis orthonormality before applying the product-basis lemma. The complete current batch and earlier consumer dispositions were rechecked. Two prerequisite omissions remain; as this is the second review, they go to the owner without another repair request.",
+  "findings": [
+    {
+      "id": "thm-qc-tensor-map-composition-and-adjoint",
+      "type": "prerequisite",
+      "reason": "Steps 1.1 and 2.1 form tensor maps from the composites S_k∘T_k and identities I_Hk. The tensor-map definition requires linear maps, but this item neither lists nor cites the published supplier lem-composition-and-identity-linear-maps, which establishes both required linearity facts. The smallest missing prerequisite is that lemma; the consuming item and steps are identified here."
+    },
+    {
+      "id": "thm-qc-partial-trace-characterization-and-basis-independence",
+      "type": "prerequisite",
+      "reason": "Fact F2 and proof step 2.1 form T⊗I_HB using the tensor-map definition, which requires I_HB to be linear. The published supplier lem-composition-and-identity-linear-maps establishes identity-map linearity but is absent from this item's deps and cited facts. The smallest missing prerequisite is that lemma. Its result is used by thm-qc-partial-trace-positive-and-trace-preserving at step 3.1 and ex-qc-register-endian-partial-trace at step 5.1; those consumers need no source repair, but depend on resolution of this supplier gap."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-qc-ordered-bitstring-encoding",
+      "decision": "accept",
+      "reason": "Its slot-labeling justification is supported by the repaired bitstring theorem, which now states and cites the required orthonormal-basis premise."
+    },
+    {
+      "id": "ex-qc-register-endian-partial-trace",
+      "decision": "accept",
+      "reason": "The index and Bell-state calculations are sound; it separately supplies computational-basis orthonormality and the product-basis lemma. Its use of the partial-trace characterization remains subject to the supplier escalation."
+    },
+    {
+      "id": "thm-qc-partial-trace-positive-and-trace-preserving",
+      "decision": "accept",
+      "reason": "Its use of the partial-trace characterization at step 3.1 is sound, and its own dependencies include identity-map linearity. No consumer source repair is required; supplier resolution remains pending."
+    }
+  ]
+}

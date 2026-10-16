@@ -1,0 +1,726 @@
+[
+  {
+    "order": 2270,
+    "id": "quantum-sampling-expectation-and-monte-carlo",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Quantum Sampling, Expectation, and Monte Carlo",
+    "companion": "quantum-sampling-expectation-and-monte-carlo-examples",
+    "requires": [
+      "amplitude-estimation-and-counting",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "probability-spaces-random-variables-and-expectation",
+      "registers-tensor-products-and-partial-trace",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "controlled-gates-phase-and-entanglement",
+      "measurements-povms-and-instruments",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "finite-probability-spaces-and-random-variables",
+      "uniform-circuit-families-promise-problems-and-complexity"
+    ],
+    "items": [
+      {
+        "id": "def-qa-29-expectation-estimation-task",
+        "kind": "definition",
+        "title": "Finite expectation-estimation task",
+        "statement": "A **finite expectation-estimation task** consists of a nonempty finite set $X$, a probability law $p:X\\to[0,1]$ with $\\sum_{x\\in X}p_x=1$, and an exactly encoded real-valued function $g:X\\to[a,b]$, where $a\\le b$ are finite rationals. Its target is\n$$\\mu:=\\mathbb E_p[g]=\\sum_{x\\in X}p_xg(x).$$\n\nFor rational parameters $\\varepsilon>0$ and $0<\\delta<1$, an $(\\varepsilon,\\delta)$ estimator is a randomized or quantum procedure that outputs a real number $\\widetilde\\mu$ satisfying\n$$\\Pr\\bigl(|\\widetilde\\mu-\\mu|\\le\\varepsilon\\bigr)\\ge1-\\delta.$$\nThe task specifies the target law and success event only. A particular procedure must state how it accesses samples or coherent state preparation and must charge those resources separately.\n\nA value that approximates an underlying real-valued observable to error $\\tau$ defines a different task with target $\\mathbb E_p[\\widetilde g]$; any claim about $\\mathbb E_p[g]$ must add the encoding error $\\tau$ to its error budget.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Sections 1\u20132",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "C. M. Grinstead and J. L. Snell, Introduction to Probability, 2nd ed., Sections 1.2 and 6.1",
+              "url": "https://math.dartmouth.edu/~prob/prob/prob.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-29-independent-trial-median-bound",
+        "kind": "lemma",
+        "title": "One-sided concentration bound for independent median trials",
+        "statement": "Let $R\\ge1$ be an integer, let $Z_1,\\ldots,Z_R$ be independent Bernoulli random variables on a finite probability space with $\\mathbb E[Z_i]\\le p<1/2$, and put $S=\\sum_{i=1}^RZ_i$. For every $t\\ge0$,\n$$\\Pr(S-\\mathbb E S\\ge t)\\le e^{-2t^2/R}.$$\nConsequently, let $R$ be odd and let $T_1,\\ldots,T_R$ be independent finite-valued real estimates on a finite probability space. If $I\\subseteq\\mathbb R$ is an interval and $\\Pr(T_i\\in I)\\ge1-p$ for every $i$, then their median (the middle order statistic) lies in $I$ except with probability at most\n$$\\exp\\bigl(-2R(1/2-p)^2\\bigr).$$",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-bernoulli-and-binomial-random-variables",
+          "def-independent-random-elements",
+          "thm-expectation-of-products-of-independent-random-variables",
+          "thm-markov-inequality",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-differentiable-implies-continuous",
+          "def-natural-logarithm",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-mean-value-theorem",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Lemma 1 and Theorems 3 and 5",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Section 19.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; only a finite family of independent Bernoulli variables is considered."
+      },
+      {
+        "id": "alg-qa-29-certified-natural-logarithm-enclosure",
+        "kind": "algorithm",
+        "title": "Rational natural-logarithm enclosure search",
+        "deps": [],
+        "justified_by": [
+          "lem-qa-29-certified-natural-logarithm-series"
+        ],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Basic Analysis I, Section 5.4.1 (analytic logarithm interface)",
+              "url": "https://www.jirka.org/ra/html/sec_logandexp.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; each iteration uses exact rational arithmetic.",
+        "statement": "**Input.** Rational numbers $x>0$ and $\\tau>0$. **Output.** A positive integer $N$ and a rational interval $[L,U]$.\n\nCompute $y=(x-1)/(x+1)$ and initialize $N=1$. At each iteration compute, by exact rational arithmetic,\n$$S_N=2\\sum_{j=0}^{N-1}\\frac{y^{2j+1}}{2j+1},\\qquad T_N=\\frac{2|y|^{2N+1}}{(2N+1)(1-y^2)}.$$\nIf $T_N\\le\\tau$, return $N$ and $[L,U]=[S_N-T_N,S_N+T_N]$. Otherwise replace $N$ by $N+1$ and repeat. Each comparison is an exact rational comparison. Arithmetic and integer bit costs are charged separately; no running-time bound is part of this definition."
+      },
+      {
+        "id": "lem-qa-29-certified-natural-logarithm-series",
+        "kind": "lemma",
+        "title": "A terminating rational enclosure for the natural logarithm",
+        "statement": "For a rational $x>0$, put $y=(x-1)/(x+1)$. For each integer $N\\ge1$, define the rational partial sum and remainder bound\n$$S_N(x):=2\\sum_{j=0}^{N-1}\\frac{y^{2j+1}}{2j+1},\\qquad T_N(x):=\\frac{2|y|^{2N+1}}{(2N+1)(1-y^2)}.$$\nThen $|y|<1$ and\n$$|\\ln x-S_N(x)|\\le T_N(x).$$\nFor every rational tolerance $\\tau>0$, the algorithm [[alg-qa-29-certified-natural-logarithm-enclosure]] terminates using rational comparisons. It returns the certified interval $[S_N(x)-T_N(x),S_N(x)+T_N(x)]$, whose width is at most $2\\tau$ and which contains $\\ln x$.",
+        "deps": [
+          "alg-qa-29-certified-natural-logarithm-enclosure",
+          "def-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "lem-derivative-of-a-power",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-monotonicity-of-the-integral",
+          "lem-geometric-sequence-null"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 full lecture notes",
+              "url": "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+            },
+            {
+              "title": "J. Lebl, Basic Analysis I, Logarithm and Exponential",
+              "url": "https://www.jirka.org/ra/html/sec_logandexp.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; the construction uses finite rational arithmetic and a terminating natural-number search."
+      },
+      {
+        "id": "lem-qa-29-dyadic-parameters-terminate",
+        "kind": "lemma",
+        "title": "Finite termination of the dyadic estimator parameter searches",
+        "statement": "Let $a>0$ and $C>0$ be rational and let $k\\ge1$ be an integer. Each of the following exact rational searches terminates:\n\n1. increase an integer $j\\ge0$ until $2^j a\\ge1$;\n2. after fixing $k$, increase an integer $m\\ge0$ until $2^{2m}a^2\\ge Ck$.\n\nThe first successful exponent is the least one satisfying its comparison. The second returns the least power of two $M=2^m$ with $M^2a^2\\ge Ck$.",
+        "deps": [
+          "thm-of-archimedean",
+          "lem-bernoulli-inequality"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Basic Analysis I",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            },
+            {
+              "title": "T. Tao, Analysis I, 3rd ed.",
+              "url": "https://terrytao.wordpress.com/books/analysis-i/"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; the witnesses are obtained by one Archimedean bound and a finite search."
+      },
+      {
+        "id": "thm-qa-29-classical-mc-chebyshev-baseline",
+        "kind": "theorem",
+        "title": "Classical bounded-sample mean baseline",
+        "statement": "Let $G$ be a finite real random variable taking values in a finite interval $[a,b]$ with $a\\le b$, and let $X_1,\\ldots,X_n$ be independent copies of $G$, with $n\\ge1$. For $\\overline X_n=n^{-1}\\sum_{i=1}^nX_i$ and $\\mu=\\mathbb E[G]$,\n$$\\mathbb E[\\overline X_n]=\\mu,\\qquad \\operatorname{Var}(\\overline X_n)=\\frac{\\operatorname{Var}(G)}{n}\\le\\frac{(b-a)^2}{4n}.$$\nConsequently, for every $\\varepsilon>0$,\n$$\\Pr(|\\overline X_n-\\mu|>\\varepsilon)\\le\\frac{(b-a)^2}{4n\\varepsilon^2}.$$\nThe procedure uses exactly $n$ independent samples. If each draw and data load costs $C_{\\rm draw}$ and $C_{\\rm load}$, their total is $n(C_{\\rm draw}+C_{\\rm load})$; arithmetic for the encoded values is an additional separately charged cost. When $a=b$, every sample equals $\\mu=a$ and the failure probability is zero.",
+        "deps": [
+          "def-qa-29-expectation-estimation-task",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-independent-random-elements",
+          "def-moments-variance-and-covariance",
+          "thm-variance-of-a-finite-sum",
+          "thm-expectation-of-products-of-independent-random-variables",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-chebyshev-inequality-for-random-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Section 1",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "C. M. Grinstead and J. L. Snell, Introduction to Probability, 2nd ed., Sections 1.2 and 6.1",
+              "url": "https://math.dartmouth.edu/~prob/prob/prob.pdf"
+            },
+            {
+              "title": "J. Matou\u0161ek and J. Vondr\u00e1k, The Probabilistic Method, Lemma 5.1.3",
+              "url": "https://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15850-f20/www/handouts/matousek-vondrak-prob-ln.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; only finite sums, finite samples, and their declared independence occur."
+      },
+      {
+        "id": "thm-qa-29-counting-is-indicator-expectation",
+        "kind": "theorem",
+        "title": "Uniform counting is finite indicator expectation",
+        "statement": "Let $X$ be a finite nonempty set with $p_x=1/|X|$ for each $x$, let $S\\subseteq X$, and define $g(x)=1$ for $x\\in S$ and $g(x)=0$ otherwise. Then the expectation task for $(X,p,g)$ has target\n$$\\mu=\\mathbb E[g]=\\frac{|S|}{|X|}.$$",
+        "deps": [
+          "def-qa-29-expectation-estimation-task",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Section 4",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Section 19.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; the sample space and all sums are finite."
+      },
+      {
+        "id": "def-qa-29-coherent-sampler",
+        "kind": "definition",
+        "title": "Coherent finite sampler and observable value",
+        "statement": "Let $X$ be a finite nonempty set with probability law $p_x\\ge0$, $\\sum_{x\\in X}p_x=1$, and let the value register contain an exact finite encoding of a real function $g:X\\to[a,b]$, where $a\\le b$ are finite rationals. A **coherent finite sampler** for $(X,p,g)$ is an explicitly supplied finite-dimensional unitary $V$ on ordered sample, value, and work registers such that\n$$V|0\\rangle=\\sum_{x\\in X}\\sqrt{p_x}\\,|x\\rangle|g(x)\\rangle|w_x\\rangle,$$\nwhere the sample labels $|x\\rangle$ are distinct computational-basis vectors and each work state $|w_x\\rangle$ has norm one. Zero-probability labels may occur and need no special branch. The registers and their order use [[def-qc-register-and-computational-basis]] and [[def-qc-tensor-register-and-permutation]]; each output is a pure state in the sense of [[def-qc-pure-state-and-ray]]. The separate item [[lem-qa-29-coherent-sampler-outcome-law]] verifies the induced measurement law.\n\nThe access contract lists the actual circuits or oracle interfaces for $V$, $V^\\dagger$, controlled $V$ and controlled $V^\\dagger$, value decoding, reversible arithmetic, any coherent predicate and controlled rotation, and the reflections used by the chosen estimator. Their availability is explicit under [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]]. A forward unitary alone does not grant an inverse or a controlled call.\n\nThe resource record follows [[def-qc-circuit-cost-model]]: charge state preparation, inverse and controlled access, data loading, value comparison and arithmetic, controlled-rotation synthesis and precision, good-state and initial-state reflections, gates, width, ancillas, and classical postprocessing separately. The state-preparation circuit and its costs are inputs; a state description is not a free QRAM or preparation oracle.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-pure-state-and-ray",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-projective-measurement",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Sections 2\u20133",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Section 19.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-29-coherent-sampler-outcome-law",
+        "kind": "lemma",
+        "title": "Measurement law of a coherent sampler",
+        "statement": "For a coherent sampler $V$ with output state $|\\psi\\rangle=\\sum_x\\sqrt{p_x}|x\\rangle|g(x)\\rangle|w_x\\rangle$ as in [[def-qa-29-coherent-sampler]], projective measurement of the sample register returns $x$ with probability $p_x$. If the value register is measured too, the pair $(x,g(x))$ has the same probability. The work register is not required to be measured, and work states for different labels need not be orthogonal.",
+        "deps": [
+          "def-qa-29-coherent-sampler",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-pure-state-and-ray",
+          "def-qc-density-operator",
+          "thm-qc-unit-vector-projector-is-density",
+          "def-qc-projective-measurement",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-dirac-notation-coordinate-identity",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-finite-probability-space-and-event"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Sections 2\u20133",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Sections 2.1\u20132.3",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; the proof uses finite orthonormal bases and finite sums."
+      },
+      {
+        "id": "alg-qa-29-amplitude-counting-consumer",
+        "kind": "algorithm",
+        "title": "Quantum counting as an expectation special case",
+        "statement": "**Input.** A Boolean domain $X=\\{0,1\\}^n$ with $N=2^n$, a predicate $f:X\\to\\{0,1\\}$, a phase-register size $M=2^m$ for an integer $m\\ge2$ (so $M\\ge4$), and the uniform coherent access and controlled membership reflection required by [[alg-qa-13-counting-from-amplitude-estimation]]. Let $S=\\{x:f(x)=1\\}$.\n\nUse the unchanged QA13 counting estimator [[alg-qa-13-counting-from-amplitude-estimation]] with this $M$ and its supplied access model, and return its exact algebraic fraction estimate $\\widetilde\\mu=\\widetilde t/N=\\sin^2(\\pi y/M)$ for the expectation task. Its real-valued count estimate $\\widetilde t=N\\widetilde\\mu$ may also be reported, with count and expectation outputs explicitly distinguished. Do not round to an integer unless that additional postprocessing and its cost are explicitly requested. By [[thm-qa-29-counting-is-indicator-expectation]], this is the QA29 expectation task for the uniform law and observable $g=\\mathbf 1_S$; the applicable count guarantee is [[thm-qa-13-counting-error-guarantee]], whose phase-size hypothesis $M\\ge4$ is met. Divide its count-error radius by $N$ for the expectation-error radius, with the same success event and probability. This item defines no second amplitude-estimation or counting routine.",
+        "deps": [
+          "thm-qa-29-counting-is-indicator-expectation",
+          "def-qa-29-expectation-estimation-task",
+          "alg-qa-13-counting-from-amplitude-estimation",
+          "thm-qa-13-counting-error-guarantee"
+        ],
+        "justified_by": [],
+        "dependency_level": 22,
+        "sources": {
+          "references": [
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Section 4",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Section 19.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qa-29-quantum-expectation-estimation",
+        "kind": "algorithm",
+        "title": "Amplitude-estimation expectation estimator",
+        "statement": "**Input.** A finite expectation-estimation task with an exact encoded observable $g:X\\to[a,b]$, a coherent sampler $V$ for its law, rational target $\\varepsilon>0$, and rational failure probability $0<\\delta<1$. For $a<b$, require $\\varepsilon\\le b-a$. The supplied access model must include every forward, inverse, controlled, value, predicate, and reflection operation that the chosen QA13 amplitude-estimation circuit invokes.\n\nIf $a=b$, return $a$. Otherwise compute the exact affine value\n$$q(x)=\\frac{g(x)-a}{b-a}\\in[0,1].$$\nAppend a good flag to the coherent sampler. Reversibly compute $q(x)$ in the declared value workspace, apply the supplied one-qubit rotation\n$$|0\\rangle\\longmapsto\\sqrt{1-q(x)}|0\\rangle+\\sqrt{q(x)}|1\\rangle$$\ncontrolled by the sample/value registers, and uncompute all scratch used only for $q$. Let $A_q$ denote the resulting state-preparation unitary, including $V$ and the controlled rotation; let $P_{\\rm good}$ project onto flag $|1\\rangle$. Run the unchanged median-confidence estimator [[alg-qa-13-median-confidence-estimation]] on $(A_q,P_{\\rm good})$ with amplitude tolerance $\\eta=\\varepsilon/(b-a)$ and failure probability $\\delta$, and call its estimate $\\widetilde q$. Return\n$$\\widetilde\\mu=a+(b-a)\\widetilde q.$$\n\nFor $a=b$, the exact-return branch has no quantum call. When $a<b$, the input is a costed finite circuit/oracle description. Charge each use of $A_q$, $A_q^\\dagger$, controlled versions, the good and initial-state reflections, value decoding, reversible arithmetic and uncomputation, the controlled rotation and its precision, phase estimation, state preparation, gates, width, ancillas, and classical output processing according to [[def-qc-circuit-cost-model]]. No operation is free because it is described by the law $p$ or observable $g$.",
+        "deps": [
+          "def-qa-29-coherent-sampler",
+          "lem-qa-29-coherent-sampler-outcome-law",
+          "def-qa-29-expectation-estimation-task",
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "thm-qa-13-amplitude-estimation-guarantee",
+          "thm-qa-13-amplitude-estimation-query-complexity",
+          "alg-qa-13-median-confidence-estimation",
+          "thm-qa-13-median-confidence-guarantee",
+          "thm-qa-13-median-confidence-query-cost",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 23,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Theorem 3",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Section 4",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Section 19.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qa-29-variance-aware-monte-carlo",
+        "kind": "algorithm",
+        "title": "Variance-aware quantum Monte Carlo",
+        "statement": "**Input.** A coherent finite sampler $V$ whose decoded real output $v$ has finite range, a known rational upper bound $\\sigma\\ge0$ with $\\operatorname{Var}(v)\\le\\sigma^2$, rational target $\\varepsilon>0$, and rational desired failure probability $0<\\rho<1$. All sample, value, inverse, controlled, predicate, and rotation circuits are explicit inputs with separately recorded costs. [[lem-qa-29-coherent-sampler-outcome-law]] identifies the distribution of each measured output with the sampler law. Every observable supplied to $\\operatorname{PositiveMean}$ is computed on fresh executions of $V$ using its explicitly supplied, costed value, predicate, rotation, inverse, and controlled operations. For an observable depending on a previously measured classical value, the input supplies the corresponding circuits for each admissible value and charges their selection or computation; the measured value is held fixed while those circuits are used.\n\nIf $\\sigma=0$, measure one fresh output and return it. Otherwise set $\\varepsilon'=\\min(\\varepsilon,\\sigma/2)$ and reserve $\\varepsilon_0=7\\varepsilon'/8$ for the ideal estimator. Define the following finite routine for any nonnegative finite-valued output $h$ and rational parameters $a,\\rho_1$ with $0<a<1/2$ and $0<\\rho_1<1$:\n\n1. Let $k$ be the least nonnegative integer with $2^ka\\ge1$, and let $M=2^m$ be the least power of two, with $m\\ge0$ an integer, for which $M^2a^2\\ge10^6k$. Their exact rational searches terminate by [[lem-qa-29-dyadic-parameters-terminate]]. Moreover $k\\ge2$ because $2a<1$; since $Ma\\ge0$ and $(Ma)^2\\ge10^6k$, [[thm-of-square-roots]] and [[lem-of-square-monotone]] give $Ma\\ge1000\\sqrt{k}$, hence $M\\ge1000\\sqrt{k}/a>2000$.\n2. For $\\ell=0$, define $h_0=h\\mathbf1_{[0,1)}$. For $1\\le\\ell\\le k$, define $h_\\ell=2^{-\\ell}h\\mathbf1_{[2^{\\ell-1},2^\\ell)}$. Each $h_\\ell$ lies in $[0,1)$.\n3. Since $M>2000$, the target $\\eta_M=88/(7M)$ satisfies $0<\\eta_M<1$ and $M\\ge4$. For each $\\ell=0,\\ldots,k$, run [[alg-qa-29-quantum-expectation-estimation]] on $h_\\ell$ over $[0,1]$ with target $\\eta_M$ and failure probability $1/[10(k+1)]$. This selects phase-register size exactly $M$ under the current QA13 interface. Call the result $u_\\ell$ and form $P(h)=u_0+\\sum_{\\ell=1}^k2^\\ell u_\\ell$.\n4. Repeat this whole binned procedure an odd number $R_1$ of fresh independent circuit executions, as required by [[def-qa-quantum-query-algorithm]], where $R_1$ is the least odd positive integer at least $\\lceil2U_1/(3/10)^2\\rceil+1$. Here $U_1$ is the upper endpoint of the certified logarithm interval for $\\ln(1/\\rho_1)$ from [[lem-qa-29-certified-natural-logarithm-series]], computed with interval width at most $1/4$. Return the median. This defines $\\operatorname{PositiveMean}(h,a,\\rho_1)$ for $0<\\rho_1<1$.\n\nFor one outer trial, measure one fresh sampler output $v_0$ and set $m=v_0/\\sigma$. Holding this coarse value fixed, let $Y=v_1/\\sigma$ be the normalized output of a new sampler execution independent of the coarse measurement and define\n$$B_m(Y)=Y-m,\\qquad h_{-,m}(Y)=(-B_m(Y))\\mathbf1_{B_m(Y)<0}/4,\\qquad h_{+,m}(Y)=B_m(Y)\\mathbf1_{B_m(Y)\\ge0}/4.$$\nRun $\\operatorname{PositiveMean}$ separately on $h_{-,m}$ and $h_{+,m}$ with $a=\\varepsilon_0/(32\\sigma)$ and $\\rho_1=1/9$, using fresh sampler executions independent of the coarse measurement and of the other call, conditional on the fixed $m$. If the results are $u_-,u_+$, return $\\sigma(m-4u_-+4u_+)$. Count the coarse state preparation and all fresh preparations used by both $\\operatorname{PositiveMean}$ calls in the total preparation count; every controlled or inverse call remains separately charged. Let $U_0$ be the upper endpoint of the certified logarithm interval for $\\ln(1/\\rho)$ from [[lem-qa-29-certified-natural-logarithm-series]], computed with interval width at most $1/4$. Repeat the outer trial an odd number $R_0$ of fresh independent circuit executions, as required by [[def-qa-quantum-query-algorithm]], where $R_0$ is the least odd positive integer at least $\\lceil18U_0\\rceil+1$, and output the median.\n\nHere $\\ln$ is the natural logarithm from [[def-natural-logarithm]]. Its rational subroutine uses [[lem-qa-29-certified-natural-logarithm-series]] with tail at most $1/8$, yielding an interval of width at most $1/4$; every ceiling uses the interval's upper endpoint. The procedure is a finite sequence of operations in the supplied exact-access model, and the accuracy theorem assumes exact value, predicate, rotation, and reflection operations. It makes no guarantee for approximate replacements: any finite-gate implementation needs a separate certified error analysis that transfers both output accuracy and success probability, with compilation, gate, precision, bit, and ancilla costs recorded. No state reflection or value-loading operation is free.",
+        "deps": [
+          "def-qa-29-coherent-sampler",
+          "lem-qa-29-coherent-sampler-outcome-law",
+          "def-qa-29-expectation-estimation-task",
+          "alg-qa-29-quantum-expectation-estimation",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-circuit-cost-model",
+          "def-natural-logarithm",
+          "def-qa-quantum-query-algorithm",
+          "lem-qa-29-certified-natural-logarithm-series",
+          "lem-qa-29-dyadic-parameters-terminate",
+          "thm-of-square-roots",
+          "lem-of-square-monotone"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Algorithms 1\u20133 and Theorems 3 and 5",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Section 4",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-29-quantum-expectation-error-cost",
+        "kind": "theorem",
+        "title": "Quantum bounded-expectation guarantee and query cost",
+        "statement": "Let $g:X\\to[a,b]$ be exactly encoded with $a\\le b$, let $V$ be the coherent sampler of [[def-qa-29-coherent-sampler]], and let $\\mu=\\sum_xp_xg(x)$. If $a=b$, the algorithm [[alg-qa-29-quantum-expectation-estimation]] returns $a=\\mu$ exactly. If $a<b$, then for rational $0<\\varepsilon\\le b-a$ and $0<\\delta<1$ it returns $\\widetilde\\mu$ with $|\\widetilde\\mu-\\mu|\\le\\varepsilon$ with probability at least $1-\\delta$. Writing $q=(\\mu-a)/(b-a)$ and $M$ for its QA13 phase-register size, the median output also obeys\n$$|\\widetilde\\mu-\\mu|\\le(b-a)\\left(\\frac{2\\pi\\sqrt{q(1-q)}}{M}+\\frac{\\pi^2}{M^2}\\right)$$\nwith probability at least $1-\\delta$ in either declared QA13 access mode. For $a<b$, in repeated controlled-$Q$ access it uses exactly $r(M-1)$ controlled-Grover calls, where $M$ and $r$ are the current QA13 median-interface parameters. In this mode its controlled-sampler/reflection query count is $O\\bigl((b-a)\\varepsilon^{-1}(1+\\ln(1/\\delta))\\bigr)$ for all $0<\\delta<1$, and $O\\bigl((b-a)\\varepsilon^{-1}\\ln(1/\\delta)\\bigr)$ when $0<\\delta\\le1/2$. If $a=b$, the algorithm returns $a$ exactly with no quantum query.\n\nFor $a<b$, in supplied controlled-power access it instead uses exactly $rm$ controlled-power queries, where $M=2^m$; sum their separately declared costs over all $r$ runs. No $M-1$ constituent-call expansion is inferred for a supplied power.\n\nThe query bound is an oracle statement. Every controlled or inverse sampler call, good-state reflection, initial-state reflection, rotation, arithmetic operation, state preparation, and classical order-statistic computation retains its separately supplied cost.",
+        "deps": [
+          "alg-qa-29-quantum-expectation-estimation",
+          "def-qa-29-coherent-sampler",
+          "lem-qa-29-coherent-sampler-outcome-law",
+          "def-qa-29-expectation-estimation-task",
+          "thm-qa-13-amplitude-estimation-guarantee",
+          "thm-qa-13-amplitude-estimation-query-complexity",
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "alg-qa-13-median-confidence-estimation",
+          "thm-qa-13-median-confidence-guarantee",
+          "thm-qa-13-median-confidence-query-cost",
+          "lem-chernoff-bound-for-independent-bernoulli-trials",
+          "lem-qa-13-pi-rational-bounds",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-circuit-cost-model",
+          "def-qa-quantum-query-algorithm"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Theorem 3",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Theorem 12",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Section 19.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; all sample laws and phase registers are finite."
+      },
+      {
+        "id": "lem-qa-29-positive-mean-dyadic-estimator",
+        "kind": "lemma",
+        "title": "Dyadic positive-mean estimator under an L2 bound",
+        "statement": "Let $h$ be a nonnegative finite-valued output of a coherent sampler, $s=\\|h\\|_2=(\\mathbb E[h^2])^{1/2}$, and let $a,\\rho_1$ be rational with $0<a<1/2$ and $0<\\rho_1<1$. Let $\\operatorname{PositiveMean}(h,a,\\rho_1)$ be the subroutine defined in [[alg-qa-29-variance-aware-monte-carlo]]. Its output $u$ satisfies\n$$|u-\\mathbb E[h]|\\le a(1+s)^2$$\nwith probability at least $1-\\rho_1$. For $k=\\lceil\\log_2(1/a)\\rceil$, its calls use\n$$O\\bigl(k\\ln(k+1)(1+\\ln(1/\\rho_1))\\bigr)$$\nprepared output-state copies and\n$$O\\bigl(a^{-1}k^{3/2}\\ln(k+1)(1+\\ln(1/\\rho_1))\\bigr)$$\nuses of the supplied state reflection when its binned QAE calls use repeated controlled-$Q$ access. The accuracy and prepared-copy bounds also hold in supplied controlled-power access; in that mode sum the separately declared power-query costs rather than infer this reflection count. All input access, band comparison, value arithmetic, controlled rotation, and finite-precision costs remain separately charged.",
+        "deps": [
+          "alg-qa-29-variance-aware-monte-carlo",
+          "alg-qa-29-quantum-expectation-estimation",
+          "thm-qa-29-quantum-expectation-error-cost",
+          "def-qa-29-coherent-sampler",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "cor-holder-inequality-for-random-variables",
+          "lem-qa-13-pi-rational-bounds",
+          "thm-of-square-roots",
+          "lem-of-square-monotone",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-circuit-cost-model",
+          "lem-qa-29-independent-trial-median-bound",
+          "def-qa-quantum-query-algorithm",
+          "def-natural-logarithm",
+          "lem-qa-29-certified-natural-logarithm-series"
+        ],
+        "justified_by": [],
+        "dependency_level": 25,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Algorithm 2 and Lemma 4",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Theorem 12",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; the bins, samples, and median repetitions are finite."
+      },
+      {
+        "id": "thm-qa-29-variance-aware-guarantee",
+        "kind": "theorem",
+        "title": "Variance-aware quantum Monte Carlo guarantee",
+        "statement": "Let $v$ be the finite-valued real output of a coherent sampler with $\\operatorname{Var}(v)\\le\\sigma^2$ for a known rational $\\sigma\\ge0$, and let rational $\\varepsilon>0$. For each rational $0<\\rho<1$, the algorithm [[alg-qa-29-variance-aware-monte-carlo]] returns $\\widetilde\\mu$ with $|\\widetilde\\mu-\\mathbb E[v]|\\le\\varepsilon$ with probability at least $1-\\rho$. If $\\sigma=0$, it returns the exact mean after one output preparation. For $\\sigma>0$, put $z=\\sigma/\\varepsilon$ and $L=\\max(2,z)$. In the exact coherent-access model, its resource counts are\n$$O\\!\\left((1+\\ln(1/\\rho))\\ln L\\,\\ln\\ln(e^e+L)\\right)$$\noutput-state preparations and\n$$O\\!\\left((1+\\ln(1/\\rho))L(\\ln L)^{3/2}\\ln\\ln(e^e+L)\\right)$$\nuses of the supplied state reflection in repeated controlled-$Q$ access, up to universal constants. Accuracy and the preparation bound hold in either declared access mode; in supplied controlled-power access sum the separately declared power costs instead of applying this reflection bound. Each state reflection is implemented through the supplied sampler and its inverse; these bounds do not turn variance alone into coherent access. A finite-gate approximation needs a separate certified error analysis before it can inherit this theorem.",
+        "deps": [
+          "alg-qa-29-variance-aware-monte-carlo",
+          "lem-qa-29-positive-mean-dyadic-estimator",
+          "thm-qa-29-quantum-expectation-error-cost",
+          "def-qa-29-expectation-estimation-task",
+          "def-qa-29-coherent-sampler",
+          "alg-qa-29-quantum-expectation-estimation",
+          "def-qa-13-amplitude-estimation-task",
+          "lem-qa-29-coherent-sampler-outcome-law",
+          "def-moments-variance-and-covariance",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "cor-chebyshev-inequality-for-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "lem-qa-29-independent-trial-median-bound",
+          "def-qa-quantum-query-algorithm",
+          "def-natural-logarithm",
+          "lem-qa-29-certified-natural-logarithm-series"
+        ],
+        "justified_by": [],
+        "dependency_level": 26,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Algorithm 3 and Theorem 5",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Theorem 12",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; all random variables have finite range and all repetitions are finite."
+      },
+      {
+        "id": "thm-qa-29-coherent-query-cost-translation",
+        "kind": "theorem",
+        "title": "Coherent query-to-circuit cost translation",
+        "statement": "For a QA29 execution, group its complete value-rotated sampler preparations into the distinct supplied unitaries $A_j$, and let $N_j$ be the number of fresh standalone preparations of $A_j$ and $Q_j$ the number of controlled Grover rounds using it. Also let $V_t$ range over the supplied unrotated sampler preparations used for coarse measurements, with $N_t^0$ such fresh preparations. If each controlled Grover round for $A_j$ is the explicit product of one controlled $A_j$ call, one controlled $A_j^\\dagger$ call, one controlled initial-state reflection, one controlled good-state reflection, and its control phase, then the exact primitive-call cost is\n$$\\sum_jN_jC_{A_j,\\rm prep}+\\sum_tN_t^0C_{V_t,\\rm prep}+\\sum_jQ_j(C_{A_j,c}+C_{A_j^\\dagger,c}+C_{S_{0,j},c}+C_{S_{{\\rm good},j},c}+C_{{\\rm phase},j}),$$\nwhere every $C$ is the declared cost of that operation. The preparation counts exclude the controlled $A_j$ and $A_j^\\dagger$ occurrences inside Grover rounds, which are already included in the $Q_j$ terms. With a single $A_q$, no unrotated coarse preparations, and $N_{\\rm prep}=N_q$, this reduces to the homogeneous formula $N_{\\rm prep}C_{A_q,\\rm prep}+Q(C_{A_q,c}+C_{A_q^\\dagger,c}+C_{S_0,c}+C_{S_{\\rm good},c}+C_{\\rm phase})$. Value decoding, band comparisons, reversible arithmetic, controlled rotations, uncomputation, phase estimation, ancilla workspace, circuit description, and classical output/median computations add their own declared gate, width, bit, or oracle costs. If a complete reflection is instead supplied as a named oracle, charge that oracle's declared cost separately and do not also expand it into its components. No bare query bound becomes a gate bound without these implementations.",
+        "deps": [
+          "alg-qa-29-quantum-expectation-estimation",
+          "thm-qa-29-quantum-expectation-error-cost",
+          "alg-qa-29-variance-aware-monte-carlo",
+          "thm-qa-29-variance-aware-guarantee",
+          "def-qa-29-coherent-sampler",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-circuit-cost-model",
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "def-qa-13-amplitude-estimation-task"
+        ],
+        "justified_by": [],
+        "dependency_level": 27,
+        "sources": {
+          "references": [
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Section 4",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Theorems 3 and 5",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; this is finite accounting of declared circuit operations."
+      }
+    ]
+  },
+  {
+    "order": 2271,
+    "id": "quantum-sampling-expectation-and-monte-carlo-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Quantum Sampling, Expectation, and Monte Carlo \u2014 Examples",
+    "companion": "quantum-sampling-expectation-and-monte-carlo",
+    "requires": [
+      "quantum-sampling-expectation-and-monte-carlo"
+    ],
+    "items": [
+      {
+        "id": "cex-qa-29-unavailable-coherent-sampler",
+        "kind": "counterexample",
+        "title": "Sample-only access is not coherent sampler access",
+        "statement": "A classical interface that returns independent samples from a finite law, by itself, supplies a coherent unitary sampler together with its inverse, controlled calls, value computation, and state reflections at no additional cost.",
+        "deps": [
+          "def-qa-29-coherent-sampler"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Sections 1\u20132",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; this is a distinction between two finite access interfaces.",
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-qa-29-bernoulli-expectation",
+        "kind": "example",
+        "title": "Bernoulli mean as a good-state probability",
+        "statement": "Let $X\\in\\{0,1\\}$ have $\\Pr(X=1)=p$ and use $g(X)=X$ on the range $[0,1]$. Suppose a coherent sampler for this law and its explicitly costed inverse/controlled operations are supplied.",
+        "deps": [
+          "def-qa-29-expectation-estimation-task",
+          "def-qa-29-coherent-sampler",
+          "lem-qa-29-coherent-sampler-outcome-law",
+          "alg-qa-29-quantum-expectation-estimation",
+          "thm-qa-29-quantum-expectation-error-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 25,
+        "sources": {
+          "references": [
+            {
+              "title": "Ashley Montanaro, Quantum speedup of Monte Carlo methods, Theorem 3",
+              "url": "https://arxiv.org/pdf/1504.06987v3"
+            },
+            {
+              "title": "Gilles Brassard, Peter H\u00f8yer, Michele Mosca, and Alain Tapp, Quantum Amplitude Amplification and Estimation, Theorem 12",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; this is a two-outcome finite probability law.",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

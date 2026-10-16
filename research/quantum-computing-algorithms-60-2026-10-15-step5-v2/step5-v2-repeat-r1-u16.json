@@ -1,0 +1,53 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "16",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "lem-qc-computational-basis-stabilizer-tableau",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "c73da012cd520cf75446b8d5a59c6d4afa8c1e39ff2b91224251ab2b55a3c12b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 incorrectly identifies bit coordinate x_j with wire j under the local Pauli convention. The Pauli Definition and F9 put wire a on factor a-1, hence x_j belongs to Pauli wire j+1. This is nonfatal because the Statement and both proof steps already use j+1 consistently; the stabilization and symplectic-pairing arguments do not rely on the incorrect wire label. Repaired F2 to distinguish factor position j from Pauli wire j+1 and cite F9.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qc-computational-basis-stabilizer-tableau",
+      "disposition": "repaired",
+      "post_sha256": "211efb4054dd64710af46145515637ad1dba71a9c420ce7899fed6ea77d13cd2",
+      "review_context_sha256": "0df1383a9f6f3a8cbefeb66dbf751d21cd58ad1785432bce24d4738413910d6d",
+      "reason": "Reviewed the assigned lemma, actual dependency interfaces, owning proof contract and A/B pages. With bit position j mapped to Pauli wire j+1, the normalized tensor-basis vector is fixed by (-1)^x_j Z_(j+1). Signed Z rows and X partners are Hermitian involutions with independent coordinate labels and delta cross-pairings; the label homomorphism excludes scalar -I for nonempty stabilizer products. The empty families at n=0 generate {I} and satisfy all conditions vacuously. Corrected only F2; the Statement and proof are unchanged, and no new prerequisite or choice assumption is needed. This is the repairer\u2019s review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "id": "lem-qc-computational-basis-stabilizer-tableau",
+      "locus": "facts-block",
+      "location": "F2",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F2 conflated zero-based tensor positions with one-based Pauli wires. Corrected x_j to factor position j and Pauli wire j+1 using the already declared F9. Statement and proof already had the correct row indices; no consumer interface changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Exact convention evidence: items/def-qc-ordered-bitstring-encoding.md#Definition orders x_0,...,x_(n-1) big-endian; items/def-qc-phase-aware-n-qubit-pauli-group.md#Definition names wires 1,...,n and identifies wire a with factor position a-1. Existing F9 records the conversion.",
+    "Dependencies checked: all thirteen declared dependencies of the assigned item; owning contract research/quantum-computing-algorithms-60-2026-10-15-batch-16.proof-contracts.json retains accurate supplier quotes and step inputs. Owning A/B page interfaces require no change. No outside or potentially defective published consumer was discovered; no published-ledger proposal is needed.",
+    "Statement/Definition interface unchanged; no downstream propagation or maintenance is triggered. Focused checks all exited 0: node tools/tsx-run.mjs tools/precheck.mts items/lem-qc-computational-basis-stabilizer-tableau.md --json (1 proof checked, 0 failures); node tools/rendercheck.mjs items/lem-qc-computational-basis-stabilizer-tableau.md --json (1 item, 0 errors or warnings); node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-16.proof-contracts.json --strict --items lem-qc-computational-basis-stabilizer-tableau --json (pass, no errors or warnings); node tools/proof-layout.mjs items/lem-qc-computational-basis-stabilizer-tableau.md (1 item, 2 steps, 0 defects). Review hashes were obtained immediately after completing the repair with the assigned review-contexts command. No unresolved obligations remain in this unit."
+  ]
+}

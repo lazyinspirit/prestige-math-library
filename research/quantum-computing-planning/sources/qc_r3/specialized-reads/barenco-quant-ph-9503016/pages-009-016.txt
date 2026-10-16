@@ -1,0 +1,718 @@
+===== PDF PAGE 9 =====
+
+where δ, α, θ, and β are real-valued. The first factorization above now follows imme-
+
+diately. In the case of special unitary matrices, the determinant of the first matrix
+
+must be 1, which implies eiδ = ±1, so the first matrix in the product can be absorbed
+
+into the second one.✷
+
+Definition:
+In view of the above lemma, we define the following.
+
+• Ry(θ) =
+
+�
+cos θ/2
+sin θ/2
+−sin θ/2
+cos θ/2
+
+�
+(a rotation by θ around ˆy[43]).
+
+• Rz(α) =
+
+�
+eiα/2
+0
+0
+e−iα/2
+
+�
+(a rotation by α around ˆz).
+
+• Ph(δ) =
+
+�
+eiδ
+0
+0
+eiδ
+
+�
+(a phase-shift with respect to δ).
+
+• σx =
+
+�
+0
+1
+1
+0
+
+�
+(a “negation”, or Pauli matrix).
+
+• I =
+
+�
+1
+0
+0
+1
+
+�
+(the identity matrix).
+
+Lemma 4.2: The following properties hold:
+
+1. Ry(θ1) · Ry(θ2) = Ry(θ1 + θ2)
+
+2. Rz(α1) · Rz(α2) = Rz(α1 + α2)
+
+3. Ph(δ1) · Ph(δ2) = Ph(δ1 + δ2)
+
+4. σx · σx = I
+
+5. σx · Ry(θ) · σx = Ry(−θ)
+
+6. σx · Rz(α) · σx = Rz(−α)
+
+Lemma 4.3: For any special unitary matrix W (W ∈SU(2)), there exist matrices
+
+A, B, and C ∈SU(2) such that A · B · C = I and A · σx · B · σx · C = W.
+
+9
+
+
+===== PDF PAGE 10 =====
+
+Proof:
+By Lemma 4.1, there exist α, θ, and β such that W = Rz(α) · Ry(θ) · Rz(β).
+
+Set A = Rz(α) · Ry( θ
+
+2), B = Ry(−θ
+
+2) · Rz(−α+β
+
+2 ), and C = Rz( β−α
+
+2 ). Then
+
+A · B · C
+=
+Rz(α) · Ry( θ
+
+2) · Ry(−θ
+
+2) · Rz(−α+β
+
+2 ) · Rz( β−α
+
+2 )
+
+=
+Rz(α) · Rz(−α)
+
+=
+I,
+
+and
+
+A · σx · B · σx · C
+=
+Rz(α) · Ry( θ
+
+2) · σx · Ry(−θ
+
+2) · Rz(−α+β
+
+2 ) · σx · Rz( β−α
+
+2 )
+
+=
+Rz(α) · Ry( θ
+
+2) · σx · Ry(−θ
+
+2) · σx · σx · Rz(−α+β
+
+2 ) · σx · Rz( β−α
+
+2 )
+
+=
+Rz(α) · Ry( θ
+
+2) · Ry( θ
+
+2) · Rz( α+β
+
+2 ) · Rz( β−α
+
+2 )
+
+=
+Rz(α) · Ry(θ) · Rz(β)
+
+=
+W.
+
+✷
+
+5
+Two-Bit Networks
+
+5.1
+Simulation of General ∧1(U) Gates
+
+Lemma 5.1: For a unitary 2 × 2 matrix W, a ∧1(W) gate can be simulated by a
+
+network of the form
+
+✈
+
+W
+
+=
+
+❧
+❧
+
+✈
+✈
+
+A
+B
+C
+
+where A, B, and C ∈SU(2), if and only if W ∈SU(2).
+
+Proof:
+For the “if” part, let A, B, and C be as in Lemma 4.3. If the value of the
+
+first (top) bit is 0 then A · B · C = I is applied to the second bit. If the value of the
+
+first bit is 1 then A · σx · B · σx · C = W is applied to the second bit.
+
+10
+
+
+===== PDF PAGE 11 =====
+
+For the “only if” part, note that A · B · C = I must hold if the simulation is
+
+correct when the first bit is 0. Also, if the network simulates a ∧1(W) gate then
+
+A · σx · B · σx · C = W. Therefore, since det(A · σx · B · σx · C) = 1, W must also be
+
+special unitary.✷
+
+Lemma 5.2: For any δ and S = Ph(δ), a ∧1(S) gate can be simulated by a network
+
+of the form
+
+✈
+
+S
+
+=
+
+E
+
+where E is unitary.
+
+Proof:
+Let
+
+E = Rz(−δ) · Ph( δ
+
+2) =
+
+�
+1
+0
+0
+eiδ
+
+�
+.
+
+Then the observation is that the 4 × 4 unitary matrix corresponding to each of the
+
+above networks is
+
+
+
+
+
+
+
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+eiδ
+0
+0
+0
+0
+eiδ
+
+
+
+
+
+
+.
+
+✷
+
+Clearly, ∧1(S) composed with ∧1(W) yields ∧1(S · W). Thus, by noting that any
+
+unitary matrix U is of the form U = S · W, where S = Ph(δ) (for some δ) and W is
+
+∈SU(2), we obtain the following.
+
+Corollary 5.3: For any unitary 2 × 2 matrix U, a ∧1(U) gate can be simulated by
+
+at most six basic gates: four 1-bit gates (∧0), and two XOR gates (∧1(σx)).
+
+5.2
+Special Cases
+
+In Section 5.1, we have established a general simulation of a ∧1(U) gate for an ar-
+
+bitrary unitary U. For special cases of U that may be of interest, a more efficient
+
+11
+
+
+===== PDF PAGE 12 =====
+
+construction than that of Corollary 5.3 is possible. Clearly, Lemma 5.1 immediately
+
+yields a more efficient simulation for all special unitary matrices. For example, the
+
+“x-axis rotation matrix” (to use the language suggested by the mapping between
+
+SU(2) and SO(3), the group of rigid-body rotations[43])
+
+Rx(θ) =
+
+�
+cos θ/2
+i sin θ/2
+i sin θ/2
+cos θ/2
+
+�
+= Rz( π
+
+2) · Ry(θ) · Rz(−π
+
+2)
+
+is special unitary. (Rx is of special interest because ∧2(iRx) is the “Deutsch gate”[24],
+
+which was shown to be universal for quantum logic.) For other specific SU(2) matrices
+
+an even more efficient simulation is possible.
+
+Lemma 5.4: A ∧1(W) gate can be simulated by a network of the form
+
+✈
+
+W
+
+=
+
+❧
+❧
+
+✈
+✈
+
+A
+B
+
+where A and B ∈SU(2) if and only if W is of the form
+
+W = Rz(α) · Ry(θ) · Rz(α) =
+
+�
+eiα cos θ/2
+sin θ/2
+−sin θ/2
+e−iα cos θ/2
+
+�
+,
+
+where α and θ are real-valued.
+
+Proof:
+For the “if” part, consider the simulation of ∧1(W) that arises in Lemma 5.1
+
+when W = Rz(α)·Ry(θ)·Rz(α). In this case, A = Rz(α)·Ry( θ
+
+2), B = Ry(−θ
+
+2)·Rz(−α)
+
+and C = I. Thus, B = A† and C can be omitted.
+
+For the “only if” part, note that B = A† must hold for the simulation to be valid
+
+when when the first bit is 0. Therefore, if the first bit is 1 then A·σx ·A†·σx is applied
+
+to the second bit. Now, the matrix A·σx·A† has determinant −1 and is traceless (since
+
+its trace is the same as that of σx). By specializing the characterization of unitary
+
+matrices in Lemma 4.1 to traceless matrices with determinant −1, we conclude that
+
+A · σx · A† must be of the form
+
+A · σx · A† =
+
+�
+sin θ/2
+eiα cos θ/2
+e−iα cos θ/2
+−sin θ/2
+
+�
+.
+
+12
+
+
+===== PDF PAGE 13 =====
+
+Therefore,
+
+A · σx · A† · σx =
+
+�
+eiα cos θ/2
+sin θ/2
+−sin θ/2
+e−iα cos θ/2
+
+�
+,
+
+as required.✷
+
+Examples of matrices of the form of Lemma 5.4 are Ry(θ) itself, as well as Rz(α) =
+
+Rz( α
+
+2) · Ry(0) · Rz( α
+
+2 ). However, Rx(θ) is not of this form.
+
+Finally, for certain U, we obtain an even greater simplification of the simulation
+
+of ∧1(U) gates.
+
+Lemma 5.5: A ∧1(V ) gate can be simulated by a construction of the form
+
+✈
+
+V
+
+=
+
+❧
+
+✈
+
+A
+B
+
+where A and B are unitary if and only if V is of the form
+
+V = Rz(α) · Ry(θ) · Rz(α) · σx =
+
+�
+sin θ/2
+eiα cos θ/2
+e−iα cos θ/2
+−sin θ/2
+
+�
+,
+
+where α and θ are real-valued.
+
+Proof:
+If an additional ∧1(σx) is appended to the end of the network in Lemma 5.4
+
+then, the network is equivalent to that above (since ∧1(σx) is an involution), and also
+
+simulates a ∧1(W · σx) gate (since ∧1(W) composed with ∧1(σx) is ∧1(W · σx)).✷
+
+Examples of matrices of the form of Lemma 5.5 are the Pauli matrices
+
+σy =
+
+�
+0
+−i
+i
+0
+
+�
+= Rz( π
+
+2) · Ry(2π) · Rz( π
+
+2) · σx
+
+and
+
+σz =
+
+�
+1
+0
+0
+−1
+
+�
+= Rz(0) · Ry(π) · Rz(0) · σx
+
+(as well as σx itself).
+
+Lemma 5.5 permits an immediate generalization of Corollary 5.3:
+
+13
+
+
+===== PDF PAGE 14 =====
+
+Corollary 5.6: For any unitary 2 × 2 matrix U, a ∧1(U) gate can be simulated by
+
+at most six basic gates: four 1-bit gates (∧0), and two gates (∧1(V )), where V is of
+
+the form V = Rz(α) · Ry(θ) · Rz(α) · σx.
+
+A particular feature of the ∧1(σz) gates is that they are symmetric with respect
+
+to their input bits. In view of this, as well as for future reference, we introduce the
+
+following special notation for ∧1(σz) gates.
+
+=
+
+σz
+
+✈
+
+=
+
+σz
+
+✈
+
+6
+Three-Bit Networks
+
+6.1
+Simulation of General ∧2(U) Gates
+
+Lemma 6.1: For any unitary 2 × 2 matrix U, a ∧2(U) gate can be simulated by a
+
+network of the form
+
+✈
+
+✈
+
+U
+
+=
+❧
+❧
+✈
+✈
+
+✈
+✈
+✈
+
+V
+V
+V †
+
+where V is unitary.
+
+Proof:
+Let V be such that V 2 = U. If the first bit or the second bit are 0 then the
+
+transformation applied to the third bit is either I or V · V † = I. If the first two bits
+
+are both 1 then the transformation applied to the third is V · V = U.✷
+
+Some of the intuition behind the construction in the above Lemma is that, when the
+
+first two input bits are x1 and x2, the sequence of operations performed on the third
+
+14
+
+
+===== PDF PAGE 15 =====
+
+bit is: V iff x1 = 1, V iff x2 = 1, and V † iff x1 ⊕x2 = 1. Since
+
+x1 + x2 −(x1 ⊕x2) = 2 · (x1 ∧x2)
+
+(where “+”, “−”, and “·” are the ordinary arithmetic operations), the above sequence
+
+of operations is equivalent to performing V 2 on the third bit iff x1 ∧x2 = 1, which is
+
+the ∧2(V 2) gate. (This approach generalizes to produce a simulation of ∧m(V 2m−1),
+
+for m > 2, which is considered in Section 7.)
+
+We can now combine Lemma 6.1 with Corollary 5.3 to obtain a simulation of
+
+∧2(U) using only basic gates (∧1(σx) and ∧0). The number of these gates is reduced
+
+when it is recognized that a number of the one-bit gates can be merged and eliminated.
+
+In particular, the ∧0(C) from the end of the simulation of the first ∧1(V ) gate, and
+
+the ∧0(C†) from the ∧1(V †) gate combine to form the identity and are eliminated
+
+entirely. This same sort of merging occurs to eliminate a ∧0(A) gate and a ∧0(A†)
+
+gate. We arrive at the following count:
+
+Corollary 6.2: For any unitary 2 × 2 matrix U, a ∧2(U) gate can be simulated by
+
+at most sixteen basic gates: eight 1-bit gates (∧0) and eight XOR gates (∧1(σx)).
+
+A noteworthy case is when U = σx, where we obtain a simulation of the 3-bit Toffoli
+
+gate ∧2(σx), which is the primitive gate for classical reversible logic [4]. Later we will
+
+use the fact that because ∧2(σx) is its own inverse, either the simulation of Lemma
+
+6.1 or the time-reversed simulation (in which the order of the gates is reversed, and
+
+each unitary operator is replaced by its Hermitian conjugate) may be used.
+
+6.2
+Three-bit gates congruent to ∧2(U)
+
+We now show that more efficient simulations of three-bit gates are possible if phase
+
+shifts of the quantum states other than zero are permitted. If we define the matrix
+
+W as
+
+W =
+
+�
+0
+1
+−1
+0
+
+�
+= Ph( π
+
+2) · σy,
+
+15
+
+
+===== PDF PAGE 16 =====
+
+then the gates ∧2(W) and ∧2(σx) can be regarded as being “congruent modulo phase
+
+shifts”, because the latter gate differs only in that it maps |111⟩to −|110⟩(instead
+
+of |110⟩). This is perfectly acceptable if the gate is part of an operation which merely
+
+mimics classical reversible computation, or if the gate is paired with another similar
+
+one to cancel out the extra phase, as is sometimes the case in reversible gate ar-
+
+rangements (see Corollary 7.4); however, this phase difference is dangerous in general
+
+if non-classical unitary operations appear in the computation. Gates congruent to
+
+∧2(σx) modulo phase shifts have been previously investigated in [44].
+
+The following is a more efficient simulation of a gate congruent to ∧2(σx) modulo
+
+phase shifts:
+
+❧
+
+✈
+
+✈
+
+∼=
+
+❧
+❧
+❧
+
+✈
+
+✈
+
+✈
+
+A
+A
+A†
+A†
+
+where A = Ry( π
+
+4). In the above, the “∼=” indicates that the networks are not identical,
+
+but differ at most in the phases of their amplitudes, which are all ±1 (the phase of
+
+the |101⟩state is reversed in this case).
+
+An alternative simulation of a gate congruent to ∧2(σx) modulo phase shifts
+
+(whose phase shifts are identical to the previous one) is given by
+
+❧
+
+✈
+
+✈
+
+∼=
+
+B
+B†
+B
+B†
+
+where B = Ry( 3π
+
+4 ).
+
+16
+

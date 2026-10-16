@@ -1,0 +1,215 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "focused-current-source-owner-review",
+  "coverage": "Only listed current sources and expressly described prerequisite interfaces. No source edit, new judgment or native execution coverage; admission waits for actual frozen original/initial evidence and current keep verdicts.",
+  "entries": [
+    {
+      "batch": "19",
+      "concern_index": 0,
+      "id": "ex-qc-degenerate-code-kl-matrix",
+      "concern": {
+        "id": "ex-qc-degenerate-code-kl-matrix",
+        "concern": "Verification step 2.1 writes the operator-valued table (V*E_a*E_bV)_{a,b} equal to the scalar matrix C. Here H_L = C\u00b2, so its entries are actually C_ab I\u2082. The intended scalar-compression calculation is correct, but the displayed equality needs either the identity factors or an explicit scalar-identity identification.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.231167+00:00",
+      "reason": "Read the full example and all displayed matrices: V:C^2->C^4 and each E:C^4->C^4 make every V*E_a*E_bV an operator on C^2. Its actual blocks are C_ab I_2, not scalars C_ab. E1V=E3V=V/sqrt3 and E2V=W/sqrt3 verify the intended coefficients. State (V*E_a*E_bV)=(C_ab I_2) and define scalar C separately, or explicitly declare the scalar-identity identification. The actual recovery and rank2 calculation are unchanged.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "$$(V^*E_a^*E_bV)_{a,b} =\\frac13\\begin{pmatrix}1&0&1\\\\0&1&0\\\\1&0&1\\end{pmatrix} =C.$$",
+          "proposed_replacement": "$$V^*E_a^*E_bV=C_{ab}I_L,\\qquad C=\\frac13\\begin{pmatrix}1&0&1\\\\0&1&0\\\\1&0&1\\end{pmatrix}.$$"
+        }
+      ]
+    },
+    {
+      "batch": "19",
+      "concern_index": 1,
+      "id": "ex-qc-knill-laflamme-orthogonal-error-recovery",
+      "concern": {
+        "id": "ex-qc-knill-laflamme-orthogonal-error-recovery",
+        "concern": "Verification step 2.1 equates the operator-valued table (V*E_a*E_bV)_{a,b} with the scalar matrix diag(1/2,1/2). Its diagonal entries are (1/2)I\u2082. State the scalar-identity identification or display those identity factors.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.231266+00:00",
+      "reason": "Read full orthogonal-error example. V*V=W*W=I_2 and W*V=0 give diagonal compression blocks I_2/2 and off-diagonal zero operators. The displayed 2x2 scalar matrix is not the operator-valued table unless that identification is declared. Add the identity factors or explicitly state the identification; keep both syndromes and the full recovery calculation.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "$$(V^*E_a^*E_bV)_{a,b} =\\begin{pmatrix}1/2&0\\\\0&1/2\\end{pmatrix}.$$",
+          "proposed_replacement": "$$(V^*E_a^*E_bV)_{a,b} =\\begin{pmatrix}I_L/2&0\\\\0&I_L/2\\end{pmatrix}.$$"
+        }
+      ]
+    },
+    {
+      "batch": "27",
+      "concern_index": 0,
+      "id": "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound",
+      "concern": {
+        "id": "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound",
+        "concern": "The Statement specifies an algorithm that 'samples three distinct addresses uniformly without replacement'; the proof assumes this exact distribution but does not explain its realization under the cited classical-query model's finite fair-bit tape convention. Already at N=4, the ordered sample space has 24 elements, so boundedly many fair bits cannot produce its exact uniform law. Rejection sampling supplies the law with almost-sure termination but unbounded random-bit consumption. Clarify whether that sampling primitive or stopping convention is admissible here. The displayed conditional error calculation is correct; the unresolved point is the randomized-procedure interface, not the 3/4 bound.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.231467+00:00",
+      "reason": "Read full theorem and actual classical-query Definition. The theorem assumes an exact uniform without-replacement law but supplies no realization from its cited finite fair-bit tape. Its proof only analyzes that law. Ordered triples at N=4 already have24 equally likely outcomes, not a dyadic denominator; even treating the sample as an unordered subset leaves56 possibilities at N=8. Bounded finite fair bits cannot realize these exact laws. The cited Definition calls this a finite decision procedure with a finite random tape and a worst-case query bound on every branch. Almost-sure rejection sampling requires an explicit admissible stopping convention, while changing to with-replacement samples would change the promised sampling procedure. Native owner must resolve the model/procedure interface honestly while preserving the richest sound approved three-query bounded-error result and trace any changed supplier Definition/Statement consumers. Do not silently pretend a finite fair tape implements the existing exact law.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "For $n\\ge2$, a randomized classical algorithm that samples three distinct addresses uniformly without replacement and outputs constant exactly when all three replies agree has success probability at least $3/4$ on every Deutsch\u2013Jozsa input.",
+          "proposed_replacement": "For $n\\ge2$, the finite probability experiment that samples three distinct addresses uniformly without replacement and outputs constant exactly when all three replies agree has success probability at least $3/4$ on every Deutsch\u2013Jozsa input. In the finite fair-bit classical query model, sampling three independent uniform addresses with replacement and using the same output rule also succeeds with probability at least $3/4$, using exactly $3n$ random bits and three value queries."
+        },
+        {
+          "source_excerpt": "On a balanced input the procedure errs only on the event in step 1.1, so its success is at least $3/4$.",
+          "proposed_replacement": "The without-replacement experiment has success at least $3/4$ by step 1.1. For an implementation in the finite fair-bit model, take three independent blocks of $n$ fair bits as addresses, allowing repetitions. On a balanced input each reply is an independent fair bit, so all three replies agree with probability $2(1/2)^3=1/4$; on a constant input they always agree. Thus this three-query algorithm also has success at least $3/4$."
+        }
+      ]
+    },
+    {
+      "batch": "29",
+      "concern_index": 0,
+      "id": "thm-qa-finite-abelian-double-annihilator",
+      "concern": {
+        "id": "thm-qa-finite-abelian-double-annihilator",
+        "concern": "Proof 2.1 writes \u201c|A||H\u22a5|=|\u011c|=|G|, the last equality following from [F1].\u201d F1 states the evaluation isomorphism G \u2245 \u011c\u0302, which directly equates |G| with the double-dual cardinality, not with |\u011c|. The required equality is available in the theorem cited by F3, whose Statement explicitly includes |\u011c|=|G|. The argument closes immediately using F3, but the stated attribution to F1 is insufficient.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.231682+00:00",
+      "reason": "Read full double-annihilator proof and its cited interfaces. F1 identifies G with its double dual, so it alone does not justify |dualG|=|G|. The actual dual-group theorem named in F3 explicitly includes equal cardinality; use that existing supplier and update F3 as needed. This is a local attribution/restatement repair, not a new theorem or source Statement change.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "The dual $\\widehat G$ is a finite abelian group",
+          "proposed_replacement": "The dual $\\widehat G$ is a finite abelian group of cardinality $|G|$"
+        },
+        {
+          "source_excerpt": "the last equality following from [F1].",
+          "proposed_replacement": "the last equality following from [F3]."
+        }
+      ]
+    },
+    {
+      "batch": "33",
+      "concern_index": 0,
+      "id": "lem-qa-crt-sign-vector-factorization",
+      "concern": {
+        "id": "lem-qa-crt-sign-vector-factorization",
+        "concern": "Fact F3 says, \u201cIn a cyclic group of order M, g^t=1 exactly when M divides t,\u201d without specifying that g is a generator. For an arbitrary element this is false, for example the identity in a cyclic group of order two. The cited lem-order-characterisation uses the element's order. Proof step 1.1 explicitly chooses a generator, so the actual application is sound; F3 needs that qualification.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.231771+00:00",
+      "reason": "Read full CRT sign factorization proof: step1.1 correctly chooses generator g_i of order M_i, but F3 universally asserts the equivalence for g in a cyclic group without saying g generates it. In C2, g=identity and t=1 refute F3. Qualify F3 by g a generator, matching the existing element-order characterization. The Statement, chosen generators and actual gcd argument stay intact.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "In a cyclic group of order $M$, $g^t=1$ exactly when",
+          "proposed_replacement": "For a generator $g$ of a cyclic group of order $M$, $g^t=1$ exactly when"
+        }
+      ]
+    },
+    {
+      "batch": "38",
+      "concern_index": 0,
+      "id": "lem-qa-14-state-distance-from-acceptance-gap",
+      "concern": {
+        "id": "lem-qa-14-state-distance-from-acceptance-gap",
+        "concern": "The Statement permits a general 'common final two-outcome measurement', but F1 and proof step 1.1 assume its acceptance operator is a diagonal orthogonal projection. The cited acceptance-probability definition supplies that representation for computational-basis acceptance events, not arbitrary two-outcome POVMs. The claim remains true: for a general acceptance effect 0 \u2264 E \u2264 I, contractivity gives the same step-2.1 estimate. The proof needs this elementary extension or an explicit measurement-dilation justification.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.231947+00:00",
+      "reason": "Read full state-distance lemma. Its Statement allows a general common two-outcome measurement, but F1 and1.1 invoke only a computational-basis orthogonal projection. A positive effect need not be a projection, so that decomposition does not prove the asserted general case. For arbitrary acceptance effect0<=E<=I, prove operator norm<=1 (for example from its finite self-adjoint spectral representation) and then the same Cauchy-Schwarz calculation in2.1 gives the promised1/6 bound. Supply the real local effect/spectral prerequisites and preserve the general measurement Statement instead of restricting it to projective readout. Declare these actual additional local suppliers when adopting the effect formulation; native owner handles their consumer-facing source and contract closure.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "[F1] [[def-qc-quantum-acceptance-probability]]: the acceptance event is the expectation of a diagonal orthogonal projection $E$ on the final computational-basis register.",
+          "proposed_replacement": "[F1] A common two-outcome measurement has an acceptance effect $E$ with $0\\preceq E\\preceq I$ and probability $\\langle Eu,u\\rangle$ on a unit state $u$ ([[def-qc-povm-and-outcome-law]], [[def-qc-finite-positive-effect-family]]). The finite non-negative operator spectral characterization is [[thm-non-negative-operator-characterisations]]."
+        },
+        {
+          "source_excerpt": "Since $E$ is an orthogonal projection, $w=Ew+(I-E)w$ is an orthogonal decomposition for every $w$. Thus $\\|Ew\\|\\le\\|w\\|$ and $\\|E\\|\\le1$.",
+          "proposed_replacement": "The finite self-adjoint spectral theorem gives an orthonormal eigenbasis for $E$. Positivity of $E$ and $I-E$ puts each eigenvalue in $[0,1]$, so summing squared coordinates gives $\\|Ew\\|^2\\le\\|w\\|^2$ for every $w$, hence $\\|E\\|\\le1$."
+        }
+      ]
+    },
+    {
+      "batch": "41",
+      "concern_index": 0,
+      "id": "ex-qa-17-two-state-reversible-walk",
+      "concern": {
+        "id": "ex-qa-17-two-state-reversible-walk",
+        "concern": "Steps 1.3, 1.4 and 3.1 use \u03c3(U) and \u03c3(W) for eigenvalue multisets, for example \u201c\u03c3(U)={1,1,1,\u22121}\u201d. The cited def-eigenvalue-eigenvector-eigenspace-and-spectrum defines \u03c3 as a set, which discards multiplicity. The requested multiset computations and their numerical multiplicities are correct, but this notation conflicts with the cited convention.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.232183+00:00",
+      "reason": "Read full two-state walk example. F8 explicitly defines sigma as a set, but1.3,1.4,3.1 use it to display eigenvalue multisets with repeated1 or-1. The finite matrix computations and multiplicities are correct. Define a separate local multiset notation and use it in those displays, retaining the complete four-eigenvalue calculations and both endpoints; do not change the global spectrum Definition.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "[F8] [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]:",
+          "proposed_replacement": "[F8] Write $\\sigma_{\\mathrm{mult}}(T)$ for the multiset of eigenvalues counted with algebraic multiplicity. The ordinary spectrum $\\sigma(T)$ is a set. [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]:"
+        },
+        {
+          "source_excerpt": "$\\sigma(U)=\\{1,1,1,-1\\}$",
+          "proposed_replacement": "$\\sigma_{\\mathrm{mult}}(U)=\\{1,1,1,-1\\}$"
+        },
+        {
+          "source_excerpt": "$\\sigma(U)=\\{1,-1,-1,-1\\}$",
+          "proposed_replacement": "$\\sigma_{\\mathrm{mult}}(U)=\\{1,-1,-1,-1\\}$"
+        },
+        {
+          "source_excerpt": "$\\sigma(U)=\\{1,-1,e^{i\\theta},e^{-i\\theta}\\}$",
+          "proposed_replacement": "$\\sigma_{\\mathrm{mult}}(U)=\\{1,-1,e^{i\\theta},e^{-i\\theta}\\}$"
+        },
+        {
+          "source_excerpt": "$\\sigma(W)=\\{1,1,e^{2i\\theta},e^{-2i\\theta}\\}$",
+          "proposed_replacement": "$\\sigma_{\\mathrm{mult}}(W)=\\{1,1,e^{2i\\theta},e^{-2i\\theta}\\}$"
+        }
+      ]
+    },
+    {
+      "batch": "44",
+      "concern_index": 0,
+      "id": "cex-qa-20-sparse-oracle-does-not-give-term-list",
+      "concern": {
+        "id": "cex-qa-20-sparse-oracle-does-not-give-term-list",
+        "concern": "Under '## Statement refuted', the text begins 'The row/value interface for a sparse Hermitian matrix by itself supplies neither the term-list contract nor term-evolution calls' and then states the canonical-list lower bounds. These are the conclusions proved by the counterexample, rather than a false statement being refuted. The heading/formulation polarity is reversed; the underlying qualified lower-bound argument is sound.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.232301+00:00",
+      "reason": "Read full sparse-oracle counterexample. Under Statement refuted it currently states the true separation and qualified canonical-list lower bounds, which its proof establishes. State an explicit false automatic-access/canonical-list-recovery assertion as the refuted claim; retain all existing true N-query/N-bit conclusions, qualifications about other decompositions and the proof. This is formulation polarity repair, not a proof refutation or removal of approved content.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "## Statement refuted\n\n",
+          "proposed_replacement": "## Statement refuted\n\nThe false assertion is that sparse row/value access alone automatically supplies the explicit canonical ordered rank-one term list and term-evolution access, including polynomial-in-$\\log N$ exact classical recovery of that canonical list. The counterexample below establishes the following qualified obstruction.\n\n"
+        }
+      ]
+    },
+    {
+      "batch": "44",
+      "concern_index": 1,
+      "id": "ex-qa-20-noncommuting-pauli-error",
+      "concern": {
+        "id": "ex-qa-20-noncommuting-pauli-error",
+        "concern": "The Given specifies 'its standard inner product \u27e8u,v\u27e9=u*v', which is conjugate-linear in the first argument. The library's published def-real-and-complex-inner-product-space and the finite-dynamics supplier use linearity in the first argument. The example should explain the conversion or use the library convention. Its conjugate-transpose, norm and commutator computations remain unchanged.",
+        "severity": "presentation"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T04:56:38.232459+00:00",
+      "reason": "Read full Pauli example. Its Given explicitly uses <u,v>=u* v, conjugate-linear in the first slot, contrary to the root linear-first convention used by the finite-dynamics supplier. Use <u,v>=v* u or explicitly explain the conversion. Both conventions give the same conjugate-transpose adjoint, norm and displayed matrix commutators; no numerical conclusion or general claim changes.",
+      "proposed_edits": [
+        {
+          "source_excerpt": "$\\langle u,v\\rangle=u^*v$",
+          "proposed_replacement": "$\\langle u,v\\rangle=v^*u$"
+        }
+      ]
+    }
+  ]
+}

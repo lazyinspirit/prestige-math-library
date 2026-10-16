@@ -7,13 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-singular-values-of-an-endomorphism, prop-singular-values-are-well-defined, thm-non-negative-operator-characterisations, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]
+deps: [def-singular-values-of-an-endomorphism, prop-singular-values-are-well-defined, thm-non-negative-operator-characterisations, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-finite-dimensional-orthogonal-decomposition]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-singular-value-decomposition.json
 sources:
   scraped: []
   references:
@@ -46,6 +46,8 @@ for every $v\in V$.
 
 [L3] Every finite-dimensional real or complex inner product space has an orthonormal basis ([[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]).
 
+[L4] A subspace of a finite-dimensional inner-product space and its orthogonal complement form an internal direct sum ([[thm-finite-dimensional-orthogonal-decomposition]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -54,4 +56,4 @@ for every $v\in V$.
 
 2.1 For each $j\le r$, define $f_j:=s_j^{-1}Te_j$. Then $\lVert f_j\rVert=1$, and for $i\ne j$ one has $\langle f_i,f_j\rangle=(s_is_j)^{-1}\langle T^*Te_i,e_j\rangle=(s_is_j)^{-1}s_i^2\langle e_i,e_j\rangle=0$. For $j>r$, step 1.1 gives $\lVert Te_j\rVert=s_j=0$, so $Te_j=0$. [step 1.1, algebra]
 
-3.1 The orthonormal set $(f_1,\dots,f_r)$, which may be empty when $r=0$, extends to an orthonormal basis $(f_1,\dots,f_m)$ of $W$ by [L3]. If $v=\sum_{j=1}^n \langle v,e_j\rangle e_j$, then step 2.1 gives $Tv=\sum_{j=1}^n \langle v,e_j\rangle Te_j=\sum_{j=1}^r s_j\langle v,e_j\rangle f_j$, and when $r=0$ this is the empty sum $0$. [L3, step 2.1, algebra] ∎
+3.1 Put $F=\operatorname{span}(f_1,\ldots,f_r)$, allowing $F=0$ when $r=0$. By [L4], $W=F\oplus F^\perp$. Choose an orthonormal basis of $F^\perp$ by [L3] and append it to $(f_1,\ldots,f_r)$. The combined list is orthonormal because the two subspaces are orthogonal, and it spans $W$ by the direct-sum decomposition. It is therefore an orthonormal basis $(f_1,\ldots,f_m)$ of $W$. If $W=0$, both lists are empty; if $r=0$, the complement basis alone is the required basis. If $v=\sum_{j=1}^n \langle v,e_j\rangle e_j$, then step 2.1 gives $Tv=\sum_{j=1}^n \langle v,e_j\rangle Te_j=\sum_{j=1}^r s_j\langle v,e_j\rangle f_j$, and when $r=0$ this is the empty sum $0$. [L3, L4, step 2.1, choose, algebra] ∎

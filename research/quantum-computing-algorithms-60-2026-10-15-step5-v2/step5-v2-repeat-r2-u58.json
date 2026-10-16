@@ -1,0 +1,75 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "58",
+  "input_sha256": "0dcbd0a3bad305a51883069ad019f8ebfa82ba1896fba313da0308bdccaf067a",
+  "decisions": [
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0783827f03bd76f6fbd1ef12578815d60403d7bdea6f7fef17a3885453adf261",
+      "outcome": "false_positive",
+      "reason": "F1 explicitly cites the ModFKV theorem AND ITS PROOF. That proof's step 1.1 sets t=eta*epsilon^2/(1000*K^2), chooses q=ceil(t^(-2)*(1+sqrt(2*log(2/delta_s)))^2), and establishes BOTH required Gram errors with probability at least 1-delta_s. Here delta_s=delta/3. Its step 2.1 applies the two-sketch lemma on exactly this event. For the same retained U,Sigma, V^T V-I=Sigma^(-1) U^T(SS^T-WW^T)U Sigma^(-1), whose operator norm is at most t*F^2/sigma^2=tK<=1/2. Thus step 4.1 legitimately uses lower and upper squared singular-value bounds 1/2 and 3/2, and step 5.1 legitimately uses ||zhat V^T||^2>=||zhat||^2/2. The theorem's Frobenius conclusion alone would not imply these bounds, but the item expressly invokes its proved sketch event rather than that conclusion alone. No missing prerequisite or mathematical repair is required.",
+      "uncertain": false,
+      "source_urls": ["https://arxiv.org/pdf/1807.04271v3"],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "disposition": "unaffected",
+      "post_sha256": "67a8f41c1544bc2eb8d9dcb61ce2c2083ab1e3b2235175697f68e8becec4b7f3",
+      "review_context_sha256": "cb66320185154c74dcdb454e5bb8f02efd84f1c0250829f8772aae1310e3b4be",
+      "reason": "The current guard equals the assignment's before guard. Checked the actual sketch procedure, its concentration event and deterministic Gram lemma; all parameters and normalizations match. Entry-query access required by the inner-product estimator is supplied. Summing beta_l gives delta/3, and Borel-Cantelli gives eventual accurate estimates on the explicitly assumed countable product law. Nonzero D_i implies z!=0 even for a bad sketch, so refinement stops almost surely. The stopping test gives ||z||>=32e/epsilon; near-isometry then gives relative row error <=sqrt(3)*epsilon/32 and total variation <epsilon. The cancellation numerator is at most (K/q)||zhat||^2, its denominator at least ||zhat||^2/2, and R=ceil(2K*log(3/delta)) supplies the rejection cap. Conditional branch guarantees and the three failure budgets yield the stated unconditional bound without conditioning away sketch failures. Geometric refinement cost and q substitution give the stated resource powers and row-norm factor. The Statement, owning page and contract are consistent; no item or metadata edit is needed.",
+      "uncertain": false,
+      "source_urls": ["https://arxiv.org/pdf/1807.04271v3"],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete",
+    "repair_complete": true,
+    "changed_paths": [],
+    "reviewed_item": "thm-qa-34-tang-recommendation-sampler",
+    "source_reading": "Consulted Tang v3, Sections 4.1-4.3 (PDF pages 11-18), including the complete vector-estimation and rejection arguments, ModFKV description, and row-sampling proof; also read the complete proof of Proposition 4.6 in Appendix A (PDF page 26). The local explicit Gram-concentration proof, not an unexamined external concentration assertion, establishes the probability event used in this adjudication.",
+    "step4_digest_disposition": "The current estimator Statement already requires entry-query access to x. The current Tang step 1.1 runs ModFKV before testing its returned rank k. The published channel-hybrid supplier's current Statement already requires nonzero Hilbert spaces, matching its Given. These digest concerns require no new repair or published-maintenance proposal from this unit.",
+    "contract_check": "Read the assigned contract's citations, derivations, boundary records and risk review against the current item and actual suppliers. Its F1 Statement quotation is not by itself a proof of near-isometry; the item's additional explicit citation to the supplier proof supplies the Gram event as detailed in the decision.",
+    "propagation": "No Statement or Definition was changed, no prerequisite was created, and no downstream examination or maintenance event was generated.",
+    "ledger_disposition": "No confirmed defect remains to propose to research/defect-ledger.jsonl, and no new published defect or repair is proposed to research/published-consumer-supplier-ledger.md. The rejected tuple's false-positive evidence is preserved in decisions; shared ledgers were not edited.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-34-tang-recommendation-sampler.md --json",
+        "exit_code": 0,
+        "result": "1 checked proof, 0 failures, direct strategy pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qa-34-tang-recommendation-sampler.md --json",
+        "exit_code": 0,
+        "result": "1 checked item, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-58.proof-contracts.json --strict --items thm-qa-34-tang-recommendation-sampler --json",
+        "exit_code": 0,
+        "result": "Assigned item checked, ok=true, no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run quantum-computing-algorithms-60-2026-10-15 --items thm-qa-34-tang-recommendation-sampler",
+        "exit_code": 0,
+        "result": "Run immediately after completing mathematical review; returned both hashes copied into reviews. No supplier was subsequently edited."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qa-34-tang-recommendation-sampler.md",
+        "exit_code": 0,
+        "result": "1 item, 8 steps, 0 defects."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection of this unchanged-item adjudication; no judgment, stamp, certificate or round transition was written."
+  }
+}

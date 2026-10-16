@@ -1,0 +1,52 @@
+5.1 Classical Circuits
+5
+
+These considerations motivate the circuit model of computation.
+A
+computer has a few basic components that can perform elementary oper-
+ations on bits or pairs of bits, such as NOT, AND, OR. It can also input a
+variable bit or prepare a constant bit. A computation is a finite sequence
+of such operations, a circuit, applied to a specified string of input bits.
+Each operation is called a gate. The result of the computation is the final
+value of all remaining bits, after all the elementary operations have been
+executed. For a Boolean function (with a one-bit output), if there are
+multiple bits still remaining at the end of the computation, one is desig-
+nated as the output bit. A circuit can be regarded as a directed acyclic
+graph, where each vertex in the graph is a gate, and the directed edges
+indicate the flow of bits through the circuit, with the direction specifying
+the order in which gates are applied. By acyclic we mean that no directed
+closed loops are permitted.
+
+We say that the gate set {NOT, AND, OR, INPUT} is “universal,”
+meaning that any function can be evaluated by building a circuit from
+these components. It is a remarkable fact about the world that an arbi-
+trary computation can be performed using such simple building blocks.
+
+5.1.2 Most functions require large circuits
+
+Our DNF construction shows that any Boolean function with an n-bit
+input can be evaluated using no more than 2n OR gates, n2n AND gates,
+n2n NOT gates, and n2n INPUT gates, a total of (3n + 1)2n gates. Of
+course, some functions can be computed using much smaller circuits, but
+for most Boolean functions the smallest circuit that evaluates the function
+really does have an exponentially large (in n) number of gates. The point
+is that if the circuit size (i.e., number of gates) is subexponential in n,
+then there are many, many more functions than circuits.
+
+How many circuits are there with G gates acting on an n-bit input?
+Consider the gate set from which we constructed the DNF, where we will
+also allow inputting of a constant bit (either 0 or 1) in case we want to
+use some scratch space when we compute. Then there are n + 5 different
+gates: NOT, AND, OR, INPUT(0), INPUT(1), and INPUT(xi) for i =
+0, 1, 2, . . . n −1.
+Each two-qubit gate acts on a pair of bits which are
+outputs from preceding gates; this pair can be chosen in fewer than G2
+
+ways. Therefore the total number of size-G circuits can be bounded as
+
+Ncircuit(G) ≤
+�
+(n + 5)G2�G .
+(5.12)
+
+

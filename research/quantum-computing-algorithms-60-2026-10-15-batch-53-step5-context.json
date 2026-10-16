@@ -1,0 +1,377 @@
+{
+  "group": "j",
+  "batches": [
+    "53"
+  ],
+  "pages_read": [
+    "quantum-sampling-expectation-and-monte-carlo",
+    "quantum-sampling-expectation-and-monte-carlo-examples"
+  ],
+  "items_read": [
+    "def-qa-29-expectation-estimation-task",
+    "lem-qa-29-independent-trial-median-bound",
+    "lem-qa-29-certified-natural-logarithm-series",
+    "lem-qa-29-dyadic-parameters-terminate",
+    "thm-qa-29-classical-mc-chebyshev-baseline",
+    "thm-qa-29-counting-is-indicator-expectation",
+    "def-qa-29-coherent-sampler",
+    "lem-qa-29-coherent-sampler-outcome-law",
+    "alg-qa-29-amplitude-counting-consumer",
+    "alg-qa-29-quantum-expectation-estimation",
+    "alg-qa-29-variance-aware-monte-carlo",
+    "thm-qa-29-quantum-expectation-error-cost",
+    "lem-qa-29-positive-mean-dyadic-estimator",
+    "thm-qa-29-variance-aware-guarantee",
+    "thm-qa-29-coherent-query-cost-translation",
+    "cex-qa-29-unavailable-coherent-sampler",
+    "ex-qa-29-bernoulli-expectation"
+  ],
+  "conventions": [
+    {
+      "convention": "The expectation task uses a nonempty finite law, an exactly encoded real observable in a rational interval [a,b], rational ε>0 and rational 0<δ<1. Approximate observable encoding changes the target and requires a separate error allowance.",
+      "fixed_by": "def-qa-29-expectation-estimation-task",
+      "matters_for": [
+        "thm-qa-29-classical-mc-chebyshev-baseline",
+        "alg-qa-29-quantum-expectation-estimation",
+        "thm-qa-29-quantum-expectation-error-cost"
+      ]
+    },
+    {
+      "convention": "Sample labels are distinct computational-basis vectors; each work vector has norm one, but different work vectors need not be orthogonal. Forward, inverse, controlled, value, rotation and reflection access are explicitly supplied and separately charged.",
+      "fixed_by": "def-qa-29-coherent-sampler",
+      "matters_for": [
+        "lem-qa-29-coherent-sampler-outcome-law",
+        "alg-qa-29-quantum-expectation-estimation",
+        "alg-qa-29-variance-aware-monte-carlo",
+        "thm-qa-29-coherent-query-cost-translation",
+        "cex-qa-29-unavailable-coherent-sampler"
+      ]
+    },
+    {
+      "convention": "The bounded estimator returns a immediately when a=b. Otherwise 0<ε≤b−a, and it calls the unchanged QA13 median estimator with amplitude tolerance ε/(b−a).",
+      "fixed_by": "alg-qa-29-quantum-expectation-estimation",
+      "matters_for": [
+        "thm-qa-29-quantum-expectation-error-cost",
+        "lem-qa-29-positive-mean-dyadic-estimator",
+        "ex-qa-29-bernoulli-expectation"
+      ]
+    },
+    {
+      "convention": "PositiveMean uses the half-open bands [0,1), [2^(ℓ−1),2^ℓ), leaving h≥2^k in the omitted tail. Its dyadic phase size is selected by M²a²≥10^6k, and setting η_M=88/(7M) selects exactly that M through QA13.",
+      "fixed_by": "alg-qa-29-variance-aware-monte-carlo",
+      "matters_for": [
+        "lem-qa-29-positive-mean-dyadic-estimator",
+        "thm-qa-29-variance-aware-guarantee"
+      ]
+    },
+    {
+      "convention": "The measured coarse value is held fixed during both conditional positive-mean calls; those calls use fresh sampler executions. Confidence schedules use certified rational upper endpoints for natural logarithms.",
+      "fixed_by": "alg-qa-29-variance-aware-monte-carlo",
+      "matters_for": [
+        "lem-qa-29-positive-mean-dyadic-estimator",
+        "thm-qa-29-variance-aware-guarantee"
+      ]
+    },
+    {
+      "convention": "Prepared-copy counts exclude controlled preparation and inverse calls inside Grover rounds. Repeated controlled-Q access and supplied controlled-power access have different cost coordinates. The variance-aware accuracy guarantee assumes exact operations; approximate compilation requires a separate certified analysis.",
+      "fixed_by": "thm-qa-29-variance-aware-guarantee",
+      "matters_for": [
+        "thm-qa-29-coherent-query-cost-translation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-29-quantum-expectation-error-cost",
+      "statement": "For an exactly encoded g:X→[a,b] and the supplied coherent sampler, a=b gives the exact answer without quantum queries. For a<b, rational 0<ε≤b−a and 0<δ<1, the estimator has additive error at most ε with probability at least 1−δ. Its median also satisfies the stated amplitude-dependent radius (b−a)(2π√(q(1−q))/M+π²/M²) with that confidence. Repeated access uses exactly r(M−1) controlled-Grover calls and O((b−a)ε⁻¹(1+ln(1/δ))) controlled-sampler/reflection queries; supplied-power access uses exactly rm separately priced power queries.",
+      "used_by": [
+        "lem-qa-29-positive-mean-dyadic-estimator",
+        "thm-qa-29-variance-aware-guarantee",
+        "thm-qa-29-coherent-query-cost-translation",
+        "ex-qa-29-bernoulli-expectation",
+        "thm-qa-30-sdp-matrix-expectation-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-29-positive-mean-dyadic-estimator",
+      "statement": "For a nonnegative finite-valued coherent-sampler output h, s=(E[h²])^(1/2), rational 0<a<1/2 and 0<ρ₁<1, PositiveMean returns u satisfying |u−E[h]|≤a(1+s)² with probability at least 1−ρ₁. With k=ceil(log₂(1/a)), it uses O(k ln(k+1)(1+ln(1/ρ₁))) prepared copies and, in repeated controlled-Q access, O(a⁻¹k^(3/2)ln(k+1)(1+ln(1/ρ₁))) state reflections. Supplied powers retain their separately declared costs.",
+      "used_by": [
+        "thm-qa-29-variance-aware-guarantee"
+      ]
+    },
+    {
+      "id": "lem-qa-29-independent-trial-median-bound",
+      "statement": "For R≥1 independent Bernoulli variables on a finite probability space, with E[Z_i]≤p<1/2 and S their sum, Pr(S−E[S]≥t)≤exp(−2t²/R) for every t≥0. For odd R independent finite-valued estimates, each lying in an interval I with probability at least 1−p, their median lies in I except with probability at most exp(−2R(1/2−p)²).",
+      "used_by": [
+        "lem-qa-29-positive-mean-dyadic-estimator",
+        "thm-qa-29-variance-aware-guarantee"
+      ]
+    },
+    {
+      "id": "lem-qa-29-certified-natural-logarithm-series",
+      "statement": "For rational x>0, y=(x−1)/(x+1), S_N=2Σ_{j=0}^{N−1}y^(2j+1)/(2j+1), and T_N=2|y|^(2N+1)/((2N+1)(1−y²)), one has |y|<1 and |ln x−S_N|≤T_N. Increasing N from 1 until T_N≤τ terminates for every rational τ>0 and returns an enclosure of width at most 2τ.",
+      "used_by": [
+        "alg-qa-29-variance-aware-monte-carlo",
+        "lem-qa-29-positive-mean-dyadic-estimator",
+        "thm-qa-29-variance-aware-guarantee"
+      ]
+    },
+    {
+      "id": "lem-qa-29-coherent-sampler-outcome-law",
+      "statement": "Projective measurement of the sample register of the specified coherent sampler returns x with probability p_x; measuring the value register too returns (x,g(x)) with the same probability. Work states for different labels need not be orthogonal.",
+      "used_by": [
+        "alg-qa-29-quantum-expectation-estimation",
+        "alg-qa-29-variance-aware-monte-carlo",
+        "thm-qa-29-quantum-expectation-error-cost",
+        "thm-qa-29-variance-aware-guarantee",
+        "ex-qa-29-bernoulli-expectation"
+      ]
+    },
+    {
+      "id": "thm-qa-29-variance-aware-guarantee",
+      "statement": "For a finite-valued coherent-sampler output v with Var(v)≤σ², known rational σ≥0, rational ε>0 and 0<ρ<1, the algorithm estimates E[v] within ε with probability at least 1−ρ. If σ=0 it returns the exact mean after one preparation. Otherwise, with L=max(2,σ/ε), its exact-access preparation count is O((1+ln(1/ρ))ln L ln ln(e^e+L)); its repeated-access state-reflection count is O((1+ln(1/ρ))L(ln L)^(3/2)ln ln(e^e+L)). Supplied-power costs and approximate compilation remain separately qualified.",
+      "used_by": [
+        "thm-qa-29-coherent-query-cost-translation"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Finite outcome laws, normalization, event probabilities and zero-weight outcomes.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Finite weighted-sum expectations throughout the batch.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-agrees-with-the-finite-weighted-sum",
+      "used_for": "Identifying general probability-theory expectations with the finite sampler formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of samples, failure indicators and transformed variables.",
+      "opened": true
+    },
+    {
+      "id": "def-bernoulli-and-binomial-random-variables",
+      "used_for": "Bernoulli failure indicators and their means.",
+      "opened": true
+    },
+    {
+      "id": "thm-expectation-of-products-of-independent-random-variables",
+      "used_for": "Moment-generating-function factorization and vanishing independent covariances.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Expectation linearity, centering, scaling and elementary moment bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Variance and covariance definitions, including the zero-variance branch.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "Covariance identities in the classical sample-mean proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-variance-of-a-finite-sum",
+      "used_for": "Variance of the independent sample mean.",
+      "opened": true
+    },
+    {
+      "id": "cor-chebyshev-inequality-for-random-variables",
+      "used_for": "Classical baseline and the variance-aware coarse-center success probability.",
+      "opened": true
+    },
+    {
+      "id": "thm-markov-inequality",
+      "used_for": "Exponential upper-tail argument in the independent-trial lemma.",
+      "opened": true
+    },
+    {
+      "id": "lem-chernoff-bound-for-independent-bernoulli-trials",
+      "used_for": "Amplifying the amplitude-dependent QAE radius through independent medians.",
+      "opened": true
+    },
+    {
+      "id": "cor-holder-inequality-for-random-variables",
+      "used_for": "The lowest-bin L2 estimate in the positive-mean proof.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential normalization and concentration expressions.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Products of exponential moments.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive exponential moments and reciprocal logarithm identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Order-preserving exponential comparisons.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural-logarithm convention and confidence schedules.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Converting the QA13 rational repetition threshold into a confidence bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiation of Bernoulli exponential moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Logarithmic moment derivatives, the certified logarithm enclosure, and 0<ln 2<1.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiating logarithmic moments and the logarithm-series transform.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Product, quotient and sum differentiation in the concentration and enclosure proofs.",
+      "opened": true
+    },
+    {
+      "id": "cor-differentiable-implies-continuous",
+      "used_for": "Continuity hypotheses for the mean-value-theorem argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Integrating the logarithmic-moment second-derivative bound by two mean-value arguments.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Differentiating the finite logarithm partial sum and its polynomial antiderivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability of the continuous logarithm remainder integrand.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Exact integral remainder and its polynomial upper bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Bounding the certified logarithm remainder.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Termination of the logarithm-enclosure search.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Finite witnesses for the dyadic parameter searches.",
+      "opened": true
+    },
+    {
+      "id": "lem-bernoulli-inequality",
+      "used_for": "Unboundedness of the powers of two used in those searches.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "L2 norms and square-root interpretation of the rational phase-size inequality.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Passing from nonnegative squared inequalities to phase-size bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Computing the trace of the projected rank-one sampler state.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Cyclic trace rearrangement in the sampler measurement-law proof.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "amplitude-estimation-and-counting",
+      "faithful": true,
+      "note": "Checked the counting, QFT-estimation and median interfaces against their QA29 consumers. The M≥4 restriction, exact cyclotomic outputs, rational scheduling thresholds, endpoint laws and repeated versus supplied-power costs are preserved."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Sampler registers have positive dimension and ordered computational bases. The measurement proof uses the stated tensor inner product and includes a zero-probability residual projection when sample labels do not exhaust the basis."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "The unitary output is normalized, so the unit-vector projector theorem supplies the density operator used in the measurement calculation. No orthogonality of different work states is inferred."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled and inverse operations remain explicit capabilities. The complete controlled Grover product retains its control phase and separately charges all factors."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "The projective measurement uses mutually orthogonal projections summing to the identity, with outcome weight tr(ρP). The sampler proof derives that weight as p_x."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "The rank-one and trace calculations respect the root pairing linear in its first argument and the corresponding Dirac coordinate convention."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Fresh executions and adaptive classical branch choices fit the finite query protocol. Named queries, controlled/inverse access, ordinary gates, preparation, precision and classical computation remain distinct resource coordinates."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "quantum-sampling-expectation-and-monte-carlo",
+      "faithful": true,
+      "note": "Opened the SDP signed-sampler algorithm and matrix-expectation theorem. They supply coherent dilation and purification access, use range [−1,1] and rational sampling tolerance τ/2 with 0<τ≤2, and preserve QA29's confidence and access-mode cost qualifications."
+    }
+  ]
+}

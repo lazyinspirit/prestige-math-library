@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "14",
+  "round": 0,
+  "reviewed_items": [
+    "def-qc-circuit-cost-model",
+    "def-qc-promise-computation-model",
+    "def-qc-uniform-circuit-family",
+    "def-qc-quantum-acceptance-probability",
+    "lem-qc-uniform-family-size-bound",
+    "alg-qc-bounded-error-amplification",
+    "lem-qc-acceptance-probability-phase-invariance",
+    "thm-qc-output-acceptance-law-normalizes",
+    "def-qc-bqp-promise-class",
+    "thm-qc-bounded-error-amplification-correct",
+    "thm-qc-bqp-error-robustness",
+    "ex-qc-bqp-promise-off-domain"
+  ],
+  "reviewed_pages": [
+    "uniform-circuit-families-promise-problems-and-complexity",
+    "uniform-circuit-families-promise-problems-and-complexity-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Reviewed the complete batch, approved scope, current pages and actual supplier claims and proofs. The output-law, finite POVM normalization, and repetition error arguments are sound; no other scope or prerequisite defect was found. The approved amplification design includes named-oracle query scaling, but the full-list family encodes only H, T, T† and CNOT. Preserving that claim needs an oracle-aware family/access interface, so owner reconciliation is required. Source check: Watrous's Proposition 3 states a broader gap-only equality but supplies only a repetition sketch; QC14 does not use it as a proof premise ([Watrous](https://arxiv.org/pdf/0804.3401)). De Wolf provides standard independent-repetition and Chernoff context ([de Wolf](https://arxiv.org/pdf/1907.09415)).",
+  "findings": [
+    {
+      "id": "alg-qc-bounded-error-amplification",
+      "type": "prerequisite",
+      "reason": "The Definition's copy instructions and final query-accounting clause, and the direct consumer thm-qc-bounded-error-amplification-correct (Statement and Proof 4.1), require named-oracle calls in the generated full-list circuit. The current def-qc-uniform-circuit-family decoder accepts only H, T, T† and CNOT labels; def-qc-circuit-cost-model supplies a query coordinate but no oracle-call syntax or encoding. The smallest missing prerequisite is an oracle-aware full-list family/access interface. Removing query support would narrow the approved claim, so the owner must reconcile the interface or scope. If CNOT is intended as the named query, the added n(r−1) copy CNOTs also need query accounting."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qc-bounded-error-amplification-correct",
+      "decision": "escalate",
+      "reason": "Direct consumer: its Statement and Proof 4.1 repeat the unsupported oracle-query scaling claim and require the missing interface."
+    },
+    {
+      "id": "thm-qc-bqp-error-robustness",
+      "decision": "accept",
+      "reason": "Indirect consumer reviewed. Its proof uses the amplification error and polynomial-resource conclusions, not the oracle query count."
+    },
+    {
+      "id": "uniform-circuit-families-promise-problems-and-complexity",
+      "decision": "accept",
+      "reason": "The page summary describes fixed-gate repetition and makes no oracle-query scaling claim."
+    }
+  ]
+}

@@ -1,0 +1,986 @@
+===== PDF PAGE 7 =====
+
+These lemmas are essential for showing how to find a sequence of gates that prepares a state with
+entries in the ring Z[ 1
+√
+
+2, i] given the initial state |0⟩. Now we sketch a proof of Lemma 1. Later, in
+Lemma 4, we show that for arbitrary u and v from the ring Z[ 1
+√
+
+2, i] the equality |u|2 + |v|2 = 1 implies
+
+sde(|u|2) = sde(|v|2), when sde
+�
+|u|2�
+≥1 and sde
+�
+|v|2�
+≥1. Therefore, under assumptions of Lemma
+2, we may consider sde of a single entry in any given state. Lemma 3 implies that we can prepare any
+
+state using H and T gates if we can prepare any state
+�z
+w
+
+�
+such that sde(|z|2) ≤3. The set of states
+
+with sde(|z|2) ≤3 is finite and small. Therefore, we can exhaustively verify that all such states can be
+prepared using H and T gates given the initial state |0⟩. In fact, we performed such verification using
+a breadth first search algorithm.
+
+The statement of Lemma 3 remains true if we replace the set {0, 1, 2, 3} by {0, −1, −2, −3}. Lemma
+3 results in Algorithm 1 for decomposition of a unitary matrix with entries in the ring Z[ 1
+√
+
+2, i] into a
+sequence of H and T gates. Its complexity is O
+�
+sde(|z|2)
+�
+, where z is an entry of the unitary. The idea
+behind the algorithm is as follows: given a 2 × 2 unitary U over the ring Z[ 1
+√
+
+2, i] and sde ≥4, there
+is a value of k in {0, 1, 2, 3} such that the multiplication by H
+�
+T k�
+reduces the sde by 1. Thus, after
+n −4 steps, we have expressed
+U = HT k1H . . . HT kn−4U ′,
+
+where any entry z′ of U ′ has the property sde
+�
+|z′|2�
+< 4. The number of such unitaries is small enough
+
+to handle the decomposition of U ′ via employing a breadth-first search algorithm.
+
+We use nopt(U) to define the smallest length of the circuit that implements U.
+Corollary 1. Algorithm 1 produces circuit of length O(nopt(U)) and uses O(nopt(U)) arithmetic op-
+erations. The number of bit operations it uses is O(n2
+opt(U)).
+
+Proof. Lemma 4, proved later in this section, implies that the value of sde
+�
+|·|2�
+is the same for
+all entries of U when the sde of at least one entry is greater than 0. For such unitaries we define
+sde|·|2 (U) = sde
+�
+|z′|2�
+, where z′ is an entry of U. The remaining special case is unitaries of the form
+
+�
+0
+ωk
+
+ωj
+0
+
+�
+,
+�
+ωk
+0
+0
+ωj
+
+�
+.
+
+We define sde|·|2 to be 0 for all of them. Consider a set Sopt,3 of optimal H and T circuits for unitaries
+with sde|·|2 ≤3. This is a finite set and therefore we can define N3 to be the maximal number of
+gates in a circuit from Sopt,3. If we have a circuit that is optimal and its length is greater than N3,
+the corresponding unitary must have sde|·|2 ≥4. Consider now a unitary U with an optimal circuit
+of length ng (U) that is larger than N3. As it is optimal, all its subsequences are optimal and it does
+not include H2. Let NH,3 be the maximum of the number of Hadamard gates used by the circuits in
+
+Sopt,3. An optimal circuit for U includes at most
+�
+ng(U)−N3
+
+2
+�
++ NH,3 Hadamard gates and, by Lemma
+
+2, sde|·|2 of the resulting unitary is less or equal to NH,3 + 3 +
+�
+ng(U)−N3
+
+2
+�
+. We conclude that for all
+unitaries except a finite set:
+
+sde|·|2 (U) ≤NH,3 + 3 +
+�ng (U) −N3
+
+2
+
+�
+.
+
+From the other side, the decomposition algorithm we described gives us the bound
+
+ng (U) ≤N3 + 4 · sde|·|2 (U) .
+
+7
+
+
+===== PDF PAGE 8 =====
+
+We conclude that ng (U) and sde|·|2 (U) are asymptotically equivalent. Therefore the algorithm’s run-
+time is O (ng (U)), because the algorithm performs sde|·|2 (U) −4 steps.
+
+We note that to store U we need O
+�
+sde|·|2 (U)
+�
+bits and therefore the addition on each step of
+
+the algorithm requires O
+�
+sde|·|2 (U)
+�
+bit operations. Therefore we use O(n2
+opt(U)) bit operations in
+total.
+
+This proof illustrates the technique that we use in Appendix B to find a tighter connection between
+sde and the circuit implementation cost, in particular we prove that circuits produced by the algorithm
+are H- and T-optimal.
+
+Algorithm 1 Decomposition of a unitary matrix with entries in the ring Z[ 1
+√
+
+2, i].
+
+Input: Unitary U =
+�z00
+z01
+z10
+z11
+
+�
+with entries in the ring Z[ 1
+√
+
+2, i].
+
+S3 – table of all unitaries over the ring Z[ 1
+√
+
+2, i], such that sde of their entries is less than or equal to
+3.
+Output: Sequence Sout of H and T gates that implements U.
+
+Sout ←Empty
+s ←sde(|z00|2)
+while s>3 do
+
+state←unfound
+for all k ∈{0, 1, 2, 3} do
+
+while state = unfound do
+
+z′
+00 ←top left entry of HT −kU
+if sde
+�
+|z′
+00|2�
+= s −1 then
+state = found
+add T kH to the end of Sout
+s ←sde
+�
+|z′
+00|2�
+
+U ←HT −kU
+end if
+end while
+end for
+end while
+lookup sequence Srem for U in S3
+add Srem to the end of Sout
+return Sout
+
+We next prove Lemma 2. In Section 5 we use Lemma 2 to show that we can prove Lemma 3 by
+considering a large, but finite, number of different cases. We provide an algorithm (Algorithm 2) that
+verifies all these cases.
+
+We now proceed to the proof of Lemma 2. We use equation (1) connecting sde and gde together with
+the following properties of gde. For any base x ∈Z [ω]:
+
+gde (y + y′, x) ≥min (gde (y, x) , gde (y′, x))
+(3)
+
+gde
+�
+yxk, x
+�
+= k + gde (y, x)
+(base extraction)
+(4)
+
+gde (y, x) < gde (y′, x) ⇒gde (y + y′, x) = gde (y, x)
+(absorption).
+(5)
+
+It is also helpful to note that gde (y, x) is invariant with respect to multiplication by ω and complex
+conjugation of both x and y.
+
+8
+
+
+===== PDF PAGE 9 =====
+
+All these properties follow directly from the definition of gde; the first three are briefly discussed in
+Appendix A. The condition gde (y, x) < gde (y′, x) is necessary for the third property. For example,
+gde
+�√
+
+2 +
+√
+
+2,
+√
+
+2
+�
+̸= gde
+�√
+
+2,
+√
+
+2
+�
+.
+
+There are also important properties specific to base
+√
+
+2. We use shorthand gde (·) for gde
+�
+·,
+√
+
+2
+�
+:
+
+gde (x) = gde
+�
+|x|2 , 2
+�
+(6)
+
+0 ≤gde
+�
+|x|2�
+−2gde (x) ≤1
+(7)
+
+gde
+�
+Re
+�√
+
+2xy∗��
+≥
+�1
+
+2
+
+�
+gde
+�
+|x|2�
++ gde
+�
+|y|2���
+(8)
+
+gde
+�
+|x|2�
+= gde
+�
+|y|2�
+⇒gde (x) = gde (y) .
+(9)
+
+Proofs of these properties are not difficult but tedious; furthermore, for completeness they are included
+in Appendix A. We exemplify them here. In the second property, inequality (7), when x = ω the left
+inequality becomes equality and for ω + 1 the right one does. When we substitute x = ω, y = ω + 1
+in the second to last property, inequality (8), it turns into 0 =
+�1
+
+2
+�
+, so the floor function r �→⌊r⌋is
+necessary. For the third property it is important that Re
+�√
+
+2xy∗�
+is an element of Z [ω] when x, y itself
+belongs to the ring Z [ω]. In contrast, Re (xy∗) is not always an element of Z [ω], in particular, when
+
+x = ω, y = ω + 1. In general, gde (x) = gde (y) does not imply gde
+�
+|x|2�
+= gde
+�
+|y|2�
+. For instance,
+
+gde (ω + 1) = gde (ω), but |ω + 1|2 = 2 +
+√
+
+2 and |ω|2 = 1.
+
+In the proof of Lemma 2 we use x = z
+�√
+
+2
+�sde(z) , y = w
+�√
+
+2
+�sde(w) that are elements of Z [ω]. The
+next lemma shows an additional property that such x and y have.
+Lemma 4. Let z and w be elements of the ring Z[ 1
+√
+
+2, i] such that |z|2 + |w|2 = 1 and sde (z) ≥1 or
+
+sde (w) ≥1, then sde (z) = sde (w) and for elements x = z
+�√
+
+2
+�sde(z) and y = w
+�√
+
+2
+�sde(w) of the ring
+
+Z [ω] it holds that gde
+�
+|x|2�
+= gde
+�
+|y|2�
+≤1.
+
+Proof. Without loss of generality, suppose sde (z) ≥sde (w). Using the relation in equation (1) between
+sde and gde, expressing z and w in terms of x and y, and substituting the result into equation |z|2 +
+|w|2 = 1, we obtain
+
+|y|2 �√
+
+2
+�2(sde(z)−sde(w))
+=
+�√
+
+2
+�2sde(z)
+−|x|2 .
+
+Substituting z = x/
+�√
+
+2
+�sde(z) into formula (1) relating sde and gde, we obtain gde (x) = 0, and using
+
+one of the inequalities (7) connecting gde
+�
+|x|2�
+and gde (x) we conclude that gde
+�
+|x|2�
+≤1. Similarly,
+
+gde
+�
+|y|2�
+≤1. We use the absorption property (5) of gde (·) to write:
+
+gde
+�
+|y|2 �√
+
+2
+�2(sde(z)−sde(w))�
+= gde
+�
+|x|2�
+.
+
+Equivalently, using the base extraction property (4):
+
+gde
+�
+|y|2�
++ 2 (sde (z) −sde (w)) = gde
+�
+|x|2�
+.
+
+Taking into account gde
+�
+|x|2�
+≤1 and gde
+�
+|y|2�
+≤1, it follows that sde (z) = sde (w).
+
+9
+
+
+===== PDF PAGE 10 =====
+
+In the proof of Lemma 2 we turn inequality (2) for difference of sde into an inequality for difference
+
+of gde
+�
+|x|2�
+and gde
+�
+|x + y|2�
+. The following lemma shows a basic relation between these quantities
+that we will use.
+Lemma 5. If x and y are elements of the ring Z [ω] such that |x|2 + |y|2 =
+�√
+
+2
+�m, then
+
+gde
+�
+|x + y|2�
+≥min
+�
+m, 1 +
+�1
+
+2
+
+�
+gde
+�
+|x|2�
++ gde
+�
+|y|2����
+.
+
+Proof. The first step is to expand |x + y|2 as |x|2 + |y|2 +
+√
+
+2Re
+�√
+
+2xy∗�
+. Next, we apply inequality
+(3) to the gde of the sum, and then the base extraction property (4) of the gde. We use equality
+
+gde
+�
+|x|2 + |y|2�
+= m to conclude that
+
+gde
+�
+|x + y|2�
+≥min
+�
+m, 1 + gde
+�
+Re
+�√
+
+2xy∗���
+.
+
+Finally, we use inequality (8) for gde
+�
+Re
+�√
+
+2xy∗��
+to derive the statement of the lemma.
+
+Now we collected all tools required to prove Lemma 2.
+
+Proof. Recall that, we are proving that for elements z and w of the ring Z[ 1
+√
+
+2, i] and any integer k it
+is true that:
+
+−1 ≤sde
+
+�����
+z + wωk
+
+√
+
+2
+
+����
+
+2�
+
+−sde
+�
+|z|2�
+≤1, when sde
+�
+|z|2�
+≥4.
+
+Using Lemma 4 we can define m = sde (z) = sde
+�
+wωk�
+and x = ωkz
+�√
+
+2
+�m and y = w
+�√
+
+2
+�m.
+Using the relation (1) between gde and sde, and the base extraction property (4) of gde we rewrite the
+inequality we are trying to prove as:
+
+1 ≤gde
+�
+|x + y|2�
+−gde
+�
+|x|2�
+≤3.
+
+It follows from Lemma 4 that gde
+�
+|x|2�
+= gde
+�
+|y|2�
+≤1. Taking into account |x|2 + |y|2 =
+√
+
+2
+2m
+
+and applying the inequality proved in Lemma 5 to x and y we conclude that:
+
+gde
+�
+|x + y|2�
+≥min
+�
+2m, 1 + gde
+�
+|x|2��
+.
+
+The condition m ≥4 allows us to remove taking the minimum on the right hand side and replace it
+with 1+gde
+�
+|x|2�
+. This proves one of the two inequalities we are trying to show, 1 ≤gde
+�
+|x + y|2�
+−
+
+gde
+�
+|x|2�
+. To prove the second inequality, gde
+�
+|x + y|2�
+−gde
+�
+|x|2�
+≤3, we apply Lemma 5 to the
+
+pair of elements of the ring Z [ω], x + y and x −y. The conditions of the lemma are satisfied because
+
+|x + y|2 + |x −y|2 =
+√
+
+2
+2(m+1). Therefore:
+
+gde
+�
+4 |x|2�
+≥min
+�
+2 (m + 1) , 1 +
+�1
+
+2
+
+�
+gde
+�
+|x + y|2�
++ gde
+�
+|x −y|2����
+.
+
+Using the base extraction property (4), we notice that gde
+�
+4 |x|2�
+= 4 + gde
+�
+|x|2�
+. It follows from
+
+m ≥4 that 2 (m + 1) ≥4 + gde
+�
+|x|2�
+. As such, we can again remove the minimization and simplify
+the inequality to:
+
+3 + gde
+�
+|x|2�
+≥
+�1
+
+2
+
+�
+gde
+�
+|x + y|2�
++ gde
+�
+|x −y|2���
+.
+
+10
+
+
+===== PDF PAGE 11 =====
+
+To finish the proof it suffices to show that gde
+�
+|x + y|2�
+= gde
+�
+|x −y|2�
+. We establish an upper
+
+bound for gde
+�
+|x + y|2�
+and use the absorption property (5) of gde. Using non-negativity of gde and
+the definition of the floor function we get:
+
+2
+�
+3 + gde
+�
+|x|2��
++ 1 ≥gde
+�
+|x + y|2�
+.
+
+Since gde
+�
+|x|2�
+≤1, gde
+�
+|x + y|2�
+≤9. Observing that 2 (m + 1) > 9 we confirm that
+
+gde
+�
+|x −y|2�
+= gde
+�√
+
+2
+2(m+1) −|x + y|2�
+= gde
+�
+|x + y|2�
+.
+
+To prove Lemma 3 it suffices to show that gde(
+��x + ωky
+��2) −gde(|x|2) achieves all values in the set
+{1, 2, 3} as k varies over all values in the range from 0 to 3. We can split this into two cases: gde(|x|2) = 1
+and gde(|x|2) = 0. We need to check if gde(
+��x + ωky
+��2) belongs to {1, 2, 3} or {2, 3, 4}. Therefore, it is
+important to describe these conditions in terms of x and y. This is accomplished in the next Section.
+
+5
+Quadratic forms and greatest dividing exponent
+
+We first clarify why it is enough to check a finite number of cases to prove Lemma 3. Recall how the
+lemma can be restated in terms of the elements of the ring Z [ω]. Next we illustrate why we can achieve
+a finite number of cases with a simple example using integer numbers Z. Then we show how this idea
+can be extended to the elements of the ring Z [ω] that are real (that is, with imaginary part equal to
+zero). Finally, in the proof of Lemma 3, we identify a set of cases that we need to check and provide
+an algorithm to perform it.
+
+As discussed at the end of the previous Section, to prove Lemma 3 one can consider elements x and y
+of the ring Z [ω] such that |x|2 + |y|2 = 2m for m ≥4. We know from Lemma 2 that there are three
+possibilities in each of the two cases:
+
+• when gde(|x|2) = 0, gde(
+��x + ωky
+��2) equals to 1, 2, or 3,
+
+• when gde(|x|2) = 1, gde(
+��x + ωky
+��2) equals 2, 3, or 4.
+
+We want to show that each of these possibilities is achievable for a specific choice of k ∈{0, 1, 2, 3}.
+
+We illustrate the idea of the reduction to a finite number of cases with an example. Suppose we want
+to describe two classes of integer numbers:
+
+• integer a such that the gde
+�
+a2, 2
+�
+= 2,
+
+• integer a such that the gde
+�
+a2, 2
+�
+> 2.
+
+It is enough to know a2 mod 23 to decide which class a belongs to. Therefore we can consider 8 residues
+a mod 23 and find the classes to which they belong. We extend this idea to the real elements of the
+ring Z [ω], being elements of the ring Z [ω] that are equal to their own real part. Afterwards we apply
+the result to
+��x + ωky
+��2, that is a real element of Z [ω].
+
+We note that the real elements of Z [ω] are of the form a +
+√
+
+2b where a and b are themselves integer
+numbers. An important preliminary observation, that follows from the irrationality of
+√
+
+2, is that for
+any integer number c
+gde (c) = 2gde (c, 2) .
+(10)
+
+11
+
+
+===== PDF PAGE 12 =====
+
+The next proposition gives a condition equivalent to gde
+�
+a +
+√
+
+2b
+�
+= k, expressed in terms of gde (a, 2)
+and gde (b, 2):
+Proposition 1. Let a and b be integer numbers. There are two possibilities:
+
+• gde
+�
+a +
+√
+
+2b
+�
+is even if and only if gde (b, 2) ≥gde (a, 2); in this case, gde (a, 2) = gde
+�
+a +
+√
+
+2b
+�
+/2.
+
+• gde
+�
+a +
+√
+
+2b
+�
+is odd if and only if gde (b, 2) < gde (a, 2); in this case, gde (b, 2) =
+�
+gde
+�
+a +
+√
+
+2b
+�
+−1
+�
+/2.
+
+Proof. Consider the case when gde (b, 2) < gde (a, 2). Observing, from equation (10), that gde (a) is
+always even, gde (a) > gde
+�√
+
+2b
+�
+, and by the absorption property (5) of gde we have gde
+�
+a +
+√
+
+2b
+�
+=
+gde
+�√
+
+2b
+�
+. Using the base extraction property (4) of gde and the relation (10) between gde (·) and
+gde (·, 2) for integers we obtain gde
+�
+a +
+√
+
+2b
+�
+= 1 + 2gde (b, 2).
+The other case similarly implies
+gde
+�
+a +
+√
+
+2b
+�
+= 2gde (a, 2). In terms of real elements of the ring Z [ω], this results in the following
+relations:
+
+A1 = {gde (b, 2) < gde (a, 2)} ⊆B1 =
+�
+gde
+�
+a +
+√
+
+2b
+�
+is even
+�
+,
+
+A2 = {gde (b, 2) ≥gde (a, 2)} ⊆B2 =
+�
+gde
+�
+a +
+√
+
+2b
+�
+is odd
+�
+.
+
+We note that each pair of sets {A1, A2} and {B1, B2} defines a partition of real elements of the ring
+Z [ω].
+This completes the proof since when for partitions {A1, A2} and {B1, B2} of some set the
+inclusions A1 ⊆B1, A2 ⊆B2 imply A1 = B1 and A2 = B2.
+
+To express
+��x + ωky
+��2 in the form a +
+√
+
+2b in a concise way, we introduce two quadratic forms P (·)
+and Q (·) with the property:
+|x|2 = P (x) +
+√
+
+2Q (x) .
+(11)
+
+Given that x, an element of Z [ω], can be expressed in terms of the integer number coordinates as
+follows, x = x0 + x1ω + x2ω2 + x3ω3, we define the quadratic forms as:
+
+P (x) := x2
+0 + x2
+1 + x2
+2 + x2
+3,
+(12)
+
+Q (x) := x0 (x1 −x3) + x2 (x1 + x3) .
+(13)
+
+Let us rewrite equality gde
+�
+|x + y|2�
+= 4 in terms of these quadratic forms and the gde of base 2.
+Using Proposition 1 we can write:
+
+gde
+�
+P
+�
+x + ωky
+�
+, 2
+�
+= 2,
+
+gde
+�
+Q
+�
+x + ωky
+�
+, 2
+�
+≥2.
+
+Similar to the example given at the beginning of this section, we see that it suffices to know the values
+of the quadratic forms modulo 23. To compute them, it suffices to know the values of the integer
+coefficients of x and y modulo 23. This follows from the expression of the product ωy in terms of the
+integer number coefficients:
+
+ω
+�
+y1 + y2ω + y3ω2 + y4ω3�
+= −y4 + y1ω + y2ω2 + y3ω3,
+
+and from the following two observations:
+
+• integer number coefficients of the sum of two elements of the ring Z[ 1
+√
+
+2, i] is the sum of their
+integer number coefficients,
+
+• for any element of Z [ω], x, the values of quadratic forms P (x) and Q (x) modulo 23 are defined
+by the values modulo 23 of the integer number coefficients of x.
+
+12
+

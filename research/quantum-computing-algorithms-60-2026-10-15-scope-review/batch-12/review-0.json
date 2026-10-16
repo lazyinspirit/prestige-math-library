@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "12",
+  "round": 0,
+  "reviewed_items": [
+    "def-qc-effective-unitary-matrix-input",
+    "def-qc-inverse-closed-dense-su2-gate-set",
+    "lem-qc-fixed-dimension-interval-arithmetic",
+    "lem-qc-irrational-rotation-dense-on-circle",
+    "lem-qc-su2-near-identity-logarithm",
+    "lem-qc-compact-su2-base-net",
+    "lem-qc-pauli-vector-multiplication",
+    "lem-qc-su2-balanced-commutator",
+    "lem-qc-two-axis-su2-generation",
+    "lem-qc-clifford-t-projective-density",
+    "lem-qc-commutator-error-cancellation",
+    "alg-qc-solovay-kitaev-unitary-compiler",
+    "thm-qc-solovay-kitaev-error-and-resource-bound",
+    "thm-qc-solovay-kitaev-bit-complexity",
+    "thm-qc-fixed-arity-unitary-error-budget",
+    "thm-qc-controlled-phase-approximation",
+    "ex-qc-solovay-kitaev-error-budget"
+  ],
+  "reviewed_pages": [
+    "approximate-universality-and-solovay-kitaev",
+    "approximate-universality-and-solovay-kitaev-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full assigned batch and direct supplier proofs were reviewed. Request one consolidated local repair for the proof clarifications and statement corrections below; the affected consumers of the statement changes were checked.",
+  "findings": [
+    {
+      "id": "lem-qc-su2-near-identity-logarithm",
+      "type": "prerequisite",
+      "reason": "F8 cites the sine derivative theorem for strict monotonicity, but that supplier states only derivative formulas. Step 2.1 also uses termwise differentiation of the complex logarithm series without citing or proving it, and needs the zero-derivative quotient to be constant. Add the relevant monotonicity and power-series differentiation prerequisites or supply these arguments locally."
+    },
+    {
+      "id": "lem-qc-balanced-commutator",
+      "type": "local",
+      "reason": "Step 2.1 uses |sin x| <= |x| to prove ||e^A-I|| <= ||A||; F4 supplies Euler's formula and the Pythagorean identity, but not this inequality. Cite the one-Lipschitz sine result or prove the bound."
+    },
+    {
+      "id": "lem-qc-commutator-error-cancellation",
+      "type": "local",
+      "reason": "F1 cites submultiplicativity, while steps 1.1-3.1 also use invariance of operator norm under unitary multiplication; derive that from the norm definition. The Facts clause assumes eta > 0 although the Statement includes eta = 0; cover that case or align the clause."
+    },
+    {
+      "id": "lem-qc-clifford-t-projective-density",
+      "type": "local",
+      "reason": "Step 2.1 infers that Q(x) is a number field from the definition of number field; after proving P irreducible, state why [Q(x):Q] is finite. When applying the two-axis lemma, explicitly normalize the two nonparallel axes to unit vectors."
+    },
+    {
+      "id": "thm-qc-solovay-kitaev-error-and-resource-bound",
+      "type": "prerequisite",
+      "reason": "Step 3.1 derives the explicit least-level formula using logarithm product/change-of-base laws and ceiling notation, but lists only the inverse definition of natural logarithm. Add the logarithm-laws supplier and define ceiling via floor or state the convention."
+    },
+    {
+      "id": "thm-qc-solovay-kitaev-error-and-resource-bound",
+      "type": "local",
+      "reason": "The Statement says the word length is L0*5^j, while the proof establishes only length at most L0*5^j. Change it to an upper bound. Steps 1.1-2.1 should also explicitly justify right multiplication by a unitary preserving operator norm."
+    },
+    {
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "type": "local",
+      "reason": "Step 2.1 uses right-unitary norm invariance and the bound ||D-I|| <= ||log D||, which follows from a sine chord bound not stated in F7. Prove or cite these facts, and specify how the certified interval comparison with the algebraic threshold tau_j selects its branch."
+    },
+    {
+      "id": "thm-qc-fixed-arity-unitary-error-budget",
+      "type": "local",
+      "reason": "The telescoping and event-error arguments use that unitary factors have operator norm one; F2 states submultiplicativity but not this property. Derive it from the operator norm definition and the stated unitarity."
+    },
+    {
+      "id": "ex-qc-solovay-kitaev-error-budget",
+      "type": "local",
+      "reason": "The Statement does not require phi_j to be real or W_j to be unitary, although the Verification assumes real phases and unitary words. State these hypotheses so the global-phase and telescoping arguments apply."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "decision": "accept",
+      "reason": "Its L_J = L0*5^J is used as a size bound; its complexity and output claims do not require equality."
+    },
+    {
+      "id": "thm-qc-fixed-arity-unitary-error-budget",
+      "decision": "accept",
+      "reason": "Uses only the asymptotic word-length upper bound."
+    },
+    {
+      "id": "ex-qc-solovay-kitaev-error-budget",
+      "decision": "accept",
+      "reason": "Uses the error guarantee, not an exact word length."
+    },
+    {
+      "id": "thm-qa-qft-finite-gate-set-compile-cost",
+      "decision": "accept",
+      "reason": "Uses only the polylogarithmic length upper bound."
+    },
+    {
+      "id": "def-qa-34-output-and-cost-types",
+      "decision": "accept",
+      "reason": "Refers to a resource contract and does not rely on exact length equality."
+    },
+    {
+      "id": "thm-qc-controlled-phase-approximation",
+      "decision": "accept",
+      "reason": "Uses the fixed-arity error guarantee, not exact SK word length."
+    },
+    {
+      "id": "thm-qc-amplitude-table-precision-and-compilation",
+      "decision": "accept",
+      "reason": "Uses fixed-arity gate-count upper bounds only."
+    },
+    {
+      "id": "lem-qc-vmw-finite-precision-sk-compiler",
+      "decision": "accept",
+      "reason": "Uses polynomial bit-time and word-length bounds, not an exact length claim."
+    },
+    {
+      "id": "approximate-universality-and-solovay-kitaev",
+      "decision": "accept",
+      "reason": "Its page summary states polylogarithmic word length, consistent with the corrected upper bound."
+    },
+    {
+      "id": "approximate-universality-and-solovay-kitaev-examples",
+      "decision": "accept",
+      "reason": "Its worked error allocation does not rely on exact word length; the added real-phase and unitary-word hypotheses match its stated context."
+    },
+    {
+      "id": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+      "decision": "accept",
+      "reason": "Uses the approximate-universality page as context and makes no exact word-length claim."
+    },
+    {
+      "id": "uniform-circuit-families-promise-problems-and-complexity",
+      "decision": "accept",
+      "reason": "Requires the approximate-universality page but does not use exact SK length."
+    },
+    {
+      "id": "quantum-fourier-transform-circuits",
+      "decision": "accept",
+      "reason": "Its finite-gate synthesis claim uses an asymptotic length upper bound."
+    },
+    {
+      "id": "qma-verification-and-local-hamiltonian",
+      "decision": "accept",
+      "reason": "Uses the approximate-universality page as a prerequisite and does not depend on exact SK length."
+    }
+  ]
+}

@@ -1,0 +1,422 @@
+===== PDF PAGE 1 =====
+arXiv:quant-ph/0406176v5  18 Apr 2006
+
+Synthesis of Quantum Logic Circuits
+
+Vivek V. Shende1
+
+vshende@umich.edu
+Stephen S. Bullock2
+
+stephen.bullock@nist.gov
+Igor L. Markov1
+
+imarkov@eecs.umich.edu
+
+1Dept. of Electrical Engineering and Computer Science,
+The University of Michigan, Ann Arbor, MI 48109-2212, USA
+
+2Mathematical and Computational Sciences Division,
+Natl. Inst. of Standards and Technology, Gaithersburg, MD 20899-8910, USA
+
+Abstract
+
+The pressure of fundamental limits on classical computation and the promise of exponential speedups
+from quantum effects have recently brought quantum circuits [10] to the attention of the Electronic De-
+sign Automation community [18, 28, 7, 27, 17]. We discuss efficient quantum logic circuits which
+perform two tasks: (i) implementing generic quantum computations and (ii) initializing quantum reg-
+isters. In contrast to conventional computing, the latter task is nontrivial because the state-space of an
+n-qubit register is not finite and contains exponential superpositions of classical bit strings. Our proposed
+circuits are asymptotically optimal for respective tasks and improve earlier published results by at least
+a factor of two.
+The circuits for generic quantum computation constructed by our algorithms are the most efficient
+known today in terms of the number of difficult gates (quantum controlled-NOTs). They are based
+on an analogue of the Shannon decomposition of Boolean functions and a new circuit block, quantum
+multiplexor, that generalizes several known constructions. A theoretical lower bound implies that our
+circuits cannot be improved by more than a factor of two. We additionally show how to accommodate
+the severe architectural limitation of using only nearest-neighbor gates that is representative of current
+implementation technologies. This increases the number of gates by almost an order of magnitude, but
+preserves the asymptotic optimality of gate counts.
+
+1
+Introduction
+
+As the ever-shrinking transistor approaches atomic proportions, Moore’s law must confront the small-scale
+granularity of the world: we cannot build wires thinner than atoms. Worse still, at atomic dimensions
+we must contend with the laws of quantum mechanics. For example, suppose one bit is encoded as the
+presence or the absence of an electron in a small region.1 Since we know very precisely where the elec-
+tron is located, the Heisenberg uncertainty principle dictates that we cannot know its momentum with high
+accuracy. Without a reasonable upper bound on the electron’s momentum, there is no alternative but to
+use a large potential to keep it in place, and expend significant energy during logic switching. A quanti-
+tative analysis of these phenomena leads experts from NCSU, SRC and Intel [36] to derive fundamental
+limitations on the scalability of any computing device which moves electrons.
+Yet these same quantum effects also facilitate a radically different form of computation [13]. Theo-
+retically, quantum computers could outperform their classical counterparts when solving certain discrete
+
+1Most current computing technologies use electron charges to store information; exceptions include spintronics-based techniques,
+e.g., magnetic RAM.
+
+1
+
+
+===== PDF PAGE 2 =====
+
+problems [16]. For example, a successful large-scale implementation of Shor’s integer factorization [29]
+would compromise the RSA cryptosystem used in electronic commerce. On the other hand, quantum ef-
+fects may also be exploited for public-key cryptography [4]. Indeed, such cryptography systems, based
+on single-photon communication, are commercially available from MagiQ Technologies in the U.S. and
+IdQuantique in Europe.
+Physically, a quantum bit might be stored in one of a variety of quantum-mechanical systems. A broad
+survey of these implementation technologies, with feasibility estimates and forecasts, is available in the
+form of the ARDA quantum computing roadmap [1]. Sample carriers of quantum information include
+top-electrons in hyperfine energy levels of either trapped atoms or trapped ions, tunneling currents in
+cold superconductors, nuclear spin polarizations in nuclear magnetic resonance, and polarization states of
+single photons. A collection of n such systems would comprise an n-qubit register, and quantum logic gates
+(controlled quantum processes) would then be applied to the register to perform a computation. In practice,
+such gates might result from rotating the electron between hyperfine levels by shining a laser beam on the
+trapped atom/ion, tuning the tunneling potential by changing voltages and/or current in a super-conducting
+circuit, or perhaps passing multiple photons through very efficient nonlinear optical media.
+The logical properties of qubits also differ significantly from those of classical bits. Bits and their
+manipulation can be described using two constants (0 and 1) and the tools of boolean algebra. Qubits, on
+the other hand, must be discussed in terms of vectors, matrices, and other linear algebraic constructions.
+We will fully specify the formalism in Section 2, but give a rough idea of the similarities and differences
+between classical and quantum information below.
+
+1. A readout (observation, measurement) of a quantum register results in a classical bit-string.
+
+2. However, identically prepared quantum states may yield different classical bit-strings upon obser-
+vation. Quantum physics only predicts the probability of each possible readout, and the readout
+probabilities of different bits in the register need not be independent.
+
+3. After readout, the state “collapses” onto the classical bit string observed. All other quantum data is
+lost.
+
+These differences notwithstanding, quantum logic circuits, from a high level perspective, exhibit many
+similarities with their classical counterparts. They consist of quantum gates, connected (though without
+fanout or feedback) by quantum wires which carry quantum bits. Moreover, logic synthesis for quantum
+circuits is as important as for the classical case. In current implementation technologies, gates that act
+on three or more qubits are prohibitively difficult to implement directly. Thus, implementing a quantum
+computation as a sequence of two-qubit gates is of crucial importance. Two-qubit gates may in turn be
+decomposed into circuits containing one-qubit gates and a standard two-qubit gate, usually the quantum
+controlled-not (CNOT). These decompositions are done by hand for published quantum algorithms (e.g.,
+Shor’s factorization algorithm [29] or Grover’s quantum search [16]), but have long been known to be
+possible for arbitrary quantum functions [12, 3]. While CNOTs are used in an overwhelming majority of
+theoretical and practical work in quantum circuits, their implementations are orders of magnitude more
+error-prone than implementations of single-qubit gates and have longer durations. Therefore, the cost of
+a quantum circuit can be realistically calculated by counting CNOT gates. Moreover, it has been shown
+previously that if CNOT is the only two-qubit gate type used, the number of such gates in a sufficiently
+large irredundant circuit is lower-bounded by approximately 20% [27].
+The first quantum logic synthesis algorithm to so decompose an arbitrary n-qubit gate would return a
+circuit containing O(n34n) CNOT gates [3]. The work in [9] interprets this algorithm as the QR decomposi-
+tion, well-known in matrix algebra. Improvements on this method have used clever circuit transformations
+and/or Gray codes [20, 2, 31] to lower this gate count. More recently, different techniques [21] have led to
+
+2
+
+
+===== PDF PAGE 3 =====
+
+circuits with CNOT-counts of 4n−2n+1. The exponential gate count is not unexpected: just as the exponen-
+tial number of n-bit Boolean functions ensures that the circuits computing them are generically large, so too
+in the quantum case. Indeed, it has been shown that n-qubit operators generically require ⌈1
+
+4(4n −3n−1)⌉
+CNOTs [27]. Similar exponential lower bounds existed earlier in other gate libraries [20].
+Existing algorithms for n-qubit circuit synthesis remain a factor of four away from lower bounds and
+fare poorly for small n. These algorithms require at least 8 CNOT gates for n = 2, while three CNOT gates
+are necessary and sufficient in the worst case [27, 34, 33]. Further, a simple procedure exists to produce
+two-qubit circuits with minimal possible number of CNOT gates [25]. In contrast, in three qubits the lower
+bound is 14 while the generic n-qubit decomposition of [21] achieves 48 CNOTs and a specialty 3-qubit
+circuit of [32] achieves 40.
+In this work, we focus on identifying useful quantum circuit blocks. To this end, we analyze quantum
+conditionals and define quantum multiplexors that generalize CNOT, Toffoli and Fredkin gates. Such
+quantum multiplexors implement if-then-else conditionals when the controlling predicate evaluates to a
+coherent superposition of |0⟩and |1⟩. We find that quantum multiplexors prove amenable to recursive
+decomposition and vastly simplify the discussion of many results in quantum logic synthesis (cf. [8, 31,
+21]). Ultimately, our analysis leads to a quantum analogue of the Shannon decomposition, which we apply
+to the problem of quantum logic synthesis.
+We contribute the following key results.
+
+• An arbitrary n-qubit quantum state can be prepared by a circuit containing no more than 2n+1 −2n
+CNOT gates. This lies a factor of four away from the theoretical lower bound.
+
+• An arbitrary n-qubit operator can be implemented in a circuit containing no more than (23/48) ×
+4n −(3/2) × 2n + 4/3 CNOT gates. This improves upon the best previously published work by a
+factor of two and lies less than a factor of two away from the theoretical lower bound.
+
+• In the special case of three qubits, our technique yields a circuit with 20 CNOT gates, whereas the
+best previously known result was 40.
+
+• The architectural limitation of permitting only nearest-neighbor interactions, common to physical
+implementations, does not change the asymptotic behavior of our techniques.
+
+In addition to these technical advances, we develop a theory of quantum multiplexors that parallels
+well-known concepts in digital logic, such as Shannon decomposition of Boolean functions. This new
+theory produces short and intuitive proofs of many results for n-qubit circuits known today.
+The remainder of the paper is organized as follows. In §2, we define quantum bits, quantum logic,
+and quantum circuits, and we introduce the necessary mathematical formalism for manipulating them.
+In §3, we introduce a novel circuit block, the quantum multiplexor, which immediately allows radical
+notational simplifications of the statements and proofs of previously known results. In §4, we give a
+novel, asymptotically-optimal algorithm for register initialization and indicate its applications to more
+general problems in quantum logic synthesis. In §5, we use the Cosine-Sine decomposition, along with a
+novel decomposition of single-select-bit quantum multiplexors, to derive a functional decomposition for
+quantum logic that can be applied recursively. We obtain quantum circuits to simulate any unitary operator
+(quantum evolution) U and present competitive gate counts. In §6, we show that our techniques adapt well
+to severe implementation constraints representative of many quantum-circuit technologies. Our results are
+summarized in §7, which concludes the paper. Additionally, two highly-technical aspects of our work
+required to achieve the best gate counts are described in the Appendix.
+
+3
+
+
+===== PDF PAGE 4 =====
+
+2
+Background and Notation
+
+The notion of a qubit formalizes the logical properties of an ideal quantum-mechanical system with two
+basis states. The two states are labeled |0⟩and |1⟩. They can be distinguished by quantum measurement of
+the qubit, which yields a single classical bit of information, specifying which state the qubit was observed
+in. However, the state of an isolated (in particular, unobserved) qubit must be modeled by vector in a
+two-dimensional complex2 vector space H1 which is spanned by the basis states.
+
+H1 = spanC{|0⟩,|1⟩}
+(1)
+
+We identify |0⟩and |1⟩with the following column vectors.
+
+|0⟩=
+�1
+0
+
+�
+|1⟩=
+�0
+1
+
+�
+(2)
+
+Thus, an arbitrary state |φ⟩∈H1 can be written in either of the two equivalent forms given below.
+
+|φ⟩= α0 |0⟩+α1 |1⟩=
+�α0
+α1
+
+�
+(3)
+
+The entries of the state vector determine the readout probabilities: if we measure a qubit whose state is
+described by |φ⟩, we should expect to see |0⟩with probability |α0|2 and |1⟩with probability |α1|2. Since
+these are the only two possibilities, α0 and α1 are required to satisfy |α0|2 +|α1|2 = 1.
+
+2.1
+Qubit Registers
+
+By a register of qubits, we shall simply mean a logical qubit array with a fixed number of qubits in a fixed
+order. A readout of a qubit register amounts to readouts of each component qubit; thus a readout of an
+n-qubit register might take the form |b0⟩|b1⟩...|bn−1⟩for each b j ∈{0,1}. We shall abbreviate this to
+|b0b1 ...bn−1⟩, and call it a bitstring state. Just as for a single qubit, the state of an isolated qubit register
+is modeled by a vector in the complex vector space spanned by the bitstring states.
+
+Hn = spanC{|b⟩;b a bitstring of length n}
+(4)
+
+Writing Bn for the set of length n bitstrings, an arbitrary vector |ψ⟩∈Hn may be expressed as ∑b∈Bn αb |b⟩,
+or as the column vector whose b-th entry is αb. As for a single qubit, |αb|2 represents the probability that
+a readout of |ψ⟩yields the bitstring |b⟩; thus the αb are subject to the relation ∑b |αb|2 = 1.
+Suppose we concatenate a ℓ-qubit register L and an m-qubit register M to form an ℓ+ m = n-qubit
+register N. Assuming L and M have not previously interacted (and remain independent), we may describe
+them by state vectors |ψL⟩∈Hℓand |ψM⟩∈Hm.
+
+|ψL⟩= ∑
+b∈Bℓ
+βb
+��b
+�
+|ψM⟩= ∑
+b′∈Bm
+γb′
+��b′�
+(5)
+
+To describe the state of N, we must somehow obtain from |ψL⟩and |ψM⟩a state vector |ψN⟩∈Hn. Quan-
+tum mechanics demands that we use a natural generalization of bitstring concatenation called the tensor
+product. To compute the tensor product of two states, we write |ψN⟩= |ψL⟩|ψM⟩, and expand it using the
+distributive law.
+
+2Complex rather than real coefficients are required in most applications. For example, in certain optical implementations [22,
+§7.4.2] real and imaginary parts encode both the presence and phase of a photon.
+
+4
+
+
+===== PDF PAGE 5 =====
+
+|ψL⟩|ψM⟩=
+∑
+b∈Bℓ,b′∈Bm
+βbγb′ |b⟩
+��b′�
+(6)
+
+Let · denote concatenation; then |b ⟩|b′⟩and |b ·b′⟩represent the same bitstring state. As b · b′ ∈Bn,
+we have |ψL⟩|ψM⟩∈Hn, as desired.
+Perhaps counter-intuitively, the quantum-mechanical state of N cannot in general be specified only in
+terms of the states of L and M. Indeed, Hk is a 2k dimensional vector space, and for n ≫2 we observe 2n ≫
+2m +2ℓ. For example, three independent qubits can be described by three two-dimensional vectors, while
+a generic state-vector of a three-qubit system is eight-dimensional. Much interest in quantum computing
+is driven by this exponential scaling of the state space, and the loss of independence between different
+subsystems is called quantum entanglement.
+
+2.2
+Quantum Logic Gates
+
+By a quantum logic gate, we shall mean a closed-system evolution (transformation) of the n-qubit state
+space Hn. In particular, this means that no information is gained or lost during this evolution, thus a
+quantum gate has the same number of input qubits as output qubits. If |ψ⟩is a state vector in Hn, the
+operation of an n-qubit quantum logic gate can be represented by |ψ⟩�→U |ψ⟩for some unitary 2n × 2n
+
+matrix U. To define unitarity, we first introduce the adjoint of a matrix.
+
+Notation. Let M be an n ×m matrix. By M†, we will mean the m×n matrix whose (i, j)-th entry is the
+complex conjugate of the (j,i)-th entry of M. In other words, M† is the conjugate transpose of M.
+
+A square matrix M is unitary iff M†M = Iℓfor Iℓan ℓ× ℓidentity matrix. This is the matrix equation
+for a symmetry: M is unitary iff the vector images of M have the same complex inner products as the
+original vectors. Thus, (a) identity matrices are unitary, (b) a product of unitary matrices is unitary, and
+(c) the inverse of a unitary matrix, given by the adjoint, is also unitary. These may be restated in terms of
+quantum logic. The quantum logic operation of “doing nothing” is modeled by the identity matrix, serial
+composition of gates is modeled by the matrix products, and every quantum gate is reversible.
+We shall often define quantum gates by simply specifying their matrices. For example, the following
+matrix specifies a quantum analogue of the classical inverter: it maps |0⟩�→|1⟩and |1⟩�→|0⟩.
+
+• The inverter σx =
+�
+0
+1
+1
+0
+
+�
+
+Many quantum gates are specified by time-dependent matrices that represent the evolution of a quantum
+system (e.g., an RF pulse affecting a nucleus) that has been “turned on” for time θ. For example, the
+following families of gates are the one-qubit gates most commonly available in physical implementations
+of quantum circuits.
+
+• The x-axis rotation Rx(θ) =
+�cosθ/2
+isinθ/2
+isinθ/2
+cosθ/2
+
+�
+
+• The y-axis rotation Ry(θ) =
+�
+cosθ/2
+sinθ/2
+−sinθ/2
+cosθ/2
+
+�
+
+• The z-axis rotation Rz(θ) =
+�e−iθ/2
+0
+0
+eiθ/2
+
+�
+
+5
+
+
+===== PDF PAGE 6 =====
+
+An arbitrary one-qubit computation can be implemented as a sequence of at most three Rz and Ry
+gates. This is due to the ZYZ decomposition:3 given any 2×2 unitary matrix U, there exist angles Φ,α,β,γ
+satisfying the following equation.
+
+U = eiΦRz(α)Ry(β)Rz(γ)
+(7)
+
+The nomenclature Rx, Ry, Rz is motivated by a picture of one-qubit states as points on the surface of a
+sphere of unit radius in R3. This picture is called the Bloch sphere [22], and may be obtained by expanding
+an arbitrary two-dimensional complex vector as below.
+
+|ψ⟩= α0 |0⟩+α1 |1⟩= reit/2
+�
+e−iϕ/2cos θ
+
+2 |0⟩+eiϕ/2 sin θ
+
+2 |1⟩
+�
+(8)
+
+The constant factor reit/2 is physically undetectable. Ignoring it, we are left with two angular parameters
+θ and ϕ, which we interpret as spherical coordinates (1,θ,ϕ). In this picture, |0⟩and |1⟩correspond to the
+north and south poles, (1,0,0) and (1,π,0), respectively. The Rx(θ) gate (resp. Ry(θ), Rz(θ)) corresponds
+to a counterclockwise rotation by θ around the x (resp. y, z) axis. Finally, just as the point given by the
+spherical coordinates (1,θ,ϕ) can be moved to the north pole by first rotating −ϕ degrees around the z-axis,
+then −θ degrees around the y axis, so too the following matrix equations hold.
+
+Ry(−θ)Rz(−ϕ)|ψ⟩= reit/2 |0⟩
+Ry(θ−π)Rz(π−ϕ)|ψ⟩= rei(t−π)/2 |1⟩
+(9)
+
+2.3
+Quantum Circuits
+
+A combinational quantum logic circuit consists of quantum gates, interconnected by quantum wires –
+carrying qubits – without fanout or feedback. As each quantum gate has the same number of inputs and
+outputs, any cut through the circuit crosses the same number of wires. Fixing an ordering on these, a
+quantum circuit can be understood as representing the sequence of quantum logic operations on a quantum
+register. An example is depicted in Figure 1, and many more will appear throughout the paper.
+Figure 1 contains 12 one- and two-qubit gates applied to a three-qubit register. Observe that the state
+of a three-qubit register is described by a vector in H3 (an 8-element column), whereas one- and two-qubit
+gates are described by unitary operations on H2 and H1 (given by 4 ×4 and 2 ×2 matrices, respectively).
+In order to reconcile the dimensions of various state-vectors and matrices, we introduce the tensor product
+operation.
+Consider an ℓ+ m = n-qubit register, on which an ℓ-qubit gate V acts on the top ℓqubits, with an
+m-qubit gate W acting on the remainder. We expand the state |ψ⟩∈Hn of the n-qubit register, as follows.
+
+|ψ⟩= ∑
+b∈Bn
+αb |b⟩=
+∑
+b∈Bℓ,b′∈Bm
+αb·b′
+��b
+���b′�
+(10)
+
+Then, denoting by V ⊗W the operation performed on the register as a whole,
+
+V ⊗W |ψ⟩=
+∑
+b∈Bℓ,b′∈Bm
+αb·b′ �
+V
+��b
+���
+W
+��b′��
+(11)
+
+Here, V |b ⟩∈Hℓand W |b′⟩∈Hm are to be concatenated, or tensored, as per Equation 6. It can be deduced
+from Equation 11 that the 2n ×2n matrix of V ⊗W is given by
+
+(V ⊗W)r·r′,c·c′ = Vr,cWr′,c′
+for
+r,c ∈Bℓ,
+r′,c′ ∈Bm
+(12)
+
+3This decomposition is well known and finds many proofs in the literature, e.g., [3]. We shall derive another as a corollary in
+Section 4.
+
+6
+

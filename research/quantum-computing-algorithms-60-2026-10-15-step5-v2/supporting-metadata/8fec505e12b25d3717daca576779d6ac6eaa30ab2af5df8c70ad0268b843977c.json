@@ -1,0 +1,671 @@
+[
+  {
+    "order": 2182,
+    "id": "circuit-syntax-denotational-semantics-and-measurement",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Circuit Syntax, Denotational Semantics, and Measurement",
+    "companion": "circuit-syntax-denotational-semantics-and-measurement-examples",
+    "requires": [
+      "channels-kraus-choi-and-stinespring-representations",
+      "controlled-gates-phase-and-entanglement",
+      "measurements-povms-and-instruments",
+      "registers-tensor-products-and-partial-trace"
+    ],
+    "items": [
+      {
+        "id": "def-qc-circuit-syntax-and-register-order",
+        "kind": "definition",
+        "title": "Finite circuit syntax and ordered wire labels",
+        "statement": "Write $\\mathcal Q_n$ for the ordered tensor product of $n$ copies of the two-level register from [[def-qc-register-and-computational-basis]], with $\\mathcal Q_0=\\mathbb C$. Fix a finite gate alphabet $G$. Each $g\\in G$ has an arity $r(g)\\ge1$ and a specified unitary $U_g:\\mathcal Q_{r(g)}\\to\\mathcal Q_{r(g)}$. An operation model states which listed gates may be called and what access or cost is assigned to them; the matrix $U_g$ by itself is only the mathematical gate data.\n\nFor $n\\ge0$, the circuit wire set is $[n]=\\{0,\\ldots,n-1\\}$ in its displayed order and its state space is $\\mathcal Q_n$. The computational basis word $x=(x_0,\\ldots,x_{n-1})$ is assigned slot $\\operatorname{enc}_n(x)$ from [[def-qc-ordered-bitstring-encoding]], so wire $0$ is the most significant bit and the empty register has its single basis vector in slot $0$.\n\nA gate occurrence on the $n$ wires is a pair $(g,(w_0,\\ldots,w_{r(g)-1}))$ with distinct wire labels $w_j\\in[n]$; the tuple order is the input and output factor order of the local gate. A layer is a finite ordered list of gate occurrences whose wire supports are pairwise disjoint. A unitary circuit is a finite chronological list $L_1,\\ldots,L_d$ of such layers, with $L_1$ applied first and $L_d$ last; $d=0$ is the empty circuit. Its input, output, and terminally measured wires are specified as ordered lists without repetitions in $[n]$. This syntax specifies finite data only; the semantic action of gates on the full register is defined separately.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_obligations": [
+          "Use QC02's bitstring encoding and state chronological layer order."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-finite-isometry-unitary-extension",
+        "kind": "lemma",
+        "title": "A finite isometry extends after finite ancilla padding",
+        "statement": "Let $H,K,E$ be nonzero finite-dimensional complex inner-product spaces and let $V:H\\to K\\otimes E$ be a linear isometry. Put $h=\\dim H$, $k=\\dim K$, and $e=\\dim E$. Let $A=Q_{ke}$ and $B=Q_h$ be the finite-level registers from [[def-qc-register-and-computational-basis]], with first computational basis vectors $a_0$ and $b_0$. Then there is a surjective linear isometry\n$$W:H\\otimes A\\longrightarrow K\\otimes E\\otimes B$$\nsuch that $W(x\\otimes a_0)=Vx\\otimes b_0$ for every $x\\in H$.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-dimension",
+          "cor-tensor-products-of-finite-free-modules-and-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; only finite-dimensional bases and orthogonal complements are used.",
+        "proof_obligations": [
+          "Match padded input/output dimensions.",
+          "Extend the isometry on finite orthogonal complements; do not infer efficient synthesis."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-local-gate-wire-embedding",
+        "kind": "lemma",
+        "title": "A local gate has a unique global wire embedding",
+        "statement": "Let $n\\ge r\\ge1$, let $w=(w_0,\\ldots,w_{r-1})$ be an ordered tuple of distinct wires in $[n]$, and let $U:\\mathcal Q_r\\to\\mathcal Q_r$ be unitary. There is a unique unitary $\\widetilde U_w:\\mathcal Q_n\\to\\mathcal Q_n$ that applies $U$ to the ordered wires $w_0,\\ldots,w_{r-1}$ and acts as the identity on the other wires.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-finite-dimensional-isometry-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; the construction uses finite ordered bases.",
+        "proof_obligations": [
+          "Check product basis vectors and extend linearly."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-disjoint-layer-order-independence",
+        "kind": "lemma",
+        "title": "Gates on disjoint wires commute",
+        "statement": "Let $U$ and $V$ be local gates embedded on two disjoint ordered wire sets in $\\mathcal Q_n$. Their global embeddings commute.",
+        "deps": [
+          "lem-qc-local-gate-wire-embedding"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; the proof is on the finite computational basis.",
+        "proof_obligations": [
+          "Evaluate both compositions on product basis vectors."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qc-circuit-denotational-semantics",
+        "kind": "definition",
+        "title": "Denotational semantics of a finite layered circuit",
+        "statement": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-local-gate-wire-embedding",
+          "lem-qc-disjoint-layer-order-independence",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; the interpretation uses finite compositions of unitaries.",
+        "proof_obligations": [
+          "Prove local embedding is well-defined and each layer/circuit is unitary."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-instrument-output-space-is-nonzero",
+        "kind": "lemma",
+        "title": "A finite instrument with nonzero input has nonzero output space",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, let $K$ be a finite-dimensional complex inner-product space, and suppose a finite instrument $(\\mathcal I_a)_{a\\in\\Omega}$ from $H$ to $K$ exists. Then $K$ is nonzero.",
+        "deps": [
+          "def-qc-instrument-and-conditional-state",
+          "def-dimension",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; only a finite basis of the nonzero input space is chosen.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018 author-hosted draft), §2.3.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution, §3.2.4",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Use the instrument trace identity on I_H and compute tr(I_H)=dim(H)>0 from a finite basis."
+        ]
+      },
+      {
+        "id": "thm-qc-instrument-kraus-normalization",
+        "kind": "theorem",
+        "title": "Instrument branch Kraus families satisfy total normalization",
+        "statement": "Let $(\\mathcal I_a)_{a\\in\\Omega}$ be a finite instrument from a nonzero finite-dimensional complex inner-product space $H$ to a finite-dimensional complex inner-product space $K$. Suppose that for every $a$ a finite Kraus family $(M_{a,j})_j$ represents $\\mathcal I_a$. Then\n$$\\sum_{a\\in\\Omega}\\sum_j M_{a,j}^\\dagger M_{a,j}=I_H.$$",
+        "deps": [
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-kraus-representation",
+          "def-trace-of-an-endomorphism",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "lem-qc-trace-pairing-nondegenerate"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; all sums are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018 author-hosted draft), §§2.2.2 and 2.3.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Expand every branch Kraus formula on arbitrary X, use rectangular trace cyclicity, and apply the QC02 nondegenerate trace-pairing lemma."
+        ]
+      },
+      {
+        "id": "lem-qc-coherent-record-isometry",
+        "kind": "lemma",
+        "title": "A finite instrument has an isometric coherent record",
+        "statement": "Let $(\\mathcal I_a)_{a\\in\\Omega}$ be a finite instrument from a nonzero finite-dimensional complex inner-product space $H$ to a finite-dimensional complex inner-product space $K$. Fix an order on its finite nonempty outcome set $\\Omega$, with $m=|\\Omega|$. There are a common integer $r\\ge1$ and Kraus families $(M_{a,j})_{0\\le j<r}$, padding shorter families by zero operators, such that\n$$\\sum_{a\\in\\Omega}\\sum_{j<r}M_{a,j}^\\dagger M_{a,j}=I_H.$$\nLet $E=Q_m\\otimes Q_r$ with its ordered product basis $(e_a\\otimes f_j)_{a,j}$, and define\n$$Vx:=\\sum_{a\\in\\Omega}\\sum_{j<r}M_{a,j}x\\otimes e_a\\otimes f_j\\in K\\otimes E.$$\nThen $V$ is a linear isometry. Let $\\Pi_a$ be the projection on $E$ which keeps exactly the basis vectors $e_a\\otimes f_j$. For every $X\\in\\mathcal L(H)$,\n$$\\operatorname{Tr}_E\\!\\left((I_K\\otimes\\Pi_a)VXV^\\dagger(I_K\\otimes\\Pi_a)\\right)=\\mathcal I_a(X).$$\nThe first record register stores the observed outcome $a$; the second index $j$ is hidden environment data.",
+        "deps": [
+          "def-qc-instrument-and-conditional-state",
+          "lem-qc-instrument-output-space-is-nonzero",
+          "thm-qc-kraus-choi-equivalence",
+          "def-qc-kraus-representation",
+          "thm-qc-instrument-kraus-normalization",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-qc-partial-trace",
+          "def-qc-projective-measurement",
+          "def-qc-dirac-notation-conversion",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; only finitely many outcome and Kraus indices occur.",
+        "proof_obligations": [
+          "Compute inner products via orthogonal record labels and the completeness identity."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018 author-hosted draft), §§2.2.2 and 2.3.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-instrument-induces-povm",
+        "kind": "theorem",
+        "title": "Every finite instrument induces a unique POVM",
+        "statement": "Let $(\\mathcal I_a)_{a\\in\\Omega}$ be a finite instrument from a nonzero finite-dimensional complex inner-product space $H$ to a finite-dimensional complex inner-product space $K$. There is a unique finite POVM $(E_a)_{a\\in\\Omega}$ on $H$ such that\n$$\\operatorname{tr}_K(\\mathcal I_a(X))=\\operatorname{tr}_H(XE_a)\\qquad(X\\in\\mathcal L(H),\\ a\\in\\Omega).$$\nConsequently, for every density operator $\\rho$ on $H$, the instrument probability $\\operatorname{tr}_K(\\mathcal I_a(\\rho))$ equals the POVM weight $\\operatorname{tr}_H(\\rho E_a)$.",
+        "deps": [
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-kraus-choi-equivalence",
+          "def-qc-kraus-representation",
+          "thm-qc-instrument-kraus-normalization",
+          "def-qc-finite-positive-effect-family",
+          "def-qc-povm-and-outcome-law",
+          "def-non-negative-and-positive-operator",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "prop-adjoint-algebra",
+          "def-trace-of-an-endomorphism",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "lem-qc-trace-pairing-nondegenerate"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; the finite family of Kraus lists is selected by finite induction.",
+        "proof_obligations": [
+          "Choose finite Kraus lists branch by branch.",
+          "Use the total trace-preservation condition to prove effect completeness.",
+          "Prove the induced POVM law and its uniqueness."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018 author-hosted draft), §§2.2.2 and 2.3.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qc-classical-control-and-measurement-circuit",
+        "kind": "definition",
+        "title": "Finite measurement branches and classical control",
+        "statement": "A measurement stage on a finite-dimensional input register is specified by a finite nonempty observed outcome set $\\Omega$ and an instrument $(\\mathcal I_a)_{a\\in\\Omega}$ as in [[def-qc-instrument-and-conditional-state]]. For an input density operator $\\rho$, its unnormalized branch output is $\\tau_a=\\mathcal I_a(\\rho)$ and its branch weight is $p_a=\\operatorname{tr}(\\tau_a)$. The positive weights sum to one by [[thm-qc-instrument-outcome-law-normalizes]]. The unique POVM induced by the instrument, supplied by [[thm-qc-instrument-induces-povm]], has effects $E_a$ satisfying $p_a=\\operatorname{tr}(\\rho E_a)$. A conditional output is assigned only when $p_a>0$, using the rule in [[def-qc-instrument-and-conditional-state]]; when $p_a=0$ the value is $\\bot$.\n\nA finite classical controller may retain the observed history $a$ and select a specified finite unitary suffix $S_a$ on the quantum data. Its branch map is $X\\mapsto S_a\\mathcal I_a(X)S_a^\\dagger$. The index $a$ is the observed outcome; any Kraus index used to represent $\\mathcal I_a$ is an unobserved environment label and is not stored as classical data.\n\nA **finite measurement history tree** for a circuit on the fixed register $D=\\mathcal Q_n$ is a finite rooted tree whose internal node $h$ carries a finite nonempty outcome set $\\Omega_h$ and an instrument $(\\mathcal I^h_a)_{a\\in\\Omega_h}$ from $D$ to $D$. The edge from $h$ to its child $ha$ carries a specified finite unitary $S_{h,a}:D\\to D$; its branch map is $X\\mapsto S_{h,a}\\mathcal I^h_a(X)S_{h,a}^\\dagger$. Leaves may carry a specified finite terminal POVM on $D$. The fixed data register is the wire register of [[def-qc-circuit-syntax-and-register-order]]. A history is the ordered list of observed edge labels from the root; a hidden Kraus index is never included in it. Since the tree is finite and each node has finitely many children, every history and every sum over histories below is finite.\n\nFor a coherent representation, order $\\Omega$ and use the computational basis $(e_a)_{a\\in\\Omega}$ of the finite label register $Q_{|\\Omega|}$. On the orthogonal decomposition $Q_{|\\Omega|}\\otimes K=\\bigoplus_{a\\in\\Omega}(\\operatorname{span}\\{e_a\\}\\otimes K)$, define the mathematical block operator by\n$$B\\!\\left(\\sum_{a\\in\\Omega} e_a\\otimes x_a\\right):=\\sum_{a\\in\\Omega}e_a\\otimes S_ax_a.$$\nIts control availability is part of the operation model. In the one-bit case, [[def-qc-controlled-unitary-access]] specifies the exact access meaning of $C(U)$; an ordinary black-box call to $U$ does not grant a controlled call. For larger outcome sets the displayed block gate is likewise an explicit operation, or must be constructed and charged by the chosen model. No gate-set implementation or efficiency bound is part of this definition. A finite history tree is interpreted by applying this definition at each node.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-instrument-outcome-law-normalizes",
+          "thm-qc-instrument-induces-povm",
+          "def-qc-controlled-unitary-access"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; outcome sets, gate families, and sums are finite.",
+        "proof_obligations": [
+          "Compute branch maps from QC04 instruments and keep observed and environmental indices separate."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qc-elementary-circuit-resources",
+        "kind": "definition",
+        "title": "Finite circuit resource accounting",
+        "statement": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call unless the model explicitly combines them. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; each resource count is a finite count of declared occurrences.",
+        "proof_obligations": [
+          "State the full finite gate/resource contract and verify layerization does not change gate count."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qc-measurement-branch-output-law",
+        "kind": "definition",
+        "title": "The outcome law and outputs of a measured circuit",
+        "statement": "For a finite instrument $(\\mathcal I_a)_{a\\in\\Omega}$ and input density operator $\\rho$, define the unnormalized branch output $\\tau_a:=\\mathcal I_a(\\rho)$ and probability $p_a:=\\operatorname{tr}(\\tau_a)$. The family $(p_a)_{a\\in\\Omega}$ is a probability distribution by [[thm-qc-instrument-outcome-law-normalizes]]. Its uniquely induced POVM $(E_a)$ satisfies $p_a=\\operatorname{tr}(\\rho E_a)$ by [[thm-qc-instrument-induces-povm]] and the outcome-law definition in [[def-qc-povm-and-outcome-law]].\n\nThe conditional branch output is $\\tau_a/p_a$ when $p_a>0$ and is $\\bot$ when $p_a=0$, exactly as specified by [[def-qc-instrument-and-conditional-state]]. No normalized state is assigned to a zero-probability branch. A Kraus representation $\\mathcal I_a(X)=\\sum_jM_{a,j}XM_{a,j}^\\dagger$ is only a representation of the observed branch map: $a$ is the outcome and $j$ is not an additional observed outcome.",
+        "deps": [
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-instrument-outcome-law-normalizes",
+          "thm-qc-instrument-induces-povm"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; the outcome set is finite.",
+        "proof_obligations": [
+          "Write branch traces explicitly and verify the sum over outcomes is the total channel."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-circuit-inverse-reversal",
+        "kind": "theorem",
+        "title": "Reversing a circuit implements its inverse",
+        "statement": "Let $C$ be a finite measurement-free unitary circuit. Assume that for every gate occurrence its adjoint is a legal gate occurrence on the same ordered wires and that the operation model explicitly grants each inverse call, as required by [[def-qc-inverse-unitary-access]]. Reverse the chronological layer order and, within each layer, reverse its gate list while replacing each gate by its adjoint. The resulting circuit $C^{-1}$ has\n$$U_{C^{-1}}=U_C^\\dagger=U_C^{-1}.$$\nIt has the same number of gate occurrences as $C$; inverse calls retain their separately declared access cost.",
+        "deps": [
+          "def-qc-circuit-denotational-semantics",
+          "lem-qc-local-gate-wire-embedding",
+          "def-qc-inverse-unitary-access",
+          "def-qc-elementary-circuit-resources",
+          "prop-adjoint-algebra"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; only finite products and adjoints of declared finite-dimensional unitaries are used.",
+        "proof_obligations": [
+          "Take the adjoint of the ordered layer product and verify inverse availability."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-deferred-measurement",
+        "kind": "theorem",
+        "title": "Finite instruments can be coherently deferred",
+        "statement": "Let $(\\mathcal I_a)_{a\\in\\Omega}$ be a finite instrument from a nonzero finite-dimensional complex inner-product space $H$ to a finite-dimensional complex inner-product space $K$, with finite nonempty observed outcome set $\\Omega$. After observing $a$, suppose the circuit applies a specified finite unitary suffix $S_a$ on $K$. For every finite-dimensional complex inner-product reference space $R$ and every input operator $X\\in\\mathcal L(H\\otimes R)$, the measured circuit's unnormalized branch on $K\\otimes R$ is\n$$\\mathcal J_a^{(R)}(X):=(S_a\\otimes I_R)(\\mathcal I_a^{(R)}(X))(S_a^\\dagger\\otimes I_R),$$\nwhere, after choosing an ordered orthonormal basis of $R$, $\\mathcal I_a^{(R)}$ denotes the finite ancillary block amplification on $\\mathcal L(H\\otimes R)$: if $X=[X_{kl}]$, then $\\mathcal I_a^{(R)}(X)=[\\mathcal I_a(X_{kl})]$. This is the block extension in the complete-positivity definition. The coherent construction retains the observed label register until terminal readout. Its outcome-$a$ branch, after tracing out the hidden Kraus and padding registers but retaining the label, is $\\mathcal J_a^{(R)}(X)\\otimes|e_a\\rangle\\langle e_a|$ on $K\\otimes R$ and the label register (up to the canonical factor permutation); discarding the label gives the same data-reference branch map. Thus it preserves the complete outcome law and all correlations with $R$. This is an exact denotational statement: any newly used dilation or block operation must be listed and charged by a gate or oracle model; no same-alphabet synthesis or cost bound is asserted.",
+        "deps": [
+          "lem-qc-coherent-record-isometry",
+          "lem-qc-instrument-output-space-is-nonzero",
+          "lem-qc-finite-isometry-unitary-extension",
+          "def-qc-classical-control-and-measurement-circuit",
+          "def-qc-measurement-branch-output-law",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-kraus-representation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "def-qc-completely-positive-map",
+          "def-qc-partial-trace",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "direct",
+        "axiom_use": "None; the construction uses finite outcome and Kraus families.",
+        "proof_obligations": [
+          "Extend the isometry to a finite unitary, use block control, and recover the same maps by orthogonal record readout/discard; tensor with arbitrary reference."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3: Foundations II: Measurement and Evolution",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-terminal-measurement-circuit-equivalence",
+        "kind": "theorem",
+        "title": "All measurements may be moved to terminal readout",
+        "statement": "Let a finite measurement history tree be as defined in [[def-qc-classical-control-and-measurement-circuit]], with a finite terminal POVM $(F_z^h)_{z\\in Z}$ for a common finite nonempty outcome set $Z$ at each leaf $h$. A **complete history** is the ordered list of observed labels along a root-to-leaf path. For every density operator at the root, the joint law of the complete history $h$ and the leaf's terminal outcome $z$ is unchanged when all node instruments are coherently deferred to terminal readout, with each recorded history controlling its declared later operations. More strongly, for every finite-dimensional reference $R$ and every operator $X$ on the root data and $R$, the unnormalized data-reference branch operator at each complete history $h$ is the same in the measured and coherently deferred constructions. Any history-controlled dilation or block operation used in that construction must be explicitly supplied and charged by the operation model.",
+        "deps": [
+          "thm-qc-deferred-measurement",
+          "def-qc-measurement-branch-output-law",
+          "def-qc-classical-control-and-measurement-circuit",
+          "def-qc-povm-and-outcome-law",
+          "thm-induction-principle"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "page": "circuit-syntax-denotational-semantics-and-measurement",
+        "proof_strategy": "induction",
+        "axiom_use": "None; the induction and every outcome tree are finite.",
+        "proof_obligations": [
+          "Induct over the finite measurement/feed-forward stages without merging labels."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2183,
+    "id": "circuit-syntax-denotational-semantics-and-measurement-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Circuit Syntax, Denotational Semantics, and Measurement — Examples",
+    "companion": "circuit-syntax-denotational-semantics-and-measurement",
+    "requires": [
+      "circuit-syntax-denotational-semantics-and-measurement"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-deferred-measurement-one-bit",
+        "kind": "example",
+        "title": "One-bit feed-forward and deferred measurement",
+        "statement": "Start two qubits in $|00\\rangle$, apply $H$ to the first, measure the first qubit in the computational basis, and apply $X$ to the second qubit if and only if the observed bit is $1$. The final joint computational-basis law is $\\Pr(00)=\\Pr(11)=1/2$, with the other two outcomes having probability $0$. Replacing the intermediate measurement and classical control by the explicitly granted block gate $C(X)$ and measuring both qubits at the end gives the same law.",
+        "deps": [
+          "thm-qc-deferred-measurement",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-controlled-unitary-access",
+          "def-qc-projective-measurement",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qc-projective-conditional-state",
+          "def-qc-pure-state-and-ray",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-qc-density-operator",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "page": "circuit-syntax-denotational-semantics-and-measurement-examples",
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Expand both record branches and verify their probabilities and conditional outputs."
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

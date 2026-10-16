@@ -1,0 +1,1 @@
+Root adopted the actual local precheck canonical phase proposal after the proof repair: old2.1 becomes1.3 and old3.1 becomes2.1. All proof-step words and tags otherwise unchanged. This is formatting only; original audited carrier remains archived separately. Final explicit proof-layout and policy local precheck/render follow.

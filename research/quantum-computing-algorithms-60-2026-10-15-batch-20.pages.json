@@ -1,0 +1,760 @@
+[
+  {
+    "order": 2204,
+    "id": "stabilizer-css-codes-syndromes-and-procedures",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Stabilizer and CSS Codes, Syndromes, and Procedures",
+    "companion": "stabilizer-css-codes-syndromes-and-procedures-examples",
+    "requires": [
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "classical-and-quantum-error-correcting-codes",
+      "controlled-gates-phase-and-entanglement",
+      "inner-product-spaces-and-orthogonality",
+      "knill-laflamme-recovery-and-subsystem-codes",
+      "linear-independence-bases-and-dimension",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "pauli-and-clifford-groups-binary-symplectic-tableaux",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "registers-tensor-products-and-partial-trace",
+      "stabilizer-circuits-and-gottesman-knill-simulation"
+    ],
+    "items": [
+      {
+        "id": "def-qc-css-code-from-nested-binary-codes",
+        "kind": "definition",
+        "title": "CSS code from nested binary codes",
+        "deps": [
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-qc-register-and-computational-basis",
+          "def-dimension",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$ and let $C_2\\subseteq C_1\\le\\mathbb F_2^n$ be binary linear\ncodes. Put $k=\\dim C_1-\\dim C_2$. The **CSS coset code** associated with this\nnested pair is the subspace of the ordered $n$-qubit register spanned by\n\n$$|x+C_2\\rangle:=|C_2|^{-1/2}\\sum_{c\\in C_2}|x+c\\rangle,\\qquad x\\in C_1.$$\n\nHere addition is coordinatewise in $\\mathbb F_2^n$, and $|y\\rangle$ is the\ncomputational-basis vector indexed by the bit string $y$. The vector depends\nonly on the coset $x+C_2$. A basis of $C_2$ extended to a basis of $C_1$\nchooses logical labels for the quotient $C_1/C_2$; the number of labels is\n$2^k$. No additional inclusion $C_2^\\perp\\subseteq C_1$ is part of this\nnested-code convention.\n\nFor a binary code $C$, $C^\\perp=\\{y:x\\cdot y=0\\text{ for every }x\\in C\\}$\nuses the standard bilinear dot product, as defined in\n[[def-qc-dual-of-a-finite-field-linear-code]].",
+        "proof_obligations": [
+          "State the standard binary bilinear dot product; prove coset representatives give the same vector.",
+          "Define the logical dimension k=dim(C₁)−dim(C₂) and show there are 2^k orthogonal coset states."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; finite basis extension and all coordinate choices are choice-free."
+      },
+      {
+        "id": "lem-qc-binary-dual-dimension",
+        "kind": "lemma",
+        "title": "Dimension of the binary dual code",
+        "statement": "For every binary linear code $C\\le\\mathbb F_2^n$ with $n\\ge1$,\n$\\dim C^\\perp=n-\\dim C$. This argument uses no form of the Axiom of Choice.",
+        "deps": [
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-dimension",
+          "thm-rank-nullity",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "thm-dimension-of-a-linear-subspace"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Identify the standard binary dot pairing with the coordinate duality map.",
+          "Show restriction to C* is onto by extending a finite basis, then apply rank-nullity to its kernel C⊥."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§37.1, printed pp.292–297; PDF pp.300–305"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§7.6, printed pp.19–20; PDF pp.25–26"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; extension of a finite basis is proved choice-free by the finite-dimensional subspace theorem."
+      },
+      {
+        "id": "def-qc-stabilizer-code-space",
+        "kind": "definition",
+        "title": "Stabilizer code space",
+        "deps": [
+          "def-qc-binary-pauli-label-and-quotient",
+          "def-qc-binary-symplectic-form",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-quantum-code-isometry-and-code-projector",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [
+          "thm-qc-stabilizer-projector-and-dimension"
+        ],
+        "dependency_level": 10,
+        "statement": "Let $n\\ge1$ and let $S$ be an abelian subgroup of the Hermitian elements of\nthe phase-aware Pauli group $\\mathcal P_n$ on the ordered $n$-qubit register.\nAssume $-I\\notin S$. The **stabilizer code space** is the common $+1$\neigenspace\n\n$$\\mathcal C(S):=\\{\\psi\\in(\\mathbb C^2)^{\\otimes n}:g\\psi=\\psi\\text{ for every }g\\in S\\}.$$\n\nIf $g_1,\\ldots,g_r$ are independent generators of $S$, the associated\nstabilizer rank is $r$; independence means no nonempty product of distinct\ngenerators is $I$. The code-space projector and its nonzero dimension are\nestablished by [[thm-qc-stabilizer-projector-and-dimension]].",
+        "proof_obligations": [
+          "Prove commutativity gives simultaneous eigenspaces and −I exclusion prevents the +1 code from being forced to zero.",
+          "Distinguish full Pauli phases from binary labels."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qc-stabilizer-encoder-by-symplectic-elimination",
+        "kind": "algorithm",
+        "title": "Stabilizer encoder by symplectic elimination",
+        "deps": [
+          "def-qc-binary-pauli-label-and-quotient",
+          "def-qc-binary-symplectic-form",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-controlled-z-and-swap",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-register-and-computational-basis",
+          "def-qc-stabilizer-code-space",
+          "lem-qc-cnot-pauli-action",
+          "lem-qc-hadamard-pauli-action",
+          "lem-qc-phase-gate-pauli-action",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-pauli-product-and-adjoint"
+        ],
+        "justified_by": [
+          "thm-qc-stabilizer-encoder-terminates-with-quadratic-gate-count"
+        ],
+        "dependency_level": 11,
+        "statement": "**Inputs.** An integer $n\\ge1$ and $r\\le n$ ordered rows\n$P(k_i,x_i,z_i)=i^{k_i}X^{x_i}Z^{z_i}$ representing independent,\npairwise-commuting signed Hermitian Pauli generators on the ordered\n$n$-qubit register.\n\n**Wire and factor indices.** Tableau coordinates and circuit wire labels are\n$q=0,\\ldots,n-1$. The one-based Pauli factor index corresponding to wire $q$\nis $j=q+1$; factor $j$ occupies tensor position $j-1$. Thus a one-wire gate\non circuit wire $q$ uses supplier factor index $q+1$, and a CNOT or SWAP on\ncircuit wires $q,s$ uses supplier indices $q+1,s+1$. The stored coordinates\n$(x_{i,q},z_{i,q})$ use the same zero-based order.\n\n**Tableau updates.** For a current row $P(k,x,z)$, all phase entries are\nupdated modulo $4$ and binary entries modulo $2$. Conjugation by $H_q$ sends\n$(k,x_q,z_q)$ to $(k+2x_qz_q,z_q,x_q)$; by $S_q$ it sends these entries to\n$(k+x_q,x_q,z_q+x_q)$; by $S_q^\\dagger$ it sends them to\n$(k-x_q,x_q,z_q+x_q)$. Conjugation by $X_q$ adds $2z_q$ to $k$ and leaves\nthe labels unchanged. Conjugation by $\\operatorname{SWAP}_{q,s}$ interchanges\n$x_q$ with $x_s$ and $z_q$ with $z_s$ and leaves $k$ unchanged. For\n$\\operatorname{CNOT}_{q\\to s}$, update $x_s\\leftarrow x_s+x_q$ and\n$z_q\\leftarrow z_q+z_s$ and leave $k$ unchanged; all unmentioned binary\ncoordinates are unchanged. Whenever a gate $U$ is appended to chronological\n$D$, replace every current row $R$ by $URU^\\dagger$. For a row product\n$P(k,x,z)P(k',x',z')$, use the exact update\n$(k+k'+2(z\\cdot x'),x+x',z+z')$.\n\n**Validity.** If any row is not Hermitian, the binary labels are dependent,\ntwo rows fail to commute, or the generated subgroup contains $-I$, return\nINVALID. The independent commuting case with $r=0$ is valid.\n\n**Elementary gate alphabet.** The output is a finite chronological list over\n$H,S,S^\\dagger,X,\\operatorname{CNOT}_{c\\to t},\\operatorname{SWAP}_{c,t}$.\nHere $H,S,X,\\operatorname{CNOT},\\operatorname{SWAP}$ have the exact matrices\nin the cited gate definitions; $S^\\dagger=\\operatorname{diag}(1,-i)$ is\nexplicitly admitted as one primitive gate of this algorithm. No inverse or\ncontrolled black-box access is assumed.\n\n**Procedure.** Keep the current rows phase-aware, an invertible binary\nrow-operation matrix $M\\in GL(r,\\mathbb F_2)$, and phase-aware input-combination\nrows $G_i$. Initially $M=I_r$, $G_i=g_i$ (the $i$th input row), and the\nchronological gate list $D$ is empty. The invariant is that current row $i$ is\n$D G_iD^\\dagger$ and\n$$G_i=\\prod_{a=0}^{r-1}g_a^{M_{ia}}=P(\\kappa_i,\\bar x_i,\\bar z_i),\\quad \\bar x_i=\\sum_{a=0}^{r-1}M_{ia}x_a,\\quad \\bar z_i=\\sum_{a=0}^{r-1}M_{ia}z_a.$$\nwhere sums in the binary labels are in $\\mathbb F_2^n$ and the product is in\nincreasing input-row order. The input generators commute and square to $I$,\nso this product is independent of order. Its phase exponent $\\kappa_i\\in\n\\mathbb Z/4\\mathbb Z$ is the signed row-operation phase data. On a gate\nconjugation update the current tableau row and its phase, leaving $G_i$ and\n$M$ unchanged. On a row multiplication $i\\leftarrow i+p$, update the current\nrow by the exact phase-aware product, set $M_i\\leftarrow M_i+M_p$ over\n$\\mathbb F_2$, and set $G_i\\leftarrow G_iG_p$ using the exact Pauli product\nrule (thereby updating $\\kappa_i$). A row interchange swaps the corresponding\nrows of the current tableau, $M$, and $G$.\n\nFor each pivot position $j=0,\\ldots,r-1$:\n\n1. Among rows $j,\\ldots,r-1$, take the first row that is not identity on the\n   unused wires, and let its row index be $s$. If $s\\ne j$, interchange the\n   complete current rows $s$ and $j$ and interchange the corresponding rows\n   of $M$ and $G$, including the phase entry of $G$. This row interchange is\n   not a circuit gate. Take the first unused wire $q$ of the pivot row $j$\n   with nonzero Pauli label. If $q\\ne j$, append the circuit gate\n   $\\operatorname{SWAP}_{j,q}$ to $D$ and conjugate every current row by it.\n2. On pivot wire $j$ and each later unused wire, normalize the pivot row's\n   local factor: apply $H$ to turn $X$ into $Z$; apply $S^\\dagger$ followed\n   by $H$ to turn $Y$ into $Z$; leave $Z$ and $I$ unchanged. Append each gate\n   and update every row, including its phase.\n3. For each later wire $q$ where the pivot row has a $Z$, append\n   $\\operatorname{CNOT}_{q\\to j}$ and update every row. The pivot becomes\n   either $+Z_j$ or $-Z_j$.\n4. If the pivot is $-Z_j$, append $X_j$ and update every row, making it\n   $+Z_j$. For each remaining row with a $Z_j$ factor, multiply that row by\n   the pivot row and update the binary row-operation matrix to clear $Z_j$.\n\nFor $r=0$, return the empty gate list, empty $M$ and $\\kappa$, and the\nunchanged logical register. On a valid input with $r>0$, return $D$, its\nreversed adjoint list $D^\\dagger$ as the encoder, and the signed\nrow-operation data $(M,\\kappa)$, with the associated $G_i$ defined by the\ninvariant above. The returned checks satisfy $D G_iD^\\dagger=+Z_i$ for\n$i=0,\\ldots,r-1$. The logical label basis is the ordered computational\nbasis on the remaining $n-r$ wires, prefixed by $|0^r\\rangle$.",
+        "proof_obligations": [
+          "Give a terminating row/column elimination algorithm with exact H/S/CNOT/SWAP updates and phase tracking.",
+          "For every branch, preserve commutation and row-space invariants; bound gate count and workspace."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qc-square-planar-surface-code",
+        "kind": "definition",
+        "title": "Square planar surface code",
+        "deps": [
+          "def-qc-css-code-from-nested-binary-codes",
+          "def-qc-generator-and-parity-check-matrices",
+          "def-qc-pauli-matrices",
+          "def-qc-register-and-computational-basis",
+          "def-qc-stabilizer-code-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "proof_strategy": "direct",
+        "statement": "Fix an integer $d\\ge2$. Take the square grid with vertices $(i,j)$ for\n$0\\le i,j\\le d$, unit horizontal and vertical edges, and $d^2$ square faces.\nLet $R$ consist of the left and right vertical boundary edges together with\ntheir vertices. The physical qubits are the edges not in $R$; there are\n$2d^2$ such edges. Order vertices and faces lexicographically by their\ncoordinates, and order physical edges lexicographically by their lower\nendpoint, with horizontal edges before vertical edges when endpoints tie.\n\nLet $Q_0$ be the binary vector space on vertices outside $R$, $Q_1$ the\nbinary vector space on physical edges, and $Q_2$ the binary vector space on\nfaces. Define $\\partial_1:Q_1\\to Q_0$ by sending each physical edge to the\nsum of its endpoints that are outside $R$. Define $\\partial_2:Q_2\\to Q_1$\nby sending each face to its boundary with any edge in $R$ deleted.\n\nThe X-check matrix is $H_X=\\partial_1$, with rows indexed by vertices\noutside $R$ and columns by physical edges. The Z-check matrix is\n$H_Z=\\partial_2^{\\mathsf T}$, with rows indexed by faces and columns by\nphysical edges. Thus X checks are the rows of $H_X$ and Z checks are the\nrows of $H_Z$. The maps satisfy $\\partial_1\\partial_2=0$. The rough\nboundaries are the left and right sides; the top and bottom are the\ncomplementary dual boundaries.",
+        "proof_obligations": [
+          "The relative incidence of each face boundary is zero because each nonrough vertex occurs twice; hence every X/Z check pair commutes.",
+          "Explicit check matrices, boundary identification, and chosen primal/dual strings are part of the definition. Chain/homology assertions are proved in the next theorem."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.18.1–7.18.4, printed pp.51–56; PDF pp.57–62"
+            },
+            {
+              "title": "https://www.preskill.caltech.edu/ph219/fault-tolerance-2011.pdf",
+              "url": "https://www.preskill.caltech.edu/ph219/fault-tolerance-2011.pdf",
+              "locator": "toric-code recovery, handwritten pp.1–3; all pages visually inspected"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, and incidence maps are finite."
+      },
+      {
+        "id": "def-qc-stabilizer-syndrome-and-logical-operators",
+        "kind": "definition",
+        "title": "Stabilizer syndromes and logical Pauli operators",
+        "deps": [
+          "def-qc-binary-pauli-label-and-quotient",
+          "def-qc-binary-symplectic-form",
+          "def-qc-stabilizer-code-space",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$ and let $S$ be a stabilizer subgroup generated by an ordered independent\nHermitian list $g_1,\\ldots,g_r$. For a phase-aware Pauli error $E$, its\n**syndrome** is the bit string $s(E)\\in\\mathbb F_2^r$ defined by\n\n$$E g_j=(-1)^{s_j(E)}g_jE,\\qquad s_j(E):=\\omega(\\lambda(E),\\lambda(g_j)).$$\n\nHere $\\lambda(P(k,x,z))=(x,z)$ is the binary Pauli label and\n$\\omega((x,z),(x',z'))=x\\cdot z'+z\\cdot x'$. The scalar center of\n$\\mathcal P_n$ is $Z_n=\\{i^kI:k\\in\\mathbb Z/4\\mathbb Z\\}$, and the\n**normalizer** is $N(S)=\\{P\\in\\mathcal P_n:Pg=gP\\text{ for every }g\\in S\\}$.\nThe **logical Pauli classes** form the quotient group\n\n$$N(S)/(Z_nS).$$\n\nA normalizer element is logically nontrivial exactly when it lies in\n$N(S)\\setminus Z_nS$. Multiplication by a scalar phase does not change a\nsyndrome or logical class.",
+        "proof_obligations": [
+          "Fix the sign-to-bit convention and prove the syndrome depends only on the Pauli coset modulo scalar phase.",
+          "Distinguish a stabilizer error, which is logically trivial, from a nontrivial normalizer element."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; definitions concern finite Pauli groups and binary labels."
+      },
+      {
+        "id": "thm-qc-stabilizer-encoder-terminates-with-quadratic-gate-count",
+        "kind": "theorem",
+        "title": "Termination and gate count of symplectic stabilizer elimination",
+        "deps": [
+          "alg-qc-stabilizer-encoder-by-symplectic-elimination",
+          "lem-qc-cnot-pauli-action",
+          "lem-qc-hadamard-pauli-action",
+          "lem-qc-phase-gate-pauli-action"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "proof_strategy": "direct",
+        "statement": "On every valid input of $r$ independent commuting signed Hermitian Pauli\ngenerators on $n$ wires, the phase-aware symplectic-elimination encoder\nterminates after $r$ pivots, uses at most $r(3n+1)$ elementary gates, and\nstores $O(rn+r^2+rn\\log(n+1))$ bits including its output gate list, excluding\nthe read-only input tableau and the implicit wire count.",
+        "proof_obligations": [
+          "Prove each pivot round leaves one new canonical +Z generator and reduces the remaining tableau to n−j unused wires.",
+          "Count one wire swap, at most 2n local normalization gates, at most n−1 CNOTs and one sign correction per pivot; bound workspace."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the loop is finite and each input row is a finite binary string."
+      },
+      {
+        "id": "thm-qc-stabilizer-projector-and-dimension",
+        "kind": "theorem",
+        "title": "Stabilizer projector and code dimension",
+        "deps": [
+          "def-qc-stabilizer-code-space",
+          "def-qc-stabilizer-subgroup",
+          "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "lem-qc-stabilizer-average-projector",
+          "thm-qc-stabilizer-projector-rank-and-code-dimension",
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$ and let $S$ be an abelian group of Hermitian $n$-qubit Pauli operators with\n$-I\\notin S$, generated by $r$ independent checks. Then\n\n$$P_S:=|S|^{-1}\\sum_{g\\in S}g$$\n\nis the orthogonal projector onto the stabilizer code space and has rank\n$2^{n-r}$. In particular, the code space is nonzero, including when $r=n$.",
+        "proof_obligations": [
+          "Identify the same subgroup/rank convention as QC16 and directly reuse its proved average-projector/rank theorem; do not duplicate the proof."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the group average and trace calculation use finite sums only."
+      },
+      {
+        "id": "thm-qc-css-encoding-dimension-and-commutation",
+        "kind": "theorem",
+        "title": "CSS encoding dimension and commutation",
+        "deps": [
+          "def-dimension",
+          "def-qc-binary-pauli-label-and-quotient",
+          "def-qc-binary-symplectic-form",
+          "def-qc-css-code-from-nested-binary-codes",
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-register-and-computational-basis",
+          "def-qc-stabilizer-code-space",
+          "lem-qc-binary-dual-dimension",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-stabilizer-projector-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "proof_strategy": "direct",
+        "statement": "Let $C_2\\subseteq C_1\\le\\mathbb F_2^n$, $n\\ge1$, and\n$k=\\dim C_1-\\dim C_2$. The coset vectors from\n[[def-qc-css-code-from-nested-binary-codes]] define an isometric encoding of\n$k$ logical qubits. For every $c\\in C_2$ and $h\\in C_1^\\perp$, $X^c$ and\n$Z^h$ commute, and each fixes every encoded coset vector. Their common\n$+1$ eigenspace is exactly this encoding. The conclusion requires only\n$C_2\\subseteq C_1$; it does not require\n$C_2^\\perp\\subseteq C_1$.\n\nMoreover, for every $x\\in C_1$, the Hadamard transform is\n\n$$H^{\\otimes n}|x+C_2\\rangle=2^{-k/2}\\sum_{y+C_1^\\perp\\in C_2^\\perp/C_1^\\perp}(-1)^{x\\cdot y}|y+C_1^\\perp\\rangle.$$\n\nThe phase is independent of the representatives $x+C_2$ and\n$y+C_1^\\perp$.",
+        "proof_obligations": [
+          "Prove orthogonality by disjoint cosets and normalization by |C₂|.",
+          "Prove commutation by c·h=0 and verify both generator families fix every coset state.",
+          "Use the Hadamard/Fourier identity for subspace superpositions to obtain the dual-basis CSS encoding."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all codes are finite-dimensional and all finite bases are obtained choice-free."
+      },
+      {
+        "id": "thm-qc-stabilizer-encoder-correctness",
+        "kind": "theorem",
+        "title": "Stabilizer encoder correctness",
+        "deps": [
+          "alg-qc-stabilizer-encoder-by-symplectic-elimination",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-stabilizer-encoder-terminates-with-quadratic-gate-count",
+          "thm-qc-stabilizer-projector-and-dimension",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-cnot-pauli-action",
+          "lem-qc-hadamard-pauli-action",
+          "lem-qc-phase-gate-pauli-action"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "proof_strategy": "direct",
+        "statement": "For every valid input of independent commuting signed Hermitian checks\n$g_0,\\ldots,g_{r-1}$ on $n$ wires, let the symplectic-elimination encoder\nreturn the forward gate list $D$, its adjoint list $D^\\dagger$, and signed\nrow-operation data $(M,\\kappa)$. Thus $M\\in GL(r,\\mathbb F_2)$ and, for each\n$i$, the exact input product\n$$G_i:=\\prod_{a=0}^{r-1}g_a^{M_{ia}}=P\\!\\left(\\kappa_i,\\sum_{a=0}^{r-1}M_{ia}x_a,\\sum_{a=0}^{r-1}M_{ia}z_a\\right)$$\nhas recorded phase $\\kappa_i\\in\\mathbb Z/4\\mathbb Z$ and satisfies\n$D G_iD^\\dagger=+Z_i$. Define the logical Hilbert space\n$\\mathcal H_L=(\\mathbb C^2)^{\\otimes(n-r)}$ and the encoding isometry\n$V:\\mathcal H_L\\to(\\mathbb C^2)^{\\otimes n}$ by\n$$V|x\\rangle:=D^\\dagger(|0^r\\rangle\\otimes|x\\rangle),\\qquad x\\in\\mathbb F_2^{n-r}.$$\nThe vectors $V|x\\rangle$ form an orthonormal basis of the stabilizer code\nspace, which has dimension $2^{n-r}$.",
+        "proof_obligations": [
+          "Prove correctness by reversing each Clifford row/column step and checking the stabilizer eigenvalue equations.",
+          "Prove the output basis is orthonormal and spans the rank-2^k code space."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof uses finite basis vectors and a finite gate list."
+      },
+      {
+        "id": "thm-qc-stabilizer-logical-pauli-quotient-dimension",
+        "kind": "theorem",
+        "title": "Dimension of the logical Pauli quotient",
+        "deps": [
+          "def-dimension",
+          "def-qc-binary-pauli-label-and-quotient",
+          "def-qc-binary-symplectic-form",
+          "def-qc-stabilizer-code-space",
+          "def-qc-stabilizer-subgroup",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-stabilizer-projector-and-dimension",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$ and let $S$ be an $n$-qubit stabilizer group generated by $r$ independent\ncommuting Hermitian Pauli checks with $-I\\notin S$. Then the logical Pauli\nquotient $N(S)/(Z_nS)$ is a binary vector space of dimension $2(n-r)$.\nConsequently, it is nontrivial exactly when the stabilizer code encodes at\nleast one qubit.",
+        "proof_obligations": [
+          "Identify the phase-aware Pauli quotient with F₂^{2n} and S with an r-dimensional isotropic subspace.",
+          "Prove the symplectic annihilator has dimension 2n−r and then quotient by the r-dimensional stabilizer label space."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; symplectic annihilators and quotient dimensions are finite-dimensional and basis extension is choice-free."
+      },
+      {
+        "id": "def-qc-stabilizer-distance",
+        "kind": "definition",
+        "title": "Stabilizer distance",
+        "deps": [
+          "def-qc-local-operator-support-and-weight",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "thm-qc-stabilizer-logical-pauli-quotient-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$ and let $S$ be a stabilizer code on $n$ qubits whose code space has dimension\n$2^k$. The stabilizer **distance** is\n\n$$d(S):=\\min\\{\\operatorname{wt}(E):E\\in N(S)\\setminus Z_nS\\}\\quad\\text{if }k>0.$$\n\nThis is a set difference: it excludes scalar-phase multiples of stabilizers.\nIf $k=0$, define $d(S)=+\\infty$, since there is no nontrivial logical Pauli\nclass.",
+        "proof_obligations": [
+          "Show the set is nonempty for a code with a nontrivial protected subsystem; state a convention for k=0."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the logical quotient is finite and its minimum exists by well-ordering."
+      },
+      {
+        "id": "thm-qc-css-syndrome-correction",
+        "kind": "theorem",
+        "title": "CSS syndrome correction",
+        "deps": [
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-classical-control-and-measurement-circuit",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-qc-generator-and-parity-check-matrices",
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "def-qc-local-operator-support-and-weight",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-projective-measurement",
+          "def-qc-quantum-code-isometry-and-code-projector",
+          "def-qc-register-and-computational-basis",
+          "def-qc-stabilizer-distance",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-binary-dual-dimension",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-qc-classical-distance-correction-and-erasure-radius",
+          "thm-qc-css-encoding-dimension-and-commutation",
+          "thm-qc-knill-laflamme-explicit-recovery",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qc-projective-conditional-state"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$, $C_2\\subseteq C_1\\le\\mathbb F_2^n$ be a nested CSS pair,\nand $t\\in\\mathbb Z_{\\ge0}$. For a binary code $C$, define the local correction\nradius $\\delta(C):=d(C)$ when $C\\ne\\{0\\}$ and $\\delta(\\{0\\}):=+\\infty$;\nthe classical distance keeps the convention $d(\\{0\\})=n+1$. Define\n\n$$d_X=\\min\\{\\operatorname{wt}(x):x\\in C_1\\setminus C_2\\},\\qquad d_Z=\\min\\{\\operatorname{wt}(z):z\\in C_2^\\perp\\setminus C_1^\\perp\\},$$\n\nwhere the minimum of an empty set is $+\\infty$. Put $d_{\\rm CSS}=\\min(d_X,d_Z)$.\nThe separate syndrome decoders for the $X$ and $Z$ components correct every\nPauli error supported on at most $t$ qubits when\n$2t<\\min(\\delta(C_1),\\delta(C_2^\\perp))$. Under the same inequality, every finite\nerror channel whose Kraus operators lie in the span of weight-at-most-$t$\nPauli operators satisfies the Knill–Laflamme condition and admits an exact\nrecovery. The quantum distance of this CSS stabilizer is $d_{\\rm CSS}$.",
+        "proof_obligations": [
+          "Derive each syndrome circuit’s ancilla output on a basis state and prove the syndrome is independent of the encoded logical label.",
+          "Prove the X and Z corrections preserve code superpositions, then handle products and degeneracy using KL."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all syndrome spaces and error sets are finite."
+      },
+      {
+        "id": "thm-qc-square-planar-surface-code-distance-and-path-count",
+        "kind": "theorem",
+        "title": "Square planar surface-code distance and path count",
+        "deps": [
+          "def-qc-generator-and-parity-check-matrices",
+          "def-qc-square-planar-surface-code",
+          "def-qc-stabilizer-distance",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "thm-qc-css-encoding-dimension-and-commutation",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_strategy": "direct",
+        "statement": "For the relative $d\\times d$ square patch of\n[[def-qc-square-planar-surface-code]], the code encodes one logical qubit and\nhas stabilizer distance $d$. Every nontrivial Z logical class contains a\nrough-to-rough path of length at least $d$, and a straight row attains $d$.\nEvery nontrivial X logical class contains a top-to-bottom dual path of length\nat least $d+1$. For each $\\ell\\ge1$, the number of self-avoiding\nrough-to-rough paths of length $\\ell$ is at most $(d+1)3^\\ell$.",
+        "proof_obligations": [
+          "Relative vertex incidence has rank (d−1)(d+1)=d²−1: any nonrough vertex subset with zero coboundary is empty by connectivity to a rough edge. Relative face boundary has rank d²: peeling the topmost face of a nonzero 2-chain detects an undeleted horizontal edge. Thus k=2d²−(d²−1)−d²=1.",
+          "A relative cycle decomposes into closed loops and rough-to-rough paths. Same-side paths/loops bound relative face chains; a left-to-right path is the unique nontrivial class and requires d horizontal steps. A straight horizontal row attains d. Duality by the explicit check matrix gives top-to-bottom paths crossing d+1 horizontal-edge rows; no smaller nontrivial dual class exists.",
+          "Count left start heights j=0,...,d and choose at most three next edges when immediate backtracking is excluded. Logical failures can be reduced to self-avoiding paths by deleting loops."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.18.1–7.18.5, printed pp.51–58; PDF pp.57–64"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof is finite binary linear algebra on an explicit grid."
+      },
+      {
+        "id": "thm-qc-stabilizer-distance-detection-and-correction",
+        "kind": "theorem",
+        "title": "Stabilizer distance detection and correction",
+        "deps": [
+          "def-qc-local-operator-support-and-weight",
+          "def-qc-pauli-matrices",
+          "def-qc-stabilizer-code-space",
+          "def-qc-stabilizer-distance",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-knill-laflamme-explicit-recovery",
+          "thm-qc-stabilizer-projector-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$ and let $S$ be a stabilizer code on $n$ qubits of distance $d(S)$. Every Pauli error $E$ of\nweight less than $d(S)$ either acts as a scalar on the code space (when\n$E\\in Z_nS$) or is detected by some stabilizer check. A finite error channel\nwhose Kraus operators lie in the span of Pauli operators of weight at most\n$t$, for $t\\in\\mathbb Z_{\\ge0}$, is correctable whenever $2t<d(S)$. In particular, all unknown Pauli\nerrors of weight at most $t$ are correctable.",
+        "proof_obligations": [
+          "If a Pauli anticommutes with a stabilizer, PEP=0. If it commutes and has weight below d, it belongs to Z(P_n)S and PEP is a scalar P.",
+          "For error pairs of weight ≤t, their product has weight ≤2t<d; apply the preceding dichotomy to each product and then KL. General local errors follow from expansion in the tensor-Pauli basis."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof uses finite Pauli expansions and the finite Knill–Laflamme recovery theorem."
+      },
+      {
+        "id": "ex-qc-steane-seven-qubit-css-code",
+        "kind": "example",
+        "title": "Steane seven-qubit CSS code",
+        "deps": [
+          "def-qc-classical-linear-code-over-finite-field",
+          "def-qc-generator-and-parity-check-matrices",
+          "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "def-qc-pauli-matrices",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "lem-qc-binary-dual-dimension",
+          "thm-qc-css-encoding-dimension-and-commutation",
+          "thm-qc-css-syndrome-correction",
+          "thm-qc-stabilizer-projector-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "proof_strategy": "direct",
+        "statement": "Let the columns of the binary parity-check matrix be the seven nonzero\nvectors $110,101,011,111,100,010,001$:\n\n$$H=\\begin{pmatrix}1&1&0&1&1&0&0\\\\1&0&1&1&0&1&0\\\\0&1&1&1&0&0&1\\end{pmatrix}.$$\n\nPut $C_1=\\ker H$ and $C_2=\\operatorname{row}(H)$. A generator matrix for\n$C_1$ is $G^{\\mathsf T}$, where the row-basis matrix $G$ is\n\n$$G=\\begin{pmatrix}1&0&0&0&1&1&0\\\\0&1&0&0&1&0&1\\\\0&0&1&0&0&1&1\\\\0&0&0&1&1&1&1\\end{pmatrix}.$$\n\nThe encoded basis is\n\n$$|0_L\\rangle=8^{-1/2}\\sum_{c\\in C_2}|c\\rangle,\\qquad |1_L\\rangle=8^{-1/2}\\sum_{c\\in C_2}|1110000+c\\rangle.$$\n\nThe six stabilizer checks are the three $X$ operators with supports given by\nthe rows of $H$, followed by the three $Z$ operators with the same supports.\nThe logical operators may be taken as\n$X_L=X^{1110000}$ and $Z_L=Z^{1110000}$. For site $j$, write $h_j$ for\ncolumn $j$ of $H$. With the stated generator order, the three single-site\nsyndromes are\n\n$$s(X_j)=(000,h_j),\\qquad s(Z_j)=(h_j,000),\\qquad s(Y_j)=(h_j,h_j).$$",
+        "proof_obligations": [
+          "Compute commutation, rank, distance, code dimension and correction of each X/Y/Z single-site error from the displayed matrices."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf",
+              "locator": "§§7.6–7.10, printed pp.19–34; PDF pp.25–40"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2205,
+    "id": "stabilizer-css-codes-syndromes-and-procedures-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Stabilizer and CSS Codes, Syndromes, and Procedures — Examples",
+    "companion": "stabilizer-css-codes-syndromes-and-procedures",
+    "requires": [
+      "stabilizer-css-codes-syndromes-and-procedures"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-css-nested-code-parameters",
+        "kind": "example",
+        "title": "CSS encoding from nested binary codes",
+        "deps": [
+          "def-qc-dual-of-a-finite-field-linear-code",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "thm-qc-css-encoding-dimension-and-commutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_strategy": "direct",
+        "statement": "Let $n=4$,\n$C_2=\\operatorname{span}_{\\mathbb F_2}\\{1111\\}$, and\n$C_1=\\operatorname{span}_{\\mathbb F_2}\\{1111,1100\\}$. A generator matrix\nfor $C_1$ has columns $1111,1100$, and a parity-check matrix has rows\n$1100,0011$. The CSS code has $k=\\dim C_1-\\dim C_2=1$ and encoded states\n\n$$|0_L\\rangle=2^{-1/2}(|0000\\rangle+|1111\\rangle),\\qquad |1_L\\rangle=2^{-1/2}(|1100\\rangle+|0011\\rangle).$$\n\nThe X checks are generated by $X^{1111}$ and the Z checks by\n$Z^{1100},Z^{0011}$. Logical operators can be chosen as\n$X_L=X^{1100}$ and $Z_L=Z^{1010}$. This example has\n$C_2^\\perp\\not\\subseteq C_1$.",
+        "proof_obligations": [
+          "Verify the binary dot products, orthonormal coset states, and generator ranks."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes, QIC 710 F26",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§§37.1–37.3, printed pp.292–303; PDF pp.300–311"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

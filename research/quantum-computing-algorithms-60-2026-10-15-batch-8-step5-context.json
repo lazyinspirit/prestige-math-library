@@ -1,0 +1,505 @@
+{
+  "group": "o",
+  "batches": [
+    "8"
+  ],
+  "pages_read": [
+    "controlled-gates-phase-and-entanglement",
+    "controlled-gates-phase-and-entanglement-examples"
+  ],
+  "items_read": [
+    "thm-qc-unit-vector-projector-is-density",
+    "def-qc-pure-state-entanglement",
+    "thm-qc-standalone-global-phase-invariance",
+    "def-qc-controlled-unitary-access",
+    "def-qc-relative-phase",
+    "def-qc-inverse-unitary-access",
+    "def-qc-controlled-phase-rotation",
+    "thm-qc-controlled-global-phase-is-relative-phase",
+    "def-qc-cnot-and-control-target-order",
+    "def-qc-multicontrol-activation",
+    "def-qc-controlled-z-and-swap",
+    "thm-qc-cnot-creates-bell-entanglement",
+    "def-qc-reflection",
+    "thm-qc-reflection-unitary-involution",
+    "thm-qc-rank-one-reflection-phase-and-control-sign",
+    "ex-qc-controlled-global-phase-witness"
+  ],
+  "conventions": [
+    {
+      "convention": "The root inner product is linear first; |x><y| sends z to <z,y>root x.",
+      "fixed_by": "thm-qc-unit-vector-projector-is-density",
+      "matters_for": [
+        "thm-qc-standalone-global-phase-invariance",
+        "def-qc-relative-phase",
+        "thm-qc-controlled-global-phase-is-relative-phase",
+        "thm-qc-rank-one-reflection-phase-and-control-sign",
+        "ex-qc-controlled-global-phase-witness"
+      ]
+    },
+    {
+      "convention": "Controlled operators use control-first order: C(U)=diag(I_H,U). Controlled access and its cost must be explicitly granted.",
+      "fixed_by": "def-qc-controlled-unitary-access",
+      "matters_for": [
+        "def-qc-controlled-phase-rotation",
+        "thm-qc-controlled-global-phase-is-relative-phase",
+        "def-qc-cnot-and-control-target-order",
+        "def-qc-multicontrol-activation",
+        "thm-qc-reflection-unitary-involution",
+        "ex-qc-controlled-global-phase-witness"
+      ]
+    },
+    {
+      "convention": "Inverse availability and cost are separate from forward and controlled access. A chronological list is inverted by reversing it and taking adjoints; the empty list denotes identity.",
+      "fixed_by": "def-qc-inverse-unitary-access",
+      "matters_for": [
+        "def-qc-reflection",
+        "thm-qc-rank-one-reflection-phase-and-control-sign"
+      ]
+    },
+    {
+      "convention": "Relative phase is the unit-modulus part of β/α for an ordered orthonormal pair, and is undefined if either coordinate vanishes.",
+      "fixed_by": "def-qc-relative-phase",
+      "matters_for": [
+        "thm-qc-controlled-global-phase-is-relative-phase",
+        "ex-qc-controlled-global-phase-witness"
+      ]
+    },
+    {
+      "convention": "CP(θ)=diag(1,1,1,exp(iθ)) in basis 00,01,10,11. Pθ=exp(iθ/2)Rz(θ), so controlling Rz alone omits a control phase.",
+      "fixed_by": "def-qc-controlled-phase-rotation",
+      "matters_for": [
+        "def-qc-controlled-z-and-swap"
+      ]
+    },
+    {
+      "convention": "CNOT uses the first wire as control and second as target: (a,t) maps to (a,t XOR a).",
+      "fixed_by": "def-qc-cnot-and-control-target-order",
+      "matters_for": [
+        "thm-qc-cnot-creates-bell-entanglement"
+      ]
+    },
+    {
+      "convention": "Multi-control activation uses m≥1 disjoint control wires and activates exactly on the specified string s. Negative controls are conjugated by X on the zero positions of s.",
+      "fixed_by": "def-qc-multicontrol-activation",
+      "matters_for": [
+        "def-qc-multicontrol-activation"
+      ]
+    },
+    {
+      "convention": "Entanglement is failure to be a product ray across a specified ordered tensor cut with nonzero factors; Schmidt rank is coefficient-matrix rank.",
+      "fixed_by": "def-qc-pure-state-entanglement",
+      "matters_for": [
+        "thm-qc-cnot-creates-bell-entanglement"
+      ]
+    },
+    {
+      "convention": "RΠ=2Π−I is positive on the projection range; SΠ=I−2Π=−RΠ. Their controlled forms differ by control Z. A conjugated reflection includes preparation, reflection, and inverse-preparation costs.",
+      "fixed_by": "def-qc-reflection",
+      "matters_for": [
+        "thm-qc-reflection-unitary-involution",
+        "thm-qc-rank-one-reflection-phase-and-control-sign"
+      ]
+    },
+    {
+      "convention": "The controlled-global-phase witness requires a nonzero finite-dimensional complex target and separately granted controlled access to both U and exp(iθ)U; witness preparation is not assumed free.",
+      "fixed_by": "thm-qc-controlled-global-phase-is-relative-phase",
+      "matters_for": [
+        "ex-qc-controlled-global-phase-witness"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qc-controlled-unitary-access",
+      "statement": "For a control qubit C and finite-dimensional complex target H with unitary U, define C(U)=diag(I_H,U) on C⊗H. Controlled access explicitly grants this block operation; ordinary black-box access does not silently grant it or assign its cost.",
+      "used_by": [
+        "def-qc-inverse-unitary-access",
+        "def-qc-controlled-phase-rotation",
+        "thm-qc-controlled-global-phase-is-relative-phase",
+        "def-qc-cnot-and-control-target-order",
+        "def-qc-multicontrol-activation",
+        "def-qc-reflection",
+        "thm-qc-reflection-unitary-involution"
+      ]
+    },
+    {
+      "id": "def-qc-reflection",
+      "statement": "For an orthogonal projection Π on a finite-dimensional complex inner-product space, RΠ=2Π−I and SΠ=I−2Π=−RΠ. Direct and controlled reflection access require explicit declarations; implementing a prepared-state reflection as UR0U† includes all three calls.",
+      "used_by": [
+        "thm-qc-reflection-unitary-involution",
+        "thm-qc-rank-one-reflection-phase-and-control-sign"
+      ]
+    },
+    {
+      "id": "thm-qc-reflection-unitary-involution",
+      "statement": "For an orthogonal projection Π on a finite-dimensional complex-inner-product space, RΠ and SΠ are self-adjoint unitary involutions. They have opposite signs on range and kernel, and C(SΠ)=Z_C C(RΠ), where Z_C=diag(I_H,−I_H).",
+      "used_by": [
+        "thm-qc-rank-one-reflection-phase-and-control-sign"
+      ]
+    },
+    {
+      "id": "thm-qc-unit-vector-projector-is-density",
+      "statement": "For a unit vector u in a nonzero finite-dimensional complex inner-product space with the root pairing linear first, P_u=|u><u| is self-adjoint, idempotent, has one-dimensional range, is non-negative, and has trace one. In particular it is a density operator.",
+      "used_by": [
+        "thm-qc-standalone-global-phase-invariance",
+        "thm-qc-controlled-global-phase-is-relative-phase",
+        "ex-qc-controlled-global-phase-witness"
+      ]
+    },
+    {
+      "id": "thm-qc-controlled-global-phase-is-relative-phase",
+      "statement": "For unitary U on a nonzero finite-dimensional complex target and real θ, assume separate controlled access to U and exp(iθ)U. Choose a unit eigenvector φ with eigenvalue μ and prepare control (|0>+conjugate(μ)|1>)/√2. The plus-control outcome has probabilities 1 and cos²(θ/2), respectively. The outcome laws differ exactly when θ is not in 2πZ; otherwise the controlled maps coincide. Access and preparation are not asserted free.",
+      "used_by": [
+        "ex-qc-controlled-global-phase-witness"
+      ]
+    },
+    {
+      "id": "def-qc-cnot-and-control-target-order",
+      "statement": "In basis 00,01,10,11, CNOT with first wire control and second wire target sends |a,t> to |a,t XOR a>, equivalently C(X)=diag(I,X).",
+      "used_by": [
+        "thm-qc-cnot-creates-bell-entanglement"
+      ]
+    },
+    {
+      "id": "def-qc-pure-state-entanglement",
+      "statement": "Across nonzero finite-dimensional complex factors H_A⊗H_B, a pure state is entangled when its ray contains no nonzero decomposable vector. Schmidt rank is coefficient-matrix rank, independent of ordered orthonormal product basis, and equals the number of positive terms in every Schmidt decomposition. Entanglement is equivalent to Schmidt rank exceeding one.",
+      "used_by": [
+        "thm-qc-cnot-creates-bell-entanglement"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Linear-first pairing, conjugate symmetry, positivity, and scalar calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Unit-vector normalization and norm-square identities.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Self-adjointness and conjugated rank-one projector identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+      "used_for": "Identifying adjoints from pairing identities.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Nonnegativity of rank-one projectors and witness measurement effects.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Trace-one verification and conversion of witness traces to quadratic forms.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Finite basis choices, including the empty basis in dimension zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-bessel-inequality-and-finite-parseval-identity",
+      "used_for": "Rank-one trace and witness-probability computations.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Unitarity of controlled blocks, phase gates, and block permutations.",
+      "opened": true
+    },
+    {
+      "id": "prop-adjoint-algebra",
+      "used_for": "Inverse chronology and adjoints of reflection expressions.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-isometry-characterisations",
+      "used_for": "Adjoint equals inverse, unitary reflection verification, and normality of a unitary.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Choosing a unit eigenvector for the controlled-phase witness.",
+      "opened": true
+    },
+    {
+      "id": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+      "used_for": "Projection identities, range/kernel decomposition, and rank-one reflection well-definedness.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Schmidt decomposition and the positive singular-family interface.",
+      "opened": true
+    },
+    {
+      "id": "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+      "used_for": "Basis invariance of Schmidt rank and rank computations through coordinate maps.",
+      "opened": true
+    },
+    {
+      "id": "cor-rank-equals-number-of-nonzero-singular-values",
+      "used_for": "Identifying Schmidt rank with the number of positive Schmidt coefficients.",
+      "opened": true
+    },
+    {
+      "id": "def-row-space-column-space-nullspace-and-matrix-ranks",
+      "used_for": "Coefficient-matrix rank and rank-one product-vector criterion.",
+      "opened": true
+    },
+    {
+      "id": "thm-row-rank-equals-column-rank",
+      "used_for": "Using column-space rank in the Schmidt-rank argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Unit-modulus phases, Euler form, and exp(iπ)=−1.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Half-angle phase factorization and Pθ versus Rz(θ).",
+      "opened": true
+    },
+    {
+      "id": "thm-kernel-and-fibres-of-complex-exponential",
+      "used_for": "The exact θ∈2πZ coincidence condition.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "controlled-gates-phase-and-entanglement",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Dirac pairing reversal and outer-product coordinates preserve the root linear-first convention."
+    },
+    {
+      "from": "controlled-gates-phase-and-entanglement",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Uses finite POVMs on nonzero spaces and trace-defined probabilities; witness effects are verified locally."
+    },
+    {
+      "from": "controlled-gates-phase-and-entanglement",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "Ray, density, and Schmidt interfaces are used with their stated domains and coefficient conjugation."
+    },
+    {
+      "from": "controlled-gates-phase-and-entanglement",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "Exact X, Z, H, and Rz signs and scalar phases are retained."
+    },
+    {
+      "from": "controlled-gates-phase-and-entanglement",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered product bases, tensor maps, and product pairings agree; finite target bases are supplied where needed."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "CNOT order, inverse chronology, explicit controlled oracle access, and the phase witness are stated faithfully."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Uses exact CP action, ordered CNOT, reversed adjoint lists, and the outer-control phase caveat."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Separates supplied controlled powers from repeated C(U) calls and charges inverse powers separately."
+    },
+    {
+      "from": "grover-search-and-invariant-plane-rotations",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Reflection signs and prepared-reflection costs agree; unit-vector density use is qualified."
+    },
+    {
+      "from": "amplitude-amplification",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Uses S-sign reflections, retains controlled scalar phases, and explicitly supplies enlarged reflections and inverses."
+    },
+    {
+      "from": "amplitude-estimation-and-counting",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Retains the signed iterate and separately supplied controlled/inverse operations."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Uses plus-on-range reflections and distinguishes standalone phase invariance from controlled eigenphase behavior."
+    },
+    {
+      "from": "discrete-quantum-walks-and-szegedy-theory",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Range reflections use preparation–reflection–inverse preparation; controlled constituents and costs are explicit."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Stored-data access uses identity/operation controlled blocks and reverses the full circuit for inverses."
+    },
+    {
+      "from": "continuous-time-quantum-walks",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Hamiltonian access keeps controlled and inverse capabilities and their costs explicit."
+    },
+    {
+      "from": "hamiltonian-simulation-and-product-formulas",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Term-list and simulation contracts grant neither controlled nor inverse access implicitly."
+    },
+    {
+      "from": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Explicitly identifies its R0=I−2Π0 as the supplier's S sign and charges the control-Z sign correction."
+    },
+    {
+      "from": "block-encodings",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Forward, inverse, controlled, controlled-inverse, and SELECT operations remain separate supplied capabilities."
+    },
+    {
+      "from": "quantum-signal-processing",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Relative phase is undefined at zero coordinates; the displayed Z phase multiplies β/α by exp(−2iφ)."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Projector phases use plus-on-range reflections and the exact control-Z correction for the opposite sign."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Signal-sequence reflection signs agree, with inverse/control/reflection access separately costed."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Capped amplification treats inverse calls as separately supplied and chargeable."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Finite-cap amplification explicitly supplies S-sign reflections, inverse preparation, and controlled operations."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Spectral access separately supplies and charges preparation, controlled powers, and inverse operations."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Coherent sampling grants forward, inverse, and controlled calls separately; unit-vector density use is faithful."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Capped-amplification and sparse-oracle interfaces retain explicit inverse/control access and projector-reflection unitarity."
+    },
+    {
+      "from": "period-hidden-shift-and-number-theoretic-algorithms",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Reversible arithmetic uses the exact control-preserving CNOT XOR action."
+    },
+    {
+      "from": "circuit-syntax-denotational-semantics-and-measurement",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Coherent blocks require explicit availability; circuit inversion reverses chronology and takes separately available adjoints."
+    },
+    {
+      "from": "reversible-computation-ancillas-and-coherent-oracles",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "CNOT-based copying and uncomputation preserve wire order; phase-query control is not inferred from ordinary access."
+    },
+    {
+      "from": "continuous-gate-universality-and-exact-synthesis",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Exact CNOT and controlled blocks retain scalar phases and the declared control-target order."
+    },
+    {
+      "from": "approximate-universality-and-solovay-kitaev",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled-phase approximation uses exact Pθ and CPθ; projective phase guarantees are not moved through controls."
+    },
+    {
+      "from": "clifford-t-exact-and-approximate-synthesis",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled T is diag(I2,T), and synthesis distinguishes exact equality from scalar-phase equivalence."
+    },
+    {
+      "from": "pauli-and-clifford-groups-binary-symplectic-tableaux",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "CNOT Pauli action uses the first control wire and exact controlled-X block."
+    },
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Bell preparation and decoding use control-first CNOT and the reverse gate order."
+    },
+    {
+      "from": "stabilizer-css-codes-syndromes-and-procedures",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Syndrome extraction cites CNOT with data as control and ancilla as XOR target."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Embedded CZ gates use CP(π)=diag(1,1,1,−1); CNOT routing preserves ordered-wire conventions."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "The ideal gate-family model explicitly grants controlled Ry and uses control-first blocks with separately stated costs."
+    }
+  ]
+}

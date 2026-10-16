@@ -1,0 +1,460 @@
+FILE lem-logarithmic-potential-distributional-laplacian
+
+STATEMENT Assume the Axiom of Countable Choice. Let $\mu$ be a finite positive Borel
+measure on $\mathbb C$ with compact support $S=\operatorname{supp}\mu$, and let
+$p_\mu(z)=\int_{\mathbb C}\log|z-w|\,d\mu(w)\in[-\infty,\infty)$ and
+$U^\mu=-p_\mu$ be as in [[def-logarithmic-potential-and-energy]]. Then $p_\mu$
+is locally integrable on $\mathbb C$, subharmonic on the domain $\mathbb C$,
+harmonic on $\mathbb C\setminus S$, and
+
+$$\Delta p_\mu=2\pi\mu,\qquad\text{equivalently}\qquad \Delta U^\mu=-2\pi\mu,$$
+
+in the distributional sense, that is,
+$\frac{1}{2\pi}\int_{\mathbb C}p_\mu\,\Delta\varphi\,dA=\int_{\mathbb C}\varphi\,d\mu$
+for every $\varphi\in C_c^\infty(\mathbb C)$; in the normalization of
+[[def-riesz-measure-subharmonic-function]] this reads $\mu_{p_\mu}=\mu$.
+
+The zero measure is included and is settled separately: then $S=\varnothing$
+and $p_0=0$ by the zero clause of [[def-logarithmic-potential-and-energy]], the
+constant $0$ is smooth, subharmonic and harmonic on $\mathbb C=\mathbb C\setminus S$,
+$\Delta 0=0=2\pi\cdot0$ distributionally and $\mu_{p_0}=0$. The proof below
+therefore assumes $S\ne\varnothing$; for a nonzero finite positive Borel measure
+this holds because $S=\operatorname{supp}\mu$ carries $\mu$, so a measure with
+empty support is zero ([[def-support-of-a-borel-measure]]).
+
+The Axiom of Countable Choice is used through the published fundamental-solution
+theorem [F6] and through the countable constructions in [F4]; the pointwise,
+Fubini and Fatou steps are choice-free.
+
+LINE 124 **Proof technique:** direct.
+
+1.1 By [F11] the support $S\ne\varnothing$ is compact. Fix $R>0$ and put $S_0:=\max_{w\in S}|w|<\infty$. For $z\in B(0,R)$ one has $\log|z-w|\le\log(R+S_0)$, so $p_\mu^+(z)\le M\log^+(R+S_0)<\infty$, where $M=\mu(\mathbb C)$. Also $p_\mu^-(z)\le\int\log^+(1/|z-w|)\,d\mu(w)$. Tonelli and the radial computation $\int_{|u|<1}\log(1/|u|)\,dA(u)=2\pi\int_0^1r\log(1/r)\,dr=\pi/2$ give $\int_{B(0,R)}p_\mu^-(z)\,dA(z)\le M\int_{|u|<1}\log(1/|u|)\,dA(u)=\pi M/2<\infty$. Thus $p_\mu^-<\infty$ outside an area-null subset of $B(0,R)$ and $p_\mu\in(-\infty,\infty)$ almost everywhere; in particular $p_\mu$ is not identically $-\infty$ on the connected domain $\mathbb C$. [F1, F7, F11, given, algebra]
+
+1.2 Let $z_n\to z$ and choose $C$ with $\log|z_n-w|\le C$ for all $w\in S$ and all $n$; the functions $h_n(w):=C-\log|z_n-w|$ are nonnegative and measurable, so [F9] gives $\liminf_n\int h_n\,d\mu\ge\int\liminf_nh_n\,d\mu$, that is, $\limsup_np_\mu(z_n)\le\int\limsup_n\log|z_n-w|\,d\mu(w)=p_\mu(z)$, because $\log|z_n-w|\to\log|z-w|$ for $w\ne z$ and $\to-\infty$ for $w=z$. Hence $p_\mu$ is upper semicontinuous. [F1, F9, algebra]
+
+LINE 130 1.3 For every $w\in\mathbb C$ the function $z\mapsto\log|z-w|$ is subharmonic by [F2] applied to the holomorphic function $z\mapsto z-w$; by [F5] it therefore satisfies the circle mean inequality $\log|a-w|\le\frac1{2\pi}\int_0^{2\pi}\log|a+re^{it}-w|\,dt$ for all $a\in\mathbb C$ and $r>0$. [F2, F5, given]
+
+2.1 Fix $a\in\mathbb C$, $r>0$ and put $G(t,w):=\log|a+re^{it}-w|$; since $G^+\le\log(|a|+r+S_0+1)$ on $S$, the extended integral $\int_0^{2\pi}\int_SG\,d\mu\,dt$ and its reversed iterated integral both equal $\int G^+-\int G^-$ by two applications of [F7], the difference being well defined because $\int\int G^+<\infty$. Integrating the inequality of step 1.3 over $\mu$ and using this identity gives $p_\mu(a)\le\frac1{2\pi}\int_0^{2\pi}\int_SG\,d\mu\,dt=\frac1{2\pi}\int_0^{2\pi}p_\mu(a+re^{it})\,dt$. [step 1.3, F1, F7, algebra]
+
+3.1 By step 1.2 $p_\mu$ is upper semicontinuous, by step 1.1 it is not identically $-\infty$ on $\mathbb C$, and by step 2.1 it satisfies the circle mean inequality at every closed disc in $\mathbb C$; each disc lies in some $B(0,R)$ and the inequality of step 2.1 is exactly the one required by [F5], so $p_\mu$ is subharmonic on $\mathbb C$, and [F4] makes it locally integrable. [step 1.1, step 1.2, step 2.1, F4, F5]
+
+FILE lem-measurable-density-chart-integrals-agree-on-overlaps
+
+STATEMENT Assume countable choice $\mathrm{AC}_\omega$. For a density $r$ as in [[def-borel-measurable-nonnegative-density-on-a-manifold]], charts $x:U\to x(U)$ and $y:V\to y(V)$, and every Borel $E\subseteq U\cap V$,
+$$\int_{x(E)}r_x\,d\lambda_n=\int_{y(E)}r_y\,d\lambda_n\quad\text{in }[0,\infty].$$
+
+LINE 34 ## Facts & Assumptions
+
+**Given:** Assume $\mathrm{AC}_\omega$. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Two supplied charts and Borel E; substitution only on their interiors.
+
+[A1] Countable choice is [[def-countable-choice]]. It is required by the Borel substitution and boundary-face nullity suppliers below.
+
+LINE 56 1.1 For $n\ge1$ put $W=x(U\cap V\cap\operatorname{Int}M)$ and $Z=y(U\cap V\cap\operatorname{Int}M)$. These are open in $\mathbb R^n$. Boundary invariance makes $T=y\circ x^{-1}:W\to Z$ a smooth diffeomorphism. The images of $E\cap\operatorname{Int}M$ are Borel: charts are homeomorphisms and the trace sigma-algebra agrees with relative Borel sets. [A1, F3, F4, F5, given]
+
+2.1 On $Z$ take $h=\mathbf1_{y(E\cap\operatorname{Int}M)}r_y$, with the zero-times-infinity convention. It is nonnegative Borel. For $u\in W$, $h(Tu)|\det DT(u)|=\mathbf1_{x(E\cap\operatorname{Int}M)}(u)r_x(u)$. Applying the Borel substitution formula to these exact domains and this integrand equates the two interior integrals. [A1, F1, F2, step 1.1]
+
+3.1 The remaining coordinate pieces of $E$ lie in the face $u_n=0$, or are empty for an interior chart. Their integrals vanish by nullity, without boundedness of $r_x$ or $r_y$. Adding them back proves the formula for $n\ge1$. [A1, F6, F7, step 2.1]
+
+FILE lem-measurable-fields-of-nonempty-compact-sets-have-measurable-dense-selections
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(X,\mathcal A,\mu)$ be a standard Borel space with a sigma-finite measure ([[def-standard-borel-space]], [[def-measure-space]], [[def-finite-sigma-finite-and-semifinite-measures]]). Let $(K,d)$ be a nonempty compact metric space ([[def-compact-space]], [[def-topological-space]], [[def-metric-space]], [[def-metric-topology]]) with a fixed dense sequence $(k_m)_{m\in\mathbb N}$, and give $K$ its Borel sigma-algebra ([[def-borel-sigma-algebra]]). Suppose $g:X\times K\to[0,\infty)$ has measurable sections $x\mapsto g(x,k)$ for each fixed $k$, continuous sections $k\mapsto g(x,k)$ for each fixed $x$, and nonempty zero sets $C_x:=\{k\in K:g(x,k)=0\}$ for every $x$. Then: (1) there is a sequence of measurable maps $s_j:X\to K$ such that $s_j(x)\in C_x$ for all $x,j$ and $(s_j(x))_{j\in\mathbb N}$ is dense in $C_x$ for every $x$; (2) for every $k\in K$, the function $x\mapsto d(k,C_x):=\inf_{c\in C_x}d(k,c)$ is measurable; and (3) for every open $U\subseteq K$, the hit set $\{x:C_x\cap U\ne\varnothing\}$ is measurable.
+
+LINE 67 
+[F4] Measurable maps compose with Borel maps; pointwise sums, products, absolute values, maxima and minima of real measurable functions are measurable; and real-valued measurability follows from measurability of all strict sublevel sets ([[def-measurable-function-between-measurable-spaces]], [[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]], [[thm-threshold-characterisations-of-real-and-extended-real-measurability]]).
+
+[F5] AC is the explicit hypothesis in the Statement ([[def-axiom-of-choice]]). The proof uses no choice: $(k_m)$ is given, recursive indices are least natural numbers, and every limit selector is unique. The sigma-finite measure is not used.
+
+FILE lem-measurable-gram-schmidt-and-constant-field-trivializations
+
+STATEMENT Assume the Axiom of Choice. Let $(X,\mathcal B,\mu)$ be a sigma-finite standard-Borel measure space and let $(H_x,e_n(x))_{x\in X}$ be a measurable complex Hilbert field with countable fundamental family. Then: (1) there are measurable sections $f_n$ such that for every $x$ the nonzero $f_n(x)$ form a complete orthonormal system in $H_x$, and $x\mapsto\langle\xi(x),f_n(x)\rangle$ is Borel for every measurable section $\xi$; (2) for each $p\in\{1,2,\ldots\}\cup\{\infty\}$, the dimension stratum $X_p:=\{x:\dim H_x=p\}$ is Borel, and for every fixed separable Hilbert space $K_p$ of dimension $p$ there are unitaries $U_x:H_x\to K_p$ on $X_p$ such that $\xi$ is a measurable section on $X_p$ if and only if $x\mapsto U_x\xi(x)$ is a Borel map; explicitly, $U_x\xi$ has coordinates $\langle\xi(x),f_n(x)\rangle$ after deleting zero frame vectors; (3) weakly measurable operator fields have Borel transported matrix coefficients on each $X_p$, and uniformly bounded transported fields are Borel maps into their weak-operator-topology balls; (4) for every countable family of measurable sections $\xi_k$, the pointwise closed spans $S_x:=\overline{\operatorname{span}}\{\xi_k(x):k\in\mathbb N\}$ form a measurable closed Hilbert subfield, and its direct integral is the closed linear span in $\int_X^\oplus H_x\,d\mu(x)$ of all square-integrable localizations $f\mathbf1_E\xi_k$, where $E=D_j\cap\{x:\|\xi_k(x)\|\le r\}$, $(D_j)$ is any countable finite-measure cover of $X$, $r\in\mathbb R$ with $r\ge1$, and $f$ is any bounded Borel scalar function supported in $E$. The zero-dimensional stratum is Borel as the complement of the positive and infinite-dimensional strata.
+
+LINE 99 
+[F7] Measurable sets form a sigma-algebra, Borel maps are tested by inverse images, continuous maps have Borel preimages, arithmetic and pointwise limits preserve measurability, and the complex conjugate and modulus are continuous ([[def-measurable-space]], [[def-sigma-algebra]], [[def-measurable-function-between-measurable-spaces]], [[def-borel-sigma-algebra]], [[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]], [[thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]], [[thm-continuous-preimages-of-borel-sets-are-borel]], [[def-complex-metric-convergence-and-continuity]], [[def-complex-conjugate-real-imaginary-part-and-modulus]], [[lem-complex-conjugation-and-modulus-laws]]).
+
+[F8] Weak measurability of an operator field is equivalent to Borel pairings against all measurable sections; WOT on bounded operators is initial for scalar functionals, and Hilbert-space Riesz representation writes those functionals as inner products ([[def-measurable-and-decomposable-operator-fields]], [[def-strong-and-weak-operator-topologies]], [[thm-riesz-representation-for-hilbert-space]], [[def-space-of-bounded-linear-operators]], [[def-operator-norm]]).
+
+FILE lem-monomial-integrals-over-disc-ball-and-polydisc
+
+STATEMENT Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $m\ge1$, and let $\lambda_{2m}$ be Lebesgue measure under $\mathbb C^m\cong\mathbb R^{2m}$. For every $\alpha\in\mathbb N^m$ and every integer $s\ge0$,
+
+$$\int_{\mathbb B^m}|z^\alpha|^2(1-|z|^2)^s\,d\lambda_{2m}(z)=\frac{\pi^m\alpha!\,s!}{(m+s+|\alpha|)!}.$$
+
+In particular,
+
+$$\int_{\mathbb B^m}|z^\alpha|^2\,d\lambda_{2m}(z)=\frac{\pi^m\alpha!}{(m+|\alpha|)!},\qquad \lambda_{2m}(\mathbb B^m)=\frac{\pi^m}{m!}.$$
+
+For the unit polydisc and the one-dimensional disc,
+
+$$\int_{\mathbb D^m}|z^\alpha|^2\,d\lambda_{2m}(z)=\frac{\pi^m}{\prod_{j<m}(\alpha_j+1)},\qquad \lambda_{2m}(\mathbb D^m)=\pi^m,$$
+
+and for every integer $k\ge0$,
+
+$$\int_{\mathbb D}|z|^{2k}\,d\lambda_2(z)=\frac{\pi}{k+1}.$$
+
+LINE 80 
+[F7] In real coordinates the displayed integrands are nonnegative polynomials times indicators of open balls or polydiscs. Finite sums and products of coordinate polynomials are continuous by the $C^k$ algebra theorem; the preimage criterion makes continuous maps Borel measurable, and products of measurable functions remain measurable ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]], [[def-borel-sigma-algebra]], [[def-measurable-function-between-measurable-spaces]], [[thm-continuous-preimages-of-borel-sets-are-borel]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]], [[def-balls-and-polydiscs-in-complex-euclidean-space]]).
+
+[F8] A nonnegative real has a unique nonnegative square root ([[thm-nth-roots-exist]]).
+
+FILE lem-nevanlinna-blaschke-factorization
+
+STATEMENT Let $f\in N(\mathbb D)$ with $f\not\equiv0$, let $(a_n)_{n\ge1}$ be its zero
+sequence repeated with multiplicity and let $B$ be the associated Blaschke
+product. Then $(a_n)$ is a Blaschke sequence, so $B$ is a Blaschke product in
+the sense of [[def-blaschke-product]], the quotient $g:=f/B$ extends
+holomorphically to $\mathbb D$ (removable singularities at the $a_n$), $g$ has
+no zeros in $\mathbb D$, $|f(z)|\le|g(z)|$ for every $z\in\mathbb D$, and
+$g\in N(\mathbb D)$.
+
+LINE 41 ## Facts & Assumptions
+
+**Given:** A function $f\in N(\mathbb D)$, $f\not\equiv0$, a harmonic majorant $h_0\ge0$ of $\log^+|f|$, the zero sequence $(a_n)$ with multiplicity, and the constants $N(r):=\#\{n:|a_n|<r\}$ and $S:=\sum_n(1-|a_n|)$.
+
+[L1] Membership $f\in N(\mathbb D)$ means that $\log^+|f|$ has a harmonic majorant, and the equivalent sup-mean form holds; conversely a holomorphic $F$ with $\sup_{0<r<1}\int_{\mathbb T}\log^+|F(r\zeta)|\,dm(\zeta)<+\infty$ lies in $N(\mathbb D)$ ([[def-nevanlinna-class-on-the-disc]], [[lem-nevanlinna-sup-mean-criterion]]).
+
+LINE 43 **Given:** A function $f\in N(\mathbb D)$, $f\not\equiv0$, a harmonic majorant $h_0\ge0$ of $\log^+|f|$, the zero sequence $(a_n)$ with multiplicity, and the constants $N(r):=\#\{n:|a_n|<r\}$ and $S:=\sum_n(1-|a_n|)$.
+
+[L1] Membership $f\in N(\mathbb D)$ means that $\log^+|f|$ has a harmonic majorant, and the equivalent sup-mean form holds; conversely a holomorphic $F$ with $\sup_{0<r<1}\int_{\mathbb T}\log^+|F(r\zeta)|\,dm(\zeta)<+\infty$ lies in $N(\mathbb D)$ ([[def-nevanlinna-class-on-the-disc]], [[lem-nevanlinna-sup-mean-criterion]]).
+
+[L2] If $F\not\equiv0$ is holomorphic on $\mathbb D$ and $\liminf_{r\uparrow1}\int_{\mathbb T}\log|F(r\zeta)|\,dm(\zeta)<+\infty$, then the zero sequence of $F$ satisfies $\sum_n(1-|c_n|)<+\infty$ ([[thm-hardy-zero-set-blaschke-condition]]).
+
+LINE 51 [L4] If $F$ is holomorphic on the punctured disc $0<|z-a|<\rho$ and bounded there, then $F$ extends holomorphically across $a$; a holomorphic function has a zero of finite order at an isolated zero, and $F/B$ is holomorphic off the zero set of $B$ ([[thm-removable-singularity-characterizations]], [[thm-algebra-of-complex-derivatives]], [[def-blaschke-product]]).
+
+[L5] Mean value of the logarithm of a linear factor: for every $c\in\mathbb C$, $$\int_{\mathbb T}\log|\zeta-c|\,dm(\zeta)=\log^+|c|.$$ For $|c|<1$ this is $\int_{\mathbb T}\log|1-\overline c\zeta|\,dm(\zeta)$, the mean of the harmonic function $\log|1-\overline cw|$ over the unit circle, which equals its value $\log1=0$ at the centre; for $|c|>1$ it is $\log|c|+\int_{\mathbb T}\log|1-\zeta/c|\,dm(\zeta)=\log|c|$ by the same mean value property. For $|c|=1$, apply the boundary-zero limiting form of Jensen to $1-\overline c w$, whose value at zero is one; its boundary logarithm is $\log|\zeta-c|$. Here the harmonic functions are real parts of holomorphic functions on a neighbourhood of $\overline{\mathbb D}$, and the torus integral agrees with the circle average ([[thm-jensen-formula-on-a-disc]], [[cor-holomorphic-mean-value-property]], [[thm-mean-value-property-for-plane-harmonic-functions]], [[def-mean-value-property-for-plane-functions]], [[def-the-one-dimensional-torus-and-normalized-haar-integral]]).
+
+[L6] If $0\le g_1\le g_2\le\cdots$ are measurable with $g_n\uparrow g$ pointwise, then $\int g_n\,dm\uparrow\int g\,dm$; moreover for a sequence of nonnegative measurable functions Fatou's inequality $\int\liminf_n g_n\,dm\le\liminf_n\int g_n\,dm$ holds ([[thm-monotone-convergence-for-the-integral]], [[thm-fatou-lemma]]).
+
+LINE 55 [L6] If $0\le g_1\le g_2\le\cdots$ are measurable with $g_n\uparrow g$ pointwise, then $\int g_n\,dm\uparrow\int g\,dm$; moreover for a sequence of nonnegative measurable functions Fatou's inequality $\int\liminf_n g_n\,dm\le\liminf_n\int g_n\,dm$ holds ([[thm-monotone-convergence-for-the-integral]], [[thm-fatou-lemma]]).
+
+[L7] Elementary estimates: $\log(1/x)\le2(1-x)$ for $1/2\le x\le1$, and $\log(1/r)\le2(1-r)$ for $1/2\le r\le1$; $\log^+|g|\le\log^+|f|+\log(1/|B|)$ where $B\ne0$, when $g=f/B$ and $|B|\le1$. [algebra]
+
+
+
+LINE 63 **Proof technique:** direct.
+
+1.1 The zero sequence satisfies the Blaschke condition. For every $0<r<1$, monotonicity of the integral and $\log|f|\le\log^+|f|\le h_0$ give $\int_{\mathbb T}\log|f(r\zeta)|\,dm(\zeta)\le\int_{\mathbb T}h_0(r\zeta)\,dm(\zeta)=h_0(0)<+\infty$ by the mean value property; hence the liminf hypothesis of [L2] holds and $\sum_n(1-|a_n|)<+\infty$, so $(a_n)$ is a Blaschke sequence and $B$ is a well-defined Blaschke product with $|B|\le1$. [given, L1, L2, L3, L5]
+
+1.2 The logarithm of one factor. Let $a\in\mathbb D$ and $0<r<1$ with $r\ne|a|$. Since $|b_a(r\zeta)|=|a-r\zeta|/|1-\overline ar\zeta|$ and $\int_{\mathbb T}\log|1-\overline ar\zeta|\,dm(\zeta)=0$ by the mean value property of the zero-free harmonic function $\log|1-\overline arw|$ on a neighbourhood of $\overline{\mathbb D}$, [L5] gives $$\int_{\mathbb T}\log\frac1{|b_a(r\zeta)|}\,dm(\zeta)=\log\frac1r-\int_{\mathbb T}\log|\zeta-\tfrac ar|\,dm(\zeta)=\log\frac1r-\log^+\frac{|a|}{r}=\begin{cases}\log\frac1r,&|a|<r,\\[2pt]\log\frac1{|a|},&|a|>r.\end{cases}$$ [given, L5, algebra]
+
+LINE 75 4.1 Exceptional radii. Let $r\in[1/2,1)$ be arbitrary and choose a sequence $r_k\downarrow r$ with $r<r_k<1$ and $r_k\notin\{|a_n|\}$ for all $k$ (the exceptional set is countable and has no accumulation point below $1$). The functions $\zeta\mapsto-\log|B(r_k\zeta)|$ are nonnegative and converge pointwise $m$-almost everywhere to $-\log|B(r\zeta)|$: for $\zeta$ outside the finite set where $B(r\zeta)=0$, continuity of $B$ gives $B(r_k\zeta)\to B(r\zeta)\ne0$. Fatou's inequality [L6] and step 3.1 therefore give $$\int_{\mathbb T}\log\frac1{|B(r\zeta)|}\,dm(\zeta)\le\liminf_k\int_{\mathbb T}\log\frac1{|B(r_k\zeta)|}\,dm(\zeta)\le4S .$$ [step 2.2, step 3.1, L6, algebra]
+
+5.1 The quotient lies in $N(\mathbb D)$. Since $g=f/B$ and $|B|\le1$, [L7] gives $\log^+|g|\le\log^+|f|+\log(1/|B|)$. For $1/2\le r<1$, steps 2.2, 3.1 and 4.1 and the majorant bound of step 1.1 give $$\int_{\mathbb T}\log^+|g(r\zeta)|\,dm(\zeta)\le h_0(0)+4S;$$ for $0\le r\le1/2$ the holomorphic function $g$ is continuous on the compact disc $|z|\le1/2$, so $\int_{\mathbb T}\log^+|g(r\zeta)|\,dm(\zeta)\le\log^+\bigl(\sup_{|z|\le1/2}|g(z)|\bigr)<+\infty$. Hence $\sup_{0<r<1}\int_{\mathbb T}\log^+|g(r\zeta)|\,dm(\zeta)<+\infty$, and the sup-mean criterion [L1] shows that $\log^+|g|$ has a harmonic majorant, that is, $g\in N(\mathbb D)$. [step 2.1, step 4.1, L1, L7, algebra]
+
+6.1 Assembly. Step 1.1 produces the Blaschke sequence and the product $B$; step 2.1 produces the holomorphic zero-free extension $g=f/B$ with $|f|\le|g|$; and steps 1.2–3.1 verify the sup-mean criterion for $g$, giving $g\in N(\mathbb D)$. [step 1.1, step 2.1, step 5.1] ∎
+
+FILE lem-nevanlinna-sup-mean-criterion
+
+STATEMENT Let $F:\mathbb D\to\mathbb C$ be holomorphic and put $u:=\log^+|F|$. Then $u$
+has a harmonic majorant on $\mathbb D$ if and only if
+$$\sup_{0<r<1}\int_{\mathbb T}\log^+|F(r\zeta)|\,dm(\zeta)<+\infty.$$
+The forward implication is immediate from the mean value property of a harmonic
+majorant; the converse is the Poisson-modification construction below.
+
+LINE 4 id: lem-nevanlinna-sup-mean-criterion
+kind: lemma
+title: "A harmonic majorant of log^+|F| exists exactly when the radial log^+ means are bounded"
+status: published
+origin: pipeline
+
+LINE 28     - title: "J. B. Garnett, Bounded Analytic Functions, revised first edition, Chapter II §5, definition of $N$ and (5.1), with Theorem 5.1 and the remark after its proof"
+      url: "https://dokumen.pub/bounded-analytic-functions-0387336214-9780387336213.html"
+      locator: "printed pp. 66-67: $f\\in N$ iff $\\log^+|f|$ has a harmonic majorant, $N$ is characterized by boundedness of the radial $\\log^+$ means (5.1), and a subharmonic $v$ is majorized by a Poisson integral iff $v^+=\\max(v,0)$ has a harmonic majorant."
+    - title: "R. K. Srivastava, Lecture Notes on Hardy Spaces (MA650, IIT Guwahati), §6.3, the paragraph before Theorem 6.21 and Theorem 6.21"
+      url: "https://fac.iitg.ac.in/rksri/MA650%20Advanced%20Hardy%20Spaces%20Notes.pdf"
+
+LINE 31     - title: "R. K. Srivastava, Lecture Notes on Hardy Spaces (MA650, IIT Guwahati), §6.3, the paragraph before Theorem 6.21 and Theorem 6.21"
+      url: "https://fac.iitg.ac.in/rksri/MA650%20Advanced%20Hardy%20Spaces%20Notes.pdf"
+      locator: "printed pp. 67-69: the original definition of $N$ by $\\sup_{0\\le r<1}\\int_{\\mathbb T}\\log^+|f(r\\xi)|d\\xi<\\infty$ and its equivalence with the quotient description."
+---
+
+
+LINE 36 ## Statement
+
+Let $F:\mathbb D\to\mathbb C$ be holomorphic and put $u:=\log^+|F|$. Then $u$
+has a harmonic majorant on $\mathbb D$ if and only if
+$$\sup_{0<r<1}\int_{\mathbb T}\log^+|F(r\zeta)|\,dm(\zeta)<+\infty.$$
+
+LINE 38 Let $F:\mathbb D\to\mathbb C$ be holomorphic and put $u:=\log^+|F|$. Then $u$
+has a harmonic majorant on $\mathbb D$ if and only if
+$$\sup_{0<r<1}\int_{\mathbb T}\log^+|F(r\zeta)|\,dm(\zeta)<+\infty.$$
+The forward implication is immediate from the mean value property of a harmonic
+majorant; the converse is the Poisson-modification construction below.
+
+LINE 44 ## Facts & Assumptions
+
+**Given:** A holomorphic function $F$ on the unit disc $\mathbb D$, the function $u=\log^+|F|=\max(\log|F|,0)$ with $\log|F(z)|=-\infty$ at zeros of $F$, the number $C:=\sup_{0<r<1}\int_{\mathbb T}u(r\zeta)\,dm(\zeta)$ where it occurs, and the radii $r_n:=1-1/(n+1)\uparrow1$, $n\ge1$ of the converse construction.
+
+[L1] If $F\not\equiv0$, then $\log|F|$ is subharmonic on $\mathbb D$, and a finite maximum of subharmonic functions is subharmonic; subharmonic functions are upper semicontinuous by definition. Hence $u=\max(\log|F|,0)$ is subharmonic and upper semicontinuous; for $F\equiv0$ the same holds because $u=0$. In both cases $u\ge0$ everywhere ([[thm-log-modulus-of-a-holomorphic-function-is-subharmonic]], [[lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity]], [[def-plane-subharmonic-function]]).
+
+LINE 67 1.1 Forward implication. Suppose $h$ is a harmonic majorant of $u$ on $\mathbb D$, i.e. $h$ is harmonic and $h\ge u$. Fix $0<r<1$; $h$ is harmonic on a neighbourhood of $\overline{D(0,r)}$, so integrating $u(r\zeta)\le h(r\zeta)$ over $\mathbb T$ and applying the mean-value property in torus form gives $$\int_{\mathbb T}u(r\zeta)\,dm(\zeta)\le\int_{\mathbb T}h(r\zeta)\,dm(\zeta)=h(0)<+\infty.$$ Taking the supremum over $r$ gives the stated bound, so the forward implication holds. [given, L4, algebra]
+
+1.2 If $F\equiv0$, then $u=0$, its radial means are zero and the zero harmonic function is a majorant, so both conditions hold. Assume henceforth $F\not\equiv0$. The function $u=\log^+|F|$ is subharmonic and nonnegative by [L1]. It is also continuous: $F$ is continuous and $x\mapsto\log^+x$, with value $0$ at $x=0$, is continuous on $[0,\infty)$. [given, L1]
+
+2.1 The modifications and their values at the origin. Since $u$ is continuous by step 1.2, in [L2] choose the specific boundary approximants $\phi_n=u|_{\partial D(0,r)}+1/n$. Their extensions are $h_n=P_r[u]+1/n$, by uniqueness and linearity of the Dirichlet solution. Thus $H_r=P_{D(0,r)}u=P_r[u]$, continuous on the closed radius-$r$ disc, harmonic inside, with boundary value $u$ and $H_r\ge u$ by [L3]. Its mean value at the origin is $H_r(0)=\int_{\mathbb T}u(r\zeta)\,dm(\zeta)$ by [L4]. [step 1.2, L2, L3, L4, algebra]
+
+FILE lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data
+
+STATEMENT Assume Countable Choice and let $n\ge2$. Suppose the $L^\infty(\mathbb R^n)$
+class $f$ has a finite-valued measurable representative $f_0$ with compact
+support $K$. Then the Newtonian-potential integral for $f_0$ is absolutely
+finite at every $x\in\mathbb R^n$, and $Nf_0$ is locally bounded. If $g$ is
+any finite-valued measurable representative with $g=f_0$ almost everywhere,
+then its integral is also absolutely finite at every $x$ and equals $Nf_0(x)$
+pointwise.
+
+LINE 77 [F16] Products, sums, differences and absolute values of measurable real-valued functions are measurable. ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F17] A real measurable function is integrable exactly when its absolute value has finite integral, and its integral is the difference of the integrals of its positive and negative parts. ([[def-integrable-real-and-complex-functions-and-their-integrals]]).
+
+[F18] $B(c,r)=\{y:\|y-c\|<r\}$ for $r>0$. ([[def-metric-ball]]).
+
+LINE 103 2.1 Choose the finite pole value $0$ in [F3]. Since $T_x^{-1}=T_x$, [F21] shows that preimages under $T_x$ of Lebesgue measurable sets are Lebesgue measurable; hence $y\mapsto\Phi(x-y)$ is measurable. The set $x-K$ is Borel by step 1.2, so [F20] and [F16] make $h_x(z):=\mathbf 1_{x-K}(z)|\Phi(z)|$ nonnegative Lebesgue measurable. Applying [F7] to $h_x$ and $T_x$, with $|\det DT_x|=1$, gives $$\int_{x-K}|\Phi(z)|\,dz=\int_{\mathbb R^n}h_x(z)\,dz=\int_{\mathbb R^n}h_x(T_x(y))\,dy=\int_K|\Phi(x-y)|\,dy,$$ because $x-y\in x-K$ exactly when $y\in K$. By [F13], [F11] and step 1.2, $$\int_K|\Phi(x-y)|\,dy\le\int_{B(0,R)}|\Phi(z)|\,dz<\infty,$$ where finiteness follows from [F5]–[F6]. This holds uniformly for $x\in C$. [A1, F3, F5, F6, F7, F11, F13, F16, F20, F21, step 1.2, algebra]
+
+3.1 Since $\widehat f$ vanishes off $K$ and $|\widehat f|\le M$, pointwise $|\Phi(x-y)\widehat f(y)|\le M\mathbf 1_K(y)|\Phi(x-y)|$. The translated kernel and $\widehat f$ are measurable by step 2.1 and [F1, F16], so $u_x$ is measurable. Monotonicity [F11] and homogeneity [F23], together with step 2.1, show $$\int_{\mathbb R^n}|\Phi(x-y)\widehat f(y)|\,dy\le M\int_K|\Phi(x-y)|\,dy\le M\int_{B(0,R)}|\Phi(z)|\,dz<\infty$$ for every $x\in C$. By [F17], $u_x\in L^1$ and $\int u_x=\int u_x^+-\int u_x^-$ with both terms finite and nonnegative, so $|N\widehat f(x)|\le\int|u_x|$. The bound is uniform on $C$. Taking $C=B(x,1)$ for each $x$ proves absolute finiteness everywhere and local boundedness. [F1, F4, F11, F16, F17, F23, step 2.1, algebra]
+
+4.1 Let $g$ be any finite-valued measurable representative with $g=f_0$ almost everywhere. By [F22] choose a measurable null set $N_g$ outside which $g=f_0$, and put $E':=E\cup N_g$. For fixed $x$, the integrands $u_g(y):=\Phi(x-y)g(y)$ and $u_{\widehat f}(y):=\Phi(x-y)\widehat f(y)$ agree off $E'$, so $d:=u_g-u_{\widehat f}$ vanishes there. By [F13], $\int|d|=\int_{E'}|d|=0$ using [F12]. Hence $d\in L^1$; step 3.1 gives $u_{\widehat f}\in L^1$, and [F14] gives $u_g=u_{\widehat f}+d\in L^1$ with $\int u_g=\int u_{\widehat f}$. The measurability established in step 2.1 and [F16] justify the products and difference. Thus every such representative has the same pointwise potential value and absolute finiteness. [F4, F12, F13, F14, F16, F17, F22, step 2.1, step 3.1, algebra]
+
+LINE 75 
+[F16] Products, sums, differences and absolute values of measurable real-valued functions are measurable. ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F17] A real measurable function is integrable exactly when its absolute value has finite integral, and its integral is the difference of the integrals of its positive and negative parts. ([[def-integrable-real-and-complex-functions-and-their-integrals]]).
+
+FILE lem-nondegenerate-czero-representations-have-regular-pvms
+
+STATEMENT Assume AC. Let $X$ be LCH and $T:C_0(X)\to\mathcal B(\mathcal H)$ a
+nondegenerate star representation. Then a unique regular PVM $P$ on $X$ with
+$P(X)=I$ satisfies $T(f)=\int_X f\,dP$ for every $f\in C_0(X)$. The zero
+Hilbert space has the zero PVM.
+
+LINE 44 **Given:** AC, an LCH space $X$, a complex Hilbert space $\mathcal H$, and a nondegenerate star representation $T:C_0(X)\to\mathcal B(\mathcal H)$.
+
+[F1] The one-point compactification $X^+=X\cup\{\infty\}$ is compact Hausdorff, $X$ is an open subspace carrying its own topology, and $\infty$ is the point at infinity ([[thm-one-point-compactification-properties]], [[def-one-point-compactification]]).
+
+[F2] For a nonempty compact Hausdorff $K$ and a nonzero $\mathcal H$, every unital star homomorphism $\pi:C(K)\to\mathcal B(\mathcal H)$ is $\pi(f)=\int f\,dE$ for a unique regular PVM $E$ on $K$ ([[lem-continuous-functional-calculus-produces-a-regular-pvm]]).
+
+LINE 48 [F2] For a nonempty compact Hausdorff $K$ and a nonzero $\mathcal H$, every unital star homomorphism $\pi:C(K)\to\mathcal B(\mathcal H)$ is $\pi(f)=\int f\,dE$ for a unique regular PVM $E$ on $K$ ([[lem-continuous-functional-calculus-produces-a-regular-pvm]]).
+
+[F3] For a PVM $E$ on a measurable space, the bounded Borel integral $\Phi_E$ is linear, multiplicative, conjugation preserving and unital; and if $E$ is a PVM on $X^+$ with scalar measures $E_x$, then $E_x$ is finite ([[thm-bounded-borel-pvm-integral]], [[thm-pvm-integral-is-a-star-homomorphism]]).
+
+[F4] A star representation is complex-linear with $T(\overline f)=T(f)^*$ and $T(fg)=T(f)T(g)$; nondegeneracy means the closed linear span of $T(C_0(X))\mathcal H$ equals $\mathcal H$ (the convention of [[lem-continuous-functional-calculus-produces-a-regular-pvm]]).
+
+LINE 60 1.1 If $\mathcal H=\{0\}$, let $P$ be the zero PVM, $P(B)=0$ for every Borel $B$; then $P(X)=I=0$ and $\int f\,dP=0=T(f)$ for every $f$, and it is the only PVM on $\mathcal H=0$. So assume $\mathcal H\ne\{0\}$ from now on. [F3]
+
+2.1 Extend $T$ to a unital star homomorphism $T^+:C(X^+)\to\mathcal B(\mathcal H)$ by $T^+(f)=T(f-f(\infty)\mathbf 1)+f(\infty)I$, where $f-f(\infty)\mathbf 1$ is regarded as an element of $C_0(X)$ through the open inclusion $X\subseteq X^+$: it is continuous on $X$ and tends to $0$ at $\infty$ because $f$ does. The map $f\mapsto f-f(\infty)\mathbf 1$ is linear, so $T^+$ is linear and $T^+(1)=I$; and $T^+$ is multiplicative and conjugation preserving because for $f,g\in C(X^+)$, writing $f=f_0+c$, $g=g_0+d$ with $c=f(\infty)$, $d=g(\infty)$ and $f_0,g_0\in C_0(X)$, one has $fg=f_0g_0+df_0+cg_0+cd$ with $f_0g_0+df_0+cg_0\in C_0(X)$, so $T^+(fg)=T(f_0)T(g_0)+dT(f_0)+cT(g_0)+cd\,I=T^+(f)T^+(g)$, and $T^+(\overline f)=T(\overline{f_0})+\overline c I=T(f_0)^*+\overline c I=T^+(f)^*$. [F1, F4, algebra, step 1.1]
+
+3.1 By [F2] applied to the nonempty compact Hausdorff space $X^+$ and the unital star homomorphism $T^+$ there is a unique regular PVM $E^+$ on $X^+$ with $T^+(h)=\int_{X^+}h\,dE^+$ for every $h\in C(X^+)$. [F1, F2, step 2.1]
+
+LINE 62 2.1 Extend $T$ to a unital star homomorphism $T^+:C(X^+)\to\mathcal B(\mathcal H)$ by $T^+(f)=T(f-f(\infty)\mathbf 1)+f(\infty)I$, where $f-f(\infty)\mathbf 1$ is regarded as an element of $C_0(X)$ through the open inclusion $X\subseteq X^+$: it is continuous on $X$ and tends to $0$ at $\infty$ because $f$ does. The map $f\mapsto f-f(\infty)\mathbf 1$ is linear, so $T^+$ is linear and $T^+(1)=I$; and $T^+$ is multiplicative and conjugation preserving because for $f,g\in C(X^+)$, writing $f=f_0+c$, $g=g_0+d$ with $c=f(\infty)$, $d=g(\infty)$ and $f_0,g_0\in C_0(X)$, one has $fg=f_0g_0+df_0+cg_0+cd$ with $f_0g_0+df_0+cg_0\in C_0(X)$, so $T^+(fg)=T(f_0)T(g_0)+dT(f_0)+cT(g_0)+cd\,I=T^+(f)T^+(g)$, and $T^+(\overline f)=T(\overline{f_0})+\overline c I=T(f_0)^*+\overline c I=T^+(f)^*$. [F1, F4, algebra, step 1.1]
+
+3.1 By [F2] applied to the nonempty compact Hausdorff space $X^+$ and the unital star homomorphism $T^+$ there is a unique regular PVM $E^+$ on $X^+$ with $T^+(h)=\int_{X^+}h\,dE^+$ for every $h\in C(X^+)$. [F1, F2, step 2.1]
+
+4.1 For every $f\in C_0(X)$ one has $T(f)E^+(\{\infty\})=0$: since $f\mathbf 1_{\{\infty\}}=0$ as a bounded Borel function on $X^+$ and the bounded integral is multiplicative, $T(f)E^+(\{\infty\})=\Phi_{E^+}(f)\Phi_{E^+}(\mathbf 1_{\{\infty\}})=\Phi_{E^+}(0)=0$. [step 3.1, F3]
+
+LINE 64 3.1 By [F2] applied to the nonempty compact Hausdorff space $X^+$ and the unital star homomorphism $T^+$ there is a unique regular PVM $E^+$ on $X^+$ with $T^+(h)=\int_{X^+}h\,dE^+$ for every $h\in C(X^+)$. [F1, F2, step 2.1]
+
+4.1 For every $f\in C_0(X)$ one has $T(f)E^+(\{\infty\})=0$: since $f\mathbf 1_{\{\infty\}}=0$ as a bounded Borel function on $X^+$ and the bounded integral is multiplicative, $T(f)E^+(\{\infty\})=\Phi_{E^+}(f)\Phi_{E^+}(\mathbf 1_{\{\infty\}})=\Phi_{E^+}(0)=0$. [step 3.1, F3]
+
+5.1 Nondegeneracy forces $E^+(\{\infty\})=0$: suppose $E^+(\{\infty\})\ne0$ and pick $\xi=E^+(\{\infty\})\xi\ne0$ in its range; then for every $f\in C_0(X)$ and $\eta\in\mathcal H$, $\langle\xi,T(\overline f)\eta\rangle=\langle T(f)\xi,\eta\rangle=\langle T(f)E^+(\{\infty\})\xi,\eta\rangle=0$ by [step 4.1], so $\xi$ is orthogonal to the linear span of $T(C_0(X))\mathcal H$, which is dense by nondegeneracy; hence $\xi=0$, a contradiction. [step 4.1, F4]
+
+LINE 66 4.1 For every $f\in C_0(X)$ one has $T(f)E^+(\{\infty\})=0$: since $f\mathbf 1_{\{\infty\}}=0$ as a bounded Borel function on $X^+$ and the bounded integral is multiplicative, $T(f)E^+(\{\infty\})=\Phi_{E^+}(f)\Phi_{E^+}(\mathbf 1_{\{\infty\}})=\Phi_{E^+}(0)=0$. [step 3.1, F3]
+
+5.1 Nondegeneracy forces $E^+(\{\infty\})=0$: suppose $E^+(\{\infty\})\ne0$ and pick $\xi=E^+(\{\infty\})\xi\ne0$ in its range; then for every $f\in C_0(X)$ and $\eta\in\mathcal H$, $\langle\xi,T(\overline f)\eta\rangle=\langle T(f)\xi,\eta\rangle=\langle T(f)E^+(\{\infty\})\xi,\eta\rangle=0$ by [step 4.1], so $\xi$ is orthogonal to the linear span of $T(C_0(X))\mathcal H$, which is dense by nondegeneracy; hence $\xi=0$, a contradiction. [step 4.1, F4]
+
+6.1 Define $P(B):=E^+(B)$ for Borel $B\subseteq X$. This is a PVM on $X$: the Borel sets of the open subspace $X$ are exactly the traces of Borel sets of $X^+$, the values are orthogonal projections with $P(\varnothing)=0$, $P(X)=E^+(X)=I-E^+(\{\infty\})=I$ by [step 5.1], multiplicativity and countable additivity are inherited from $E^+$. For $f\in C_0(X)$, $T(f)=T^+(f)=\int_{X^+}f\,dE^+=\int_Xf\,dP$, since $f$ vanishes at $\infty$ and $E^+(\{\infty\})=0$. [step 2.1, step 3.1, step 5.1, F1]
+
+LINE 68 5.1 Nondegeneracy forces $E^+(\{\infty\})=0$: suppose $E^+(\{\infty\})\ne0$ and pick $\xi=E^+(\{\infty\})\xi\ne0$ in its range; then for every $f\in C_0(X)$ and $\eta\in\mathcal H$, $\langle\xi,T(\overline f)\eta\rangle=\langle T(f)\xi,\eta\rangle=\langle T(f)E^+(\{\infty\})\xi,\eta\rangle=0$ by [step 4.1], so $\xi$ is orthogonal to the linear span of $T(C_0(X))\mathcal H$, which is dense by nondegeneracy; hence $\xi=0$, a contradiction. [step 4.1, F4]
+
+6.1 Define $P(B):=E^+(B)$ for Borel $B\subseteq X$. This is a PVM on $X$: the Borel sets of the open subspace $X$ are exactly the traces of Borel sets of $X^+$, the values are orthogonal projections with $P(\varnothing)=0$, $P(X)=E^+(X)=I-E^+(\{\infty\})=I$ by [step 5.1], multiplicativity and countable additivity are inherited from $E^+$. For $f\in C_0(X)$, $T(f)=T^+(f)=\int_{X^+}f\,dE^+=\int_Xf\,dP$, since $f$ vanishes at $\infty$ and $E^+(\{\infty\})=0$. [step 2.1, step 3.1, step 5.1, F1]
+
+7.1 $P$ is regular: for each $x$, the finite measure $P_x(B)=E^+_x(B)$ on $X$ is the restriction of the regular Borel measure $E^+_x$ on $X^+$; inner regularity holds because each compact subset of $X$ in the subspace topology is compact in $X^+$, and outer regularity holds because open subsets of $X$ are open in $X^+$. [step 6.1, F1, F3]
+
+LINE 70 6.1 Define $P(B):=E^+(B)$ for Borel $B\subseteq X$. This is a PVM on $X$: the Borel sets of the open subspace $X$ are exactly the traces of Borel sets of $X^+$, the values are orthogonal projections with $P(\varnothing)=0$, $P(X)=E^+(X)=I-E^+(\{\infty\})=I$ by [step 5.1], multiplicativity and countable additivity are inherited from $E^+$. For $f\in C_0(X)$, $T(f)=T^+(f)=\int_{X^+}f\,dE^+=\int_Xf\,dP$, since $f$ vanishes at $\infty$ and $E^+(\{\infty\})=0$. [step 2.1, step 3.1, step 5.1, F1]
+
+7.1 $P$ is regular: for each $x$, the finite measure $P_x(B)=E^+_x(B)$ on $X$ is the restriction of the regular Borel measure $E^+_x$ on $X^+$; inner regularity holds because each compact subset of $X$ in the subspace topology is compact in $X^+$, and outer regularity holds because open subsets of $X$ are open in $X^+$. [step 6.1, F1, F3]
+
+8.1 Uniqueness: if $P'$ is any regular PVM on $X$ with $T(f)=\int_Xf\,dP'$ for all $f\in C_0(X)$, let $\widetilde{P'}$ be its extension by zero at infinity, $\widetilde{P'}(B):=P'(B\cap X)$ for Borel $B\subseteq X^+$. This is a regular PVM on $X^+$: values are orthogonal projections, $\widetilde{P'}(X^+)=P'(X)=I$ and $\widetilde{P'}(\{\infty\})=0$, countable additivity and multiplicativity are inherited from $P'$, and its finite scalar measures are inner regular on all Borel sets, including those containing $\infty$, by compact approximation inside $X$. Outer regularity follows by applying inner regularity to complements in the compact space $X^+$; thus the extension is regular. For $h\in C(X^+)$ write $h=h_0+c$ with $h_0\in C_0(X)$ and $c=h(\infty)$; then $\int h\,d\widetilde{P'}=\int h_0\,dP'+c\,\widetilde{P'}(X^+)=T(h_0)+cI=T^+(h)$, so $\widetilde{P'}$ represents $T^+$ and the uniqueness in [F2] gives $\widetilde{P'}=E^+$ and hence $P'=P$. [step 2.1, step 3.1, F2, step 6.1, step 7.1]
+
+LINE 72 7.1 $P$ is regular: for each $x$, the finite measure $P_x(B)=E^+_x(B)$ on $X$ is the restriction of the regular Borel measure $E^+_x$ on $X^+$; inner regularity holds because each compact subset of $X$ in the subspace topology is compact in $X^+$, and outer regularity holds because open subsets of $X$ are open in $X^+$. [step 6.1, F1, F3]
+
+8.1 Uniqueness: if $P'$ is any regular PVM on $X$ with $T(f)=\int_Xf\,dP'$ for all $f\in C_0(X)$, let $\widetilde{P'}$ be its extension by zero at infinity, $\widetilde{P'}(B):=P'(B\cap X)$ for Borel $B\subseteq X^+$. This is a regular PVM on $X^+$: values are orthogonal projections, $\widetilde{P'}(X^+)=P'(X)=I$ and $\widetilde{P'}(\{\infty\})=0$, countable additivity and multiplicativity are inherited from $P'$, and its finite scalar measures are inner regular on all Borel sets, including those containing $\infty$, by compact approximation inside $X$. Outer regularity follows by applying inner regularity to complements in the compact space $X^+$; thus the extension is regular. For $h\in C(X^+)$ write $h=h_0+c$ with $h_0\in C_0(X)$ and $c=h(\infty)$; then $\int h\,d\widetilde{P'}=\int h_0\,dP'+c\,\widetilde{P'}(X^+)=T(h_0)+cI=T^+(h)$, so $\widetilde{P'}$ represents $T^+$ and the uniqueness in [F2] gives $\widetilde{P'}=E^+$ and hence $P'=P$. [step 2.1, step 3.1, F2, step 6.1, step 7.1]
+
+9.1 Thus for nonzero $\mathcal H$ there is exactly one regular PVM $P$ on $X$ with $P(X)=I$ and $T(f)=\int_Xf\,dP$, namely the restriction of $E^+$; for $\mathcal H=\{0\}$ the zero PVM is the unique one by [step 1.1]. Both cases together prove the claim. [step 1.1, step 6.1, step 7.1, step 8.1] ∎
+
+LINE 74 8.1 Uniqueness: if $P'$ is any regular PVM on $X$ with $T(f)=\int_Xf\,dP'$ for all $f\in C_0(X)$, let $\widetilde{P'}$ be its extension by zero at infinity, $\widetilde{P'}(B):=P'(B\cap X)$ for Borel $B\subseteq X^+$. This is a regular PVM on $X^+$: values are orthogonal projections, $\widetilde{P'}(X^+)=P'(X)=I$ and $\widetilde{P'}(\{\infty\})=0$, countable additivity and multiplicativity are inherited from $P'$, and its finite scalar measures are inner regular on all Borel sets, including those containing $\infty$, by compact approximation inside $X$. Outer regularity follows by applying inner regularity to complements in the compact space $X^+$; thus the extension is regular. For $h\in C(X^+)$ write $h=h_0+c$ with $h_0\in C_0(X)$ and $c=h(\infty)$; then $\int h\,d\widetilde{P'}=\int h_0\,dP'+c\,\widetilde{P'}(X^+)=T(h_0)+cI=T^+(h)$, so $\widetilde{P'}$ represents $T^+$ and the uniqueness in [F2] gives $\widetilde{P'}=E^+$ and hence $P'=P$. [step 2.1, step 3.1, F2, step 6.1, step 7.1]
+
+9.1 Thus for nonzero $\mathcal H$ there is exactly one regular PVM $P$ on $X$ with $P(X)=I$ and $T(f)=\int_Xf\,dP$, namely the restriction of $E^+$; for $\mathcal H=\{0\}$ the zero PVM is the unique one by [step 1.1]. Both cases together prove the claim. [step 1.1, step 6.1, step 7.1, step 8.1] ∎
+
+FILE lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $\Omega\subseteq\mathbb R^n$ be open and let $\zeta\in L^2(\Omega;\mathbb R)$ satisfy
+$$\int_\Omega\zeta\varphi\,dx\ge0\qquad\text{for every }\varphi\in C_c^\infty(\Omega)\text{ with }\varphi\ge0 .$$
+Then $\zeta\ge0$ almost everywhere on $\Omega$. Moreover, if $O\subseteq\Omega$ is open and $\int_\Omega\zeta\varphi\,dx=0$ for every $\varphi\in C_c^\infty(O)$, then $\zeta=0$ almost everywhere on $O$.
+
+LINE 66 [F9] [[thm-heine-borel-rn]]: a subset of $\mathbb R^n$ that is closed and bounded is compact.
+
+[F10] [[def-positive-and-negative-parts-of-a-function]]: $\zeta=\zeta^+-\zeta^-$ with $\zeta^+,\zeta^-\ge0$ and $\zeta^+\zeta^-=0$ pointwise; hence $\zeta\ge0$ a.e. exactly when $\zeta^-=0$ a.e.
+
+[F11] [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-test-function-space-d-of-an-open-set]]: elements of $L^2(\Omega)$ are a.e. classes of measurable functions, while elements of $C_c^\infty(\Omega)$ are actual smooth compactly supported functions, so the pairing $\varphi\mapsto\int_\Omega\zeta\varphi$ depends only on the class of $\zeta$ and on the function $\varphi$; for an open $O\subseteq\Omega$ the restriction of the class $\zeta$ is a class in $L^2(O)$ with $\int_O|\zeta|^2\le\int_\Omega|\zeta|^2$ by monotonicity of the nonnegative integral, and $\int_O\zeta\varphi=\int_\Omega\zeta\varphi$ for every $\varphi\in C_c^\infty(O)$.
+
+LINE 76 **Given:** An open set $\Omega\subseteq\mathbb R^n$, a real class $\zeta\in L^2(\Omega)$ with $\int_\Omega\zeta\varphi\ge0$ for every nonnegative $\varphi\in C_c^\infty(\Omega)$, and an open subset $O\subseteq\Omega$.
+
+1.1 (Local vanishing, uniformly in the open set and the class) Let $\omega\subseteq\mathbb R^n$ be open, let $z\in L^2(\omega)$ satisfy $\int_\omega z\varphi\ge0$ for every nonnegative $\varphi\in C_c^\infty(\omega)$, let $O'\subseteq\omega$ be open, and let $\eta\in C_c^\infty(O')$ with $\eta\ge0$; we claim $\int_\omega(z^-)^2\eta=0$. If $\eta=0$ this is trivial, so assume $\eta\ne0$. Choose a real representative $f$ of the class $z$ and set $g:=z^-\eta$, the class of the measurable function $f^-\eta$; since $\eta$ is bounded with compact support and $f^-\le|f|$, this class lies in $L^2(\omega)$ and has a representative vanishing outside the compact set $S:=\operatorname{supp}\eta\subseteq O'$ [F10, F11]. If $O'=\mathbb R^n$, choose any $\varepsilon>0$; otherwise [F6] applies to $S$ and the nonempty closed set $\mathbb R^n\setminus O'$, giving $d:=\operatorname{dist}(S,\mathbb R^n\setminus O')>0$, and choose $0<\varepsilon<d/2$. Let $\varphi_\varepsilon$ be the smooth representative of $\rho_\varepsilon*g$ from [F2]. It is compactly supported; when $O'\ne\mathbb R^n$, its support lies in $\overline{S+\operatorname{supp}\rho_\varepsilon}\subseteq O'$ because $\operatorname{supp}\rho_\varepsilon\subseteq\overline B_{2\varepsilon}(0)$ and $2\varepsilon<d$ [F1]. Since $\rho_\varepsilon\ge0$ and $f^-\eta\ge0$, monotonicity of the integral gives $\varphi_\varepsilon\ge0$ throughout [F3], so $\varphi_\varepsilon\in C_c^\infty(\omega)$ is a nonnegative test function and the hypothesis yields $\int_\omega z\varphi_\varepsilon\ge0$; on the other hand $\bigl|\int_\omega z(\varphi_\varepsilon-g)\bigr|\le\|\varphi_\varepsilon-g\|_2\|z\|_2\to0$ as $\varepsilon\downarrow0$ by [F2] and [F4], so $\int_\omega zg\ge0$. Finally $zg=zz^-\eta=-z^+z^-\eta-(z^-)^2\eta=-(z^-)^2\eta$ because $z^+z^-=0$ pointwise [F10], so $\int_\omega(z^-)^2\eta\le0$; as the integrand is nonnegative this forces $\int_\omega(z^-)^2\eta=0$. The argument uses only the pairing hypothesis on the open set $\omega$. [given, F1, F2, F3, F4, F6, F10, F11, algebra]
+
+2.1 (From local test functions to a.e. vanishing) Let $\omega$ and $z$ be as in step 1.1. Let $O'\subseteq\omega$ be open and let $K\subseteq O'$ be compact; by [F7] there is $\chi\in C_c^\infty(O')$ with $0\le\chi\le1$ and $\chi=1$ on a neighbourhood $N$ of $K$, and step 1.1 with $\eta=\chi$ gives $\int_\omega(z^-)^2\chi=0$; as this integrand is nonnegative and measurable, [F5] gives $(z^-)^2\chi=0$ a.e. on $\omega$, hence $(z^-)^2=0$ a.e. on $K$. Now for arbitrary open $O'\subseteq\omega$ for $j\in\mathbb N$ take $K_j:=\{x:|x|\le j+1\}$ if $O'=\mathbb R^n$ and $K_j:=\{x\in O':|x|\le j+1\text{ and }\operatorname{dist}(x,\mathbb R^n\setminus O')\ge1/(j+1)\}$ otherwise; each $K_j$ is closed, bounded and contained in $O'$, hence compact by [F9], and the $K_j$ cover $O'$ (a point $x\in O'$ has a ball $B(x,r)\subseteq O'$, so $x\in K_j$ for every $j+1\ge\max\{|x|,1/r\}$). Since $(z^-)^2$ vanishes a.e. on each $K_j$, it vanishes a.e. on the union $O'$ by [F8]. Taking $O'=\omega$, $(z^-)^2=0$ a.e. on $\omega$, so $z^-=0$ a.e. on $\omega$ and $z\ge0$ a.e. on $\omega$ by [F10]. [step 1.1, F5, F7, F8, F9, F10]
+
+LINE 78 1.1 (Local vanishing, uniformly in the open set and the class) Let $\omega\subseteq\mathbb R^n$ be open, let $z\in L^2(\omega)$ satisfy $\int_\omega z\varphi\ge0$ for every nonnegative $\varphi\in C_c^\infty(\omega)$, let $O'\subseteq\omega$ be open, and let $\eta\in C_c^\infty(O')$ with $\eta\ge0$; we claim $\int_\omega(z^-)^2\eta=0$. If $\eta=0$ this is trivial, so assume $\eta\ne0$. Choose a real representative $f$ of the class $z$ and set $g:=z^-\eta$, the class of the measurable function $f^-\eta$; since $\eta$ is bounded with compact support and $f^-\le|f|$, this class lies in $L^2(\omega)$ and has a representative vanishing outside the compact set $S:=\operatorname{supp}\eta\subseteq O'$ [F10, F11]. If $O'=\mathbb R^n$, choose any $\varepsilon>0$; otherwise [F6] applies to $S$ and the nonempty closed set $\mathbb R^n\setminus O'$, giving $d:=\operatorname{dist}(S,\mathbb R^n\setminus O')>0$, and choose $0<\varepsilon<d/2$. Let $\varphi_\varepsilon$ be the smooth representative of $\rho_\varepsilon*g$ from [F2]. It is compactly supported; when $O'\ne\mathbb R^n$, its support lies in $\overline{S+\operatorname{supp}\rho_\varepsilon}\subseteq O'$ because $\operatorname{supp}\rho_\varepsilon\subseteq\overline B_{2\varepsilon}(0)$ and $2\varepsilon<d$ [F1]. Since $\rho_\varepsilon\ge0$ and $f^-\eta\ge0$, monotonicity of the integral gives $\varphi_\varepsilon\ge0$ throughout [F3], so $\varphi_\varepsilon\in C_c^\infty(\omega)$ is a nonnegative test function and the hypothesis yields $\int_\omega z\varphi_\varepsilon\ge0$; on the other hand $\bigl|\int_\omega z(\varphi_\varepsilon-g)\bigr|\le\|\varphi_\varepsilon-g\|_2\|z\|_2\to0$ as $\varepsilon\downarrow0$ by [F2] and [F4], so $\int_\omega zg\ge0$. Finally $zg=zz^-\eta=-z^+z^-\eta-(z^-)^2\eta=-(z^-)^2\eta$ because $z^+z^-=0$ pointwise [F10], so $\int_\omega(z^-)^2\eta\le0$; as the integrand is nonnegative this forces $\int_\omega(z^-)^2\eta=0$. The argument uses only the pairing hypothesis on the open set $\omega$. [given, F1, F2, F3, F4, F6, F10, F11, algebra]
+
+2.1 (From local test functions to a.e. vanishing) Let $\omega$ and $z$ be as in step 1.1. Let $O'\subseteq\omega$ be open and let $K\subseteq O'$ be compact; by [F7] there is $\chi\in C_c^\infty(O')$ with $0\le\chi\le1$ and $\chi=1$ on a neighbourhood $N$ of $K$, and step 1.1 with $\eta=\chi$ gives $\int_\omega(z^-)^2\chi=0$; as this integrand is nonnegative and measurable, [F5] gives $(z^-)^2\chi=0$ a.e. on $\omega$, hence $(z^-)^2=0$ a.e. on $K$. Now for arbitrary open $O'\subseteq\omega$ for $j\in\mathbb N$ take $K_j:=\{x:|x|\le j+1\}$ if $O'=\mathbb R^n$ and $K_j:=\{x\in O':|x|\le j+1\text{ and }\operatorname{dist}(x,\mathbb R^n\setminus O')\ge1/(j+1)\}$ otherwise; each $K_j$ is closed, bounded and contained in $O'$, hence compact by [F9], and the $K_j$ cover $O'$ (a point $x\in O'$ has a ball $B(x,r)\subseteq O'$, so $x\in K_j$ for every $j+1\ge\max\{|x|,1/r\}$). Since $(z^-)^2$ vanishes a.e. on each $K_j$, it vanishes a.e. on the union $O'$ by [F8]. Taking $O'=\omega$, $(z^-)^2=0$ a.e. on $\omega$, so $z^-=0$ a.e. on $\omega$ and $z\ge0$ a.e. on $\omega$ by [F10]. [step 1.1, F5, F7, F8, F9, F10]
+
+3.1 (First assertion) Apply step 2.1 with $(\omega,z)=(\Omega,\zeta)$: the nonnegative-pairing hypothesis holds by assumption, so $(\zeta^-)^2=0$ a.e. on $\Omega$, hence $\zeta^-=0$ a.e. on $\Omega$ and $\zeta\ge0$ a.e. on $\Omega$ by [F10]. [step 2.1, F10]
+
+LINE 80 2.1 (From local test functions to a.e. vanishing) Let $\omega$ and $z$ be as in step 1.1. Let $O'\subseteq\omega$ be open and let $K\subseteq O'$ be compact; by [F7] there is $\chi\in C_c^\infty(O')$ with $0\le\chi\le1$ and $\chi=1$ on a neighbourhood $N$ of $K$, and step 1.1 with $\eta=\chi$ gives $\int_\omega(z^-)^2\chi=0$; as this integrand is nonnegative and measurable, [F5] gives $(z^-)^2\chi=0$ a.e. on $\omega$, hence $(z^-)^2=0$ a.e. on $K$. Now for arbitrary open $O'\subseteq\omega$ for $j\in\mathbb N$ take $K_j:=\{x:|x|\le j+1\}$ if $O'=\mathbb R^n$ and $K_j:=\{x\in O':|x|\le j+1\text{ and }\operatorname{dist}(x,\mathbb R^n\setminus O')\ge1/(j+1)\}$ otherwise; each $K_j$ is closed, bounded and contained in $O'$, hence compact by [F9], and the $K_j$ cover $O'$ (a point $x\in O'$ has a ball $B(x,r)\subseteq O'$, so $x\in K_j$ for every $j+1\ge\max\{|x|,1/r\}$). Since $(z^-)^2$ vanishes a.e. on each $K_j$, it vanishes a.e. on the union $O'$ by [F8]. Taking $O'=\omega$, $(z^-)^2=0$ a.e. on $\omega$, so $z^-=0$ a.e. on $\omega$ and $z\ge0$ a.e. on $\omega$ by [F10]. [step 1.1, F5, F7, F8, F9, F10]
+
+3.1 (First assertion) Apply step 2.1 with $(\omega,z)=(\Omega,\zeta)$: the nonnegative-pairing hypothesis holds by assumption, so $(\zeta^-)^2=0$ a.e. on $\Omega$, hence $\zeta^-=0$ a.e. on $\Omega$ and $\zeta\ge0$ a.e. on $\Omega$ by [F10]. [step 2.1, F10]
+
+3.2 (Second assertion) Assume additionally that $\int_\Omega\zeta\varphi=0$ for every $\varphi\in C_c^\infty(O)$, and put $\omega:=O$ and $z:=\zeta|_O$, the restriction of the class, which lies in $L^2(O)$ with $\int_O|\zeta|^2\le\int_\Omega|\zeta|^2$ and $\int_O\zeta\varphi=\int_\Omega\zeta\varphi$ for every $\varphi\in C_c^\infty(O)$ [F11]. For every nonnegative $\varphi\in C_c^\infty(O)$ one has $\int_O\zeta\varphi=0\ge0$ and also $\int_O(-\zeta)\varphi=0\ge0$, so step 2.1 applies with $(\omega,z)=(O,\zeta|_O)$ and with $(\omega,z)=(O,-\zeta|_O)$, whose negative parts are $\zeta^-$ and $\zeta^+$ respectively; hence $(\zeta^-)^2=0$ and $(\zeta^+)^2=0$ a.e. on $O$, so $\zeta^+=\zeta^-=0$ a.e. on $O$ and $\zeta=0$ a.e. on $O$ by [F10]. [step 2.1, F10, F11]
+
+LINE 82 3.1 (First assertion) Apply step 2.1 with $(\omega,z)=(\Omega,\zeta)$: the nonnegative-pairing hypothesis holds by assumption, so $(\zeta^-)^2=0$ a.e. on $\Omega$, hence $\zeta^-=0$ a.e. on $\Omega$ and $\zeta\ge0$ a.e. on $\Omega$ by [F10]. [step 2.1, F10]
+
+3.2 (Second assertion) Assume additionally that $\int_\Omega\zeta\varphi=0$ for every $\varphi\in C_c^\infty(O)$, and put $\omega:=O$ and $z:=\zeta|_O$, the restriction of the class, which lies in $L^2(O)$ with $\int_O|\zeta|^2\le\int_\Omega|\zeta|^2$ and $\int_O\zeta\varphi=\int_\Omega\zeta\varphi$ for every $\varphi\in C_c^\infty(O)$ [F11]. For every nonnegative $\varphi\in C_c^\infty(O)$ one has $\int_O\zeta\varphi=0\ge0$ and also $\int_O(-\zeta)\varphi=0\ge0$, so step 2.1 applies with $(\omega,z)=(O,\zeta|_O)$ and with $(\omega,z)=(O,-\zeta|_O)$, whose negative parts are $\zeta^-$ and $\zeta^+$ respectively; hence $(\zeta^-)^2=0$ and $(\zeta^+)^2=0$ a.e. on $O$, so $\zeta^+=\zeta^-=0$ a.e. on $O$ and $\zeta=0$ a.e. on $O$ by [F10]. [step 2.1, F10, F11]
+
+4.1 Step 3.1 proves the first assertion and step 3.2 the second for arbitrary open $\Omega$, class $\zeta$ and open $O\subseteq\Omega$; the argument of steps 1.1-2.1 is uniform in the pair $(\omega,z)$, so the second assertion needed no re-run of the estimates. Countable Choice was used in the approximate-identity interface of step 1.1 and in the countable-union step of step 2.1 [A1, F2, F8], while the localisation itself is choice-free. [step 3.1, step 3.2, A1, F2, F8] ∎
+
+FILE lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations
+
+STATEMENT Assume Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group
+with Haar measure $m_G$ and $A=L^1(G,m_G)$. If $h:A\to\mathbb C$ is a nonzero
+multiplicative linear functional (no continuity assumed), then there exists a
+unique $\gamma\in\widehat G$ such that
+$$h(f)=\widehat f(\gamma)=\int_G f(x)\overline{\gamma(x)}\,dm_G(x)\qquad\text{for all }f\in A,$$
+and consequently $|h(f)|\le\|f\|_1$; every such $h$ has norm $1$. Conversely
+each $\gamma\in\widehat G$ gives such a functional.
+
+LINE 56 **Given:** Dependent Choice, a locally compact Hausdorff abelian group $G$ written additively with Haar measure $m_G$, the Banach algebra $A=L^1(G,m_G)$ with convolution and involution ([[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]], [[def-l-p-space-as-a-quotient-by-null-functions]]), and a nonzero multiplicative linear functional $h:A\to\mathbb C$.
+
+[F1] The scalar unitisation $A^+=\mathbb C\oplus A$ with $(z,f)(w,g)=(zw,\,zg+wf+f*g)$ and $\|(z,f)\|=|z|+\|f\|_1$ is a nonzero unital complex Banach algebra, and $h^+(z,f):=z+h(f)$ is a character of it ([[def-unital-banach-algebra]], [[def-character-and-maximal-ideal-space]], [[lem-lca-lone-convolution-is-a-commutative-banach-star-algebra]]).
+
+[F2] Characters of a nonzero unital complex Banach algebra are unital and satisfy $|\chi(a)|\le\|a\|$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]]).
+
+LINE 72 **Proof technique:** direct.
+
+1.1 (Boundedness of $h$.) In the unitisation $A^+$ of [F1] the functional $h^+(z,f)=z+h(f)$ is multiplicative and unital: $h^+((z,f)(w,g))=zw+h(zg+wf+f*g)=zw+zh(g)+wh(f)+h(f)h(g)=h^+(z,f)h^+(w,g)$ by linearity and multiplicativity of $h$. By [F2] applied to the character $h^+$, $|h(f)|=|h^+(0,f)|\le\|(0,f)\|=\|f\|_1$ for every $f\in A$; in particular $h$ is bounded with $\|h\|\le1$. [F1, F2]
+
+2.1 (The character ratio is independent of the reference function.) For $x\in G$ and $f,g\in A$ one has $T_x(f*g)=(T_xf)*g=f*(T_xg)$: evaluating at $z$ and substituting $y\mapsto y-x$ in the defining integral gives $(T_x(f*g))(z)=(f*g)(z-x)=\int_Gf(y)g(z-x-y)\,dm_G(y)$ and likewise for the other two expressions. Choose $f_0\in A$ with $h(f_0)\ne0$ and put $a(x):=h(T_xf_0)/h(f_0)$. For every $g\in A$, multiplicativity gives $h(T_xg)h(f_0)=h(T_x(g*f_0))=h(g)h(T_xf_0)=h(g)a(x)h(f_0)$. Dividing by the fixed nonzero $h(f_0)$ proves $h(T_xg)=a(x)h(g)$, including when $h(g)=0$. [F4, step 1.1]
+
+FILE lem-one-dimensional-trace-truncation-compatibility
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $I=(a,b)$ with $-\infty<a<b<\infty$, let $1\le p<\infty$, and let $u\in W^{1,p}(I;\mathbb R)$ ([[def-sobolev-space-wkp-and-its-norm]]). Let $u^*$ be its unique absolutely continuous representative on $[a,b]$ ([[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]]) and put $Tu:=(u^*(a),u^*(b))\in\mathbb R^2$, ordered componentwise. Then:
+
+1. $T$ is well defined, linear and bounded, and $\ker T=W_0^{1,p}(I)$ ([[def-wkp-zero-as-a-sobolev-closure]]).
+2. For every $k\in\mathbb R$ the function $(u-k)^+$ belongs to $W^{1,p}(I)$, and $T\bigl((u-k)^+\bigr)=(Tu-k)^+$ componentwise; moreover $(u-k)^+\in W_0^{1,p}(I)$ if and only if $Tu\le(k,k)$ componentwise. In particular $T(u^+)=(Tu)^+$, $T(u^-)=(Tu)^-$ and $T|u|=|Tu|$.
+
+LINE 51 
+1. $T$ is well defined, linear and bounded, and $\ker T=W_0^{1,p}(I)$ ([[def-wkp-zero-as-a-sobolev-closure]]).
+2. For every $k\in\mathbb R$ the function $(u-k)^+$ belongs to $W^{1,p}(I)$, and $T\bigl((u-k)^+\bigr)=(Tu-k)^+$ componentwise; moreover $(u-k)^+\in W_0^{1,p}(I)$ if and only if $Tu\le(k,k)$ componentwise. In particular $T(u^+)=(Tu)^+$, $T(u^-)=(Tu)^-$ and $T|u|=|Tu|$.
+
+## Facts & Assumptions
+
+LINE 69 [F5] [[lem-classical-derivatives-are-weak-derivatives]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]: a $C^1$ function on $I$ has its classical derivative as weak derivative; the interval $I=(a,b)$ is a box with finite Lebesgue measure, so the constant function $1$ lies in $L^p(I)$ and hence in $W^{1,p}(I)$ with weak derivative $0$, the classical derivative of the constant.
+
+[F6] [[cor-positive-negative-part-and-truncation-calculus-in-w-one-p]]: for a real class $w\in W^{1,p}(I)$ the classes $w^+=\max\{w,0\}$ and $w^-=\max\{-w,0\}$ lie in $W^{1,p}(I)$ with $Dw^+=1_{\{w>0\}}Dw$ and $Dw^-=-1_{\{w<0\}}Dw$ a.e.
+
+[F7] [[lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]: in dimension one there is a fixed smooth bump $b_0$ with $0\le b_0\le1$, $b_0=1$ on $[-1,1]$ and $\operatorname{supp}b_0\subseteq(-2,2)$; by the chain rule the rescalings $x\mapsto b_0((x-c)/r)$ and $x\mapsto b_0((c-x)/r)$ are smooth with derivatives $\pm r^{-1}b_0'((x-c)/r)$ and $\mp r^{-1}b_0'((c-x)/r)$, so these derivatives are bounded in absolute value by $\|b_0'\|_\infty/r$, and products of such rescalings obey the product rule.
+
+LINE 97 1.3 (Linearity) For $u,v\in W^{1,p}(I)$ the class $u+v$ has weak derivative $u'+v'$ by [F4], and $u^*+v^*$ is continuous and absolutely continuous; by the uniqueness clause of [F1] it is the representative of $u+v$, so $(u+v)^*=u^*+v^*$ and $T(u+v)=Tu+Tv$; for $c\in\mathbb R$ the class $cu$ has weak derivative $cu'$ and representative $cu^*$ by [F1] and [F4], so $T(cu)=cTu$; hence $T$ is linear. [given, F1, F4]
+
+1.4 (Truncation membership) The constant function $k$ lies in $W^{1,p}(I)$ with weak derivative $0$ by [F5], so $w:=u-k$ lies in $W^{1,p}(I)$ with weak derivative $u'$ by [F4]; by [F6] the classes $w^+=\max\{w,0\}$ and $w^-=\max\{-w,0\}$ lie in $W^{1,p}(I)$ with $Dw^+=1_{\{w>0\}}u'$ and $Dw^-=-1_{\{w<0\}}u'$ a.e.; in particular $(u-k)^+\in W^{1,p}(I)$. [given, F4, F5, F6]
+
+2.1 (Endpoint values of the truncated class) Apply [F1] to the class $w^+$ of step 1.4: it has a unique continuous representative $w^*$ on $[a,b]$, absolutely continuous, with $w^*(x)=w^*(a)+\int_a^x Dw^+$. The continuous function $x\mapsto(u^*(x)-k)^+$ on $[a,b]$ is a representative of $w^+$ because $u^*-k$ represents $u-k$ and the positive part is well defined on a.e. classes [F6]; two continuous representatives of one class agree on the dense interval $(a,b)$, hence by continuity on all of $[a,b]$. Therefore $T(w^+)=\bigl((u^*(a)-k)^+,(u^*(b)-k)^+\bigr)=\bigl((Tu-k)^+\bigr)$ componentwise. [step 1.4, F1, F6]
+
+LINE 99 1.4 (Truncation membership) The constant function $k$ lies in $W^{1,p}(I)$ with weak derivative $0$ by [F5], so $w:=u-k$ lies in $W^{1,p}(I)$ with weak derivative $u'$ by [F4]; by [F6] the classes $w^+=\max\{w,0\}$ and $w^-=\max\{-w,0\}$ lie in $W^{1,p}(I)$ with $Dw^+=1_{\{w>0\}}u'$ and $Dw^-=-1_{\{w<0\}}u'$ a.e.; in particular $(u-k)^+\in W^{1,p}(I)$. [given, F4, F5, F6]
+
+2.1 (Endpoint values of the truncated class) Apply [F1] to the class $w^+$ of step 1.4: it has a unique continuous representative $w^*$ on $[a,b]$, absolutely continuous, with $w^*(x)=w^*(a)+\int_a^x Dw^+$. The continuous function $x\mapsto(u^*(x)-k)^+$ on $[a,b]$ is a representative of $w^+$ because $u^*-k$ represents $u-k$ and the positive part is well defined on a.e. classes [F6]; two continuous representatives of one class agree on the dense interval $(a,b)$, hence by continuity on all of $[a,b]$. Therefore $T(w^+)=\bigl((u^*(a)-k)^+,(u^*(b)-k)^+\bigr)=\bigl((Tu-k)^+\bigr)$ componentwise. [step 1.4, F1, F6]
+
+2.2 ($W_0^{1,p}\subseteq\ker T$) Each $\varphi\in C_c^\infty(I)$, extended by zero, is its own absolutely continuous representative with $\varphi(a)=\varphi(b)=0$, so $T\varphi=0$ by [F1]; by step 1.2 the map $T$ is bounded, hence continuous, and by [F3] the space $W_0^{1,p}(I)$ is the closure of $C_c^\infty(I)$, so $T$ vanishes on all of $W_0^{1,p}(I)$. [step 1.2, F1, F3]
+
+LINE 111 5.1 ((i) concluded: $\ker T=W_0^{1,p}$) Steps 1.1-1.3 show that $T$ is well defined, linear and bounded (with the estimate of step 1.2); step 2.2 gives $W_0^{1,p}(I)\subseteq\ker T$. Conversely, if $Tu=0$, then step 3.1 exhibits $\chi_\delta u\to u$ in $W^{1,p}(I)$ with $\chi_\delta u\in W_0^{1,p}(I)$ for each $\delta$ by step 4.1; since $W_0^{1,p}(I)$ is closed in $W^{1,p}(I)$ [F3], $u\in W_0^{1,p}(I)$. Hence $\ker T=W_0^{1,p}(I)$. [step 1.2, step 2.2, step 4.1, F3]
+
+6.1 (The truncation iff) Fix $k\in\mathbb R$. By step 2.1, $T\bigl((u-k)^+\bigr)=\bigl((Tu-k)^+\bigr)$; by step 5.1, $(u-k)^+\in W_0^{1,p}(I)$ exactly when this trace pair vanishes, that is, exactly when $(u^*(a)-k)^+=0$ and $(u^*(b)-k)^+=0$, equivalently $u^*(a)\le k$ and $u^*(b)\le k$, equivalently $Tu\le(k,k)$ componentwise; membership $(u-k)^+\in W^{1,p}(I)$ is step 1.4. [step 1.4, step 2.1, step 5.1]
+
+7.1 (The particular identities and discharge) Taking $k=0$ in step 6.1 gives $T(u^+)=(Tu)^+$ and $u^+\in W_0^{1,p}(I)$ exactly when $Tu\le(0,0)$. Applying step 6.1 to the class $-u$, whose representative is $-u^*$ and whose trace pair is $-Tu$, gives $T\bigl((-u)^+\bigr)=(-Tu)^+=(Tu)^-$, that is $T(u^-)=(Tu)^-$; since $|u|=u^++u^-$, linearity of $T$ from step 1.3 gives $T|u|=T(u^+)+T(u^-)=(Tu)^++(Tu)^-=|Tu|$ componentwise. Steps 5.1, 6.1 and the present step prove all the assertions; the Axiom of Choice was used only through the representative interfaces [F1], the endpoint estimate [F2] and the truncation, extension, density and multiplication interfaces [F6, F11, F12], which assume it or Countable Choice [A1]. [step 1.3, step 5.1, step 6.1, A1] ∎ 
+
+LINE 113 6.1 (The truncation iff) Fix $k\in\mathbb R$. By step 2.1, $T\bigl((u-k)^+\bigr)=\bigl((Tu-k)^+\bigr)$; by step 5.1, $(u-k)^+\in W_0^{1,p}(I)$ exactly when this trace pair vanishes, that is, exactly when $(u^*(a)-k)^+=0$ and $(u^*(b)-k)^+=0$, equivalently $u^*(a)\le k$ and $u^*(b)\le k$, equivalently $Tu\le(k,k)$ componentwise; membership $(u-k)^+\in W^{1,p}(I)$ is step 1.4. [step 1.4, step 2.1, step 5.1]
+
+7.1 (The particular identities and discharge) Taking $k=0$ in step 6.1 gives $T(u^+)=(Tu)^+$ and $u^+\in W_0^{1,p}(I)$ exactly when $Tu\le(0,0)$. Applying step 6.1 to the class $-u$, whose representative is $-u^*$ and whose trace pair is $-Tu$, gives $T\bigl((-u)^+\bigr)=(-Tu)^+=(Tu)^-$, that is $T(u^-)=(Tu)^-$; since $|u|=u^++u^-$, linearity of $T$ from step 1.3 gives $T|u|=T(u^+)+T(u^-)=(Tu)^++(Tu)^-=|Tu|$ componentwise. Steps 5.1, 6.1 and the present step prove all the assertions; the Axiom of Choice was used only through the representative interfaces [F1], the endpoint estimate [F2] and the truncation, extension, density and multiplication interfaces [F6, F11, F12], which assume it or Countable Choice [A1]. [step 1.3, step 5.1, step 6.1, A1] ∎ 
+
+FILE lem-parametric-immersion-extension-on-a-disk
+
+STATEMENT Assume countable choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $0\le k\le n$ and let $N$ be a smooth $n$-manifold without boundary. (i) **Absolute form.** The inclusion $\operatorname{Imm}(D^k,N)\subseteq\operatorname{FImm}(D^k,N)$ is a weak homotopy equivalence: every formal immersion of the closed disk is homotopic, through formal immersions, to a genuine one, and finite CW parameter pairs admit lifting up to homotopy relative to prescribed genuine boundary data. The separate compact smooth parameter form below requires neighbourhood-holonomic relative input. (ii) **Relative parametric form.** Suppose $0\le k<n$, let $D^k\subseteq U\subseteq\mathbb R^k$ with $U$ an open neighbourhood of the closed unit disk, and let $A\subseteq D^k$ be a closed collar neighbourhood of $\partial D^k$. Let $(P,Q)$ be a compact parameter pair ([[def-compact-parameter-pair]]) with $P$ boundaryless, so $Q\subseteq P$ is closed (possibly empty). Let $(f,F)=(f_p,F_p)_{p\in P}$ be a smooth $P$-family of formal immersions of $U$ such that the original family is smoothly holonomic on $Q$ (on an open parameter neighbourhood of $Q$) and holonomic on a neighbourhood of $A$ for every $p\in P$. Then there is a homotopy of $P$-families of formal immersions from $(f,F)$ to a family $(g,G)$ with $G=dg$, constant on $Q$ and on $A$. The hypothesis $k<n$ is needed for the relative statement; the absolute statement (i) holds also for $k=n$ and is what supplies the base case over a $0$-handle.
+
+(iii) **Full-column core and handle form.** For $0\le j\le m\le n$ with $j<n$, retain all $m$ source columns over $D^j$. On the holonomic side the first $j$ columns equal the core derivative; on the formal side they are independent monomorphism columns. The derivative comparison is a weak equivalence both on the absolute core spaces and on their extension fibres over prescribed holonomic boundary jets, using the first-jet interface of [[lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property]]. For compact parameter pairs with neighbourhood-holonomic relative data, the comparison preserves prescribed attaching germs and the relative parameters. Realization near the core and positive cocore compression give the corresponding relative integration on an $m$-dimensional $j$-handle; cocore directions remain source directions.
+
+(iv) **Compact-source parameter transfer.** More generally, if the derivative map for a compact smooth source $X$ is a weak equivalence, it has the relative parametric conclusion for every compact parameter pair of [[def-compact-parameter-pair]], including interval factors: continuous formal data smoothly holonomic on a neighbourhood of $Q$ deform relative to $Q$ to genuine data, and smooth input admits smooth output and a smooth formal deformation. This implication uses a compact collared parameter neighbourhood and finite CW models, not an arbitrary compact-pair consequence of weak equivalence.
+
+LINE 75 8.1 The same relative core comparison applies to an $m$-dimensional $j$-handle. Realize its holonomic full-column core data by local addition in the $m-j$ cocore directions; the derivative along the core is the full monomorphism, hence the maps are immersions on a common compact-parameter neighbourhood of the core. Near the attaching collar use the already prescribed genuine maps. Their first jets agree on the attaching core, so the $O(r^2)$ pinching argument matches their germs on the overlap while preserving rank. This gives an immersion on a neighbourhood of the union of the core and the attaching collar. Relative parameter control requires retaining the original whole-handle immersion on a smaller parameter neighbourhood of $Q$. On the transition strip inside its given genuine neighbourhood, blend this original map with the canonical core realization in target logarithm coordinates. They share full core first jets, so their difference is $O(|v|^2)$ and its derivative is $O(|v|)$; differentiated cocore cutoffs therefore contribute $O(\delta)$ and preserve rank for a common sufficiently small radius. Use the original map throughout the smaller parameter neighbourhood. Compress the whole handle into the resulting domain by embeddings $(x,v)\mapsto(x,\lambda(p,x)v)$, with $0<\lambda\le1$, equal to one near $Q$ and on a smaller attaching collar and small away from slightly larger neighbourhoods of those regions. Transition inside the region already covered by the prescribed genuine maps. Its derivative has triangular blocks $I,\lambda I$, so is invertible even though $d\lambda$ is nonzero. The isotopy from $\lambda=1$ gives the comparison with the original formal family, is fixed on the attaching collar, and never drops cocore rank. The formal comparison transports tangent summands with the nonzero scale, or uses the horizontal/vertical identity transport at the collapsed core, rather than setting vertical derivatives to zero. This proves the fixed-source relative handle comparison required by the core argument. [F2, F4, step 6.1, step 7.1, construct]
+
+9.1 We explain the compact smooth parameter pair, rather than identifying it with an arbitrary compact pair. Let $W$ be the open parameter neighbourhood of $Q$ on which the original family is genuine. Choose a smooth bump equal to one near $Q$ with support in $W$, and a regular level to obtain a compact collared parameter neighbourhood $U$ with $Q\subset\operatorname{int}U\subset U\subset W$. For interval/corner factors work in a compact smooth parameter neighbourhood $P_0\times D^d_R$ containing $P_0\times[0,1]^d$. Extend the continuous family by clamping the interval coordinates. On a neighbourhood of $Q$, use the given smooth local extensions instead: a finite parameter cover and parameter-only partition paste smooth extensions of the prescribed genuine maps in the target embedding, then retract to $N$ and set their formal columns equal to the source derivative of that pasted map. On this neighbourhood the columns are not extended independently, so holonomicity is retained. The extensions agree on $P$; compactness and openness of full rank preserve holonomicity on a smaller ambient neighbourhood of $Q$. A cutoff inside the original neighbourhood pastes this with the clamped continuous family. After the deformation restrict back to $P$. The finite Morse/handle construction in [F5] applied to $U$ and the compact complement of its interior produces a finite CW model $(K,L)$ of the parameter pair $(P,U)$. If $U$ has only a finite CW model, replace it by that model before attaching the finitely many complement cells: transport the attaching maps through its homotopy inverse, with attaching collars carrying the required homotopies. This gives maps of pairs $a:(P,U)\to(K,L)$ and $b:(K,L)\to(P,U)$ with pair homotopies $ba\simeq\mathrm{id}$ and $ab\simeq\mathrm{id}$. Every track starting in $U$ stays in $U$, where the given family is genuine. Apply the fibrewise finite lifting of step 7.1 on $(K,L)$ and pull back by $a$. If the spatial boundary family was pulled back through $ba$, transport it back along the pair homotopy using the compact-parameter lifting supplied in [F4]. Do this also for the formal deformation with its genuine endpoints prescribed; the endpoint-relative cubical lifts in the path variable keep those endpoints. The resulting boundary track followed by its reverse contracts to the fixed original boundary family, and another such lift makes the deformation stationary on that spatial boundary. On $U$ the resulting genuine family is regularly homotopic to the prescribed one, via its composite with the pair homotopy. Extend the reverse regular homotopy to all of $P$ using the homotopy extension property of the collared inclusion $U\subset P$. This extension may move spatial boundary data. Write its projected boundary track as $\beta(p,t)$, starting at the original $b_p$; it is constant on $U$. For each $(p,t)$ lift the reversed track $s\mapsto\beta(p,(1-s)t)$, starting from the extended genuine datum. The compact-parameter lifting formulas of [F4] are stationary on constant tracks, so these lifts preserve the prescribed correction on $U$ and the initial datum at $t=0$. Their endpoints give a corrected genuine homotopy over the original $b_p$ for every $p,t$, ending at the original family on $U$. Concatenating the formal homotopy with this correction produces on $U$ a track followed by its reverse. Contract these loops, and use the same collar homotopy extension property on $P\times I$ relative to $P\times\partial I\cup U\times I$. Rebase this formal extension too: lift its reversed projected boundary tracks, now with parameters $P\times I$ and the contraction variable, by the formal version of [F4]. On the prescribed ends and on $U$ those projections are constant, so stationary lifting leaves the given loop contraction and both endpoints unchanged. The resulting homotopy is stationary on $U$ and lies over the original spatial boundary throughout. The jet pinching of step 6.1 retains the full prescribed spatial collar germ. Thus it is relative to $Q$. All choices are finite, except the explicitly countable-choice suppliers in [F5]. [F3, F5, step 7.1, step 8.1, construct, choose]
+
+10.1 First prepare a common holonomic neighbourhood of $A$ in $U$. If $P$ is empty the conclusion is immediate; otherwise $F=df$ on $P\times A$, so $df$ has a positive minimum least singular value $c$ there. Joint smoothness and compactness give a source neighbourhood $V$ of $A$, with compact closure in $U$, on which the least singular value of $df$ is greater than $c/2$ and $\|F-df\|<c/4$, uniformly in $p$. Choose a smooth source cutoff $\chi=1$ on a neighbourhood of $A$, supported in $V$, and replace $F$ by $(1-s\chi)F+s\chi df$. Every interpolated map remains injective by these estimates. The base map is unchanged; the bundle homotopy fixes $A$ and the given parameter neighbourhood of $Q$, since $F=df$ there. At its endpoint the family is holonomic on one common open source neighbourhood of $A$, including an outer strip beyond $\partial D^k$, without assuming any uniform width for the original pointwise holonomic neighbourhoods. Cut a smaller disk inside this prepared holonomic collar and leave all original data on $A$ unchanged. Apply steps 7.1 and 9.1 with $j=m=k<n$ to that disk and its now common collar-holonomic data. They give the relative deformation on the smaller disk. Extend it by the prepared data on the surrounding holonomic collar and on the rest of $U$; the agreement on an open collar makes the extension smooth in the source. Smooth genuine output families are obtained with the genuine smoothing supplier, fixing the original parameter neighbourhood of $Q$ and prescribed spatial collar. Make the formal deformation constant on small temporal endpoint collars and use formal-family smoothing relative to those endpoint and parameter neighbourhoods. These smoothing operations preserve full fibrewise rank, since their compact jet errors may be chosen below the positive injectivity margin. Multiply their parameter-mollification correction by a fixed smooth source cutoff zero on the prescribed collar, with transition inside a region where the original reference is already jointly smooth. Its differentiated error has the additional term $d\chi$ times the zeroth-order mollification error, also tending uniformly to zero. Thus first jets remain small and the prescribed spatial collar maps and bundle columns are kept exactly. Thus a smooth relative deformation is obtained when the input is smooth. The absolute case $k=n$ was already proved in step 4.1 and is not used as a spatially relative disk theorem. [F3, F4, F5, step 4.1, step 7.1, step 9.1]
+
+FILE lem-poisson-jensen-inequality-hardy-functions
+
+STATEMENT Let $0<p\le\infty$ and $f\in H^p(\mathbb D)$ with $f\not\equiv0$, with boundary
+function $f^*\in L^p$ as in
+[[thm-nevanlinna-boundary-values-and-log-integrability]]; by
+[[lem-hardy-log-integrability-of-boundary-values]] one has
+$\log|f^*|\in L^1(\mathbb T,m)$. Then for every $z\in\mathbb D$
+$$\log|f(z)|\le P[\log|f^*|](z):=\int_{\mathbb T}P(z,\zeta)\,\log|f^*(\zeta)|\,dm(\zeta),$$
+with the convention $\log0=-\infty$. In particular $\log|f|$ is majorized on
+$\mathbb D$ by the harmonic function $P[\log|f^*|]$, and equality holds for
+every $z$ whenever $f$ is outer in the sense of
+[[def-inner-singular-inner-and-outer-functions]].
+
+LINE 52 **Given:** Countable choice, $0<p\le\infty$, a nonzero $f\in H^p(\mathbb D)$, its boundary function $f^*$ with $\log|f^*|\in L^1(\mathbb T,m)$, a point $z\in\mathbb D$ with $f(z)\ne0$, and radii $R\in(|z|,1)$.
+
+[L1] A nonzero Hardy function lies in N and has finite nonzero nontangential boundary values under countable choice, with $f^*\in L^p$ and $\log|f^*|\in L^1$. In particular radial limits exist almost everywhere. The elementary estimate $\log^+ t\le t^q/q$ holds for every $q>0$. No strong Lp convergence is assumed in this proof. ([[thm-nevanlinna-boundary-values-and-log-integrability]], [[lem-hardy-log-integrability-of-boundary-values]], [[def-analytic-hardy-space-disc]], [[def-nevanlinna-class-on-the-disc]], [[def-countable-choice]])
+
+[L2] $f_R(w):=f(Rw)$ is holomorphic on a neighbourhood of the closed unit disc, and $F(w):=f_R(\varphi_z(w))$ likewise, where $\varphi_z(w)=\frac{z-w}{1-\overline zw}$ is the Blaschke factor; $F(0)=f(Rz)$ and $F$ has finitely many zeros in the open disc ([[def-unit-disc-upper-half-plane-and-blaschke-factor]], [[thm-blaschke-factor-is-a-disc-automorphism]]).
+
+LINE 74 1.2 The case $f(z)=0$. If $f(z)=0$, then $\log|f(z)|=-\infty\le P[\log|f^*|](z)$ by the convention on $\log0$; the inequality holds trivially. [given, algebra]
+
+1.3 Positive logarithmic parts converge in L1. For finite p set $C=\|f\|_{H^p}^p$, so $\int|f_R|^pdm\le C$ and $\int|f^*|^pdm\le C$ by [L1]. Given $\varepsilon>0$, choose $L>0$ large enough that $\log t\le\varepsilon t^p$ for all $t>e^L$; indeed [L1] with $q=p/2$ gives $\log t/t^p\le(2/p)t^{-p/2}$ for $t\ge1$, and it suffices to take L with $(2/p)e^{-Lp/2}\le\varepsilon$. Writing $u_R=\log^+|f_R|$, $u^*=\log^+|f^*|$, the tails satisfy $$\int(u_R-L)_+dm\le\varepsilon C,\qquad\int(u^*-L)_+dm\le\varepsilon C.$$ The truncated functions $\min(u_R,L)$ converge almost everywhere to $\min(u^*,L)$ and are bounded by L, so [L5] gives L1 convergence by dominated convergence. Therefore $\limsup_{R\uparrow1}\|u_R-u^*\|_1\le2\varepsilon C$, and letting epsilon decrease to zero proves the claim. For p infinity, all positive logarithms are bounded by $\log^+\|f\|_\infty$, so dominated convergence applies directly. These limit statements hold along every sequence tending to one, hence for the stated radial limit. [L1, L5, given, algebra]
+
+2.1 Pass to the Jensen inequality. For f(z) nonzero, let R increase to one in step 1.1. Its left side tends to $\log|f(z)|$. The weight $P(z,\cdot)$ is bounded by [L5], so step 1.3 gives convergence of the weighted positive logarithmic integrals. Fatou's lemma gives $$\int P(z,\zeta)\log^-|f^*(\zeta)|dm\le\liminf_{R\uparrow1}\int P(z,\zeta)\log^-|f(R\zeta)|dm.$$ Subtracting this inequality from the positive-part limit bounds the limsup of the Jensen right side by $P[\log|f^*|](z)$. This quantity is finite by [L1] and the bounded weight, so $\log|f(z)|\le P[\log|f^*|](z)$. Step 1.2 covers zeros of f. Only CC boundary existence and the logarithmic tail estimate were used; no AC Hardy representation is invoked. [step 1.1, step 1.2, step 1.3, L1, L5, algebra]
+
+LINE 76 1.3 Positive logarithmic parts converge in L1. For finite p set $C=\|f\|_{H^p}^p$, so $\int|f_R|^pdm\le C$ and $\int|f^*|^pdm\le C$ by [L1]. Given $\varepsilon>0$, choose $L>0$ large enough that $\log t\le\varepsilon t^p$ for all $t>e^L$; indeed [L1] with $q=p/2$ gives $\log t/t^p\le(2/p)t^{-p/2}$ for $t\ge1$, and it suffices to take L with $(2/p)e^{-Lp/2}\le\varepsilon$. Writing $u_R=\log^+|f_R|$, $u^*=\log^+|f^*|$, the tails satisfy $$\int(u_R-L)_+dm\le\varepsilon C,\qquad\int(u^*-L)_+dm\le\varepsilon C.$$ The truncated functions $\min(u_R,L)$ converge almost everywhere to $\min(u^*,L)$ and are bounded by L, so [L5] gives L1 convergence by dominated convergence. Therefore $\limsup_{R\uparrow1}\|u_R-u^*\|_1\le2\varepsilon C$, and letting epsilon decrease to zero proves the claim. For p infinity, all positive logarithms are bounded by $\log^+\|f\|_\infty$, so dominated convergence applies directly. These limit statements hold along every sequence tending to one, hence for the stated radial limit. [L1, L5, given, algebra]
+
+2.1 Pass to the Jensen inequality. For f(z) nonzero, let R increase to one in step 1.1. Its left side tends to $\log|f(z)|$. The weight $P(z,\cdot)$ is bounded by [L5], so step 1.3 gives convergence of the weighted positive logarithmic integrals. Fatou's lemma gives $$\int P(z,\zeta)\log^-|f^*(\zeta)|dm\le\liminf_{R\uparrow1}\int P(z,\zeta)\log^-|f(R\zeta)|dm.$$ Subtracting this inequality from the positive-part limit bounds the limsup of the Jensen right side by $P[\log|f^*|](z)$. This quantity is finite by [L1] and the bounded weight, so $\log|f(z)|\le P[\log|f^*|](z)$. Step 1.2 covers zeros of f. Only CC boundary existence and the logarithmic tail estimate were used; no AC Hardy representation is invoked. [step 1.1, step 1.2, step 1.3, L1, L5, algebra]
+
+3.1 Equality for outer functions. If $f$ is outer, then by [L6] the identity $\log|f(z)|=P[\log|f^*|](z)$ holds for every $z$, so equality holds in the Poisson-Jensen inequality; thus the inequality is an identity for all nonzero outer functions. [step 1.1, step 2.1, L6, algebra] ∎
+
+FILE lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core
+
+STATEMENT Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact
+Hausdorff abelian group with Haar measure $m_G$ and dual $\widehat G$, and let
+$\phi:G\to\mathbb C$ be continuous and positive definite, with $k:=\phi(0)\ge0$.
+Define
+$$L_\phi(f):=\int_G f(x)\,\phi(-x)\,dm_G(x),\qquad f\in L^1(G,m_G).$$
+Then $L_\phi$ is a well-defined linear functional with $|L_\phi(f)|\le k\|f\|_1$,
+the integrated positivity
+$$L_\phi(f*f^*)\ \ge\ 0\qquad(f\in L^1(G,m_G))$$
+holds, and the Cauchy-Schwarz-type bound
+$$|L_\phi(f)|^2\le k\,L_\phi(f*f^*)\le k^2\,\|\widehat f\|_\infty^2$$
+holds. Consequently $L_\phi$ vanishes on $\{f:\widehat f=0\}$ and descends to a
+positive linear functional $F_\phi$ on the transform core
+$\{\widehat f:f\in L^1(G,m_G)\}\subseteq C_0(\widehat G)$ with
+$$|F_\phi(h)|\le k\,\|h\|_\infty .$$
+No condition on the growth or integrability of $\phi$ beyond continuity and
+positive definiteness is needed.
+
+LINE 73 [F3] The approximate identity $\{u_U\}\subseteq C_c(G)$ is symmetric with $u_U\ge0$, $\int_Gu_U\,dm_G=1$, $\|u_U\|_1=1$, and $f*u_U\to f$ in $A$ for every $f\in A$ ([[lem-lca-translations-and-normalised-local-approximate-identities]], [[def-dependent-choice]]).
+
+[F4] In $A^+=\mathbb C\oplus A$ the spectrum of $(0,a)$ is $\{0\}\cup\widehat a(\widehat G)$ and $r_{A^+}(0,a)=\lim_m\|a^m\|_1^{1/m}$ ([[lem-lca-scalar-unitization-character-space-and-spectrum]], [[thm-spectral-radius-formula]], [[def-spectral-radius]]).
+
+[F5] $C_c(G)$ is dense in $A$ every transform lies in $C_0(\widehat G)$ by Riemann–Lebesgue, and the transform core is a self-adjoint algebra: products and complex conjugates of transforms of $A$ are transforms of $A$ ([[thm-c-c-is-dense-in-l-p-for-radon-measures]], [[thm-riemann-lebesgue-lemma-on-lca-groups]], [[lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution]]); polynomials without constant term approximate the square-root function uniformly on a compact interval ([[cor-weierstrass-approximation-on-a-closed-interval]]).
+
+LINE 89 3.1 (The Cauchy-Schwarz bound.) The form $[g,h]:=L_\phi(g*h^*)$ is sesquilinear by [F2] and positive semidefinite by step 2.1; for such a form $|[g,h]|^2\le[g,g][h,h]$ (the quadratic $[g+th,g+th]\ge0$ in $t\in\mathbb C$ has nonnegative discriminant). With $h=u_U^*=u_U$ from [F3] this gives $|L_\phi(f*u_U)|^2=|[f,u_U]|^2\le L_\phi(f*f^*)\,L_\phi(u_U*u_U^*)$. As $U$ shrinks, $f*u_U\to f$ in $A$ ([F3]) so $L_\phi(f*u_U)\to L_\phi(f)$ by step 1.1; and $L_\phi(u_U*u_U^*)\to k$: the functions $u_U*u_U^*$ are nonnegative with integral $1$ and support shrinking to $\{0\}$, so $|L_\phi(u_U*u_U^*)-k|=|\int_G(u_U*u_U^*)(x)(\phi(-x)-k)\,dm_G(x)|\le\sup_{x\in\operatorname{supp}(u_U*u_U^*)}|\phi(-x)-k|\to0$ by continuity of $\phi$ at $0$ and [F1]. Hence $|L_\phi(f)|^2\le k\,L_\phi(f*f^*)$. [F1, F2, F3, step 1.1, step 2.1]
+
+4.1 (The sup-norm bound.) If $k=0$, [F1] makes $L_\phi=0$ and all bounds hold. Assume $k>0$ and put $a:=f*f^*$, so $a^*=a$ and $\widehat a=|\widehat f|^2$ by [F2]. Applying step 3.1 to $a,a^2,a^4,\dots$ gives by induction $|L_\phi(f)|\le k^{1-2^{-n}}L_\phi(a^{2^{n-1}})^{2^{-n}}$ for $n\ge1$, and the elementary bound of step 1.1 applied to the last factor yields $|L_\phi(f)|\le k\,\|a^{2^{n-1}}\|_1^{2^{-n}}$. Since $\|a^{2^{n-1}}\|_1^{2^{-n}}=(\|a^{2^{n-1}}\|_1^{1/2^{n-1}})^{1/2}\to r_{A^+}(0,a)^{1/2}$ by the spectral radius formula [F4], while $r_{A^+}(0,a)=\max_{\lambda\in\sigma_{A^+}(0,a)}|\lambda|=\sup_{\gamma}|\widehat a(\gamma)|=\|\widehat f\|_\infty^2$ by [F4], we obtain $|L_\phi(f)|\le k\|\widehat f\|_\infty$. Applying this bound to $a=f*f^*$ gives $0\le L_\phi(a)\le k\|\widehat a\|_\infty=k\|\widehat f\|_\infty^2$, proving the second inequality in the stated chain. The bound holds for every representative, so $L_\phi$ vanishes on $\{f:\widehat f=0\}$. [F2, F4, step 3.1]
+
+5.1 (Descent and positivity.) Since $L_\phi$ vanishes on the kernel of the transform, $F_\phi(\widehat f):=L_\phi(f)$ is a well-defined linear functional on the transform core, and step 4.1 gives $|F_\phi(h)|\le k\|h\|_\infty$. For positivity let $h\ge0$ belong to the core. The core is a self-adjoint algebra of functions vanishing at infinity ([F5]), so choose real polynomials $p_n$ with $p_n(0)=0$ and $p_n(t)^2\to t$ uniformly on $[0,\|h\|_\infty]$ ([F5]); then $p_n(h)$ lies in the core with $|p_n(h)|^2=p_n(h)^{2}\to h$ uniformly, and writing $p_n(h)=\widehat{g_n}$ for some $g_n\in A$ we get $|p_n(h)|^2=\widehat{g_n*g_n^*}$, so $F_\phi(|p_n(h)|^2)=L_\phi(g_n*g_n^*)\ge0$ by step 2.1; passing to the uniform limit using the bound of step 4.1 gives $F_\phi(h)\ge0$. [F2, F5, step 2.1, step 4.1]

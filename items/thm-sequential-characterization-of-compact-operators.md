@@ -1,21 +1,17 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-sequential-characterization-of-compact-operators.json
 id: thm-sequential-characterization-of-compact-operators
 kind: theorem
 title: Sequential characterization of compact operators
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-linear-operator, def-dependent-choice, lem-dependent-choice-implies-countable-choice, thm-metric-compactness-equivalences, def-metric-compactness-variants, def-metric-bounded-diameter, def-metric-convergence, def-metric-ball, thm-metric-closure-characterisation, thm-compactness-under-continuous-maps, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, def-bounded-linear-operator, def-sequence, lem-index-map-grows]
+deps: [def-compact-linear-operator, def-dependent-choice, lem-dependent-choice-implies-countable-choice, thm-metric-compactness-equivalences, def-metric-compactness-variants, def-metric-bounded-diameter, def-metric-convergence, def-metric-ball, thm-metric-closure-characterisation, thm-compactness-under-continuous-maps, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, def-bounded-linear-operator, def-sequence, lem-index-map-grows, lem-complex-norm-realification-is-a-real-norm]
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.183, Lemma 4.19"
@@ -28,7 +24,7 @@ sources:
 
 Assume the Axiom of Dependent Choice ([[def-dependent-choice]]). Let $X$ and $Y$
 be normed spaces over the same scalar field
-([[def-norm-and-normed-space]], [[rem-real-and-complex-normed-space-convention]])
+([[def-norm-and-normed-space]], [[def-complex-norm-and-complex-normed-space]])
 and let $T:X\to Y$ be a bounded linear operator
 ([[def-bounded-linear-operator]]). Then $T$ is compact
 ([[def-compact-linear-operator]]) if and only if every bounded sequence
@@ -49,7 +45,7 @@ $(Tx_{k_j})$ converges in the norm metric of $Y$
 
 [A4] A subset $A$ of a metric space is bounded when $A=\varnothing$ or $A\subseteq B(x_0,r)$ for some point $x_0$ and real $r>0$ ([[def-metric-bounded-diameter]], [[def-metric-ball]]).
 
-[A5] In a normed space, $\|x\|\le R$ implies $x\in R\overline B_X$; convergence is metric convergence for $d(y,y')=\|y-y'\|$; a set $F\subseteq Y$ is closed exactly when $F=\overline F$; for nonempty $A$ the closure is $\overline A=\{y:d(y,A)=0\}$; and the closure of $A$ is contained in every closed set containing $A$ ([[def-norm-and-normed-space]], [[def-metric-convergence]], [[thm-metric-closure-characterisation]]).
+[A5] In a normed space, $\|x\|\le R$ implies $x\in R\overline B_X$; convergence is metric convergence for $d(y,y')=\|y-y'\|$; a set $F\subseteq Y$ is closed exactly when $F=\overline F$; for nonempty $A$ the closure is $\overline A=\{y:d(y,A)=0\}$; and the closure of $A$ is contained in every closed set containing $A$ ([[def-norm-and-normed-space]], [[lem-complex-norm-realification-is-a-real-norm]], [[def-metric-convergence]], [[thm-metric-closure-characterisation]]).
 
 ## Proof
 

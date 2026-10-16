@@ -1,0 +1,1553 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "17",
+  "scope": [
+    "def-qc-bell-basis",
+    "thm-qc-bell-transform-inverse",
+    "alg-qc-teleportation",
+    "thm-qc-teleportation-bell-expansion",
+    "alg-qc-dense-coding",
+    "def-qc-teleportation-protocol-resource-count",
+    "thm-qc-teleportation-equiprobable-outcomes",
+    "thm-qc-teleportation-correction-identity",
+    "thm-qc-dense-coding-correctness-and-resource-count",
+    "thm-qc-teleportation-reference-stability",
+    "thm-qc-teleportation-correctness-and-resource-count",
+    "ex-qc-teleportation-branch-correction"
+  ],
+  "contracts": {
+    "def-qc-bell-basis": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated normalized-input or fixed-resource domain excludes a zero-vector case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No varying natural-number parameter has value one as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition fixes finite registers and instructions and selects nothing from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_supplier_checks": []
+    },
+    "thm-qc-bell-transform-inverse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-bell-basis",
+          "source_section": "Definition",
+          "quote": "Bell vectors** by\n\n$$|\\Phi^+\\rangle:=\\frac{|00\\rangle+|11\\rangle}{\\sqrt2},\\qquad |\\Phi^-\\rangle:=\\frac{|00\\rangle-|11\\rangle}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qqu",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\o",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with b",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "orthonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, t",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\over",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix in [F2] gives $H|a\\rangle=(|0\\rangle+(-1)^a|1\\rangle)/\\sqrt2$ for each bit $a$. By [F6], $(H\\otimes I)|ab\\rangle=(|0,b\\rangle+(-1)^a|1,b\\rangle)/\\sqrt2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From [F3], applying CNOT twice fixes every basis vector because $(t\\oplus a)\\oplus a=t$. Its matrix permutes the orthonormal basis [F4], so its inverse is its transpose and equals itself. The matrix of $H\\otimes I$ in [F4] is real symmetric and its square is the identity by [F2]. Thus both factors are self-adjoint involutions, and direct composition gives $(H\\otimes I)\\operatorname{CNOT}_{1\\to2}B=I=B(H\\otimes I)\\operatorname{CNOT}_{1\\to2}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the control-first action in [F3] to the two terms of step 1.1. The control-zero term is fixed, while the control-one term changes its target from $b$ to $b\\oplus1$. Therefore $B|ab\\rangle=(|0,b\\rangle+(-1)^a|1,b\\oplus1\\rangle)/\\sqrt2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting $00,01,10,11$ into step 2.1 gives $\\Phi^+,\\Psi^+,\\Phi^-,\\Psi^-$ in that order, exactly as defined in [F1]. Each has norm one because it is a signed sum of two distinct orthonormal computational basis vectors from [F5], divided by $\\sqrt2$. The inner product of $\\Phi^+$ with $\\Phi^-$ and of $\\Psi^+$ with $\\Psi^-$ is $(1-1)/2=0$; cross-pair inner products are zero because their computational supports are disjoint.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The four vectors in step 3.1 are an orthonormal set of four vectors in the four-dimensional space whose product basis is listed in [F4]; hence they are an orthonormal basis.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In matrices, $(AB)_{ij}=\\sum_k A_{ik}B_{kj}$, so conjugating and transposing this finite sum gives $(AB)^\\dagger=B^\\dagger A^\\dagger$. By [F7]–[F8] this is the adjoint product rule in the register pairing. Since both factors in [F6] and [F3] are self-adjoint by step 1.2, $B^\\dagger=(H\\otimes I)\\operatorname{CNOT}_{1\\to2}$. Applying this reverse sequence to the four Bell vectors sends $\\Phi^+$ to $|+\\rangle|0\\rangle$, $\\Psi^+$ to $|+\\rangle|1\\rangle$, $\\Phi^-$ to $|-\\rangle|0\\rangle$, and $\\Psi^-$ to $|-\\rangle|1\\rangle$ after CNOT; the Hadamard then sends $|+\\rangle$ to $|0\\rangle$ and $|-\\rangle$ to $|1\\rangle$. It therefore recovers $00,01,10,11$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.2",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated normalized-input or fixed-resource domain excludes a zero-vector case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-bell-transform-inverse-finite-cases",
+          "description": "Enumerates all four Bell labels and checks all vector norms and pairwise inner products.",
+          "steps": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "alg-qc-teleportation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition specifies that a zero-probability outcome has no conditional state or branch output."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No varying natural-number parameter has value one as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition fixes finite registers and instructions and selects nothing from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_supplier_checks": []
+    },
+    "thm-qc-teleportation-bell-expansion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-teleportation",
+          "source_section": "Definition",
+          "quote": "1. Alice applies $\\operatorname{CNOT}_{A\\to B}$ and then $H_A$, so the combined operator is $V_{AB}=(H_A\\otimes I_{BC})\\opera",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-bell-basis",
+          "source_section": "Definition",
+          "quote": "Bell vectors** by\n\n$$|\\Phi^+\\rangle:=\\frac{|00\\rangle+|11\\rangle}{\\sqrt2},\\qquad |\\Phi^-\\rangle:=\\frac{|00\\rangle-|11\\rangle}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qqu",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\o",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{p",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, t",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the initial vector is $2^{-1/2}(\\alpha|000\\rangle+\\alpha|011\\rangle+\\beta|100\\rangle+\\beta|111\\rangle)$ in wire order $A,B,C$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F4] to the four basis vectors gives $2^{-1/2}(\\alpha|000\\rangle+\\alpha|011\\rangle+\\beta|110\\rangle+\\beta|101\\rangle)$ after CNOT: the first two terms have control bit $0$ and are fixed, while the last two have control bit $1$ and their target bits flip.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3] and [F6], $H_A$ sends each first-wire $|0\\rangle$ to $(|0\\rangle+|1\\rangle)/\\sqrt2$ and each $|1\\rangle$ to $(|0\\rangle-|1\\rangle)/\\sqrt2$. Regrouping the resulting eight terms by the first two wires gives $\\frac12\\bigl(|00\\rangle(\\alpha|0\\rangle+\\beta|1\\rangle)+|01\\rangle(\\alpha|1\\rangle+\\beta|0\\rangle)+|10\\rangle(\\alpha|0\\rangle-\\beta|1\\rangle)+|11\\rangle(\\alpha|1\\rangle-\\beta|0\\rangle)\\bigr)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The four receiver vectors in step 3.1 are respectively $|\\psi\\rangle$, $X|\\psi\\rangle$, $Z|\\psi\\rangle$, and $XZ|\\psi\\rangle$ by the actions in [F5]. These are exactly $X^bZ^a|\\psi\\rangle$ for labels $00,01,10,11$, so step 3.1 is the sum in the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-vector or zero-amplitude specialization is included in step 1.1 and the displayed formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-bell-expansion-finite-cases",
+          "description": "Expands the computational terms and identifies labels 00, 01, 10, 11.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "alg-qc-dense-coding": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition specifies that a zero-probability outcome has no conditional state or branch output."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No varying natural-number parameter has value one as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition fixes finite registers and instructions and selects nothing from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_supplier_checks": []
+    },
+    "def-qc-teleportation-protocol-resource-count": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated normalized-input or fixed-resource domain excludes a zero-vector case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No varying natural-number parameter has value one as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition fixes finite registers and instructions and selects nothing from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_supplier_checks": [],
+      "supplier_reconciliations": [
+        {
+          "supplier": "def-qc-elementary-circuit-resources",
+          "status": "actual-interface-checked-and-narrower-than-planned-interface",
+          "supplier_excerpt": "The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires.",
+          "not_supplied": [
+            "Bell-pair use count",
+            "classical communication-bit count",
+            "measurement-record-bit count",
+            "transmitted-qubit count"
+          ],
+          "local_resolution": "This definition gives those protocol-specific coordinates explicitly and uses the supplier only for the gate-occurrence/size convention."
+        }
+      ]
+    },
+    "thm-qc-teleportation-equiprobable-outcomes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\r",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with b",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairin",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{p",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "orthonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $(a,b)$, let $P_{ab}$ be the diagonal projection onto the two basis vectors $|ab0\\rangle,|ab1\\rangle$ of the ordered three-wire register. These four projections are self-adjoint idempotents, their ranges are pairwise orthogonal, and their sum is the identity because the eight orthonormal computational basis vectors from [F8] are partitioned by their first two bits. Hence they form a projective measurement as in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write the post-gate vector in [F1] as $\\Omega=\\sum_i c_i e_i$ in the orthonormal basis [F4]. For the matrix $\\rho$ with entries $\\rho_{ij}=c_i\\overline{c_j}$, self-adjointness is immediate; for any coordinate vector $z$, $\\langle\\rho z,z\\rangle=|\\sum_j z_j\\overline{c_j}|^2\\ge0$. The matrix [F6] sends $(\\alpha,\\beta)$ to $(\\beta,\\alpha)$ under $X$ and to $(\\alpha,-\\beta)$ under $Z$, so each preserves $|\\alpha|^2+|\\beta|^2$ and every $X^bZ^a$ preserves norm. The branch vectors in [F1] have orthogonal $AB$ labels, hence $\\operatorname{tr}(\\rho)=\\sum_i|c_i|^2=\\|\\Omega\\|^2=\\|\\psi\\|^2=1$ by [A1] and [F7]. Thus $\\rho$ is a density operator under the description in [F2].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and [F7], the probability weight of label $(a,b)$ is $\\operatorname{tr}(\\rho P_{ab})=|c_{ab0}|^2+|c_{ab1}|^2$, the sum of the two diagonal entries selected by $P_{ab}$. The branch vector in [F1] has these two coefficients equal to those of $\\frac12X^bZ^a|\\psi\\rangle$, so this sum is $\\frac14\\|X^bZ^a\\psi\\|^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The matrices in [F6] are unitary: direct multiplication gives $X^*X=I$ and $Z^*Z=I$. Hence $\\|X^bZ^a\\psi\\|^2=\\|\\psi\\|^2=1$, so every weight in step 2.1 is $1/4$. By [F3] these are the outcome probabilities, and the four weights sum to one.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "F3",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated normalized-input or fixed-resource domain excludes a zero-vector case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-equiprobable-outcomes-finite-cases",
+          "description": "The four diagonal projectors select branches of squared norm 1/4.",
+          "steps": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "thm-qc-teleportation-correction-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\r",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{p",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From the matrices in [F2], direct multiplication gives $X^2=I$ and $Z^2=I$. Therefore $X^bX^b=I$ and $Z^aZ^a=I$ for the two possible values of each bit.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Keeping the operator order fixed, $Z^aX^bX^bZ^a=Z^a(X^bX^b)Z^a=Z^aIZ^a=Z^aZ^a=I$ by step 1.1. This also covers $a=b=1$ without using an anticommutation swap.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying the identity in step 2.1 to the byproduct vector from [F1] yields $Z^aX^b(X^bZ^a|\\psi\\rangle)=|\\psi\\rangle$ for every qubit vector.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-vector or zero-amplitude specialization is included in step 1.1 and the displayed formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-correction-identity-finite-cases",
+          "description": "Checks all bit exponents; label 11 retains the exact Z-X-X-Z order.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "thm-qc-dense-coding-correctness-and-resource-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-dense-coding",
+          "source_section": "Definition",
+          "quote": "Alice applies $X_A^b$ and then $Z_A^a$, so the encoding operator is $Z_A^aX_A^b$.\n2. Alice sends the single qubit $A$ to Bob.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-bell-basis",
+          "source_section": "Definition",
+          "quote": "Bell vectors** by\n\n$$|\\Phi^+\\rangle:=\\frac{|00\\rangle+|11\\rangle}{\\sqrt2},\\qquad |\\Phi^-\\rangle:=\\frac{|00\\rangle-|11\\rangle}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-bell-transform-inverse",
+          "source_section": "Statement",
+          "quote": "back to their labels.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{p",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "orthonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying $Z_A^aX_A^b$ to $|\\Phi^+\\rangle=(|00\\rangle+|11\\rangle)/\\sqrt2$ and using [F4] gives the four cases: $00\\mapsto\\Phi^+$, $01\\mapsto\\Psi^+$, $10\\mapsto\\Phi^-$, and $11\\mapsto\\Psi^-$. In the last case, $Z_A X_A|00\\rangle=-|10\\rangle$ and $Z_A X_A|11\\rangle=|01\\rangle$, so the state is exactly $\\Psi^-$ in the chosen convention.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x\\in\\{0,1\\}$, [F4] gives $Z^a|x\\rangle=(-1)^{ax}|x\\rangle$. Expanding the left side and then substituting $y=x\\oplus b$ gives $(Z^aX^b\\otimes I)|\\Phi^+\\rangle=2^{-1/2}\\sum_x(-1)^{a(x\\oplus b)}|x\\oplus b,x\\rangle=2^{-1/2}\\sum_y(-1)^{ay}|y,y\\oplus b\\rangle=(I\\otimes X^bZ^a)|\\Phi^+\\rangle$. The same matrices give $XZ=-ZX$, hence $X^bZ^a=(-1)^{ab}Z^aX^b$. The scalar $\\lambda=(-1)^{ab}$ leaves the rank-one projector unchanged because $(\\lambda v)(\\lambda v)^*=|\\lambda|^2vv^*=vv^*$; it changes no projective outcome weight, while the direct four-case vectors in step 1.1 fix the exact label phase.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F3], the four encoded vectors in step 1.1 are $B|ab\\rangle$, and $B^\\dagger$ sends each to $|ab\\rangle$. The output projectors are the orthogonal basis projections in [F8]. The density matrix of $|ab\\rangle$ has its sole nonzero diagonal entry, equal to $1$, at label $(a,b)$, so [F5] and [F7] give weight one there and zero at the other labels. By [F6] this is a deterministic output law.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The procedure [F1] begins with one shared pair, sends only wire $A$ once, and outputs the two input bits at Bob's measurement. Its instructions contain at most two conditional Pauli gate occurrences for Alice's encoding, one CNOT and one Hadamard for Bob, and two final measured wires. Thus it achieves the stated resource exchange for this procedure; no optimality statement is used.",
+          "step": "3.1",
+          "inputs": [
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated normalized-input or fixed-resource domain excludes a zero-vector case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-dense-coding-correctness-and-resource-count-finite-cases",
+          "description": "Enumerates the four encodings, phase relation, decoder labels, and resource counts.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "thm-qc-teleportation-reference-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with b",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, t",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\r",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-teleportation-correction-identity",
+          "source_section": "Statement",
+          "quote": "Z^aX^bX^bZ^a|\\psi\\rangle=|\\psi\\rangle.$$\n\nThe operator order is part of the statement; no Pauli factors are commuted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-projective-conditional-state",
+          "source_section": "Statement",
+          "quote": "If $p_a>0$, then\n\n$$\\rho_a:=\\frac{P_a\\rho P_a}{p_a}$$\n\nis a density operator whose image $\\operatorname{im}(\\rho_a):=\\{\\rho_a",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{p",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "orthonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By the product-basis property in [F1], write $|\\Psi\\rangle_{AR}=|0\\rangle_A\\otimes|r_0\\rangle_R+|1\\rangle_A\\otimes|r_1\\rangle_R$ for unique $r_0,r_1\\in R$. The wire permutation in [F1] sends the initial order $A,R,B,C$ to $A,B,C,R$, placing the resource pair between $A$ and $R$. Apply the gates to each summand using [F2] and [F3]; linearity gives $|\\Omega\\rangle=\\frac12\\sum_{a,b}|ab\\rangle_{AB}\\otimes (X^bZ^a\\otimes I_R)|\\Psi\\rangle_{CR}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $P_{ab}$ on $A,B,C,R$ as the diagonal projection onto basis vectors whose first two bits are $ab$. These four projections form a PVM because they partition the product basis in [F1], which is orthonormal by [F10] and the product pairing. Write $|\\Omega\\rangle=\\sum_i c_i e_i$ and define $\\rho_{ij}=c_i\\overline{c_j}$. This matrix is self-adjoint and has nonnegative quadratic form $\\langle\\rho z,z\\rangle=|\\sum_j z_j\\overline{c_j}|^2$. From [F9], $X(\\gamma,\\delta)=(\\delta,\\gamma)$ and $Z(\\gamma,\\delta)=(\\gamma,-\\delta)$, so each preserves $|\\gamma|^2+|\\delta|^2$ and norm. The branch vectors in step 1.1 therefore have norm $\\frac12\\|\\Psi\\|=\\frac12$, so [F8] gives $\\operatorname{tr}(\\rho)=\\sum_i|c_i|^2=1$; hence $\\rho$ is a density operator under [F5]. The weight $\\operatorname{tr}(\\rho P_{ab})$ is the sum of the two diagonal entries selected by $P_{ab}$, namely the squared norm of that branch, $1/4$. By [F6] these are probabilities.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying $P_{ab}$ to step 1.1 leaves exactly $\\frac12|ab\\rangle\\otimes(X^bZ^a\\otimes I_R)|\\Psi\\rangle$. Its rank-one matrix is $\\frac14|ab\\rangle\\langle ab|\\otimes|(X^bZ^a\\otimes I_R)\\Psi\\rangle\\langle(X^bZ^a\\otimes I_R)\\Psi|$. Since its weight is $1/4>0$, [F7] divides by $1/4$ to give the displayed conditional joint state.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Bob's correction acts on the $C$ factor as $Z^aX^b$. By [F2] and [F4], on every elementary tensor $x_C\\otimes r_R$ its composition with $X^bZ^a\\otimes I_R$ is $x_C\\otimes r_R$; elementary tensors span by [F1], so it fixes the whole joint vector $|\\Psi\\rangle_{CR}$. Thus the corrected conditional state is $|ab\\rangle\\langle ab|_{AB}\\otimes|\\Psi\\rangle\\langle\\Psi|_{CR}$ for every label, proving reference stability.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated normalized-input or fixed-resource domain excludes a zero-vector case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-reference-stability-finite-cases",
+          "description": "Decomposes an arbitrary joint vector into two reference coefficients and checks every branch.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "thm-qc-teleportation-correctness-and-resource-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-teleportation",
+          "source_section": "Definition",
+          "quote": "1. Alice applies $\\operatorname{CNOT}_{A\\to B}$ and then $H_A$, so the combined operator is $V_{AB}=(H_A\\otimes I_{BC})\\opera",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-teleportation-equiprobable-outcomes",
+          "source_section": "Statement",
+          "quote": "1/4$ for each $(a,b)\\in\\{0,1\\}^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-teleportation-correction-identity",
+          "source_section": "Statement",
+          "quote": "Z^aX^bX^bZ^a|\\psi\\rangle=|\\psi\\rangle.$$\n\nThe operator order is part of the statement; no Pauli factors are commuted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-teleportation-reference-stability",
+          "source_section": "Statement",
+          "quote": "corrected joint vector on $C\\otimes R$ is exactly\n$|\\Psi\\rangle_{CR}$, with $A$ relabelled as the output wire $C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-teleportation-protocol-resource-count",
+          "source_section": "Definition",
+          "quote": "For the procedure [[alg-qc-teleportation]], define a protocol-specific resource\nrecord with separate coordinates as follows. A **shared-pair use** is one\ninitial Bell pair supplied as an input resource; its preparation is excluded.\nA **classical communication bit** is one bit sent from Alice to Bob; the record\ncontains two. A **transmitted qubit** is a qubit sent during the protocol after\nthe shared pair is available; the record contains zero. A **measurement-record\nbit** is one of the two ordered computational-basis outcomes measured by Alice;\nthe record contains two such bits. A **local gate occurrence** is counted by\nthe size convention of [[def-qc-elementary-circuit-resources]], namely as one\ngate occurrence in the declared circuit: Alice uses one CNOT and one Hadamard,\nand Bob uses at most two conditional Pauli gate occurrences, $X^b$ and $Z^a$.\nThe pair preparation is not included among those gate occurrences. This record\ncounts the stated procedure only; it asserts no optimality or physical\nrealization.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\r",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], each of the four possible labels has probability $1/4$, so every branch has positive probability and the conditional branch is defined. The Bell expansion [F6] identifies its receiver vector as $X^bZ^a|\\psi\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the correction from [F1] to the byproduct in step 1.1 gives $Z^aX^bX^bZ^a|\\psi\\rangle=|\\psi\\rangle$ by [F3]. Hence every branch has the exact corrected output.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a joint input with any finite reference, the same branchwise output statement is the conclusion of [F4]. This verifies the protocol preserves the full input-reference vector, not only its reduced input state.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The resource record [F5] separates one preshared Bell-pair use, the two classical bits sent from Alice to Bob, zero qubits sent after the pair is available, the two Alice gates, the two-bit Alice measurement record, and up to two conditional Bob Pauli gates. These are counts of the stated procedure only; no lower bound or physical preparation claim follows.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated normalized-input or fixed-resource domain excludes a zero-vector case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-correctness-and-resource-count-finite-cases",
+          "description": "Combines all label probabilities and corrections with the operation-by-operation count.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "ex-qc-teleportation-branch-correction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\r",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-teleportation-equiprobable-outcomes",
+          "source_section": "Statement",
+          "quote": "1/4$ for each $(a,b)\\in\\{0,1\\}^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{p",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding the input with the Bell resource and applying CNOT $A\\to B$ gives $2^{-1/2}(\\alpha|000\\rangle+\\alpha|011\\rangle+\\beta|110\\rangle+\\beta|101\\rangle)$. Applying $H_A$ and grouping by $AB$ yields $\\frac12\\bigl(|00\\rangle(\\alpha|0\\rangle+\\beta|1\\rangle)+|01\\rangle(\\alpha|1\\rangle+\\beta|0\\rangle)+|10\\rangle(\\alpha|0\\rangle-\\beta|1\\rangle)+|11\\rangle(\\alpha|1\\rangle-\\beta|0\\rangle)\\bigr)$, which is [F1]'s expansion.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each label, the receiver vector is respectively $\\psi$, $X\\psi$, $Z\\psi$, and $XZ\\psi$ by [F3]. Each has the same norm as $\\psi$, since $X$ swaps its two coordinates and $Z$ changes only the sign of the second. Thus each projected branch has squared norm $\\frac14\\|\\psi\\|^2=1/4$, agreeing with the probability in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For label $00$, the correction is $I$ and leaves $\\alpha|0\\rangle+\\beta|1\\rangle$ unchanged. For $01$, it is $X$, and $X(\\alpha|1\\rangle+\\beta|0\\rangle)=\\alpha|0\\rangle+\\beta|1\\rangle$. For $10$, it is $Z$, and $Z(\\alpha|0\\rangle-\\beta|1\\rangle)=\\alpha|0\\rangle+\\beta|1\\rangle$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For label $11$, the branch is $\\alpha|1\\rangle-\\beta|0\\rangle=XZ|\\psi\\rangle$ and the correction is $ZX$. Hence $ZX(XZ|\\psi\\rangle)=Z(XX)Z|\\psi\\rangle=Z^2|\\psi\\rangle=|\\psi\\rangle$ using [F3]; this fixed order has no residual phase. Together the four calculations return the input on every branch.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty-domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-vector or zero-amplitude specialization is included in step 1.1 and the displayed formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one/basis-state specialization is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter occurs in the statement or procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases and outcomes are finite and explicit; no arbitrary choice is used in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "ex-qc-teleportation-branch-correction-finite-cases",
+          "description": "Expands arbitrary normalized amplitudes and checks each correction, including 11.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    }
+  }
+}

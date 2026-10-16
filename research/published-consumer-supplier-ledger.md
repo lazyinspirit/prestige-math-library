@@ -6368,6 +6368,10 @@ All 13 direct dependencies are published, earlier than target order 288.051 item
 
 | Dependency | Canonical order / position |
 |---|---|
+`lem-pairwise-coprime-divisibility` — A-P, bounded current proof and exact declared supplier-interface review. Proof 1.1 uses q|gcd(n_i,n_j) without its divisibility supplier. The existing gcd maximum property immediately gives q<=gcd(n_i,n_j)=1, contradicting q>1. Nonfatal inference polish; owner should replace that clause by the inequality. Empty products and unit moduli are sound. Current raw SHA-256 `3d35e3166f33d63d0f66f3a2ed9c8c66bd816d90c4b8d6c7c9e458c9f2215b86`. Actual suppliers: def-common-divisor-and-gcd, def-coprime, lem-coprime-divides-product, cor-euclids-lemma-for-finite-products, lem-every-integer-above-one-has-a-prime-divisor, def-monoid-finite-product, thm-generalised-associativity, thm-induction-principle. Owned consumer: `lem-qa-crt-sign-vector-factorization via thm-chinese-remainder-theorem`; its use remains sound and needs no repair. Status: closed nonfatal finding disposition; published editorial repair pending owner under ordinary published repair controls. Published source is unchanged; no repair stamp, whole-closure audit or certification. Evidence: `research/quantum-computing-algorithms-60-2026-10-15-alpha-batch-33-3a.md`, reader:33:1.
+
+`thm-rational-continued-fraction-termination` — A-P, bounded current proof and exact declared supplier-interface review. Proof 1.1, 1.3 and 3.1 have internal tags interrupting sentences and a duplicated concluding tag/clause. Nonfatal layout damage. Owner should move tags to complete step endings, remove duplicated text, and make the rational premise explicit in 1.1. The positive-numerator descent starts at the first later complete quotient, so negative rational inputs are handled. Current raw SHA-256 `0c0bfe209dccf5fdddf77d7a471fb0a071422a6ec57cd1ec5bfaf4a3f0261e2f`. Actual suppliers: def-continued-fraction-complete-quotients, thm-continued-fraction-algorithm-for-real-numbers, thm-division-algorithm-in-z, lem-continued-fraction-convergent-recurrence. Owned consumer: `alg-qa-shor-factoring via alg-qa-modular-order-finding and rational reconstruction`; its use remains sound and needs no repair. Status: closed nonfatal finding disposition; published editorial repair pending owner under ordinary published repair controls. Published source is unchanged; no repair stamp, whole-closure audit or certification. Evidence: `research/quantum-computing-algorithms-60-2026-10-15-alpha-batch-33-3a.md`, reader:33:2.
+
 | `def-banach-space` | 288.047 item 2 |
 | `cor-finite-dimensional-normed-spaces-are-banach` | 288.051 item 3 |
 | `def-linear-basis` | 74 item 6 |
@@ -34201,6 +34205,10 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 | `cor-additivity-of-the-nonnegative-lebesgue-integral` | A-R, mathematical-statistics-foundations-37: owner-authorized local published correction completed with actual pre-edit ownership, original audited/verified preimage, mandatory checks and policy-valid receipt `research/mathematical-statistics-foundations-37-owner-s4-published-cor-additivity-of-the-nonnegative-lebesgue-integral-repair.json`. Current canonical SHA-256 `4895179a7beeb21966e1061e9ba3c118640746bb587d50f4084ec3538390cbb1`. Historical confirmed findings, severity and original reports remain; this is local repair protocol, not new publication or a whole-item audit. |
 | `thm-indefinite-integral-of-a-nonnegative-function-is-a-measure` | A-R, mathematical-statistics-foundations-37: owner-authorized local published correction completed with actual pre-edit ownership, original audited/verified preimage, mandatory checks and policy-valid receipt `research/mathematical-statistics-foundations-37-owner-s4-published-thm-indefinite-integral-of-a-nonnegative-function-is-a-measure-repair.json`. Current canonical SHA-256 `1b242749944bfd0bc547561f756ea691075d56e0d5baccd78d277dfa98020dc6`. Historical confirmed findings, severity and original reports remain; this is local repair protocol, not new publication or a whole-item audit. |
 | `thm-dominated-convergence` | A-R, mathematical-statistics-foundations-37: owner-authorized local published correction completed with actual pre-edit ownership, original audited/verified preimage, mandatory checks and policy-valid receipt `research/mathematical-statistics-foundations-37-owner-s4-published-thm-dominated-convergence-v2-repair.json`. Current canonical SHA-256 `2c7b6324db26a53697fe681e83a153beb6c72fa82aae9f3730f7432ef26d680a`. Historical confirmed findings, severity and original reports remain; this is local repair protocol, not new publication or a whole-item audit. |
+| `lem-pairwise-coprime-divisibility` | A-P: QA batch 33 Step-3a, 2026-10-16. Nonfatal gcd maximum-property inference maintenance pending owner; complete current carrier and exact direct supplier interfaces reviewed. See batch 33 entry and `research/quantum-computing-algorithms-60-2026-10-15-alpha-batch-33-3a.md`. |
+
+| `thm-rational-continued-fraction-termination` | A-P: QA batch 33 Step-3a, 2026-10-16. Nonfatal proof tag placement maintenance pending owner; complete current carrier and exact direct supplier interfaces reviewed. See batch 33 entry and `research/quantum-computing-algorithms-60-2026-10-15-alpha-batch-33-3a.md`. |
+
 | `thm-arithmetic-and-lattice-operations-preserve-measurability` | A-R, mathematical-statistics-foundations-37: owner-authorized local published correction completed with actual pre-edit ownership, original audited/verified preimage, mandatory checks and policy-valid receipt `research/mathematical-statistics-foundations-37-owner-s4-published-thm-arithmetic-and-lattice-operations-preserve-measurability-repair.json`. Current canonical SHA-256 `9d90cb5cc2b86ea1fda7618dbd95b7f60cf1bf2aa786d386e1b9c324fce0f51f`. Historical confirmed findings, severity and original reports remain; this is local repair protocol, not new publication or a whole-item audit. Earlier bounded review retained: Frontier-22 density/CDF/Stieltjes audit 2026-09-11: threshold identities handle scalar, lattice and defined sums; positive products respect the zero-times-infinity convention, and positive/negative parts avoid undefined infinity subtraction. U-P to bounded clear; prior monitoring row retained. Exact hash/scope: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
 
 
@@ -38926,3 +38934,543 @@ Replace remark-only logical premises with typed published suppliers and explicit
 Current canonical hash: `cbf613d060124d4aa4126350993cc3726eda81265e24ace0e0261c66f18b44ca`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
 
 <!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:thm-weierstrass-convergence-holomorphic-functions:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-contours-reversal-concatenation-and-closedness:begin -->
+def-complex-contours-reversal-concatenation-and-closedness: Retain concatenation for every endpoint-compatible pair of complex-valued maps; prove the additional continuity, rectifiability and additive-length claims for contour factors through the native coordinate-length suppliers.
+Current canonical content hash: 334fcf3b43e7c799816848bdf31df7d28cbb6332611d3cb912828b993a365393.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/items/def-complex-contours-reversal-concatenation-and-closedness.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-contours-reversal-concatenation-and-closedness:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-absolute-line-integral-over-a-rectifiable-path:begin -->
+def-absolute-line-integral-over-a-rectifiable-path: Identify the complex arc-length function explicitly with the coordinate path arc-length function, retaining the original tagged integral definition.
+Current canonical content hash: 6c415d394d48591b994e650e903195c9efedcc7a9610457a19032494e8166efc.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/def-absolute-line-integral-over-a-rectifiable-path.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-absolute-line-integral-over-a-rectifiable-path:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-differentiability-holomorphic-and-entire:begin -->
+def-complex-differentiability-holomorphic-and-entire: Remove the redundant logical remark dependency while preserving the complete differentiability, holomorphic and entire definitions.
+Current canonical content hash: 4d3ccb53e00055887539cc862786ae9ab746f0be4e5d75de45947f2422073229.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/def-complex-differentiability-holomorphic-and-entire.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-differentiability-holomorphic-and-entire:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-domain:begin -->
+def-complex-domain: Specify the complex metric topology through the coordinate topology transport without changing the domain predicate.
+Current canonical content hash: fd13633e8d06a90be007df363cf002e8d84075f2be374d1531472d14df9c7f3d.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/def-complex-domain.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-domain:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-oriented-complex-triangle-and-boundary:begin -->
+def-oriented-complex-triangle-and-boundary: Retain repeated and collinear vertices; justify the segment, contour and perimeter formulas through real-affine and coordinate-speed transport.
+Current canonical content hash: 9183bbcb0d6a001e207113db405cc52a8c0c1d7cc7797872e0e07c15aac8690e.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/def-oriented-complex-triangle-and-boundary.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-oriented-complex-triangle-and-boundary:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-wirtinger-derivatives:begin -->
+def-wirtinger-derivatives: Specify open coordinate domains, real partial derivatives and derivative conjugation; expand the differential identity while retaining real differentiability and the antiholomorphic scope.
+Current canonical content hash: c25f79f10a8ff94495546b51cbf788d18c78e2dd3983fd493cf1c919b08986f2.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/def-wirtinger-derivatives.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-wirtinger-derivatives:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-riemann-stieltjes-and-parametric-contour-integrals-agree:begin -->
+thm-riemann-stieltjes-and-parametric-contour-integrals-agree: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 2b75586e1922a6c566826ab544add95ffbccb2c41ec685d8e30435e6f84b8fbb.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-riemann-stieltjes-and-parametric-contour-integrals-agree.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-riemann-stieltjes-and-parametric-contour-integrals-agree:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-existence-of-complex-line-integrals-on-rectifiable-paths:begin -->
+thm-existence-of-complex-line-integrals-on-rectifiable-paths: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 48c8a308d0fb0bced13137a96085abaabe6aa9fe49b1977a9a115b60854c083f.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-existence-of-complex-line-integrals-on-rectifiable-paths.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-existence-of-complex-line-integrals-on-rectifiable-paths:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain:begin -->
+prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain: Justify the Euclidean star-shaped supplier on the transported complex domain, preserving the original primitive construction.
+Current canonical content hash: 2ba990f4e7fcf4aae4b2c94340379fe3357cdc2f427a66b1b939773db1b5fe75.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-holomorphic-primitive-on-star-shaped-domain:begin -->
+thm-holomorphic-primitive-on-star-shaped-domain: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 23aef4498cef045abf676b7acd07377a2bc4a90aff88a04a7fa732b4b59cb192.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-holomorphic-primitive-on-star-shaped-domain.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-holomorphic-primitive-on-star-shaped-domain:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-local-holomorphic-logarithm-nonvanishing-function-on-disc:begin -->
+lem-local-holomorphic-logarithm-nonvanishing-function-on-disc: Prove that the positive-radius complex disc is open, convex, star-shaped and a domain, then apply the star-shaped primitive theorem; retain the original logarithm claim.
+Current canonical content hash: 6124fb104ed83c1957f9511e8db9662d53cefd62b301ddaba1d97d352af2681b.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/lem-local-holomorphic-logarithm-nonvanishing-function-on-disc.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-local-holomorphic-logarithm-nonvanishing-function-on-disc:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-boundary-maximum-modulus-principle:begin -->
+thm-boundary-maximum-modulus-principle: Prove closure boundedness, modulus continuity, constant-branch extension to the closure, boundary nonemptiness and plane unboundedness using the typed complex-coordinate suppliers.
+Current canonical content hash: 81516f0bec62989f6188ec855f6a2a4b1b1bd530d643cd122fb882923aab3598.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-boundary-maximum-modulus-principle.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-boundary-maximum-modulus-principle:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann:begin -->
+thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 2040432079bd4da91eb9f555304cf0131f290546ec6a1e347446a0e243d048b9.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-fundamental-inequality-for-complex-line-integrals:begin -->
+thm-fundamental-inequality-for-complex-line-integrals: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 13735d49e4ba8342140dc581694c8d84c0dacfa06d8995fd2fbd19dfc208f6f4.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-fundamental-inequality-for-complex-line-integrals.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-fundamental-inequality-for-complex-line-integrals:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-fundamental-theorem-for-complex-line-integrals:begin -->
+thm-fundamental-theorem-for-complex-line-integrals: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: a1140233539ed0211f4b61bd5f32595e8e5541ae9ae2bdbaddbb2f9554ed75b9.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-fundamental-theorem-for-complex-line-integrals.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-fundamental-theorem-for-complex-line-integrals:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-invariance-of-complex-line-integrals-under-increasing-reparametrization:begin -->
+thm-invariance-of-complex-line-integrals-under-increasing-reparametrization: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 612326ff4d1fe32a5bfd03271e74ea35f968434726d651b94db254c34b898190.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-invariance-of-complex-line-integrals-under-increasing-reparametrization.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-invariance-of-complex-line-integrals-under-increasing-reparametrization:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-morera-triangle-theorem:begin -->
+thm-morera-triangle-theorem: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 354bfbe793f33cb90dedcda307fc65f0ba926475661bdfdcd036bffb5edc02d2.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-morera-triangle-theorem.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-morera-triangle-theorem:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-wirtinger-chain-rule-for-real-differentiable-maps:begin -->
+thm-wirtinger-chain-rule-for-real-differentiable-maps: Transport the actual Euclidean isometry, differentiation, arc-length or star-shaped-domain application through the explicit native complex-coordinate suppliers at its cited proof use; preserve the original theorem Statement. The full-domain and consumer-use evidence is research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/REPORT.md.
+Current canonical content hash: 6c3f9c2cc0f690ed4e56bd78b42455686378c43c3b25acdb49506fcb2a545bca.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/items/thm-wirtinger-chain-rule-for-real-differentiable-maps.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-wirtinger-chain-rule-for-real-differentiable-maps:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-two-omitted-values-rule-out-an-essential-singularity:begin -->
+lem-two-omitted-values-rule-out-an-essential-singularity: Use an open annulus for boundary maximum; prove its nonempty open bounded connected domain, identify its closure, and check holomorphy and continuity for the function and reciprocal. Statement unchanged.
+Current canonical content hash: a305270070c85017cb58b3307b16b32a6a99b87f9ea3577d967d747d3ae13980.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/complex/consumer-check-round2/items/lem-two-omitted-values-rule-out-an-essential-singularity.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-two-omitted-values-rule-out-an-essential-singularity:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-coordinate-map-for-a-finite-dimensional-normed-space:begin -->
+thm-coordinate-map-for-a-finite-dimensional-normed-space: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L5 already routes realification norm/metric to actual lemma and full complex homogeneity to actual definition; both coordinate norms are transported to R^(2n). Both dimension-zero branches remain.
+Current canonical content hash: 32825c25c6d6b5114fb4a0892a1984d07c0694a9142d76499906ebd00145df60.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/items/thm-coordinate-map-for-a-finite-dimensional-normed-space.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-coordinate-map-for-a-finite-dimensional-normed-space:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent:begin -->
+thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L2 uses exactly actual equivalent-complex-norms positive real comparison constants. Coordinate maps give the same bounds including zero dimension; no metric premise is attributed to complex norm definition.
+Current canonical content hash: 2de0463b6d300a3aefbeb7b2580ef849cc07f380ef675a161e8628217d60de52.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/items/thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-banach-space:begin -->
+def-banach-space: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Its Definition supplies metric completeness over both fields; the actual complex definition supplies no metric theorem.
+Current canonical content hash: 80c577adb14ec2b835c94b4369cd677220271bedc165ee21d9b4e6514de19358.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/def-banach-space.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-banach-space:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-finite-dimensional-normed-spaces-are-banach:begin -->
+cor-finite-dimensional-normed-spaces-are-banach: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L3 already cites actual coordinate l1 and realification-metric lemma. Step 1.3 transports the identical real norm Q isometrically; n=0 is explicit.
+Current canonical content hash: 8e6dfa3b37172ef94792d3836d2b27db6cd180991ae935a2091d16d4e4e908d8.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/items/cor-finite-dimensional-normed-spaces-are-banach.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-finite-dimensional-normed-spaces-are-banach:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-finite-dimensional-subspaces-are-closed:begin -->
+cor-finite-dimensional-subspaces-are-closed: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L3 uses restriction only, which actual complex-subspace definition proves; L7 already cites actual subspace-realification for metric restriction and supplied interleaved basis. Dimension zero and ZF remain.
+Current canonical content hash: 08b9f0773983e8921ff9635a8bd87b1c09a5852d2c3105d7c69fd2026cef07cb.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/items/cor-finite-dimensional-subspaces-are-closed.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-finite-dimensional-subspaces-are-closed:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-inner-product-induces-a-norm:begin -->
+cor-inner-product-induces-a-norm: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: A3 and final Statement require precisely the three complex norm axioms. Nonnegativity is separately supplied by its induced-length supplier A1; no induced-metric attribution occurs.
+Current canonical content hash: 0d981960e34a7504f48d00060c26606878f3627dc1208cbc6d2bb96bd2a528cc.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/items/cor-inner-product-induces-a-norm.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-inner-product-induces-a-norm:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-bounded-linear-operator:begin -->
+def-bounded-linear-operator: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Definition explicitly dispatches real/complex norms and same-field linearity; only the identical finite real C>=0 bound is used. It asserts no metric theorem.
+Current canonical content hash: ea724cce9c44b80742356460cdc50eac6e5055925a0e2b8489ba967168ddb758.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/items/def-bounded-linear-operator.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-bounded-linear-operator:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-bounded-linear-operator-equivalences:begin -->
+thm-bounded-linear-operator-equivalences: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Existing proposal changes only strict-to-nonstrict zero-vector bound; norm-metric interpretation is supplied through bounded-operator and Lipschitz interfaces. All four predicates remain.
+Current canonical content hash: db1f4a39aac885ed38de2fa9466b6d0d200937d071fa61b4cfc2aea0b80968ab.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/items/thm-bounded-linear-operator-equivalences.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-bounded-linear-operator-equivalences:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-sequential-uniform-boundedness-for-coordinate-partial-sums:begin -->
+ex-sequential-uniform-boundedness-for-coordinate-partial-sums: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F3 is cited in coordinate completeness steps 2.1, 4.1 and 5.1; identical complex norm metric must be sourced by the proved lemma.
+Current canonical content hash: 61f23ebd0a8a392997a6278b7b0f2779648caefa7e49aeb3aadf2b81197e4b39.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/ex-sequential-uniform-boundedness-for-coordinate-partial-sums.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-sequential-uniform-boundedness-for-coordinate-partial-sums:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-real-part-determines-a-complex-linear-functional:begin -->
+lem-real-part-determines-a-complex-linear-functional: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Pure algebra: realification definition and complex coordinate arithmetic supply its scalar operations. No norm or metric supplier is needed.
+Current canonical content hash: 261250288921a58712ef765aeb2bb6b4874f0bfb5382f7b2c7975aba9f40dd37.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/lem-real-part-determines-a-complex-linear-functional.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-real-part-determines-a-complex-linear-functional:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-power-series-coefficients-are-determined-by-real-values:begin -->
+lem-power-series-coefficients-are-determined-by-real-values: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L2 cites a real-only norm definition for nonnegativity and reverse triangle; L3 now establishes their applicability to complex Y in the tail/limit estimate of step 1.2.
+Current canonical content hash: 96b3b9313241213f8e63621ec4c979fd1af18cbc29a15baae2b108a16755f8e6.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/lem-power-series-coefficients-are-determined-by-real-values.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-power-series-coefficients-are-determined-by-real-values:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-bounded-bilinear-map:begin -->
+def-bounded-bilinear-map: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Explicit two-field dispatch and same-field bilinearity with real bounds only. No metric assertion.
+Current canonical content hash: db39f18cb8de2bb7a71df1ff852ee79089045f9ce618804711c15d047053f0fc.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-bounded-bilinear-map.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-bounded-bilinear-map:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-resolvent-of-a-closed-operator:begin -->
+def-resolvent-of-a-closed-operator: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Banach domain obtains its two-field norm metric from effective def-banach-space. Extra complex definition is scalar/axiom vocabulary; graph closure and boundedness use named Banach/operator suppliers.
+Current canonical content hash: 705083a986057281afa4c5784f956876eb5f069000803c8019aaff37eff2b957.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-resolvent-of-a-closed-operator.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-resolvent-of-a-closed-operator:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-vector-operations-are-continuous-in-a-normed-space:begin -->
+lem-vector-operations-are-continuous-in-a-normed-space: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L1 supplies real and complex homogeneity in step 1.2 and the norm balls used to prove continuity in steps 2.1–2.2.
+Current canonical content hash: ff78608d83fdf428dd18808af54570330e6ca266ff88a4f4e67c67f411ca2e0b.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/lem-vector-operations-are-continuous-in-a-normed-space.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-vector-operations-are-continuous-in-a-normed-space:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-compact-linear-operator:begin -->
+def-compact-linear-operator: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Its defining bounded-subset and compact-closure predicates require the norm metric on complex spaces; this also supplies the unchanged compact-embedding and sequential-characterization consumers.
+Current canonical content hash: 5b5657f40de8df8d28684e613949aee30ccff07cec5dceea57579a90b35f13b2.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/def-compact-linear-operator.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-compact-linear-operator:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-sequential-characterization-of-compact-operators:begin -->
+thm-sequential-characterization-of-compact-operators: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: A5 explicitly supplies the complex norm metric used in convergence and closure steps; route it to the actual metric lemma.
+Current canonical content hash: 3c31353689351b118f182df646ae5e52131759021860feec4acb1576c6ebcaa1.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/thm-sequential-characterization-of-compact-operators.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-sequential-characterization-of-compact-operators:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-dual-space-of-a-normed-space:begin -->
+def-dual-space-of-a-normed-space: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Definition dispatches R/C explicitly and defines bounded scalar-linear functionals with operator norm. No metric assertion needs an added direct dependency.
+Current canonical content hash: 87817213d14f0483247a271088526c5f86b9733ef241f0f357f175a3abb42f1b.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-dual-space-of-a-normed-space.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-dual-space-of-a-normed-space:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-relative-normed-convexity-and-separation:begin -->
+def-relative-normed-convexity-and-separation: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Convex real scalars and continuity/closed hyperplanes are defined over both fields and use actual norm balls.
+Current canonical content hash: 66922bf183e4ae2bf0b82d70f6c93df61ff3a6a183c34ad6567b27ef3660c4df.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/def-relative-normed-convexity-and-separation.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-relative-normed-convexity-and-separation:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-compactly-embedded-normed-spaces:begin -->
+def-compactly-embedded-normed-spaces: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Explicit real/complex norm dispatch; defining bounded-set/compact-closure interface is effective def-compact-linear-operator, whose identical norm metric is now routed. No extra direct metric dependency needed.
+Current canonical content hash: 91ed1743f0d9bb3d5e740e197f725052d6558072593f278b38cdd34f0b3805d3.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-compactly-embedded-normed-spaces.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-compactly-embedded-normed-spaces:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cex-sequential-uniform-boundedness-needs-a-complete-domain:begin -->
+cex-sequential-uniform-boundedness-needs-a-complete-domain: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F7 explicitly identifies the complex metric; the actual complex definition does not establish it. F2 additionally routes complex restriction to the early complex-subspace definition and checks real restriction directly by the three ambient real norm axioms; removes the unnecessary later real normed-subspace edge. The underlying c00 set, inherited supremum norm and all witness formulas remain identical.
+Current canonical content hash: ca5ba538d8c720056867c3a55b11f0cd75bc5c3b55f798567c3d8660fe10a4ae.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/cex-sequential-uniform-boundedness-needs-a-complete-domain.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cex-sequential-uniform-boundedness-needs-a-complete-domain:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-meromorphic-continuation-and-intertwining-identity-for-a-nu:begin -->
+thm-meromorphic-continuation-and-intertwining-identity-for-a-nu: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F5 proves scalar norm axioms from modulus laws and explicitly cites def-complex-metric-convergence-and-continuity for d(z,w)=|z-w| and complex-plane completeness separately.
+Current canonical content hash: 8293b715bb4db06dd9450a2848cab2b8660f8c71910ab5f8541c3fd2cce8c578.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/thm-meromorphic-continuation-and-intertwining-identity-for-a-nu.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-meromorphic-continuation-and-intertwining-identity-for-a-nu:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-banach-space-no-countably-infinite-hamel-basis:begin -->
+thm-banach-space-no-countably-infinite-hamel-basis: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L7 is used under the given Banach hypothesis in step 1.2; the actual realification lemma preserves a metric but does not claim arbitrary complex normed spaces are complete.
+Current canonical content hash: e1f1cd3cd703240458c03f482f28d6f290bcc8777c1bebcac176263f34261b2a.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/thm-banach-space-no-countably-infinite-hamel-basis.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-banach-space-no-countably-infinite-hamel-basis:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-canonical-banach-complexification-of-a-real-banach-space:begin -->
+lem-canonical-banach-complexification-of-a-real-banach-space: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Statement explicitly invokes complex norm axioms only; real norm and completeness use separate L1 real norm/Banach suppliers, and local rotation-supremum proof establishes complex homogeneity and completeness.
+Current canonical content hash: 01eea448c1a9d87c84d47dd7949f28b452bc980dd46f9e4bdceddc1426f1ffb9.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/lem-canonical-banach-complexification-of-a-real-banach-space.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-canonical-banach-complexification-of-a-real-banach-space:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-resolvent-identity-and-holomorphy-for-closed-operators:begin -->
+lem-resolvent-identity-and-holomorphy-for-closed-operators: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Banach/resolvent interfaces supply complete norm metric; complex norm definition is domain/scalar vocabulary only.
+Current canonical content hash: 152cfd55a4d3ac830ddbd6f5e6cb106efb44c2ae5852aba2eaa2367df78cbb17.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/lem-resolvent-identity-and-holomorphy-for-closed-operators.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-resolvent-identity-and-holomorphy-for-closed-operators:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-hahn-banach-norm-preserving-extension:begin -->
+thm-hahn-banach-norm-preserving-extension: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Real theorem removes redundant inherited remark dependency. Its real norm hypotheses and extension proof remain unchanged.
+Current canonical content hash: 9262b427d781fc5c667d8fc318c6fac830c2983a07b1c7b06f9d23b3f75a7011.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/thm-hahn-banach-norm-preserving-extension.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-hahn-banach-norm-preserving-extension:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-complex-hahn-banach-norm-preserving-extension:begin -->
+thm-complex-hahn-banach-norm-preserving-extension: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Step 2.1 applies the real Hahn–Banach supplier to the underlying real normed subspace; the actual complex definition alone does not establish that typed premise.
+Current canonical content hash: 608b86643d99b662e6a6cc349aa3223323ba304a6b34930c2851856c22ca6357.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/thm-complex-hahn-banach-norm-preserving-extension.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-complex-hahn-banach-norm-preserving-extension:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-strongly-continuous-semigroup:begin -->
+def-strongly-continuous-semigroup: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Effective Banach definition supplies metric and completeness; complex norm citation is domain/scalar vocabulary. Strong continuity predicate is unchanged.
+Current canonical content hash: ca6abc7d43345a0b1da7e84e71118db44df8f8c0456affbe1798c189cc85e075.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-strongly-continuous-semigroup.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-strongly-continuous-semigroup:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-sector-and-bounded-analytic-semigroup:begin -->
+def-complex-sector-and-bounded-analytic-semigroup: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Banach/operator vocabulary supplies metric completeness and boundedness. Final complex norm citation identifies complex scalar interpretation of canonical complexification; no independent metric claim there.
+Current canonical content hash: f1320d5a843ae595a27d91ae8837b951753cb488cef2fdfd7d0f1b696ceb1cf9.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-complex-sector-and-bounded-analytic-semigroup.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-complex-sector-and-bounded-analytic-semigroup:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-sectorial-operator-with-the-semigroup-sign-convention:begin -->
+def-sectorial-operator-with-the-semigroup-sign-convention: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Banach domain and named resolvent interface already supply norm metric. No metric assertion is assigned solely to complex norm definition.
+Current canonical content hash: e03a77f4940016a679122b19ffb62858fbdf525c45e54a8893c4c639b0f93fd5.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-sectorial-operator-with-the-semigroup-sign-convention.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-sectorial-operator-with-the-semigroup-sign-convention:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-absorbing-balanced-and-absolutely-convex-set:begin -->
+def-absorbing-balanced-and-absolutely-convex-set: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: The two-field scalar dispatch cannot point exclusively to a complex-only definition; no metric premise is used.
+Current canonical content hash: 7cff95b505bd7c0900d2d3795edeec47e138588c566c9a64f76e1047af95571a.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/def-absorbing-balanced-and-absolutely-convex-set.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-absorbing-balanced-and-absolutely-convex-set:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:rem-real-banach-spaces-require-complexification-for-analyticity:begin -->
+rem-real-banach-spaces-require-complexification-for-analyticity: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Uses the separate canonical complexification and analytic-semigroup interfaces; removed redundant norm remark is not a logical premise.
+Current canonical content hash: 1e5a9db366f96f1c87b19d507d0e2a30105cc5f570e3ab9ce5e8525f17f92b1b.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/rem-real-banach-spaces-require-complexification-for-analyticity.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:rem-real-banach-spaces-require-complexification-for-analyticity:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-bounded-coercive-and-symmetric-sesquilinear-forms:begin -->
+def-bounded-coercive-and-symmetric-sesquilinear-forms: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Hilbert and sesquilinear suppliers supply its typed domain; inherited unused norm remark removed only. No complex norm metric attribution.
+Current canonical content hash: 3ad2376fd45cfe667ba7dd6b43b1f21ded712668814d64eaf0f1d4ec85b4459d.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-bounded-coercive-and-symmetric-sesquilinear-forms.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-bounded-coercive-and-symmetric-sesquilinear-forms:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-relative-compact-closed-sets-have-a-positive-distance-gap:begin -->
+lem-relative-compact-closed-sets-have-a-positive-distance-gap: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F5 directly supplies norm balls and triangle estimates in steps 2.1 and 5.1 over either field.
+Current canonical content hash: 1909c4fa538d4f479eaf8929c6768cf63fb7e8037abd63a0adf2e15c44a20198.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/lem-relative-compact-closed-sets-have-a-positive-distance-gap.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-relative-compact-closed-sets-have-a-positive-distance-gap:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-kernel-of-identity-minus-compact-is-finite-dimensional:begin -->
+lem-kernel-of-identity-minus-compact-is-finite-dimensional: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: A2 explicitly asserts the complex norm metric for sequence-limit/closed-ball reasoning.
+Current canonical content hash: 8bc9e223b3b5e514192f20b6f8a1865d991b3afeee4bcffd35e333c0552ff7e4.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/lem-kernel-of-identity-minus-compact-is-finite-dimensional.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-kernel-of-identity-minus-compact-is-finite-dimensional:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-jordan-von-neumann-polarization:begin -->
+thm-jordan-von-neumann-polarization: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: A3 uses only complex norm axioms, in particular full scalar homogeneity including i; real branch already cites real definition. No missing metric premise.
+Current canonical content hash: 4d985458d788267c0282345a6340ad707b0d76234af7d68cca55902ff25ad365.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/thm-jordan-von-neumann-polarization.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-jordan-von-neumann-polarization:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-relative-norming-in-a-finite-dimensional-space:begin -->
+ex-relative-norming-in-a-finite-dimensional-space: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F4 supplies the norm verification in step 1.1 in both fields; no metric use requires an added metric dependency.
+Current canonical content hash: 0967b9c428a3b4b9fab97a8402ba73f93fe7f3c0679adf4900c87e7f54c9c686.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/ex-relative-norming-in-a-finite-dimensional-space.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-relative-norming-in-a-finite-dimensional-space:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-compact-group-with-no-faithful-finite-dimensional-representation:begin -->
+ex-compact-group-with-no-faithful-finite-dimensional-representation: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F5 asserts that norm balls are open; the realification metric theorem supplies this complex metric interface.
+Current canonical content hash: acd302a04a96fc2c55779e14b4c57aed675a3b3e0c44eab1f95e54b9d8129753.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/ex-compact-group-with-no-faithful-finite-dimensional-representation.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-compact-group-with-no-faithful-finite-dimensional-representation:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-norm-preserving-extension-from-any-subspace:begin -->
+thm-norm-preserving-extension-from-any-subspace: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: L3 dispatches both field branches in steps 1.1–1.2; complex-only source cannot type its real branch.
+Current canonical content hash: af8f3ba8d733f0b876d242b56e4e1e6e8fa64051956951ed6ac10572719144af.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/thm-norm-preserving-extension-from-any-subspace.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-norm-preserving-extension-from-any-subspace:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-weak-and-strict-separation:begin -->
+def-weak-and-strict-separation: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Uses the effective relative-convexity/separation supplier, now explicitly routed; own definitions and formulas unchanged.
+Current canonical content hash: 219a8cba99ea0999c8909a143b27410f745bbd2c3e7896eb25eefdb4de15aab0.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-weak-and-strict-separation.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-weak-and-strict-separation:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-c-star-algebra:begin -->
+def-c-star-algebra: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: Complex norm axioms and effective Banach definition supply norm and completeness separately; C*-identity, nonunital/zero-algebra scope and bounds unchanged.
+Current canonical content hash: 977d38102fbbf086808d135199bd5756fcb915ca088d045e69f5b798e814ae8d.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/def-c-star-algebra.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-c-star-algebra:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-weak-derivative-operator-is-closed-between-lp-spaces:begin -->
+cor-weak-derivative-operator-is-closed-between-lp-spaces: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F5 asserts that both scalar-field normed spaces are metric spaces for the sequential closed-graph argument.
+Current canonical content hash: 51b007ef3242a89a606c75585b2c8bee03ebcd5bf47610418ca0b61edacf551d.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/native-interface-reconciliation/native-norms/items/cor-weak-derivative-operator-is-closed-between-lp-spaces.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cor-weak-derivative-operator-is-closed-between-lp-spaces:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cex-first-resolvent-estimate-does-not-give-hille-yosida-bound:begin -->
+cex-first-resolvent-estimate-does-not-give-hille-yosida-bound: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F1 invokes complex homogeneity only from actual norm definition; F2 uses finite-dimensional Banach supplier for completeness. Matrix bounds and DC assumption unchanged.
+Current canonical content hash: abdbbc4c785f76dd4f65091b6b65e89b121463feb98e606404849641d4ee0f29.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/cex-first-resolvent-estimate-does-not-give-hille-yosida-bound.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:cex-first-resolvent-estimate-does-not-give-hille-yosida-bound:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-fredholm-alternative-for-an-integral-equation:begin -->
+ex-fredholm-alternative-for-an-integral-equation: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: A2 invokes norm axioms only; scalar coordinate inequalities and local proof 1.1–1.2 establish C([a,b],K) completeness, using effective Banach predicate. AC and alternatives unchanged.
+Current canonical content hash: 1d4ae5616934b92d6e374a5d3b6781795da6a67c28c98ac830120c6e0b177a6e.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/ex-fredholm-alternative-for-an-integral-equation.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:ex-fredholm-alternative-for-an-integral-equation:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-finite-dimensional-compact-group-representations-are-completely-reducible:begin -->
+thm-finite-dimensional-compact-group-representations-are-completely-reducible: Reconcile the actual real/complex norm interface and proof routing with the native suppliers. Focused actual-use disposition: F9 actual equivalent-complex-norms gives identical positive-real inequalities on End(V), hence same norm topology by epsilon scaling. All decomposition/AC/dimension-zero clauses remain.
+Current canonical content hash: d877ecc5f1998f9aa9d4a2c8761e69e7fbc0d67ed58089150d52988da6d6df30.
+Delegated proposed source: research/quantum-build-60-2026-10-15-owner/norms/consumer-check-round2/items/thm-finite-dimensional-compact-group-representations-are-completely-reducible.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-finite-dimensional-compact-group-representations-are-completely-reducible:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-positive-and-negative-parts-of-a-function:begin -->
+def-positive-and-negative-parts-of-a-function: Preserve part definitions and both identities; explicitly define function magnitude as max(f,-f), and difference notation as the defined partial sum f^++(-f^-), with all sign/infinity cases. No scalar extended absolute value/subtraction added.
+Current canonical content hash: 9e663a8c8d8aa3e467998daa5c4020c8f2655d4c2a32371d7917f7aec5dcc2a0.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/def-positive-and-negative-parts-of-a-function.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:def-positive-and-negative-parts-of-a-function:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-arithmetic-and-lattice-operations-preserve-measurability:begin -->
+thm-arithmetic-and-lattice-operations-preserve-measurability: Preserve arbitrary measurable-space scope and all four original closure claims, including |f| and total fg notation. Replace remark premise by typed total function product, repair defined-sum rational-witness cases at both positive-infinity possibilities, prove nonnegative-product threshold formula including zero/infinity and a=0, and reconstruct signed product by complete sign cases without extended field algebra.
+Current canonical content hash: ee5162e4a7135844ee196043596541365412ec18d0cea16ae7b092dda810afae.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/thm-arithmetic-and-lattice-operations-preserve-measurability.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-arithmetic-and-lattice-operations-preserve-measurability:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-finite-probability-maximal-ergodic-inequality:begin -->
+lem-finite-probability-maximal-ergodic-inequality: Replace copied obsolete remark name in Facts by the unchanged total function-product convention declared in the arithmetic supplier; no Statement or Proof change.
+Current canonical content hash: c04864867d135d782e5fe71ee5f941a3114a9f7052bd6cf27e03eb17a65f1e3a.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/lem-finite-probability-maximal-ergodic-inequality.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-finite-probability-maximal-ergodic-inequality:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-largest-summand-bound-for-symmetric-independent-variables:begin -->
+lem-largest-summand-bound-for-symmetric-independent-variables: Replace copied obsolete remark name in Facts by the unchanged total function-product convention declared in the arithmetic supplier; no Statement or Proof change.
+Current canonical content hash: 76b14613e823201675730d7816155f1b0003a2d58633d4f808f3e224cded4172.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/lem-largest-summand-bound-for-symmetric-independent-variables.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-largest-summand-bound-for-symmetric-independent-variables:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-levy-maximal-inequality-for-independent-tail-sums:begin -->
+lem-levy-maximal-inequality-for-independent-tail-sums: Replace copied obsolete remark name in Facts by the unchanged total function-product convention declared in the arithmetic supplier; no Statement or Proof change.
+Current canonical content hash: 42ae435b0d906abbe7b7b5618099b3aefce56b901d635882a6389a7c6c853ef0.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/lem-levy-maximal-inequality-for-independent-tail-sums.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-levy-maximal-inequality-for-independent-tail-sums:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-birkhoff-ergodic-probability-case-for-strong-laws:begin -->
+thm-birkhoff-ergodic-probability-case-for-strong-laws: Replace copied obsolete remark name in Facts by the unchanged total function-product convention declared in the arithmetic supplier; no Statement or Proof change.
+Current canonical content hash: cd4c034a4f9daa369a4bac0ef341ea76b3d1b33029f2ed16c12081ebdbf26d9b.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/thm-birkhoff-ergodic-probability-case-for-strong-laws.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-birkhoff-ergodic-probability-case-for-strong-laws:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-kolmogorov-maximal-inequality:begin -->
+thm-kolmogorov-maximal-inequality: Replace copied obsolete remark name in Facts by the unchanged total function-product convention declared in the arithmetic supplier; no Statement or Proof change.
+Current canonical content hash: 853941f990772cebc84edfe698e5c72f2f61724308dd36be10180320a2d7a2d0.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/thm-kolmogorov-maximal-inequality.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-kolmogorov-maximal-inequality:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral:begin -->
+thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral: Replace possibly infinite f(x)-t by explicitly defined coordinate-lift sum F+(-T), prove lift measurability using rectangles/thresholds, and verify finite/infinite threshold cases. Statement and Tonelli step unchanged.
+Current canonical content hash: c5d8b4c7825d01fa7d7be5ab05c5bc97c6497b58a803b5cd86ab5edd73404763.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/consumer-check-round2/proposed/items/thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-sard-slicing-for-compact-null-sections:begin -->
+lem-sard-slicing-for-compact-null-sections: Replace indexed section-cover selection by all witnessed interval/cube-list pairs and explicit summable open enlargements, preserving the compact-section Statement and consumer interface.
+Current canonical content hash: e37313327063982e2f51aeedac8e81975f631ea8cde6d8c399bbc2f10f599de9.
+Delegated proposed source: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-sard-slicing-for-compact-null-sections.proposed.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:lem-sard-slicing-for-compact-null-sections:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-operator-norm-is-the-largest-singular-value:begin -->
+- thm-operator-norm-is-the-largest-singular-value: proof-only rectangular/rank-zero SVD repair; Statement and dependencies unchanged. Positive-part sum uses j <= r; zero rank uses an existing unit domain vector without a codomain f_1.
+- Current content: a9f0e864a5f882fb986e75ced68843450775c5e393ec538e36f4f7a1bac547d1.
+- Owner: /root; run quantum-computing-algorithms-60-2026-10-15; exact audited preimage and actual one-item formatting/render evidence in research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-operator-norm-is-the-largest-singular-value.json. No new audit or publication.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-operator-norm-is-the-largest-singular-value:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-singular-value-decomposition:begin -->
+- thm-singular-value-decomposition: proof-only completion of the left singular orthonormal family. Preserve the Statement; use the actual finite orthogonal decomposition and append an orthonormal complement basis, including empty cases.
+- Current content: 91182fd7492eb7d550b62bc03e5420c14a28013c5f47c67b0c072417ddfba48a.
+- Owner: /root; run quantum-computing-algorithms-60-2026-10-15; exact audited preimage and actual one-item formatting/render evidence in research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-singular-value-decomposition.json. No new audit or publication.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-singular-value-decomposition:end -->
+
+<!-- quantum-computing-algorithms-60-2026-10-15-alpha-batch-10-3a:begin -->
+## Quantum batch 10 published page status — 2026-10-16
+
+`boolean-circuits-and-nonuniform-complexity` (page, not an item): confirmed nonfatal stale status wording. Owner-current before bd03263a0e8b47e65d082e588068682d06c0ce0122e90611bd5033255944dfdb says status: published and This draft page. Owner-corrected current 60edca6896dd093fb769042fb10f0e75a4c1cf1a7d8399781ee32e076745a184 removes draft; metadata and sixteen published placements unchanged. Supplier `def-boolean-circuit-size-depth-fanin-and-basis` and owned consumer `alg-qc-reversible-embedding` retain their actual Boolean-DAG interfaces; no consumer repair needed. Exact owner authority/evidence: `research/quantum-computing-algorithms-60-2026-10-15-step3-owner-required-page-routes.json` and its before/after archives and owner-review.md. Historical native page bytes are unbound; retain historical_delta_unknown and the original finding. Repair strategy completed for this prose-only status error by the prior owner correction; this worker keeps published bytes read-only. Closed row `qca60-b10-3a-published-page-status`, reader:10:3; independent current review and owner_resolution in `research/quantum-computing-algorithms-60-2026-10-15-alpha-batch-10-3a.md` and its decisions file. No publication audit is claimed.
+
+The item classification index and its counts are unchanged: this obligation concerns a page and identifies no defective published mathematical item.
+<!-- quantum-computing-algorithms-60-2026-10-15-alpha-batch-10-3a:end -->
+
+<!-- quantum-computing-algorithms-60-2026-10-15-batch-56-page-caption -->
+Published page `counting-complexity-and-sharpp`: confirmed nonfatal stale draft caption, fixed by owner and independently adjudicated at reader:56:1. Genuine owner before raw `1ccef2f4301e49daee872b67e28401f52dadd89dd4ea55e693a7020711c3ccfe` says status published and “This draft page”; exact after/current raw `ed103e1a803c888c1e4af32e6c341ff25e3f915807933766aaf659a15ae3e63d` changes only that clause to “This page”. All 17 listed carriers currently have published status. Native subject_type page and consumer_id null are preserved; separate owner witness: `rem-qa-32-bqp-pp-pspace-proof-obligations` -> `def-sharpp-and-gap-p-functions`. Current remark and exact definition reviewed; no mathematical supplier or consumer change. Native historical reader bytes remain unbound: owner before capture proves the defect without binding the full originally observed page. Explicit disposition authority: research/quantum-computing-algorithms-60-2026-10-15-step3-owner-required-page-routes.json batch 56/index 1 and owner review. Repair strategy applied by owner: remove only stale status adjective; this adjudicator kept published content read-only. Closed defect `qca60-b56-3a-published-page-caption`; evidence research/quantum-computing-algorithms-60-2026-10-15-alpha-batch-56-3a.md and research/quantum-computing-algorithms-60-2026-10-15-alpha-batch-56-3a-decisions.json. This page is outside the deduplicated item classification index, so its item rows and counts are unchanged.
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-non-negative-operator-characterisations:begin -->
+- thm-non-negative-operator-characterisations: proof-only repair of claim2-to-claim3 implication; independently apply the appropriate real or complex spectral theorem under claim2. Statement and dependencies unchanged.
+- Current content: 232fab9930f242cbef7e037a1c4627553b0fb74901930efb6de5a67365d98365.
+- Owner: /root; run quantum-computing-algorithms-60-2026-10-15; exact audited preimage and actual one-item formatting/render evidence in research/quantum-computing-algorithms-60-2026-10-15-owner-step4-published-alerts/non-negative-operator/repair-receipt.json. No new audit or publication.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-non-negative-operator-characterisations:end -->
+
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison:begin -->
+- thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison: proof-only correction of the SVD factorization of UAV: right unitary V*V0, so its adjoint is V0*V. Statement and dependencies unchanged.
+- Current content: ae01003226e11a298369ea64b40171bb17f25317d9ac39cf8e09665c8a464db0.
+- Owner: /root; run quantum-computing-algorithms-60-2026-10-15; exact audited preimage and actual one-item formatting/render evidence in research/quantum-computing-algorithms-60-2026-10-15-owner-step4-published-alerts/unitary-invariance/repair-receipt.json. No new audit or publication.
+<!-- local-published-repair:quantum-computing-algorithms-60-2026-10-15:thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison:end -->
+

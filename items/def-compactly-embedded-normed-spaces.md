@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-compactly-embedded-normed-spaces.json
 id: def-compactly-embedded-normed-spaces
 kind: definition
 title: "Compactly embedded normed spaces"
@@ -6,17 +8,12 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0
-deps: [def-compact-linear-operator, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, def-bounded-linear-operator, def-metric-compactness, def-metric-bounded-diameter, thm-metric-compactness-equivalences, def-countable-choice, def-dependent-choice, thm-coordinate-map-for-a-finite-dimensional-normed-space, thm-heine-borel-rn]
+deps: [def-compact-linear-operator, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, def-bounded-linear-operator, def-metric-compactness, def-metric-bounded-diameter, thm-metric-compactness-equivalences, def-countable-choice, def-dependent-choice, thm-coordinate-map-for-a-finite-dimensional-normed-space, thm-heine-borel-rn]
 justified_by: []
 aliases: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)"
@@ -32,7 +29,7 @@ sources:
 Let $X$ and $Y$ be normed spaces over the same field
 $\mathbb K\in\{\mathbb R,\mathbb C\}$, read in the real case from
 [[def-norm-and-normed-space]] and in the complex case from
-[[rem-real-and-complex-normed-space-convention]], and suppose $X\subseteq Y$
+[[def-complex-norm-and-complex-normed-space]], and suppose $X\subseteq Y$
 with **continuous inclusion** $J:X\to Y$: there is a real $C\ge0$ with
 $\|x\|_Y\le C\|x\|_X$ for every $x\in X$.
 

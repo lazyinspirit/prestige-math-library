@@ -1,0 +1,108 @@
+28
+Quantum Algorithms
+
+In our discussion of period finding (H⊥= Z/r) we noted that Fourier sampling yields
+a rational number y/N close to integer/r with high probability:
+�
+
+k
+Prob
+�����
+y
+N −k
+
+r
+
+����≤
+1
+2N
+
+�
+≥4
+
+π2 ,
+(6.141)
+
+so that choosing N ≥R2 was good enough to determine a rational number with de-
+nominator < R. If we fix the desired accuracy δ, then the part of the distribution lying
+outside the peaks decreases as N increases (an exercise):
+
+Prob
+�
+∀k
+����
+y
+N −k
+
+r
+
+����> δ
+�
+≤
+1
+Nδ,
+(6.142)
+
+The peak of the Fourier transform sharpens with increasing N, so that the prob of lying
+outside all peaks with half width δ scales like 1/N.
+When we sample H⊥, we find an n-component vector, where each component should
+be determined to accuracy 1/R2 (where |G/H| < R). The probability of success in
+finding all n-components to this accuracy is
+
+Prob(success) ≥
+�
+1 −1
+
+Nδ
+
+�n
+(6.143)
+
+and the probability of being successful in each of m consecutive samplings is
+
+Prob(success m times) ≥
+�
+1 −1
+
+Nδ
+
+�nm
+.
+(6.144)
+
+For δ = 1/R2, the success probability is a constant for
+
+mnR2
+
+N
+< constant or N = O(mnR2).
+(6.145)
+
+Since m = O(n log N) samples are sufficient to find generators of H⊥, we conclude it
+suffices to choose N to be
+
+N = O(n2R2 log N) = O(n2R2 log(nR))
+(6.146)
+
+This is good enough to determine H⊥in m = O(n log N) = O(n log(nR)) queries, and
+the generators of H are found by inverting the matrix M⊥that generates H⊥.
+The algorithm is efficient: both the number of queries and the number of steps in the
+quantum Fourier transform are polylog in (the upper bound on) the number of cosets
+|G/H|.
+
+6.6 Quantum Searching
+
+For the hardest instances of NP-hard problems, no better method is known than ex-
+haustive search for a solution. For example, suppose that for some efficiently computable
+Boolean function
+
+f : {0, 1}n −→{0, 1};
+(6.147)
+
+we wish to determine whether there is an x such that f(x) = 1. We could search for
+a solution by trying all of the N = 2n possible values of the input x, but that might
+require time O(NpolylogN) — assuming we can evaluate f in time O(polylogN). That’s
+very slow, yet if f has no structure that we know how to exploit, we might not know
+how to do better.
+
+

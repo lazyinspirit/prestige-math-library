@@ -1,0 +1,965 @@
+[
+  {
+    "order": 2196,
+    "id": "stabilizer-circuits-and-gottesman-knill-simulation",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Stabilizer Circuits and Gottesman–Knill Simulation",
+    "companion": "stabilizer-circuits-and-gottesman-knill-simulation-examples",
+    "requires": [
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "finite-averaging-and-character-theory-prerequisites",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "inner-product-spaces-and-orthogonality",
+      "linear-independence-bases-and-dimension",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "measurements-povms-and-instruments",
+      "monoids-groups-and-subgroups",
+      "pauli-and-clifford-groups-binary-symplectic-tableaux",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "registers-tensor-products-and-partial-trace",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "linear-algebra-methods-in-combinatorics"
+    ],
+    "items": [
+      {
+        "id": "def-qc-pauli-measurement-branch-semantics",
+        "kind": "definition",
+        "title": "Pauli measurement branch semantics",
+        "statement": "Let $H_n=(\\mathbb C^2)^{\\otimes n}$ be an ordered $n$-qubit register, let\n$\\rho\\in M_{2^n}(\\mathbb C)$ be a density operator, and let $M\\in M_{2^n}(\\mathbb C)$\nbe a Hermitian Pauli observable with $M^2=I$. For $b\\in\\{0,1\\}$ define\n\n$$P_b:=\\frac{I+(-1)^bM}{2},\\qquad p_b:=\\operatorname{Tr}(\\rho P_b),\\qquad \\mathcal I_b(\\rho):=P_b\\rho P_b.$$\n\nThe outcome $b$ has probability $p_b$. Its conditional density operator is\n$\\rho_b:=\\mathcal I_b(\\rho)/p_b$ when $p_b>0$; it is $\\bot$ (no assigned\nconditional density operator) when $p_b=0$.\nThe branch map $\\mathcal I_b$ is the projective measurement instrument for the\n$(-1)^b$ eigenspace of $M$. A non-Hermitian phase-aware Pauli is outside this\ndefinition. For $n\\ge1$, Hermiticity of $P(k,x,z)=i^kX^xZ^z$ means\n$k\\equiv x\\cdot z\\pmod2$; in particular $Y=iXZ$ is admitted. For $n=0$,\nthe admitted observables are $I_{H_0}$ and $-I_{H_0}$.\n\nThe hypotheses and meanings of density operator, Pauli observable, projective\nmeasurement, POVM outcome law, and instrument are the cited suppliers. The\nlocal projector calculation is [[lem-qc-pauli-measurement-projectors]].",
+        "deps": [
+          "def-qc-projective-measurement",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-density-operator",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-group-on-zero-qubits",
+          "def-qc-pauli-matrices",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix"
+        ],
+        "justified_by": [
+          "lem-qc-pauli-measurement-projectors",
+          "lem-qc-pauli-measurement-positive-branch-is-density",
+          "lem-qc-pauli-measurement-defines-an-instrument"
+        ],
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "complementary orthogonal projectors and total probability one."
+        ]
+      },
+      {
+        "id": "lem-qc-pauli-measurement-projectors",
+        "kind": "lemma",
+        "title": "Pauli measurement projectors and total probability",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, let\n$\\rho$ be a density operator on $H$, and let $M$ be a Hermitian Pauli\nobservable on $H$ with $M^2=I_H$. For $b\\in\\{0,1\\}$ set\n\n$$P_b:=\\frac{I_H+(-1)^bM}{2},\\qquad p_b:=\\operatorname{Tr}(\\rho P_b).$$\n\nThen $P_0,P_1$ are complementary orthogonal projections and\n$p_0,p_1\\ge0$, with $p_0+p_1=1$.",
+        "deps": [
+          "def-qc-pauli-measurement-branch-semantics",
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "thm-non-negative-operator-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Verify complementary orthogonal projectors, positive branch weights, and total probability one."
+        ]
+      },
+      {
+        "id": "lem-qc-stabilizer-maximal-isotropic-self-dual",
+        "kind": "lemma",
+        "title": "A maximal stabilizer label space is self-dual",
+        "statement": "Let $V=\\mathbb F_2^{2n}$ have the standard symplectic form\n$\\omega((x,z),(x',z'))=x\\cdot z'+z\\cdot x'$. If $L\\le V$ is isotropic and\n$r=\\dim L$, then\n\n$$\\dim L^\\perp=2n-r.$$\n\nConsequently $r\\le n$, and if $r=n$ then\n\n$$L^\\perp:=\\{v\\in V:\\omega(v,\\ell)=0\\text{ for every }\\ell\\in L\\}=L.$$",
+        "deps": [
+          "def-qc-binary-symplectic-form",
+          "def-vector-space",
+          "def-dimension",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §II",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Prove the annihilator dimension formula by nondegeneracy and rank-nullity, including the zero subspace."
+        ]
+      },
+      {
+        "id": "def-qc-stabilizer-subgroup",
+        "kind": "definition",
+        "title": "Stabilizer subgroup",
+        "statement": "For an ordered register of $n$ qubits, a **stabilizer subgroup** is an abelian\nsubgroup $S$ of the Hermitian $n$-qubit Pauli operators such that\n$-I\\notin S$. The binary label of a phase-aware Pauli $P(k,x,z)$ is\n$(x,z)\\in\\mathbb F_2^{2n}$. Define the **rank** of $S$ by\n\n$$\\operatorname{rank}(S):=\\dim_{\\mathbb F_2}\\operatorname{span} \\{(x,z):P(k,x,z)\\in S\\}.$$\n\nThe binary label convention and commutation form are supplied by the cited\nPauli items. [[lem-qc-stabilizer-subgroup-label-space-and-order]] proves that\nthis label span is isotropic, its dimension is independent of any generating\nset, and $|S|=2^{\\operatorname{rank}(S)}$. Matrix multiplication gives the\nphase-aware Pauli group operation by\n[[thm-qc-pauli-product-and-adjoint]]. For $n=0$, the Pauli group is the\nempty-register convention of [[def-qc-pauli-group-on-zero-qubits]].",
+        "deps": [
+          "def-subgroup",
+          "def-dimension",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-group-on-zero-qubits",
+          "thm-qc-pauli-product-and-adjoint",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "def-qc-binary-symplectic-form",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [
+          "lem-qc-stabilizer-subgroup-label-space-and-order"
+        ],
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "show the span is isotropic and rank is independent of generating set."
+        ],
+        "existing_supplier_checks": [
+          "Reuses existing root supplier def-subgroup from monoids-groups-and-subgroups; no duplicate QC carrier is proposed.",
+          "Reuses existing root supplier def-dimension from linear-independence-bases-and-dimension; no duplicate QC carrier is proposed."
+        ]
+      },
+      {
+        "id": "lem-qc-pauli-measurement-defines-an-instrument",
+        "kind": "lemma",
+        "title": "Pauli projectors define a finite measurement instrument",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let\n$M$ be a Hermitian Pauli observable on $H$ with $M^2=I_H$. Put\n$P_b=(I_H+(-1)^bM)/2$ and define\n$\\mathcal I_b(X)=P_bXP_b$ for $b\\in\\{0,1\\}$. Then the maps\n$(\\mathcal I_0,\\mathcal I_1)$ form a finite instrument from $H$ to $H$. For\nevery density operator $\\rho$ on $H$, the outcome weight of branch $b$ is\n$\\operatorname{Tr}(\\rho P_b)$.",
+        "deps": [
+          "def-qc-pauli-measurement-branch-semantics",
+          "lem-qc-pauli-measurement-projectors",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-completely-positive-map",
+          "lem-qc-finite-ancilla-amplification-is-block-map",
+          "def-qc-tensor-register-and-permutation",
+          "def-non-negative-and-positive-operator",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14 §14.1",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Verify complete positivity of every ancilla amplification and trace preservation of the summed branches."
+        ]
+      },
+      {
+        "id": "lem-qc-pauli-measurement-positive-branch-is-density",
+        "kind": "lemma",
+        "title": "Positive-probability Pauli branches are density operators",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, let\n$\\rho$ be a density operator on $H$, and let $M$ be a Hermitian Pauli\nobservable on $H$ with $M^2=I_H$. For $b\\in\\{0,1\\}$ put\n$P_b=(I_H+(-1)^bM)/2$ and $p_b=\\operatorname{Tr}(\\rho P_b)$. If $p_b>0$,\nthen the normalized branch\n\n$$\\rho_b:=\\frac{P_b\\rho P_b}{p_b}$$\n\nis a density operator.",
+        "deps": [
+          "def-qc-pauli-measurement-branch-semantics",
+          "lem-qc-pauli-measurement-projectors",
+          "def-qc-density-operator",
+          "prop-trace-is-linear"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14 §14.1",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Prove that a positive-probability branch map divided by its weight is nonnegative and trace one."
+        ]
+      },
+      {
+        "id": "lem-qc-zero-probability-branch",
+        "kind": "lemma",
+        "title": "Zero-probability Pauli measurement branch",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, let\n$\\rho$ be a density operator on $H$, and let $M$ be a Hermitian Pauli\nobservable on $H$ with $M^2=I_H$. For $b\\in\\{0,1\\}$ put\n$P_b=(I_H+(-1)^bM)/2$ and $p_b=\\operatorname{Tr}(\\rho P_b)$. If $p_b=0$,\nthen $P_b\\rho P_b=0$. The outcome has probability zero and, under the\nconditional-state convention, has no normalized conditional state.",
+        "deps": [
+          "def-qc-pauli-measurement-branch-semantics",
+          "def-qc-density-operator",
+          "def-trace-of-a-square-matrix",
+          "def-trace-of-an-endomorphism",
+          "lem-qc-pauli-measurement-projectors",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "thm-non-negative-operator-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "derive P_bρP_b=0 from positivity and zero trace."
+        ],
+        "existing_supplier_checks": [
+          "Reuses existing root supplier def-trace-of-a-square-matrix from matrices-and-the-matrix-of-a-linear-map; no duplicate QC carrier is proposed.",
+          "Reuses existing root supplier thm-non-negative-operator-characterisations from the-spectral-theorem-and-singular-value-decomposition; no duplicate QC carrier is proposed."
+        ]
+      },
+      {
+        "id": "def-qc-adaptive-pauli-circuit-tree",
+        "kind": "definition",
+        "title": "Finite adaptive Pauli-measurement circuit tree",
+        "statement": "Fix an ordered $n$-qubit register and a finite gate alphabet as in\n[[def-qc-circuit-syntax-and-register-order]]. A **finite adaptive\nPauli-measurement circuit tree** is a finite rooted tree whose leaves are\nterminal and whose nonterminal nodes are of one of these two types:\n\n1. A gate node is labelled by a gate occurrence on the ordered register and\n   has one successor. Its state update is conjugation by the global unitary\n   assigned to that occurrence by\n   [[def-qc-circuit-denotational-semantics]].\n2. A measurement node is labelled by a Hermitian Pauli observable $M$ and has\n   two outgoing edges labelled $b=0,1$. On input density operator $\\rho$,\n   edge $b$ has weight $p_b=\\operatorname{Tr}(\\rho P_b)$ and unnormalized\n   output $P_b\\rho P_b$, where $P_b=(I+(-1)^bM)/2$ as in\n   [[def-qc-pauli-measurement-branch-semantics]]. Its child state is\n   $P_b\\rho P_b/p_b$ only if $p_b>0$; an edge of weight zero is impossible\n   and has no conditional state.\n\nThe observed measurement transcript is the ordered list of measurement-edge\nlabels on a root-to-leaf path. The tree itself specifies every later\ninstruction from that observed history, so its classical control is\ndeterministic. A path whose edges all have positive weights has probability\nequal to their product. A path passing through a zero-weight edge has\nprobability zero, and its descendants are not evaluated because no\nconditional state is assigned. A leaf outputs its terminal state; a ray is\nassigned only on a positive-probability path whose input and gate/measurement\nupdates remain pure.\n\nThe complementary-projector and total-probability facts for each measurement\nnode are supplied by [[lem-qc-pauli-measurement-projectors]]. This definition\ndoes not identify an instrument with a POVM or require uniqueness of such a\nPOVM.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-pauli-measurement-branch-semantics",
+          "lem-qc-pauli-measurement-projectors"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14 §14.1",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": []
+      },
+      {
+        "id": "def-qc-stabilizer-state",
+        "kind": "definition",
+        "title": "Stabilizer state",
+        "statement": "Let $S$ be a rank-$n$ stabilizer subgroup on an ordered $n$-qubit register\n$H_n=(\\mathbb C^2)^{\\otimes n}$. A **pure stabilizer state** is the unique ray\nin the common $+1$ fixed space\n\n$$\\mathcal C(S):=\\{\\psi\\in H_n:g\\psi=\\psi\\text{ for every }g\\in S\\}.$$\n\nThe cited projector-rank theorem proves that this common space is nonzero and\none-dimensional, so the ray is well defined. A normalized representative may\nbe used for probabilities, but the state itself is the ray, not a chosen\nvector.",
+        "deps": [
+          "def-qc-stabilizer-subgroup",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-stabilizer-projector-rank-and-code-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "establish the common fixed space is nonzero and one-dimensional."
+        ]
+      },
+      {
+        "id": "lem-qc-stabilizer-subgroup-label-space-and-order",
+        "kind": "lemma",
+        "title": "Stabilizer labels form an isotropic space of the same rank",
+        "statement": "Let $S$ be a stabilizer subgroup on $n\\ge0$ qubits and let\n$\\lambda(P(k,x,z))=(x,z)$. Then $\\lambda|_S$ is injective, its image $L$ is an\nisotropic $\\mathbb F_2$-subspace, the rank $\\dim_{\\mathbb F_2}L$ depends only\non $S$ and not on a generating list, and\n$|S|=2^{\\dim_{\\mathbb F_2}L}$.",
+        "deps": [
+          "def-qc-stabilizer-subgroup",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-group-on-zero-qubits",
+          "thm-qc-pauli-product-and-adjoint",
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-qc-binary-symplectic-form",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "def-finite-field-and-its-order",
+          "thm-z-mod-p-is-a-field",
+          "def-dimension",
+          "lem-cardinality-of-a-finite-dimensional-space-over-a-finite-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §II",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Prove label injectivity, isotropy, rank independence, and the finite subgroup cardinality."
+        ]
+      },
+      {
+        "id": "lem-qc-stabilizer-average-projector",
+        "kind": "lemma",
+        "title": "Stabilizer average is the fixed-space projector",
+        "statement": "For a stabilizer subgroup $S$ on $n$ qubits, the finite operator average\n\n$$\\Pi_S:=\\frac{1}{|S|}\\sum_{g\\in S}g$$\n\nis self-adjoint and idempotent, and its image is exactly the common $+1$ fixed\nspace $\\mathcal C(S)$. If this image is the span of a unit vector $\\psi$, then\n$\\Pi_S=|\\psi\\rangle\\langle\\psi|$ under the root-linear-first Dirac convention.",
+        "deps": [
+          "def-qc-stabilizer-subgroup",
+          "def-qc-dirac-notation-conversion",
+          "def-matrix-product-and-identity-matrix",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "lem-qc-stabilizer-subgroup-label-space-and-order"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14 §14.3",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "use group closure and Hermiticity, not simultaneous diagonalization by assertion."
+        ],
+        "existing_supplier_checks": [
+          "Reuses existing root supplier def-matrix-product-and-identity-matrix from matrices-and-the-matrix-of-a-linear-map; no duplicate QC carrier is proposed.",
+          "Reuses existing root supplier def-adjoint-of-a-linear-map-between-inner-product-spaces from inner-product-spaces-and-orthogonality; no duplicate QC carrier is proposed."
+        ]
+      },
+      {
+        "id": "def-qc-stabilizer-tableau",
+        "kind": "definition",
+        "title": "Phase-aware stabilizer tableau",
+        "statement": "For $n\\ge0$, $x,z\\in\\mathbb F_2^n$, and $k\\in\\mathbb Z/4$, write\n$P(k,x,z)=i^kX^xZ^z$, with the fixed tensor order and\n$X^x=\\bigotimes_{j<n}X^{x_j}$, $Z^z=\\bigotimes_{j<n}Z^{z_j}$. A **row**\n$(k,x,z)$ is Hermitian when $k\\equiv x\\cdot z\\pmod 2$; it stores the exact\nPauli phase as well as its binary label $(x,z)$.\n\nFor $n=0$, use the scalar Pauli convention of\n[[def-qc-pauli-group-on-zero-qubits]]; the generator list is empty.\n\nA **generator tableau** is an ordered list of $n$ Hermitian rows whose Pauli\noperators commute, have linearly independent labels, and generate a subgroup\nnot containing $-I$. It represents the unique common $+1$ ray when the rows\nstabilize a pure state. An **extended tableau** also stores Hermitian\ndestabilizer rows $d_1,\\ldots,d_n$ and stabilizer rows $s_1,\\ldots,s_n$ with\n\n$$\\omega(d_i,s_j)=\\delta_{ij},\\quad \\omega(d_i,d_j)=0,\\quad \\omega(s_i,s_j)=0.$$\n\nThe exact phase and symplectic conventions are those of the cited Pauli\nsuppliers. The generator-only simulator uses the $s_j$ rows; the extended\npairing is retained as a second representation invariant.",
+        "deps": [
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "def-qc-binary-symplectic-form",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-group-on-zero-qubits",
+          "thm-qc-pauli-product-and-adjoint",
+          "def-qc-stabilizer-subgroup",
+          "def-qc-stabilizer-state"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "initial tableau represents its declared state and satisfies the dual-pairing invariant."
+        ]
+      },
+      {
+        "id": "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+        "kind": "lemma",
+        "title": "An anticommuting stabilizer measurement is fair",
+        "statement": "Let $\\rho=|\\psi\\rangle\\langle\\psi|$ be a pure stabilizer state density operator,\nand let $M$ be a Hermitian Pauli observable that anticommutes with one of its\nstabilizer generators. Then\n$\\operatorname{Tr}(P_0\\rho)=\\operatorname{Tr}(P_1\\rho)=1/2$.",
+        "deps": [
+          "def-qc-pauli-measurement-branch-semantics",
+          "def-qc-pure-state-and-ray",
+          "def-qc-stabilizer-subgroup",
+          "def-qc-stabilizer-state",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "lem-qc-pauli-measurement-projectors",
+          "lem-qc-pure-projective-branch-norm",
+          "thm-qc-ray-projector-well-defined-and-bijective"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "conjugate M by the +1 stabilizer or use trace cyclicity."
+        ]
+      },
+      {
+        "id": "lem-qc-computational-basis-stabilizer-tableau",
+        "kind": "lemma",
+        "title": "Computational basis states have an extended stabilizer tableau",
+        "statement": "For $n\\ge0$ and a bit string $x=(x_0,\\ldots,x_{n-1})\\in\\mathbb F_2^n$, the\nbasis state $|x\\rangle$ has rows indexed by $a=1,\\ldots,n$ given by\n$s_{j+1}=(-1)^{x_j}Z_{j+1}$ and $d_{j+1}=X_{j+1}$ for each $0\\le j<n$.\nTheir labels satisfy the extended tableau pairing conditions.",
+        "deps": [
+          "def-qc-stabilizer-tableau",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-group-on-zero-qubits",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "def-qc-binary-symplectic-form",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "Verify the signed basis stabilizers, extended pairings, independent labels, and the empty-register case."
+        ]
+      },
+      {
+        "id": "lem-qc-tableau-clifford-update",
+        "kind": "lemma",
+        "title": "Phase-aware tableau updates for Clifford generators",
+        "statement": "Write a Hermitian row as $P(k,x,z)=i^kX^xZ^z$, with $k\\in\\mathbb Z/4$.\nIn this lemma's formulas, label coordinates are numbered by Pauli wires\n$a=1,\\ldots,n$ in tensor order: the coordinate denoted $x_a$ (respectively\n$z_a$) here is the coordinate denoted $x_{a-1}$ (respectively $z_{a-1}$)\nin [[def-qc-stabilizer-tableau]]. This reindexing changes no operator or phase.\nFor wire $a$ with $1\\le a\\le n$, conjugation by $H_a$, $S_a$, and\n$S^\\dagger_a$ updates the row by, respectively,\n\n$$H_a:(k,x_a,z_a)\\mapsto(k+2x_az_a,z_a,x_a),$$\n$$S_a:(k,x_a,z_a)\\mapsto(k+x_a,x_a,z_a\\oplus x_a),$$\n$$S^\\dagger_a:(k,x_a,z_a)\\mapsto(k-x_a,x_a,z_a\\oplus x_a).$$\n\nFor distinct wires $c,t$, $\\operatorname{CNOT}_{c\\to t}$ updates\n$x_t\\mapsto x_t\\oplus x_c$, $z_c\\mapsto z_c\\oplus z_t$, with all other label\ncoordinates and $k$ unchanged. Applying these conjugations to every row\npreserves the generator tableau and, when present, the extended pairing\ninvariant.",
+        "deps": [
+          "def-qc-stabilizer-tableau",
+          "lem-qc-hadamard-pauli-action",
+          "lem-qc-phase-gate-pauli-action",
+          "lem-qc-cnot-pauli-action",
+          "def-qc-binary-symplectic-form",
+          "def-qc-one-qubit-gate-alphabet-and-rotations"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "include phase bits and verify row pairings."
+        ]
+      },
+      {
+        "id": "lem-qc-tableau-deterministic-sign",
+        "kind": "lemma",
+        "title": "Tableau row reduction returns the deterministic Pauli sign",
+        "statement": "Let $n\\ge0$ and let $g_1,\\ldots,g_n$ be the independent signed rows of a rank-$n$ stabilizer\ntableau with unit stabilizer representative $\\psi$, and let a Hermitian Pauli\n$M$ commute with every row. Binary Gaussian\nelimination finds the unique $c\\in\\mathbb F_2^n$ whose row-label sum is\n$\\lambda(M)$. The phase-aware product\n$G=\\prod_{j=1}^n g_j^{c_j}$, taken in increasing row order, is exactly\n$(-1)^bM$ for the deterministic measurement bit $b$.",
+        "deps": [
+          "def-qc-stabilizer-tableau",
+          "def-qc-stabilizer-state",
+          "thm-qc-pauli-product-and-adjoint",
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "def-qc-binary-symplectic-form",
+          "def-qc-pauli-group-on-zero-qubits",
+          "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "lem-qc-stabilizer-maximal-isotropic-self-dual",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-qc-pauli-measurement-branch-semantics",
+          "lem-qc-pure-projective-branch-norm",
+          "thm-qc-ray-projector-well-defined-and-bijective"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "row reduction must return the exact ± sign and may not infer it from binary labels."
+        ]
+      },
+      {
+        "id": "thm-qc-stabilizer-projector-rank-and-code-dimension",
+        "kind": "theorem",
+        "title": "Stabilizer projector rank and code dimension",
+        "statement": "Let $S$ be a stabilizer subgroup on $n$ qubits of rank $r$, and let $\\Pi_S$\nbe its fixed-space projector. Then\n\n$$\\operatorname{Tr}(\\Pi_S)=\\dim_{\\mathbb C}\\operatorname{im}\\Pi_S =\\frac{2^n}{|S|}=2^{n-r}.$$\n\nIn particular, if $r=n$, then $\\mathcal C(S)$ is one-dimensional; for\narbitrary $r$ it is the $2^{n-r}$-dimensional stabilizer code space.",
+        "deps": [
+          "def-qc-stabilizer-subgroup",
+          "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "lem-qc-stabilizer-maximal-isotropic-self-dual",
+          "lem-qc-stabilizer-average-projector",
+          "def-qc-pauli-matrices",
+          "def-qc-pauli-group-on-zero-qubits",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "def-trace-of-a-square-matrix",
+          "def-trace-of-an-endomorphism",
+          "lem-trace-of-an-idempotent-is-the-dimension-of-its-image",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14 §14.3",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "nonidentity tensor Paulis are traceless; trace of an orthogonal projector equals its rank."
+        ],
+        "existing_supplier_checks": [
+          "Reuses existing root supplier def-trace-of-a-square-matrix from matrices-and-the-matrix-of-a-linear-map; no duplicate QC carrier is proposed.",
+          "Reuses existing root supplier def-trace-of-an-endomorphism from matrices-and-the-matrix-of-a-linear-map; no duplicate QC carrier is proposed.",
+          "Reuses existing root supplier lem-trace-of-an-idempotent-is-the-dimension-of-its-image from finite-averaging-and-character-theory-prerequisites; no duplicate QC carrier is proposed."
+        ]
+      },
+      {
+        "id": "lem-qc-deterministic-stabilizer-measurement",
+        "kind": "lemma",
+        "title": "Deterministic Pauli measurement on a pure stabilizer state",
+        "statement": "Let $S$ be a rank-$n$ stabilizer subgroup on $n\\ge0$ qubits and let $M$ be a Hermitian Pauli\nobservable commuting with every element of $S$. There is a unique $g\\in S$\nwith the same binary label as $M$, and $g=(-1)^bM$ for a unique\n$b\\in\\{0,1\\}$. On the stabilizer state of $S$, outcome $b$ has probability\none and the other outcome has probability zero. Moreover $P_b\\psi=\\psi$, so\nthe conditional state in the nonzero branch is the original ray.",
+        "deps": [
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-qc-stabilizer-subgroup",
+          "def-qc-pauli-group-on-zero-qubits",
+          "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "lem-qc-stabilizer-maximal-isotropic-self-dual",
+          "def-qc-stabilizer-state",
+          "thm-qc-stabilizer-projector-rank-and-code-dimension",
+          "def-qc-pauli-measurement-branch-semantics",
+          "def-qc-pure-state-and-ray",
+          "lem-qc-pure-projective-branch-norm",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "lem-qc-zero-probability-branch"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "phase-aware membership; binary label equality alone does not determine the outcome sign."
+        ]
+      },
+      {
+        "id": "lem-qc-random-measurement-stabilizer-update",
+        "kind": "lemma",
+        "title": "Random Pauli measurement updates stabilizer generators",
+        "statement": "Let $n\\ge1$ and let $S=\\langle g_1,\\ldots,g_n\\rangle$ be a stabilizer\nsubgroup whose displayed generators have linearly independent binary labels\nand fix a unit vector $\\psi$ on $n$ qubits. Let $M$ be a Hermitian Pauli\nobservable anticommuting with $g_1$. For either outcome $b\\in\\{0,1\\}$, define\n$g'_1=(-1)^bM$ and, for $j>1$, set $g'_j=g_jg_1$ if $g_j$ anticommutes with\n$M$, and $g'_j=g_j$ otherwise. Then the updated rows generate a rank-$n$\nstabilizer subgroup for the normalized post-measurement state\n$P_b|\\psi\\rangle/\\|P_b|\\psi\\rangle\\|$.",
+        "deps": [
+          "def-qc-pauli-measurement-branch-semantics",
+          "lem-qc-zero-probability-branch",
+          "lem-qc-deterministic-stabilizer-measurement",
+          "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+          "thm-qc-pauli-product-and-adjoint",
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "def-qc-binary-symplectic-form",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-qc-stabilizer-subgroup",
+          "def-qc-stabilizer-state",
+          "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "thm-qc-stabilizer-projector-rank-and-code-dimension",
+          "lem-qc-pure-projective-branch-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "show updated rows commute, stay independent, exclude −I, and stabilize P_b|ψ⟩."
+        ]
+      },
+      {
+        "id": "alg-qc-stabilizer-exact-simulator",
+        "kind": "algorithm",
+        "title": "Exact generator-tableau simulator for stabilizer circuits",
+        "statement": "**Inputs and admissible conditions.** An integer $n\\ge0$, a basis string\n$x=(x_0,\\ldots,x_{n-1})\\in\\mathbb F_2^n$, and a finite adaptive\nPauli-measurement circuit tree on\n$H_n=(\\mathbb C^2)^{\\otimes n}$. Circuit wire labels are\n$j\\in[n]=\\{0,\\ldots,n-1\\}$. Tableau/Pauli wire labels are $a\\in\\{1,\\ldots,n\\}$,\nwith circuit wire $j$ represented by Pauli wire $a=j+1$. Unitary instructions\nare $H_j,S_j,S^\\dagger_j$ and\n$\\operatorname{CNOT}_{c\\to t}$ with distinct $c,t\\in[n]$. Here\n$S^\\dagger:=S^*$, the conjugate transpose of the matrix\n$S=\\operatorname{diag}(1,i)$, so $S^*=\\operatorname{diag}(1,-i)$.\nMeasurement instructions are Hermitian phase-aware Paulis $M=P(k,u,v)$\nsatisfying the Hermitian phase criterion. The tree uses the branch semantics\nof [[def-qc-adaptive-pauli-circuit-tree]]. Its classical bit operations are\ncharged separately under [[def-qc-elementary-circuit-resources]]. A malformed\ninput, unsupported gate, out-of-range wire, or non-Hermitian measurement\noperand returns INVALID.\n\n**Output.** For a valid input, the sampled measurement transcript and the\nfinal signed generator rows representing the final pure stabilizer ray.\nFair randomness is used exactly when the measured Pauli anticommutes with a\nstabilizer row.\n\n**Initialization.** For each circuit wire $j\\in[n]$, store the signed\nstabilizer row $s_{j+1}=(-1)^{x_j}Z_{j+1}$. The simulator stores only these\ngenerator rows; if $n=0$, the row list is empty.\n\n**Execution.** Set the current tree node to the root and the transcript to the\nempty list. While the current node is not a leaf, perform the instruction at\nthat node and move to its indicated child:\n\n1. **Gate node.** For $H_j$, $S_j$, or $S^\\dagger_j$, apply\n   [[lem-qc-tableau-clifford-update]] to every generator row using Pauli wire\n   $j+1$. For $\\operatorname{CNOT}_{c\\to t}$, apply the same supplier using\n   control wire $c+1$ and target wire $t+1$. Then move to the gate node's\n   unique successor.\n2. **Measurement node with a pivot.** Compute\n   $\\omega(\\lambda(s_a),\\lambda(M))$ for each row $a=1,\\ldots,n$. If any\n   value is $1$, choose the least such $a$ and retain the old row\n   $g=s_a$. Sample a fair bit $b$. For every other row $s_\\ell$ that\n   anticommutes with $M$, replace it by the exact phase-aware product\n   $s_\\ell g$. Replace the pivot row by $(-1)^bM$, keep the other rows,\n   append $b$ to the transcript, and move to the child edge labelled $b$.\n3. **Measurement node without a pivot.** If every row commutes with $M$,\n   form the augmented matrix over $\\mathbb F_2$ whose columns are\n   $\\lambda(s_1),\\ldots,\\lambda(s_n)$ in the fixed $(x,z)$ coordinate order\n   and whose right-hand side is $\\lambda(M)$. Scan the generator columns in\n   increasing order. For each column, choose the least row not already used as\n   a pivot that has entry $1$ in that column, swap it into the next pivot row,\n   and add that pivot row to every other row having entry $1$ in the column.\n   If a column has no pivot, or a row with zero coefficient part has right-hand\n   side $1$, return INVALID. Otherwise read the unique coefficient vector\n   $c=(c_1,\\ldots,c_n)$ from the right-hand sides of the pivot rows. For $n=0$\n   this is the empty system with the empty solution. Multiply the selected\n   signed rows in increasing row order using the exact phase-aware product\n   rule, obtaining $G$. Set $b=0$ if $G=M$ and $b=1$ if $G=-M$; the unique\n   matching sign is guaranteed by\n   [[lem-qc-tableau-deterministic-sign]]. Leave the tableau unchanged, append\n   $b$ to the transcript, and move to the child edge labelled $b$.\n\nFor a valid rank-$n$ pure stabilizer tableau, each deterministic system is\nconsistent and has full column rank. Each iteration moves to a child, and the\nfinite tree ensures that execution reaches a leaf. Return the transcript and\ncurrent stabilizer rows there. Correctness and resource bounds are separate\nresults.",
+        "deps": [
+          "def-qc-stabilizer-tableau",
+          "def-qc-adaptive-pauli-circuit-tree",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-group-on-zero-qubits",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-qc-elementary-circuit-resources",
+          "lem-qc-tableau-clifford-update",
+          "lem-qc-tableau-deterministic-sign",
+          "lem-qc-random-measurement-stabilizer-update"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "Every instruction and elimination has a bounded finite loop. Prove signed-row invariant, measurement law and polynomial bit cost in the existing Gottesman–Knill theorem; fair-bit randomness is the only sampling primitive."
+        ],
+        "existing_supplier_checks": [
+          "Proposed local supplier; not an authored or proof-accepted carrier. Exact prerequisites listed; local mathematical route specified."
+        ]
+      },
+      {
+        "id": "thm-qc-tableau-measurement-update",
+        "kind": "theorem",
+        "title": "Phase-aware tableau measurement agrees with the projective instrument",
+        "statement": "For a rank-$n$ stabilizer tableau and a Hermitian Pauli measurement $M$, the\ntableau measurement rule returns exactly the projective instrument branches:\nif some stabilizer row anticommutes with $M$, both bits occur with probability\n$1/2$ and the pivot update represents each conditional state; if every row\ncommutes with $M$, the signed row product returns the unique probability-one\nbit, leaves the state unchanged, and the opposite zero-probability branch has\nno normalized state.",
+        "deps": [
+          "def-qc-pauli-measurement-branch-semantics",
+          "lem-qc-pauli-measurement-projectors",
+          "lem-qc-zero-probability-branch",
+          "lem-qc-deterministic-stabilizer-measurement",
+          "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+          "lem-qc-random-measurement-stabilizer-update",
+          "lem-qc-pauli-measurement-positive-branch-is-density",
+          "lem-qc-pure-projective-branch-norm",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-qc-stabilizer-tableau",
+          "lem-qc-tableau-clifford-update",
+          "lem-qc-tableau-deterministic-sign"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "use zero-branch semantics plus the maximal pure-stabilizer cases and preserve the phase-aware tableau invariant."
+        ]
+      },
+      {
+        "id": "thm-qc-gottesman-knill-exact-simulation",
+        "kind": "theorem",
+        "title": "Exact Gottesman–Knill simulation with measurement",
+        "statement": "Let $C$ be a finite adaptive circuit on $n\\ge0$ ordered qubits, starting in a\ncomputational-basis state $|x\\rangle$. Its unitary instructions are from the\nfinite Clifford generating alphabet $H,S,S^\\dagger,\\operatorname{CNOT}$ and\nits measurements are Hermitian Pauli observables. Its finite deterministic\ncontroller is represented by a circuit tree as in\n[[def-qc-adaptive-pauli-circuit-tree]]. Let $T$ be a\nworst-case bound on quantum instructions per branch and $C_{\\rm cl}$ a\nworst-case bound on controller bit operations per branch. Then\n[[alg-qc-stabilizer-exact-simulator]] outputs exactly the circuit's\ndistribution on measurement transcripts and final stabilizer rays.\n\nWith dense binary rows and elementary bit operations, tableau and elimination\nworkspace is $O((n+1)^2)$ bits. Each gate costs $O((n+1)^2)$; each random\nmeasurement costs $O((n+1)^2)$; each deterministic measurement costs\n$O((n+1)^3)$. Initializing and outputting the dense signed rows costs\n$O((n+1)^2)$ bit operations. Thus the simulator uses\n$O((n+1)^2+T(n+1)^3+C_{\\rm cl})$ bit operations and stores an $O(T)$-bit\ntranscript, in addition to the tableau and controller workspace. For $n\\ge1$\nthe time bound is $O(n^2+Tn^3+C_{\\rm cl})$. No amplitude vector is formed.",
+        "deps": [
+          "def-qc-stabilizer-tableau",
+          "lem-qc-computational-basis-stabilizer-tableau",
+          "lem-qc-tableau-clifford-update",
+          "lem-qc-tableau-deterministic-sign",
+          "thm-qc-tableau-measurement-update",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-pauli-group-on-zero-qubits",
+          "def-qc-adaptive-pauli-circuit-tree",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "alg-qc-stabilizer-exact-simulator"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Theorem 6 and proof, §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits, §III",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_obligations": [
+          "induct over instructions and state a data-structure-specific polynomial bound; do not claim explicit enumeration of the output distribution."
+        ]
+      }
+    ]
+  },
+  {
+    "order": 2197,
+    "id": "stabilizer-circuits-and-gottesman-knill-simulation-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Stabilizer Circuits and Gottesman–Knill Simulation — Examples",
+    "companion": "stabilizer-circuits-and-gottesman-knill-simulation",
+    "requires": [
+      "stabilizer-circuits-and-gottesman-knill-simulation"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-stabilizer-x-measurement-branches",
+        "kind": "example",
+        "title": "Stabilizer measurement on $|0\\rangle$ in the $X$ basis",
+        "statement": "Start in the one-qubit basis state $|0\\rangle$, whose stabilizer is\n$S=\\langle Z\\rangle$. Measure $X$, then measure $X$ again. The first\nmeasurement has two equiprobable outcomes and updates the signed stabilizer\ngenerator to the corresponding $X$ eigenvalue. The second measurement is\ndeterministic; its opposite branch has probability zero and no normalized\nconditional state.",
+        "deps": [
+          "thm-qc-gottesman-knill-exact-simulation",
+          "def-qc-pauli-matrices",
+          "def-qc-register-and-computational-basis",
+          "def-qc-pauli-measurement-branch-semantics",
+          "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+          "lem-qc-random-measurement-stabilizer-update",
+          "lem-qc-zero-probability-branch"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §20.1 and §20.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "Verify the anticommutation branch probability and generator update, including the impossible-branch convention for deterministic examples."
+        ],
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

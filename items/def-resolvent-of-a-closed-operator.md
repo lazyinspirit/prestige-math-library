@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-resolvent-of-a-closed-operator.json
 id: def-resolvent-of-a-closed-operator
 kind: definition
 title: "Resolvent and spectrum of a closed operator on a Banach space"
@@ -6,14 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0
-deps:
-  - def-banach-space
-  - rem-real-and-complex-normed-space-convention
-  - def-unbounded-linear-operator-domain-and-graph
-  - def-densely-defined-closed-and-closable-operator
-  - thm-closed-graph-theorem
-  - def-bounded-linear-operator
-  - def-resolvent-and-spectrum-of-a-closed-unbounded-operator
+deps: [def-banach-space, def-complex-norm-and-complex-normed-space, def-unbounded-linear-operator-domain-and-graph, def-densely-defined-closed-and-closable-operator, thm-closed-graph-theorem, def-bounded-linear-operator, def-resolvent-and-spectrum-of-a-closed-unbounded-operator]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,17 +27,11 @@ sources:
     - title: "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)"
       url: "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf"
       locator: "Chapter 6 Section 2.2, Definitions 3-4, printed pp. 12-13"
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 ---
 
 ## Definition
 
-Let $X$ be a Banach space over $\mathbb K\in\{\mathbb R,\mathbb C\}$ ([[def-banach-space]], [[rem-real-and-complex-normed-space-convention]]) and let $A:D(A)\subseteq X\to X$ be a closed linear operator: $D(A)$ is a linear subspace and $\Gamma(A)=\{(x,Ax):x\in D(A)\}$ is closed in $X\times X$ with norm $\|(x,y)\|=\|x\|+\|y\|$. This extends the Hilbert-space vocabulary of [[def-unbounded-linear-operator-domain-and-graph]] and [[def-densely-defined-closed-and-closable-operator]] to Banach spaces. A scalar $\lambda\in\mathbb K$ belongs to the **resolvent set** $\rho(A)$ if $\lambda I-A:D(A)\to X$ is bijective and its inverse is bounded on $X$. Under Dependent Choice, boundedness of the inverse follows from bijectivity by [[thm-closed-graph-theorem]]; thus under DC this is equivalent to the bijectivity-only convention. For $\lambda\in\rho(A)$ the bounded operator $$R(\lambda,A):=(\lambda I-A)^{-1}\in\mathcal B(X)$$ is the **resolvent**, and $\sigma(A):=\mathbb K\setminus\rho(A)$ is the spectrum. One has $R(\lambda,A)X=D(A)$, $R(\lambda,A)(\lambda I-A)y=y$ for $y\in D(A)$, and $\lambda R(\lambda,A)x-x=AR(\lambda,A)x$ for $x\in X$; in particular $AR(\lambda,A)=\lambda R(\lambda,A)-I\in\mathcal B(X)$. This is the Banach-space form of the Hilbert-space vocabulary [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]; the shift convention $\lambda I-A$ is the same, with the closed graph theorem replacing the Hilbert-space bounded-inverse convention.
+Let $X$ be a Banach space over $\mathbb K\in\{\mathbb R,\mathbb C\}$ ([[def-banach-space]], [[def-complex-norm-and-complex-normed-space]]) and let $A:D(A)\subseteq X\to X$ be a closed linear operator: $D(A)$ is a linear subspace and $\Gamma(A)=\{(x,Ax):x\in D(A)\}$ is closed in $X\times X$ with norm $\|(x,y)\|=\|x\|+\|y\|$. This extends the Hilbert-space vocabulary of [[def-unbounded-linear-operator-domain-and-graph]] and [[def-densely-defined-closed-and-closable-operator]] to Banach spaces. A scalar $\lambda\in\mathbb K$ belongs to the **resolvent set** $\rho(A)$ if $\lambda I-A:D(A)\to X$ is bijective and its inverse is bounded on $X$. Under Dependent Choice, boundedness of the inverse follows from bijectivity by [[thm-closed-graph-theorem]]; thus under DC this is equivalent to the bijectivity-only convention. For $\lambda\in\rho(A)$ the bounded operator $$R(\lambda,A):=(\lambda I-A)^{-1}\in\mathcal B(X)$$ is the **resolvent**, and $\sigma(A):=\mathbb K\setminus\rho(A)$ is the spectrum. One has $R(\lambda,A)X=D(A)$, $R(\lambda,A)(\lambda I-A)y=y$ for $y\in D(A)$, and $\lambda R(\lambda,A)x-x=AR(\lambda,A)x$ for $x\in X$; in particular $AR(\lambda,A)=\lambda R(\lambda,A)-I\in\mathcal B(X)$. This is the Banach-space form of the Hilbert-space vocabulary [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]; the shift convention $\lambda I-A$ is the same, with the closed graph theorem replacing the Hilbert-space bounded-inverse convention.
 
 **Boundedness under DC.** Assume Dependent Choice. If $\lambda\in\mathbb K$ and $\lambda I-A$ is
 bijective, then $\lambda I-A$ is a closed operator: its graph is the image of
@@ -53,7 +42,7 @@ closed graph and is everywhere defined, so the closed graph theorem
 ([[thm-closed-graph-theorem]], which assumes DC) makes it bounded; this is the
 one place where an axiom beyond ZF enters, and it is the DC carried by the cited
 theorem. The Banach-space vocabulary is [[def-banach-space]] with the scalar
-convention of [[rem-real-and-complex-normed-space-convention]]; boundedness and
+convention of [[def-complex-norm-and-complex-normed-space]]; boundedness and
 the space $\mathcal B(X)$ are those of [[def-bounded-linear-operator]].
 
 **Elementary identities.** Let $\lambda\in\rho(A)$ and $R:=R(\lambda,A)$. Since

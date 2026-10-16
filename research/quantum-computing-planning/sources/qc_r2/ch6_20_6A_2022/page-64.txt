@@ -1,0 +1,56 @@
+58
+Quantum Algorithms
+
+The operators that advance or retard the time act on three adjacent qubits:
+
+|t⟩⟨t −1| = (|110⟩⟨100|)t−1,t,t+1,
+
+|t −1⟩⟨t| = (|100⟩⟨110|)t−1,t,t+1
+(6.288)
+
+(for 1 ≤t ≤T −1). Acting on three qubits suffices to locate the position of the “domain
+wall” between the 0’s and 1’s in the bit string, and to move the wall one position to the
+left or to the right; for t = 0 action on just two qubits suffices to move the wall one step
+to the right, and for t = T action on two qubits suffices to move the wall one step to the
+left. Since these clock terms act on at most three qubits, the term Ut ⊗|t⟩⟨t −1| acts on
+at most 5 qubits, if Ut is a 2-qubit gate. Thus with this clock encoding, the Hamiltonian
+
+H = Hin + Hout + Hprop + Hclock
+(6.289)
+
+is 5-local. Because the clock Hamiltonian annihilates validly encoded clock states, it
+trivially commutes with the rest of the terms in the Hamiltonian H, and has an energy
+gap of 1. Therefore, our previous analysis of the ground state energy of H still stands.
+This completes the demonstration that any QMA problem is reducible to the prob-
+lem of estimating the ground state energy (with a 1/poly(n) promise gap) of a 5-local
+Hamiltonian.
+
+Comments
+
+Thus we have shown that the 5-local Hamiltonian problem is a “natural” QMA-complete
+problem, much as 3-SAT is a natural NP-complete problem. But while in the classical
+case many practical problems have been shown to be NP-complete, the family of prob-
+lems that have been shown to be QMA-complete is still rather small, and the problems
+seem relatively “artificial.” In any case, its interesting to see that quantum local Hamil-
+tonian problems seem to be harder than classical ones (if QMA ̸= NP).
+I won’t discuss the tricks for reducing the QMA-complete problem to k = 2 (which
+involves clever use of perturbation theory) or for making H geometrically local (which
+involves encoding the clock more cleverly, among other things).
+Another interesting direction to pursue using these ideas is to show that any problem
+in BQP can be solved using adiabatic quantum computing. The idea is to replace
+
+Hprop →Hprop(s) = (1 −s)Hclock−init + sHprop
+(6.290)
+
+where the null space of Hclock−init fixes the clock at |t = 0⟩and s varies in [0, 1]. Then
+the ground state of H(s = 0) is easy to construct, and the ground state of H(s = 1) is
+the valid history state. The eigenvalue gap of H(s) stays > 1/poly(n) for s ∈[0, 1], so
+the history state can be prepared in polynomial time by adiabatically varying s. Once
+we have prepared the history state, we can measure the clock, projecting out |t = T⟩
+with probability 1/(T + 1) = 1/poly(n). And once we have |ψ(T)⟩we can measure the
+output qubit to find out if the circuit accepts. At a modest additional cost, we can can
+substantially improve the probability of preparing |ψ(T)⟩, by adding a long “runway”
+after time t = T, so that the state of the computer remains fixed for S additional time
+steps; then measuring the clock prepares |ψ(T)⟩with probability (S + 1)/(S + T + 1).
+
+

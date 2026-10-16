@@ -1,0 +1,60 @@
+5.2 Reversible computation
+15
+
+may regard an invertible function as a permutation of the 2n strings of
+n bits — there are (2n)! such functions. If we did not insist on invert-
+ibility, there would be
+�
+22n�n = (2n)2n functions taking n bits to n bits
+(the number of ways to choose n Boolean functions); using the Stirling
+approximation, (2n)! ≈(2n/e)2n, we see that the fraction of all functions
+which are invertible is quite small, about e−2n.
+Any irreversible computation can be “packaged” as an evaluation of an
+invertible function. For example, for any f : {0, 1}n →{0, 1}, we can
+construct ˜f : {0, 1}n+1 →{0, 1}n+1 such that
+
+˜f(x, y) = (x, y ⊕f(x)).
+(5.27)
+
+Here y is a bit and ⊕denotes the XOR gate (addition mod 2) — the
+n-bit input x is preserved and the last bit flips iff f(x) = 1. Applying ˜f
+a second time undoes this bit flip; hence ˜f is invertible, and equal to its
+own inverse. If we set y = 0 initially and apply ˜f, we can read out the
+value of f(x) in the last output bit.
+Just as for Boolean functions, we can ask whether a complicated re-
+versible computation can be executed by a circuit built from simple com-
+ponents — are there universal reversible gates?
+It is easy to see that
+one-bit and two-bit reversible gates do not suffice; we will need three-bit
+gates for universal reversible computation.
+Of the four 1-bit →1-bit gates, two are reversible; the trivial gate and
+the NOT gate. Of the (24)2 = 256 possible 2-bit →2-bit gates, 4! = 24
+are reversible. One of special interest is the controlled-NOT (CNOT) or
+reversible XOR gate that we already encountered in Chapter 4:
+
+XOR : (x, y) �→(x, x ⊕y),
+(5.28)
+
+x
+
+y
+
+x
+
+x ⊕y
+
+s
+
+g
+
+This gate flips the second bit if the first is 1, and does nothing if the first
+bit is 0 (hence the name controlled-NOT). Its square is trivial; hence it
+inverts itself. Anticipating the notation that will be convenient for our
+discussion of quantum gates, we will sometimes use Λ(X) to denote the
+CNOT gate. More generally, by Λ(G) we mean a gate that applies the
+operation G to a “target” conditioned on the value of a “control bit;” G
+is applied if the control bit is 1 and the identity is applied if the control
+bit is 0. In the case of the CNOT gate, G is the Pauli operator X, a bit
+flip.
+
+

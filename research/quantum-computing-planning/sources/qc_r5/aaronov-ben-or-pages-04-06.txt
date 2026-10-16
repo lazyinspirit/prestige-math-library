@@ -1,0 +1,209 @@
+
+restriction is therefore that the error correction takes any state to some word in the code. Quantum
+computation codes which satisfy both restrictions are called proper quantum computation codes.
+
+Explicit proper codes over Fp We describe two classes of proper quantum computation codes. We
+first describe the class of quantum codes in [4] generalized to codes over Fp, for any prime p. These
+codes are defined for general quantum circuits which consist of particles with p ≥2 possible states to
+be in. We call such quantum particles qupits, as a generalization to qubits. Non binary codes where
+defined independently also by Chuang[11] and Knill[13]. The proofs that these are quantum codes[4]
+transform smoothly from F2 to Fp. For p = 2, we show how to convert these codes to proper quantum
+codes, using the set of gates and procedures described in [19], which are modified to fit the definition
+of proper quantum codes. The second example of proper quantum codes uses a special case of the
+linear quantum codes, which is the quantum analog of random polynomial codes[5]. The requirements
+imposed on quantum computation codes are actually very similar to the requirements that are imposed
+on the secret sharing schemes that are used to perform secure fault-tolerant distributed computation
+[5]. In both cases measuring a few qubits, or reading a few secret shares, must give no information
+about the unencoded data, and in both cases we must show how to perform computation in a fault-
+tolerant way on the encoded data. To adopt the techniques of [5] to the quantum setting one can use
+the same encoding but instead of selecting a random polynomial to share a secret we simply pick the
+superposition of all those polynomials.
+The noise rate threshold is shown to be larger than ≃10−6.
+
+The results of this paper hold also with a more general noise model, in which for all integer k,
+for any set of k points, the probability that a fault occured in all the points is bounded by ηk, and
+an adversary can pick a transformation that operates on all the damaged qubits together. The same
+result is true for quantum circuits which are allowed to operate only on nearest neighbor qubits (In
+this case the threshold will be smaller.)
+Similar results to those of this paper where independently discovered by Knill, Laflamme and
+Zurek[14].
+Organization of paper: In section 2 we define the model of noisy quantum circuits. Section 3
+is devoted to describe one step of the simulation, given any quantum computation code. In section 4
+we present concatenated simulations and prove that this scheme provides noise resistant computation
+in the presence of a constant noise rate, given any proper quantum code. In section 5 we present
+two explicit classes of proper quantum computation code. Section 6 discusses possible extensions,
+conclusions and open questions.
+
+2
+Noisy Quantum Circuits
+
+In this section we recall the definitions of quantum circuits[12, 8, 25] with mixed states[3], We then
+define noisy quantum circuits, which model a physical realization of quantum circuits[1]. The faults
+are probabilistic, and occur in single qubits and in gates.
+
+2.0.1
+Pure states
+
+We deal with systems of n two-state quantum particles, or “qubits”. The pure state of such a system
+is a unit vector, denoted |α⟩, in the 2n dimensional complex space C2n. We view C2n as a tensor
+product of n two dimensional spaces, each corresponding to a qubit: C2n = C2 ⊗... ⊗C2. As a basis
+for C2n, we use the 2n orthogonal basic states: |i⟩= |i1⟩⊗|i2⟩.... ⊗|in⟩, 0 ≤i < 2n, where i is in
+binary representation, and each ij gets 0 or 1. A general unit vector |α⟩in C2n is called a “pure state”,
+and is a superposition of the basic states: |α⟩= �2n
+
+i=1 ci|i⟩, with �2n
+
+i=1 |ci|2 = 1. |α⟩corresponds to
+the vector vα = (c1, c2, ..., c2n). v†
+α, the complex conjugate of vα, is denoted ⟨α|. The inner product
+between |α⟩and |β⟩is ⟨α|β⟩= (vα, v†
+β). The matrix v†
+αvβ is denoted as |α⟩⟨β|. An isolated system of
+n qubits develops in time by a unitary matrix, of size 2n × 2n: |α(t2)⟩= U|α(t1)⟩. A quantum system
+
+4
+
+
+
+
+
+in C2n can be observed by measuring the system. An important measurement is a basic measurement
+of a qubit q, of which the possible outcomes are 0, 1. For the state |α⟩= �2n
+
+i=1 ci|i⟩, the probability
+for outcome 0 is p0 = �
+i,i|q=0 |ci|2 and the state of the system will collapse to |β⟩=
+1
+p0
+�
+i,i|q=0 ci|i⟩,
+(the same for 1). A unitary operation U on k qubits can be applied on n qubits, n ≥k, by taking
+the extension ˜U of U, i.e. the tensor product of U with an identity matrix on the other qubits.
+The deffinition can be generalised to circuits which operate on p−state quantum particles, or qupits.
+(simply replace 2 by p in the definitions above).
+
+2.0.2
+Mixed states
+
+A system which is not ideally isolated from it’s environment is described by a mixed state. There are
+two equivalent descriptions of mixed states: mixtures and density matrices. We use density matrices
+in this paper. A system in the mixture {α} = {pk, |αk⟩} is with probability pk in the pure state
+|αk⟩. The rules of development in time and measurements for mixtures are obtained by applying
+classical probability to the rules for pure states. A density matrix ρ on C2n is an hermitian positive
+semi definite complex matrix of dimensions 2n × 2n, with tr(ρ) = 1. A pure state |α⟩= �
+i ci|i⟩
+is associated the density matrix ρ|α⟩= |α⟩⟨α| i.e. ρ|α⟩(i, j) = cic∗
+j. A mixture {α} = {pl, |αl⟩}, is
+associated the density matrix : ρ{α} = �
+l plρ|αl⟩. The operations on a density matrix are defined
+such that the correspondence to mixtures is preserved. If a unitary matrix U transforms the mixture
+{α} = {pl, |αl⟩} to {β} = {pl, U|αl⟩}, then ρ{β} = �
+
+l plU|αl⟩⟨αl|U † = Uρ{α}U †. A basic measurement
+of the j′th qubit in ρ gives, the outcome 0 with the probability which is the sum of the diagonal terms
+of ρ, which relate to the basic states i with ij = 0: pr(0) = �2n
+
+i=1 ρi,iδ(ij = 0). conditioned that the
+outcome is the eigenvalue 0, the resulting density matrix is O0 ◦(ρ), which is the minor of ρ which
+includes only rows and columns which relate to basic states i with ij = 0. (This minor should of
+course be normalized to have trace one). Without conditioning on the outcome the resulting density
+matrix will be O ◦(ρ) = Pr(0)O0 ◦(ρ) + Pr(1)O1 ◦(ρ). which differs from ρ, only in that the entries
+in ρ which connected between 0 and 1 on the same qubit are put to zero. Given a density matrix ρ of
+n qubits, the reduced density matrix of a subsystem,A, of, say, m qubits is defined as an average over
+the states of the other qubits: ρ|A(i, j) = �2n−m
+
+k=1
+ρ(ik, jk).
+
+2.1
+Quantum circuits with mixed states
+
+A quantum unitary gate, g, of order k is a complex unitary matrix of size 2k ×2k. A density matrix
+ρ will transform by the gate to g ◦ρ = ˜Uρ ˜U †, where ˜U is the extension of U. A Quantum circuit is a
+directed acyclic graph with n inputs and n outputs. Each node v in the graph is labeled by a quantum
+gate gv. The in-degree and out-degree of v are equal to the order of gv. Some of the outputs are
+labeled “result” to indicate that these are the qubits that will give the output of the circuit. The wires
+in the circuit correspond to qubits. An initial density matrix ρ transforms by a circuit Q to a final
+density matrix Q◦ρ = gt ◦...◦g2 ◦g1 ◦ρ, where the gates gt...g1 are applied in a topological order. For
+an input string i, the initial density matrix is ρ|i⟩. The output of the circuit is the outcome of applying
+basic measurements of the result qubits, on the final density matrix Q ◦ρ|i⟩. Since the outcomes of
+measurements are random, the function that the circuit computes is a probabilistic function, i.e. for
+input i it outputs strings according to a distribution which depends on i.
+
+2.2
+Noisy Quantum Circuits
+
+As any physical system, a quantum system is subjected to noise. The process of noise is dynamic
+and depends on time. We therefore divide the quantum circuit to levels, or time steps. We permit
+that qubits are input and output at different times, and we say a qubit is alive from t1 to t2 if it is
+input to the circuit at t1 and output at t2. The “space time” of the noisy quantum circuit is a two
+dimentional array, consisting of all the pairs (q, t), of a qubit q and time t, where the qubit q is alive
+
+5
+
+
+
+
+
+at time t. The volume of the circuit M, is the number of points in it’s space time and it is denoted
+by V (M).
+In our model of noisy quantum circuits each qubit and each gate are damaged with probability
+1/2 > η > 0 each time step. The damage operates as follows: A unitary operation operates on the
+qubit, (or on the qubits that are output from the gate in the case of a gate damage) and on a state
+of the environment (The environment can be represented by m qubits in some state). This operation
+results in a density matrix of the n + m qubits. We reduce this density matrix to the n qubits of the
+circuit to get the new density matrix after the damage. A noise step happens between two levels, or
+two time steps of computation, and in a noise step each gate or qubit is damaged with probability
+η. The density matrix of the circuit develops by applying alternately computation steps and noise
+steps. Each “run” of the computation is subjected to a specific “fault path”, which indicates where
+and when fault occured. Each run ends up with some output. The function computed by the noisy
+quantum circuit is naturally the average over the outputs, on the probabilistic process of noise.
+
+3
+Quantum computation on encoded states
+
+In the following section we define quantum codes and quantum computation codes.
+Then we
+describe how to improve reliability of computation using quantum computation codes.
+Quantum
+computation codes are used abstractly in this section, while explicit examples of such codes are given
+in section 5.
+
+3.1
+Quantum block codes
+
+A quantum linear block linear code is a function φ from the Hilbert space of a qubit to a Hilbert
+space of m qubits: φ : C2 �−→C2m. m is called the size of the block in the code. Such a code induces
+a linear function from C2n to C2mn in the following way: a pure state in C2n, |α⟩= �
+i ci|i⟩will
+transform to |β⟩= �
+i ciφ|i1⟩φ|i2⟩...φ|in⟩. A pure state in the image of φ is called a word in the code.
+The above definition can be extended to density matrices: A mixed state of n qubits will be encoded
+by the corresponding probability over the encoding of the pure states. A mixture of words in the code
+is also said to be in the code.
+The error in the encoded state is sparse if not too many qubits in each block are damaged. Using
+this notion of sparse sets, we can define a metric on block density matrices. They will be close if the
+deviation between them is confined to a sparse set of qubits:
+
+Definition 1 Let B be the qubits in n blocks of m qubits. A set A ∈B of qubits is said to be k−sparse
+if in each block there are not more than k qubits in A. Two density matrices ρ1 and ρ2 of the qubits
+B are said to be k−deviated if there is an k−sparse set of qubits, A, such that reduced on all qubits
+except those in A they are equal: ρ1|B−A = ρ2|B−A.
+
+The deviation is a metric since it satisfies the triangal inequality, and it is zero only for equal density
+matrices. The quantum code corrects d errors if there is some recovery procedure R, that when applied
+on all the blocks in any density matrix that d-deviates from a code word w, the output is the recovered
+word w (maybe tensored product with ancilla qubits used by the correction procedure).
+
+3.2
+Quantum computation codes
+
+A computation code is a quantum code which provides a way to perform gates on the encoded
+states fault tolerantly. The procedure Pg that simulates a gate g with respect to a quantum code is a
+sequence of gates which transforms the encoded state to the encoded output of the gate: Pg(φ(i)⊗|0 >
+) = φ(g(i)) ⊗|a >, where we have used extra ancilla qubits. These qubits are not counted as the
+inputs or outputs of the procedure. A quantum procedure is said to have spread l if no qubit or gate
+effects more than l outputs of the procedure. We will need procedures with small spread for fault
+
+6
+

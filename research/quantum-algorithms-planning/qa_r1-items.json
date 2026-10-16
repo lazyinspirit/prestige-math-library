@@ -1,0 +1,3243 @@
+{
+  "category": "quantum-algorithms",
+  "status": "draft-planning",
+  "items": [
+    {
+      "id": "def-qa-task-and-promise-domain",
+      "kind": "definition",
+      "title": "QA task and promise domain",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-promise-problem"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A decision task is a published root promise pair (Y,N) of disjoint binary-string sets. A search task replaces the yes/no output bit by an explicit relation R(z,w) and requires an output w satisfying R on each promised instance. Outputs outside the promise have no correctness condition. This is an algorithm-task contract around the root definition, not a replacement promise formalism.",
+      "proof_obligations": [
+        "Make the task input alphabet, encoded instance subset and output relation explicit for every later algorithm."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem",
+        "def-qa-input-encoding-and-size"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-input-encoding-and-size",
+      "kind": "definition",
+      "title": "Input encoding and size for algorithmic tasks",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-task-and-promise-domain"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "An instance z is represented by a finite binary string enc(z); input size is n=|enc(z)|. A task family is indexed by n and specifies which encodings lie in its promise. The encoding and its length convention are part of the task statement.",
+      "proof_obligations": [
+        "Show the encoding is unambiguous on promised instances and state any length/padding convention used by a later cost bound."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 3
+    },
+    {
+      "id": "def-qa-promise-query-instance",
+      "kind": "definition",
+      "title": "Promise query instance and oracle family",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-input-encoding-and-size",
+        "def-qc-coherent-function-oracle",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A query instance z selects a total finite function f_z:{0,1}^{a(n)}→{0,1}^{b(n)}; the promise restricts z, while f_z remains defined on every address. The oracle action is exactly the QC coherent function-oracle instance U_f|x>|y>=|x>|y xor f_z(x)>. The cost model does not charge for obtaining a matrix description of U_f and does not infer a circuit implementation.",
+      "proof_obligations": [
+        "Specify address and output widths and verify the QC XOR-oracle hypotheses for each later family."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-coherent-function-oracle",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "Final QC oracle interface contract and page binding remain subject to QC reconciled inventory."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 4
+    },
+    {
+      "id": "def-qa-quantum-query-algorithm",
+      "kind": "definition",
+      "title": "Quantum query algorithm",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-promise-query-instance",
+        "def-qc-register-and-computational-basis",
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-coherent-function-oracle",
+        "def-qc-classical-control-and-measurement-circuit",
+        "def-qc-projective-measurement",
+        "def-qc-uniform-circuit-family"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A T-query algorithm is a finite QC circuit with at most T designated calls to U_f on every execution branch, oracle-independent gates, any explicitly permitted intermediate measurements and classical control, and a final classical output rule. Its circuit family is uniform only when the QC uniformity interface supplies that condition. Controlled access to U_f is not implicit.",
+      "proof_obligations": [
+        "List initialization, all gates around queries, intermediate/final measurements and any classical feed-forward, ancillas, and the maximum number of queries on every branch; do not assume controlled oracle access unless separately stated."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation",
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-coherent-function-oracle",
+        "def-qc-uniform-circuit-family"
+      ],
+      "unresolved_obligations": [
+        "QC circuit and oracle contracts are reserved and need final reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 5
+    },
+    {
+      "id": "def-qa-expected-query-cost",
+      "kind": "definition",
+      "title": "Expected query cost from finite execution prefixes",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-finite-probability-space-and-event",
+        "def-finite-real-random-variable-and-distribution",
+        "def-expectation-on-a-finite-probability-space"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A sequential procedure has finite outcome sets and a specified normalized transition law at each elementary step. Its first M elementary steps give a finite experiment; let C_M be the number of oracle calls executed by that prefix, with a halted branch extended by deterministic idle steps. Define expected query cost as sup_M E[C_M] in [0,∞]. Define total query count pathwise as sup_M C_M; an infinite execution can have finite query count. No finite-prefix experiment is claimed to determine min(total queries,M) when arbitrarily many nonquery steps intervene.",
+      "proof_obligations": [
+        "Prove prefix consistency by summing the last transition law, C_M≤C_(M+1) pathwise, and finite-prefix expectation monotonicity. For a procedure whose round contains a bounded finite number of nonquery steps, define finite first-R-round experiments and compute their query expectations; cofinal prefix/round limits give the same supremum. In Simon, one query occurs per sampling round, so query-index truncations are valid specifically there."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon’s independent sampling process, geometric rank waits and expected O(n) query count."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: repeated finite Fourier-sampling procedures and query accounting."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13: repeated Simon sampling and query-cost comparison."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event",
+        "def-finite-real-random-variable-and-distribution",
+        "def-expectation-on-a-finite-probability-space"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 2
+    },
+    {
+      "id": "def-qa-quantum-query-complexity",
+      "kind": "definition",
+      "title": "Quantum query complexity",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-quantum-query-algorithm",
+        "def-qa-expected-query-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The worst-case quantum query cost is the maximum number of designated U_f calls over promised instances of a fixed input length. In the pure query model, nonoracle gates are uncharged; a separate gate model must count them. A bounded-error query cost uses the same maximum over instances, not an average over oracle inputs.",
+      "proof_obligations": [
+        "Prove that the maximum is finite for each specified circuit and that repetition/query stopping branches are included in the maximum."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-coherent-function-oracle",
+        "def-qa-quantum-query-algorithm"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 7
+    },
+    {
+      "id": "def-qa-classical-query-algorithm",
+      "kind": "definition",
+      "title": "Classical query algorithm",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-promise-query-instance",
+        "def-qa-input-encoding-and-size",
+        "def-probabilistic-polynomial-time-machine-interface"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A classical query algorithm chooses an address as a function of its input, prior oracle replies and (if randomized) its coin string, receives the entire f_z(address) value per query, and returns a classical output. Queries are to a fixed total oracle for each promised instance.",
+      "proof_obligations": [
+        "Specify deterministic or randomized behavior and whether the query bound is worst-case over random coins; QA comparisons use a worst-case cap."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-probabilistic-polynomial-time-machine-interface"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 6
+    },
+    {
+      "id": "def-qa-classical-query-complexity",
+      "kind": "definition",
+      "title": "Classical query complexity",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-classical-query-algorithm",
+        "def-qa-expected-query-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The classical query cost of a solver is its maximum number of oracle calls over all promised instances and all random coins; randomized success is measured separately on every promised instance.",
+      "proof_obligations": [
+        "Keep expected-query bounds distinct from the maximum-query convention."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-probabilistic-polynomial-time-machine-interface"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 8
+    },
+    {
+      "id": "def-qa-exact-promise-correctness",
+      "kind": "definition",
+      "title": "Exact correctness for promise tasks",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-quantum-query-algorithm",
+        "def-qa-classical-query-algorithm"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A decision solver is exact when it outputs the required side on every input in Y∪N with probability one. A search solver is exact when it outputs a witness satisfying the stated relation with probability one on every promised input. No assertion is made outside the promise.",
+      "proof_obligations": [
+        "Derive success from the specified final output law, separately for each promised input."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem",
+        "def-qc-quantum-acceptance-probability"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 9
+    },
+    {
+      "id": "def-qa-bounded-error-promise-correctness",
+      "kind": "definition",
+      "title": "Worst-case bounded-error correctness",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-quantum-query-algorithm",
+        "def-qa-classical-query-algorithm",
+        "def-qc-quantum-acceptance-probability"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A bounded-error decision solver has correct-output probability at least 2/3 for each promised instance; randomized/quantum probability is over the model’s internal coins or measurement outcome. Search success means the measured classical output satisfies the promised relation. The constant 2/3 is a convention, and amplification is a separate result with its own access cost.",
+      "proof_obligations": [
+        "State whether success is per input or distributional; the contract requires worst-case per-input success."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-quantum-acceptance-probability",
+        "def-finite-probability-space-and-event"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 10
+    },
+    {
+      "id": "def-qa-nonoracle-gate-cost",
+      "kind": "definition",
+      "title": "Nonoracle quantum gate cost",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-quantum-query-algorithm",
+        "def-qc-circuit-cost-model",
+        "def-qc-elementary-circuit-resources"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Nonoracle gate cost counts every stated circuit gate outside designated oracle calls, including state-preparation gates, ancilla operations, inverse circuits and output-measurement-control operations according to the selected QC gate/resource model. The default circuit starts its non-input registers in |0>; any supplied nonzero initial state must name an explicit preparation or input-access model and its cost. Oracle query count and gate count are separate coordinates.",
+      "proof_obligations": [
+        "Name the QC gate alphabet, treatment of measurements and cost of controlled/inverse access; state the initial-register convention and charge any nonzero-state preparation according to its explicit preparation or input-access model. Do not assume a prepared state, QRAM, or controlled-U access for free."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 10 §10.1, PDF pp.83–84: HHL explicitly assumes a B-gate state-preparation circuit; chapter 19 §19.3, PDF pp.167–168: efficient preparation of classical vectors is identified as a strong assumption."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-circuit-cost-model",
+        "def-qc-elementary-circuit-resources"
+      ],
+      "unresolved_obligations": [
+        "Final QC fixed-circuit resource contracts and exact page bindings remain under reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 11
+    },
+    {
+      "id": "def-qa-classical-bit-cost",
+      "kind": "definition",
+      "title": "Classical bit-operation cost",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-input-encoding-and-size",
+        "def-qa-classical-query-algorithm"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Classical bit cost is the number of transitions of a declared deterministic or randomized multitape Turing machine over a fixed finite alphabet; random-bit generation and writing/reading the bits used to form addresses and process oracle replies are charged. An oracle reply is one separate query action, not free classical postprocessing. Arithmetic bounds must state their concrete bit algorithm.",
+      "proof_obligations": [
+        "Fix the machine/bit-operation convention for each later result and include output processing, random-bit generation and the cost of constructing query addresses; keep oracle actions in a separate coordinate."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-boolean-circuit-size-depth-fanin-and-basis",
+        "def-probabilistic-polynomial-time-machine-interface"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 12
+    },
+    {
+      "id": "thm-qa-promise-preserving-query-reduction-composition",
+      "kind": "theorem",
+      "title": "Promise-preserving reduction composes with a query solver",
+      "page": "computational-problems-promises-and-cost-models",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-promise-preserving-reduction",
+        "def-qa-exact-promise-correctness"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Let R be a root promise-preserving many-one reduction from source instances z to target instances R(z). Correctness composes exactly (or with the target solver’s per-instance bounded-error probability) when the source access contract also supplies the target query oracle selected by R(z), or an explicitly stated simulation of every target query at the declared cost. The target solver’s query count is preserved only in the former, direct-access case; computing R and simulating a target query contribute their separate classical and oracle/gate costs.",
+      "proof_obligations": [
+        "Use the reduction’s totality and promise-preservation clauses; verify that target-oracle access is supplied or give its simulation and cost. Do not infer query preservation from a promise-preserving map alone."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-preserving-reduction",
+        "def-promise-problem"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 13
+    },
+    {
+      "id": "def-qa-standard-bit-query",
+      "kind": "definition",
+      "title": "Standard bit-flip query convention",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-promise-query-instance",
+        "def-qc-coherent-function-oracle",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For f:{0,1}^a→{0,1}^b, a standard query is the QC coherent function-oracle action |x>|y>↦|x>|y xor f(x)>. It preserves the address and is self-inverse; a query call is charged once under QA01.",
+      "proof_obligations": [
+        "Verify fixed address/output width and identify the target register."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-coherent-function-oracle",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "QC oracle contract remains pending final reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 5
+    },
+    {
+      "id": "def-qa-phase-query",
+      "kind": "definition",
+      "title": "Binary phase-query convention",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-promise-query-instance",
+        "def-qc-register-and-computational-basis",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For Boolean f, the phase oracle is P_f|x>=(-1)^{f(x)}|x>, extended linearly to address superpositions. This definition supplies an uncontrolled phase-query resource; controlled P_f is a different access promise.",
+      "proof_obligations": [
+        "Check that P_f is unitary and P_f^2=I on the computational basis, hence on the register."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-phase-kickback",
+      "kind": "theorem",
+      "title": "Phase kickback from the standard bit query",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-standard-bit-query",
+        "def-qa-phase-query",
+        "def-qc-pure-state-and-ray",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "With a one-bit target prepared in |->=(|0>-|1>)/sqrt(2), the standard query maps |x>|-> to (-1)^{f(x)}|x>|->. Thus the address acquires phase (-1)^{f(x)} and the target returns unchanged, including for address superpositions by linearity.",
+      "proof_obligations": [
+        "Compute X^{f(x)}|->=(-1)^{f(x)}|-> and extend by linearity; state preparation is an explicit ancilla operation."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-pure-state-and-ray",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 8
+    },
+    {
+      "id": "thm-qa-bit-query-to-phase-query",
+      "kind": "theorem",
+      "title": "One standard query implements one phase query",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-standard-bit-query",
+        "def-qa-phase-query",
+        "thm-qa-phase-kickback",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-elementary-circuit-resources",
+        "def-qa-nonoracle-gate-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Starting the target qubit in |0>, apply X then H to prepare |->=(|0>-|1>)/sqrt(2), invoke the standard bit oracle once, and leave the target in |->; on the address this implements P_f. Thus the conversion uses one oracle query and two nonoracle one-qubit preparation gates in the declared QC gate model. The target preparation is explicit; no generic amplitude-table loading or preprepared target is assumed.",
+      "proof_obligations": [
+        "Use the QC one-qubit gate convention to verify HX|0>=|-> and count exactly one X and one H preparation gate from the zero target. Then compute X^{f(x)}|->=(-1)^{f(x)}|->, extend by linearity to address superpositions, and verify that no f-dependent target garbage remains.",
+        "Report one oracle query separately from the two preparation gates; charge them under the QA01 nonoracle gate-cost definition and QC07/QC09 circuit-resource model. This fixed-state construction does not invoke generic amplitude-table preparation."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-coherent-function-oracle",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-elementary-circuit-resources",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "The QC07 gate alphabet and QC09 circuit-resource contract remain proposed cross-track suppliers pending integration; the stated two-gate preparation assumes a zero-initialized target."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 11
+    },
+    {
+      "id": "thm-qa-controlled-phase-query-to-bit-query",
+      "kind": "theorem",
+      "title": "Controlled phase access implements a standard bit query",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-standard-bit-query",
+        "def-qa-phase-query",
+        "def-qc-controlled-unitary-access",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Assume access to the controlled phase action that applies P_f on the address iff output bit y=1. H on y, then this controlled action, then H on y implements |x>|y>↦|x>|y xor f(x)> in one controlled-phase call. This is conditional on controlled phase access; bare uncontrolled P_f access is not asserted to suffice.",
+      "proof_obligations": [
+        "Check y=0 and y=1 separately; verify the controlled phase contributes Z^{f(x)} and HZH=X."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-controlled-unitary-access",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "Controlled-unitary and H-gate contracts require final QC reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-compute-copy-uncompute-clean-query",
+      "kind": "theorem",
+      "title": "Compute-copy-uncompute produces a clean coherent function query",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "alg-qc-reversible-embedding",
+        "thm-qc-reversible-embedding-cost",
+        "def-qc-clean-and-dirty-ancillas",
+        "def-qc-inverse-unitary-access"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If a QC reversible-embedding circuit computes f into a designated output while preserving its input and has gate count G, clean workspace, and an inverse circuit of the same count, append bitwise CNOT copies of its b output bits into a fresh target and apply the inverse embedding. This realizes the standard XOR query, leaves the target value in place, and restores embedding workspace to zero, using exactly 2G+b gates under that gate model. If the supplied Boolean circuit has size S, the QC10 reversible-embedding result gives O(S+b) gates and clean workspace; no improved depth follows without its separate fanout schedule.",
+      "proof_obligations": [
+        "Check the reversible embedding’s clean-workspace and exact-inverse hypotheses, show the copied output remains while all embedding registers are inverted, and keep the abstract oracle query count separate from the compiled gate count."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "alg-qc-reversible-embedding",
+        "thm-qc-reversible-embedding-cost",
+        "def-qc-clean-and-dirty-ancillas"
+      ],
+      "unresolved_obligations": [
+        "QC reversible-embedding interface/cost statement remains reserved pending reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 7
+    },
+    {
+      "id": "def-qa-binary-dot-product",
+      "kind": "definition",
+      "title": "Binary dot product",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-input-encoding-and-size"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a,x∈{0,1}^n, a·x is the parity ⊕_{i=1}^n(a_i∧x_i), equivalently the sum of coordinate products in the two-element field once its field laws are established in QA04. The output is one bit.",
+      "proof_obligations": [
+        "Check the bitwise XOR formula agrees with the modular-two sum; QA04 supplies the field proof before linear algebra uses it."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-integers-modulo-n-basic-algebra"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-reversible-binary-dot-product",
+      "kind": "algorithm",
+      "title": "Reversible binary dot-product computation",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-binary-dot-product",
+        "def-qc-clean-and-dirty-ancillas",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-toffoli-and-fredkin"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input registers |a>|x>|z> and one clean ancilla r=0. For i=1,…,n apply the exact reversible Boolean gate (a_i,x_i,r)↦(a_i,x_i,r xor (a_i and x_i)); then apply CNOT(r,z); reverse the n gates; output |a>|x>|z xor (a·x)>|0>. This explicit bounded-arity circuit uses exactly 2n Toffoli gates and one CNOT, and has no failure branch.",
+      "proof_obligations": [
+        "Verify the parity accumulator after the forward pass, target toggle, and reverse cleanup; count each gate exactly."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-clean-and-dirty-ancillas",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "QC10 Toffoli and clean-ancilla semantics require final reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 3
+    },
+    {
+      "id": "thm-qa-reversible-binary-dot-product-correct-and-cost",
+      "kind": "theorem",
+      "title": "Correctness and cost of reversible binary dot product",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "alg-qa-reversible-binary-dot-product",
+        "def-qa-binary-dot-product",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-toffoli-and-fredkin"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The stated sequence maps every computational basis input to |a>|x>|z xor(a·x)>|0> and therefore implements that map on superpositions by linearity; its exact abstract gate count is 2n Toffolis and one CNOT, with one clean work bit.",
+      "proof_obligations": [
+        "Inductively track r as the parity of processed conjunctions and verify inverse gates reset r for every basis input."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-clean-and-dirty-ancillas",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-global-phase-under-control",
+      "kind": "theorem",
+      "title": "An uncontrolled global oracle phase becomes relative under control",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-qa-phase-query",
+        "def-qc-controlled-unitary-access",
+        "thm-qc-standalone-global-phase-invariance",
+        "thm-qc-controlled-global-phase-is-relative-phase"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If f is constant c, then P_f=(-1)^c I. The standalone phase is a global scalar and preserves every outcome law by `thm-qc-standalone-global-phase-invariance`; controlled access instead makes the scalar a relative phase, and `thm-qc-controlled-global-phase-is-relative-phase` supplies an input and measurement distinguishing c=0 from c=1.",
+      "proof_obligations": [
+        "Compute the constant-function phase on both control blocks, then apply the standalone and controlled phase results under their nonzero-state, measurement and controlled-access hypotheses."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-controlled-unitary-access",
+        "thm-qc-standalone-global-phase-invariance",
+        "thm-qc-controlled-global-phase-is-relative-phase"
+      ],
+      "unresolved_obligations": [
+        "QC relative-phase/control contracts remain pending final reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 10
+    },
+    {
+      "id": "lem-qa-hadamard-f2-kernel",
+      "kind": "lemma",
+      "title": "Hadamard character sum on F_2^n",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-binary-dot-product",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-tensor-register-and-permutation",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For z∈{0,1}^n, Σ_{x∈{0,1}^n}(-1)^{x·z}=2^n when z=0 and 0 otherwise. Equivalently H^{⊗n}|x>=2^{-n/2}Σ_y(-1)^{x·y}|y>.",
+      "proof_obligations": [
+        "Factor the finite sum into ∏_i Σ_{x_i∈{0,1}}(-1)^{x_i z_i}; state tensor order and normalization."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-tensor-register-and-permutation",
+        "def-finite-sum-in-a-commutative-monoid",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 5,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-deutsch-promise",
+      "kind": "definition",
+      "title": "Deutsch constant-versus-balanced promise",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-promise-query-instance"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For f:{0,1}→{0,1}, YES means f(0)=f(1) and NO means f(0)≠f(1); all four Boolean functions are in the promise. The output is constant or balanced.",
+      "proof_obligations": [
+        "Check the four truth tables partition into two constant and two balanced cases."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-deutsch-query",
+      "kind": "algorithm",
+      "title": "One-query Deutsch algorithm",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-deutsch-promise",
+        "thm-qa-bit-query-to-phase-query",
+        "lem-qa-hadamard-f2-kernel",
+        "def-qa-nonoracle-gate-cost",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-one-qubit-gate-alphabet-and-rotations"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Starting from |0>|0>, apply X to the target and then H to both qubits, call U_f once, apply H to the address and measure it; output constant on 0 and balanced on 1. There are no loops or failure branches.",
+      "proof_obligations": [
+        "State that X then H prepares the |-> target from |0>; count one oracle call, one X preparation gate, two Hadamards before the query and one Hadamard after it."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "QC07 one-qubit gate alphabet and X/H conventions remain reserved cross-track suppliers pending integration; gate counts assume all circuit registers start at zero."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-deutsch-query-correct",
+      "kind": "theorem",
+      "title": "Deutsch algorithm is exact",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "alg-qa-deutsch-query",
+        "def-qa-deutsch-promise",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The final address is |0> when f(0)=f(1) and |1> when f(0)≠f(1), with probability one.",
+      "proof_obligations": [
+        "Evaluate the phase state and the final two-term Hadamard transform in both promise cases."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-quantum-acceptance-probability",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 12
+    },
+    {
+      "id": "thm-qa-deutsch-classical-query-lower-bound",
+      "kind": "theorem",
+      "title": "One classical query cannot solve Deutsch exactly",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-deutsch-promise",
+        "def-qa-classical-query-algorithm"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Every deterministic or worst-case bounded-error classical algorithm using one query has an input on which it cannot distinguish a constant from a balanced function with certainty; two distinct queries suffice exactly. A randomized one-query algorithm has worst-case success at most 1/2.",
+      "proof_obligations": [
+        "For either first query address, pair a constant oracle with a balanced oracle agreeing at that address; use their indistinguishable transcripts."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 5
+    },
+    {
+      "id": "def-qa-deutsch-jozsa-promise",
+      "kind": "definition",
+      "title": "Deutsch–Jozsa promise",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-promise-query-instance",
+        "def-qa-input-encoding-and-size"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For n≥1, N=2^n and f:{0,1}^n→{0,1}, YES means f is constant and NO means exactly N/2 values map to 0 and N/2 to 1. The task outputs which case holds.",
+      "proof_obligations": [
+        "Verify the two promise sets are disjoint and state n≥1 so the balanced class is meaningful."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 3
+    },
+    {
+      "id": "alg-qa-deutsch-jozsa-query",
+      "kind": "algorithm",
+      "title": "One-query Deutsch–Jozsa algorithm",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-deutsch-jozsa-promise",
+        "thm-qa-bit-query-to-phase-query",
+        "lem-qa-hadamard-f2-kernel",
+        "def-qa-nonoracle-gate-cost",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-one-qubit-gate-alphabet-and-rotations"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Starting from |0^{n+1}>, apply X to the target, H^{⊗n} to the address and H to the target, call U_f once, apply H^{⊗n} to the address, and measure y. Output constant iff y=0^n, otherwise balanced. No intermediate measurement or loop is required.",
+      "proof_obligations": [
+        "Give exact register order, one query count, one X target-preparation gate, and 2n+1 Hadamards in the ideal gate model; the target H after X prepares |->."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "QC07 one-qubit gate alphabet and X/H conventions remain reserved cross-track suppliers pending integration; gate counts assume all circuit registers start at zero."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-deutsch-jozsa-query-correct",
+      "kind": "theorem",
+      "title": "Deutsch–Jozsa algorithm is exact",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "alg-qa-deutsch-jozsa-query",
+        "def-qa-deutsch-jozsa-promise"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "On constant f the output is y=0^n with probability one; on balanced f the amplitude, hence probability, at y=0^n is zero. Every other outcome is therefore a correct balanced output.",
+      "proof_obligations": [
+        "Use the exact y=0 amplitude 2^{-n}Σ_x(-1)^{f(x)} and balance promise."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-quantum-acceptance-probability"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 13
+    },
+    {
+      "id": "thm-qa-deutsch-jozsa-deterministic-query-lower-bound",
+      "kind": "theorem",
+      "title": "Exact deterministic Deutsch–Jozsa needs N/2+1 queries",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-deutsch-jozsa-promise",
+        "def-qa-classical-query-algorithm"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Any deterministic classical exact solver has worst-case cost at least N/2+1; this many queries suffice by the pigeonhole principle. With at most N/2 identical outputs, both a constant function and a balanced function agree on the transcript.",
+      "proof_obligations": [
+        "Construct a balanced completion of the all-zero transcript for any set of at most N/2 queried points."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-cardinality"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound",
+      "kind": "theorem",
+      "title": "Three classical samples solve Deutsch–Jozsa with bounded error",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-deutsch-jozsa-promise",
+        "def-qa-classical-query-algorithm",
+        "def-finite-probability-space-and-event"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For n≥2, query three distinct uniformly sampled addresses and output constant iff all three replies agree. Constant inputs are always classified correctly; for any balanced f, the probability all three replies agree is 2*C(N/2,3)/C(N,3)≤1/4, so success is at least 3/4. For n=1, two queries solve exactly.",
+      "proof_obligations": [
+        "Compute the without-replacement probability and handle N=2 separately; state that this bounded-error upper bound means the exact deterministic separation is not a bounded-error exponential separation."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event",
+        "lem-finite-probability-basic-laws",
+        "thm-product-rule"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 7
+    },
+    {
+      "id": "def-qa-bernstein-vazirani-promise",
+      "kind": "definition",
+      "title": "Bernstein–Vazirani no-offset promise",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-promise-query-instance",
+        "def-qa-binary-dot-product"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For n≥1 there is an unknown a∈{0,1}^n and the oracle is f_a(x)=a·x in F_2. The task is to output a. No unknown additive offset is part of this version.",
+      "proof_obligations": [
+        "State whether the query function is total and verify the secret a is uniquely determined by its values."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 4
+    },
+    {
+      "id": "alg-qa-bernstein-vazirani-query",
+      "kind": "algorithm",
+      "title": "One-query Bernstein–Vazirani algorithm",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-bernstein-vazirani-promise",
+        "thm-qa-bit-query-to-phase-query",
+        "lem-qa-hadamard-f2-kernel",
+        "def-qc-dirac-notation-conversion",
+        "def-qa-nonoracle-gate-cost",
+        "def-qc-one-qubit-gate-alphabet-and-rotations"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Starting from |0^{n+1}>, apply X to the target, H^{⊗n} to the address and H to the target to prepare |+^n>|->, query U_{f_a} once, apply H^{⊗n} to the address and measure it. Output the measured string. There are no loops or failure branches.",
+      "proof_obligations": [
+        "Specify the |-> target, address register order and exact single-query access; from all-zero initialization count one X, n+1 initial Hadamards, and n final Hadamards."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [
+        "QC07 one-qubit gate alphabet and X/H conventions remain reserved cross-track suppliers pending integration; gate counts assume all circuit registers start at zero."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 11
+    },
+    {
+      "id": "thm-qa-bernstein-vazirani-query-correct",
+      "kind": "theorem",
+      "title": "Bernstein–Vazirani algorithm returns the secret exactly",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "alg-qa-bernstein-vazirani-query",
+        "def-qa-bernstein-vazirani-promise",
+        "lem-qa-hadamard-f2-kernel",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The final address register is |a> with probability one, since its y amplitude is 2^{-n}Σ_x(-1)^{x·(a xor y)}=1 for y=a and 0 otherwise.",
+      "proof_obligations": [
+        "Apply the F2 Hadamard kernel with z=a xor y."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-quantum-acceptance-probability",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 14
+    },
+    {
+      "id": "thm-qa-bernstein-vazirani-classical-query-lower-bound",
+      "kind": "theorem",
+      "title": "Classical Bernstein–Vazirani needs n queries for bounded error",
+      "page": "exact-oracle-algorithms",
+      "deps": [
+        "def-qa-bernstein-vazirani-promise",
+        "def-qa-classical-query-algorithm",
+        "def-finite-probability-space-and-event"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Any classical randomized solver that succeeds with probability at least 2/3 on every secret needs at least n queries. Under uniform a, a deterministic q-query transcript has at most 2^q leaves, so average success is at most 2^{q-n}; averaging over coins gives the same bound. n queries to the standard basis recover all coordinates.",
+      "proof_obligations": [
+        "Formalize adaptive decision-tree leaves and average over the 2^n secrets; distinguish query cost from bit-processing cost."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 8
+    },
+    {
+      "id": "def-qa-binary-field-f2",
+      "kind": "definition",
+      "title": "Binary field carrier and operations",
+      "page": "reversible-arithmetic-and-oracle-conversion",
+      "deps": [
+        "def-integers-modulo-n",
+        "def-addition-and-multiplication-modulo-n"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Define F_2=Z/2Z={ [0]_2,[1]_2 } with addition and multiplication induced by the root residue-class operations modulo 2. This definition fixes the carrier and operations; the next theorem separately proves that they satisfy the field axioms.",
+      "proof_obligations": [
+        "Use the root congruence definition to show the two residue classes are distinct and verify all operation laws from the published modulo-n algebra contract; explicitly identify the additive and multiplicative identities."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon’s XOR-period promise and the F_2^n orthogonality equations."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon’s algorithm as the hidden-subgroup problem over F_2^n."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13, and §6.5, pp.27-33: Simon’s XOR promise, bitwise equations and F_2^n hidden-subgroup interpretation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-integers-modulo-n",
+        "def-addition-and-multiplication-modulo-n",
+        "thm-integers-modulo-n-basic-algebra"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "thm-qa-binary-field-f2-is-a-field",
+      "kind": "theorem",
+      "title": "The quotient Z/2 is the binary field",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "def-qa-binary-field-f2",
+        "def-prime",
+        "thm-z-mod-p-is-a-field"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Since 2 is prime, the published root theorem `thm-z-mod-p-is-a-field` makes Z/2Z a field under the residue-class addition and multiplication. The QA definition F_2 is exactly this carrier with these operations, so F_2 is a field; no general finite-field classification is used.",
+      "proof_obligations": [
+        "Verify 2 satisfies the root prime definition by checking its only positive divisors are 1 and 2; instantiate the published prime-modulus field theorem and identify its carrier and operations with `def-qa-binary-field-f2`."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qa-binary-field-f2",
+        "def-prime",
+        "thm-z-mod-p-is-a-field"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-simon-promise",
+      "kind": "definition",
+      "title": "Simon hidden-XOR-period promise",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-promise-query-instance",
+        "def-qa-binary-field-f2"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For n≥1 and fixed output width m≥n−1, f:{0,1}^n→{0,1}^m satisfies f(x)=f(y) iff y=x xor s for a unique unknown nonzero s∈{0,1}^n. The task is to output s. Each output fiber is exactly {x,x xor s}, so f is 2-to-1; the width condition permits 2^{n−1} distinct fiber labels.",
+      "proof_obligations": [
+        "State that s≠0 and the iff condition; verify it partitions the domain into size-two fibers, forces even N, and that m≥n−1 is sufficient to provide distinct labels for all 2^{n−1} fibers."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-promise-problem"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 3
+    },
+    {
+      "id": "alg-qa-simon-one-sample",
+      "kind": "algorithm",
+      "title": "One Simon Fourier-sampling sample",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "def-qa-simon-promise",
+        "def-qa-standard-bit-query",
+        "lem-qa-hadamard-f2-kernel",
+        "def-qc-projective-measurement"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Prepare n address qubits and m output qubits in zero states, apply H^{⊗n} to the address, query U_f once, measure the m-bit output register in the computational basis, apply H^{⊗n} to the address, and measure y. Return y as one row. Every branch uses exactly one query and two computational-basis measurements.",
+      "proof_obligations": [
+        "Use the declared address width n and oracle output width m; check output measurement and conditional state update through QC measurement semantics. The sample-law theorem separately proves the output distribution."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-projective-measurement",
+        "def-qc-coherent-function-oracle"
+      ],
+      "unresolved_obligations": [
+        "QC measurement and oracle contracts remain under reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-simon-postquery-coset-state",
+      "kind": "theorem",
+      "title": "Simon query and output measurement produce a coset pair",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "alg-qa-simon-one-sample",
+        "def-qa-simon-promise",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Before measuring the output, the state is 2^{-n/2}Σ_x|x>|f(x)>. For any observed value f(x0), the address register is (|x0>+|x0 xor s>)/sqrt(2), with each coset outcome probability 2^{1-n}.",
+      "proof_obligations": [
+        "Count the two preimages of each output and normalize the collapsed pair state."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-projective-measurement",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 7
+    },
+    {
+      "id": "thm-qa-simon-hadamard-sampling-law",
+      "kind": "theorem",
+      "title": "Simon samples uniformly from s-perp",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "thm-qa-simon-postquery-coset-state",
+        "lem-qa-hadamard-f2-kernel",
+        "def-qa-binary-dot-product"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "After H^{⊗n}, the amplitude of y is 2^{-(n-1)/2}(-1)^{x0·y} when s·y=0 and zero otherwise. Thus y is uniform on the (n−1)-dimensional hyperplane s-perp, independently of the observed coset.",
+      "proof_obligations": [
+        "Expand both Hadamard images, factor (-1)^{x0·y}, and use the F2 character sum; verify probabilities sum to one."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-sum-in-a-commutative-monoid"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 9
+    },
+    {
+      "id": "def-qa-simon-rank-process",
+      "kind": "definition",
+      "title": "Simon independent-sample rank process",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "def-qa-simon-promise",
+        "thm-qa-simon-hadamard-sampling-law"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For d=n−1, take independent repetitions of the one-sample algorithm and maintain the span V_k of accepted rows. A sample is accepted iff it is outside V_k; stop when rank d is reached. The collection is an unbounded stopping process unless a sample budget/failure output is explicitly added.",
+      "proof_obligations": [
+        "Define rank using the F2 vector-space structure and state fresh independent execution on each repetition."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-simon-rank-growth-probability",
+      "kind": "theorem",
+      "title": "Simon rank growth probability",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "def-qa-simon-rank-process",
+        "thm-qa-simon-hadamard-sampling-law",
+        "def-finite-probability-space-and-event",
+        "thm-geometric-series",
+        "def-qa-expected-query-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "When current rank is k<d, exactly 2^k of the 2^d equally likely samples lie in V_k, so the next sample raises rank with probability p_k=1−2^{k-d}≥1/2. The waiting time to the next rank increase is geometric with mean 1/p_k≤2.",
+      "proof_obligations": [
+        "Count elements of the current span, compute the conditional probability, and establish finite expected waiting time at each rank."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-product-rule",
+        "def-finite-cardinality",
+        "def-finite-probability-space-and-event",
+        "thm-geometric-series"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 11
+    },
+    {
+      "id": "alg-qa-f2-gaussian-elimination",
+      "kind": "algorithm",
+      "title": "Gaussian elimination over F2 for Simon recovery",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "thm-qa-binary-field-f2-is-a-field",
+        "def-qa-binary-field-f2",
+        "thm-rank-nullity",
+        "thm-gaussian-elimination-produces-row-echelon-form"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input a binary d×n matrix, d=n−1, n≥1. Set pivot row k=0. For columns j=0,…,n−1 find the least row i≥k with entry 1; if none, continue to next column. Otherwise swap rows i,k, XOR row k into every other row with entry 1 in column j, record pivot j, and increment k. If k≠n−1 return FAIL. Set the sole nonpivot variable to 1 and solve each pivot variable from its reduced row. Return the resulting n-bit vector. Every search, row XOR and loop is bounded; n=1 returns vector 1.",
+      "proof_obligations": [
+        "Row swaps/XORs preserve kernel; distinct pivots yield reduced echelon form. Exactly one free variable exists iff rank n−1; setting it to one gives the unique nonzero binary kernel vector. At most O(n²) row operations each touches O(n) bits, so O(n³) bit cost."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-rank-nullity",
+        "thm-gaussian-elimination-produces-row-echelon-form",
+        "thm-z-mod-p-is-a-field"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 2
+    },
+    {
+      "id": "thm-qa-f2-gaussian-elimination-correct-and-cost",
+      "kind": "theorem",
+      "title": "F2 row reduction returns the unique Simon mask",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "alg-qa-f2-gaussian-elimination",
+        "thm-rank-nullity",
+        "def-qa-simon-promise"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If the d independent rows lie in s-perp, their matrix has rank n−1, so rank-nullity gives one-dimensional kernel; over F2 its two vectors are 0 and the unique nonzero s. Row operations preserve solutions and the stated implementation uses O(n^3) bit operations.",
+      "proof_obligations": [
+        "Combine rank-nullity with the known nonzero solution s and the fact that a one-dimensional F2 space has exactly two elements."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-rank-nullity",
+        "thm-gaussian-elimination-produces-row-echelon-form"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 5
+    },
+    {
+      "id": "alg-qa-simon-recovery-with-budget",
+      "kind": "algorithm",
+      "title": "Budgeted Simon recovery with explicit failure branch",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "alg-qa-simon-one-sample",
+        "def-qa-simon-rank-process",
+        "alg-qa-f2-gaussian-elimination"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Let d=n−1 and let δ∈Q∩(0,1) be a supplied accuracy parameter. If d=0, output the sole nonzero one-bit mask 1 with zero queries. Otherwise compute M=ceil(2d/δ), run at most M fresh one-sample trials, and maintain an echelon basis by reducing each new row against current pivots, inserting it only if independent. If rank d is reached, solve Ys=0 and output its unique nonzero kernel vector; otherwise output FAIL. No other branch is allowed.",
+      "proof_obligations": [
+        "Verify the finite cap, rational-parameter arithmetic, stop test and explicit FAIL output; account for at most M oracle queries, O(Mn²+n³) row-processing bit operations, and the bit cost of computing M."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-projective-measurement",
+        "def-qc-coherent-function-oracle"
+      ],
+      "unresolved_obligations": [
+        "QC oracle/measurement interfaces require final reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 12
+    },
+    {
+      "id": "thm-qa-simon-recovery-correctness-and-query-bound",
+      "kind": "theorem",
+      "title": "Simon recovery succeeds with probability at least 1-delta",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "alg-qa-simon-recovery-with-budget",
+        "thm-qa-simon-rank-growth-probability",
+        "thm-qa-f2-gaussian-elimination-correct-and-cost",
+        "def-finite-probability-space-and-event",
+        "thm-geometric-series",
+        "def-qa-expected-query-cost",
+        "thm-markov-inequality"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The unbounded rank-collection process has stage waits W_k with geometric tails and means 1/p_k≤2; it terminates almost surely and its expected query cost, as defined by finite-prefix truncations, is at most 2d for d=n−1. For rational δ∈(0,1), the finite algorithm capped at M=ceil(2d/δ) succeeds with probability at least 1−δ and has worst-case query cost M=O(n/δ); for δ=1/3 this is a bounded-error O(n)-query algorithm.",
+      "proof_obligations": [
+        "For each rank k<d, sum the geometric wait series to obtain E[W_k]=1/p_k≤2, then add the d stage costs using the expected-query-cost definition. For the finite cap, T_M=min(T,M) is a bounded random variable on the finite first-M-sample experiment and E[T_M]≤E_qry[T]≤2d. Failure T>M implies T_M≥M, so finite-space Markov gives Pr(T>M)≤2d/M≤δ. On completion invoke the unique-kernel theorem; include incremental row-processing and rational-parameter bit costs."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event",
+        "thm-geometric-series",
+        "thm-markov-inequality"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 17,
+      "local_order": 13
+    },
+    {
+      "id": "def-qa-simon-random-instance-distribution",
+      "kind": "definition",
+      "title": "Random Simon-oracle distribution for a classical lower bound",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "def-qa-simon-promise",
+        "def-finite-probability-space-and-event"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For n≥1 and output width m≥n−1, choose s uniformly from the 2^n−1 nonzero masks, partition addresses into cosets {x,x xor s}, and assign distinct output labels uniformly without replacement to the 2^{n−1} cosets from {0,1}^m. The resulting random total oracle satisfies the Simon promise.",
+      "proof_obligations": [
+        "Verify there are 2^{n−1} cosets, that m≥n−1 supplies enough distinct labels, and that distinct coset labels make equality equivalent to membership in the same coset."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-simon-classical-randomized-query-lower-bound",
+      "kind": "theorem",
+      "title": "Classical randomized Simon search needs exponential queries",
+      "page": "simon-algorithm-and-finite-field-recovery",
+      "deps": [
+        "def-qa-simon-random-instance-distribution",
+        "def-qa-classical-query-algorithm",
+        "def-finite-probability-space-and-event"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Let N=2^n and n≥8. Any worst-case randomized algorithm that outputs the hidden nonzero s with success at least 2/3 requires Ω(2^{n/2}) classical oracle queries. For q distinct queried addresses, put B=binom(q,2) and S=N−1. Under a collision-free adaptive transcript, the posterior is uniform over at least S−B masks. At the jth new query, at most j−1 remaining masks create a collision with a prior address, so the total collision probability is at most B/(S−B). The no-collision transcript permits guessing success at most 1/(S−B), giving average success at most (B+1)/(S−B). In particular, if q≤floor(2^{n/2}/4), then B≤N/32 and this success bound is <2/3. Averaging the same bound over random coins proves the randomized lower bound.",
+      "proof_obligations": [
+        "Prove uniformity of the posterior after each collision-free adaptive transcript because distinct coset labels are assigned uniformly without replacement; at each fresh query count at most j−1 colliding masks among at least S−binom(j−1,2) candidates; sum these conditional bounds to B/(S−B), then bound the no-collision guess probability by 1/(S−B). Apply the fixed cutoff q≤floor(2^{n/2}/4), n≥8, and average over random coins. Separate oracle queries from classical bit cost."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §3.3.2, PDF pp. 36–39: full distributional Simon classical lower-bound proof for the decision variant, using uniform hidden masks and the collision-free transcript posterior; the local item gives a direct randomized-search proof for the nonzero promise."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 5 §5.3, PDF pp. 29–32: adversarial/deterministic classical HSP query lower bound, specializing to the family of order-two subgroups of F_2^n; used as an independent comparison, not as the local randomized-search proof."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 8
+    },
+    {
+      "id": "def-qa-finite-abelian-character-dual",
+      "kind": "definition",
+      "title": "Dual group of a finite abelian group",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-additive-character-of-a-finite-abelian-group",
+        "def-group"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a finite abelian group G written additively, define G-hat as its set of additive characters χ:G→C^× and give it pointwise multiplication (χψ)(x)=χ(x)ψ(x), identity 1 and inverse χ^{-1}(x)=χ(x)^{-1}. This definition asserts the set and operation; the next theorem proves the group laws.",
+      "proof_obligations": [
+        "Show closure of pointwise product and inverse and identity in the homomorphism set; show commutativity."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-additive-character-of-a-finite-abelian-group",
+        "def-group"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+      "kind": "theorem",
+      "title": "Pointwise character dual is a finite abelian group",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-character-dual",
+        "def-group-homomorphism",
+        "lem-group-homomorphism-basic-properties",
+        "thm-qa-finite-abelian-dual-has-same-cardinality"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Pointwise product, constant-one identity and pointwise inverse make G-hat an abelian group; the cyclic/product character count gives |G-hat|=|G|<∞, so it is a finite abelian group.",
+      "proof_obligations": [
+        "Check homomorphism closure using commutativity of C^×; use the explicit count theorem for finiteness rather than assuming it."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-additive-character-of-a-finite-abelian-group",
+        "def-group-homomorphism",
+        "lem-group-homomorphism-basic-properties"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 7
+    },
+    {
+      "id": "lem-qa-cyclic-group-has-n-characters",
+      "kind": "lemma",
+      "title": "A cyclic group of order n has exactly n characters",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-additive-character-of-a-finite-abelian-group",
+        "thm-classification-of-cyclic-groups",
+        "thm-complex-nth-roots-and-roots-of-unity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For C_n=<g>, a character is uniquely determined by χ(g), which must satisfy χ(g)^n=1; each of the n distinct nth roots of unity defines exactly one character by χ(g^j)=χ(g)^j. Thus |C_n-hat|=n, including n=1.",
+      "proof_obligations": [
+        "Prove generator determination, well-definedness modulo n, and a bijection between characters and nth roots."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-classification-of-cyclic-groups",
+        "thm-complex-nth-roots-and-roots-of-unity"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 2
+    },
+    {
+      "id": "lem-qa-character-dual-of-a-product-factors",
+      "kind": "lemma",
+      "title": "Characters of a finite product factor coordinatewise",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-character-dual",
+        "def-external-direct-product-of-groups",
+        "thm-external-direct-product-is-a-group"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For finite abelian G=G_1×…×G_r, restriction to coordinates identifies G-hat bijectively with G_1-hat×…×G_r-hat; the inverse maps a tuple (χ_i) to χ(g_1,…,g_r)=∏χ_i(g_i).",
+      "proof_obligations": [
+        "Verify the displayed map and its inverse preserve products and are mutually inverse, with empty/trivial-factor cases stated."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-external-direct-product-of-groups",
+        "thm-external-direct-product-is-a-group"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-finite-abelian-dual-has-same-cardinality",
+      "kind": "theorem",
+      "title": "A finite abelian group and its character dual have equal order",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+        "lem-qa-cyclic-group-has-n-characters",
+        "lem-qa-character-dual-of-a-product-factors",
+        "prop-order-of-finite-direct-product",
+        "def-group-isomorphism-and-automorphism"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If G≅C_{n_1}×…×C_{n_r}, then |G-hat|=∏n_i=|G|. The isomorphism and cardinality are exact finite-set statements; no self-duality isomorphism is chosen here.",
+      "proof_obligations": [
+        "Apply invariant-factor decomposition, the cyclic character count and product factorization, then the root finite-product order formula."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+        "prop-order-of-finite-direct-product",
+        "thm-product-rule",
+        "def-group-isomorphism-and-automorphism"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-finite-abelian-dual-character-orthogonality",
+      "kind": "theorem",
+      "title": "Dual-index character orthogonality",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+        "thm-complex-nth-roots-and-roots-of-unity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For x,y∈G, Σ_{χ∈G-hat}χ(x)conjugate(χ(y)) equals |G| if x=y and 0 otherwise. This is column/index orthogonality, proved locally from cyclic root sums across invariant factors; it is not inferred from the group-index row orthogonality alone.",
+      "proof_obligations": [
+        "Factor the character sum over cyclic coordinates and evaluate the nth-root geometric sum in each coordinate."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+        "lem-qa-cyclic-group-has-n-characters"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 8
+    },
+    {
+      "id": "def-qa-normalized-finite-abelian-fourier-transform",
+      "kind": "definition",
+      "title": "Normalized Fourier transform on a finite abelian group",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-character-dual",
+        "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "def-function-space",
+        "def-finite-sum-in-a-commutative-monoid",
+        "def-rational-power",
+        "lem-rational-power-laws"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For f:G→C define F_G f(χ)=|G|^{-1/2}Σ_{x∈G} f(x) conjugate(χ(x)), for χ∈G-hat. This fixes the negative-character sign and places the same |G|^{-1/2} factor in each direction.",
+      "proof_obligations": [
+        "Check finite sum domain, scalar normalization and character-evaluation convention; no unitarity is asserted by the definition."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-additive-character-of-a-finite-abelian-group",
+        "def-finite-sum-in-a-commutative-monoid",
+        "def-rational-power",
+        "lem-rational-power-laws"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-finite-abelian-fourier-transform-is-unitary",
+      "kind": "theorem",
+      "title": "Finite abelian Fourier transform is unitary",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-normalized-finite-abelian-fourier-transform",
+        "thm-qa-finite-abelian-dual-character-orthogonality",
+        "lem-additive-character-orthogonality-from-representation-orthogonality",
+        "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "lem-finite-sum-reindexing-and-fubini"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The matrix U_{χ,x}=|G|^{-1/2}conjugate(χ(x)) is square and both its row and column inner products are Kronecker deltas; hence U*U=UU*=I. This proves unitarity on all complex functions on G.",
+      "proof_obligations": [
+        "Expand finite row and column inner products; apply the two distinct orthogonality theorems and the dual cardinality; establish the square-matrix inverse conclusion."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "lem-additive-character-orthogonality-from-representation-orthogonality",
+        "thm-qa-finite-abelian-dual-character-orthogonality",
+        "thm-qa-finite-abelian-dual-has-same-cardinality"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 4,
+      "local_order": 11
+    },
+    {
+      "id": "thm-qa-finite-abelian-fourier-inversion",
+      "kind": "theorem",
+      "title": "Finite abelian Fourier inversion",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "thm-qa-finite-abelian-fourier-transform-is-unitary",
+        "def-qa-normalized-finite-abelian-fourier-transform"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every f:G→C and x∈G, f(x)=|G|^{-1/2}Σ_{χ∈G-hat}(F_Gf)(χ)χ(x). The inverse transform uses the positive character rather than its conjugate.",
+      "proof_obligations": [
+        "Write the adjoint matrix explicitly and use unitary matrix inversion; verify the evaluation formula at each x."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-qa-finite-abelian-fourier-transform-is-unitary"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 5,
+      "local_order": 15
+    },
+    {
+      "id": "thm-qa-finite-abelian-parseval",
+      "kind": "theorem",
+      "title": "Finite abelian Parseval identity",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "thm-qa-finite-abelian-fourier-transform-is-unitary",
+        "def-qa-normalized-finite-abelian-fourier-transform"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For f,g:G→C, Σ_{χ}(F_Gf)(χ) conjugate((F_Gg)(χ))=Σ_x f(x)conjugate(g(x)); in particular squared counting norms agree.",
+      "proof_obligations": [
+        "Expand the finite inner product and invoke unitarity; preserve the root first-argument-linear convention."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-qa-finite-abelian-fourier-transform-is-unitary"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 5,
+      "local_order": 16
+    },
+    {
+      "id": "def-qa-finite-abelian-convolution",
+      "kind": "definition",
+      "title": "Unnormalized convolution on a finite abelian group",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-group",
+        "def-function-space",
+        "def-finite-sum-in-a-commutative-monoid"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For f,g:G→C define (f*g)(z)=Σ_{x∈G}f(x)g(z−x). This is the unnormalized finite-group convolution; no |G|^{-1} is included.",
+      "proof_obligations": [
+        "Verify the sum is finite and independent of any enumeration; state additive notation and group inverse."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-sum-in-a-commutative-monoid",
+        "def-group"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 3
+    },
+    {
+      "id": "thm-qa-finite-abelian-fourier-convolution",
+      "kind": "theorem",
+      "title": "Fourier transform of unnormalized convolution",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-convolution",
+        "def-qa-normalized-finite-abelian-fourier-transform",
+        "lem-finite-sum-reindexing-and-fubini"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every χ∈G-hat, F_G(f*g)(χ)=sqrt(|G|)(F_Gf)(χ)(F_Gg)(χ). The factor sqrt(|G|) is forced by using an unnormalized convolution with a unitary transform.",
+      "proof_obligations": [
+        "Substitute the convolution, exchange/reindex finite sums x,z↦z−x, use χ(x+y)=χ(x)χ(y), and track every normalization factor."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qa-normalized-finite-abelian-fourier-transform",
+        "def-finite-sum-in-a-commutative-monoid",
+        "lem-finite-sum-reindexing-and-fubini",
+        "thm-complex-nth-roots-and-roots-of-unity"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 4,
+      "local_order": 12
+    },
+    {
+      "id": "def-qa-finite-abelian-subgroup-annihilator",
+      "kind": "definition",
+      "title": "Character annihilator of a subgroup",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-character-dual",
+        "def-subgroup"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For H≤G define H^perp={χ∈G-hat:χ(h)=1 for every h∈H}. For K≤G-hat define K^perp={g∈G:χ(g)=1 for every χ∈K}. The pairing is evaluation and the convention is fixed once for both annihilators.",
+      "proof_obligations": [
+        "Verify each annihilator is a subgroup under the relevant pointwise/additive operation."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-additive-character-of-a-finite-abelian-group",
+        "def-subgroup"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 5
+    },
+    {
+      "id": "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+      "kind": "theorem",
+      "title": "Subgroup-annihilator cardinality",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "cor-subgroups-of-abelian-groups-are-normal",
+        "def-quotient-group",
+        "thm-quotient-group-laws",
+        "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "thm-lagrange",
+        "cor-quotient-of-an-abelian-group-is-abelian"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Restriction identifies H^perp with the characters of G/H, hence |H^perp|=|G/H|=|G|/|H|. A character is trivial on H exactly when it factors uniquely through the quotient map.",
+      "proof_obligations": [
+        "Use the abelian-subgroup-normality corollary to form G/H; construct the character factor homomorphism on cosets and prove it is well defined and inverse to inflation, then apply dual cardinality and Lagrange."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-quotient-group",
+        "thm-quotient-group-laws",
+        "thm-lagrange",
+        "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "cor-subgroups-of-abelian-groups-are-normal",
+        "cor-quotient-of-an-abelian-group-is-abelian"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-finite-abelian-evaluation-map-isomorphism",
+      "kind": "theorem",
+      "title": "Finite abelian group is canonically isomorphic to its double dual",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-character-dual",
+        "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+        "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The evaluation map ev:G→(G-hat)-hat, ev(g)(χ)=χ(g), is a group homomorphism and bijection. Injectivity follows because a nonzero element has a character detecting it, proved on cyclic invariant factors; source and target have equal finite cardinality.",
+      "proof_obligations": [
+        "Prove evaluation is a homomorphism and nondegenerate using an explicit cyclic coordinate character; apply the dual-cardinality theorem to G and to the finite abelian group G-hat to compare G with its double dual, then conclude bijectivity."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+        "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "lem-qa-cyclic-group-has-n-characters"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 4,
+      "local_order": 13
+    },
+    {
+      "id": "thm-qa-finite-abelian-double-annihilator",
+      "kind": "theorem",
+      "title": "Double annihilator returns the subgroup",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+        "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+        "thm-qa-finite-abelian-evaluation-map-isomorphism"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Under the canonical evaluation identification G≅G-hat-hat, every subgroup H≤G satisfies (H^perp)^perp=H. Inclusion is immediate from the definition; both subgroups have equal cardinality by the annihilator formula.",
+      "proof_obligations": [
+        "Prove inclusion and compute both finite subgroup orders; invoke the evaluation isomorphism to identify the double dual."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+        "thm-qa-finite-abelian-evaluation-map-isomorphism"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 5,
+      "local_order": 17
+    },
+    {
+      "id": "thm-qa-finite-abelian-coset-fourier-transform",
+      "kind": "theorem",
+      "title": "Fourier transform of a subgroup coset indicator",
+      "page": "finite-abelian-fourier-analysis",
+      "deps": [
+        "def-qa-normalized-finite-abelian-fourier-transform",
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+        "lem-additive-character-orthogonality-from-representation-orthogonality"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For H≤G and x0∈G, F_G 1_{x0+H}(χ)=|H|/sqrt(|G|)·conjugate(χ(x0)) when χ∈H^perp and 0 otherwise. Consequently, the normalized uniform coset vector |H|^{-1/2}1_{x0+H} transforms to sqrt(|H|/|G|)·conjugate(χ(x0))=1/sqrt(|H^perp|)·conjugate(χ(x0)) on H^perp and zero elsewhere. In the boundary case H=G, this is amplitude 1 at the trivial character.",
+      "proof_obligations": [
+        "Translate the finite sum to H, factor out the coset phase, and apply character orthogonality on H. Keep the indicator amplitude |H|/sqrt(|G|) and the normalized-state amplitude sqrt(|H|/|G|)=1/sqrt(|H^perp|) distinct; use |H^perp|=|G|/|H| to verify norm one, including H=G."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "lem-additive-character-orthogonality-from-representation-orthogonality",
+        "def-finite-sum-in-a-commutative-monoid"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 4,
+      "local_order": 14
+    },
+    {
+      "id": "def-qa-cyclic-quantum-fourier-transform",
+      "kind": "definition",
+      "title": "Positive-sign cyclic quantum Fourier transform",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "def-unitary-discrete-fourier-transform-on-z-mod-n",
+        "thm-finite-fourier-inversion",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For N≥1 define QFT_N=F_N^{-1}; on basis |x> it is N^{-1/2}Σ_{y=0}^{N−1}exp(2πixy/N)|y>. For N=2^n it acts on n ordered bits under the QC bitstring encoding.",
+      "proof_obligations": [
+        "Use root inversion to identify the positive-sign inverse and fix the register basis order; n=0/N=1 is the identity."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-unitary-discrete-fourier-transform-on-z-mod-n",
+        "thm-finite-fourier-inversion",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-qft-gate-cost-model",
+      "kind": "definition",
+      "title": "QFT ideal and finite-set gate-cost models",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-controlled-phase-rotation",
+        "def-qc-elementary-circuit-resources"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The ideal QFT count treats H and exact controlled phase rotations as elementary continuous gates and SWAP as one named two-qubit gate (or three CNOTs if expanded). Finite-set synthesis is a separate model: state whether error is actual operator norm or projective operator norm under a tracked-global-scalar convention, and derive output-law error separately. Classical bit-time to compute arbitrary target-angle descriptions is outside the gate-count claim.",
+      "proof_obligations": [
+        "State gate alphabet and SWAP convention; use QC11/QC12 exact hypotheses for any compiled bound and make no arbitrary-angle bit-time claim."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-controlled-phase-rotation",
+        "def-qc-elementary-circuit-resources"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 7,
+      "local_order": 4
+    },
+    {
+      "id": "lem-qa-binary-qft-product-factorization",
+      "kind": "lemma",
+      "title": "Binary factorization of QFT basis output",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "def-qa-cyclic-quantum-fourier-transform",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Write x=Σ_{j=0}^{n−1}x_j2^j and R_j=(|0>+exp(2πi·0.x_jx_{j−1}…x_0)|1>)/sqrt(2), where 0.x_jx_{j−1}…x_0=Σ_{i=0}^j x_i2^{i−j−1}. Immediately before the final reversal swaps, the state on ordered wires q_{n−1},…,q_0 is R_{n−1}⊗R_{n−2}⊗…⊗R_0. After the swaps, on that same standard wire order, it is R_0⊗R_1⊗…⊗R_{n−1}.",
+      "proof_obligations": [
+        "Expand xy/2^n in binary and factor the output sum one wire at a time; show target q_j acquires phase 2π·0.x_jx_{j−1}…x_0 before swaps, then explicitly apply the reversal permutation to obtain the stated final ordered tensor product."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qa-cyclic-quantum-fourier-transform",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-exact-binary-qft-circuit",
+      "kind": "algorithm",
+      "title": "Exact binary QFT circuit",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "def-qa-cyclic-quantum-fourier-transform",
+        "def-qa-qft-gate-cost-model",
+        "lem-qa-binary-qft-product-factorization"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "On ordered wires q_{n−1},…,q_0, for j=n−1 down to 0 apply H to q_j, then for each i=0,…,j−1 apply controlled R_{j−i+1} from q_i to target q_j, where R_s=diag(1,exp(2πi/2^s)); finally swap q_j with q_{n−1−j} for j<floor(n/2). No ancillas or failure branches are used.",
+      "proof_obligations": [
+        "Ensure lower-index control wires are still computational basis inputs at each step; specify all phase angles, gate order and bit-reversal permutation."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-controlled-phase-rotation",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "unresolved_obligations": [
+        "QC rotation and register-order semantics remain under reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 5
+    },
+    {
+      "id": "thm-qa-exact-binary-qft-circuit-correct",
+      "kind": "theorem",
+      "title": "Exact binary QFT circuit correctness",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "alg-qa-exact-binary-qft-circuit",
+        "lem-qa-binary-qft-product-factorization",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-inverse-unitary-access"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The circuit maps every basis |x> to 2^{-n/2}Σ_y exp(2πixy/2^n)|y> with the declared output order, hence implements QFT_{2^n} on every state by linearity. Reversing gates and adjointing each gives the negative-sign inverse QFT with the same ideal gate count.",
+      "proof_obligations": [
+        "Track phase contributions from each controlled rotation for a basis input; verify swaps restore the standard output order and extend by linearity."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-controlled-phase-rotation",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-inverse-unitary-access"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-exact-binary-qft-gate-count",
+      "kind": "theorem",
+      "title": "Exact binary QFT ideal gate count",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "alg-qa-exact-binary-qft-circuit",
+        "def-qa-qft-gate-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The exact circuit uses n H gates, n(n−1)/2 controlled phase rotations, floor(n/2) SWAP gates, no ancillas and O(n^2) ideal gates. If SWAP is expanded into CNOTs, add 3 floor(n/2) CNOT gates.",
+      "proof_obligations": [
+        "Count the triangular pairs (i,j) with 0≤i<j<n and the final reversal swaps."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-elementary-circuit-resources"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 7
+    },
+    {
+      "id": "alg-qa-truncated-binary-qft-circuit",
+      "kind": "algorithm",
+      "title": "Truncated binary QFT",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "alg-qa-exact-binary-qft-circuit",
+        "def-qa-qft-gate-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For integer cutoff m≥1, run the exact circuit except omit every controlled R_s with denominator index s>m; retain all H gates and final reversal swaps. The circuit is finite, uses no ancillas and defines a unitary for every m.",
+      "proof_obligations": [
+        "State the convention m≥n as exact QFT, and preserve all bit-reversal swaps."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-controlled-phase-rotation"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 8
+    },
+    {
+      "id": "thm-qa-truncated-qft-operator-norm-error",
+      "kind": "theorem",
+      "title": "Operator-norm error of QFT truncation",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "alg-qa-truncated-binary-qft-circuit",
+        "alg-qa-exact-binary-qft-circuit",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "thm-finite-dimensional-isometry-characterisations",
+        "thm-qa-exact-binary-qft-circuit-correct"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For 1≤m<n, ||QFT_{2^n}−QFT^{(m)}_{2^n}||≤Σ_{s=m+1}^n(n−s+1)2π/2^s≤2πn·2^{-m}. For m≥n, error is zero. For 0<ε<1 choose m=min(n,ceil(log_2(2πn/ε))) to make error at most ε.",
+      "proof_obligations": [
+        "Use |1−e^{iθ}|≤|θ| for each omitted controlled phase and telescope the product. Derive unitary invariance of the operator norm from its finite-dimensional supremum definition and norm preservation, then use submultiplicativity; assume 0<ε<1 when selecting the logarithmic cutoff."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "thm-operator-norm-is-the-largest-singular-value",
+        "thm-qa-exact-binary-qft-circuit-correct"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-truncated-qft-gate-count",
+      "kind": "theorem",
+      "title": "Truncated QFT ideal gate count",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "alg-qa-truncated-binary-qft-circuit",
+        "def-qa-qft-gate-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "With m<n, the truncated circuit uses n H gates, Σ_{s=2}^{m}(n−s+1) controlled phase rotations, floor(n/2) swaps and no ancillas, hence O(nm+n) ideal gates. For m=O(log(n/ε)) this is O(n log(n/ε)) when the cutoff is below n.",
+      "proof_obligations": [
+        "Count retained denominator levels and distinguish ideal rotation gates from compiled finite-set gates."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qc-elementary-circuit-resources"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-projective-operator-closeness-bounds-output-distribution",
+      "kind": "theorem",
+      "title": "Projective operator closeness bounds output distributions",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "def-finite-probability-space-and-event",
+        "thm-cauchy-schwarz-finite",
+        "thm-qc-standalone-global-phase-invariance"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Let U and V be unitaries on the same finite register and suppose inf_{|λ|=1}||U−λV||≤ε. For every unit input state, the total-variation distance between their computational-basis output laws is at most ε. The minimizing global phase does not change the law by the QC standalone-phase theorem.",
+      "proof_obligations": [
+        "Choose a unit scalar λ with ||U−λV||≤ε; use standalone global-phase invariance to identify V and λV output laws. For unit amplitude vectors α=Uψ and β=λVψ, apply | |α_j|²−|β_j|² |≤|α_j−β_j|(|α_j|+|β_j|) and finite Cauchy–Schwarz to obtain one-half of the summed absolute differences ≤||α−β||₂≤ε."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-finite-probability-space-and-event",
+        "thm-cauchy-schwarz-finite",
+        "thm-qc-standalone-global-phase-invariance"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 3
+    },
+    {
+      "id": "thm-qa-qft-finite-gate-set-compile-cost",
+      "kind": "theorem",
+      "title": "Finite universal-gate compilation cost for the truncated QFT",
+      "page": "quantum-fourier-transform-circuits",
+      "deps": [
+        "alg-qa-truncated-binary-qft-circuit",
+        "thm-qa-truncated-qft-operator-norm-error",
+        "def-qa-qft-gate-cost-model",
+        "def-qc-elementary-circuit-resources",
+        "alg-qc-solovay-kitaev-unitary-compiler",
+        "thm-qc-solovay-kitaev-error-and-resource-bound",
+        "thm-qc-standalone-global-phase-invariance",
+        "thm-qc-controlled-global-phase-is-relative-phase",
+        "thm-qa-projective-operator-closeness-bounds-output-distribution"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For n≥1 and rational target error 0<η<1, let m=min(n,ceil(log₂(4πn/η))) and compile the truncated circuit with this cutoff. The omitted rotations contribute operator error at most η/2 (or zero if m=n). Let L=O(nm) count the Hadamard and controlled-phase blocks, with final swaps expanded into exact CNOTs. Under QC12’s fixed-arity QSD, exact-CNOT, inverse-closed dense one-qubit alphabet and exact-arithmetic compiler hypotheses, set δ=min(η/(2L), ε₀/2), where ε₀ is the fixed compiler threshold, and compile each one-qubit block and each complete controlled-phase block to projective operator error at most δ. Do not control a phase-minimized subblock. Projective errors telescope to at most η/2 for the truncated circuit and at most η from the exact QFT. The projective-distance output theorem gives total-variation error at most η for every computational-basis output law. The finite gate count is O(nm·log^{3.97}(2nm/η)) including O(nm) exact CNOTs from fixed-arity decompositions and O(n) swap CNOTs. Per-block scalar phases are retained as QC12 metadata: they are harmless for this standalone output law and become relative under outer control, for which this theorem claims no compilation cost. This is an abstract gate-count result under QC12’s exact-arithmetic compiler interface, with no finite-precision target-angle bit-time claim.",
+      "proof_obligations": [
+        "For m=min(n,ceil(log₂(4πn/η))), apply the truncation theorem: the operator error is at most η/2, or zero when m=n.",
+        "Let L count the H and complete controlled-phase blocks (L=O(nm)); expand each final SWAP into three exact CNOTs. Since δ=min(η/(2L), ε₀/2) is within the fixed QC12 compiler range, apply its full-block projective corollary to every one- or two-qubit block, compiling each controlled phase as the complete CPθ target and never as a controlled phase-minimized subblock.",
+        "Use the triangle inequality for projective operator distance to combine the L gate errors into at most Lδ≤η/2, and combine with the truncation error to obtain projective distance at most η from the exact QFT. Apply thm-qa-projective-operator-closeness-bounds-output-distribution separately to truncation and compilation and use total-variation triangle inequality to obtain η/2+η/2=η.",
+        "Track the product of per-block scalar metadata as one whole-circuit scalar; use standalone global-phase invariance for this output law. Do not claim that the scalar can be discarded under outer control or that an outer-controlled QFT is compiled. The cost is O(L·log^{3.97}(1/δ)) one-qubit gates plus exact CNOT terms, hence O(nm·log^{3.97}(2nm/η)) including exact CNOTs; make no finite-precision target-angle bit-time claim."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [
+        "alg-qc-solovay-kitaev-unitary-compiler",
+        "thm-qc-solovay-kitaev-error-and-resource-bound",
+        "def-qc-elementary-circuit-resources",
+        "thm-qc-standalone-global-phase-invariance",
+        "thm-qc-controlled-global-phase-is-relative-phase"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 11
+    },
+    {
+      "id": "ex-qa-promise-and-cost-models",
+      "kind": "example",
+      "title": "Promise, query and cost-model examples",
+      "page": "computational-problems-promises-and-cost-models-examples",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "Compare a total function with an off-promise completion, count one oracle call returning a multi-bit string, and give two circuits with equal query count but different nonoracle gate cost.",
+      "proof_obligations": [
+        "Check each displayed finite calculation directly from the companion-page contract."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapters 1.4 and 2.1-2.4, PDF pp. 15-33: classical/reversible versus quantum circuits, query model, standard oracle, phase oracle and oracle-query cost."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §§1.1-1.7, PDF pp. 9-12, and chapter 21 §§21.1-21.2, PDF pp.105-106: quantum query model, reversible embedding, uniformity and access conventions."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: black-box query cost and standard reversible function oracle."
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-oracle-conversion-and-uncomputation",
+      "kind": "example",
+      "title": "Oracle conversion and uncomputation examples",
+      "page": "reversible-arithmetic-and-oracle-conversion-examples",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "Compute a one-bit phase-kickback example, a two-bit reversible dot product, and an unclean-workspace counterexample where residual garbage destroys the intended interference.",
+      "proof_obligations": [
+        "Check each displayed finite calculation directly from the companion-page contract."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §§2.1-2.3, PDF pp.25-29: query model, standard/phase queries, phase kickback, reversible computation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 1 §1.4, PDF pp. 10-11: unitary reversibility and compute-copy-uncompute; chapters 21.1-21.2, PDF pp.105-106, oracle query model."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-8: bit-flip function oracle and phase kickback."
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-exact-oracle-algorithms",
+      "kind": "example",
+      "title": "Deutsch, Deutsch–Jozsa and Bernstein–Vazirani examples",
+      "page": "exact-oracle-algorithms-examples",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "Give n=1 Deutsch truth tables, an n=2 balanced DJ table, and explicit two-bit BV amplitudes; check each exact output and classical query statement.",
+      "proof_obligations": [
+        "Check each displayed finite calculation directly from the companion-page contract."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-simon-finite-rank-and-sampling",
+      "kind": "example",
+      "title": "Finite Simon rank and sampling examples",
+      "page": "simon-algorithm-and-finite-field-recovery-examples",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "Work n=1 and n=2 instances, including the rank-zero boundary, the hyperplane sample set, span growth probabilities and the unique nonzero solution.",
+      "proof_obligations": [
+        "Check each displayed finite calculation directly from the companion-page contract."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-finite-abelian-fourier-tables-and-convolution",
+      "kind": "example",
+      "title": "Finite abelian Fourier and convolution examples",
+      "page": "finite-abelian-fourier-analysis-examples",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "Write character tables for C_2, C_3 and C_2×C_3; check orthogonality, inversion, Parseval, the sqrt(|G|) convolution factor and an annihilator.",
+      "proof_obligations": [
+        "Check each displayed finite calculation directly from the companion-page contract."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4, PDF pp.41-48, and chapter 6 §§6.1-6.2.1, PDF pp.57-60: cyclic and finite-abelian Fourier/character conventions."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §§4.1-4.4, PDF pp.25-28, and chapter 6, PDF pp.33-37: QFT, abelian characters and HSP sampling."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18, and §6.5.3, PDF pp.30-34: QFT and finite-abelian annihilator sampling."
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-qft-fourier-circuit-order-and-truncation",
+      "kind": "example",
+      "title": "QFT circuit order and truncation examples",
+      "page": "quantum-fourier-transform-circuits-examples",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "Draw the N=4 positive-sign circuit with the final swap, verify its matrix on basis states, and estimate the operator-norm truncation bound for a chosen n,m.",
+      "proof_obligations": [
+        "Check each displayed finite calculation directly from the companion-page contract."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Chapter 4 §4.5 and Exercise 4.4, PDF pp.44-46: exact binary QFT, output bit reversal, rotation count and truncation proof obligation."
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chapter 4 §4.2, PDF pp.25-28: exact QFT factorization/circuit and approximate gate count."
+        },
+        {
+          "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+          "locator": "§6.2.2, PDF pp.17-18 (printed pp.11-12): product factorization, exact controlled-phase circuit, bit reversal and long-rotation truncation."
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    }
+  ]
+}

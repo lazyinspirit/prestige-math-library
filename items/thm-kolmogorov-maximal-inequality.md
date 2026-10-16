@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-kolmogorov-maximal-inequality.json
 id: thm-kolmogorov-maximal-inequality
 title: "Kolmogorov maximal inequality"
 kind: theorem
@@ -8,13 +10,6 @@ deps: ["def-partial-sums-and-sample-means", "def-independent-random-elements", "
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (thm-kolmogorov-maximal-inequality). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   references:
     - title: "Theorem 2.5.5, p. 84"
@@ -38,7 +33,7 @@ Thus controlling the whole finite maximum costs no larger bound than controlling
 
 [F3] [[lem-variance-and-covariance-identities-for-random-variables]]: Let $X,Y$ be square-integrable real random variables on one probability space. Then $\operatorname{Var}(X)=\mathbb E[X^2]-\mathbb E[X]^2,$ $\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].$ Moreover, covariance is symmetric and bilinear on finite linear combinations. On finite full-power-set probability spaces these formulas reduce to the published finite identities.
 
-[F4] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then: 1. $cf$ is measurable for every real scalar $c$; 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable; 3. if $f+g$ is pointwise defined, then $f+g$ is measurable; 4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
+[F4] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then: 1. $cf$ is measurable for every real scalar $c$; 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable; 3. if $f+g$ is pointwise defined, then $f+g$ is measurable; 4. with the total function-product convention declared in that theorem, the pointwise product $fg$ is measurable.
 
 ## Proof
 

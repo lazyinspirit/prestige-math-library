@@ -1,0 +1,2279 @@
+{
+  "category": "quantum-algorithms",
+  "status": "draft-planning",
+  "items": [
+    {
+      "id": "def-qa-eigenphase-estimation-model",
+      "kind": "definition",
+      "title": "Eigenphase estimation access model",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-pure-state-and-ray",
+        "def-qc-controlled-unitary-access",
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Fix a unitary U with eigenstate |ψ⟩ and phase θ∈[0,1) satisfying U|ψ⟩=exp(2πiθ)|ψ⟩. For m phase qubits set Q=2^m. Specify separately access to each controlled U^(2^j), j=0,…,m−1, and access to a single controlled U gate.",
+      "proof_obligations": [
+        "Define the eigenphase sign and register bit ordering consistently with QA06.",
+        "State that controlled powers are supplied access primitives; do not infer them from a bare controlled-U gate.",
+        "For superposition inputs, use a separate spectral-decomposition theorem rather than changing the eigenstate contract."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; phase convention and controlled powers"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; phase estimation circuit and controlled powers"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QC register and controlled-unitary IDs are reserved, unwritten interfaces; exact reserved IDs are used above.",
+        "QA06 supplies the positive-sign QFT convention; its inverse circuit is used by QPE."
+      ],
+      "unresolved_obligations": [
+        "QC contract reconciliation and QA06 QFT proof remain pending integration."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 6,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-quantum-phase-estimation",
+      "kind": "algorithm",
+      "title": "Quantum phase estimation",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "def-qa-eigenphase-estimation-model",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-controlled-unitary-access",
+        "def-qc-classical-control-and-measurement-circuit",
+        "thm-qa-exact-binary-qft-circuit-correct",
+        "def-qc-circuit-denotational-semantics",
+        "def-qa-cyclic-quantum-fourier-transform",
+        "def-qc-register-and-computational-basis",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input U, an m-qubit phase register, eigenstate |ψ⟩, and controlled-power access. Prepare Q^(-1/2)Σ_j|j⟩, apply controlled U^(2^j) at each bit, apply the inverse of QA06's positive-sign exact binary QFT circuit, measure y∈{0,…,Q−1}, and output y/Q.",
+      "proof_obligations": [
+        "Give complete instructions, output range and exact power-access requirements.",
+        "Derive the post-circuit amplitude from denotational circuit semantics and the finite QFT matrix.",
+        "Construct inverse QFT by reversing QA06's explicit gate sequence and negating rotation angles; charge no inverse oracle for U."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`thm-qa-exact-binary-qft-circuit-correct` is QA06's reserved exact circuit theorem.",
+        "QC circuit semantics and controlled-access interfaces are reserved; QPE does not require inverse access to U."
+      ],
+      "unresolved_obligations": [
+        "Proof depends on final QA06 exact circuit contract and QC circuit semantics inventory."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 3
+    },
+    {
+      "id": "lem-qa-phase-estimation-geometric-sum",
+      "kind": "lemma",
+      "title": "Finite geometric sum for phase-estimation amplitudes",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "thm-complex-exponential-addition-and-real-extension",
+        "thm-complex-numbers-form-a-field"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For z on the unit circle, Σ_(j=0)^(Q−1)z^j=Q when z=1 and (1−z^Q)/(1−z) otherwise; specialize to z=exp(2πi(θ−y/Q)).",
+      "proof_obligations": [
+        "Prove by multiplying the finite sum by 1−z and cancelling adjacent powers.",
+        "Treat z=1 separately and use the complex field laws for division in the other case."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; finite phase sum"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48"
+        }
+      ],
+      "existing_supplier_checks": [
+        "The finite sum proof is elementary; no physical measurement supplier is involved."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "lem-qa-phase-estimation-outcome-kernel",
+      "kind": "lemma",
+      "title": "Phase-estimation finite outcome law",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "alg-qa-quantum-phase-estimation",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-projective-measurement",
+        "thm-qa-exact-binary-qft-circuit-correct",
+        "lem-qa-phase-estimation-geometric-sum",
+        "def-qc-circuit-denotational-semantics",
+        "def-qa-cyclic-quantum-fourier-transform",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For phase θ and Q=2^m, the measured output law is Pθ(y)=Q^(−2)|Σ_(j=0)^(Q−1)exp(2πij(θ−y/Q))|², including the exact phase case Qθ∈Z.",
+      "proof_obligations": [
+        "Compute each amplitude by multiplying the controlled-power state by the inverse QFT matrix.",
+        "Use the finite geometric-series identity, including its zero-denominator/θ=y/Q limiting case.",
+        "Check normalization by unitarity or the finite geometric-sum orthogonality theorem."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; distribution formula"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root cyclic Fourier inversion and QA06 exact QFT are supporting suppliers; no physics measurement postulate is used."
+      ],
+      "unresolved_obligations": [
+        "Exact locally authored amplitude calculation and sign audit."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-phase-estimation-exact-grid",
+      "kind": "theorem",
+      "title": "Exact phase recovery on the QPE grid",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "lem-qa-phase-estimation-outcome-kernel",
+        "lem-orthogonality-of-characters-on-a-finite-cyclic-group"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If Qθ=t is an integer, phase estimation returns y=t with probability one and every other outcome has probability zero.",
+      "proof_obligations": [
+        "Substitute θ=t/Q into the finite geometric sum; the nonmatching outcomes sum a full nontrivial Qth-root orbit to zero."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`lem-orthogonality-of-characters-on-a-finite-cyclic-group` is published and supplies the full root-of-unity sum if used."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 6
+    },
+    {
+      "id": "lem-qa-phase-estimation-nearest-grid-bound",
+      "kind": "lemma",
+      "title": "Nearest-grid probability in phase estimation",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "lem-qa-phase-estimation-outcome-kernel"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For any θ, a nearest grid index y satisfies Pθ(y)≥4/π².",
+      "proof_obligations": [
+        "Write Qθ−y=δ with |δ|≤1/2 and use the sine quotient for the geometric sum.",
+        "Apply sin(π|δ|)≥2|δ| and sin(π|δ|/Q)≤π|δ|/Q; take the δ=0 limit separately."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; nearest-grid constant"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; estimate omitted"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Childs supplies the inequality statement; full trigonometric derivation is local."
+      ],
+      "unresolved_obligations": [
+        "Complete locally checked sine inequality derivation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 7
+    },
+    {
+      "id": "lem-qa-phase-estimation-tail-bound",
+      "kind": "lemma",
+      "title": "Circular-distance tail bound in phase estimation",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "lem-qa-phase-estimation-outcome-kernel"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If d(y)=‖θ−y/Q‖ and K=⌊Qη⌋≥2, then Pr[d(y)≥η]≤1/(2(K−1)).",
+      "proof_obligations": [
+        "Use |sin(π(θ−y/Q))|≥2d to bound each point probability by 1/(4Q²d²).",
+        "Partition circular distance into grid annuli with at most two points each and compare the series tail to ∫_(K−1)^∞x^(−2)dx."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; tail omitted"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "Full local circular annulus count and endpoint conventions required."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 8
+    },
+    {
+      "id": "thm-qa-phase-estimation-success-and-tail",
+      "kind": "theorem",
+      "title": "Phase-estimation nearest-grid and tail bounds",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "lem-qa-phase-estimation-outcome-kernel",
+        "thm-qa-phase-estimation-exact-grid",
+        "lem-qa-phase-estimation-nearest-grid-bound",
+        "lem-qa-phase-estimation-tail-bound"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every θ, a nearest grid point y/Q is measured with probability at least 4/π². If d=‖θ−y/Q‖ and K=⌊Qη⌋≥2, then Pr[d≥η]≤1/(2(K−1)). Exact grid phases are returned with probability one.",
+      "proof_obligations": [
+        "Use the sine quotient for the nearest grid point and sin(πu)≥2u on [0,1/2], sin(v)≤v.",
+        "For the tail, bound Pθ(y)≤1/(4Q²d²), count at most two grid points per annulus, and sum Σ_(k≥K)k^(−2)≤1/(K−1).",
+        "State circular distance and handle θ=0 and exact-grid limits."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; nearest-grid constant"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; outcome law, success estimate omitted"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`lem-orthogonality-of-characters-on-a-finite-cyclic-group` is published; it supplies only finite cyclic orthogonality, not the tail proof."
+      ],
+      "unresolved_obligations": [
+        "Complete local derivation of the tail bound; de Wolf does not supply this success calculation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-phase-estimation-superposition-law",
+      "kind": "theorem",
+      "title": "Phase estimation on a superposition of eigenspaces",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "alg-qa-quantum-phase-estimation",
+        "def-qc-dirac-notation-conversion",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-tensor-register-and-permutation",
+        "def-qc-instrument-and-conditional-state",
+        "lem-qa-phase-estimation-outcome-kernel",
+        "def-qc-density-operator",
+        "def-qc-partial-trace"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a unit input ψ=Σ_θΠ_θψ, put a_y(θ)=Q^{-1}Σ_(j=0)^(Q−1)exp(2πij(θ−y/Q)) and K_y=Σ_θ a_y(θ)Π_θ. The finite QPE instrument on the system has outcome y with unnormalized state K_y|ψ⟩ and probability p_y=Σ_θ|a_y(θ)|²||Π_θψ||². If p_y>0 its conditional vector is K_yψ/√p_y; if p_y=0 that branch has no conditional state. For a density operator ρ including a reference R, the instrument is (K_y⊗I_R)ρ(K_y†⊗I_R)/p_y. The outcome law is an eigenspace-weighted mixture, but finite-precision conditioning generally retains coherent components of several eigenspaces. Only exact-grid phases with disjoint readout labels yield the corresponding spectral projection.",
+      "proof_obligations": [
+        "Derive the amplitude multiplier a_y by the controlled-power and inverse-QFT matrix, retaining complex phases. Orthogonal Π_θ give K_y†K_y=Σ_θ|a_y(θ)|²Π_θ and Σ_y K_y†K_y=I from the normalized finite geometric kernel. This proves positivity, normalization, reference extension and the conditional state formula. Cross terms vanish in the outcome trace, not in the conditional operator."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; eigenstate and superposition discussion"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`thm-complex-spectral-theorem-for-normal-endomorphisms` is a published root supplier; QC finite-register measurement interfaces are reserved."
+      ],
+      "unresolved_obligations": [
+        "Check exact spectral-projection statement against the root theorem during authoring."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-phase-estimation-access-cost",
+      "kind": "theorem",
+      "title": "Phase-estimation query and gate costs",
+      "page": "quantum-phase-estimation",
+      "deps": [
+        "alg-qa-quantum-phase-estimation",
+        "def-qc-circuit-cost-model",
+        "def-qc-controlled-unitary-access",
+        "thm-qa-exact-binary-qft-gate-count"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "In QC’s circuit-cost interface, restrict for this count to the ideal continuous-rotation submodel with exact arbitrary-angle controlled phases; this is not a fixed finite gate alphabet or uniform-family claim. With each controlled U^(2^j) available as one power query, one QPE run uses exactly m such queries. With only controlled-U access, repeated application uses Q−1 controlled-U queries. Gate cost is Σ_j C_j plus O(m²) exact QFT/prepare/measure gates; no efficient power construction follows from a black-box U.",
+      "proof_obligations": [
+        "Sum 2^j over j=0,…,m−1 to obtain Q−1.",
+        "Count the exact QFT gates under the ideal continuous-rotation submodel of the QC circuit-cost interface.",
+        "Keep query, circuit-gate and classical-description/bit costs distinct; this theorem asserts no fixed finite-alphabet or uniform-family implementation, and finite-set synthesis needs separate error and compiler bounds."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; controlled-power cost"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA06 exact binary QFT gate count uses H gates, controlled rotations and final bit-reversal swaps.",
+        "QC cost/access interfaces are reserved and not treated as free implementations."
+      ],
+      "unresolved_obligations": [
+        "Finite universal-gate synthesis precision and description bit-time remain out of scope."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 5
+    },
+    {
+      "id": "ex-qa-exact-phase-estimation",
+      "kind": "example",
+      "title": "Exact estimation of a binary phase",
+      "page": "quantum-phase-estimation-examples",
+      "deps": [
+        "alg-qa-quantum-phase-estimation",
+        "lem-qa-phase-estimation-outcome-kernel"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For θ=t/2^m, compute that QPE returns t exactly with probability one.",
+      "proof_obligations": [
+        "Substitute the phase in the geometric sum and verify the Kronecker-delta outcome."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-phase-estimation-nearest-grid-and-tail",
+      "kind": "example",
+      "title": "Nearest-grid and tail estimates in phase estimation",
+      "page": "quantum-phase-estimation-examples",
+      "deps": [
+        "thm-qa-phase-estimation-success-and-tail"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Work a phase halfway between adjacent grid points and evaluate the stated nearest-grid and circular-tail bounds.",
+      "proof_obligations": [
+        "Use the exact outcome law and distinguish individual nearest-point probability from the total tail."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; sample law"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 2
+    },
+    {
+      "id": "def-qa-rational-phase-reconstruction",
+      "kind": "definition",
+      "title": "Denominator-bounded rational phase reconstruction",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "def-regular-continued-fraction",
+        "def-convergents-of-regular-continued-fraction",
+        "thm-standard-representatives-modulo-n"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For integers Q>4N² and y∈[0,Q), define the candidate fractions as reduced convergents p/q of the normalized finite continued fraction of y/Q with 1≤q≤N and 2|yq−pQ|≤q. Return the unique candidate if it exists; otherwise return FAIL.",
+      "proof_obligations": [
+        "Specify integer-only Euclidean computation and normalized finite expansion.",
+        "Prove uniqueness from |p1/q1−p2/q2|≥1/N² for distinct reduced candidates and Q>N².",
+        "State runtime in terms of the bit length of Q and N."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§9, PDF pp. 45–49; continued-fraction period extraction"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56; rational reconstruction from a phase sample"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root finite continued-fraction definitions, Euclidean termination, and standard representatives are published."
+      ],
+      "unresolved_obligations": [
+        "Finite-rational Legendre bridge is a separate local lemma below; irrational Legendre is not substituted."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "lem-qa-finite-rational-legendre-criterion",
+      "kind": "lemma",
+      "title": "Finite-rational Legendre criterion before the terminal convergent",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "def-regular-continued-fraction",
+        "def-convergents-of-regular-continued-fraction",
+        "def-continued-fraction-complete-quotients",
+        "lem-continued-fraction-convergent-recurrence",
+        "lem-continued-fraction-determinant-identity",
+        "lem-continued-fraction-complete-quotient-formula",
+        "thm-rational-continued-fraction-termination",
+        "thm-normalized-finite-continued-fraction-uniqueness"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If A/D is reduced, D>2q, p/q is reduced with q>0, and |A/D−p/q|<1/(2q²), then p/q is a convergent of the normalized finite continued fraction of A/D.",
+      "proof_obligations": [
+        "Choose adjacent finite convergent denominators q_n≤q<q_(n+1) and show n+1 does not exceed the terminal index because q<D.",
+        "Repeat the determinant/best-approximation argument on the finite prefix; at a terminal complete quotient permit equality α_(n+1)=a_(n+1), using strict approximation in the contradiction.",
+        "Handle initial denominator q=1 and the possible first repeated denominator q_0=q_1=1 separately.",
+        "Do not depend on `thm-legendre-continued-fraction-criterion`, whose α is explicitly irrational."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§9, PDF pp. 45–49; finite rational continued-fraction recovery"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19; Shor's period-to-rational approximation argument"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`thm-legendre-continued-fraction-criterion` is a published proof but has irrational-input scope only.",
+        "Finite recurrence, determinant and normalized expansion carriers are published root items."
+      ],
+      "unresolved_obligations": [
+        "Author the rational-prefix proof locally; cited irrational theorem is not a valid dependency."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-rational-reconstruction-from-phase-sample",
+      "kind": "algorithm",
+      "title": "Rational reconstruction from a phase sample",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "def-qa-rational-phase-reconstruction",
+        "lem-qa-finite-rational-legendre-criterion",
+        "alg-qa-quantum-phase-estimation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Given phase output y/Q and denominator bound N, run the integer-only candidate search in `def-qa-rational-phase-reconstruction`; return its reduced fraction or FAIL. No floating-point comparison is used.",
+      "proof_obligations": [
+        "Give pseudocode using Euclid/continued-fraction convergents and exact test 2|yq−pQ|≤q.",
+        "Show at most one candidate passes.",
+        "Prove at most O(log Q) Euclidean divisions by Fibonacci denominator descent; with schoolbook division charge O(log²Q) bits per division, hence O(log³Q) conservative bit cost. No published root item supplies this bit bound."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§9, PDF pp. 45–49"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root Euclidean algorithm and finite continued-fraction algorithm define the needed arithmetic steps."
+      ],
+      "unresolved_obligations": [
+        "Rational reconstruction implementation and bit count require a local derivation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 5
+    },
+    {
+      "id": "thm-qa-rational-reconstruction-correctness",
+      "kind": "theorem",
+      "title": "Correctness of phase-sample rational reconstruction",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "alg-qa-rational-reconstruction-from-phase-sample",
+        "lem-qa-finite-rational-legendre-criterion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If θ=k/r is reduced with r≤N, Q>4N², and y is a nearest Q-grid integer to θ, reconstruction returns k/r. For any y there is at most one reduced candidate with denominator≤N in the reconstruction window.",
+      "proof_obligations": [
+        "Reduce y/Q to A/D in lowest terms and use |y/Q−k/r|≤1/(2Q)<1/(2r²).",
+        "If A/D=k/r, show it is the terminal convergent of the normalized finite expansion. Otherwise use |A/D−k/r|≥1/(Dr) to show D>2r, then invoke the finite-rational Legendre criterion.",
+        "Prove denominator-bounded uniqueness by the integer determinant lower bound.",
+        "Track modular/circular phase representatives to the representative k/r∈[0,1).",
+        "For reduced θ=k/r∈[0,1), a nonzero phase is at least 1/r from either endpoint. Since Q>4N² and r≤N, its nearest sample cannot wrap to y=0 across 1; θ=0 is the exact-grid case. Therefore the ordinary integer reconstruction interval is justified without an implicit circular-to-linear conversion."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published irrational Legendre criterion is expressly not used for rational y/Q."
+      ],
+      "unresolved_obligations": [
+        "Depends on the local finite-rational lemma being fully proved."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 7
+    },
+    {
+      "id": "alg-qa-modular-multiplication-circuit",
+      "kind": "algorithm",
+      "title": "Reversible modular multiplication by a unit",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "def-qc-clean-and-dirty-ancillas",
+        "def-qc-dirac-notation-conversion",
+        "alg-qc-reversible-embedding",
+        "def-qc-coherent-function-oracle",
+        "def-integers-modulo-n",
+        "def-addition-and-multiplication-modulo-n",
+        "thm-integers-modulo-n-basic-algebra",
+        "def-unit-group-modulo-n-and-euler-totient",
+        "thm-unit-criterion-modulo-n",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-register-and-computational-basis",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For N≥2 and a unit a modulo N, implement the permutation U_a|z⟩=|az mod N⟩ on valid residues 0≤z<N and the identity on invalid n-bit encodings, n=ceil(log₂N). Use a controlled schoolbook multiply/remainder circuit with explicit valid-range flag and ancilla cleanup.",
+      "proof_obligations": [
+        "Construct an O(n²)-size Boolean circuit for constant multiplication and long-division remainder.",
+        "Compile to a reversible circuit with fresh-target X/CNOT embedding, fanout/unfanout and clean ancillas; use U_(a inverse) to clear the swapped old input.",
+        "Prove the map is a permutation on valid residues and the chosen extension is unitary on all 2^n basis states.",
+        "Count control and cleanup gates; state no depth bound unless fanout/depth is separately proved."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56; repeated-squaring modular arithmetic discussion"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19; reversible modular exponentiation and arithmetic discussion"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root modular arithmetic items prove residue algebra but do not construct reversible modular multiplication circuits.",
+        "QC10 reserves reversible embedding and its cost theorem; its fresh-target and fanout conditions must be honored."
+      ],
+      "unresolved_obligations": [
+        "No existing root/QC item proves this specific O(n²) arithmetic-circuit construction.",
+        "The exact QC10 gate/work compiler statement and schoolbook circuit-size proof must be reconciled before claiming O(n²) gates."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-modular-arithmetic-cost",
+      "kind": "theorem",
+      "title": "Gate and bit cost of modular multiplication and powering",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "alg-qa-modular-multiplication-circuit",
+        "thm-qc-reversible-embedding-cost",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Under schoolbook Boolean arithmetic and QC10 reversible compilation, one controlled multiplication by a known unit modulo N has O(n²) gates and O(n²) clean arithmetic workspace; repeated-squaring constants x^(2^j) are generated in O(n³) classical bit operations for m=O(n).",
+      "proof_obligations": [
+        "Count schoolbook product, remainder/comparison, control, swap, inverse cleanup and fanout gates.",
+        "Apply QC10's actual O(S+E+m) finite reversible compilation bound with its fanout assumptions.",
+        "Count classical constant precomputation and binary modular exponentiation using O(n²) bit multiplication.",
+        "Do not assert polynomial query cost for a bare U_x oracle."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QC10's `thm-qc-reversible-embedding-cost` is a reserved bridge, not a current published arithmetic bound."
+      ],
+      "unresolved_obligations": [
+        "Exact bit and workspace constants/compilation proof await QC10 reconciliation."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 6
+    },
+    {
+      "id": "alg-qa-modular-order-finding",
+      "kind": "algorithm",
+      "title": "Modular order finding with rational reconstruction",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "alg-qa-quantum-phase-estimation",
+        "def-qc-dirac-notation-conversion",
+        "alg-qa-rational-reconstruction-from-phase-sample",
+        "alg-qa-modular-multiplication-circuit",
+        "def-unit-group-modulo-n-and-euler-totient",
+        "thm-unit-criterion-modulo-n",
+        "lem-order-characterisation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input N≥3, unit x modulo N, and failure target δ. Set n=ceil(log₂N), m=2n+3 and Q=2^m>4N². On each independent run apply QPE for U_x from |1⟩, reconstruct a denominator q≤N, and retain q only if x^q≡1 mod N. After t=ceil((π²/4)(1+log₂N)ln(1/δ)) samples return the smallest retained q, or FAIL if none.",
+      "proof_obligations": [
+        "Prove the orbit eigenvectors have phases k/r and |1⟩ induces uniform k∈Z/r.",
+        "Show every retained q is a multiple of the true order r.",
+        "Specify repeated sampling and the minimum rule; a nonminimal verified period is a failure, not silently called the order."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§9, PDF pp. 45–49"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published order characterization supplies x^q=1 iff r divides q.",
+        "QC controlled powers are replaced by explicit modular multiplication circuits only under the local cost theorem."
+      ],
+      "unresolved_obligations": [
+        "Controlled modular multiply circuit and finite rational reconstruction proofs remain local authoring obligations."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 8
+    },
+    {
+      "id": "lem-qa-totient-ratio-logarithmic-lower-bound",
+      "kind": "lemma",
+      "title": "Elementary lower bound for the totient ratio",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "thm-euler-totient-product-formula",
+        "thm-canonical-prime-factorisation",
+        "def-prime"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every integer r≥1, φ(r)/r≥1/(1+log₂r), with φ(1)=1.",
+      "proof_obligations": [
+        "List distinct prime divisors increasingly as p_i and use p_i≥i+1.",
+        "Use the Euler product to bound the product below by ∏_(i=1)^ω(1−1/(i+1))=1/(ω+1).",
+        "Use 2^ω≤r to obtain ω≤log₂r and handle r=1 separately."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19; source cites a sharper Hardy–Wright lower bound"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56; order-sample success discussion"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`thm-euler-totient-product-formula` is published and proves the exact product used; the elementary logarithmic weakening is local."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 3
+    },
+    {
+      "id": "thm-qa-modular-order-finding-success",
+      "kind": "theorem",
+      "title": "Success probability and repetition for modular order finding",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "alg-qa-modular-order-finding",
+        "thm-qa-phase-estimation-success-and-tail",
+        "thm-qa-rational-reconstruction-correctness",
+        "lem-qa-totient-ratio-logarithmic-lower-bound"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For true order r, one independent phase sample produces denominator r with probability at least (4/π²)φ(r)/r≥4/[π²(1+log₂N)]. The minimum accepted candidate is the exact order with probability at least 1−δ after the declared t samples.",
+      "proof_obligations": [
+        "Prove the modular multiplication orbit has r distinct basis states and derive its Fourier eigenbasis.",
+        "The phase index k is uniform; coprime k probability is φ(r)/r.",
+        "On the nearest-grid event invoke finite rational reconstruction to obtain k/r; coprimality makes denominator r.",
+        "Any accepted q satisfies r|q. If an exact r candidate appears it is therefore the minimum; union/product bound controls failure."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§9, PDF pp. 45–49"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root finite cyclic unit-group and order items support r≤N and exact period testing."
+      ],
+      "unresolved_obligations": [
+        "The source's sharper φ(r)/r estimate cites Hardy–Wright; this inventory uses and proves the weaker local bound instead."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-modular-order-finding-cost",
+      "kind": "theorem",
+      "title": "Separate order-finding query, gate, and bit costs",
+      "page": "quantum-order-finding-and-rational-reconstruction",
+      "deps": [
+        "alg-qa-modular-order-finding",
+        "thm-qa-phase-estimation-access-cost",
+        "thm-qa-modular-arithmetic-cost",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "With QC10 reversible arithmetic and the ideal continuous exact-arbitrary-angle QFT submodel, order finding uses O(n²(1+ln(1/δ))) controlled modular-multiplier calls, O(n⁴(1+ln(1/δ))) gates and O(n⁴(1+ln(1/δ))) schoolbook classical bit operations, for n=ceil(log₂N). With only controlled U_x access, the query bound is t(Q−1), not polynomial. This is not a finite-alphabet or uniform-family theorem.",
+      "proof_obligations": [
+        "Count O(n(1+ln(1/δ))) phase samples and m=O(n) controlled-power circuits per sample.",
+        "Multiply by the local O(n²) reversible modular-multiplier gate bound and add O(n²) exact ideal-rotation QFT gates.",
+        "Count continued fractions as O(n³) schoolbook bit operations (O(n) Euclidean divisions, each O(n²)) and candidate modular-power verification as O(n³) bits per sample.",
+        "Report external function-oracle queries, controlled-U queries, arithmetic-gate cost and classical bit cost separately; do not infer a finite-alphabet compiler or uniform circuit family."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        }
+      ],
+      "existing_supplier_checks": [
+        "No existing supplier proves polynomial implementation of controlled powers from a black-box U."
+      ],
+      "unresolved_obligations": [
+        "All arithmetic gate bounds depend on the explicit reversible multiplier proof above."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 9
+    },
+    {
+      "id": "ex-qa-rational-reconstruction-boundary",
+      "kind": "example",
+      "title": "Denominator-bounded reconstruction at the strict boundary",
+      "page": "quantum-order-finding-and-rational-reconstruction-examples",
+      "deps": [
+        "def-qa-rational-phase-reconstruction",
+        "lem-qa-finite-rational-legendre-criterion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Work an exact integer comparison 2|yq−pQ|≤q and show why a tie at the reconstruction boundary is accepted without a floating-point tolerance.",
+      "proof_obligations": [
+        "Show candidate uniqueness and distinguish ≤ in the algorithm from the strict inequality in the Legendre step."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-order-finding-noncoprime-phase",
+      "kind": "example",
+      "title": "A non-coprime phase gives a proper order divisor",
+      "page": "quantum-order-finding-and-rational-reconstruction-examples",
+      "deps": [
+        "alg-qa-modular-order-finding",
+        "thm-qa-modular-order-finding-success"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Choose a phase index k not coprime to r; compute the reduced denominator as r/gcd(k,r), show its power test fails, and explain how another sample can recover r.",
+      "proof_obligations": [
+        "Verify the reduced denominator is a proper divisor and the algorithm does not call it the exact order."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§9, PDF pp. 45–49"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-shor-factoring",
+      "kind": "algorithm",
+      "title": "Shor factoring with explicit retries and verified outputs",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "alg-qa-modular-order-finding",
+        "thm-qa-modular-order-finding-success",
+        "alg-qa-modular-multiplication-circuit",
+        "def-unit-group-modulo-n-and-euler-totient",
+        "thm-unit-criterion-modulo-n"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input a promised composite N≥4 and target failure δ. Return 2 if N is even; test perfect powers and return a proper root factor; otherwise repeat T=ceil(ln(1/δ)/(-ln(5/8))) times: sample a uniformly from 1,…,N−1 and compute d=gcd(a,N); if d>1 return d, and if d=1 run order finding on unit a at confidence 3/4. When its candidate period q is even compute z=a^(q/2) mod N and test gcd(z±1,N). Return only a verified proper divisor or FAIL.",
+      "proof_obligations": [
+        "Make perfect-power detection and all randomized choices operational and polynomial-bit-costed.",
+        "Show output verification prevents any incorrect divisor.",
+        "Bound per-attempt failure by 5/8 after combining nonunit gcd and unit branch.",
+        "State internal order-finding confidence and outer repetition independently."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published unit group, gcd, CRT and modular arithmetic carriers support the classical setup but not a quantum implementation."
+      ],
+      "unresolved_obligations": [
+        "Reversible modular exponentiation circuit and exact uniform circuit family remain local dependencies."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 6
+    },
+    {
+      "id": "lem-qa-shor-perfect-power-precheck",
+      "kind": "lemma",
+      "title": "Even and perfect-power preprocessing returns a proper factor",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "thm-integers-modulo-n-basic-algebra"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For promised composite N≥4, the even branch returns a proper factor 2; if N=a^e with integers a>1,e≥2, the perfect-power branch returns a proper factor a. Binary search over integer roots and exponentiation tests decide the latter in polynomial bit time.",
+      "proof_obligations": [
+        "Show 2<N for the even composite branch unless N=2, excluded by the composite promise.",
+        "Bound exponent e≤n and use binary search over at most n-bit roots; each exact power comparison uses O(log e) schoolbook n-bit multiplications, giving O(n⁵) bit operations overall.",
+        "Check 1<a<N for a detected nontrivial power."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19; classical preprocessing"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root integer/modular arithmetic is published, but no power-detection bit-cost item exists; the finite procedure and cost are local."
+      ],
+      "unresolved_obligations": [
+        "Author the polynomial-bit integer-root test; do not assume factorization of N in preprocessing."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "lem-qa-shor-residue-gcd-branch",
+      "kind": "lemma",
+      "title": "Random residue gcd branch for factoring",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "def-unit-group-modulo-n-and-euler-totient",
+        "thm-unit-criterion-modulo-n",
+        "thm-bezout-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For N composite and a uniform integer a∈{1,…,N−1}, gcd(a,N) is either one, in which case a is a uniform unit conditional on this event, or a proper nontrivial factor. The excluded value a=0 ensures gcd(a,N)≠N.",
+      "proof_obligations": [
+        "Use the unit criterion to identify the gcd-one event with the unit group.",
+        "Prove conditional uniformity by counting equally likely representatives.",
+        "Show each nonunit residue in the range has gcd strictly between 1 and N."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published unit criterion and standard representatives support the finite residue classification."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 2
+    },
+    {
+      "id": "lem-qa-even-order-square-root",
+      "kind": "lemma",
+      "title": "Half an even order gives a square root of one",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "lem-order-characterisation",
+        "def-integers-modulo-n",
+        "thm-integers-modulo-n-basic-algebra"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If x is a unit modulo odd N and q≥1 is any even exponent with x^q≡1 mod N, then z=x^(q/2) satisfies z²≡1 mod N. If q is the true order of x, then additionally z≠1 mod N.",
+      "proof_obligations": [
+        "Use x^q=1 for the square relation.",
+        "For q equal to the true order, if x^(q/2)=1 then the order characterization forces q|q/2, contradiction."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–18"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`lem-order-characterisation` is a published group-theoretic supplier."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 3
+    },
+    {
+      "id": "lem-qa-crt-sign-vector-factorization",
+      "kind": "lemma",
+      "title": "Mixed CRT signs yield proper gcd factors",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "thm-unit-group-chinese-remainder-decomposition",
+        "thm-chinese-remainder-theorem",
+        "lem-qa-even-order-square-root"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For odd N=∏p_i^(e_i), if z²≡1 mod N and z is neither 1 nor −1 modulo N, then both gcd(z−1,N) and gcd(z+1,N) are proper nontrivial divisors.",
+      "proof_obligations": [
+        "Show each odd prime-power component has only the two square roots ±1 using the factorization (z−1)(z+1) and coprimality of the two factors modulo odd p.",
+        "A mixed sign vector has at least one component on each side, so each gcd exceeds one and is smaller than N.",
+        "Connect verified residues with the CRT decomposition."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–18; CRT square-root discussion"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published CRT supports the componentwise decomposition; the odd prime-power square-root proof must be written locally."
+      ],
+      "unresolved_obligations": [
+        "Complete local proof of exactly two square roots of one modulo an odd prime power."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 5
+    },
+    {
+      "id": "lem-qa-prime-power-order-two-adic-law",
+      "kind": "lemma",
+      "title": "Two-adic order distribution in odd prime-power unit groups",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+        "def-unit-group-modulo-n-and-euler-totient",
+        "lem-order-characterisation",
+        "thm-unit-group-chinese-remainder-decomposition"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For odd prime p and e≥1, if a is uniform in (Z/p^e)^×, each possible value j=v₂(ord_(p^e)(a)) has probability at most 1/2.",
+      "proof_obligations": [
+        "Use cyclicity of the odd prime-power unit group and write its order as 2^s u with u odd.",
+        "Count exponents modulo 2^s by their 2-adic valuation; the probability at j=0 is 2^(−s), and at j≥1 is 2^(j−s−1), each at most 1/2.",
+        "Define v₂ and connect the exponent's order to the group element's order using the order characterization."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–18; local 2-adic argument"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`thm-structure-of-the-unit-group-modulo-n` is published; exact prime-power cyclic factor statement and its hypotheses must be checked."
+      ],
+      "unresolved_obligations": [
+        "Audit that the unit-group structure theorem proves cyclicity for all odd prime powers as used."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-order-to-factor-correctness",
+      "kind": "theorem",
+      "title": "Order-to-factor output correctness",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "alg-qa-shor-factoring",
+        "lem-qa-even-order-square-root",
+        "lem-qa-crt-sign-vector-factorization",
+        "thm-unit-group-chinese-remainder-decomposition",
+        "thm-chinese-remainder-theorem",
+        "thm-integers-modulo-n-basic-algebra"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For odd N and any accepted even period q with a^q≡1 mod N, z=a^(q/2) is a square root of one modulo N. If z is neither 1 nor −1 modulo N, both gcd(z−1,N) and gcd(z+1,N) are proper nontrivial factors; the algorithm returns only a divisor verified to lie strictly between 1 and N.",
+      "proof_obligations": [
+        "Use a^q=1 to show z²=1; minimality is unnecessary for output validity.",
+        "Apply CRT over odd prime-power factors to show each local component is ±1 and non-global signs force both gcds to be proper.",
+        "Verify gcd output is a divisor and all even/perfect-power branches return proper factors."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–18; order-to-factor reduction"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "CRT and unit-group decomposition theorem items are published; the local proof must check odd modulus hypotheses."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 7
+    },
+    {
+      "id": "thm-qa-order-to-factor-success",
+      "kind": "theorem",
+      "title": "Classical randomized order-to-factor success bound",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "thm-qa-order-to-factor-correctness",
+        "lem-qa-prime-power-order-two-adic-law",
+        "thm-unit-group-chinese-remainder-decomposition",
+        "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+        "thm-totient-of-a-prime-power",
+        "thm-canonical-prime-factorisation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If odd composite N has k≥2 distinct prime factors and a is uniform in (Z/N)^×, the true-order reduction yields an even order with nontrivial square root of one with probability at least 1−2^(1−k)≥1/2.",
+      "proof_obligations": [
+        "Use CRT to make the component orders independent under uniform a.",
+        "For each odd prime-power unit group, prove every possible 2-adic valuation of the order has probability at most 1/2.",
+        "Failure occurs exactly when all component valuations agree; sum the products and bound by 2^(−(k−1)).",
+        "Use oddness and non-prime-power input promise to guarantee k≥2."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–18; local 2-adic order argument"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published unit-group structure and CRT decomposition are checked; source proof gives the local valuation calculation."
+      ],
+      "unresolved_obligations": [
+        "Author the distribution of order 2-adic valuations from the cyclic unit-group factors; do not cite Shor alone as proof."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 17,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-shor-factoring-success",
+      "kind": "theorem",
+      "title": "Bounded-error success of Shor factoring",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "alg-qa-shor-factoring",
+        "lem-qa-shor-perfect-power-precheck",
+        "lem-qa-shor-residue-gcd-branch",
+        "thm-qa-modular-order-finding-success",
+        "thm-qa-order-to-factor-success"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For promised composite N≥4, Shor factoring returns a proper divisor with probability at least 1−δ after the declared T attempts; each attempt succeeds with probability at least 3/8 after exact preprocessing, random residue gcd, a 3/4-confidence order call, and the ≥1/2 CRT reduction.",
+      "proof_obligations": [
+        "Separate even and perfect-power exact preprocessing from odd non-prime-power case.",
+        "A uniform residue either reveals a proper gcd or, conditional on being a unit, is uniform in the unit group.",
+        "Combine order-finder correctness 3/4 with classical reduction 1/2; the nonunit branch only improves success.",
+        "Apply independent-trial failure product (5/8)^T≤δ."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published totient product and unit-group supplier support the sampling/counting context."
+      ],
+      "unresolved_obligations": [
+        "The local order-finder success and CRT valuation theorem must be complete before this end-to-end theorem is proved."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 18,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-shor-factoring-cost",
+      "kind": "theorem",
+      "title": "Separate Shor factoring bit, gate, and query costs",
+      "page": "shors-factoring-algorithm",
+      "deps": [
+        "alg-qa-shor-factoring",
+        "thm-qa-modular-order-finding-cost",
+        "thm-qa-modular-arithmetic-cost",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "With schoolbook reversible arithmetic gates and the ideal continuous exact-arbitrary-angle QFT submodel, for n=ceil(log₂N) Shor factoring uses O(n⁴(1+ln(1/δ))) quantum gates and O(n⁵+n⁴(1+ln(1/δ))) classical bit operations, plus O(n²(1+ln(1/δ))) controlled modular-multiplier calls. With explicit arithmetic circuits, external black-box query count is zero; with bare controlled U_x access, every QPE costs Q−1 queries and the polynomial gate claim does not apply. No finite-alphabet compilation or uniform-family conclusion is asserted.",
+      "proof_obligations": [
+        "Count one order call’s O(n) QPE samples, O(n) controlled-power stages per sample, O(n²) reversible arithmetic gates per modular multiplication and O(n³) bit verification per sample.",
+        "Bound perfect-power preprocessing: for e≤n, binary-search integer roots and compare powers by repeated squaring; schoolbook bit cost is O(n⁵).",
+        "Count the outer O(1+ln(1/δ)) attempts.",
+        "State the mixed finite-arithmetic/ideal-exact-rotation gate model and separately budget finite-set synthesis if introduced.",
+        "Keep the bare black-box unitary query cost explicit."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19; repeated squaring and arithmetic discussion"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§5, PDF pp. 49–56"
+        }
+      ],
+      "existing_supplier_checks": [
+        "No current supplier gives all local gate counts; QA08's reversible multiplier result is a required dependency."
+      ],
+      "unresolved_obligations": [
+        "Conservative cost bound awaits the modular arithmetic and uniformity proofs."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 8
+    },
+    {
+      "id": "ex-qa-shor-factorization-of-fifteen",
+      "kind": "example",
+      "title": "A Shor order sample for factoring fifteen",
+      "page": "shors-factoring-algorithm-examples",
+      "deps": [
+        "alg-qa-shor-factoring",
+        "thm-qa-order-to-factor-correctness"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a=2 modulo 15, compute order 4 and the gcds of 2²±1 with 15, obtaining proper factors 3 and 5.",
+      "proof_obligations": [
+        "Verify the modular powers, parity, square-root test and divisor checks directly."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19; factor-reduction worked logic"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 17,
+      "local_order": 2
+    },
+    {
+      "id": "ex-qa-shor-factorization-retry-branches",
+      "kind": "example",
+      "title": "Shor factorization preprocessing and retry branches",
+      "page": "shors-factoring-algorithm-examples",
+      "deps": [
+        "alg-qa-shor-factoring"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Work one even input, one perfect power, one nonunit random choice, and one odd-order or trivial-square-root retry.",
+      "proof_obligations": [
+        "Show each branch terminates, returns a verified divisor, or proceeds to an independent attempt."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§4, PDF pp. 16–19"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-finite-abelian-hidden-subgroup-problem",
+      "kind": "definition",
+      "title": "Finite abelian hidden-subgroup promise and output encoding",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "def-qa-finite-abelian-character-dual",
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-coherent-function-oracle",
+        "def-qc-register-and-computational-basis"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input G in explicit invariant-factor coordinates and a coherent oracle F:G→S satisfying F(g)=F(h) iff g−h∈H for an unknown subgroup H. Define the algorithm's output as the common-kernel presentation K=∩_j ker χ_j for its sampled characters; success means K=H.",
+      "proof_obligations": [
+        "Specify canonical coordinate and function-output encodings, oracle reversibility, group operation and hidden-subgroup promise.",
+        "Specify implicit common-kernel output so no unproved or free generator extraction is implied.",
+        "Distinguish query-only access from supplied uniform circuits for the oracle, state preparation and product QFT."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA05 supplies planned finite abelian character/annihilator interfaces; QC coherent-oracle and register interfaces remain reserved."
+      ],
+      "unresolved_obligations": [
+        "QA05 exact final supplier chain and QC oracle contract need integration."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 4
+    },
+    {
+      "id": "alg-qa-finite-abelian-hidden-subgroup-sample",
+      "kind": "algorithm",
+      "title": "One finite abelian hidden-subgroup Fourier sample",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "def-qa-finite-abelian-hidden-subgroup-problem",
+        "def-qa-normalized-finite-abelian-fourier-transform",
+        "thm-qa-finite-abelian-fourier-transform-is-unitary",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-projective-measurement",
+        "def-qc-partial-trace",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-register-and-computational-basis",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Given explicit invariant-factor coordinates for G, a hiding oracle F, and supplied exact circuits for uniform-state preparation and the normalized product QFT over G, prepare |G|^(−1/2)Σ_g|g⟩, evaluate F into a fresh output register, discard the output register, apply the supplied QFT, and return the measured character χ. The algorithm makes no existence or efficiency claim for those supplied circuits.",
+      "proof_obligations": [
+        "Define the coset state after discarding the output register from the coherent oracle semantics.",
+        "Specify the supplied exact QFT implementation through invariant-factor coordinates, bit ordering and any non-power-of-two encoding extension.",
+        "Count one coherent F query and separately charge the supplied preparation/QFT gates; do not treat either as free."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA05 final list is planned; product-character orthogonality is required in the sample-law theorem.",
+        "QA06 exact binary QFT applies only to power-of-two cyclic factors; an arbitrary-modulus cyclic QFT circuit remains a charged input or unresolved circuit supplier."
+      ],
+      "unresolved_obligations": [
+        "Exact finite-dimensional state preparation and circuit extension for arbitrary cyclic moduli must be supplied or cost-parameterized."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 5
+    },
+    {
+      "id": "lem-qa-hidden-coset-state-law",
+      "kind": "lemma",
+      "title": "Discarding the hiding register yields a coset-state mixture",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-coherent-function-oracle",
+        "def-qc-partial-trace",
+        "def-qa-finite-abelian-hidden-subgroup-problem",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-register-and-computational-basis",
+        "def-qc-tensor-register-and-permutation",
+        "def-qc-density-operator"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "After coherent evaluation of F and discarding the output register, the input state is the uniform mixture over coset states |g+H⟩=|H|^(−1/2)Σ_(h∈H)|g+h⟩, with one distinct label per coset.",
+      "proof_obligations": [
+        "Expand the uniform input and coherent function output as a finite sum.",
+        "Use F(g)=F(g') iff g−g'∈H so equal output labels occur exactly on cosets.",
+        "Apply partial trace to eliminate cross terms between distinct output labels and normalize the remaining coset projectors. If discussing output measurement instead of discard, separately show it gives the same reduced input state."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36; coset-state construction"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QC partial trace and coherent-oracle definitions are reserved and must be reconciled; no physical measurement postulate is used."
+      ],
+      "unresolved_obligations": [
+        "Check the final QC finite-register partial-trace statement and basis-order convention."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+      "kind": "theorem",
+      "title": "Fourier samples are uniform in the annihilator",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "lem-qa-hidden-coset-state-law",
+        "thm-qa-finite-abelian-dual-character-orthogonality",
+        "thm-qa-finite-abelian-coset-fourier-transform",
+        "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-denotational-semantics"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every hidden subgroup H and every measured coset state, the normalized finite abelian QFT outputs a character uniformly distributed in H^⊥ and has zero probability outside H^⊥.",
+      "proof_obligations": [
+        "Apply QA05's coset-transform identity: the unnormalized indicator coefficient is |H|/sqrt(|G|); for the normalized coset state multiply by |H|^(−1/2), giving amplitude sqrt(|H|/|G|)=1/sqrt(|H^⊥|) on H^⊥.",
+        "Use dual-character orthogonality to show support exactly H^⊥ and equal squared amplitude 1/|H^⊥| on that support.",
+        "Use |H||H^⊥|=|G| to normalize the law; do not infer uniformity from cardinality alone."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA05 is adding a separate dual-character orthogonality theorem; it is necessary for this proof and not replaceable by dual-cardinality alone."
+      ],
+      "unresolved_obligations": [
+        "Exact QA05 final ID and proof still pending integration."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 8
+    },
+    {
+      "id": "lem-qa-annihilator-restriction-cut",
+      "kind": "lemma",
+      "title": "A Fourier sample cuts a larger common kernel",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "thm-qa-finite-abelian-evaluation-map-isomorphism",
+        "thm-qa-finite-abelian-double-annihilator"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If H⊆K≤G and K≠H, a uniform character χ∈H^⊥ satisfies χ|_K≠1 with probability at least 1/2; replacing K by K∩kerχ then reduces its order by a factor of at least two while retaining H.",
+      "proof_obligations": [
+        "Choose g∈K\\H; double annihilator/evaluation-map duality yields a character in H^⊥ with χ(g)≠1.",
+        "Evaluation at g is a nontrivial homomorphism H^⊥→U(1), whose finite image has size at least two; its kernel therefore has index at least two.",
+        "Every character in H^⊥ is trivial on H, so H remains in the new common kernel."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36; repeated annihilator intersections"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA05 final additions include evaluation-map isomorphism and double annihilator; both are needed for separation."
+      ],
+      "unresolved_obligations": [
+        "QA05 evaluation-map and double-annihilator proofs remain pending final integration."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 6,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+      "kind": "algorithm",
+      "title": "Finite abelian hidden-subgroup common-kernel reconstruction",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "lem-qa-annihilator-restriction-cut"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If |G|=1, output G without queries. Otherwise let s=ceil(log₂|G|) and M=ceil(4s+16ln(1/δ)). Run M independent Fourier-sample procedures and output K=∩_{j≤M}ker χ_j in the explicit common-kernel representation.",
+      "proof_obligations": [
+        "Define intersection output without assuming an efficient generator conversion.",
+        "Maintain H⊆K and show a sampled character reduces K by index at least two with probability at least one half whenever K>H.",
+        "Stop after the fixed M samples; output K even on failure and define failure as K>H."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA05 double-annihilator theorem supports the separating character; root independent-Bernoulli Chernoff lemma supports the sample bound."
+      ],
+      "unresolved_obligations": [
+        "If later changed to generator-list output, add a separately proved polynomial-bit Smith-normal-form conversion; current output deliberately stays implicit."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 7
+    },
+    {
+      "id": "lem-qa-common-kernel-repetition-bound",
+      "kind": "lemma",
+      "title": "Chernoff repetition bound for common-kernel recovery",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "lem-qa-annihilator-restriction-cut",
+        "lem-chernoff-bound-for-independent-bernoulli-trials"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Set s=ceil(log₂|G|) and M=ceil(4s+16ln(1/δ)). If a fresh sample cuts the current K with conditional probability at least one half whenever K>H, then after M samples the probability of fewer than s cuts before reaching H is at most δ.",
+      "proof_obligations": [
+        "Couple each cut indicator, until hitting H, from below by a fresh independent Bernoulli(1/2) variable.",
+        "A cut reduces |K| by at least two, so s cuts suffice; if the process reaches H earlier it already succeeds.",
+        "For X~Bin(M,1/2), mean μ=M/2≥2s+8ln(1/δ); apply the published lower-tail bound at a deviation at least μ/2 to obtain exp(−μ/8)≤δ."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36; subgroup-reconstruction repetition"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`lem-chernoff-bound-for-independent-bernoulli-trials` is a published exact supplier; the coupling argument is local."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 7,
+      "local_order": 3
+    },
+    {
+      "id": "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+      "kind": "theorem",
+      "title": "Finite abelian hidden-subgroup reconstruction succeeds",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+        "lem-qa-annihilator-restriction-cut",
+        "lem-qa-common-kernel-repetition-bound",
+        "thm-qa-finite-abelian-double-annihilator",
+        "lem-chernoff-bound-for-independent-bernoulli-trials"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The common-kernel output always contains H and equals H with probability at least 1−δ after M=ceil(4s+16ln(1/δ)) samples, s=ceil(log₂|G|); the trivial group is returned exactly without sampling.",
+      "proof_obligations": [
+        "If K>H choose g∈K\\H and use double annihilator to find a character in H^⊥ nontrivial at g.",
+        "The restriction evaluation map on uniform H^⊥ has nontrivial image, so at least half of samples cut K by index ≥2.",
+        "Couple cuts up to hitting H from below by independent Bernoulli(1/2) variables; after s cuts K=H.",
+        "Apply the independent-Bernoulli lower-tail bound with mean M/2 and show Pr[Bin(M,1/2)<s]≤δ."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "`lem-chernoff-bound-for-independent-bernoulli-trials` is a published supplier; QA05 dual orthogonality and double-annihilator results are planned."
+      ],
+      "unresolved_obligations": [
+        "Complete QA05 duality and character-separation proofs required."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-finite-abelian-hidden-subgroup-cost",
+      "kind": "theorem",
+      "title": "Finite abelian hidden-subgroup query and circuit costs",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [
+        "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+        "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+        "def-qc-circuit-cost-model",
+        "def-qc-coherent-function-oracle"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The implicit-output algorithm uses at most M coherent hiding-oracle evaluations and stores O(M log|G|) character bits (zero queries for trivial G); classical output handling costs O(M log|G|) bit operations. Gate cost is M times explicit uniform-preparation, hiding-oracle, product-QFT and measurement costs; if supplied invariant-factor circuits give O(log²|G|) QFT/preparation gates and C_F oracle gates, the gate count is O(M(C_F+log²|G|)).",
+      "proof_obligations": [
+        "Count query, output-bit, gate and classical bit costs separately.",
+        "Use product-QFT component costs and charge the hiding oracle circuit; never assume it or state preparation free.",
+        "Clarify non-power-of-two register encoding and any controlled gate overhead; the exact binary QFT supplier alone does not implement arbitrary cyclic moduli."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA06 supplies exact binary QFT only for power-of-two factors; uniform preparation, arbitrary-modulus product QFT and coherent oracle costs remain explicit model parameters."
+      ],
+      "unresolved_obligations": [
+        "No polynomial implementation claim is made for arbitrary black-box group/function encodings or arbitrary cyclic-modulus QFT without explicit circuits."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 10
+    },
+    {
+      "id": "rem-qa-nonabelian-hidden-subgroup-scope",
+      "kind": "remark",
+      "title": "Scope limits for nonabelian hidden-subgroup problems",
+      "page": "finite-abelian-hidden-subgroup-algorithms",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "The abelian proof uses one-dimensional characters and subgroup annihilators. General finite-group information-theoretic query bounds do not establish an efficient algorithm; no general polynomial-time nonabelian HSP claim is made.",
+      "proof_obligations": [
+        "Cite full-read sources for the established scope statement and label conjectural extensions separately."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chs. 10–13, PDF pp. 50–66"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "This remark supplies no premise to active theorem proofs."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-hsp-cyclic-subgroup-annihilator",
+      "kind": "example",
+      "title": "Fourier sampling for a cyclic subgroup",
+      "page": "finite-abelian-hidden-subgroup-algorithms-examples",
+      "deps": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For G=Z_n and H=dZ_n, list H^⊥ and compute the uniform Fourier sample law.",
+      "proof_obligations": [
+        "Check annihilator size and the normalized character amplitudes directly."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§6, PDF pp. 33–36"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 2
+    },
+    {
+      "id": "ex-qa-hsp-common-kernel-recovery",
+      "kind": "example",
+      "title": "Common-kernel subgroup recovery",
+      "page": "finite-abelian-hidden-subgroup-algorithms-examples",
+      "deps": [
+        "alg-qa-finite-abelian-hidden-subgroup-reconstruction"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Take a small product of cyclic groups and show how sampled characters cut the initial candidate subgroup down to H.",
+      "proof_obligations": [
+        "Compute each kernel and its index; demonstrate the implicit output representation."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-finite-cyclic-discrete-logarithm-problem",
+      "kind": "definition",
+      "title": "Finite cyclic discrete-logarithm problem and costed encoding",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "def-qa-finite-abelian-hidden-subgroup-problem",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-controlled-unitary-access",
+        "def-qc-coherent-function-oracle"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input a cyclic group G=<g> of known order q≥2, x∈G, a unique fixed-length element encoding, and supplied reversible group multiplication/equality circuits or explicitly costed group-operation oracles. Output the unique a∈{0,…,q−1} with g^a=x.",
+      "proof_obligations": [
+        "State known order, generator promise, encoding injectivity, reversible operation semantics and output convention.",
+        "Do not claim efficient implementation for every abstract finite cyclic group.",
+        "Separate function-oracle, group-operation, gate and classical bit costs."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root finite cyclic group/order and modular inverse suppliers support the mathematical contract; no universal encoding cost supplier exists."
+      ],
+      "unresolved_obligations": [
+        "Any concrete group family needs its own reversible multiplication and equality circuits with bit/gate costs."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 3
+    },
+    {
+      "id": "alg-qa-cyclic-group-power-evaluation",
+      "kind": "algorithm",
+      "title": "Costed coherent evaluation of cyclic group powers",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "def-qa-finite-cyclic-discrete-logarithm-problem",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-controlled-unitary-access",
+        "def-qc-coherent-function-oracle",
+        "alg-qc-reversible-embedding",
+        "thm-qc-reversible-embedding-cost",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-register-and-computational-basis",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Given q, fixed encodings of g,x and a controlled reversible group multiplication circuit, precompute g^(2^j),x^(2^j) for j<ceil(log₂q), initialize an identity accumulator, and conditionally multiply by each constant according to the exponent bits u,v to compute g^u x^v into a fresh target.",
+      "proof_obligations": [
+        "Show repeated squaring and conditional multiplication produce the required value for every exponent in [0,q).",
+        "Use fresh-target compute-copy-uncompute embedding and prove all scratch registers return to zero.",
+        "Charge O(log q) group-operation calls and O(log q C_G) arithmetic gates per function evaluation, plus precomputation and output encoding.",
+        "State that a direct coherent function oracle is one query only when explicitly supplied; it does not erase implementation cost."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32; cyclic DLP oracle and exponentiation"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§5, PDF pp. 20–24; repeated-squaring group arithmetic"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QC10 reversible embedding cost is a reserved interface; its fresh-target X/CNOT and fanout conditions apply.",
+        "No existing root item provides a generic finite cyclic group multiplication circuit."
+      ],
+      "unresolved_obligations": [
+        "Concrete finite group encodings and operation costs must be supplied per group family."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 5
+    },
+    {
+      "id": "lem-qa-cyclic-dlp-hidden-subgroup",
+      "kind": "lemma",
+      "title": "Cyclic discrete logarithm hides a rank-one subgroup",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "def-qa-finite-cyclic-discrete-logarithm-problem"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For x=g^a, the function f(u,v)=g^u x^v on Z_q×Z_q satisfies f(u,v)=f(u',v') iff (u−u',v−v') lies in H=<(-a,1)>.",
+      "proof_obligations": [
+        "Rewrite equality as g^(u−u'+a(v−v'))=e.",
+        "Use that g has exact order q, so equality is equivalent to u−u'+a(v−v')≡0 mod q.",
+        "Show the solution kernel is exactly the cyclic subgroup generated by (-a,1), with q elements."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Finite cyclic group order characterization is a published root supplier."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 6
+    },
+    {
+      "id": "lem-qa-cyclic-dlp-annihilator-equation",
+      "kind": "lemma",
+      "title": "Fourier annihilator equation for cyclic discrete logarithm",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "lem-qa-cyclic-dlp-hidden-subgroup",
+        "def-qa-normalized-finite-abelian-fourier-transform",
+        "def-qa-finite-abelian-subgroup-annihilator",
+        "thm-qa-finite-abelian-dual-character-orthogonality"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the character χ_(c,d)(u,v)=exp(2πi(cu+dv)/q), membership in H^⊥ is equivalent to d≡ac mod q; a uniform annihilator sample therefore has uniform c∈Z_q.",
+      "proof_obligations": [
+        "Evaluate χ_(c,d) on the generator (-a,1).",
+        "Use that H is generated by that element and the finite abelian sample law is uniform on H^⊥.",
+        "Show c↦(c,ac) is a bijection from Z_q to H^⊥."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA05 dual-character orthogonality and QA10 uniform annihilator sample theorem provide exact Fourier law; sign convention is checked against QA05 negative-sign transform."
+      ],
+      "unresolved_obligations": [
+        "QA05 dual orthogonality and QA10 sample-law proof are pending integration."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 8
+    },
+    {
+      "id": "alg-qa-finite-cyclic-discrete-logarithm",
+      "kind": "algorithm",
+      "title": "Finite cyclic discrete logarithm by Fourier sampling",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "def-qa-finite-cyclic-discrete-logarithm-problem",
+        "alg-qa-cyclic-group-power-evaluation",
+        "lem-qa-cyclic-dlp-hidden-subgroup",
+        "lem-qa-cyclic-dlp-annihilator-equation",
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "def-qa-normalized-finite-abelian-fourier-transform",
+        "thm-qa-finite-abelian-fourier-transform-is-unitary",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input a promised cyclic DLP instance (G,g,x,q) and 0<δ<1. Set t=ceil((1+log₂q)ln(1/δ)); repeat: obtain one QA10 Fourier sample (c,d), skip nonunits c, compute a=d c^(−1) mod q by extended Euclid, verify g^a=x, and return verified a. After t samples return FAIL if no verified value.",
+      "proof_obligations": [
+        "Prove the hidden subgroup is generated by (−a,1), and its annihilator samples satisfy d=ac mod q.",
+        "Specify one coherent f query per sample and explicit construction from group operations by repeated squaring.",
+        "Use exact modular inverse and verification; no classical extraction is free.",
+        "Use the declared t and the QA10 sample success lower bound to derive failure at most δ by (1−p)^t≤exp(−pt)."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§5, PDF pp. 20–24; finite cyclic and elliptic DLP procedures"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QA10 sample procedure provides one finite abelian Fourier sample; root Bezout/extended Euclid and unit criterion supply modular inverse facts."
+      ],
+      "unresolved_obligations": [
+        "Concrete cost requires supplied group multiplication and QFT circuits."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost",
+      "kind": "theorem",
+      "title": "Finite cyclic discrete-log correctness, success and costs",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "alg-qa-finite-cyclic-discrete-logarithm",
+        "def-qa-finite-cyclic-discrete-logarithm-problem",
+        "lem-qa-cyclic-dlp-annihilator-equation",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+        "lem-qa-totient-ratio-logarithmic-lower-bound",
+        "thm-bezout-identity",
+        "cor-extended-euclidean-bezout-coefficients"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every promised cyclic DLP instance, the output is always verified; each Fourier sample succeeds with probability φ(q)/q≥1/(1+log₂q). After t=ceil((1+log₂q)ln(1/δ)) samples the exact answer is returned with probability at least 1−δ. Costs: O(log q(1+ln(1/δ))) direct coherent f queries, O(log²q(1+ln(1/δ))) group-operation queries, O((log²q C_G+log³q)(1+ln(1/δ))) gates for multiplication cost C_G and supplied exact cyclic QFT/uniform preparation, and O((log²q T_G+log⁴q)(1+ln(1/δ))) bit operations for supplied group-operation bit cost T_G, including O(log³q) schoolbook modular-inverse work and verification.",
+      "proof_obligations": [
+        "Characters annihilating (−a,1) are exactly (c,ac); c is uniform in Z_q.",
+        "The unit probability is φ(q)/q; a unit c gives the unique a=dc^(−1), and group equality verification enforces correctness.",
+        "Bound repetition by (1−p)^t≤exp(−pt).",
+        "Count each f evaluation and verification as O(log q) group multiplications and each sample's product QFT/preparation as O(log²q) gates only under a supplied circuit with that cost; count Euclid separately."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§6, PDF pp. 57–64"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/9508027",
+          "locator": "§5, PDF pp. 20–24"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Published Euler product, cyclic generator count, unit criterion, Bezout and Euclidean algorithm support success and inverse calculations."
+      ],
+      "unresolved_obligations": [
+        "Theorem is conditional on efficient uniform element encodings, group operations, and QFT implementation; no generic group gate bound is asserted."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 12
+    },
+    {
+      "id": "def-qa-finite-abelian-hidden-shift-problem",
+      "kind": "definition",
+      "title": "Finite abelian hidden-shift promise",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "def-qa-finite-abelian-hidden-subgroup-problem",
+        "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+        "def-qc-coherent-function-oracle"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input a finite abelian group A in explicit coordinates, injective functions f,g:A→S through coherent oracles, and the promise of a unique s∈A such that f(a)=g(a+s) for every a. Output s.",
+      "proof_obligations": [
+        "Specify injectivity and uniqueness, query model, output encoding, and group coordinate operations.",
+        "Keep general group size/output-length assumptions explicit for complexity claims."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32 and §13, PDF pp. 63–66"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0302112",
+          "locator": "§§6–7, PDF pp. 8–11; hidden-shift relation and generalized dihedral group"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Finite abelian group structure theorem is published; coherent oracle remains a reserved QC interface."
+      ],
+      "unresolved_obligations": [
+        "For infinite finitely generated groups, truncation and output-length assumptions require separate contracts; this definition is finite only."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-hidden-shift-generalized-dihedral-reduction",
+      "kind": "theorem",
+      "title": "Hidden shift as generalized-dihedral hidden subgroup",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "def-qa-finite-abelian-hidden-shift-problem",
+        "def-qa-finite-abelian-hidden-subgroup-problem"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For A finite abelian and shift s, let D_A=A⋊Z₂ have multiplication (a,b)(a',b')=(a+(-1)^b a',b+b'). Define F(a,0)=f(a), F(a,1)=g(a). Then F hides the right reflection subgroup H=< (s,1) >; recovering H recovers s.",
+      "proof_obligations": [
+        "Verify right multiplication by (s,1) pairs (a,0) with (a+s,1) and back.",
+        "Use injectivity and the shift identity to prove these are exactly equal-value pairs, hence precisely the right cosets.",
+        "Prove the reflection subgroup parameter uniquely determines s.",
+        "Count the generalized-dihedral function query as one selected f/g oracle query and charge all implementation costs."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0302112",
+          "locator": "Proposition 6.1 and §7, PDF pp. 8–11"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§13, PDF pp. 63–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "This reduction is local group algebra and does not rely on a nonabelian Fourier theorem or a physical premise."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 7
+    },
+    {
+      "id": "lem-qa-dihedral-sieve-pair-combination",
+      "kind": "lemma",
+      "title": "Dihedral hidden-state pair combination",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For |ψ_k⟩=(|0⟩+exp(2πiks/N)|1⟩)/√2 and |ψ_ℓ⟩, apply CNOT from the first qubit to the second and measure the second. Each outcome has probability 1/2 and leaves the first qubit in |ψ_(k+ℓ)⟩ or |ψ_(k−ℓ)⟩, with the sign determined by the outcome.",
+      "proof_obligations": [
+        "Expand the four-term product state, apply the CNOT basis map, and condition on the measured target bit.",
+        "Check outcome normalization, sign and phase convention, including k=ℓ and k=0 edge cases."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0302112",
+          "locator": "§3, PDF pp. 2–3; pair extraction"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§13, PDF pp. 63–66; sieve overview"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QC circuit semantics and projective measurement are reserved; the two-qubit calculation is local."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 6,
+      "local_order": 2
+    },
+    {
+      "id": "alg-qa-dihedral-hidden-subgroup-sieve",
+      "kind": "algorithm",
+      "title": "Power-of-two dihedral hidden-subgroup sieve",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "thm-qa-hidden-shift-generalized-dihedral-reduction",
+        "lem-qa-dihedral-sieve-pair-combination",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-coherent-function-oracle",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-register-and-computational-basis",
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input a reflection oracle for D_(2^n), with D_N=<x,y | x^N=y²=1, yxy=x^(−1)> and H=<yx^s>; for N≤4, query all group elements and identify the reflection pattern directly. For n≥3 set m=ceil(√(n−1)) once and keep this m through the recursion. At a recursive modulus 2^r, create L0=3·2^(3m) coset samples using one hiding-oracle query each; Fourier transform the cyclic coordinate and measure labels k to obtain known qubit states ψ_k. Set t_r=ceil((r−1)/m)≤m. At stage j=0,…,t_r−1, labels in L_j are divisible by 2^(mj); set w_j=min(m,r−1−mj), pair a maximal set of disjoint labels whose quotients k/2^(mj) agree modulo 2^(w_j), apply the CNOT pair-combiner, and retain only difference outcomes ψ_(k−ℓ), which gain w_j trailing zeroes. Since Σ_j w_j=r−1, the final labels are divisible by 2^(r−1); if label 2^(r−1) occurs, measure its state in the ± basis to recover s mod 2 (+ for even, − for odd). Choose F0=<x²,y> for even s or F1=<x²,yx> for odd s, rescale the slope to that subgroup, and recurse; if the target label is absent, return FAIL.",
+      "proof_obligations": [
+        "Prove the direct-query base case identifies the reflection parameter.",
+        "Verify the global m=ceil(√(n−1)) and each positive t_r=ceil((r−1)/m)≤m schedule; the shortened final width makes the stage widths sum exactly r−1 without overshooting the parity label.",
+        "Use maximal disjoint matching and the pair-combiner lemma to prove each list invariant and label update.",
+        "Prove the target state phase is (−1)^s; verify the ± outcome and the two index-two subgroups/rescaled slope conventions.",
+        "Give the stage list-size recurrence, oracle/query count, list-processing bits/gates, workspace and error probability for the locally specified final-width variant; no polynomial-time claim."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0302112",
+          "locator": "Algorithm 1 and §3, PDF pp. 2–4; list invariant and recursion"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§13, PDF pp. 63–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Kuperberg's full power-of-two algorithm and proof are read; general-N algorithm is only outline-level.",
+        "The algorithm's measurement and coherent-oracle costs require QC interfaces, not physical postulates."
+      ],
+      "unresolved_obligations": [
+        "Complete exact list-size and pairing contract and proof locally before using as an active algorithm.",
+        "Prove the source list-size/Chernoff recurrence still yields the stated resource and failure bounds with the locally specified final shortened matching width."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-dihedral-sieve-scope",
+      "kind": "theorem",
+      "title": "Kuperberg dihedral hidden-subgroup scope and resource claim",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [
+        "alg-qa-dihedral-hidden-subgroup-sieve",
+        "lem-qa-dihedral-sieve-pair-combination",
+        "def-qa-finite-abelian-hidden-shift-problem",
+        "thm-qa-hidden-shift-generalized-dihedral-reduction",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the locally specified shortened-final-width sieve on D_(2^n) with a hidden reflection, the target resource bound is 2^(O(√n)) oracle queries, computation time and quantum space. For original exponent n≥3 set m=ceil(√(n−1)) once and retain it through recursion; at each modulus 2^r use t_r=ceil((r−1)/m)≤m and L0=3·2^(3m) coset samples. The source list-size/Chernoff analysis gives per-sieve failure at most m·exp(−2^(m/3−1)) for full-width stages; the proposed shortened final matching width must be checked locally. If that bound holds, a union bound over at most n recursive stages gives total failure at most min(1,nm·exp(−2^(m/3−1))). This is subexponential, not polynomial.",
+      "proof_obligations": [
+        "Reprove the sieve state-combination, list-size recurrence, Chernoff bounds, parity recovery and recursive subgroup restriction, including the shortened final stage and the per-sieve failure bound.",
+        "Specify quantum workspace, oracle-query, classical list-processing and gate costs independently.",
+        "Limit the imported theorem to the fully written power-of-two case; state arbitrary-N and arbitrary finite-abelian extensions separately as unproved authoring obligations."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0302112",
+          "locator": "Theorems 1.1 and 3.1, §§3–5, PDF pp. 1–7; general hidden shift §7, PDF pp. 9–11"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§13, PDF pp. 63–66; Kuperberg sieve summary"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Kuperberg's power-of-two proof includes the Chernoff sieve argument; the arbitrary-N and generalized abelian proof is outline-level in the fully read source."
+      ],
+      "unresolved_obligations": [
+        "No local theorem proof has yet been authored; do not treat the cited paper as an unproved active-library fallback.",
+        "No general polynomial-time hidden-shift or nonabelian-HSP result is claimed."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 11
+    },
+    {
+      "id": "rem-qa-number-theoretic-extension-scope",
+      "kind": "remark",
+      "title": "Scope of number-field and elliptic-curve extensions",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms",
+      "deps": [],
+      "justified_by": [],
+      "statement_or_definition": "The finite cyclic DLP is the required core. Number-field/Pell/class-group discussions in lecture notes and elliptic-curve DLP are context only in this draft. Proos–Zalka and Childs state elliptic-curve associativity without proving it; no EC algorithm/resource claim enters the core inventory.",
+      "proof_obligations": [
+        "For any future EC algorithm add locally proved nonsingular-cubic group law and associativity, point/field encoding, reversible addition, subgroup-order, and gate/bit-cost suppliers.",
+        "Treat the cited missing associativity proof as an established-result authoring obligation, not an open problem.",
+        "Do not claim classical field arithmetic, ideal reduction, number-field representations or output recovery for free."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0301141",
+          "locator": "§§2–4 and Appendix, PDF pp. 2–29; associativity referred externally and success appendix sketched"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§7–9, PDF pp. 37–49; elliptic and number-field surveys with omitted algebraic proofs"
+        }
+      ],
+      "existing_supplier_checks": [
+        "No root EC associativity or number-field reduced-ideal proof supplier was found in the audited interface."
+      ],
+      "unresolved_obligations": [
+        "Elliptic and number-field algorithm branches remain omitted pending complete algebraic and cost suppliers."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-cyclic-discrete-log-fourier-sample",
+      "kind": "example",
+      "title": "A composite-order cyclic discrete-log Fourier sample",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms-examples",
+      "deps": [
+        "alg-qa-finite-cyclic-discrete-logarithm",
+        "thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Choose a cyclic group of composite order q with x=g^a; compute an annihilator sample (c,d), test gcd(c,q), and recover a=d c^(−1) when c is a unit.",
+      "proof_obligations": [
+        "Check the subgroup/sign convention and verify the recovered exponent by group equality."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§5, PDF pp. 29–32"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 2
+    },
+    {
+      "id": "ex-qa-hidden-shift-dihedral-cosets",
+      "kind": "example",
+      "title": "Hidden-shift right cosets in a generalized dihedral group",
+      "page": "period-hidden-shift-and-number-theoretic-algorithms-examples",
+      "deps": [
+        "thm-qa-hidden-shift-generalized-dihedral-reduction"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a small cyclic A, list the pairs (a,0)~(a+s,1) and verify the semidirect-product multiplication and reflection sign.",
+      "proof_obligations": [
+        "Check both right multiplication directions and distinguish right from left cosets."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0302112",
+          "locator": "§6, PDF pp. 8–9"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 1
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "33",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "alg-qa-shor-uniform-residue-sampler",
+      "model": "gpt-6-luna",
+      "context_sha256": "fef0e0cd102a4ec4e67f801153039d96752c8353e76837db61183a3184e7f626",
+      "outcome": "false_positive",
+      "reason": "False positive: SCHEMA.md separates algorithm instructions from proved properties. The existing same-page thm-qa-shor-residue-sampler-correct-and-cost proves P(output a)=2^{-h}/(M/2^h)=1/M, nontermination probability lim_j(1-M/2^h)^j=0, and expected block count 2^h/M<=2. The algorithm specifies its input, fair-bit law, exact rejection loop and output; no additional prerequisite or item edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qa-even-order-square-root",
+      "model": "gpt-6-luna",
+      "context_sha256": "32ad24a30769cd2456518f30b045b9b1dfd623a889eeb2c549c191313494f90d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal notation/type defect: the Given declared x to be a residue class but then applied the integer class constructor [x^(q/2)]_N to it. Repaired only Given and proof step 2.1 by taking integer x with unit class [x]_N and applying order characterisation to that class. Squaring gives [x^q]_N=[1]_N; the true-order case excludes an identity half-power since 0<q/2<q. The original Statement is byte-identical; q=2 and N=2 boundaries remain sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-shor-factoring-success",
+      "model": "gpt-6-luna",
+      "context_sha256": "44d59bb41f1568f473fa65f3799c89b59f7a3c0a2505233202dbbaf34ba8d9e3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed fatal dependency-citation defect: F7 dropped the cited definition's finite-space hypothesis and step 3.1 invoked it on infinite tape events. Repaired by constructing each attempt's finite terminal space (residue a, finite measurement transcript y) with normalized weights mu_a(y)/(N-1), restricting F7 to finite spaces, and applying finite coordinate independence to T terminal records. Unit conditioning now occurs only in the finite space; its good-unit mass >=1/2 and pointwise exact-order bound >=3/4 imply per-attempt success >=3/8, including immediate nonunit success. A finite union of null sampler nontermination events has zero mass. The Statement and CC/DC assumptions are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-qa-shor-uniform-residue-sampler",
+      "disposition": "unaffected",
+      "post_sha256": "31ff894e7dccf1cdd72a7f1550abb150c988d3706cde063683945030e673cf0d",
+      "review_context_sha256": "21e5242de0644c8af5505ffbf1716aba716ae842edc0dd160773f22933567edb",
+      "reason": "False positive: SCHEMA.md separates algorithm instructions from proved properties. The existing same-page thm-qa-shor-residue-sampler-correct-and-cost proves P(output a)=2^{-h}/(M/2^h)=1/M, nontermination probability lim_j(1-M/2^h)^j=0, and expected block count 2^h/M<=2. The algorithm specifies its input, fair-bit law, exact rejection loop and output; no additional prerequisite or item edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qa-even-order-square-root",
+      "disposition": "repaired",
+      "post_sha256": "e3d4fc2377303cd412bb06ea92da78b56e647049edb14a769ff574df80c95533",
+      "review_context_sha256": "3719d495589f5cdd92abdeff15a118f8dc94fa4ceecd25292b28cdabdde09fab",
+      "reason": "Confirmed nonfatal notation/type defect: the Given declared x to be a residue class but then applied the integer class constructor [x^(q/2)]_N to it. Repaired only Given and proof step 2.1 by taking integer x with unit class [x]_N and applying order characterisation to that class. Squaring gives [x^q]_N=[1]_N; the true-order case excludes an identity half-power since 0<q/2<q. The original Statement is byte-identical; q=2 and N=2 boundaries remain sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-shor-factoring-success",
+      "disposition": "repaired",
+      "post_sha256": "bec9f250128f94b36989e9c03dbc54f4c158073ebee74475aa40a880a3654c39",
+      "review_context_sha256": "1cea5e7fe8898e810b1edc6cb672768b4e3568b13484d58cf7a94d79b9dd2a26",
+      "reason": "Confirmed fatal dependency-citation defect: F7 dropped the cited definition's finite-space hypothesis and step 3.1 invoked it on infinite tape events. Repaired by constructing each attempt's finite terminal space (residue a, finite measurement transcript y) with normalized weights mu_a(y)/(N-1), restricting F7 to finite spaces, and applying finite coordinate independence to T terminal records. Unit conditioning now occurs only in the finite space; its good-unit mass >=1/2 and pointwise exact-order bound >=3/4 imply per-attempt success >=3/8, including immediate nonunit success. A finite union of null sampler nontermination events has zero mass. The Statement and CC/DC assumptions are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "id": "alg-qa-shor-uniform-residue-sampler",
+      "classification": "false_positive",
+      "status": "dismissed",
+      "reason": "The existing separate same-page sampler theorem proves exact uniformity and almost-sure termination; the algorithm instructions need no mathematical repair."
+    },
+    {
+      "ledger": "defect",
+      "id": "lem-qa-even-order-square-root",
+      "classification": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Confirmed nonfatal notation/type defect: the Given declared x to be a residue class but then applied the integer class constructor [x^(q/2)]_N to it. Repaired only Given and proof step 2.1 by taking integer x with unit class [x]_N and applying order characterisation to that class. Squaring gives [x^q]_N=[1]_N; the true-order case excludes an identity half-power since 0<q/2<q. The original Statement is byte-identical; q=2 and N=2 boundaries remain sound."
+    },
+    {
+      "ledger": "defect",
+      "id": "thm-qa-shor-factoring-success",
+      "classification": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "Confirmed fatal dependency-citation defect: F7 dropped the cited definition's finite-space hypothesis and step 3.1 invoked it on infinite tape events. Repaired by constructing each attempt's finite terminal space (residue a, finite measurement transcript y) with normalized weights mu_a(y)/(N-1), restricting F7 to finite spaces, and applying finite coordinate independence to T terminal records. Unit conditioning now occurs only in the finite space; its good-unit mass >=1/2 and pointwise exact-order bound >=3/4 imply per-attempt success >=3/8, including immediate nonunit success. A finite union of null sampler nontermination events has zero mass. The Statement and CC/DC assumptions are unchanged."
+    },
+    {
+      "ledger": "defect",
+      "id": "lem-qa-crt-sign-vector-factorization",
+      "classification": "confirmed_nonfatal",
+      "status": "owner_route_required",
+      "route": "frontier owner; outside this assignment",
+      "affected_use": "items/lem-qa-crt-sign-vector-factorization.md, Fact F3 and proof step 1.1",
+      "reason": "Verified the existing Step-4 digest concern against F3: it states g^t=1 iff M divides t for a cyclic group of order M without saying g is a generator. This is false for the identity in C2 at t=1. Step 1.1 actually chooses generators g_i, so its use and the consuming factoring proofs remain sound. Minimal repair: qualify g as a generator in F3; no assigned item repair depends on changing that item. No edit or adjudication of the unassigned carrier was made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Reviewed in assigned dependency order: sampler, even-order lemma, factoring success. The sampler remains byte-identical. Only the two assigned proof-bearing items and their own contract entries were repaired; historical evidence and verification stamps were not rewritten. No published defects or published-ledger changes were discovered.",
+    "The elementary rejection-sampling, finite-probability and group-order arguments are familiar; no external source consultation is claimed. Read the complete existing sampler proof, modular-order algorithm and success proof, order-to-factor success/correctness proofs, residue-gcd proof, relevant preprocessing proof, local modular/group and finite/countable probability supplier interfaces, and owning page interfaces.",
+    "After precheck requested canonical phases, the lemma now uses 1.1/2.1/3.1. Its integer representative and unit class remain distinct; squaring establishes the general even-exponent result, and order characterisation excludes the identity only for a true order. Its contract was synchronized under the shared-write lock. Hashes were rebound immediately after this final review.",
+    "After the lemma renumbering, re-examined success F3/F5 through order-to-factor success F5 and correctness F3: they consume the unchanged half-power conclusions, without proof-step references. The probability repair remains sound. Its review-context command was then rerun; returned hashes were unchanged. This is local repair review, not an independent judgment of the authored repair.",
+    "Direct comparison with frozen Statement/Definition hashes is unchanged for all three assigned items: sampler 946fdd85ce76e7fa473dfa0c9ae6746b83a1c2d85fa9b4008fd2b50f1ab5991a; lemma 75d6e840e505285639d1d90ce36e3a18f0bb3540cb80727894bcec5253f4fec7; success 33792da010310d6e31edfb63c5ee4afd5d2919d0bbaddd392b51162edf5d65c9. Accordingly no interface event, new prerequisite, downstream inventory or separate consumer maintenance is triggered.",
+    "Final focused check: node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-33.proof-contracts.json --strict --items lem-qa-even-order-square-root,thm-qa-shor-factoring-success exited 0: 0 errors, 0 warnings, 2/2 items checked.",
+    "Final focused check: node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-even-order-square-root.md items/thm-qa-shor-factoring-success.md --json exited 0: 2 checked, 0 failed. Earlier scoped check also confirmed the algorithm is not applicable to phase-proof precheck.",
+    "Final focused check: node tools/rendercheck.mjs items/lem-qa-even-order-square-root.md items/thm-qa-shor-factoring-success.md --json exited 0: 2 checked, no errors or warnings. The earlier three-item rendercheck also passed for the unchanged sampler.",
+    "Required final item-layout command: node tools/proof-layout.mjs items/lem-qa-even-order-square-root.md items/thm-qa-shor-factoring-success.md exited 0: 2 items, 7 steps, 0 defects. No item edits occurred afterward.",
+    "All three assigned rejected tuples are resolved, and no assigned mathematical uncertainty remains. No gate diagnostics were assigned. The unassigned CRT fact qualification is proposed separately for the frontier owner in ledger_updates; its actual generator application is sound."
+  ],
+  "supporting_evidence": {
+    "research/quantum-computing-algorithms-60-2026-10-15-batch-33.proof-contracts.json": "177a555cd722883e591f18e57c4f4bf5914eccccceffbba3c8bffb8d1492b381"
+  }
+}

@@ -1,0 +1,2112 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-phase-estimation-geometric-sum",
+    "lem-qa-phase-estimation-sine-chord-bounds",
+    "lem-qa-phase-estimation-outcome-kernel",
+    "thm-qa-phase-estimation-access-cost",
+    "lem-qa-phase-estimation-nearest-grid-bound",
+    "lem-qa-phase-estimation-tail-bound",
+    "thm-qa-phase-estimation-exact-grid",
+    "thm-qa-phase-estimation-superposition-law",
+    "thm-qa-phase-estimation-success-and-tail",
+    "ex-qa-exact-phase-estimation",
+    "ex-qa-phase-estimation-nearest-grid-and-tail"
+  ],
+  "contracts": {
+    "lem-qa-phase-estimation-geometric-sum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-integer-powers",
+          "source_section": "Definition",
+          "quote": "Fix $z\\in\\mathbb C$. Apply [[thm-recursion]] to the set $\\mathbb C$, the\ninitial value $1$, and the function $w\\mapsto wz$. This defines the natural\npowers uniquely by\n$$ z^0=1,\\qquad z^{n+1}=z^nz\\quad(n\\in\\mathbb N). $$\n\nLet $\\jmath\\colon\\mathbb N\\to\\mathbb Z$ be the embedding of\n[[lem-nat-embeds-int]]. For an integer $r\\ge0$, that lemma gives a unique\n$n\\in\\mathbb N$ with $r=\\jmath(n)$; define $z^r:=z^n$. If $r<0$ and $z\\ne0$,\nthere is a unique $n\\in\\mathbb N$ with $n\\ge1$ and $-r=\\jmath(n)$; define\n$$ z^r:=(z^n)^{-1}. $$\nThe inverse exists because $\\mathbb C$ is a field by\n[[thm-complex-numbers-form-a-field]]. Thus nonnegative integer powers are\ndefined for every $z$, while negative integer powers are defined exactly when\n$z\\ne0$; in particular $0^0=1$ and no negative power of $0$ is defined. The\ninteger and its unique natural representative are never conflated.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $n=0$, the sum is empty, so $(1-z)S_0(z)=0=1-z^0$ by [F1] and [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $n\\in\\mathbb N$ and assume $(1-z)S_n(z)=1-z^n$; this is the induction hypothesis.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and [F2], $(1-z)S_{n+1}=(1-z)S_n+(1-z)z^n=(1-z^n)+(z^n-z^{n+1})=1-z^{n+1}$, using distributivity in [F3] and the induction hypothesis [step 1.2]. Thus [F5] proves $(1-z)S_n(z)=1-z^n$ for every $n$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.2",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $z=1$, every summand is $1$, so [F1] gives $S_0(1)=0$ and $S_{n+1}(1)=S_n(1)+1$. At $n=0$, this equals $\\iota_{\\mathbb C}(0)=0$ by [F4]; if $S_n(1)=\\iota_{\\mathbb C}(n)$, the two successor recursions give $S_{n+1}(1)=S_n(1)+1=\\iota_{\\mathbb C}(n)+1=\\iota_{\\mathbb C}(n+1)$. Induction [F5] proves $S_n(1)=\\iota_{\\mathbb C}(n)$ for every $n$. If $z\\ne1$, then $1-z\\ne0$, so divide the identity from step 2.1 by $1-z$ in the field [F3] to obtain $S_n(z)=(1-z^n)/(1-z)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the QPE specialization, repeated use of [F6] and the power recursion [F2] gives $z^Q=\\exp(2\\pi iQ(\\theta-y/Q))=\\exp(2\\pi i(Q\\theta-y))$. Since $y\\in\\mathbb Z$, [F6] gives $\\exp(-2\\pi iy)=1$, hence $z^Q=\\exp(2\\pi iQ\\theta)$. The same kernel statement gives $z=1$ exactly when $2\\pi i(\\theta-y/Q)\\in2\\pi i\\mathbb Z$, equivalently $\\theta-y/Q\\in\\mathbb Z$, or $Q\\theta-y\\in Q\\mathbb Z$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty sum S_0 is the base case in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "z=0 is permitted in the induction identity in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The successor recursion covers n=1 in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The z=1 branch and the nonzero-denominator branch are separated in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both n=0 and every successor n are covered in steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite initial sum is handled by its recursion in step 1.1; no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The implication z=1 ⇒ Qθ−y∈QZ follows from the exponential kernel in step 4.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication follows from the same exponential-kernel equivalence in step 4.1."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "lem-qa-phase-estimation-sine-chord-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma$ be the unique smallest positive zero of cosine supplied by [[thm-cosine-has-a-smallest-positive-zero]]. Define\n$$\\pi:=2\\gamma.$$\n\nThus $\\pi>0$ and $\\pi/2=\\gamma$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n\n$$|\\sin u-\\sin v|\\le|u-v|,$$\n\nand\n\n$$|\\cos u-\\cos v|\\le|u-v|.$$\n\nThus sine and cosine are Lipschitz functions on $\\mathbb R$, each with\nLipschitz constant $1$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $g(t)=\\sin t-2t/\\pi$ on $[0,\\pi/2]$. By [F1], [F3], and [F4], $g(0)=g(\\pi/2)=0$ and $g'(t)=\\cos t-2/\\pi$ on the interior.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $g'$ is nonincreasing: if $s<t$, then $\\cos s\\ge\\cos t$, so $g'(s)\\ge g'(t)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $t\\in(0,\\pi/2)$. Apply [F5] on $[0,t]$ and $[t,\\pi/2]$ to obtain $a\\in(0,t)$ and $b\\in(t,\\pi/2)$ with $g(t)=t g'(a)$ and $-g(t)=(\\pi/2-t)g'(b)$. Since $a<b$, step 2.1 gives $g'(a)\\ge g'(b)$. Dividing by the positive numbers $t$ and $\\pi/2-t$, then multiplying by their product, gives $g(t)\\pi/2\\ge0$; as $\\pi>0$, $g(t)\\ge0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $0<u<1/2$, take $t=\\pi u\\in(0,\\pi/2)$ in step 3.1 to get $\\sin(\\pi u)\\ge2u$. At $u=0$ and $u=1/2$, the same inequality is equality by [F1].",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $v\\ge0$, [F6] and $\\sin0=0$ give $\\sin v=\\sin v-\\sin0\\le|\\sin v-\\sin0|\\le v$. Thus both stated inequalities hold.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns scalar inequalities on nonempty real intervals, not an empty finite object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The equality cases u=0 and v=0 are handled in steps 4.1 and 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint u=1/2 is checked in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch occurs beyond the explicit interval endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoints of [0,1/2] and v=0 are handled in steps 4.1–5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed arbitrary real inputs and no existence choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts inequalities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts inequalities, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "lem-qa-phase-estimation-outcome-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-eigenphase-estimation-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, $U:H\\to H$ a unitary, and $\\psi\\in H$ a unit vector with a promised phase $\\theta\\in[0,1)$ such that\n$$U\\psi=\\exp(2\\pi i\\theta)\\psi.$$\nFor an integer $m\\ge1$, let $Q=2^m$. The phase register is $(\\mathbb C^2)^{\\otimes m}$ with ordered computational basis indexed big-endian by\n$x=\\sum_{k=0}^{m-1}b_k2^{m-1-k}$, where $b_k\\in\\{0,1\\}$ ([[def-qc-register-and-computational-basis]], [[def-qc-ordered-bitstring-encoding]]).\nThus the wire of weight $2^j$ is $q_{m-1-j}$.\n\nThere are distinct forward-access options:\n\n1. **Controlled-power access.** The model explicitly supplies one controlled $U^{2^j}$ operation for each $j=0,\\ldots,m-1$. Each use is counted as one controlled-power query; an implementation's ordinary gate cost is recorded separately.\n2. **Single controlled-unitary access.** The model supplies calls to $C(U)=\\operatorname{diag}(I_H,U)$ in the control-first order of [[def-qc-controlled-unitary-access]]. A controlled $U^{2^j}$ may be implemented by $2^j$ sequential calls to $C(U)$; those calls are charged individually.\n\nOptional **controlled inverse-power access** is a separate capability that explicitly supplies $C(U^{-2^j})$ for each required $j$. It is not implied by either forward option. It is needed only by a consuming procedure that reverses the controlled-power portion of a coherent QPE prefix. Reversing the inverse-QFT gate list does not use $U^{-1}$.\n\nThe finite ordered-register, gate, and measurement interpretations are those of [[def-qc-circuit-syntax-and-register-order]]. The definition is an access-model promise: it does not assert that the supplied controlled powers have an efficient construction or that $\\theta$ has an exact $m$-bit expansion.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-quantum-phase-estimation",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For an integer $N\\ge1$, let $\\mathcal F_N$ be the negative-sign, $N^{-1/2}$-normalized transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Define the **cyclic quantum Fourier transform** by $\\operatorname{QFT}_N:=\\mathcal F_N^{-1}$. The inverse exists by [[thm-finite-fourier-inversion]], and its matrix on the standard basis indexed by $0,\\ldots,N-1$ is\n\n$$\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle,\\qquad 0\\le x<N.$$\n\nHere the standard-basis ket convention is the one specified by [[def-qc-dirac-notation-conversion]]. Thus the transform has the positive sign and the same $N^{-1/2}$ normalization as the inverse Fourier formula. At $N=1$ it is the identity on the one-dimensional register. In the binary specialization $N=2^n$, the circuit page writes each index in its unique base-two expansion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-exact-binary-qft-circuit-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the exact binary circuit of [[alg-qa-exact-binary-qft-circuit]] implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$: it maps each computational basis vector $|x\\rangle$, $0\\le x<2^n$, to\n\n$$2^{-n/2}\\sum_{y=0}^{2^n-1}e^{2\\pi ixy/2^n}|y\\rangle,$$\n\nwith the declared output register order. Hence its denotation is $\\operatorname{QFT}_{2^n}$ on every state. Reversing the gate list and replacing every gate by its adjoint gives the negative-sign inverse QFT with the same ideal gate count.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space; the pairing is linear in its first argument ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Write $\\mathcal L(H)$ for its complex-linear endomorphisms ([[def-vector-space-of-linear-maps]]) and let $\\Omega$ be a finite nonempty outcome set. A **finite POVM** on $H$ with outcomes $\\Omega$ is a family $E=(E_a)_{a\\in\\Omega}$ with each $E_a$ nonnegative and $\\sum_{a\\in\\Omega}E_a=I_H$; after any enumeration of $\\Omega$, these operators form the finite complete positive family of [[def-qc-finite-positive-effect-family]]. Reordering does not alter the finite sum. The complete-family lemma [[lem-qc-complete-effect-family-members-are-effects]] shows that every $E_a$ also has nonnegative complement $I_H-E_a$, so each is an effect.\n\nFor a density operator $\\rho$ on $H$ (a nonnegative operator of trace one, [[def-qc-density-operator]]), its **POVM outcome weights** are\n\n$$p_\\rho(a):=\\operatorname{tr}(\\rho E_a),\\qquad a\\in\\Omega.$$\n\nHere $\\operatorname{tr}$ is the finite-dimensional endomorphism trace ([[def-trace-of-an-endomorphism]]).\n\nThe positivity and normalization of these weights are proved in [[thm-qc-povm-probabilities-normalize]]. A POVM specifies this outcome law; it does not by itself prescribe a conditional output state.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-dirac-notation-coordinate-identity",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces with ordered\northonormal bases $E=(e_j)_{j<n}$ and $F=(f_i)_{i<m}$. Let $T:H\\to K$ be\nlinear ([[def-linear-map]]), and write $T_{ij}$ for the $(i,j)$ entry of its\nmatrix in these bases.\nThen, for every $z\\in H$,\n\n$$Tz=\\sum_{j<n}\\sum_{i<m}T_{ij}\\langle z,e_j\\rangle_{H,\\mathrm{root}}f_i, \\qquad T=\\sum_{j<n}\\sum_{i<m}T_{ij}|f_i\\rangle\\langle e_j|.$$\n\nFor $x\\in K$ and $y\\in H$, the rank-one map $|x\\rangle\\langle y|$ has\ncoordinate matrix $[x]_F[y]_E^\\dagger$, where $M^\\dagger=\\overline M^{\\mathsf T}$.\nIts amplitude satisfies\n$\\langle x|T|y\\rangle_D=\\langle Ty,x\\rangle_{K,\\mathrm{root}}$.\nAll sums are empty when an index dimension is zero, and the identities include\nthose cases.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then\n\n$$\\sum_{x=0}^{N-1}e^{2\\pi i(k-\\ell)x/N}=\\begin{cases}N,&k\\equiv\\ell\\pmod N,\\\\\\\\ 0,&k\\not\\equiv\\ell\\pmod N.\\end{cases}$$\n\nAt $N=1$ the congruence holds for all $k,\\ell$ and the sum is $1$. The sum is the finite sum of the complex family $x\\mapsto e^{2\\pi i(k-\\ell)x/N}$ over the von Neumann natural $N=\\{0,\\dots,N-1\\}$ ([[def-finite-sum-in-a-commutative-monoid]]), and $N$ on the right is the natural number $N$ read in $\\mathbb C$ as the additive multiple $N\\cdot1_{\\mathbb C}$, that is, the value at $N$ of the canonical embedding $\\mathbb N\\to\\mathbb C$ ([[def-canonical-natural]], [[lem-integer-multiples-agree-with-canonical-natural]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Before the controlled powers, the state is $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ by [F2]. Write $x=\\sum_j c_j2^j$, where $c_j$ is the bit at wire $q_{m-1-j}$ by [F1]. The controlled operation on that wire applies $U^{2^j}$ exactly when $c_j=1$; multiplying the eigenvalues gives $\\prod_j\\exp(2\\pi i\\theta c_j2^j)=\\exp(2\\pi i\\theta x)$. Hence the state after the controlled-power stage is $Q^{-1/2}\\sum_x\\exp(2\\pi i\\theta x)|x\\rangle\\otimes\\psi$. Reading this gate sequence as an operator on the ordered register uses [F9].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inverse QFT matrix coefficient from input $x$ to output $y$ is $Q^{-1/2}\\exp(-2\\pi ixy/Q)$, by [F3] and the adjoint convention. Applying it to step 1.1 gives $\\chi=\\sum_{y=0}^{Q-1}a_y|y\\rangle\\otimes\\psi$, where $a_y=Q^{-1}\\sum_{x=0}^{Q-1}\\exp(2\\pi ix(\\theta-y/Q))$. The sign is positive in the eigenphase and negative in the inverse-QFT coefficient, yielding the displayed difference $\\theta-y/Q$. The operator ordering is the one in [F9].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vector $\\chi$ is normalized. Indeed, expand the finite squared moduli using [F7] and interchange the finite sums: $\\sum_y|a_y|^2=Q^{-2}\\sum_{x,x'}\\exp(2\\pi i(x-x')\\theta)\\sum_y\\exp(-2\\pi i(x-x')y/Q)$. By [F6], the inner sum is $Q$ when $x=x'$ and $0$ otherwise, because $0\\le x,x'<Q$; therefore $\\sum_y|a_y|^2=Q^{-2}Q\\cdot Q=1$. Since $\\|\\psi\\|=1$ and the $|y\\rangle$ are orthonormal, $\\|\\chi\\|=1$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The ray-projector theorem [F5] makes $\\rho=|\\chi\\rangle\\langle\\chi|$ a density operator. The phase-register projective outcome has projector $P_y$ from [F4], so it extracts $a_y|y\\rangle\\otimes\\psi$. By [F5] and [F8], $\\operatorname{tr}(\\rho P_y)=\\operatorname{tr}(P_y\\rho)=\\operatorname{tr}(|P_y\\chi\\rangle\\langle\\chi|)=\\langle P_y\\chi,\\chi\\rangle_{\\rm root}=\\|P_y\\chi\\|^2=|a_y|^2$, where the penultimate equality uses $P_y=P_y^*=P_y^2$. The outcome law in [F4] therefore gives this probability to the classical label $y$. Substituting the value of $a_y$ from step 2.1 gives exactly the displayed $P_\\theta(y)$.",
+          "step": "3.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F8",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The finite sum in the displayed law is defined for every $y,\\theta$, including when $Q\\theta$ is an integer. For its geometric-sum specialization, the denominator is zero exactly when $z=\\exp(2\\pi i(\\theta-y/Q))=1$, equivalently $Q\\theta-y\\in Q\\mathbb Z$; in every other case [[lem-qa-phase-estimation-geometric-sum]] gives the nonzero-denominator quotient. Thus the stated squared-sum law handles all phases without an undefined quotient.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm assumes m≥1, so its phase register is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exact-grid zero-denominator case is separated from the finite-sum formula in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof uses only finite sums and applies at the smallest allowed Q=2 in steps 2.1–2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The denominator-degenerate exact-grid case is handled without division in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All labels y=0,…,Q−1 and every θ∈[0,1) occur in steps 2.1–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The normalization is a finite sum over the complete label set in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The outcome formula is an equality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The outcome formula is an equality, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "thm-qa-phase-estimation-access-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-quantum-phase-estimation",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-exact-binary-qft-gate-count",
+          "source_section": "Statement",
+          "quote": "For $n\\ge0$, the exact circuit uses $n$ Hadamards, $n(n-1)/2$ controlled phase rotations, $\\lfloor n/2\\rfloor$ SWAP gates, no ancillas, and\n\n$$n+\\frac{n(n-1)}2+\\lfloor n/2\\rfloor=O(n^2)$$\n\nideal gates in the model of [[def-qa-qft-gate-cost-model]]. If every SWAP is expanded into three exact CNOTs, the circuit instead has $3\\lfloor n/2\\rfloor$ CNOTs in place of the SWAPs.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-elementary-circuit-resources",
+          "source_section": "Definition",
+          "quote": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call unless the model explicitly combines them. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-phase-estimation-geometric-sum",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under controlled-power access, the loop in [F1] invokes exactly one supplied operation for each of the $m$ indices $j=0,\\ldots,m-1$, hence exactly $m$ controlled-power queries.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under single controlled-unitary access, block multiplication gives $C(U)^r=\\operatorname{diag}(I_H,U^r)=C(U^r)$ for every natural $r$. Thus the $j$-th controlled power is implemented by $2^j$ calls, so the total is $\\sum_{j=0}^{m-1}2^j=2^m-1=Q-1$ by [F4].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The supplied power circuits contribute $\\sum_j C_j$ ordinary gates. Phase-register preparation contributes $m$ Hadamards, and the inverse QFT contributes the count in [F3]. Adding gives the displayed unitary gate count; reversing the QFT circuit changes neither its count nor the query count.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Measurement outputs one $m$-bit label. The operation model [F5] keeps query, ordinary-gate, and classical-bit costs separate; the input eigenstate's preparation is outside the theorem's stated count. Therefore the displayed formula asserts only the stated gate profile and does not infer an implementation of powers from a black-box $U$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m≥1 and counts a nonempty phase register."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At j=0 the repeated implementation uses one call; the m=1 count is included in steps 1.2 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The minimum allowed width m=1 is covered by the finite loop and formula in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No denominator or degenerate probability branch occurs in a resource count."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The loop endpoints j=0 and j=m−1 are counted in steps 1.1–1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All calls are counted by explicit finite loops and sums in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives cost equalities, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives cost equalities, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "lem-qa-phase-estimation-nearest-grid-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-circular-phase-distance",
+          "source_section": "Definition",
+          "quote": "For a real $x\\in[-1,1]$, define its circular distance to the nearest integer by\n$$d_{\\mathbb T}(x):=\\min\\{|x|,\\,1-|x|\\}.$$\nHere $|x|$ is the real absolute value and $\\min$ is the minimum of the displayed finite set ([[def-real-order]], [[def-max-min]]); existence of this finite minimum follows from [[lem-finite-set-has-max]]. Both entries lie in $[0,1]$, so the value lies in $[0,1/2]$. If $|x|\\le1/2$, the nearest integer is $0$; if $x>1/2$, it is $1$; if $x<-1/2$, it is $-1$, so the formula is the distance to the nearest integer. For phases $\\theta,\\phi\\in[0,1)$, their circular distance is $d_{\\mathbb T}(\\theta-\\phi)$; the difference belongs to $(-1,1)$, the stated domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-phase-estimation-outcome-kernel",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and let the input be an eigenvector with\n$U\\psi=\\exp(2\\pi i\\theta)\\psi$, where $\\theta\\in[0,1)$.\nFor each $y\\in\\{0,\\ldots,Q-1\\}$, the probability of measuring $y$ in the algorithm of [[alg-qa-quantum-phase-estimation]] is\n$$P_\\theta(y)=Q^{-2}\\left|\\sum_{j=0}^{Q-1}\\exp\\!\\left(2\\pi i j(\\theta-y/Q)\\right)\\right|^2.$$\nThus the finite outcome kernel is defined at every phase, including $Q\\theta\\in\\mathbb Z$; no quotient with a zero denominator is needed in this formula.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-phase-estimation-geometric-sum",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-phase-estimation-sine-chord-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $n=\\lfloor Q\\theta\\rfloor$ and $r=Q\\theta-n$, so $n\\in\\{0,\\ldots,Q-1\\}$ and $0\\le r<1$ by [F1]. If $r\\le1/2$, choose $y=n$; if $r>1/2$, choose $y=n+1$ modulo $Q$. The resulting circular distance is respectively $r/Q$ or $(1-r)/Q$, at most $1/(2Q)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A grid label $y$ has integer lifts $y+sQ$ for $s\\in\\mathbb Z$; as $y$ ranges over $\\{0,\\ldots,Q-1\\}$, these lifts range over all integers. Thus minimizing circular phase distance is the same as choosing an integer nearest to $Q\\theta=n+r$. If $r\\le1/2$, every integer $k\\le n$ is at distance at least $r$ and every $k\\ge n+1$ is at distance at least $1-r\\ge r$, so $n$ is nearest. If $r>1/2$, every $k\\le n$ is at distance at least $r>1-r$ and every $k\\ge n+1$ is at distance at least $1-r$, so $n+1$ is nearest. Every nearest label therefore has distance $d\\le1/(2Q)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix a nearest label and set $x=\\theta-y/Q$, $d=d_{\\mathbb T}(x)$. Since $x\\in(-1,1)$, the definition of $d$ gives an integer $\\ell\\in\\{-1,0,1\\}$ and sign $\\varepsilon\\in\\{-1,1\\}$ with $x=\\ell+\\varepsilon d$. By [F6], $\\exp(2\\pi ix)=\\exp(2\\pi i\\varepsilon d)$; if $\\varepsilon=-1$, [F7]–[F8] show its distance from $1$ has the same modulus as for $d$. Euler's formula gives $1-\\exp(2\\pi id)=\\exp(\\pi id)(\\exp(-\\pi id)-\\exp(\\pi id))=-2i\\exp(\\pi id)\\sin(\\pi d)$. Since $|\\exp(\\pi id)|=1$ and $\\sin(\\pi d)\\ge2d\\ge0$ by [F5], $|1-\\exp(2\\pi ix)|=2\\sin(\\pi d)$. The same calculation with $Qx=Q\\ell+\\varepsilon Qd$ gives $|1-\\exp(2\\pi iQx)|=2\\sin(\\pi Qd)$ when $d>0$, because $Qd\\le1/2$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "When $d>0$, [F4] and step 3.1 yield $P_\\theta(y)=Q^{-2}(\\sin(\\pi Qd)/\\sin(\\pi d))^2$. If $d=0$, then $x=0$ and [F3] gives $P_\\theta(y)=1$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $d>0$, step 2.1 gives $0<Qd\\le1/2$. By [F5], $\\sin(\\pi Qd)\\ge2Qd$ and $0<\\sin(\\pi d)\\le\\pi d$; hence step 4.1 gives $P_\\theta(y)\\ge Q^{-2}(2Qd/(\\pi d))^2=4/\\pi^2$. If $d=0$, step 4.1 gives $P_\\theta(y)=1\\ge4/\\pi^2$. Thus every nearest label, including either label at a tie, has the claimed probability.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 4.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m≥1 and has a nonempty finite grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exact-grid case d=0 is handled separately in steps 4.1 and 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest grid Q=2 is included in the integer-lift construction in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Ties between neighboring labels are covered by the every-nearest-label argument in steps 2.1 and 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The floor construction covers θ=0 and the wrap-around between labels Q−1 and 0 in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A nearest label is constructed from floor(Qθ) in step 1.1, without an arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives an existence and bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives an existence and bound, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "lem-qa-phase-estimation-tail-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-phase-estimation-outcome-kernel",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and let the input be an eigenvector with\n$U\\psi=\\exp(2\\pi i\\theta)\\psi$, where $\\theta\\in[0,1)$.\nFor each $y\\in\\{0,\\ldots,Q-1\\}$, the probability of measuring $y$ in the algorithm of [[alg-qa-quantum-phase-estimation]] is\n$$P_\\theta(y)=Q^{-2}\\left|\\sum_{j=0}^{Q-1}\\exp\\!\\left(2\\pi i j(\\theta-y/Q)\\right)\\right|^2.$$\nThus the finite outcome kernel is defined at every phase, including $Q\\theta\\in\\mathbb Z$; no quotient with a zero denominator is needed in this formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-circular-phase-distance",
+          "source_section": "Definition",
+          "quote": "For a real $x\\in[-1,1]$, define its circular distance to the nearest integer by\n$$d_{\\mathbb T}(x):=\\min\\{|x|,\\,1-|x|\\}.$$\nHere $|x|$ is the real absolute value and $\\min$ is the minimum of the displayed finite set ([[def-real-order]], [[def-max-min]]); existence of this finite minimum follows from [[lem-finite-set-has-max]]. Both entries lie in $[0,1]$, so the value lies in $[0,1/2]$. If $|x|\\le1/2$, the nearest integer is $0$; if $x>1/2$, it is $1$; if $x<-1/2$, it is $-1$, so the formula is the distance to the nearest integer. For phases $\\theta,\\phi\\in[0,1)$, their circular distance is $d_{\\mathbb T}(\\theta-\\phi)$; the difference belongs to $(-1,1)$, the stated domain.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-phase-estimation-geometric-sum",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-phase-estimation-sine-chord-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For an outcome $y$, put $x=\\theta-y/Q$ and $d=d_{\\mathbb T}(x)$. If $d>0$, then $x\\notin\\mathbb Z$; write $x=\\ell+\\varepsilon d$ with $\\ell\\in\\{-1,0,1\\}$ and $\\varepsilon\\in\\{-1,1\\}$. By [F4] and [F1], $P_\\theta(y)=Q^{-2}|1-\\exp(2\\pi iQx)|^2/|1-\\exp(2\\pi ix)|^2$. By [F6], integer shifts do not change these exponentials. For $d\\in[0,1/2]$, Euler's formula gives $1-\\exp(2\\pi id)=\\exp(\\pi id)(\\exp(-\\pi id)-\\exp(\\pi id))=-2i\\exp(\\pi id)\\sin(\\pi d)$. Since $|\\exp(\\pi id)|=1$ and $\\sin(\\pi d)\\ge2d$ by [F5], the denominator modulus is at least $4d$; if $\\varepsilon=-1$, [F8] gives the same modulus by complex conjugation. The numerator is at most $2$ by [F6]–[F7]. Hence $P_\\theta(y)\\le1/(4Q^2d^2)$. If $d=0$, this outcome is not in the tail event because $Q\\eta\\ge K\\ge2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For an outcome in the tail, let $k=\\lfloor Qd\\rfloor$. If $k<K$, then $Qd<k+1\\le K\\le Q\\eta\\le Qd$, a contradiction; hence $k\\ge K$. Also $k\\le Q/2$ by [F2], since $Qd\\le Q/2$. If $K>Q/2$, there are no tail outcomes.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $K\\le Q/2$. For each label $y$, choose $\\ell_y=0$ if $|x|\\le1/2$, $\\ell_y=1$ if $x>1/2$, and $\\ell_y=-1$ if $x<-1/2$, where $x=\\theta-y/Q$. Then $\\delta_y=Q(x-\\ell_y)\\in Q\\theta+\\mathbb Z$ and $|\\delta_y|=Qd$. Distinct labels give distinct lifts: equality would make their difference a multiple of $Q$, while their label difference has magnitude less than $Q$. For an annulus $k\\le Qd<k+1$, the lift lies in $[k,k+1)$ or $(-(k+1),-k]$. Each half-open interval of length $1$ contains at most one element of the integer translate $Q\\theta+\\mathbb Z$, because distinct elements differ by a nonzero integer. Thus at most two labels lie in this annulus.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every such label has $d\\ge k/Q$, so step 1.1 bounds its probability by $1/(4k^2)$. The total tail probability is therefore at most $\\frac12\\sum_{k=K}^{Q/2}k^{-2}$. For $k\\ge K\\ge2$, $k^{-2}\\le[k(k-1)]^{-1}=(k-1)^{-1}-k^{-1}$. The finite sum telescopes to at most $1/(K-1)$, so the tail is at most $1/(2(K-1))$. Together with the empty-tail case in step 1.2 this proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When K>Q/2, step 1.2 proves the tail set is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The d=0 outcome is not in the tail by step 1.1 because Qη≥2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For Q=2 the K>Q/2 empty-tail branch applies in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-distance and empty-tail cases are handled in steps 1.1–1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The maximal distance d=1/2 is included at k=Q/2 in steps 1.2 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The integer lift is chosen deterministically and each annulus has at most two labels in step 1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-sided tail inequality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-sided tail inequality, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "thm-qa-phase-estimation-exact-grid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-phase-estimation-outcome-kernel",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and let the input be an eigenvector with\n$U\\psi=\\exp(2\\pi i\\theta)\\psi$, where $\\theta\\in[0,1)$.\nFor each $y\\in\\{0,\\ldots,Q-1\\}$, the probability of measuring $y$ in the algorithm of [[alg-qa-quantum-phase-estimation]] is\n$$P_\\theta(y)=Q^{-2}\\left|\\sum_{j=0}^{Q-1}\\exp\\!\\left(2\\pi i j(\\theta-y/Q)\\right)\\right|^2.$$\nThus the finite outcome kernel is defined at every phase, including $Q\\theta\\in\\mathbb Z$; no quotient with a zero denominator is needed in this formula.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then\n\n$$\\sum_{x=0}^{N-1}e^{2\\pi i(k-\\ell)x/N}=\\begin{cases}N,&k\\equiv\\ell\\pmod N,\\\\\\\\ 0,&k\\not\\equiv\\ell\\pmod N.\\end{cases}$$\n\nAt $N=1$ the congruence holds for all $k,\\ell$ and the sum is $1$. The sum is the finite sum of the complex family $x\\mapsto e^{2\\pi i(k-\\ell)x/N}$ over the von Neumann natural $N=\\{0,\\dots,N-1\\}$ ([[def-finite-sum-in-a-commutative-monoid]]), and $N$ on the right is the natural number $N$ read in $\\mathbb C$ as the additive multiple $N\\cdot1_{\\mathbb C}$, that is, the value at $N$ of the canonical embedding $\\mathbb N\\to\\mathbb C$ ([[def-canonical-natural]], [[lem-integer-multiples-agree-with-canonical-natural]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $0\\le\\theta<1$, the integer $t=Q\\theta$ satisfies $0\\le t<Q$. At $y=t$, every summand in [F1] is $1$, so $P_\\theta(t)=Q^{-2}Q^2=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $y\\in\\{0,\\ldots,Q-1\\}$ and $y\\ne t$, then $t-y$ is not divisible by $Q$, since $|t-y|<Q$ and $t-y\\ne0$. Substituting $\\theta=t/Q$ in [F1], the sum is the nontrivial cyclic-character sum in [F2], hence zero; therefore $P_\\theta(y)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m≥1 and Q≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The endpoint grid phase t=0 is included in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest allowed grid Q=2 is covered by the same character-sum argument in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The trivial character at y=t and all nontrivial differences are separated in steps 1.1–1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The range t∈{0,…,Q−1} follows from θ∈[0,1) in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every output label is considered by the finite character sum in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication about exact-grid phases, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication about exact-grid phases, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "thm-qa-phase-estimation-superposition-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "alg-qa-quantum-phase-estimation",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For an integer $N\\ge1$, let $\\mathcal F_N$ be the negative-sign, $N^{-1/2}$-normalized transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Define the **cyclic quantum Fourier transform** by $\\operatorname{QFT}_N:=\\mathcal F_N^{-1}$. The inverse exists by [[thm-finite-fourier-inversion]], and its matrix on the standard basis indexed by $0,\\ldots,N-1$ is\n\n$$\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle,\\qquad 0\\le x<N.$$\n\nHere the standard-basis ket convention is the one specified by [[def-qc-dirac-notation-conversion]]. Thus the transform has the positive sign and the same $N^{-1/2}$ normalization as the inverse Fourier formula. At $N=1$ it is the identity on the one-dimensional register. In the binary specialization $N=2^n$, the circuit page writes each index in its unique base-two expansion.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-qa-quantum-phase-estimation",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-exact-binary-qft-circuit-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the exact binary circuit of [[alg-qa-exact-binary-qft-circuit]] implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$: it maps each computational basis vector $|x\\rangle$, $0\\le x<2^n$, to\n\n$$2^{-n/2}\\sum_{y=0}^{2^n-1}e^{2\\pi ixy/2^n}|y\\rangle,$$\n\nwith the declared output register order. Hence its denotation is $\\operatorname{QFT}_{2^n}$ on every state. Reversing the gate list and replacing every gate by its adjoint gives the negative-sign inverse QFT with the same ideal gate count.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-phase-estimation-outcome-kernel",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and let the input be an eigenvector with\n$U\\psi=\\exp(2\\pi i\\theta)\\psi$, where $\\theta\\in[0,1)$.\nFor each $y\\in\\{0,\\ldots,Q-1\\}$, the probability of measuring $y$ in the algorithm of [[alg-qa-quantum-phase-estimation]] is\n$$P_\\theta(y)=Q^{-2}\\left|\\sum_{j=0}^{Q-1}\\exp\\!\\left(2\\pi i j(\\theta-y/Q)\\right)\\right|^2.$$\nThus the finite outcome kernel is defined at every phase, including $Q\\theta\\in\\mathbb Z$; no quotient with a zero denominator is needed in this formula.",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional complex inner-product spaces and write $\\mathcal L(H)$ and $\\mathcal L(K)$ for their vector spaces of complex-linear endomorphisms with pointwise operations ([[def-dimension]], [[def-real-and-complex-inner-product-space]], [[def-vector-space-of-linear-maps]], [[prop-linear-maps-form-a-vector-space]]). Let $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. For each integer $r\\ge1$, put $R=\\mathbb C^r$ with its standard ordered register basis ([[def-qc-register-and-computational-basis]]). Write an operator $X\\in\\mathcal L(H\\otimes R)$ in its unique $r\\times r$ block form $X=[X_{ij}]$ with $X_{ij}\\in\\mathcal L(H)$, and define $\\Phi^{(r)}(X)$ to have blocks $[\\Phi(X_{ij})]$ on $K\\otimes R$. Lemma [[lem-qc-finite-ancilla-amplification-is-block-map]] proves that this block rule defines a linear map on the full operator space for every finite $r$. For $r=1$, the extension is $\\Phi$ under the canonical unitary identifications $x\\mapsto x\\otimes e_0$ and $y\\mapsto y\\otimes e_0$ proved in that lemma.\n\nThe map $\\Phi$ is **completely positive** if, for every finite $r\\ge1$, $\\Phi^{(r)}$ sends every nonnegative operator on $H\\otimes R$ to a nonnegative operator on $K\\otimes R$ ([[def-non-negative-and-positive-operator]]). The quantifier includes $r=1$; complete positivity therefore implies positivity. No Kraus, Choi, or Stinespring characterization is part of this definition.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex-inner-product space, let $K$ be a finite-dimensional complex-inner-product space, and let $\\Omega$ be a finite nonempty outcome set. A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive ([[def-qc-completely-positive-map]]) and\n\n$$\\sum_{a\\in\\Omega}\\operatorname{tr}_K(\\mathcal I_a(X))=\\operatorname{tr}_H(X)\\qquad\\text{for every }X\\in\\mathcal L(H).$$\n\nFor a density operator $\\rho$ on $H$ (nonnegative with trace one, [[def-qc-density-operator]]), define the outcome weight $p_a(\\rho):=\\operatorname{tr}_K(\\mathcal I_a(\\rho))$. The **conditional state** for outcome $a$ is\n\n$$\\rho_a:=\\begin{cases}\\mathcal I_a(\\rho)/p_a(\\rho),&p_a(\\rho)>0,\\\\[2pt]\\bot,&p_a(\\rho)=0.\\end{cases}$$\n\nHere $\\bot$ is a symbol meaning that no conditional density operator is assigned; it is not a state. Positivity and normalization of the outcome weights, and density of every positive-probability conditional state, are proved in [[thm-qc-instrument-outcome-law-normalizes]] and [[thm-qc-instrument-conditional-state-is-density]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, the map\n$\\operatorname{tr}:M_n(F)\\to F$ is linear:\n\n$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qa-phase-estimation-geometric-sum",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "2.3",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space; the pairing is linear in its first argument ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Write $\\mathcal L(H)$ for its complex-linear endomorphisms ([[def-vector-space-of-linear-maps]]) and let $\\Omega$ be a finite nonempty outcome set. A **finite POVM** on $H$ with outcomes $\\Omega$ is a family $E=(E_a)_{a\\in\\Omega}$ with each $E_a$ nonnegative and $\\sum_{a\\in\\Omega}E_a=I_H$; after any enumeration of $\\Omega$, these operators form the finite complete positive family of [[def-qc-finite-positive-effect-family]]. Reordering does not alter the finite sum. The complete-family lemma [[lem-qc-complete-effect-family-members-are-effects]] shows that every $E_a$ also has nonnegative complement $I_H-E_a$, so each is an effect.\n\nFor a density operator $\\rho$ on $H$ (a nonnegative operator of trace one, [[def-qc-density-operator]]), its **POVM outcome weights** are\n\n$$p_\\rho(a):=\\operatorname{tr}(\\rho E_a),\\qquad a\\in\\Omega.$$\n\nHere $\\operatorname{tr}$ is the finite-dimensional endomorphism trace ([[def-trace-of-an-endomorphism]]).\n\nThe positivity and normalization of these weights are proved in [[thm-qc-povm-probabilities-normalize]]. A POVM specifies this outcome law; it does not by itself prescribe a conditional output state.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], write $H=\\bigoplus_{\\theta\\in\\Theta}E_\\theta$ orthogonally with projections $\\Pi_\\theta$. By [F2], every eigenvalue has modulus one, and [F3] supplies its unique phase $\\theta\\in[0,1)$. Therefore $\\sum_\\theta\\Pi_\\theta=I_H$ and $\\psi=\\sum_\\theta\\Pi_\\theta\\psi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a phase-register basis branch $|j\\rangle$, the controlled powers act as $U^j$. On each eigenspace, $U^j\\Pi_\\theta=\\exp(2\\pi ij\\theta)\\Pi_\\theta$. Applying the inverse-QFT matrix in [F4], the coefficient of $|y\\rangle$ on $E_\\theta$ is $a_y(\\theta)$; hence the post-readout Kraus operator on $H$ is $K_y=\\sum_\\theta a_y(\\theta)\\Pi_\\theta$. Interpreting the chronological gate list as this operator uses [F14].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F14",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Orthogonality in [F6] gives $K_y^\\dagger K_y=\\sum_\\theta|a_y(\\theta)|^2\\Pi_\\theta$. Summing over $y$ and using [F5] yields $\\sum_yK_y^\\dagger K_y=\\sum_\\theta\\Pi_\\theta=I_H$. Consequently, for a unit vector $\\psi$, $\\|K_y\\psi\\|^2=\\sum_\\theta|a_y(\\theta)|^2\\|\\Pi_\\theta\\psi\\|^2$; all cross terms vanish because the eigenspaces are orthogonal. The weights $\\|\\Pi_\\theta\\psi\\|^2$ are nonnegative and sum to one, so this is the eigenspace-weighted mixture law.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "If every $\\theta\\in\\Theta$ has $Q\\theta=t_\\theta\\in\\{0,\\ldots,Q-1\\}$, the finite geometric sum in [F10] and cyclic-character orthogonality give $a_y(\\theta)=1$ for $y=t_\\theta$ and $0$ otherwise. Distinct phases have distinct labels, so $K_y$ is exactly the spectral projection for the eigenspace with label $y$, or zero if there is none.",
+          "step": "2.3",
+          "inputs": [
+            "F4",
+            "F10",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By linearity of the circuit, its pre-readout map from $H$ to the phase register tensored with $H$ is $V:v\\mapsto\\sum_z|z\\rangle\\otimes K_zv$, with the $K_z$ from step 2.1. For a reference $R$, the joint output is $(V\\otimes I_R)\\rho(V^\\dagger\\otimes I_R)$. Apply the readout branch in [F13] to get $|y\\rangle\\langle y|\\otimes (K_y\\otimes I_R)\\rho(K_y^\\dagger\\otimes I_R)$. Reorder the phase factor to the last position using [F11], then take its partial trace by the coordinate formula [F9]; the sole nonzero diagonal phase coordinate is $y$, so the result is exactly $(K_y\\otimes I_R)\\rho(K_y^\\dagger\\otimes I_R)$. To prove complete positivity of the system map, take $R=\\mathbb C$ in this formula and then extend by any finite identity factor $S$: the branch map is $X\\mapsto(K_y\\otimes I_S)X(K_y^\\dagger\\otimes I_S)$. If $X$ is nonnegative, this is nonnegative by its quadratic-form definition, so each branch is completely positive by [F7].",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "F9",
+            "F11",
+            "F13",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If some phase $\\theta$ is off-grid, then for every $y$, $z=\\exp(2\\pi i(\\theta-y/Q))\\ne1$ and $z^Q=\\exp(2\\pi iQ\\theta)\\ne1$ by [F10]. The geometric formula gives $a_y(\\theta)\\ne0$ for every $y$. Since $Q\\ge2$ and [F5] says the $Q$ squared moduli sum to one, each is strictly less than one. Thus $K_y$ acts on this eigenspace by a scalar of modulus strictly between zero and one, so $K_y$ is not a projection; the readout is not the spectral projective measurement.",
+          "step": "3.2",
+          "inputs": [
+            "F5",
+            "F10",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any finite-dimensional reference $R$ (including $R=\\mathbb C$) and any operator $X$ on $H\\otimes R$, [F8] and step 2.2 give $\\sum_y\\operatorname{tr}\\mathcal I_y^{(R)}(X)=\\operatorname{tr}(((\\sum_yK_y^\\dagger K_y)\\otimes I_R)X)=\\operatorname{tr}X$. Taking $R=\\mathbb C$ proves that the system maps form an instrument on $H$. For a density $\\rho$ with arbitrary reference $R$, cyclicity and linearity also give $p_y=\\operatorname{tr}\\mathcal I_y^{(R)}(\\rho)=\\sum_\\theta|a_y(\\theta)|^2\\operatorname{tr}((\\Pi_\\theta\\otimes I_R)\\rho)$. By [F12], the weights $\\operatorname{tr}((\\Pi_\\theta\\otimes I_R)\\rho)$ are nonnegative and sum to one. Therefore the reference outcome law is the claimed mixture. When $p_y>0$, $\\mathcal I_y^{(R)}(\\rho)/p_y$ is nonnegative of trace one, and when $p_y=0$ no conditional density is defined. For a pure input the conditional vector is $K_y\\psi/\\sqrt{p_y}$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F12",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "To witness coherence, take $Q\\ge2$, orthonormal $u_0,u_1$, $Uu_0=u_0$, $Uu_1=\\exp(\\pi i/Q)u_1$, and $\\psi=(u_0+u_1)/\\sqrt2$. Both eigenvalues have modulus one by [F3], so $U$ is unitary, and $\\psi$ is unit. At output $y=0$, $a_0(0)=1$, while [F10] gives $a_0(1/(2Q))=Q^{-1}\\sum_{j<Q}\\exp(\\pi ij/Q)=2/[Q(1-\\exp(\\pi i/Q))]\\ne0$. The denominator is nonzero because $0<\\pi/Q<2\\pi$. Thus $K_0\\psi=(u_0+a_0(1/(2Q))u_1)/\\sqrt2$, and its rank-one operator has the nonzero cross terms $a_0(1/(2Q))|u_1\\rangle\\langle u_0|/2$ and $\\overline{a_0(1/(2Q))}|u_0\\rangle\\langle u_1|/2$. The branch probability is positive because its $u_0$ coefficient is nonzero, so conditioning preserves these cross terms.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F10",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonzero finite-dimensional system and m≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-probability outcome receives no conditional state in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The minimal phase register Q=2 and a two-eigenspace witness are covered in steps 4.1 and 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated eigenvalues are grouped into full eigenspace projections in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Exact-grid phases and off-grid phases are handled separately in steps 4.1–4.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite spectral decomposition is used directly in step 1.1; no arbitrary eigenbasis is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives branch laws and two cases, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives branch laws and two cases, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "thm-qa-phase-estimation-success-and-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-phase-estimation-nearest-grid-bound",
+          "source_section": "Statement",
+          "quote": "For every $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$, a nearest grid label $y\\in\\{0,\\ldots,Q-1\\}$, minimizing $d_{\\mathbb T}(\\theta-y/Q)$, exists. Every nearest label satisfies\n$$P_\\theta(y)\\ge\\frac4{\\pi^2}.$$\nIn particular, this holds at ties between adjacent labels and at the wrap-around between $Q-1$ and $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-phase-estimation-tail-bound",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, $\\theta\\in[0,1)$, $\\eta\\in\\mathbb R$, and\n$K=\\lfloor Q\\eta\\rfloor\\ge2$. With\n$d_{\\mathbb T}(\\theta-y/Q)$ as in [[def-qa-circular-phase-distance]],\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-circular-phase-distance",
+          "source_section": "Definition",
+          "quote": "For a real $x\\in[-1,1]$, define its circular distance to the nearest integer by\n$$d_{\\mathbb T}(x):=\\min\\{|x|,\\,1-|x|\\}.$$\nHere $|x|$ is the real absolute value and $\\min$ is the minimum of the displayed finite set ([[def-real-order]], [[def-max-min]]); existence of this finite minimum follows from [[lem-finite-set-has-max]]. Both entries lie in $[0,1]$, so the value lies in $[0,1/2]$. If $|x|\\le1/2$, the nearest integer is $0$; if $x>1/2$, it is $1$; if $x<-1/2$, it is $-1$, so the formula is the distance to the nearest integer. For phases $\\theta,\\phi\\in[0,1)$, their circular distance is $d_{\\mathbb T}(\\theta-\\phi)$; the difference belongs to $(-1,1)$, the stated domain.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-phase-estimation-exact-grid",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. If $Q\\theta=t\\in\\mathbb Z$, then $t\\in\\{0,\\ldots,Q-1\\}$, phase estimation returns $y=t$ with probability $1$, and every other output has probability $0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to the given $\\theta$; it supplies a nearest label $y$ and the lower bound $P_\\theta(y)\\ge4/\\pi^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $K=\\lfloor Q\\eta\\rfloor\\ge2$, all hypotheses of [F2] hold, so the stated circular-distance tail bound follows.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $Q\\theta=t\\in\\mathbb Z$, [F3] gives $P_\\theta(t)=1$ and zero probability at every other label. These conclusions prove the theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m≥1 and a nonempty finite output grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exact-grid probability-one case is applied in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest allowed m=1 is inherited by the nearest and tail results in steps 1.1–1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nearest-label ties and exact-grid concentration are included in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cited nearest and exact-grid results include the circular wrap-around and θ=0 endpoint in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Existence of a nearest label is supplied and applied in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states one-sided bounds and a special case, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states one-sided bounds and a special case, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "ex-qa-exact-phase-estimation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-quantum-phase-estimation",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-phase-estimation-exact-grid",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. If $Q\\theta=t\\in\\mathbb Z$, then $t\\in\\{0,\\ldots,Q-1\\}$, phase estimation returns $y=t$ with probability $1$, and every other output has probability $0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $Q=2^3=8$ and $Q\\theta=8(5/8)=5$, an integer in $\\{0,\\ldots,7\\}$. By [F2], the output probabilities in label order $0,1,\\ldots,7$ are $(0,0,0,0,0,1,0,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The unique measured label is $y=5$; [F1] therefore returns the exact phase estimate $y/Q=5/8$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes m=3 and an eight-label register."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The seven zero-probability labels appear in the complete vector in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked register has Q=8; it does not claim the one-label case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact-grid input concentrates on the single label in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All eight labels, including the endpoint labels 0 and 7, are listed in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The complete finite output law is enumerated in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a concrete case, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a concrete case, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "qpe-q8-phase-5-over-8-law",
+          "input": "m=3, Q=8, θ=5/8",
+          "expected": "P=(0,0,0,0,0,1,0,0); output estimate 5/8",
+          "status": "computed exactly in steps 1.1–1.2"
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-qa-phase-estimation-nearest-grid-and-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-phase-estimation-outcome-kernel",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and let the input be an eigenvector with\n$U\\psi=\\exp(2\\pi i\\theta)\\psi$, where $\\theta\\in[0,1)$.\nFor each $y\\in\\{0,\\ldots,Q-1\\}$, the probability of measuring $y$ in the algorithm of [[alg-qa-quantum-phase-estimation]] is\n$$P_\\theta(y)=Q^{-2}\\left|\\sum_{j=0}^{Q-1}\\exp\\!\\left(2\\pi i j(\\theta-y/Q)\\right)\\right|^2.$$\nThus the finite outcome kernel is defined at every phase, including $Q\\theta\\in\\mathbb Z$; no quotient with a zero denominator is needed in this formula.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-phase-estimation-geometric-sum",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-circular-phase-distance",
+          "source_section": "Definition",
+          "quote": "For a real $x\\in[-1,1]$, define its circular distance to the nearest integer by\n$$d_{\\mathbb T}(x):=\\min\\{|x|,\\,1-|x|\\}.$$\nHere $|x|$ is the real absolute value and $\\min$ is the minimum of the displayed finite set ([[def-real-order]], [[def-max-min]]); existence of this finite minimum follows from [[lem-finite-set-has-max]]. Both entries lie in $[0,1]$, so the value lies in $[0,1/2]$. If $|x|\\le1/2$, the nearest integer is $0$; if $x>1/2$, it is $1$; if $x<-1/2$, it is $-1$, so the formula is the distance to the nearest integer. For phases $\\theta,\\phi\\in[0,1)$, their circular distance is $d_{\\mathbb T}(\\theta-\\phi)$; the difference belongs to $(-1,1)$, the stated domain.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-phase-estimation-success-and-tail",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. Every nearest grid label $y$ has $P_\\theta(y)\\ge4/\\pi^2$. For any $\\eta\\in\\mathbb R$ with $K=\\lfloor Q\\eta\\rfloor\\ge2$,\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$\nIf $Q\\theta$ is an integer $t$, then $P_\\theta(t)=1$ and all other labels have probability $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $Q\\theta=3/2$, the grid labels $1$ and $2$ are tied nearest labels, each at circular distance $1/16$. For $y=1,2$, $Q(\\theta-y/8)=\\pm1/2$, so the geometric quotient in [F1]–[F2] has numerator modulus $2$ and denominator modulus $2\\sin(\\pi/16)$. Thus $P_\\theta(1)=P_\\theta(2)=1/(64\\sin^2(\\pi/16))$, which is at least $4/\\pi^2$ by the nearest-grid part of [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The circular distances for $y=0,\\ldots,7$ are $(3/16,1/16,1/16,3/16,5/16,7/16,7/16,5/16)$, by [F3]. Hence the tail event $d_{\\mathbb T}(\\theta-y/8)\\ge1/4$ consists exactly of $y=4,5,6,7$. For these labels the exact outcome probabilities are $P_\\theta(4)=P_\\theta(7)=1/(64\\sin^2(5\\pi/16))$ and $P_\\theta(5)=P_\\theta(6)=1/(64\\sin^2(7\\pi/16))$, again by the finite geometric quotient.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the exact total tail is $\\frac1{32}\\bigl(\\sin^{-2}(5\\pi/16)+\\sin^{-2}(7\\pi/16)\\bigr)$. Here $K=\\lfloor8(1/4)\\rfloor=2$, so [F4] gives the proven upper bound $1/2$ for this total. Numerically the exact expression is approximately $0.07769$, well below $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes m=3 and Q=8."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For θ=3/16 all eight outcome probabilities are positive; no zero-probability branch occurs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes Q=8 and makes no one-label claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two tied nearest labels 1 and 2 are computed in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The full label range and its circular distances are listed in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite output labels 0,…,7 are explicitly enumerated in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies concrete values, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies concrete values, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "qpe-q8-phase-3-over-16-nearest-tie",
+          "input": "m=3, Q=8, θ=3/16; labels y=1,2",
+          "expected": "P(1)=P(2)=1/(64 sin²(π/16)); each ≥4/π²",
+          "status": "computed exactly in step 1.1"
+        },
+        {
+          "name": "qpe-q8-phase-3-over-16-tail",
+          "input": "η=1/4; labels y=4,5,6,7",
+          "expected": "tail=(sin⁻²(5π/16)+sin⁻²(7π/16))/32 ≈0.07769 ≤1/2",
+          "status": "computed exactly and bounded in steps 1.2–2.1"
+        }
+      ],
+      "unresolved_suppliers": []
+    }
+  }
+}

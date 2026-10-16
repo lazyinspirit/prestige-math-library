@@ -1,0 +1,58 @@
+{
+  "batch": "50",
+  "opened": [
+    "cex-qa-26-hhl-classical-vector-output",
+    "def-qa-26-hhl-access-model",
+    "def-qa-26-hhl-sine-window",
+    "def-qa-26-qlsp-task",
+    "ex-qa-26-diagonal-hhl",
+    "hhl-phase-estimation-linear-systems",
+    "hhl-phase-estimation-linear-systems-examples",
+    "lem-qa-26-hermitian-dilation",
+    "lem-qa-26-hhl-capped-amplification",
+    "lem-qa-26-hhl-filter-perturbation",
+    "lem-qa-26-hhl-prefix-table-synthesis-error",
+    "lem-qa-26-hhl-sine-window-kernel-moment",
+    "lem-qa-26-hhl-sine-window-prefix-masses",
+    "lem-qa-26-hhl-success-amplitude",
+    "lem-qa-26-phase-to-eigenvalue-unwrapping",
+    "lem-qa-26-postselection-normalization-bound",
+    "lem-qa-26-qlsp-target-is-well-defined",
+    "thm-qa-26-hhl-amplified-postselection-cost",
+    "thm-qa-26-hhl-query-cost",
+    "thm-qa-26-hhl-simulator-cost",
+    "thm-qa-26-hhl-state-correctness"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "def-qa-26-qlsp-task",
+      "location": "Definition",
+      "defect": "ill-formed",
+      "evidence": "The frontmatter has `justified_by: []`, while the Definition uses the normalized vector `A^+b / ||A^+b||`. The in-scope `lem-qa-26-qlsp-target-is-well-defined` states and proves `A^+b != 0` under these hypotheses, but the definition does not link that well-definedness result through `justified_by`.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "lem-qa-26-hhl-prefix-table-synthesis-error",
+      "location": "1.2",
+      "defect": "citation-inaccurate",
+      "evidence": "Facts [F3] gives `sin(v) <= v` for `v >= 0`, but step 1.2 says `[F3] gives sin(x_tau) >= 2x_tau/pi`. That lower bound is listed in [F7] and is also cited at the end of the step, so the argument is supported but the [F3] citation is inaccurate.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "lem-qa-26-hhl-sine-window-prefix-masses",
+      "location": "Statement",
+      "defect": "missing-hypothesis",
+      "evidence": "`def-qa-26-hhl-sine-window` defines `|Psi_T>` for a power-of-two `T >= 2`, but this Statement says only `T >= 2` and concludes that `|Psi_T>` is normalized. For example, `T=3` is outside the cited definition's domain. State the power-of-two restriction (and hence that `T` is an integer) explicitly.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-qa-26-hhl-state-correctness",
+      "location": "Statement",
+      "defect": "overstrong-title-or-statement",
+      "evidence": "The closing clause says the returned output is in the tagged domain summand, but proof step 3.1 only places the ideal target `(2kappa)^-1 H^+(b,0)` there. The finite algorithm decodes `k` in `[-T/2,T/2-1]`, leaving the self-paired Nyquist label `-T/2`; its filter value `f_kappa(-pi T/t0)` is nonzero, and the sine-window kernel has a generically nonzero tail at that label. The paired `+/-` dilation components therefore need not cancel their codomain component exactly. The algorithm performs no domain projection; the returned state is only proved close to the domain-supported target.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Opened all 19 scoped items and both pages exactly once, and checked the relevant direct suppliers for their claims. I also checked HHL Appendix A3/A4 in the [paper](https://arxiv.org/pdf/0811.3171). I did not independently re-audit every transitive supplier proof."
+}

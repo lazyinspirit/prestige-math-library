@@ -1,0 +1,64 @@
+the results to the initialized qubits. After the first rotations we have �2m−1
+i=0
+|i >. The corrections
+will then take this state to an equal distribution over all the basic states in Cperp. The fact that this
+distribution is uniform is due to the linearity of the code.
+So the initialization procedure is actually defined by correcting an ancilla block to |s0 > and than
+using the block we are interested in initializing, and apply a controlled not from each bit to the bit
+of the |s0 >. This will not change |s0 > if the input string is all 0′s but will convert it to |S1 > if the
+string is a string of 1′s, and the resulting state is the output of the initialization procedure.
+The spread of this procedure is 1: a fault in the cat states can only effect one qubit at the end. A
+fault in the first rotations and in the first controlled not gates can only effect one bit at the end.
+(2) Correction procedure: For the correction procedure we first create a state |s0 > on ancilla
+qubits. We than apply a correction procedure, exactly as the procedure in the initialization procedure,
+only that instead of computing from the j′th copy of a syndrome whether the j′th bit is wrong, we
+also compute whether the number of faults according to the syndrome is larger than d. The controlled
+not from the result to the j′th qubit is replaced by a Toffoli gate which also checks if the number of
+faults is smaller than d. We also add a gate which replaces the qubit with a qubit from the state |s0 >
+if the number of faults is indeed larger that d. After this, all the qubits are rotated in the x axis and
+than the whole sequence of gates is repeated, and than all the qubits are again rotated in the x axis.
+(3) Reading procedure: This procedure requires m(m + 1) ancilla qubits. First we apply con-
+trolled not from each of the qubits to one of the last m ancilla qubits.
+This simulates m basic
+measurements of these qubits[3]. We repeat this operation again to each one of the m blocks of m
+ancilla qubits, so we have m copies of the measured state. On each of these copy we apply an op-
+eration that computes the bit that is represented by this state, using only gates from the universal
+set. (This might require more ancilla qubits.) The resulting qubits are the m qubits which carry the
+results from these m computations. The spread of this procedure is 1. A fault in the first stage of
+copying the qubits m times can only effect one qubit in each of the copies, and if the number of faults
+is smaller than the critical number, the fault has no effect on the resulting qubits. A fault during the
+computation of one bit can only effect this bit. So the spread is 1, as long as the sum of damage in
+the block and number of faults in the first stage is smaller than half the minimal distance of the code.
+(4) The procedures of a controlled not gate: |Sa, Sb >�−→|Sa, S(a+b) >, The Fourier transform, or
+the rotation around the x axis by π: |Sa >�−→
+1
+√
+
+2
+�
+b(−1)ab|Sb >, the not gate |Sa >�−→|S(1−a) >,
+and also a rotation around the z axis by π/2: |Sa >�−→(i)a|Sa >, is achieved on the encoded state
+by applying bitwise the gates on each of the qubits in the block. The procedure’s spread is 1: a fault
+can only effect one qubit.
+(5) Toffoli gate: we define a Toffoli procedure as is described in [19], where all the measurements
+are replaced by controlled not gates. The only piece of this procedure which is not straight forward
+is creating the ancilla state |A >. The way we do that is create a cat state of encoded qubits: i.e.
+use m blocks of qubits that we first initialize to the state |S0 >m, and rotate the first block, and then
+copy this block bitwise on all the other blocks, giving the state:
+1
+√
+
+2(|S0 > |S0 > ...|S0 > +|s1 > |S1 >
+...|S1 >). create three such ancilla states. Also create |A > +|B > as in [19]. Now apply m times the
+transformation: |Sa > |b > |c > |d > −−−> (−1)a(bc+d)|Sa > |b > |c > |d > on a block in the first
+encoded cat state and three bits in the three blocks of |A >, then do the same thing with the second
+cat state and then the third. To measure the cat state, rotate each of the blocks in the cat states in
+the x direction. Now compute from each block the bit it represents, and than independently m times
+the parity of these bits in each cat state. For each qubit in the third block of |A >, compare three
+parity bits from the three cat states by a majority vote and apply a controlled not from the result to
+the qubit in |A >. If only one fault occurred in this procedure, than in each block of |A > there is at
+most one deviated qubit. This means that the procedure is fault tolerant.
+
+16
+
+

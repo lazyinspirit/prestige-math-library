@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-morera-triangle-theorem.json
 id: thm-morera-triangle-theorem
 kind: theorem
 title: "Morera's theorem: vanishing triangle integrals characterize holomorphy among continuous functions"
@@ -7,19 +9,12 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-oriented-complex-triangle-and-boundary, prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain, thm-cauchy-integral-formula-higher-derivatives, thm-goursat-triangle-theorem]
+deps: [def-star-shaped-open-subset-of-rn, thm-complex-coordinate-isometry-and-topology-transport, def-oriented-complex-triangle-and-boundary, prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain, thm-cauchy-integral-formula-higher-derivatives, thm-goursat-triangle-theorem]
 justified_by: []
 aliases: []
 landmark: true
 short: "Morera's theorem"
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-21
-  audited: 2026-08-21
 sources:
   scraped: []
   references:
@@ -60,7 +55,7 @@ Repeated or collinear vertices are permitted.
 
 **Proof technique:** direct.
 
-1.1 For the vanishing-integrals-to-holomorphy direction, fix $a\in\Omega$ and choose $r>0$ with $\overline D(a,r)\subseteq\Omega$; the disc $D(a,r)$ is star-shaped with respect to $a$, and every filled triangle in it is among the triangles covered by the assumed condition and [L1]. [given, L1]
+1.1 For the vanishing-integrals-to-holomorphy direction, fix $a\in\Omega$ and choose $r>0$ with $\overline D(a,r)\subseteq\Omega$; the disc $D(a,r)$ is open and contains $a$. For $z$ in it and $0\le t\le1$, $|a+t(z-a)-a|=t|z-a|<r$; openness and segment transport in [[thm-complex-coordinate-isometry-and-topology-transport]] show its coordinate image is star-shaped at $\Phi(a)$ in [[def-star-shaped-open-subset-of-rn]], and every filled triangle in it is among the triangles covered by the assumed condition and [L1]. [given, L1]
 
 1.2 For the holomorphy-to-vanishing-integrals direction, if $f$ is holomorphic on $\Omega$, [L4] gives zero integral around every filled triangle of [L1] contained in $\Omega$, including those with repeated or collinear vertices. [L1, L4]
 

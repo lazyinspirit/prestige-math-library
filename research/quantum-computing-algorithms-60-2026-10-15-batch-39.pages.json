@@ -1,0 +1,921 @@
+[
+  {
+    "order": 2242,
+    "id": "polynomial-method-and-approximate-degree",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Polynomial Method and Approximate Degree",
+    "companion": "polynomial-method-and-approximate-degree-examples",
+    "requires": [
+      "reversible-arithmetic-and-oracle-conversion",
+      "fundamental-trigonometric-identities",
+      "linear-algebra-methods-in-combinatorics",
+      "computational-problems-promises-and-cost-models",
+      "the-complex-exponential-and-eulers-formula",
+      "uniform-circuit-families-promise-problems-and-complexity"
+    ],
+    "items": [
+      {
+        "id": "lem-qa-15-continuous-markov-derivative-bound",
+        "kind": "lemma",
+        "title": "Continuous Markov derivative bound on an interval",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "def-formal-derivative-of-a-polynomial",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "lem-chebyshev-degree-leading-coefficients-and-extreme-values",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-cofunction-supplementary-and-reflection-identities",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "lem-real-polynomial-factor-at-a-root",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-extreme-value-r",
+          "thm-algebra-of-continuous-functions",
+          "cor-differentiable-implies-continuous",
+          "lem-of-triangle-inequality",
+          "thm-induction-principle"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "If $p$ is a real polynomial with no supported monomial of degree greater than $d\\in\\mathbb N_0$, and $h:=\\max_{[-1,1]}p-\\min_{[-1,1]}p$, then\n$$\\max_{[-1,1]}|p'|\\le \\frac{d^2h}{2}.$$\nThe zero polynomial is allowed under the support-degree convention.",
+        "proof_obligations": [
+          "By [F1], $p$ and each polynomial $r$ below are finite real polynomials; [F2] and [F9] make $p,p'$ continuous and attain their extrema on $[-1,1]$. For any such $r$, $S_r(\\theta):=\\sin\\theta\\,r(\\cos\\theta)$ is continuous by [F6], [F9], and [F10], and is $2\\pi$-periodic by [F15]; hence [F9] gives a maximum of $|S_r|$ on $[0,2\\pi]$. If $d=0$ or $p=0$, then $p'=0$ and $h=0$; assume $d\\ge1$. For $j=1,\\ldots,d$, put $\\theta_j=(2j-1)\\pi/(2d)$ and $x_j=\\cos\\theta_j$. By [F4], $T_d(x_j)=\\cos(d\\theta_j)=0$. Monotonicity and reflection in [F5] show $x_1>\\cdots>x_d$ in $(-1,1)$ and $x_d=-x_1$. Also [F5] gives $\\sin\\theta_j>0$. Since $d\\theta_j=(j-1)\\pi+\\pi/2$, repeated use of the shift-by-$\\pi$ identity in [F5], with finite induction [F13], gives $\\sin(d\\theta_j)=(-1)^{j-1}$. The chain rule [F6] applied to [F4] now gives $T_d'(x_j)=d\\sin(d\\theta_j)/\\sin\\theta_j=d(-1)^{j-1}/\\sin\\theta_j\\ne0$.",
+          "Fix any polynomial $r$ supported in degrees at most $d-1$. For $x\\in[-x_1,x_1]$, choose $\\theta\\in[0,\\pi]$ with $x=\\cos\\theta$. Monotonicity and reflection in [F5] imply $\\pi/(2d)\\le\\theta\\le\\pi-\\pi/(2d)$, so $\\sin\\theta\\ge\\sin(\\pi/(2d))$. For every positive integer $n$, $|\\sin(n\\phi)|\\le n|\\sin\\phi|$: equality holds for $n=1$; the sine addition formula [F8] and $|\\sin|,|\\cos|\\le1$ from [F5] give $|\\sin((n+1)\\phi)|\\le|\\sin(n\\phi)|+|\\sin\\phi|$, so induction [F13] proves the claim. At $\\phi=\\pi/(2d)$ this yields $1=|\\sin(d\\phi)|\\le d\\sin\\phi$, hence $\\sin(\\pi/(2d))\\ge1/d$. Therefore $|r(x)|\\le d|\\sin\\theta\\,r(\\cos\\theta)|\\le d\\max_{\\eta\\in[0,2\\pi]}|S_r(\\eta)|$ throughout this central interval.",
+          "By the factor theorem [F7] and $T_d(x_j)=0$ from step 1.1, each quotient $T_d(X)/(X-x_j)$ is a polynomial of degree $d-1$, so the Lagrange polynomials $L_j(X):=T_d(X)/((X-x_j)T_d'(x_j))$ have degree at most $d-1$. At $x_i$ with $i\\ne j$, $L_j(x_i)=0$; at $x_j$, factorization $T_d(X)=(X-x_j)s_j(X)$ and product rule [F11] give $s_j(x_j)=T_d'(x_j)$, so $L_j(x_j)=1$. Thus every $r$ as in step 2.1 satisfies $r(X)=\\sum_{j=1}^d r(x_j)L_j(X)$, since the difference has degree at most $d-1$ and $d$ distinct roots, hence vanishes by [F7]. Repeated factorization by [F7] gives $T_d(X)=c\\prod_j(X-x_j)$ with $c\\ne0$ (degree $d$ by [F3]); repeated product rule gives $T_d'(X)=c\\sum_j\\prod_{k\\ne j}(X-x_k)$. Therefore the polynomial $\\sum_j T_d(X)/(X-x_j)-T_d'(X)$ vanishes for every $X$ away from the nodes, an infinite set, so it is zero by the root bound [F7]. Substituting $1/T_d'(x_j)=(-1)^{j-1}\\sin\\theta_j/d$ from step 1.1 gives $r(X)=\\frac1d\\sum_{j=1}^d(-1)^{j-1}\\sin\\theta_j\\,r(x_j)\\frac{T_d(X)}{X-x_j}$.",
+          "Let $W:=\\max_{\\eta\\in[0,2\\pi]}|S_r(\\eta)|$. At each node, $\\sin\\theta_j|r(x_j)|=|S_r(\\theta_j)|\\le W$. For $x\\in(x_1,1]$, all $x-x_j>0$, and the interpolation formula of step 3.1 gives $|r(x)|\\le(W/d)|T_d(x)|\\sum_j1/(x-x_j)=(W/d)|T_d'(x)|$. For $x\\in[-1,-x_1)$ all denominators are negative, so the summands $T_d(x)/(x-x_j)$ have a common sign and their absolute values sum to $|T_d'(x)|$; the same interpolation and node bounds give $|r(x)|\\le(W/d)|T_d'(x)|$. For interior $x=\\cos\\theta$, $0<\\theta<\\pi$, differentiating [F4] by [F6] gives $|T_d'(x)|=d|\\sin(d\\theta)|/\\sin\\theta\\le d^2$ by the sine estimate of step 2.1. Continuity extends this bound to the outer endpoints; the central boundary nodes are covered by step 2.1. Hence $|r(x)|\\le dW$ on the outer intervals. Combining this with step 2.1 proves $\\|r\\|_{[-1,1]}\\le d\\max_{\\eta\\in[0,2\\pi]}|S_r(\\eta)|$ on all of $[-1,1]$.",
+          "For continuous $g$ on $[-1,1]$ write $\\|g\\|:=\\max_{[-1,1]}|g|$; for continuous $2\\pi$-periodic $S$ write $\\|S\\|_{\\rm trig}:=\\max_{[0,2\\pi]}|S|$. Let $S$ be a real trigonometric polynomial of degree at most $d$, meaning a finite real linear combination of $1,\\cos(k\\theta),\\sin(k\\theta)$ for $1\\le k\\le d$. Its sine and cosine terms and their derivatives are continuous by [F6] and [F10], and are $2\\pi$-periodic by [F15], so all maxima just defined, including that of $|S'|$, exist by [F9]. For fixed $\\alpha$, $F_\\alpha(\\theta):=(S(\\alpha+\\theta)-S(\\alpha-\\theta))/2$ is a linear combination of $\\sin(k\\theta)$: the constant term cancels, each cosine term contributes $-\\sin(k\\alpha)\\sin(k\\theta)$, and each sine term contributes $\\cos(k\\alpha)\\sin(k\\theta)$ by the addition formulas [F8] and parity [F14]. By [F4], $\\sin(k\\theta)=\\sin\\theta\\,U_{k-1}(\\cos\\theta)$, so $F_\\alpha(\\theta)=\\sin\\theta\\,r(\\cos\\theta)$ for a polynomial $r$ supported in degrees at most $d-1$ by [F3]. By the chain rule [F6], differentiating the centered difference at $0$ gives $F_\\alpha'(0)=(S'(\\alpha)+S'(\\alpha))/2=S'(\\alpha)$. Differentiating the factorization using polynomial differentiability [F2], [F6], and [F11] gives $F_\\alpha'(0)=r(1)$, because $\\sin0=0$ and $\\cos0=1$ by [F6]. Thus $S'(\\alpha)=r(1)$. By steps 2.1 and 4.1, $|r(1)|\\le\\|r\\|\\le d\\|F_\\alpha\\|_{\\rm trig}$. Also $\\|F_\\alpha\\|_{\\rm trig}\\le\\|S\\|_{\\rm trig}$ by [F12], since $F_\\alpha$ is the half-difference of two values of $S$. As this holds for every $\\alpha$, $\\|S'\\|_{\\rm trig}\\le d\\|S\\|_{\\rm trig}$.",
+          "Put $S(\\theta):=p(\\cos\\theta)$. Applying [F8] at $(u,v)$ and $(u,-v)$ and using [F14] gives $\\cos u\\cos v=(\\cos(u+v)+\\cos(u-v))/2$. Induction now gives that each power $\\cos^k\\theta$ is a linear combination of $\\cos(j\\theta)$ for $0\\le j\\le k$: multiplying a term $\\cos(j\\theta)$ by $\\cos\\theta$ gives frequencies $j+1$ and $j-1$ when $j\\ge1$, while the constant term gives $\\cos\\theta$. Thus $S$ is a real trigonometric polynomial of degree at most $d$. Cosine decreases from $1$ to $-1$ on $[0,\\pi]$ by [F5] and its endpoint values [F6], [F5], so its range on $[0,2\\pi]$ is $[-1,1]$; with [F15] this gives $\\|S\\|_{\\rm trig}=\\|p\\|$. The chain rule [F6] and polynomial differentiability [F2] give $S'(\\theta)=-\\sin\\theta\\,p'(\\cos\\theta)$, so step 5.1 gives $\\max_{\\theta\\in[0,2\\pi]}|\\sin\\theta\\,p'(\\cos\\theta)|\\le d\\|p\\|$. Applying the inequality proved in steps 2.1 and 4.1 to $r=p'$, whose degree is at most $d-1$ by [F2], yields $\\|p'\\|\\le d\\max_{\\theta\\in[0,2\\pi]}|\\sin\\theta\\,p'(\\cos\\theta)|\\le d^2\\|p\\|$. Finally, let $M=\\max p$ and $m=\\min p$, attained by [F9], and apply this derivative bound to $p-(M+m)/2$. Its range height is $h$ and its supremum norm is $h/2$, while its derivative is $p'$. Thus $\\max|p'|\\le d^2h/2$, as claimed."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          },
+          {
+            "title": "N. L. Carothers, A Short Course on Approximation Theory, Math 682 (Bowling Green State University, 1998)",
+            "url": "https://eigen-space.org/approx2526/pdf/carothers+a-short-course-in-approximation-theory-new.pdf",
+            "locator": "Chapter 5, “The Inequalities of Markov and Bernstein,” printed pp. 57–60: Lemma 5.19 and Theorems 5.21–5.22."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice: all node sets and sums are finite, and maxima are attained on compact intervals.",
+        "dependency_level": 0,
+        "local_order": 1,
+        "existing_supplier_checks": [
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "def-formal-derivative-of-a-polynomial",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "lem-chebyshev-degree-leading-coefficients-and-extreme-values",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-cofunction-supplementary-and-reflection-identities",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "lem-real-polynomial-factor-at-a-root",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-extreme-value-r",
+          "thm-algebra-of-continuous-functions",
+          "cor-differentiable-implies-continuous",
+          "lem-of-triangle-inequality",
+          "thm-induction-principle"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance"
+      },
+      {
+        "id": "lem-qa-15-grid-return-derivative",
+        "kind": "lemma",
+        "title": "Bounded integer-grid values control excursions by the derivative",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "lem-derivative-of-a-power",
+          "cor-mean-value-theorem",
+          "thm-extreme-value-r",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Let $N\\ge1$ be an integer and let $q$ be a real polynomial. On $[0,N]$, set\n$$h:=\\max q-\\min q,\\qquad D:=\\max |q'|.$$\nIf $0\\le q(k)\\le1$ for every integer $k=0,\\ldots,N$, then\n$$D\\ge \\max\\{0,h-1\\}.$$",
+        "proof_obligations": [
+          "By [F1]–[F3], both $q$ and $|q'|$ are continuous on the compact interval $[0,N]$. Thus there exist $u,v\\in[0,N]$ with $q(u)=\\max q=:M$, $q(v)=\\min q=:m$, and $D=\\max|q'|$. In particular $h=M-m\\ge0$ and $D\\ge0$.",
+          "For any $x\\in[0,N]$, some grid integer $k\\in\\{0,\\ldots,N\\}$ satisfies $|x-k|\\le1/2$ (choose a nearest integer, with an endpoint grid point at either boundary). Applying [F4] on the interval between $x$ and $k$ when they differ gives $|q(x)-q(k)|\\le D|x-k|\\le D/2$; equality of the points gives the same inequality directly.",
+          "If $h\\le1$, then $\\max\\{0,h-1\\}=0\\le D$. It remains to consider $h>1$.",
+          "Apply step 1.2 at a maximizer $u$ and a minimizer $v$. The grid bounds give $M\\le1+D/2$ and $m\\ge-D/2$, so $h=M-m\\le1+D$. Rearranging yields $D\\ge h-1$."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "lem-derivative-of-a-power",
+          "cor-mean-value-theorem",
+          "thm-extreme-value-r",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 0,
+        "local_order": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-qa-15-discrete-markov-ehlich-zeller",
+        "kind": "lemma",
+        "title": "Finite-grid Markov derivative inequality",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "lem-qa-15-continuous-markov-derivative-bound",
+          "lem-qa-15-grid-return-derivative",
+          "lem-derivative-of-a-power",
+          "thm-chain-rule",
+          "thm-algebra-of-continuous-functions",
+          "thm-extreme-value-r"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Let $N\\ge1$ and let $q$ be a real polynomial with no supported monomial of degree greater than $d\\in\\mathbb N_0$. Put $h=\\max_{[0,N]}q-\\min_{[0,N]}q$ and $D=\\max_{[0,N]}|q'|$. If $0\\le q(k)\\le1$ for every integer $k=0,\\ldots,N$, then\n$$D\\le\\frac{d^2}{N}h.$$",
+        "proof_obligations": [
+          "The polynomial functions $q,q'$ are continuous and attain extrema on $[0,N]$ by [F3], so $h,D$ are defined. Put $p(u):=q(N(u+1)/2)$ for $u\\in[-1,1]$. It has no supported monomial above degree $d$ and the same range height $h$ as $q$ on $[0,N]$. By the chain rule in [F3], $p'(u)=(N/2)q'(N(u+1)/2)$, hence $\\max|p'|=(N/2)D$. Applying [F1] gives $(N/2)D\\le(d^2/2)h$.",
+          "Since $N>0$, multiplying the inequality of step 1.1 by $2/N$ yields $D\\le d^2h/N$. The grid-return estimate [F2] is compatible with this bound and gives the additional consequence $h\\le1+D$ that will be used in the OR lower-bound proof."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          },
+          {
+            "title": "N. L. Carothers, A Short Course on Approximation Theory, Math 682 (Bowling Green State University, 1998)",
+            "url": "https://eigen-space.org/approx2526/pdf/carothers+a-short-course-in-approximation-theory-new.pdf",
+            "locator": "Chapter 5, “The Inequalities of Markov and Bernstein,” printed pp. 57–60: Lemma 5.19 and Theorems 5.21–5.22."
+          }
+        ],
+        "existing_supplier_checks": [
+          "lem-qa-15-continuous-markov-derivative-bound",
+          "lem-qa-15-grid-return-derivative",
+          "lem-derivative-of-a-power",
+          "thm-chain-rule",
+          "thm-algebra-of-continuous-functions",
+          "thm-extreme-value-r"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 1,
+        "local_order": 3,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; rescaling and maxima use finite-dimensional real arithmetic and compact intervals.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-qa-15-bit-oracle-query-model",
+        "kind": "definition",
+        "title": "Oracle-only bit-query algorithm",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-standard-bit-query",
+          "def-qa-finite-branch-output-law",
+          "def-qa-task-and-promise-domain",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-instrument-outcome-law-normalizes"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Fix an integer $N\\ge0$ and a promise domain $D\\subseteq\\{0,1\\}^N$ as in [[def-qa-task-and-promise-domain]]. For each full-cube input $x=(x_0,\\ldots,x_{N-1})$, define the total address function $g_x:\\{0,1\\}^N\\to\\{0,1\\}$ by $g_x(e_i)=x_i$ for the one-hot word $e_i$ ($0\\le i<N$), and $g_x(a)=0$ for every other address. If $N=0$, the address set has only the empty word and $g_x$ is identically zero. A **local bit-query algorithm** is a finite rooted execution tree on one fixed finite ordered register, starting in the all-zero computational-basis state $|0^m\\rangle$ for its fixed register length $m$. The tree topology and each node label are fixed independently of $x$. Each non-oracle node is either a fixed unitary or a fixed finite instrument, with its observed outcomes retained for later control; every such operation is independent of $x$. Each query node acts on a declared $N$-bit address register and a disjoint one-bit target register by the standard XOR oracle $U_{g_x}$ of [[def-qa-standard-bit-query]], tensored with the identity on all other wires. Every terminal node uses the same ordered output-wire tuple and the same fixed accepting subset $S\\subseteq\\{0,1\\}^r$, independent of $x$; the output law sums over all unmeasured labels and all terminal branch histories as in [[def-qa-finite-branch-output-law]].\n\nThe **query count of a branch** is the number of query nodes on its root-to-terminal path. The algorithm makes at most $T$ queries when every such path contains at most $T$ query nodes. A local bit-query algorithm has **no direct input access**: there is no input register containing $x$, no $x$-dependent non-oracle operation or initial state, and no $x$-dependent terminal predicate. Thus $x$ enters only through the stated bit oracle. This is the oracle-only specialization used for the QA15 polynomial-method results.",
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 17,
+        "local_order": 4,
+        "existing_supplier_checks": [
+          "def-qa-standard-bit-query",
+          "def-qa-finite-branch-output-law",
+          "def-qa-task-and-promise-domain",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-instrument-outcome-law-normalizes"
+        ],
+        "unresolved_obligations": [
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so initial state, all nonoracle operations and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model.",
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so the initial state, every non-oracle operation, and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model.",
+          "Supplier [[def-qa-finite-branch-output-law]] is present, but its current Step 1 record is escalated because 38 transitive root supplier statements/proofs remain unread in the supplier batch audit. Verify those exact IDs and hypotheses before treating branch-law-dependent claims as ready; see research/quantum-computing-algorithms-60-2026-10-15-batch-25.cross-batch-dependencies.json."
+        ],
+        "audit_authoring_status": "complete local definition drafted; no independent acceptance; escalated for QA01 interface reconciliation"
+      },
+      {
+        "id": "def-qa-15-acceptance-polynomial",
+        "kind": "definition",
+        "title": "Acceptance polynomials and approximate degree on Boolean domains",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-task-and-promise-domain",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "lem-finite-set-has-max",
+          "thm-reals-ordered-field"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-task-and-promise-domain",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "lem-finite-set-has-max",
+          "thm-reals-ordered-field"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local definition drafted; no independent acceptance",
+        "dependency_level": 18,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-15-bit-oracle-query-complexity",
+        "kind": "definition",
+        "title": "Local bounded-error bit-query complexity",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-task-and-promise-domain",
+          "lem-finite-set-has-max"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Let $f:D\\to\\{0,1\\}$ be a promise function and $0\\le\\epsilon<1/2$. Its **local bounded-error bit-query complexity** is\n$$Q^{\\mathrm{bit}}_{\\epsilon}(f;D):=\\min\\{T\\in\\mathbb N_0:\\text{some local bit-query algorithm making at most }T\\text{ queries has }|\\Pr[A\\text{ accepts }x]-f(x)|\\le\\epsilon\\text{ for every }x\\in D\\}.$$\nThe feasible set is nonempty. Query the one-hot addresses $e_0,\\ldots,e_{N-1}$ in order, measuring each target bit and copying its result to a fresh, initially zero output wire by a fixed outcome-controlled bit flip; the outcomes are deterministically $x_0,\\ldots,x_{N-1}$. Fixed branch operations reset the target between calls and set the next one-hot address, so the terminal output tuple is exactly the recorded $N$-bit word. The fixed terminal accepting subset $\\{y\\in D:f(y)=1\\}$ then accepts exactly on yes-inputs in $D$, so this is an exact $N$-query algorithm (for $N=0$, the fixed output predicate suffices without a query). Thus the minimum is finite and at most $N$; it exists because the feasible counts below this one form a nonempty finite set of naturals, which has a least element by [[lem-finite-set-has-max]] applied to their negatives. The query count is the minimum worst-branch query count and does not charge non-oracle operations. “Local” refers exactly to the oracle-only interface in [[def-qa-15-bit-oracle-query-model]]. If $D=\\varnothing$, a zero-query algorithm is feasible and the minimum is $0$.",
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 18,
+        "local_order": 6,
+        "existing_supplier_checks": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-task-and-promise-domain",
+          "lem-finite-set-has-max"
+        ],
+        "unresolved_obligations": [
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so initial state, all nonoracle operations and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model."
+        ],
+        "audit_authoring_status": "complete local definition drafted; no independent acceptance; escalated for QA01 interface reconciliation"
+      },
+      {
+        "id": "lem-qa-15-branch-density-degree",
+        "kind": "lemma",
+        "title": "Unnormalized branch density entries have degree at most twice the query count",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-finite-branch-output-law",
+          "def-qa-standard-bit-query",
+          "def-qc-register-and-computational-basis",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-completely-positive-map",
+          "def-trace-of-an-endomorphism",
+          "thm-non-negative-operator-characterisations",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-complex-numbers-form-a-field"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Let $A$ be a local bit-query algorithm, allowing finite input-independent instrument branches, and let $h$ be any execution history containing $t(h)$ oracle calls. Write $\\sigma_h(x):=w_h(x)\\rho_h(x)$ for the unnormalized branch operator: $w_h$ is the probability weight of the history and $\\rho_h$ its conditional density operator when $w_h>0$; set $\\sigma_h=0$ when $w_h=0$. In the fixed computational basis, every matrix entry of $\\sigma_h(x)$ on $x\\in\\{0,1\\}^N$ is represented by a complex polynomial whose support has no monomial of total degree greater than $2t(h)$.",
+        "proof_obligations": [
+          "At the root, the branch weight is one and the state is the fixed all-zero basis-state projector, so every entry of $\\sigma_\\varnothing$ is constant and has no supported monomial above degree zero.",
+          "Induction hypothesis: at a history $h$ with $t(h)$ queries, each entry of $\\sigma_h(x)$ has no supported monomial of degree greater than $2t(h)$.",
+          "On a fixed unitary edge, multiplying the branch weight into the conditional-state update gives $\\sigma_{h'}=U\\sigma_hU^\\dagger$, a fixed linear map on entries, so the support degree does not increase and the query count remains $t(h)$. At instrument outcome $a$ of a positive-weight history, if $q_a>0$, then $\\sigma_{ha}=w_hq_a(\\mathcal I_a(\\rho_h)/q_a)=\\mathcal I_a(\\sigma_h)$. If $q_a=0$, [F6] makes $\\mathcal I_a(\\rho_h)$ nonnegative with trace zero; its nonnegative eigenvalues sum to zero, so the operator is zero and $\\sigma_{ha}=0=\\mathcal I_a(\\sigma_h)$. A zero-weight parent also maps to zero by linearity. Since all non-oracle maps are fixed independently of $x$ by [F1], every such instrument branch is a fixed linear map on entries and preserves the support degree bound in [step 1.2].",
+          "At an oracle node, the matrix entries of $U_{g_x}$ in the computational basis are constants, $x_i$, or $1-x_i$: a one-hot address $e_i$ toggles the target exactly when $x_i=1$, and every other address leaves it unchanged. The same holds for $U_{g_x}^\\dagger$, which equals $U_{g_x}$ because an XOR query is an involution. Therefore each entry of $U_{g_x}\\sigma_hU_{g_x}^\\dagger$ is a finite sum of products of one affine entry, one entry with support degree at most $2t(h)$ from [step 1.2], and one affine entry. By [F4]–[F5] its support degree is at most $2t(h)+2$, and the new history has $t(h)+1$ queries.",
+          "Induct on the finite execution-tree depth from [F1]. Step 1.1 proves the root case. At each successor edge, step 2.1 preserves the degree bound when the query count is unchanged, and step 2.2 raises its upper bound by exactly two when a query is added. Therefore every history $h$ satisfies the claimed support degree bound $2t(h)$; zero-weight histories satisfy it because all their entries are zero."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "induction",
+        "axiom_use": "No choice; induction is over the finite execution tree and every matrix operation is a finite sum.",
+        "dependency_level": 18,
+        "local_order": 7,
+        "existing_supplier_checks": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-finite-branch-output-law",
+          "def-qa-standard-bit-query",
+          "def-qc-register-and-computational-basis",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-completely-positive-map",
+          "def-trace-of-an-endomorphism",
+          "thm-non-negative-operator-characterisations",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-complex-numbers-form-a-field"
+        ],
+        "unresolved_obligations": [
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so the initial state, every non-oracle operation, and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model.",
+          "Supplier [[def-qa-finite-branch-output-law]] is present, but its current Step 1 record is escalated because 38 transitive root supplier statements/proofs remain unread in the supplier batch audit. Verify those exact IDs and hypotheses before treating branch-law-dependent claims as ready; see research/quantum-computing-algorithms-60-2026-10-15-batch-25.cross-batch-dependencies.json."
+        ],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance"
+      },
+      {
+        "id": "lem-qa-15-query-amplitude-degree",
+        "kind": "lemma",
+        "title": "Coherent query amplitudes have degree at most the query count",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-standard-bit-query",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-complex-numbers-form-a-field"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Let $A$ be a local bit-query algorithm on $N$ input bits whose non-oracle steps are all fixed unitaries, and suppose every execution uses at most $T$ queries. For each computational-basis state $|a,b,w\\rangle$ of its fixed register, its amplitude after every circuit prefix is represented on the Boolean input cube by a complex polynomial in $X_0,\\ldots,X_{N-1}$ whose support has no monomial of total degree greater than the number of queries in that prefix (and at the end none has degree greater than $T$).",
+        "proof_obligations": [
+          "Before any query, every basis amplitude is a coordinate of the fixed initial state, hence is a constant polynomial whose support has no degree above zero. Suppose at a prefix with $t$ queries every amplitude has a representative with no supported monomial of degree greater than $t$.",
+          "A fixed unitary $U$ sends an amplitude vector $(\\alpha_v(x))_v$ to $\\alpha'_u(x)=\\sum_v U_{uv}\\alpha_v(x)$. This is a finite complex linear combination by [F2]–[F3], so each new amplitude has no supported monomial of degree greater than $t$.",
+          "At a query, if the address is one-hot $e_i$, the target bit amplitude update is $\\alpha'_{e_i,b,w}(x)=(1-x_i)\\alpha_{e_i,b,w}(x)+x_i\\alpha_{e_i,b\\oplus1,w}(x)$; at a non-one-hot address the amplitude is unchanged. Each coefficient is affine in $x_i$, so the new amplitude has no supported monomial of degree greater than $t+1$. This includes $N=0$, when there are no one-hot addresses and the query leaves the target unchanged.",
+          "Traverse the finite circuit in its chronological order. A non-oracle layer preserves the support degree bound by step 2.1; each query raises that bound by at most one by step 2.2. Induction on the finite prefix length therefore gives no supported monomial above the query count at every prefix, and in particular none above $T$ at termination."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-standard-bit-query",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-complex-numbers-form-a-field"
+        ],
+        "unresolved_obligations": [
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so the initial state, every non-oracle operation, and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model."
+        ],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 18,
+        "local_order": 8,
+        "proof_strategy": "induction",
+        "axiom_use": "No choice; the circuit and each computational basis are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-qa-15-symmetrization",
+        "kind": "lemma",
+        "title": "Symmetrizing a Boolean-cube polynomial gives a Hamming-weight polynomial",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-acceptance-polynomial",
+          "lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-reals-ordered-field",
+          "lem-of-triangle-inequality"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Let $D\\subseteq\\{0,1\\}^N$ be invariant under coordinate permutations and let $f:D\\to\\{0,1\\}$ satisfy $f(\\pi x)=f(x)$ for every permutation $\\pi$ and $x\\in D$. If a real polynomial $p$ of total degree at most $d$ is an $\\epsilon$-approximant to $f$ on $D$, then there is a univariate real polynomial $q(t)$ of degree at most $d$ such that $q(|x|)$ is also an $\\epsilon$-approximant on $D$, where $|x|:=\\sum_{i<N}x_i$ is Hamming weight.",
+        "proof_obligations": [
+          "Replace $p$ by its multilinear reduction $\\widetilde p$ from",
+          "Define $\\bar p(x):=\\frac1{N!}\\sum_{\\pi\\in S_N}\\widetilde p(x_{\\pi(0)},\\ldots,x_{\\pi(N-1)})$. For $x\\in D$, each permuted point is in $D$ and has $f(\\pi x)=f(x)$, so",
+          "Fix a set $S$ of size $s$. Under the average over $S_N$, each subset $R$ of size $s$ occurs as the permuted image of $S$ exactly $s!(N-s)!$ times. Hence the average of $X_S$ is $\\binom Ns^{-1}\\sum_{|R|=s}X_R$, a polynomial of degree at most $s$. Summing with coefficients $c_S$ shows that $\\bar p$ has degree at most $d$ and is invariant under all coordinate permutations.",
+          "If $x$ has Hamming weight $t$, exactly $\\binom ts$ of the squarefree monomials $x_R$ with $|R|=s$ equal $1$ (their index sets must lie inside the $t$ coordinates equal to $1$); all others equal $0$. Therefore the average of each degree-$s$ monomial at $x$ is $\\binom ts/\\binom Ns=(t)_s/(N)_s$, where $(t)_s=t(t-1)\\cdots(t-s+1)$ and $(t)_0=1$. The denominator $(N)_s$ is nonzero for $s\\le N$ by"
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-acceptance-polynomial",
+          "lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-reals-ordered-field",
+          "lem-of-triangle-inequality"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 19,
+        "local_order": 9,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; the permutation group and all coefficient averages are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-qa-15-promise-domain-scope",
+        "kind": "proposition",
+        "title": "Approximation constraints apply only on the promise domain",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-task-and-promise-domain",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For $f:D\\to\\{0,1\\}$, the condition that a polynomial $p$ is an $\\epsilon$-approximant means exactly $|p(x)-f(x)|\\le\\epsilon$ for $x\\in D$; it imposes no condition at inputs outside $D$. If $D\\subsetneq\\{0,1\\}^N$, then for every $y\\notin D$ and every polynomial $p$, there is another polynomial agreeing with $p$ on $D$ and having a different value at $y$.",
+        "proof_obligations": [
+          "The first assertion is the defining predicate in [F1], whose universal quantifier ranges over $x\\in D$ only.",
+          "For $y=(y_0,\\ldots,y_{N-1})$, define $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$, an empty product equal to $1$ when $N=0$. This is a polynomial by [F2]. At a Boolean point $x$, its $i$th factor equals $1$ if $x_i=y_i$ and $0$ otherwise, so $\\delta_y(x)=1$ exactly when $x=y$ and equals $0$ at every other cube point.",
+          "Since $y\\notin D$, step 1.2 gives $\\delta_y(x)=0$ on all $x\\in D$ and $\\delta_y(y)=1$. Therefore $p+\\delta_y$ agrees with $p$ on $D$ but differs from $p$ at $y$. This proves the off-promise freedom claim."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-task-and-promise-domain",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 19,
+        "local_order": 10,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; the point indicator is an explicit finite product.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-qa-15-acceptance-degree-bound",
+        "kind": "theorem",
+        "title": "A T-query bit algorithm has an acceptance polynomial of degree at most 2T",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "lem-qa-15-branch-density-degree",
+          "def-qa-finite-branch-output-law",
+          "lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "If a local bit-query algorithm makes at most $T$ queries on every branch, then its full-cube acceptance probability $P_A(x)$ is represented on $\\{0,1\\}^N$ by a real multilinear polynomial of total degree at most $2T$. Consequently, if it computes $f:D\\to\\{0,1\\}$ with error at most $\\epsilon$ on a promise domain $D$, then $\\widetilde{\\deg}_{\\epsilon}(f;D)\\le2T$ and\n$$Q^{\\mathrm{bit}}_{\\epsilon}(f;D)\\ge\\left\\lceil\\frac{\\widetilde{\\deg}_{\\epsilon}(f;D)}2\\right\\rceil.$$",
+        "proof_obligations": [
+          "For each terminal history $\\ell$, the accepting probability contribution is the finite sum of the diagonal entries of $\\sigma_\\ell(x)$ over accepting output strings and all unmeasured basis labels. This is the output law of [F1], with the unnormalized branch operator of [F2]. Every summand has a complex polynomial representative of degree at most $2t(\\ell)\\le2T$, so their finite sum $G(x)$ has degree at most $2T$ on the Boolean cube.",
+          "For each Boolean input $x$, the sum in step 1.1 is the real probability $P_A(x)$. Replace each coefficient of $G$ by its real part to obtain a real polynomial $p$; for real $x$, $p(x)=\\operatorname{Re}G(x)=G(x)=P_A(x)$, and its total degree is still at most $2T$. Thus $p$ is an acceptance polynomial by [F3].",
+          "If $A$ has error at most $\\epsilon$ on $D$, then [F3] makes $p$ an $\\epsilon$-approximant, so $\\widetilde{\\deg}_{\\epsilon}(f;D)\\le2T$. This holds for every feasible $T$, in particular for the minimum query count [F4]. Since query counts are integers, the result is the displayed ceiling inequality."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "lem-qa-15-branch-density-degree",
+          "def-qa-finite-branch-output-law"
+        ],
+        "unresolved_obligations": [
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so initial state, all nonoracle operations and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model."
+        ],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance; escalated for QA01 interface reconciliation",
+        "dependency_level": 19,
+        "local_order": 11,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; branch histories, outcomes, basis labels, and output sums are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qa-15-exact-degree-or",
+        "kind": "theorem",
+        "title": "The exact polynomial degree of OR is N",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-acceptance-polynomial",
+          "lem-qa-15-symmetrization",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For $N\\ge1$, let $\\mathrm{OR}_N(x)=0$ when $x=0^N$ and $1$ otherwise. Its exact approximate degree is\n$$\\widetilde{\\deg}_0(\\mathrm{OR}_N;\\{0,1\\}^N)=N.$$",
+        "proof_obligations": [
+          "The polynomial $P(X)=1-\\prod_{i=0}^{N-1}(1-X_i)$ has total degree at most $N$ by [F4]. At a Boolean vector $x$, the product is $1$ exactly when all bits are zero and is $0$ otherwise, so $P(x)=\\mathrm{OR}_N(x)$. Thus [F1] gives $\\widetilde{\\deg}_0(\\mathrm{OR}_N)\\le N$.",
+          "Let $p$ be any exact polynomial approximant of degree at most $d$. Since OR is invariant under coordinate permutations, [F2] gives a univariate $q$ of degree at most $d$ with $q(0)=0$ and $q(k)=1$ for each integer $1\\le k\\le N$. Therefore the nonzero polynomial $q-1$ has the $N$ distinct roots $1,\\ldots,N$ and is nonzero because $(q-1)(0)=-1$. By [F3], its degree is at least $N$, so $d\\ge N$. Hence every exact approximant has degree at least $N$.",
+          "The upper and lower bounds of steps 1.1 and 1.2 coincide, proving the equality."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-acceptance-polynomial",
+          "lem-qa-15-symmetrization",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 20,
+        "local_order": 12,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; the Boolean cube and its Hamming-weight layers are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qa-15-or-approximate-degree-lower-bound",
+        "kind": "theorem",
+        "title": "OR has a square-root approximate-degree lower bound and corresponding query lower bounds",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "lem-qa-15-symmetrization",
+          "lem-qa-15-discrete-markov-ehlich-zeller",
+          "lem-qa-15-grid-return-derivative",
+          "cor-mean-value-theorem",
+          "thm-qa-15-acceptance-degree-bound",
+          "thm-reals-ordered-field"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For $N\\ge1$, define $\\mathrm{OR}_N(x)=0$ at $x=0^N$ and $1$ at every other Boolean vector. For $0\\le\\epsilon<1/2$ and $d=\\widetilde{\\deg}_{\\epsilon}(\\mathrm{OR}_N;\\{0,1\\}^N)$,\n$$d^2\\ge\\frac{1-2\\epsilon}{2}N.$$\nConsequently every local bit-query algorithm computing OR with error at most $\\epsilon$ has at least $\\lceil d/2\\rceil$ queries, and\n$$Q^{\\mathrm{bit}}_{\\epsilon}(\\mathrm{OR}_N;\\{0,1\\}^N)\\ge\\left\\lceil\\frac12\\sqrt{\\frac{1-2\\epsilon}{2}N}\\right\\rceil.$$",
+        "proof_obligations": [
+          "Choose an $\\epsilon$-approximating polynomial of degree at most $d$ from [F1]. Apply [F2] to obtain a univariate polynomial $q(t)$ of degree at most $d$ whose values at integer $k$ approximate $\\mathrm{OR}_N$ on the weight-$k$ layer. Define $r(t):=(q(t)+\\epsilon)/(1+2\\epsilon)$ and $c:=(1-2\\epsilon)/(1+2\\epsilon)$. At $k=0$, $q(0)\\in[-\\epsilon,\\epsilon]$, so $r(0)\\in[0,2\\epsilon/(1+2\\epsilon)]$; at each $1\\le k\\le N$, $q(k)\\in[1-\\epsilon,1+\\epsilon]$, so $r(k)\\in[1/(1+2\\epsilon),1]$. Thus all grid values lie in $[0,1]$ and $r(1)-r(0)\\ge c>0$.",
+          "Let $h=\\max_{[0,N]}r-\\min_{[0,N]}r$ and $D=\\max_{[0,N]}|r'|$. By [F4] on $[0,1]$, $D\\ge r(1)-r(0)\\ge c$. By [F3], $D\\le a h$ with $a:=d^2/N$, and $h\\le1+D$. If $a\\ge1$, then $a\\ge c/(1+c)$ since $0<c\\le1$. If $a<1$, then $D\\le a(1+D)$, so $(1-a)D\\le a$ and $D\\le a/(1-a)$. Combining $c\\le D\\le a/(1-a)$ gives $a\\ge c/(1+c)$. In both cases $a\\ge c/(1+c)=(1-2\\epsilon)/2$, proving $d^2\\ge(1-2\\epsilon)N/2$ by ordered-field algebra [F6].",
+          "The local query lower bound follows from [F5]. Since $d\\ge\\sqrt{(1-2\\epsilon)N/2}$ by step 2.1, monotonicity of the ceiling gives the displayed explicit query estimate."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          },
+          {
+            "title": "N. L. Carothers, A Short Course on Approximation Theory, Math 682 (Bowling Green State University, 1998)",
+            "url": "https://eigen-space.org/approx2526/pdf/carothers+a-short-course-in-approximation-theory-new.pdf",
+            "locator": "Chapter 5, “The Inequalities of Markov and Bernstein,” printed pp. 57–60: Lemma 5.19 and Theorems 5.21–5.22."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "lem-qa-15-symmetrization",
+          "lem-qa-15-discrete-markov-ehlich-zeller",
+          "lem-qa-15-grid-return-derivative",
+          "cor-mean-value-theorem",
+          "thm-qa-15-acceptance-degree-bound",
+          "thm-reals-ordered-field"
+        ],
+        "unresolved_obligations": [
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so initial state, all nonoracle operations and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model."
+        ],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance; escalated for QA01 interface reconciliation",
+        "dependency_level": 20,
+        "local_order": 13,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; all maxima, derivatives and layer averages are over finite-dimensional polynomials on compact intervals.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qa-15-parity-approximate-degree",
+        "kind": "theorem",
+        "title": "Parity has approximate degree N and requires at least N over 2 queries",
+        "page": "polynomial-method-and-approximate-degree",
+        "deps": [
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "lem-qa-15-symmetrization",
+          "thm-qa-15-acceptance-degree-bound",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "thm-intermediate-value",
+          "thm-algebra-of-continuous-functions",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-reals-ordered-field"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For $N\\ge1$, define $\\mathrm{PARITY}_N(x)=|x|\\pmod 2$. For every $0\\le\\epsilon<1/2$,\n$$\\widetilde{\\deg}_{\\epsilon}(\\mathrm{PARITY}_N;\\{0,1\\}^N)=N,$$\nand every local bit-query algorithm computing parity with error at most $\\epsilon$ uses at least $\\lceil N/2\\rceil$ queries.",
+        "proof_obligations": [
+          "Choose an $\\epsilon$-approximant $p$ of degree at most $d=\\widetilde{\\deg}_{\\epsilon}(\\mathrm{PARITY}_N)$ by [F1]. By [F2] it yields a univariate polynomial $q(t)$ of degree at most $d$ with $|q(k)- (k\\bmod 2)|\\le\\epsilon$ for every integer $0\\le k\\le N$. Hence $q(k)-1/2<0$ for even $k$ and $q(k)-1/2>0$ for odd $k$, because $\\epsilon<1/2$ and [F7].",
+          "The polynomial $q(t)-1/2$ is continuous by [F3]. For each $k=0,\\ldots,N-1$, its values at $k$ and $k+1$ have opposite signs by step 1.1. The intermediate value theorem [F3] gives a root in each open interval $(k,k+1)$; the root is interior because neither endpoint value is zero. These $N$ open intervals are disjoint, so the roots are $N$ distinct real numbers. Since $q-1/2$ is not the zero polynomial (its value at $0$ is negative), [F4] implies its degree is at least $N$, and therefore $d\\ge N$.",
+          "The polynomial $P(X)=\\frac12(1-\\prod_{i=0}^{N-1}(1-2X_i))$ has degree at most $N$ by [F6] and equals parity on the Boolean cube, since each factor $1-2x_i$ is $1$ for bit $0$ and $-1$ for bit $1$. Thus the approximate degree is at most $N$; with step 2.1 it equals $N$. The query lower bound follows from [F5]."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "lem-qa-15-symmetrization",
+          "thm-qa-15-acceptance-degree-bound",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "thm-intermediate-value",
+          "thm-algebra-of-continuous-functions",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree",
+          "thm-reals-ordered-field"
+        ],
+        "unresolved_obligations": [
+          "Owner integration unresolved: inspect and repair the actual QA01 query-algorithm, query-complexity, and QC promise-computation interfaces so initial state, all nonoracle operations and the output predicate are independent of x, x enters only through the bit oracle, and Q_epsilon(f) is the minimum across feasible algorithms. The local claim is proved only for the explicit oracle-only bit-query model."
+        ],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance; escalated for QA01 interface reconciliation",
+        "dependency_level": 20,
+        "local_order": 14,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; only finite layers, a finite product polynomial and the intermediate value theorem are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2243,
+    "id": "polynomial-method-and-approximate-degree-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Polynomial Method and Approximate Degree — Examples",
+    "companion": "polynomial-method-and-approximate-degree",
+    "requires": [
+      "polynomial-method-and-approximate-degree"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-15-or-polynomial-small-n",
+        "kind": "example",
+        "title": "A one-query exact algorithm on a two-point OR promise",
+        "page": "polynomial-method-and-approximate-degree-examples",
+        "deps": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "def-qa-standard-bit-query",
+          "def-qc-clifford-t-gate-library",
+          "def-qc-pauli-matrices",
+          "def-qc-instrument-and-conditional-state",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For $N=2$, let $D=\\{00,11\\}$ and let $f=\\mathrm{OR}_2|_D$, so $f(00)=0$ and $f(11)=1$. There is a one-query local bit-query algorithm with acceptance probability\n$$p(x_0,x_1)=\\frac{x_0+x_1}{2}.$$",
+        "proof_obligations": [
+          "The matrices in [F3] and [F4] satisfy $H^*H=I$ and $X^*X=I$ by direct multiplication; the CNOT action in [F3] permutes the four computational-basis vectors, so it is unitary. Starting at $|00,0\\rangle$, apply $X$ to the second address bit, then $H$ to the first and CNOT from the first to the second. The basis actions in [F3]–[F4] give $\\frac1{\\sqrt2}(|01,0\\rangle+|10,0\\rangle)=\\frac1{\\sqrt2}(|e_1,0\\rangle+|e_0,0\\rangle)$. These are fixed input-independent unitaries permitted by [F1].",
+          "One oracle call and [F2] transform this to $\\frac1{\\sqrt2}(|e_1,x_1\\rangle+|e_0,x_0\\rangle)$. Measuring the target and accepting exactly when it is $1$ has probability $\\frac12|x_1|^2+\\frac12|x_0|^2=(x_0+x_1)/2$, because the orthogonal address basis states have no cross terms and each $x_i$ is a bit. This gives the stated acceptance polynomial.",
+          "On $00$ the acceptance probability is $0=f(00)$, and on $11$ it is $1=f(11)$, so the algorithm is exact on $D$ with one query. The polynomial $p$ has total degree one by [F7]. No constant polynomial can be exact on $D$ because a constant has the same value at $00$ and $11$, while $f$ differs there. Thus $\\widetilde{\\deg}_0(f;D)=1$ by [F5], and the one-query construction verifies $Q^{\\mathrm{bit}}_0(f;D)\\le1$ by [F6]."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-15-bit-oracle-query-complexity",
+          "def-qa-standard-bit-query",
+          "def-qc-clifford-t-gate-library",
+          "def-qc-pauli-matrices",
+          "def-qc-instrument-and-conditional-state",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-monomials-multidegree-and-total-degree"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 19,
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; fixed finite-dimensional unitaries, one query, and a finite output measurement suffice."
+      },
+      {
+        "id": "cex-qa-15-off-cube-values-are-unconstrained",
+        "kind": "counterexample",
+        "title": "A symmetrized acceptance polynomial can exceed one between Hamming layers",
+        "page": "polynomial-method-and-approximate-degree-examples",
+        "deps": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-standard-bit-query",
+          "def-qc-pauli-matrices",
+          "lem-qa-15-symmetrization",
+          "def-qc-instrument-and-conditional-state"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "False claim: if an acceptance polynomial takes values in $[0,1]$ on the Boolean cube, then its symmetrized univariate polynomial takes values in $[0,1]$ at every real $t$ between $0$ and $N$.",
+        "proof_obligations": [
+          "The Pauli $X$ in [F5] toggles a basis bit and is a fixed unitary because it permutes the two basis vectors. Start at the all-zero address, target, and two-bit output register. In the first round, apply $X$ to the first address bit to set the address to $e_0$, query and measure the target; since it began at zero, the outcome is deterministically $x_0$ by [F2]. If the outcome is $1$, apply $X$ to the first output bit and to the target; if it is $0$, leave both unchanged. This copies the result and resets the target. Apply $X$ to both address bits to change $e_0$ into $e_1$; repeat the query and measurement, copying the second outcome into the second output bit and resetting the target in the same way. Every outcome-controlled operation is a fixed unitary on its branch by [F1] and [F5]; the output is deterministically $(x_0,x_1)$. This finite tree uses exactly two queries. Accept on the fixed subset $\\{00,01,10\\}$, so the algorithm computes NAND.",
+          "The resulting acceptance polynomial is $p(X_0,X_1)=1-X_0X_1$: its values are $1,1,1,0$ at $00,01,10,11$, respectively, exactly the NAND acceptance law. In particular it lies in $[0,1]$ on the Boolean cube.",
+          "Averaging $p$ over the two coordinate permutations leaves its constant term $1$ fixed and sends $X_0X_1$ to itself. By [F4], the associated Hamming-weight polynomial is $q(t)=1-\\binom{t}{2}=1-t(t-1)/2$, since it takes values $1,1,0$ at weights $0,1,2$.",
+          "At the noninteger point $t=1/2$, $q(1/2)=1-((1/2)(-1/2))/2=9/8>1$. Thus the symmetrized polynomial is not constrained to remain in $[0,1]$ between integer Hamming weights, refuting the claim."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21, §§21.3–21.6, printed pp. 98–101 (PDF pp. 106–110): query amplitudes, acceptance degree, symmetrization, parity, Markov derivative bound, and OR lower bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§11.2, printed pp. 90–92 (PDF pp. 102–104): query amplitudes, acceptance polynomial, symmetrization, approximate-degree OR lower bound, and exact OR degree."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-15-bit-oracle-query-model",
+          "def-qa-15-acceptance-polynomial",
+          "def-qa-standard-bit-query",
+          "def-qc-pauli-matrices",
+          "lem-qa-15-symmetrization",
+          "def-qc-instrument-and-conditional-state"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "complete local proof drafted; no independent acceptance",
+        "dependency_level": 20,
+        "local_order": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice; the two-bit query tree and permutation average are finite."
+      }
+    ]
+  }
+]

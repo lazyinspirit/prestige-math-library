@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-riemann-stieltjes-and-parametric-contour-integrals-agree.json
 id: thm-riemann-stieltjes-and-parametric-contour-integrals-agree
 kind: theorem
 title: "For piecewise-C1 contours the Riemann–Stieltjes integral agrees with the parametric complex integral and the published real line integrals"
@@ -7,13 +9,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-riemann-stieltjes-c1-integrator-reduction, def-scalar-and-vector-line-integrals-along-piecewise-c1-paths, def-vector-valued-derivative-and-integral, cor-piecewise-c1-paths-have-additive-speed-integral-length, thm-continuous-implies-integrable, cor-arc-length-accumulation-derivative-is-speed]
+deps: [thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed, def-absolute-line-integral-over-a-rectifiable-path, thm-riemann-stieltjes-c1-integrator-reduction, def-scalar-and-vector-line-integrals-along-piecewise-c1-paths, def-vector-valued-derivative-and-integral, cor-piecewise-c1-paths-have-additive-speed-integral-length, thm-continuous-implies-integrable, cor-arc-length-accumulation-derivative-is-speed]
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -32,7 +31,7 @@ The real and imaginary parts of the first display are the published vector line 
 
 ## Facts & Assumptions
 
-**Given:** A piecewise-$C^1$ contour $\gamma=x+iy$, a continuous $f=u+iv$, and an admissible partition $(t_j)$.
+**Given:** A piecewise-$C^1$ contour $\gamma=x+iy$, a continuous $f=u+iv$, and an admissible partition $(t_j)$. Apply all Euclidean path suppliers below to $\Gamma=\Phi\circ\gamma=(x,y)$. By [[thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed]], complex length agrees with coordinate length on every subinterval, the complex velocity notation is $\gamma'_j=x'_j+iy'_j$, and $|\gamma'_j|=\|\Gamma'_j\|_2$. The absolute-integral definition [[def-absolute-line-integral-over-a-rectifiable-path]] gives $s_\gamma=s_\Gamma$; on each smooth piece this differs from its local arc-length function by a constant. In [L2] use the real vector fields $(u\circ\Phi^{-1},-v\circ\Phi^{-1})$ and $(v\circ\Phi^{-1},u\circ\Phi^{-1})$ along $\Gamma$, and the analogous scalar field.
 
 [L1] Let $f:[a,b]\to\mathbb R$ be Riemann integrable. Suppose $\alpha$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $\alpha'$ extends continuously to $[a,b]$. Then $f$ is Riemann–Stieltjes integrable with respect to $\alpha$ and $\int_a^b f\,d\alpha=\int_a^b f(x)\alpha'(x)\,dx$ ([[thm-riemann-stieltjes-c1-integrator-reduction]]).
 

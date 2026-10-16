@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-largest-summand-bound-for-symmetric-independent-variables.json
 id: lem-largest-summand-bound-for-symmetric-independent-variables
 title: "Largest-summand bound for independent symmetric variables"
 kind: lemma
@@ -8,12 +10,6 @@ deps: ["def-symmetric-real-random-variable", "def-partial-sums-and-sample-means"
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Roch Note 4, Appendix A, Lemma 4.19 and proof, p. 10"
@@ -34,7 +30,7 @@ $$\mathbb P(|S_n|>t)\ge\tfrac12(1-(1-p)^n)\ge\tfrac12(1-e^{-np}).$$
 
 [F2] [[thm-independent-random-elements-have-product-joint-law]]: Let $n\ge1$, and let $X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$ for $i<n$ be independent random elements. Define $X=(X_0,\dots,X_{n-1}):\Omega\to\prod_{i<n}S_i.$ Then $X$ is a random element of $\left(\prod_{i<n}S_i,\bigotimes_{i<n}\Sigma_i\right)$, and its law is the finite product of the marginal laws: $\mathbb P_X=\bigotimes_{i<n}\mathbb P_{X_i}.$
 
-[F3] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then: 1. $cf$ is measurable for every real scalar $c$; 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable; 3. if $f+g$ is pointwise defined, then $f+g$ is measurable; 4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
+[F3] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then: 1. $cf$ is measurable for every real scalar $c$; 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable; 3. if $f+g$ is pointwise defined, then $f+g$ is measurable; 4. with the total function-product convention declared in that theorem, the pointwise product $fg$ is measurable.
 
 ## Proof
 

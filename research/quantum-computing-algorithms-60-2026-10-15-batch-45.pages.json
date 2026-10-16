@@ -1,0 +1,722 @@
+[
+  {
+    "order": 2254,
+    "id": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Linear Combinations of Unitaries and Taylor Simulation",
+    "companion": "lcu-oblivious-amplitude-amplification-and-taylor-simulation-examples",
+    "requires": [
+      "state-preparation-isometry-synthesis-and-limits",
+      "hamiltonian-simulation-and-product-formulas",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "controlled-gates-phase-and-entanglement",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "registers-tensor-products-and-partial-trace",
+      "the-complex-exponential-and-eulers-formula",
+      "classical-and-quantum-error-correcting-codes"
+    ],
+    "items": [
+      {
+        "id": "lem-qa-21-pure-state-trace-distance-from-vector-error",
+        "kind": "lemma",
+        "title": "Pure-state trace distance is bounded by vector error",
+        "statement": "Let $H$ be a finite-dimensional complex inner-product space and let $u,v\\in H$ be unit vectors. Write $P_u=|u\\rangle\\langle u|$ and $P_v=|v\\rangle\\langle v|$ using the Dirac convention of [[def-qc-dirac-notation-conversion]], and define their trace distance by $D(P_u,P_v):=\\tfrac12\\|P_u-P_v\\|_1$, where $\\|\\cdot\\|_1$ is the trace norm of [[def-qc-trace-norm]]. Then\n$$D(P_u,P_v)\\le \\|u-v\\|.$$",
+        "deps": [
+          "def-qc-trace-norm",
+          "thm-qc-trace-norm-spectral-formula",
+          "def-qc-dirac-notation-conversion",
+          "def-inner-product-norm",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, §1.1.3, Eqs. (1.181)–(1.184)",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.5",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; only finite-dimensional spectral decomposition and inner-product identities are used."
+      },
+      {
+        "id": "def-qa-21-clean-ancilla-postselection",
+        "kind": "definition",
+        "title": "Clean-ancilla zero-branch postselection",
+        "statement": "Let $A$ be a finite register with distinguished unit computational-basis vector $|0_A\\rangle$ (unit by [[thm-qc-computational-basis-orthonormal]]), let $S$ be a finite-dimensional complex-inner-product space, and define the isometry $J:S\\to A\\otimes S$ by $Jx=|0_A\\rangle\\otimes x$. The product inner product makes $J$ an isometry; [[lem-qc-linear-isometry-adjoint-identities]] gives $J^\\dagger J=I_S$, and [[thm-qc-isometric-encoding-projector]] makes $\\Pi_0:=JJ^\\dagger$ the orthogonal projection onto its image. On elementary tensors this is $|0_A\\rangle\\langle0_A|\\otimes I_S$ by the convention of [[def-qc-tensor-map]]. For a unit vector $\\phi\\in A\\otimes S$, define its zero-branch vector $q:=J^\\dagger\\phi$, zero-branch weight $p_0:=\\|q\\|^2$, and complementary-branch weight $p_\\perp:=\\|(I-\\Pi_0)\\phi\\|^2$. When $p_0>0$, the conditional system vector is $q/\\sqrt{p_0}$; when $p_0=0$, no conditional vector is assigned. This definition fixes only the clean-ancilla two-outcome branch rule used on this page; it makes no physical realization claim.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-isometric-encoding-projector",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-qc-dirac-notation-conversion",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "lem-qc-linear-isometry-adjoint-identities",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.17)–(28.22), printed pp.141–142: the projected ancilla-zero branch and its squared norm."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eq. (9.3), printed p.74: the zero-index branch, branch weight, and conditional state."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; this is a finite-dimensional mathematical branch rule."
+      },
+      {
+        "id": "lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians",
+        "kind": "lemma",
+        "title": "Partial trace contracts the trace norm on Hermitian operators",
+        "statement": "Let $H_A,H_E$ be finite-dimensional complex inner-product spaces and let $X=X^\\dagger$ be an endomorphism of $H_A\\otimes H_E$. Then\n$$\\|\\operatorname{Tr}_E X\\|_1\\le\\|X\\|_1.$$\nThe trace norm and partial trace are those of [[def-qc-trace-norm]] and [[def-qc-partial-trace]]. If either factor is zero-dimensional, both sides are zero.",
+        "deps": [
+          "def-qc-trace-norm",
+          "thm-qc-trace-norm-spectral-formula",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-real-and-complex-inner-product-space",
+          "def-trace-of-an-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, §1.1.3, Eq. (1.183)",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.5",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; only finite-dimensional spectral decomposition and finite tensor coordinates are used."
+      },
+      {
+        "id": "thm-qa-21-clean-ancilla-postselection-probability-law",
+        "kind": "theorem",
+        "title": "Clean-ancilla postselection has normalized branch weights",
+        "statement": "With the notation of [[def-qa-21-clean-ancilla-postselection]], every unit vector $\\phi$ has $p_0,p_\\perp\\in[0,1]$ and $p_0+p_\\perp=1$. If $p_0>0$, the assigned conditional vector $q/\\sqrt{p_0}$ is a unit vector; if $p_0=0$, then $q=0$ and no conditional vector exists.",
+        "deps": [
+          "def-qa-21-clean-ancilla-postselection",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-isometric-encoding-projector",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-dirac-notation-conversion",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "lem-qc-linear-isometry-adjoint-identities",
+          "def-inner-product-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.17)–(28.22), printed pp.141–142."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eq. (9.3), printed p.74."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; finite-dimensional inner-product identities suffice."
+      },
+      {
+        "id": "def-qa-21-lcu-input-and-access-model",
+        "kind": "definition",
+        "title": "LCU decomposition and access model",
+        "statement": "Let $S$ be a finite-dimensional complex-inner-product system space and let\n$$M=\\sum_{j=0}^{m-1}c_jV_j,\\qquad c_j\\in\\mathbb C,$$\nwhere $m\\ge1$, each $V_j:S\\to S$ is unitary, and\n$$\\alpha:=\\sum_{j=0}^{m-1}|c_j|>0.$$\nThe finite ordered list $(c_j,V_j)_{j<m}$ is an **LCU representation** of $M$; it is part of the input, and a matrix description alone does not supply circuits for any $V_j$.\n\nSet $q=\\lceil\\log_2m\\rceil$ and let $A_{\\rm idx}$ be the $q$-qubit index register, with the one-dimensional $q=0$ case allowed. Its computational indices are $0,\\ldots,2^q-1$. For $j<m$ put $\\omega_j=c_j/|c_j|$ when $c_j\\ne0$ and $\\omega_j=1$ when $c_j=0$. Define the complete SELECT unitary by\n$$S_{\\rm sel}(|j\\rangle\\otimes x)=\\begin{cases}|j\\rangle\\otimes\\omega_jV_jx,&j<m,\\\\|j\\rangle\\otimes x,&m\\le j<2^q.\\end{cases}$$\nThis basis rule fixes every valid and padded index; it extends linearly to all superpositions and acts as identity on any separately declared work register.\n\nA **PREPARE** access is a fully specified unitary $P$ on the index register and all its declared work registers, with\n$$P|0_{\\rm anc}\\rangle=e^{i\\theta}\\left(\\sum_{j<m}\\sqrt{|c_j|/\\alpha}\\,|j\\rangle\\right)\\otimes|0_{\\rm work}\\rangle$$\nfor some phase $\\theta\\in\\mathbb R$. The same full unitary, including its action on every nonzero input, determines $P^\\dagger$; neither an inverse nor a controlled call is implied unless explicitly supplied. The allowed global phase cancels between $P$ and $P^\\dagger$ in the LCU block. PREPARE work wires are included among the ancillas projected to zero.\n\nFor an amplitude-table implementation with $D=2^q$ entries, the dense fixed-width input length, table reading, arithmetic, and coefficient precision are separate costs. If the continuous-rotation QC24 procedure [[alg-qc-state-preparation]] is used, its source theorem [[thm-qc-state-preparation-rotation-level-upper-bound]] gives $O((q+1)D)$ bounded-arity gates and serial depth, with at most $\\max\\{q-1,0\\}$ reusable clean work bits; the table and exact arithmetic costs remain separate. This bound is for continuous rotations. Finite-alphabet synthesis and finite-precision bit-time require separate guarantees. A supplied PREPARE circuit is instead charged by its declared full description, gates, wires, and generation cost.\n\nThe **LCU block circuit** is the complete unitary\n$$W:=P^\\dagger S_{\\rm sel}P$$\non all coefficient/work ancillas and the system. The access record separately lists PREPARE, PREPARE$^\\dagger$, SELECT, SELECT$^\\dagger$, and every controlled form used, together with their query, gate, wire, coefficient-bit, and classical-description costs under [[def-qa-20-simulation-error-and-cost-model]] and [[def-qc-circuit-cost-model]]. Unspecified access, inverse access, controlled access, and table loading have no free cost. The zero LCU representation is outside this access model because $\\alpha=0$ does not define a normalized coefficient state.",
+        "deps": [
+          "def-qa-20-simulation-error-and-cost-model",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "alg-qc-state-preparation",
+          "def-qc-circuit-cost-model",
+          "def-qc-state-preparation-cost-model",
+          "thm-qc-state-preparation-rotation-level-upper-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.10)–(28.20), printed pp.141–142: finite LCU, coefficient preparation, SELECT, and projected block."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Method 2 and Eq. (9.3), printed pp.73–74: finite LCU access and the unnormalized zero-index branch."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; every index set and circuit is finite, and no arbitrary choice is used."
+      },
+      {
+        "id": "alg-qa-21-lcu-block-encoding",
+        "kind": "algorithm",
+        "title": "LCU block encoding",
+        "statement": "**Input:** An LCU representation and complete PREPARE and SELECT access from [[def-qa-21-lcu-input-and-access-model]], including their stated work-register and padded-index behavior. The access record must explicitly supply PREPARE$^\\dagger$ and its cost; an input without that inverse access is inadmissible.\n\n**Procedure:** On the coefficient/work ancillas and system, apply PREPARE, then SELECT, then the supplied PREPARE$^\\dagger$. Return the complete unitary $W=P^\\dagger S_{\\rm sel}P$. Charge the three calls at their declared costs. No measurement or deterministic state-output guarantee is part of this procedure.",
+        "deps": [
+          "def-qa-21-lcu-input-and-access-model",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.11)–(28.20), printed pp.141–142."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Method 2 and Eq. (9.3), printed pp.73–74."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the procedure uses only finite supplied unitary access."
+      },
+      {
+        "id": "def-qa-21-oblivious-reflection",
+        "kind": "definition",
+        "title": "Oblivious ancilla reflection",
+        "statement": "Let $A$ be the full coefficient and PREPARE-work ancilla register in [[def-qa-21-lcu-input-and-access-model]], let $S$ be the system, and let $J:S\\to A\\otimes S$ be the clean injection of [[def-qa-21-clean-ancilla-postselection]]. Set $\\Pi_0:=JJ^\\dagger$; [[thm-qc-isometric-encoding-projector]] makes this the orthogonal projection onto the image of $J$. Its basis formula is $\\Pi_0=|0_A\\rangle\\langle0_A|\\otimes I_S$, where $|0_A\\rangle$ is unit by [[thm-qc-computational-basis-orthonormal]] and the tensor action is that of [[def-qc-tensor-map]]. Define\n$$R_0:=I-2\\Pi_0.$$\nThus $R_0$ acts as $-I$ on the clean-ancilla subspace and as $+I$ on its orthogonal complement; it acts identically on the unknown system state. In the convention of [[def-qc-reflection]], $R_0=S_{\\Pi_0}$, while that item writes $R_{\\Pi_0}=2\\Pi_0-I=-R_0$. These signs are distinct inside controlled blocks: if only the controlled $R_{\\Pi_0}$ is supplied, implement controlled $R_0$ with the exact control-$Z$ correction of [[thm-qc-reflection-unitary-involution]] and charge that gate. A projector-reflection call and its controlled form are explicit access operations, not free consequences of a state vector.",
+        "deps": [
+          "def-qa-21-lcu-input-and-access-model",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-map",
+          "def-qa-21-clean-ancilla-postselection",
+          "thm-qc-isometric-encoding-projector",
+          "def-qc-reflection",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eq. (28.22), printed p.142: reflection on the zero coefficient subspace."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "§9.3, printed pp.74–76: oblivious amplification uses only the clean coefficient register."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the reflector is the explicit finite-dimensional projector formula."
+      },
+      {
+        "id": "def-qa-21-truncated-taylor-lcu",
+        "kind": "definition",
+        "title": "Finite Taylor LCU polynomial",
+        "statement": "Let $H=\\sum_{j=0}^{m-1}a_jV_j$ on a finite-dimensional complex-inner-product space, with $m\\ge1$, real $a_j$ and Hermitian unitaries $V_j$, and put $\\Lambda=\\sum_j|a_j|$. For real $h$ and integer $K\\ge0$, define\n$$M_K(h):=\\sum_{k=0}^{K}\\frac{(-ihH)^k}{k!}.$$\nIts ordered product-term LCU list has one empty tuple for $k=0$, with coefficient $1$ and unitary $I$, and for each $1\\le k\\le K$ and ordered tuple $(j_1,\\ldots,j_k)$ has coefficient\n$$c_{k,\\mathbf j}:=\\frac{(-i)^k h^k a_{j_1}\\cdots a_{j_k}}{k!}$$\nand unitary $V_{j_1}\\cdots V_{j_k}$. Distinct tuples remain distinct entries even if their product unitaries coincide. The absolute coefficient sum of this listed representation is\n$$s_K(h):=\\sum_{k=0}^{K}\\frac{(\\Lambda|h|)^k}{k!}.$$\n\nWhenever $s_K(h)\\le2$, append two distinct identity entries with coefficients $+q$ and $-q$, where $q=(2-s_K(h))/2$. They leave the represented matrix unchanged and raise the listed absolute coefficient sum to exactly $2$. If $q=0$, the zero-weight entries may be retained with zero preparation amplitude or omitted. The polynomial, coefficient phases, ordered tuple index, and any numerical precision used to generate them are part of the finite input/access record; no term product, coefficient table, PREPARE circuit, or SELECT circuit is free.",
+        "deps": [
+          "def-qa-21-lcu-input-and-access-model",
+          "def-self-adjoint-and-normal-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.5)–(28.14), printed pp.141–142: truncated Taylor polynomial and its ordered product-term LCU."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3.1",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eqs. (9.4)–(9.5), printed pp.74–76: Taylor expansion and ordered products of Hamiltonian terms."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the sums and product-term index sets are finite."
+      },
+      {
+        "id": "thm-qa-21-lcu-block-correctness",
+        "kind": "theorem",
+        "title": "LCU projected-block and postselection correctness",
+        "statement": "Let $M=\\sum_{j<m}c_jV_j$ be a finite LCU representation with $\\alpha=\\sum_j|c_j|>0$, let $W$ be the unitary from [[alg-qa-21-lcu-block-encoding]], and let $Jx=|0_{\\rm anc}\\rangle\\otimes x$ include every coefficient and PREPARE-work ancilla. Then\n$$J^\\dagger WJ=M/\\alpha.$$\nFor every unit input vector $\\psi$, the clean-ancilla zero-branch vector is $M\\psi/\\alpha$ and its postselection weight, under [[def-qa-21-clean-ancilla-postselection]], is $\\|M\\psi\\|^2/\\alpha^2$. If this weight is positive, the conditional system vector is $M\\psi/\\|M\\psi\\|$; if it is zero, the conditional vector is undefined.",
+        "deps": [
+          "alg-qa-21-lcu-block-encoding",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-dirac-notation-conversion",
+          "def-qa-21-clean-ancilla-postselection",
+          "thm-qa-21-clean-ancilla-postselection-probability-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.17)–(28.21), printed pp.142–143: the projected block and postselection branch."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eq. (9.3), printed p.74: the unnormalized zero-index output and success probability."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all registers, sums, and branch weights are finite-dimensional."
+      },
+      {
+        "id": "alg-qa-21-one-step-oblivious-amplification",
+        "kind": "algorithm",
+        "title": "One-step oblivious amplitude amplification",
+        "statement": "**Input:** A unitary $W$ on coefficient/work ancillas and system, explicit inverse access to $W$, the reflection $R_0=I-2\\Pi_0$ of [[def-qa-21-oblivious-reflection]], and an operator $M$ satisfying $J^\\dagger WJ=M/2$ for the clean injection $Jx=|0_{\\rm anc}\\rangle\\otimes x$.\n\n**Procedure:** Chronologically apply $W$, then $R_0$, then $W^\\dagger$, then $R_0$, then $W$. The resulting unitary is\n$$C:=-WR_0W^\\dagger R_0W.$$\nThe scalar $-1$ is an explicit phase correction; it is not omitted when this procedure is controlled. The circuit uses two $W$ calls, one $W^\\dagger$ call, and two reflection calls. A controlled invocation requires the declared controlled forward, inverse, reflection, and phase-correction gates. This procedure makes no measurement and asserts no exact ancilla cleanup for a nonunitary or approximate $M$; the robust clean-input guarantee is proved separately.",
+        "deps": [
+          "alg-qa-21-lcu-block-encoding",
+          "def-qa-21-oblivious-reflection",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.22)–(28.25), printed p.142: two reflections and the exact projected block."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Exercise 9 and the discussion after Eq. (9.3), printed pp.74–76."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the procedure is a finite composition of declared unitaries."
+      },
+      {
+        "id": "thm-qa-21-taylor-tail-bound",
+        "kind": "theorem",
+        "title": "Taylor simulation tail bound",
+        "statement": "Let $H=\\sum_{j<m}a_jV_j$ be a finite-dimensional self-adjoint Hamiltonian on a nonzero complex-inner-product space, with $m\\ge1$, written with real $a_j$ and Hermitian unitaries $V_j$, and set $\\Lambda=\\sum_j|a_j|$. For real $h$, integer $K\\ge0$, and $x=\\Lambda|h|$,\n$$\\left\\|M_K(h)-e^{-ihH}\\right\\|\\le e^x\\frac{x^{K+1}}{(K+1)!}.$$\nThe Taylor coefficient sum $s_K=\\sum_{k=0}^Kx^k/k!$ satisfies $s_K\\le e^x\\le2$ when $x\\le\\ln2$. If $0<\\eta<1$ and $x\\le\\ln2$, there is a $K=O\\!\\left(1+\\frac{\\log(1/\\eta)}{\\log\\log(e+1/\\eta)}\\right)$ for which the right-hand side is at most $\\eta$.",
+        "deps": [
+          "def-qa-21-truncated-taylor-lcu",
+          "def-qa-19-finite-matrix-dynamics",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-complex-exponential",
+          "lem-complex-exponential-series-converges-everywhere",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-natural-logarithm",
+          "thm-exponential-is-strictly-increasing",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eq. (28.6), printed p.141: the factorial Taylor remainder bound."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3.1",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eq. (9.4) and Exercise 10, printed pp.75–76: the truncated Taylor simulation route and tail obligation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the proof uses finite spectral decompositions and absolutely convergent scalar series."
+      },
+      {
+        "id": "thm-qa-21-oblivious-amplification-block-identity",
+        "kind": "theorem",
+        "title": "Oblivious-amplification block identity",
+        "statement": "Let $J:S\\to A\\otimes S$ be the clean-ancilla isometry $Jx=|0_{\\rm anc}\\rangle\\otimes x$, let $\\Pi=JJ^\\dagger$ be the orthogonal projection onto its image, and set $R_0=I-2\\Pi$. Let $W$ be unitary and assume $J^\\dagger WJ=M/2$. For the chronological circuit $WR_0W^\\dagger R_0W$,\n$$J^\\dagger WR_0W^\\dagger R_0WJ=-\\frac{3}{2}M+\\frac12MM^\\dagger M.$$\nIf $M$ is unitary, this projected block is $-M$. The identity alone gives no bound on leakage outside the clean-ancilla subspace for a nonunitary $M$.",
+        "deps": [
+          "alg-qa-21-one-step-oblivious-amplification",
+          "def-qa-21-oblivious-reflection",
+          "thm-qc-reflection-unitary-involution",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "lem-qc-linear-isometry-adjoint-identities",
+          "thm-qc-isometric-encoding-projector",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.22)–(28.25), printed p.142: the exact three-use block polynomial."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3 and Exercise 9",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Printed pp.74–76: the oblivious-amplification circuit and its unitary-target condition."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the proof is finite operator algebra."
+      },
+      {
+        "id": "lem-qa-21-robust-one-step-oaa-isometry",
+        "kind": "lemma",
+        "title": "Robust one-step OAA including ancilla leakage",
+        "statement": "Let $S$ be a nonzero finite-dimensional system space, let $A$ be the complete clean-ancilla register, let $Jx=|0_A\\rangle\\otimes x$, and put $\\Pi=JJ^\\dagger$, $R_0=I-2\\Pi$. Suppose $W$ is unitary, $J^\\dagger WJ=M/2$, $V:S\\to S$ is unitary, and $\\|M-V\\|\\le\\eta\\le1/100$. For\n$$C:=-WR_0W^\\dagger R_0W$$\none has the clean-input isometry bound\n$$\\|CJ-JV\\|\\le10\\sqrt{\\eta}.$$\nThe estimate includes residual ancilla leakage; it does not assert exact cleanup for nonzero $\\eta$.",
+        "deps": [
+          "alg-qa-21-one-step-oblivious-amplification",
+          "thm-qa-21-oblivious-amplification-block-identity",
+          "def-qa-21-oblivious-reflection",
+          "thm-qc-reflection-unitary-involution",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-linear-isometry-adjoint-identities",
+          "thm-qc-isometric-encoding-projector"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eq. (28.25), printed p.142; the full ancilla-leakage bound below is proved locally."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3 and Exercise 9",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Printed pp.74–76; the robust isometry estimate including leakage is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all decompositions and tensor registers are finite-dimensional."
+      },
+      {
+        "id": "alg-qa-21-segmented-taylor-simulation",
+        "kind": "algorithm",
+        "title": "Segmented Taylor LCU simulator",
+        "statement": "**Inputs:** A finite list $H=\\sum_{j=0}^{m-1}a_jV_j$ on a nonzero finite-dimensional complex system space, where $m\\ge1$, $a_j\\in\\mathbb R$ and each $V_j$ is a supplied Hermitian unitary; real time $t$ and a tolerance $0<\\epsilon\\le1$, each with a finite exact description. The description of $\\epsilon$ supplies arbitrarily tight rational interval enclosures. Also supply the complete PREPARE/SELECT, inverse, and cost interfaces from [[def-qa-21-lcu-input-and-access-model]] for the Taylor list selected below. For the certified procedure the real descriptions supply arbitrarily tight rational interval enclosures for $S=\\Lambda|t|$ and $S/\\ln2$, where $\\Lambda=\\sum_j|a_j|$. Exact coefficient phases and the required unitary/circuit access for the selected list are separate supplied data; interval names alone do not provide them. Arithmetic, refinement, description and generation costs are charged separately. No efficient classical compiler is asserted.\n\nFor the **indexed term-query implementation**, additionally supply the complete unitary $T(|j\\rangle\\otimes x)=|j\\rangle\\otimes V_jx$ for $j<m$, acting as identity at padded term indices, together with every controlled or inverse form actually used and its separate costs. A call to this coherent multiplexer is one indexed term query. Individual accesses to the separate $V_j$ do not grant this operation: when it is assembled from individual controlled $V_j$, each multiplexed call uses $m$ equality-controlled individual calls, and all label tests, routing, phase gates and work are charged. With an independently supplied Taylor SELECT, only its declared internal resource record applies.\n\n**Procedure:**\n\n1. Refine an enclosure $[\\epsilon_-,\\epsilon_+]$ of $\\epsilon$ until $0<\\epsilon_-$ and $\\epsilon_+\\le2\\epsilon_-$. Refine an enclosure $[S_-,S_+]$ of $S=\\Lambda|t|$, intersecting with the known nonnegative half-line, until its width is less than $\\epsilon_-/8$. If $S_+\\le\\epsilon_-/4$, return the exact identity circuit with no oracle calls and the certificate $S\\le\\epsilon/4$. Otherwise proceed to the segmented branch; no positive lower bound on $S$ is needed. These refinements terminate because $\\epsilon>0$ and the supplied descriptions give arbitrarily tight rational enclosures. No exact equality test on interval-described reals is used; every $t=0$ or $\\Lambda=0$ input takes the identity branch.\n2. In the remaining branch put $q=S/\\ln2$. In the ideal exact-arithmetic variant set $r=\\max(1,\\lceil q\\rceil)$. In the certified variant refine an enclosure $[q_-,q_+]$ until its width is less than $1$, then set $r=\\max(1,\\lceil q_+\\rceil)$. Either choice has $r\\ge1$, $\\Lambda|t|/r\\le\\ln2$, and $r<q+2$. Set $h=t/r$ and $\\eta=\\epsilon^2/(1600r^2)$. All refinement and segment-count costs are recorded.\n3. Set $\\eta_-:=\\epsilon_-^2/(1600r^2)$, a positive rational lower bound for $\\eta$. Set $n=1$ and successively double $n$ until the exact rational comparison $4/n!\\le\\eta_-$ holds; compute the factorial by finite integer multiplication and set $K=n-1$. This finite scheduler has no real-equality test or unbounded refinement at a fixed failed order. Since $x=\\Lambda|h|\\le\\ln2<1$, the tail in [[thm-qa-21-taylor-tail-bound]] is at most $2/n!\\le\\eta_-/2\\le\\eta/2$. Its factorial estimate gives the stated logarithmic-over-double-logarithmic order, including the factor of at most two from doubling. Charge the factorial and coefficient arithmetic.\n4. Expand $M_K(h)$ into the ordered product-term LCU list of [[def-qa-21-truncated-taylor-lcu]]. The certificate $\\Lambda|h|\\le\\ln2$ and [[thm-qa-21-taylor-tail-bound]] prove $s_K\\le2$ analytically. Add two distinct identity terms $+qI,-qI$ with $q=(2-s_K)/2$, retaining zero-weight padding labels if needed; the matrix is unchanged and the listed norm is exactly $2$. Under the indexed term-query implementation, implement each Taylor SELECT using at most $K$ controlled indexed term queries: process tuple positions from $K$ down to $1$, condition each call on a valid tuple having that position, and use its term label. Compute/uncompute those labels in charged work registers. This reverse execution order yields the displayed product $V_{j_1}\\cdots V_{j_k}$. Apply the coefficient phase separately and act as identity on padding and unused labels. The adjoint SELECT reverses this sequence and uses the declared inverse calls.\n5. For each of the $r$ segments, allocate a fresh clean register containing the expanded-term index and every PREPARE work wire. Build $W=P^\\dagger S_{\\rm sel}P$ using the exact coefficient phases and the padded invalid-index behavior. Apply the phase-corrected chronological circuit $W,R_0,W^\\dagger,R_0,W$, with $R_0=I-2\\Pi_0$ on the complete clean coefficient/work register. Thus the segment unitary is $-WR_0W^\\dagger R_0W$, with two reflection calls, two forward $W$ calls, and one inverse call.\n6. Compose the $r$ segment circuits in time order. Retain every segment's coefficient/work register in the output dilation; do not measure or claim exact cleanup. The output is the finite unitary/access-circuit description together with the chosen $r,K$, coefficient table or generator, and resource record.\n\nThe default procedure is uncontrolled. A controlled variant is defined only when controlled access to every component is supplied; the known minus sign is applied as a phase on the outer control, not discarded. If a compiled implementation is used, the per-call operator-norm error bounds $\\delta_i$ must satisfy the certified sum $\\sum_i\\delta_i\\le\\delta_{\\rm impl}\\le\\epsilon/2$. The exact-access variant has $\\delta_{\\rm impl}=0$. Every PREPARE, SELECT, inverse, reflection, control, coefficient, table, precision, wire, and gate cost remains explicit.",
+        "deps": [
+          "def-qa-21-truncated-taylor-lcu",
+          "def-qa-21-lcu-input-and-access-model",
+          "alg-qa-21-one-step-oblivious-amplification",
+          "thm-qa-21-taylor-tail-bound",
+          "thm-qa-21-lcu-block-correctness",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-circuit-cost-model",
+          "lem-qa-21-robust-one-step-oaa-isometry"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.5)–(28.25), printed pp.141–143: Taylor LCU, padding scale, and OAA block."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3.1",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eqs. (9.4)–(9.5), printed pp.75–76: Taylor simulation by ordered unitary products and LCU."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; all term lists, registers, and circuits are finite."
+      },
+      {
+        "id": "thm-qa-21-taylor-simulation-error-and-cost",
+        "kind": "theorem",
+        "title": "Segmented Taylor error and resources",
+        "statement": "Let $H=\\sum_{j<m}a_jV_j$ be the finite Hermitian-unitary decomposition on a nonzero finite-dimensional complex-inner-product space in [[alg-qa-21-segmented-taylor-simulation]], let $\\Lambda=\\sum_j|a_j|$, let $t\\in\\mathbb R$, and let $0<\\epsilon\\le1$. For the segmented branch, let $r$ be the segment count selected by that algorithm. It satisfies $\\Lambda|t|/r\\le\\ln2$ and $r<\\Lambda|t|/\\ln2+2$; put $\\eta=\\epsilon^2/(1600r^2)$.\nChoose $K$ by the factorial-doubling rule in that algorithm. Let $V_{\\rm impl}$ be its complete circuit or access-circuit unitary, including all work registers, and suppose the sum of its per-call operator-norm error bounds is at most $\\epsilon/2$. Let $J_{\\rm in}$ append all initial work registers in zero, and let $J_{\\rm out}$ append the same work registers in zero to an ideal output. Then\n$$\\|V_{\\rm impl}J_{\\rm in}-J_{\\rm out}e^{-itH}\\|\\le\\epsilon.$$\nFor every finite reference space and every input density operator on system plus reference, tracing out the work registers gives output states $\\rho_{\\rm impl},\\rho_{\\rm ideal}$ satisfying\n$$D(\\rho_{\\rm impl},\\rho_{\\rm ideal}):=\\tfrac12\\|\\rho_{\\rm impl}-\\rho_{\\rm ideal}\\|_1\\le\\epsilon.$$\nThe certified small-time branch returns identity with error at most $\\epsilon/3$; it is exact when $t=0$ or $\\Lambda=0$. No operator-norm bound on arbitrary nonzero initial work registers or exact cleanup of the output registers is claimed.\n\nOn the segmented branch the segment count is $r$, and the truncation order obeys $K=O(1+\\log(1/\\eta)/\\log\\log(e+1/\\eta))$. With the explicitly supplied controlled indexed term multiplexer of the algorithm, the construction uses at most $3rK$ indexed term queries. If each such multiplexed call is instead assembled from the $m$ individually supplied controlled $V_j$, the corresponding bound is $3rmK$ individual term calls; equality tests, routing, coefficient phases and their inverse/control operations remain separately charged. Independently supplied Taylor SELECT access has only its declared internal query/gate cost, with no inferred $K$-call implementation. It uses exactly $3r$ PREPARE calls, $3r$ PREPARE$^\\dagger$ calls, $2r$ SELECT calls, $r$ SELECT$^\\dagger$ calls, and $2r$ reflection calls. If the expanded Taylor list has $N_K=\\sum_{k=0}^K m^k$ ordered terms and each segment keeps a fresh index register, the index width is $\\lceil\\log_2(N_K+2)\\rceil$ qubits and the $r$ retained registers' total index width is $r\\lceil\\log_2(N_K+2)\\rceil$. All PREPARE table, internal work, term gates, coefficient bits, circuit description, control, inverse, and classical generation costs are charged separately under [[def-qa-20-simulation-error-and-cost-model]].",
+        "deps": [
+          "alg-qa-21-segmented-taylor-simulation",
+          "def-qa-21-truncated-taylor-lcu",
+          "thm-qa-21-lcu-block-correctness",
+          "thm-qa-21-taylor-tail-bound",
+          "thm-qa-21-oblivious-amplification-block-identity",
+          "lem-qa-21-robust-one-step-oaa-isometry",
+          "def-qa-19-finite-matrix-dynamics",
+          "thm-qa-19-matrix-exponential-unitary-properties",
+          "def-qa-20-simulation-error-and-cost-model",
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "def-qc-partial-trace",
+          "def-qc-tensor-register-and-permutation",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-non-negative-operator-characterisations",
+          "lem-qa-21-pure-state-trace-distance-from-vector-error",
+          "lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.5)–(28.25), printed pp.141–143; the robust clean-input leakage and segmented proof are supplied locally."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3.1",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eqs. (9.4)–(9.5), printed pp.75–76; the finite segmented error and resource proof is supplied locally."
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information, §1.1.3, Eqs. (1.181)–(1.183)",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "PDF pp.33–34: trace norm and monotonicity under partial trace."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; finite-dimensional spectral decompositions and finite products suffice."
+      }
+    ]
+  },
+  {
+    "order": 2255,
+    "id": "lcu-oblivious-amplitude-amplification-and-taylor-simulation-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Linear Combinations of Unitaries and Taylor Simulation — Examples",
+    "companion": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+    "requires": [
+      "lcu-oblivious-amplitude-amplification-and-taylor-simulation"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-21-cancelling-normalization-padding",
+        "kind": "example",
+        "title": "Cancelling identity padding fixes the LCU scale",
+        "statement": "For the truncated Taylor LCU in [[def-qa-21-truncated-taylor-lcu]], suppose\nits listed coefficient norm is\n$$s_K=\\sum_{k=0}^K\\frac{(\\Lambda|h|)^k}{k!}\\le2.$$\nSet $q=(2-s_K)/2$ and append two distinct identity entries with coefficients\n$+q$ and $-q$. The represented polynomial is unchanged while its listed\ncoefficient norm becomes exactly $2$.\n\nFor example, take the one-term Hamiltonian $H=1\\cdot Z$, $h=\\log 2$, and\n$K=0$. Then\n$M_0=I$, $s_0=1$, and the padded list $(1I,\\tfrac12I,-\\tfrac12I)$ still sums\nto $I$ and has absolute coefficient sum $2$.",
+        "deps": [
+          "def-qa-21-truncated-taylor-lcu",
+          "def-qc-pauli-matrices",
+          "def-natural-logarithm"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.5)–(28.14), printed pp.141–142: the Taylor LCU and its coefficient normalization."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3.1",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Eqs. (9.4)–(9.5), printed pp.75–76: the Taylor product-term LCU; the cancelling padding calculation is local."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-21-unknown-input-reflection",
+        "kind": "counterexample",
+        "title": "A preserved unknown state cannot program its own reflection",
+        "statement": "Let $P$ and $T$ be qubit registers. There is no fixed unitary $U$ on $P\\otimes T$\nthat, for every unit program vector $|\\psi\\rangle\\in P$ and target vector\n$|\\phi\\rangle\\in T$, implements\n$$U(|\\psi\\rangle\\otimes|\\phi\\rangle)=|\\psi\\rangle\\otimes(I-2|\\psi\\rangle\\langle\\psi|)|\\phi\\rangle,$$\nwhile preserving the program register. This only rules out that exact\nprogram-state interface; it does not rule out a declared circuit for a known\nreflection or a separate oracle interface.",
+        "deps": [
+          "def-qc-reflection",
+          "def-qa-21-oblivious-reflection",
+          "thm-qc-reflection-unitary-involution",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-rank-one-reflection-phase-and-control-sign",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "lem-qc-linear-isometry-preserves-inner-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.22)–(28.25), printed p.142: reflections are operations supplied by explicit access; the impossibility claim is proved locally."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Printed pp.74–76: oblivious amplification uses a declared reflection; the preserved-program contradiction is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "contradiction",
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-qa-21-two-term-lcu-postselection",
+        "kind": "example",
+        "title": "Two-term LCU postselection is input dependent",
+        "statement": "On a qubit let $M=I+2Z$, with LCU terms $(1,I)$ and $(2,Z)$, so\n$\\alpha=3$. Use the complete PREPARE unitary\n$$P=\\begin{pmatrix}1/\\sqrt3&-\\sqrt{2/3}\\\\\\sqrt{2/3}&1/\\sqrt3\\end{pmatrix},$$\nwhose first column prepares $3^{-1/2}|0\\rangle+\\sqrt{2/3}|1\\rangle$, and\nexplicitly supply inverse access $P^\\dagger$. Let SELECT apply $I$ and $Z$ on\nthe corresponding indices. The projected block is\n$$M/3=\\begin{pmatrix}1&0\\\\0&-1/3\\end{pmatrix}.$$\nFor $|\\psi\\rangle=a|0\\rangle+b|1\\rangle$ with\n$|a|^2+|b|^2=1$, the clean-ancilla branch vector is\n$a|0\\rangle-(b/3)|1\\rangle$ and its weight is\n$$p_0=|a|^2+|b|^2/9.$$\nThe branch is always nonzero, with $1/9\\le p_0\\le1$; its conditional state is\nthe branch vector divided by $\\sqrt{p_0}$. The least weight occurs at\n$a=0$, and the greatest at $b=0$.",
+        "deps": [
+          "def-qc-pauli-matrices",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-dirac-notation-conversion",
+          "thm-qa-21-lcu-block-correctness",
+          "def-qa-21-clean-ancilla-postselection",
+          "thm-qa-21-clean-ancilla-postselection-probability-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 28 §28.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Eqs. (28.10)–(28.21), printed pp.141–143: a finite LCU block and its zero-ancilla postselection branch."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §9.3",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Method 2 and Eq. (9.3), printed pp.73–74: the LCU block and input-dependent branch probability."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

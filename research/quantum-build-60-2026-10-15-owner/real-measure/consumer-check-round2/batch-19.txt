@@ -1,0 +1,349 @@
+FILE thm-completeness-of-full-exponential-family
+
+STATEMENT Assume AC and let $(P_\eta)_{\eta\in\Omega}$ be a full-rank exponential family as in [[def-exponential-family]], with $\Omega$ containing a nonempty open subset of $\mathbb R^k$. Then its canonical statistic $T$ is complete.
+
+LINE 75 3.1 For every real $t$ with $\|t\|_\infty<\delta$, its Laplace transform is $\int e^{t\cdot s}\nu(ds)=\frac{Z(\eta_0+t)}{Z(\eta_0)}E_{\eta_0+t}g(T)=0$ by the mean-zero premise. The transform-uniqueness result [F3], under axiom branch [A1], gives $\nu=0$. [A1, F3, step 2.1, given, algebra]
+
+4.1 For every Borel $B$, $0=\nu(B)=\rho(T^{-1}B)=\int_Bg(s)P_{\eta_0}^T(ds)$ by the definition of the pushforward measure and $\rho$. Taking $B=\{g>0\}$ and $B=\{g<0\}$ shows both positive and negative parts have zero integral, so $g(T)=0$ $P_{\eta_0}$-almost surely. Every family density is strictly positive on $\{h>0\}$, so all $P_\eta$ are equivalent to $P_{\eta_0}$ and the same vanishing holds for every $\eta$. By [F2], $T$ is complete. [F1, F2, step 3.1, given, algebra] ∎
+
+FILE thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation
+
+STATEMENT Let $(X,\mathcal A,\mu)$ be a measure space and let $h\in L^1(\mu)$. Define
+$$\nu(E):=\int_E h\,d\mu\qquad(E\in\mathcal A).$$
+Then $\nu$ is a complex measure on $(X,\mathcal A)$, and for every measurable
+$E$,
+$$|\nu|(E)=\int_E |h|\,d\mu.$$
+
+LINE 53 **Proof technique:** direct.
+
+1.1 The set function $\nu$ is finite-valued because $$|\nu(E)|=\left|\int_E h\,d\mu\right|\le \int_E |h|\,d\mu\le \int |h|\,d\mu<+\infty$$ by [L1] and [L2]. If $(E_n)$ is a pairwise disjoint measurable sequence, then $\sum_{n=0}^N \mathbf 1_{E_n}\uparrow \mathbf 1_{\cup_n E_n}$, so monotone convergence applied to the positive and negative parts of the real and imaginary parts of $h$ gives $$\nu\left(\bigcup_n E_n\right)=\sum_n \nu(E_n).$$ Thus $\nu$ is a complex measure. [L1, L2]
+
+1.2 Define $$u(x):=\begin{cases}\overline{h(x)}/|h(x)|,&h(x)\neq0,\\0,&h(x)=0.\end{cases}$$ Then $|u|\le1$ and $u h=|h|$. By [L5], the function $u$ is measurable. Apply [L6] to $\rho(F):=\int_F |h|\,d\mu$ and obtain a finite measure $\rho$ on $(X,\mathcal A)$. Applying [L4] to $u$ on $(E,\mathcal A\!\restriction_E,\rho)$ gives complex simple functions $s_n$ with $|s_n|\le2$ and $$\int_E |u-s_n|\,d\rho\to0.$$ For each $n$, define the clipped simple function $$t_n:=\frac{s_n}{\max\{1,|s_n|\}}.$$ Then $|t_n|\le1$, and because $|u|\le1$ one has $$|t_n-u|\le |t_n-s_n|+|s_n-u|\le 2|s_n-u|.$$ Hence $\int_E |u-t_n|\,d\rho\to0$. [L4, L5, L6]
+
+FILE thm-continuous-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]).
+
+Let $F : [a,b] \to \mathbb{R}$ be continuous and monotone. Then $F$ is
+differentiable at Lebesgue-almost every point of $(a,b)$.
+
+LINE 44 **Proof technique:** direct.
+
+1.1 Replacing $F$ by $-F$ if necessary, we may assume that $F$ is nondecreasing. For each integer $N \ge 1$, the first inequality of [[thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions]] with $u=a$, $v=b$, and $R=N$ shows that the sets $\{x \in [a,b) : D^{+}F(x) > N\}$ and, after reflecting the interval, $\{x \in (a,b] : D^{-}F(x) > N\}$ have measure at most $(F(b)-F(a))/N$. Hence $D^{+}F$ and $D^{-}F$ are finite almost everywhere. [given]
+
+2.1 Fix rationals $0 < r < R$ and put $$E_{r,R} := \{x \in (a,b) : D^{+}F(x) > R \text{ and } D_{-}F(x) < r\}.$$ For each rational $h>0$, the maps $$x \mapsto \frac{F(x+h)-F(x)}{h} \quad \text{on } (a,b-h), \qquad x \mapsto \frac{F(x)-F(x-h)}{h} \quad \text{on } (a+h,b)$$ are continuous because $F$ is continuous. Therefore $$\{D^{+}F>R\}=\bigcap_{m \ge 1}\bigcup_{\substack{h \in \mathbb{Q}\\0<h<1/m}}\left\{x \in (a,b-h) : \frac{F(x+h)-F(x)}{h}>R\right\},$$ and similarly $$\{D_{-}F<r\}=\bigcap_{m \ge 1}\bigcup_{\substack{h \in \mathbb{Q}\\0<h<1/m}}\left\{x \in (a+h,b) : \frac{F(x)-F(x-h)}{h}<r\right\}.$$ Hence both sets are Borel, so $E_{r,R}$ is Lebesgue measurable. For any subinterval $[u,v] \subseteq [a,b]$, the two inequalities of [[thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions]] give $R\,\lambda(E_{r,R} \cap [u,v]) \le F(v)-F(u)$ and $(R-r)\,\lambda(E_{r,R} \cap [u,v]) \le R(v-u)-F(v)+F(u)$. Adding them yields $(2R-r)\,\lambda(E_{r,R} \cap [u,v]) \le R(v-u)$, so $$\lambda(E_{r,R} \cap [u,v]) \le \frac{R}{2R-r}(v-u).$$ The constant $\frac{R}{2R-r}$ is strictly less than $1$. Therefore no point of $E_{r,R}$ can be a density-one point of $E_{r,R}$. By the Lebesgue density theorem [[thm-lebesgue-density-theorem]], $E_{r,R}$ is null. [step 1.1, algebra]
+
+LINE 46 1.1 Replacing $F$ by $-F$ if necessary, we may assume that $F$ is nondecreasing. For each integer $N \ge 1$, the first inequality of [[thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions]] with $u=a$, $v=b$, and $R=N$ shows that the sets $\{x \in [a,b) : D^{+}F(x) > N\}$ and, after reflecting the interval, $\{x \in (a,b] : D^{-}F(x) > N\}$ have measure at most $(F(b)-F(a))/N$. Hence $D^{+}F$ and $D^{-}F$ are finite almost everywhere. [given]
+
+2.1 Fix rationals $0 < r < R$ and put $$E_{r,R} := \{x \in (a,b) : D^{+}F(x) > R \text{ and } D_{-}F(x) < r\}.$$ For each rational $h>0$, the maps $$x \mapsto \frac{F(x+h)-F(x)}{h} \quad \text{on } (a,b-h), \qquad x \mapsto \frac{F(x)-F(x-h)}{h} \quad \text{on } (a+h,b)$$ are continuous because $F$ is continuous. Therefore $$\{D^{+}F>R\}=\bigcap_{m \ge 1}\bigcup_{\substack{h \in \mathbb{Q}\\0<h<1/m}}\left\{x \in (a,b-h) : \frac{F(x+h)-F(x)}{h}>R\right\},$$ and similarly $$\{D_{-}F<r\}=\bigcap_{m \ge 1}\bigcup_{\substack{h \in \mathbb{Q}\\0<h<1/m}}\left\{x \in (a+h,b) : \frac{F(x)-F(x-h)}{h}<r\right\}.$$ Hence both sets are Borel, so $E_{r,R}$ is Lebesgue measurable. For any subinterval $[u,v] \subseteq [a,b]$, the two inequalities of [[thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions]] give $R\,\lambda(E_{r,R} \cap [u,v]) \le F(v)-F(u)$ and $(R-r)\,\lambda(E_{r,R} \cap [u,v]) \le R(v-u)-F(v)+F(u)$. Adding them yields $(2R-r)\,\lambda(E_{r,R} \cap [u,v]) \le R(v-u)$, so $$\lambda(E_{r,R} \cap [u,v]) \le \frac{R}{2R-r}(v-u).$$ The constant $\frac{R}{2R-r}$ is strictly less than $1$. Therefore no point of $E_{r,R}$ can be a density-one point of $E_{r,R}$. By the Lebesgue density theorem [[thm-lebesgue-density-theorem]], $E_{r,R}$ is null. [step 1.1, algebra]
+
+3.1 Applying step 2.1 to the reflected function $x \mapsto F(a+b-x)$ shows that for every rational $0 < r < R$ the set $E'_{r,R} := \{x \in (a,b) : D^{-}F(x) > R \text{ and } D_{+}F(x) < r\}$ is null as well. Taking the countable union over rational pairs and using [[thm-countable-union-of-null-is-null]], we conclude that outside a null set one has $D^{+}F \le D_{-}F$ and $D^{-}F \le D_{+}F$. Combined with the sidewise inequalities $D_{+}F \le D^{+}F$ and $D_{-}F \le D^{-}F$ from [[thm-dini-derivatives-exist-are-ordered-and-detect-differentiability]], this forces $D_{+}F = D^{+}F = D_{-}F = D^{-}F$ at almost every point where the four Dini derivatives are finite. [step 2.1]
+
+LINE 48 2.1 Fix rationals $0 < r < R$ and put $$E_{r,R} := \{x \in (a,b) : D^{+}F(x) > R \text{ and } D_{-}F(x) < r\}.$$ For each rational $h>0$, the maps $$x \mapsto \frac{F(x+h)-F(x)}{h} \quad \text{on } (a,b-h), \qquad x \mapsto \frac{F(x)-F(x-h)}{h} \quad \text{on } (a+h,b)$$ are continuous because $F$ is continuous. Therefore $$\{D^{+}F>R\}=\bigcap_{m \ge 1}\bigcup_{\substack{h \in \mathbb{Q}\\0<h<1/m}}\left\{x \in (a,b-h) : \frac{F(x+h)-F(x)}{h}>R\right\},$$ and similarly $$\{D_{-}F<r\}=\bigcap_{m \ge 1}\bigcup_{\substack{h \in \mathbb{Q}\\0<h<1/m}}\left\{x \in (a+h,b) : \frac{F(x)-F(x-h)}{h}<r\right\}.$$ Hence both sets are Borel, so $E_{r,R}$ is Lebesgue measurable. For any subinterval $[u,v] \subseteq [a,b]$, the two inequalities of [[thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions]] give $R\,\lambda(E_{r,R} \cap [u,v]) \le F(v)-F(u)$ and $(R-r)\,\lambda(E_{r,R} \cap [u,v]) \le R(v-u)-F(v)+F(u)$. Adding them yields $(2R-r)\,\lambda(E_{r,R} \cap [u,v]) \le R(v-u)$, so $$\lambda(E_{r,R} \cap [u,v]) \le \frac{R}{2R-r}(v-u).$$ The constant $\frac{R}{2R-r}$ is strictly less than $1$. Therefore no point of $E_{r,R}$ can be a density-one point of $E_{r,R}$. By the Lebesgue density theorem [[thm-lebesgue-density-theorem]], $E_{r,R}$ is null. [step 1.1, algebra]
+
+3.1 Applying step 2.1 to the reflected function $x \mapsto F(a+b-x)$ shows that for every rational $0 < r < R$ the set $E'_{r,R} := \{x \in (a,b) : D^{-}F(x) > R \text{ and } D_{+}F(x) < r\}$ is null as well. Taking the countable union over rational pairs and using [[thm-countable-union-of-null-is-null]], we conclude that outside a null set one has $D^{+}F \le D_{-}F$ and $D^{-}F \le D_{+}F$. Combined with the sidewise inequalities $D_{+}F \le D^{+}F$ and $D_{-}F \le D^{-}F$ from [[thm-dini-derivatives-exist-are-ordered-and-detect-differentiability]], this forces $D_{+}F = D^{+}F = D_{-}F = D^{-}F$ at almost every point where the four Dini derivatives are finite. [step 2.1]
+
+4.1 Steps 1.1 and 3.1 show that all four Dini derivatives agree finitely almost everywhere on $(a,b)$. Therefore [[thm-dini-derivatives-exist-are-ordered-and-detect-differentiability]] implies that $F'$ exists almost everywhere. Since a null set in the Lebesgue sense is the same as elementary measure zero on the line ([[thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line]]), this is exactly the claimed almost-everywhere statement. [step 1.1, step 3.1] ∎
+
+FILE thm-convolution-bound-for-regular-estimators
+
+STATEMENT Assume AC. Let $\{P_{n,h}:h\in\mathbb R^d\}$ be LAN at $h=0$ with
+positive-definite information matrix $K$ and central sequence $\Delta_n$.
+Let $T_n=\sqrt n(\widehat\theta_n-\theta_0)$ be regular under every fixed
+local alternative, with common limit law $W$ as in
+[[def-regular-estimator-under-local-alternatives]]. Then there is a
+probability law $\nu$ on $\mathbb R^d$ such that
+$$\mathcal L(W)=N_d(0,K^{-1})*\nu.$$
+Here $*$ is convolution, the law of the sum of independent random vectors
+with the two indicated laws. In particular, the efficient Gaussian component
+with covariance $K^{-1}$ is a convolution factor of every regular limit.
+
+LINE 105 [F11] [[thm-cramer-wold-device]]: Under AC, Borel probability laws on a finite-dimensional Euclidean space are determined by all their real linear projection laws.
+
+[F12] [[def-product-measure-on-sigma-finite-spaces]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], and [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]: The product of two Borel probability laws exists, and bounded product integrals factor into the marginal integrals, by applying Tonelli to the positive and negative parts of their real and imaginary parts.
+
+## Proof
+
+FILE thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]).
+
+Let $f : \mathbb{R}^n \to \mathbb{C}$ be locally integrable, let
+$\varphi \in C_c^\infty(\mathbb{R}^n)$ have mass $1$, and let
+$\varphi_\varepsilon$ be the associated mollifier. Then for every
+$\varepsilon > 0$, the convolution
+
+$$ (f*\varphi_\varepsilon)(x) := \int_{\mathbb{R}^n} f(y)\varphi_\varepsilon(x-y)\,dy $$
+
+is smooth, and for every multi-index $\alpha$,
+
+$$ \partial^\alpha(f*\varphi_\varepsilon) = f*(\partial^\alpha \varphi_\varepsilon). $$
+
+LINE 52 
+[L4] Products and sums of finite measurable real functions are measurable; applying this to real and imaginary parts gives the complex version ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[L5] Dominated convergence passes pointwise limits through integrals under an integrable absolute majorant ([[thm-dominated-convergence]]).
+
+FILE thm-cut-locus-of-a-point-has-riemannian-volume-zero
+
+STATEMENT Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Let $(M,g)$ be a complete, connected, boundaryless, finite-dimensional Riemannian manifold and let $p\in M$, with unit tangent sphere $S_pM$ and cut locus $\operatorname{Cut}(p)$ as in [[def-cut-point-and-cut-locus-of-a-point]]. Then $\operatorname{Cut}(p)$ has zero Riemannian volume: writing $\operatorname{vol}_g$ for the Borel measure defined by the Riemannian density ([[prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density]]),
+$$\operatorname{vol}_g\bigl(\operatorname{Cut}(p)\bigr)=0.$$
+In dimension zero $\operatorname{Cut}(p)=\varnothing$ and the value is zero. No compactness of $M$ is assumed and no total-volume hypothesis is imposed.
+
+LINE 237 11.1 The Riemannian volume vanishes. [A1, F3, F12, F25, F27, F28, F30, F31, F32, F33, F34, F35, F36, F41, F47, F48, F50, F51, F53, step 1.1, step 10.1, algebra] Let $\{(U_j,\varphi_j)\}_{j\in\mathbb N}$ be the atlas produced in step 10.1 and put $G_j:=\operatorname{Cut}(p)\cap U_j$. Each $G_j$ is Borel: $\operatorname{Cut}(p)$ is closed in $M$ [F3] and $U_j$ is open, so both are Borel subsets of $M$, and the Borel sigma-algebra is closed under finite intersections [F41]; moreover $\bigcup_jG_j=\operatorname{Cut}(p)$. Fix $j$, write $x:=\varphi_j:U_j\to O:=x(U_j)$ for the chart, and let $r$ be the coefficient of the Riemannian density in this chart; by [F31] the density is positive and smooth with coefficient $r$, so $r:O\to(0,+\infty)$ is smooth, hence continuous as a map of smooth manifolds [F12] (the open set $O\subseteq\mathbb R^n$ carries the standard smooth structure [F27]). Let $\tilde r:\mathbb R^n\to[0,+\infty)$ be $r$ extended by $0$ outside $O$. Then $\tilde r$ is Borel measurable: the family $\mathcal C:=\{B\subseteq\mathbb R:\tilde r^{-1}(B)\in\mathcal B(\mathbb R^n)\}$ is a sigma-algebra, and it contains every open $V\subseteq\mathbb R$, because $\tilde r^{-1}(V)$ is the union of $O\cap r^{-1}(V)$, which is open in $\mathbb R^n$ since $O$ is open and $r$ is continuous and a set open in the open subspace $O$ is open in $\mathbb R^n$ [F50], and of $O^{\mathrm c}$ when $0\in V$, which is closed [F41]; since the Borel sigma-algebra is generated by the open sets and is the smallest sigma-algebra containing them [F41, F51], $\mathcal C$ contains $\mathcal B(\mathbb R)$, so $\tilde r$ is Borel measurable [F47]. Every Borel set is Lebesgue measurable [F53], so $\tilde r$ is Lebesgue measurable [F47]. By [F30] the measure $\operatorname{vol}_g$ is the Borel measure of the density $\mu_g$, so the chart formula [F32] gives $$\operatorname{vol}_g(G_j)=\int_{x(G_j)}r\,d\lambda_n=\int_{x(G_j)}\tilde r\,d\lambda_n,$$ the second equality because $\tilde r$ agrees with $r$ on $O\supseteq x(G_j)$ and the integral over a set is the integral of the product with its characteristic function [F48]. The set $x(G_j)$ is contained in the null set $x(\operatorname{Cut}(p)\cap U_j)$ of step 10.1, hence is null [F25]; by [F33] it has Lebesgue outer measure zero, and by [F34] it is Lebesgue measurable with $\lambda_n\bigl(x(G_j)\bigr)=0$. Therefore [F35], applied to the measurable nonnegative function $\tilde r$ and this measurable null set, gives $\int_{x(G_j)}\tilde r\,d\lambda_n=0$ and hence $\operatorname{vol}_g(G_j)=0$ for every $j$. Disjointifying, $G'_0:=G_0$ and $G'_k:=G_k\setminus(G_0\cup\cdots\cup G_{k-1})$ for $k\ge1$, the sets $G'_k$ are Borel [F41], pairwise disjoint, satisfy $G'_k\subseteq G_k$, and have union $\operatorname{Cut}(p)$; countable additivity of the measure $\operatorname{vol}_g$ [F36] and the nonnegativity of measure values then give $$\operatorname{vol}_g\bigl(\operatorname{Cut}(p)\bigr)=\sum_{k=0}^\infty\operatorname{vol}_g(G'_k)\le\sum_{k=0}^\infty\operatorname{vol}_g(G_k)=0,$$ so that $\operatorname{vol}_g(\operatorname{Cut}(p))=0$. [A1, F3, F12, F25, F27, F28, F30, F31, F32, F33, F34, F35, F36, F41, F47, F48, F50, F51, F53, step 1.1, step 10.1, algebra]
+
+12.1 Boundary, endpoint and choice audit. [A1, F1, F2, F10, F11, F22, F23, F24, F25, F26, F28, F29, F30, F33, F35, F36, F38, F41, F43, F48, F49, F50, step 1.1, step 1.3, step 5.1, step 6.1, step 11.1, given] Dimension zero is discharged in step 1.1, where the empty cut locus has volume zero. Dimension one is covered by the same argument: $\mathbb R^{n-1}=\mathbb R^0$ is a single point, the parametrisations $\psi_{1,\pm}$ are the constants $\pm1$, the graph theorem [F23] covers compact subsets of $\mathbb R^0$ (its own proof treats the case $m=0$), the cone map $\Psi_{1,\pm}$ is the map $t\mapsto\pm t$ on the open set $\mathbb R^0\times\mathbb R=\mathbb R$, and the image lemma [F24] applies there with ambient dimension $m=n=1$; the only step needing care was the compactness of the one-point ball $B_m$, handled in step 5.1 by the definition of compactness [F49]. The empty manifold carries no point $p$ and is excluded by the hypothesis $p\in M$. Degenerate pieces are harmless: a quadruple with $C_{i,\varepsilon,k,m}=\varnothing$ contributes the empty graph, content zero by [F22], and the ball $B_m$ has radius $1-1/m>0$ because $m\ge2$, so no zero-radius ball is used; the closed intervals $[k,k+1]$ of step 6.1 include both endpoints, which costs nothing because [F23] needs only compactness of the parameter set. The zero vector is never passed to the exponential differential and is not part of $S_pM$ or $E$ by [F1], and $\lambda$ is defined on all of $T_pM$. Assumption [A1] is used through the suppliers that require it and nowhere else: the Hopf-Rinow and exponential smoothness statements [F10, F11], the countable atlas [F28], the nullity criterion [F29], the countable-union closure of null sets [F25], the equidimensional image theorem [F26], the volume measure [F30] and the measurable-integral facts [F33, F35, F36]; the covering argument of step 5.1 uses the Archimedean property and the integer part, neither of which needs choice, and the choice of basis in step 1.3 is a single existential instantiation. The statement asserts one equality and contains no biconditional, so there is no forward or reverse implication of an equivalence to verify; the only equivalence invoked, nullity versus vanishing outer measure [F33], is used in the direction from nullity to vanishing outer measure. Finally the proof never uses compactness of $M$ and never assumes the cut locus to be a submanifold: nullity is produced from the continuity of the cut time alone, and the closing measure computation uses only the density chart formula. [A1, F1, F2, F10, F11, F22, F23, F24, F25, F26, F28, F29, F30, F33, F35, F36, F38, F41, F43, F48, F49, F50, step 1.1, step 1.3, step 5.1, step 6.1, step 11.1, given] ∎
+
+## Source locator
+
+FILE thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions
+
+STATEMENT Assume Countable Choice and the Axiom of Choice. Let $n\ge2$, let $\Omega\subseteq\mathbb R^n$ be open, let $0<\theta\le M_a^2$, let $A=(a^{ij})$ be measurable symmetric with $\theta|\xi|^2\le\sum a^{ij}(x)\xi_i\xi_j\le M_a^2|\xi|^2$ for a.e. $x$ and all $\xi$, and let $L_0u=-D_i(a^{ij}D_ju)$. Let $u\in H^1(\Omega;\mathbb R)$ satisfy $u\ge0$ a.e. and
+$$a_0(u,v)\le0\qquad\text{for every }v\in H^1_0(\Omega),\ v\ge0\ a.e.,$$
+i.e. $u$ is a nonnegative weak subsolution of $L_0u=0$ ([[def-weak-subsolution-and-supersolution-of-a-divergence-form-equation]]).
+Then $u$ is locally bounded, and for every ball $B_R(x_0)\Subset\Omega$, every $0<\rho<1$ and every $p>0$,
+$$\operatorname{ess\,sup}_{B_{\rho R}(x_0)}u\le C\Bigl(\frac{1}{|B_R(x_0)|}\int_{B_R(x_0)}u^p\,dx\Bigr)^{1/p},\qquad C=C(n,\theta,M_a,\rho,p).$$
+For $n=2$ the same statement holds with the critical Sobolev embedding in place of the $2^*$ embedding. The constant is scale invariant: it does not depend on $R$ or $x_0$.
+
+LINE 46 **Given:** Countable Choice and the Axiom of Choice; an open $\Omega\subseteq\mathbb R^n$, $n\ge2$; constants $0<\theta\le M_a^2$; a measurable symmetric coefficient field $A$ with $\theta|\xi|^2\le\langle A\xi,\xi\rangle\le M_a^2|\xi|^2$ a.e.; a nonnegative class $u\in H^1(\Omega;\mathbb R)$ with $a_0(u,v)\le0$ for every nonnegative $v\in H^1_0(\Omega)$; a ball $B_R(x_0)\Subset\Omega$.
+
+[F1] Assume Countable Choice and the Axiom of Choice. $a_0(w,v)=\int_\Omega a^{ij}D_jwD_iv\,dx$ is defined for $w,v\in H^1(\Omega;\mathbb R)$, and the subsolution inequality is the one of [[def-weak-subsolution-and-supersolution-of-a-divergence-form-equation]] with $f=0$; for $\eta\in C_c^\infty(\Omega)$ and $k\in\mathbb R$ the class $\eta^2(u-k)^+$ is an admissible nonnegative test ([[lem-positive-part-is-an-admissible-weak-test-by-truncation]]).
+
+[F2] Assume Countable Choice and the Axiom of Choice. Truncated Caccioppoli estimate: for $k\in\mathbb R$, $f=0$ and concentric balls $B_r\Subset B_R$, $\int_{B_r}|D(u-k)^+|^2\le C_0(R-r)^{-2}\int_{B_R}(u-k)^{+2}$ with $C_0=C_0(\theta,M_a)$ ([[lem-caccioppoli-inequality-for-truncated-subsolutions]]).
+
+LINE 48 [F1] Assume Countable Choice and the Axiom of Choice. $a_0(w,v)=\int_\Omega a^{ij}D_jwD_iv\,dx$ is defined for $w,v\in H^1(\Omega;\mathbb R)$, and the subsolution inequality is the one of [[def-weak-subsolution-and-supersolution-of-a-divergence-form-equation]] with $f=0$; for $\eta\in C_c^\infty(\Omega)$ and $k\in\mathbb R$ the class $\eta^2(u-k)^+$ is an admissible nonnegative test ([[lem-positive-part-is-an-admissible-weak-test-by-truncation]]).
+
+[F2] Assume Countable Choice and the Axiom of Choice. Truncated Caccioppoli estimate: for $k\in\mathbb R$, $f=0$ and concentric balls $B_r\Subset B_R$, $\int_{B_r}|D(u-k)^+|^2\le C_0(R-r)^{-2}\int_{B_R}(u-k)^{+2}$ with $C_0=C_0(\theta,M_a)$ ([[lem-caccioppoli-inequality-for-truncated-subsolutions]]).
+
+[F3] Assume Countable Choice and the Axiom of Choice. Level-set step: if $u\in H^1(B_R)$ and $\int_{B_\rho}|D(u-k)^+|^2\le C_0(R-\rho)^{-2}\int_{B_R}(u-k)^{+2}$ holds for all $0<\rho<R$ and all levels $k$, then for $n\ge3$, $\int_{B_r}(u-k)^{+2}\le C(n,C_0)(R-r)^{-2}(k-h)^{-4/n}\bigl(\int_{B_R}(u-h)^{+2}\bigr)^{1+2/n}$. For $n=2$ and each $0<\delta<1$, the power and integral exponent use $2\delta$ and $1+\delta$, and the radius factor is $R^{2-2\delta}(R-r)^{-2}$; the constant may depend on $\delta$ ([[lem-sobolev-level-set-iteration-step]]).
+
+LINE 50 [F2] Assume Countable Choice and the Axiom of Choice. Truncated Caccioppoli estimate: for $k\in\mathbb R$, $f=0$ and concentric balls $B_r\Subset B_R$, $\int_{B_r}|D(u-k)^+|^2\le C_0(R-r)^{-2}\int_{B_R}(u-k)^{+2}$ with $C_0=C_0(\theta,M_a)$ ([[lem-caccioppoli-inequality-for-truncated-subsolutions]]).
+
+[F3] Assume Countable Choice and the Axiom of Choice. Level-set step: if $u\in H^1(B_R)$ and $\int_{B_\rho}|D(u-k)^+|^2\le C_0(R-\rho)^{-2}\int_{B_R}(u-k)^{+2}$ holds for all $0<\rho<R$ and all levels $k$, then for $n\ge3$, $\int_{B_r}(u-k)^{+2}\le C(n,C_0)(R-r)^{-2}(k-h)^{-4/n}\bigl(\int_{B_R}(u-h)^{+2}\bigr)^{1+2/n}$. For $n=2$ and each $0<\delta<1$, the power and integral exponent use $2\delta$ and $1+\delta$, and the radius factor is $R^{2-2\delta}(R-r)^{-2}$; the constant may depend on $\delta$ ([[lem-sobolev-level-set-iteration-step]]).
+
+[F4] Nonlinear iteration: if $\delta>0$, $C\ge1$, $B\ge1$ and $Y_{j+1}\le CB^{j}Y_j^{1+\delta}$ with $Y_0\le C^{-1/\delta}(2B)^{-1/\delta^2}$, then $Y_j\le Y_0\lambda^j\to0$ with $\lambda=(2B)^{-1/\delta}$ ([[lem-nonlinear-geometric-iteration-sequence-converges-to-zero]]).
+
+FILE thm-de-giorgi-local-boundedness-with-scale-correct-forcing-term
+
+STATEMENT Assume Countable Choice and the Axiom of Choice. Let $n\ge2$, let $\Omega\subseteq\mathbb R^n$ be open, let $A$ and $L_0$ be as in [[thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions]], and let $f\in L^q_{\mathrm{loc}}(\Omega)$ with $q>n/2$. Let $u\in H^1(\Omega;\mathbb R)$ satisfy $u\ge0$ a.e. and
+$$a_0(u,\varphi)\le\int_\Omega f\,\varphi\,dx\qquad\text{for every nonnegative }\varphi\in C_c^\infty(\Omega;\mathbb R).$$
+Then for every ball $B_R(x_0)\Subset\Omega$, every $0<\rho<1$ and every $p>0$,
+$$\operatorname{ess\,sup}_{B_{\rho R}(x_0)}u\le C\Bigl[\Bigl(\frac{1}{|B_R(x_0)|}\int_{B_R(x_0)}u^p\,dx\Bigr)^{1/p}+R^{\,2-n/q}\|f^+\|_{L^q(B_R(x_0))}\Bigr],$$
+with $C=C(n,q,\theta,M_a,\rho,p)$ independent of $R$ and $x_0$. The factor $R^{2-n/q}$ is dictated by dilation of the equation: the forcing term has the dimension of $u$ for every $q$. The strict threshold $q>n/2$ is an integrability hypothesis for this boundedness estimate, not a condition for dimensional consistency; the $n=2$ case admits any $q>1$ with the critical Sobolev embedding in place of the $2^*$ embedding.
+
+LINE 48 **Given:** Countable Choice and the Axiom of Choice; an open set $\Omega\subseteq\mathbb R^n$, $n\ge2$; constants $0<\theta\le M_a^2$; measurable symmetric coefficients $A$ with $\theta|\xi|^2\le\langle A(x)\xi,\xi\rangle\le M_a^2|\xi|^2$; the principal operator $L_0u=-D_i(a^{ij}D_ju)$ with form $a_0$; a source $f\in L^q_{\mathrm{loc}}(\Omega)$, $q>n/2$; a nonnegative $u\in H^1(\Omega;\mathbb R)$ with $a_0(u,\varphi)\le\int_\Omega f\varphi\,dx$ for all nonnegative $\varphi\in C_c^\infty(\Omega;\mathbb R)$; a ball $B_R(x_0)\Subset\Omega$ and $0<\rho<1$.
+
+[F1] Assume Countable Choice and the Axiom of Choice. Sobolev positive-part calculus: for $w\in H^1(\Omega;\mathbb R)$, $w^+\in H^1$ with $Dw^+=\mathbf1_{\{w>0\}}Dw$ and $Dw=0$ a.e. on $\{w=0\}$; multiplication by a compactly supported smooth factor obeys the weak product rule. If $a_0(w,v)\le0$ for every nonnegative $v\in H^1_0(\Omega)$, then $w^+$ is a weak subsolution of the principal operator, so $a_0(w^+,v)\le0$ for every nonnegative $v\in H^1_0(\Omega)$. Here is the admissible truncation proof. For $\phi\in C_c^\infty(\Omega)$, $\phi\ge0$, set $\eta_\epsilon(t)=\min\{1,t^+/\epsilon\}$. The chain and product rules give $\psi_\epsilon=\phi\eta_\epsilon(w)\in H^1$ with compact support in $\Omega$, hence $\psi_\epsilon\in H^1_0(\Omega)$; it is nonnegative, and $D_i\psi_\epsilon=\eta_\epsilon(w)D_i\phi+\epsilon^{-1}\phi\mathbf1_{\{0<w<\epsilon\}}D_iw$ (the level-set endpoints contribute zero because Sobolev gradients vanish a.e. on a level set). Thus
+$$a_0(w,\psi_\epsilon)=\int_\Omega\eta_\epsilon(w)a^{ij}D_jwD_i\phi\,dx+\frac1\epsilon\int_{\{0<w<\epsilon\}}\phi\,a^{ij}D_jwD_iw\,dx\le0.$$
+The second integral is nonnegative by symmetry, ellipticity, and $\phi\ge0$, so the first is nonpositive. As $\epsilon\downarrow0$, $\eta_\epsilon(w)\to\mathbf1_{\{w>0\}}$ pointwise and is bounded by $1$; dominated convergence applies because $A$ is bounded and $|Dw||D\phi|$ is integrable on $\operatorname{supp}\phi$. Using $Dw^+=\mathbf1_{\{w>0\}}Dw$ gives $a_0(w^+,\phi)\le0$. To extend from smooth tests to every nonnegative $v\in H^1_0$, choose $z_j\in C_c^\infty(\Omega)$ with $z_j\to v$ in $H^1$ and pass to a subsequence with $z_j\to v$ a.e. The positive-part gradient formulas give
+
+LINE 50 [F1] Assume Countable Choice and the Axiom of Choice. Sobolev positive-part calculus: for $w\in H^1(\Omega;\mathbb R)$, $w^+\in H^1$ with $Dw^+=\mathbf1_{\{w>0\}}Dw$ and $Dw=0$ a.e. on $\{w=0\}$; multiplication by a compactly supported smooth factor obeys the weak product rule. If $a_0(w,v)\le0$ for every nonnegative $v\in H^1_0(\Omega)$, then $w^+$ is a weak subsolution of the principal operator, so $a_0(w^+,v)\le0$ for every nonnegative $v\in H^1_0(\Omega)$. Here is the admissible truncation proof. For $\phi\in C_c^\infty(\Omega)$, $\phi\ge0$, set $\eta_\epsilon(t)=\min\{1,t^+/\epsilon\}$. The chain and product rules give $\psi_\epsilon=\phi\eta_\epsilon(w)\in H^1$ with compact support in $\Omega$, hence $\psi_\epsilon\in H^1_0(\Omega)$; it is nonnegative, and $D_i\psi_\epsilon=\eta_\epsilon(w)D_i\phi+\epsilon^{-1}\phi\mathbf1_{\{0<w<\epsilon\}}D_iw$ (the level-set endpoints contribute zero because Sobolev gradients vanish a.e. on a level set). Thus
+$$a_0(w,\psi_\epsilon)=\int_\Omega\eta_\epsilon(w)a^{ij}D_jwD_i\phi\,dx+\frac1\epsilon\int_{\{0<w<\epsilon\}}\phi\,a^{ij}D_jwD_iw\,dx\le0.$$
+The second integral is nonnegative by symmetry, ellipticity, and $\phi\ge0$, so the first is nonpositive. As $\epsilon\downarrow0$, $\eta_\epsilon(w)\to\mathbf1_{\{w>0\}}$ pointwise and is bounded by $1$; dominated convergence applies because $A$ is bounded and $|Dw||D\phi|$ is integrable on $\operatorname{supp}\phi$. Using $Dw^+=\mathbf1_{\{w>0\}}Dw$ gives $a_0(w^+,\phi)\le0$. To extend from smooth tests to every nonnegative $v\in H^1_0$, choose $z_j\in C_c^\infty(\Omega)$ with $z_j\to v$ in $H^1$ and pass to a subsequence with $z_j\to v$ a.e. The positive-part gradient formulas give
+$$D z_j^+-Dv=\mathbf1_{\{z_j>0\}}(Dz_j-Dv)+(\mathbf1_{\{z_j>0\}}-\mathbf1_{\{v>0\}})Dv.$$
+The first term tends to zero in $L^2$; the second does too by dominated convergence, since its indicator tends to zero on $\{v>0\}$ and $Dv=0$ a.e. on $\{v=0\}$. Also $z_j^+\to v$ in $L^2$ by the $1$-Lipschitz property, hence $z_j^+\to v$ in $H^1$. Each nonzero $z_j^+$ has compact support in $\Omega$; zero-extend it and convolve with a nonnegative unit-mass radial mollifier, chosen with support radius smaller than $\operatorname{dist}(\operatorname{supp}z_j^+,\partial\Omega)$ (if $z_j^+=0$, keep the zero function). The mollified functions are nonnegative and in $C_c^\infty(\Omega)$, and converge to $z_j^+$ in $H^1$ by approximate-identity convergence applied to the function and its weak gradient. A diagonal choice gives nonnegative smooth tests converging to $v$. Boundedness of $a_0(w,\cdot)$ passes the inequality to $v$. In particular, no product of an indicator with an arbitrary test is asserted to lie in $H^1_0$. ([[lem-positive-part-is-an-admissible-weak-test-by-truncation]], [[cor-positive-negative-part-and-truncation-calculus-in-w-one-p]], [[thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions]], [[lem-weak-leibniz-rule-with-a-smooth-factor]], [[lem-compact-support-zero-extension-in-wkp]], [[def-radial-mollifier-family-in-rn]], [[lem-smooth-bump-between-concentric-euclidean-balls]], [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[lem-mollification-commutes-with-weak-derivatives-in-the-interior]], [[thm-l-one-approximate-identities-converge-in-l-p]], [[thm-dominated-convergence]], [[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[lem-elliptic-form-is-well-defined-and-bounded]], [[def-uniformly-elliptic-divergence-form-operator]], [[def-weak-subsolution-and-supersolution-of-a-divergence-form-equation]]).
+
+LINE 51 $$a_0(w,\psi_\epsilon)=\int_\Omega\eta_\epsilon(w)a^{ij}D_jwD_i\phi\,dx+\frac1\epsilon\int_{\{0<w<\epsilon\}}\phi\,a^{ij}D_jwD_iw\,dx\le0.$$
+The second integral is nonnegative by symmetry, ellipticity, and $\phi\ge0$, so the first is nonpositive. As $\epsilon\downarrow0$, $\eta_\epsilon(w)\to\mathbf1_{\{w>0\}}$ pointwise and is bounded by $1$; dominated convergence applies because $A$ is bounded and $|Dw||D\phi|$ is integrable on $\operatorname{supp}\phi$. Using $Dw^+=\mathbf1_{\{w>0\}}Dw$ gives $a_0(w^+,\phi)\le0$. To extend from smooth tests to every nonnegative $v\in H^1_0$, choose $z_j\in C_c^\infty(\Omega)$ with $z_j\to v$ in $H^1$ and pass to a subsequence with $z_j\to v$ a.e. The positive-part gradient formulas give
+$$D z_j^+-Dv=\mathbf1_{\{z_j>0\}}(Dz_j-Dv)+(\mathbf1_{\{z_j>0\}}-\mathbf1_{\{v>0\}})Dv.$$
+The first term tends to zero in $L^2$; the second does too by dominated convergence, since its indicator tends to zero on $\{v>0\}$ and $Dv=0$ a.e. on $\{v=0\}$. Also $z_j^+\to v$ in $L^2$ by the $1$-Lipschitz property, hence $z_j^+\to v$ in $H^1$. Each nonzero $z_j^+$ has compact support in $\Omega$; zero-extend it and convolve with a nonnegative unit-mass radial mollifier, chosen with support radius smaller than $\operatorname{dist}(\operatorname{supp}z_j^+,\partial\Omega)$ (if $z_j^+=0$, keep the zero function). The mollified functions are nonnegative and in $C_c^\infty(\Omega)$, and converge to $z_j^+$ in $H^1$ by approximate-identity convergence applied to the function and its weak gradient. A diagonal choice gives nonnegative smooth tests converging to $v$. Boundedness of $a_0(w,\cdot)$ passes the inequality to $v$. In particular, no product of an indicator with an arbitrary test is asserted to lie in $H^1_0$. ([[lem-positive-part-is-an-admissible-weak-test-by-truncation]], [[cor-positive-negative-part-and-truncation-calculus-in-w-one-p]], [[thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions]], [[lem-weak-leibniz-rule-with-a-smooth-factor]], [[lem-compact-support-zero-extension-in-wkp]], [[def-radial-mollifier-family-in-rn]], [[lem-smooth-bump-between-concentric-euclidean-balls]], [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[lem-mollification-commutes-with-weak-derivatives-in-the-interior]], [[thm-l-one-approximate-identities-converge-in-l-p]], [[thm-dominated-convergence]], [[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[lem-elliptic-form-is-well-defined-and-bounded]], [[def-uniformly-elliptic-divergence-form-operator]], [[def-weak-subsolution-and-supersolution-of-a-divergence-form-equation]]).
+
+
+LINE 52 The second integral is nonnegative by symmetry, ellipticity, and $\phi\ge0$, so the first is nonpositive. As $\epsilon\downarrow0$, $\eta_\epsilon(w)\to\mathbf1_{\{w>0\}}$ pointwise and is bounded by $1$; dominated convergence applies because $A$ is bounded and $|Dw||D\phi|$ is integrable on $\operatorname{supp}\phi$. Using $Dw^+=\mathbf1_{\{w>0\}}Dw$ gives $a_0(w^+,\phi)\le0$. To extend from smooth tests to every nonnegative $v\in H^1_0$, choose $z_j\in C_c^\infty(\Omega)$ with $z_j\to v$ in $H^1$ and pass to a subsequence with $z_j\to v$ a.e. The positive-part gradient formulas give
+$$D z_j^+-Dv=\mathbf1_{\{z_j>0\}}(Dz_j-Dv)+(\mathbf1_{\{z_j>0\}}-\mathbf1_{\{v>0\}})Dv.$$
+The first term tends to zero in $L^2$; the second does too by dominated convergence, since its indicator tends to zero on $\{v>0\}$ and $Dv=0$ a.e. on $\{v=0\}$. Also $z_j^+\to v$ in $L^2$ by the $1$-Lipschitz property, hence $z_j^+\to v$ in $H^1$. Each nonzero $z_j^+$ has compact support in $\Omega$; zero-extend it and convolve with a nonnegative unit-mass radial mollifier, chosen with support radius smaller than $\operatorname{dist}(\operatorname{supp}z_j^+,\partial\Omega)$ (if $z_j^+=0$, keep the zero function). The mollified functions are nonnegative and in $C_c^\infty(\Omega)$, and converge to $z_j^+$ in $H^1$ by approximate-identity convergence applied to the function and its weak gradient. A diagonal choice gives nonnegative smooth tests converging to $v$. Boundedness of $a_0(w,\cdot)$ passes the inequality to $v$. In particular, no product of an indicator with an arbitrary test is asserted to lie in $H^1_0$. ([[lem-positive-part-is-an-admissible-weak-test-by-truncation]], [[cor-positive-negative-part-and-truncation-calculus-in-w-one-p]], [[thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions]], [[lem-weak-leibniz-rule-with-a-smooth-factor]], [[lem-compact-support-zero-extension-in-wkp]], [[def-radial-mollifier-family-in-rn]], [[lem-smooth-bump-between-concentric-euclidean-balls]], [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[lem-mollification-commutes-with-weak-derivatives-in-the-interior]], [[thm-l-one-approximate-identities-converge-in-l-p]], [[thm-dominated-convergence]], [[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[lem-elliptic-form-is-well-defined-and-bounded]], [[def-uniformly-elliptic-divergence-form-operator]], [[def-weak-subsolution-and-supersolution-of-a-divergence-form-equation]]).
+
+[F2] Assume the Axiom of Choice. Lax-Milgram and coercivity: $H^1(B_1)$ is Hilbert by [[thm-hk-is-a-hilbert-space]]. Its subspace $H^1_0(B_1)$ is closed and linear by its closure definition: a Cauchy sequence there converges in $H^1(B_1)$, and its limit still lies in the closure of the smooth tests. Thus the restricted derivative-sum inner product makes $H^1_0(B_1)$ Hilbert. The form $a_0$ is a bounded sesquilinear form on the Hilbert space $H^1_0(B_1)$ with coercivity constant $\alpha=\theta/(1+C_P(B_1)^2)$, and for every bounded conjugate-linear functional $G$ on $H^1_0(B_1)$ there is a unique $h\in H^1_0(B_1)$ with $a_0(h,v)=G(v)$ for all $v\in H^1_0(B_1)$, the weak Dirichlet solution; it satisfies $\alpha\|h\|_{H^1_0}\le\|G\|_{H^{-1}}$ ([[thm-lax-milgram]], [[lem-coercivity-of-the-principal-dirichlet-form]], [[lem-elliptic-form-is-well-defined-and-bounded]], [[def-h-minus-one-as-the-dual-of-h-one-zero]], [[def-weak-dirichlet-solution-for-a-divergence-form-operator]], [[def-wkp-zero-as-a-sobolev-closure]]).
+
+LINE 58 [F3] Assume the Axiom of Choice. Embedding of $H^1_0$ into the dual exponents of $L^q$: for $n\ge3$ and $1\le r<2^*=2n/(n-2)$ there is $C_r$ with $\|w\|_{L^r(B_1)}\le C_r\|w\|_{H^1_0(B_1)}$ for all $w\in H^1_0(B_1)$, by Holder and the Sobolev inequality; for $n=2$ the same holds for every finite $r$ by the critical embedding $W^{1,2}_0(B_1)\hookrightarrow L^r(B_1)$ ([[cor-sobolev-inequality-for-w-one-p-zero]], [[thm-critical-sobolev-embedding-into-every-finite-lq]], [[thm-holder-inequality-for-integrals]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
+
+[F4] Assume the Axiom of Choice. The weak maximum principle with a source on the bounded $C^1$ domain $B_1$: if $v\in H^1(B_1;\mathbb R)$ satisfies $a_0(v,\varphi)\le\int_{B_1}g\varphi\,dx$ for every nonnegative $\varphi\in H^1_0(B_1)$ with $g\in L^q(B_1)$, $q>n/2$, then $\operatorname{ess\,sup}_{B_1}v\le\sup_{\partial B_1}v^++C_0\|g^+\|_{L^q(B_1)}$ with $C_0=C_0(n,q,\theta,M_a,B_1)$; in particular for $v\in H^1_0(B_1)$ one has $\operatorname{ess\,sup}_{B_1}v\le C_0\|g^+\|_{L^q(B_1)}$, and if $g\le0$ then $v\le0$ a.e. ([[thm-weak-maximum-principle-for-coercive-divergence-form-equations]], [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], [[thm-kernel-of-the-trace-is-w-one-p-zero]], [[def-bounded-c-k-domain-and-boundary-charts]]).
+
+[F5] Assume the Axiom of Choice. Homogeneous local boundedness: if $w\in H^1(B_1;\mathbb R)$ satisfies $w\ge0$ a.e. and $a_0(w,v)\le0$ for every nonnegative $v\in H^1_0(B_1)$, then for every $0<s<1$, every $0<\sigma<1$ and every $p>0$, $\operatorname{ess\,sup}_{B_{\sigma s}}w\le C_1(\frac{1}{|B_s|}\int_{B_s}w^p\,dx)^{1/p}$; this is the homogeneous theorem applied on the compactly contained ball $B_s\Subset B_1$ ([[thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions]]).
+
+LINE 70 1.1 Scaling the problem to the unit ball. Define $v(y):=u(x_0+Ry)$ for $y\in B_1$, $A_R(y):=A(x_0+Ry)$ and $g(y):=R^2f(x_0+Ry)$, so that $g\in L^q(B_1)$ with $\|g^+\|_{L^q(B_1)}=R^{2-n/q}\|f^+\|_{L^q(B_R(x_0))}$ and $\frac{1}{|B_1|}\int_{B_1}v^p\,dy=\frac{1}{|B_R(x_0)|}\int_{B_R(x_0)}u^p\,dx$ by the change of variables $x=x_0+Ry$; the coefficients $A_R$ are again measurable, symmetric and uniformly elliptic with the same constants $\theta,M_a$. Since $f\in L^q(B_R)$ and $q>n/2$, Sobolev and Holder extend the local inequality by density to nonnegative $H^1_0(B_R)$ tests. For every such test $\varphi\in H^1_0(B_1)$ the pullback $\varphi_R(x):=\varphi((x-x_0)/R)$ lies in $H^1_0(B_R(x_0))$ with $D\varphi_R(x)=R^{-1}D\varphi(y)$, hence $a_0^R(v,\varphi)=R^{2-n}\int_{B_R(x_0)}a^{ij}D_juD_i\varphi_R\,dx\le R^{2-n}\int_{B_R(x_0)}f\varphi_R\,dx=\int_{B_1}g\varphi\,dy$, where $a_0^R$ is the form of $A_R$; so $v\ge0$ satisfies the same subsolution inequality on $B_1$ with source $g$. [given, algebra]
+
+2.1 Removing a small source by a barrier. Let $U\in H^1(B_1;\mathbb R)$ satisfy $U\ge0$ a.e. and $a_0(U,\varphi)\le\int_{B_1}g\varphi\,dx$ for all nonnegative $\varphi\in H^1_0(B_1)$ with $\|g^+\|_{L^q(B_1)}\le1$; then for every $0<\rho<1$, every $p>0$ and some $C_2=C_2(n,q,\theta,M_a,\rho,p)$ one has $\operatorname{ess\,sup}_{B_\rho}U\le C_2(\frac{1}{|B_1|}\int_{B_1}U^p\,dx)^{1/p}+C_2$. Indeed, by [F3] the functional $\varphi\mapsto\int_{B_1}g^+\varphi\,dx$ is bounded on $H^1_0(B_1)$, so by [F2] there is a unique $h\in H^1_0(B_1)$ with $a_0(h,\varphi)=\int_{B_1}g^+\varphi\,dx$ for all $\varphi\in H^1_0(B_1)$. Since $-h$ is a weak subsolution with source $-g^+\le0$ and zero boundary values, [F4] gives $h\ge0$; it also gives $\operatorname{ess\,sup}_{B_1}h\le C_0\|g^+\|_{L^q(B_1)}\le C_0$. The difference $w:=U-h$ satisfies $a_0(w,\varphi)\le-\int_{B_1}g^-\varphi\,dx\le0$ for all nonnegative $\varphi\in H^1_0(B_1)$, so $w^+$ is a nonnegative homogeneous weak subsolution by [F1]. Since $h\ge0$ and $U\ge0$, $w^+=(U-h)^+\le U$. Fix $s:=(1+\rho)/2$, so $\rho<s<1$, and apply [F5] to $w^+$ on the outer ball $B_s\Subset B_1$ with inner ratio $\sigma=\rho/s$. This gives $\operatorname{ess\,sup}_{B_\rho}w^+\le C(\frac{1}{|B_s|}\int_{B_s}(w^+)^p)^{1/p}\le C'(\frac{1}{|B_1|}\int_{B_1}U^p)^{1/p}$, where the volume ratio is absorbed into $C'$. Hence $\operatorname{ess\,sup}_{B_\rho}U\le\operatorname{ess\,sup}_{B_\rho}w^++\operatorname{ess\,sup}_{B_1}h\le C_2(\frac{1}{|B_1|}\int_{B_1}U^p)^{1/p}+C_2$. [step 1.1, F1, F2, F3, F4, F5]
+
+3.1 Undoing the rescaling and the normalisation. If $\|g^+\|_{L^q(B_1)}=0$ then $v$ is itself a homogeneous weak subsolution and [F5] gives the claim directly with the forcing term absent. Otherwise put $F_R:=\|g^+\|_{L^q(B_1)}>0$ and $U:=v/F_R$, so that $U\ge0$, $a_0(U,\varphi)\le\int_{B_1}(g/F_R)\varphi\,dx$ for all nonnegative $\varphi\in H^1_0(B_1)$ and $\|(g/F_R)^+\|_{L^q(B_1)}=1$; step 2.1 applied to $U$ gives $\operatorname{ess\,sup}_{B_\rho}U\le C_2(\frac{1}{|B_1|}\int_{B_1}U^p)^{1/p}+C_2$, and multiplying by $F_R$, $\operatorname{ess\,sup}_{B_\rho}v\le C_2(\frac{1}{|B_1|}\int_{B_1}v^p)^{1/p}+C_2F_R$. Substituting the identities of step 1.1 gives $\operatorname{ess\,sup}_{B_{\rho R}(x_0)}u\le C_2(\frac{1}{|B_R(x_0)|}\int_{B_R(x_0)}u^p\,dx)^{1/p}+C_2R^{2-n/q}\|f^+\|_{L^q(B_R(x_0))}$, which is the asserted estimate with $C:=\max\{C_2,1\}$; the constant depends only on $n,q,\theta,M_a,\rho,p$, and the argument uses Countable Choice and the Axiom of Choice exactly through the cited suppliers. [step 1.1, step 2.1, F5, F6, algebra] ∎
+
+FILE thm-de-giorgi-nash-interior-holder-regularity
+
+STATEMENT Assume Countable Choice and the Axiom of Choice. Let $n\ge2$, let $\Omega\subseteq\mathbb R^n$ be open, and let $A$, $L_0$ be as in [[thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions]], with measurable symmetric uniformly elliptic coefficients and constants $\theta,M_a$. Let $u\in H^1(\Omega;\mathbb R)$ be a weak solution of $L_0u=0$ on $\Omega$.
+Then there are $\alpha=\alpha(n,\theta,M_a)\in(0,1)$ and, for every $\alpha'\in(0,\alpha)$, a class $u^*\in C^{0,\alpha'}_{\mathrm{loc}}(\Omega)$ ([[def-local-holder-and-c-two-alpha-norms-on-euclidean-balls]], [[def-holder-spaces-c-k-alpha-and-their-scaled-norms]]) with $u^*=u$ a.e. on $\Omega$, and for every ball $B_{R_0}(x_0)\Subset\Omega$,
+$$[u^*]_{0,\alpha';B_{R_0/2}(x_0)}\le C(n,\theta,M_a,\alpha')\,R_0^{-\alpha'}\Bigl(\frac{1}{|B_{R_0}(x_0)|}\int_{B_{R_0}(x_0)}u^2\,dx\Bigr)^{1/2},$$
+and $\|u^*\|_{L^\infty(B_{R_0/2}(x_0))}\le C R_0^{-n/2}\|u\|_{L^2(B_{R_0}(x_0))}$. In particular every real weak solution of the homogeneous scalar equation with the symmetric bounded measurable uniformly elliptic principal coefficients specified above has a locally Holder continuous representative, and the representative is unique up to equality everywhere on $\Omega$.
+
+LINE 54 [F5] For continuous functions, pointwise supremum and infimum on an open ball equal the essential supremum and infimum of the corresponding almost-everywhere class; the Holder seminorm and norm are those of [[def-local-holder-and-c-two-alpha-norms-on-euclidean-balls]] and [[def-holder-spaces-c-k-alpha-and-their-scaled-norms]] ([[def-essential-supremum-with-respect-to-a-measure]]).
+
+[F6] Positive parts of a real weak solution of the homogeneous equation are weak subsolutions. For $v=u$ or $v=-u$, the zero-source identity extends from $C_c^\infty$ tests to $H^1_0$ by density and boundedness of the form ([[def-wkp-zero-as-a-sobolev-closure]], [[lem-elliptic-form-is-well-defined-and-bounded]]). Thus test with the nonnegative $H^1_0$ function $\phi\chi_\epsilon(v)$, where $\phi\in C_c^\infty(\Omega)$ is nonnegative and $\chi_\epsilon(t)=\min\{1,t^+/\epsilon\}$. The chain and product rules give $a_0(v,\phi\chi_\epsilon(v))=\int\chi_\epsilon(v)A Dv\cdot D\phi+\int\phi\chi_\epsilon'(v)A Dv\cdot Dv=0$; the second term is nonnegative. Dominated convergence in the first term as $\epsilon\downarrow0$ gives $a_0(v^+,\phi)\le0$ ([[thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions]], [[lem-weak-leibniz-rule-with-a-smooth-factor]], [[lem-positive-part-is-an-admissible-weak-test-by-truncation]]).
+
+## Proof
+
+LINE 58 ## Proof
+
+**Proof technique:** iterate the one-step oscillation reduction on smaller interior balls, transfer its dyadic decay to Lebesgue values, extend those values continuously, and use local boundedness of the positive and negative parts for the quantitative norm estimate.
+
+1.1 Local boundedness of the positive and negative parts. For $v=u$ and $v=-u$, [F6] shows that $v^+$ is a nonnegative weak subsolution. Given any ball $B_S(x)\Subset\Omega$, choose $S'>S$ with $B_{S'}(x)\Subset\Omega$ and apply [F2] on $B_{S'}(x)$ with inner ratio $S/S'$ and exponent $p=2$. Since $v^+\in H^1(\Omega)$, its $L^2(B_{S'})$ mean is finite, so both $u^+$ and $(-u)^+$ are essentially bounded on $B_S(x)$. Consequently $u$ has finite essential oscillation on every compactly contained ball. [given, F2, F6]
+
+LINE 60 **Proof technique:** iterate the one-step oscillation reduction on smaller interior balls, transfer its dyadic decay to Lebesgue values, extend those values continuously, and use local boundedness of the positive and negative parts for the quantitative norm estimate.
+
+1.1 Local boundedness of the positive and negative parts. For $v=u$ and $v=-u$, [F6] shows that $v^+$ is a nonnegative weak subsolution. Given any ball $B_S(x)\Subset\Omega$, choose $S'>S$ with $B_{S'}(x)\Subset\Omega$ and apply [F2] on $B_{S'}(x)$ with inner ratio $S/S'$ and exponent $p=2$. Since $v^+\in H^1(\Omega)$, its $L^2(B_{S'})$ mean is finite, so both $u^+$ and $(-u)^+$ are essentially bounded on $B_S(x)$. Consequently $u$ has finite essential oscillation on every compactly contained ball. [given, F2, F6]
+
+2.1 Geometric oscillation decay. Fix $B_R(x_0)\Subset\Omega$. By [F1], applying the one-step estimate first with outer ball $B_{R/2}$ and then with successive dyadic outer balls gives $\operatorname{ess\,osc}_{B_{R/2^{k+1}}(x_0)}u\le\eta^k\operatorname{ess\,osc}_{B_R(x_0)}u$ for every integer $k\ge0$. By monotonicity of essential oscillation, if $0<r\le R/4$, choosing $k$ so that $R/2^{k+2}<r\le R/2^{k+1}$ gives $$\operatorname{ess\,osc}_{B_r(x_0)}u\le C_0(r/R)^{\alpha_0}\operatorname{ess\,osc}_{B_R(x_0)}u,\qquad \alpha_0:=\frac{\log(1/\eta)}{\log2}>0,$$ with $C_0=4^{\alpha_0}$; for $R/4<r\le R$ the same inequality follows from monotonicity and this choice of $C_0$. This argument applies to any ball compactly contained in $\Omega$, and all oscillations are finite by step 1.1. [step 1.1, F1, algebra]
+
+LINE 68 4.1 The continuous representative. The Lebesgue set of $u$ is dense by [F3]. Step 3.1 makes the Lebesgue representative locally Holder on its intersection with each smaller ball $B_{\rho R}(x_0)$. The extension theorem [F4] gives a unique continuous extension on $\Omega$, still denoted $u^*$, which agrees with $u$ a.e. and retains these local Holder bounds. [step 3.1, F3, F4]
+
+5.1 Holder and supremum estimates. Let $R:=R_0$ and apply step 3.1 on the outer ball $B_{3R/4}(x_0)$ with inner ratio $2/3$. Applying [F2] with $p=2$ and outer ball $B_R$ to the positive parts $u^+$ and $(-u)^+$ from step 1.1 gives $$\operatorname{ess\,sup}_{B_{3R/4}}|u|\le C(\frac{1}{|B_R|}\int_{B_R}u^2)^{1/2}.$$ Hence $\operatorname{ess\,osc}_{B_{3R/4}}u\le2C(\frac{1}{|B_R|}\int_{B_R}u^2)^{1/2}$. Steps 3.1 and 4.1 give the corresponding increment bound with exponent $\alpha_0$. Set $\alpha:=\min\{\alpha_0,1/2\}\in(0,1)$; weakening the exponent to $\alpha$ preserves the estimate. For $0<\alpha'<\alpha$, interpolate that Holder increment with the supremum bound: $\min\{C M(|x-y|/R)^{\alpha},2M\}\le C'(\alpha')M(|x-y|/R)^{\alpha'}$, where $M=(\frac{1}{|B_R|}\int_{B_R}u^2)^{1/2}$. Thus $$[u^*]_{0,\alpha';B_{R/2}}\le C R^{-\alpha'}(\frac{1}{|B_R|}\int_{B_R}u^2)^{1/2},\qquad \|u^*\|_{L^\infty(B_{R/2})}\le C R^{-n/2}\|u\|_{L^2(B_R)}.$$ The constants depend only on $n,\theta,M_a,\alpha'$. [step 3.1, step 4.1, F2, F5, algebra]
+
+6.1 Uniqueness. If two continuous representatives agree with $u$ a.e., they agree on a full-measure, hence dense, subset of $\Omega$; continuity makes them equal everywhere. All arguments use only the declared choice principles. [F3, F4] ∎
+
+FILE thm-decay-of-the-newtonian-potential-of-compactly-supported-data
+
+STATEMENT Assume the Axiom of Countable Choice and let $n\ge2$. Fix $R>0$, and let
+$f:\mathbb R^n\to\mathbb R$ be Lebesgue measurable, integrable, and compactly
+supported, with $\|f\|_1:=\int_{\mathbb R^n}|f(y)|\,dy<\infty$, and zero outside the open
+Euclidean ball $B_R(0)$. Put
+$M:=\int_{\mathbb R^n}f(y)\,dy$ and let $\omega_{n-1}$ be the sphere-area
+normalization in the definition of $\Phi$.
+
+For every $x\in\mathbb R^n$ with $r:=|x|>2R$, the Newtonian integral
+$Nf(x)=\int_{\mathbb R^n}\Phi(x-y)f(y)\,dy$ is absolutely finite. If $n\ge3$,
+then
+$$
+\left|Nf(x)-\frac{M r^{2-n}}{(n-2)\omega_{n-1}}\right| \le \frac{2^{n-1}R}{\omega_{n-1}}\|f\|_1 r^{1-n}.
+$$
+If $n=2$, then
+$$
+\left|Nf(x)+\frac{M}{2\pi}\log r\right| \le \frac{R}{\pi}\|f\|_1 r^{-1}.
+$$
+The constants are independent of the direction of $x$. In particular, when
+$M=0$ these are the respective improved orders
+$Nf(x)=O(r^{1-n})$ for $n\ge3$ and $Nf(x)=O(r^{-1})$ for $n=2$.
+
+LINE 93 [F3] A real measurable function is integrable exactly when
+$\int|f|<\infty$, and its integral is the difference of the finite integrals
+of its positive and negative parts.
+([[def-integrable-real-and-complex-functions-and-their-integrals]]).
+
+
+LINE 112 [F8] Sums, differences, products and absolute values of measurable real
+functions are measurable. ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F9] The nonnegative integral is monotone and homogeneous for nonnegative
+
+FILE thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication
+
+STATEMENT Assume AC. Let $(X,\mathcal B,\mu)$ be a sigma-finite standard-Borel measure
+space, let $(H_x,e_n(x))_{x\in X}$ be a measurable complex Hilbert field with
+a countable fundamental family, and set
+$$\mathcal H=\int_X^\oplus H_x\,d\mu(x),$$
+with the direct-integral Hilbert-space structure. For each
+$f\in L^\infty(X,\mu)$ let $M_f\in\mathcal B(\mathcal H)$ act by scalar
+multiplication, and put $\mathcal D=\{M_f:f\in L^\infty(X,\mu)\}$. Then
+$$\mathcal D'=\{S\in\mathcal B(\mathcal H): S\text{ is decomposable}\},$$
+where decomposable has the meaning in
+[[def-measurable-and-decomposable-operator-fields]]. For a fixed $S$, any
+weakly measurable essentially bounded field inducing $S$ is unique up to a
+$\mu$-null set.
+
+LINE 110 
+[F20] Arithmetic operations on measurable extended-real functions, when defined, preserve measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F21] Superlevel sets of a measurable real-valued function are measurable ([[thm-threshold-characterisations-of-real-and-extended-real-measurability]]).
+
+FILE thm-density-measure-integration-agrees-with-smooth-density-integration
+
+STATEMENT Assume countable choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
+
+For a nonnegative Borel $f:M\to[0,\infty]$ and any chart partition $(x_i,\varphi_i)$,
+$$\int_M f\,d\mu_r=\sum_i\int_{x_i(U_i)}(\varphi_i f r)_{x_i}\,d\lambda_n,$$
+with values in $[0,\infty]$ and all zero-times-infinity products equal to zero. For positive smooth $r$ and compactly supported smooth real $f$, this equals the smooth density integral $\int_Mfr$. For real or complex $f\in L^1(\mu_r)$ the same chart formula holds, interpreted by real and imaginary positive and negative parts; the series converges absolutely. On the completion, nonnegative measurable functions and real or complex $L^1$ functions have Borel representatives modulo completed null sets, and the formulas are applied to those representatives.
+
+LINE 31 For a nonnegative Borel $f:M\to[0,\infty]$ and any chart partition $(x_i,\varphi_i)$,
+$$\int_M f\,d\mu_r=\sum_i\int_{x_i(U_i)}(\varphi_i f r)_{x_i}\,d\lambda_n,$$
+with values in $[0,\infty]$ and all zero-times-infinity products equal to zero. For positive smooth $r$ and compactly supported smooth real $f$, this equals the smooth density integral $\int_Mfr$. For real or complex $f\in L^1(\mu_r)$ the same chart formula holds, interpreted by real and imaginary positive and negative parts; the series converges absolutely. On the completion, nonnegative measurable functions and real or complex $L^1$ functions have Borel representatives modulo completed null sets, and the formulas are applied to those representatives.
+
+## Facts & Assumptions
+
+LINE 35 ## Facts & Assumptions
+
+**Given:** Assume $\mathrm{AC}_\omega$. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Borel-first integration, signed absolute convergence, smooth compact support and completion.
+
+[F1] [[thm-density-measure-is-independent-of-the-chart-gluing]]: The intrinsic measure equals each gluing construction and has the chart-restriction formula.
+
+LINE 49 [F6] [[lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals]]: A bounded Borel Riemann-integrable coefficient on a nondegenerate n-box has equal Lebesgue and Riemann integrals.
+
+[F7] [[def-integrable-real-and-complex-functions-and-their-integrals]]: Absolute integrability permits real and imaginary positive/negative part integrals.
+
+[F8] [[def-completion-of-a-measure-space]]: A completed measurable set differs from a Borel set inside a Borel null set.
+
+LINE 69 2.1 Take nonnegative simple Borel $s_m\uparrow f$. For each chart, $s_m(x_i^{-1}(u))q_i(u)\uparrow f(x_i^{-1}(u))q_i(u)$, where $q_i=(\varphi_i\circ x_i^{-1})r_{x_i}$. This also holds if $q_i=\infty$: a positive limiting value of $f$ forces an eventually positive $s_m$, whereas a zero limit makes every $s_m$ zero. Monotone convergence on $M$ and each chart, followed by $\sup_m\sum_i a_{mi}=\sum_i\sup_ma_{mi}$ for increasing nonnegative $a_{mi}$, proves the formula. The last identity follows by taking finite chart sums first and then their supremum. [F2, F3, step 1.1]
+
+3.1 For real or complex Borel $f$ with $\int|f|\,d\mu_r<\infty$, apply the nonnegative formula to $|f|$. It gives $\sum_i\int |f\circ x_i^{-1}|q_i<\infty$, so every chart term is integrable and the sum of their absolute integrals is finite. Apply the formula separately to $f^+,f^-$, or to the four positive/negative real/imaginary parts. Subtraction now involves only finite numbers and produces the asserted absolutely convergent series. Where $q_i=\infty$ and $f\ne0$ the weighted absolute integrand $h_i$ is infinite only on a Lebesgue-null set: for $E_i=\{h_i=\infty\}$ and every integer $m\ge1$, $m\lambda_n(E_i)\le\int h_i<\infty$, forcing $\lambda_n(E_i)=0$; one may set the signed coefficient to zero there. This leaves each part integral unchanged. [F7, F10, step 2.1, F13]
+
+3.2 Let $f\ge0$ be measurable for the completed measure. Choose increasing completed-simple $s_m\uparrow f$. For each of the countably many level sets in these simple functions, the completion definition supplies a Borel replacement with symmetric difference contained in a Borel null set. Countable choice selects these replacements; their exceptional Borel sets have a null union $N$. The replacement simple functions $t_m$ are nonnegative Borel and equal $s_m$ off $N$. Put $u_m=\max_{k\le m}t_k$ off $N$ and zero on $N$. Then $u_m$ is increasing Borel, and $g=\sup_m u_m$ is Borel and equals $f$ off $N$. Applying monotone convergence to $u_m$, whose Borel and completed integrals agree by the extension property, gives equality of the Borel and completed integrals of $g$. The null-set integral property gives $\int f\,d\overline\mu_r=\int g\,d\mu_r$. Thus the chart formula for $g$ computes the completed integral, including infinity. [F2, F3, F8, F9, F10, step 2.1]
+
+FILE thm-density-measure-is-independent-of-the-chart-gluing
+
+STATEMENT Assume countable choice $\mathrm{AC}_\omega$. For every nonnegative Borel density $r$, chart-partition gluing data as in [[def-countable-chart-gluing-of-a-nonnegative-density-measure]] exist, and all such constructions give the same Borel measure $\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\to x(U)$, then
+$$\mu_r(E)=\int_{x(E)}r_x\,d\lambda_n.$$
+
+LINE 32 ## Facts & Assumptions
+
+**Given:** Assume $\mathrm{AC}_\omega$. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Common nonnegative refinement and pointwise extended-real arithmetic.
+
+[A1] Countable choice is [[def-countable-choice]]. Under it, [[def-countable-chart-gluing-of-a-nonnegative-density-measure]] supplies at least one countable locally finite chart cover and subordinate smooth partition, including at a boundary.
+
+FILE thm-density-of-elementary-predictable-processes-in-predictable-l2
+
+STATEMENT Assume the Axiom of Choice and the standing hypothesis (H) of
+[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$ and let
+$\mathcal P_T$ be the predictable sigma-algebra on $[0,T]\times\Omega$
+[[def-progressively-measurable-and-predictable-process]], with the finite
+measure $\mathrm dt\otimes P$. Then the classes of bounded elementary
+predictable integrands
+[[def-elementary-predictable-brownian-integrand]] are dense in
+$L^2([0,T]\times\Omega,\mathcal P_T,\mathrm dt\otimes P)$: for every
+$\mathcal P_T$-measurable $H$ with $\int_0^T\!\!\int_\Omega H^2\,dP\,dt<\infty$
+and every $\varepsilon>0$ there is a bounded elementary predictable integrand
+$G$ with
+$$\Bigl(\int_0^T\!\!\int_\Omega(H-G)^2\,dP\,dt\Bigr)^{1/2}<\varepsilon .$$
+Equalities are equalities of $(\mathrm dt\otimes P)$-classes, so two elementary
+integrands whose difference vanishes almost everywhere represent the same
+approximant.
+
+LINE 84 6.1 Let $H\ge0$ be $\mathcal P_T$-measurable with $H\in L^2(\mu)$. By [F5] choose nonnegative simple $\mathcal P_T$-measurable $s_n\uparrow H$ pointwise; each $s_n$ is bounded and lies in $\overline{\mathcal E}$ by step 5.1. Since $0\le s_n\le H$ and $H\in L^2(\mu)$, [F6] gives $\|H-s_n\|_2\to0$, and for $\varepsilon>0$ one takes $n$ with $\|H-s_n\|_2<\varepsilon/2$ and then a bounded elementary $G$ with $\|s_n-G\|_2<\varepsilon/2$, so that $\|H-G\|_2<\varepsilon$ by the triangle inequality. [F5, F6, step 5.1]
+
+7.1 For a general real $H\in L^2(\mu)$, decompose $H=H^+-H^-$; both parts are nonnegative and $\mathcal P_T$-measurable with $H^\pm\le|H|$, so both lie in $L^2(\mu)$ and each is approximated to within $\varepsilon/2$ by a bounded elementary process by step 6.1; their difference is bounded and elementary on a common refinement by [F1] and is within $\varepsilon$ of $H$ by the triangle inequality. [F1, step 6.1]
+
+8.1 Steps 6.1 and 7.1 prove the density statement for nonnegative and for general predictable $L^2$ classes, with all approximants bounded and elementary; equalities of processes are equalities of $(\mathrm dt\otimes P)$-classes throughout, which is exactly the qualification "modulo product-almost-everywhere equality". For each fixed $m$, step 2.2 selects only the finite list $G_1,\dots,G_m$, so the density argument itself uses no choice principle; the declared AC is inherited from the standing hypothesis (H) and ambient probability interfaces as recorded in [F8]. [step 2.2, step 6.1, step 7.1, F8, given] ∎
+
+FILE thm-differentiation-along-families-shrinking-nicely
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]).
+
+Let $f\in L^1_{\mathrm{loc}}(\mathbb{R}^n)$, let $A\subseteq\mathbb{R}^n$, and
+suppose that for each $x\in A$ there is a family $(E_r(x))_{r>0}$ shrinking
+nicely to $x$ with constant $\alpha_x>0$. Then for almost every $x\in A$,
+$$\lim_{r\to0^+}\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}|f(y)-f(x)|\,d\lambda(y)=0,$$
+hence
+$$\lim_{r\to0^+}\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}f(y)\,d\lambda(y)=f(x).$$
+
+LINE 35 suppose that for each $x\in A$ there is a family $(E_r(x))_{r>0}$ shrinking
+nicely to $x$ with constant $\alpha_x>0$. Then for almost every $x\in A$,
+$$\lim_{r\to0^+}\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}|f(y)-f(x)|\,d\lambda(y)=0,$$
+hence
+$$\lim_{r\to0^+}\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}f(y)\,d\lambda(y)=f(x).$$
+
+LINE 37 $$\lim_{r\to0^+}\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}|f(y)-f(x)|\,d\lambda(y)=0,$$
+hence
+$$\lim_{r\to0^+}\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}f(y)\,d\lambda(y)=f(x).$$
+
+## Facts & Assumptions
+
+LINE 53 1.1 Let $x\in A$ be a Lebesgue point of $f$, as supplied by [L2]. For every [L1, L2, given, algebra] $r>0$, [L1] gives $$\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}|f(y)-f(x)|\,d\lambda(y) \le\frac{1}{\alpha_x\,\lambda(B(x,r))} \int_{B(x,r)}|f(y)-f(x)|\,d\lambda(y).$$ [L1, L2, given, algebra]
+
+2.1 Because $x$ is a Lebesgue point, the right-hand side of step 1.1 tends to [step 1.1] $0$ as $r\to0^+$. Therefore the left-hand side also tends to $0$. [step 1.1]
+
+3.1 Using [step 2.1, algebra] $$\left|\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}f(y)\,d\lambda(y)-f(x)\right| \le\frac{1}{\lambda(E_r(x))}\int_{E_r(x)}|f(y)-f(x)|\,d\lambda(y),$$ step 2.1 immediately gives the second limit as well. [step 2.1, algebra]

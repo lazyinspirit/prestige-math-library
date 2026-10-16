@@ -1,0 +1,229 @@
+
+[PDF page 11]
+Corollary 1 (restated). For all ǫ > 0, MajMajSAT ̸∈BQTISP(n1+o(1), n1−ǫ).
+Theorem 1 follows immediately from the following two results. The ﬁrst gives a lower bound for
+MajSAT and MajMajSAT on unbounded-error probabilistic algorithms, and the second translates
+this lower bound to the quantum setting by giving a time- and space-eﬃcient simulation of quantum
+algorithms by unbounded-error probabilistic algorithms. Recall that PTISP(t, s) denotes the class
+of languages decidable by unbounded-error probabilistic algorithms running in time O(t) and space
+O(s).
+Lemma 1 (Allender et al. [2]). For every real d and every positive real ǫ there exists a real
+c > 1 such that either:
+• MajMajSAT ̸∈PTIME(nc), and
+• MajSAT ̸∈PTISP(nd, n1−ǫ).
+Lemma 2. For all suﬃciently constructible t ≥log n and s ≥log n,
+BQTISP(t, s) ⊆PTISP(t · polylog(t), s + polylog(t)).
+Lemma 2 is our main technical contribution, and its proof occupies the remainder of Section 3.
+The ﬁrst step is to show that we can assume without loss of generality that our model only uses a
+certain ﬁnite universal set of quantum gates. A key ingredient is the Solovay-Kitaev theorem [11],
+which shows how to approximate any single-qubit unitary gate to within ǫ in the 2-norm sense using
+only polylog(1/ǫ) gates from a ﬁnite universal set. The eﬃciency aﬀorded by the Solovay-Kitaev
+theorem is critical for obtaining our lower bound.
+The second step is to simulate this special case of our model time- and space-eﬃciently with
+unbounded-error probabilistic algorithms. Our strategy builds on known simulations of quantum
+computations without intermediate measurements by probabilistic machines with unbounded error
+[1, 8]. The basic idea of these simulations is to write the ﬁnal amplitude of a basis state as a
+simple linear combination of #P functions, where each #P function counts the number of quantum
+computation paths leading to that state with a certain path amplitude. Taking advantage of our
+choice of universal set, we can use simple algebraic manipulations to express the probability of
+acceptance as the diﬀerence between two #P functions, up to a simple common scaling factor.
+Standard techniques then result in a time- and space-eﬃcient simulation by an unbounded-error
+probabilistic machine.
+The above approach only handles unitary operations with one ﬁnal measurement. To handle
+intermediate measurements, we ﬁrst adapt this approach to capture the probability of observing any
+particular sequence of measurement outcomes. The acceptance probability can then be expressed as
+a sum over all sequences of measurement outcomes that lead to acceptance, where each term is the
+scaled diﬀerence of two #P functions. We can combine those terms into a single one using the closure
+of #P under uniform exponential sums. However, the usual way of doing this – nondeterministically
+guess and store a sequence and then run the computation corresponding to that sequence – is too
+space-ineﬃcient. To address this problem, we note that the crux of the construction corresponds to
+multiplying two #P functions on the same input. The standard approach runs the two computations
+in sequence, accepting iﬀboth accept. We argue that we can run these two computations in parallel
+and keep them in synch so that they access each bit of the guessed sequence at the same time,
+11
+
+
+[PDF page 12]
+allowing us to reference each bit only once. We can then guess each bit when needed during the
+ﬁnal simulation and overwrite it with the next guess bit, allowing us to meet the space constraint.
+Regarding the conditions in Lemma 2, we assume t and s are at least logarithmic so that they
+dominate any logarithmic terms arising from indexed access to the input. We henceforth ignore
+the technical constructibility constraints on t and s. For Theorem 1, we only need to consider
+“ordinary” polynomially-bounded functions, which are computable in time polynomial in the length
+of the output written in binary, which is suﬃcient for our purposes.
+3.2
+Eﬃcient Approximation With a Universal Set
+A BQTISP(t, s) computation can be viewed as applying a sequence of O(t) classically selected
+quantum gates to a register of O(s) qubits. There are three types of gates:
+• Unitary gates selected from a ﬁnite library of gates associated with the machine.
+• Query gates, which eﬀect the transformation |i⟩|b⟩7→|i⟩|b ⊕xi⟩, where i is an index into the
+input x.
+• Measurement gates, which perform a single-qubit projective measurement in the computa-
+tional basis.
+The ﬁrst step in the proof of Lemma 2 is to show that we can restrict our attention to ma-
+chines whose library is a ﬁxed universal set. It is well-known that every unitary transformation
+can be eﬀected exactly using CNOT gates and single-qubit gates. Deﬁning BQTISP′(t, s) to be
+BQTISP(t, s) with the restriction that each gate in the library either is CNOT or acts on only one
+qubit, we have the following.
+Lemma 3. For all t and all s,
+BQTISP(t, s) = BQTISP′(t, s).
+For completeness, we sketch a proof of Lemma 3 in Appendix B.
+It is also well-known that ﬁnite universal sets exist which can approximate any unitary operation
+to arbitrary accuracy. We say that a single-qubit unitary operation eU ǫ-approximates a single-qubit
+unitary operation U if ||eU −eiθU|| ≤ǫ for some (irrelevant) global phase factor eiθ. We say that a
+set S of single-qubit unitary gates is universal for single-qubit unitary gates if for all single-qubit
+unitary gates U and all ǫ > 0 there is a sequence eU1, . . . , eUℓof gates from S such that the operation
+eU1 · · · eUℓǫ-approximates U.
+We use the fact that the set {F, H} is universal for single-qubit unitary gates2, where H is the
+Hadamard gate and
+F =
+1
+0
+0
+3
+5 + 4
+5i
+
+in the computational basis. We can restrict our attention to quantum Turing machines with library
+{CNOT, F, H} by replacing each single-qubit gate in the library of a BQTISP′ machine with an
+approximation using F and H gates.
+2This is shown on page 196 in [14] with a relative phase shift by π/4 instead of the F gate; however, F is a relative
+phase shift by an irrational multiple of 2π and hence can approximate the π/4 phase shift to arbitrary accuracy.
+12
+
+
+[PDF page 13]
+We need to satisfy the following requirements:
+• The transformation should not increase the number of gates applied by too much.
+• The new sequence of gates should still be eﬃciently computable by a classical algorithm.
+• The probability an input x is accepted should not change by too much when we apply the
+transformation.
+The following key theorem allows us to meet these constraints.
+Lemma 4 (Solovay and Kitaev [11]). If S is universal for single-qubit unitary gates and is
+closed under adjoint, then for all single-qubit unitary gates U and all ǫ > 0 there is a sequence of at
+most polylog(1/ǫ) gates from S that ǫ-approximates U. Moreover, such a sequence can be computed
+deterministically in time polylog(1/ǫ) provided the ﬁrst k bits of the matrix entries of U and the
+gates in S are computable in time poly(k).
+The proof by Solovay and Kitaev gives an algorithm for computing an approximation in time
+polylog(1/ǫ), ignoring the complexity of arithmetic (see [4] and Section 8.3 of [12]). We cannot do
+exact arithmetic since the entries of our gates may require inﬁnitely many bits to specify, but in
+each step of the algorithm it suﬃces to work with poly(ǫ)-approximations to all of the matrices.
+Computing each matrix entry to O(log (1/ǫ)) bits suﬃces for this because the matrices have only
+constant size. By our complexity constraint on the transition amplitudes and the fact that the
+entries of F and H are also eﬃciently computable, this incurs only a polylog(1/ǫ) time (and space)
+overhead.
+We argue that approximating each single-qubit unitary gate to within Θ(1/t) ensures that
+the probability of acceptance of a quantum Turing machine running in time t only changes by
+a small amount. Note that our model is nonoblivious to measurement outcomes, so there may
+be exponentially many classical computation paths corresponding to the diﬀerent measurement
+outcomes. A simple union bound over these paths does not work since it would require exponentially
+small precision in the approximations, which we cannot aﬀord. However, the approximation errors
+are relative to the probability weights of the paths. As a result, the overall error cannot grow too
+large.
+Deﬁne BQTISP′′(t, s) to be BQTISP(t, s) with the restriction that the library of gates is
+{CNOT, F, F †, H, I}. We include “identity gates” I for technical reasons – we need to allow com-
+putation steps that do not change the state of the quantum tape. We include F † gates because the
+Solovay-Kitaev theorem requires the universal set to be closed under adjoint.
+Lemma 5. For all suﬃciently constructible t and all s,
+BQTISP′(t, s) ⊆BQTISP′′(t · polylog(t), s + polylog(t)).
+We defer the proof of Lemma 5 to Appendix A.
+3.3
+Eﬃcient Probabilistic Simulation
+We now prove Lemma 2. By Lemmas 3 and 5, it suﬃces to show that
+BQTISP′′(t, s) ⊆PTISP(t, s + log t).
+13
+
+
+[PDF page 14]
+So consider a language L ∈BQTISP′′(t, s) and an associated quantum Turing machine M. We ﬁx
+an arbitrary input x and assume for simplicity of notation that on input x, M uses exactly s qubits
+and always applies exactly t quantum gates, exactly m of which are measurements, regardless of the
+observed sequence of measurement outcomes. This can be achieved by padding the computation
+with gates that do not aﬀect the accept/reject decision of M.
+3.3.1
+Computation Tree
+PP can be characterized as the class of languages consisting of inputs for which the diﬀerence of
+two #P functions exceeds a certain polynomial-time computable threshold. Thus, we would like
+to express the acceptance probability of M on input x as the ratio of the diﬀerence of two #P
+functions and some polynomial-time computable function. To facilitate the argument, we model
+the computation of M on input x as a tree, analogous to the usual computation trees one associates
+with randomized or nondeterministic computations. We can express the ﬁnal amplitude of a basis
+state as a linear combination of #P functions, where each #P function counts the number of
+root-to-leaf paths in the tree that lead to that basis state and have a particular path amplitude.
+The coeﬃcients in this linear combination are the path amplitudes, which are the products of the
+transition amplitudes along the path. In order to rewrite the linear combination as a ratio of the
+above type, we guarantee certain properties of the transition amplitudes in the tree.
+• First, our choice of universal set allows us to cancel a common denominator out of any given
+gate in such a way that the numerators become Gaussian integers. We can make the product
+of the common denominators the same for all full computation paths, and we will eventually
+absorb it in the polynomial-time computable threshold function.
+• Second, the Gaussian integers, such as the 3 + 4i numerator in the F gate, are handled by
+separating out real and imaginary parts, as well as positive and negative parts, and by mul-
+tiplicating nodes such that we eﬀectively only need to consider numerators in {1, −1, i, −i}.
+By multiplicating nodes we mean that we allow one node to have multiple children represent-
+ing the same computational basis state. For example, the 3 + 4i numerator results in seven
+children.
+We formally deﬁne the computation tree for our ﬁxed input x as follows. It has depth t. Each
+level τ = 0, . . . , t represents the state of the quantum tape after the τth gate is applied and before
+the (τ + 1)st gate is applied. Each node v has ﬁve labels:
+• τ(v) ∈{0, . . . , t}, representing the level of v
+• µ(v) ∈{0, 1}≤m, representing the sequence of measurement outcomes that leads to v
+• σ(v) ∈{0, 1}s, representing a computational basis state
+• α(v) ∈{1, −1, i, −i}, representing the numerator of the amplitude of v
+• β(v) ∈R+, representing the denominator of the amplitude of v
+Note that α(v) will be the product of the numerators of the transition amplitudes along the path
+that leads to v, and similarly for β(v). Labels of nodes across a given level need not be unique; if v
+and u are at the same level and σ(v) = σ(u) and µ(v) = µ(u), then v and u represent interference.
+14
+
+
+[PDF page 15]
+We now deﬁne the tree inductively as follows. The root node v is at level τ(v) = 0 and has
+µ(v) = ǫ representing that no measurements have been performed yet, σ(v) = 0s representing the
+initial state, and α(v) = β(v) = 1 representing that |0s⟩has amplitude 1 initially. Now consider
+an arbitrary node v. If τ(v) = t then v is a leaf. Otherwise, v has children at level τ(v) + 1 that
+depend on the type and operands of (τ(v) + 1)st gate applied given that µ(v) is observed. Let G
+denote this gate.
+• If G = H then v has two children v0 and v1. Suppose G is applied to the jth qubit and let σ(v0)
+and σ(v1) be obtained from σ(v) by setting the jth bit to 0 for σ(v0) and to 1 for σ(v1). Let
+σ(v)j denote the jth bit of σ(v). If σ(v)j = 0 then put α(v0) = α(v1) = α(v), and if σ(v)j = 1
+then put α(v0) = α(v) and α(v1) = −α(v). In each case put β(v0) = β(v1) =
+√
+2β(v). The 1
+and −1 multipliers for the α-labels correspond to the transition amplitudes of G, except that
+the common 1/
+√
+2 has been factored out and absorbed in the β-label.
+• If G = F then we consider two cases. Suppose G is applied to the jth qubit. If σ(v)j = 1 then
+v has seven children, all with the same σ-label σ(v). Three of the children have α-label α(v)
+and the other four have α-label i·α(v), and all children have β-label 5β(v). This corresponds
+to an amplitude of 3+4i
+5 , where the numerator 3 + 4i has been spread out across multiple
+children so as to maintain the property that all α-labels are in {1, −1, i, −i}. If σ(v)j = 0
+then v has ﬁve children, again all with the same σ-label σ(v), and now all with the same
+α-label α(v) and all with β-label 5β(v). This corresponds to an amplitude of 5/5, so that a
+common denominator of 5 can be used for all nodes resulting from the application of G.
+• If G = F † then the children of v are constructed as in the case G = F except that the children
+with α-label i · α(v) now have α-label −i · α(v).
+• If G = I, CNOT, a query gate, or a measurement gate, then applying G to |σ(v)⟩yields
+another computational basis state |σ⟩, so v has a single child u with σ(u) = σ, α(u) = α(v),
+and β(u) = β(v).
+For the cases where G is unitary, we put µ(u) = µ(v) for all children u. If G is a measurement
+gate then we put µ(u) = µ(v)σ(v)j, where u is the unique child of v and j is the index of the qubit
+measured by G.
+Note that the denominator β(v) can be written as 5f(v)√
+2
+h(v), where f(v) denotes the number
+of F and F † gates along the path from the root to v, and h(v) the number of H gates. In fact,
+f(v) and h(v) can be viewed as functions of τ(v) and µ(v) only, and we will write f(τ, µ) and
+h(τ, µ) accordingly. This is because the sequence of gates that leads to a node v only depends on
+µ(v) (and on the ﬁxed input x). The latter reﬂects the obliviousness of the model to the quantum
+computation path.
+In order to describe how the computation tree reﬂects the evolution of the quantum tape, we
+introduce the following notation:
+• Vτ,µ,σ,α = {v : τ(v) = τ, µ(v) = µ, σ(v) = σ, α(v) = α}
+• Vτ,µ,σ = S
+α Vτ,µ,σ,α
+• Vτ,µ = S
+σ Vτ,µ,σ
+15

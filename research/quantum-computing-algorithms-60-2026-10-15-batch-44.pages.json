@@ -1,0 +1,556 @@
+[
+  {
+    "order": 2252,
+    "id": "hamiltonian-simulation-and-product-formulas",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Hamiltonian Simulation and Product Formulas",
+    "companion": "hamiltonian-simulation-and-product-formulas-examples",
+    "requires": [
+      "continuous-time-quantum-walks",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "controlled-gates-phase-and-entanglement",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "reversible-computation-ancillas-and-coherent-oracles"
+    ],
+    "items": [
+      {
+        "id": "def-qa-20-simulation-error-and-cost-model",
+        "kind": "definition",
+        "title": "Hamiltonian simulation error and resources",
+        "statement": "Let $V$ be a finite-dimensional complex inner-product space and let $H=H^*$ be a specified endomorphism. Its exact time-$t$ evolution is $U_H(t)=e^{-itH}$ as defined by [[def-qa-19-finite-matrix-dynamics]]. The notation $\\|T\\|$ denotes the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. A **Hamiltonian simulator at encoded time $t$ and tolerance $0<\\epsilon<1$** is a declared procedure whose output is a unitary $W$ on the stated target register satisfying $\\|W-U_H(t)\\|\\le\\epsilon$. If its circuit uses auxiliary registers, the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] must make the induced target unitary $W$ well-defined; the error is measured on that target unitary. The scalar time and tolerance have exact finite descriptions under the declared input convention; their description lengths are recorded.\n\nThe resource record lists, separately, the number of calls to each named oracle, controlled calls, inverse calls, elementary gate occurrences, clean and dirty ancillary wires, coefficient bits, full circuit-description bits, and classical generation time. A coordinate not supplied by the access contract is unavailable, not zero. No matrix description supplies a circuit, oracle, controlled call, inverse call, or term exponential for free; uniform-family and cost conventions are those of [[def-qc-uniform-circuit-family]], [[def-qc-circuit-cost-model]], [[def-qc-controlled-unitary-access]], and [[def-qc-inverse-unitary-access]]. No polynomial resource bound is asserted by this definition.",
+        "deps": [
+          "def-qa-19-finite-matrix-dynamics",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-qc-circuit-cost-model",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-uniform-circuit-family",
+          "def-qc-clean-and-dirty-ancillas"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §§27.2–27.3, printed pp. 133–135: finite time-independent Hamiltonian evolution, operator-norm simulation, and product formulas."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §§9.1–9.2, printed pp. 71–74: finite Hermitian evolution, operator-norm simulation, and Lie–Suzuki–Trotter methods."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-20-term-list-access-model",
+        "kind": "definition",
+        "title": "Term-list Hamiltonian access",
+        "statement": "A **term-list access input** consists of an integer $m\\ge1$, finite-dimensional self-adjoint endomorphisms $H_1,\\ldots,H_m$ on one stated register, and the exact target $H=\\sum_{j=1}^m H_j$. A supported time code is a finite expression whose leaves are rational numbers or symbols $\\rho_q$ denoting the unique positive real root of $x^q=4$ for an odd integer $q\\ge1$; [[thm-nth-roots-exist]] gives a unique nonnegative root; it is positive because $0^q=0\\ne4$. Internal operations are addition, subtraction, multiplication, or division by a nonzero expression. Its exact real value and bit length are recorded. These codes include rational times and every coefficient-scaled rational time in the finite Suzuki recursion.\n\nFor each $j$, the input declares which time codes are supported and supplies either the exact operation $e^{-isH_j}$ or a full-list uniform circuit generator, in the sense of [[def-qc-uniform-circuit-family]], that returns a unitary $V_j(s)$ together with a certified error $\\eta_j(s)\\ge0$ satisfying $\\|V_j(s)-e^{-isH_j}\\|\\le\\eta_j(s)$. If a circuit uses auxiliary registers, it supplies the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] so that its induced operation $V_j(s)$ on the target is well-defined: clean registers start and return to zero for every target input, and dirty registers are acted on by the identity. The operator-norm error is measured on the induced target operation. The provider specifies how each supported code is passed to the generator and records its actual description length and generation time; no polynomial bound is inferred. This is an explicit access promise, not a claim that every matrix has such a family.\n\nFor each supported call the input records its named-oracle query counts, gate count, ancillary wires, description bits, coefficient bits, and classical generation cost. Costs of composing the calls into a full product and generating that product are separately recorded as $Q_{\\rm wrap}$ and $G_{\\rm wrap}$. A controlled form is available only when separately declared as the block operation of [[def-qc-controlled-unitary-access]]. Inverse access to a call is available only when separately declared under [[def-qc-inverse-unitary-access]], with its own cost and error record. Forward access implies neither capability. The term list supplies no promise that any operation or coefficient computation is free.",
+        "deps": [
+          "def-qa-20-simulation-error-and-cost-model",
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-uniform-circuit-family",
+          "def-qc-clean-and-dirty-ancillas",
+          "thm-nth-roots-exist"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §§27.2–27.3, printed pp. 133–135: finite time-independent Hamiltonian evolution, operator-norm simulation, and product formulas."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §§9.1–9.2, printed pp. 71–74: finite Hermitian evolution, operator-norm simulation, and Lie–Suzuki–Trotter methods."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-20-sparse-hamiltonian-oracle-model",
+        "kind": "definition",
+        "title": "Sparse Hamiltonian row and value oracles",
+        "statement": "Fix $N\\ge1$, a sparsity bound $d\\ge1$, an integer $b\\ge1$, and an injective code $\\mathrm{enc}:C\\to\\{0,1\\}^b$ for a finite set $C\\subset\\mathbb C$ containing $0$ and closed under conjugation. Put $w=\\lceil\\log_2N\\rceil$ and $v=\\lceil\\log_2d\\rceil$, identify $[N]$ with the first $N$ strings in $\\{0,1\\}^w$, and regard any remaining strings as invalid labels. A valid $w$-bit index is zero-extended to $w+1$ bits. Let $H=(H_{xy})_{x,y\\in[N]}$ be Hermitian, have entries in $C$, and have at most $d$ nonzero entries in every row. For each valid row $x$, list its nonzero column indices in increasing order. Define the total location function $f_H(x,\\ell)$ to be the $\\ell$-th listed index for a valid slot $0\\le\\ell<d$ when that slot exists, and a distinguished sentinel otherwise. Invalid row labels and invalid slot labels also return the sentinel. Encode the sentinel by a fixed $(w+1)$-bit word outside the valid index codes. Define the total value function $g_H(x,y)$ to return $\\mathrm{enc}(H_{xy})$ on valid labels and $\\mathrm{enc}(0)$ on invalid labels. All label widths and codes are part of the finite input description.\n\nThe **row-location oracle** and **entry-value oracle** are the coherent XOR maps $O_{f_H}|x,\\ell,z\\rangle=|x,\\ell,z\\oplus f_H(x,\\ell)\\rangle$ and $O_{g_H}|x,y,z\\rangle=|x,y,z\\oplus g_H(x,y)\\rangle$, where the output target has respectively $w+1$ and $b$ bits. The slot register has $v$ bits; all unused slot strings are invalid and use the sentinel. These are total Boolean-function oracles on every bitstring basis input. They are instances of [[def-qc-coherent-function-oracle]], whose justified-by supplier proves unitarity and involutivity for arbitrary total functions. Each named call and any separately granted controlled or inverse call is charged under [[def-qc-circuit-cost-model]]. This exact-code model describes the decoded matrix $H$; approximating a different target matrix requires a separate bound on the matrix difference. Row and value access alone does not supply a term list or term-evolution circuits.",
+        "deps": [
+          "def-qa-20-simulation-error-and-cost-model",
+          "def-qc-coherent-function-oracle",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.4, printed pp. 135–136: sparse Hamiltonian row-neighbor/value access and edge-coloring simulation."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.4, Example 2, printed pp. 76–77: sparse row-location and entry-value access for a Hermitian matrix."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-20-first-order-product-formula",
+        "kind": "definition",
+        "title": "First-order Lie product formula",
+        "statement": "For a term-list input $H=\\sum_{j=1}^m H_j$, a real time $h$, and the announced order $1,\\ldots,m$, define\n$$S_1(h):=e^{-ihH_1}e^{-ihH_2}\\cdots e^{-ihH_m}.$$\nOperator products are written in their ordinary left-to-right algebraic order, so the rightmost factor acts first on a vector. For an integer $r\\ge1$, the $r$-step first-order approximation at time $t$ is $S_1(t/r)^r$. Each exponential is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]]; this definition does not identify the product with $e^{-itH}$ when terms fail to commute.",
+        "deps": [
+          "def-qa-20-term-list-access-model",
+          "def-qa-19-finite-matrix-dynamics"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §§27.2–27.3, printed pp. 133–135: finite time-independent Hamiltonian evolution, operator-norm simulation, and product formulas."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §§9.1–9.2, printed pp. 71–74: finite Hermitian evolution, operator-norm simulation, and Lie–Suzuki–Trotter methods."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-20-symmetric-second-order-formula",
+        "kind": "definition",
+        "title": "Symmetric second-order product formula",
+        "statement": "For the announced term order $1,\\ldots,m$ and real $h$, define the palindromic product\n$$S_2(h):=e^{-ihH_1/2}e^{-ihH_2/2}\\cdots e^{-ihH_{m-1}/2}e^{-ihH_m}e^{-ihH_{m-1}/2}\\cdots e^{-ihH_2/2}e^{-ihH_1/2}.$$\nFor $m=1$ this is just $e^{-ihH_1}$. The $r$-step approximation is $S_2(t/r)^r$, with $r\\ge1$. A written product acts right-to-left, as in [[def-qa-20-first-order-product-formula]]. Every term call and any signed-time implementation cost must be declared by [[def-qa-20-term-list-access-model]].",
+        "deps": [
+          "def-qa-20-term-list-access-model",
+          "def-qa-20-first-order-product-formula"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §§27.2–27.3, printed pp. 133–135: finite time-independent Hamiltonian evolution, operator-norm simulation, and product formulas."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §§9.1–9.2, printed pp. 71–74: finite Hermitian evolution, operator-norm simulation, and Lie–Suzuki–Trotter methods."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "rem-qa-20-higher-order-formula-proof-obligations",
+        "kind": "remark",
+        "title": "Scope of higher-order Suzuki claims",
+        "statement": "## Remarks\n\nThe finite Suzuki recursion, finite-order cancellation, and the explicit conservative norm bound proved on this page are the higher-order claims supplied here. They use signed term times and charge every expanded term call. No asymptotic complexity claim with hidden commutator constants, no generic nested-commutator estimate, and no free negative-time access is part of this remark; any stronger resource assertion needs its own complete proof and access-cost accounting.",
+        "deps": [
+          "def-qa-20-term-list-access-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed p. 135: higher-order product-formula asymptotics; no recursive cancellation proof is supplied."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed pp. 72–74: first-order error scaling and higher-order context; Chapter 9, Exercise 4, printed p. 79: the second-order local-error fact. No higher-order recursive proof is supplied."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-20-first-order-commutator-error",
+        "kind": "theorem",
+        "title": "First-order commutator error",
+        "statement": "Let $V$ be a finite-dimensional complex inner-product space, let $H_1,\\ldots,H_m$ be self-adjoint endomorphisms of $V$ with $m\\ge1$, and set $H=\\sum_{j=1}^mH_j$. For every real $t$ and integer $r\\ge1$,\n$$\\left\\|S_1(t/r)^r-U_H(t)\\right\\|\\le\\frac{t^2}{2r}\\sum_{1\\le j<k\\le m}\\|[H_j,H_k]\\|,$$\nwhere $S_1$ has the fixed order of [[def-qa-20-first-order-product-formula]] and $U_H(t)=e^{-itH}$ is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]].",
+        "deps": [
+          "def-qa-20-first-order-product-formula",
+          "def-qa-19-finite-matrix-dynamics",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-qa-19-matrix-exponential-unitary-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed pp. 134–135: Lie product formulas and finite-step simulation."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed pp. 72–74: first-order Lie–Suzuki–Trotter simulation and term costs."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-20-first-order-term-list-simulation",
+        "kind": "algorithm",
+        "title": "First-order term-list simulator",
+        "statement": "**Input:** A finite term-list access input with $H=\\sum_{j=1}^m H_j$, a finite time code $t$ in the expression language of [[def-qa-20-term-list-access-model]], a rational tolerance $0<\\epsilon<1$, a certified rational $C_2\\ge0$ satisfying $C_2\\ge\\sum_{1\\le j<\\ell\\le m}\\|[H_j,H_\\ell]\\|$, and a supplied certified rational upper bound $R\\ge0$ satisfying $R\\ge t^2C_2/\\epsilon$. For $t\\ne0$, put $r=\\max\\{1,\\lceil R\\rceil\\}$ and $h=t/r$; the access declarations must supply each term call at this exact signed code $h$, with its implementation and costs. A call may be directly supported at $h$ or supplied by separately declared inverse or time-reversed access, with that route's own costs. When $t\\ne0$, every approximate call must have a certified error, and the sum of those errors over all $rm$ calls must be at most $\\epsilon/2$. The time-code and call conventions are those of [[def-qa-20-term-list-access-model]].\n\n**Output:** The composed unitary circuit for the declared product order, together with its query, gate, ancilla, coefficient-bit, description-bit, and classical-generation cost record.\n\n**Instructions:**\n\n1. Compare the exact value of the supplied time code with $0$. If it is $0$, return the identity circuit.\n2. Otherwise set $r=\\max\\{1,\\lceil R\\rceil\\}$ using rational arithmetic and set $h=t/r$ as a supported finite expression code.\n3. For each of exactly $r$ repetitions, execute the declared term calls chronologically in order $m,m-1,\\ldots,1$. By [[def-qc-circuit-denotational-semantics]], later executed gates multiply on the left. The ideal exact-call operator for one repetition is therefore $e^{-ihH_1}\\cdots e^{-ihH_m}$ of [[def-qa-20-first-order-product-formula]]; with supplied implementations the actual operator is $V_1(h)\\cdots V_m(h)$, with the declared call errors accumulated separately. If the call at $h$ is supplied through inverse or time-reversed access, use that separately declared route and its cost and error record; do not infer it from forward access alone.\n4. Keep circuit-generation, coefficient, and all oracle costs in their separate declared coordinates. When $t\\ne0$ and calls are approximate, retain their per-call error records; admissibility requires their sum over all $rm$ calls to be at most $\\epsilon/2$.\n\nThe procedure makes no claim that the required term calls or their uniform generator exist for an arbitrary matrix.",
+        "deps": [
+          "def-qa-20-first-order-product-formula",
+          "def-qa-20-term-list-access-model",
+          "def-qc-circuit-denotational-semantics"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §§27.2–27.3, printed pp. 133–135: finite time-independent Hamiltonian evolution, operator-norm simulation, and product formulas."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §§9.1–9.2, printed pp. 71–74: finite Hermitian evolution, operator-norm simulation, and Lie–Suzuki–Trotter methods."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-20-second-order-conservative-error",
+        "kind": "theorem",
+        "title": "Conservative second-order error",
+        "statement": "Let $V$ be finite-dimensional, let $H_1,\\ldots,H_m$ be self-adjoint with $m\\ge1$, put $H=\\sum_jH_j$ and $M=\\sum_j\\|H_j\\|$. For every real $t$ and integer $r\\ge1$,\n$$\\left\\|S_2(t/r)^r-U_H(t)\\right\\|\\le\\frac{|t|^3M^3}{3r^2},$$\nwhere $S_2$ is the palindromic product of [[def-qa-20-symmetric-second-order-formula]] and $U_H$ is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]].",
+        "deps": [
+          "def-qa-20-symmetric-second-order-formula",
+          "def-qa-19-finite-matrix-dynamics",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-qa-19-matrix-exponential-unitary-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed pp. 134–135: symmetric second-order formula and higher-order error context."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed pp. 72–74: product-formula context; Chapter 9, Exercise 4, printed p. 79, Eq. (9.7): the symmetric second-order local-error form."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-20-suzuki-recursive-product-formula",
+        "kind": "algorithm",
+        "title": "Finite higher-order Suzuki product formula",
+        "statement": "**Input:** Integers $k,r\\ge1$, a finite time code $t$ in the expression language of [[def-qa-20-term-list-access-model]], and a finite term-list access input.\n\n**Admissible conditions:** If $t\\ne0$, for every term occurrence $e^{-i c_\\nu tH_{j_\\nu}/r}$ in the fully expanded segment, the access input supports that exact signed time code for term $H_{j_\\nu}$ and declares its implementation, per-call costs, and any approximation-error record. The call may be supplied directly at the signed code or through separately declared inverse or time-reversed access with its own cost and error record. This condition includes the half-time calls in the base formula and every signed central call in the recursion.\n\n**Output:** The finite product circuit and its declared query, gate, ancilla, coefficient-bit, description-bit, and classical-generation costs.\n\n**Instructions:**\n\n1. Compare the exact value of the supplied time code with $0$. If it is $0$, return the identity. Otherwise begin with $S_2(h)$ from [[def-qa-20-symmetric-second-order-formula]], where $h=t/r$.\n2. For each $j=2,\\ldots,k$, let $\\rho_{2j-1}$ be the unique nonnegative root of $x^{2j-1}=4$ from [[thm-nth-roots-exist]]; it is positive since $0^{2j-1}\\ne4$. Put $p_j=(4-\\rho_{2j-1})^{-1}$, and recursively replace the current even-order formula $S_{2j-2}(h)$ by\n$$S_{2j}(h):=S_{2j-2}(p_jh)^2S_{2j-2}((1-4p_j)h)S_{2j-2}(p_jh)^2.$$\n3. Recursively expand one segment until only the term exponentials remain, retaining their displayed operator order. For exactly $r$ repetitions, execute the factors of each expanded segment chronologically in the reverse of their displayed operator order. Since later executed gates multiply on the left by [[def-qc-circuit-denotational-semantics]], the exact-call operator is $S_{2k}(t/r)^r$. If calls are approximate, execute their supplied unitary implementations in that same chronological order and retain the per-call error records; the displayed $S_{2k}$ remains the ideal exact-call word.\n4. For each central coefficient $1-4p_j$, use the implementation declared for that actual signed call time. For $q=2j-1\\ge3$, let $\\rho_q$ be the positive root of $\\rho_q^q=4$. It is positive, and $\\rho_q<4$: otherwise monotonicity of positive integer powers ([[lem-power-monotone]]) would give $\\rho_q^q\\ge4^q>4$, a contradiction. Hence $4-\\rho_q>0$, $p_j=(4-\\rho_q)^{-1}>1/4$, and $1-4p_j<0$. Thus the central coefficient is negative; the actual call time is this coefficient times the current recursive time argument. Use the resulting signed code, which may be positive or negative, with its directly supported implementation or separately declared inverse or time-reversed access. Charge exact coefficient descriptions and classical generation separately.\n\nThe recursion is finite because $j$ increases only from $2$ through $k$, and each expansion makes five calls to the preceding formula. No asymptotic error or cost guarantee is part of this procedure definition.",
+        "deps": [
+          "def-qa-20-symmetric-second-order-formula",
+          "def-qa-20-term-list-access-model",
+          "def-qc-circuit-denotational-semantics",
+          "thm-nth-roots-exist",
+          "lem-power-monotone"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed p. 135: higher-order product-formula asymptotics; no recursive cancellation proof is supplied."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed pp. 72–74: first-order error scaling and higher-order context; Chapter 9, Exercise 4, printed p. 79: the second-order local-error fact. No higher-order recursive proof is supplied."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-20-first-order-resource-bound",
+        "kind": "theorem",
+        "title": "First-order query and gate cost",
+        "statement": "For the term-list input $H=\\sum_{j=1}^mH_j$ in [[def-qa-20-term-list-access-model]], let $t$ be a finite time code in its expression language, let $0<\\epsilon<1$ be rational, and let $C_2\\ge0$ be a certified rational satisfying $C_2\\ge\\sum_{1\\le j<\\ell\\le m}\\|[H_j,H_\\ell]\\|$. Supply a certified rational upper bound $R\\ge t^2C_2/\\epsilon$ and put $r=\\max\\{1,\\lceil R\\rceil\\}$ and $h=t/r$. When $t\\ne0$, suppose each term call at the exact signed code $h$ is supported and declared, directly or through separately declared inverse or time-reversed access, with at most $q_j$ named queries and $g_j$ gate occurrences. Let $Q_{\\rm wrap}$ and $G_{\\rm wrap}$ be the separately declared query and gate costs of uniform circuit composition and generation. For $t\\ne0$, the algorithm [[alg-qa-20-first-order-term-list-simulation]] uses at most $r\\sum_jq_j+Q_{\\rm wrap}$ queries and $r\\sum_jg_j+G_{\\rm wrap}$ gates. Its exact term product has error at most $\\epsilon/2$. If, when $t\\ne0$, implemented calls are unitary and their total operator-norm error over all $rm$ calls is at most $\\epsilon/2$, the returned unitary is within $\\epsilon$ of $U_H(t)$. When $t=0$, the algorithm returns the identity with no term calls. Coefficient, description-bit, ancilla, and classical-generation resources remain separate coordinates.",
+        "deps": [
+          "alg-qa-20-first-order-term-list-simulation",
+          "thm-qa-20-first-order-commutator-error",
+          "def-qa-20-term-list-access-model",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed pp. 134–135: first-order step and gate scaling."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed pp. 72–74: first-order simulation and error accumulation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-20-suzuki-order-cancellation",
+        "kind": "lemma",
+        "title": "Suzuki recursive cancellation of error terms",
+        "statement": "Let $H_1,\\ldots,H_m$ be fixed finite-dimensional self-adjoint matrices, $m\\ge1$, and let $U(h)=e^{-ih\\sum_jH_j}$. The recursive formulas $S_{2k}$ of [[alg-qa-20-suzuki-recursive-product-formula]] have the same Taylor coefficients as $U(h)$ through degree $2k$ at $h=0$. They are symmetric: $S_{2k}(-h)=S_{2k}(h)^{-1}$ for all real $h$.",
+        "deps": [
+          "alg-qa-20-suzuki-recursive-product-formula",
+          "def-qa-20-symmetric-second-order-formula",
+          "def-qa-20-term-list-access-model",
+          "def-qa-19-finite-matrix-dynamics",
+          "thm-qa-19-matrix-exponential-unitary-properties",
+          "thm-nth-roots-exist",
+          "lem-power-monotone"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed p. 135: higher-order product-formula asymptotics; no recursive cancellation proof is supplied."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed pp. 72–74: first-order error scaling and higher-order context; Chapter 9, Exercise 4, printed p. 79: the second-order local-error fact. No higher-order recursive cancellation proof is supplied."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "induction"
+      },
+      {
+        "id": "thm-qa-20-suzuki-conservative-error-and-resources",
+        "kind": "theorem",
+        "title": "Higher-order product-formula error with explicit term counts",
+        "statement": "Let $k,m,r\\ge1$, let $H_1,\\ldots,H_m$ be self-adjoint endomorphisms of a finite-dimensional complex inner-product space, and put $H=\\sum_jH_j$, $M=\\sum_j\\|H_j\\|$, and $q=2k+1$. Expand one recursive segment as $S_{2k}(h)=\\prod_{\\nu=1}^{L}e^{-ihc_\\nu H_{j_\\nu}}$ in its declared order and set $B_k=\\sum_{\\nu=1}^{L}|c_\\nu|\\|H_{j_\\nu}\\|$. For every real $t$,\n$$\\left\\|S_{2k}(t/r)^r-U_H(t)\\right\\|\\le\\frac{(B_k^q+M^q)|t|^q}{q!\\,r^{q-1}}.$$\nThe expanded term count is $L=(2m-1)5^{k-1}$ per segment. If $t$ is rational with an exact finite code, a rational tolerance $\\epsilon>0$ and rational upper bounds $\\overline B\\ge B_k$, $\\overline M\\ge M$ are supplied, a finite integer search for the least $r\\ge1$ satisfying $r^{q-1}q!\\epsilon\\ge(\\overline B^q+\\overline M^q)|t|^q$ makes the displayed exact-call error at most $\\epsilon$. For the resource claims when $t\\ne0$, require the term-list input to support every actual signed call code $c_\\nu t/r$ for its term $H_{j_\\nu}$ in the fully expanded segment, including half-time base calls and negative central calls, and to declare an implementation and per-call cost at each such code. An inverse or time-reversed implementation must be separately declared with its own cost and error record; forward access alone does not supply it. When $t\\ne0$ and term circuits are approximate, add the sum of all per-call operator-norm errors separately; to keep total error at most $\\epsilon$, use $\\epsilon/2$ in the integer search and require the sum of call errors over all $rL$ calls to be at most $\\epsilon/2$. When $t\\ne0$, the term-call contributions to query and gate costs are the sums of the declared costs at the actual signed times in one expanded word, multiplied by $r$; when $t=0$, the recursive algorithm returns the identity with no term calls. The separately declared product-composition overheads $Q_{\\rm wrap}$ and $G_{\\rm wrap}$ are added to those totals; coefficient, description-bit, ancilla, and classical-generation resources remain separate coordinates.",
+        "deps": [
+          "alg-qa-20-suzuki-recursive-product-formula",
+          "lem-qa-20-suzuki-order-cancellation",
+          "def-qa-20-term-list-access-model",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-qa-19-matrix-exponential-unitary-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed p. 135: higher-order product-formula asymptotics; no recursive cancellation proof is supplied."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed pp. 72–74: first-order error scaling and higher-order context; Chapter 9, Exercise 4, printed p. 79: the second-order local-error fact. No higher-order recursive proof is supplied."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2253,
+    "id": "hamiltonian-simulation-and-product-formulas-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Hamiltonian Simulation and Product Formulas — Examples",
+    "companion": "hamiltonian-simulation-and-product-formulas",
+    "requires": [
+      "hamiltonian-simulation-and-product-formulas"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-20-commuting-two-term-simulation",
+        "kind": "example",
+        "title": "Exact simulation of two commuting terms",
+        "statement": "If two finite-dimensional self-adjoint matrices $H_1,H_2$ commute, then every first-order product step is exact:\n$$e^{-ihH_1}e^{-ihH_2}=e^{-ih(H_1+H_2)}\\qquad(h\\in\\mathbb R).$$\nConsequently $S_1(t/r)^r=U_{H_1+H_2}(t)$ for every $t\\in\\mathbb R$ and $r\\ge1$.",
+        "deps": [
+          "def-qa-20-first-order-product-formula",
+          "thm-qa-19-matrix-exponential-unitary-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed p. 134: the exact product identity for commuting Hamiltonians."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.2, printed p. 72: the commuting case and the distinction from noncommuting exponentials."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-20-sparse-oracle-does-not-give-term-list",
+        "kind": "counterexample",
+        "title": "Sparse access need not give a short term list",
+        "statement": "The false assertion is that sparse row/value access alone automatically supplies the explicit canonical ordered rank-one term list and term-evolution access, including polynomial-in-$\\log N$ exact classical recovery of that canonical list. The counterexample below establishes the following qualified obstruction.\n\nThe row/value interface for a sparse Hermitian matrix by itself supplies neither the term-list contract nor term-evolution calls required by [[def-qa-20-term-list-access-model]]. In the $1$-sparse diagonal family below, any deterministic exact classical procedure that recovers the canonical ordered rank-one term list needs $N$ row-value queries, and any lossless binary encoding of that canonical list has worst-case length at least $N$ bits. This rules out polynomial-in-$\\log N$ query recovery of that canonical list; it does not rule out every possible alternative decomposition.",
+        "deps": [
+          "def-qa-20-sparse-hamiltonian-oracle-model",
+          "def-qa-20-term-list-access-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.4, printed pp. 135–136: sparse Hamiltonian row-neighbor/value access and edge-coloring simulation."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9 §9.4, Example 2, printed pp. 76–77: sparse row-location and entry-value access for a Hermitian matrix."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-20-noncommuting-pauli-error",
+        "kind": "example",
+        "title": "First-order error for two Pauli terms",
+        "statement": "For the Pauli matrices\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\quad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\quad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},$$\nthe two-term Hamiltonian $H=X+Z$ has first-order commutator bound $t^2/r$. Also, for every $\\lambda\\ge0$, the same fixed total matrix $H=Z$ has the decomposition $H_1=\\lambda X$, $H_2=Z-\\lambda X$, whose commutator certificate grows with $\\lambda$ although $\\|H\\|=1$.",
+        "deps": [
+          "thm-qa-20-first-order-commutator-error",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 27 §27.3, printed pp. 134–135: noncommuting term products and product-formula error."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 9, Exercise 1, printed p. 79: explicit noncommuting Pauli $X,Z$ exponentials."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

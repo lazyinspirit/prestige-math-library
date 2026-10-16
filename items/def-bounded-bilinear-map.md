@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-bounded-bilinear-map.json
 id: def-bounded-bilinear-map
 kind: definition
 title: "A bounded bilinear map between normed spaces"
@@ -7,14 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-norm-and-normed-space, def-vector-space,
-       rem-real-and-complex-normed-space-convention]
+deps: [def-norm-and-normed-space, def-vector-space, def-complex-norm-and-complex-normed-space]
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  audited: 2026-09-01
-  precheck: n/a
 sources:
   scraped: []
   references:
@@ -27,7 +25,7 @@ pipeline_run: frontier-28
 
 ## Definition
 
-Let $X$, $Y$, and $Z$ be normed spaces over the same scalar field $\mathbb K$.
+Let $X$, $Y$, and $Z$ be normed spaces over the same scalar field $\mathbb K\in\{\mathbb R,\mathbb C\}$, using [[def-norm-and-normed-space]] over $\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] over $\mathbb C$.
 A map $B:X\times Y\to Z$ is **bilinear** when $x \mapsto B(x,y)$ is linear for
 each fixed $y \in Y$ and $y \mapsto B(x,y)$ is linear for each fixed
 $x \in X$.

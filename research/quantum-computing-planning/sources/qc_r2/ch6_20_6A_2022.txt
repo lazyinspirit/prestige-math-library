@@ -1,0 +1,5852 @@
+Quantum Information
+Chapter 6. Quantum Algorithms
+
+John Preskill
+Institute for Quantum Information and Matter
+California Institute of Technology
+
+Updated November 2020
+
+For further updates and additional chapters, see:
+http://www.theory.caltech.edu/people/preskill/ph219/
+
+Please send corrections to preskill@caltech.edu
+
+
+
+Contents
+
+page iv
+Preface
+v
+
+6
+Quantum Algorithms
+1
+6.1
+Some Quantum Algorithms
+1
+6.2
+Periodicity
+7
+6.2.1
+Finding the period
+8
+6.2.2
+From FFT to QFT
+10
+6.3
+Factoring
+12
+6.3.1
+Factoring as period finding
+12
+6.3.2
+RSA
+16
+6.4
+Phase Estimation
+18
+6.5
+Hidden Subgroup Problem
+21
+6.5.1
+Discrete Log Problem
+23
+6.5.2
+Diffie-Hellman key exchange
+23
+6.5.3
+Finding abelian hidden subgroups
+24
+6.6
+Quantum Searching
+28
+6.6.1
+Generalized Search
+31
+6.7
+The Grover Algorithm Is Optimal
+32
+6.8
+Using quantum computers to simulate quantum physics
+35
+6.8.1
+Simulating time evolution of local Hamiltonians
+35
+6.8.2
+Estimating energy eigenvalues and preparing energy eigenstates
+39
+6.9
+Classical simulation of slightly entangling quantum computations
+42
+6.10 QMA-completeness of the local Hamiltonian problem
+46
+6.10.1 3-SAT is NP-complete
+47
+6.10.2 Frustrated spin glasses
+49
+6.10.3 The quantum k-local Hamiltonian problem
+50
+6.10.4 Constructing and analyzing the Hamiltonian
+51
+
+
+This article forms one chapter of Quantum Information which will be first published by
+Cambridge University Press.
+
+c⃝in the Work, John Preskill, 2020
+
+NB: The copy of the Work, as displayed on this website, is a draft, pre-publication copy
+only. The final, published version of the Work can be purchased through Cambridge
+University Press and other standard distribution channels. This draft copy is made
+available for personal use only and must not be sold or re-distributed.
+
+
+Preface
+
+This is the 6th chapter of my book Quantum Information, based on the course I have
+been teaching at Caltech since 1997. An early version of this chapter has been available
+on the course website since 1998, but this version is substantially revised and expanded.
+This is a working draft of Chapter 6, which I will continue to update. See the URL
+on the title page for further updates and drafts of other chapters. Please send an email
+to preskill@caltech.edu if you notice errors.
+Eventually, the complete book will be published by Cambridge University Press. I
+hesitate to predict the publication date — they have been far too patient with me.
+
+
+
+6
+
+Quantum Algorithms
+
+6.1 Some Quantum Algorithms
+
+While we are not yet able to show that BPP ̸= BQP, there are three approaches that
+we can pursue to study the differences between the capabilities of classical and quantum
+computers:
+
+(1) Nonexponential speedup. We can find quantum algorithms that are demonstra-
+bly faster than the best classical algorithm, but not exponentially faster. These
+algorithms shed no light on the conventional classification of complexity. But
+they do demonstrate a type of separation between tasks that classical and quan-
+tum computers can perform. Example: Grover’s quantum speedup of the search
+of an unsorted data base.
+(2) “Relativized” exponential speedup. We can consider the problem of analyzing
+the contents of a “quantum black box.” The box performs an a priori unknown)
+unitary transformation. We can prepare an input for the box, and we can measure
+its output; our task is to find out what the box does. It is possible to prove that
+quantum black boxes (computer scientists call them oracles1) exist with this
+property: By feeding quantum superpositions to the box, we can learn what is
+inside with an exponential speedup, compared to how long it would take if we
+were only allowed classical inputs. A computer scientist would say that BPP ̸=
+BQP “relative to the oracle.” Example: Simon’s exponential quantum speedup
+for finding the period of a 2 to 1 function.
+(3) Exponential speedup for “apparently” hard problems. We can exhibit a
+quantum algorithm that solves a problem in polynomial time, where the problem
+appears to be hard classically, so that it is strongly suspected (though not proved)
+that the problem is not in BPP. Example: Shor’s factoring algorithm.
+
+Deutsch’s problem. We will discuss examples from all three approaches. But first,
+we’ll warm up by recalling an example of a simple quantum algorithm that was previously
+discussed in §1.5: Deutsch’s algorithm for distinguishing between constant and balanced
+functions f : {0, 1} →{0, 1}. We are presented with a quantum black box that computes
+f(x); that is, it enacts the two-qubit unitary transformation
+
+Uf : |x⟩|y⟩→|x⟩|y ⊕f(x)⟩,
+(6.1)
+
+which flips the second qubit iff f(first qubit) = 1. Our assignment is to determine
+
+1 The term “oracle” signifies that the box responds to a query immediately; that is, the time it takes the box
+to operate is not included in the complexity analysis.
+
+
+2
+Quantum Algorithms
+
+whether f(0) = f(1). If we are restricted to the “classical” inputs |0⟩and |1⟩, we need
+to access the box twice (x = 0 and x = 1) to get the answer. But if we are allowed to
+input a coherent superposition of these “classical” states, then once is enough.
+The quantum circuit that solves the problem (discussed in §1.5) is:
+
+|0⟩
+
+|1⟩
+
+Measure
+H
+
+H
+Uf
+
+H
+s
+
+Here H denotes the Hadamard transform
+
+H : |x⟩→
+1
+√
+
+2
+
+�
+
+y
+(−1)xy|y⟩,
+(6.2)
+
+or
+
+H : |0⟩→
+1
+√
+
+2(|0⟩+ |1⟩)
+
+|1⟩→
+1
+√
+
+2(|0⟩−|1⟩);
+(6.3)
+
+that is, H is the 2 × 2 matrix
+
+H :
+
+�
+1
+√
+
+2
+1
+√
+
+2
+1
+√
+
+2
+−1
+√
+
+2
+
+�
+
+.
+(6.4)
+
+The circuit takes the input |0⟩|1⟩to
+
+|0⟩|1⟩→1
+
+2(|0⟩+ |1⟩)(|0⟩−|1⟩)
+
+→1
+
+2
+
+�
+(−1)f(0)|0⟩+ (−1)f(1)|1⟩
+�
+(|0⟩−|1⟩)
+
+→1
+
+2
+
+��
+(−1)f(0) + (−1)f(1)�
+|0⟩
+
++
+�
+(−1)f(0) −(−1)f(1)�
+|1⟩
+
+�
+1
+√
+
+2(|0⟩−|1⟩).
+(6.5)
+
+Then when we measure the first qubit, we find the outcome |0⟩with probability one if
+f(0) = f(1) (constant function) and the outcome |1⟩with probability one if f(0) ̸= f(1)
+(balanced function).
+A quantum computer enjoys an advantage over a classical computer because it can
+invoke quantum parallelism. Because we input a superposition of |0⟩and |1⟩, the output
+is sensitive to both the values of f(0) and f(1), even though we ran the box just once.
+Deutsch–Jozsa problem. Now we’ll consider some generalizations of Deutsch’s
+problem. We will continue to assume that we are to analyze a quantum black box
+(“quantum oracle”). But in the hope of learning something about complexity, we will
+imagine that we have a family of black boxes, with variable input size. We are interested
+in how the time needed to find out what is inside the box scales with the size of the
+input (where “time” is measured by how many times we query the box).
+
+
+6.1 Some Quantum Algorithms
+3
+
+In the Deutsch–Jozsa problem, we are presented with a quantum black box that com-
+putes a function taking n bits to 1,
+
+f : {0, 1}n →{0, 1},
+(6.6)
+
+and we have it on good authority that f is either constant (f(x) = c for all x) or
+balanced (f(x) = 0 for exactly 1
+
+2 of the possible input values). We are to solve the
+decision problem: Is f constant or balanced?
+In fact, we can solve this problem, too, accessing the box only once, using the same
+circuit as for Deutsch’s problem (but with x expanded from one bit to n bits). We note
+that if we apply n Hadamard gates in parallel to n-qubits.
+
+H(n) = H ⊗H ⊗. . . ⊗H,
+(6.7)
+
+then the n-qubit state transforms as
+
+H(n) : |x⟩→
+
+n
+�
+
+i=1
+
+
+
+1
+√
+
+2
+
+�
+
+yi={0,1}
+(−1)xiyi|yi⟩
+
+
+
+≡
+1
+2n/2
+
+2n−1
+�
+
+y=0
+(−1)x·y|y⟩,
+(6.8)
+
+where x, y represent n-bit strings, and x · y denotes the bitwise AND (or mod 2 scalar
+product)
+
+x · y = (x1 ∧y1) ⊕(x2 ∧y2) ⊕. . . ⊕(xn ∧yn).
+(6.9)
+
+Acting on the input (|0⟩)n|1⟩, the action of the circuit is
+
+(|0⟩)n|1⟩→
+
+�
+1
+2n/2
+
+2n−1
+�
+
+x=0
+|x⟩
+
+�
+1
+√
+
+2(|0⟩−|1⟩)
+
+→
+
+�
+1
+2n/2
+
+2n−1
+�
+
+x=0
+(−1)f(x)|x⟩
+
+�
+1
+√
+
+2(|0⟩−|1⟩)
+
+→
+
+
+
+1
+
+2n
+
+2n−1
+�
+
+x=0
+
+2n−1
+�
+
+y=0
+(−1)f(x)(−1)x·y|y⟩
+
+
+
+1
+√
+
+2(|0⟩−|1⟩)
+(6.10)
+
+Now let us evaluate the sum
+
+1
+2n
+
+2n−1
+�
+
+x=0
+(−1)f(x)(−1)x·y.
+(6.11)
+
+If f is a constant function, the sum is
+
+(−1)f(x)
+�
+1
+2n
+
+2n−1
+�
+
+x=0
+(−1)x·y
+�
+
+= (−1)f(x)δy,0;
+(6.12)
+
+it vanishes unless y = 0. Hence, when we measure the n-bit register, we obtain the result
+|y = 0⟩≡(|0⟩)n with probability one. But if the function is balanced, then for y = 0,
+the sum becomes
+
+1
+2n
+
+2n−1
+�
+
+x=0
+(−1)f(x) = 0,
+(6.13)
+
+(because half of the terms are (+1) and half are (−1)). Therefore, the probability of
+obtaining the measurement outcome |y = 0⟩is zero.
+
+
+4
+Quantum Algorithms
+
+We conclude that one query of the quantum oracle suffices to distinguish constant and
+balanced function with 100% confidence. The measurement result y = 0 means constant,
+any other result means balanced.
+So quantum computation solves this problem neatly, but is the problem really hard
+classically? If we are restricted to classical input states |x⟩, we can query the oracle
+repeatedly, choosing the input x at random (without replacement) each time. Once we
+obtain distinct outputs for two different queries, we have determined that the function
+is balanced (not constant). But if the function is in fact constant, we will not be certain
+it is constant until we have submitted 2n−1 + 1 queries and have obtained the same
+response every time. In contrast, the quantum computation gives a definite response in
+only one go. So in this sense (if we demand absolute certainty) the classical calculation
+requires a number of queries exponential in n, while the quantum computation does not,
+and we might therefore claim an exponential quantum speedup.
+But perhaps it is not reasonable to demand absolute certainty of the classical com-
+putation (particularly since any real quantum computer will be susceptible to errors, so
+that the quantum computer will also be unable to attain absolute certainty.) Suppose
+we are satisfied to guess balanced or constant, with a probability of success
+
+P(success) > 1 −ε.
+(6.14)
+
+If the function is actually balanced, then if we make k queries, the probability of getting
+the same response every time is p = 2−(k−1). If after receiving the same response k
+consecutive times we guess that the function is balanced, then a quick Bayesian analysis
+shows that the probability that our guess is wrong is
+1
+2k−1+1 (assuming that balanced
+and constant are a priori equally probable). So if we guess after k queries, the probability
+of a wrong guess is
+
+1 −P(success) =
+1
+2k−1(2k−1 + 1).
+(6.15)
+
+Therefore, we can achieve success probability 1 −ε for ε−1 = 2k−1(2k−1 + 1) or k ∼
+1
+2 log
+�1
+
+ε
+�
+. Since we can reach an exponentially good success probability with a polynomial
+number of trials, it is not really fair to say that the problem is hard.
+Bernstein–Vazirani problem. Exactly the same circuit can be used to solve another
+variation on the Deutsch–Jozsa problem. Let’s suppose that our quantum black box
+computes one of the functions fa, where
+
+fa(x) = a · x,
+(6.16)
+
+and a is an n-bit string. Our job is to determine a.
+The quantum algorithm can solve this problem with certainty, given just one (n-qubit)
+quantum query. For this particular function, the quantum state in eq. (6.10) becomes
+
+1
+2n
+
+2n−1
+�
+
+x=0
+
+2n−1
+�
+
+y=0
+(−1)a·x(−1)x·y|y⟩.
+(6.17)
+
+But in fact
+
+1
+2n
+
+2n−1
+�
+
+x=0
+(−1)a·x(−1)x·y = δa,y,
+(6.18)
+
+so this state is |a⟩. We can execute the circuit once and measure the n-qubit register,
+finding the n-bit string a with probability one.
+
+
+6.1 Some Quantum Algorithms
+5
+
+If only classical queries are allowed, we acquire only one bit of information from each
+query, and it takes n queries to determine the value of a. Therefore, we have a clear
+separation between the quantum and classical difficulty of the problem. Even so, this
+example does not probe the relation of BPP to BQP, because the classical problem is
+not hard. The number of queries required classically is only linear in the input size, not
+exponential.
+Simon’s problem. Bernstein and Vazirani managed to formulate a variation on the
+above problem that is hard classically, and so establish for the first time a “relativized”
+separation between quantum and classical complexity. We will find it more instructive
+to consider a simpler example proposed somewhat later by Daniel Simon.
+Once again we are presented with a quantum black box, and this time we are assured
+that the box computes a function
+
+f : {0, 1}n →{0, 1}n,
+(6.19)
+
+that is 2-to-1. Furthermore, the function has a “period” given by the n-bit string a; that
+is
+
+f(x) = f(y)
+iff
+y = x ⊕a,
+(6.20)
+
+where here ⊕denotes the bitwise XOR operation. (So a is the period if we regard x
+as taking values in (Z2)n rather than Z2n.) This is all we know about f. Our job is to
+determine the value of a.
+Classically this problem is hard. We need to query the oracle an exponentially large
+number of times to have any reasonable probability of finding a. We don’t learn anything
+until we are fortunate enough to choose two queries x and y that happen to satisfy
+x ⊕y = a. Suppose, for example, that we choose 2n/4 queries. The number of pairs of
+queries is less than (2n/4)2, and for each pair {x, y}, the probability that x ⊕y = a is
+2−n. Therefore, the probability of successfully finding a is less than
+
+2−n(2n/4)2 = 2−n/2;
+(6.21)
+
+even with exponentially many queries, the success probability is exponentially small.
+If we wish, we can frame the question as a decision problem: Either f is a 1-1 function,
+or it is 2-to-1 with some randomly chosen period a, each occurring with an a priori
+probability 1
+
+2. We are to determine whether the function is 1-to-1 or 2-to-1. Then, after
+2n/4 classical queries, our probability of making a correct guess is
+
+P(success) < 1
+
+2 +
+1
+2n/2 ,
+(6.22)
+
+which does not remain bounded away from 1
+
+2 as n gets large.
+But with quantum queries the problem is easy! The circuit we use is essentially the
+same as above, but now both registers are expanded to n qubits. We prepare the equally
+weighted superposition of all n-bit strings (by acting on |0⟩with H(n)), and then we
+query the oracle:
+
+Uf :
+
+�2n−1
+�
+
+x=0
+|x⟩
+
+�
+
+|0⟩→
+
+2n−1
+�
+
+x=0
+|x⟩|f(x)⟩.
+(6.23)
+
+Now we measure the second register. (This step is not actually necessary, but I include
+it here for the sake of pedagogical clarity.) The measurement outcome is selected at
+random from the 2n−1 possible values of f(x), each occurring equiprobably. Suppose the
+
+
+6
+Quantum Algorithms
+
+outcome is f(x0). Then because both x0 and x0 ⊕a, and only these values, are mapped
+by f to f(x0), we have prepared the state
+
+1
+√
+
+2(|x0⟩+ |x0 ⊕a⟩)
+(6.24)
+
+in the first register.
+Now we want to extract some information about a. Clearly it would do us no good to
+measure the register (in the computational basis) at this point. We would obtain either
+the outcome x0 or x0 ⊕a, each occurring with probability 1
+
+2, but neither outcome would
+reveal anything about the value of a.
+But suppose we apply the Hadamard transform H(n) to the register before we mea-
+sure:
+
+H(n) : 1
+√
+
+2(|x0⟩+ |x0 + a⟩)
+
+→
+1
+2(n+1)/2
+
+2n−1
+�
+
+y=0
+
+�
+(−1)x0·y + (−1)(x0⊕a)·y�
+|y⟩
+
+=
+1
+2(n−1)/2
+�
+
+a·y=0
+(−1)x0·y|y⟩.
+(6.25)
+
+If a · y = 1, then the terms in the coefficient of |y⟩interfere destructively. Hence only
+states |y⟩with a · y = 0 survive in the sum over y. The measurement outcome, then, is
+selected at random from all possible values of y such that a · y = 0, each occurring with
+probability 2−(n−1).
+We run this algorithm repeatedly, each time obtaining another value of y satisfying
+y · a = 0. Once we have found n such linearly independent values {y1, y2, y3 . . . yn} (that
+is, linearly independent over (Z2)n), we can solve the equations
+
+y1 · a = 0
+
+y2 · a = 0
+...
+
+yn · a = 0,
+(6.26)
+
+to determine a unique value of a, and our problem is solved. It is easy to see that with
+O(n) repetitions, we can attain a success probability that is exponentially close to 1.
+So we finally have found an example where, given a particular type of quantum oracle,
+we can solve a problem in polynomial time by exploiting quantum superpositions, while
+exponential time is required if we are limited to classical queries. As a computer scientist
+might put it:
+
+There exists an oracle relative to which BQP ̸= BPP.
+
+Note that whenever we compare classical and quantum complexity relative to an
+oracle, we are considering a quantum oracle (queries and replies are states in Hilbert
+space), but with a preferred orthonormal basis. If we submit a classical query (an element
+of the preferred basis) we always receive a classical response (another basis element).
+The issue is whether we can achieve a significant speedup by choosing more general
+quantum queries.
+
+
+6.2 Periodicity
+7
+
+6.2 Periodicity
+
+So far, the one case for which we have found an exponential separation between the speed
+of a quantum algorithm and the speed of the corresponding classical algorithm is the
+case of Simon’s problem. Simon’s algorithm exploits quantum parallelism to speed up
+the search for the period of a function. Its success encourages us to seek other quantum
+algorithms designed for other kinds of period finding.
+Simon studied periodic functions taking values in (Z2)n. For that purpose the n-bit
+Hadamard transform H(n) was a powerful tool. If we wish instead to study periodic func-
+tions taking values in Z2n, the (discrete) Fourier transform will be a tool of comparable
+power.
+The moral of Simon’s problem is that, while finding needles in a haystack may be
+difficult, finding periodically spaced needles in a haystack can be far easier. For example,
+if we scatter a photon off of a periodic array of needles, the photon is likely to be scattered
+in one of a set of preferred directions, where the Bragg scattering condition is satisfied.
+These preferred directions depend on the spacing between the needles, so by scattering
+just one photon, we can already collect some useful information about the spacing. We
+should further explore the implications of this metaphor for the construction of efficient
+quantum algorithms.
+So imagine a quantum oracle that computes a function
+
+f : {0, 1}n →{0, 1}m,
+(6.27)
+
+that has an unknown period r, where r is a positive integer satisfying
+
+1 ≪r ≪2n.
+(6.28)
+
+That is,
+
+f(x) = f(x + mr),
+(6.29)
+
+where m is any integer such that x and x + mr lie in {0, 1, 2, . . . , 2n −1}. We are to find
+the period r. Classically, this problem is hard. If r is, say, of order 2n/2, we will need to
+query the oracle of order 2n/4 times before we are likely to find two values of x that are
+mapped to the same value of f(x), and hence learn something about r. But we will see
+that there is a quantum algorithm that finds r in time poly (n).
+Even if we know how to compute efficiently the function f(x), it may be a hard
+problem to determine its period. Our quantum algorithm can be applied to finding, in
+poly(n) time, the period of any function that we can compute in poly(n) time. Efficient
+period finding allows us to efficiently solve a variety of (apparently) hard problems, such
+as factoring an integer, or evaluating a discrete logarithm.
+The key idea underlying quantum period finding is that the Fourier transform can
+be evaluated by an efficient quantum circuit (as discovered by Peter Shor). The quan-
+tum Fourier transform (QFT) exploits the power of quantum parallelism to achieve an
+exponential speedup of the well-known (classical) fast Fourier transform (FFT). Since
+the FFT has such a wide variety of applications, perhaps the QFT will also come into
+widespread use someday.
+
+
+8
+Quantum Algorithms
+
+6.2.1 Finding the period
+
+The QFT is the unitary transformation that acts on the computational basis according
+to
+
+QFT : |x⟩→
+1
+√
+
+N
+
+N−1
+�
+
+y=0
+e2πixy/N|y⟩,
+(6.30)
+
+where N = 2n. For now let’s suppose that we can perform the QFT efficiently, and see
+how it enables us to extract the period of f(x).
+Emulating Simon’s algorithm, we first query the oracle with the input
+1
+√
+
+N
+�
+x |x⟩
+
+(easily prepared by applying H(n) to |0⟩), and so prepare the state
+
+1
+√
+
+N
+
+N−1
+�
+
+x=0
+|x⟩|f(x)⟩.
+(6.31)
+
+Then we measure the output register, obtaining the result |f(x0)⟩for some 0 ≤x0 < r.
+This measurement prepares in the input register the coherent superposition of the A
+values of x that are mapped to f(x0):
+
+1
+√
+
+A
+
+A−1
+�
+
+j=0
+|x0 + jr⟩,
+(6.32)
+
+where
+
+N −r ≤x0 + (A −1)r < N,
+(6.33)
+
+or
+
+A −1 < N
+
+r < A + 1.
+(6.34)
+
+Actually, the measurement of the output register is unnecessary. If it is omitted, the state
+of the input register is an incoherent superposition (summed over x0 ∈{0, 1, . . . r −1})
+of states of the form eq. (6.32). The rest of the algorithm works just as well acting on
+this initial state.
+Now our task is to extract the value of r from the state eq. (6.32) that we have
+prepared. Were we to measure the input register by projecting onto the computational
+basis at this point, we would learn nothing about r. Instead (cf. Simon’s algorithm), we
+should Fourier transform first and then measure.
+By applying the QFT to the state eq. (6.32) we obtain
+
+1
+√
+
+NA
+
+N−1
+�
+
+y=0
+e2πix0y/N
+A−1
+�
+
+j=0
+e2πijry/N|y⟩.
+(6.35)
+
+If we now measure in the computational basis, the probability of obtaining the outcome
+y is
+
+Prob(y) = A
+
+N
+
+������
+
+1
+A
+
+A−1
+�
+
+j=0
+e2πijry/N
+
+������
+
+2
+
+.
+(6.36)
+
+This distribution strongly favors values of y such that yr/N is close to an integer. For
+
+
+6.2 Periodicity
+9
+
+example, if N/r happened to be an integer (and therefore equal to A), we would have
+
+Prob(y) = 1
+
+r
+
+������
+
+1
+A
+
+A−1
+�
+
+j=0
+e2πijy/A
+
+������
+=
+
+
+
+
+
+
+1
+r
+y = A · (integer)
+
+0
+otherwise.
+(6.37)
+
+More generally, we may sum the geometric series
+
+A−1
+�
+
+j=0
+eiθj = eiAθ −1
+
+eiθ −1 ,
+(6.38)
+
+where
+
+θy = 2πyr(mod N)
+
+N
+.
+(6.39)
+
+There are precisely r values of y in {0, 1, . . . , N −1} that satisfy
+
+−r
+
+2 ≤yr(mod N) ≤r
+
+2.
+(6.40)
+
+(To see this, imagine marking the multiples of r and N on a number line ranging from
+0 to rN −1. For each multiple of N, there is a multiple of r no more than distance r/2
+away.) For each of these values, the corresponding θy satisfies.
+
+−π r
+
+N ≤θy ≤π r
+
+N .
+(6.41)
+
+Now, since A −1 < N
+
+r , for these values of θy all of the terms in the sum over j in eq.
+(6.38) lie in the same half-plane, so that the terms interfere constructively and the sum
+is substantial.
+We know that
+
+|1 −eiθ| ≤|θ|,
+(6.42)
+
+because the straight-line distance from the origin is less than the arc length along the
+circle, and for A|θ| ≤π, we know that
+
+|1 −eiAθ| ≥2A|θ|
+
+π
+,
+(6.43)
+
+because we can see (either graphically or by evaluating its derivative) that this distance
+is a convex function. We actually have A < N
+
+r + 1, and hence Aθy < π
+�
+1 + r
+
+N
+�
+, but by
+applying the above bound to
+�����
+ei(A−1)θ −1
+
+eiθ −1
++ ei(A−1)θ
+�����≥
+
+�����
+ei(A−1)θ −1
+
+eiθ −1
+
+�����−1,
+(6.44)
+
+we can still conclude that
+����
+eiAθ −1
+
+eiθ −1
+
+����≥2(A −1)|θ|
+
+π|θ|
+−1 = 2
+
+πA −
+�
+1 + 2
+
+π
+
+�
+.
+(6.45)
+
+Ignoring a possible correction of order 2/A, then, we find
+
+Prob(y) ≥
+�4
+
+π2
+
+�1
+
+r,
+(6.46)
+
+
+10
+Quantum Algorithms
+
+for each of the r values of y that satisfy eq. (6.40). Therefore, with a probability of at
+least 4/π2, the measured value of y will satisfy
+
+kN
+
+r −1
+
+2 ≤y ≤kN
+
+r + 1
+
+2,
+(6.47)
+
+or
+k
+r −1
+
+2N ≤y
+
+N ≤k
+
+r + 1
+
+2N ,
+(6.48)
+
+where k is an integer chosen from {0, 1, . . . , r −1}. The output of the computation is
+reasonable likely to be within distance 1/2 of an integer multiple of N/r.
+Suppose that we know that r < M ≪N. Thus N/r is a rational number with a
+denominator less than M. Two distinct rational numbers, each with denominator less
+than M, can be no closer together than 1/M 2, since a
+
+b −c
+
+d = ad−bc
+
+bd . If the measurement
+outcome y satisfies eq. (6.47), then there is a unique value of k/r (with r < M) deter-
+mined by y/N, provided that N ≥M2. This value of k/r can be efficiently extracted
+from the measured y/N, by the continued fraction method.
+Now, with probability exceeding 4/π2, we have found a value of k/r where k is selected
+(roughly equiprobably) from {0, 1, 2, . . . , r −1}. It is reasonably likely that k and r are
+relatively prime (have no common factor), so that we have succeeded in finding r. With
+a query of the oracle, we may check whether f(x) = f(x + r). But if GCD(k, r) ̸= 1, we
+have found only a factor (r1) of r.
+If we did not succeed, we could test some nearby values of y (the measured value
+might have been close to the range −r/2 ≤yr(mod N) ≤r/2 without actually lying
+inside), or we could try a few multiples of r (the value of GCD(k, r), if not 1, is probably
+not large). That failing, we resort to a repetition of the quantum circuit, this time (with
+probability at least 4/π2) obtaining a value k′/r. Now k′, too, may have a common
+factor with r, in which case our procedure again determines a factor (r2) of r. But it is
+reasonably likely that GCD(k, k′) = 1, in which case r = LCM(r1, r2). Indeed, we can
+estimate the probability that randomly selected k and k′ are relatively prime as follows:
+Since a prime number p divides a fraction 1/p of all numbers, the probability that p
+divides both k and k′ is 1/p2. And k and k′ are coprime if and only if there is no prime
+p that divides both. Therefore,
+
+Prob(k, k′ coprime) =
+�
+
+prime p
+
+�
+1 −1
+
+p2
+
+�
+=
+1
+ζ(2) = 6
+
+π2 ≃.607
+(6.49)
+
+(where ζ(z) denotes the Riemann zeta function). Therefore, we are likely to succeed in
+finding the period r after some constant number (independent of N) of repetitions of
+the algorithm.
+
+6.2.2 From FFT to QFT
+
+Now let’s consider the implementation of the quantum Fourier transform. The Fourier
+transform
+�
+
+x
+f(x)|x⟩→
+�
+
+y
+
+�
+1
+√
+
+N
+
+�
+
+x
+e2πixy/Nf(x)
+
+�
+
+|y⟩,
+(6.50)
+
+is multiplication by an N × N unitary matrix, where the (x, y) matrix element is
+(e2πi/N)xy. Naively, this transform requires O(N2) elementary operations. But there is a
+
+
+6.2 Periodicity
+11
+
+well-known and very useful (classical) procedure that reduces the number of operations
+to O(N log N). Assuming N = 2n, we express x and y as binary expansions
+
+x = xn−1 · 2n−1 + xn−2 · 2n−2 + . . . + x1 · 2 + x0
+y = yn−1 · 2n−1 + yn−2 · 2n−2 + . . . + y1 · 2 + y0.
+(6.51)
+
+In the product of x and y, we may discard any terms containing n or more powers of 2,
+as these make no contribution to e2πixy/2n. Hence
+xy
+2n ≡yn−1(.x0) + yn−2(.x1x0) + yn−3(.x2x1x0) + . . .
+
++ y1(.xn−2xn−3 . . . x0) + y0(.xn−1xn−2 . . . x0),
+(6.52)
+
+where the factors in parentheses are binary expansions; e.g.,
+
+.x2x1x0 = x2
+
+2 + x1
+
+22 + x0
+
+23 .
+(6.53)
+
+We can now evaluate
+˜f(x) =
+1
+√
+
+N
+
+�
+
+y
+e2πixy/Nf(y),
+(6.54)
+
+for each of the N values of x. But the sum over y factors into n sums over yk = 0, 1,
+which can be done sequentially in a time of order n.
+With quantum parallelism, we can do far better. From eq. (6.52) we obtain
+
+QFT :|x⟩→
+1
+√
+
+N
+
+�
+
+y
+e2πixy/N|y⟩
+
+=
+1
+√
+
+2n
+
+�
+|0⟩+ e2πi(.x0)|1⟩
+��
+|0⟩+ e2πi(.x1x0)|1⟩
+�
+
+. . .
+�
+|0⟩+ e2πi(.xn−1xn−2...x0)|1⟩
+�
+.
+(6.55)
+
+The QFT takes each computational basis state to an unentangled state of n qubits;
+thus we anticipate that it can be efficiently implemented. Indeed, let’s consider the case
+n = 3. We can readily see that the circuit
+
+|x2⟩
+
+|x1⟩
+
+|x0⟩
+
+|y0⟩
+
+|y1⟩
+
+|y2⟩
+
+s
+
+s
+s
+
+H
+R1
+R2
+
+H
+R1
+
+H
+
+does the job (but note that the order of the bits has been reversed in the output). Each
+Hadamard gate acts as
+
+H : |xk⟩→
+1
+√
+
+2
+
+�
+|0⟩+ e2πi(.xk)|1⟩
+�
+.
+(6.56)
+
+The other contributions to the relative phase of |0⟩and |1⟩in the kth qubit are provided
+by the two-qubit conditional rotations, where
+
+Rd =
+�1
+0
+0
+eiπ/2d
+�
+,
+(6.57)
+
+
+12
+Quantum Algorithms
+
+and d = (k −j) is the “distance” between the qubits.
+In the case n = 3, the QFT is constructed from three H gates and three controlled-R
+gates. For general n, the obvious generalization of this circuit requires n H gates and
+�n
+2
+�
+= 1
+
+2n(n−1) controlled R’s. A two qubit gate is applied to each pair of qubits, again
+with controlled relative phase π/2d, where d is the “distance” between the qubits. Thus
+the circuit family that implements QFT has a size of order (log N)2.
+We can reduce the circuit complexity to linear in log N if we are willing to settle for
+an implementation of fixed accuracy, because the two-qubit gates acting on distantly
+separated qubits contribute only exponentially small phases. If we drop the gates acting
+on pairs with distance greater than m, than each term in eq. (6.52) is replaced by an
+approximation to m bits of accuracy; the total error in xy/2n is certainly no worse than
+n2−m, so we can achieve accuracy ε in xy/2n with m ≥log n/ε. If we retain only the gates
+acting on qubit pairs with distance m or less, then the circuit size is mn ∼n log n/ε.
+In fact, if we are going to measure in the computational basis immediately after
+implementing the QFT (or its inverse), a further simplification is possible – no two-qubit
+gates are needed at all! We first remark that the controlled – Rd gate acts symmetrically
+on the two qubits – it acts trivially on |00⟩, |01⟩, and |10⟩, and modifies the phase of |11⟩
+by eiθd. Thus, we can interchange the “control” and “target” bits without modifying the
+gate. With this change, our circuit for the 3-qubit QFT can be redrawn as:
+
+|x2⟩
+
+|x1⟩
+
+|x0⟩
+
+|y0⟩
+
+|y1⟩
+
+|y2⟩
+
+s
+s
+
+s
+
+H
+
+R1
+H
+
+R2
+R1
+H
+
+Once we have measured |y0⟩, we know the value of the control bit in the controlled-R1
+gate that acted on the first two qubits. Therefore, we will obtain the same probability
+distribution of measurement outcomes if, instead of applying controlled-R1 and then
+measuring, we instead measure y0 first, and then apply (R1)y0 to the next qubit, condi-
+tioned on the outcome of the measurement of the first qubit. Similarly, we can replace
+the controlled-R1 and controlled-R2 gates acting on the third qubit by the single qubit
+rotation
+
+(R2)y0(R1)y1,
+(6.58)
+
+(that is, a rotation with relative phase π(.y1y0)) after the values of y1 and y0 have been
+measured.
+Altogether then, if we are going to measure after performing the QFT, only n
+Hadamard gates and n −1 single-qubit rotations are needed to implement it. The QFT
+is remarkably simple!
+
+6.3 Factoring
+
+6.3.1 Factoring as period finding
+
+What does the factoring problem (finding the prime factors of a large composite positive
+integer) have to do with periodicity? There is a well-known (randomized) reduction of
+
+
+6.3 Factoring
+13
+
+factoring to determining the period of a function. Although this reduction is not directly
+related to quantum computing, we will discuss it here for completeness, and because the
+prospect of using a quantum computer as a factoring engine has generated so much
+excitement.
+Suppose we want to find a factor of the n-bit number N. Select pseudo-randomly
+a < N, and compute the greatest common divisor GCD(a, N), which can be done
+efficiently (in a time of order (log N)3) using the Euclidean algorithm. If GCD(a, N) ̸= 1
+then the GCD is a nontrivial factor of N, and we are done. So suppose GCD(a, N) = 1.
+
+[Aside: The Euclidean algorithm. To compute GCD(N1, N2) (for N1 > N2) first
+divide N1 by N2 obtaining remainder R1. Then divide N2 by R1, obtaining
+remainder R2. Divide R1 by R2, etc. until the remainder is 0. The last nonzero
+remainder is R = GCD(N1, N2). To see that the algorithm works, just note that
+(1) R divides all previous remainders and hence also N1 and N2, and (2) any
+number that divides N1 and N2 will also divide all remainders, including R. A
+number that divides both N1 and N2, and also is divided by any number that
+divides both N1 and N2 must be GCD(N1, N2). To see how long the Euclidean
+algorithm takes, note that
+
+Rj = qRj+1 + Rj+2,
+(6.59)
+
+where q ≥1 and Rj+2 < Rj+1; therefore Rj+2 < 1
+
+2Rj. Two divisions reduce
+the remainder by at least a factor of 2, so no more than 2 log N1 divisions are
+required, with each division using O((log N)2) elementary operations; the total
+number of operations is O((log N)3).]
+
+The numbers a < N coprime to N (having no common factor with N) form a finite
+group under multiplication mod N. [Why? We need to establish that each element a has
+an inverse. But for given a < N coprime to N, each ab (mod N) is distinct, as b ranges
+over all b < N coprime to N. (If N divides ab −ab′, it must divide b −b′.) Therefore,
+for some b, we must have ab ≡1 (mod N); hence the inverse of a exists.] Each element
+a of this finite group has a finite order r, the smallest positive integer such that
+
+ar ≡1 (mod N).
+(6.60)
+
+The order of a mod N is the period of the function
+
+fN,a(x) = ax (mod N).
+(6.61)
+
+We know there is an efficient quantum algorithm that can find the period of a function;
+therefore, if we can compute fN,a efficiently, we can find the order of a efficiently.
+Computing fN,a may look difficult at first, since the exponent x can be very large.
+But if x < 2m and we express x as a binary expansion
+
+x = xm−1 · 2m−1 + xm−2 · 2m−2 + . . . + x0,
+(6.62)
+
+we have
+
+ax(mod N) = (a2m−1)xm−1(a2m−2)xm−2 . . . (a)x0 (mod N).
+(6.63)
+
+Each a2j has a large exponent, but can be computed efficiently by a classical computer,
+using repeated squaring
+
+a2j (mod N) = (a2j−1)2 (mod N).
+(6.64)
+
+
+14
+Quantum Algorithms
+
+So only m −1 (classical) mod N multiplications are needed to assemble a table of all
+a2j’s.
+The computation of ax(mod N) is carried out by executing a routine:
+
+INPUT 1
+For j = 0 to m −1, if xj = 1, MULTIPLY a2j.
+
+This routine requires at most m mod N multiplications, each requiring of order
+(log N)2 elementary operations. (Using tricks for performing efficient multiplication
+of very large numbers, the number of elementary operations can be reduced to
+O(log N log log N log log log N); thus, asymptotically for large N, a circuit family with
+size O(log2 N log log N log log log N) can compute fN,a.) Since r < N, we will have a
+reasonable chance of success at extracting the period if we choose m ∼2 log N. Hence,
+the computation of fN,a can be carried out by a circuit family of size O((log N)3).
+Schematically, the circuit has the structure:
+
+|x2⟩
+
+|x1⟩
+
+|x0⟩
+
+|1⟩
+
+s
+
+s
+
+s
+
+a
+a2
+a4
+
+Multiplication by a2j is performed if the control qubit xj has the value 1.
+Suppose we have found the period r of a mod N. Then if r is even, we have
+
+N divides
+�
+a
+r
+2 + 1
+��
+a
+r
+2 −1
+�
+.
+(6.65)
+
+We know that N does not divide ar/2 −1; if it did, the order of a would be ≤r/2. Thus,
+if it is also the case that N does not divide ar/2 + 1, or
+
+ar/2 ̸= −1 (mod N),
+(6.66)
+
+then N must have a nontrivial common factor with each of ar/2 ± 1. Therefore,
+GCD(N, ar/2 + 1) ̸= 1 is a factor (that we can find efficiently by a classical compu-
+tation), and we are done.
+We see that, once we have found r, we succeed in factoring N unless either (1) r is
+odd or (2) r is even and ar/2 ≡−1 (mod N). How likely is success?
+Let’s suppose that N is a product of two prime factors p1 ̸= p2,
+
+N = p1p2
+(6.67)
+
+(this is actually the least favorable case). For each a < p1p2, there exist unique a1 < p1
+and a2 < p2 such that
+
+a ≡a1
+(mod p1)
+
+a ≡a2
+(mod p2).
+(6.68)
+
+Choosing a random a < N is, therefore, equivalent to choosing random a, < p1 and
+a2 < p2.
+
+
+6.3 Factoring
+15
+
+[Aside: We’re using the Chinese Remainder Theorem. The a solving eq. (6.68) is
+unique because if a and b are both solutions, then both p1 and p2 must divide
+a −b. The solution exists because every a < p1p2 solves eq. (6.68) for some a1
+and a2. Since there are exactly p1p2 ways to choose a1 and a2, and exactly p1p2
+ways to choose a, uniqueness implies that there is an a corresponding to each
+pair a1, a2.]
+
+Now let r1 denote the order of a1 mod p1 and r2 denote the order of a2 mod p2. The
+Chinese remainder theorem tells us that ar ≡1 (mod p1p2) is equivalent to
+
+ar
+1 ≡1 (mod p1)
+
+ar
+2 ≡1 (mod p2).
+(6.69)
+
+Therefore r = LCM(r1, r2). If r1 and r2 are both odd, then so is r, and we lose.
+But if either r1 or r2 is even, then so is r, and we are still in the game. If
+
+ar/2 ≡−1
+(mod p1)
+
+ar/2 ≡−1
+(mod p2).
+(6.70)
+
+Then we have ar/2 ≡−1 (mod p1p2) and we still lose. But if either
+
+ar/2 ≡−1
+(mod p1)
+
+ar/2 ≡1
+(mod p2),
+(6.71)
+
+or
+
+ar/2 ≡1
+(mod p1)
+
+ar/2 ≡−1
+(mod p2),
+(6.72)
+
+then ar/2 ̸≡−1(mod p1p2) and we win. (Of course, ar/2 ≡1 (mod p1) and ar/2 ≡
+1 (mod p2) is not possible, for that would imply ar/2 ≡1 (mod p1p2), and r could not
+be the order of a.)
+Suppose that
+
+r1 = 2c1 · odd
+
+r2 = 2c2 · odd,
+(6.73)
+
+where c1 > c2. Then r = LCM(r1, r2) = 2r2· integer, so that ar/2 ≡1 (mod p2) and
+eq. (6.71) is satisfied – we win! Similarly c2 > c1 implies eq. (6.72) – again we win. But
+for c1 = c2, r = r1 · (odd) = r2 · (odd′) so that eq. (6.70) is satisfied – in that case we
+lose.
+Okay – it comes down to: for c1 = c2 we lose, for c1 ̸= c2 we win. How likely is c1 ̸= c2?
+It helps to know that the multiplicative group mod p is cyclic – it contains a primitive
+element of order p −1, so that all elements are powers of the primitive element. [Why?
+The integers mod p are a finite field. If the group were not cyclic, the maximum order
+of the elements would be q < p −1, so that xq ≡1 (mod p) would have p −1 solutions.
+But that can’t be: in a finite field there are no more than q qth roots of unity.]
+Suppose that p−1 = 2k ·s, where s is odd, and consider the orders of all the elements
+of the cyclic group of order p −1. For brevity, we’ll discuss only the case k = 1, which
+is the least favorable case for us. Then if b is a primitive (order 2s) element, the even
+powers of b have odd order, and the odd powers of b have order 2· (odd). In this case,
+
+
+16
+Quantum Algorithms
+
+then, r = 2c· (odd) where c ∈{0, 1}, each occuring equiprobably. Therefore, if p1 and
+p2 are both of this (unfavorable) type, and a1, a2 are chosen randomly, the probability
+that c1 ̸= c2 is 1
+
+2. Hence, once we have found r, our probability of successfully finding
+a factor is at least 1
+
+2, if N is a product of two distinct primes. If N has more than two
+distinct prime factors, our odds are even better. The method fails if N is a prime power,
+N = pα, but prime powers can be efficiently factored by other methods.
+
+6.3.2 RSA
+
+Does anyone care whether factoring is easy or hard? Well, yes, some people do.
+The presumed difficulty of factoring is the basis of the security of the widely used
+RSA (for Rivest, Shamir, and Adleman) scheme for public key cryptography, which you
+may have used yourself if you have ever sent your credit card number over the internet.
+The idea behind public key cryptography is to avoid the need to exchange a secret key
+(which might be intercepted and copied) between the parties that want to communicate.
+The enciphering key is public knowledge. But using the enciphering key to infer the
+deciphering key involves a prohibitively difficult computation. Therefore, Bob can send
+the enciphering key to Alice and everyone else, but only Bob will be able to decode
+the message that Alice (or anyone else) encodes using the key. Encoding is a “one-way
+function” that is easy to compute but very hard to invert.
+(Of course, Alice and Bob could have avoided the need to exchange the public key if
+they had decided on a private key in their previous clandestine meeting. For example,
+they could have agreed to use a long random string as a one-time pad for encoding and
+decoding. But perhaps Alice and Bob never anticipated that they would someday need
+to communicate privately. Or perhaps they did agree in advance to use a one-time pad,
+but they have now used up their private key, and they are loath to reuse it for fear that
+an eavesdropper might then be able to break their code. Now they are too far apart to
+safely exchange a new private key; public key cryptography appears to be their most
+secure option.)
+To construct the public key Bob chooses two large prime numbers p and q. But he
+does not publicly reveal their values. Instead he computes the product
+
+N = pq.
+(6.74)
+
+Since Bob knows the prime factorization of N, he also knows the value of the Euler
+function ϕ(N) – the number of number less than N that are coprime with N. In the
+case of a product of two primes it is
+
+ϕ(N) = N −p −q + 1 = (p −1)(q −1),
+(6.75)
+
+(only multiples of p and q share a factor with N). It is easy to find ϕ(N) if you know
+the prime factorization of N, but it is hard if you know only N.
+Bob then pseudo-randomly selects e < ϕ(N) that is coprime with ϕ(N). He reveals
+to Alice (and anyone else who is listening) the value of N and e, but nothing else.
+Alice converts her message to ASCII, a number a < N. She encodes the message by
+computing
+
+b = f(a) = ae(mod N),
+(6.76)
+
+which she can do quickly by repeated squaring. How does Bob decode the message?
+
+
+6.3 Factoring
+17
+
+Suppose that a is coprime to N (which is overwhelmingly likely if p and q are very
+large – anyway Alice can check before she encodes). Then
+
+aϕ(N) ≡1 (mod N)
+(6.77)
+
+(Euler’s theorem). This is so because the numbers less than N and coprime to N form a
+group (of order ϕ(N)) under mod N multiplication. The order of any group element must
+divide the order of the group (the powers of a form a subgroup). Since GCD(e, ϕ(N) = 1,
+we know that e has a multiplicative inverse d = e−1 mod ϕ(N):
+
+ed ≡1 (mod ϕ(N)).
+(6.78)
+
+The value of d is Bob’s closely guarded secret; he uses it to decode by computing:
+
+f−1(b) = bd (mod N)
+
+= aed (mod N)
+
+= a · (aϕ(N))integer (mod N)
+
+= a (mod N).
+(6.79)
+
+[Aside: How does Bob compute d = e−1? The multiplicative inverse is a byproduct
+of carrying out the Euclidean algorithm to compute GCD(e, ϕ(N)) = 1. Tracing
+the chain of remainders from the bottom up, starting with Rn = 1:
+
+1 = Rn = Rn−2 −qn−1Rn−1
+Rn−1 = Rn−3 −qn−2Rn−2
+Rn−2 = Rn−4 −qn−3Rn−3
+etc. . . .
+(6.80)
+
+(where the qj’s are the quotients), so that
+
+1 = (1 + qn−1qn−2)Rn−2 −qn−1Rn−3
+1 = (−qn−1 −qn−3(1 + qn−1qn−2))Rn−3
++ (1 + qn−1qn−2)Rn−4,
+
+etc. . . . .
+(6.81)
+
+Continuing, we can express 1 as a linear combination of any two successive
+remainders; eventually we work our way up to
+
+1 = d · e + q · ϕ(N),
+(6.82)
+
+and identify d as e−1 (mod ϕ(N)).]
+
+Of course, if Eve has a superfast factoring engine, the RSA scheme is insecure. She
+factors N, finds ϕ(N), and quickly computes d. In fact, she does not really need to factor
+N; it is sufficient to compute the order modulo N of the encoded message ae (mod N).
+Since e is coprime with ϕ(N), the order of ae (mod N) is the same as the order of a
+(both elements generate the same orbit, or cyclic subgroup). Once the order Ord(a) is
+known, Eve computes ˜d such that
+
+˜de ≡1 (mod Ord(a))
+(6.83)
+
+so that
+
+(ae)
+˜d ≡a · (aOrd(a))integer (mod N) ≡a (mod N),
+(6.84)
+
+
+18
+Quantum Algorithms
+
+and Eve can decipher the message. If our only concern is to defeat RSA, we run the
+Shor algorithm to find r = Ord(ae), and we needn’t worry about whether we can use r
+to extract a factor of N or not.
+How important are such prospective cryptographic applications of quantum comput-
+ing? When fast quantum computers are readily available, concerned parties can stop
+using RSA, or can use longer keys to stay a step ahead of contemporary technology.
+However, people with secrets sometimes want their messages to remain confidential for
+a while (30 years?). They may not be satisfied by longer keys if they are not confident
+about the pace of future technological advances.
+And if they shun RSA, what will they use instead? Not so many suitable one-way
+functions are known, and others besides RSA are (or may be) vulnerable to a quantum
+attack. So there really is a lot at stake. If fast large scale quantum computers become
+available, the cryptographic implications may be far reaching.
+But while quantum theory taketh away, quantum theory also giveth; quantum com-
+puters may compromise public key schemes, but also offer an alternative: secure quantum
+key distribution, as discussed in Chapter 4.
+
+6.4 Phase Estimation
+
+There is an alternative way to view the factoring algorithm (due to Kitaev) that deepens
+our insight into how it works: we can factor because we can measure efficiently and
+accurately the eigenvalue of a certain unitary operator.
+Consider a < N coprime to N, let x take values in {0, 1, 2, . . . , N −1}, and let U a
+denote the unitary operator
+
+U a : |x⟩→|ax (mod N)⟩.
+(6.85)
+
+This operator is unitary (a permutation of the computational basis) because multipli-
+cation by a mod N is invertible.
+If the order of a mod N is r, then
+
+U r
+a = 1.
+(6.86)
+
+It follows that all eigenvalues of U a are rth roots of unity:
+
+λk = e2πik/r,
+k ∈{0, 1, 2, . . . , r −1}.
+(6.87)
+
+The corresponding eigenstates are
+
+|λk⟩= 1
+√r
+
+r−1
+�
+
+j=0
+e−2πikj/r|ajx0(mod N)⟩;
+(6.88)
+
+associated with each orbit of length r generated by multiplication by a, there are r
+mutually orthogonal eigenstates.
+U a is not hermitian, but its phase (the Hermitian operator that generates U a) is an
+observable quantity. Suppose that we can perform a measurement that projects onto
+the basis of U a eigenstates, and determines a value λk selected equiprobably from the
+possible eigenvalues. Hence the measurement determines a value of k/r, as does Shor’s
+procedure, and we can proceed to factor N with a reasonably high success probability.
+But how do we measure the eigenvalues of a unitary operator?
+Suppose that we can execute the unitary U conditioned on a control bit, and consider
+the circuit:
+
+
+6.4 Phase Estimation
+19
+
+|0⟩
+
+|λ⟩
+
+Measure
+
+|λ⟩
+
+s
+H
+H
+
+U
+
+Here |λ⟩denotes an eigenstate of U with eigenvalue λ (U|λ⟩= λ|λ⟩). Then the action
+of the circuit on the control bit is
+
+|0⟩→
+1
+√
+
+2(|0⟩+ |1⟩) →
+1
+√
+
+2(|0⟩+ λ|1⟩)
+
+→1
+
+2(1 + λ)|0⟩+ 1
+
+2(1 −λ)|1⟩.
+(6.89)
+
+Then the outcome of the measurement of the control qubit has probability distribution
+
+Prob(0) =
+����
+1
+2(1 + λ)
+����
+
+2
+= cos2(πφ)
+
+Prob(1) =
+����
+1
+2(1 −λ)
+�
+|2 = sin2(πφ),
+(6.90)
+
+where λ = e2πiφ.
+As we have discussed previously (for example in connection with Deutsch’s problem),
+this procedure distinguishes with certainty between the eigenvalues λ = 1 (φ = 0) and
+λ = −1 (φ = 1/2). But other possible values of λ can also be distinguished, albeit
+with less statistical confidence. For example, suppose the state on which U acts is a
+superposition of U eigenstates
+
+α1|λ1⟩+ α2|λ2⟩.
+(6.91)
+
+And suppose we execute the above circuit n times, with n distinct control bits. We thus
+prepare the state
+
+α1|λ1⟩
+�1 + λ1
+
+2
+|0⟩+ 1 −λ1
+
+2
+|1⟩
+�⊗n
+
++α2|λ2⟩
+�1 + λ2
+
+2
+|0⟩+ 1 −λ2
+
+2
+|1⟩
+�⊗n
+.
+(6.92)
+
+If λ1 ̸= λ2, the overlap between the two states of the n control bits is exponentially small
+for large n; by measuring the control bits, we can perform the orthogonal projection onto
+the {|λ1⟩, |λ2⟩} basis, at least to an excellent approximation.
+If we use enough control bits, we have a large enough sample to measure Prob (0)=
+1
+2(1 + cos 2πφ) with reasonable statistical confidence. By executing a controlled-(iU),
+we can also measure 1
+
+2(1 + sin 2πφ) which suffices to determine φ modulo an integer.
+However, in the factoring algorithm, we need to measure the phase of e2πik/r to ex-
+ponential accuracy, which seems to require an exponential number of trials. Suppose,
+though, that we can efficiently compute high powers of U (as is the case for U a) such
+as
+
+U 2j.
+(6.93)
+
+By applying the above procedure to measurement of U 2j, we determine
+
+exp(2πi2jφ),
+(6.94)
+
+
+20
+Quantum Algorithms
+
+where e2πiφ is an eigenvalue of U. Hence, measuring U 2j to one bit of accuracy is
+equivalent to measuring the jth bit of the eigenvalue of U.
+We can use this phase estimation procedure for order finding, and hence factorization.
+We invert eq. (6.88) to obtain
+
+|x0⟩= 1
+√r
+
+r−1
+�
+
+k=0
+|λk⟩;
+(6.95)
+
+each computational basis state (for x0 ̸= 0) is an equally weighted superposition of r
+eigenstates of U a.
+Measuring the eigenvalue, we obtain λk = e2πik/r, with k selected from {0, 1 . . . , r−1}
+equiprobably. If r < 2n, we measure to 2n bits of precision to determine k/r. In principle,
+we can carry out this procedure in a computer that stores fewer qubits than we would
+need to evaluate the QFT, because we can attack just one bit of k/r at a time.
+But it is instructive to imagine that we incorporate the QFT into this phase estimation
+procedure. Suppose the circuit
+
+|0⟩
+
+|0⟩
+
+|0⟩
+
+|λ⟩
+
+1
+√
+
+2
+�
+|0⟩+ λ4|1⟩
+�
+
+1
+√
+
+2
+�
+|0⟩+ λ2|1⟩
+�
+
+1
+√
+
+2 (|0⟩+ λ|1⟩)
+s
+
+s
+
+s
+H
+
+H
+
+H
+
+U
+U2
+U4
+
+acts on the eigenstate |λ⟩of the unitary transformation U. The conditional U prepares
+1
+√
+
+2(|0⟩+λ|1⟩), the conditional U 2 prepares
+1
+√
+
+2(|0⟩+λ2|1⟩), the conditional U 4 prepares
+
+1
+√
+
+2(|0⟩+ λ4|1⟩), and so on. We could perform a Hadamard and measure each of these
+qubits to sample the probability distribution governed by the jth bit of φ, where λ =
+e2πiφ. But a more efficient method is to note that the state prepared by the circuit is
+
+1
+√
+
+2m
+
+2m−1
+�
+
+y=0
+e2πiφy|y⟩.
+(6.96)
+
+A better way to learn the value of φ is to perform the QFT(m), not the Hadamard H(m),
+before we measure.
+Considering the case m = 3 for clarity, the circuit that prepares and then Fourier
+analyzes the state
+
+1
+√
+
+8
+
+7
+�
+
+y=0
+e2πiφy|y⟩
+(6.97)
+
+is
+
+
+6.5 Hidden Subgroup Problem
+21
+
+|0⟩
+
+|0⟩
+
+|0⟩
+
+|˜y0⟩
+
+|˜y1⟩
+
+|˜y2⟩
+r
+
+r
+
+r
+r
+r
+
+r
+
+H
+
+H
+
+H
+
+H
+
+1
+H
+
+2
+1
+H
+
+U
+U2
+U4
+
+This circuit very nearly carries out our strategy for phase estimation outlined above, but
+with a significant modification. Before we execute the final Hadamard transformation
+and measurement of ˜y1 and ˜y2, some conditional phase rotations are performed. It is
+those phase rotations that distinguish the QFT(3) from Hadamard transform H(3), and
+they strongly enhance the reliability with which we can extract the value of φ.
+We can understand better what the conditional rotations are doing if we suppose
+that φ = k/8, for k ∈{0, 1, 2 . . . , 7}; in that case, we know that the Fourier transform
+will generate the output ˜y = k with probability one. We may express k as the binary
+expansion
+
+k = k2k1k0 ≡k2 · 4 + k1 · 2 + k0.
+(6.98)
+
+In fact, the circuit for the least significant bit ˜y0 of the Fourier transform is precisely
+Kitaev’s measurement circuit applied to the unitary U 4, whose eigenvalue is
+
+(e2πiφ)4 = eiπk = eiπk0 = ±1.
+(6.99)
+
+The measurement circuit distinguishes eigenvalues ±1 perfectly, so that ˜y0 = k0.
+The circuit for the next bit ˜y1 is almost the measurement circuit for U 2, with eigen-
+value
+
+(e2πiφ)2 = eiπk/2 = eiπ(k1·k0).
+(6.100)
+
+Except that the conditional phase rotation has been inserted, which multiplies the phase
+by exp[iπ(·k0)], resulting in eiπk1. Again, applying a Hadamard followed by measure-
+ment, we obtain the outcome ˜y1 = k1 with certainty. Similarly, the circuit for ˜y2 measures
+the eigenvalue
+
+e2πiφ = eiπk/4 = eiπ(k2·k1k0),
+(6.101)
+
+except that the conditional rotation removes eiπ(·k1k0), so that the outcome is ˜y2 = k2
+with certainty.
+Thus, the QFT implements the phase estimation routine with maximal cleverness.
+We measure the less significant bits of φ first, and we exploit the information gained in
+the measurements to improve the reliability of our estimate of the more significant bits.
+Keeping this interpretation in mind, you will find it easy to remember the circuit for
+the QFT(n)!
+
+6.5 Hidden Subgroup Problem
+
+Simon’s problem and period finding are two black-box problems for which quantum
+computers provide exponential speedups. What else can quantum computers do? These
+two problems have a similar structure, and it is useful to recognize this common ground,
+because it suggests further generalizations.
+More specifically, Simon’s problem and period finding are both special cases of a
+
+
+22
+Quantum Algorithms
+
+problem that is naturally formulated in group-theoretic language: the Hidden Subgroup
+Problem (HSP). This is a black-box problem where we may regard the input to the
+function f to be an element of a group G which is mapped into a finite set X, where X
+may be chosen to be the set of m-bit strings:
+
+f : G →X = {0, 1}m.
+(6.102)
+
+The group G may be either finite or infinite, but we ordinarily assume it is finitely
+generated, that is, each element of G can be expressed as a product of a finite set of
+generating elements, where these generating elements may be used any number of times
+in the product, and in any order.
+We are promised that the function f is constant and distinct on the cosets of a
+subgroup H ⊆G. This means that
+
+f(g1) = f(g2) iff g−1
+2 g1 ∈H
+(6.103)
+
+(that is, g1 = g2h for some h ∈H). The problem is to find H — to list a set of elements
+of G that generate H. We may take the input size for the HSP to be an upper bound
+on log(|G/H|), the number of cosets (which is finite because X is finite).
+The promise may restrict the hidden subgroup further by specifying additional prop-
+erties of H. For example, in the case of Simon’s problem,
+
+G = Zn
+2,
+H = Z2 = {0, a}.
+(6.104)
+
+The group Z2 is the set {0, 1}, where the group operation is addition modulo 2. A
+product group G1 × G2 is defined as the group of pairs of elements
+
+G1 × G2 = {(g1, g2)|g1 ∈G1, g2 ∈G2},
+(6.105)
+
+where the group operations are performed in parallel:
+
+(g1, g2) ◦(g′
+1, g′
+2) = (g1g′
+1, g2g′
+2)
+(6.106)
+
+Thus, the elements of Zn
+2 (the product of n Z2s) are n-bit strings of bits, where the
+group operation is bitwise XOR:
+
+(xn−1, .., x0) ◦(yn−1, .., y0) = (xn−1 ⊕yn−1, .., x0 ⊕y0)
+(6.107)
+
+Each element is its own inverse (i.e. is order 2).
+The promise in Simon’s problem is:
+
+f(x) = f(y) iff x ∈{0, a} = H = Z2.
+(6.108)
+
+Here {0, a} is isomorphic to Z2. The problem is to determine how this Z2 is embedded in
+G = Zn
+2 — i.e., to find its generator a. The number of possible embeddings is exponential
+in n. The number of cosets (and so the number of possible outputs in the set X) is 2n−1,
+and its log is the input size.
+Another example is period finding, for which
+
+G = Z and H = rZ = {rk, k ∈Z}.
+(6.109)
+
+The group operation is addition, and we are promised that
+
+f(x) = f(y) iff x −y = r · integer ∈H
+(6.110)
+
+The problem is to find the generator of H, namely the period r. The number of cosets
+of H is |G/H| = r, and an upper bound on its log is the input size.
+
+
+6.5 Hidden Subgroup Problem
+23
+
+Classically, the HSP has query complexity Ω(
+�
+
+|G/H|); we need to query this many
+times in order to get the same output in response to two different queries with reasonable
+probability. This is exponential in the input size — the problem is hard classically.
+But for any finitely generated abelian group, the problem is easy quantumly! It
+can be solved (with high success probability) using O(polylog|G/H|) queries, and
+O(polylog|G/H|) additional computational steps.
+Before we explain the algorithm, let’s discuss another application:
+
+6.5.1 Discrete Log Problem
+
+Recall that if q is prime, then the group Z∗
+q (multiplication mod q with elements
+{1, 2, ..., q −1}) is cyclic. This means that Z∗
+q is generated by a single element a; Thus
+
+Z∗
+q = {a, a2, a3, .., aq−1 = e}.
+(6.111)
+
+Therefore any element x ∈Z∗
+q can be expressed in a unique way as the modular expo-
+nential
+
+x = ay (mod q) where y ∈{0, 1, 2, .., q −2}.
+(6.112)
+
+The discrete log (mod q) with base a is the inverse of this function’:
+
+x = ay (mod q) ↔y = dlogq,a(x)
+(6.113)
+
+A discrete log can be defined this way for any cyclic group and any generating element
+of the group.
+Example: q = 7, Z∗
+q = {1, 2, ..., 6}, a = 5 is the generator:
+
+y =
+0
+1
+2
+3
+4
+5
+
+x = 5y (mod 7)
+1
+5
+4
+6
+2
+3
+.
+
+The inverse function is
+
+x =
+1
+2
+3
+4
+5
+6
+
+y = dlog7,5(x) =
+0
+4
+5
+2
+1
+3
+.
+
+The modular exponential is easy to compute classically (by repeated squaring), but the
+discrete log seems to be hard to compute — the modular exponential is a candidate one-
+way function. It is hard to invert because ax seems to jump about in Z∗
+q haphazardly as
+x varies (for at least some values of q).
+There are applications of this one-way function in cryptography; for example:
+
+6.5.2 Diffie-Hellman key exchange
+
+This protocol’s security rests on the presumed hardness of computing the discrete log-
+arithm. The objective is for Alice and Bob to generate a shared secret key that is not
+known by their adversary Eve.
+
+• A prime number q and a generating element a ∈Z∗
+q are publicly announced.
+• Alice generates a random element x ∈Z∗
+q and keeps it secret. Bob generates a random
+element y ∈Z∗
+q and keeps it secret.
+• Alice computes and announces ax (mod q). Bob computes and announces ay (mod q).
+
+
+24
+Quantum Algorithms
+
+• Alice computes (ay)x = axy (mod q). Bob computes (ax)y = axy (mod q). This is their
+final shared key.
+
+Alice and Bob can both compute the key because the modular exponential can be
+evaluated efficiently. The protocol is expected to be secure because even when ax and
+ay (but not x or y) are known, it is hard to compute axy. Of course, if Eve can compute
+the discrete log, she could break the protocol. E.g. knowing ax and ay she would be able
+to compute x and then compute (ay)x.
+But a quantum computer can evalutate a discrete log by solving a HSP! Here is how.
+We would like to find
+
+r = dlogq,a(x)
+(6.114)
+
+where the value of r is such that x = ar (mod q). We consider the function
+
+f : Z × Z →Z∗
+q,
+f(y1, y2) = ay1x−y2 (mod q).
+(6.115)
+
+When does f map two different inputs to the same output?
+
+f(y1, y2) = ay1−ry2 (mod q) = f(z1, z2) = az1−rz2 (mod q)
+(6.116)
+
+iff (y1 −z1) −r(y2 −z2) = 0 (mod q −1). This means that we may think of the input
+to f as an element of the additive group G = Z × Z where f is constant and distinct on
+the cosets of
+
+H = {(y1, y2)|y1 = ry2 (mod q −1)}.
+(6.117)
+
+H is generated by the elements (r, 1), (q −1, 0) so if we find generators, we determine r.
+
+6.5.3 Finding abelian hidden subgroups
+
+Primal lattice and dual lattice
+
+For a HSP problem with finitely generated abelian ˜G, we may consider without loss
+of generality a corresponding problem with G = Zn, since there is a homomorphism
+mapping G onto ˜G . In general, it is useful that we can give geometrical interpretations
+to G and H. G is the n-dimensional hypercubic lattice, containing all ordered n-tuples
+of integers. The subgroup H can be regarded as a sublattice of Zn. This sublattice is
+spanned by a set of n linearly independent vectors {v1, v2, ..vn}, each an element of
+Zn (i.e. with integer entries). A general element x of H is a linear combination of the
+generating vectors
+
+x =
+
+n
+�
+
+a=1
+αava.
+(6.118)
+
+We may construct an n × n generator matrix for the lattice H whose rows are the
+generating vectors:
+
+M =
+
+
+
+
+
+
+
+v1
+v2
+.
+vn
+
+
+
+
+
+
+and H = {x = αM, α ∈Zn},
+(6.119)
+
+where α is the row vector α = (α1, α2, .., αn). For fixed H, the generator matrix is not
+unique. We may make the replacement M �→RM where R is an invertible integral
+
+
+6.5 Hidden Subgroup Problem
+25
+
+matrix with det R = ±1 (so that R−1 is also integral). Both M and RM are generators
+of the same lattice.
+The quotient space G/H may be called the unit cell of the lattice. It contains all the
+distinct ways to shift the lattice H by an element of G. We may say that |G/H| is the
+volume of the unit cell, the number of points it contains. Note that
+
+|G/H| = det M
+(6.120)
+
+(the linear transformation M inflates the cube {0, 1}n to a region of volume det M).
+Corresponding to the integral lattice H is its dual lattice, denoted H⊥. The elements
+of H⊥are points in Rn that are orthogonal to all the vectors in H, modulo integers:
+
+H⊥= {k ∈Rn such that k · x ∈Z for all x ∈H}.
+(6.121)
+
+Equivalently, exp (2πik · x) = 1 for k ∈H⊥and x ∈H. H⊥is also a lattice (i.e. its
+elements are the span of a set of generating vectors with integer coefficients), but the
+components are not necessarily integer (although they are rational numbers). If H⊥is
+generated by vectors u1, u2, ..un then its generating matrix is
+
+M⊥=
+
+
+
+
+
+
+
+u1
+u2
+.
+un
+
+
+
+
+
+
+and H⊥= {k = βM⊥, β ∈Zn}
+(6.122)
+
+We can choose the basis for the dual lattice such that uavT
+b
+= δab, in which case
+M⊥MT = I. That means that, once we have found M⊥, an easy computation de-
+termines M (matrix inversion of transpose of M⊥). In the quantum algorithm for the
+abelian HSP, the quantum computation determines the generators of H⊥(i.e. the matrix
+M⊥) and then finding the generators of H is easy (by matrix inversion).
+The efficient solution to the problem makes use “Fourier sampling” — after evaluating
+the function f on a coherent superposition of values of G, we perform (an approximation
+to) the Fourier transform over the group G, and then measure. This procedure enables
+us to sample nearly uniformly from H⊥. Only a modest number of samples are needed
+to determine H⊥, and hence H, which solves the problem.
+For example, in the case of period finding, we have G = Z, H = rZ = {x = rα, α ∈Z}
+and H⊥= {k = β/r, β ∈Z}. In the quantum algorithm, we are promised that r ≤R;
+thus we can sample from H⊥using the Fourier transform for the finite group ZN rather
+than the infinite group Z, where N ≥R2. Fourier sampling then provides sufficient
+accuracy to determine an element β/r of H⊥with high success probability. After a few
+samples we can determine 1/r, the generator of H⊥, and hence r, the generator of H.
+We want to extend this idea from subgroups of Z to subgroups of Zn.
+So, to solve the general abelian HSP, we Fourier transform over Zn
+N instead of Zn,for
+some sufficiently large N. And to keep the discussion simple at first, let’s suppose that
+H is actually a subgroup of the finite group Zn
+N, rather than of Zn.
+
+H-invariant coset state and Fourier sampling from the dual lattice
+
+As in the period finding algorithm we query the black box with
+
+1
+�
+
+|G|
+
+�
+
+x∈G
+|x⟩to obtain
+1
+�
+
+|G|
+
+�
+
+x∈G
+|x⟩⊗|f(x)⟩,
+(6.123)
+
+
+26
+Quantum Algorithms
+
+where f is constant and distinct on the cosets of H ⊆G. Were we to measure the
+output register, obtaining f(x0), we would prepare in the input register the uniform
+superposition of elements in the same coset as x0; which is
+
+|H, x0⟩=
+1
+�
+
+|H|
+
+�
+
+x∈H
+|x + x0⟩.
+(6.124)
+
+This “coset state” has an important property: it is H-invariant. We may consider the
+unitary transformation Uy associated with an element y ∈G whose action is
+
+Uy|H, x0⟩=
+1
+�
+
+|H|
+
+�
+
+x∈H
+|x + x0 + y⟩,
+(6.125)
+
+and we may reparamaterize the sum over x replacing x �→x′ −y, thus obtaining:
+
+1
+�
+
+|H|
+
+�
+
+x′∈H
+|x′ + x0⟩= |H, x0⟩.
+(6.126)
+
+To appreciate the significance of H-invariance, note that if |ψ⟩obeys U|ψ⟩= |ψ⟩, then
+˜U| ˜ψ⟩= V UV −1| ˜ψ⟩= | ˜ψ⟩where | ˜ψ⟩= V |ψ⟩. Now apply this identity to U = Uy where
+V is the Fourier transform
+
+V : |x⟩�→
+1
+�
+
+|G|
+
+�
+
+k∈G⊥
+e2πik·x/N|k⟩,
+(6.127)
+
+V −1 : |k⟩�→
+1
+�
+
+|G|
+
+�
+
+x∈G
+e−2πik·x/N|x⟩.
+(6.128)
+
+We then find ˜Uy|k⟩= e−2πik·y/N|k⟩, as follows:
+
+|k⟩V −1
+−−−→
+1
+�
+
+|G|
+
+�
+
+x∈G⊥
+e−2πik·x/N|x⟩
+(6.129)
+
+Uy
+−→
+1
+�
+
+|G|
+
+�
+
+x∈G⊥
+e−2πik·x/N|x + y⟩
+(6.130)
+
+=
+e2πik·y/N
+1
+�
+
+|G|
+
+�
+
+x′∈G⊥
+e−2πik·x′/N|x′⟩
+(6.131)
+
+V−→e2πik·y/N|k⟩.
+(6.132)
+
+Therefore, the state |k⟩is an eigenstate of ˜Uy with eigenvalue 1 iff k · y/N = integer —
+or for y ∈H iff k/N ∈H⊥. Thus, if a state is H-invariant, then in the Fourier basis its
+expansion contains the state |k⟩with a non-zero coefficient only if k/N ∈H⊥.
+More explicitly, we compute
+
+V −1 : |H, x0⟩=
+1
+�
+
+|H|
+
+�
+
+x∈H
+|x + x0⟩
+(6.133)
+
+�→
+1
+�
+
+|H||G|
+
+�
+
+x∈H
+
+�
+
+k∈G⊥
+e2πik·(x+x0)/N|k⟩.
+(6.134)
+
+(6.135)
+
+Because of H-invariance, only k/N ∈H⊥survives in the sum over G⊥, and for such k,
+
+
+6.5 Hidden Subgroup Problem
+27
+
+e2πi(k·x)/N = 1 so we obtain
+1
+�
+
+|H⊥|
+
+�
+
+k∈H⊥
+e2πik·x0/N|k⟩
+(6.136)
+
+Therefore if we Fourier sample — i.e. Fourier transform and then measure — the prob-
+ability distribution that governs the outcome is the uniform distribution on H⊥. Once
+we have sampled from H⊥enough times, with high probability a generating set for H⊥
+
+will be found.
+
+Query complexity
+
+How many samples are enough (assuming now that G is finite — e.g. G = Zn
+N — and
+H ⊆G)? Suppose K is a group (either abelian or not), and m elements of K are
+chosen uniformly at random. If these m elements do not generate K, then they must be
+contained in some maximal proper subgroup S ⊂K. (Proper means S is smaller than
+K, and maximal means we cannot add another element of K to S without generating all
+of K.) Any proper subgroup has order |S| ≤|K|/2, because the order of the subgroup
+must divide the order of K, and the probability that all m elements are in S is
+
+Prob(all m in S) =
+�|S|
+
+|K|
+
+�m
+;
+(6.137)
+
+therefore the probability that the m elements generate K is
+
+Prob(m elements generate K) ≥1 −
+�
+
+S∈max
+
+�|S|
+
+|K|
+
+�m
+≥1 −(# max)2−m,
+(6.138)
+
+where the sum is over maximal proper subgroups {S}, and where (# max) denotes the
+total number of maximal proper subgroups.
+If K is abelian, we can count the maximal proper subgroups. S is a sublattice of K
+and if S is a maximal proper subgroup, then its dual lattice S⊥contains a vector not
+in K⊥. There is only one such (linearly independent) vector if S is maximal, for if there
+were two then we could remove one, obtaining a smaller S⊥and hence a larger proper
+subgroup S. Any nontrivial vector not in K⊥determines such a subgroup, so there are
+|G/K⊥| −1 choices (where e.g. G = Zn
+N), and therefore
+
+Prob(m elements generate S) ≥1 −2−m|G/K⊥|.
+(6.139)
+
+In the case of the hidden subgroup problem where H ⊆G = Zn
+N, we are sampling
+K = H⊥and |G/K⊥| becomes |G/H|, the number of cosets. To have constant success
+probability, then, we choose m such that e.g.
+
+2−m|G/K⊥| < 1
+
+2,
+(6.140)
+
+or m −1 > log |G/H| (compare this with the conclusion for Simon’s problem). Since
+|G/H| < Nn; it suffices if m = O(n log N).
+How large should N be? For period finding with r ≤R, choosing N ≥R2 provided
+adequate precision for finding r. For an integral lattice with generator matrix M, its
+inverse matrix (transpose of M⊥) has entries that can be expressed as integer/ det M,
+where det M = |G/H|, the number of cosets. In the formulation of the HSP, we are
+provided with an upper bound |G/H| ≤R, and N needs to be large enough to point to
+a unique rational number with denominator ≤R with reasonable success probability.
+
+
+28
+Quantum Algorithms
+
+In our discussion of period finding (H⊥= Z/r) we noted that Fourier sampling yields
+a rational number y/N close to integer/r with high probability:
+�
+
+k
+Prob
+�����
+y
+N −k
+
+r
+
+����≤
+1
+2N
+
+�
+≥4
+
+π2 ,
+(6.141)
+
+so that choosing N ≥R2 was good enough to determine a rational number with de-
+nominator < R. If we fix the desired accuracy δ, then the part of the distribution lying
+outside the peaks decreases as N increases (an exercise):
+
+Prob
+�
+∀k
+����
+y
+N −k
+
+r
+
+����> δ
+�
+≤
+1
+Nδ,
+(6.142)
+
+The peak of the Fourier transform sharpens with increasing N, so that the prob of lying
+outside all peaks with half width δ scales like 1/N.
+When we sample H⊥, we find an n-component vector, where each component should
+be determined to accuracy 1/R2 (where |G/H| < R). The probability of success in
+finding all n-components to this accuracy is
+
+Prob(success) ≥
+�
+1 −1
+
+Nδ
+
+�n
+(6.143)
+
+and the probability of being successful in each of m consecutive samplings is
+
+Prob(success m times) ≥
+�
+1 −1
+
+Nδ
+
+�nm
+.
+(6.144)
+
+For δ = 1/R2, the success probability is a constant for
+
+mnR2
+
+N
+< constant or N = O(mnR2).
+(6.145)
+
+Since m = O(n log N) samples are sufficient to find generators of H⊥, we conclude it
+suffices to choose N to be
+
+N = O(n2R2 log N) = O(n2R2 log(nR))
+(6.146)
+
+This is good enough to determine H⊥in m = O(n log N) = O(n log(nR)) queries, and
+the generators of H are found by inverting the matrix M⊥that generates H⊥.
+The algorithm is efficient: both the number of queries and the number of steps in the
+quantum Fourier transform are polylog in (the upper bound on) the number of cosets
+|G/H|.
+
+6.6 Quantum Searching
+
+For the hardest instances of NP-hard problems, no better method is known than ex-
+haustive search for a solution. For example, suppose that for some efficiently computable
+Boolean function
+
+f : {0, 1}n −→{0, 1};
+(6.147)
+
+we wish to determine whether there is an x such that f(x) = 1. We could search for
+a solution by trying all of the N = 2n possible values of the input x, but that might
+require time O(NpolylogN) — assuming we can evaluate f in time O(polylogN). That’s
+very slow, yet if f has no structure that we know how to exploit, we might not know
+how to do better.
+
+
+6.6 Quantum Searching
+29
+
+We can model this situation in the black box setting. Suppose we are promised that
+the function evaluated by the box has the form
+
+fw(x) =
+
+�
+0
+x ̸= w,
+
+1
+x = w,
+(6.148)
+
+where x ∈{0, 1, 2.., N −1} for some unknown w. Our task is to find w, the marked string.
+Classically, we’ll need to query the box more than N/2 times to find w with success
+probability above 1/2. This is a black-box version of an NP-hard problem, where there
+is a unique witness accepted by a circuit, but the problem has no structure, so there is
+no better option than exhaustive searching.
+Now we ask, can exhaustive search be done faster on a quantum computer? The
+answer is yes, using Grover’s algorithm. With quantum queries, we can find the marked
+string using O(
+√
+
+N) queries. Thus we can solve NP-hard problems by exhaustive search
+in time O(
+√
+
+NpolylogN).
+We say that Grover’s algorithm achieves a quadratic speedup relative to exhaustive
+search on a classical computer. Though the speedup is only quadratic rather than ex-
+ponential, Grover’s algorithm is interesting because of its broad applicability. And it is
+rather remarkable: in effect we can interrogate N potential witnesses by asking O(
+√
+
+N)
+questions.
+In the quantum setting, the black box applies the unitary
+
+Uw : |x⟩⊗|y⟩�→|x⟩⊗|y ⊕fw(x)⟩,
+(6.149)
+
+where x ∈{0, 1}n and y ∈{0, 1}n. By the standard trick, Uw becomes a phase oracle:
+
+Uw : |x⟩⊗|−⟩�→(−1)fw(x)|x⟩⊗|−⟩
+(6.150)
+
+where
+
+(−1)fw(x) =
+
+�
+1
+x ̸= w,
+
+−1
+x = w.
+(6.151)
+
+Ignoring the output register (which is unaffected by Uw), we can express Uw acting on
+input as
+
+Uw = I −2|w⟩⟨w|.
+(6.152)
+
+We can express a general n-qubit state |ψ⟩as
+
+Uw : |ψ⟩= a|w⟩+ b|ψ⊥⟩�→−a|w⟩+ b|ψ⊥⟩,
+(6.153)
+
+where ⟨w|ψ⊥⟩= 0. That is, we resolve |ψ⟩into a component along |w⟩and a component
+in the hyperplane orthogonal to |w⟩. Uw induces a reflection of the vector |ψ⟩about this
+hyperplane.
+The first step in Grover’s algorithm is to prepare the uniform superposition of all
+values of x:
+
+|s⟩= H⊗n|0⟩=
+1
+√
+
+N
+
+N−1
+�
+
+x=1
+|x⟩;
+(6.154)
+
+this state |s⟩has overlap with the marked string |w⟩
+
+⟨w|s⟩=
+1
+√
+
+N
+.
+(6.155)
+
+
+30
+Quantum Algorithms
+
+The next step is to apply the Grover iteration many times in succession, where each
+iteration enhances the overlap of the quantum superposition with the marked state |w⟩,
+while suppressing the amplitude for each |x⟩with x ̸= w. This iteration is
+
+UGrover = UsUw
+(6.156)
+
+where Uw is the query and
+
+Us = 2|s⟩⟨s| −I
+(6.157)
+
+reflects a vector about the axis determined by |s⟩. Note that Us is easy to construct as
+a quantum circuit. It can be expressed as
+
+Us = H⊗n(2|0⟩⟨0| −I)H⊗n
+(6.158)
+
+since H⊗n maps |s⟩to |0⟩, where H is the single qubit Hadamard gate. Furthermore a
+multiply controlled Z gate can be formed from a multiply controlled-not gate Λn−1(X)
+where the target qubit has a Hadamard before and after the gate, and we know that
+Λn−1(X) can be constructed from O(n) Toffoli gates. Finally, we can conjugate by X⊗n
+
+so the phase gate is triggered by |00..0⟩rather than |11..1⟩. Thus Us is realized by a
+circuit of size O(log N).
+What does UGrover do? It preserves the plane spanned by |s⟩and |w⟩, so we may
+confine our attention to that plane. First, Uw reflects |s⟩about the axis |w⊥⟩(the vector
+⊥to |w⟩in the span of |s⟩and |w⟩). Then Us reflects Uw|s⟩about the axis |s⟩. The net
+effect of UGrover, then, is a counterclockwise rotation in the plane by the angle 2θ, where
+θ is initial angle between |s⟩and |w⟩. Each time we repeat the Grover iteration the state
+vector rotates further in the counterclockwise direction by 2θ.
+The initial angle θ between |s⟩and |w⊥⟩is given by sin θ = ⟨w|s⟩= 1/
+√
+
+N. For
+N ≫1, then, we have θ = 1/
+√
+
+N + O(1/N3/2). If we repeat the Grover iteration T
+times, then the vector is rotated away from the |w⊥⟩axis by (2T + 1)θ.
+We may choose T such that (2T + 1)θ = π/2 + δ where |δ| ≤θ/2 ≈
+1
+2
+√
+
+N . Then
+if we measure in the computational basis, we find the outcome |w⟩with probability
+Prob(w) = cos2 δ ≥1 −δ2 ≥1 −
+1
+4N . Thus we find |w⟩with success probability close
+to 1 using T ≈π
+
+4θ ≈π
+
+4
+√
+
+N Grover iterations, making use of T quantum queries to the
+black box. This is Grover’s quadratic speedup.
+Suppose now that there are r marked states, where r is known. Classically, with each
+query the probability of finding a solution (wi such that f(wi) = 1) is r/N, so we need
+O(N/r) queries to find a solution with constant success probability. Quantumly, the
+uniform superposition of the marked states
+
+|marked⟩= 1
+√r
+
+r
+�
+
+i=1
+|wi⟩
+(6.159)
+
+has overlap with |s⟩=
+1
+√
+
+N
+�N−1
+x=0 |x⟩
+
+⟨marked|s⟩=
+�r
+
+N = sin θ
+(6.160)
+
+and the Grover iteration again rotates by 2θ in the plane spanned by |s⟩and |marked⟩
+(because the query reflects about the axis perpendicular to |marked⟩).
+As above, then, for N/r ≫1, we achieve success probability Prob = 1 −O(r/N)
+
+
+6.6 Quantum Searching
+31
+
+in T ≈π/4
+�
+
+N/r queries. Again, the speedup is quadratic: The number of quantum
+queries needed to find a solution is
+
+#quantum queries = O(
+�
+
+#classical queries).
+(6.161)
+
+What if r is not known a priori? As a function of the number of queries the success
+probability oscillates, where the period of the oscillation is T ≈π/2
+�
+
+N/r. If we choose
+T uniformly at random in the interval T = {0, 1, 2, .., Tmax ≈π/4
+√
+
+N}, then if there is
+a solution (r > 0), a solution will be found with Prob ≥1/2 + O(1/N). If we repeat m
+times, sampling a different random value of T each time, we will find a solution apart
+from a small failure probability ≈2−m. Therefore, we can use Grover’s algorithm to
+solve a decision problem in NP with high success probability, in
+
+time = O(
+√
+
+NpolylogN),
+(6.162)
+
+since we can compute the circuit that evaluates f(x) in (classical or quantum) time
+O(polylogN).
+
+6.6.1 Generalized Search
+
+In some cases, the problem may have structure that can be exploited to search faster for
+a solution. In that case, some strings are better candidates than others to be solutions,
+and so we ought to be able to search more efficiently by spending more time testing
+likely solutions instead of less likely ones.
+For the case of Grover’s exhaustive search of a function without any apparent struc-
+ture, we started the algorithm by preparing
+
+|s⟩= H⊗n|0⟩=
+1
+√
+
+N
+
+N−1
+�
+
+x=0
+|x⟩,
+(6.163)
+
+which has overlap sin θ = 1/
+√
+
+N with the solution |w⟩, and hence would yield the
+uniform distribution on x if we measured in the computational basis. For a function
+with structure we may be able to construct an efficiently computable unitary U such
+that U|0⟩= sin θ|w⟩+ cos θ|ψ⊥⟩where sin2 θ > 1/N. In that case, we can conduct
+Grover’s algorithm with H⊗n replaced by U, and Us replaced by
+
+˜Us = U(2|0⟩⟨0| −I)U†.
+(6.164)
+
+Thus ˜Us reflects in the axis U|0⟩rather than |s⟩. The analysis of the algorithm is the
+same as before, and in the case where there exists a unique solution,we can find it with
+high probability in T ≈π
+
+4θ < π
+
+4
+√
+
+N queries.
+Specifically, because of the structure of the function, we might be able to exclude all
+except M < N inputs as potential solutions. Then, classically, we could find the solution
+in O(M) queries, while quantumly only O(
+√
+
+M) queries suffice, if we can construct U
+such that
+
+U|0⟩=
+1
+√
+
+M
+
+M
+�
+
+i=1
+|xi⟩,
+(6.165)
+
+the uniform superposition of the candidate solutions.
+For example, suppose that classical search for a solution can be accelerated by a
+
+
+32
+Quantum Algorithms
+
+classical heuristic — that is, a function g that takes a randomly generated seed r in a
+set R to a trial solution:
+
+g : r �→g(r) where r ∈R.
+(6.166)
+
+The heuristic is useful if trial solutions generated by the heuristic are more likely to be
+accepted than trial solutions chosen uniformly at random
+�# of soln. in g(R)
+
+|R|
+
+�
+>
+�total # of soln.
+
+N
+
+�
+,
+(6.167)
+
+where the bracket ⟨·⟩indicates the expectation value evaluated for a probability distri-
+bution on black-box functions. Then the number of classical queries to find a solution,
+using the heuristic, with constant success probability is
+
+Tclassical = O
+��
+|R|
+# of soln. in g(R)
+
+��
+.
+(6.168)
+
+To exploit the heuristic in quantum searching, we apply Grover’s algorithm to searching
+in the space of seeds instead of the full search space. The heuristic is realized as an
+efficiently computable unitary:
+
+|r⟩⊗|0⟩�→|r⟩⊗|g(r)⟩.
+(6.169)
+
+We can query the box with |g(r)⟩and then run the evaluation of g backwards to erase
+garbage:
+
+|r⟩⊗|0⟩⊗|y⟩�→|r⟩⊗|g(r)⟩⊗|y⟩�→|r⟩⊗|g(r)⟩⊗|y ⊕f(g(r))⟩
+
+�→|r⟩⊗|0⟩⊗|y ⊕f(g(r))⟩
+(6.170)
+
+This composite oracle can be consulted to search R for a state marked by the function
+f ◦g (i.e. for a state marked by f in g(R), the range of g). The number of quantum
+queries used is
+
+Tquantum = O
+
+���
+
+|R|
+# of soln. in g(R)
+
+��
+
+(6.171)
+
+(for each black box there is a quadratic speed up). Furthermore, the square root function
+is concave: ⟨
+√
+
+F⟩= �
+i pa√pa ≤
+��
+i paFa =
+�
+
+⟨F⟩where {pa} is a probability distri-
+bution, and here Fa represents the classical query complexity for a black box function
+labeled by a. Thus,
+
+Tquantum ≤O
+
+���
+|R|
+# of soln. in g(R)
+
+��
+
+= O(
+�
+
+Tclassical).
+(6.172)
+
+The speedup is quadratic, as for unstructured search.
+
+6.7 The Grover Algorithm Is Optimal
+
+Grover’s quadratic quantum speedup for exhaustive search is already interesting and
+potentially important, but surely with more cleverness we can do better, can’t we?
+No, it turns out that we can’t. Grover’s algorithm provides the fastest possible quantum
+search of an unsorted database, if “time” is measured according to the number of queries
+of the oracle.
+Considering the case of a single marked state |ω⟩, let U(ω, T) denote a quantum circuit
+
+
+6.7 The Grover Algorithm Is Optimal
+33
+
+that calls the oracle T times. We place no restriction on the circuit aside from specifying
+the number of queries; in particular, we place no limit on the number of quantum gates.
+This circuit is applied to an initial state |ψ(0)⟩, producing a final state
+
+|ψω(t)⟩= U(ω, T)|ψ(0)⟩.
+(6.173)
+
+Now we are to perform a measurement designed to distinguish among the N possible
+values of ω. If we are to be able to perfectly distinguish among the possible values, the
+states |ψω(t)⟩must all be mutually orthogonal, and if we are to distinguish correctly
+with high probability, they must be nearly orthogonal.
+Now, if the states {|ψω⟩are an orthonormal basis, then, for any fixed normalized
+vector |ϕ⟩,
+
+N−1
+�
+
+ω=0
+∥|ψω⟩−|ϕ⟩∥2≥2N −2
+√
+
+N.
+(6.174)
+
+(The sum is minimized if |ϕ⟩is the equally weighted superposition of all the basis
+elements, |ϕ⟩=
+1
+√
+
+N
+�
+ω |ψω⟩, as you can show by invoking a Lagrange multiplier to
+perform the constrained extremization.) Our strategy will be to choose the state |ϕ⟩
+suitably so that we can use this inequality to learn something about the number T of
+oracle calls.
+Our circuit with T queries builds a unitary transformation
+
+U(ω, T) = U ωU T U ωU T−1 . . . U ωU 1,
+(6.175)
+
+where U ω is the oracle transformation, and the U t’s are arbitrary non-oracle transforma-
+tions. For our state |ϕ(T)⟩we will choose the result of applying U(ω, T) to |ψ(0)⟩, except
+with each U ω replaced by I; that is, the same circuit, but with all queries submitted to
+the “empty oracle.” Hence,
+
+|ϕ(T)⟩= U T U T−1 . . . U 2U 1|ψ(0)⟩,
+(6.176)
+
+while
+
+|ψω(T)⟩= U ωU T U ωU T−1 . . . U ωU 1|ψ(0)⟩.
+(6.177)
+
+To compare |ϕ(T)⟩and |ψω(T)⟩, we appeal to our previous analysis of the effect of errors
+on the accuracy of a circuit, regarding the ω oracle as an “erroneous” implementation
+of the empty oracle. The norm of the error vector in the t-th step is
+
+∥|E(ω, t)⟩∥=∥(U ω −I)|ϕ(t)⟩∥
+
+= 2|⟨ω|ϕ(t)⟩|,
+(6.178)
+
+since U ω = I −2|ω⟩⟨ω|. After T queries we have
+
+∥|ψω(T)⟩−|ϕ(T)⟩∥≤2
+
+T
+�
+
+t=1
+|⟨ω|ϕ(t)⟩|.
+(6.179)
+
+
+34
+Quantum Algorithms
+
+From the identity
+�T
+�
+
+t=1
+ct
+
+�2
+
++ 1
+
+2
+
+T
+�
+
+s,t=1
+(cs −ct)2
+
+=
+
+T
+�
+
+s,t=1
+
+�
+ctcs + 1
+
+2c2
+s −ctcs + 1
+
+2c2
+t
+
+�
+= T
+
+T
+�
+
+t=1
+c2
+t ,
+(6.180)
+
+we obtain the inequality
+�T
+�
+
+t=1
+ct
+
+�2
+
+≤T
+
+T
+�
+
+t=1
+c2
+t ,
+(6.181)
+
+which applied to eq. (6.179) yields
+
+∥|ψω(T)⟩−|ϕ(T)⟩∥2≤4T
+
+�T
+�
+
+t=1
+|⟨ω|ϕ(t)⟩|2
+�
+
+.
+(6.182)
+
+Summing over ω we find
+
+�
+
+ω
+∥|ψω(T)⟩−|ϕ(T)⟩∥2≤4T
+
+T
+�
+
+t=1
+⟨ϕ(t)|ϕ(t)⟩= 4T 2.
+(6.183)
+
+Invoking eq. (6.174) we conclude that
+
+4T 2 ≥2N −2
+√
+
+N,
+(6.184)
+
+if the states |ψω(T)⟩are mutually orthogonal. We have, therefore, found that any quan-
+tum algorithm that can distinguish all the possible values of the marked state must
+query the oracle T times where
+
+T ≥
+
+�
+
+N
+
+2 ,
+(6.185)
+
+(ignoring the small correction as N →∞). This lower bound on the number of queries
+applies if we are to identify the marked state with a success probability that approaches
+one for asymptotically large N. A simple extension of argument shows that
+
+T ≥
+
+�
+
+N
+
+2
+�
+1 −√ε
+�1/2 ,
+(6.186)
+
+if instead we settle for success probabilty at least 1 −ε for each possible choice of the
+marked string ω.
+Grover’s algorithm finds ω in π
+
+4
+√
+
+N queries, which exceeds our lower bound by only
+about 11%. In fact, by a more careful argument, we can derive a tighter lower bound on
+the number of queries that asymptotically matches what Grover’s algorithm achieves.
+Furthermore, we can show that Grover’s circuit attains the best success probability
+among all circuits with T oracle calls in the case where T < π
+
+4
+√
+
+N.
+One feels a twinge of disappointment (as well as a surge of admiration for Grover) at
+the realization that the quantum search algorithm cannot be improved in the black box
+setting. What are the implications for quantum complexity?
+For many optimization problems in the NP class, there is no better method known
+than exhaustive search of all the possible solutions. By exploiting quantum parallelism,
+we can achieve a quadratic speedup of exhaustive search. Now we have learned that
+
+
+6.8 Using quantum computers to simulate quantum physics
+35
+
+the quadratic speedup is the best possible if we rely on the power of sheer quantum
+parallelism — that is, if we don’t design our quantum algorithm to exploit the specific
+structure of the problem we wish to solve.
+The optimality of the Grover algorithm might be construed as evidence that BQP ̸⊇
+NP. At least, if it turns out that NP ⊆BQP and P ̸= NP, then the NP problems
+must share a deeply hidden structure (for which there is currently no evidence) that is
+well-matched to the peculiar capabilities of quantum circuits.
+Even the quadratic speedup may prove useful for a variety of NP-complete optimiza-
+tion problems. But a quadratic speedup, unlike an exponential one, does not really move
+the frontier between solvability and intractability. Quantum computers may someday
+outperform classical computers in performing exhaustive search, but only if the clock
+speed of quantum devices does not lag too far behind that of their classical counterparts.
+
+6.8 Using quantum computers to simulate quantum physics
+
+Sadly, we now know some things that quantum computers cannot do. But happily, there
+are also some important things that they can do.
+
+• They can solve the hidden subgroup problem for finitely generated abelian groups,
+with an exponential speedup (in the oracle model) relative to classical algorithms.
+• The can speed up, quadratically, exhaustive search for solutions to combinatorial
+problems.
+
+What else can they do?
+
+6.8.1 Simulating time evolution of local Hamiltonians
+
+An important application for quantum computers is simulating the time evolution of
+quantum systems. The simulation is efficient if the Hamiltonian H is local.
+For a system of n qubits, we say that H is k-local if
+
+H =
+�
+
+a
+Ha,
+(6.187)
+
+where each term Ha acts non-trivially on at most k qubits — i.e. Ha = ˜Ha ⊗In−k, and
+˜Ha acts on some set of at most k qubits. (Of course, we may use a similar definition for
+a system of d-dimensional subsystems for constant d > 2, rather than qubits.) We say
+that H is local if it is k-local for some constant k.
+There is a stronger notion of locality we sometimes use, which can be called geometrical
+locality or spatial locality. A k-local Hamiltonian is geometrically local in D dimensions
+if the qubits can be arranged in (flat) D-dimensional space with a bounded number
+of qubits per unit volume, and the k qubits upon which Ha acts non-trivially are all
+contained in a ball of constant radius. In this sense there are no long-range interactions
+among the qubits. H is geometrically local if it is geometrically k-local in D dimensions
+for some constant D and k.
+If we write H = �
+a Ha where there is a unique Ha for each set of k qubits, then
+the expansion of a k-local H contains at most
+�n
+k
+�
+= O(nk) terms, and the expansion
+of a geometrically local H contains O(n) terms (each of the n qubits is contained in a
+constant number of interacting sets). Let us also assume that each Ha is bounded
+
+||Ha||∞≤h for all a, where h is a constant.
+(6.188)
+
+
+36
+Quantum Algorithms
+
+Physicists are interested in geometrically local Hamiltonians because they seem to pro-
+vide an accurate description of Nature. Therefore, it is noteworthy that quantum circuits
+can simulate quantum evolution governed by a local Hamiltonian efficiently: evolution
+of n qubits for time t can be simulated to constant accuracy using a circuit whose size
+is polynomial in n and t.
+We can formulate the problem this way: suppose we are given an initial quantum state
+|ψ(0)⟩, or a classical description of a quantum circuit that prepares the state. Our goal
+is to construct
+
+|ψ(t)⟩= U(t)|ψ(0)⟩
+(6.189)
+
+where U(t) satisfies d
+
+dtU(t) = −iH(t)U(t) and the boundary condition U(0) = I. (Thus
+U(t) = e−iHt in the case where H is time independent). We will settle for computing
+|ψ(t)⟩to accuracy δ, i.e. constructing ˜ψ(t)⟩where
+
+||| ˜ψ(t)⟩−|ψ(t)⟩|| < δ.
+(6.190)
+
+Depending on the situation, we might be satisfied if δ is a sufficiently small constant, or
+we might impose the stricter requirement that the error is smaller than some specified
+power of the size n of the system. To relate this simulation task to a task that can be
+described classically, suppose the goal is to sample from the probability distribution
+
+⟨ψ(t)|Πa|ψ(t)⟩
+(6.191)
+
+where Πa projects onto an eigenstate with eigenvalue a of an observable A that can be
+measured efficiently by a quantum computer. Classicaly this task is believed to be hard
+at least in some cases, because the unitary matrix U(t) is exponentially large (2n × 2n).
+But quantumly we can do the simulation efficiently if H is a local Hamiltonian.
+To simulate continuous time evolution on a classical or quantum computer, we choose
+a small step size ∆, and approximate evolution for time t by a sequence of t/∆steps. (If
+H is actually time dependent, assume ∆is small enough that the change of H during a
+time interval of width ∆can be neglected.) We wish to attain accuracy
+
+|| ˜U(t) −U(t)||∞< δ,
+(6.192)
+
+where ˜U is the simulated unitary and U is the ideal unitary. Hence the error per time
+step should be less than δ∆/t.
+Suppose H = �
+a Ha is a sum of M k-local terms, and let’s consider the geometrically
+local case, where M = O(n). We will show below that a single time step can be simulated
+by a product of M local “gates” (unitary transformations that act on a constant number
+of qubits) where each such “gate” has an error O(∆2h2). Therefore the simulation of
+evolution for time t uses all together Mt/∆gates where we require
+
+Mt
+
+∆∆2h2 ≈δ
+=⇒
+∆= O
+�
+δ
+h2Mt
+
+�
+.
+(6.193)
+
+Therefore the total number of gates is
+
+L = O
+�h2(Mt)2
+
+δ
+
+�
+.
+(6.194)
+
+Furthermore each “gate” can be simulated to accuracy O(∆2h2) with a universal gate
+
+
+6.8 Using quantum computers to simulate quantum physics
+37
+
+set using polylog
+�
+1
+∆2h2
+�
+= polylog
+�
+h2(Mt)2
+
+δ2
+�
+gates, according to the Solovay-Kitaev
+theorem. We conclude that the simulation can be done with a quantum circuit of size
+
+L = O
+�h2(Mt)2
+
+δ
+polylog
+�h2(Mt)2
+
+δ2
+
+��
+.
+(6.195)
+
+In the case where H is geometrically local, M = O(n) = O(V ), where V is the spatial
+volume of the system. Since h is a constant, we find that the cost of simulating time
+evolution with fixed accuracy scales like
+
+L = O(Ω2 polylog Ω),
+(6.196)
+
+where Ω= V t is the simulated volume of spacetime.
+Now we need to explain how to simulate a single time step. We’ll use the idea that
+exp (�
+a Aa) can be approximated by �
+a exp (Aa) if ||A|| ≪1. To check the accuracy
+we expand the exponentials:
+
+exp
+
+��
+
+a
+Aa
+
+�
+
+−
+�
+
+a
+exp (Aa)
+(6.197)
+
+=
+
+
+
+1 +
+�
+
+a
+Aa + 1
+
+2
+
+�
+
+a,b
+AaAb + . . .
+
+
+
+−
+�
+
+a
+
+�
+1 + Aa + 1
+
+2A2
+a + . . .
+�
+
+=
+
+
+
+1 +
+�
+
+a
+Aa + 1
+
+2
+
+�
+
+a,b
+AaAb + . . .
+
+
+
+−
+
+�
+
+1 +
+�
+
+a
+Aa +
+�
+
+a
+
+1
+2A2
+a +
+�
+
+a<b
+AaAb + . . .
+
+�
+
+= 1
+
+2
+
+��
+
+a<b
+AaAb +
+�
+
+a<b
+AbAa
+
+�
+
+−
+�
+
+a<b
+AaAb + . . .
+
+= −1
+
+2
+
+�
+
+a<b
+[Aa, Ab] + . . .
+
+(where + . . . denotes terms higher order in Aa). Writing H = �
+a Ha, then, we find that
+
+e−iH∆−
+�
+
+a
+e−iHa∆= 1
+
+2∆2 �
+
+a<b
+[Ha, Hb] + h.o.
+(6.198)
+
+Now, how many non-vanishing commutators {[Ha, Hb]} can occur in this sum? Let’s
+suppose the Hamiltonian is geometrically local, in which case there are O(n) terms
+in H, and each term fails to commute with a constant number of terms. So, there are
+O(n) = O(M) non-vanishing commutators. We conclude that (in the geometrically local
+case)
+�����e−iH∆−
+�
+
+a
+e−iHa∆
+�����= O(M∆2h2).
+(6.199)
+
+Since Πae−iHa∆is a product of M “gates,” we have verified that the accuracy per gate
+is O(∆2h2) (Note that terms arising from the higher-order terms in the expansion of
+the exponential are of order M∆3h3, and therefore systematically supressed by another
+factor of ∆h = O(δ/hMt) = O((δ/L)1/2). )
+So far we have shown that, for a geometrically local H that is a sum of bounded terms,
+evolution in a spacetime volume Ωcan be achieved with a quantum circuit of size
+
+L = O(Ω2 polylog Ω),
+(6.200)
+
+
+38
+Quantum Algorithms
+
+The resources needed for the simulation scale like the square of the simulated volume
+(up to a log factor). Can this be improved?
+An improved approximation to exp (�
+a Aa) is the subject of an exercise. Instead
+of �
+a eAa we use �
+a→e
+1
+2 Aa �
+a←e
+1
+2 Aa, where �
+a→denotes the product in ascending
+order, and �
+a←denotes the product in descending order. The exercise shows that, for
+geometrically local H,
+
+||e−iH∆−
+�
+
+a→
+e
+1
+2 Ha∆�
+
+a←
+e
+1
+2 Ha∆|| = O(M∆3h3),
+(6.201)
+
+i.e. the error per gate is O(h3∆3) instead of O(h2∆2). For an accurate simulation, we
+choose
+Mt
+
+∆(∆3h3) ≈δ =⇒∆≈
+�
+δ
+h3Mt
+
+�1/2
+;
+(6.202)
+
+the number of gates is
+
+Mt
+
+∆≈h3/2(Mt)3/2
+
+δ1/2
+,
+(6.203)
+
+and the Solovay-Kitaev blowup factor is polylog
+�
+1
+∆3h3
+�
+= polylog
+�
+h3/2(Mt)3/2
+
+δ3/2
+�
+=
+
+polylog
+�hMt
+
+δ
+�
+. We conclude that spacetime volume Ωcan be simulated with a circuit of
+size
+
+L = O(Ω3/2 polylog Ω).
+(6.204)
+
+The improved approximation in each time step increases the circuit size by only a factor
+of 2.
+The accuracy of this Trotter-Suzuki approximation to e−iH∆can be improved further,
+so that
+
+||e−iH∆−approximation|| = O
+�
+cpM(h∆)p+1�
+(6.205)
+
+where p is any power, the constant cp depends on p, and the improved approximation
+increases the number of gates by a factor that depends on p. With this approximation,
+we choose
+Mt
+
+∆(h∆)p+1 ≈δ =⇒∆≈
+δ1/p
+
+h(p+1)/p(Mt)1/p ,
+(6.206)
+
+so that the number of gates is
+
+Mt
+
+∆≈h(p+1)/p(Mt)(p+1)/p
+
+δ1/p
+.
+(6.207)
+
+Including the Solovay-Kitaev log factor, we can do the simulation with a circuit of size
+
+L = O(Ω1+ϵ polylog Ω),
+(6.208)
+
+where ϵ = 1/p. In fact, though, the factor cp grows exponentially with p = 1/ϵ; this
+happens because each time we increase the value of p by 1, we may the price of increas-
+ing the circuit size by a constant factor. But anyway, as we systematically improve the
+approximation, the circuit size comes closer and closer to scaling linearly with the sim-
+ulated volume, though it never quite makes it. Somehow, Nature manages to simulate
+herself with “resources” scaling like Ω(and without any error!), but this approximation
+method using a universal quantum computer does not do quite as well. There are other
+simulation methods that more nearly match the scaling Nature achieves.
+
+
+6.8 Using quantum computers to simulate quantum physics
+39
+
+Whether the quantum circuit model can simulate Nature efficiently is an important
+issue, because it addresses whether this model is the right one for studying what problems
+can be solved with reasonable resources by computers that are in principle physically
+realizable. We believe that the classical Turing machine model is not the right model,
+because it seems to be incapable of efficiently simulating general quantum systems, even
+ones for which the Hamiltonian is geometrically local. The quantum circuit model is
+presumably stronger, but is it really strong enough?
+Particle physicists model fundamental physics using quantum field theory (QFT).
+Some predictions of QFT can be computed classically, and the success of such predictions
+provides the evidence that QFT is a good model. But we don’t know how to efficiently
+simulate on a classical computer the real-time evolution of, for example, nuclear matter
+governed by quantum chromodynamics. Can we do such simulations efficiently on a
+quantum computer?
+The question is subtle because the number of qubits per unit volume is formally
+infinite in QFT (there are degrees of freedom at arbitrarily small distances) and al-
+though the Hamiltonian is local, the terms in the Hamiltonian do not necessarily have
+bounded norm. On the other hand, in a physical process of interest, we can usually
+assume that the energy density per unit volume is bounded above. In that case, we
+expect that the very-short-distance degrees of freedom are not so relevant, so that we
+can attain reasonable accuracy by approximating continuous space with a finite den-
+sity of lattice points per unit volume, and that furthermore the terms in the local
+Hamiltonian can be well approximated by operators with bounded norm. A reasonable
+expectation is that the complexity of a simulation of the dynamics scales polynomially
+in Ωρmax = (V tρmax) = Emaxt where ρmax is the maximal energy per unit volume, and
+Emax is an upper bound on the total energy. But there is no rigorous theorem establish-
+ing such scaling. Though physicists have a pretty good grasp of the properties of QFT
+(as indicated by the agreement between theory and experimental data), rigorous math-
+ematical results pertaining to QFT are still quite technical and incomplete, particulary
+in three spatial dimensions (where we live).
+Our understanding is even less satisfactory for physical processes in which gravita-
+tional effects are important. Can the quantum circuit model simulate quantum gravity
+efficiently? If so, quantum computers may turn out to be a powerful tool for deepening
+our understanding of quantum gravity. If not, then we still have not found the computa-
+tional model that fully captures the computational power that is potentially realizable
+in Nature.
+
+6.8.2 Estimating energy eigenvalues and preparing energy eigenstates
+
+We have argued that a quantum computer can efficiently simulate the time evolution
+of a quantum system with a local Hamiltonian; i.e., it can solve the time-dependent
+Schroedinger equation. Another thing that physicists and chemists want to do is solve
+the time-independent Schroedinger equation; i.e., compute the energy eigenvalues of a
+Hamiltonian. For example, chemists say that estimating the ground state energy of a
+molecule to “chemical accuracy” (about one part in a million) is valuable for predicting
+the properties of chemical reactions. In general, finding the energy eigenvalues of a local
+Hamiltonian seems to be a hard problem classically because we need to diagonalize a
+2n × 2n matrix for a system of n qubits. In some cases this may be easy, for example
+
+
+40
+Quantum Algorithms
+
+if the matrix is very sparse and has a simple structure, but in some physically relevant
+cases efficient classical algorithms are not known.
+Sometimes, if we express H in a “natural” basis we find that all the off-diagonal terms
+in the matrix are non-positive, i.e.
+
+H = cI −h
+(6.209)
+
+where I is the identity and h has only non-negative entries. In that case, the ground state
+|ψ0⟩of H (the eigenvector with the lowest eigenvalue) can be expressed as |ψ0⟩= �
+i ci|i⟩
+where |i⟩is a basis element and all ci can be chosen non-negative. That is because |ψ0⟩
+maximizes
+
+⟨ψ0|h|ψ0⟩=
+�
+c∗
+i cjhij
+(6.210)
+
+and so it is optimal to choose c∗
+i cj ≥0 for all i and j. When all the ci are nonnegative,
+there are quantum Monte Carlo sampling algorithms that can find the {ci} efficiently
+and accurately in practice. But if the off-diagonal terms in H have both + and −signs,
+then sampling algorithms might not work well because there can be delicate cancellations
+between positive and negative terms contributing to ⟨ψ0|h|ψ0⟩. Computational physicists
+call this the sign problem.
+But on a quantum computer, we can estimate eigenvalues of a unitary matrix U using
+the phase estimation algorithm. To obtain m bits of accuracy, we prepare an m-qubit
+register in a uniform superposition state, and execute this circuit:
+
+-figure-
+
+The measured value of k provides an estimate of the eigenvalue to m bits of accuracy.
+To perform Ut conditioned on t we simulate e−iHt for t ∈T × {1, 2, 4, 8, ..2m−1}. This
+suffices to find the fractional part of ET
+
+2π to m-bit accuracy, where E is an eigenvalue
+of the Hamiltonian H. We choose the step size in the simulation of e−iHt so that the
+accuracy is δ ≈2−m for t = 2mT. If the Hamiltonian is geometrically local, we have seen
+that this approximation can be achieved with a circuit size (neglecting a log factor)
+
+L = O
+�h2(nt)2
+
+δ
+
+�
+= O
+�
+h2(nT)2 × 22m
+
+2−m
+
+�
+= O
+�
+(hT)2n223m�
+.
+(6.211)
+
+For a particular preparation of the input state |ψ⟩, suppose we repeat the computation
+many times, and plot a histogram of the results:
+
+-figure-
+
+The location of each narrow peak estimates an energy eigenvalue Ea, modulo 2π/T.
+The height of the peak estimates |⟨Ea|ψ⟩|2 – the overlap |ψ⟩with the corresponding
+energy eigenstate |Ea⟩. To compute the energy eigenvalue to accuracy polynomial in n,
+we choose
+
+δ ≈2−m ≈1/nc =⇒m = c log2 n.
+(6.212)
+
+
+6.8 Using quantum computers to simulate quantum physics
+41
+
+The algorithm is efficient: the quantum circuit size is
+
+O
+�
+23mh2(nT)2�
+= O(n3cn2).
+(6.213)
+
+However, if we want to estimate (say) the ground state energy E0 to polynomial
+accuracy in quantum polynomial time, we must be able to prepare a state |ψ⟩whose
+overlap with the ground state |E0⟩is no worse than polynomially small:
+
+|⟨E0|ψ⟩|2 > 1/poly(n).
+(6.214)
+
+If that is the case, we can get a good estimate of E0 in only polynomially many trials.
+As a bonus, when we obtain the value E0 for the measured eigenvalue E0, then we have
+projected state |ψ⟩onto the ground state |E0⟩, and therefore we can compute further
+properties of |E0⟩, such as the distribution Prob(a) = ⟨E0|Πa|E0⟩, where Πa is projector
+onto eigenspace of an efficiently measurable observable.
+The catch is that the overlap of a randomly chosen n-qubit state with |E0⟩is expo-
+nentially small, so preparing |ψ⟩with a polynomially small overlap is not necessarily
+easy. One way we might attempt to construct a state with a significant overlap with the
+ground state is by appealing to the quantum adiabatic theorem. We prepare the ground
+state of a Hamiltonian Heasy whose ground state is easy to find classically. Then we
+simulate Schroedinger evolution governed by a time-dependent Hamiltonian H(t) such
+that
+
+H(0) = Heasy,
+H(T) = Hhard,
+0 ≤t ≤T,
+(6.215)
+
+where Hhard is the Hamiltonian whose ground state we wish to construct. For example,
+we might choose
+
+H(t) = (1 −t/T)Heasy + (t/T)Hhard.
+(6.216)
+
+The quantum adiabatic theorem says that if |ψ(0)⟩has a large overlap with the ground
+state of Heasy, then |ψ(T) has a large overlap with the ground state of Hhard, if T is long
+enough (i.e. the Hamiltonian H(t) changes slowly enough). But how slow is slow enough?
+Let E0(t) denote the energy of the ground state of H(t) and let E1(t) denote the energy
+of the first excited state of H(t). Define ∆= mint∈[0,T](E1(t) −E0(t)); we say ∆is the
+minimum energy gap between the ground and first excited state. Then the adiabatic
+theorem says that T > A/∆c is slow enough, where A and c are constants independent
+of the number of qubits n. Therefore, we have a complete polynomial algorithm for
+computing the ground state energy of a local Hamiltonian to polynomial accuracy in
+polynomial time provided that
+
+∆=
+1
+poly(n).
+(6.217)
+
+But if ∆becomes exponentially small in n during the evolution in which H(t) interpo-
+lates between Heasy and Hhard, then this algorithm may require exponential time.
+Unfortunately, we’ll see that it follows from weak complexity-theoretic assumptions
+that there are local Hamiltonians for which computing ground state energy is hard even
+for a quantum computer. (For example, otherwise we would be able to solve efficiently
+any problem in NP using a quantum computer, which seems unlikely.) So the minimum
+energy gap ∆must be smaller than polynomially small in such cases.
+On the other hand, it is reasonable to be hopeful that computing ground state en-
+ergy for quantum systems will be an important application of quantum computing. For
+example, as previously note, chemists say it is valuable to compute the energy of the
+
+
+42
+Quantum Algorithms
+
+electronic ground state of a molecule with atomic nuclei at fixed positions to accuracy
+≈10−6 (chemical accuracy). They also claim that it is an adequate approximation to
+express
+
+H =
+
+M
+�
+
+a=1
+Ha
+(6.218)
+
+and each Ha acts on ≤4 basis functions. Hence this Hamiltonian is local. Further-
+more, chemists assert (without proof) that it is possible to evolve adiabatically from
+the Hartree-Fock Hamiltonian (which they can solve classically) to the full configuration
+interaction (FCI) Hamiltonian (which they want to solve, but don’t know how to solve
+classically in general) while the gap satisfies ∆≥constant. If that is true, quantum
+computers are likely to be a powerful tool for studying molecular chemistry.
+
+6.9 Classical simulation of slightly entangling quantum computations
+
+How hard is it to simulate a quantum computer using a classical computer? Clearly, we
+would like to understand more deeply the classical and quantum complexity of solving
+the time-dependent and time-independent Schroedinger equations. In particular, we wish
+to identify cases for which the problem seems to be hard classically and easy quantumly,
+for these are cases where quantum computers will find a useful niche.
+More broadly, why do we believe that quantum computers are more powerful than
+classical ones, and what is the source of the quantum computer’s power? Roughly speak-
+ing, it seems to be hard to simulate a quantum system with a classical computer because
+the Hilbert space of the quantum computer is exponentially large in the number of qubits
+n, and that exponentially large Hilbert space is needed to accommodate and describe
+the quantum correlations among the qubits in a many-body quantum system. From this
+perspective, it seems legitimate to claim that quantum entanglement is the source of
+the quantum computer’s power. On the other hand, that claim may be too simplistic,
+because: 1) Some quantum computations that generate highly entangled quantum states
+are easy to simulate classically. We’ll see an example next term when we discuss (in con-
+nection with quantum error correction) quantum computation using the Clifford group.
+2) For mixed states, simulating a quantum computation classically might be hard even
+if the state remains separable (that is, unentangled) at all times during the computation
+— even if the correlations among the parts of the quantum computer are “classical”
+they could still be hard to simulate. You examined an example in a homework prob-
+lem: estimating the trace of an exponentially large unitary matrix using just “one clean
+qubit.”
+So let’s ask the question this way: for quantum computation with pure states, if the
+qubits in the computer never become highly entangled during the course of the compu-
+tation, can we simulate the quantum computer efficiently with a classical computer? As
+we’ll see, the answer is yes.
+Imagine that n qudits (d-dimensional systems) are arranged in a line, and consider
+cutting the system into two parts anywhere along the line: there are m qudits to the left
+of the cut and n−m qubits to the right of the cut. Suppose that for any way of choosing
+where we cut the chain, the entanglement between the two parts is bounded above by
+a constant (independent of the system size n). We could quantify the entanglement in
+various ways, and the conclusion would be the same, but to keep the discussion simple
+
+
+6.9 Classical simulation of slightly entangling quantum computations
+43
+
+let us use the Schmidt number. Recall that the Schmidt number is the number of terms
+in the Schmidt expansion of a bipartite pure state — equivalently it is the rank of the
+density operator for either part.
+While in principle the Schmidt number could be as large as dn/2 when the system is
+cut into two subsystems of equal size, let us assume that
+
+Schmidt number ≤D = constant.
+(6.219)
+
+We claim that under this assumption:
+
+1. There is a succinct classical description of the pure state of n qudits.
+2. A computation in which the n qudits have bounded Schmidt number at all times can
+be efficiently simulated on a classical computer.
+
+First, let’s construct the succinct description. The n-qudit state |ψ⟩can be expanded
+in the standard basis as
+
+|ψ⟩=
+�
+ci1i2..in|i1i2..in⟩
+(6.220)
+
+in terms of the dn complex numbers {ci1i2..in}. This is not succinct in general, but if the
+Schmidt rank is bounded then each ci1i2..in can be expressed as a contraction of tensors,
+where each tensor has 3 indices, and each index has a constant number of values:
+
+-figure-
+
+Here each (Pk)ik
+αk−1αk has dD2 entries (except for the sites at the ends of the chain,
+which have dD entries). Therefore, the state is described by ndD2 complex parameters,
+a number that is linear rather than exponential in n. (In the case of a product state,
+this becomes nd parameters.)
+To obtain this compressed description of the n-site state |ψ⟩we perform the Schmidt
+decomposition repeatedly (n −1 times in succession). In the first step we divide the
+system between qudits 1 and 2:
+
+|ψ⟩=
+�
+
+α1
+λ1α1|ψ1α1⟩|φ2α1⟩.
+(6.221)
+
+Here the {λ1α1} are Schmidt coefficients, the {|ψ1α1⟩} are elements of an orthonormal
+basis for the first qudit, and {|φ2α1⟩} are elements of an orthonormal basis for qudits
+2, 3, ..n. We can expand |ψ1α1⟩in the standard basis, obtaining
+
+|ψ⟩=
+�
+
+α1
+
+�
+
+i1
+λ1α1ψi1
+1α1|i1⟩|φ2α1⟩=
+�
+
+α1
+
+�
+
+i1
+(P i1
+1 )α1|i1⟩|φ2α1⟩,
+(6.222)
+
+where (P i1
+1 )α1 = λ1α1ψi1
+1α1 Now we Schmidt decompose |φ2α1⟩across the cut between
+qudits 2 and 3, finding
+
+|φ2α1⟩=
+�
+
+α2
+
+�
+
+i2
+(P i2
+2 )α1α2|i2⟩|φ3α2⟩.
+(6.223)
+
+Note that there is no α1 label on the states {|φ3α2⟩}. That is because these are the states
+occuring in the Schmidt decomposition across the 2-3 cut that describe the right side of
+
+
+44
+Quantum Algorithms
+
+the cut. These states have nothing to do with α1, which labels the states in the Schmidt
+decomposition across the 1-2 cut.
+Repeating the Schmidt decomposition n−1 times we find
+
+|ψ⟩=
+�
+
+α1..αn−1
+
+�
+
+i1,..in
+(P i1
+1 )α1(P i2
+2 )α1α2(P i3
+3 )α2α3..(P in
+n )αn−1|i1i2..in⟩.
+(6.224)
+
+This is the decomposition in terms of contracted tensors that we sought. It is called the
+matrix product state (MPS) decomposition of |ψ⟩. It exists for any |ψ⟩, but for generic
+|ψ⟩, the matrices in the middle of the chain of n qudits become exponentially large
+in n. Under the assumption of bounded Schmidt rank, however, (P1)i1 and (Pn)in are
+D-component vectors and (Pk)ik for k = 2, 3, ..n −1 are D × D matrices.
+Therefore, we have expressed |ψ⟩= �
+i1,..in P i1
+1 P i2
+2 ..P in
+n |i1i2..in⟩where the coefficient
+is a product of matrices. If we don’t want the endpoints to be special we can replace
+P i1
+1 and P in
+n by D × D matrices contracted with one another; then
+
+|ψ⟩=
+�
+
+i1,..in
+tr
+�
+P i1
+1 P i2
+2 ..P in
+n
+�
+|i1i2..in⟩
+(6.225)
+
+This description looks like the MPS locally, but with the ends of the chain now glued
+together.
+Suppose that the qudits are arranged in a one-dimensional chain, and that a circuit of
+geometrically local quantum gates acts on the state, such that each gate acts on a pair of
+neighboring qudits. We want to see that the MPS description can be efficiently updated
+as this circuit is executed. If a unitary transformation U acts on a pair of neighboring
+qudits on the chain as in
+
+-figure-
+
+this unitary affects only two neighboring matrices:
+�
+
+β
+(P i)αβ(Qj)βγ �→
+�
+
+β
+
+�
+
+i′j′
+Uij
+i′j′(P i′)αβ(Qj′)βγ ≡Mij
+αγ
+(6.226)
+
+Now we need to update the Schmidt decomposition across the P-Q cut:
+
+-figure-
+
+We regard Mij
+αγ as a dD × dD matrix, and we perform its singular value decomposition
+(SVD). Recall that for any matrix M, there are unitary matrices VL and VR such that
+M = V †
+L∆VR, where ∆is diagonal. This Schmidt decomposes the state
+�
+
+ac
+Mac|ac⟩=
+�
+
+b
+∆b|ψLb⟩⊗|ψRb⟩
+(6.227)
+
+where |ψLb⟩= �
+a |a⟩V †
+Lab and |ψRb⟩= �
+c |c⟩V †
+Rbc. Here |ac⟩is shorthand for |αi, γj⟩,
+where |α⟩labels the states in the Schmidt decomposition across the cut just to the left of
+
+
+6.9 Classical simulation of slightly entangling quantum computations
+45
+
+the two neighboring sites where U acts, and γ labels states in the Schmidt decomposition
+across the cut just to the right.
+The SVD of an N ×N matrix can be computed in time O(N3) on a classical computer.
+In the case of Mij
+αγ, for which N = dD, this is time O(d3D3). In general, the middle index
+b would be summed over N(= dD) values. But if the Schmidt rank stays bounded by D,
+the matrix ∆has at most D nonzero eigenvalues. We may identify (P ′i)αβ = (V †
+L
+√
+
+∆)i
+αβ
+and (Q′j)βγ = (
+√
+
+∆VR)j
+βγ, where β is summed over D values, completing the update of
+the MPS. The point is that when U acts on neighboring sites labeled a, a + 1, we need
+not update the Schmidt states to the left of site a or to the right of site a + 1.
+Acting on a product state, any 2-qudit state acting across a given cut can produce a
+state with Schmidt number at most d2 across that cut.
+
+-figure-
+
+This can be achieved by a SWAP gate acting on two maximally entangled pairs, one
+on each side of the cut. Likewise, acting on a state with Schmidt number D, the two-
+qudit gate can increase the Schmidt number to at most d2D . This means that, starting
+with a product state, a circuit in which no more than G gates act across any particular
+cut creates a state with Schmidt number at most D = (d2)G across that cut. (We can
+simulate a 2-qudit gate U acting across the cut by swapping the qubits until they are at
+adjacent sites on either side of the cut, applying U, and then swapping back. Only U,
+not the swaps, increases the Schmidt number, and it increases it by at most the factor
+d2.) The quantum state admits an efficient MPS classical description provided that the
+Schmidt number D is bounded above by poly(n) across every cut, and furthermore this
+description can be efficiently updated each time a quantum gate is applied. It follows
+that a quantum computation acting on n qubits can be simulated efficiently by a classical
+computer if the initial state of the quantum computer is a product state, and the number
+of gates that act across each cut (for some ordering of the qubits) is O(log n), since in
+that case we have D ≤(d2)O(log n) = nO(log d2).
+We should also note that, for an MPS, local measurements of the qudits in the chain
+are easy to simulate. First let’s impose the proper normalization condition on the state
+|ψ⟩:
+
+|ψ⟩=
+�
+
+i1,..in
+tr
+�
+P i1
+1 P i2
+2 ..P in
+n
+�
+|i1i2..in⟩
+(6.228)
+
+=⇒⟨ψ|ψ⟩=
+�
+
+i1,..in
+
+���tr
+�
+P i1
+1 P i2
+2 ..P in
+n
+����
+2
+,
+
+which is conveniently written as
+
+�
+
+i1,..in
+tr
+��
+P i1
+1 ⊗P i1∗
+1
+��
+P i2
+2 ⊗P i2∗
+2
+�
+..
+�
+P in
+n ⊗P in∗
+n
+��
+= tr(E1E2, , En),
+(6.229)
+
+where Ek = �
+ik P ik
+k ⊗P ik∗
+k
+is a D2 × D2 matrix. The expectation value of a product
+
+
+46
+Quantum Algorithms
+
+observable can be expressed as:
+
+⟨ψ|O1 ⊗O2 ⊗.. ⊗On|ψ⟩=
+(6.230)
+
+=
+�
+
+j1..jn
+
+�
+
+i1..in
+tr
+�
+P j1∗
+1
+..P jn∗
+n
+�
+⟨j1|O1|i1⟩..⟨jn|On|in⟩× tr
+�
+P i1
+1 ..P in
+n
+�
+
+= tr (E1(O1)E2(O2)..En(On))
+
+where Ek(Ok) = �
+ikjk
+
+�
+P ik
+k ⊗P jk∗
+k
+�
+⟨jk|Ok|ik⟩is also a D2×D2 matrix. We can evaluate
+the trace of a product of n constant-size matrices in time O(n). This completes the proof
+that slightly entangled quantum computations can be classically simulated in polynomial
+time.
+Finally, let’s return to the problem of finding the energy of the ground state of a local
+Hamiltonian. In many one-dimensional systems studied in physics, the ground state and
+low-lying excited states can be well approximated by an MPS with a reasonable matrix
+size. That is, there is a good approximation to e.g. the ground state with maximal
+Schmidt number across any cut
+
+D = poly(n).
+(6.231)
+
+However there are local Hamiltonians (even translation-invariant ones) for which finding
+the ground state energy seems to be hard not only for classical computers but also for
+quantum computers! In these cases, either an accurate MPS representation requires
+matrices super-polynomial in size, or, if there is a good MPS approximation with D =
+poly(n), it must be a hard computational task to find that approximation.
+
+6.10 QMA-completeness of the local Hamiltonian problem
+
+As we have discussed, we expect that quantum computers can compute the ground state
+energy of local Hamiltonians in cases where the problem is hard classically; this may be
+an important application for quantum computers. On the other hand, we believe that in
+some cases computing the ground state energy of a local Hamiltonian is still hard even
+for quantum computers. Let us try to understand more deeply the reason for this belief.
+Physicists are often interested in translation-invariant geometrically local Hamiltoni-
+ans, in which all qubits interact in the same way with their neighbors (except for the
+qubits at the boundary of the sample), because such Hamiltonians provide good models
+of some real materials. But Hamiltonians that are not translationally invariant are also
+useful in physics (for example, when modeling a material with ”disorder” due to dirt and
+other imperfections in the sample). If the Hamiltonian is not translation invariant, then
+we can formulate an instance of an n-qubit local Hamiltonian problem by specifying
+how the Hamiltonian varies from site to site in the system. Physicists sometimes refer to
+such (not translationally-invariant) systems as spin glasses. Even in the classical case,
+where the variable at each site is a bit rather than a qubit, finding the ground state
+energy of a spin glass to constant accuracy can be an NP-hard problem. Therefore, we
+don’t expect classical or quantum computers to be able to solve the problem in general
+(unless NP is contained in BQP, which seems unlikely).
+Let’s first understand why the classical spin-glass problem can be NP-hard. Then we’ll
+discuss the hardness of the quantum problem. We’ll see that in the quantum case finding
+the ground state energy of a local Hamiltonian is QMA-hard. (Recall that QMA is the
+
+
+6.10 QMA-completeness of the local Hamiltonian problem
+47
+
+quantum analogue of NP: the class of problems such that the solution can be verified
+efficiently with a quantum computer if a suitable “quantum witness” is provided.)
+For the classical case, we’ll recall the notion of a“reduction” of one computational
+problem to another (B reduces to A if a machine that solves A can be used to solve B),
+and then we’ll consider this sequence of reductions:
+
+1. Any problem in NP reduces to CIRCUIT-SAT (already discussed previously); i.e.,
+CIRCUIT-SAT is NP-complete.
+2. CIRCUIT-SAT reduces to 3-SAT (3-SAT is NP-complete).
+3. 3-SAT can be formulated as the problem of finding the ground state energy of a
+classical 3-local Hamiltonian to constant accuracy.
+4. MAX 2-SAT is also NP-hard and can be formulated as the problem of finding the
+ground state energy of a classical 2-local Hamiltonian to constant accuracy.
+5. The classical 2-local Hamiltonian problem is still hard in the case where the Hamil-
+tonian is geometrically local, in three or even in two dimensions (cases of interest for
+describing real spin glasses).
+
+(5) implies that a spin glass will not be able to relax to its ground state efficiently in any
+realistic physical process (which is part of what physicists mean by the word “glass”).
+
+6.10.1 3-SAT is NP-complete
+
+Language: Recall (as discussed earlier) that if f is a uniform family of Boolean functions
+with variable input size, f : {0, 1}∗�→{0, 1}, then the set of input strings accepted by
+f is called a language:
+
+L = {x ∈{0, 1}∗: f(x) = 1}
+(6.232)
+
+NP: We say that a language is in NP if there is a polynomial-size uniform classical circuit
+family (the verifier V (x, y)) such that:
+
+• If x ∈L, then there exists a witness y such that V (x, y) = 1 (completeness).
+• If x /∈L, then, for all y, V (x, y) = 0 (soundness).
+
+Reduction: We say that B reduces to A if there is a polynomial-size uniform classical
+circuit family R mapping x to R(x) such that B accepts x if and only if A accepts R(x).
+This means we can hook up R to a machine that solves A to construct a machine that
+solves B.
+An important problem in NP is CIRCUIT-SAT. The input to the problem is a Boolean
+circuit C (with an n-bit input and G = poly(n) gates), and we are to evaluate the
+Boolean function f(C), where f(C) = 1 if there is an input x such that C(x) = 1,
+f(C) = 0 otherwise. CIRCUIT-SAT is in NP because we can simulate the circuit C.
+Given as a witness the value of x that C accepts, we can verify efficiently that C(x) = 1.
+Furthermore, CIRCUIT-SAT is NP-complete (any problem in NP reduces to CIRCUIT-
+SAT), as we discussed previously. If V (x, .) is the verifier for an NP problem with a fixed
+instance x, we may think of V (x, .) as a circuit whose input is the witness y. Solving the
+CIRCUIT-SAT problem for this Boolean circuit tells us whether there exists a witness
+that the verifier accepts, and therefore solves the NP problem.
+Now we come to a further reduction that we did not discuss previously: CIRCUIT-SAT
+reduces to 3-SAT, and therefore 3-SAT, too, is an NP-complete problem (the Cook-Levin
+theorem). For the SAT problem, the input is a “Boolean formula” with n variables, where
+
+
+48
+Quantum Algorithms
+
+each variable is a bit. The formula is a conjunction of clauses, and the formula is true if
+and only if every clause is true. In the k-SAT problem, each clause depends on at most
+k of the variables, where k is a constant. (In some formulations of k-SAT, each clause is
+required to be a disjunction of k literals (variables or their negations), but that is not
+an important requirement, since any formula, and in particular any k-bit formula, can
+be expressed in conjunctive normal form.). If f is a Boolean formula, the SAT function
+is:
+
+SAT(f) = 1 if there exists x such that f(x) = 1,
+(6.233)
+
+SAT(f) = 0 otherwise.
+
+Now we’ll show that CIRCUIT-SAT reduces to 3-SAT. For a given circuit C (the input
+to CIRCUIT-SAT), how do we construct the corresponding Boolean formula R(C) (the
+input to 3-SAT)?
+Suppose that the gates in the circuit C are chosen from the universal set (AND, OR,
+NOT), or any other gate set such that each gate has at most two input bits and one
+output bit. We introduce a variable for the output of each gate, and we include in the
+formula R(C) a clause corresponding to each gate.
+Here the three-variable clause Cg(x, y, z) is true iff z is a valid output of the gate g when
+the inputs are (x, y). The circuit may also have inputs that are constants rather than
+variables. Then, e.g. a gate with two input bits, one of which is a constant, becomes a two-
+variable clause, determined by the gate and the value of the constant. Or equivalently,
+we can regard input of a constant as a gate with a one-bit output; the corresponding
+one-bit clause is true if x has the right value. The circuit also has an answer bit, which
+becomes a 1-bit clause Cg(x) which is true iff x = 1 (that is, if and only if the answer is
+YES).
+The formula R(C) has as variables the input x to the circuit C, and also additional
+variables corresponding to the outputs of all gates in the circuit C. R(C) has been
+constructed so that an assignment that satisfies every clause in C corresponds to a
+valid history of the computation of the circuit C acting on input x, where the input is
+accepted. If there is an input x that is accepted by the circuit C, then there will be a
+satisfying assignment for the 3-SAT formula R(C), and conversely if there is no input
+that C accepts, then there will be no satisfying assignment for R(C). Thus we have
+obtained the desired reduction of CIRCUIT-SAT to 3-SAT.
+The key idea we have exploited to reduce CIRCUIT-SAT to 3-SAT is that the witness
+for 3-SAT is a valid history of the whole computation C that accepts the input x. We can
+check the history efficiently because the circuit C has polynomial size and it is easy to
+check each of the poly(n) gates in the execution of the circuit. Later on, we will extend
+this idea — that a valid history of the computation is an efficiently checkable witness
+— to the quantum setting.
+Notice that we may think of the clauses in the formula f as the terms in a 3-local
+classical Hamiltonian
+
+H(x) =
+�
+
+c
+Hc(xc1, xc2, xc3);
+(6.234)
+
+here the sum is over the clauses in the formula, where
+
+Hc(xc1, xc2, xc3) =
+
+�
+0
+if clause c is true for assignment xc1, xc2, xc3,
+
+1
+otherwise
+(6.235)
+
+
+6.10 QMA-completeness of the local Hamiltonian problem
+49
+
+Then minx H(x) = 0 if there is an assignment that satisfies every clause, while
+minx H(x) ≥1 if there is no satisfying assignment (the number of violated clauses
+is ≥1 for any assignment). We conclude that finding the minimum value of a 3-local
+classical Hamiltonian is NP-hard: if we could do it we could solve 3-SAT. and hence any
+problem in NP. This conclusion implies, as asserted earlier, that finding the ground state
+energy of a 3-local classical Hamiltonian to constant accuracy must be hard in general
+for quantum computers, too, unless NP ⊆BQP.
+
+6.10.2 Frustrated spin glasses
+
+In fact, finding the ground state energy to constant accuracy is NP-hard even for a
+2-local classical Hamiltonian
+
+H(x) =
+�
+
+c
+Hc(xc1, xc2).
+(6.236)
+
+Although 2-SAT (deciding whether a 2-SAT formula can be satisfied) is easy (there is a
+poly-time algorithm), MAX-2SAT is an NP-hard problem. MAX-2SAT is the problem of
+finding the minimum number of violated clauses for any assignment, which is equivalent
+to minimizing the Hamiltonian function H.
+Furthermore, we can make the 2-local Hamiltonian geometrically local without losing
+hardness. An example is the Ising spin-glass model in three dimensions. Suppose the
+binary variables are spins sitting at the sites of a cubic lattice, taking values Zi ∈{±1}
+at site i in the lattice. Consider the Hamiltonian
+
+H = −
+�
+
+⟨ij⟩
+JijZiZj
+(6.237)
+
+Here ⟨ij⟩labels the edge in the lattice that connects two nearest-neighbor sites with
+labels i and j.
+Jij ∈{±1} encodes the instance of the problem. If Jij = +1, then we say the edge
+⟨ij⟩is ferromagnetic; it is energetically favorable for the neighboring spins to align
+(both +1 or both −1). If Jij = −1, then we say the edge ⟨ij⟩is anti-ferromagnetic; it is
+energetically favorable for the neighboring spins to anti-align (either +1 and −1 or −1
+and +1). If all edges were ferromagnetic, it would be easy to minimize the energy — all
+spins would align. But anti-ferromagnetic edges can generate frustration. This means it
+is not possible to minimize −JijZiZj for all edges simultaneously.
+For purposes of visualization, it is convenient to represent spins by lattice cells– i.e.
+by squares on the 2D square lattices or by cubes in the 3D cubic lattice. There is a
+−JijZiZj term coupling neighboring spins associated with each edge where two squares
+meet in 2D on each face where two cubes meet in 3D.
+Consider a site in 2D where 4 edges meet. If one of these edges is antiferromagnetic and
+the other three are ferromagnetic, then there must be an odd number of excited edges
+meeting at this site. More generally, if the number of antiferromagnetic edges is odd, then
+there must be an odd number of excited edges and if the number of antiferromagnetic
+edges is even, then there must be an even number of excited edges. If the number of
+J = −1 edges meeting at a site is odd, we say that there is an Ising vortex at that site.
+For any spin configuration, there are domain walls of excited edges, where the walls end
+on Ising vortices.
+Minimizing the energy, then, is equivalent in 2D to finding the minimum “chain” of
+
+
+50
+Quantum Algorithms
+
+excited edges with boundary points at the positions of the Ising vortices. There is a poly-
+time classical algorithm that finds the minimal chain. In 3D, there is an Ising vortex
+on an edge if there are an odd number of J = −1 faces that meed at that edge. These
+vortices form closed loops, and each spin configuration has a domain wall of excited faces
+bounded by the vortex loops. To minimize the energy, then, we find the minimum area
+surface with a specified 1D boundary; this problem is NP-hard. Finding the minimum
+energy configuration is hard because there are many ways for the domain walls to be
+“pinned” — stuck at local minima in the energy, such that many spins need to flip at
+once to find a lower energy configuration. Local searching for the global energy minimum
+fails.
+In fact, there are also NP-hard spin glass problems in 2D, if we introduce local mag-
+netic field terms in H as well as antiferromagnetic terms. For example, on a square
+lattice consider
+
+H = −
+�
+
+⟨ij⟩
+JijZiZj −
+�
+
+i
+hiZi
+(6.238)
+
+where Jij ∈{1, 0, −1} and hi ∈{1, 0, −1}. The local magnetic field {hi} compounds
+the frustration: Each spin wants to align with the local field, but by doing so the edge
+connecting the spins might become excited.
+So we see that minimizing the energy of a geometrially 2-local classical Hamiltonian
+can be NP-hard because of frustration — there is no way to satisfy all the clauses and
+there are many local minima of the energy that are not global minima. In the quantum
+local Hamiltonian problem, we have H = �
+a Ha where the {Ha} might not be mutually
+commuting; hence we might expect the problem to be even harder— that the Ha’s
+cannot be simultaneously diagonalized compounds the frustration even further. Indeed
+the ground state could be highly entangled, with no succinct classical description. Let’s
+try to characterize the hardness of the quantum problem.
+
+6.10.3 The quantum k-local Hamiltonian problem
+
+Let H = �
+a Ha be an n-qubit Hamiltonian that is k-local — each Ha acts nontrivially
+on at most k qubits, where k is a constant, and ||Ha|| ≤h = constant. The 2k × 2k
+
+matrix Ha is specified to poly(n) bits of precision.
+We are promised that the ground state energy E0 , the lowest eigenvalue of H, satisfies
+either
+
+1. E0 ≤Elow, or
+2. E0 > Ehigh,
+
+where Ehigh −Elow >
+1
+poly(n).
+We are to output:
+
+f(H) =
+
+�
+1
+if E0 ≤Elow,
+
+0
+if E0 > Ehigh.
+(6.239)
+
+Note that in the formulation of the problem, there is a promise gap so that we can
+answer the YES/NO question by determining E0 to 1/poly(n) accuracy.
+We already know that this problem is NP-hard, even in the special case where H is
+classical (all Ha commute). Also recall there is a class analogous to NP for randomized
+computation (MA) and quantum computation (QMA): A language L is in QMA if there
+
+
+6.10 QMA-completeness of the local Hamiltonian problem
+51
+
+exists a poly-size uniform quantum circuit family (the verifier V ) and a single-qubit
+measurement {Π0, Π1} such that:
+1. If x ∈L there is a witness |ψx⟩such that:
+
+⟨Ψ|Π1|Ψ⟩≥2/3
+where
+|Ψ⟩= V (|ψx⟩⊗|x⟩⊗|0⟩∗).
+(6.240)
+
+2. If x /∈L, then ⟨Ψ|Π1|Ψ⟩≤1/3 for all |ψx⟩.
+We claim: the k-local Hamiltonian problem is QMA-complete for k ≥5 (famously
+proved by Kitaev: see Chap. 14 of KSV). The result can be improved to geometrically
+2-local H in 2D (for qubits) or geometrically 2-local H in 1D (for higher dimensional
+qudits, with the local dimension d sufficiently large).
+To verify this claim, we need to show:
+
+1. the k-local Hamiltonian problem is in QMA.
+2. Any problem in QMA is reducible to the k-local Hamiltonian problem. We’ll show
+this for k = 5 and without geometrical constraints, as in Kitaev’s original discovery.
+
+We have already shown part (1). We have seen that if the ground state |ψ0⟩is provided as
+a witness, then we can compute E0 to 1/poly(n) accuracy using a circuit of size poly(n)
+that performs the phase estimation algorithm. But how to achieve the reduction (2)?
+For the reduction, we’ll follow the strategy used to show that 3-SAT is NP-complete:
+For any problem in QMA, we’ll construct a witness that encodes the whole history of
+the computation performed by the verifier, and a Hamiltonian H such that computing
+the ground state energy of H amounts to checking that each step in the computation is
+valid.
+For a given problem in QMA, suppose that the verifier circuit VT has T gates:
+U1, U2, . . . UT chosen from a universal set, where each Ut acts on at most two qubits. For
+the corresponding k-local Hamiltonian problem, we’ll suppose that Merlin provides the
+history state encoding the computation performed by the verifier:
+
+|η⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+|ψ(t)⟩⊗|t⟩,
+(6.241)
+
+where |ψ(t)⟩= (UtUt−1 . . . U1)|ψinitial⟩; here |ψinitial⟩= |x⟩⊗|0⟩∗⊗|ψx⟩, where |x⟩
+specifies the instance of the QMA problem, |0⟩∗is the initial state of scratch space used
+by the verifier, |ψx⟩is the quantum witness testifying that x should be accepted, and
+|ψ(t)⟩is state of the quantum computer obtained after the first t steps of the verifier
+circuit have been executed. The state |t⟩is the state of a clock register that records the
+time t ∈{0, 1, · · · , T}; since ⟨t|s⟩= δts, the T + 1 states appearing in superposition in
+state |η⟩are mutually orthogonal, so |η⟩is properly normalized: ⟨η|η⟩= 1.
+
+6.10.4 Constructing and analyzing the Hamiltonian
+
+Now we want to choose our Hamiltonian H so that it locally “checks” the history encoded
+in |η⟩; that is, H will impose an energetic penalty if a step in the circuit is invalid, or if
+the input is not accepted.
+We will choose H to be of the form
+
+H = Hin + Hout + Hprop + Hclock.
+(6.242)
+
+The purpose of Hin is to enforce that the verifier circuit’s input qubits (other than the
+
+
+52
+Quantum Algorithms
+
+witness itself) are set to the right initial values. E.g. for each scratch qubit labeled j
+that should be in the state |0⟩at time t = 0, we include in Hin the term
+
+H(j)
+in = (|1⟩⟨1|)(j) ⊗I(else) ⊗(|0⟩⟨0|)(clock).
+(6.243)
+
+There is an energy penality of 1 if the scratch qubit is set to |1⟩rather than |0⟩as the
+execution of the verifier circuit begins (time t = 0). Similar terms in Hin enforce that the
+input register is set to the desired value x. The purpose of Hout is to impose a penalty
+if the verifier circuit for the QMA problem fails to accept:
+
+Hout = (|0⟩⟨0|)(output) ⊗I(else) ⊗(|T⟩⟨T|)(clock).
+(6.244)
+
+There is an energy cost of 1 if the output qubit has the value |0⟩rather than |1⟩after
+the verifier circuit is fully executed (time t = T). The purpose of Hclock is to impose a
+penalty if the clock register is not properly encoded (we’ll return to this issue later).
+The purpose of the Hprop is to impose a penalty if the state |ψ(t)⟩does not have the
+form Ut|ψ(t −1)⟩; i.e., was not obtained by faithfully executing step t of the verifier
+circuit. Hence we write:
+
+Hprop =
+
+T
+�
+
+t=1
+Hprop(t),
+(6.245)
+
+where
+
+Hprop(t) = 1
+
+2
+
+�
+I ⊗|t⟩⟨t| + I ⊗|t −1⟩⟨t −1| −Ut ⊗|t⟩⟨t −1| −U†
+t ⊗|t −1⟩⟨t|
+�
+.
+
+(6.246)
+
+The action of Hprop(t) on the relevant part of the valid history state |η⟩is
+
+|ψ(t −1)⟩⊗|t −1⟩�→1
+
+2 (|ψ(t −1)⟩⊗|t −1⟩−Ut|ψ(t −1)⟩⊗|t⟩+ . . . ) ,
+
+|ψ(t)⟩⊗|t⟩�→1
+
+2
+
+�
+|ψ(t)⟩⊗|t⟩−U†
+t |ψ(t)⟩⊗|t −1⟩+ . . .
+�
+.
+(6.247)
+
+Acting on |η⟩, the terms I⊗|t⟩⟨t| and −Ut⊗|t⟩⟨t−1| in Hprop give canceling contributions.
+Hence
+
+Hprop|η⟩= 0
+if |η⟩is a valid history state.
+(6.248)
+
+Therefore, a valid history state (where the state at time t is obtained from the state at
+time t −1 by applying the proper gate), such that the initial state is also valid, is a null
+vector of both Hprop and Hin. Furthermore, if the quantum verifier accepts the input
+with probability 1 −ϵ, then
+
+E0 ≤⟨η|Hout|η⟩=
+ϵ
+T + 1.
+(6.249)
+
+(If the history is valid, the only term in the Hamiltonian that makes a nonzero contri-
+bution to ⟨H⟩is the term that penalizes an incorrect final readout.) Note also that it
+is possible to amplify the success probability by repeating the verification of multiple
+copies of the witness. Actually, the amplification is a little bit subtle: Merlin might try
+to fool Arthur: Instead of sending a product state |ψx⟩⊗m (m copies of the witness) he
+might send an entangled state instead. But the amplification still works even in that
+case. Each copy sent by Merlin may be a mixed state (obtained from the partial trace
+over the other copies), a mixture of a state the verifier accepts with probability ≥2/3
+
+
+6.10 QMA-completeness of the local Hamiltonian problem
+53
+
+and of another state that it might reject. But Merlin cannot fool Arthur into accepting
+after many trials unless there is some state occuring in the ensemble of pure states that
+is accepted with high probability in each trial.
+So now we have seen that for a problem in QMA such that the verifier accepts with
+high probability, the corresponding Hamiltonian H has an eigenvector with eigenvalue
+close to zero. There are two things left to show:
+
+• If the verifier rejects with high probability, then
+
+E0 ≥1/poly(n)
+(6.250)
+
+(then we can choose the promise gap of size 1/poly(n), such that E0 ≤Elow for a
+YES answer and E0 > Ehigh for a NO answer)
+• So far Hprop is not local! It acts on the clock register, which is a (T + 1)-dimensional
+system, and T = poly(n). We need to show we can encode the clock using qubits such
+that Hprop + Hclock is k-local.
+
+We’ll come back to the issue of encoding the clock later. First let’s try to understand
+better the spectrum of H = Hin + Hout + Hprop.
+
+Diagonalizing Hprop
+Let’s start by considering Hprop. We’ve seen that a valid history state is a null vector of
+Hprop (has eigenvalue zero). What are the other eigenspaces and eigenvalues of Hprop?
+It’s easier to compute the spectrum of Hprop by transforming to a rotating frame basis
+that freezes the motion of the state |ψ(t)⟩. That is, let
+
+Vt = UtUt−1 . . . U1
+(6.251)
+
+(the unitary applied after the first t steps of the circuit). And consider V = �T
+t=0 Vt ⊗
+|t⟩⟨t|. The the history state η =
+1
+√T+1
+�T
+t=0 Vt|ψ(0)⟩⊗|t⟩⟨t| is mapped by V † to the
+“history” state for the case where |ψ(t)⟩does not depend on t at all:
+
+V †|η⟩
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+V †
+t Vt|ψ(0)⟩⊗|t⟩⟨t| = |ψ(0)⟩⊗
+
+T
+�
+
+t=0
+|t⟩⟨t|.
+(6.252)
+
+Under this basis change, the Hamiltonian transforms as
+
+H′
+prop = V †HpropV =
+
+T
+�
+
+t=0
+
+1
+2 (I ⊗|t⟩⟨t| + I ⊗|t −1⟩⟨t|)
+(6.253)
+
+−
+
+T
+�
+
+t=0
+
+1
+2
+
+�
+V †
+t Vt−1 ⊗|t⟩⟨t −1| + V †
+t−1Vt−1 ⊗|t −1⟩⟨t|
+�
+
+=
+
+T
+�
+
+t=0
+
+1
+2 (|t⟩⟨t| + |t −1⟩⟨t −1| −|t⟩⟨t −1| −|t −1⟩⟨t|) .
+
+This transformed Hamiltonian H′
+prop acts nontrivially only on the clock register. It is a
+sum of overlapping 2 × 2 blocks:
+
+H′
+prop =
+
+T
+�
+
+t=1
+
+�
+1
+2
+−1
+
+2
+−1
+
+2
+1
+2
+
+�
+
+t−1,t
+,
+(6.254)
+
+where the subscript means the matrix acts on the space spanned by {|t−1⟩, |t⟩}. Because
+
+
+54
+Quantum Algorithms
+
+of the overlaps, H′
+prop is actually
+�
+1
+−1
+
+2
+−1
+
+2
+1
+
+�
+in each block, except in the spaces
+
+spanned by {|0⟩, |1⟩} and {|T −1⟩, |T⟩}, where it is
+�
+1
+2
+−1
+
+2
+−1
+
+2
+1
+
+�
+
+0,1
+and
+�
+1
+−1
+
+2
+−1
+
+2
+1
+2
+
+�
+
+T−1,T
+.
+(6.255)
+
+That is, H′
+prop acts on the clock as a (T + 1) × (T + 1) matrix
+
+H′
+prop =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+2
+−1
+
+2
+0
+· · ·
+−1
+
+2
+1
+−1
+
+2
+0
+· · ·
+0
+−1
+
+2
+1
+−1
+
+2
+0
+· · ·
+...
+...
+· · ·
+0
+−1
+
+2
+1
+−1
+
+2
+· · ·
+0
+−1
+
+2
+1
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;
+(6.256)
+
+its entries are (−1
+
+2, −1
+
+2, .., −1
+
+2) just above and below the diagonal, (1
+
+2, 1, 1, .., 1, 1
+
+2) on the
+diagonal, and 0 elsewhere.
+We may express it as H′
+prop = I −1
+
+2M, where
+
+M =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+1
+0
+· · ·
+1
+0
+1
+0
+· · ·
+0
+1
+0
+1
+0
+· · ·
+...
+...
+· · ·
+0
+1
+0
+1
+· · ·
+0
+1
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+(6.257)
+
+That is,
+
+M : |t⟩�→|t + 1⟩+ |t −1⟩,
+t ∈{1, 2, .., T −1},
+
+M : |0⟩�→|0⟩+ |1⟩,
+
+M : |T⟩�→|T −1⟩+ |T⟩.
+(6.258)
+
+Diagonalizing M also diagonalizes H′
+prop.
+We can diagonalize M by Fourier transforming. The eigenvectors have the form
+
+|ω⟩=
+
+T
+�
+
+t=0
+eiωt|t⟩.
+(6.259)
+
+In the expansion of M|ω⟩, the coefficient of |t⟩for t ∈{1, 2, .., T −1} is
+
+eiω(t−1) + eiω(t+1) = (eiω + e−iω)eiωt
+(6.260)
+
+= (2 cos ω)eiωt.
+(6.261)
+
+Thus the action on |t⟩is multiplication by 2 cos ω, which does not depend on the sign
+of w. To construct an eigenstate of M, then, we may consider a linear combination of
+|ω⟩and |−ω⟩, where the value of |ω⟩is chosen so that M acts properly on the states at
+the boundary — i.e. on |t = 0⟩and |t = T⟩.
+
+
+6.10 QMA-completeness of the local Hamiltonian problem
+55
+
+The coefficient of |0⟩in M|ω⟩is 1 + eiw; therefore, the coefficient of |0⟩in
+M
+�
+eiω/2|w⟩+ e−iω/2|−ω⟩
+�
+is
+
+eiω/2(1 + eiω) + e−iω/2(1 + e−iω) = (eiω + e−iω)(eiω/2 + e−iω/2)
+
+= 2 cos ω(eiω/2 + e−iω/2).
+(6.262)
+
+If follows that the “boundary condition” at t = 0 is consistent, for any value of ω, with
+an eigenvalue of 2 cos ω for the vectors eiω/2|ω⟩+ e−iω/2|−ω⟩.
+But we must also consider the other boundary, at t = T. The coefficient of |T⟩
+in eiω/2|ω⟩+ e−iω/2|−ω⟩is eiω/2eiωT + e−iω/2e−iωT , while the coefficient of |T⟩in
+M
+�
+eiω/2|ω⟩+ e−iw/2|−ω⟩
+�
+is
+
+(1 + e−iω)eiω/2eiωT + (1 + eiω)e−iω/2e−iωT .
+(6.263)
+
+We are to choose ω so that
+
+(1 + e−iw)eiw/2eiwT + (1 + eiw)e−iw/2e−iwT = (eiw + e−iw)(eiw/2eiwT + e−iw/2e−iwT ).
+
+(6.264)
+
+After some cancellations, this condition becomes
+
+eiw/2eiwT + e−iw/2e−iwT = e3iw/2eiwT + e−3iw/2e−iwT
+(6.265)
+
+=⇒cos
+�
+ω
+�
+T + 1
+
+2
+
+��
+= cos
+�
+ω
+�
+T + 3
+
+2
+
+��
+.
+(6.266)
+
+This condition is satisfied provided that
+
+w(T + 1) = πk
+where
+k = integer.
+(6.267)
+
+We have therefore established that {2 cos ωk} are T + 1 distinct eigenvalues of M where
+ωk =
+π
+T+1k for k ∈{0, 1, 2, .., T}, and that the corresponding eigenvectors (up to nor-
+malization) are
+
+|ψk⟩=
+
+T
+�
+
+t=0
+cos
+�
+ωk
+
+�
+t + 1
+
+2
+
+��
+|t⟩;
+(6.268)
+
+hence the eigenvalues of H′
+prop are Ek = 1 −cos ωk = 2 sin2 ωk. These T + 1 eigenstates
+are a complete basis, and the two smallest eigenvalues are:
+
+E0 = 0,
+(6.269)
+
+E1 = 2 sin2
+�
+π
+2(T + 1)
+
+�
+≈
+π2
+
+2(T + 1)2 .
+(6.270)
+
+If T = poly(n), then, the eigenvalue gap for Hprop is E1 −E0 ≥
+1
+poly(n).
+
+Lower bound on the energy when the witness is rejected
+
+But we want to consider the spectrum for the full Hamiltonian H = Hin + Hout + Hprop
+(ignoring Hclock for now). For Hin + Hout, the null space is spanned by all vectors that
+have a valid input at t = 0 and answer YES (are accepted) at t = T:
+
+(Hin + Hout) |valid input, accepted output⟩= 0,
+(6.271)
+
+while ⟨Hin + Hout⟩≥1 for all vectors orthogonal to this null space. Thus Hin + Hout has
+eigenvalue gap = 1. Now, if the verifier accepts the input with the probability one, then
+
+
+56
+Quantum Algorithms
+
+there is a simultaneous null eigenvector of Hprop and of Hin+Hout. That is, there is a valid
+history with a valid input where the output is accepted. But if the acceptance probability
+is small, that means the angle between these two null spaces cannot be too small, since
+there is no vector that comes close to lying within both null spaces. We can relate this
+angle to the ground state energy of the full Hamiltonian H = Hin + Hout + Hprop.
+In general, suppose that H1 and H2 are two Hermitian operators, each with lowest
+eigenvalue zero, and eigenvalue gap at least ∆. Then
+
+H1 ≥∆(I −Π1)
+where Π1 is projection onto null space of H1
+(6.272)
+
+H2 ≥∆(I −Π2)
+where Π2 is projection onto null space of H2
+(6.273)
+
+Thus H1 + H2 ≥∆(2I −Π1 −Π2) and ⟨H1 + H2⟩≥2∆−∆⟨Π1 + Π2⟩. Now suppose
+|ψ1⟩and |ψ2⟩are two vectors such that |⟨ψ1|ψ2⟩| = cos θ for 0 ≤θ ≤π/2. With suitable
+phase conventions we may choose a basis in the two-dimensional space spanned by |ψ1⟩
+and |ψ2⟩such that
+
+|ψ1⟩=
+�cos θ/2
+sin θ/2
+
+�
+|ψ2⟩=
+�
+cos θ/2
+−sin θ/2
+
+�
+=⇒
+(6.274)
+
+|ψ1⟩⟨ψ1| + |ψ2⟩⟨ψ2| =
+�2 cos2 θ/2
+0
+0
+2 sin2 θ/2
+
+�
+,
+(6.275)
+
+and therefore, in any state
+
+⟨|ψ1⟩⟨ψ1| + |ψ2⟩⟨ψ2|⟩≤2 cos2 θ/2 = 1 + cos θ.
+(6.276)
+
+If follows that, if Π1 and Π2 are projectors, where the maximum overlap between spaces
+projected by Π1 and Π2 is |⟨ψ1|ψ2⟩| = cos θ, then ⟨Π1 + Π2⟩≤1 + cos θ. Thus
+
+⟨H1 + H2⟩≥2∆−∆⟨Π1 + Π2⟩
+(6.277)
+
+≥∆(1 −cos θ) = 2∆sin2 θ/2.
+(6.278)
+
+Having related the expectation value of a sum of nonnegative Hermitian operators to
+the angle between their null spaces, we now need to estimate the angle between null
+spaces of H1 = Hin + Hout and H2 = Hprop. That is, we want to find
+
+cos2 θ = max |⟨η1|η2⟩|2
+(6.279)
+
+= max⟨η2|Π1|η2⟩
+(6.280)
+
+where we maximize over η1 in the null space of H1 and η2 in the null space H2, and Π1
+is the projector onto the null space of H1.
+A vector in the null space of H2
+=
+Hprop is a valid history state |η2⟩
+=
+1
+√T+1
+�T
+t=0 |ψ(t)⟩⊗|t⟩. The projector onto null space of H1 acts trivially on states
+with t ∈{1, 2, .., T −1} so after transforming to the rotating frame
+
+⟨η′
+2|Π1|η′
+2⟩= T −1
+
+T + 1 +
+1
+T + 1⟨˜η2|Πin + Π′
+out|˜η2⟩,
+(6.281)
+
+where ˜η2 is a state of the non-clock variables, Πin projects onto a valid input state, and
+Π′
+out projects onto
+
+V †
+T (|1⟩out ⊗(anything else))
+(6.282)
+
+(because we have transformed to the rotating frame, and the history state is valid). We
+know that ⟨˜η2|Πin + Π′
+out|˜η2⟩≤(1 + cos φ) where φ is the angle between the spaces that
+
+
+6.10 QMA-completeness of the local Hamiltonian problem
+57
+
+Πin and Πout project onto, as we showed above. This angle φ is given by cos2 φ = ϵ where
+ϵ is the max. acceptance probability — that is, if the input is valid (in the support of
+Πin) and the history is valid, then the probability of |1⟩out is at most ϵ.
+Via eq.(6.281), this upper bound ⟨˜η2|Πin +Π′
+out|˜η2⟩≤1+√ϵ provides an upper bound
+on the expectation value of Π1 in a valid history state, and hence an lower bound on
+the angle θ between the H1 and H2 null eigenspaces:
+
+cos2 θ ≤T −1
+
+T + 1 +
+1
+T + 1(1 + √ϵ) = 1 −1 −√ϵ
+
+T + 1 ,
+(6.283)
+
+where ϵ is the maximum acceptance probability. Now, ∆= 2 sin2 �
+π
+2(T+1)
+�
+is a lower
+
+bound for the gap of H1 or H2 and ⟨H1 + H2⟩≥2∆sin2 θ
+
+2, where sin2 θ = 1 −cos2 θ ≥
+1−√ϵ
+
+T+1 . Using sin2 θ
+
+2 =
+sin2 θ
+4 cos2 θ
+
+2 ≥1
+
+4 sin2 θ, we have
+
+E0 ≥4 sin2
+�
+π
+2(T + 1)
+
+�
+× 1
+
+4
+
+�1 −√ϵ
+
+T + 1
+
+�
+≥sin2
+�
+π
+2(T + 1)
+
+�
+×
+�1 −√ϵ
+
+T + 1
+
+�
+
+≥constant × 1 −√ϵ
+
+(T + 1)3 = 1 −√ϵ
+
+poly(n).
+(6.284)
+
+To summarize, we have shown that if the acceptance probability is ≥1−ϵ, then E0 ≤
+ϵ
+T+1
+and if acceptance probability is ≤ϵ, then E0 ≥constant×(1−√ϵ)
+1
+(T+1)3 . With suitable
+amplification to make ϵ small (compared to 1/(T + 1)3) in the case where the answer
+is YES, we have reduced the QMA problem to an instance of the local Hamiltonian
+problem.
+
+Encoding the clock
+
+Except . . . we still need to see that the Hamiltonian can be made local. We’d like to
+encode the clock register using qubits. One way is to use a unary encoding with T
+qubits labeled by i = {1, 2, 3, . . . , T}, where
+
+|t = 0⟩= |000..0⟩
+
+|t = 1⟩= |100..0⟩
+
+|t = 2⟩= |110..0⟩
+
+etc.
+(6.285)
+
+We can add a term to the Hamiltonian that imposes an energy penalty on the clock if
+its state is not validly encoded. The encoding is valid if a 0 is never followed by a 1.
+Therefore we choose
+
+Hclock =
+
+T−1
+�
+
+i=1
+(|01⟩⟨01)i,i+1 ,
+(6.286)
+
+so that the only null vectors of Hclock are valid clock states.
+The term Hprop in the Hamiltonian contains operators |t⟩⟨t|, |t⟩⟨t−1|, |t−1⟩⟨t| acting
+on the clock register. If only validly encoded clock states are allowed, we can project
+onto the state |t⟩by acting on just two neighboring qubits:
+
+|t⟩⟨t| = (|10⟩⟨10|)t,t+1
+(6.287)
+
+for t = 1, 2, 3, . . . , T −1, and acting on only a single qubit suffices for t = 0 or t = T.
+
+
+58
+Quantum Algorithms
+
+The operators that advance or retard the time act on three adjacent qubits:
+
+|t⟩⟨t −1| = (|110⟩⟨100|)t−1,t,t+1,
+
+|t −1⟩⟨t| = (|100⟩⟨110|)t−1,t,t+1
+(6.288)
+
+(for 1 ≤t ≤T −1). Acting on three qubits suffices to locate the position of the “domain
+wall” between the 0’s and 1’s in the bit string, and to move the wall one position to the
+left or to the right; for t = 0 action on just two qubits suffices to move the wall one step
+to the right, and for t = T action on two qubits suffices to move the wall one step to the
+left. Since these clock terms act on at most three qubits, the term Ut ⊗|t⟩⟨t −1| acts on
+at most 5 qubits, if Ut is a 2-qubit gate. Thus with this clock encoding, the Hamiltonian
+
+H = Hin + Hout + Hprop + Hclock
+(6.289)
+
+is 5-local. Because the clock Hamiltonian annihilates validly encoded clock states, it
+trivially commutes with the rest of the terms in the Hamiltonian H, and has an energy
+gap of 1. Therefore, our previous analysis of the ground state energy of H still stands.
+This completes the demonstration that any QMA problem is reducible to the prob-
+lem of estimating the ground state energy (with a 1/poly(n) promise gap) of a 5-local
+Hamiltonian.
+
+Comments
+
+Thus we have shown that the 5-local Hamiltonian problem is a “natural” QMA-complete
+problem, much as 3-SAT is a natural NP-complete problem. But while in the classical
+case many practical problems have been shown to be NP-complete, the family of prob-
+lems that have been shown to be QMA-complete is still rather small, and the problems
+seem relatively “artificial.” In any case, its interesting to see that quantum local Hamil-
+tonian problems seem to be harder than classical ones (if QMA ̸= NP).
+I won’t discuss the tricks for reducing the QMA-complete problem to k = 2 (which
+involves clever use of perturbation theory) or for making H geometrically local (which
+involves encoding the clock more cleverly, among other things).
+Another interesting direction to pursue using these ideas is to show that any problem
+in BQP can be solved using adiabatic quantum computing. The idea is to replace
+
+Hprop →Hprop(s) = (1 −s)Hclock−init + sHprop
+(6.290)
+
+where the null space of Hclock−init fixes the clock at |t = 0⟩and s varies in [0, 1]. Then
+the ground state of H(s = 0) is easy to construct, and the ground state of H(s = 1) is
+the valid history state. The eigenvalue gap of H(s) stays > 1/poly(n) for s ∈[0, 1], so
+the history state can be prepared in polynomial time by adiabatically varying s. Once
+we have prepared the history state, we can measure the clock, projecting out |t = T⟩
+with probability 1/(T + 1) = 1/poly(n). And once we have |ψ(T)⟩we can measure the
+output qubit to find out if the circuit accepts. At a modest additional cost, we can can
+substantially improve the probability of preparing |ψ(T)⟩, by adding a long “runway”
+after time t = T, so that the state of the computer remains fixed for S additional time
+steps; then measuring the clock prepares |ψ(T)⟩with probability (S + 1)/(S + T + 1).
+
+

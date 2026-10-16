@@ -1,0 +1,56 @@
+“hope” not always comes true. During the computation faults can “spread” to places not in the fault
+path. This spread can happen if a gate operates on a damaged qubit and some “correct” qubits- in
+general, this can cause all the qubits that participate in the gate to be damaged. If for example, a gate
+procedure consists of one gate operating on the whole block, than one fault is already unrecoverable.
+The procedures should be designed in such a way that a fault can not effect all the qubits in the block.
+In general, a fault at time t in qubit q can effect qubit q′ at time t′ > t if there is a path in the circuit
+connecting the points (q, t) and (q′, t′). Since we want to be able to correct after each computation
+stage, We can define the “spread” of a procedure as the maximal number of qubits in each block in
+the output of the procedure, which are effected by a fault that happened in this procedure. If we
+use only procedures with small spread, then if not too many errors happened during the computation
+stage in each procedure, the error corrections will still be able to correct the damage using the other
+undamaged qubits. We are actually looking for a pair of a quantum code which can correct d errors,
+and a corresponding set of universal gates, such that their procedures, with respect to the code,
+allow one fault to spread to at most d qubits. Since the error corrections, initialization, and reading
+procedures are also subjected to faults, we need them to have small spread too. Such codes, with the
+corresponding universal set of gates, will be called quantum computation codes.
+We now want to show that the reliability of the simulating circuit is larger than the original
+circuit. In the original circuit, if one fault occurred the computation failed, but the simulating circuit
+can tolerate a number of errors, say k, in each procedure, since the error corrections correct them
+afterwards. The effective noise rate of M1 is thus the probability for more than k errors in a procedure,
+and it will be smaller than the actual noise rate η, if the parameters are chosen correctly. However, it
+seems that an improvement from a constant noise rate to polynomially small effective noise rate, as
+we need for fault tolerance, is hard to get in the above scheme. In [19] it is shown how to apply the
+above scheme, with a specific quantum computation code, to achieve fault tolerance when the noise
+rate η is taken to be logarithmically small.
+
+Improvement to constant noise rate To improve this result, we use concatenated simulations,
+which generalizes the works of Gacs [10] to the quantum case. The idea is that since the simulating
+circuit is also a circuit, it’s effective noise rate can be improved by simulating it again, and so on
+for several levels. Even a very small improvement in each level will suffice since the improvement is
+exponential in the number of levels. Such a small improvement can be achieved when using a code of
+constant block size, if the noise rate is smaller than some threshold η0. Note, that each level simulates
+the error corrections in the simulated level, and adds error corrections in the current level. The final
+circuit thus includes error corrections of all the levels, where the computation of error corrections
+of high levels is corrected all the time in small levels. The lower the level, the more often are error
+corrections of this level applied. This is in correspondence with the fact that lower levels work on
+smaller blocks, that are more likely to be quickly damaged. The whole scheme relies heavily on the
+fact that the places where errors occur are random and independent. Most of the faults will probably
+be corrected by error corrections in the first level, and if this does not work, than using other blocks
+which where corrected in the first level, the error will probably be corrected in the second level. The
+probability that the highest blocks can not be recoverable is polynomially small.
+Not any quantum computation code can be used in the above scheme. There are two restrictions:(1)
+When applying the simulation, we replace the gates by fault tolerant procedures. Since we want to
+simulate the new circuit as well, we need that these procedures use gates that can be replaced by fault
+tolerant procedures as well. Hence the universal set of gates associated with the quantum computation
+code that we use, must have fault tolerant procedures which use gates from the same universal set of
+gates. This is the “closeness” restriction. (2) Let us consider a two level simulation. If a simulated
+error correction operates on an encoded wrong word, it clearly corrects it. But what happens if it gets
+as an input some state which does not encode any word? The simulated error correction “understands”
+only encoded words. If we demand that error correction in the lower level corrects any state to some
+word in the code, than the input for the error correction of the upper level will maybe be wrong but
+it will be an encoded word, so it can be understood and corrected by the upper level. The second
+
+3
+
+

@@ -1,0 +1,408 @@
+===== PDF PAGE 19 =====
+
+quantum computing. In the definition of NP from Section II.1, the machine M functions as a
+verification procedure that treats each possible string y ∈Σp(|x|) as a potential proof that x ∈Ayes.
+The conditions on M are known as the completeness and soundness conditions, which derive their
+names from logic: completeness refers to the condition that true statements have proofs, while
+soundness refers to the condition that false statements do not.
+To define QMA, the set of possible proofs is extended to include quantum states, which of
+course presumes that the verification procedure is quantum. As quantum computations are inher-
+ently probabilistic, a bounded probability of error is allowed in the completeness and soundness
+conditions. (This is why the class is called QMA rather than QNP, as it is really MA and not NP
+that is the classical analogue of QMA.)
+
+QMA
+Let A = (Ayes, Ano) be a promise problem, let p be a polynomial-bounded function,
+and let a, b : N →[0, 1] be functions. Then A ∈QMAp(a, b) if and only if there exists
+a polynomial-time generated family of circuits Q = {Qn : n ∈N}, where each circuit
+Qn takes n + p(n) input qubits and produces one output qubit, with the following
+properties:
+
+1. Completeness. For all x ∈Ayes, there exists a p(|x|)-qubit quantum state ρ such
+that Pr[Q accepts (x, ρ)] ≥a(|x|).
+
+2. Soundness. For all x ∈Ano and all p(|x|)-qubit quantum states ρ it holds that
+Pr[Q accepts (x, ρ)] ≤b(|x|).
+
+Also define QMA = �
+p QMAp(2/3, 1/3), where the union is over all polynomial-
+bounded functions p.
+
+V.2
+Problems in QMA
+
+Before discussing the general properties of QMA that are known, it is appropriate to mention some
+examples of problems in this class. Of course it is clear that thousands of interesting combinatorial
+problems are in QMA, as the containment NP ⊆QMA is trivial. What is more interesting is the
+identification of problems in QMA that are not known to be in NP, for these are examples that
+provide insight into the power of quantum proofs. There are presently just a handful of known
+problems in QMA that are not known to be in NP, but the list is growing.
+
+The local Hamiltonian problem
+
+Historically speaking, the first problem identified to be complete for QMA was the local Hamilto-
+nian problem [67, 68], which can be seen as a quantum analogue of the MAX-k-SAT problem. Its
+proof of completeness can roughly be seen as a quantum analogue of the proof of the Cook–Levin
+Theorem [40, 75]. The proof has subsequently been strengthened to achieve better parameters [62].
+Suppose that M is a Hermitian matrix whose rows and columns are indexed by strings of
+length n for some integer n ≥1. Then M is said to be k-local if and only if it can be expressed as
+
+M = Pπ(A ⊗I)P−1
+π
+
+for an arbitrary matrix A indexed by Σk, Pπ a permutation matrix defined by
+
+Pπ |x1 · · · xn⟩= |xπ(1) · · · xπ(n)⟩
+
+19
+
+
+===== PDF PAGE 20 =====
+
+for some permutation π ∈Sn, and I denoting the identity matrix indexed by Σn−k. In less formal
+terms, M is a matrix that arises from a “gate” on k qubits, but where the gate is described by a
+2k × 2k Hermitian matrix A rather than a unitary matrix. It is possible to express such a matrix
+compactly by specifying A along with the bit-positions on which A acts.
+Intuitively, a k-local matrix assigns a real number (typically thought of as representing energy)
+to any quantum state on n qubits. This number depends only on the reduced state of the k qubits
+where M acts nontrivially, and can be thought of as a locally defined penalty on a given quantum
+state. Loosely speaking, the k-local Hamiltonian problem asks whether there exists a quantum
+state that can significantly avoid a collection of such penalties.
+
+THE k-LOCAL HAMILTONIAN PROBLEM
+Input:
+A collection H1, . . . , Hm of k-local Hermitian matrices with entries indexed by strings of
+length n and satisfying
+��Hj
+��≤1 for j = 1, . . . , m.
+
+Yes:
+There exists an n-qubit quantum state |ψ⟩such that ⟨ψ|H1 + · · · + Hm|ψ⟩≤−1.
+
+No:
+For every n-qubit quantum state |ψ⟩it holds that ⟨ψ|H1 + · · · + Hm|ψ⟩≥1.
+
+Theorem 8. The 2-local Hamiltonian problem is complete for QMA with respect to Karp reductions.
+
+The completeness of this problem has been shown to be closely related to the universality of
+the so-called adiabatic model of quantum computation [12].
+
+Other problems complete for QMA
+
+Aside from the local Hamiltonian problem, there are other promise problems known to be com-
+plete for QMA, including the following:
+
+1. Several Variants of the local Hamiltonian problem. For example, the 2-local Hamiltonian
+problem remains QMA-complete when the local Hamiltonians are restricted to nearest-
+neighbor interactions on a two-dimensional array of qubits [86]. The hardness of the lo-
+cal Hamiltonian problem with nearest-neighbor interactions on one-dimensional systems is
+known to be QMA-complete for 12 dimensional particles in place of qubits [9], but is open
+for smaller systems including qubits.
+
+2. The density matrix consistency problem. Here, the input is a collection of density matrices rep-
+resenting the reduced states of a hypothetical n-qubit state. The input is a yes-instance of the
+problem if there exists a state of the n-qubit system that is consistent with the given reduced
+density matrices, and is a no-instance if every state of the n-qubit system has reduced states
+that have significant disagreement from one or more of the input density matrices. This
+problem is known to be complete for QMA with respect to Cook reductions [76], but is not
+known to be complete for Karp reductions. A different problem with similar properties was
+considered in [77].
+
+3. The quantum clique problem. Beigi and Shor [23] have proved that a promise version of the
+following problem is QMA-complete for any constant k ≥2. Given a quantum operation
+Φ, are there k different inputs to Φ that are perfectly distinguishable after passing through
+Φ? They name this the quantum clique problem because there is a close connection between
+computing the zero-error capacity of a classical channel and computing the size of the largest
+clique in the complement of a graph representing the channel; and this is a quantum variant
+of that problem.
+
+20
+
+
+===== PDF PAGE 21 =====
+
+4. Several problems about quantum circuits. All of the problems mentioned above are proved
+to be QMA-hard through reductions from the local Hamiltonian problem. Other problems
+concerning properties of quantum circuits can be proved QMA-complete by more direct
+means, particularly when the problem itself concerns the existence of a quantum state that
+causes an input circuit to exhibit a certain behavior. An example in this category is the non-
+identity check problem [60] that asks whether a given unitary circuit implements an operation
+that is close to some scalar multiple of the identity.
+
+The group non-membership problem
+
+Another example of a problem in QMA that is not known to be in NP is the group non-membership
+problem [17, 101]. This problem is quite different from the QMA-complete problems mentioned
+above in two main respects. First, the problem corresponds to a language, meaning that the
+promise is vacuous: every possible input can be classified as a yes-instance or no-instance of
+the problem. (In all of the above problems it is not possible to do this without invalidating the
+known proofs that the problems are in QMA.) Second, the problem is not known to be complete
+for QMA; and indeed it would be surprising if QMA were shown to have a complete problem
+having a vacuous promise.
+In the group non-membership problem the input is a subgroup H of some finite group G, along
+with an element g ∈G. The yes-instances of the problem are those for which g ̸∈H, while the
+no-instances are those for which g ∈H.
+
+THE GROUP NON-MEMBERSHIP PROBLEM
+Input:
+Group elements h1, . . . , hk and g from some finite group G. Let H = ⟨h1, . . . , hk⟩be the
+subgroup generated by h1, . . . , hk.
+
+Yes:
+g ̸∈H.
+
+No:
+g ∈H.
+
+Like most group-theoretic computational problems, there are many specific variants of the
+group non-membership problem that differ in the way that group elements are represented. For
+example, group elements could be represented by permutations in cycle notation, invertible ma-
+trices over a finite field, or any number of other possibilities. The difficulty of the problem clearly
+varies depending the representation. The framework of black-box groups, put forth by Babai and
+Szemer´edi [21], simplifies this issue by assuming that group elements are represented by mean-
+ingless labels that can only be multiplied or inverted by means of a black box, or group oracle. Any
+algorithm or protocol that solves a problem in this framework can then be adapted to any specific
+group provided that an efficient implementation of the group operations exists that can replace
+the group oracle.
+
+Theorem 9. The group non-membership problem is in QMA for every choice of a group oracle.
+
+V.3
+Error reduction for QMA
+
+The class QMA is robust with respect to error bounds, reflected by the completeness and sound-
+ness probabilities, in much the same way that the same is true of BQP. Two specific error reduction
+methods are presented in this section: weak error reduction and strong error reduction. The two meth-
+ods differ with respect to the length of the quantum proof that is needed to obtain a given error
+bound, which is a unique consideration that arises when working with quantum proofs.
+
+21
+
+
+===== PDF PAGE 22 =====
+
+Qx
+
+Qx
+
+Qx
+
+Qx
+
+Qx
+
+F
+accept
+or
+reject
+ξ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 9: An illustration of the weak error reduction procedure for QMA. The circuits Qx represent
+the original verification procedure, and the circuit labelled F outputs acceptance or rejection based
+on the frequency of accepts among its inputs (which can be adjusted depending on a and b). It
+cannot be assumed that the input state ξ takes the form of a product state ρ ⊗· · · ⊗ρ; but it is not
+difficult to prove that there will always be at least one such state among the states maximizing the
+acceptance probability of the procedure.
+
+Suppose that A = (Ayes, Ano) is a given promise problem for which a QMA-type quantum ver-
+ification procedure exists. To describe both error reduction procedures, it is convenient to assume
+that the input to the problem is hard-coded into each circuit in the family representing the verifi-
+cation procedure. The verification procedure therefore takes the form Q = {Qx : x ∈Σ∗}, where
+each circuit Qx takes a p(|x|)-qubit quantum state as input, for some polynomial-bounded func-
+tion p representing the quantum proof length, and produces one output qubit. The completeness
+and soundness probabilities are assumed to be given by polynomial-time computable functions a
+and b as usual.
+The natural approach to error reduction is repetition: for a given input x the verification circuit
+Qx is evaluated multiple times, and a decision to accept or reject based on the frequency of accepts
+and rejects among the outcomes of the repetitions is made. Assuming a(|x|) and b(|x|) are not
+too close together, this results in a decrease in error that is exponential in the number of repeti-
+tions [68]. The problem that arises, however, is that each repetition of the verification procedure
+apparently destroys the quantum proof it verifies, which necessitates the composite verification
+procedure receiving p(|x|) qubits for each repetition of the original procedure as illustrated in Fig-
+ure 9. The form of error reduction implemented by this procedure is called weak error reduction,
+given that the length of the quantum proof must grow as the error decreases. (Of course one may
+view that it also has a strength, which is that it does not require a significant increase in circuit
+depth over the original procedure.)
+The second error reduction procedure for QMA was described in [80]. Like weak error reduc-
+tion it gives an exponential reduction in error for roughly a linear increase in circuit size, but has
+the advantage that it does not require any increase in the length of the quantum proof. This form
+of error reduction is called strong error reduction because of this advantage, which turns out to be
+quite handy in some situations. The procedure is illustrated in Figure 10. The following theorem
+follows from an analysis of this procedure.
+
+22
+
+
+===== PDF PAGE 23 =====
+
+Qx
+Q−1
+x
+Qx
+Q−1
+x
+Qx
+Q−1
+x
+
+ρ
+
+Tr
+
+|0k+m⟩
+
+C
+output
+
+Figure 10: Illustration of the strong error reduction procedure for QMA. The circuit Qx represents
+a unitary purification of a given QMA verification procedure on an input x, while the circuit C
+determines whether to accept or reject based on the number of alternations of its input qubits. The
+quantum proof is denoted by ρ.
+
+Theorem 10. Suppose that a, b : N →[0, 1] are polynomial-time computable functions and q : N →N
+is a polynomial-bounded function such that a(n) −b(n) ≥1/q(n) for all but finitely many n ∈N. Then
+for every choice of polynomial-bounded functions p, r : N →N such that r(n) ≥2 for all but finitely
+many n, it holds that
+QMAp(a, b) = QMAp
+�
+1 −2−r, 2−r�
+.
+
+V.4
+Containment of QMA in PP
+
+By means of strong error reduction for QMA, it can be proved that QMA is contained in PP as
+follows. Suppose that some promise problem A = (Ayes, Ano) is contained in QMA. Then by
+Theorem 10 it holds that
+A ∈QMAp
+�
+1 −2−(p+2), 2−(p+2)�
+(2)
+
+for some polynomial-bounded function p. What is important here is that the soundness proba-
+bility is smaller than the reciprocal of the dimension of the space corresponding to the quantum
+proof (which is why strong error reduction is needed).
+Now, consider an algorithm that does not receive any quantum proof, but instead just ran-
+domly guesses a quantum proof on p qubits and feeds this proof into a verification procedure
+having completeness and soundness probabilities consistent with the above inclusion (2). To be
+more precise, the quantum proof is substituted by the totally mixed state on p qubits. A sim-
+ple analysis shows that this algorithm accepts every string x ∈Ayes with probability at least
+2−(p(|x|)+1) and accepts every string x ∈Ano with probability at most 2−(p(|x|)+2). Both of these
+probabilities are exponentially small, but the separation between them is enough to establish that
+A ∈PQP = PP.
+
+V.5
+Classical proofs for quantum verification procedures
+
+One may also consider quantum verification procedures that receive classical proofs rather than
+quantum proofs. Aharonov and Naveh [11] defined a complexity class MQA accordingly.
+
+23
+
+
+===== PDF PAGE 24 =====
+
+MQA
+Let A = (Ayes, Ano) be a promise problem. Then A ∈MQA if and only if there
+exists a polynomial-bounded function p and a polynomial-time generated family of
+circuits Q = {Qn : n ∈N}, where each circuit Qn takes n + p(n) input qubits and
+produces one output qubit, with the following properties. For all x ∈Ayes, there
+exists a string y ∈Σp(|x|) such that Pr[Q accepts (x, y)] ≥2/3; and for all x ∈Ano
+and all strings y ∈Σp(|x|) it holds that Pr[Q accepts (x, y)] ≤1/3.
+
+(This class was originally named QCMA, and is more commonly known by that name—but it is
+not too late to give this interesting class a better name.)
+When considering the power of quantum proofs, it is the question of whether MQA is prop-
+erly contained in QMA that arguably cuts to the heart of the issue. Aaronson and Kuperberg [5]
+studied this question, and based on a reasonable group-theoretic conjecture argued that the group
+non-membership problem is likely to be in MQA.
+
+V.6
+Are two quantum proofs better than one?
+
+An unusual, yet intriguing question about quantum proofs was asked by Kobayashi, Matsumoto,
+and Yamakami [74]: are two quantum proofs better than one? The implicit setting in this question is
+similar to that of QMA, except that the verification procedure receives two quantum proofs that
+are guaranteed to be unentangled. The complexity class QMA(2) is defined to be the class of promise
+problems having such two-proof systems with completeness and soundness probabilities 2/3 and
+1/3, respectively. (It is not known to what extent this type of proof system is robust with respect to
+error bounds, so it is conceivable that other reasonable choices of error bounds could give distinct
+complexity classes.) The class QMA(2), and its natural extension to more than two proofs, have
+subsequently been studied in [4, 32].
+The restriction on entanglement that is present in the definition of QMA(2) may seem artificial
+from a physical perspective, as there is no obvious mechanism that would prevent two entities
+with otherwise unlimited computational power from sharing entanglement. Nevertheless, the
+question of the power of QMA(2) is interesting in that it turns around the familiar question in
+quantum computing about the computational power of entanglement. Rather than asking if com-
+putational power is limited by a constraint on entanglement, here the question is whether a con-
+straint on entanglement enhances computational power. It is clear that two quantum proofs are no
+less powerful than one, as a verification procedure may simply ignore one of the proofs—which
+means that QMA ⊆QMA(2). Good upper bounds on QMA(2), however, are not known: the best
+upper bound presently known is QMA(2) ⊆NEXP, which follows easily from the fact that a non-
+deterministic exponential-time algorithm can guess explicit descriptions of the quantum proofs
+and then perform an exponential-time simulation of the verification procedure.
+
+VI
+Quantum interactive proof systems
+
+The notion of efficient proof verification is generalized by means of the interactive proof system
+model, which has fundamental importance in complexity theory and theoretical cryptography.
+Interactive proof systems, or interactive proofs for short, were first introduced by Babai [17, 20] and
+Goldwasser, Micali, and Rackoff [55, 56], and have led to remarkable discoveries in complexity
+such as the PCP Theorem [15, 16, 43]. In the most commonly studied variant of interactive proof
+systems, a polynomial-time verifier interacts with a computationally unbounded prover that tries
+to convince the verifier of the truth of some statement. The prover is not trustworthy, however,
+
+24
+

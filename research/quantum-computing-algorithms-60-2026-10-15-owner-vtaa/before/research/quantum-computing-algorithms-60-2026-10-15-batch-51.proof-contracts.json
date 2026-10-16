@@ -1,0 +1,873 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-27-even-sign-window",
+    "lem-qa-27-lcu-projected-block-identity",
+    "lem-qa-27-supported-pseudoinverse-target",
+    "thm-qa-27-qsvt-inverse-state-cost",
+    "ex-qa-27-sparse-diagonal-qlsp",
+    "ex-qa-27-fixed-vs-variable-time-cost"
+  ],
+  "contracts": {
+    "lem-qa-27-even-sign-window": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Evenness and degree follow from interchanging the shifted terms and polynomial degree under translation.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "The two shifts cannot both lie below the positive sign threshold; boundedness and sign approximation give a global lower bound on their sum and hence 0<=R<=1.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "In the inner interval both shifts are at least g, so the sign approximation gives the asserted window value and complementary cutoff bound.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "In the outer interval the shifts have opposite signs and lie outside the gap, so their sum is small and the window is suppressed.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "step": "4.1",
+          "claim": "The global interval R in [0,1] maps through the affine relation to the stated global D bounds.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "This scalar lemma assumes 0<eta<1 and 0<g<=t<=1; empty vector-space and logical-equivalence cases do not occur.",
+          "evidence": "The Statement allows either threshold interval to be empty and explicitly makes that interval claim vacuous; step 1.2 proves the global bound without requiring either interval to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "This scalar lemma assumes 0<eta<1 and 0<g<=t<=1; empty vector-space and logical-equivalence cases do not occur.",
+          "evidence": "The Statement assumes 0<eta<1 and g>0; steps 2.1 and 4.1 divide only by 1-eta>0, and x=0 lies in the lemma domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This scalar approximation lemma has no unit-vector, probability-one, or one-dimensional-space assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "reason": "This scalar lemma assumes 0<eta<1 and 0<g<=t<=1; empty vector-space and logical-equivalence cases do not occur.",
+          "evidence": "The allowed endpoint g=t makes the inner interval the singleton x=0; step 2.1 applies at x=0 and proves its stated bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "This scalar lemma assumes 0<eta<1 and 0<g<=t<=1; empty vector-space and logical-equivalence cases do not occur.",
+          "evidence": "The Statement domain |x|<=s and s+t<=1 put both shifted sign arguments in [-1,1], including x=\u00b1s; step 1.2 verifies the global bound there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All scalar parameters and the polynomial S are supplied; the proof makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states interval estimates and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states interval estimates and no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-27-lcu-projected-block-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "For $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-22-block-encoding-access-model",
+          "source_section": "Definition",
+          "quote": "It also records whether the family SELECT unitary $\\sum_j |j\\rangle\\langle j|\\otimes U_j$ is supplied as one oracle or must be assembled from the separately controlled calls. A call to one operation does not imply access to another.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "The ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the linear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "The coefficient preparation and orthogonal SELECT branches give the coefficient-register compression sum_j w_j zeta_j U_j; SELECT remains a separately supplied and costed operation.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Compress each component ancilla using the exact block relation and simplify w_j zeta_j A_j/alpha_j to beta_j A_j/Lambda.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma is conditional on nonzero coefficients and Lambda>0; zero-coefficient and empty-index cases are excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes each beta_j is nonzero and Lambda>0; steps 1.1 and 2.1 therefore divide only by positive declared quantities."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma is conditional on nonzero coefficients and Lambda>0; zero-coefficient and empty-index cases are excluded by its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma is conditional on nonzero coefficients and Lambda>0; zero-coefficient and empty-index cases are excluded by its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma is conditional on nonzero coefficients and Lambda>0; zero-coefficient and empty-index cases are excluded by its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The lemma is conditional on nonzero coefficients and Lambda>0; zero-coefficient and empty-index cases are excluded by its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is conditional on nonzero coefficients and Lambda>0; zero-coefficient and empty-index cases are excluded by its hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is conditional on nonzero coefficients and Lambda>0; zero-coefficient and empty-index cases are excluded by its hypotheses."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-27-supported-pseudoinverse-target": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-26-qlsp-task",
+          "source_section": "Definition",
+          "quote": "every $j$ with $\\beta_j\\ne0$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "If $V\\ne0$, define the **operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Construct B from the finite SVD, verify the four Penrose equations, and use uniqueness to identify B with A+.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "2.1",
+          "claim": "The unit input coefficients have squared moduli summing to one and each singular value is at most alpha, so A+b is nonzero with norm at least 1/alpha.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.2",
+          "claim": "Scaling all positive singular values by 1/alpha scales their reciprocals by alpha and therefore the pseudoinverse target by the positive factor gamma/2.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "The gap and norm hypotheses give each supported inverse multiplier at least gamma/(2alpha), whose squared weighted sum is at least delta squared over four.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.2",
+            "algebra",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the normalized input coefficient identity sum |beta_j|^2=1, which proves the supported positive singular index set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1 and 3.1 assume each supported sigma_j>=gamma>0 and alpha>0, so inverse denominators are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonzero normalized b, positive support gap, and alpha>0; empty domains and zero-input cases are excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonzero normalized b, positive support gap, and alpha>0; empty domains and zero-input cases are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonzero normalized b, positive support gap, and alpha>0; empty domains and zero-input cases are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonzero normalized b, positive support gap, and alpha>0; empty domains and zero-input cases are excluded."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonzero normalized b, positive support gap, and alpha>0; empty domains and zero-input cases are excluded."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonzero normalized b, positive support gap, and alpha>0; empty domains and zero-input cases are excluded."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-27-qsvt-inverse-state-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-27-pseudoinverse-polynomial-degree",
+          "source_section": "Statement",
+          "quote": "For rational $0<e\\le\\delta\\le1/2$, the intended OP1A construction returns an odd real polynomial $p$ of degree $O(\\delta^{-1}\\log(1/e))$ satisfying $|p(x)|\\le1$ on $[-1,1]$, $p(0)=0$, and\n$$\\sup_{x\\in[\\delta,1]}\\left|p(x)-\\frac{\\delta}{2x}\\right|\\le e.$$\nFor a normalized block $\\bar A=A/\\alpha$ whose supported singular values lie in $\\{0\\}\\cup[\\delta,1]$, this gives the singular-space approximation $p^{\\rm SV}(\\bar A^\\dagger)\\approx(\\delta/2)\\bar A^+=(\\gamma/2)A^+$ on the supported input, where $\\delta=\\gamma/\\alpha$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-27-supported-pseudoinverse-target",
+          "source_section": "Statement",
+          "quote": "In the block-encoded QLSP model, let $|b\\rangle$ be the normalized codomain input, let $\\|A\\|_{\\rm op}\\le\\alpha$, and suppose $|b\\rangle=\\sum_{j=1}^r\\beta_j|u_j\\rangle$ is supported on positive singular values $\\sigma_j\\ge\\gamma>0$. Then\n$$\\frac{(\\delta/2)\\bar A^+|b\\rangle}{\\|(\\delta/2)\\bar A^+|b\\rangle\\|}=\\frac{A^+|b\\rangle}{\\|A^+|b\\rangle\\|},\\qquad \\left\\|(\\delta/2)\\bar A^+|b\\rangle\\right\\|^2\\ge\\frac{\\delta^2}{4},\\qquad \\delta=\\gamma/\\alpha,\\quad\\bar A=A/\\alpha.$$\nIn particular the ideal inverse-branch success probability is positive and has the stated crude lower bound.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-24-qsvt-query-count",
+          "source_section": "Statement",
+          "quote": "For degree $d\\ge0$, one un-controlled QSVT sequence makes exactly $d$ signal calls: $\\lceil d/2\\rceil$ calls to $U$ and $\\lfloor d/2\\rfloor$ calls to $U^*$, beginning with $U$ when $d>0$. It applies exactly $d+1$ projector-phase operations, with $\\lceil(d+1)/2\\rceil$ about $\\Pi_R$ and $\\lfloor(d+1)/2\\rfloor$ about $\\Pi_L$. By [[thm-qa-24-projector-phase-implementation]], each phase operation uses two controlled calls to the corresponding reflection and one variable one-qubit phase rotation, plus a constant number of one-qubit gates. A coherent control of one sequence against the identity requires no controlled signal call when $d$ is even and one controlled signal call when $d$ is odd. Selecting between the two phase lists $\\Phi$ and $-\\Phi$ uses the same unconditioned signal list in both branches and controls only the phase rotations. Phase generation, inverse access, and finite-gate compilation retain their separately declared costs. At $d=0$ there is no signal or controlled-signal call.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-12-unknown-amplitude-query-cost",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the expected total number of calls made by [[alg-qa-12-unknown-amplitude-search]] to $A$, $A^\\dagger$, the good and zero-input phase operations, and any one-call verifier is $\\Theta(a^{-1/2})$. The lower bound is for this specified schedule; no general optimality statement is made outside an explicit black-box search model. For $a=0$, the expected query cost is infinite.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-12-amplification-plane-invariant",
+          "source_section": "Statement",
+          "quote": "the subspace $\\operatorname{span}\\{|B\\rangle,|G\\rangle\\}$ is invariant. In the ordered orthonormal basis $(|B\\rangle,|G\\rangle)$, the restriction of $Q$ is\n$\n\\begin{pmatrix}\n\\cos(2\\theta)&-\\sin(2\\theta)\\\\\n\\sin(2\\theta)&\\cos(2\\theta)\n\\end{pmatrix}.\n$\nFor $a=0$ the prepared vector spans an invariant bad line and $Q|\\psi\\rangle=|\\psi\\rangle$; for $a=1$ it spans an invariant good line and $Q|\\psi\\rangle=-|\\psi\\rangle$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-qa-12-unknown-amplitude-search",
+          "source_section": "Definition",
+          "quote": "1. On a fresh register prepare $A|0\\rangle$, perform the declared good/bad projective instrument, and verify a classical candidate if the diagonal-predicate specialization is used. If the branch is good, return its conditional quantum state or the verified candidate.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qa-12-unknown-amplitude-success",
+          "source_section": "Statement",
+          "quote": "For every $a>0$, the procedure [[alg-qa-12-unknown-amplitude-search]] returns a good output with probability $1$. If $a=0$, it never returns a good output and does not halt.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "The SVD and the adjoint singular transform give multiplier p(sigma/alpha) against target delta/(2(sigma/alpha)); the supplied scalar and implementation errors bound the supported block error by zeta.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "Reverse triangle inequality bounds the implemented success norm below by delta/2-zeta; normalization perturbation is at most twice the block error divided by the ideal norm.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "The ideal mass lower bound comes from the local target lemma; one degree-m attempt uses m signal calls by the QSVT count.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "The invariant good line preserves the conditional state through every Grover iterate; expected amplification calls scale as inverse square-root success, so multiply by m.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a normalized nonzero input on positive singular support and zeta<delta/2; empty spaces and zero-success branches are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the implemented success norm is at least delta/2-zeta>0 before the conditional state is normalized."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a normalized nonzero input on positive singular support and zeta<delta/2; empty spaces and zero-success branches are excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a normalized nonzero input on positive singular support and zeta<delta/2; empty spaces and zero-success branches are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a normalized nonzero input on positive singular support and zeta<delta/2; empty spaces and zero-success branches are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a normalized nonzero input on positive singular support and zeta<delta/2; empty spaces and zero-success branches are excluded."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a normalized nonzero input on positive singular support and zeta<delta/2; empty spaces and zero-success branches are excluded."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a normalized nonzero input on positive singular support and zeta<delta/2; empty spaces and zero-success branches are excluded."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-qa-27-sparse-diagonal-qlsp": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "For $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-23-qsp-signal-sequence",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge0$ and real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$, the length-$d$ QSP sequence is the ordered matrix product\n$$U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}\\bigl(W_R(x)Z(\\phi_j)\\bigr),$$\nwhere the product is written left to right in increasing $j$ and matrix multiplication acts right to left. For $d=0$ this is $Z(\\phi_0)$. This definition fixes the sign of the off-diagonal signal entry, both endpoint phases, and the product order.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "A and S commute and their squares sum to identity, so the displayed Hermitian dilation is unitary and its top-left block is A.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "The singular values are 1 and 1/2; factoring two scalar inequalities proves p(x)=x/2 approximates delta/(2x) within 1/4 on the entire gap interval.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-3",
+          "step": "1.3",
+          "claim": "The length-one QSP matrix has top-left entry exp(i pi/3)x; averaging it with its conjugate produces exactly p(x), which QA24 transfers to each singular line.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Square the two polynomial and ideal inverse multipliers; factor the reciprocal certificate polynomials and verify the listed degree-two Bernstein coefficients are nonnegative.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero two-dimensional space C^2 and a two-coordinate matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies p(0)=0 and the transform vanishes on a zero singular value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The matrix has two distinct positive singular values, not a one-dimensional instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The singular values 1 and 1/2 are distinct, so no repeated-value case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 verify the polynomial and reciprocal bounds at x=1/2 and x=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All matrix entries, singular vectors, input states, and phase values are explicitly specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no equivalence statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no equivalence statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Hermitian one-ancilla dilation",
+          "method": "exact matrix multiplication",
+          "input": {
+            "A": "diag(1,1/2)",
+            "S": "diag(0,sqrt(3)/2)"
+          },
+          "calculation": "A^2+S^2=I and AS=SA, so U*=U and U^2=I.",
+          "expected": {
+            "top_left": "A",
+            "unitary": true,
+            "normalization": 1
+          }
+        },
+        {
+          "name": "degree-one QSP real extraction",
+          "method": "exact two-by-two matrix multiplication",
+          "input": {
+            "phases": [
+              "0",
+              "pi/3"
+            ],
+            "signal": "W_R(x)"
+          },
+          "calculation": "The top-left entry is exp(i pi/3)x and averaging the conjugate list gives x/2.",
+          "expected": {
+            "polynomial": "x/2",
+            "degree": 1,
+            "parity": "odd"
+          }
+        },
+        {
+          "name": "inverse approximation and Bernstein certificate",
+          "method": "exact rational polynomial arithmetic",
+          "input": {
+            "delta": "1/2",
+            "error": "1/4",
+            "interval": [
+              "1/2",
+              "1"
+            ]
+          },
+          "calculation": "|2x^2-1|<=x factors as (2x-1)(x+1)>=0 and (1-x)(2x+1)>=0; the Bernstein coefficient lists are (0,3/16,1/2) and (1/4,3/16,0).",
+          "expected": {
+            "uniform_error": "1/4",
+            "certificate": "nonnegative"
+          }
+        }
+      ]
+    },
+    "ex-qa-27-fixed-vs-variable-time-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-27-variable-time-model",
+          "source_section": "Definition",
+          "quote": "Define the root-mean-square stopping time\n$$T_{\\rm av}:=\\left(\\sum_{i=1}^m p_i t_i^2\\right)^{1/2}.$$\nLet $p_{\\rm succ}$ be the total Born probability of the good-output subspace. When $p_{\\rm succ}>0$, the good output means the normalized conditional state of the declared good projector; it is defined only on that positive-probability branch. The mean stopping time $\\sum_i p_i t_i$ is a different quantity and is not substituted for $T_{\\rm av}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-27-vtaa-amplification",
+          "source_section": "Statement",
+          "quote": "Let a finite coherent variable-time algorithm satisfy [[def-qa-27-variable-time-model]], have $m$ stopping times and $T_{\\max}\\ge1$, RMS stopping time $T_{\\rm av}$, and good-output probability $p_{\\rm succ}>0$. Under the reversible stopping semantics of the model and supplied inverse and coherent access to every operation used, Ambainis' variable-time amplification procedure produces the conditional good state with success probability at least $1/2$ using time\n$$O\\!\\left(T_{\\max}\\sqrt{\\ln L_T}+\\frac{T_{\\rm av}}{\\sqrt{p_{\\rm succ}}}(\\ln L_T)^{3/2}\\right),\\qquad L_T=\\max(2,T_{\\max}).$$\nRepeating this finite amplified procedure $O(\\ln(1/\\rho))$ times gives success at least $1-\\rho$ for $0<\\rho<1/2$. The operation count is in the supplied stage-time metric; each controlled, inverse, reflection, preparation, and classical-construction cost remains explicit.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-27-qsvt-inverse-state-cost",
+          "source_section": "Statement",
+          "quote": "An unamplified attempt of degree $m$ uses exactly $m$ block-encoding signal calls in the QSVT sequence. Applying the supplied unknown-amplitude amplification procedure costs expected $O(m/\\sqrt{p_{\\rm impl}})$ signal calls, with state preparation, controlled/inverse calls, reflections, phase gates, synthesis, and classical certificate generation charged separately. When the degree theorem is established, $m=O(\\delta^{-1}\\ln(1/e))$, so this becomes $O(\\delta^{-1}\\ln(1/e)/\\sqrt{p_{\\rm impl}})$ expected signal calls, and the crude $\\zeta\\le\\delta/4$ bound gives $O(\\delta^{-2}\\ln(1/e))$. This is an expected-cost statement; it does not assert a fixed worst-case stopping time.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "The stopping masses sum to one, Tmax is four, and the weighted second moment is 9/2, giving RMS time 3/sqrt(2); the ordinary mean is separately 11/6.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "With success probability 1/4 the fixed-time amplification factor is two; setting m=3 gives O(6), while the variable-time expression substitutes Tmax=4, Tav=3/sqrt(2), and ln L_T=ln 4.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "Big-O constants are unspecified, so arithmetic on the two expressions does not decide a finite-instance speed comparison or establish a universal speedup.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example fixes three positive stopping times, nonzero success mass, and no endpoint or logical-equivalence claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "RMS and mean stopping time",
+          "method": "exact rational arithmetic",
+          "input": {
+            "times": [
+              1,
+              2,
+              4
+            ],
+            "masses": [
+              "1/2",
+              "1/3",
+              "1/6"
+            ]
+          },
+          "calculation": "Weighted square sum is 1/2+4/3+16/6=9/2; weighted first moment is 1/2+2/3+4/6=11/6.",
+          "expected": {
+            "Tmax": 4,
+            "Tav": "3/sqrt(2)",
+            "mean": "11/6",
+            "success": "1/4"
+          }
+        },
+        {
+          "name": "amplification expression substitution",
+          "method": "exact symbolic substitution",
+          "input": {
+            "Tmax": 4,
+            "Tav": "3/sqrt(2)",
+            "p_success": "1/4"
+          },
+          "calculation": "Fixed expression m/sqrt(p) with m=3 is 6; the variable-time expression is 4 sqrt(ln 4)+3 sqrt(2)(ln 4)^(3/2).",
+          "expected": {
+            "fixed": "O(6)",
+            "variable": "O(4 sqrt(ln4)+3 sqrt(2)(ln4)^(3/2))"
+          }
+        }
+      ]
+    }
+  }
+}

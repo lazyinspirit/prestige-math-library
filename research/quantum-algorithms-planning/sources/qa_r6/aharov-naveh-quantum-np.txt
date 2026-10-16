@@ -1,0 +1,1720 @@
+arXiv:quant-ph/0210077v1  11 Oct 2002
+
+Quantum NP - A Survey
+
+Dorit Aharonov∗and Tomer Naveh†
+
+Abstract
+
+We describe Kitaev’s result from 1999, in which he defines the complexity class QMA,
+the quantum analog of the class NP, and shows that a natural extension of 3−SAT, namely
+local Hamiltonians, is QMA complete. The result builds upon the classical Cook-Levin
+proof of the NP completeness of SAT , but differs from it in several fundamental ways,
+which we highlight. This result raises a rich array of open problems related to quantum
+complexity, algorithms and entanglement, which we state at the end of this survey. This
+survey is the extension of lecture notes taken by Naveh for Aharonov’s quantum computa-
+tion course, held in Tel Aviv University, 2001.
+
+1
+Introduction
+
+The field of complexity theory has witnessed several fundamental results in the recent decade
+or two; It is now a rich field involving deep questions and leading to the discovery of beautiful
+and unexpected structures, with important contributions to the understanding of the notion
+of classical probabilistic and deterministic computation. With the stormy entrance of quan-
+tum computation into the life of theoretical computer scientists, it seems only natural to ask
+whether such a rich theory of complexity can also be developed for the quantum model; it
+is probably true that such interesting structures and results await for us down the road of
+quantum complexity theory, with perhaps insights to be drawn from them regarding the quan-
+tum computational power. Several important results have already been discovered[16, 11], and
+there are surely more to come. It is not unreasonable to also hope that quantum complexity
+can significantly contribute to the understanding of classical complexity in unexpected ways; A
+puzzling example in which quantum arguments are used in order to prove an entirely classical
+result in the area of locally decodable codes was recently found[8]. We thus view the develop-
+ment of the field of quantum complexity as an important direction that holds the promise of
+a rich area of study with possible implications to the understanding of quantum algorithmic
+theory, as well as to classical complexity theory and to the foundations of quantum physics.
+Perhaps the most basic and fundamental result in classical complexity theory, is the Cook-
+Levin theorem[14], which states that SAT, the problem of whether a Boolean formula is
+satisfiable or not, is NP complete. This result opened the door to the study of the extremely
+
+∗School of Engineering and Computer Science, The Hebrew University, Jerusalem, Israel, and the Mathe-
+matical Sciences Research Institute, Berkeley, California
+†Department for Computer Science, Tel Aviv University, Tel Aviv, Israel
+
+1
+
+
+expressive complexity class NP, and the rich theory of NP-completeness, and was an impor-
+tant building block in many later results in theoretical computer science and complexity theory,
+such as the PCP theorems, hardness of approximation results and the proof that IP = PSpace.
+In the heart of this result stands the very basic understanding that computation is local.
+We devote this manuscript to the survey of a result by Kitaev[9, 10], which is the quantum
+analog of the Cook-Levin Theorem.
+Kitaev first defines the quantum analog of NP, and
+then defines a complete problem which can be viewed as a generalization of SAT to the
+quantum world. The proof follows the lines of the Cook-Levin proof, but defers from it in
+some fundamental points; We highlight those as we go along.
+The classical proof is quite
+simple; The quantum counterpart is rather complicated and long. However, there are several
+reasons to study this theorem, apart from the elegance of the proof, and from the naturalness
+of the question. First, there is a lot to be learned from the comparison of the classical proof
+and its (much more involved) quantum counterpart; Understanding the exact places where
+those differ is insightful. Secondly, the result raises a rich array of natural and interesting
+open problems related to this subject; We list those at the end of the survey, after the proof.
+Our proof follows closely the proof given by Kitaev[9, 10], with minor deviations; Our main
+contribution here is adding explanations and clarifications, hopefully providing some intuition
+behind the proof, and highlighting some open problems. We hope that this survey will provide
+an easy access to Kitaev’s fundamental result and to the rich array of open questions it raises.
+
+2
+Definition of QMA
+
+We would like to define a complexity class which will be the quantum analog of NP:
+
+Definition 1 NP: L ∈NP if there exists a deterministic polynomial time verifier V such
+that:
+
+• ∀x ∈L ∃y |y| = poly(|x|), V (x, y) = 1.
+
+• ∀x /∈L ∀y |y| = poly(|x|), V (x, y) = 0.
+
+By |x| we mean the number of bits in the binary string x. However, when trying to define
+the quantum analog, we immediately encounter an obstacle. We cannot require the verifier to
+answer 0 or 1 deterministically, because we will not be able to distinguish between this case
+and the case in which the verifier outputs these values with extremely high probability. Since
+the fact that states are continuous is inherent to quantum computation, we resort to defining
+QMA, the quantum analog of MA, which is the probabilistic version of NP.
+Informally, MA can be thought of as a probabilistic analog of NP, allowing for two-sided
+errors.
+
+Definition 2 MA:
+L ∈MA if there exists a probabilistic polynomial time verifier V such
+that:
+
+• ∀x ∈L ∃y |y| = poly(|x|), Pr(V (x, y) = 1) ≥2
+
+3
+
+2
+
+
+• ∀x /∈L ∀y |y| = poly(|x|), Pr(V (x, y) = 1) ≤1
+
+3
+
+MA is naturally viewed as a game or interaction between 2 parties - Merlin, which has
+infinite computational power, and Arthur, which is limited to a polynomial time machine (the
+above V ). Merlin should answer queries such as “is x ∈L?”, and accompany the answer with
+a polynomial witness y which Arthur can verify in polynomial time. Note that when showing
+that a problem is in MA, we should also show that Merlin cannot fool Arthur - i.e. that when
+x /∈L there is no witness y that can persuade the verifier to believe that x ∈L with probability
+≥1
+
+3.
+We will define QMA analogously, where the verifier V is a quantum machine, and the
+witness y is a state of a polynomial number of qubits. We denote by B the Hilbert space of
+one qubit.
+
+Definition 3 QMA:
+L ∈QMA if there exists a quantum polynomial time verifier V and a
+polynomial p such that:
+
+• ∀x ∈L ∃|ξ⟩∈Bp(|x|), Pr(V (|x⟩|ξ⟩) = 1) ≥2/3
+
+• ∀x /∈L ∀|ξ⟩∈Bp(|x|), Pr(V (|x⟩|ξ⟩) = 1) ≤1/3
+
+Another possible definition would be to take |α⟩as a classical witness, i.e. a basis state,
+but leave V to be a quantum machine. We call this class Quantum Classical MA (QCMA).
+
+Definition 4 QCMA:
+L ∈QCMA if there exists a quantum polynomial time verifier V and
+a polynomial p such that:
+
+• ∀x ∈L
+∃y |y| = poly(|x|), Pr(V (|x⟩|y⟩) = 1) ≥2/3
+
+• ∀x /∈L ∀y,
+|y| = poly(|x|), Pr(V (|x⟩|α⟩) = 1) ≤1/3
+
+Claim 1 MA ⊆QCMA⊆QMA.
+
+Proof: The left inclusion is trivial. The right inclusion follows from the fact that the quan-
+tum verifier can force Merlin to send him a classical witness by measuring the witness before
+applying on it the quantum algorithm.□
+It is unclear whether the two classes, QCMA and QMA are the same; See open question
+5 for further discussion. In any case, for the purposes of this paper, we will limit ourselves to
+the class QMA, where the witnesses are quantum.
+
+2.1
+Amplification
+
+In all the above definitions of MA, QCMA and QMA, we have used as our completeness pa-
+rameter (i.e. one minus the error probability in case x ∈L) the value 2/3 and as our soundness
+parameter (the bound on error probability in case x ̸∈L) the value 1/3. We can denote this
+choice by MA(2/3, 1/3) or QMA(2/3, 1/3). In general, we can define the classes MA(c, s) or
+
+3
+
+
+QMA(c, s) with general completeness and soundness parameters, which are functions of the
+input’s length. It turns out that we have a lot of freedom in the choice of these parameters,
+and we can make them either polynomially close to each other, or exponentially close to 1 or 0,
+without changing the complexity classes we are dealing with. In other words, amplification of
+the completeness and the soundness from polynomial separation to exponentially small error
+can be done in polynomial overhead. This is done using parallel repetition and taking the
+appropriate majority. More formally, for the case of the classical class MA:
+
+Theorem 1 MA(c, c −1/ng) ⊆MA(2/3, 1/3) =MA(1 −e−ng, e−ng) where we require g to be
+a constant and 0 < c, c −1/ng < 1.
+
+Proof: If c and s are separated by some 1/poly(n), we run the verifier polynomially many
+times, say m, using independent random coins at each time.
+In case x ∈L the expected
+number of acceptances is at least cm, whereas in case x ̸∈L it is at most sm; The Cher-
+noff bound1[13] guarantees that we can distinguish between the cases with only polynomially
+number of independent experiments with exponentially small error. This proves the inclusions
+MA(c, c −1/ng) ⊆MA(2/3, 1/3) ⊆MA(1 −e−ng, e−ng) where the other direction is trivial.
+□
+Hence, we can conveniently move between the definition of MA with either one of these
+three possible choices of parameters.
+
+Remark 1 The class MA as we defined it has two sided errors; In fact, this class is equivalent
+to MA with only one sided error, i.e. with completeness 1 and soundness bounded away from
+1[19, 7]. It is unclear whether the same holds in the quantum case; See open question 4.
+
+This nice freedom in the choice of parameters, due to the parallel repetition, holds also in
+the quantum case, however with a slightly more complicated proof.
+
+Theorem 2 QMA(c, c −1/ng) ⊆QMA(2/3, 1/3) =QMA(1 −e−ng, e−ng) where we require g
+to be a constant, 0 < c, c −1/ng < 1.
+
+Proof: The proof of this theorem is slightly more subtle than the simple proof in the classical
+case. We will first prove that QMA(2/3, 1/3) is contained in QMA(1 −e−ng, e−ng), i.e. that
+we can amplify soundness and completeness exponentially. The idea of remains the same as
+in the classical case: the verifier should perform polynomially many independent experiments
+and output the majority vote. However, unlike in the classical case, the verifier cannot per-
+form many independent experiments on the same witness provided by the prover since after
+measuring it the witness will have changed; Neither can the verifier copy the quantum witness
+state before verifying it, due to the no cloning theorem[18] which states that an unknown
+quantum state cannot be copied. The verifier thus needs to ask the prover to provide him
+with polynomially many copies of the witness. This is problematic, since the prover might try
+
+1The Chernoff bound guarantees that the average of polynomially many repetitions of independent experi-
+ments will converge exponentially fast to the expected value
+
+4
+
+
+to cheat by entangling the witnesses he provides. We will have to show that such a strategy
+cannot help the prover in case x is not in the language.
+We construct a new verifier which runs in parallel polynomially many copies of the verifier
+V , then outputs the majority. The existence of a witness for the new verifier in case x ∈L
+is trivial since it is simply duplicate copies of the original witness. To prove soundness, one
+might suspect that entanglement between the provers can be used to bypass the fact that the
+error goes exponentially to 0. To show this cannot happen, we treat the verifiers as if they are
+applied one after the other, and not in parallel. This is correct since the verifiers operate on
+different qubits and so they commute. We know that the probability that the first copy of V
+outputs 1 is less than 1/3. After the first verifier was applied, we can apply the second verifier.
+The second verifier gets as an input some state, which can be conditioned on the result of
+the measurement of the first verifier. However, regardless of what this output was, it is still
+correct that the probability for an output 1 is less than 1/3. And so on for the remaining of
+the verifiers. Hence, the probability for the majority of the verifiers being 1 can be bounded
+from above by the probability that polynomially many independent Bernoulli trials with bias
+1/3 will be 1, which decays exponentially by Chernoff.
+The idea of the inclusion QMA(c, c −1/ng) ⊂QMA(2/3, 1/3) is exactly the same, except
+that instead of majority vote among the polynomially many verifiers, we need to count the
+number of accepting verifiers, and accept only if this number is above (c + s)/2 times the
+number of experiments. The other inclusions are trivial. □
+In the rest of the survey, we will interchange between the different choices of parameters
+according to our convenience.
+
+2.2
+Complexity
+
+Before we continue, let us summarize what is known about these classes in terms of complexity.
+The most important class in quantum complexity theory is the class BQP, which consists of
+those problems which can be solved by a quantum machine with error probability bounded
+below half; This is considered as the class of tractable problems on a quantum computer. It is
+to be compared with the class BPP which is the same class for classical computers. Of course,
+we have that BPP ⊆BQP, and that BQP ⊆QMA. But how powerful is the class QMA?
+Can we upperbound it? Adleman et. al. proved that BQP is contained in a large class, called
+PP. A language L is in PP if there exists a Turing machine that runs in polynomial time
+on an input x, and such that if x ∈L it outputs 1 with probability larger than 1/2, and if
+x ̸∈L it outputs 0 with probability larger than 1/2. Note that the difference between the
+output probability and 1/2 can be exponentially small. This makes the class possibly much
+stronger than the class BPP; In particular, PP contains NP (see [5] lecture 7). It turns out
+that the above upper bound on BQP can be generalized to prove the same inclusions for the
+class QMA, i.e. QMA ⊆PP. This fact was first noted by Kitaev and Watrous[17] who build
+on a simplification of [1] by Fortnow and Rogers[6] to prove it. To summarize we have that:
+
+Theorem 3 BPP ⊆BQP ⊆QCMA ⊆QMA ⊆PP.
+
+5
+
+
+This is almost all that is known regarding the relation of BQP and QMA to classical com-
+plexity classes. To give intuition about what this upper bound means regarding the quantum
+complexity power, we note that the class PP is known to be contained in perhaps a more
+natural class, PSPACE, which is the class of languages that can be recognized by a Turing
+machine that uses polynomial space (but can take exponential amount of time.)
+We now proceed to define the complete problem for QMA: Local Hamiltonian.
+
+3
+The Local Hamiltonian Problem
+
+In this section we will define what can be thought of as the quantum analog of 3−SAT, called
+the “local Hamiltonian problem”.
+
+Definition 1 5-Local Hamiltonian problem
+
+• Input: H1, ...Hr, A set of r Hermitian positive semi definite matrices operating on the
+space of five qubits, B⊗5, with bounded norm ∥Hi∥≤1.
+Each matrix comes with a
+specification of the 5 qubits (out of the total n qubits) on which it operates. Each matrix
+entry is given with poly(n) many bits. Apart from Hi we are also given two real numbers,
+a and b (again, with polynomially many bits) such that b −a > 1/poly(n).
+
+• Output: Is the smallest eigenvalue of H = H1 + H2 + ... + Hr smaller than a or are all
+eigenvalues larger than b?
+
+We slightly abuse notation here by writing H = H1+H2+...+Hr; Hi are matrices operating
+on different qubits, and the summation is over their extension to the entire set of qubits (tensor
+product with identity). This abuse of notation will be used throughout the paper, and it will
+be clear that we mean the summation of the operators as operators on n qubits.
+Note that the defined problem is a promise problem: we are promised that one of the two
+possible outputs occurs. In other words, we don’t care what the output is for Hamiltonians
+with minimal eigenvalue between a and b.
+In the same way, one can naturally define the k-local Hamiltonian problem for any k. We
+will see that 5-local Hamiltonian is QMA complete, and the reason for the number five will only
+be apparent towards the very end of the proof. However it is unclear whether it is necessary to
+consider 5 local Hamiltonian or whether a smaller number suffices; See open question number
+1 for further discussion.
+
+3.1
+Connection to 3 −SAT
+
+We now show that the local Hamiltonian problem is a natural generalization of 3 −SAT to
+the quantum world. For this, we explain how 3 −SAT can be viewed as a 3-local Hamiltonian
+problem. We will work with qubits, but all operations are now classical operations in disguise.
+Let φ = C1 ∧C2 ∧· · · ∧Cr be a 3-SAT formula on n variables, where each Ci is a clause, i.e.
+an OR over three variables or their negations. For every clause Ci we define a 8 × 8 matrix
+
+6
+
+
+Hi, operating on three qubits. Hi is a projection on the unsatisfying assignment of Ci. For
+example, for the clause Ci = X1 ∨X2 ∨¬X3 we get the matrix:
+
+Hi =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+= |001⟩⟨001|
+
+since 001 is the only unsatisfying assignment for Ci. Hi defined this way is a projection matrix.
+Moreover, it is Hermitian. If we look at Hi, its eigenvectors are all basis vectors of three qubits,
+with the vectors corresponding to satisfying assignments having eigenvalues 0, and the vector of
+the unsatisfying assignment corresponding to the eigenvalue 1. We then consider the operation
+of Hi on all the qubits, by taking tensor product of Hi with identity on the rest of the qubits.
+We denote the new matrix by Hi too, again by slight abuse of notation; It will be clear from
+context which of these we are talking about. If z is an assignment to the n variables which
+satisfies a clause Ci, then Hi|z⟩= 0. Otherwise, Hi|z⟩= |z⟩. We can view this as if the
+matrix Hi “penalizes” assignments that do not satisfy Ci by giving them one unit of “energy”.
+We denote H = �r
+i=1 Hi, and observe that H|z⟩= q|z⟩where q is the number of clauses
+unsatisfied by z. All eigenvalues of H are non negative integers, and zero is an eigenvalue of H
+if and only if H corresponds to a satisfiable formula. Otherwise, the smallest eigenvalue of H
+is at least 1. Thus, 3−SAT is equivalent to the following problem: “Is the smallest eigenvalue
+of H 0 or is it at least 1?”, which is an instance of the 3−local Hamiltonian problem.
+
+4
+Local Hamiltonians is in QMA
+
+Theorem 1 The k-Local Hamiltonian problem is in QMA for any k = O(log(n)).
+
+Proof: We first want to show that if the Hamiltonian H has an eigenvalue smaller than a,
+i.e. if we are in a “yes” instance, then there exists a witness that Marlin can use to convince
+Arthur for this fact. The obvious witness to use, is simply an eigenstate with eigenvalue smaller
+than a. Let us denote this ground state by |η⟩and its corresponding eigenvalue by λ. We will
+construct a procedure which outputs 1 with probability which is related to this eigenvalue. To
+illustrate the idea, consider first the simpler case in which all the Hamiltonians Hi are merely
+projections, Hi = |αi⟩⟨αi|. In this case, we note that
+
+λ = ⟨η|H|η⟩=
+
+r
+�
+
+i=1
+⟨η|Hi|η⟩=
+
+r
+�
+
+i=1
+⟨η|αi⟩⟨αi|η⟩=
+
+r
+�
+
+i=1
+|⟨η|αi⟩|2
+(1)
+
+or,
+
+λ/r = (1/r)
+
+r
+�
+
+i=1
+|⟨η|αi⟩|2
+(2)
+
+7
+
+
+We note that |⟨η|αi⟩|2 is exactly the probability to get a positive answer when measuring
+the state |η⟩in the basis |αi⟩and the subspace orthogonal to it. Thus, equation 2 gives the
+following interpretation of λ/r: It is simply the probability to get the answer 1 when we pick i
+randomly between 1 and r and measure |η⟩in the basis |αi⟩and the subspace orthogonal to it.
+This implies an easy way to design an experiment, or a quantum verification procedure on the
+input state η, which outputs 1 with probability 1 −λ/r and 0 otherwise. Pick an i ∈{1, ...r}
+uniformly at random, measure |η⟩in the basis |αi⟩and the orthogonal subspace, and output 0
+if the measurement resulted in a projection on |α⟩; output 1 otherwise. The probability for 1
+is exactly 1 −λ/r ≥1 −a/r. On the other hand, if H is a “no” instance, i.e. all eigenvalues
+are larger than b, then for any vector |η⟩,
+
+⟨η|H|η⟩=
+
+r
+�
+
+i=1
+⟨η|Hi|η⟩≥b;
+(3)
+
+The probability for 1 in the experiment is in this case
+
+1 −⟨η|H|η⟩/r ≤1 −b/r;
+(4)
+
+Since we know that b −a ≥1/ng, we also have that the probabilities for 1 for the “yes” and
+“no” instances are polynomially different: 1 −a/r > 1 −b/r + 1/ng. We can amplify this
+difference using the amplification theorem and this proves that the problem is indeed in QMA,
+if the Hamiltonians are simple projections.
+We remark that since the projections are local, i.e. involve at most log(n) qubits, such a
+measurement can be performed by a polynomial quantum verifier.
+To deal with the more general case, where Hi are general Hermitian positive semidefinite
+matrices with norm at most 1, we note that any such matrix can be written in its spectral
+decomposition,
+
+Hi =
+
+dim(Hi)
+�
+
+j=1
+wi
+j|αi
+j⟩⟨αi
+j|
+(5)
+
+We now impose the following trick which enables us to toss a coin with probability 1 −
+⟨η|Hi|η⟩. We first add one qubit to the system, in the state |0⟩. We then apply the following
+unitary transformation on the qubits of Hi and on the extra qubit:
+
+T|αi
+j⟩|0⟩= |αi
+j⟩(
+�
+
+wi
+j|0⟩+
+�
+
+1 −wi
+j|1⟩)
+(6)
+
+We now prove that the measurement of the extra qubit outputs 1 with probability 1−⟨η|Hi|η⟩.
+To see this, write
+|η⟩=
+�
+
+j
+yj|αi
+j⟩|βi
+j⟩
+(7)
+
+using the Schmidt decomposition. After the transformation T, this state evolves to
+
+T|η⟩=
+�
+
+j
+yj|αi
+j⟩|βi
+j⟩(
+�
+
+wi
+j|0⟩+
+�
+
+1 −wi
+j|1⟩)
+(8)
+
+8
+
+
+The probability to measure 1 is then the squared norm of the following vector:
+
+�
+
+j
+
+�
+
+1 −wi
+jyj|αi
+j⟩|βi
+j⟩.
+(9)
+
+This squared norm is just
+�
+
+j
+(1 −wi
+j)|yj|2 = 1 −
+�
+
+j
+wi
+j|yj|2
+(10)
+
+but we know that
+⟨η|Hi|η⟩=
+�
+
+j
+wi
+j|yj|2.
+(11)
+
+We can now describe the exact verification procedure: Pick a random index i, and perform the
+above test for Hi: Add one qubit, apply T and measure the extra qubit. The outcome will be
+1 with probability
+�
+
+i
+(1/r)(1 −⟨η|Hi|η⟩) = 1 −⟨η|H|η⟩/r
+(12)
+
+If we are in a “yes” instance, this number will be larger than 1 −a/r; If we are in a “no”
+instance, it will be smaller than 1 −b/r, and the proof is completed just as in the simple
+projections case. □
+
+5
+QMA Completeness
+
+In this section we will show that the 5-local Hamiltonian problem is QMA-hard. The proof is
+complicated, and we will start with an overview.
+
+5.1
+Reminder of the Cook-Levin Proof
+
+The proof that local Hamiltonian is QMA complete bears a lot of resemblance to Cook-Levin’s
+proof that 3SAT is NP-Complete. Let us briefly sketch the idea underlying the Cook-Levin’s
+proof, so that we can refer to it later on. Consider an NP problem, L. There is a Turing
+machine which operates on x, y where x is a supposedly member of L and y is a supposed
+witness for this fact, and M checks that x is in the language using y.
+We now want to
+construct a reduction to 3 −SAT, i.e. to design a Boolean formula which is satisfiable if and
+only if x is in the language, i.e. if the Turing machine performed a successful computation
+which started with the input and ended with “accept” or 1, in the first site on the tape. To
+construct such a formula, we consider the variables xi,t where i runs over all reachable locations
+on the tape in the polynomial time limit and t runs over the time steps. xi,t are variables which
+can get any of some constant number of possible values; These values correspond to a finite
+description of the state of the Turing machine related to the location i on the tape at time
+t. They include what is written on the tape at that time and that location, the state of the
+
+9
+
+
+Turing machine at that time, and whether the head of the Turing machine is at that location
+or not. An assignment to these variables can be viewed as a history of some computation; a
+description of how the Turing machine evolved in time. The 3-SAT formula we construct is
+essentially checking that this evolution is a valid evolution of the Turing machine. Each clause
+in the formula will look at three subsequent cells at some time t, say xi−1,t, xi,t and xi+1,t plus
+the cell xi,t+1. Given the values of xi−1,t, xi,t and xi+1,t, it is possible to know whether the
+value of xi,t+1 is valid or not; Thus, the clause is satisfied if and only if xi,t+1 evolves from
+xi−1,t, xi,t and xi+1,t by a valid computation. We also add clauses that check that the input is
+really x, i.e. clauses of the form xi,0 if the i′th input bit was 1, and ¬xi,0 if the i′th input bit
+was 0. Finally, we check that the output is accept by adding the clause x1,T , which is satisfied
+if the first site is 1 at the end of the computation at time T. Each of these verifications is local,
+since the evolution of the Turing machine is local, and thus each corresponds to a clause. Note
+that our variables have a constant but possibly large set of possible values; It is easy to see
+that such formulas can be converted to formulas over Boolean variables, and that each clause
+can be converted to many clauses each operating only on three variables. All these details are
+none of our concern; The main issue, which we will try to mimic in the quantum case, is that
+the history of a Turing machine can be verified locally.
+
+5.2
+The Quantum analog- Sketch
+
+The idea of the quantum proof is very similar. We know that L is in QMA; Thus, there exists
+a quantum circuit, using two-qubit gates, which accepts an input x with some witness |ξ⟩with
+high probability (we will assume it is exponentially close to 1) if x is in L and rejects with
+exponentially close to one probability if x ̸∈L given any witness. We want to reduce this
+problem to the local Hamiltonian problem, i.e. to construct a Hamiltonian which will have
+small eigenvalue in the x ∈L case and only large eigenvalues otherwise.
+How to construct the analog? Drawing from the Cook-Levin proof, we want the history of
+the computation to be our witness, which we hope to be able to verify locally. Our first guess
+for the quantum witness would thus be the sequence of states which constitute the history of
+the computation:
+|x⟩|ξ⟩, U1|x⟩|ξ⟩, U2U1|x⟩|ξ⟩, ..., UT · · · U2U1|x⟩|ξ⟩.
+(13)
+
+However, there is a serious problem with this suggestion. Let us assume for a moment that U1
+is simply the identity gate, and all we want to check is whether the first and second states given
+to us by the prover are the same, and we want to do this via a local Hamiltonian. In general,
+we want to design a local Hamiltonian which when applied on |α⟩|α⟩it behaves differently
+than when applied on |α⟩|β⟩, if |β⟩is quite different from |α⟩. The problem is that a local
+Hamiltonian has access only to the reduced density matrix of the state |α⟩|β⟩to five qubits
+at a time. In other words, ⟨η|H|η⟩for any state |η⟩will be exactly the same if we move to
+|η′⟩as long as it has the same reduced density matrices as |η⟩on all sets of five qubits. It
+is very easy to construct two states which agree on all density matrices of five qubits, but
+are completely different due to their overall correlations or entanglement. Hence, using only
+local Hamiltonians we cannot hope to be able to verify the correctness of the time evolution
+if the states are given to us sequentially. However, entanglement which was the source of this
+
+10
+
+
+problem, can also help us solve it. Consider the following superposition
+
+1
+√
+
+2(|0⟩|α⟩+ |1⟩|β⟩)
+(14)
+
+From the reduced density matrix of just the first qubit, we can learn a lot about whether the
+states |α⟩and |β⟩are the same or different; in fact, the reduced density matrix of the first qubit
+tells us the angle between these two states, as one can easily verify. This means that if the
+histories are given to us in superposition, there is hope that local measurements or observables
+like our local Hamiltonian will be able to verify the correctness of the time evolution.
+The idea is therefore to ask the prover for the history of the computation, not in the form
+of sequential states but rather in a superposition over all time leafs:
+
+|η⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+Ut....U1|x, ξ⟩|t⟩
+(15)
+
+we will see later how this state can actually be verified for correctness. In the book[9] this
+idea of moving from time evolution to a time-independent local Hamiltonian is attributed to
+Feynman[4].
+Except for this main difference of using superposition over time instead of sequential time,
+there is another essential difference in the proof. In the classical case the eigenvalues are inte-
+gers, and so to show soundness one only has to show that the resulting formula is not satisfiable
+if x is not in the language. The corresponding statement would be that the smallest eigenvalue
+of H is not 0; In the classical case, this automatically means that it is at least 1. In the quan-
+tum case, due to the continuous nature of the model, the fact that the smallest eigenvalue is
+larger than 0 is not enough; One actually has to show that it is at least polynomially bounded
+away from zero, because the accuracy achieved by the verification process is only polynomial,
+i.e. we can only amplify a polynomial separation and not an exponentially small separation.
+To bound the lowest eigenvalue from below Kitaev uses a geometrical argument, augmented
+with some nice ideas of how to perform the analysis involving the known theory of random
+walks on the line, represented here by the time axis.
+
+5.3
+The reduction
+
+Let L be a problem in QMA. Then there exists a quantum circuit Q with two-qubit gates
+U1, . . . , UT such that for an input |x⟩and a witness |ξ⟩the output qubit has more than 1−e−n
+
+probability to collapse on |1⟩if x ∈L and less than e−n probability to collapse the first qubit on
+|0⟩otherwise. Given this sequence of gates, we will construct an input to the local Hamiltonian
+problem, i.e. a sequence of local matrices. For now, our matrices will not be completely local,
+but instead will operate on two qubits among the n computer qubits plus an extra T + 1
+dimensional Hilbert space, which will serve as a clock, and which is augmented to the right
+of all the other qubits. We will modify the Hamiltonian later on so it is truly 5-local, but for
+the sake of simplicity we present the main part of the proof using this extra T + 1 dimensional
+Hilbert space. We denote by the subscript C the subspace of the clock. The subscript i at the
+
+11
+
+
+foot of operators means that they operate on qubit number i; The projection operator Π|α⟩
+
+means project on the subspace spanned by |α⟩.
+Our Hamiltonian will be a sum of three main
+terms, H = Hin + Hout + Hprop.
+
+• Hin is a matrix that checks that the input for the first n qubits is indeed x, where we do
+not care about the witness; It can be anything. This check need to verify that the ith
+bit is indeed xi, at time 0, for all i between 1 to n. This is done by projecting the state
+to time 0 (by projecting the clock state to time 0), and then projecting the remaining
+state to the space orthogonal to |xi⟩:
+
+Hin =
+
+n
+�
+
+i=1
+Π|¬xi⟩
+i
+⊗|0⟩⟨0|C
+(16)
+
+• Hout is a matrix that checks that the output is 1 at time T, again, by first projecting the
+clock to time T and then projecting the state to the subspace orthogonal to |1⟩on the
+first qubit which carries the answer of the quantum circuit:
+
+Hout = Π|0⟩
+1 ⊗|T⟩⟨T|C
+(17)
+
+• Hprop checks that the propagation of the computational process is done according to the
+given circuit. It is a sum of T terms,
+
+Hprop =
+
+T
+�
+
+t=1
+Hprop(t)
+(18)
+
+where each term checks that the propagation from time t −1 to t is correct:
+
+Hprop(t) = 1
+
+2(I ⊗|t⟩⟨t| + I ⊗|t −1⟩⟨t −1| −Ut ⊗|t⟩⟨t −1| −U†
+t ⊗|t −1⟩⟨t|)
+(19)
+
+During the proof of the completeness part, it will become clear why each of these terms
+really verifies what we claim it does. Note that each term in the above Hamiltonian indeed
+satisfies our constraints of being Hermitian, positive semi-definite and of norm at most 1; There
+is one problem, which is that it is only log-local and not local, since it operates on two qubits
+among the main qubits plus the clock space (which can be represented by logarithmically many
+qubits, which is the reason why we call it log-local.) We will fix this problem only much later
+and for now we work with the Hamiltonian H as defined. To complete the reduction we also
+need to specify a and b; We let a = 1/T 10, and b = 1/4(T + 1)3.
+The claim is that the constructed Hamiltonian has an eigenvalue less than a if x is in the
+language that the quantum circuit accepts, and otherwise all the eigenvalues of the Hamiltonian
+are larger than b. Once we prove both claims (completeness and soundness) we will be done;
+The two together imply that solving the local Hamiltonian problem for the Hamiltonian that
+is associated with a certain circuit, is a way to decide the answer of the circuit, (i.e. solving the
+Hamiltonian problem is QMA hard: any QMA problem can be solved using a machine that
+solves the local Hamiltonian problem.) It will remain only to deal with the locality problem
+which we will do at the very end.
+
+12
+
+
+5.4
+Completeness
+
+To prove completeness, we want to show that a “yes” instance of the QMA problem transforms
+to a “yes” instance in the Local Hamiltonian problem. If x ∈L, the H we constructed has an
+eigenvalue smaller than a. For this, it suffices to prove the following claim:
+
+Claim 2 If x is accepted by the circuit Q, for some quantum witness |ξ⟩, with probability which
+is larger than 1 −ǫ, then the Hamiltonian H = Hin + Hprop + Hout constructed above given x
+and the circuit Q has an eigenvector with eigenvalue ≤ǫ.
+
+Proof: To see why the claim is true, in analogy with the classical case, the state we will use
+is the history of the computation
+
+|η⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+UtUt−1 . . . U1|γ0⟩⊗|t⟩
+(20)
+
+where |γ0⟩is the state at the beginning of the computation (a tensor product of the input and
+the witness to the machine) and |t⟩is a clock state.
+The intuition is that this state is “almost” a zero eigenstate of the Hamiltonian H, since is
+“almost” satisfies all the tests this local Hamiltonian checks. More formally, we claim that
+
+⟨η|H|η⟩≤ǫ.
+(21)
+
+which suffices to prove the claim.
+To calculate ⟨η|H|η⟩we first note that
+
+Hin|η⟩= 0.
+(22)
+
+It is less obvious but can be easily checked that for each t = 1, ...T
+
+Hprop(t)|η⟩= 0.
+(23)
+
+The reader is recommended to verify this step, since it explains the definition of the prop-
+agation Hamiltonian, which is one of the main conceptual steps in the proof. The intuition
+is that the propagation Hamiltonian is composed of four parts, all confined to the projections
+on the span of the two time leafs |t −1⟩and |t⟩. Two terms in the Hamiltonian Hprop(t),
+I ⊗|t⟩⟨t| + I ⊗|t −1⟩⟨t −1| correspond simply to picking out the state at those times. In
+addition, there are two extra terms: the term, Ut ⊗|t⟩⟨t −1| which corresponds to a forward
+propagation in time, and a term U†
+t ⊗|t −1⟩⟨t| which corresponds to backwards propagation
+in time; When applied on the projection of the state to the two time steps |t −1⟩and |t⟩, the
+forward propagation in time term picks just the t −1 time step and propagates it forward by
+applying Ut to it, and then the resulting state gets canceled with the t time step; The same
+happens with the backwards propagation term which picks up the time step t, propagates it
+one step backwards by applying U†
+t and then this term gets canceled with it. with the t −1
+time step.
+It is left to check what happens to |η⟩when we apply Hout. When we apply Hout on |η⟩
+we get a projection on the part of |η⟩which rejects. Since the probability for rejection is ≤ǫ,
+we get that the norm squared of Hout|η⟩is at most ǫ, and hence ⟨η|Hout|η⟩= ∥Hout|η⟩∥2 ≤ǫ.
+Hence, the minimal eigenvalue of H is less than ǫ. □
+
+13
+
+
+5.5
+Soundness
+
+To complete the reduction, we need to show that if x /∈L, the minimal eigenvalue of H is
+larger than the chosen b.
+
+Theorem 2 If x /∈L then the minimal eigenvalue of H is ≥
+1
+4(T+1)3 .
+
+Proof: To prove this theorem we will put together several lemmas. The idea is to write H as a
+sum of two Hamiltonians, H1 = Hin + Hout, H2 = Hprop, and to use the following geometrical
+lemma, which gives a lower bound on the lowest eigenvalue of a sum of two Hamiltonians,
+given some conditions on the eigenvalues and eigenspaces of the two Hamiltonians.
+
+Lemma 1 Let H1 and H2 be two Hermitian positive semi-definite matrices, and let N1 and
+N2 be the eigenspaces of the eigenvalue 0, respectively. If the angle between N1 and N2 is some
+θ > 0, and the second eigenvalue of both H1 and H2 is ≥λ then the minimal eigenvalue of
+H1 + H2 ≥λ sin2(θ/2).
+
+Proof: Consider an eigenvector of H1 + H2, |δ⟩such that ∥|δ⟩∥= 1. For at least one of the
+subspaces N1 or N2 The angle between |δ⟩and this subspace is at least θ
+
+2. W.L.O.G let this
+subspace be N1. We have
+
+⟨δ|(H1 + H2)|δ⟩= ⟨δ|H1|δ⟩+ ⟨δ|H2|δ⟩≥⟨δ|H1|δ⟩.
+
+We write
+|δ⟩= |µ⟩+ |µ⊥⟩
+
+where |µ⟩, |µ⊥⟩are the projections of |δ⟩onto N1 and the orthogonal subspace to N1 respec-
+tively. Then
+⟨δ|H1|δ⟩= ⟨µ⊥|H1|µ⊥⟩≥∥µ⊥⟩∥2λ
+
+where the first equality follows from the fact that N1 and and its complement are invariant
+to the application of H1 and the second follows from the definition of H1 and λ. We also
+know that ∥µ⊥⟩∥2 ≥sin2(θ/2) because the angle between N1 and |δ⟩is at least θ/2, and this
+completes the proof. □
+To use the geometrical lemma, we will assume x /∈L and give lower bounds on the second
+eigenvalues of H1 and H2, as well as a lower bound on θ. We will first bound the second
+eigenvalues of H1 and H2.
+
+Lemma 2 The second eigenvalue of H1 is at least 1.
+
+Proof: The second eigenvalue of H1 is ≥1 since Hin and Hout are projections and hence
+their eigenvalues are 0 and 1.
+Since the eigenspaces of the eigenvalue 1 of Hin and Hout
+are orthogonal (because they operate on different times), they commute, and so their second
+eigenvalue is simply the minimal second eigenvalue of the two. □
+
+Lemma 3 The second eigenvalue of H2 = Hprop is at least
+1
+2(T+1)2 .
+
+14
+
+
+Proof: It turns out that for this and further arguments it is simpler to look at Hprop in a
+rotated basis. The eigenvalues of a matrix are not changed when looked at in a different basis.
+Hence we define the unitary matrix R as follows:
+
+R =
+
+T
+�
+
+t=0
+Ut...U1 ⊗|t⟩⟨t|.
+(24)
+
+R is unitary since it is a block diagonal matrix with each of its blocks unitary. What R does
+is basically rotate the basis in each time leaf to the basis which one gets if one applies the
+first t computation steps on the computational basis. Hence, in the new rotated basis, the
+computation is simply the identity. Now, it is easy to check that
+
+R†Hprop(t)R = 1
+
+2(I ⊗|t⟩⟨t| + I ⊗|t −1⟩⟨t −1| −I ⊗|t −1⟩⟨t| −I ⊗|t −1⟩⟨t|)
+(25)
+
+We can write Hprop = I ⊗A where A is a (T + 1) × (T + 1) of the form:
+
+A =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+2
+−1
+
+2
+0
+0
+0
+0
+0
+0
+−1
+
+2
+1
+−1
+
+2
+0
+0
+0
+0
+0
+0
+−1
+
+2
+1
+−1
+
+2
+0
+0
+0
+0
+0
+0
+−1
+
+2
+1
+−1
+
+2
+0
+0
+0
+0
+0
+0
+−1
+
+2
+1
+−1
+
+2
+0
+0
+0
+0
+0
+0
+−1
+
+2
+1
+−1
+
+2
+0
+0
+0
+0
+0
+0
+−1
+
+2
+1
+−1
+
+2
+0
+0
+0
+0
+0
+0
+−1
+
+2
+1
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+= I −
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+2
+1
+2
+0
+0
+0
+0
+0
+0
+1
+2
+0
+1
+2
+0
+0
+0
+0
+0
+0
+1
+2
+0
+1
+2
+0
+0
+0
+0
+0
+0
+1
+2
+0
+1
+2
+0
+0
+0
+0
+0
+0
+1
+2
+0
+1
+2
+0
+0
+0
+0
+0
+0
+1
+2
+0
+1
+2
+0
+0
+0
+0
+0
+0
+1
+2
+0
+1
+2
+0
+0
+0
+0
+0
+0
+1
+2
+1
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+= I −B
+
+The eigenvalues of R†HpropR or equivalently of Hprop are simply the eigenvalues of A (with
+multiple appearances), or 1 minus those of B; It suffices then to find the eigenvalues of B.
+Interestingly, the matrix B is a familiar matrix from the theory of random walks and we
+will use this fact in the analysis of its eigenvalues. For a direct proof see Kiteav[10]. Here we
+refer to the theory of random walks due to its intriguing connection with the subject at hand.
+For a nice exposition of random walks, see Lovasz’s survey[12]. Returning to our matrix B,
+it turns out that it is the stochastic matrix corresponding to a simple random walk on the
+time axis, from 0 to T. with a loop at both ends. The largest eigenvalue of this matrix is 1,
+corresponding to the eigenvector which is the uniform limiting distribution. This eigenvalue
+gives the 0 eigenvalue of A and hence of Hprop. In random walk theory, one is very interested
+
+15
+
+
+in the second eigenvalue of the stochastic matrices corresponding to random walks since the
+second eigenvalue is directly related to the rate at which the random walk mixes to its limiting
+distribution. B’s second largest eigenvalue λ2 is bounded from below by the conductance φ of
+the graph on which the random walk is applied, using Jerrum and Sinclair’s bound[15]:
+
+1 −λ2 ≥φ2/2
+(26)
+
+The conductance of the random walk is
+1
+T+1 which gives 1 −λ2 ≥
+1
+2(T+1)2 . Since 1 minus the
+second largest eigenvalue of B is exactly the second smallest eigenvalue of A, this implies the
+desired result. □
+It is left to give a lower bound on the angle between the two null spaces.
+
+Lemma 4 The angle between N1 and N2 satisfies sin2(θ/2) ≥
+1
+2(T+1).
+
+Proof: H1 = Hin + Hout is a projection, and hence the null space is simply the subspace
+orthogonal to the space on which H1 projects. Hence, N1 is equal to the direct sum of three
+subspaces:
+
+N1 = (|x⟩⟨x| ⊗W ⊗|0⟩⟨0|) ⊕(|1⟩⟨1| ⊗W ⊗|T⟩⟨T|) ⊕T−1
+t=1 (W ⊗|t⟩⟨t|)
+(27)
+
+where W is the entire Hilbert space for the remaining of the qubits. N2, the null space of
+Hprop, is exactly the space spanned by all valid computations starting with an arbitrary state
+|α⟩on the qubits of the input and witness together. These are all states of the form:
+
+|η⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+Ut . . . U1|α⟩⊗|t⟩.
+(28)
+
+The fact that such states are in the null space of Hprop was shown before; The fact that all
+states in the null space of Hprop are of this form follows from looking at the rotated R†HpropR,
+as before. The null space of the rotated Hprop is simply the entire space on the computer
+register times the null space of the clock matrix A; The null space of the matrix A is exactly
+all constant vectors. This is a standard claim, following from the fact that the random walk
+B defines on the line is aperiodic, ergodic, and converges to the uniform vector. (One can
+readily prove this fact also from scratch, by considering the effect of A on the eigenvector
+corresponding to eigenvalue 1, and looking at the maximal coordinate.)
+Now, to find N2, the null space of Hprop, we have to rotate the null space of RHpropR†
+
+(which is all the Hilbert space on the computer qubits times constant vectors on the clock
+space) back to the original basis, by applying R and R† from both sides. It is easy to see that
+for any state
+
+|α⟩⊗
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+|t⟩
+(29)
+
+rotating it back gives a state of the form of equation 28.
+
+16
+
+
+We now want to bound the angle between N1 and N2, which is the minimal angle between
+two vectors from both spaces. Any vector in N2 is of the form of equation 28, i.e. a history of
+a certain computation, and the angle φ between such a history |η⟩and N1 is given by
+
+cos2(φ) = ∥ΠN1|η⟩∥2
+(30)
+
+where ΠN1 denotes the projection onto N1. This is true since |η⟩is of norm 1. Thus we have
+that the angle θ between N1 and N2 is the minimal angle φ between a history vector and the
+space N1, or equivalently:
+
+cos2(θ) = max|η⟩∈N2{∥ΠN1|η⟩∥2}
+(31)
+
+We now claim that for any |η⟩∈N2 we have:
+
+∥ΠN1|η⟩∥2 ≤1 −
+1
+2(T + 1).
+(32)
+
+The proof of this will complete the proof of the lemma, using equation 31. To prove the upper
+bound of equation 32, we observe that the norm squared of the projection onto N1 is simply
+the sum of the norms squared on the projections on the different parts of N1, as a direct
+sum of subspaces. If we write N1 as a direct sum of the different spaces spanned by times
+t = 1, ..., T −1, then since |η⟩is the uniform superposition over time, the projection of |η⟩on
+each of the middle time step gives
+1
+T+1, and so the total contribution of the middle time leafs
+is T−1
+
+T+1.
+We now claim that the contribution of the first and last leafs together is far from the
+maximal possible contribution
+2
+T+1. Intuitively, this is due to the fact that the projection
+on N1 sums up the projection on x as input in the beginning of the computation plus the
+projection on “accept” at the end of the computation. However, since |η⟩represents a valid
+computation by a circuit that does not accept x, it cannot be the case that both projections
+are maximal. To quantify this statement, we observe that we can write |η⟩as a sum of two
+states:
+
+|η⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+|γt⟩⊗|t⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+(a|γ1
+t ⟩+ b|γ2
+t ⟩) ⊗|t⟩= a|η1⟩+ b|η2⟩
+(33)
+
+where |γ1
+0⟩is the normalized projection of |γ0⟩on the input being x, and |γ2
+0⟩is the normalized
+projection on the orthogonal subspace, and |γ1
+t ⟩,|γ2
+t ⟩are simply the states obtained from the
+initial states by applying the computation. The norm sqaured of the projection of the first
+time leaf of |η⟩,
+1
+√T+1|γ0⟩⊗|0⟩, onto N1 is
+a2
+T+1. The norm squared of the projection of the
+
+last time leaf of |η⟩,
+1
+√T+1|γ0⟩⊗|T⟩, onto N1 is the norm squared of
+
+1
+√
+
+T + 1(a|δ1
+T ⟩+ b|δ2
+T ⟩)
+(34)
+
+where |δ1
+T ⟩, |δ2
+T ⟩are the projections of |γ1
+T ⟩, |γ2
+T ⟩on “accept”, respectively (we are using the
+linearity of projection.) Now we have that
+
+∥|δ1
+T ⟩∥2 ≤e−n
+(35)
+
+17
+
+
+since the circuit accepts with probability less than e−n if x is not in the language. Hence,
+
+∥a|δ1
+T ⟩+ b|δ2
+T ⟩∥≤2e−n + b2
+(36)
+
+and so the total norm squared of the projection on N1 is at most
+
+∥ΠN1|η⟩∥2 ≤
+1
+T + 1(a2 + 2e−n + b2) + T −1
+
+T + 1 ≤(1 −
+1
+2(T + 1))
+(37)
+
+using the fact that a2 + b2 = 1. This completes the proof.□
+To complete the proof of the theorem 2, we simply apply the geometrical lemma 1 using
+the bounds we have shown for the eigenvalues and for θ. □
+This completes the proof of the hardness of Local Hamiltonian for QMA, if we are allowed
+to use Hamiltonians which operate on spaces of polynomial dimension; In the next section
+we make the last step that is needed to convert the Hamiltonian to a 5-local Hamiltonian
+consisting of terms operating on five qubits only.
+
+6
+Improving from log local to 5−local
+
+To move from operators on the entire clock to local operators, represent the time in unary
+representation on T qubits which will serve as the clock qubits. For example, time t = 4 is
+represented by the T qubit state |111100 . . . 00⟩. To modify the Hamiltonian accordingly, we
+replace all operators on the clock space by operators that operate on three qubits at most. We
+apply the following modifications:
+
+|t⟩⟨t −1|
+�−→|110⟩⟨100| ⊗I
+(38)
+
+|t −1⟩⟨t|
+�−→|100⟩⟨110| ⊗I
+
+|t⟩⟨t|
+�−→|110⟩⟨110| ⊗I
+
+|t −1⟩⟨t −1| �−→|100⟩⟨100| ⊗I
+
+where in all these cases |110⟩⟨100| or the similar terms operate on qubits t −1, t, t + 1 of the
+clock qubits and the identity I operates on the remaining T −2 clock qubits. This will hold
+in all terms of Hprop, except for two exceptions to the above - when t = 1 and t = T, in order
+not to refer to bits 0 and T + 1 of the clock which do not exist. For t = 1 we will drop the
+first bit of the 3-bit operator, so the operator |1⟩⟨0| on the original clock becomes |10⟩⟨00| on
+the first two bits; and similarly |0⟩⟨1| on the original clock becomes |00⟩⟨10| on the first two
+bits in the unary clock. For the case t = T we drop the 3rd bit of the operators in the same
+manner. The final Hprop which we get is
+
+H′
+prop(t) = 1
+
+2(I ⊗|110⟩⟨110| + I ⊗|100⟩⟨100| −Ut ⊗|110⟩⟨100| −U†
+t ⊗|100⟩⟨110|)
+(39)
+
+where the three qubit operators operate on qubits t −1, t, t + 1. For H′
+prop(1), H′
+prop(T) we
+get a slightly different expression with the clock operators operating only on two qubits as
+explained above.
+
+18
+
+
+As for Hin and Hout, we again change |t⟩⟨t| to be an operator on three qubits for the middle
+time leafs and two qubits for the beginning and end leafs.
+We first claim that restricting ourselves to the subspace spanned by states with the clock
+qubits being in valid unary representations, all previous claims hold. Explicitly, as can be
+easily checked:
+
+Claim 3 For any state |η⟩which represents a valid history of a computation, (in unary rep-
+resentation) we still get H′
+prop|η⟩= 0.
+
+From this, using exactly the same arguments as used before, we have that
+
+Claim 4 If |η⟩is a history of an accepting computation, then ⟨η|H′|η⟩≤ǫ.
+
+Hence, completeness will go through with these modifications. However, soundness will not
+go through because of the following reason. The T qubits that we have introduced have many
+more possible states except for valid unary representations of some time step. The H′ we have
+defined operates on such states as well; To prove soundness, we need to show that among such
+states there are no states of small eigenvalue in case of x not in the language. This might be
+complicated, and we resort to a different solution.
+In addition to the modifications of the existing terms in the Hamiltonian, we introduce a
+new term which penalizes the state of the clock qubits if they are not unary representation of
+some time step. We call this term Hclock; It locally checks that the clock bits are a valid unary
+representation. All we need to check is that two consequent bits cannot be in the state |01⟩;
+This can be done by a sum of local projections, as follows:
+
+H′
+clock =
+
+T
+�
+
+t=1
+|01⟩⟨01|t−1,t ⊗I.
+(40)
+
+Our (truly!) final Hamiltonian is defined to be
+
+H′ = H′
+in + H′
+out + H′
+prop + H′
+clock
+(41)
+
+Clearly, |η⟩(with a unary clock) is an eigenvector of eigenvalue ≤ǫ of the new Hamiltonian
+H′, since it is a zero eigenvector of H′
+clock, and so completeness is preserved.
+For the proof of soundness, we observe that H′ keeps the subspace that is spanned by
+all states in which the clock qubits are valid unary representations invariant; Let us call this
+subspace D. The orthogonal subspace, D⊥, is also invariant under the operation of H′. H′
+
+operates on D just as the previous H did, and hence on this subspace the lower bound on the
+eigenvalues holds as before; On the orthogonal subspace D⊥the eigenvalue of H′ is at least
+1 since H′
+clock detects at least one violation. Hence, overall, the lower bound from theorem 2
+holds here too. This completes the proof of completeness of 5-local Hamiltonian.
+
+Remark 2 Why 5? We remark here regarding the necessity of three qubits Hamiltonians
+instead of one qubit Hamiltonians to control the propagation in time. One can naively suggest to
+use the one qubit Hamiltonian |1⟩⟨0| operating on the tth clock qubit to represent the propagation
+
+19
+
+
+from t −1 to t, instead of the three qubit operator we use. This suggestion does not work for
+the following reason: the history states will no longer be eigenstates of H′
+prop, since the one
+qubit time propagation terms might cause valid time leafs to propagate to invalid ones; E.g.,
+|11100000⟩will propagate by U6 ⊗|1⟩⟨0|6 to |11100100⟩. This does not happen when three qubit
+operators are used. It is an open question whether this obstacle can be overcome to show that
+3-local or 4-local Hamiltonian is QMA complete; See open question 3.
+
+7
+Discussion and Open Questions
+
+We have presented here a beautiful result by Kitaev which we believe is a fundamental stepping
+stone for the field of quantum complexity. We collect here a list of open questions it raises.
+The first set of problems is related to the question of the expressiveness of the class QMA.
+There are hundreds of NP complete problems, from an enormous variety of fields; So far, the
+only interesting quantum MA complete problem we know of is the Local Hamiltonian problem.
+
+Open Question 1 Find more quantum MA complete problems.
+
+In particular,
+
+Open Question 2 Is there a natural QMA complete problem which is not quantum related?
+
+We have proved that 5-local Hamiltonian is QMA complete. What is the importance of the
+number five? It is unknown whether 5 qubits are necessary. Perhaps even 2−locality suffices
+to achieve QMA completeness. This is very different from the classical situation, where it is
+known that 3-SAT is NP complete but 2-SAT can be solved in polynomial time.
+
+Open Question 3 What is the complexity of k-local Hamiltonian with k = 2, 3, 4?
+
+The next question is related to the definition of the class QMA:
+
+Open Question 4 Is QMA with two sided errors the same as QMA with one sided error?
+
+This holds in the classical case, and the question is whether it holds quantumly. Kitaev
+and Watrous[11] show the equivalence of one and two sided errors in certain cases (quantum
+interactive proofs with more rounds) but the proof does not carry over to this case.
+Another open question which is related to the definition of QMA is
+
+Open Question 5 Is QCMA=QMA?
+
+Due to the results presented in this survey, it seems reasonable to assume that the answer
+is yes. Our intuition behind this conjecture is that the quantum verifier limits itself in its
+tests of the quantum state to the reduced density matrices of five qubits; It therefore does not
+care about longer range entanglement. Perhaps such states that are specified by short range
+entanglement can be efficiently generated. In other words:
+
+20
+
+
+Open Question 6 Consider a (possibly very complicated) n qubit state |ξ⟩. Is there an effi-
+cient circuit that generates a state |ξ′⟩which has (almost) the same reduced density matrices
+to any subset of five qubits?
+
+If this can be done, this will prove the equality QCMA = QMA since the classical witness
+can be the description of the quantum circuit, and the verifier can generate the state on its
+own. A proof that shows this equivalence is likely to be very insightful regarding quantum
+correlations. This question touches upon the interesting question of whether it is possible to
+develop a quantum analog of the beautiful theory of pseudo-random generators; In pseudo-
+random generation, one generates probability distributions that are very different from the
+uniform distribution but such that any circuit of some restricted set (say of bounded size)
+cannot tell the difference. The question we are asking is of a similar type, and can be viewed
+as a pseudo quantum generator type question, since we need the state to pass the test of the
+very restricted verifier who only looks at sets of five qubits.
+The results presented here highlight a very interesting connection between Hamiltonians
+and unitary gates or quantum circuits, which Kitaev attributes to Feynman[4]. We view this
+connection as fascinating and potentially very powerful. In particular, in exactly the same
+way QMA circuits are translated to a local Hamiltonian, one can also translate BQP circuits
+to a local Hamiltonian; It is very interesting to ask whether the other direction of moving
+from groundstates of local Hamiltonians to efficient circuits that generate them also holds. We
+cannot hope for a constructive version of this direction since it is QMA hard, but an existence
+proof of such short circuits for ground states of local Hamiltonians will be very interesting,
+leading to a positive answer to open question 5 and to implications to the very important task
+of quantum state generation (see [2].)
+
+Open Question 7 Given a local Hamiltonian, does there exist a polynomial size quantum
+circuit that generates (a state with non negligible projection on) its ground state?
+
+We remark that Feynman’s point of view[4] of moving from circuits to time independent
+Hamiltonians, enables one to translate short computation time into large spectral gap of Hamil-
+tonians. The spectral gap of Ω(1/T 3) achieved in kitaev’s proof is indeed expressed in terms
+of the computational time T. It is interesting to compare this to the framework of adiabatic
+quantum computation[3] in which the opposite direction of moving from large spectral gaps
+to efficient state generation is taken, when one aims at generating a groundstate of a final
+Hamiltonian Hf by designing a sequence of local Hamiltonians H0, ...Hf all with large spectral
+gaps.
+We end with a more general open problem which seems related to the results presented
+here:
+
+Open Question 8 Does the quantum analog of the PCP theorem hold? Can we prove hard-
+ness of approximation for quantum computation?
+
+Hopefully, the results and open questions presented in this survey will provide easy access
+to research in what we view as a fascinating area.
+
+21
+
+
+8
+Acknowledgements
+
+One of us (D.A.) wishes to thank Avi Wigderson for insightful comments during Kitaev’s first
+lecture about the subject[9].
+
+References
+
+[1] L. Adleman, J. DeMarrais, and M. Huang. Quantum computability. SIAM J. Computing
+26 (1997) 1524-1540.
+
+[2] Dorit Aharonov and Amnon Ta-Shma, Quantum sampling and statistical zero knowledge
+(tentative name), in preparation.
+
+[3] Edward Farhi, Jeffrey Goldstone, Sam Gutmann, Michael Sipser, Quantum Computation
+by Adiabatic Evolution, quant-ph/0001106
+
+[4] Richard. P. Feynman, Quantum Mechanical Computers, Optic News, 11, February 1985,
+p. 11
+
+[5] O. Goldreich, Lecture notes for the course “Introduction to Complexity Theory”, 1999.
+http://www.wisdom.weizmann.ac.il/mathusers/oded/cc99.html
+
+[6] L. Fortnow and J. Rogers. Complexity limitations on quantum computation. Journal of
+Comput. and Syst. Sci. 59(2) (1999), 240-252
+
+[7] Oded Goldreich and David Zuckerman. Another proof that BPP ‘ PH (and more). Elec-
+tronic Colloquium on Computational Complexity Technical Report TR97-045, September
+1997.
+
+[8] Iordanis Kerenidis and Ronald de Wolf, Exponential Lower Bound for 2-Query Locally
+Decodable Codes, quant-ph/0208062
+
+[9] A. Yu Kitaev, Lecture given in Hebrew University, Jerusalem, Israel, 1999.
+
+[10] A. Yu Kitaev, A. Shen, M. N. Vyalyi Classical and Quantum Computation, American
+Mathematical Society, 2002
+
+[11] A. Kitaev and J. Watrous. Parallelization, amplification, and exponential time simula-
+tion of quantum interactive proof systems. Proceedings of the 32nd ACM Symposium on
+Theory of Computing , 608-617, 2000.
+
+[12] L. Lovasz: Random Walks on Graphs: A Survey [in: Combinatorics, Paul Erds is Eighty,
+Vol. 2 (ed. D. Mikls, V. T. Ss, T. Sznyi), Jnos Bolyai Mathematical Society, Budapest,
+1996, 353–398.]
+
+[13] Motwani and Raghavan, Randomized algorithms, Cambridge University Press, 1995
+
+[14] C. Papadimitrious, computational complexity, Addison-Wesley, 1994
+
+22
+
+
+[15] Alistair Sinclair, Algorithms for random generation and counting: a Markov chain ap-
+proach, Birkhauser Verlag, Basel, Switzerland, 1993
+
+[16] J. Watrous. PSPACE has constant-round quantum interactive proof systems. Proceedings
+of the 40th Annual Symposium on Foundations of Computer Science, pages 112-119, 1999.
+
+[17] J. Watrous. Succinct quantum proofs for properties of finite groups. Proceedings of the
+41st Annual Symposium on Foundations of Computer Science, pages 537-546, 2000.
+
+[18] W.K.Wootters and W.H.Zurek, Nature (London), 299, 802, 1982
+
+[19] Stathis Zachos, Martin Furer: Probabilistic Quantifiers vs. Distrustful Adversaries. Proc.
+FSTTCS, Springer-Verlag, Lecture Notes in Computer Science (Vol. 287) pages 443-455,
+1987.
+
+23
+
+

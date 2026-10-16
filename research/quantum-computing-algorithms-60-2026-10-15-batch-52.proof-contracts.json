@@ -1,0 +1,1655 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-qa-28-polynomial-matrix-function-error",
+    "lem-qa-28-normalized-function-target",
+    "thm-qa-28-spectral-law-measurement",
+    "thm-qa-28-matrix-function-error-cost",
+    "thm-qa-28-spectral-estimation-guarantee",
+    "ex-qa-28-exponential-polynomial",
+    "ex-qa-28-two-level-spectral-estimate"
+  ],
+  "contracts": {
+    "thm-qa-28-polynomial-matrix-function-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-spectral-resolution-and-polynomial-spectral-projections",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe normal. If $\\lambda_1,\\dots,\\lambda_r$ are the distinct eigenvalues of $T$,\nthen there are pairwise orthogonal projections $P_1,\\dots,P_r$ such that\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\neach $P_j$ projects onto the eigenspace $E_{\\lambda_j}(T)$, and every $P_j$ is\na polynomial in $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-functional-calculus-for-a-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and write the spectral resolution from\n[[thm-spectral-resolution-and-polynomial-spectral-projections]] as\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\nwhere the $\\lambda_j$ are the distinct eigenvalues of $T$ and $P_j$ is the\northogonal projection onto $E_{\\lambda_j}(T)$. For a function\n$f:\\sigma(T)\\to\\mathbb C$ on the spectrum of $T$, define\n\n$$f(T):=\\sum_{j=1}^r f(\\lambda_j)P_j.$$\n\nThis is the **spectral functional calculus** of $T$. For the identity function\n$\\operatorname{id}_{\\sigma(T)}$, one has $\\operatorname{id}_{\\sigma(T)}(T)=T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-functional-calculus-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and let $f,g:\\sigma(T)\\to\\mathbb C$.\n\n1. $(f+g)(T)=f(T)+g(T)$.\n2. $(fg)(T)=f(T)g(T)$.\n3. If $\\overline f(\\lambda)=\\overline{f(\\lambda)}$, then $\\overline f(T)=f(T)^*$.\n4. If $h:f(\\sigma(T))\\to\\mathbb C$, then $(h\\circ f)(T)=h(f(T))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\dots,x_n$ be pairwise orthogonal vectors in a real or complex inner-product space, that is $\\langle x_i,x_j\\rangle=0$ whenever $i\\ne j$ ([[def-orthogonality-and-orthogonal-complement]]). Then\n\n$$\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2 ,$$\n\nthe empty sum on the right being $0$ at $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $V=0$, [F3] defines the operator norm as zero, so the result is immediate. Otherwise [F1]–[F2] give $p(H)-f(H)=\\sum_\\lambda (p(\\lambda)-f(\\lambda))P_\\lambda$. For any $v\\in V$, the vectors $P_\\lambda v$ are pairwise orthogonal by [F1]; hence [F4] gives $\\|(p(H)-f(H))v\\|^2=\\sum_\\lambda |p(\\lambda)-f(\\lambda)|^2\\|P_\\lambda v\\|^2\\le\\eta^2\\sum_\\lambda\\|P_\\lambda v\\|^2=\\eta^2\\|v\\|^2$, with the last equality following from $\\sum_\\lambda P_\\lambda=I$ and [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every unit vector $v$, step 1.1 yields $\\|(p(H)-f(H))v\\|\\le\\eta$. Taking the supremum over unit vectors using [F3] proves the asserted operator-norm bound. A bound on all of $I$ implies the required bound on its subset $\\sigma(H)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the zero-dimensional space using the zero-domain norm convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 permits eta=0 and the spectral coefficients then vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a one-point spectrum as a finite orthogonal sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses projections for distinct eigenvalues, including a full degenerate eigenspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the pointwise bound to every spectral value, including interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The spectral projections are supplied by finite-dimensional spectral resolution in step 1.1; the proof selects no unprovided approximation polynomial.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The spectral projections are supplied by finite-dimensional spectral resolution in step 1.1; the proof selects no unprovided approximation polynomial.",
+            "item_sha256": "3bc7f58b426851491a3e126fb412c83990e9703af8ba32ef1e1c7d64b2973015",
+            "row_sha256": "b449d18a355e2fbc10addf89a8281e4c84eb35541443d91d04039c6d751e32ef",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is spectral scalar-to-operator approximation implication; it asserts no biconditional requiring a separate forward implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is spectral scalar-to-operator approximation implication; it asserts no biconditional requiring a separate forward implication.",
+            "item_sha256": "3bc7f58b426851491a3e126fb412c83990e9703af8ba32ef1e1c7d64b2973015",
+            "row_sha256": "0362b19e473d9f37304d8c528bb8697fdfce8d2e3be5fc092a8f16f4e2113760",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is spectral scalar-to-operator approximation implication; it asserts no biconditional requiring a separate reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is spectral scalar-to-operator approximation implication; it asserts no biconditional requiring a separate reverse implication.",
+            "item_sha256": "3bc7f58b426851491a3e126fb412c83990e9703af8ba32ef1e1c7d64b2973015",
+            "row_sha256": "80cecdb2137196eb83d366f606224eeb99dead583d3da847f26c6ba05e5057fc",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Independently checked steps 1.1–2.1 against all six cited finite spectral-calculus/norm suppliers. Orthogonal eigenspace components give the squared-norm bound termwise; taking unit-vector maxima transfers the scalar bound. The zero-dimensional domain has norm zero by definition; eta=0, empty spectrum and endpoint eigenvalues are covered. I need not be an interval: only its spectral subset is used. No choice or limiting argument is needed. Reader/refuter report no defect here."
+      }
+    },
+    "lem-qa-28-normalized-function-target": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-28-polynomial-matrix-function-error",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space, let $H:V\\to V$ be Hermitian, and let $I\\subseteq\\mathbb R$ contain its spectrum. For functions $f:I\\to\\mathbb C$, a polynomial $p\\in\\mathbb C[x]$, and $\\eta\\ge0$, if $|p(\\lambda)-f(\\lambda)|\\le\\eta$ for every $\\lambda\\in\\sigma(H)$, then\n$$\\|p(H)-f(H)\\|\\le\\eta.$$\nIn particular, a uniform bound on all of $I$ suffices. Here $f(H)$ is the finite spectral functional calculus.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-functional-calculus-for-a-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and write the spectral resolution from\n[[thm-spectral-resolution-and-polynomial-spectral-projections]] as\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\nwhere the $\\lambda_j$ are the distinct eigenvalues of $T$ and $P_j$ is the\northogonal projection onto $E_{\\lambda_j}(T)$. For a function\n$f:\\sigma(T)\\to\\mathbb C$ on the spectrum of $T$, define\n\n$$f(T):=\\sum_{j=1}^r f(\\lambda_j)P_j.$$\n\nThis is the **spectral functional calculus** of $T$. For the identity function\n$\\operatorname{id}_{\\sigma(T)}$, one has $\\operatorname{id}_{\\sigma(T)}(T)=T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The spectrum of $H/\\alpha$ is $\\{\\lambda/\\alpha:\\lambda\\in\\sigma(H)\\}$, since each eigenvector of $H$ remains an eigenvector with its eigenvalue divided by $\\alpha$. For each such eigenvalue, the hypothesis gives $|\\beta p(\\lambda/\\alpha)-f(\\lambda)|\\le\\beta\\eta$. Apply [F1] to $H$ and the scalar function $\\lambda\\mapsto\\beta p(\\lambda/\\alpha)-f(\\lambda)$ to get the asserted operator-norm inequality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The top-left block equals $p(H/\\alpha)$ by hypothesis. Dividing the proved inequality by $\\beta$ gives $\\|p(H/\\alpha)-f(H)/\\beta\\|\\le\\eta$. The additional hypothesis $\\beta\\ge\\|f(H)\\|$ supplies the normalization condition in the block-encoding definition [F3], so this is a valid $\\beta$-block encoding with compression error at most $\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement explicitly assumes a nonzero finite-dimensional space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows zero approximation error eta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 works for a one-eigenvalue Hermitian matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the scalar bound to each distinct eigenvalue projection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes spectral values at the norm boundary plus or minus alpha."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "p and the unitary top-left block are hypotheses, not asserted to exist by a witness selection; the proof only verifies the normalization.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "p and the unitary top-left block are hypotheses, not asserted to exist by a witness selection; the proof only verifies the normalization.",
+            "item_sha256": "d6a0daf0347f9972f3a96580c344a83c268f2cbccb8a02c89c6e33b82fa5afe1",
+            "row_sha256": "5ea1b423b07f5cca23d8bb0904d5660db31f907e2c4554aad24e4eb4ee293e4e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is scaled normalized matrix-function approximation; it asserts no biconditional requiring a separate forward implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is scaled normalized matrix-function approximation; it asserts no biconditional requiring a separate forward implication.",
+            "item_sha256": "d6a0daf0347f9972f3a96580c344a83c268f2cbccb8a02c89c6e33b82fa5afe1",
+            "row_sha256": "692262c148e4b49c10f4fe87ae1f3810d8eb0dc7b6d12ef0d8dc30710cd45529",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is scaled normalized matrix-function approximation; it asserts no biconditional requiring a separate reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is scaled normalized matrix-function approximation; it asserts no biconditional requiring a separate reverse implication.",
+            "item_sha256": "d6a0daf0347f9972f3a96580c344a83c268f2cbccb8a02c89c6e33b82fa5afe1",
+            "row_sha256": "2863c667269c851ad832c1b0d99fb052d8b1dde8e948bdef49139e50242ac00e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-28-spectral-law-measurement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-spectral-resolution-and-polynomial-spectral-projections",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe normal. If $\\lambda_1,\\dots,\\lambda_r$ are the distinct eigenvalues of $T$,\nthen there are pairwise orthogonal projections $P_1,\\dots,P_r$ such that\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\neach $P_j$ projects onto the eigenspace $E_{\\lambda_j}(T)$, and every $P_j$ is\na polynomial in $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-28-state-spectral-distribution",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a Hermitian endomorphism of a finite-dimensional complex inner-product space, with distinct eigenvalues $\\lambda$ and orthogonal spectral projections $P_\\lambda$. Let $\\psi$ be a unit vector representing a pure state. Its **state-dependent spectral distribution** is the finite measure on $\\sigma(H)$ defined by\n$$\\mu_\\psi(\\{\\lambda\\})=\\|P_\\lambda\\psi\\|^2=\\langle\\psi|P_\\lambda|\\psi\\rangle.$$\nThe support is restricted to eigenvalues with nonzero weight; degeneracies are represented by one atom per distinct eigenvalue, not one atom per chosen eigenvector. The formula is the definition; its nonnegativity, total mass one, and functional-calculus moment identity are established in [[thm-qa-28-spectral-law-measurement]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-qa-28-phase-spectral-estimation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** An instance of [[def-qa-28-spectral-estimation-access]], a phase-register size $m\\ge1$ with $Q=2^m$, and an input system register already prepared in the normalized state $\\psi$ declared by the access instance. The caller invokes and charges $A_\\psi$ for that preparation; this procedure does not prepare the system again. The access instance fixes the phase encoding $\\theta(\\lambda)$ and decoder.\n\n**Instructions.** Initialize the phase register to $|0^m\\rangle$. Apply the coherent QPE gate list through the inverse QFT from [[alg-qa-quantum-phase-estimation]] to this prepared system, using the supplied controlled powers for $j=0,\\ldots,m-1$, or synthesize each required power from the declared controlled-$U$ interface. Perform its specified computational-basis Lüders measurement once on the phase register and record $y\\in\\{0,\\ldots,Q-1\\}$. Return $y/Q$ as a circular phase sample and apply the specified decoder to return an eigenvalue estimate when the injective encoding promise holds. If $U=e^{iH}$ and $\\sigma(H)\\subseteq[-1,1]$, use the principal representative in $(-1/2,1/2]$ and output $2\\pi\\operatorname{unwrap}(y/Q)$.\n\nThe phase register, controlled powers, gates, decoder arithmetic, measurement, and output costs follow the access record. In particular, with only a controlled-$U$ oracle, implementing the binary powers uses $\\sum_{j=0}^{m-1}2^j=Q-1$ controlled-$U$ calls.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-phase-estimation-outcome-kernel",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and let the input be an eigenvector with\n$U\\psi=\\exp(2\\pi i\\theta)\\psi$, where $\\theta\\in[0,1)$.\nFor each $y\\in\\{0,\\ldots,Q-1\\}$, the probability of measuring $y$ in the algorithm of [[alg-qa-quantum-phase-estimation]] is\n$$P_\\theta(y)=Q^{-2}\\left|\\sum_{j=0}^{Q-1}\\exp\\!\\left(2\\pi i j(\\theta-y/Q)\\right)\\right|^2.$$\nThus the finite outcome kernel is defined at every phase, including $Q\\theta\\in\\mathbb Z$; no quotient with a zero denominator is needed in this formula.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-qa-quantum-phase-estimation",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-functional-calculus-for-a-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and write the spectral resolution from\n[[thm-spectral-resolution-and-polynomial-spectral-projections]] as\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\nwhere the $\\lambda_j$ are the distinct eigenvalues of $T$ and $P_j$ is the\northogonal projection onto $E_{\\lambda_j}(T)$. For a function\n$f:\\sigma(T)\\to\\mathbb C$ on the spectrum of $T$, define\n\n$$f(T):=\\sum_{j=1}^r f(\\lambda_j)P_j.$$\n\nThis is the **spectral functional calculus** of $T$. For the identity function\n$\\operatorname{id}_{\\sigma(T)}$, one has $\\operatorname{id}_{\\sigma(T)}(T)=T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The orthogonality in [F1] gives $\\psi=\\sum_\\lambda P_\\lambda\\psi$ and $\\|\\psi\\|^2=\\sum_\\lambda\\|P_\\lambda\\psi\\|^2=1$. Thus the weights in [F2] are nonnegative and sum to one. By [F5]–[F6], $\\langle\\psi|g(H)|\\psi\\rangle=\\sum_\\lambda g(\\lambda)\\langle\\psi|P_\\lambda|\\psi\\rangle=\\sum_\\lambda\\mu_\\psi(\\{\\lambda\\})g(\\lambda)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By linearity, the QPE unitary sends the initial phase state and $\\psi$ to $\\sum_\\lambda\\sum_y a_y(\\lambda)|y\\rangle\\otimes P_\\lambda\\psi$, using [F3] on each eigenspace. Projecting the phase register onto $|y\\rangle$ gives the system vector $v_y=\\sum_\\lambda a_y(\\lambda)P_\\lambda\\psi$. Since the summands for distinct $\\lambda$ are orthogonal by [F1], [F4] yields $\\Pr(Y=y)=\\|v_y\\|^2=\\sum_\\lambda |a_y(\\lambda)|^2\\|P_\\lambda\\psi\\|^2=\\sum_\\lambda\\mu_\\psi(\\{\\lambda\\})P_{\\bar\\theta(\\lambda)}(y)$. Summing these probabilities over the finite output set gives one, as each eigenphase kernel is a measurement law.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "When $\\Pr(Y=y)>0$, [F4] normalizes the projected branch to $v_y/\\|v_y\\|$, which is the displayed formula. Its coefficients $a_y(\\lambda)$ need not vanish outside one eigenvalue, so no exact eigenspace-collapse claim follows; the formula itself gives the precise conditional state.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The normalized psi in Statement excludes the zero space and hence an empty spectrum; the finite spectral sum is over that nonempty spectrum.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The normalized psi in Statement excludes the zero space and hence an empty spectrum; the finite spectral sum is over that nonempty spectrum.",
+            "item_sha256": "a6faf4908a0eba550498b20c8f95ec1f17f86e1d25ddd914e249419967bc8838",
+            "row_sha256": "6268675f5e0d5f18f3cabf178e695b8c763a6d2f0cc169262f8c32eba69fd01b",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The normalized psi in Statement excludes the zero space and hence an empty spectrum; the finite spectral sum is over that nonempty spectrum."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 restricts the conditional-state formula to positive-probability outcomes; zero-probability branches are omitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include the one-eigenvalue spectral distribution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use the projection onto each full eigenspace, not a chosen eigenbasis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 sums over the entire finite spectrum, including any endpoint eigenvalue."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The spectrum, projections and unitary phase action are supplied; step 3.1 explicitly computes the conditional vector rather than choosing an eigenspace.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The spectrum, projections and unitary phase action are supplied; step 3.1 explicitly computes the conditional vector rather than choosing an eigenspace.",
+            "item_sha256": "a6faf4908a0eba550498b20c8f95ec1f17f86e1d25ddd914e249419967bc8838",
+            "row_sha256": "0ac0553cef9b1a9d0b8239f9a1c5def3cde8c026e039737cefd237646b433c7e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is phase-estimation spectral mixture and conditional state; it asserts no biconditional requiring a separate forward implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is phase-estimation spectral mixture and conditional state; it asserts no biconditional requiring a separate forward implication.",
+            "item_sha256": "a6faf4908a0eba550498b20c8f95ec1f17f86e1d25ddd914e249419967bc8838",
+            "row_sha256": "51a34968929f2ad3619a39ef1020a964830009cf164ad812937fb5576771fd01",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is phase-estimation spectral mixture and conditional state; it asserts no biconditional requiring a separate reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is phase-estimation spectral mixture and conditional state; it asserts no biconditional requiring a separate reverse implication.",
+            "item_sha256": "a6faf4908a0eba550498b20c8f95ec1f17f86e1d25ddd914e249419967bc8838",
+            "row_sha256": "cdac011595b7e67e90992aee989a05ea23d4f42043fbb668c038794a53a69437",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Checked all three proof steps and ten declared suppliers. The declared phase unitary is scalar on each H eigenspace, so the coherent QPE prefix acts linearly on its spectral decomposition. Orthogonality removes cross terms in the outcome probability, while the specified Lüders readout retains the coherent conditional sum. Finite spectral calculus gives the moment identity in the root/Dirac convention. Degeneracies use one atom per distinct eigenvalue, zero spectral weights are allowed, and the conditional vector is asserted only for positive probability. Unit input excludes the zero space. The reader-added finite-dimensional Hermitian/unit-vector hypotheses are essential and correct; no further mathematical defect found."
+      }
+    },
+    "thm-qa-28-matrix-function-error-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-28-qsvt-matrix-function",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A nonzero finite-dimensional Hermitian matrix $H$, a scale $\\alpha>0$ with $\\|H\\|\\le\\alpha$, a supplied unit-normalized $(1,a,\\varepsilon_{BE})$ block encoding of $A=H/\\alpha$ in the sense of [[def-qa-22-block-encoding]], with designated compression $\\widetilde A$ satisfying $\\|\\widetilde A-H/\\alpha\\|\\le\\varepsilon_{BE}$ (and $\\varepsilon_{BE}=0$ for exact access), a function $f$ on $\\sigma(H)$, and a caller-supplied extension $\\bar f:[-\\alpha,\\alpha]\\to\\mathbb C$ agreeing with $f$ on the spectrum. Let $J$ be a nonempty subset of $\\{0,1,2,3\\}$. For each $j\\notin J$, supply an exact certificate that $g_j$ is identically zero on $[-\\alpha,\\alpha]$. For each $j\\in J$, supply a positive scale $\\gamma_j$ satisfying $|g_j(t)|\\le\\gamma_j$ on that interval, a tolerance $\\tau_j\\ge0$, a nonnegative degree bound $d_j$, and a real polynomial $p_j$ of degree at most $d_j$ and parity $d_j\\bmod2$ (including when $p_j=0$), with $|p_j(x)|\\le1$ on $[-1,1]$ and\n$$\\left|p_j(x)-\\frac{g_j(\\alpha x)}{\\gamma_j}\\right|\\le\\tau_j\\qquad(-1\\le x\\le1).$$\nFor each active component, also supply either a reflected-convention phase-list certificate of length $d_j+1$ for which the real part of the QSP sequence's upper-left entry equals $p_j$ (exactly or within a certified uniform error bound), or, when $p_j$ has rational or exact algebraic coefficients, a positive rational phase-synthesis tolerance $\\nu_j$ for OP1. The certificate's finite verification procedure and cost are included in the phase-source record. Any certified phase-generation or compilation error is recorded for the component and included in its implementation-error bound $\\kappa_j$ in [[thm-qa-28-matrix-function-error-cost]].\n\nHere the four real component functions are\n$$g_0(t)=\\frac{\\Re\\bar f(t)+\\Re\\bar f(-t)}2,\\quad g_1(t)=\\frac{\\Re\\bar f(t)-\\Re\\bar f(-t)}2,$$\n$$g_2(t)=\\frac{\\Im\\bar f(t)+\\Im\\bar f(-t)}2,\\quad g_3(t)=\\frac{\\Im\\bar f(t)-\\Im\\bar f(-t)}2.$$\nThus $g_0,g_2$ are even, $g_1,g_3$ are odd, and $\\bar f=g_0+g_1+i g_2+i g_3$. The zero certificates and scale bounds give $|\\bar f(t)|\\le B:=\\sum_{j\\in J}\\gamma_j$; the construction makes no optimal-normalization claim. For an identically zero target with $\\bar f=0$, one may take $J=\\{0\\}$, $\\gamma_0=1$, $d_0=0$, $\\tau_0=0$, and $p_0=0$; the exact list $\\Phi_0=(\\pi/2)$ certifies its phase source since the degree-zero QSP upper-left entry is $e^{i\\pi/2}=i$.\n\n**Additional input.** An LCU access record that supplies or compiles the coefficient-preparation unitary $P$, its inverse, and the required SELECT from the active component circuits, with all implementation costs declared as in [[def-qa-22-block-encoding-access-model]].\n\n**Output.** The LCU circuit $W$ constructed with declared normalization $B$ and designated top-left block $W_{00}$. The error bound for $W_{00}$ is given separately by [[thm-qa-28-matrix-function-error-cost]]. If a supplied phase certificate fails its stated verification or OP1 returns a non-success result, return that failure and no block-encoding output.\n\n**Instructions.** For each $j\\in J$, verify its supplied phase-list certificate's length, reflected-convention polynomial identity or uniform error bound; if no list is supplied, run [[alg-qa-23-qsp-phase-synthesis]] under OP1 on $p_j$ with degree bound $d_j$, required parity $d_j\\bmod2$, and tolerance $\\nu_j$. Propagate any certificate, synthesis or compilation failure without producing a block-encoding output. Apply [[alg-qa-24-qsvt]] to the supplied block encoding to produce the singular-value transform block for $p_j$, retaining separate ancillas and all inverse, controlled, projector-phase, compilation, and implementation-error costs. Since $p_j$ is real with known parity, the even or odd transform is selected by its parity. Any certified phase or implementation deviation from the ideal $p_j$ transform is included in $\\kappa_j$.\n\nRun [[alg-qa-22-lcu-block-encoding]] on the component unitaries indexed by $J$, with unit component normalizations and coefficients $c_j\\gamma_j$, where $c_0=c_1=1$ and $c_2=c_3=i$. Its LCU normalization is $B=\\sum_{j\\in J}\\gamma_j>0$. Return its designated top-left block as an approximation to $f(H)/B$. OP1 and the matrix-function error theorem specify the phase and error obligations.\n\nThis algorithm does not claim a general efficient approximation theorem, automatic extension of $f$, or a finite bit-time phase compiler beyond the stated exact-algebraic/rational OP1 interface. Charge polynomial descriptions, root/phase generation, state preparation, SELECT, PREPARE and its inverse, all QSVT calls, gate compilation, and all output bits under the separate cost coordinates.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-28-polynomial-matrix-function-error",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space, let $H:V\\to V$ be Hermitian, and let $I\\subseteq\\mathbb R$ contain its spectrum. For functions $f:I\\to\\mathbb C$, a polynomial $p\\in\\mathbb C[x]$, and $\\eta\\ge0$, if $|p(\\lambda)-f(\\lambda)|\\le\\eta$ for every $\\lambda\\in\\sigma(H)$, then\n$$\\|p(H)-f(H)\\|\\le\\eta.$$\nIn particular, a uniform bound on all of $I$ suffices. Here $f(H)$ is the finite spectral functional calculus.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-24-qsvt-robustness-amplitude-bound",
+          "source_section": "Statement",
+          "quote": "Let $A,B:H_R\\to H_L$ be contractions between the same finite-dimensional complex-inner-product spaces, let $P$ be the scalar polynomial of an exact degree-$d$ QSVT phase sequence, and put $\\delta=\\|A-B\\|_{\\mathrm{op}}$. Then, for the corresponding odd or even singular-value transforms,\n\n$$\\|P^{\\mathrm{SV}}(A)-P^{\\mathrm{SV}}(B)\\|_{\\mathrm{op}}\\le4d\\sqrt{\\delta}.$$\n\nFor $d=0$ the transform is constant on the relevant singular space and the difference is zero. The lemma is an operator statement; the unitary completions used in the proof are finite-dimensional existence constructions and do not supply an efficient implementation or any additional query access.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ is zero or has degree at most $d$, has parity $d\\bmod2$, and satisfies $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-24-singular-value-transform",
+          "source_section": "Definition",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular-value decomposition $A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|$. Let $p:[-1,1]\\to\\mathbb C$ be a scalar function.\n\nIf $p$ is **odd**, define the odd singular-value transform by\n\n$$p^{\\mathrm{SV}}_{\\mathrm{odd}}(A):H_R\\to H_L,\\qquad p^{\\mathrm{SV}}_{\\mathrm{odd}}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle v_j|.$$\n\nIf $p$ is **even**, define its right-space transform by\n\n$$p^{\\mathrm{SV}}_{R}(A):H_R\\to H_R,\\qquad p^{\\mathrm{SV}}_{R}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|v_j\\rangle\\langle v_j|+p(0)\\Pi_{\\ker A},$$\n\nwhere $\\Pi_{\\ker A}$ is the orthogonal projection in $H_R$ onto $\\ker A$. The left-space version is\n\n$$p^{\\mathrm{SV}}_{L}(A):H_L\\to H_L,\\qquad p^{\\mathrm{SV}}_{L}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle u_j|+p(0)\\Pi_{\\ker A^*}.$$\n\nThe odd transform annihilates the right kernel because oddness gives $p(0)=0$; the even transforms use the canonical kernel projections. The resulting operators are independent of the chosen SVD by [[lem-qa-24-singular-transform-basis-independence]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-22-lcu-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "Under the exact inputs and instructions of [[alg-qa-22-lcu-block-encoding]], the all-zero coefficient-index and component-ancilla block of $W=P^{\\dagger}\\mathrm{SELECT}P$ is\n\n$$\\frac{\\sum_{j=0}^{m-1}\\beta_jA_j}{\\Lambda}.$$\n\nMoreover, $\\|\\sum_j\\beta_jA_j\\|_{\\rm op}\\le\\Lambda$, so the constructed unitary is an $(\\Lambda,b+a_*,0)$ block encoding of $\\sum_j\\beta_jA_j$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qa-23-qsp-synthesis-correctness",
+          "source_section": "Statement",
+          "quote": "Let $p$ be supplied in the rational/exact-algebraic target representation of [[alg-qa-23-qsp-phase-synthesis]], with any supplied real complement represented through its explicitly charged ideal-real interface, with degree bound $d\\ge0$, parity $d\\bmod2$, $|p(x)|\\le1$ on $[-1,1]$, and rational tolerance $\\delta>0$. On a `SUCCESS` output of [[alg-qa-23-qsp-phase-synthesis]], the exact phase list has an ideal QSP matrix whose upper-left matrix entry $P$ satisfies $\\operatorname{Re}P=p$ in exact mode and $|\\operatorname{Re}P(x)-p(x)|\\le\\delta_0/8\\le\\delta/8$ in numerical mode, for every $x\\in[-1,1]$, where $\\delta_0=\\min(\\delta,8)$. If numerical phase gates are used, each compiled phase error is at most $\\delta_0/(8(d+1))$ in operator norm, so the implemented upper-left matrix entry has real-part error at most $\\delta_0/4\\le\\delta$. This is a matrix-entry accuracy claim; no measurement or scalar-extraction circuit is included. The algorithm terminates on every promised input when its optional compiler terminates with a certificate or an explicit failure result; failed exact checks return their declared non-success branch.\n\nIn `efficient-numerical` mode without a supplied complement or finite-basis compiler, the algorithm requires $\\operatorname{poly}(d,1+\\log_+(1/\\delta))$ charged arithmetic operations, ideal exact algebraic field/equality/order tests, root-descriptor operations, and polynomially many written tower/DAG certificate bits. Here $\\log_+(x)=\\max(0,\\log x)$. Input reading and conversion from an arbitrary original coefficient encoding, expanded minimal-polynomial conversion, operation implementation bit cost, and optional compiler work are separate resource coordinates. This is the explicit exact-algebraic arithmetic model of the algorithm; complete modes retain finite termination without the same height-independent bound.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-spectral-resolution-and-polynomial-spectral-projections",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe normal. If $\\lambda_1,\\dots,\\lambda_r$ are the distinct eigenvalues of $T$,\nthen there are pairwise orthogonal projections $P_1,\\dots,P_r$ such that\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\neach $P_j$ projects onto the eigenspace $E_{\\lambda_j}(T)$, and every $P_j$ is\na polynomial in $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-functional-calculus-for-a-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and write the spectral resolution from\n[[thm-spectral-resolution-and-polynomial-spectral-projections]] as\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\nwhere the $\\lambda_j$ are the distinct eigenvalues of $T$ and $P_j$ is the\northogonal projection onto $E_{\\lambda_j}(T)$. For a function\n$f:\\sigma(T)\\to\\mathbb C$ on the spectrum of $T$, define\n\n$$f(T):=\\sum_{j=1}^r f(\\lambda_j)P_j.$$\n\nThis is the **spectral functional calculus** of $T$. For the identity function\n$\\operatorname{id}_{\\sigma(T)}$, one has $\\operatorname{id}_{\\sigma(T)}(T)=T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-functional-calculus-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and let $f,g:\\sigma(T)\\to\\mathbb C$.\n\n1. $(f+g)(T)=f(T)+g(T)$.\n2. $(fg)(T)=f(T)g(T)$.\n3. If $\\overline f(\\lambda)=\\overline{f(\\lambda)}$, then $\\overline f(T)=f(T)^*$.\n4. If $h:f(\\sigma(T))\\to\\mathbb C$, then $(h\\circ f)(T)=h(f(T))$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qa-24-qsvt-query-count",
+          "source_section": "Statement",
+          "quote": "For degree $d\\ge0$, one un-controlled QSVT sequence makes exactly $d$ signal calls: $\\lceil d/2\\rceil$ calls to $U$ and $\\lfloor d/2\\rfloor$ calls to $U^*$, beginning with $U$ when $d>0$. It applies exactly $d+1$ projector-phase operations, with $\\lceil(d+1)/2\\rceil$ about $\\Pi_R$ and $\\lfloor(d+1)/2\\rfloor$ about $\\Pi_L$. By [[thm-qa-24-projector-phase-implementation]], each phase operation uses two controlled calls to the corresponding reflection and one variable one-qubit phase rotation, plus a constant number of one-qubit gates. A coherent control of one sequence against the identity requires no controlled signal call when $d$ is even and one controlled signal call when $d$ is odd. Selecting between the two phase lists $\\Phi$ and $-\\Phi$ uses the same unconditioned signal list in both branches and controls only the phase rotations. Phase generation, inverse access, and finite-gate compilation retain their separately declared costs. At $d=0$ there is no signal or controlled-signal call.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a Hermitian input $A$, each active parity singular-value transform in [F4] equals ordinary polynomial functional calculus. Indeed, for an eigenvector with eigenvalue $x>0$, choose its left and right singular vectors equal, so its transform coefficient is $p_j(x)$. For $x<0$, choose singular value $|x|$ and left vector the negative of the right vector; the coefficient is $-p_j(|x|)=p_j(x)$ when $p_j$ is odd, while for even parity it is $p_j(|x|)=p_j(x)$. At $x=0$, an odd polynomial vanishes and the even transform assigns $p_j(0)$ on the kernel. The spectral resolution [F7] and basis-independence in [F4] make these equalities independent of choices within degenerate eigenspaces. Also [F1] gives $|f(\\lambda)|\\le\\sum_{j\\in J}\\gamma_j=B$ on $\\sigma(H)$; apply [F2] to the zero polynomial and $f$ to obtain $\\|f(H)\\|\\le B$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $\\|p_j(A)-g_j(H)/\\gamma_j\\|\\le\\tau_j$, since $A=H/\\alpha$ and the scalar bound holds on its spectrum. By [F3]\u2013[F4], replacing the exact signal block $A$ by $\\widetilde A$ changes the ideal transform $p_j^{\\mathrm{SV}}$ by at most $4d_j\\sqrt{\\varepsilon_{BE}}$; step 1.1 identifies the transform at $A$ with $p_j(A)$. The implemented component adds at most $\\kappa_j$ by its definition, including numerical phase and signal implementation errors. For any unit vector $v$, the vector triangle inequality in [F9] bounds the action of the total difference by the sum of these three operator bounds; taking the supremum over unit $v$ gives $\\|Y_j-g_j(H)/\\gamma_j\\|\\le\\tau_j+4d_j\\sqrt{\\varepsilon_{BE}}+\\kappa_j$, where $Y_j$ is its actual top-left block.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F9",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact LCU block for these $Y_j$ is $B^{-1}\\sum_{j\\in J}c_j\\gamma_jY_j$ by [F5]; its actual circuit differs from that block by at most $\\kappa_{LCU}$. The decomposition in [F1] gives $f(H)=\\sum_{j\\in J}c_jg_j(H)$ on the spectrum. For each unit vector $v$, apply the vector triangle inequality [F9] to the weighted sum of component errors from step 2.1 and the LCU implementation error; taking the supremum over $v$ gives the displayed operator-norm bound after multiplying each component bound by $\\gamma_j/B$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F9",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The exact signal-call count for component $j\\in J$ is $d_j$ by [F8]; a SELECT branch invokes its designated component sequence, so its selected-component branch has at most $\\max_{j\\in J}d_j$ signal calls. The implemented SELECT circuit may contain the sum of separately controlled component occurrences; its actual oracle-occurrence count remains separately charged. The remaining resource coordinates are the declared preparation, inverse, control, coefficient, phase, reflection, compilation, and output costs in [F1], [F6], and [F8]; neither a degree count nor an exact phase list supplies those costs automatically.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires B=sum gamma_j>0, excluding an empty active J as well as an empty nonzero system.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Statement requires B=sum gamma_j>0, excluding an empty active J as well as an empty nonzero system.",
+            "item_sha256": "42951133ede5d5714c58c3d7ed21a3af388eb5c02e9651157a50e01dee7b0444",
+            "row_sha256": "8de0cc522902a260c6ca3c3ec1170e818b0ac3b82ccf0e91915576d6020c0372",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Statement requires B=sum gamma_j>0, excluding an empty active J as well as an empty nonzero system."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the ideal perturbation contribution zero when epsilon_BE=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a one-eigenvalue Hermitian matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes basis-independent action on degenerate singular/eigenspaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the scalar approximation on the spectrum, including normalized endpoints plus or minus one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Active components and implementations are inputs; their finite LCU construction is evaluated in step 3.1 without claiming a free phase/compiler choice.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Active components and implementations are inputs; their finite LCU construction is evaluated in step 3.1 without claiming a free phase/compiler choice.",
+            "item_sha256": "42951133ede5d5714c58c3d7ed21a3af388eb5c02e9651157a50e01dee7b0444",
+            "row_sha256": "a48bfddbe2c561a012b9821ae6d22f53874034bfb81ca8a105c12f24cbbb6e4f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is component QSVT-LCU matrix-function error and query count; it asserts no biconditional requiring a separate forward implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is component QSVT-LCU matrix-function error and query count; it asserts no biconditional requiring a separate forward implication.",
+            "item_sha256": "42951133ede5d5714c58c3d7ed21a3af388eb5c02e9651157a50e01dee7b0444",
+            "row_sha256": "60e206af6ca8918e2a37b446bdef6b8ddc8622651abf62fb5c09d4ecd0b8f7fc",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is component QSVT-LCU matrix-function error and query count; it asserts no biconditional requiring a separate reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is component QSVT-LCU matrix-function error and query count; it asserts no biconditional requiring a separate reverse implication.",
+            "item_sha256": "42951133ede5d5714c58c3d7ed21a3af388eb5c02e9651157a50e01dee7b0444",
+            "row_sha256": "4c9b7d4bfc1b2fdb1b7630557a056aa22233b44cfaf188202e986eaea80d9905",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Independently checked all four steps and fourteen suppliers. Hermitian positive/negative eigenspaces turn odd/even singular transforms into p(A), with p(0) on the even kernel and zero on the odd kernel. Scalar approximation, contraction perturbation and component implementation errors add by operator triangle inequality, and exact LCU weights sum to B. For real-part extraction the robustness bound applies to each conjugate phase sequence and their average. B>0, omitted-zero components, zero polynomial, d=0, singular values 0 and 1 and epsilon_BE=0 are covered; no AC or universal bit-time bound. Corrected the exactness caveat: an exactly implemented approximate phase certificate may still have nonzero polynomial error kappa. Exact target realization is needed to take all kappa bounds zero. Read Gilyen Lemma22 full proof, PDF pp23\u201324, in cached source. Its zero-block scaling construction closes the immediately recoverable shorthand in the local robustness supplier step5; owner polish alert is recorded without editing that supplier. Query count is the stated per-branch count, with SELECT construction separately charged."
+      }
+    },
+    "thm-qa-28-spectral-estimation-guarantee": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-phase-estimation-success-and-tail",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. Every nearest grid label $y$ has $P_\\theta(y)\\ge4/\\pi^2$. For any $\\eta\\in\\mathbb R$ with $K=\\lfloor Q\\eta\\rfloor\\ge2$,\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$\nIf $Q\\theta$ is an integer $t$, then $P_\\theta(t)=1$ and all other labels have probability $0$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-28-median-spectral-estimation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** An eigenvalue-estimation access instance, positive rational binary inputs $\\epsilon>0$ and $0<\\delta<1$, and certified rational upper enclosures $\\pi_+>\\pi$ and $L_+\\ge\\ln(1/\\delta)$ as produced by the finite interval procedures in OP0 of `research/quantum-algorithms-planning/operational-contracts.md`.\n\n**Instructions.** Choose the least dyadic $Q=2^m$, $m\\ge1$, satisfying $Q\\epsilon\\ge6\\pi_+$. Choose the least positive odd integer $r$ satisfying $r\\ge8L_+$. On each of $r$ fresh trials, invoke the access instance's declared state-preparation circuit on fresh standard-input registers to prepare its normalized state $\\psi$, then run [[alg-qa-28-phase-spectral-estimation]] with phase-register size $m$. Decode every result using the same branch convention, then return the median of the $r$ real eigenvalue estimates. Do not reuse the postmeasurement system from one trial as the input to another; each trial begins with a fresh state preparation. A fixed-eigenvalue accuracy guarantee requires the eigenstate promise stated by the corresponding theorem.\n\nThe certified enclosures, doubling comparisons, state preparation, each QPE circuit, each controlled-power or controlled-$U$ call, projective readout, decoding, and median computation are charged. If only controlled-$U$ access is supplied, the ideal controlled-call count is $r(Q-1)$; exact supplied powers use their separately declared per-trial costs. No inverse call is used by this procedure. Its accuracy theorem is separate.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-28-spectral-estimation-access",
+          "source_section": "Definition",
+          "quote": "An **eigenvalue-estimation access instance** consists of a finite-dimensional system space; a costed state-preparation circuit $A_\\psi$ with $A_\\psi|0\\rangle=|\\psi\\rangle$; a costed unitary $U$ and each controlled, inverse, or controlled-inverse version actually used; an injective known phase encoding $\\lambda\\mapsto\\theta(\\lambda)\\in\\mathbb R/\\mathbb Z$ on the promised spectrum; and a specified decoder with its branch cut and output units. Exact controlled powers $U^{2^j}$ may instead be supplied individually, with their costs. If powers are synthesized from controlled-$U$, charge the exact number of calls and all control/wiring costs; no power or control is free.\n\nFor Hamiltonian access, the instance additionally specifies a Hermitian $H$, an interval containing $\\sigma(H)$, a simulation rule for each requested signed time and its operator-error/cost bound, and how errors are allocated across the circuit. In the convention of [[def-qa-20-simulation-error-and-cost-model]], a simulator for $e^{-itH}$ implements the positive-sign phase unitary $e^{iH}$ at $t=-1$, using inverse access when that is what the supplied interface permits. Every preparation, inverse, controlled call, simulation, phase-register gate, decoder arithmetic operation, measurement, and written output is included in its declared cost coordinates. Aliasing is excluded by the injectivity promise and the chosen decoder; absent that promise, the output is only an estimate of the encoded phase modulo one, not of a uniquely identified eigenvalue.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-eigenphase-estimation-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, $U:H\\to H$ a unitary, and $\\psi\\in H$ a unit vector with a promised phase $\\theta\\in[0,1)$ such that\n$$U\\psi=\\exp(2\\pi i\\theta)\\psi.$$\nFor an integer $m\\ge1$, let $Q=2^m$. The phase register is $(\\mathbb C^2)^{\\otimes m}$ with ordered computational basis indexed big-endian by\n$x=\\sum_{k=0}^{m-1}b_k2^{m-1-k}$, where $b_k\\in\\{0,1\\}$ ([[def-qc-register-and-computational-basis]], [[def-qc-ordered-bitstring-encoding]]).\nThus the wire of weight $2^j$ is $q_{m-1-j}$.\n\nThere are distinct forward-access options:\n\n1. **Controlled-power access.** The model explicitly supplies one controlled $U^{2^j}$ operation for each $j=0,\\ldots,m-1$. Each use is counted as one controlled-power query; an implementation's ordinary gate cost is recorded separately.\n2. **Single controlled-unitary access.** The model supplies calls to $C(U)=\\operatorname{diag}(I_H,U)$ in the control-first order of [[def-qc-controlled-unitary-access]]. A controlled $U^{2^j}$ may be implemented by $2^j$ sequential calls to $C(U)$; those calls are charged individually.\n\nOptional **controlled inverse-power access** is a separate capability that explicitly supplies $C(U^{-2^j})$ for each required $j$. It is not implied by either forward option. It is needed only by a consuming procedure that reverses the controlled-power portion of a coherent QPE prefix. Reversing the inverse-QFT gate list does not use $U^{-1}$.\n\nFinite ordered-register syntax is specified by [[def-qc-circuit-syntax-and-register-order]], gate action by [[def-qc-circuit-denotational-semantics]], and projective measurement outcomes by [[def-qc-projective-measurement]]. The definition is an access-model promise: it does not assert that the supplied controlled powers have an efficient construction or that $\\theta$ has an exact $m$-bit expansion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "alg-qa-28-phase-spectral-estimation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** An instance of [[def-qa-28-spectral-estimation-access]], a phase-register size $m\\ge1$ with $Q=2^m$, and an input system register already prepared in the normalized state $\\psi$ declared by the access instance. The caller invokes and charges $A_\\psi$ for that preparation; this procedure does not prepare the system again. The access instance fixes the phase encoding $\\theta(\\lambda)$ and decoder.\n\n**Instructions.** Initialize the phase register to $|0^m\\rangle$. Apply the coherent QPE gate list through the inverse QFT from [[alg-qa-quantum-phase-estimation]] to this prepared system, using the supplied controlled powers for $j=0,\\ldots,m-1$, or synthesize each required power from the declared controlled-$U$ interface. Perform its specified computational-basis L\u00fcders measurement once on the phase register and record $y\\in\\{0,\\ldots,Q-1\\}$. Return $y/Q$ as a circular phase sample and apply the specified decoder to return an eigenvalue estimate when the injective encoding promise holds. If $U=e^{iH}$ and $\\sigma(H)\\subseteq[-1,1]$, use the principal representative in $(-1/2,1/2]$ and output $2\\pi\\operatorname{unwrap}(y/Q)$.\n\nThe phase register, controlled powers, gates, decoder arithmetic, measurement, and output costs follow the access record. In particular, with only a controlled-$U$ oracle, implementing the binary powers uses $\\sum_{j=0}^{m-1}2^j=Q-1$ controlled-$U$ calls.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "source_section": "Statement",
+          "quote": "For every $x>0$,\n\n$$L(x)=\\log x.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-integral-logarithm-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The function $L:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "For $0<x\\le2$, $\\sin x\\ge x-x^3/6\\ge x/3>0$. Also $\\cos2\\le-1/3$. Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-functional-calculus-for-a-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and write the spectral resolution from\n[[thm-spectral-resolution-and-polynomial-spectral-projections]] as\n\n$$T=\\sum_{j=1}^r \\lambda_j P_j,$$\n\nwhere the $\\lambda_j$ are the distinct eigenvalues of $T$ and $P_j$ is the\northogonal projection onto $E_{\\lambda_j}(T)$. For a function\n$f:\\sigma(T)\\to\\mathbb C$ on the spectrum of $T$, define\n\n$$f(T):=\\sum_{j=1}^r f(\\lambda_j)P_j.$$\n\nThis is the **spectral functional calculus** of $T$. For the identity function\n$\\operatorname{id}_{\\sigma(T)}$, one has $\\operatorname{id}_{\\sigma(T)}(T)=T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-functional-calculus-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and let $f,g:\\sigma(T)\\to\\mathbb C$.\n\n1. $(f+g)(T)=f(T)+g(T)$.\n2. $(fg)(T)=f(T)g(T)$.\n3. If $\\overline f(\\lambda)=\\overline{f(\\lambda)}$, then $\\overline f(T)=f(T)^*$.\n4. If $h:f(\\sigma(T))\\to\\mathbb C$, then $(h\\circ f)(T)=h(f(T))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integral-logarithm-derivative-and-normalisation",
+          "source_section": "Statement",
+          "quote": "For every $x>0$,\n\n$$L'(x)=\\frac1x,$$\n\nand $L(1)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the prepared eigenvector of eigenvalue $\\lambda\\in[-1,1]$, put $\\theta_0=\\lambda/(2\\pi)$ and let $\\bar\\theta\\in[0,1)$ be the representative of its encoded phase class. By [F9], $U\\psi=e^{2\\pi i\\bar\\theta}\\psi$. Set $\\eta=\\epsilon/(2\\pi)$; then $Q\\eta=Q\\epsilon/(2\\pi)\\ge3$, so $K=\\lfloor Q\\eta\\rfloor\\ge3$. Apply [F1] to $\\bar\\theta$: except with probability at most $1/(2(K-1))\\le1/4$, the circular phase error is less than $\\eta$. On this event, the definition of the circular distance in [F1] gives an integer $k$ with $|y/Q+k-\\bar\\theta|<\\eta$. Write $\\bar\\theta=\\theta_0+n$ for an integer $n$; then $y/Q+k-n=\\theta_0+e$ for some $|e|<\\eta\\le1/(2\\pi)$. Consequently $|\\theta_0+e|<1/\\pi<1/2$ by [F7], so this lift is the principal representative and the specified decoder returns an estimate with error $2\\pi|e|<\\epsilon$. Thus each exact trial succeeds with probability at least $3/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "With controlled-$U$ access, the QPE phase register uses powers $U^{2^j}$ for $j=0,\\ldots,m-1$, whose repeated-call implementation uses $\\sum_j2^j=Q-1$ calls per trial. There are $r$ trials; each begins with a fresh charged state preparation and has one projective readout and one decoder. Exact supplied powers replace this count by their declared per-trial costs. No uncontrolled resource coordinate is inferred.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The rational schedule search in [F2] terminates. Since $\\epsilon>0$ and $\\pi_+,L_+$ are finite rationals, [F8] gives an integer $N\\ge1$ with $N>6\\pi_+/\\epsilon$ and $N>8L_+$. The bound $2^n\\ge n+1$ follows by induction: it is equality at $n=0$, and $2^{n+1}\\ge2(n+1)\\ge n+2$ whenever it holds at $n$. Thus $2^N\\epsilon\\ge(N+1)\\epsilon>6\\pi_+$ and the dyadic doubling search stops by exponent $N$. The odd integer $2N+1$ exceeds $8L_+$, so the increasing odd search also stops by then. Each least schedule value is therefore found by a finite search, with rational comparisons.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F8",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $X_i$ be the indicator of success on trial $i$ and $S=\\sum_{i=1}^rX_i$. Exact independent fresh preparations make the $X_i$ independent, with $p_i=\\Pr(X_i=1)\\ge3/4$ by step 1.1. For $t=\\ln3>0$, on $S\\le r/2$ we have $e^{-tS}\\ge e^{-tr/2}$, so summing the nonnegative finite expectation over this event gives $\\Pr(S\\le r/2)\\le e^{tr/2}\\mathbb E(e^{-tS})=e^{tr/2}\\prod_i(1-p_i+p_ie^{-t})\\le(\\sqrt3/2)^r$. Each factor decreases in $p_i$ and at $p_i=3/4$ the product factor is $\\sqrt3(1/4+1/4)=\\sqrt3/2$. Since $2/\\sqrt3>8/7$ (both sides are positive and $4/3>64/49$ because $196>192$) and [F10] applies to $L$ on $[1,8/7]$, there is $c\\in(1,8/7)$ with $\\ln(8/7)=L(8/7)-L(1)=(1/7)L'(c)=1/(7c)>1/8$. Thus [F5] gives $\\ln(2/\\sqrt3)>1/8$, and [F6] implies $(\\sqrt3/2)^r\\le e^{-r/8}$. The schedule gives $r/8\\ge L_+\\ge\\ln(1/\\delta)$, so [F6] and monotonicity of the exponential yield $e^{-r/8}\\le e^{-\\ln(1/\\delta)}=\\delta$. An odd median is inaccurate only if at least half the trials are inaccurate, which is contained in $\\{S\\le r/2\\}$; this proves the exact claim.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F10",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For one approximate trial, write the exact and implemented normalized vectors as $v,w$ and put $d=v-w$. For each readout projector $P_y$, the identity $P_y=P_y^*=P_y^2$ gives $\\langle d,P_yv\\rangle=\\langle P_yd,P_yv\\rangle$ and $\\langle w,P_yd\\rangle=\\langle P_yw,P_yd\\rangle$. Applying [F11] termwise, then [F4] to the nonnegative real lists of projected-vector norms and using [F12], bounds each of $\\sum_y|\\langle d,P_yv\\rangle|$ and $\\sum_y|\\langle w,P_yd\\rangle|$ by $\\|d\\|\\le\\xi$, since $\\|v\\|=\\|w\\|=1$. Expanding $\\langle v,P_yv\\rangle-\\langle w,P_yw\\rangle$ as the sum of those two terms shows that the $\\ell^1$ distance of the outcome laws is at most $2\\xi$, hence their total variation distance is at most $\\xi$. For finite probability laws $p,q$ and an event $E$, $p(E)-q(E)=\\frac12(\\sum_{y\\in E}(p_y-q_y)-\\sum_{y\\notin E}(p_y-q_y))$, so $|p(E)-q(E)|\\le\\frac12\\sum_y|p_y-q_y|$. In a product of $r$ trial laws, inserting hybrids that replace one factor at a time and using that every unchanged factor has mass one bounds the total variation distance by the sum of the single-trial distances, at most $r\\xi$. Applying the event bound to the median-success event and the exact probability from step 2.1 gives probability at least $1-\\delta-r\\xi$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F11",
+            "F12",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The eigenstate promise cannot be dropped from the generic phase-access procedure. Consider the access instance $U=\\operatorname{diag}(1,-1)$ with encoded eigenvalue labels $0$ and $1/2$ assigned to phases $0$ and $1/2$, and input $\\psi=(|0\\rangle+|1\\rangle)/\\sqrt2$. Choose any $0<\\epsilon<1/4$ and a dyadic $Q$ satisfying $Q\\epsilon\\ge6\\pi$; then $Q$ is even. Both phases lie exactly on the QPE grid, so [F1] gives output $0$ or $1/2$ with probability $1/2$ each. Fresh repetitions are independent; pairing each length-$r$ sequence with the sequence obtained by swapping every $0$ and $1/2$ shows the median is each encoded eigenvalue with probability exactly $1/2$. The two $\\epsilon$-neighborhoods are disjoint, so neither fixed label has success probability above $1/2$. This counterexample uses the generic injective phase-encoding interface [F3], and shows why this theorem states the Hamiltonian guarantee for eigenstate input only.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The eigenvector promise requires a nonzero system space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes lambda=0, whose encoded phase and principal representative are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a single eigenvalue without requiring spectral separation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 depends only on the promised eigenvalue, so every vector in one degenerate eigenspace has the same bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 bounds principal-branch error for lambda at either endpoint plus or minus one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 proves the least dyadic Q and positive odd r searches terminate by finite rational comparisons.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Step 1.3 proves the least dyadic Q and positive odd r searches terminate by finite rational comparisons.",
+            "item_sha256": "f099418b68b843a160c26af5fcf6050c89771b951456e13c3411c6fc953d9d6a",
+            "row_sha256": "520dc8852ed637ae3bb9e83c271b0004bb47304e0efe56c2882f5ea709a416df",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is eigenstate median spectral accuracy and approximate-law loss; it asserts no biconditional requiring a separate forward implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is eigenstate median spectral accuracy and approximate-law loss; it asserts no biconditional requiring a separate forward implication.",
+            "item_sha256": "f099418b68b843a160c26af5fcf6050c89771b951456e13c3411c6fc953d9d6a",
+            "row_sha256": "27544b4a6629bed8ad89666c3f1036677ec68a02de70829459ac83401132f145",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is eigenstate median spectral accuracy and approximate-law loss; it asserts no biconditional requiring a separate reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is eigenstate median spectral accuracy and approximate-law loss; it asserts no biconditional requiring a separate reverse implication.",
+            "item_sha256": "f099418b68b843a160c26af5fcf6050c89771b951456e13c3411c6fc953d9d6a",
+            "row_sha256": "d98f4a3d98ce81589208bce27634e0972cf925f3acfacbaab764a399431431bc",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Read all six current steps and all 26 declared suppliers. Q epsilon>=6 pi gives K>=3 and tail<=1/4; lambda in [-1,1] and epsilon<=1 keep the circular success lift strictly inside the principal branch since pi>2. Finite independent eigenstate trials admit the explicit exponential-moment bound (sqrt(3)/2)^r<=exp(-r/8)<=delta. MVT on [1,8/7] has continuous/differentiable positive logarithm with derivative 1/x; the strict comparison 196>192 is correct. Rational dyadic and odd searches terminate by Archimedean bounds, even as delta tends to one. Complex Cauchy\u2013Schwarz followed by finite-real Cauchy\u2013Schwarz and projector orthogonality gives TV<=xi per trial and finite product hybrids give r xi, including xi=0 and vacuous negative lower bounds. Exact-grid 0,1/2 mixture and odd-sequence complementation prove the eigenstate caveat. Confirmed the duplicated F5/F6 labels and renamed the newly added complex and projector facts F11/F12, updating step3.1. Refuter defect is nonfatal; no Statement change in this amendment. Mirrored the two reader-added dependencies into the owned manifest."
+      }
+    },
+    "ex-qa-28-exponential-polynomial": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-28-qsvt-matrix-function",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A nonzero finite-dimensional Hermitian matrix $H$, a scale $\\alpha>0$ with $\\|H\\|\\le\\alpha$, a supplied unit-normalized $(1,a,\\varepsilon_{BE})$ block encoding of $A=H/\\alpha$ in the sense of [[def-qa-22-block-encoding]], with designated compression $\\widetilde A$ satisfying $\\|\\widetilde A-H/\\alpha\\|\\le\\varepsilon_{BE}$ (and $\\varepsilon_{BE}=0$ for exact access), a function $f$ on $\\sigma(H)$, and a caller-supplied extension $\\bar f:[-\\alpha,\\alpha]\\to\\mathbb C$ agreeing with $f$ on the spectrum. Let $J$ be a nonempty subset of $\\{0,1,2,3\\}$. For each $j\\notin J$, supply an exact certificate that $g_j$ is identically zero on $[-\\alpha,\\alpha]$. For each $j\\in J$, supply a positive scale $\\gamma_j$ satisfying $|g_j(t)|\\le\\gamma_j$ on that interval, a tolerance $\\tau_j\\ge0$, a nonnegative degree bound $d_j$, and a real polynomial $p_j$ of degree at most $d_j$ and parity $d_j\\bmod2$ (including when $p_j=0$), with $|p_j(x)|\\le1$ on $[-1,1]$ and\n$$\\left|p_j(x)-\\frac{g_j(\\alpha x)}{\\gamma_j}\\right|\\le\\tau_j\\qquad(-1\\le x\\le1).$$\nFor each active component, also supply either a reflected-convention phase-list certificate of length $d_j+1$ for which the real part of the QSP sequence's upper-left entry equals $p_j$ (exactly or within a certified uniform error bound), or, when $p_j$ has rational or exact algebraic coefficients, a positive rational phase-synthesis tolerance $\\nu_j$ for OP1. The certificate's finite verification procedure and cost are included in the phase-source record. Any certified phase-generation or compilation error is recorded for the component and included in its implementation-error bound $\\kappa_j$ in [[thm-qa-28-matrix-function-error-cost]].\n\nHere the four real component functions are\n$$g_0(t)=\\frac{\\Re\\bar f(t)+\\Re\\bar f(-t)}2,\\quad g_1(t)=\\frac{\\Re\\bar f(t)-\\Re\\bar f(-t)}2,$$\n$$g_2(t)=\\frac{\\Im\\bar f(t)+\\Im\\bar f(-t)}2,\\quad g_3(t)=\\frac{\\Im\\bar f(t)-\\Im\\bar f(-t)}2.$$\nThus $g_0,g_2$ are even, $g_1,g_3$ are odd, and $\\bar f=g_0+g_1+i g_2+i g_3$. The zero certificates and scale bounds give $|\\bar f(t)|\\le B:=\\sum_{j\\in J}\\gamma_j$; the construction makes no optimal-normalization claim. For an identically zero target with $\\bar f=0$, one may take $J=\\{0\\}$, $\\gamma_0=1$, $d_0=0$, $\\tau_0=0$, and $p_0=0$; the exact list $\\Phi_0=(\\pi/2)$ certifies its phase source since the degree-zero QSP upper-left entry is $e^{i\\pi/2}=i$.\n\n**Additional input.** An LCU access record that supplies or compiles the coefficient-preparation unitary $P$, its inverse, and the required SELECT from the active component circuits, with all implementation costs declared as in [[def-qa-22-block-encoding-access-model]].\n\n**Output.** The LCU circuit $W$ constructed with declared normalization $B$ and designated top-left block $W_{00}$. The error bound for $W_{00}$ is given separately by [[thm-qa-28-matrix-function-error-cost]]. If a supplied phase certificate fails its stated verification or OP1 returns a non-success result, return that failure and no block-encoding output.\n\n**Instructions.** For each $j\\in J$, verify its supplied phase-list certificate's length, reflected-convention polynomial identity or uniform error bound; if no list is supplied, run [[alg-qa-23-qsp-phase-synthesis]] under OP1 on $p_j$ with degree bound $d_j$, required parity $d_j\\bmod2$, and tolerance $\\nu_j$. Propagate any certificate, synthesis or compilation failure without producing a block-encoding output. Apply [[alg-qa-24-qsvt]] to the supplied block encoding to produce the singular-value transform block for $p_j$, retaining separate ancillas and all inverse, controlled, projector-phase, compilation, and implementation-error costs. Since $p_j$ is real with known parity, the even or odd transform is selected by its parity. Any certified phase or implementation deviation from the ideal $p_j$ transform is included in $\\kappa_j$.\n\nRun [[alg-qa-22-lcu-block-encoding]] on the component unitaries indexed by $J$, with unit component normalizations and coefficients $c_j\\gamma_j$, where $c_0=c_1=1$ and $c_2=c_3=i$. Its LCU normalization is $B=\\sum_{j\\in J}\\gamma_j>0$. Return its designated top-left block as an approximation to $f(H)/B$. OP1 and the matrix-function error theorem specify the phase and error obligations.\n\nThis algorithm does not claim a general efficient approximation theorem, automatic extension of $f$, or a finite bit-time phase compiler beyond the stated exact-algebraic/rational OP1 interface. Charge polynomial descriptions, root/phase generation, state preparation, SELECT, PREPARE and its inverse, all QSVT calls, gate compilation, and all output bits under the separate cost coordinates.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-28-matrix-function-error-cost",
+          "source_section": "Statement",
+          "quote": "Use [[alg-qa-28-qsvt-matrix-function]] on a nonzero finite-dimensional space, with active set $J$ and $B=\\sum_{j\\in J}\\gamma_j>0$. Let $A=H/\\alpha$ be the target Hermitian contraction and let $\\widetilde A$ be the contraction compressed from the supplied block encoding, with $\\|\\widetilde A-A\\|\\le\\varepsilon_{BE}$. For each $j\\in J$, let $d_j$ be its QSVT degree, let $\\tau_j$ bound $|p_j(x)-g_j(\\alpha x)/\\gamma_j|$ on $\\sigma(A)$, and let $\\kappa_j$ bound the operator-norm deviation of its implemented QSVT block from the ideal singular-value transform $p_j^{\\mathrm{SV}}(\\widetilde A)$. This bound includes any polynomial error in numerical QSP phase generation, finite phase compilation, and signal-call implementation. Let $\\kappa_{LCU}$ bound the projected-block deviation of the implemented LCU circuit from its exact LCU construction on those component unitaries. Then $B\\ge\\|f(H)\\|$, so this is a valid $B$-block encoding, and its returned block $W_{00}$ satisfies\n$$\\left\\|W_{00}-\\frac{f(H)}{B}\\right\\|\\le\\frac1B\\sum_{j\\in J}\\gamma_j\\left(\\tau_j+4d_j\\sqrt{\\varepsilon_{BE}}+\\kappa_j\\right)+\\kappa_{LCU}.$$\nIf each phase list realizes its target $p_j$ exactly and the phase, signal-call, and LCU implementations are exact, the $\\kappa$ bounds may all be taken to be zero. The scale $B$ is the supplied sum of component scales, not an asserted optimal normalization.\n\nThe component $j\\in J$ uses exactly $d_j$ signal calls in its QSVT sequence, with the forward/inverse split and projector-reflection counts of [[thm-qa-24-qsvt-query-count]]. Inside a single LCU SELECT call, the maximum selected-component branch length is $\\max_{j\\in J} d_j$, while the implemented oracle-occurrence count is charged by the supplied SELECT circuit and may be the sum of separately controlled component counts; PREPARE, SELECT, inverse PREPARE, control logic, phase generation, compilation, ancillas, gates, and bit-time costs are separately charged according to their supplied implementations. No complexity bound for polynomial approximation or for exact-algebraic bit growth is implied.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ is zero or has degree at most $d$, has parity $d\\bmod2$, and satisfies $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-23-qsp-signal-sequence",
+          "source_section": "Definition",
+          "quote": "Let $x\\in[-1,1]$, put $s(x)=\\sqrt{1-x^2}$ using the nonnegative real square root, and define the Hermitian-reflection signal matrix\n$$W_R(x)=\\begin{pmatrix}x&s(x)\\\\s(x)&-x\\end{pmatrix}.$$\nFor each real $\\phi$, define $Z(\\phi)=\\operatorname{diag}(e^{i\\phi},e^{-i\\phi})$. For an integer $d\\ge0$ and real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$, the length-$d$ QSP sequence is the ordered matrix product\n$$U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}\\bigl(W_R(x)Z(\\phi_j)\\bigr),$$\nwhere the product is written left to right in increasing $j$ and matrix multiplication acts right to left. For $d=0$ this is $Z(\\phi_0)$. This definition fixes the sign of the off-diagonal signal entry, both endpoint phases, and the product order.\n\nThe phases are in matrix order: when the factors are applied as chronological circuit layers, the rightmost factor acts first, in accordance with [[def-qc-circuit-denotational-semantics]]. In the ordered signal basis, if both coordinates are nonzero, applying $Z(\\phi)$ multiplies the ratio of the second coordinate to the first by $e^{-2i\\phi}$; if either coordinate is zero, that relative phase is undefined, while the displayed matrix action remains defined. This is the relative phase convention fixed by [[def-qc-relative-phase]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-22-lcu-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "Under the exact inputs and instructions of [[alg-qa-22-lcu-block-encoding]], the all-zero coefficient-index and component-ancilla block of $W=P^{\\dagger}\\mathrm{SELECT}P$ is\n\n$$\\frac{\\sum_{j=0}^{m-1}\\beta_jA_j}{\\Lambda}.$$\n\nMoreover, $\\|\\sum_j\\beta_jA_j\\|_{\\rm op}\\le\\Lambda$, so the constructed unitary is an $(\\Lambda,b+a_*,0)$ block encoding of $\\sum_j\\beta_jA_j$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-28-polynomial-matrix-function-error",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space, let $H:V\\to V$ be Hermitian, and let $I\\subseteq\\mathbb R$ contain its spectrum. For functions $f:I\\to\\mathbb C$, a polynomial $p\\in\\mathbb C[x]$, and $\\eta\\ge0$, if $|p(\\lambda)-f(\\lambda)|\\le\\eta$ for every $\\lambda\\in\\sigma(H)$, then\n$$\\|p(H)-f(H)\\|\\le\\eta.$$\nIn particular, a uniform bound on all of $I$ suffices. Here $f(H)$ is the finite spectral functional calculus.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-trigonometric-and-hyperbolic-power-series",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$,\n$$\\sin z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n+1}}{(2n+1)!},\\quad \\cos z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n}}{(2n)!},$$\n$$\\sinh z=\\sum_{n\\ge0}\\frac{z^{2n+1}}{(2n+1)!},\\quad \\cosh z=\\sum_{n\\ge0}\\frac{z^{2n}}{(2n)!}.$$\nAll four series have infinite radius.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-alternating-series-test",
+          "source_section": "Statement",
+          "quote": "Let $(\\varepsilon_k)$ be the alternating sequence of [[lem-alternating-sequence]],\nthat is the unique sequence of reals with $\\varepsilon_0 = 1$ and\n$\\varepsilon_{k+1} = -\\varepsilon_k$, which is what is usually written\n$\\varepsilon_k = (-1)^k$; let $e$ and $o$ be its even and odd index maps, so that\n$\\varepsilon_{e_j} = 1$, $\\varepsilon_{o_j} = -1$, and every natural number is\n$e_j$ for exactly one $j$ or $o_j$ for exactly one $j$.\n\nLet $(b_k)$ be a sequence of reals that is nonincreasing\n([[def-monotone-sequence]]) and converges to $0$ ([[def-real-limit]]); then\n$b_k \\ge 0$ for every $k$. Write $t_n := \\sum_{k<n} \\varepsilon_k b_k$ for the\npartial sums ([[def-series]]). Then:\n\n1. the series $\\sum \\varepsilon_k b_k$ converges; write $L$ for its sum;\n2. $t_{e_j} \\le L \\le t_{o_j}$ for every $j \\in \\mathbb{N}$, and for every\n   $n \\in \\mathbb{N}$ the sum $L$ lies between the two consecutive partial sums\n   $t_n$ and $t_{n+1}$;\n3. $|L - t_n| \\le b_n$ for every $n \\in \\mathbb{N}$.\n\nClaim 3 is the error bound: the partial sum $t_n$, which uses the $n$ terms\n$\\varepsilon_0 b_0, \\dots, \\varepsilon_{n-1}b_{n-1}$, differs from the sum by at\nmost the first term omitted.\n\n**Only claim 1 is a corollary of [[thm-dirichlet-test]].** Claims 2 and 3 are not:\nthey come from the interlacing of the even-index and odd-index partial sums, and\nthat argument is carried out below rather than smuggled into the Dirichlet\nestimate, which produces no bracketing at all.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S=\\sqrt{I-H^2}=\\operatorname{diag}(\\sqrt3/2,2\\sqrt2/3)$ and set $U=\\begin{pmatrix}H&S\\\\S&-H\\end{pmatrix}$. Since $S=S^*$, $H=H^*$, and $HS=SH$, $U^*=U$ and $U^2=\\begin{pmatrix}H^2+S^2&HS-SH\\\\SH-HS&S^2+H^2\\end{pmatrix}=I$. Thus $U$ is unitary and its top-left block is $H$, proving the exact dilation assertion by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The real part of $e^{-ix}$ is even and the imaginary part is $-\\sin x$, which is odd, by [F3]. For phase list $(0)$ the degree-zero signal sequence has upper-left entry $1$. For $(\\pi/2,\\pi/2)$, the upper-left entry of $Z(\\pi/2)W_R(x)Z(\\pi/2)$ is $x e^{i\\pi}=-x$, by the sequence definition [F2]. Using the exact dilation from step 1.1, the polynomials have matching parity and satisfy $|p_R(x)|=1$, $|p_I(x)|\\le1$ on $[-1,1]$. The coefficient weights are both one, so the LCU scale is $B=2$; by [F2] its normalized weighted sum is $(I+i(-H))/2=(I-iH)/2$, with the stated normalization.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The sine and cosine series converge by [F3], so their terms tend to zero. For $|x|\\le1$, their term magnitudes are nonincreasing, so [F4] gives $|1-\\cos x|\\le x^2/2$; the sine series similarly gives $|x-\\sin x|\\le|x|^3/6$. On the two eigenvalues these imply component errors $\\tau_0\\le1/8$ and $\\tau_3\\le1/48$. With $\\varepsilon_{BE}=0$, exact phases and exact LCU, the error formula in [F2] gives normalized block error at most $(1/8+1/48)/2=7/96$. Equivalently, $|(1-ix)/2-e^{-ix}/2|\\le(|1-\\cos x|+|x-\\sin x|)/2\\le(x^2/2+|x|^3/6)/2$, which is $7/96$ at $x=-1/2$ and $5/162$ at $x=1/3$. The scalar error is at most $7/96$ on $\\sigma(H)$; applying the polynomial matrix-function transfer theorem [F2] to $p(x)=(1-ix)/2$ and $f(x)=e^{-ix}/2$ gives the same operator-norm bound.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This worked example fixes a two-dimensional nonzero matrix space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement of ex-qa-28-exponential-polynomial makes no separate claim requiring this boundary worksheet."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The displayed matrix has two distinct eigenvalues."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two displayed diagonal entries minus one-half and one-third are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The two matrix eigenvalues lie strictly inside [-1,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly constructs the dilation with diagonal sqrt(I-H^2), and step 2.1 supplies both exact phase lists.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Step 1.1 explicitly constructs the dilation with diagonal sqrt(I-H^2), and step 2.1 supplies both exact phase lists.",
+            "item_sha256": "418552b9445f36c564ed519f2c1095a14bef6cbfa1199f50504b1499134f44a5",
+            "row_sha256": "5fa1b97886297f88a79d533c5e36c82c8b76998a7d3ad58ba8b3f166a4e04f7d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is two-eigenvalue exponential linear-approximation block; it asserts no biconditional requiring a separate forward implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is two-eigenvalue exponential linear-approximation block; it asserts no biconditional requiring a separate forward implication.",
+            "item_sha256": "418552b9445f36c564ed519f2c1095a14bef6cbfa1199f50504b1499134f44a5",
+            "row_sha256": "314f5c1c5cb06bdc84ea33eb0dda1fb625ece55338ace4a58060191b916e9855",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is two-eigenvalue exponential linear-approximation block; it asserts no biconditional requiring a separate reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is two-eigenvalue exponential linear-approximation block; it asserts no biconditional requiring a separate reverse implication.",
+            "item_sha256": "418552b9445f36c564ed519f2c1095a14bef6cbfa1199f50504b1499134f44a5",
+            "row_sha256": "4f0079d4f10f420124350b1cba174ff934b592e95c4f98cd47f245ac0f5cd9e2",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-ancilla Hermitian dilation",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "H": "diag(-1/2,1/3)",
+            "S": "diag(sqrt(3)/2,2sqrt(2)/3)"
+          },
+          "calculation": "H and S commute, H^2+S^2=I, and the off-diagonal blocks HS-SH vanish.",
+          "expected": {
+            "U_adjoint": "U",
+            "U_squared": "I",
+            "top_left": "H"
+          }
+        },
+        {
+          "name": "QSP phase-list scalar polynomials",
+          "method": "exact finite matrix multiplication",
+          "input": {
+            "degree_zero_phases": [
+              "0"
+            ],
+            "degree_one_phases": [
+              "pi/2",
+              "pi/2"
+            ]
+          },
+          "calculation": "The upper-left entries are 1 and x exp(i(pi/2+pi/2))=-x.",
+          "expected": {
+            "p_R": "1",
+            "p_I": "-x"
+          }
+        },
+        {
+          "name": "normalized Taylor error at the two eigenvalues",
+          "method": "exact rational bound",
+          "input": {
+            "eigenvalues": [
+              "-1/2",
+              "1/3"
+            ]
+          },
+          "calculation": "At -1/2, (x^2/2+|x|^3/6)/2=7/96. At 1/3, the same bound is 5/162.",
+          "expected": {
+            "errors": [
+              "7/96",
+              "5/162"
+            ],
+            "maximum": "7/96"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Read the three verification steps and all twelve dependencies. S has diagonal entries sqrt(3)/2, 2sqrt(2)/3, commutes with H and satisfies S^2=I-H^2, proving U unitary. The reflected lists (0) and (pi/2,pi/2) have real coefficients 1 and -x exactly; coefficients 1,i give (I-iH)/2 at B=2. On [-1,1] both parity polynomials are bounded and the omitted real-odd/imaginary-even components vanish. Decreasing alternating Taylor tails give spectral errors 1/8 and 1/48; their normalized sum is 7/96 and the other eigenvalue bound is 5/162. All scale, degree, zero-kernel and exactness qualifications match the suppliers. The corrected exact-realization caveat is satisfied. No defect found; reader/refuter have no finding here."
+      }
+    },
+    "ex-qa-28-two-level-spectral-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-28-state-spectral-distribution",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a Hermitian endomorphism of a finite-dimensional complex inner-product space, with distinct eigenvalues $\\lambda$ and orthogonal spectral projections $P_\\lambda$. Let $\\psi$ be a unit vector representing a pure state. Its **state-dependent spectral distribution** is the finite measure on $\\sigma(H)$ defined by\n$$\\mu_\\psi(\\{\\lambda\\})=\\|P_\\lambda\\psi\\|^2=\\langle\\psi|P_\\lambda|\\psi\\rangle.$$\nThe support is restricted to eigenvalues with nonzero weight; degeneracies are represented by one atom per distinct eigenvalue, not one atom per chosen eigenvector. The formula is the definition; its nonnegativity, total mass one, and functional-calculus moment identity are established in [[thm-qa-28-spectral-law-measurement]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qa-28-spectral-law-measurement",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space, let $H:V\\to V$ be Hermitian with distinct eigenvalues $\\lambda$ and spectral projections $P_\\lambda$, and let $\\psi\\in V$ be a unit vector. Run the ideal phase-estimation sampler on $\\psi$, with unitary $U$ whose declared phase class on $P_\\lambda V$ is $\\theta(\\lambda)\\in\\mathbb R/\\mathbb Z$. Write $\\bar\\theta(\\lambda)\\in[0,1)$ for its unique representative, so $Uv=e^{2\\pi i\\bar\\theta(\\lambda)}v$ for $v\\in P_\\lambda V$. Write $a_y(\\lambda)$ for the phase-register amplitude at output $y$ when the input is in that eigenspace, so $|a_y(\\lambda)|^2=P_{\\bar\\theta(\\lambda)}(y)$ as in [[lem-qa-phase-estimation-outcome-kernel]]. Then the output law is\n$$\\Pr(Y=y)=\\sum_{\\lambda\\in\\sigma(H)}\\mu_\\psi(\\{\\lambda\\})P_{\\bar\\theta(\\lambda)}(y).$$\nFor every outcome with positive probability, the normalized conditional system vector is\n$$\\psi_y=\\frac{\\sum_\\lambda a_y(\\lambda)P_\\lambda\\psi}{\\sqrt{\\Pr(Y=y)}}.$$\nMoreover, $\\mu_\\psi$ is a probability distribution and, for every $g:\\sigma(H)\\to\\mathbb C$,\n$$\\langle\\psi|g(H)|\\psi\\rangle=\\sum_\\lambda\\mu_\\psi(\\{\\lambda\\})g(\\lambda).$$\nThe conditional system is generally a coherent sum across eigenspaces, not an exact eigenspace projection.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-phase-estimation-success-and-tail",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. Every nearest grid label $y$ has $P_\\theta(y)\\ge4/\\pi^2$. For any $\\eta\\in\\mathbb R$ with $K=\\lfloor Q\\eta\\rfloor\\ge2$,\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$\nIf $Q\\theta$ is an integer $t$, then $P_\\theta(t)=1$ and all other labels have probability $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "For $0<x\\le2$, $\\sin x\\ge x-x^3/6\\ge x/3>0$. Also $\\cos2\\le-1/3$. Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-trigonometric-and-hyperbolic-power-series",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$,\n$$\\sin z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n+1}}{(2n+1)!},\\quad \\cos z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n}}{(2n)!},$$\n$$\\sinh z=\\sum_{n\\ge0}\\frac{z^{2n+1}}{(2n+1)!},\\quad \\cosh z=\\sum_{n\\ge0}\\frac{z^{2n}}{(2n)!}.$$\nAll four series have infinite radius.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-alternating-series-test",
+          "source_section": "Statement",
+          "quote": "Let $(\\varepsilon_k)$ be the alternating sequence of [[lem-alternating-sequence]],\nthat is the unique sequence of reals with $\\varepsilon_0 = 1$ and\n$\\varepsilon_{k+1} = -\\varepsilon_k$, which is what is usually written\n$\\varepsilon_k = (-1)^k$; let $e$ and $o$ be its even and odd index maps, so that\n$\\varepsilon_{e_j} = 1$, $\\varepsilon_{o_j} = -1$, and every natural number is\n$e_j$ for exactly one $j$ or $o_j$ for exactly one $j$.\n\nLet $(b_k)$ be a sequence of reals that is nonincreasing\n([[def-monotone-sequence]]) and converges to $0$ ([[def-real-limit]]); then\n$b_k \\ge 0$ for every $k$. Write $t_n := \\sum_{k<n} \\varepsilon_k b_k$ for the\npartial sums ([[def-series]]). Then:\n\n1. the series $\\sum \\varepsilon_k b_k$ converges; write $L$ for its sum;\n2. $t_{e_j} \\le L \\le t_{o_j}$ for every $j \\in \\mathbb{N}$, and for every\n   $n \\in \\mathbb{N}$ the sum $L$ lies between the two consecutive partial sums\n   $t_n$ and $t_{n+1}$;\n3. $|L - t_n| \\le b_n$ for every $n \\in \\mathbb{N}$.\n\nClaim 3 is the error bound: the partial sum $t_n$, which uses the $n$ terms\n$\\varepsilon_0 b_0, \\dots, \\varepsilon_{n-1}b_{n-1}$, differs from the sum by at\nmost the first term omitted.\n\n**Only claim 1 is a corollary of [[thm-dirichlet-test]].** Claims 2 and 3 are not:\nthey come from the interlacing of the even-index and odd-index partial sums, and\nthat argument is carried out below rather than smuggled into the Dirichlet\nestimate, which produces no bracketing at all.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-28-spectral-estimation-access",
+          "source_section": "Definition",
+          "quote": "An **eigenvalue-estimation access instance** consists of a finite-dimensional system space; a costed state-preparation circuit $A_\\psi$ with $A_\\psi|0\\rangle=|\\psi\\rangle$; a costed unitary $U$ and each controlled, inverse, or controlled-inverse version actually used; an injective known phase encoding $\\lambda\\mapsto\\theta(\\lambda)\\in\\mathbb R/\\mathbb Z$ on the promised spectrum; and a specified decoder with its branch cut and output units. Exact controlled powers $U^{2^j}$ may instead be supplied individually, with their costs. If powers are synthesized from controlled-$U$, charge the exact number of calls and all control/wiring costs; no power or control is free.\n\nFor Hamiltonian access, the instance additionally specifies a Hermitian $H$, an interval containing $\\sigma(H)$, a simulation rule for each requested signed time and its operator-error/cost bound, and how errors are allocated across the circuit. In the convention of [[def-qa-20-simulation-error-and-cost-model]], a simulator for $e^{-itH}$ implements the positive-sign phase unitary $e^{iH}$ at $t=-1$, using inverse access when that is what the supplied interface permits. Every preparation, inverse, controlled call, simulation, phase-register gate, decoder arithmetic operation, measurement, and written output is included in its declared cost coordinates. Aliasing is excluded by the injectivity promise and the chosen decoder; absent that promise, the output is only an estimate of the encoded phase modulo one, not of a uniquely identified eigenvalue.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two diagonal entries are distinct, so their spectral projections are $|0\\rangle\\langle0|$ and $|1\\rangle\\langle1|$. Their action on $\\psi$ gives squared norms $3/5$ and $2/5$, respectively; the squares sum to one. The encoded phase classes have canonical representatives $1-1/(4\\pi)$ for eigenvalue $-1/2$ and $1/(6\\pi)$ for eigenvalue $1/3$. By [F1], the squared norms are exactly the masses and the measured phase law is $\\frac35P_{1-1/(4\\pi)}+\\frac25P_{1/(6\\pi)}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "We certify $\\pi<4$. The sine Taylor partial sum through $-4^7/7!$ is $S_3=4-4^3/3!+4^5/5!-4^7/7!=-6976/5040=-502272/362880$. Starting with $4^9/9!$, the absolute Taylor terms decrease because the next-to-current ratio is $16/((n+1)(n+2))<1$ for odd $n\\ge7$. These magnitudes tend to zero, since the sine series at $4$ converges by [F3]. Applying [F4] to this tail bounds the alternating remainder by $4^9/9!=262144/362880$. Hence $\\sin4\\le-240128/362880<0$. If $\\pi>4$, [F3] would give $\\sin4>0$; if $\\pi=4$, [F3] would give $\\sin4=0$. Both contradict the negative bound, so $\\pi<4$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\eta=\\epsilon/(2\\pi)=1/(8\\pi)$. For each eigenvalue $\\lambda$, let $\\theta_0=\\lambda/(2\\pi)$ and let $\\bar\\theta\\in[0,1)$ be its canonical encoded phase. Then $Q\\eta=16/\\pi>4$ by $\\pi<4$, so $K=\\lfloor Q\\eta\\rfloor\\ge4$; [F2] bounds the circular tail at $\\bar\\theta$ by at most $1/6<1/4$. On this success event, the circular-distance definition gives an integer $k$ with $|y/Q+k-\\bar\\theta|<\\eta$. Writing $\\bar\\theta=\\theta_0+n$ for an integer $n$, the lift $y/Q+k-n=\\theta_0+e$ has $|e|<\\eta$. Since $|\\theta_0|\\le1/(2\\pi)$, we have $|\\theta_0+e|<5/(8\\pi)<1/2$ by $\\pi>2$, so it is the principal representative and the decoded eigenvalue error is at most $\\epsilon$. Thus each eigenstate has success at least $3/4$. By [F1], the total success probability is at least $(3/5)(3/4)+(2/5)(3/4)=3/4$. The eigenvalue gap is $1/3-(-1/2)=5/6>1/2=2\\epsilon$, so the two intervals are disjoint.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The seven phase bits require the controlled powers with exponents $1,2,4,8,16,32,64$. Repeating controlled-$U$ for each power uses $1+2+4+8+16+32+64=127$ calls.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This worked example fixes the nonzero space C^2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement of ex-qa-28-two-level-spectral-estimate makes no separate claim requiring this boundary worksheet."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically a two-distinct-eigenvalue calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed diagonal entries minus one-half and one-third are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Neither displayed eigenvalue is an endpoint of the promised interval [-1,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The input vector, Q and tolerance are given explicitly; step 1.1 computes their spectral weights without an arbitrary selection.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The input vector, Q and tolerance are given explicitly; step 1.1 computes their spectral weights without an arbitrary selection.",
+            "item_sha256": "d31a1b61973f5deac4f0604e3159bf795a7af367eb4f44deead678f077435cde",
+            "row_sha256": "4b7ccb03ec71e077389af34b975a3aa141dda1722e3ceecf9e33d15708558759",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is two-level spectral mixture and 127-query example; it asserts no biconditional requiring a separate forward implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is two-level spectral mixture and 127-query example; it asserts no biconditional requiring a separate forward implication.",
+            "item_sha256": "d31a1b61973f5deac4f0604e3159bf795a7af367eb4f44deead678f077435cde",
+            "row_sha256": "4184f5a2d7f2cce651572b7ad506634db5e28df808a5302afa1cfbee45f4295a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is two-level spectral mixture and 127-query example; it asserts no biconditional requiring a separate reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The current claim is two-level spectral mixture and 127-query example; it asserts no biconditional requiring a separate reverse implication.",
+            "item_sha256": "d31a1b61973f5deac4f0604e3159bf795a7af367eb4f44deead678f077435cde",
+            "row_sha256": "e2352f4d262b5282c0cc18437bfc93e145d999467500af5b3361e7eed13d8395",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "spectral weights and normalized state",
+          "method": "exact finite calculation",
+          "input": {
+            "amplitudes": [
+              "sqrt(3/5)",
+              "sqrt(2/5)"
+            ],
+            "eigenvalues": [
+              "-1/2",
+              "1/3"
+            ]
+          },
+          "calculation": "Square the two amplitudes: 3/5 and 2/5; their sum is 1. The eigenvalue gap is 1/3+1/2=5/6.",
+          "expected": {
+            "weights": [
+              "3/5",
+              "2/5"
+            ],
+            "weight_sum": "1",
+            "gap": "5/6"
+          }
+        },
+        {
+          "name": "dyadic phase scale and controlled-query total",
+          "method": "exact finite calculation",
+          "input": {
+            "Q": 128,
+            "epsilon": "1/4",
+            "phase_bits": 7
+          },
+          "calculation": "Q epsilon=32; pi<4 gives 6 pi<24<32. The repeated controlled-U powers cost 1+2+4+8+16+32+64=127.",
+          "expected": {
+            "Q_epsilon": "32",
+            "controlled_U_calls": 127,
+            "tail_bound_at_K4": "1/6"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Read four verification steps and ten dependencies. Squared amplitudes 3/5,2/5 normalize; phases must be in [0,1), namely 1-1/(4pi),1/(6pi). The pre-reader negative kernel parameter was outside the exact supplier domain; accepted the canonical-representative repair and explicit circular-lift derivation. The sine partial sum is -502272/362880 and next term 262144/362880, giving sin4<0 and pi<4 using positivity before the first positive zero, with pi>2 from the positivity supplier. Q eta=16/pi>4 gives K>=4 and tail<=1/6; the principal lift has magnitude <5/(8pi)<1/2. The gap 5/6>2epsilon separates the intervals; mixture success>=3/4 means accuracy relative to its sampled spectral component, not concentration around one fixed eigenvalue. Seven power exponents sum to 127. No eigenstate median guarantee is applied to this superposition; no AC."
+      }
+    }
+  }
+}

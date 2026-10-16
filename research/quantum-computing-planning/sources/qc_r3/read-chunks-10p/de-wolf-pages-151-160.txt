@@ -1,0 +1,634 @@
+===== PDF PAGE 151 =====
+
+Later Aaronson and Ambainis [3] gave a more complicated protocol that uses O(√n) qubits of
+communication.
+What about lower bounds? It is a well-known result of classical communication complexity that
+classical bounded-error protocols for the Intersection problem need about n bits of communication.
+Thus we have a quadratic quantum-classical separation for this problem. Could there be a quantum
+protocol that uses much less than √n qubits of communication? This question was open for quite a
+few years after [78] appeared, until finally Razborov [215] showed that any bounded-error quantum
+protocol for Intersection needs to communicate about √n qubits.
+
+16.5
+Example 3: The vector-in-subspace problem
+
+Notice the contrast between the examples of the last two sections. For the Distributed Deutsch-
+Jozsa problem we get an exponential quantum-classical separation, but the separation only holds
+if we require the classical protocol to be errorless. On the other hand, the gap for the disjointness
+function is only quadratic, but it holds even if we allow classical protocols to have some error
+probability.
+Here is a function where the quantum-classical separation has both features: the quantum
+protocol is exponentially better than the classical protocol, even if the latter is allowed some error:
+
+Alice receives a unit vector v ∈Rm
+
+Bob receives two m-dimensional projectors P0 and P1 such that P0 + P1 = I
+Promise: either P0v = v or P1v = v.
+Question: which of the two?
+
+As stated, this is a problem with continuous input, but it can be discretized in a natural way by
+approximating each real number by O(log m) bits. Alice and Bob’s input is now n = O(m2 log m)
+bits long. There is a simple yet efficient 1-round quantum protocol for this problem: Alice views v
+as a log m-qubit state and sends this to Bob; Bob measures with operators P0 and P1, and outputs
+the measurement result (0 or 1). This takes only log m = O(log n) qubits of communication, and
+Bob’s output is correct with probability 1 thanks to the promise on the inputs.
+The efficiency of this protocol comes from the fact that an m-dimensional unit vector can be
+“compressed” or “represented” as a log m-qubit state. Similar compression is not possible with
+classical bits, which suggests that any classical protocol will have to send the vector v more or less
+literally and hence will require a lot of communication. This turns out to be true, but the proof is
+quite hard [166]. It shows that any bounded-error protocol needs to send Ω(m1/3) bits.
+
+16.6
+Example 4: Quantum fingerprinting
+
+The examples of the previous section were either exponential quantum improvements for promise
+problems (Deutsch-Jozsa and vector-in-subspace) or polynomial improvements for total problems
+(disjointness). We will now give an exponential improvement for the total problem of equality-
+testing, but in a restricted setting called the simultaneous message passing (SMP) model. Alice
+and Bob receive n-bit input x and y, respectively. They do not have any shared resources like shared
+randomness or an entangled state, but they do have local randomness. They don’t communicate
+with each other directly, but instead send a single message to a third party, called the Referee. The
+Referee, upon receiving message mA from Alice and mB from Bob, should output the value f(x, y).
+
+139
+
+
+===== PDF PAGE 152 =====
+
+The goal is to compute f(x, y) with a minimal amount of communication from Alice and Bob to
+the Referee.
+We will see that for the equality problem there is an exponential savings in communication
+when qubits are used instead of classical bits. Classically, the problem of the bounded-error com-
+munication complexity of equality in the SMP model was first raised by Yao [266], and was open
+for almost twenty years until Newman and Szegedy [205] exhibited a lower bound of Ω(√n) bits.
+This is tight, since Ambainis [12] constructed a bounded-error protocol for this problem where the
+messages are O(√n) bits long (see Exercise 8). In contrast, in the quantum setting this problem
+can be solved with very little communication: only O(log n) qubits suffice [77].
+The quantum trick is to associate each x ∈{0, 1}n with a short quantum state |ϕx⟩, called
+the quantum fingerprint of x.
+Just like with physical fingerprints, the idea is that a quantum
+fingerprint is a small object that doesn’t contain very much information about the object x, but
+that suffices for testing if the fingerprinted object equals some other fingerprinted object. As we
+will see below, we can do such testing if the fingerprints are pairwise almost orthogonal. More
+precisely, an (n, m, ε)-quantum fingerprinting scheme maps n-bit string x to m-qubit state |ϕx⟩
+with the property that for all distinct x, y ∈{0, 1}n, we have |⟨ϕx|ϕy⟩| ≤ε.
+We will now show how to obtain a specific (n, m, 0.02)-quantum fingerprinting scheme from
+an error-correcting code C : {0, 1}n →{0, 1}N where m = log N ≈log n.
+There exist codes
+where N = O(n) and any two codewords C(x) and C(y) have Hamming distance close to N/2, say
+d(C(x), C(y)) ∈[0.49N, 0.51N] (we won’t prove this here, but for instance a random linear code
+will work). Define the quantum fingerprint of x as follows:
+
+|ϕx⟩=
+1
+√
+
+N
+
+N
+�
+
+j=1
+(−1)C(x)j|j⟩.
+
+This is a unit vector in an N-dimensional space, so it corresponds to only ⌈log N⌉= log n + O(1)
+qubits. For distinct x and y, the corresponding fingerprints will have small inner product:
+
+⟨ϕx|ϕy⟩= 1
+
+N
+
+N
+�
+
+j=1
+(−1)C(x)j+C(y)j = N −2d(C(x), C(y))
+
+N
+∈[−0.02, 0.02].
+
+Alice: x
+Bob: y
+
+|φx⟩
+|φy⟩
+
+Referee
+
+❥
+✙
+
+❄
+
+x
+?= y
+
+Figure 16.2: Quantum fingerprinting protocol for the equality problem
+
+The quantum protocol is very simple (see Figure 16.2): Alice and Bob send quantum fingerprints
+of x and y to the Referee, respectively. The referee now has to determine whether x = y (which
+corresponds to ⟨ϕx|ϕy⟩= 1) or x ̸= y (which corresponds to ⟨ϕx|ϕy⟩∈[−0.02, 0.02]). The following
+
+140
+
+
+===== PDF PAGE 153 =====
+
+|0⟩
+
+|φx⟩
+
+|φy⟩
+
+measure
+H
+H
+
+SWAP
+
+Figure 16.3: Quantum circuit to test if |ϕx⟩= |ϕy⟩or |⟨ϕx|ϕy⟩| is small
+
+test (Figure 16.3), sometimes called the SWAP-test [37, 77], accomplishes this with small error
+probability.
+This circuit first applies a Hadamard transform to a qubit that is initially |0⟩, then SWAPs
+the other two registers conditioned on the value of the first qubit being |1⟩, then applies another
+Hadamard transform to the first qubit and measures it. Here SWAP is the operation that swaps the
+two registers: |ϕx⟩|ϕy⟩�→|ϕy⟩|ϕx⟩. The Referee receives |ϕx⟩from Alice and |ϕy⟩from Bob and ap-
+plies the test to these two states. An easy calculation reveals that the outcome of the measurement
+is 1 with probability (1−|⟨ϕx|ϕy⟩|2)/2. Hence if |ϕx⟩= |ϕy⟩then we observe a 1 with probability 0,
+but if |⟨ϕx|ϕy⟩| is close to 0 then we observe a 1 with probability close to 1/2. Repeating this
+procedure with several individual fingerprints can make the error probability arbitrarily close to 0.
+
+Exercises
+
+1. (H) Prove that classical deterministic protocols with one message (from Alice to Bob), need
+to send n bits to solve the equality problem.
+
+2.
+(a) (H) Show that if |ϕ⟩and |ψ⟩are non-orthogonal states (i.e., ⟨ϕ|ψ⟩̸= 0), then there is
+no two-outcome projective measurement that perfectly distinguishes these two states, in
+the sense that applying the measurement on |ϕ⟩always gives a different outcome from
+applying the same measurement to |ψ⟩.
+
+(b) Prove that quantum protocols with one message (from Alice to Bob), need to send at
+least n qubits to solve the equality problem (on n-bit inputs) with success probability 1
+on every input. Assume for simplicity that Bob does a projective measurement rather
+than a general POVM.
+
+(c) (H) Prove that quantum protocols with one message (from Alice to Bob), need to send at
+least log n qubits to solve the distributed Deutsch-Jozsa problem with success probabil-
+ity 1 on every input. Again assume for simplicity that Bob does a projective measurement
+rather than a general POVM.
+
+3. (H) Consider one-round quantum communication complexity. Alice gets input x ∈{0, 1}n,
+Bob gets input y ∈{0, 1}n, and they want to compute some Boolean function f(x, y) of their
+inputs. Assume that all rows of the communication matrix are different, i.e., for all x and x′
+
+there is a y such that f(x, y) ̸= f(x′, y). They are allowed only one round of communication:
+Alice sends a quantum message to Bob and Bob must then be able to give the right answer
+with probability 1. Prove that Alice needs to send n qubits to Bob for this. You may assume
+that Alice’s messages are pure states (this is without loss of generality).
+
+141
+
+
+===== PDF PAGE 154 =====
+
+4. Suppose Alice and Bob each have n-bit agendas, and they know that for exactly 25% of
+the timeslots they are both free. Give a quantum protocol that finds such a timeslot with
+probability 1, using only O(log n) qubits of communication.
+
+5. (H) The disjointness problem of communication complexity is the following decision version
+of the intersection problem: Alice receives an x ∈{0, 1}n, Bob receives y ∈{0, 1}n, and
+f(x, y) = 0 if there is an i such that xi = yi = 1, and f(x, y) = 1 otherwise (i.e., f says
+whether x and y represent disjoint subsets of [n]). Suppose there exists an m-qubit one-way
+protocol that solves this problem, so where Alice sends Bob m qubits and then Bob outputs
+f(x, y) with probability at least 2/3. Prove the lower bound m = Ω(n) on the number of
+qubits sent.
+
+6. (H) Consider the intersection problem: Alice has input x ∈{0, 1}n, Bob has input y ∈{0, 1}n,
+and they want to find (with success probability ≥2/3) an i such that xi = yi = 1, if such
+an i exists. We know that using r = O(√n) messages between Alice and Bob, they can
+solve the intersection problem with O(√n log n) qubits of communication (see Section 16.4).
+We also know that with only r = 1 message (i.e., one-way communication) Θ(n) qubits of
+communication are necessary and sufficient (see Exercise 5). Now suppose we limit them to
+some r ∈{1, . . . , √n} messages. This r is known to Alice and Bob. Describe a communication
+protocol by means of which Alice and Bob can solve the intersection problem with at most r
+messages, and O((n/r) log n) qubits of communication in total.
+
+7.
+(a) Consider the following variant of the search problem: we are given query access to a
+string x ∈{0, 1}n, and we know a set S ⊆[n] of k < n elements such that xi = 0 for all
+i ̸∈S. Show that there is a quantum algorithm that can find a solution for this search
+problem (i.e., an i such that xi = 1, if there is one) with success probability ≥2/3, using
+O(
+√
+
+k) queries to x.
+
+(b) Consider the following variant of the intersection problem of communication complexity:
+Alice holds a string x ∈{0, 1}n of Hamming weight k, and Bob holds a string y ∈{0, 1}n
+
+of Hamming weight k. Give a quantum communication protocol that finds an i such
+that xi = yi = 1 (if such an i exists) with success probability ≥2/3, using O(
+√
+
+k log n)
+qubits of communication.
+
+8. Consider an error-correcting code C : {0, 1}n →{0, 1}N where N = O(n), N is a square, and
+any two distinct codewords are at Hamming distance d(C(x), C(y)) ∈[0.49N, 0.51N] (such
+codes exist, but you don’t have to prove that).
+
+(a) View the codeword C(x) as a
+√
+
+N ×
+√
+
+N matrix. Show that if you choose a row index uni-
+formly at random and choose a column index uniformly at random, then the unique in-
+dex i where these row and column intersect, is uniformly distributed over i ∈{1, . . . , N}.
+
+(b) (H) Give a classical bounded-error SMP-protocol for the equality problem where Alice
+and Bob each send O(√n) bits to the Referee.
+
+9. Alice and Bob want to solve the equality problem on n-bit inputs x and y (i.e., decide
+whether x = y). They do not share randomness or entanglement but can use local (private)
+randomness.
+
+142
+
+
+===== PDF PAGE 155 =====
+
+(a) (H) Fix a prime number p ∈[3n, 6n], then the set Fp of integers modulo p is a finite field
+(i.e., it has a well-defined addition and multiplication). For x = (x0, . . . , xn−1) ∈{0, 1}n,
+define the univariate polynomial Px : Fp →Fp of degree < n as Px(t) = �n−1
+i=0 xiti (note
+that the n bits of x are used as coefficients here, not as the argument of the polynomial).
+Show that for distinct n-bit strings x and y, we have Prt∈Fp[Px(t) = Py(t)] ≤1/3, where
+the probability is taken over a uniformly random t ∈Fp.
+
+(b) Use (a) to give a classical communication protocol where Alice sends an O(log n)-bit
+message to Bob, and Bob can decide whether x = y with success probability ≥2/3.
+
+(c) Use (a) to give a quantum fingerprinting scheme x �→|ϕx⟩, where quantum state |ϕx⟩
+has O(log n) qubits, and |⟨ϕx|ϕy⟩| ∈[0, 1/3] for all distinct n-bit strings x and y (prove
+the latter property explicitly, it’s not enough to write down only the states).
+
+10. The inner product problem in communication complexity is the function f : {0, 1}n ×
+{0, 1}n →{0, 1} defined by f(x, y) = �n
+i=1 xiyi mod 2. Suppose there exists a quantum
+protocol P for Alice and Bob that uses q qubits of communication (possibly using multiple
+messages between Alice and Bob) and computes the inner product function with success prob-
+ability 1 (on every possible inputs x, y). The protocol does not assume any shared entangled
+state at the start.
+
+(a) Give a quantum protocol that uses 2q qubits of communication and implements the 2n-
+qubit map |x⟩A|y⟩B �→(−1)x·y|x⟩A|y⟩B (possibly with some auxiliary qubits for each of
+Alice and Bob; these should start and end in state |0⟩).
+
+(b) (H) Give a protocol where Alice transmits x to Bob using 2q qubits of communication.
+
+(c) Derive a lower bound on q from (b) and Holevo’s theorem (Theorem 3 of Chapter 15;
+be specific about which part of the theorem you invoke).
+
+11. Consider the following problem in communication complexity. Alice’s input has two parts:
+a unit vector v ∈Rm and two orthogonal projectors P0 and P1. Bob’s input is an m × m
+unitary U. They are promised that the vector Uv either lies in the subspace corresponding
+to P0 (i.e., P0Uv = Uv) or in the subspace corresponding to P1 (i.e., P1Uv = Uv), and the
+problem for Alice and Bob is to find out which of these two cases holds.
+
+(a) Give a quantum protocol that uses two messages of O(log m) qubits (one message from
+Alice to Bob and one from Bob to Alice) to solve this problem with success probability 1.
+
+(b) (H) Show that there exists a constant c > 0 such that classical protocols need to send
+Ω(mc) bits of communication to solve this problem with error probability ≤1/3, even
+when they are allowed to send many messages.
+
+12. (H) Consider the following communication complexity problem, called the “Hidden Matching
+Problem.” Alice’s input is some x ∈{0, 1}n. Bob’s input is a matching M, i.e., a partition of
+{1, . . . , n} into n/2 disjoint unordered pairs (assume n is a power of 2 for simplicity). Their
+goal is that Bob outputs a pair {i, j} ∈M together with the parity xi ⊕xj of the two bits
+indexed by that pair. It doesn’t matter which pair {i, j} ∈M Bob outputs, as long as the
+additional bit of output equals the parity of the two indexed bits of x. Show that they can
+solve this problem with success probability 1 using only a message of log n qubits from Alice
+to Bob (and no communication from Bob to Alice).
+
+143
+
+
+===== PDF PAGE 156 =====
+
+Comment: One can show that classical one-way protocols need Ω(√n) bits of communication to solve this
+
+problem with small error probability.
+
+13.
+(a) Suppose you have a state
+1
+√
+
+2(|0⟩|ϕ⟩+|1⟩|ψ⟩), where |ϕ⟩and |ψ⟩are quantum states with
+real amplitudes. Suppose you apply a Hadamard gate to its first qubit and then measure
+that first qubit. Show that the probability of measurement outcome 0 is 1
+
+2(1 + ⟨ϕ|ψ⟩).
+
+(b) Suppose H is a subgroup of a finite group G, and g ∈G some element. Show (1) if
+g ∈H then the cosets g ◦H and H are equal
+and (2) if g ̸∈H then the cosets g ◦H and H are disjoint.
+
+(c) Suppose you are given quantum state |ψH⟩=
+1
+√
+
+H
+�
+h∈H |h⟩(for an unknown H ≤G),
+and an element g ∈G. You may assume you have a unitary A available that implements
+the group operation, A : |g, h⟩�→|g, g ◦h⟩, and you may also apply a controlled version
+of A. Give an algorithm that acts on |ψH⟩and possibly some auxiliary qubits, and that
+outputs 0 with probability 1 if g ∈H, and outputs 0 with probability ≤1/2 if g ̸∈H.
+
+(d) (H) Consider the following communication complexity problem. Alice and Bob both
+know a finite group G, Alice gets as input some subgroup H ≤G (for instance in the
+form of a generating set for H) and Bob gets input g ∈G. Give a one-way quantum
+protocol where Alice sends to Bob a message of O(log |G|) qubits, and then Bob decides
+with success probability ≥2/3 whether g ∈H.
+
+144
+
+
+===== PDF PAGE 157 =====
+
+Chapter 17
+
+Entanglement and Non-Locality
+
+17.1
+Quantum non-locality
+
+Entangled pure states are those that cannot be written as a tensor product of separate states. The
+most famous one is the EPR-pair:
+1
+√
+
+2(|00⟩+ |11⟩).
+
+Suppose Alice has the first qubit of the pair, and Bob has the second. If Alice measures her qubit
+in the computational basis and gets outcome b ∈{0, 1}, then the state collapses to |bb⟩. Similarly,
+if Alice measures her qubit in some other basis, this will collapse the joint state (including Bob’s
+qubit) to some state that depends on her measurement basis as well as its outcome. Somehow
+Alice’s action seems to have an instantaneous effect on Bob’s side—even if the two qubits are
+light-years apart!
+This was a great bother to Einstein, whose theory of relativity posits that
+information and causation cannot travel faster than the speed of light. Einstein called such effects
+of entanglement “spooky action at a distance” (in German: “spukhafte Fernwirkungen”), and
+viewed it as a fundamental problem for quantum mechanics [111]. In his view, quantum mechanics
+should be replaced by some “local realist” physical theory that would still have the same predictive
+power as quantum mechanics. Here “local” means that information and causation act locally, not
+faster than light, and “realist” means that physical systems have definite, well-defined properties
+(even if those properties may be unknown to us).
+Note that the above experiment where Alice measures her half of the EPR-pair doesn’t actually
+violate locality: no information is transferred from Alice to Bob. From Bob’s perspective there
+is no difference between the situation where Alice measured and the situation where she didn’t.1
+
+For this experiment, a shared coin flip between Alice and Bob is a local realist physical model
+that has exactly the same observable consequences as measuring the qubits of the EPR-pair in the
+computational basis: a 50-50 distribution on outcomes |00⟩and |11⟩. This shared-coin-flip model
+is local because no information is transferred between Alice and Bob, and it’s realist because the
+coin flip has a definite outcome (even if that outcome is unknown to Alice and Bob before they
+measure).
+Given this example, one might hope (and Einstein expected) that any kind of behavior that
+comes from entangled states can be replaced by some local realist physical model.
+This way,
+quantum mechanics could be replaced by an alternative physical theory with less counter-intuitive
+
+1In fact, one can show that entanglement cannot replace communication, see for example Exercise 18.7.
+
+145
+
+
+===== PDF PAGE 158 =====
+
+behavior. Surprisingly, in the 1960s, John Bell [41] devised entanglement-based experiments whose
+behavior cannot be reproduced by any local realist theory. In other words, we can let Alice and Bob
+do certain measurements on an entangled state, and the resulting distributions on their outputs pre-
+dicted by quantum mechanics, cannot be obtained from any local realist theory. This phenomenon
+is known as “quantum non-locality.” It could of course be that the quantum mechanical predictions
+of the resulting correlations are just wrong. However, in the early 1980s, such experiments were
+actually done by Aspect and others [32], and they gave the outcomes that quantum mechanics
+predicted.2 Note that such experiments don’t prove quantum mechanics, but they disprove any
+local realist physical theory.3
+
+Such experiments, which realize correlations that are provably impossible to realize with local
+realist models, are among the deepest and most philosophical results of 20th century physics: the
+commonsense idea of local realism is most probably false! Since Bell’s seminal work, the concept of
+quantum non-locality has been extensively studied, by physicists, philosophers, and more recently
+by computer scientists.
+
+In the next sections we review some interesting examples.
+The two-party setting of these
+examples is illustrated in Fig. 17.1: Alice receives input x and Bob receives input y, and they
+produce outputs a and b, respectively, that have to be correlated in a certain way (which depends
+on the game). They are not allowed to communicate. In physics language, we could assume they
+are “space-like separated,” which means that they are so far apart that they cannot influence each
+other during the course of the experiment (assuming information doesn’t travel faster than the
+speed of light). In the classical scenario they are allowed to share a random variable. Physicists
+would call this the “local hidden variable” that gives properties their definite value (that value may
+be unknown to the experimenter). This setting captures all local realist models. In the quantum
+model Alice and Bob are allowed to share entangled states, such as EPR-pairs. The goal is to show
+that entanglement-based strategies can do things that local realist strategies cannot.
+
+Alice
+
+x
+
+a
+
+❄
+
+❄
+
+Bob
+
+y
+
+b
+
+❄
+
+❄
+
+Inputs:
+
+Outputs:
+
+Figure 17.1: The non-locality scenario involving two parties: Alice and Bob receive inputs x and y,
+respectively, and are required to produce outputs a and b that satisfy certain conditions. Once the
+inputs are received, no communication is permitted between the parties.
+
+2Modulo some technical “loopholes” due to imperfect photon sources, measurement devices, Alice and Bob not
+being sufficiently far apart etc. These are still hotly debated in some corners, but most people accept that Aspect’s
+and later experiments are convincing, and kill any reasonable hope of a complete local-realist explanation of nature.
+[144] did an experiment that simultaneously closed the two most important loopholes.
+3Despite its name, non-locality doesn’t disprove locality, but rather disproves the conjunction of locality and
+realism—at least one of the two assumptions has to fail.
+
+146
+
+
+===== PDF PAGE 159 =====
+
+17.2
+CHSH: Clauser-Horne-Shimony-Holt
+
+In the CHSH game [92] Alice and Bob receive input bits x and y, and their goal is to output bits
+a and b, respectively, such that
+a ⊕b = x ∧y,
+(17.1)
+
+(‘∧’ is logical AND; ‘⊕’ is parity, i.e. addition mod 2) or, failing that, to satisfy this condition with
+as high a probability as possible.
+First consider the case of classical deterministic strategies, so without any randomness. For
+these, Alice’s output bit depends solely on her input bit x, and similarly for Bob. Let a0 be the
+bit that Alice outputs if her input is x = 0, and a1 the bit she outputs if x = 1. Let b0, b1 be the
+outputs Bob gives on inputs y = 0 and y = 1, respectively. These four bits completely characterize
+any deterministic strategy. Condition (17.1) becomes
+
+a0 ⊕b0
+=
+0,
+
+a0 ⊕b1
+=
+0,
+
+a1 ⊕b0
+=
+0,
+
+a1 ⊕b1
+=
+1.
+(17.2)
+
+It is impossible to satisfy all four equations simultaneously, since summing them modulo 2 yields
+0 = 1. Therefore it is impossible to satisfy Condition (17.1) perfectly. Since a probabilistic strategy
+(where Alice and Bob share randomness) is a probability distribution over deterministic strategies,
+it follows that no probabilistic strategy can have success probability better than 3/4 on every
+possible input (the 3/4 can be achieved simultaneously for every input, see Exercise 4).4
+
+Now consider the same problem but where Alice and Bob are supplied with a shared 2-qubit
+system initialized to the entangled state
+
+1
+√
+
+2(|00⟩−|11⟩).
+
+Such a state can easily be obtained from an EPR-pair by local operations, for instance if Alice
+applies a Z-gate to her qubit. Now the parties can produce outputs that satisfy Condition (17.1)
+with probability cos(π/8)2 ≈0.85 (higher than what is possible in the classical case), as follows.
+
+Recall the unitary operation that rotates the qubit by angle θ: R(θ) =
+�cos θ
+−sin θ
+sin θ
+cos θ
+
+�
+. If x = 0
+
+then Alice applies R(−π/16) to her qubit; and if x = 1 she applies R(3π/16). Then Alice measures
+her qubit in the computational basis and outputs the resulting bit a. Bob’s procedure is the same,
+depending on his input bit y. It is straightforward to calculate that if Alice rotates by θA and Bob
+rotates by θB, the state becomes
+
+1
+√
+
+2 (cos(θA + θB)(|00⟩−|11⟩) + sin(θA + θB)(|01⟩+ |10⟩)) .
+
+After the measurements, the probability that a ⊕b = 0 is cos(θA + θB)2. Note that if x ∧y = 0
+then θA + θB = ±π/8, while if x ∧y = 1 then θA + θB = 3π/8. Hence Condition 17.1 is satisfied
+with probability cos(π/8)2 for all four input possibilities, showing that quantum entanglement
+
+4Such statements, upper bounding the optimal success probability of classical strategies for a specific game, are
+known as Bell inequalities. This specific one is called the CHSH inequality.
+
+147
+
+
+===== PDF PAGE 160 =====
+
+allows Alice and Bob to win the game with a probability that’s higher than what the best classical
+strategy can achieve. Tsirelson [91] showed that cos(π/8)2 is the best that quantum strategies can
+do for CHSH, even if they are allowed to use much more entanglement than one EPR-pair (see
+Exercise 7).
+
+17.3
+Magic square game
+
+Is there a game where the quantum protocol always succeeds, while the best classical success
+probability is bounded below 1?
+A particularly elegant example is the following magic square
+game [26]. Consider the problem of labeling the entries of a 3 × 3 matrix with bits so that the
+parity of each row is even, whereas the parity of each column is odd. This is clearly impossible:
+if the parity of each row is even then the sum of the 9 bits is 0 mod 2, but if the parity of each
+column is odd then the sum of the 9 bits is 1 mod 2. The two matrices
+
+0
+0
+0
+0
+0
+0
+1
+1
+0
+
+0
+0
+0
+0
+0
+0
+1
+1
+1
+
+each satisfy five out of the six constraints. For the first matrix, all rows have even parity, but only
+the first two columns have odd parity. For the second matrix, the first two rows have even parity,
+and all columns have odd parity.
+Consider the game where Alice receives x ∈{1, 2, 3} as input (specifying the number of a row),
+and Bob receives y ∈{1, 2, 3} as input (specifying the number of a column). Their goal is to each
+produce 3-bit outputs, a1a2a3 for Alice and b1b2b3 for Bob, such that
+
+1. They satisfy the row/column parity constraints: a1 ⊕a2 ⊕a3 = 0 and b1 ⊕b2 ⊕b3 = 1.
+
+2. They are consistent where the row intersects the column: ay = bx.
+
+As usual, Alice and Bob are forbidden from communicating once the game starts, so Alice does not
+know y and Bob does not know x. We shall show the best classical strategy has success probability
+8/9, while there is a quantum strategy that always succeeds.
+An example of a deterministic strategy that attains success probability 8/9 (when the input xy
+is uniformly distributed) is where Alice plays according to the rows of the first matrix above and
+Bob plays according the columns of the second matrix above. This succeeds in all cases, except
+where x = y = 3. To see why this is optimal, note that for any other classical strategy, it is possible
+to represent it as two matrices as above but with different entries. Alice plays according to the rows
+of the first matrix and Bob plays according to the columns of the second matrix. We can assume
+that the rows of Alice’s matrix all have even parity; if she outputs a row with odd parity then
+they immediately lose, regardless of Bob’s output. Similarly, we can assume that all columns of
+Bob’s matrix have odd parity.5 Considering such a pair of matrices, the players lose at each entry
+where they differ. There must be such an entry, since otherwise it would be possible to have all
+rows even and all columns odd with one matrix. Thus, when the input xy is chosen uniformly from
+{1, 2, 3} × {1, 2, 3}, the success probability of the best-possible classical strategy is at most 8/9.
+
+5In fact, the game can be simplified so that Alice and Bob each output just two bits, since the parity constraint
+determines the third bit.
+
+148
+

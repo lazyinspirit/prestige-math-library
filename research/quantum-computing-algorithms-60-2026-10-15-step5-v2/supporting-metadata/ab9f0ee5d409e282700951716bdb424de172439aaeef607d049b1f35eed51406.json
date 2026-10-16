@@ -1,0 +1,929 @@
+[
+  {
+    "order": 2220,
+    "id": "simon-algorithm-and-finite-field-recovery",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Simon’s Algorithm and Finite-Field Recovery",
+    "companion": "simon-algorithm-and-finite-field-recovery-examples",
+    "requires": [
+      "exact-oracle-algorithms",
+      "gaussian-elimination-and-row-reduction",
+      "primes-and-the-fundamental-theorem-of-arithmetic",
+      "series-and-nonnegative-tests",
+      "reversible-arithmetic-and-oracle-conversion",
+      "congruences-and-the-chinese-remainder-theorem",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "computational-problems-promises-and-cost-models",
+      "measurements-povms-and-instruments",
+      "finite-probability-spaces-and-random-variables",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces"
+    ],
+    "items": [
+      {
+        "id": "thm-qa-binary-field-f2-is-a-field",
+        "kind": "theorem",
+        "title": "The quotient Z/2 is the binary field",
+        "statement_or_definition": "The quotient operations on $\\mathbb Z/2\\mathbb Z$ make the carrier $\\mathbb F_2$ of [[def-qa-binary-field-f2]] a field. This is only the modulus-$2$ specialization of the published prime-modulus theorem; it does not assert a classification of finite fields.",
+        "deps": [
+          "def-qa-binary-field-f2",
+          "def-prime",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_obligations": [
+          "Show 2 is prime and specialize the prime-modulus quotient theorem with the exact carrier and operations."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-prime",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 1,
+        "axiom_use": "No Choice is used; the proof checks the finite divisor set and specializes the published prime-modulus theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-binary-vector-space",
+        "kind": "definition",
+        "title": "The coordinate vector space over F2",
+        "statement_or_definition": "For $n\\ge0$, let $\\mathbb F_2^n=\\{0,1\\}^n$. Give it coordinatewise addition $(x+y)_i=x_i+y_i$ and scalar multiplication $(c x)_i=cx_i$ using the operations of [[def-qa-binary-field-f2]]. Its zero vector is $0^n$. Then $\\mathbb F_2^n$ is a vector space over $\\mathbb F_2$, with standard basis $e_0,\\ldots,e_{n-1}$ and dimension $n$. For $n=0$, the carrier consists of the empty tuple, and the basis is empty.",
+        "deps": [
+          "def-qa-binary-field-f2",
+          "thm-qa-binary-field-f2-is-a-field",
+          "def-vector-space",
+          "def-linear-independence",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_obligations": [
+          "Verify coordinate closure and each vector-space axiom; identify the standard basis and include n=0."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Appendix A.1, PDF p.205: the binary vector space with entrywise addition modulo two and notation F_2={0,1}."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33–37: binary strings as elements of F_2^n in Simon's problem."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-vector-space",
+          "def-linear-independence",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 2,
+        "axiom_use": "No Choice is used; the coordinate operations and standard basis are explicit finite data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-f2-gaussian-elimination",
+        "kind": "algorithm",
+        "title": "Gaussian elimination over F2 for Simon recovery",
+        "statement_or_definition": "**Input:** An $(n-1)\\times n$ binary matrix $Y$ over the field $\\mathbb F_2$, with $n\\ge1$. Let $d=n-1$.\n\n**Instructions:**\n\n1. Set the pivot-row index $k=0$ and an empty ordered list of pivot columns. For columns $j=0,\\ldots,n-1$ in order, search the rows $i\\ge k$ for the least $i$ with $Y_{ij}=1$. If none exists, continue to the next column.\n2. If such $i$ exists, swap rows $i$ and $k$. For every other row $r\\ne k$ with entry $1$ in column $j$, replace row $r$ by its bitwise XOR with row $k$. Record $j$ as a pivot column and increase $k$ by one.\n3. After the finite column loop, return FAIL if $k\\ne d$. Otherwise find the sole nonpivot column $q$, set the free variable $x_q=1$, and solve each pivot variable from its reduced row. Return the resulting vector $x\\in\\mathbb F_2^n$.\n\nAll searches, swaps, row XORs, and loops are finite. The $n=1$ input has zero rows and the algorithm returns the one-bit vector $1$. The operation is a deterministic row-reduction procedure; correctness and bit cost are proved in [[thm-qa-f2-gaussian-elimination-correct-and-cost]].",
+        "deps": [
+          "thm-qa-binary-field-f2-is-a-field",
+          "def-qa-binary-field-f2",
+          "def-qa-binary-vector-space",
+          "def-matrix-equation-augmented-matrix-and-linear-system",
+          "thm-rank-nullity",
+          "thm-gaussian-elimination-produces-row-echelon-form"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Specify deterministic pivot searches, row operations, failure condition, free variable, and n=1 behavior."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-matrix-equation-augmented-matrix-and-linear-system",
+          "thm-rank-nullity",
+          "thm-gaussian-elimination-produces-row-echelon-form"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 3,
+        "axiom_use": "No Choice is used; all pivot choices are the least admissible row or column in a finite order.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-computational-basis-measurement-law",
+        "kind": "lemma",
+        "title": "Computational-basis measurement weights are squared amplitudes",
+        "statement_or_definition": "Let $(|y\\rangle)_{y\\in\\mathcal Y}$ be a finite ordered orthonormal computational basis, let $\\psi=\\sum_{y\\in\\mathcal Y}a_y|y\\rangle$ be a unit vector, and put $\\rho=|\\psi\\rangle\\langle\\psi|$. For the computational-basis projective measurement with $P_y=|y\\rangle\\langle y|$, the associated POVM weight is\n$$\np(y)=\\operatorname{tr}(\\rho P_y)=|a_y|^2.\n$$\nIn particular these weights are nonnegative and sum to one.",
+        "deps": [
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-projective-measurement",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "thm-qc-unit-vector-projector-is-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Verify the basis projectors form a POVM; compute each diagonal trace exactly and include normalization."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1–3.3, PDF pp.35–39: the measurement probabilities in Simon's one-sample procedure."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11–13: computational-basis measurements and the Born weights in Simon's algorithm."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-trace-of-an-endomorphism"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 4,
+        "axiom_use": "No Choice is used; the computation is a finite diagonal trace in the specified orthonormal basis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-simon-promise",
+        "kind": "definition",
+        "title": "Simon hidden-XOR-period promise",
+        "statement_or_definition": "Fix integers $n\\ge1$ and $m\\ge n-1$. A total function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ satisfies the **Simon hidden-XOR-period promise** if there is a unique nonzero string $s\\in\\{0,1\\}^n$ such that for all $x,y\\in\\{0,1\\}^n$,\n\n$$f(x)=f(y)\\quad\\Longleftrightarrow\\quad (y=x\\text{ or }y=x\\oplus s).$$\n\nFor the query algorithms using this promise, the instance is $n,m$ together with black-box access to $f$: the solver receives no function table or other information depending on $f$. Each oracle call uses the standard bit-query interface [[def-qa-standard-bit-query]]. Its witness relation $R(f,s)$ holds exactly when $s$ is the nonzero mask in the displayed iff condition, so the required output is the unique hidden mask. The address operation $\\oplus$ is the coordinatewise addition of [[def-qa-binary-field-f2]]. The output width condition lets the $2^{n-1}$ fibers receive distinct labels; it does not promise that the image uses every $m$-bit label. Each fiber is exactly $\\{x,x\\oplus s\\}$.",
+        "deps": [
+          "def-qa-binary-field-f2",
+          "def-qa-standard-bit-query"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "Show the period pairs addresses; construct enough labels for a total promised function and verify uniqueness."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 5,
+        "axiom_use": "No Choice is used; the fibers and label assignment are finite, and labels are enumerated lexicographically.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-simon-annihilator-subspace-basis",
+        "kind": "lemma",
+        "title": "The Simon annihilator is an (n−1)-dimensional binary subspace",
+        "statement_or_definition": "Let $n\\ge1$ and let $s\\in\\mathbb F_2^n$ be nonzero in the coordinate vector space of [[def-qa-binary-vector-space]]. Define\n$$\ns^\\perp:=\\{y\\in\\mathbb F_2^n:s\\cdot y=0\\},\n$$\nwhere the binary dot product is the parity defined in [[def-qa-binary-dot-product]]. Then $s^\\perp$ is a linear subspace of dimension $d=n-1$ and has exactly $2^d$ elements. The assertion includes $n=1$, when $s^\\perp=\\{0\\}$ has dimension zero.",
+        "deps": [
+          "def-qa-simon-promise",
+          "def-qa-binary-field-f2",
+          "thm-qa-binary-field-f2-is-a-field",
+          "def-qa-binary-dot-product",
+          "def-qa-binary-vector-space",
+          "def-vector-space",
+          "def-linear-subspace",
+          "def-linear-independence",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "proof_obligations": [
+          "Give an explicit basis by choosing a nonzero coordinate; prove subspace, independence, dimension, size, and n=1."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3, §§3.1–3.3, PDF pp.35–39: Simon's nonzero hidden string and the orthogonal binary equations."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11–13: the binary equations y·a=0 and their solution space."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33–37: Simon's order-two subgroup in F_2^n and its annihilator."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-vector-space",
+          "def-linear-subspace",
+          "def-linear-independence",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 6,
+        "axiom_use": "No Choice is used; the proof selects the least nonzero coordinate and gives an explicit finite basis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-simon-one-sample",
+        "kind": "algorithm",
+        "title": "One Simon Fourier-sampling sample",
+        "statement_or_definition": "**Input:** Integers $n\\ge1$, $m\\ge n-1$, and ordinary access through the [[def-qa-standard-bit-query]] to a total function satisfying [[def-qa-simon-promise]]. Prepare an ordered $n$-qubit address register and $m$-qubit target register, both in their zero computational-basis states.\n\n**Instructions:**\n\n1. Apply the exact one-qubit Hadamard gate to every address wire, producing $H^{\\otimes n}|0^n\\rangle$, and leave the target at $|0^m\\rangle$.\n2. Apply the standard bit-flip oracle $U_f|x\\rangle|z\\rangle=|x\\rangle|z\\oplus f(x)\\rangle$ once. Measure the target with the computational-basis projective measurement [[def-qc-projective-measurement]], viewed as the finite POVM [[def-qc-povm-and-outcome-law]]. Use the Lüders branch maps $\\mathcal I_v(X)=P_vXP_v$, where $P_v=I_{\\rm address}\\otimes|v\\rangle\\langle v|$, under the instrument and conditional-state interface [[def-qc-instrument-and-conditional-state]]. Theorem [[thm-qc-luders-instrument-of-a-povm-is-valid]] supplies a valid instrument; its outcome weights and positive-branch states are covered by [[thm-qc-instrument-outcome-law-normalizes]] and [[thm-qc-instrument-conditional-state-is-density]]. Discard the reported value and target register. The POVM effects are these same $P_v$.\n3. Apply $H^{\\otimes n}$ to the address register and measure it in the computational basis. Return the observed $n$-bit string $y$ as one sample row.\n\nEvery branch uses exactly one oracle query and $2n$ Hadamard gates. It makes one finite instrument measurement on the target and one terminal projective measurement on the address. The intermediate target outcome is not used by classical postprocessing. There is no failure branch, controlled-oracle call, or inverse-oracle call. This procedure's sample law is proved separately in [[thm-qa-simon-hadamard-sampling-law]].",
+        "deps": [
+          "def-qa-simon-promise",
+          "def-qa-standard-bit-query",
+          "lem-qa-hadamard-f2-kernel",
+          "def-qc-projective-measurement",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "thm-qc-instrument-outcome-law-normalizes",
+          "thm-qc-instrument-conditional-state-is-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "proof_obligations": [
+          "Specify registers, one standard query, finite target instrument, final measurement, and exact query/gate counts."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 7,
+        "axiom_use": "No Choice is used; the circuit and all registers are finite and explicitly ordered.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-simon-random-instance-distribution",
+        "kind": "definition",
+        "title": "Random Simon-oracle distribution for a classical lower bound",
+        "statement_or_definition": "Fix $n\\ge1$ and $m\\ge n-1$, and put $L=2^m$ and $C=2^{n-1}$. Choose $s$ uniformly from the $2^n-1$ nonzero binary masks. Let $\\mathcal C_s$ be the set of address pairs $\\{x,x\\oplus s\\}$. Conditional on $s$, choose uniformly an injection $\\lambda:\\mathcal C_s\\to\\{0,1\\}^m$ and define the total oracle $f_{s,\\lambda}(x)=\\lambda(\\{x,x\\oplus s\\})$.\n\nThe sample space consists of all pairs $(s,\\lambda)$ with equal weight. There are $C$ cosets and $L\\ge C$ labels, so each $s$ admits exactly $L(L-1)\\cdots(L-C+1)$ injections; this number does not depend on $s$. Thus the marginal on $s$ is uniform and the conditional label assignment is uniform without replacement.",
+        "deps": [
+          "def-qa-simon-promise",
+          "def-finite-probability-space-and-event"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "proof_obligations": [
+          "Count injections, normalize the finite law, and verify every sampled function has a unique nonzero mask."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-finite-probability-space-and-event"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 8,
+        "axiom_use": "No Choice is used; the finite injection set is enumerated and assigned uniform weights.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-simon-postquery-coset-state",
+        "kind": "theorem",
+        "title": "Simon query and output measurement produce a coset pair",
+        "statement_or_definition": "For a Simon oracle with hidden nonzero string $s$, immediately after its one standard query the joint state is\n\n$$2^{-n/2}\\sum_{x\\in\\{0,1\\}^n}|x\\rangle|f(x)\\rangle.$$\n\nFor each output value $v$ in the image of $f$, the target Lüders instrument has probability $2^{1-n}$ and its conditional joint state factors as\n\n$$\\frac{|x_0\\rangle+|x_0\\oplus s\\rangle}{\\sqrt2}\\otimes|v\\rangle,$$\n\nwhere $x_0$ is either preimage of $v$. Outcomes outside the image have probability zero. Hence the address register conditional state is the normalized coset-pair vector shown above.",
+        "deps": [
+          "alg-qa-simon-one-sample",
+          "def-qa-simon-promise",
+          "def-qa-standard-bit-query",
+          "lem-qa-hadamard-f2-kernel",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-projective-measurement",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "thm-qc-instrument-outcome-law-normalizes",
+          "thm-qc-instrument-conditional-state-is-density",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-unit-vector-projector-is-density",
+          "def-trace-of-an-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "proof_obligations": [
+          "Normalize the query state; validate the target instrument and compute every branch probability and conditional state."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-trace-of-an-endomorphism"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 9,
+        "axiom_use": "No Choice is used; all register bases, branches, and sums are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-f2-gaussian-elimination-correct-and-cost",
+        "kind": "theorem",
+        "title": "F2 row reduction returns the unique Simon mask",
+        "statement_or_definition": "For $n\\ge1$, let $Y$ be a binary $(n-1)\\times n$ matrix. The algorithm [[alg-qa-f2-gaussian-elimination]] terminates, returns FAIL exactly when $\\operatorname{rank}(Y)<n-1$, and otherwise returns the unique nonzero vector in $\\ker Y$. In particular, if the rows are independent and each row $y_i$ satisfies $y_i\\cdot s=0$ for a fixed nonzero Simon mask $s$, then the returned vector is $s$. The algorithm uses $O(n^3)$ classical bit operations.",
+        "deps": [
+          "alg-qa-f2-gaussian-elimination",
+          "thm-rank-nullity",
+          "def-qa-simon-promise",
+          "thm-qa-binary-field-f2-is-a-field",
+          "def-qa-binary-field-f2",
+          "def-qa-binary-vector-space",
+          "def-matrix-equation-augmented-matrix-and-linear-system",
+          "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "def-linear-basis",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-qa-binary-dot-product",
+          "thm-gaussian-elimination-produces-row-echelon-form",
+          "def-qa-classical-bit-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "proof_obligations": [
+          "Prove row-operation invariance, pivot/rank equivalence, kernel uniqueness, and multitape O(n^3) cost."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "thm-rank-nullity",
+          "def-qa-binary-field-f2-is-a-field",
+          "def-matrix-equation-augmented-matrix-and-linear-system",
+          "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "def-linear-basis",
+          "lem-span-is-the-set-of-linear-combinations",
+          "thm-gaussian-elimination-produces-row-echelon-form"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 10,
+        "axiom_use": "No Choice is used; row operations, finite bases, and the selected free coordinate are explicit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-simon-classical-randomized-query-lower-bound",
+        "kind": "theorem",
+        "title": "Classical randomized Simon search needs exponential queries",
+        "statement_or_definition": "Let $n\\ge8$, $N=2^n$, and $m\\ge n-1$. Consider algorithms that know $n,m$ and receive only classical query access to the promised oracle $f$; no truth table, description, or other information depending on $f$ is supplied. Every randomized algorithm in this model that outputs the unique nonzero Simon mask with success probability at least $2/3$ on every promised oracle must use more than $\\lfloor 2^{n/2}/4\\rfloor$ queries in the worst case. Consequently the classical randomized query complexity in this oracle-only model is $\\Omega(2^{n/2})$. This is a query lower bound; no classical bit-time lower bound is asserted.",
+        "deps": [
+          "def-qa-simon-random-instance-distribution",
+          "def-qa-classical-query-algorithm",
+          "def-finite-probability-space-and-event"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "proof_obligations": [
+          "Prove the uniform collision-free posterior, collision bound, final-guess bound, finite-tape averaging, and constants."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §3.3.2, PDF pp. 36–39: full distributional Simon classical lower-bound proof for the decision variant, using uniform hidden masks and the collision-free transcript posterior; the local item gives a direct randomized-search proof for the nonzero promise."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 5 §5.3, PDF pp. 29–32: adversarial/deterministic classical HSP query lower bound, specializing to the family of order-two subgroups of F_2^n; used as an independent comparison, not as the local randomized-search proof."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-finite-probability-space-and-event"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 11,
+        "axiom_use": "No Choice is used; all oracle, label, and random-tape spaces in the bound are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "contradiction"
+      },
+      {
+        "id": "thm-qa-simon-hadamard-sampling-law",
+        "kind": "theorem",
+        "title": "Simon samples uniformly from s-perp",
+        "statement_or_definition": "For every Simon hidden nonzero string $s\\in\\{0,1\\}^n$, the one-sample algorithm returns a string uniformly distributed on\n\n$$s^\\perp:=\\{y\\in\\{0,1\\}^n:s\\cdot y=0\\}.$$\n\nThe set $s^\\perp$ has $2^{n-1}$ elements. Conditional on the measured output value $f(x_0)$, the amplitude of $y$ is $2^{-(n-1)/2}(-1)^{x_0\\cdot y}$ when $s\\cdot y=0$ and is zero otherwise. Thus the outcome law is independent of which output fiber was observed.",
+        "deps": [
+          "thm-qa-simon-postquery-coset-state",
+          "alg-qa-simon-one-sample",
+          "lem-qa-hadamard-f2-kernel",
+          "def-qa-binary-dot-product",
+          "lem-qa-computational-basis-measurement-law",
+          "lem-qa-simon-annihilator-subspace-basis",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 20,
+        "proof_obligations": [
+          "Compute the conditional amplitudes, invoke the local Born-weight lemma, count s-perp, and normalize."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 12,
+        "axiom_use": "No Choice is used; the proof is a finite binary sum and a finite coordinate count.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-simon-rank-process",
+        "kind": "definition",
+        "title": "Simon independent-sample rank process",
+        "statement_or_definition": "Fix integers $n\\ge1$ and $m\\ge n-1$, and fix one total oracle $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ satisfying the [[def-qa-simon-promise]], with its hidden nonzero mask $s$. Put $d=n-1$ and use the coordinate vector space $\\mathbb F_2^n$ of [[def-qa-binary-vector-space]]. Start with an empty ordered list of accepted rows and $V_0=\\{0\\}=\\operatorname{span}(\\varnothing)$. On each round, reset both registers and run a fresh [[alg-qa-simon-one-sample]] for this same fixed oracle $f$. Its measurement outcomes are independent across these freshly initialized executions: every finite $R$-round history is an outcome in a finite probability space [[def-finite-probability-space-and-event]] with the product of its one-sample probabilities. Obtain its sample row $y$. At current rank $k$, let $V_k$ be the span of the $k$ accepted rows. If $y\\notin V_k$, append $y$ and set $V_{k+1}:=\\operatorname{span}_{\\mathbb F_2}(V_k\\cup\\{y\\})$; if $y\\in V_k$, discard it and leave the list and span unchanged. Stop once the span has dimension $d$.\n\nThe sample law [[thm-qa-simon-hadamard-sampling-law]] places every row in $s^\\perp$, and [[lem-qa-simon-annihilator-subspace-basis]] proves that this subspace has dimension $d$, so this stopping target is attainable and never exceeds the available rank. This is an unbounded rank-collection process, with one oracle query in every sampling round. Its probability and expected-query claims use finite prefix experiments as in [[def-qa-expected-query-cost]]; a finite cap and failure output are specified separately.",
+        "deps": [
+          "def-qa-simon-promise",
+          "alg-qa-simon-one-sample",
+          "thm-qa-simon-hadamard-sampling-law",
+          "lem-qa-simon-annihilator-subspace-basis",
+          "def-qa-binary-field-f2",
+          "thm-qa-binary-field-f2-is-a-field",
+          "def-qa-binary-vector-space",
+          "def-qa-expected-query-cost",
+          "def-finite-probability-space-and-event"
+        ],
+        "justified_by": [],
+        "dependency_level": 21,
+        "proof_obligations": [
+          "Specify independent finite product sample prefixes, acceptance rule, stopping rank, and expected-query convention."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-finite-probability-space-and-event"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 13,
+        "axiom_use": "No Choice is used; each finite prefix is a finite product of the specified sample law.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-simon-rank-growth-probability",
+        "kind": "theorem",
+        "title": "Simon rank growth probability",
+        "statement_or_definition": "Let $d=n-1$ and consider a finite history with $k<d$ accepted rows in the Simon rank process. These rows are independent by the acceptance rule, so the current rank is $k$. The next independent sample increases the rank with probability\n\n$$p_k=1-2^{k-d}\\ge\\frac12.$$\n\nWriting $q_k=2^{k-d}$, for each fixed rank-$k$ history and every $r\\in\\mathbb N$, let $A_{k,r}$ be the event, in the finite continuation experiment of the next $r$ fresh samples, that all $r$ fail to raise rank. For $M\\ge1$, let $W_{k,M}$ on the finite $M$-sample continuation experiment be the number of samples up to the first rank increase, capped at $M$, with value $M$ if no increase occurs in that prefix. Then\n\n$$\\Pr(A_{k,r})=q_k^r,$$\n\nand the expected truncated waiting count is\n\n$$\\mathbb E[W_{k,M}]=\\sum_{j=0}^{M-1}q_k^j\\le\\frac1{p_k}\\le2.$$\n\nAll probabilities and expectations here are over finite continuation experiments; no probability measure on infinite sample histories is assumed.",
+        "deps": [
+          "def-qa-simon-rank-process",
+          "thm-qa-simon-hadamard-sampling-law",
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "thm-geometric-series",
+          "def-qa-binary-field-f2",
+          "def-qa-binary-vector-space",
+          "thm-qa-binary-field-f2-is-a-field",
+          "def-linear-independence",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-combination-and-span",
+          "def-linear-basis",
+          "def-dimension",
+          "lem-qa-simon-annihilator-subspace-basis"
+        ],
+        "justified_by": [],
+        "dependency_level": 22,
+        "proof_obligations": [
+          "Count the rank-k span, derive rise/failure probabilities, and compute truncated finite-prefix expectation."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "thm-geometric-series",
+          "def-qa-binary-field-f2-is-a-field",
+          "def-linear-independence",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-combination-and-span",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 14,
+        "axiom_use": "No Choice is used; finite-dimensional spans and finite-prefix expectations suffice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-simon-recovery-with-budget",
+        "kind": "algorithm",
+        "title": "Budgeted Simon recovery with explicit failure branch",
+        "statement_or_definition": "**Input:** A promised Simon oracle with $n\\ge1$, output width $m\\ge n-1$, and a supplied rational failure tolerance $\\delta=a/b$ with positive binary integers $a<b$. Set $d=n-1$.\n\n**Instructions:**\n\n1. If $d=0$, return the unique nonzero one-bit string $1$ immediately, using zero queries.\n2. Otherwise form $u=2db$ by binary shift-and-add multiplication, divide $u$ by $a$ using binary long division $u=ha+r$ with $0\\le r<a$, and set $M=h$ if $r=0$ and $M=h+1$ otherwise. Start with an empty reduced row-echelon basis.\n3. For at most $M$ trials, run [[alg-qa-simon-one-sample]] once. Reduce its row against the current pivot rows in increasing pivot-column order. Discard it if the residual row is zero. Otherwise insert it at its least nonzero coordinate as a new pivot, clear that pivot column from the old rows by XOR, and maintain the pivot order. Stop sampling as soon as the basis reaches rank $d$.\n4. If the basis reaches rank $d$, form the $(n-1)\\times n$ matrix of its rows, call [[alg-qa-f2-gaussian-elimination]], and output the returned vector. If all $M$ trials are used before rank $d$ is reached, return FAIL.\n\nEvery execution has at most $M$ oracle queries. Each sample uses $2n$ Hadamard gates and two finite measurements; no controlled or inverse query is used. Under the [[def-qa-classical-bit-cost]] model, classical basis maintenance costs $O(Mn^2)$ bit operations, the final row reduction costs $O(n^3)$, and computing $M$ by schoolbook integer arithmetic costs $O((B+\\log n)^2)$ bit operations, where $B$ is the total binary input length of $a,b$. The total classical bit bound is therefore $O(Mn^2+n^3+(B+\\log n)^2)$. The correctness and failure bound are proved in [[thm-qa-simon-recovery-correctness-and-query-bound]].",
+        "deps": [
+          "alg-qa-simon-one-sample",
+          "def-qa-simon-rank-process",
+          "alg-qa-f2-gaussian-elimination",
+          "def-qa-classical-bit-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 22,
+        "proof_obligations": [
+          "Give a finite binary computation of the cap, early stopping, failure branch, and separate query/bit costs."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 15,
+        "axiom_use": "No Choice is used; every loop is finitely capped and all pivot choices use a fixed order.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-simon-recovery-correctness-and-query-bound",
+        "kind": "theorem",
+        "title": "Simon recovery succeeds with probability at least 1-delta",
+        "statement_or_definition": "Fix a Simon oracle with $n\\ge1$, let $d=n-1$, and let $\\delta\\in\\mathbb Q\\cap(0,1)$. The unbounded rank-collection process terminates almost surely in the sense that its finite-prefix tail probability $\\Pr(T>R)$ tends to zero as $R\\to\\infty$; its expected query cost, defined as the supremum over finite query prefixes, is at most $2d$. For the finite algorithm with $M=\\lceil2d/\\delta\\rceil$, the probability of returning the hidden mask is at least $1-\\delta$, and its worst-case query count is at most $M=O(n/\\delta)$. For fixed constant $\\delta$, the query count is $O(n)$. The finite algorithm's classical postprocessing has bit cost $O(Mn^2+n^3+(B+\\log n)^2)$ when $\\delta=a/b$ is supplied in binary with total numerator/denominator length $B$.\n\nHere the tail probabilities are computed from the finite prefix experiments of the rank process. When $d\\ge1$, the induced stopping-time law assigns mass $\\Pr(T=t)=\\Pr(T>t-1)-\\Pr(T>t)$ to $t\\ge1$ and mass $\\lim_R\\Pr(T>R)$ to $T=\\infty$; the proof shows the latter is zero. When $d=0$, $T=0$ and the process is already complete. No measure on an infinite execution-history space is assumed.",
+        "deps": [
+          "alg-qa-simon-recovery-with-budget",
+          "def-qa-simon-rank-process",
+          "thm-qa-simon-rank-growth-probability",
+          "thm-qa-f2-gaussian-elimination-correct-and-cost",
+          "def-finite-probability-space-and-event",
+          "thm-geometric-series",
+          "def-qa-expected-query-cost",
+          "thm-markov-inequality",
+          "def-qa-classical-bit-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 23,
+        "proof_obligations": [
+          "Prove a finite-prefix termination tail, expected query bound, Markov cap failure, correctness, and bit costs."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [
+          "def-finite-probability-space-and-event",
+          "thm-geometric-series",
+          "thm-markov-inequality"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 16,
+        "axiom_use": "No Choice is used; almost-sure termination is derived from finite-prefix tail probabilities, with no measure on infinite histories.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2221,
+    "id": "simon-algorithm-and-finite-field-recovery-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Simon’s Algorithm and Finite-Field Recovery — Examples",
+    "companion": "simon-algorithm-and-finite-field-recovery",
+    "requires": [
+      "simon-algorithm-and-finite-field-recovery"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-simon-finite-rank-and-sampling",
+        "kind": "example",
+        "title": "Finite Simon rank and sampling examples",
+        "statement_or_definition": "### One address bit\n\nTake $n=1$, hidden mask $s=1$, output width $m=0$, and the constant map from the two one-bit addresses to the unique empty output string. The two addresses are exactly the single coset $\\{0,1\\}$. Here $d=n-1=0$, the only sample row is $0$, and the recovery algorithm's zero-rank branch returns $1$ with no query.\n\n### Two address bits\n\nTake $n=2$, $m=1$, $s=11$, and define\n$$\nf(00)=f(11)=0,\\qquad f(01)=f(10)=1.\n$$\nThe fibers are the two cosets of $\\{00,11\\}$. The output measurement has two outcomes, each with probability $1/2$. Conditional on outcome $0$, the address state before the final Hadamards is $(|00\\rangle+|11\\rangle)/\\sqrt2$; conditional on outcome $1$, it is $(|01\\rangle+|10\\rangle)/\\sqrt2$.\n\nThe equation $s\\cdot y=0$ gives $s^\\perp=\\{00,11\\}$. Each sample is uniform on these two rows. At rank zero, the next row raises rank exactly when it is $11$, so the exact rank-rise probability is $1/2$. The matrix $Y=[11]$ has rank $1=n-1$; the row-reduction procedure chooses column $0$ as pivot, sets the sole free coordinate $x_1=1$, solves $x_0=1$, and returns $s=11$.\n\nFor failure tolerance $\\delta=1/2$, the finite cap is $M=\\lceil2(1)/(1/2)\\rceil=4$. The cap fails precisely when all four rows are $00$, an event of probability $1/16$; hence this instance succeeds with probability $15/16$ and uses at most four queries.",
+        "deps": [
+          "def-qa-simon-promise",
+          "def-qa-binary-dot-product",
+          "thm-qa-simon-postquery-coset-state",
+          "thm-qa-simon-hadamard-sampling-law",
+          "def-qa-simon-rank-process",
+          "thm-qa-simon-rank-growth-probability",
+          "alg-qa-f2-gaussian-elimination",
+          "thm-qa-f2-gaussian-elimination-correct-and-cost",
+          "alg-qa-simon-recovery-with-budget",
+          "thm-qa-simon-recovery-correctness-and-query-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "proof_obligations": [
+          "Check n=1 and n=2 promises, branch states, sample/rank laws, row reduction, and exact cap failure."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6, 2026)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 3 §§3.1-3.3, PDF pp.35-39: Simon promise, one-sample derivation, uniform s-perp law, rank growth, expected queries and classical lower-bound proof."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.11-13 and §6.5, PDF pp.27-33: independent Simon sample derivation and finite-abelian HSP context."
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+              "locator": "Chapter 6, PDF pp.33-37: Simon as a finite-abelian hidden-subgroup instance and Fourier sampling context."
+            }
+          ]
+        },
+        "existing_supplier_checks": [],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "Authored draft with local argument where applicable; no independent review or mathematical acceptance.",
+        "local_order": 1,
+        "axiom_use": "No Choice is used; the examples enumerate finite strings, rows, and outcomes explicitly.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

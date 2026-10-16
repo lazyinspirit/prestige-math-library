@@ -1,0 +1,82 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "focused-current-source-owner-review",
+  "coverage": "Root individually confirms actual named defects using current sources and explicitly described advisor evidence. Candidate patches are proposed work, not completed source repair, native acceptance or new review coverage. All source unchanged.",
+  "entries": [
+    {
+      "batch": "21",
+      "concern_index": 0,
+      "id": "lem-qc-sparse-fault-path-implies-code-deviation",
+      "concern": {
+        "id": "lem-qc-sparse-fault-path-implies-code-deviation",
+        "concern": "Proof 2.1 concludes: 'Induction over the finite sequence of computation and correction stages at each concatenation level gives joint encoded error budget at most q\u2113\u2264d'. Steps 1.1\u20131.3 establish the alternating-stage invariant only when the asserted stage contracts already apply. They do not establish the induction from level r to r+1: no hierarchical error sector or recursive decoder is defined here, and no argument shows that an arbitrary bad child's potentially unencoded output becomes an admissible coarse fault while good children retain their attached syndromes. The cited proper-code definition specifies encoded-input budgets and zero-fault arbitrary-input correction, but supplies no proved recursive substitution or noisy arbitrary-input attraction result. This is substantial for both general threshold consumers. The concrete existence theorem separately supplies hierarchical sectors and attraction/substitution arguments in 2.3 and 5.2\u20137.1, but this general lemma neither cites nor generalizes those arguments. Source comparison: Aharonov\u2013Ben-Or, https://arxiv.org/pdf/quant-ph/9611025, Appendix C, pp. 12\u201314, explicitly proves three simultaneous recursive assertions, including arbitrary-input correction. If the present contracts are intended to assume their identities at every level, that additional hypothesis needs to be explicit; otherwise the recursive correctness claim remains unsupported.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:12:03.352355+00:00",
+      "reason": "Root read the complete current sparse-path lemma and all three current contracts, then the actual advisor derivation. The present proof iterates chronology at a fixed level without defining or proving recursive sector substitution. Encoded-input noisy identities plus zero-fault arbitrary-input attraction do not handle arbitrary bad-child outputs. The candidate supplies hierarchical sectors and a simultaneous induction conditional on a proved finite syndrome-parametric port certificate. The native owner must actually prove the certificate for the concrete construction, including refresh locality, typed intermediate sectors and residual/invalid-coordinate alignment. Do not replace this by assuming all-level correctness or claim the old weak contract implies the certificate. In the scalar-Gram recovery argument, explicitly construct a finite unitary supported-error basis before forming a normalized mixture; an arbitrary error basis cannot simply be normalized into a channel. Preserve numerical q bounds and both general conditional threshold results, with actual supplier and consumer closure.",
+      "candidate_patch_file": "research/quantum-computing-algorithms-60-2026-10-15-owner-step4-concern-review/recursive-fault-gap/candidate-patch.md"
+    },
+    {
+      "batch": "47",
+      "concern_index": 0,
+      "id": "alg-qa-23-polynomial-root-isolation",
+      "concern": {
+        "id": "alg-qa-23-polynomial-root-isolation",
+        "concern": "Instruction 6 says: \u201cTest common-root membership by a gcd followed by the same certified rectangle count.\u201d Admissibility for q does not imply admissibility for that gcd. For a concrete rational example put \u03b5=1/16, p(z)=(z\u00b2+1)\u00b2((z-\u03b5)\u00b2+4), and q(z)=(z\u00b2+1)((z-\u03b5)\u00b2+4). The rectangle R=(0,1/8)+i(15/8,17/8) contains exactly the simple root \u03b5+2i, has diameter\u00b2=5/64<1/4, and is admissible for q: its boundary contains none of q's four roots, all four vertex imaginary values are nonzero, and no edge imaginary restriction is identically zero. At m=1, gcd(q,p')=z\u00b2+1. On R's left edge z=iy, this gcd is real throughout, so its imaginary restriction is identically zero and both left-vertex imaginary values vanish. The stipulated rectangle-count routine therefore cannot be invoked there. Root-free boundaries alone do pass to a divisor, but the additional imaginary-part conditions do not. Nonzero constant gcds likewise need a zero-count branch. I have not established that this particular rectangle is selected by the deterministic schedule; it disproves the unstated inheritance implication needed by instruction 6. Neither that instruction nor thm-qa-23-polynomial-root-isolation-correctness supplies a new admissibility procedure for these gcd recounts. This leaves multiplicity correctness/termination unsupported as written, and the bounded-grid algorithm inherits the same multiplicity test.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:12:03.352492+00:00",
+      "reason": "Root read actual ROOTS coefficient model and instruction6, the complete advisor symbolic witness and finite nine-scalar proof. A divisor of q inherits boundary root-freeness but not nonzero imaginary vertices or nonidentically-zero edge imaginary parts. The witness confirms the unsupported inheritance. For nonconstant gcd h, each of four vertex and four edge conditions forbids at most one real t in (1+it)h, so nine integer candidates suffice; a constant gcd has zero roots. This keeps exact algebraic access, unchanged isolators and polynomial rational arithmetic. Native owner must check actual ROOTS/GRID-ROOTS suppliers, resource proofs and full affected consumers after applying the proposal.",
+      "candidate_patch_file": "research/quantum-computing-algorithms-60-2026-10-15-owner-step4-concern-review/root-gcd-gap/candidate.patch"
+    },
+    {
+      "batch": "47",
+      "concern_index": 1,
+      "id": "thm-qa-23-qsp-phase-factorization",
+      "concern": {
+        "id": "thm-qa-23-qsp-phase-factorization",
+        "concern": "Proof 3.1 applies the induction hypothesis directly to the SU(2)-form pair (P',Q') from 2.1 and then appends a W_S factor. The induction hypothesis as stated supplies a reflection-convention factorization. A short convention transport is omitted: at k=d-1 apply the reflection induction hypothesis to (i^k P', i^(k+1) Q'), then use F3's affine phase conversion to obtain the required SU(2) list before appending the peeled phase. The cited conversion closes this gap, but the current text does not state it.",
+        "severity": "gap-a-reader-closes"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:12:03.352557+00:00",
+      "reason": "Root read full actual QSP factorization proof and F3 convention conversion. Its induction hypothesis is in reflection convention, while3.1 applies it directly to a source SU2 pair. Apply it instead at k=d-1 to (i^k Pprime,i^(k+1) Qprime), then use F3 to convert to the source list before appending the peeled phase. The concrete patch makes this explicit and preserves the full factorization Statement and phase convention. If this item is initially rejected it belongs in its genuine native initial assignment, not owner admission.",
+      "candidate_patch_file": "research/quantum-computing-algorithms-60-2026-10-15-owner-step4-concern-review/root-gcd-gap/candidate.patch"
+    },
+    {
+      "batch": "51",
+      "concern_index": 0,
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "concern": {
+        "id": "alg-qa-27-cks-variable-time-linear-solver",
+        "concern": "The finite-precision paragraph asserts: \u201cConstruct the exact sparse block encoding with compression [tilde A]/d\u201d while retaining location maps that \u201cenumerate the support of A\u201d. No explicit condition requires the decoded matrix to vanish outside those lists. A norm-error certificate and Hermiticity alone do not imply that condition. For example, take A=(1/2)I\u2082, d=2, diagonal-only location lists with padded sentinels, and decoded tilde A=(1/2)I\u2082+\u03c4X for arbitrarily small positive rational \u03c4. The decoded matrix is Hermitian, 2-sparse, has entries bounded by one and norm error \u03c4, but the supplied neighbor-state construction omits its off-diagonal entries and compresses to A/2 rather than tilde A/2. The exact-block assertion and the same assertion in lem-qa-27-cks-stopping-time-instantiation Proof 1.1 therefore need an explicit support-preservation/list-coverage hypothesis or a separately justified decoded-matrix construction.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:12:03.352607+00:00",
+      "reason": "Root read the actual CKS finite-matrix paragraph and efficient-mode budgets, plus the actual guarantee proof1.2 and advisor derivation. Existing location maps enumerate supportA while decoded tildeA is unrestricted. For A=.5I2 and tildeA=.5I2+tauX, the listed diagonal construction compresses A/2, not tildeA/2. Define tildeA by zero extension of valid listed entries and require Hermiticity/entry/error certificates for that same matrix. An old unrestricted norm certificate cannot simply be reused after masking, and no extra support or precision-refinement access may be presumed. Native same owner must verify the proposed construction and complete alg-to-stopping-lemma-to-theorem/page/OP6 closure.",
+      "candidate_patch_file": "research/quantum-computing-algorithms-60-2026-10-15-owner-step4-concern-review/cks-precision-gaps/candidate-source.patch"
+    },
+    {
+      "batch": "51",
+      "concern_index": 1,
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "concern": {
+        "id": "thm-qa-27-cks-linear-condition-guarantee",
+        "concern": "Proof 1.2 concludes H=O(d polylog(d\u03ba/\u03b5,1/\u03c1)) from stage errors e_j\u2264min(\u03b4_j/2,\u03b7_I/8), \u03b7_I\u2264e_*/(4096m\u03b1), and \u03b6,\u03b7_S bounded above by the displayed budgets. These are only upper bounds on errors; they provide no upper bound on log(1/e_j), log(1/\u03b6), or simulator precision costs. The algorithm specifies least QPE scales and repetition counts only after \u03b6 is selected. Holding d,\u03ba,\u03b5,\u03c1 fixed, choosing the permitted \u03b6=2^(\u2212L) makes even that least coherent repetition count \u0398(L), with correspondingly unbounded sparse-access calls, whereas the stated query bound is independent of L. The efficient constructor needs specified precision choices of controlled size, or the resource theorem needs to retain their actual dependence. This also affects the source-scale cost specialization in lem-qa-27-cks-stopping-time-instantiation.",
+        "severity": "would-be-fatal"
+      },
+      "confirmed_defect": true,
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-16T05:12:03.352646+00:00",
+      "reason": "Root read actual efficient-mode inequalities and guarantee proof1.2. Merely choosing zeta below a correctness budget allows2^-L for fixed task parameters, making least coherent repetitions arbitrarily large and invalidating the stated input-only resource bound. The proposed prescribed dyadic schedule fixes all requested tolerances within a constant factor of explicit inverse-polynomial budgets, then actual degrees, QPE call count/time sum, and simulator/block/value tolerances sequentially. Their inverse logarithms are controlled and give the intended d*kappa polylog bound; arbitrary overprecision retains actual H dependence. Fixed access must meet the requests or return INVALID_ACCESS. Native owner must prove all costs and actual supplier/consumer uses, not silently assume free precision refinement.",
+      "candidate_patch_file": "research/quantum-computing-algorithms-60-2026-10-15-owner-step4-concern-review/cks-precision-gaps/candidate-source.patch"
+    }
+  ]
+}

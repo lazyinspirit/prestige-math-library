@@ -1,0 +1,2634 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-qa-36-finite-cheeger-bound",
+    "lem-qa-36-clock-penalty-gap-perturbation",
+    "lem-qa-36-partial-trace-contracts-trace-distance",
+    "def-qa-36-finite-adiabatic-path-model",
+    "lem-qa-36-gapped-projection-regularity",
+    "def-qa-36-adiabatic-resource-model",
+    "lem-qa-36-jrs-finite-band-estimates",
+    "thm-qa-36-jrs-finite-adiabatic-bound",
+    "alg-qa-36-five-local-history-path",
+    "lem-qa-36-history-state-ground-and-output",
+    "lem-qa-36-history-path-ground-vector-monotonicity",
+    "alg-qa-36-discretized-path-simulation",
+    "lem-qa-36-history-path-restricted-gap",
+    "thm-qa-36-adiabatic-path-to-circuit-simulation",
+    "lem-qa-36-history-path-full-gap",
+    "thm-qa-36-circuit-to-adiabatic-simulation",
+    "ex-qa-36-two-level-avoided-crossing",
+    "cex-qa-36-gap-closing-failure",
+    "ex-qa-36-two-gate-history-state"
+  ],
+  "contracts": {
+    "thm-qa-36-finite-cheeger-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-transition-matrix-and-n-step-transition-probabilities",
+          "source_section": "Definition",
+          "quote": "Let $E$ be countable with sigma-algebra $2^E$, and let $K$ be a probability kernel on it. For $x,y\\in E$, set",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-reversible-measure-and-detailed-balance",
+          "source_section": "Definition",
+          "quote": "Let $p$ be the transition matrix of a countable state space $E$\n([[def-transition-matrix-and-n-step-transition-probabilities]]), so that\n$p(x,y)\\ge0$ and $\\sum_{y\\in E}p(x,y)=1$ for every $x\\in E$. A **state measure**\nis a function $\\mu:E\\to[0,+\\infty)$ with $\\mu(x)<+\\infty$ for every $x$; it is\n**nonzero** when $\\mu(x)>0$ for at least one $x$. Such a measure $\\mu$ is\n**reversible** for $p$, and $\\mu$ satisfies **detailed balance** for $p$, when",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Set $q_{xy}=\\pi(x)P(x,y)$. By [F3], $q_{xy}=q_{yx}$; by [F1] its row sums are $\\pi(x)$, and by [F2] its column sums are also $\\pi(y)$. For a real-valued function $f$ define $\\displaystyle \\mathcal E(f)=\\frac12\\sum_{x,y}q_{xy}(f(x)-f(y))^2.$ Expanding the square and using these row and column sums gives $\\mathcal E(f)=\\langle f,(I-P)f\\rangle_\\pi$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Suppose $f\\ge0$ and its support has $\\pi$-mass at most $1/2$. For $t\\ge0$, let $S_t=\\{x:f(x)^2>t\\}$. The finite layer-cake identities give $\\int_0^\\infty\\pi(S_t)\\,dt=\\sum_x\\pi(x)f(x)^2$ and $\\int_0^\\infty Q(S_t,S_t^c)\\,dt=\\frac12\\sum_{x,y}q_{xy}|f(x)^2-f(y)^2|$. Every nonempty $S_t$ is admissible in the definition of $\\phi$, so the latter integral is at least $\\phi\\|f\\|_{2,\\pi}^2$. Cauchy–Schwarz bounds it above by $\\sqrt{\\mathcal E(f)\\cdot\\frac12\\sum_{x,y}q_{xy}(f(x)+f(y))^2}$; using $(a+b)^2\\le2a^2+2b^2$ and the row and column sums makes the second factor at most $2\\|f\\|_{2,\\pi}^2$. If $f\\ne0$, division yields $\\mathcal E(f)\\ge(\\phi^2/2)\\|f\\|_{2,\\pi}^2$; for $f=0$ it is immediate.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Let $g$ be a real function with $\\sum_x\\pi(x)g(x)=0$. A weighted median $m$ exists by sorting the finitely many values of $g$ until their cumulative $\\pi$-mass reaches $1/2$; hence each of $g_+=(g-m)_+$ and $g_-=(m-g)_+$ has support mass at most $1/2$. For every pair $x,y$, $((g-m)(x)-(g-m)(y))^2\\ge(g_+(x)-g_+(y))^2+(g_-(x)-g_-(y))^2$. Therefore step 1.1 gives $\\mathcal E(g)=\\mathcal E(g-m)\\ge\\mathcal E(g_+)+\\mathcal E(g_-)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Apply steps 2.1 and 2.2 to $g_+$ and $g_-$. Their squared norms sum to $\\|g-m\\|_{2,\\pi}^2=\\|g\\|_{2,\\pi}^2+m^2\\ge\\|g\\|_{2,\\pi}^2$ because $g$ has mean zero. Thus $\\mathcal E(g)\\ge(\\phi^2/2)\\|g\\|_{2,\\pi}^2$.",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Detailed balance makes $P$ self-adjoint for $\\langle\\cdot,\\cdot\\rangle_\\pi$, since exchanging $x,y$ in the finite sum proves $\\langle f,Pg\\rangle_\\pi=\\langle Pf,g\\rangle_\\pi$. Constants are $1$-eigenvectors. If a real function satisfies $Pf=f$, choose a state where it attains its maximum. Its value is a convex average of neighboring values, so every state reached with positive transition probability has the same maximum; irreducibility propagates this to every state. Thus the $1$-eigenspace consists only of constants. For a complex eigenvector, its real and imaginary parts are real $1$-eigenvectors, so the same conclusion holds. By [F4], the minimum Rayleigh quotient of $I-P$ on the orthogonal complement of constants equals $1-\\lambda_2$. Step 3.1 bounds every real mean-zero quotient below by $\\phi^2/2$; applying that inequality to the real and imaginary parts gives the same bound for complex vectors. This proves the claim. The eigenvalue is the second largest algebraic eigenvalue, so a possible negative eigenvalue near $-1$ does not affect the statement.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 2.1, 3.1, 4.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 4.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 2.1, 2.2, 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-state reversible chain",
+          "input": "P=[[1/2,1/2],[1/2,1/2]], pi=(1/2,1/2)",
+          "calculation": "phi=1/2 and the algebraic gap is 1",
+          "result": "1 >= phi^2/2 = 1/8"
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-clock-penalty-gap-perturbation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Write $H_J$ in blocks as $\\begin{pmatrix}A&B\\\\B^*&D\\end{pmatrix}$ for $S\\oplus S^\\perp$. Then $\\|B\\|\\le K$ and $D=Q_SH_1Q_S+JQ_SH_2Q_S\\ge(J-K)I$ by [F1]–[F2]. For real $\\lambda\\le K$, $D-\\lambda I\\ge(J-2K)I>0$, so the Schur complement $\\displaystyle S_\\lambda=A-\\lambda I-B(D-\\lambda I)^{-1}B^*$ is defined and $0\\le B(D-\\lambda I)^{-1}B^*\\le\\epsilon_J I$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The invertible block triangular change of variables completing the square in $\\langle(H_J-\\lambda)x,x\\rangle$ gives the direct sum quadratic form of $S_\\lambda$ and $D-\\lambda I$. Since the latter is positive definite, the largest dimension of a subspace on which $H_J-\\lambda I$ is negative definite equals the corresponding dimension for $S_\\lambda$. This follows directly because the triangular change is an invertible linear map and hence preserves subspace dimension and signs of the quadratic form.",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "For $k=1,2$, the span of the first $k$ eigenvectors of $A$ is a $k$-dimensional subspace of $S$ on which the Rayleigh quotient of $H_J$ is at most $\\mu_k$. If $H_J$ had fewer than $k$ eigenvalues at most $\\mu_k$, that subspace would contain a nonzero vector orthogonal to its first $k-1$ eigenvectors, whose Rayleigh quotient would be strictly larger than $\\mu_k$, a contradiction. Thus $\\lambda_k(H_J)\\le\\mu_k\\le K$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Fix $k=1$ or $2$ and suppose $\\lambda<\\mu_k-\\epsilon_J$. Then $\\lambda<K$, and step 1.1 gives $S_\\lambda\\ge A-(\\lambda+\\epsilon_J)I$. Since $\\lambda+\\epsilon_J<\\mu_k$, at most $k-1$ eigenvalues of $S_\\lambda$ are negative. By step 2.1, at most $k-1$ eigenvalues of $H_J-\\lambda I$ are negative. Letting $\\lambda$ increase to $\\mu_k-\\epsilon_J$ proves $\\lambda_k(H_J)\\ge\\mu_k-\\epsilon_J$. The gap estimate follows by subtracting the bounds for $k=1,2$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "If $x=s+t$ is a unit eigenvector of eigenvalue $\\lambda\\le K$, its $S^\\perp$ block equation is $B^*s+(D-\\lambda I)t=0$. By step 1.1, $\\|(D-\\lambda I)^{-1}\\|\\le1/(J-2K)$; then [F2] yields $\\|t\\|\\le K\\|s\\|/(J-2K)$. No lower bound on the compressed gap was used in this leakage estimate. For a counterexample to any gap conclusion from $J>2K$ alone, take $\\dim S=2$, $H_1=0$, and $H_2=0$ on $S$ and $I$ on $S^\\perp$; then $K=0$, every $J>0$ satisfies $J>2K$, and the lowest eigenvalue of $H_J$ has multiplicity two. Hence the separate compressed-gap condition is necessary.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 2.2, 4.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 2.2, 3.1, 4.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "diagonal penalty instance",
+          "input": "S=span(e1,e2), H1=diag(0,1,0), H2=diag(0,0,1), K=1, J=4",
+          "calculation": "compressed eigenvalues are 0,1; full eigenvalues are 0,1,4; epsilon=1/(4-2)=1/2",
+          "result": "the two eigenvalue enclosures hold and the compressed gap 1 exceeds epsilon"
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-partial-trace-contracts-trace-distance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qc-partial-trace-characterization-and-basis-independence",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional complex inner-product spaces $H_A,H_B$, the partial\ntrace $\\operatorname{Tr}_B:\\operatorname{End}(H_A\\otimes H_B)\\to\n\\operatorname{End}(H_A)$ is the unique linear map satisfying",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-partial-trace-positive-and-trace-preserving",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional complex inner-product spaces $H_A,H_B$ and a\nnon-negative operator $R\\in\\operatorname{End}(H_A\\otimes H_B)$,\n$\\operatorname{Tr}_B(R)$ is non-negative and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-trace-distance",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **trace distance** is\n$$D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1,$$\nwhere $\\|\\cdot\\|_1$ is the trace norm ([[def-qc-trace-norm]]). The factor $1/2$ is part of this state-distance convention. The diamond norm below is an unhalved norm on maps.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-trace-norm",
+          "source_section": "Definition",
+          "quote": "Let $A:H\\to K$ be a linear map ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces. Its singular values are the eigenvalues of\n$|A|:=\\sqrt{A^*A}:H\\to H$, counted with multiplicity, as defined in\n[[def-singular-values-of-an-endomorphism]]. Define the **trace norm**, or\nSchatten-$1$ norm, by",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-trace-norm-spectral-formula",
+          "source_section": "Statement",
+          "quote": "For every linear map $A:H\\to K$ ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces,",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Put $X=\\rho-\\sigma$ and $Y=\\operatorname{Tr}_{H_B}X$. Both are Hermitian. For $Y$, this follows directly from [F1]: conjugating its $(i,i')$ entry and using $X_{(i,j),(i',j)}=\\overline{X_{(i',j),(i,j)}}$ gives $\\overline{Y_{ii'}}=Y_{i'i}$. By [F2], the two partial traces of $\\rho,\\sigma$ are density operators, so their trace distance is defined.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "For any finite-dimensional Hermitian $Z$, diagonalize it in an orthonormal basis with eigenvalues $\\lambda_i\\in\\mathbb R$. If $A=A^*$ and $\\|A\\|\\le1$, then each diagonal entry $\\langle Ae_i,e_i\\rangle$ is real and lies in $[-1,1]$. Hence $|\\operatorname{tr}(ZA)|=|\\sum_i\\lambda_i\\langle Ae_i,e_i\\rangle|\\le\\sum_i|\\lambda_i|=\\|Z\\|_1$ by [F3]–[F4]. Equality is attained by the self-adjoint contraction $A=\\sum_{\\lambda_i>0}P_i-\\sum_{\\lambda_i<0}P_i$, so $\\|Z\\|_1=\\max_{A=A^*,\\,\\|A\\|\\le1}\\operatorname{tr}(ZA)$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For every self-adjoint contraction $A$ on $H_A$, [F5] shows $A\\otimes I_{H_B}$ is self-adjoint with norm at most one: its eigenvalues in the product basis are the eigenvalues of $A$, repeated, and each has modulus at most $1$. The pairing identity [F1] gives $\\operatorname{tr}(YA)=\\operatorname{tr}(X(A\\otimes I_{H_B}))$, whose absolute value is at most $\\|X\\|_1$ by step 1.2 applied on $H_A\\otimes H_B$. Taking the maximum over $A$ in step 1.2 on $H_A$ yields $\\|Y\\|_1\\le\\|X\\|_1$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Apply the trace-distance definition [F3] to $X=\\rho-\\sigma$ and $Y=\\operatorname{Tr}_{H_B}\\rho-\\operatorname{Tr}_{H_B}\\sigma=\\operatorname{Tr}_{H_B}X$. Step 2.1 gives $2D(\\operatorname{Tr}_{H_B}\\rho,\\operatorname{Tr}_{H_B}\\sigma)=\\|Y\\|_1\\le\\|X\\|_1=2D(\\rho,\\sigma)$; division by $2$ proves the assertion.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly specifies the zero-valued branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the degenerate boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 1.2, 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "def-qa-36-finite-adiabatic-path-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly specifies the zero-valued branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the closed interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the nonempty-choice boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-gapped-projection-regularity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-functional-calculus-for-a-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space, let $T:V\\to V$ be\nnormal, and write the spectral resolution from\n[[thm-spectral-resolution-and-polynomial-spectral-projections]] as",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Fix $s_0\\in[0,1]$. By [F1], the selected finite set of eigenvalues at $s_0$ is separated from its complement by the positive gap. Choose finitely many positively oriented closed contours whose interiors contain exactly this cluster and whose boundaries avoid the spectrum; for a sufficiently small neighborhood of $s_0$, the resolvent on these contours remains defined. Indeed, if $R_0(z)=(H(s_0)-zI)^{-1}$ and $\\|H(s)-H(s_0)\\|\\|R_0(z)\\|<1$ uniformly on the compact contour, then submultiplicativity [F3] makes the Neumann series for $I+(H(s)-H(s_0))R_0(z)$ convergent and gives the inverse.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "On this neighborhood, [F2] and the scalar residue formula give the same Riesz projection as the definition: $\\displaystyle P(s)=-\\frac1{2\\pi i}\\oint_\\Gamma(H(s)-zI)^{-1}\\,dz.$ To see this, diagonalize $H(s)$; the integral of $(\\lambda-z)^{-1}$ is $-2\\pi i$ when $\\lambda$ is inside the contour and zero when it is outside, so the sum is exactly the projection onto the selected eigenspaces.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Put $R_z(s)=(H(s)-zI)^{-1}$. Differentiating $(H-zI)R_z=I$ gives $\\dot R_z=-R_zH'R_z$ and differentiating again gives $\\ddot R_z=2R_zH'R_zH'R_z-R_zH''R_z$. The contour is compact and stays uniformly in the resolvent set on this neighborhood, so these integrands and their first two derivatives are continuous uniformly in $z$. Differentiation under the finite contour integral is therefore valid, and step 2.1 makes $P$ twice continuously differentiable near $s_0$.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "On the overlap of two such neighborhoods, each contour formula projects onto the same coherently followed eigenspaces by [F1]–[F2]; hence the local projections agree. Their first two derivatives consequently agree on overlaps, so the local $C^2$ representations patch to a global $C^2$ map on $[0,1]$, with one-sided derivatives at the endpoints.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 1.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the closed interval endpoints and proof steps 4.1 check them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 1.1, 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "def-qa-36-adiabatic-resource-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly specifies the zero-valued branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in the Statement/Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-jrs-finite-band-estimates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-36-gapped-projection-regularity",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ finite-dimensional Hermitian path with a coherently followed spectral cluster separated from the complementary spectrum by a positive gap, the spectral projection $P(s)$ is $C^2$ on $[0,1]$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Fix $s$ and write $P=\\sum_{\\lambda\\in\\Lambda_P}P_\\lambda$. The displayed definition makes $\\widetilde X$ off-diagonal: $P\\widetilde XP=Q\\widetilde XQ=0$. On each band-to-complement block, $[H,\\widetilde X]$ multiplies $-P_\\lambda X\\widehat R_\\lambda$ by $\\lambda-H|_Q$, giving $P_\\lambda XQ$; on the reverse block it gives $-QXP_\\lambda$. Summing yields $[H,\\widetilde X]=PX-XP$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Choose an orthonormal basis of $\\operatorname{ran}P$ adapted to the mutually orthogonal $P_\\lambda$. For each basis vector $e$ in $\\operatorname{ran}P_\\lambda$, $Q\\widetilde Xe=-\\widehat R_\\lambda QXe$, so summing squared column norms gives the block estimate $\\|Q\\widetilde XP\\|\\le\\sqrt m\\|QXP\\|/g$. Applying the same argument to $X^*$ and taking adjoints gives $\\|P\\widetilde XQ\\|\\le\\sqrt m\\|PXQ\\|/g$. Since $\\widetilde X$ is off-diagonal, its full norm is the maximum of these block norms, hence $\\|\\widetilde X\\|\\le\\sqrt m\\|X\\|/g$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "On a local fixed Riesz contour put $R_z=(H-zI)^{-1}$ and $\\widehat R_z=Q(H|_Q-zI)^{-1}Q$. Then $\\widetilde X=(2\\pi i)^{-1}\\oint R_zXR_z\\,dz$. For $G(A,B)=(2\\pi i)^{-1}\\oint R_zAR_zBR_z\\,dz$, using $[H-z,R_z]=0$ gives $\\displaystyle [H,G(A,B)]=\\frac1{2\\pi i}\\oint(AR_zBR_z-R_zAR_zB)\\,dz=A\\widetilde B-\\widetilde A B.$ Indeed, $R_z[H-z,A]R_z=AR_z-R_zA$ and $R_z[H-z,B]R_z=BR_z-R_zB$; adding the two commutator contributions cancels the middle terms. Write $C=A\\widetilde B-\\widetilde A B$. On each band eigenspace $P_\\lambda$, the Sylvester equations from this commutator give $\\displaystyle PGQ=P\\widetilde C Q,\\qquad QGP=-Q\\widetilde C P,$ because $P_\\lambda\\widetilde C Q=-P_\\lambda C\\widehat R_\\lambda$ and $Q\\widetilde C P_\\lambda=-\\widehat R_\\lambda C P_\\lambda$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Differentiate $HP=PH$ and multiply on the left by $Q$ and on the right by each $P_\\lambda$. The resulting Sylvester equation is $(H|_Q-\\lambda I)Q\\dot P P_\\lambda=-Q\\dot H P_\\lambda$, so $Q\\dot P P_\\lambda=-\\widehat R_\\lambda\\dot H P_\\lambda$. Differentiating $P^2=P$ gives $P\\dot P P=Q\\dot P Q=0$; self-adjointness gives the other off-diagonal block by adjoint. These identities equal the reduced-resolvent formula for $\\widetilde{\\dot H}$, proving $\\dot P=\\widetilde{\\dot H}$. Step 2.1 then gives $\\|\\dot P\\|\\le\\sqrt m\\|\\dot H\\|/g$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "The diagonal blocks follow by expanding $R_z=\\sum_{\\lambda\\in\\Lambda_P}P_\\lambda/(\\lambda-z)+\\widehat R_z$. In $QGQ$, the only non-holomorphic terms have the middle resolvent in $P_\\lambda$, and their integrals are $-\\widehat R_\\lambda A P_\\lambda B\\widehat R_\\lambda$; terms with all three resolvents in $Q$ are holomorphic inside the contour. Hence $QGQ=-Q\\widetilde A\\widetilde BQ$. In $PGP$, terms with three band resolvents have zero integral because their rational integrands decay as $z^{-3}$ and all their poles lie inside the contour. The remaining terms have two band poles $\\lambda,\\mu$ and one $Q$ resolvent. Their scalar contour coefficient equals $\\widehat R_\\lambda^2$ if $\\lambda=\\mu$ by Cauchy's derivative formula, and equals $(\\widehat R_\\lambda-\\widehat R_\\mu)/(\\lambda-\\mu)=\\widehat R_\\lambda\\widehat R_\\mu$ if $\\lambda\\ne\\mu$ by the resolvent identity. Thus $PGP=P\\widetilde A\\widetilde BP$. Together with step 2.2, these blocks prove $\\displaystyle G(A,B)=(P-Q)(\\widetilde A\\widetilde B+\\widetilde{A\\widetilde B}-\\widetilde{\\widetilde A B}).$ All contours enclose the whole band; coincident band eigenvalues are grouped into one $P_\\lambda$, and the complementary resolvent is holomorphic throughout the enclosed region.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Differentiating the contour formula and using $\\dot R_z=-R_z\\dot H R_z$ gives $\\displaystyle \\dot{\\widetilde X}=\\widetilde{\\dot X}-G(\\dot H,X)-G(X,\\dot H).$ Apply step 3.2 to both $G$ terms and use $\\dot P=\\widetilde{\\dot H}$ from step 3.1. Their sum is $\\displaystyle (P-Q)\\bigl(\\dot P\\widetilde X+\\widetilde X\\dot P+\\widetilde{[\\dot H,\\widetilde X]}-\\widetilde{[\\dot P,X]}\\bigr),$ because the remaining terms are $\\widetilde{\\dot H\\widetilde X+X\\dot P-\\dot P X-\\widetilde X\\dot H}=\\widetilde{[\\dot H,\\widetilde X]}-\\widetilde{[\\dot P,X]}$. Negating this sum in the derivative formula yields $\\displaystyle \\dot{\\widetilde X}=\\widetilde{\\dot X}+(Q-P)(\\dot P\\widetilde X+\\widetilde X\\dot P+\\widetilde{[\\dot H,\\widetilde X]}-\\widetilde{[\\dot P,X]}).$ The contour formula is local, so it remains valid at internal band eigenvalue coincidences; no selected eigenvalue is crossed by the contour.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Apply step 4.1 to $X=\\dot H$. Since $\\widetilde{\\dot H}=\\dot P$ is off-diagonal, $\\dot P^2$ is block diagonal and has zero $QP$ block. Also $[\\dot P,\\dot H]=-[\\dot H,\\dot P]$. Therefore $\\displaystyle Q\\ddot P P=Q\\widetilde{\\ddot H}P+2Q\\widetilde{[\\dot H,\\dot P]}P.$ The block estimate in step 2.1 bounds the first term by $\\sqrt m\\|\\ddot H\\|/g$ and the second by $2(\\sqrt m/g)\\|[\\dot H,\\dot P]\\|\\le4\\sqrt m\\|\\dot H\\|\\|\\dot P\\|/g\\le4m\\|\\dot H\\|^2/g^2$ by [F2] and step 3.1. This is the claimed bound.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Apply step 4.1 to $X=\\dot P$. The products $\\dot P\\widetilde{\\dot P}$ and $\\widetilde{\\dot P}\\dot P$ are block diagonal, and $[\\dot P,\\dot P]=0$. Hence $\\displaystyle Q\\dot{\\widetilde{\\dot P}}P=Q\\widetilde{\\ddot P}P+Q\\widetilde{[\\dot H,\\widetilde{\\dot P}]}P.$ The block bound from step 2.1 makes the first term at most $\\sqrt m\\|Q\\ddot P P\\|/g$. The second is at most $(\\sqrt m/g)\\|[\\dot H,\\widetilde{\\dot P}]\\|\\le(2\\sqrt m/g)\\|\\dot H\\|\\|\\widetilde{\\dot P}\\|\\le2m\\|\\dot H\\|\\|\\dot P\\|/g^2$, again by steps 2.1 and 3.1.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 3.2, 5.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 3.2, 4.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-36-jrs-finite-adiabatic-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-36-gapped-projection-regularity",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ finite-dimensional Hermitian path with a coherently followed spectral cluster separated from the complementary spectrum by a positive gap, the spectral projection $P(s)$ is $C^2$ on $[0,1]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-36-jrs-finite-band-estimates",
+          "source_section": "Statement",
+          "quote": "Let $H(s)$ be a $C^2$ finite-dimensional Hermitian path and $P(s)$ a $C^2$ spectral projection of fixed rank $m\\ge1$ separated from its complement by gap $g(s)>0$. Put $Q=I-P$. For any operator $X$ define its reduced-resolvent transform at $s$ by\n$$\\widetilde X=-\\sum_{\\lambda\\in\\Lambda_P}\\left(P_\\lambda X\\widehat R_\\lambda+\\widehat R_\\lambda XP_\\lambda\\right),\\qquad \\widehat R_\\lambda=Q(H|_{\\operatorname{ran}Q}-\\lambda I)^{-1}Q,$$\nwhere $\\Lambda_P$ is the set of distinct eigenvalues in $\\operatorname{ran}P$ and $P_\\lambda$ is the corresponding eigenspace projection. Then\n$$\\dot P=\\widetilde{\\dot H},\\quad \\|\\widetilde X\\|\\le\\frac{\\sqrt m\\|X\\|}{g},\\quad \\|Q\\widetilde X P\\|\\le\\frac{\\sqrt m\\|QXP\\|}{g},\\quad \\|P\\widetilde X Q\\|\\le\\frac{\\sqrt m\\|PXQ\\|}{g},$$\n$$\\|\\dot P\\|\\le\\frac{\\sqrt m\\|\\dot H\\|}{g},\\quad \\|Q\\ddot P P\\|\\le\\frac{\\sqrt m\\|\\ddot H\\|}{g}+\\frac{4m\\|\\dot H\\|^2}{g^2},$$\nand\n$$\\|Q\\dot{\\widetilde{\\dot P}}P\\|\\le\\frac{\\sqrt m\\|Q\\ddot P P\\|}{g}+\\frac{2m\\|\\dot H\\|\\|\\dot P\\|}{g^2}.$$\nThe rank $m$ may count multiplicity; the argument only uses that the number of distinct band eigenvalues is at most $m$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]\\subseteq\\mathbb R$ be a compact interval, let\n$C:I\\to M_n(\\mathbb R)$ be continuous, let $t_0\\in I$, and let\n$Y_0\\in M_n(\\mathbb R)$. Then the linear matrix initial value problem",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Put $D(s)=[P'(s),P(s)]$. Since $P,P'$ are self-adjoint, $D^*=-D$, so $K_A(s)=TH(s)+iD(s)$ is self-adjoint. Let $U_A$ solve $iU_A'=K_AU_A$, $U_A(0)=I$; [F4] gives existence and uniqueness, and differentiating $U_A^*U_A$ gives unitarity. Differentiating $P^2=P$ yields $PP'P=0$ and $P'P+PP'=P'$, hence $[D,P]=P'$. Therefore $P$ solves $iP'=[K_A,P]$, and so does $F(s)=U_A(s)P(0)U_A(s)^*$. Both have initial value $P(0)$; uniqueness for this finite linear matrix ODE gives $F(s)=P(s)$, or equivalently $U_A(s)P(0)U_A(s)^*=P(s)$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Define the unitary wave operator $\\Omega(s)=U_A(s)^*U_T(s)$. Differentiating with the two evolution equations gives $\\Omega'(s)=-U_A(s)^*D(s)U_T(s)$ and therefore $\\Omega(s)=I-\\int_0^sU_A(r)^*D(r)U_A(r)\\Omega(r)\\,dr$. The intertwining identity in step 1.1 implies that the conjugated kernel is off-diagonal relative to $P(0),Q(0)$ and that $\\displaystyle Q(0)\\Omega(s)P(0)=-\\int_0^s Q(0)P'(r)[r]P(0)\\Omega(r)P(0)\\,dr,$ where $X[r]=U_A(r)^*X(r)U_A(r)$.",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For any differentiable $X$, the commutator identity from [[lem-qa-36-jrs-finite-band-estimates]] and step 1.1 gives $\\displaystyle \\frac{d}{dr}\\bigl(Q(0)\\widetilde X[r]P(0)\\bigr)=-iTQ(0)X[r]P(0)+Q(0)\\dot{\\widetilde X}[r]P(0).$ Indeed, $Q[H,\\widetilde X]P=-QXP$, and the extra commutator with $iD/T$ has zero $QP$ block because $P[D,\\widetilde X]Q=Q[D,\\widetilde X]P=0$ when $D$ and $\\widetilde X$ are off-diagonal. Integrating this identity by parts in step 2.1 with $X=P'$ and $Y(r)=P(0)\\Omega(r)P(0)$ yields $\\displaystyle Q(0)\\Omega(s)P(0)=-\\frac{i}{T}\\left[Q(0)\\widetilde{P'}[r]P(0)Y(r)\\Big|_0^s-\\int_0^sQ(0)\\dot{\\widetilde{P'}}[r]P(0)Y(r)\\,dr-\\int_0^sQ(0)\\widetilde{P'}[r]P(0)P(0)\\Omega'(r)P(0)\\,dr\\right].$ Here $\\|Y(r)\\|\\le1$ and $P(0)\\Omega'(r)P(0)=P(0)P'[r]Q(0)\\Omega(r)P(0)$, because the $PQ$ block of $[P',P]$ is $-PP'Q$. The last integrand is therefore bounded by $\\|Q\\widetilde{P'}P\\|\\|P'\\|\\|Q(0)\\Omega P(0)\\|$. Repeating the same calculation with $P(0)$ and $Q(0)$ interchanged bounds $\\|P(0)\\Omega Q(0)\\|$ by the same expression.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Use [F2] on the endpoint and derivative terms of step 3.1, and $\\|Q\\widetilde{P'}P\\|\\le\\sqrt m\\|P'\\|/g$ on its product term. Since $\\|Q(0)\\Omega P(0)\\|\\le1$, this gives $\\displaystyle \\|Q(0)\\Omega P(0)\\|\\le\\frac1T\\left[\\frac{\\sqrt m\\|P'(0)\\|}{g(0)}+\\frac{\\sqrt m\\|P'(s)\\|}{g(s)}+\\int_0^s\\left(\\frac{\\sqrt m\\|QP''P\\|}{g}+\\frac{\\sqrt m\\|P'\\|^2}{g}+\\frac{2m\\|H'\\|\\|P'\\|}{g^2}\\right)dr\\right].$ Now $\\|P'\\|\\le\\sqrt m\\|H'\\|/g$. The first two integral terms are respectively at most $m\\|H''\\|/g^2+4m\\sqrt m\\|H'\\|^2/g^3$ and $m\\sqrt m\\|H'\\|^2/g^3$; the last is at most $2m\\sqrt m\\|H'\\|^2/g^3$. Their sum gives exactly the integrand in $A_m(s)$, and the endpoint terms give its two endpoint summands. The same bound holds for $\\|P(0)\\Omega Q(0)\\|$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Unitary conjugation by $U_A$ and step 1.1 give $\\displaystyle \\|U_TP(0)U_T^*-P(s)\\|=\\|\\Omega P(0)\\Omega^*-P(0)\\|=\\|Q(0)\\Omega P(0)-P(0)\\Omega Q(0)\\|.$ The last operator is off-diagonal with the two blocks bounded in step 4.1; its norm is the maximum of their norms, so it is at most $A_m(s)$. For a unit $\\psi\\in\\operatorname{ran}P(0)$, $Q(s)U_T(s)\\psi=U_A(s)Q(0)\\Omega(s)P(0)\\psi$ by step 1.1. Its squared norm is the transition probability and is at most $\\|Q(0)\\Omega(s)P(0)\\|^2\\le A_m(s)^2$.",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the closed interval endpoints and proof steps 1.1, 4.1 check them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 1.1, 3.1, 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "alg-qa-36-five-local-history-path": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly specifies the zero-valued branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in the Statement/Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-history-state-ground-and-output": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.",
+          "uses": [
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by",
+          "uses": [
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-trace-distance-range-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional density operators $\\rho,\\sigma$,\n$$0\\le D(\\rho,\\sigma)\\le1.$$\nMoreover, $D(\\rho,\\sigma)=0$ iff $\\rho=\\sigma$, and $D(\\rho,\\sigma)=1$ iff their supports are orthogonal.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Each local term $h_\\ell$ is zero outside the two legal clock patterns $a_\\ell,b_\\ell$. On their span, in the order $(a_\\ell,b_\\ell)$, it is $\\displaystyle \\frac12\\begin{pmatrix}I&-U_\\ell^*\\\\-U_\\ell&I\\end{pmatrix}.$ For any data vectors $x,y$, its quadratic form is $\\frac12\\|y-U_\\ell x\\|^2\\ge0$. Its kernel consists exactly of paired amplitudes $(x,U_\\ell x)$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "On legal unary clocks, $a_\\ell$ occurs only at $c_{\\ell-1}$ and $b_\\ell$ only at $c_\\ell$. Define the unitary $W=\\sum_{j=0}^NV_j\\otimes|c_j\\rangle\\langle c_j|$ on that space. Since $V_\\ell=U_\\ell V_{\\ell-1}$, conjugating the block from step 1.1 by $W$ makes every adjacent block $\\frac12\\begin{pmatrix}I&-I\\\\-I&I\\end{pmatrix}$. Summing over edges gives $W^*H_{\\rm prop}W=I_{\\rm data}\\otimes L_N/2$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The quadratic form of $L_N$ is $\\langle z,L_Nz\\rangle=\\sum_{j=0}^{N-1}|z_j-z_{j+1}|^2$, so its kernel is the constant clock vectors. Step 2.1 therefore gives exactly the displayed propagation kernel, with arbitrary data vector $\\xi$.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "On a legal clock, $H_{\\rm input}$ vanishes except at $c_0$, where it is the data Hamming-weight operator $N_1=\\sum_i|1\\rangle\\langle1|_i$. Since $V_0=I$, conjugation by $W$ leaves this block unchanged. For a kernel vector with data vector $\\xi$, its input energy is $\\langle\\xi,N_1\\xi\\rangle/(N+1)$, which is zero exactly when $\\xi$ lies in the one-dimensional span of $|0^n\\rangle$. Thus $H_{\\rm prop}+H_{\\rm input}$ has the unique normalized kernel vector $|\\eta\\rangle$.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The clock penalty $H_{\\rm clock}$ is positive semidefinite and has kernel exactly the legal unary strings: a binary string has no adjacent pattern $01$ exactly when all its $1$ bits precede all its $0$ bits. Each term of $H_{\\rm final}$ is positive semidefinite by step 1.1 and the definitions of $H_{\\rm input},H_{\\rm clock}$. A zero-energy vector must therefore lie in the clock-penalty kernel and in the kernel identified in step 4.1. This proves uniqueness for the full final Hamiltonian.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.2",
+          "step": "5.2",
+          "claim": "Tracing the clock out of $|\\eta\\rangle\\langle\\eta|$ and using [F1] removes all cross terms between distinct $c_\\ell$, giving $\\displaystyle \\rho_{\\rm data}=\\frac1{N+1}\\sum_{\\ell=0}^{N}|V_\\ell0^n\\rangle\\langle V_\\ell0^n|.$ For each $\\ell\\ge L$, the appended gates are identities, so $V_\\ell|0^n\\rangle=|\\psi_{\\rm out}\\rangle:=U_L\\cdots U_1|0^n\\rangle$. There are $K+1$ such indices, and the other $L$ terms form a density operator $\\sigma$ after normalization. Hence $\\rho_{\\rm data}=\\frac{L}{N+1}\\sigma+\\frac{K+1}{N+1}|\\psi_{\\rm out}\\rangle\\langle\\psi_{\\rm out}|$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "By homogeneity of the trace norm in the definition of trace distance, the distance from $|\\psi_{\\rm out}\\rangle\\langle\\psi_{\\rm out}|$ is $\\frac{L}{N+1}D(\\sigma,|\\psi_{\\rm out}\\rangle\\langle\\psi_{\\rm out}|)\\le L/(N+1)$ by [F3]. Since $K=\\lceil2L/\\varepsilon\\rceil$ and $N=L+K$, we have $L/(N+1)\\le L/K\\le\\varepsilon/2$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 5.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 1.1, 4.1, 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case; see 1.1, 2.1, 3.1, 4.1, 5.1, 5.2, 6.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 5.2 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 3.1, 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-history-path-ground-vector-monotonicity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "On a legal clock $|c_i\\rangle$, the sum $H_{\\rm clock0}$ has eigenvalue $i$, while $H_{\\rm prop}$ has diagonal degree $1$ at the endpoints and $2$ internally, with neighboring matrix entries $-1/2$. Thus $H_0(s)=a\\operatorname{diag}(i)+tL_N$. Both summands are positive semidefinite.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "If $s=0$, then $H_0(0)=\\operatorname{diag}(0,1,\\ldots,N)$ and its unique normalized ground vector is $e_0$. If $s=1$, then $H_0(1)=L_N/2$; its quadratic form is one half the sum of squared adjacent differences, so its kernel consists exactly of constant vectors, giving the stated uniform ground vector.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Suppose $0<s<1$, so $a,t>0$. The matrix is real symmetric with neighboring off-diagonal entries $-t$. A real unit minimizer exists by [F1]. Replacing its coordinates by their absolute values does not increase the Rayleigh quotient, since each edge contribution is $t(x_i-x_{i+1})^2$ and $(|x_i|-|x_{i+1}|)^2\\le (x_i-x_{i+1})^2$; therefore a nonnegative ground vector $v$ exists. Its eigenvalue equation at any zero coordinate forces every adjacent coordinate to be zero, and connectedness of the path would then force $v=0$. Hence $v_i>0$ for every $i$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The endpoint equation at vertex $0$ determines $v_1$ uniquely from $v_0$, and each interior equation determines $v_{i+1}$ from $v_i,v_{i-1}$. If $v_0=0$, the endpoint equation gives $v_1=0$ and recurrence gives $v=0$, impossible. Thus every eigenvector at a fixed eigenvalue is determined by its first coordinate, so the ground eigenspace is one-dimensional.",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Write $E$ for the ground eigenvalue and $d_i=v_i-v_{i+1}$ for $0\\le i<N$. The endpoint and interior eigenvalue equations give $\\displaystyle d_0=\\frac{E}{t}v_0,\\qquad d_i-d_{i-1}=\\frac{E-ai}{t}v_i\\quad(1\\le i<N),\\qquad d_{N-1}=\\frac{aN-E}{t}v_N.$ The ground energy satisfies $E\\ge0$ because both terms in $H_0(s)$ are positive semidefinite. Testing the normalized constant vector gives $E\\le aN/2$, because its Laplacian energy is zero and the average of $0,1,\\ldots,N$ is $N/2$. Therefore $d_0\\ge0$ and $d_{N-1}\\ge0$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Since $a>0$ and each $v_i>0$, the increments $d_i-d_{i-1}$ in step 3.2 are nonnegative while $ai\\le E$ and nonpositive after $ai\\ge E$. Thus the sequence $(d_i)$ first does not decrease and then does not increase; every one of its entries is at least the smaller of its two endpoint entries. Step 3.2 makes both endpoints nonnegative, so every $d_i\\ge0$. This proves $v_i\\ge v_{i+1}$ and completes the remaining case.",
+          "inputs": [
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 2.1, 2.2, 3.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case; see 1.1, 2.1, 2.2, 3.1, 3.2, 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 1.1, 2.1, 2.2, 3.1, 3.2 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the closed interval endpoints and proof steps 1.1, 2.1, 3.1, 3.2, 4.1 check them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 1.1, 3.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "alg-qa-36-discretized-path-simulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-36-finite-adiabatic-path-model",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a nonzero finite-dimensional complex inner-product space with inner product linear in its first argument. A **finite adiabatic path** is a family of linear endomorphisms $H(s):V\\to V$ ([[def-linear-map]]) whose matrix entries are twice continuously differentiable and such that $H(s)=H(s)^*$ at every $s$. A **coherently followed spectral band** is a norm-continuous family $P(s)$ of orthogonal projections of one fixed rank $m\\ge1$, commuting with $H(s)$, whose range is a sum of full eigenspaces and which locally continues the same isolated cluster. For a finite union of positively oriented circles $\\Gamma$, define $\\oint_\\Gamma F(z)\\,dz$ as the sum of the parameterized integrals $\\int_0^{2\\pi}F(c+re^{it})ire^{it}\\,dt$ over its circle components. Local continuation means that on each neighborhood there is such a contour enclosing exactly the selected cluster and\n$$P(s)=-\\frac1{2\\pi i}\\oint_\\Gamma(H(s)-zI)^{-1}\\,dz.$$\nWith $Q(s)=I-P(s)$, define the **full gap**\n$$g(s)=\\min\\{|\\lambda-\\mu|:\\lambda\\in\\sigma(H(s)|_{\\operatorname{ran}P(s)}),\\ \\mu\\in\\sigma(H(s)|_{\\operatorname{ran}Q(s)})\\}.$$\nIf $Q(s)=0$, the full gap is $+\\infty$. Admissible gapped paths have a uniform full gap $\\inf_{s\\in[0,1]}g(s)>0$. Distinct eigenvalues inside the band may cross; its total rank remains $m$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qa-19-finite-matrix-dynamics",
+          "source_section": "Definition",
+          "quote": "In this page a **Hamiltonian** is a self-adjoint endomorphism $H$ of a\nfinite-dimensional complex inner-product space $V$; no physical postulate is\npart of the term. Let $\\sigma(H)$ be the set of its distinct eigenvalues and\nlet $P_\\lambda$ be the orthogonal projection onto the $\\lambda$-eigenspace.\nFor real time $t$, define the finite matrix evolution",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-20-term-list-access-model",
+          "source_section": "Definition",
+          "quote": "A **term-list access input** consists of an integer $m\\ge1$, finite-dimensional self-adjoint endomorphisms $H_1,\\ldots,H_m$ on one stated register, and the exact target $H=\\sum_{j=1}^m H_j$. A supported time code is a finite expression whose leaves are rational numbers or symbols $\\rho_q$ denoting the unique positive real root of $x^q=4$ for an odd integer $q\\ge1$; [[thm-nth-roots-exist]] gives a unique nonnegative root; it is positive because $0^q=0\\ne4$. Internal operations are addition, subtraction, multiplication, or division by a nonzero expression. Its exact real value and bit length are recorded. These codes include rational times and every coefficient-scaled rational time in the finite Suzuki recursion.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-36-adiabatic-resource-model",
+          "source_section": "Definition",
+          "quote": "An **adiabatic path access instance** consists of a finite path model ([[def-qa-36-finite-adiabatic-path-model]]), its exact initial preparation circuit $A_0$ and cost $C_{\\rm init}$, a finite term count $r$, and a uniform description\n$$H(s)=\\sum_{j=1}^r c_j(s)H_j,$$\nwhere the $H_j$ are stated finite-dimensional self-adjoint operators and the real coefficient functions $c_j$ have explicit rational binary inputs, uniform evaluation procedures, certified value errors and certified first-derivative bound $M_1\\ge\\sup_s\\|H'(s)\\|$. The access declaration provides, for every allowed time code $u$, either the exact term operation $e^{-iuH_j}$ as a named oracle with its query charge, or a full-list uniform circuit family $V_j(u)$ with a certified bound $\\|V_j(u)-e^{-iuH_j}\\|\\le\\eta_j(u)$. Each inverse or controlled call is available only when separately declared. This is the finite term-list access interface of [[def-qa-20-simulation-error-and-cost-model]] and [[def-qa-20-term-list-access-model]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-20-first-order-commutator-error",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space, let $H_1,\\ldots,H_m$ be self-adjoint endomorphisms of $V$ with $m\\ge1$, and set $H=\\sum_{j=1}^mH_j$. For every real $t$ and integer $r\\ge1$,\n$$\\left\\|S_1(t/r)^r-U_H(t)\\right\\|\\le\\frac{t^2}{2r}\\sum_{1\\le j<k\\le m}\\|[H_j,H_k]\\|,$$\nwhere $S_1$ has the fixed order of [[def-qa-20-first-order-product-formula]] and $U_H(t)=e^{-itH}$ is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "In physical time $u\\in[0,T]$, the exact generator is $H(u/T)$. On interval $[j\\tau,(j+1)\\tau]$, freeze it at $H(s_j)$. Duhamel's identity, obtained by differentiating the product of one exact and one frozen propagator, bounds the operator difference by the integral of the generator difference. Since $\\|H(s)-H(s_j)\\|\\le M_1|s-s_j|$, summing the interval bounds gives $\\displaystyle \\int_0^T M_1\\left|\\frac{u}{T}-\\frac{\\lfloor u/\\tau\\rfloor}{q}\\right|du=\\frac{TM_1}{2q}\\le\\frac{\\varepsilon}{6}.$ The last inequality follows from the definition of $q$; if $M_1=0$, the left side is zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Replacing each frozen $H(s_j)$ by $\\widetilde H_j$ changes that segment's propagator by at most $\\tau\\varepsilon/(3T)$, again by Duhamel and unitarity. Telescoping the $q$ products gives total coefficient error at most $q\\tau\\varepsilon/(3T)=\\varepsilon/3$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "By [F3] and the choice of $r_{\\rm PF}$, the ideal product formula for any one frozen segment has error at most $\\tau^2B/(2r_{\\rm PF})\\le\\varepsilon/(6q)$. Telescoping over $q$ unitary segments gives total product-formula error at most $\\varepsilon/6$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "There are exactly $qMr_{\\rm PF}$ term-exponential calls. Replacing each by its declared provider changes the composed unitary by at most the sum of the call errors, since all surrounding factors are unitary; the total is at most $qMr_{\\rm PF}\\cdot\\varepsilon/(6qMr_{\\rm PF})=\\varepsilon/6$. The total operator error is therefore at most $\\varepsilon/6+\\varepsilon/3+\\varepsilon/6+\\varepsilon/6=5\\varepsilon/6\\le\\varepsilon$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "For $T>0$, all loop counts $q,r_{\\rm PF},M$ are finite integers fixed from the input certificates; every coefficient evaluation and term call has a finite supported description and its costs are charged by [F2]. The algorithm therefore returns a uniform circuit whenever those declared providers are available. For $T=0$, the exact propagator is the identity by [F1], so step 1 is correct.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 1.1, 5.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the closed interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the nonempty-choice boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-history-path-restricted-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-36-history-path-ground-vector-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$, $a=1-s$, $t=s/2$, and let $L_N$ be the graph Laplacian of the path with vertices $0,1,\\ldots,N$. The restriction of the interpolated clock Hamiltonian to legal unary clocks, after removing the data register and propagation unitaries, is\n$$H_0(s)=a\\,\\operatorname{diag}(0,1,\\ldots,N)+tL_N.$$\nFor each $s\\in[0,1]$, its smallest eigenvalue is simple and has a normalized nonnegative eigenvector $v(s)=(v_0,\\ldots,v_N)$ satisfying\n$$v_0\\ge v_1\\ge\\cdots\\ge v_N>0.$$\nAt $s=0$ this vector is $e_0$; at $s=1$ it is the uniform vector.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-36-finite-cheeger-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a finite set with $|\\Omega|\\ge2$. Let $P=(P(x,y))_{x,y\\in\\Omega}$ be an irreducible row-stochastic matrix and let $\\pi$ be a strictly positive stationary probability satisfying detailed balance\n$$\\pi(x)P(x,y)=\\pi(y)P(y,x).$$\nFor $S\\subseteq\\Omega$, put $Q(S,S^c)=\\sum_{x\\in S,\\,y\\notin S}\\pi(x)P(x,y)$, and define the conductance\n$$\\phi=\\min_{0<\\pi(S)\\le1/2}\\frac{Q(S,S^c)}{\\pi(S)}.$$\nIf $1=\\lambda_1>\\lambda_2\\ge\\cdots$ are the eigenvalues of $P$ in the weighted inner product $\\langle f,g\\rangle_\\pi=\\sum_x\\pi(x)f(x)g(x)$, then the algebraic gap satisfies\n$$1-\\lambda_2\\ge\\frac{\\phi^2}{2}.$$\nNo absolute-gap or aperiodicity assertion is made.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "On legal clock $c_i$, $H_{\\rm clock0}$ has eigenvalue $i$; the propagation terms have diagonal degree one at the endpoints, degree two internally, and adjacent entries $-1/2$. Therefore the clock matrix is the displayed $H_0(s)=aD+tL_N$, where $a=1-s$, $t=s/2$, and $D=\\operatorname{diag}(0,1,\\ldots,N)$.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "If $0\\le s\\le1/6$, the Rayleigh quotient at $e_0$ gives the ground eigenvalue $E_0\\le t$. On the codimension-one subspace $e_0^\\perp$, $D\\ge I$ and $L_N\\ge0$, so min-max gives the second eigenvalue $E_1\\ge a$. Thus $E_1-E_0\\ge a-t=1-3s/2\\ge3/4$.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Now suppose $s\\ge1/6$, so $t\\ge1/12$, and let $v$ be the normalized positive ground vector from [F1], with eigenvalue $E_0$. Set $\\pi_i=v_i^2$, so $\\sum_i\\pi_i=1$ and $\\pi_0\\ge\\pi_1\\ge\\cdots\\ge\\pi_N>0$. For a vector $f=(f_i)$ with $\\sum_i\\pi_i f_i=0$, set $x_i=v_if_i$; then $x\\perp v$ and $\\|x\\|^2=\\sum_i\\pi_i|f_i|^2$. The eigenvalue equation $H_0v=E_0v$, expanded edge by edge, gives the ground-state identity $\\displaystyle \\langle x,(H_0-E_0I)x\\rangle=t\\sum_{i=0}^{N-1}v_iv_{i+1}|f_i-f_{i+1}|^2.$ Indeed, the diagonal coefficient at vertex $i$ after subtracting $E_0$ is $t$ times the sum of neighboring ratios $v_j/v_i$; multiplying by $v_i^2|f_i|^2$ assigns $t v_iv_j|f_i|^2$ to each incident edge, and the off-diagonal term supplies $-2t v_iv_j\\operatorname{Re}(\\overline f_i f_j)$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Since $v_i\\ge v_{i+1}$, each edge weight satisfies $v_iv_{i+1}\\ge\\pi_{i+1}$. Define a continuous-time reversible path chain with stationary masses $\\pi_i$ and symmetric edge conductances $c_i=\\pi_{i+1}$: its rate from $i$ to $i+1$ is $c_i/\\pi_i=\\pi_{i+1}/\\pi_i\\le1$, and its reverse rate is $c_i/\\pi_{i+1}=1$. Each total exit rate is at most $2$. Let $Q$ be its generator and $P=I+Q/2$. Then $P$ is row-stochastic, reversible with stationary law $\\pi$, and irreducible, and its Dirichlet form is $\\langle f,(I-P)f\\rangle_\\pi=\\frac12\\sum_i c_i|f_i-f_{i+1}|^2$.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For any set $S$ with $0<\\pi(S)\\le1/2$, if $0\\in S$, choose the largest $k$ for which $\\{0,\\ldots,k\\}\\subseteq S$. Then $k<N$, edge $(k,k+1)$ crosses the cut, and the tail mass is at least $1/2$. Monotonicity gives $\\sum_{j=k+1}^N\\pi_j\\le N\\pi_{k+1}$, so $\\pi_{k+1}\\ge1/(2N)$. The chain flow across the edge is $c_k/2=\\pi_{k+1}/2$, hence $Q_P(S,S^c)/\\pi(S)\\ge1/(2N)$. If $0\\notin S$, put $k=\\min S-1$; then $S\\subseteq\\{k+1,\\ldots,N\\}$ and $\\pi(S)\\le N\\pi_{k+1}$, while the crossing flow is again $\\pi_{k+1}/2$, giving the same ratio bound. Thus $\\phi(P)\\ge1/(2N)$.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "By [F2], $1-\\lambda_2(P)\\ge1/(8N^2)$. The generator gap is twice this number because $P=I+Q/2$, so its Dirichlet-form Poincaré constant is at least $1/(4N^2)$. Step 2.2 and $v_iv_{i+1}\\ge c_i$ therefore give $E_1-E_0\\ge t/(4N^2)\\ge1/(48N^2)$ for $s\\ge1/6$. Together with step 2.1, this proves the uniform bound.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly specifies the zero-valued branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 1.1, 2.1, 2.2, 4.1, 5.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the closed interval endpoints and proof steps 1.1 check them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-edge clock path",
+          "input": "N=1, H0(s)=(1-s)diag(0,1)+(s/2)L1",
+          "calculation": "the exact gap is sqrt(1-2s(1-s)",
+          "result": "its minimum is 1/sqrt(2), above the uniform lower bound 1/48"
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-36-adiabatic-path-to-circuit-simulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-36-finite-adiabatic-path-model",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a nonzero finite-dimensional complex inner-product space with inner product linear in its first argument. A **finite adiabatic path** is a family of linear endomorphisms $H(s):V\\to V$ ([[def-linear-map]]) whose matrix entries are twice continuously differentiable and such that $H(s)=H(s)^*$ at every $s$. A **coherently followed spectral band** is a norm-continuous family $P(s)$ of orthogonal projections of one fixed rank $m\\ge1$, commuting with $H(s)$, whose range is a sum of full eigenspaces and which locally continues the same isolated cluster. For a finite union of positively oriented circles $\\Gamma$, define $\\oint_\\Gamma F(z)\\,dz$ as the sum of the parameterized integrals $\\int_0^{2\\pi}F(c+re^{it})ire^{it}\\,dt$ over its circle components. Local continuation means that on each neighborhood there is such a contour enclosing exactly the selected cluster and\n$$P(s)=-\\frac1{2\\pi i}\\oint_\\Gamma(H(s)-zI)^{-1}\\,dz.$$\nWith $Q(s)=I-P(s)$, define the **full gap**\n$$g(s)=\\min\\{|\\lambda-\\mu|:\\lambda\\in\\sigma(H(s)|_{\\operatorname{ran}P(s)}),\\ \\mu\\in\\sigma(H(s)|_{\\operatorname{ran}Q(s)})\\}.$$\nIf $Q(s)=0$, the full gap is $+\\infty$. Admissible gapped paths have a uniform full gap $\\inf_{s\\in[0,1]}g(s)>0$. Distinct eigenvalues inside the band may cross; its total rank remains $m$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qa-36-adiabatic-resource-model",
+          "source_section": "Definition",
+          "quote": "An **adiabatic path access instance** consists of a finite path model ([[def-qa-36-finite-adiabatic-path-model]]), its exact initial preparation circuit $A_0$ and cost $C_{\\rm init}$, a finite term count $r$, and a uniform description\n$$H(s)=\\sum_{j=1}^r c_j(s)H_j,$$\nwhere the $H_j$ are stated finite-dimensional self-adjoint operators and the real coefficient functions $c_j$ have explicit rational binary inputs, uniform evaluation procedures, certified value errors and certified first-derivative bound $M_1\\ge\\sup_s\\|H'(s)\\|$. The access declaration provides, for every allowed time code $u$, either the exact term operation $e^{-iuH_j}$ as a named oracle with its query charge, or a full-list uniform circuit family $V_j(u)$ with a certified bound $\\|V_j(u)-e^{-iuH_j}\\|\\le\\eta_j(u)$. Each inverse or controlled call is available only when separately declared. This is the finite term-list access interface of [[def-qa-20-simulation-error-and-cost-model]] and [[def-qa-20-term-list-access-model]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-36-discretized-path-simulation",
+          "source_section": "Definition",
+          "quote": "**Input:** An adiabatic path access instance from [[def-qa-36-adiabatic-resource-model]], evolution time $T\\ge0$, and rational tolerance $0<\\varepsilon\\le1$. Write $M$ for the term count, and suppose the instance provides a certified $M_1\\ge\\sup_{s\\in[0,1]}\\|H'(s)\\|$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-19-finite-matrix-dynamics",
+          "source_section": "Definition",
+          "quote": "In this page a **Hamiltonian** is a self-adjoint endomorphism $H$ of a\nfinite-dimensional complex inner-product space $V$; no physical postulate is\npart of the term. Let $\\sigma(H)$ be the set of its distinct eigenvalues and\nlet $P_\\lambda$ be the orthogonal projection onto the $\\lambda$-eigenspace.\nFor real time $t$, define the finite matrix evolution",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "If $T=0$, the exact evolution is $I$, so applying $A_0$ and the declared output procedure already has zero evolution error. If $T>0$, run the algorithm in [F2] with tolerance $\\varepsilon$; its construction fixes a finite grid and term-call counts from the supplied certificates and returns a circuit $W$ with $\\|W-U_T(1)\\|\\le\\varepsilon$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The circuit first applies the exact supplied preparation $A_0$ and then applies $W$. For every unit input vector $\\xi$, $\\|(W-U_T(1))A_0\\xi\\|\\le\\|W-U_T(1)\\|\\|A_0\\xi\\|\\le\\varepsilon$, because an isometry preserves norm. The initial preparation is therefore included without changing the evolution error.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The algorithm's circuit consists of $q$ segments, each with $M r_{\\rm PF}$ charged term calls, plus the supplied coefficient-evaluation and generator work. Adding $C_{\\rm init}$ and the separately recorded queries, gates, ancillas, precision bits, description bits and generator time gives exactly the path-access resource record; no undeclared matrix or spectral-projector operation is used.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the nonempty-choice boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-qa-36-history-path-full-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-36-history-path-restricted-gap",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ be the number of propagation steps. On the legal-clock block with the zero data input, remove the input penalty and conjugate by the prefix unitaries as in [[lem-qa-36-history-state-ground-and-output]]. The resulting clock matrix is\n$$H_0(s)=(1-s)\\operatorname{diag}(0,1,\\ldots,N)+\\frac{s}{2}L_N,$$\nwhere $L_N$ is the path Laplacian. Its ground eigenvalue is simple and its spectral gap is at least $1/(48N^2)$ for every $s\\in[0,1]$. In particular, the restricted clock gap is $\\Omega(N^{-2})$ uniformly along the path.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-36-history-path-ground-vector-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$, $a=1-s$, $t=s/2$, and let $L_N$ be the graph Laplacian of the path with vertices $0,1,\\ldots,N$. The restriction of the interpolated clock Hamiltonian to legal unary clocks, after removing the data register and propagation unitaries, is\n$$H_0(s)=a\\,\\operatorname{diag}(0,1,\\ldots,N)+tL_N.$$\nFor each $s\\in[0,1]$, its smallest eigenvalue is simple and has a normalized nonnegative eigenvector $v(s)=(v_0,\\ldots,v_N)$ satisfying\n$$v_0\\ge v_1\\ge\\cdots\\ge v_N>0.$$\nAt $s=0$ this vector is $e_0$; at $s=1$ it is the uniform vector.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-36-history-state-ground-and-output",
+          "source_section": "Statement",
+          "quote": "Let the five-local path in [[alg-qa-36-five-local-history-path]] have $N=L+K$ gates, including its $K$ identity gates, and let $V_0=I$ and $V_\\ell=U_\\ell\\cdots U_1$. On the legal unary-clock space, the propagation Hamiltonian has kernel\n$$\\left\\{\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell\\xi\\otimes|c_\\ell\\rangle:\\xi\\in(\\mathbb C^2)^{\\otimes n}\\right\\}.$$\nAfter adding $H_{\\rm input}$, this kernel is one-dimensional and its unit vector is\n$$|\\eta\\rangle=\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell|0^n\\rangle\\otimes|c_\\ell\\rangle.$$\nThe full $H_{\\rm final}$ also has this unique ground state. Its data-register marginal is at trace distance at most $L/(N+1)\\le\\varepsilon/2$ from the specified circuit output state.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-36-clock-penalty-gap-perturbation",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H=S\\oplus S^\\perp$ be finite-dimensional, let $H_1=H_1^*$ with $\\|H_1\\|\\le K$, and let $H_2=H_2^*\\ge0$ satisfy $H_2|_S=0$ and $H_2|_{S^\\perp}\\ge I$. For $J>2K$, set $H_J=H_1+JH_2$, and let $\\mu_1\\le\\mu_2\\le\\cdots$ be the eigenvalues of the compression $A=P_SH_1|_S$, where $\\dim S\\ge2$. With $\\epsilon_J=K^2/(J-2K)$, the two smallest eigenvalues of $H_J$ obey\n$$\\mu_k-\\epsilon_J\\le\\lambda_k(H_J)\\le\\mu_k\\quad(k=1,2).$$\nConsequently $\\lambda_2(H_J)-\\lambda_1(H_J)\\ge(\\mu_2-\\mu_1)-\\epsilon_J$; positivity of this bound requires the separate condition $\\epsilon_J<\\mu_2-\\mu_1$. Every unit eigenvector $x=s+t$ of $H_J$ with eigenvalue $\\lambda\\le K$ also satisfies $\\|t\\|\\le K\\|s\\|/(J-2K)$. Thus $J>2K$ alone supplies no general gap conclusion.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Let $\\mathcal S$ be the subspace of legal unary clocks. The prefix conjugation from [[lem-qa-36-history-state-ground-and-output]] preserves each clock basis state and makes $H_{\\rm prop}$ equal to $L_N/2$ on the clock. Since the input penalty acts only at $c_0$ and the prefix at $c_0$ is the identity, the compression of $H_1(s):=H(s)-JH_{\\rm clock}$ to $\\mathcal S$ decomposes, in the computational basis $x\\in\\{0,1\\}^n$, as $\\displaystyle H_x(s)=H_0(s)+|x|\\,|c_0\\rangle\\langle c_0|,$ where $H_0(s)$ is the zero-input clock block and $|x|$ is Hamming weight.",
+          "inputs": [
+            "given",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The $x=0$ block has simple ground energy $E_0$ and gap $\\Delta\\ge1/(48N^2)$ by [F1]–[F2]. Write $p=|v_0|^2$. Since $v_i\\le v_0$ and $\\sum_i|v_i|^2=1$, $p\\ge1/(N+1)$. Also $\\Delta\\le2$: the compression of $H_0(s)$ to $\\operatorname{span}\\{e_0,e_1\\}$ is positive and has trace at most $2$ (for $N=1$ its trace is $a+2t=1$, and for $N\\ge2$ it is $a+3t=1+s/2\\le3/2$). Min-max bounds the second eigenvalue by the largest eigenvalue of this compression, which is at most its trace; since $E_0\\ge0$, this also bounds the gap.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For any $x\\ne0$, put $r=|x|\\ge1$ and $R=|c_0\\rangle\\langle c_0|$. The spectral gap of the zero-input block gives $H_0-E_0I\\ge\\Delta(I-|v\\rangle\\langle v|)$, and $rR\\ge R$. Thus $\\displaystyle H_x-E_0I\\ge B:=\\Delta(I-|v\\rangle\\langle v|)+R.$ On the two-dimensional span of $v$ and $c_0$, the matrix of $B$ in the basis $v,w$ (where $c_0=\\sqrt p\\,v+\\sqrt{1-p}\\,w$) has trace $1+\\Delta$ and determinant $p\\Delta$. Its smaller eigenvalue is at least its determinant divided by its trace, hence at least $p\\Delta/(1+\\Delta)$. On the orthogonal complement, $B=\\Delta I$, so this lower bound applies to the whole space. By $\\Delta\\le2$, every nonzero-input block has ground energy at least $E_0+\\Delta p/3\\ge E_0+1/[144N^2(N+1)]$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The legal compression therefore has unique ground in the $x=0$ block and gap at least $\\displaystyle \\min\\left\\{\\frac1{48N^2},\\frac1{144N^2(N+1)}\\right\\}=\\frac1{144N^2(N+1)}\\ge\\Delta_0.$ The last inequality is equivalent to $3(N+1)^2\\ge2N^2$, which holds for every $N\\ge1$.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "On the full register, $H_2=H_{\\rm clock}$ is positive, vanishes exactly on $\\mathcal S$, and is at least $I$ on $\\mathcal S^\\perp$: every illegal binary clock string contains at least one adjacent $01$ pair. Further, $\\displaystyle H_1(s)=H_{\\rm input}+(1-s)H_{\\rm clock0}+sH_{\\rm prop}$ is self-adjoint and has norm at most $n+N+3N/2\\le K_0$, using the termwise norm bounds in the construction. The legal dimension is $2^n(N+1)\\ge2$, so [F4] applies to its first two eigenvalues with $K=K_0$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "For this $J$, $J>2K_0$ and $\\displaystyle \\epsilon_J=\\frac{K_0^2}{J-2K_0}<\\frac{\\Delta_0}{4}.$ The perturbation bounds in [F4] give $\\lambda_1(H(s))\\le\\mu_1$ and $\\lambda_2(H(s))\\ge\\mu_2-\\epsilon_J$, where $\\mu_2-\\mu_1\\ge\\Delta_0$ by step 4.1. Thus the full gap is at least $\\Delta_0-\\epsilon_J>3\\Delta_0/4$ for every $s$. Its positivity makes the ground state unique, and $\\Delta_0=\\Theta(N^{-3})$ gives the stated asymptotic gap.",
+          "inputs": [
+            "F4",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 1.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case; see 1.1, 2.1, 3.1, 4.1, 5.1, 6.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 1.1, 2.1, 3.1, 4.1, 5.1, 6.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the closed interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in the Statement/Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-qa-36-circuit-to-adiabatic-simulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-36-five-local-history-path",
+          "source_section": "Definition",
+          "quote": "**Input:** A full-list uniform circuit on $n\\ge1$ qubits with $L\\ge1$ listed gates $U_1,\\ldots,U_L$, each acting on at most two data qubits, and a rational tolerance $0<\\varepsilon\\le1$. Circuit products act right to left ([[def-qc-uniform-circuit-family]]). The computation is applied to the explicitly supplied all-zero input preparation $A_0$; its wire and preparation cost $C_{\\rm init}$ is recorded by [[def-qc-circuit-cost-model]] and [[def-qa-36-adiabatic-resource-model]].",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qa-36-adiabatic-resource-model",
+          "source_section": "Definition",
+          "quote": "An **adiabatic path access instance** consists of a finite path model ([[def-qa-36-finite-adiabatic-path-model]]), its exact initial preparation circuit $A_0$ and cost $C_{\\rm init}$, a finite term count $r$, and a uniform description\n$$H(s)=\\sum_{j=1}^r c_j(s)H_j,$$\nwhere the $H_j$ are stated finite-dimensional self-adjoint operators and the real coefficient functions $c_j$ have explicit rational binary inputs, uniform evaluation procedures, certified value errors and certified first-derivative bound $M_1\\ge\\sup_s\\|H'(s)\\|$. The access declaration provides, for every allowed time code $u$, either the exact term operation $e^{-iuH_j}$ as a named oracle with its query charge, or a full-list uniform circuit family $V_j(u)$ with a certified bound $\\|V_j(u)-e^{-iuH_j}\\|\\le\\eta_j(u)$. Each inverse or controlled call is available only when separately declared. This is the finite term-list access interface of [[def-qa-20-simulation-error-and-cost-model]] and [[def-qa-20-term-list-access-model]].",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-36-history-state-ground-and-output",
+          "source_section": "Statement",
+          "quote": "Let the five-local path in [[alg-qa-36-five-local-history-path]] have $N=L+K$ gates, including its $K$ identity gates, and let $V_0=I$ and $V_\\ell=U_\\ell\\cdots U_1$. On the legal unary-clock space, the propagation Hamiltonian has kernel\n$$\\left\\{\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell\\xi\\otimes|c_\\ell\\rangle:\\xi\\in(\\mathbb C^2)^{\\otimes n}\\right\\}.$$\nAfter adding $H_{\\rm input}$, this kernel is one-dimensional and its unit vector is\n$$|\\eta\\rangle=\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell|0^n\\rangle\\otimes|c_\\ell\\rangle.$$\nThe full $H_{\\rm final}$ also has this unique ground state. Its data-register marginal is at trace distance at most $L/(N+1)\\le\\varepsilon/2$ from the specified circuit output state.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-36-history-path-full-gap",
+          "source_section": "Statement",
+          "quote": "For the path in [[alg-qa-36-five-local-history-path]], put $N=L+K$, $K_0=n+3N$, and\n$$\\Delta_0=\\frac1{216(N+1)^3},\\qquad J=2K_0+\\frac{4K_0^2}{\\Delta_0}+1.$$\nFor every $s\\in[0,1]$, the full Hamiltonian has a unique ground state and its gap is greater than $3\\Delta_0/4$. Consequently the minimum gap is $\\Omega(N^{-3})$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-36-jrs-finite-adiabatic-bound",
+          "source_section": "Statement",
+          "quote": "Let $H:[0,1]\\to\\mathcal L(V)$ be a $C^2$ finite-dimensional Hermitian path, and let $P(s)$ be a coherently followed spectral projection of constant rank $m\\ge1$, separated from its complement by full gap $g(s)>0$. Let $U_T$ solve $iU_T'(s)=TH(s)U_T(s)$ with $U_T(0)=I$, where $T>0$. Define\n$$A_m(s)=\\frac1T\\left[\\frac{m\\|H'(0)\\|}{g(0)^2}+\\frac{m\\|H'(s)\\|}{g(s)^2}+\\int_0^s\\left(\\frac{m\\|H''(r)\\|}{g(r)^2}+\\frac{7m\\sqrt m\\|H'(r)\\|^2}{g(r)^3}\\right)dr\\right].$$\nThen\n$$\\|U_T(s)P(0)U_T(s)^*-P(s)\\|\\le A_m(s).$$\nFor every unit $\\psi\\in\\operatorname{ran}P(0)$, its transition probability out of the band at time $s$ is at most $A_m(s)^2$. The rank $m$ may be larger than the number of distinct eigenvalues in the band; using rank in the constants is a valid upper bound.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-36-partial-trace-contracts-trace-distance",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B$ be nonzero finite-dimensional complex inner-product spaces and let $\\rho,\\sigma$ be density operators on $H_A\\otimes H_B$. Then\n$$D(\\operatorname{Tr}_{H_B}\\rho,\\operatorname{Tr}_{H_B}\\sigma)\\le D(\\rho,\\sigma).$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-pure-state-trace-distance",
+          "source_section": "Statement",
+          "quote": "For unit vectors $u,v$ in a finite-dimensional complex Hilbert space, let $P_u=|u\\rangle\\langle u|$ and $P_v=|v\\rangle\\langle v|$. Then\n$$D(P_u,P_v)=\\sqrt{1-|\\langle u|v\\rangle_D|^2},$$\nwhere $\\langle\\cdot|\\cdot\\rangle_D$ is the Dirac pairing converted from the root library's first-argument-linear inner product.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-qa-36-discretized-path-simulation",
+          "source_section": "Definition",
+          "quote": "**Input:** An adiabatic path access instance from [[def-qa-36-adiabatic-resource-model]], evolution time $T\\ge0$, and rational tolerance $0<\\varepsilon\\le1$. Write $M$ for the term count, and suppose the instance provides a certified $M_1\\ge\\sup_{s\\in[0,1]}\\|H'(s)\\|$.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-36-adiabatic-resource-model",
+          "source_section": "Definition",
+          "quote": "An **adiabatic path access instance** consists of a finite path model ([[def-qa-36-finite-adiabatic-path-model]]), its exact initial preparation circuit $A_0$ and cost $C_{\\rm init}$, a finite term count $r$, and a uniform description\n$$H(s)=\\sum_{j=1}^r c_j(s)H_j,$$\nwhere the $H_j$ are stated finite-dimensional self-adjoint operators and the real coefficient functions $c_j$ have explicit rational binary inputs, uniform evaluation procedures, certified value errors and certified first-derivative bound $M_1\\ge\\sup_s\\|H'(s)\\|$. The access declaration provides, for every allowed time code $u$, either the exact term operation $e^{-iuH_j}$ as a named oracle with its query charge, or a full-list uniform circuit family $V_j(u)$ with a certified bound $\\|V_j(u)-e^{-iuH_j}\\|\\le\\eta_j(u)$. Each inverse or controlled call is available only when separately declared. This is the finite term-list access interface of [[def-qa-20-simulation-error-and-cost-model]] and [[def-qa-20-term-list-access-model]].",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Write $H(s)=(1-s)H_{\\rm init}+sH_{\\rm final}$. The common $H_{\\rm input}$ and $JH_{\\rm clock}$ terms cancel in $H'$, leaving $H'=H_{\\rm prop}-H_{\\rm clock0}$, so $\\|H'\\|\\le3N$ from the term bounds, and $H''=0$. By [F3], the full ground gap is at least $\\gamma:=3\\Delta_0/4=1/[288(N+1)^3]$ throughout the path. The initial ground is $|0^n\\rangle|c_0\\rangle$, and its supplied preparation is included in [F1].",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "In the rank-one JRS expression from [F4], each endpoint term is at most $3N/\\gamma^2$, and the integral term is at most $7(3N)^2/\\gamma^3$ because $H''=0$. Put $\\displaystyle B_T=\\frac{6N}{\\gamma^2}+\\frac{63N^2}{\\gamma^3},\\qquad T=\\left\\lceil\\frac{4B_T}{\\varepsilon}\\right\\rceil.$ Then $A_1(1)\\le B_T/T\\le\\varepsilon/4$. Since $\\gamma^{-1}=288(N+1)^3$, we have $B_T=O(N^{11})$ and $T=O(N^{11}/\\varepsilon)$. Also $K=\\Theta(L/\\varepsilon)$ and $N=\\Theta(L/\\varepsilon)$ for $L\\ge1$, $\\varepsilon\\le1$, giving the stated $O(L^{11}\\varepsilon^{-12})$ bound.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Let $\\psi_T$ be the ideal evolved unit vector and $\\eta$ the final ground vector. The JRS projector estimate gives $\\||\\psi_T\\rangle\\langle\\psi_T|-|\\eta\\rangle\\langle\\eta|\\|\\le\\varepsilon/4$. For rank-one projections the operator norm of their difference equals their trace distance: on the span of the two vectors the difference has eigenvalues $\\pm\\sqrt{1-|\\langle\\psi_T,\\eta\\rangle|^2}$, and it vanishes on the orthogonal complement. Thus their full-register trace distance is at most $\\varepsilon/4$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Run the discretized simulator [F6] with tolerance $\\varepsilon/4$ and apply its circuit to the supplied initial vector. If $\\widetilde\\psi_T$ is the resulting unit vector, operator-norm error gives $\\|\\widetilde\\psi_T-\\psi_T\\|\\le\\varepsilon/4$. Put $c=\\langle\\psi_T,\\widetilde\\psi_T\\rangle$. By [F5], the pure-state trace distance squared is $(1-|c|)(1+|c|)\\le2(1-|c|)\\le2-2\\operatorname{Re}c=\\|\\widetilde\\psi_T-\\psi_T\\|^2$, so it is at most $\\varepsilon/4$. By partial-trace contractivity, tracing out the clock does not increase either this error or the adiabatic error in step 3.1.",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The data marginal of $|\\eta\\rangle$ is within $\\varepsilon/2$ of the target circuit output by [F2]. The triangle inequality for trace distance, steps 3.1–4.1, and the padding estimate therefore give total output distance at most $\\varepsilon/4+\\varepsilon/4+\\varepsilon/2=\\varepsilon$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "The term count is at most $n+3N$ and all coefficients, including $J$, have polynomial bit length because $K,N$ and $J$ are polynomial in $n,L,1/\\varepsilon$. A uniform commutator bound follows from $\\sum_{p<q}\\|[A_p,A_q]\\|\\le2\\sum_{p<q}\\|A_p\\|\\|A_q\\|$ and the polynomial term norms. With the declared polynomial-cost term-time providers, coefficient evaluations and output operation, the fixed grid and product-formula loops in [F6] have polynomial charged cost. Each coordinate remains explicitly charged, including controlled or inverse access when needed; no spectral projector is used to prepare the initial state.",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly specifies the zero-valued branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case; see 1.1, 2.1, 3.1, 4.1, 5.1, 6.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 1.1, 3.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the nonempty-choice boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "ex-qa-36-two-level-avoided-crossing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-36-jrs-finite-adiabatic-bound",
+          "source_section": "Statement",
+          "quote": "Let $H:[0,1]\\to\\mathcal L(V)$ be a $C^2$ finite-dimensional Hermitian path, and let $P(s)$ be a coherently followed spectral projection of constant rank $m\\ge1$, separated from its complement by full gap $g(s)>0$. Let $U_T$ solve $iU_T'(s)=TH(s)U_T(s)$ with $U_T(0)=I$, where $T>0$. Define\n$$A_m(s)=\\frac1T\\left[\\frac{m\\|H'(0)\\|}{g(0)^2}+\\frac{m\\|H'(s)\\|}{g(s)^2}+\\int_0^s\\left(\\frac{m\\|H''(r)\\|}{g(r)^2}+\\frac{7m\\sqrt m\\|H'(r)\\|^2}{g(r)^3}\\right)dr\\right].$$\nThen\n$$\\|U_T(s)P(0)U_T(s)^*-P(s)\\|\\le A_m(s).$$\nFor every unit $\\psi\\in\\operatorname{ran}P(0)$, its transition probability out of the band at time $s$ is at most $A_m(s)^2$. The rank $m$ may be larger than the number of distinct eigenvalues in the band; using rank in the constants is a valid upper bound.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Put $x=s-1/2$. Direct multiplication gives $H(s)^2=(x^2+1/4)I$, so its eigenvalues are $\\pm\\sqrt{x^2+1/4}$. The ground-to-excited gap is therefore $g(s)=2\\sqrt{x^2+1/4}$, whose minimum is $1$ at $s=1/2$ and whose endpoint values are $\\sqrt2$. The ground band is uniformly isolated and has rank one.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Differentiating gives $H'(s)=Z$ and $H''(s)=0$. Since $Z^*Z=I$, $\\|H'(s)\\|=1$ for every $s$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Substituting the endpoint values and derivatives from steps 1.1–1.2 into [F2] gives endpoint contribution $1/2+1/2=1$. For the integral, with $x=s-1/2$, $\\displaystyle \\int_0^1\\frac{7}{g(s)^3}\\,ds=\\frac78\\int_{-1/2}^{1/2}\\frac{dx}{(x^2+1/4)^{3/2}}=\\frac7{\\sqrt2},$ using the antiderivative $x/((1/4)\\sqrt{x^2+1/4})$. Hence $A_1(1)=(1+7/\\sqrt2)/T$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The JRS conclusion consequently bounds the projector deviation by $(1+7/\\sqrt2)/T$ and the transition probability out of the ground band by its square. For example, any $T\\ge4(1+7/\\sqrt2)/\\varepsilon$ makes the projector deviation at most $\\varepsilon/4$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the zero boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case; see 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 1.1, 3.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite choice or minimization is justified in proof steps 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "avoided crossing spectrum and integral",
+          "input": "H(s)=(s-1/2)Z+X/2",
+          "calculation": "g(s)=2 sqrt((s-1/2)^2+1/4); integral_0^1 7/g(s)^3 ds=7/sqrt(2)",
+          "result": "A1(1)=(1+7/sqrt(2))/T"
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "cex-qa-36-gap-closing-failure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The path is linear in $s$, hence twice continuously differentiable. Since $Z=\\operatorname{diag}(1,-1)$, its eigenvalues are $s-1/2$ and $-(s-1/2)$; the gap is $g(s)=2|s-1/2|$, which vanishes at $s=1/2$. Therefore no positive uniform full gap exists.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "At $s=0$, $H(0)=-Z/2$ has unique ground vector $|0\\rangle$; at $s=1$, $H(1)=Z/2$ has unique ground vector $|1\\rangle$. The Hamiltonians commute for all times and are diagonal, so the solution of $i\\partial_sU_T=TH(s)U_T$ maps $|0\\rangle$ to a scalar phase times $|0\\rangle$. Its final overlap with the final ground vector is zero, and its transition probability out of the final ground space is exactly $1$ for every $T>0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The path satisfies the smoothness assumption but violates the strictly positive uniform-gap hypothesis in [[thm-qa-36-jrs-finite-adiabatic-bound]]. Step 1.2 shows directly that the desired ground-state-following conclusion can fail completely when that hypothesis is removed.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the one boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement/Definition specifies the spectral multiplicity convention and proof steps 1.1, 1.2, 2.1 treat its uses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the nonempty-choice boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "diagonal crossing",
+          "input": "H(s)=(s-1/2)Z",
+          "calculation": "gap=2|s-1/2| and the exact propagator is diagonal",
+          "result": "the initial ground |0> remains orthogonal to the final ground |1>; transition probability is 1"
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "ex-qa-36-two-gate-history-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-36-history-state-ground-and-output",
+          "source_section": "Statement",
+          "quote": "Let the five-local path in [[alg-qa-36-five-local-history-path]] have $N=L+K$ gates, including its $K$ identity gates, and let $V_0=I$ and $V_\\ell=U_\\ell\\cdots U_1$. On the legal unary-clock space, the propagation Hamiltonian has kernel\n$$\\left\\{\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell\\xi\\otimes|c_\\ell\\rangle:\\xi\\in(\\mathbb C^2)^{\\otimes n}\\right\\}.$$\nAfter adding $H_{\\rm input}$, this kernel is one-dimensional and its unit vector is\n$$|\\eta\\rangle=\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell|0^n\\rangle\\otimes|c_\\ell\\rangle.$$\nThe full $H_{\\rm final}$ also has this unique ground state. Its data-register marginal is at trace distance at most $L/(N+1)\\le\\varepsilon/2$ from the specified circuit output state.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The padding count is $K=\\lceil2\\cdot2/1\\rceil=4$, so $N=6$. The prefix states are $V_0|0\\rangle=|0\\rangle$, $V_1|0\\rangle=X|0\\rangle=|1\\rangle$, and $V_2|0\\rangle=ZX|0\\rangle=Z|1\\rangle=-|1\\rangle$. Since $U_3,\\ldots,U_6$ are identities, all later prefix states remain $-|1\\rangle$. Substitution in the history-state formula of [F1] gives the displayed normalized vector.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For $\\ell=1$, the endpoint patterns are $a_1=00,b_1=10$ on clock bits $(1,2)$; for $\\ell=2,3,4,5$, the internal patterns are $a_\\ell=100,b_\\ell=110$ on bits $(\\ell-1,\\ell,\\ell+1)$; for $\\ell=6$, the endpoint patterns are $a_6=10,b_6=11$ on bits $(5,6)$. On every adjacent pair $(c_{\\ell-1},c_\\ell)$, the data amplitudes in step 1.1 satisfy $\\phi_\\ell=U_\\ell\\phi_{\\ell-1}$: the first two transitions apply $X$ and $Z$, and the last four apply $I$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "By [F1], each $h_\\ell$ restricted to its pattern pair has quadratic form $\\frac12\\|\\phi_\\ell-U_\\ell\\phi_{\\ell-1}\\|^2$. Step 2.1 makes this zero for each $\\ell=1,\\ldots,6$; all other legal clock amplitudes are outside that term's two-pattern support. Thus every propagation term annihilates $|\\eta\\rangle$, and the sum $H_{\\rm prop}$ does as well.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires a nonempty finite space, nonzero register, positive rank, or nonempty interval; it asserts no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued input or endpoint is handled in 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement/Definition includes the one-dimensional or rank-one boundary case; see 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the degenerate boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the endpoints boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate claim about the nonempty-choice boundary; the stated hypotheses do not introduce that parameter or choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim, so there is no implication direction to check."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "padded two-gate history",
+          "input": "U1=X, U2=Z, epsilon=1, K=4, N=6",
+          "calculation": "prefix states are |0>, |1>, -|1>, followed by four identity steps",
+          "result": "each adjacent transition satisfies phi_l=U_l phi_(l-1), so every h_l annihilates the history vector"
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    }
+  }
+}

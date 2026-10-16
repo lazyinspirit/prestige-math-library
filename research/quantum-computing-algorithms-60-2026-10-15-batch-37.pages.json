@@ -1,0 +1,1124 @@
+[
+  {
+    "order": 2238,
+    "id": "amplitude-estimation-and-counting",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Amplitude Estimation and Counting",
+    "companion": "amplitude-estimation-and-counting-examples",
+    "requires": [
+      "reversible-arithmetic-and-oracle-conversion",
+      "quantum-phase-estimation",
+      "amplitude-amplification",
+      "computational-problems-promises-and-cost-models",
+      "controlled-gates-phase-and-entanglement",
+      "measurements-povms-and-instruments",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "effective-numberings-reductions-resources-and-randomness",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "lem-qa-13-pi-rational-bounds",
+        "kind": "lemma",
+        "title": "Rational bounds for pi used in finite schedules",
+        "statement": "The circle constant satisfies $3<\\pi<22/7$.",
+        "deps": [
+          "thm-principal-inverse-tangent-calculus",
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-alternating-series-test",
+          "thm-of-archimedean"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": true,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-13-two-nearest-phase-mass",
+        "kind": "lemma",
+        "title": "Two nearest phase labels carry probability at least eight over pi squared",
+        "statement": "Let $M=2^m$ with $m\\ge1$, and let $\\theta\\in[0,1)$ be an eigenphase measured by the $M$-label QPE kernel. The two labels $\\lfloor M\\theta\\rfloor$ and $\\lceil M\\theta\\rceil$ reduced modulo $M$ (one label when $M\\theta$ is an integer) have total outcome probability at least $8/\\pi^2$.",
+        "deps": [
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "lem-qa-13-pi-rational-bounds",
+          "lem-qa-phase-estimation-sine-chord-bounds",
+          "thm-sine-and-cosine-derivatives",
+          "thm-tangent-cotangent-secant-cosecant-derivatives-and-periods",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-cofunction-supplementary-and-reflection-identities",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-mean-value-theorem",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": true,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 14,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-13-amplitude-estimation-task",
+        "kind": "definition",
+        "title": "Amplitude estimation and counting input/output contract",
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $|0\\rangle$ a specified unit vector, $A:H\\to H$ a supplied unitary, and $\\Pi_{\\rm good}$ an explicitly supplied orthogonal projection. Put\n$$S_0=I-2|0\\rangle\\langle0|,\\qquad S_{\\rm good}=I-2\\Pi_{\\rm good},\\qquad Q=-A S_0A^*S_{\\rm good}.$$\nEach classical instance has an injective encoding $\\operatorname{enc}$ from its declared instance set into $\\{0,1\\}^*$, with input size $|\\operatorname{enc}(z)|$; the promise domain and output obligation are stated for that task. Supplied operator or oracle access is a separate resource declaration.\n\nThe success amplitude is $a=\\|\\Pi_{\\rm good}A|0\\rangle\\|^2\\in[0,1]$, and $\\theta=\\arcsin\\sqrt a\\in[0,\\pi/2]$. Amplitude estimation returns an algebraically encoded estimate of $a$; its requested accuracy and failure probability are stated separately.\n\nFor counting, let $n$ be a nonnegative integer and set $N=2^n$ with address basis $\\{|x\\rangle:x\\in\\{0,1\\}^n\\}$ and a Boolean predicate $f$. Write $H_{\\rm Had}=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$ for the one-qubit Hadamard gate, distinct from the space $H$, and set $A=H_{\\rm Had}^{\\otimes n}$, $|0\\rangle=|0^n\\rangle$, $\\Pi_{\\rm good}=\\sum_{f(x)=1}|x\\rangle\\langle x|$, and $t=|\\{x:f(x)=1\\}|$. Then the counting amplitude is $a=t/N$. The preparation uses exactly $n$ ordinary Hadamard gates. Access to the controlled membership reflection is a separate explicit resource.\n\nTwo phase-estimation access modes are allowed. In the power-query mode, the model supplies each $C(Q^{2^j})$ for $0\\le j<m$ as one declared query, with its individual cost recorded. In the repeated-unitary mode the model supplies $C(Q)$ and implements $C(Q^{2^j})$ by $2^j$ sequential calls, for exactly $2^m-1$ controlled-$Q$ calls. In repeated-unitary mode, each controlled-$Q$ call expands as the composite $C(-I)C(A)C(S_0)C(A^*)C(S_{\\rm good})$; controlled $A$, controlled $A^*$, controlled $S_0$, controlled $S_{\\rm good}$, and the control phase $C(-I)$ must all be supplied or implemented and charged. In power-query mode each supplied controlled power has its own declared cost vector, including any constituent implementations the model uses. An uncontrolled phase query does not supply any of them. Query, ordinary-gate, state-preparation, measurement, and classical bit costs are separate coordinates.",
+        "deps": [
+          "def-qa-task-and-promise-domain",
+          "def-qa-input-encoding-and-size",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-projective-measurement",
+          "def-qc-dirac-notation-conversion",
+          "def-qa-phase-query",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-reflection",
+          "def-qa-quantum-query-algorithm",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 17,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-13-grover-eigenphase-relation",
+        "kind": "lemma",
+        "title": "Grover eigenphases encode the good probability",
+        "statement": "Let $\\psi=A|0\\rangle$, $a=\\|\\Pi_{\\rm good}\\psi\\|^2$, and $\\theta=\\arcsin\\sqrt a$. If $0<a<1$, define the unit vectors $G=\\Pi_{\\rm good}\\psi/\\sqrt a$ and $B=(I-\\Pi_{\\rm good})\\psi/\\sqrt{1-a}$. In the ordered basis $(B,G)$, the Grover iterate $Q$ of [[def-qa-13-amplitude-estimation-task]] restricts to\n$$\\begin{pmatrix}\\cos(2\\theta)&-\\sin(2\\theta)\\\\\\sin(2\\theta)&\\cos(2\\theta)\\end{pmatrix}.$$\nIts eigenvalues are $e^{2i\\theta}$ and $e^{-2i\\theta}$, and $\\psi=\\cos\\theta B+\\sin\\theta G$ has squared overlap $1/2$ with each corresponding normalized eigenvector. At $a=0$, $\\psi$ is a $+1$ eigenvector; at $a=1$, it is a $-1$ eigenvector.",
+        "deps": [
+          "def-qa-13-amplitude-estimation-task",
+          "lem-qa-12-amplification-plane-invariant"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 18,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-13-real-cyclotomic-comparison",
+        "kind": "lemma",
+        "title": "Finite exact comparison of real cyclotomic values",
+        "statement": "For an integer $s\\ge2$, let $\\zeta_s=e^{2\\pi i/s}$ and let $P,R\\in\\mathbb Q[X]$ be given coefficient lists such that $P(\\zeta_s)$ and $R(\\zeta_s)$ are real. There is a terminating deterministic exact procedure to decide which of these two real numbers is larger, or whether they are equal. Its bit-operation cost is charged to the classical cost model; no polynomial bound is asserted.",
+        "deps": [
+          "thm-cyclotomic-polynomials-are-irreducible-over-the-rationals",
+          "thm-principal-inverse-tangent-calculus",
+          "lem-qa-13-pi-rational-bounds",
+          "def-sine-and-cosine-by-power-series",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-qa-classical-bit-cost",
+          "thm-alternating-series-test",
+          "thm-of-archimedean"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": true,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 18,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-13-iterative-likelihood-amplitude-estimation",
+        "kind": "algorithm",
+        "title": "Iterative no-QFT amplitude estimation by finite-grid likelihood",
+        "statement": "**Input.** An instance of the task [[def-qa-13-amplitude-estimation-task]] with the same $H,|0\\rangle,A,\\Pi_{\\rm good}$ supplied under the prepared-success-subspace access contract of [[def-qa-12-prepared-success-subspace]]. That contract supplies and charges the uncontrolled calls to $A,A^*,S_0,S_{\\rm good}$. Additionally require supplied access to the good/bad projective measurement $\\{\\Pi_{\\rm good},I-\\Pi_{\\rm good}\\}$ of [[def-qc-projective-measurement]], with each use charged in the measurement coordinate and any implementation costs charged separately; no controlled access is used. Also require integers $K,S,J\\ge1$.\n\nSet $m_0=0$ and $m_k=2^{k-1}$ for $1\\le k\\le K$. For each $k=0,\\ldots,K$, perform $S$ repetitions: prepare a fresh $A|0\\rangle$, apply exactly $m_k$ signed Grover iterates using [[alg-qa-12-amplitude-amplification]], measure the good/bad projective measurement, and record the outcome. Let $h_k$ be the number of good outcomes at scale $k$.\n\nSet $s=2J$ and $\\zeta_s=e^{2\\pi i/s}$. For an integer $q$, let $\\rho_s(q)$ be its least residue in $\\{0,\\ldots,s-1\\}$. For grid labels $j=0,\\ldots,J$, put $\\theta_j=j\\pi/(2J)$ and define the likelihood\n$$L_j=\\prod_{k=0}^K\\sin^{2h_k}((2m_k+1)\\theta_j)\\cos^{2(S-h_k)}((2m_k+1)\\theta_j),$$\nwhere every zeroth power is $1$. For each label $j$ and scale $k=0,\\ldots,K$, set\n$$r_{kj}=\\rho_s((2m_k+1)j),\\qquad r'_{kj}=\\rho_s(-r_{kj}),$$\nand form the rational polynomials\n$$U_{kj}(X)=\\frac{2-X^{r_{kj}}-X^{r'_{kj}}}{4},\\qquad V_{kj}(X)=\\frac{2+X^{r_{kj}}+X^{r'_{kj}}}{4}.$$\nPut $P_j(X)=\\prod_{k=0}^K U_{kj}(X)^{h_k}V_{kj}(X)^{S-h_k}$, treating every zeroth power as $1$. The polynomials $P_j$ are the exact comparison inputs for the likelihoods $L_j$: compare $P_i(\\zeta_s)$ and $P_j(\\zeta_s)$ using [[lem-qa-13-real-cyclotomic-comparison]], and choose the least label $\\widehat j$ attaining the maximum.\n\nSet $E_{\\widehat j}(X)=(2-X^{\\widehat j}-X^{\\rho_s(-\\widehat j)})/4$ and return $\\widetilde a=E_{\\widehat j}(\\zeta_s)$, encoded by the pair $(s,E_{\\widehat j})$. Each shot uses a fresh state and ordinary measurement. This is a finite-grid likelihood procedure, not a finite-sample $\\epsilon,\\delta$ guarantee; no such guarantee is asserted here.",
+        "deps": [
+          "def-qa-13-amplitude-estimation-task",
+          "def-qa-12-prepared-success-subspace",
+          "alg-qa-12-amplitude-amplification",
+          "lem-qa-13-grover-eigenphase-relation",
+          "def-qc-projective-measurement",
+          "def-qa-quantum-query-algorithm",
+          "lem-qa-13-real-cyclotomic-comparison"
+        ],
+        "justified_by": [
+          "thm-qa-13-iterative-likelihood-query-count"
+        ],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Suzuki et al., Amplitude estimation without phase estimation, complete article, \u00a7\u00a72\u20133.2",
+              "url": "https://arxiv.org/pdf/1904.10246"
+            }
+          ]
+        },
+        "dependency_level": 19,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers."
+      },
+      {
+        "id": "alg-qa-13-phase-estimation-amplitude-estimation",
+        "kind": "algorithm",
+        "title": "QFT-based amplitude estimation",
+        "statement": "**Input.** An instance from [[def-qa-13-amplitude-estimation-task]], an integer $m\\ge2$, $M=2^m$, and either the declared controlled-power access mode or repeated controlled-$Q$ access.\n\n**Instructions.** Prepare $\\psi=A|0\\rangle$, run the $M$-label QPE circuit on $Q$ using controlled powers $Q^{2^j}$, $j=0,\\ldots,m-1$, and measure its phase register to obtain $y\\in\\{0,\\ldots,M-1\\}$. Output the exact cyclotomic value\n$$\\widetilde a=\\sin^2(\\pi y/M)=\\frac{2-\\zeta_M^y-\\zeta_M^{-y}}4,\\qquad \\zeta_M=e^{2\\pi i/M},$$\nwith the real embedding specified by this root. A decimal approximation is postprocessing and is charged separately. The leading minus in $Q$ is retained: on a controlled call it is the control phase $C(-I)$, not a discarded standalone global phase.",
+        "deps": [
+          "def-qa-13-amplitude-estimation-task",
+          "lem-qa-13-grover-eigenphase-relation",
+          "def-qa-eigenphase-estimation-model",
+          "alg-qa-quantum-phase-estimation",
+          "thm-qa-phase-estimation-access-cost",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "thm-qc-standalone-global-phase-invariance",
+          "thm-qc-controlled-global-phase-is-relative-phase",
+          "thm-qc-reflection-unitary-involution",
+          "def-qa-classical-bit-cost",
+          "lem-qa-13-real-cyclotomic-comparison"
+        ],
+        "justified_by": [
+          "thm-qa-13-amplitude-estimation-guarantee"
+        ],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 19,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers."
+      },
+      {
+        "id": "alg-qa-13-counting-from-amplitude-estimation",
+        "kind": "algorithm",
+        "title": "Quantum counting by uniform-state amplitude estimation",
+        "statement": "**Input.** A Boolean predicate $f:\\{0,1\\}^n\\to\\{0,1\\}$, an integer $n\\ge0$, $N=2^n$, an explicitly supplied controlled membership reflection for $S_{\\rm good}$, a power of two $M=2^m\\ge2$, and the other controlled accesses in [[def-qa-13-amplitude-estimation-task]].\n\nPrepare $N^{-1/2}\\sum_x|x\\rangle=H^{\\otimes n}|0^n\\rangle$, run the $m$-qubit QPE circuit for $Q$ with $M=2^m$ labels, measure $y$, and output the exact algebraic fraction estimate $\\widetilde a=\\sin^2(\\pi y/M)$ and count estimate $\\widetilde t=N\\widetilde a$. For $M\\ge4$ this is the QFT amplitude-estimation circuit of [[alg-qa-13-phase-estimation-amplitude-estimation]]; for $M=2$, use its one-phase-qubit QPE circuit directly, without invoking the $M\\ge4$ error theorem. The fraction and count are real-valued algebraic outputs; integer rounding is optional postprocessing. The controlled membership reflection is an explicit access requirement. In repeated-unitary mode each controlled $Q$ call charges one controlled membership reflection; in power-query mode each supplied controlled power carries its declared cost vector, including any membership-reflection implementations it uses. Neither access mode is inferred from the bare phase oracle $|x\\rangle\\mapsto(-1)^{f(x)}$.",
+        "deps": [
+          "def-qa-13-amplitude-estimation-task",
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "alg-qa-quantum-phase-estimation",
+          "lem-qa-13-grover-eigenphase-relation",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "def-qa-classical-bit-cost"
+        ],
+        "justified_by": [
+          "thm-qa-13-counting-error-guarantee"
+        ],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 20,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers."
+      },
+      {
+        "id": "alg-qa-13-median-confidence-estimation",
+        "kind": "algorithm",
+        "title": "Median confidence amplification for amplitude estimation",
+        "statement": "**Input.** The amplitude-estimation task, rational $0<\\epsilon\\le1$ and rational $0<\\delta<1$.\n\nInitialize $m=0$ and $M=1$. Repeatedly increment $m$ and double $M$ while $M<88/(7\\epsilon)$, using exact rational comparison, so that $M=2^m$. Set $r=1$ and repeatedly increase $r$ by $2$ while $2^r<(2/\\delta)^8$, using exact rational comparisons. Run $r$ independent fresh copies of the QFT estimator with phase-register size $M$, and return the middle order statistic of their exact algebraic estimates (ties are ordered by their exact value and identical values are interchangeable).",
+        "deps": [
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "lem-qa-13-pi-rational-bounds",
+          "def-qa-classical-bit-cost",
+          "lem-qa-13-real-cyclotomic-comparison",
+          "def-qa-quantum-query-algorithm",
+          "def-nat-power",
+          "thm-induction-principle",
+          "thm-of-archimedean"
+        ],
+        "justified_by": [
+          "thm-qa-13-median-confidence-guarantee"
+        ],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 20,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers."
+      },
+      {
+        "id": "alg-qa-13-certified-count-output-rounding",
+        "kind": "algorithm",
+        "title": "Rational-interval rounding of a counting output",
+        "statement": "**Input.** Public integers $N\\ge1$, even $M\\ge2$, and $0\\le y<M$. The output is an integer $q$. All sums, factorials, comparisons and ceiling operations below use exact rational or integer arithmetic, charged as classical bit work under [[def-qa-classical-bit-cost]].\n\nIf $y=0$, return $q=0$. Otherwise initialize $r=4$. Compute $R_r=8^{2r+2}/(2r+2)!$; while $NR_r\\ge1/24$, increment $r$ by one and recompute $R_r$. At the first $r$ with $NR_r<1/24$, set\n$$D_r=\\sum_{k=1}^r\\frac{2k\\,8^{2k-1}}{(2k)!}.$$\n\nInitialize $h=1$. Compute\n$$S_h=\\sum_{k=0}^{h-1}\\frac{(-1)^k}{2k+1},\\qquad e_h=\\frac4{2h+1},\\qquad [a_h,b_h]=\\frac{2y}{M}[4S_h-e_h,4S_h+e_h].$$\nThese are the arctangent-series enclosures from [[thm-principal-inverse-tangent-calculus]] and [[thm-alternating-series-test]]. Set $x_h=(a_h+b_h)/2$ and $\\rho_h=(b_h-a_h)/2$. While either $[a_h,b_h]\\nsubseteq[0,8]$ or $ND_r\\rho_h\\ge1/24-NR_r$, increment $h$ by one and recompute $S_h,e_h,a_h,b_h,x_h,\\rho_h$.\n\nFor the first accepted $h$, compute\n$$C_r(x_h)=\\sum_{k=0}^r\\frac{(-1)^k x_h^{2k}}{(2k)!},\\qquad E=D_r\\rho_h+R_r,$$\n$$u=\\frac N2(1-C_r(x_h)-E),\\qquad v=\\frac N2(1-C_r(x_h)+E).$$\nReturn $q=\\lceil v-2/3\\rceil$, computing the rational ceiling by integer division. The termination and error guarantee are established in [[lem-qa-13-certified-count-output-rounding]].",
+        "deps": [
+          "thm-principal-inverse-tangent-calculus",
+          "thm-alternating-series-test",
+          "def-qa-classical-bit-cost"
+        ],
+        "justified_by": [
+          "lem-qa-13-certified-count-output-rounding"
+        ],
+        "design_row": "QA13",
+        "local_addition": true,
+        "dependency_level": 18,
+        "axiom_use": "No choice axiom is used; all selections are prescribed rational comparisons and integer arithmetic.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, \u00a74, integer rounding after Theorem 13; rational-interval realization specified here",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qa-13-certified-count-output-rounding",
+        "kind": "lemma",
+        "title": "Terminating certified rounding for a counting estimate",
+        "statement": "Given integers $N\\ge1$, even $M\\ge2$, and $0\\le y<M$, let $z=N\\sin^2(\\pi y/M)$. There is a terminating deterministic rational-interval procedure that produces an integer $q$ with $|q-z|\\le2/3$. Its arithmetic work is a classical bit cost; no polynomial bit bound is asserted.",
+        "deps": [
+          "alg-qa-13-certified-count-output-rounding",
+          "lem-qa-13-pi-rational-bounds",
+          "thm-principal-inverse-tangent-calculus",
+          "def-sine-and-cosine-by-power-series",
+          "def-qa-classical-bit-cost",
+          "lem-integer-part",
+          "thm-ratio-test",
+          "thm-alternating-series-test",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-double-angle-and-power-reduction-identities",
+          "lem-qa-13-real-cyclotomic-comparison",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "lem-nth-term-test",
+          "def-abs-value",
+          "thm-of-archimedean"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": true,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 19,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-amplitude-estimation-guarantee",
+        "kind": "theorem",
+        "title": "Amplitude-estimation additive error and success probability",
+        "statement": "For the QFT-based estimator with $M=2^m\\ge4$ and integer $k\\ge1$, its output satisfies\n$$|\\widetilde a-a|\\le\\frac{2\\pi k\\sqrt{a(1-a)}}M+\\frac{\\pi^2k^2}{M^2}$$\nwith probability at least $8/\\pi^2$ when $k=1$, and with probability strictly greater than $1-1/[2(k-1)]$ when $k\\ge2$. In particular the $k=1$ error is at most $\\pi/M+\\pi^2/M^2$. At $a=0$ the output is exactly zero; at $a=1$ it is exactly one.\n\nFor every allowed access instance and $M=2^m\\ge4$, the prescribed signed controlled circuit and its exact real cyclotomic output are well-defined, retaining the controlled relative phase and separately charged classical output processing.",
+        "deps": [
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "lem-qa-13-grover-eigenphase-relation",
+          "lem-qa-13-two-nearest-phase-mass",
+          "thm-qa-phase-estimation-success-and-tail",
+          "thm-qa-phase-estimation-superposition-law",
+          "lem-qa-phase-estimation-sine-chord-bounds",
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "def-qa-circular-phase-distance",
+          "lem-integer-part",
+          "thm-qa-phase-estimation-exact-grid",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "thm-ftc-first-part",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-cofunction-supplementary-and-reflection-identities",
+          "def-qa-13-amplitude-estimation-task",
+          "def-qa-eigenphase-estimation-model",
+          "alg-qa-quantum-phase-estimation",
+          "thm-qa-phase-estimation-access-cost",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "thm-qc-standalone-global-phase-invariance",
+          "thm-qc-controlled-global-phase-is-relative-phase",
+          "thm-qc-reflection-unitary-involution",
+          "def-qa-classical-bit-cost",
+          "lem-qa-13-real-cyclotomic-comparison"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 20,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-iterative-likelihood-query-count",
+        "kind": "theorem",
+        "title": "Exact query count for the finite-grid iterative estimator",
+        "statement": "Across the finite-grid schedule with $K\\ge1$ and $S\\ge1$, forward $A$ calls equal $S\\sum_{k=0}^K(m_k+1)$, inverse $A^*$ calls equal $S\\sum_{k=0}^K m_k$, and both zero-input reflections and good-predicate reflections equal $S\\sum_{k=0}^K m_k$. Thus the total number of $A/A^*$ calls is $S\\sum_{k=0}^K(2m_k+1)=S(1+\\sum_{k=1}^K(2^k+1))=O(S2^K)$. This count gives no finite-sample success guarantee.\n\nFor all integers $K,S,J\\ge1$, the finite-grid procedure terminates and returns a uniquely determined exact algebraic output under its least-label tie rule. Its displayed factors are the Bernoulli likelihood factors of the prescribed independent shots; no finite-sample accuracy guarantee is asserted.",
+        "deps": [
+          "alg-qa-13-iterative-likelihood-amplitude-estimation",
+          "def-qa-12-prepared-success-subspace",
+          "def-qa-quantum-query-complexity",
+          "def-qa-13-amplitude-estimation-task",
+          "alg-qa-12-amplitude-amplification",
+          "lem-qa-13-grover-eigenphase-relation",
+          "def-qc-projective-measurement",
+          "def-qa-quantum-query-algorithm",
+          "lem-qa-13-real-cyclotomic-comparison",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-double-angle-and-power-reduction-identities"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Suzuki et al., Amplitude estimation without phase estimation, complete article, \u00a7\u00a72\u20133.2",
+              "url": "https://arxiv.org/pdf/1904.10246"
+            }
+          ]
+        },
+        "dependency_level": 20,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-13-counting-zero-outcome-kernel",
+        "kind": "lemma",
+        "title": "Exact zero-label probability for counting",
+        "statement": "For a fresh Count run with $L=2^\\ell\\ge2$ and $\\theta=\\arcsin\\sqrt{t/N}$, the QPE label is zero exactly when the raw count estimate is zero. If $0<t<N$, then\n$$\\Pr(y=0)=\\frac{\\sin^2(L\\theta)}{L^2\\sin^2\\theta}.$$\nFor $t=0$ this probability is $1$; when $L=2$ and $0<t<N$ it is $\\cos^2\\theta$.",
+        "deps": [
+          "alg-qa-13-counting-from-amplitude-estimation",
+          "lem-qa-13-grover-eigenphase-relation",
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-cofunction-supplementary-and-reflection-identities",
+          "thm-qa-phase-estimation-superposition-law"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": true,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 21,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-amplitude-estimation-query-complexity",
+        "kind": "theorem",
+        "title": "Amplitude-estimation query and precision complexity",
+        "statement": "For $M=2^m\\ge4$, repeated controlled-$Q$ access uses exactly $M-1$ controlled-$Q$ applications in one run; each expands to one call each to controlled $A$, controlled $A^*$, controlled $S_0$, controlled $S_{\\rm good}$, and the control phase. Supplied controlled-power access uses exactly $m$ power queries and reports their separate costs. With fixed success probability, additive amplitude error $\\epsilon\\in(0,1]$ is obtained with $M=\\Theta(1/\\epsilon)$, hence $O(1/\\epsilon)$ repeated controlled-$Q$ calls; state preparation, ordinary gates, and classical encoding are separate costs.",
+        "deps": [
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "thm-qa-13-amplitude-estimation-guarantee",
+          "thm-qa-phase-estimation-access-cost",
+          "def-qa-quantum-query-complexity",
+          "def-qa-13-amplitude-estimation-task"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 21,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-counting-error-guarantee",
+        "kind": "theorem",
+        "title": "Quantum counting error and boundary cases",
+        "statement": "For an integer $n\\ge0$, $N=2^n$, $t$ marked addresses among $N$, and $M=2^m\\ge4$, the raw estimate satisfies\n$$|\\widetilde t-t|\\le\\frac{2\\pi k\\sqrt{t(N-t)}}M+\\frac{\\pi^2k^2N}{M^2}$$\nwith the same success probabilities as the amplitude-estimation theorem for integer $k\\ge1$. If $t=0$, the raw estimate is zero with certainty. If $t=N$, the raw estimate is $N$ with certainty because $M$ is even.\n\nFor every integer $n\\ge0$ and dyadic $M\\ge2$, the counting procedure is well-defined, prepares the uniform state with exactly $n$ ordinary Hadamards, specializes the task amplitude to $a=t/N$, and returns the exact algebraic pair $(\\widetilde a,N\\widetilde a)$ with separately charged optional rounding. Its one-phase-qubit $M=2$ branch is included in this well-definedness claim; the error guarantee above concerns $M\\ge4$.",
+        "deps": [
+          "alg-qa-13-counting-from-amplitude-estimation",
+          "thm-qa-13-amplitude-estimation-guarantee",
+          "lem-qa-13-grover-eigenphase-relation",
+          "thm-qa-phase-estimation-exact-grid",
+          "def-qa-13-amplitude-estimation-task",
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "alg-qa-quantum-phase-estimation",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "def-qa-classical-bit-cost"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 21,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-median-confidence-guarantee",
+        "kind": "theorem",
+        "title": "Explicit median confidence guarantee for amplitude estimation",
+        "statement": "For rational $0<\\epsilon\\le1$ and $0<\\delta<1$, the median procedure of [[alg-qa-13-median-confidence-estimation]] returns $\\widetilde a$ with $|\\widetilde a-a|\\le\\epsilon$ with probability at least $1-\\delta$.\n\nBoth rational scheduling loops terminate at their least prescribed values, and the odd finite list has a well-defined exact algebraic middle order statistic. Its phase-register size is admissible for the one-run estimator; preparations, queries and comparison bit work retain their separately declared costs.",
+        "deps": [
+          "alg-qa-13-median-confidence-estimation",
+          "thm-qa-13-amplitude-estimation-guarantee",
+          "lem-chernoff-bound-for-independent-bernoulli-trials",
+          "lem-qa-13-pi-rational-bounds",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "cor-mean-value-theorem",
+          "alg-qa-13-phase-estimation-amplitude-estimation",
+          "def-qa-classical-bit-cost",
+          "lem-qa-13-real-cyclotomic-comparison",
+          "def-qa-quantum-query-algorithm",
+          "def-nat-power",
+          "thm-induction-principle",
+          "thm-of-archimedean"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 21,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-13-relative-approximate-counting",
+        "kind": "algorithm",
+        "title": "Relative approximate counting with unknown marked count",
+        "statement": "**Input.** A Boolean predicate on $N=2^n\\ge1$ addresses with an integer $n\\ge0$, the fully declared controlled counting access model, and rational $0<\\epsilon\\le1$.\n\nSet $\\ell=0$. Repeatedly increment $\\ell$, set $L=2^\\ell$, run a fresh Count$(f,L)$, and stop exactly when its label $y$ is nonzero or $L^2\\ge4N$. The test $y\\ne0$ is an exact finite label test. Initialize $m=0$ and $M=1$; repeatedly increment $m$ and double $M$ while $M<[20(22/7)^2/\\epsilon]L$, using exact rational comparison, so that $M=2^m$. Run a fresh Count$(f,M)$ and run [[alg-qa-13-certified-count-output-rounding]] on $(N,M,y)$ to output an integer within $2/3$ of its exact algebraic count estimate, as proved by [[lem-qa-13-certified-count-output-rounding]]. The scale loop returns the least power of two meeting its rational threshold; all scales are powers of two and the multiplier grows as $1/\\epsilon$ times $L$.",
+        "deps": [
+          "alg-qa-13-counting-from-amplitude-estimation",
+          "lem-qa-13-counting-zero-outcome-kernel",
+          "lem-qa-13-certified-count-output-rounding",
+          "lem-qa-13-pi-rational-bounds",
+          "def-qa-classical-bit-cost",
+          "def-nat-power",
+          "thm-induction-principle",
+          "thm-of-archimedean",
+          "alg-qa-13-certified-count-output-rounding"
+        ],
+        "justified_by": [
+          "thm-qa-13-relative-counting-success"
+        ],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers."
+      },
+      {
+        "id": "thm-qa-13-counting-query-complexity",
+        "kind": "theorem",
+        "title": "Quantum counting query complexity",
+        "statement": "For an integer $n\\ge0$, $N=2^n$, and a power of two $M=2^m\\ge4$, Count uses exactly $M-1$ repeated controlled-Grover calls, or exactly $m$ supplied controlled-power queries, in addition to its $n$ ordinary Hadamards for uniform-state preparation. At fixed success probability, additive count error $\\epsilon_c\\in(0,N]$ is obtained using $O(N/\\epsilon_c)$ repeated controlled-Grover calls; additive fraction error $\\epsilon_f\\in(0,1]$ uses $O(1/\\epsilon_f)$. The count-dependent error bound retains the terms $2\\pi k\\sqrt{t(N-t)}/M$ and $\\pi^2k^2N/M^2$. Algebraic output encoding and integer rounding have separate classical bit costs.",
+        "deps": [
+          "alg-qa-13-counting-from-amplitude-estimation",
+          "thm-qa-13-counting-error-guarantee",
+          "thm-qa-13-amplitude-estimation-query-complexity",
+          "thm-qa-13-amplitude-estimation-guarantee",
+          "def-qa-quantum-query-complexity",
+          "def-qa-classical-bit-cost"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-median-confidence-query-cost",
+        "kind": "theorem",
+        "title": "Median amplitude-estimation query cost",
+        "statement": "In the repeated controlled-$Q$ access mode, the median estimator uses exactly $r(M-1)$ controlled-$Q$ calls. With the explicit thresholds in [[alg-qa-13-median-confidence-estimation]], this is $O(\\epsilon^{-1}(1+\\ln(1/\\delta)))$ calls. For the conventional range $0<\\delta\\le1/2$, this is $O(\\epsilon^{-1}\\ln(1/\\delta))$. Controlled $A$, controlled $A^*$, controlled predicate reflections, state preparation, gate counts, and classical order-statistic work are separately charged.",
+        "deps": [
+          "alg-qa-13-median-confidence-estimation",
+          "thm-qa-13-median-confidence-guarantee",
+          "thm-qa-13-amplitude-estimation-query-complexity",
+          "def-qa-quantum-query-complexity",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "cor-mean-value-theorem"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-relative-counting-query-cost",
+        "kind": "theorem",
+        "title": "Relative approximate counting query complexity",
+        "statement": "For an integer $n\\ge0$, $N=2^n$, a predicate with $0\\le t\\le N$ marked addresses, and rational $0<\\epsilon\\le1$, in the repeated controlled-$Q$ access mode the dyadic relative-counting procedure uses expected $O(\\epsilon^{-1}\\sqrt{N/t})$ controlled-$Q$ calls when $t>0$, and exactly one controlled membership-reflection call per such controlled Grover call. Each controlled $Q$ additionally uses its declared controlled $A$, controlled $A^*$, controlled $S_0$, and control phase. For $t=0$, this implementation uses $O(\\sqrt N/\\epsilon)$ controlled-$Q$ calls: the rough loop reaches its $L^2\\ge4N$ cutoff, and the final estimator still uses $M=\\Theta(L/\\epsilon)$. State preparation, gates, and certified classical rounding are separate.",
+        "deps": [
+          "alg-qa-13-relative-approximate-counting",
+          "lem-qa-13-counting-zero-outcome-kernel",
+          "def-qa-13-amplitude-estimation-task",
+          "def-qa-quantum-query-complexity",
+          "thm-qa-phase-estimation-access-cost",
+          "def-nat-power",
+          "thm-induction-principle",
+          "thm-of-archimedean",
+          "lem-qa-13-grover-eigenphase-relation",
+          "thm-qa-phase-estimation-exact-grid",
+          "alg-qa-13-counting-from-amplitude-estimation"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 23,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-13-relative-counting-success",
+        "kind": "theorem",
+        "title": "Relative approximate counting success guarantee",
+        "statement": "For the dyadic relative-counting procedure with rational $0<\\epsilon\\le1$, if $t>0$ its integer output is within $\\epsilon t$ of $t$ with probability at least $2/3$. If $t=0$, every rough and final Count output is exactly zero, the loop stops at its finite cutoff, and the output is zero with certainty.\n\nFor every stated input, both dyadic scheduling loops terminate and the final certified integer rounding terminates. The final scale is the least dyadic value at least $T=[20(22/7)^2/\\epsilon]L$, hence $T\\le M<2T$ and $M\\ge20\\pi^2L/\\epsilon$. Fresh preparations and all controlled access and bit costs remain as declared.",
+        "deps": [
+          "alg-qa-13-relative-approximate-counting",
+          "thm-qa-13-counting-error-guarantee",
+          "lem-qa-13-counting-zero-outcome-kernel",
+          "lem-qa-13-pi-rational-bounds",
+          "lem-qa-phase-estimation-sine-chord-bounds",
+          "def-sine-and-cosine-by-power-series",
+          "thm-alternating-series-test",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-mean-value-theorem",
+          "alg-qa-13-counting-from-amplitude-estimation",
+          "lem-qa-13-certified-count-output-rounding",
+          "def-qa-classical-bit-cost",
+          "def-nat-power",
+          "thm-induction-principle",
+          "thm-of-archimedean"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 23,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2239,
+    "id": "amplitude-estimation-and-counting-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Amplitude Estimation and Counting \u2014 Examples",
+    "companion": "amplitude-estimation-and-counting",
+    "requires": [
+      "amplitude-estimation-and-counting"
+    ],
+    "items": [
+      {
+        "id": "cex-qa-13-controlled-powers-are-not-free",
+        "kind": "counterexample",
+        "title": "A bare unitary oracle does not supply controlled powers for free",
+        "statement": "A query bound stated in controlled powers of a unitary can always be read as the same gate or query bound for a bare uncontrolled unitary oracle, without separately supplying or charging controlled access.",
+        "deps": [
+          "thm-qa-13-amplitude-estimation-query-complexity",
+          "def-qc-controlled-unitary-access",
+          "def-qa-13-amplitude-estimation-task"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-13-counting-error-regimes",
+        "kind": "example",
+        "title": "Counting bounds at zero, one, half, and all marked",
+        "statement": "Take $N=16$, $M=4$, and $k=1$. Evaluate the generic raw count error expression at $t=0,1,8,16$ and compare it with the endpoint certainty claims.",
+        "deps": [
+          "alg-qa-13-counting-from-amplitude-estimation",
+          "thm-qa-13-counting-error-guarantee"
+        ],
+        "justified_by": [],
+        "design_row": "QA13",
+        "local_addition": false,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brassard, H\u00f8yer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, complete article, \u00a7\u00a74\u20135, Theorems 11\u201318",
+              "url": "https://arxiv.org/pdf/quant-ph/0005055"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, complete lecture notes, \u00a7\u00a719.1\u201319.3",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, complete 239-page notes, \u00a77.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "axiom_use": "No choice axiom is used; all constructions and measurement schedules are finite, and the analytic estimates use the stated real-analysis suppliers.",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

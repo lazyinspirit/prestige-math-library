@@ -1,0 +1,236 @@
+
+[PDF page 6]
+amplitudes. Again, one can solve the problem by restricting the elementary quantum operations
+to a universal set. However, unlike in the randomized setting, there is no single standard universal
+set like the unbiased coin ﬂip with which all quantum algorithms are easy to describe. Algorithm
+designers should be allowed to use arbitrary local operations provided they do not smuggle hard-
+to-compute information into the amplitudes.
+Absolute halting. In order to measure time complexity, we should use a model that naturally
+allows any algorithm to halt absolutely within some time bound t. In the randomized setting, one
+can design algorithms whose running times are random variables and may actually run forever. We
+can handle such algorithms by clocking them, so that they are forced to halt within some ﬁxed
+number of time steps. Our quantum model should provide a similar mechanism.
+2.2
+Earlier Models
+Now that we have spelled out the relevant issues and criteria, we consider several previously studied
+models as candidates.
+Bernstein and Vazirani [3] laid the foundations for studying quantum complexity theory using
+quantum Turing machines. Their model uses a single tape and therefore cannot handle sublinear
+space bounds. Like classical one-tape Turing machines, their model is sequential-access. It does
+not allow intermediate measurements. On the other hand, their model is fully nonoblivious: the
+transition function produces a superposition over basis conﬁgurations, and the state and tape head
+location may be diﬀerent for diﬀerent components of the superposition. Their model represents the
+self-suﬃcient extreme of the classical control spectrum. In their paper, Bernstein and Vazirani prove
+that their model is syntactic by giving a few orthogonality constraints on the entries of the transition
+function table that are necessary and suﬃcient for the overall evolution to be unitary.
+These
+conditions are somewhat unnatural, and can be traced back to the possibility of nonobliviousness
+to the quantum computation path. Bernstein and Vazirani restrict the transition amplitudes by
+requiring that the ﬁrst k bits of each amplitude are computable deterministically in time poly(k).
+Their model is nontrivial to clock; they require that the transition function be designed in such
+a way that the machine always halts, meaning that it reaches a superposition in which all non-
+halting basis conﬁgurations have zero amplitude. Bernstein and Vazirani detail how to design such
+mechanisms.
+In [18], Watrous considers a model similar to Bernstein and Vazirani’s, but with one read-
+write work tape and a read-only input tape not counting toward the space bound. The model
+naturally allows for sublinear space bounds, but it is still sequential-access. It allows intermediate
+measurements but only for the halting mechanism: a special register is measured after each time
+step, with the outcome indicating “halt and output 1”, “halt and output 0”, or “continue”. The
+model is nonoblivious like the Bernstein-Vazirani model. It has more classical interaction due to
+the halting mechanism, but this is arguably not “classical control.” The syntax conditions on the
+transition function are similar to those for the Bernstein-Vazirani model. The results in [18] require
+the transition amplitudes to be rational, which is somewhat unappealing since one may often wish
+to use Hadamard gates, which have irrational amplitudes. Similar to the Bernstein-Vazirani model,
+the model is nontrivial to clock. In fact, the results in [18] rely on counting an inﬁnite computation
+as a rejection.
+The main issue with the above models for our purposes is their sequential-access nature. It is
+possible to handle this problem by imposing a random-access mechanism. However, the conditions
+6
+
+
+[PDF page 7]
+on the entries of the transition function table characterizing unitary evolution become more com-
+plicated and unnatural, making the model inconvenient to work with. Again, the culprit is the
+nonobliviousness to the quantum computation path. Since this behavior does not appear to be
+physically realizable in the foreseeable future anyway, the complications arising from it are in some
+sense unjustiﬁed.
+In [17], Watrous considers a diﬀerent model of space-bounded quantum computation.
+This
+model is essentially a classical Turing machine with an additional quantum work tape and a ﬁxed-
+size quantum register. Sublinear space bounds are handled by charging for the space of the classical
+work tape and the quantum work tape but not the input tape. All three tape heads move sequen-
+tially. This model handles intermediate measurements. It is oblivious to the quantum computation
+path; the state and tape head locations cannot be in superposition with the contents of the quantum
+work tape. However, the computation is nonoblivious to the classical computation history, includ-
+ing the measurement outcomes. The ﬁnite control is classical; in each step it selects a quantum
+operation and applies it to the combination of the qubit under the quantum work tape head together
+with the ﬁxed-size register. The register is needed because there is only one head on the quantum
+work tape, but a quantum operation needs to act on multiple qubits to create entanglement. The
+allowed operations come from the so-called quantum operations formalism (see Chapter 8 of [14]),
+which encompasses unitary operations and general measurements, as well as interaction with an
+external environment. Each quantum operation produces an output from a ﬁnite alphabet – the
+measurement outcome in the case of a measurement. This outcome inﬂuences the next (classical)
+transition. This model is syntactic just like classical Turing machines, with the additional step of
+testing that each quantum operation satisﬁes the deﬁnition of a valid quantum operation. For his
+constructions, Watrous needs the transition amplitudes to be algebraic. This model is trivial to
+clock, since all the control is done classically and thus the machine can halt in a ﬁxed number of
+steps, just as in the classical setting.
+The latter model is convenient to work with since the essence of the quantum aspects of a
+computation are isolated into local operations that are chosen classically and applied to a simple
+quantum register. This models the currently envisioned realizations of quantum computers. We
+adopt this model for the exposition of our results, but we need to make some modiﬁcations in order
+to address the following issues.
+• Algorithms like Grover’s require quantum access to the input, i.e., an operation that allows
+diﬀerent basis states in a superposition to access diﬀerent bits of the input simultaneously.
+On inputs of length n, this is done with a query gate that eﬀects the transformation |i⟩|b⟩7→
+|i⟩|b ⊕xi⟩where i ∈{0, 1}⌈log n⌉, b ∈{0, 1}, and xi is the ith bit of the input. The model
+from [17] does not have such an operation and thus cannot express algorithms like Grover’s.
+While this operation seems no more physically realistic than nonobliviousness to the quantum
+computation path if we view the input as stored in a classical memory, it does make sense
+when the input is actually the output of another computation. For these reasons, we include
+such an operation in our model.
+• We want our model to have random access to emphasize the fact that our time-space lower
+bound does not exploit any model artifacts due to sequential access.
+We can make the
+model from [17] random-access by allowing each of the tape heads to jump in unit time to
+a location whose address we have classically computed, just as can be done for deterministic
+and randomized Turing machines.
+7
+
+
+[PDF page 8]
+• The quantum operations used in the model from [17] are more general than we wish to
+consider. Since we are focusing on the computational aspects of the model, we choose to
+restrict the set of allowed operations to unitary operations and projective measurements in
+the computational basis. The quantum operations formalism models the evolution of open
+quantum systems, which is of information-theoretic rather than algorithmic concern and can
+be simulated with unitary operations by introducing an additional “environment” system at
+a cost in space.
+• The restriction to algebraic transition amplitudes is unnecessary in the present setting. We
+feel that a reasonable way to restrict the amplitudes is the one chosen by Bernstein and
+Vazirani; i.e., the ﬁrst k bits of each amplitude should be computable deterministically in
+time poly(k).
+2.3
+Our Model
+For concreteness, we now describe and motivate the particular model we use for the exposition of
+our arguments. Our model addresses all the issues listed in Section 2.1, and is an adaptation of
+Watrous’s model from [17], as described at the end of Section 2.2.
+In terms of obliviousness, our model corresponds to the physically realistic middle ground
+where a classical mechanism determines which quantum operation to apply based on the previous
+measurement outcomes but independent of the actual quantum computation path. Our arguments
+are robust with respect to the details of the model as long as it has the latter property. In particular,
+we can handle uniform quantum circuits. Our results also hold for more general models allowing
+nonobliviousness to the quantum computation path, but this requires more technical work; see the
+remarks in Section 3.4.
+2.3.1
+Model Deﬁnition
+We deﬁne a quantum Turing machine as follows. There are three semi-inﬁnite tapes: the input
+tape, the classical work tape, and the quantum work tape.
+Each cell on the input tape holds
+one bit or a blank symbol. Each cell on the classical work tape holds one bit. Each cell on the
+quantum work tape holds one qubit. The input tape contains the input, a string in {0, 1}n, followed
+by blanks, and the classical and quantum work tapes are initialized to all 0’s. There are a ﬁxed
+number of tape heads, each of which is restricted to one of the three tapes. There may be multiple
+heads moving independently on the same tape.
+The ﬁnite control, the operations on the classical work tape, and all head movements are
+classical; each operation on the quantum work tape can be either a unitary operation or a single-
+qubit projective measurement in the computational basis. In each step of the computation, the
+ﬁnite control of the machine is in one of a ﬁnite number of states. Each state has an associated
+classical function, which is applied to the contents of the cells under the heads on the classical work
+tape, and an associated quantum operation, which is applied to the contents of the cells under the
+heads on the quantum work tape. The next state of the ﬁnite control and the head movements are
+determined by the current state, the contents of the cells under the input tape heads and classical
+work tape heads at the beginning of the computation step, and the measurement outcome if the
+quantum operation was a measurement.
+Each head moves left one cell, moves right one cell, stays where it is, or jumps to a new location
+at a precomputed address that is written on the classical work tape between two of the classical
+8
+
+
+[PDF page 9]
+work tape heads. The latter type of move is classical random access. We also allow “quantum
+random access” to the input by optionally performing a query that eﬀects the transformation
+|i⟩|b⟩7→|i⟩|b ⊕xi⟩on the qubits between two of the quantum work tape heads, where i ∈{0, 1}∗
+is an address located on the quantum work tape, b ∈{0, 1}, and xi is the ith bit of the input of
+length n or 0 if i > n.
+Among the states of the ﬁnite control are an “accept” state and a “reject” state, which cause the
+machine to halt. Although not needed in this paper, the machine can be augmented with a one-way
+sequential-access write-only classical output tape in order to compute nonboolean functions.
+Let us motivate our model deﬁnition. In terms of physical computing systems, the input tape
+corresponds to an external input source, the classical work tape corresponds to classical memory,
+and the quantum work tape corresponds to quantum memory. The bits and qubits under the heads
+correspond to the data being operated on in the CPU.
+We use multiple heads on each tape for several reason. One reason is that creating entanglement
+requires multiple-qubit operations and hence multiple quantum work tape heads. Another reason
+is that having multiple heads oﬀers a convenient way of formalizing random access. Since we are
+studying how algorithm performance scales with the input size, addresses have non-constant length
+and thus cannot ﬁt under the tape heads all at once. A number of mechanisms are possible for
+indicating where an address is stored for random access. The one we have chosen, namely that the
+address is delimited by two tape heads, is artiﬁcial and is chosen only for convenience because it
+makes the model simple and clean. Another possible mechanism is to associate with each head a
+special index tape used for writing addresses; see [13] for a discussion of this type of model.
+A minor issue arises with our multiple head approach: an operation on a work tape may not
+be well-deﬁned if two of the heads are over the same cell. Rather than requiring programs to avoid
+this situation, which would make the model non-syntactic, we can just assume that no operation
+is performed on the violating work tape when this situation arises.
+We allow the heads to move sequentially because if we only allowed random access, then con-
+structing an address would require storing a pointer to the location where that address is stored.
+The pointer would have have nonconstant size, so we would need a pointer to that pointer, and so
+on. This chicken-and-egg problem does not appear in physical computing systems, and we explicitly
+avoid it by allowing sequential traversal of memory without having to “remember” where the head
+is.
+2.3.2
+Complexity Classes
+The running time of a quantum Turing machine at input length n is the maximum over all inputs
+of length n and over all computation paths of the number of steps before the machine halts. The
+space usage is the maximum over all inputs of length n and over all computation paths of the
+largest address of a classical work tape head or quantum work tape head during the computation.
+Either the time or the space may be inﬁnite. Note that we maximize over all computation paths,
+even ones that occur with probability 0 due to destructive interference.
+Our deﬁnition of space usage allows the space to be exponential in the running time, since in
+time t a machine can write an address that is exponential in t and move a head to that location
+using the random-access mechanism. However, the space usage can be reduced to at most the
+running time with at most a polylogarithmic factor increase in the latter by compressing the data
+9
+
+
+[PDF page 10]
+and using an appropriate data structure to store (old address, new address) pairs. (See Section
+2.3.1 of [13] for a similar construction.)
+We are now set up to deﬁne quantum complexity classes within our model.
+Deﬁnition. BQTISP(t, s) is the class of languages L such that for some quantum Turing machine
+M running in time O(t) and space O(s),
+• if x ∈L then Pr(M accepts x) ≥2
+3, and
+• if x ̸∈L then Pr(M accepts x) ≤1
+3.
+We also require that for each entry in the matrix representation of each unitary operation of M in the
+computational basis, the ﬁrst k bits of the real and imaginary parts are computable deterministically
+in time poly(k). We deﬁne BQTIME(t) similarly but without the space restriction.
+As evidence in support of our model of choice, we note that the following results hold in our
+model.
+• Recall that BPTISP(t, s) is the class of languages solvable in time O(t) and space O(s) by a
+randomized algorithm with error probability at most 1/3. Then BPTISP(t, s) ⊆BQTISP(t, s)
+holds because a quantum algorithm in our model can directly simulate a randomized algo-
+rithm; the only issue is producing unbiased coin ﬂips. For this, the simulation can apply a
+Hadamard gate to one qubit on the quantum work tape and then measure it. This qubit can
+be reused to generate as many random bits as needed.
+• Grover’s algorithm shows that OR ∈BQTISP(n1/2 · polylog(n), log n), where OR denotes
+the problem of computing the disjunction of the n input bits.
+• Shor’s algorithm shows that a nontrivial factor of an integer of bit length n can be computed
+in time O(n3 · polylog(n)) and space O(n) with error probability at most 1/3 in our model.
+3
+Time-Space Lower Bound
+In this section we prove our results. Section 3.1 contains an outline of the two main steps of the
+proof. In Section 3.2 we argue that we can restrict our attention to a special case of our model
+using a ﬁnite universal set of gates. We show in Section 3.3 how to eﬃciently simulate this special
+case on unbounded-error probabilistic algorithms.
+3.1
+Results and Proof Outline
+Using the notation introduced in Section 2.3.2, we can formalize Theorem 1 and Corollary 1 as
+follows.
+Theorem 1 (restated). For every real d and every positive real ǫ there exists a real c > 1 such
+that either:
+• MajMajSAT ̸∈BQTIME(nc), or
+• MajSAT ̸∈BQTISP(nd, n1−ǫ).
+10

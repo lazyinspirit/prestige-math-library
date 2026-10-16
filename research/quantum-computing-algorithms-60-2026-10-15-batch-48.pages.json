@@ -1,0 +1,336 @@
+[
+  {
+    "order": 2260,
+    "id": "quantum-singular-value-transformation",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Quantum Singular-Value Transformation",
+    "companion": "quantum-singular-value-transformation-examples",
+    "requires": [
+      "block-encodings",
+      "quantum-signal-processing",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "inner-product-spaces-and-orthogonality",
+      "controlled-gates-phase-and-entanglement",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "uniform-circuit-families-promise-problems-and-complexity"
+    ],
+    "items": [
+      {
+        "id": "def-qa-24-pue-svd-data",
+        "kind": "definition",
+        "title": "Projected-unitary encoding and singular vectors",
+        "deps": [
+          "def-qa-22-block-encoding",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-singular-value-decomposition",
+          "def-qc-dirac-notation-conversion",
+          "def-orthogonal-projection",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "thm-finite-dimensional-isometry-characterisations",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "dependency_level": 8,
+        "local_order": 1,
+        "axiom_use": "None; all spaces are finite-dimensional and the construction uses only a finite SVD.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-24-pue-svd-invariant-subspaces",
+        "kind": "lemma",
+        "title": "PUE singular-space invariant decomposition",
+        "deps": [
+          "def-qa-24-pue-svd-data",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "prop-adjoint-algebra",
+          "thm-singular-value-decomposition",
+          "def-orthogonal-projection",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+        ],
+        "dependency_level": 9,
+        "local_order": 2,
+        "axiom_use": "None; the decomposition is finite-dimensional and uses no choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-24-singular-value-transform",
+        "kind": "definition",
+        "title": "Odd and even singular-value transforms",
+        "deps": [
+          "def-qa-24-pue-svd-data",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [
+          "lem-qa-24-singular-transform-basis-independence"
+        ],
+        "dependency_level": 9,
+        "local_order": 3,
+        "axiom_use": "None; only finite-dimensional SVD data are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qa-24-qsvt",
+        "kind": "algorithm",
+        "title": "Quantum singular-value transformation circuit",
+        "deps": [
+          "def-qa-24-pue-svd-data",
+          "def-qa-24-singular-value-transform",
+          "def-qa-23-qsp-admissible-polynomial-pair",
+          "thm-qa-23-qsp-phase-factorization",
+          "def-qa-23-qsp-signal-sequence",
+          "def-qc-reflection",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-reflection-unitary-involution",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access"
+        ],
+        "dependency_level": 10,
+        "local_order": 4,
+        "axiom_use": "None; this is a finite sequence of supplied finite-dimensional unitary operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-24-singular-transform-basis-independence",
+        "kind": "lemma",
+        "title": "Singular-value transform is independent of SVD choices",
+        "deps": [
+          "def-qa-24-singular-value-transform",
+          "def-qa-24-pue-svd-data",
+          "thm-singular-value-decomposition",
+          "def-orthogonal-projection",
+          "prop-adjoint-algebra",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces"
+        ],
+        "dependency_level": 10,
+        "local_order": 5,
+        "axiom_use": "None; all eigenspaces and orthogonal projections are finite-dimensional.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-24-projector-phase-implementation",
+        "kind": "theorem",
+        "title": "Projector phase operations from controlled reflections",
+        "deps": [
+          "def-qa-24-pue-svd-data",
+          "def-qc-reflection",
+          "def-qc-controlled-unitary-access",
+          "thm-qc-reflection-unitary-involution",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-circuit-denotational-semantics"
+        ],
+        "dependency_level": 10,
+        "local_order": 6,
+        "axiom_use": "None; the construction uses finite-dimensional unitary matrices and exact supplied gates.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-24-qsvt-query-count",
+        "kind": "theorem",
+        "title": "QSVT signal and reflection query counts",
+        "deps": [
+          "alg-qa-24-qsvt",
+          "thm-qa-24-projector-phase-implementation",
+          "def-qc-circuit-cost-model",
+          "def-qc-controlled-unitary-access"
+        ],
+        "dependency_level": 11,
+        "local_order": 7,
+        "axiom_use": "None; the proof counts a finite sequence of declared operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-24-qsvt-singular-space-action",
+        "kind": "theorem",
+        "title": "QSVT action on singular subspaces",
+        "deps": [
+          "def-qa-24-pue-svd-data",
+          "alg-qa-24-qsvt",
+          "lem-qa-24-pue-svd-invariant-subspaces",
+          "def-qa-24-singular-value-transform",
+          "lem-qa-24-singular-transform-basis-independence",
+          "def-qa-23-qsp-signal-sequence",
+          "lem-qa-23-phase-sequence-unitarity",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-reflection-unitary-involution",
+          "lem-qa-23-hermitian-signal-convention-conversion",
+          "thm-qa-23-real-polynomial-completion",
+          "thm-qa-23-qsp-phase-factorization",
+          "thm-qa-24-projector-phase-implementation"
+        ],
+        "dependency_level": 11,
+        "local_order": 8,
+        "axiom_use": "None; the proof is a finite orthogonal decomposition and matrix multiplication.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "kind": "lemma",
+        "title": "Operator perturbation bound for QSVT",
+        "deps": [
+          "def-qa-24-pue-svd-data",
+          "def-qa-24-singular-value-transform",
+          "lem-qa-24-singular-transform-basis-independence",
+          "thm-qa-24-qsvt-singular-space-action",
+          "thm-singular-value-decomposition",
+          "def-qc-dirac-notation-conversion",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-orthogonal-projection",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "prop-adjoint-algebra",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ],
+        "dependency_level": 12,
+        "local_order": 9,
+        "axiom_use": "None; the proof uses finite SVDs, explicit finite unitary completions, and norm estimates.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-24-real-polynomial-extraction",
+        "kind": "theorem",
+        "title": "Real bounded polynomial extraction in QSVT",
+        "deps": [
+          "alg-qa-24-qsvt",
+          "thm-qa-24-qsvt-singular-space-action",
+          "thm-qa-23-real-polynomial-completion",
+          "thm-qa-23-qsp-phase-factorization",
+          "def-qa-23-qsp-signal-sequence",
+          "def-qa-23-qsp-admissible-polynomial-pair",
+          "def-qc-controlled-unitary-access",
+          "def-qc-circuit-denotational-semantics",
+          "thm-qa-24-projector-phase-implementation",
+          "thm-qa-24-qsvt-query-count",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 12,
+        "local_order": 10,
+        "axiom_use": "None; the argument uses exact finite-dimensional polynomial identities and a controlled finite circuit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-24-qsvt-error-and-resource-bound",
+        "kind": "theorem",
+        "title": "QSVT robustness, approximation error, and resources",
+        "deps": [
+          "thm-qa-24-qsvt-singular-space-action",
+          "def-qa-24-singular-value-transform",
+          "def-qa-22-block-encoding",
+          "def-qa-24-pue-svd-data",
+          "def-qc-circuit-cost-model",
+          "lem-qa-24-qsvt-robustness-amplitude-bound",
+          "thm-qa-24-qsvt-query-count",
+          "lem-qa-24-singular-transform-basis-independence",
+          "thm-singular-value-decomposition",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "prop-adjoint-algebra",
+          "def-orthogonal-projection",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+        ],
+        "dependency_level": 13,
+        "local_order": 11,
+        "axiom_use": "None; the proof uses finite SVDs, operator-norm estimates, and finite circuit products.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2261,
+    "id": "quantum-singular-value-transformation-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Quantum Singular-Value Transformation — Examples",
+    "companion": "quantum-singular-value-transformation",
+    "requires": [
+      "quantum-singular-value-transformation"
+    ],
+    "items": [
+      {
+        "id": "cex-qa-24-parity-violation",
+        "kind": "counterexample",
+        "title": "Parity violation makes singular-value action basis dependent",
+        "deps": [
+          "def-qa-24-singular-value-transform",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "dependency_level": 10,
+        "local_order": 1,
+        "axiom_use": "None; the counterexample is one-dimensional.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-24-rank-one-pue",
+        "kind": "example",
+        "title": "Rank-one PUE singular-plane calculation",
+        "deps": [
+          "lem-qa-24-pue-svd-invariant-subspaces",
+          "thm-qa-24-qsvt-singular-space-action"
+        ],
+        "dependency_level": 12,
+        "local_order": 2,
+        "axiom_use": "None; this is a finite two-by-two calculation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

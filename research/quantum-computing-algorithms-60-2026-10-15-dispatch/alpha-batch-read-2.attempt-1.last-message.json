@@ -1,0 +1,541 @@
+{
+  "group": "m",
+  "batches": ["2"],
+  "pages_read": [
+    "registers-tensor-products-and-partial-trace",
+    "registers-tensor-products-and-partial-trace-examples"
+  ],
+  "items_read": [
+    "def-qc-register-and-computational-basis",
+    "lem-qc-trace-pairing-nondegenerate",
+    "def-qc-ordered-bitstring-encoding",
+    "def-qc-tensor-register-and-permutation",
+    "thm-qc-computational-basis-orthonormal",
+    "def-qc-partial-trace",
+    "def-qc-tensor-map",
+    "lem-qc-tensor-product-basis-and-dimension",
+    "thm-qc-bitstring-index-is-bijection",
+    "thm-qc-partial-trace-characterization-and-basis-independence",
+    "thm-qc-tensor-map-composition-and-adjoint",
+    "thm-qc-wire-permutation-is-unitary",
+    "thm-qc-partial-trace-positive-and-trace-preserving",
+    "ex-qc-register-endian-partial-trace"
+  ],
+  "conventions": [
+    {
+      "convention": "Registers Q_d have positive dimension d; the zero-qubit register is the one-dimensional empty tensor product C, distinct from C^0.",
+      "fixed_by": "def-qc-register-and-computational-basis",
+      "matters_for": [
+        "thm-qc-computational-basis-orthonormal",
+        "thm-qc-bitstring-index-is-bijection",
+        "lem-qc-tensor-product-basis-and-dimension"
+      ]
+    },
+    {
+      "convention": "The root inner product is linear in its first argument and conjugate-linear in its second; tensor pairings multiply the factor pairings.",
+      "fixed_by": "def-qc-tensor-register-and-permutation",
+      "matters_for": [
+        "thm-qc-tensor-map-composition-and-adjoint",
+        "thm-qc-partial-trace-positive-and-trace-preserving",
+        "ex-qc-register-endian-partial-trace"
+      ]
+    },
+    {
+      "convention": "Factor order is retained, product bases are lexicographic, and bit position 0 is most significant: enc_n(x) = sum over k<n of x_k 2^(n-1-k). The empty word has index 0.",
+      "fixed_by": "def-qc-ordered-bitstring-encoding",
+      "matters_for": [
+        "thm-qc-bitstring-index-is-bijection",
+        "ex-qc-register-endian-partial-trace"
+      ]
+    },
+    {
+      "convention": "General tensor spaces allow zero-dimensional factors, which make the tensor space zero. The empty factor list instead gives C. P_sigma outputs the factors in order sigma(0), ..., sigma(n-1).",
+      "fixed_by": "def-qc-tensor-register-and-permutation",
+      "matters_for": [
+        "lem-qc-tensor-product-basis-and-dimension",
+        "def-qc-tensor-map",
+        "thm-qc-wire-permutation-is-unitary",
+        "thm-qc-tensor-map-composition-and-adjoint"
+      ]
+    },
+    {
+      "convention": "Partial trace contracts the second factor: its (i,i') entry is the sum over j of R_((i,j),(i',j)). Rows are outputs and columns inputs; an empty contracted index gives zero.",
+      "fixed_by": "def-qc-partial-trace",
+      "matters_for": [
+        "thm-qc-partial-trace-characterization-and-basis-independence",
+        "thm-qc-partial-trace-positive-and-trace-preserving",
+        "ex-qc-register-endian-partial-trace"
+      ]
+    },
+    {
+      "convention": "The tensor map for an empty family is the identity on C.",
+      "fixed_by": "def-qc-tensor-map",
+      "matters_for": [
+        "thm-qc-tensor-map-composition-and-adjoint"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qc-tensor-register-and-permutation",
+      "statement": "Ordered tensor spaces retain factor order, use lexicographic product bases and the product inner product, take the empty tensor product to be C, allow zero-dimensional factors, and define wire permutations by their action on product bases.",
+      "used_by": [
+        "def-qc-partial-trace",
+        "def-qc-tensor-map",
+        "lem-qc-tensor-product-basis-and-dimension",
+        "thm-qc-wire-permutation-is-unitary"
+      ]
+    },
+    {
+      "id": "lem-qc-tensor-product-basis-and-dimension",
+      "statement": "Elementary tensors of the specified ordered orthonormal factor bases form an orthonormal basis, and tensor dimensions multiply; the empty list has dimension 1 and any zero-dimensional factor gives the zero space.",
+      "used_by": [
+        "thm-qc-bitstring-index-is-bijection",
+        "thm-qc-partial-trace-characterization-and-basis-independence",
+        "thm-qc-tensor-map-composition-and-adjoint",
+        "thm-qc-wire-permutation-is-unitary",
+        "thm-qc-partial-trace-positive-and-trace-preserving",
+        "ex-qc-register-endian-partial-trace"
+      ]
+    },
+    {
+      "id": "def-qc-tensor-map",
+      "statement": "For finite ordered families of finite-dimensional complex vector spaces and linear maps, the tensor map is the unique linear map applying the factor maps to elementary tensors; the empty tensor map is the identity on C.",
+      "used_by": [
+        "thm-qc-partial-trace-characterization-and-basis-independence",
+        "thm-qc-tensor-map-composition-and-adjoint",
+        "thm-qc-partial-trace-positive-and-trace-preserving"
+      ]
+    },
+    {
+      "id": "lem-qc-trace-pairing-nondegenerate",
+      "statement": "Let V be a finite-dimensional complex vector space. If D:V→V is linear and tr(D∘A)=0 for every linear map A:V→V, then D=0. This includes the zero space.",
+      "used_by": [
+        "thm-qc-partial-trace-characterization-and-basis-independence"
+      ]
+    },
+    {
+      "id": "thm-qc-partial-trace-characterization-and-basis-independence",
+      "statement": "For finite-dimensional complex inner-product spaces H_A,H_B, partial trace is the unique linear map satisfying tr((Tr_B R)∘T)=tr(R∘(T⊗I_B)) for every R and T of the stated endomorphism spaces. Its coordinate formula is independent of the chosen ordered orthonormal basis of H_B, including zero-dimensional factors.",
+      "used_by": [
+        "thm-qc-partial-trace-positive-and-trace-preserving",
+        "ex-qc-register-endian-partial-trace"
+      ]
+    },
+    {
+      "id": "def-qc-register-and-computational-basis",
+      "statement": "For integer d≥1, Q_d=C^d has the standard first-linear inner product and ordered standard computational basis. An n-qubit register is the ordered tensor product of n copies of Q_2, with empty product C.",
+      "used_by": [
+        "def-qc-ordered-bitstring-encoding",
+        "def-qc-tensor-register-and-permutation",
+        "thm-qc-computational-basis-orthonormal",
+        "thm-qc-bitstring-index-is-bijection",
+        "ex-qc-register-endian-partial-trace"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "First-argument-linear inner-product convention and sesquilinearity.",
+      "opened": true
+    },
+    {
+      "id": "def-dimension",
+      "used_for": "Finite bases, dimension, and the zero-dimensional case.",
+      "opened": true
+    },
+    {
+      "id": "def-function-space",
+      "used_for": "Coordinate spaces C^d and their zero-based coordinates.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-basis-of-f-n",
+      "used_for": "Standard coordinate bases and unique coordinate expansions.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "Validity of the coordinate inner product, including dimension zero.",
+      "opened": true
+    },
+    {
+      "id": "def-tensor-product-of-modules-by-generators-and-relations",
+      "used_for": "Algebraic tensors, multilinearity, and spanning by elementary tensors.",
+      "opened": true
+    },
+    {
+      "id": "thm-commutative-ring-module-structure-on-a-tensor-product",
+      "used_for": "Complex-vector-space structure on algebraic tensor products.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+      "used_for": "Finite tensor-map extensions, associativity identifications, and empty tensor unit.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-map",
+      "used_for": "Linearity of tensor maps, permutations, and coordinate constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-coordinate-column-and-matrix-of-a-linear-map",
+      "used_for": "Output-row/input-column matrix conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+      "used_for": "Unique linear extensions from prescribed basis images.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-a-composite-is-the-product",
+      "used_for": "Trace-pairing and partial-trace matrix computations.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-units",
+      "used_for": "The matrix-unit witness detecting a nonzero entry in the trace pairing.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Row-by-column multiplication and empty matrix products.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Basis-independent trace and trace zero on the zero space.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Diagonal-sum trace computations.",
+      "opened": true
+    },
+    {
+      "id": "thm-tensor-product-basis-from-bases",
+      "used_for": "Product bases, including empty factor bases.",
+      "opened": true
+    },
+    {
+      "id": "cor-tensor-products-of-finite-free-modules-and-dimension",
+      "used_for": "Multiplication of finite tensor dimensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Induction proving bit-string encoding bijective.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Natural-number indexing starting at zero.",
+      "opened": true
+    },
+    {
+      "id": "lem-composition-and-identity-linear-maps",
+      "used_for": "Linearity of identities and compatible composites.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Choosing orthonormal bases, including the empty basis.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The defining adjoint identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+      "used_for": "Identifying the tensor of adjoints with the adjoint tensor map.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Distinguishing bijective isometries between reordered spaces from unitary endomorphisms.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Non-negativity requires self-adjointness and nonnegative quadratic forms.",
+      "opened": true
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "used_for": "Self-adjointness in the partial-trace positivity proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "used_for": "Showing partial trace preserves self-adjointness.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "lem-qa-tensor-extension-preserves-operator-norm",
+      "finding": "lem-qa-tensor-extension-preserves-operator-norm, Proof 3.1, says: “P and P^{-1} preserve norms, so each has operator norm 1.” Its separate conjugation clause permits a finite ordered tensor register with a zero-dimensional factor under def-qc-tensor-register-and-permutation. On that zero space, P and P^{-1} have operator norm 0 by the opened published def-operator-norm-on-a-finite-dimensional-inner-product-space. The stated conjugation equality remains true, but this proof assertion omits that boundary case.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "registers-tensor-products-and-partial-trace",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "The example uses the exact root-to-Dirac conversion and outer-product coordinate identity."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Register bases, empty words, and big-endian XOR addresses agree."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered address/target bases and zero-width registers agree."
+    },
+    {
+      "from": "exact-oracle-algorithms",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Hadamard tensor actions and lexicographic address labels agree."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Binary weights, reversal, tensor extensions, and permutation isometries agree; the separate downstream zero-space proof gap is alerted."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Phase-wire weights, factorwise maps, adjoints, and discarded registers agree."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Unsigned computational-basis encoding and ordered arithmetic registers agree."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Concatenated big-endian codes, orthonormal product bases, and output-register contraction agree."
+    },
+    {
+      "from": "grover-search-and-invariant-plane-rotations",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Address-slot bijection and orthonormal address/response product bases agree."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "N-level addresses and response/work product bases use the supplied finite-register conventions."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "The one-based address labels are explicitly identified with e_(i-1); orthogonality uses agree."
+    },
+    {
+      "from": "discrete-quantum-walks-and-szegedy-theory",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "The access-cost proof uses the supplied ordered product bases and factor permutations."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "The QRAM basis action is an involutive permutation with fixed unused encodings."
+    },
+    {
+      "from": "continuous-time-quantum-walks",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Local X tensor extensions and the zero-qubit tensor unit agree."
+    },
+    {
+      "from": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Clean injections use unit basis vectors and product pairings; partial-trace duality is quoted accurately."
+    },
+    {
+      "from": "block-encodings",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ancillas precede the system; zero ancilla width means a one-dimensional ancilla factor."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Finite domain/codomain registers and the declared big-endian phase-register order agree."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Distinct sample labels are orthogonal and tensor pairings factor in the declared order."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "The reference-state preparation uses ordered orthonormal computational bases."
+    },
+    {
+      "from": "period-hidden-shift-and-number-theoretic-algorithms",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Finite bit labels, factorwise pairings, and discarded second-factor indices agree."
+    },
+    {
+      "from": "quantum-complexity-classes-and-oracle-separations",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Simon register instruments and tensor gates retain the supplied basis and factor order."
+    },
+    {
+      "from": "qma-verification-and-local-hamiltonian",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Acceptance-effect contraction quotes the trace characterization accurately; repetition uses factorwise tensor maps."
+    },
+    {
+      "from": "quantum-communication-and-fingerprinting",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Fingerprint bases, tensor pairings, composition, and adjoints agree."
+    },
+    {
+      "from": "adiabatic-computation-and-circuit-equivalence",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Clock discard contracts diagonal clock blocks; positivity and trace preservation are quoted accurately."
+    },
+    {
+      "from": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Schmidt and purification arguments retain product pairing, auxiliary-factor order, and basis-independent partial trace."
+    },
+    {
+      "from": "measurements-povms-and-instruments",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Finite ancilla block maps and Naimark embeddings use ordered orthonormal product bases."
+    },
+    {
+      "from": "channels-kraus-choi-and-stinespring-representations",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Trace-pairing uniqueness, input-first Choi order, environment contraction, and tensor adjoints agree."
+    },
+    {
+      "from": "trace-distance-fidelity-and-information-limits",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Marginal trace identities and tensor rules agree; symmetric permutations explicitly respect the output-order composition convention."
+    },
+    {
+      "from": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "The qubit space and orthonormal computational basis agree."
+    },
+    {
+      "from": "controlled-gates-phase-and-entanglement",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Control-first product bases and factorwise maps agree."
+    },
+    {
+      "from": "circuit-syntax-denotational-semantics-and-measurement",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Wire order, local embeddings, trace-pairing uniqueness, and record-register contraction agree."
+    },
+    {
+      "from": "reversible-computation-ancillas-and-coherent-oracles",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Basiswise reversible actions extend linearly with the supplied empty-register and encoding conventions."
+    },
+    {
+      "from": "continuous-gate-universality-and-exact-synthesis",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered bit labels and orthonormal bases support the stated basiswise gate identities."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Input encoding, output-first permutation, and summation over unmeasured wires agree."
+    },
+    {
+      "from": "pauli-and-clifford-groups-binary-symplectic-tableaux",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "One-based wire names explicitly translate to zero-based positions; tensor products and adjoints agree."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Computational labels, tensor actions, and the zero-qubit boundary agree."
+    },
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Bell basis order, local Hadamard tensor actions, and reference-factor ordering agree."
+    },
+    {
+      "from": "classical-and-quantum-error-correcting-codes",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Support reordering uses bijective isometries between the declared ordered tensor spaces."
+    },
+    {
+      "from": "knill-laflamme-recovery-and-subsystem-codes",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "First-factor partial trace is explicitly obtained by swapping before the supplied second-factor trace."
+    },
+    {
+      "from": "stabilizer-css-codes-syndromes-and-procedures",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "CSS basis labels and ordered local Pauli products agree."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Vertex order, measurement contractions, tensor-unit identifications, and empty graph registers agree."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Amplitude-table order, zero-prefix indices, workspace permutations, and tensor embeddings agree."
+    }
+  ]
+}

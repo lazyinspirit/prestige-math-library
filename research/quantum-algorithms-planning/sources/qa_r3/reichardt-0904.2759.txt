@@ -1,0 +1,7133 @@
+Span programs and quantum query complexity:
+The general adversary bound is nearly tight
+for every boolean function
+
+Ben W. Reichardt∗
+
+Abstract
+
+The general adversary bound is a semi-definite program (SDP) that lower-bounds the quan-
+tum query complexity of a function. We turn this lower bound into an upper bound, by giving a
+quantum walk algorithm based on the dual SDP that has query complexity at most the general
+adversary bound, up to a logarithmic factor.
+In more detail, the proof has two steps, each based on “span programs,” a certain linear-
+algebraic model of computation. First, we give an SDP that outputs for any boolean function a
+span program computing it that has optimal “witness size.” The optimal witness size is shown
+to coincide with the general adversary lower bound. Second, we give a quantum algorithm for
+evaluating span programs with only a logarithmic query overhead on the witness size.
+
+The first result is motivated by a quantum algorithm for evaluating composed span programs.
+The algorithm is known to be optimal for evaluating a large class of formulas. The allowed gates
+include all constant-size functions for which there is an optimal span program. So far, good
+span programs have been found in an ad hoc manner, and the SDP automates this procedure.
+Surprisingly, the SDP’s value equals the general adversary bound. A corollary is an optimal
+quantum algorithm for evaluating “balanced” formulas over any finite boolean gate set.
+The second result broadens span programs’ applicability beyond the formula evaluation
+problem. We extend the analysis of the quantum algorithm for evaluating span programs. The
+previous analysis shows that a corresponding bipartite graph has a large spectral gap, but only
+works when applied to the composition of constant-size span programs. We show generally that
+properties of eigenvalue-zero eigenvectors in fact imply an “effective” spectral gap around zero.
+
+A strong universality result for span programs follows. A good quantum query algorithm for
+a problem implies a good span program, and vice versa. Although nearly tight, this equivalence
+is nontrivial. Span programs are a promising model for developing more quantum algorithms.
+
+∗School of Computer Science and Institute for Quantum Computing, University of Waterloo.
+
+1
+
+arXiv:0904.2759v1  [quant-ph]  17 Apr 2009
+
+
+Contents
+
+1
+Introduction
+3
+
+2
+Definitions
+6
+2.1
+Span programs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+2.2
+Adversary lower bounds . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+
+3
+Example: Span programs based on one-sided-error quantum query algorithms
+11
+
+4
+Span program manipulations
+14
+4.1
+Span program complementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+4.2
+Tensor-product and direct-sum span program composition . . . . . . . . . . . . . . .
+16
+4.3
+Strict and real span programs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+
+5
+Canonical span programs
+25
+
+6
+Span program witness size and the general adversary bound
+27
+
+7
+Consequences of the SDP for optimal witness size
+30
+
+8
+Correspondence between span programs and bipartite graphs
+33
+8.1
+Eigenvalue-zero spectral analysis of the graphs GP (x)
+. . . . . . . . . . . . . . . . .
+36
+8.2
+Small-eigenvalue spectral analysis of the graphs GP (x) . . . . . . . . . . . . . . . . .
+37
+8.3
+Proofs of Theorem 8.3 and Theorem 8.4 . . . . . . . . . . . . . . . . . . . . . . . . .
+42
+
+9
+Quantum algorithm for evaluating span programs
+43
+9.1
+Algorithm using the Szegedy correspondence
+. . . . . . . . . . . . . . . . . . . . . .
+45
+9.2
+Discrete-time simulation of a continuous-time algorithm . . . . . . . . . . . . . . . .
+49
+
+10 The general quantum adversary bound is nearly tight for every boolean function 54
+
+11 Open problems
+55
+
+A Optimal span programs for the Hamming-weight threshold functions
+59
+A.1 Span programs for the threshold functions T n
+l
+. . . . . . . . . . . . . . . . . . . . . .
+61
+A.2 Span programs for the interval functions In
+l,m
+. . . . . . . . . . . . . . . . . . . . . .
+62
+A.3 Adversary bounds for the interval functions In
+l,m . . . . . . . . . . . . . . . . . . . . .
+63
+
+B Examples of composed span programs
+67
+
+2
+
+
+1
+Introduction
+
+Quantum algorithms for evaluating formulas have developed rapidly since the breakthrough AND-
+OR formula-evaluation algorithm [FGG07]. The set of allowed gates in the formula has increased
+from just AND and OR gates to include all boolean functions on up to three bits, e.g., the three-
+majority function, and many four-bit functions—with certain technical balance conditions. Op-
+erationally, these new algorithms can be interpreted as evaluating “span programs,” a certain
+linear-algebraic computational model [KW93]. Discovering an optimal span program for a function
+immediately allows it to be added to the gate set [RˇS08].
+This paper is motivated by three main puzzles:
+
+1. Can the gate set allowed in the formula-evaluation algorithm be extended further? Given
+that the search for optimal span programs has been entirely ad hoc, yet still quite successful,
+it seems that the answer must be yes. How far can it be extended, though?
+
+2. What is the relationship between span program complexity, or “witness size,” and the adver-
+sary lower bounds on quantum query complexity? There are two different adversary bounds,
+Adv ≤Adv±, but the power of the latter is not fully understood. Span program witness size
+appears to be closely connected to these bounds. For example, so far all known optimal span
+programs are for functions f with Adv(f) = Adv±(f).
+
+3. Aside from their applications to formula evaluation, can span programs be used to derive
+other quantum algorithms?
+
+Our first result answers the first two questions. Unexpectedly, we find that for any boolean func-
+tion f, the optimal span program has witness size equal to the general adversary bound Adv±(f).
+This result is surprising because of its broad scope. It allows us to optimally evaluate formulas over
+any finite gate set, quantumly. Classically, optimal formula-evaluation algorithms are known only
+for a limited class of formulas using AND and OR gates, and a few other special cases.
+This result suggests a new technique for developing quantum algorithms for other problems.
+Based on the adversary lower bound, one can construct a span program, and hopefully turn this
+into an algorithm, i.e., an upper bound. Unfortunately, it has not been known how to evaluate
+general span programs. The second result of this paper is a quantum algorithm for evaluating span
+programs, with only a logarithmic query overhead on the witness size. The main technical difficulty
+is showing that a corresponding bipartite graph has a large spectral gap. We show that properties
+of eigenvalue-zero eigenvectors in fact imply an “effective” spectral gap around zero.
+In combination, the two results imply that the general quantum adversary bound, Adv±, is tight
+up to a logarithmic factor for every boolean function. This is surprising because Adv± is closely
+connected to the nonnegative-weight adversary bound Adv, which has strong limitations.
+The
+results also imply that quantum computers, measured by query complexity, and span programs,
+measured by witness size, are equivalent computational models, up to a logarithmic factor.
+
+Some further background material is needed to place the results in context.
+
+Quantum algorithms for evaluating formulas
+
+Farhi, Goldstone and Gutmann in 2007 gave a nearly optimal quantum query algorithm for eval-
+uating balanced binary AND-OR formulas [FGG07, CCJY07]. This was extended by Ambainis et
+
+3
+
+
+al. to a nearly optimal quantum algorithm for evaluating all AND-OR formulas, and an optimal
+quantum algorithm for evaluating “approximately balanced” AND-OR formulas [ACR+07].
+Reichardt and ˇSpalek gave an optimal quantum algorithm for evaluating “adversary-balanced”
+formulas over a considerably extended gate set [RˇS08], including in particular:
+
+• All functions {0, 1}n →{0, 1} for n ≤3, such as AND, OR, PARITY and MAJ3.
+
+• 69 of the 92 inequivalent functions f : {0, 1}4 →{0, 1} with Adv(f) = Adv±(f) (Defini-
+tion 2.4).
+
+They derived this result by generalizing the previous approaches to consider span programs,
+a computational model introduced by Karchmer and Wigderson [KW93]. They then derived a
+quantum algorithm for evaluating certain concatenated span programs, with a query complexity
+upper-bounded by the span program witness size (Definition 2.3). Thus in fact the allowed gate
+set includes all functions f : {0, 1}n →{0, 1}, with n = O(1), for which we have a span program P
+computing f and with witness size wsize(P) = Adv±(f) (Definition 2.4). A special case of [RˇS08,
+Theorem 4.7] is:
+
+Theorem 1.1 ([RˇS08]). Fix a function f : {0, 1}n →{0, 1}. For k ∈N, define fk : {0, 1}nk →
+{0, 1} as follows: f1 = f and fk(x) = f
+�
+fk−1(x1, . . . , xnk−1), . . . , fk−1(xnk−nk−1+1, . . . , xnk)
+�
+for
+k > 1. If span program P computes f, then
+
+Q(fk) = O(wsize(P)k) ,
+(1.1)
+
+where Q(fk) is the bounded-error quantum query complexity of fk.
+
+[RˇS08] followed an ad hoc approach to finding optimal span programs for various functions.
+Although successful so far, continuing this method seems daunting:
+
+• For most functions f, probably Adv±(f) > Adv(f). Indeed, there are 222 four-bit boolean
+functions, up to the natural equivalences, and for only 92 of them does Adv± = Adv hold.
+For no function with a gap has a span program matching Adv±(f) been found. This suggests
+that perhaps span programs can only work well for the rare cases when Adv± = Adv.
+
+• Moreover, for all the functions for which we know an optimal span program, it turns out
+that an optimal span program can be built just by using AND and OR gates with optimized
+weights. (This fact has not been appreciated; see Appendix A.) On the other hand, there is
+no reason to think that optimal span programs will in general have such a limited form.
+
+• Finally, it can be difficult to prove a span program’s optimality. For several functions, we
+have found span programs whose witness sizes match Adv numerically, but we lack a proof.
+
+In any case, the natural next step is to try to automate the search for good span programs.
+A main difficulty is that there is considerable freedom in the span program definition, e.g., span
+programs are naturally continuous, not discrete. The search space needs to be narrowed down.
+We show that it suffices to consider span programs written in so-called “canonical” form. This
+form was introduced by [KW93], but its significance for developing quantum algorithms was not
+at first appreciated. We then find a semi-definite program (SDP) for varying over span programs
+written in canonical form, optimizing the witness size. This automates the search for span programs.
+Remarkably, the SDP has a value that corresponds exactly to the general adversary bound
+Adv±, in a new formulation. Thus we characterize optimal span program witness size:
+
+4
+
+
+Theorem 1.2. For any function f : {0, 1}n →{0, 1},
+
+inf
+P wsize(P) = Adv±(f) ,
+(1.2)
+
+where the infimum is over span programs P computing f. Moreover, this infimum is achieved.
+
+This result greatly extends the gate set over which the formula-evaluation algorithm of [RˇS08]
+works optimally. In fact, it allows the algorithm to run on formulas with any finite gate set. A
+factor is lost that depends on the gates, but for a finite gate set, this will be a constant. As another
+corollary, Theorem 1.2 also settles the question of how the general adversary bound behaves under
+function composition, and it implies a new upper bound on the sign-degree of boolean functions.
+
+Quantum algorithm for evaluating span programs
+
+Now that we know there are span programs with witness size matching the general adversary bound,
+it is of considerable interest to extend the formula-evaluation algorithm to evaluate arbitrary span
+programs. Unfortunately, though, a key theorem from [RˇS08] does not hold general span programs.
+The [RˇS08] algorithm works by plugging together optimal span programs for the individual
+gates in a formula ϕ to construct a composed span program P that computes ϕ. Then a family of
+related graphs GP (x), one for each input x, is constructed. For an input x, the algorithm starts
+at a particular “output vertex” of the graph, and runs a quantum walk for about 1/wsize(P) steps
+in order to compute ϕ(x). The algorithm’s analysis has two parts. First, for completeness, it is
+shown that when ϕ(x) = 1, there exists an eigenvalue-zero eigenvector of the weighted adjacency
+matrix AGP (x) with large support on the output vertex. Second, for soundness, it is shown that
+if ϕ(x) = 0, then AGP (x) has a spectral gap of Ω(1/wsize(P)) for eigenvectors supported on the
+output vertex. This spectral gap determines the algorithm’s query complexity.
+The completeness step of the proof comes from relating the definition of GP (x) to the wit-
+ness size definition. Eigenvalue-zero eigenvectors correspond exactly to span program “witnesses,”
+with the squared support on the output vertex corresponding to the witness size. This argument
+straightforwardly extends to arbitrary span programs.
+For soundness, the proof essentially inverts the matrix AGP (x) −ρ1 gate by gate, span program
+by span program, starting at the inputs and working recursively toward the output vertex. In this
+way, it roughly computes the Taylor series about ρ = 0 of the eigenvalue-ρ eigenvectors in order
+eventually to find a contradiction for |ρ| small. One would not expect this method to extend to
+arbitrary span programs, because it loses a constant factor that depends badly on the individual
+span programs used for each gate. Indeed, it fails in general. Span programs can be constructed
+for which the associated graphs simply do not have an Ω(1/wsize(P)) spectral gap in the 0 case.
+(For example, take a large span program and add an AND gate to the top whose other input is 0.
+The composed span program computes the constant 0 function and has constant witness size, but
+the spectral gaps of the associated large graphs need not be Ω(1).)
+On the other hand, it has not been understood why the [RˇS08] analysis works so well when
+applied to balanced compositions of constant-size optimal span programs. In particular, the corre-
+spondence between graphs and span programs by definition relates the witness size to properties of
+eigenvalue-zero eigenvectors. Why does the witness size quantity also appear in the spectral gap?
+We show that this is not a coincidence, that in general an eigenvalue-zero eigenvector of a
+bipartite graph implies an “effective” spectral gap for a perturbed graph. Somewhat more precisely,
+the inference is that the total squared overlap on the output vertex of small-eigenvalue eigenvectors
+
+5
+
+
+is small. This argument leads to a substantially more general small-eigenvalue spectral analysis.
+It also implies simpler proofs of Theorem 1.1 as well as of the AND-OR formula-evaluation result
+in [ACR+07].
+This small-eigenvalue analysis is the key step that allows us to evaluate span programs on a
+quantum computer. Besides showing an effective spectral gap, though, we would also need to bound
+∥AGP ∥in order to generalize [RˇS08]. However, recent work by Cleve et al. shows that this norm
+does not matter if we are willing to concede a logarithmic factor in the query complexity [CGM+08].
+We thus obtain:
+
+Theorem 1.3. Let P be a span program computing f : {0, 1}n →{0, 1}. Then
+
+Q(f) = O
+�
+wsize(P)
+log wsize(P)
+log log wsize(P)
+
+�
+.
+(1.3)
+
+We can now prove the main result of this paper, that for any boolean function f the general
+adversary bound on the quantum query complexity is tight up to a logarithmic factor:
+
+Theorem 1.4. For any function f : {0, 1}n →{0, 1}, the quantum query complexity of f satisfies
+
+Q(f) = Ω(Adv±(f))
+and
+Q(f) = O
+�
+Adv±(f)
+log Adv±(f)
+log log Adv±(f)
+
+�
+.
+(1.4)
+
+Proof. The lower bound is due to [HLˇS07] (see Theorem 2.6). For the upper bound, use the SDP
+from Theorem 1.2, to construct a span program P computing f, with wsize(P) = Adv±(f). Then
+apply Theorem 1.3 to obtain a bounded-error quantum query algorithm that evaluates f.
+
+Thus the Adv± semi-definite program is in fact an SDP for quantum query complexity, up to
+a logarithmic factor. Previously, Barnum et al. have already given an SDP for quantum query
+complexity [BSS03], and have shown that the nonnegative-weight adversary bound Adv can be
+derived by strengthening it, but their SDP is quite different.
+In particular, the Adv± SDP is
+“greedy,” in the sense that it considers only how much information can be learned using a sin-
+gle query; see Definition 2.4 below.
+The [BSS03] SDP, on the other hand, has separate terms
+for every query.
+It is surprising that a small modification to Adv can not only break the cer-
+ticate complexity and property testing barriers [HLˇS07], but in fact be nearly optimal always.
+For example, for the Element Distinctness problem with the input in [n]n specified in binary,
+Adv(f) = O(√n log n) [ˇSS06] but Q(f) = Ω(n2/3) by the polynomial method [AS04, Amb05].
+Theorem 1.4 implies that Adv±(f) = Ω(n2/3/ log n).
+
+2
+Definitions
+
+For a natural number n ∈N, let [n] = {1, 2, . . . , n}. Let B = {0, 1}. For a bit b ∈B, let ¯b = 1 −b
+denote its complement. A function f with codomain B is a (total) boolean function if its domain
+is Bn for some n ∈N; f is a partial boolean function if its domain is a subset D ⊆Bn.
+The complex and real numbers are denoted by C and R, respectively. For a finite set X, let
+CX be the inner product space C|X| with orthonormal basis {|x⟩: x ∈X}. We assume familiarity
+with ket notation, e.g., �
+x∈X |x⟩⟨x| = 1 the identity on CX. For vector spaces V and W over C,
+let L(V, W) denote the set of all linear transformations from V into W, and let L(V ) = L(V, V ).
+For A ∈L(V, W), ∥A∥is the operator norm of A.
+
+6
+
+
+The union of disjoint sets is sometimes denoted by ⊔.
+In the remainder of this section, we will define span programs, from [KW93], and the “witness
+size” span program complexity measure from [RˇS08]. We will then define the quantum adversary
+bounds and state some of their basic properties, including composition, lower bounds on quantum
+query complexity, and the previously known lower bound on span program witness size.
+
+2.1
+Span programs
+
+A span program P is a certain linear-algebraic way of specifying a boolean function fP [KW93,
+GP03]. Roughly, a span program consists of a target |t⟩in a vector space V , and a collection of
+subspaces Vj,b ⊆V , for j ∈[n], b ∈B. For an input x ∈Bn, fP (x) = 1 when the target can be
+reached using a linear combination of vectors in ∪j∈[n]Vj,xj. For our complexity measure on span
+programs, however, it will be necessary to fix a set of “input vectors” that span each subspace Vj,b.
+We desire to span the target using a linear combination of these vectors with small coefficients.
+Formally we therefore define a span program as follows:
+
+Definition 2.1 (Span program [KW93]). Let n ∈N. A span program P consists of a “target”
+vector |t⟩in a finite-dimensional inner-product space V over C, together with “input” vectors
+|vi⟩∈V for i ∈I. Here the index set I is a disjoint union I = Ifree ⊔�
+j∈[n],b∈B Ij,b.
+To P corresponds a function fP : Bn →B, defined by
+
+fP (x) =
+
+�
+1
+if |t⟩∈Span({|vi⟩: i ∈Ifree ∪�
+j∈[n] Ij,xj})
+
+0
+otherwise
+(2.1)
+
+We say that Ifree indexes the set of “free” input vectors, while Ij,b indexes input vectors “labeled
+by” (j, b). We say that P “computes” the function fP . For x ∈Bn, fP (x) evaluates to 1, or true,
+when the target can be reached using a linear combination of the “available” input vectors, i.e.,
+input vectors that are either free or labeled by (j, xj) for j ∈[n].
+Some additional notation will come in handy. Let {|i⟩: i ∈I} be an orthonormal basis for C|I|.
+Let A : C|I| →V be the linear operator
+
+A =
+�
+
+i∈I
+|vi⟩⟨i| .
+(2.2)
+
+Written as a matrix, the columns of A are the input vectors of P. For an input x ∈Bn, let I(x)
+be the set of available input vector indices and Π(x) : C|I| →C|I| the projection thereon,
+
+I(x) = Ifree ∪
+�
+
+j∈[n]
+Ij,xj
+(2.3)
+
+Π(x) =
+�
+
+i∈I(x)
+|i⟩⟨i| .
+(2.4)
+
+Lemma 2.2. For a span program P, fP (x) = 1 if and only if |t⟩∈Range(AΠ(x)). Equivalently,
+fP (x) = 0 if and only if Π(x)A†|t⟩∈Range
+�
+Π(x)A†�
+1 −|t⟩⟨t|
+
+∥t∥2
+��
+.
+
+Lemma 2.2 follows from Eq. (2.1). Therefore exactly when fP (x) = 1 is there a “witness”
+|w⟩∈C|I| satisfying AΠ(x)|w⟩= |t⟩.
+Exactly when fP (x) = 0, there is a witness |w′⟩∈V
+
+7
+
+
+satisfying ⟨t|w′⟩̸= 0 and Π(x)A†|w′⟩= 0, i.e., |w′⟩has nonzero inner product with the target
+vector and is orthogonal to the available input vectors.
+The complexity measure we use to characterize span programs is the witness size [RˇS08]:
+
+Definition 2.3 (Witness size with costs [RˇS08]). Consider a span program P, and a vector s ∈
+[0, ∞)n of nonnegative “costs.” Let S = �
+j∈[n],b∈B,i∈Ij,b
+√sj|i⟩⟨i|. For each input x ∈Bn, define
+the witness size of P on x with costs s, wsizes(P, x), as follows:
+
+• If fP (x) = 1, then |t⟩∈Range(AΠ(x)), so there is a witness |w⟩∈C|I| satisfying AΠ(x)|w⟩=
+|t⟩. Then wsizes(P, x) is the minimum squared length of any such witness, weighted by the
+costs s:
+wsizes(P, x) =
+min
+|w⟩: AΠ(x)|w⟩=|t⟩∥S|w⟩∥2 .
+(2.5)
+
+• If fP (x) = 0, then |t⟩/∈Range(AΠ(x)). Therefore there is a witness |w′⟩∈V satisfying
+⟨t|w′⟩= 1 and Π(x)A†|w′⟩= 0. Then
+
+wsizes(P, x) =
+min
+|w′⟩: ⟨t|w′⟩=1
+Π(x)A†|w′⟩=0
+
+∥SA†|w′⟩∥2 .
+(2.6)
+
+The witness size of P with costs s, restricted to domain D ⊆Bn, is
+
+wsizes(P, D) = max
+x∈D wsizes(P, x) .
+(2.7)
+
+The wsizes(P, D) notation is for handling partial boolean functions. For the common case that
+D = Bn, let wsizes(P) = wsizes(P, Bn). For j ∈[n], sj can intuitively be thought of as the charge
+for evaluating the jth input bit. When the subscript s is omitted, the costs are taken to be uniform,
+s = ⃗1 = (1, 1, . . . , 1), e.g., wsize(P) = wsize⃗1(P). In this case, note that S = 1 −�
+i∈Ifree |i⟩⟨i|. The
+extra generality of allowing nonuniform costs is necessary for considering unbalanced formulas.
+Before continuing, let us remark that the above definition of span programs differs slightly
+from the original definition due to Karchmer and Wigderson [KW93]. Call a span program strict
+if Ifree = ∅. Ref. [KW93] considers only strict span programs. For the witness size complexity
+measure, we will later prove that span programs and strict span programs are equivalent (Propo-
+sition 4.10).
+Allowing free input vectors is often convenient for defining and composing span
+programs, though, and may be necessary for developing efficient quantum algorithms based on
+span programs. Ref. [RˇS08] uses an even more relaxed span program definition than Definition 2.1,
+letting each input vector to be labeled by a subset of [n]×B. This definition is convenient for terse
+span program constructions, and is also easily seen to be equivalent to ours.
+Classical applications of span programs have used a different complexity measure, the “size” of
+P being the number of input vectors, |I|. This measure has been characterized in [G´al01].
+Note that replacing the target vector |t⟩by c|t⟩, for c ̸= 0, changes the witness sizes by a factor
+of |c|2 or 1/|c|2, depending on whether fP (x) = 1 or 0. Thus we might just as well have defined
+the witness size as
+�
+
+max
+x:fP (x)=0 wsizes(P, x)
+max
+x:fP (x)=1 wsizes(P, x) ,
+(2.8)
+
+provided that fP is not the constant 0 or constant 1 function on D. Explicit formulas for wsizes(P, x)
+can be written in terms of Moore-Penrose pseudoinverses of certain matrices, and are given in [RˇS08,
+Lemma A.3]. Theorem 9.3 will give an alternative, related criterion for comparing span programs.
+
+8
+
+
+2.2
+Adversary lower bounds
+
+There are essentially two techniques, the polynomial and adversary methods, for lower-bounding
+quantum query complexity. The polynomial method was introduced in the quantum setting by
+Beals et al. [BBC+01]. It is based on the observation that after running a quantum algorithm
+for q oracle queries to an input x, the probability of any measurement result is a polynomial of
+degree at most 2q in the variables xj. The first of the adversary bounds, Adv, was introduced
+by Ambainis [Amb02]. Adversary bounds are a generalization of the classical hybrid argument,
+that considers the entanglement of the system when run on a superposition of input strings. Both
+methods have classical analogs; see [Bei93] and [Aar06]
+The polynomial method and Adv are incomparable.
+ˇSpalek and Szegedy [ˇSS06] proved the
+equivalence of a number of formulations for the adversary bound Adv, and also showed that Adv is
+subject to a certificate complexity barrier. For example, for f a total boolean function, Adv(f) ≤
+�
+
+C0(f)C1(f), where Cb(f) is the best upper bound over those x with f(x) = b of the size of the
+smallest certificate for f(x). The polynomial method can surpass this barrier. In particular, for
+the Element Distinctness problem, the polynomial method implies an Ω(n2/3) lower bound on the
+quantum query complexity [AS04, Amb05], and this is tight [Amb07, Sze04]. However, displaying
+two list elements that are the same is enough to prove that the list does not have distinct elements,
+so C0(f) = 2 and Adv(f) = O(√n).
+Adv also suffers a “property testing barrier” on partial
+functions.
+On the other hand, the polynomial method can also be loose. Ambainis gave a total boolean
+function fk on n = 4k bits that can be represented exactly by a polynomial of degree only 2k, but
+for which Adv(fk) = 2.5k [Amb06], and see [HLˇS07] for other examples.
+Thus both lower bound methods are limited. In 2007, though, Høyer et al. discovered a strict
+generalization Adv± of Adv [HLˇS07]. For example, for Ambainis’s function, Adv±(fk) ≥2.51k.
+Adv± also breaks the certificate complexity and property testing barriers. No similar limits on
+its power have been found. In particular, for no function f is it known that the quantum query
+complexity of f is ω(Adv±(f)).
+In this section, we define the two adversary bounds. On account of how their definitions differ,
+we call Adv the “nonnegative-weight” adversary bound, and Adv± the “general” adversary bound.
+We also state some previous results.
+
+Definition 2.4 (Adversary bounds with costs [HLˇS05, HLˇS07]). For finite sets C and E, and
+D ⊆Cn, let f : D →E and let s ∈[0, ∞)n be a vector of nonnegative costs. An adversary matrix
+for f is a nonzero, |D| × |D| real, symmetric matrix Γ that satisfies ⟨x|Γ|y⟩= 0 for all x, y ∈D
+with f(x) = f(y).
+Define the nonnegative-weight adversary bound for f, with costs s, as
+
+Advs(f) =
+max
+adversary matrices Γ:
+∀x,y∈D, ⟨x|Γ|y⟩≥0
+∀j∈[n], ∥Γ◦∆j∥≤sj
+
+∥Γ∥,
+(2.9)
+
+where Γ ◦∆j denotes the entry-wise matrix product between Γ and ∆j = �
+x,y∈D:xj̸=yj |x⟩⟨y|, and
+the norm is the operator norm.
+The general adversary bound for f, with costs s, is
+
+Adv±
+s (f) =
+max
+adversary matrices Γ:
+∀j∈[n], ∥Γ◦∆j∥≤sj
+
+∥Γ∥.
+(2.10)
+
+9
+
+
+In this maximization, the entries of Γ need not be nonnegative. In particular, Adv±
+s (f) ≥Advs(f).
+Letting ⃗1 = (1, 1, . . . , 1), the nonnegative-weight adversary bound for f is Adv(f) = Adv⃗1(f)
+and the general adversary bound for f is Adv±(f) = Adv±
+⃗1 (f).
+
+One special case is when sj∗= 0 for some j∗∈[n]. In this case, since Γ ◦∆j∗must be zero,
+letting s′ = (s1, . . . , �
+sj∗, . . . , sn) and fb be the restriction of f to inputs x with xj∗= b, we have
+Advs(f) = maxb∈C Advs′(fb) and Adv±
+s (f) = maxb∈C Adv±
+s′(fb). Provided sj > 0 for all j ∈[n],
+we can write
+
+Advs(f) =
+max
+adversary matrices Γ:
+∀x,y∈D, ⟨x|Γ|y⟩≥0
+min
+j∈n sj
+∥Γ∥
+∥Γ ◦∆j∥
+(2.11)
+
+Adv±
+s (f) =
+max
+adversary matrices Γ min
+j∈n sj
+∥Γ∥
+∥Γ ◦∆j∥,
+(2.12)
+
+which are the expressions used in Refs. [HLˇS05, HLˇS07]. Furthermore, Theorem 6.2 and Theo-
+rem 6.4 will state dual semi-definite programs for Adv and Adv±.
+The adversary bounds are primarily of interest because, with uniform costs s = ⃗1, they give
+lower bounds on quantum query complexity.
+
+Definition 2.5. For f : D →E, with D ⊆Cn, let Qϵ(f) be the ϵ-bounded-error quantum query
+complexity of f, Q(f) = Q1/10(f), and, when E = {0, 1}, let Q1(f) be the one-sided bounded-error
+quantum query complexity.
+
+Theorem 2.6 ([BSS03, HLˇS07]). For any function f : D →E, with D ⊆Cn, the ϵ-bounded-error
+quantum query complexity of f is lower-bounded as
+
+Qϵ(f) ≥1 −2
+�
+
+ϵ(1 −ϵ)
+2
+Adv(f)
+
+Qϵ(f) ≥1 −2
+�
+
+ϵ(1 −ϵ) −2ϵ
+
+2
+Adv±(f) .
+
+(2.13)
+
+In particular, Q(f) = Ω(Adv±(f)). Moreover, if D = {0, 1}, then
+
+Qϵ(f) ≥1 −2
+�
+
+ϵ(1 −ϵ)
+2
+Adv±(f) .
+(2.14)
+
+For boolean functions, the nonnegative-weight adversary bound composes multiplicatively, but
+this was not known to hold for the general adversary bound [HLˇS07]:
+
+Theorem 2.7 (Adversary bound composition [HLˇS07, Amb06, LLS06, HLˇS05]). Let f : {0, 1}n →
+{0, 1} and, for j ∈[n], let fj : {0, 1}mj →{0, 1}. Define g : {0, 1}m1 × · · · × {0, 1}mn →{0, 1} by
+
+g(x) = f
+�
+f1(x1), . . . , fn(xn)
+�
+.
+(2.15)
+
+Let s ∈[0, ∞)m1 × · · · × [0, ∞)mn, and let αj = Advsj(fj) and βj = Adv±
+sj(fj) for j ∈[n]. Then
+
+Advs(g) = Advα(f)
+(2.16)
+
+Adv±
+s (g) ≥Adv±
+β (f) .
+(2.17)
+
+In particular, if Advs1(f1) = · · · = Advsn(fn) = α, then Advs(g) = α Adv(f), and if Adv±
+s1(f1) =
+· · · = Adv±
+sn(fn) = β, then Adv±
+s (g) ≥β Adv±(f).
+
+10
+
+
+Reichardt and ˇSpalek [RˇS08] show that the adversary bounds lower-bound the witness size of
+a span program:
+
+Theorem 2.8 ([RˇS08]). For any span program P computing fP : {0, 1}n →{0, 1},
+
+wsize(P) ≥Adv±(fP ) ≥Adv(fP ) .
+(2.18)
+
+There is a direct proof that wsize(P) ≥Adv(fP ) in [RˇS08, Sec. 5.3], but the inequality
+wsize(P) ≥Adv±(fP ) is only implicit in [RˇS08]. The argument is as follows. Letting fk : {0, 1}nk →
+{0, 1} be the k-times-iterated composition of f on itself, Q(fk
+P ) = Ok(wsize(P)k) by Theorem 1.1.
+Now by Theorem 2.7, Adv±(f)k ≤Adv±(fk) = O(Q(fk
+P )). Putting these results together and let-
+ting k →∞gives Adv±(f) ≤wsize(P). A full and direct proof will be given below in Theorem 6.1.
+
+3
+Example:
+Span programs based on one-sided-error quantum
+query algorithms
+
+Span programs have proved useful in [RˇS08] for evaluating formulas. There, span programs for
+constant-size gates are composed to generate a span program for a full formula. In this section,
+we give an explicit construction of asymptotically large span programs that are interesting from
+the perspective of quantum algorithms and that do not arise from the composition of constant-size
+span programs. We relate span program witness size to one-sided bounded-error quantum query
+complexity. Theorem 7.1 below will strengthen the results in this section, but the construction
+there will be less explicit.
+Formally, we show:
+
+Theorem 3.1. Consider a quantum query algorithm A that evaluates f : {0, 1}n →{0, 1}, with
+bounded one-sided error on false inputs, using q queries.
+Then there exists a span program P
+computing fP = f, with
+wsize(P) = O(q) .
+(3.1)
+
+In particular, infP:fP =f wsize(P) = O(Q1(f)).
+
+This example should be illustrative for Definition 2.1 and Definition 2.3, but is not needed for
+the rest of this article. Another nontrivial span program example is given in Appendix A.
+Many known quantum query algorithms have one-sided error, as required by Theorem 3.1,
+or can be trivially modified to have one-sided error.
+Examples include algorithms for Search,
+Ordered Search, Graph Collision, Triangle Finding, and Element Distinctness. There are excep-
+tions, though.
+For example, the formula-evaluation algorithms discussed above and implicit in
+Theorem 1.1 all have bounded two-sided error. In particular, for AND-OR formula evaluation,
+the algorithm from [ACR+07] outputs the formula’s evaluation but not a witness to that evalua-
+tion [RˇS08, Sec. 5]. For AND-OR formula evaluation, a witness can be extracted from the λ = 0
+graph eigenstate, but it is not known how far this generalizes [ACGT09]. We certainly expect that
+there are functions f with bounded two-sided-error quantum query complexity, Q(f), strictly less
+than the bounded one-sided-error quantum query complexity, Q1(f).
+
+Proof of Theorem 3.1. Assume that the quantum algorithm A has a workspace of m qubits, and an
+n-dimensional query register. Starting in the state |0m, 1⟩, it alternates between applying unitaries
+
+11
+
+
+independent of the input string x and oracle queries to x. The evolution of the system is given by
+
+|ϕ0⟩= |0m, 1⟩
+V1
+→
+|ϕ1⟩= �n
+j=1 |ϕ1,j⟩|j⟩
+Ox
+→
+|ϕ2⟩= �n
+j=1(−1)xj|ϕ1,j⟩|j⟩
+→· · ·
+
+· · ·
+V2r−1
+→
+|ϕ2r−1⟩= �n
+j=1 |ϕ2r−1,j⟩|j⟩
+Ox
+→
+|ϕ2r⟩= �n
+j=1(−1)xj|ϕ2r−1,j⟩|j⟩
+→· · ·
+
+· · ·
+V2q+1
+→
+|ϕ2q+1⟩
+(3.2)
+Here, for r ∈[q + 1], V2r−1 is the unitary independent of x that is applied at odd time step 2r −1,
+while Ox : |y⟩|j⟩�→(−1)xj|y⟩|j⟩is the phase-flip input oracle applied at even time steps. (To allow
+conditional queries, prepend a constant bit 0 to the input string x.) The state of the system after
+s time steps is |ϕτ⟩= �n
+j=1 |ϕs,j⟩⊗|j⟩; for s ≥2, these states depend on x.
+On inputs x evaluating to f(x) = 1, the algorithm A does not make errors. Thus for these
+x we may assume without loss of generality that |ϕ2q+1⟩= |0m, 1⟩, by at most doubling the
+number of queries to clean the algorithm’s workspace. On inputs evaluating to f(x) = 0, then,
+|⟨0m, 1|ϕ2q+1⟩| ≤ϵ for some ϵ bounded away from one.
+Recall that B = {0, 1}. We construct a span program P as follows:
+
+• The inner product space is V = C(2q+2)2m, spanned by the orthonormal basis {|s, y, j⟩: s ∈
+{0, 1, . . . , 2q + 1}, y ∈Bm, j ∈[n]}.
+
+• The target vector is |t⟩= −|0, 0m, 1⟩+ |2q + 1, 0m, 1⟩.
+
+• There are free input vectors for each odd time step s: Ifree = {2r −1 : r ∈[q + 1]} × Bm × [n],
+with
+|vs,y,j⟩= −|s −1, y, j⟩+ |s⟩⊗Vs|y, j⟩
+(3.3)
+
+for (s, y, j) ∈Ifree.
+
+• For j ∈[n] and b ∈B, Ij,b = {2r : r ∈[q]} × Bm × [n] × {b}, with, for (s, y, j, b) ∈Ij,b,
+
+|vs,y,j,b⟩= −(|s −1⟩+ (−1)b|s⟩) ⊗|y, j⟩.
+(3.4)
+
+For analyzing this span program, it will be helpful to set up some additional notation. Let Us
+be the unitary applied at time step s:
+
+Us =
+
+�
+Vs
+if s is odd
+Ox
+if s is even
+(3.5)
+
+For an input x, the available input vectors, i.e., those indexed by I(x), are then
+
+|vs,y,j⟩:= −|s, y, j⟩+ |s + 1⟩⊗Us+1|y, j⟩
+(3.6)
+
+for all y ∈Bm, j ∈[n] and s = 0, 1, . . . , 2q even or odd. Let A(x) = �2q
+s=0
+�
+y,j |vs,y,j⟩⟨s, y, j|. Then
+fP (x) = 1 if and only if |t⟩∈Range(A(x)).
+
+Claim 3.2. If f(x) = 1, then fP (x) = 1 and wsize(P, x) ≤q.
+
+12
+
+
+Proof. Letting |w⟩= �2q
+s=0 |s⟩⊗|ϕs⟩, then
+
+A(x)|w⟩=
+
+2q
+�
+
+s=0
+
+�
+
+y,j
+|vs,y,j⟩⟨y, j|ϕs⟩
+
+=
+
+2q
+�
+
+s=0
+−|s⟩⊗|ϕs⟩+ |s + 1⟩⊗Us+1|ϕs⟩
+
+=
+
+2q
+�
+
+s=0
+−|s⟩⊗|ϕs⟩+ |s + 1⟩⊗|ϕs+1⟩
+
+= −|0⟩⊗|ϕ0⟩+ |2q + 1⟩⊗|ϕ2q+1⟩
+
+= |t⟩,
+
+(3.7)
+
+where we have used for the second equality that �
+y,j |y, j⟩⟨y, j| is a resolution of the identity, and
+for the third equality that Us+1|ϕs⟩= |ϕs+1⟩in order to get a telescoping series. Thus |w⟩is a
+witness to fP (x) = 1. Since the input vectors |vs,y,j⟩for s even are free, the witness size is
+
+wsize(P, x) ≤
+
+�����
+
+�
+q
+�
+
+k=1
+|2k + 1⟩⟨2k + 1| ⊗1
+
+�
+
+|w⟩
+
+�����
+
+2
+(3.8)
+
+=
+
+q
+�
+
+k=1
+∥|2k + 1⟩⊗|ϕ2k+1⟩∥2
+
+= q .
+
+Claim 3.3. If f(x) = 0, then fP (x) = 0 and wsize(P, x) ≤4q/(1 −ϵ)2.
+
+Proof. Let |w′⟩= �2q+1
+s=0 |s⟩⊗|ϕs⟩. Then |⟨t|w′⟩| = |1 −⟨0m, 1|ϕ2q+1⟩| ≥1−ϵ > 0. Moreover, since
+
+⟨vs,y,j|(|σ⟩⊗|ϕσ⟩) =
+
+
+
+
+
+
+
+
+−⟨y, j|ϕs⟩
+if σ = s
+⟨y, j|U†
+s+1|ϕs+1⟩= ⟨y, j|ϕs⟩
+if σ = s + 1
+0
+otherwise
+
+(3.9)
+
+we compute
+
+A(x)†|w′⟩=
+
+2q
+�
+
+s=0
+
+2q+1
+�
+
+σ=0
+
+�
+
+y,j
+|s, y, j⟩⟨vs,y,j|(|σ⟩⊗|ϕσ⟩) = 0 .
+(3.10)
+
+Thus |w′⟩is a witness to fP (x) = 0. Now the input vectors associated with false inputs are, for
+odd s between 1 and 2q −1, y ∈{0, 1}m and j ∈[n], |v′
+s,y,j⟩:= −|s, y, j⟩−|s + 1⟩⊗Us+1|y, j⟩. Now
+
+⟨v′
+s,y,j|w′⟩= −⟨y, j|ϕs⟩−⟨y, j|U†
+s+1|ϕs+1⟩= −2⟨y, j|ϕs⟩. The witness size therefore satisfies
+
+(1 −ϵ)2wsize(P, x) ≤
+
+q
+�
+
+k=1
+
+�
+
+y,j
+|⟨v′
+2k−1,y,j|w′⟩|2
+(3.11)
+
+= 4
+
+q
+�
+
+k=1
+
+�
+
+y,j
+|⟨y, j|ϕ2k+1⟩|2
+
+= 4q .
+
+13
+
+
+After scaling the target vector appropriately—see Eq. (2.8)—Claim 3.2 and Claim 3.3 together
+give wsize(P) ≤2q/(1 −ϵ), proving Theorem 3.1.
+
+4
+Span program manipulations
+
+This section presents several useful manipulations of span programs. First, we develop span pro-
+gram complementation and composition. The essential ideas for both manipulations have already
+been proposed in [RˇS08], but the ideas there were not fully translated into the span program
+formalism, which we do here. Section 4.2 also introduces a new construction of composed span pro-
+grams, tensor-product composition, which appears be useful for designing more efficient quantum
+algorithms for evaluating formulas [Rei09].
+Both techniques take as inputs span programs computing certain functions and output a span
+program computing a different function. In Section 4.3, we give two ways of simplifying a span
+program P that do not change fP nor increase the witness size. Section 5 will present a more
+dramatic simplification, though.
+
+4.1
+Span program complementation
+
+Although Definition 2.1 seems to have asymmetrical conditions conditions for when fP (x) = 1
+versus when fP (x) = 0, this is misleading. In fact, span programs can be complemented freely.
+This is important for composing span programs that compute non-monotone functions.
+
+Lemma 4.1. For every span program P, there exists a span program P †, said to be “dual” to P,
+that computes the negation of fP , fP †(x) = ¬fP (x), with witness size wsizes(P †, x) = wsizes(P, x)
+for all x ∈Bn and s ∈[0, ∞)n.
+
+Proof. There are different constructions of dual span programs [CF02, NNP05, RˇS08]. Here we
+more or less follow [RˇS08, Sec. 2.3], as the other constructions may not preserve witness size.
+As in Definition 2.1, let P have target vector |t⟩and input vectors |vi⟩, for i ∈I = Ifree ⊔
+�
+j∈[n],b∈B Ij,b, in the inner product space V = Cd. Recall that A = �
+i∈I |vi⟩⟨i|, I(x) = Ifree ∪
+�
+j∈[n] Ij,xj and Π(x) = �
+i∈I(x) |i⟩⟨i|. Let ˜Π(x) = �
+i∈I(x)∖Ifree |i⟩⟨i|, and fix an orthonormal basis
+{|k⟩: k ∈[d]} for V .
+
+Definition 4.2. The dual span program P †, with target vector |t′⟩and input vectors |v′
+k⟩for k ∈
+I′ = I′
+free ⊔�
+j∈[n],b∈B I′
+j,b in the inner product space V ′, is defined by:
+
+• V ′ = C1+|I|, with orthonormal basis {|0⟩} ⊔{|i⟩: i ∈I}.
+
+• |t′⟩= |0⟩.
+
+• I′
+free = [d], with free input vectors, for k ∈I′
+free,
+
+|v′
+k⟩= (|0⟩⟨t| + A†)|k⟩= |0⟩⟨t|k⟩+
+�
+
+i∈I
+|i⟩⟨vi|k⟩.
+(4.1)
+
+• For j ∈[n] and b ∈B, I′
+j,b = Ij,¯b with |v′
+i⟩= |i⟩for i ∈I′
+j,b.
+
+14
+
+
+Fix s ∈[0, ∞)n, and let A′ = �
+k∈I′ |v′
+k⟩⟨k| = |0⟩⟨t| + A† + �
+i∈I∖Ifree |i⟩⟨i|. Let I′(x) = I′
+free ∪
+�
+j∈[n] I′
+j,xj and Π′(x) = �
+i∈I′(x) |i⟩⟨i|.
+
+If fP (x) = 1, then there exists a witness |w⟩∈C|I| such that AΠ(x)|w⟩= |t⟩. Assume that |w⟩
+is an optimal witness, i.e., wsizes(P, x) = ∥S|w⟩∥2 (see Definition 2.3). Let |w′⟩= |0⟩−Π(x)|w⟩.
+Then ⟨t′|w′⟩= 1 and
+
+A′†|w′⟩=
+�
+|t⟩⟨0| + A +
+�
+
+i∈I∖Ifree
+|i⟩⟨i|
+�
+(|0⟩−Π(x)|w⟩)
+
+= |t⟩−AΠ(x)|w⟩−
+�
+
+i∈I∖Ifree
+|i⟩⟨i|Π(x)|w⟩
+
+= −
+�
+1 −
+�
+
+i∈Ifree
+|i⟩⟨i|
+�
+Π(x)|w⟩.
+
+(4.2)
+
+Therefore, |w′⟩is orthogonal to the available input vectors of P † (Π′(x)A′†|w′⟩= 0), implying that
+|w′⟩is a witness to fP †(x) = 0. Moreover, Eq. (4.2) also implies wsizes(P, x) = ∥SA′†|w′⟩∥2 ≥
+wsizes(P †, x).
+Conversely, if fP †(x) = 0, then there is a witness |w′⟩∈V ′, with ⟨t′|w′⟩= 1, orthogonal to
+the available input vectors of P †. Assume that |w′⟩is an optimal witness, i.e., wsizes(P †, x) =
+∥SA′†|w′⟩∥2. The two conditions ⟨0|w′⟩= 1, and ⟨i|w′⟩= 0 for all i ∈∪j∈[n]Ij,¯xj, imply (1 −
+Π(x))|w′⟩= |0⟩. The condition that |w′⟩is orthogonal to the free input vectors then implies
+
+0 = (|t⟩⟨0| + A)|w′⟩
+
+= (|t⟩⟨0| + A)(|0⟩+ Π(x)|w′⟩)
+
+= |t⟩+ AΠ(x)|w′⟩.
+
+(4.3)
+
+Thus fP (x) = 1, with witness |w⟩= −Π(x)|w′⟩. Moreover, the equalities of Eq. (4.2) still hold, so
+wsizes(P †, x) = ∥SΠ(x)|w⟩∥2 ≥wsizes(P, x).
+So far we have shown that fP †(x) = ¬fP (x) for all x ∈Bn.
+It remains to show that
+wsizes(P, x) = wsizes(P †, x) in the case fP (x) = 0.
+Assume that fP (x) = 0.
+Then there exists an optimal witness |w′⟩satisfying ⟨t|w′⟩= 1,
+Π(x)A†|w′⟩= 0 and wsizes(P, x) = ∥SA†|w′⟩∥2. Let |w⟩= |w′⟩−(1 −Π(x))A†|w′⟩. Then |w⟩is
+supported only on the available input vector indices of P †; the first term, |w′⟩, is supported on
+I′
+free, while the second term is supported only on ∪j∈[n]Ij¯xj. Furthermore,
+
+A′|w⟩=
+�
+|0⟩⟨t| + A† +
+�
+
+i∈I∖Ifree
+|i⟩⟨i|
+�
+(|w′⟩−(1 −Π(x))A†|w′⟩)
+
+= (|0⟩⟨t| + A†)|w′⟩−
+�
+�
+
+i∈I∖Ifree
+|i⟩⟨i| −˜Π(x)
+�
+A†|w′⟩
+
+= |0⟩= |t′⟩
+
+(4.4)
+
+since �
+i∈I∖Ifree |i⟩⟨i| −˜Π(x) = 1 −Π(x). Therefore |w⟩is a witness to fP †(x) = 0. Moreover, the
+
+squared length of S
+�
+1 −�
+k∈I′
+free |k⟩⟨k|
+�
+|w⟩is ∥S(1 −Π(x))A†|w′⟩∥2 = ∥SA†|w′⟩∥2 = wsizes(P, x),
+
+so wsizes(P †, x) ≤wsizes(P, x).
+
+15
+
+
+To show the converse statement, wsizes(P, x) ≤wsizes(P †, x), let Π′
+free = �
+k∈I′
+free |k⟩⟨k| be
+the projection onto the free columns of A′. Let |w⟩be an optimal witness to fP †(x) = 1, i.e.,
+wsizeS(P †, x) = ∥S(1 −Π′
+free)|w⟩∥2. Then Π′(x)|w⟩=
+�
+Π′
+free + �
+i∈I′(x)∖I′
+free |i⟩⟨i|
+�
+|w⟩= |w⟩and
+
+|t′⟩= |0⟩= A′|w⟩
+
+= (|0⟩⟨t| + A†)Π′
+free|w⟩+
+�
+
+i∈I′(x)∖I′
+free
+
+|i⟩⟨i|w⟩.
+(4.5)
+
+This implies that ⟨t|Π′
+free|w⟩= 1 and also A†Π′
+free|w⟩+ �
+j∈n,i∈Ij,¯xj |i⟩⟨i|w⟩= 0. Multiplying by
+
+Π(x), the latter equation implies that Π(x)A†Π′
+free|w⟩= 0, so |w′⟩= Π′
+free|w⟩is a witness for
+fP (x) = 0. Therefore,
+
+wsizes(P, x) ≤∥SA†|w′⟩∥
+2
+
+=
+���S
+�
+
+j∈[n],i∈Ij,¯xj
+
+|i⟩⟨i|w⟩
+���
+2
+
+= ∥S(1 −Π′
+free)|w⟩∥2
+
+= wsizes(P †, x) .
+
+(4.6)
+
+Thus wsizes(P †, x) = wsizes(P, x) always.
+
+4.2
+Tensor-product and direct-sum span program composition
+
+We will now show that the best span program witness size for a function composes sub-multiplicatively,
+in the following sense:
+
+Theorem 4.3 (Span program composition). Consider functions f : Bn →B and, for j ∈[n],
+fj : Bm →B. Let g : Bm →B be defined by
+
+g(x) = f
+�
+f1(x), f2(x), . . . , fn(x)
+�
+.
+(4.7)
+
+Let P be a span program computing fP = f and, for j ∈[n], let Pj be a span program computing
+fPj = fj.
+Then there exists a span program Q computing fQ = g, and such that, for any s ∈[0, ∞)m and
+rj = wsizes(Pj),
+wsizes(Q) ≤wsizer(P) .
+(4.8)
+
+In particular, wsizes(Q) ≤wsize(P) maxj∈[n] wsizes(Pj).
+
+The ease with which span programs compose is one of their nicest features. To prove Theo-
+rem 4.3, we will give two constructions of composed span programs, a tensor-product-composed
+span program Q⊗and a direct-sum-composed span program Q⊕, that each satisfy Eq. (4.8). The
+method of composing span programs used in [RˇS08] is a special case of direct-sum composition,
+but tensor-product composition is new. Below the proof of Theorem 4.3, we will define a third
+composition method, reduced-tensor-product span program composition, that is closely related to
+tensor-product composition.
+
+16
+
+
+Of course, only one proof of Theorem 4.3 is needed, so the definitions and proofs for Q⊕
+
+and Qr⊗can be safely skipped over.
+We include here multiple composition methods because
+the different constructions have different tradeoffs when it comes to designing efficient quantum
+algorithms for formula evaluation. In particular, we believe that an intermediate construction, in
+which some inputs are composed in a reduced-tensor-product fashion and other inputs in the direct-
+sum fashion, should be useful for designing a slightly faster quantum algorithm for evaluating AND-
+OR formulas [Rei09]. Appendix B gives examples of the three different span program composition
+methods for AND-OR formulas, using the correspondence between span programs and bipartite
+graphs that will be developed in Section 8.
+
+Proof of Theorem 4.3. Let span program P be in inner-product space V , with target vector |t⟩and
+input vectors indexed by Ifree and Ijc for j ∈[n] and c ∈B. For j ∈[n], let P j1 = Pj and let P j0
+
+be a span program computing fP j0 = ¬fP j1 with wsizes(P j0) = wsizes(P j1). Such span programs
+exist by Lemma 4.1. For j ∈[n] and c ∈B, let P jc be in the inner product space V jc with target
+vector |tjc⟩and input vectors indexed by Ijc
+free and Ijc
+kb for k ∈[m], b ∈B.
+Some more notation will be convenient. For x ∈Bm, let y = y(x) ∈Bn be given by y(x)j =
+fP j1(x) = fj(x) for j ∈[n]. Thus g(x) = f(y(x)). Also let I(y)′ = I(y) ∖Ifree = ∪j∈[n]Ijyj. Define
+ς : I ∖Ifree →[n] × B by ς(i) = (j, c) if i ∈Ijc. The idea is that ς maps i to the index of the span
+program that must evaluate to true in order for |vi⟩to be available.
+
+Definition 4.4. The tensor-product-composed span program Q⊗is defined by:
+
+• The inner product space is V ⊗= V ⊗�
+j∈[n],c∈B V jc.
+
+• The target vector is |t⊗⟩= |t⟩V ⊗�
+j∈[n],c∈B |tjc⟩V jc.
+
+• The free input vectors are indexed by I⊗
+free = Ifree ⊔�
+j∈[n],c∈B(Ijc × Ijc
+free) with, for i ∈I⊗
+free,
+
+|v⊗
+i ⟩=
+
+
+
+
+
+
+|vi⟩V ⊗�
+j∈[n],c∈B |tjc⟩V jc
+if i ∈Ifree
+|vi′⟩V ⊗|vi′′⟩V jc ⊗�
+j′∈[n],c′∈B:
+(j′,c′)̸=(j,c)
+|tj′c′⟩V j′c′
+if i = (i′, i′′) ∈Ijc × Ijc
+free
+(4.9)
+
+• The other input vectors are indexed by I⊗
+kb = ⊔j∈[n],c∈B(Ijc × Ijc
+kb) for k ∈[m], b ∈B. For
+i ∈Ijc, i′ ∈Ijc
+kb, let
+
+|v⊗
+ii′⟩= |vi⟩V ⊗|vi′⟩V jc ⊗
+�
+
+j′∈[n],c′∈B:
+(j′,c′)̸=(j,c)
+
+|tj′c′⟩V j′c′ .
+(4.10)
+
+Definition 4.5. The direct-sum-composed span program Q⊕is defined by:
+
+• The inner product space is V ⊕= V ⊕�
+j∈[n],c∈B(CIjc ⊗V jc). Any vector in V ⊕can be
+uniquely expressed as |u⟩V + �
+i∈I∖Ifree |i⟩⊗|ui⟩, where |u⟩∈V and |ui⟩∈V ς(i).
+
+• The target vector is |t⊕⟩= |t⟩V .
+
+17
+
+
+• The free input vectors are indexed by I⊕
+free = I ⊔�
+j∈[n],c∈B(Ijc × Ijc
+free) with, for i ∈I⊕
+free,
+
+|v⊕
+i ⟩=
+
+
+
+
+
+
+
+
+|vi⟩V
+if i ∈Ifree
+|vi⟩V −|i⟩⊗|tjc⟩
+if i ∈Ijc
+|i′⟩⊗|vi′′⟩
+if i = (i′, i′′) ∈Ijc × Ijc
+free
+
+(4.11)
+
+• The other input vectors are indexed by I⊕
+kb = ⊔j∈[n],c∈B(Ijc × Ijc
+kb) for k ∈[m], b ∈B. For
+i ∈Ijc, i′ ∈Ijc
+kb, let
+|v⊕
+ii′⟩= |i⟩⊗|vi′⟩.
+(4.12)
+
+For x ∈Bm, the indices of the available input vectors for Q⊗and Q⊕are
+
+I⊗(x) = Ifree ∪
+�
+
+j∈[n],c∈B
+Ijc × Ijc(x)
+(4.13)
+
+I⊕(x) = I ∪
+�
+
+j∈[n],c∈B
+Ijc × Ijc(x) .
+(4.14)
+
+Note that if Ifree = Ijc
+free = ∅for j ∈[n] and c ∈B, then Q⊗has no free input vectors either,
+I⊗
+free = ∅.
+Assume g(x) = fP (y(x)) = 1. Then we have witnesses |w⟩∈CI and |wjyj⟩∈CIjyj , for j ∈[n],
+such that
+
+|t⟩=
+�
+
+i∈I(y)
+wi|vi⟩
+
+|tjyj⟩=
+�
+
+i∈Ijyj (x)
+wjyj
+i
+|vi⟩,
+(4.15)
+
+and such that wsizer(P, y) = ∥R|w⟩∥2 (where, analogous to the definition of S in Definition 2.3,
+R = �
+j∈[n],c∈B,i∈Ijc
+√rj|i⟩⟨i|) and wsizes(P jyj, x) = ∥S|wjyj⟩∥2.
+
+Let |w⊗⟩∈CI⊗(x) be
+
+w⊗
+i =
+
+
+
+
+
+
+
+
+wi
+if i ∈Ifree
+wi′wς(i′)
+i′′
+if i = (i′, i′′) with i′ ∈I(y)′, i′′ ∈Iς(i′)(x)
+0
+otherwise
+
+(4.16)
+
+Then
+�
+
+i∈I⊗(x)
+w⊗
+i |v⊗
+i ⟩=
+�
+
+i∈Ifree
+wi|vi⟩V ⊗
+�
+
+j∈[n],c∈B
+|tjc⟩V jc +
+�
+
+i∈I(y)′,
+i′∈Iς(i)(x)
+
+wi|vi⟩V ⊗wς(i)
+i′
+|vi′⟩V ς(i) ⊗
+�
+
+j∈[n],c∈B:
+(j,c)̸=ς(i)
+
+|tjc⟩V jc
+
+=
+�
+
+i∈I(y)
+wi|vi⟩V ⊗
+�
+
+j∈[n],c∈B
+|tjc⟩V jc
+
+= |t⊗⟩,
+(4.17)
+
+so indeed fQ⊗(x) = 1.
+
+18
+
+
+Let |w⊕⟩∈CI⊕(x) be
+
+w⊕
+i =
+
+
+
+
+
+
+
+
+wi
+if i ∈I(y)
+
+wi′wς(i′)
+i′′
+if i = (i′, i′′) with i′ ∈I(y)′, i′′ ∈Iς(i′)(x)
+0
+otherwise
+
+(4.18)
+
+Then
+�
+
+i∈I⊕(x)
+w⊕
+i |v⊕
+i ⟩=
+�
+
+i∈Ifree
+wi|vi⟩V +
+�
+
+i∈I(y)′
+wi
+�
+|vi⟩V −|i⟩⊗|tς(i)⟩
+�
++
+�
+
+i∈I(y)′,
+i′∈Iς(i)(x)
+
+wiwς(i)
+i′
+|i⟩⊗|vi′⟩
+
+=
+�
+
+i∈I(y)
+wi|vi⟩V +
+�
+
+i∈I(y)′
+wi|i⟩⊗
+�
+−|tς(i)⟩+
+�
+
+i′∈Iς(i)(x)
+wς(i)
+i′
+|vi′⟩
+�
+
+= |t⟩V = |t⊕⟩,
+(4.19)
+
+so indeed fQ⊕(x) = 1.
+Moreover,
+
+∥S|w⊗⟩∥2 = ∥S|w⊕⟩∥2 =
+�
+
+j∈[n],i∈Ijyj ,
+
+k∈[m],i′∈I
+jyj
+kxk
+
+sk|wiwjyj
+i′ |2
+
+=
+�
+
+i∈I(y)′
+wsizes(P ς(i), x)|wi|2
+
+= wsizer(P, y) ,
+
+(4.20)
+
+so wsizes(Q⊗, x) = wsizes(Q⊕, x) ≤wsizer(P, y).
+Now assume that g(x) = fP (y) = 0. Then we have witnesses |u⟩∈V and |uj¯yj⟩∈V j¯yj, for
+j ∈[n], such that ⟨t|u⟩= ⟨tj¯yj|uj¯yj⟩= 1, ⟨vi|u⟩= 0 for i ∈I(y), ⟨vi|uj¯yj⟩= 0 for i ∈Ij¯yj(x),
+wsizer(P, y) = �
+j∈[n],i∈Ij ¯yj rj|⟨vi|u⟩|2 and wsizes(P j¯yj, x) = �
+
+k∈[m],i∈I
+j ¯yj
+k¯xk
+sk|⟨vi|uj¯yj⟩|2.
+
+Let
+
+|u⊗⟩= |u⟩V ⊗
+�
+
+j∈[n]
+
+�
+
+|uj¯yj⟩V j ¯yj ⊗|tjyj⟩V jyj
+
+∥|tjyj⟩∥2
+
+�
+
+.
+(4.21)
+
+Then ⟨t⊗|u⊗⟩= 1.
+For i ∈Ifree, ⟨v⊗
+i |u⊗⟩= 0 since ⟨vi|u⟩= 0, and similarly for i ∈Ijyj,
+i′ ∈Ijyj(x), ⟨v⊗
+i,i′|u⊗⟩= 0. We also have that for j ∈[n], i ∈Ij¯yj and i′ ∈Ij¯yj(x), ⟨v⊗
+ii′|u⊗⟩= 0,
+since ⟨vi′|uj¯yj⟩= 0. Thus ⟨v⊗
+i |u⊗⟩= 0 for all i ∈I⊗(x), so |u⊗⟩is a witness for fQ⊗(x) = 0.
+Moreover,
+
+wsizes(Q⊗, x) ≤
+�
+
+j∈[n],c∈B,i∈Ijc,
+k∈[m],i′∈Ijc
+k¯xk
+
+sk|⟨v⊗
+ii′|u⊗⟩|2
+
+=
+�
+
+j∈[n],i∈Ij ¯yj ,
+
+k∈[m],i′∈I
+j ¯yj
+k¯xk
+
+sk|⟨v⊗
+ii′|u⊗⟩|2 ,
+(4.22)
+
+19
+
+
+where we have used ⟨v⊗
+ii′|u⊗⟩= 0 for i ∈I(y), since ⟨vi|u⟩= 0,
+
+=
+�
+
+i∈I∖I(y),
+k∈[m],i′∈Iς(i)
+k¯xk
+
+sk
+
+�����
+
+�
+
+⟨vi|V ⊗⟨vi′|V ς(i) ⊗
+�
+
+j∈[n],c∈B:
+(j,c)̸=ς(i)
+
+⟨tjc|V jc
+
+�
+
+·
+
+�
+
+|u⟩V ⊗
+�
+
+j∈[n]
+
+�
+
+|uj¯yj⟩V j ¯yj ⊗|tjyj⟩V jyj
+
+∥|tjyj⟩∥2
+
+�������
+
+2
+
+=
+�
+
+i∈I∖I(y),
+k∈[m],i′∈Iς(i)
+k¯xk
+
+sk|⟨vi|u⟩|2 · |⟨vi′|uς(i)⟩|2
+
+=
+�
+
+i∈I∖I(y)
+wsizes(P ς(i), x)|⟨vi|u⟩|2
+
+= wsizer(P, y) ,
+(4.23)
+
+where we have substituted the definitions of |v⊗
+ii′⟩and |u⊗⟩, and used ⟨tj¯yj|uj¯yj⟩= 1. We conclude
+that fQ⊗= g and wsizes(Q⊗) ≤wsizer(P).
+Let
+|u⊕⟩= |u⟩V +
+�
+
+i∈I∖I(y)
+⟨vi|u⟩|i⟩⊗|ui⟩.
+(4.24)
+
+Then ⟨t⊕|u⊕⟩= 1. For i ∈I⊕
+free, ⟨v⊕
+i |u⊕⟩= 0. Indeed, this follows for i ∈I(y) since ⟨vi|u⟩= 0,
+and it holds for i ∈I ∖I(y) since (⟨vi|V −⟨i| ⊗⟨tς(i)|)(|u⟩V + ⟨vi|u⟩|i⟩⊗|ui⟩) = 0. |u⊕⟩is clearly
+orthogonal to the entire subspace |i⟩⊗V ς(i) for i ∈I(y). Finally, for i ∈I ∖I(y) and i′ ∈Iς(i)(x),
+⟨v⊕
+ii′|u⊕⟩= 0 since ⟨vi′|ui⟩= 0.
+Thus ⟨v⊕
+i |u⊕⟩= 0 for all i ∈I⊕(x), so |u⊕⟩is a witness for
+fQ⊕(x) = 0. Moreover,
+
+wsizes(Q⊕, x) ≤
+�
+
+i∈I∖Ifree
+k∈[m],i′∈Iς(i)
+k¯xk
+
+sk|⟨v⊕
+ii′|u⊕⟩|2
+
+=
+�
+
+i∈I∖I(y)
+k∈[m],i′∈Iς(i)
+k¯xk
+
+sk
+���
+⟨i| ⊗⟨vi′|
+��
+⟨vi|u⟩|i⟩⊗|ui⟩
+���2
+
+=
+�
+
+i∈I∖I(y)
+k∈[m],i′∈Iς(i)
+k¯xk
+
+sk|⟨vi|u⟩|2|⟨vi′|ui⟩|2
+
+=
+�
+
+i∈I∖I(y)
+wsizes(P ς(i), x)|⟨vi|u⟩|2
+
+= wsizer(P, y) .
+(4.25)
+
+We conclude that fQ⊕= g and wsizes(Q⊕) ≤wsizer(P).
+
+Tensor-product composition is somewhat extravagant in the dimension of the final inner product
+space. This is not a particular concern theoretically, since a set of m vectors can always be embedded
+
+20
+
+
+isometrically in at most m dimensions. However, it can be convenient to have an explicit isometric
+embedding of the composed span program’s vectors into a lower dimensional space. The “reduced”
+tensor-product span program composition, which we will define next, is such an embedding. It
+is particularly effective when the outer span program has many zero entries in its input vectors.
+Canonical span programs, defined below in Section 5, are good examples.
+As in the setup for Theorem 4.3, consider functions f : Bn →B and, for k ∈[n], fk : Bm →B.
+Let g : Bm →B be defined by
+
+g(x) = f
+�
+f1(x), f2(x), . . . , fn(x)
+�
+.
+(4.26)
+
+Let P be a span program computing fP = f and, for j ∈[n], let Pj be a span program computing
+fPj = fj.
+Let span program P be in inner-product space V , with target vector |t⟩and input vectors
+indexed by Ifree and Ijc for j ∈[n] and c ∈B. For j ∈[n], let P j1 = Pj and let P j0 be a span
+program computing fP j0 = ¬fP j1 with wsizes(P j0) = wsizes(P j1). For j ∈[n] and c ∈B, let P jc
+
+be in the inner product space V jc with target vector |tjc⟩and input vectors indexed by Ijc
+free and
+Ijc
+kb for k ∈[m], b ∈B.
+Let d = dim(V ) and {|l⟩: l ∈[d]} be an orthonormal basis for V .
+
+Definition 4.6. The tensor-product-composed span program, reduced with respect to the basis {|l⟩:
+l ∈[d]}, is Qr⊗, defined by:
+
+• For l ∈[d], let Zl = {(j, c) ∈[n] × B : ∀i ∈Ijc, ⟨l|vi⟩= 0}, and let πl = �
+(j,c)∈Zl ∥|tjc⟩∥.
+
+• The inner product space of Qr⊗is V r⊗= �
+l∈[d]
+��
+(j,c)/∈Zl V jc�
+. Any vector |v⟩∈V r⊗can
+be uniquely expressed as �
+l∈[d] |l⟩⊗|vl⟩, where |vl⟩∈�
+(j,c)/∈Zl V jc.
+
+• The target vector is
+|tr⊗⟩=
+�
+
+l∈[d]
+⟨l|t⟩|l⟩πl ⊗
+�
+
+(j,c)/∈Zl
+|tjc⟩V jc .
+(4.27)
+
+• The free input vectors are indexed by Ir⊗
+free = I⊗
+free = Ifree ⊔�
+j∈[n],c∈B(Ijc × Ijc
+free) with, for
+i ∈Ir⊗
+free,
+
+|vr⊗
+i ⟩=
+
+
+
+
+
+
+�
+l∈[d] ⟨l|vi⟩|l⟩πl ⊗�
+(j,c)/∈Zl |tjc⟩V jc
+if i ∈Ifree
+�
+l∈[d] ⟨l|vi′⟩|l⟩πl ⊗|vi′′⟩V jc ⊗�
+(j′,c′)/∈Zl:
+(j′,c′)̸=(j,c)
+|tj′c′⟩V j′c′
+if i = (i′, i′′) ∈Ijc × Ijc
+free
+
+(4.28)
+
+• The other input vectors are indexed by Ir⊗
+kb = I⊗
+kb = ⊔j∈[n],c∈B(Ijc × Ijc
+kb) for k ∈[m], b ∈B.
+For i ∈Ijc, i′ ∈Ijc
+kb, let
+
+|vr⊗
+ii′ ⟩=
+�
+
+l∈[d]
+⟨l|vi⟩|l⟩πl ⊗|vi′⟩V jc ⊗
+�
+
+(j′,c′)/∈Zl:
+(j′,c′)̸=(j,c)
+
+|tj′c′⟩V j′c′ .
+(4.29)
+
+For example, if P is a canonical span program—see Definition 5.1 below—with {|x⟩: x ∈
+Bn, fP (x) = 0} an orthonormal basis for V , then for each x with fP (x) = 0, {(j, xj) : j ∈[n]} ⊆Zx.
+
+21
+
+
+Proposition 4.7. The span program Qr⊗computes fQr⊗= g, and, for any s ∈[0, ∞)m,
+
+wsizes(Qr⊗) ≤wsizeσ(P) ,
+(4.30)
+
+where σj = wsizes(Pj) for j ∈[n]. In particular, wsizes(Qr⊗) ≤wsize(P) maxj∈[n] wsizes(Pj).
+
+Proof. Rather than repeat the proof of Theorem 4.3, it is enough to note that the input vectors of
+Qr⊗are in one-to-one correspondence with the input vectors of Q⊗, and that the lengths of, and
+angles between, corresponding vectors are preserved. Therefore, fQr⊗= fQ⊗and for all s ∈[0, ∞)n
+
+and x ∈Bn, wsizes(Qr⊗, x) = wsizes(Q⊗, x).
+
+To conclude this section, let us remark that the composed span programs Q⊕, Q⊗and Qr⊗
+
+from Theorem 4.3 and Definition 4.6 are optimal under certain conditions.
+
+Corollary 4.8. In Theorem 4.3, assume that the functions fj, j ∈[n], depend on disjoint sets of the
+input bits. Assume also that the span programs Pj have witness sizes rj = wsizes(Pj) = Adv±
+s (fj)
+and that P has witness size wsizer(P) = Adv±
+r (f).
+(By Theorem 2.8, these witness sizes are
+optimal.) Then the composed span program Q satisfies
+
+wsizes(Q) = Adv±
+s (g) = Adv±
+r (f) ,
+(4.31)
+
+which is optimal.
+
+Proof. We have the inequalities
+
+Adv±
+r (f) ≤Adv±
+s (g)
+
+≤wsizes(Q)
+
+≤wsizer(P)
+
+= Adv±
+r (f) ,
+
+(4.32)
+
+where the three inequalities are from Theorem 2.7, Theorem 2.8 and Theorem 4.3, respectively.
+Therefore, all inequalities are equalities, and Eq. (4.31) follows.
+
+Theorem 6.1 below will show that a span program P has optimal witness size with costs s among
+all span programs computing fP if and only if wsizes(P) = Adv±
+s (fP ). Therefore, Corollary 4.8
+says that Q is optimal if the input span programs are optimal and the fj depend on disjoint sets
+of the input bits.
+
+4.3
+Strict and real span programs
+
+For searching for span programs with optimal witness size, it turns out that Definition 2.1 is more
+general than necessary. In fact, it suffices to consider span programs over the reals R, and without
+any free input vectors.
+
+Definition 4.9. Let P be a span program.
+
+• P is strict if it has no free input vectors, i.e., Ifree = ∅.
+
+• P is real if in a basis for V the coefficients of the input and target vectors are all real numbers.
+
+22
+
+
+• P is monotone if Ij,0 = ∅for all j ∈[n].
+
+As remarked in Section 2.1, [KW93] considered only strict span programs.
+
+Proposition 4.10. For any span program P, there exists a strict span program P ′ with fP ′ = fP
+and wsizes(P ′, x) = wsizes(P, x) for all s ∈[0, ∞)n and x ∈Bn.
+
+Proof. Construct P ′ by projecting P’s target vector |t⟩and input vectors {|vi⟩: i ∈I ∖Ifree} to
+the space orthogonal to the span of the free input vectors. That is, let ∆free be the projection onto
+the space orthogonal to Span({|vi⟩: i ∈Ifree}). Then the target vector of P ′ is ∆free|t⟩and the
+input vectors are {∆free|vi⟩: i ∈I ∖Ifree}.
+Then fP ′ = fP . Indeed, if fP (x) = 1, i.e., |t⟩= AΠ(x)|w⟩for some witness |w⟩, then |w⟩is also
+a witness for fP ′(x) = 1. Conversely, if fP ′(x) = 1, i.e., for some |w⟩, ∆free|t⟩= ∆freeAΠ(x)|w⟩,
+then |t⟩−AΠ(x)|w⟩∈Range({|vi⟩: i ∈Ifree}), so fP (x) = 1.
+Now fix s ∈[0, ∞)n. We claim that wsizes(P ′, x) = wsizes(P, x) for all x ∈Bn.
+First, if fP (x) = 0, then by Definition 2.3,
+
+wsizes(P, x) =
+min
+|w′⟩:⟨t|w′⟩=1
+Π(x)A†|w′⟩=0
+
+∥SA†|w′⟩∥
+2
+
+=
+min
+|w′⟩:⟨t|w′⟩=1
+Π(x)A†|w′⟩=0
+∆free|w′⟩=|w′⟩
+
+∥SA†|w′⟩∥
+2
+
+=
+min
+|w′⟩:⟨t|∆free|w′⟩=1
+Π(x)A†∆free|w′⟩=0
+
+∥SA†∆free|w′⟩∥
+2
+
+= wsizes(P ′, x) ,
+
+(4.33)
+
+where the second equality is because Π(x)A†|w′⟩= 0 implies in particular that ⟨vi|w′⟩= 0 for all
+i ∈Ifree.
+If fP (x) = 1, then let Πfree = �
+i∈Ifree |i⟩⟨i| and Π′(x) = Π(x) −Πfree = �
+i∈I(x)∖Ifree |i⟩⟨i|. We
+have
+
+wsizes(P, x) =
+min
+|w⟩:AΠ(x)|w⟩=|t⟩∥SΠ′(x)|w⟩∥2
+
+=
+min
+|w⟩:Π′(x)|w⟩=|w⟩
+A|w⟩−|t⟩∈Range(AΠfree)
+
+∥S|w⟩∥2
+(4.34)
+
+=
+min
+|w⟩:∆freeAΠ′(x)|w⟩=∆free|t⟩
+∥S|w⟩∥2
+
+= wsizes(P ′, x) .
+
+Span programs may also be taken to be real without harming the witness size:
+
+Lemma 4.11. For any span program P, there exists a real span program P ′ computing the same
+function fP ′ = fP , with wsizes(P ′, x) ≤wsizes(P, x) for every cost vector s ∈[0, ∞)n and x ∈Bn.
+
+Proof. Let i = √−1. For a complex number c ∈C, let ℜ(c), ℑ(c) ∈R denote its real and imaginary
+parts, c = ℜ(c) + ℑ(c)i. Extend this definition entry-wise to complex vectors: for v ∈Cl, let
+
+23
+
+
+ℜ(v) = (ℜ(v1), . . . , ℜ(vl)) and ℑ(v) = (ℑ(v1), . . . , ℑ(vl)). Furthermore, define R : Cl →Rl ⊗R2
+
+by
+R(v) = ℜ(v) ⊗|0⟩+ ℑ(v) ⊗|1⟩.
+(4.35)
+
+Note that this map satisfies, for any vector v ∈Cl and any scalar c ∈C, ∥R(v)∥= ∥v∥and
+
+R(c v) = ℜ(c)R(v) + ℑ(c)R(iv) .
+(4.36)
+
+Let P have target vector |t⟩, and input vectors |vι⟩for ι ∈I = Ifree ⊔�
+j∈[n],b∈B Ij,b. Fix an
+arbitrary orthonormal basis for P’s inner product space V .
+Let the inner product space for P ′ be V ′ = V ⊗C2. Let P ′’s target vector be |t′⟩= R(|t⟩), and
+its input vectors be indexed by I′ = I × B, such that for any x ∈Bn, the set of available input
+vectors is indexed by I′(x) = I(x) × B. That is, I′
+free = Ifree × B and I′
+j,b = Ij,b × B for j ∈[n] and
+b ∈B. For (ι, b) ∈I′ = I × B, let the corresponding input vector be
+
+|vι,b⟩= R(ib|vι⟩) =
+
+�
+ℜ(|vι⟩) ⊗|0⟩+ ℑ(|vι⟩) ⊗|1⟩
+if b = 0
+−ℑ(|vι⟩) ⊗|0⟩+ ℜ(|vι⟩) ⊗|1⟩
+if b = 1
+(4.37)
+
+Fix a cost vector s ∈[0, ∞)n.
+Let A = �
+ι∈I |vι⟩⟨ι|, A′ = �
+(ι,b)∈I′ |vι,b⟩⟨ι, b| and Π(x) =
+�
+ι∈I(x) |ι⟩⟨ι|.
+The most interesting case to check is when fP ′(x) = 0. Let |w′⟩be an optimal witness, i.e.,
+⟨w′|t′⟩= 1, (Π(x)⊗1)A′†|w′⟩= 0 and wsizes(P ′, x) = ∥(Π(x) ⊗1)A′†|w′⟩∥2. Then since the entries
+of P ′’s target and input vectors are real, ℜ(|w′⟩) is also a witness for fP ′(x) = 0, with equal or
+better witness size, so assume that |w′⟩= ℜ(|w′⟩). Let |w⟩be such that R(|w⟩) = |w′⟩. Then
+ℜ(⟨w|t⟩) = ⟨w′|t′⟩= 1 so |⟨w|t⟩| ≥1; there may be a nonzero imaginary part to ⟨w|t⟩. Also,
+A′†|w′⟩= R(A†|w⟩), so |w⟩is a witness for fP (x) = 0 and ∥(S ⊗1)A′†|w′⟩∥2 = ∥SA†|w⟩∥2. Hence
+wsizes(P, x) ≤wsizes(P ′, x)/|⟨w|t⟩| ≤wsizes(P ′, x).
+The arguments in the other cases are similar. In every case, witnesses for P and for P ′ have a
+simple correspondence. If |w⟩is a witness for fP (x) = b ∈B, then |w′⟩= R(|w⟩) will be a witness
+for fP ′(x) = b. If |w′⟩is a witness for fP ′(x) = b, then so is ℜ(|w′⟩), and letting |w⟩be such that
+R(|w⟩) = ℜ(|w′⟩), |w⟩will be a witness for fP (x) = b. We omit the details.
+
+Lemma 4.11 implies that there would have been no loss in generality in defining span programs
+over R instead of over C. In some cases, though, it is convenient to work over C to have smaller
+span programs. For example, [RˇS08] gives a span program for the three-majority function with
+three input vectors and optimal witness size two, and one can verify that this is impossible for span
+programs over R.
+The idea of the construction in Lemma 4.11 is essentially to replace every entry a of A =
+�
+i∈I |vi⟩⟨i| by the 2 × 2 block
+�ℜa −ℑa
+ℑa ℜa
+�
+to simulate multiplication of complex numbers over the
+reals. The proof can be slightly simplified by assuming, without loss of generality, that |t⟩= |1⟩,
+a basis vector for V . We have avoided doing so, though, in order to illustrate a special case of
+how span programs can be defined over matrices. For j, k, l ∈N, Definition 2.1 and Definition 2.3
+naturally extend to allowing the target to be a vector of j × l matrices and the input vectors to
+have entries that are j × k matrices. The program evaluates to 1 if there exists a way of summing
+available input vectors multiplied by k × l matrices to reach the target. Provided that an entry-
+wise matrix inner product is used in the generalization of Definition 2.3, such programs can be
+simulated over R without changing the witness size. This generalization can be useful for finding
+
+24
+
+
+span programs when we would like to work with a higher-dimensional representation of a function’s
+symmetry group. For example, this technique has been used to find an optimal span program for
+a Hamming-weight threshold function in [RˇS08, Example 5.1].
+Let us conclude this section with one last span program manipulation:
+
+Lemma 4.12. For P a span program and M any invertible linear transformation on P’s inner
+product space V , fP and the witness size of P are invariant under applying M to the target vector
+and all input vectors.
+
+Proof. Let P ′ be the span program in which M has been applied to P’s target and input vectors.
+The claim is that for all x ∈Bn and s ∈[0, ∞)n, fP ′(x) = fP (x) and wsizes(P, x) = wsizes(P ′, x).
+Indeed, the conditions AΠ(x)|w⟩= |t⟩and (MA)Π(x)|w⟩= M|t⟩are equivalent. This implies that
+fP = fP ′ and, when fP (x) = 1, wsizes(P, x) = wsizes(P ′, x), by definition Eq. (2.5). To finish the
+proof, note that when fP (x) = 0,
+
+min
+|w′⟩:⟨t|w′⟩=1
+Π(x)A†|w′⟩=0
+
+∥SA†|w′⟩∥2 =
+min
+|w′⟩:⟨t|M†|w′⟩=1
+Π(x)(MA)†|w′⟩=0
+
+∥S(MA)†|w′⟩∥2
+(4.38)
+
+by the change of variables |w′⟩→M†|w′⟩. By Eq. (2.6), wsizes(P, x) = wsizes(P ′, x).
+
+5
+Canonical span programs
+
+For every function f : Bn →B, there exists a span program P computing fP = f. Indeed, one
+can, for example, expand f into a circuit that uses OR gates and NOT gates. Each OR gate can
+be implemented by a trivial span program with |t⟩= |vi⟩= (1) ∈C. Appealing to Lemma 4.1
+to negate this span program, and using Theorem 4.3 to compose the span programs following the
+circuit, gives a span program for f. However, this naive span program will generally not have
+the optimal witness size among all span programs computing f. Moreover, there is considerable
+freedom in the definition of span programs, so unless f is very simple, it can be quite difficult to
+find an optimal span program.
+In this section we prove that it suffices to search over span programs with a restricted form,
+so-called canonical span programs. Combined with Lemma 4.11, this implies that it suffices to look
+for real, canonical span programs. In Section 6, we will develop a semi-definite program, inspired by
+this reduction, for computing the optimal span program for a function. Canonical span programs
+were originally defined by Karchmer and Wigderson [KW93], but their significance for developing
+quantum algorithms was not at first appreciated.
+
+Definition 5.1 (Canonical span program [KW93]). Let P be a span program computing fP : Bn →
+B, with inner product space V , target vector |t⟩and input vectors |vi⟩for i ∈Ifree ⊔�
+j∈[n],b∈B Ij,b.
+P is canonical if:
+
+• Ifree = ∅. Thus P is strict (Definition 4.9).
+
+• V = CF0 where F0 = {x ∈Bn : fP (x) = 0}.
+
+• In the orthonormal basis {|x⟩: x ∈F0} for V , the target |t⟩is given by |t⟩= �
+x∈F0 |x⟩, and
+
+• For all x ∈F0, j ∈[n] and i ∈Ij,xj, ⟨x|vi⟩= 0.
+
+25
+
+
+Theorem 5.2. For any cost vector s ∈[0, ∞)n, a span program P can be converted to a canonical
+span program ˆP that computes the same function f ˆP = fP , with wsizes( ˆP, x) ≤wsizes(P, x) for
+all x ∈Bn. In fact, for all x ∈Bn with fP (x) = 0, wsizes( ˆP, x) = wsizes(P, x), with |x⟩itself an
+optimal witness for f ˆP (x) = 0.
+Moreover, ˆP uses the same input vector index sets Ij,b as P, so in particular if P is monotone
+then ˆP is also monotone. If P is real, then so is ˆP.
+
+Proof. This theorem is analogous to [KW93, Theorem 6], and we use the same conversion procedure,
+except we additionally analyze the witness size.
+Let P have target vector |t⟩∈V and input vectors |vi⟩for i ∈I = Ifree ∪�
+j∈[n],b∈B Ij,b. Recall
+the definitions A = �
+i∈I |vi⟩⟨i|, I(x) = Ifree ∪�
+j∈[n] Ij,xj and Π(x) = �
+i∈I(x) |i⟩⟨i|. Fix s ∈[0, ∞)n
+
+and let S = �
+j∈[n],b∈B,i∈Ij,b
+√sj|i⟩⟨i|.
+For x ∈Bn, let |w(x)⟩or |w′(x)⟩be optimal witnesses for fP (x) being 1 or 0, respectively, with
+costs s. That is, let
+
+|w(x)⟩= arg min|w⟩:AΠ(x)|w⟩=|t⟩∥S|w⟩∥2
+if fP (x) = 1
+
+|w′(x)⟩= arg min |w′⟩:⟨t|w′⟩=1
+Π(x)A†|w′⟩=0
+∥SA†|w′⟩∥2
+if fP (x) = 0
+(5.1)
+
+(See [RˇS08, Lemma A.3] for explicit formulas for |w(x)⟩and |w′(x)⟩.)
+Let F0 = {x ∈Bn : fP (x) = 0}. To construct ˆP from P, simply apply to P’s target and input
+vectors the map �
+x∈F0 |x⟩⟨w′(x)| ∈L(V, CF0). Then
+
+• The target vector becomes |ˆt⟩= �
+x∈F0 |x⟩⟨w′(x)|t⟩= �
+x∈F0 |x⟩∈CF0, as required for a
+canonical span program. The input vectors become, for i ∈I, |ˆvi⟩= �
+x∈F0 |x⟩⟨w′(x)|vi⟩.
+
+• For any x ∈F0 and i ∈I(x), since ⟨w′(x)|vi⟩= 0, ⟨x|ˆvi⟩= 0.
+
+• In particular, for i ∈Ifree, ⟨x|ˆvi⟩= 0 for all x ∈F0. Thus |ˆvi⟩= 0, so the free input vectors
+may be discarded.
+
+Therefore ˆP is a canonical span program. ˆP is monotone if P is monotone, and ˆP is real if P is
+real.
+Let ˆA = �
+i∈I |ˆvi⟩⟨i| = �
+x∈F0 |x⟩⟨w′(x)|A.
+For x ∈F0, note that ⟨ˆt|x⟩= 1 and
+ˆA†|x⟩= A†|w′(x)⟩.
+(5.2)
+
+In particular, Π(x) ˆA†|x⟩= 0, so |x⟩is a witness for f ˆP (x) = 0. Also, wsizes( ˆP, x) ≤∥S ˆA†|x⟩∥2 =
+∥SA†|w′(x)⟩∥2 = wsizes(P, x). In fact, |x⟩is an optimal witness for f ˆP (x) = 0. Indeed, assume
+otherwise, and let |ˆu⟩= �
+y∈F0 ˆuy|y⟩satisfy ⟨ˆt|ˆu⟩= �
+y∈F0 ˆuy = 1, Π(x) ˆA†|ˆu⟩= 0 and ∥S ˆA†|ˆu⟩∥2 <
+∥S ˆA†|x⟩∥2. Let |u⟩= �
+y∈F0 ˆuy|w′(y)⟩, so A†|u⟩= ˆA†|ˆu⟩. Then ⟨t|u⟩= 1, Π(x)A†|u⟩= 0, and
+∥SA†|u⟩∥2 = ∥S ˆA†|ˆu⟩∥2 < wsizes(P, x), a contradiction.
+Next consider an x ∈Bn such that fP (x) = 1. Then
+
+ˆAΠ(x)|w(x)⟩=
+�
+
+y∈F0
+|y⟩⟨w′(y)|AΠ(x)|w(x)⟩
+
+=
+�
+
+y∈F0
+|y⟩⟨w′(y)|t⟩
+
+= |ˆt⟩.
+
+(5.3)
+
+26
+
+
+Thus |w(x)⟩is a witness for f ˆP (x) = 1, and wsizes( ˆP, x) ≤∥S|w(x)⟩∥2 = wsizes(P, x).
+
+Note that the canonical span program ˆP from Theorem 5.2 depends on the cost vector s. In
+contrast, the strict span program P ′ from Proposition 4.10 has witness size equal to that of P for
+all s ∈[0, ∞)n.
+
+6
+Span program witness size and the general adversary bound
+
+In this section, we will use Theorem 5.2 to formulate a semi-definite program (SDP) for the optimal
+span program computing a boolean function f. Remarkably, this SDP turns out to be exactly the
+dual of the SDP that defines the general adversary bound for f (Definition 2.4). Thus the optimal
+span program witness size is exactly equal to the general adversary bound. This result has several
+corollaries, in quantum algorithms and in complexity theory, that we give in Section 7.
+This result may be somewhat surprising, because the optimal span programs known previously
+were all for functions f with Adv(f) = Adv±(f) [RˇS08]. It is not clear why earlier attempts to
+find optimal span programs did not succeed for any function f with Adv(f) < Adv±(f).
+
+Theorem 6.1. For any function f : D →B, with D ⊆Bn, and any cost vector s ∈[0, ∞)n,
+
+inf
+P: fP |D=f wsizes(P, D) = Adv±
+s (f) ,
+(6.1)
+
+where the infimum is over span programs P that compute a function agreeing with f on D. More-
+over, this infimum is achieved.
+
+Before proving Theorem 6.1, let us show the following dual characterization of the general
+adversary bound:
+
+Theorem 6.2. For finite sets D ⊆Cn, and E, let f : D →E, and let s ∈[0, ∞)n be a vector of
+nonnegative costs. If either C = {0, 1} or E = {0, 1}, then the general adversary bound for f, with
+costs s, equals
+
+Adv±
+s (f) =
+min
+X⪰0:
+∀(x,y)∈F, P
+j∈[n]:xj̸=yj ⟨x,j|X|y,j⟩=1
+max
+x∈D
+
+�
+
+j∈[n]
+sj⟨x, j|X|x, j⟩.
+(6.2)
+
+Here X is required to be a positive semi-definite, (n|D|) × (n|D|) matrix, with coordinates labeled
+by D × [n], and F = {(x, y) ∈D × D : f(x) ̸= f(y)}. The optimum is achieved.
+
+Proof. The proof is by a standard application of duality theory to the semi-definite program given
+in Definition 2.4. Nonetheless, this expression for Adv±
+s (f) is new, and is somewhat simpler than
+the expression that was known before, Eq. (6.6) below. Therefore we include a proof, based on the
+following immediate observation:
+
+Claim 6.3. Let M = �
+j,k∈[m] Mjk|j⟩⟨k| ∈L(C[m]) be an m × m Hermitian matrix. Assume that
+either M is entry-wise nonnegative, i.e., Mjk ≥0 for all j, k ∈[m], or that M is bipartite, i.e., for
+some l ∈[m −1], M = �
+j≤l,k>l(Mjk|j⟩⟨k| + Mkj|k⟩⟨j|). Then M ⪯1 if and only if ∥M∥≤1.
+
+27
+
+
+Taking the dual of the SDP on the right-hand side of Eq. (6.2), we obtain
+
+max
+˜Γ=P
+F αxy|x⟩⟨y|
+{βx≥0}
+
+�
+
+F
+αxy
+such that
+�
+
+x
+βx ≤1, ∀j, ˜Γj ⪯sj
+�
+
+x
+βx|x⟩⟨x| .
+(6.3)
+
+Here ˜Γj = ˜Γ ◦∆j = �
+x,y∈D:xj̸=yj |x⟩⟨x|˜Γ|y⟩⟨y| as in Definition 2.4. Also, ˜Γj ⪯sj
+�
+x βx|x⟩⟨x| means
+
+that the difference (sj
+�
+x∈D βx|x⟩⟨x|) −˜Γj is a positive semi-definite matrix. In particular, this
+constraint implies that if sj = 0 then αxy = 0 for all x, y with xj ̸= yj; and that if αxy ̸= 0, then
+βx > 0 and βy > 0.
+Thus we can change variables, letting Γ = �
+(x,y)∈∆:αxy̸=0
+αxy
+√
+
+βxβy |x⟩⟨y|.
+Like ˜Γ, Γ can vary
+
+over the set of adversary matrices, i.e., symmetric matrices supported only on those |x⟩⟨y| with
+f(x) ̸= f(y). The objective function becomes �
+F ⟨x|Γ|y⟩
+�
+
+βxβy, and, for j ∈[n], the constraint
+on ˜Γj becomes Γj ⪯sj1, where Γj = Γ ◦∆j.
+Now if C = {0, 1}, then the matrices ∆j are bipartite—perhaps in a permuted basis—so each
+Γj is also bipartite. If E = {0, 1}, then Γ is bipartite since it is supported only on F. In either
+case, by Claim 6.3 the condition Γj ⪯sj1 is equivalent to ∥Γj∥≤sj. Therefore, after changing
+variables, the SDP becomes
+
+max
+adversary matrices Γ
+{βx≥0}
+
+�
+
+F
+⟨x|Γ|y⟩
+�
+
+βxβy
+such that
+�
+
+x
+βx ≤1, ∀j, ∥Γj∥≤sj .
+(6.4)
+
+Since any negative signs on the coordinates of the principal eigenvector of Γ can be absorbed into
+the matrix, without affecting the norms of the Γj, the objective function in Eq. (6.4) simplifies
+to ∥Γ∥, so we obtain Adv±(f). Since the dual SDP in Eq. (6.3) is clearly strictly feasible, by
+the duality principle [Lov03, Theorem 3.4] the primal optimum equals the dual optimum and the
+primal optimum is achieved. Eq. (6.2) follows.
+
+For completeness, we state without proof the dual forms of the adversary bounds for the case
+of functions without a binary input alphabet or boolean codomain:
+
+Theorem 6.4. For finite sets D ⊆Cn, and E, let f : D →E, and let s ∈[0, ∞)n. Let F =
+�
+x,y∈D: f(x)̸=f(y) |x⟩⟨y|. As in Definition 2.4, let ∆j = �
+x,y∈D:xj̸=yj |x⟩⟨y| for j ∈[n], and let ◦
+denote entry-wise matrix multiplication.
+Then the nonnegative-weight adversary bound for f, with costs s, equals
+
+Advs(f) =
+min
+Xj⪰0:
+P
+j Xj◦∆j◦F≥F
+
+max
+x∈D
+
+�
+
+j∈[n]
+sj⟨x|Xj|x⟩.
+(6.5)
+
+The minimization is over |D| × |D| positive semi-definite matrices Xj, j ∈[n], that satisfy the
+entry-wise inequality �
+j Xj ◦∆j ◦F ≥F. (Note that Eq. (6.2) has the same form, except with the
+requirement that �
+j Xj ◦∆j ◦F = F.)
+The general adversary bound for f, with costs s, equals
+
+Adv±
+s (f) =
+min
+Xj,Yj⪰0:
+P
+j(Xj−Yj)◦∆j◦F=F
+
+max
+x∈D
+
+�
+
+j∈[n]
+sj⟨x|(Xj + Yj)|x⟩.
+(6.6)
+
+28
+
+
+Proof of Theorem 6.1. Lemma 6.5 constructs an SDP whose solution is the optimal witness size of
+a span program computing f.
+
+Lemma 6.5. Let f : D →B, with D ⊆Bn, be a partial boolean function.
+For b ∈B, let
+Fb = {x ∈D : f(x) = b}. Then for any cost vector s ∈[0, ∞)n,
+
+inf
+P: fP |D=f wsizes(P, D) =
+inf
+m∈N,
+{|vxj⟩∈Rm: x∈D,j∈[n]} :
+∀(x,y)∈F0×F1, P
+j∈[n]:xj̸=yj ⟨vxj|vyj⟩=1
+
+max
+x∈D
+
+�
+
+j∈[n]
+sj∥|vxj⟩∥2 .
+(6.7)
+
+Proof. The proof is by establishing a correspondence between solutions to the constraints on
+the right-hand side of Eq. (6.7) and real, canonical span programs computing fP |D = f with
+maxj∈[n],b∈B |Ij,b| ≤m.
+First let us prove the ≤direction. Given a solution {|vxj⟩}, let P be a span program with target
+|t⟩= �
+x∈F0 |x⟩∈RF0 and Ij,b = [m] for all j ∈[n], b ∈B. These sets are not disjoint, so for k ∈Ij,b,
+use |vjbk⟩to denote the corresponding input vector, defined by |vjbk⟩= �
+x∈F0:xj̸=b ⟨vxj|k⟩|x⟩. Thus
+
+A :=
+�
+
+j∈[n],b∈B,k∈[m]
+|vjbk⟩⟨j, b, k|
+
+=
+�
+
+x∈F0,j∈[n]
+|x⟩⟨j, ¯xj| ⊗⟨vxj| .
+(6.8)
+
+For x ∈F0, |w′⟩= |x⟩is a witness for fP (x) = 0; ⟨x|t⟩= 1 but ⟨x|vjxjk⟩= 0 for all j, k. The
+witness size is ∥A†|x⟩∥2 = �
+j sj∥|vxj⟩∥2.
+For x ∈F1, let |w⟩= �
+j |j, xj⟩⊗|vxj⟩. The condition that �
+j:xj̸=yj ⟨vyj|vxj⟩= 1 implies that
+
+|w⟩is a witness, AΠ(x)|w⟩= A|w⟩= |t⟩, so fP (x) = 1. The witness size is ∥|w⟩∥2 = �
+j sj∥|vxj⟩∥2.
+Thus fP |D = f and wsizes(P, D) ≤maxx
+�
+j sj∥|vxj⟩∥2.
+Now let us prove the ≥direction. Let P be a span program computing fP , with fP |D = f. By
+Theorem 5.2 and Lemma 4.11, we may assume that P is real and in canonical form, and that for
+each x ∈F0, |x⟩is an optimal witness for fP (x) = 0: wsizes(P, x) = ∥SA†|x⟩∥2.
+Thus the target vector is |t⟩= �
+x∈F0 |x⟩and the input vectors lie in the inner product
+space RF0. Let m = maxj∈[n],b∈B |Ij,b|. Without loss of generality, we may assume that |Ij,b| = m
+for all j ∈[n] and b ∈B. Indeed, if some index set Ij,b is smaller, then we can pad the span program
+with zero vectors labeled by (j, b) without affecting the witness size. Therefore, let Ij,b = [m] for all
+j ∈[n] and b ∈B. These sets are not disjoint, so for k ∈Ij,b, use |vjbk⟩to denote the corresponding
+input vector.
+For x ∈F0, note that since the span program is canonical, ⟨x|vjxjk⟩= 0 for all j ∈[n] and
+k ∈[m].
+For j ∈[n], let |vxj⟩= �
+k∈[m] ⟨vj¯xjk|x⟩|k⟩.
+Then Eq. (6.8) again holds.
+Moreover,
+
+wsizes(P, x) = ∥SA†|x⟩∥2 = �
+j∈[n] sj∥|vxj⟩∥2. Thus maxx∈F0
+�
+j sj∥|vxj⟩∥2 ≤wsizes(P, D).
+For x ∈F1, on the other hand, let |wx⟩be an optimal witness vector, i.e., satisfying |wx⟩=
+Π(x)|wx⟩= �
+j∈[n],k∈[m] |j, xj, k⟩⟨j, xj, k|wx⟩, A|wx⟩= |t⟩and wsizes(P, x) = ∥S|wx⟩∥2. For j ∈[n],
+let |vxj⟩= �
+k∈[m] |k⟩⟨j, xj, k|wx⟩. Then
+
+A|wx⟩= |t⟩
+=⇒
+∀y ∈F0,
+�
+
+j:xj̸=yj
+⟨vyj|vxj⟩= 1 .
+(6.9)
+
+Finally, wsizes(P, x) = �
+j sj∥|vxj⟩∥2, so maxx∈F1
+�
+j sj∥|vxj⟩∥2 ≤wsizes(P, D).
+
+29
+
+
+Now the expression on the right-hand side of Eq. (6.1) is just the Cholesky decomposition of
+the solution to the SDP in Eq. (6.2).
+We conclude that infP:fP |D=f wsizes(P) = Adv±
+s (f), as
+claimed.
+
+Before stating some corollaries of Theorem 6.1, let us make a remark on the proof:
+
+Lemma 6.6. For a function f : D →B, with D ⊆Bn, assume that there is a rank-k optimal
+solution X to Eq. (6.2) for Adv±(f). Note that k ≤n|D| ≤n2n. Then by the proof of Lemma 6.5
+there is an optimal span program computing f with |Ij,b| = k for all j ∈[n] and b ∈B.
+
+[HLˇS07, Theorem 18] states in particular that Eq. (6.5) always has a rank-one optimal solution.
+The proof takes the Cholesky decomposition of a solution X = �
+x,y,j,j′ |x, j⟩⟨vxj|vyj′⟩⟨y, j′|, and
+replaces each vector |vxj⟩by the scalar ∥|vxj⟩∥. That is, let X′ = �
+x,y,j,j′ ∥|vxj⟩∥∥|vyj′⟩∥|x, j⟩⟨y, j′|,
+a rank-one matrix.
+Then by the Cauchy-Schwarz inequality, ⟨x, j|X′|y, j⟩≥⟨x, j|X|y, j⟩, with
+equality when y = x, so X′ is as good a solution to Eq. (6.5) as X is. However, note that even
+when Advs(f) = Adv±
+s (f), this argument does not imply that Eq. (6.2) has a rank-one optimal
+solution [ˇSpa09].
+
+7
+Consequences of the SDP for optimal witness size
+
+This section will state several corollaries of Theorem 6.1. First of all, we can strengthen Theo-
+rem 3.1.
+
+Theorem 7.1. For any function f : D →{0, 1}, with D ⊆{0, 1}n, there exists a span program P
+computing fP |D = f with witness size upper-bounded by the bounded-error quantum query complex-
+ity of f,
+wsize(P, D) = O(Q(f)) .
+(7.1)
+
+Proof. By Theorem 2.6, the quantum query complexity of f is lower-bounded by the general ad-
+versary bound for f, which by Theorem 6.1 equals the best span program witness size:
+
+Q(f) = Ω(Adv±(f))
+(7.2)
+
+= Ω
+�
+inf
+P:fP |D=f wsize(P, D)
+�
+.
+
+It is an interesting problem to prove Theorem 7.1 based directly on a quantum query algorithm
+that evaluates f, as in the proof of Theorem 3.1 for the one-sided error case.
+As an immediate corollary of Theorem 6.1 and Theorem 4.3, the general adversary bound com-
+poses multiplicatively for boolean functions. That is, the inequality in Eq. (2.17), from Theorem 2.7,
+is actually an equality.
+
+Theorem 7.2 (General adversary bound composition). Let f : {0, 1}n →{0, 1} and, for j ∈[n], let
+fj : {0, 1}mj →{0, 1}. Define g : {0, 1}m1×· · ·×{0, 1}mn →{0, 1} by g(x) = f
+�
+f1(x1), . . . , fn(xn)
+�
+.
+Let s ∈[0, ∞)m1 × · · · × [0, ∞)mn, and let βj = Adv±
+sj(fj) for j ∈[n]. Then
+
+Adv±
+s (g) = Adv±
+β (f) .
+(7.3)
+
+In particular, if Adv±
+s1(f1) = · · · = Adv±
+sn(fn) = β, then Adv±
+s (g) = β Adv±(f).
+
+30
+
+
+Proof. Theorem 2.7 gives the inequality Adv±
+s (g) ≥Adv±
+β (f). To obtain the opposite inequality,
+appeal to Theorem 6.1 to obtain optimal span programs for the functions, compose these span
+programs using Theorem 4.3, and appeal to Theorem 6.1 to upper-bound Adv±
+s (g).
+This proof is rather indirect. Based on the new formulation of the general adversary bound in
+Theorem 6.2, we can also give a direct proof of Theorem 7.2 that does not use span programs.
+Recall that B = {0, 1}. For x ∈Bm1 × · · · × Bmn, let y(x) = (f1(x), . . . , fn(x)), so g(x) =
+f(y(x)).
+For y ∈Bn and j ∈[n], fix vectors |vyj⟩∈V that achieve Adv±
+β (f), i.e., �
+j:yj̸=yj′ ⟨vyj|vy′j⟩= 1
+
+for all y, y′ ∈Bn with f(y) ̸= f(y′), and Adv±
+β (f) = maxy∈Bn �
+j∈[n] βj∥|vyj⟩∥2. For j ∈[n], fix
+
+vectors |vj
+zk⟩∈V j for z ∈Bmj, k ∈[mj], that achieve Adv±
+sj(fj), i.e., �
+k:zk̸=z′
+k ⟨vj
+zk|vj
+z′k⟩= 1 for
+all z, z′ ∈Bmj with fj(z) ̸= fj(z′).
+Based on these solutions, we construct a feasible solution for the dual formulation of Adv±
+s (g).
+For x ∈Bm1 × · · · × Bmn, j ∈[n] and k ∈[mj], let
+
+|wxjk⟩= |vy(x)j⟩⊗|vj
+xjk⟩⊗|δg(x),fj(xj)⟩∈V ⊗(⊕j∈nV j) ⊗C2 .
+(7.4)
+
+Here, the third register is spanned by the orthonormal basis {|0⟩, |1⟩}, and δa,b is 1 if a = b and 0
+otherwise.
+Consider x, x′ ∈Bm1 × · · · × Bmn such that g(x) ̸= g(x′). In particular, y(x) ̸= y(x′). Then
+�
+
+j∈[n],k∈[mj]:
+xjk̸=x′
+jk
+
+⟨wxjk|wx′jk⟩=
+�
+
+j∈[n]
+⟨vy(x)j|vy(x′)j⟩
+�
+
+k∈[mj]:xjk̸=x′
+jk
+
+⟨vj
+xjk|vj
+x′
+jk⟩(1 −δfj(xj),fj(x′
+j))
+
+=
+�
+
+j∈[n]:y(x)j̸=y(x′)j
+⟨vy(x)j|vy(x′)j⟩
+�
+
+k∈[mj]:xjk̸=x′
+jk
+
+⟨vj
+xjk|vj
+x′
+jk⟩
+
+=
+�
+
+j∈[n]:y(x)j̸=y(x′)j
+⟨vy(x)j|vy(x′)j⟩
+
+= 1 .
+
+(7.5)
+
+Hence indeed the vectors |wxjk⟩give a feasible solution. We conclude that
+
+Adv±
+s (g) ≤
+max
+x∈Bm1×···×Bmn
+�
+
+j∈[n],k∈[mj]
+sjk∥|wxjk⟩∥2
+
+= max
+x
+
+�
+
+j∈[n]
+∥|vy(x)j⟩∥2 �
+
+k∈[mj]
+sjk∥|vj
+xjk⟩∥
+2
+
+≤max
+x
+
+�
+
+j∈[n]
+βj∥|vy(x)j⟩∥2
+
+= Adv±
+β (f) .
+
+(7.6)
+
+The last step is clearly an inequality, which is all we actually need to finish the proof. It is in fact
+an equality, though, because y(x) varies over all strings in Bn as x varies over Bm1 ×· · ·×Bmn.
+
+By substituting Theorem 6.1 into Theorem 1.1, we obtain an exact asymptotic expression for
+the quantum query complexity of a boolean function f composed on itself.
+
+31
+
+
+Theorem 7.3. For any function f : {0, 1}n →{0, 1}, define fk : {0, 1}nk →{0, 1} as the function
+f composed on itself repeatedly to a depth of k, as in Theorem 1.1. Then
+
+lim
+k→∞Q(fk)1/k = Adv±(f) .
+(7.7)
+
+Proof. By the adversary lower bound Theorem 2.6, Q(fk) = Ω(Adv±(fk)) = Ω(Adv±(f)k) by
+Theorem 2.7. Hence lim infk→∞Q(fk)1/k ≥Adv±(f). Theorem 6.1 together with the formula-
+evaluation algorithm Theorem 1.1 implies Q(fk) = Ok(Adv±(f)k). Hence lim supk→∞Q(fk)1/k ≤
+Adv±(f).
+
+Theorem 7.3 implies a new asymptotic upper bound on the sign-degree of a boolean function f
+composed on itself to a depth of k, as k →∞.
+
+Definition 7.4 (Sign-degree). Given a function f : {0, 1}n →{0, 1}, a real multivariate polynomial
+p(x1, . . . , xn) is said to be a threshold polynomial that sign-represents f if for all inputs x ∈{0, 1}n,
+p(x) ̸= 0 and the signs of p(x) and (−1)f(x) coincide.
+The sign-degree of f, sign-degree(f), is defined as the least degree of a polynomial that sign-
+represents f.
+
+By the polynomial method [BBC+01, NC00], sign-degree(f) = O(Q(f)) for every boolean
+function f. (See also Refs. [MNR07, BVdW07], which relate the sign-degree of f to the unbounded-
+error quantum and classical query complexities of f.) Thus we obtain the following corollary of
+Theorem 7.3:
+
+Corollary 7.5. For any function f : {0, 1}n →{0, 1},
+
+lim sup
+k→∞
+sign-degree(fk)1/k ≤lim
+k→∞Q(fk)1/k = Adv±(f) .
+(7.8)
+
+Lee and Servedio have recently shown that sign-degree(f)k ≤sign-degree(fk) [Lee09], based on
+which Corollary 7.5 gives an upper bound of the sign-degree of f itself.
+One special case of interest is when f is a read-once AND-OR formula on n variables.
+In
+this case, Adv(f) = Adv±(f) = √n [BS04]. Indeed, these bounds can be computed by show-
+ing Adv(s1,...,sm)(ANDm) = Adv±
+(s1,...,sm)(ANDm) =
+��
+j∈[m] s2
+j, where ANDm denotes the AND
+gate on m variables, and then using Theorem 2.7 and Theorem 7.2 to compose the nonnegative-
+weight and general adversary bounds, respectively. O’Donnell and Servedio [OS03] asked whether
+sign-degree(f) = O(√n)? This question has consequences in learning theory [KS01, KOS04]. Am-
+bainis et al. proved that sign-degree(f) = n1/2+o(1) by giving a quantum algorithm, and, therefore,
+an explicit threshold polynomial [ACR+07]. Combined with the unpublished result of Lee and
+Servedio mentioned above, Corollary 7.5 will close this question. In fact, though, [ACR+07] with
+Lee and Servedio’s result already suffices; the composed function fk is an “approximately bal-
+anced” formula for any fixed AND-OR formula f, and, by another result of [ACR+07], therefore
+sign-degree(fk) = O(
+√
+
+nk).
+Theorem 1.1 is only a special case of the formula-evaluation result from [RˇS08]. That article’s
+main result, [RˇS08, Theorem 4.7], can also be extended. For brevity, we will not repeat all the
+notation and definitions, but will just state the extension. [RˇS08] used the nonnegative-weight
+adversary bound Adv instead of the general adversary bound Adv± throughout, because only for
+functions f with Adv(f) = Adv±(f) had the authors found matching span programs. Theorem 6.1,
+
+32
+
+
+however, gives optimal span programs for every boolean function f. Thus if we modify [RˇS08,
+Def. 4.5], defining adversary-balanced formulas, to refer to Adv± instead of Adv, and if we let S
+be any finite gate set of boolean functions, [RˇS08, Theorem 4.7] becomes:
+
+Theorem 7.6. There exists a quantum algorithm that evaluates an adversary-balanced formula
+ϕ(x) over S using O(Adv±(ϕ)) input queries. After efficient classical preprocessing independent
+of the input x, and assuming O(1)-time coherent access to the preprocessed classical string, the
+running time of the algorithm is Adv±(ϕ)(log Adv±(ϕ))O(1).
+
+Aside from changing Adv to Adv±, the proof from [RˇS08] goes through entirely. Note that
+layered formulas, in which gates at the same depth are the same, are a special case of adversary-
+balanced formulas.
+
+8
+Correspondence between span programs and bipartite graphs
+
+In this section, we define a correspondence between span programs and weighted bipartite graphs,
+slightly generalizing the correspondence from [RˇS08]. We also analyze the spectra of these graphs,
+focusing on eigenvalues near zero and eigenvectors supported on one particular “output vertex.”
+The main result, Theorem 8.3, relates spectral quantities of interest to the span program witness
+size. This is the key theorem that allows span programs to be evaluated on a quantum computer.
+Theorem 8.3’s proof has two main steps. The first step, an eigenvalue-zero analysis given in
+Section 8.1, is essentially the same as the argument in [RˇS08]. However, the second step, analyzing
+small, nonzero eigenvalues, is novel. Section 8.2 gives a general argument that relates properties of
+eigenvalue-zero eigenvectors of weighted bipartite graphs to what are in a certain sense “effective”
+spectral gaps.
+This small-eigenvalue analysis substantially extends the proof in [RˇS08]. The small-eigenvalue
+analysis in [RˇS08] only works for span programs that arise from the concatenation of constant-size
+span programs with constant entries, with strict balance conditions, and it breaks down when these
+conditions are relaxed. For example, [RˇS08] shows spectral gaps of Ω(1/wsize(P)) away from zero,
+for a span program P, but the spectral gaps for general span programs cannot be lower-bounded in
+terms of the witness size. The small-eigenvalue analysis in [RˇS08] is also more technically involved.
+Theorem 8.3 implies a simpler proof of Theorem 1.1 and Theorem 7.6, as well as for the AND-OR
+formula-evaluation result in [ACR+07].
+
+Definition 8.1. A finite, weighted, bipartite graph G is specified by finite sets T and U, and
+BG ∈L(CU, CT ) the “biadjacency matrix.” G has vertices {τi : i ∈T} ⊔{µj : j ∈U}. For each
+i ∈T and j ∈U with ⟨i|BG|j⟩̸= 0, G has an edge (τi, µj) weighted by ⟨i|BG|j⟩. The weighted
+adjacency matrix of G, AG ∈L(CT ⊕CU), is
+
+AG =
+�0
+BG
+B†
+G
+0
+
+�
+T
+U
+T
+U
+(8.1)
+
+Henceforth all graphs will be finite.
+Recall from Section 2 that B = {0, 1}.
+For a given
+span program, recall also the definitions A = �
+i∈I |vi⟩⟨i|, I(x) = Ifree ∪�
+j∈[n] Ij,xj and Π(x) =
+�
+i∈I(x) |i⟩⟨i|. Let
+
+Π(x) = 1 −Π(x) =
+�
+
+i∈I∖I(x)
+|i⟩⟨i| .
+(8.2)
+
+33
+
+
+Now the correspondence between span programs and weighted bipartite graphs is given by:
+
+Definition 8.2 (Graphs GP (x)). Let P be a span program with target vector |t⟩and input vectors
+|vi⟩for i ∈I = Ifree ∪�
+j∈[n],b∈B Ij,b, in inner product space V . Fix an arbitrary orthonormal basis
+{|k⟩: k ∈[dim(V )]} for V .
+Let GP be the weighted bipartite graph with T = [dim(V )] ⊔I, U = {0} ⊔I and the biadjacency
+matrix
+
+BGP =
+�|t⟩
+A
+0
+1
+
+�
+0
+I
+V
+I
+(8.3)
+
+The vertex µ0 is called the “output vertex.”
+Note that for each input vector index i ∈I, GP has two corresponding vertices, with a weight-
+one edge between them. For x ∈Bn, let GP (x) be the same as GP except with these weight-one
+edges deleted for all i ∈I(x). That is, GP (x) has the biadjacency matrix
+
+BGP (x) =
+�|t⟩
+A
+0
+Π(x)
+
+�
+0
+I
+V
+I
+(8.4)
+
+Definition 8.2 is a modest generalization of the correspondence between span programs and
+bipartite graphs given in [RˇS08, Sec. 2]. The difference is that [RˇS08] only defines GP (x) for span
+programs with target |t⟩= (1, 0, 0, . . . , 0). This is not a very restrictive requirement, though, since
+a unitary change of basis can ensure that |t⟩= (∥|t⟩∥, 0, . . . , 0).
+It will be convenient to establish some more notation. Any vector |ψ⟩∈CT ⊕CU can be
+uniquely expanded as |ψ⟩= (|ψT ⟩, |ψU⟩), with |ψT ⟩∈CT and |ψU⟩∈CU. For the graphs GP (x),
+CT = V ⊕CI and CU = C{0} ⊕CI, so any |ψ⟩∈CT ⊕CU can similarly be written |ψ⟩=
+�
+(|ψT,V ⟩, |ψT,I⟩), (ψU,0, |ψU,I⟩)
+�
+. Let |0⟩= (0, 1, 0) ∈CT ⊕C{0}⊕CI be the unit vector on vertex µ0.
+With this notation, the eigenvalue-ρ eigenvector equation of AGP (x),
+
+ρ|ψ⟩= AGP (x)|ψ⟩,
+(8.5)
+
+is equivalent to the four equations
+
+ρ|ψT,V ⟩= ψU,0|t⟩+ A|ψU,I⟩
+(8.6a)
+
+ρ|ψT,I⟩= Π(x)|ψU,I⟩
+(8.6b)
+
+ρ ψU,0 = ⟨t|ψT,I⟩
+(8.6c)
+
+ρ|ψU,I⟩= A†|ψT,V ⟩+ Π(x)|ψT,I⟩.
+(8.6d)
+
+Our main result is:
+
+Theorem 8.3. Let P be a span program and D ⊆Bn. Then a span program P ′ can be constructed
+such that fP ′ = fP and, for all x ∈D,
+
+• If fP (x) = 1, then there is an eigenvalue-zero eigenvector |ψ⟩of AGP ′(x) with
+
+|⟨0|ψ⟩|2
+
+∥|ψ⟩∥2 ≥1
+
+2 .
+(8.7)
+
+34
+
+
+• If fP (x) = 0, let {|α⟩} be a complete set of orthonormal eigenvectors of AGP ′(x), with cor-
+responding eigenvalues ρ(α). Then for any c ≥0, the squared length of the projection of |0⟩
+onto the span of the eigenvectors α with |ρ(α)| ≤c/wsize(P, D) satisfies
+
+�
+
+α: |ρ(α)|≤c/wsize(P,D)
+|⟨α|0⟩|2 ≤8c2�
+1 +
+1
+wsize(P, D)
+
+�
+≤16c2 .
+(8.8)
+
+Roughly, Eq. (8.8) says that AGP ′(x) has an effective spectral gap around zero. We will see in
+Section 9 below that this is strong enough for applying quantum phase estimation.
+The two main ingredients required for proving Theorem 8.3, an eigenvalue-zero analysis of
+AGP (x) and an analysis relating eigenvalue-zero eigenvectors to the effective spectral gap. These
+two ingredients are presented in Section 8.1 and Section 8.2 below.
+Section 8.3 will put them
+together to prove Theorem 8.3.
+Theorem 8.3 is quite useful. However, we will see in Section 9 below that for some applications,
+using Theorem 8.3 as a black box can lead to an O(log n) overhead in the quantum query complexity.
+Theorem 9.1 will include two quantum query algorithms. The more specialized algorithm does not
+incur a logarithmic overhead, but requires that the norm of the adjacency matrix be at most a
+constant. However, the span program P ′ that Theorem 8.3 outputs will not necessarily satisfy
+∥AGP ′∥= O(1), so only the first algorithm applies. Thus if one cares about saving logarithmic
+query overhead factors, Theorem 8.3 cannot be applied as a black box.
+It is possible that the first algorithm in Theorem 9.1 can be improved to work without the
+logarithmic overhead even when ∥AGP ′∥= ω(1). See Conjecture 11.1. Even if this turns out to be
+the case, though, there will be an important case when we cannot apply Theorem 8.3 as a black
+box, namely, when we wish to prove upper bounds on the time complexity of the algorithm.
+For developing time-efficient quantum algorithms, other properties of the adjacency matrix
+besides the norm, such as the maximum degree of a vertex, also matter [CNW09]. This article is
+concerned primarily with the query complexity of quantum algorithms and not the time complexity.
+Investigating the tradeoffs involved in designing span programs for query-optimal and nearly time-
+optimal quantum algorithms is an important area for further research, but is beyond our scope.
+With an eye toward these applications, though, we give a version of Theorem 8.3 that applies
+to the graphs GP (x) directly instead of to GP ′(x):
+
+Theorem 8.4. Let P be a span program, and for x ∈Bn let GP (x) be the weighted bipartite graph
+from Definition 8.2. Then for x ∈Bn:
+
+• If fP (x) = 1, let |w⟩∈CI be a witness, i.e., AΠ(x)|w⟩= |t⟩. Then AGP (x) has an eigenvalue-
+zero eigenvector |ψ⟩with
+|⟨0|ψ⟩|2
+
+∥|ψ⟩∥2 ≥
+1
+1 + ∥|w⟩∥2 .
+(8.9)
+
+• If fP (x) = 0, let |w′⟩∈V be a witness, i.e., ⟨t|w′⟩= 1 and Π(x)A†|w′⟩= 0. Let {|α⟩} be
+a complete set of orthonormal eigenvectors of AGP (x), with corresponding eigenvalues ρ(α).
+Then for any Υ ≥0,
+�
+
+α: |ρ(α)|≤Υ
+|⟨α|0⟩|2 ≤8Υ2�
+∥|w′⟩∥2 + ∥A†|w′⟩∥
+2�
+.
+(8.10)
+
+35
+
+
+A typical application of Theorem 8.4 will start with a span program having witnesses in the
+true and false cases satisfying
+
+max
+�
+max
+x:fP (x)=1 ∥|w⟩∥2,
+max
+x:fP (x)=0(∥|w′⟩∥2 + ∥A†|w′⟩∥
+2)
+�
+≤W ,
+(8.11)
+
+for some W. Scale the target vector down by a factor of 1/
+√
+
+W, and apply Theorem 8.4; Eq. (8.9)
+then holds with 1/2 on the right-hand side, and letting Υ = c/W the right-hand side of Eq. (8.10)
+becomes 8c2. See Theorem 9.3.
+Although the upper bounds in Eqs. (8.9) and (8.10) depend on quantities, ∥|w⟩∥2 and (∥|w′⟩∥2+
+∥A†|w′⟩∥2), similar to the witness size, for two reasons they are not the same as the witness size.
+
+• First, in the case fP (x) = 1, ∥|w⟩∥2 can be greater than wsize(P, x) if P is not strict (Defini-
+tion 4.9), because the witness size does not count the portion of |w⟩supported on Ifree.
+
+• Second, in the case fP (x) = 0, while it is true that ∥A†|w′⟩∥2 can be bounded by wsize(P, x),
+the term ∥|w′⟩∥2 is not necessarily so-bounded. This is clear because simultaneously scaling
+the target and all input vectors by c > 0 leaves the witness size invariant (Lemma 4.12)
+but multiplies ∥|w′⟩∥2 by 1/c2. The effective spectral gap of AGP (x) certainly should not be
+invariant under such scaling, and should approach zero as c approaches zero.
+
+Theorem 8.4 therefore motivates using W in Eq. (8.11) as a new span program complexity mea-
+sure. This measure is important for developing time-efficient quantum algorithms based on span
+programs, as in for example Theorem 7.6.
+The proof of Theorem 8.4 will also be given below in Section 8.3.
+
+8.1
+Eigenvalue-zero spectral analysis of the graphs GP(x)
+
+We will begin by analyzing Eqs. (8.6) at eigenvalue ρ = 0.
+This theorem is a straightforward
+extension of [RˇS08, Theorems 2.5 and A.7].
+
+Theorem 8.5 ([RˇS08]). For a span program P and input x ∈Bn, consider all the eigenvalue-zero
+eigenvector equations of the weighted adjacency matrix AGP (x), except for the constraint at the
+output vertex µ0, i.e., Eqs. (8.6) except (8.6c) at ρ = 0.
+These equations have a solution |ψ⟩with ψU,0 ̸= 0 if and only if fP (x) = 1, and have a solution
+|ψ⟩with ⟨t|ψT,V ⟩̸= 0 if and only if fP (x) = 0. More quantitatively, let s ∈[0, ∞)n be a vector of
+nonnegative costs, and recall from Definition 2.3 that S = �
+j∈[n],b∈B,i∈Ij,b
+√sj|i⟩⟨i|. Then
+
+• If fP (x) = 1, AGP (x) has an eigenvalue-zero eigenvector |ψ⟩= (0, ψU,0, |ψU,I⟩) ∈CT ⊕C{0} ⊕
+CI with
+|ψU,0|2
+
+|ψU,0|2 + ∥S|ψU,I⟩∥2 ≥
+1
+1 + wsizes(P, x) .
+(8.12)
+
+• If fP (x) = 0, let |w′⟩∈V be an optimal witness, i.e., ⟨t|w′⟩= 1, Π(x)A†|w′⟩= 0 and
+∥SA†|w′⟩∥2 = wsizes(P, x) (see Definition 2.3). Then there is a solution |ψ⟩= (|ψT,V ⟩, |ψT,I⟩, 0) ∈
+V ⊕CI ⊕CU to Eqs. (8.6a,b,d) at ρ = 0, with
+
+|⟨t|ψT,V ⟩|2
+
+∥|ψT,V ⟩∥2 + ∥S|ψT,I⟩∥2 ≥
+1
+∥|w′⟩∥2 + wsizes(P, x)
+.
+(8.13)
+
+36
+
+
+Proof. Let ρ = 0. Since GP (x) is bipartite, the ψT terms do not interact with the ψU terms. In
+particular, Eqs. (8.6c,d) (resp. 8.6a,b) can always be satisfied by setting the ψT (resp. ψU) terms
+to zero. Fix s ∈[0, ∞)n.
+Now Eqs. (8.6a,b) are equivalent to −ψU,0|t⟩= A|ψU,I⟩and |ψU,I⟩= Π(x)|ψU,I⟩.
+If these
+equations have a solution with ψU,0 ̸= 0, then −|ψU,I⟩/ψU,0 is a witness for fP (x) = 1. Conversely,
+if fP (x) = 1, then let |w⟩∈CI be an optimal witness, satisfying AΠ(x)|w⟩= |t⟩and wsizes(P, x) =
+∥S|w⟩∥2. Let ψU,0 = −1 and |ψU,I⟩= Π(x)|w⟩. Then |ψ⟩= (0, ψU,0, |ψU,I⟩) satisfies Eqs. (8.6), and
+Eq. (8.12) with equality.
+Next, assume that |ψ⟩solves Eq. (8.6d) with ⟨t|ψT,V ⟩̸= 0. Then Π(x)A†|ψT,V ⟩= −Π(x)Π(x)|ψT,I⟩=
+0, so |ψT,V ⟩/⟨t|ψT,V ⟩is a witness for fP (x) = 0. Conversely, assume that fP (x) = 0 and let |w′⟩be
+an optimal witness. Let |ψT,V ⟩= |w′⟩and |ψT,I⟩= −A†|w′⟩. Then |ψ⟩= (|ψT,V ⟩, |ψT,I⟩, 0) satisfies
+Eqs. (8.6a,b,d), and Eq. (8.13) with equality.
+
+Note that if the costs are uniform s = ⃗1, then S = 1 −�
+i∈Ifree |i⟩⟨i|, so ∥S|ψU,I⟩∥2 ≤∥|ψU,I⟩∥2
+
+and ∥S|ψT,I⟩∥2 ≤∥|ψT,I⟩∥2. If P is also a strict span program, i.e., Ifree = ∅, then S = 1 so
+both these inequalities are equalities, and the denominators on the left-hand sides of Eqs. (8.12)
+and (8.13) are, respectively, ∥|ψU⟩∥2 and ∥|ψT ⟩∥2. However, if P is not strict, then Eqs. (8.12)
+and (8.13) do not imply lower bounds on achievable |ψU,0|2/∥|ψU⟩∥2 or |⟨t|ψT,V ⟩|2/∥|ψT ⟩∥2.
+
+Corollary 8.6. Let P be a span program. Then there exists a span program ˆP that computes
+f ˆP = fP , and such that, for all x ∈Bn,
+
+• If fP (x) = 1, then there is an eigenvalue-zero eigenvector |ψ⟩of AG ˆ
+P (x) with
+
+|ψU,0|2
+
+∥|ψ⟩∥2 ≥
+1
+1 + wsize(P, x) .
+(8.14)
+
+• If fP (x) = 0, then there is a solution |ψ⟩to all the eigenvalue-zero eigenvector equations of
+AG ˆ
+P (x), except for the constraint at vertex µ0, with
+
+|⟨t|ψT,V ⟩|2
+
+∥|ψ⟩∥2
+≥
+1
+1 + wsize(P, x) .
+(8.15)
+
+Proof. Let ˆP be the canonical span program constructed in Theorem 5.2 for costs s = ⃗1, with
+wsize( ˆP, x) ≤wsize(P, x) for all x ∈Bn.
+ˆP is in particular strict, so Eq. (8.14) follows from
+Eq. (8.12).
+For showing Eq. (8.15), recall from Theorem 5.2 that an optimal witness |w′⟩for f ˆP (x) = 0
+may be taken to be |x⟩itself, so ∥|w′⟩∥2 = 1 in Eq. (8.13).
+
+This completes the eigenvalue-zero analysis of the graphs GP (x).
+
+8.2
+Small-eigenvalue spectral analysis of the graphs GP(x)
+
+Theorem 8.5 implies in particular that when fP (x) = 0, AGP (x) does not have any eigenvalue-zero
+eigenvectors supported on the output vertex µ0. Therefore AGP (x) has some spectral gap around
+zero for eigenvectors overlapping |0⟩. This spectral gap can be arbitrarily small, though, because
+
+37
+
+
+GP (x) can be a very large graph and its edge weights are poorly constrained. In fact, though, the
+lower bound Eq. (8.13) can be translated into a good lower bound on an “effective” spectral gap.
+That is, we can upper-bound the total squared support of |0⟩on small-magnitude eigenvalues of
+AGP (x).
+The main result of this section is:
+
+Theorem 8.7. Let G be a weighted bipartite graph with biadjacency matrix BG ∈L(CU, CT ).
+Assume that for some δ > 0 and |t⟩∈CT , the weighted adjacency matrix AG has an eigenvalue-
+zero eigenvector |ψ⟩with
+|⟨t|ψT ⟩|2 ≥δ∥|ψ⟩∥2 .
+(8.16)
+
+Let G′ be the same as G except with a new vertex, µ0, added to the U side, and for i ∈T the new
+edge (τi, µ0) weighted by ⟨i|t⟩. That is, the biadjacency matrix of G′ is
+
+BG′ =
+�
+|t⟩
+BG
+�
+0
+U
+T
+(8.17)
+
+Recall that |0⟩= (0, 1, 0) ∈CT ⊕C{0} ⊕CU.
+Let {|α⟩} be a complete set of orthonormal
+eigenvectors of AG′, with corresponding eigenvalues ρ(α). Then for all Υ ≥0, the squared length
+of the projection of |0⟩onto the span of the eigenvectors α with |ρ(α)| ≤Υ satisfies
+�
+
+α: |ρ(α)|≤Υ
+|⟨α|0⟩|2 ≤8Υ2/δ .
+(8.18)
+
+This theorem applies to the case of a strict span program P with fP (x) = 0, by letting G =
+GP (x) and, from Eq. (8.13) with s = ⃗1, δ = 1/(∥|w′⟩∥2 + wsize(P, x)).
+To motivate our approach to proving Theorem 8.7, let us recall some basic properties about the
+eigenvalues and eigenvectors of bipartite graphs.
+
+Proposition 8.8. Let G be a weighted bipartite graph with biadjacency matrix BG and adjacency
+matrix AG.
+Assume that |ψ⟩= (|ψT ⟩, |ψU⟩) ∈CT ⊕CU is an eigenvalue-ρ eigenvector of AG, for some ρ ̸= 0.
+Then (|ψT ⟩, −|ψU⟩) is an eigenvector of AG with eigenvalue −ρ. Moreover, |ψT ⟩= 1
+
+ρBG|ψU⟩is an
+
+eigenvector of BGB†
+G and |ψU⟩= 1
+
+ρB†
+G|ψT ⟩is an eigenvector of B†
+GBG, both with corresponding
+eigenvalues ρ2.
+Conversely, if |ϕ⟩∈CT is an eigenvalue-λ eigenvector of BGB†
+G for λ > 0, then BG|ϕ⟩∈CU
+
+is an eigenvalue-λ eigenvector of B†
+GBG and |ψ±⟩= (|ϕ⟩, ± 1
+√
+
+λB†
+G|ϕ⟩) ∈CT ⊕CU are eigenvectors
+
+of AG with corresponding eigenvalues ±
+√
+
+λ.
+
+The proof is immediate.
+Thus the spectrum of AG is symmetrical around zero, and nonzero-eigenvalue eigenvectors
+of the positive semi-definite matrix BGB†
+G are in exact correspondence to symmetrical pairs of
+nonzero-eigenvalue eigenvectors of AG.
+Proposition 8.8 allows us to translate the claims of Theorem 8.7 into claims on spectral prop-
+erties of positive semi-definite matrices. We will start, though, by proving the necessary result for
+positive semi-definite matrices, Theorem 8.9 below. After proving Theorem 8.9, we will give the
+translation to prove Theorem 8.7.
+
+38
+
+
+Theorem 8.9. Let X ∈L(V ) be a positive semi-definite matrix, |t⟩∈V a vector, and let X′ =
+X + |t⟩⟨t|.
+Let {|β⟩} be a complete set of orthonormal eigenvectors of X′, with corresponding
+eigenvalues λ(β) ≥0. Assume that there exists a |ϕ⟩∈Ker(X) with |⟨t|ϕ⟩|2 ≥δ∥|ϕ⟩∥2. Then for
+any Λ ≥0,
+
+δ
+�
+
+β: λ(β)≤Λ
+⟨t|β⟩̸=0
+
+1
+λ(β)|⟨t|β⟩|2 ≤4Λ .
+(8.19)
+
+Proof. The sum is well-defined, with no division by zero, because any |β⟩with ⟨t|β⟩̸= 0 must have
+λ(β) = ⟨β|X′|β⟩= ⟨β|X|β⟩+ |⟨t|β⟩|2 > 0.
+The key lemma for proving Theorem 8.9 is:
+
+Lemma 8.10. Under the conditions of Theorem 8.9, for any |ξ⟩∈V ,
+
+δ|⟨t|ξ⟩|2 ≤∥X′|ξ⟩∥2 .
+(8.20)
+
+Moreover, if |ξ⟩is a linear combination of eigenvectors with corresponding eigenvalues at most κ,
+i.e., |ξ⟩= �
+β:λ(β)≤κ ⟨β|ξ⟩|β⟩, then
+
+δ|⟨t|ξ⟩|2 ≤κ2∥|ξ⟩∥2 .
+(8.21)
+
+Proof. We will write the matrices X and X′ out in coordinates. Fixing ⟨t|ξ⟩, we will use straight-
+forward calculus to minimize ∥X′|ξ⟩∥2.
+Let |1⟩, . . . , |m⟩be a complete, orthonormal set of eigenvectors for
+�
+1 −
+|t⟩⟨t|
+∥|t⟩∥2
+�
+X
+�
+1 −
+|t⟩⟨t|
+∥|t⟩∥2
+�
+,
+
+with corresponding eigenvalues a1, a2, . . . , am. In the coordinates
+�|t⟩
+
+∥|t⟩∥, |1⟩, . . . , |m⟩
+�
+, X and X′ are
+given by
+
+X =
+
+
+
+
+
+
+
+
+a
+¯b1
+. . .
+¯bm
+b1
+a1
+0
+...
+...
+bm
+0
+am
+
+
+
+
+
+
+
+(8.22)
+
+X′ =
+
+
+
+
+
+
+
+
+a + ∥|t⟩∥2
+¯b1
+. . .
+¯bm
+b1
+a1
+0
+...
+...
+bm
+0
+am
+
+
+
+
+
+
+
+(8.23)
+
+where a = ⟨t|X|t⟩/∥|t⟩∥2 and bj = ⟨aj|X |t⟩
+
+∥|t⟩∥, for j ∈[m].
+By incorporating any phases into the basis vectors |j⟩, we may assume that all bj ≥0. Fur-
+thermore, we may assume without loss of generality that all bj > 0. Indeed, if some bj = 0, then
+the |j⟩coordinate lies in a different block of X′ from |t⟩, so removing this coordinate will not affect
+min|ψ⟩∥X′|ψ⟩∥/|⟨t|ψ⟩|. Since X ⪰0, all aj ≥0. Moreover, if some aj = 0, then since
+�a bj
+bj 0
+�
+is a
+(positive semi-definite) submatrix of X, it must be that bj = 0. Hence we may assume that aj > 0
+for all j ∈[m].
+We are given the existence of a |ϕ⟩∈Ker(X) with |⟨t|ϕ⟩|2 ≥δ∥|ϕ⟩∥2. Let us write out this
+condition in coordinates. By scaling |ϕ⟩, we may assume that ⟨t|ϕ⟩= ∥|t⟩∥. Thus, written in
+
+39
+
+
+coordinates, |ϕ⟩= (1, −b1
+
+a1 , . . . , −bm
+
+am ) and ⟨t|X|ϕ⟩= 0 implies that
+
+a =
+
+m
+�
+
+j=1
+b2
+j/aj .
+(8.24)
+
+The condition |⟨t|ϕ⟩|2 ≥δ∥|ϕ⟩∥2, in coordinates, is
+
+∥|t⟩∥2 ≥δ
+�
+1 +
+
+m
+�
+
+j=1
+
+�bj
+
+aj
+
+�2�
+.
+(8.25)
+
+We can now solve the minimization problem:
+
+Claim 8.11.
+
+min
+|ξ⟩: ⟨t|ξ⟩=∥|t⟩∥∥X′|ξ⟩∥2 =
+∥|t⟩∥4
+
+1 + �
+j
+�bj
+
+aj
+�2 ≥δ∥|t⟩∥2 .
+(8.26)
+
+Proof. Since X′ is a symmetric matrix, we may assume that |ξ⟩has real coordinates. Introduce
+variables c1, . . . , cm and let |ξ⟩= (1, c1, . . . , cm). For j ∈[m], let γj = aj
+�aj
+
+bj cj + 1
+�
+. Then
+
+∥X′|ξ⟩∥2 =
+�
+a + ∥|t⟩∥2 +
+�
+
+j
+bjcj
+�2 +
+�
+
+j
+(bj + ajcj)2
+
+=
+�
+a + ∥|t⟩∥2 +
+�
+
+j
+
+b2
+j
+aj
+
+�γj
+
+aj
+−1
+��2
++
+�
+
+j
+
+�bj
+
+aj
+γj
+�2
+
+=
+�
+∥|t⟩∥2 +
+�
+
+j
+
+�bj
+
+aj
+
+�2
+γj
+
+�2
++
+�
+
+j
+
+�bj
+
+aj
+
+�2
+γ2
+j ,
+(8.27)
+
+where we have substituted cj = bj
+
+aj
+�γj
+
+aj −1
+�
+and then used Eq. (8.24) to cancel a from the first term.
+A global minimum exists and will satisfy, for all j ∈[m],
+
+0 =
+∂
+∂γj
+∥X′|ξ⟩∥2
+
+= 2
+�bj
+
+aj
+
+�2�
+γj + ∥|t⟩∥2 +
+�
+
+k
+
+�bk
+
+ak
+
+�2
+γk
+
+�
+.
+(8.28)
+
+Thus we should set all γj equal, γj = γ for j ∈[m], where γ = −∥|t⟩∥2/(1 + S) and S = �
+j
+�bj
+
+aj
+�2.
+
+Substituting back into Eq. (8.27), ∥X′|ξ⟩∥2 at the minimum is
+
+∥X′|ξ⟩∥2 = (∥|t⟩∥2 + Sγ)2 + Sγ2
+
+= ∥|t⟩∥4/(1 + S) ,
+(8.29)
+
+as claimed.
+
+Eq. (8.20) follows. Eq. (8.21) is an immediate consequence of Eq. (8.20), since |ξ⟩= �
+β:λ(β)≤κ ⟨β|ξ⟩|β⟩
+implies ∥X′|ξ⟩∥≤κ∥|ξ⟩∥. This completes the proof of Lemma 8.10.
+
+40
+
+
+Now let us derive Eq. (8.19) by bootstrapping Lemma 8.10. We aim to bound
+
+δ
+�
+
+β: λ(β)≤Λ
+⟨t|β⟩̸=0
+
+1
+λ(β)|⟨t|β⟩|2 = δ
+
+∞
+�
+
+k=0
+
+�
+
+Λ
+2k+1 <λ(β)≤Λ
+
+2k
+
+1
+λ(β)|⟨t|β⟩|2
+
+≤δ
+
+Λ
+
+∞
+�
+
+k=0
+2k+1
+�
+
+Λ
+2k+1 <λ(β)≤Λ
+
+2k
+
+|⟨t|β⟩|2
+
+= δ
+
+Λ
+
+∞
+�
+
+k=0
+2k+1⟨t|tk⟩,
+(8.30)
+
+where |tk⟩= �
+β:
+Λ
+2k+1 <λ(β)≤Λ
+
+2k ⟨β|t⟩|β⟩, the projection of |t⟩onto the span of the eigenvectors with
+
+eigenvalues in
+�
+Λ
+2k+1 , Λ
+
+2k
+�
+. Therefore ⟨t|tk⟩= ⟨tk|tk⟩= |⟨t|tk⟩|2/∥|tk⟩∥2 when |tk⟩̸= 0, so Eq. (8.21)
+can be applied with |ξ⟩= |tk⟩and κ = Λ/2k to continue:
+
+δ
+�
+
+β: λ(β)≤Λ
+⟨t|β⟩̸=0
+
+1
+λ(β)|⟨t|β⟩|2 ≤1
+
+Λ
+
+∞
+�
+
+k=0
+2k+1�Λ
+
+2k
+
+�2
+
+= 2Λ
+
+∞
+�
+
+k=0
+
+1
+2k
+
+= 4Λ ,
+(8.31)
+
+as claimed.
+
+With Theorem 8.9 in hand, we can now apply Proposition 8.8 to prove Theorem 8.7.
+
+Proof of Theorem 8.7. We are given an eigenvalue-zero eigenvector of AG, (|ψT ⟩, 0) ∈CT ⊕CU
+
+with |⟨t|ψT ⟩|2 ≥δ∥|ψT ⟩∥2. In particular, B†
+G|ψT ⟩= 0.
+An eigenvalue-zero eigenvector |ζ⟩= (|ζT ⟩, ζ0, |ζU⟩) ∈CT ⊕C{0} ⊕CU has to satisfy
+
+0 = BG′(ζ0, |ζU⟩)
+
+= ζ0|t⟩+ BG|ζU⟩.
+(8.32)
+
+Since |⟨t|ψT ⟩|2 > 0 and B†
+G|ψT ⟩= 0, |t⟩cannot lie in the range of BG, so ζ0 must be zero. Thus
+follows the claim for Υ = 0, that AG′ has no eigenvalue-zero eigenvectors supported on µ0.
+Now to show Eq. (8.18) for Υ > 0, note that for each eigenvector |α⟩of AG′, ρ(α)⟨0|α⟩=
+⟨0|AG′|α⟩= ⟨t|αT ⟩. Therefore
+�
+
+α: |ρ(α)|≤Υ
+|⟨α|0⟩|2 =
+�
+
+α: 0<|ρ(α)|≤Υ
+
+1
+ρ(α)2 |⟨t|αT ⟩|2 .
+(8.33)
+
+Let X′ = BG′B†
+G′. Let {|β⟩} be a complete set of orthonormal eigenvectors of X′, with correspond-
+ing eigenvalues λ(β). By Proposition 8.8, each eigenvector |β⟩with λ(β) ̸= 0 corresponds to a pair
+of eigenvectors of AG′ with eigenvalues ±
+�
+
+λ(β). The above sum therefore equals
+
+2
+�
+
+β: 0<λ(β)≤Υ2
+
+1
+λ(β)|⟨t|β⟩|2 .
+(8.34)
+
+41
+
+
+Now apply Theorem 8.9 with X = X′ −|t⟩⟨t| = BGB†
+G ⪰0, |ϕ⟩= |ψT ⟩and Λ = Υ2, to obtain
+the claimed upper bound of 8Υ2/δ.
+
+8.3
+Proofs of Theorem 8.3 and Theorem 8.4
+
+Let us now combine Theorem 8.5 and Theorem 8.7 to prove Theorem 8.3 and Theorem 8.4. The
+proof of Theorem 8.3 will also use the canonical span program reduction, Theorem 5.2.
+
+Proof of Theorem 8.3. Let ˆP be the canonical span program constructed in Theorem 5.2 for costs
+s = ⃗1, with wsize( ˆP, x) ≤wsize(P, x) for all x ∈Bn. In particular, recall that when fP (x) = 0, an
+optimal witness |w′⟩may be taken to be |x⟩itself. Also, ˆP is strict, i.e., has Ifree = ∅, so S is the
+identity on CI.
+Let P ′ be the same as ˆP except with the the target vector scaled by a factor of 1/
+�
+
+wsize(P, D).
+Thus fP ′ = fP still, and, for all x ∈D,
+
+wsize(P ′, x) ≤
+
+�
+1
+if fP (x) = 1
+wsize(P, D)2
+if fP (x) = 0
+(8.35)
+
+Now, when fP ′(x) = 0, an optimal witness is |w′⟩=
+�
+
+wsize(P, D)|x⟩. This scaling step is known
+as amplification. It was introduced by [CRˇSZ07] and also applied in [ACR+07, RˇS08].
+For the case fP (x) = 1, the first part of Theorem 8.3, Eq. (8.7), now follows from Eqs. (8.12)
+and (8.35); since S = 1, ∥|ψ⟩∥2 = |ψU,0|2 + ∥S|ψU,I⟩∥2.
+For the case fP (x) = 0, let G be the graph GP (x) with the output vertex µ0 and all incident
+edges deleted. Thus G’s biadjacency matrix is the same as BGP (x) from Eq. (8.4), except with
+the µ0 column deleted. Theorem 8.5 implies that AG has an eigenvalue-zero eigenvector |ψ⟩=
+(|ψT,V ⟩, |ψT,I⟩, 0) ∈V ⊕CI ⊕CI satisfying
+
+|⟨t|ψT,V ⟩|2
+
+∥|ψ⟩∥2
+≥
+1
+∥|w′⟩∥2 + wsize(P ′, x)
+
+≥
+1
+wsize(P, D)(wsize(P, D) + 1)
+
+(8.36)
+
+by Eqs. (8.13) and (8.35). Eq. (8.8) now follows by Eq. (8.18) in Theorem 8.7 with G′ = GP (x),
+Υ = c/wsize(P, D) and δ = 1/
+�
+wsize(P, D)(wsize(P, D) + 1)
+�
+.
+
+Proof of Theorem 8.4. The idea is that we want to charge for the free input vectors of P. Let
+P ′ be a strict span program that is the same as P except with one extra input bit, and with the
+free input vectors of P now labeled by (n + 1, 1). That is, I′
+j,b = Ij,b for j ∈[n] and b ∈B, but
+I′
+free = I′
+n+1,0 = ∅and I′
+n+1,1 = Ifree. Then for all x ∈Bn, fP ′(x, 1) = fP (x), with the same
+witnesses, and GP ′(x, 1) = GP (x). The only difference is that in the case fP (x) = 1, wsize(P ′, x) =
+min|w⟩:AΠ(x)|w⟩=|t⟩∥|w⟩∥2 counts the portion of |w⟩on indices in Ifree, while wsize(P, x) does not.
+The proof now follows the same steps as the proof of Theorem 8.3, except with δ = 1/(∥|w′⟩∥2 +
+∥A†|w′⟩∥2) in the case fP (x) = 0.
+
+42
+
+
+9
+Quantum algorithm for evaluating span programs
+
+In this section, we will connect quantum query algorithms to the graph spectral properties that
+are the conclusions of Theorem 8.3 and Theorem 8.4. The following theorem gives two quantum
+algorithms for evaluating a total or partial boolean function f based on promised spectral properties
+of a family of graphs {G(x) : x ∈D}, with D ⊆Bn.
+
+Theorem 9.1. Let G = (V, E) be a complex-weighted graph with Hermitian weighted adjacency
+matrix AG ∈L(CV ) satisfying ⟨v|AG|v⟩≥0 for all v ∈V . Let Vinput be a subset of degree-one
+vertices of G whose incident edges have weight one, and partition Vinput as Vinput = �
+j∈[n],b∈B Vj,b.
+For x ∈Bn, define G(x) from G by deleting all edges to vertices in ∪j∈[n]Vj,xj. Let AG(x) ∈L(CV )
+be the weighted adjacency of matrix of G(x).
+Let f : D →B, with D ⊆Bn, µ ∈V ∖Vinput, ϵ = Ω(1) and Λ > 0. Assume that for all x ∈D
+the graphs G(x) satisfy:
+
+• If f(x) = 1, then AG(x) has an eigenvalue-zero eigenvector |ψ⟩∈CV with
+
+|⟨µ|ψ⟩|2
+
+∥|ψ⟩∥
+≥ϵ .
+(9.1)
+
+• If f(x) = 0, let {|α⟩} be a complete set of orthonormal eigenvectors of AG(x), with corre-
+sponding eigenvalues ρ(α). Assume that the squared length of the projection of |µ⟩onto the
+span of the eigenvectors α with |ρ(α)| ≤Λ satisfies
+�
+
+α: |ρ(α)|≤Λ
+|⟨α|µ⟩|2 ≤ϵ/2 .
+(9.2)
+
+Let abs(AG) be the entry-wise absolute value of AG, and let ∥abs(AG)∥be its operator norm.
+Then f can be evaluated with error probability at most 1/3 using at most
+
+O
+
+�
+
+min
+�∥abs(AG)∥
+
+Λ
+, 1
+
+Λ
+log 1
+
+Λ
+log log 1
+
+Λ
+
+��
+
+(9.3)
+
+quantum queries.
+
+The intuition behind this theorem is that f can be evaluated by starting at |µ⟩and “measuring”
+AG(x) to precision Λ.
+(More precisely, this is implemented by applying phase estimation to a
+certain unitary operator.) Output 1 if and only if the measurement returns 0. Eq. (9.1) implies
+completeness when f(x) = 1, because the initial state has large overlap with an eigenvalue-zero
+eigenstate. Eq. (9.2) implies soundness when f(x) = 0.
+In fact, the proof of Theorem 9.1 requires two quantum algorithms, one for each of the bounds
+in Eq. (9.3).
+
+1. The proof that Q(f) = O(∥abs(AG)∥/Λ) is based on Szegedy’s correspondence between
+continuous- and discrete-time quantum walks [Sze04].
+The proof is nearly the same as
+in [RˇS08, Appendix B.2]. The differences are that we are only assuming an effective spectral
+gap in the case f(x) = 0, and that the graph G in Theorem 9.1 is not required to be bipartite.
+
+43
+
+
+The graphs to which we apply Theorem 9.1 below will be bipartite, though, since they will
+be derived from span programs.
+
+This algorithm applies to the formula-evaluation applications, Theorem 1.1, Theorem 7.3 and
+Theorem 7.6. In each case, a span program P is given and the algorithm run with G = GP .
+In addition to lower-bounding Λ, the query and time complexity bounds require showing that
+∥abs(AG)∥= O(1).
+
+2. The second bound, Q(f) = ˜O(1/Λ), is applicable in the more typical case when we do not
+know an upper bound on ∥abs(AG)∥. The idea is to apply phase estimation to eiAG(x). Since
+AG is independent of the input x, recent work by Cleve et al. shows that its norm does
+not matter if we can concede a logarithmic factor in the query complexity [CGM+08]. For
+applying phase estimation, there is still the problem that eigenvalues can wrap around the
+circle, e.g., e2πi = e0i, leading to false positives. To avoid such errors, we scale AG(x) by a
+uniformly random number R ∈(0, 144/ϵ2).
+
+Although Theorem 9.1 refers only to query complexity, and not time complexity, the first
+algorithm’s time complexity can also often be bounded under reasonable assumptions on G. See
+Refs. [RˇS08, ACR+07, CNW09] for details.
+
+For a span program P, the graphs GP and GP (x) from Definition 8.2 are of the form required by
+Theorem 9.1. The assumptions Eqs. (9.1) and (9.2) for Theorem 9.1 are also of the same type as the
+conclusions of Theorem 8.3 and Theorem 8.4. Therefore, assuming for the moment Theorem 9.1,
+as corollaries we obtain quantum algorithms for evaluating span programs:
+
+Theorem 9.2. Let P be a span program and D ⊆Bn. Then the quantum query complexity of fP
+restricted to D satisfies
+
+Q(fP |D) = O
+�
+wsize(P, D)
+log wsize(P, D)
+log log wsize(P, D)
+
+�
+.
+(9.4)
+
+Proof. Set c = 1/8 in Theorem 8.3 and apply Theorem 9.1 with µ the output vertex µ0 of GP ,
+ϵ = 1/2 and Λ = c/wsize(P, D).
+
+Theorem 9.3. Let P be a span program with target vector |t⟩and input vectors |vi⟩for i ∈I =
+Ifree ∪�
+j∈[n],b∈B Ij,b, in inner product space V . Let D ⊆Bn and assume that for some W1, W2 ≥1,
+
+max
+x∈D:fP (x)=1
+min
+|w⟩∈CI:
+AΠ(x)|w⟩=|t⟩
+
+∥|w⟩∥2 ≤W1
+
+max
+x∈D:fP (x)=0
+min
+|w′⟩∈V : ⟨t|w′⟩=1,
+Π(x)A†|w′⟩=0
+
+(∥|w′⟩∥2 + ∥A†|w′⟩∥
+2) ≤W2 .
+(9.5)
+
+Let P ′ be the same as P, except with the target vector |t⟩/√W1. Then fP can be evaluated on
+inputs in D using
+O
+��
+
+W1W2∥abs(AGP ′)∥
+�
+= O
+��
+
+W1W2∥abs(AGP )∥
+�
+(9.6)
+
+quantum queries, with error probability at most 1/3.
+
+44
+
+
+Proof. Apply Theorem 8.4 to P ′ with Υ =
+1
+4
+√
+
+2/√W1W2.
+Then Theorem 9.1’s assumptions
+
+Eqs. (9.1) and (9.2) hold with ϵ = 1/2 and Λ = Υ. An O
+�√W1W2∥abs(AGP ′)∥
+�
+-query quan-
+tum algorithm follows.
+Finally, since W1 ≥1, ∥abs(AGP ′)∥≤∥abs(AGP )∥.
+
+In the rest of this section, we will prove Theorem 9.1, relying heavily on [RˇS08] and [CGM+08].
+As sketched above, there are two parts to the proof, given in Section 9.1 and Section 9.2 below.
+For x ∈Bn, let Ox be the phase-flip input oracle defined by
+
+Ox : |b, j⟩�→(−1)b xj|b, j⟩
+(9.7)
+
+for b ∈B and j ∈[n].
+
+9.1
+Algorithm using the Szegedy correspondence
+
+Proposition 9.4 ([RˇS08]). Under the assumptions of Theorem 9.1, f can be evaluated with error
+probability at most 1/3 using O(∥abs(AG)∥/Λ) queries to the input oracle Ox.
+
+The proof is basically the same as for the algorithm in [RˇS08, Appendix B.2], which in turn
+was closely based on the algorithms in [CRˇSZ07, ACR+07]. However, the arguments in [RˇS08]
+were tied to the formula-evaluation application, whereas Proposition 9.4 is in a more general set-
+ting. In particular, [RˇS08] could assume a spectral gap in the case f(x) = 0, whereas we only
+have Eq. (9.2), an “effective” spectral gap. This weaker assumption means that establishing the
+algorithm’s soundness requires somewhat more care.
+The key technical ingredient in the proof is a theorem due to Szegedy [Sze04] that we apply
+to relate the spectrum and eigenvectors of AG(x) to those of a discrete-time coined quantum walk
+unitary. We use a formulation of the theorem essentially the same as given in [ACR+07]. However,
+the statement there had a minor typo (in |α, ±⟩below). This typo did not affect their application
+or the application in [RˇS08], but would matter for us here. Therefore, after stating the corrected
+theorem, we also repeat the proof from [ACR+07], which was correct.
+
+Theorem 9.5 ([Sze04]). Let V be a finite set. For each v ∈V , let |ϕv⟩∈CV be a length-one
+vector. Define T ∈L(CV , CV ⊗CV ), S, U ∈L(CV ⊗CV ) and M ∈L(CV ) by
+
+T =
+�
+
+v∈V
+(|v⟩⊗|ϕv⟩)⟨v|
+S =
+�
+
+v,w∈V
+|v, w⟩⟨w, v|
+(9.8)
+
+U = (2TT † −1)S
+M = T †ST =
+�
+
+v,w∈V
+⟨ϕv|w⟩⟨v|ϕw⟩|v⟩⟨w|
+(9.9)
+
+Since T †T = 1, U is a unitary. (U is a swap followed by the reflection about the span of the vectors
+{|v⟩⊗|ϕv⟩: v ∈V }.) M is a Hermitian matrix with ∥M∥≤1. Let {|α⟩} be a complete set of
+orthonormal eigenvectors of M with respective eigenvalues ρ(α).
+Then the spectral decomposition of U corresponds to that of M as follows: Let Rα = Span{T|α⟩, ST|α⟩}.
+Then Rα ⊥Rα′ for α ̸= α′; let R = ⊕αRα. U is −S on R⊥, and U preserves each subspace Rα.
+If |ρ(α)| < 1, then Rα is two-dimensional, and within it the eigenvectors and corresponding
+eigenvalues of U are given by
+
+|α, ±⟩=
+�
+1 −
+�
+ρ(α) ∓i
+�
+
+1 −ρ(α)2�
+S
+�
+T|α⟩
+
+λ(α, ±) = ρ(α) ± i
+�
+
+1 −ρ(α)2 .
+(9.10)
+
+45
+
+
+If ρ(α) ∈{1, −1}, then ST|α⟩= ρ(α)T|α⟩, so Rα is one-dimensional; let |α, +⟩= T|α⟩and
+λ(α, +) = ρ(α) be the corresponding eigenvalue of U.
+
+Proof. This proof is taken from [ACR+07].
+First assume α ̸= α′, and let us show Rα ⊥Rα′. Indeed, ⟨α|T †T|α′⟩= ⟨α|α′⟩= 0, as T †T = 1.
+Since S2 = 1, similarly, ST|α⟩is orthogonal to ST|α′⟩. Finally, ⟨α|T †ST|α′⟩= ⟨α|M|α′⟩= 0.
+Therefore, the decomposition CV ⊗CV = (�
+α Rα) ⊕R⊥is well-defined.
+R is the span of the images of ST and T. 2TT † −1 is +1 on the image of T and −1 on its
+complement; therefore U is −S on R⊥.
+Finally, TT †T = T and TT †ST = TM, so
+
+U(ST|α⟩) = (2TT † −1)T|α⟩= T|α⟩
+
+U(T|α⟩) = (2TT † −1)ST|α⟩= (2ρ(α) −S)T|α⟩;
+
+U fixes the subspaces Rα.
+For the case that |ρ(α)| < 1, let |β⟩= (1 + βS)T|α⟩. Then U|β⟩= (2ρ(α) + β)T|α⟩−ST|α⟩is
+proportional to |β⟩if β(2ρ(α) + β) = −1; i.e., β = −ρ(α) ± i
+�
+
+1 −ρ(α)2. Eq. (9.10) follows.
+If ρ(α) ∈{−1, 1}, then since (⟨α|T †)(ST|α⟩) = ⟨α|M|α⟩= ρ(α), T|α⟩= ρ(α)ST|α⟩. Therefore
+Rα is one-dimensional, corresponding to a single eigenvector of U with eigenvalue ρ(α).
+
+We will need slightly more control over the eigenvectors |α, ±⟩:
+
+Lemma 9.6. With the setup of Theorem 9.5, for any |ψ⟩∈CV , the eigenvectors |α, ±⟩with
+|ρ(α)| < 1 satisfy ∥|α, ±⟩∥=
+�
+
+2(1 −ρ(α)2) and
+
+|⟨ψ|T †|α, ±⟩|2
+
+∥|α, ±⟩∥2
+= 1
+
+2|⟨ψ|α⟩|2 .
+(9.11)
+
+When |ρ(α)| = 1, ∥|α, +⟩∥= 1 and ⟨ψ|T †|α, +⟩= ⟨µ|α⟩.
+
+Proof. Fix an eigenvector |α⟩of AG(x) and let ρ = ρ(α). Assume that |ρ| < 1. We have
+
+∥|α, ±⟩∥2 = ⟨α|T †(1 −e±i arccos ρS)(1 −e∓i arccos ρS)T|α⟩
+
+= ⟨α|T †2(1 −ρS)T|α⟩
+
+= 2(1 −ρ⟨α|T †ST|α⟩)
+
+= 2(1 −ρ2) ,
+
+(9.12)
+
+where we have used S2 = T †T = 1, ∥|α⟩∥= 1, and T †ST = M. Also, then, we compute
+
+⟨ψ|T †|α, ±⟩= ⟨ψ|T(1 −e∓i arccos ρS)T|α⟩
+
+= ⟨ψ|T †T|α⟩−e∓i arccos ρ⟨ψ|T †ST|α⟩
+
+= ⟨ψ|α⟩(1 −ρ e∓i arccos ρ)
+
+= ⟨ψ|α⟩(1 −ρ2 ± iρ
+�
+
+1 −ρ2) ,
+
+(9.13)
+
+so |⟨ψ|T †|α, ±⟩|2 = |⟨ψ|α⟩|2(1 −ρ2). Eq. (9.11) follows.
+When |ρ(α)| = 1, the claims are immediate from |α, +⟩= T|α⟩and T †T = 1.
+
+46
+
+
+We can now prove Proposition 9.4.
+
+Proof of Proposition 9.4. Notice that if we scale AG, AG(x) and Λ all by 1/∥abs(AG)∥, then both
+assumptions Eq. (9.1) and Eq. (9.2) still hold. Therefore we will assume below that ∥abs(AG)∥= 1.
+Our goal is to evaluate f using O(1/Λ) queries to the phase-flip input oracle of Eq. (9.7).
+Assume that G is a connected graph; otherwise, discard all components other than the one
+containing the vertex µ. Therefore abs(AG) has a single principal eigenvector |δ⟩, abs(AG)|δ⟩= |δ⟩,
+with ⟨v|δ⟩> 0 for all v ∈V .
+Put an arbitrary total order “<” on the vertices in V . For each v ∈V , let
+
+|ϕv⟩=
+1
+�
+
+⟨v|δ⟩
+
+��
+
+⟨v|AG|v⟩⟨v|δ⟩|v⟩+
+�
+
+w∈V : w<v
+
+�
+
+|⟨v|AG|w⟩| ⟨w|δ⟩|w⟩+
+�
+
+w∈V : v<w
+⟨v|AG|w⟩̸=0
+
+⟨w|AG|v⟩
+�
+
+|⟨v|AG|w⟩|
+
+�
+
+⟨w|δ⟩|w⟩
+�
+
+(9.14)
+Then
+
+∥|ϕv⟩∥2 =
+1
+⟨v|δ⟩
+
+�
+
+w∈V
+⟨v| abs(AG)|w⟩⟨w|δ⟩
+
+= 1 .
+
+(9.15)
+
+Therefore Theorem 9.5 will apply; define T, S, U and M from Eqs. (9.8) and (9.9). Also let ˜Ox
+be the unitary
+
+˜Ox|v, w⟩=
+
+�
+−|v, w⟩
+if v ∈Vj,xj ⊆Vinput for some j ∈[n]
+|v, w⟩
+otherwise
+(9.16)
+
+One controlled call to ˜Ox can be implemented using one call to the standard phase-flip oracle Ox
+of Eq. (9.7).
+
+The algorithm has three steps:
+
+1. Prepare the initial state T|µ⟩.
+
+2. Run phase estimation on Wx = i ˜OxU, with precision δp = 2
+
+πΛ and error rate δe = ϵ/6.
+
+3. Output 1 if the measured phase is 0 or π. Otherwise output 0.
+
+Phase estimation on a unitary W with precision δp and error rate δe requires O(1/(δpδe))
+controlled applications of W [CEMM98]. Since ϵ = Ω(1), the query complexity of this algorithm is
+therefore O(1/Λ). It remains to prove completeness and soundness.
+Fix an input x ∈Bn. For v ∈V , let
+
+|ϕx
+v⟩=
+
+�
+|v⟩
+if v ∈Vj,xj for some j ∈[n]
+|ϕv⟩
+otherwise
+(9.17)
+
+Apply Theorem 9.5 using the vectors |ϕx
+v⟩to define Tx, Ux and Mx.
+
+Lemma 9.7. M = AG and Mx = AG(x). Moreover, letting CE = Span({|v, w⟩: (v, w) ∈E}) ⊆
+CV ⊗CV be the span of the edges of G, Ux|CE = ˜OxU|CE and Tx|µ⟩= T|µ⟩∈CE.
+
+47
+
+
+Proof. First, note that for any vertices v, w ∈V , from Eq. (9.9) and Eq. (9.14),
+
+⟨v|M|w⟩= ⟨ϕv|w⟩⟨v|ϕw⟩
+
+= ⟨v|AG|w⟩
+
+�
+
+⟨v|δ⟩
+⟨w|δ⟩
+
+�
+
+⟨w|δ⟩
+
+⟨v|δ⟩
+
+= ⟨v|AG|w⟩.
+
+(9.18)
+
+Therefore M = AG.
+Recall that G(x) is the same as G except with the edges to vertices in ∪j∈[n]Vj,xj removed.
+Consider a v ∈Vj,xj. By assumption, v has a single neighbor w ̸= v, so it must be that |ϕv⟩= |w⟩.
+Since |ϕx
+v⟩= |v⟩, ⟨v|Mx|w⟩= ⟨ϕx
+v|w⟩⟨v|ϕx
+w⟩= 0. However, for all pairs (v, w) that do not make an
+edge leaving some Vj,xj, ⟨v|Mx|w⟩= ⟨v|M|w⟩. Therefore Mx = AG(x).
+Next, we aim to show that UxS and ˜OxUS are the same when restricted to CE. Note that
+
+US = 2TT † −1CV ⊗CV
+
+= 2
+�
+
+v∈V
+|v⟩⟨v| ⊗|ϕv⟩⟨ϕv| −1CV ⊗CV
+
+=
+�
+
+v∈V
+|v⟩⟨v| ⊗(2|ϕv⟩⟨ϕv| −1CV ) .
+
+(9.19)
+
+Similarly UxS = �
+v |v⟩⟨v| ⊗(2|ϕx
+v⟩⟨ϕx
+v| −1CV ). Therefore,
+
+(US)†UxS =
+�
+
+v
+|v⟩⟨v| ⊗
+�
+(2|ϕv⟩⟨ϕv| −1)(2|ϕx
+v⟩⟨ϕx
+v| −1)
+�
+
+=
+�
+
+v /∈∪jVj,xj
+
+|v⟩⟨v| ⊗1 +
+�
+
+j∈[n],v∈Vj,xj
+w∼v
+
+|v⟩⟨v| ⊗(1 −2|v⟩⟨v| −2|w⟩⟨w|) ,
+(9.20)
+
+where in the second term w is v’s single neighbor in G. On the other hand, from its definition in
+Eq. (9.16),
+˜Ox = 1CV ⊗CV −2
+�
+
+j∈[n],v∈Vj,xj
+
+|v⟩⟨v| ⊗1CV .
+(9.21)
+
+By inspection, this is the same as Eq. (9.20) on CE.
+Finally, since by assumption µ /∈Vinput, Tx|µ⟩= |µ⟩⊗|ϕx
+µ⟩= |µ⟩⊗|ϕµ⟩= T|µ⟩. T|µ⟩∈CE by
+Eq. (9.14).
+
+The initial state T|µ⟩= Tx|µ⟩lies in Range(Tx) ⊆CE. Also, Ux fixes CE; in fact, it even fixes
+the join of the ranges of Tx and STx, which could be smaller than CE. By Lemma 9.7, ˜OxU and
+Ux are the same restricted to CE. Therefore, the algorithm behaves the same as if it were running
+phase estimation on iUx instead of Wx = i ˜OxU.
+Based on Eq. (9.1), the algorithm is complete:
+
+Lemma 9.8. If x ∈D and f(x) = 1, then the algorithm outputs 1 with probability at least ϵ −δe =
+5
+6ϵ, where δe = ϵ/6 is the phase estimation error parameter.
+
+48
+
+
+Proof. Assume that f(x) = 1. From Eq. (9.1), AG(x) has an eigenvalue-zero eigenvector |α⟩∈CV
+
+with ∥|α⟩∥= 1 and |⟨µ|α⟩|2 ≥ϵ. By Theorem 9.5 with ρ(α) = 0, Ux has eigenvectors |α, ±⟩=
+(1 ± iS)Tx|α⟩with respective eigenvalues ±i. By Lemma 9.6, these satisfy
+
+|⟨µ|T †
+x|α, +⟩|
+2
+
+∥|α, +⟩∥
++ |⟨µ|T †
+x|α, −⟩|
+2
+
+∥|α, −⟩∥
+= |⟨µ|α⟩|2 ≥ϵ .
+(9.22)
+
+Thus the algorithm measures a phase of 0 or π, and outputs 1, with probability at least ϵ −δe.
+
+Based on Eq. (9.2), since the phase estimation precision is δp = 2
+
+πΛ, the algorithm is sound:
+
+Lemma 9.9. If x ∈D and f(x) = 0, then the algorithm outputs 1 with probability at most
+ϵ/2 + δe = 2
+
+3ϵ.
+
+Proof. Let {|α⟩} be a complete set of orthonormal eigenvectors of AG(x), with corresponding eigen-
+values ρ(α). The initial state T|µ⟩= Tx|µ⟩lies in the range of Tx, and therefore is in the span of
+the eigenvectors {|α, ±⟩}, i.e., the space R = ⊕αRα from Theorem 9.5. The probability that the
+algorithm outputs 1 is therefore at most δe plus
+
+�
+
+|α,b⟩:
+arg(λ(α,b))∈[ π
+
+2 −δp, π
+
+2 +δp]∪[−π
+
+2 −δp,−π
+
+2 +δp]
+
+|⟨α, b|µ⟩|2
+
+∥|α, b⟩∥2 =
+�
+
+α:|arcsin ρ(α)|≤δp
+
+�|⟨α, +|µ⟩|2
+
+∥|α, +⟩∥2 +|⟨α, −|µ⟩|2
+
+∥|α, −⟩∥2
+
+�
+(9.23)
+
+where in the first sum b can be either + or −, and we have used λ(α, ±) = e±i arccos ρ(α), so
+arg(λ(α, ±)) = ±(π
+
+2 −arcsin ρ(α)).
+Since |arcsin ρ(α)| ≤π
+
+2 |ρ(α)|, and by Lemma 9.6, the above sum is at most
+�
+
+α:|ρ(α)|≤Λ
+|⟨α|µ⟩|2 ,
+(9.24)
+
+which is at most ϵ/2 by Eq. (9.2).
+
+Therefore, the algorithm is correct. The constant gap ϵ/6 between its completeness and sound-
+ness parameters can be amplified as usual.
+
+9.2
+Discrete-time simulation of a continuous-time algorithm
+
+Proposition 9.10. Under the assumptions of Theorem 9.1, f can be evaluated with error probability
+at most 1/3 using O
+�1
+
+Λ log( 1
+
+Λ)/ log log 1
+
+Λ
+�
+queries to the input oracle Ox.
+
+Proposition 9.4 and Proposition 9.10 together prove Theorem 9.1.
+To prove Proposition 9.10, we will first give an algorithm in the continuous-time query model.
+This algorithm uses the same idea as the algorithm from Proposition 9.4. Namely, we run phase
+estimation on a certain unitary.
+Completeness of the algorithm is derived from Eq. (9.1) and
+soundness derived from Eq. (9.2).
+Then we simulate this continuous-query algorithm in the discrete-query model. The key tech-
+nical step is a recent result due to Cleve, Gottesman, Mosca, Somma and Yonge-Mallo, [CGM+08],
+that states that continuous-query algorithms can be simulated by discrete-query algorithms with
+only a logarithmic overhead. We quote here a weak version of their theorem.
+
+49
+
+
+Theorem 9.11 ([CGM+08]). Suppose we are given a continuous-time query algorithm with any
+driving Hamiltonian D(t) whose operator norm ∥D(t)∥is bounded above by any L1 function with
+respect to t. (The size of ∥D(t)∥as a function of the input size N does not matter.) Then there
+exists a discrete-time query algorithm that makes
+
+O
+�T log T
+
+δ
+δ log log T
+
+δ
+
+�
+(9.25)
+
+full queries and whose answer has fidelity 1 −δ with the output of the continuous-time algorithm.
+
+We will not define the continuous-time query model here; see [CGM+08] for details. For other
+applications of the model, see, e.g., [FG98, Moc07, FGG07, CCD+03].
+
+Proof of Proposition 9.10. We start by presenting and analyzing the continuous-time query algo-
+rithm.
+The rough idea is to run phase estimation with precision Λ on the unitary eiAG(x). Output 1
+if the estimated phase is zero, and otherwise output 0. This algorithm belongs in the continuous-
+query model, because AG(x) is the sum of an input-independent term AG and an oracle-dependent
+term
+AG(x) −AG = −
+�
+
+j∈[n],v∈Vj,xj
+w∼v
+
+(|v⟩⟨w| + |w⟩⟨v|) .
+(9.26)
+
+However, this algorithm would not be sound. When f(x) = 0, the problem is that even though
+AG(x) has an effective spectral gap, that does not imply that there is an effective gap in the phases
+of the eigenvalues of eiAG(x). Each eigenvalue ρ ∈R of AG(x) corresponds to the eigenvalue eiρ
+
+of eiAG(x), and therefore large eigenvalues can wrap all the way around the circle. For example,
+an eigenvalue-(2π) eigenvector of AG(x) is an eigenvalue-one eigenvector of eiAG(x), which phase
+estimation will not distinguish from an eigenvalue-zero eigenvector of AG(x).
+We solve this issue by scaling AG(x) by a uniformly random T ∈R (0, τ), where τ is a large
+enough constant. Intuitively, this means that for any eigenvector |α⟩of AG(x) with eigenvector
+ρ(α), |ρ(α)| > Λ, there is only a small chance that Tρ(α) wraps around into the interval [−Λ, Λ].
+We will analyze the following concrete algorithm:
+
+1. Let M = ⌈12/ϵ⌉= O(1). Let τ = M2/Λ. Let T be a random variable chosen uniformly from
+the interval (0, τ).
+
+2. Prepare the initial state
+
+1
+√
+
+M
+
+�
+M
+�
+
+m=1
+|m⟩
+�
+⊗|µ⟩∈C[M] ⊗CV .
+(9.27)
+
+3. Apply eiT m
+
+M AG(x) to the second register, controlled by the value m in the first register. That
+is, apply the unitary
+�
+
+m∈[M]
+|m⟩⟨m| ⊗eiT m
+
+M AG(x) = exp
+�
+iT
+�
+
+m∈[M]
+
+m
+M |m⟩⟨m| ⊗AG(x)
+�
+.
+(9.28)
+
+50
+
+
+The resulting state is
+1
+√
+
+M
+
+�
+
+m∈[M]
+|m⟩⊗eiT m
+
+M AG(x)|µ⟩.
+(9.29)
+
+4. Project the first register onto the uniform superposition
+1
+√
+
+M
+�
+m∈M |m⟩. Output 1 if the
+projection succeeds, and output 0 otherwise.
+
+This algorithm is essentially running a slightly simplified version of phase estimation. We have
+chosen to write it out concretely, instead of using phase estimation as a black box, partly in order
+to illustrate that full phase estimation is unnecessary when the objective is just to decide whether
+or not the phase is zero. When there is a large gap between the parameter on the right-hand side
+of Eq. (9.1) and that on the right-hand side of Eq. (9.2), the procedure becomes especially simple.
+(In fact, for our application of Theorem 9.1 to span programs, the gap can be made a constant
+arbitrarily close to one.) A similar simplification can be made in the proof of Proposition 9.4.
+
+Lemma 9.12. When run with input x ∈D, the above procedure satisfies:
+
+• If f(x) = 1, then it outputs 1 with probability at least ϵ.
+
+• If f(x) = 0, then it outputs 1 with probability at most 3ϵ/4.
+
+Proof. Let {|α⟩} be a complete set of orthonormal eigenvectors of AG(x), with corresponding eigen-
+values ρ(α). The probability that the procedure outputs 1 is the expectation versus T of
+
+Pr
+�
+output 1|T = t
+�
+=
+1
+M2
+
+���
+�
+
+m∈[M]
+eit m
+
+M AG(x)|µ⟩
+���
+2
+
+=
+1
+M2
+
+���
+�
+
+α
+
+�
+
+m∈[M]
+eit m
+
+M ρ(α)⟨α|µ⟩|α⟩
+���
+2
+
+=
+1
+M2
+�
+
+α
+
+���
+�
+
+m∈[M]
+eit m
+
+M ρ(α)���
+2
+|⟨α|µ⟩|2
+
+(9.30)
+
+When f(x) = 1, we have from Eq. (9.1) that �
+α:ρ(α)=0 |⟨α|µ⟩|2 ≥ϵ, so Pr
+�
+output 1|T = t
+�
+≥ϵ,
+regardless of t.
+For the case f(x) = 0, we split the sum over α into a sum over those α with |ρ(α)| ≤Λ and a
+sum over those α with |ρ(α)| > Λ. By Eq. (9.2), the first sum is at most M2ϵ/2:
+
+Pr
+�
+output 1|T = t
+�
+≤ϵ
+
+2 +
+1
+M2
+�
+
+α: |ρ(α)|>Λ
+
+���
+�
+
+m∈[M]
+eit m
+
+M ρ(α)���
+2
+|⟨α|µ⟩|2 .
+(9.31)
+
+Now use
+���
+�
+
+m∈[M]
+eit m
+
+M ρ(α)���
+2
+= M +
+�
+
+l,m∈[M]
+l̸=m
+
+eit l−m
+
+M ρ(α)
+(9.32)
+
+and, for ρ(α) ̸= 0,
+
+ET
+�
+eiT l−m
+
+M ρ(α)�
+= eiτ l−m
+
+M ρ(α) −1
+iτ l−m
+
+M ρ(α)
+.
+(9.33)
+
+51
+
+
+Substituting back into Eq. (9.31) gives
+
+Pr
+�
+output 1
+�
+≤ϵ
+
+2 +
+1
+M2
+�
+
+α: |ρ(α)|>Λ
+
+�
+M +
+�
+
+l,m∈[M]
+l̸=m
+
+eiτ l−m
+
+M ρ(α) −1
+iτ l−m
+
+M ρ(α)
+
+�
+|⟨α|µ⟩|2
+
+= ϵ
+
+2 + 1
+
+M
+
+�
+
+α: |ρ(α)|>Λ
+
+�
+1 +
+1
+τρ(α)
+
+�
+
+l,m∈[M]
+l>m
+
+eiτ l−m
+
+M ρ(α) −e−iτ l−m
+
+M ρ(α)
+
+i(l −m)
+
+�
+|⟨α|µ⟩|2
+
+≤ϵ
+
+2 + 1
+
+M
+
+�
+
+α: |ρ(α)|>Λ
+
+�
+1 + 2M2
+
+τρ(α)
+
+�
+|⟨α|µ⟩|2 ,
+
+(9.34)
+
+where in the last step we have (loosely) bounded the sum over l and m. Now use �
+α |⟨α|µ⟩|2 = 1,
+τ = M2/Λ and M ≥12/ϵ to conclude
+
+Pr
+�
+output 1
+�
+≤ϵ
+
+2 + 3
+
+M
+
+≤3ϵ
+
+4
+,
+(9.35)
+
+as claimed.
+
+Therefore, the above procedure is correct. It remains to show that it can be simulated using
+O(τ log τ/ log log τ) queries to the input oracle Ox from Eq. (9.7). The difficulty is simulating eitH(x)
+
+for a t ∈(0, τ), where
+H(x) =
+�
+
+m∈[M]
+
+m
+M |m⟩⟨m| ⊗AG(x) .
+(9.36)
+
+In the language of physics, eitH(x) corresponds to applying the time-independent Hamiltonian H(x)
+for a time t.
+Let
+D =
+�
+
+m∈[M]
+
+m
+M |m⟩⟨m| ⊗AG ,
+(9.37)
+
+the “driving Hamiltonian.” D is independent of the input x, so eitD can be implemented without
+querying Ox. Let the “query Hamiltonian” be
+
+Hx =
+�
+
+m∈[M]
+
+m
+M |m⟩⟨m| ⊗(AG(x) −AG)
+
+= −
+�
+
+m∈[M]
+
+m
+M |m⟩⟨m| ⊗
+�
+
+v∈∪j∈[n]Vj,xj
+w∼v
+
+(|v⟩⟨w| + |w⟩⟨v|) ,
+(9.38)
+
+where we have used that G(x) differs from G only in the deletion of the weight-one edges leaving
+the vertices v ∈∪j∈[n]Vj,xj. For an arbitrary t ∈R, eitHx can be implemented using at most two
+queries to the oracle Ox.
+Then
+H(x) = D + Hx .
+(9.39)
+
+52
+
+
+The problem for taking the exponential is that the two terms D and Hx do not commute.
+We will now apply Theorem 9.11, which very roughly can be thought of as an asymmetric
+Lie-Trotter expansion of the exponential.
+A minor difference between our setting and the one
+in [CGM+08], though, is that they assume a more restricted form for the query Hamiltonian. For
+querying a k-bit string y with the first bit fixed to y1 = 0, they assume the query Hamiltonian is
+
+˜Hy =
+�
+
+j∈[k]
+yj|j⟩⟨j| =
+�
+
+j∈[k]: yj=1
+|j⟩⟨j| .
+(9.40)
+
+Unfortunately, our query Hamiltonian Hx is not of this required form. In order to apply Theo-
+rem 9.11 as a black box, we need to put Hx into this form for some string y. Each bit of y will
+be a fixed function of exactly one bit of x, and therefore a discrete phase-flip query on y can be
+simulated with one application of Ox.
+First of all, note that Theorem 9.11 still holds if the query Hamiltonian is of the form
+
+˜H′
+y =
+�
+
+j∈[k]
+yjg(j)|j⟩⟨j| ,
+(9.41)
+
+where g is any fixed function [k] →{−1, 1}. That is, signs are allowed. Indeed, then
+
+˜H′
+y = −
+�
+
+j∈[k]: g(j)=−1
+|j⟩⟨j| +
+�
+
+j∈[k]: g(j)=1
+yj|j⟩⟨j| +
+�
+
+j∈[k]: g(j)=−1
+(1 −yj)|j⟩⟨j|
+(9.42)
+
+The first term can be moved into the driving Hamiltonian, since it does not depend on y, and
+the remaining terms are of the form of ˜Hy′ on an input y′ that equals y except with the bits
+{j ∈[k] : g(j) = −1} complemented.
+Let us now translate our query Hamiltonian Hx into the form of Eq. (9.41). For m ∈[M], let
+
+Dm = |m⟩⟨m| ⊗AG
+(9.43)
+
+Hm
+x = −|m⟩⟨m| ⊗
+�
+
+v∈∪j∈[n]Vj,xj
+w∼v
+
+(|v⟩⟨w| + |w⟩⟨v|)
+(9.44)
+
+Hm(x) = Dm + Hm
+x = |m⟩⟨m| ⊗AG(x) .
+(9.45)
+
+Then H(x) = �
+m∈[M]
+m
+M Hm(x), so
+
+eitH(x) =
+�
+
+m∈[M]
+exp
+�
+it m
+
+M Hm(x)
+�
+(9.46)
+
+since the different terms Hm(x) commute pairwise.
+The term Hm
+x is nearly of the form Eq. (9.41). It can be put in that form by changing basis.
+For j ∈[n], b ∈B and v ∈Vj,b ⊆Vinput, with neighbor w, write
+
+|v⟩⟨w| + |w⟩⟨v| = |vw+⟩⟨vw+| −|vw−⟩⟨vw−| ,
+(9.47)
+
+where |vw±⟩=
+1
+√
+
+2(|v⟩±|w⟩). Use two bits of y, with values xj and ¯xj, to get the terms ∓|m⟩⟨m|⊗
+|vw±⟩⟨vw±| from Eq. (9.44) into the form of Eq. (9.41).
+
+53
+
+
+Overall, therefore y has |Vj,b| copies of bit xj and |Vj,b| copies of the complement ¯xj, for all
+j ∈[n], b ∈B. Thus k, the length of y, is 2|Vinput|.
+Finally, apply Theorem 9.11, with accuracy parameter δ =
+ϵ
+12M = Ω(1), M times, once
+for each of the terms in Eq. (9.46).
+The total query complexity is O(Mτ log(τ)/ log log τ) =
+O( 1
+
+Λ log( 1
+
+Λ)/ log log 1
+
+Λ), as desired. The total error introduced in the simulation is at most Mδ,
+so the gap between the completeness and soundness parameters of the final algorithm is at least
+ϵ/4 −2 · ϵ/12 = ϵ/12. This constant gap can be amplified as usual.
+
+10
+The general quantum adversary bound is nearly tight for every
+boolean function
+
+We can now prove the main result of this paper, that for any total or partial boolean function f
+the general adversary bound on the quantum query complexity is tight up to a logarithmic factor.
+
+Theorem 10.1. For any function f : D →{0, 1}, with D ⊆{0, 1}n, the bounded-error quantum
+query complexity of f, Q(f), satisfies
+
+Q(f) = Ω(Adv±(f))
+(10.1)
+
+and
+
+Q(f) = O
+�
+Adv±(f)
+log Adv±(f)
+log log Adv±(f)
+
+�
+.
+(10.2)
+
+Proof. The lower bound is a special case of Theorem 2.6, and is due to Høyer, Lee and ˇSpalek [HLˇS07].
+As already sketched in Section 1, for the upper bound, use the semi-definite program from
+Theorem 6.1 with uniform costs s = ⃗1 to construct a span program P computing fP |D = f,
+with wsize(P, D) = Adv±(f). Then apply Theorem 9.2 to obtain a bounded-error quantum query
+algorithm that evaluates f.
+
+By using binary search and standard error reduction, Theorem 10.1 can be extended to cover
+functions with larger codomain [Lee09]:
+
+Theorem 10.2. For any function f : D →[m], with D ⊆{0, 1}n, Q(f) satisfies
+
+Q(f) = Ω(Adv±(f))
+(10.3)
+
+and
+
+Q(f) = O
+�
+Adv±(f)
+log Adv±(f)
+log log Adv±(f) log(m) log log m
+�
+.
+(10.4)
+
+Proof. The lower bound is again due to [HLˇS07]. To derive the upper bound, first let us show:
+
+Lemma 10.3. For finite sets D ⊆Cn, E and F, let f : D →E and g : E →F. Let s ∈[0, ∞)n.
+Then
+
+Advs(g ◦f) ≤Advs(f)
+(10.5)
+
+Adv±
+s (g ◦f) ≤Adv±
+s (f) .
+(10.6)
+
+54
+
+
+Proof. For x, y ∈D, f(x) = f(y) implies g(f(x)) = g(f(y)). Therefore if Γ is an adversary matrix
+for g◦f : D →F, then Γ is also an adversary matrix for f. The conclusions follow by Definition 2.4
+for the adversary bounds.
+
+In order to evaluate f, apply standard binary search using ⌈log2 m⌉steps. In each step, there
+is some division of the range g : [m] →{0, 1}. By Lemma 10.3, Adv±(g ◦f) ≤Adv±(f). Therefore
+by Theorem 10.1, g ◦f can be evaluated with error at most 1/3, using
+
+O
+�
+Adv±(f)
+log Adv±(f)
+log log Adv±(f)
+
+�
+(10.7)
+
+queries. Repeat this O(log log m) times in order to reduce the error probability to 1/(3⌈log m⌉).
+Then by the union bound, the entire procedure has a probability of error at most 1/3.
+
+We do not have a result for the case of a non-binary input alphabet. Of course the input can be
+encoded into binary, so that Theorem 10.1 applies. However, this encoding might increase Adv±
+
+significantly.
+
+11
+Open problems
+
+We have shown that for any boolean function f, the general adversary bound Adv±(f) is a tight
+lower bound on the bounded-error quantum query complexity Q(f), up to a logarithmic factor. In
+proving this statement, we have also shown that quantum algorithms, judged by query complexity,
+and span programs, judged by witness size, are equivalent computational models for evaluating
+boolean functions, again up to a logarithmic factor.
+Among the corollaries, Theorem 7.6 gives an optimal quantum algorithm for evaluating adversary-
+balanced formulas over any finite boolean gate set. For example, the formula’s gate set may be
+taken to be all functions {0, 1}n →{0, 1} with n ≤1000. This formula-evaluation algorithm exploits
+the ease of composing span programs. The main unresolved problem here is how best to evaluate
+unbalanced formulas, aiming for optimal query complexity and near-optimal time complexity.
+Span programs may also be useful for developing other quantum algorithms.
+They have a
+rich mathematical structure, and their potential has not been fully explored. One possible ap-
+proach is to study the general adversary bound for more problems. For example, studying the
+Barnum/Saks/Szegedy semi-definite program for quantum query complexity [BSS03] has led to
+improved zero-error algorithms for Ordered Search [CLP07]. The Adv± SDP is simpler than the
+SDP in [BSS03], and Theorem 6.2 gives a new, simpler form for the dual SDP, for boolean func-
+tions. Although this SDP is still exponentially large, the simplifications may ease the inference
+of structure from numerical investigations. For the Ordered Search problem in particular, Childs
+and Lee have closely characterized Adv± [CL08].
+This result will not necessarily be useful for
+developing an Ordered Search algorithm because the codomain is not boolean and Theorem 10.1
+has a logarithmic overhead. A variation of this problem, Least-Significant-Bit Ordered Search, has
+boolean codomain, but is of less practical interest.
+The nonnegative-weight adversary bound Adv is often easy to approximate. If this bound is
+close to Adv±, then perhaps a solution to Eq. (6.5), the SDP dual to the Adv SDP, can also be
+turned into a quantum walk algorithm. However, the span program framework will not apply for
+the analysis.
+
+55
+
+
+This article has focused on query complexity, but Theorem 9.1 is more than an information-
+theoretic statement. It gives explicit algorithms whose time complexity can be analyzed, as in
+Theorem 7.6 for formula evaluation. Proposition 4.7, Theorem 8.4 and Theorem 9.3 are pertinent
+results, but more techniques are needed for developing span programs P such that ∥abs(AGP )∥=
+O(1) and for which the quantum walk reflections from Szegedy’s Theorem 9.5 can be implemented
+efficiently.
+It is an interesting problem to consider functions with non-binary input alphabet and non-
+boolean codomain. The three main theorems, Theorem 6.1, Theorem 8.3 and Theorem 9.1, may
+extend to cover partial functions with domain in [k]n and k = O(1). When the codomain is not
+boolean, we would like to strengthen Theorem 10.2. The natural approach is to define generalized
+canonical span programs and extend Lemma 6.5 to characterize the optimal generalized witness
+size of f : Cn →E [RˇS09]. Although this may lead to new quantum query algorithms, it will
+be insufficient for obtaining provably optimal or near-optimal algorithms for non-binary input
+alphabets, since the SDP in Eq. (6.2) is not always equal to Adv±; see Eq. (6.6). Moreover, there
+are functions [3]2 →[3] for which both Adv± and the SDP in Eq. (6.2) compose strictly sub-
+multiplicatively, which indicates that the formula-evaluation problem for non-boolean gate sets is
+more complicated.
+One might ask whether the classical query complexity of evaluating a span program P on
+inputs in D can be related to the witness size wsize(P, D). A polynomial dependence is not pos-
+sible, though, since there is only a polynomial relationship between quantum and classical query
+complexities for total functions [Sim97, BBC+01].
+Finally, we conjecture that the logarithmic overhead can be removed from Theorem 10.1. An
+analogous conjecture may hold in the continuous-time query model [FG98, Moc07, CGM+08].
+
+Conjecture 11.1. For any function f : D →{0, 1}, with D ⊆{0, 1}n, the general quantum
+adversary bound is tight:
+Q(f) = Θ(Adv±(f)) .
+(11.1)
+
+Acknowledgements
+
+I would like to thank Robert ˇSpalek and Troy Lee for helpful discussions and feedback. I would also
+like to thank Andris Ambainis and Stephanie Wehner for sharing their ideas on the Hamming-weight
+threshold functions.
+
+References
+
+[Aar06]
+Scott Aaronson.
+Lower bounds for local search by quantum arguments.
+SIAM J.
+Computing, 35(4):804–824, 2006. arXiv:quant-ph/0307149.
+
+[ACGT09] Andris Ambainis, Andrew M. Childs, Fran¸cois Le Gall, and Seiichiro Tani. The quan-
+tum query complexity of certification. arXiv:0903.1291 [quant-ph], 2009.
+
+[ACR+07]
+Andris Ambainis, Andrew M. Childs, Ben W. Reichardt, Robert ˇSpalek, and Shengyu
+Zhang.
+Any AND-OR formula of size N can be evaluated in time N1/2+o(1) on a
+quantum computer. In Proc. 48th IEEE FOCS, pages 363–372, 2007.
+
+56
+
+
+[Amb02]
+Andris Ambainis. Quantum lower bounds by quantum arguments. J. Comput. Syst.
+Sci., 64:750–767, 2002. Earlier version in STOC’00.
+
+[Amb05]
+Andris Ambainis. Polynomial degree and lower bounds in qu complexity: Collision and
+element distinctness with small range. Theory of Computing, 1:37–46, 2005.
+
+[Amb06]
+Andris Ambainis. Polynomial degree vs. quantum query complexity. J. Comput. Syst.
+Sci., 72(2):220–238, 2006. Preliminary version in Proc. 44th IEEE FOCS, 2003.
+
+[Amb07]
+Andris Ambainis. Quantum walk algorithm for element distinctness. SIAM J. Com-
+puting, 37(1):210–239, 2007. arXiv:quant-ph/0311001.
+
+[Amb08]
+Andris Ambainis. private communication, 2008.
+
+[AS04]
+Scott Aaronson and Yaoyun Shi.
+Quantum lower bounds for the collision and the
+element distinctness problem. J. ACM, 51(4):595–605, 2004.
+
+[BBC+01]
+Robert Beals, Harry Buhrman, Richard Cleve, Michele Mosca, and Ronald de Wolf.
+Quantum lower bounds by polynomials. J. ACM, 48(4):778–797, 2001.
+
+[Bei93]
+Richard Beigel. The polynomial method in circuit complexity. In Proc. 8th IEEE Symp.
+Structure in Complexity Theory, pages 82–95, 1993.
+
+[BS04]
+Howard Barnum and Michael Saks. A lower bound on the quantum query complexity
+of read-once functions. J. Comput. Syst. Sci., 69(2):244–258, 2004.
+
+[BSS03]
+Howard Barnum, Michael Saks, and Mario Szegedy.
+Quantum decision trees and
+semidefinite programming. In Proc. 18th IEEE Complexity, pages 179–193, 2003.
+
+[BVdW07] Harry Buhrman, Nikolay Vershchagin, and Ronald de Wolf.
+On computation and
+communication with small bias. In Proc. 22nd CCC, pages 24–32, 2007.
+
+[CCD+03]
+Andrew M. Childs, Richard Cleve, Enrico Deotto, Edward Farhi, Sam Gutmann, and
+Daniel A. Spielman. Exponential algorithmic speedup by quantum walk. In Proc. 35th
+ACM STOC, pages 59–68, 2003. arXiv:quant-ph/0209131.
+
+[CCJY07]
+Andrew M. Childs, Richard Cleve, Stephen P. Jordan, and David Yeung. Discrete-
+query quantum algorithm for NAND trees. arXiv:quant-ph/0702160, 2007.
+
+[CEMM98] Richard Cleve, Artur Ekert, Chiara Macchiavello, and Michele Mosca. Quantum algo-
+rithms revisited. Proc. R. Soc. London A, 454(1969):339–354, 1998.
+
+[CF02]
+Ronald Cramer and Serge Fehr.
+Optimal black-box secret sharing over arbitrary
+Abelian groups. In Proc. CRYPTO 2002, LNCS vol. 2442, pages 272–287. Springer-
+Verlag, 2002.
+
+[CGM+08] Richard Cleve, Daniel Gottesman, Michele Mosca, Rolando Somma, and David L.
+Yonge-Mallo.
+Efficient discrete-time simulations of continuous-time quantum query
+algorithms. arXiv:0811.4428 [quant-ph], 2008.
+
+57
+
+
+[CL08]
+Andrew M. Childs and Troy Lee. Optimal quantum adversary lower bounds for ordered
+search. In Proc. 35th ICALP, LNCS vol. 5125, pages 869–880, 2008. arXiv:0708.3396
+[quant-ph].
+
+[CLP07]
+Andrew M. Childs, Andrew J. Landahl, and Pablo A. Parrilo.
+Improved quantum
+algorithms for the ordered search problem via semidefinite programming. Phys. Rev.
+A, 75:032335, 2007. arXiv:quant-ph/0608161.
+
+[CNW09]
+Chen-Fu Chiang, Daniel Nagaj, and Pawl Wocjan. An efficient circuit for the quantum
+walk update rule. arXiv:0903.3465 [quant-ph], 2009.
+
+[CRˇSZ07]
+Andrew M. Childs, Ben W. Reichardt, Robert ˇSpalek, and Shengyu Zhang. Every
+NAND formula of size N can be evaluated in time N1/2+o(1) on a quantum computer.
+arXiv:quant-ph/0703015, 2007.
+
+[FG98]
+Edward Farhi and Sam Gutmann. Analog analogue of a digital quantum computation.
+Phys. Rev. A, 57:2403, 1998. arXiv:quant-ph/9612026.
+
+[FGG07]
+Edward Farhi, Jeffrey Goldstone, and Sam Gutmann. A quantum algorithm for the
+Hamiltonian NAND tree. arXiv:quant-ph/0702144, 2007.
+
+[G´al01]
+Anna G´al. A characterization of span program size and improved lower bounds for
+monotone span programs. Computational Complexity, 10:277–296, 2001.
+
+[GP03]
+Anna G´al and Pavel Pudl´ak. A note on monotone complexity and the rank of matrices.
+Information Processing Letters, 87(6):321–326, 2003.
+
+[HLˇS05]
+Peter Høyer, Troy Lee, and Robert ˇSpalek.
+Tight adversary bounds for composite
+functions. arXiv:quant-ph/0509067, 2005.
+
+[HLˇS07]
+Peter Høyer, Troy Lee, and Robert ˇSpalek. Negative weights make adversaries stronger.
+In Proc. 39th ACM STOC, pages 526–535, 2007. arXiv:quant-ph/0611054.
+
+[KOS04]
+Adam R. Klivans, Ryan O’Donnell, and Rocco A. Servedio. Learning intersections and
+thresholds of halfspaces. J. Comput. Syst. Sci., 68(4):808–840, 2004.
+
+[KS01]
+Adam R. Klivans and Rocco A. Servedio. Learning DNF in time 2 ˜O(n1/3). In Proc.
+33rd ACM STOC, pages 258–265, 2001.
+
+[KW93]
+Mauricio Karchmer and Avi Wigderson. On span programs. In Proc. 8th IEEE Symp.
+Structure in Complexity Theory, pages 102–111, 1993.
+
+[Lee09]
+Troy Lee. private communication, 2009.
+
+[LLS06]
+Sophie Laplante, Troy Lee, and Mario Szegedy. The quantum adversary method and
+classical formula size lower bounds. Computational Complexity, 15:163–196, 2006. Ear-
+lier version in Complexity’05.
+
+[Lov03]
+L´aszl´o Lov´asz. Semidefinite programs and combinatorial optimization. In B. A. Reed
+and C. Linhares Sales, editors, Recent Advances in Algorithms and Combinatorics,
+volume 11 of CMS Books Math., pages 137–194. Springer, 2003.
+
+58
+
+
+[MNR07]
+Ashley Montanaro, Harumichi Nishimura, and Rudy Raymond. Unbounded error quan-
+tum query complexity. arXiv:0712.1446 [quant-ph], 2007.
+
+[Moc07]
+Carlos Mochon. Hamiltonian oracles. Phys. Rev. A, 75:042313, 2007. arXiv:quant-
+ph/0602032.
+
+[NC00]
+Michael A. Nielsen and Isaac L. Chuang. Quantum computation and quantum infor-
+mation. Cambridge University Press, Cambridge, 2000.
+
+[NNP05]
+Ventzislav Nikov, Svetla Nikova, and Bart Preneel.
+On the size of monotone span
+programs. In Proc. SCN 2004, LNCS vol. 3352, pages 249–262, 2005.
+
+[OS03]
+Ryan O’Donnell and Rocco A. Servedio. New degree bounds for polynomial threshold
+functions. In Proc. 35th ACM STOC, pages 325–334, 2003.
+
+[Rei09]
+Ben W. Reichardt. Faster quantum algorithm for evaluating AND-OR formulas. In
+preparation, 2009.
+
+[RˇS08]
+Ben W. Reichardt and Robert ˇSpalek. Span-program-based quantum algorithm for
+evaluating formulas. In Proc. 40th ACM STOC, pages 103–112, 2008. arXiv:0710.2630
+[quant-ph].
+
+[RˇS09]
+Ben W. Reichardt and Robert ˇSpalek. Generalized canonical span programs. In prepa-
+ration, 2009.
+
+[Sim97]
+Daniel R. Simon.
+On the power of quantum computation.
+SIAM J. Computing,
+26(5):1474–1483, 1997. Earlier version in FOCS’94.
+
+[ˇSpa09]
+Robert ˇSpalek. private communication, 2009.
+
+[ˇSS06]
+Robert ˇSpalek and Mario Szegedy. All quantum adversary methods are equivalent.
+Theory of Computing, 2(1):1–18, 2006.
+Earlier version in ICALP’05. arXiv:quant-
+ph/0409116.
+
+[Sze04]
+Mario Szegedy. Quantum speed-up of Markov chain based algorithms. In Proc. 45th
+IEEE FOCS, pages 32–41, 2004.
+
+A
+Optimal span programs for the Hamming-weight threshold
+functions
+
+In this appendix, span programs with optimal witness size are given for the Hamming-weight
+threshold functions.
+Additionally, optimal span programs are given for those Hamming-weight
+interval functions for which the nonnegative-weight adversary bound equals the general adversary
+bound.
+The motivation is to show an explicit and nontrivial span program construction.
+The
+main technique, recursive composition of symmetrized span programs, may be useful for other
+constructions.
+Surprisingly, the optimal span programs are simply derived from span programs for AND and
+OR gates, composed in a certain symmetrical manner and with optimized weights. The optimal
+span programs for Threshold 2 of 3 and Threshold 2 of 4 given in [RˇS08] did not have this form.
+
+59
+
+
+The proofs are simple calculations.
+After presenting the span programs, we compute their
+witness sizes, compute the best nonnegative-weight adversary bounds (by giving adversary matrices
+and solutions to the dual formulation), and show by perturbations of these matrices that the general
+adversary bound is strictly greater in those cases where the span program witness size does not
+match the nonnegative-weight adversary bound.
+
+Definition A.1. The Hamming-weight threshold function T n
+l : {0, 1}n →{0, 1} is defined by
+
+T n
+l (x) =
+
+�
+1
+if |x| ≥l
+0
+otherwise
+(A.1)
+
+where |x| = �n
+i=1 xi is the Hamming weight of x.
+The Hamming-weight interval function In
+l,m : {0, 1}n →{0, 1} is defined by
+
+In
+l,m(x) =
+
+�
+1
+if l ≤|x| ≤m
+0
+otherwise
+(A.2)
+
+Note that T n
+l = In
+l,n and, for all x ∈{0, 1}n, In
+l,m(x) is the conjunction T n
+l (x) ∧T n
+n−m(¯x), where
+¯x is the bitwise complement of x. Also, In
+l,m(x) = In
+n−m,n−l(¯x), which allows us to assume without
+loss of generality that |n
+
+2 −m| ≤|n
+
+2 −l|.
+
+Theorem A.2. For the interval function In
+l,m, assume that |n
+
+2 −m| ≤|n
+
+2 −l|. Then
+
+Adv(In
+l,m) =
+
+��
+
+(m + 1)(n −m) + m(n−l+1)
+
+(m−l+1)2
+if l > 0
+�
+
+(m + 1)(n −m)
+if l = 0
+.
+(A.3)
+
+If l ∈{0, 1, m}, then Adv±(In
+l,m) = Adv(In
+l,m); otherwise Adv±(In
+l,m) > Adv(In
+l,m).
+There exists a span program P n
+l,m computing fP n
+l,m = In
+l,m, with witness size
+
+wsize(P n
+l,m) ≤
+
+�
+
+(m + 1)(n −m) + l(n −l + 1)
+
+m −l + 1
+.
+(A.4)
+
+This witness size matches Adv(In
+l,m), and hence is optimal, for l ∈{0, 1, m}, i.e., in those cases
+where Adv±(In
+l,m) = Adv(In
+l,m).
+
+Our span program construction for the case l = 0 and m = n −2 has been influenced by a
+family of constructions due to Ambainis that come arbitrarily close to optimality [Amb08].
+We will use the following notation. For i ∈[n] = {1, 2, . . . , n}, let ei = 0i−110n−i ∈{0, 1}n be
+the bit string with a 1 only in position i, and for x ∈{0, 1}n, let i ∈x mean xi = 1 and i /∈x mean
+xi = 0. Let ⊕denote the bitwise exor operation.
+For computing the nonnegative-weight adversary bounds, we will use a dual formulation that
+is a simplified version of Eq. (6.5):
+
+Theorem A.3 ([ˇSS06]). Let f : {0, 1}n →{0, 1}. Then
+
+Adv(f) = min
+{px}
+max
+x,y:f(x)̸=f(y)
+1
+�
+i:xi̸=yi
+�
+
+px(i)py(i)
+,
+(A.5)
+
+where the first minimization is over distributions px on [n] for each x ∈{0, 1}n.
+
+60
+
+
+A.1
+Span programs for the threshold functions T n
+l
+
+Proposition A.4. For l ∈[n], there exists a span program P n
+l computing fP n
+l = T n
+l , with witness
+size
+wsize(P n
+l ) ≤
+�
+
+l(n −l + 1) .
+(A.6)
+
+Proof. The proof is by induction in l. For the base case, l = 1, T n
+1 is the OR function, for which
+an optimal span program has V = C, target vector |t⟩= 1 and, for i ∈I = [n], input vector
+|vi⟩= 1 labeled by (i, 1). For this span program, the witness size for inputs x of Hamming weight
+|x| = j ≥1 is 1/j, achieved by |w⟩= 1
+
+j
+�
+i∈x |i⟩, and the witness size for x = 0n is n.
+For i ∈[n], let x−i = x1 . . . �xi . . . xn ∈{0, 1}n−1 be the string x with the ith bit removed. For
+l > 1, the span program for T n
+l can be built recursively, by expanding out the formula
+
+T n
+l (x1, . . . , xn) =
+
+n�
+
+i=1
+
+�
+xi ∧T n−1
+l−1 (x−i)
+�
+.
+(A.7)
+
+By induction, let P n−1
+l−1
+be an optimal span program for T n−1
+l−1 , over a vector space of dimension
+d with target vector |t′⟩= (1, 0, . . . , 0), and with witness sizes 1 for inputs of Hamming weight
+l −1 and witness sizes (l −1)(n −l + 1) for inputs of Hamming weight l −2. We construct span
+program P n
+l
+over the vector space V = C ⊕(Cn ⊗Cd), of dimension 1 + nd.
+Let the target
+vector be |t⟩= (1, 0). For the ith term in Eq. (A.7), add the following “block” of input vectors:
+(1,
+√
+
+l −1|i⟩⊗|t′⟩) labeled by (i, 1), and (0, |i⟩⊗|vj⟩) for each input vector |vj⟩of P n−1
+l−1 on x−i.
+The span program P n
+l
+indeed computes T n
+l . For computing the witness size of P n
+l , note that
+all input bits are symmetrical, so it suffices to consider inputs of the form x = 1j0n−j.
+
+• In the true case, j ≥l, consider the witness |w⟩with weight 1/j on each of the input
+vectors (1,
+√
+
+l −1|i⟩⊗|t′⟩) for i ∈[j] and then an optimal witness, of squared length at most
+(
+√
+
+l −1/j)2 · wsize(P n−1
+l−1 , x−i) within each of those T n−1
+l−1 span program blocks. The witness
+size is
+∥|w⟩∥2 = 1
+
+j2
+�
+
+i∈x
+
+�
+1 + (l −1)wsize(P n−1
+l−1 , x−i)
+�
+≤1 .
+(A.8)
+
+• In the false case, j < l, let the witness vector |w′⟩∈V orthogonal to the available input
+vectors be |w′⟩=
+�
+1, −
+1
+√
+
+l−1
+�
+i∈x |i⟩⊗|w′
+i⟩
+�
+. Here |w′
+i⟩is an optimal witness vector for the
+
+span program P n−1
+l−1 on x−i, i.e., orthogonal to the available input vectors and with ⟨t′|w′
+i⟩= 1.
+Then ⟨t|w′⟩= 1 and
+
+∥A†|w′⟩∥
+2 =
+�
+
+i/∈x
+1 +
+�
+
+i∈x
+
+1
+l −1∥A†|w′
+i⟩∥
+2
+
+= (n −j) +
+�
+
+i∈x
+
+1
+l −1wsize(P n−1
+l−1 , x−i)
+
+≤(n −j) + j(n −l + 1)
+
+= n + j(n −l)
+
+≤l(n −l + 1) ,
+(A.9)
+
+where in the two inequalities we have used wsize(P n−1
+l−1 , x−i) ≤(l−1)(n−j +1) and j ≤l−1,
+respectively.
+
+61
+
+
+Thus wsize(P n
+l ) ≤
+�
+
+l(n −l + 1).
+
+Letting size(P) be the number of input vectors of a span program P [KW93], note that
+size(P n
+1 ) = n and size(P n
+l ) = n(1 + size(P n−1
+l−1 )), which is exponential in l.
+For example, for
+the three-majority function T 3
+2 , size(P 3
+2 ) = 9. This size is not optimal, even among span programs
+with optimal witness size.
+In Proposition A.6 below, we will require slightly finer control over the threshold span program
+witness sizes:
+
+Claim A.5. On an input x of Hamming weight |x| = j ≥l, the span program P n
+l
+constructed in
+Proposition A.4 satisfies
+
+wsize(P n
+l , x) ≤
+1
+j −l + 1 .
+(A.10)
+
+Proof. By induction in l. The base case, l = 1, was already considered as the base case for the
+induction in the proof of Proposition A.4. For l > 1, apply Eq. (A.8) and the induction assumption
+to get
+
+wsize(P n
+l , x) ≤1
+
+j2
+�
+
+i∈x
+
+�
+1 + (l −1)wsize(P n−1
+l−1 , x−i)
+�
+(A.11)
+
+≤1
+
+j
+�
+1 +
+l −1
+j −l + 1
+�
+
+=
+1
+j −l + 1 .
+
+A.2
+Span programs for the interval functions In
+l,m
+
+Proposition A.6. There exists a span program P n
+l,m computing fP n
+l,m = In
+l,m, with witness size
+
+wsize(P n
+l,m) ≤
+
+�
+
+(m + 1)(n −m) + l(n −l + 1)
+
+m −l + 1
+(A.12)
+
+when |n
+
+2 −m| ≤|n
+
+2 −l|.
+
+Proof. We use In
+l,m(x) = T n
+l (x) ∧T n
+n−m(¯x) and combine the span programs P n
+l
+for T n
+l
+and P n
+n−m
+for T n
+n−m from Proposition A.4.
+Let V ′ and V ′′ be the vector spaces for P n
+l and P n
+n−m, with target vectors |t′⟩and |t′′⟩, respec-
+tively. As in Proposition A.4, scale the target vectors so that witness sizes in the true cases are
+at most 1 and in the false cases are at most l(n −l + 1) or (n −m)(m + 1) for P n
+l
+and P n
+n−m,
+respectively. Let V = V ′ ⊕V ′′ be the vector space for P n
+l,m, with target vector
+
+|t⟩=
+��
+
+l(n −l + 1)|t′⟩,
+�
+
+(n −m)(m + 1)|t′′⟩
+�
+∈V .
+(A.13)
+
+The input vectors for P n
+l,m are exactly the input vectors of P n
+l on input x in the first component of
+V and the input vectors of P n
+n−m on input ¯x in the second component of V . This way, fP n
+l,m = 1 if
+and only if both component span programs evaluate to true, so indeed fP n
+l,m = In
+l,m.
+Note that all input bits are symmetrical, so the witness size of P n
+l,m on an input x depends only
+on j = |x|.
+
+62
+
+
+• In the true case, l ≤j ≤m, the witness size is the sum of the squared lengths for witnesses
+for the two component span programs, from Claim A.5,
+
+wsize(P n
+l,m, x) = l(n −l + 1)wsize(P n
+l , x) + (n −m)(m + 1)wsize(P n
+n−m, ¯x)
+
+≤l(n −l + 1)
+
+j −l + 1
++ (n −m)(m + 1)
+
+m −j + 1
+.
+(A.14)
+
+As the above expression is convex up in j ∈[l, m], it is maximized for j ∈{l, m}. Since
+|n
+
+2 −m| ≤|n
+
+2 −l|, l(n −l + 1) ≤(m + 1)(n −m), so j = m is the worst case:
+
+wsize(P n
+l,m, x) ≤l(n −l + 1)
+
+m −l + 1 + (m + 1)(n −m) .
+(A.15)
+
+• In the false case, either j < l or j > m, and we aim to show wsize(P n
+l,m, x) ≤1. Take first the
+case j > l. Consider a witness vector
+�
+1
+√
+
+l(n−l+1)|w′⟩, 0
+�
+∈V where |w′⟩is an optimal witness
+
+vector to fP n
+l (x) = 1. The witness size is
+1
+l(n−l+1)wsize(P n
+l , x) ≤1. The case j > m is dealt
+with symmetrically.
+
+A.3
+Adversary bounds for the interval functions In
+l,m
+
+Proposition A.7. For the interval function In
+l,m with |n
+
+2 −m| ≤|n
+
+2 −l|,
+
+Adv(In
+l,m) =
+
+��
+
+(m + 1)(n −m) + m(n−l+1)
+
+(m−l+1)2
+if l > 0
+�
+
+(m + 1)(n −m)
+if l = 0
+(A.16)
+
+In particular, Adv(T n
+l ) =
+�
+
+l(n −l + 1).
+
+Proof. There are two steps to the proof. First we give an adversary matrix Γ that achieves for
+
+each i ∈[n] ∥Γ∥/∥Γ ◦∆i∥=
+�
+
+(m + 1)(n −m) + m(n−l+1)
+
+(m−l+1)2 if l > 0, or
+�
+
+(m + 1)(n −m) if l = 0.
+By Definition 2.4, this lowers bounds Adv(In
+l,m). Second, we give a matching solution to the dual
+formulation of the nonnegative-weight adversary bound of Theorem A.3, in order to upper-bound
+Adv(In
+l,m).
+Let
+
+Γ =
+�
+
+x:|x|=m
+|x⟩
+
+��
+
+i/∈x
+⟨x ⊕ei| + c
+�
+
+y:|y|=l−1
+|x⊕y|=m−l+1
+
+⟨y|
+
+�
+
+,
+(A.17)
+
+where c is to be determined. For the case l = 0, the second term above is zero, so set c = 0.
+Then for each i ∈[n], let Γi = Γ ◦∆i, so
+
+Γi =
+�
+
+x,y:xi̸=yi
+⟨x|Γ|y⟩
+
+=
+�
+
+x:|x|=m
+i/∈x
+
+|x⟩⟨x ⊕ei| + c
+�
+
+x:|x|=m
+i∈x
+
+�
+
+y:|y|=l−1
+|x⊕y|=m−l+1
+i/∈y
+
+|x⟩⟨y| .
+(A.18)
+
+63
+
+
+Then
+Γ†
+iΓi =
+�
+
+y:|y|=m+1
+i∈y
+
+|y⟩⟨y| + c2
+�
+
+y,y′,x
+|y|=|y′|=l−1,|x|=m
+|x⊕y|=|x⊕y′|=m−l+1
+i∈x,i/∈y,i/∈y′
+
+|y⟩⟨y′| .
+(A.19)
+
+Thus Γ†
+iΓi is the direct sum of two matrices, for l > 0. The first term above clearly has norm
+one, and we want to choose c as large as possible so the second term also has norm one. Now the
+eigenvector with largest eigenvalue for the second sum is, by symmetry, |ψ⟩= �
+x:|x|=l−1,i/∈x |x⟩,
+with eigenvalue c2 �n−l
+m−l
+��m−1
+l−1
+�
+. Thus let
+
+c =
+��n−l
+m−l
+��m−1
+l−1
+��−1/2
+(A.20)
+
+so ∥Γi∥= 1.
+Let us determine the norm of Γ. We have
+
+∥ΓΓ†∥= ⟨ψm|ΓΓ†|ψm⟩
+
+⟨ψm|ψm⟩
+,
+(A.21)
+
+where |ψm⟩= �
+x:|x|=m |x⟩, ∥|ψm⟩∥2 = ( nm ). Then
+
+Γ†|ψm⟩=
+�
+
+x:|x|=m
+
+��
+
+i/∈x
+|x ⊕ei⟩+ c
+�
+
+y:|y|=l−1
+|x⊕y|=m−l+1
+
+|y⟩
+�
+
+=
+�
+
+y:|y|=m+1
+(m + 1)|y⟩+ c
+�
+
+y:|y|=l−1
+
+�n−l+1
+m−l+1
+�
+|y⟩
+
+(A.22)
+
+so
+
+∥ΓΓ†∥=
+1
+( nm )
+
+�
+(m + 1)2 (
+n
+m+1 ) + c2 ( n
+l−1 )
+�n−l+1
+m−l+1
+�2 �
+
+=
+
+�
+(m + 1)(n −m) + m(n−l+1)
+
+(m−l+1)2
+if l > 0
+
+(m + 1)(n −m)
+if l = 0
+
+(A.23)
+
+This gives the desired lower bound on Adv(In
+l,m).
+Next, we need to show a matching upper bound on Adv(In
+l,m), using Theorem A.3. For each x,
+we need a distribution px on [n]. For a function f that is symmetrical under permuting the input
+bits, we look for distributions such that px(i) depends only on whether xi = 0 or 1 and moreover
+its values in these cases depends only on |x|. Thus for i = 0, 1, . . . , n, we fix a pi, 0 ≤pi ≤1/i (with
+p0 = 0) and set p′
+i = (1 −ipi)/(n −i) ≥0 (with p′
+n = 0). Letting pi and p′
+i be the probabilities of 1
+and 0 bits, respectively, when |x| = i, Eq. (A.5) gives
+
+Adv(f) ≤min
+{pi}
+max
+x,y
+f(x)̸=f(y)
+
+�
+�
+
+i:xi=1,yi=0
+
+�
+
+p|x|p′
+|y| +
+�
+
+i:xi=0,yi=1
+
+�
+
+p′
+|x|p|y|
+
+�−1
+.
+(A.24)
+
+Fixing |x| = i and |y| = j, the inner maximum is achieved by x = 1i0n−i and y = 1j0n−j because
+these strings have the fewest differing bits. Thus the above bound simplifies to
+
+Adv(f) ≤min
+{pi}
+max
+i<j
+f(1i0n−i)̸=f(1j0n−j)
+
+�
+(j −i)
+�
+
+p′
+ipj
+
+�−1
+.
+(A.25)
+
+64
+
+
+Now specialize from symmetrical functions down to the Hamming-weight interval function f =
+In
+l,m. For i ≥m + 1, we should clearly set pi as large as possible, i.e., set pi = 1/i, while for i < l
+we should set p′
+i as large as possible, i.e., p′
+i = 1/(n −i).
+First consider the case l = 0. Then we should set p′
+i = 1/(n −i) for all i ≤m in order to
+minimize the expression in Eq. (A.25). This gives
+
+Adv(In
+0,m) ≤
+max
+0≤i≤m
+m+1≤j≤n
+
+�
+
+(n −i)j
+
+j −i
+
+=
+�
+
+(m + 1)(n −m) ,
+
+(A.26)
+
+where the maximum is achieved at i = m, j = m + 1.
+Now assume l > 0. It turns out that there is some freedom in the choice of pi for l ≤i < m.
+For i = l, . . . , m, choose pi to balance the (l −1, i) and (i, m + 1) terms above, i.e., setting
+
+�
+(i −l + 1)
+�
+
+p′
+l−1pi
+
+�−1
+=
+�
+(m −i + 1)
+�
+
+p′
+ipm+1
+
+�−1
+.
+(A.27)
+
+Since p′
+l−1 = 1/(n −l + 1) and pm+1 = 1/(m + 1), this gives
+
+pi =
+1
+
+i + (m+1)(n−i)
+
+n−l+1
+�i−l+1
+
+m−i+1
+�2 .
+(A.28)
+
+Substituting this value for pi back in, the (l −1, i) and (i, m + 1) terms are both the square root of
+
+f(n, l, m, i) := i(n −l + 1)
+
+(i −l + 1)2 + (n −i)(m + 1)
+
+(m −i + 1)2
+.
+(A.29)
+
+The case i = m gives the bound we are aiming for. We claim that this is the worst case, i.e., that
+f(n, l, m, i) ≤f(n, l, m, m) when |n
+
+2 −m| ≤|n
+
+2 −l|.
+First note that
+
+∂2
+
+∂i2 f(n, l, m, i) = 2(n −l + 1)(i + 2l −2)
+
+(i −l + 1)4
++ 2(m + 1)(3n −i −2m −2)
+
+(m −i + 1)4
+> 0 .
+(A.30)
+
+Thus it suffices to check that f(n, l, m, l) ≤f(n, l, m, m). Indeed,
+
+f(n, l, m, m) −f(n, l, m, l) = (n −m −l)
+�
+(m −l + 1)3 −1
+�
+
+(m −l + 1)2
+.
+(A.31)
+
+Note that l ≤m. The above difference is clearly ≥0 if m ≤n
+
+2 . If m > n
+
+2 , then the assumption
+|n
+
+2 −m| ≤|n
+
+2 −l| implies that l < n
+
+2 and m−n
+
+2 ≤n
+
+2 −l, i.e., m+l ≤n; so again the above difference
+is ≥0.
+
+Proposition A.8. For the interval function In
+l,m, Adv(In
+l,m) < Adv±(In
+l,m) if and only if l /∈
+{0, 1, m, n −1, n}.
+
+65
+
+
+Proof. For l ∈{0, 1, m, n −1, n}, Adv(In
+l,m) = Adv±(In
+l,m) because Proposition A.6 gave a span
+program P n
+l,m with witness size wsize(P n
+l,m) = Adv(In
+l,m), and by Theorem 2.8, wsize(P n
+l,m) ≥
+Adv±(In
+l,m).
+Otherwise, assume that 2 ≤l ≤m −1 and |n
+
+2 −m| ≤|n
+
+2 −l|. We will show that a perturbation
+of the adversary matrix Γ from Eqs. (A.17) and (A.20) in the proof of Proposition A.7 increases
+∥Γ∥/∥Γ ◦∆i∥for each i ∈[n]. The perturbation we consider will be in the direction of
+
+Λ =
+�
+
+x:|x|=m−1
+|x⟩
+�
+�
+
+y:|y|=l−1
+|x⊕y|=m−l
+
+⟨y| −δ
+�
+
+y:|y|=l−1
+|x⊕y|=m−l+2
+
+⟨y|
+�
+,
+(A.32)
+
+where δ > 0 will be determined later. Let Γ(ϵ) = Γ + ϵΛ. Let Λi = Λ ◦∆i and Γ(ϵ)
+i
+= Γ(ϵ) ◦∆i.
+First of all, note that
+∂
+∂ϵ∥Γ(ϵ)∥/∥Γ(ϵ)
+i ∥
+��
+ϵ=0 = 0. Indeed,
+
+∂
+∂ϵ∥Γ(ϵ)∥
+��
+ϵ=0 =
+1
+2∥Γ∥
+∂
+∂ϵ∥Γ(ϵ)†Γ(ϵ)∥
+��
+ϵ=0 .
+(A.33)
+
+However, Γ(ϵ)†Γ(ϵ) = Γ†Γ + ϵ2Λ†Λ since Γ†Λ = Λ†Γ = 0. Thus
+∂
+∂ϵ∥Γ(ϵ)∥
+��
+ϵ=0 = 0, and similarly
+
+∂
+∂ϵ∥Γ(ϵ)
+i ∥
+��
+ϵ=0 = 0.
+
+Therefore, we need to compute
+∂2
+∂ϵ2 ∥Γ(ϵ)∥/∥Γ(ϵ)
+i ∥
+��
+ϵ=0. Now
+
+∂2
+
+∂ϵ2 ∥Γ(ϵ)∥
+��
+ϵ=0 =
+1
+2∥Γ∥
+∂2
+
+∂ϵ2 ∥Γ†Γ + ϵ2Λ†Λ∥
+��
+ϵ=0
+
+=
+1
+∥Γ∥
+∂
+∂ϵ∥Γ†Γ + ϵΛ†Λ∥
+��
+ϵ=0 .
+(A.34)
+
+By the Perron-Frobenius theorem, Γ†Γ has a unique eigenvalue of largest magnitude, and it is non-
+degenerate. Letting |ψ⟩be the corresponding eigenvector, we have by nondegenerate perturbation
+theory
+∂2
+
+∂ϵ2 ∥Γ(ϵ)∥
+��
+ϵ=0 =
+1
+∥Γ∥
+∥Λ|ψ⟩∥2
+
+∥|ψ⟩∥2
+.
+(A.35)
+
+For j = 0, 1, . . . , n, let |ψj⟩= �
+x:|x|=j |x⟩, with ∥|ψj⟩∥2 = ( n
+j ). By Eq. (A.21), we may take
+
+|ψ⟩= Γ†|ψm⟩
+
+=
+�
+
+x:|x|=m
+
+��
+
+i/∈x
+|x ⊕ei⟩+ c
+�
+
+y:|y|=l−1
+|x⊕y|=m−l+1
+
+|y⟩
+
+�
+
+= (m + 1)|ψm+1⟩+ c
+�n−l+1
+m−l+1
+�
+|ψl−1⟩,
+(A.36)
+
+so
+
+Λ|ψ⟩= c
+�n−l+1
+m−l+1
+�
+|ψm−1⟩
+��m−1
+m−l
+�
+−δ
+�
+m−1
+m−l−1
+�
+(n −m + 1)
+�
+.
+(A.37)
+
+66
+
+
+Substituting this into Eq. (A.35),
+
+∂2
+
+∂ϵ2 ∥Γ(ϵ)∥
+��
+ϵ=0 =
+1
+∥Γ∥
+c2 �n−l+1
+m−l+1
+�2 (
+n
+m−1 )
+��m−1
+m−l
+�
+−δ
+�
+m−1
+m−l−1
+�
+(n −m + 1)
+�2
+
+(m + 1)2 (
+n
+m+1 ) + c2 �n−l+1
+m−l+1
+�2 ( n
+l−1 )
+
+=
+1
+∥Γ∥
+( m
+l−1 )
+�n−l+1
+m−l+1
+�
+
+�(m+1)(n−m)
+
+n−l+1
++
+m
+(m−l+1)2
+�
+(n −m + 1)
+
+�
+1 −(m −l)(n −m + 1)
+
+l
+δ
+�2
+. (A.38)
+
+Unlike Γ†Γ, Γ†
+iΓi has a degenerate principal eigenspace. This principal eigenspace is spanned
+by |φ⟩= �
+x:|x|=l−1
+i/∈x
+|x⟩and |φ′⟩= �
+x:|x|=m+1
+i∈x
+|x⟩.
+Since Λi|φ′⟩= 0, we have by degenerate
+
+perturbation theory
+
+∂2
+
+∂ϵ2 ∥Γ(ϵ)
+i ∥
+��
+ϵ=0 =
+1
+∥Γi∥
+∂
+∂ϵ∥Γ†
+iΓi + ϵΛ†
+iΛi∥
+��
+ϵ=0
+
+=
+1
+∥Γi∥
+∥Λi|φ⟩∥2
+
+∥|φ⟩∥2
+
+(A.39)
+
+Recall that ∥Γi∥= 1, and note that ∥|φ⟩∥2 =
+�n−1
+l−1
+�
+. Then
+
+Λi|φ⟩=
+��
+m−2
+m−l−1
+�
+−δ
+�
+m−2
+m−l−2
+�
+(n −m + 1)
+�
+�
+
+x:|x|=m−1
+i∈x
+
+|x⟩.
+(A.40)
+
+Substituting into Eq. (A.35),
+
+∂2
+
+∂ϵ2 ∥Γ(ϵ)
+i ∥
+��
+ϵ=0 =
+
+�n−1
+m−2
+�
+
+�n−1
+l−1
+���
+m−2
+m−l−1
+�
+−δ
+�
+m−2
+m−l−2
+�
+(n −m + 1)
+�2
+
+=
+�m−2
+l−1
+��
+n−l
+m−l−1
+��
+1 −(l −1)(n −m + 1)
+
+m −l
+δ
+�2
+.
+(A.41)
+
+Now set δ =
+m−l
+(l−1)(n−m+1); recall that l ≥2 so the denominator is nonzero. We get ∂2
+
+∂ϵ2 ∥Γ(ϵ)
+i ∥
+��
+ϵ=0 =
+
+0 while
+∂2
+∂ϵ2 ∥Γ(ϵ)∥
+��
+ϵ=0 > 0. Thus
+∂2
+∂ϵ2 ∥Γ(ϵ)∥/∥Γ(ϵ)
+i ∥
+��
+ϵ=0 > 0, so Adv(In
+l,m) < Adv±(In
+l,m).
+
+B
+Examples of composed span programs
+
+In order to illustrate the different methods of span program composition used in Theorem 4.3
+and Proposition 4.7, in this appendix we give examples of span program direct-sum composition
+(Definition 4.5), tensor-product composition (Definition 4.4), and reduced-tensor-product compo-
+sition (Definition 4.6). For presenting the examples, we use the correspondence from Definition 8.2
+between span programs and bipartite graphs.
+Our examples will use the following monotone span programs for fan-in-two AND and OR gates:
+
+Definition B.1. Define span programs PAND and POR computing AND and OR, B2 →B, respec-
+tively, by
+
+PAND :
+|t⟩=
+�α1
+α2
+
+�
+,
+|v1⟩=
+�β1
+0
+
+�
+,
+|v2⟩=
+�0
+β2
+
+�
+(B.1)
+
+POR :
+|t⟩= δ,
+|v1⟩= ϵ1,
+|v2⟩= ϵ2
+(B.2)
+
+67
+
+
+for parameters αj, βj, δ, ϵj > 0, j ∈{1, 2}. Both span programs have I1,1 = {1}, I2,1 = {2} and
+Ifree = I1,0 = I2,0 = ∅. Let α =
+�
+
+α2
+1 + α2
+2.
+
+Now let ϕ : Bn →B be a size-n AND-OR formula in which all gates have fan-in two. By
+composing the span programs of Definition B.1 according to ϕ, we obtain a span program Pϕ
+computing ϕ. The particular composed span program Pϕ will depend on what composition method
+is used. Figure 1 gives several examples of tensor-product and reduced-tensor-product composition.
+Much like a canonical span program, the structure of the reduced-tensor-product-composed span
+program is related to the set of “maximal false” inputs to ϕ. Figure 2 compares reduced-tensor-
+product composition to direct-sum composition, as well as to the graphs used in the AND-OR
+formula-evaluation algorithms of Refs. [ACR+07, FGG07]. Although these algorithms did not use
+the span program framework, the graphs they use do correspond to span programs, built essentially
+according to direct-sum composition of PAND and POR. The small-eigenvalue spectral analysis in
+Theorem 8.7 simplifies their proofs.
+Although not shown here, the different composition methods can also be combined. Hybrid-
+composed span programs will be analyzed in [Rei09].
+Typical parameter choices for PAND and POR are given by:
+
+Claim B.2. With the parameters in Definition B.1 set to
+
+αj = (sj/sp)1/4
+βj = 1
+(B.3)
+
+δ = 1
+ϵj = (sj/sp)1/4 ,
+(B.4)
+
+where sp = s1 + s2, the span programs PAND and POR satisfy:
+
+wsize(√s1,√s2)(PAND, x) =
+
+�√sp
+if x ∈{11, 10, 01}
+√sp
+
+2
+if x = 00
+
+wsize(√s1,√s2)(POR, x) =
+
+�√sp
+if x ∈{00, 10, 01}
+√sp
+
+2
+if x = 11
+
+(B.5)
+
+It can be seen as a consequence of De Morgan’s laws and span program duality (Lemma 4.1)
+that wsize(√s1,√s2)(PAND, x) = wsize(√s1,√s2)(POR, ¯x) in Claim B.2.
+
+68
+
+
+δ
+
+ϵ1
+
+ϵ2
+
+00
+0
+
+1
+
+2
+
+(a) x1 ∨x2
+
+α1
+
+α2
+
+β1
+
+β2
+
+0
+
+01
+
+10
+
+1
+
+2
+
+(b) x1 ∧x2
+
+δα1
+
+δα2
+
+ϵ1β1
+
+ϵ1β2
+
+ϵ2α2
+
+ϵ2α1
+0
+
+010
+
+100
+
+1
+
+2
+
+3
+
+(c) (x1 ∧x2) ∨x3
+
+α1δ
+
+α2δ
+
+β1ϵ1
+
+β1ϵ2
+
+β2δ
+
+0
+
+001
+
+110
+
+1
+
+2
+
+3
+
+(d) (x1 ∨x2) ∧x3
+
+α1δα′
+
+1
+
+α1δα′
+
+2
+
+β1ϵ1β′
+
+1
+
+β1ϵ1β′
+
+2
+
+β1ϵ2α′
+
+2
+
+β1ϵ2α′
+
+1
+
+α2δα′
+β2δα′
+
+0
+
+0101
+
+1001
+
+1110
+
+1
+
+2
+
+3
+
+4
+
+(e)
+`
+(x1 ∧x2) ∨x3
+´
+∧x4
+
+α2δα′
+
+1
+
+α1δα′
+
+2
+
+α1δα′
+
+1
+
+β1ϵ1β′
+
+1
+
+β1ϵ1β′
+
+2
+β1ϵ2α′
+
+2
+
+β1ϵ2α′
+
+1
+
+α2δα′
+
+2
+
+β2δα′
+
+2
+
+β2δα′
+
+1
+
+0
+
+1
+
+2
+
+3
+
+4
+1110
+(f)
+`
+(x1 ∧x2) ∨x3
+´
+∧x4
+
+Figure 1: In (a) and (b) are given the graphs GPOR and GPAND, respectively, according to Defini-
+tion 8.2. Parts (c) and (d) show tensor-product compositions of these span programs, which are also
+the reduced-tensor-product compositions. Part (e) shows the reduced-tensor-product composition
+of the span programs for a larger formula. Notice that for reduced-tensor-product composition,
+the structure of the graph changes locally as each additional gate is composed onto the end of the
+formula, e.g., going from (d) to (e). However, composing additional gates has a nonlocal effect
+on edge weights. In each graph, the output vertex is labeled 0 and the input vertices are labeled
+by [n]. Similarly to canonical span programs, Definition 5.1, the other vertices are labeled by the
+maximal false inputs to the formula; notice in each example that a vertex labeled with input x is
+connected exactly to those input bits j ∈[n] with xj = 0. Part (f) shows a span program for the
+same formula as part (e), except built using tensor-product composition. The vertex 1110 has been
+unnecessarily duplicated. In (e) and (f), there are two AND gates; the primed variables refer to
+the PAND span program coefficients for x1 ∧x2.
+
+69
+
+
+ϕ(x)
+
+x1
+
+x2
+x3
+x4
+x5
+x6
+
+x7
+
+∨
+
+∧
+
+∧
+
+∨
+
+∨
+
+∧
+
+(a)
+
+1
+
+2
+
+3
+4
+
+5
+
+6
+
+7
+
+(b)
+
+1
+
+2
+
+3
+4
+
+5
+
+6
+
+7
+
+(c)
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+0101011
+
+1001011
+
+0101100
+
+1001100
+
+1110011
+
+1110100
+
+(d)
+
+Figure 2: Consider the AND-OR formula ϕ(x) =
+�
+[(x1∧x2)∨x3]∧x4
+�
+∨
+�
+x5∧[x6∨x7]
+�
+, represented
+as a tree in (a). Part (b) shows the graph on which [ACR+07] runs a quantum walk in order to
+evaluate ϕ. The graph is essentially the same as the formula tree. The weight of an edge from
+child v to parent p is the 1/4 power of the ratio sv/sp of sizes of the subformula rooted at v to that
+rooted at p, as in Claim B.2. The only exception is the weight of the edge to the root, which is
+set to 1/n1/4 for amplification, as in Theorem 8.3 and Theorem 9.3. Part (c) shows the graph one
+obtains by from direct-sum composition of PAND and POR. It is the same as in (b), except with
+two weight-one edges inserted above each internal gate. These edges can be interpreted as pairs
+of NOT gates that cancel out. Including them would slow the [ACR+07] algorithm down only by
+a constant factor. Part (d) shows a span program derived from the same formula using reduced-
+tensor-product composition only. Vertices are labeled using the same convention as in Figure 1.
+Even though every gate has fan-in two, graph vertices can have exponentially large degree.
+
+70
+
+

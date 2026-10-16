@@ -1,0 +1,68 @@
+48
+Quantum Algorithms
+
+each variable is a bit. The formula is a conjunction of clauses, and the formula is true if
+and only if every clause is true. In the k-SAT problem, each clause depends on at most
+k of the variables, where k is a constant. (In some formulations of k-SAT, each clause is
+required to be a disjunction of k literals (variables or their negations), but that is not
+an important requirement, since any formula, and in particular any k-bit formula, can
+be expressed in conjunctive normal form.). If f is a Boolean formula, the SAT function
+is:
+
+SAT(f) = 1 if there exists x such that f(x) = 1,
+(6.233)
+
+SAT(f) = 0 otherwise.
+
+Now we’ll show that CIRCUIT-SAT reduces to 3-SAT. For a given circuit C (the input
+to CIRCUIT-SAT), how do we construct the corresponding Boolean formula R(C) (the
+input to 3-SAT)?
+Suppose that the gates in the circuit C are chosen from the universal set (AND, OR,
+NOT), or any other gate set such that each gate has at most two input bits and one
+output bit. We introduce a variable for the output of each gate, and we include in the
+formula R(C) a clause corresponding to each gate.
+Here the three-variable clause Cg(x, y, z) is true iff z is a valid output of the gate g when
+the inputs are (x, y). The circuit may also have inputs that are constants rather than
+variables. Then, e.g. a gate with two input bits, one of which is a constant, becomes a two-
+variable clause, determined by the gate and the value of the constant. Or equivalently,
+we can regard input of a constant as a gate with a one-bit output; the corresponding
+one-bit clause is true if x has the right value. The circuit also has an answer bit, which
+becomes a 1-bit clause Cg(x) which is true iff x = 1 (that is, if and only if the answer is
+YES).
+The formula R(C) has as variables the input x to the circuit C, and also additional
+variables corresponding to the outputs of all gates in the circuit C. R(C) has been
+constructed so that an assignment that satisfies every clause in C corresponds to a
+valid history of the computation of the circuit C acting on input x, where the input is
+accepted. If there is an input x that is accepted by the circuit C, then there will be a
+satisfying assignment for the 3-SAT formula R(C), and conversely if there is no input
+that C accepts, then there will be no satisfying assignment for R(C). Thus we have
+obtained the desired reduction of CIRCUIT-SAT to 3-SAT.
+The key idea we have exploited to reduce CIRCUIT-SAT to 3-SAT is that the witness
+for 3-SAT is a valid history of the whole computation C that accepts the input x. We can
+check the history efficiently because the circuit C has polynomial size and it is easy to
+check each of the poly(n) gates in the execution of the circuit. Later on, we will extend
+this idea — that a valid history of the computation is an efficiently checkable witness
+— to the quantum setting.
+Notice that we may think of the clauses in the formula f as the terms in a 3-local
+classical Hamiltonian
+
+H(x) =
+�
+
+c
+Hc(xc1, xc2, xc3);
+(6.234)
+
+here the sum is over the clauses in the formula, where
+
+Hc(xc1, xc2, xc3) =
+
+�
+0
+if clause c is true for assignment xc1, xc2, xc3,
+
+1
+otherwise
+(6.235)
+
+

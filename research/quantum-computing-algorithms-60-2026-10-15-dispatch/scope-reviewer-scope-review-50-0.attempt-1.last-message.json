@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "50",
+  "round": 0,
+  "reviewed_items": [
+    "def-qa-26-hhl-reciprocal-filter",
+    "def-qa-26-hhl-sine-window",
+    "lem-qa-26-hermitian-dilation",
+    "lem-qa-26-hhl-filter-geometry",
+    "def-qa-26-qlsp-task",
+    "lem-qa-26-hhl-filter-perturbation",
+    "lem-qa-26-hhl-sine-window-prefix-masses",
+    "lem-qa-26-qlsp-target-is-well-defined",
+    "lem-qa-26-hhl-prefix-table-synthesis-error",
+    "def-qa-26-hhl-access-model",
+    "lem-qa-26-hhl-sine-window-kernel-moment",
+    "lem-qa-26-phase-to-eigenvalue-unwrapping",
+    "lem-qa-26-hhl-capped-amplification",
+    "alg-qa-26-hhl-phase-estimation",
+    "lem-qa-26-hhl-success-amplitude",
+    "thm-qa-26-hhl-amplified-postselection-cost",
+    "thm-qa-26-hhl-simulator-cost",
+    "lem-qa-26-postselection-normalization-bound",
+    "thm-qa-26-hhl-state-correctness",
+    "thm-qa-26-hhl-query-cost",
+    "cex-qa-26-hhl-classical-vector-output",
+    "ex-qa-26-diagonal-hhl"
+  ],
+  "reviewed_pages": [
+    "hhl-phase-estimation-linear-systems",
+    "hhl-phase-estimation-linear-systems-examples"
+  ],
+  "decision": "repair",
+  "reason": "Whole-batch review found locally repairable proof gaps and OP5 interface details; no unresolved significant prerequisite gap.",
+  "findings": [
+    {
+      "id": "lem-qa-26-hermitian-dilation",
+      "type": "local",
+      "reason": "The proof expands arbitrary b only in positive left singular vectors, though the Statement allows b outside ran(A). Include its ker(A*) component and show both pseudoinverses annihilate it."
+    },
+    {
+      "id": "lem-qa-26-hhl-filter-perturbation",
+      "type": "local",
+      "reason": "The |lambda|≤2/kappa case can cross from the reciprocal branch into the transition branch, but the Lipschitz argument covers only the transition/constant pieces. Bound the reciprocal segment and match at the boundary; also substantiate the continuity claim in F1."
+    },
+    {
+      "id": "lem-qa-26-hhl-sine-window-prefix-masses",
+      "type": "local",
+      "reason": "The Statement is duplicated verbatim; remove the duplicate."
+    },
+    {
+      "id": "lem-qa-26-phase-to-eigenvalue-unwrapping",
+      "type": "local",
+      "reason": "F1's cited spectral-theorem Statement gives an eigenbasis but not real eigenvalues. Derive reality from self-adjointness and the [-1,1] bound from the norm hypothesis before using lambda in that interval."
+    },
+    {
+      "id": "lem-qa-26-hhl-success-amplitude",
+      "type": "local",
+      "reason": "The proof likewise attributes real eigenvalues to a supplier Statement that only asserts diagonalizability. Add the short self-adjointness argument before using the real reciprocal spectrum."
+    },
+    {
+      "id": "alg-qa-26-hhl-phase-estimation",
+      "type": "scope",
+      "reason": "The Definition leaves epsilon and rho as arbitrary reals rather than OP5's finite rational inputs, and gives only the first column of the two-qubit flag map. State the exact input encodings and specify OP5's conditional rotations, negative-sign branch, and unitary completion."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-26-hhl-phase-estimation",
+      "decision": "repair",
+      "reason": "Its uses of the dilation, prefix-mass, and signed-phase interfaces remain valid after the listed proof fixes; the algorithm itself needs the OP5 scope repair."
+    },
+    {
+      "id": "lem-qa-26-hhl-success-amplitude",
+      "decision": "repair",
+      "reason": "Its ideal-filter claim is sound, but its own proof needs the listed real-spectrum derivation."
+    },
+    {
+      "id": "lem-qa-26-postselection-normalization-bound",
+      "decision": "accept",
+      "reason": "Its norm-bound use remains valid after the success-amplitude proof repair."
+    },
+    {
+      "id": "thm-qa-26-hhl-amplified-postselection-cost",
+      "decision": "accept",
+      "reason": "The B and inverse-B call counts are unchanged by specifying the flag circuit."
+    },
+    {
+      "id": "thm-qa-26-hhl-simulator-cost",
+      "decision": "accept",
+      "reason": "The existing C_flag charge covers the specified finite flag implementation; the simulation and table costs are unchanged."
+    },
+    {
+      "id": "thm-qa-26-hhl-state-correctness",
+      "decision": "accept",
+      "reason": "Its uses of the filter, success, and dilation claims remain valid after their proof-only repairs; the algorithm's output and error interface is preserved."
+    },
+    {
+      "id": "thm-qa-26-hhl-query-cost",
+      "decision": "accept",
+      "reason": "The sparse-query proof and separately charged access costs are unchanged."
+    },
+    {
+      "id": "ex-qa-26-diagonal-hhl",
+      "decision": "accept",
+      "reason": "Its ideal success-amplitude calculation is unchanged by the proof repair."
+    },
+    {
+      "id": "hhl-phase-estimation-linear-systems",
+      "decision": "accept",
+      "reason": "Its summary remains accurate after specifying the OP5 flag implementation."
+    },
+    {
+      "id": "hhl-phase-estimation-linear-systems-examples",
+      "decision": "accept",
+      "reason": "Its example and counterexample summaries are unaffected."
+    }
+  ]
+}

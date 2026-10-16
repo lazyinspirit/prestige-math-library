@@ -1,0 +1,160 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "22",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "def-qc-adaptive-measurement-pattern",
+      "model": "gpt-6-luna",
+      "context_sha256": "db634ac3cf4a24785d77ab13021f346ea4924139785fa3b9159b1a408dc38a19",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal citation defect: def-qc-elementary-circuit-resources defines gate size, declared depth, all-wire width and optional costs, but never a measurement-occurrence convention. The pattern already lists exactly the q distinct vertices of V\\O and measures each once, so q is a literal finite count, including q=0; no mathematical conclusion or prerequisite theorem is missing. The repair states this counting convention locally and limits the resource citation to width |V|.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-qc-adaptive-measurement-pattern",
+      "disposition": "repaired",
+      "post_sha256": "eb615ab3b51d7eff250a981d8f1905d74ba1125b9469a46dfc1130a8a94b210b",
+      "review_context_sha256": "65028a44fb9b3b66fd07330db64266b12cb2e7b993d72946872af694702daae9",
+      "reason": "Confirmed nonfatal citation defect: def-qc-elementary-circuit-resources defines gate size, declared depth, all-wire width and optional costs, but never a measurement-occurrence convention. The pattern already lists exactly the q distinct vertices of V\\O and measures each once, so q is a literal finite count, including q=0; no mathematical conclusion or prerequisite theorem is missing. The repair states this counting convention locally and limits the resource citation to width |V|. Ordered tensor-map domains, linear bras, ancilla embedding, orthonormal equatorial bases, pure/mixed branch weights and the positive-probability normalization rule agree with the current prerequisite definitions. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-qc-measurement-pattern-for-cz",
+    "thm-qc-pattern-branch-probabilities-and-zero-branches",
+    "def-qc-circuit-to-graph-resource-encoding",
+    "thm-qc-pattern-is-measurement-circuit",
+    "thm-qc-circuit-simulated-by-adaptive-pattern"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-qc-adaptive-measurement-pattern",
+      "status": "fixed",
+      "severity": "nonfatal",
+      "stage": "5-adjudicate",
+      "finding": "Confirmed nonfatal citation defect: def-qc-elementary-circuit-resources defines gate size, declared depth, all-wire width and optional costs, but never a measurement-occurrence convention. The pattern already lists exactly the q distinct vertices of V\\O and measures each once, so q is a literal finite count, including q=0; no mathematical conclusion or prerequisite theorem is missing. The repair states this counting convention locally and limits the resource citation to width |V|.",
+      "evidence": "items/def-qc-adaptive-measurement-pattern.md#Definition; items/def-qc-elementary-circuit-resources.md#Definition",
+      "adjudication_ref": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u22.json"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-qc-pattern-is-measurement-circuit",
+      "status": "open",
+      "severity": "nonfatal",
+      "finding": "Branch/instrument equivalence remains sound, but Statement and F5 independently repeat the same unsupported measurement-accounting attribution. Proof 1.1 already counts one occurrence per listed vertex. Cite the repaired pattern definition for q, retain the elementary-resource citation for width/gate/suffix costs, and adjust F5 accordingly. This is an existing nonfatal citation defect, not a changed branch interface.",
+      "affected_use": "[F5] The resource convention counts declared gate occurrences, wires, and measurement occurrences as separate coordinates ([[def-qc-elementary-circuit-resources]]).",
+      "invalidated_claim": "Attribution of a measurement-occurrence coordinate to def-qc-elementary-circuit-resources, which defines no such coordinate.",
+      "minimality": "Change only the resource citation/qualification in the Statement and F5; keep every count and the branch-equivalence proof. Statement text would change, requiring its ordinary next direct hop only in its owner lane.",
+      "route": "frontier owner lane"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "All five discovered direct item consumers are draft frozen-frontier items. No published direct consumer or published defect was found in this interface examination."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "definition_change": {
+      "before": "This pattern uses $|V|$ qubit registers and exactly $q$ projective measurement occurrences under the resource convention of [[def-qc-elementary-circuit-resources]].",
+      "after": "This pattern uses $|V|$ qubit registers, its width in the convention of [[def-qc-elementary-circuit-resources]]. Its projective measurement count is $q$, counting one occurrence for each listed vertex $m_j$.",
+      "effect": "Actual Definition text changes, so all five direct dependency/reference consumers are inventoried above. All branch operators and numerical resource counts remain unchanged."
+    },
+    "direct_consumer_examination": [
+      {
+        "id": "lem-qc-measurement-pattern-for-cz",
+        "path": "items/lem-qc-measurement-pattern-for-cz.md",
+        "locus": "Facts F2; Proof 1.1–3.1",
+        "affected_use": "The graph pattern branch map applies the graph-edge unitary before the ordered measurement bras and preserves the stated input/output order.",
+        "disposition": "sound_unchanged",
+        "reason": "The four-vertex gadget measures vertices 1 and 2 once each. Branch maps, input/output order and correction matrices are unchanged; the clarified local count is q=2."
+      },
+      {
+        "id": "thm-qc-pattern-branch-probabilities-and-zero-branches",
+        "path": "items/thm-qc-pattern-branch-probabilities-and-zero-branches.md",
+        "locus": "Facts F1; Proof 1.1–4.1",
+        "affected_use": "The pattern Definition fixes the ordered input embedding, graph edge unitary, transcript-dependent measurement bases, branch maps, and output restriction.",
+        "disposition": "sound_unchanged",
+        "reason": "The recursive contractions use exactly the same ordered q measured vertices. Completeness at each prefix and root isometry still imply total trace one, including the empty transcript; resource attribution is not a premise."
+      },
+      {
+        "id": "def-qc-circuit-to-graph-resource-encoding",
+        "path": "items/def-qc-circuit-to-graph-resource-encoding.md",
+        "locus": "Definition: measured vertex order and adaptive angles/correction",
+        "affected_use": "Measure the vertices v_{j,s-1} in round-major, wire-minor order, for s=1,...,R and j=1,...,n.",
+        "disposition": "sound_unchanged",
+        "reason": "The encoding instantiates a pattern with nR listed measured vertices, n(R+1) registers, and the same adaptive basis functions and terminal correction. The supplier change alters none of those data."
+      },
+      {
+        "id": "thm-qc-pattern-is-measurement-circuit",
+        "path": "items/thm-qc-pattern-is-measurement-circuit.md",
+        "locus": "Statement resource paragraph; Facts F1/F5; Proof 1.1",
+        "affected_use": "[F5] The resource convention counts declared gate occurrences, wires, and measurement occurrences as separate coordinates ([[def-qc-elementary-circuit-resources]]).",
+        "disposition": "owner_repair_required",
+        "reason": "Branch/instrument equivalence remains sound, but Statement and F5 independently repeat the same unsupported measurement-accounting attribution. Proof 1.1 already counts one occurrence per listed vertex. Cite the repaired pattern definition for q, retain the elementary-resource citation for width/gate/suffix costs, and adjust F5 accordingly. This is an existing nonfatal citation defect, not a changed branch interface.",
+        "invalidated_claim": "Attribution of a measurement-occurrence coordinate to def-qc-elementary-circuit-resources, which defines no such coordinate.",
+        "minimality": "Change only the resource citation/qualification in the Statement and F5; keep every count and the branch-equivalence proof. Statement text would change, requiring its ordinary next direct hop only in its owner lane.",
+        "route": "frontier owner lane; no edit in unit 22"
+      },
+      {
+        "id": "thm-qc-circuit-simulated-by-adaptive-pattern",
+        "path": "items/thm-qc-circuit-simulated-by-adaptive-pattern.md",
+        "locus": "Facts F4; Proof 1.1 and 3.1–4.1",
+        "affected_use": "The graph pattern uses the stated ordered branch maps, measurement bases, and terminal correction.",
+        "disposition": "sound_unchanged",
+        "reason": "The branchwise induction and nR-outcome probability calculation consume unchanged branch contractions, measurement bases and correction data. Counting one measurement per listed vertex agrees with the nR transcript length."
+      }
+    ],
+    "page_examination": {
+      "path": "library/quantum-computing/graph-states-and-measurement-based-computation.md",
+      "affected_use": "It formalizes open-graph measurement patterns, exact branch maps, outcome probabilities, zero-probability transcripts, and Pauli-frame corrections.",
+      "disposition": "sound_unchanged",
+      "reason": "The page summary and placement do not assert a separate measurement-count supplier; all described interfaces remain available. The examples companion makes no direct resource-attribution claim."
+    },
+    "contract": "This proof-free definition has no own proof contract. Under the shared-write lock, updated only its owning manifest Definition mirror and the four complete Definition citation quotes in the owning batch-22 proof contracts. Parsed before/after comparisons verified that no other metadata fields changed; all four quotes and the manifest statement equal the current Definition exactly. No consumer proof steps or substantive claims were edited.",
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-qc-adaptive-measurement-pattern.md --json",
+        "exit_code": 0,
+        "result": "checked 1; errors []; warnings []"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-qc-adaptive-measurement-pattern.md --json",
+        "exit_code": 0,
+        "result": "not-applicable; zero checked proofs and zero failures"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-qc-adaptive-measurement-pattern.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects"
+      },
+      {
+        "command": "Read-only in-memory validateReports(pack, [unit22Report], assignedBeforeWithCurrentUnit22Guard), with exact original digest checked",
+        "exit_code": 0,
+        "result": "Exact input digest matched. No unit-22 report errors; expected missing-other-unit diagnostics excluded. This is a focused unit check, not collection or certification."
+      },
+      {
+        "command": "Shared-write acquire/reread/exact mirror replacement/parsed-delta check/release for batch-22.pages.json and batch-22.proof-contracts.json",
+        "exit_code": 0,
+        "result": "Updated one manifest statement and four citation quotes; exact equality with current Definition and no other parsed metadata delta; lock released."
+      }
+    ],
+    "pending": [],
+    "sources_consulted": [
+      "Current local dependency definitions listed in the item, including the complete resource Definition and its proof; no external source reading claimed."
+    ],
+    "out_of_scope_digest_concerns": "The Step-4 digest concerns about normalized transport-schedule input/algebraic classification and circuit-to-graph encoding classification name other carriers. Their original evidence is preserved for their owner; no edit or adjudication is claimed here.",
+    "next_action": "Controller collection and ordinary frontier-owner routing for the independently defective resource attribution in thm-qc-pattern-is-measurement-circuit. No unresolved mathematics remains in the assigned item; no independent acceptance of this repair is claimed."
+  }
+}

@@ -1,0 +1,77 @@
+12
+5 Classical and quantum circuits
+
+5.1.4 Randomized computation
+
+It is sometimes useful to consider probabilistic circuits that have access
+to a random number generator. For example, a gate in a probabilistic
+circuit might act in either one of two ways, and flip a fair coin to decide
+which action to execute.
+Such a circuit, for a single fixed input, can
+sample many possible computational paths. An algorithm performed by
+a probabilistic circuit is said to be “randomized.”
+If we run a randomized computation many times on the same input,
+we won’t get the same answer every time; rather there is a probability
+distribution of outputs. But the computation is useful if the probability
+of getting the right answer is high enough. For a decision problem, we
+would like a randomized computation to accept an input x which is in
+the language L with probability at least 1
+
+2 + δ, and to accept an input
+x which is not in the language with probability no greater than 1
+
+2 −δ,
+where δ > 0 is a constant independent of the input size. In that case
+we can amplify the probability of success by performing the computation
+many times and taking a majority vote on the outcomes. For x ∈L, if we
+run the computation N times, the probability of rejecting in more than
+half the runs is no more than e−2Nδ2 (the Chernoff bound). Likewise, for
+x ̸∈L, the probability of accepting in the majority of N runs is no more
+than e−2Nδ2.
+Why? There are all together 2N possible sequences of outcomes in the
+N trials, and the probability of any particular sequence with NW wrong
+answers is
+�1
+
+2 −δ
+�NW �1
+
+2 + δ
+�N−NW
+.
+(5.22)
+
+The majority is wrong only if NW ≥N/2, so the probability of any
+sequence with an incorrect majority is no larger than
+
+�1
+
+2 −δ
+�N/2 �1
+
+2 + δ
+�N/2
+= 1
+
+2N
+�
+1 −4δ2�N/2 .
+(5.23)
+
+Using 1 −x ≤e−x and multiplying by the total number of sequences 2N,
+we obtain the Chernoff bound:
+
+Prob(wrong majority) ≤
+�
+1 −4δ2�N/2 ≤e−2Nδ2.
+(5.24)
+
+If we are willing to accept a probability of error no larger than ε, then,
+it suffices to run the computation a number of times
+
+N ≥
+1
+2δ2 ln (1/ε) .
+(5.25)
+
+

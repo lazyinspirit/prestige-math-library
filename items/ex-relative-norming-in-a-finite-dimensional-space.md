@@ -1,10 +1,12 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/ex-relative-norming-in-a-finite-dimensional-space.json
 id: ex-relative-norming-in-a-finite-dimensional-space
 kind: example
 title: An explicit norming functional for the finite-dimensional maximum norm
 status: published
 origin: pipeline
-deps: [def-dual-space-of-a-normed-space, rem-real-and-complex-normed-space-convention, lem-finite-set-has-max, thm-well-ordering-principle]
+deps: [def-dual-space-of-a-normed-space, def-complex-norm-and-complex-normed-space, lem-finite-set-has-max, thm-well-ordering-principle, def-norm-and-normed-space]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -16,13 +18,6 @@ sources:
       url: https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
-verification:
-  audited: 2026-09-09
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 ---
 
 ## Example
@@ -41,7 +36,7 @@ For a displayed nonuniqueness instance, at $x=(1,1)\in\mathbb K^2$ the distinct 
 
 [F3] The dual is the bounded scalar-linear functionals, with norm the supremum of absolute values on the closed unit ball ([[def-dual-space-of-a-normed-space]]).
 
-[F4] The norm axioms use absolute homogeneity with the modulus over either field ([[rem-real-and-complex-normed-space-convention]]).
+[F4] The norm axioms use absolute homogeneity with the modulus over $\mathbb R$ by [[def-norm-and-normed-space]] and over $\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].
 
 ## Verification
 

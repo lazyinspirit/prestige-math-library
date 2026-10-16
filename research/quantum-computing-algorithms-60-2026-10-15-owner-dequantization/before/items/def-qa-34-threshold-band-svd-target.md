@@ -1,0 +1,30 @@
+---
+id: def-qa-34-threshold-band-svd-target
+kind: definition
+title: Threshold-band singular-value approximation
+status: draft
+origin: pipeline
+pipeline_run: quantum-computing-algorithms-60-2026-10-15
+dependency_level: 0
+deps:
+  - thm-singular-value-decomposition
+  - def-orthogonal-projection
+  - def-frobenius-matrix-norm
+justified_by: []
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  precheck: n/a
+sources:
+  references:
+    - title: Ewin Tang, A quantum-inspired classical algorithm for recommendation systems, version 3
+      url: https://arxiv.org/pdf/1807.04271v3
+---
+
+## Definition
+
+Let $A:\mathbb R^n\to\mathbb R^m$ have a singular value decomposition $A=U\Sigma V^T$ as in [[thm-singular-value-decomposition]], let $\sigma>0$, and let $0<\eta\le1$. Write $P_>$ for the orthogonal projection onto the span of right singular vectors whose singular values are at least $\sigma(1+\eta)$, and $E$ for the span of right singular vectors whose singular values lie in $[\sigma(1-\eta),\sigma(1+\eta))$. For any orthogonal projection $P_E$ with range contained in $E$, a **threshold-band target** is
+$$A_{\sigma,\eta}:=A(P_>+P_E).$$
+
+The choice inside the threshold band is allowed to vary; all singular directions above the band are retained and all directions below it are discarded. The definition is independent of the choice of orthonormal bases within singular subspaces because it is stated using their subspaces. If a singular value equals the upper endpoint it belongs to $P_>$; equality at the lower endpoint belongs to $E$. Since $A$ vanishes on its nullspace, choices on zero singular directions do not change $A_{\sigma,\eta}$.

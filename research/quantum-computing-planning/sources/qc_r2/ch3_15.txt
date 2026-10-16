@@ -1,0 +1,5123 @@
+Lecture Notes for Ph219/CS219:
+Quantum Information
+Chapter 3
+
+John Preskill
+California Institute of Technology
+
+Updated October 2018
+
+
+Contents
+
+3
+Foundations II: Measurement and Evolution
+4
+3.1
+Orthogonal measurement and beyond
+4
+3.1.1 Orthogonal Measurements
+4
+3.1.2 Generalized measurements
+8
+3.2
+Quantum channels
+11
+3.2.1 The operator-sum representation
+11
+3.2.2 Reversibility
+13
+3.2.3 Quantum channels in the Heisenberg picture
+14
+3.2.4 Quantum operations
+16
+3.2.5 Linearity
+17
+3.2.6 Complete positivity
+18
+3.3
+Channel-state duality and the dilation of a channel
+20
+3.3.1 Channel-state duality
+20
+3.3.2 Stinespring dilation
+22
+3.3.3 Axioms revisited
+23
+3.4
+Three quantum channels
+24
+3.4.1 Depolarizing channel
+24
+3.4.2 Dephasing channel
+27
+3.4.3 Amplitude-damping channel
+31
+3.5
+Master equations for open quantum systems
+34
+3.5.1 Markovian evolution
+34
+3.5.2 The Liouvillian
+35
+3.5.3 Damped harmonic oscillator
+38
+3.6
+Non-Markovian noise
+41
+3.6.1 Gaussian phase noise
+41
+3.6.2 Spin echo
+43
+3.6.3 Qubits as noise spectrometers
+44
+3.6.4 Spin-boson model at nonzero temperature
+45
+3.7
+Summary
+47
+
+2
+
+
+Contents
+3
+
+3.8
+Exercises
+49
+
+
+3
+
+Foundations II: Measurement and
+Evolution
+
+3.1 Orthogonal measurement and beyond
+
+In Chapter 2 we discussed how to describe the state of an open quantum
+system, one which is part of a larger system. In this Chapter we will
+extend the theory of open quantum systems further. In particular, we
+will develop two important concepts: generalized measurements, which are
+performed by making use of an auxiliary system, and quantum channels,
+which describe how open systems evolve.
+
+3.1.1 Orthogonal Measurements
+
+An axiom of quantum theory asserts that a measurement may be de-
+scribed as an orthogonal projection operator. But if a measurement of
+system S is realized by performing an orthogonal measurement on a larger
+system that contains S, the resulting operation performed on S alone need
+not be an orthogonal projection. We would like to find a mathematical
+description of such “generalized measurements” on system S. But first
+let’s recall how measurement of an arbitrary Hermitian operator can be
+achieved in principle, following the classic treatment of Von Neumann.
+To measure an observable M, we will modify the Hamiltonian of the
+world by turning on a coupling between that observable and another vari-
+able that represents the apparatus. Depending on the context, we will
+refer to the auxiliary system used in the measurement as the “pointer,”
+the “meter,” or the “ancilla.” (The word “ancilla” just means something
+extra which is used to achieve a desired goal.) The coupling establishes a
+correlation between the eigenstates of the observable and the distinguish-
+able states of the pointer, so that we can prepare an eigenstate of the
+observable by “observing” the pointer.
+This may not seem like a fully satisfying model of measurement because
+
+4
+
+
+3.1 Orthogonal measurement and beyond
+5
+
+we have not explained how to measure the pointer. Von Neumann’s atti-
+tude was that it is possible in principle to correlate the state of a micro-
+scopic quantum system with the value of a macroscopic classical variable,
+and we may take it for granted that we can perceive the value of the
+classical variable. A quantum measurement, then, is a procedure for am-
+plifying a property of the microscopic world, making it manifest in the
+macroscopic world.
+We may think of the pointer as a particle of mass m that propagates
+freely apart from its tunable coupling to the quantum system being mea-
+sured. Since we intend to measure the position of the pointer, it should be
+prepared initially in a wavepacket state that is narrow in position space
+— but not too narrow, because a vary narrow wave packet will spread too
+rapidly. If the initial width of the wave packet is ∆x, then the uncertainty
+in it velocity will be of order ∆v = ∆p/m ∼ℏ/m∆x, so that after a time
+t, the wavepacket will spread to a width
+
+∆x(t) ∼∆x + ℏt
+
+∆x,
+(3.1)
+
+which is minimized for (∆x(t))2 ∼(∆x)2 ∼ℏt/m.
+Therefore, if the
+experiment takes a time t, the resolution we can achieve for the final
+position of the pointer is limited by
+
+∆x >∼(∆x)SQL ∼
+
+�
+
+ℏt
+m,
+(3.2)
+
+the “standard quantum limit.” We will choose our pointer to be suffi-
+ciently heavy that this limitation is not serious.
+The Hamiltonian describing the coupling of the quantum system to the
+pointer has the form
+
+H = H0 + 1
+
+2mP 2 + λ(t)M ⊗P ,
+(3.3)
+
+where P 2/2m is the Hamiltonian of the free pointer particle (which we
+will henceforth ignore on the grounds that the pointer is so heavy that
+spreading of its wavepacket may be neglected), H0 is the unperturbed
+Hamiltonian of the system to be measured, and λ is a coupling constant
+that we are able to turn on and off as desired.
+The observable to be
+measured, M, is coupled to the momentum P of the pointer.
+If M does not commute with H0, then we have to worry about how
+the observable M evolves during the course of the measurement.
+To
+simplify the analysis, let us suppose that either [M, H0] = 0, or else the
+measurement is carried out quickly enough that the free evolution of the
+system can be neglected during the measurement procedure. Then the
+
+
+6
+3 Foundations II: Measurement and Evolution
+
+Hamiltonian can be approximated as H ≃λ(t)M ⊗P . If the coupling
+λ switches on suddenly at time zero and switches off suddenly at time T,
+the resulting time evolution operator is
+
+U(T) ≃exp (−iλTM ⊗P ) .
+(3.4)
+
+Expanding in the basis in which M is diagonal,
+
+M =
+�
+
+a
+|a⟩Ma⟨a|,
+(3.5)
+
+we express U(T) as
+
+U(T) =
+�
+
+a
+|a⟩exp (−iλtMaP ) ⟨a|.
+(3.6)
+
+Now we recall that P generates a translation of the position of the
+pointer: P = −i d
+
+dx in the position representation, so that e−ix0P =
+exp
+�
+−x0 d
+
+dx
+�
+, and by Taylor expanding,
+
+e−ix0P ψ(x) = ψ(x −x0);
+(3.7)
+
+In other words e−ix0P acting on a wavepacket translates the wavepacket
+by x0. We see that if our quantum system starts in a superposition of
+M eigenstates, initially unentangled with the position-space wavepacket
+|ψ(x) of the pointer, then after time T the quantum state has evolved to
+
+U(T)
+
+��
+
+a
+αa|a⟩⊗|ψ(x)⟩
+
+�
+
+=
+�
+
+a
+αa|a⟩⊗|ψ(x −λTMa)⟩;
+(3.8)
+
+the position of the pointer has become correlated with the value of the
+observable M.
+If the pointer wavepacket is narrow enough for us to
+resolve all values of the Ma that occur (that is, the width ∆x of the packet
+is small compared to λT∆Ma, where ∆Ma is the minimal gap between
+eigenvalues of M), then when we observe the position of the pointer
+(never mind how!) we will prepare an eigenstate of the observable. With
+probability |αa|2, we will detect that the pointer has shifted its position
+by λTMa, in which case we will have prepared the M eigenstate |a⟩. We
+conclude that the initial state |ϕ⟩of the quantum system is projected to
+|a⟩with probability |⟨a|ϕ⟩|2. This is Von Neumann’s model of orthogonal
+measurement.
+The classic example is the Stern–Gerlach apparatus. To measure σ3
+for a spin-1
+
+2 object, we allow the object to pass through a region of inho-
+mogeneous magnetic field
+B3 = λz.
+(3.9)
+
+
+3.1 Orthogonal measurement and beyond
+7
+
+The magnetic moment of the object is µ⃗σ, and the coupling induced by
+the magnetic field is
+H = −λµzσ3.
+(3.10)
+
+In this case σ3 is the observable to be measured, coupled to the position
+z rather than the momentum of the pointer; thus, because z generates a
+translation of P z, the coupling imparts an impulse to the pointer which
+is correlated with its spin. We can perceive whether the object is pushed
+up or down, and so project out the spin state | ↑z⟩or | ↓z⟩. By rotating
+the magnet, we could measure the observable ˆn · ⃗σ instead.
+Thinking more abstractly, suppose that {Ea, a = 0, 1, 2, . . . N−1} is a
+complete set of orthogonal projectors satisfying
+
+EaEb = δabEa,
+Ea = E†
+a,
+�
+
+a
+Ea = I.
+(3.11)
+
+To perform an orthogonal measurement with these outcomes, we intro-
+duce an N-dimensional pointer system with fiducial orthonormal basis
+states {|a⟩, a = 0, 1, 2, . . . , N−1}, and, by coupling the system to the
+pointer, perform the unitary transformation
+
+U =
+�
+
+a,b
+Ea ⊗|b + a⟩⟨b|.
+(3.12)
+
+Thus the pointer advances by an amount a if the state of the system
+is within the support of the projector Ea. (The addition in |b + a⟩is
+understood to be modulo N; we may envision the pointer as a circular
+dial with N uniformly spaced tick marks.) The unitarity of U is easy to
+verify:
+
+UU † =
+
+
+
+�
+
+a,b
+Ea ⊗|b + a⟩⟨b|
+
+
+
+
+
+
+
+�
+
+c,d
+Ec ⊗|d⟩⟨d + c|
+
+
+
+
+
+=
+�
+
+a,b,c,d
+δacEa ⊗δbd|b + a⟩⟨d + c|
+
+=
+�
+
+a
+Ea ⊗
+�
+
+b
+|b + a⟩⟨b + a| = I ⊗I.
+(3.13)
+
+This unitary transformation acts on an initial product state of system
+and pointer according to
+
+U : |Ψ⟩= |ψ⟩⊗|0⟩�→|Ψ′⟩=
+�
+
+a
+Ea|ψ⟩⊗|a⟩;
+(3.14)
+
+if the pointer is then measured in the fiducial basis, the measurement
+postulate implies that the outcome a occurs with probability
+
+Prob(a) = ⟨Ψ′| (I ⊗|a⟩⟨a|) |Ψ′⟩= ⟨ψ|Ea|ψ⟩,
+(3.15)
+
+
+8
+3 Foundations II: Measurement and Evolution
+
+and that when this outcome occurs the normalized post-measurement
+state is
+Ea|ψ⟩
+∥Ea|ψ⟩∥.
+(3.16)
+
+If the measurement is performed and its outcome is not known, the initial
+pure state of the system becomes a mixture of these post-measurement
+states:
+�
+
+a
+Prob(a)Ea|ψ⟩⟨ψ|Ea
+
+⟨ψ|Ea|ψ⟩
+=
+�
+
+a
+Ea|ψ⟩⟨ψ|Ea.
+(3.17)
+
+In fact, the system is described by this density operator once it becomes
+entangled with the pointer, whether we bother to observe the pointer or
+not. If the initial state of the system before the measurement is a mixed
+state with density matrix ρ, then by expressing ρ as an ensemble of pure
+states we conclude that the measurement modifies the state according to
+
+ρ �→
+�
+
+a
+EaρEa.
+(3.18)
+
+We see that if, by coupling the system to our pointer, we can execute
+suitable unitary transformations correlating the system and the pointer,
+and if we can observe the pointer in its fiducial basis, then we are empow-
+ered to perform any conceivable orthogonal measurement on the system.
+
+3.1.2 Generalized measurements
+
+In this discussion of orthogonal measurement, the fiducial basis of the
+pointer had two different roles — we assumed that the fiducial pointer
+states become correlated with the system projectors {Ea}, and also that
+the measurement of the pointer projects onto the fiducial basis. In princi-
+ple we could separate these two roles. Perhaps the unitary transformation
+applied to system and pointer picks out a different preferred basis than
+the basis in which the pointer is easily measured. Or perhaps the pointer
+which becomes entangled with the system is itself microscopic, and we
+may entangle it with a second macroscopic pointer in order to measure
+the microscopic pointer in whatever basis we prefer.
+Suppose, to be concrete, that the system A is a single qubit, and so is
+the pointer B. They interact, resulting in the unitary map
+
+U : (α|0⟩+ β|1⟩)A ⊗|0⟩B �→α|0⟩A ⊗|0⟩B + β|1⟩A ⊗|1⟩B.
+(3.19)
+
+Measuring the pointer by projecting onto the basis {|0⟩, |1⟩} would induce
+an orthogonal measurement of the system, also in the {|0⟩, |1⟩} basis. But
+suppose that we measure the pointer in a different basis instead, such as
+
+
+3.1 Orthogonal measurement and beyond
+9
+
+{|±⟩=
+1
+√
+
+2 (|0⟩± |1⟩)}. Then the measurement postulate dictates that the
+two outcomes + and −occur equiprobably, and that the corresponding
+post-measurement states of the system are
+
+α|0⟩± β|1⟩.
+(3.20)
+
+In contrast to an orthogonal measurement of the system, these two post-
+measurement states are not orthogonal, unless |α| = |β|. Furthermore,
+also in contrast to an orthogonal measurement, if two such measurements
+are performed in rapid succession, the outcomes need not be the same.
+We use the term generalized measurement to mean a measurement, like
+this one, which is not necessarily an orthogonal projection acting on the
+system.
+It is convenient to describe this measurement procedure by expanding
+the entangled state of system and pointer in the basis in which the pointer
+is measured; hence we rewrite eq.(3.19) as
+
+U : |ψ⟩A ⊗|0⟩B �→M +|ψ⟩A ⊗|+⟩B + M −|ψ⟩A ⊗|−⟩B,
+(3.21)
+
+where
+
+M + =
+1
+√
+
+2
+
+�
+1
+0
+0
+1
+
+�
+=
+1
+√
+
+2I,
+M −=
+1
+√
+
+2
+
+�
+1
+0
+0
+−1
+
+�
+=
+1
+√
+
+2σ3.
+(3.22)
+
+Evidently, by measuring B in the basis {|±⟩}, we prepare A in one of the
+states M ±|ψ⟩, up to a normalization factor.
+Now let’s generalize this idea to the case where the pointer system
+B is N-dimensional, and the measurement of the pointer projects onto
+an orthonormal basis {|a⟩, a = 0, 1, 2, . . . , N−1}.
+Again we’ll assume
+that the system A and pointer B are initially in a product state, then
+an entangling unitary transformation U correlates the system with the
+pointer. By expanding the action of U in the basis for B we obtain
+
+U : |ψ⟩A ⊗|0⟩B �→
+�
+
+a
+M a|ψ⟩A ⊗|a⟩B.
+(3.23)
+
+Since U is unitary, it preserves the norm of any input, which means that
+
+1 =
+
+�����
+
+�
+
+a
+M a|ψ⟩⊗|a⟩
+
+�����
+
+2
+=
+�
+
+a,b
+⟨ψ|M †
+aM b|ψ⟩⟨a|b⟩=
+�
+
+a
+⟨ψ|M †
+aM a|ψ⟩
+
+(3.24)
+
+for any |ψ⟩; hence
+�
+
+a
+M †
+aM a = I.
+(3.25)
+
+
+10
+3 Foundations II: Measurement and Evolution
+
+The complete orthogonal measurement projecting onto the pointer ba-
+sis {|a⟩B} is equivalent to the incomplete orthogonal measurement on
+AB with projectors {I ⊗|a⟩⟨a|}; the measurement postulate asserts that
+outcome a occurs with probability
+
+Prob(a) = ∥M a|ψ⟩∥2,
+(3.26)
+
+and that if outcome a occurs the post-measurement state of the system
+is
+M a|ψ⟩
+∥M a|ψ⟩∥.
+(3.27)
+
+The completeness relation �
+a M †
+aM a = I ensures that the probabilities
+sum to one, but the possible post-measurement states need not be mu-
+tually orthogonal, nor are the measurements necessarily repeatable. If
+we perform the measurement twice in succession and obtain outcome a
+the first time, the conditional probability of obtaining outcome b in the
+second measurement is
+
+Prob(b|a) = ∥M bM a|ψ⟩∥2
+
+∥M a|ψ⟩∥2
+.
+(3.28)
+
+The two measurements agree if Prob(b|a) = δba, which is satisfied for
+arbitrary initial states of the system only if M bM a = δbaM a up to a
+phase factor, i.e. in the case where the measurement is orthogonal.
+We see that if the initial state of the system is the density operator
+ρ (realized as an ensemble of pure states), there is an operator Ea =
+M †
+aM a associated with each possible measurement outcome a, such that
+the probability of outcome a is
+
+Prob(a) = tr (ρEa) .
+(3.29)
+
+The measurement operators {Ea} form a complete set of Hermitian non-
+negative operators; that is, they satisfy the properties:
+
+1. Hermiticity. Ea = E†
+a.
+
+2. Positivity.
+⟨ψ|Ea|ψ⟩≥0 for any vector |ψ⟩; we abbreviate this
+property by simply writing Ea ≥0.
+
+3. Completeness. �
+a Ea = I.
+
+Such a partition of unity by nonnegative operators is called a positive
+operator-valued measure, or POVM. (The term measure is a bit heavy-
+handed in this finite-dimensional context; it becomes more apt when the
+index a can be continuously varying.)
+
+
+3.2 Quantum channels
+11
+
+We have seen how a POVM can arise when an orthogonal measurement
+is performed on a meter after the meter interacts with the system. In
+fact any POVM can be realized this way. We need only observe that a
+nonnegative Hermitian operator Ea has a nonnegative square root √Ea;
+more generally, the operator
+
+M a = U a
+�
+
+Ea
+(3.30)
+
+obeys M †
+aM a = Ea where U a is an arbitrary unitary operator —
+eq.(3.30) is the polar decomposition of the operator M a. Plugging into
+eq.(3.23) yields the unitary interaction which realizes the POVM {Ea}. In
+this formulation, the post-measurement state corresponding to outcome
+a,
+
+U a
+
+�√Ea|ψ⟩
+
+∥√Ea|ψ⟩∥
+
+�
+,
+(3.31)
+
+is arbitrary, since we are free to choose the unitary U a however we please
+for each possible outcome. The POVM attributes a probability to each
+measurement outcome, but provides no guidance regarding the state after
+the measurement. Indeed, after the measurement we have the freedom
+to discard the state and replace it by whatever freshly prepared state we
+desire.
+
+3.2 Quantum channels
+
+3.2.1 The operator-sum representation
+
+We now proceed to the next step in our program of understanding the
+behavior of one part of a bipartite quantum system. We have seen that
+a pure state of the bipartite system AB may behave like a mixed state
+when we observe subsystem A alone, and that an orthogonal measurement
+of the bipartite system can realize a (nonorthogonal) POVM on A alone.
+Next we ask, if a state of the bipartite system undergoes unitary evolution,
+how do we describe the evolution of A alone?
+In effect, we have already answered this question in our discussion of
+generalized measurements.
+If system A starts out in a pure state |ψ⟩
+(unentangled with B), and then interacts with B, the joint state of AB has
+the form eq.(3.23); the resulting density operator for A is found by tracing
+out B. Equivalently, we may imagine measuring system B in the basis
+{|a⟩}, but failing to record the measurement outcome, so we are forced to
+average over all the possible post-measurement states, weighted by their
+probabilities. The result is that the initial density operator ρ = |ψ⟩⟨ψ| is
+subjected to a linear map E, which acts as
+
+E(ρ) =
+�
+
+a
+M aρM †
+a,
+(3.32)
+
+
+12
+3 Foundations II: Measurement and Evolution
+
+where the operators {M a} obey the completeness relation eq.(3.25). Be-
+ing linear, E acts as in eq.(3.32) not just on pure states, but on any density
+operator.
+A linear map of the form eq.(3.32), where the {M a} obey eq.(3.25), is
+called a quantum channel. The word “channel” is drawn from communi-
+cation theory — we are to imagine a sender who transmits the state ρ
+though a communication link to another party who receives the modified
+state E(ρ). Sometimes the word superoperator is used as a synonym for
+quantum channel, where “super” conveys that the map takes operators
+to operators rather than vectors to vectors. Yet another name for the
+same object is trace-preserving completely positive map, or TPCP map
+for short. The justification for this name will emerge shortly. Eq.(3.32)
+is said to be an operator-sum representation of the quantum channel, and
+the operators {M a} are called the Kraus operators or operation elements
+of the channel.
+A quantum channel maps density operators to density operators; that
+is, has the following easily verified properties:
+
+1. Linearity. E(αρ1 + βρ2) = αE(ρ1) + βE(ρ2).
+
+2. Preserves Hermiticity. ρ = ρ† implies E(ρ) = E(ρ)† .
+
+3. Preserves positivity. ρ ≥0 implies E(ρ) ≥0.
+
+4. Preserves trace. tr (E(ρ)) = tr (ρ).
+
+These properties partially explain the locution “trace-preserving com-
+pletely positive map,” except that we are still missing the reason for the
+modifier “completely.” That’s coming soon.
+We’ve seen how a quantum channel acting on system A arises from
+a unitary transformation acting on A and B followed by a partial trace
+on B.
+As in our discussion of generalized measurements, we can also
+run this argument backwards to see that any quantum channel may be
+realized this way. Given a quantum channel E acting on A with Kraus
+operators {M a}, we may introduce the auxiliary system B with Hilbert
+space dimension matching the number of Kraus operators.
+A unitary
+transformation may then be constructed whose action on |ψ⟩A ⊗|0⟩B is
+as in eq.(3.23), from which the quantum channel E is obtained by tracing
+out B.
+The operator-sum representation of a given quantum channel E is not
+unique, because we can perform the partial trace on B in any basis we
+please. When expressed in terms of rotated basis states {|µ⟩} such that
+
+|a⟩=
+�
+
+µ
+|µ⟩Vµa
+(3.33)
+
+
+3.2 Quantum channels
+13
+
+for unitary V , the joint state of AB becomes
+�
+
+a,µ
+M a|ψ⟩A ⊗|µ⟩BVµa =
+�
+
+µ
+N µ|ψ⟩A ⊗|µ⟩B
+(3.34)
+
+where the new Kraus operators are
+
+N µ =
+�
+
+a
+VµaM a.
+(3.35)
+
+We will see soon that any two operator-sum representations of the same
+quantum channel are always related by such a unitary change of basis for
+the Kraus operators.
+Quantum channels are important because they provide us with a for-
+malism for discussing decoherence, the evolution of pure states into mixed
+states. Unitary evolution of ρA is the special case in which there is only
+one term in the operator sum. If there are two or more terms, then there
+are pure initial states of A which become entangled with B under evolu-
+tion governed by the joint unitary transformation UAB, and therefore the
+state of A becomes mixed when we trace out B.
+Two channels E1 and E2 can be composed to obtain another channel
+E2 ◦E1; if E1 describes evolution from yesterday to today, and E2 de-
+scribes evolution from today to tomorrow, then E2 ◦E1 describes the evo-
+lution from yesterday to tomorrow. Specifically, if E1 has an operator-sum
+representation with N Kraus operators {M a}, and E2 has an operator-
+sum representation with M Kraus operators {N µ}, then E2 ◦E1 has an
+operator-sum representation with NM Kraus operators {N µM a}. Be-
+cause we can compose them in this way, we say that quantum channels
+form a dynamical semigroup.
+
+3.2.2 Reversibility
+
+A unitary transformation U has a unitary inverse U †. Thus if today’s
+quantum state was obtained by applying U to yesterday’s state, we can
+in principle recover yesterday’s state by applying U † to today’s state.
+Unitary time evolution is reversible.
+Is the same true for general quantum channels?
+If channel E1 with
+Kraus operators {M a} is inverted by channel E2 with Kraus operators
+{N µ}, then for any pure state |ψ⟩we have
+
+E2 ◦E1(|ψ⟩⟨ψ|) =
+�
+
+µ,a
+N µM a|ψ⟩⟨ψ|M †
+aN †
+µ = |ψ⟩⟨ψ|.
+(3.36)
+
+Since the left-hand side is a sum of positive terms, eq.(3.36) can hold only
+if each of these terms is proportional to |ψ⟩⟨ψ|, hence
+
+N µM a = λµaI
+(3.37)
+
+
+14
+3 Foundations II: Measurement and Evolution
+
+for each µ and a. Using the completeness relation, we find
+
+M †
+bM a = M †
+b
+
+��
+
+µ
+N †
+µN µ
+
+�
+
+M a =
+�
+
+µ
+λ∗
+µbλµaI ≡βbaI.
+(3.38)
+
+where each βaa is real and positive unless M a = 0.
+Since the channel E1 maps system A to itself, each Kraus operator M a
+is a square d × d matrix, where d is the dimension of A. Therefore M a
+has a polar decomposition, which yields
+
+M a = U a
+�
+
+M †
+aM a =
+�
+
+βaa U a
+(3.39)
+
+for some unitary U a, and it then follows that
+
+M †
+bM a =
+�
+
+βaaβbb U †
+bU a = βbaI,
+(3.40)
+
+and hence
+U a =
+βba
+√βaaβbb
+U b
+(3.41)
+
+for each a and b. We conclude that each Kraus operator M a is propor-
+tional to a single unitary matrix, and hence that E1 is a unitary map. A
+quantum channel can be inverted by another quantum channel only if it
+is unitary.
+We have found that decoherence is irreversible. Once system A becomes
+entangled with system B, we can’t undo the damage to A if we don’t
+have access to B. Decoherence causes quantum information to leak to
+a system’s environment, and because we cannot control the environment
+this information cannot be recovered.
+This argument applies to a channel which maps A to A′ as long as A
+and A′ have the same dimension. But the conclusion can be evaded if A′
+
+has a larger dimension than A, since in that case the Kraus operators are
+rectangular, and the polar decomposition does not apply. We will take
+advantage of this exception when developing the theory of quantum error
+correction in Chapter 7.
+
+3.2.3 Quantum channels in the Heisenberg picture
+
+We have described quantum channels using the Schr¨odinger picture in
+which the quantum state evolves with time. Sometimes it is convenient
+to use the Heisenberg picture, in which the state is stationary and the
+operators evolve instead.
+When time evolution is unitary, in the Schr¨odinger picture the state
+vector at time t is obtained from the state vector at time 0 by
+
+|ψ(t)⟩= U(t)|ψ(0)⟩
+(3.42)
+
+
+3.2 Quantum channels
+15
+
+where U(t) is unitary, and correspondingly a density operator evolves
+according to
+ρ(t) = U(t)ρ(0)U(t)†.
+(3.43)
+
+In the Heisenberg picture the density operator ρ is fixed, and an operator
+A evolves according to
+
+A(t) = U(t)†A(0)U(t).
+(3.44)
+
+This evolution law is chosen so that the two pictures agree on the expec-
+tation values of observables at any time:
+
+⟨A⟩t,Schr = tr (A(0)ρ(t)) = tr (A(t)ρ(0)) = ⟨A⟩t,Heis,
+(3.45)
+
+where we have used the cyclic property of the trace.
+Likewise, if the E is a quantum channel which acts on density operators
+according to
+ρ′ = E(ρ) =
+�
+
+a
+M aρM †
+a,
+(3.46)
+
+we may use an alternative description in which the state is fixed, but
+operators evolve as
+
+A′ = E∗(A) =
+�
+
+a
+M †
+aAM a,
+(3.47)
+
+so that
+tr (A E(ρ)) = tr (E∗(A)ρ) .
+(3.48)
+
+We say that E∗is the dual or adjoint of E.
+Note that the dual of a channel need not be a channel, that is, might
+not be trace preserving. Instead, the completeness property of the Kraus
+operators {M a} implies that
+
+E∗(I) = I
+(3.49)
+
+if E is a channel. We say that a map is unital if it preserves the identity
+operator, and conclude that the dual of a channel is a unital map.
+Not all quantum channels are unital, but some are. If the Kraus oper-
+ators of E satisfy
+�
+
+a
+M †
+aM a = I =
+�
+
+a
+M aM †
+a,
+(3.50)
+
+then E is unital and its dual E∗is also a unital channel. A unital quan-
+tum channel maps a maximally mixed density operator to itself; it is the
+quantum version of a doubly stochastic classical map, which maps proba-
+bility distributions to probability distributions and preserves the uniform
+distribution.
+
+
+16
+3 Foundations II: Measurement and Evolution
+
+3.2.4 Quantum operations
+
+Generalized measurements and quantum channels are actually special
+cases of a more general notion called a quantum operation. As already
+noted, a generalized measurement can be realized by entangling a system
+with a meter and performing an orthogonal measurement on the meter,
+while a quantum channel arises if we measure the meter but completely
+forget the measurement outcome. In a quantum operation, we imagine
+measuring the meter, then retaining some of the information about the
+outcome while discarding the rest.
+We may consider a generalized measurement described by Kraus op-
+erators {M aµ} which carry two labels, a and µ. These obey the usual
+completeness relation
+�
+
+a,µ
+M †
+aµM aµ = I.
+(3.51)
+
+Suppose that, after a measurement that projects onto a definite value
+for both a and µ, we remember a but forget µ. Then, if the quantum
+state is ρ before the measurement, the post-measurement state (up to a
+normalization factor) is
+
+Ea(ρ) ≡
+�
+
+µ
+M aµρM †
+aµ,
+(3.52)
+
+where the outcome a occurs with probability
+
+Prob(a) = tr Ea(ρ).
+(3.53)
+
+Eq.(3.52) looks like the operator-sum representation for a quantum chan-
+nel, except that now instead of the completeness relation the Kraus op-
+erators obey an inequality constraint
+�
+
+µ
+M †
+aµM aµ ≤I.
+(3.54)
+
+(We write A ≤I as a shorthand for the statement that I −A is a
+nonnegative operator; that is, the eigenvalues of the Hermitian operator A
+are no larger than 1.) Our earlier notion of a generalized measurement is
+recovered when µ takes just one value (all information about the outcome
+is retained), and the operation becomes a channel when a takes just one
+value (all information about the outcome is discarded).
+The state needs to be renormalized to restore the unit trace condition;
+therefore under an operation the state really evolves nonlinearly according
+to
+
+ρ �→
+Ea(ρ)
+tr Ea(ρ).
+(3.55)
+
+
+3.2 Quantum channels
+17
+
+It is often convenient, though, to regard the operation as a linear map
+that takes ρ to a subnormalized state.
+For example, we may want
+to consider a sequence of n consecutive measurements with outcomes
+{a1, a2, . . . , an−1, an}, where the ith measurement transforms the state
+according to the operation Eai. Rather than renormalizing the state after
+each measurement, we can wait until after the final measurement in the
+sequence before renormalizing. The final state can then be written
+
+ρ �→
+Ean ◦Ean−1 ◦· · · ◦Ea2 ◦Ea1(ρ)
+tr Ean ◦Ean−1 ◦· · · ◦Ea2 ◦Ea1(ρ)
+(3.56)
+
+where the normalizing factor in the denominator is just the probability
+of the observed sequence of measurement outcomes.
+
+3.2.5 Linearity
+
+A quantum channel specifies how an initial density operator evolves to a
+final density operator. Why on general grounds should we expect evolu-
+tion of a quantum state to be described by a linear map? One possible
+answer is that nonlinear evolution would be incompatible with interpret-
+ing the density operator as an ensemble of possible states.
+Suppose that E maps an initial state at time t = 0 to a final state at
+time t = T, and suppose that at time t = 0 the initial state ρi is prepared
+with probability pi. Then the time-evolved state at t = T will be E(ρi)
+with probability pi.
+On the other hand we argued in Chapter 2 that an ensemble in which
+σi is prepared with probability qi can be described by the convex combi-
+nation of density operators
+
+σ =
+�
+
+i
+qiσi.
+(3.57)
+
+Therefore the initial state is described by �
+i piρi, which evolves to
+
+ρ′ = E
+
+��
+
+i
+piρi
+
+�
+
+.
+(3.58)
+
+But we can also apply eq.(3.57) to the ensemble of final states, concluding
+that the final state may alternatively be described by
+
+ρ′ =
+�
+
+i
+piE(ρi).
+(3.59)
+
+Equating the two expressions for ρ′ we find that E must act linearly, at
+least on convex combinations of states.
+
+
+18
+3 Foundations II: Measurement and Evolution
+
+Similar reasoning applies to quantum operations, if we regard the nor-
+malization of an operation Ea as indicating the probability of the corre-
+sponding measurement outcome. Suppose again that the initial state ρi
+is prepared with a priori probability pi and subsequently measured. If the
+state is ρi then measurement outcome a occurs with conditional proba-
+bility p(a|i), and the post-measurement state is Ea(ρi)/p(a|i); hence the
+state ensemble after the measurement is described by the density operator
+
+ρ′ =
+�
+
+i
+p(i|a)Ea(ρi)
+
+p(a|i) ,
+(3.60)
+
+where p(i|a) is the a posteriori probability that state ρi was prepared,
+taking into account the information gained by doing the measurement.
+On the other hand, applying the operation Ea to the convex combination
+of the initial states {ρi} yields
+
+ρ′ = Ea (�
+i piρi)
+pa
+.
+(3.61)
+
+Invoking Bayes’ rule
+pip(a|i) = pap(i|a)
+(3.62)
+
+we see that the operation Ea is required to be a linear map:
+
+Ea
+
+��
+
+i
+piρi
+
+�
+
+=
+�
+
+i
+piEa(ρi).
+(3.63)
+
+3.2.6 Complete positivity
+
+A quantum channel is a linear map taking density operators to density
+operators. In particular, if its input is a nonnegative operator than so is
+its output. We therefore say that a channel is a positive map.
+But a channel has a stronger property than mere positivity; it is com-
+pletely positive. This means that the channel remains positive even when
+we consider it to be acting on just part of a larger system.
+If a channel E maps linear operators on Hilbert space HA to linear
+operators on Hilbert space HA′, we will usually express this more eco-
+nomically by saying E maps A to A′. We may extend the input Hilbert
+space to HA ⊗HB, and consider the extended channel E ⊗I mapping AB
+to A′B. We say that E is completely positive if any such extension of E
+is positive.
+Clearly, quantum channels are completely positive, because if E has
+an operator-sum representation with Kraus operators {M a}, then E ⊗
+I has an operator-sum representation with Kraus operators {M a ⊗I}.
+
+
+3.2 Quantum channels
+19
+
+Likewise, quantum operations, though not necessarily trace preserving,
+are also completely positive.
+It is perfectly reasonable to demand that a channel be completely pos-
+itive if it is to describe the time evolution of a quantum system — even
+though the channel acts on just part of the world, it should map an initial
+state of the whole world to a final state of the whole world. It is there-
+fore important to note that not all positive maps are completely positive;
+complete positivity is a stronger condition.
+A simple example is the transpose map T, mapping the d-dimensional
+system A to itself. In a particular basis {|i⟩}, T acts as
+
+T : |i⟩⟨j| �→|j⟩⟨i|
+(3.64)
+
+and hence
+T : ρ �→ρT .
+(3.65)
+
+The map T is evidently positive because
+
+⟨ψ|ρT |ψ⟩=
+�
+
+i,j
+ψ∗
+j
+�
+ρT �
+
+ji ψi =
+�
+
+i,j
+ψi (ρ)ij ψ∗
+j = ⟨ψ∗|ρ|ψ∗⟩
+(3.66)
+
+for any vector |ψ⟩; therefore ρT is nonnegative if ρ is.
+But T is not completely positive. Consider the (unconventionally nor-
+malized) maximally entangled state on AB, where B is also d-dimensional:
+
+|˜Φ⟩AB =
+
+d−1
+�
+
+i=0
+|i⟩A ⊗|i⟩B ≡
+�
+
+i
+|i, i⟩.
+(3.67)
+
+The extension of T acts on this state as
+
+T ⊗I : |˜Φ⟩⟨˜Φ| =
+�
+
+i,j
+|i⟩⟨j| ⊗|i⟩⟨j| �→
+�
+
+i,j
+|j⟩⟨i| ⊗|i⟩⟨j| ≡
+�
+
+i,j
+|j, i⟩⟨i, j|;
+
+(3.68)
+
+that is, it maps |˜Φ⟩⟨˜Φ| to the SWAP operator which interchanges the
+systems A and B:
+
+SWAP : |ψ⟩A ⊗|ϕ⟩B =
+�
+
+i,j
+ψiϕj|i, j⟩=�→
+�
+
+i,j
+ϕjψi|j, i⟩= |ϕ⟩A ⊗|ψ⟩B
+
+(3.69)
+Since the square of SWAP is the identity, its eigenvalues are ±1. States
+which are symmetric under interchange of A and B have eigenvalue 1,
+while antisymmetric states have eigenvalue -1. Thus SWAP has negative
+eigenvalues, which means that T ⊗I is not positive and therefore T is not
+completely positive.
+
+
+20
+3 Foundations II: Measurement and Evolution
+
+3.3 Channel-state duality and the dilation of a channel
+
+We have now seen that a quantum channel acting on A, which arises from
+a unitary map on an extension of A, is a completely positive linear map of
+density operators to density operators. We have also argued that linearity
+and complete positivity are properties that should hold for any reasonable
+evolution law on quantum states. It is therefore satisfying to note that
+any trace-preserving completely positive linear map is a quantum channel
+— it has an operator sum representation and a unitary realization. When
+considering the (in general nonunitary) evolution of A, we are entitled to
+imagine that A is part of an extended system which evolves unitarily.
+
+3.3.1 Channel-state duality
+
+To prove this statement we will use a trick which is interesting in its
+own right and also has other applications. For the purpose of studying
+the properties of a map E taking A to A′, we introduce an auxiliary
+system R with the same dimension as A, which we call the reference
+system. If E is completely positive, it maps a maximally entangled state
+on RA to a nonnegative operator on RA′. Conversely, we may associate
+with any nonnegative operator on RA′ a corresponding CP map taking
+A to A′. This correspondence between maps and states, called the Choi-
+Jamiolkowski isomorphism or channel-state duality, is a very useful tool.
+To see how it works, consider how I⊗E acts on the maximally entangled
+state
+
+|˜Φ⟩RA =
+
+d−1
+�
+
+i=0
+|i⟩R ⊗|i⟩A.
+(3.70)
+
+where A and R both have dimension d. This vector has norm
+√
+
+d instead
+of norm 1; we choose this unconventional normalization, highlighted by
+the tilde over Φ, to avoid annoying factors of d in the formulas that
+follow.
+If EA→A′ is completely positive, then I ⊗E maps |˜Φ⟩⟨˜Φ| (up
+to normalization) to a density operator on RA′, which like any density
+operator can be realized by an ensemble of pure states; hence
+
+(I ⊗E)
+��
+|˜Φ⟩⟨˜Φ|
+�
+
+RA
+
+�
+=
+�
+
+a
+
+�
+|˜Ψa⟩⟨˜Ψa|
+�
+
+RA′ .
+(3.71)
+
+Here the normalization of |˜Ψa⟩may depend on a; in order to make the
+equation look less cluttered, we’ve absorbed the probability of each pure
+state occurring in the ensemble into that state’s normalization.
+Now we notice that
+
+|ϕ⟩A =
+�
+
+i
+ϕi|i⟩A =
+�
+
+i
+ϕi
+�
+
+R⟨i|˜Φ⟩RA
+�
+= R⟨ϕ∗|˜Φ⟩RA;
+(3.72)
+
+
+3.3 Channel-state duality and the dilation of a channel
+21
+
+using the linearity of E, eq.(3.71) then implies
+
+E ((|ϕ⟩⟨ϕ|)A) =
+�
+
+a
+
+�
+⟨ϕ∗|˜Ψa⟩⟨˜Ψa|ϕ∗⟩
+�
+
+A′ .
+(3.73)
+
+(This scheme for extracting the action on |ϕ⟩A using the dual vector R⟨ϕ∗|
+is called the relative-state method.) Given a vector |˜Φ⟩RA′, where R is d
+dimensional, we may define an operator M a mapping HA to HA′ (where
+A is d dimensional) by
+
+M a|ϕ⟩A = R⟨ϕ∗|˜Ψa⟩RA′;
+(3.74)
+
+it is easy to check that M a is linear. Thus eq.(3.73) provides an operator-
+sum representation of E acting on the pure state (|ϕ⟩⟨ϕ|)A (and hence by
+linearity acting on any density operator):
+
+E(ρ) =
+�
+
+a
+M aρM †
+a.
+(3.75)
+
+We have now established the desired isomorphism between states and
+CP maps: Eq.(3.71) tells us how to obtain a state on RA′ from the channel
+EA→A′, while eq.(3.74) and eq.(3.75) tells us how to recover the CP map
+from the state.
+Furthermore, the {M a} must obey the completeness
+relation �
+a M †
+aM a = I if E is trace-preserving.
+Put succinctly, the argument went as follows. Because EA→A′ is com-
+pletely positive, I ⊗E takes a maximally entangled state on RA to a
+density operator on RA′, up to normalization. This density operator can
+be expressed as an ensemble of pure states, and each of these pure states
+is associated with a Kraus operator in the operator-sum representation of
+E.
+From this viewpoint, we see that the freedom to choose the Kraus
+operators representing a channel in many different ways is really the same
+thing as the freedom to choose the ensemble of pure states representing a
+density operator in many different ways. According to the HJW theorem,
+two different ensemble realizations of the same density operator,
+
+(I ⊗E)
+��
+|˜Φ⟩⟨˜Φ|
+�
+
+RA
+
+�
+=
+�
+
+a
+
+�
+|˜Ψa⟩⟨˜Ψa|
+�
+
+RA′ =
+�
+
+µ
+(|˜γµ⟩⟨˜γµ|)RA′ , (3.76)
+
+are related by a unitary change of basis,
+
+|˜γµ⟩=
+�
+
+a
+Vµa|˜Ψa⟩.
+(3.77)
+
+Correspondingly, two different sets of Kraus operators {M a} and {N µ}
+representing the same channel are related by
+
+N µ =
+�
+
+a
+VµaM a
+(3.78)
+
+
+22
+3 Foundations II: Measurement and Evolution
+
+where Vµa is a unitary matrix.
+Channel-state duality also makes clear how many Kraus operators are
+needed to describe a channel.
+A channel E mapping A to A′, where
+A has dimension d and A′ has dimension d′, is equivalent to a density
+operator on RA′, where R has dimension d, and the minimal number
+of Kraus operators needed to represent the channel is the same as the
+minimal number of pure states needed in an ensemble representation of
+the density operator.
+This is the density operator’s rank (number of
+nonzero eigenvalues), which is no larger than dd′. Of course, there may
+be operator-sum representations of E which use many more than this
+minimal number of Kraus operators, just as an ensemble representation
+of a density operator might use many more than the minimal number of
+pure states.
+The number of free parameters needed to specify a channel mapping A
+to A′ is the number (dd′)2 needed to specify a density operator on RA′,
+except that there are d2 constraints because the map is trace preserving
+for each of d2 linearly independent inputs. Therefore the number of real
+free parameters is
+d2 �
+d′2 −1
+�
+.
+(3.79)
+
+This is 12 parameters for a general channel taking qubits to qubits. In
+contrast, a unitary map on qubits has only 3 parameters, aside from the
+physically irrelevant overall phase.
+
+3.3.2 Stinespring dilation
+
+Once we have an operator-sum representation of the channel EA→A′, it is
+easy to see how E can be realized by a unitary map acting on an extended
+system.
+We introduce an extra system E, the channel’s environment,
+which has dimension equal to the number of Kraus operators and or-
+thonormal basis {|a⟩}. Then we define an inner-product preserving map
+(an isometry) which takes A to A′E according to
+
+U A→A′E : |ψ⟩�→
+�
+
+a
+M a|ψ⟩⊗|a⟩.
+(3.80)
+
+The completeness relation satisfied by the {M a} implies U †U = IA.
+Though U may not actually be unitary, it might as well be, because we
+can easily extend an isometry to a unitary transformation by expanding
+the input Hilbert space. This isometry, which yields EA→A′ when we trace
+out the environment, is called the Stinespring dilation of the channel
+Another way to think about the construction of the Stinespring dilation
+is that we have used E to construct a purification of the density operator
+
+
+3.3 Channel-state duality and the dilation of a channel
+23
+
+arising from channel-state duality:
+
+|¯Ψ⟩RA′E =
+�
+
+a
+|˜Ψa⟩RA′ ⊗|a⟩E.
+(3.81)
+
+Apart from a normalization factor of
+√
+
+d, this is the pure state of RA′E
+that results when the dilation acts on the maximally entangled state
+|˜Φ⟩RA; we may recover the dilation from |¯Ψ⟩using
+
+U A→A′E|ψ⟩A = R⟨ψ∗|¯Ψ⟩RA′E.
+(3.82)
+
+This succinct way to characterize a channel using a pure state is sometimes
+quite convenient, and we’ll make heavy use of it when studying quantum
+channels in Chapter 10.
+
+3.3.3 Axioms revisited
+
+In Chapter 2 we stated the axioms of quantum mechanics in a form ap-
+propriate for closed systems. With the theory of open systems now in
+hand, we can give an alternative formulation with revised notions of how
+states, measurements, and evolution are described.
+
+States. A state is a density operator, a nonnegative Hermitian operator
+in Hilbert space with unit trace.
+
+Measurement. A measurement is a positive operator-valued measure
+(POVM), a partition of unity by nonnegative operators. When the
+measurement {Ea} is performed on the state ρ, the outcome a
+occurs with probability tr (Eaρ).
+
+Dynamics. Time evolution is described by a trace-preserving completely
+positive map (TPCP map).
+
+One could regard either the open-system or closed-system version as
+the fundamental formulation of the theory; it’s really a matter of taste.
+We have already seen how the open-system axioms are obtained starting
+from the closed-system axioms.
+Alternatively, starting with the open-
+system axioms, pure states arise as the extremal points in the space of
+density operators, or from the observation that every density operator has
+a purification in an extended system. Similarly, orthogonal measurements
+and unitary evolution arise naturally because every POVM can be realized
+by an orthogonal measurement in an extended system, and every trace-
+preserving completely positive map has an isometric Stinespring dilation.
+The notion that an open system may always be regarded as part of a
+larger closed system is fondly known as the church of the larger Hilbert
+space.
+
+
+24
+3 Foundations II: Measurement and Evolution
+
+3.4 Three quantum channels
+
+The best way to familiarize ourselves with the concept of a quantum
+channel is to study a few examples. We will now consider three examples
+(all interesting and useful) of channels acting on a single qubit. If we
+wish we may imagine that the channel E describes the fate of quantum
+information that is transmitted with some loss of fidelity from a sender
+to a receiver. Or, if we prefer, we may imagine that the transmission is
+in time rather than space; that is, E describes the time evolution of a
+quantum system that interacts with its environment.
+
+3.4.1 Depolarizing channel
+
+The depolarizing channel is a model of a decohering qubit that has par-
+ticularly nice symmetry properties. We can describe it by saying that,
+with probability 1 −p the qubit remains intact, while with probability p
+an “error” occurs. The error can be of any one of three types, where each
+type of error is equally likely. If {|0⟩, |1⟩} is an orthonormal basis for the
+qubit, the three types of errors can be characterized as:
+
+1. Bit flip error: |0⟩�→|1⟩
+|1⟩�→|0⟩or |ψ⟩�→σ1|ψ⟩, σ1 =
+�0 1
+1 0
+�
+,
+
+2. Phase flip error:
+|0⟩�→|0⟩
+|1⟩�→−|1⟩or |ψ⟩�→σ3|ψ⟩, σ3 =
+�
+1 0
+0 −1
+�
+,
+
+3. Both: |0⟩�→+i|1⟩
+|1⟩�→−i|0⟩or |ψ⟩�→σ2|ψ⟩, σ2 =
+�
+0 −i
+i 0
+�
+.
+
+If an error occurs, then |ψ⟩evolves to an ensemble of the three states
+σ1|ψ⟩, σ2|ψ⟩, σ3|ψ⟩, all occurring with equal likelihood.
+
+Unitary representation. The depolarizing channel mapping qubit A to A
+can be realized by an isometry mapping A to AE, where E is a four-
+dimensional environment, acting as
+
+U A→AE : |ψ⟩A �→
+�
+
+1 −p |ψ⟩A ⊗|0⟩E
+
++
+�p
+
+3 (σ1|ψ⟩A ⊗|1⟩E + σ2|ψ⟩A ⊗|2⟩E + σ3|ψ⟩A ⊗|3⟩E) .
+
+(3.83)
+
+The environment evolves to one of four mutually orthogonal states that
+“keep a record” of what transpired; if we could only measure the environ-
+ment in the basis {|a⟩E, a = 0, 1, 2, 3}, we would know what kind of error
+had occurred (and we would be able to intervene and reverse the error).
+
+
+3.4 Three quantum channels
+25
+
+Operator-sum representation. To obtain an operator-sum representation
+of the channel, we evaluate the partial trace over the environment in the
+{|a⟩E} basis. Then
+M a =
+E⟨a|U,
+(3.84)
+
+so that
+
+M 0 =
+�
+
+1 −p I, M 1 =
+�p
+
+3 σ1, M 2 =
+�p
+
+3 σ2, M 3 =
+�p
+
+3 σ3. (3.85)
+
+Using σ2
+i = I, we can readily check the normalization condition
+
+�
+
+a
+M †
+aM a =
+�
+(1 −p) + 3p
+
+3
+
+�
+I = I.
+(3.86)
+
+A general initial density matrix ρ of the qubit evolves as
+
+ρ �→ρ′ = (1 −p)ρ + p
+
+3 (σ1ρσ1 + σ2ρσ2 + σ3ρσ3) .
+(3.87)
+
+where we are summing over the four (in principle distinguishable) possible
+final states of the environment.
+
+Relative-state representation. We can also characterize the channel by in-
+troducing a reference qubit R and describing how a maximally-entangled
+state of the two qubits RA evolves, when the channel acts only on A.
+There are four mutually orthogonal maximally entangled states, which
+may be denoted
+
+|φ+⟩=
+1
+√
+
+2(|00⟩+ |11⟩),
+
+|φ−⟩=
+1
+√
+
+2(|00⟩−|11⟩),
+
+|ψ+⟩=
+1
+√
+
+2(|01⟩+ |10⟩),
+
+|ψ−⟩=
+1
+√
+
+2(|01⟩−|10⟩).
+(3.88)
+
+If the initial state is |φ+⟩RA, then when the depolarizing channel acts on
+qubit A, the entangled state evolves as
+
+|φ+⟩⟨φ+| �→(1 −p)|φ+⟩⟨φ+| + p
+
+3
+
+�
+
+|ψ+⟩⟨ψ+| + |ψ−⟩⟨ψ−| + |φ−⟩⟨φ−|
+
+�
+
+.
+
+(3.89)
+
+
+26
+3 Foundations II: Measurement and Evolution
+
+The “worst possible” quantum channel has p = 3/4, for in that case the
+initial entangled state evolves as
+
+|φ+⟩⟨φ+| �→1
+
+4
+
+�
+
+|φ+⟩⟨φ+| + |φ−⟩⟨φ−| + |ψ+⟩⟨ψ+| + |ψ−⟩⟨ψ−|
+
+�
+
+= 1
+
+4I;
+
+(3.90)
+
+it becomes the maximally mixed density matrix on RA. By the relative-
+state method, then, we see that a pure state |ψ⟩of qubit A evolves as
+
+(|ψ⟩⟨ψ|)A �→
+R⟨ψ∗|2
+�1
+
+4IRA
+
+�
+|ψ∗⟩R = 1
+
+2IA,
+(3.91)
+
+where the factor of two has been inserted because here we have used the
+standard normalization of the entangled states, instead of the unconven-
+tional normalization used in our earlier discussion of the relative-state
+method. We see that, for p = 3/4, the qubit is mapped to the maximally
+mixed density operator on A, irrespective of the value of the initial state
+|ψ⟩A. It is as though the channel threw away the initial quantum state,
+and replaced it by completely random junk.
+An alternative way to express the evolution of the maximally entangled
+state is
+
+|φ+⟩⟨φ+| �→
+�
+1 −4
+
+3p
+�
+|φ+⟩⟨φ+| + 4
+
+3p
+�1
+
+4IRA
+
+�
+.
+(3.92)
+
+Thus instead of saying that an error occurs with probability p, with errors
+of three types all equally likely, we could instead say that an error occurs
+with probability 4/3p, where the error completely “randomizes” the state
+(at least we can say that for p ≤3/4). The existence of two natural ways
+to define an “error probability” for this channel can sometimes cause
+confusion.
+One useful measure of how well the channel preserves the original quan-
+tum information is called the “entanglement fidelity” Fe. It quantifies how
+“close” the final density matrix is to the original maximally entangled
+state |φ+⟩after the action of I ⊗E:
+
+Fe = ⟨φ+|ρ′|φ+⟩.
+(3.93)
+
+For the depolarizing channel, we have Fe = 1 −p, and we can interpret
+Fe as the probability that no error occurred.
+
+Bloch-sphere representation. It is also instructive to see how the depolar-
+izing channel acts on the Bloch sphere. An arbitrary density matrix for
+a single qubit can be written as
+
+ρ(⃗P) = 1
+
+2
+
+�
+I + ⃗P · ⃗σ
+�
+,
+(3.94)
+
+
+3.4 Three quantum channels
+27
+
+where ⃗P is the “spin polarization” of the qubit. The depolarizing channel
+maps this state to
+
+ρ′ =
+�
+1 −4
+
+3p
+�
+ρ + 4
+
+3pI = ρ(⃗P ′)
+(3.95)
+
+where
+⃗P ′ =
+�
+1 −4
+
+3p
+�
+⃗P
+(3.96)
+
+Hence the Bloch sphere contracts uniformly under the action of the chan-
+nel (for p ≤3/4); the spin polarization shrinks by the factor 1−4
+
+3p (which
+is why we call it the depolarizing channel).
+
+Reversibility? Why do we say that the channel is not invertible? Evi-
+dently we can reverse a uniform contraction of the sphere with a uniform
+inflation. But the trouble is that the inflation of the Bloch sphere is not
+a channel, because it is not positive. Inflation will take some values of ⃗P
+with |⃗P| ≤1 to values with |⃗P| > 1, and so will take a density operator
+to an operator with a negative eigenvalue. Decoherence can shrink the
+ball, but no physical process can blow it up again! A channel running
+backwards in time is not a channel.
+
+3.4.2 Dephasing channel
+
+Our next example is the dephasing channel, also called the phase-damping
+channel. This case is particularly instructive, because it provides a re-
+vealing caricature of decoherence in realistic physical situations, with all
+inessential mathematical details stripped away.
+
+Unitary representation. An isometric representation of the channel is
+
+|0⟩A �→
+�
+
+1 −p |0⟩A ⊗|0⟩E + √p |0⟩A ⊗|1⟩E,
+
+|1⟩A �→
+�
+
+1 −p |1⟩A ⊗|0⟩E + √p |1⟩A ⊗|2⟩E.
+(3.97)
+
+In this case, unlike the depolarizing channel, qubit A does not make any
+transitions in the {|0⟩, |1⟩} basis. Instead, the environment “scatters” off
+of the qubit occasionally (with probability p), being kicked into the state
+|1⟩E if A is in the state |0⟩A and into the state |2⟩E if A is in the state
+|1⟩A. Furthermore, also unlike the depolarizing channel, the channel picks
+out a preferred basis for qubit A; the basis {|0⟩, |1⟩} is the only basis in
+which bit flips never occur.
+
+
+28
+3 Foundations II: Measurement and Evolution
+
+Kraus
+operators. Evaluating
+the
+partial
+trace
+over
+E
+in
+the
+{|0⟩E, |1⟩E, |2⟩E} basis, we obtain the Kraus operators
+
+M 0 =
+�
+
+1 −p I,
+M 1 = √p
+�1 0
+0 0
+
+�
+,
+M 2 = √p
+�0 0
+0 1
+
+�
+.
+(3.98)
+
+It is easy to check that M 2
+0 + M 2
+1 + M 2
+2 = I. In this case, three Kraus
+operators are not really needed; a representation with two Kraus operators
+is possible. Expressing
+
+M 1 =
+√p
+
+2 (I + σ3) ,
+M 2 =
+√p
+
+2 (I −σ3) ,
+(3.99)
+
+we find
+
+E(ρ) =
+�
+
+a
+M aρM a =
+�
+1 −1
+
+2p
+�
+ρ + 1
+
+2p σ3ρσ3,
+(3.100)
+
+so an alternative description of the channel is that σ3 is applied with
+probability p/2 and nothing happens with probability (1 −p/2).
+An
+initial density matrix ρ evolves to
+
+E
+�
+ρ00
+ρ01
+ρ10
+ρ11
+
+�
+=
+�
+ρ00
+(1 −p)ρ01
+(1 −p)ρ10
+ρ11
+
+�
+;
+(3.101)
+
+the on-diagonal terms in ρ remain invariant while the off-diagonal terms
+decay.
+
+Continuous dephasing. We may also consider dephasing that occurs con-
+tinuously in time. Suppose that the probability of a scattering event per
+unit time is Γ, so that p = Γ∆t ≪1 when a brief time interval ∆t elapses.
+The evolution over a time t = n∆t is governed by En (E repeated n times
+in succession), so that the off-diagonal terms in the density operator be-
+come suppressed by
+
+(1 −p)n = (1 −Γt/n)n →e−Γt,
+(3.102)
+
+taking the limit n →∞with t fixed. Thus, if we prepare an initial pure
+state α|0⟩+ β|1⟩, then after a time t ≫Γ−1, the density operator evolves
+as
+�
+|α|2
+αβ∗
+
+α∗β
+|β|2
+
+�
+�→
+�
+|α|2
+0
+0
+|β|2
+
+�
+;
+(3.103)
+
+The state decoheres, in the preferred basis {|0⟩, |1⟩}.
+
+
+3.4 Three quantum channels
+29
+
+Bloch-sphere representation. We can compute how the polarization of
+the density operator evolves using the representation of the channel
+eq.(3.100), finding
+
+ρ(⃗P) = 1
+
+2
+
+�
+I + ⃗P · ⃗σ
+�
+�→ρ(⃗P ′)
+(3.104)
+
+where
+P ′
+1,2 = (1 −p)P1,2,
+P ′
+3 = P3;
+(3.105)
+
+the Bloch ball shrinks to a prolate spheroid aligned with the z axis. Under
+continuous dephasing, the ball deflates in the x-y plane, degenerating to
+the z axis in the limit of large Γt.
+You might wonder whether there is a quantum channel which causes
+just one component of the polarization to decay, mapping the Bloch ball
+to an oblate spheroid which touches the Bloch sphere along its equator.
+In fact no such map can be completely positive (the no-pancake theorem).
+Up to a unitary change of basis, a pancake map shrinks the value of P2
+while preserving P1 and P3, which is equivalent to taking the transpose of
+the density operator with nonzero probability, and we have seen in §3.2.6
+that the transpose map is not completely positive.
+
+Interpretation. We might interpret the phase-damping channel as describ-
+ing a heavy “classical” particle (e.g., an interstellar dust grain) interacting
+with a background gas of light particles (e.g., the 3K microwave photons).
+We can imagine that the dust is initially prepared in a superposition of
+position eigenstates |ψ⟩=
+1
+√
+
+2(|x⟩+ |−x⟩) (or more realistically a super-
+position of position-space wavepackets with little overlap). We might be
+able to monitor the behavior of the dust particle, but it is hopeless to
+keep track of the quantum state of all the photons that scatter from the
+particle; for our purposes, the quantum state of the particle is described
+by the density matrix ρ obtained by tracing over the photon degrees of
+freedom.
+Our analysis of the phase damping channel indicates that if photons are
+scattered by the dust particle at a rate Γ, then the off-diagonal terms in
+ρ decay like exp(−Γt), and so become completely negligible for t ≫Γ−1.
+At that point, the coherence of the superposition of position eigenstates is
+completely lost – there is no chance that we can recombine the wavepack-
+ets and induce them to interfere. If we attempt to do a double-slit in-
+terference experiment with dust grains, we will not see any interference
+pattern if it takes a time t ≫Γ−1 for the grain to travel from the source
+to the screen.
+The dust grain is heavy. Because of its large inertia, its state of motion
+is little affected by the scattered photons. Thus, there are two disparate
+
+
+30
+3 Foundations II: Measurement and Evolution
+
+time scales relevant to its dynamics. On the one hand, there is a damping
+time scale, the time for a significant amount of the particle’s momentum
+to be transfered to the photons, which is a long time for such a heavy
+particle. On the other hand, there is the decoherence time scale. In this
+model, the time scale for decoherence is of order Γ, the time for a single
+photon to be scattered by the dust grain, which is far shorter than the
+damping time scale. For a macroscopic object, decoherence is fast.
+As we have already noted, the phase-damping channel picks out a pre-
+ferred basis for decoherence, which in our “interpretation” we have as-
+sumed to be the position-eigenstate basis. Physically, decoherence prefers
+the spatially localized states of the dust grain because the interactions
+of photons and grains are localized in space. Grains in distinguishable
+positions tend to scatter the photons of the environment into mutually
+orthogonal states.
+Even if the separation between the “grains” were so small that it could
+not be resolved very well by the scattered photons, the decoherence pro-
+cess would still work in a similar way. Perhaps photons that scatter off
+grains at positions x and −x are not mutually orthogonal, but instead
+have an overlap
+⟨γ + |γ−⟩= 1 −ε,
+ε ≪1.
+(3.106)
+
+The phase-damping channel would still describe this situation, but with p
+replaced by pε (if p is still the probability of a scattering event). Thus, the
+decoherence rate would become Γdec = εΓscat, where Γscat is the scattering
+rate.
+The intuition we distill from this simple model applies to a wide va-
+riety of physical situations. A coherent superposition of macroscopically
+distinguishable states of a “heavy” object decoheres very rapidly com-
+pared to its damping rate. The spatial locality of the interactions of the
+system with its environment gives rise to a preferred “local” basis for de-
+coherence. The same principle applies to Schr¨odinger’s unfortunate cat,
+delicately prepared in a coherent superposition of its dead state and its
+alive state, two states that are easily distinguished by spatially localized
+probes. The cat quickly interacts with its environment, which is “scat-
+tered” into one of two mutually orthogonal states perfectly correlated
+with the cat’s state in the {|dead⟩, |alive⟩} basis, thus transforming the
+cat into an incoherent mixture of those two basis states.
+
+Visibility. On the other hand, for microscopic systems the time scale for
+decoherence need not be short compared to dynamical time scales. Con-
+sider for example a single atom, initially prepared in a uniform superposi-
+tion of its ground state |0⟩and an excited state |1⟩with energy ℏω above
+the ground state energy. Neglecting decoherence, after time t the atom’s
+
+
+3.4 Three quantum channels
+31
+
+state will be
+|ψ(t)⟩=
+1
+√
+
+2
+
+�
+|0⟩+ e−iωt|1⟩
+�
+.
+(3.107)
+
+If dephasing occurs in the {|0⟩, |1⟩} basis with rate Γ, the off-diagonal
+terms in the density operator decay, yielding the density operator
+
+ρ(t) = 1
+
+2
+
+�
+1
+eiωte−Γt
+
+e−iωte−Γt
+1
+
+�
+.
+(3.108)
+
+If after time t we measure the atom in the basis
+
+|±⟩=
+1
+√
+
+2 (|0⟩± |1⟩) ,
+(3.109)
+
+the probability of the + outcome is
+
+Prob(+, t) = ⟨+|ρ(t)|+⟩= 1
+
+2
+�
+1 + e−Γt cos ωt
+�
+.
+(3.110)
+
+In principle this time dependence of the probability can be measured by
+varying the time t between the preparation and measurement, and by re-
+peating the experiment many times for each t to estimate the probability
+with high statistical confidence. The decoherence rate Γ can be deter-
+mined experimentally by fitting the declining visibility of the coherent
+oscillations of Prob(+, t) to a decaying exponential function of t.
+
+3.4.3 Amplitude-damping channel
+
+The amplitude-damping channel is a schematic model of the decay of an
+excited state of a (two-level) atom due to spontaneous emission of a pho-
+ton. By detecting the emitted photon (“observing the environment”) we
+can perform a POVM that gives us information about the initial prepa-
+ration of the atom.
+
+Unitary representation. We denote the atomic ground state by |0⟩A and
+the excited state of interest by |1⟩A. The “environment” is the electro-
+magnetic field, assumed initially to be in its vacuum state |0⟩E. After we
+wait a while, there is a probability p that the excited state has decayed to
+the ground state and a photon has been emitted, so that the environment
+has made a transition from the state |0⟩E (“no photon”) to the state |1⟩E
+(“one photon”). This evolution is described by a unitary transformation
+that acts on atom and environment according to
+
+|0⟩A ⊗|0⟩E �→|0⟩A ⊗|0⟩E
+
+|1⟩A ⊗|0⟩E �→
+�
+
+1 −p |1⟩A ⊗|0⟩E + √p |0⟩A ⊗|1⟩E.
+(3.111)
+
+(Of course, if the atom starts out in its ground state, and the environment
+in its vacuum state, then no transition occurs.)
+
+
+32
+3 Foundations II: Measurement and Evolution
+
+Kraus operators. By evaluating the partial trace over the environment in
+the basis {|0⟩E, |1⟩E}, we find the Kraus operators
+
+M 0 =
+�
+1
+0
+0
+√1 −p
+
+�
+,
+M 1 =
+�
+0
+√p
+0
+0
+
+�
+,
+(3.112)
+
+and we can check that
+
+M †
+0M 0 + M †
+1M 1 =
+�
+1
+0
+0
+1 −p
+
+�
++
+�
+0
+0
+0
+p
+
+�
+= I.
+(3.113)
+
+The operator M 1 induces a “quantum jump,” the decay from |1⟩A to
+|0⟩A, and M 0 describes how the state changes if no jump occurs. The
+density matrix evolves as
+
+ρ �→E(ρ) = M 0ρM †
+0 + M 1ρM †
+1
+
+=
+�
+ρ00
+√1 −p ρ01
+√1 −p ρ10
+(1 −p) ρ11
+
+�
++
+�
+pρ11
+0
+0
+0
+
+�
+
+=
+�
+ρ00 + pρ11
+√1 −p ρ01
+√1 −p ρ10
+(1 −p) ρ11
+
+�
+.
+(3.114)
+
+Time dependence. If Γ is the spontaneous decay rate per unit time, then
+the decay occurs with probability p = Γ∆t ≪1 in a small time interval
+∆t. We find the density operator after time t = n∆t by applying the
+channel n times in succession. The ρ11 matrix element then decays as
+
+ρ11 �→(1 −p)nρ11,
+where
+(1 −p)n = (1 −Γt/n)n →e−Γt,
+(3.115)
+
+the expected exponential decay law, while the off-diagonal entries decay
+by the factor (1 −p)n/2 = e−Γt/2; hence we find
+
+ρ(t) =
+�
+ρ00 +
+�
+1 −e−Γt�
+ρ11
+e−Γt/2ρ01
+e−Γt/2 ρ10
+e−Γtρ11
+
+�
+(3.116)
+
+It is customary to use “T1” to denote the exponential decay time for the
+excited population, and to use “T2” to denote the exponential decay time
+for the off-diagonal terms in the density operator. In some systems where
+dephasing is very rapid T2 is much shorter than T1, but we see that for the
+amplitude-damping channel these two times are related and comparable:
+
+T2 = 2Γ−1 = 2T1.
+(3.117)
+
+By the time that t ≫T1, the atom is in its ground state with high
+probability (ρ00(t) ≈1).
+
+
+3.4 Three quantum channels
+33
+
+Watching the environment. So far we have described the evolution of
+the qubit under the assumption that the state of the environment is not
+observed. But now suppose we surround the atom with photon detectors,
+so we know whether a photon has been emitted or not. Rather than a
+channel, then, we consider a POVM performed on the atom.
+Returning to the joint unitary dynamics of system and environment,
+we see that a coherent superposition of the atomic ground and excited
+states evolves as
+
+(α|0⟩A + β|1⟩A) ⊗|0⟩E
+
+�→(α|0⟩A + β
+�
+
+1 −p |1⟩A) ⊗|0⟩E + β√p |0⟩A ⊗|1⟩E;
+(3.118)
+
+To describe the system evolving continuously in time, we may consider
+applying this unitary map n ≫1 times in succession, but where photons
+emitted at different times are perfectly distinguishable and hence orthog-
+onal. The resulting POVM has n+1 Kraus operators, associated with the
+vacuum state of the environment and n different possible single photon
+states:
+
+M 0 =
+�1
+0
+0
+�
+
+(1 −p)n
+
+�
+,
+M k =
+�
+0
+�
+
+(1 −p)k−1p
+0
+0
+
+�
+,
+(3.119)
+
+for k = 1, 2, . . . n. Taking the continuous-time limit we find that if no
+spontaneous decay occurs for time t, the corresponding Kraus operator is
+
+M 0 =
+�1
+0
+0
+e−Γt/2
+
+�
+.
+(3.120)
+
+If we detect a photon (and so project out a single-photon state of the
+environment), then we have prepared the state |0⟩A of the atom. Not only
+that, we have prepared a state in which we know with certainty that the
+initial atomic state was the excited state |1⟩A; if the atom had started out
+in the ground state than it could not have decayed and no photon could
+have been detected.
+On the other hand, if we detect no photon, and our photon detector
+has perfect efficiency, then we have projected out the vacuum state of the
+environment, and so have prepared the atomic state
+
+M 0 (α|0⟩+ β|1⟩) = α|0⟩+ e−Γt/2β|1⟩,
+(3.121)
+
+up to a normalization factor. As time goes by, the a posteriori quantum
+state has larger and larger overlap with the ground state, because if it
+had started out in the excited state it should have decayed by now. In
+the limit t →∞our POVM becomes an orthogonal measurement: either
+a photon is detected, in which case the initial state of the atom must have
+
+
+34
+3 Foundations II: Measurement and Evolution
+
+been |1⟩, or no photon is detected, in which case the initial state must
+have been |0⟩. It’s odd but true: we can project out the state |0⟩of the
+atom by not detecting anything.
+
+3.5 Master equations for open quantum systems
+
+3.5.1 Markovian evolution
+
+Quantum channels provide a general description of the evolution of den-
+sity operators, including the evolution of pure states to mixed states (de-
+coherence). In the same sense, unitary transformations provide a general
+description of coherent quantum evolution. But in the case of coherent
+evolution, we often find it very convenient to characterize the dynamics
+of a quantum system with a Hamiltonian, which describes the evolution
+over an infinitesimal time interval. The dynamics is then encoded in a
+differential equation, the Schr¨odinger equation, and we may calculate the
+evolution over a finite time interval by integrating the equation, that is, by
+piecing together the evolution over many infinitesimal intervals. Likewise,
+it is often possible to describe the (not necessarily coherent) evolution of
+a density operator, at least to a good approximation, by a differential
+equation which is called the master equation.
+It is not obvious that there should be a differential equation that de-
+scribes the decoherence of an open system. Such a description is possible
+only if the evolution of the quantum system is Markovian, that is, local
+in time. For the evolution of the density operator ρ(t) to be governed
+by a (first-order) differential equation in t, ρ(t + dt) must be completely
+determined by ρ(t).
+In the case of an open system A, we are to imagine that its evolution is
+actually unitary on the extended system AE, where E is the environment.
+But though the evolution of AE may be governed by a Schr¨odinger equa-
+tion, that’s not enough to ensure that the time evolution is Markovian
+for A by itself. The trouble is that information can flow from A to E and
+then return at a later time. In that case the density operator ρA(t + dt)
+is not fully determined by ρA(t); we need to know ρA at earlier times as
+well.
+This quandary arises because information flow is a two-way street. An
+open system (whether classical or quantum) is dissipative because infor-
+mation and energy can flow from the system to the environment. But that
+means that information can also flow back from environment to system,
+resulting in non-Markovian fluctuations of the system. This inescapable
+connection underlies the fluctuation-dissipation theorem, a widely appli-
+cable tool of statistical physics.
+For any open system these fluctuations are inevitable, and an exact
+
+
+3.5 Master equations for open quantum systems
+35
+
+Markovian description of quantum dynamics is impossible. Nevertheless,
+a Markovian description can be a very good approximation if there is a
+clean separation between the typical correlation time of the fluctuations
+and the time scale of the evolution that we want to follow.
+Crudely
+speaking, we may denote by (∆t)env the time it takes for the environment
+to “forget” information it acquired from the system — after time (∆t)env
+we can regard that information as lost forever, and neglect the possibility
+that the information may return to influence the subsequent evolution of
+the system.
+To describe the evolution we “coarse-grain” in time, perceiving the dy-
+namics through a filter that screens out the high frequency components
+of the motion with ω ≫(∆tcoarse)−1. An approximately Markovian de-
+scription should be possible for (∆t)env ≪(∆t)coarse; we may neglect
+the memory of the reservoir if we are unable to resolve its effects. This
+Markovian approximation is useful if the time scale of the dynamics that
+we want to observe is long compared to (∆t)coarse, for example if the
+damping time scale (∆t)damp satisfies
+
+(∆t)damp ≫(∆t)coarse ≫(∆t)env.
+(3.122)
+
+This is a good approximation in some physical settings, like an atom
+interacting with the radiation field, but more dubious in other cases, like
+an electron spin interacting with nuclear spins in a semiconductor.
+We could attempt to derive the master equation starting with the
+Schr¨odinger equation for AE, treating the coupling between A and E
+in time-dependent perturbation theory, and carefully introducing a fre-
+quency cutoff, but we won’t do that here. Instead let’s take it for granted
+that the dynamics is Markovian, and use the theory of quantum channels
+to infer the form of the master equation.
+
+3.5.2 The Liouvillian
+
+For a closed quantum system, time evolution is governed by a self-adjoint
+Hamiltonian H according to
+
+|ψ(t + dt)⟩= (I −idtH) |ψ(t)⟩,
+(3.123)
+
+and correspondingly the density operator evolves as
+
+ρ(t + dt) = ρ(t) −idt[H, ρ(t)].
+(3.124)
+
+In the case of an open quantum system, Markovian evolution for the
+infinitesimal time interval dt may be expressed as
+
+ρ(t + dt) = Edt(ρ(t)),
+(3.125)
+
+
+36
+3 Foundations II: Measurement and Evolution
+
+where Edt is a quantum channel. By adopting this Markovian form, we
+take the view that, after each infinitesimal time increment in the joint
+evolution of the system and its environment, the state of the environment
+is discarded and replaced by a fresh state of the environment unentan-
+gled with the system. We already made this assumption implicitly when
+discussing continuous-time dephasing and spontaneous decay in §3.4.
+Expanding Edt to linear order,
+
+Edt = I + dtL
+(3.126)
+
+we find
+˙ρ = L(ρ),
+(3.127)
+
+where the linear map L generating time evolution is called the Liouvillian
+or Lindbladian. This evolution equation has the formal solution
+
+ρ(t) = lim
+n→∞
+
+�
+1 + Lt
+
+n
+
+�n
+(ρ(0)) = eLt(ρ(0))
+(3.128)
+
+if L is time independent.
+The channel has an operator-sum representation
+
+ρ(t + dt) = Edt(ρ(t)) =
+�
+
+a
+M aρ(t)M †
+a = ρ(t) + O(dt),
+(3.129)
+
+where, if we retain only terms up to linear order in dt, we may assume
+without loss of generality that M 0 = I + O(dt), and that M a is of
+order
+√
+
+dt for a > 0. Each of the Kraus operators M 1,2,... describes a
+possible “quantum jump” that the system might undergo, which occurs
+during time interval dt with probability O(dt), and M 0 describes how the
+system evolves when no jump occurs. We may write
+
+M 0 = I + (−iH + K)dt,
+
+M a =
+√
+
+dt La,
+(3.130)
+
+where H and K are both hermitian and La, H, and K are all zeroth
+order in dt. In fact, we can determine K by invoking the Kraus-operator
+completeness relation; keeping terms up to linear order in O(dt), we find
+
+I =
+�
+
+a
+M †
+aM a = I + dt
+
+�
+
+2K +
+�
+
+a>0
+L†
+aLa
+
+�
+
++ · · · ,
+(3.131)
+
+or
+K = −1
+
+2
+
+�
+
+a>0
+L†
+aLa.
+(3.132)
+
+
+3.5 Master equations for open quantum systems
+37
+
+Substituting into eq. (3.129), we obtain the Lindblad master equation:
+
+˙ρ = L(ρ) = −i[H, ρ] +
+�
+
+a>0
+
+�
+LaρL†
+a −1
+
+2L†
+aLaρ −1
+
+2ρL†
+aLa
+
+�
+.
+(3.133)
+
+This is the general Markovian evolution law for quantum states in the
+Schr¨odinger picture, assuming time evolution is a trace-preserving com-
+pletely positive linear map. The first term in L(ρ) is the familiar Hamilto-
+nian term generating unitary evolution. The other terms describe the pos-
+sible transitions that the system may undergo due to interactions with the
+environment. The operators La are called Lindblad operators or quantum
+jump operators. Each LaρL†
+a term induces one of the possible quantum
+jumps, while the terms −1/2L†
+aLaρ−1/2ρL†
+aLa are needed to normalize
+properly the case in which no jumps occur.
+Alternatively, we can describe the evolution using the Heisenberg
+picture.
+Then instead of eq.(3.129), the density operator is time-
+independent, while an operator A evolves according to
+
+A(t + dt) = E∗
+dt(A(t)) =
+�
+
+a
+M †
+aA(t)M a,
+(3.134)
+
+and hence
+
+˙A = L∗(A) = i[H, A] +
+�
+
+a>0
+
+�
+L†
+aALa −1
+
+2L†
+aLaA −1
+
+2AL†
+aLa
+
+�
+.
+
+(3.135)
+
+Heisenberg-picture time evolution is unital rather than trace preserving;
+the identity operator I does not evolve.
+As for any nonunitary quantum channel, we have the freedom to rede-
+fine the Kraus operators in the operator-sum representation of Edt, replac-
+ing {M a} by operators {N µ} which differ by a unitary change of basis.
+In particular, invoking this freedom for the jump operators (while leaving
+M 0 untouched), we may replace {La} by {L′
+µ} where
+
+L′
+µ =
+�
+
+a
+VµaLa
+(3.136)
+
+and Vµa is a unitary matrix. We say that these two ways of choosing
+the jump operators are two different unravelings of the same Markovian
+dynamics.
+The master equation describes what happens when the system interacts
+with an unobserved environment, but we may also consider what happens
+if the environment is continuously monitored. In that case each quantum
+jump is detected; we update the quantum state of the system whenever
+
+
+38
+3 Foundations II: Measurement and Evolution
+
+a jump occurs, and an initial pure state remains pure at all later times.
+Specifically, a jump of type a occurs during the interval (t, t + dt) with
+probability
+Prob(a) = dt⟨ψ(t)|L†
+aLa|ψ(t)⟩,
+(3.137)
+
+and when a type-a jump is detected the updated state is
+
+|ψ(t + dt)⟩=
+La|ψ(t)⟩
+∥La|ψ(t)⟩∥,
+(3.138)
+
+while when no jump occurs the state evolves as
+
+|ψ(t + dt)⟩=
+M 0|ψ(t)⟩
+∥M 0|ψ(t)⟩∥.
+(3.139)
+
+This stochastic Schr¨odinger evolution can be numerically simulated; each
+simulated quantum trajectory is different, but averaging over a sample of
+many such trajectories reproduces the evolution of the density operator as
+described by the master equation. Simulating the stochastic Schr¨odinger
+equation may have advantages over simulating the master equation, since
+it is less costly to follow the evolution of a d-dimensional state vector than
+a d × d density matrix.
+
+3.5.3 Damped harmonic oscillator
+
+As an example to illustrate the master equation, consider the case of a
+harmonic oscillator coupled to the electromagnetic field via
+
+H′ =
+�
+
+k
+gk(ab†
+k + a†bk),
+(3.140)
+
+where a is the annihilation operator of the oscillator, b†
+k creates a pho-
+ton in mode k, and gk is a coupling constant. Let’s also suppose that
+the environment is at zero temperature; then the excitation level of the
+oscillator can cascade down by successive emission of photons, but no
+absorption of photons will occur. If each photon, once emitted, never
+interacts again with the oscillator, the evolution is Markovian, and there
+is only one Lindblad jump operator:
+
+L =
+√
+
+Γa.
+(3.141)
+
+Here Γ is the rate for the oscillator to decay from the first excited (n = 1)
+state to the ground (n = 0) state, which can be computed as Γ = �
+k Γk,
+where Γk is the rate for emission into mode k. The rate for the decay
+from level n to n−1 is nΓ. (The nth level of excitation of the oscillator
+
+
+3.5 Master equations for open quantum systems
+39
+
+may be interpreted as a state of n noninteracting particles; the rate is nΓ
+because any one of the n particles can decay.)
+The Schr¨odinger-picture master equation in the Lindblad form becomes
+
+˙ρ = −i[H0, ρ] + Γ
+�
+aρa† −1
+
+2a†aρ −1
+
+2ρa†a
+�
+,
+(3.142)
+
+where H0 = ωa†a is the Hamiltonian of the oscillator, while in the Heisen-
+berg picture an operator A evolves according to
+
+˙A = i[H0, A] + Γ
+�
+a†Aa −1
+
+2a†aA −1
+
+2Aa†a
+�
+.
+(3.143)
+
+The jump term describes the damping of the oscillator due to photon
+emission.
+To study the effect of the jumps, consider the Heisenberg-picture evolu-
+tion of the annihilation operator a(t). We can solve the master equation
+by making an ansatz a(t) = f(t)a, where f(t) is a function of time, and
+then checking the self-consistency of the ansatz. Plugging into eq.(3.143)
+we find
+
+˙f(t)a = iωf(t)[a†a, a] + Γf(t)
+�
+a†aa −1
+
+2a†aa −1
+
+2aa†a
+�
+
+=
+�
+iω + Γ
+
+2
+
+�
+f(t)[a†, a]a =⇒
+˙f(t) = −
+�
+iω + Γ
+
+2
+
+�
+f(t),
+(3.144)
+
+which integrates to f(t) = e−iωt−Γt/2f(0). We conclude that
+
+a(t) = e−iωt−Γt/2a(0),
+(3.145)
+
+and therefore the occupation number of the oscillator n = a†a decays in
+the Heisenberg picture according to
+
+n(t) = e−Γtn(0).
+(3.146)
+
+Thus Γ is indeed the damping rate of the oscillator. If we interpret the nth
+excitation state of the oscillator as a state of n noninteracting particles,
+each with a decay probability Γ per unit time, then eq. (3.146) is just the
+exponential law satisfied by the population of decaying particles.
+More interesting is what the master equation tells us about decoherence.
+In our amplitude damping model, it is the annihilation operator a and
+its adjoint that appear in the coupling H′ of oscillator to environment,
+so we can anticipate that the oscillator’s state will decohere in the basis
+of a eigenstates. The coherent state
+
+|α⟩= e−|α|2/2eαa†|0⟩= e−|α|2/2
+∞
+�
+
+n=0
+
+αn
+√
+
+n!
+|n⟩,
+(3.147)
+
+
+40
+3 Foundations II: Measurement and Evolution
+
+is the normalized eigenstate of a with complex eigenvalue α. The operator
+a is not Hermitian, and two coherent states with distinct eigenvalues α
+and β are not orthogonal; rather
+
+|⟨α|β⟩|2 = e−|α|2e−|β|2e2Re(α∗β)
+
+= exp(−|α −β|2),
+(3.148)
+
+so the overlap is very small when |α −β| is large.
+The solution to the Schr¨odinger-picture master equation is worked out
+in Exercise 3.9, where we find that an initial coherent state remains co-
+herent, but with a decaying amplitude; after time t the state |α⟩evolves
+as
+|α⟩�→|αe−Γt/2⟩
+(3.149)
+
+(in the rotating frame where the Hamiltonian evolution of the oscillator
+has been transformed away). We may also consider what happens when
+the initial state is a superposition of coherent states (a “cat state”)
+
+|ψ⟩= Nα,β(|α⟩+ |β⟩),
+(3.150)
+
+(where Nα,β is a normalization factor), or
+
+ρ = N2
+α,β (|α⟩⟨α| + |α⟩⟨β| + |β⟩⟨α| + |β⟩⟨β|) .
+(3.151)
+
+The off-diagonal terms in this density operator evolve as
+
+|α⟩⟨β| �→eiφ(α,β)e−Γt|α−β|2/2|αe−Γt/2⟩⟨βe−Γt/2|,
+(3.152)
+
+where eiφ(α,β) is a phase factor. Thus the off-diagonal terms decay expo-
+nentially with time, at a rate
+
+Γdecohere = 1
+
+2Γ|α −β|2
+(3.153)
+
+proportional to |α −β|2, the square of the separation of the two coher-
+ent states in phase space; the decoherence rate is much larger than the
+damping rate Γ for |α −β|2 ≫1.
+This behavior is easy to interpret.
+The expectation value of the occupation number n in a coherent state
+is ⟨n⟩= ⟨α|a†a|α⟩= |α|2. Therefore, if α, β have comparable moduli
+but significantly different phases (as for a superposition of minimum un-
+certainty wave packets centered at positions x and −x), the decoherence
+rate is comparable to Γ⟨n⟩, the rate for emission of a single photon. This
+rate is very large compared to the rate for a significant fraction of the
+oscillator energy to be dissipated, if n is large.
+We can also consider an oscillator coupled to an environment with a
+nonzero temperature. Again, the decoherence rate is roughly the rate for a
+
+
+3.6 Non-Markovian noise
+41
+
+single photon to be emitted or absorbed, but the rate may be much faster
+than at zero temperature.
+Because the photon modes with frequency
+comparable to the oscillator frequency ω have a thermal occupation num-
+ber
+nγ ≈T
+
+ℏω,
+(3.154)
+
+(for T ≫ℏω), the interaction rate is further enhanced by the factor nγ.
+For an oscillator with energy E = ℏωnosc, we have
+
+Γdecohere
+
+Γdamp
+∼noscnγ ∼E
+
+ℏω
+T
+ℏω
+
+∼mω2x2
+
+ℏω
+T
+ℏω ∼x2 mT
+
+ℏ2 ∼x2
+
+λ2
+T
+,
+(3.155)
+
+where x is the amplitude of oscillation and λT is the thermal de Broglie
+wavelength of the oscillating object. For macroscopic objects, decoherence
+is really fast.
+
+3.6 Non-Markovian noise
+
+3.6.1 Gaussian phase noise
+
+The master equation describes the evolution of a quantum system subject
+to Markovian noise, but in some experimental systems the Markovian
+approximation is not very accurate. In this section we will discuss some
+of the features of decoherence for a system subjected to non-Markovian
+noise.
+As a simple example, consider a single qubit with energy eigenstates |0⟩
+and |1⟩, where the energy splitting between the two states fluctuates. For
+example, the qubit could be a spin-1
+
+2 particle in a magnetic field pointing
+along the z-axis, where the magnetic field is not perfectly controlled in
+the laboratory. The Hamiltonian for this system is
+
+H = −1
+
+2ω01σ3 −1
+
+2f(t)σ3 ,
+(3.156)
+
+where f(t) is the fluctuating component of the magnetic field. This is
+a model of classical noise, arising not because the system interacts with
+an unobserved environment, but rather because a term in the system’s
+Hamiltonian fluctuates.
+The function f is treated stochastically; that is, we consider an ensem-
+ble of possible functions {f}, each with an assigned probability weight
+µ(f). We imagine that the actual f(t) in each run of the experiment is
+selected by sampling from this distribution, and predict the observed be-
+havior of the system by averaging over the distribution µ(f). The model is
+
+
+42
+3 Foundations II: Measurement and Evolution
+
+particularly simple because the unperturbed Hamiltonian H0 = 1
+
+2ω01σ3
+commutes with the noise term Hf = 1
+
+2f(t)σ3, and in fact we can trans-
+form H0 away by going to the interaction picture.
+The fluctuations induce dephasing of the qubit in the energy eigenstate
+basis. To analyze the dephasing, we will make a further simplifying as-
+sumption, that the noise is Gaussian. Whether the noise is classical of
+quantum, this Gaussian approximation often applies in laboratory situ-
+ations where the system is weakly coupled to many different fluctuating
+variables in the environment. We denote averaging over the distribution
+µ(f) by [·], and assume the distribution to be stationary with mean zero;
+that is [f(t)] = 0, and [f(t)f(t′)] = K(t −t′) is a function only of the
+difference t −t′, which is called the covariance of the distribution. The
+Gaussian distribution can be characterized by its generating functional
+Z[J], which can be expressed in terms of the covariance as
+
+Z[J] ≡
+�
+e
+�
+dtJ(t)f(t)�
+
+f = exp
+�1
+
+2
+
+�
+dtdt′J(t)K(t −t′)J(t′)
+�
+.
+(3.157)
+
+An initial density operator ρ(0) evolves in time T to
+
+ρ(T) =
+�
+exp
+�
+i
+�T
+
+o
+
+1
+2f(t)σ3
+
+�
+ρ(0) exp
+�
+−i
+�T
+
+o
+
+1
+2f(t)σ3
+
+��
+.
+(3.158)
+
+The energy eigenstates |0⟩⟨0| or |1⟩⟨1| are not affected, but using
+eq.(3.157) we see that the coefficients of the off-diagonal entries |0⟩⟨1|
+and |1⟩⟨0| decay by the factor
+
+exp
+�
+−1
+
+2
+
+�T
+
+0
+dt
+�T
+
+0
+dt′K(t −t′)
+�
+
+= exp
+�
+−1
+
+2
+
+�T
+
+0
+dt
+�T
+
+0
+dt′
+�∞
+
+−∞
+
+dω
+2π e−iω(t−t′) ˜K(ω)
+�
+;
+(3.159)
+
+here we have introduced the Fourier transform ˜K(ω) of the covariance
+K(t), which is said to be the spectral density or power spectrum of the
+noise. Doing the t and t′ integrals we obtain
+
+exp
+�
+−1
+
+2
+
+�∞
+
+−∞
+
+dω
+2π
+˜K(ω)WT (ω)
+�
+(3.160)
+
+where WT (ω) is the smooth window function
+
+WT (ω) =
+����
+
+�T
+
+0
+dt e−iωt
+����
+
+2
+= 4
+
+ω2 sin2(ωT/2),
+(3.161)
+
+which has most of its support on the interval [0, 2π/T].
+
+
+3.6 Non-Markovian noise
+43
+
+Assuming that ˜K(ω = 0) is finite, we expect that for T sufficiently
+large,
+˜K(ω) can be regarded as approximately constant in the region
+where WT (ω) is supported. Using
+�∞
+−∞dxsin2 x
+
+x2
+= π, we then obtain the
+decay factor e−Γ2T , where the dephasing rate Γ2 is
+
+Γ2 = ˜K(ω = 0).
+(3.162)
+
+(Here we’ve assumed that ˜K(ω) is continuous at ω = 0 — otherwise
+we should average its limiting values as ω approaches zero from positive
+and negative values.) If the spectral density is flat (“white noise”), this
+formula for Γ2 applies at any time T, but in general, the time scale for
+which dephasing can be described by a rate Γ2 depends on the shape of
+the noise’s spectral density. In effect, an experimentalist who measures
+the dephasing time T2 = Γ−1
+2
+of a qubit is probing the noise power at low
+frequency.
+Crudely speaking, we expect ˜K(ω) to be roughly constant in the inter-
+val [0, ωc], where ωc = 2π/τc, and τc is a characteristic “autocorrelation”
+or “memory” time of the noise. That is, τc is chosen so that the corre-
+lation function K(t −t′) is small for |t −t′| ≫τc. Thus we see that one
+can speak of a “dephasing rate” Γ2 (and a corresponding dephasing time
+T2 = Γ−1
+2 ) if the evolution is sufficiently “coarse-grained” in time. For the
+purpose of describing evolution over a time period T ≫τc, the window
+function WT (ω) is mostly supported within the interval [0, ωc] where ˜K(ω)
+is approximately constant; therefore the non-Markovian noise model can
+be replaced by a corresponding effective Markovian model in which the
+memory of the fluctuations can be neglected, as in our analysis of dephas-
+ing in §3.4.2. But for T ≪τc such a description may not be applicable.
+
+3.6.2 Spin echo
+
+Strategies for mitigating the damaging effects of the noise become possible
+when the noise autocorrelation time τc is long compared to the time scale
+over which the experimentalist can manipulate the system. For example,
+when observing the dephasing of a spin evolving for time T, we may apply
+a fast pulse that flips the spin about the x-axis at time T/2. Then the
+effects of low-frequency phase noise during the second half of the evolution
+will tend to compensate for the effects of the phase noise during the first
+half. This trick is called the spin echo phenomenon.
+If we use this trick, the damping factor applied to |0⟩⟨1| is again given
+by
+
+exp
+�
+−1
+
+2
+
+�∞
+
+−∞
+
+dw
+
+2π
+˜K(ω)WT (ω)
+�
+(3.163)
+
+
+44
+3 Foundations II: Measurement and Evolution
+
+but with a modified window function
+
+WT (ω) =
+����
+
+�T
+
+0
+dtJ(t)eiωt
+����
+
+2
+,
+(3.164)
+
+where J(t) is a modulating function that expresses the effect of the spin
+echo pulse sequence. For example, if we flip the spin at time T/2, then
+J(t) is +1 in the interval [0, T/2] and -1 in the interval [T/2, T]; therefore
+
+WT (w) = 1
+
+ω2
+
+���1 −2eiωT/2 + eiωT ���
+2
+
+= 1
+
+ω2
+
+�����
+1 −eiωT/2
+
+1 + eiωT/2
+�
+1 −eiωT �
+�����
+
+2
+
+= tan2(ωT/4) · 4
+
+ω2 sin2(ωt/2).
+(3.165)
+
+In effect, the spin echo modifies
+˜K(ω) by the multiplicative factor
+tan2(ωT/4), which suppresses the low frequency noise.
+The suppression can be improved further by using more pulses. In prac-
+tice, pulses have bounded strength and nonzero duration, which places
+limitations on the effectiveness of this strategy.
+
+3.6.3 Qubits as noise spectrometers
+
+Now let’s consider a different model of classical noise, in which the fluc-
+tuating term does not commute with the unperturbed Hamiltonian:
+
+H = −1
+
+2ω01σ3 + f(t)σ1.
+(3.166)
+
+In this model the fluctuating field can induce transitions among the energy
+eigenstates, at a rate that can be computed using lowest-order interaction-
+picture perturbation theory if the noise is weak. The probability that a
+qubit prepared in the state |1⟩at time 0 is observed in the state |0⟩at
+time T, averaged over the fluctuating classical field, is
+
+Prob(1 →0)
+=
+
+�����−i
+�T
+
+0
+dt f(t)e−iω01t⟨0|σ1|1⟩
+����
+
+2 �
+
+=
+�T
+
+0
+dt
+�T
+
+0
+dt′ e−iω01(t−t′) �
+f(t)f(t′)
+�
+
+=
+�∞
+
+−∞
+
+dω
+2π
+˜K(ω)WT (ω −ω01) .
+(3.167)
+
+This expression is similar to the formula eq.(3.160) for the off-diagonal
+term in the density operator obtained in the dephasing model, except that
+
+
+3.6 Non-Markovian noise
+45
+
+now the center of the window function has been shifted to the frequency
+ω01 of the transition.
+As before, if we consider the observation time T to be large compared
+to the autocorrelation time τc of the noise, then the support of the window
+function is narrow, and ˜K(ω) is approximately constant in the window.
+Thus, after a suitable coarse-graining of the time evolution, we may iden-
+tify a rate for the decay of the qubit
+
+Γ↓= ˜K(ω = ω01).
+(3.168)
+
+Similarly, for the transition from ground state to excited state, we find
+
+Γ↑= ˜K(ω = −ω01).
+(3.169)
+
+Thus negative frequency noise transfers energy from the noise reservoir
+to the qubit, exciting the qubit, while positive frequency noise transfers
+energy from qubit to the noise reservoir, returning the excited qubit to
+the ground state. (Dephasing of a qubit, in contrast, involves a negligible
+exchange of energy and therefore is controlled by low frequency noise.) We
+conclude that an experimentalist capable of varying the energy splitting
+ω01 and measuring the qubit’s transition rate can determine how the noise
+power depends on the frequency.
+For the case we have considered in which the noise source is classical,
+f(t) and f(t′) are real commuting variables; therefore K(t) is an even
+function of t and correspondingly ˜K(ω) is an even function of ω. Classical
+noise is spectrally symmetric, and the rates for excitation and decay are
+equal.
+On the other hand, noise driven by a quantized thermal “bath” can
+be spectrally asymmetric. When the qubit comes to thermal equilibrium
+with the bath, up and down transitions occur at equal rates. If p0 denotes
+the probability that the qubit is in the ground state |0⟩and p1 denotes the
+probability that the qubit is in the excited state |1⟩, then in equilibrium
+
+p0Γ↑= p1Γ↓⇒
+˜K(−ω01)
+
+˜K(ω01)
+= p1
+
+p0
+= e−βω01;
+(3.170)
+
+the ratio of noise strengths at positive and negative frequencies is given
+(for a thermal bath) by a Boltzmann factor; this property of the noise is
+called the Kubo-Martin-Schwinger (KMS) condition. The noise becomes
+classical in the high-temperature limit βω01 ≪1, and is in the deeply
+quantum regime for βω01 ≫1.
+
+3.6.4 Spin-boson model at nonzero temperature
+
+To turn our model of classical dephasing noise into a quantum model,
+we replace the stochastic classical field f(t) by an operator acting on a
+
+
+46
+3 Foundations II: Measurement and Evolution
+
+quantized bath. The noise will still be Gaussian if the bath is a system of
+harmonic oscillators, uncoupled to one another and each coupled linearly
+to the dephasing qubit. The Hamiltonian for the system A and bath B is
+
+HA + HB + HAB = −1
+
+2ω01σ3 +
+�
+
+k
+ωka†
+kak −1
+
+2σ3
+
+��
+
+k
+gkak + g∗
+ka†
+k
+
+�
+
+,
+
+(3.171)
+which is called the spin-boson model, as it describes a single spin- 1
+
+2 par-
+ticle coupled to many bosonic variables. This is a model of dephasing
+because the coupling of the spin to the bath is diagonal in the spin’s
+energy eigenstate basis. (Otherwise the physics of the model would be
+harder to analyze.) Despite its simplicity, the spin-boson model provides
+a reasonably realistic description of dephasing for a qubit weakly coupled
+to many degrees of freedom in the environment.
+If there are many oscillators, the sum over k can be approximated by
+a frequency integral:
+�
+
+k
+|gk|2 ≈
+�∞
+
+0
+dωJ(ω),
+(3.172)
+
+where J(ω) is said to be the spectral function of the oscillator bath. Let’s
+assume that the bath is in thermal equilibrium at temperature β−1. In
+principle, the coupling to the system could tweak the equilibrium distri-
+bution of the bath, but we assume that this effect is negligible, because
+the bath is much bigger than the system. The fluctuations of the bath
+are Gaussian, and the average over the ensemble of classical functions in
+our previous analysis can be replaced by the thermal expectation value:
+
+[f(t)f(0)] �→⟨f(t)f(0)⟩β ≡tr
+�
+e−βHBf(t)f(0)
+�
+,
+(3.173)
+
+where now f(t) denotes the operator
+
+f(t) = eitHBf(0)e−itHB =
+�
+
+k
+
+�
+gkake−iωkt + g∗
+ka†
+keiωkt�
+.
+(3.174)
+
+We see that
+
+Kβ(t) ≡⟨f(t)f(0)⟩β =
+�
+
+k
+|gk|2 ⟨e−iωktaka†
+k + eiωkta†
+kak⟩β.
+(3.175)
+
+From the Planck distribution, we find
+
+⟨a†
+kak⟩β =
+1
+eβωk −1 = 1
+
+2 coth(βωk/2) −1
+
+2,
+
+⟨aka†
+k⟩β = ⟨a†
+kak + 1⟩β = 1
+
+2 coth(βωk/2) + 1
+
+2,
+(3.176)
+
+
+3.7 Summary
+47
+
+and by Fourier transforming we obtain the spectral density of the noise
+
+˜Kβ(ω) ≡
+�∞
+
+−∞
+dt eiωtKβ(t)
+
+=
+�
+
+k
+|gk|2 �
+2πδ(ω −ωk)⟨aka†
+k⟩β + 2πδ(ω + ωk)⟨a†
+kak⟩β
+�
+,
+
+(3.177)
+
+which may be written as
+
+˜Kβ(ω) = πJ(ω) (coth(βω/2) + 1) ,
+ω > 0,
+˜Kβ(ω) = πJ(ω) (coth(βω/2) −1) ,
+ω < 0.
+(3.178)
+
+Thus, as we anticipated, the noise power spectrum exhibits the spec-
+tral asymmetry required by the KMS condition — the spectral density
+˜Kβ(−ω) of the noise at negative frequency is supressed relative to the
+spectral density ˜Kβ(ω) at positive frequency by the Boltzmann factor
+e−βω.
+Since the window function WT (ω) is an even function of ω, only the even
+part of ˜Kβ(ω) contributes to the attenuation of |0⟩⟨1|; the attenuation
+factor
+
+exp
+�
+−1
+
+2
+
+�∞
+
+−∞
+
+dω
+2π
+˜Kβ(ω)WT (ω)
+�
+,
+(3.179)
+
+therefore becomes
+
+exp
+�
+−
+�∞
+
+0
+dωJ(ω)2 sin2(ωT/2)
+
+ω2
+coth(βω/2)
+�
+.
+(3.180)
+
+A dephasing rate can be identified if the spectral function J(ω) behaves
+suitably at low frequency; the attenuation factor is e−Γ2T in the limit
+T →∞where
+
+Γ2 = lim
+ω→0
+˜Kβ(ω) = lim
+ω→0 2πJ(ω)/(βω),
+(3.181)
+
+assuming that this limit exists. The noise is said to be Ohmic if J(ω) ≈
+Aω is linear in ω at low frequency, and in that case the dephasing rate
+becomes Γ2 = 2πAβ−1 in the limit of long time T.
+
+3.7 Summary
+
+POVM. If we restrict our attention to a subspace of a larger Hilbert
+space, then an orthogonal (Von Neumann) measurement performed on the
+larger space cannot in general be described as an orthogonal measurement
+
+
+48
+3 Foundations II: Measurement and Evolution
+
+on the subspace. Rather, it is a generalized measurement or POVM —
+the outcome a occurs with a probability
+
+Prob(a) = tr (Eaρ) ,
+(3.182)
+
+where ρ is the density matrix of the subsystem, each Ea is a positive
+hermitian operator, and the Ea’s satisfy
+�
+
+a
+Ea = I .
+(3.183)
+
+A POVM in HA can be realized as a unitary transformation on the tensor
+product HA ⊗HB, followed by an orthogonal measurement in HB.
+Quantum channel. Unitary evolution on HA⊗HB will not in general
+appear to be unitary if we restrict our attention to HA alone. Rather,
+evolution in HA will be described by a quantum channel, (which can be
+inverted by another channel only if unitary). A general channel E has an
+operator-sum representation:
+
+E : ρ →E(ρ) =
+�
+
+a
+M aρM †
+a ,
+(3.184)
+
+where
+�
+
+a
+M †
+aM a = I.
+(3.185)
+
+In fact, any reasonable (linear, trace preserving, and completely positive)
+mapping of density operators to density operators has such an operator-
+sum representation.
+Decoherence. Decoherence — the decay of quantum information due
+to the interaction of a system with its environment — can be described
+by a quantum channel. If the environment frequently “scatters” off the
+system, and the state of the environment is not monitored, then off-
+diagonal terms in the density operator of the system decay rapidly in a
+preferred basis (typically a spatially localized basis selected by the nature
+of the coupling of the system to the environment). The time scale for
+decoherence is set by the scattering rate, which may be much larger than
+the damping rate for the system.
+Master Equation.
+When the relevant dynamical time scale of an
+open quantum system is long compared to the time for the environment
+to “forget” quantum information, the evolution of the system is effectively
+local in time (the Markovian approximation). Much as general unitary
+evolution is generated by a Hamiltonian, a general Markovian superoper-
+ator is generated by a Liouvillian L as described by the master equation:
+
+˙ρ ≡L(ρ) = −i[H, ρ] +
+�
+
+a
+
+�
+LaρL†
+a −1
+
+2L†
+aLaρ −1
+
+2ρL†
+aLa
+
+�
+.
+(3.186)
+
+
+3.8 Exercises
+49
+
+Here each Lindblad operator (or quantum jump operator) La describes a
+“quantum jump” that could in principle be detected if we monitored the
+environment faithfully. By solving the master equation, we can compute
+the decoherence rate of an open system.
+Non-Markovian noise. Non-Markovian noise can be characterized
+by its power spectrum, and the effects of the noise on dephasing over a
+long time period are determined by the behavior of the power spectrum
+at low frequency. Quantum noise in thermal equilibrium at temperature
+β−1 has a spectral asymmetry — the noise at negative frequency (−ω) is
+suppressed compared to the noise at positive frequency ω by a Boltzmann
+factor e−βω (the KMS condition).
+
+Further important ideas are developed in the Exercises.
+
+3.8 Exercises
+
+3.1 Which state did Alice make?
+
+Consider a game in which Alice prepares one of two possible states:
+either ρ1 with a priori probability p1, or ρ2 with a priori probability
+p2 = 1 −p1. Bob is to perform a measurement and on the basis of
+the outcome to guess which state Alice prepared. If Bob’s guess is
+right, he wins; if he guesses wrong, Alice wins.
+
+In this exercise you will find Bob’s best strategy, and determine his
+optimal probability of error.
+
+Let’s suppose (for now) that Bob performs a POVM with two pos-
+sible outcomes, corresponding to the two nonnegative Hermitian
+operators E1 and E2 = I −E1. If Bob’s outcome is E1, he guesses
+that Alice’s state was ρ1, and if it is E2, he guesses ρ2. Then the
+probability that Bob guesses wrong is
+
+perror = p1 tr (ρ1E2) + p2 tr (ρ2E1) .
+(3.187)
+
+a) Show that
+
+perror = p1 +
+�
+
+i
+λi⟨i|E1|i⟩,
+(3.188)
+
+where {|i⟩} denotes the orthonormal basis of eigenstates of the
+Hermitian operator p2ρ2 −p1ρ1, and the λi’s are the corre-
+sponding eigenvalues.
+
+b) Bob’s best strategy is to perform the two-outcome POVM that
+minimizes this error probability. Find the nonnegative opera-
+tor E1 that minimizes perror, and show that error probability
+
+
+50
+3 Foundations II: Measurement and Evolution
+
+when Bob performs this optimal two-outcome POVM is
+
+(perror)optimal = p1 +
+�
+
+neg
+λi .
+(3.189)
+
+where �
+neg denotes the sum over all of the negative eigenvalues
+of p2ρ2 −p1ρ1.
+c) It is convenient to express this optimal error probability in terms
+of the L1 norm of the operator p2ρ2 −p1ρ1,
+
+∥p2ρ2 −p1ρ1∥1 = tr |p2ρ2 −p1ρ1| =
+�
+
+pos
+λi −
+�
+
+neg
+λi , (3.190)
+
+the difference between the sum of positive eigenvalues and
+the sum of negative eigenvalues. Use the property tr (p2ρ2 −
+p1ρ1) = p2 −p1 to show that
+
+(perror)optimal = 1
+
+2 −1
+
+2∥p2ρ2 −p1ρ1∥1 .
+(3.191)
+
+Check whether the answer makes sense in the case where ρ1 =
+ρ2 and in the case where ρ1 and ρ2 have support on orthogonal
+subspaces.
+d) Now suppose that Alice decides at random (with p1 = p2 = 1/2)
+to prepare one of two pure states |ψ1⟩, |ψ2⟩of a single qubit,
+with
+|⟨ψ1|ψ2⟩| = sin(2α) ,
+0 ≤α ≤π/4 .
+(3.192)
+
+With a suitable choice of basis, the two states can be expressed
+as
+
+|ψ1⟩=
+�
+cos α
+sin α
+
+�
+,
+|ψ2⟩=
+�
+sin α
+cos α
+
+�
+.
+(3.193)
+
+Find Bob’s optimal two-outcome measurement, and compute
+the optimal error probability.
+e) Bob wonders whether he can find a better strategy if his POVM
+{Ei} has more than two possible outcomes.
+Let p(a|i) de-
+note the probability that state a was prepared, given that the
+measurement outcome was i; it can be computed using the
+relations
+
+pip(1|i)
+=
+p1p(i|1) = p1 tr ρ1Ei ,
+pip(2|i)
+=
+p2p(i|2) = p2 tr ρ2Ei ;
+(3.194)
+
+here p(i|a) denotes the probability that Bob finds measurement
+outcome i if Alice prepared the state ρa, and pi denotes the
+
+
+3.8 Exercises
+51
+
+probability that Bob finds measurement outcome i, averaged
+over Alice’s choice of state. For each outcome i, Bob will make
+his decision according to which of the two quantities
+
+p(1|i) ,
+p(2|i)
+(3.195)
+
+is the larger; the probability that he makes a mistake is the
+smaller of these two quantities. This probability of error, given
+that Bob obtains outcome i, can be written as
+
+perror(i) = min (p(1|i), p(2|i)) = 1
+
+2 −1
+
+2 |p(2|i) −p(1|i)| .
+
+(3.196)
+Show that the probability of error, averaged over the measure-
+ment outcomes, is
+
+perror =
+�
+
+i
+pi perror(i) = 1
+
+2 −1
+
+2
+
+�
+
+i
+|tr (p2ρ2 −p1ρ1) Ei| .
+
+(3.197)
+
+f) By expanding in terms of the basis of eigenstates of p2ρ2 −p1ρ1,
+show that
+perror ≥1
+
+2 −1
+
+2∥p2ρ2 −p1ρ1∥1 .
+(3.198)
+
+(Hint: Use the completeness property �
+i Ei = I.) Since we
+have already shown that this bound can be saturated with a
+two-outcome POVM, the POVM with many outcomes is no
+better.
+
+3.2 Eavesdropping and disturbance
+
+Alice wants to send a message to Bob. Alice is equipped to prepare
+either one of the two states |u⟩or |v⟩. These two states, in a suitable
+basis, can be expressed as
+
+|u⟩=
+�
+cos α
+sin α
+
+�
+,
+|v⟩=
+�
+sin α
+cos α
+
+�
+,
+(3.199)
+
+where 0 < α < π/4. Suppose that Alice decides at random to send
+either |u⟩or |v⟩to Bob, and Bob is to make a measurement to
+determine what she sent. Since the two states are not orthogonal,
+Bob cannot distinguish the states perfectly.
+
+a) Bob realizes that he can’t expect to be able to identify Alice’s
+qubit every time, so he settles for a procedure that is successful
+only some of the time. He performs a POVM with three pos-
+sible outcomes: ¬u, ¬v, or DON’T KNOW. If he obtains the
+
+
+52
+3 Foundations II: Measurement and Evolution
+
+result ¬u, he is certain that |v⟩was sent, and if he obtains ¬v,
+he is certain that |u⟩was sent. If the result is DON’T KNOW,
+then his measurement is inconclusive. This POVM is defined
+by the operators
+
+E¬u = A(I −|u⟩⟨u|) ,
+E¬v = A(I −|v⟩⟨v|) ,
+EDK = (1 −2A)I + A (|u⟩⟨u| + |v⟩⟨v|) ,
+(3.200)
+
+where A is a positive real number. How should Bob choose
+A to minimize the probability of the outcome DK, and what
+is this minimal DK probability (assuming that Alice chooses
+from {|u⟩, |v⟩} equiprobably)? Hint: If A is too large, EDK
+will have negative eigenvalues, and Eq.(3.200) will not be a
+POVM.
+
+b) Eve also wants to know what Alice is sending to Bob. Hoping
+that Alice and Bob won’t notice, she intercepts each qubit
+that Alice sends, by performing an orthogonal measurement
+that projects onto the basis
+��1
+0
+�
+,
+�0
+1
+��
+.
+If she obtains the
+outcome
+�1
+0
+�
+, she sends the state |u⟩on to Bob, and if she
+obtains the outcome
+�0
+1
+�
+, she sends |v⟩on to Bob. Therefore
+each time Bob’s POVM has a conclusive outcome, Eve knows
+with certainty what that outcome is.
+But Eve’s tampering
+causes detectable errors; sometimes Bob obtains a “conclusive”
+outcome that actually differs from what Alice sent. What is the
+probability of such an error, when Bob’s outcome is conclusive?
+
+3.3 Minimal disturbance
+
+Consider a game in which Alice decides at random (equiprobably)
+whether to prepare one of two possible pure states of a single qubit,
+either
+
+|ψ⟩=
+�
+cos α
+sin α
+
+�
+,
+or
+| ˜ψ⟩=
+�
+sin α
+cos α
+
+�
+,
+(3.201)
+
+and sends the state to Bob. By performing an orthogonal measure-
+ment in the basis {|0⟩, |1⟩}, Bob can identify the state with minimal
+error probability
+
+(perror)optimal = sin2 α = 1
+
+2(1 −sin θ) ,
+(3.202)
+
+where we have defined θ by
+
+⟨ψ| ˜ψ⟩≡cos θ = sin(2α) .
+(3.203)
+
+
+3.8 Exercises
+53
+
+But now let’s suppose that Eve wants to eavesdrop on the state as it
+travels from Alice to Bob. Like Bob, she wishes to extract optimal
+information that distinguishes |ψ⟩from | ˜ψ⟩, and she also wants to
+minimize the disturbance introduced by her eavesdropping, so that
+Alice and Bob are not likely to notice that anything is amiss.
+
+Eve realizes that the optimal POVM can be achieved by measure-
+ment operators
+
+M 0 = |φ0⟩⟨0| ,
+M 1 = |φ1⟩⟨1| ,
+(3.204)
+
+where the vectors |φ0⟩, and |φ1⟩are arbitrary. If Eve performs this
+measurement, then Bob receives the state
+
+ρ′ = cos2 α|φ0⟩⟨φ0| + sin2 α|φ1⟩⟨φ1| ,
+(3.205)
+
+if Alice sent |ψ⟩, and the state
+
+˜ρ′ = sin2 α|φ0⟩⟨φ0| + cos2 α|φ1⟩⟨φ1| ,
+(3.206)
+
+if Alice sent | ˜ψ⟩.
+
+Eve wants the average fidelity of the state received by Bob to be as
+large as possible. The quantity that she wants to minimize, which
+we will call the “disturbance” D, measures how close this average
+fidelity is to one:
+
+D = 1 −1
+
+2(F + ˜F) ,
+(3.207)
+
+where
+F = ⟨ψ|ρ′|ψ⟩,
+˜F = ⟨˜ψ|˜ρ′| ˜ψ⟩.
+(3.208)
+
+The purpose of this exercise is to examine how effectively Eve can re-
+duce the disturbance by choosing her measurement operators prop-
+erly.
+
+a) Show that F + ˜F can be expressed as
+
+F + ˜F = ⟨φ0|A|φ0⟩+ ⟨φ1|B|φ1⟩,
+(3.209)
+
+where
+
+A
+=
+�
+1 −2 cos2 α sin2 α
+cos α sin α
+cos α sin α
+2 cos2 α sin2 α
+
+�
+,
+
+B
+=
+�
+2 cos2 α sin2 α
+cos α sin α
+cos α sin α
+1 −2 cos2 α sin2 α
+
+�
+. (3.210)
+
+
+54
+3 Foundations II: Measurement and Evolution
+
+b) Show that if |φ0⟩and |φ1⟩are chosen optimally, the minimal
+disturbance that can be attained is
+
+Dmin(cos2 θ) = 1
+
+2(1 −
+�
+
+1 −cos2 θ + cos4 θ) .
+(3.211)
+
+[Hint: We can choose |φ0⟩and |φ1⟩to maximize the two terms
+in eq. (3.209) independently. The maximal value is the maxi-
+mal eigenvalue of A, which since the eigenvalues sum to 1, can
+be expressed as λmax =
+1
+2
+�
+1 +
+√
+
+1 −4 · det A
+�
+.]
+Of course,
+Eve could reduce the disturbance further were she willing to
+settle for a less than optimal probability of guessing Alice’s
+state correctly.
+
+c) Sketch a plot of the function Dmin(cos2 θ). Interpret its value for
+cos θ = 1 and cos θ = 0. For what value of θ is Dmin largest?
+Find Dmin and (perror)optimal for this value of θ.
+
+3.4 The price of quantum state encryption
+
+Alice and Bob are working on a top secret project. I can’t tell you
+exactly what the project is, but I will reveal that Alice and Bob
+are connected by a perfect quantum channel, and that Alice uses
+the channel to send quantum states to Bob.
+Alice and Bob are
+worried that an eavesdropper (Eve) might intercept some of Alice’s
+transmissions. By measuring the intercepted quantum state, Eve
+could learn something about what Alice is sending, and perhaps
+make an inference about the nature of the project.
+
+To protect against eavesdropping, Alice and Bob decide to encrypt
+the quantum states that Alice sends. They share a secret key, a
+string of random bits about which the eavesdropper knows nothing.
+By consuming 2n bits of secret key, Alice can encrypt, and Bob can
+decrypt, an arbitrary n-qubit state ρ. For every possible state ρ,
+the encrypted state looks exactly the same to Eve, so she cannot
+find out anything about ρ.
+
+Here is how the encryption procedure works: We may express the
+2n bit string x as x = x0x1x2 · · · xn−1, where xi ∈{0, 1, 2, 3}, and
+denote a tensor product of n Pauli operators as
+
+σ(x) = σx0 ⊗σx2 ⊗· · · ⊗σxn−1
+(3.212)
+
+(where σ0 = I).
+Note that σ(x)2 = I⊗n, the identity operator
+acting on n qubits. To encrypt, Alice consults her random string
+to determine x (which is chosen uniformly at random), and applies
+σ(x) to the state, obtaining σ(x)ρσ(x). To decrypt, Bob, consults
+the same string and applies σ(x) to recover ρ.
+
+
+3.8 Exercises
+55
+
+a) Since Eve does not know the secret key, to her the encrypted
+state is indistinguishable from
+
+E(ρ) =
+1
+22n
+�
+
+x
+σ(x)ρσ(x) .
+(3.213)
+
+Show that, for any n-qubit state ρ
+
+E(ρ) = 1
+
+2n I⊗n .
+(3.214)
+
+Since E(ρ) is independent of ρ, no information about ρ is ac-
+cessible to Eve.
+b) Alice wonders if it is possible to encrypt the state using a shorter
+key. Alice and Bob could use their shared randomness to sam-
+ple an arbitrary probability distribution. That is, they could
+agree on a set of N unitary matrices {U a, a = 1, 2, 3, . . . , N},
+and Alice could encrypt by applying U a with probability pa.
+Then Bob could decrypt by applying U −1
+a . To Eve, the en-
+crypted state would then appear to be
+
+E′(ρ) =
+�
+
+a
+paU aρU −1
+a
+.
+(3.215)
+
+Show that, if E′(ρ) = I⊗n, then pa ≤2−2n for each a.
+Hint: Note that E has an operator sum representation with
+Kraus operators {σ(x)/2n} and that E′ has an operator sum
+representation with Kraus operators {√pa U a}.
+Further-
+more E = E′.
+Therefore, there exists an M × M unitary
+matrix Vax (where M = max(N, 22n)) such that √paU a =
+�
+x Vaxσ(x)/2n. Now express patr
+�
+U aU †
+a
+�
+in terms of V .
+
+Remark: The result shows that encryption requires N ≥22n, and
+that at least 2n bits of key are required to specify U a. Thus the
+encryption scheme in which σ(x) is applied is the most efficient
+possible scheme. (For encryption to be effective, it is enough for
+E(ρ) to be independent of ρ; it is not necessary that E(ρ) = I⊗n/2n.
+But the same result applies under the weaker assumption that E(ρ)
+is independent of ρ.)
+
+3.5 Unital maps and majorization
+
+Recall that the action of a trace-preserving completely positive
+(TPCP) map E can be expressed as
+
+E(ρ) =
+�
+
+a
+M aρM †
+a ,
+(3.216)
+
+
+56
+3 Foundations II: Measurement and Evolution
+
+where
+�
+
+a
+M †
+aM a = I .
+(3.217)
+
+A TPCP map is said to be unital if E(I) = I, or equivalently if
+�
+
+a
+M aM †
+a = I .
+(3.218)
+
+If A is a nonnegative Hermitian operator with unit trace (tr A = 1),
+let λ(A) denote the vector of eigenvalues of A, which can be re-
+garded as a probability vector. If A and B are nonnegative Hermi-
+tian operators with unit trace, we say that A ≺B (“A is majorized
+by B”) if λ(A) ≺λ(B). (Recall that for two probability vectors p
+and q, we say that p ≺q if there is a doubly stochastic matrix D
+such that p = Dq.)
+
+Show that if ρ is a density operator and E is a unital map, then
+
+E(ρ) ≺ρ .
+(3.219)
+
+Hint: Express ρ = U∆U † where ∆is diagonal and U is unitary,
+and express ρ′ ≡E(ρ) = V ∆′V †, where ∆′ is diagonal and V
+is unitary. Then try to show that the diagonal entries of ∆′ can
+be expressed as a doubly stochastic matrix acting on the diagonal
+entries of ∆.
+
+Remark: A unital map is the natural quantum generalization of
+a doubly stochastic map (a doubly stochastic map can be regarded
+as the special case of a unital map that preserves the basis in which
+ρ is diagonal). The result of the exercise shows that a unital map
+takes an input density operator to an output density operator that
+is no less random than the input.
+
+3.6 What transformations are possible for bipartite pure states?
+
+Alice and Bob share a bipartite pure state |Ψ⟩. Using a 2-LOCC
+protocol, they wish to transform it to another bipartite pure state
+|Φ⟩. Furthermore, the protocol must be deterministic — the state
+|Φ⟩is obtained with probability one irrespective of the outcomes of
+the measurements that Alice and Bob perform.
+
+Suppose that these initial and final states have Schmidt decompo-
+sitions
+
+|Ψ⟩=
+�
+
+i
+
+�
+
+(pΨ)i |αi⟩⊗|βi⟩,
+|Φ⟩=
+�
+
+i
+
+�
+
+(pΦ)i |α′
+i⟩⊗|β′
+i⟩.
+
+(3.220)
+
+
+3.8 Exercises
+57
+
+Show that if the deterministic transformation |Ψ⟩�→|Φ⟩is possible,
+then pΨ ≺pΦ.
+
+Hints: Using the Lo-Popescu Theorem from Exercise 2.9, we can
+reduce the 2-LOCC to an equivalent 1-LOCC. That is, if the de-
+terministic transformation is possible, then there is a generalized
+measurement that can be applied by Alice, and an operation de-
+pending on Alice’s measurement outcome that can be applied by
+Bob, such that for each possible measurement outcome Alice’s mea-
+surement followed by Bob’s operation maps |Ψ⟩to |Φ⟩. Recall that
+a generalized measurement is defined by a set of operators {M a}
+such that �
+a M †
+aM a = I, and that the action of the measurement
+on a pure state |ψ⟩if outcome a occurs is
+
+|ψ⟩�→
+M a|ψ⟩
+�
+
+⟨ψ|M †
+aM a|ψ⟩
+.
+(3.221)
+
+Think about how the 1-LOCC protocol transforms Alice’s density
+operator. You might want to use the polar decomposition: a matrix
+A can be expressed as
+√
+
+AA† U, where U is unitary.
+
+Remark: The converse is also true. Thus majorization provides the
+necessary and sufficient condition for the deterministic transforma-
+tion of one bipartite pure state to another (Nielsen’s Theorem). In
+this respect, majorization defines a partial order on bipartite pure
+states such that we may say that |Ψ⟩is no less entangled than |Φ⟩
+if pΨ ≺pΦ.
+
+3.7 Fidelity and overlap
+
+The overlap of two probability distributions {pi} and {˜pi} is defined
+as
+Overlap({pi}, {˜pi}) ≡
+�
+
+i
+
+�
+
+pi · ˜pi .
+(3.222)
+
+Suppose that we try to distinguish the two states ρ and ˜ρ by per-
+forming the POVM {Ei}. Then the two corresponding probability
+distributions have the overlap
+
+Overlap(ρ, ˜ρ; {Ei}) ≡
+�
+
+i
+
+�
+
+tr ρEi ·
+�
+
+tr ˜ρEi .
+(3.223)
+
+It turns out that the minimal overlap that can be achieved by any
+
+POVM is related to the fidelity F(ρ, ˜ρ) =
+���˜ρ
+1
+2 ρ
+1
+2
+���
+2
+
+1:
+
+min{Ei} [Overlap(ρ, ˜ρ; {Ei})] =
+�
+
+F(ρ, ˜ρ) .
+(3.224)
+
+
+58
+3 Foundations II: Measurement and Evolution
+
+In this exercise, you will show that the square root of the fidelity
+is a lower bound on the overlap, but not that the bound can be
+saturated.
+
+b) The space of linear operators acting on a Hilbert space is itself a
+Hilbert space, where the inner product (A, B) of two operators
+A and B is
+(A, B) ≡tr
+�
+A†B
+�
+.
+(3.225)
+
+For this inner product, the Schwarz inequality becomes
+
+|tr A†B| ≤
+�
+tr A†A
+�1/2 �
+tr B†B
+�1/2
+,
+(3.226)
+
+Choosing A = ρ
+1
+2 E
+
+1
+2
+i and B = U ˜ρ
+1
+2 E
+
+1
+2
+i (for an arbitrary uni-
+tary U), use this form of the Schwarz inequality to show that
+
+Overlap(ρ, ˜ρ; {Ei}) ≥|tr ρ
+1
+2 U ˜ρ
+1
+2 | .
+(3.227)
+
+c) Now use the polar decomposition
+
+A = V
+�
+
+A†A
+(3.228)
+
+(where V is unitary) to write
+
+˜ρ
+1
+2 ρ
+1
+2 = V
+�
+
+ρ
+1
+2 ˜ρρ
+1
+2 ,
+(3.229)
+
+and by choosing the unitary U in eq. (3.227) to be U = V −1,
+show that
+
+Overlap(ρ, ˜ρ; {Ei}) ≥
+�
+
+F(ρ, ˜ρ) .
+(3.230)
+
+d) We can obtain an explicit formula for the fidelity in the case of
+two states of a single qubit. Using the Bloch parametrization
+
+ρ(⃗P) = 1
+
+2
+
+�
+I + ⃗σ · ⃗P
+�
+,
+(3.231)
+
+show that the fidelity of two single-qubit states with polariza-
+tion vectors ⃗P and ⃗Q is
+
+F(⃗P, ⃗Q) = 1
+
+2
+
+�
+1 + ⃗P · ⃗Q +
+�
+
+(1 −⃗P 2)(1 −⃗Q2)
+�
+.
+(3.232)
+
+Hint: First note that the eigenvalues of a 2 × 2 matrix can be
+expressed in terms of the trace and determinant of the matrix.
+Then evaluate the determinant and trace of
+�
+ρ
+1
+2 ˜ρρ
+1
+2
+�
+, and
+calculate the fidelity using the corresponding expression for
+the eigenvalues.
+
+
+3.8 Exercises
+59
+
+3.8 Semicausal and semilocal maps in the Heisenberg picture
+In the Schr¨odinger picture, a completely positive (CP) map E leaves
+observables fixed and takes an input density operator to an output
+density operator, E : ρin �→ρout = E(ρin). In the Heisenberg pic-
+ture, the dual map E∗leaves density operators fixed and takes an in-
+put observable to an output observable, E∗: ain �→aout = E∗(ain).
+If E has the operator sum representation E(ρ) = �
+µ M aρM †
+a, then
+its dual has operator sum representation
+
+E∗(a) =
+�
+
+a
+M †
+aaM a .
+(3.233)
+
+a) If E is a TPCP map, show that its dual E∗can be represented
+as
+E∗(a) = C⟨0|U †
+AC (aA ⊗IC) U AC|0⟩C ,
+(3.234)
+
+where U AC is a unitary transformation on AC, aA is an ob-
+servable on A, IC is the identity on C, and |0⟩C is a fixed pure
+state in HC. (You may use the corresponding property of the
+TPCP map E.)
+b) Consider a CP map E acting on a bipartite quantum system AB.
+We way that E is semicausal if the map does not convey any
+information from B to A. That is, suppose that Alice and Bob
+share an initial state ρAB. Then if Bob performs an operation
+on B before the map E acts, and Alice makes a measurement
+on A after the map E acts, Alice’s measurement collects no
+information about the operation that Bob performed. Show
+that if E is semicausal, then there is an operation ˜E on A such
+that
+E∗(aA ⊗IB) = ˜E∗(aA) ⊗IB .
+(3.235)
+
+c) We say that E is semilocal if it can be performed by means of
+local operations and one-way quantum communication from A
+to B. That is, there is a message system C that can be passed
+from Alice to Bob. We may assume that the initial state of
+ABC is a product ρAB ⊗ρC — the state of the message is
+uncorrelated with the joint state held by Alice and Bob. To
+apply E to ρAB, Alice applies an operation to AC, and sends
+C to Bob. Then Bob applies an operation to BC, and discards
+C. Show that if E is semilocal, then there are CP maps GAC
+from A to AC and FBC from BC to B such that
+
+E∗= (G∗
+AC ⊗IB) ◦(IA ⊗F∗
+BC) ;
+(3.236)
+
+here ◦denotes composition of maps, with the map on the right
+acting first.
+
+
+60
+3 Foundations II: Measurement and Evolution
+
+d) Using the Heisenberg-picture characterizations of semicausal and
+semilocal maps found in (b) and (c), show that a semilocal map
+is semicausal, and express ˜E in terms of F and G.
+
+Remark. The result (d) is intuitively obvious — communication
+from Alice to Bob cannot convey a signal from Bob to Alice. What
+is less obvious is that the converse is also true: every semicausal
+map is semilocal.
+
+3.9 Damped harmonic oscillator at zero temperature
+
+Let’s suppose the oscillations of a quantum harmonic oscillator with
+circular frequency ω are damped because the oscillator can emit
+photons with energy ℏω. When a photon is emitted, the oscillator
+makes a transition from the energy eigenstate with energy En = nℏω
+to the energy eigenstate with enenrgy En−1 = (n −1)ℏω, and the
+photon carries away the lost energy. The probability that a photon
+is emitted in an infinitesimal time interval dt is Γdt; we say that Γ is
+the emission rate. Therefore, the coupled evolution of the oscillator
+and the electromagnetic field for time interval dt can be described
+as:
+
+|Ψ(0)⟩= |ψ⟩⊗|0⟩�→
+
+|Ψ(dt)⟩=
+√
+
+Γdt a|ψ⟩⊗|1⟩+
+�
+I −1
+
+2Γdt a†a
+�
+|ψ⟩⊗|0⟩.
+
+(3.237)
+
+Here |ψ⟩is the initial normalized state vector of the oscillator and
+{|0⟩, |1⟩} are orthonormal states of the electromagnetic field; |0⟩
+denotes the state in which no photon has been emitted and |1⟩
+denotes the state containing one photon. The operator a reduces
+the excitation level of the oscillator by one unit, and the a†a factor
+in the second term is needed to ensure that the evolution is unitary.
+
+a) Check unitarity by verifying that ⟨Ψ(dt)|Ψ(dt)⟩= 1, to linear
+order in the small quantity dt.
+
+Because the states {|0⟩, |1⟩} of the electromagnetic field are orthog-
+onal, the quantum state of the oscillator may decohere. Summing
+over these basis states, we see that the initial pure state |ψ⟩⟨ψ| of
+the oscillator evolves in time dt as
+
+|ψ⟩⟨ψ| �→⟨0|Ψ(dt)⟩⟨Ψ(dt)|0⟩+ ⟨1|Ψ(dt)⟩⟨Ψ(dt)|1⟩
+
+= Γdt a|ψ⟩⟨ψ|a† +
+�
+I −1
+
+2Γdt a†a
+�
+|ψ⟩⟨ψ|
+�
+I −1
+
+2Γdt a†a
+�
+;
+
+
+3.8 Exercises
+61
+
+More generally, the initial (not necessarily pure) density operator ρ
+of the oscillator evolves as
+
+ρ �→Γdt aρa† +
+�
+I −1
+
+2Γdt a†a
+�
+ρ
+�
+I −1
+
+2Γdt a†a
+�
+. (3.238)
+
+Now suppose that the initial state of the oscillator is a coherent
+state
+
+|α⟩= e−|α|2/2
+∞
+�
+
+n=0
+
+αn
+√
+
+n!
+|n⟩,
+(3.239)
+
+where α is a complex number. For this problem, we will ignore the
+usual dynamics of the oscillator that causes α to rotate uniformly in
+time: α �→αe−iωt; equivalently, we will assume that the dynamics
+is described in a “rotating frame” such that the rotation of α is
+transformed away. We will only be interested in how the states of
+the oscillator are affected by the damping described by eq.(3.238).
+
+b) Show that, to linear order in dt,
+�
+I −1
+
+2Γdt a†a
+�
+|α⟩≈e−Γdt|α|2/2|α e−Γdt/2⟩.
+(3.240)
+
+Note that there are two things to check in eq.(3.240): that the
+value of α decays with time, and that the normalization of the
+state decays with time.
+
+c) Verify that, also to linear order in dt,
+
+Γdt a|α⟩⟨α|a† ≈Γdt|α|2 |α e−Γdt/2⟩⟨α e−Γdt/2|,
+(3.241)
+
+and thus show that, to linear order in dt, |α⟩⟨α| evolves as
+
+|α⟩⟨α| �→|α e−Γdt/2⟩⟨α e−Γdt/2|.
+(3.242)
+
+By considering many consecutive small time increments, argue
+that, in a finite time t, the initial coherent state evolves as
+
+|α⟩�→|α e−Γt/2⟩.
+(3.243)
+
+Thus, the state remains a (pure) coherent state at all times,
+with the value of α decaying exponentially with time. Since
+the energy stored in the oscillator is proportional to α2, which
+decays like e−Γt, we say that Γ is the damping rate of the
+oscillator.
+
+
+62
+3 Foundations II: Measurement and Evolution
+
+Now consider what happens if the initial state of the oscillator is a
+superposition of two coherent states:
+
+|ψ⟩= Nα,β (|α⟩+ |β⟩) .
+(3.244)
+
+Here Nα,β is a real nonnegative normalization constant (note that,
+though the states |α⟩and β⟩are both normalized, they are not
+orthogonal).
+
+d) Evaluate ⟨β|α⟩, and determine Nα,β.
+
+For example we might choose α = ξ0/
+√
+
+2 and β = −ξ0/
+√
+
+2, so
+that the two superposed coherent states are minimum uncertainty
+wavepackets (with width ∆ξ = 1/
+√
+
+2) centered at dimensionless
+positions ±ξ0. If |α −β| ≫1, then the two wavepackets are well
+separated compared to their width, and we might say that oscilla-
+tor state |ψ⟩is “in two places at once.” How quickly will such a
+superposition of two separated wavepackets decohere?
+
+The initial density operator of the oscillator is
+
+ρ = N2
+α,β
+�
+|α⟩⟨α| + |α⟩⟨β| + |β⟩⟨α| + |β⟩⟨β|
+�
+.
+(3.245)
+
+We already know from part (c) how the “diagonal” terms |α⟩⟨α| and
+|β⟩⟨β| evolve, but what about the “off-diagonal” terms |α⟩⟨β| and
+|β⟩⟨α|?
+
+e) Using arguments similar to those used in parts (b) and (c), show
+that in time t, the operator |α⟩⟨β| evolves as
+
+|α⟩⟨β| �→eiφ(α,β)e−Γt|α−β|2/2|αe−Γt/2⟩⟨βe−Γt/2|,
+(3.246)
+
+and find the phase factor eiφ(α,β). Thus the off-diagonal terms
+decay exponentially with time, at a rate
+
+Γdecohere = 1
+
+2Γ|α −β|2
+(3.247)
+
+proportional to the distance squared |α −β|2.
+
+f) Consider an oscillator with mass m = 1 g, circular frequency
+ω = 1 s−1 and (very good) quality factor Q ≡ω/Γ = 109. Thus
+the damping time is very long: over 30 years. A superposition
+of minimum uncertainty wavepackets is prepared, centered at
+positions x = ±1 cm. Estimate the decoherence rate. (Wow!
+For macroscopic objects, decoherence is really fast!)
+
+
+3.8 Exercises
+63
+
+3.10 One-qubit decoherence
+
+The matrices I, σ1, σ2, σ3, where σ1,2,3 are the Pauli matrices and
+bfI is the identity matrix, are a basis for the four-dimensional space
+of 2 × 2 matrices. Let us denote I as σ0.
+
+a) Let E be a quantum operation (a completely positive map) acting
+on the density operator ρ of a single qubit. Show that we may
+express E(ρ) as
+
+E(ρ) =
+
+3
+�
+
+µ,ν=0
+Eµν σµρσν ,
+(3.248)
+
+where the Eµν’s are complex numbers satisfying Eµν = E∗
+νµ.
+Hint: The operation E has an operator-sum representation
+with operation elements {M a}. Each M a can be expanded in
+the basis {σµ, µ = 0, 1, 2, 3}.
+
+b) Find four independent conditions that must be satisfied by the
+Eµν’s in order that the operation E be trace-preserving (a chan-
+nel).
+
+c) A Hermitian 2 × 2 operator can be expressed as
+
+ρ(P) = 1
+
+2
+
+3
+�
+
+µ=0
+Pµσµ ,
+(3.249)
+
+where P0, P1, P2, P3 are real numbers. Show that a linear map
+that takes Hermitian operators to Hermitian operators acts as
+
+E(ρ(P)) = ρ(P ′) ,
+(3.250)
+
+where P ′ = MP and M is a real matrix. What is the (real)
+dimension of the space of such linear maps?
+
+d) Suppose that tr ρ = 1 and that E is trace preserving, so that
+P0 = P ′
+0 = 1. Show that
+
+⃗P ′ = M ⃗P + ⃗v ,
+(3.251)
+
+where ⃗P and ⃗P ′ are real three-component polarization vec-
+tors, M is a real matrix, and ⃗v is a real three-component vec-
+tor. What is the (real) dimension of the space of such trace-
+preserving maps?
+
+e) Express ⃗v in terms of the E0k’s. Hint: Use the result of (b).
+
+
+64
+3 Foundations II: Measurement and Evolution
+
+f) On a Hilbert space of dimension d, the space of linear maps from
+Hermitian operators to Hermitian operators has real dimension
+d4.
+What is the dimension of the space of trace-preserving
+maps?
+Hint: Count the number of independent conditions
+that must be imposed to ensure that the map is trace preserv-
+ing.
+
+3.11 Orthogonal or not?
+
+Consider a generalized measurement (POVM) on an d-dimensional
+Hilbert space.
+There are d possible outcomes for the measure-
+ment corresponding to the d nonnegative operators Ea, a =
+0, 1, 2, . . . , d−1, where �d−1
+a=0 Ea = I. Suppose that each Ea is one-
+dimensional (has one nonzero eigenvalue). Is this POVM necessarily
+an orthogonal measurement? Explain your answer.
+
+3.12 Heterodyne measurement of an oscillator
+
+The coherent states {|α⟩, α ∈C} are an overcomplete basis for a
+one-dimensional harmonic oscillator, satisfying
+
+⟨β|α⟩= exp
+�
+−1
+
+2|β|2 + β∗α −1
+
+2|α|2
+�
+(3.252)
+
+a) Show that
+�
+d2α Eα = I ,
+(3.253)
+
+where
+Eα = 1
+
+π|α⟩⟨α| .
+(3.254)
+
+Hint: Evaluate matrix elements of both sides of the equation
+between coherent states.
+
+b) Since the Eα’s provide a partition of unity, they define a POVM
+(an “ideal heterodyne measurement” of the oscillator). Sup-
+pose that a coherent state |β⟩is prepared, and that an ideal
+heterodyne measurement is performed, so that the coherent
+state |α⟩is obtained with probability distribution P(α) d2α =
+⟨β|Eα|β⟩d2α. With what fidelity does the measurement out-
+come |α⟩approximate the initial coherent state |β⟩, averaged
+over the possible outcomes?
+
+3.13 Master equation for the depolarizing channel
+
+a) Consider a depolarizing qubit that is subjected to “Pauli errors”
+at a rate ˜Γ, where σ1, σ2, and σ3 errors are all equally likely.
+
+
+3.8 Exercises
+65
+
+The depolarization can be described by a master equation with
+
+Lindblad operators
+�
+
+˜Γ/3 σ1,
+�
+
+˜Γ/3 σ2, and
+�
+
+˜Γ/3 σ3. Show
+that this master equation has the form
+
+˙ρ = −i[H, ρ] −Γ
+�
+ρ −1
+
+2I
+�
+.
+(3.255)
+
+How is Γ related to ˜Γ?
+b) Up to an irrelevant term proportional to the identity, the most
+general 2 × 2 Hermitian matrix is
+
+H = ω
+
+2 n · σ ,
+(3.256)
+
+where n is a unit vector. Use this form of H and the Bloch
+parametrization
+
+ρ = 1
+
+2(I + ⃗P · ⃗σ) ,
+(3.257)
+
+to show that the master equation eq. (3.255) can be rewritten
+as
+˙⃗P = ω(n × ⃗P) −Γ⃗P .
+(3.258)
+
+Thus the polarization precesses uniformly with circular fre-
+quency ω about the n-axis as it contracts with lifetime Γ−1.
+c) Alice and Bob play a game in which Alice decides to “turn on”
+one of the two Hamiltonians
+
+H = ω
+
+2 σ3 ,
+H′ = 0 ,
+(3.259)
+
+and Bob is to guess which Hamiltonian Alice chose. Bob has
+a supply of qubits, and he can observe whether the qubits
+“precess” in order to distinguish H from H′. However, his
+qubits are also subject to depolarization at the rate Γ as in
+eq. (3.255). Suppose that Bob prepares his qubits at time 0
+with polarization ⃗P0 = (1, 0, 0); after time t elapses, (1) find
+the polarization ⃗P(t) if the Hamiltonian is H and (2) find the
+polarization ⃗P ′(t) if the Hamiltonian is H′.
+d) What is Bob’s optimal measurement for distinguishing the po-
+larizations ⃗P(t) and ⃗P ′(t) (assuming that Alice is as likely to
+choose H as H′?
+What is his optimal probability of error
+(pe)opt (t)?
+
+e) The probability of error is smallest if Bob waits for a time tbest
+before measuring. Find tbest as a function of Γ and ω. Does
+your answer make sense in the limits Γ ≫ω and Γ ≪ω?
+
+

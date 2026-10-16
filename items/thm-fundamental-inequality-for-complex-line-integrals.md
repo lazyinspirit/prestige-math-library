@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-fundamental-inequality-for-complex-line-integrals.json
 id: thm-fundamental-inequality-for-complex-line-integrals
 kind: theorem
 title: "The fundamental inequality: the modulus of the integral is at most the absolute line integral for rectifiable contours"
@@ -7,13 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-existence-of-complex-line-integrals-on-rectifiable-paths, lem-complex-conjugation-and-modulus-laws, cor-chord-length-is-at-most-arc-length]
+deps: [thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed, def-absolute-line-integral-over-a-rectifiable-path, thm-existence-of-complex-line-integrals-on-rectifiable-paths, lem-complex-conjugation-and-modulus-laws, cor-chord-length-is-at-most-arc-length]
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -35,7 +34,7 @@ $$\left|\int_\gamma f(z)\,dz\right|\le\int_\gamma|f(z)|\,|dz|.$$
 
 [L2] Complex modulus satisfies $|z+w|\le|z|+|w|$ and $|zw|=|z||w|$ ([[lem-complex-conjugation-and-modulus-laws]]).
 
-[L3] Every chord of a rectifiable path is at most the length of the corresponding subpath ([[cor-chord-length-is-at-most-arc-length]]).
+[L3] Apply [[cor-chord-length-is-at-most-arc-length]] to $\Gamma=\Phi\circ\gamma$. Chord and subpath lengths equal the complex lengths by [[thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed]]. With $s_\gamma=s_\Gamma$ as in [[def-absolute-line-integral-over-a-rectifiable-path]], the chord bound is therefore $|\gamma(v)-\gamma(u)|\le s_\gamma(v)-s_\gamma(u)$.
 
 ## Proof
 

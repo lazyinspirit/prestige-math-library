@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "50",
+  "round": 1,
+  "reviewed_items": [
+    "def-qa-26-hhl-reciprocal-filter",
+    "def-qa-26-hhl-sine-window",
+    "lem-qa-26-hermitian-dilation",
+    "lem-qa-26-hhl-filter-geometry",
+    "def-qa-26-qlsp-task",
+    "lem-qa-26-hhl-filter-perturbation",
+    "lem-qa-26-hhl-sine-window-prefix-masses",
+    "lem-qa-26-qlsp-target-is-well-defined",
+    "lem-qa-26-hhl-prefix-table-synthesis-error",
+    "def-qa-26-hhl-access-model",
+    "lem-qa-26-hhl-sine-window-kernel-moment",
+    "lem-qa-26-phase-to-eigenvalue-unwrapping",
+    "lem-qa-26-hhl-capped-amplification",
+    "alg-qa-26-hhl-phase-estimation",
+    "lem-qa-26-hhl-success-amplitude",
+    "thm-qa-26-hhl-amplified-postselection-cost",
+    "thm-qa-26-hhl-simulator-cost",
+    "lem-qa-26-postselection-normalization-bound",
+    "thm-qa-26-hhl-state-correctness",
+    "thm-qa-26-hhl-query-cost",
+    "cex-qa-26-hhl-classical-vector-output",
+    "ex-qa-26-diagonal-hhl"
+  ],
+  "reviewed_pages": [
+    "hhl-phase-estimation-linear-systems",
+    "hhl-phase-estimation-linear-systems-examples"
+  ],
+  "decision": "escalate",
+  "reason": "All assigned repairs are complete and their consumers were checked. Escalation is needed for two outside-batch QA27 state guarantees whose vector-norm statements do not specify global-phase invariance, although their amplification suppliers guarantee only the conditional good-state ray or density operator.",
+  "findings": [
+    {
+      "id": "lem-qa-26-hermitian-dilation",
+      "type": "local",
+      "reason": "Expanded arbitrary b into its positive left-singular part and ker(A*) part; both pseudoinverses annihilate the latter."
+    },
+    {
+      "id": "lem-qa-26-hhl-filter-perturbation",
+      "type": "local",
+      "reason": "Proved continuity at both filter boundaries and a same-sign Lipschitz bound across reciprocal, transition, and plateau branches."
+    },
+    {
+      "id": "lem-qa-26-hhl-sine-window-prefix-masses",
+      "type": "local",
+      "reason": "Removed the duplicated Statement."
+    },
+    {
+      "id": "lem-qa-26-phase-to-eigenvalue-unwrapping",
+      "type": "local",
+      "reason": "Derived eigenvalue reality from self-adjointness and bounded eigenvalues using the operator-norm promise before applying phase decoding."
+    },
+    {
+      "id": "lem-qa-26-hhl-success-amplitude",
+      "type": "local",
+      "reason": "Derived real eigenvalues from self-adjointness before defining the reciprocal spectral action."
+    },
+    {
+      "id": "alg-qa-26-hhl-phase-estimation",
+      "type": "scope",
+      "reason": "Specified exact rational encodings for epsilon and rho, finite parameter arithmetic, the tagged preparation, and OP5's two conditional Y rotations, negative-sign phase, and unitary completion fixing the unused label."
+    },
+    {
+      "id": "lem-qa-26-hhl-capped-amplification",
+      "type": "local",
+      "reason": "Clarified that successful amplified branches preserve the same good-state ray even when the sine amplitude is negative."
+    },
+    {
+      "id": "thm-qa-26-hhl-state-correctness",
+      "type": "local",
+      "reason": "Made the output guarantee phase-invariant, corrected the well-projection error comparison, and recorded the positive scaling factor for rectangular dilation."
+    },
+    {
+      "id": "cex-qa-26-hhl-classical-vector-output",
+      "type": "local",
+      "reason": "Replaced the sign family with 2^N distinct positive-first-coordinate rays whose coordinate ratios decode all N bits despite global phase."
+    },
+    {
+      "id": "thm-qa-26-hhl-query-cost",
+      "type": "prerequisite",
+      "reason": "Added a finite rational-time QA25 implementation using rational q_j values and a certified time-rounding error within the simulation budget."
+    },
+    {
+      "id": "thm-qa-26-hhl-amplified-postselection-cost",
+      "type": "local",
+      "reason": "Clarified that rectangular-mode preparation counts use the supplied tagged B_A form and its actual declared cost."
+    },
+    {
+      "id": "thm-qa-26-hhl-simulator-cost",
+      "type": "local",
+      "reason": "Clarified that preparation cost coordinates refer to the supplied form, including B_A in dilation mode."
+    },
+    {
+      "id": "thm-qa-27-qsvt-inverse-state-cost",
+      "type": "outside-batch",
+      "reason": "Its Statement gives vector-norm error for a returned quantum state; its unknown-amplitude amplifier preserves the good ray and can multiply its ket by a negative sine amplitude. Owner should clarify the phase-invariant representative or supply a phase correction."
+    },
+    {
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "type": "outside-batch",
+      "reason": "Its vector-norm output claim relies on a capped-amplification supplier that guarantees the good-state density operator, not a fixed ket phase. Owner should clarify the phase-invariant representative or supply a phase correction."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-26-hhl-phase-estimation",
+      "decision": "accept",
+      "reason": "Uses the capped lemma as a ray-preserving procedure; the explicit flag unitary has the same required first column."
+    },
+    {
+      "id": "lem-qa-26-hhl-success-amplitude",
+      "decision": "accept",
+      "reason": "The ideal filter's supported well component is unchanged; real eigenvalues are now established locally."
+    },
+    {
+      "id": "thm-qa-26-hhl-amplified-postselection-cost",
+      "decision": "accept",
+      "reason": "Preparation and inverse counts remain the same, with the actual tagged preparation cost charged."
+    },
+    {
+      "id": "thm-qa-26-hhl-simulator-cost",
+      "decision": "accept",
+      "reason": "Simulation and flag counts remain the same; the tagged preparation uses its declared cost."
+    },
+    {
+      "id": "lem-qa-26-postselection-normalization-bound",
+      "decision": "accept",
+      "reason": "Its bound applies to the one-attempt well vector, unchanged by the cap's later global phase."
+    },
+    {
+      "id": "thm-qa-26-hhl-state-correctness",
+      "decision": "accept",
+      "reason": "The repaired statement allows a representative of the returned ray and its error budget remains valid."
+    },
+    {
+      "id": "thm-qa-26-hhl-query-cost",
+      "decision": "accept",
+      "reason": "The sparse simulator's rational-time restriction is covered by the added time-rounding proof."
+    },
+    {
+      "id": "ex-qa-26-diagonal-hhl",
+      "decision": "accept",
+      "reason": "The ideal inverse state and success amplitude remain unchanged for finite exact cutoffs."
+    },
+    {
+      "id": "hhl-phase-estimation-linear-systems",
+      "decision": "accept",
+      "reason": "Its inventory and summary remain accurate for the repaired finite algorithm and phase-invariant state claim."
+    },
+    {
+      "id": "hhl-phase-estimation-linear-systems-examples",
+      "decision": "accept",
+      "reason": "Its diagonal example and corrected classical-output lower bound match the page summary."
+    },
+    {
+      "id": "def-qa-27-block-encoded-qlsp",
+      "decision": "accept",
+      "reason": "Its gamma support gap, range promise, preparation, and normalized pseudoinverse target match the unchanged QLSP task."
+    },
+    {
+      "id": "def-qa-27-cks-sparse-oracle-model",
+      "decision": "accept",
+      "reason": "Its Hermitian nonzero-support promise is compatible with the QLSP range requirement; its clean-preparation condition is stricter."
+    },
+    {
+      "id": "lem-qa-27-supported-pseudoinverse-target",
+      "decision": "accept",
+      "reason": "Its singular-coordinate proof uses the same support-gap and Moore–Penrose interfaces."
+    },
+    {
+      "id": "thm-qa-27-pseudoinverse-polynomial-degree",
+      "decision": "accept",
+      "reason": "Its block-encoded target uses the unchanged QLSP pseudoinverse target and support gap."
+    },
+    {
+      "id": "alg-qa-27-qsvt-pseudoinverse",
+      "decision": "accept",
+      "reason": "Its block access and QLSP input contract are consistent with the unchanged task definition."
+    },
+    {
+      "id": "thm-qa-27-qsvt-inverse-state-cost",
+      "decision": "escalate",
+      "reason": "Owner phase-convention clarification is required for its vector-norm output statement."
+    },
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "decision": "accept",
+      "reason": "Its Hermitian support promise implies range support, and its clean B preparation is an explicit stronger access condition."
+    },
+    {
+      "id": "lem-qa-27-cks-stopping-time-instantiation",
+      "decision": "accept",
+      "reason": "Its singular-support and one-attempt target comparisons match the QLSP task; the phase ambiguity arises in the later amplified output statement."
+    },
+    {
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "decision": "escalate",
+      "reason": "Owner phase-convention clarification is required for its vector-norm output statement."
+    },
+    {
+      "id": "ex-qa-27-fixed-vs-variable-time-cost",
+      "decision": "accept",
+      "reason": "Its cost arithmetic uses the supported-state success model without changing the QLSP target."
+    },
+    {
+      "id": "ex-qa-27-sparse-diagonal-qlsp",
+      "decision": "accept",
+      "reason": "Its diagonal instance satisfies the gamma, normalization, and support assumptions."
+    },
+    {
+      "id": "block-encoding-linear-systems-and-variable-time-amplification",
+      "decision": "accept",
+      "reason": "Its required-page relation was checked; its CKS/QSVT content uses the unchanged QLSP interface, not the revised HHL procedure."
+    }
+  ]
+}

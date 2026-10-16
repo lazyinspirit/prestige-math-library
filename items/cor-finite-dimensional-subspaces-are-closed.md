@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/cor-finite-dimensional-subspaces-are-closed.json
 id: cor-finite-dimensional-subspaces-are-closed
 kind: corollary
 title: "A finite-dimensional normed subspace is closed"
@@ -7,23 +9,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-finite-dimensional-normed-spaces-are-banach, def-normed-subspace,
-       def-linear-basis, thm-rationals-countable, thm-n-cross-n-countable,
-       lem-q-and-irrationals-dense-r, thm-recursion, thm-well-ordering-principle,
-       cor-archimedean-reciprocal, rem-real-and-complex-normed-space-convention,
-       thm-complex-numbers-are-the-real-coordinate-plane]
+deps: [cor-finite-dimensional-normed-spaces-are-banach, def-normed-subspace, def-linear-basis, thm-rationals-countable, thm-n-cross-n-countable, lem-q-and-irrationals-dense-r, thm-recursion, thm-well-ordering-principle, cor-archimedean-reciprocal, thm-complex-numbers-are-the-real-coordinate-plane, def-complex-norm-and-complex-normed-space, def-complex-normed-subspace, def-realification-of-a-complex-vector-space, lem-complex-norm-realification-is-a-real-norm, lem-complex-normed-subspace-realifies-to-real-normed-subspace]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-astra
-    verdict: locally-repaired
-    date: 2026-09-09
-    scope: owner-authorized-local-ZF-finite-dimensional-closedness-repair
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -35,7 +25,7 @@ pipeline_run: frontier-29
 ## Statement
 
 Let $V$ be a normed space over $\mathbb K\in\{\mathbb R,\mathbb C\}$ and let
-$W\subseteq V$ be a normed subspace. If $W$ admits an ordered basis of finite
+$W\subseteq V$ be a normed subspace over that same field: use [[def-normed-subspace]] for $\mathbb R$ and [[def-complex-normed-subspace]] for $\mathbb C$. If $W$ admits an ordered basis of finite
 length, including length zero, then $W$ is closed in $V$. This holds in ZF,
 without a choice axiom; the ambient space need not be complete.
 
@@ -47,7 +37,7 @@ without a choice axiom; the ambient space need not be complete.
 
 [L2] An ordered basis is an independent finite list spanning its space; the empty list spans exactly the zero subspace ([[def-linear-basis]]).
 
-[L3] The restricted norm on a normed subspace is the ambient one ([[def-normed-subspace]]).
+[L3] The restricted norm on a normed subspace is the ambient one ([[def-normed-subspace]], [[def-complex-normed-subspace]]).
 
 [L4] Fix an enumeration $q:\mathbb N\to\mathbb Q$ and a bijection $p:\mathbb N^2\to\mathbb N$ ([[thm-rationals-countable]], [[thm-n-cross-n-countable]]). Rational numbers, identified with their real images, approximate every real number ([[lem-q-and-irrationals-dense-r]], clause 1).
 
@@ -55,7 +45,7 @@ without a choice axiom; the ambient space need not be complete.
 
 [L6] For every $\varepsilon>0$ some integer $k\ge1$ satisfies $1/k<\varepsilon$ ([[cor-archimedean-reciprocal]]).
 
-[L7] Restricting a complex normed space to real scalars leaves its metric unchanged ([[rem-real-and-complex-normed-space-convention]]). Every complex number has a unique real-imaginary decomposition with the usual coordinate arithmetic ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L7] Realification preserves the norm and metric ([[def-realification-of-a-complex-vector-space]], [[lem-complex-norm-realification-is-a-real-norm]]). A complex normed subspace realifies to a real normed subspace, and its supplied complex basis $b_j$ yields the real basis $b_j,ib_j$ ([[lem-complex-normed-subspace-realifies-to-real-normed-subspace]]). Complex coordinate arithmetic is given by [[thm-complex-numbers-are-the-real-coordinate-plane]].
 
 ## Proof
 

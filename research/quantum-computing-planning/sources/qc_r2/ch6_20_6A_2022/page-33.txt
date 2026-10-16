@@ -1,0 +1,89 @@
+6.5 Hidden Subgroup Problem
+27
+
+e2πi(k·x)/N = 1 so we obtain
+1
+�
+
+|H⊥|
+
+�
+
+k∈H⊥
+e2πik·x0/N|k⟩
+(6.136)
+
+Therefore if we Fourier sample — i.e. Fourier transform and then measure — the prob-
+ability distribution that governs the outcome is the uniform distribution on H⊥. Once
+we have sampled from H⊥enough times, with high probability a generating set for H⊥
+
+will be found.
+
+Query complexity
+
+How many samples are enough (assuming now that G is finite — e.g. G = Zn
+N — and
+H ⊆G)? Suppose K is a group (either abelian or not), and m elements of K are
+chosen uniformly at random. If these m elements do not generate K, then they must be
+contained in some maximal proper subgroup S ⊂K. (Proper means S is smaller than
+K, and maximal means we cannot add another element of K to S without generating all
+of K.) Any proper subgroup has order |S| ≤|K|/2, because the order of the subgroup
+must divide the order of K, and the probability that all m elements are in S is
+
+Prob(all m in S) =
+�|S|
+
+|K|
+
+�m
+;
+(6.137)
+
+therefore the probability that the m elements generate K is
+
+Prob(m elements generate K) ≥1 −
+�
+
+S∈max
+
+�|S|
+
+|K|
+
+�m
+≥1 −(# max)2−m,
+(6.138)
+
+where the sum is over maximal proper subgroups {S}, and where (# max) denotes the
+total number of maximal proper subgroups.
+If K is abelian, we can count the maximal proper subgroups. S is a sublattice of K
+and if S is a maximal proper subgroup, then its dual lattice S⊥contains a vector not
+in K⊥. There is only one such (linearly independent) vector if S is maximal, for if there
+were two then we could remove one, obtaining a smaller S⊥and hence a larger proper
+subgroup S. Any nontrivial vector not in K⊥determines such a subgroup, so there are
+|G/K⊥| −1 choices (where e.g. G = Zn
+N), and therefore
+
+Prob(m elements generate S) ≥1 −2−m|G/K⊥|.
+(6.139)
+
+In the case of the hidden subgroup problem where H ⊆G = Zn
+N, we are sampling
+K = H⊥and |G/K⊥| becomes |G/H|, the number of cosets. To have constant success
+probability, then, we choose m such that e.g.
+
+2−m|G/K⊥| < 1
+
+2,
+(6.140)
+
+or m −1 > log |G/H| (compare this with the conclusion for Simon’s problem). Since
+|G/H| < Nn; it suffices if m = O(n log N).
+How large should N be? For period finding with r ≤R, choosing N ≥R2 provided
+adequate precision for finding r. For an integral lattice with generator matrix M, its
+inverse matrix (transpose of M⊥) has entries that can be expressed as integer/ det M,
+where det M = |G/H|, the number of cosets. In the formulation of the HSP, we are
+provided with an upper bound |G/H| ≤R, and N needs to be large enough to point to
+a unique rational number with denominator ≤R with reasonable success probability.
+
+

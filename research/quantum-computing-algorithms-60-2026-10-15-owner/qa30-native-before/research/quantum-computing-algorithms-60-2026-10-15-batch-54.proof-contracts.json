@@ -1,0 +1,3001 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-30-hermitian-product-trace-real",
+    "lem-qa-30-positive-product-trace-nonnegative",
+    "def-qa-30-sdp-primal-dual-pair",
+    "lem-qa-30-normalized-hermitian-observable-effects",
+    "def-qa-30-mmw-game",
+    "thm-qa-30-sdp-weak-duality",
+    "lem-qa-30-exp-quadratic-bound",
+    "thm-qa-30-mmw-regret-bound",
+    "lem-qa-30-mmw-dual-output-feasibility",
+    "def-qa-30-variational-quantum-algorithm",
+    "def-qa-30-classical-optimizer-interface",
+    "def-qa-30-qaoa-circuit-and-objective",
+    "def-qa-30-vqe-rayleigh-objective",
+    "thm-qa-30-parameter-shift-rule",
+    "thm-qa-30-qaoa-expectation-bound",
+    "thm-qa-30-vqe-rayleigh-ritz-guarantee",
+    "lem-qa-30-capamplify-state-output-bound",
+    "def-qa-30-sdp-reference-state-access",
+    "lem-qa-30-sdp-trace-mean-ratio-identity",
+    "def-qa-30-quantum-membership-separation-model",
+    "def-qa-30-sdp-sparse-oracle-model",
+    "alg-qa-30-quantum-membership-to-separation",
+    "thm-qa-30-quantum-membership-separation-cost",
+    "alg-qa-30-sdp-gibbs-purification",
+    "thm-qa-30-sdp-gibbs-state-error-cost",
+    "alg-qa-30-sdp-matrix-expectation-oracle",
+    "thm-qa-30-sdp-matrix-expectation-cost",
+    "lem-qa-30-mmw-to-sdp-feasibility",
+    "thm-qa-30-sdp-binary-search-correctness",
+    "alg-qa-30-quantum-sdp-solver",
+    "thm-qa-30-quantum-sdp-solver-guarantee",
+    "thm-qa-30-quantum-sdp-solver-cost",
+    "ex-qa-30-sdp-weak-duality",
+    "cex-qa-30-variational-global-optimum",
+    "ex-qa-30-vqe-and-qaoa-objectives"
+  ],
+  "contracts": {
+    "lem-qa-30-hermitian-product-trace-real": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Conjugating the diagonal sum in [F5] entry by entry and using [F2] gives $\\overline{\\operatorname{tr}(AB)}=\\operatorname{tr}((AB)^*)$. For $n=0$, both sides are the empty sum $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "By [F1] and [F3], $(AB)^*=B^*A^*=BA$. Then [F4] gives $\\operatorname{tr}(BA)=\\operatorname{tr}(AB)$, so step 1.1 says $\\operatorname{tr}(AB)$ equals its conjugate and is real.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this empty boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "lem-qa-30-positive-product-trace-nonnegative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangl",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\t",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Let $R=P^{1/2}$ from [F2] and put $T=RQR$. Since $Q$ is nonnegative by [F1], self-adjointness of $R$ and the inner-product identity [F5] give $\\langle Tx,x\\rangle=\\langle QRx,Rx\\rangle\\ge0$ for every $x$. Thus every diagonal entry $\\langle Te_j,e_j\\rangle$ in an orthonormal coordinate basis is nonnegative real; summing by [F4] gives $\\operatorname{tr}(T)\\ge0$. This also holds in dimension zero because the trace is the empty sum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Since $P=R^2$, [F3] applied to $U=R$ and $V=RQ$ gives $\\operatorname{tr}(PQ)=\\operatorname{tr}(R(RQ))=\\operatorname{tr}((RQ)R)=\\operatorname{tr}(RQR)=\\operatorname{tr}(T)\\ge0$ by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this empty boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-sdp-primal-dual-pair": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "lem-qa-30-normalized-hermitian-observable-effects": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-finite-positive-effect-family",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, and let $I_H:H\\to H$ denote the identity map $x\\mapsto x$. An **effect** on $H$ is an endomorphism $E$ such that both $E$ and $I_H-E$ are non-negative in the sense of [[def-non-negative-and-positive-operator]]. A **finite complete positive family** is a nonempty finite list $(E_1,\\ldots,E_n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, the map\n$\\operatorname{tr}:M_n(F)\\to F$ is linear:\n\n$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-30-positive-product-trace-nonnegative",
+          "source_section": "Statement",
+          "quote": "If $P,Q\\in\\mathbb C^{n\\times n}$ are positive semidefinite, then $\\operatorname{tr}(PQ)\\ge0$ for every $n\\ge0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-30-hermitian-product-trace-real",
+          "source_section": "Statement",
+          "quote": "For Hermitian matrices $A,B\\in\\mathbb C^{n\\times n}$, $n\\ge0$, the trace $\\operatorname{tr}(AB)$ is real.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "By [F1], write the eigenvalues of $M$ with unit eigenvectors $e_k$ as $\\lambda_k$. Then [F7] gives $|\\lambda_k|=\\|Me_k\\|\\le\\|M\\|\\le1$, so the eigenvalues $(1\\pm\\lambda_k)/2$ of $E_\\pm$ lie in $[0,1]$. Hence $0\\preceq E_\\pm\\preceq I$, and direct addition gives $E_++E_-=I$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "By [F3] and [F5], $p_\\pm=\\operatorname{tr}(E_\\pm\\rho)$ are nonnegative; by [F6] they are real. Using [F4] and $\\operatorname{tr}(\\rho)=1$, $p_+-p_-=\\operatorname{tr}(((I+M)/2-(I-M)/2)\\rho)=\\operatorname{tr}(M\\rho)$. This is the mean of the $+1,-1$ outcomes.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this degenerate boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this endpoints boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-mmw-game": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Each $S_{t-1}$ is Hermitian, so [F1] diagonalizes it with real eigenvalues $\\lambda_k$. The eigenvalues $e^{-\\eta\\lambda_k}$ of $W_t$ are strictly positive; thus $W_t$ is positive definite and [F2] gives $\\operatorname{tr}(W_t)=\\sum_ke^{-\\eta\\lambda_k}>0$. Therefore $\\rho_t$ is defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Scaling the positive operator $W_t$ by its positive trace gives $\\rho_t\\succeq0$, and trace linearity gives $\\operatorname{tr}(\\rho_t)=1$. Thus each update is a density matrix and its cost is well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this degenerate boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this endpoints boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-sdp-weak-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-sdp-primal-dual-pair",
+          "source_section": "Definition",
+          "quote": "Fix integers $n\\ge0$ and $m\\ge0$, Hermitian matrices $C,A_1,\\ldots,A_m\\in\\mathbb C^{n\\times n}$, and $b=(b_1,\\ldots,b_m)\\in\\mathbb R^m$. The **primal semidefinite program** is\n$$\\sup\\{\\operatorname{tr}(CX):X\\in\\mathbb C^{n\\times n},\\ X\\succeq0,\\ \\operatorname{tr}(A_jX)\\le b_j\\ (1\\le j\\le m)\\},$$\nand its declared **dual program** is\n$$\\inf\\{b\\cdot y:y\\in\\math",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, the map\n$\\operatorname{tr}:M_n(F)\\to F$ is linear:\n\n$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-30-positive-product-trace-nonnegative",
+          "source_section": "Statement",
+          "quote": "If $P,Q\\in\\mathbb C^{n\\times n}$ are positive semidefinite, then $\\operatorname{tr}(PQ)\\ge0$ for every $n\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Expand $D=\\sum_jy_jA_j-C$ and use [F2] to obtain the displayed identity. Each scalar term is nonnegative because both $y_j$ and $b_j-\\operatorname{tr}(A_jX)$ are nonnegative by [F1]. The remaining term is nonnegative by [F1] and [F3] applied to $D,X$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The right side of the identity in step 1.1 is a sum of nonnegative real numbers, so $b\\cdot y-\\operatorname{tr}(CX)\\ge0$, which is the claimed inequality. No feasibility beyond [F1], optimizer, or strong-duality assumption is used.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this empty boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "lem-qa-30-exp-quadratic-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "If $u\\ge0$, the exponential series gives $e^u=1+u+\\sum_{k\\ge2}u^k/k!\\le1+u+u^2\\sum_{k\\ge2}1/k!<1+u+u^2$, since $0\\le u\\le1$ and $\\sum_{k\\ge2}1/k!<\\sum_{k\\ge2}2^{-(k-1)}=1$. If $u=-v\\le0$ with $0\\le v\\le1$, the alternating exponential series has decreasing term magnitudes, so $e^{-v}\\le1-v+v^2/2\\le1-v+v^2$. Thus $e^u\\le1+u+u^2$ for either sign.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Substitute $u=-\\eta x$ and use $|u|\\le\\eta$ to get $e^{-\\eta x}\\le1-\\eta x+\\eta^2x^2\\le1-\\eta x+\\eta^2$. Diagonalize $M$ by [F1]; each eigenvalue $x$ lies in $[-1,1]$, so the scalar inequality on every eigenvalue is precisely the stated Loewner inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this endpoints boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-mmw-regret-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-mmw-game",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, a round count $T\\ge1$, and Hermitian losses $M_1,\\ldots,M_T\\in\\mathbb C^{n\\times n}$ with $-I\\preceq M_t\\preceq I$, choose $0<\\eta\\le1$. Define $S_0=0$, $S_t=\\sum_{s=1}^tM_s$, $W_t=e^{-\\eta S_{t-1}}$, and $\\rho_t=W_t/\\operatorname{tr}(W_t)$. The round cost is $\\operatorname{tr}(M_t\\rho_t)$. The exponential is the finite-dimensional Hermitian spe",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-30-exp-quadratic-bound",
+          "source_section": "Statement",
+          "quote": "For $0<\\eta\\le1$ and $x\\in[-1,1]$,\n$$e^{-\\eta x}\\le1-\\eta x+\\eta^2.$$\nConsequently, if $M=M^*$ and $-I\\preceq M\\preceq I$, then $e^{-\\eta M}\\preceq I-\\eta M+\\eta^2I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-dimensional-golden-thompson-trace-inequality",
+          "source_section": "Statement",
+          "quote": "For Hermitian matrices $H,K\\in\\mathbb C^{p\\times p}$ with $p\\ge1$,\n$$\\operatorname{tr}\\exp(H+K)\\le\\operatorname{tr}\\bigl(\\exp(H)\\exp(K)\\bigr).$$\nHere $\\exp(A)=\\sum_{j=0}^{\\infty}A^j/j!$ is the norm-convergent finite-matrix exponential series. No commutativity assumption is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-30-positive-product-trace-nonnegative",
+          "source_section": "Statement",
+          "quote": "If $P,Q\\in\\mathbb C^{n\\times n}$ are positive semidefinite, then $\\operatorname{tr}(PQ)\\ge0$ for every $n\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-30-hermitian-product-trace-real",
+          "source_section": "Statement",
+          "quote": "For Hermitian matrices $A,B\\in\\mathbb C^{n\\times n}$, $n\\ge0$, the trace $\\operatorname{tr}(AB)$ is real.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Put $Z_t=\\operatorname{tr}(e^{-\\eta S_t})$ and $m_t=\\operatorname{tr}(M_t\\rho_t)$. Since $S_t$ is Hermitian, [F3] gives $Z_t\\le\\operatorname{tr}(e^{-\\eta S_{t-1}}e^{-\\eta M_t})$. By [F2], the difference $(I-\\eta M_t+\\eta^2I)-e^{-\\eta M_t}$ is positive semidefinite; apply [F4] with the positive matrix $e^{-\\eta S_{t-1}}$ to compare traces. The result is $Z_t\\le Z_{t-1}(1-\\eta m_t+\\eta^2)$. Also $m_t\\in[-1,1]$, so $1-\\eta m_t+\\eta^2>0$, and $1+u\\le e^u$ yields $Z_t\\le Z_{t-1}e^{-\\eta m_t+\\eta^2}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Iterating step 1.1 from $Z_0=n$ gives $Z_T\\le n\\exp(-\\eta\\sum_tm_t+\\eta^2T)$. If $S_T$ has eigenvalues $\\lambda_1,\\ldots,\\lambda_n$, [F5] gives $Z_T=\\sum_ke^{-\\eta\\lambda_k}\\ge e^{-\\eta\\lambda_{\\min}(S_T)}$. Taking natural logarithms and rearranging proves the inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this degenerate boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this endpoints boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "lem-qa-30-mmw-dual-output-feasibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-sdp-primal-dual-pair",
+          "source_section": "Definition",
+          "quote": "Fix integers $n\\ge0$ and $m\\ge0$, Hermitian matrices $C,A_1,\\ldots,A_m\\in\\mathbb C^{n\\times n}$, and $b=(b_1,\\ldots,b_m)\\in\\mathbb R^m$. The **primal semidefinite program** is\n$$\\sup\\{\\operatorname{tr}(CX):X\\in\\mathbb C^{n\\times n},\\ X\\succeq0,\\ \\operatorname{tr}(A_jX)\\le b_j\\ (1\\le j\\le m)\\},$$\nand its declared **dual program** is\n$$\\inf\\{b\\cdot y:y\\in\\math",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-30-mmw-game",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, a round count $T\\ge1$, and Hermitian losses $M_1,\\ldots,M_T\\in\\mathbb C^{n\\times n}$ with $-I\\preceq M_t\\preceq I$, choose $0<\\eta\\le1$. Define $S_0=0$, $S_t=\\sum_{s=1}^tM_s$, $W_t=e^{-\\eta S_{t-1}}$, and $\\rho_t=W_t/\\operatorname{tr}(W_t)$. The round cost is $\\operatorname{tr}(M_t\\rho_t)$. The exponential is the finite-dimensional Hermitian spe",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-30-mmw-regret-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $T\\ge1$, $0<\\eta\\le1$, and let $M_1,\\ldots,M_T$ be Hermitian with $-I\\preceq M_t\\preceq I$. For the update of [[def-qa-30-mmw-game]],\n$$\\sum_{t=1}^T\\operatorname{tr}(M_t\\rho_t)\\le\\lambda_{\\min}\\!\\left(\\sum_{t=1}^TM_t\\right)+\\eta T+\\frac{\\ln n}{\\eta}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "By $\\|A_j\\|,\\|C\\|\\le1$ and $\\|y_t\\|_1\\le r$, the triangle inequality gives $\\|M_t\\|\\le(r+1)/w=1$, so the regret bound applies. The trace-estimate assumptions and $\\sum_jy_{t,j}\\le r$ give $\\left|\\sum_jy_{t,j}\\widetilde a_{t,j}-\\widetilde c_t-\\operatorname{tr}\\!\\left(\\left(\\sum_jy_{t,j}A_j-C\\right)\\rho_t\\right)\\right|\\le(r+1)\\theta=w\\theta.$ Together with the shifted-oracle inequality, this implies $\\operatorname{tr}(M_t\\rho_t)\\ge-2\\theta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Sum the lower bounds from step 1.1 and combine them with [F3]. Writing $S=\\sum_tM_t$, we get $-2\\theta T\\le\\lambda_{\\min}(S)+\\eta T+\\ln(n)/\\eta$, hence $\\lambda_{\\min}(S/T)\\ge-(2\\theta+\\eta+\\ln(n)/(\\eta T))$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The dual slack of $\\bar y$ is $\\sum_j\\bar y_jA_j-C=\\gamma I+(w/T)S$, because the identity coefficient contributes $\\gamma A_1=\\gamma I$. Step 2.1 and the lower bound on $\\gamma$ make this matrix positive semidefinite. Also $\\bar y\\ge0$ and $b\\cdot\\bar y=\\gamma R+T^{-1}\\sum_tb\\cdot y_t\\le\\gamma R+\\alpha$. These are exactly the dual feasibility and objective claims in [F1].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 handles this endpoints boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-variational-quantum-algorithm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-30-hermitian-product-trace-real",
+          "source_section": "Statement",
+          "quote": "For Hermitian matrices $A,B\\in\\mathbb C^{n\\times n}$, $n\\ge0$, the trace $\\operatorname{tr}(AB)$ is real.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For unitary $U$, $U\\rho_kU^*$ is nonnegative because its quadratic form on $x$ is that of $\\rho_k$ on $U^*x$, and its trace is $\\operatorname{tr}(U\\rho_kU^*)=\\operatorname{tr}(\\rho_kU^*U)=1$ by [F1] and [F2]. Thus it is again a density operator.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Since $O_k$ and $U\\rho_kU^*$ are Hermitian, [F3] makes their trace product real. Applying the real-valued $f_k$ and summing shows $C(\\theta)\\in\\mathbb R$; the specified preparation, measurement, and optimizer data are additional algorithm inputs and imply no convergence conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-classical-optimizer-interface": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-qaoa-circuit-and-objective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "On $|x\\rangle$, the edge term $(I-Z_uZ_v)/2$ has eigenvalue $(1-(-1)^{x_u+x_v})/2$, which is $1$ exactly when $x_u\\ne x_v$ and $0$ otherwise. Thus $C_G|x\\rangle$ has eigenvalue equal to the cut size of $x$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The finite projective measurement law assigns probabilities $q_x\\ge0$ summing to one, so the expectation of the measured cut size is $\\sum_xq_x C_G(x)=\\langle\\psi|C_G|\\psi\\rangle_D$ by the diagonal spectral expansion. Each output is therefore a feasible cut with the stated score observable.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this empty boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-vqe-rayleigh-objective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Expand $|\\psi(\\theta)\\rangle=\\sum_jc_j|e_j\\rangle$ in the orthonormal eigenbasis from [F1], with eigenvalues $\\lambda_j$. The root convention in [F2] gives $E(\\theta)=\\sum_j\\lambda_j|c_j|^2$, a real number because each $\\lambda_j$ is real.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The coefficients satisfy $\\sum_j|c_j|^2=1$. Therefore $E(\\theta)$ is a convex combination of eigenvalues and is at least their minimum $E_0$. This defines a variational upper estimate of the ground energy, without asserting that the ansatz attains it.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this degenerate boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-parameter-shift-rule": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe em",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The power series and $P^2=I$ give $e^{-i\\theta P/2}=\\cos(\\theta/2)I-i\\sin(\\theta/2)P$. Absorb all other fixed circuit factors into fixed vectors/operators and expand the expectation bilinearly. Products of the two trigonometric factors reduce by the double-angle identities to $C(\\theta)=a+b\\cos\\theta+c\\sin\\theta$ for constants independent of $\\theta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Differentiating gives $C'(\\theta)=-b\\sin\\theta+c\\cos\\theta$. Direct substitution yields $C(\\theta+\\pi/2)-C(\\theta-\\pi/2)=2(-b\\sin\\theta+c\\cos\\theta)$, proving the formula. For a finite sum of such expectation terms, differentiation and the shifted difference both distribute linearly.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this degenerate boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-qaoa-expectation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-qaoa-circuit-and-objective",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple undirected graph, $p\\ge1$, and $\\gamma_1,\\ldots,\\gamma_p,\\beta_1,\\ldots,\\beta_p\\in\\mathbb R$. On $|V|$ qubits define\n$$C_G=\\sum_{(u,v)\\in E}\\frac{I-Z_uZ_v}{2},\\qquad B_G=\\sum_{v\\in V}X_v.$$\nPrepare $|+\\rangle^{\\otimes |V|}$ and apply, in the declared right-to-left product convention,\n$$U_{G,p}(\\gamma,\\beta)=\\prod_{j=p}^{1}e^{",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Write $q_x$ for the probability of bitstring $x$. By [F2], $q_x\\ge0$ and $\\sum_xq_x=1$. By [F1], every value $C_G(x)$ is a feasible cut size and lies in $[C_{\\min},C_{\\max}]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Multiply the pointwise inequalities by $q_x$ and sum over the finite bitstring set. This gives $C_{\\min}\\le\\sum_xq_xC_G(x)\\le C_{\\max}$; [F1] identifies the middle term with the QAOA objective. The argument supplies no positive ratio when $C_{\\max}=0$ and no optimization conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this empty boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-vqe-rayleigh-ritz-guarantee": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-vqe-rayleigh-objective",
+          "source_section": "Definition",
+          "quote": "Let $H=H^*$ be a Hermitian matrix on a nonzero finite-dimensional complex space, let $|\\psi_0\\rangle$ be a unit vector, and let $U(\\theta)$ be a supplied unitary ansatz. The variational eigenvalue objective is\n$$E(\\theta)=\\langle\\psi(\\theta)|H|\\psi(\\theta)\\rangle_D,\\qquad |\\psi(\\theta)\\rangle=U(\\theta)|\\psi_0\\rangle.$$\nThe target ground energy is $E_0=\\min\\s",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Let $e_j$ be an orthonormal eigenbasis with eigenvalues $\\lambda_j\\ge E_0$, and write $\\psi=\\sum_jc_je_j$. By [F1]–[F3], $E(\\theta)-E_0=\\sum_j(\\lambda_j-E_0)|c_j|^2\\ge0.$ The coefficients have squared magnitudes summing to one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Every summand in step 1.1 is nonnegative. The sum is zero exactly when $c_j=0$ for each $\\lambda_j>E_0$, which is exactly the condition that $\\psi$ belongs to the eigenspace for $E_0$, allowing any degeneracy there.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this degenerate boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this iff-forward boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this iff-reverse boundary."
+        }
+      ]
+    },
+    "lem-qa-30-capamplify-state-output-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\o",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-inverse-unitary-access",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional unitary $U$, **inverse access** is the explicitly granted operation $U^\\dagger=U^{-1}$. Its availability and query or gate charge are recorded separately from forward access, including any controlled access in [[def-qc-controlled-unitary-access]]. For a chronological sequence of length $k\\ge0$ that applies $U_1$ first and $U_k$ last,",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-natur",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\lo",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-exponential-series-has-infinite-radius",
+          "source_section": "Statement",
+          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "If $p=1$, a direct sample succeeds. If $0<p<1$, set $\\sin\\theta=\\sqrt p$ with $0<\\theta<\\pi/2$, and define unit vectors $|B\\rangle=(I-\\Pi)|\\psi\\rangle/\\sqrt{1-p}$ and $|G\\rangle=\\Pi|\\psi\\rangle/\\sqrt p$. Then $|\\psi\\rangle=\\cos\\theta|B\\rangle+\\sin\\theta|G\\rangle$. In this ordered basis, reflection about $|\\psi\\rangle$ has matrix $\\begin{pmatrix}\\cos2\\theta&\\sin2\\theta\\\\\\sin2\\theta&-\\cos2\\theta\\end{pmatrix}$ and the phase flip on the good space is $\\operatorname{diag}(1,-1)$. Their product is $\\begin{pmatrix}\\cos2\\theta&-\\sin2\\theta\\\\\\sin2\\theta&\\cos2\\theta\\end{pmatrix}$, a rotation by $2\\theta$. Induction using [F4] shows that after $j$ iterations the good probability is $\\sin^2((2j+1)\\theta)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For $p_{\\rm low}<1/2$, let $b=\\lceil\\log_2K\\rceil$. Since $K\\ge2$, minimality of $b$ gives $K/2^b\\ge1/2$. Conditional on $J<K$, the draw is uniform on the integers $0,\\ldots,K-1$. For $p\\le1/2$, using $\\sin^2u=(1-\\cos(2u))/2$ and $2\\sin(2\\theta)\\cos((4j+2)\\theta)=\\sin((4j+4)\\theta)-\\sin(4j\\theta)$ and summing over $j$ gives $\\frac1K\\sum_{j=0}^{K-1}\\sin^2((2j+1)\\theta)=\\frac12-\\frac{\\sin(4K\\theta)}{4K\\sin(2\\theta)}\\ge\\frac12-\\frac1{4K\\sin(2\\theta)}$. Since $\\sin(2\\theta)=2\\sqrt{p(1-p)}\\ge\\sqrt{2p}$ and $K\\ge1/\\sqrt{p_{\\rm low}}$, the conditional mean success is at least $1/2-1/(4\\sqrt2)>1/8$. Multiplying by $\\Pr(J<K)=K/2^b\\ge1/2$ gives randomized-branch success at least $1/16$. If $p>1/2$, the direct sample succeeds with probability greater than $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "In each round, the direct sample succeeds with probability $p$. When it does not, step 2.1 gives randomized-branch success at least $1/16$ if $p\\le1/2$; for $p>1/2$ or $p_{\\rm low}\\ge1/2$, direct success already exceeds $1/2$. Thus every fresh round succeeds with probability at least $1/16$. Put $t=1/16$. By [F7], $\\exp(-t)=1-t+\\sum_{k=1}^{\\infty}\\bigl(t^{2k}/(2k)!-t^{2k+1}/(2k+1)!\\bigr)\\ge1-t$: the series can be paired by [F11], and each pair equals $\\frac{t^{2k}}{(2k)!}(1-\\frac{t}{2k+1})\\ge0$. Hence $(15/16)^N\\le\\exp(-N/16)$. The cap gives $N/16\\ge\\ln(1/\\rho)$, so [F8] implies $\\exp(-N/16)\\le\\exp(-\\ln(1/\\rho))$. By [F9] and [F10], $\\exp(-\\ln(1/\\rho))\\exp(\\ln(1/\\rho))=1$ and $\\exp(\\ln(1/\\rho))=1/\\rho$, hence $\\exp(-\\ln(1/\\rho))=\\rho$. Independence of the fresh rounds now bounds total failure by $\\rho$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "Every successful direct or Grover branch is a projection onto $\\operatorname{ran}\\Pi$ of the same initial vector. In step 1.1 each iterate changes only the two scalar coordinates in $\\operatorname{span}\\{|B\\rangle,|G\\rangle\\}$, so its good component is a scalar multiple of $|G\\rangle$. Verification therefore preserves exactly the normalized good ray. Each round uses at most $K-1$ Grover iterations plus one direct preparation and $b$ random bits; multiplying by $N$ proves the stated call and random-bit orders, with each controlled/inverse/reflection/verifier cost charged.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-sdp-reference-state-access": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe em",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Applying $H^{\\otimes q}$ to $|0^q\\rangle$ gives $2^{-q/2}\\sum_{i=0}^{2^q-1}|i\\rangle$ by the one-qubit formula and tensor expansion. The subsequent CNOT layer maps each basis vector $|i\\rangle|0^q\\rangle$ to $|i\\rangle|i\\rangle$, so the output is exactly $2^{-q/2}\\sum_i|i,i\\rangle=|\\Phi_d\\rangle$ when $d=2^q$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The construction in step 1.1 has one Hadamard and one CNOT for each of $q$ bit positions and acts on the two declared $q$-qubit registers. For non-power-of-two $d$, the separately supplied $V_\\Phi$ contract is the entire preparation claim, and its cost is retained as $C_\\Phi$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "lem-qa-30-sdp-trace-mean-ratio-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-sdp-reference-state-access",
+          "source_section": "Definition",
+          "quote": "For an integer matrix dimension $d\\ge1$, define the maximally entangled reference vector\n$$|\\Phi_d\\rangle=d^{-1/2}\\sum_{i=0}^{d-1}|i\\rangle|i\\rangle$$\non two ordered $d$-dimensional registers. The access contract supplies a finite preparation unitary $V_\\Phi$, its inverse, width/ancillas, input encoding, and costs $C_\\Phi$. When $d=2^q$, a concrete preparati",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, the map\n$\\operatorname{tr}:M_n(F)\\to F$ is linear:\n\n$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-30-hermitian-product-trace-real",
+          "source_section": "Statement",
+          "quote": "For Hermitian matrices $A,B\\in\\mathbb C^{n\\times n}$, $n\\ge0$, the trace $\\operatorname{tr}(AB)$ is real.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For any $d\\times d$ matrix $X$, direct expansion of [F1] gives $\\langle\\Phi_d|(X\\otimes I)|\\Phi_d\\rangle_D=d^{-1}\\sum_i\\langle i|X|i\\rangle_D=\\operatorname{tr}(X)/d$. If $F$ is the second block's top-left amplitude, then $F^*F=(I+M/2)/4$. The composite success operator on the first register is $Fg/B$, so $p_M=\\frac1{dB^2}\\operatorname{tr}(gF^*Fg)=\\frac1{4dB^2}\\operatorname{tr}(e^{-G}(I+M/2)),$ where the second equality follows from [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "With $M=0$, step 1.1 gives $p_0=\\operatorname{tr}(e^{-G})/(4dB^2)>0$, since every eigenvalue of $e^{-G}$ is strictly positive. Linearity [F3] and the definition of $\\rho_G$ now give $p_M/p_0=1+\\operatorname{tr}(e^{-G}M)/(2\\operatorname{tr}(e^{-G}))=1+\\frac12\\operatorname{tr}(M\\rho_G)$. The traces are real by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-quantum-membership-separation-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "def-qa-30-sdp-sparse-oracle-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whethe",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-inverse-unitary-access",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional unitary $U$, **inverse access** is the explicitly granted operation $U^\\dagger=U^{-1}$. Its availability and query or gate charge are recorded separately from forward access, including any controlled access in [[def-qc-controlled-unitary-access]]. For a chronological sequence of length $k\\ge0$ that applies $U_1$ first and $U_k$ last,",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For each fixed pair $(k,\\ell)$, the padded value $j_{k,\\ell}$ is a fixed encoded string. XOR by that same string is an involution, so applying $O_I$ twice restores every basis state, including a slot whose value is the sentinel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The value oracle has the same basis-permutation form with the fixed encoded entry in its target XOR. It too is an involution on every valid or explicitly completed input basis state. Therefore both maps extend linearly to unitaries, and an inverse/controlled version is available only when supplied as in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "alg-qa-30-quantum-membership-to-separation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-quantum-membership-separation-cost": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "alg-qa-30-sdp-gibbs-purification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-sdp-gibbs-state-error-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-30-sdp-gibbs-purification",
+          "source_section": "Definition",
+          "quote": "Input a finite Hermitian loss matrix $H$, a certified spectral interval, sparse-entry and sparse-sum access, a costed reference-state preparation, a rational error budget, and a finite polynomial/phase certificate. The output is either the heralded normalized Gibbs purification or an explicit FAIL; no matrix exponential, QSVT phase list, state preparation, i",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-30-capamplify-state-output-bound",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a supplied finite-dimensional unitary preparation, $\\Pi$ a supplied success projector, and $|0\\rangle$ the declared initial vector. Let $p=\\|\\Pi V|0\\rangle\\|^2\\ge p_{\\rm low}>0$, where $p_{\\rm low}$ is a supplied positive rational, and let $0<\\rho<1$ be a supplied rational failure target. The following finite cap-amplification procedure returns th",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "By the reverse triangle inequality, $\\|\\widetilde v\\|\\ge\\|v\\|-\\|\\widetilde v-v\\|\\ge\\sqrt{p_G}-\\zeta\\ge\\sqrt{p_G}/2$, so the implemented branch is nonzero and its probability is at least $p_G/4$. Also $\\left\\|\\frac{\\widetilde v}{\\|\\widetilde v\\|}-\\frac v{\\|v\\|}\\right\\|\\le\\frac{\\|\\widetilde v-v\\|+|\\|v\\|-\\|\\widetilde v\\||}{\\|v\\|}\\le\\frac{2\\zeta}{\\sqrt{p_G}}.$ This proves the conditional-state bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Apply [F2] to the implemented preparation with lower success bound $p_{\\rm low}=p_G/4$. It returns the same normalized good projection as the conditional branch from step 1.1 with probability at least $2/3$. Since $p_{\\rm low}^{-1/2}=2p_G^{-1/2}$, its preparation/reflection call count is $O(p_G^{-1/2})$ for this fixed confidence; supplied QSVT, block, reference-state, inverse, compilation and precision costs remain additional.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "alg-qa-30-sdp-matrix-expectation-oracle": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-sdp-matrix-expectation-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-30-sdp-matrix-expectation-oracle",
+          "source_section": "Definition",
+          "quote": "Input an explicit finite purification circuit $V_\\rho$ preparing a unit vector whose reduced state on register $S$ is $\\rho$, together with its inverse and any controlled versions. Also supply a finite unitary dilation $W_M$ of the two-outcome POVM $E_\\pm=(I\\pm M)/2$ for a Hermitian contraction $M$, with an output bit and all work registers. Prepare the puri",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-29-quantum-expectation-error-cost",
+          "source_section": "Statement",
+          "quote": "Let $g:X\\to[a,b]$ be exactly encoded with $a\\le b$, let $V$ be the coherent sampler of [[def-qa-29-coherent-sampler]], and let $\\mu=\\sum_xp_xg(x)$. If $a=b$, the algorithm [[alg-qa-29-quantum-expectation-estimation]] returns $a=\\mu$ exactly. If $a<b$, then for rational $0<\\varepsilon\\le b-a$ and $0<\\delta<1$ it returns $\\widetilde\\mu$ with $|\\widetilde\\mu-\\m",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-30-sdp-gibbs-state-error-cost",
+          "source_section": "Statement",
+          "quote": "Let the ideal unnormalized Gibbs amplitude on the reference state be $|v\\rangle=((e^{-G/2}/B)\\otimes I)|\\Phi_d\\rangle$ with ideal flag probability $p_G=\\|v\\|^2>0$, where $B>0$ is the declared block-encoding normalization. Suppose the implemented flagged preparation has good-branch vector $|\\widetilde v\\rangle$ with $\\|\\widetilde v-v\\|\\le\\zeta$, and assume $0",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Apply [F2] to the interval $[-1,1]$ with tolerance $\\tau/2$; its interval width is $2$, so it returns the approximate-purification mean estimate within $\\tau/2$ with probability at least $1-\\delta$ and uses $O(\\tau^{-1}(1+\\ln(1/\\delta)))$ coherent rounds.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For unit vectors $|u\\rangle,|v\\rangle$ and a contraction $M$, expand $\\langle u|M|u\\rangle_D-\\langle v|M|v\\rangle_D=\\langle u-v|M|u\\rangle_D+\\langle v|M|u-v\\rangle_D$. Cauchy–Schwarz and unit norms bound its absolute value by $2\\|u-v\\|\\|M\\|\\le2\\xi$. Thus allocate $\\tau-2\\xi>0$ to the estimator when the target is the ideal Gibbs mean; a union bound makes $m$ simultaneous estimates fail with probability at most the sum of their declared failure budgets.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "lem-qa-30-mmw-to-sdp-feasibility": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-sdp-binary-search-correctness": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "alg-qa-30-quantum-sdp-solver": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-quantum-sdp-solver-guarantee": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "thm-qa-30-quantum-sdp-solver-cost": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement makes no one-dimensional boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "ex-qa-30-sdp-weak-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-sdp-primal-dual-pair",
+          "source_section": "Definition",
+          "quote": "Fix integers $n\\ge0$ and $m\\ge0$, Hermitian matrices $C,A_1,\\ldots,A_m\\in\\mathbb C^{n\\times n}$, and $b=(b_1,\\ldots,b_m)\\in\\mathbb R^m$. The **primal semidefinite program** is\n$$\\sup\\{\\operatorname{tr}(CX):X\\in\\mathbb C^{n\\times n},\\ X\\succeq0,\\ \\operatorname{tr}(A_jX)\\le b_j\\ (1\\le j\\le m)\\},$$\nand its declared **dual program** is\n$$\\inf\\{b\\cdot y:y\\in\\math",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-30-sdp-weak-duality",
+          "source_section": "Statement",
+          "quote": "For every primal-feasible $X$ and dual-feasible $y$ in [[def-qa-30-sdp-primal-dual-pair]], $\\operatorname{tr}(CX)\\le b\\cdot y$. More precisely,\n$$b\\cdot y-\\operatorname{tr}(CX)=\\sum_{j=1}^m y_j\\bigl(b_j-\\operatorname{tr}(A_jX)\\bigr)+\\operatorname{tr}\\!\\left(\\left(\\sum_{j=1}^m y_jA_j-C\\right)X\\right),$$\nand every term on the right is nonnegative.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The primal feasible interval is $[0,1]$, so $x\\le1$ for every feasible $x$, and $x=1$ is feasible; hence the attained primal maximum is $1$. The dual constraints are $y\\ge0$ and $y\\ge1$, so every feasible $y$ is at least $1$, with equality feasible; hence the attained dual minimum is $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For arbitrary feasible $x,y$, step 1.1 gives $x\\le1\\le y$, so the objectives satisfy weak duality, in agreement with [F2]. The equality of the two attained values is verified for this example only and is not inferred in general.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "cex-qa-30-variational-global-optimum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-vqe-rayleigh-objective",
+          "source_section": "Definition",
+          "quote": "Let $H=H^*$ be a Hermitian matrix on a nonzero finite-dimensional complex space, let $|\\psi_0\\rangle$ be a unit vector, and let $U(\\theta)$ be a supplied unitary ansatz. The variational eigenvalue objective is\n$$E(\\theta)=\\langle\\psi(\\theta)|H|\\psi(\\theta)\\rangle_D,\\qquad |\\psi(\\theta)\\rangle=U(\\theta)|\\psi_0\\rangle.$$\nThe target ground energy is $E_0=\\min\\s",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-30-vqe-rayleigh-ritz-guarantee",
+          "source_section": "Statement",
+          "quote": "For every ansatz parameter $\\theta$, $E(\\theta)\\ge E_0$, with equality exactly when $|\\psi(\\theta)\\rangle$ lies in the ground eigenspace of $H$. Thus a VQE evaluation gives an upper bound on the ground energy, but an ansatz family or classical optimizer need not reach $E_0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The eigenvalues of $H$ are $0,1$, so $E_0=0$ and its ground eigenspace is $\\operatorname{span}\\{|0\\rangle\\}$. The only ansatz state $|1\\rangle$ is orthogonal to that eigenspace.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Direct multiplication gives $H|1\\rangle=|1\\rangle$, hence the ansatz energy is $1>0=E_0$. It still satisfies [F2], so the universal ansatz-coverage claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    },
+    "ex-qa-30-vqe-and-qaoa-objectives": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-30-vqe-rayleigh-ritz-guarantee",
+          "source_section": "Statement",
+          "quote": "For every ansatz parameter $\\theta$, $E(\\theta)\\ge E_0$, with equality exactly when $|\\psi(\\theta)\\rangle$ lies in the ground eigenspace of $H$. Thus a VQE evaluation gives an upper bound on the ground energy, but an ansatz family or classical optimizer need not reach $E_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-30-qaoa-circuit-and-objective",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple undirected graph, $p\\ge1$, and $\\gamma_1,\\ldots,\\gamma_p,\\beta_1,\\ldots,\\beta_p\\in\\mathbb R$. On $|V|$ qubits define\n$$C_G=\\sum_{(u,v)\\in E}\\frac{I-Z_uZ_v}{2},\\qquad B_G=\\sum_{v\\in V}X_v.$$\nPrepare $|+\\rangle^{\\otimes |V|}$ and apply, in the declared right-to-left product convention,\n$$U_{G,p}(\\gamma,\\beta)=\\prod_{j=p}^{1}e^{",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-30-qaoa-expectation-bound",
+          "source_section": "Statement",
+          "quote": "For the finite graph and circuit of [[def-qa-30-qaoa-circuit-and-objective]], the QAOA objective lies between the minimum and maximum feasible cut sizes, and each computational-basis measurement returns a feasible cut. This expected-value statement alone implies no universal approximation ratio, global optimizer, or advantage guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The eigenvalues of $Z_1+2Z_2$ on $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$ are $3,-1,1,-3$, so the ground energy is $-3$. The product ansatz has energy $\\cos\\theta+2\\cos\\phi$: at $(\\pi/2,0)$ this is $2$, and at $(\\pi,\\pi)$ the state is $|11\\rangle$ with energy $-3$. Thus both the displayed trial value and attainment claim are verified.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For QAOA, the initial state is $(|00\\rangle+|01\\rangle+|10\\rangle+|11\\rangle)/2$. The cost unitary multiplies only $|01\\rangle,|10\\rangle$ by $e^{-i\\pi/2}=-i$. With $R_x(\\pi/4)=\\begin{pmatrix}\\cos(\\pi/8)&-i\\sin(\\pi/8)\\\\-i\\sin(\\pi/8)&\\cos(\\pi/8)\\end{pmatrix}$ on each wire, direct multiplication gives zero amplitudes for $00,11$ and amplitude $-i/\\sqrt2$ for each of $01,10$. By [F4], the probabilities are $1/2,1/2,0,0$ in the stated order, so the expected cut value is $1$, in agreement with [F2]–[F3].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain excludes or does not concern the empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated claim has no zero boundary parameter or the proof does not assert one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement makes no eigenvalue-multiplicity boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles this endpoints boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no arbitrary existence or selection claim; its proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no equivalence claim requiring this direction."
+        }
+      ]
+    }
+  }
+}

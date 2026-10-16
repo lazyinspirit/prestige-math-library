@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-hopf-hecke-75-2026-10-15-owner/published-repairs/def-metric-bounded-diameter.json
 id: def-metric-bounded-diameter
 kind: definition
 title: "Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space"
@@ -9,20 +11,12 @@ provenance:
   proof: not-applicable
 deps: [def-metric-space, def-metric-ball, def-bounded-set, def-infimum,
        thm-infimum-property, lem-sup-unique, def-complete-ordered-field,
-       lem-metric-nonnegativity, rem-sup-conventions, lem-of-add-order,
+       lem-metric-nonnegativity, lem-of-add-order,
        def-ordered-field]
 justified_by: []
 aliases: [def-metric-diameter, def-distance-to-set]
 landmark: false
 short: "bounded, $\\operatorname{diam}$, $d(x,A)$"
-verification:
-  precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-08-02
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -81,10 +75,10 @@ $$d(A,B) := \inf E(A,B).$$
 
 **Every one of the three scope restrictions is load bearing.** In this library
 $\sup$ and $\inf$ denote real numbers and are written only after existence has
-been established; the extended real line is introduced on a later page and is
-not used for the suprema and infima taken here, and no convention
-$\sup \emptyset = -\infty$ is in force in this development
-([[rem-sup-conventions]]). Accordingly:
+been established; the least-upper-bound property of [[def-complete-ordered-field]] and the
+greatest-lower-bound property of [[thm-infimum-property]] apply to nonempty
+real sets with the respective bounds. Empty or unbounded sets acquire no
+real supremum or infimum by convention. Accordingly:
 
 - $\operatorname{diam}(A)$ is defined exactly when $A$ is nonempty **and**
   bounded. It is not defined for $A = \emptyset$, and it is not defined, not even

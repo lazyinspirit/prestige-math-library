@@ -1,0 +1,781 @@
+===== PDF PAGE 61 =====
+
+The phases χs(g) do not affect the probabilities of the final measurement, since |χs(g)|2 = 1. The
+above algorithm thus samples uniformly from the (labels of) elements of H⊥. Each such element
+χg ∈H⊥gives us a constraint on H because χg(h) = 1 for all h ∈H.4 Generating a small number
+of such elements will give sufficient information to find the generators of H itself. Consider our
+earlier examples of Abelian HSP:
+
+Simon’s problem.
+Recall that G = Zn
+2 = {0, 1}n and H = {0, s} for the HSP corresponding
+to Simon’s problem. Setting up the uniform superposition over G can be done by applying H⊗n
+
+to the initial state |0n⟩of the first register. The QFT corresponding to G is just H⊗n. The 2n
+
+characters are χg(x) = (−1)x·g. The algorithm will uniformly sample from labels of elements of
+
+H⊥= {χg | χg(h) = 1 for all h ∈H} = {χg | g · s = 0}.
+
+Accordingly, the algorithm samples uniformly from the g ∈{0, 1}n such that g · s = 0 (mod 2).
+Doing this an expected O(n) times gives n −1 linearly independent equations about s, from which
+we can find s using Gaussian elimination.
+
+Period-finding.
+For the HSP corresponding to period-finding, G = Zϕ(N) and H = ⟨r⟩, and
+
+H⊥= {χb | e2πibh/ϕ(N) = 1 for all h ∈H} = {χb | br/ϕ(N) ∈{0, . . . , r −1}}.
+
+Accordingly, the output of the algorithm is an integer multiple b = cϕ(N)/r of ϕ(N)/r, for uniformly
+random c ∈{0, . . . , r −1}.
+Notice that the algorithm doesn’t actually know ϕ(N), which creates two problems. First, of
+the 4 numbers b, c, ϕ(N), r involved in the equation b = cϕ(N)/r we only know the measurement
+outcome b, which is not enough to compute r. Second, step 5 of the algorithm wants to do a QFT
+corresponding to the group Zϕ(N) but it doesn’t know ϕ(N); and even if we knew ϕ(N), we’ve
+only seen how to efficiently implement a QFT over Zq when q is a power of 2. Fortunately, if we
+actually use the QFT over Zq for q a power of 2 that is roughly N2 (and in step 1 set up a uniform
+superposition over Zq instead of over G), then one can show that the above algorithm still works:
+the measurement yields an integer b that (with constant probability) is close to an integer multiple
+of q/r.5 This is basically just Shor’s algorithm as described in Chapter 5.
+
+Discrete logarithm.
+For the HSP corresponding to the discrete log problem, where G = ZN×ZN
+and H = ⟨(a, 1)⟩, a small calculation shows that H⊥= {χ(c,−ac) | c ∈ZN} (see Exercise 2). Hence
+sampling from H⊥yields some label (c, −ac) ∈G of an element of H⊥, from which we can compute
+the discrete logarithm a if gcd(c, N) = 1 (repeating a small number of times will give such a c
+with high probability). The QFT corresponding to G is FN ⊗FN, which we don’t know how to
+implement efficiently for arbitrary N, but which we can replace by Fq ⊗Fq for some power-of-2 q
+chosen to be somewhat larger than N.
+
+4This is a linear constraint mod N. For example, say G = ZN1 × ZN2, and g = (g1, g2) is the label of an element
+of H⊥. Then 1 = χg(h) = ωg1h1
+N1
+ωg2h2
+N2
+for all h = (h1, h2) ∈H, equivalently g1h1N2 + g2h2N1 = 0 mod N1N2.
+5There is something that needs to be proved here, but we will skip the details. In fact one can even use a Fourier
+transform for q = O(N) instead of O(N 2) [134]. Note that this also reduces the number of qubits used by Shor’s
+algorithm from roughly 3 log N to roughly 2 log N.
+
+49
+
+
+===== PDF PAGE 62 =====
+
+In the above algorithm we assumed G is a finite Abelian group. These techniques have been much
+extended to the case of infinite groups such as G = Z and even Rd, to obtain efficient quantum
+algorithms for problems like Pell’s equation [135], and computing properties in number fields [61].
+
+6.3
+General non-Abelian HSP
+
+6.3.1
+The symmetric group and the graph isomorphism problem
+
+The Abelian HSP covers a number of interesting computational problems, including period-finding
+and discrete log. However, there are also some interesting computational problems that can be cast
+as an instance of HSP with a non-Abelian G. Unfortunately we do not have an efficient algorithm
+for most non-Abelian HSPs.
+A good example is the graph isomorphism (GI) problem: given two undirected n-vertex graphs
+G1 and G2, decide whether there exists a bijection taking the vertices of G1 to those of G2 that
+makes the two graphs equal. No efficient classical algorithm is known for GI, so it would be great
+if we could solve this efficiently on a quantum computer.6
+
+How can we try to solve this via the HSP? Let G be the 2n-vertex graph that is the disjoint
+union of the two graphs G1 and G2. Let G = S2n. Let f map π ∈S2n to π(G), which means that
+edge (i, j) becomes edge (π(i), π(j)). Let H be the automorphism group Aut(G) of G, which is the
+set of all π ∈S2n that map G to itself. This gives an instance of the HSP, and solving it would give
+us a generating set of H = Aut(G).
+Assume for simplicity that each of G1 and G2 is connected. If G1 and G2 are not isomorphic,
+then the only automorphisms of G are the ones that permute vertices inside G1 and inside G2:
+Aut(G) = Aut(G1) × Aut(G2). However, if the two graphs are isomorphic, then Aut(G) will also
+contain a permutation that swaps the first n with the second n vertices. Accordingly, if we were
+able to find a generating set of the hidden subgroup H = Aut(G), then we can just check whether
+all generators are in Aut(G1) × Aut(G2) and decide graph isomorphism.
+
+6.3.2
+Non-Abelian QFT on coset states
+
+One can try to design a quantum algorithm for general, non-Abelian instances of the HSP along the
+lines of the earlier standard algorithm: set up a uniform superposition over a random coset of H,
+apply the QFT corresponding to G, measure the final state, and hope that the result gives useful
+information about H. QFTs corresponding to non-Abelian G are much more complicated than in
+the Abelian case, because the irreducible representations ρ can now have dimension d > 1. For
+completeness, let’s write down the QFT anyway. Let �G denote the set of irreducible representations
+of G, and dim(ρ) be the dimension of a particular ρ ∈�G. We can assume without loss of generality
+that the dim(ρ) × dim(ρ) matrices ρ(g) are unitary. The QFT corresponding to G is defined as
+follows:
+
+|g⟩�−→
+�
+
+ρ∈�G
+
+�
+
+dim(ρ)
+
+|G|
+|ρ⟩
+
+dim(ρ)
+�
+
+i,j=1
+ρ(g)ij|i, j⟩,
+
+where |ρ⟩denotes a name or label of ρ. It can be shown that this map is unitary. In particular,
+|G| = �
+
+ρ∈�G dim(ρ)2, which implies that the dimensions on the left and the right are the same,
+
+6For a long time, the best algorithm for GI took time roughly 2
+√n [34], but in a recent breakthrough Babai gave a
+“quasi-polynomial” algorithm, which is 2(log n)O(1) time [33]. That’s not yet polynomial, but a lot faster than before.
+
+50
+
+
+===== PDF PAGE 63 =====
+
+and that the right-hand state has norm 1.
+In many cases this QFT can still be implemented
+with an efficient quantum circuit, including for the symmetric group G = S2n that is relevant for
+graph isomorphism [38, 200]. However, that is not enough for an efficient algorithm: the standard
+algorithm does not always yield much information about the hidden H ≤S2n [131, 201, 136].
+There are some special cases of non-Abelian HSP that can be computed efficiently, for instance
+for normal subgroups [137], solvable groups [258, 148], and nil-2 groups [149].
+
+6.3.3
+Query-efficient algorithm
+
+While we do not have a general efficient quantum algorithm for the non-Abelian HSP, there does
+exist an algorithm that needs to compute f only a few times, i.e., a query-efficient algorithm, due
+to Ettinger et al. [113]. We will sketch this now.
+Consider steps 1–3 of the standard algorithm for the Abelian case. Even in the general non-
+Abelian case, this produces a coset state, i.e., a two-register superposition where the second register
+ranges over the values of f, and the first register will be a uniform superposition over the coset of
+H that corresponds to that value of f. Suppose we do this m times, producing a state |ψH⟩which
+is the tensor product of m coset states for the same unknown H (for simplicity, below we’ll ignore
+the fact that this state also depends on the particular values f takes on the cosets of H). One can
+show that the coset states corresponding to different possible H are pairwise almost orthogonal:
+|⟨ψH|ψH′⟩| is exponentially small in m. How large should we take m to ensure that these states are
+“sufficiently orthogonal” to enable us to learn H from |ψH⟩? The hidden subgroup H is generated
+by a set of ≤log |G| elements. Hence the total number of possible H that we want to distinguish is
+at most
+�|G|
+log |G|
+�
+≤2(log |G|)2. This upper bound on the number of possible H allows us to define a
+POVM measurement {EH} (see Section 1.2.2 for the definition of POVM), with one element for each
+possible hidden subgroup H, such that if we measure |ψH⟩with this POVM, then we are likely to
+get the correct outcome H. Choosing m = O((log |G|)2) makes the states “sufficiently orthogonal”
+for this idea to work (see Exercise 4). This POVM need not be efficiently implementable: circuits
+to implement it (using only a computational-basis measurement at the end) may require a number
+of elementary gates that’s polynomial in |G|. But at least the number of times we need to query
+the function f is only polylogarithmic in |G|.
+
+For those interested in more HSP results, a good source is Childs’s lecture notes [87, Chapter 4–14].
+
+Exercises
+
+1. Show that the Deutsch-Jozsa problem for n = 1 (i.e., where f : {0, 1} →{0, 1}) is an instance
+of the HSP. Explicitly say what G, f, H, and H⊥are, and how sampling from H⊥allows you
+to solve the problem.
+
+2. Show that for the HSP corresponding to discrete log, we indeed have H⊥= {χ(c,−ac) | c ∈ZN}
+as claimed near the end of Section 6.2.2.
+
+3. This exercise explains Diffie-Hellman key exchange, which is secure under the assumption
+that the adversary cannot efficiently compute discrete logarithms. Alice and Bob choose a
+public key consisting of a large prime p (say, of 1000 or 2000 bits) and generator γ of the
+group Z∗
+p, which has size ϕ(p) = p −1. To agree on a shared secret key K, Alice chooses a
+uniformly random a ∈{0, . . . , p −2} and sends Bob the group element A = γa; Bob chooses
+
+51
+
+
+===== PDF PAGE 64 =====
+
+a uniformly random b ∈{0, . . . , p−2} and sends Alice B = γb. Alice and Bob use K = γab as
+their secret key, which they can use for instance to encrypt messages using a one-time pad.
+
+(a) Show that both Alice and Bob can efficiently compute K given the communication.
+
+(b) Show that an adversary who can efficiently compute discrete logarithms, can compute
+K from the public key and the communication tapped from the channel (i.e., A, B, p
+and γ, but not a and b).
+
+4. Suppose we are given an unknown state |ψi⟩from a known set of K states {|ψj⟩| j ∈[K]}.
+
+(a) Suppose the states are pairwise orthogonal: ⟨ψj|ψk⟩= δjk. Give a projective measure-
+ment that determines i with probability 1.
+
+(b) (H) Suppose the states are pairwise almost orthogonal: |⟨ψj|ψk⟩| ≤1/100K2 for all
+distinct j, k ∈[K]. Define Ei = 2
+
+3|ψi⟩⟨ψi|. Show that I−�K
+i=1 Ei is positive semidefinite.
+
+(c) Under the same assumption as (b), give a POVM that determines i with success prob-
+ability at least 2/3.
+
+5. (H) Suppose we have an efficient algorithm to produce, from a given undirected n-vertex
+graph G, the following n2-qubit state:
+
+aG
+�
+
+π∈Sn
+|π(G)⟩,
+
+where the basis states correspond to n×n adjacency matrices. Here aG is a scalar that makes
+the norm equal to 1. Use this procedure to efficiently decide (with high success probability)
+whether two given graphs G1 and G2 are isomorphic or not.
+
+52
+
+
+===== PDF PAGE 65 =====
+
+Chapter 7
+
+Grover’s Search Algorithm
+
+The second-most important quantum algorithm after Shor’s is Grover’s search algorithm [132]. It
+doesn’t provide an exponential speed-up, only a quadratic speed-up, but it is much more widely
+applicable than Shor.
+
+7.1
+The problem
+
+The search problem:
+For N = 2n, we are given an arbitrary x ∈{0, 1}N. The goal is to find an i such that xi = 1 (and
+to output ‘no solutions’ if there are no such i). We denote the number of solutions in x by t (i.e.,
+t is the Hamming weight of x).
+
+This problem may be viewed as a simplification of the problem of searching an N-slot unordered
+database or search space, modeled by an N-bit string. Classically, a randomized algorithm would
+need Θ(N) queries to solve the search problem. Grover’s algorithm solves it in O(
+√
+
+N) queries,
+and O(
+√
+
+N log N) other gates (the number of gates can be reduced a bit further, see Exercise 9).
+
+7.2
+Grover’s algorithm
+
+Let Ox,±|i⟩= (−1)xi|i⟩denote the ±-type oracle for the input x (i.e., a phase-query), and R0 be
+the unitary transformation that puts a −1 in front of all basis states |i⟩where i ̸= 0n, and that
+does nothing to the basis state |0n⟩.1 The Grover iterate is
+
+G = H⊗nR0H⊗nOx,±.
+(7.1)
+
+Note that 1 Grover iterate makes 1 query, and uses O(log N) other gates.
+Grover’s algorithm starts in the n-bit state |0n⟩, applies a Hadamard transformation to each
+qubit to get the uniform superposition |U⟩=
+1
+√
+
+N
+�
+i |i⟩of all N indices, applies G to this state k
+times (for some k to be chosen later), and then measures the final state. Intuitively, what happens
+is that in each iteration some amplitude is moved from the indices of the 0-bits to the indices of
+the 1-bits. The algorithm stops when almost all of the amplitude is on the 1-bits, in which case a
+measurement of the final state will probably give the index of a 1-bit. Figure 7.1 illustrates this.
+
+1This unitary R0 is independent of x, and can be implemented using O(n) elementary gates (Exercise 2.9.a).
+
+53
+
+
+===== PDF PAGE 66 =====
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+|0⟩
+
+|0⟩
+
+|0⟩
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+measure
+
+H
+
+H
+
+H
+
+G
+G
+
+. . .
+
+. . .
+
+. . .
+
+G
+
+�
+��
+�
+k
+
+Figure 7.1: Grover’s algorithm, with k Grover iterates
+
+In order to analyze this, define the following “good” and “bad” states, corresponding to the
+solutions and non-solutions, respectively:
+
+|G⟩= 1
+√
+
+t
+
+�
+
+i:xi=1
+|i⟩and |B⟩=
+1
+√
+
+N −t
+
+�
+
+i:xi=0
+|i⟩.
+
+Then the uniform state over all indices can be written as
+
+|U⟩=
+1
+√
+
+N
+
+N−1
+�
+
+i=0
+|i⟩= sin(θ)|G⟩+ cos(θ)|B⟩,
+for θ = arcsin
+�
+
+t/N.
+
+The Grover iterate G is actually the product of two reflections. A reflection through a subspace V
+is a unitary A such that Av = v for all vectors v ∈V , and Aw = −w for all w that are orthogonal
+to V . Note that we can write A = 2PV −I, where PV is the projector onto subspace V . If V is
+1-dimensional, spanned by vector u, we also call this a reflection through u.
+Firstly, Ox,± is a reflection through the subspace V spanned by the basis states that are not
+solutions; restricted to the 2-dimensional space spanned by |G⟩and |B⟩this is in fact just a reflection
+through the state |B⟩.2 Secondly,
+
+H⊗nR0H⊗n = H⊗n(2|0n⟩⟨0n| −I)H⊗n = 2H⊗n|0n⟩⟨0n|H⊗n −H⊗nIH⊗n = 2|U⟩⟨U| −I
+
+is a reflection through |U⟩.
+Here is Grover’s algorithm restated, assuming we know the fraction of solutions is ε = t/N:
+
+1. Set up the starting state |U⟩= H⊗n|0⟩
+
+2. Repeat the following k = O(1/√ε) times:
+
+(a) Reflect through |B⟩(i.e., apply Ox,±)
+
+(b) Reflect through |U⟩(i.e., apply H⊗nR0H⊗n)
+
+3. Measure the first register and check that the resulting i is a solution
+
+2Note that Ox,± is not (and is not claimed to be, and does not need to be for our purposes) a reflection through |B⟩
+in the full N-dimensional space. For example, if 3 and 4 are non-solutions, then the state
+1
+√
+
+2(|3⟩−|4⟩) is orthogonal
+to |B⟩, yet Ox,± maps that state to itself rather than to minus itself (the latter is what a reflection through |B⟩in
+the full N-dimensional space would do).
+
+54
+
+
+===== PDF PAGE 67 =====
+
+Geometric argument:
+There is a fairly simple geometric argument why the algorithm works.
+The analysis is in the 2-dimensional real plane spanned by |B⟩and |G⟩. We start with
+
+|U⟩= sin(θ)|G⟩+ cos(θ)|B⟩.
+
+The two reflections (a) and (b) increase the angle from θ to 3θ, moving us towards the good state
+as illustrated in Figure 7.2.
+
+|B⟩
+
+|G⟩
+
+θ
+|U⟩
+
+✻
+
+✲
+✿
+|B⟩
+
+|G⟩
+
+θ
+θ
+
+|U⟩
+
+Ox,±|U⟩
+
+✻
+
+✲
+✿
+
+③
+|B⟩
+
+|G⟩
+
+θ
+2θ
+|U⟩
+
+G|U⟩
+✻
+
+✲
+✿
+
+✣
+
+Figure 7.2: The first iteration of Grover: (picture on the left) start with |U⟩; (middle) reflect
+through |B⟩to get Ox,±|U⟩; (right) reflect through |U⟩to get G|U⟩
+
+The next two reflections (a) and (b) increase the angle with another 2θ, etc. More generally,
+after k applications of (a) and (b) our state has become
+
+sin((2k + 1)θ)|G⟩+ cos((2k + 1)θ)|B⟩.
+
+If we now measure, then the probability of seeing a solution is Pk = sin((2k + 1)θ)2. We want Pk
+to be as close to 1 as possible. Note that if we can choose ˜k = π
+
+4θ −1/2, then (2˜k + 1)θ = π/2 and
+hence P˜k = sin(π/2)2 = 1. An example where this works is if t = N/4, for then θ = π/6 and ˜k = 1.
+Unfortunately ˜k = π
+
+4θ −1/2 will usually not be an integer, and we can only do an integer number
+of Grover iterations. However, if we choose k to be the integer closest to ˜k, then our final state will
+still be close to |G⟩and the failure probability will still be small (assuming t ≪N):
+
+1 −Pk
+=
+cos((2k + 1)θ)2 = cos((2˜k + 1)θ + 2(k −˜k)θ)2
+
+=
+cos(π/2 + 2(k −˜k)θ)2 = sin(2(k −˜k)θ)2 ≤sin(θ)2 = t
+
+N ,
+
+where we used |k −˜k| ≤1/2. Since θ = arcsin
+�
+
+t/N ≥
+�
+
+t/N, the number of queries is k ≤π
+
+4θ ≤
+
+π
+4
+
+�
+
+N
+
+t .
+
+Algebraic argument:
+For those who don’t like geometry, here’s an alternative (but equivalent)
+algebraic argument.
+Let ak denote the amplitude of the indices of the t 1-bits after k Grover
+iterates, and bk the amplitude of the indices of the 0-bits. Initially, for the uniform superposition
+|U⟩we have a0 = b0 = 1/
+√
+
+N. Using that H⊗nR0H⊗n =
+2
+N J −I, where J is the N × N all-1s
+matrix, we find the following recursion:
+
+ak+1
+=
+N −2t
+
+N
+ak + 2(N −t)
+
+N
+bk
+
+bk+1
+=
+−2t
+
+N ak + N −2t
+
+N
+bk
+
+55
+
+
+===== PDF PAGE 68 =====
+
+The following formulas, due to Boyer et al. [64], provide a closed form for ak and bk (which may be
+verified by substituting them into the recursion). With θ = arcsin
+�
+
+t/N as before, define
+
+ak
+=
+1
+√
+
+t sin((2k + 1)θ)
+
+bk
+=
+1
+√
+
+N −t cos((2k + 1)θ)
+
+Accordingly, after k iterations the success probability (the sum of squares of the amplitudes of the
+locations of the t 1-bits) is the same as in the geometric analysis
+
+Pk = t · a2
+k = (sin((2k + 1)θ))2.
+
+Thus we have a bounded-error quantum search algorithm with O(
+�
+
+N/t) queries, assuming we
+know t. We now list (without full proofs) a number of useful variants of Grover:
+
+• If we know t exactly, then the algorithm can be tweaked to end up in exactly the good state.
+Roughly speaking, you can make the angle θ slightly smaller, such that ˜k = π/4θ −1/2
+becomes an integer (see Exercise 5).
+
+• If we do not know t, then there is a problem: we do not know which k to use, so we do
+not know when to stop doing the Grover iterates. Note that if k gets too big, the success
+probability Pk = (sin((2k + 1)θ))2 goes down again! However, a slightly more complicated
+algorithm due to [64] (basically running the above algorithm with exponentially increasing
+guesses for k) shows that an expected number of O(
+�
+
+N/t) queries still suffices to find a
+solution if there are t solutions. If there is no solution (t = 0), then we can easily detect that
+by checking xi for the i’s that the algorithm outputs.
+
+• If we know a lower bound τ on the actual (possibly unknown) number of solutions t, then the
+above algorithm uses an expected number of O(
+�
+
+N/τ) queries. If we run this algorithm for up
+to three times its expected number of queries, then (by Markov’s inequality) with probability
+at least 2/3 it will have found a solution. This way we can turn an expected runtime into a
+worst-case runtime.
+
+• If we do not know t but would like to reduce the probability of not finding a solution to some
+small ε > 0, then we can do this using O(
+�
+
+N log(1/ε)) queries (see Exercise 6).
+NB: The important part here is that the log(1/ε) is inside the square-root; usual error-
+reduction by O(log(1/ε)) repetitions of basic Grover would give the worse upper bound of
+O(
+√
+
+N log(1/ε)) queries.
+
+7.3
+Amplitude amplification
+
+The analysis that worked for Grover’s algorithm is actually much more generally applicable (we
+will also see it again in the next chapter). In this section we describe a very similar procedure that
+allows us to amplify the “good” part of the outcome of an algorithm. Quite abstractly, suppose we
+have a quantum circuit A (without measurements) that acts on m qubits, such that
+
+A|0m⟩= √p|ψ1⟩+
+�
+
+1 −p|ψ0⟩,
+
+56
+
+
+===== PDF PAGE 69 =====
+
+where |ψ1⟩and |ψ0⟩are normalized m-qubit states that are orthogonal to each other; it could for
+instance be that the last qubit of |ψ1⟩is |1⟩and the last qubit of |ψ0⟩is |0⟩. For some reason we
+like the state |ψ1⟩and we want to increase its “weight” √p in the superposition. The following
+procedure achieves this.
+In analogy with the analysis of Grover, think of |ψ1⟩as the “good state” and |ψ0⟩as the “bad
+state,” and view these two states as the vertical and horizontal axes in a 2-dimensional picture. Our
+starting state will be |U⟩= A|0m⟩, which plays the role that the uniform state played in Grover,
+and which is of course easy to obtain by applying A once to basis state |0m⟩. The angle between
+|U⟩and the horizontal axis is θ = arcsin √p. We would like to rotate this initial state towards the
+good state, i.e., towards the vertical axis. As for Grover, we could implement the desired rotation
+as a product of two reflections: a reflection through the bad state and a reflection through |U⟩.
+For the first reflection, suppose we have a circuit RG that can somehow distinguish the good
+state from the bad state by putting a “−” in front of |ψ1⟩and leaving |ψ0⟩alone. For example, if
+the last qubit of |ψ1⟩is |1⟩and the last qubit of |ψ0⟩is |0⟩, then RG would be extremely easy: it
+would just apply a Z-gate to the last qubit. The second reflection can be implemented as
+
+AR0A−1.
+
+It is easy to check that this maps the state |U⟩= A|0m⟩to itself, while every state orthogonal
+to |U⟩gets a “−” in front of it, so indeed this reflects through |U⟩. Like before, the product of
+these two reflections corresponds to a rotation by an angle of 2θ in the 2-dimensional picture. Since
+we need A−1 for this reflection, it is important that A is just a unitary, and does not involve any
+measurements.
+The following amplitude amplification procedure from [68] increases the amplitude of the good
+state to be close to 1:
+
+1. Setup the starting state |U⟩= A|0m⟩
+
+2. Repeat the following O(1/√p) times:
+
+(a) Reflect through the bad state |ψ0⟩(i.e., apply RG)
+
+(b) Reflect through |U⟩(i.e., apply AR0A−1)
+
+The analysis is the same as for Grover: the initial angle between our algorithm’s state and the
+horizontal axis is θ and every iteration increases this angle by 2θ, so after k iterations our state is
+
+sin((2k + 1)θ)|ψ1⟩+ cos((2k + 1)θ)|ψ0⟩.
+
+We would like to end up with angle (2k + 1)θ ≈π/2, because then the amplitude of the good state
+|ψ1⟩would be close to sin(π/2) = 1. Hence, like before, we choose k to be π
+
+4θ −1/2 rounded to the
+nearest integer. This is O(1/√p). If we do not know in advance what p is, then we can try out
+exponentially decreasing guesses for its value, similar to how we handle the case of Grover with
+unknown number of solutions.
+Note that the Hadamard transform H⊗n can be viewed as an algorithm with success probability
+p = t/N for a search problem of size N with t solutions, because H⊗n|0n⟩is the uniform superpo-
+sition over all N locations. Hence Grover’s algorithm is a special case of amplitude amplification,
+where m = n, A = A−1 = H⊗n, and RG corresponds to a phase-query to x.
+
+57
+
+
+===== PDF PAGE 70 =====
+
+Amplitude amplification allows to speed up a large class of classical algorithms: any unitary
+algorithm A that has some non-trivial probability p of finding a solution to whatever problem
+we’re trying to solve, and where we can efficiently recognize a solution, can be amplified to success
+probability nearly 1 by O(1/√p) runs of A and A−1. In contrast, classically we would need to
+repeat A O(1/p) times before we have success probability close to 1.
+
+7.4
+Application: faster solution for satisfiability
+
+Grover’s algorithm has many applications: basically any classical algorithm that has some search-
+component can be improved using Grover’s algorithm as a subroutine. This includes many basic
+computer applications such as finding shortest paths and minimum spanning trees, various other
+graph algorithms, etc.
+
+We can also use it to speed up the computation of NP-complete problems (see Chapter 13 for
+the complexity class NP), albeit only quadratically, not exponentially. As an example, consider
+the satisfiability problem: we are given a Boolean formula ϕ(i1, . . . , in) and want to know if it has
+a satisfying assignment, i.e., a setting of the bits i1, . . . , in that makes ϕ(i1, . . . , in) = 1. A classical
+brute-force search along all 2n possible assignments takes time roughly 2n.
+
+To find a satisfying assignment faster, define the N = 2n-bit input to Grover’s algorithm by
+xi = ϕ(i), where i ∈{0, 1}n.
+For a given assignment i = i1 . . . in it is easy to compute ϕ(i)
+classically in polynomial time. We can write that computation as a reversible circuit (using only
+Toffoli gates), corresponding to a unitary Uϕ that maps |i, 0, 0⟩�→|i, ϕ(i), wi⟩, where the third
+register holds some classical workspace the computation may have needed. To apply Grover we
+need an oracle that puts the answer in the phase and doesn’t leave workspace around (because that
+could mess up the intended interference effects, see Exercise 2.11 for an example). Define Ox as the
+unitary that first applies Uϕ, then applies a Z-gate to the second register, and then applies U−1
+ϕ
+to “clean up” the workspace again. This has the form we need for Grover: Ox,±|i⟩= (−1)xi|i⟩;
+here we did not explicitly write the workspace qubits, which start and end in |0⟩. Now we can run
+Grover and find a satisfying assignment with high probability if there is one, using a number of
+elementary operations that is
+√
+
+2n times some polynomial factor.
+
+If brute-force search is basically the best thing we can do classically to solve some particular NP-
+hard problem, then that computation can be sped up quadratically on a quantum computer using
+Grover search like above. However, there are also NP-hard problems where we know algorithms
+that still run in exponential time, but that are much faster than brute-force search. For example,
+consider the famous Traveling Salesman Problem (TSP): given an n-vertex graph with weights
+(distances) on the edges, find the shortest tour in this graph that visits every node exactly once.
+Since there are (n −1)! many different tours, classical brute-force search would take time (n −1)!,
+times some polynomial in n. Grover’s algorithm could speed this up quadratically. However, there
+are much more clever classical algorithms for TSP. In particular, the Bellman-Held-Karp dynamic
+programming algorithm solves TSP in time 2n, times a polynomial in n. This algorithm is much
+faster than the Grover-based O(
+√
+
+n!) (n! ≈(n/e)n by Stirling’s approximation), and is not amenable
+to a straightforward speed-up using Grover. Nevertheless, it turns out quantum computers can still
+solve TSP polynomially faster than the best known classical algorithms, albeit in a much more
+complicated way than by just applying Grover [17].
+
+58
+

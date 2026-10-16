@@ -1,0 +1,830 @@
+===== PDF PAGE 21 =====
+
+1.4
+Elementary gates
+
+A unitary that acts on a small number of qubits (say, at most 3) is often called a gate, in analogy
+to classical logic gates like AND, OR, and NOT; more about that in the next chapter. The Pauli
+matrices I, X, Y, Z (Appendix A.9) are examples of 1-qubit gates. For example, the bitflip gate X
+(a.k.a. NOT-gate) negates the bit in the computational basis, i.e., it swaps |0⟩and |1⟩. The phaseflip
+gate Z puts a −in front of |1⟩. Represented as 2 × 2 unitary matrices, these are
+
+X =
+�0
+1
+1
+0
+
+�
+,
+Z =
+�1
+0
+0
+−1
+
+�
+.
+
+Another important 1-qubit gate is the phase gate Rϕ, which merely rotates the phase of the |1⟩-state
+by an angle ϕ:
+Rϕ|0⟩= |0⟩
+Rϕ|1⟩= eiϕ|1⟩
+
+This corresponds to the unitary matrix
+
+Rϕ =
+�1
+0
+0
+eiϕ
+
+�
+.
+
+Note that Z is a special case of this: Z = Rπ, because eiπ = −1. The Rπ/4-gate is often just called
+the T-gate.
+Possibly the most important 1-qubit gate is the Hadamard transform, specified by:
+
+H|0⟩=
+1
+√
+
+2|0⟩+ 1
+√
+
+2|1⟩
+
+H|1⟩=
+1
+√
+
+2|0⟩−1
+√
+
+2|1⟩
+
+As a unitary matrix, this is represented as
+
+H =
+1
+√
+
+2
+
+�1
+1
+1
+−1
+
+�
+.
+
+If we apply H to initial state |0⟩and then measure, we have equal probability of observing |0⟩or
+|1⟩. Similarly, applying H to |1⟩and observing gives equal probability of |0⟩or |1⟩. However, if we
+apply H to the superposition
+1
+√
+
+2|0⟩+
+1
+√
+
+2|1⟩then we obtain
+
+H( 1
+√
+
+2|0⟩+ 1
+√
+
+2|1⟩) =
+1
+√
+
+2H|0⟩+ 1
+√
+
+2H|1⟩= 1
+
+2(|0⟩+ |1⟩) + 1
+
+2(|0⟩−|1⟩) = |0⟩.
+
+The positive and negative amplitudes for |1⟩have canceled each other out! This effect is called
+interference, and is analogous to interference patterns between light or sound waves.
+An example of a 2-qubit gate is the controlled-not gate CNOT. It negates the second bit of its
+input if the first bit is 1, and does nothing if the first bit is 0:
+
+CNOT|0⟩|b⟩= |0⟩|b⟩
+CNOT|1⟩|b⟩= |1⟩|1 −b⟩
+
+9
+
+
+===== PDF PAGE 22 =====
+
+The first qubit is called the control qubit, the second the target qubit. In matrix form, this is
+
+CNOT =
+
+
+
+
+
+
+
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+1
+0
+0
+1
+0
+
+
+
+
+
+.
+
+More generally, if U is some n-qubit unitary matrix, then the controlled-U operation corresponds
+to the following 2n+1 × 2n+1 unitary matrix:
+�I
+0
+0
+U
+
+�
+,
+
+where I is the 2n-dimensional identity matrix and the two 0s denote 2n × 2n all-0 matrices.
+
+1.5
+Example: quantum teleportation
+
+In the next chapter we will look in more detail at how we can use and combine such elementary
+gates, but as an example we will here already explain teleportation [50]. Suppose there are two
+parties, Alice and Bob. Alice has a qubit α0|0⟩+α1|1⟩that she wants to send to Bob via a classical
+channel. Without further resources this would be impossible, intuitively because the amplitudes
+α0, α1 may require an infinite number of bits of precision to write them down exactly. However,
+suppose Alice also shares an EPR-pair
+
+1
+√
+
+2(|00⟩+ |11⟩)
+
+with Bob (say Alice holds the left qubit and Bob the right qubit9). Initially, their joint state is
+
+(α0|0⟩+ α1|1⟩) ⊗1
+√
+
+2(|00⟩+ |11⟩).
+
+The first two qubits belong to Alice, the third to Bob. Alice performs a CNOT on her two qubits
+and then a Hadamard transform on her first qubit. Their joint 3-qubit state can now be written as
+
+1
+2 |00⟩(α0|0⟩+ α1|1⟩) +
+1
+2 |01⟩(α0|1⟩+ α1|0⟩) +
+1
+2 |10⟩(α0|0⟩−α1|1⟩) +
+1
+2 |11⟩
+����
+Alice
+
+(α0|1⟩−α1|0⟩)
+�
+��
+�
+Bob
+
+.
+
+Alice then measures her two qubits in the computational basis and sends the result (2 random
+classical bits ab) to Bob over a classical channel. Bob now knows which transformation he must
+do on his qubit in order to regain the qubit α0|0⟩+ α1|1⟩. First, if b = 1 then he applies a bitflip
+
+9Some students, on first encountering an EPR-pair, think that Alice holds
+1
+√
+
+2|00⟩and Bob holds
+1
+√
+
+2|11⟩. This
+interpretation doesn’t really make sense. For the right intuition, think of the analogous classical case where there
+is a random coin flip (with value 0 or 1), and Alice and Bob each have a copy of this value. Then the probabilistic
+joint state is 00 with probability 1/2 (Alice and Bob each hold a bit with value 0), and 11 with probability 1/2 (each
+holds a bit with value 1). The EPR-pair is similar, but now with amplitudes 1/
+√
+
+2 instead of probabilities 1/2.
+
+10
+
+
+===== PDF PAGE 23 =====
+
+(X-gate) on his qubit; second if a = 1 then he applies a phaseflip (Z-gate). For instance, if Alice
+sent ab = 11, then Bob knows that his qubit is α0|1⟩−α1|0⟩. A bitflip followed by a phaseflip
+will give him Alice’s original qubit α0|0⟩+ α1|1⟩. In fact, if Alice’s qubit had been entangled with
+some other qubits, then teleportation preserves this entanglement: Bob then receives a qubit that
+is entangled in the same way as Alice’s original qubit was.
+Note that the qubit on Alice’s side has been destroyed: teleporting moves a qubit from Alice to
+Bob, rather than copying it. In fact, copying an unknown qubit is impossible [265], see Exercise 12.
+
+Exercises
+
+1.
+(a) What is the inner product between the real vectors (0, 1, 0, 1) and (0, 1, 1, 1)?
+
+(b) What is the inner product between the states |0101⟩and |0111⟩?
+
+2. Compute the result of applying a Hadamard transform to both qubits of |0⟩⊗|1⟩in two ways
+(the first way using tensor product of vectors, the second using tensor product of matrices),
+and show that the two results are equal:
+
+H|0⟩⊗H|1⟩= (H ⊗H)(|0⟩⊗|1⟩).
+
+3. Show that a bitflip operation, preceded and followed by Hadamard transforms, equals a
+phaseflip operation: HXH = Z.
+
+4. Show that surrounding a CNOT gate with Hadamard gates switches the role of the control-bit
+and target-bit of the CNOT: (H ⊗H)CNOT(H ⊗H) is the 2-qubit gate where the second
+bit controls whether the first bit is negated (i.e., flipped).
+
+5. Let
+
+Rθ =
+�cos θ
+−sin θ
+sin θ
+cos θ
+
+�
+
+be the single-qubit rotation gate that rotates the amplitude-vector counterclockwise over an
+angle θ. Show that HRθH = R−θ, so conjugation by Hadamard reverses the direction.
+
+6.
+(a) Show that 1
+
+2
+
+�1 + i
+1 −i
+1 −i
+1 + i
+
+�
+is unitary.
+
+(b) This gate is sometimes called “the square root of NOT.” Explain why.
+
+7. Simplify the following: (⟨0| ⊗I)(α00|00⟩+ α01|01⟩+ α10|10⟩+ α11|11⟩).
+
+8. Prove that an EPR-pair
+1
+√
+
+2 (|00⟩+ |11⟩) is an entangled state, i.e., that it cannot be written
+as the tensor product of two separate qubits.
+
+9. Suppose we have the state
+1
+√
+
+2(|0⟩|ϕ⟩+ |1⟩|ψ⟩), where |ϕ⟩and |ψ⟩are unknown normalized
+quantum states with the same number of qubits. Suppose we apply a Hadamard gate to the
+first qubit and then measure that first qubit in the computational basis. Give the probability
+of measurement outcome 1, as a function of the inner product between the states |ϕ⟩and |ψ⟩.
+
+10. Give the 2-outcome projective measurement on a 2-qubit space that measures the parity (i.e.,
+sum modulo 2) of 2-bit basis states. Also give the corresponding observable.
+
+11
+
+
+===== PDF PAGE 24 =====
+
+11. (H) Show that the success probability of the POVM at the end of Section 1.2.2 can be
+increased from 1/4 to 1/(2 +
+√
+
+2).
+
+12. (H) Prove the quantum no-cloning theorem: there does not exist a 2-qubit unitary U that
+maps
+|ϕ⟩|0⟩�→|ϕ⟩|ϕ⟩
+
+for every qubit |ϕ⟩.
+
+13. Show that unitaries cannot “delete” information: there is no 1-qubit unitary U that maps
+|ϕ⟩�→|0⟩for every 1-qubit state |ϕ⟩.
+
+14. Suppose Alice and Bob are not entangled. If Alice sends a qubit to Bob, then this can give
+Bob at most one bit of information about Alice.10
+However, if they share an EPR-pair,
+|ψ⟩=
+1
+√
+
+2(|00⟩+|11⟩), then they can transmit two classical bits by sending one qubit over the
+channel; this is called superdense coding. This exercise will show how this works.
+
+(a) They start with a shared EPR-pair,
+1
+√
+
+2(|00⟩+ |11⟩). Alice has classical bits a and b.
+Suppose she does an X-gate on her half of the EPR-pair if a = 1, followed by a Z-gate
+if b = 1 (she does both if ab = 11, and neither if ab = 00). Write the resulting 2-qubit
+state for the four different cases that ab could take.
+(b) Suppose Alice sends her half of the state to Bob, who now has two qubits. Show that
+Bob can determine both a and b from his state, using Hadamard and CNOT gates,
+followed by a measurement in the computational basis. After his final measurement,
+Bob’s first qubit should be |a⟩and his second qubit should be |b⟩.
+
+15. Alice and Bob share an EPR-pair, |ψ⟩=
+1
+√
+
+2(|00⟩+ |11⟩).
+
+(a) Let C be a 2 × 2 matrix. Show that Tr((C ⊗I)|ψ⟩⟨ψ|) = 1
+
+2Tr(C).
+(b) (H) Alice could apply one of the 4 Pauli matrices (I, X, Y, Z) to her qubit. Use part (a)
+to show that the 4 resulting 2-qubit states form an orthonormal set.
+(c) Suppose Alice applies one of the 4 Pauli matrices to her qubit and then sends that qubit
+to Bob. Give the 4 projectors of a 4-outcome projective measurement that Bob could
+do on his 2 qubits to find out which Pauli matrix Alice actually applied.
+
+16. Let θ ∈[0, 2π), Uθ =
+�cos θ
+−sin θ
+sin θ
+cos θ
+
+�
+, |ϕ⟩= Uθ|0⟩and |ϕ⊥⟩= Uθ|1⟩.
+
+(a) Show that ZX|ϕ⊥⟩= |ϕ⟩.
+(b) Show that an EPR-pair,
+1
+√
+
+2(|00⟩+ |11⟩), can also be written as
+1
+√
+
+2(|ϕ⟩|ϕ⟩+ |ϕ⊥⟩|ϕ⊥⟩).
+
+(c) Suppose Alice and Bob start with an EPR-pair. Alice applies U−1
+θ
+to her qubit and then
+measures it in the computational basis. What pure state does Bob have if her outcome
+was 0, and what pure state does he have if her outcome was 1?
+(d) Suppose Alice knows the number θ but Bob does not. Give a protocol that uses one
+EPR-pair and 1 classical bit of communication where Bob ends up with the qubit |ϕ⟩
+(in contrast to general teleportation of an unknown qubit, which uses 1 EPR-pair and 2
+bits of communication).
+
+10This is actually a deep statement, a special case of Holevo’s theorem. More about this may be found in Chapter 15.
+
+12
+
+
+===== PDF PAGE 25 =====
+
+Chapter 2
+
+The Circuit Model and the
+Deutsch-Jozsa Algorithm
+
+2.1
+Quantum computation
+
+Below we explain how a quantum computer can apply computational steps to its register of
+qubits. Two models exist for this: the quantum Turing machine [102, 55] and the quantum circuit
+model [103, 267]. These models are equivalent, in the sense that they can simulate each other in
+polynomial time, assuming the circuits are appropriately “uniform.” We only explain the circuit
+model here, which is more popular among researchers.
+
+2.1.1
+Classical circuits
+
+In classical complexity theory, a Boolean circuit is a finite directed acyclic graph with AND, OR,
+and NOT gates.
+It has n input nodes, which contain the n input bits (n ≥0).
+The internal
+nodes are AND, OR, and NOT gates, and there are one or more designated output nodes. The
+initial input bits are fed into AND, OR, and NOT gates according to the circuit, and eventually
+the output nodes assume some value.
+We say that a circuit computes some Boolean function
+f : {0, 1}n →{0, 1}m if the output nodes get the right value f(x) for every input x ∈{0, 1}n.
+A circuit family is a set C = {Cn} of circuits, one for each input size n. Each circuit has one
+output bit. Such a family recognizes or decides a language L ⊆{0, 1}∗= ∪n≥0{0, 1}n if, for every
+n and every input x ∈{0, 1}n, the circuit Cn outputs 1 if x ∈L and outputs 0 otherwise.1 Such
+a circuit family is uniformly polynomial if there is a deterministic Turing machine2 that outputs
+Cn given n as input, using space logarithmic in n.3 Note that the size (number of gates) of the
+circuits Cn can then grow at most polynomially with n. It is known that uniformly polynomial
+circuit families are equal in power to polynomial-time deterministic Turing machines: a language L
+can be decided by a uniformly polynomial circuit family iff L ∈P [208, Theorem 11.5], where P is
+the class of languages decidable by polynomial-time Turing machines.
+
+1We can think of a language L as a sequence of Boolean functions fn : {0, 1}n →{0, 1}, where fn takes value 1
+exactly on the n-bit strings that are in L. The circuit Cn then computes the function fn.
+2If you don’t know what a Turing machine is, you can just think of a computer program in some fixed language,
+such as C or Python.
+3Logarithmic space implies time that’s at most polynomial in n, because such a machine will have only poly(n)
+different internal states, so it either halts after poly(n) steps or cycles forever.
+
+13
+
+
+===== PDF PAGE 26 =====
+
+Similarly we can consider randomized circuits. These receive, in addition to the n input bits,
+also some random bits (“coin flips”) as input. A randomized circuit computes a function f if it
+successfully outputs the right answer f(x) with probability at least 2/3 for every x (probability
+taken over the values of the random bits). Randomized circuits are equal in power to randomized
+Turing machines: a language L can be decided by a uniformly polynomial randomized circuit
+family iff L ∈BPP, where BPP (“Bounded-error Probabilistic Polynomial time”) is the class of
+languages that can efficiently be recognized by randomized Turing machines with success probability
+at least 2/3. Because we can efficiently reduce the error probability of randomized algorithms (see
+Appendix B.2), the particular value 2/3 doesn’t really matter here and may be replaced by any
+fixed constant in (1/2, 1).
+
+2.1.2
+Quantum circuits
+
+A quantum circuit (also called quantum network or quantum gate array) generalizes the idea of
+classical circuit families, replacing the AND, OR, and NOT gates by elementary quantum gates. A
+quantum gate is a unitary transformation on a small (usually 1, 2, or 3) number of qubits. We saw
+a number of examples already in the previous chapter: the bitflip gate X, the phaseflip gate Z,
+the Hadamard gate H. The main 2-qubit gate we have seen is the controlled-NOT (CNOT) gate.
+Adding another control qubit, we get the 3-qubit Toffoli gate, also called controlled-controlled-not
+(CCNOT) gate. This negates the third bit of its input if both of the first two bits are 1. The
+Toffoli gate is important because it is complete for classical reversible computation: any classical
+computation can be implemented by a circuit of Toffoli gates. This is easy to see: using auxiliary
+wires with fixed values, Toffoli can implement AND (fix the 3rd ingoing wire to 0) and NOT (fix the
+1st and 2nd ingoing wire to 1). It is known that AND and NOT-gates together suffice to implement
+any classical Boolean circuit, so if we can apply (or simulate) Toffoli gates, we can implement any
+classical computation in a reversible manner.
+Mathematically, such elementary quantum gates can be composed into bigger unitary operations
+by taking tensor products (if gates are applied in parallel to different parts of the register), and
+ordinary matrix products (if gates are applied sequentially). We have already seen a simple example
+of such a circuit of elementary gates in the previous chapter, namely to implement teleportation.
+For example, if we apply the Hadamard gate H to each qubit in a register of n zeroes, we obtain
+
+1
+√
+
+2n
+�
+
+j∈{0,1}n
+|j⟩,
+
+which is a superposition of all n-bit strings. More generally, if we apply H⊗n to an initial state |i⟩,
+with i ∈{0, 1}n, we obtain
+
+H⊗n|i⟩=
+1
+√
+
+2n
+�
+
+j∈{0,1}n
+(−1)i·j|j⟩,
+(2.1)
+
+where i · j = �n
+k=1 ikjk denotes the inner product of the n-bit strings i, j ∈{0, 1}n. For example:
+
+H⊗2|01⟩=
+1
+√
+
+2(|0⟩+ |1⟩) ⊗1
+√
+
+2(|0⟩−|1⟩) = 1
+
+2
+
+�
+
+j∈{0,1}2
+(−1)01·j|j⟩.
+
+Note that Hadamard happens to be its own inverse (it’s unitary and Hermitian, hence H = H∗=
+H−1), so applying it once more on the right-hand side of the above equation would give us back
+|01⟩. The n-fold Hadamard transform will be very useful for quantum algorithms.
+
+14
+
+
+===== PDF PAGE 27 =====
+
+As in the classical case, a quantum circuit can be viewed as a finite directed acyclic graph
+of input nodes, gates, and output nodes. The graph needs some annotation to tell us the order
+of the qubits going into a gate.4 There are n nodes that contain the input (as classical bits); in
+addition we may have some more input nodes that are initially |0⟩(“workspace”). The internal
+nodes of the quantum circuit are quantum gates that each operate on at most two or three qubits
+of the state. The gates in the circuit transform the initial state vector into a final state, which will
+generally be a superposition. We measure some or all qubits of this final state in the computational
+basis in order to (probabilistically) obtain a classical output to the algorithm. We can think of the
+measurement of one qubit in the computational basis as one special type of gate. We may assume
+without much loss of generality that such measurements only happen at the very end of the circuit
+(see Exercise 8).
+What about the more general kinds of measurements discussed in Section 1.2.2? If we want
+to apply such a measurement in the circuit model, we will have to implement it using a circuit
+of elementary gates followed by a measurement in the computational basis. For example, suppose
+projectors P0 and P1 form a 2-outcome projective measurement on an n-qubit space (P0+P1 = I2n).
+Assume for simplicity that P0 and P1 both have rank 2n/2. Then there exists a unitary U that
+maps an n-qubit state |ϕ⟩to a state whose first qubit is |0⟩whenever P0|ϕ⟩= |ϕ⟩, and that maps
+n-qubit |ψ⟩to a state whose first qubit is |1⟩whenever P1|ψ⟩= |ψ⟩.
+We can now implement
+the projective measurement by first applying a circuit that implements U, and then measuring
+(in the computational basis) the first qubit of the resulting state. This recovers the measurement
+probabilities of the 2-outcome projective measurement; if we also want to recover the same post-
+measurement state, then we have to multiply by U−1 at the end.
+The minimal-size circuit to
+implement U could be very large (i.e., expensive) if the projective measurement is complicated, but
+that is how it should be.
+To draw quantum circuits, the convention is to let time progress from left to right: we start with
+the initial state on the left. Each qubit is pictured as a horizontal wire, and the circuit prescribes
+which gates are to be applied to which wires. Single-qubit gates like X and H just act on one
+wire, while multi-qubit gates such as the CNOT act on multiple wires simultaneously.5 When one
+qubit “controls” the application of a gate to another qubit, then the controlling wire is drawn with
+a dot linked vertically to the gate that is applied to the target qubit. This happens for instance
+with the CNOT, where the applied single-qubit gate is X, usually drawn as ‘⊕’ in a circuit picture
+(similarly, the Toffoli gate is drawn in a circuit with a dot on the two control wires and an ‘⊕’ on
+the target wire). Figure 2.1 gives a simple example on two qubits, initially in basis state |00⟩: first
+apply H to the 1st qubit, then CNOT to both qubits (with the first qubit acting as the control),
+and then Z to the last qubit. The resulting state is
+1
+√
+
+2(|00⟩−|11⟩).
+
+Note that if we have a circuit for unitary U, it is very easy to find a circuit for the inverse U−1
+
+with the same complexity: just reverse the order of the gates, and take the inverse of each gate.
+For example, if U = U1U2U3, then U−1 = U−1
+3 U−1
+2 U−1
+1 .
+In analogy to the classical class BPP, we will define BQP (“Bounded-error Quantum Poly-
+nomial time”) as the class of languages that can efficiently be computed with success probability
+
+4E.g., what is the first qubit going into a particular CNOT gate and what is the second qubit.
+Such extra
+information is not necessary for classical circuits with symmetric gates such as AND, OR, and NOT, since the order
+of incoming bits doesn’t affect the output bit there.
+5Note that the number of wires (qubits) going into a unitary must equal the number of wires going out because
+a unitary is always invertible (reversible). This differs from the case of classical circuits, where non-reversible gates
+like AND have more wires going in than out.
+
+15
+
+
+===== PDF PAGE 28 =====
+
+|0⟩
+H
+•
+
+|0⟩
+Z
+
+Figure 2.1: Simple circuit for turning |00⟩into an entangled state
+
+at least 2/3 by (a family of) quantum circuits whose size grows at most polynomially with the
+input-length. We will study this quantum complexity class and its relation with various classical
+complexity classes in more detail in Chapter 13.
+
+2.2
+Universality of various sets of elementary gates
+
+Which set of elementary gates should we allow? There are several reasonable choices.
+
+(1) The set of all 1-qubit operations together with the 2-qubit CNOT gate is universal,
+meaning that any other unitary transformation can be built from these gates.
+
+Allowing all 1-qubit gates is not very realistic from an implementational point of view, as there are
+continuously many of them, and we cannot expect experimentalists to implement gates to infinite
+precision. However, the model is usually restricted, only allowing a small finite set of 1-qubit gates
+from which all other 1-qubit gates can be efficiently approximated.
+
+(2) The set consisting of CNOT, Hadamard, and the phase-gate T = Rπ/4 is universal
+in the sense of approximation, meaning that any other unitary can be arbitrarily well
+approximated using circuits of only these gates.
+The Solovay-Kitaev theorem [206, Appendix 3] says that this approximation is quite
+efficient: we can approximate any gate on 1 or 2 qubits up to error ε using a circuit of
+only polylog(1/ε) gates from our small universal set, i.e., polynomial in the logarithm
+of 1/ε. In particular, simulating an arbitrary 2-qubit gate up to exponentially small
+error ε costs only a polynomial number of gates from our small universal set.
+
+It is often convenient to restrict to real numbers and use an even smaller set of gates:
+
+(3) The set of Hadamard and Toffoli (CCNOT) is universal for all unitaries with real
+entries in the sense of approximation, meaning that any unitary with only real entries
+can be arbitrarily well approximated using circuits of only these gates.
+
+2.3
+Quantum parallelism
+
+One uniquely quantum-mechanical effect that we can use for building quantum algorithms is quan-
+tum parallelism. Suppose we have a classical algorithm that computes some function f : {0, 1}n →
+{0, 1}m.
+Then we can build a quantum circuit U (consisting only of Toffoli gates) that maps
+|z⟩|0⟩→|z⟩|f(z)⟩for every z ∈{0, 1}n. Now suppose we apply U to a superposition of all inputs z
+(which is easy to build using n Hadamard transforms):
+
+U
+
+
+
+1
+√
+
+2n
+�
+
+z∈{0,1}n
+|z⟩|0⟩
+
+
+
+=
+1
+√
+
+2n
+�
+
+z∈{0,1}n
+|z⟩|f(z)⟩.
+
+16
+
+
+===== PDF PAGE 29 =====
+
+We applied U just once, but the final superposition contains f(z) for all 2n input values z! However,
+by itself this is not very useful and does not give more than classical randomization, since observing
+the final superposition will give just one uniformly random |z⟩|f(z)⟩and all other information will
+be lost.
+As we will see below, quantum parallelism needs to be combined with the effects of
+interference and entanglement in order to get something that is better than classical.
+
+2.4
+The early algorithms
+
+The two best-known successes of quantum algorithms so far are Shor’s factoring algorithm from
+1994 [241] and Grover’s search algorithm from 1996 [132], which will be explained in later chapters.
+Here we describe some of the earlier quantum algorithms that preceded Shor’s and Grover’s.
+Virtually all quantum algorithms work with queries in some form or other. We will explain
+this model here. It may look contrived at first, but eventually will lead smoothly to Shor’s and
+Grover’s algorithm. We should, however, emphasize that the query complexity model differs from
+the standard model described above, because the input is now given as a “black-box” (also some-
+times called an “oracle”). This means that the exponential quantum-classical separations that we
+describe below do not by themselves give exponential quantum-classical separations in the standard
+circuit model (the same applies to Simon’s algorithm in the next chapter).
+To explain the query setting, consider an N-bit input x = (x0, . . . , xN−1) ∈{0, 1}N. Usually we
+will have N = 2n, so that we can address bit xi using an n-bit index i. One can think of the input
+as an N-bit memory which we can access at any point of our choice (a “Random Access Memory”
+or RAM). For example, a memory of N = 1024 bits can be indexed by addresses i ∈{0, 1}10 of
+n = 10 bits each. A memory access is via a so-called “black-box,” which is equipped to output the
+bit xi on input i. As a quantum operation, this is the following unitary mapping on n + 1 qubits:
+
+Ox : |i, 0⟩→|i, xi⟩.
+
+The first n qubits of the state are called the address bits (or address register), while the (n + 1)st
+qubit is called the target bit.6 Since this mapping must be unitary, we also have to specify what
+happens if the initial value of the target bit is 1. Therefore we actually let Ox be the following
+unitary transformation:
+
+Ox : |i, b⟩→|i, b ⊕xi⟩,
+
+here i ∈{0, 1}n, b ∈{0, 1}, and ⊕denotes exclusive-or (addition modulo 2). In matrix representa-
+tion, this Ox is now a permutation matrix and hence unitary. Note that a quantum computer can
+apply Ox on a superposition of various i, something a classical computer cannot do. One applica-
+tion of this black-box is called a query, and counting the required number of queries to compute
+this or that function of x is something we will do a lot in the first half of these notes.
+Given the ability to make a query of the above type, we can also make a query of the form
+|i⟩�→(−1)xi|i⟩by setting the target bit to the state |−⟩=
+1
+√
+
+2(|0⟩−|1⟩) = H|1⟩:
+
+Ox (|i⟩|−⟩) = |i⟩1
+√
+
+2(|xi⟩−|1 −xi⟩) = (−1)xi|i⟩|−⟩.
+
+6It is a common rookie mistake to confuse the N bits of x with the n address bits; don’t fall for this!
+
+17
+
+
+===== PDF PAGE 30 =====
+
+This ±-kind of query puts the output variable in the phase of the state: if xi is 1 then we get
+a −1 in the phase of basis state |i⟩; if xi = 0 then nothing happens to |i⟩.7 This “phase-query”
+or “phase-oracle” is sometimes more convenient than the standard type of query. We denote the
+corresponding n-qubit unitary transformation by Ox,±.
+
+2.4.1
+Deutsch-Jozsa
+
+Deutsch-Jozsa problem [104]:
+For N = 2n, we are given x ∈{0, 1}N such that either
+(1) all xi have the same value (“constant”), or
+(2) N/2 of the xi are 0 and N/2 are 1 (“balanced”).
+The goal is to find out whether x is constant or balanced.
+
+The algorithm of Deutsch and Jozsa is as follows. We start in the n-qubit zero state |0n⟩,
+apply a Hadamard transform to each qubit, apply a phase-query, apply another Hadamard to each
+qubit, and then measure the final state. As a unitary transformation, the algorithm would be
+H⊗nOx,±H⊗n. We have drawn the corresponding quantum circuit in Figure 2.2, where time again
+progresses from left to right. Note that the number of wires going into the query is n, not N; the
+basis states on this sequence of wires specify an n-bit address (if we use Ox instead of Ox,± then
+there is one more wire at the bottom, for the target qubit of Ox, initialized to H|1⟩= |−⟩).
+
+|0⟩
+
+|0⟩
+
+|0⟩
+
+measure
+
+H
+
+H
+
+H
+
+H
+
+H
+
+H
+
+Ox,±
+
+Figure 2.2: The Deutsch-Jozsa algorithm for n = 3
+
+Let us follow the state through these operations. Initially we have the state |0n⟩. By Equa-
+tion (2.1) on page 14, after the first Hadamard transforms we have obtained the uniform superpo-
+sition of all i:
+1
+√
+
+2n
+�
+
+i∈{0,1}n
+|i⟩.
+
+The Ox,±-query turns this into
+1
+√
+
+2n
+�
+
+i∈{0,1}n
+(−1)xi|i⟩.
+
+7This is sometimes called the “phase kick-back trick.” Note that for |+⟩=
+1
+√
+
+2(|0⟩+ |1⟩), we have Ox (|i⟩|+⟩) =
+|i⟩|+⟩irrespective of what x is. This allows us to control on which part of the state a phase-query is applied: we put
+the control qubit in state |−⟩for indices i where we want to apply the phase-query, and in state |+⟩for the indices
+where we do not want to apply a phase-query.
+
+18
+

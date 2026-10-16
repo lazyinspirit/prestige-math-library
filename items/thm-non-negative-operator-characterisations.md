@@ -12,8 +12,8 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner-step4-published-alerts/non-negative-operator/repair-receipt.json
 sources:
   scraped: []
   references:
@@ -49,6 +49,6 @@ $T:V\to V$ be linear. The following are equivalent:
 
 1.2 Assume claim 3. If the diagonal entries are $\lambda_1,\dots,\lambda_n\ge0$, then [L3] gives square roots $\sqrt{\lambda_j}\ge0$; the diagonal operator $S$ with diagonal entries $\sqrt{\lambda_j}$ satisfies $S^*S=T$. Thus claim 3 implies claim 4. [L3, algebra]
 
-2.1 In the orthonormal eigenbasis from step 1.1, the matrix of $T$ is diagonal with those nonnegative real eigenvalues on the diagonal. Thus claim 2 implies claim 3. [step 1.1]
+1.3 Assume claim 2, so $T$ is self-adjoint. If $V$ is real, [L1] gives an orthonormal eigenbasis. If $V$ is complex, $T=T^*$ implies $TT^*=T^*T$, so [L2] gives an orthonormal eigenbasis. In either case the matrix of $T$ in this basis is diagonal, and its diagonal entries are nonnegative real numbers by claim 2. Thus claim 2 implies claim 3. [L1, L2, algebra]
 
-3.1 Assume claim 4, so $T=S^*S$. Then for every $v\in V$ one has $\langle Tv,v\rangle=\langle S^*Sv,v\rangle=\langle Sv,Sv\rangle\ge0$, and for all $u,v$ one has $\langle Tu,v\rangle=\langle Su,Sv\rangle=\langle u,Tv\rangle$. Hence $T$ is self-adjoint and non-negative. Thus claim 4 implies claim 1. [algebra] ∎
+2.1 Assume claim 4, so $T=S^*S$. Then for every $v\in V$ one has $\langle Tv,v\rangle=\langle S^*Sv,v\rangle=\langle Sv,Sv\rangle\ge0$, and for all $u,v$ one has $\langle Tu,v\rangle=\langle Su,Sv\rangle=\langle u,Tv\rangle$. Hence $T$ is self-adjoint and non-negative. Thus claim 4 implies claim 1. [algebra] ∎

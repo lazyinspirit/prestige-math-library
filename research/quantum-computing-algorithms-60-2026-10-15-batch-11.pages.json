@@ -1,0 +1,564 @@
+[
+  {
+    "order": 2186,
+    "id": "continuous-gate-universality-and-exact-synthesis",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Continuous-Gate Universality and Exact Synthesis",
+    "companion": "continuous-gate-universality-and-exact-synthesis-examples",
+    "requires": [
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "controlled-gates-phase-and-entanglement",
+      "hilbert-space-geometry-and-riesz-representation",
+      "inner-product-spaces-and-orthogonality",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "registers-tensor-products-and-partial-trace",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "root-systems-dynkin-diagrams-and-cartan-killing-classification",
+      "sard-theorem-and-transversality",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "reeb-stability-and-global-foliation-constructions",
+      "haar-measure-existence-and-uniqueness"
+    ],
+    "items": [
+      {
+        "id": "def-qc-global-phase-equivalence",
+        "kind": "definition",
+        "title": "Global Phase Equivalence",
+        "statement": "For square matrices $U,V$ of the same size, write $U\\sim_{\\mathrm{phase}}V$ when $U=\\lambda V$ for some $\\lambda\\in\\mathbb C$ with $|\\lambda|=1$. This relation is kept distinct from exact matrix equality.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-two-unitary-block-demultiplexing",
+        "kind": "lemma",
+        "title": "Demultiplexing a Two-Block Unitary",
+        "statement": "Let $H$ be a finite-dimensional complex inner-product space and let $U_0,U_1$ be unitary endomorphisms of $H$. On the control-first direct sum $H\\oplus H$, the block unitary $\\operatorname{diag}(U_0,U_1)$ factors as\n$$\\operatorname{diag}(U_0,U_1)=(I\\otimes V)\\operatorname{diag}(D,D^*)(I\\otimes W)$$\nfor unitary $V,W$ on $H$ and a diagonal unitary $D$ in an orthonormal eigenbasis; $I\\otimes V$ denotes $\\operatorname{diag}(V,V)$ under $\\mathbb C^2\\otimes H\\cong H\\oplus H$.",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-polar-form-with-unique-principal-argument",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-unitary-group-cayley-charts",
+        "kind": "lemma",
+        "title": "Cayley Charts on the Unitary Matrix Group",
+        "statement": "For $N\\ge1$, define $U(N)=\\{Q\\in M_N(\\mathbb C):Q^*Q=QQ^*=I\\}$ and $\\mathfrak u(N)=\\{X\\in M_N(\\mathbb C):X^*=-X\\}$, both regarded as real spaces where appropriate. Then $U(N)$ is a compact smooth real manifold of dimension $N^2$. Near $I$, the Cayley map\n$$X\\longmapsto (I+X)(I-X)^{-1}$$\nis a smooth chart from $\\mathfrak u(N)$; left translates give a finite atlas. The Frobenius inner product induces a smooth Riemannian metric. Under AC$_\\omega$, its volume density defines a normalized Borel volume probability $\\mu_F$; a Borel subset is $\\mu_F$-null exactly when its intersection with every chart has Lebesgue-null coordinate image. Under AC, $\\mu_F$ is the normalized Haar probability, so this also gives the Haar-null criterion in that branch.",
+        "deps": [
+          "thm-heine-borel-rn",
+          "def-smooth-manifold",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-riemannian-volume-density",
+          "lem-the-riemannian-volume-density-is-coordinate-independent",
+          "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density",
+          "def-countable-choice",
+          "lem-axiom-of-choice-implies-countable-choice",
+          "cor-normalized-haar-probability-on-a-compact-group",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "axiom_use": "Assume AC_omega for the Radon volume measure; assume full AC only for the optional identification with normalized Haar probability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-cosine-sine-block-decomposition",
+        "kind": "theorem",
+        "title": "Cosine-Sine Block Decomposition",
+        "statement": "Let $k\\ge1$ and let $U\\in U(2k)$ be partitioned into $k\\times k$ blocks\n$$U=\\begin{pmatrix}A&B\\\\ C&D\\end{pmatrix}.$$\nThere are block-diagonal unitaries $L=\\operatorname{diag}(L_0,L_1)$ and $R=\\operatorname{diag}(R_0,R_1)$ and nonnegative real diagonal matrices $C_0,S_0$ such that\n$$U=L\\begin{pmatrix}C_0&-S_0\\\\S_0&C_0\\end{pmatrix}R,\\qquad C_0^2+S_0^2=I,\\quad 0\\le C_0,S_0\\le I.$$\nThe singular values at $0$ and $1$ are allowed, with no nondegeneracy assumption.",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-two-level-unitary",
+        "kind": "definition",
+        "title": "Two-Level Unitary",
+        "statement": "Let a finite ordered register have an orthonormal computational basis $(|z\\rangle)_{z\\in\\mathcal X}$, using the root convention that the inner product is linear in its first argument. For distinct labels $x,y\\in\\mathcal X$, choose $V\\in U(2)$, where $U(2)=\\{M\\in M_2(\\mathbb C):M^*M=MM^*=I_2\\}$. The **two-level unitary** $T_{x,y}(V)$ acts by the matrix $V$ in the ordered basis $(|x\\rangle,|y\\rangle)$ and acts as the identity on $\\operatorname{span}\\{|x\\rangle,|y\\rangle\\}^{\\perp}$. Its action is exact matrix equality: any scalar phase contained in $V$ is retained.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-computational-basis-orthonormal",
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qc-two-level-unitary-elimination",
+        "kind": "algorithm",
+        "title": "Exact Two-Level Elimination of a Unitary",
+        "statement": "Input: an exact-arithmetic representation of $U\\in U(N)$, $N\\ge1$, supporting addition, multiplication, conjugation, nonnegative square roots, exact zero tests, and exact division by nonzero positive real scalars. Output: a finite ordered factorization into two-level unitaries and a diagonal unitary. This is an exact algebraic procedure; no claim of a bit-time algorithm for arbitrary real input is made.\n\nInitialize $M:=U$ and an empty chronological list. For each column $j=0,\\ldots,N-2$, and for $r=N-1,N-2,\\ldots,j+1$, set $a=M_{r-1,j}$ and $b=M_{r,j}$. If $b=0$, do nothing. Otherwise set $h=\\sqrt{|a|^2+|b|^2}>0$ and left-multiply rows $(r-1,r)$ by\n$$G=\\frac1h\\begin{pmatrix}\\overline a&\\overline b\\\\-b&a\\end{pmatrix},$$\nrecording this two-level unitary in the order applied. Let the resulting matrix be $D$. Return the factorization $U=G_1^*\\cdots G_s^*D$. In chronological circuit order, apply $D$ first and then $G_s^*,\\ldots,G_1^*$.",
+        "deps": [
+          "def-qc-two-level-unitary",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qc-two-level-unitary-elimination-correct",
+        "kind": "theorem",
+        "title": "Correctness and Termination of Two-Level Elimination",
+        "statement": "For $U\\in U(N)$, the elimination procedure of [[alg-qc-two-level-unitary-elimination]] terminates after at most $N(N-1)/2$ Givens steps and returns an exact factorization of $U$ into the recorded two-level adjoints followed by a diagonal unitary. The number of diagonal entries is $N$; entries equal to $1$ need no phase gate.",
+        "deps": [
+          "alg-qc-two-level-unitary-elimination",
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-one-qubit-euler-decomposition",
+        "kind": "theorem",
+        "title": "One-Qubit Euler Decomposition",
+        "statement": "Use the rotation convention of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and define $R_y(\\theta):=R_{(0,1,0)}(\\theta)$:\n$$R_z(\\alpha)=\\begin{pmatrix}e^{-i\\alpha/2}&0\\\\0&e^{i\\alpha/2}\\end{pmatrix},\\qquad R_y(\\theta)=\\begin{pmatrix}\\cos(\\theta/2)&-\\sin(\\theta/2)\\\\\\sin(\\theta/2)&\\cos(\\theta/2)\\end{pmatrix}.$$\nFor every $U\\in U(2)$ there are real $\\delta,\\alpha,\\theta,\\beta$ with\n$$U=e^{i\\delta}R_z(\\alpha)R_y(\\theta)R_z(\\beta).$$\nIf $\\det U=1$, the scalar factor is unnecessary and $U=R_z(\\alpha)R_y(\\theta)R_z(\\beta)$.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-transpose",
+          "thm-quarter-turn-values-and-shift-formulas"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-two-qubit-cartan-decomposition",
+        "kind": "theorem",
+        "title": "Exact Two-Qubit Cartan Decomposition",
+        "statement": "For every $U\\in U(4)$ there are $A,B,C,D\\in SU(2)$, real $a,b,c,\\delta$, and the matrices\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\quad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\quad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$$\nsuch that\n$$U=e^{i\\delta}(A\\otimes B)\\exp\\!\\bigl(i(aX\\otimes X+bY\\otimes Y+cZ\\otimes Z)\\bigr)(C\\otimes D).$$\nThe equality is exact; the scalar $e^{i\\delta}$ is displayed.",
+        "deps": [
+          "thm-qc-one-qubit-euler-decomposition",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-polar-form-with-unique-principal-argument",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-transpose"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-global-phase-under-control",
+        "kind": "lemma",
+        "title": "Global Phase Under Control",
+        "statement": "Let $H$ be a nonzero finite-dimensional target space, let $U$ be unitary on $H$, and let $|\\lambda|=1$. In control-first order put\n$$C(U)=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix},\\qquad P_\\lambda=\\begin{pmatrix}1&0\\\\0&\\lambda\\end{pmatrix}.$$\nThen $C(\\lambda U)=(P_\\lambda\\otimes I_H)C(U)$. A scalar multiplying an entire output leaves every defined finite-POVM outcome law unchanged, whereas a scalar attached to a target matrix inside a control gives a phase on only the active control block; applying $P_{\\overline\\lambda}$ on the control restores the exact controlled matrix.",
+        "deps": [
+          "def-qc-controlled-unitary-access",
+          "def-qc-global-phase-equivalence",
+          "def-qc-density-operator",
+          "def-qc-povm-and-outcome-law",
+          "thm-qc-povm-probabilities-normalize"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-generic-cnot-parameter-count",
+        "kind": "lemma",
+        "title": "Parameter Count for a Fixed CNOT Skeleton",
+        "statement": "Assume AC$_\\omega$ to form normalized Frobenius volume on $U(2^n)$. For fixed $n\\ge1$ and a fixed ordered CNOT skeleton with $m$ CNOTs, arbitrary exact one-qubit gates, and no ancillas, the set of exact circuit matrices is contained in a finite union of smooth images of real parameter spaces of dimension at most $3n+4m+1$. If $3n+4m+1<4^n$, this fixed skeleton has measure zero. Under full AC, it is Haar-null.",
+        "deps": [
+          "def-qc-elementary-circuit-resources",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-cnot-and-control-target-order",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-pauli-matrices",
+          "thm-heine-borel-rn",
+          "thm-morse-sard-for-euclidean-maps",
+          "lem-qc-unitary-group-cayley-charts",
+          "thm-qc-one-qubit-euler-decomposition",
+          "thm-euclidean-inverse-function-theorem",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "lem-axiom-of-choice-implies-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "axiom_use": "AC_omega is assumed for the normalized smooth volume measure; full AC is needed only for the optional Haar identification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-multiplexed-axis-rotation-gray-code",
+        "kind": "lemma",
+        "title": "Gray-Code Synthesis of a Multiplexed Axis Rotation",
+        "statement": "Let $k\\ge0$ controls have computational labels $x\\in\\{0,1\\}^k$, and let $\\theta_x\\in\\mathbb R$. Fix $a\\in\\{x,y,z\\}$. On one target qubit define\n$$M=\\sum_{x\\in\\{0,1\\}^k}|x\\rangle\\langle x|\\otimes R_a(\\theta_x),\\qquad R_a(t)=\\exp(-it\\sigma_a/2).$$\nThen $M$ is exactly synthesized with $2^k$ CNOTs for $k>0$ (the final CNOT restores the parity network). For $a=y,z$ it uses $2^k$ target rotations $R_a(\\beta_j)$; for $a=x$ it uses $2^k$ $R_y$ rotations in the fixed target basis described below; for $k=0$ it is one rotation and no CNOT. For $a=x$ and $k>0$ the implementation also uses two fixed target basis-change gates; the $y,z$ implementations need none. One may replace the cyclic Gray traversal by a traversal that omits the final restoration and absorb that final parity into the next block only when that block is explicitly specified.",
+        "deps": [
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "thm-qc-axis-rotation-pauli-formula",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-one-control-unitary-two-cnot",
+        "kind": "theorem",
+        "title": "Exact Controlled One-Qubit Unitary with Two CNOTs",
+        "statement": "For every $U\\in U(2)$, the exact controlled matrix $C(U)=\\operatorname{diag}(I_2,U)$ is realized with two CNOTs and one-qubit gates only. The scalar phase of $U$ is implemented as a phase gate on the control and is not discarded.",
+        "deps": [
+          "def-qc-controlled-unitary-access",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-one-qubit-euler-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-two-qubit-unitary-three-cnot-synthesis",
+        "kind": "theorem",
+        "title": "Exact Three-CNOT Synthesis of Two-Qubit Unitaries",
+        "statement": "Every $U\\in U(4)$ has an exact circuit with no ancillas, at most three CNOT gates, and arbitrary one-qubit gates. The scalar phase is implemented as a one-qubit scalar gate and is not discarded.",
+        "deps": [
+          "thm-qc-two-qubit-cartan-decomposition",
+          "thm-qc-one-qubit-euler-decomposition",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "thm-qc-axis-rotation-pauli-formula",
+          "def-qc-cnot-and-control-target-order",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-terminal-diagonal-migration",
+        "kind": "lemma",
+        "title": "Two-CNOT Synthesis up to a Migrating Terminal Diagonal",
+        "statement": "Every $U\\in U(4)$ factors exactly as $U=\\Delta V$, where $\\Delta$ is diagonal in the ordered two-qubit computational basis and $V$ has a no-ancilla circuit with at most two CNOTs and arbitrary one-qubit gates. Scalar phases are retained. Consequently, if a chronological circuit has $N\\ge1$ arbitrary two-qubit slots all on the same two wires and each separator preserves every computational label on those two wires, the slots can be synthesized using at most $2(N-1)+3$ CNOTs in total, leaving the separator operations unchanged. This counts only the slots' CNOTs.",
+        "deps": [
+          "thm-qc-two-qubit-cartan-decomposition",
+          "thm-qc-two-qubit-unitary-three-cnot-synthesis",
+          "thm-qc-axis-rotation-pauli-formula",
+          "def-qc-pauli-matrices",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-determinant-multiplicative"
+        ],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-recursive-qsd-central-cz-absorption",
+        "kind": "lemma",
+        "title": "Exact Central Controlled-Z Absorption at a QSD Node",
+        "statement": "Let $k\\ge1$, let the first of $k+1$ wires be the target, and let $L=\\operatorname{diag}(L_0,L_1)$ and $R=\\operatorname{diag}(R_0,R_1)$ be generic block-diagonal unitaries in that target's basis. Let $M$ be a multiplexed $R_y$ on that target, selected by the other $k$ wires. The exact matrix $LMR$ can be represented by four generic $k$-qubit slots, two multiplexed $R_z$ factors and a central network with only $2^k-1$ controlled-$Z$ gates and arbitrary one-qubit rotations. Each controlled-$Z$ costs one CNOT. Thus one CNOT is saved relative to demultiplexing $L,R$ and using a full $2^k$-CNOT central rotation. The exact rewritten factors add no workspace, preserve scalar phases, and keep every non-target wire a select wire within the central network.",
+        "deps": [
+          "lem-qc-multiplexed-axis-rotation-gray-code",
+          "lem-qc-two-unitary-block-demultiplexing",
+          "thm-qc-one-qubit-euler-decomposition",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-generic-unitary-cnot-lower-bound",
+        "kind": "theorem",
+        "title": "Generic No-Ancilla CNOT Lower Bound",
+        "statement": "Assume AC$_\\omega$ to form normalized Frobenius volume. For $n\\ge1$, almost every $n$-qubit unitary with respect to that measure requires at least\n$$\\left\\lceil\\frac{4^n-3n-1}{4}\\right\\rceil$$\nCNOT gates in an exact circuit with arbitrary one-qubit gates and no ancillas. Under full AC, normalized Frobenius volume is normalized Haar measure, so the same is a Haar-almost-everywhere bound. This is a generic lower bound and is not a per-unitary assertion.",
+        "deps": [
+          "def-qc-elementary-circuit-resources",
+          "lem-qc-generic-cnot-parameter-count",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "lem-axiom-of-choice-implies-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "axiom_use": "Assume AC_omega for normalized Frobenius volume; assume full AC only for the optional identification with normalized Haar measure.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-borrowed-bit-multicontrolled-x-linear",
+        "kind": "lemma",
+        "title": "Linear Multicontrolled X with One Borrowed Wire",
+        "statement": "For every integer $r\\ge1$, an $r$-controlled $X$ on $r$ control wires and one target has an exact circuit of $O(r)$ arbitrary one-qubit gates and CNOTs when one additional borrowed wire is available. The circuit equals $C^r(X)\\otimes I$ on the entire register: the borrowed wire is returned unchanged for every state, including states entangled with the controls, target, or an external register. No wire is initialized or measured.",
+        "deps": [
+          "thm-qc-one-control-unitary-two-cnot",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-exact-arbitrary-unitary-qsd-upper-bound",
+        "kind": "theorem",
+        "title": "Exact QSD CNOT Upper Bound",
+        "statement": "For $n\\ge2$, every $n$-qubit unitary has an exact no-ancilla circuit with arbitrary one-qubit gates and at most\n$$\\frac{23}{48}4^n-\\frac32 2^n+\\frac43$$\nCNOTs. For $n=1$, no CNOT is needed. For $n=0$, a circuit on the empty register realizes a scalar unitary exactly if and only if it is $1$; the empty circuit realizes this identity with no gates. This is a gate-count bound; it makes no numerical decomposition-time or finite-precision bit-complexity claim.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-cosine-sine-block-decomposition",
+          "thm-qc-one-qubit-euler-decomposition",
+          "thm-qc-two-qubit-unitary-three-cnot-synthesis",
+          "lem-qc-two-unitary-block-demultiplexing",
+          "lem-qc-multiplexed-axis-rotation-gray-code",
+          "lem-qc-terminal-diagonal-migration",
+          "lem-qc-recursive-qsd-central-cz-absorption"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-multicontrolled-ancilla-resource-tradeoff",
+        "kind": "theorem",
+        "title": "Multicontrolled Unitaries with and without a Clean Work Bit",
+        "statement": "For $m\\ge1$ controls and exact $U\\in U(2)$, define\n$$C^m(U)=\\sum_{x\\ne1^m}|x\\rangle\\langle x|\\otimes I_2+|1^m\\rangle\\langle1^m|\\otimes U.$$\nThis controlled operation has (i) a no-workspace exact construction with $O(m^2)$ one-qubit and CNOT gates, and (ii) an exact construction using one clean work bit, initially $0$ and returned to $0$, with $O(m)$ such gates. For nonscalar $U$, every exact circuit needs at least $m$ two-qubit gates, also when auxiliary wires are allowed with data-independent initial state and exact clean or dirty return. Clean auxiliary wires start at $0$ and return to $0$ for every data input; dirty auxiliary wires may start in any state and the full operation is $C^m(U)\\otimes I$ on them, including correlated inputs. A fixed auxiliary state may be internally entangled but is initially independent of the data. These are upper/lower bounds; the quadratic no-work construction is not asserted optimal.",
+        "deps": [
+          "def-qc-controlled-unitary-access",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-cnot-and-control-target-order",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-one-control-unitary-two-cnot",
+          "lem-qc-borrowed-bit-multicontrolled-x-linear",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-sine-and-cosine-addition-formulas"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qc-two-level-gate-to-elementary-gates",
+        "kind": "algorithm",
+        "title": "Gray-Path Synthesis of a Two-Level Gate",
+        "statement": "Input distinct $x,y\\in\\{0,1\\}^n$, $n\\ge1$, exact $V\\in U(2)$, and for each controlled call a choice between the no-workspace and clean-bit constructions of [[thm-qc-multicontrolled-ancilla-resource-tradeoff]]. If any call selects the clean-bit construction, supply one clean bit initialized to $0$. Output: the chronological elementary-gate list on the $n$ data wires and, if selected, that one clean work wire.\n\nLet $g_0=x,\\ldots,g_d=y$ be the path that flips the differing bit positions once in increasing order, where $d$ is the Hamming distance. For $j=0,\\ldots,d-2$, swap $g_j$ and $g_{j+1}$ by an $X$ on their differing bit controlled on the other $n-1$ bits matching their common pattern. Apply $V$ to the final pair $g_{d-1},y$ by a one-qubit target gate controlled on their common other bits, reversing the ordered $2\\times2$ block if $g_{d-1}$ has target bit $1$. Undo the swaps in reverse order. Expand every multi-control using its selected construction; implement negative controls by conjugating that control wire with $X$.\n\nExpand the calls by the following procedures. Every list below is chronological; concatenation means execute the left list first. Order control wires and available spare wires by their register positions. All parameter selections are exact mathematical operations: use exact matrix arithmetic, a finite-dimensional unitary eigendecomposition, polar arguments and the Euler parameter selection of [[thm-qc-one-qubit-euler-decomposition]]. The input representation must support these selections and exact zero tests; no finite-precision bit-time claim is made. Fix each selection when its call is first expanded and retain the resulting list for an inverse call.\n\nFor one control $c$, target $t$ and matrix $W$, choose $W=e^{i\\delta}R_z(\\alpha)R_y(\\theta)R_z(\\beta)$ as in [[thm-qc-one-qubit-euler-decomposition]]. Form the three matrices $A=R_z(\\alpha)R_y(\\theta/2)$, $B=R_y(-\\theta/2)R_z(- (\\alpha+\\beta)/2)$ and $C=R_z((\\beta-\\alpha)/2)$. Define $S(c,t;W)$ to be the list $C_t$, $\\mathrm{CNOT}_{c\\to t}$, $B_t$, $\\mathrm{CNOT}_{c\\to t}$, $A_t$, $\\operatorname{diag}(1,e^{i\\delta})_c$. Each of $A,B,C$ is one arbitrary one-qubit gate, as in [[thm-qc-one-control-unitary-two-cnot]]. Define $T(a,b;t)$ by setting $J=((1+i)I+(1-i)X)/2$ and concatenating $S(b,t;J)$, $\\mathrm{CNOT}_{a\\to b}$, $S(b,t;J^*)$, $\\mathrm{CNOT}_{a\\to b}$, $S(a,t;J)$.\n\nDefine the ladder list $L(c_1,\\ldots,c_s;t)$ with an ordered supply of at least $\\max\\{s-2,0\\}$ distinct spare wires. For $s=1$ emit one CNOT; for $s=2$ emit $T(c_1,c_2;t)$. For $s\\ge3$, use the first $s-2$ spares $a_1,\\ldots,a_{s-2}$. Set $T_1=T(c_1,c_2;a_1)$, $T_j=T(c_{j+1},a_{j-1};a_j)$ for $2\\le j\\le s-2$, and $H=T(c_s,a_{s-2};t)$. Concatenate $T_1,\\ldots,T_{s-2},H,T_{s-2},\\ldots,T_1$ and then $T_2,\\ldots,T_{s-2},H,T_{s-2},\\ldots,T_2$; the latter list is just $H$ when $s=3$. This is the borrowed ladder used in [[lem-qc-borrowed-bit-multicontrolled-x-linear]].\n\nDefine $D(C;t;z)$ for an ordered nonempty control set $C$ and a distinct borrowed wire $z$. With one or two controls use the corresponding ladder base case and leave $z$ unused. With $r\\ge3$ controls split $C$ into its first $p=\\lceil r/2\\rceil$ controls $A$ and the remaining $q=\\lfloor r/2\\rfloor$ controls $B$. Let $F=L(A;z)$ use spares from $B\\cup\\{t\\}$, and let $G=L(B\\cup\\{z\\};t)$ use spares from $A$. Emit $F,G,F,G$, using the same parameter choices for repeated lists. The stated spare supplies have at least $p-2$ and $q-1$ wires, respectively.\n\nDefine the positive-control no-workspace expansion $N(C;t;W)$ recursively. If $C$ is empty, emit $W_t$. If it has one wire $c$, emit $S(c,t;W)$. Otherwise write $C=A\\cup\\{b\\}$, with $b$ its last control. Choose an orthonormal eigendecomposition $W=R\\operatorname{diag}(\\lambda_1,\\lambda_2)R^*$ by [[thm-complex-spectral-theorem-for-normal-endomorphisms]], choose polar angles $\\lambda_j=\\cos u_j+i\\sin u_j$ by [[thm-polar-form-with-unique-principal-argument]], and set $Z=R\\operatorname{diag}(\\cos(u_1/2)+i\\sin(u_1/2),\\cos(u_2/2)+i\\sin(u_2/2))R^*$. The addition formulas of [[thm-sine-and-cosine-addition-formulas]] specify these half-angle roots. Emit $S(b,t;Z)$, $D(A;b;t)$, $S(b,t;Z^*)$, $D(A;b;t)$, $N(A;t;Z)$. The last call has one fewer control and uses only its indicated wires.\n\nFor the positive-control clean-bit expansion with nonempty $C$ and clean wire $w$, emit $D(C;w;t)$, $S(w,t;W)$, and the reversed adjoint of that same $D$ list. With no controls emit $W_t$ and leave $w$ unused. These are the two constructions analyzed in [[thm-qc-multicontrolled-ancilla-resource-tradeoff]]. For a pattern control, conjugate the selected whole positive-control list by one $X$ on each zero-valued control, ordering each set of these $X$ gates by wire position. Reverse the ordered middle block by using $XVX$ as its single matrix parameter, not by adding target $X$ occurrences.\n\nUse the selected literal elementary gate list for each call without deleting identity gates or cancelling neighboring gates. In the one-control base use the three target matrices and one control phase as four arbitrary one-qubit gates. Use the same choices and reversed adjoint gate lists for the return swaps. Reuse the supplied clean bit sequentially; each selected clean-bit construction returns it to $0$.",
+        "deps": [
+          "def-qc-two-level-unitary",
+          "def-qc-controlled-unitary-access",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-ordered-bitstring-encoding",
+          "thm-qc-multicontrolled-ancilla-resource-tradeoff",
+          "lem-qc-borrowed-bit-multicontrolled-x-linear",
+          "thm-qc-one-control-unitary-two-cnot",
+          "thm-qc-one-qubit-euler-decomposition",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-sine-and-cosine-addition-formulas",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-clean-and-dirty-ancillas",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qc-two-level-gate-synthesis-correct",
+        "kind": "theorem",
+        "title": "Correctness of Gray-Path Two-Level Synthesis",
+        "statement": "The algorithm of [[alg-qc-two-level-gate-to-elementary-gates]] realizes the exact two-level unitary on the ordered selected pair $(x,y)$ and fixes every other computational-basis vector. Write $d$ for their Hamming distance and $m=n-1$. Before expansion there are $2(d-1)$ pattern-controlled swaps and one pattern-controlled target block.\n\nHere are exact post-expansion counts for its literal circuits. A cost pair $(c,q)$ counts CNOTs and arbitrary one-qubit gates, respectively; pairs are added componentwise and identity gate occurrences are retained. Define\n$$E_1=(1,0),\\quad E_2=(8,12),\\quad E_s=(4s-8)(8,12)\\quad(s\\ge3),$$\n$$B_1=(1,0),\\quad B_2=(8,12),\\quad B_r=2E_{\\lceil r/2\\rceil}+2E_{\\lfloor r/2\\rfloor+1}\\quad(r\\ge3).$$\nFor a positive $m$-controlled one-qubit call the no-workspace cost is\n$$Q_0=(0,1),\\quad Q_1=(2,4),\\quad Q_m=Q_{m-1}+2B_{m-1}+(4,8)\\quad(m\\ge2),$$\nand the selected one-clean-bit cost is $K_m=2B_m+(2,4)$ for $m\\ge1$ (use $K_0=Q_0$ with no work bit). For each forward swap $j$, choose $S_j\\in\\{Q_m,K_m\\}$, and for the middle block choose $T\\in\\{Q_m,K_m\\}$. If $z_j$ and $z_V$ are the numbers of zero-valued controls in their patterns, the exact total pair is\n$$2\\sum_{j=0}^{d-2}\\bigl(S_j+(0,2z_j)\\bigr)+T+(0,2z_V).$$\nIts sum of coordinates is the exact elementary gate count. All-no-workspace selection uses $n$ wires and $O(dn^2)$ gates; all-clean selection uses at most $n+1$ wires and $O(dn)$ gates. For mixed selections one clean bit suffices and is reused sequentially, returned to zero after each call. When $n=1$, the circuit is one arbitrary one-qubit gate with cost $(0,1)$ and no work bit.",
+        "deps": [
+          "alg-qc-two-level-gate-to-elementary-gates",
+          "def-qc-two-level-unitary",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-multicontrolled-ancilla-resource-tradeoff",
+          "lem-qc-borrowed-bit-multicontrolled-x-linear",
+          "thm-qc-one-control-unitary-two-cnot",
+          "thm-qc-one-qubit-euler-decomposition",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-sine-and-cosine-addition-formulas"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2187,
+    "id": "continuous-gate-universality-and-exact-synthesis-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Continuous-Gate Universality and Exact Synthesis — Examples",
+    "companion": "continuous-gate-universality-and-exact-synthesis",
+    "requires": [
+      "continuous-gate-universality-and-exact-synthesis"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-two-level-unitary-synthesis",
+        "kind": "example",
+        "title": "A Two-Level Rotation on Two Qubits",
+        "statement": "Use the ordered computational basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$. Select $x=00$, $y=01$, and\n$$V=\\frac1{\\sqrt2}\\begin{pmatrix}1&-1\\\\1&1\\end{pmatrix}.$$\nThis is the QC7 rotation $R_y(\\pi/2)$, with its exact sign convention recorded in [[def-qc-one-qubit-gate-alphabet-and-rotations]].",
+        "deps": [
+          "thm-qc-one-qubit-euler-decomposition",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-two-level-unitary"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

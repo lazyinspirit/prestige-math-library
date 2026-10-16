@@ -1,0 +1,339 @@
+{
+  "group": "i",
+  "batches": [
+    "50"
+  ],
+  "pages_read": [
+    "hhl-phase-estimation-linear-systems",
+    "hhl-phase-estimation-linear-systems-examples"
+  ],
+  "items_read": [
+    "def-qa-26-hhl-reciprocal-filter",
+    "def-qa-26-hhl-sine-window",
+    "lem-qa-26-hermitian-dilation",
+    "lem-qa-26-hhl-filter-geometry",
+    "def-qa-26-qlsp-task",
+    "lem-qa-26-hhl-filter-perturbation",
+    "lem-qa-26-hhl-sine-window-prefix-masses",
+    "lem-qa-26-qlsp-target-is-well-defined",
+    "lem-qa-26-hhl-prefix-table-synthesis-error",
+    "def-qa-26-hhl-access-model",
+    "lem-qa-26-hhl-sine-window-kernel-moment",
+    "lem-qa-26-phase-to-eigenvalue-unwrapping",
+    "lem-qa-26-hhl-capped-amplification",
+    "alg-qa-26-hhl-phase-estimation",
+    "lem-qa-26-hhl-success-amplitude",
+    "thm-qa-26-hhl-amplified-postselection-cost",
+    "thm-qa-26-hhl-simulator-cost",
+    "lem-qa-26-postselection-normalization-bound",
+    "thm-qa-26-hhl-state-correctness",
+    "thm-qa-26-hhl-query-cost",
+    "cex-qa-26-hhl-classical-vector-output",
+    "ex-qa-26-diagonal-hhl"
+  ],
+  "conventions": [
+    {
+      "convention": "QLSP has m,n ≥ 1, nonzero b in ran(A), and a support-specific positive singular-value gap γ. Its output is the normalized domain state A⁺b, rather than a classical coordinate list.",
+      "fixed_by": "def-qa-26-qlsp-task",
+      "matters_for": [
+        "lem-qa-26-qlsp-target-is-well-defined",
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-state-correctness",
+        "cex-qa-26-hhl-classical-vector-output"
+      ]
+    },
+    {
+      "convention": "The well amplitude is odd, the ill amplitude is even, and the flag order is nothing, well, ill. The supported reciprocal is fκ(λ)=1/(2κλ), retaining negative eigenvalue signs.",
+      "fixed_by": "def-qa-26-hhl-reciprocal-filter",
+      "matters_for": [
+        "lem-qa-26-hhl-filter-geometry",
+        "lem-qa-26-hhl-filter-perturbation",
+        "lem-qa-26-hhl-success-amplitude",
+        "thm-qa-26-hhl-state-correctness"
+      ]
+    },
+    {
+      "convention": "Simulation uses e^{+iHt}; the forward Fourier transform in phase estimation has negative sign. Full-operator access and explicitly supplied clean-input isometry access are separate admissible modes. Uncomputation uses actual circuit adjoints.",
+      "fixed_by": "def-qa-26-hhl-access-model",
+      "matters_for": [
+        "lem-qa-26-phase-to-eigenvalue-unwrapping",
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-simulator-cost",
+        "thm-qa-26-hhl-state-correctness",
+        "thm-qa-26-hhl-query-cost"
+      ]
+    },
+    {
+      "convention": "T is a power of two, the sine window uses τ=0,…,T−1 with half-step angles π(τ+1/2)/T, and prefix synthesis encodes the left child by 1. Reflection symmetry compensates for the reversed leaf labels.",
+      "fixed_by": "lem-qa-26-hhl-prefix-table-synthesis-error",
+      "matters_for": [
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-state-correctness"
+      ]
+    },
+    {
+      "convention": "Signed decoding uses k=y for y<T/2 and k=y−T otherwise, with eigenvalue estimate 2πk/t₀ and centered labels −T/2,…,T/2−1.",
+      "fixed_by": "lem-qa-26-phase-to-eigenvalue-unwrapping",
+      "matters_for": [
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-state-correctness",
+        "ex-qa-26-diagonal-hhl"
+      ]
+    },
+    {
+      "convention": "Rectangular success requires both the well flag and the domain tag. Preparation work is retained, simulator work is included in the joint error comparison, and successful amplified branches are identified as pure-state rays.",
+      "fixed_by": "alg-qa-26-hhl-phase-estimation",
+      "matters_for": [
+        "thm-qa-26-hhl-state-correctness",
+        "thm-qa-26-hhl-amplified-postselection-cost",
+        "thm-qa-26-hhl-simulator-cost"
+      ]
+    },
+    {
+      "convention": "Sparse query counts exclude separately charged arithmetic, phase generation, uniform preparation, gate synthesis and the linear-size sine table. Variable failure probability adds a factor 1+log(1/ρ).",
+      "fixed_by": "thm-qa-26-hhl-query-cost",
+      "matters_for": [
+        "thm-qa-26-hhl-query-cost"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-26-hhl-state-correctness",
+      "statement": "Under the promises and precision allocations in alg-qa-26-hhl-phase-estimation, the conditional returned joint pure-state ray has a unit representative within vector norm ε of the normalized QLSP target tensored with preparation work, clean algorithmic registers and well flag; capped amplification returns FAIL with probability at most ρ. The same assertion holds for the Hermitian dilation with output in its tagged domain summand.",
+      "used_by": [
+        "thm-qa-26-hhl-query-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-26-hhl-sine-window-kernel-moment",
+      "statement": "Let t₀=2048κ/ε, 0<ε≤1, κ≥1, and T be the least power of two at least 8(t₀+1). For any λ∈[−1,1], the signed sine-window phase kernel satisfies Σₖ pₖ(λ)(λt₀−2πk)²<300.",
+      "used_by": [
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-state-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-26-hhl-filter-perturbation",
+      "statement": "For κ≥1, t₀>0, real λ,δ with 1/κ≤|λ|≤1 and λ̃=λ−δ/t₀, the pair m=(fκ,gκ) satisfies ‖m(λ̃)−m(λ)‖₂≤10κ|δ| |fκ(λ)|/t₀.",
+      "used_by": [
+        "thm-qa-26-hhl-state-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-26-hhl-capped-amplification",
+      "statement": "For a unitary flagged preparation with p≥1/(16κ²), κ≥1, and exact inverse access, the stated K=⌈4κ⌉, R=⌈16 ln(1/ρ)⌉+16 random capped schedule fails with probability at most ρ, preserves the normalized successful pure-state ray, and uses at most 2RK preparation/inverse calls.",
+      "used_by": [
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-amplified-postselection-cost",
+        "thm-qa-26-hhl-simulator-cost",
+        "thm-qa-26-hhl-state-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-26-hhl-success-amplitude",
+      "statement": "For the ideal exact-eigenvalue algorithm on normalized input supported on 1/κ≤|λ|≤1, the well vector is v=(2κ)⁻¹H⁺|b⟩, its probability lies in [1/(4κ²),1/4], and its normalized state is the QLSP target.",
+      "used_by": [
+        "lem-qa-26-postselection-normalization-bound",
+        "thm-qa-26-hhl-state-correctness",
+        "ex-qa-26-diagonal-hhl"
+      ]
+    },
+    {
+      "id": "lem-qa-26-hermitian-dilation",
+      "statement": "For A:Cⁿ→Cᵐ, H_A(x,y)=(Ay,A*x) is Hermitian, has nonzero eigenvalues ±σⱼ and kernel ker(A*)⊕ker(A), and satisfies H_A⁺(b,0)=(0,A⁺b). For positive rank its nonzero condition number is preserved.",
+      "used_by": [
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-state-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-26-hhl-prefix-table-synthesis-error",
+      "statement": "The stated binary prefix circuit prepares the sine-window vector. A product of N controlled Y rotations with per-rotation operator error at most δ has operator error at most Nδ; for N=T−1 and δ=εΨ/(100T), this is less than εΨ/100, with the same bound for inverse preparation.",
+      "used_by": [
+        "alg-qa-26-hhl-phase-estimation",
+        "thm-qa-26-hhl-state-correctness"
+      ]
+    },
+    {
+      "id": "thm-qa-26-hhl-simulator-cost",
+      "statement": "The capped circuit uses at most RK calls each to V and V†; each contains 2L controlled simulation calls with absolute times summing to less than 2t₀. Total absolute simulation time is less than 4RKt₀, with simulator and other resource charges given by the explicit separate sums.",
+      "used_by": [
+        "thm-qa-26-hhl-query-cost"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Rectangular singular pairs, support-gap coordinates and the dilation pseudoinverse.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Self-adjoint block dilation and reality of Hermitian eigenvalues.",
+      "opened": true
+    },
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "Penrose-equation constructions and nonzero-target proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Identification of the constructed diagonal and dilation pseudoinverses.",
+      "opened": true
+    },
+    {
+      "id": "def-kernel-and-image-of-a-linear-map",
+      "used_for": "The nonzero range-input promise and selection of a preimage of b.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Finite orthonormal eigenbasis expansions in decoding and correctness.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Norm preservation in rotation-product error estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Simulation error contracts and the entry bound |Hᵢⱼ|≤‖H‖.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Telescoping, reverse-triangle and normalization estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Filter normalization, rotation matrices and trigonometric bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-sine-and-cosine-are-one-lipschitz",
+      "used_for": "Filter stability and the sine-kernel denominator estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Matching filter endpoints and quarter-turn identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Values at zero used in filter continuity and kernel estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-double-angle-and-power-reduction-identities",
+      "used_for": "Sine-prefix masses and capped-amplification averaging.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Finite exponential sums for sine-prefix masses.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Multiplicativity in the finite geometric-sum derivation.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Prefix-mass identities, rotation differences and amplification averages.",
+      "opened": true
+    },
+    {
+      "id": "thm-cofunction-supplementary-and-reflection-identities",
+      "used_for": "Positive sine weights and symmetry under reversal of prefix leaf labels.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The exponential failure bound for independent capped rounds.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-qa-26-hhl-phase-estimation",
+      "concern": "Definition step 2 says to set t_j and allocate η_j 'to both its forward controlled call S_H(t_j,η_j) and its reverse call', then proceeds to the negative-sign QFT. It does not explicitly instruct applying the forward call or name its control wire. The intended operation is readily reconstructed from the cited QPE algorithm: apply the call controlled by q_{L−1−j}. State this explicitly to make the defining procedure executable without reconstruction.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The coherent QPE prefix, negative-sign inverse QFT, geometric sum and sine-chord bounds are used with compatible phase signs and big-endian indexing. The algorithm's omitted explicit control-wire instruction is recorded separately."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "amplitude-amplification",
+      "faithful": true,
+      "note": "The capped schedule uses the supplied arbitrary orthogonal success projector, actual inverse preparation and the stated sin²((2j+1)θ) rotation law, including p=1. Successful branches preserve a ray."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "QA20 supplies exact sorted XOR access and separately charged simulation resources. The alternative clean-workspace guarantee is explicitly added by the HHL access model rather than attributed to QA20's target-unitary definition."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Root inner products are linear in the first argument; Dirac conversion and conjugate-transpose adjoints are consistent with the eigenvalue and pseudoinverse calculations."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Computational registers retain big-endian order. Preparation work and simulator work remain explicit tensor factors in the joint-vector comparison."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "Normalized vectors differing by global phase are treated as the same pure-state ray; the conditional successful branch is compared before tracing work."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled and inverse access are explicitly supplied and charged. Flag Y rotations retain the stated exact matrix convention and negative-eigenvalue sign gate."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Oracle calls, gates, workspace, classical generation, precision and table construction remain separate resource coordinates; no uniform efficiency follows from a matrix description alone."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "amplitude-estimation-and-counting",
+      "faithful": true,
+      "note": "The cited π-bound lemma gives 3<π<22/7, which implies the weaker π<16/5 estimates used locally."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "qubitization-and-optimal-hamiltonian-simulation",
+      "faithful": true,
+      "note": "The sparse specialization uses the sorted-XOR encoding's actual logarithmic location cost, clean-input simulation guarantee, and actual-adjoint hybrid. Irrational phase times are rounded to rational simulator inputs with an explicit additional error budget."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "hhl-phase-estimation-linear-systems",
+      "faithful": true,
+      "note": "The downstream block-encoded QLSP definition, supported-pseudoinverse lemma and sparse CKS model preserve the nonzero range-input promise, support-specific singular gap, domain output and normalized pseudoinverse target."
+    }
+  ]
+}

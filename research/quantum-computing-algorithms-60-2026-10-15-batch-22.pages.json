@@ -1,0 +1,944 @@
+[
+  {
+    "title": "Graph States and Measurement-Based Computation",
+    "kind": "A",
+    "category": "quantum-computing",
+    "requires": [
+      "algebraic-extensions-degree-and-finite-fields",
+      "bell-states-teleportation-and-dense-coding",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "congruences-and-the-chinese-remainder-theorem",
+      "continuous-gate-universality-and-exact-synthesis",
+      "controlled-gates-phase-and-entanglement",
+      "determinants-of-matrices-over-a-commutative-ring",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "graphs-walks-and-connectivity",
+      "measurements-povms-and-instruments",
+      "pauli-and-clifford-groups-binary-symplectic-tableaux",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "registers-tensor-products-and-partial-trace",
+      "stabilizer-circuits-and-gottesman-knill-simulation",
+      "vector-spaces-and-subspaces"
+    ],
+    "companion": "graph-states-and-measurement-based-computation-examples",
+    "items": [
+      {
+        "id": "def-qc-binary-adjacency-matrix",
+        "kind": "definition",
+        "title": "Binary adjacency matrix of an ordered finite simple graph",
+        "statement": "Let $G=(V,E)$ be a finite simple graph with a fixed order\n$V=(v_0,\\ldots,v_{n-1})$. Put $\\mathbb F_2:=\\mathbb Z/2\\mathbb Z$; the\nfield law follows from [[thm-z-mod-p-is-a-field]] at $p=2$, and this field has\norder two by [[def-finite-field-and-its-order]]. Define the binary adjacency\nmatrix $A_2(G)\\in M_n(\\mathbb F_2)$ by\n\n$$ (A_2(G))_{jk}=\\begin{cases}1,&\\{v_j,v_k\\}\\in E,\\\\0,&\\{v_j,v_k\\}\\notin E.\\end{cases} $$\n\nThe indices use the ordered bit coordinates of\n[[def-qc-ordered-bitstring-encoding]]. Since edges are unordered pairs of\ndistinct vertices, $A_2(G)$ is symmetric and has zero diagonal. This is a\nmatrix over $\\mathbb F_2$, using [[def-matrices-over-a-commutative-ring]];\nit is not the root library's real-valued adjacency matrix. When $V=\\varnothing$,\n$A_2(G)$ is the unique $0\\times0$ matrix.",
+        "deps": [
+          "def-finite-simple-graph",
+          "thm-z-mod-p-is-a-field",
+          "def-finite-field-and-its-order",
+          "def-vector-space",
+          "def-matrices-over-a-commutative-ring",
+          "def-qc-ordered-bitstring-encoding"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            },
+            {
+              "title": "M. Hein et al., Entanglement in graph states and its applications, arXiv:quant-ph/0602096",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "define vertex-order dependence and arithmetic mod 2; do not depend on the real-valued root adjacency matrix."
+        ]
+      },
+      {
+        "id": "def-qc-j-gate-and-equatorial-basis",
+        "kind": "definition",
+        "title": "J gate and ordered equatorial measurement vectors",
+        "statement": "For $\\alpha\\in\\mathbb R$, let\n$P_\\alpha=\\operatorname{diag}(1,e^{i\\alpha})$ and\n$J(\\alpha)=H P_\\alpha$, with $H$ and the exact one-qubit gate convention\nfrom [[def-qc-one-qubit-gate-alphabet-and-rotations]]. Define the ordered\nmeasurement vectors\n\n$$ |b\\rangle_\\alpha:=J(\\alpha)^\\dagger|b\\rangle,\\qquad b\\in\\{0,1\\}, $$\n\nwhere $|0\\rangle,|1\\rangle$ are the ordered computational basis vectors.\nThe adjoint and complex inner product use the root convention translated by\n[[def-qc-dirac-notation-conversion]]. The global phase in $J(\\alpha)$\nis fixed by the displayed matrix product; it is not suppressed.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415, §20.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf and Hans J. Briegel, Quantum computing via measurements only, arXiv:quant-ph/0010033",
+              "url": "https://arxiv.org/pdf/quant-ph/0010033"
+            }
+          ]
+        },
+        "proof_obligations": []
+      },
+      {
+        "id": "lem-qc-j-basis-and-phase-identities",
+        "kind": "lemma",
+        "title": "J-gate basis and exact phase identities",
+        "statement": "For every $\\alpha,\\beta\\in\\mathbb R$, $J(\\alpha)$ is unitary and\n$\\{|0\\rangle_\\alpha,|1\\rangle_\\alpha\\}$ is an orthonormal basis. The exact\nidentities\n\n$$ J(0)=H,\\qquad J(0)^2=I,\\qquad J(-\\beta)X=e^{-i\\beta}ZJ(\\beta),\\qquad J(\\pi/2)^3=e^{i\\pi/4}I $$\n\nhold in the fixed phase convention.",
+        "deps": [
+          "def-qc-j-gate-and-equatorial-basis",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Verify unitarity and basis orthonormality from the exact matrices; multiply both sides of the phase identity; compute the three-J scalar exactly."
+        ]
+      },
+      {
+        "id": "def-qc-graph-state",
+        "kind": "definition",
+        "title": "Graph state of an ordered finite simple graph",
+        "statement": "Let $G=(V,E)$ be a finite simple graph with a fixed vertex order. Let\n$\\mathcal H_V=\\bigotimes_{v\\in V}\\mathbb C^2$ use that order and its ordered\ncomputational basis, as in [[def-qc-register-and-computational-basis]],\n[[def-qc-ordered-bitstring-encoding]], and\n[[def-qc-tensor-register-and-permutation]]. For each edge $\\{u,v\\}$ let\n$CZ_{uv}$ be the unique full-register local embedding from\n[[lem-qc-local-gate-wire-embedding]] of the controlled phase gate with angle\n$\\pi$ from [[def-qc-controlled-phase-rotation]]. Order the endpoints so that\n$u$ precedes $v$ in the fixed vertex order; the embedded two-qubit matrix is\n$\\operatorname{diag}(1,1,1,-1)$ in the ordered pair basis\n$|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, and every other tensor factor\nacts as the identity. Thus the two local factors have the same order as the\nedge endpoints, within the full register ordered by $V$. Order the finite edge\nset lexicographically by its ordered endpoint indices and define\n\n$$ |G\\rangle:=\\left(\\prod_{\\{u,v\\}\\in E}^{\\mathrm{lex}}CZ_{uv}\\right)|+\\rangle^{\\otimes V},\\qquad |+\\rangle=2^{-1/2}(|0\\rangle+|1\\rangle). $$\n\nThe lexicographic order makes the product a specified finite composition.\nIf $V=\\varnothing$, the tensor product and empty product act on the\none-dimensional trivial register and $|G\\rangle$ is its unit vector.",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-controlled-phase-rotation",
+          "lem-qc-local-gate-wire-embedding"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in graph states and its applications, arXiv:quant-ph/0602096",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "establish incident edge gates commute, so the finite product is order-independent."
+        ]
+      },
+      {
+        "id": "lem-qc-cz-matching-pauli-frame-action",
+        "kind": "lemma",
+        "title": "Controlled-Z matching action on a Pauli frame",
+        "statement": "Let $n\\ge0$ and let $M$ be a matching, meaning a set of pairwise disjoint\ntwo-element subsets of the ordered wire set $\\{1,\\ldots,n\\}$. Give the graph\n$G_M=(\\{1,\\ldots,n\\},M)$ the vertex order $1,\\ldots,n$, so vertex $j$ is\ncoordinate $j$ (position $j-1$ in the zero-based vertex list) of its binary\nadjacency matrix. Let $A_M:=A_2(G_M)\\in M_n(\\mathbb F_2)$ from\n[[def-qc-binary-adjacency-matrix]], so $(A_M)_{jk}=1$ exactly when\n$\\{j,k\\}\\in M$. For $x,z\\in\\mathbb F_2^n$, all coordinates use this wire\norder, and binary dot products mean $a\\cdot b:=\\sum_{j=1}^n a_jb_j$ in\n$\\mathbb F_2$. Define $q_M(x):=\\sum_{\\{j,k\\}\\in M}x_jx_k\\in\\mathbb F_2$.\nFor $n\\ge1$, put\n$P(x,z):=X^xZ^z=P(0,x,z)$ as in\n[[def-qc-phase-aware-n-qubit-pauli-group]]. For $n=0$, the unique empty\nvectors satisfy $X^x=Z^z=I_{\\mathbb C}$ and we define $P(x,z)=I_{\\mathbb C}$;\nthe register is the empty tensor product from\n[[def-qc-tensor-register-and-permutation]]. With\n$CZ_M:=\\prod_{\\{j,k\\}\\in M}CZ_{jk}$,\n\n$$CZ_M P(x,z)=(-1)^{q_M(x)}P(x,z\\oplus A_Mx)CZ_M.$$\n\nFor the empty wire set or empty matching the sum is zero and the formula is\nthe identity.",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-binary-adjacency-matrix",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415, §20.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, §II B",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Expand the matching quadratic form on computational basis vectors and retain the sign when both endpoints have X support."
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-normalized-transport-schedule",
+        "kind": "definition",
+        "title": "Normalized transport schedule for a J/CZ circuit",
+        "statement": "Let $C$ be a finite $n$-wire circuit over the $J(\\alpha)$ and $CZ$ gates, with chronological layers\n$L_1,\\ldots,L_d$ and source wire labels $0,\\ldots,n-1$ as in\n[[def-qc-circuit-syntax-and-register-order]]. Schedule index $j\\in\\{1,\\ldots,n\\}$\ndenotes source wire $j-1$. For each source layer $L_r$, let $M_r$ be the\nmatching of its $CZ$ occurrences after reindexing a source pair $\\{u,v\\}$ as\n$\\{u+1,v+1\\}$, and let $J_r\\subseteq\\{1,\\ldots,n\\}$ be the indices carrying\none-qubit gates $J(\\alpha_{rj})$. The source layer has pairwise disjoint gate\nsupports by [[def-qc-circuit-syntax-and-register-order]], so no $J$ gate in\n$J_r$ meets an edge of $M_r$. By\n[[lem-qc-disjoint-layer-order-independence]], its denotation may be written\nwith the CZ matching first and then at most one $J(\\alpha_{rj})$ per schedule\nindex $j$. The\n**normalized transport schedule** $\\mathcal T(C)$ is the finite chronological\nlist of rounds $(M_s,(\\alpha_{s1},\\ldots,\\alpha_{sn}))$ and the scalar\n$\\sigma_C$ defined as follows. A round applies its matching first and then\none $J$ gate on each wire. Define\n$\\sigma_C=\\prod_{r:0<|J_r|<n}e^{i\\pi(n-|J_r|)/4}$. The round list is the\nconcatenation, in source-layer order, of the blocks specified by the first\nmatching case below; the empty product is $1$. This order makes the\nzero-wire empty-layer case unambiguous:\n\n1. If $J_r=\\varnothing$ and $M_r=\\varnothing$, the block is empty.\n2. If $n\\ge1$ and $J_r=\\{1,\\ldots,n\\}$, the block consists of one round with matching\n   $M_r$ and the original angles $\\alpha_{rj}$.\n3. If $J_r=\\varnothing$ and $M_r\\ne\\varnothing$, the block consists of two rounds: the\n   first has matching $M_r$ and angle $0$ on every wire; the second has no\n   matching and angle $0$ on every wire.\n4. If $0<|J_r|<n$, the block consists of three rounds. The first has matching $M_r$,\n   angle $\\alpha_{rj}$ on active wires $j\\in J_r$, and angle $\\pi/2$ on\n   idle wires. The next two have no matching, angle $0$ on active wires,\n   and angle $\\pi/2$ on idle wires. The factor for this mixed layer is\n   included in the displayed product defining $\\sigma_C$.\n\nThe rounds are numbered $s=1,\\ldots,R$ in concatenation order. Their schedule\nindices continue to denote the corresponding source wires $j-1$. Angles at\nindices without an original $J$ gate are padding angles. For a mixed layer,\nthe active-wire product is $J(0)J(0)J(\\alpha)=J(\\alpha)$ and each idle wire\ncontributes $J(\\pi/2)^3=e^{i\\pi/4}I$; the scalar is therefore recorded in\n$\\sigma_C$ rather than suppressed. The no-$J$ matching case has two\n$J(0)=H$ transports, whose product is $I$. No claim about the transport\ngraph's simplicity is part of this definition.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "lem-qc-disjoint-layer-order-independence",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-j-gate-and-equatorial-basis",
+          "lem-qc-j-basis-and-phase-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415, §20.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, §§II D–F",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "State the layer order and handle empty, fully occupied, CZ-only, and mixed layers.",
+          "Retain the scalar from each mixed layer and bound R by 3d."
+        ]
+      },
+      {
+        "id": "lem-qc-one-bit-teleportation",
+        "kind": "lemma",
+        "title": "One-bit J-gate teleportation branch identity",
+        "statement": "For a normalized qubit $|\\psi\\rangle=a|0\\rangle+c|1\\rangle$ and real\n$\\alpha$, prepare $CZ(|\\psi\\rangle\\otimes|+\\rangle)$ and project the first\nqubit in the ordered basis $\\{|b\\rangle_\\alpha:b=0,1\\}$ of\n[[def-qc-j-gate-and-equatorial-basis]]. The outcome-$b$ branch operator on the\nsecond qubit is\n\n$$K_b=2^{-1/2}X^bJ(\\alpha).$$\n\nThus each outcome has probability $1/2$ and the normalized output is\n$X^bJ(\\alpha)|\\psi\\rangle$. The operator identity is linear and therefore\nalso holds when the input qubit is entangled with a finite-dimensional\nreference register.",
+        "deps": [
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-qc-density-operator",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-projective-measurement",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-j-gate-and-equatorial-basis",
+          "lem-qc-j-basis-and-phase-identities",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-dirac-notation-coordinate-identity",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf and Hans J. Briegel, Quantum computing via measurements only, arXiv:quant-ph/0010033",
+              "url": "https://arxiv.org/pdf/quant-ph/0010033"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "expand amplitudes and check each branch norm."
+        ]
+      },
+      {
+        "id": "lem-qc-r-y-r-z-multiplexor-gray-code",
+        "kind": "lemma",
+        "title": "Exact Gray-code synthesis of multiplexed y- and z-axis rotations",
+        "statement": "For $k\\ge0$ controls and real angles $\\theta_x$ indexed by\n$x\\in\\{0,1\\}^k$, let\n$$M_a=\\sum_{x\\in\\{0,1\\}^k}|x\\rangle\\langle x|\\otimes R_a(\\theta_x), \\qquad a\\in\\{y,z\\},$$\nwhere $R_y(\\theta)=R_{(0,1,0)}(\\theta)$ and\n$R_z(\\theta)=R_{(0,0,1)}(\\theta)$ use the exact exponential convention of\n[[def-qc-one-qubit-gate-alphabet-and-rotations]]. There is an exact finite\ncircuit for $M_a$ on the same $k+1$ wires, using arbitrary one-qubit\nrotations and CNOT gates and no ancillas. For $k=0$ it is one rotation and no\nCNOT; for $k>0$ it uses $2^k$ target rotations and $2^k$ CNOTs. The circuit\nuses exact real angle labels; no finite-bit encoding or synthesis-time bound\nis asserted.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "thm-qc-axis-rotation-pauli-formula",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-local-gate-wire-embedding"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits, arXiv:quant-ph/0406176v5, §§3 and 5",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415, §2.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Prove the cyclic Gray traversal and Walsh inversion exactly.",
+          "Verify both rotation signs from the fixed Pauli convention; do not use the QC11 axis-sign mismatch.",
+          "Cover k=0 and the final parity-restoring CNOT."
+        ]
+      },
+      {
+        "id": "lem-qc-graph-state-amplitude-formula",
+        "kind": "lemma",
+        "title": "Computational-basis amplitudes of a graph state",
+        "statement": "Let $G=(V,E)$ be an ordered finite simple graph with $n=|V|$. In the ordered\ncomputational basis indexed by $x\\in\\mathbb F_2^V$,\n\n$$ |G\\rangle=2^{-n/2}\\sum_{x\\in\\mathbb F_2^V}(-1)^{\\sum_{\\{u,v\\}\\in E}x_ux_v}|x\\rangle, $$\n\nwhere the exponent is evaluated as an integer and only its parity affects the\nsign.",
+        "deps": [
+          "def-qc-graph-state",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-controlled-phase-rotation"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in graph states and its applications, arXiv:quant-ph/0602096",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "multiply edge phases and retain normalization."
+        ]
+      },
+      {
+        "id": "lem-qc-graph-state-edge-gates-commute",
+        "kind": "lemma",
+        "title": "Controlled-Z edge gates commute",
+        "statement": "For any two edges $e,f$ of a finite simple graph on an ordered qubit register,\nthe embedded operators $CZ_e$ and $CZ_f$ commute. Consequently the finite\ngraph-state edge product is independent of the ordering of its edges.",
+        "deps": [
+          "def-qc-graph-state",
+          "def-qc-controlled-phase-rotation"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in graph states and its applications, arXiv:quant-ph/0602096",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Use the diagonal computational-basis action, including disjoint edges, edges sharing one vertex, and the empty edge set."
+        ]
+      },
+      {
+        "id": "def-qc-adaptive-measurement-pattern",
+        "kind": "definition",
+        "title": "Finite open-graph adaptive measurement pattern",
+        "statement": "An **open-graph adaptive measurement pattern** consists of an ordered finite\nsimple graph $G=(V,E)$, input and output subsets $I,O\\subseteq V$, an ordering\n$m_1,\\ldots,m_q$ of $M:=V\\setminus O$, basis-choice functions\n$\\alpha_j:\\{0,1\\}^{j-1}\\to\\mathbb R$, and a terminal correction function\n$C:\\{0,1\\}^q\\to U(\\mathcal H_O)$. For each subset $S\\subseteq V$, write\n$\\mathcal H_S:=\\bigotimes_{v\\in S}\\mathbb C^2$ in inherited vertex order,\nwith $\\mathcal H_\\varnothing=\\mathbb C$. The tensor register $\\mathcal H_V$\nand all wire permutations use the fixed vertex order. Let\n$\\Pi_{I,V\\setminus I}:\\mathcal H_V\\to\n\\mathcal H_I\\otimes\\mathcal H_{V\\setminus I}$ be the wire permutation listing\n$I$ first and then $V\\setminus I$, each in inherited order. Let\n$a_+:\\mathbb C\\to\\mathbb C^2$ be the linear map $c\\mapsto c|+\\rangle$, and\nlet $a_{+,V\\setminus I}:=\\bigotimes_{v\\in V\\setminus I}a_+$ in inherited\norder. Using the empty-tensor identifications, define the ordered input map\n$$\\iota_I:=\\Pi_{I,V\\setminus I}^{-1} (I_{\\mathcal H_I}\\otimes a_{+,V\\setminus I}): \\mathcal H_I\\to\\mathcal H_V.$$\nThus the input is unchanged and each complementary vertex receives $|+\\rangle$.\nApply $U_G:=\\prod_{\\{u,v\\}\\in E}^{\\mathrm{lex}}CZ_{uv}$.\nAt step $j$, after transcript prefix $b_1,\\ldots,b_{j-1}$, measure vertex\n$m_j$ in the ordered basis $\\{|b_j\\rangle_{\\alpha_j(b_{<j})}:b_j\\in\\{0,1\\}\\}$\nfrom [[def-qc-j-gate-and-equatorial-basis]]. The measured systems are removed\nand the vertices in $O$ are retained in their inherited order.\n\nLet $\\Pi_{M,O}$ be the tensor permutation listing $m_1,\\ldots,m_q$ first and\nthe vertices of $O$ in inherited order. For a full transcript\n$\\mathbf b=(b_1,\\ldots,b_q)$, define the linear measurement contraction\n$$B_{\\mathbf b}:= \\left(\\bigotimes_{j=1}^q {}_{\\alpha_j(b_{<j})}\\!\\langle b_j|_{m_j}\\right)\\otimes I_{\\mathcal H_O},$$\nwhere the bras are the linear functionals from\n[[def-qc-dirac-notation-conversion]], their tensor map is formed in\n$m_1,\\ldots,m_q$ order, so\n$B_{\\mathbf b}:\\mathcal H_{m_1}\\otimes\\cdots\\otimes\\mathcal H_{m_q}\n\\otimes\\mathcal H_O\\to\\mathcal H_O$. The scalar output\n$\\mathbb C^{\\otimes q}$ is identified with\n$\\mathbb C$ by the tensor-unit convention. This tensor map is supplied by\n[[def-qc-tensor-map]]; for $q=0$ its measured-register factor is the identity\non the empty tensor product. The branch map is the ordered composition\n\n$$K_{\\mathbf b}=B_{\\mathbf b}\\Pi_{M,O}U_G\\iota_I: \\mathcal H_I\\to\\mathcal H_O.$$\n\nThe measured systems are removed and the vertices in $O$ are retained in\ntheir inherited order. This pattern uses $|V|$ qubit registers, its width in\nthe convention of [[def-qc-elementary-circuit-resources]]. Its projective\nmeasurement count is $q$, counting one occurrence for each listed vertex\n$m_j$. On a normalized pure input its\nprobability is $\\|K_{\\mathbf b}\\psi\\|^2$; for a density operator $\\rho$ it is\n$\\operatorname{tr}(K_{\\mathbf b}\\rho K_{\\mathbf b}^\\dagger)$. The conditional\noutput is normalized only when that probability is positive. The corrected\nbranch is $C(\\mathbf b)K_{\\mathbf b}$; the correction does not change the\nbranch probability. This is a finite-dimensional mathematical circuit and\ninstrument semantics, with no physical postulate or implementation claim.",
+        "deps": [
+          "def-qc-graph-state",
+          "def-qc-projective-measurement",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-classical-control-and-measurement-circuit",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-qc-pure-state-and-ray",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-j-gate-and-equatorial-basis",
+          "lem-qc-j-basis-and-phase-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "define tensor and measurement order, the branch map including output-wire restriction, classical basis-selection functions, and terminal correction semantics."
+        ]
+      },
+      {
+        "id": "lem-qc-adaptive-angle-pauli-frame-update",
+        "kind": "lemma",
+        "title": "Adaptive J angle and Pauli-frame update",
+        "statement": "Let a one-qubit input carry the Pauli frame $X^xZ^z$, where $x,z\\in\\{0,1\\}$,\nand let $\\beta\\in\\mathbb R$. Choose the next equatorial measurement angle\n$(-1)^x\\beta$. For outcome $b\\in\\{0,1\\}$, the one-bit teleportation branch is\n\n$$ 2^{-1/2}\\gamma(x,z,\\beta)X^{b\\oplus z}Z^xJ(\\beta),\\qquad \\gamma(x,z,\\beta)=\\begin{cases}1,&x=0,\\\\(-1)^ze^{-i\\beta},&x=1.\\end{cases} $$\n\nThus the updated Pauli frame is $(x',z')=(b\\oplus z,x)$, and the exact\nbranch scalar has unit modulus.",
+        "deps": [
+          "lem-qc-one-bit-teleportation",
+          "lem-qc-hadamard-pauli-action",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-qc-j-gate-and-equatorial-basis",
+          "lem-qc-j-basis-and-phase-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "multiply the displayed matrices in the fixed J convention, track the global scalar, and verify the Pauli-frame bit update."
+        ]
+      },
+      {
+        "id": "lem-qc-normalized-rounds-preserve-circuit",
+        "kind": "lemma",
+        "title": "Normalized transport rounds preserve the circuit up to a recorded phase",
+        "statement": "For a circuit $C$ as in [[def-qc-normalized-transport-schedule]], let\n$U_C$ be its denotation and let $\\widetilde U_C$ be the chronological product\nof the normalized rounds. Then\n\n$$\\widetilde U_C=\\sigma_C U_C.$$",
+        "deps": [
+          "def-qc-normalized-transport-schedule",
+          "def-qc-circuit-denotational-semantics",
+          "lem-qc-j-basis-and-phase-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415, §20.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, §§II D–F",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Check each of the four layer cases and multiply equalities in chronological order, retaining all phases."
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-transport-encoding-is-simple-and-size-bounded",
+        "kind": "lemma",
+        "title": "Normalized transport encoding is a finite simple graph of bounded size",
+        "statement": "Let $C$ be an $n$-wire, $d$-layer circuit and let $R$ be the number of rounds\nin the normalized schedule. Form a candidate vertex list\n$V_T=\\{v_{j,s}:1\\le j\\le n,\\ 0\\le s\\le R\\}$, horizontal edges\n$\\{v_{j,s-1},v_{j,s}\\}$, and vertical edges\n$\\{v_{j,s-1},v_{k,s-1}\\}$ for each $\\{j,k\\}\\in M_s$. Each edge list is\nloop-free and duplicate-free, the lists are disjoint, and their union is a\nfinite simple graph with exactly $n(R+1)$ vertices and $R\\le3d$; thus the\ngraph object used in the Definition is well-defined.",
+        "deps": [
+          "def-qc-normalized-transport-schedule",
+          "def-finite-simple-graph"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Check zero wires, zero layers, empty CZ layers, fully occupied J layers, mixed J/idle layers, and uniqueness of horizontal versus vertical edges."
+        ]
+      },
+      {
+        "id": "thm-qc-exact-unitary-synthesis-from-qsd",
+        "kind": "theorem",
+        "title": "Exact finite unitary synthesis from cosine-sine recursion",
+        "statement": "For every $n\\ge1$ and $U\\in U(2^n)$, there is a finite exact $n$-wire\ncircuit with no ancillas, using arbitrary one-qubit gates and CNOT gates,\nwhose denotation is exactly $U$. For $n=0$, the unitary channel on the\none-dimensional register is the identity channel and is represented by the\nempty circuit. The finite alphabet may be chosen to contain the exact gate\nmatrices used in the construction. This is an existence theorem for exact\nmathematical gate labels; it gives no finite-bit encoding or decomposition-time\nbound.",
+        "deps": [
+          "thm-qc-cosine-sine-block-decomposition",
+          "lem-qc-two-unitary-block-demultiplexing",
+          "lem-qc-r-y-r-z-multiplexor-gray-code",
+          "thm-qc-two-qubit-unitary-three-cnot-synthesis",
+          "thm-polar-form-with-unique-principal-argument",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-local-gate-wire-embedding"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits, arXiv:quant-ph/0406176v5, §§5.1–5.3",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415, §2.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Derive the unoptimized finite QSD recursion, compile the central Ry and both diagonal Rz multiplexors exactly, and handle n=0,1,2.",
+          "Do not use the unproved optimized CNOT saving or claim finite-bit synthesis complexity."
+        ]
+      },
+      {
+        "id": "lem-qc-graph-state-stabilizer-generators",
+        "kind": "lemma",
+        "title": "Graph-state stabilizer generators",
+        "statement": "Let $G=(V,E)$ be an ordered finite simple graph and let $|G\\rangle$ be its\ngraph state. Write $X_v,Z_v$ for the one-qubit Pauli matrices embedded on the\ntensor factor indexed by $v$; in the phase-aware Pauli convention, vertex at\nzero-based position $r$ is wire $r+1$. For $v\\in V$, put\n$K_v:=X_v\\prod_{u\\in N(v)}Z_u$. Each $K_v$ is a Hermitian involution,\n$K_v|G\\rangle=|G\\rangle$, the generators commute pairwise, and their binary\nPauli labels are independent. This includes $V=\\varnothing$, where the\ngenerating family is empty.",
+        "deps": [
+          "def-qc-graph-state",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-binary-adjacency-matrix",
+          "def-qc-pauli-matrices",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "lem-qc-graph-state-edge-gates-commute"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in graph states and its applications, arXiv:quant-ph/0602096",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "conjugate Xᵥ through incident CZ gates; adjacent generators have two local anticommutations; Kᵥ has a unique X at v."
+        ]
+      },
+      {
+        "id": "lem-qc-measurement-pattern-for-cz",
+        "kind": "lemma",
+        "title": "Four-branch open-graph pattern for CZ",
+        "statement": "Take vertices $1,2$ as inputs and $3,4$ as outputs, with edges\n$\\{1,2\\},\\{1,3\\},\\{2,4\\}$. Prepare\n$CZ_{12}CZ_{13}CZ_{24}(|\\psi\\rangle_{12}|+\\rangle_3|+\\rangle_4)$ and measure\nvertices $1,2$ in the $J(0)=H$ basis. For outcomes $b_1,b_2\\in\\{0,1\\}$,\nthe branch operator from the two input wires to the two output wires is\n\n$$K_{b_1b_2}=\\frac12(X^{b_1}H\\otimes X^{b_2}H)CZ.$$\n\nEach of the four branches has probability $1/4$ for every normalized input,\nand the terminal correction $(HX^{b_1}\\otimes HX^{b_2})$ yields the corrected\nbranch $\\frac12 CZ|\\psi\\rangle$.",
+        "deps": [
+          "def-qc-adaptive-measurement-pattern",
+          "lem-qc-one-bit-teleportation",
+          "lem-qc-j-basis-and-phase-identities",
+          "def-qc-controlled-phase-rotation"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "expand all four outcome branches with the declared wire order; verify each branch has probability 1/4 and its output equals the displayed corrected CZ branch."
+        ]
+      },
+      {
+        "id": "thm-qc-pattern-branch-probabilities-and-zero-branches",
+        "kind": "theorem",
+        "title": "Pattern branch probabilities and zero-probability transcripts",
+        "statement": "For a finite adaptive pattern with transcript branch maps $K_{\\mathbf b}$, a\nnormalized pure input $|\\psi\\rangle$ has\n$p_{\\mathbf b}=\\|K_{\\mathbf b}|\\psi\\rangle\\|^2$ and\n$\\sum_{\\mathbf b}p_{\\mathbf b}=1$. For a density operator $\\rho$, the branch\nprobability is $p_{\\mathbf b}=\\operatorname{tr}(K_{\\mathbf b}\\rho\nK_{\\mathbf b}^\\dagger)$ and these probabilities also sum to one. A transcript\nwith $p_{\\mathbf b}=0$ is impossible and has no normalized conditional output;\nnormalization is defined only for positive-probability branches.",
+        "deps": [
+          "def-qc-adaptive-measurement-pattern",
+          "def-qc-pure-state-and-ray",
+          "def-qc-density-operator",
+          "def-qc-projective-measurement",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-dirac-notation-coordinate-identity",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-operator-characterisations",
+          "def-qc-j-gate-and-equatorial-basis",
+          "lem-qc-j-basis-and-phase-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "derive each branch map from the ordered measurement instrument and show probabilities sum to one across all adaptive transcripts."
+        ]
+      },
+      {
+        "id": "def-qc-circuit-to-graph-resource-encoding",
+        "kind": "definition",
+        "title": "Circuit-to-open-graph resource encoding with normalized transport rounds",
+        "statement": "Let $C$ be a finite J/CZ circuit and let $\\mathcal T(C)$ have rounds\n$(M_s,(\\alpha_{s1},\\ldots,\\alpha_{sn}))_{s=1}^R$ and recorded scalar\n$\\sigma_C$ as in [[def-qc-normalized-transport-schedule]]. The schedule index\n$j\\in\\{1,\\ldots,n\\}$ denotes source circuit wire $j-1$; thus a schedule edge\n$\\{j,k\\}$ corresponds to the source-wire pair $\\{j-1,k-1\\}$. Coordinate\n$j$ of every frame vector denotes this same wire. The encoded graph\n$G_C$ has vertices $v_{j,s}$ for $1\\le j\\le n$ and $0\\le s\\le R$,\nhorizontal edges $\\{v_{j,s-1},v_{j,s}\\}$, and vertical edges\n$\\{v_{j,s-1},v_{k,s-1}\\}$ for $\\{j,k\\}\\in M_s$. It is a finite simple\ngraph by [[lem-qc-transport-encoding-is-simple-and-size-bounded]]. Its input\nvertices are $I=\\{v_{j,0}:1\\le j\\le n\\}$, its outputs are\n$O=\\{v_{j,R}:1\\le j\\le n\\}$, and its ordered vertex register follows wire\nindex first and then column index. In particular, the inherited orders on\n$I$ and $O$ are $v_{1,0},\\ldots,v_{n,0}$ and\n$v_{1,R},\\ldots,v_{n,R}$, matching source circuit wire order\n$0,\\ldots,n-1$. The pattern’s measurement order on the vertices\n$v_{j,s-1}$ is round-major, wire-minor, for $s=1,\\ldots,R$ and\n$j=1,\\ldots,n$.\n\nThe adaptive basis angles and terminal correction are defined from the\noutcome blocks $b^s=(b^s_1,\\ldots,b^s_n)$ as follows. Let $A_s$ be the binary\nadjacency matrix of $M_s$ with vertex order $1,\\ldots,n$ (vertex $j$ is\nposition $j-1$ in the zero-based order of [[def-qc-binary-adjacency-matrix]]),\nso\n$(A_s)_{jk}=1$ exactly when $\\{j,k\\}\\in M_s$. Matrix-vector products and\nall frame vectors use these coordinates; binary dot products mean\n$u\\cdot v=\\sum_{j=1}^n u_jv_j\\in\\mathbb F_2$. The frame functions are defined recursively by\n$x^0=z^0=0\\in\\mathbb F_2^n$ and the following formulas. Before round $s$, define\n\n$$z^{s,*}:=z^{s-1}\\oplus A_sx^{s-1},\\qquad \\theta_{sj}:=(-1)^{x^{s-1}_j}\\alpha_{sj}.$$\n\nFor an outcome block $b^s$, the post-round frame is defined by\n$x^s:=b^s\\oplus z^{s,*}$ and $z^s:=x^{s-1}$. The function of earlier\noutcomes given by these recurrences selects the equatorial measurement basis\nat each vertex. For a complete transcript $\\mathbf b$, the\nterminal frame and correction are the following functions. For $n\\ge1$, the zero-scalar Pauli frame is\n$P(x,z):=X^xZ^z=P(0,x,z)$ from\n[[def-qc-phase-aware-n-qubit-pauli-group]], and the terminal correction is\n$C(\\mathbf b):=P(x^R,z^R)^\\dagger$. For $n=0$, the empty frame is\n$P((),()):=I_{\\mathbb C}$ and the correction is the identity on the\none-dimensional register.\n\nFor $n\\ge1$, define\n$\\gamma(x,z,\\alpha)=1$ if $x=0$ and\n$\\gamma(x,z,\\alpha)=(-1)^ze^{-i\\alpha}$ if $x=1$, as in\n[[lem-qc-adaptive-angle-pauli-frame-update]], and put\n\n$$\\lambda_{\\mathbf b}:=\\sigma_C\\prod_{s=1}^R\\left[ (-1)^{\\sum_{\\{j,k\\}\\in M_s}x^{s-1}_jx^{s-1}_k} \\prod_{j=1}^n\\gamma(x^{s-1}_j,z^{s,*}_j,\\alpha_{sj})\\right].$$\n\nFor $n=0$, the empty transcript has scalar $\\lambda=1$. The encoding\nretains these exact scalars; no global phase is discarded. Its graph has\n$n(R+1)$ vertices and $R\\le3d$ for $d$ original layers. The item\n[[lem-qc-normalized-rounds-preserve-circuit]] proves that the normalized\nround circuit is $\\sigma_C U_C$; the branch theorem proves the resulting\npattern's relation to $U_C$.",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-qc-normalized-transport-schedule",
+          "def-qc-binary-adjacency-matrix",
+          "def-qc-adaptive-measurement-pattern",
+          "def-qc-j-gate-and-equatorial-basis",
+          "lem-qc-j-basis-and-phase-identities",
+          "lem-qc-adaptive-angle-pauli-frame-update",
+          "lem-qc-cz-matching-pauli-frame-action",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "lem-qc-transport-encoding-is-simple-and-size-bounded",
+          "lem-qc-normalized-rounds-preserve-circuit"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "specify schedule and show no duplicated edges."
+        ]
+      },
+      {
+        "id": "thm-qc-pattern-is-measurement-circuit",
+        "kind": "theorem",
+        "title": "Every finite open-graph pattern is a measurement circuit",
+        "statement": "Every finite open-graph adaptive pattern has a finite **raw measurement circuit** that preserves its arbitrary input, adjoins $|+\\rangle$ ancillas on $V\\setminus I$, applies one $CZ$ per graph edge, performs the same ordered projective measurements with the same transcript-dependent bases, and retains the same ordered output wires. Its branch operator on transcript $\\mathbf b$ is exactly the pattern's raw operator $K_{\\mathbf b}$, including its scalar phase. Thus for every density input $\\rho$ both have branch probability\n$$p_{\\mathbf b}=\\operatorname{tr}(K_{\\mathbf b}\\rho K_{\\mathbf b}^*),$$\nand, when $p_{\\mathbf b}>0$, the same raw conditional output $\\rho_{\\mathbf b}=K_{\\mathbf b}\\rho K_{\\mathbf b}^*/p_{\\mathbf b}$.\n\nAppending the pattern's specified transcript-controlled suffix $C(\\mathbf b)$ gives a **corrected measurement circuit** with branch operator $L_{\\mathbf b}=C(\\mathbf b)K_{\\mathbf b}$. This equals the corrected pattern branch operator, has the same probability $p_{\\mathbf b}$, and has conditional output $C(\\mathbf b)\\rho_{\\mathbf b}C(\\mathbf b)^*$ whenever $p_{\\mathbf b}>0$. Both raw presentations have the same transcript-labelled instrument, and both corrected presentations have the same corrected transcript-labelled instrument and the same channel after forgetting the transcript. Zero-probability branches have no normalized conditional output in either presentation.\n\nThe raw circuit uses $|V|$ qubit wires, $|E|$ controlled-phase gate occurrences, and $q$ measurement occurrences under [[def-qc-adaptive-measurement-pattern]]; wire and gate counts use [[def-qc-elementary-circuit-resources]]. Corrections are charged separately: the operation model must grant and cost each specified suffix call, or supply a finite construction and charge all its gate occurrences and any extra workspace. These suffix costs are added to the raw resource coordinates; they are not included in $|E|$ or supplied for free. The family of suffixes is finite because $\\{0,1\\}^q$ is finite. No finite-bit encoding or efficient synthesis claim for exact angles or suffix matrices is made.",
+        "deps": [
+          "def-qc-adaptive-measurement-pattern",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-classical-control-and-measurement-circuit",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-pattern-branch-probabilities-and-zero-branches",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-qc-instrument-and-conditional-state"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Robert Raussendorf and Hans J. Briegel, Quantum computing via measurements only, arXiv:quant-ph/0010033, pp. 2–4",
+              "url": "https://arxiv.org/pdf/quant-ph/0010033"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, §II D, pp. 8–10",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "preserve each branch operator and transcript probability."
+        ]
+      },
+      {
+        "id": "thm-qc-circuit-simulated-by-adaptive-pattern",
+        "kind": "theorem",
+        "title": "A finite J/CZ circuit is simulated branch by branch by its adaptive pattern",
+        "statement": "Let $C$ be a finite $n$-wire J/CZ circuit with $d$ chronological layers, let\n$R$ be the normalized transport-round count, and let $U_C$ be its denotation.\nFor the adaptive graph pattern of\n[[def-qc-circuit-to-graph-resource-encoding]], every transcript\n$\\mathbf b\\in\\{0,1\\}^{nR}$ has branch map\n\n$$K_{\\mathbf b}=2^{-nR/2}\\lambda_{\\mathbf b}P_{\\mathbf b}U_C,$$\n\nwhere for $n\\ge1$, $P_{\\mathbf b}=P(x^R,z^R)$ in the phase-aware convention,\nand for $n=0$ the empty-frame convention is $P_{\\mathbf b}=I_{\\mathbb C}$.\nThe exact unit-modulus scalar $\\lambda_{\\mathbf b}$ is the one defined in\nthat encoding, including the\nmixed-layer padding phase and the CZ-matching signs. Each transcript has\nprobability $2^{-nR}$ on every normalized pure or mixed input. Applying the\nterminal correction $P_{\\mathbf b}^{\\dagger}$ gives the circuit output ray\non pure inputs, and summing the corrected branches gives exactly the channel\n$\\rho\\mapsto U_C\\rho U_C^{\\dagger}$ on density operators. The empty-register\nand zero-round cases use their unique empty transcript.",
+        "deps": [
+          "def-qc-adaptive-measurement-pattern",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-circuit-to-graph-resource-encoding",
+          "def-qc-normalized-transport-schedule",
+          "lem-qc-normalized-rounds-preserve-circuit",
+          "lem-qc-transport-encoding-is-simple-and-size-bounded",
+          "lem-qc-one-bit-teleportation",
+          "lem-qc-adaptive-angle-pauli-frame-update",
+          "lem-qc-cz-matching-pauli-frame-action",
+          "lem-qc-graph-state-edge-gates-commute",
+          "thm-qc-pattern-branch-probabilities-and-zero-branches",
+          "cor-trace-is-invariant-under-similarity"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "For each transport round the arbitrary-input one-bit branch identity applies to every wire after the current CZ matching. Output Pauli frames propagate through CZ: X_c picks up Z_t and X_t picks up Z_c; commute them into the next equatorial measurement, flipping its angle and outcome bit as appropriate.",
+          "Maintain the exact branch scalar, frame, and norm invariant by induction over R rounds. Every transport contributes a fair bit; after final frame correction the output channel is the prescribed circuit, including reference correlations. Count the added identity transports; do not claim one graph column per unnormalized CZ-only layer."
+        ]
+      },
+      {
+        "id": "thm-qc-circuit-pattern-equivalence-and-universality",
+        "kind": "theorem",
+        "title": "Circuit and pattern translations are branch preserving and universal",
+        "statement": "Every finite J/CZ circuit has an adaptive open-graph pattern whose corrected\nbranches implement the same unitary channel and whose transcript branches\npreserve the exact probabilities. Conversely, every finite open-graph\npattern has a raw measurement-circuit presentation with exactly its raw branch operators $K_{\\mathbf b}$, probabilities, and positive-probability conditional outputs. Appending its specified and separately charged correction suffixes gives a corrected measurement-circuit presentation with exactly its corrected branch operators $C(\\mathbf b)K_{\\mathbf b}$, unchanged probabilities, and corrected conditional outputs $C(\\mathbf b)\\rho_{\\mathbf b}C(\\mathbf b)^*$. The corresponding raw instruments agree transcript by transcript, as do the corresponding corrected instruments; the corrected channels agree after forgetting the transcript. For every $n\\ge0$, each unitary channel on the\nordered $n$-qubit register $\\mathcal Q_n$ has a J/CZ circuit representative\nand hence an adaptive pattern implementing the same channel; for $n\\ge1$ the\nunitary matrix has size $2^n$, and for $n=0$ the channel is the identity on\n$\\mathbb C$. Global scalar phases are retained in branch maps and do not alter\nthe induced channel.",
+        "deps": [
+          "thm-qc-circuit-simulated-by-adaptive-pattern",
+          "thm-qc-pattern-is-measurement-circuit",
+          "def-qc-j-gate-and-equatorial-basis",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-pauli-matrices",
+          "def-qc-controlled-phase-rotation",
+          "lem-qc-j-basis-and-phase-identities",
+          "thm-qc-one-qubit-euler-decomposition",
+          "thm-qc-exact-unitary-synthesis-from-qsd",
+          "def-qc-circuit-syntax-and-register-order"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Robert Raussendorf and Hans J. Briegel, Quantum computing via measurements only, arXiv:quant-ph/0010033",
+              "url": "https://arxiv.org/pdf/quant-ph/0010033"
+            },
+            {
+              "title": "Robert Raussendorf, Daniel E. Browne, and Hans J. Briegel, Measurement-based quantum computation on cluster states, arXiv:quant-ph/0301052",
+              "url": "https://arxiv.org/pdf/quant-ph/0301052"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "combine the branch-map inductions in both directions; cite the exact QC11 synthesis theorem, derive CNOT=(I⊗H)CZ(I⊗H), use the J(α) Euler decomposition, and track transcript probabilities and output corrections."
+        ]
+      },
+      {
+        "id": "thm-qc-graph-state-unique-stabilizer-ray",
+        "kind": "theorem",
+        "title": "Graph state is the unique joint stabilizer ray",
+        "statement": "Let $G=(V,E)$ be an ordered finite simple graph on $n$ vertices, let\n$|G\\rangle$ be its graph state, and let $K_v=X_v\\prod_{u\\in N(v)}Z_u$ be\nthe generators from [[lem-qc-graph-state-stabilizer-generators]]. Their common\n$+1$ eigenspace is exactly $\\operatorname{span}\\{|G\\rangle\\}$. If $S_G$ is\nthe subgroup they generate, its orthogonal projector is\n\n$$\\Pi_G=2^{-n}\\sum_{g\\in S_G}g=|G\\rangle\\langle G|.$$\n\nFor $V=\\varnothing$, $S_G=\\{I\\}$ and the formula is the identity projector\non the one-dimensional trivial register.",
+        "deps": [
+          "def-qc-graph-state",
+          "def-qc-controlled-phase-rotation",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-stabilizer-subgroup",
+          "lem-qc-graph-state-stabilizer-generators",
+          "lem-qc-stabilizer-average-projector",
+          "thm-qc-stabilizer-projector-rank-and-code-dimension",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in graph states and its applications, arXiv:quant-ph/0602096",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "establish full rank and apply the rank-one projector result."
+        ]
+      }
+    ],
+    "order": 2208,
+    "id": "graph-states-and-measurement-based-computation"
+  },
+  {
+    "title": "Graph States and Measurement-Based Computation — Examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "requires": [
+      "graph-states-and-measurement-based-computation"
+    ],
+    "companion": "graph-states-and-measurement-based-computation",
+    "items": [
+      {
+        "id": "ex-qc-one-edge-graph-state",
+        "kind": "example",
+        "title": "One-edge graph state and two-wire CZ pattern",
+        "statement": "For the graph with vertices $1,2$ and one edge $\\{1,2\\}$,\n\n$$|G\\rangle=CZ|++\\rangle=\\tfrac12(|00\\rangle+|01\\rangle+|10\\rangle-|11\\rangle).$$\n\nIts two graph-state generators are $K_1=X\\otimes Z$ and\n$K_2=Z\\otimes X$. Separately, the four-vertex pattern with inputs $1,2$,\noutputs $3,4$, and edges $\\{1,2\\},\\{1,3\\},\\{2,4\\}$ has branch\n$\\tfrac12(X^{b_1}H\\otimes X^{b_2}H)CZ$ and terminal correction\n$HX^{b_1}\\otimes HX^{b_2}$. In particular, on input $|00\\rangle$ all four\nuncorrected outputs are $\\tfrac12|++\\rangle$, each with probability $1/4$,\nand all corrected outputs are $\\tfrac12|00\\rangle$.",
+        "deps": [
+          "def-qc-graph-state",
+          "lem-qc-graph-state-amplitude-formula",
+          "lem-qc-graph-state-stabilizer-generators",
+          "lem-qc-measurement-pattern-for-cz"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "Verify the amplitude signs, generator products, and branch-map correction convention."
+        ]
+      }
+    ],
+    "order": 2209,
+    "id": "graph-states-and-measurement-based-computation-examples"
+  }
+]

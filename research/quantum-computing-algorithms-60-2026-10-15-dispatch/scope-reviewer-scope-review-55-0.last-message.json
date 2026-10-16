@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "55",
+  "round": 0,
+  "reviewed_items": [
+    "alg-qa-euclidean-modular-inverse",
+    "rem-qa-number-theoretic-extension-scope",
+    "thm-qa-euclidean-modular-inverse-correctness-cost",
+    "lem-qa-dihedral-sieve-pair-combination",
+    "lem-qa-dihedral-coset-state-fourier-law",
+    "def-qa-finite-abelian-hidden-shift-problem",
+    "def-qa-finite-cyclic-discrete-logarithm-problem",
+    "thm-qa-hidden-shift-generalized-dihedral-reduction",
+    "alg-qa-dihedral-hidden-subgroup-sieve",
+    "lem-qa-controlled-cyclic-multiplication-clean",
+    "lem-qa-cyclic-dlp-hidden-subgroup",
+    "thm-qa-dihedral-sieve-scope",
+    "lem-qa-cyclic-dlp-annihilator-equation",
+    "alg-qa-cyclic-group-power-evaluation",
+    "thm-qa-cyclic-group-power-evaluation-correctness",
+    "alg-qa-finite-cyclic-discrete-logarithm",
+    "thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost",
+    "ex-qa-hidden-shift-dihedral-cosets",
+    "ex-qa-cyclic-discrete-log-fourier-sample"
+  ],
+  "reviewed_pages": [
+    "period-hidden-shift-and-number-theoretic-algorithms",
+    "period-hidden-shift-and-number-theoretic-algorithms-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete review found local proof, prerequisite, and interface repairs. The assigned scope is otherwise supported; no unresolved prerequisite gap requires escalation.",
+  "findings": [
+    {
+      "id": "lem-qa-dihedral-coset-state-fourier-law",
+      "type": "prerequisite",
+      "reason": "Proof 3.1 claims the conditional qubit after measuring k, but the listed projective-measurement prerequisites establish outcome probabilities only. State the Lüders instrument/update rule and derive the conditional state. Affected consumers: alg-qa-dihedral-hidden-subgroup-sieve Step 1 and thm-qa-dihedral-sieve-scope F2, Steps 2.1 and 3.1."
+    },
+    {
+      "id": "lem-qa-dihedral-sieve-pair-combination",
+      "type": "prerequisite",
+      "reason": "Statement and Proof 2.1–3.1 claim post-measurement qubit states, while the listed PVM prerequisites do not specify a state update. Explicitly use the Lüders instrument and its conditional-state rule. Affected consumers: alg-qa-dihedral-hidden-subgroup-sieve Step 2 and thm-qa-dihedral-sieve-scope F3, Steps 2.1–2.2."
+    },
+    {
+      "id": "alg-qa-dihedral-hidden-subgroup-sieve",
+      "type": "local",
+      "reason": "Step 4 says to restrict the oracle to K0/K1 but does not specify how child coordinates are queried through the ambient oracle. Under the stated convention the inclusions are (a',b')→(2a',b') and (a',b')→(2a'+b',b') modulo 2^r. State the maps and account for their per-query cost."
+    },
+    {
+      "id": "thm-qa-dihedral-sieve-scope",
+      "type": "local",
+      "reason": "Proof 1.2 extends its bound on the b_i sum through t_r=m, where it is not established: for m=t_r=3 the recurrence gives C_3=52677/32768≈1.608, not >2 as claimed. Prove a sufficient bound such as C_t>1 for Step 3.1, or adjust the absence estimate. Also state whether O(n^3 M) excludes F-oracle implementation gates; the f,g-to-F wrapper adds O(w_F) ordinary gates per call, and Step 6.1 already leaves an explicit-oracle gate term separate."
+    },
+    {
+      "id": "rem-qa-number-theoretic-extension-scope",
+      "type": "local",
+      "reason": "The claim that both sources refer elsewhere for associativity is inaccurate. Childs §7.1 says an explicit check (e.g. with Mathematica) can establish it; Proos–Zalka §3 points to reference [14]. Neither passage supplies a detailed local proof. Correct the source description while retaining the scope limit. [Childs, Lecture Notes, §7.1](https://www.cs.umd.edu/~amchilds/qa/qa.pdf); [Proos–Zalka, §3](https://arxiv.org/pdf/quant-ph/0301141)."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-dihedral-hidden-subgroup-sieve",
+      "decision": "repair",
+      "reason": "It consumes both conditional-state lemmas and needs to name the Lüders measurements; Step 4 also needs the child-to-parent oracle coordinate maps."
+    },
+    {
+      "id": "thm-qa-dihedral-sieve-scope",
+      "decision": "repair",
+      "reason": "It consumes the algorithm and both conditional-state lemmas; recheck the recursive query accounting and repair the C_t and compiled-oracle gate accounting."
+    },
+    {
+      "id": "period-hidden-shift-and-number-theoretic-algorithms",
+      "decision": "accept",
+      "reason": "Its text remains within the approved power-of-two scope and does not claim an arbitrary-order extension; the listed resource categories remain accurate after the item repairs."
+    },
+    {
+      "id": "period-hidden-shift-and-number-theoretic-algorithms-examples",
+      "decision": "accept",
+      "reason": "Both examples were checked and do not rely on the affected sieve measurement or resource claims."
+    }
+  ]
+}

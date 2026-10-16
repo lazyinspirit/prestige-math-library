@@ -1,0 +1,128 @@
+8
+Quantum Algorithms
+
+6.2.1 Finding the period
+
+The QFT is the unitary transformation that acts on the computational basis according
+to
+
+QFT : |x⟩→
+1
+√
+
+N
+
+N−1
+�
+
+y=0
+e2πixy/N|y⟩,
+(6.30)
+
+where N = 2n. For now let’s suppose that we can perform the QFT efficiently, and see
+how it enables us to extract the period of f(x).
+Emulating Simon’s algorithm, we first query the oracle with the input
+1
+√
+
+N
+�
+x |x⟩
+
+(easily prepared by applying H(n) to |0⟩), and so prepare the state
+
+1
+√
+
+N
+
+N−1
+�
+
+x=0
+|x⟩|f(x)⟩.
+(6.31)
+
+Then we measure the output register, obtaining the result |f(x0)⟩for some 0 ≤x0 < r.
+This measurement prepares in the input register the coherent superposition of the A
+values of x that are mapped to f(x0):
+
+1
+√
+
+A
+
+A−1
+�
+
+j=0
+|x0 + jr⟩,
+(6.32)
+
+where
+
+N −r ≤x0 + (A −1)r < N,
+(6.33)
+
+or
+
+A −1 < N
+
+r < A + 1.
+(6.34)
+
+Actually, the measurement of the output register is unnecessary. If it is omitted, the state
+of the input register is an incoherent superposition (summed over x0 ∈{0, 1, . . . r −1})
+of states of the form eq. (6.32). The rest of the algorithm works just as well acting on
+this initial state.
+Now our task is to extract the value of r from the state eq. (6.32) that we have
+prepared. Were we to measure the input register by projecting onto the computational
+basis at this point, we would learn nothing about r. Instead (cf. Simon’s algorithm), we
+should Fourier transform first and then measure.
+By applying the QFT to the state eq. (6.32) we obtain
+
+1
+√
+
+NA
+
+N−1
+�
+
+y=0
+e2πix0y/N
+A−1
+�
+
+j=0
+e2πijry/N|y⟩.
+(6.35)
+
+If we now measure in the computational basis, the probability of obtaining the outcome
+y is
+
+Prob(y) = A
+
+N
+
+������
+
+1
+A
+
+A−1
+�
+
+j=0
+e2πijry/N
+
+������
+
+2
+
+.
+(6.36)
+
+This distribution strongly favors values of y such that yr/N is close to an integer. For
+
+

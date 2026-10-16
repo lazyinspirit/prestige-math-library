@@ -1,0 +1,95 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "12",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "779a1acaeb257187d23b2011c96bb3aca8f474442aa908fc11b72ea70e785b0b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The rejected step used an existential balanced-commutator statement for the particular finite-precision factors without proving those factors satisfy its conclusion. The factors satisfy [A_0,B_0]=log D and have equal norm s<=sqrt(eta); new step 4.1 proves their identity distances are at most s and bounds the degree>=3 commutator tail by 32s^3 and the exponential tail by s^3. Step 5.1 can therefore apply the cancellation supplier with all hypotheses verified and obtains (40+5)eta^(3/2)<=64eta^(3/2). This is a dependency-interface inference gap, repaired locally without changing the statement.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/quant-ph/0505030"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "disposition": "repaired",
+      "post_sha256": "b70ec7009c048845cc86cfb04f3ef892f37fe2f2b88ffef0034c02f45ca215fd",
+      "review_context_sha256": "3a2254605f148a688b57256462f548820e1a37bb5e4b5a084dcf5632e1081d4b",
+      "reason": "Checked the actual Pauli construction, logarithm hypotheses, certified nonzero branch, SU(2) factor and word interfaces, commutator expansion, cancellation prerequisites and 45<=64 error induction. The existing conditioned square-root argument in final step 6.1 already supplies additive guard bits, so the Step-4 digest concern requires no further repair. Statement, input encoding charge, length and bit-time bounds remain unchanged. This is my repair assessment, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/quant-ph/0505030"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "facts-block and proof-step (former F3 / 4.1; current 4.1 / 5.1)",
+      "reason": "The rejected step used an existential balanced-commutator statement for the particular finite-precision factors without proving those factors satisfy its conclusion. The factors satisfy [A_0,B_0]=log D and have equal norm s<=sqrt(eta); new step 4.1 proves their identity distances are at most s and bounds the degree>=3 commutator tail by 32s^3 and the exponential tail by s^3. Step 5.1 can therefore apply the cancellation supplier with all hypotheses verified and obtains (40+5)eta^(3/2)<=64eta^(3/2). This is a dependency-interface inference gap, repaired locally without changing the statement."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "id": "thm-qc-solovay-kitaev-bit-complexity",
+      "disposition": "no-published-maintenance",
+      "reason": "The assigned supplier remains draft, its Statement is byte-identical, and the repair adds only a local proof estimate. No supplier interface event or published-consumer defect was discovered in this review."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "current_state": "Assigned frontier repair and owning contract synchronization complete. Precheck, renderer, strict contract and final proof-layout all pass. No unresolved mathematical obligation or statement change.",
+    "conventions": "Exact child targets remain SU(2); interval intermediates need not be unitary. No AC, new prerequisite, statement weakening, judge stamp or independent acceptance is introduced.",
+    "statement_sha256_before_and_after": "23f85b45d5ee190d0f2e0e43d3820c55fc7cb3de236d2330af8b9238feb69723",
+    "source_reading": "Consulted Dawson–Nielsen arXiv:quant-ph/0505030v2, p.7 precision caveat, sections 4.1–4.2 (pp.8–9) and section 5.2 Lemma 3 (p.12). The source gives a general cubic series-estimate method; the explicit constants 32+1 are proved locally, not attributed to its approximate constants. No claim of reading van Melkebeek–Watson.",
+    "dependencies_checked": [
+      "lem-qc-su2-balanced-commutator",
+      "lem-qc-pauli-vector-multiplication",
+      "lem-qc-su2-near-identity-logarithm",
+      "lem-qc-commutator-error-cancellation",
+      "lem-qc-fixed-dimension-interval-arithmetic"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qc-solovay-kitaev-bit-complexity.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qc-solovay-kitaev-bit-complexity.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-12.proof-contracts.json --items thm-qc-solovay-kitaev-bit-complexity --strict --json",
+        "exit_code": 0,
+        "result": "ok:true, 1 checked, 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qc-solovay-kitaev-bit-complexity.md",
+        "exit_code": 0,
+        "result": "1 items, 7 steps, 0 defects"
+      }
+    ],
+    "unresolved_mathematics": [],
+    "pending": [],
+    "contract_repair": "Under the shared write lock, reread the owning contract, added the local expansion estimate as a derivation, synchronized renumbered step claims and every citation-use list, checked the assigned contract, then released the lock. No other contract entry was edited.",
+    "prior_judge": "No verification.judge record was present on the assigned carrier. This material proof repair requires fresh independent rejudgment by the controller; none was launched or claimed here."
+  }
+}

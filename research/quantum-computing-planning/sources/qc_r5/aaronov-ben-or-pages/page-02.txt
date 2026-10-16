@@ -1,0 +1,58 @@
+The error corrections which where described so far used a combination of classical and quantum
+operations. We would like to define a model of noisy quantum computation[1], such that errors and
+error corrections can be described entirely inside this model. Working in the correct model will enable
+to prove the result of this paper. Sequential quantum computation can not be noise resistant[1], so
+we work with quantum circuits[8, 25], and since the state of a noisy quantum system is in general
+a probability distribution over pure states, i.e. a mixed state, and not merely a pure state as in the
+standard model, we use quantum circuits with mixed states[3]. Since noise is a dynamic process which
+depends on time, the circuit will be divided to levels, or time steps. Unlike Yao[25] we allow qubits to
+be input and output at different times to the circuit. This is crucial, since with the restriction that all
+qubits are initialized at time 0, it is not possible to compute fault tolerantly without an exponential
+blowup in the size of the circuit[2]. Between the time steps, we add the noise process, which is a
+probabilistic process: each qubit or gate undergoes a fault with independent probability η per step,
+and η is referred to as the noise rate. The list of times and places where faults had occurred, namely
+the fault path, is random, and naturally, the function that the circuit computes is a weighted average
+over the noise process.
+
+Computing on encoded states: Let us first describe how one can protect quantum information
+against noise, using quantum error correcting codes[4, 22].
+The idea behind these codes is, as in
+classical linear block codes, to spread the state of one qubit on a number of qubits, called a “block”,
+such that even if some of the qubits in a block are damaged, the state of the system can be recovered
+from the other correct qubits. If we want to preserve the state of n qubits, we encode it on n blocks.
+The whole state should be recoverable if not too many errors occurred in each block. Quantum codes
+that can correct d faults have the property that if not more than d faults occurred in each block, there
+is some operation that can recover the encoded state given the damaged state. The difference from
+classical codes is that the quantum correlations should be recovered as well, and not only the logical
+states of the qubits. However, it turns out that applying classical error corrections in one basis of the
+Quantum space can correct the logical states, while applying classical error corrections in some other
+basis corresponds to corrections of the quantum correlations.
+In order to protect a quantum computation against faults, one can try to compute on encoded
+states, and not on the states themselves, using quantum codes. The circuit M1 which will compute
+on encoded states is defined as a simulation of the original circuit M0. A qubit in the original circuit
+transforms to a block of qubits in the simulating circuit, and each time step transforms to a working
+period of several time steps.
+To simulate the computation done in the t′th time step in M0, we
+will apply in M1 the analog computation, on encoded states. Each gate in M0 will transform to
+some “procedure” in M1, which computes this gate on encoded states. The procedure might require
+ancilla qubits, so these are added to the circuit M1, and are initialized only when needed. If M1 is
+initialized with some encoded state, we expect this state to evolve by the computation along some
+“trajectory”, such that at the end of each working period it encodes the correct corresponding state
+of M0. The input and output to M1 will simply be a duplication of the inputs and outputs of M0, on
+the corresponding blocks. We will therefore need to add on each block, before computation begins,
+an initialization procedure, that transforms the duplicated input, i.e a string of 0′s or a string of 1′s,
+to the encoding state |S0 >, or |S1 >. At the end of the computation we will need the opposite
+transformation, so we will use a reading Procedure that transforms a block in the state |S0 > or |S1 >
+back to a string of 0’s or 1′s.
+Computing on encoded quantum states does not automatically provide protection against faults,
+since errors accumulate, and when the damage has effected too many qubits in one block, the correct
+state is no longer recoverable. In order to be able to correct the state, error corrections should be
+applied all the time, so that the error can not accumulate. Therefore in each working period in M1 we
+will add a step of error corrections of each block. The working period will be divided to two stages:
+a computation stage and a correction stage. The idea is therefore to apply alternately computation
+stages and correction stages, hoping that during the computation stage the damage that accumulated
+is still small enough so that the corrections are still able to correct it. One should notice that this
+
+2
+
+

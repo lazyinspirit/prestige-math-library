@@ -1,0 +1,2740 @@
+{
+  "version": 1,
+  "level": "quantum-computing-algorithms-60-2026-10-15-batch-19",
+  "scope": [
+    "lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement",
+    "lem-qc-knill-laflamme-product-operator-matrix-units-form-a-basis",
+    "def-qc-first-factor-partial-trace",
+    "lem-qc-knill-laflamme-coefficient-matrix-is-positive",
+    "lem-qc-knill-laflamme-orthogonal-error-basis",
+    "def-qc-exact-recovery-of-a-quantum-code",
+    "lem-qc-kraus-operators-of-the-identity-channel-are-scalars",
+    "lem-qc-orthogonal-error-syndrome-projectors",
+    "lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form",
+    "thm-qc-knill-laflamme-explicit-recovery",
+    "thm-qc-knill-laflamme-necessity",
+    "cor-qc-distance-corrects-t-errors-and-erasures",
+    "def-qc-correctable-subsystem-and-gauge-factor",
+    "ex-qc-degenerate-code-kl-matrix",
+    "thm-qc-subsystem-knill-laflamme",
+    "ex-qc-knill-laflamme-orthogonal-error-recovery"
+  ],
+  "contracts": {
+    "lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tensor-product-basis-from-bases",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. If $M$ is free with basis $(e_i)_{i\\in I}$ and $N$ is free with basis $(f_j)_{j\\in J}$, then $M\\otimes_RN$ is free with basis\n\n$$\\bigl(e_i\\otimes f_j\\bigr)_{(i,j)\\in I\\times J}.$$\n\nEquivalently, the canonical map $R^{(I\\times J)}\\to M\\otimes_RN$ sending the standard basis vector at $(i,j)$ to $e_i\\otimes f_j$ is an isomorphism. This includes an empty basis in either factor.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\Delta=\\Phi-\\Psi$. By [F4], $\\Delta$ is complex-linear. For every\nnonzero $x\\in H$,\n$P_x=\\|x\\|^2P_{x/\\|x\\|}$, and $P_0=0$, so linearity gives\n$\\Delta(P_x)=0$ for every $x\\in H$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "With $|u\\rangle\\langle v|$ denoting the map\n$z\\mapsto\\langle z,v\\rangle u$, the linear-first convention gives\n$$P_{u+v}-P_{u-v}=2(|u\\rangle\\langle v|+|v\\rangle\\langle u|)$$\nand\n$$P_{u+iv}-P_{u-iv}=2i(|v\\rangle\\langle u|-|u\\rangle\\langle v|).$$\nIf $S=P_{u+v}-P_{u-v}$ and $T=P_{u+iv}-P_{u-iv}$, then\n$|u\\rangle\\langle v|=(S-T/i)/4$ and\n$|v\\rangle\\langle u|=(S+T/i)/4$. Hence\n$\\Delta(|u\\rangle\\langle v|)=0$ for all $u,v$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose an orthonormal basis $(e_j)$ of $H$ using [F2]. Every\n$T\\in\\mathcal B(H)$ has the expansion\n$T=\\sum_{j,k}\\langle Te_k,e_j\\rangle|e_j\\rangle\\langle e_k|$, so these\nmatrix units form a basis of $\\mathcal B(H)$. Step 1.2 makes $\\Delta$ zero\non that basis, hence on all of $\\mathcal B(H)$; thus $\\Phi=\\Psi$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "F4",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Choose an orthonormal basis $(r_a)$ of $R$. By [F3],\n$(e_j\\otimes r_a)$ is a basis of $H\\otimes R$ and the operators\n$|e_j\\otimes r_a\\rangle\\langle e_k\\otimes r_b|$\nform a basis of $\\mathcal B(H\\otimes R)$. Each equals\n$(|e_j\\rangle\\langle e_k|)\\otimes(|r_a\\rangle\\langle r_b|)$, on which\n$(\\Delta\\otimes\\operatorname{id}_{\\mathcal B(R)})$ is zero by step 1.2.\nTherefore the two amplified maps agree on the entire operator space.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F3",
+            "F4",
+            "algebra",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: "
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: Choose an orthonormal basis $(e_j)$ of $H$ using [F2]. Every\n$T\\in\\mathcal B(H)$ has the expansion\n$T=\\sum_{j,k}\\langle Te_k,e_j\\rangle|e_j\\rangle\\langle e_k|$, so these\nmatrix units form a basis of $\\mathcal B(H)$. Step 1.2 makes $\\Delta$ zero\non that basis, hence on all of $\\mathcal B(H)$; thus $\\Phi=\\Psi$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "lem-qc-knill-laflamme-product-operator-matrix-units-form-a-basis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]), let\n$n \\in \\mathbb{N}$ and let $v : n \\to V$ be a finite list\n([[def-linear-combination-and-span]]).\n\n1. **The span of the image of a list.** Whether or not $v$ is injective,\n   $$\\operatorname{span}(v[n]) \\;=\\; \\Bigl\\{\\, \\sum_{i<n}\\lambda_i v_i \\;:\\; \\lambda : n \\to F \\,\\Bigr\\} .$$\n2. **Coordinates.** $v$ is an ordered basis of $V$ ([[def-linear-basis]]) **if and\n   only if** for every $x \\in V$ there is **exactly one** $\\lambda : n \\to F$ with\n   $x = \\sum_{i<n}\\lambda_i v_i$. When that holds, this $\\lambda$ is called the\n   **coordinate list of $x$ with respect to the ordered basis $v$**, and\n   $\\lambda_i$ its **$i$-th coordinate**.\n\nThe coordinate list is attached to the **ordered** basis and not to the basis as\na set: reordering the list permutes the coordinates of every vector, as the\ncompanion page shows on a worked example in $\\mathbb{R}^{2}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], each $M_{s\\alpha,t\\beta}$ is linear. Applying it to a product\nbasis vector gives $M_{s\\alpha,t\\beta}(g_{t'}\\otimes q_{\\beta'})=g_s\\otimes q_\\alpha$ when $(t',\\beta')=(t,\\beta)$ and $0$ otherwise, by [F2]. Thus these operators have the individual matrix-unit columns of the product basis.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If either basis is empty, [F2] makes $H_G\\otimes H_Q=\\{0\\}$; its endomorphism space is the zero vector space, whose empty family is a basis, as asserted. Otherwise, for any $T\\in\\mathcal B(H_G\\otimes H_Q)$ and each input basis vector $g_t\\otimes q_\\beta$, write\n$T(g_t\\otimes q_\\beta)=\\sum_{s,\\alpha}c_{s\\alpha,t\\beta}(g_s\\otimes q_\\alpha)$\nusing [F2, F4]. The finite sum $\\sum_{s,\\alpha,t,\\beta}c_{s\\alpha,t\\beta}M_{s\\alpha,t\\beta}$ has the same value as $T$ on every basis vector by step 1.1, hence equals $T$ by [F3]. If a linear combination of the $M_{s\\alpha,t\\beta}$ is zero, applying it to each input basis vector shows each coefficient is zero by [F2]. Therefore this family spans and is linearly independent.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: If either basis is empty, [F2] makes $H_G\\otimes H_Q=\\{0\\}$; its endomorphism space is the zero vector space, whose empty family is a basis, as asserted. Otherwise, for any $T\\in\\mathcal B(H_G\\otimes H_Q)$ and each input basis vector $g_t\\otimes q_\\beta$, write\n$T(g_t\\otimes q_\\beta)=\\sum_{s,\\alpha}c_{s\\alpha,t\\beta}(g_s\\otimes q_\\alpha)$\nusing [F2, F4]. The finite sum $\\sum_{s,\\alpha,t,\\beta}c_{s\\alpha,t\\beta}M_{s\\alpha,t\\beta}$ has the same value as $T$ on every basis vector by step 1.1, hence equals $T$ by [F3]. If a linear combination of the $M_{s\\alpha,t\\beta}$ is zero, applying it to each input basis vector shows each coefficient is zero by [F2]. Therefore this family spans and is linearly independent."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: If either basis is empty, [F2] makes $H_G\\otimes H_Q=\\{0\\}$; its endomorphism space is the zero vector space, whose empty family is a basis, as asserted. Otherwise, for any $T\\in\\mathcal B(H_G\\otimes H_Q)$ and each input basis vector $g_t\\otimes q_\\beta$, write\n$T(g_t\\otimes q_\\beta)=\\sum_{s,\\alpha}c_{s\\alpha,t\\beta}(g_s\\otimes q_\\alpha)$\nusing [F2, F4]. The finite sum $\\sum_{s,\\alpha,t,\\beta}c_{s\\alpha,t\\beta}M_{s\\alpha,t\\beta}$ has the same value as $T$ on every basis vector by step 1.1, hence equals $T$ by [F3]. If a linear combination of the $M_{s\\alpha,t\\beta}$ is zero, applying it to each input basis vector shows each coefficient is zero by [F2]. Therefore this family spans and is linearly independent."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: "
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "def-qc-first-factor-partial-trace": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward direction. Definition: Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces, and fix\nthe factor order $H_G\\otimes H_Q$. For ordered orthonormal bases\n$(g_s)$ and $(q_\\alpha)$, define\n$$\\operatorname{Tr}_G:\\mathcal B(H_G\\otimes H_Q)\\to\\mathcal B(H_Q),\\qquad (\\operatorname{Tr}_G X)_{\\alpha\\beta}=\\sum_sX_{(s,\\alpha),(s,\\beta)},$$\nwhere $X_{(s,\\alpha),(t,\\beta)}=\\langle X(g_t\\otimes q_\\beta),\ng_s\\otimes q_\\alpha\\rangle$ under the linear-first convention. Equivalently,\nthis is the partial trace over the second "
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse direction. Definition: Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces, and fix\nthe factor order $H_G\\otimes H_Q$. For ordered orthonormal bases\n$(g_s)$ and $(q_\\alpha)$, define\n$$\\operatorname{Tr}_G:\\mathcal B(H_G\\otimes H_Q)\\to\\mathcal B(H_Q),\\qquad (\\operatorname{Tr}_G X)_{\\alpha\\beta}=\\sum_sX_{(s,\\alpha),(s,\\beta)},$$\nwhere $X_{(s,\\alpha),(t,\\beta)}=\\langle X(g_t\\otimes q_\\beta),\ng_s\\otimes q_\\alpha\\rangle$ under the linear-first convention. Equivalently,\nthis is the partial trace over the second "
+        }
+      ],
+      "well_definedness": {
+        "proved_by": "thm-qc-partial-trace-characterization-and-basis-independence; thm-qc-wire-permutation-is-unitary; cor-finite-iterated-tensor-products-represent-multilinear-maps",
+        "evidence": "The definition is backed by these exact direct supplier interfaces; the excerpts document the authoring dependencies and are not independent approval.",
+        "supplier_excerpts": [
+          {
+            "source": "thm-qc-partial-trace-characterization-and-basis-independence",
+            "source_section": "Statement",
+            "quote": "For finite-dimensional complex inner-product spaces $H_A,H_B$, the partial\ntrace $\\operatorname{Tr}_B:\\operatorname{End}(H_A\\otimes H_B)\\to\n\\operatorname{End}(H_A)$ is the unique linear map satisfying\n\n$$\\operatorname{tr}\\bigl((\\operatorname{Tr}_B R)\\circ T\\bigr)=\\operatorname{tr}\\bigl(R\\circ(T\\otimes I_{H_B})\\bigr)\\quad\\text{for every }R\\in\\operatorname{End}(H_A\\otimes H_B)\\text{ and }T\\in\\operatorname{End}(H_A).$$\n\nHere $I_{H_B}$ is the identity map $y\\mapsto y$ on $H_B$; $\\operatorname{End}$\nis the notation defined in [[def-qc-partial-trace]].\n\nIts coordinate formula is independent of the chosen ordered orthonormal basis\nof $H_B$. The assertion includes zero-dimensional factors."
+          },
+          {
+            "source": "thm-qc-wire-permutation-is-unitary",
+            "source_section": "Statement",
+            "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]]."
+          },
+          {
+            "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+            "source_section": "Statement",
+            "quote": "Let $R$ be a commutative ring and let $M_1,\\ldots,M_k$ be a finite list of $R$-modules. Any parenthesized tensor product\n\n$$T=M_1\\otimes_R\\cdots\\otimes_RM_k$$\n\nrepresents $R$-multilinear maps from $M_1\\times\\cdots\\times M_k$: for every $R$-module $P$, composition with $(m_1,\\ldots,m_k)\\mapsto m_1\\otimes\\cdots\\otimes m_k$ is a bijection from $\\operatorname{Hom}_R(T,P)$ to the set of multilinear maps into $P$. Different parenthesizations are connected by the unique isomorphism preserving pure tensors.\n\nFor $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$."
+          }
+        ]
+      }
+    },
+    "lem-qc-knill-laflamme-coefficient-matrix-is-positive": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $PV=V$, $V^*P=V^*$ and $V^*V=I_{H_L}$. Multiplying\n$PE_a^*E_bP=C_{ab}P$ by $V^*$ and $V$ therefore gives\n$V^*E_a^*E_bV=C_{ab}I_{H_L}$. Choose a unit vector $\\psi\\in H_L$, possible\nbecause $H_L\\ne\\{0\\}$. The adjoint identity [F4] yields\n$C_{ab}=\\langle E_a^*E_bV\\psi,V\\psi\\rangle\n=\\langle E_bV\\psi,E_aV\\psi\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any $z=(z_1,\\ldots,z_m)\\in\\mathbb C^m$, the first-argument\nlinearity and conjugate symmetry in [F3] give\n$$z^*Cz=\\sum_{a,b}\\overline{z_a}z_b\\langle E_bV\\psi,E_aV\\psi\\rangle =\\left\\|\\sum_b z_bE_bV\\psi\\right\\|^2\\ge0.$$\nAlso $C_{ba}=\\overline{C_{ab}}$, so $C$ is Hermitian. The nonnegative\nquadratic form is exactly positive semidefiniteness.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: By [F2], $PV=V$, $V^*P=V^*$ and $V^*V=I_{H_L}$. Multiplying\n$PE_a^*E_bP=C_{ab}P$ by $V^*$ and $V$ therefore gives\n$V^*E_a^*E_bV=C_{ab}I_{H_L}$. Choose a unit vector $\\psi\\in H_L$, possible\nbecause $H_L\\ne\\{0\\}$. The adjoint identity [F4] yields\n$C_{ab}=\\langle E_a^*E_bV\\psi,V\\psi\\rangle\n=\\langle E_bV\\psi,E_aV\\psi\\rangle$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: By [F2], $PV=V$, $V^*P=V^*$ and $V^*V=I_{H_L}$. Multiplying\n$PE_a^*E_bP=C_{ab}P$ by $V^*$ and $V$ therefore gives\n$V^*E_a^*E_bV=C_{ab}I_{H_L}$. Choose a unit vector $\\psi\\in H_L$, possible\nbecause $H_L\\ne\\{0\\}$. The adjoint identity [F4] yields\n$C_{ab}=\\langle E_a^*E_bV\\psi,V\\psi\\rangle\n=\\langle E_bV\\psi,E_aV\\psi\\rangle$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "lem-qc-knill-laflamme-orthogonal-error-basis": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-knill-laflamme-coefficient-matrix-is-positive",
+          "source_section": "Statement",
+          "quote": "Let $H_L,H_P,H_O$ be finite-dimensional complex inner-product spaces,\n$V:H_L\\to H_P$ an isometric encoding of nonzero logical space, and\n$P=VV^*$. For a finite family of linear error operators\n$E_1,\\ldots,E_m:H_P\\to H_O$, suppose scalars $C_{ab}$ satisfy\n$PE_a^*E_bP=C_{ab}P$ for all $a,b$. Then the matrix $C=(C_{ab})$ is\nHermitian positive semidefinite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $C$ is Hermitian positive semidefinite. Apply [F4] to obtain a\nunitary $U$ with $U^*CU=\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_m)$.\nFor each eigenvector $u_i$, positivity gives\n$\\lambda_i=u_i^*Cu_i\\ge0$, and [F5] supplies $\\sqrt{\\lambda_i}$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Expand the transformed operator sum. Unitarity and [F6] give\n$\\sum_iF_iXF_i^*=\\sum_{a,b}\\left(\\sum_iU_{ai}\\overline{U_{bi}}\\right)E_aXE_b^*=\\sum_aE_aXE_a^*.$\nThus mixing preserves the represented map, including every zero-on-code\nerror.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compress the transformed products by $V$. The scalar-compression\nidentities and [F2] give\n$V^*F_i^*F_jV=(U^*CU)_{ij}I_{H_L}=\\delta_{ij}\\lambda_iI_{H_L}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $\\lambda_i=0$, then for every $x\\in H_L$,\n$\\|F_iVx\\|^2=\\lambda_i\\|x\\|^2=0$, so $F_iV=0$. If $\\lambda_i>0$,\nthen [F5] and step 2.1 give $W_i^*W_j=\\delta_{ij}I$ for positive\neigenvalues. Hence each $W_i$ is isometric, and for $i\\ne j$ its range is\northogonal to the range of $W_j$.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2: If $\\lambda_i=0$, then for every $x\\in H_L$,\n$\\|F_iVx\\|^2=\\lambda_i\\|x\\|^2=0$, so $F_iV=0$. If $\\lambda_i>0$,\nthen [F5] and step 2.1 give $W_i^*W_j=\\delta_{ij}I$ for positive\neigenvalues. Hence each $W_i$ is isometric, and for $i\\ne j$ its range is\northogonal to the range of $W_j$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2: If $\\lambda_i=0$, then for every $x\\in H_L$,\n$\\|F_iVx\\|^2=\\lambda_i\\|x\\|^2=0$, so $F_iV=0$. If $\\lambda_i>0$,\nthen [F5] and step 2.1 give $W_i^*W_j=\\delta_{ij}I$ for positive\neigenvalues. Hence each $W_i$ is isometric, and for $i\\ne j$ its range is\northogonal to the range of $W_j$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "def-qc-exact-recovery-of-a-quantum-code": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Let $H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces. An encoding isometry $V:H_L\\to H_P$ has code projector $P=VV^*$;\n[[thm-qc-isometric-encoding-projector]] gives $V^*V=I_{H_L}$, so\n$\\operatorname{Ad}_V(X)=VXV^*$ is trace-preserving.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel. The code\nis **exactly correctable** for $\\mathcal N$ if there is a decoded recovery\nchannel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ for which\n\n$$\\mathcal R\\circ\\mathcal"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward direction. Definition: Let $H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces. An encoding isometry $V:H_L\\to H_P$ has code projector $P=VV^*$;\n[[thm-qc-isometric-encoding-projector]] gives $V^*V=I_{H_L}$, so\n$\\operatorname{Ad}_V(X)=VXV^*$ is trace-preserving.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel. The code\nis **exactly correctable** for $\\mathcal N$ if there is a decoded recovery\nchannel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ for which\n\n$$\\mathcal R\\circ\\mathcal"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse direction. Definition: Let $H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces. An encoding isometry $V:H_L\\to H_P$ has code projector $P=VV^*$;\n[[thm-qc-isometric-encoding-projector]] gives $V^*V=I_{H_L}$, so\n$\\operatorname{Ad}_V(X)=VXV^*$ is trace-preserving.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel. The code\nis **exactly correctable** for $\\mathcal N$ if there is a decoded recovery\nchannel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ for which\n\n$$\\mathcal R\\circ\\mathcal"
+        }
+      ],
+      "well_definedness": {
+        "proved_by": "thm-qc-isometric-encoding-projector; lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement",
+        "evidence": "The definition is backed by these exact direct supplier interfaces; the excerpts document the authoring dependencies and are not independent approval.",
+        "supplier_excerpts": [
+          {
+            "source": "thm-qc-isometric-encoding-projector",
+            "source_section": "Statement",
+            "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$."
+          },
+          {
+            "source": "lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement",
+            "source_section": "Statement",
+            "quote": "Let $H,K,R$ be finite-dimensional complex inner-product spaces, with the\nlibrary convention that the inner product is linear in its first argument. For\n$x\\in H$, put $P_x:H\\to H$, $P_x(z)=\\langle z,x\\rangle x$ (rank one when\n$x\\ne0$). Write $\\mathcal B(H)=\\operatorname{End}_{\\mathbb C}(H)$. If\ncomplex-linear maps\n$\\Phi,\\Psi:\\mathcal B(H)\\to\\mathcal B(K)$ agree on $P_x$ for every unit\n$x\\in H$, then $\\Phi=\\Psi$ on $\\mathcal B(H)$ and\n$\\Phi\\otimes\\operatorname{id}_{\\mathcal B(R)}=\n\\Psi\\otimes\\operatorname{id}_{\\mathcal B(R)}$ on\n$\\mathcal B(H\\otimes R)$, under the canonical matrix-unit identification."
+          }
+        ]
+      }
+    },
+    "lem-qc-kraus-operators-of-the-identity-channel-are-scalars": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a unit vector $\\psi$, define $P_\\psi z=\\langle z,\\psi\\rangle\\psi$.\nThe adjoint identity [F6] rewrites\n$K_jP_\\psi K_j^*z=\\langle z,K_j\\psi\\rangle K_j\\psi$, so the assumed channel\nidentity gives $\\sum_jK_jP_\\psi K_j^*=P_\\psi$. If $u\\perp\\psi$, then\n$\\langle P_\\psi u,u\\rangle=0$ and\n$\\langle K_jP_\\psi K_j^*u,u\\rangle\n=|\\langle u,K_j\\psi\\rangle|^2$. Thus\n$\\sum_j|\\langle u,K_j\\psi\\rangle|^2=0$, so each inner product vanishes.\nFor a fixed $j$, write $K_j\\psi=c\\psi+v$ with $v\\perp\\psi$ using [F5].\nThe vanishing inner product with $u=v$ gives\n$0=\\langle v,K_j\\psi\\rangle=\\|v\\|^2$, so $v=0$ and\n$K_j\\psi\\in\\operatorname{span}\\{\\psi\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\dim H=1$, each linear endomorphism is scalar, so the conclusion\nholds. If $\\dim H\\ge2$, choose an orthonormal basis $(e_1,\\ldots,e_n)$ by\n[F4]. Step 1.1 gives $K_je_r=c_{jr}e_r$. For $r\\ne s$, applying step 1.1\nto $(e_r+e_s)/\\sqrt2$ shows\n$c_{jr}e_r+c_{js}e_s\\in\\operatorname{span}\\{e_r+e_s\\}$, hence\n$c_{jr}=c_{js}$. Thus $c_{jr}$ is independent of $r$ for each $j$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In either dimension case, each $K_j$ acts by one scalar on a basis of\n$H$, and therefore $K_j=c_jI_H$ on all of $H$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: For a unit vector $\\psi$, define $P_\\psi z=\\langle z,\\psi\\rangle\\psi$.\nThe adjoint identity [F6] rewrites\n$K_jP_\\psi K_j^*z=\\langle z,K_j\\psi\\rangle K_j\\psi$, so the assumed channel\nidentity gives $\\sum_jK_jP_\\psi K_j^*=P_\\psi$. If $u\\perp\\psi$, then\n$\\langle P_\\psi u,u\\rangle=0$ and\n$\\langle K_jP_\\psi K_j^*u,u\\rangle\n=|\\langle u,K_j\\psi\\rangle|^2$. Thus\n$\\sum_j|\\langle u,K_j\\psi\\rangle|^2=0$, so each inner product vanishes.\nFor a fixed $j$, write $K_j\\psi=c\\psi+v$ with $v\\perp\\psi$ using [F5].\nThe vanishing inner product with $u=v$ gives\n$0=\\langle v,K_j\\psi\\rangle=\\|v\\|^2$, so $v=0$ and\n$K_j\\psi\\in\\operatorname{span}\\{\\psi\\}$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: If $\\dim H=1$, each linear endomorphism is scalar, so the conclusion\nholds. If $\\dim H\\ge2$, choose an orthonormal basis $(e_1,\\ldots,e_n)$ by\n[F4]. Step 1.1 gives $K_je_r=c_{jr}e_r$. For $r\\ne s$, applying step 1.1\nto $(e_r+e_s)/\\sqrt2$ shows\n$c_{jr}e_r+c_{js}e_s\\in\\operatorname{span}\\{e_r+e_s\\}$, hence\n$c_{jr}=c_{js}$. Thus $c_{jr}$ is independent of $r$ for each $j$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "lem-qc-orthogonal-error-syndrome-projectors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-knill-laflamme-orthogonal-error-basis",
+          "source_section": "Statement",
+          "quote": "Let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nLet $E_1,\\ldots,E_m:H_P\\to H_O$ be a finite family satisfying\n$PE_a^*E_bP=C_{ab}P$, and let $C$ be the resulting positive matrix.\nThere is a unitary matrix $U$ such that for\n$F_i=\\sum_aE_aU_{ai}$ one has\n$\\sum_iF_iXF_i^*=\\sum_aE_aXE_a^*$ for every $X$, and\n$V^*F_i^*F_jV=\\delta_{ij}\\lambda_iI_{H_L}$ with $\\lambda_i\\ge0$.\nIf $\\lambda_i=0$, then $F_iV=0$; if $\\lambda_i>0$, then\n$W_i=F_iV/\\sqrt{\\lambda_i}$ is an isometry and the ranges of the $W_i$\nare pairwise orthogonal.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "An endomorphism $P$ of a finite-dimensional inner product space is the orthogonal projection onto some subspace if and only if\n\n$$P^2=P\\qquad\\text{and}\\qquad P^*=P.$$\n\nIn that case it is the orthogonal projection onto $\\operatorname{im}P$, along $\\ker P=(\\operatorname{im}P)^\\perp$. The cases $P=0$ and $P=I$ are included.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i$, [F4] gives\n$P_i^*=(W_iW_i^*)^*=W_iW_i^*$, and\n$P_i^2=W_i(W_i^*W_i)W_i^*=W_iW_i^*=P_i$ since $W_i$ is an isometry by\n[F1]. The image of $P_i$ is contained in $\\operatorname{ran}W_i$, while\n$P_iW_ix=W_ix$ for every $x$; hence its image equals\n$\\operatorname{ran}W_i$. By [F2], $P_i$ is the orthogonal projection onto\nthat range.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $i\\ne j$, then\n$P_iP_j=W_i(W_i^*W_j)W_j^*=0$ by [F1]. Thus\n$S^*=S$ and\n$S^2=\\sum_iP_i^2+\\sum_{i\\ne j}P_iP_j=S$; [F2] makes $S$ an\northogonal projection. The same calculation gives\n$(I-S)^*=I-S=(I-S)^2$, so [F2] makes $Q=I-S$ an orthogonal projection.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $P_i$ fixes its own range and kills the other ranges, so\n$\\operatorname{ran}S$ is exactly the orthogonal sum of the\n$\\operatorname{ran}W_i$. Since $Q=I-S$ is an orthogonal projection, its\nrange is $\\ker S$, the orthogonal complement of the range of $S$ by [F3].\nFor every $x\\in H_O$,\n$\\langle Sx,x\\rangle=\\|Sx\\|^2\\ge0$ and\n$\\langle Qx,x\\rangle=\\|Qx\\|^2\\ge0$, so [F5] gives $0\\le S\\le I$. For the empty family\nthe sums give $S=0,Q=I$ directly.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: Each $P_i$ fixes its own range and kills the other ranges, so\n$\\operatorname{ran}S$ is exactly the orthogonal sum of the\n$\\operatorname{ran}W_i$. Since $Q=I-S$ is an orthogonal projection, its\nrange is $\\ker S$, the orthogonal complement of the range of $S$ by [F3].\nFor every $x\\in H_O$,\n$\\langle Sx,x\\rangle=\\|Sx\\|^2\\ge0$ and\n$\\langle Qx,x\\rangle=\\|Qx\\|^2\\ge0$, so [F5] gives $0\\le S\\le I$. For the empty family\nthe sums give $S=0,Q=I$ directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: If $i\\ne j$, then\n$P_iP_j=W_i(W_i^*W_j)W_j^*=0$ by [F1]. Thus\n$S^*=S$ and\n$S^2=\\sum_iP_i^2+\\sum_{i\\ne j}P_iP_j=S$; [F2] makes $S$ an\northogonal projection. The same calculation gives\n$(I-S)^*=I-S=(I-S)^2$, so [F2] makes $Q=I-S$ an orthogonal projection."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-first-factor-partial-trace",
+          "source_section": "Definition",
+          "quote": "Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces, and fix\nthe factor order $H_G\\otimes H_Q$. For ordered orthonormal bases\n$(g_s)$ and $(q_\\alpha)$, define\n$$\\operatorname{Tr}_G:\\mathcal B(H_G\\otimes H_Q)\\to\\mathcal B(H_Q),\\qquad (\\operatorname{Tr}_G X)_{\\alpha\\beta}=\\sum_sX_{(s,\\alpha),(s,\\beta)},$$\nwhere $X_{(s,\\alpha),(t,\\beta)}=\\langle X(g_t\\otimes q_\\beta),\ng_s\\otimes q_\\alpha\\rangle$ under the linear-first convention. Equivalently,\nthis is the partial trace over the second factor after swapping the two wires.\nThe partial-trace characterization and wire-permutation unitarity in\n[[thm-qc-partial-trace-characterization-and-basis-independence]] and\n[[thm-qc-wire-permutation-is-unitary]] show that the map is independent of\nthe chosen orthonormal bases. In particular, the same definition applies when\n$H_Q=H_L\\otimes H_R$, with that residual factor order left unchanged. For an\noperator on $(H_G\\otimes H_L)\\otimes H_R$, use the canonical associator of\nthe ordered tensor-register construction to view it on\n$H_G\\otimes(H_L\\otimes H_R)$ before taking this partial trace.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-kraus-map-completely-positive",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ have a finite Kraus representation\n$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger$. Then $\\Phi$ is completely positive.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-kraus-choi-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces, fix an ordered\northonormal basis $\\mathcal B$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. The following are\nequivalent: $\\Phi$ is completely positive; $J_{\\mathcal B}(\\Phi)$ is\nnon-negative; and $\\Phi$ has a finite Kraus representation.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-qc-knill-laflamme-product-operator-matrix-units-form-a-basis",
+          "source_section": "Statement",
+          "quote": "Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(g_s)_{s<m}$ and $(q_\\alpha)_{\\alpha<n}$; either\nindex set may be empty. Put $\\mathcal B(H)=\\operatorname{End}_{\\mathbb C}(H)$.\nFor each $s,t<m$ and $\\alpha,\\beta<n$, define\n$$M_{s\\alpha,t\\beta}x=\\langle x,g_t\\otimes q_\\beta\\rangle(g_s\\otimes q_\\alpha).$$\nThen the family $(M_{s\\alpha,t\\beta})_{s,t,\\alpha,\\beta}$ is a basis of\n$\\mathcal B(H_G\\otimes H_Q)$. If either factor is zero-dimensional, this is\nthe empty basis of the zero endomorphism space.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M_1,\\ldots,M_k$ be a finite list of $R$-modules. Any parenthesized tensor product\n\n$$T=M_1\\otimes_R\\cdots\\otimes_RM_k$$\n\nrepresents $R$-multilinear maps from $M_1\\times\\cdots\\times M_k$: for every $R$-module $P$, composition with $(m_1,\\ldots,m_k)\\mapsto m_1\\otimes\\cdots\\otimes m_k$ is a bijection from $\\operatorname{Hom}_R(T,P)$ to the set of multilinear maps into $P$. Different parenthesizations are connected by the unique isomorphism preserving pure tensors.\n\nFor $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix unit vectors $g\\in H_G$ and $\\ell\\in H_L$, and write $P_\\ell x=\\langle x,\\ell\\rangle\\ell$. Extend $\\ell$ to an orthonormal basis $(e_0,e_1,\\ldots,e_{q-1})$ of $H_L$ with $e_0=\\ell$, using [F3]. For each $j$, expand $K_j(g\\otimes\\ell)=\\sum_{k<q}y_{jk}\\otimes e_k$. Apply the marginal hypothesis to the rank-one density operator $P_{g\\otimes\\ell}$. By [F4] the output is $\\sum_jP_{K_j(g\\otimes\\ell)}$. In each diagonal entry $k,k$, the partial-trace formula [F1] sums the squared coordinates of $y_{jk}$ over an orthonormal basis of $H_G$, so that entry is $\\sum_j\\|y_{jk}\\|^2$. The required marginal is $P_\\ell$, whose $k$th diagonal entry is zero for every $k>0$. Since each squared norm is nonnegative, $y_{jk}=0$ for all $j$ and $k>0$. Hence $K_j(g\\otimes\\ell)=\\eta_{j,g,\\ell}\\otimes\\ell$ for some $\\eta_{j,g,\\ell}\\in H_G$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a unit $g$. If unit vectors $\\ell_1,\\ell_2$ are linearly independent, then $\\ell_1+\\ell_2\\ne0$; normalize their sum and apply step 1.1 to $\\ell_1,\\ell_2$ and $(\\ell_1+\\ell_2)/\\|\\ell_1+\\ell_2\\|$. Linearity of $K_j$ gives\n$\\eta_{j,g,\\ell_1}\\otimes\\ell_1+\\eta_{j,g,\\ell_2}\\otimes\\ell_2\n=\\eta_{j,g,\\ell_+}\\otimes(\\ell_1+\\ell_2)$.\nExtend $\\ell_1,\\ell_2$ to a basis and apply its two corresponding coordinate functionals to the second tensor factor; this gives $\\eta_{j,g,\\ell_1}=\\eta_{j,g,\\ell_+}=\\eta_{j,g,\\ell_2}$. If $\\ell_2=c\\ell_1$ for a unit scalar $c$, linearity and $c\\ne0$ give the same equality directly. Thus $\\eta_{j,g,\\ell}$ is independent of the unit vector $\\ell$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a unit $\\ell_0\\in H_L$. For unit $g$, step 1.1 shows $K_j(g\\otimes\\ell_0)$ lies in $H_G\\otimes\\operatorname{span}\\{\\ell_0\\}$. Scaling gives the same for every $g$. Define $A_jg$ by $K_j(g\\otimes\\ell_0)=A_jg\\otimes\\ell_0$; it is unique because $u\\mapsto u\\otimes\\ell_0$ is injective. The linearity of $K_j$ makes $A_j$ linear. By step 1.2, $K_j(g\\otimes\\ell)=A_jg\\otimes\\ell$ for all simple tensors. Since simple tensors span by [F8], $K_j=A_j\\otimes I_{H_L}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F8",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Trace preservation [F5] and step 2.1 give\n$(\\sum_jA_j^*A_j)\\otimes I_{H_L}=I_{H_G}\\otimes I_{H_L}$, using the tensor-adjoint rule [F7]. Apply both sides to $g\\otimes\\ell_0$ for arbitrary $g$ and a fixed unit $\\ell_0$. Injectivity of $u\\mapsto u\\otimes\\ell_0$ yields $\\sum_jA_j^*A_j=I_{H_G}$.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 2.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $\\mathcal T_G(X)=\\sum_jA_jXA_j^*$. Its finite Kraus form makes it completely positive by [F9], and the normalization from step 2.2 makes it trace-preserving by [F5]. Thus it is a channel. On a simple operator tensor $X_G\\otimes X_L$, step 2.1 gives\n$\\Phi(X_G\\otimes X_L)=\\sum_j(A_jX_GA_j^*)\\otimes X_L\n=\\mathcal T_G(X_G)\\otimes X_L$.\nBy [F11], tensor products of operator matrix units form a basis of the full operator space, so linearity gives $\\Phi=\\mathcal T_G\\otimes\\operatorname{id}_{\\mathcal B(H_L)}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F5",
+            "F9",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For a finite reference space $H_R$, choose orthonormal bases of $H_G,H_L,H_R$ by [F3]; [F8] gives the product basis of $H_L\\otimes H_R$. Use the canonical reassociation in [F11] and the operator matrix-unit basis there to write any operator $\\rho$ on $(H_G\\otimes H_L)\\otimes H_R$ as $\\rho=\\sum_{s,t}|g_s\\rangle\\langle g_t|\\otimes\\rho_{st}$, with $\\rho_{st}\\in\\mathcal B(H_L\\otimes H_R)$. Write $A_jg_s=\\sum_r a^{(j)}_{rs}g_r$. By the first-factor partial-trace formula [F1], the coefficient of $\\rho_{st}$ after applying $\\Phi\\otimes\\operatorname{id}_{\\mathcal B(H_R)}$ and tracing out $G$ is\n$\\sum_{j,r}a^{(j)}_{rs}\\overline{a^{(j)}_{rt}}=\\sum_j(A_j^*A_j)_{ts}=\\delta_{ts}$.\nTherefore the output marginal is $\\sum_s\\rho_{ss}=(\\operatorname{Tr}_G\\otimes\\operatorname{id}_{\\mathcal B(H_R)})(\\rho)$. The calculation applies to every operator, hence to every density operator and every finite reference.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F8",
+            "F11",
+            "step 2.2",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the gauge-reset assertion, choose an orthonormal basis $(g_s)$ of $H_G$ and define $C_s:H_G\\otimes H_L\\to H_L$ by $C_s(g\\otimes\\ell)=\\langle g,g_s\\rangle\\ell$. Its adjoint is $C_s^*\\ell=g_s\\otimes\\ell$, so $\\sum_sC_s^*C_s(g\\otimes\\ell)=\\sum_s\\langle g,g_s\\rangle g_s\\otimes\\ell=g\\otimes\\ell$; simple tensors span, hence $\\sum_sC_s^*C_s=I_{H_G\\otimes H_L}$. On the product basis, the matrix entries of $\\sum_sC_sYC_s^*$ are exactly the first-factor contraction entries in [F1], hence $\\operatorname{Tr}_G(Y)=\\sum_sC_sYC_s^*$. Let $J_{g_0}:H_L\\to H_P$ be $J_{g_0}\\ell=J(g_0\\otimes\\ell)$. It is an isometry by [F6]. Choose finite Kraus operators $D_r$ for $\\mathcal D$ using [F10]. Since $J_{g_0}YJ_{g_0}^*=J(P_{g_0}\\otimes Y)J^*$, the gauge-reset map equals $X\\mapsto\\sum_{s,r}J_{g_0}C_sD_rX D_r^*C_s^*J_{g_0}^*$, so it has Kraus operators $J_{g_0}C_sD_r$, and\n$\\sum_{s,r}(J_{g_0}C_sD_r)^*(J_{g_0}C_sD_r)\n=\\sum_rD_r^*(\\sum_sC_s^*J_{g_0}^*J_{g_0}C_s)D_r\n=\\sum_rD_r^*D_r=I_{H_O}$.\nThus the map is completely positive by [F9] and trace-preserving by [F5], so it is a channel. Its range is contained in $\\operatorname{im}J$ by construction.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "construct",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: Fix unit vectors $g\\in H_G$ and $\\ell\\in H_L$, and write $P_\\ell x=\\langle x,\\ell\\rangle\\ell$. Extend $\\ell$ to an orthonormal basis $(e_0,e_1,\\ldots,e_{q-1})$ of $H_L$ with $e_0=\\ell$, using [F3]. For each $j$, expand $K_j(g\\otimes\\ell)=\\sum_{k<q}y_{jk}\\otimes e_k$. Apply the marginal hypothesis to the rank-one density operator $P_{g\\otimes\\ell}$. By [F4] the output is $\\sum_jP_{K_j(g\\otimes\\ell)}$. In each diagonal entry $k,k$, the partial-trace formula [F1] sums the squared coordinates of $y_{jk}$ over an orthonormal basis of $H_G$, so that entry is $\\sum_j\\|y_{jk}\\|^2$. The required marginal is $P_\\ell$, whose $k$th diagonal entry is zero for every $k>0$. Since each squared norm is nonnegative, $y_{jk}=0$ for all $j$ and $k>0$. Hence $K_j(g\\otimes\\ell)=\\eta_{j,g,\\ell}\\otimes\\ell$ for some $\\eta_{j,g,\\ell}\\in H_G$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Fix unit vectors $g\\in H_G$ and $\\ell\\in H_L$, and write $P_\\ell x=\\langle x,\\ell\\rangle\\ell$. Extend $\\ell$ to an orthonormal basis $(e_0,e_1,\\ldots,e_{q-1})$ of $H_L$ with $e_0=\\ell$, using [F3]. For each $j$, expand $K_j(g\\otimes\\ell)=\\sum_{k<q}y_{jk}\\otimes e_k$. Apply the marginal hypothesis to the rank-one density operator $P_{g\\otimes\\ell}$. By [F4] the output is $\\sum_jP_{K_j(g\\otimes\\ell)}$. In each diagonal entry $k,k$, the partial-trace formula [F1] sums the squared coordinates of $y_{jk}$ over an orthonormal basis of $H_G$, so that entry is $\\sum_j\\|y_{jk}\\|^2$. The required marginal is $P_\\ell$, whose $k$th diagonal entry is zero for every $k>0$. Since each squared norm is nonnegative, $y_{jk}=0$ for all $j$ and $k>0$. Hence $K_j(g\\otimes\\ell)=\\eta_{j,g,\\ell}\\otimes\\ell$ for some $\\eta_{j,g,\\ell}\\in H_G$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "thm-qc-knill-laflamme-explicit-recovery": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-quantum-code-isometry-and-code-projector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register interface. A **quantum code** is an isometric encoding $V:\\mathcal H_L\\to\\mathcal H_P$. Its **code subspace** is $\\mathcal C:=\\operatorname{im}V$, its logical dimension is $K:=\\dim\\mathcal H_L$, and its physical block length is the number $n$ of tensor factors. When each physical factor is a qubit, $\\mathcal H_P\\cong(\\mathbb C^2)^{\\otimes n}$; a logical $k$-qubit register has $K=2^k$. Require $K\\ge1$.\n\nUsing the root library's adjoint convention, the **code projector** is $P:=VV^*\\in\\operatorname{End}(\\mathcal H_P)$. The theorem [[thm-qc-isometric-encoding-projector]] proves $V^*V=I_{\\mathcal H_L}$, $P^*=P=P^2$, and $\\operatorname{im}P=\\mathcal C$, including one-dimensional logical spaces and the full-space code.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-kraus-map-completely-positive",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ have a finite Kraus representation\n$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger$. Then $\\Phi$ is completely positive.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-knill-laflamme-orthogonal-error-basis",
+          "source_section": "Statement",
+          "quote": "Let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nLet $E_1,\\ldots,E_m:H_P\\to H_O$ be a finite family satisfying\n$PE_a^*E_bP=C_{ab}P$, and let $C$ be the resulting positive matrix.\nThere is a unitary matrix $U$ such that for\n$F_i=\\sum_aE_aU_{ai}$ one has\n$\\sum_iF_iXF_i^*=\\sum_aE_aXE_a^*$ for every $X$, and\n$V^*F_i^*F_jV=\\delta_{ij}\\lambda_iI_{H_L}$ with $\\lambda_i\\ge0$.\nIf $\\lambda_i=0$, then $F_iV=0$; if $\\lambda_i>0$, then\n$W_i=F_iV/\\sqrt{\\lambda_i}$ is an isometry and the ranges of the $W_i$\nare pairwise orthogonal.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qc-orthogonal-error-syndrome-projectors",
+          "source_section": "Statement",
+          "quote": "Let $W_i:H_L\\to H_O$ be finitely many isometries with pairwise orthogonal\nranges. Then $P_i=W_iW_i^*$ are pairwise orthogonal projections, their sum\n$S=\\sum_iP_i$ is an orthogonal projection satisfying $0\\le S\\le I_{H_O}$,\nand $Q=I_{H_O}-S$ is the orthogonal projection onto the residual complement.\nThe empty family is allowed, with $S=0$ and $Q=I_{H_O}$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement",
+          "source_section": "Statement",
+          "quote": "Let $H,K,R$ be finite-dimensional complex inner-product spaces, with the\nlibrary convention that the inner product is linear in its first argument. For\n$x\\in H$, put $P_x:H\\to H$, $P_x(z)=\\langle z,x\\rangle x$ (rank one when\n$x\\ne0$). Write $\\mathcal B(H)=\\operatorname{End}_{\\mathbb C}(H)$. If\ncomplex-linear maps\n$\\Phi,\\Psi:\\mathcal B(H)\\to\\mathcal B(K)$ agree on $P_x$ for every unit\n$x\\in H$, then $\\Phi=\\Psi$ on $\\mathcal B(H)$ and\n$\\Phi\\otimes\\operatorname{id}_{\\mathcal B(R)}=\n\\Psi\\otimes\\operatorname{id}_{\\mathcal B(R)}$ on\n$\\mathcal B(H\\otimes R)$, under the canonical matrix-unit identification.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F6] to diagonalize the coefficient matrix and replace the Kraus\noperators by the unitarily mixed family $F_i$. The operator-sum map remains\n$\\mathcal N$, the positive eigenvalues are $\\lambda_i$, and\n$F_iV=\\sqrt{\\lambda_i}W_i$ for $\\lambda_i>0$, while $F_iV=0$ when\n$\\lambda_i=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Trace preservation [F4] and $V^*V=I$ from [F2] give\n$V^*(\\sum_iF_i^*F_i)V=I_{H_L}$. Using step 1.1, the left side is\n$(\\sum_i\\lambda_i)I_{H_L}$. Since $H_L$ is nonzero,\n$\\sum_i\\lambda_i=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $\\lambda_i>0$, define $R_i=W_i^*:H_O\\to H_L$. Choose a unit\nvector $\\ell_0\\in H_L$ and an orthonormal basis $(q_s)$ of $QH_O$ using\n[F8]; for each basis vector define\n$T_sx=\\langle x,q_s\\rangle\\ell_0$. These are finite Kraus operators.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F9], $R_i^*R_i=W_iW_i^*$. From\n$T_sx=\\langle x,q_s\\rangle\\ell_0$ and the adjoint definition,\n$T_s^*y=\\langle y,\\ell_0\\rangle q_s$; hence\n$T_s^*T_sx=\\langle x,q_s\\rangle q_s$. Summing over the orthonormal basis\nof $QH_O$ gives $\\sum_sT_s^*T_s=Q$. Therefore\n$\\sum_{\\lambda_i>0}R_i^*R_i+\\sum_sT_s^*T_s\n=\\sum_{\\lambda_i>0}W_iW_i^*+Q=I_{H_O}$ by [F7].\nThe finite Kraus map is completely positive by [F5] and trace-preserving by\n[F4], so it is a recovery channel.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For positive $\\lambda_j$,\n$R_iF_jV=\\sqrt{\\lambda_j}W_i^*W_j\n=\\delta_{ij}\\sqrt{\\lambda_j}I_{H_L}$; if $\\lambda_j=0$ then\n$F_jV=0$. Also $T_sF_jV=0$ because $QW_j=0$. Hence for every\n$X\\in\\mathcal B(H_L)$,\n$(\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V)(X)\n=\\sum_j\\lambda_jX=X$ by step 1.2.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The equality in step 3.1 is equality of linear maps on all operators.\nTensoring that equality with the identity on any finite reference gives the\nsame equality there by [F10].",
+          "step": "3.2",
+          "inputs": [
+            "step 3.1",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "The same recovery Kraus actions in step 3.1 show\n$\\mathcal R(F_iVXV^*F_j^*)=\\delta_{ij}\\lambda_iX$ for every\n$X\\in\\mathcal B(H_L)$; zero-eigenvalue terms vanish because $F_iV=0$.\nSince $F_i=\\sum_aE_aU_{ai}$, unitarity gives\n$E_a=\\sum_iF_i\\overline{U_{ai}}$. Therefore\n$\\mathcal R(E_aVXV^*E_b^*)=\\sum_i\\overline{U_{ai}}U_{bi}\\lambda_iX\n=C_{ba}X$, using $C=U\\operatorname{diag}(\\lambda_i)U^*$.",
+          "step": "3.3",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: Apply [F6] to diagonalize the coefficient matrix and replace the Kraus\noperators by the unitarily mixed family $F_i$. The operator-sum map remains\n$\\mathcal N$, the positive eigenvalues are $\\lambda_i$, and\n$F_iV=\\sqrt{\\lambda_i}W_i$ for $\\lambda_i>0$, while $F_iV=0$ when\n$\\lambda_i=0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: Apply [F6] to diagonalize the coefficient matrix and replace the Kraus\noperators by the unitarily mixed family $F_i$. The operator-sum map remains\n$\\mathcal N$, the positive eigenvalues are $\\lambda_i$, and\n$F_iV=\\sqrt{\\lambda_i}W_i$ for $\\lambda_i>0$, while $F_iV=0$ when\n$\\lambda_i=0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: For each $\\lambda_i>0$, define $R_i=W_i^*:H_O\\to H_L$. Choose a unit\nvector $\\ell_0\\in H_L$ and an orthonormal basis $(q_s)$ of $QH_O$ using\n[F8]; for each basis vector define\n$T_sx=\\langle x,q_s\\rangle\\ell_0$. These are finite Kraus operators."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "thm-qc-knill-laflamme-necessity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qc-exact-recovery-of-a-quantum-code",
+          "source_section": "Definition",
+          "quote": "Let $H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces. An encoding isometry $V:H_L\\to H_P$ has code projector $P=VV^*$;\n[[thm-qc-isometric-encoding-projector]] gives $V^*V=I_{H_L}$, so\n$\\operatorname{Ad}_V(X)=VXV^*$ is trace-preserving.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel. The code\nis **exactly correctable** for $\\mathcal N$ if there is a decoded recovery\nchannel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ for which\n\n$$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V =\\operatorname{id}_{\\mathcal B(H_L)}$$\n\nas linear maps, where $\\operatorname{Ad}_V(X)=VXV^*$. Equivalently,\nthe physical recovery $\\operatorname{Ad}_V\\circ\\mathcal R$ returns\n$V\\rho V^*$ from every positive semidefinite trace-one logical operator\n$\\rho$.\n\nIt suffices to check equality on the rank-one projectors $P_\\psi$ from\n[[lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement]]\nfor unit vectors $\\psi$: by that lemma,\nagreement on those projectors implies agreement on every operator and after\ntensoring with the identity on any finite reference system.\n\nFor any chosen finite Kraus representation\n$\\mathcal N(X)=\\sum_aE_aXE_a^*$, trace preservation gives\n$\\sum_aE_a^*E_a=I_{H_P}$ by\n[[thm-qc-trace-preserving-kraus-normalization]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "thm-qc-kraus-choi-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces, fix an ordered\northonormal basis $\\mathcal B$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. The following are\nequivalent: $\\Phi$ is completely positive; $J_{\\mathcal B}(\\Phi)$ is\nnon-negative; and $\\Phi$ has a finite Kraus representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qc-kraus-operators-of-the-identity-channel-are-scalars",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the\nlibrary convention linear in the first argument. Let $K_1,\\ldots,K_m:H\\to H$\nbe a finite family whose Kraus map is the identity channel, so\n$\\sum_jK_jXK_j^*=X$ for every $X\\in\\operatorname{End}(H)$. Then for each $j$\nthere is a scalar $c_j\\in\\mathbb C$ such that $K_j=c_jI_H$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A3], choose a finite Kraus representation\n$\\mathcal R(X)=\\sum_jR_jXR_j^*$. Composing its Kraus operators with the\nerrors $E_a$ and the encoding $V$ gives the Kraus family\n$R_jE_aV:H_L\\to H_L$ for\n$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V$.\nBy exactness [A1], this family represents the identity channel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F1] to the finite Kraus family in step 1.1. For each $j,a$ there\nis a scalar $c_{ja}$ with $R_jE_aV=c_{ja}I_{H_L}$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Trace preservation of $\\mathcal R$ gives\n$\\sum_jR_j^*R_j=I_{H_O}$ by [A4]. Therefore, for every $a,b$,\n$$V^*E_a^*E_bV =V^*E_a^*\\left(\\sum_jR_j^*R_j\\right)E_bV =\\sum_j(R_jE_aV)^*(R_jE_bV) =\\left(\\sum_j\\overline{c_{ja}}c_{jb}\\right)I_{H_L}.$$",
+          "step": "2.1",
+          "inputs": [
+            "A4",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $C_{ab}=\\sum_j\\overline{c_{ja}}c_{jb}$. Since $P=VV^*$,\n$PE_a^*E_bP=V(V^*E_a^*E_bV)V^*=C_{ab}P$ by step 2.1. This is the\nKnill–Laflamme condition for every pair of errors.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: By [A3], choose a finite Kraus representation\n$\\mathcal R(X)=\\sum_jR_jXR_j^*$. Composing its Kraus operators with the\nerrors $E_a$ and the encoding $V$ gives the Kraus family\n$R_jE_aV:H_L\\to H_L$ for\n$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V$.\nBy exactness [A1], this family represents the identity channel."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "cor-qc-distance-corrects-t-errors-and-erasures": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-local-operator-support-and-weight",
+          "source_section": "Definition",
+          "quote": "Fix an ordered physical register $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ with finite-dimensional factors. For $S\\subseteq[n]:=\\{0,\\ldots,n-1\\}$, form $\\mathcal H_S$ and $\\mathcal H_{S^c}$ in the inherited order, and let $\\Pi_S:\\mathcal H_P\\to\\mathcal H_S\\otimes\\mathcal H_{S^c}$ be the declared bijective wire permutation. An operator $E\\in\\operatorname{End}(\\mathcal H_P)$ is **supported in $S$** if there is $E_S\\in\\operatorname{End}(\\mathcal H_S)$ with\n\n$$\\Pi_S E\\Pi_S^{-1}=E_S\\otimes I_{S^c}.$$\n\nIts **weight** is $\\operatorname{wt}(E):=\\min\\{|S|:E\\text{ is supported in }S\\}$. The minimum exists because the full set $[n]$ supports every operator and $[n]$ has finitely many subsets. Let $\\mathcal H_\\varnothing=\\mathbb C$; scalar identity operators have weight zero. The weight is invariant under reordering the tensor factors by their declared wire permutation ([[lem-qc-local-operator-support-is-permutation-invariant]]).\n\nHere $E_S\\otimes I_{S^c}$ is the tensor map of [[def-qc-tensor-map]]. The product factors may have arbitrary finite dimensions; qubits are the special case $\\dim\\mathcal H_j=2$ for every $j$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-quantum-code-distance-and-error-detection",
+          "source_section": "Definition",
+          "quote": "Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P)$ is **detectable by the code** if there is a scalar $\\lambda_E\\in\\mathbb C$ such that\n\n$$PEP=\\lambda_E P.$$\n\nWhen $K\\ge2$, define the **quantum distance** by\n\n$$d:=\\min\\{\\operatorname{wt}(E):E\\in\\operatorname{End}(\\mathcal H_P),\\ PEP\\notin\\mathbb C P\\},$$\n\nwhere $\\mathbb C P:=\\{\\lambda P:\\lambda\\in\\mathbb C\\}$.\n\nWhen $K=1$, set $d:=n+1$ by convention; the non-detectable set is empty in that case, as proved in [[lem-qc-detectability-is-linear-and-encoding-invariant]]. The same theorem proves that the minimum for $K\\ge2$ exists, the condition is linear in $E$, and changing $V$ to $VU$ for a logical unitary $U$ leaves $d$ unchanged.\n\nThis definition distinguishes detection from recovery: no recovery map or correction criterion is asserted here. In particular the distance theorem on this page only proves detection below $d$; correction maps are deferred to QC19.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-quantum-distance-detects-low-weight-errors",
+          "source_section": "Statement",
+          "quote": "For a finite-register quantum code of distance $d$, every operator $E$ with $\\operatorname{wt}(E)<d$ is detectable: $PEP=\\lambda_E P$ for some $\\lambda_E\\in\\mathbb C$. No correction-map conclusion is asserted.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-knill-laflamme-explicit-recovery",
+          "source_section": "Statement",
+          "quote": "Let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nLet $\\mathcal N(X)=\\sum_{a=1}^m E_aXE_a^*$ be a finite Kraus\nrepresentation of a channel from $\\mathcal B(H_P)$ to\n$\\mathcal B(H_O)$. If\n$PE_a^*E_bP=C_{ab}P$ for all $a,b$, then there is a finite Kraus recovery\nchannel $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ satisfying\n$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V\n=\\operatorname{id}_{\\mathcal B(H_L)}$. It is obtained by diagonalizing $C$,\ndecoding each nonzero orthogonal error range, and sending the orthogonal\ncomplement to a fixed logical state. For this recovery and every\n$X\\in\\mathcal B(H_L)$, the off-diagonal error action is\n$\\mathcal R(E_aVX V^*E_b^*)=C_{ba}X$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix Kraus errors $E_a,E_b$ and choose supports $S_a,S_b$ with\n$|S_a|,|S_b|\\le t$, as allowed by [F1]. Put $U=S_a\\cup S_b$. Since\n$S_a,S_b\\subseteq U$, extend each local operator by identity on the\nadditional factors of $U$ and use the wire permutations in [F2] to put both\noperators in the same factor order $H_U\\otimes H_{U^c}$. On every product\nbasis vector in that order, each conjugated error acts on its own $S_a$ or\n$S_b$ coordinates and leaves every other coordinate fixed. The tensor-map\ndefinition in [F2] therefore gives forms\n$\\widetilde E_a\\otimes I_{U^c}$ and $\\widetilde E_b\\otimes I_{U^c}$.\nThe adjoint and composition identities in [F2] give\n$E_a^*E_b=(\\widetilde E_a^*\\widetilde E_b)\\otimes I_{U^c}$ in that order.\nThus $E_a^*E_b$ is supported in $U$ and has weight at most\n$|U|\\le |S_a|+|S_b|\\le2t<d$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], each product in step 1.1 is detectable, so there are scalars\n$C_{ab}$ with $PE_a^*E_bP=C_{ab}P$. Applying [F5] gives one recovery for\nthe entire Kraus family.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the known affected set is a fixed $S$, every $E_a$ acts as the\nidentity outside $S$, and so does every product $E_a^*E_b$ by [F1,F2]. Its\nweight is at most $|S|<d$. Applying [F3] and then [F5] gives exact recovery.\nThis uses the one known support $S$ rather than a union of two unknown\nsupports.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: Fix Kraus errors $E_a,E_b$ and choose supports $S_a,S_b$ with\n$|S_a|,|S_b|\\le t$, as allowed by [F1]. Put $U=S_a\\cup S_b$. Since\n$S_a,S_b\\subseteq U$, extend each local operator by identity on the\nadditional factors of $U$ and use the wire permutations in [F2] to put both\noperators in the same factor order $H_U\\otimes H_{U^c}$. On every product\nbasis vector in that order, each conjugated error acts on its own $S_a$ or\n$S_b$ coordinates and leaves every other coordinate fixed. The tensor-map\ndefinition in [F2] therefore gives forms\n$\\widetilde E_a\\otimes I_{U^c}$ and $\\widetilde E_b\\otimes I_{U^c}$.\nThe adjoint and composition identities in [F2] give\n$E_a^*E_b=(\\widetilde E_a^*\\widetilde E_b)\\otimes I_{U^c}$ in that order.\nThus $E_a^*E_b$ is supported in $U$ and has weight at most\n$|U|\\le |S_a|+|S_b|\\le2t<d$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Fix Kraus errors $E_a,E_b$ and choose supports $S_a,S_b$ with\n$|S_a|,|S_b|\\le t$, as allowed by [F1]. Put $U=S_a\\cup S_b$. Since\n$S_a,S_b\\subseteq U$, extend each local operator by identity on the\nadditional factors of $U$ and use the wire permutations in [F2] to put both\noperators in the same factor order $H_U\\otimes H_{U^c}$. On every product\nbasis vector in that order, each conjugated error acts on its own $S_a$ or\n$S_b$ coordinates and leaves every other coordinate fixed. The tensor-map\ndefinition in [F2] therefore gives forms\n$\\widetilde E_a\\otimes I_{U^c}$ and $\\widetilde E_b\\otimes I_{U^c}$.\nThe adjoint and composition identities in [F2] give\n$E_a^*E_b=(\\widetilde E_a^*\\widetilde E_b)\\otimes I_{U^c}$ in that order.\nThus $E_a^*E_b$ is supported in $U$ and has weight at most\n$|U|\\le |S_a|+|S_b|\\le2t<d$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    },
+    "def-qc-correctable-subsystem-and-gauge-factor": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Let $H_G,H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces with the fixed factor order $H_G\\otimes H_L$. Let\n$J:H_G\\otimes H_L\\to H_P$ be an isometric encoding and set $P=JJ^*$.\nThe factors $H_G$ and $H_L$ are the gauge and protected logical subsystems.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel.\n\nFor any finite-dimensional residual space $H_Q$, use the first-factor partial\ntrace $\\operatorname{Tr}_G$ of\n[[def-qc-first-factor-partial-trace]] on $H_G\\oti"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward direction. Definition: Let $H_G,H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces with the fixed factor order $H_G\\otimes H_L$. Let\n$J:H_G\\otimes H_L\\to H_P$ be an isometric encoding and set $P=JJ^*$.\nThe factors $H_G$ and $H_L$ are the gauge and protected logical subsystems.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel.\n\nFor any finite-dimensional residual space $H_Q$, use the first-factor partial\ntrace $\\operatorname{Tr}_G$ of\n[[def-qc-first-factor-partial-trace]] on $H_G\\oti"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse direction. Definition: Let $H_G,H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces with the fixed factor order $H_G\\otimes H_L$. Let\n$J:H_G\\otimes H_L\\to H_P$ be an isometric encoding and set $P=JJ^*$.\nThe factors $H_G$ and $H_L$ are the gauge and protected logical subsystems.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel.\n\nFor any finite-dimensional residual space $H_Q$, use the first-factor partial\ntrace $\\operatorname{Tr}_G$ of\n[[def-qc-first-factor-partial-trace]] on $H_G\\oti"
+        }
+      ],
+      "well_definedness": {
+        "proved_by": "def-qc-first-factor-partial-trace; def-qc-exact-recovery-of-a-quantum-code; lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form",
+        "evidence": "The definition is backed by these exact direct supplier interfaces; the excerpts document the authoring dependencies and are not independent approval.",
+        "supplier_excerpts": [
+          {
+            "source": "def-qc-first-factor-partial-trace",
+            "source_section": "Definition",
+            "quote": "Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces, and fix\nthe factor order $H_G\\otimes H_Q$. For ordered orthonormal bases\n$(g_s)$ and $(q_\\alpha)$, define\n$$\\operatorname{Tr}_G:\\mathcal B(H_G\\otimes H_Q)\\to\\mathcal B(H_Q),\\qquad (\\operatorname{Tr}_G X)_{\\alpha\\beta}=\\sum_sX_{(s,\\alpha),(s,\\beta)},$$\nwhere $X_{(s,\\alpha),(t,\\beta)}=\\langle X(g_t\\otimes q_\\beta),\ng_s\\otimes q_\\alpha\\rangle$ under the linear-first convention. Equivalently,\nthis is the partial trace over the second factor after swapping the two wires.\nThe partial-trace characterization and wire-permutation unitarity in\n[[thm-qc-partial-trace-characterization-and-basis-independence]] and\n[[thm-qc-wire-permutation-is-unitary]] show that the map is independent of\nthe chosen orthonormal bases. In particular, the same definition applies when\n$H_Q=H_L\\otimes H_R$, with that residual factor order left unchanged. For an\noperator on $(H_G\\otimes H_L)\\otimes H_R$, use the canonical associator of\nthe ordered tensor-register construction to view it on\n$H_G\\otimes(H_L\\otimes H_R)$ before taking this partial trace."
+          },
+          {
+            "source": "def-qc-exact-recovery-of-a-quantum-code",
+            "source_section": "Definition",
+            "quote": "Let $H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces. An encoding isometry $V:H_L\\to H_P$ has code projector $P=VV^*$;\n[[thm-qc-isometric-encoding-projector]] gives $V^*V=I_{H_L}$, so\n$\\operatorname{Ad}_V(X)=VXV^*$ is trace-preserving.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel. The code\nis **exactly correctable** for $\\mathcal N$ if there is a decoded recovery\nchannel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ for which\n\n$$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V =\\operatorname{id}_{\\mathcal B(H_L)}$$\n\nas linear maps, where $\\operatorname{Ad}_V(X)=VXV^*$. Equivalently,\nthe physical recovery $\\operatorname{Ad}_V\\circ\\mathcal R$ returns\n$V\\rho V^*$ from every positive semidefinite trace-one logical operator\n$\\rho$.\n\nIt suffices to check equality on the rank-one projectors $P_\\psi$ from\n[[lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement]]\nfor unit vectors $\\psi$: by that lemma,\nagreement on those projectors implies agreement on every operator and after\ntensoring with the identity on any finite reference system.\n\nFor any chosen finite Kraus representation\n$\\mathcal N(X)=\\sum_aE_aXE_a^*$, trace preservation gives\n$\\sum_aE_a^*E_a=I_{H_P}$ by\n[[thm-qc-trace-preserving-kraus-normalization]]."
+          },
+          {
+            "source": "lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form",
+            "source_section": "Statement",
+            "quote": "Let $H_G,H_L$ be nonzero finite-dimensional complex inner-product spaces in the fixed order $H_G\\otimes H_L$. Let $\\Phi:\\mathcal B(H_G\\otimes H_L)\\to\\mathcal B(H_G\\otimes H_L)$ be a channel with a finite Kraus family $K_1,\\ldots,K_m$. If\n$\\operatorname{Tr}_G(\\Phi(\\rho))=\\operatorname{Tr}_G(\\rho)$ for every positive semidefinite trace-one operator $\\rho$ on $H_G\\otimes H_L$, then there are operators $A_j:H_G\\to H_G$ such that $K_j=A_j\\otimes I_{H_L}$ for every $j$ and $\\sum_jA_j^*A_j=I_{H_G}$. Consequently $\\Phi=\\mathcal T_G\\otimes\\operatorname{id}_{\\mathcal B(H_L)}$ for the channel $\\mathcal T_G(X)=\\sum_jA_jXA_j^*$, and the same marginal identity holds after tensoring with the identity on any finite reference space. Conversely, any finite family $A_j$ with $\\sum_jA_j^*A_j=I_{H_G}$ defines a channel with this marginal-preserving property.\n\nAlso let $J:H_G\\otimes H_L\\to H_P$ be an isometric encoding and let $\\mathcal D:\\mathcal B(H_O)\\to\\mathcal B(H_G\\otimes H_L)$ be a channel. For every unit $g_0\\in H_G$, the gauge-reset map\n$$X\\longmapsto J(P_{g_0}\\otimes\\operatorname{Tr}_G(\\mathcal D(X)))J^*,$$\nwhere $P_{g_0}x=\\langle x,g_0\\rangle g_0$, is a channel into the encoded subspace $\\operatorname{im}J$."
+          }
+        ]
+      }
+    },
+    "ex-qc-degenerate-code-kl-matrix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-quantum-code-isometry-and-code-projector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register interface. A **quantum code** is an isometric encoding $V:\\mathcal H_L\\to\\mathcal H_P$. Its **code subspace** is $\\mathcal C:=\\operatorname{im}V$, its logical dimension is $K:=\\dim\\mathcal H_L$, and its physical block length is the number $n$ of tensor factors. When each physical factor is a qubit, $\\mathcal H_P\\cong(\\mathbb C^2)^{\\otimes n}$; a logical $k$-qubit register has $K=2^k$. Require $K\\ge1$.\n\nUsing the root library's adjoint convention, the **code projector** is $P:=VV^*\\in\\operatorname{End}(\\mathcal H_P)$. The theorem [[thm-qc-isometric-encoding-projector]] proves $V^*V=I_{\\mathcal H_L}$, $P^*=P=P^2$, and $\\operatorname{im}P=\\mathcal C$, including one-dimensional logical spaces and the full-space code.",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-knill-laflamme-explicit-recovery",
+          "source_section": "Statement",
+          "quote": "Let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nLet $\\mathcal N(X)=\\sum_{a=1}^m E_aXE_a^*$ be a finite Kraus\nrepresentation of a channel from $\\mathcal B(H_P)$ to\n$\\mathcal B(H_O)$. If\n$PE_a^*E_bP=C_{ab}P$ for all $a,b$, then there is a finite Kraus recovery\nchannel $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ satisfying\n$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V\n=\\operatorname{id}_{\\mathcal B(H_L)}$. It is obtained by diagonalizing $C$,\ndecoding each nonzero orthogonal error range, and sending the orthogonal\ncomplement to a fixed logical state. For this recovery and every\n$X\\in\\mathcal B(H_L)$, the off-diagonal error action is\n$\\mathcal R(E_aVX V^*E_b^*)=C_{ba}X$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-kraus-map-completely-positive",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ have a finite Kraus representation\n$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger$. Then $\\Phi$ is completely positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each of $I_4$, $X\\otimes I_2$, and $Z\\otimes I_2$ is unitary. Hence\n$\\sum_{a=1}^3E_a^*E_a=\\frac13(I_4+I_4+I_4)=I_4$, so the displayed Kraus\nmap is trace-preserving; it is completely positive because it is a finite\nKraus sum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "With $P=VV^*$, direct compression gives\n$$(V^*E_a^*E_bV)_{a,b} =\\frac13\\begin{pmatrix}1&0&1\\\\0&1&0\\\\1&0&1\\end{pmatrix} =C.$$\nSince $P=VV^*$, this is equivalently\n$PE_a^*E_bP=C_{ab}P$ for every $a,b$. In particular, $C$ is non-diagonal\nand has rank $2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The orthonormal eigenvectors\n$u_+=(1,0,1)/\\sqrt2$, $u_2=(0,1,0)$, and\n$u_0=(1,0,-1)/\\sqrt2$ have eigenvalues $2/3,1/3,0$, respectively.\nThe corresponding mixed Kraus operators are\n$F_+=(I_4+Z\\otimes I_2)/\\sqrt6=\\sqrt{2/3}(P_0\\otimes I_2)$,\n$F_2=E_2$, and\n$F_0=(I_4-Z\\otimes I_2)/\\sqrt6=\\sqrt{2/3}(P_1\\otimes I_2)$. The columns\n$u_+,u_2,u_0$ form a unitary matrix, so expanding the Kraus sum gives\n$\\sum_iF_iYF_i^*=\\sum_aE_aYE_a^*$ for every operator $Y$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By the definition of $W$, one has\n$F_+V=\\sqrt{2/3}V$, $F_2V=\\sqrt{1/3}W$, and $F_0V=0$.\nThe restrictions $V,W$ are isometries with orthogonal ranges, so the\npositive-eigenvalue error basis has exactly two syndromes; the zero\neigenvalue error annihilates the code.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define recovery Kraus operators $R_+=V^*$ and $R_2=W^*$. Their\nadjoint products are $VV^*=P_0\\otimes I_2$ and\n$WW^*=P_1\\otimes I_2$, so $R_+^*R_++R_2^*R_2=I_4$ and the recovery is\ntrace-preserving.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For the mixed errors,\n$R_+F_+V=\\sqrt{2/3}I_L$ and\n$R_2F_2V=\\sqrt{1/3}I_L$; all other products $R_iF_jV$ vanish. Thus for\nevery $X\\in\\mathcal B(H_L)$ the corrected channel returns\n$(2/3+1/3)X=X$. The unitary Kraus change preserves the original channel,\nso this recovery corrects the displayed three-error channel, including its\ndegeneracy; this is the recovery construction in [F1].",
+          "step": "3.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2: For the mixed errors,\n$R_+F_+V=\\sqrt{2/3}I_L$ and\n$R_2F_2V=\\sqrt{1/3}I_L$; all other products $R_iF_jV$ vanish. Thus for\nevery $X\\in\\mathcal B(H_L)$ the corrected channel returns\n$(2/3+1/3)X=X$. The unitary Kraus change preserves the original channel,\nso this recovery corrects the displayed three-error channel, including its\ndegeneracy; this is the recovery construction in [F1]."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward direction. Step 1.1: Each of $I_4$, $X\\otimes I_2$, and $Z\\otimes I_2$ is unitary. Hence\n$\\sum_{a=1}^3E_a^*E_a=\\frac13(I_4+I_4+I_4)=I_4$, so the displayed Kraus\nmap is trace-preserving; it is completely positive because it is a finite\nKraus sum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse direction. Step 2.1: The orthonormal eigenvectors\n$u_+=(1,0,1)/\\sqrt2$, $u_2=(0,1,0)$, and\n$u_0=(1,0,-1)/\\sqrt2$ have eigenvalues $2/3,1/3,0$, respectively.\nThe corresponding mixed Kraus operators are\n$F_+=(I_4+Z\\otimes I_2)/\\sqrt6=\\sqrt{2/3}(P_0\\otimes I_2)$,\n$F_2=E_2$, and\n$F_0=(I_4-Z\\otimes I_2)/\\sqrt6=\\sqrt{2/3}(P_1\\otimes I_2)$. The columns\n$u_+,u_2,u_0$ form a unitary matrix, so expanding the Kraus sum gives\n$\\sum_iF_iYF_i^*=\\sum_aE_aYE_a^*$ for every operator $Y$."
+        }
+      ]
+    },
+    "thm-qc-subsystem-knill-laflamme": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-correctable-subsystem-and-gauge-factor",
+          "source_section": "Definition",
+          "quote": "Let $H_G,H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces with the fixed factor order $H_G\\otimes H_L$. Let\n$J:H_G\\otimes H_L\\to H_P$ be an isometric encoding and set $P=JJ^*$.\nThe factors $H_G$ and $H_L$ are the gauge and protected logical subsystems.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel.\n\nFor any finite-dimensional residual space $H_Q$, use the first-factor partial\ntrace $\\operatorname{Tr}_G$ of\n[[def-qc-first-factor-partial-trace]] on $H_G\\otimes H_Q$. In particular, for\na reference $H_R$, take $H_Q=H_L\\otimes H_R$ and leave that factor order\nunchanged.\n\nA **decoded recovery** is a channel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_G\\otimes H_L)$. The subsystem\n$H_L$ is **exactly correctable** for $\\mathcal N$ under $J$ when some decoded\nrecovery satisfies, for every finite-dimensional reference $H_R$ and every\npositive semidefinite trace-one operator $\\rho$ on\n$(H_G\\otimes H_L)\\otimes H_R$,\n\n$$((\\operatorname{Tr}_G\\otimes\\operatorname{id}_{\\mathcal B(H_R}))\\circ((\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_J)\\otimes\\operatorname{id}_{\\mathcal B(H_R)}))(\\rho)=(\\operatorname{Tr}_G\\otimes\\operatorname{id}_{\\mathcal B(H_R)})(\\rho),$$\n\nwhere $\\operatorname{Ad}_J(X)=JXJ^*$. The recovery may change the gauge\nstate. By [[lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form]],\nthis is equivalently a corrected decoded channel of the form\n$\\mathcal T_G\\otimes\\operatorname{id}_{\\mathcal B(H_L)}$ for a channel\n$\\mathcal T_G$ on the gauge factor. For a unit vector $g_0\\in H_G$, resetting\nthe decoded gauge and re-encoding uses\n$X\\mapsto J(P_{g_0}\\otimes\\operatorname{Tr}_G(\\mathcal R(X)))J^*$, where\n$P_{g_0}(x)=\\langle x,g_0\\rangle g_0$; the same supplier proves this is a\nchannel. If $\\dim H_G=1$, the marginal condition is ordinary exact recovery\nof the code subspace in the sense of\n[[def-qc-exact-recovery-of-a-quantum-code]].",
+          "uses": [
+            "1.1",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-quantum-code-isometry-and-code-projector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register interface. A **quantum code** is an isometric encoding $V:\\mathcal H_L\\to\\mathcal H_P$. Its **code subspace** is $\\mathcal C:=\\operatorname{im}V$, its logical dimension is $K:=\\dim\\mathcal H_L$, and its physical block length is the number $n$ of tensor factors. When each physical factor is a qubit, $\\mathcal H_P\\cong(\\mathbb C^2)^{\\otimes n}$; a logical $k$-qubit register has $K=2^k$. Require $K\\ge1$.\n\nUsing the root library's adjoint convention, the **code projector** is $P:=VV^*\\in\\operatorname{End}(\\mathcal H_P)$. The theorem [[thm-qc-isometric-encoding-projector]] proves $V^*V=I_{\\mathcal H_L}$, $P^*=P=P^2$, and $\\operatorname{im}P=\\mathcal C$, including one-dimensional logical spaces and the full-space code.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-kraus-map-completely-positive",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ have a finite Kraus representation\n$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger$. Then $\\Phi$ is completely positive.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-kraus-choi-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces, fix an ordered\northonormal basis $\\mathcal B$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. The following are\nequivalent: $\\Phi$ is completely positive; $J_{\\mathcal B}(\\Phi)$ is\nnon-negative; and $\\Phi$ has a finite Kraus representation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form",
+          "source_section": "Statement",
+          "quote": "Let $H_G,H_L$ be nonzero finite-dimensional complex inner-product spaces in the fixed order $H_G\\otimes H_L$. Let $\\Phi:\\mathcal B(H_G\\otimes H_L)\\to\\mathcal B(H_G\\otimes H_L)$ be a channel with a finite Kraus family $K_1,\\ldots,K_m$. If\n$\\operatorname{Tr}_G(\\Phi(\\rho))=\\operatorname{Tr}_G(\\rho)$ for every positive semidefinite trace-one operator $\\rho$ on $H_G\\otimes H_L$, then there are operators $A_j:H_G\\to H_G$ such that $K_j=A_j\\otimes I_{H_L}$ for every $j$ and $\\sum_jA_j^*A_j=I_{H_G}$. Consequently $\\Phi=\\mathcal T_G\\otimes\\operatorname{id}_{\\mathcal B(H_L)}$ for the channel $\\mathcal T_G(X)=\\sum_jA_jXA_j^*$, and the same marginal identity holds after tensoring with the identity on any finite reference space. Conversely, any finite family $A_j$ with $\\sum_jA_j^*A_j=I_{H_G}$ defines a channel with this marginal-preserving property.\n\nAlso let $J:H_G\\otimes H_L\\to H_P$ be an isometric encoding and let $\\mathcal D:\\mathcal B(H_O)\\to\\mathcal B(H_G\\otimes H_L)$ be a channel. For every unit $g_0\\in H_G$, the gauge-reset map\n$$X\\longmapsto J(P_{g_0}\\otimes\\operatorname{Tr}_G(\\mathcal D(X)))J^*,$$\nwhere $P_{g_0}x=\\langle x,g_0\\rangle g_0$, is a channel into the encoded subspace $\\operatorname{im}J$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-knill-laflamme-explicit-recovery",
+          "source_section": "Statement",
+          "quote": "Let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nLet $\\mathcal N(X)=\\sum_{a=1}^m E_aXE_a^*$ be a finite Kraus\nrepresentation of a channel from $\\mathcal B(H_P)$ to\n$\\mathcal B(H_O)$. If\n$PE_a^*E_bP=C_{ab}P$ for all $a,b$, then there is a finite Kraus recovery\nchannel $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ satisfying\n$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V\n=\\operatorname{id}_{\\mathcal B(H_L)}$. It is obtained by diagonalizing $C$,\ndecoding each nonzero orthogonal error range, and sending the orthogonal\ncomplement to a fixed logical state. For this recovery and every\n$X\\in\\mathcal B(H_L)$, the off-diagonal error action is\n$\\mathcal R(E_aVX V^*E_b^*)=C_{ba}X$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-knill-laflamme-necessity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal N(X)=\\sum_{a=1}^mE_aXE_a^*$ be a finite Kraus\nrepresentation of a channel from $\\mathcal B(H_P)$ to $\\mathcal B(H_O)$,\nand let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nIf the code is exactly correctable in the sense of\n[[def-qc-exact-recovery-of-a-quantum-code]], then there are scalars\n$C_{ab}$ such that\n$PE_a^*E_bP=C_{ab}P$ for all $a,b$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-knill-laflamme-explicit-recovery",
+          "source_section": "Statement",
+          "quote": "Let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nLet $\\mathcal N(X)=\\sum_{a=1}^m E_aXE_a^*$ be a finite Kraus\nrepresentation of a channel from $\\mathcal B(H_P)$ to\n$\\mathcal B(H_O)$. If\n$PE_a^*E_bP=C_{ab}P$ for all $a,b$, then there is a finite Kraus recovery\nchannel $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ satisfying\n$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V\n=\\operatorname{id}_{\\mathcal B(H_L)}$. It is obtained by diagonalizing $C$,\ndecoding each nonzero orthogonal error range, and sending the orthogonal\ncomplement to a fixed logical state. For this recovery and every\n$X\\in\\mathcal B(H_L)$, the off-diagonal error action is\n$\\mathcal R(E_aVX V^*E_b^*)=C_{ba}X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-correctable-subsystem-and-gauge-factor",
+          "source_section": "Definition",
+          "quote": "Let $H_G,H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces with the fixed factor order $H_G\\otimes H_L$. Let\n$J:H_G\\otimes H_L\\to H_P$ be an isometric encoding and set $P=JJ^*$.\nThe factors $H_G$ and $H_L$ are the gauge and protected logical subsystems.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel.\n\nFor any finite-dimensional residual space $H_Q$, use the first-factor partial\ntrace $\\operatorname{Tr}_G$ of\n[[def-qc-first-factor-partial-trace]] on $H_G\\otimes H_Q$. In particular, for\na reference $H_R$, take $H_Q=H_L\\otimes H_R$ and leave that factor order\nunchanged.\n\nA **decoded recovery** is a channel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_G\\otimes H_L)$. The subsystem\n$H_L$ is **exactly correctable** for $\\mathcal N$ under $J$ when some decoded\nrecovery satisfies, for every finite-dimensional reference $H_R$ and every\npositive semidefinite trace-one operator $\\rho$ on\n$(H_G\\otimes H_L)\\otimes H_R$,\n\n$$((\\operatorname{Tr}_G\\otimes\\operatorname{id}_{\\mathcal B(H_R}))\\circ((\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_J)\\otimes\\operatorname{id}_{\\mathcal B(H_R)}))(\\rho)=(\\operatorname{Tr}_G\\otimes\\operatorname{id}_{\\mathcal B(H_R)})(\\rho),$$\n\nwhere $\\operatorname{Ad}_J(X)=JXJ^*$. The recovery may change the gauge\nstate. By [[lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form]],\nthis is equivalently a corrected decoded channel of the form\n$\\mathcal T_G\\otimes\\operatorname{id}_{\\mathcal B(H_L)}$ for a channel\n$\\mathcal T_G$ on the gauge factor. For a unit vector $g_0\\in H_G$, resetting\nthe decoded gauge and re-encoding uses\n$X\\mapsto J(P_{g_0}\\otimes\\operatorname{Tr}_G(\\mathcal R(X)))J^*$, where\n$P_{g_0}(x)=\\langle x,g_0\\rangle g_0$; the same supplier proves this is a\nchannel. If $\\dim H_G=1$, the marginal condition is ordinary exact recovery\nof the code subspace in the sense of\n[[def-qc-exact-recovery-of-a-quantum-code]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-exact-recovery-of-a-quantum-code",
+          "source_section": "Definition",
+          "quote": "Let $H_L,H_P,H_O$ be nonzero finite-dimensional complex inner-product\nspaces. An encoding isometry $V:H_L\\to H_P$ has code projector $P=VV^*$;\n[[thm-qc-isometric-encoding-projector]] gives $V^*V=I_{H_L}$, so\n$\\operatorname{Ad}_V(X)=VXV^*$ is trace-preserving.\nLet $\\mathcal N:\\mathcal B(H_P)\\to\\mathcal B(H_O)$ be a channel. The code\nis **exactly correctable** for $\\mathcal N$ if there is a decoded recovery\nchannel\n$\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ for which\n\n$$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V =\\operatorname{id}_{\\mathcal B(H_L)}$$\n\nas linear maps, where $\\operatorname{Ad}_V(X)=VXV^*$. Equivalently,\nthe physical recovery $\\operatorname{Ad}_V\\circ\\mathcal R$ returns\n$V\\rho V^*$ from every positive semidefinite trace-one logical operator\n$\\rho$.\n\nIt suffices to check equality on the rank-one projectors $P_\\psi$ from\n[[lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement]]\nfor unit vectors $\\psi$: by that lemma,\nagreement on those projectors implies agreement on every operator and after\ntensoring with the identity on any finite reference system.\n\nFor any chosen finite Kraus representation\n$\\mathcal N(X)=\\sum_aE_aXE_a^*$, trace preservation gives\n$\\sum_aE_a^*E_a=I_{H_P}$ by\n[[thm-qc-trace-preserving-kraus-normalization]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.3",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement",
+          "source_section": "Statement",
+          "quote": "Let $H,K,R$ be finite-dimensional complex inner-product spaces, with the\nlibrary convention that the inner product is linear in its first argument. For\n$x\\in H$, put $P_x:H\\to H$, $P_x(z)=\\langle z,x\\rangle x$ (rank one when\n$x\\ne0$). Write $\\mathcal B(H)=\\operatorname{End}_{\\mathbb C}(H)$. If\ncomplex-linear maps\n$\\Phi,\\Psi:\\mathcal B(H)\\to\\mathcal B(K)$ agree on $P_x$ for every unit\n$x\\in H$, then $\\Phi=\\Psi$ on $\\mathcal B(H)$ and\n$\\Phi\\otimes\\operatorname{id}_{\\mathcal B(R)}=\n\\Psi\\otimes\\operatorname{id}_{\\mathcal B(R)}$ on\n$\\mathcal B(H\\otimes R)$, under the canonical matrix-unit identification.",
+          "uses": [
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-qc-knill-laflamme-product-operator-matrix-units-form-a-basis",
+          "source_section": "Statement",
+          "quote": "Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(g_s)_{s<m}$ and $(q_\\alpha)_{\\alpha<n}$; either\nindex set may be empty. Put $\\mathcal B(H)=\\operatorname{End}_{\\mathbb C}(H)$.\nFor each $s,t<m$ and $\\alpha,\\beta<n$, define\n$$M_{s\\alpha,t\\beta}x=\\langle x,g_t\\otimes q_\\beta\\rangle(g_s\\otimes q_\\alpha).$$\nThen the family $(M_{s\\alpha,t\\beta})_{s,t,\\alpha,\\beta}$ is a basis of\n$\\mathcal B(H_G\\otimes H_Q)$. If either factor is zero-dimensional, this is\nthe empty basis of the zero endomorphism space.",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For necessity, let $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_G\\otimes H_L)$ be an exact decoded recovery. By [F3], choose a finite Kraus family $(S_r)$ for $\\mathcal R$. The corrected map $\\Phi=\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_J$ has Kraus operators $K_{ra}=S_rE_aJ$. It is completely positive by [F3], and\n$$\\sum_{r,a}K_{ra}^*K_{ra} =J^*\\sum_aE_a^*\\left(\\sum_rS_r^*S_r\\right)E_aJ =J^*\\left(\\sum_aE_a^*E_a\\right)J =J^*J=I_{H_G\\otimes H_L}$$\nby [F2] and [F3]. Thus $\\Phi$ is a channel. By exactness [F1], it preserves the $H_L$ marginal; [F4] gives $S_rE_aJ=A_{ra}\\otimes I_{H_L}$ for some $A_{ra}:H_G\\to H_G$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Trace preservation of $\\mathcal R$ and $\\mathcal N$ gives $\\sum_rS_r^*S_r=I_{H_O}$ and $\\sum_aE_a^*E_a=I_{H_P}$ by [F3]. Hence\n$$J^*E_a^*E_bJ =J^*E_a^*\\left(\\sum_rS_r^*S_r\\right)E_bJ =\\sum_r(S_rE_aJ)^*(S_rE_bJ) =\\left(\\sum_rA_{ra}^*A_{rb}\\right)\\otimes I_{H_L}.$$\nSet $M_{ab}=\\sum_rA_{ra}^*A_{rb}$. This proves the operator-valued condition.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix an orthonormal gauge basis $(g_k)$ using [F7]. The matrix entry of $M_{ab}$ in row $k$, column $\\ell$ is $\\langle M_{ab}g_\\ell,g_k\\rangle$ by [F8]. Therefore\n$$P_{kk}E_a^*E_bP_{\\ell\\ell} =J\\bigl(Q_{kk}(M_{ab}\\otimes I_{H_L})Q_{\\ell\\ell}\\bigr)J^* =\\langle M_{ab}g_\\ell,g_k\\rangle P_{k\\ell}.$$\nThis proves the matrix-unit statement in the necessary direction.",
+          "step": "1.3",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "F7",
+            "F8",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For sufficiency, assume $J^*E_a^*E_bJ=M_{ab}\\otimes I_{H_L}$. Let $d_G=\\dim H_G>0$ and choose an orthonormal basis $(g_k)_{k<d_G}$ by [F7]. Define $\\iota_k:H_L\\to H_G\\otimes H_L$ by $\\iota_kx=g_k\\otimes x$, and put $F_{ak}=E_aJ\\iota_k$ and $\\widetilde F_{ak}=F_{ak}/\\sqrt{d_G}$. By trace preservation [F3] and $J^*J=I$ from [F2],\n$$\\sum_{a,k}F_{ak}^*F_{ak} =\\sum_k\\iota_k^*J^*\\left(\\sum_aE_a^*E_a\\right)J\\iota_k =d_G I_{H_L}.$$\nThus $(\\widetilde F_{ak})$ is a finite Kraus representation of a channel $\\widetilde{\\mathcal N}:\\mathcal B(H_L)\\to\\mathcal B(H_O)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F7",
+            "F10",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For all $a,b,k,\\ell$, the assumed condition gives\n$$\\widetilde F_{ak}^*\\widetilde F_{b\\ell} =\\frac{\\langle M_{ab}g_\\ell,g_k\\rangle}{d_G}I_{H_L}.$$\nApply [F5] to $\\widetilde{\\mathcal N}$ with the identity encoding of $H_L$. It supplies a channel $\\mathcal S:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ and a finite Kraus family $(S_r)$ for which\n$$\\mathcal S(\\widetilde F_{ak}X\\widetilde F_{b\\ell}^*) =\\frac{\\langle M_{ba}g_k,g_\\ell\\rangle}{d_G}X$$\nfor every $X\\in\\mathcal B(H_L)$.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Trace preservation and $J^*J=I$ imply\n$$\\sum_aM_{aa}\\otimes I_{H_L} =J^*\\left(\\sum_aE_a^*E_a\\right)J =I_{H_G\\otimes H_L},$$\nso $\\sum_aM_{aa}=I_{H_G}$: applying the equality to each $g\\otimes\\ell_0$ for fixed unit $\\ell_0$ gives $(\\sum_aM_{aa}g-g)\\otimes\\ell_0=0$, and tensoring with nonzero $\\ell_0$ is injective. Define the decoded recovery $\\mathcal T(X)=P_{g_0}\\otimes\\mathcal S(X)$ for a fixed unit $g_0\\in H_G$. For a gauge matrix unit $|g_k\\rangle\\langle g_\\ell|\\otimes X$, the encoded channel output is $\\sum_aF_{ak}XF_{a\\ell}^*$; applying $\\mathcal S$ and scaling the cross-term formula in step 2.2 from $\\widetilde F_{ak}$ to $F_{ak}=\\sqrt{d_G}\\,\\widetilde F_{ak}$ gives logical output\n$$\\sum_a\\mathcal S(F_{ak}XF_{a\\ell}^*) =\\sum_a\\langle M_{aa}g_k,g_\\ell\\rangle X =\\langle g_k,g_\\ell\\rangle X =\\delta_{k\\ell}X.$$\nHere the scaling is\n$\\mathcal S(F_{ak}XF_{b\\ell}^*)=d_G\\mathcal S(\\widetilde F_{ak}X\\widetilde F_{b\\ell}^*)$,\nso the factor $d_G$ cancels the denominator in step 2.2. The input logical\nmarginal of that matrix unit is also $\\delta_{k\\ell}X$. By linearity and the\nproduct matrix-unit basis in [F12], the decoded map $\\mathcal T$ with output\ngauge reset preserves the logical marginal on every operator; [F9] extends\nthe equality to every finite reference.",
+          "step": "2.3",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F2",
+            "F3",
+            "F7",
+            "F9",
+            "F10",
+            "F12",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "The Kraus operators of $\\mathcal T$ are $T_r y=g_0\\otimes S_r y$. Since $g_0$ is unit, $\\sum_rT_r^*T_r=\\sum_rS_r^*S_r=I_{H_O}$; hence $\\mathcal T$ is a channel by [F3]. Step 2.3 proves it preserves the logical marginal on every operator, and [F9] extends that identity to every finite reference. The physical reset-and-encode map is a channel by [F4], so the protected subsystem is exactly correctable.",
+          "step": "2.4",
+          "inputs": [
+            "step 2.3",
+            "F1",
+            "F3",
+            "F4",
+            "F9",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $P=JJ^*$, the operator-valued condition gives\n$PE_a^*E_bP=J(M_{ab}\\otimes I_{H_L})J^*$. Conversely, multiplying this compressed equality by $J^*$ and $J$ and using $J^*J=I$ recovers the operator-valued condition.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For a fixed orthonormal gauge basis, if the operator-valued condition holds, then\n$Q_{kk}(J^*E_a^*E_bJ)Q_{\\ell\\ell}\n=\\langle M_{ab}g_\\ell,g_k\\rangle Q_{k\\ell}$,\nwhich gives the embedded matrix-unit condition after multiplying by $J$ and $J^*$. Conversely, sum the embedded matrix-unit identities over $k,\\ell$. Since $\\sum_kP_{kk}=P$ and $J^*P_{k\\ell}J=Q_{k\\ell}$, the resulting operator is\n$J^*E_a^*E_bJ=(\\sum_{k,\\ell}\\lambda_{abk\\ell}|g_k\\rangle\\langle g_\\ell|)\\otimes I_{H_L}$.\nThis establishes equivalence for the fixed basis; because the operator-valued condition is basis-independent, it holds for every orthonormal gauge basis.",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\dim H_G=1$, every $M_{ab}$ is a scalar, so the criterion becomes\n$PE_a^*E_bP=C_{ab}P$. Under the unitary identification\n$H_G\\otimes H_L\\cong H_L$, the first-factor trace leaves the logical\noperator unchanged, so the subsystem recovery definition [F11] is ordinary\nexact recovery. The necessity and sufficiency directions are [F6].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F11",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: "
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: For necessity, let $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_G\\otimes H_L)$ be an exact decoded recovery. By [F3], choose a finite Kraus family $(S_r)$ for $\\mathcal R$. The corrected map $\\Phi=\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_J$ has Kraus operators $K_{ra}=S_rE_aJ$. It is completely positive by [F3], and\n$$\\sum_{r,a}K_{ra}^*K_{ra} =J^*\\sum_aE_a^*\\left(\\sum_rS_r^*S_r\\right)E_aJ =J^*\\left(\\sum_aE_a^*E_a\\right)J =J^*J=I_{H_G\\otimes H_L}$$\nby [F2] and [F3]. Thus $\\Phi$ is a channel. By exactness [F1], it preserves the $H_L$ marginal; [F4] gives $S_rE_aJ=A_{ra}\\otimes I_{H_L}$ for some $A_{ra}:H_G\\to H_G$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward direction. Step 1.1: For necessity, let $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_G\\otimes H_L)$ be an exact decoded recovery. By [F3], choose a finite Kraus family $(S_r)$ for $\\mathcal R$. The corrected map $\\Phi=\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_J$ has Kraus operators $K_{ra}=S_rE_aJ$. It is completely positive by [F3], and\n$$\\sum_{r,a}K_{ra}^*K_{ra} =J^*\\sum_aE_a^*\\left(\\sum_rS_r^*S_r\\right)E_aJ =J^*\\left(\\sum_aE_a^*E_a\\right)J =J^*J=I_{H_G\\otimes H_L}$$\nby [F2] and [F3]. Thus $\\Phi$ is a channel. By exactness [F1], it preserves the $H_L$ marginal; [F4] gives $S_rE_aJ=A_{ra}\\otimes I_{H_L}$ for some $A_{ra}:H_G\\to H_G$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse direction. Step 2.1: For sufficiency, assume $J^*E_a^*E_bJ=M_{ab}\\otimes I_{H_L}$. Let $d_G=\\dim H_G>0$ and choose an orthonormal basis $(g_k)_{k<d_G}$ by [F7]. Define $\\iota_k:H_L\\to H_G\\otimes H_L$ by $\\iota_kx=g_k\\otimes x$, and put $F_{ak}=E_aJ\\iota_k$ and $\\widetilde F_{ak}=F_{ak}/\\sqrt{d_G}$. By trace preservation [F3] and $J^*J=I$ from [F2],\n$$\\sum_{a,k}F_{ak}^*F_{ak} =\\sum_k\\iota_k^*J^*\\left(\\sum_aE_a^*E_a\\right)J\\iota_k =d_G I_{H_L}.$$\nThus $(\\widetilde F_{ak})$ is a finite Kraus representation of a channel $\\widetilde{\\mathcal N}:\\mathcal B(H_L)\\to\\mathcal B(H_O)$."
+        }
+      ]
+    },
+    "ex-qc-knill-laflamme-orthogonal-error-recovery": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-quantum-code-isometry-and-code-projector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register interface. A **quantum code** is an isometric encoding $V:\\mathcal H_L\\to\\mathcal H_P$. Its **code subspace** is $\\mathcal C:=\\operatorname{im}V$, its logical dimension is $K:=\\dim\\mathcal H_L$, and its physical block length is the number $n$ of tensor factors. When each physical factor is a qubit, $\\mathcal H_P\\cong(\\mathbb C^2)^{\\otimes n}$; a logical $k$-qubit register has $K=2^k$. Require $K\\ge1$.\n\nUsing the root library's adjoint convention, the **code projector** is $P:=VV^*\\in\\operatorname{End}(\\mathcal H_P)$. The theorem [[thm-qc-isometric-encoding-projector]] proves $V^*V=I_{\\mathcal H_L}$, $P^*=P=P^2$, and $\\operatorname{im}P=\\mathcal C$, including one-dimensional logical spaces and the full-space code.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-kraus-map-completely-positive",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ have a finite Kraus representation\n$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger$. Then $\\Phi$ is completely positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-knill-laflamme-explicit-recovery",
+          "source_section": "Statement",
+          "quote": "Let $V:H_L\\to H_P$ be an isometry with $H_L\\ne\\{0\\}$ and $P=VV^*$.\nLet $\\mathcal N(X)=\\sum_{a=1}^m E_aXE_a^*$ be a finite Kraus\nrepresentation of a channel from $\\mathcal B(H_P)$ to\n$\\mathcal B(H_O)$. If\n$PE_a^*E_bP=C_{ab}P$ for all $a,b$, then there is a finite Kraus recovery\nchannel $\\mathcal R:\\mathcal B(H_O)\\to\\mathcal B(H_L)$ satisfying\n$\\mathcal R\\circ\\mathcal N\\circ\\operatorname{Ad}_V\n=\\operatorname{id}_{\\mathcal B(H_L)}$. It is obtained by diagonalizing $C$,\ndecoding each nonzero orthogonal error range, and sending the orthogonal\ncomplement to a fixed logical state. For this recovery and every\n$X\\in\\mathcal B(H_L)$, the off-diagonal error action is\n$\\mathcal R(E_aVX V^*E_b^*)=C_{ba}X$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both $I_4$ and $X\\otimes I_2$ are unitary, so\n$E_0^*E_0+E_1^*E_1=I_4$. The map\n$\\mathcal N(Y)=E_0YE_0^*+E_1YE_1^*$ is therefore a channel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By the definitions of $V$ and $W$, $W^*V=0$,\n$V^*V=W^*W=I_L$, and\n$$(V^*E_a^*E_bV)_{a,b} =\\begin{pmatrix}1/2&0\\\\0&1/2\\end{pmatrix}.$$\nThe normalized error restrictions are $V$ and $W$, so their ranges are\northogonal and each syndrome has weight $1/2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define recovery Kraus operators $R_0=V^*$ and $R_1=W^*$. Then\n$R_0^*R_0+R_1^*R_1=VV^*+WW^*=I_4$, so the recovery is trace-preserving.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The only nonzero corrected error products are\n$R_0E_0V=I_L/\\sqrt2$ and $R_1E_1V=I_L/\\sqrt2$. Hence for every\n$Y\\in\\mathcal B(H_L)$ the corrected channel returns\n$\\frac12Y+\\frac12Y=Y$. This is the orthogonal-syndrome branch of [F1].",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement and proof contain no empty family, list, basis, sum, set, or zero-length case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero operator, zero eigenvalue, zero-dimensional input, or zero-valued boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-dimensional space, single-error case, or dimension-one endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degeneracy or zero-eigenvalue claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no numerical threshold, endpoint, or strict-boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a nonempty family, so no nonempty-choice step occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no equivalence requiring a reverse direction."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1182 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qa-22-block-encoding",
+    "lem-qa-22-block-compression-contraction",
+    "thm-qa-22-adjoint-block-encoding",
+    "thm-qa-22-product-block-encoding-correctness",
+    "thm-qa-22-long-product-error-recurrence",
+    "thm-qa-22-lcu-block-encoding-correctness",
+    "thm-qa-22-block-encoding-error-and-query-cost",
+    "ex-qa-22-product-error",
+    "ex-qa-22-two-term-lcu"
+  ],
+  "contracts": {
+    "def-qa-22-block-encoding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inner-product-norm",
+          "source_section": "Definition",
+          "quote": "For a vector $v$ in a real or complex inner product space, define its **inner-product norm** by\n\n$$\\lVert v\\rVert:=\\sqrt{\\langle v,v\\rangle}.$$\n\nPositive definiteness in [[def-inner-product-space]] makes the radicand a nonnegative real, and [[thm-nth-roots-exist]] supplies its unique nonnegative square root. The notation therefore defines one real number $\\lVert v\\rVert\\ge0$. Its norm axioms are established in [[cor-triangle-inequality-for-inner-product-norm]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $e_0$ is a unit vector, $J_a^{\\dagger}J_a=I$ and $J_aJ_a^{\\dagger}=\\Pi_a$. Therefore $J_a^{\\dagger}(\\Pi_aU\\Pi_a)J_a=J_a^{\\dagger}UJ_a=B_U$ and $\\Pi_aU\\Pi_a=J_aB_UJ_a^{\\dagger}$. Thus $J_a$ identifies the restriction of $\\Pi_aU\\Pi_a$ on its range with $B_U$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The padding conditions give $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. Thus $P_{\\rm in}:=E_{\\rm in}E_{\\rm in}^{\\dagger}$ is a self-adjoint idempotent. For every $z$, $P_{\\rm in}z$ and $(I-P_{\\rm in})z$ are orthogonal, so $\\|P_{\\rm in}z\\|^2\\le\\|z\\|^2$. By [F4], $\\|E_{\\rm in}^{\\dagger}z\\|^2=\\langle P_{\\rm in}z,z\\rangle=\\|P_{\\rm in}z\\|^2$ and $\\|E_{\\rm in}x\\|^2=\\langle x,E_{\\rm in}^{\\dagger}E_{\\rm in}x\\rangle=\\|x\\|^2$. The same adjoint identity gives $\\|E_{\\rm out}y\\|^2=\\langle y,E_{\\rm out}^{\\dagger}E_{\\rm out}y\\rangle=\\|y\\|^2$. Thus the input adjoint is contractive and both padding maps preserve length.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $a=1$ and $U=X\\otimes I_d$, where $X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, the displayed matrix satisfies $X^{\\dagger}X=XX^{\\dagger}=I$, so $U$ is unitary, but $\\Pi_aU\\Pi_a=0$. Hence the full projected operator need not be unitary.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a unit $z\\in\\mathbb C^d$, if $E_{\\rm in}^{\\dagger}z\\ne0$, normalize that vector in the maximum defining [F3]; if it is zero, its image under $A$ is zero. In either case, $\\|E_{\\rm out}AE_{\\rm in}^{\\dagger}z\\|\\le\\|A\\|_{\\rm op}\\|E_{\\rm in}^{\\dagger}z\\|\\le\\|A\\|_{\\rm op}$, so $\\|\\widehat A\\|_{\\rm op}\\le\\|A\\|_{\\rm op}$. Conversely, for each unit $x\\in\\mathbb C^n$, $E_{\\rm in}x$ is unit and $\\|\\widehat A E_{\\rm in}x\\|=\\|E_{\\rm out}Ax\\|=\\|Ax\\|$. Taking suprema yields $\\|\\widehat A\\|_{\\rm op}=\\|A\\|_{\\rm op}$ by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: m,n>=1 and d>=max(m,n) exclude the zero-dimensional coordinate-register case; it is not included silently."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits A=0 with alpha>0; step 3.1 preserves its zero operator norm under the declared padding."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits m=n=d=1 and a=0; step 1.1 identifies the resulting projected block."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition imposes no rank condition; step 1.2 proves the padding identities for arbitrary declared isometric embeddings."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition permits alpha=||A|| and epsilon=0 and names epsilon=0 as the exact case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The padding maps E_in and E_out are part of the encoding data; the proof uses those fixed maps and selects no witness from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition gives a norm inequality for a specified compressed block; its projector paragraph is an equality of operators, not a biconditional criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition gives a norm inequality for a specified compressed block; its projector paragraph is an equality of operators, not a biconditional criterion."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-46",
+        "notes": "Read Definition and every proof step with all ten direct suppliers. Positive m,n,d exclude zero domains; a=0 is the one-dimensional ancilla, A=0 and epsilon=0 are allowed. E_in and E_out are fixed isometric data, so no AC is used. Projection identities follow from J†J=I; orthogonal splitting proves E_in† contractive and the two isometries preserve length; testing padded E_in x gives both norm inequalities. The X example is unitary with zero compression. Checked Gilyén et al. §4.1 Definition 43 (retrieved v1, PDF index 40) and Childs §29.1 equations (29.1) and rescaling paragraph (PDF index 150): local epsilon is normalized and alpha>=||A|| is an additional approximate promise. Reader clarification is mathematically accurate; no changed Definition or consumer hypothesis."
+      }
+    },
+    "lem-qa-22-block-compression-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The zero-ancilla coordinate projection $J_a^{\\dagger}$ has norm at most one: it discards all coordinates orthogonal to $e_0\\otimes\\mathbb C^d$, so the squared length of the retained coordinates is at most the squared length of the full vector. Hence for each unit $x$, $\\|B_Ux\\|=\\|J_a^{\\dagger}UJ_ax\\|\\le\\|UJ_ax\\|=\\|J_ax\\|=1$, using [F3] and the isometry of $J_a$ from [F1]. Taking the maximum gives $\\|B_U\\|_{\\rm op}\\le1$; the zero-dimensional case follows from [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the exact case [F1] gives $\\widehat A=\\alpha B_U$ and $\\|A\\|_{\\rm op}=\\|\\widehat A\\|_{\\rm op}$. The unit-vector definition [F2] gives $\\|\\alpha B_U\\|_{\\rm op}=\\alpha\\|B_U\\|_{\\rm op}$ for positive $\\alpha$, hence $\\|A\\|_{\\rm op}=\\alpha\\|B_U\\|_{\\rm op}\\le\\alpha$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 states that the zero-domain operator norm case follows from F2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the exact block A=0 and concludes ||A||<=alpha."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to every unit vector, including a one-dimensional system and a=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the isometric injection and unitarity, with no rank hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 applies when epsilon=0 and alpha=||A|| as well as for larger alpha."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The compression lemma fixes U and J_a as inputs and derives a bound; it does not choose a block encoding."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves that a projected block is a contraction and draws an exact-case consequence; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement proves that a projected block is a contraction and draws an exact-case consequence; it states no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-22-adjoint-block-encoding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-22-block-encoding-access-model",
+          "source_section": "Definition",
+          "quote": "An **access instance** for a finite family of block-encoding unitaries $U_j$ records, as separate supplied operations, each of $U_j$, $U_j^{\\dagger}$, controlled-$U_j$, and controlled-$U_j^{\\dagger}$ that an algorithm may call. A call to one operation does not imply access to another.\n\nWhenever a family SELECT is used, the instance specifies extensions $\\widetilde U_j$ acting on one common ordered target register. For a nonempty family on the same system $\\mathbb C^d$ with ancilla widths $a_j$, set $a_*:=\\max_j a_j$ and use $\\widetilde U_j:=I_{2^{a_*-a_j}}\\otimes U_j$, with the unused ancillas preceding the original ancillas and the system. This identity extension preserves the all-zero block. If system registers also differ, the common system register, its identifications, and unitary extensions preserving the declared encoded blocks must be supplied explicitly before forming SELECT. For a family indexed by $0\\le j<m$ and a selector register of dimension $D\\ge\\max\\{m,1\\}$, the family SELECT is\n\n$$\\mathrm{SELECT}:=\\sum_{j=0}^{m-1}|j\\rangle\\langle j|\\otimes\\widetilde U_j+\\sum_{j=m}^{D-1}|j\\rangle\\langle j|\\otimes I,$$\n\nwhere $I$ acts on the common target register and empty sums are zero. The instance records whether this complete unitary is supplied as one oracle or must be assembled from separately controlled calls; any required extensions and register routing have declared implementation costs.\n\nFor every supplied circuit operation $O$, the instance records the applicable circuit-description length, gate count and gate set, depth, total width, and clean and dirty work-ancilla counts; for a uniform family it records the full-description generator time. It separately records each named oracle-query count, classical postprocessing time and space, matrix-data and coefficient-table reading or storage, state-preparation cost, and target precision and its bit encoding when the task is approximate. These coordinates follow [[def-qc-circuit-cost-model]] and [[def-qc-uniform-circuit-family]]; an inapplicable coordinate is marked not applicable, not silently zero. A bare matrix $A$ supplies none of these circuits or access rights. If an operation is compiled from matrix entries or a coefficient table, its data access, synthesis, precision, and classical costs are recorded separately. The cost of a SELECT implementation includes its controls and relative phases unless those are listed as separate supplied primitives. These block-encoding constructions include no measurement or classical-output step; a consumer's measurement and output costs are accounted separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F4], the supplied operation $U^{\\dagger}$ from [F2] has compression $J_a^{\\dagger}U^{\\dagger}J_a=(J_a^{\\dagger}UJ_a)^{\\dagger}=B_U^{\\dagger}$. In the rectangular case, $\\widehat A^{\\dagger}=E_{\\rm in}A^{\\dagger}E_{\\rm out}^{\\dagger}$, which is exactly the declared padding of $A^{\\dagger}$ with the two embeddings exchanged.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any vector $v$, [F5] and [F6] imply $\\|v\\|=\\max_{\\|y\\|=1}|\\langle v,y\\rangle|$: Cauchy–Schwarz gives the upper bound, and if $v\\ne0$ the unit vector $y=v/\\|v\\|$ attains it; for $v=0$ both sides are zero. Therefore, for any linear map $T:V\\to W$ between nonzero finite-dimensional inner-product spaces, $\\|T\\|=\\max_{\\|x\\|=\\|y\\|=1}|\\langle Tx,y\\rangle|=\\max_{\\|x\\|=\\|y\\|=1}|\\langle x,T^{\\dagger}y\\rangle|=\\|T^{\\dagger}\\|$ by [F3] and maximizing over the unit vectors of $V$ and $W$. If either space is zero, both maps are zero and both norms are zero by [F5].",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the rectangular case apply step 1.2 to $T=B_U-\\widehat A/\\alpha$; in the square case $\\widehat A=A$. Since $\\alpha$ is real, [F4] gives $T^{\\dagger}=B_U^{\\dagger}-\\widehat A^{\\dagger}/\\alpha$, whose norm equals $\\|T\\|\\le\\varepsilon$. Also step 1.2 applied to $A$ gives $\\|A^{\\dagger}\\|=\\|A\\|\\le\\alpha$. Together with the swapped padding of step 1.1, these are exactly the normalization and error requirements of [F1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The referenced block-encoding Definition requires m,n>=1, so no zero-dimensional matrix is in scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows A=0 provided alpha>0; its adjoint and the error inequality remain defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement applies to a one-dimensional square matrix and permits a=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rectangular-padding clause of the Statement allows arbitrary rank and swaps the declared embeddings."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes epsilon=0 and any positive alpha meeting the block-encoding normalization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Inverse access is an explicit hypothesis; the theorem assumes its supplied implementation rather than choosing one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement constructs an adjoint encoding from inverse access; it does not assert a converse characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement constructs an adjoint encoding from inverse access; it does not assert a converse characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-46",
+        "notes": "Read all proof steps, seven direct prerequisites and reader/refuter evidence. Confirmed refuter:46:1 as nonfatal omitted rectangular normalization; repaired the dual-norm proof for T:V->W and explicitly applied it to A and the padded error. Cauchy–Schwarz and y=v/||v|| yield the dual norm in every nonzero finite coordinate space; separate maxima give ||A†||=||A||<=alpha. Zero spaces give zero maps; actual encoding dimensions are positive. Compression adjoints reverse the product and swapped fixed embeddings give exactly the padded A†; alpha is positive real so conjugation does not alter it. A=0, a=0 and epsilon=0 preserve the conclusion. Inverse access remains separately supplied. No Statement change, no consumer propagation or AC use."
+      }
+    },
+    "thm-qa-22-product-block-encoding-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-22-product-block-encoding",
+          "source_section": "Definition",
+          "quote": "**Inputs.** An integer $n\\ge1$, square matrices $A,B\\in\\mathbb C^{n\\times n}$, positive normalizations $\\alpha_A,\\alpha_B$, and unitaries $U_A,U_B$ giving $(\\alpha_A,a_A,\\varepsilon_A)$ and $(\\alpha_B,a_B,\\varepsilon_B)$ block encodings, with $\\alpha_A\\ge\\|A\\|_{\\rm op}$ and $\\alpha_B\\ge\\|B\\|_{\\rm op}$. Their access and implementation costs are supplied separately under [[def-qa-22-block-encoding-access-model]].\n\n**Construction.** Put the ancillas in the fixed order $A$-ancilla, $B$-ancilla, system. Let $V_A$ act by $U_A$ on the $A$-ancilla and system and by the identity on the $B$-ancilla. Let $V_B$ act by $U_B$ on the $B$-ancilla and system and by the identity on the $A$-ancilla. Return the unitary $W:=V_AV_B$, so $V_B$ acts first, and use all $a_A+a_B$ ancillas for the projected block. No intermediate measurement or reset is performed. The resulting normalization is $\\alpha_A\\alpha_B$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-22-block-compression-contraction",
+          "source_section": "Statement",
+          "quote": "For a finite system space, an ancilla injection $J_ax=e_0\\otimes x$, and a unitary $U$ on the joint space, the projected block $B_U=J_a^{\\dagger}UJ_a$ satisfies $\\|B_U\\|_{\\rm op}\\le1$. Consequently, every exact $(\\alpha,a,0)$ block encoding of $A$ satisfies $\\|A\\|_{\\rm op}\\le\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each lifted operation $V_A,V_B$ is a block-diagonal direct sum of copies of its supplied unitary on the untouched ancilla's computational basis; the inverse is the corresponding direct sum of the component inverse. Thus both lifts and $V_AV_B$ are unitary. Let $J$ inject the system into the all-zero state of both ancillas. The zero-subspace projections are $P_A$ and $P_B$, with $P=P_AP_B$, $PJ=J$, and $J^{\\dagger}P=J^{\\dagger}$. In $J^{\\dagger}V_AV_BJ$, insert $P$ at both ends; commute $P_B$ through $V_A$ and use $P_AV_B=V_BP_A$ to obtain $J^{\\dagger}V_AP_BV_BJ$. The vector $P_BV_BJx$ has both ancillas zero and system component $C_Bx$, so $P_BV_BJ=JC_B$. The remaining compression is $J^{\\dagger}V_AJC_B=C_AC_B$. Hence the all-zero block is exactly $C_AC_B$ in the stated order.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $A':=A/\\alpha_A$, $B':=B/\\alpha_B$, $E_A:=C_A-A'$, and $E_B:=C_B-B'$. Then $C_AC_B-A'B'=E_AB'+A'E_B+E_AE_B$. By [F1], $\\|E_A\\|\\le\\varepsilon_A$ and $\\|E_B\\|\\le\\varepsilon_B$; by the normalization promises, $\\|A'\\|\\le1$ and $\\|B'\\|\\le1$. Applying [F3] to each summand yields the first displayed bound, and $\\|A\\|/\\alpha_A,\\|B\\|/\\alpha_B\\le1$ yields its conservative final bound.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same difference can be written $C_AE_B+E_AB'$. By [F4], $\\|C_A\\|\\le1$, so [F3] gives $\\|C_AE_B+E_AB'\\|\\le\\varepsilon_B+\\varepsilon_A\\|B\\|/\\alpha_B\\le\\varepsilon_A+\\varepsilon_B$. Also $\\|AB\\|\\le\\|A\\|\\|B\\|\\le\\alpha_A\\alpha_B$ by [F3]; the product normalization is positive. The block-encoding definition therefore applies with the claimed error.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The product construction inherits n>=1 from its two valid component block encodings."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The product matrices may be zero; steps 1.2 and 2.1 use only the normalization and error bounds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement applies to one-dimensional systems and zero-ancilla component encodings."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No invertibility or rank hypothesis appears in the Statement or proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The error derivation permits epsilon_A=epsilon_B=0 and alpha_j=||A_j||."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof analyzes the two given component encodings and introduces no choice of a new encoding."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient error bound for the constructed product block, not a biconditional test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient error bound for the constructed product block, not a biconditional test."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-46",
+        "notes": "Read all steps and six direct suppliers. Separate ancilla projections commute with the other lifted unitary, so intermediate P_B selects C_B while A ancilla stays zero, yielding C_A C_B in the right order. Lifts are unitary direct sums. Expansion E_A B′+A′ E_B+E_A E_B gives the displayed bound; C_A E_B+E_A B′ and compression contraction give the sharper additive estimate. Actual submultiplicativity supplier applies to these finite square maps and also proves ||AB||<=alpha_A alpha_B. Positive normalizations, n>=1, zero matrices/errors and a_A=a_B=0 are covered. No inverse/controlled calls, ancilla reuse, rectangular composition or AC is assumed. Gilyén §4.4 Lemma 53 confirms the separate-ancilla identity; local normalized convention and extra alpha promises justify the precise stated estimates. No defect found."
+      }
+    },
+    "thm-qa-22-long-product-error-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-22-product-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "Under the inputs and register order of [[alg-qa-22-product-block-encoding]], let $C_A$ and $C_B$ be the two normalized compressed blocks, so $\\|C_A-A/\\alpha_A\\|_{\\rm op}\\le\\varepsilon_A$ and $\\|C_B-B/\\alpha_B\\|_{\\rm op}\\le\\varepsilon_B$. The all-zero block of the constructed unitary is $C_AC_B$. It obeys\n\n$$\\left\\|C_AC_B-\\frac{AB}{\\alpha_A\\alpha_B}\\right\\|_{\\rm op}\\le\\varepsilon_A\\frac{\\|B\\|_{\\rm op}}{\\alpha_B}+\\varepsilon_B\\frac{\\|A\\|_{\\rm op}}{\\alpha_A}+\\varepsilon_A\\varepsilon_B\\le\\varepsilon_A+\\varepsilon_B+\\varepsilon_A\\varepsilon_B.$$\n\nBecause each $C_A$ is itself a projected unitary block and hence a contraction, the sharper bound $\\|C_AC_B-AB/(\\alpha_A\\alpha_B)\\|_{\\rm op}\\le\\varepsilon_B+\\varepsilon_A\\|B\\|_{\\rm op}/\\alpha_B\\le\\varepsilon_A+\\varepsilon_B$ also holds. In particular the product is an $(\\alpha_A\\alpha_B,a_A+a_B,\\varepsilon_A+\\varepsilon_B+\\varepsilon_A\\varepsilon_B)$ block encoding of $AB$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Inductively apply [F1] to the first $k-1$ encodings and the $k$th encoding, using disjoint ancillas at every composition. The resulting compression is $B_1\\cdots B_k$ in the stated order, and each step multiplies the normalization, giving $\\prod_i\\alpha_i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $C_i:=A_i/\\alpha_i$, so $B_i=C_i+E_i$. The hypotheses give $\\|C_i\\|_{\\rm op}\\le1$. For every unit vector $x$, the vector triangle inequality gives $\\|B_ix\\|\\le\\|C_ix\\|+\\|E_ix\\|\\le1+\\varepsilon_i$; taking the maximum in [F2] yields $\\|B_i\\|_{\\rm op}\\le1+\\varepsilon_i$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The telescoping identity $B_1\\cdots B_k-C_1\\cdots C_k=\\sum_{i=1}^k(B_1\\cdots B_{i-1})E_i(C_{i+1}\\cdots C_k)$ follows by adding and subtracting the intermediate products $B_1\\cdots B_iC_{i+1}\\cdots C_k$. By [F3], [F2], and [step 1.2], its norm is at most $\\sum_i\\varepsilon_i\\prod_{j<i}(1+\\varepsilon_j)$, since every later $\\|C_j\\|\\le1$. Each omitted factor $(1+\\varepsilon_j)$ is at least one, so this is at most the displayed sum over all $j\\ne i$. Finally $C_1\\cdots C_k=A_1\\cdots A_k/(\\prod_i\\alpha_i)$, proving the result, including $k=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: k>=1 excludes the empty product; step 2.1 verifies the lower nonempty endpoint k=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits all A_i=0 because each alpha_i is positive and dominates its norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly verifies that the displayed bound includes k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof uses only norm bounds and submultiplicativity, not matrix rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses permit epsilon_i=0 and alpha_i=||A_i||."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite list of matrices and encodings is supplied as input; no arbitrary-family selection is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives a one-sided upper bound for a finite product error and no converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives a one-sided upper bound for a finite product error and no converse."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-22-lcu-block-encoding-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-22-lcu-block-encoding",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Integers $n\\ge1$ and $m\\ge1$, a finite family of square matrices $A_j\\in\\mathbb C^{n\\times n}$, positive numbers $\\alpha_j\\ge\\|A_j\\|_{\\rm op}$, and exact $(\\alpha_j,a_j,0)$ block-encoding unitaries $U_j$. Also supply coefficients $\\beta_j\\in\\mathbb C$ after omitting zero coefficients, with $\\Lambda:=\\sum_{j=0}^{m-1}|\\beta_j|\\alpha_j>0$. The component circuits and their controlled access are separate access inputs.\n\n**Instructions.** Let $a_*:=\\max_j a_j$. Extend each component unitary to the common ordered ancilla register by identities on its unused ancillas, so its all-zero block is unchanged. Let $b:=\\lceil\\log_2m\\rceil$, $D:=2^b$, and provide a unitary $P$ on the $b$-qubit coefficient register satisfying\n\n$$P|0^b\\rangle=|\\chi\\rangle:=\\sum_{j=0}^{m-1}\\sqrt{\\frac{|\\beta_j|\\alpha_j}{\\Lambda}}\\,|j\\rangle.$$\n\nThe squared amplitudes sum to one by the definition of $\\Lambda$. Define the unitary\n\n$$\\mathrm{SELECT}:=\\sum_{j=0}^{m-1}|j\\rangle\\langle j|\\otimes\\frac{\\beta_j}{|\\beta_j|}\\,U_j+\\sum_{j=m}^{D-1}|j\\rangle\\langle j|\\otimes I,$$\n\nwhere each $U_j$ acts on its padded component ancilla and the data register; an empty second sum is zero. Return $W:=P^{\\dagger}\\,\\mathrm{SELECT}\\,P$, acting on the coefficient register, common component ancillas, and data system.\n\nThe instance must supply or compile $P$, $P^{\\dagger}$, and SELECT, and state the cost of each separately. A coefficient table is not itself a state-preparation circuit; table access, synthesis, controlled component calls, phases, precision, and classical preprocessing are charged under [[def-qa-22-block-encoding-access-model]].\n\nIf $P$ is synthesized from the explicit exact normalized amplitude table $(\\sqrt{w_j})_{j<D}$, where $w_j:=|\\beta_j|\\alpha_j/\\Lambda$ for $j<m$ and $w_j:=0$ for $j\\ge m$, the exact-table procedure [[alg-qc-state-preparation]] is an optional construction. Since zero coefficients were omitted and each $\\alpha_j>0$, $w_0>0$ and the first nonzero amplitude $\\sqrt{w_0}$ is positive real. The state-preparation procedure omits only this reference phase, which is $0$ here, so the prepared vector equals $|\\chi\\rangle$ exactly. Under its ideal continuous-angle model, [[thm-qc-state-preparation-rotation-level-upper-bound]] gives at most $D-1$ prefix rotations, at most $D$ phases, $O((b+1)D)$ bounded-arity gates and serial depth, and at most $\\max\\{b-1,0\\}$ reusable clean work bits. Supply or compile the inverse circuit $P^{\\dagger}$ separately and charge it separately. If the table uses exactly $s$ bits for each real and imaginary coordinate, [[thm-qc-state-preparation-cost]] separately charges its $2Ds$ input bits and full-table preprocessing scan. These suppliers assert no finite-alphabet arbitrary-angle implementation or Turing bit-time bound; a supplied circuit for $P$ instead carries its own declared costs.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $w_j:=|\\beta_j|\\alpha_j/\\Lambda$. The amplitude list is normalized because $\\sum_jw_j=1$. Identity-padding a component ancilla preserves its unitary and contributes factor $\\langle e_0,e_0\\rangle=1$ to its all-zero block, so by [F2] its compression remains $A_j/\\alpha_j$. SELECT is unitary because it is block diagonal on orthogonal index subspaces, with each block a unit-modulus phase times a unitary (and identity on unused labels); hence $W=P^{\\dagger}\\mathrm{SELECT}P$ is unitary. Projecting SELECT onto the common component-ancilla zero state replaces each $U_j$ by $A_j/\\alpha_j$, so the full projected block of $W$ is the coefficient-register matrix element of $P^{\\dagger}\\bigl(\\sum_j|j\\rangle\\langle j|\\otimes(\\beta_j/|\\beta_j|)A_j/\\alpha_j\\bigr)P$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The amplitudes in [F1] are real and nonnegative, so the $(0,j)$ and $(j,0)$ entries of $P^{\\dagger}$ and $P$ in this matrix element both equal $\\sqrt{w_j}$. Expanding gives $\\sum_jw_j(\\beta_j/|\\beta_j|)A_j/\\alpha_j=\\sum_j\\beta_jA_j/\\Lambda$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every unit vector $x$, [F3] and [F4] give $\\|\\sum_j\\beta_jA_jx\\|\\le\\sum_j|\\beta_j|\\|A_jx\\|\\le\\sum_j|\\beta_j|\\alpha_j=\\Lambda$. Taking the maximum over unit $x$ yields $\\|\\sum_j\\beta_jA_j\\|_{\\rm op}\\le\\Lambda$. Since $\\Lambda>0$, the definition of block encoding applies with zero error.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses m>=1 and Lambda>0 exclude an empty-term LCU; step 2.1 also covers the single-term case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every A_j=0, the positive Lambda hypotheses still hold and step 3.1 proves the projected zero block has norm at most Lambda."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is the same finite sum when m=1 and b=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof uses only ||A_j||<=alpha_j and allows singular component matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The inputs are exact zero-error encodings and permit alpha_j=||A_j||."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses the supplied P and SELECT from the algorithm and selects no witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem verifies the projected block of the specified LCU circuit; it does not give a converse classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem verifies the projected block of the specified LCU circuit; it does not give a converse classification."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-46",
+        "notes": "Read all three steps, five direct suppliers and actual optional state-preparation procedure and correctness/cost proofs. Lambda>0, nonzero coefficients and positive alpha_j make all phase ratios and weights defined. Identity padding preserves component blocks. SELECT is a unitary direct sum, with identity on unused labels; their prepared amplitudes vanish, so they contribute zero to the matrix element. Real sqrt weights on both sides produce beta_j A_j/Lambda, including complex phases, unequal alpha_j, m=1 (b=0), no component ancilla and a zero final matrix. Triangle inequality on each unit vector proves normalization. Optional state preparation fixes reference argument to zero because its first nonzero amplitude is positive; it is valid in the explicit ideal-angle model with restored workspace, not finite-alphabet arbitrary-angle synthesis. No AC, measurement, free SELECT or cost-free inverse assumption. Read Gilyén §4.3 Lemma 52 and its matrix-element argument and Childs §28.3 equations (28.15)–(28.21); direct local proof checked independently. No defect found."
+      }
+    },
+    "thm-qa-22-block-encoding-error-and-query-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding-access-model",
+          "source_section": "Definition",
+          "quote": "An **access instance** for a finite family of block-encoding unitaries $U_j$ records, as separate supplied operations, each of $U_j$, $U_j^{\\dagger}$, controlled-$U_j$, and controlled-$U_j^{\\dagger}$ that an algorithm may call. A call to one operation does not imply access to another.\n\nWhenever a family SELECT is used, the instance specifies extensions $\\widetilde U_j$ acting on one common ordered target register. For a nonempty family on the same system $\\mathbb C^d$ with ancilla widths $a_j$, set $a_*:=\\max_j a_j$ and use $\\widetilde U_j:=I_{2^{a_*-a_j}}\\otimes U_j$, with the unused ancillas preceding the original ancillas and the system. This identity extension preserves the all-zero block. If system registers also differ, the common system register, its identifications, and unitary extensions preserving the declared encoded blocks must be supplied explicitly before forming SELECT. For a family indexed by $0\\le j<m$ and a selector register of dimension $D\\ge\\max\\{m,1\\}$, the family SELECT is\n\n$$\\mathrm{SELECT}:=\\sum_{j=0}^{m-1}|j\\rangle\\langle j|\\otimes\\widetilde U_j+\\sum_{j=m}^{D-1}|j\\rangle\\langle j|\\otimes I,$$\n\nwhere $I$ acts on the common target register and empty sums are zero. The instance records whether this complete unitary is supplied as one oracle or must be assembled from separately controlled calls; any required extensions and register routing have declared implementation costs.\n\nFor every supplied circuit operation $O$, the instance records the applicable circuit-description length, gate count and gate set, depth, total width, and clean and dirty work-ancilla counts; for a uniform family it records the full-description generator time. It separately records each named oracle-query count, classical postprocessing time and space, matrix-data and coefficient-table reading or storage, state-preparation cost, and target precision and its bit encoding when the task is approximate. These coordinates follow [[def-qc-circuit-cost-model]] and [[def-qc-uniform-circuit-family]]; an inapplicable coordinate is marked not applicable, not silently zero. A bare matrix $A$ supplies none of these circuits or access rights. If an operation is compiled from matrix entries or a coefficient table, its data access, synthesis, precision, and classical costs are recorded separately. The cost of a SELECT implementation includes its controls and relative phases unless those are listed as separate supplied primitives. These block-encoding constructions include no measurement or classical-output step; a consumer's measurement and output costs are accounted separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-22-lcu-block-encoding",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Integers $n\\ge1$ and $m\\ge1$, a finite family of square matrices $A_j\\in\\mathbb C^{n\\times n}$, positive numbers $\\alpha_j\\ge\\|A_j\\|_{\\rm op}$, and exact $(\\alpha_j,a_j,0)$ block-encoding unitaries $U_j$. Also supply coefficients $\\beta_j\\in\\mathbb C$ after omitting zero coefficients, with $\\Lambda:=\\sum_{j=0}^{m-1}|\\beta_j|\\alpha_j>0$. The component circuits and their controlled access are separate access inputs.\n\n**Instructions.** Let $a_*:=\\max_j a_j$. Extend each component unitary to the common ordered ancilla register by identities on its unused ancillas, so its all-zero block is unchanged. Let $b:=\\lceil\\log_2m\\rceil$, $D:=2^b$, and provide a unitary $P$ on the $b$-qubit coefficient register satisfying\n\n$$P|0^b\\rangle=|\\chi\\rangle:=\\sum_{j=0}^{m-1}\\sqrt{\\frac{|\\beta_j|\\alpha_j}{\\Lambda}}\\,|j\\rangle.$$\n\nThe squared amplitudes sum to one by the definition of $\\Lambda$. Define the unitary\n\n$$\\mathrm{SELECT}:=\\sum_{j=0}^{m-1}|j\\rangle\\langle j|\\otimes\\frac{\\beta_j}{|\\beta_j|}\\,U_j+\\sum_{j=m}^{D-1}|j\\rangle\\langle j|\\otimes I,$$\n\nwhere each $U_j$ acts on its padded component ancilla and the data register; an empty second sum is zero. Return $W:=P^{\\dagger}\\,\\mathrm{SELECT}\\,P$, acting on the coefficient register, common component ancillas, and data system.\n\nThe instance must supply or compile $P$, $P^{\\dagger}$, and SELECT, and state the cost of each separately. A coefficient table is not itself a state-preparation circuit; table access, synthesis, controlled component calls, phases, precision, and classical preprocessing are charged under [[def-qa-22-block-encoding-access-model]].\n\nIf $P$ is synthesized from the explicit exact normalized amplitude table $(\\sqrt{w_j})_{j<D}$, where $w_j:=|\\beta_j|\\alpha_j/\\Lambda$ for $j<m$ and $w_j:=0$ for $j\\ge m$, the exact-table procedure [[alg-qc-state-preparation]] is an optional construction. Since zero coefficients were omitted and each $\\alpha_j>0$, $w_0>0$ and the first nonzero amplitude $\\sqrt{w_0}$ is positive real. The state-preparation procedure omits only this reference phase, which is $0$ here, so the prepared vector equals $|\\chi\\rangle$ exactly. Under its ideal continuous-angle model, [[thm-qc-state-preparation-rotation-level-upper-bound]] gives at most $D-1$ prefix rotations, at most $D$ phases, $O((b+1)D)$ bounded-arity gates and serial depth, and at most $\\max\\{b-1,0\\}$ reusable clean work bits. Supply or compile the inverse circuit $P^{\\dagger}$ separately and charge it separately. If the table uses exactly $s$ bits for each real and imaginary coordinate, [[thm-qc-state-preparation-cost]] separately charges its $2Ds$ input bits and full-table preprocessing scan. These suppliers assert no finite-alphabet arbitrary-angle implementation or Turing bit-time bound; a supplied circuit for $P$ instead carries its own declared costs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-qa-22-product-block-encoding",
+          "source_section": "Definition",
+          "quote": "**Inputs.** An integer $n\\ge1$, square matrices $A,B\\in\\mathbb C^{n\\times n}$, positive normalizations $\\alpha_A,\\alpha_B$, and unitaries $U_A,U_B$ giving $(\\alpha_A,a_A,\\varepsilon_A)$ and $(\\alpha_B,a_B,\\varepsilon_B)$ block encodings, with $\\alpha_A\\ge\\|A\\|_{\\rm op}$ and $\\alpha_B\\ge\\|B\\|_{\\rm op}$. Their access and implementation costs are supplied separately under [[def-qa-22-block-encoding-access-model]].\n\n**Construction.** Put the ancillas in the fixed order $A$-ancilla, $B$-ancilla, system. Let $V_A$ act by $U_A$ on the $A$-ancilla and system and by the identity on the $B$-ancilla. Let $V_B$ act by $U_B$ on the $B$-ancilla and system and by the identity on the $A$-ancilla. Return the unitary $W:=V_AV_B$, so $V_B$ acts first, and use all $a_A+a_B$ ancillas for the projected block. No intermediate measurement or reset is performed. The resulting normalization is $\\alpha_A\\alpha_B$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-22-lcu-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "Under the exact inputs and instructions of [[alg-qa-22-lcu-block-encoding]], the all-zero coefficient-index and component-ancilla block of $W=P^{\\dagger}\\mathrm{SELECT}P$ is\n\n$$\\frac{\\sum_{j=0}^{m-1}\\beta_jA_j}{\\Lambda}.$$\n\nMoreover, $\\|\\sum_j\\beta_jA_j\\|_{\\rm op}\\le\\Lambda$, so the constructed unitary is an $(\\Lambda,b+a_*,0)$ block encoding of $\\sum_j\\beta_jA_j$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-22-product-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "Under the inputs and register order of [[alg-qa-22-product-block-encoding]], let $C_A$ and $C_B$ be the two normalized compressed blocks, so $\\|C_A-A/\\alpha_A\\|_{\\rm op}\\le\\varepsilon_A$ and $\\|C_B-B/\\alpha_B\\|_{\\rm op}\\le\\varepsilon_B$. The all-zero block of the constructed unitary is $C_AC_B$. It obeys\n\n$$\\left\\|C_AC_B-\\frac{AB}{\\alpha_A\\alpha_B}\\right\\|_{\\rm op}\\le\\varepsilon_A\\frac{\\|B\\|_{\\rm op}}{\\alpha_B}+\\varepsilon_B\\frac{\\|A\\|_{\\rm op}}{\\alpha_A}+\\varepsilon_A\\varepsilon_B\\le\\varepsilon_A+\\varepsilon_B+\\varepsilon_A\\varepsilon_B.$$\n\nBecause each $C_A$ is itself a projected unitary block and hence a contraction, the sharper bound $\\|C_AC_B-AB/(\\alpha_A\\alpha_B)\\|_{\\rm op}\\le\\varepsilon_B+\\varepsilon_A\\|B\\|_{\\rm op}/\\alpha_B\\le\\varepsilon_A+\\varepsilon_B$ also holds. In particular the product is an $(\\alpha_A\\alpha_B,a_A+a_B,\\varepsilon_A+\\varepsilon_B+\\varepsilon_A\\varepsilon_B)$ block encoding of $AB$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The LCU circuit consists, in chronological order, of one call to $P$, one call to SELECT, and one call to $P^{\\dagger}$ by [F2]. Additivity of the declared sequential cost coordinates in [F1] gives their coordinatewise sum; when SELECT is decomposed, its listed controlled calls and phases are part of that sum. Its normalization is $\\Lambda$ by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The product circuit calls the two supplied encodings exactly once each, first $V_B$ and then $V_A$, by [F3]. Their query and gate counts therefore add, with any separately supplied routing or control operations charged in their own coordinates. Its normalization and error are those proved in [F5]. No matrix access, state-preparation circuit, inverse call, or controlled call not explicitly present in the supplied access instance is included for free.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1 and 2.1 count only the declared finite sequence of calls; absent cost coordinates are marked not applicable."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The circuit-call counts in steps 1.1 and 2.1 do not depend on whether the encoded matrices are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 counts one call each to P, SELECT, and P-dagger for one LCU construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 counts the declared product calls without any rank or invertibility condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the product error result, which allows exact zero error and normalization equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every operation and its cost are supplied by the access instance; the proof chooses no implementation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem counts calls in the specified constructions and makes no equivalence claim about all costs."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem counts calls in the specified constructions and makes no equivalence claim about all costs."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-46",
+        "notes": "Read both proof steps and all six direct suppliers. Chronology is P, SELECT, P† and V_B,V_A respectively; each named primitive is invoked once. Only declared additive sequential coordinates are summed: no width, minimal-depth, description-length or generator-time additivity is asserted. Product query/gate counts add, with routing/control wrappers explicitly included or separately charged. LCU normalization Lambda, product alpha_A alpha_B and normalized errors match the independently reviewed correctness theorems. Separate forward/inverse/controlled access, coefficient/table reading, ideal-angle synthesis and precision retain their declared charges; bare matrices grant no operation. m=1 and absent optional charges are handled by not-applicable coordinates, not silent zero. Positive normalization hypotheses inherited from procedures; no AC or output-measurement claim. No defect found."
+      }
+    },
+    "ex-qa-22-product-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-22-product-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "Under the inputs and register order of [[alg-qa-22-product-block-encoding]], let $C_A$ and $C_B$ be the two normalized compressed blocks, so $\\|C_A-A/\\alpha_A\\|_{\\rm op}\\le\\varepsilon_A$ and $\\|C_B-B/\\alpha_B\\|_{\\rm op}\\le\\varepsilon_B$. The all-zero block of the constructed unitary is $C_AC_B$. It obeys\n\n$$\\left\\|C_AC_B-\\frac{AB}{\\alpha_A\\alpha_B}\\right\\|_{\\rm op}\\le\\varepsilon_A\\frac{\\|B\\|_{\\rm op}}{\\alpha_B}+\\varepsilon_B\\frac{\\|A\\|_{\\rm op}}{\\alpha_A}+\\varepsilon_A\\varepsilon_B\\le\\varepsilon_A+\\varepsilon_B+\\varepsilon_A\\varepsilon_B.$$\n\nBecause each $C_A$ is itself a projected unitary block and hence a contraction, the sharper bound $\\|C_AC_B-AB/(\\alpha_A\\alpha_B)\\|_{\\rm op}\\le\\varepsilon_B+\\varepsilon_A\\|B\\|_{\\rm op}/\\alpha_B\\le\\varepsilon_A+\\varepsilon_B$ also holds. In particular the product is an $(\\alpha_A\\alpha_B,a_A+a_B,\\varepsilon_A+\\varepsilon_B+\\varepsilon_A\\varepsilon_B)$ block encoding of $AB$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The errors are $E_A=C_A-A/\\alpha_A=\\operatorname{diag}(1/10,0)$ and $E_B=C_B-B/\\alpha_B=\\operatorname{diag}(1/5,0)$. For a diagonal $D=\\operatorname{diag}(d_1,d_2)$, $\\|Dx\\|^2=|d_1|^2|x_1|^2+|d_2|^2|x_2|^2$, so the maximum on unit vectors is $\\max(|d_1|,|d_2|)$, attained at the corresponding basis vector. Hence $\\|E_A\\|=1/10$, $\\|E_B\\|=1/5$, $\\|A\\|_{\\rm op}=1/2$, and $\\|B\\|_{\\rm op}=1$. For each of $C_A,C_B$, put $S=\\sqrt{I-C^2}$ and $D(C)=\\begin{pmatrix}C&S\\\\S&-C\\end{pmatrix}$. The diagonal matrices $C,S$ commute and satisfy $C^2+S^2=I$, so block multiplication gives $D(C)^*=D(C)$ and $D(C)^2=I$. Then [F3] gives $\\|D(C)x\\|^2=\\langle x,D(C)^*D(C)x\\rangle=\\|x\\|^2$, and [F4] makes $D(C)$ unitary; its top-left block is $C$. Thus both chosen compressed blocks have exact unitary dilations.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The theorem's normalized bound is $(1/10)(1/2)+(1/5)(1/2)+(1/10)(1/5)=17/100$. The actual product block is $C_AC_B=\\operatorname{diag}(21/50,0)$, whereas $AB/(\\alpha_A\\alpha_B)=\\operatorname{diag}(1/4,0)$; their difference has norm $21/50-1/4=17/100$, so this instance attains that bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiplying the normalized error by $\\alpha_A\\alpha_B=2$ gives unnormalized error $17/50$. The looser universal normalized estimate is $\\varepsilon_A+\\varepsilon_B+\\varepsilon_A\\varepsilon_B=8/25$; after scaling by $2$, its unnormalized counterpart is $16/25$. Neither bound is tight here.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Example fixes two 2-by-2 matrices and does not instantiate an empty-dimensional register."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the zero diagonal entries and their zero singular directions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that ||B||=1, including the unit diagonal entry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both rank-one matrices and their explicit unitary dilations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The chosen alpha and epsilon values are interior to the separate input bounds; the example attains the product-error estimate only."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every matrix, compressed block, and dilation is explicitly specified in the Example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Example verifies one numerical instance and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Example verifies one numerical instance and states no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-qa-22-two-term-lcu": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-22-lcu-block-encoding",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Integers $n\\ge1$ and $m\\ge1$, a finite family of square matrices $A_j\\in\\mathbb C^{n\\times n}$, positive numbers $\\alpha_j\\ge\\|A_j\\|_{\\rm op}$, and exact $(\\alpha_j,a_j,0)$ block-encoding unitaries $U_j$. Also supply coefficients $\\beta_j\\in\\mathbb C$ after omitting zero coefficients, with $\\Lambda:=\\sum_{j=0}^{m-1}|\\beta_j|\\alpha_j>0$. The component circuits and their controlled access are separate access inputs.\n\n**Instructions.** Let $a_*:=\\max_j a_j$. Extend each component unitary to the common ordered ancilla register by identities on its unused ancillas, so its all-zero block is unchanged. Let $b:=\\lceil\\log_2m\\rceil$, $D:=2^b$, and provide a unitary $P$ on the $b$-qubit coefficient register satisfying\n\n$$P|0^b\\rangle=|\\chi\\rangle:=\\sum_{j=0}^{m-1}\\sqrt{\\frac{|\\beta_j|\\alpha_j}{\\Lambda}}\\,|j\\rangle.$$\n\nThe squared amplitudes sum to one by the definition of $\\Lambda$. Define the unitary\n\n$$\\mathrm{SELECT}:=\\sum_{j=0}^{m-1}|j\\rangle\\langle j|\\otimes\\frac{\\beta_j}{|\\beta_j|}\\,U_j+\\sum_{j=m}^{D-1}|j\\rangle\\langle j|\\otimes I,$$\n\nwhere each $U_j$ acts on its padded component ancilla and the data register; an empty second sum is zero. Return $W:=P^{\\dagger}\\,\\mathrm{SELECT}\\,P$, acting on the coefficient register, common component ancillas, and data system.\n\nThe instance must supply or compile $P$, $P^{\\dagger}$, and SELECT, and state the cost of each separately. A coefficient table is not itself a state-preparation circuit; table access, synthesis, controlled component calls, phases, precision, and classical preprocessing are charged under [[def-qa-22-block-encoding-access-model]].\n\nIf $P$ is synthesized from the explicit exact normalized amplitude table $(\\sqrt{w_j})_{j<D}$, where $w_j:=|\\beta_j|\\alpha_j/\\Lambda$ for $j<m$ and $w_j:=0$ for $j\\ge m$, the exact-table procedure [[alg-qc-state-preparation]] is an optional construction. Since zero coefficients were omitted and each $\\alpha_j>0$, $w_0>0$ and the first nonzero amplitude $\\sqrt{w_0}$ is positive real. The state-preparation procedure omits only this reference phase, which is $0$ here, so the prepared vector equals $|\\chi\\rangle$ exactly. Under its ideal continuous-angle model, [[thm-qc-state-preparation-rotation-level-upper-bound]] gives at most $D-1$ prefix rotations, at most $D$ phases, $O((b+1)D)$ bounded-arity gates and serial depth, and at most $\\max\\{b-1,0\\}$ reusable clean work bits. Supply or compile the inverse circuit $P^{\\dagger}$ separately and charge it separately. If the table uses exactly $s$ bits for each real and imaginary coordinate, [[thm-qc-state-preparation-cost]] separately charges its $2Ds$ input bits and full-table preprocessing scan. These suppliers assert no finite-alphabet arbitrary-angle implementation or Turing bit-time bound; a supplied circuit for $P$ instead carries its own declared costs.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-22-lcu-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "Under the exact inputs and instructions of [[alg-qa-22-lcu-block-encoding]], the all-zero coefficient-index and component-ancilla block of $W=P^{\\dagger}\\mathrm{SELECT}P$ is\n\n$$\\frac{\\sum_{j=0}^{m-1}\\beta_jA_j}{\\Lambda}.$$\n\nMoreover, $\\|\\sum_j\\beta_jA_j\\|_{\\rm op}\\le\\Lambda$, so the constructed unitary is an $(\\Lambda,b+a_*,0)$ block encoding of $\\sum_j\\beta_jA_j$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-22-block-encoding-error-and-query-cost",
+          "source_section": "Statement",
+          "quote": "For one LCU construction, the normalization is $\\Lambda$ and each additive cost coordinate for the sequential operations is the sum of the declared costs of PREPARE, SELECT, and PREPARE$^{\\dagger}$; a SELECT implementation assembled from controlled component unitaries includes those calls and phases in its declared cost. For a two-factor product construction, the normalization is $\\alpha_A\\alpha_B$ and the query and gate counts are the sums of the two supplied encoding costs in the chosen order. Any explicit wire permutation or control wrapper is included in a supplied operation's cost or charged as a separate operation. The normalized error is bounded by [[thm-qa-22-product-block-encoding-correctness]].\n\nMatrix-data access, coefficient-table access and storage, state preparation and its inverse, controlled access, angle or entry precision, classical preprocessing, and compilation remain separate cost coordinates. This result counts declared primitives; it does not synthesize a circuit from a bare matrix or assign an absent primitive zero cost.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coordinate formulas give $\\|A_0\\|_{\\rm op}=\\|A_1\\|_{\\rm op}=1$, so the chosen $\\alpha_j$ satisfy the normalization promises. For a positive diagonal contraction $C$, put $S:=\\sqrt{I-C^2}$ and $D(C):=\\begin{pmatrix}C&S\\\\S&-C\\end{pmatrix}$. Since $C$ and $S$ are commuting self-adjoint diagonal matrices and $C^2+S^2=I$, direct block multiplication gives $D(C)^*=D(C)$ and $D(C)^2=I$, hence $D(C)^*D(C)=I$. The adjoint identity [F5] shows $\\|D(C)x\\|^2=\\langle x,D(C)^*D(C)x\\rangle=\\|x\\|^2$, and $D(C)^2=I$ makes it invertible, so [F6] makes it unitary. Its top-left block is $C$. Thus $D(A_0/\\alpha_0)$ and $D(A_1/\\alpha_1)$ are exact unitary block encodings with one component ancilla each.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Here $\\Lambda=|1|\\cdot1+|i|\\cdot2=3$, so $|\\chi\\rangle=\\sqrt{1/3}|0\\rangle+\\sqrt{2/3}|1\\rangle$. By [F1] and [F2], the projected block is $\\frac13A_0+\\frac{2}{3}i(A_1/2)=(A_0+iA_1)/3=\\operatorname{diag}(1/3,i/3)$; the normalization is $3$ and the error is zero.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With PREPARE, SELECT, and PREPARE$^{\\dagger}$ separately supplied, the construction uses one call to each. If SELECT is assembled from component calls, its declaration must include one controlled call for each component branch and the relative phase operation; if those circuits are compiled from matrices, their data access and gate costs are added separately.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Example fixes two terms on 2-by-2 matrices, not an empty family or zero-dimensional register."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the zero diagonal entries in both component matrices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies ||A_0||=||A_1||=1 and alpha_0=||A_0||."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs exact unitary dilations of the rank-one component matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The exact encodings have zero block error, and alpha_0=||A_0||."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The coefficients and normalized coefficient state are explicitly given in step 1.2; no witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Example verifies one two-term instance and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Example verifies one two-term instance and states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-46",
+        "notes": "Read all three Verification steps and seven direct suppliers. Coordinate norms of A_0 and A_1 are 1, hence alpha_0=1 and alpha_1=2 meet the promise. For both diagonal contractions the positive diagonal S commutes with C and D(C) is a self-adjoint involution, hence unitary, giving exact one-ancilla encodings. Lambda=3 and weights 1/3,2/3 produce diag(1/3,i/3): the phase i is retained and the unequal second normalization cancels. Error is zero. PREPARE/SELECT/PREPARE† count once each as supplied primitives; decomposed SELECT explicitly charges the controlled branch calls and relative phase. No matrix-to-circuit synthesis or free control access is inferred. No AC, degeneracy or denominator issue; no defect found."
+      }
+    }
+  }
+}

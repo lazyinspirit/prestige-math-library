@@ -1,0 +1,334 @@
+{
+  "group": "t",
+  "batches": ["22"],
+  "pages_read": [
+    "graph-states-and-measurement-based-computation",
+    "graph-states-and-measurement-based-computation-examples"
+  ],
+  "items_read": [
+    "def-qc-binary-adjacency-matrix",
+    "def-qc-j-gate-and-equatorial-basis",
+    "lem-qc-j-basis-and-phase-identities",
+    "def-qc-graph-state",
+    "lem-qc-cz-matching-pauli-frame-action",
+    "def-qc-normalized-transport-schedule",
+    "lem-qc-one-bit-teleportation",
+    "lem-qc-r-y-r-z-multiplexor-gray-code",
+    "lem-qc-graph-state-amplitude-formula",
+    "lem-qc-graph-state-edge-gates-commute",
+    "def-qc-adaptive-measurement-pattern",
+    "lem-qc-adaptive-angle-pauli-frame-update",
+    "lem-qc-normalized-rounds-preserve-circuit",
+    "lem-qc-transport-encoding-is-simple-and-size-bounded",
+    "thm-qc-exact-unitary-synthesis-from-qsd",
+    "lem-qc-graph-state-stabilizer-generators",
+    "lem-qc-measurement-pattern-for-cz",
+    "thm-qc-pattern-branch-probabilities-and-zero-branches",
+    "def-qc-circuit-to-graph-resource-encoding",
+    "thm-qc-pattern-is-measurement-circuit",
+    "thm-qc-circuit-simulated-by-adaptive-pattern",
+    "thm-qc-circuit-pattern-equivalence-and-universality",
+    "thm-qc-graph-state-unique-stabilizer-ray",
+    "ex-qc-one-edge-graph-state"
+  ],
+  "conventions": [
+    {
+      "convention": "The binary adjacency matrix is over F₂ = Z/2Z, in fixed vertex order, symmetric with zero diagonal; the empty graph has the unique 0×0 matrix.",
+      "fixed_by": "def-qc-binary-adjacency-matrix",
+      "matters_for": [
+        "lem-qc-cz-matching-pauli-frame-action",
+        "lem-qc-graph-state-stabilizer-generators",
+        "def-qc-circuit-to-graph-resource-encoding"
+      ]
+    },
+    {
+      "convention": "J(α) = H diag(1,e^{iα}), and the outcome-b measurement vector is J(α)†|b⟩. The scalar phase of J is fixed.",
+      "fixed_by": "def-qc-j-gate-and-equatorial-basis",
+      "matters_for": [
+        "lem-qc-one-bit-teleportation",
+        "lem-qc-adaptive-angle-pauli-frame-update",
+        "lem-qc-measurement-pattern-for-cz",
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    },
+    {
+      "convention": "The graph-state register follows fixed vertex order; each CZ is diag(1,1,1,−1), and the defining edge product is lexicographic. The empty graph state is 1 in C.",
+      "fixed_by": "def-qc-graph-state",
+      "matters_for": [
+        "lem-qc-graph-state-amplitude-formula",
+        "lem-qc-graph-state-edge-gates-commute",
+        "lem-qc-graph-state-stabilizer-generators",
+        "thm-qc-graph-state-unique-stabilizer-ray"
+      ]
+    },
+    {
+      "convention": "Schedule wire j denotes source circuit wire j−1. Each round applies its CZ matching before its J gates. Mixed-layer padding contributes e^{iπ(n−|J_r|)/4} to σ_C.",
+      "fixed_by": "def-qc-normalized-transport-schedule",
+      "matters_for": [
+        "lem-qc-normalized-rounds-preserve-circuit",
+        "lem-qc-transport-encoding-is-simple-and-size-bounded",
+        "def-qc-circuit-to-graph-resource-encoding",
+        "thm-qc-circuit-simulated-by-adaptive-pattern"
+      ]
+    },
+    {
+      "convention": "A pattern permits overlapping input and output sets. Complementary input vertices receive |+⟩; measured vertices are removed in the specified measurement order, while outputs retain inherited vertex order. Raw branch maps exclude terminal corrections.",
+      "fixed_by": "def-qc-adaptive-measurement-pattern",
+      "matters_for": [
+        "thm-qc-pattern-branch-probabilities-and-zero-branches",
+        "thm-qc-pattern-is-measurement-circuit",
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    },
+    {
+      "convention": "The frame is X^xZ^z. The adaptive angle is (−1)^xβ, the new frame is (b⊕z,x), and its scalar is 1 for x=0 and (−1)^z e^{−iβ} for x=1.",
+      "fixed_by": "lem-qc-adaptive-angle-pauli-frame-update",
+      "matters_for": [
+        "def-qc-circuit-to-graph-resource-encoding",
+        "thm-qc-circuit-simulated-by-adaptive-pattern"
+      ]
+    },
+    {
+      "convention": "Transport vertices are ordered wire first, then column; measurements are ordered round first, then wire. The terminal correction is P(x^R,z^R)†, and λ includes both the padding phase and matching signs.",
+      "fixed_by": "def-qc-circuit-to-graph-resource-encoding",
+      "matters_for": [
+        "thm-qc-circuit-simulated-by-adaptive-pattern",
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    },
+    {
+      "convention": "Conditional states exist only on positive-probability branches; a zero-probability branch has zero unnormalized output and no normalized conditional output.",
+      "fixed_by": "thm-qc-pattern-branch-probabilities-and-zero-branches",
+      "matters_for": [
+        "thm-qc-pattern-is-measurement-circuit",
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    },
+    {
+      "convention": "Exact synthesis uses instance-specific exact gate matrices, with no finite-bit encoding or decomposition-time guarantee. For zero qubits only the unitary channel, rather than an arbitrary scalar unitary matrix, is represented by the empty circuit.",
+      "fixed_by": "thm-qc-exact-unitary-synthesis-from-qsd",
+      "matters_for": [
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-qc-one-bit-teleportation",
+      "statement": "The outcome-b branch operator is K_b = 2^{−1/2}X^bJ(α). Each outcome has probability 1/2, and the operator identity also holds with a finite-dimensional reference register.",
+      "used_by": [
+        "lem-qc-adaptive-angle-pauli-frame-update",
+        "lem-qc-measurement-pattern-for-cz",
+        "thm-qc-circuit-simulated-by-adaptive-pattern"
+      ]
+    },
+    {
+      "id": "thm-qc-circuit-simulated-by-adaptive-pattern",
+      "statement": "For the encoded finite n-wire J/CZ circuit, every transcript has K_b = 2^{−nR/2}λ_b P_b U_C, with the encoding's exact unit-modulus λ_b. Every transcript has probability 2^{−nR}, and the corrected branches sum to the channel ρ ↦ U_CρU_C†.",
+      "used_by": [
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    },
+    {
+      "id": "thm-qc-pattern-branch-probabilities-and-zero-branches",
+      "statement": "For every finite adaptive pattern, pure-input branch probabilities are squared branch-map norms, mixed-input probabilities are tr(K_bρK_b†), and their sum is one. Zero-probability transcripts have no normalized conditional output.",
+      "used_by": [
+        "thm-qc-pattern-is-measurement-circuit",
+        "thm-qc-circuit-simulated-by-adaptive-pattern"
+      ]
+    },
+    {
+      "id": "lem-qc-cz-matching-pauli-frame-action",
+      "statement": "For n ≥ 0 and a matching M, CZ_M P(x,z) = (−1)^{q_M(x)}P(x,z⊕A_Mx)CZ_M, with the stated empty-register convention.",
+      "used_by": [
+        "def-qc-circuit-to-graph-resource-encoding",
+        "thm-qc-circuit-simulated-by-adaptive-pattern"
+      ]
+    },
+    {
+      "id": "lem-qc-normalized-rounds-preserve-circuit",
+      "statement": "For a circuit C as in the normalized transport schedule, the chronological product of the normalized rounds satisfies Ũ_C = σ_C U_C.",
+      "used_by": [
+        "def-qc-circuit-to-graph-resource-encoding",
+        "thm-qc-circuit-simulated-by-adaptive-pattern"
+      ]
+    },
+    {
+      "id": "thm-qc-exact-unitary-synthesis-from-qsd",
+      "statement": "For every n ≥ 1 and U ∈ U(2^n), there is a finite exact n-wire circuit without ancillas, using arbitrary one-qubit gates and CNOT gates, whose denotation is exactly U. For n=0 the unitary channel is represented by the empty circuit.",
+      "used_by": [
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    },
+    {
+      "id": "lem-qc-r-y-r-z-multiplexor-gray-code",
+      "statement": "A multiplexed y- or z-axis rotation with k controls has an exact circuit on the same k+1 wires without ancillas: one rotation and no CNOT for k=0, and 2^k target rotations and 2^k CNOTs for k>0.",
+      "used_by": [
+        "thm-qc-exact-unitary-synthesis-from-qsd"
+      ]
+    },
+    {
+      "id": "thm-qc-pattern-is-measurement-circuit",
+      "statement": "Every finite open-graph adaptive pattern has a raw measurement circuit with exactly its raw branch operators, probabilities and positive-probability conditional outputs. Appending its specified, separately charged correction suffix gives exactly its corrected branch operators and instrument.",
+      "used_by": [
+        "thm-qc-circuit-pattern-equivalence-and-universality"
+      ]
+    },
+    {
+      "id": "lem-qc-graph-state-stabilizer-generators",
+      "statement": "The operators K_v = X_v∏_{u∈N(v)}Z_u are commuting Hermitian involutions fixing |G⟩, with independent binary Pauli labels, including the empty generating family.",
+      "used_by": [
+        "thm-qc-graph-state-unique-stabilizer-ray",
+        "ex-qc-one-edge-graph-state"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-simple-graph",
+      "used_for": "Finite, unordered, distinct-endpoint edge sets in graph-state and transport constructions.",
+      "opened": true
+    },
+    {
+      "id": "thm-z-mod-p-is-a-field",
+      "used_for": "The field structure of Z/2Z.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-field-and-its-order",
+      "used_for": "The order-two field convention for binary adjacency matrices.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-space",
+      "used_for": "Vector-space interpretation of binary coordinate and frame vectors.",
+      "opened": true
+    },
+    {
+      "id": "def-matrices-over-a-commutative-ring",
+      "used_for": "Binary adjacency matrices, including the unique empty matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Basis-independent trace and its zero-dimensional convention in branch calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Rectangular trace cyclicity in branch normalization, isometric preparation and instrument completeness.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "Root-linear-first coordinate pairing and the identity tr(uu†)=‖u‖².",
+      "opened": true
+    },
+    {
+      "id": "thm-polar-form-with-unique-principal-argument",
+      "used_for": "Exact real arguments for diagonal unitary entries and cosine-sine rotation angles.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Positivity of unnormalized branch outputs.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Nonnegative spectral eigenvalues and the implication that a nonnegative trace-zero branch operator is zero.",
+      "opened": true
+    },
+    {
+      "id": "cor-trace-is-invariant-under-similarity",
+      "used_for": "Input-independent transcript probabilities under unitary conjugation.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-qc-normalized-transport-schedule",
+      "concern": "The Definition opens 'Let C be a finite n-wire circuit' without explicitly restricting its alphabet to J and CZ, although its title and the preservation lemma's Given impose that intended restriction. Its cases otherwise ignore unsupported gates: a one-wire X-only layer has J_r=M_r=∅ and produces no rounds. State the J/CZ input restriction explicitly so the Definition and preservation Statement have the same domain.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qc-normalized-transport-schedule",
+      "concern": "The item has kind: definition and a def- ID, but its defining content is an operational procedure: 'Start with σ_C=1 and process the original layers in order', followed by four branches that append rounds and update σ_C. This needs reconciliation with the dispatch's requirement that procedures use kind: algorithm and an alg- ID, while also preserving the established item ID.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qc-circuit-to-graph-resource-encoding",
+      "concern": "The item has kind: definition and a def- ID, but specifies a circuit-to-pattern construction with initialization, round-by-round frame updates, angle selection and terminal correction. Its procedural classification needs reconciliation with the dispatch's algorithm rule and established-ID preservation requirement.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "bell-states-teleportation-and-dense-coding",
+      "faithful": true,
+      "note": "This declared prerequisite supplies context, but no assigned item cites a Bell-protocol result. One-bit teleportation is proved locally; its single-bit outcome convention does not import or reverse the Bell protocol's phase/flip labels."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "The uses retain chronological right-to-left matrix products, disjoint layer supports, ordered local embeddings and separately charged suffix access. The zero-based source wires are explicitly translated to schedule indices."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "continuous-gate-universality-and-exact-synthesis",
+      "faithful": true,
+      "note": "The CSD, two-block demultiplexing, three-CNOT base case and Euler interfaces are used with their exact phases. The local QSD theorem asserts finite existence without importing optimized gate counts or bit-complexity guarantees."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "CZ is the exact angle-π controlled phase and CNOT retains control-target order. No controlled access is inferred from an arbitrary unitary matrix."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Bras are linear functionals obtained from the root-linear-first pairing; outer products use coordinate matrices xy†. Measurement contractions and norm-square probabilities respect this convention."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Projective bases are complete, branch maps are shown completely positive, normalization is proved, and conditional outputs are assigned only at positive probability. No conditional instrument is inferred from a POVM alone."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "pauli-and-clifford-groups-binary-symplectic-tableaux",
+      "faithful": true,
+      "note": "The frame order X^xZ^z and binary label order (x,z) are retained. Matching signs and adaptive phases are explicit; the n≥1 Pauli definition is extended locally and explicitly for n=0."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "Pure states are rays and density operators are nonnegative trace-one operators on nonzero spaces. The zero-qubit space is C, so the state hypotheses remain satisfied."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "H, X, Y, Z and the negative-exponent rotation convention agree with the suppliers. The opposite-sign Euler notation is expressly local and translated back to the supplier's angles."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered tensor factors, big-endian bitstrings, tensor contractions and wire permutations retain the supplier conventions. Empty registers are C, and the input/output orders of the transport graph match source wire order."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "faithful": true,
+      "note": "The graph generators are first shown to generate a stabilizer subgroup excluding −I, with rank n. The group-average projector and 2^{n−r} code-dimension results then apply with their stated hypotheses; n=0 is handled separately."
+    }
+  ]
+}

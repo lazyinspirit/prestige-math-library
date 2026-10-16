@@ -1,0 +1,266 @@
+[
+  {
+    "id": "def-qa-expected-query-cost",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-one-fair-bit-then-conditional-query",
+      "asserts": "5.1 By [F3] and the prefix-marginal identity in step 3.2, the expectation of $C_M$ computed on the length-$(M+1)$ tree equals its length-$M$ expectation. The pointwise inequality in step 4.1 and nonnegative transition weights then give $\\mathbb E[C_M]\\le\\mathbb E[C_{M+1}]$. Each expectation is finite because $0\\le C_M\\le M$. [F1, F3, step 3.2, step 4.1, algebra]",
+      "claim": "Finite prefix normalization, prefix marginal consistency, monotonicity, and a finite expected query count.",
+      "checked_in": "Steps 1.2, 2.1, 3.2, 4.1, and 5.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "ex-qa-promise-and-cost-models",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-two-bit-reply-one-query-and-hadamard-cancellation",
+      "asserts": "2.2 The matrix in [F9] satisfies $H^2=\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ by finite row-by-column multiplication [F11]. Therefore the two extra gates in the second circuit return the first target bit to its initial value before the same oracle call. The target entering $U_{f_z}$ is again $00$, so both query circuits have the same output law and one query; their nonoracle gate counts are 0 and 2 by [F5]\u2013[F6]. [F5, F6, F9, F11, step 1.3, algebra]",
+      "claim": "The finite oracle table is total and the query, gate, and output counts match the displayed table.",
+      "checked_in": "Steps 1.3, 2.1, and 2.2",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "def-qa-finite-branch-output-law",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-one-leaf-computational-basis-output",
+      "asserts": "4.1 At a positive-weight leaf, each pair $(z,v)$ specifies exactly one full computational-basis word because the output-wire tuple has distinct indices and $W_\\ell$ is its complement. Conversely every full word has exactly one such pair. Thus [F9]\u2013[F10] make the vectors $e_{\\ell,z,v}$ a complete orthonormal basis. Each $\\langle\\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle$ is nonnegative by [F5], and their finite sum over $(z,v)$ is $\\operatorname{tr}(\\rho_\\ell)=1$ by [F8]. Therefore $q_\\ell(z)\\ge0$ and $\\sum_zq_\\ell(z)=1$, including the empty-output or empty-work-register cases. [A1, F5, F8, F9, F10, step 3.1]",
+      "claim": "Terminal marginal law for a basis state, including summation over a finite unmeasured register.",
+      "checked_in": "Steps 3.1 and 4.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "def-qa-finite-branch-output-law",
+    "index": 1,
+    "obligation": {
+      "check": "quantum-query-two-outcome-instrument-branch-mixture",
+      "asserts": "1.3 At an instrument node with density input $\\rho_h$, [F3] gives $q_{h,a}\\ge0$ and $\\sum_aq_{h,a}=1$. If $q_{h,a}>0$, [F4] gives a density operator at that child; if $q_{h,a}=0$, the child weight is zero and no conditional state is used. Therefore the sum of child weights is $w(h)\\sum_aq_{h,a}=w(h)$. [F2, F3, F4, algebra]",
+      "claim": "Finite branch weights multiply conditional output weights and preserve normalization.",
+      "checked_in": "Steps 1.3, 2.1, and 5.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "def-qa-binary-field-f2",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-two-residue-table",
+      "asserts": "2.1 Applying [F2] to representatives $0$ and $1$ gives the addition table $[0]+[0]=[0]$, $[0]+[1]=[1]$, $[1]+[0]=[1]$, $[1]+[1]=[0]$, and the multiplication table $[0][0]=[0]$, $[0][1]=[1][0]=[0]$, $[1][1]=[1]$. Since steps 1.1 and 1.2 show that these are all quotient classes, the tables are exhaustive; both operations take values in this carrier and are exactly the quotient operations. [given, F1, F2, F3, step 1.1, step 1.2, algebra] \u220e",
+      "claim": "The quotient operations close on two residues.",
+      "checked_in": "Steps 1.1\u20131.2",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "def-qa-binary-dot-product",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-empty-and-two-coordinate",
+      "asserts": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$. It is the parity of the number of coordinates where both bits are $1$. Under the quotient operations of [[def-qa-binary-field-f2]], this bit represents the sum $\\sum_{i=0}^{n-1}[a_i]_2[x_i]_2$ in $\\mathbb Z/2\\mathbb Z$; the equality uses only the operation definitions, not the field axioms.",
+      "claim": "Parity matches quotient addition at n=0 and n=2.",
+      "checked_in": "Steps 1.1\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-reversible-binary-dot-product-correct-and-cost",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-two-bit",
+      "asserts": "For every $n\\ge0$, the algorithm [[alg-qa-reversible-binary-dot-product]] maps every computational-basis input to\n$$\n|a\\rangle|x\\rangle|z\\rangle|0\\rangle_r\\longmapsto|a\\rangle|x\\rangle|z\\oplus(a\\cdot x)\\rangle|0\\rangle_r.\n$$\nIt therefore implements the same linear map on superpositions. Its exact cost is $2n$ Toffoli gates, one CNOT, and one clean work bit; it has no failure branch.",
+      "claim": "Parity, cleanup, and exact cost agree on a finite input.",
+      "checked_in": "Steps 1.1\u20135.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "def-qa-phase-query",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-constant-phase",
+      "asserts": "For a Boolean function $f:\\{0,1\\}^{a}\\to\\{0,1\\}$, the **phase query** is the linear operator on the address register defined on its ordered computational basis by\n$$\nP_f|x\\rangle=(-1)^{f(x)}|x\\rangle.\n$$\nThis definition supplies uncontrolled access only. Controlled access to $P_f$ is a separate promise and is not implied by an uncontrolled call.",
+      "claim": "Unitary and involutive phase action.",
+      "checked_in": "Steps 1.1\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-phase-kickback",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-two-boolean-cases",
+      "asserts": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be a total Boolean function. If the one-bit target of its standard query is prepared in\n$$\n|-\\rangle:=\\frac{|0\\rangle-|1\\rangle}{\\sqrt2},\n$$\nthen one standard query acts on every address basis vector by\n$$\nU_f(|x\\rangle|-\\rangle)=(-1)^{f(x)}|x\\rangle|-\\rangle.\n$$\nThus the address acquires exactly the phase query $P_f$, while the target returns unchanged. The same identity holds for every address superposition.",
+      "claim": "Both Boolean oracle actions produce the stated phase.",
+      "checked_in": "Steps 1.1\u20132.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-compute-copy-uncompute-clean-query",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-one-bit-evaluator",
+      "asserts": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be total. Suppose a finite nonoracle gate circuit $V$ preserves the address and, from zero value and workspace registers, computes\n$$\nV|x\\rangle|0^b\\rangle|0^w\\rangle=|x\\rangle|f(x)\\rangle|0^w\\rangle\n$$\nfor every $x$, with gate count $G$. Suppose its exact inverse circuit is available with the same gate count and acts only on the address, value, and workspace registers. Applying $V$, copying the $b$ output bits to a fresh target by $b$ CNOTs, and applying $V^{-1}$ implements the standard query, restores the value and workspace registers to zero, and uses exactly $2G+b$ gate occurrences. Any query calls in a different implementation must be charged separately.\n\nFor a finite Boolean DAG with $S$ noninput nodes, $E$ input-port uses counted with multiplicity, and $b$ ordered output ports, the current QC10 reversible-embedding construction itself already implements the clean XOR query. Its local cost theorem gives at most $6S+4E+b$ gates and $S+E$ clean work bits. Thus its size is $O(S+E+b)$, and is $O(S+b)$ when $E=O(S)$, as for the stated bounded-fan-in graphs. No depth bound is inferred from the classical Boolean DAG.",
+      "claim": "The generic 2G+b formula is exact for G=b=1.",
+      "checked_in": "Steps 1.1\u20134.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-global-phase-under-control",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-controlled-witness",
+      "asserts": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be constant with value $c\\in\\{0,1\\}$. Its phase query is $P_f=(-1)^cI$. A standalone call therefore leaves every pure-state measurement law unchanged. If the model explicitly grants controlled phase-query access, the two constant cases are distinguishable: on address $|0^a\\rangle$ and control $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$, control of $P_f$ returns $|+\\rangle|0^a\\rangle$ when $c=0$ and $|-\\rangle|0^a\\rangle$ when $c=1$. Measuring the control in the $\\{|+\\rangle,|-\\rangle\\}$ basis distinguishes them with certainty. No controlled access is inferred from a bare phase-query call.",
+      "claim": "The controlled measurement distinguishes the constant cases.",
+      "checked_in": "Steps 1.1\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-bit-query-to-phase-query",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-target-preparation",
+      "asserts": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be total. Starting a target qubit in $|0\\rangle$, apply $X$ and then $H$, and make one standard bit query. Since $HX|0\\rangle=|-\\rangle$, phase kickback implements $P_f$ on the address and returns the target to $|-\\rangle$. This conversion uses one query plus exactly two nonoracle one-qubit gates; the target preparation is explicit and assumes no preprepared state or generic amplitude loading.",
+      "claim": "The stated conversion begins from zero target.",
+      "checked_in": "Steps 1.1\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-controlled-phase-query-to-bit-query",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-controlled-output",
+      "asserts": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be total. Assume the operation model explicitly supplies the controlled phase call\n$$\nC(P_f)=\\begin{pmatrix}I&0\\\\0&P_f\\end{pmatrix}\n$$\nwith the output qubit as the first, control register. On address $|x\\rangle$ and output $|y\\rangle$, apply $H$ to the output, make one controlled phase call, and apply $H$ again. The result is $|x\\rangle|y\\oplus f(x)\\rangle$, so this implements one standard query with one controlled phase call and two nonoracle $H$ gates. Bare uncontrolled $P_f$ access does not satisfy the stated access hypothesis.",
+      "claim": "The controlled conversion acts correctly on y=0 and y=1.",
+      "checked_in": "Steps 1.1\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "ex-qa-oracle-conversion-and-uncomputation",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-four-finite-checks",
+      "asserts": "For the one-bit function $f(x)=x$, compute the standard XOR query with a clean work bit, copy its value to the target, and uncompute the work. On input address $|+\\rangle$, target $|-\\rangle$, and work $|0\\rangle$, the address becomes $|-\\rangle$ and the work returns to zero; a final Hadamard on the address yields outcome $1$ with certainty. For the two-bit dot product, take $a=11$, $x=10$, and target $z=0$. The reversible Toffoli circuit outputs target $1$ and resets its work bit. If the one-bit circuit omits its final uncomputation, residual address-dependent work makes the same final address measurement uniform instead of deterministic. Finally, a constant-one phase query has no standalone measurement effect, but its controlled call changes a control $|+\\rangle$ to $|-\\rangle$.",
+      "claim": "All displayed finite calculations agree with the claimed states and probabilities.",
+      "checked_in": "Steps 1.1\u20134.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-binary-field-f2-is-a-field",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-mod-two-quotient-field-specialization",
+      "asserts": "The quotient operations on $\\mathbb Z/2\\mathbb Z$ make the carrier $\\mathbb F_2$ of [[def-qa-binary-field-f2]] a field. This is only the modulus-$2$ specialization of the published prime-modulus theorem; it does not assert a classification of finite fields.",
+      "checked_in": "Steps 1.1\u20132.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "def-qa-binary-vector-space",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-coordinate-space-n0-n1",
+      "asserts": "For $n\\ge0$, let $\\mathbb F_2^n=\\{0,1\\}^n$. Give it coordinatewise addition $(x+y)_i=x_i+y_i$ and scalar multiplication $(c x)_i=cx_i$ using the operations of [[def-qa-binary-field-f2]]. Its zero vector is $0^n$. Then $\\mathbb F_2^n$ is a vector space over $\\mathbb F_2$, with standard basis $e_0,\\ldots,e_{n-1}$ and dimension $n$. For $n=0$, the carrier consists of the empty tuple, and the basis is empty.",
+      "checked_in": "Steps 1.1\u20132.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "lem-qa-computational-basis-measurement-law",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-two-outcome-born-trace",
+      "asserts": "Let $(|y\\rangle)_{y\\in\\mathcal Y}$ be a finite ordered orthonormal computational basis, let $\\psi=\\sum_{y\\in\\mathcal Y}a_y|y\\rangle$ be a unit vector, and put $\\rho=|\\psi\\rangle\\langle\\psi|$. For the computational-basis projective measurement with $P_y=|y\\rangle\\langle y|$, the associated POVM weight is\n$$\np(y)=\\operatorname{tr}(\\rho P_y)=|a_y|^2.\n$$\nIn particular these weights are nonnegative and sum to one.",
+      "checked_in": "Steps 1.1\u20132.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "def-qa-simon-promise",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-n1-m0-promised-oracle",
+      "asserts": "Fix integers $n\\ge1$ and $m\\ge n-1$. A total function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ satisfies the **Simon hidden-XOR-period promise** if there is a unique nonzero string $s\\in\\{0,1\\}^n$ such that for all $x,y\\in\\{0,1\\}^n$,\n\n$$f(x)=f(y)\\quad\\Longleftrightarrow\\quad (y=x\\text{ or }y=x\\oplus s).$$\n\nFor the query algorithms using this promise, the instance is $n,m$ together with black-box access to $f$: the solver receives no function table or other information depending on $f$. Each oracle call uses the standard bit-query interface [[def-qa-standard-bit-query]]. Its witness relation $R(f,s)$ holds exactly when $s$ is the nonzero mask in the displayed iff condition, so the required output is the unique hidden mask. The address operation $\\oplus$ is the coordinatewise addition of [[def-qa-binary-field-f2]]. The output width condition lets the $2^{n-1}$ fibers receive distinct labels; it does not promise that the image uses every $m$-bit label. Each fiber is exactly $\\{x,x\\oplus s\\}$.",
+      "checked_in": "Steps 1.1\u20131.3",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "lem-qa-simon-annihilator-subspace-basis",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-annihilator-n1-and-n2",
+      "asserts": "Let $n\\ge1$ and let $s\\in\\mathbb F_2^n$ be nonzero in the coordinate vector space of [[def-qa-binary-vector-space]]. Define\n$$\ns^\\perp:=\\{y\\in\\mathbb F_2^n:s\\cdot y=0\\},\n$$\nwhere the binary dot product is the parity defined in [[def-qa-binary-dot-product]]. Then $s^\\perp$ is a linear subspace of dimension $d=n-1$ and has exactly $2^d$ elements. The assertion includes $n=1$, when $s^\\perp=\\{0\\}$ has dimension zero.",
+      "checked_in": "Steps 1.1\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-f2-gaussian-elimination-correct-and-cost",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-one-row-mask11",
+      "asserts": "For $n\\ge1$, let $Y$ be a binary $(n-1)\\times n$ matrix. The algorithm [[alg-qa-f2-gaussian-elimination]] terminates, returns FAIL exactly when $\\operatorname{rank}(Y)<n-1$, and otherwise returns the unique nonzero vector in $\\ker Y$. In particular, if the rows are independent and each row $y_i$ satisfies $y_i\\cdot s=0$ for a fixed nonzero Simon mask $s$, then the returned vector is $s$. The algorithm uses $O(n^3)$ classical bit operations.",
+      "checked_in": "Steps 2.1\u20134.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-simon-classical-randomized-query-lower-bound",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-smallest-allowed-N-constant",
+      "asserts": "6.1 By steps 1.1 and 2.2, with $S-B>0$, $(B+1)/(S-B)\\le(N/32+1)/(31N/32-1)<2/3$. The strict inequality is equivalent to $5<59N/32$, which holds because $N\\ge256$. Thus every fixed random tape has average success strictly below $2/3$ under the finite oracle distribution. [given, F3, step 2.2, step 5.1, algebra]",
+      "checked_in": "Steps 2.1,5.1\u20136.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-simon-hadamard-sampling-law",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-one-bit-sample",
+      "asserts": "3.1 There are $2^{n-1}$ allowed strings by [F6]. The vector after the final Hadamards has squared norm $2^{n-1}2^{-(n-1)}=1$ by step 2.1 and orthonormality [F7]. This also covers $n=1$, when the only allowed string is $0$. [given, F2, F6, F7, step 2.1, algebra]",
+      "checked_in": "Steps 2.1\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-simon-rank-growth-probability",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-rank-rise-small-d",
+      "asserts": "Let $d=n-1$ and consider a finite history with $k<d$ accepted rows in the Simon rank process. These rows are independent by the acceptance rule, so the current rank is $k$. The next independent sample increases the rank with probability\n\n$$p_k=1-2^{k-d}\\ge\\frac12.$$\n\nWriting $q_k=2^{k-d}$, for each fixed rank-$k$ history and every $r\\in\\mathbb N$, let $A_{k,r}$ be the event, in the finite continuation experiment of the next $r$ fresh samples, that all $r$ fail to raise rank. For $M\\ge1$, let $W_{k,M}$ on the finite $M$-sample continuation experiment be the number of samples up to the first rank increase, capped at $M$, with value $M$ if no increase occurs in that prefix. Then\n\n$$\\Pr(A_{k,r})=q_k^r,$$\n\nand the expected truncated waiting count is\n\n$$\\mathbb E[W_{k,M}]=\\sum_{j=0}^{M-1}q_k^j\\le\\frac1{p_k}\\le2.$$\n\nAll probabilities and expectations here are over finite continuation experiments; no probability measure on infinite sample histories is assumed.",
+      "checked_in": "Steps 1.1\u20132.2",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "thm-qa-simon-recovery-correctness-and-query-bound",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-d1-delta-half-cap",
+      "asserts": "Fix a Simon oracle with $n\\ge1$, let $d=n-1$, and let $\\delta\\in\\mathbb Q\\cap(0,1)$. The unbounded rank-collection process terminates almost surely in the sense that its finite-prefix tail probability $\\Pr(T>R)$ tends to zero as $R\\to\\infty$; its expected query cost, defined as the supremum over finite query prefixes, is at most $2d$. For the finite algorithm with $M=\\lceil2d/\\delta\\rceil$, the probability of returning the hidden mask is at least $1-\\delta$, and its worst-case query count is at most $M=O(n/\\delta)$. For fixed constant $\\delta$, the query count is $O(n)$. The finite algorithm's classical postprocessing has bit cost $O(Mn^2+n^3+(B+\\log n)^2)$ when $\\delta=a/b$ is supplied in binary with total numerator/denominator length $B$.",
+      "checked_in": "Steps 2.2\u20133.1",
+      "fixture_version": 1
+    }
+  },
+  {
+    "id": "ex-qa-simon-finite-rank-and-sampling",
+    "index": 0,
+    "obligation": {
+      "check": "quantum-query-n1-n2-examples-and-cap",
+      "asserts": "For failure tolerance $\\delta=1/2$, the finite cap is $M=\\lceil2(1)/(1/2)\\rceil=4$. The cap fails precisely when all four rows are $00$, an event of probability $1/16$; hence this instance succeeds with probability $15/16$ and uses at most four queries.",
+      "checked_in": "Steps 1.1\u20132.1",
+      "fixture_version": 1
+    }
+  }
+]

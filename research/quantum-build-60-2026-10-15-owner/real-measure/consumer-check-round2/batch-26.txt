@@ -1,0 +1,339 @@
+FILE thm-subexponential-independent-sums
+
+STATEMENT Let $X_1,\ldots,X_n$ be independent centered real random variables, with $X_i$ sub-exponential with parameters $(\nu_i^2,b_i)$ as defined in [[def-subgaussian-variable-and-vector]], where $n\ge1$ and $b_i>0$. Put $v=\sum_{i=1}^n\nu_i^2$, $b=\max_{1\le i\le n}b_i$, and $S=\sum_{i=1}^nX_i$. For $t>0$, if $v>0$ then
+$$\mathbb P(|S|\ge t)\le2\exp\!\left(-\frac12\min\!\left\{\frac{t^2}{v},\frac{t}{b}\right\}\right),$$
+and if $v=0$ then $\mathbb P(|S|\ge t)=0$.
+
+LINE 72 
+[F10] Finite sums of real-valued measurable functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+## Proof
+
+FILE thm-survival-cumulative-hazard-identity
+
+STATEMENT Assume Countable Choice and Dependent Choice. Let $T$ be a nonnegative event
+time with a finite-valued density $f$ relative to Lebesgue measure, so
+$P_T(A)=\int_A f(u)\,du$ for every Borel $A\subseteq[0,\infty)$, and assume
+$S_T(0)=1$. Let
+$$\tau_*:=\inf\{t\ge0:S_T(t)=0\},$$
+with $\tau_*=+\infty$ if this set is empty. For every $0\le t<\tau_*$,
+$$S_T(t)=\exp\!\left(-\int_0^t\frac{f(u)}{S_T(u)}\,du\right).$$
+If $\tau_*<\infty$, the improper cumulative hazard tends to $+\infty$ as
+$t\uparrow\tau_*$; extending it by $+\infty$ for $t\ge\tau_*$ gives the same
+identity there with the convention $e^{-\infty}=0$. The density-hazard formula
+is asserted only where $S_T>0$.
+
+LINE 80 
+[F10] The pointwise product of measurable real-valued functions is measurable. [[thm-arithmetic-and-lattice-operations-preserve-measurability]]
+
+[F11] For every $x>0$, $\exp(\log x)=x$; also $\log 1=0$, since $\exp(0)=1$ by its power-series definition and $\log(\exp y)=y$. [[def-natural-logarithm]], [[def-real-exponential-function-and-e]]
+
+FILE thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent
+
+STATEMENT Assume Countable Choice, together with the Axiom of Choice where the compactness clause is used. Let $\Omega\subseteq\mathbb R^n$ be open and let $L,D(L)$ be the symmetric-case operator of [[def-ltwo-operator-associated-with-a-symmetric-elliptic-form]], with $D(L)$ dense and $L$ symmetric and lower bounded ([[lem-associated-elliptic-operator-is-densely-defined-symmetric-and-lower-bounded]]); let its scalar field be $\mathbb K\in\{\mathbb R,\mathbb C\}$ and fix $\mu\ge\beta$. Then $L$ is self-adjoint: $L=L^*$, the adjoint being taken in $L^2(\Omega;\mathbb K)$ for the densely defined operator $L$ ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]). Moreover $L+\mu:D(L)\to L^2(\Omega;\mathbb K)$ is a bijection with inverse $K_\mu$. If $\Omega$ is bounded and the Axiom of Choice holds, then $K_\mu$ is compact ([[lem-shifted-elliptic-solution-operator-is-compact-on-ltwo]]). Under these boundedness and AC hypotheses, for $\mathbb K=\mathbb C$, $L$ has compact resolvent: $(L-\lambda)^{-1}$ is compact on $L^2(\Omega;\mathbb C)$ for every $\lambda$ in the resolvent set of $L$ ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]). For $\mathbb K=\mathbb R$, identify $L^2(\Omega;\mathbb C)$ canonically with $L^2(\Omega;\mathbb R)_{\mathbb C}$ by $u+iv\leftrightarrow(u,v)$, and let $L_{\mathbb C}(u+iv):=Lu+iLv$ on $D(L_{\mathbb C})=D(L)+iD(L)$ ([[def-complexification-of-a-real-vector-space]], [[def-complexification-of-a-real-linear-map]], [[def-complex-lp-and-euclidean-test-function-conventions]]). Then $L_{\mathbb C}$ is self-adjoint and has compact resolvent: $(L_{\mathbb C}-\lambda)^{-1}$ is compact on $L^2(\Omega;\mathbb C)$ for every $\lambda$ in its resolvent set ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]).
+
+LINE 70 1.1 Surjectivity of $L+\mu$. Let $f\in L^2(\Omega)$ and put $u:=K_\mu f\in H^1_0(\Omega)$; by [F3] $u\in D(L)$ and $Lu=f-\mu u$, that is $(L+\mu)u=f$. Hence $\operatorname{ran}(L+\mu)=L^2(\Omega)$, and $(L+\mu)u=0$ forces $u=K_\mu 0=0$ by [F2], so $L+\mu$ is a bijection of $D(L)$ onto $L^2(\Omega)$ with inverse $K_\mu$. [F2, F3, given]
+
+1.2 The complex case: $\operatorname{ran}(L+\mu\pm i)=L^2(\Omega)$. Assume $\mathbb K=\mathbb C$ and let $f\in L^2(\Omega)$. The forms $a_\mu^\pm(u,v):=a_\mu(u,v)\pm i(u,v)_{L^2}$ are bounded and coercive on $H^1_0(\Omega)$, because $\operatorname{Re}a_\mu^\pm(u,u)=\operatorname{Re}a_\mu(u,u)\ge\alpha\|u\|_{H^1_0}^2$ and boundedness is inherited from $a_\mu$ and the $L^2$ pairing; applying [F4] to the bounded conjugate-linear datum $v\mapsto(f,v)$ gives a unique $u_\pm\in H^1_0(\Omega)$ with $a_\mu(u_\pm,v)\pm i(u_\pm,v)_{L^2}=(f,v)_{L^2}$ for every $v\in H^1_0(\Omega)$, which rearranges to $a(u_\pm,v)=(f-\mu u_\pm\mp i u_\pm,v)_{L^2}$. Hence $u_\pm\in D(L)$ with $(L+\mu\pm i)u_\pm=f$, so both ranges are all of $L^2(\Omega)$. [F2, F3, F4, given]
+
+2.1 Complex case: self-adjointness. Assume $\mathbb K=\mathbb C$ and put $T:=L+\mu$ on the dense domain $D(L)$. By [F1] the operator $T$ is densely defined and symmetric, and by step 1.2 $\operatorname{ran}(T\pm i)=L^2(\Omega)$; the range criterion [F5] then makes $T$ self-adjoint, and $L=T-\mu$ is self-adjoint because subtracting the real scalar $\mu$ preserves the adjoint relation $D(L^*)=D(T^*)=D(L)$ and $L^*=T^*-\mu$. [F1, F5, step 1.2, given]
+
+FILE thm-tempered-status-of-the-sl2-r-unitary-series
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]) and use the normalized parameter convention of [[def-normalized-principal-series-i-epsilon-nu]]. Every irreducible unitary principal-series class $[I_{\varepsilon,is}]$, with $\varepsilon\in\{0,1\}$ and $s\in\mathbb R$, is tempered. The odd family at $s=0$ is reducible, $I_{1,0}=D_1^+\oplus D_1^-$, and its two irreducible summands are tempered; each $D_n^\pm$ for $n\ge2$ is also tempered. No nontrivial spherical complementary-series class $[I_{0,\nu}]$ with $0<|\nu|<1$, and not the trivial class, is tempered. Here tempered means weak containment in the left regular representation ([[def-tempered-unitary-representation]]); the reducible $I_{1,0}$ is not itself a point of the unitary dual ([[def-unitary-dual-of-a-locally-compact-group]]).
+
+LINE 52 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]) and use the normalized parameter convention of [[def-normalized-principal-series-i-epsilon-nu]]. Every irreducible unitary principal-series class $[I_{\varepsilon,is}]$, with $\varepsilon\in\{0,1\}$ and $s\in\mathbb R$, is tempered. The odd family at $s=0$ is reducible, $I_{1,0}=D_1^+\oplus D_1^-$, and its two irreducible summands are tempered; each $D_n^\pm$ for $n\ge2$ is also tempered. No nontrivial spherical complementary-series class $[I_{0,\nu}]$ with $0<|\nu|<1$, and not the trivial class, is tempered. Here tempered means weak containment in the left regular representation ([[def-tempered-unitary-representation]]); the reducible $I_{1,0}$ is not itself a point of the unitary dual ([[def-unitary-dual-of-a-locally-compact-group]]).
+
+## Facts & Assumptions
+
+LINE 60 [F1] A strongly continuous unitary representation is tempered exactly when it is weakly contained in the left regular representation ([[def-tempered-unitary-representation]], [[def-left-and-right-regular-unitary-representations]], [[def-weak-containment-of-unitary-representations]]). The Plancherel supplier proves that the closed support of its actual onto regular disintegration is exactly the irreducible classes weakly contained in that representation ([[thm-plancherel-support-for-sl2-r]], [[def-fell-topology-on-the-unitary-dual]]).
+
+[F2] The Plancherel transform identifies the regular representation with an irreducible direct integral over its Plancherel support. The carrier consists of nonzero-parameter unitary principal classes and $D_n^\pm$ for $n\ge2$; its closed support also contains $[I_{0,0}]$ and $D_1^\pm$, while the spherical complementary classes with $0<\nu<1$ and the trivial class lie outside the support ([[thm-plancherel-support-for-sl2-r]]).
+
+[F3] The compact-picture representations $I_{\varepsilon,is}$ are strongly continuous and unitary. The spherical $I_{0,0}$ is irreducible, while $I_{1,0}=D_1^+\oplus D_1^-$ is reducible ([[thm-unitarity-of-the-sl2-unitary-principal-series]], [[def-limits-of-discrete-series-for-sl2-r]]).
+
+LINE 62 [F2] The Plancherel transform identifies the regular representation with an irreducible direct integral over its Plancherel support. The carrier consists of nonzero-parameter unitary principal classes and $D_n^\pm$ for $n\ge2$; its closed support also contains $[I_{0,0}]$ and $D_1^\pm$, while the spherical complementary classes with $0<\nu<1$ and the trivial class lie outside the support ([[thm-plancherel-support-for-sl2-r]]).
+
+[F3] The compact-picture representations $I_{\varepsilon,is}$ are strongly continuous and unitary. The spherical $I_{0,0}$ is irreducible, while $I_{1,0}=D_1^+\oplus D_1^-$ is reducible ([[thm-unitarity-of-the-sl2-unitary-principal-series]], [[def-limits-of-discrete-series-for-sl2-r]]).
+
+[F4] Each $D_1^\pm$ is an irreducible strongly continuous unitary limit, and $D_n^\pm$ for $n\ge2$ are irreducible unitary discrete-series models ([[def-limits-of-discrete-series-for-sl2-r]], [[thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series]], [[thm-irreducibility-and-k-types-of-the-discrete-series]]).
+
+LINE 64 [F3] The compact-picture representations $I_{\varepsilon,is}$ are strongly continuous and unitary. The spherical $I_{0,0}$ is irreducible, while $I_{1,0}=D_1^+\oplus D_1^-$ is reducible ([[thm-unitarity-of-the-sl2-unitary-principal-series]], [[def-limits-of-discrete-series-for-sl2-r]]).
+
+[F4] Each $D_1^\pm$ is an irreducible strongly continuous unitary limit, and $D_n^\pm$ for $n\ge2$ are irreducible unitary discrete-series models ([[def-limits-of-discrete-series-for-sl2-r]], [[thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series]], [[thm-irreducibility-and-k-types-of-the-discrete-series]]).
+
+[F5] The spherical complementary models $I_{0,\nu}$ are irreducible unitary representations for $0<|\nu|<1$ ([[thm-unitarity-of-the-sl2-complementary-series]]).
+
+LINE 80 1.1 Let $S$ be the closed support of the Plancherel measure. By [F2], the regular representation has its irreducible direct-integral decomposition over $S$; by [F1], the irreducible classes in this support are exactly the tempered classes. [F1, F2, A1]
+
+2.1 Every nonzero-parameter unitary principal class and every $D_n^\pm$ for $n\ge2$ is in the Plancherel carrier, hence in $S$. The even endpoint $[I_{0,0}]$ and the two limits $D_1^\pm$ lie in $S$ by [F2]; [F3] and [F4] make these irreducible unitary dual points. Step 1.1 therefore proves all principal, discrete, and limit claims. At the odd endpoint, [F3] identifies $I_{1,0}$ with the two summands, so the reducible direct sum is not asserted to be a dual point. [F2, F3, F4, step 1.1]
+
+3.1 By [F2], the positive-parameter spherical complementary classes $[I_{0,\nu}]$, $0<\nu<1$, and the trivial class are outside $S$, hence are not tempered by step 1.1. If $-1<\nu<0$, [F6] gives $[I_{0,\nu}]=[I_{0,-\nu}]$, and $0<-\nu<1$, so the negative-parameter class is outside $S$ as well. This uses the complementary Hilbert-space sign equivalence; no non-temperedness conclusion is drawn from its convergence to the trivial class or from zero Plancherel mass alone. [F2, F5, F6, step 1.1, A1] ∎
+
+FILE thm-the-derivative-of-an-increasing-function-is-measurable-integrable-and-bounded-by-its-total-increase
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]).
+
+Let $F : [a,b] \to \mathbb{R}$ be nondecreasing. Then the derivative $F'$
+exists almost everywhere, is measurable, is Lebesgue integrable on $[a,b]$,
+and satisfies
+
+$$
+\int_a^b F'(x)\,d\lambda(x) \le F(b)-F(a).
+$$
+
+LINE 49 
+1.1 By [[thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun]], $F'$ exists almost everywhere on $(a,b)$. Extend $F$ to $[a,b+1]$ by setting $\widetilde F(x)=F(x)$ for $x \le b$ and $\widetilde F(x)=F(b)$ for $x \ge b$. For each $n \ge 1$ define $h_n(x) := n\bigl(\widetilde F(x+1/n)-\widetilde F(x)\bigr)$ for $x \in [a,b]$. Because monotone functions are Borel measurable ([[thm-monotone-real-functions-are-borel-measurable]]) and arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]), each $h_n$ is measurable and nonnegative. At every point where $F'$ exists, $h_n(x) \to F'(x)$. [given, construct]
+
+2.1 For every $n$, $\int_a^b h_n(x)\,d\lambda(x) = n\int_a^b \widetilde F(x+1/n)\,d\lambda(x) - n\int_a^b \widetilde F(x)\,d\lambda(x)$. After the change of variable $t=x+1/n$ in the first integral, this becomes $\int_a^b h_n = n\int_b^{b+1/n}\widetilde F(t)\,dt - n\int_a^{a+1/n}F(t)\,dt \le F(b)-F(a)$, because $\widetilde F(t) \le F(b)$ on $[b,b+1/n]$ and $F(t) \ge F(a)$ on $[a,a+1/n]$. [step 1.1, algebra]
+
+FILE thm-the-limits-of-discrete-series-are-not-square-integrable
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). Define a square-integrable irreducible unitary representation to mean one for which every matrix coefficient lies in $L^2(G)$; this is the discrete-series convention of Frahm's SL$(2,\mathbb R)$ Plancherel notes. Let $D_1^-$ and $D_1^+$ be the two limits of discrete series of [[def-limits-of-discrete-series-for-sl2-r]]. Neither is square-integrable. In the compact picture of $I_{1,0}$, the normalized weight-one vector $f_1(k_\theta)=e^{i\theta}$ in $D_1^+$ has coefficient
+$$\langle\Pi_0(a_\tau)f_1,f_1\rangle=\operatorname{sech}(\tau/2),\qquad a_\tau=\operatorname{diag}(e^{\tau/2},e^{-\tau/2}),$$
+and
+$$\int_G|\langle\Pi_0(g)f_1,f_1\rangle|^2\,dg=2\pi\int_0^\infty\operatorname{sech}^2(\tau/2)\sinh\tau\,d\tau=+\infty.$$
+Complex conjugation gives the same nonintegrable coefficient modulus on $D_1^-$. This statement establishes failure of the all-coefficients criterion; it makes no claim about Plancherel support or occurrence in the regular representation.
+
+LINE 39 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Define a square-integrable irreducible unitary representation to mean one for which every matrix coefficient lies in $L^2(G)$; this is the discrete-series convention of Frahm's SL$(2,\mathbb R)$ Plancherel notes. Let $D_1^-$ and $D_1^+$ be the two limits of discrete series of [[def-limits-of-discrete-series-for-sl2-r]]. Neither is square-integrable. In the compact picture of $I_{1,0}$, the normalized weight-one vector $f_1(k_\theta)=e^{i\theta}$ in $D_1^+$ has coefficient
+$$\langle\Pi_0(a_\tau)f_1,f_1\rangle=\operatorname{sech}(\tau/2),\qquad a_\tau=\operatorname{diag}(e^{\tau/2},e^{-\tau/2}),$$
+and
+
+LINE 43 and
+$$\int_G|\langle\Pi_0(g)f_1,f_1\rangle|^2\,dg=2\pi\int_0^\infty\operatorname{sech}^2(\tau/2)\sinh\tau\,d\tau=+\infty.$$
+Complex conjugation gives the same nonintegrable coefficient modulus on $D_1^-$. This statement establishes failure of the all-coefficients criterion; it makes no claim about Plancherel support or occurrence in the regular representation.
+
+## Facts & Assumptions
+
+LINE 49 **Given:** AC; the compact-picture representation $I_{1,0}$, its two limit summands, the unitary structure of those limits, the weight-one coefficient formula, and the fixed left Haar measure.
+
+[F1] The odd compact-picture basis has unit vectors $f_m(k_\theta)=e^{im\theta}$; $D_1^+$ is the closed positive-weight tail beginning at $f_1$, and $D_1^-$ is the closed negative-weight tail beginning at $f_{-1}$. Both are irreducible strongly continuous unitary representations ([[def-limits-of-discrete-series-for-sl2-r]], [[thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series]]).
+
+[F2] At $\nu=0$, the compact-picture action has the form $(\Pi_0(g)f)(k)=r(k,g)f(\kappa(k,g))$ with $r(k,g)$ real and positive. Therefore pointwise complex conjugation commutes with $\Pi_0(g)$ and maps $f_1$ to $f_{-1}$ ([[thm-compact-picture-of-the-sl2-principal-series]], [[def-limits-of-discrete-series-for-sl2-r]]).
+
+LINE 67 **Given:** The assumptions and notation of the Statement.
+
+1.1 Let $c_+(g):=\langle\Pi_0(g)f_1,f_1\rangle$. By [F1], $f_1$ is a unit K-eigenvector in $D_1^+$, and [F3] gives $c_+(a_\tau)=\operatorname{sech}(\tau/2)$. [F1, F3]
+
+2.1 Unitarity and the K-character property of $f_1$ imply that $\psi_+(g):=|c_+(g)|^2$ is continuous, nonnegative, and K-bi-invariant. Applying [F4] and using $\sinh\tau=2\sinh(\tau/2)\cosh(\tau/2)$ gives $\int_G\psi_+(g)\,dg=2\pi\int_0^\infty 2\tanh(\tau/2)\,d\tau=+\infty$: the integrand $2\tanh(\tau/2)$ tends to $2$, hence is at least $1$ for all sufficiently large $\tau$. Thus $c_+\notin L^2(G)$. [F1, F3, F4, F5, step 1.1, algebra, A1]
+
+LINE 71 2.1 Unitarity and the K-character property of $f_1$ imply that $\psi_+(g):=|c_+(g)|^2$ is continuous, nonnegative, and K-bi-invariant. Applying [F4] and using $\sinh\tau=2\sinh(\tau/2)\cosh(\tau/2)$ gives $\int_G\psi_+(g)\,dg=2\pi\int_0^\infty 2\tanh(\tau/2)\,d\tau=+\infty$: the integrand $2\tanh(\tau/2)$ tends to $2$, hence is at least $1$ for all sufficiently large $\tau$. Thus $c_+\notin L^2(G)$. [F1, F3, F4, F5, step 1.1, algebra, A1]
+
+3.1 Let $C f=\overline f$ on $L^2_1(K)$. By [F2], $C$ commutes with $\Pi_0(g)$ and maps the positive tail $D_1^+$ onto $D_1^-$. Since $C$ is antiunitary, $\langle\Pi_0(g)f_{-1},f_{-1}\rangle=\overline{\langle\Pi_0(g)f_1,f_1\rangle}$, so its modulus also fails to lie in $L^2(G)$ by step 2.1. The irreducible unitary representations $D_1^\pm$ therefore each have a matrix coefficient outside $L^2(G)$, which violates the defining requirement that every matrix coefficient be square-integrable. [F1, F2, F5, step 1.1, step 2.1, algebra] ∎
+
+FILE thm-tonelli-and-fubini-for-completed-product-measures
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]), and let
+$\overline{\mu \times \nu}$ be the completed product of two sigma-finite
+measure spaces.
+
+1. If $f : X \times Y \to [0,\infty]$ is $\overline{\mu \times \nu}$-measurable, there are measurable null sets $A\subseteq X$ and $B\subseteq Y$ such that $f_x$ is $\overline{\mathcal B}$-measurable for $x\notin A$ and $f^y$ is $\overline{\mathcal A}$-measurable for $y\notin B$. Define $I_f(x)=\int_Y f_x\,d\overline\nu$ for $x\notin A$ and $I_f(x)=0$ on $A$; define $J_f(y)=\int_X f^y\,d\overline\mu$ for $y\notin B$ and $J_f(y)=0$ on $B$. Then $I_f,J_f$ are measurable and
+$$\int f\,d\overline{\mu \times \nu}=\int_X I_f\,d\mu=\int_Y J_f\,d\nu.$$
+2. If $f \in L^1(\overline{\mu \times \nu})$, there are measurable null sets $A\subseteq X$ and $B\subseteq Y$ such that the sections are measurable and integrable outside them. Define $I_f,J_f$ by the same section integrals outside $A,B$ and by zero on $A,B$. They are measurable and integrable, and the same equality holds.
+
+LINE 60 2.1 Apply Tonelli in [L2] to $\mathbf 1_Z$. Since $(\mu \times \nu)(Z)=0$, it gives $$\int_X \nu(Z_x)\,d\mu = 0,\qquad \int_Y \mu(Z^y)\,d\nu = 0.$$ The functions $x\mapsto\nu(Z_x)$ and $y\mapsto\mu(Z^y)$ are measurable, so $A:=\{x:\nu(Z_x)>0\}$ and $B:=\{y:\mu(Z^y)>0\}$ are measurable null sets. For $x\notin A$, $f_x=g_x$ outside the null section $Z_x$; [L4] makes $f_x$ measurable for the completed factor measure. The analogous statement holds for $y\notin B$. [L2, L4, step 1.1]
+
+3.1 In the nonnegative case, replace the product-measurable representative $g$ by $g^+=\max(g,0)$. Since $f\ge0$ and $f=g$ outside $Z$, one has $f=g^+$ there, both on the product and on every section outside $A,B$. Apply Tonelli [L2] to $g^+$. Define $I_f$ and $J_f$ to equal the section integrals of $f$ outside $A,B$ and zero on $A,B$ as in the statement. They agree there with the measurable Tonelli section-integral functions of $g^+$, so are measurable and have the same outer integrals. By [L3], the completed integral of $f$ equals the product integral of $g^+$. Tonelli now gives the asserted three-way equality. [L2, L3, step 1.1, step 2.1]
+
+4.1 If $f \in L^1(\overline{\mu \times \nu})$, apply [L1] separately to $\operatorname{Re} f$ and $\operatorname{Im} f$, obtaining product-measurable extended-real functions $u,v$ equal to those finite parts almost everywhere. Their nonfinite-value sets are product-null; set $u,v$ to zero there, making them finite real-valued product-measurable functions. Put $g:=u+iv$. The discrepancy set $\{f\ne g\}$ is contained in a product-measurable null set $Z$ by the completion definition, so $g=f$ outside $Z$. By [L3] applied to $|f|$ and $|g|$, $g\in L^1(\mu\times\nu)$. By Fubini [L2], the measurable sets where $\int|g_x|\,d\nu=\infty$ or $\int|g^y|\,d\mu=\infty$ are factor-null. Apply the Tonelli argument of step 2.1 to this new $Z$, obtaining measurable factor-null sets $A,B$, and enlarge them by these nonintegrability sets. Outside the enlarged sets, apply [L4] separately to the real and imaginary parts to make each $f$ section measurable; its almost-everywhere equality to the corresponding integrable $g$ section then makes it integrable with the same integral. Define $I_f,J_f$ by these section integrals there and zero on the exceptional sets. They are measurable, integrable, and equal almost everywhere to the Fubini section-integral functions for $g$. By [L3], their integrals equal the completed product integral of $f$. [L1, L2, L3, L4, L5, step 2.1] ∎
+
+FILE thm-two-sided-exit-probability-for-brownian-motion
+
+STATEMENT Assume the Axiom of Choice. Let $B$ be a standard Brownian motion
+[[def-brownian-motion]], let $a<x<b$ be reals, and let $P_x$ be the law of the
+shifted, everywhere-continuous process $t\mapsto x+\widehat B_t$
+[[def-brownian-motion-started-at-x]], on canonical continuous path space with its compact-open Borel sigma-algebra. Here $\widehat B$ is the normalized zero-start representative specified in that definition. For $c\in\mathbb R$ let
+$T_c:=\inf\{t\ge0:Z_t=c\}$ be the hitting time of the level $c$ for the
+coordinate process $Z$ of the shifted law. Then
+$$P_x(T_b<T_a)=\frac{x-a}{b-a}.$$
+
+LINE 58 1.2 By [F4] applied at the a.s. finite stopping time $T$, the process $W_t=B_{T+t}-B_T$ on $\{T<\infty\}$ and $W_t=0$ otherwise is an everywhere-continuous zero-start Brownian motion independent of $\mathcal F_T$, using the supplier's measurable random-time convention. Consequently, for every $\mathcal F_T$-measurable random variable $R$ with values in $[0,N]$ one has $\mathbb E[W_R\,|\,\mathcal F_T]=0$ almost surely. Indeed, if $R$ is countably valued with values $r_j\in[0,N]$, then $W_R=\sum_jW_{r_j}1_{\{R=r_j\}}$ and for $G\in\mathcal F_T$ one has $\int_GW_R\,dP=\sum_jP(G\cap\{R=r_j\})\,\mathbb EW_{r_j}=0$, because $G\cap\{R=r_j\}\in\mathcal F_T$ is independent of $W_{r_j}$ and $\mathbb EW_{r_j}=0$; for general $R$ the dyadic ceilings $R_k:=\min(2^{-k}\lceil2^kR\rceil,N)$ decrease to $R$, so $W_{R_k}\to W_R$ almost surely and $|W_{R_k}|\le S:=\sup_{[0,N]}|W|$, whose expectation is finite by [F3]; dominated convergence [F6] gives $\int_GW_R\,dP=\lim_k\int_GW_{R_k}\,dP=0$ for every $G\in\mathcal F_T$, and [F5]'s uniqueness identifies $\mathbb E[W_R|\mathcal F_T]=0$. [F3, F4, F5, F6]
+
+2.1 Fix $M>\max\{|A|,|B|\}$ and let $R=M-T$ on $\{T\le M\}$ and $R=0$ otherwise. This is an $\mathcal F_T$-measurable random variable with values in $[0,M]$: $T$ is $\mathcal F_T$-measurable since $\{T\le r\}\cap\{T\le u\}=\{T\le\min(r,u)\}\in\mathcal F_u$. No product $0\cdot\infty$ is used. On $\{T\le M\}$ one has $B_M-B_T=W_{M-T}=W_R$, and on $\{T>M\}$ both $B_M-B_{T\wedge M}$ and $W_R=W_0$ vanish; hence $B_M-B_{T\wedge M}=W_R$. All terms are integrable: $B_M$ is Gaussian, $W_R$ is bounded in absolute value by its integrable finite-horizon supremum, and the identity gives integrability of $B_{T\wedge M}$. Taking expectations and using step 1.2 with [F5]'s tower identity, $\mathbb E[B_M-B_{T\wedge M}]=0$, so $\mathbb E[B_{T\wedge M}]=\mathbb E[B_M]=0$, the last equality because the law of $B_M$ is the centered $N(0,M)$. [F5, step 1.2]
+
+3.1 Let $M\to\infty$. Set $B_T=0$ on the null event $T=\infty$, as in the strong-Markov convention. The random variables $B_{T\wedge M}$ converge almost surely to $B_T$ because $T<\infty$ almost surely and the paths are continuous, and they are bounded by $\max\{|A|,|B|\}$: for $t<T$ the value $B_t$ lies in $(A,B)$ by step 1.1, and $B_T\in\{A,B\}$. Dominated convergence [F6] therefore gives $\mathbb E[B_T]=0$. [F6, step 1.1, step 2.1]
+
+FILE thm-ump-nonexistence-witness
+
+STATEMENT Assume AC. Let $X$ have law $P_\theta=N(\theta,1)$ on $\mathbb R$, with
+$\theta\in\mathbb R$, and test the simple null $H_0:\theta=0$ against the
+two-sided alternative $H_1:\theta\in\{-1,1\}$. A randomized test is a
+binary-action probability kernel as in [[def-randomized-test]]; write $\psi$
+for its measurable rejection function. Level $\alpha$ and power use
+[[def-test-size-and-power]]. Here UMP means maximizing power at each
+alternative among level-$\alpha$ tests. For every $0<\alpha<1$, no such test
+maximizes power at both alternative values.
+
+LINE 96 2.1 AC [A1] applied to any sequence of nonempty sets supplies a choice function on its values and hence a sequence choice, so [F5] shows every singleton is $\lambda$-null. By step 1.1 and [F4], $P_0(\{c\})=\int_{\{c\}}p_0\,d\lambda=0$ for every real $c$. Applying [F9] under $P_0$ gives finite $c_+,c_-$ with $P_0(X>c_+)=P_0(X<c_-)=\alpha$, since the boundary masses vanish. The threshold indicators are measurable by [F13]. For $B\subseteq\{0,1\}$, define $K_\pm(x,B)=\phi_\pm(x)\mathbf1_{\{1\in B\}}+(1-\phi_\pm(x))\mathbf1_{\{0\in B\}}$. The two weights are nonnegative and sum to one, and the formula is countably additive because each point belongs to at most one event in a disjoint sequence; each event evaluation is measurable by [F12]–[F13]. Thus [F14] gives probability kernels with test functions $\phi_\pm$, which are randomized tests by [F8] and have level $\alpha$ by [F10]. [A1, F4, F5, F8, F9, F10, F12, F13, F14, step 1.1, choose, construct]
+
+3.1 Step 1.1 gives $p_1(x)/p_0(x)=e^{x-1/2}$, strictly increasing, and $p_{-1}(x)/p_0(x)=e^{-x-1/2}$, strictly decreasing. Put $k_+=e^{c_+-1/2}>0$. For any level-$\alpha$ test $\psi$, $(\phi_+-\psi)(p_1-k_+p_0)\ge0$: above $c_+$ both factors are nonnegative, below it both are nonpositive, and at $c_+$ the second vanishes. [F12] makes this product measurable; since $|\phi_+-\psi|\le1$ and each density integrates to one, [F7] makes it integrable. Apply [F4] to the positive and negative parts of $\phi_+-\psi$, then [F7] gives $E_1(\phi_+-\psi)-k_+E_0(\phi_+-\psi)=\int(\phi_+-\psi)(p_1-k_+p_0)\,d\lambda\ge0$. By [F10] and step 2.1, $E_0\phi_+=\alpha\ge E_0\psi$, so $E_1\phi_+\ge E_1\psi$. If equality holds, the two nonnegative terms in $E_1(\phi_+-\psi)=\int(\phi_+-\psi)(p_1-k_+p_0)\,d\lambda+k_+E_0(\phi_+-\psi)$ vanish. [F11] makes the integrand zero $\lambda$-almost everywhere; strict monotonicity then forces $\psi=\phi_+$ off $c_+$ almost everywhere, and step 2.1 gives $P_0(\{c_+\})=0$. Since $P_0$ has density $p_0$, equality forces $\psi=\phi_+$ $P_0$-almost surely, so $\phi_+$ is most powerful against $\theta=1$, uniquely up to $P_0$-almost-sure equality of rejection functions. [step 1.1, step 2.1, F4, F5, F7, F10, F11, F12, algebra]
+
+3.2 Put $k_-=e^{-c_--1/2}>0$. For $x<c_-$, $\phi_-(x)-\psi(x)\ge0$ and $p_{-1}(x)-k_-p_0(x)>0$; for $x>c_-$ both are nonpositive, and at $c_-$ the density difference is zero. By [F12] the product is measurable; it is nonnegative and integrable by [F7]. Apply [F4] to the positive and negative parts of $\phi_--\psi$, then [F7] gives $E_{-1}(\phi_--\psi)-k_-E_0(\phi_--\psi)=\int(\phi_--\psi)(p_{-1}-k_-p_0)\,d\lambda\ge0$. By [F10] and step 2.1, $E_0\phi_-=\alpha\ge E_0\psi$, so $E_{-1}\phi_-\ge E_{-1}\psi$. If equality holds, both nonnegative terms in the sum vanish; [F11] makes the integrand zero $\lambda$-almost everywhere, and strict decrease of $p_{-1}/p_0$ forces $\psi=\phi_-$ off $c_-$ almost everywhere. Step 2.1 gives $P_0(\{c_-\})=0$, and its density then gives equality $P_0$-almost surely, proving uniqueness up to $P_0$-almost-sure equality of rejection functions against $\theta=-1$. [step 1.1, step 2.1, F4, F5, F7, F10, F11, F12, algebra]
+
+LINE 98 3.1 Step 1.1 gives $p_1(x)/p_0(x)=e^{x-1/2}$, strictly increasing, and $p_{-1}(x)/p_0(x)=e^{-x-1/2}$, strictly decreasing. Put $k_+=e^{c_+-1/2}>0$. For any level-$\alpha$ test $\psi$, $(\phi_+-\psi)(p_1-k_+p_0)\ge0$: above $c_+$ both factors are nonnegative, below it both are nonpositive, and at $c_+$ the second vanishes. [F12] makes this product measurable; since $|\phi_+-\psi|\le1$ and each density integrates to one, [F7] makes it integrable. Apply [F4] to the positive and negative parts of $\phi_+-\psi$, then [F7] gives $E_1(\phi_+-\psi)-k_+E_0(\phi_+-\psi)=\int(\phi_+-\psi)(p_1-k_+p_0)\,d\lambda\ge0$. By [F10] and step 2.1, $E_0\phi_+=\alpha\ge E_0\psi$, so $E_1\phi_+\ge E_1\psi$. If equality holds, the two nonnegative terms in $E_1(\phi_+-\psi)=\int(\phi_+-\psi)(p_1-k_+p_0)\,d\lambda+k_+E_0(\phi_+-\psi)$ vanish. [F11] makes the integrand zero $\lambda$-almost everywhere; strict monotonicity then forces $\psi=\phi_+$ off $c_+$ almost everywhere, and step 2.1 gives $P_0(\{c_+\})=0$. Since $P_0$ has density $p_0$, equality forces $\psi=\phi_+$ $P_0$-almost surely, so $\phi_+$ is most powerful against $\theta=1$, uniquely up to $P_0$-almost-sure equality of rejection functions. [step 1.1, step 2.1, F4, F5, F7, F10, F11, F12, algebra]
+
+3.2 Put $k_-=e^{-c_--1/2}>0$. For $x<c_-$, $\phi_-(x)-\psi(x)\ge0$ and $p_{-1}(x)-k_-p_0(x)>0$; for $x>c_-$ both are nonpositive, and at $c_-$ the density difference is zero. By [F12] the product is measurable; it is nonnegative and integrable by [F7]. Apply [F4] to the positive and negative parts of $\phi_--\psi$, then [F7] gives $E_{-1}(\phi_--\psi)-k_-E_0(\phi_--\psi)=\int(\phi_--\psi)(p_{-1}-k_-p_0)\,d\lambda\ge0$. By [F10] and step 2.1, $E_0\phi_-=\alpha\ge E_0\psi$, so $E_{-1}\phi_-\ge E_{-1}\psi$. If equality holds, both nonnegative terms in the sum vanish; [F11] makes the integrand zero $\lambda$-almost everywhere, and strict decrease of $p_{-1}/p_0$ forces $\psi=\phi_-$ off $c_-$ almost everywhere. Step 2.1 gives $P_0(\{c_-\})=0$, and its density then gives equality $P_0$-almost surely, proving uniqueness up to $P_0$-almost-sure equality of rejection functions against $\theta=-1$. [step 1.1, step 2.1, F4, F5, F7, F10, F11, F12, algebra]
+
+4.1 If a UMP test $\psi^*$ existed, its optimality at $\theta=1$ and step 3.1 would force $\psi^*=\phi_+$ $P_0$-almost surely, while its optimality at $\theta=-1$ and step 3.2 would force $\psi^*=\phi_-$ $P_0$-almost surely. Choose $x_0>\max(c_+,c_-)$; positivity and continuity of $p_0$ give a nondegenerate interval above both cutoffs on which $p_0$ is bounded below by a positive constant. By [F6] and the countable choice in step 2.1, that interval has positive Lebesgue and hence positive $P_0$ measure by [F4] and [F7], but $\phi_+=1$ and $\phi_-=0$ there, contradicting the two almost-sure equalities. Therefore no UMP level-$\alpha$ test exists. [step 2.1, step 3.1, step 3.2, F1, F4, F5, F6, F7, F10, algebra] ∎
+
+LINE 84 
+[F12] Sums, products, and scalar multiples of measurable functions are measurable whenever the pointwise operations are defined. ([[thm-arithmetic-and-lattice-operations-preserve-measurability]])
+
+[F13] The Borel sigma-algebra on $\mathbb R$ contains every open ray, so the threshold indicators are measurable. ([[def-borel-sigma-algebra]])
+
+FILE thm-uniformly-integrable-martingale-convergence
+
+STATEMENT Assume AC. A uniformly integrable martingale $M$ converges almost surely and in $L^1$ to an integrable random variable $M_\infty$.
+
+LINE 41 ## Proof
+
+1.1 Uniform integrability implies $\sup_n\mathbb E|M_n|<\infty$ by F1, hence $\sup_n\mathbb E M_n^+<\infty$. Apply F2 to obtain a finite integrable $M_\infty$ with $M_n\to M_\infty$ almost surely. [F1, F2]
+
+2.1 Almost-sure convergence implies convergence in probability. The family $\{M_n:n\ge0\}$ is uniformly integrable by hypothesis, so F3 yields $\mathbb E|M_n-M_\infty|\to0$. Mere $L^1$ boundedness was not substituted for uniform integrability. AC is used exactly as described in F4. [F3, F4, step 1.1] ∎
+
+FILE thm-uniqueness-of-lp-mild-heat-solutions-in-the-convolution-class
+
+STATEMENT Assume Countable Choice. Let $n\ge1$, $1\le p<\infty$, $T>0$,
+$u\in C([0,T];L^p(\mathbb R^n))$, $u(0)=f$, and $u(t)=H_{t-s}u(s)$ for every
+$0<s<t\le T$. Then $u(t)=H_tf$ for all $0\le t\le T$. Hence the heat
+evolution is the unique solution in this class. This is uniqueness for the
+semigroup relation, not an unrestricted classical uniqueness assertion or a
+claim of strong continuity on all $L^\infty$.
+
+LINE 64 $H_{t+s}=H_tH_s$ on $L^p$ for all $s,t\ge0$ with $H_0$ the identity, the
+contraction bound $\|H_rf\|_p\le\|f\|_p$, and strong continuity at zero,
+$\|H_rf-f\|_p\to0$ as $r\downarrow0^+$, for every $f\in L^p$
+([[thm-heat-cauchy-solution-for-lp-data]]).
+
+
+LINE 82 2.1 Norm bound: applying the contraction clause of [F1] to the last expression and then the triangle inequality gives $\|u(t)-H_tf\|_p\le\|u(s)-H_sf\|_p\le\|u(s)-f\|_p+\|f-H_sf\|_p$. [step 1.1, F1, given]
+
+3.1 Limit: the continuity of $u$ at $0$ in the $L^p$ norm gives $\|u(s)-f\|_p=\|u(s)-u(0)\|_p\to0$ as $s\downarrow0^+$, and the strong continuity clause of [F1] gives $\|H_sf-f\|_p\to0$; hence the right-hand side of step 2.1 tends to $0$, so the nonnegative number $\|u(t)-H_tf\|_p$ is $0$ and $u(t)=H_tf$ in $L^p$ for every $t\in(0,T]$. At $t=0$ the identity $u(0)=f=H_0f$ is the hypothesis and the identity case of [F1]. [F1, F2, step 2.1, given, algebra]
+
+4.1 Existence in the same class: the map $t\mapsto H_tf$ lies in $C([0,T];L^p)$: at $t=0$ this is the strong continuity of [F1], and for $t>0$ and $h>0$ the semigroup law and contraction give $\|H_{t+h}f-H_tf\|_p\le\|H_hf-f\|_p$, while for $h<0$ with $t+h\ge0$ they give $\|H_{t+h}f-H_tf\|_p\le\|H_{-h}f-f\|_p$, and both bounds tend to $0$ as $|h|\to0$. [step 3.1, F1, given]
+
+FILE thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). The two limits $D_1^-,D_1^+$ of [[def-limits-of-discrete-series-for-sl2-r]] are irreducible strongly continuous unitary representations of $G=\mathrm{SL}_2(\mathbb R)$, with multiplicity-one K-type chains of weights $-(1+2j)$ and $+(1+2j)$, respectively, and Casimir scalar $-\tfrac18$. They are the orthogonal direct summands of the unitary principal series $I_{1,0}$:
+$$I_{1,0}=D_1^-\oplus D_1^+.$$
+
+LINE 37 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). The two limits $D_1^-,D_1^+$ of [[def-limits-of-discrete-series-for-sl2-r]] are irreducible strongly continuous unitary representations of $G=\mathrm{SL}_2(\mathbb R)$, with multiplicity-one K-type chains of weights $-(1+2j)$ and $+(1+2j)$, respectively, and Casimir scalar $-\tfrac18$. They are the orthogonal direct summands of the unitary principal series $I_{1,0}$:
+$$I_{1,0}=D_1^-\oplus D_1^+.$$
+
+
+LINE 38 
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). The two limits $D_1^-,D_1^+$ of [[def-limits-of-discrete-series-for-sl2-r]] are irreducible strongly continuous unitary representations of $G=\mathrm{SL}_2(\mathbb R)$, with multiplicity-one K-type chains of weights $-(1+2j)$ and $+(1+2j)$, respectively, and Casimir scalar $-\tfrac18$. They are the orthogonal direct summands of the unitary principal series $I_{1,0}$:
+$$I_{1,0}=D_1^-\oplus D_1^+.$$
+
+## Facts & Assumptions
+
+LINE 46 [F1] At $\varepsilon=1,\nu=0$, the compact-picture action $\Pi$ on $H=L^2_1(K)$ is strongly continuous and unitary, and its smooth compact-picture formula is the Iwasawa cocycle ([[thm-compact-picture-of-the-sl2-principal-series]]). Its precise roles here are the ambient unitary action and canonical ANK cocycle used in step 1.1.
+
+[F2] The spaces $D_1^+$ and $D_1^-$ are the closed spans in $H$ of the mutually orthogonal lines $\mathbb C f_{1+2j}$ and $\mathbb C f_{-1-2j}$, respectively; their algebraic spans are dense and their orthogonal direct sum is $H$ ([[def-limits-of-discrete-series-for-sl2-r]]).
+
+[F3] At $\varepsilon=1,\nu=0$, $L_{E_+}f_{-1-2j}=-j f_{-1-2(j-1)}$ and $L_{E_-}f_{-1-2j}=(j+1) f_{-1-2(j+1)}$; on the positive tail, $L_{E_+}f_{1+2j}=(j+1)f_{1+2(j+1)}$ and $L_{E_-}f_{1+2j}=-j f_{1+2(j-1)}$ ([[lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points]](c)). The endpoint Casimir is $-\tfrac18$ there as well.
+
+LINE 62 **Given:** The assumptions and notation in the Statement.
+
+1.1 Put $u_t=\begin{pmatrix}1&t\\0&1\end{pmatrix}$ and $\ell_t=\begin{pmatrix}1&0\\t&1\end{pmatrix}$; their real infinitesimal generators are $N_+$ and $N_-$ from [F5]. If $(b_1,b_2)$ is the bottom row of $k_\theta g$, the Iwasawa cocycle in [F1] gives $\bigl(\Pi(g)f_m\bigr)(k_\theta)=(b_2-i b_1)^m(b_1^2+b_2^2)^{-(m+1)/2}$. For odd $m$, both exponents are integers. When $g=u_t$ or $g=\ell_t$, $b_1,b_2$ are affine in $t$; at $t=0$, $b_1^2+b_2^2=1$ and $b_2-i b_1=e^{i\theta}$. Compactness of $K$ gives a complex neighborhood of $t=0$, uniform in $\theta$, on which these factors are analytic and their denominators stay nonzero. Thus both orbit maps have power series converging uniformly on $K$, hence in $H$, and their Taylor coefficients are $L_{N_+}^k f_m/k!$ or $L_{N_-}^k f_m/k!$. By [F3] and [F5], these coefficients remain in the same algebraic positive or negative tail as $f_m$, so each small-$t$ orbit vector lies in the corresponding closed span $D_1^+$ or $D_1^-$. Unitarity in [F1] extends this inclusion from finite sums to each closure, and the inverse elements give equality. Every $u_t$ and $\ell_t$ is a product of elements with sufficiently small parameter. Moreover, for $s\ne0$, $u_s\ell_{-1/s}u_s=\begin{pmatrix}0&s\\-s^{-1}&0\end{pmatrix}$ and $\begin{pmatrix}0&s\\-s^{-1}&0\end{pmatrix}\begin{pmatrix}0&1\\-1&0\end{pmatrix}^{-1}=\operatorname{diag}(s,s^{-1})$. Hence the two unipotent subgroups generate every determinant-one matrix: if $g=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ has $a\ne0$, then $g=\ell_{c/a}\operatorname{diag}(a,a^{-1})u_{b/a}$; if $a=0$, then $c\ne0$ and $u_1g$ has nonzero upper-left entry. Thus both closed spans are G-invariant. [F1, F2, F3, F5, algebra]
+
+2.1 Let $W$ be a nonzero closed G-invariant subspace of $D_1^+$. Since step 1.1 proves $D_1^+$ is G-invariant, $W$ is K-invariant. Choose $0\ne v\in W$. By [F2], $v$ has an orthogonal expansion in the lines $\mathbb C f_{1+2j}$, so some K-character projection $P_jv$ is nonzero. Its degree-one character integral from [F4] is a norm limit of sums of K-translates of $v$, all in $W$; closedness gives $f_{1+2j}\in W$ for some $j$. For real $X\in\mathfrak g$, the difference quotients $(\Pi(\exp(tX))w-w)/t$ for any smooth $w\in W$ lie in $W$ and converge in norm to $L_Xw$; complex linearity gives stability under $E_\pm$. The K-type vectors are smooth. By [F3], $L_{E_+}$ raises every positive-tail weight with coefficient $j+1\ne0$, while $L_{E_-}$ lowers it with coefficient $-j\ne0$ for $j>0$; the boundary coefficient at $j=0$ is zero. Iteration therefore gives every $f_{1+2k}\in W$. Their span is dense by [F2], so $W=D_1^+$. [F2, F3, F4, A1, step 1.1, algebra]
+
+LINE 64 1.1 Put $u_t=\begin{pmatrix}1&t\\0&1\end{pmatrix}$ and $\ell_t=\begin{pmatrix}1&0\\t&1\end{pmatrix}$; their real infinitesimal generators are $N_+$ and $N_-$ from [F5]. If $(b_1,b_2)$ is the bottom row of $k_\theta g$, the Iwasawa cocycle in [F1] gives $\bigl(\Pi(g)f_m\bigr)(k_\theta)=(b_2-i b_1)^m(b_1^2+b_2^2)^{-(m+1)/2}$. For odd $m$, both exponents are integers. When $g=u_t$ or $g=\ell_t$, $b_1,b_2$ are affine in $t$; at $t=0$, $b_1^2+b_2^2=1$ and $b_2-i b_1=e^{i\theta}$. Compactness of $K$ gives a complex neighborhood of $t=0$, uniform in $\theta$, on which these factors are analytic and their denominators stay nonzero. Thus both orbit maps have power series converging uniformly on $K$, hence in $H$, and their Taylor coefficients are $L_{N_+}^k f_m/k!$ or $L_{N_-}^k f_m/k!$. By [F3] and [F5], these coefficients remain in the same algebraic positive or negative tail as $f_m$, so each small-$t$ orbit vector lies in the corresponding closed span $D_1^+$ or $D_1^-$. Unitarity in [F1] extends this inclusion from finite sums to each closure, and the inverse elements give equality. Every $u_t$ and $\ell_t$ is a product of elements with sufficiently small parameter. Moreover, for $s\ne0$, $u_s\ell_{-1/s}u_s=\begin{pmatrix}0&s\\-s^{-1}&0\end{pmatrix}$ and $\begin{pmatrix}0&s\\-s^{-1}&0\end{pmatrix}\begin{pmatrix}0&1\\-1&0\end{pmatrix}^{-1}=\operatorname{diag}(s,s^{-1})$. Hence the two unipotent subgroups generate every determinant-one matrix: if $g=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ has $a\ne0$, then $g=\ell_{c/a}\operatorname{diag}(a,a^{-1})u_{b/a}$; if $a=0$, then $c\ne0$ and $u_1g$ has nonzero upper-left entry. Thus both closed spans are G-invariant. [F1, F2, F3, F5, algebra]
+
+2.1 Let $W$ be a nonzero closed G-invariant subspace of $D_1^+$. Since step 1.1 proves $D_1^+$ is G-invariant, $W$ is K-invariant. Choose $0\ne v\in W$. By [F2], $v$ has an orthogonal expansion in the lines $\mathbb C f_{1+2j}$, so some K-character projection $P_jv$ is nonzero. Its degree-one character integral from [F4] is a norm limit of sums of K-translates of $v$, all in $W$; closedness gives $f_{1+2j}\in W$ for some $j$. For real $X\in\mathfrak g$, the difference quotients $(\Pi(\exp(tX))w-w)/t$ for any smooth $w\in W$ lie in $W$ and converge in norm to $L_Xw$; complex linearity gives stability under $E_\pm$. The K-type vectors are smooth. By [F3], $L_{E_+}$ raises every positive-tail weight with coefficient $j+1\ne0$, while $L_{E_-}$ lowers it with coefficient $-j\ne0$ for $j>0$; the boundary coefficient at $j=0$ is zero. Iteration therefore gives every $f_{1+2k}\in W$. Their span is dense by [F2], so $W=D_1^+$. [F2, F3, F4, A1, step 1.1, algebra]
+
+3.1 Let $W$ be a nonzero closed G-invariant subspace of $D_1^-$. Choose $0\ne v\in W$. By [F2], its orthogonal expansion in the lines $\mathbb C f_{-1-2j}$ has a nonzero coefficient; the corresponding K-character projection [F4] is a norm limit of K-translates in $W$, so $f_{-1-2j}\in W$ for some $j$. The difference-quotient argument of step 2.1 gives stability under $E_\pm$. If $j>0$, the nonzero coefficient $-j$ in $L_{E_+}f_{-1-2j}$ moves up to the boundary weight $-1$; from there the nonzero coefficients $j+1$ in $L_{E_-}$ generate every lower weight. Thus every $f_{-1-2k}$ lies in $W$, and density [F2] gives $W=D_1^-$. Hence both limits are irreducible. [F2, F3, F4, A1, step 1.1, step 2.1, algebra]
+
+LINE 66 2.1 Let $W$ be a nonzero closed G-invariant subspace of $D_1^+$. Since step 1.1 proves $D_1^+$ is G-invariant, $W$ is K-invariant. Choose $0\ne v\in W$. By [F2], $v$ has an orthogonal expansion in the lines $\mathbb C f_{1+2j}$, so some K-character projection $P_jv$ is nonzero. Its degree-one character integral from [F4] is a norm limit of sums of K-translates of $v$, all in $W$; closedness gives $f_{1+2j}\in W$ for some $j$. For real $X\in\mathfrak g$, the difference quotients $(\Pi(\exp(tX))w-w)/t$ for any smooth $w\in W$ lie in $W$ and converge in norm to $L_Xw$; complex linearity gives stability under $E_\pm$. The K-type vectors are smooth. By [F3], $L_{E_+}$ raises every positive-tail weight with coefficient $j+1\ne0$, while $L_{E_-}$ lowers it with coefficient $-j\ne0$ for $j>0$; the boundary coefficient at $j=0$ is zero. Iteration therefore gives every $f_{1+2k}\in W$. Their span is dense by [F2], so $W=D_1^+$. [F2, F3, F4, A1, step 1.1, algebra]
+
+3.1 Let $W$ be a nonzero closed G-invariant subspace of $D_1^-$. Choose $0\ne v\in W$. By [F2], its orthogonal expansion in the lines $\mathbb C f_{-1-2j}$ has a nonzero coefficient; the corresponding K-character projection [F4] is a norm limit of K-translates in $W$, so $f_{-1-2j}\in W$ for some $j$. The difference-quotient argument of step 2.1 gives stability under $E_\pm$. If $j>0$, the nonzero coefficient $-j$ in $L_{E_+}f_{-1-2j}$ moves up to the boundary weight $-1$; from there the nonzero coefficients $j+1$ in $L_{E_-}$ generate every lower weight. Thus every $f_{-1-2k}$ lies in $W$, and density [F2] gives $W=D_1^-$. Hence both limits are irreducible. [F2, F3, F4, A1, step 1.1, step 2.1, algebra]
+
+4.1 By [F1] and step 1.1, the restrictions to the closed limits are strongly continuous unitary representations. Their orthogonal direct sum is $I_{1,0}$ by [F2]; their K-type multiplicities and weights are [F2], and their Casimir scalar is [F3]. [F1, F2, F3, step 1.1] ∎
+
+FILE thm-unitarity-of-the-sl2-complementary-series
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]) and let $\nu\in\mathbb R$. In spherical parity define
+$$a_0(\nu)=1,\qquad a_{\pm2j}(\nu)=\prod_{l=1}^{j}\frac{2l-1-\nu}{2l-1+\nu}\quad(j\ge1).$$
+For every real $\nu\notin\{-1,-3,-5,\ldots\}$, the Fourier form
+$$B_\nu(f,h)=\sum_{n\in2\mathbb Z}a_n(\nu)\widehat f(n)\overline{\widehat h(n)}$$
+is a finite continuous Hermitian $G$-invariant form on $C^\infty_0(K)$. It agrees with $\langle A(\nu)f,h\rangle_0/c_0(\nu)$ wherever that quotient is defined and with its regular meromorphic continuation at the common scalar poles, including $\nu=0$. The full spherical K-finite module $I^K_{0,\nu}$ admits a positive-definite invariant Hermitian form (in the $(\mathfrak g,K)$ sense) if and only if $|\nu|<1$. For $0<|\nu|<1$, $B_\nu$ is positive definite and its Hilbert completion is the irreducible strongly continuous unitary spherical complementary series; at $\nu=0$, $B_0$ is the usual $L^2$ form and the representation is the spherical unitary principal series. At regular real $\nu$ with $|\nu|>1$, $a_0$ and $a_2$ have opposite signs, so $B_\nu$ is indefinite. At negative odd integers the normalized weights have poles, but the invariant-form recurrence still rules out a positive-definite form on the full K-finite spherical module.
+
+At $\nu=1$, the regular normalized form has $a_0=1$ and every nonzero even weight zero. At $\nu=-1$, the rescaled limit
+$$q_n=\lim_{\nu\to-1^+}(1+\nu)a_n(\nu),\qquad q_0=0,\quad q_{\pm2j}=2j\quad(j\ge1)$$
+is a different nonzero degenerate $G$-invariant form. The $\nu=1$ form detects the trivial quotient; the $\nu=-1$ limiting form has radical $\mathbb C f_0$, the trivial submodule. No signature claim is made for other exceptional rescaled forms.
+
+For odd parity and real $\nu\ne0$, if $B$ is an invariant Hermitian form and $b_n=B(f_n,f_n)$, the recurrence gives $b_1=-b_{-1}$, so no positive-definite invariant form exists on the full odd K-finite module and there is no nonspherical complementary series. At a nonexceptional real $\nu$, every nonzero invariant Hermitian form on that odd module is nondegenerate and indefinite. At positive even $\nu=2m>0$, its tail weights $|n|\ge2m+1$ vanish; at negative even $\nu=-2m<0$, its central weights $|n|\le2m-1$ vanish, so every such form is degenerate at these nonzero exceptional parameters. At odd $\nu=0$, the K-finite module splits into the two unitary limits of discrete series as in [[thm-unitarity-of-the-sl2-unitary-principal-series]].
+
+LINE 62 
+At $\nu=1$, the regular normalized form has $a_0=1$ and every nonzero even weight zero. At $\nu=-1$, the rescaled limit
+$$q_n=\lim_{\nu\to-1^+}(1+\nu)a_n(\nu),\qquad q_0=0,\quad q_{\pm2j}=2j\quad(j\ge1)$$
+is a different nonzero degenerate $G$-invariant form. The $\nu=1$ form detects the trivial quotient; the $\nu=-1$ limiting form has radical $\mathbb C f_0$, the trivial submodule. No signature claim is made for other exceptional rescaled forms.
+
+
+LINE 82 [F6] The real derived action is $L_{E_+}f_n=(1+\nu+n)f_{n+2}/2$ and $L_{E_-}f_n=(1+\nu-n)f_{n-2}/2$. For an invariant Hermitian form on the K-finite module, infinitesimal invariance makes real generators skew-adjoint; since $E_- = \overline{E_+}$, sesquilinearity gives $B(L_{E_+}u,v)=-B(u,L_{E_-}v)$ ([[lem-sl2-raising-and-lowering-formulas-in-the-compact-picture]]).
+
+[F7] At $\nu=0$, the spherical module is irreducible and the odd K-finite module splits into the two chains $M^-_1$ and $M^+_{-1}$; at $\nu=1$ the trivial representation is the finite-dimensional quotient, and at $\nu=-1$ it is the submodule $\mathbb C f_0$ ([[thm-generic-irreducibility-and-the-exceptional-parameter-lattice]]).
+
+[F8] The compact-picture action at imaginary parameter is a strongly continuous unitary representation in the sense of [[def-strongly-continuous-unitary-representation]]; at $\nu=0$ the odd representation is the direct sum of the two unitary limits of discrete series ([[thm-unitarity-of-the-sl2-unitary-principal-series]]).
+
+LINE 120 3.1 At $\nu=1$, the product in step 1.1 has $a_0=1$ and $a_{\pm2j}=0$ for every $j\ge1$. Hence $B_1(f,h)=\widehat f(0)\overline{\widehat h(0)}$. It is a finite nonzero degenerate invariant form by steps 2.1–2.2. Its radical in $C^\infty_0(K)$ is $\{f:\widehat f(0)=0\}$, whose K-finite part is the algebraic span of the nonzero even K-types; the quotient is one-dimensional, and [F7] identifies its K-finite quotient with the trivial module $L_0$. [F2, F7, step 2.2]
+
+3.2 For $-1<\nu\le0$ and $j\ge1$, rewrite $(1+\nu)a_{2j}(\nu)=(1-\nu)\prod_{l=2}^{j}(2l-1-\nu)/(2l-1+\nu)$. Each factor in the product is at most $l/(l-1)$, so $0<(1+\nu)a_{2j}(\nu)\le2j$. The $j=0$ weight $(1+\nu)a_0$ tends to zero, while for $j\ge1$ the product tends to $2j$ as $\nu\to-1^+$. By [F9] and this bound, the rescaled Fourier forms converge on smooth vectors to the finite nonzero form with weights $b_0=0$ and $b_{\pm2j}=2j$. To pass invariance to the rescaled limit, [F12] bounds the Fourier-decay seminorms of $\Pi_\nu(g)f$ and $\Pi_\nu(g)h$ uniformly for $\nu\in[-1,0]$; hence the same summable majorant applies to both sides of the invariance identity. The limit is invariant, its radical is exactly $\mathbb C f_0$, and [F7] identifies that line as the trivial submodule. [F7, F9, F12, step 2.2, algebra]
+
+4.1 Suppose $0<|\nu|<1$. The polynomial bound in step 2.1 and Fourier decay in [F9] give a finite $r$ and $C$ with $\|f\|_{B_\nu}\le C p_r(f)$ for every smooth $f$. The smooth compact action is continuous in each $C^r$ seminorm by [F1, F11], so every smooth vector has a continuous orbit in the $B_\nu$ norm. Invariance makes $\Pi_\nu(g)$ an isometry with inverse $\Pi_\nu(g^{-1})$; it extends to a unitary on the completion, and density plus the isometry bound extends strong continuity to every completed vector. For irreducibility, the completion is the weighted $\ell^2$ completion of the even Fourier modes. If $W$ is a nonzero closed invariant subspace, choose $\xi=\sum_{n\in2\mathbb Z}x_nf_n\ne0$ in $W$ and an $n$ with $x_n\ne0$. For integers $N>|n|$, the finite average $Q_N\xi=N^{-1}\sum_{j=0}^{N-1}e^{-2\pi i n j/N}\Pi_\nu(k_{2\pi j/N})\xi$ lies in $W$ and retains exactly the modes $r\equiv n\pmod N$. As $N\to\infty$, all retained modes other than $n$ lie in the weighted $\ell^2$ tail $|r|\ge N-|n|$, so $Q_N\xi\to x_nf_n$. Hence $f_n\in W$. Smooth difference quotients in the $B_\nu$ norm put both ladder images in $W$; for $|\nu|<1$ all even ladder coefficients are nonzero, so $W$ contains every even K-type. Their finite span is dense by construction of the completion, giving $W$ equal to the full Hilbert space. [F1, F2, F6, F9, step 2.1, step 2.3, algebra] ∎
+
+FILE thm-unitarity-of-the-sl2-unitary-principal-series
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). For every $\varepsilon\in\{0,1\}$ and every $\nu\in i\mathbb R$ the compact-picture action of $G$ on $L^2_\varepsilon(K)$ preserves the $L^2$ inner product and is strongly continuous; hence $I_{\varepsilon,\nu}$ is a strongly continuous unitary representation of $G$ with $K$-types $f_n$, $n\equiv\varepsilon\ (2)$, of multiplicity one. At $\nu=0$ the spherical representation $I_{0,0}$ is irreducible (unitary spherical principal series). In odd parity the $K$-finite core is $I^K_{1,0}\cong M^-_1\oplus M^+_{-1}$, and the Hilbert representation is the orthogonal direct sum of the irreducible unitary completions of these two limit-of-discrete-series modules.
+
+LINE 46 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For every $\varepsilon\in\{0,1\}$ and every $\nu\in i\mathbb R$ the compact-picture action of $G$ on $L^2_\varepsilon(K)$ preserves the $L^2$ inner product and is strongly continuous; hence $I_{\varepsilon,\nu}$ is a strongly continuous unitary representation of $G$ with $K$-types $f_n$, $n\equiv\varepsilon\ (2)$, of multiplicity one. At $\nu=0$ the spherical representation $I_{0,0}$ is irreducible (unitary spherical principal series). In odd parity the $K$-finite core is $I^K_{1,0}\cong M^-_1\oplus M^+_{-1}$, and the Hilbert representation is the orthogonal direct sum of the irreducible unitary completions of these two limit-of-discrete-series modules.
+
+## Facts & Assumptions
+
+LINE 56 [F2] The functions $f_n(k_\theta)=e^{in\theta}$, $n\equiv\varepsilon\pmod2$, are an orthonormal basis of $L^2_\varepsilon(K)$, and their finite spans are exactly the K-finite vectors ([[lem-k-type-decomposition-of-the-sl2-principal-series]]).
+
+[F3] At $\nu=0$, the spherical compact-picture representation is irreducible; in odd parity its K-finite module splits into the positive chain $M^-_1$ with K-types $1,3,5,\ldots$ and the negative chain $M^+_{-1}$ with K-types $-1,-3,-5,\ldots$ ([[thm-generic-irreducibility-and-the-exceptional-parameter-lattice]]).
+
+[F4] In the compact picture at $\nu=0$, $(\Pi_0(g)f)(k_\theta)=|\alpha(p(k_\theta,g))|f(k_{\kappa_g(\theta)})$, where $k_\theta g=a_tn_xk_{\kappa_g(\theta)}$ is the canonical $AN\times K$ factorization ([[def-iwasawa-and-minimal-parabolic-data-for-sl2-r]], [[thm-compact-picture-of-the-sl2-principal-series]]).
+
+LINE 84 3.1 For polynomial $F$, each term of $(\overline b z+\overline a)^{-1}F(\Phi_g(z))$ is a polynomial divided by a positive integer power of $\overline a+\overline b z$. Since $|\overline b/\overline a|<1$, [F5] expands each reciprocal power uniformly on $|z|\le1$ as a series with only nonnegative powers of $z$. Thus $\Pi_0(g)$ maps positive odd Fourier polynomials into $H_+$. The action is unitary by [F1], so approximation by these polynomials and closedness give $\Pi_0(g)H_+\subseteq H_+$; applying the same argument to $g^{-1}$ gives equality. At $\nu=0$ the cocycle and the odd inducing sign are real, so complex conjugation commutes with $\Pi_0(g)$; consequently $H_-$ is also invariant. [F1, F4, F5, step 2.1, step 1.3]
+
+4.1 By [F3], the K-finite parts of $H_+$ and $H_-$ are exactly $M^-_1$ and $M^+_{-1}$. Each is algebraically irreducible by the chain argument in [F3]. If a closed invariant subspace of either summand is nonzero, [F6] puts a nonzero K-finite vector in it; irreducibility then gives the whole corresponding chain, which is dense in that summand. Hence both invariant Hilbert summands are irreducible unitary limits of discrete series, and their orthogonal sum is $I_{1,0}$. [F2, F3, F6, step 1.3, step 3.1] ∎
+
+FILE thm-univariate-trimmed-mean-under-replacement
+
+STATEMENT Assume Countable Choice. Let $X$ be an absolutely continuous real random variable with mean $\mu$ and finite positive variance $\sigma^2=E[(X-\mu)^2]$ ([[def-moments-variance-and-covariance]]). Let $X_1,\ldots,X_N,Y_1,\ldots,Y_N$ be $2N$ iid clean copies of $X$, and let $(\widetilde X_1,\ldots,\widetilde X_N,\widetilde Y_1,\ldots,\widetilde Y_N)$ be a sample-replacement version with at most $\lfloor2\eta N\rfloor$ changed coordinates in total ([[def-adversarial-sample-replacement]]). Let $0\le\eta$, $0<\delta<1$, $\delta\ge e^{-N/4}$, and
+$$
+\varepsilon=8\eta+\frac{12\log(4/\delta)}{N}\in(0,1/4].
+$$
+Apply [[alg-univariate-trimmed-mean]] with these parameters. For the centered variable $Z=X-\mu$, define, for $0<u<1$,
+$$
+Q_u(Z)=\sup\{t\in\mathbb R:P(Z\ge t)\ge1-u\},
+$$
+and, for $0<u\le1$, define
+$$
+E(u,X)=\max\left\{E\bigl[|Z|\mathbf1_{\{Z\le Q_{u/2}(Z)\}}\bigr],\ E\bigl[|Z|\mathbf1_{\{Z\ge Q_{1-u/2}(Z)\}}\bigr]\right\}.
+$$
+Here $E$ is the raw centered-tail functional, distinct from the excess-tail lower-bound functional. The claims are
+$$
+P\!\left(|\widehat\mu-\mu|\le3E(4\varepsilon,X)+2\sigma\sqrt{\frac{\log(4/\delta)}{N}}\right)\ge1-\delta
+$$
+and
+$$
+P\!\left(|\widehat\mu-\mu|\le10\sqrt{\varepsilon}\,\sigma\right)\ge1-4e^{-\varepsilon N/12}.
+$$
+
+LINE 68 1.2 First use inner endpoints $q_{2\varepsilon},q_{1-2\varepsilon}$ and outer endpoints $q_{\varepsilon/2},q_{1-\varepsilon/2}$. Require each of the two inner clean $Y$ tail counts to exceed $N(\varepsilon+2\eta)$ and each outer count to be less than $N(\varepsilon-2\eta)$. Put $a=\eta/t\ge0$. Since $\varepsilon=(8a+12)t$, [F3] for the binomial counts bounds each inner failure by $\exp[-36(a+2)^2\ell/(36a+56)]\le e^{-18\ell/7}$, and each outer failure by $\exp[-(2a+6)^2\ell/((28/3)a+16)]\le e^{-9\ell/4}$. The two rational functions are increasing for $a\ge0$, as direct differentiation shows, so their minima are their values at zero. Thus all four count conditions hold outside probability $4e^{-9\ell/4}\le\delta/2$, since $\ell>\log4$. After $M\le2\eta N$ changes the inner counts are still strictly greater than $\varepsilon N$ and outer counts strictly less than $\varepsilon N$. Integer counts and the ranks $r_-=\lceil\varepsilon N\rceil$, $r_+=N-\lfloor\varepsilon N\rfloor$ therefore give $q_{\varepsilon/2}\le\alpha-\mu\le q_{2\varepsilon}$ and $q_{1-2\varepsilon}\le\beta-\mu\le q_{1-\varepsilon/2}$. For example fewer than $\varepsilon N$ values below an outer lower endpoint means at most $r_--1$ such values, while more than $\varepsilon N$ values above an inner upper endpoint means at least $\lfloor\varepsilon N\rfloor+1$ such values. These strict inequalities cover noninteger ranks and the integral boundary without a rounding loss. [F1, F2, F3, F4, algebra]
+
+2.1 On the count event, monotonicity of clipping endpoints bounds the clean first-half clipped average above by the average of $W^+=\phi_{q_{2\varepsilon},q_{1-\varepsilon/2}}(Z)$ and below by the average of $W^-=\phi_{q_{\varepsilon/2},q_{1-2\varepsilon}}(Z)$. Step 1.1 bounds $EW^+\le2T(4\varepsilon)$ and $EW^-\ge-2T(4\varepsilon)$, their variances by $\sigma^2$, and their interval widths by $2\sqrt2\sigma/\sqrt\varepsilon$. These comparison variables have fixed endpoints, so their deviation events are functions of the clean $X$ half and do not rely on the corrupted cutoffs being independent of it. Apply [F3] at $a=\ell$ separately to the two comparisons. As $t/\varepsilon\le1/12$, each deviation is at most $\sigma\sqrt t[\sqrt2+(4\sqrt2/3)\sqrt{t/\varepsilon}]\le2\sigma\sqrt t$. Their total exceptional probability is $2e^{-\ell}=\delta/2$. [F2, F3, step 1.1, step 1.2, algebra]
+
+3.1 Write $A=q_{\varepsilon/2}$, $B=q_{1-\varepsilon/2}$. Replacing at most $M$ first-half points changes the clipped average by at most $2\eta(B-A)\le(\varepsilon/4)(B-A)$. If $A\le0\le B$, $(\varepsilon/4)(B-A)\le\max\{(\varepsilon/2)|A|,(\varepsilon/2)|B|\}\le T(\varepsilon)$. If both endpoints are positive, use $B-A\le B$ and the same upper-tail bound; if both are negative, use $B-A\le|A|$ and its lower-tail bound. By monotonicity $T(\varepsilon)\le T(4\varepsilon)$. Combining this with step 2.1 and the two exceptional probabilities proves the first displayed bound with its exact constants $3$ and $2$, uniformly over every admissible sample-dependent replacement. [F1, F2, step 1.1, step 1.2, step 2.1, algebra]

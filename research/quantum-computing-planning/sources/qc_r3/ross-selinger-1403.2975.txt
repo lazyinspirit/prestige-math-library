@@ -1,0 +1,5285 @@
+arXiv:1403.2975v3  [quant-ph]  15 Jun 2016
+
+Optimal ancilla-free Clifford+T approximation of z-rotations
+
+Neil J. Ross and Peter Selinger
+
+Department of Mathematics and Statistics
+Dalhousie University
+
+Abstract
+
+We consider the problem of approximating arbitrary single-qubit z-rotations by ancilla-free Clifford+T circuits,
+up to given epsilon. We present a fast new probabilistic algorithm for solving this problem optimally, i.e., for finding
+the shortest possible circuit whatsoever for the given problem instance. The algorithm requires a factoring oracle
+(such as a quantum computer). Even in the absence of a factoring oracle, the algorithm is still near-optimal under
+a mild number-theoretic hypothesis. In this case, the algorithm finds a solution of T -count m + O(log(log(1/ε))),
+where m is the T -count of the second-to-optimal solution. In the typical case, this yields circuit approximations
+of T -count 3 log2(1/ε) + O(log(log(1/ε))). Our algorithm is efficient in practice, and provably efficient under the
+above-mentioned number-theoretic hypothesis, in the sense that its expected runtime is O(polylog(1/ε)).
+
+1
+Introduction
+
+Practical quantum computing requires the fault-tolerant implementation of a universal gate set. The decomposition
+of arbitrary unitary operators into gates from this fixed set is then an important problem. Most of the common
+error correction schemes, including most stabilizer codes and surface codes, permit a relatively inexpensive fault-
+tolerant implementation of gates from the Clifford group. However, since Clifford gates are not universal for quantum
+computation, at least one non-Clifford gate must be added to the basic gate set to achieve universality. A common
+choice for this additional gate is the T -gate or π/8-gate.
+The T -gate is not the only possible extension of the
+Clifford group but it is considered to be the most practical one. This is due to the availability of fault-tolerant
+implementations of the T -gate. For this reason, the Clifford+T gate set is often considered as the most promising
+candidate for practical quantum computing.
+In this paper, we consider the problem of approximating arbitrary single-qubit z-rotations by Clifford+T circuits
+up to given ε. Until about two years ago, the state-of-the-art algorithm for this problem was the Solovay-Kitaev
+algorithm, which yields circuits of size O(logc(1/ε)), where c > 3. At the other end of the spectrum are algorithms
+based on exhaustive search. While such algorithms achieve optimal circuit sizes, they have exponential runtimes.
+For example, the algorithm of [5] is feasible up to ε ≈10−4. Even the improved algorithm of [11], which combines
+search-based and other methods and achieves optimal T -counts, still has exponential runtime which makes it feasible
+only for precisions up to ε ≈10−17.
+Within the last two years, a new generation of efficient number-theoretic algorithms have been proposed for the
+approximate synthesis problem, achieving circuit sizes of O(log(1/ε)) with polynomial runtime. Unlike the Solovay-
+Kitaev algorithm, which is based on a geometric method of successive approximations, these new algorithms are
+based on solving Diophantine equations. The first such algorithm was due to Kliuchnikov, Maslov, and Mosca [9].
+It uses a small number of ancilla qubits to approximate a given single-qubit operator. An improved algorithm was
+given in [14], which uses no ancillas and achieves T -counts of K +4 log2(1/ε) for approximating arbitrary z-rotations.
+This compares to the information-theoretic lower bound of K + 3 log2(1/ε).
+In this paper, we present a fast new probabilistic algorithm for solving the single-qubit approximate synthesis
+problem. Our algorithm is optimal in an absolute sense, i.e., it finds the shortest possible circuit whatsoever for
+any given problem instance. To achieve this optimality, the algorithm requires an oracle for integer factoring. Of
+course, a quantum computer can serve as such an oracle by using Shor’s algorithm [15]. But even in the absence of a
+factoring oracle, our algorithm is still nearly optimal: In this case, under a mild number-theoretic assumption, we can
+prove that the algorithm finds a solution of T -count m + O(log(log(1/ε))), where m is the T -count of the second-to-
+optimal solution. In the typical case, m is given by the information-theoretic lower bound 3 log2(1/ε). Therefore our
+algorithm, in the absence of a factoring oracle, yields circuit approximations of T -count 3 log2(1/ε)+O(log(log(1/ε)))
+in the typical case.
+
+1
+
+
+We note that our algorithm is optimal only for the specific problem of approximating a given z-rotation by a
+linear sequence of single-qubit Clifford+T gates. It is already known that even smaller gate counts and/or circuit
+depths are achievable using additional techniques, such as ancillas, measurements, or state distillation [4, 16, 3, 2].
+In particular, the methods of [3] produce so-called repeat-until-success circuits whose expected T -count is below the
+information theoretic lower bound for deterministic circuits.
+It is likely that in the future, the existence of an efficient approximate synthesis algorithm will be considered an
+essential requirement for any universal gate set proposed for practical quantum computing, of similar importance,
+say, as the existence of a fault-tolerant implementation. Our algorithm is specialized to the Clifford+T gate set
+which is arguably the most relevant gate set to practical quantum computing. However, similar number-theoretic
+methods are also applicable to certain other universal gate sets. For example, Bocharov et al. [1] gave an efficient
+synthesis algorithm for the Clifford+V gate set that achieves gate counts linear in log(1/ε), and Kliuchnikov et al.
+[8] did the same for the ⟨F, T ⟩gate set. One may reasonably expect these gate sets to be amenable to the same kind
+of optimal synthesis that we provide here for the Clifford+T gate set.
+
+2
+Overview
+
+Recall that the single-qubit Clifford group is generated by the Hadamard gate H, the phase gate S, and the scalar
+ω = eiπ/4. By adding the non-Clifford operator T , one obtains a universal gate set for quantum computing.
+
+ω = eiπ/4,
+H =
+1
+√
+
+2
+
+�1
+1
+1 −1
+
+�
+,
+S =
+�1 0
+0 i
+
+�
+,
+T =
+�1
+0
+0 eiπ/4
+
+�
+.
+
+Our goal is to approximate an arbitrary z-rotation
+
+Rz(θ) = e−iθZ/2 =
+�
+e−iθ/2
+0
+0
+eiθ/2
+
+�
+
+by a Clifford+T operator up to given ε > 0. By a result of Kliuchnikov, Maslov, and Mosca [10], a unitary 2 × 2-
+operator can be exactly written as a product of Clifford+T operators if and only if all of its matrix entries belong to
+the ring D[ω] = Z[ 1
+√
+
+2, i]. Our strategy is therefore to approximate Rz(θ) by a unitary operator of the form
+
+U =
+�
+u −t†
+
+t
+u†
+
+�
+,
+
+where u, t ∈D[ω]. This problem can be solved in two stages:
+
+(1) find a suitable candidate u ∈D[ω] that is a good approximation of e−iθ/2;
+
+(2) solve the Diophantine equation u†u + t†t = 1, to ensure that U is unitary.
+
+Problem (2) can be solved by standard number-theoretic methods. In the interest of self-containedness, we summarize
+these methods in Section 6 and Appendix C. In general, solving the Diophantine equation in (2) requires the ability
+to factor large integers. However, if no efficient factoring method is available, then (modulo a mild number-theoretic
+assumption), the Diophantine equation can still be solved with large enough probability to ensure that at most
+O(log(1/ε)) candidates need to be tried.
+The main new technical innovation of this paper is a new and optimal solution to problem (1). It turns out that
+the “suitability” of a candidate u can be expressed as a problem of the form u ∈A and u• ∈B, where A and B
+are fixed convex subsets of the complex plane depending only on θ and ε, and (−)• is the automorphism of the ring
+D[ω] obtained by mapping
+√
+
+2 to −
+√
+
+2. We call such a problem a two-dimensional grid problem. In Sections 4 and
+5, we formulate a general algorithm for solving one- and two-dimensional grid problems efficiently. Our algorithm
+proceeds by transforming the sets A and B using invertible linear operators that preserve solutions to the given
+problem, which we call grid operators. We show that for any two convex sets A and B one can construct a grid
+operator G such that the action of G on A and B normalizes the grid problem in an appropriate sense. The main
+technical ingredient that makes our solution efficient is an iterative process for constructing G, which is detailed in
+Appendix A.
+The rest of this paper is organized as follows. In Section 3, we review some basic notions from algebra. We
+discuss one- and two-dimensional grid problems in Sections 4 and 5, respectively. In Section 6, we show how to solve
+the relevant Diophantine equation. A detailed description of the main synthesis algorithm is given in Section 7. In
+Section 8, we analyze the algorithm’s correctness, optimality, and complexity. Some experimental results are given
+in Section 10. For better readability of the main body of the paper, certain technical results are proved in the
+appendices.
+
+2
+
+
+3
+Some algebra
+
+We introduce some notation and algebraic prerequisites. The set of natural numbers, including 0, is denoted by N,
+the ring of integers is denoted by Z, and we let ω = eiπ/4 = (1 + i)/
+√
+
+2.
+
+Definition 3.1. (Extensions of Z) We are interested in the following rings of algebraic integers:
+
+• Z[
+√
+
+2] = {a + b
+√
+
+2 | a, b ∈Z}, the ring of quadratic integers with radicand 2;
+
+• Z[ω] = {aω3 + bω2 + cω + d | a, b, c, d ∈Z}, the ring of cyclotomic integers of degree 8;
+
+• D = Z[ 1
+
+2] = { a
+
+2k | a ∈Z, k ∈N}, the ring of dyadic fractions;
+
+• D[
+√
+
+2] = Z[ 1
+√
+
+2 ] = {a + b
+√
+
+2 | a, b ∈D}; and
+
+• D[ω] = Z[ 1
+√
+
+2 , i] = {aω3 + bω2 + cω + d | a, b, c, d ∈D}.
+
+We have the inclusions Z ⊆Z[
+√
+
+2] ⊆Z[ω] and D ⊆D[
+√
+
+2] ⊆D[ω]. Moreover, Z ⊆D, Z[
+√
+
+2] ⊆D[
+√
+
+2], and
+Z[ω] ⊆D[ω]. Finally, Z[
+√
+
+2] and Z[ω] are dense in R and C, respectively.
+
+Definition 3.2. (Automorphisms) The following maps are automorphisms of D[ω]:
+
+• Complex conjugation, which we denote (−)†, acts on an arbitrary element of D[ω] or Z[ω] as follows:
+
+(aω3 + bω2 + cω + d)† = −cω3 −bω2 −aω + d.
+
+•
+√
+
+2-conjugation, which we denote (−)•, acts on an arbitrary element of D[ω] or Z[ω] as follows:
+
+(aω3 + bω2 + cω + d)• = −aω3 + bω2 −cω + d
+
+The action of (−)• on an element of D[
+√
+
+2] or Z[
+√
+
+2] is given by (a + b
+√
+
+2)• = a −b
+√
+
+2. In particular, this implies
+that if t = a + b
+√
+
+2 is an element of D[
+√
+
+2] (resp. Z[
+√
+
+2]), then t•t = a2 −2b2 is an element of D (resp. Z).
+
+Remark 3.3. If α and β are two distinct elements of Z[
+√
+
+2], then the following inequality holds:
+
+|α −β| · |α• −β•| ⩾1,
+(1)
+
+This follows from the fact that for t ∈Z[
+√
+
+2], t•t is an integer and t•t = 0 if and only if t = 0.
+
+Definition 3.4. Let t ∈D[ω] and k ∈N. If
+√
+
+2kt ∈Z[ω], then we say that k is a denominator exponent of t. The
+smallest such k ⩾0 is the least denominator exponent of t. For k ∈N, the elements of D[
+√
+
+2] (resp. D[ω]) having k
+as a denominator exponent form a ring, denoted
+1
+√
+
+2k Z[
+√
+
+2] (resp.
+1
+√
+
+2k Z[ω]).
+
+Definition 3.5. We frequently refer to the following elements of Z[
+√
+
+2] and Z[ω]:
+
+• λ = 1 +
+√
+
+2 ∈Z[
+√
+
+2] and
+
+• δ = 1 + ω ∈Z[ω].
+
+Remark 3.6. The element λ is invertible in the ring Z[
+√
+
+2], with inverse λ−1 = −1 +
+√
+
+2 = −λ•. The element δ of
+the ring Z[ω] satisfies δ2 = λω
+√
+
+2 and δ†δ = λ
+√
+
+2.
+
+4
+One-dimensional grid problems
+
+Definition 4.1. Let B be a set of real numbers. The (real) grid for B is the set
+
+grid(B) = {α ∈Z[
+√
+
+2] | α• ∈B}.
+(2)
+
+When B is clear from the context, we refer to the elements of this set as grid points.
+
+In the following, we will only be interested in the case where B is a closed interval [y0, y1] with y0 < y1. In this
+case, the grid is discrete and infinite. It is discrete because the distance between grid points is bounded below by
+(1). And it is infinite by the density of Z[
+√
+
+2]: there are infinitely many points β ∈B ∩Z[
+√
+
+2], and for each of them,
+β• is a grid point.
+
+3
+
+
+(a)
+
+−8
+−7
+−6
+−5
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+
+B
+
+(b)
+
+−8
+−7
+−6
+−5
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+
+B
+
+Figure 1: The real grid for two different intervals B. In both cases, the interval B is shown in green, and grid points
+are shown as black dots.
+
+Example 4.2. Figure 1 illustrates the grids for the intervals [−1, 1] and [−3, 3], respectively. For example, the first
+few non-negative points in grid([−1, 1]) are 0, 1, 1 +
+√
+
+2, 2 +
+√
+
+2, 2 + 2
+√
+
+2, 3 + 2
+√
+
+2, and 4 + 3
+√
+
+2. As one would
+expect, the grid for [−3, 3] is about three times denser than that for [−1, 1]. We also note that B ⊆B′ implies
+grid(B) ⊆grid(B′).
+
+Definition 4.3. Let A and B be sets of real numbers.
+The one-dimensional grid problem for A and B is the
+following:
+One-dimensional grid problem: Find α ∈Z[
+√
+
+2] satisfying α ∈A and α• ∈B.
+(3)
+
+Note that (3) can be equivalently written as α ∈A∩grid(B). In other words, the grid problem is to find points in
+some given set A that belong to the grid for B. We also refer to the conditions α ∈A and α• ∈B as grid constraints.
+In the case where A and B are finite intervals, the grid problem is guaranteed to have a finite number of solutions.
+We recall the following facts from [14]:
+
+Lemma 4.4. Let A = [x0, x1] and B = [y0, y1] be closed real intervals, such that x1 −x0 = δ and y1 −y0 = ∆. If
+δ∆< 1, then the grid problem (3) has at most one solution. If δ∆⩾(1 +
+√
+
+2)2, then the grid problem (3) has at
+least one solution.
+
+Proof. Lemmas 16 and 17 of [14].
+
+Proposition 4.5. There is an algorithm for enumerating all solutions of the one-dimensional grid problem for
+closed intervals A = [x0, x1] and B = [y0, y1]. Moreover, the algorithm is efficient in the sense that it only requires
+a constant number of arithmetic operations per solution produced.
+
+Proof. It was already noted in [14, Lemma 17] that there is an efficient algorithm for computing one solution. To
+see that we can efficiently enumerate all solutions, let δ = x1 −x0 and ∆= y1 −y0 as before. Recall that λ = 1 +
+√
+
+2
+and that λ−1 = −λ•. The grid problem for the sets A and B is equivalent to the grid problem for λ−1A and −λB,
+because α ∈A and α• ∈B hold if and only if λ−1α ∈λ−1A and (λ−1α)• ∈−λB. Using such rescaling, we may
+without loss of generality assume that λ−1 ⩽δ < 1.
+Now consider any solution α = a + b
+√
+
+2 ∈Z[
+√
+
+2]. From α ∈[x0, x1], we know that x0 −b
+√
+
+2 ⩽a ⩽x1 −b
+√
+
+2.
+But since x1 −x0 < 1, it follows that for any b ∈Z, there is at most one a ∈Z yielding a solution. Moreover, we
+note that b = (α −α•)/
+√
+
+23, so that any solution satisfies (x0 −y1)/
+√
+
+23 ⩽b ⩽(x1 −y0)/
+√
+
+23. The algorithm then
+proceeds by enumerating all the integers b in the interval [(x0 −y1)/
+√
+
+23, (x1 −y0)/
+√
+
+23]. For each such b, find the
+unique integer a (if any) in the interval [x0 −b
+√
+
+2, x1 −b
+√
+
+2]. Finally, check if a + b
+√
+
+2 is a solution. The runtime
+is governed by the number of b ∈Z that need to be checked, of which there are at most O(y1 −y0) = O(δ∆). As a
+consequence of Lemma 4.4, the total number of solutions is at least Ω(δ∆), and so the algorithm is efficient.
+
+Remark 4.6. For the purposes of this paper, by an arithmetic operation we mean addition, subtraction, multiplication,
+division, exponentiation, and logarithm.
+
+Remark 4.7. Since the inputs to the algorithm are real intervals, if we were to give a rigorous complexity-theoretic
+account, we should also clarify how these intervals are specified (for example, with rational endpoints, endpoints as
+computable real numbers, etc.). For our purposes, the manner in which an interval A = [x0, x1] is specified as an
+input to the algorithm does not matter very much; it would be sufficient, for example, to assume that we are given
+rational bounds a, b with a < x0 < x1 < b, such that b −a exceeds x1 −x0 by at most a fixed constant factor, as well
+as a procedure for deciding whether any given point of D[
+√
+
+2] is in A or not.
+
+4
+
+
+5
+Two-dimensional grid problems
+
+Recall that Z[ω] is a subset of the complex numbers. In what follows, it is often convenient to identify the complex
+numbers with the Euclidean plane R2, so we will often interchangeably regard Z[ω] as a subset of C and of R2.
+
+Definition 5.1. Let B be a subset of R2. The (complex) grid for B is the set
+
+Grid(B) = {u ∈Z[ω] | u• ∈B}.
+(4)
+
+We will only be interested in the case where B is a bounded convex set with non-empty interior. In this case, the
+grid is discrete and infinite, just as in the one-dimensional case.
+
+Example 5.2. Figure 2 illustrates the complex grids for several different convex sets B. Note that the grid has a
+90-degree symmetry in (a), a 45-degree symmetry in (b), and a 180-degree symmetry in (c).
+
+Definition 5.3. Let A and B be subsets of R2. The two-dimensional grid problem for A and B is the following:
+
+Two-dimensional grid problem: Find u ∈Z[ω] satisfying u ∈A and u• ∈B.
+(5)
+
+As in the one-dimensional case, the grid problem can be understood as looking for points in the intersection of
+the set A and the grid for B. Our goal will be to prove a two-dimensional analogue of Proposition 4.5, namely, that
+there is an efficient algorithm which, given two bounded convex subsets A and B of R2 with non-empty interior,
+enumerates all solutions of the two-dimensional grid problem for A and B.
+However, the proof is more complicated than in the one-dimensional case. We will consider several special cases
+before solving the general problem in Section 5.6.
+
+Remark 5.4. By analogy with Remark 4.7, we should indicate what it means for a bounded convex subset A of R2
+
+to be “given” as the input to an algorithm. Again, the details of this do not matter much. For our purposes, it will
+suffice to assume that a convex set is given along with the following information:
+
+• a convex polygon enclosing A, say with rational vertices, and such that the area of the polygon exceeds that
+of A by at most a fixed constant factor;
+
+• a method to decide, for any given point of D[ω], whether it is in A or not; and
+
+• a method to compute the intersection of A with any straight line in D[ω]. More precisely, given any straight
+line parameterized as L(t) = p + tq, with p, q ∈D[ω], we can effectively determine the interval {t | L(t) ∈A}
+in the sense of Remark 4.7.
+
+5.1
+Upright rectangles
+
+A special case of the two-dimensional grid problem arises when both A and B are upright rectangles, by which we
+mean sets of the form [x0, x1] × [y0, y1]. If A and B are upright rectangles, then the two-dimensional grid problem
+can easily be reduced to the one-dimensional case. We start with a lemma characterizing Z[ω].
+
+Lemma 5.5. A complex number u is in Z[ω] if and only it can be written of the form u = α + βi or of the form
+u = α + βi + ω, where α, β ∈Z[
+√
+
+2].
+
+Proof. The right-to-left implication is trivial. For the left-to-right implication, let u = aω3 + bω2 + cω + d, where
+a, b, c, d ∈Z. Noting that ω = 1+i
+√
+
+2 , we have
+
+u = (d + c −a
+
+2
+
+√
+
+2) + (b + c + a
+
+2
+
+√
+
+2)i.
+
+If c −a (and therefore c + a) is even, then u is of the first form, with α = d + c−a
+
+2
+√
+
+2 and β = b + c+a
+
+2
+√
+
+2. If c −a
+(and therefore c + a) is odd, then u is of the second form, with α = d + c−a−1
+
+2
+√
+
+2 and β = b + c+a−1
+
+2
+√
+
+2.
+
+Lemma 5.6. There is an algorithm which, given a pair of upright rectangles A and B, enumerates all solutions of the
+two-dimensional grid problem for A and B. Moreover, the algorithm requires only a constant number of arithmetic
+operations per solution produced.
+
+5
+
+
+(a)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+B
+
+(b)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+B
+
+(c)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+B
+
+Figure 2: The complex grid for three different convex sets B. In each case, the set B is shown in green, and grid points
+are shown as black dots. (a) B = [−1, 1]2. (b) B = {(x, y) | x2 + y2 ⩽2}. (c) B = {(x, y) | 6x2 + 16xy + 11y2 ⩽2}.
+
+6
+
+
+Proof. By assumption, A = Ax × Ay and B = Bx × By, where Ax, Ay, Bx, and By are closed intervals.
+By
+Lemma 5.5, any potential solution is of the form u = α+βi or u = α+βi+ω, where α, β ∈Z[
+√
+
+2]. When u = α+βi,
+then u• = α• + β•i. Therefore, the two-dimensional grid constraints u ∈A and u• ∈B are equivalent to the
+one-dimensional constraints α ∈Ax, α• ∈Bx and β ∈Ay, β• ∈By. On the other hand, when u = α + βi + ω,
+let v = u −ω = α + βi. Then v• = u• + ω, and the constraints u ∈A and u• ∈B are equivalent to v ∈A −ω
+and v• ∈B + ω, which reduces to the one-dimensional constraints α ∈Ax −
+1
+√
+
+2, α• ∈Bx +
+1
+√
+
+2 and β ∈Ay −
+1
+√
+
+2,
+β• ∈By +
+1
+√
+
+2. In both cases, the solutions to the one-dimensional constraints can be efficiently enumerated by
+Proposition 4.5.
+
+5.2
+Upright sets
+
+We can generalize the method of Section 5.1 to convex sets that are close to upright rectangles in a suitable sense.
+
+Definition 5.7. Let A be a bounded convex subset of R2. The bounding box of A, denoted BBox(A), is the smallest
+set of the form [x0, x1] × [y0, y1] that contains A. The uprightness of A, denoted up(A), is defined to be the ratio of
+the area of A to the area of its bounding box:
+
+up(A) =
+area(A)
+area(BBox(A)).
+(6)
+
+Therefore, the uprightness is a real number between 0 and 1. We say that A is M-upright if up(A) ⩾M.
+
+Lemma 5.8. There exists an algorithm which, given a pair A, B of convex M-upright sets, enumerates all solutions
+of the two-dimensional grid problem for A and B. Moreover, the algorithm requires O(1/M 2) arithmetic operations
+per solution produced. In particular, when M > 0 is fixed, it requires only a constant number of operations per
+solution.
+
+Proof. By Lemma 5.6, we can efficiently enumerate the solutions of the grid problem for BBox(A) and BBox(B).
+Moreover, as shown in the proof of Lemma 5.6, the solutions are arranged in rows and columns. For each such
+candidate solution u, we only need to check whether u is also a solution for A and B. To establish the efficiency of
+the algorithm, we need to ensure that the total number of solutions is not too small in relation to the total number of
+candidates produced. To see this, note that, with the exception of trivial cases, when the number of rows or columns
+is very small, M-uprightness and convexity ensure that the proportion of candidates u that are solutions for A and
+B is approximately M 2 : 1. Therefore, the runtime per solution differs from that of Lemma 5.6 by at most a factor
+of O(1/M 2).
+
+Example 5.9. Figure 3 shows three different examples of grid problems.
+Each example uses the same set B =
+[−1, 1] × [−1, 1], shown in green. The grid for B is shown as black dots. The sets Ai are shown in red, for i = 1, 2, 3,
+and their bounding boxes are shown in outline. The typical case of an upright set is A1. Here, a fixed proportion
+of grid points from the bounding box of A1 are elements of A1. The exceptional case of an upright set is A2. Its
+bounding box spans only two columns of the grid. Therefore, although the bounding box contains many grid points,
+A2 does not. However, this case is easily dealt with, by solving a one-dimensional grid problem for each of the grid
+columns separately. Finally, the set A3 is not upright. In this case, Lemma 5.8 is not helpful, and a priori, it could
+be a difficult problem to find grid points in A3.
+
+5.3
+Grid operators
+
+The method of Section 5.2 can be further generalized by using certain linear transformations to turn non-upright
+sets into upright sets. The linear transformations that are useful for this purpose are special grid operators:
+
+Definition 5.10. As before, we regard Z[ω] as a subset of R2. A real linear operator G : R2 →R2 is called a grid
+operator if G(Z[ω]) ⊆Z[ω]. Moreover, a grid operator G is called special if it has determinant ±1.
+
+Grid operators are characterized by the following lemma.
+
+Lemma 5.11. Let G : R2 →R2 be a linear operator, which we can identify with a real 2×2-matrix with real entries.
+Then G is a grid operator if and only if it is of the form
+
+G =
+
+�
+a + a′
+
+√
+
+2
+b + b′
+
+√
+
+2
+c + c′
+
+√
+
+2
+d + d′
+
+√
+
+2
+
+�
+
+,
+(7)
+
+where a, b, c, d, a′, b′, c′, d′ are integers satisfying a + b + c + d ≡0 (mod 2) and a′ ≡b′ ≡c′ ≡d′ (mod 2).
+
+7
+
+
+B
+
+A1
+A2
+
+A3
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+Figure 3: Grid problems for upright and non-upright sets
+
+Proof. By Lemma 5.5, we know that a vector u ∈R2 is in Z[ω] if and only if it can be written of the form
+
+u =
+
+�
+x1 + x2
+√
+
+2
+y1 + y2
+√
+
+2
+
+�
+
+,
+(8)
+
+where x1, x2, y1, y2 are integers and x2 ≡y2 (mod 2).
+A simple computation then shows that every operator of
+the form (7) is a grid operator. For the converse, consider an arbitrary grid operator G. We prove the claim by
+applying G to the three particular points [ 1
+0 ], [ 0
+1 ], and
+1
+√
+
+2[ 1
+1 ] ∈Z[ω]. From G[ 1
+0 ] ∈Z[ω] and G[ 0
+1 ] ∈Z[ω], it follows
+that the columns of G are of the form (8), so that G is of the form (7), with integers a, b, c, d, a′, b′, c′, d′ satisfying
+a′ ≡c′ (mod 2) and b′ ≡d′ (mod 2). Moreover, we have
+
+G
+�
+1/
+√
+
+2
+1/
+√
+
+2
+
+�
+=
+
+�a′+b′
+
+2
++ a+b
+√
+
+2
+c′+d′
+
+2
++ c+d
+√
+
+2
+
+�
+
+∈Z[ω],
+
+which implies a+ b ≡c+ d (mod 2) and a′ + b′ ≡c′ + d′ ≡0 (mod 2). Together, these conditions imply a+ b+ c+ d ≡
+0 (mod 2) and a′ ≡b′ ≡c′ ≡d′ (mod 2), as claimed.
+
+Remark 5.12. The composition of two (special) grid operators is again a (special) grid operator. If G is a special
+grid operator, then G is invertible and G−1 is a special grid operator. If G is a (special) grid operator, then G• is a
+(special) grid operator, defined by applying (−)• separately to each matrix entry, and satisfying G•u• = (Gu)•.
+
+The interest of special grid operators lies in the following fact:
+
+Proposition 5.13. Let G be a special grid operator, and let A and B be subsets of R2. Define
+
+G(A) = {Gu | u ∈A},
+G•(B) = {G•u | u ∈B}.
+
+Then u ∈Z[ω] is a solution to the two-dimensional grid problem for A and B if and only if Gu is a solution to the
+two-dimensional grid problem for G(A) and G•(B). In particular, the two-dimensional grid problem for A and B is
+computationally equivalent to that for G(A) and G•(B).
+
+Proof. Let u ∈Z[ω]. Then u is a solution to the grid problem for A and B if and only if u ∈A and u• ∈B, if and
+only if Gu ∈G(A) and G•u• = (Gu)• ∈G•(B), if and only if Gu is a solution to the grid problem for G(A) and
+G•(B).
+
+8
+
+
+(a)
+
+A
+
+B
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+(b)
+
+G(A)
+
+G•(B)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+Figure 4: (a) The grid problem for two sets A and B. (b) The grid problem with G(A) and G•(B). Note that the
+solutions of (a), which are the grid points in the set A, are in one-to-one correspondence with the solutions of (b),
+which are the grid points in the set G(A).
+
+Example 5.14. Figure 4(a) illustrates the grid problem for a pair of sets A and B. As before, the set B is shown in
+green, and Grid(B) is shown as black dots. The set A is shown in red, and the solutions to the grid problem are the
+seven grid points that lie in A. Figure 4(b) shows the grid problem for the sets G(A) and G•(B), where G is the
+special grid operator
+
+G =
+�
+1
+√
+
+2
+0
+1
+
+�
+.
+
+Note that, as predicted by Proposition 5.13, the solutions of the transformed grid problem are in one-to-one corre-
+spondence with those of the original problem; namely, in each case, there are seven solutions.
+
+5.4
+Ellipses
+
+Combining the results of Sections 5.2 and 5.3, we know that the grid problem for convex sets A and B can be solved
+efficiently, provided that we can find a grid operator G such that G(A) and G•(B) are sufficiently upright. Our key
+technical result is that in case A and B are ellipses, this is always the case.
+
+Definition 5.15. Let D be a positive definite real 2 × 2-matrix with non-zero determinant, and let p ∈R2 be a
+point. The ellipse defined by D and centered at p is the set
+
+E = {u ∈R2 | (u −p)†D(u −p) ⩽1}.
+
+Theorem 5.16. Suppose A, B ⊆R2 are ellipses. Then there exists a grid operator G such that G(A) and G•(B)
+are 1/6-upright. Moreover, if A and B are M-upright, then G can be efficiently computed in O(log(1/M)) arithmetic
+operations.
+
+Since the proof is long and technical, we give it in Appendix A.
+
+5.5
+The enclosing ellipse of a bounded convex set
+
+Our final step in the solution of the two-dimensional grid problem is to generalize Theorem 5.16 from ellipses to
+arbitrary bounded convex sets with non-empty interior. This can be done because every such set A can be inscribed
+in an ellipse whose area is not much greater than that of A, as stated in the following proposition.
+
+9
+
+
+Proposition 5.17. Let A be a bounded convex subset of R2 with non-empty interior. Then there exists an ellipse E
+such that A ⊆E, and such that
+
+area(E) ⩽4π
+
+3
+√
+
+3 area(A).
+
+The proof is in Appendix B. Note that
+4π
+3
+√
+
+3 ≈2.4184. We remark that the bound in Proposition 5.17 is sharp;
+the bound is attained in case A is an equilateral triangle. In this case, the enclosing ellipse is a circle, and the ratio
+of the areas is exactly
+4π
+3
+√
+
+3.
+
+5.6
+General solution of the two-dimensional grid problem
+
+We are finally in a position to solve the two-dimensional grid problem for arbitrary bounded convex sets of non-empty
+interior.
+
+Theorem 5.18. There is an algorithm which, given two bounded convex subset A and B of R2 with non-empty
+interior, enumerates all solutions of the two-dimensional grid problem for A and B. Moreover, if A and B are M-
+upright, then the algorithm requires O(log(1/M)) arithmetic operations overall, plus a constant number of arithmetic
+operations per solution produced.
+
+Proof. Given two such sets A and B, we can first find ellipses A′ and B′ containing A and B, respectively, and
+whose areas exceed those of A and B by at most a fixed constant factor N. Such ellipses exist by Proposition 5.17;
+moreover, it is not hard to see that they can be found efficiently if A and B are polygons with rational vertices. Since
+we assume that each given convex set is equipped with such an enclosing rational polygon (Remark 5.4), A′ and B′
+
+can be found efficiently for arbitrary given A and B.
+Next, by Theorem 5.16, we can use O(log(1/M)) arithmetic operations to find a grid operator G such that G(A′)
+and G•(B′) are 1/6-upright. It follows that G(A) and G•(B) are N/6-upright. By Lemma 5.8, we can efficiently
+enumerate all solutions u of the grid problem for G(A) and G•(B). By Proposition 5.13, G−1u then enumerates the
+solutions to the grid problem for A and B.
+
+Remark 5.19. Note that the complexity of O(log(1/M)) overall operations in Theorem 5.18 is exponentially better
+than the complexity of O(1/M 2) per candidate we obtained in Lemma 5.8. This improvement is entirely due to the
+use of grid operators in Theorem 5.16.
+
+5.7
+Scaled grid problems
+
+Sometimes we want to find solutions to a grid problem where the points are taken in D[ω] instead of Z[ω]. There are
+two variants of this problem: we may either enumerate the solutions for a fixed denominator exponent, or enumerate
+all solutions in order of increasing least denominator exponent.
+
+Definition 5.20. Let A and B be subsets of R2. The two-dimensional scaled grid problem for fixed k ⩾0 is to find
+u ∈
+1
+√
+
+2k Z[ω] satisfying u ∈A and u• ∈B. The two-dimensional scaled grid problem for arbitrary k ⩾0 is to find
+u ∈D[ω] satisfying u ∈A and u• ∈B.
+
+Proposition 5.21. There is an algorithm which, given two bounded convex subsets A and B of R2 with non-empty
+interior and an integer k ⩾0, enumerates all solutions of the two-dimensional scaled grid problem for A, B, and k.
+Moreover, if A and B are M-upright, then the algorithm requires O(log(1/M)) arithmetic operations overall, plus a
+constant number of arithmetic operations per solution produced.
+
+Proof. Note that u =
+1
+√
+
+2k v is a solution to the scaled grid problem for A, B, and k if and only if v is a solution to the
+
+(unscaled) grid problem for
+√
+
+2kA and (−
+√
+
+2)kB. The claim then immediately follows from Proposition 5.18.
+
+Proposition 5.22. There is an algorithm which, given two bounded convex subsets A and B of R2 with non-empty
+interior, enumerates (the infinite sequence of) all solutions u of the two-dimensional scaled grid problem for A, B,
+and arbitrary k ⩾0, in order of increasing k. Moreover, if A and B are M-upright, then the algorithm requires
+O(log(1/M)) arithmetic operations overall, plus a constant number of arithmetic operations per solution produced.
+
+10
+
+
+Proof. This can be done by applying Lemma 5.21 to each k = 0, 1, 2, . . ., in increasing order. In principle, this
+method enumerates each solution multiple times, since each solution for k is also a solution for k + 1. As a slight
+optimization, such duplicate enumeration can be avoided by noting that for k > 0, u =
+1
+√
+
+2k (aω3 + bω2 + cω + d)
+
+is an element of Z[ω]/
+√
+
+2k −Z[ω]/
+√
+
+2 k−1 if and only if a −c or b −d (or both) are odd. Finally, we note that,
+because uprightness is invariant under scaling, the grid operator G in the proof of Proposition 5.18 only needs to be
+computed once, rather than once for every k.
+
+We end this section with some lower bounds on the number of solutions to two-dimensional scaled grid problems.
+
+Lemma 5.23. Let A and B be convex subsets of R2, and let k ⩾0. Assume A contains a circle of radius r and B
+contains a circle of radius R, such that rR ⩾
+1
+2k (1+
+√
+
+2)2. Then the scaled grid problem for k has at least 2 solutions.
+
+Proof. By scaling the problem by a factor of
+√
+
+2k, we can assume without loss of generality that k = 0. Let δ = r/
+√
+
+2
+and ∆= R
+√
+
+2, and inscribe two squares of size δ × δ in the first circle, and one square of size ∆× ∆in the second
+circle, as shown here:
+
+δ
+δ
+
+x0
+x1 x2
+x3
+α
+α′
+
+y0
+
+y1
+
+β
+•
+•
+
+∆
+
+z0
+z1
+
+w0
+
+w1
+
+•
+
+α•
+
+•
+
+α′•
+
+β•
+
+Since δ∆= rR ⩾(1 +
+√
+
+2)2, by Lemma 4.4, we can find α, α′, β ∈Z[
+√
+
+2] such that α ∈[x0, x1], α• ∈[z0, z1],
+α′ ∈[x2, x3], α′• ∈[z0, z1], β ∈[y0, y1], and β• ∈[w0, w1]. Then u = α + iβ and v = α′ + iβ are two different
+solutions to the two-dimensional grid problem as claimed.
+
+Lemma 5.24. Let A and B be convex subsets of R2, and assume that the two-dimensional scaled grid problem for k
+has at least two distinct solutions. Then for all ℓ⩾0, the scaled grid problem for k + 2ℓhas at least 2ℓ+ 1 solutions.
+
+Proof. Let u ̸= v be solutions of the scaled grid problem for k. For each j = 0, 1, . . . , 2ℓ, let φ =
+j
+2ℓ, and consider
+uj = φu+(1−φ)v. Then uj has denominator exponent k+2ℓ. Also, uj is a convex combination of u and v; moreover,
+since φ• = φ, we also know that u•
+j = φu• + (1 −φ)v• is a convex combination of u• and v•. Since A and B are
+convex, it follows that uj is a solution of the scaled grid problem for k + 2ℓ, yielding 2ℓ+ 1 distinct solutions.
+
+Remark 5.25. The bound in Lemma 5.24 is sufficient for our purposes, but it is not tight. In fact, the number of
+solutions grows as O(4k).
+
+6
+Solving a Diophantine equation
+
+We will be interested in solving equations of the following form: given ξ ∈D[
+√
+
+2], find t ∈D[ω] such that
+
+t†t = ξ.
+(9)
+
+The following necessary condition is immediate:
+
+Lemma 6.1 (Necessary condition). The equation (9) has a solution only if ξ ⩾0 and ξ• ⩾0.
+
+Proof. Assume t†t = ξ. Since t is a complex number, we have ξ = t†t ⩾0. Similarly, since t• is a complex number,
+we have ξ• = (t•)†(t•) ⩾0.
+
+The following theorem states that the problem of solving the equation (9) can be reduced to the prime factorization
+problem for integers.
+
+Theorem 6.2. Let ξ ∈D[
+√
+
+2]. Note that ξ•ξ ∈D, so we can write ξ•ξ = n
+
+2ℓfor some n ∈Z and ℓ∈N. There exists
+a probabilistic algorithm which, given ξ and, in case n ̸= 0, a prime factorization of n, determines whether or not
+the equation (9) has a solution, and finds a solution if there is one. Moreover, the expected runtime of this algorithm
+is polynomial in the size of n.
+
+Theorem 6.2 is a well-known result in computational algebraic number theory. For the benefit readers who are
+not experts in number theory, we give an elementary and more or less self-contained proof in Appendix C.
+
+11
+
+
+7
+The approximate synthesis algorithm
+
+7.1
+The approximate synthesis problem
+
+Recall that the z-rotation by angle θ is the unitary operator
+
+Rz(θ) = e−iθZ/2 =
+�
+e−iθ/2
+0
+0
+eiθ/2
+
+�
+.
+
+Definition 7.1. Given θ and a precision ε > 0, the approximate synthesis problem for z-rotations is to find an
+operator U expressible in the single-qubit Clifford+T gate set, such that
+
+∥Rz(θ) −U∥⩽ε.
+(10)
+
+Moreover, we want the T -count of the operator U to be as small as possible; here, the T -count of a Clifford+T circuit
+is the number of T -gates appearing in it. The norm in (10) is the operator norm.
+
+It is known from [10] that a single-qubit operator can be exactly represented over the Clifford+T gate set if and
+only if it can be written of the form
+
+U =
+�
+u −t†ωℓ
+t
+u†ωℓ
+
+�
+,
+(11)
+
+where u, t ∈D[ω] and ℓis an integer. The following lemma shows that, for the purposes of approximate synthesis,
+we may assume without loss of generality that ℓ= 0.
+
+Lemma 7.2. If ε < |1 −eiπ/8|, then all solutions of the approximate synthesis problem have the form
+
+U =
+�
+u −t†
+t
+u†
+
+�
+.
+(12)
+
+If ε ⩾|1 −eiπ/8|, then there exists a solution of T -count 0 (i.e., a Clifford operator), and it is also of the form (12).
+
+Proof. To prove the first claim, assume ε < |1 −eiπ/8|. Let U be of the form (11), satisfying (10). Let eiφ1 and
+eiφ2 be the eigenvalues of URz(θ)−1, with φ1, φ2 ∈[−π, π]. Using (10), we have ∥I −URz(θ)−1∥⩽ε < |1 −eiπ/8|.
+On the other hand, ∥I −URz(θ)−1∥= max{|1 −eiφ1|, |1 −eiφ2|}.
+It follows that |1 −eiφj| < |1 −eiπ/8| for
+j = 1, 2, hence −π/8 < φj < π/8, hence −π/4 < φ1 + φ2 < π/4, so |1 −ei(φ1+φ2)| < |1 −eiπ/4| = |1 −ω|. On
+other hand, we have ei(φ1+φ2) = det(URz(θ)−1) = ωℓ, hence |1 −ωℓ| < |1 −ω|, which implies ωℓ= 1. Therefore,
+U is of the form (12).
+To prove the second claim, assume ε ⩾|1 −eiπ/8|.
+Let j be the integer closest to
+2θ
+
+π ,
+so that |j −2θ
+
+π | ⩽
+1
+2, or equivalently, |j π
+
+4 −θ
+
+2| ⩽
+π
+8 .
+Let U be as in (12), with u = ω−j and t = 0.
+Then
+∥Rz(θ) −U∥= |eiθ/2 −u†| = |1 −u†e−iθ/2| = |1 −ei(j π
+
+4 −θ
+
+2 )| ⩽|1 −ei π
+
+8 | ⩽ε. So (10) holds. But U = Sjω−j is a
+Clifford operator, so has T -count 0.
+
+Our strategy is therefore to approximate Rz(θ) by an operator U of the form (12), with u, t ∈D[ω], and then use
+the exact synthesis algorithm of [10] to synthesize U into a sequence of Clifford+T gates with minimal T -count. The
+following lemma relates the T -count of the resulting circuit to the least denominator exponent k of u.
+
+Lemma 7.3. Let U be a unitary operator as in (12), where u, t ∈D[ω], and let k be the least denominator exponent
+of u. Then the T -count of U is either 2k −2 or 2k. Moreover, if k > 0 and U has T -count 2k, then U ′ = T UT †
+
+has T -count 2k −2. We further note that ∥Rz(θ) −U ′∥= ∥Rz(θ) −U∥, so for the purpose of solving (10), it does
+not matter whether U or U ′ is used. Hence, without loss of generality, we may assume that U as in (12) always has
+T -count exactly 2k −2 when k > 0, and 0 when k = 0.
+
+Proof. Because U is unitary, we have t†t + u†u = 1. We first claim that t and u have the same least denominator
+exponent. Indeed, in the ring Z[ω], an element s is divisible by
+√
+
+2 if and only if s†s is divisible by 2. The left-to-right
+implication is obvious, and the right-to-left implication follows, e.g., from Lemma 2 of [6]. Then for any k ⩾0, we
+have
+√
+
+2ku ∈Z[ω] iff 2ku†u ∈Z[ω] iff 2k(1 −t†t) ∈Z[ω] iff 2kt†t ∈Z[ω] iff
+√
+
+2kt ∈Z[ω]. This proves that u and t
+have the same denominator exponents, and in particular, the same least denominator exponent.
+The claims about the T -counts of U and U ′ follow by inspection of Figure 2 of [7]. Using the terminology of
+Definitions 7.4 and 7.6 of [7], this figure shows every possible k-residue of a Clifford+T operator, modulo a right
+action of the group ⟨S, X, ω⟩. Because U is of the form (12), only a subset of the k-residues is actually possible, and
+the figure shows that for this subset, the T -count is 2k or 2k −2. Moreover, in each of the possible cases where k > 0
+and U has T -count 2k, the figure also shows that U ′ = T UT † has T -count 2k −2.
+For the final claim, we have ∥Rz(θ)−U∥= ∥T Rz(θ)T †−T UT †∥= ∥Rz(θ)−U ′∥because Rz(θ) and T commute.
+
+12
+
+
+So our task is to find an operator U of the form (12), satisfying (10), and such that the denominator exponent of
+u is as small as possible. It is useful to first re-express (10) as a property of u. Let z = e−iθ/2. Using u†u + t†t = 1
+and z†z = 1, we have
+
+∥Rz(θ) −U∥2 = ∥u −z∥2 + ∥t∥2 = (u −z)†(u −z) + t†t = u†u + t†t −z†u −u†z + z†z = 2 −2 Re(z†u).
+
+So (10) is equivalent to 2 −2 Re(z†u) ⩽ε2, or equivalently, Re(z†u) ⩾1 −ε2
+
+2 . If we identify the complex numbers
+z = x + yi and u = a + bi with 2-dimensional real vectors ⃗z = (x, y)T and ⃗u = (a, b)T , then Re(z†u) is just their
+inner product ⃗z · ⃗u, and therefore (10) is equivalent to
+
+⃗z · ⃗u ⩾1 −ε2
+
+2 .
+(13)
+
+In summary, the approximate synthesis problem reduces to the following:
+
+Problem 7.4. Given an angle θ and a precision ε > 0, find u, t ∈D[ω] such that
+
+(a) t†t + u†u = 1,
+
+(b) ⃗z · ⃗u ⩾1 −ε2/2, where z = e−iθ/2, with notation as above,
+
+(c) and such that u has the smallest denominator exponent we can find.
+
+7.2
+Reduction to a grid problem and a Diophantine equation
+
+As we will now show, Problem 7.4 can be reduced to a scaled grid problem and a Diophantine equation, and therefore
+it can be efficiently solved by the methods of Sections 5 and 6. Let D be the closed unit disk, regarded either as a
+subset of C or of R2.
+
+Lemma 7.5. If u, t ∈D[ω] and t†t + u†u = 1, then u ∈D and u• ∈D.
+
+Proof. Note that u†u = 1 −t†t ⩽1, so u ∈D. Similarly, (u•)†(u•) = 1 −(t•)†(t•) ⩽1, so u• ∈D.
+
+The condition ⃗z · ⃗u ⩾1 −ε2/2 from Problem 7.4(b) defines a certain subset of the unit disk, which we call the
+ε-region for θ:
+
+Rε = {⃗u ∈D | ⃗u · ⃗z ⩾1 −ε2
+
+2 }.
+
+D
+
+i
+
+1
+
+⃗z
+
+ε2
+
+2
+
+Rε
+
+θ
+2
+(14)
+
+By Lemma 7.5 and Problem 7.4(b), a necessary condition for a solution to Problem 7.4 is that u ∈Rε and u• ∈D.
+This is an instance of a scaled two-dimensional grid problem; note that both the ε-region and the unit disk are
+convex, and are effectively given in the sense of Remark 5.4. Therefore, by Proposition 5.22, there exists an efficient
+algorithm that enumerates all such u in increasing order of least denominator exponent.
+For each u ∈D[ω] satisfying the grid problem, it remains to check whether the equation t†t + u†u = 1 has a
+solution t ∈D[ω]. This is equivalent to solving the Diophantine equation
+
+t†t = 1 −u†u,
+
+which is of the form (9). Let ξ = 1 −u†u ∈D[
+√
+
+2], and write ξ•ξ =
+n
+2ℓ, where n ∈Z and ℓ∈N. By Theorem 6.2,
+there is an efficient algorithm that can solve this equation (or determine that no solution exists), given a prime
+factorization of n.
+
+13
+
+
+7.3
+The main algorithm
+
+Putting together the results of Sections 7.1 and 7.2, we obtain the following algorithm for solving the approximate
+synthesis problem:
+
+Algorithm 7.6. Given θ and ε, let A = Rε be the ε-region, and let B = D be the unit disk.
+
+1. Use Proposition 5.22 to enumerate the infinite sequence of solutions to the scaled grid problem u ∈A and
+u• ∈B, where u ∈D[ω], in the order of increasing least denominator exponent k.
+
+2. For each such solution u:
+
+(a) Let ξ = 1 −u†u ∈D[
+√
+
+2], and write ξ•ξ = n
+
+2ℓ, where n ∈Z and ℓ⩾0 is minimal.
+
+(b) Attempt to find a prime factorization of n. If n ̸= 0 but no prime factorization is found, skip step 2(c)
+and continue with the next u.
+
+(c) Use the algorithm of Theorem 6.2 to solve the equation t†t = ξ. If a solution t exists, go to step 3;
+otherwise, continue with the next u.
+
+3. Define U as in equation (12), let U ′ = T UT †, and use the exact synthesis algorithm of [10] to find a Clifford+T
+circuit implementing either U or U ′, whichever has smaller T -count. Output this circuit and stop.
+
+8
+Analysis of the algorithm
+
+8.1
+Correctness
+
+Proposition 8.1 (Correctness). If Algorithm 7.6 terminates, then it yields a valid solution to the approximate
+synthesis problem, i.e., it yields a Clifford+T circuit approximating Rz(θ) up to ε.
+
+Proof. By construction. By steps 2(a) and 2(c) of the algorithm, we have t†t + u†u = 1, so U is unitary. By step 1
+of the algorithm, u belongs to the ε-region, so (13) holds. This implies that U satisfies (10). Moreover, as noted in
+Lemma 7.3, U ′ also satisfies (10), so whichever of these operators is returned approximates Rz(θ) up to ε.
+
+8.2
+Optimality
+
+The optimality of the algorithm hinges on step 2(b), “attempt to find a prime factorization of n”. In the presence of
+a factoring oracle (such as a quantum computer), this can always be done. In this case, Algorithm 7.6 is guaranteed
+to find an optimal solution to the approximate synthesis problem. In the absence of a factoring oracle, we must
+potentially discard some candidate solutions u, until we find one for which n can be factored. We analyze these two
+situations in Propositions 8.2 and 8.8.
+
+Proposition 8.2 (Optimality in the presence of a factoring oracle). In the presence of an oracle for integer factoring,
+the circuit returned by Algorithm 7.6 has the smallest T -count of any single-qubit Clifford+T circuit approximating
+Rz(θ) up to ε.
+
+Proof. By construction, step 1 of the algorithm enumerates all solutions u of the scaled grid problem in order of
+increasing denominator exponent k. Step 2(a) always succeeds, and step 2(b) always succeeds by using the factoring
+oracle. By Theorem 6.2, step 2(c) succeeds if and only if the equation t†t + u†u = 1 has a solution. Therefore, when
+step 2(c) succeeds, the algorithm has found a solution of Problem 7.4 for which u has the lowest possible denominator
+exponent k. Let m be the T -count of the final solution. By Lemma 7.3, we have m = 2k −2, except when k = 0, in
+which case m = 0.
+To show that this T -count is minimal, let ¯U be any solution of the approximate synthesis problem with T -count
+¯m. By Lemma 7.2, we may assume without loss of generality that
+
+¯U =
+�
+¯u −¯t†
+¯t
+¯u†
+
+�
+.
+
+Let ¯k be the denominator exponent of ¯u. By minimality of k, we have k ⩽¯k, hence m ⩽¯m.
+
+14
+
+
+We emphasize that the optimality in Proposition 8.2 is absolute, i.e., not merely asymptotic or up to an additive
+constant. Of all the Clifford+T operators approximating Rz(θ) to within ε, the algorithm finds one with the lowest
+T -count.
+To analyze the algorithm in the absence of a factoring oracle, we must address the question of how many candidates
+must be generated before steps 2(b) and 2(c) of the algorithm succeed. In this case, the algorithm may still use any
+classical algorithm to try to factor the number n in step 2(b), but the amount of effort extended on any particular
+n must be capped. In our complexity analysis for this case, in Proposition 8.8 below, we conservatively assume that
+the only n that the algorithm can successfully factor are those n that are already prime. In reality the algorithm
+might do a little better. In order to complete the analysis, we must rely on a number-theoretic assumption about
+the distribution of prime numbers.
+
+Hypothesis 8.3. Each number n produced in step 2(a) of Algorithm 7.6 is asymptotically as likely to be prime
+as a randomly chosen odd number of comparable size. Moreover, the primality of each n can be modelled as an
+independent random event.
+
+Lemma 8.4. Each of the numbers n produced in step 2(a) of Algorithm 7.6 satisfies n ⩾0, and either n = 0 or
+n ≡1 (mod 8).
+
+Proof. See Appendix D.
+
+Lemma 8.5. Let u be a candidate produced in step 1 of Algorithm 7.6, let k be its least denominator exponent, and
+let n be the integer computed in step 2(a). Then n ⩽4k.
+
+Proof. By assumption, we can write u = v/
+√
+
+2k, where v ∈Z[ω].
+From step 2(a) of the algorithm, we have
+ξ = 1 −u†u =
+1
+2k (2k −v†v) =
+α
+2k , where α ∈Z[
+√
+
+2]. Therefore ξ•ξ = α•α
+
+22k =
+n
+2ℓ. Since α•α is an integer and ℓis
+minimal, we have ℓ⩽2k. Also, by assumption, both u and u• are in the unit disk, so u†u ⩽1 and (u•)†(u•) ⩽1. It
+follows that 0 ⩽ξ, ξ• ⩽1, hence ξ•ξ ⩽1. Therefore,
+n
+2ℓ⩽1, which implies n ⩽2ℓ⩽4k as claimed.
+
+Lemma 8.6. Let b > 0 be an arbitrary fixed constant. Then for a ⩾1,
+
+∞
+�
+
+x=1
+
+�
+1 −
+1
+a + b ln x
+
+�x
+= O(a).
+
+Proof. See Appendix E.
+
+Definition 8.7. Let U ′, U ′′ be two solutions of the approximate synthesis problem of the form
+
+U ′ =
+�
+u′ −t′†
+
+t′
+u′†
+
+�
+,
+U ′′ =
+�
+u′′ −t′′†
+
+t′′
+u′′†
+
+�
+.
+(15)
+
+We say that U ′ and U ′′ are equivalent solutions if u′ = u′′.
+
+Proposition 8.8 (Near-optimality in the absence of a factoring oracle). Let m be the T -count of the solution of the
+approximate synthesis problem found by Algorithm 7.6 in the absence of an oracle for integer factoring. Then
+
+(a) The approximate synthesis problem has an expected number of at most O(log(1/ε)) non-equivalent solutions
+with T -count less than m.
+
+(b) The expected value of m is m′′ + O(log(log(1/ε))), where m′ and m′′ are the T -counts of the optimal and
+second-to-optimal solutions of the approximate synthesis problem (up to equivalence), and m′ ⩽m′′.
+
+Proof. If ε ⩾|1 −eiπ/8|, then by Lemma 7.2, there is a solution with T -count 0, and the algorithm easily finds it. In
+this case, there is nothing to show. So assume without loss of generality that ε < |1 −eiπ/8|. Then by Lemma 7.2,
+all solutions are of the form (12).
+(a) Consider the list u1, u2, . . . of candidates generated in step 1 of the algorithm. Let k1, k2, . . . be their respective
+least denominator exponents, and let n1, n2, . . . be the corresponding integers calculated in step 2(a). By Lemma 8.5,
+we have nj ⩽4kj for all j. By Hypothesis 8.3, the probability that nj is prime is asymptotically no smaller than that
+of a randomly chosen odd integer less than 4kj, which, by the well-known prime number theorem, is greater than
+
+pj :=
+2
+ln(4kj) =
+1
+kj ln 2.
+(16)
+
+15
+
+
+Note that u1 and u2 are two distinct solutions to the scaled grid problem of step 1 of the algorithm. Since the
+candidates are enumerated in order of increasing denominator exponent, k2 is a denominator exponent for both u1
+and u2. It follows by Lemma 5.24 that there are at least 2ℓ+ 1 distinct candidates of denominator exponent k2 + 2ℓ,
+for all ℓ⩾0. In other words, for all j, if j ⩽2ℓ+1, we have kj ⩽k2 +2ℓ. In particular, this holds for ℓ= ⌊1+log2 j⌋,
+and therefore,
+kj ⩽k2 + 2(1 + log2 j).
+(17)
+
+Combining (17) with (16), we have
+
+pj ⩾
+1
+(k2 + 2(1 + log2 j)) ln 2 =
+1
+(k2 + 2) ln 2 + 2 ln j
+(18)
+
+Let j0 be the smallest index such that nj0 is prime. By Hypothesis 8.3, we can treat the primality of each nj as an
+independent random event. Therefore,
+
+P(j0 > j)
+=
+P(n1, . . . , nj are not prime)
+⩽
+(1 −p1)(1 −p2) · · · (1 −pj)
+
+⩽
+(1 −pj)j
+
+⩽
+�
+1 −
+1
+(k2 + 2) ln 2 + 2 ln j
+
+�j
+.
+
+The expected value of j0 is
+
+E(j0) =
+
+∞
+�
+
+j=0
+P(j0 > j) ⩽1 +
+
+∞
+�
+
+j=1
+
+�
+1 −
+1
+(k2 + 2) ln 2 + 2 ln j
+
+�j
+= O(k2),
+(19)
+
+where we have used Lemma 8.6 to estimate the sum.
+Next, we will estimate k2. The width of the ε-region Rε, as shown in (14), is ε2/2 at the widest point, and we
+can inscribe a disk of radius r = ε2/4 in it. Also, the closed unit disk D has radius R = 1. It follows by Lemma 5.23
+that the scaled grid problem for Rε and D, as in step 1 of the algorithm, has at least two solutions, provided that
+
+rR = ε2
+
+4 ⩾(1 +
+√
+
+2)2
+
+2k
+,
+(20)
+
+or equivalently, provided that
+k ⩾2 + 2 log2(1 +
+√
+
+2) + 2 log2(1/ε).
+(21)
+
+We therefore have k2 ⩽k for all k satisfying (21). It follows that
+
+k2 = O(log(1/ε)),
+(22)
+
+and therefore, using (19), also
+E(j0) = O(log(1/ε)).
+(23)
+
+To finish the proof of part (a), recall that j0 was defined to be the smallest index such that nj0 is prime. This
+ensures that step 2(b) of the algorithm succeeds for the candidate uj0. Furthermore, we have n ≡1 (mod 8) by
+Lemma 8.4, and therefore the equation t†t = ξ has a solution by Proposition C.26. Hence the remaining steps of the
+algorithm also succeed for uj0.
+Now let r be the number of non-equivalent solutions of the approximate synthesis problem of T -count strictly
+less than m. As noted above, any such solution U is of the form (12). Then the least denominator exponent of u
+is strictly smaller than kj0, so that u = uj for some j < j0. In this way, each of the r non-equivalent solutions is
+mapped to a different index j < j0. It follows that r < j0, and hence E(r) ⩽E(j0) = O(log(1/ε)), as was to be
+shown.
+(b) Let U ′ be an optimal solution of the approximate synthesis problem, and let U ′′ be optimal among the solutions
+that are not equivalent to U ′. Let u′ and u′′ be as in (15), and let k′, k′′ be the least denominator exponents of u′
+
+and u′′, respectively, with k′ ⩽k′′. Let k2 and j0 be as in the proof of part (a). Note that, by definition, k2 ⩽k′′. Let
+k be the least denominator exponent of the solution of the approximate synthesis problem found by the algorithm.
+Then k ⩽kj0. Using (17), we have
+
+k ⩽kj0 ⩽k2 + 2(1 + log2 j0) ⩽k′′ + 2(1 + log2 j0).
+
+16
+
+
+Recall from Lemma 7.3 that 2k −2 ⩽m ⩽2k, and similarly 2k′′ −2 ⩽m′′ ⩽2k′′. Hence m ⩽2k ⩽2k′′ + 4(1 +
+log2 j0) ⩽m′′ + 6 + 4 log2 j0. These calculations apply to any one run of the algorithm. Taking expected values over
+many randomized runs, we therefore have
+
+E(m) ⩽m′′ + 6 + 4E(log2 j0) ⩽m′′ + 6 + 4 log2 E(j0).
+(24)
+
+Note that we have used the law E(log j0) ⩽log(E(j0)), which holds because log is a concave function. Combining
+(24) with (23), we therefore have the desired result:
+
+E(m) = m′′ + O(log(log(1/ε))).
+(25)
+
+Remark 8.9. In the near-optimal case of Proposition 8.8, our algorithm can additionally be used to compute a firm
+lower bound for the T -count of any solution of the approximate synthesis problem for the given θ and ε. Namely, the
+algorithm can consider the first candidate uj for which the Diophantine equation solver does not fail — i.e., either it
+solves the equation or it times out. If kj is the least denominator exponent of uj, then a lower bound for the T -count
+is 2kj −2 (or 0 when kj = 0). Note that this is not the usual information-theoretic lower bound that applies in the
+average case, but an actual lower bound for each particular problem instance.
+
+8.3
+Worst-case behavior
+
+In [14], an approximate synthesis algorithms for z-rotations was given that always returns a solution of T -count at
+most K + 4 log2(1/ε), where K is a constant approximately equal to 10. We note that Algorithm 7.6 enumerates
+all the solutions of the grid problem for the ε-region, whereas the algorithm of [14] only enumerates a subset of the
+solutions. Also, Algorithm 7.6 can solve the Diophantine equation in all the cases in which the algorithm of [14] can
+solve it. It follows that in all cases, the solution returned by Algorithm 7.6 is at least as good as that returned by
+the algorithm of [14]. In particular, Algorithm 7.6 always returns a solution of T -count at most K + 4 log2(1/ε).
+Moreover, it is known from [14, Section 9], that there are certain combinations of θ and ε for which this T -count is
+actually optimal to within a constant number of gates. Thus our algorithm’s performance is K + 4 log2(1/ε) in the
+worst case, but this worst case behavior is only achieved in those cases where it is actually optimal.
+One may ask whether a more precise statement can be made about the angles θ for which this worst-case behavior
+occurs. We believe that this is indeed possible. Let Q(
+√
+
+2) be the field of rational numbers extended with
+√
+
+2.
+
+Conjecture 8.10. Fix an angle θ, and consider the T -count as ε →0. Then the T -count behaves as K + 4 log2(1/ε)
+when tan θ
+
+2 ∈Q(
+√
+
+2), and as K + 3 log2(1/ε) otherwise.
+
+Giving a rigorous proof of this conjecture is beyond the scope of this paper and probably difficult, but we will
+sketch a plausibility argument. We believe that the first part, showing that the T -count behaves no better than
+K + 4 log2(1/ε) when tan θ
+
+2 ∈Q(
+√
+
+2), could be made rigorous without too much difficulty. In addition, we also offer
+experimental evidence supporting Conjecture 8.10 in Section 10.
+The essential point is this. Consider the grid associated to a convex bounded set B as in Figure 5. Note that the
+slope r of any line passing through two grid points satisfies r ∈Q(
+√
+
+2) (unless the line is vertical, in which case the
+slope is infinite). Conversely, fix some real number r. Let us call a line of slope r a grid line if it passes through at
+least one grid point. We first wish to show that if r ∈Q(
+√
+
+2), then the set of grid lines is discrete, i.e., there is a
+minimum distance between each pair of grid lines. To see why this is so, note that r ∈1
+
+nZ[
+√
+
+2] for some n ∈Z. Each
+grid line is uniquely determined by its y-intercept, i.e., its point of intersection with the y-axis. Consider a grid line
+with y-intercept b, and passing through the grid point u ∈Z[ω]. Using Lemma 5.5, we can assume without loss of
+generality that u = α+βi, where α, β ∈Z[
+√
+
+2]; the case where u = α+βi+ω is analogous. Then we have b = β −rα,
+and therefore b ∈1
+
+nZ[
+√
+
+2]. Moreover, the line with y-intercept b• and slope r• contains u•, and therefore intersects
+B. Since B is bounded, it follows that b• lies in a certain finite interval B′ of real numbers determined only by B
+and r•. The two relations b ∈1
+
+nZ[
+√
+
+2] and b• ∈B′ determine a one-dimensional grid problem, and therefore the set
+of solutions is discrete. This shows that the set of grid lines is discrete when r ∈Q(
+√
+
+2).
+Recall from (14) that for given θ and ε, the ε-region is bounded by a circular arc and a straight line. The slope
+of the straight line is r = −1/ tan θ
+
+2, and is independent of ε. If r ∈Q(
+√
+
+2), then the ε-region is “parallel” to the grid
+lines of slope r, as shown in Figure 5(a). In this case, the number of solutions to the grid problem is not dominated
+by the area, but by the width of the ε-region. More specifically, for the scaled grid problem of Algorithm 7.6 to have
+a solution for a given denominator exponent k, it is a necessary condition that the ε-region intersects some grid line.
+The distance between the grid lines scales as
+1
+2k , and the width of the ε-region is ε2
+
+2 , and therefore, we expect the
+
+17
+
+
+(a)
+
+Rε
+
+β
+
+α
+
+b
+r
+
+u
+
+(b)
+
+u•
+
+r•
+
+B
+
+b•
+
+B′
+
+Figure 5: Part (a) shows the grid points and grid lines (of slope r ∈Q(
+√
+
+2)) for a convex set B. Part (b) shows the
+set B and the dual grid lines (of slope r•), all of whose y-intercepts lie in an interval B′.
+
+ε-region to intersect at least one grid line when
+1
+2k ⩽cε2, for some constant c. Equivalently k ⩾K + 2 log 1
+
+ε. By
+Lemmas 7.3 and 9.7, the T -count scales as 2k, i.e., K + 4 log 1
+
+ε.
+On the other hand, if r ̸∈Q(
+√
+
+2), then the set of grid lines is dense, and in this case, it appears that the solution
+to the grid problem is dominated by the area of the ε-region. In this case, the number of grid points per area scales
+as 4k, and the area of the ε-region is proportional to ε3; hence we expect a grid point to fall in the ε-region when
+1
+4k ⩽cε3, or equivalently, 2k ⩾K + 3 log 1
+
+ε, yielding the typical T -count of K + 3 log 1
+
+ε in that case.
+
+8.4
+Time complexity of the algorithm
+
+Proposition 8.11 (Complexity). Algorithm 7.6 runs in expected time O(polylog(1/ε)). This is true whether or not
+a factorization oracle is used.
+
+Proof. Let M be the uprightness of the ε-region. Let j0 be the average number of candidates tried in steps 2(a)–(c)
+of the algorithm, and let kj0 be the least denominator exponent of the final candidate. Let n be the largest integer
+that appears in step 2(a) of the algorithm.
+By Proposition 5.22, step 1 of the algorithm requires O(log(1/M)) arithmetic operations, plus a constant number
+per candidate. For each of the j0 candidates, step 2(a) requires O(1) arithmetic operations. Step 2(b) also requires
+O(1) arithmetic operations, either due to the use of a factoring oracle, or else, because we can put an arbitrary fixed
+bound on the amount of effort invested in factoring any given integer. At minimum, this will succeed when the
+integer in question is prime, which is sufficient for the estimates of Proposition 8.8. Step 2(c) requires O(polylog(n))
+operations by Theorem 6.2. Finally, step 3 requires O(kj0) arithmetic operations; see, e.g., Theorem 5.1 of [7]. So
+the total expected number of arithmetic operations is
+
+O(log(1/M)) + j0 · O(polylog(n)) + O(kj0).
+(26)
+
+Recall that the ε-region Rε, shown in (14), contains a disk of radius ε2/4. Hence, area(Rε) ⩾
+π
+16ε4. On the other
+hand, the square [−1, 1] × [−1, 1] is a (not very tight) bounding box for Rε. It follows that
+
+M = up(Rε) =
+area(Rε)
+area(BBox(Rε)) = Ω(ε4),
+
+hence log(1/M) = O(log(1/ε)). From (23), the expected value of j0 is O(log(1/ε)). Combining (17) with (22), we
+therefore have
+kj0 ⩽k2 + 2(1 + log2 j0) = O(log(1/ε)) + O(log(log(1/ε))) = O(log(1/ε)).
+
+From Lemma 8.5, and the fact that candidates are enumerated in order of increasing denominator exponent, we have
+n ⩽4kj0, hence
+polylog(n) = O(poly(kj0)) = O(polylog(1/ε)).
+
+Combining all of these estimates with (26), the expected number of arithmetic operations for the algorithm is
+O(polylog(1/ε)).
+Moreover, each individual arithmetic operation can be performed with precision O(log(1/ε)),
+
+18
+
+
+taking time O(polylog(1/ε)). Therefore the total expected time complexity of the algorithm is O(polylog(1/ε)), as
+desired.
+
+9
+Approximation up to a phase
+
+So far, we have considered the problem of approximate synthesis “on the nose”, i.e., the operator U in Definition 7.1
+was literally required to approximate Rz(θ) in the operator norm. However, it is well-known that global phases have
+no observable effect in quantum mechanics, so in quantum computing, it is also common to consider the problem of
+approximate synthesis “up to a phase”. This is made precise in the following definition.
+
+Definition 9.1. Given θ and some ε > 0, the approximate synthesis problem for z-rotations up to a phase is to find
+an operator U expressible in the single-qubit Clifford+T gate set, and a unit scalar λ, such that
+
+∥Rz(θ) −λU∥⩽ε.
+(27)
+
+Moreover, it is desirable to find U of smallest possible T -count. As before, the norm in (27) is the operator norm.
+
+In this section, we will give a version of Algorithm 7.6 that optimally solves the approximate synthesis problem
+up to a phase. The central insight is that it is in fact sufficient to restrict λ to only two possible phases, namely
+λ = 1 and λ = √ω = eiπ/8. A similar technique was also used in [11].
+First, note that if W is a unitary 2 × 2-matrix and det W = 1, then tr W is real. This is obvious, because
+det W = 1 ensures that the two eigenvalues of W are each other’s complex conjugates.
+
+Lemma 9.2. Let W be a unitary 2 × 2-matrix, and assume that det W = 1 and tr W ⩾0. Then for all unit scalars
+λ, we have
+∥I −W∥⩽∥I −λW∥.
+
+Proof. We may assume without loss of generality that W is diagonal. Since det W = 1, we can write
+
+W =
+�eiφ
+0
+0
+e−iφ
+
+�
+
+for some φ. By symmetry, we can assume without loss of generality that 0 ⩽φ ⩽π. Since tr W ⩾0, we have
+φ ⩽π/2. Now consider a unit scalar λ = eiψ, where −π ⩽ψ ⩽π. Then ∥I −λW∥= max{|1 −ei(ψ+φ)|, |1 −ei(ψ−φ)|}
+and ∥I −W∥= |1 −eiφ|. If ψ ⩾0, then |1 −eiφ| ⩽|1 −ei(ψ+φ)|. Similarly, if ψ ⩽0, then |1 −eiφ| ⩽|1 −ei(ψ−φ)|.
+In either case, we have ∥I −W∥⩽∥I −λW∥, as claimed.
+
+Lemma 9.3. Fix ε, a unitary operator R with det R = 1, and a Clifford+T operator U. The following are equivalent:
+
+(1) There exists a unit scalar λ such that
+∥R −λU∥⩽ε;
+
+(2) There exists n ∈Z such that
+∥R −einπ/8U∥⩽ε.
+
+Proof. It is obvious that (2) implies (1). For the opposite implication, first note that, because U is a Clifford+T
+operator, we have det U = ωk for some k ∈Z, and therefore det(R−1U) = ωk. Let V = e−ikπ/8R−1U, so that
+det V = 1. If tr V ⩾0, let W = V ; otherwise, let W = −V . Either way, we have W = einπ/8R−1U, where n ∈Z,
+and det W = 1, tr W ⩾0. Let λ′ = e−inπ/8λ. By Lemma 9.2, we have
+
+∥I −W∥
+⩽
+∥I −λ′W∥
+=⇒
+∥I −einπ/8R−1U∥
+⩽
+∥I −λ′einπ/8R−1U∥
+=⇒
+∥R −einπ/8U∥
+⩽
+∥R −λ′einπ/8U∥,
+=⇒
+∥R −einπ/8U∥
+⩽
+∥R −λU∥,
+
+which implies the desired claim.
+
+Remark 9.4. A version of Lemma 9.3 also applies to gate sets other than Clifford+T , as long as the gate set has
+discrete determinants.
+
+Corollary 9.5. In Definition 9.1, it suffices without loss of generality to consider only the two scalars λ = 1 and
+λ = eiπ/8.
+
+19
+
+
+Proof. Let U be a Clifford+T operator satisfying (27) for some unit scalar λ. By Lemma 9.3, there exists a λ of the
+form einπ/8 also satisfying (27). Then we can write λ = ωkλ′, where k ∈Z and λ′ ∈{1, eiπ/8}. Letting U ′ = ωkU,
+we have λ′U ′ = λU, and therefore
+∥Rz(θ) −λ′U ′∥⩽ε,
+
+as claimed. Moreover, since ω = eiπ/4 is a Clifford operator, U and U ′ have the same T -count.
+
+To solve the approximate synthesis problem up to a phase, we therefore need an algorithm for finding optimal
+solutions of (27) in case λ = 1 and λ = eiπ/8 For λ = 1, this is of course just Algorithm 7.6. So all that remains to
+do is to find an algorithm for solving
+∥Rz(θ) −eiπ/8U∥⩽ε.
+(28)
+
+We use a sequence of steps very similar to those of Section 7.1 to reduce this to a grid problem and a Diophantine
+equation. We first consider the form of U.
+
+Lemma 9.6. If ε < |1 −eiπ/8|, then all solutions of (28) have the form
+
+U =
+�
+u −t†ω−1
+
+t
+u†ω−1
+
+�
+.
+(29)
+
+Proof. This is completely analogous to the proof of Lemma 7.2, using eiπ/8U in place of U.
+
+Recall that δ = 1 + ω, and note that
+δ
+|δ| = eiπ/8. Also note that δω−1 = δ†, and that the element δ is invertible
+
+in D[ω] with inverse δ−1 = (ω −i)/
+√
+
+2. Suppose that U is of the form (29). Let u′ = δu and t′ = δt. We have:
+
+∥Rz(θ) −eiπ/8U∥
+=
+����Rz(θ) −δ
+
+|δ|
+
+�
+u −t†ω−1
+
+t
+u†ω−1
+
+�����
+
+=
+����Rz(θ) −1
+
+|δ|
+
+�
+δu −δ†t†
+δt
+δ†u†
+
+�����
+
+=
+����Rz(θ) −1
+
+|δ|
+
+�
+u′ −t′†
+
+t′
+u′†
+
+�����.
+
+Recall the definition of the ε-region Rε from (14). Using exactly the same argument as in Section 7, it follows that
+(28) holds if and only if u′
+
+|δ| ∈Rε, i.e., u′ ∈|δ|Rε.
+As before, in order for U to be unitary, of course it must satisfy u†u+t†t = 1, and a necessary condition for this is
+u, u• ∈D. The latter condition can be equivalently re-expressed in terms of u′ by requiring u′ ∈|δ| D and u′• ∈|δ•| D.
+Therefore, finding solutions to (28) of the form (29) reduces to the two-dimensional grid problem u′ ∈|δ|Rε and
+u′• ∈|δ•| D, together with the usual Diophantine equation u†u + t†t = 1. The last remaining piece of the puzzle is
+to compute the T -count of U, and in particular, to ensure that potential solutions are found in order of increasing
+T -count.
+
+Lemma 9.7. Let U be a Clifford+T operator of the form (29), and let k be the least denominator exponent of
+u′ = δu. Then the T -count of U is either 2k −1 or 2k + 1. Moreover, if k > 0 and U has T -count 2k + 1, then
+U ′ = T UT † has T -count 2k −1.
+
+Proof. This can be proved by a tedious but easy induction, analogous to Lemma 7.3.
+
+We therefore arrive at the following algorithm for solving (28). Here we assume ε < |1−eiπ/8|, so that Lemma 9.6
+applies.
+
+Algorithm 9.8. Given θ and ε, let A = |δ|Rε, and let B = |δ•| D.
+
+1. Use Proposition 5.22 to enumerate the infinite sequence of solutions to the scaled grid problem u′ ∈A and
+u′• ∈B, where u′ ∈D[ω], in the order of increasing least denominator exponent k.
+
+2. For each such solution u′:
+
+(a) Let u = u′/δ, let ξ = 1 −u†u ∈D[
+√
+
+2], and write ξ•ξ = n
+
+2ℓ, where n ∈Z and ℓ⩾0 is minimal.
+
+(b) Attempt to find a prime factorization of n. If n ̸= 0 but no prime factorization is found, skip step 2(c)
+and continue with the next u′.
+
+20
+
+
+(c) Use the algorithm of Theorem 6.2 to solve the equation t†t = ξ. If a solution t exists, go to step 3;
+otherwise, continue with the next u′.
+
+3. Define U as in equation (29), let U ′ = T UT †, and use the exact synthesis algorithm of [10] to find a Clifford+T
+circuit implementing either U or U ′, whichever has smaller T -count. Output this circuit and stop.
+
+Algorithm 9.8 is optimal in the presence of a factoring oracle, and near-optimal in the absence of a factoring oracle,
+in the same sense as Algorithm 7.6. Its expected time complexity is O(polylog(1/ε)). The proofs are completely
+analogous to those of Section 8. We then arrive at the following composite algorithm for the approximate synthesis
+problem for z-rotations up to a phase:
+
+Algorithm 9.9 (Approximate synthesis up to a phase). Given θ and ε, run both Algorithms 7.6 and 9.8, and return
+whichever circuit has the smaller T -count.
+
+Proposition 9.10 (Correctness, time complexity, and optimality). Algorithm 9.9 yields a valid solution to the
+approximate synthesis problem up to a phase.
+Its expected running time is O(polylog(1/ε)). In the presence of
+a factoring oracle, the algorithm is optimal, i.e., the returned circuit has the smallest T -count of any single-qubit
+Clifford+T circuit approximating Rz(θ) up to ε and up to a phase. Moreover, in the absence of a factoring oracle,
+the algorithm is near-optimal in the following sense. Let m be the T -count of the solution found. Then:
+
+(a) The approximate synthesis problem has an expected number of at most O(log(1/ε)) non-equivalent solutions
+with T -count less than m.
+
+(b) The expected value of m is m′′′ + O(log(log(1/ε))), where m′′′ is the T -count of the third-to-optimal solution
+(up to equivalence) of the approximate synthesis problem up to a phase.
+
+Proof. The correctness and time complexity of Algorithm 9.9 follows from that of Algorithms 7.6 and 9.8. The
+optimality results follow from those of Algorithms 7.6 and 9.8, keeping in mind that Algorithm 7.6 finds an optimal
+(or near-optimal) solution for the phase λ = 1, Algorithm 9.8 finds an optimal (or near-optimal) solution for the
+phase λ = eiπ/8, and by Corollary 9.5, these are the only two phases that need to be considered.
+The only subtlety that must be pointed out is that in part (b) of the near-optimality, we use the T -count of the
+third-to-optimal solution, rather than the second-to-optimal one as in Proposition 8.8. This is because the optimal
+and second-to-optimal solutions may belong to Algorithms 7.6 and 9.8, respectively, so that it may not be until the
+third-to-optimal solution that the near-optimality result of either Algorithm 7.6 or Algorithm 9.8 can be invoked.
+
+Remark 9.11. Algorithms 7.6 and 9.8 share the same ε-region up to scaling, and therefore the uprightness computation
+of Theorem 5.16 only needs to be done once.
+
+Remark 9.12. By Lemmas 7.3 and 9.7, Algorithm 7.6 always produces circuits with even T -count, and Algorithm 9.8
+always produces circuits with odd T -count. Instead of running both algorithms to completion, it is possible to
+interleave the two algorithms, so that all potential solutions are considered in order of increasing T -count. This is a
+slight optimization which does not, however, affect the asymptotic time complexity.
+
+10
+Experimental results
+
+We implemented Algorithm 7.6 in the programming language Haskell; the implementation is available from [13].
+Running on a single core of a 3.4GHz Intel i5-3570 CPU, we approximated the operator Rz(π/128) up to various
+ε. The results are summarized in the leftmost four columns of Table 1. For example, here is the approximation of
+Rz(π/128) up to ε = 10−10:
+
+u =
+1
+√
+
+252 (−26687414ω3 + 10541729ω2 + 10614512ω + 40727366)
+
+t =
+1
+√
+
+252 (30805761ω3 −23432014ω2 + 2332111ω + 20133911)
+
+U = HTSHTSHTSHTHTHTHTSHTHTSHTSHTSHTHTHTSHTSHTHTHTSHTHTSHTHTHTHTHTHTHTSHTSHT
+SHTHTSHTHTSHTHTHTHTSHTHTHTSHTHTSHTHTHTHTSHTSHTSHTHTHTSHTSHTSHTSHTHTSHTS
+HTSHTSHTHTSHTHTSHTSHTHTHTHTHTSHTHTHTHTSHTSHTSHTHTSHTSHTHTHTSHTHTHTHTHTS
+HTSHTHTHTHTHTSHTHTHTHTSHTHTHTHTHTHTHω7
+
+In addition to ε, the T -count of the computed operator, and the actual error, we have also reported the lower bound
+on the T -count, which was computed according to Remark 8.9. It can be seen that the actual T -count achieved by
+
+21
+
+
+ε
+T -count
+T -bound
+Actual error
+Runtime
+Candidates
+Time/Candidate
+10−10
+102
+⩾102
+0.91180 · 10−10
+0.0190s
+3.0
+0.0064s
+10−20
+200
+⩾198
+0.87670 · 10−20
+0.0433s
+7.0
+0.0061s
+10−30
+298
+⩾298
+0.99836 · 10−30
+0.0600s
+7.0
+0.0085s
+10−40
+402
+⩾400
+0.77378 · 10−40
+0.0976s
+11.7
+0.0084s
+10−50
+500
+⩾500
+0.82008 · 10−50
+0.1353s
+20.3
+0.0067s
+10−60
+602
+⩾596
+0.61151 · 10−60
+0.1548s
+16.0
+0.0097s
+10−70
+702
+⩾698
+0.40936 · 10−70
+0.1931s
+20.9
+0.0093s
+10−80
+804
+⩾794
+0.92372 · 10−80
+0.2402s
+27.2
+0.0088s
+10−90
+898
+⩾898
+0.96607 · 10−90
+0.2696s
+22.2
+0.0121s
+10−100
+1000
+⩾998
+0.78879 · 10−100
+0.3443s
+31.2
+0.0110s
+10−200
+1998
+⩾1994
+0.73266 · 10−200
+1.1423s
+62.3
+0.0183s
+10−500
+4990
+⩾4986
+0.67156 · 10−500
+8.6509s
+170.4
+0.0508s
+10−1000
+9974
+⩾9966
+0.80457 · 10−1000
+47.9300s
+270.4
+0.1773s
+10−2000
+19942
+⩾19934
+0.88272 · 10−2000
+383.1024s
+556.7
+0.6881s
+
+Table 1: Experimental results. The first four columns report the T -count, computed lower bound on the T -count,
+and the actual error for approximating the operator Rz(π/128) up to various ε. The remaining columns report the
+runtime for each ε, averaged over 50 independent runs of Algorithm 7.6 with random angles θ. The runtime is further
+broken down into average number of candidates tried per run of the algorithm, and time spent per candidate.
+
+ε = 10−100
+ε = 10−200
+ε = 10−300
+ε = 10−400
+ε = 10−500
+
+θ = 2 tan−1(2 + 3
+√
+
+2)
+1320
+2646
+3976
+5306
+6636
+θ = 2 tan−1(5/3)
+1314
+2646
+3966
+5306
+6636
+θ = 2 tan−1((2 + 7
+√
+
+2)/5)
+1308
+2642
+3968
+5294
+6630
+θ = 2 tan−1(2 + 3
+√
+
+3)
+1002
+1996
+2994
+3992
+4990
+θ = 2 tan−1(
+√
+
+5)
+998
+1998
+2996
+3990
+4990
+θ = 2 tan−1(1 + 11
+√
+
+7)
+1000
+1998
+2996
+3992
+4990
+4 log2(1/ε)
+1329
+2658
+3986
+5315
+6644
+3 log2(1/ε)
+997
+1993
+2990
+3986
+4983
+
+Table 2: Worst-case and typical T -counts. The top part of the table shows the T -counts for various combinations of
+θ and ε. The bottom part of the table shows the actual values of 4 log2(1/ε) and 3 log2(1/ε) for each ε, rounded to
+the closest integer. As predicted by Conjecture 8.10, the T -counts are close to 4 log2(1/ε) when θ = 2 tan−1(r), for
+r ∈Q(
+√
+
+2), and close to 3 log2(1/ε) otherwise.
+
+the algorithm exceeds this lower bound by at most a very small amount, which is consistent with O(log(log(1/ε)))
+as predicted by Proposition 8.8(b). This excess could be further reduced by increasing the amount of effort spent on
+factoring, and will become zero in the presence of a factoring oracle.
+Table 1 also shows the runtime as a function of ε. Since the enumeration of solutions to the grid problem in
+the algorithm is deterministic, the algorithm tends to find the same one or two solutions each time it is run with
+the same parameters. For this reason, we have averaged the runtimes in Table 1 over 50 runs of the algorithm with
+random angles θ, for each ε. As shown in Table 1, we were able to achieve approximations up to ε = 10−1000 with
+a T -count of under 10000 in less than 50 seconds on average. This compares to a T -count of 13300 and an average
+runtime of 504.8 seconds reported in [14] on the same hardware. We also note that the experimental runtimes in
+Table 1 are consistent with the polynomial runtime predicted by Proposition 8.11, and appear to be O(log3(1/ε)).
+Table 2 shows T -counts as a function of θ and ε. As predicted by Conjecture 8.10, the T -counts are close to
+4 log2(1/ε) when θ = 2 tan−1(r), for r ∈Q(
+√
+
+2), and close to 3 log2(1/ε) otherwise.
+
+22
+
+
+11
+Conclusion
+
+We have presented a fast new probabilistic algorithm for approximating arbitrary single-qubit z-rotations by Clif-
+ford+T circuits. Our algorithm is optimal in the presence of a factoring oracle, i.e., it finds the shortest possible
+circuit whatsoever for the given problem instance. In the absence of a factoring oracle, our algorithm is still nearly
+optimal. In particular, no quantum computer is required to run our algorithm. The main technical innovation of this
+paper is a new efficient algorithm for solving two-dimensional grid problems, such as the ones that arise in candidate
+selection for approximate synthesis. We solved this problem by an iterative method that successively increases the
+uprightness of a pair of convex sets until the problem is in a form where it can be solved directly.
+It is an interesting question whether a similar algorithm can be found for giving optimal or near-optimal ap-
+proximations of arbitrary single-qubit operators. In its current form, our method only applies to z-rotations. Since
+any arbitrary single-qubit operator can be decomposed into three z-rotations using Euler angles, our algorithm can
+currently achieve a T -count of 9 log2(1/ε) + O(log(log(1/ε))). (Interestingly, the average case gate complexity can
+always be achieved in this situation, because if the operator to be approximated happens to exhibit worst-case be-
+havior, we can always change it by multiplying it by a small number of random Clifford+T gates). However, the
+information-theoretic lower bound in this situation remains K+3 log2(1/ε), so there is still potential for improvement.
+
+12
+Acknowledgements
+
+This research was supported by the Natural Sciences and Engineering Research Council of Canada (NSERC). This
+research was supported by the Intelligence Advanced Research Projects Activity (IARPA) via Department of In-
+terior National Business Center contract number D12PC00527. The U.S. Government is authorized to reproduce
+and distribute reprints for Governmental purposes notwithstanding any copyright annotation thereon. Disclaimer:
+The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily
+representing the official policies or endorsements, either expressed or implied, of IARPA, DoI/NBC, or the U.S.
+Government.
+
+A
+Proof of Theorem 5.16
+
+This appendix contains a proof of Theorem 5.16. We start by reformulating the problem in more convenient terms.
+Recall that the notion of uprightness introduced in Section 5.2 was defined for an arbitrary bounded convex subset
+of R2. If the set in question is an ellipse, we can expand the definition of uprightness into an explicit expression.
+Recall from Definition 5.15 that an ellipse centered at p can be written as E = {u ∈R2 | (u −p)†D(u −p) ⩽1},
+where D is a positive definite matrix whose entries are, e.g., as follows:
+
+D =
+�a
+b
+b
+d
+
+�
+.
+
+We can compute the area of E and the area of its bounding box using D. Indeed, we have area(E) = π/
+�
+
+det(D) and
+area(BBox(E)) = 4
+√
+
+ad/det(D). Substituting these in Definition 5.7 yields the desired expression for uprightness:
+
+up(E) =
+area(E)
+area(BBox(E)) = π
+
+4
+
+�
+
+det(D)
+
+ad
+.
+E
+
+BBox(E)
+
+(30)
+
+It follows that the uprightness of E is invariant under translation and scalar multiplication.
+Recall that λ =
+√
+
+2 + 1. The matrix D corresponding to an ellipse E has determinant 1 if and only if it can be
+written in the form
+
+D =
+�eλ−z
+b
+b
+eλz
+
+�
+(31)
+
+for some b, e, z ∈R with e > 0 and e2 = b2 + 1. In this case, the definition of uprightness (30) simplifies to
+
+up(E) =
+π
+4e2 =
+π
+4
+√
+
+b2 + 1
+.
+(32)
+
+23
+
+
+Equivalently, if up(E) = M, then
+
+b2 =
+π2
+
+16M 2 −1.
+(33)
+
+Since Theorem 5.16 deals with pairs of ellipses, it is convenient to introduce the following terminology for dis-
+cussing pairs of matrices.
+
+Definition A.1. A state is a pair of real symmetric positive definite matrices of determinant 1. Given a state (D, ∆)
+with
+
+D =
+�
+eλ−z
+b
+b
+eλz
+
+�
+∆=
+�
+ελ−ζ
+β
+β
+ελζ
+
+�
+(34)
+
+we define its skew as Skew(D, ∆) = b2 + β2 and its bias as Bias(D, ∆) = ζ −z.
+
+Note that the skew of a state is small if and only if both b2 and β2 are small, which happens, by (32), if and only
+if the ellipses corresponding to D and ∆both have large uprightness. So our strategy for increasing the uprightness
+will be to reduce the skew. In what follows, we use (D, ∆) to denote an arbitrary state and always assume that the
+entries of D and ∆are given as in (34). For future reference, we record here another useful property of states.
+
+Remark A.2. If (D, ∆) is a state with b ⩾0, then −be ⩽−b2. Indeed:
+
+e2 = b2 + 1 =⇒e2 ⩾b2 =⇒e ⩾b =⇒
+−be ⩽−b2.
+
+Similarly, if b ⩽0, then be ⩽−b2. Analogous inequalities also hold for β and ε.
+
+The action of a grid operator on an ellipse can be adapted to states in a natural way, provided that the operator
+is special.
+
+Definition A.3. The action of special grid operators on states is defined as follows. Here, G† denotes the transpose
+of G, and G• is defined by applying (−)• separately to each matrix entry, as in Remark 5.12.
+
+(D, ∆) · G = (G†DG, G•†∆G•).
+
+Lemma A.4. Let (D, ∆) be a state, and let A and B be the ellipses centered at the origin that are defined by D and
+∆, respectively. Then the ellipses G(A) and G•(B) are defined by the matrices D′ and ∆′, where
+
+(D′, ∆′) = (D, ∆) · G−1
+
+Proof. We have
+G(A)
+=
+{G(u) ∈R2 | u†Du ⩽1}
+=
+{v ∈R2 | (G−1v)†D(G−1v) ⩽1}
+=
+{v ∈R2 | v†(G−1)†DG−1v ⩽1},
+
+so the ellipse G(A) is defined by the positive operator D′ = (G−1)†DG−1. The proof for G•(B) is similar.
+
+The main ingredient in the proof of Theorem 5.16 is the following Step Lemma.
+
+Lemma A.5 (Step Lemma). For any state (D, ∆), if Skew(D, ∆) ⩾15, then there exists a special grid operator G
+such that Skew((D, ∆) · G) ⩽0.9 Skew(D, ∆). Moreover, G can be computed using a constant number of arithmetic
+operations.
+
+Before proving the Step Lemma, we show how it can be used to derive Theorem 5.16, whose statement we
+reproduce here.
+
+Theorem. Suppose A, B ⊆R2 are ellipses. Then there exists a grid operator G such that G(A) and G•(B) are
+1/6-upright. Moreover, if A and B are M-upright, then G can be efficiently computed in O(log(1/M)) arithmetic
+operations.
+
+Proof. Let D and ∆be the matrices defining A and B respectively, in the sense of Definition 5.15. Since uprightness
+is invariant under translations and scaling, we may without loss of generality assume that both ellipses are centered
+at the origin, and that det D = det ∆= 1.
+The pair (D, ∆) is a state. By applying Lemma A.5 repeatedly, we get grid operators G1, . . . , Gn such that:
+
+Skew((D, ∆) · G1 . . . Gn) ⩽15.
+(35)
+
+24
+
+
+R =
+1
+√
+
+2
+
+�
+1
+−1
+1
+1
+
+�
+A =
+�
+1
+−2
+0
+1
+
+�
+B =
+�
+1
+√
+
+2
+0
+1
+
+�
+
+K =
+1
+√
+
+2
+
+�−λ−1
+−1
+λ
+1
+
+�
+X =
+�0
+1
+1
+0
+
+�
+Z =
+�1
+0
+0
+−1
+
+�
+
+Figure 6: List of useful grid operators.
+
+Now let (D′, ∆′) = (D, ∆) · G1 . . . Gn and set G = (G1 · · · Gn)−1. By Lemma A.4, the ellipses G(A) and G•(B) are
+defined by the matrices D′ and ∆′, respectively. Let b and β be the anti-diagonal entries of the matrices D′ and ∆′,
+respectively. We have:
+
+b2 + β2 = Skew(D′, ∆′) = Skew((D, ∆) · G−1) = Skew((D, ∆) · G1 . . . Gn) ⩽15,
+
+hence b2 ⩽15 and β2 ⩽15. Using (32), we get
+
+up(G(A)) =
+π
+4
+√
+
+b2 + 1
+⩾
+π
+4
+√
+
+16 ⩾1/6
+and
+up(G•(B)) =
+π
+
+4
+�
+
+β2 + 1
+⩾
+π
+4
+√
+
+16 ⩾1/6,
+
+as desired.
+To bound the number of operations, note that each application of Gj reduces the skew by at least 10 percent.
+Therefore, the number n in (35) satisfies n ⩽log0.9(15/Skew(D, ∆)) = O(log(Skew(D, ∆))). Using (33), we have
+
+log(Skew(D, ∆)) = log(b2 + β2) ⩽log((
+π2
+
+16M 2 −1) + (
+π2
+
+16M 2 −1)) = O(log(1/M)).
+
+It follows that the computation of G requires O(log(1/M)) applications of the Step Lemma, each of which requires
+a constant number of arithmetic operations, proving the final claim of the theorem.
+
+The remainder of this appendix is devoted to proving the Step Lemma. To each state, we associate the pair
+(z, ζ). The proof of the Step Lemma is essentially a case distinction on the location of the pair (z, ζ) in the plane.
+We find coverings of the plane with the property that if the point (z, ζ) belongs to some region O of our covering,
+then it is easy to compute a special grid operator G such that Skew((D, ∆) · G) ⩽0.9 Skew(D, ∆). The relevant grid
+operators are given in Figure 6. Each one of the next 5 subsections is dedicated to a particular region of the plane.
+We prove the Step Lemma in Section A.6.
+
+A.1
+The Shift Lemma
+
+In this section, we consider states (D, ∆) such that |Bias(D, ∆)| > 1. Any such state can be “shifted” to a state
+(D′, ∆′) of equal skew but with |Bias(D′, ∆′)| ⩽1.
+
+Definition A.6. The shift operators σ and τ are defined by:
+
+σ =
+√
+
+λ−1
+�
+λ
+0
+0
+1
+
+�
+, τ =
+√
+
+λ−1
+�
+1
+0
+0
+−λ
+
+�
+
+Even though σ and τ are not grid operators, we can use them to define an operation on states called a shift by
+k. By abuse of notation, we write this operation as an action.
+
+Definition A.7. Given a state (D, ∆) and k ∈Z, the k-shift of (D, ∆) is defined as:
+
+(D, ∆) · Shiftk = (σkDσk, τ k∆τ k).
+
+The notation (D, ∆) · Shiftk is justified by the following lemma.
+
+Lemma A.8. The shift of a state is a state and moreover:
+
+Skew((D, ∆) · Shiftk) = Skew(D, ∆) and Bias((D, ∆) · Shiftk) = Bias(D, ∆) + 2k
+
+25
+
+
+Proof. Compute (D, ∆) · Shiftk:
+
+(D, ∆) · Shiftk
+=
+(σkDσk, τ k∆τ k)
+
+=
+(σk
+�eλ−z
+b
+b
+eλz
+
+�
+σk, τ k
+�ελ−ζ
+β
+β
+ελζ
+
+�
+τ k)
+
+=
+(
+�eλ−z+k
+b
+b
+eλz−k
+
+�
+,
+�ελ−ζ−k
+(−1)kβ
+(−1)kβ
+ελζ+k
+
+�
+)
+
+The resulting matrices are clearly symmetric and positive definite. Moreover, since σk and τ k have determinant ±1,
+both σkDσk and τ k∆τ k have determinant 1. Finally:
+
+• Skew((D, ∆) · Shiftk) = b2 + ((−1)kβ)2 = b2 + β2 = Skew(D, ∆) and
+
+• Bias((D, ∆) · Shiftk) = (ζ + k) −(z −k) = Bias(D, ∆) + 2k,
+
+which completes the proof.
+
+For every special grid operator G, there is a special grid operator G′ whose action on a state corresponds to
+shifting the state by k, applying G and then shifting the state by −k.
+
+Lemma A.9. If G is a special grid operator and k ∈Z, then G′ = σkGσk is a special grid operator and moreover
+G′• = (−τ)kG•τ k.
+
+Proof. It suffices to show this for k = 1. Suppose G =
+�w
+x
+y
+z
+
+�
+is a special grid operator and note that:
+
+G′ = σGσ =
+�λw
+x
+y
+λ−1z
+
+�
+=
+�λ−1
+0
+0
+λ−1
+
+��λ
+0
+0
+1
+
+�
+G
+�λ
+0
+0
+1
+
+�
+.
+
+Since all the factors in the above product are grid operators, the result is also a grid operator. Moreover det(σGσ) =
+det(G) = 1 so that σGσ is special. Finally:
+
+G′• = (σGσ)• =
+�λ•w•
+x•
+
+y•
+(λ−1)•z•
+
+�
+=
+�−λ−1w•
+x•
+
+y•
+−λz•
+
+�
+= −τG•τ.
+
+Lemma A.10. If G is a grid operator, then:
+
+(((D, ∆) · Shiftk) · G) · Shiftk = (D, ∆) · (σkGσk).
+
+Proof. Write G′ = σkGσk. Simple computation then yields the result:
+
+(((D, ∆) · Shiftk) · G) · Shiftk
+=
+((σkDσk, τ k∆τ k) · G) · Shiftk
+
+=
+(G†σkDσkG, G•†τ k∆τ kG•) · Shiftk
+
+=
+(σkG†σkDσkGσk, τ kG•†τ k∆τ kG•τ k)
+=
+(σkG†σkDσkGσk, ((−τ)kG•†τ k)∆((−τ)kG•τ k))
+=
+(G′†DG′, G′•†∆G′•)
+=
+(D, ∆) · G′
+
+=
+(D, ∆) · (σkGσk).
+
+Shifts allow us to consider only states (D, ∆) with Bias(D, ∆) ∈[−1, 1] in the proof of the Step Lemma.
+
+Lemma A.11. If the Step Lemma holds for all states (D, ∆) with Bias(D, ∆) ∈[−1, 1], then it holds for all states.
+
+Proof. Let (D, ∆) be some state with Skew(D, ∆) ⩾15. Let x = Bias(D, ∆) and set k = ⌊1−x
+
+2 ⌋. Then by Lemma A.8,
+we have Skew((D, ∆) · Shiftk) = Skew(D, ∆) and Bias((D, ∆) · Shiftk) ∈[−1, 1]. Then by assumption, there exists
+a special grid operator G such that Skew(((D, ∆) · Shiftk) · G) ⩽0.9 Skew((D, ∆) · Shiftk). Now by Lemma A.9 we
+know that G′ = σk G σk is a special grid operator. Moreover, by Lemma A.10 and A.8, we have:
+
+Skew((D, ∆) · G′)
+=
+Skew((((D, ∆) · Shiftk) · G) · Shiftk)
+=
+Skew(((D, ∆) · Shiftk) · G)
+⩽
+0.9 Skew((D, ∆) · Shiftk)
+=
+0.9 Skew(D, ∆),
+
+which completes the proof.
+
+26
+
+
+A.2
+The R Lemma
+
+Definition A.12. The hyperbolic sine in base λ is defined as:
+
+sinhλ(x) = λx −λ−x
+
+2
+.
+
+Lemma A.13. Recall the operator R from Figure 6.
+If (D, ∆) is such that Skew(D, ∆) ⩾15, and such that
+−0.8 ⩽z ⩽0.8 and −0.8 ⩽ζ ⩽0.8, then:
+
+Skew((D, ∆) · R) ⩽0.9 Skew(D, ∆).
+
+Proof. Compute the action of R on (D, ∆):
+
+R†DR
+=
+1
+2
+
+�
+1
+1
+−1
+1
+
+��eλ−z
+b
+b
+eλz
+
+��1
+−1
+1
+1
+
+�
+
+=
+
+�
+. . .
+e(λz−λ−z)
+
+2
+e(λz−λ−z)
+
+2
+. . .
+
+�
+
+=
+�
+. . .
+e sinhλ(z)
+e sinhλ(z)
+. . .
+
+�
+,
+
+R•†∆R•
+=
+1
+2
+
+�−1
+−1
+1
+−1
+
+��ελ−ζ
+β
+β
+ελζ
+
+��−1
+1
+−1
+−1
+
+�
+
+=
+
+�
+. . .
+ε(λζ−λ−ζ)
+
+2
+ε(λζ−λ−ζ)
+
+2
+. . .
+
+�
+
+=
+�
+. . .
+ε sinhλ(ζ)
+ε sinhλ(ζ)
+. . .
+
+�
+.
+
+Therefore Skew((D, ∆) · R) = e2 sinh2
+λ(z) + ε2 sinh2
+λ(ζ). But recall that e2 = b2 + 1 and ε2 = β2 + 1, so that in fact:
+
+Skew((D, ∆) · R) = (b2 + 1) sinh2
+λ(z) + (β2 + 1) sinh2
+λ(ζ).
+
+We assumed −0.8 ⩽z, ζ ⩽0.8 and this implies that sinh2
+λ(ζ), sinh2
+λ(z) ⩽sinh2
+λ(0.8). Writing y = sinh2
+λ(0.8) for
+brevity, and using the assumption that Skew(D, ∆) ⩾15, we get:
+
+Skew((D, ∆) · R)
+=
+(b2 + 1) sinh2
+λ(z) + (β2 + 1) sinh2
+λ(ζ)
+⩽
+(b2 + 1)y + (β2 + 1)y
+=
+(b2 + β2 + 2)y
+⩽
+Skew(D, ∆)(1 + 2
+
+15)y.
+
+This completes the proof, since (1 + 2
+
+15)y = (1 + 2
+
+15) sinh2
+λ(0.8) ≈0.663 ⩽0.9.
+
+A.3
+The K Lemma
+
+Definition A.14. The hyperbolic cosine in base λ is defined as:
+
+coshλ(x) = λx + λ−x
+
+2
+.
+
+Lemma A.15. Recall the operator K from Figure 6. If (D, ∆) is such that Bias(D, ∆) ∈[−1, 1], Skew(D, ∆) ⩾15,
+and such that b, β ⩾0, z ⩽0.3, and 0.8 ⩽ζ, then:
+
+Skew((D, ∆) · K) ⩽0.9 Skew(D, ∆).
+
+Proof. Compute the action of K on (D, ∆):
+
+K†DK
+
+=
+1
+2
+
+�−λ−1
+λ
+−1
+1
+
+��eλ−z
+b
+b
+eλz
+
+��−λ−1
+−1
+λ
+1
+
+�
+
+=
+1
+2
+
+�
+. . .
+e(λz+1 + λ−z−1) −2
+√
+
+2b
+e(λz+1 + λ−z−1) −2
+√
+
+2b
+. . .
+
+�
+
+=
+�
+. . .
+e coshλ(z + 1) −
+√
+
+2b
+e coshλ(z + 1) −
+√
+
+2b
+. . .
+
+�
+,
+
+27
+
+
+K•†∆K•
+
+=
+1
+2
+
+�
+λ
+−λ−1
+
+−1
+1
+
+��
+ελ−ζ
+β
+β
+ελζ
+
+��
+λ
+−1
+−λ−1
+1
+
+�
+
+=
+1
+2
+
+�
+. . .
+−ε(λζ−1 + λ−ζ+1) + 2
+√
+
+2β
+−ε(λζ−1 + λ−ζ+1) + 2
+√
+
+2β
+. . .
+
+�
+
+=
+�
+. . .
+√
+
+2β −ε coshλ(ζ −1)
+√
+
+2β −ε coshλ(ζ −1)
+. . .
+
+�
+.
+
+Therefore:
+Skew((D, ∆) · K) = (
+√
+
+2b −e coshλ(z + 1))2 + (
+√
+
+2β −ε coshλ(ζ −1))2.
+(36)
+
+But recall that e2 = b2 + 1, and from Remark A.2 that b ⩾0 implies −be ⩽−b2, so:
+
+(
+√
+
+2b −e coshλ(z + 1))2
+
+=
+2b2 −2
+√
+
+2 be coshλ(z + 1) + e2 cosh2
+λ(z + 1)
+
+⩽
+2b2 −2
+√
+
+2 b2 coshλ(z + 1) + (b2 + 1) cosh2
+λ(z + 1)
+
+=
+b2(2 −2
+√
+
+2 coshλ(z + 1) + cosh2
+λ(z + 1)) + cosh2
+λ(z + 1)
+
+=
+b2(
+√
+
+2 −coshλ(z + 1))2 + cosh2
+λ(z + 1).
+(37)
+
+Reasoning analogously, we also have
+
+(
+√
+
+2β −ε coshλ(ζ −1))2
+⩽
+β2(
+√
+
+2 −coshλ(ζ −1))2 + cosh2
+λ(ζ −1).
+(38)
+
+By assumption, Bias(D, ∆) ∈[−1, 1], thus ζ ⩽z + 1. This, together with the assumptions 0.8 ⩽ζ and z ⩽0.3,
+implies that both z + 1 and ζ −1 are in the interval [−0.2, 1.3]. On this interval, the function cosh2
+λ(x) assumes its
+maximum at x = 1.3, and the function f(x) = (
+√
+
+2 −coshλ(x))2 assumes its maximum at x = 0. Therefore,
+
+b2(
+√
+
+2 −coshλ(z + 1))2 + cosh2
+λ(z + 1)
+⩽
+b2(
+√
+
+2 −coshλ(0))2 + cosh2
+λ(1.3).
+(39)
+
+and
+
+β2(
+√
+
+2 −coshλ(ζ −1))2 + cosh2
+λ(ζ −1)
+⩽
+β2(
+√
+
+2 −coshλ(0))2 + cosh2
+λ(1.3).
+(40)
+
+Combining (36)–(40), together with the assumption that Skew(D, ∆) ⩾15, yields:
+
+Skew((D, ∆) · K)
+=
+(
+√
+
+2b −e coshλ(z + 1))2 + (
+√
+
+2β −ε coshλ(ζ −1))2
+
+⩽
+(b2 + β2)(
+√
+
+2 −coshλ(0))2 + 2 cosh2
+λ(1.3)
+
+=
+Skew(D, ∆)(
+√
+
+2 −coshλ(0))2 + 2 cosh2
+λ(1.3)
+
+⩽
+Skew(D, ∆)((
+√
+
+2 −coshλ(0))2 + 2
+
+15 cosh2
+λ(1.3))
+
+This completes the proof since (
+√
+
+2 −coshλ(0))2 + 2
+
+15 cosh2
+λ(1.3) ≈0.571 ⩽0.9.
+
+A.4
+The A Lemma
+
+Definition A.16. Let g(x) = (1 −2x)2.
+
+Lemma A.17. Recall the operator A from Figure 6. If (D, ∆) is such that Bias(D, ∆) ∈[−1, 1], Skew(D, ∆) ⩾15,
+and such that b, β ⩾0 and 0.3 ⩽z, ζ, then there exists n ∈Z such that:
+
+Skew((D, ∆) · An) ⩽0.9 Skew(D, ∆).
+
+Proof. Let c = min{z, ζ} and n = max{1, ⌊λc
+
+2 ⌋}. Compute the action of An on (D, ∆):
+
+An†DAn
+=
+�
+1
+0
+−2n
+1
+
+��eλ−z
+b
+b
+eλz
+
+��1
+−2n
+0
+1
+
+�
+
+=
+�
+. . .
+b −2neλ−z
+
+b −2neλ−z
+. . .
+
+�
+,
+
+An•†∆An•
+=
+An†∆An
+
+=
+�
+. . .
+β −2nελ−ζ
+
+β −2nελ−ζ
+. . .
+
+�
+.
+
+28
+
+
+Therefore:
+Skew((D, ∆) · An) = (b −2neλ−z)2 + (β −2nελ−ζ)2
+
+But recall that e2 = b2 + 1 and ε2 = β2 + 1, and from Remark A.2 that b, β ⩾0 implies −be ⩽−b2 and −εβ ⩽−β2.
+Using these facts, we can expand the above formula as follows:
+
+Skew((D, ∆) · An)
+
+=
+(b −2neλ−z)2 + (β −2nελ−ζ)2
+
+=
+b2 −4nbeλ−z + 4n2e2λ−2z + β2 −4nβελ−ζ + 4n2ε2λ−2ζ
+
+⩽
+b2 −4nb2λ−z + 4n2(b2 + 1)λ−2z + β2 −4nβ2λ−ζ + 4n2(β2 + 1)λ−2ζ
+
+=
+b2(1 −4nλ−z + 4n2λ−2z) + β2(1 −4nλ−ζ + 4n2λ−2ζ) + 4n2(λ−2z + λ−2ζ)
+=
+b2(1 −2nλ−z)2 + β2(1 −2nλ−ζ)2 + 4n2(λ−2z + λ−2ζ)
+
+=
+b2g(nλ−z) + β2g(nλ−ζ) + 4n2(λ−2z + λ−2ζ).
+
+Writing y = max{g(nλ−z), g(nλ−ζ)} for brevity, and using the assumption that Skew(D, ∆) ⩾15 together with the
+fact that c ⩽z, ζ, we get:
+
+Skew((D, ∆) · An)
+⩽
+b2y + β2y + 8n2λ−2c
+
+=
+Skew(D, ∆)y + 8n2λ−2c
+
+⩽
+Skew(D, ∆)(y + 8
+
+15n2λ−2c).
+
+To finish the proof, it remains to show that y + 8
+
+15n2λ−2c ⩽0.9. There are two cases:
+
+• If ⌊λc
+
+2 ⌋⩾1, then λc
+
+4 ⩽n ⩽λc
+
+2 . From n ⩽λc
+
+2 , we have 2nλ−c ⩽1, and so
+8
+15n2λ−2c ⩽
+2
+15. Moreover, because
+Bias(D, ∆) ∈[−1, 1], we have c ⩽z, ζ ⩽c + 1. Hence
+1
+4λ = λc
+
+4 λ−c−1 ⩽nλ−c−1 ⩽nλ−z, nλ−ζ ⩽nλ−c ⩽1
+
+2.
+On the interval [ 1
+
+4λ, 1
+
+2], the function g(x) assumes its maximum at x =
+1
+4λ. This implies that y ⩽g( 1
+
+4λ). This
+completes the present case since we get:
+
+y + 8
+
+15n2λ−2c ⩽g( 1
+
+4λ) + 2
+
+15 ≈0.762 ⩽0.9.
+
+• If ⌊λc
+
+2 ⌋< 1, then n = 1 and λc < 2.
+From 0.3 ⩽c, we have
+8
+15n2λ−2c ⩽
+8
+15λ−0.6.
+Moreover, because
+Bias(D, ∆) ∈[−1, 1], we have 0.3 ⩽c ⩽z, ζ ⩽c + 1. With λc ⩽2, this implies that
+1
+2λ ⩽λ−c−1 ⩽λ−z, λ−ζ ⩽
+λ−0.3. Therefore both λ−z and λ−ζ are in the interval [ 1
+
+2λ, λ−0.3]. On this interval, the function g(x) assumes
+its maximum at x =
+1
+2λ, and therefore y ⩽g( 1
+
+2λ). This completes the proof since:
+
+y + 8
+
+15n2λ−2c ⩽g( 1
+
+2λ) + 8
+
+15λ−0.6 ≈0.657 ⩽0.9.
+
+A.5
+The B Lemma
+
+Definition A.18. Let h(x) = (1 −
+√
+
+2x)2.
+
+Lemma A.19. Recall the operator B from Figure 6. If (D, ∆) is such that Bias(D, ∆) ∈[−1, 1], Skew(D, ∆) ⩾15,
+and such that b ⩽0 ⩽β and −0.2 ⩽z, ζ, then there exists n ∈Z such that:
+
+Skew((D, ∆) · Bn) ⩽0.9 Skew(D, ∆).
+
+Proof. Let c = min{z, ζ}, n = max{1, ⌊λc
+
+√
+
+2⌋} and compute the action of Bn on (D, ∆):
+
+Bn†DBn
+=
+�
+1
+0
+√
+
+2n
+1
+
+��
+eλ−z
+b
+b
+eλz
+
+��
+1
+√
+
+2n
+0
+1
+
+�
+
+=
+�
+. . .
+b +
+√
+
+2 neλ−z
+
+b +
+√
+
+2 neλ−z
+. . .
+
+�
+,
+
+Bn•†DBn•
+=
+�
+1
+0
+−
+√
+
+2n
+1
+
+��
+ελ−ζ
+β
+β
+ελζ
+
+��
+1
+−
+√
+
+2n
+0
+1
+
+�
+
+=
+�
+. . .
+β −
+√
+
+2 nελ−ζ
+
+β −
+√
+
+2 nελ−ζ
+. . .
+
+�
+.
+
+29
+
+
+Therefore:
+Skew((D, ∆) · Bn) = (b +
+√
+
+2 neλ−z)2 + (β −
+√
+
+2 nελ−ζ)2.
+
+But recall that e2 = b2 +1, that ε2 = β2 +1, and from Remark A.2 that b ⩽0 ⩽β implies be ⩽−b2 and −βε ⩽−β2.
+Using these facts, we can expand the above formula as follows:
+
+Skew((D, ∆) · Bn)
+
+=
+(b +
+√
+
+2 neλ−z)2 + (β −
+√
+
+2 nελ−ζ)2
+
+=
+b2 + 2
+√
+
+2 nbeλ−z + 2n2e2λ−2z + β2 −2
+√
+
+2 nβελ−ζ + 2n2ε2λ−2ζ
+
+⩽
+b2 −2
+√
+
+2 nb2λ−z + 2n2(b2 + 1)λ−2z + β2 −2
+√
+
+2 nβ2λ−ζ + 2n2(β2 + 1)λ−2ζ
+
+=
+b2(1 −2
+√
+
+2 nλ−z + 2n2λ−2z) + β2(1 −2
+√
+
+2 nλ−ζ + 2n2λ−2ζ) + 2n2(λ−2z + λ−2ζ)
+
+=
+b2(1 −
+√
+
+2 nλ−z)2 + β2(1 −
+√
+
+2 nλ−ζ)2 + 2n2(λ−2z + λ−2ζ).
+
+=
+b2h(nλ−z) + β2h(nλ−ζ) + 2n2(λ−2z + λ−2ζ).
+
+Writing y = max{h(nλ−z), h(nλ−ζ)} for brevity, and using the assumption that Skew(D, ∆) ⩾15, together with the
+fact that c ⩽z, ζ, we get:
+
+Skew((D, ∆) · Bn)
+⩽
+b2y + β2y + 4n2λ−2c
+
+=
+Skew(D, ∆)y + 4n2λ−2c
+
+⩽
+Skew(D, ∆)(y + 4
+
+15n2λ−2c).
+
+To finish the proof, it remains to show that y + 4
+
+15n2λ−2c ⩽0.9. There are two cases:
+
+• If ⌊λc
+
+√
+
+2⌋⩾1, then
+λc
+
+2
+√
+
+2 ⩽n ⩽
+λc
+√
+
+2. From n ⩽
+λc
+√
+
+2, we have 2n2λ−2c ⩽1, and so 4n2λ−2c
+
+15
+⩽
+2
+15. Moreover,
+
+because Bias(D, ∆) ∈[−1, 1], we have c ⩽z, ζ ⩽c + 1. Hence
+1
+2
+√
+
+2 λ =
+λc
+
+2
+√
+
+2λ−c−1 ⩽nλ−c−1 ⩽nλ−z, nλ−ζ ⩽
+nλ−c ⩽
+1
+√
+
+2. On the interval [
+1
+2
+√
+
+2 λ,
+1
+√
+
+2], the function h(x) assumes its maximum at x =
+1
+2
+√
+
+2 λ. This implies
+that y ⩽h(
+1
+2
+√
+
+2 λ). This completes the present case since we get:
+
+y + 4
+
+15n2λ−2c ⩽h(
+1
+2
+√
+
+2 λ
+) + 2
+
+15 ≈0.762 ⩽0.9.
+
+• If ⌊λc
+
+√
+
+2⌋< 1, then n = 1 and λc <
+√
+
+2. From −0.2 ⩽c, we have
+4
+15n2λ−2c ⩽
+4
+15λ0.4. Moreover, because
+
+Bias(D, ∆) ∈[−1, 1], we have −0.2 ⩽c ⩽z, ζ ⩽c + 1. With λc ⩽
+√
+
+2, this implies that
+1
+√
+
+2 λ ⩽λ−c−1 ⩽
+λ−z, λ−ζ ⩽λ0.2. Therefore both λ−z and λ−ζ are in the interval [
+1
+√
+
+2 λ, λ0.2]. On this interval, the function
+h(x) assumes its maximum at x = λ0.2, and therefore y ⩽h(λ0.2). This completes the proof since:
+
+y + 4
+
+15n2λ−2c ⩽h(λ0.2) + 4
+
+15λ0.4 ≈0.851 ⩽0.9.
+
+A.6
+Proof of the Step Lemma
+
+The proof of the Step Lemma is now basically a case distinction, using the cases enumerated in Sections A.1–A.5, as
+well as some additional symmetric cases. In particular, the following remark will allow us to use the grid operators
+X and Z to reduce the number of cases to consider.
+
+Remark A.20. The grid operator Z negates the anti-diagonal entries of a state while the operator X swaps the
+diagonal entries of a state. This follows by simple computation:
+
+(D, ∆) · Z =
+��eλ−z
+−b
+−b
+eλz
+
+�
+,
+�ελ−ζ
+−β
+−β
+ελζ
+
+��
+,
+(D, ∆) · X =
+��eλz
+b
+b
+eλ−z
+
+�
+,
+�ελζ
+β
+β
+ελ−ζ
+
+��
+.
+
+Moreover, Bias((D, ∆) · Z) = Bias(D, ∆) and Bias((D, ∆) · X) = −Bias(D, ∆).
+
+30
+
+
+(a)
+
+XK
+
+K
+
+XK•
+
+K•
+
+XAn
+
+An
+
+R
+
+z
+
+ζ
+
+1
+
+1
+
+(b)
+
+XBn
+
+Bn
+
+R
+
+z
+
+ζ
+
+1
+
+1
+
+Figure 7: (a) A covering of the region z −ζ ∈[−1, 1] and z + ζ ⩾0 for the case b ⩾0. (b) A covering of the region
+z −ζ ∈[−1, 1] and z + ζ ⩾0 for the case b ⩽0.
+
+Lemma (Step Lemma). For any state (D, ∆), if Skew(D, ∆) ⩾15, then there exists a special grid operator G
+such that Skew((D, ∆) · G) ⩽0.9 Skew(D, ∆). Moreover, G can be computed using a constant number of arithmetic
+operations.
+
+Proof. Let (D, ∆) be a state such that Skew(D, ∆) ⩾15. By Lemma A.11 we can assume w.l.o.g. that Bias(D, ∆) ∈
+[−1, 1]. Moreover, by Remark A.20, we can also assume that β ⩾0 and z + ζ ⩾0. Note that the application of the
+grid operators X and/or Z in Remark A.20 preserves the fact that Bias(D, ∆) ∈[−1, 1]. We now treat in turn the
+cases b ⩾0 and b ⩽0.
+
+Case 1 b ⩾0. A covering of the strip defined by z−ζ ∈[−1, 1] and z+ζ ⩾0 is depicted in Figure 7(a). The R region
+(in green) and the A region (in red) are defined as the intersection of this space with {(z, ζ) | −0.8 ⩽z, ζ ⩽0.8}
+and {(z, ζ) | z ⩽0.3 and 0.8 ⩽ζ} respectively. The K and K• regions (both in blue) fill the remaining space.
+We now consider in turn the possible locations of the pair (z, ζ) in this covering.
+
+1. If −0.8 ⩽z, ζ ⩽0.8, then Skew((D, ∆) · R) ⩽0.9 Skew(D, ∆) by Lemma A.13.
+2. If z ⩽0.3 and 0.8 ⩽ζ, then Skew((D, ∆) · K) ⩽0.9 Skew(D, ∆) by Lemma A.15.
+3. If 0.3 ⩽z, ζ, then there exists n ∈Z such that Skew((D, ∆) · An) ⩽0.9 Skew(D, ∆) by Lemma A.17.
+4. If 0.8 ⩽z and ζ ⩽0.3, then note that (D, ∆) · K• = (∆, D) · K, and therefore by Lemma A.15:
+
+Skew((D, ∆) · K•) = Skew((∆, D) · K) ⩽0.9 Skew(∆, D) = 0.9 Skew(D, ∆).
+
+Case 2 b ⩽0. As above, we use a covering of the strip defined by z −ζ ∈[−1, 1] and z + ζ ⩾0 and consider
+the possible locations of (z, ζ) in this space. The relevant covering is depicted in Figure 7(b), where the R
+region (in green) is defined as above and the B region (in red) is defined as the intersection of the strip with
+{(z, ζ) | z, ζ ⩾−0.2}.
+
+1. If −0.8 ⩽z, ζ ⩽0.8, then Skew((D, ∆) · R) ⩽0.9 Skew(D, ∆) by Lemma A.13.
+2. If z, ζ ⩾−0.2 then there exists n ∈Z such that Skew((D, ∆) · Bn) ⩽0.9 Skew(D, ∆) by Lemma A.19.
+
+Finally, note that only a constant number of calculations are required to decide which of the above cases applies.
+Moreover, each case only requires a constant number of operations. Specifically, the computation of k and σk in
+Lemma A.11, of n and An in Lemma A.17, and of n and Bn in Lemma A.19 each require just a fixed number of
+operations, and each of the remaining cases produces a fixed grid operator.
+
+31
+
+
+B
+Proof of Proposition 5.17
+
+We prove Proposition 5.17, whose statement we reproduce here.
+
+Proposition. Let A be a bounded convex subset of R2 with non-empty interior. Then there exists an ellipse E such
+that A ⊆E, and such that
+
+area(E) ⩽4π
+
+3
+√
+
+3 area(A).
+(41)
+
+Proof. We may assume without loss of generality that A is compact, for it it is not, we can replace A by its closure,
+which has the same area as A because A is convex. Let D be the closed unit disk, and consider the collection
+Aff(A, D) of all affine transformations f : R2 →R2 satisfying f(A) ⊆D. Then Aff(A, D), with the natural topology,
+is a compact set. Therefore, there exists some f ∈Aff(A, D) maximizing the area of f(A). We claim that f is
+invertible. Indeed, since A is bounded, there exists some λ > 0 such that λA ⊆D. Since λA has non-zero area,
+and multiplication by λ is an affine map, it follows that f(A) has non-zero area as well, and so f is invertible. Let
+E = f −1(D). We claim that E is the desired ellipse.
+
+A
+f
+�−−−−→
+f(A)
+
+D
+
+f −1
+�−−−−→
+A
+
+E = f −1(D)
+
+We have A ⊆E by construction. We must show (41). Because affine transformations preserve ratios of areas, we
+may equivalently show
+
+area(D) ⩽4π
+
+3
+√
+
+3
+area(f(A)).
+
+Let ∂D be the boundary of D, and consider points p where f(A) “touches” the boundary, i.e., points p ∈f(A) ∩∂D.
+We claim that any arc segment of ∂D of length 2π/3 radians (120 degrees) contains at least one such point. To prove
+this, assume, for the sake of contradiction, that there is such an arc segment Q not containing any point of f(A).
+By rotational symmetry, we may without loss of generality assume that Q is the arc from −π/3 to π/3 radians on
+the unit circle. Let z1 and z2 be the endpoints of Q, as shown here:
+
+g(D).
+
+f(A)
+Q
+
+D
+
+•
+w1
+
+•
+w2
+
+•z1
+
+•z2
+
+•
+(−1, 0)
+
+Since both Q and f(A) are compact, there exists some d > 0 such that the distance between any point of A and
+any point of Q is at least d. Let w1 and w2 be the two points on the unit circle whose distance from Q is d/2. Now
+consider the affine transformation g that fixes (−1, 0) and maps w1 to z1 and w2 to z2. Then g(D) is an ellipse
+whose boundary passes through the points (−1, 0), z1, and z2, shown as a dashed line in the above illustration. It is
+therefore bisected by Q. Since the map g moves no point of the unit disk by more than distance d, the set g(f(A))
+does not intersect Q. It follows that g(f(A)) is contained in D. On the other hand, a calculation shows that the area
+of g(f(A)) is slightly greater than that of f(A), contradicting the assumption that the area of f(A) was maximal.
+We have proved that every arc segment of length 2π/3 radians on the boundary of D contains a point of f(A). It
+follows that there is some finite cyclic sequence of points p1, . . . , pn ∈f(A) ∩∂D such that consecutive points are no
+more than 2π/3 radians apart. By connecting each pi to the center, we partition each of the sets f(A) and D into n
+
+32
+
+
+pieces B1, . . . , Bn and C1, . . . , Cn, respectively.
+
+B1
+
+B2
+B3
+
+B4
+
+B5
+
+C3
+
+C4
+
+C5
+
+•
+
+•p1
+
+•p2
+•p3
+
+•
+p4
+
+•
+p5
+
+The fact that the inner angles are less than 2π/3 immediately implies that area(Ci) ⩽
+4π
+3
+√
+
+3 area(Bi) for all i; hence
+
+also area(D) ⩽
+4π
+3
+√
+
+3 area(f(A)). This finishes the proof of the proposition.
+
+C
+Proof of Theorem 6.2
+
+Consider the rings Z and D, together with their respective extensions Z[
+√
+
+2], Z[ω] and D[
+√
+
+2], D[ω], as introduced in
+Section 3. We wish to give an efficient method for solving equations of the form t†t = ξ, for given ξ ∈D[
+√
+
+2] and
+unknown t ∈D[ω]. To do this, we first classify the primes in Z[
+√
+
+2] and Z[ω], then show how to solve the equation
+t†t = ξ in the case where ξ ∈Z[
+√
+
+2] and t ∈Z[ω], which we finally extend to the general case. None of the results
+in this section are original; they are well-known from the theory of cyclotomic fields, which goes back to the 19th
+century work of Gauss and Kummer. Nevertheless, we hope that the following detailed treatment may be useful to
+readers who are not experts in algebraic number theory. Moreover, we hope to give sufficient details to enable an
+interested reader, in principle, to implement the algorithm. This will also aid in our complexity analysis.
+A fundamental property of the rings Z, Z[
+√
+
+2], and Z[ω] is that they are Euclidean domains; this implies that the
+notions of divisibility, greatest common divisor, and unique prime factorization all make sense in these rings. Recall
+that in a ring, a unit is an invertible element. In a Euclidean domain, we write x | y if x is a divisor of y, and x ∼y
+if x | y and y | x; equivalently, x ∼y iff there exists a unit u that xu = y. An element x is prime if x is not a unit,
+and x = ab implies that either a or b is a unit. Note that if x is prime and x | ab, then x | a or x | b; this follows from
+Euclid’s algorithm.
+
+C.1
+Units in Z[
+√
+
+2]
+
+Definition C.1. We say that ξ ∈Z[
+√
+
+2] is doubly positive if ξ ⩾0 and ξ• ⩾0.
+
+Lemma C.2. The units of Z[
+√
+
+2] are of the form u = (−1)nλm, where λ = 1 +
+√
+
+2. Moreover, a unit u is doubly
+positive if and only if u is a square in Z[
+√
+
+2].
+
+Proof. Lemma 10 of [14].
+
+Lemma C.3. Let ξ ∈Z[
+√
+
+2], and consider n = ξ•ξ. If n is a unit in Z, then ξ is a unit in Z[
+√
+
+2].
+
+Proof. If n is a unit, then there exists m ∈Z such that nm = 1, hence ξξ•m = 1, hence ξ is invertible in Z[
+√
+
+2].
+
+C.2
+Primes in Z[
+√
+
+2]
+
+Lemma C.4. Let ξ ∈Z[
+√
+
+2], and consider n = ξ•ξ. If n is prime in Z, then ξ is prime in Z[
+√
+
+2].
+
+Proof. Suppose ξ = αβ in Z[
+√
+
+2], and consider n = ξ•ξ = α•αβ•β. Since α•α and β•β are integers and n is prime,
+we must have that either α•α or β•β is a unit in Z; hence α or β is a unit in Z[
+√
+
+2]. So ξ is prime.
+
+Lemma C.5. For every prime ξ of Z[
+√
+
+2], there exists a unique (up to a unit) prime p of Z such that ξ | p.
+
+Proof. To show existence, consider n = ξ•ξ.
+Note that ξ ̸= 0, hence n ̸= 0.
+Let n = p1p2 · · · pk be a prime
+factorization of n. Since ξ | p1p2 · · · pk and ξ is prime in Z[
+√
+
+2], there exists some i such that ξ | pi.
+To show uniqueness, assume ξ | p and ξ | q, where p ̸∼q. Then gcd(p, q) = 1, hence by Euclid’s algorithm, we can
+write 1 = np + mq, for integers n and m. Then ξ | np + mq = 1, which is absurd since ξ is prime.
+
+33
+
+
+Lemma C.6. Let ξ be a prime of Z[
+√
+
+2], and let p be the unique (up to a unit) prime of Z such that ξ | p. Then
+exactly one of the following holds: ξ ∼p or ξ•ξ ∼p.
+
+Proof. First note that at most one of these properties can hold, because otherwise ξ ∼ξ•ξ, which implies that ξ• is
+a unit, which is absurd since it is prime.
+We now show that at least one of the properties holds. Since ξ | p and p is an integer, we have ξ• | p, hence ξ•ξ | p2.
+Also, ξ•ξ is an integer, so either ξ•ξ ∼1, ξ•ξ ∼p, or ξ•ξ ∼p2. The first of these cases is absurd, since ξ would then
+be a unit. In the second case, we have ξ•ξ ∼p, which is to be shown. In the third case, since ξ | p, there is α ∈Z[
+√
+
+2]
+such that ξα = p. Then we have ξ•ξα•α = p2 ∼ξ•ξ, which implies that α is a unit, hence ξ ∼p.
+
+Lemma C.7. Let p be a prime of Z. Then the prime factorization of p in Z[
+√
+
+2] consists of one or two factors.
+
+Proof. Let ξ be some prime factor of p in Z[
+√
+
+2]. By Lemma C.6, either ξ ∼p or ξ•ξ ∼p. Either way, this gives a
+prime factorization of p in Z[
+√
+
+2].
+
+We now determine the prime factorization in Z[
+√
+
+2] of every prime p of Z. It turns out that there are 5 cases,
+depending whether p is even, or p ≡1, 3, 5, 7 (mod8).
+
+Lemma C.8. The prime factorization of p = 2 in Z[
+√
+
+2] is p =
+√
+
+2 ·
+√
+
+2. The prime factorization of p = −2 in
+Z[
+√
+
+2] is p = −
+√
+
+2 ·
+√
+
+2.
+
+Proof. We only need to show that
+√
+
+2 is prime in Z[
+√
+
+2], but this follows from Lemma C.4.
+
+Lemma C.9. Let p be a prime of Z such that p ≡3 (mod 8) or p ≡5 (mod 8). Then p is prime in Z[
+√
+
+2].
+
+Proof. Let ξ be a prime factor of p in Z[
+√
+
+2]. By Lemma C.6, we know that ξ ∼p or ξ•ξ ∼p. In the former
+case, p is prime and we are done. In the latter case, writing ξ = a + b
+√
+
+2, we have ξ•ξ = a2 −2b2 = ±p, hence
+a2 −2b2 ≡±3 (mod 8). By easy case distinction, we see that a2 can only be 0, 1, or 4 modulo 8, and 2b2 can only
+be 0 or 2 modulo 8, so a2 −2b2 ≡±3 (mod 8) is plainly impossible.
+
+Lemma C.10. Let ξ ∈Z[
+√
+
+2] such that ξ ∼ξ•. Then either ξ ∼n, or ξ ∼n
+√
+
+2, for some n ∈Z.
+
+Proof. By assumption, ξ ∼ξ•, so there exists a unit u ∈Z[
+√
+
+2] such that ξ• = uξ. By Lemma C.2, the units of
+Z[
+√
+
+2] are exactly of the form u = (−1)nλm, where λ = 1 +
+√
+
+2. Applying the automorphism to ξ• = uξ, we get
+ξ = u•ξ•, hence ξ•ξ = u•uξ•ξ, hence u•u = 1, hence (λ•λ)m = 1. But λ•λ = −1, so m is even; say m = 2k. Let
+ξ′ = λkξ. Note that ξ′ ∼ξ. Then we have
+
+ξ′• = (λ•)kξ• = (−λ)−kuξ = (−1)−kλ−k(−1)nλmξ = ±λkξ = ±ξ′.
+(42)
+
+We can write ξ′ = a+b
+√
+
+2 for some a, b ∈Z. From (42), we have either a−b
+√
+
+2 = a+b
+√
+
+2, or a−b
+√
+
+2 = −(a+b
+√
+
+2).
+In the first case, b = 0, and therefore ξ ∼ξ′ = a. In the second case, a = 0, and therefore ξ ∼ξ′ = b
+√
+
+2.
+
+Lemma C.11. Let p be a prime of Z such that p ≡1 (mod 8) or p ≡7 (mod 8). Then p has a prime factorization
+of the form p ∼ξ•ξ in Z[
+√
+
+2]; moreover, ξ ̸∼ξ•, so that the two prime factors are distinct.
+
+Proof. It is well-known (by quadratic reciprocity) that if p is a prime with p ≡±1 (mod 8), then 2 is a quadratic
+residue modulo p. Therefore, the equation x2 ≡2 (mod p) has an integer solution; let x be such a solution. Let
+α = x+
+√
+
+2. Then α•α = x2 −2 ≡0 (mod p), and hence p | α•α. On the other hand, clearly p ∤α (since α/p ̸∈Z[
+√
+
+2]),
+and similarly p ∤α•, which shows that p is not a prime in Z[
+√
+
+2]. By Lemma C.6, p ∼ξ•ξ for some prime ξ of Z[
+√
+
+2].
+The final claim follows from Lemma C.10, because if ξ ∼ξ•, then either ξ ∼n or ξ ∼n
+√
+
+2. In the first case,
+n2 | ξ•ξ ∼p, but p is prime, so that n = ±1, contradicting that ξ is prime. In the second case, 2n2 | ξ•ξ ∼p,
+contradicting the assumption that p is odd.
+
+Lemma C.12. Let p be a prime of Z. A prime factorization of p in Z[
+√
+
+2] can be computed in probabilistic polynomial
+time.
+
+Proof. Assume without loss of generality that p > 0. If p = 2, then p =
+√
+
+22 is the desired prime factorization
+by Lemma C.8. If p ≡3, 5 (mod 8), then p is already prime in Z[
+√
+
+2] by Lemma C.9. The remaining case is when
+p ≡1, 7 (mod 8).
+In this case the prime factorization is of the form p ∼ξ•ξ by Lemma C.11.
+Moreover, the
+proof of Lemma C.11 indicates how such ξ can be computed, namely as ξ = gcd(p, x +
+√
+
+2), where x is a solution
+of x2 ≡2 (mod p). The equation x2 ≡2 (mod p) can be solved in probabilistic polynomial time by a well-known
+algorithm, see [12].
+
+34
+
+
+C.3
+Primes in Z[ω]
+
+Lemma C.13. Let ξ be a prime in Z[
+√
+
+2]. Then either ξ is prime in Z[ω], or else ξ ∼t†t where t is some prime of
+Z[ω]. In particular, the prime factorization of ξ in Z[ω] consists of either one or two factors.
+
+Proof. This is similar to the proof of Lemma C.7. Let t be some prime factor of ξ in Z[ω]. Then t | ξ, therefore
+t† | ξ† = ξ, therefore t†t | ξ2 in Z[ω]. But both t†t and ξ are elements of Z[
+√
+
+2], so t†t | ξ2 in Z[
+√
+
+2]. Since ξ is prime
+in Z[
+√
+
+2], there are only three possibilities: t†t ∼1, t†t ∼ξ, and t†t ∼ξ2. In the first case, t is a unit, contradicting
+the fact that it is prime in Z[ω]. In the second case, we are done. In the third case, since t | ξ, there is a ∈Z[ω] such
+that at = ξ. Then a†at†t = ξ†ξ = ξ2 = t†t, which implies a†a = 1. Therefore a is a unit, and t ∼ξ. Therefore ξ is
+prime in Z[ω] and we are done.
+
+C.4
+The Diophantine equation t†t = ξ
+
+We are interested in solving equations of the form
+
+t†t = ξ,
+(43)
+
+where ξ ∈D[
+√
+
+2] is given, and t ∈D[ω] is unknown.
+
+Definition C.14. Recall that for elements ξ, ξ′ ∈Z[
+√
+
+2], the notation ξ ∼ξ′ means that ξ, ξ′ differ by a unit, i.e.,
+there exists a unit u ∈Z[
+√
+
+2] such that ξ = uξ′. We extend this notation also to the ring D[
+√
+
+2]: for ξ, ξ′ ∈D[
+√
+
+2],
+we write ξ ∼ξ′ iff there exists a unit u ∈Z[
+√
+
+2] such that ξ = uξ′. Note that we have taken u to be a unit of the
+ring Z[
+√
+
+2], not of D[
+√
+
+2].
+
+It will often be convenient to replace (43) by the following weaker condition.
+
+Definition C.15. We say that ξ ∈D[
+√
+
+2] is †-decomposable if the equation
+
+t†t ∼ξ
+(44)
+
+has a solution t ∈D[ω].
+
+Solutions to (43) can be recovered from solutions to (44) by using the following observation:
+
+Lemma C.16. Let ξ ∈D[
+√
+
+2].
+Then equation (43) has a solution if and only if ξ is doubly positive and †-
+decomposable.
+
+Proof. If ξ is a solution to (43), then it is obviously †-decomposable. It is also doubly positive by Lemma 6.1.
+Conversely, assume t†t ∼ξ. Then there exists a unit u of Z[
+√
+
+2] such that ξ = ut†t. Since both ξ and t†t are doubly
+positive, it follows that u is doubly positive, and hence u is a square of the ring Z[
+√
+
+2] by Lemma C.2; say u = v2.
+Since v ∈Z[
+√
+
+2], we have v = v†. Setting t′ = vt, we have ξ = v†vt†t = t′†t′, which finishes the proof.
+
+C.5
+The case ξ ∈Z[
+√
+
+2]
+
+Lemma C.17. Suppose t†t ∼ξ for t ∈D[ω] and ξ ∈Z[
+√
+
+2]. Then t ∈Z[ω].
+
+Proof. Note that, in Z[ω], we have
+√
+
+2k | t if and only if 2k | t†t. Choose t′ ∈Z[ω] and k ⩾0 such that t = t′/
+√
+
+2k.
+Then t′†t′ = 2kξ, hence 2k | t′†t′, hence
+√
+
+2k | t′, hence t ∈Z[ω].
+
+Lemma C.18. If x, y, z are three elements of a Euclidean domain, then
+
+gcd(xy, z) | gcd(x, z) · gcd(y, z).
+
+Proof. By considering the prime factorization of z.
+
+Lemma C.19. Suppose ξ = αβ, where α, β ∈Z[
+√
+
+2] and gcd(α, β) = 1. Then ξ is †-decomposable iff α and β are
+†-decomposable.
+
+Proof. For the right-to-left implication, assume α ∼s†s and β ∼r†r. Clearly ξ = αβ ∼(sr)†sr. For the left-
+to-right implication, assume ξ ∼t†t. Note that t ∈Z[ω] by Lemma C.17. To show that α is †-decomposable, let
+s = gcd(t, α). We claim that s†s ∼α. Clearly, since s | α and s† | α, we have s†s | α2. One the other hand, we
+know that s†s | t†t ∼ξ = αβ. Since α and β are relatively prime, it follows that s†s | α. Conversely, note that by
+Lemma C.18, α = gcd(t†t, α) | gcd(t†, α)·gcd(t, α) = s†s. Therefore s†s ∼α and α is †-decomposable. The argument
+for β is similar.
+
+35
+
+
+Lemma C.20. Suppose that ξ ∈Z[
+√
+
+2] is prime. Let p > 0 be the unique positive prime in Z such that ξ | p. Then
+ξ is †-decomposable if and only if p = 2 or p ≡1, 3, 5 (mod8).
+
+Proof. We consider each case in turn. If p = 2, then ξ ∼
+√
+
+2. Let δ = 1 + ω; a simple calculation shows that
+δ†δ = λ
+√
+
+2 ∼ξ. So ξ is †-decomposable.
+If p ≡1 (mod 4), then by quadratic reciprocity, there exists some integer u such that u2 ≡−1 (mod p). Therefore
+ξ | p | u2 + 1 = (u + i)(u −i). Let t = gcd(ξ, u + i). We claim that ξ ∼t†t. Note that t | ξ, hence t† | ξ† = ξ, hence
+t†t | ξ2. Since ξ is prime in Z[
+√
+
+2], there are 3 possibilities: t†t ∼1, t†t ∼ξ, or t†t ∼ξ2. The first case is not
+possible, because in this case, t would be a unit, so that ξ is relatively prime to u + i, hence to u −i, hence to u2 + 1,
+contradicting ξ | u2 + 1. In the second case, we have t†t ∼ξ, which was to be shown. In the third case, we have
+t†t ∼ξ2. Since t | ξ, there exists some s ∈Z[ω] such that ts = ξ. But then t†ts†s = ξ†ξ = ξ2 ∼t†t, so that s is a unit.
+In this case, we have t ∼ξ, therefore ξ | u + i, therefore also ξ = ξ† | u −i, hence ξ |(u + i) −(u −i) ∼2, contradicting
+the fact that p is the only prime integer divisible by ξ.
+The case p ≡3 (mod 8) is very similar.
+In this case, by quadratic reciprocity, −2 is a square modulo p, so
+that there exists some integer u such that u2 ≡−2 (mod p). Therefore ξ | p | u2 + 2 = (u + i
+√
+
+2)(u −i
+√
+
+2). Let
+t = gcd(ξ, u + i
+√
+
+2). We claim that ξ ∼t†t. Note that t | ξ, hence t† | ξ† = ξ, so t†t | ξ2. So again we have the three
+possibilities t†t ∼1, t†t ∼ξ, or t†t ∼ξ2. The first case is not possible, because in this case, t would be a unit, so
+that ξ is relatively prime to u + i
+√
+
+2, hence to u −i
+√
+
+2, hence to u2 + 2, contradicting ξ | u2 + 2. In the second case,
+we have t†t ∼ξ, which was to be shown. In the third case, we have t†t ∼ξ2. Since t | ξ, there exists some s ∈Z[ω]
+such that ts = ξ. But then t†ts†s = ξ†ξ = ξ2 ∼t†t, so that s is a unit. In this case, we have t ∼ξ, therefore
+ξ | u + i
+√
+
+2, therefore also ξ = ξ† | u −i
+√
+
+2, hence ξ | i(u −i
+√
+
+2)−i(u + i
+√
+
+2) = 2
+√
+
+2. On the other hand, ξ | p, therefore
+ξ | gcd(p, 2
+√
+
+2) = 1, contradicting the fact that ξ is not a unit.
+Finally, if p ≡7 (mod 8), then p ∼ξ•ξ by Lemma C.11. Assume that ξ is †-decomposable as ξ ∼t†t. Then
+
+(t†t)•(t†t) ∼ξ•ξ ∼p.
+
+Note that t•t ∈Z[i], so we can write t•t = a + bi for some a, b ∈Z. But then we have
+
+p ∼(t•t)(t•t)† = (a + bi)(a −bi) = a2 + b2.
+
+But a2 and b2 can only be congruent to 0, 1, or 4 modulo 8, contradicting p ≡7 (mod 8).
+Therefore ξ is not
+†-decomposable, which is what was claimed.
+
+Lemma C.21. Suppose ξ ∈Z[
+√
+
+2] is prime. Let p > 0 be the unique positive prime in Z such that ξ | p. Let m be a
+positive integer. Then ξm is †-decomposable if and only if m is even or p ≡1, 2, 3, 5 (mod8).
+
+Proof. If m is even, then note that ξ ∈Z[
+√
+
+2], so ξ = ξ†; therefore, t = ξm/2 will be a solution. If p ≡1, 2, 3, 5 (mod8),
+then by Lemma C.20, there exists s ∈Z[ω] with s†s ∼ξ; therefore t = sm is a solution of t†t ∼ξm. The only remaining
+case is then m is odd and p ≡7 (mod 8). In this case, there can be no solution. For assume on the contrary that
+t†t = ξm. Then as in the proof of Lemma C.20, we can write t•t = a + bi for some a, b ∈Z, and we get
+
+pm ∼(t•t)(t•t)† = (a + bi)(a −bi) = a2 + b2,
+
+contradicting pm ≡7 (mod 8).
+
+Remark C.22. The proofs of Lemmas C.20 and C.21 are constructive, and immediately yield efficient algorithms for
+determining t, provided that we have an efficient method of solving u2 ≡−1 (mod p) when p is a prime congruent
+to 1 (mod 4) and of solving u2 ≡−2 (mod p) when p is a prime congruent to 3 (mod 8). These last problems can be
+solved in probabilistic polynomial time by a well-known algorithm, see [12].
+
+Lemma C.23. Given ξ ∈Z[
+√
+
+2], together with its prime factorization in Z[
+√
+
+2], there exists an algorithm that
+determines, in probabilistic polynomial time, whether the equation t†t ∼ξ has a solution or not, and finds a solution
+if there is one.
+
+Proof. Let ξ ∼ξm1
+1
+ξm2
+2
+· · · ξmk
+k
+be a prime factorization of ξ in Z[
+√
+
+2], where ξ1, . . . , ξk are distinct (i.e., pairwise
+non-associate) primes. By Lemma C.19, t†t ∼ξ has a solution if and only if t†t ∼ξmi
+i
+has a solution for all i. By
+Lemma C.21, t†t ∼ξmi
+i
+has a solution if and only if mi is even or p ≡1, 2, 3, 5 (mod8). Since these conditions are
+easy to check, we can therefore determine the existence of a solution efficiently, i.e., in polynomial time.
+Moreover, once a solution has been shown to exist, the actual solution can be efficiently computed. Namely, for
+each i, find ti such that t†
+iti ∼ξmi
+i
+as in Lemma C.21. Then t ∼t1t2 · · · tk satisfies t†t ∼ξm1
+1
+ξm2
+2
+· · · ξmk
+k
+∼ξ. By
+Remark C.22, all of this can be computed in probabilistic polynomial time.
+
+36
+
+
+Proposition C.24. Let ξ ∈Z[
+√
+
+2], and let n = ξ•ξ. Note that n is an integer. Given the prime factorization of
+n, there exists an algorithm that determines, in probabilistic polynomial time, whether the equation t†t ∼ξ has a
+solution or not, and finds a solution if there is one.
+
+Proof. Suppose that n = ±pm1
+1
+· · · pmk
+k
+is the prime factorization of n, where p1, . . . , pk are distinct positive primes.
+Each pi can be efficiently factored into primes of Z[
+√
+
+2] by Lemma C.12; this yields the prime factorization of
+n = ξ•ξ in Z[
+√
+
+2]. From this, it is easy to obtain a prime factorization of ξ. The rest of the claim then follows from
+Lemma C.23.
+
+C.6
+The case ξ ∈D[
+√
+
+2]
+
+The following lemma can be used to reduce the problem of †-decomposability in D[
+√
+
+2] to †-decomposability in Z[
+√
+
+2].
+
+Lemma C.25. Consider ξ ∈D[
+√
+
+2]. Then ξ is †-decomposable if and only if
+√
+
+2 ξ is †-decomposable.
+
+Proof. Recall that δ = 1 + ω satisfies δ†δ = λ
+√
+
+2 ∼
+√
+
+2. Also note that δ is invertible in D[ω]; specifically, δ−1 =
+δλ−1ω−1/
+√
+
+2 ∈D[ω]. Assume that ξ is †-decomposable, so that t†t ∼ξ. Letting t′ = δt, we have t′†t′ = δ†δt†t ∼
+√
+
+2t†t ∼
+√
+
+2 ξ, so that
+√
+
+2 ξ is †-decomposable. The converse is proved similarly, using δ−1 instead of δ.
+
+We can now prove Theorem 6.2, whose statement we reproduce here.
+
+Theorem. Let ξ ∈D[
+√
+
+2]. Note that ξ•ξ ∈D, so we can write ξ•ξ = n
+
+2ℓfor some n ∈Z and ℓ∈N. There exists a
+probabilistic algorithm which, given ξ and, in case n ̸= 0, a prime factorization of n, determines whether or not the
+equation t†t = ξ has a solution, and finds a solution if there is one. Moreover, the expected runtime of this algorithm
+is polynomial in the size of n.
+
+Proof. Let ξ be an element of D[
+√
+
+2] with ξ•ξ = n
+
+2ℓfor some n ∈Z. First, the algorithm can easily check whether ξ
+is doubly positive, and if it is not, there is no solution. Next, if n = 0, then ξ = 0, and t = 0 is obviously a solution,
+so there is nothing to do. Otherwise, let ξ′ =
+√
+
+2ℓξ. Since ξ′ ∈Z[
+√
+
+2] and ξ′•ξ′ = n, and a factorization of n is given,
+we can use Proposition C.24 to efficiently determine whether s†s ∼ξ′ has a solution. By Lemma C.25 this is the
+case if and only if the equation t†t ∼ξ also has a solution, in which case it is given by t = δ−ℓs. Finally, since ξ is
+doubly positive, we can solve t′†t′ = ξ by Lemma C.16.
+
+We conclude this appendix with a useful fact: the algorithm of Theorem 6.2 always succeeds in case n is a prime
+that is congruent to 1 modulo 8.
+
+Proposition C.26. Let ξ = D[
+√
+
+2] be doubly positive, with ξ•ξ = n
+
+2ℓfor some n ∈Z. If n is prime and n ≡1 (mod 8),
+then the equation t†t = ξ has a solution.
+
+Proof. Let ξ′ =
+√
+
+2ℓξ. Then ξ′ ∈Z[
+√
+
+2] and ξ′•ξ′ = n. Then ξ′ is prime by Lemma C.4 and †-decomposable by
+Lemma C.20. By Lemma C.25, ξ is †-decomposable, so that the equation t†t = ξ can be solved by Lemma C.16.
+
+D
+Proof of Lemma 8.4
+
+Definition D.1. Recall that δ = 1 + ω. Every element u ∈D[ω] can be written in the form
+
+u = 1
+
+δk (aω3 + bω2 + cω + d),
+(45)
+
+where a, b, c, d ∈Z and k ⩾0. The smallest k such that u can be written in this form is called the least δ-exponent
+of u.
+
+Remark D.2. A calculation shows that 1
+
+δ (aω3 + bω2 + cω + d) is equal to
+
+1
+2
+�
+(a −b + c −d)ω3 + (a + b −c + d)ω2 + (−a + b + c −d)ω + (a −b + c + d)
+�
+.
+
+It follows that an element aω3 + bω2 + cω + d ∈Z[ω] is divisible by δ if and only if a + b + c + d is even.
+
+We can now prove Lemma 8.4, whose statement we reproduce here.
+
+Lemma. Each of the numbers n produced in step 2(a) of Algorithm 7.6 satisfies n ⩾0, and either n = 0 or
+n ≡1 (mod 8).
+
+37
+
+
+Proof. Recall that in step 2(a) of Algorithm 7.6, we are given u ∈D[ω] such that u ∈D and u• ∈D. We let
+ξ = 1 −u†u and write ξ•ξ =
+n
+2ℓ, where ℓ⩾0 is minimal. We must show that n ⩾0, and that either n = 0 or
+n ≡1 (mod 8).
+The first claim is trivial, since by assumption u†u ⩽1 and (u†u)• ⩽1, and therefore ξ, ξ• ⩾0, which implies
+n ⩾0. For the second claim, write u in the form (45), with least δ-exponent k.
+
+• Case 1: k ⩽1. In this case, one can show by a direct calculation (for example with the help of the algorithm
+from Proposition 5.21) that the scaled two-dimensional grid problem only has the 9 solutions u = 0 and u = ωj,
+where j = 0, . . . , 7. In the first case, n = 1, and in the remaining 8 cases, n = 0, so the claim follows.
+
+• Case 2: k ⩾2. We calculate
+
+u†u =
+1
+(δ†δ)k (A + B
+√
+
+2),
+
+where A = a2+b2+c2+d2 and B = cd+bc+ab−da. Note that, since k is the least δ-exponent of u, Remark D.2
+implies that a + b + c + d is odd. It easily follows that A is odd; moreover, since B ≡(a + c)(b + d) (mod 2),
+it also follows that B is even. Also note that (δ†δ)k = (λ
+√
+
+2)k is an element of Z[
+√
+
+2], and is divisible by 2
+since k ⩾2. Therefore, we have (δ†δ)k = C + D
+√
+
+2 for some C, D ∈Z where C, D are both even. We further
+calculate
+ξ = 1 −u†u =
+1
+(δ†δ)k (C + D
+√
+
+2 −A −B
+√
+
+2) =
+1
+(δ†δ)k (x + y
+√
+
+2),
+
+where x = C −A is odd and y = D −B is even. Noting that (δ†δ)•(δ†δ) = 2 and that x2 −2y2 ≡1 (mod 8),
+we therefore have
+ξ•ξ =
+1
+((δ†δ)•(δ†δ))k (x2 −2y2) = 1
+
+2k (x2 −2y2).
+
+It follows that ℓ= k and n = x2 −2y2, and therefore n ≡1 (mod 8), which was to be shown.
+
+E
+Proof of Lemma 8.6
+
+Lemma E.1.
+(a) √x ⩾ln x for all x > 0.
+
+(b) 3√x ⩾(ln x)2 for all x ⩾1.
+
+(c) (1 −a
+
+x)x ⩽e−a, for all x ⩾a > 0.
+
+Proof. By elementary calculus. For (a) and (b), note that the functions f(x) = ln x/√x and g(x) = (ln x)2/3√x, on
+the given domains, take their maxima at x = e2 and x = e4, respectively, and in both cases, the maximum is less
+than 1. For (c), first note that for all z ∈R, z + 1 ⩽ez; the claim follows by letting z = −a
+
+x.
+
+We can now prove Lemma 8.6, whose statement we reproduce here.
+
+Lemma. Let b > 0 be an arbitrary fixed constant. Then for a ⩾1,
+
+∞
+�
+
+x=1
+
+�
+1 −
+1
+a + b ln x
+
+�x
+= O(a).
+
+Proof. Let
+x0 = 16a2 + 144b2.
+(46)
+
+We claim that for all x ⩾x0,
+�
+1 −
+1
+a + b ln x
+
+�x
+⩽1
+
+x2 .
+(47)
+
+Indeed, from x ⩾16a2, we get
+√x
+
+2
+⩾2a.
+(48)
+
+From x ⩾144b2, we get
+√x
+
+6
+⩾2b.
+(49)
+
+38
+
+
+Combining (48) and (49) with Lemma E.1(a) and (b), we have
+
+x =
+√x
+
+2 · √x +
+√x
+
+6
+· 3√x ⩾2a ln x + 2b(ln x)2 = 2 ln x(a + b ln x),
+
+hence
+1
+a + b ln x ⩾2 ln x
+
+x
+,
+
+hence
+�
+1 −
+1
+a + b ln x
+
+�x
+⩽
+�
+1 −2 ln x
+
+x
+
+�x
+⩽e−2 ln x = 1
+
+x2
+
+where the final inequality uses Lemma E.1(c). This finishes the proof of (47). The lemma now immediately follows,
+because we have
+
+∞
+�
+
+x=1
+
+�
+1 −
+1
+a + b ln x
+
+�x
+=
+
+⌊x0⌋
+�
+
+x=1
+
+�
+1 −
+1
+a + b ln x
+
+�x
++
+
+∞
+�
+
+x=⌊x0⌋+1
+
+�
+1 −
+1
+a + b ln x
+
+�x
+
+⩽
+
+⌊x0⌋
+�
+
+x=1
+
+�
+1 −
+1
+a + b ln x0
+
+�x
++
+
+∞
+�
+
+x=⌊x0⌋+1
+
+1
+x2
+
+⩽
+
+∞
+�
+
+x=0
+
+�
+1 −
+1
+a + b ln x0
+
+�x
++
+
+∞
+�
+
+x=1
+
+1
+x2
+
+=
+a + b ln x0 + π2
+
+6
+= a + b ln(16a2 + 144b2) + π2
+
+6
+= O(a).
+
+References
+
+[1] A. Bocharov, Y. Gurevich, and K. M. Svore. Efficient decomposition of single-qubit gates into V basis circuits.
+Phys. Rev. A, 88:012313 (13 pages), 2013. Also available from arXiv:1303.1411.
+
+[2] A. Bocharov, M. Roetteler, and K. M. Svore. Efficient synthesis of probabilistic quantum circuits with fallback.
+Physical Review A, 91:052317, May 2015. Also available from arXiv:1409.3552.
+
+[3] A. Bocharov, M. Roetteler, and K. M. Svore.
+Efficient synthesis of universal repeat-until-success quantum
+circuits. Phys. Rev. Lett., 114:080502, Feb. 2015. Also available from arXiv:1404.5320.
+
+[4] G. Duclos-Cianci and K. M. Svore. Distillation of nonstabilizer states for universal quantum computation. Phys.
+Rev. A, 88:042325 (7 pages), 2013. Also available from arXiv:1210.1980.
+
+[5] A. G. Fowler. Constructing arbitrary Steane code single logical qubit fault-tolerant gates. Quantum Information
+and Computation, 11(9–10):867–873, 2011. Also available from arXiv:quant-ph/0411206.
+
+[6] B. Giles and P. Selinger. Exact synthesis of multiqubit Clifford+T circuits. Physical Review A, 87:032332, 2013.
+Also available from arXiv:1212.0506.
+
+[7] B. Giles and P. Selinger. Remarks on Matsumoto and Amano’s normal form for single-qubit Clifford+T opera-
+tors. arXiv:1312.6584, Dec. 2013.
+
+[8] V. Kliuchnikov, A. Bocharov, and K. M. Svore. Asymptotically optimal topological quantum compiling. Phys.
+Rev. Lett., 112:140504, Apr 2014. Also available from arXiv:1310.4150.
+
+[9] V. Kliuchnikov, D. Maslov, and M. Mosca. Asymptotically optimal approximation of single qubit unitaries by
+Clifford and T circuits using a constant number of ancillary qubits. Phys. Rev. Lett., 110:190502 (5 pages),
+2013. Also available from arXiv:1212.0822v2.
+
+[10] V. Kliuchnikov, D. Maslov, and M. Mosca. Fast and efficient exact synthesis of single qubit unitaries generated
+by Clifford and T gates. Quantum Information and Computation, 13(7–8):607–630, 2013. Also available from
+arXiv:1206.5236v4.
+
+39
+
+
+[11] V. Kliuchnikov, D. Maslov, and M. Mosca. Practical approximation of single-qubit unitaries by single-qubit
+quantum Clifford and T circuits. IEEE Transactions on Computers, 65(1):161–172, Jan 2016. Also available
+from arXiv:1212.6964v2.
+
+[12] M. O. Rabin. Probabilistic algorithms in finite fields. SIAM Journal on Computing, 9(2):273–280, 1980.
+
+[13] N. J. Ross and P. Selinger. Exact and approximate synthesis of quantum circuits, version 0.3.0.1. Software
+implementation, http://www.mathstat.dal.ca/~selinger/newsynth/, 2015.
+
+[14] P. Selinger. Efficient Clifford+T approximation of single-qubit operators. Quantum Information and Computa-
+tion, 15(1-2):159–180, Jan. 2015. Also available from arXiv:1212.6253.
+
+[15] P. W. Shor.
+Algorithms for quantum computation: discrete logarithms and factoring.
+In Proceedings of
+the 35th Annual Symposium on Foundations of Computer Science, pages 124–134, 1994. Also available from
+arXiv:quant-ph/9508027.
+
+[16] N. Wiebe and V. Kliuchnikov. Floating point representations in quantum circuit synthesis. New Journal of
+Physics, 15:093041 (24 pages), 2013. Also available from arXiv:1305.5528.
+
+40
+
+

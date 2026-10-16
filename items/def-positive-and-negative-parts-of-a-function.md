@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-positive-and-negative-parts-of-a-function.json
 id: def-positive-and-negative-parts-of-a-function
 kind: definition
 title: "The positive and negative parts of a function"
@@ -8,13 +10,6 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extended-reals]
-verification:
-  audited: 2026-08-27
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   references:
     - title: "Sheldon Axler, Measure, Integration and Real Analysis, Section 2E"
@@ -28,8 +23,20 @@ Let $f : X \to \overline{\mathbb{R}}$ with $\overline{\mathbb{R}}$ as in
 
 $$f^+ := \max\{f,0\},\qquad f^- := \max\{-f,0\}.$$
 
-Pointwise, both functions take values in $[0,+\infty]$, and one has
+All maxima, negations, and sums here are pointwise, using the total order,
+reflection and partial addition of [[def-extended-reals]]. Both parts take
+values in $[0,+\infty]$. For an extended-real-valued function, define the
+**magnitude function** by $|f|(x):=\max\{f(x),-f(x)\}$. This is function notation;
+it does not introduce an absolute-value operation into the scalar arithmetic of
+that item. Likewise the notation $f^+-f^-$ below abbreviates the pointwise sum
+$f^++(-f^-)$, whose definedness is verified here.
 
-$$f = f^+ - f^-,\qquad |f| = f^+ + f^-.$$
+At each point at least one of $f^+$ and $f^-$ is zero. If $f(x)\ge0$, then
+$f^+(x)=f(x)$ and $f^-(x)=0$; if $f(x)\le0$, then $f^+(x)=0$ and
+$f^-(x)=-f(x)$. These cases include both infinite values and show that the
+following sums are defined and satisfy
 
-At each point at least one of $f^+$ and $f^-$ is zero.
+$$f=f^++(-f^-),\qquad |f|=f^++f^-.$$
+
+Thus the familiar notation $f=f^+-f^-$ retains exactly these pointwise values;
+no subtraction of two infinite nonzero values occurs.

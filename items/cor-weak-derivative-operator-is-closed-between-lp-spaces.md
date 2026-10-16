@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/cor-weak-derivative-operator-is-closed-between-lp-spaces.json
 id: cor-weak-derivative-operator-is-closed-between-lp-spaces
 kind: corollary
 title: "Weak differentiation has a closed graph on its natural domains"
@@ -7,7 +9,7 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-axiom-of-choice, def-countable-choice, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-stability-of-sobolev-derivatives, lem-weak-derivative-linearity-locality-and-commutation, lem-weak-derivatives-are-unique-almost-everywhere, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-complex-holder-minkowski-and-the-quotient-norm, thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one, def-graph-of-a-linear-operator, def-product-norms-on-finitely-many-normed-spaces, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, thm-metric-sequential-closure, thm-holder-inequality-for-integrals, thm-lebesgue-measure-of-a-box-of-every-kind, thm-dominated-convergence, def-the-standard-smooth-step-function, thm-heine-borel-rn, thm-extreme-value-metric, lem-smooth-bump-between-concentric-euclidean-balls, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-tonelli-and-fubini-for-completed-product-measures, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-absolute-continuity-of-the-integral, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-over-a-measurable-set, lem-classical-derivatives-are-weak-derivatives, thm-real-power-continuity-and-derivatives, thm-chain-rule, def-test-function-space-d-of-an-open-set]
+deps: [def-axiom-of-choice, def-countable-choice, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-stability-of-sobolev-derivatives, lem-weak-derivative-linearity-locality-and-commutation, lem-weak-derivatives-are-unique-almost-everywhere, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-complex-holder-minkowski-and-the-quotient-norm, thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one, def-graph-of-a-linear-operator, def-product-norms-on-finitely-many-normed-spaces, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, thm-metric-sequential-closure, thm-holder-inequality-for-integrals, thm-lebesgue-measure-of-a-box-of-every-kind, thm-dominated-convergence, def-the-standard-smooth-step-function, thm-heine-borel-rn, thm-extreme-value-metric, lem-smooth-bump-between-concentric-euclidean-balls, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-tonelli-and-fubini-for-completed-product-measures, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-absolute-continuity-of-the-integral, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-over-a-measurable-set, lem-classical-derivatives-are-weak-derivatives, thm-real-power-continuity-and-derivatives, thm-chain-rule, def-test-function-space-d-of-an-open-set, lem-complex-norm-realification-is-a-real-norm]
 landmark: false
 proof_strategy: direct
 sources:
@@ -19,9 +21,6 @@ sources:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
       locator: "Chapter 3 §3.4, Theorem 3.20, printed p. 56; local L1 weak-derivative limit criterion"
-verification:
-  precheck: pass
-  audited: 2026-09-30
 ---
 
 ## Sources
@@ -73,7 +72,7 @@ $\mathrm{AC}_\omega$; no stronger choice principle is spent.
 
 [F4] Weak differentiation is linear and restricts to open subsets, and its locally integrable value class is unique under $\mathrm{AC}_\omega$ ([[lem-weak-derivative-linearity-locality-and-commutation]], [[lem-weak-derivatives-are-unique-almost-everywhere]]). Real and complex $L^p$ classes are vector spaces with their quotient norms ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-complex-lp-and-euclidean-test-function-conventions]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], [[thm-complex-holder-minkowski-and-the-quotient-norm]], [[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]]).
 
-[F5] A linear operator between normed spaces is closed when its graph is closed in the maximum product norm; normed spaces are metric spaces, and a set is closed exactly when it contains limits of all its convergent sequences under $\mathrm{AC}_\omega$ ([[def-graph-of-a-linear-operator]], [[def-product-norms-on-finitely-many-normed-spaces]], [[def-norm-and-normed-space]], [[rem-real-and-complex-normed-space-convention]], [[thm-metric-sequential-closure]]).
+[F5] A linear operator between normed spaces is closed when its graph is closed in the maximum product norm; normed spaces are metric spaces, and a set is closed exactly when it contains limits of all its convergent sequences under $\mathrm{AC}_\omega$ ([[def-graph-of-a-linear-operator]], [[def-product-norms-on-finitely-many-normed-spaces]], [[def-norm-and-normed-space]], [[def-complex-norm-and-complex-normed-space]], [[lem-complex-norm-realification-is-a-real-norm]], [[thm-metric-sequential-closure]]).
 
 [F6] The box $Q=(-1,1)^n$ has finite measure under $\mathrm{AC}_\omega$; Hölder therefore sends each $L^p(Q)$ function to $L^1(Q)$ for every $1\le p\le\infty$. Integrals over measurable sets are monotone, and an $L^1$ integral is absolutely continuous with respect to measure ([[thm-lebesgue-measure-of-a-box-of-every-kind]], [[thm-holder-inequality-for-integrals]], [[thm-absolute-continuity-of-the-integral]], [[def-integral-over-a-measurable-set]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
 

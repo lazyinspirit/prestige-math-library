@@ -1,19 +1,15 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-relative-normed-convexity-and-separation.json
 id: def-relative-normed-convexity-and-separation
 kind: definition
 title: Convex sets and continuous real-hyperplane separation in a normed space
 status: published
 origin: pipeline
-deps: [rem-real-and-complex-normed-space-convention, def-dual-space-of-a-normed-space, def-metric-topology]
+deps: [def-complex-norm-and-complex-normed-space, def-dual-space-of-a-normed-space, def-metric-topology, def-norm-and-normed-space, lem-complex-norm-realification-is-a-real-norm]
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, §§1.1–1.2 and §1.3 evaluation paragraph
@@ -25,7 +21,7 @@ pipeline_run: phase-2-wave-1
 
 ## Definition
 
-Let $X$ be a normed space over $\mathbb K\in\{\mathbb R,\mathbb C\}$ with the metric and scalar convention of [[rem-real-and-complex-normed-space-convention]]. A subset $C\subseteq X$ is **convex** when
+Let $X$ be a normed space over $\mathbb K\in\{\mathbb R,\mathbb C\}$ using [[def-norm-and-normed-space]] over $\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] over $\mathbb C$, with metric $d(x,y)=\|x-y\|$ supplied in the complex case by [[lem-complex-norm-realification-is-a-real-norm]]. A subset $C\subseteq X$ is **convex** when
 $$x,y\in C,\quad 0\le t\le1\quad\Longrightarrow\quad (1-t)x+ty\in C,$$
 where $t$ is real, also when $\mathbb K=\mathbb C$. The empty set and every singleton are convex: the former has no pair of points to test, and $(1-t)x+tx=x$ for the latter. At $t=0,1$ the convex combination is one of its endpoints.
 

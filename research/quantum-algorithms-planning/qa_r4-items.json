@@ -1,0 +1,3658 @@
+{
+  "category": "quantum-algorithms",
+  "status": "draft-planning",
+  "items": [
+    {
+      "id": "def-qa-17-finite-stochastic-kernel",
+      "kind": "definition",
+      "title": "Finite row-stochastic kernel",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-transition-matrix-and-n-step-transition-probabilities"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A finite state set X with a row-stochastic matrix P (P_xy≥0 and Σ_yP_xy=1). No stationary law or reversibility is required to define its row-preparation isometry and reflection walk.",
+      "proof_obligations": [
+        "Fix the row convention P_xy=Pr(Y=y|X=x) and the finite register order."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the root row-stochastic definition; stationarity and detailed balance are separate optional hypotheses."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-17-finite-reversible-chain",
+      "kind": "definition",
+      "title": "Finite reversible Markov chain",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-finite-stochastic-kernel",
+        "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+        "def-reversible-measure-and-detailed-balance"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A finite row-stochastic kernel P with an explicitly supplied strictly positive stationary distribution π satisfying πP=π and detailed balance π_xP_xy=π_yP_yx. These additional data are required only for reversible-chain results.",
+      "proof_obligations": [
+        "Verify the row-stochastic and detailed-balance conventions against the root definitions; do not invoke a stationary-existence theorem when π is input."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the exact root row-stochastic, stationary-distribution and detailed-balance definitions; positivity, invariance and reversibility are explicit inputs."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 2
+    },
+    {
+      "id": "def-qa-17-szegedy-transition-isometry",
+      "kind": "definition",
+      "title": "Szegedy row-preparation isometry",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-tensor-register-and-permutation",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "def-qa-17-finite-stochastic-kernel",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For any finite row-stochastic P, define T|x⟩=|x⟩Σ_y√P_xy|y⟩, S|x,y⟩=|y,x⟩, and D=T†ST. Then T is an isometry and D_xy=√(P_xyP_yx); reversibility is not assumed.",
+      "proof_obligations": [
+        "Show distinct |x⟩ give orthonormal row states and derive D_xy by an explicit inner product."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 3
+    },
+    {
+      "id": "lem-qa-17-stochastic-l2-contraction",
+      "kind": "lemma",
+      "title": "Finite reversible L2 contraction",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-finite-reversible-chain",
+        "def-inner-product-space",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "def-reversible-measure-and-detailed-balance"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For finite row-stochastic P with stationary π, Jensen gives Σ_x π_x |Σ_y P_xy f_y|² ≤ Σ_y π_y |f_y|²; hence P is a contraction on L²(π), and the reversible similarity D has operator norm at most 1.",
+      "proof_obligations": [
+        "Apply scalar convexity row by row and then stationarity; identify the weighted norm with the Euclidean norm after diagonal similarity."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 4
+    },
+    {
+      "id": "def-qa-17-szegedy-walk",
+      "kind": "definition",
+      "title": "Szegedy walk operator",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-szegedy-transition-isometry",
+        "def-qc-reflection",
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qa-17-finite-stochastic-kernel"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For any finite row-stochastic P, let Π=TT†, R_A=2Π−I, and U=S R_A on C^X⊗C^X. Define W=U²=(S R_A S)R_A. These conventions are distinct: their nontrivial phases differ by a factor of two.",
+      "proof_obligations": [
+        "Check each reflection is associated with the declared range and that S²=I; do not conflate U with W."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 6
+    },
+    {
+      "id": "lem-qa-17-walk-reflection-unitarity",
+      "kind": "lemma",
+      "title": "Szegedy reflection and walk unitarity",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-szegedy-walk",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "def-self-adjoint-and-normal-endomorphism",
+        "def-qc-reflection",
+        "def-qa-17-finite-stochastic-kernel",
+        "thm-qc-reflection-unitary-involution"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Π is an orthogonal projection, R_A=2Π−I and S are unitary involutions, so U and W are unitary.",
+      "proof_obligations": [
+        "Expand Π²=Π and Π†=Π from T†T=I, then compute R_A†R_A=I and S†S=I.",
+        "Keep R_A=2Π−I as the walk sign; controlled use of the opposite sign I−2Π requires the control-Z correction."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 7
+    },
+    {
+      "id": "lem-qa-17-invariant-eigenplane",
+      "kind": "lemma",
+      "title": "Szegedy invariant two-dimensional eigenspace",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-szegedy-walk",
+        "def-qa-17-szegedy-transition-isometry",
+        "thm-qa-17-discriminant-self-adjoint",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "def-qa-17-finite-stochastic-kernel"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If Dv=λv, the span of Tv and STv is U-invariant; U(Tv)=STv and U(STv)=−Tv+2λSTv.",
+      "proof_obligations": [
+        "Use ΠSTv=TDv and S²=I; separately handle linearly dependent vectors at λ=±1."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 8
+    },
+    {
+      "id": "thm-qa-17-discriminant-self-adjoint",
+      "kind": "theorem",
+      "title": "Discriminant symmetry and norm",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-szegedy-transition-isometry",
+        "def-self-adjoint-and-normal-endomorphism",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-qa-17-finite-stochastic-kernel",
+        "def-qa-17-finite-reversible-chain",
+        "lem-qa-17-stochastic-l2-contraction"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every finite stochastic P, D=T†ST has entries sqrt(P_xy P_yx), is real symmetric, and ||D||≤1. For reversible P it also equals diag(sqrt π)Pdiag(1/sqrt π).",
+      "proof_obligations": [
+        "Derive entries from T†ST; use S=S† and T†T=I for symmetry and contraction; use detailed balance for the similarity identity."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 5
+    },
+    {
+      "id": "thm-qa-17-szegedy-spectral-mapping",
+      "kind": "theorem",
+      "title": "Szegedy spectral mapping",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "lem-qa-17-invariant-eigenplane",
+        "thm-qa-17-discriminant-self-adjoint",
+        "lem-qa-17-walk-reflection-unitarity",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-qa-17-finite-stochastic-kernel"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For each eigenvalue λ∈(−1,1) of D, U has eigenvalues λ±i sqrt(1−λ²)=exp(±i arccos λ) on the invariant plane; W=U² has exp(±2i arccos λ). The remaining orthogonal complement has U-spectrum in {−1,1}; endpoint and multiplicity cases are stated separately.",
+      "proof_obligations": [
+        "Solve z²−2λz+1=0; prove the complement action is −S; use the finite spectral theorem to assemble the complete spectrum."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 10
+    },
+    {
+      "id": "def-qa-17-walk-access-model",
+      "kind": "definition",
+      "title": "Szegedy walk access model",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-szegedy-walk",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-reflection",
+        "def-qc-circuit-cost-model",
+        "def-qc-uniform-circuit-family",
+        "def-qa-17-finite-stochastic-kernel",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For any finite row-stochastic P, the input access model separately supplies row preparation V_P:|x,0⟩↦|x⟩Σ_y√P_xy|y⟩, V_P†, and controlled forms when required. The reflection about ran(T) is V_P(2|0⟩⟨0|−I)V_P†; the swap has its own gate cost. Matrix entries alone imply no efficient preparation circuit.",
+      "proof_obligations": [
+        "State the exact action on the clean row register and all work bits; specify controlled and inverse availability individually."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-17-walk-access-cost",
+      "kind": "theorem",
+      "title": "Walk-step access and gate count",
+      "page": "discrete-quantum-walks-and-szegedy-theory",
+      "deps": [
+        "def-qa-17-walk-access-model",
+        "def-qa-17-szegedy-walk",
+        "def-qc-circuit-cost-model",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "One U step uses one reflection implementation (one V_P and one V_P†), one swap, and its specified access costs. A controlled U step requires the controlled versions of both calls. W uses two such steps; query, gate and bit counts are reported separately.",
+      "proof_obligations": [
+        "Expand U=S V_P(2|0⟩⟨0|−I)V_P† and count calls, ancillas, and reflections exactly."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 11
+    },
+    {
+      "id": "ex-qa-17-two-state-reversible-walk",
+      "kind": "example",
+      "title": "Two-state reversible walk",
+      "page": "discrete-quantum-walks-and-szegedy-theory-examples",
+      "deps": [
+        "thm-qa-17-szegedy-spectral-mapping"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a two-state chain with transition probability a in each direction, compute π, D, and the eigenphases of U explicitly.",
+      "proof_obligations": [
+        "Compute the two eigenvalues and verify endpoint cases a=0 and a=1."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 4
+    },
+    {
+      "id": "ex-qa-17-period-two-walk",
+      "kind": "example",
+      "title": "Period-two walk and absolute gap",
+      "page": "discrete-quantum-walks-and-szegedy-theory-examples",
+      "deps": [
+        "def-qa-17-finite-reversible-chain"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the two-vertex deterministic swap, P has eigenvalues 1 and −1; the chain is reversible but periodic and its absolute gap is zero.",
+      "proof_obligations": [
+        "Compute P, π, and the spectrum directly."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 2
+    },
+    {
+      "id": "cex-qa-17-zero-stationary-weight",
+      "kind": "counterexample",
+      "title": "Zero stationary weights break similarity",
+      "page": "discrete-quantum-walks-and-szegedy-theory-examples",
+      "deps": [
+        "def-qa-17-finite-stochastic-kernel",
+        "def-invariant-and-stationary-distribution-for-a-markov-kernel"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If π has a zero coordinate, diag(1/sqrt π) is undefined; the reversible similarity formula cannot be applied on the full state set without restricting to positive support.",
+      "proof_obligations": [
+        "Display a finite chain with transient states and identify the failed inverse."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-18-marked-set-and-stationary-mass",
+      "kind": "definition",
+      "title": "Marked set and stationary mass",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-17-finite-reversible-chain",
+        "def-promise-problem",
+        "def-qc-projective-measurement",
+        "def-qc-povm-and-outcome-law"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a finite reversible chain with stationary law π and marked M⊆X, define ε=π(M). Detection uses the promise M=∅ or π(M)≥ε₀ and outputs an empty/nonempty bit; finding uses the nonempty promise and outputs a label x∈M. These are separate tasks.",
+      "proof_obligations": [
+        "Keep the decision and marked-label output contracts separate; state one-sided error for each algorithm."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root def-promise-problem defines the finite yes/no promise domain; no QC duplicate is used."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-18-classical-hitting-time",
+      "kind": "definition",
+      "title": "Finite classical hitting time",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-18-marked-set-and-stationary-mass",
+        "def-transition-matrix-and-n-step-transition-probabilities"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a Markov chain P and initial law μ, define τ_M=min{t≥0:X_t∈M}; specify whether the resource is expectation or a constant-success quantile.",
+      "proof_obligations": [
+        "Define the event {τ_M>t} from the finite transition kernel without importing path-space suppliers."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 2
+    },
+    {
+      "id": "lem-qa-18-symmetric-compressed-walk-bound",
+      "kind": "lemma",
+      "title": "Compressed-chain spectral bound",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-18-marked-set-and-stationary-mass",
+        "def-self-adjoint-and-normal-endomorphism",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For symmetric lazy P with uniform stationary state, nonnegative spectrum and second eigenvalue ≤1−δ, the compression P_M=Π_U P Π_U to U=X\\M satisfies ||P_M||≤1−δ|M|/|X|.",
+      "proof_obligations": [
+        "Decompose a unit vector supported on U into uniform and orthogonal components; prove its uniform component squared is ≤1−ε and use the spectral bound on the complement."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 3
+    },
+    {
+      "id": "thm-qa-18-classical-spectral-hitting-bound",
+      "kind": "theorem",
+      "title": "Classical hitting bound from gap",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "lem-qa-18-symmetric-compressed-walk-bound",
+        "def-qa-18-classical-hitting-time"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Under the hypotheses of the compressed-chain lemma, starting uniformly on U gives Pr[τ_M>t]≤(1−δε)^t, hence O(1/(δε)) steps suffice for constant success.",
+      "proof_obligations": [
+        "Write the no-hit probability as a matrix coefficient of P_M^t and apply its operator-norm bound."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 4,
+      "local_order": 5
+    },
+    {
+      "id": "alg-qa-18-szegedy-phase-detection",
+      "kind": "algorithm",
+      "title": "Szegedy walk marked-set detection",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-18-marked-set-and-stationary-mass",
+        "def-qa-17-finite-stochastic-kernel",
+        "def-qa-17-szegedy-walk",
+        "def-qa-17-walk-access-model",
+        "lem-qa-18-absorbing-walk-discriminant-decomposition",
+        "lem-qa-18-symmetric-compressed-walk-bound",
+        "alg-qa-quantum-phase-estimation",
+        "thm-qa-phase-estimation-success-and-tail",
+        "thm-qa-phase-estimation-superposition-law",
+        "thm-qa-phase-estimation-exact-grid",
+        "def-qc-dirac-notation-conversion",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-coherent-function-oracle",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-cost-model",
+        "thm-qa-phase-estimation-access-cost",
+        "thm-qa-17-walk-access-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Given a finite symmetric lazy P with δ(P)=1−λ₂(P)≥δ₀ with δ₀∈(0,1], a marked predicate with promise M=∅ or π(M)≥ε₀ with ε₀∈(0,1], and target false-empty probability β∈(0,1), form the absorbing row kernel P′ and its general Szegedy walk U′. Let γ₀=arccos(1−δ₀ε₀), m=ceil(log₂(32π/γ₀)), Q=2^m. On each fresh run apply the supplied uniform-state circuit A_unif of cost C_unif and then V_P′ to form T′|√π⟩ and check the first register; if marked, accept nonempty. Otherwise run QA07 phase estimation on U′ with m bits and controlled powers, let d(y)=min(y/Q,1−y/Q), and accept iff d(y)>γ₀/(4π). Repeat k=ceil(log(1/β)/log 6) runs and accept if any run accepts.",
+      "proof_obligations": [
+        "Prove P′ is row-stochastic and invoke the general row-kernel walk interface, not the reversible-chain-only theorem.",
+        "State all controlled-power and row-preparation access, membership checks, setup costs and phase-register gates.",
+        "Treat A_unif as an explicitly supplied circuit of cost C_unif; no state-preparation routine is inferred from P or π.",
+        "Charge finite-gate synthesis, coefficient bits and target precision separately from walk/query counts."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; finite phase-estimation circuit"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; phase-estimation outcome and tail analysis"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; controlled-power query cost"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; controlled-power query cost"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Uses the exact planned QA07 `alg-qa-quantum-phase-estimation` and phase-estimation success/tail contracts; their proofs remain owned by QA07."
+      ],
+      "unresolved_obligations": [
+        "Controlled powers, row preparation for absorbing rows, stationary-state preparation and marked-predicate evaluation must each retain explicit costs."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 12
+    },
+    {
+      "id": "thm-qa-18-detection-correctness-cost",
+      "kind": "theorem",
+      "title": "Walk detection correctness and cost",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "alg-qa-18-szegedy-phase-detection",
+        "thm-qa-17-szegedy-spectral-mapping",
+        "lem-qa-18-symmetric-compressed-walk-bound",
+        "lem-qa-18-absorbing-walk-discriminant-decomposition",
+        "thm-qa-phase-estimation-success-and-tail",
+        "thm-qa-phase-estimation-superposition-law",
+        "thm-qa-phase-estimation-exact-grid",
+        "thm-qa-phase-estimation-access-cost",
+        "thm-qa-17-walk-access-cost",
+        "def-qc-dirac-notation-conversion",
+        "thm-qc-reflection-unitary-involution"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Under the algorithm’s lazy-symmetric gap and marked-mass promises, D′=P_UU⊕I_M. In the empty case the uniform stationary walk state is an exact zero-phase eigenstate, so the detector never falsely accepts. In the nonempty case the first-register check returns immediately if M=X; otherwise the conditioned state is T′|√π_U⟩/sqrt(1−ε), lies in ran(T′) over U, has no component on marked +1 eigenspaces or outside the signal planes, and has every phase at angular eigenphase distance at least γ₀=arccos(1−δ₀ε₀), equivalently circular fractional phase distance at least γ₀/(2π) from zero, and QA07 phase estimation accepts with probability at least 5/6 per run at Q≥32π/γ₀. With k=ceil(log(1/β)/log 6), false-empty probability is at most β. Each run uses a marked check and one m-bit QPE; with only controlled one-step U′ calls, QPE uses exactly Q−1 controlled walk calls. If C_init=C_unif+C_row includes the supplied uniform-state circuit and one V_P′ row preparation, C_mark the marked check, C_walk one controlled U′ (one controlled V_P′, one controlled V_P′†, reflection and swap), and G_QPE(m) the phase register/inverse-QFT gates, the total is at most k(C_init+C_mark+(Q−1)C_walk+G_QPE(m)); with supplied controlled powers use their m-query cost instead of (Q−1)C_walk. Finite-gate synthesis and coefficient bits remain additional.",
+      "proof_obligations": [
+        "Prove P_UU is positive semidefinite with top eigenvalue at most 1−δ₀ε₀; use the walk spectral mapping on ran(T′).",
+        "Convert angular gap γ₀ to QA07’s circular fractional phase and apply its tail bound at η=γ₀/(8π), then derive the cutoff and repetition error.",
+        "Keep decision correctness separate from marked-element finding and list each setup/query/gate cost.",
+        "Show the initial marked check exits before conditioning when M=X; on the no-mark branch identify T′|√π_U⟩/sqrt(1−ε) and rule out both marked +1 eigenspaces and the walk-space orthogonal complement."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; finite phase-estimation circuit"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; phase-estimation outcome and tail analysis"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "§4.1, PDF pp. 25–28; controlled-power query cost"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "§4.1, PDF pp. 41–48; controlled-power query cost"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Uses the exact planned QA07 phase-estimation success/tail and superposition-law contracts; proof completion remains with QA07."
+      ],
+      "unresolved_obligations": [
+        "The reused QA07 tail theorem must be proved before QA18 detection correctness is promoted.",
+        "The full row-preparation, marked-check, controlled-power and phase-register costs remain explicit inputs."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 13
+    },
+    {
+      "id": "alg-qa-18-reversible-walk-finding",
+      "kind": "algorithm",
+      "title": "Reversible quantum-walk finding",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-18-marked-set-and-stationary-mass",
+        "def-qa-17-walk-access-model",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-reflection",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Run the MNRS approximate-reflection/recursive-amplification procedure from a stationary walk state, using the marked phase flip and the approximate reflection constructed from controlled walk phase estimation. Include the early-sampling branch, fresh ancillas and final marked-label measurement. The complete binding generation/execution definition is operational-contracts.md OP2, including OP0 numerical/selection subroutines, every cap/failure/invalid branch, access direction, output and cost convention. Its instructions are part of this Definition; named source routines are expanded there rather than assumed available.",
+      "proof_obligations": [
+        "Give all loops and branch conditions, including the unknown marked mass case and ancilla cleanup.",
+        "OP2 extends the source approximate reflection from A+B to the full walk space by applying exact R_A on the all-zero estimate branch. Check the stationary +1 vector, the A-perp intersect B-perp zero-phase complement, and every nonzero signal plane separately; charge the controlled R_A. Its exceptional all-zero amplitude is at most 2^-k, hence norm error at most 2^(1-k). Trace this change through every recursive A_i and tolerant-finding resource use."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "The operation that prepares the stationary state is a charged subroutine, not an assumed efficient circuit.",
+        "The binding appendix defines the finite procedure now; prove its explicit precision constants, capped-schedule correctness/termination and actual query/gate/bit resource bounds locally. Source guarantees are not automatically accepted for modified schedules or coefficient profiles."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 7,
+      "operational_contract_ref": {
+        "path": "research/quantum-algorithms-planning/operational-contracts.md",
+        "section": "OP2",
+        "binding": true
+      }
+    },
+    {
+      "id": "thm-qa-18-reversible-search-cost",
+      "kind": "theorem",
+      "title": "Reversible walk finding cost",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "alg-qa-18-reversible-walk-finding",
+        "def-qa-18-marked-set-and-stationary-mass",
+        "thm-qa-17-szegedy-spectral-mapping"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a finite ergodic reversible chain with absolute spectral gap δ, marked stationary mass at least ε, setup cost S, update/inverse cost U, and coherent check cost C, a one-sided-error algorithm finds a marked state with constant probability using S+O(ε^(−1/2)(δ^(−1/2)U+C)) cost. Repetition to error η multiplies by O(log(1/η)).",
+      "proof_obligations": [
+        "Use MNRS recursive approximate amplitude amplification and its per-level phase-estimation error schedule; prove the geometric cost sum and success lower bound."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "§§2–4, Theorems 4–7, PDF pp. 6–17"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 9
+    },
+    {
+      "id": "def-qa-18-element-distinctness-johnson-walk",
+      "kind": "definition",
+      "title": "Element-distinctness Johnson walk model",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-18-marked-set-and-stationary-mass",
+        "def-qc-coherent-function-oracle",
+        "alg-qc-reversible-embedding",
+        "def-qc-circuit-cost-model",
+        "def-qc-uniform-circuit-family"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input f:[N]→[M] by a coherent value oracle. Vertices are r-subsets, adjacent vertices differ by one replacement; use the lazy chain that stays with probability 1/2 and otherwise swaps one selected and one outside index. Mark a subset containing a collision pair; define setup, update, check, memory, output, and query costs separately.",
+      "proof_obligations": [
+        "Specify reversible load/erase behavior and the promise or total-problem output rule.",
+        "Restrict 1≤r≤N/2; laziness makes the transition spectrum nonnegative and halves the nonlazy Johnson gap.",
+        "A collision cannot occur in an r=1 subset; require r≥2. For N≤3 use a direct finite value-query comparison and for optimizing r clamp the rounded N^(2/3) into [2,floor(N/2)]."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 20 §§20.1–20.3, printed pp. 91–94; PDF pp. 99–102"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0311001",
+          "locator": "Theorems 4–5, §§3–4.4, PDF pp. 5–18"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "Theorem 1 and §1.3, PDF pp. 4–5"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 8
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-query-cost",
+      "kind": "theorem",
+      "title": "Element-distinctness O(N^(2/3)) query bound",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-18-element-distinctness-johnson-walk",
+        "thm-qa-18-reversible-search-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For value-oracle element distinctness with at least one collision and 2≤r≤N/2, N≥4, the lazy Johnson walk has gap N/[2r(N−r)], marked mass at least r(r−1)/[N(N−1)], setup r, update at most 2, and query-check 0. The reversible walk theorem gives r+O(N/sqrt r) queries; choosing r=Theta(N^(2/3)) gives O(N^(2/3)) queries with constant success.",
+      "proof_obligations": [
+        "Prove the Johnson eigenvalue gap and marked fraction; derive the setup/update/check costs and optimize r.",
+        "A collision cannot occur in an r=1 subset; require r≥2. For N≤3 use a direct finite value-query comparison and for optimizing r clamp the rounded N^(2/3) into [2,floor(N/2)]."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 20 §§20.1–20.3, printed pp. 91–94; PDF pp. 99–102"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0311001",
+          "locator": "Theorems 4–5, §§3–4.4, PDF pp. 5–18"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "Theorem 1 and §1.3, PDF pp. 4–5"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 10
+    },
+    {
+      "id": "def-qa-18-random-access-gate-model",
+      "kind": "definition",
+      "title": "Quantum random-access memory gate model",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qc-register-and-computational-basis",
+        "def-qc-tensor-register-and-permutation",
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Define the random-access gate acting on an index, target bit and memory word; state memory size and whether address fanout is a primitive gate.",
+      "proof_obligations": [
+        "State the gate action and distinguish its cost/depth from ordinary bounded-arity gates."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0311001",
+          "locator": "§6.2, PDF pp. 24–30"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 7,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "kind": "theorem",
+      "title": "Element-distinctness gate cost under QRAM",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "thm-qa-18-element-distinctness-query-cost",
+        "def-qa-18-random-access-gate-model",
+        "alg-qc-reversible-embedding",
+        "thm-qc-reversible-embedding-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Under Ambainis’s explicit random-access quantum-memory model and canonical skip-list/hash-table storage, element distinctness has O(N^(2/3) polylog(N+M)) gate-time and O(N^(2/3) polylog(N+M)) memory for fixed value-oracle encoding; this is not an ordinary two-qubit gate bound. For an explicit Boolean-circuit value function with G gates, depth D, maximum per-wire layer fanout F and m output bits, report the separate QC10 reversible-compilation depth 2D(2ceil(log₂(F+1))+3)+2ceil(log₂(m+1))+1 per query, with fresh-target X/CNOT and round-based copy/unfanout.",
+      "proof_obligations": [
+        "Retain the paper’s bounded-run-time, hash overflow probability, canonical storage and hybrid-error lemmas; count index/value bits.",
+        "Use m for the output-bit count in the fanout-sensitive depth formula; report gate count separately from depth and oracle queries."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0311001",
+          "locator": "§6.2 and Lemmas 5–6, PDF pp. 24–30"
+        }
+      ],
+      "existing_supplier_checks": [
+        "QC10 cost bridge supplies fresh-target X/CNOT and round-based copy/unfanout; depth is fanout-sensitive and remains separate from query complexity."
+      ],
+      "unresolved_obligations": [
+        "No ordinary gate-model conversion or precise universal polylog exponent is claimed."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 11
+    },
+    {
+      "id": "ex-qa-18-johnson-walk-parameters",
+      "kind": "example",
+      "title": "Johnson walk parameters",
+      "page": "quantum-walk-search-and-element-distinctness-examples",
+      "deps": [
+        "thm-qa-18-element-distinctness-query-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For small N,r compute the Johnson transition spectrum and the fraction of subsets containing a fixed pair.",
+      "proof_obligations": [
+        "Enumerate subsets and verify the formula directly."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 20 §§20.1–20.3, printed pp. 91–94; PDF pp. 99–102"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0311001",
+          "locator": "Theorems 4–5, §§3–4.4, PDF pp. 5–18"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "Theorem 1 and §1.3, PDF pp. 4–5"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 2
+    },
+    {
+      "id": "ex-qa-18-element-distinctness-unique-collision",
+      "kind": "example",
+      "title": "Unique-collision parameter calculation",
+      "page": "quantum-walk-search-and-element-distinctness-examples",
+      "deps": [
+        "thm-qa-18-element-distinctness-query-cost"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For one collision pair, show ε=r(r−1)/[N(N−1)] and substitute r=N^(2/3).",
+      "proof_obligations": [
+        "Compute the exact inclusion probability and asymptotic query cost."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 20 §§20.1–20.3, printed pp. 91–94; PDF pp. 99–102"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0311001",
+          "locator": "Theorems 4–5, §§3–4.4, PDF pp. 5–18"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0608026",
+          "locator": "Theorem 1 and §1.3, PDF pp. 4–5"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 3
+    },
+    {
+      "id": "cex-qa-18-query-cost-is-not-gate-cost",
+      "kind": "counterexample",
+      "title": "Query count does not bound gate count",
+      "page": "quantum-walk-search-and-element-distinctness-examples",
+      "deps": [
+        "def-qa-18-random-access-gate-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A procedure can use O(N^(2/3)) oracle queries while its reversible set-membership and sorting gates cost more; QRAM gate bounds require an explicit memory model.",
+      "proof_obligations": [
+        "Use the paper’s data-structure implementation and contrast with an ordinary circuit representation."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0311001",
+          "locator": "§6, PDF pp. 24–30"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-19-finite-matrix-dynamics",
+      "kind": "definition",
+      "title": "Finite Hermitian matrix dynamics",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-self-adjoint-and-normal-endomorphism",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-functional-calculus-for-a-normal-endomorphism",
+        "thm-complex-exponential-addition-and-real-extension",
+        "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For finite Hermitian H with spectral resolution H=Σ_j λ_j Π_j, define U_H(t)=Σ_j exp(−itλ_j)Π_j. This is the finite-dimensional functional-calculus meaning of the matrix exponential.",
+      "proof_obligations": [
+        "Check the scalar exponential convention and the finite spectral projections."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "thm-qa-19-matrix-exponential-unitary-properties",
+      "kind": "theorem",
+      "title": "Finite matrix exponential identities",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-qa-19-finite-matrix-dynamics",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "thm-complex-exponential-addition-and-real-extension",
+        "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For Hermitian H, U_H(t) is unitary, U_H(t+s)=U_H(t)U_H(s), and it solves dU/dt=−iHU with U(0)=I; uniqueness follows by diagonalizing H and solving finitely many scalar equations.",
+      "proof_obligations": [
+        "Prove each identity termwise in the finite spectral resolution and verify the scalar derivative/addition law."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 2
+    },
+    {
+      "id": "def-qa-19-graph-generator-conventions",
+      "kind": "definition",
+      "title": "Graph adjacency and Laplacian generators",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-self-adjoint-and-normal-endomorphism",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "def-qc-register-and-computational-basis"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a finite undirected weighted graph define Hermitian adjacency A and explicitly choose L=D−A or A−D; a generator convention includes edge weights, loops, basis order and sign.",
+      "proof_obligations": [
+        "Verify Hermiticity from symmetric edge weights; define normalization separately from the discrete transition matrix."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 1,
+      "local_order": 3
+    },
+    {
+      "id": "def-qa-19-continuous-time-walk",
+      "kind": "definition",
+      "title": "Continuous-time quantum walk",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-qa-19-finite-matrix-dynamics",
+        "def-qa-19-graph-generator-conventions",
+        "def-qc-pure-state-and-ray",
+        "def-qc-register-and-computational-basis"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Given finite Hermitian generator H, start vector ψ and time t, the walk output is U_H(t)ψ; graph structure and Hamiltonian input access are declared separately.",
+      "proof_obligations": [
+        "Do not infer efficient simulation from finite dimension; state a term or sparse oracle model when claiming an algorithm."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-19-measurement-distribution",
+      "kind": "theorem",
+      "title": "Continuous-walk measurement law",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-qa-19-continuous-time-walk",
+        "def-qc-projective-measurement",
+        "def-qc-povm-and-outcome-law",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For normalized ψ, basis outcome y after the walk has probability |⟨y|U_H(t)|ψ⟩|²; the probabilities sum to 1.",
+      "proof_obligations": [
+        "Use unitarity and orthonormal-basis resolution of identity."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 5
+    },
+    {
+      "id": "alg-qa-19-hypercube-state-transfer",
+      "kind": "algorithm",
+      "title": "Hypercube continuous-walk transfer",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-qa-19-continuous-time-walk",
+        "def-qa-19-graph-generator-conventions",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-cost-model",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the n-dimensional Boolean hypercube, prepare |0^n⟩, evolve under A=Σ_j X_j for time π/2, and measure the vertex register.",
+      "proof_obligations": [
+        "Specify the known-generator circuit or Hamiltonian-simulation access and output measurement."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 7,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-19-hypercube-transfer-correctness",
+      "kind": "theorem",
+      "title": "Hypercube transfer correctness",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "alg-qa-19-hypercube-state-transfer",
+        "thm-qa-19-matrix-exponential-unitary-properties",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The preceding algorithm outputs 1^n with probability 1; its state is exp(−iAπ/2)|0^n⟩=(−i)^n|1^n⟩.",
+      "proof_obligations": [
+        "Use A=Σ_j X_j with commuting tensor factors and exp(−iπX/2)=−iX."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 7
+    },
+    {
+      "id": "alg-qa-19-complete-graph-spatial-search",
+      "kind": "algorithm",
+      "title": "Complete-graph continuous-time search",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-qa-19-continuous-time-walk",
+        "def-qa-19-hamiltonian-access-cost-model",
+        "def-qc-coherent-function-oracle",
+        "def-qc-projective-measurement",
+        "def-qc-circuit-cost-model",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For arbitrary finite N≥2, encode the N labels in an active register subspace, supply a uniform-state preparation isometry/circuit A_s with A_s|0⟩=|s⟩=N^(−1/2)Σ_x|x⟩ and charged cost C_s, and supply the marked-item oracle |w⟩⟨w|. For the complete-graph adjacency A on that active subspace, evolve under H=−A/N−|w⟩⟨w| for t=πsqrt(N)/2 and measure the label register. For N=2^n, A_s is exactly the tensor product of n Hadamard gates.",
+      "proof_obligations": [
+        "Specify an injective active-label encoding and the action of the Hamiltonian/oracle on the active subspace; charge any circuit extension outside it.",
+        "Treat A_s and its cost C_s as supplied input for arbitrary N; for N=2^n give the n-Hadamard construction and cost.",
+        "Specify whether marked-oracle evolution is a continuous-time query primitive or simulated using discrete gates; charge it accordingly.",
+        "Keep state preparation, matrix-simulation precision, graph gates, oracle access, and classical description bits separate."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §17.1, printed pp. 77–80/PDF pp. 81–88, for the finite Hamiltonian-walk convention; Ch. 31 §31.3, printed pp. 159–160/PDF pp. 167–168, for search context; the arbitrary-N uniform preparation and exact two-dimensional calculation are stated and proved locally"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1 for finite continuous-time walk/Hamiltonian conventions; the arbitrary-N complete-graph calculation is proved locally"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 9
+    },
+    {
+      "id": "thm-qa-19-complete-graph-search-correctness",
+      "kind": "theorem",
+      "title": "Complete-graph search success",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "alg-qa-19-complete-graph-spatial-search",
+        "thm-qa-19-matrix-exponential-unitary-properties",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For every finite N≥2, under the stated exact continuous-time oracle-evolution model, the preceding evolution places the marked-label register in |w⟩ with probability exactly 1 at t=πsqrt(N)/2. If the evolution is instead implemented by a unitary within operator-norm error ρ, the measured marked probability is at least 1−2ρ.",
+      "proof_obligations": [
+        "On span{|w⟩,|r⟩}, where |r⟩ is uniform on the N−1 unmarked vertices, write H as [[−1,−sqrt(N−1)/N],[−sqrt(N−1)/N,−(N−2)/N]]. Set K=H+(N−1)I/N, prove K²=I/N and √N K|s⟩=−|w⟩, then evaluate the exponential at t=πsqrt(N)/2.",
+        "For the approximate implementation claim, use ||V−U||≤ρ to bound the output-state distance and the change in marked-outcome probability by 2ρ."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §17.1, printed pp. 77–80/PDF pp. 81–88, for the finite Hamiltonian-walk convention; Ch. 31 §31.3, printed pp. 159–160/PDF pp. 167–168, for search context; the exact probability at the stated time is verified by the local 2×2 proof"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1 for finite continuous-time walk/Hamiltonian conventions; the exact probability is verified by the local 2×2 proof"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-19-continuous-walk-resource-accounting",
+      "kind": "theorem",
+      "title": "Continuous-walk resource accounting",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "alg-qa-19-hypercube-state-transfer",
+        "alg-qa-19-complete-graph-spatial-search",
+        "def-qa-19-hamiltonian-access-cost-model",
+        "def-qc-circuit-cost-model",
+        "def-qc-projective-measurement"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "If the supplied initial-state circuit, Hamiltonian evolution/simulator, and final measurement have query/gate/input-description-bit costs (q_in,g_in,b_in), (q_H,g_H,b_H), and (q_m,g_m,b_m), respectively, then the composed procedure has componentwise additive cost (q_in+q_H+q_m, g_in+g_H+g_m, b_in+b_H+b_m), plus separately declared classical processing; measurement output-bit count is reported separately. For exact hypercube transfer, the initial |0^n⟩ uses no preparation gates, evolution factors into n one-qubit exp(−iπX/2) gates, and readout outputs n bits. For complete-graph search at arbitrary N, add the supplied A_s costs (q_s,g_s,b_s); when N=2^n, the Hadamard preparation has q_s=0 and g_s=n. An ideal continuous-time oracle is charged according to its declared evolution-query cost; a discrete-gate Hamiltonian simulator uses its own query, gate and precision costs.",
+      "proof_obligations": [
+        "Derive hypercube factorization from the commuting tensor factors and count its gates and measured bits.",
+        "Use additive circuit-cost composition; do not infer Hamiltonian simulation or uniform-state preparation cost from the matrix alone.",
+        "Keep query counts, gate counts, description bits and finite-precision synthesis costs separate."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §17.2, printed pp. 78–80/PDF pp. 82–88, for hypercube factorization; resource sums are derived locally from the declared circuit-cost model"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1 for continuous-time walk conventions; resource sums are derived locally from the declared circuit-cost model"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 11
+    },
+    {
+      "id": "def-qa-19-hamiltonian-access-cost-model",
+      "kind": "definition",
+      "title": "Continuous-time Hamiltonian access cost",
+      "page": "continuous-time-quantum-walks",
+      "deps": [
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-circuit-cost-model",
+        "def-qc-uniform-circuit-family"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A finite matrix algorithm receives either an explicit term list or a row-sparse oracle; list controlled/inverse access, coefficient precision, initial-state preparation, gate cost, query cost and classical description bits.",
+      "proof_obligations": [
+        "Do not assign unit cost to arbitrary matrix exponentiation."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 8
+    },
+    {
+      "id": "ex-qa-19-hypercube-for-n-one-and-two",
+      "kind": "example",
+      "title": "Small hypercube transfer",
+      "page": "continuous-time-quantum-walks-examples",
+      "deps": [
+        "thm-qa-19-hypercube-transfer-correctness"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Compute the n=1 and n=2 hypercube generators and verify transfer at π/2.",
+      "proof_obligations": [
+        "Multiply the 2×2 or tensor-product matrices exactly."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 2
+    },
+    {
+      "id": "ex-qa-19-complete-graph-search-matrix",
+      "kind": "example",
+      "title": "Complete-graph search matrix",
+      "page": "continuous-time-quantum-walks-examples",
+      "deps": [
+        "thm-qa-19-complete-graph-search-correctness",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Compute the search Hamiltonian matrix in {|w⟩,|r⟩} and its eigenvalue gap.",
+      "proof_obligations": [
+        "Check normalization and the N=2 boundary directly."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 3
+    },
+    {
+      "id": "cex-qa-19-adjacency-laplacian-sign-conventions",
+      "kind": "counterexample",
+      "title": "Generator convention matters",
+      "page": "continuous-time-quantum-walks-examples",
+      "deps": [
+        "def-qa-19-graph-generator-conventions"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Changing A−D to D−A reverses time; normalized adjacency changes spectral scale and therefore the claimed runtime.",
+      "proof_obligations": [
+        "Compute a two-vertex walk under both signs."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 17 §§17.1–17.2, printed pp. 77–80; PDF pp. 81–88"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1, printed pp. 71–72"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 2,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-20-simulation-error-and-cost-model",
+      "kind": "definition",
+      "title": "Hamiltonian simulation error and resources",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-19-finite-matrix-dynamics",
+        "def-qc-circuit-cost-model",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-uniform-circuit-family"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A simulator approximates U_H(t) in operator norm; its resource vector records query, controlled/inverse query, gate, ancilla, coefficient-bit and classical-description costs.",
+      "proof_obligations": [
+        "Fix the norm and output-unitary convention; distinguish simulation precision from coefficient precision."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 1
+    },
+    {
+      "id": "def-qa-20-term-list-access-model",
+      "kind": "definition",
+      "title": "Term-list Hamiltonian access",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-simulation-error-and-cost-model",
+        "def-self-adjoint-and-normal-endomorphism",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input is H=Σ_j H_j with finite Hermitian terms and an implementation/cost contract for exp(−iH_jt), controlled and inverse calls; no term evolution is free unless supplied.",
+      "proof_obligations": [
+        "Give term count, norms, uniform coefficient encoding and per-term implementation cost."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 2
+    },
+    {
+      "id": "def-qa-20-sparse-hamiltonian-oracle-model",
+      "kind": "definition",
+      "title": "Sparse Hamiltonian row/value oracle",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-simulation-error-and-cost-model",
+        "def-qc-coherent-function-oracle",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For N×N Hermitian H with at most d nonzeros per row, give reversible row-location and b-bit complex-entry oracles and charge each call; state whether indices include padding/sentinels.",
+      "proof_obligations": [
+        "Prove the oracle action is unitary on all basis inputs, including invalid indices and finite-precision encodings."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 3
+    },
+    {
+      "id": "def-qa-20-first-order-product-formula",
+      "kind": "definition",
+      "title": "First-order Lie product formula",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-term-list-access-model",
+        "def-qa-19-finite-matrix-dynamics"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For fixed order H=Σ_j H_j and step h, define S₁(h)=Π_j exp(−ihH_j); r-step simulation is S₁(t/r)^r.",
+      "proof_obligations": [
+        "Fix order, signs and multiplication convention."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-20-first-order-commutator-error",
+      "kind": "theorem",
+      "title": "First-order commutator error",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-first-order-product-formula",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For Hermitian H_j and real t, ||S₁(t/r)^r−U_H(t)|| ≤ (t²/(2r))Σ_{j<k}||[H_j,H_k]||.",
+      "proof_obligations": [
+        "Prove the two-term Duhamel commutator integral, split terms successively, and telescope unitary factors across r steps."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 7
+    },
+    {
+      "id": "alg-qa-20-first-order-term-list-simulation",
+      "kind": "algorithm",
+      "title": "First-order term-list simulator",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-first-order-product-formula",
+        "def-qa-20-term-list-access-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input real evolution time t with declared finite description, rational ε>0, a finite term list and certified rational C₂≥Σ_(j<k)||[H_j,H_k]||. If t=0 return identity. Otherwise set integer r=max(1,ceil(t²C₂/ε)); for step h=t/r execute the supplied exp(−ihH_j) circuits in the declared right-to-left product order and repeat exactly r times. If approximate term circuits are used, require a certified sum of per-call operator errors at most ε/2. Return the joint implemented unitary; controlled form is used only with explicit controlled term access.",
+      "proof_obligations": [
+        "The integer r≥1 also handles commuting terms C₂=0. Product-formula error is at most ε/2 by the commutator theorem; telescope term implementation errors for the other ε/2. State time/angle description arithmetic and all finite compilation costs."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 8
+    },
+    {
+      "id": "thm-qa-20-first-order-resource-bound",
+      "kind": "theorem",
+      "title": "First-order query and gate cost",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "alg-qa-20-first-order-term-list-simulation",
+        "thm-qa-20-first-order-commutator-error"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "With r steps, the query count is rΣ_j q_j and gate count rΣ_j g_j plus listed uniform arithmetic/control overhead; the commutator theorem ensures operator error ≤ε for the chosen r.",
+      "proof_obligations": [
+        "Substitute the r bound and account for coefficient bits and classical construction time separately."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 11
+    },
+    {
+      "id": "def-qa-20-symmetric-second-order-formula",
+      "kind": "definition",
+      "title": "Symmetric second-order product formula",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-term-list-access-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Define S₂(h)=e^(−ihH₁/2)…e^(−ihH_(m−1)/2)e^(−ihH_m)e^(−ihH_(m−1)/2)…e^(−ihH₁/2).",
+      "proof_obligations": [
+        "Check the symmetry and first two Taylor coefficients."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 5
+    },
+    {
+      "id": "thm-qa-20-second-order-conservative-error",
+      "kind": "theorem",
+      "title": "Conservative second-order error",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-symmetric-second-order-formula",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For M=Σ_j||H_j||, ||S₂(t/r)^r−U_H(t)||≤|t|³M³/(3r²).",
+      "proof_obligations": [
+        "Prove equality of Taylor coefficients through degree two and bound the third-order remainders of both unitary curves by M³|h|³/6."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 9
+    },
+    {
+      "id": "rem-qa-20-higher-order-formula-proof-obligations",
+      "kind": "remark",
+      "title": "Higher-order Suzuki scope",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-term-list-access-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Higher-order Suzuki recursion may be defined, but no asymptotic order/cost claim is supplied until the nested-commutator error and implementation proof are included.",
+      "proof_obligations": [
+        "List the recursion and prove its order conditions, constants, and per-term access cost before promotion."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "No higher-order asymptotic theorem is accepted in this section."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 6
+    },
+    {
+      "id": "ex-qa-20-commuting-two-term-simulation",
+      "kind": "example",
+      "title": "Commuting term simulation",
+      "page": "hamiltonian-simulation-and-product-formulas-examples",
+      "deps": [
+        "def-qa-20-first-order-product-formula"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For commuting H₁,H₂, one product step equals exp(−it(H₁+H₂)).",
+      "proof_obligations": [
+        "Use the commutation identity for finite functional calculus."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-20-noncommuting-pauli-error",
+      "kind": "example",
+      "title": "Noncommuting Pauli product error",
+      "page": "hamiltonian-simulation-and-product-formulas-examples",
+      "deps": [
+        "thm-qa-20-first-order-commutator-error"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Compute [X,Z] and the first-order error bound for H=X+Z.",
+      "proof_obligations": [
+        "Evaluate the 2×2 matrices."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 3
+    },
+    {
+      "id": "cex-qa-20-sparse-oracle-does-not-give-term-list",
+      "kind": "counterexample",
+      "title": "Sparse access is not a term list",
+      "page": "hamiltonian-simulation-and-product-formulas-examples",
+      "deps": [
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "def-qa-20-term-list-access-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A sparse row/value oracle need not expose a polynomial-size list of individually simulable terms with free exponentials.",
+      "proof_obligations": [
+        "Give a family where listing all locations globally requires more bits than a row oracle."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 2
+    },
+    {
+      "id": "def-qa-21-lcu-input-and-access-model",
+      "kind": "definition",
+      "title": "LCU decomposition and access model",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "def-qa-20-simulation-error-and-cost-model",
+        "def-qc-clean-and-dirty-ancillas",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "alg-qc-state-preparation",
+        "def-qc-circuit-cost-model",
+        "def-qc-state-preparation-cost-model",
+        "thm-qc-state-preparation-rotation-level-upper-bound"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Specify M=Σ_j c_jV_j, α=Σ|c_j|, clean coefficient state preparation, SELECT phases, PREPARE†, and separately charged controlled/inverse forms.",
+      "proof_obligations": [
+        "Define all work-register behavior on nonzero/invalid index states and list finite coefficient precision.",
+        "For an amplitude-table implementation of PREPARE, retain the QC24 table/input-precision and rotation-level gate costs; a supplied PREPARE circuit remains an explicit charged access input.",
+        "The QC24 rotation-level upper bound uses variable-angle/continuous rotations; finite-alphabet synthesis, angle-description bits and target precision require separate costs.",
+        "If compiling PREPARE from a coefficient table, pad the term index to a power-of-two table and charge table construction, storage, precision and access.",
+        "The current QC24 bound is O((n+1)D) bounded-arity gates/depth for D=2^n, including n=0; table construction, reading, precision and exact real arithmetic remain separate. It is not a certified finite-precision bit-time theorem."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 1
+    },
+    {
+      "id": "alg-qa-21-lcu-block-encoding",
+      "kind": "algorithm",
+      "title": "LCU block encoding",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "def-qa-21-lcu-input-and-access-model",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Prepare Σ sqrt(|c_j|/α)|j⟩, apply SELECT with coefficient phases, and unprepare; return the unitary W=PREPARE†SELECT PREPARE.",
+      "proof_obligations": [
+        "Give the exact finite circuit and clean-ancilla output."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 2
+    },
+    {
+      "id": "thm-qa-21-lcu-block-correctness",
+      "kind": "theorem",
+      "title": "LCU projected-block correctness",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "alg-qa-21-lcu-block-encoding",
+        "def-qc-register-and-computational-basis"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The top-left projected block of W is M/α; measuring the coefficient ancilla at zero applies M/α, with success probability ||Mψ||²/α² on normalized ψ.",
+      "proof_obligations": [
+        "Expand the prepared amplitudes and the SELECT action, then compute the projected block and probability."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 5
+    },
+    {
+      "id": "def-qa-21-oblivious-reflection",
+      "kind": "definition",
+      "title": "Oblivious ancilla reflection",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "def-qa-21-lcu-input-and-access-model",
+        "def-qc-reflection"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Define R=I−2Π₀, where Π₀ projects only the clean coefficient ancilla to zero and acts identically on the unknown system register.",
+      "proof_obligations": [
+        "State sign convention and register support; do not reflect about an unknown input state.",
+        "Keep R=I−2Π for this OAA circuit; if implementing or controlling the opposite projector-reflection sign, use the exact QC08 control-Z relation rather than treating the signs as identical."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 3
+    },
+    {
+      "id": "alg-qa-21-one-step-oblivious-amplification",
+      "kind": "algorithm",
+      "title": "One-step oblivious amplitude amplification",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "alg-qa-21-lcu-block-encoding",
+        "def-qa-21-oblivious-reflection",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input W with ΠWΠ=M/2 and inverse access. On a clean coefficient register apply W, then R=I−2Π, then W†, then R, then W (chronological order); this is WRW†RW in right-to-left notation. The circuit uses two W calls, one W† and two reflections. For a unitary M apply an overall −1 correction to make the zero-ancilla block M; if outer-controlled, implement that correction on the outer control. For approximate M retain and quantify ancilla leakage; no measurement or exact workspace cleanup is asserted.",
+      "proof_obligations": [
+        "Track right-to-left composition and explicitly count two reflections. Preserve the known phase under outer control; use the robust local OAA supplier for approximate M."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-21-oblivious-amplification-block-identity",
+      "kind": "theorem",
+      "title": "Oblivious-amplification block identity",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "alg-qa-21-one-step-oblivious-amplification",
+        "thm-qc-reflection-unitary-involution"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The projected block of WRW†RW is −3M/2+MM†M/2. If M is unitary this is −M; for approximate M, a separate robust theorem must bound the full ancilla leakage and output operator error.",
+      "proof_obligations": [
+        "Expand ΠWRW†RWΠ with R=I−2Π; the three W/W† factors and two R factors give −3B+4BB†B for B=ΠWΠ=M/2, hence −3M/2+MM†M/2. Two reflections occur, not four. Do not infer a clean deterministic output for arbitrary M."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "Robust near-unitary cleanup/error bound must be proved as a local theorem or imported from a complete QA supplier."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 8
+    },
+    {
+      "id": "def-qa-21-truncated-taylor-lcu",
+      "kind": "definition",
+      "title": "Finite Taylor LCU polynomial",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "def-qa-21-lcu-input-and-access-model",
+        "def-self-adjoint-and-normal-endomorphism"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a finite Hermitian-unitary decomposition H=Σ_j a_jV_j, define M_K(h)=Σ_(k=0)^K(−ihH)^k/k! and its ordered product-term LCU expansion. Pad the coefficient 1-norm to 2 by a cancelling identity pair when Λ|h|≤ln2.",
+      "proof_obligations": [
+        "Show the padding changes the LCU 1-norm but not the represented operator; specify finite index encoding."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-21-taylor-tail-bound",
+      "kind": "theorem",
+      "title": "Taylor simulation tail bound",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "def-qa-21-truncated-taylor-lcu",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For x=Λ|h|, ||M_K(h)−exp(−ihH)||≤e^x x^(K+1)/(K+1)!; for x≤ln2 choose K=O(1+log(1/η)/loglog(e+1/η)) to make the tail at most η.",
+      "proof_obligations": [
+        "Bound the operator series termwise using submultiplicativity and the scalar exponential tail/Stirling bound."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 7
+    },
+    {
+      "id": "alg-qa-21-segmented-taylor-simulation",
+      "kind": "algorithm",
+      "title": "Segmented Taylor LCU simulator",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "def-qa-21-truncated-taylor-lcu",
+        "alg-qa-21-one-step-oblivious-amplification",
+        "def-qc-clean-and-dirty-ancillas",
+        "def-qc-circuit-cost-model",
+        "lem-qa-21-robust-one-step-oaa-isometry"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input finite Hermitian-unitary term decomposition with Λ=Σ|a_j|, real t, 0<ε≤1 and explicit PREPARE/SELECT access. If t=0 or Λ=0 return identity. Set r=max(1,ceil(Λ|t|/ln2)) and η=ε²/(1600r²). Choose the least K≥0 whose certified Taylor tail e^(Λ|t|/r)(Λ|t|/r)^(K+1)/(K+1)!≤η. Expand M_K(t/r) into ordered term products, compute its coefficient 1-norm α_K≤2, and append cancelling ±((2−α_K)/2)I terms to make it exactly 2. Build W, run the phase-corrected −WRW†RW with a fresh clean coefficient register per segment, and compose r segments. Keep all coefficient registers in the output dilation; they are approximately, not exactly, zero. Allocate additional circuit/preparation implementation errors ≤ε/2 in total. Discard auxiliary registers only at final output.",
+      "proof_obligations": [
+        "The Taylor series converges; increasing K terminates. Λ|h|≤ln2 ensures α_K≤2 and valid cancelling padding. Invoke the local robust OAA isometry lemma with η=ε²/(1600r²), giving each segment error ≤ε/(4r); telescope r clean-input dilations. Gate/preparation approximation budget ≤ε/2 leaves total ≤ε. Charge fresh ancillas, exact/certified coefficient bits, term product SELECT, inverse access and controlled phase correction."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "Robust OAA correctness for approximate unitaries is still required."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-21-taylor-simulation-error-and-cost",
+      "kind": "theorem",
+      "title": "Segmented Taylor error and resources",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "alg-qa-21-segmented-taylor-simulation",
+        "thm-qa-21-taylor-tail-bound",
+        "thm-qa-21-oblivious-amplification-block-identity",
+        "lem-qa-21-robust-one-step-oaa-isometry"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the explicit segmented construction, ||V_impl J−J_out exp(−itH)||≤ε as a clean-input isometry error, with all auxiliary registers compared to their zero states. Tracing them gives output trace-distance error at most ε. r=max(1,ceil(Λ|t|/ln2)), K from η=ε²/(1600r²), and the algorithm uses O(rK) underlying term-unitary queries, O(r) composite Taylor SELECT/SELECT† and PREPARE/PREPARE† calls. The number of segments times the coefficient width is charged if fresh workspaces are retained. All term gates, coefficient generation, precision, control and inverse costs remain explicit.",
+      "proof_obligations": [
+        "Taylor error ≤η per segment followed by the robust OAA lemma gives ≤10√η≤ε/(4r); telescope isometries with fresh work registers. Add summed implementation errors ≤ε/2. A composite Taylor SELECT invokes at most K term unitaries, and each OAA has three W/W† factors; count access and ancillary widths. This does not claim full operator-norm closeness on arbitrary nonzero coefficient inputs."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "Exact robust OAA full-state error is a prerequisite; projected-block error alone does not imply clean output."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 17,
+      "local_order": 11
+    },
+    {
+      "id": "ex-qa-21-two-term-lcu",
+      "kind": "example",
+      "title": "Two-term LCU block",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation-examples",
+      "deps": [
+        "thm-qa-21-lcu-block-correctness"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For M=aI+bZ, compute α, PREPARE amplitudes and the projected block by hand.",
+      "proof_obligations": [
+        "Expand the two basis branches."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 3
+    },
+    {
+      "id": "ex-qa-21-cancelling-normalization-padding",
+      "kind": "example",
+      "title": "LCU normalization padding",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation-examples",
+      "deps": [
+        "def-qa-21-truncated-taylor-lcu"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Add coefficients +qI and −qI to increase the LCU 1-norm without changing M.",
+      "proof_obligations": [
+        "Check both the coefficient sum and the absolute coefficient sum."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 1
+    },
+    {
+      "id": "cex-qa-21-unknown-input-reflection",
+      "kind": "counterexample",
+      "title": "Unknown-state reflection is invalid",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation-examples",
+      "deps": [
+        "def-qa-21-oblivious-reflection"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Ordinary amplitude amplification cannot reflect about an arbitrary unknown input state; oblivious amplification reflects only the clean ancilla subspace.",
+      "proof_obligations": [
+        "Exhibit two nonorthogonal possible input states and show the purported reflection depends on which unknown state was supplied."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 2
+    },
+    {
+      "id": "def-qa-25-qubitization-access-model",
+      "kind": "definition",
+      "title": "Qubitization access model",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-22-block-encoding",
+        "def-qa-22-block-encoding-access-model",
+        "def-qa-23-qsp-admissible-polynomial-pair",
+        "def-qa-24-singular-value-transform",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-reflection",
+        "def-qc-circuit-cost-model",
+        "def-qc-uniform-circuit-family"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input is a Hermitian α-block encoding U of H/α plus explicit access to U,U†, controlled variants, projector reflections, PREPARE/SELECT if used, and phase synthesis with precision and gate costs.",
+      "proof_obligations": [
+        "Reconcile all costs with the frozen QA22–24 statements; no free controlled or inverse calls."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 1
+    },
+    {
+      "id": "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+      "kind": "lemma",
+      "title": "Hermitian block-encoding signal subspaces",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-25-qubitization-access-model",
+        "def-qa-22-block-encoding",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-qc-dirac-notation-conversion",
+        "thm-qc-reflection-unitary-involution"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For U block-encoding Hermitian A and A|ψ_λ⟩=λ|ψ_λ⟩, the vectors |0,ψ_λ⟩ and normalized (I−Π)U|0,ψ_λ⟩ / (I−Π)U†|0,ψ_λ⟩ span paired two-dimensional signal spaces on which U,U† act by the reflection matrix with entries λ and sqrt(1−λ²). Endpoint and zero-singular spaces are stated separately.",
+      "proof_obligations": [
+        "Derive both U and U† actions from ΠUΠ=A; handle |λ|=1 and zero singular values without dividing by zero."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 2
+    },
+    {
+      "id": "thm-qa-25-qubitization-signal-sequence",
+      "kind": "theorem",
+      "title": "Qubitization lifts scalar QSP",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+        "thm-qa-23-qsp-phase-factorization",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qc-reflection-unitary-involution",
+        "lem-qa-23-hermitian-signal-convention-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Alternating U/U† and phases of the projector reflection acts on each signal plane as the QSP sequence with x=λ/α; admissible QSP phases therefore induce the corresponding polynomial block transformation on all eigenspaces simultaneously.",
+      "proof_obligations": [
+        "Track basis switches between U and U† planes, prove the scalar signal identity, and include endpoint/null-space actions.",
+        "Translate the Gilyén SU(2) signal into this Hermitian W convention through lem-qa-23-hermitian-signal-convention-conversion, including the determinant parity and tracked global scalar. Under control the scalar phase is explicit, never dropped."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 7
+    },
+    {
+      "id": "def-qa-25-hamiltonian-simulation-polynomial",
+      "kind": "definition",
+      "title": "Hamiltonian-simulation polynomial target",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-25-qubitization-access-model",
+        "def-qa-23-qsp-admissible-polynomial-pair",
+        "def-qa-24-singular-value-transform",
+        "def-qa-19-finite-matrix-dynamics",
+        "thm-complex-exponential-addition-and-real-extension",
+        "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For τ=αt, the target scalar function on x∈[−1,1] is exp(−iτx); separate its real even and imaginary odd parts or use a proved joint complex-polynomial construction.",
+      "proof_obligations": [
+        "Record parity, boundedness, complementary-polynomial and normalization conditions required by the chosen synthesis route."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "A real parity-bounded polynomial theorem alone does not synthesize the full complex non-parity target."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 3
+    },
+    {
+      "id": "lem-qa-25-jacobi-anger-truncation",
+      "kind": "lemma",
+      "title": "Jacobi–Anger Chebyshev truncation",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-25-hamiltonian-simulation-polynomial",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "thm-complex-exponential-addition-and-real-extension",
+        "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The Chebyshev expansion of exp(−iτx) truncated at degree d has uniform error at most the Bessel tail; d=O(τ+log(1/ε)/log(e+log(1/ε)/τ)) suffices for τ>0.",
+      "proof_obligations": [
+        "Prove the Jacobi–Anger identity, bound the Bessel tail uniformly, and give explicit small-τ and t=0 branches."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 5
+    },
+    {
+      "id": "alg-qa-25-qubitized-hamiltonian-simulation",
+      "kind": "algorithm",
+      "title": "Qubitized Hamiltonian simulator",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-25-qubitization-access-model",
+        "def-qa-25-hamiltonian-simulation-polynomial",
+        "thm-qa-25-qubitization-signal-sequence",
+        "alg-qa-24-qsvt"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Given a charged Hermitian block encoding and target ε, compute the parity-compatible polynomial/phase sequence for exp(−itH), execute the alternating signal/reflection circuit, combine even/odd blocks by the proved construction, correct global/relative phase as required, and return the system state with clean ancilla. Its executable input includes certified even/odd polynomial approximations, complementary polynomial/phase lists and the finite block-combination/OAA circuit with a stated clean-input isometry error budget. Without these certificates the instance is CONSTRUCTION_HOLD, not an algorithmic instruction to choose a polynomial from existence. The degree/generation target is preserved in the Jacobi–Anger and correctness/resource suppliers. The complete binding generation/execution definition is operational-contracts.md OP4, including OP0 numerical/selection subroutines, every cap/failure/invalid branch, access direction, output and cost convention. Its instructions are part of this Definition; named source routines are expanded there rather than assumed available.",
+      "proof_obligations": [
+        "Specify the exact even/odd or joint polynomial combination, robust normalization/OAA if used, phase list, ancilla cleanup and all branches."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "The parity/complex combination and its full error bound must be proved from the complete Gilyén construction.",
+        "The binding appendix defines the finite procedure now; prove its explicit precision constants, capped-schedule correctness/termination and actual query/gate/bit resource bounds locally. Source guarantees are not automatically accepted for modified schedules or coefficient profiles."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 9,
+      "operational_contract_ref": {
+        "path": "research/quantum-algorithms-planning/operational-contracts.md",
+        "section": "OP4",
+        "binding": true
+      }
+    },
+    {
+      "id": "thm-qa-25-qubitized-simulation-correctness",
+      "kind": "theorem",
+      "title": "Near-optimal simulation correctness",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "alg-qa-25-qubitized-hamiltonian-simulation",
+        "lem-qa-25-jacobi-anger-truncation",
+        "thm-qa-23-qsp-synthesis-correctness",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "thm-qc-reflection-unitary-involution"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the exact Hermitian block-encoding access and binding OP4 generated even/odd polynomials, phase lists, LCU/OAA and allocated numerical budgets, the complete circuit satisfies ||V_impl J−J_out exp(−itH)||≤ε on the clean-input isometry J, where J_out appends all work registers in zero. Auxiliary output registers are therefore approximately zero, with the same stated isometry error; tracing them gives the corresponding system-output trace-distance bound. No full-space operator bound on arbitrary dirty workspace or exact clean return is asserted. For t=0 the declared identity branch is exact.",
+      "proof_obligations": [
+        "Propagate polynomial approximation, block-encoding, synthesis, OAA and composition errors with an explicit budget.",
+        "Use the actual OP4 polynomial truncation and rational coefficient errors, the QA21 robust clean-input OAA leakage lemma, and a telescoping isometry budget. Check system/referee entanglement by tensoring the same isometry operator with identity; do not infer exact cleanup from a compression block."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "Do not mark complete until complex parity combination and cleanup are proved."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 16,
+      "local_order": 11
+    },
+    {
+      "id": "thm-qa-25-qubitized-simulation-resource-bound",
+      "kind": "theorem",
+      "title": "Qubitization query and gate resources",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "thm-qa-25-qubitized-simulation-correctness",
+        "def-qa-25-qubitization-access-model",
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Put τ=α|t| and L=ln(1/ε) for 0<ε<1. For τ>0 the binding OP4 factorial/Bessel-tail degree is d=O(τ+L/log(e+L/τ)); for t=0 the identity uses no signal query. Charge O(d) U/U† calls and projector phases, real-polynomial controls, coefficient preparation/SELECT/OAA, phase generation, classical bit arithmetic and auxiliary registers separately. For sparse input α=d_H h_max, multiply by the actual sparse-encoding access cost and retain its in-place location/value/precision promises. With τ bounded above and below by positive constants and ε→0 this specializes to O(τ+L/log L). That additive L/log L formula is not claimed uniformly for jointly varying τ and ε.",
+      "proof_obligations": [
+        "Use the exact QSVT/QSP call counts, include controlled-U caveat for coherent control and odd degree, and separate queries from gate/bit cost.",
+        "Use τ=α|t| for negative as well as positive time. Prove the uniform factorial-tail solution, including τ→0 and the exact t=0 branch. The coarser fixed-τ asymptotic has explicit scope; no undefined standard-regime claim remains. The Taylor budget ε² in OAA changes logarithms by only a constant factor."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "Sparse value/row oracle conversion and phase synthesis gate costs must be retained."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 17,
+      "local_order": 12
+    },
+    {
+      "id": "alg-qa-25-sparse-hamiltonian-block-encoding",
+      "kind": "algorithm",
+      "title": "Sparse Hermitian block encoding",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-25-qubitization-access-model",
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "alg-qa-22-lcu-block-encoding",
+        "def-qc-state-preparation-cost-model",
+        "thm-qc-state-preparation-rotation-level-upper-bound",
+        "alg-qc-state-preparation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input finite d_H-row-sparse Hermitian H with h_max>0, row/column nonzero enumerations (column lists are row lists by Hermiticity) padded with distinct invalid sentinel labels, and supplied reversible in-place location permutations O_r,O_c and their inverses with charged costs. Let Ĥ=H/h_max and d=d_H. Supply costed D_d preparing d^{−1/2}Σ_(k=1)^d|k⟩; arbitrary d does not imply free preparation. Define V_L=O_r(I⊗D_d)SWAP and V_R=O_c(D_d⊗I) on paired index registers. Let U_L=I_flag⊗V_L. Define U_R by V_R, query Ĥ_ij, rotate flag |0⟩↦Ĥ_ij|0⟩+√(1−|Ĥ_ij|²)|1⟩ (zero entry for sentinel indices), and unquery values/work. Return U_L†U_R with designated all-zero auxiliary block. This block is H/(d h_max). If only XOR row-location access is supplied, separately construct/cost the in-place forward and reverse maps; no O(1)-query standard sparse bound is inferred from XOR access alone. If H=0 return identity block encoding with a stated positive normalization.",
+      "proof_obligations": [
+        "Give exact row/column preparation circuits, padding for missing entries, finite-precision arithmetic, and query/gate/bit counts.",
+        "For row/column amplitude preparation, declare the coefficient-table encoding or supplied circuit; retain QC24 input-table, precision, width, and rotation-level gate costs without treating sparse access as free state preparation.",
+        "The QC24 rotation-level upper bound uses variable-angle/continuous rotations; finite-alphabet synthesis, angle-description bits and target precision require separate costs.",
+        "When a row has fewer than a power-of-two number of nonzero entries, pad the preparation index with zero-amplitude slots and include the reversible index mapping cost.",
+        "The amplitude table is built from at most d_H charged row-location/value queries and finite-precision arithmetic; pad its index to a power of two and charge table storage, preparation gates, access, precision and angle synthesis.",
+        "The current QC24 bound is O((n+1)D) bounded-arity gates/depth for D=2^n, including n=0; table construction, reading, precision and exact real arithmetic remain separate. It is not a certified finite-precision bit-time theorem.",
+        "For valid (i,j), row and column lists contain the pair once exactly when H_ij≠0; their uniform overlap is 1/d, and the flag-0 amplitude is Ĥ_ij, yielding H_ij/(d h_max). Invalid sentinels never overlap valid indices. Complete the flag action to the explicit 2×2 unitary [[h,−√(1−|h|²)],[√(1−|h|²),conj(h)]] and charge finite-precision arithmetic.",
+        "A reversible in-place location permutation needs a reverse-index interface; arbitrary XOR function evaluation does not give it for free. At worst coherently scan the d-entry row to find the inverse label, with exact validity/sentinel branches and charged d oracle calls. A polynomial bit cost needs that construction, not matrix sparsity alone."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 10
+    },
+    {
+      "id": "thm-qa-25-sparse-no-fast-forwarding-lower-bound",
+      "kind": "theorem",
+      "title": "Sparse Hamiltonian no-fast-forwarding",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "def-promise-problem",
+        "def-qc-circuit-cost-model",
+        "def-qa-19-finite-matrix-dynamics",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "lem-qa-25-parity-path-transfer",
+        "thm-qa-25-bounded-error-parity-query-lower-bound",
+        "thm-qa-19-matrix-exponential-unitary-properties"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the exact 2-sparse Hermitian parity-path family H_x of norm at most 1, row-value oracles that return symmetric entry approximations within η≤1/(6πn) (b=O(log n) bits) still have sparse normalization α_sparse=2||Ĥ_x||_max=Θ(1). A simulator with operator-norm error at most 1/3 at time t=πn/2 differs from exact parity transfer by at most 1/2 after the Duhamel rounding budget, so its output computes parity with error at most 1/4. Each sparse row query costs O(1) bit queries, and bounded-error parity requires Ω(n); hence sparse-oracle simulation requires Ω(n)=Ω(t)=Ω(α_sparse t) queries. No unrestricted block-encoding lower bound is claimed.",
+      "proof_obligations": [
+        "Apply the path-transfer lemma; bound entry-quantization operator error by 2η using row/column sparsity and use Duhamel over t=πn/2.",
+        "Show a 1/3 simulator plus the 1/6 rounding error has parity failure at most 1/4.",
+        "Reduce each finite-precision sparse row query to O(1) input-bit queries, then invoke the bounded-error parity polynomial lower bound.",
+        "Keep the result scoped to sparse-row oracle access; do not infer a generic block-encoding lower bound."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28.1, printed p. 139; PDF p. 148"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Root def-promise-problem supplies the promise-task interface; the parity reduction itself is proved locally from the finite oracle model."
+      ],
+      "unresolved_obligations": [
+        "No lower bound matching the additive precision term is established."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 8
+    },
+    {
+      "id": "ex-qa-25-two-dimensional-block-encoding",
+      "kind": "example",
+      "title": "Two-dimensional block encoding",
+      "page": "qubitization-and-optimal-hamiltonian-simulation-examples",
+      "deps": [
+        "lem-qa-25-hermitian-block-encoding-signal-subspaces"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Compute the signal plane for a 2×2 Hermitian block and verify its λ/α dependence.",
+      "proof_obligations": [
+        "Check λ=0 and |λ|=α endpoints."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 1
+    },
+    {
+      "id": "ex-qa-25-chebyshev-truncation",
+      "kind": "example",
+      "title": "Low-degree Chebyshev simulation polynomial",
+      "page": "qubitization-and-optimal-hamiltonian-simulation-examples",
+      "deps": [
+        "lem-qa-25-jacobi-anger-truncation"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Calculate the first terms of the Jacobi–Anger/Chebyshev expansion and its parity split.",
+      "proof_obligations": [
+        "Check real/even and imaginary/odd terms."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 2
+    },
+    {
+      "id": "ex-qa-25-parity-no-fast-forwarding",
+      "kind": "example",
+      "title": "Parity reduction for sparse simulation",
+      "page": "qubitization-and-optimal-hamiltonian-simulation-examples",
+      "deps": [
+        "thm-qa-25-sparse-no-fast-forwarding-lower-bound"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For small n, enumerate the two weighted paths and verify endpoint parity transfer.",
+      "proof_obligations": [
+        "Compute row degree, normalization and endpoint labels."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 29 §§29.1–29.4, printed pp. 143–148; PDF pp. 151–156"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.4–9.5, printed pp. 76–82"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1806.01838",
+          "locator": "Defs. 3, 43; Thm. 17, Cor. 18, Lemma 19, Hamiltonian simulation sections, pp. 7–25 and 41–61"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 3
+    },
+    {
+      "id": "def-qa-36-finite-adiabatic-path-model",
+      "kind": "definition",
+      "title": "Finite adiabatic path model",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-self-adjoint-and-normal-endomorphism",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "def-qc-pure-state-and-ray",
+        "def-qc-projective-measurement",
+        "def-qc-povm-and-outcome-law",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Specify finite Hermitian C² path H(s), slow-time evolution i∂_sU_T=TH(s)U_T, an isolated spectral projection P(s) with coherent local Riesz continuation and uniform full gap g(s)>0, output measurement/error, and an explicitly supplied initial preparation/isometry A₀ with declared cost C_init. For rank one A₀ prepares the specified unit vector ψ₀∈ran(P(0)); for a rank-m band it is an isometry C^m→C^d with orthonormal columns spanning the declared initial subspace in ran(P(0)). The matrix H or P(0) alone does not supply A₀.",
+      "proof_obligations": [
+        "Separate model data from the adiabatic theorem; state whether the band is unique ground or rank-m.",
+        "If initial amplitudes are supplied as a table, pad the finite basis to a power of two with zero amplitudes and charge table construction, storage, precision and access.",
+        "Keep A₀ and C_init as explicit instance data; do not infer an amplitude table, QRAM, or preparation circuit from H(0) or its spectral projector."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "Theorems 1 and 3, PDF pp. 3–11"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 30, printed pp. 151–156; PDF pp. 159–164"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§§2–3.1, Theorem 3.1, Lemmas 3.5–3.19, PDF pp. 7–20"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 7,
+      "local_order": 3
+    },
+    {
+      "id": "def-qa-36-adiabatic-resource-model",
+      "kind": "definition",
+      "title": "Adiabatic path access and resource model",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-qa-36-finite-adiabatic-path-model",
+        "def-qa-20-simulation-error-and-cost-model",
+        "def-qc-uniform-circuit-family",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Give a uniform finite description of H(s), term/sparse access circuits, derivative and coefficient precision bounds, and a named supplied initial preparation/isometry circuit A₀ of declared cost C_init whose exact image lies in the specified initial band; also specify evolution time T and separate query/gate/bit costs. A matrix or spectral projector does not itself provide A₀.",
+      "proof_obligations": [
+        "Require uniform polynomial-time evaluation of sampled terms; arbitrary real matrix families are not circuit inputs."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "Theorems 1 and 3, PDF pp. 3–11"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 30, printed pp. 151–156; PDF pp. 159–164"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§§2–3.1, Theorem 3.1, Lemmas 3.5–3.19, PDF pp. 7–20"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 5
+    },
+    {
+      "id": "lem-qa-36-gapped-projection-regularity",
+      "kind": "lemma",
+      "title": "Finite gapped spectral projection regularity",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-qa-36-finite-adiabatic-path-model",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-functional-calculus-for-a-normal-endomorphism"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a C² finite Hermitian path and a coherently followed spectral cluster uniformly separated by a positive gap, the spectral projection P(s) is C² via local fixed-contour Riesz formulas.",
+      "proof_obligations": [
+        "Choose local contours around the prescribed cluster, differentiate the finite resolvent, and prove agreement on overlaps from projection continuity."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "Theorems 1 and 3, PDF pp. 3–11"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 30, printed pp. 151–156; PDF pp. 159–164"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§§2–3.1, Theorem 3.1, Lemmas 3.5–3.19, PDF pp. 7–20"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 8,
+      "local_order": 4
+    },
+    {
+      "id": "thm-qa-36-jrs-finite-adiabatic-bound",
+      "kind": "theorem",
+      "title": "Finite JRS adiabatic projector bound",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-qa-36-finite-adiabatic-path-model",
+        "lem-qa-36-gapped-projection-regularity",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "def-self-adjoint-and-normal-endomorphism",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For C² finite self-adjoint H(s), a coherently followed isolated constant-rank-m band with gap g(s)>0, and i∂_sU_T=TH(s)U_T, define A_m(s)=T^−1[m(||H′(0)||/g(0)^2+||H′(s)||/g(s)^2)+∫₀ˢ(m||H″(r)||/g(r)^2+7m√m||H′(r)||²/g(r)^3)dr]. Then ||U_T(s)P(0)U_T(s)†−P(s)||≤A_m(s), and for every unit ψ∈ran(P(0)) its transition probability out of ran(P(s)) is at most A_m(s)^2. The rank-one case sets m=1.",
+      "proof_obligations": [
+        "Specialize JRS Theorem 3 to finite dimension; retain C² regularity, constant rank, coherent isolated projection, full gap, endpoint terms and all constants/gap powers."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "Theorems 1 and 3, PDF pp. 3–11"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 30, printed pp. 151–156; PDF pp. 159–164"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§§2–3.1, Theorem 3.1, Lemmas 3.5–3.19, PDF pp. 7–20"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 9,
+      "local_order": 6
+    },
+    {
+      "id": "alg-qa-36-five-local-history-path",
+      "kind": "algorithm",
+      "title": "Five-local history-state adiabatic path",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-qa-36-finite-adiabatic-path-model",
+        "def-qa-36-adiabatic-resource-model",
+        "def-qc-uniform-circuit-family",
+        "def-qc-partial-trace",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input length-L≥1 circuit of at most two-qubit gates and rational 0<ε≤1. Append ceil(2L/ε) identity gates; write L′ for total length. Unary clock |c_l⟩=|1^l0^(L′−l)⟩. Put H_clock=Σ_(j<L′)|01⟩⟨01|_(j,j+1), H_in=Σ_i |1⟩⟨1|_i⊗|0⟩⟨0|_clock1, and H_clock0=Σ_j|1⟩⟨1|_clockj. For internal step l use local clock a=100,b=110 on (l−1,l,l+1); at l=1 use a=00,b=10 and at l=L′ use a=10,b=11 (for L′=1 use a=0,b=1). Define h_l=[I⊗(|a⟩⟨a|+|b⟩⟨b|)−U_l⊗|b⟩⟨a|−U_l†⊗|a⟩⟨b|]/2 and H_prop=Σ_l h_l. Set H_init=H_in+H_clock0+JH_clock, H_final=H_in+H_prop+JH_clock, and H(s)=(1−s)H_init+sH_final. Choose polynomial J from the full-gap supplier’s explicit leakage budget. Prepare all computation and clock bits zero, evolve for the full-gap/JRS chosen T with the explicit simulation budget, trace out the clock, and output the computation register.",
+      "proof_obligations": [
+        "Every h_l is positive semidefinite since its two-pattern block is [I,−U†;−U,I]/2; all other pattern states receive zero from that term. Check endpoint ordering and verify h_l annihilates the selected history. H_clock zero space is exactly monotone unary strings; H_init has a unique all-zero ground vector. Each propagation term acts on at most two computation plus three clock qubits; input terms act on two. Prove the declared polynomial J and complete full-path gap before authoring acceptance; retain all initialization, clock legality and padding assumptions."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§§3.1.1–3.1.3, PDF pp. 10–15"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 7
+    },
+    {
+      "id": "lem-qa-36-history-state-ground-and-output",
+      "kind": "lemma",
+      "title": "History state and padded output",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "alg-qa-36-five-local-history-path",
+        "def-qc-partial-trace",
+        "def-qc-trace-distance",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "On the legal-clock subspace, H_prop has kernel { (L+1)^{-1/2}Σ_ℓ U_ℓ…U_1|ξ⟩|clock_ℓ⟩ : ξ∈C^{2^n} }, of dimension 2^n. Add the declared input penalty requiring |ξ⟩=|0^n⟩ at clock zero; H_prop+H_in then has the unique normalized history ground state η. Clock penalties enforce legality. Padding with Θ(L/ε) identities makes the computation marginal of this selected history state ε-close in trace distance to the specified circuit output.",
+      "proof_obligations": [
+        "Conjugate H_prop by the controlled prefix-unitary to a path Laplacian tensored with identity; its zero space is uniform clock times arbitrary input. Input energy vanishes exactly for the all-zero input, proving unique selected history ground state. Partial trace gives the average of time-slice density operators; padding bounds the nonfinal weight by ε. Do not infer uniqueness from propagation alone."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§§3.1.1 and Lemma 3.10, PDF pp. 10–15"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 8
+    },
+    {
+      "id": "thm-qa-36-finite-cheeger-bound",
+      "kind": "theorem",
+      "title": "Finite reversible Cheeger inequality",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-transition-matrix-and-n-step-transition-probabilities",
+        "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+        "def-reversible-measure-and-detailed-balance",
+        "def-self-adjoint-and-normal-endomorphism",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a finite reversible ergodic chain with stationary law π and conductance φ=min_{0<π(S)≤1/2}Q(S,S^c)/π(S), the algebraic gap 1−λ₂ below the top eigenvalue is at least φ²/2; no absolute-gap claim is needed for the ground-energy comparison.",
+      "proof_obligations": [
+        "Give the complete coarea/Cauchy–Schwarz proof and state the reversible transition and conductance conventions."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "Theorem 2.5, PDF p. 10"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [
+        "The source cites Cheeger/conductance results; a complete local proof is required."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 1
+    },
+    {
+      "id": "lem-qa-36-history-path-ground-vector-monotonicity",
+      "kind": "lemma",
+      "title": "History-path positive ground vector",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "alg-qa-36-five-local-history-path",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the restricted tridiagonal path matrix from the five-local construction, prove the top eigenvector of G(s)=I−H_S(s) is unique and positive for s>0 and monotone in the clock coordinate, with the endpoint s=0 handled separately.",
+      "proof_obligations": [
+        "Prove the finite Perron positivity from an explicit positive power or direct recurrence, then prove monotonicity from the tridiagonal recurrence."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "Claims 3.7–3.8, PDF pp. 13–14"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [
+        "A complete finite-dimensional Perron argument is absent from the cited paper and must be supplied locally."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 9
+    },
+    {
+      "id": "lem-qa-36-history-path-restricted-gap",
+      "kind": "lemma",
+      "title": "Restricted history-path gap",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "alg-qa-36-five-local-history-path",
+        "thm-qa-36-finite-cheeger-bound",
+        "lem-qa-36-history-path-ground-vector-monotonicity",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The restriction of H(s) to the legal history subspace has gap Ω(L^(−2)) uniformly in s, using a Gershgorin bound for small s and a birth-death conductance bound for larger s.",
+      "proof_obligations": [
+        "Derive the tridiagonal matrix, prove the small-s disc separation, construct the weighted reversible path chain, bound conductance from monotone stationary weights, and apply the local Cheeger theorem."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [
+        "This is a substantial proof and remains unresolved until the conductance and monotonicity details are written in full."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 10
+    },
+    {
+      "id": "lem-qa-36-clock-penalty-gap-perturbation",
+      "kind": "lemma",
+      "title": "Large clock-penalty perturbation",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-self-adjoint-and-normal-endomorphism",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Let S be the legal subspace, H=H₁+JH₂, H₂|_S=0, H₂|_(S^⊥)≥I, ||H₁||≤K and J>2K. Then λ_min(H₁|S)−K²/(J−2K)≤λ_min(H)≤λ_min(H₁|S). If the restricted ground eigenvalue has gap Δ and J is chosen so K²/(J−2K)≪Δ, prove the corresponding low-energy cluster/gap and leakage bounds via the same block decomposition; no general gap conclusion is supplied solely by J>2K.",
+      "proof_obligations": [
+        "Use the variational upper bound and write unit vectors as components in S and S^⊥. Complete the square using the penalty J and cross term ≤2K||v_S||||v_perp||. For gap transfer use min–max for the first two eigenvalues and record the additive error separately. Avoid double-counting J: H₂≥I, not ≥J before multiplication."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "Lemma 3.17, PDF pp. 18–19"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 0,
+      "local_order": 2
+    },
+    {
+      "id": "lem-qa-36-history-path-full-gap",
+      "kind": "lemma",
+      "title": "Full-space history-path gap",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "lem-qa-36-history-path-restricted-gap",
+        "lem-qa-36-clock-penalty-gap-perturbation",
+        "alg-qa-36-five-local-history-path",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "The full five-local path has a unique ground state and gap Ω(L^(−3)): decompose legal states into input-index history blocks, apply the input penalty, then control illegal clocks with the large-penalty perturbation lemma.",
+      "proof_obligations": [
+        "Prove block decomposition, input-energy penalty, legal subspace gap transfer and illegal-clock separation for every s."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "Lemmas 3.11–3.19, PDF pp. 15–20"
+        }
+      ],
+      "existing_supplier_checks": [
+        "Audited the live root supplier body and hypotheses; use only the exact finite-dimensional scope listed in the report."
+      ],
+      "unresolved_obligations": [
+        "Do not claim the full gap from the restricted path bound alone."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 12
+    },
+    {
+      "id": "alg-qa-36-discretized-path-simulation",
+      "kind": "algorithm",
+      "title": "Discretized adiabatic path circuit",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "def-qa-36-adiabatic-resource-model",
+        "def-qa-20-term-list-access-model",
+        "thm-qa-20-first-order-commutator-error",
+        "def-qc-uniform-circuit-family",
+        "def-qc-circuit-cost-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input T≥0, rational 0<ε≤1, costed initial circuit A₀, finite term-list descriptions of H(s), certified M₁≥sup_s||H′(s)|| and uniformly evaluable coefficients. If T=0 apply A₀ and output. Otherwise set q=max(1,ceil(3TM₁/ε)), h=1/q; for j=0,…,q−1 evaluate each coefficient of H(j/q) with combined operator error ≤ε/(3T). Invoke the first-order term-list simulator for duration T/q at operator-error budget ε/(3q), choosing its integer step count from the certified commutator sum and requiring its term circuits to fit the budget. Compose segments after A₀ and perform the declared output measurement. Query, gate, coefficient-evaluation bit and initial-state costs are summed separately.",
+      "proof_obligations": [
+        "Duhamel gives piecewise-constant-path error ≤TM₁/(2q)≤ε/6. Coefficient perturbation contributes at most T·ε/(3T)=ε/3; q simulator errors contribute ε/3. Sum all three and reserve remaining ε/6 for A₀/preparation/output implementation if approximate. Every loop has fixed q and finite term count; the term simulator has its explicit positive integer r, including zero commutators."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "Theorems 1 and 3, PDF pp. 3–11"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 30, printed pp. 151–156; PDF pp. 159–164"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§§2–3.1, Theorem 3.1, Lemmas 3.5–3.19, PDF pp. 7–20"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 11
+    },
+    {
+      "id": "thm-qa-36-circuit-to-adiabatic-simulation",
+      "kind": "theorem",
+      "title": "Circuit-to-adiabatic simulation",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "alg-qa-36-five-local-history-path",
+        "lem-qa-36-history-state-ground-and-output",
+        "lem-qa-36-history-path-full-gap",
+        "thm-qa-36-jrs-finite-adiabatic-bound",
+        "def-qc-trace-distance",
+        "def-qc-partial-trace"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Every uniform length-L circuit has the five-local finite Hermitian history path with product initial ground state, full gap Ω(L′^−3) and polynomially bounded derivatives, where L′=Θ(L/ε) after identity padding. With ||H′||=O(L′), H″=0, the rank-one JRS bound is A(1)=O((L′)^11/T), so T=O(L^11 ε^−12) suffices for O(ε) adiabatic error; finite-precision simulation receives a separate O(ε) budget, and the padded final reduced output is O(ε)-close in trace distance.",
+      "proof_obligations": [
+        "Track padding dependence in path length, norm and gap; substitute into JRS with explicit T; add finite Hamiltonian-simulation error and output trace-distance error."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "Theorem 3.1 and Lemma 3.10, PDF pp. 10–15"
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "Theorem 3, PDF pp. 5–11"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 14,
+      "local_order": 14
+    },
+    {
+      "id": "thm-qa-36-adiabatic-path-to-circuit-simulation",
+      "kind": "theorem",
+      "title": "Adiabatic path-to-circuit simulation",
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "deps": [
+        "alg-qa-36-discretized-path-simulation",
+        "def-qa-36-adiabatic-resource-model",
+        "def-qa-19-finite-matrix-dynamics"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A uniformly described finite path with polynomial term count, bounded norms/derivatives, finite-precision coefficient evaluation, and an exact supplied initial preparation/isometry circuit A₀ of cost C_init with image in the initial band is simulated by first applying A₀ and then a uniform path-evolution circuit. The total cost includes C_init plus grid, segment-simulation and coefficient-evaluation costs; operator/output error is ε under the allocated path and simulation error budgets.",
+      "proof_obligations": [
+        "Use a Duhamel path-variation estimate and telescope constant-segment simulation errors; state required uniformity and precision."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "Theorem 1.1 discussion, PDF pp. 3–4"
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Chs. 27–29, printed pp. 133–148; PDF pp. 141–156"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [
+        "A finite path without an efficient term/access description is outside the theorem."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 13
+    },
+    {
+      "id": "cex-qa-36-gap-closing-failure",
+      "kind": "counterexample",
+      "title": "Gap closing invalidates uniform adiabatic bound",
+      "page": "adiabatic-computation-and-circuit-equivalence-examples",
+      "deps": [
+        "def-qa-36-finite-adiabatic-path-model",
+        "thm-qa-36-jrs-finite-adiabatic-bound"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "A two-level path whose gap closes has no positive uniform g; the finite JRS estimate cannot be invoked and an endpoint-following conclusion does not follow from C² regularity alone.",
+      "proof_obligations": [
+        "Give an explicit 2×2 path and compute the gap and transition probability."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "§I and Theorem 3 hypotheses, PDF pp. 1–5"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 2
+    },
+    {
+      "id": "ex-qa-36-two-gate-history-state",
+      "kind": "example",
+      "title": "Two-gate history state",
+      "page": "adiabatic-computation-and-circuit-equivalence-examples",
+      "deps": [
+        "lem-qa-36-history-state-ground-and-output"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Write the legal-clock history state and propagation terms for a two-gate circuit.",
+      "proof_obligations": [
+        "Verify each propagation projector annihilates the history state."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "locator": "§3.1.1, PDF pp. 10–11"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 3
+    },
+    {
+      "id": "ex-qa-36-two-level-avoided-crossing",
+      "kind": "example",
+      "title": "Two-level gapped path",
+      "page": "adiabatic-computation-and-circuit-equivalence-examples",
+      "deps": [
+        "thm-qa-36-jrs-finite-adiabatic-bound"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For a specified 2×2 Hermitian path, compute its minimum gap, derivative norms and JRS runtime bound.",
+      "proof_obligations": [
+        "Diagonalize and substitute the exact path data."
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "locator": "Theorem 3, PDF pp. 5–11"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 1
+    },
+    {
+      "id": "lem-qa-18-absorbing-walk-discriminant-decomposition",
+      "kind": "lemma",
+      "title": "Absorbing-kernel discriminant decomposition",
+      "page": "quantum-walk-search-and-element-distinctness",
+      "deps": [
+        "def-qa-17-finite-stochastic-kernel",
+        "def-qa-17-szegedy-transition-isometry",
+        "def-qa-18-marked-set-and-stationary-mass"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For symmetric row-stochastic P and M⊆X, define P′ to make each x∈M absorbing and leave every unmarked row unchanged. Its row-stochastic Szegedy discriminant is D′=P_UU⊕I_M for U=X\\M, even though P′ is generally not reversible.",
+      "proof_obligations": [
+        "Compute √(P′_xyP′_yx) separately on U×U, M×M and the two cross blocks; verify P′ remains row-stochastic."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18.4, printed pp. 84–86; PDF pp. 92–94"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2–8.3, printed pp. 64–69"
+        }
+      ],
+      "existing_supplier_checks": [
+        "The row-stochastic reflection-walk interface is general; no reversibility or stationary distribution for P′ is used."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 3,
+      "local_order": 4
+    },
+    {
+      "id": "cex-qa-17-nonreversible-discriminant",
+      "kind": "counterexample",
+      "title": "Nonreversible kernel and discriminant",
+      "page": "discrete-quantum-walks-and-szegedy-theory-examples",
+      "deps": [
+        "def-qa-17-finite-stochastic-kernel",
+        "thm-qa-17-discriminant-self-adjoint"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For the directed three-cycle P_xy=1 iff y=x+1 mod 3, the uniform law is stationary but detailed balance fails; D_xy=√(P_xyP_yx)=0 for every pair, so D is symmetric but is not the reversible similarity transform of P.",
+      "proof_obligations": [
+        "Compute P, the stationary law and D explicitly; verify at least one detailed-balance equation fails."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 18 §§18.1–18.3, printed pp. 81–84; PDF pp. 89–92"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 8.2, printed pp. 64–66"
+        }
+      ],
+      "existing_supplier_checks": [],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 4,
+      "local_order": 3
+    },
+    {
+      "id": "lem-qa-25-parity-path-transfer",
+      "kind": "lemma",
+      "title": "Sparse parity-path transfer and norm",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "def-qa-19-finite-matrix-dynamics",
+        "thm-qa-19-matrix-exponential-unitary-properties",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For x∈{0,1}^n let w_i=√(i(n+1−i))/n and H_x=Σ_i w_i Σ_b(|i−1,b⟩⟨i,b⊕x_i|+|i,b⊕x_i⟩⟨i−1,b|). With p_i=x_1⊕⋯⊕x_i, V_x|i,b⟩=|i,b⊕p_i⟩ conjugates H_x to H_0⊗I, where H_0 is the restriction of (2/n)J_x to the symmetric n-qubit subspace. Thus ||H_x||≤1 and exp(−iH_xπn/2)|0,0⟩=(−i)^n|n,parity(x)⟩.",
+      "proof_obligations": [
+        "Verify the prefix-parity basis change conjugates each edge to the x_i-controlled bit flip.",
+        "Derive the Dicke-basis coefficients of J_x, use ||J_x||≤n/2, and compute exp(−iπJ_x)|0^n⟩=(−i)^n|1^n⟩.",
+        "Show each row-location/value answer uses O(1) parity-bit oracle calls and that H_x is 2-sparse."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28.1, printed p. 139; PDF p. 148"
+        }
+      ],
+      "existing_supplier_checks": [
+        "The finite matrix-exponential and spectral-calculus contracts are reused; the sparse-oracle simulation model is QA20."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 6
+    },
+    {
+      "id": "thm-qa-25-bounded-error-parity-query-lower-bound",
+      "kind": "theorem",
+      "title": "Bounded-error parity query lower bound",
+      "page": "qubitization-and-optimal-hamiltonian-simulation",
+      "deps": [
+        "def-promise-problem",
+        "def-qc-uniform-circuit-family",
+        "def-qc-coherent-function-oracle"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Any quantum query algorithm that computes parity on {0,1}^n with error at most 1/3 uses at least n/2 queries.",
+      "proof_obligations": [
+        "Represent its signed output expectation by a multilinear polynomial of degree at most 2q.",
+        "Use orthogonality of parity to every polynomial of degree below n; a pointwise error below 1 forces nonzero correlation with parity, so 2q≥n."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28.1, printed p. 139; PDF p. 148"
+        }
+      ],
+      "existing_supplier_checks": [
+        "This is a finite query lower bound under the declared QC coherent-oracle model; no physical supplier is used."
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 10,
+      "local_order": 4
+    },
+    {
+      "id": "lem-qa-21-robust-one-step-oaa-isometry",
+      "kind": "lemma",
+      "title": "Robust one-step OAA including ancilla leakage",
+      "page": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "deps": [
+        "alg-qa-21-one-step-oblivious-amplification",
+        "thm-qa-21-oblivious-amplification-block-identity",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Let W encode M/2 on clean ancilla and ||M−V||≤η≤1/100 for a unitary V. Put C=−WRW†RW with R=I−2Π and clean-input isometry J. Then ||CJ−JV||≤10√η. This is an isometry error on clean input, allowing small residual ancilla leakage; no exact-clean claim is made.",
+      "proof_obligations": [
+        "The zero block D=J†CJ=3M/2−MM†M/2. Write M=V+E and telescope MM†M−V: its norm is ≤η[(1+η)²+(1+η)+1], so ||D−V||≤4η for η≤1/100.",
+        "Since CJ is an isometry, leakage L=(I−Π)CJ satisfies L†L=I−D†D. From ||D−V||≤4η obtain ||I−D†D||≤8η+16η²≤9η, hence ||L||≤3√η. Thus ||CJ−JV||≤4η+3√η≤10√η. Tensoring a reference preserves this operator-isometry bound; telescope segments using fresh clean ancillas and retain their residual leakage."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 28 §28.3, printed pp. 140–142; PDF pp. 149–150"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.3, printed pp. 74–76"
+        }
+      ],
+      "existing_supplier_checks": [
+        "alg-qa-21-one-step-oblivious-amplification",
+        "thm-qa-21-oblivious-amplification-block-identity",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 15,
+      "local_order": 9
+    },
+    {
+      "id": "alg-qa-20-suzuki-recursive-product-formula",
+      "kind": "algorithm",
+      "title": "Finite higher-order Suzuki product formula",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "def-qa-20-symmetric-second-order-formula",
+        "def-qa-20-term-list-access-model"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Input integer k≥1, r≥1, real t and finite term list. Define S_2(h) by the existing symmetric formula. For j=2,…,k set p_j=1/(4−4^(1/(2j−1))) and define S_(2j)(h)=S_(2j−2)(p_jh)^2 S_(2j−2)((1−4p_j)h) S_(2j−2)(p_jh)^2. Expand recursively until only supplied term exponentials remain, in the displayed operator order; execute S_(2k)(t/r)^r. Negative coefficients use declared inverse/time-reversed term access. k=1 is the second-order formula; t=0 returns identity.",
+      "proof_obligations": [
+        "Recursion decreases j so terminates after finite depth; each level multiplies term-call count by five. List negative-time access and coefficient computation/precision separately."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [
+        "def-qa-20-symmetric-second-order-formula",
+        "def-qa-20-term-list-access-model"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 11,
+      "local_order": 10
+    },
+    {
+      "id": "lem-qa-20-suzuki-order-cancellation",
+      "kind": "lemma",
+      "title": "Suzuki recursive cancellation of error terms",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "alg-qa-20-suzuki-recursive-product-formula",
+        "def-qa-19-finite-matrix-dynamics"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "For fixed finite matrices and k≥1, the Taylor coefficients of S_(2k)(h) and exp(−ihΣH_j) agree through degree 2k. All formulas are analytic near zero and symmetric, S_(2k)(−h)=S_(2k)(h)^{-1}.",
+      "proof_obligations": [
+        "Work in truncated formal noncommutative power series up to degree 2k+2. Symmetry forces log S(h) to have only odd terms. Assuming log S_(2k−2)(h)=hA+h^(2k−1)E+O(h^(2k+1)), multiplying the five scaled copies gives leading error [4p^(2k−1)+(1−4p)^(2k−1)]E=0; BCH commutators involving this error begin at degree 2k, and symmetry removes all even log terms. The linear coefficient is [4p+(1−4p)]A=A. Prove formal log/BCH to this finite order directly from the finite power-series multiplication, then translate back to analytic Taylor coefficients. Base S2 is obtained by multiplying coefficients through order two."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [
+        "alg-qa-20-suzuki-recursive-product-formula",
+        "def-qa-19-finite-matrix-dynamics"
+      ],
+      "unresolved_obligations": [
+        "Established order-cancellation proof must be authored locally; formal BCH truncation is part of this lemma, not a citation fallback."
+      ],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 12,
+      "local_order": 12
+    },
+    {
+      "id": "thm-qa-20-suzuki-conservative-error-and-resources",
+      "kind": "theorem",
+      "title": "Higher-order product-formula error with explicit term counts",
+      "page": "hamiltonian-simulation-and-product-formulas",
+      "deps": [
+        "alg-qa-20-suzuki-recursive-product-formula",
+        "lem-qa-20-suzuki-order-cancellation",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+      ],
+      "justified_by": [],
+      "statement_or_definition": "Write the expanded S_(2k)(h)=∏_ν exp(−ih c_ν H_(jν)), let B_k=Σ_ν|c_ν| ||H_(jν)|| and M=Σ_j||H_j||. For r≥1 and real t, ||S_(2k)(t/r)^r−exp(−itH)||≤(B_k^(2k+1)+M^(2k+1))|t|^(2k+1)/((2k+1)!r^(2k)). If m≥1, expanded term count is (2m−1)5^(k−1) per segment. Queries/gates are the sum of the costed term exponentials at their actual signed times, multiplied by r.",
+      "proof_obligations": [
+        "For the qth derivative of an ordered product of unitary curves, multinomial Leibniz plus unitarity bounds the norm by (Σ|cν|||Hjν||)^q=B_k^q for real h; the exact exponential derivative bound is M^q. Taylor integral remainder after matching 2k coefficients bounds local error by (B_k^q+M^q)|h|^q/q!, q=2k+1. Telescope r unitary steps. Count five recursive calls and the 2m−1 second-order terms. Choose r≥max(1,ceil(((B_k^q+M^q)|t|^q/(q!ε))^(1/(2k)))) and allocate term-compilation errors separately."
+      ],
+      "sources": [
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "locator": "Ch. 27 §§27.1–27.4, printed pp. 133–138; PDF pp. 141–147"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1907.09415",
+          "locator": "Ch. 9.1–9.2, printed pp. 71–74"
+        }
+      ],
+      "existing_supplier_checks": [
+        "alg-qa-20-suzuki-recursive-product-formula",
+        "lem-qa-20-suzuki-order-cancellation",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+      ],
+      "unresolved_obligations": [],
+      "audit_authoring_status": "proposed-contract-and-proof-route; no authored carrier or acceptance",
+      "dependency_level": 13,
+      "local_order": 13
+    }
+  ]
+}

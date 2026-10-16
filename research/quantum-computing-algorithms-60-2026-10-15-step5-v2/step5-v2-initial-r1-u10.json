@@ -1,0 +1,66 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "alg-qc-reversible-embedding",
+      "model": "gpt-6-luna",
+      "context_sha256": "dfe112f3882e808b4c8581a83b30ed0ccd82a9d94a366e1b9f23350ad1819a80",
+      "outcome": "false_positive",
+      "reason": "A separate proved correctness result already exists: thm-qc-reversible-embedding-cost explicitly depends on this algorithm. Its Statement gives the exact clean XOR action; Proof 3.1 proves evaluation by topological induction, including repeated-source scratch, followed by output copy and reversal, and 4.1 extends it coherently. The algorithm defines a finite gate list using already proved involutive gates; its correctness theorem is not an unproved premise of the definition. No missing correctness supplier or prerequisite cycle was found.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qc-reversible-and-oracle-compute-copy-uncompute",
+      "model": "gpt-6-luna",
+      "context_sha256": "dc3cc3dfb95ee6d601de8b633f3e1473964c88f04f33cff4d8e621113928db9e",
+      "outcome": "false_positive",
+      "reason": "F3 uses the library term Boolean circuit, whose governing def-boolean-circuit-size-depth-fanin-and-basis explicitly fixes finite DAGs with constants and NOT/AND/OR gates of fan-in one or two. It does not assert arbitrary-basis compilation. The cited theorem repeats these hypotheses, and its complete Statement is quoted in the example contract. Verification 3.1 invokes it only for the explicit one-AND DAG (S=1,E=2,m=1), which satisfies every hypothesis and gives bounds 15 gates and 3 clean bits. No unsupported general-basis conclusion is used or stated under the local definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-qc-reversible-embedding",
+      "disposition": "unaffected",
+      "post_sha256": "a02ff38b9865c503efbf54f3e3352a7a0836889e2ba9d4ce74a07b113f5f4dc2",
+      "review_context_sha256": "664976080218dc3adbf61babd23ac2e3b8fd84e11596c1b468dd0e2796ea4149",
+      "reason": "Checked validation, topological source availability, fresh value/scratch wires, distinct controls for repeated sources, ordered output CNOTs and the reversed complete evaluation list. Constants, zero input/output counts and repeated outputs are supported. The separate cost theorem proves the asserted action without assuming it in its induction. Page placement includes both procedure and theorem; the algorithm has no phase proof and requires no proof contract. Its guard is unchanged; no repair or AC assumption is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qc-reversible-and-oracle-compute-copy-uncompute",
+      "disposition": "unaffected",
+      "post_sha256": "e2a707b00b96a4e3a7575230ee1832692a7abdb72b10eb145c39ca98103048c1",
+      "review_context_sha256": "38a3a5f0d01c89a965bf285c20d7a9cdd3048a801ddedd58b2ec7dd66ab6488a",
+      "reason": "Checked all eight basis rows and Verification 1.1\u20133.1 against the actual Toffoli, CNOT, clean-work, chronological-product and tensor-basis interfaces. The work value is ab, then ab, then 0; y becomes y XOR ab, and linearity extends precisely on the clean-work subspace. Two Toffoli occurrences and one CNOT give three gates and one clean bit, within the compiler bounds for the one-AND DAG. F3 retains the library fixed-basis meaning of Boolean circuit. Contract citations and derivations and the owning A/B page prose agree; no item or metadata change is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Both rejected tuples are false positives after direct mathematical review. No item, Statement, Definition, contract or page interface was edited. No downstream propagation, created prerequisite, canonical defect-ledger change or published-consumer maintenance update is needed. No independent review of an authored repair is claimed.",
+    "Algorithm evidence: items/alg-qc-reversible-embedding.md Definition instructions 1\u20134; items/thm-qc-reversible-embedding-cost.md Statement and Proof 1.1\u20134.1; fresh-target NOT/OR and clean-target Toffoli lemmas; gate involution lemma. Finite topological induction preserves source bits, repeated sources are copied to distinct controls, output CNOTs touch only target bits, and reversal acts only on input/work. No AC is used.",
+    "Example evidence: items/ex-qc-reversible-and-oracle-compute-copy-uncompute.md F3, Example eight-row table, and Verification 1.1\u20133.1; governing items/def-boolean-circuit-size-depth-fanin-and-basis.md Definition fixes the NOT/AND/OR basis with constants. The compiler theorem has exactly that basis and the example invokes only its covered one-AND instance. A broader arbitrary-basis interpretation is not part of the library definition.",
+    "Inspected the assigned example proof contract in research/quantum-computing-algorithms-60-2026-10-15-batch-10.proof-contracts.json and the owning reversible-computation-ancillas-and-coherent-oracles A/B pages. The procedure has no phase proof and no corresponding proof-bearing contract obligation. Familiar finite Boolean algebra and linearity were checked directly against the current local suppliers; no external source reading is claimed.",
+    "Required review-context commands succeeded immediately after each completed item review. Copied their exact post_sha256 and review_context_sha256 values into the respective reviews without refreshing them after supplier edits.",
+    "Focused check: node tools/tsx-run.mjs tools/precheck.mts items/alg-qc-reversible-embedding.md items/ex-qc-reversible-and-oracle-compute-copy-uncompute.md --json; exit 0, files 2, checked proofs 1, failures 0; algorithm not-applicable and example pass.",
+    "Focused check: node tools/rendercheck.mjs items/alg-qc-reversible-embedding.md items/ex-qc-reversible-and-oracle-compute-copy-uncompute.md --json; exit 0, checked 2, no errors or warnings.",
+    "Focused check: node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-10.proof-contracts.json --items ex-qc-reversible-and-oracle-compute-copy-uncompute --strict --json; exit 0, ok true, no errors or warnings.",
+    "No changed item paths exist, so the after-final-edit proof-layout obligation has no subjects. No judges, workers, certificates, round transitions or shared-ledger mutations were launched. All assigned reviews are complete and no uncertainty remains."
+  ]
+}

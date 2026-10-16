@@ -1,0 +1,484 @@
+===== PDF PAGE 7 =====
+
+X1
+
+X2
+
+X3
+
+X4
+
+Φ1
+
+Φ2
+
+Φ3
+
+Φ4
+
+Φ5
+Φ6
+
+Y1
+
+Y2
+
+Y3
+
+Figure 2: An example of a quantum circuit. The input qubits are labelled X1, . . . , X4, the output
+qubits are labelled Y1, . . . , Y3, and the gates are labelled by (hypothetical) quantum operations
+Φ1, . . . , Φ6.
+
+The natural representation of this operation is easily computed:
+
+KD =
+
+
+
+
+
+
+
+
+1
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0
+0
+1
+
+
+
+
+
+
+.
+
+The natural matrix representation of quantum operations is well-suited to performing compu-
+tations. For the purposes of this article, the most important observation about this representation
+is that a composition of operations corresponds simply to matrix multiplication.
+
+III
+The quantum circuit model
+
+III.1
+General quantum circuits
+
+The term quantum circuit refers to an acyclic network of quantum gates connected by wires. The
+quantum gates represent general quantum operations, involving some constant number of qubits,
+while the wires represent the qubits on which the gates act. An example of a quantum circuit
+having four input qubits and three output qubits is pictured in Figure 2. In general a quantum
+circuit may have n input qubits and m output qubits for any choice of integers n, m ≥0. Such a
+circuit induces some quantum operation from n qubits to m qubits, determined by composing the
+actions of the individual gates in the appropriate way. The size of a quantum circuit is the total
+number of gates plus the total number of wires in the circuit.
+A unitary quantum circuit is a quantum circuit in which all of the gates correspond to unitary
+quantum operations. Naturally this requires that every gate, and hence the circuit itself, has an
+equal number of input and output qubits. It is common in the study of quantum computing
+that one works entirely with unitary quantum circuits. The unitary model and general model are
+closely related, as will soon be explained.
+
+7
+
+
+===== PDF PAGE 8 =====
+
+Toffoli gate
+|a⟩
+
+|b⟩
+
+|c⟩
+
+|a⟩
+
+|b⟩
+
+|c ⊕ab⟩
+
+Phase-shift gate
+
+P
+|a⟩
+ia |a⟩
+
+Erasure gate
+
+Tr
+ρ
+
+Hadamard gate
+
+H
+|a⟩
+1
+√
+
+2 |0⟩+ (−1)a
+
+√
+
+2 |1⟩
+
+Ancillary gate
+
+|0⟩
+|0⟩
+
+Figure 3: A universal collection of quantum gates: Toffoli, Hadamard, phase-shift, ancillary, and
+erasure gates.
+
+III.2
+A finite universal gate set
+
+Restrictions must be placed on the gates from which quantum circuits may be composed if the
+quantum circuit model is to be used for complexity theory—for without such restrictions it cannot
+be argued that each quantum gate corresponds to an operation with unit-cost. The usual way in
+which this is done is simply to fix a suitable finite set of allowable gates. For the remainder of this
+article, quantum circuits will be assumed to be composed of gates from the following list:
+
+1. Toffoli gates. Toffoli gates are three-qubit unitary gates defined by the following action on
+standard basis states:
+T : |a⟩|b⟩|c⟩�→|a⟩|b⟩|c ⊕ab⟩.
+
+2. Hadamard gates. Hadamard gates are single-qubit unitary gates defined by the following
+action on standard basis states:
+
+H : |a⟩�→
+1
+√
+
+2
+|0⟩+ (−1)a
+
+√
+
+2
+|1⟩.
+
+3. Phase-shift gates. Phase-shift gates are single-qubit unitary gates defined by the following
+action on standard basis states:
+P : |a⟩�→ia |a⟩.
+
+4. Ancillary gates. Ancillary gates are non-unitary gates that take no input and produce a single
+qubit in the state |0⟩as output.
+
+5. Erasure gates. Erasure gates are non-unitary gates that take a single qubit as input and pro-
+duce no output. Their effect is represented by the partial trace on the space corresponding
+to the qubit they take as input.
+
+The symbols used to denote these gates in quantum circuit diagrams are shown in Figure 3. Some
+additional useful gates are illustrated in Figure 4, along with their realizations as circuits with
+gates from the chosen basis set.
+
+8
+
+
+===== PDF PAGE 9 =====
+
+≡
+H
+P
+P
+H
+|1⟩
+≡
+|0⟩
+
+≡
+|1⟩
+Tr
+D
+≡
+
+|0⟩
+Tr
+
+Figure 4: Four additional quantum gates, together with their implementations as quantum cir-
+cuits. Top left: a NOT gate. Top right: a constant |1⟩ancillary gate. Bottom left: a controlled-NOT
+gate. Bottom right: a phase-damping (or decoherence) gate.
+
+The above gate set is universal in a strong sense: every quantum operation can be approximated
+to within any desired degree of accuracy by some quantum circuit. Moreover, the size of the
+approximating circuit scales well with respect to the desired accuracy. Theorem 1, stated below,
+expresses this fact in more precise terms, but requires a brief discussion of a specific sense in which
+one quantum operation approximates another.
+A natural and operationally meaningful way to measure the distance between two given quan-
+tum operations Φ and Ψ is given by
+
+δ(Φ, Ψ) = 1
+
+2 ∥Φ −Ψ∥⋄,
+
+where ∥·∥⋄denotes a norm usually known as the diamond norm [66, 68]. A technical discussion
+of this norm is not necessary for the purposes of this article and is beyond its scope. Instead, an
+intuitive description of the distance measure δ(Φ, Ψ) will suffice.
+When considering the distance between quantum operations Φ and Ψ, it must naturally be as-
+sumed that these operations agree on their numbers of input qubits and output qubits; so assume
+that Φ and Ψ both map n qubits to m qubits for nonnegative integers n and m. Now, suppose that
+an arbitrary quantum state on n or more qubits is prepared, one of the two operations Φ or Ψ is
+applied to the first n of these qubits, and then a general measurement of all of the resulting qubits
+takes place (including the m output qubits and the qubits that were not among the inputs to the
+chosen quantum operation). Two possible probability distributions on measurement outcomes
+arise: one corresponding to Φ and the other corresponding to Ψ. The quantity δ(Φ, Ψ) is simply
+the maximum possible total variation distance between these distributions, ranging over all pos-
+sible initial states and general measurements. This is a number between 0 and 1 that intuitively
+represents the observable difference between quantum operations. In the special case that Φ and Ψ
+take no inputs, the quantity δ(Φ, Ψ) is simply one-half the trace norm of the difference between the
+two output states; a common and useful ways to measure the distance between quantum states.
+Now the Universality Theorem, which represents an amalgamation of several results that suits
+the needs of this article, may be stated. In particular, it incorporates the Solovay–Kitaev Theorem,
+which provides a bound on the size of an approximating circuit as a function of the accuracy.
+
+Theorem 1 (Universality Theorem). Let Φ be an arbitrary quantum operation from n qubits to m
+qubits.
+Then for every ε > 0 there exists a quantum circuit Q with n input qubits and m output
+qubits such that δ(Φ, Q) < ε.
+Moreover, for fixed n and m, the circuit Q may be taken to satisfy
+size(Q) = poly(log(1/ε)).
+
+9
+
+
+===== PDF PAGE 10 =====
+
+X1
+
+X2
+
+X3
+
+|0⟩
+
+H
+
+Tr
+
+Tr
+
+Y1
+
+Y2
+
+X1
+
+X2
+
+X3
+
+H
+
+Y1
+
+Y2
+
+Z1
+
+W1
+
+W2
+
+Figure 5: A general quantum circuit (left) and its unitary purification (right).
+
+Note that it is inevitable that the size of Q is exponential in n and m in the worst case [70]. Further
+details on the facts comprising this theorem can be found in Nielsen and Chuang [84] and Kitaev,
+Shen, and Vyalyi [68].
+
+III.3
+Unitary purifications of quantum circuits
+
+The connection between the general and unitary quantum circuits can be understood through the
+notion of a unitary purification of a general quantum circuit. This may be thought of as a very
+specific manifestation of the Stinespring Dilation Theorem [95], which implies that general quantum
+operations can be represented by unitary operations on larger systems. It was first applied to the
+quantum circuit model by Aharonov, Kitaev, and Nisan [10], who gave several arguments in favor
+of the general quantum circuit model over the unitary model. The term purification is borrowed
+from the notion of a purification of a mixed quantum state, as the process of unitary purification
+for circuits is similar in spirit. The universal gate described in the previous section has the effect of
+making the notion of a unitary purification of a general quantum circuit nearly trivial at a technical
+level.
+Suppose that Q is a quantum circuit taking input qubits (X1, . . . , Xn) and producing output
+qubits (Y1, . . . , Ym), and assume there are k ancillary gates and l erasure gates among the gates of
+Q to be labelled in an arbitrary order as G1, . . . , Gk and K1, . . . , Kl, respectively. A new quantum
+circuit R may then be formed by removing the gates labelled G1, . . . , Gk and K1, . . . , Kl; and to
+account for the removal of these gates the circuit R takes k additional input qubits (Z1, . . . , Zk) and
+produces l additional output qubits (W1, . . . , Wl). Figure 5 illustrates this process. The circuit R is
+said to be a unitary purification of Q. It is obvious that R is equivalent to Q, provided the qubits
+(Z1, . . . , Zk) are initially set to the |0⟩state and the qubits (W1, . . . , Wl) are traced-out, or simply
+ignored, after the circuit is run—for this is precisely the meaning of the removed gates.
+Despite the simplicity of this process, it is often useful to consider the properties of unitary
+purifications of general quantum circuits.
+
+III.4
+Oracles in the quantum circuit model
+
+Oracles play an important, and yet uncertain, role in computational complexity theory; and the
+situation is no different in the quantum setting. Several interesting oracle-related results, offering
+some insight into the power of quantum computation, will be discussed in this article.
+Oracle queries are represented in the quantum circuit model by an infinite family
+
+{Rn : n ∈N}
+
+10
+
+
+===== PDF PAGE 11 =====
+
+R6
+H
+
+H
+
+H
+
+H
+
+H
+
+H
+
+H
+
+Tr
+|1⟩
+
+|x⟩
+
+
+
+
+
+
+
+
+|y⟩
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|x⟩
+
+
+
+
+
+
+
+|y ⊕f(x)⟩
+
+Figure 6: The Bernstein–Vazirani algorithm allows a multiple-bit query to be simulated by a single-
+bit query. In the example pictured, f : Σ3 →Σ3 is a given function. To simulate a query to this
+function, the gate R6 is taken to be a standard oracle gate implementing the predicate A(x, z) =
+⟨f(x), z⟩, for ⟨·, ·⟩denoting the modulo 2 inner product.
+
+of quantum gates, one for each possible query length. Each gate Rn is a unitary gate acting on
+n + 1 qubits, with the effect on computational basis states given by
+
+Rn |x, a⟩= |x, a ⊕A(x)⟩
+(1)
+
+for all x ∈Σn and a ∈Σ, where A is some predicate that represents the particular oracle under
+consideration. When quantum computations relative to such an oracle are to be studied, quantum
+circuits composed of ordinary quantum gates as well as the oracle gates {Rn} are considered; the
+interpretation being that each instance of Rn in such a circuit represents one oracle query.
+It is critical to many results concerning quantum oracles, as well as most results in the area
+of quantum query complexity, that the above definition (1) takes each Rn to be unitary, thereby
+allowing these gates to make queries “in superposition”. In support of this seemingly strong def-
+inition is the fact, discussed in the next section, that any efficient algorithm (quantum or classical)
+can be converted to a quantum circuit that closely approximates the action of these gates.
+Finally, one may consider a more general situation in which the predicate A is replaced by
+a function that outputs multiple bits. The definition of each gate Rn is adapted appropriately.
+Alternately, one may restrict their attention to single-bit queries as discussed above, and use the
+Bernstein–Vazirani algorithm [31] to simulate one multiple-bit query with one single-bit query as
+illustrated in Figure 6.
+
+IV
+Polynomial-time quantum computations
+
+This section focuses on polynomial-time quantum computations. These are the computations that are
+viewed, in an abstract and idealized sense, to be efficiently implementable by the means of a quan-
+tum computer. In particular, the complexity class BQP (short for bounded-error quantum polynomial
+time) is defined. This is the most fundamentally important of all quantum complexity classes, as it
+represents the collection of decision problems that can be efficiently solved by quantum comput-
+ers.
+
+11
+
+
+===== PDF PAGE 12 =====
+
+IV.1
+Polynomial-time generated circuit families and BQP
+
+To define the class BQP using the quantum circuit model, it is necessary to briefly discuss encod-
+ings of circuits and the notion of a polynomial-time generated circuit family.
+It is clear that any quantum circuit formed from the gates described in the previous section
+could be encoded as a binary string using any number of different encoding schemes. Such an
+encoding scheme must be chosen, but its specifics are not important so long as the following
+simple restrictions are satisfied:
+
+1. The encoding is sensible: every quantum circuit is encoded by at least one binary string, and
+every binary string encodes at most one quantum circuit.
+
+2. The encoding is efficient: there is a fixed polynomial-bounded function p such that every
+circuit of size N has an encoding with length at most p(N). Specific information about the
+structure of a circuit must be computable in polynomial time from an encoding of the circuit.
+
+3. The encoding disallows compression: it is not possible to work with encoding schemes that
+allow for extremely short (e.g., polylogarithmic-length) encodings of circuits; so for simplic-
+ity it is assumed that the length of every encoding of a quantum circuit is at least the size of
+the circuit.
+
+Now, as any quantum circuit represents a finite computation with some fixed number of input
+and output qubits, quantum algorithms are modelled by families of quantum circuits. The typical
+assumption is that a quantum circuit family that describes an algorithm contains one circuit for
+each possible input length. Precisely the same situation arises here as in the classical setting, which
+is that it should be possible to efficiently generate the circuits in a given family in order for that
+family to represent an efficient, finitely specified algorithm. The following definition formalizes
+this notion.
+
+Definition 2. Let S ⊆Σ∗be any set of strings. Then a collection {Qx : x ∈S} of quantum cir-
+cuits is said to be polynomial-time generated if there exists a polynomial-time deterministic Turing
+machine that, on every input x ∈S, outputs an encoding of Qx.
+
+This definition is slightly more general than what is needed to define BQP, but is convenient
+for other purposes. For instance, it allows one to easily consider the situation in which the input,
+or some part of the input, for some problem is hard-coded into a collection of circuits; or where
+a computation for some input may be divided among several circuits. In the most typical case
+that a polynomial-time generated family of the form {Qn : n ∈N} is referred to, it should
+be interpreted that this is a shorthand for {Q1n : n ∈N}. Notice that every polynomial-time
+generated family {Qx : x ∈S} has the property that each circuit Qx has size polynomial in
+|x|. Intuitively speaking, the number of quantum and classical computation steps required to
+implement such a computation is polynomial; and so operations induced by the circuits in such a
+family are viewed as representing polynomial-time quantum computations.
+The complexity class BQP, which contains those promise problems abstractly viewed to be effi-
+ciently solvable using a quantum computer, may now be defined. More precisely, BQP is the class
+of promise problems that can be solved by polynomial-time quantum computations that may have
+some small probability to make an error. For decision problems, the notion of a polynomial-time
+quantum computation is equated with the computation of a polynomial-time generated quantum
+circuit family Q = {Qn : n ∈N}, where each circuit Qn takes n input qubits, and produces one
+output qubit. The computation on a given input string x ∈Σ∗is obtained by first applying the
+
+12
+

@@ -1,0 +1,1791 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "27",
+  "scope": [
+    "lem-qa-hadamard-f2-kernel",
+    "def-qa-deutsch-promise",
+    "def-qa-deutsch-jozsa-promise",
+    "def-qa-bernstein-vazirani-promise",
+    "thm-qa-deutsch-classical-query-lower-bound",
+    "thm-qa-deutsch-jozsa-deterministic-query-lower-bound",
+    "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound",
+    "thm-qa-bernstein-vazirani-classical-query-lower-bound",
+    "alg-qa-deutsch-query",
+    "alg-qa-deutsch-jozsa-query",
+    "alg-qa-bernstein-vazirani-query",
+    "thm-qa-deutsch-query-correct",
+    "thm-qa-deutsch-jozsa-query-correct",
+    "thm-qa-bernstein-vazirani-query-correct",
+    "ex-qa-exact-oracle-algorithms"
+  ],
+  "contracts": {
+    "lem-qa-hadamard-f2-kernel": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$. It is the parity of the number of coordinates where both bits are $1$. Under the quotient operations of [[def-qa-binary-field-f2]], this bit represents the sum $\\sum_{i=0}^{n-1}[a_i]_2[x_i]_2$ in $\\mathbb Z/2\\mathbb Z$; the equality uses only the operation definitions, not the field axioms.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $(-1)^{x\\cdot z}=\\prod_{i<n}(-1)^{x_i z_i}$, since the exponent parity is the sum of the coordinate products modulo two. Distributivity over the finite Cartesian product gives $\\sum_{x\\in\\{0,1\\}^n}(-1)^{x\\cdot z}=\\prod_{i<n}\\left(1+(-1)^{z_i}\\right).$ Each factor is $2$ when $z_i=0$ and $0$ when $z_i=1$. Thus the product is $2^n$ when all coordinates of $z$ vanish and is $0$ otherwise.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], on each factor $H|x_i\\rangle=2^{-1/2}\\sum_{y_i\\in\\{0,1\\}}(-1)^{x_i y_i}|y_i\\rangle$. Applying [F5] to the ordered product basis [F3] gives a coefficient $2^{-n/2}\\prod_{i<n}(-1)^{x_i y_i}=2^{-n/2}(-1)^{x\\cdot y}$ at $|y\\rangle$, by [F1]. Summing these coefficients proves the tensor-Hadamard formula in the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: evaluates z=0^n separately from z≠0^n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: applies the tensor identity for n=1 as well as n≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qa-deutsch-promise": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-task-and-promise-domain",
+          "source_section": "Definition",
+          "quote": "A **decision task** is a root promise pair $(Y,N)$ of disjoint subsets of $\\{0,1\\}^*$, as in [[def-promise-problem]]: its promise domain is $Y\\cup N$, and the required output is yes on $Y$ and no on $N$. No correctness condition is imposed outside that promise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-promise-query-instance",
+          "source_section": "Definition",
+          "quote": "For each encoded promised instance $z\\in P_n$ of length $n$ (with $P_n$ as in [[def-qa-input-encoding-and-size]] and its task promise as in [[def-qa-task-and-promise-domain]]), a **query instance** specifies nonnegative integer widths $a(n),b(n)$ and a total function\n$$\nf_z:\\{0,1\\}^{a(n)}\\to\\{0,1\\}^{b(n)}.\n$$\nThe promise restricts which $z$ are legal; it does not restrict the address domain of $f_z$. Bit strings label the big-endian computational basis: for a word $x=(x_0,\\ldots,x_{r-1})$, its slot is $\\sum_{k<r}x_k2^{r-1-k}$, with the empty word in slot $0$ ([[def-qc-ordered-bitstring-encoding]]). Ket and bra notation uses the root convention $\\langle x|y\\rangle_D=\\langle y,x\\rangle_{\\rm root}$ ([[def-qc-dirac-notation-conversion]]). Its standard quantum query is the coherent XOR oracle from [[def-qc-coherent-function-oracle]], acting on those ordered register bases:\n$$\nU_{f_z}|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f_z(x)\\rangle,\n$$\nwhere $\\oplus$ is coordinatewise addition modulo two, $x$ is an $a(n)$-bit address, and $y$ is a $b(n)$-bit target. One invocation is one query, regardless of the output width. A supplied matrix or a classical description of $f_z$ does not itself supply a circuit decomposition, state preparation, or controlled access at zero cost.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Writing the two function values in order gives exactly the four strings $00,01,10,11$. By the Definition, $00$ and $11$ are in $Y$, while $01$ and $10$ are in $N$. These two sets are disjoint and cover all four possible tables, so the promised output is well-defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The totality in [F2] makes both evaluations $f(0)$ and $f(1)$ available. Equality gives the constant case and inequality gives the balanced case by the two disjoint rows of the table in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: includes the constant-zero truth table 00."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Definition fixes the one-bit domain; lists all four tables."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qa-deutsch-jozsa-promise": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-task-and-promise-domain",
+          "source_section": "Definition",
+          "quote": "A **decision task** is a root promise pair $(Y,N)$ of disjoint subsets of $\\{0,1\\}^*$, as in [[def-promise-problem]]: its promise domain is $Y\\cup N$, and the required output is yes on $Y$ and no on $N$. No correctness condition is imposed outside that promise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-promise-query-instance",
+          "source_section": "Definition",
+          "quote": "For each encoded promised instance $z\\in P_n$ of length $n$ (with $P_n$ as in [[def-qa-input-encoding-and-size]] and its task promise as in [[def-qa-task-and-promise-domain]]), a **query instance** specifies nonnegative integer widths $a(n),b(n)$ and a total function\n$$\nf_z:\\{0,1\\}^{a(n)}\\to\\{0,1\\}^{b(n)}.\n$$\nThe promise restricts which $z$ are legal; it does not restrict the address domain of $f_z$. Bit strings label the big-endian computational basis: for a word $x=(x_0,\\ldots,x_{r-1})$, its slot is $\\sum_{k<r}x_k2^{r-1-k}$, with the empty word in slot $0$ ([[def-qc-ordered-bitstring-encoding]]). Ket and bra notation uses the root convention $\\langle x|y\\rangle_D=\\langle y,x\\rangle_{\\rm root}$ ([[def-qc-dirac-notation-conversion]]). Its standard quantum query is the coherent XOR oracle from [[def-qc-coherent-function-oracle]], acting on those ordered register bases:\n$$\nU_{f_z}|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f_z(x)\\rangle,\n$$\nwhere $\\oplus$ is coordinatewise addition modulo two, $x$ is an $a(n)$-bit address, and $y$ is a $b(n)$-bit target. One invocation is one query, regardless of the output width. A supplied matrix or a classical description of $f_z$ does not itself supply a circuit decomposition, state preparation, or controlled access at zero cost.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-input-encoding-and-size",
+          "source_section": "Definition",
+          "quote": "An input encoding is an injective map $\\operatorname{enc}$ from the declared instance set into $\\{0,1\\}^*$. The input size of an instance $z$ is $n:=|\\operatorname{enc}(z)|$. If task instances are already binary strings, the default encoding is the identity. The encoding is part of the task specification, and any length or padding convention must be stated.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $n\\ge1$, $N=2^n$ is even and $1\\le N/2<N$. A constant function has either $0$ or $N$ addresses with value $1$, whereas a balanced function has $N/2$ such addresses. These counts differ, so the YES and NO sets are disjoint.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both promise classes are nonempty: the zero function is constant, and the function $f(x)=x_0$ has exactly $N/2$ inputs with each value because flipping its first bit pairs a zero-output address with a one-output address. Thus the stated promise is meaningful for every $n\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: exhibits the constant-zero function."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: exhibits f(x)=x_0 when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qa-bernstein-vazirani-promise": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-task-and-promise-domain",
+          "source_section": "Definition",
+          "quote": "A **decision task** is a root promise pair $(Y,N)$ of disjoint subsets of $\\{0,1\\}^*$, as in [[def-promise-problem]]: its promise domain is $Y\\cup N$, and the required output is yes on $Y$ and no on $N$. No correctness condition is imposed outside that promise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-promise-query-instance",
+          "source_section": "Definition",
+          "quote": "For each encoded promised instance $z\\in P_n$ of length $n$ (with $P_n$ as in [[def-qa-input-encoding-and-size]] and its task promise as in [[def-qa-task-and-promise-domain]]), a **query instance** specifies nonnegative integer widths $a(n),b(n)$ and a total function\n$$\nf_z:\\{0,1\\}^{a(n)}\\to\\{0,1\\}^{b(n)}.\n$$\nThe promise restricts which $z$ are legal; it does not restrict the address domain of $f_z$. Bit strings label the big-endian computational basis: for a word $x=(x_0,\\ldots,x_{r-1})$, its slot is $\\sum_{k<r}x_k2^{r-1-k}$, with the empty word in slot $0$ ([[def-qc-ordered-bitstring-encoding]]). Ket and bra notation uses the root convention $\\langle x|y\\rangle_D=\\langle y,x\\rangle_{\\rm root}$ ([[def-qc-dirac-notation-conversion]]). Its standard quantum query is the coherent XOR oracle from [[def-qc-coherent-function-oracle]], acting on those ordered register bases:\n$$\nU_{f_z}|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f_z(x)\\rangle,\n$$\nwhere $\\oplus$ is coordinatewise addition modulo two, $x$ is an $a(n)$-bit address, and $y$ is a $b(n)$-bit target. One invocation is one query, regardless of the output width. A supplied matrix or a classical description of $f_z$ does not itself supply a circuit decomposition, state preparation, or controlled access at zero cost.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$. It is the parity of the number of coordinates where both bits are $1$. Under the quotient operations of [[def-qa-binary-field-f2]], this bit represents the sum $\\sum_{i=0}^{n-1}[a_i]_2[x_i]_2$ in $\\mathbb Z/2\\mathbb Z$; the equality uses only the operation definitions, not the field axioms.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $x\\in\\{0,1\\}^n$, [F3] is a finite XOR of bits, hence defines one bit; therefore $f_a$ is a total Boolean function and satisfies the query-instance requirement [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each coordinate $i<n$, let $e_i$ be the string with a single $1$ at position $i$. Then $f_a(e_i)=a_i$ by [F3]. If $f_a=f_b$, evaluation at every $e_i$ gives $a_i=b_i$, so $a=b$. Thus the secret is uniquely determined by the function table.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: applies to the zero secret a=0^n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: uses the single standard vector e_0 when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-deutsch-classical-query-lower-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-deutsch-promise",
+          "source_section": "Definition",
+          "quote": "Let $f:\\{0,1\\}\\to\\{0,1\\}$ be the total Boolean function of a [[def-qa-promise-query-instance]]. The **Deutsch promise** is the decision task with YES set $Y=\\{f:f(0)=f(1)\\}$ and NO set $N=\\{f:f(0)\\ne f(1)\\}$. The required output is $0$ on $Y$ (constant) and $1$ on $N$ (balanced). All four Boolean functions on one bit are promised.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-classical-query-algorithm",
+          "source_section": "Definition",
+          "quote": "A **classical query algorithm** is a finite decision procedure for a fixed input length whose query actions are to the total function $f_z$ of [[def-qa-promise-query-instance]]. Each query chooses an address from the encoding of [[def-qa-input-encoding-and-size]], earlier replies, and any random bits used so far; it receives the entire $b(n)$-bit reply $f_z(x)$ as one query answer. The address choices may be adaptive.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a deterministic one-query procedure and let $q$ be its queried address. The constant-zero function $f_0$ and the balanced function $g$ defined by $g(q)=0$, $g(1-q)=1$ give the same reply. The procedure therefore has the same transcript and output on two functions requiring different answers, so it cannot be exact.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Querying both addresses reveals the entire truth table; equal replies identify a constant and unequal replies identify a balanced function. Thus two queries suffice exactly, and step 1.1 proves the deterministic exact query complexity is two.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix a random tape of an algorithm that makes at most one query. If it makes no query, its one output is correct on at most two of the four truth tables. If it queries address $q$, then for each possible reply $b\\in\\{0,1\\}$ there are exactly two promised functions with $f(q)=b$: one constant and one balanced. The fixed tape gives the same output for both, so it is correct on at most one of each such pair, hence on at most two of the four functions. There are finitely many deterministic one-query strategies on two addresses with binary outputs. The random-tape algorithm induces a probability weight on this finite strategy set by grouping tapes according to their resulting strategy. Averaging the fixed-strategy bound over that finite distribution and over the four functions preserves the bound $1/2$; by [F3] some promised input has success at most $1/2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: includes a random tape that halts without querying."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: establish the one-query lower bound and two-query upper bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-deutsch-jozsa-deterministic-query-lower-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-deutsch-jozsa-promise",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $N:=2^n$, and let $f:\\{0,1\\}^n\\to\\{0,1\\}$ be the total function of a [[def-qa-promise-query-instance]]. The **Deutsch–Jozsa promise** is the decision task with YES set consisting of constant functions and NO set consisting of functions taking each value $0$ and $1$ exactly $N/2$ times. The required output is constant or balanced, respectively. Here $N$ is the number of addresses, as supplied by [[thm-qc-bitstring-index-is-bijection]] and [[def-finite-cardinality]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-classical-query-algorithm",
+          "source_section": "Definition",
+          "quote": "A **classical query algorithm** is a finite decision procedure for a fixed input length whose query actions are to the total function $f_z$ of [[def-qa-promise-query-instance]]. Each query chooses an address from the encoding of [[def-qa-input-encoding-and-size]], earlier replies, and any random bits used so far; it receives the entire $b(n)$-bit reply $f_z(x)$ as one query answer. The address choices may be adaptive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose a deterministic procedure makes at most $N/2$ queries in the worst case. Run it on the constant-zero function and let $S$ be the set of distinct queried addresses. Then $|S|\\le N/2$, so at least $N/2$ addresses remain unqueried. Choose $T$ to be the first $N/2$ such addresses in lexicographic order and define $g$ to be $1$ on $T$ and $0$ elsewhere. Then $g$ is balanced and agrees with the constant-zero function on every address in $S$. Inductively, each adaptive query and reply in the two executions is the same, so the final outputs agree despite the different correct answers. Thus no such procedure is exact.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Query any fixed set of $N/2+1$ distinct addresses. If all replies are equal, the function cannot be balanced because each value occurs only $N/2$ times in a balanced function, so it is constant. If the replies are not all equal, the function is not constant and is balanced by the promise. This gives an exact procedure using $N/2+1$ queries; combined with step 1.1 the exact complexity is $N/2+1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: runs on the constant-zero function and allows zero or repeated queries."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Statement requires n≥1; also hold at N=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-deutsch-jozsa-promise",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $N:=2^n$, and let $f:\\{0,1\\}^n\\to\\{0,1\\}$ be the total function of a [[def-qa-promise-query-instance]]. The **Deutsch–Jozsa promise** is the decision task with YES set consisting of constant functions and NO set consisting of functions taking each value $0$ and $1$ exactly $N/2$ times. The required output is constant or balanced, respectively. Here $N$ is the number of addresses, as supplied by [[thm-qc-bitstring-index-is-bijection]] and [[def-finite-cardinality]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-classical-query-algorithm",
+          "source_section": "Definition",
+          "quote": "A **classical query algorithm** is a finite decision procedure for a fixed input length whose query actions are to the total function $f_z$ of [[def-qa-promise-query-instance]]. Each query chooses an address from the encoding of [[def-qa-input-encoding-and-size]], earlier replies, and any random bits used so far; it receives the entire $b(n)$-bit reply $f_z(x)$ as one query answer. The address choices may be adaptive.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a constant function, all three replies agree, so the procedure outputs constant correctly with probability one. For a balanced function write $m=N/2$. The ordered sample space has $N(N-1)(N-2)$ triples. If $m=2$, no three distinct samples can have the same reply, so the error probability is zero. If $m\\ge3$, the error event consists of an ordered triple all drawn from the zero class or all from the one class; its probability is $\\frac{2m(m-1)(m-2)}{(2m)(2m-1)(2m-2)}=\\frac{m-2}{2(2m-1)}=\\frac{N-4}{4(N-1)}.$ This is at most $1/4$, since $N-4\\le N-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a balanced input the procedure errs only on the event in step 1.1, so its success is at least $3/4$. On a constant input its success is one. When $n=1$, the domain has two addresses and querying both returns the full truth table, which classifies exactly. The claim concerns bounded-error upper cost and leaves the deterministic exact lower bound as a separate query measure.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: handles the n=2 boundary N=4 by the m=2 case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: handles n=1 separately with two exact queries."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-bernstein-vazirani-classical-query-lower-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-bernstein-vazirani-promise",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$. The **Bernstein–Vazirani no-offset promise** consists of the total functions\n$$\nf_a:\\{0,1\\}^n\\to\\{0,1\\},\\qquad f_a(x):=a\\cdot x,\n$$\nfor an unknown secret $a\\in\\{0,1\\}^n$, using [[def-qa-binary-dot-product]]. The task is to output $a$. This version has no additive offset: the oracle is exactly $f_a$, not $x\\mapsto a\\cdot x\\oplus b$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$. It is the parity of the number of coordinates where both bits are $1$. Under the quotient operations of [[def-qa-binary-field-f2]], this bit represents the sum $\\sum_{i=0}^{n-1}[a_i]_2[x_i]_2$ in $\\mathbb Z/2\\mathbb Z$; the equality uses only the operation definitions, not the field axioms.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-classical-query-algorithm",
+          "source_section": "Definition",
+          "quote": "A **classical query algorithm** is a finite decision procedure for a fixed input length whose query actions are to the total function $f_z$ of [[def-qa-promise-query-instance]]. Each query chooses an address from the encoding of [[def-qa-input-encoding-and-size]], earlier replies, and any random bits used so far; it receives the entire $b(n)$-bit reply $f_z(x)$ as one query answer. The address choices may be adaptive.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a random tape. The algorithm is a deterministic adaptive binary decision tree of depth at most $q$, since each query reply is one bit by [F2]. A binary tree of depth at most $q$ has at most $2^q$ leaves: this holds at depth zero, and at each added level every prior leaf creates at most two children. Each leaf outputs one candidate secret, so at most one of the $2^n$ secrets reaching that leaf can be correctly recovered. Hence success averaged uniformly over secrets is at most $2^q/2^n=2^{q-n}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $n$ and $q$, there are finitely many deterministic depth-at-most-$q$ decision trees on the finite address set, with output labels in $\\{0,1\\}^n$. The random-tape algorithm induces weights on this finite strategy set by grouping tapes according to their tree. Averaging step 1.1 over this finite distribution leaves average success at most $2^{q-n}$. If worst-case success is at least $2/3$ on every secret, its average under the uniform secret law is at least $2/3$. For $q\\le n-1$, the upper bound is at most $1/2<2/3$, a contradiction; therefore $q\\ge n$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each coordinate $i<n$, query $e_i$, the string with one at $i$ and zeros elsewhere. By [F2], the reply is $f_a(e_i)=a_i$. These $n$ replies give the entire secret, so $n$ queries suffice exactly.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: counts a decision tree that may halt before querying."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: and 2.1 give lower and upper bounds at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "alg-qa-deutsch-query": {
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Definition initializes both registers to zero before the listed gates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Definition fixes a one-bit address and exactly one oracle call."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "alg-qa-deutsch-jozsa-query": {
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Definition initializes address and target registers to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Definition includes n=1 and still makes exactly one oracle call."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "alg-qa-bernstein-vazirani-query": {
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Definition initializes address and target registers to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Definition includes n=1 and still makes exactly one oracle call."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-deutsch-query-correct": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-deutsch-query",
+          "source_section": "Definition",
+          "quote": "**Input.** A one-bit total Boolean oracle $f$ satisfying the Deutsch promise of [[def-qa-deutsch-promise]], with an address qubit $A$ and target qubit $T$ initialized to $|0\\rangle_A|0\\rangle_T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-deutsch-promise",
+          "source_section": "Definition",
+          "quote": "Let $f:\\{0,1\\}\\to\\{0,1\\}$ be the total Boolean function of a [[def-qa-promise-query-instance]]. The **Deutsch promise** is the decision task with YES set $Y=\\{f:f(0)=f(1)\\}$ and NO set $N=\\{f:f(0)\\ne f(1)\\}$. The required output is $0$ on $Y$ (constant) and $1$ on $N$ (balanced). All four Boolean functions on one bit are promised.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-bit-query-to-phase-query",
+          "source_section": "Statement",
+          "quote": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be total. Starting a target qubit in $|0\\rangle$, apply $X$ and then $H$, and make one standard bit query. Since $HX|0\\rangle=|-\\rangle$, phase kickback implements $P_f$ on the address and returns the target to $|-\\rangle$. This conversion uses one query plus exactly two nonoracle one-qubit gates; the target preparation is explicit and assumes no preprepared state or generic amplitude loading.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-finite-branch-output-law",
+          "source_section": "Definition",
+          "quote": "At each positive-weight leaf $\\ell$, the ordered output wires have a fixed length $m$ and are disjoint from the remaining wires $W_\\ell$. For $z\\in\\{0,1\\}^m$ and a bit string $v$ on $W_\\ell$, let $e_{\\ell,z,v}$ be the full-register computational-basis vector with those bits in their declared wire positions. Define the leaf output weight and total output law by\n$$q_\\ell(z):=\\sum_{v\\in\\{0,1\\}^{|W_\\ell|}}\\langle \\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle_{\\rm root},\\qquad P(z\\mid x):=\\sum_{\\ell\\text{ positive-weight leaf}}w(\\ell)q_\\ell(z).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the root pairing linear in its first argument, and let $u\\in H$ satisfy $\\|u\\|=1$. Define $P_u:=|u\\rangle\\langle u|$ by the root-linear-first Dirac convention. Then $P_u$ is self-adjoint and idempotent, has one-dimensional range, is non-negative, and has trace one. In particular, $P_u$ is a density operator.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the address is initially $|+\\rangle=2^{-1/2}\\sum_{x\\in\\{0,1\\}}|x\\rangle$ and the target is $| -\\rangle$. By [F3], after the query and final address Hadamard, the output amplitude at $y\\in\\{0,1\\}$ is $\\alpha_y=\\frac12\\sum_{x\\in\\{0,1\\}}(-1)^{f(x)+xy}.$ The target remains the same unit vector [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $y=0$, $\\alpha_0=\\bigl((-1)^{f(0)}+(-1)^{f(1)}\\bigr)/2$; for $y=1$, $\\alpha_1=\\bigl((-1)^{f(0)}-(-1)^{f(1)}\\bigr)/2$. If $f(0)=f(1)$, these are respectively $\\pm1$ and $0$; if they differ, they are $0$ and $\\pm1$, by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In each case the address amplitudes have squared moduli $1$ at the correct output and $0$ at the other. Since the terminal state is the product of that address vector and the unit target $| -\\rangle$, [F5] and [F7] sum the target's two squared coordinate moduli to one and give exactly the same address output law. Thus the measured output is correct with probability one.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: computes the constant-case output y=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Statement is the one-bit boundary and computes both outputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-deutsch-jozsa-query-correct": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-deutsch-jozsa-query",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $n\\ge1$ and a total Boolean oracle $f:\\{0,1\\}^n\\to\\{0,1\\}$ satisfying the Deutsch–Jozsa promise of [[def-qa-deutsch-jozsa-promise]], with an ordered $n$-qubit address register $A$ and one target qubit $T$ initialized to $|0^n\\rangle_A|0\\rangle_T$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-deutsch-jozsa-promise",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $N:=2^n$, and let $f:\\{0,1\\}^n\\to\\{0,1\\}$ be the total function of a [[def-qa-promise-query-instance]]. The **Deutsch–Jozsa promise** is the decision task with YES set consisting of constant functions and NO set consisting of functions taking each value $0$ and $1$ exactly $N/2$ times. The required output is constant or balanced, respectively. Here $N$ is the number of addresses, as supplied by [[thm-qc-bitstring-index-is-bijection]] and [[def-finite-cardinality]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-bit-query-to-phase-query",
+          "source_section": "Statement",
+          "quote": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be total. Starting a target qubit in $|0\\rangle$, apply $X$ and then $H$, and make one standard bit query. Since $HX|0\\rangle=|-\\rangle$, phase kickback implements $P_f$ on the address and returns the target to $|-\\rangle$. This conversion uses one query plus exactly two nonoracle one-qubit gates; the target preparation is explicit and assumes no preprepared state or generic amplitude loading.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-hadamard-f2-kernel",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $z\\in\\{0,1\\}^n$, with the binary dot product of [[def-qa-binary-dot-product]],\n$$\n\\sum_{x\\in\\{0,1\\}^n}(-1)^{x\\cdot z}=\\begin{cases}2^n,&z=0^n,\\\\0,&z\\ne0^n.\\end{cases}\n$$\nConsequently, for every $x\\in\\{0,1\\}^n$,\n$$\nH^{\\otimes n}|x\\rangle=2^{-n/2}\\sum_{y\\in\\{0,1\\}^n}(-1)^{x\\cdot y}|y\\rangle,\n$$\nwhere $H$ is the exact one-qubit gate of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and tensor factors follow the ordered register convention of [[def-qc-tensor-register-and-permutation]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-finite-branch-output-law",
+          "source_section": "Definition",
+          "quote": "At each positive-weight leaf $\\ell$, the ordered output wires have a fixed length $m$ and are disjoint from the remaining wires $W_\\ell$. For $z\\in\\{0,1\\}^m$ and a bit string $v$ on $W_\\ell$, let $e_{\\ell,z,v}$ be the full-register computational-basis vector with those bits in their declared wire positions. Define the leaf output weight and total output law by\n$$q_\\ell(z):=\\sum_{v\\in\\{0,1\\}^{|W_\\ell|}}\\langle \\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle_{\\rm root},\\qquad P(z\\mid x):=\\sum_{\\ell\\text{ positive-weight leaf}}w(\\ell)q_\\ell(z).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the root pairing linear in its first argument, and let $u\\in H$ satisfy $\\|u\\|=1$. Define $P_u:=|u\\rangle\\langle u|$ by the root-linear-first Dirac convention. Then $P_u$ is self-adjoint and idempotent, has one-dimensional range, is non-negative, and has trace one. In particular, $P_u$ is a density operator.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F3], after the oracle and final Hadamards the amplitude at address $y$ is $\\alpha_y=2^{-n}\\sum_{x\\in\\{0,1\\}^n}(-1)^{f(x)+x\\cdot y}.$ For constant $f(x)=c$, factor out $(-1)^c$ and apply [F4] with $z=y$: $\\alpha_y=(-1)^c$ if $y=0^n$ and $0$ otherwise.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For balanced $f$, [F2] gives equally many $+1$ and $-1$ terms in $\\alpha_{0^n}$, so $\\alpha_{0^n}=0$. For every $y$, the terminal output weight is $|\\alpha_y|^2$ after summing the target coordinates: the state is $\\sum_y\\alpha_y|y\\rangle\\otimes| -\\rangle$, the target has squared coordinate moduli $1/2,1/2$ by [F3]. Its unit-vector projector is a density operator by [F6], and [F5] and [F7] give the stated marginal. Thus the constant case outputs $0^n$ surely, while in the balanced case the probability of $0^n$ is zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The output weights sum to one by [F5]. Hence, when $f$ is balanced, all output probability is on strings other than $0^n$, which the output rule of [F1] labels balanced; in the constant case step 1.1 places all probability at $0^n$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: compute the zero-frequency output and its probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Statement includes n=1 and the finite-sum proof applies there."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-bernstein-vazirani-query-correct": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-bernstein-vazirani-query",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $n\\ge1$ and an oracle $f_a(x)=a\\cdot x$ satisfying the no-offset Bernstein–Vazirani promise of [[def-qa-bernstein-vazirani-promise]], on an ordered $n$-qubit address register $A$ and one target qubit $T$ initialized to $|0^n\\rangle_A|0\\rangle_T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-bernstein-vazirani-promise",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$. The **Bernstein–Vazirani no-offset promise** consists of the total functions\n$$\nf_a:\\{0,1\\}^n\\to\\{0,1\\},\\qquad f_a(x):=a\\cdot x,\n$$\nfor an unknown secret $a\\in\\{0,1\\}^n$, using [[def-qa-binary-dot-product]]. The task is to output $a$. This version has no additive offset: the oracle is exactly $f_a$, not $x\\mapsto a\\cdot x\\oplus b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$. It is the parity of the number of coordinates where both bits are $1$. Under the quotient operations of [[def-qa-binary-field-f2]], this bit represents the sum $\\sum_{i=0}^{n-1}[a_i]_2[x_i]_2$ in $\\mathbb Z/2\\mathbb Z$; the equality uses only the operation definitions, not the field axioms.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-bit-query-to-phase-query",
+          "source_section": "Statement",
+          "quote": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be total. Starting a target qubit in $|0\\rangle$, apply $X$ and then $H$, and make one standard bit query. Since $HX|0\\rangle=|-\\rangle$, phase kickback implements $P_f$ on the address and returns the target to $|-\\rangle$. This conversion uses one query plus exactly two nonoracle one-qubit gates; the target preparation is explicit and assumes no preprepared state or generic amplitude loading.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-hadamard-f2-kernel",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $z\\in\\{0,1\\}^n$, with the binary dot product of [[def-qa-binary-dot-product]],\n$$\n\\sum_{x\\in\\{0,1\\}^n}(-1)^{x\\cdot z}=\\begin{cases}2^n,&z=0^n,\\\\0,&z\\ne0^n.\\end{cases}\n$$\nConsequently, for every $x\\in\\{0,1\\}^n$,\n$$\nH^{\\otimes n}|x\\rangle=2^{-n/2}\\sum_{y\\in\\{0,1\\}^n}(-1)^{x\\cdot y}|y\\rangle,\n$$\nwhere $H$ is the exact one-qubit gate of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and tensor factors follow the ordered register convention of [[def-qc-tensor-register-and-permutation]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-finite-branch-output-law",
+          "source_section": "Definition",
+          "quote": "At each positive-weight leaf $\\ell$, the ordered output wires have a fixed length $m$ and are disjoint from the remaining wires $W_\\ell$. For $z\\in\\{0,1\\}^m$ and a bit string $v$ on $W_\\ell$, let $e_{\\ell,z,v}$ be the full-register computational-basis vector with those bits in their declared wire positions. Define the leaf output weight and total output law by\n$$q_\\ell(z):=\\sum_{v\\in\\{0,1\\}^{|W_\\ell|}}\\langle \\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle_{\\rm root},\\qquad P(z\\mid x):=\\sum_{\\ell\\text{ positive-weight leaf}}w(\\ell)q_\\ell(z).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the root pairing linear in its first argument, and let $u\\in H$ satisfy $\\|u\\|=1$. Define $P_u:=|u\\rangle\\langle u|$ by the root-linear-first Dirac convention. Then $P_u$ is self-adjoint and idempotent, has one-dimensional range, is non-negative, and has trace one. In particular, $P_u$ is a density operator.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1]–[F3], after phase kickback and the final address Hadamards the amplitude at $y$ is $\\alpha_y=2^{-n}\\sum_{x\\in\\{0,1\\}^n}(-1)^{a\\cdot x+x\\cdot y}=2^{-n}\\sum_x(-1)^{x\\cdot(a\\oplus y)},$ where $\\oplus$ is coordinatewise addition modulo two; the parity formula in [F2] gives the exponent identity coordinate by coordinate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], $\\alpha_y=1$ for $y=a$ and $0$ for $y\\ne a$. The target remains the unit vector $| -\\rangle$ by [F3], so [F5]–[F7] give output weight $|\\alpha_y|^2$ at each measured address. Therefore the output distribution is concentrated at $a$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: include the zero secret a=0^n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: The Statement and proof apply at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "ex-qa-exact-oracle-algorithms": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-deutsch-promise",
+          "source_section": "Definition",
+          "quote": "Let $f:\\{0,1\\}\\to\\{0,1\\}$ be the total Boolean function of a [[def-qa-promise-query-instance]]. The **Deutsch promise** is the decision task with YES set $Y=\\{f:f(0)=f(1)\\}$ and NO set $N=\\{f:f(0)\\ne f(1)\\}$. The required output is $0$ on $Y$ (constant) and $1$ on $N$ (balanced). All four Boolean functions on one bit are promised.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-deutsch-jozsa-promise",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $N:=2^n$, and let $f:\\{0,1\\}^n\\to\\{0,1\\}$ be the total function of a [[def-qa-promise-query-instance]]. The **Deutsch–Jozsa promise** is the decision task with YES set consisting of constant functions and NO set consisting of functions taking each value $0$ and $1$ exactly $N/2$ times. The required output is constant or balanced, respectively. Here $N$ is the number of addresses, as supplied by [[thm-qc-bitstring-index-is-bijection]] and [[def-finite-cardinality]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-bernstein-vazirani-promise",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$. The **Bernstein–Vazirani no-offset promise** consists of the total functions\n$$\nf_a:\\{0,1\\}^n\\to\\{0,1\\},\\qquad f_a(x):=a\\cdot x,\n$$\nfor an unknown secret $a\\in\\{0,1\\}^n$, using [[def-qa-binary-dot-product]]. The task is to output $a$. This version has no additive offset: the oracle is exactly $f_a$, not $x\\mapsto a\\cdot x\\oplus b$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$. It is the parity of the number of coordinates where both bits are $1$. Under the quotient operations of [[def-qa-binary-field-f2]], this bit represents the sum $\\sum_{i=0}^{n-1}[a_i]_2[x_i]_2$ in $\\mathbb Z/2\\mathbb Z$; the equality uses only the operation definitions, not the field axioms.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-deutsch-query-correct",
+          "source_section": "Statement",
+          "quote": "For either promised one-bit function $f$, the final measurement of [[alg-qa-deutsch-query]] outputs $0$ with probability one when $f$ is constant and $1$ with probability one when $f$ is balanced.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-deutsch-jozsa-query-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every function satisfying the Deutsch–Jozsa promise, [[alg-qa-deutsch-jozsa-query]] outputs constant with probability one on constant inputs and balanced with probability one on balanced inputs.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-bernstein-vazirani-query-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every no-offset Bernstein–Vazirani function $f_a(x)=a\\cdot x$, [[alg-qa-bernstein-vazirani-query]] outputs the secret $a$ with probability one.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-deutsch-classical-query-lower-bound",
+          "source_section": "Statement",
+          "quote": "On the Deutsch promise, the exact deterministic classical query complexity is $2$. Every randomized classical algorithm making at most one query has worst-case success probability at most $1/2$ under per-input correctness.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-deutsch-jozsa-deterministic-query-lower-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $N=2^n$, the exact deterministic classical query complexity of the Deutsch–Jozsa promise is $N/2+1$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, a randomized classical algorithm that samples three distinct addresses uniformly without replacement and outputs constant exactly when all three replies agree has success probability at least $3/4$ on every Deutsch–Jozsa input. For $n=1$, querying both addresses solves the promise exactly with two queries. Thus the deterministic exact lower bound is not a bounded-error exponential separation.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-bernstein-vazirani-classical-query-lower-bound",
+          "source_section": "Statement",
+          "quote": "For the no-offset Bernstein–Vazirani promise on $n\\ge1$ bits, every randomized classical algorithm with worst-case success at least $2/3$ needs at least $n$ queries. Querying the $n$ standard basis addresses recovers the secret exactly, so the bounded-error and exact classical query complexities are both $n$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-hadamard-f2-kernel",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $z\\in\\{0,1\\}^n$, with the binary dot product of [[def-qa-binary-dot-product]],\n$$\n\\sum_{x\\in\\{0,1\\}^n}(-1)^{x\\cdot z}=\\begin{cases}2^n,&z=0^n,\\\\0,&z\\ne0^n.\\end{cases}\n$$\nConsequently, for every $x\\in\\{0,1\\}^n$,\n$$\nH^{\\otimes n}|x\\rangle=2^{-n/2}\\sum_{y\\in\\{0,1\\}^n}(-1)^{x\\cdot y}|y\\rangle,\n$$\nwhere $H$ is the exact one-qubit gate of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and tensor factors follow the ordered register convention of [[def-qc-tensor-register-and-permutation]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Deutsch truth tables give $(f(0),f(1))=00,11\\Longrightarrow\\text{constant},\\qquad (f(0),f(1))=01,10\\Longrightarrow\\text{balanced}.$ The exact Deutsch theorem [F4] therefore outputs $0$ on the first two tables and $1$ on the latter two.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the two-bit Deutsch–Jozsa function $f(x)=x_0$, the table is $00\\mapsto0$, $01\\mapsto0$, $10\\mapsto1$, $11\\mapsto1$, so it is balanced by [F2]. Its final address amplitude is $\\alpha_y=\\frac14\\sum_{x\\in\\{0,1\\}^2}(-1)^{x_0+x\\cdot y}.$ For $y=00,01,10,11$, these sums are respectively $0,0,4,0$, so the measured output is $10$. The classical exact bound is $N/2+1=3$ queries, and the three-distinct-sample rule is exact for $N=4$ because any three of four addresses include both output values.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $a=10$, the two-bit Bernstein–Vazirani amplitude at $y$ is $\\alpha_y=\\frac14\\sum_{x\\in\\{0,1\\}^2}(-1)^{x\\cdot(10\\oplus y)}.$ The sums for $y=00,01,10,11$ are $0,0,4,0$, respectively; hence the exact output is $10$. By [F5], classical bounded-error recovery needs at least two queries and the two basis queries suffice.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For Deutsch, the deterministic exact classical query count is two while one randomized query has worst-case success at most $1/2$ by [F5]. For two-bit Deutsch–Jozsa the exact deterministic count is three, while three random distinct queries have success one on this finite domain. For two-bit Bernstein–Vazirani two classical queries recover both secret bits. These are query counts; none is a classical bit-time claim.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty address width or explicitly requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: and 2.1 compute the zero and nonzero output amplitudes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof verify this boundary: checks all four one-bit Deutsch tables."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no eigenvalue multiplicity, rank, or degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite strings, finite tables, and explicit finite samples are used; no arbitrary choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    }
+  }
+}

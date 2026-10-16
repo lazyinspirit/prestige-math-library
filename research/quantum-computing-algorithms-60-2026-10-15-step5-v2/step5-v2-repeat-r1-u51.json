@@ -1,0 +1,117 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "51",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "b9074bc502b799bf61e5d8e048ce3ff2d04f8d72f0aef8a00069213bc396e7f9",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Definition incorrectly identifies a finite OP1A polynomial transform with the exact reciprocal. If p(x)=delta/(2x) on a nontrivial interval, the polynomial xp(x)-delta/2 vanishes identically, contradicting its value at zero. The scalar error persists for exact block access. The repair retains the same constructor and target while including scalar, block and phase errors in the existing eta_I budget.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "disposition": "repaired",
+      "post_sha256": "b075003246b6d84464945d02e1daf6c0a2f5a3f8503511e7ba3977c95a798fcb",
+      "review_context_sha256": "c171943e2eba96ff9aaf415a339325aea23ae40ba4398f031e9b7df6f521ca23",
+      "reason": "The Definition now identifies the ideal stage multiplier as sgn(lambda)p_j(|lambda|/d), retains OP1A error e_j before dilution, and combines it with input-block, phase-synthesis and implementation errors in eta_I. Since phi_m/phi_j<=1, dilution cannot enlarge the scalar error. Negative eigenvalues retain the odd-transform sign, and no inverse is asserted on the kernel. The existing stopping-time proof 1.1 and 3.2 already use precisely this approximation budget; precision requests, caps, resource claims and both modes are preserved. This is an author repair, not an independent acceptance of the repaired carrier.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-qa-27-cks-stopping-time-instantiation",
+    "thm-qa-27-cks-linear-condition-guarantee"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "quantum-computing-algorithms-60-2026-10-15-step5-repeat-r1-u51-exact-reciprocal",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T08:00:49.382350+00:00",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "alg-qa-27-cks-variable-time-linear-solver",
+        "caught_at_stage": "5-rejudge",
+        "caught_by_role": "judge-sol",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "summary": "The Definition incorrectly identifies a finite OP1A polynomial transform with the exact reciprocal. If p(x)=delta/(2x) on a nontrivial interval, the polynomial xp(x)-delta/2 vanishes identically, contradicting its value at zero. The scalar error persists for exact block access. The repair retains the same constructor and target while including scalar, block and phase errors in the existing eta_I budget.",
+        "adjudication_ref": [
+          {
+            "id": "alg-qa-27-cks-variable-time-linear-solver",
+            "model": "gpt-6.1-sol",
+            "context_sha256": "b9074bc502b799bf61e5d8e048ce3ff2d04f8d72f0aef8a00069213bc396e7f9",
+            "item_sha256": "dea94339ca00b80079092a129bf49372f234493da4f4bd3b4c64730522991598"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-repeat-r1-u51.json",
+            "locator": "decisions[0], reviews[0], downstream_reviews and repair_notes"
+          }
+        ],
+        "prevention": {
+          "kind": "brief",
+          "ref": "Keep scalar polynomial approximation, block error and phase/implementation error separate before combining their budgets."
+        }
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "Both direct item consumers are draft members of the frozen frontier and remain sound under the repaired approximation interface. The owning page remains sound. No direct published or outside-frontier item consumer was found in the dependency/reference inventory, so no maintenance route or published repair is needed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed one assigned rejected tuple and repaired only the assigned draft algorithm plus its necessary OP6 operational-contract mirror. The original Definition changed in its two efficient-mode paragraphs; all constructor calls, precision requests, error tolerances, caps, costs and alternate Fourier mode are retained. No new prerequisite, dependency or manifest/registry edit was needed.",
+    "Local evidence consulted: alg-qa-27-qsvt-pseudoinverse Definition (OP1A scalar approximation and separate phase errors); thm-qa-27-pseudoinverse-polynomial-degree Statement and complete proof; thm-qa-24-real-polynomial-extraction and thm-qa-24-qsvt-error-and-resource-bound Statements and proofs; complete direct stopping-time and CKS guarantee consumers; owning page; binding OP6 efficient-mode clauses. Familiar finite polynomial identities and spectral/operator-norm error reasoning were used; no external source reading or independent review of this repair is claimed.",
+    "The Step-4 digest support-coverage concern is already addressed by the current explicit decoded-entry list-coverage/INVALID_ACCESS clauses and stopping-time Proof 1.1. The digest precision-cost concern is already addressed by the current exact eta_I and e_j choices, largest-dyadic zeta/eta_S requests, least admissible QPE/simulator sizes and fixed per-slot tolerances, with the corresponding logarithmic calculation in the resource theorem Proof 1.2. These current clauses were preserved.",
+    "Immediately after the completed item review, ran node tools/step5-workflow.mjs review-contexts --run quantum-computing-algorithms-60-2026-10-15 --items alg-qa-27-cks-variable-time-linear-solver and copied its post_sha256 and review_context_sha256 into reviews[0]. No item or supplier was edited afterward. The later OP6 mirror update used acquire/reread/edit/check/release under step5-shared-write-lock, preserving all contract bytes outside its two mirrored paragraphs.",
+    "Focused checks: node tools/rendercheck.mjs items/alg-qa-27-cks-variable-time-linear-solver.md --json exited 0, checked 1, no errors or warnings; node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-27-cks-variable-time-linear-solver.md --json exited 0, algorithm status not-applicable, 0 checked proofs and 0 failures; node tools/proof-layout.mjs items/alg-qa-27-cks-variable-time-linear-solver.md exited 0 after the final item edit, 1 item, 0 steps, 0 defects. node tools/rendercheck.mjs research/quantum-algorithms-planning/operational-contracts.md --json exited 0, checked 1, no errors or warnings.",
+    "Operational discovery: rendercheck --help was found to start its default inventory scan and was interrupted (exit 130); precheck --help treats the flag as a filename and returned ENOENT. Neither exploratory invocation is counted as validation. All reported validation uses the explicit assigned paths above.",
+    "Both direct item consumers remain sound and are listed in downstream with exact affected uses in downstream_reviews. No direct published or outside-frontier item consumer was found. No unresolved mathematical or repair obligation remains in this assignment. Controller-owned impact routing, independent rejudgment, ledger merging and certification remain separate; this fatal finding still counts toward the round convergence threshold."
+  ],
+  "downstream_reviews": [
+    {
+      "id": "lem-qa-27-cks-stopping-time-instantiation",
+      "path": "items/lem-qa-27-cks-stopping-time-instantiation.md",
+      "affected_use": "Facts F1/F2/F7; Proof 1.1 states that the odd stage polynomial approximates phi_j/(2 lambda) within its declared scalar error and includes polynomial/phase errors in eta_I; Proof 3.2 sums m eta_I.",
+      "invalidated_claim": "None: the consumer already distinguishes the target multiplier from its polynomial approximation.",
+      "disposition": "unaffected",
+      "minimality": "No edit needed: the stage approximation and total eta_I budget used in Proof 1.1 and 3.2 are retained exactly. No consumer Statement changes or further propagation."
+    },
+    {
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "path": "items/thm-qa-27-cks-linear-condition-guarantee.md",
+      "affected_use": "Statement assumes the constructor certificates; F1 imports its budgets; Proof 1.2 uses e_j=min(phi_j/(2d),eta_I/8) and the OP1A degree, and Proof 5.1 uses the stopping-time lemma output error.",
+      "invalidated_claim": "None: this theorem requires approximate state output and already derives its error through the existing eta_I budget.",
+      "disposition": "unaffected",
+      "minimality": "Precision requests, phase tolerances, polynomial degrees, H, finite caps and the stopping-time supplier are unchanged; no exact reciprocal stage is required."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/quantum-algorithms/block-encoding-linear-systems-and-variable-time-amplification.md",
+      "affected_use": "The items list embeds the assigned algorithm; the final paragraph describes an efficient QSVT inverse mode with gapped phase tests, common normalization and local stopping/output-error/resource proofs.",
+      "disposition": "unaffected",
+      "reason": "The page makes no exact reciprocal-compression assertion, and its approximate output and resource description is preserved."
+    }
+  ]
+}

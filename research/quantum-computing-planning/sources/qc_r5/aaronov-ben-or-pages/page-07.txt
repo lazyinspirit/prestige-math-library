@@ -1,0 +1,65 @@
+tolerant computation. Since we want to convert any arbitrary circuit to a more reliable one, we need
+the set of gates that have l-spread procedures to be universal.
+
+Definition 2 A quantum block code C is said to be a quantum computation code with spread l if there
+exists a universal set of quantum gates G such that (1) for any gate g ∈G there exists a procedure Pg
+with respect to C, with spread l, and (2) There exist correction , initialization and reading procedures
+with spread l.
+
+3.3
+Improving reliability by block simulations
+
+To simulate some circuit by a quantum computation code, we first convert it to a circuit which uses
+only gates from the universal set of the code. Then we simulate this new circuit as was explained: We
+now convert each qubit to a block of qubits, each time step to a working period, and each gate to the
+corresponding procedure, and besides that we add in each working period a correction procedure on
+each block. Apart from all that, we also add initialization procedures before the first working period
+of each computation block and a reading procedure after the last working period of each result block.
+The space-time of the simulating circuit M1 can be devided to rectangles, where each rectangle
+will correspond to one procedure, in the following way: First, devide the time to alternating stages:
+computation stages, in which one time step of M0 is simulated, i.e. one level of gate procedures is
+applied, and a corrections stage, in which one level of error correction procedures are applied. Each
+stage is a “strip” in the space time. Each strip can be devided to rectangles by deviding the qubits
+to sets: A correction strip will be devided such that in each rectangle a correction of one qubit is
+computed. In a computation strip, we devide the strip to rectangles by deviding the qubits to sets,
+where each set of qubits participates in exactly one procedure. Each rectangle thus corresponds to
+one procedure.
+We show that if a fault path in M1 is such that no more than a few faults occured in each rectangle,
+then indeed the computation succeeds. The number of faults allowed in one rectangle is bounded so
+that when taking into account the spread of the fault, the number of qubits effected in each block at
+the end of one working period is not too big, so that the density matrix can still be recovered.
+
+Definition 3 A fault path of a medium M1 that block simulates M0 is said to be a “k−sparse fault
+path” if no more than k faults occured in each rectangle.
+
+Lemma 1 Let C be a quantum computation code that corrects d errors, with spread l. Let M1 be
+a block simulating circuit. Consider a computation of M1 subjected to a k−sparse fault path with
+d ≥2kl. At the end of each working period the density matrix is d−deviated from the correct one.
+
+Proof: We will prove by induction on t a stronger assertion, that at the end of the t′th working period
+the density matrix is d/2−deviated from the correct one. For t = 0 the deviation is zero. Suppose
+that the density matrix at the end of the t′th working period is d/2-deviated from the correct matrix.
+After the computation stage, not more than kl qubits are effected in each block, so the density matrix
+is kl + d/2-deviated. Since kl + d/2 ≤d, the correction procedure indeed corrects the error, only that
+during the corrections new errors occur. Again, the number of effected qubits is not more than kl in
+each block, and all the other qubits transform as they should, so they are corrected. Hence after the
+correction procedure the matrix is kl-deviated. Since kl ≤d/2 this proves the induction step.
+
+We can now compute the effective noise rate of M1. This will be smaller than η if the parameters
+are chosen correctly:
+
+Theorem 1 Let M1 simulate M0 by the computation code C, which corrects d errors, have spread l,
+
+with all rectangles smaller than a. The effective noise rate of M1 is ≤2
+�
+a
+d/2l + 1
+
+�
+η
+d
+2l +1.
+
+7
+
+

@@ -1,0 +1,4598 @@
+Lecture Notes for Ph219/CS219:
+Quantum Information and Computation
+Chapter 4
+
+John Preskill
+California Institute of Technology
+
+November 2, 2001
+
+
+Contents
+
+4
+Quantum Entanglement
+4
+4.1
+Nonseparability of EPR pairs
+4
+4.1.1 Hidden quantum information
+4
+4.1.2 Einstein locality and hidden variables
+8
+4.2
+The Bell inequality
+10
+4.2.1 Three quantum coins
+10
+4.2.2 Quantum entanglement vs. Einstein locality
+13
+4.3
+More Bell inequalities
+17
+4.3.1 CHSH inequality
+17
+4.3.2 Maximal violation
+18
+4.3.3 Quantum strategies outperform classical strategies
+20
+4.3.4 All entangled pure states violate Bell inequalities
+22
+4.3.5 Photons
+24
+4.3.6 Experiments and loopholes
+26
+4.4
+Using entanglement
+27
+4.4.1 Dense coding
+28
+4.4.2 Quantum teleportation
+30
+4.4.3 Quantum teleportation and maximal entanglement
+32
+4.4.4 Quantum software
+35
+4.5
+Quantum cryptography
+36
+4.5.1 EPR quantum key distribution
+36
+4.5.2 No cloning
+39
+4.6
+Mixed-state entanglement
+41
+4.6.1 Positive-partial-transpose criterion for separability
+43
+4.7
+Nonlocality without entanglement
+45
+4.8
+Multipartite entanglement
+48
+4.8.1 Three quantum boxes
+49
+4.8.2 Cat states
+55
+4.8.3 Entanglement-enhanced communication
+57
+
+2
+
+
+Contents
+3
+
+4.9
+Manipulating entanglement
+59
+4.10
+Summary
+59
+4.11
+Bibliographical notes
+59
+4.12
+Exercises
+59
+
+
+4
+
+Quantum Entanglement
+
+4.1 Nonseparability of EPR pairs
+
+4.1.1 Hidden quantum information
+
+The deep ways that quantum information differs from classical informa-
+tion involve the properties, implications, and uses of quantum entangle-
+ment. Recall from §2.4.1 that a bipartite pure state is entangled if its
+Schmidt number is greater than one.
+Entangled states are interesting
+because they exhibit correlations that have no classical analog. We will
+study these correlations in this chapter.
+Recall, for example, the maximally entangled state of two qubits (or
+EPR pair) defined in §3.4.1:
+
+|φ+⟩AB =
+1
+√
+
+2 (|00⟩AB + |11⟩AB) .
+(4.1)
+
+“Maximally entangled” means that when we trace over qubit B to find
+the density operator ρA of qubit A, we obtain a multiple of the identity
+operator
+
+ρA = trB(|φ+⟩⟨φ+|) = 1
+
+2IA ,
+(4.2)
+
+(and similarly ρB = 1
+
+2IB). This means that if we measure spin A along
+any axis, the result is completely random — we find spin up with proba-
+bility 1/2 and spin down with probability 1/2. Therefore, if we perform
+any local measurement of A or B, we acquire no information about the
+preparation of the state, instead we merely generate a random bit. This
+situation contrasts sharply with case of a single qubit in a pure state;
+there we can store a bit by preparing, say, either | ↑ˆn⟩or | ↓ˆn⟩, and we
+can recover that bit reliably by measuring along the ˆn-axis. With two
+
+4
+
+
+4.1 Nonseparability of EPR pairs
+5
+
+qubits, we ought to be able to store two bits, but in the state |φ+⟩AB this
+information is hidden; at least, we can’t acquire it by measuring A or B.
+In fact, |φ+⟩is one member of a basis of four mutually orthogonal states
+for the two qubits, all of which are maximally entangled — the basis
+
+|φ±⟩=
+1
+√
+
+2(|00⟩± |11⟩) ,
+
+|ψ±⟩=
+1
+√
+
+2(|01⟩± |10⟩) ,
+(4.3)
+
+introduced in §3.4.1. Imagine that Alice and Bob play a game with Char-
+lie. Charlie prepares one of these four states, thus encoding two bits in
+the state of the two-qubit system. One bit is the parity bit (|φ⟩or |ψ⟩):
+are the two spins aligned or antialigned? The other is the phase bit (+ or
+−): what superposition was chosen of the two states of like parity. Then
+Charlie sends qubit A to Alice and qubit B to Bob. To win the game,
+Alice (or Bob) has to identify which of the four states Charlie prepared.
+Of course, if Alice and Bob bring their qubits together, they can iden-
+tify the state by performing an orthogonal measurement that projects
+onto the {|φ+⟩, |φ−⟩, |ψ+⟩, |ψ−⟩} basis. But suppose that Alice and Bob
+are in different cities, and that they are unable to communicate at all.
+Acting locally, neither Alice nor Bob can collect any information about
+the identity of the state.
+What they can do locally is manipulate this information. Alice may
+apply σ3 to qubit A, flipping the relative phase of |0⟩A and |1⟩A. This
+action flips the phase bit stored in the entangled state:
+
+|φ+⟩↔|φ−⟩,
+
+|ψ+⟩↔|ψ−⟩.
+(4.4)
+
+On the other hand, she can apply σ1, which flips her spin (|0⟩A ↔|1⟩A),
+and also flips the parity bit of the entangled state:
+
+|φ+⟩↔|ψ+⟩,
+
+|φ−⟩↔−|ψ−⟩.
+(4.5)
+
+Bob can manipulate the entangled state similarly. In fact, as we discussed
+in §2.4, either Alice or Bob can perform a local unitary transformation
+that changes one maximally entangled state to any other maximally en-
+tangled state.∗What their local unitary transformations cannot do is alter
+
+∗But of course, this does not suffice to perform an arbitrary unitary transformation on
+the four-dimensional space HA ⊗HB, which contains states that are not maximally
+entangled. The maximally entangled states are not a subspace — a superposition of
+maximally entangled states typically is not maximally entangled.
+
+
+6
+4 Quantum Entanglement
+
+ρA = ρB = 1
+
+2I — the information they are manipulating is information
+that neither one can read.
+But now suppose that Alice and Bob are able to exchange (classical)
+messages about their measurement outcomes; together, then, they can
+learn about how their measurements are correlated. The entangled basis
+states are conveniently characterized as the simultaneous eigenstates of
+two commuting observables:
+
+σ(A)
+1
+⊗σ(B)
+1
+,
+
+σ(A)
+3
+⊗σ(B)
+3
+;
+(4.6)
+
+the eigenvalue of σ(A)
+3
+⊗σ(B)
+3
+is the parity bit, and the eigenvalue of
+σ(A)
+1
+⊗σ(B)
+1
+is the phase bit. Since these operators commute, they can in
+principle be measured simultaneously. But they cannot be measured si-
+multaneously if Alice and Bob perform localized measurements. Alice and
+Bob could both choose to measure their spins along the z-axis, preparing
+a simultaneous eigenstate of σ(A)
+3
+and σ(B)
+3
+. Since σ(A)
+3
+and σ(B)
+3
+both
+commute with the parity operator σ(A)
+3
+⊗σ(B)
+3
+, their orthogonal measure-
+ments do not disturb the parity bit, and they can combine their results
+to infer the parity bit. But σ(A)
+3
+and σ(B)
+3
+do not commute with phase
+operator σ(A)
+1
+⊗σ(B)
+1
+, so their measurement disturbs the phase bit. On
+the other hand, they could both choose to measure their spins along the
+x-axis; then they would learn the phase bit at the cost of disturbing the
+parity bit. But they can’t have it both ways. To have hope of acquiring
+the parity bit without disturbing the phase bit, they would need to learn
+about the product σ(A)
+3
+⊗σ(B)
+3
+without finding out anything about σ(A)
+3
+and σ(B)
+3
+separately. That cannot be done locally.
+Now let us bring Alice and Bob together, so that they can operate on
+their qubits jointly. How might they acquire both the parity bit and the
+phase bit of their pair? By applying an appropriate unitary transforma-
+tion, they can rotate the entangled basis {|φ±⟩, |ψ±⟩} to the unentan-
+gled basis {|00⟩, |01⟩, |10⟩, |11⟩}. Then they can measure qubits A and
+B separately to acquire the bits they seek. How is this transformation
+constructed?
+This is a good time to introduce notation that will be used heavily
+in later chapters, the quantum circuit notation. Qubits are denoted by
+horizontal lines, and the single-qubit unitary transformation U is denoted:
+
+U
+
+
+4.1 Nonseparability of EPR pairs
+7
+
+A particular single-qubit unitary we will find useful is the Hadamard
+transform
+
+H =
+1
+√
+
+2
+
+�1
+1
+1
+−1
+
+�
+=
+1
+√
+
+2(σ1 + σ3) ,
+(4.7)
+
+which has the properties
+
+H2 = I ,
+(4.8)
+
+and
+
+Hσ1H = σ3 ,
+Hσ3H = σ1 .
+(4.9)
+
+(We can envision H (up to an overall phase) as a θ = π rotation about
+the axis ˆn =
+1
+√
+
+2(ˆn1 + ˆn3) that rotates ˆx to ˆz and vice-versa; we have
+
+U(ˆn, θ) = I cos θ
+
+2 + iˆn · ⃗σ sin θ
+
+2 = i 1
+√
+
+2(σ1 + σ3) = iH .)
+(4.10)
+
+Also useful is the two-qubit transformation known as the reversible XOR
+or controlled-NOT transformation; it acts as
+
+CNOT : |a, b⟩→|a, a ⊕b⟩,
+(4.11)
+
+on the basis states a, b = 0, 1, where a ⊕b denotes addition modulo 2.
+The CNOT is denoted:
+
+a
+
+b
+
+w
+
+
+
+
+a ⊕b
+
+a
+
+Thus this transformation flips the second bit if the first is 1, and acts
+trivially if the first bit is 0; it has the property
+
+(CNOT)2 = I ⊗I .
+(4.12)
+
+We call a the control (or source) bit of the CNOT, and b the target bit.
+By composing these “primitive” transformations, or quantum gates, we
+can build other unitary transformations. For example, the “circuit”
+
+H
+u
+
+i
+
+
+8
+4 Quantum Entanglement
+
+(to be read from left to right) represents the product of H applied to
+the first qubit followed by CNOT with the first bit as the source and
+the second bit as the target. It is straightforward to see that this circuit
+transforms the standard basis to the entangled basis,
+
+|00⟩→
+1
+√
+
+2(|0⟩+ |1⟩)|0⟩→|φ+⟩,
+
+|01⟩→
+1
+√
+
+2(|0⟩+ |1⟩)|1⟩→|ψ+⟩,
+
+|10⟩→
+1
+√
+
+2(|0⟩−|1⟩)|0⟩→|φ−⟩,
+
+|11⟩→
+1
+√
+
+2(|0⟩−|1⟩)|1⟩→|ψ−⟩,
+(4.13)
+
+so that the first bit becomes the phase bit in the entangled basis, and the
+second bit becomes the parity bit.
+Similarly, we can invert the transformation by running the circuit back-
+wards (since both CNOT and H square to the identity); if we apply the
+inverted circuit to an entangled state, and then measure both bits, we
+can learn the value of both the phase bit and the parity bit.
+Of course, H acts on only one of the qubits; the “nonlocal” part of
+our circuit is the controlled-NOT gate — this is the operation that estab-
+lishes or removes entanglement. If we could only perform an “interstellar
+CNOT,” we would be able to create entanglement among distantly sep-
+arated pairs, or extract the information encoded in entanglement. But
+we can’t. To do its job, the CNOT gate must act on its target without
+revealing the value of its source. Local operations and classical commu-
+nication will not suffice.
+
+4.1.2 Einstein locality and hidden variables
+
+Einstein was disturbed by quantum entanglement. Eventually, he along
+with Podolsky and Rosen (EPR) sharpened their discomfort into what
+they regarded as a paradox. As later reinterpreted by Bohm, the situa-
+tion they described is really the same as that discussed in §2.5.3. Given
+a maximally entangled state of two qubits shared by Alice and Bob, Al-
+ice can choose one of several possible measurements to perform on her
+spin that will realize different possible ensemble interpretations of Bob’s
+density matrix; for example, she can prepare either σ1 or σ3 eigenstates.
+We have seen that Alice and Bob are unable to exploit this phenomenon
+for faster-than-light communication. Einstein knew this but he was still
+dissatisfied. He felt that in order to be considered a complete description
+of physical reality a theory should meet a stronger criterion, that might
+be called Einstein locality (also sometimes known as local realism):
+
+
+4.1 Nonseparability of EPR pairs
+9
+
+Suppose that A and B are spacelike separated systems. Then in a
+complete description of physical reality an action performed on system
+A must not modify the description of system B.
+
+But if A and B are entangled, a measurement of A is performed and a
+particular outcome is known to have been obtained, then the density ma-
+trix of B does change. Therefore, by Einstein’s criterion, the description
+of a quantum system by a wavefunction or density operator cannot be
+considered complete.
+Einstein seemed to envision a more complete description that would
+remove the indeterminacy of quantum mechanics. A class of theories with
+this feature are called local hidden-variable theories. In a hidden-variable
+theory, measurement is actually fundamentally deterministic, but appears
+to be probabilistic because some degrees of freedom are not precisely
+known. For example, perhaps when a spin is prepared in what quantum
+theory would describe as the pure state | ↑ˆz⟩, there is actually a deeper
+theory in which the state prepared is parametrized as (ˆz, λ) where λ (0 ≤
+λ ≤1) is the hidden variable. Suppose that with present-day experimental
+technique, we have no control over λ, so when we prepare the spin state,
+λ might take any value — the probability distribution governing its value
+is uniform on the unit interval.
+Now suppose that when we measure the spin along an axis ˆn rotated
+by θ from the ˆz axis, the outcome will be
+
+| ↑ˆn⟩,
+for 0 ≤λ ≤cos2 θ
+
+2 ,
+
+| ↓ˆn⟩,
+for cos2 θ
+
+2 < λ ≤1 .
+(4.14)
+
+If we know λ, the outcome is deterministic, but if λ is completely un-
+known, then the probability distribution governing the measurement will
+agree with the predictions of quantum theory. In a hidden-variable the-
+ory, the randomness of the measurement outcome is not intrinsic; rather,
+it results from ignorance — our description of the system is not the most
+complete possible description.
+Now, what about entangled states? When we say that a hidden-variable
+theory is local, we mean that it satisfies the Einstein locality constraint.
+A measurement of A does not modify the values of the variables that
+govern the measurements of B. Rather, when Alice measures her half of
+an entangled state that she shares with Bob, she gains information about
+the values of the hidden variables, sharpening her ability to predict what
+Bob will find when he measures the other half. This seems to be what
+Einstein had in mind when he envisioned a more complete description.
+
+
+10
+4 Quantum Entanglement
+
+4.2 The Bell inequality
+
+4.2.1 Three quantum coins
+
+Is a local hidden-variable theory merely a reformulation of quantum me-
+chanics, or is it a testable hypothesis? John Bell’s fruitful idea was to test
+Einstein locality by considering the quantitative properties of the correla-
+tions between measurement outcomes obtained by two parties, Alice and
+Bob, who share an entangled state. Let us consider an example of the
+sort of correlations that Alice and Bob would like to explain.
+The system that Alice and Bob are studying might be described this
+way: Alice, in Pasadena, has in her possession three coins laid out on a
+table, labeled 1, 2, 3. Each coin has either its heads (H) or tails (T) side
+facing up, but it is hidden under an opaque cover, so that Alice is not able
+to tell whether it is an H or a T. Alice can uncover any one of the three
+coins, and so learn its value (H or T). However, as soon as that one coin
+is uncovered, the other two covered coins instantly disappear in a puff of
+smoke, and Alice never gets an opportunity to uncover the other coins.
+She has many copies of the three-coin set, and eventually she learns that,
+no matter which coin she exposes, she is just as likely to find an H as a
+T. Bob, in Chicago, has a similar set of coins, also labeled 1, 2, 3. He too
+finds that each one of his coins, when revealed, is as likely to be an H as
+a T.
+In fact, Alice and Bob have many identical copies of their shared set
+of coins, so they conduct an extensive series of experiments to investigate
+how their coin sets are correlated with one another. They quickly make
+a remarkable discovery: Whenever Alice and Bob uncover coins with the
+same label (whether 1, 2, or 3), they always find coins with the same value
+— either both are H or both are T. They conduct a million trials, just
+to be sure, and it works every single time! Their coin sets are perfectly
+correlated.
+Alice and Bob suspect that they have discovered something important,
+and they frequently talk on the phone to brainstorm about the implica-
+tions of their results. One day, Alice is in an especially reflective mood:
+
+Alice: You know, Bob, sometimes it’s hard for me to decide which of
+the three coins to uncover. I know that if I uncover coin 1, say, then
+coins 2 and 3 will disappear, and I’ll never have a chance to find
+out the values of those coins. Once, just once, I’d love to be able to
+uncover two of the three coins, and find out whether each is an H
+or a T. But I’ve tried and it just isn’t possible — there’s no way to
+look at one coin and prevent the other from going poof!
+
+Bob: [Long pause] Hey . . . wait a minute Alice, I’ve got an idea . . .
+Look, I think there is a way for you to find the value of two of your
+
+
+4.2 The Bell inequality
+11
+
+coins, after all! Let’s say you would like to uncover coin 1 and coin
+2. Well, I’ll uncover my coin 2 here in Chicago, and I’ll call you to
+tell you what I found, let’s say its an H. We know, then, that you
+are certain to find an H if you uncover your coin 2 also. There’s
+absolutely no doubt about that, because we’ve checked it a million
+times. Right?
+
+Alice: Right . . .
+
+Bob: But now there’s no reason for you to uncover your coin 2; you
+know what you’ll find anyway.
+You can uncover coin 1 instead.
+And then you’ll know the value of both coins.
+
+Alice: Hmmm . . . yeah, maybe. But we won’t be sure, will we? I mean,
+yes, it always worked when we uncovered the same coin before,
+but this time you uncovered your coin 2, and your coins 1 and 3
+disappeared, and I uncovered my coin 1, and my coins 2 and 3
+disappeared. There’s no way we’ll ever be able to check anymore
+what would have happened if we had both uncovered coin 2.
+
+Bob: We don’t have to check that anymore, Alice; we’ve already checked
+it a million times. Look, your coins are in Pasadena and mine are in
+Chicago. Clearly, there’s just no way that my decision to uncover
+my coin 2 can have any influence on what you’ll find when you
+uncover your coin 2. That’s not what’s happening. It’s just that
+when I uncover my coin 2 we’re collecting the information we need
+to predict with certainty what will happen when you uncover your
+coin 2. Since we’re already certain about it, why bother to do it!
+
+Alice: Okay, Bob, I see what you mean. Why don’t we do an experiment
+to see what really happens when you and I uncover different coins?
+
+Bob: I don’t know, Alice. We’re not likely to get any funding to do
+such a dopey experiment. I mean, does anybody really care what
+happens when I uncover coin 2 and you uncover coin 1?
+
+Alice: I’m not sure, Bob. But I’ve heard about a theorist named Bell.
+They say that he has some interesting ideas about the coins. He
+might have a theory that makes a prediction about what we’ll find.
+Maybe we should talk to him.
+
+Bob: Good idea! And it doesn’t really matter whether his theory makes
+any sense or not. We can still propose an experiment to test his
+prediction, and they’ll probably fund us.
+
+So Alice and Bob travel to CERN to have a chat with Bell. They tell
+Bell about the experiment they propose to do. Bell listens closely, but for
+
+
+12
+4 Quantum Entanglement
+
+a long time he remains silent, with a faraway look in his eyes. Alice and
+Bob are not bothered by his silence, as they rarely understand anything
+that theorists say anyway. But finally Bell speaks.
+
+Bell: I think I have an idea . . .. When Bob uncovers his coin in Chicago,
+that can’t exert any influence on Alice’s coin in Pasadena. Instead,
+what Bob finds out by uncovering his coin reveals some information
+about what will happen when Alice uncovers her coin.
+
+Bob: Well, that’s what I’ve been saying . . .
+
+Bell: Right. Sounds reasonable. So let’s assume that Bob is right about
+that. Now Bob can uncover any one of his coins, and know for sure
+what Alice will find when she uncovers the corresponding coin. He
+isn’t disturbing her coin in any way; he’s just finding out about it.
+We’re forced to conclude that there must be some hidden variables
+that specify the condition of Alice’s coins. And if those variables
+are completely known, then the value of each of Alice’s coins can be
+unambiguously predicted.
+
+Bob: [Impatient with all this abstract stuff] Yeah, but so what?
+
+Bell: When your correlated coin sets are prepared, the values of the hid-
+den variables are not completely specified; that’s why any one coin
+is as likely to be an H as a T. But there must be some probabil-
+ity distribution P(x, y, z) (with x, y, z ∈{H, T}) that characterizes
+the preparation and governs Alice’s three coins. These probabilities
+must be nonnegative, and they sum to one:
+�
+
+x,y,z∈{H,T }
+P(x, y, z) = 1 .
+(4.15)
+
+Alice can’t uncover all three of her coins, so she can’t measure
+P(x, y, z) directly. But with Bob’s help, she can in effect uncover
+any two coins of her choice. Let’s denote with Psame(i, j), the prob-
+ability that coins i and j (i, j = 1, 2, 3) have the same value, either
+both H or both T. Then we see that
+
+Psame(1, 2) =
+P(HHH) + P(HHT) + P(TTH) + P(TTT) ,
+Psame(2, 3) =
+P(HHH) + P(THH) + P(HTT) + P(TTT) ,
+Psame(1, 3) =
+P(HHH) + P(HTH) + P(THT) + P(TTT) ,
+(4.16)
+
+and it immediately follows from eq. (4.15) that
+
+Psame(1, 2) + Psame(2, 3) + Psame(1, 3)
+= 1 + 2 P(HHH) + 2 P(TTT) ≥1 .
+(4.17)
+
+
+4.2 The Bell inequality
+13
+
+So that’s my prediction: Psame should obey the inequality
+
+Psame(1, 2) + Psame(2, 3) + Psame(1, 3) ≥1 .
+(4.18)
+
+You can test it my doing your experiment that “uncovers” two coins
+at a time.
+
+Bob: Well, I guess the math looks right. But I don’t really get it. Why
+does it work?
+
+Alice: I think I see . . .. Bell is saying that if there are three coins on a
+table, and each one is either an H or a T, then at least two of the
+three have to be the same, either both H or both T. Isn’t that it,
+Bell?
+
+Bell stares at Alice, a surprised look on his face. His eyes glaze, and
+for a long time he is speechless. Finally, he speaks:
+
+Bell: Yes
+
+So Alice and Bob are amazed and delighted to find that Bell is that
+rarest of beasts — a theorist who makes sense. With Bell’s help, their pro-
+posal is approved and they do the experiment, only to obtain a shocking
+result. After many careful trials, they conclude, to very good statistical
+accuracy that
+
+Psame(1, 2) ≃Psame(2, 3) ≃Psame(1, 3) ≃1
+
+4 ,
+(4.19)
+
+and hence
+
+Psame(1, 2) + Psame(2, 3) + Psame(1, 3) ≃3 · 1
+
+4 = 3
+
+4 < 1 .
+(4.20)
+
+The correlations found by Alice and Bob flagrantly violate Bell’s inequal-
+ity!
+Alice and Bob are good experimenters, but dare not publish so dis-
+turbing a result unless they can find a plausible theoretical interpreta-
+tion. Finally, they become so desperate that they visit the library to see
+if quantum mechanics can offer any solace . . .
+
+4.2.2 Quantum entanglement vs. Einstein locality
+
+What Alice and Bob read about is quantum entanglement. Eventually,
+they learn that their magical coins are governed by a maximally entangled
+state of two qubits. What Alice and Bob really share are many copies of
+the state |ψ−⟩. When Alice uncovers a coin, she is measuring her qubit
+
+
+14
+4 Quantum Entanglement
+
+along one of three possible axes, no two of which are orthogonal. Since
+the measurements don’t commute, Alice can uncover only one of her three
+coins. Similarly, when Bob uncovers his coin, he measures his member
+of the entangled pair along any one of three axes, so he too is limited to
+uncovering just one of his three coins. But since Alice’s measurements
+commute with Bob’s, they can uncover one coin each, and study how
+Alice’s coins are correlated with Bob’s coins.
+
+To help Alice and Bob interpret their experiment, let’s see what quan-
+tum mechanics predicts about these correlations. The state |ψ−⟩has the
+convenient property that it remains invariant if Alice and Bob each apply
+the same unitary transformation,
+
+U ⊗U|ψ⟩= |ψ⟩.
+(4.21)
+
+For infinitesimal unitaries, this becomes the property
+
+�
+⃗σ(A) + ⃗σ(B)�
+|ψ−⟩= 0
+(4.22)
+
+(the state has vanishing total angular momentum, as you can easily check
+by an explicit computation). Now consider the expectation value
+
+⟨ψ−|
+�
+⃗σ(A) · ˆa
+��
+⃗σ(B) · ˆb
+�
+|ψ−⟩,
+(4.23)
+
+where ˆa and ˆb are unit 3-vectors. Acting on |ψ−⟩, we can replace ⃗σ(B) by
+−⃗σ(A); therefore, the expectation value can be expressed as a property of
+Alice’s system, which has density operator ρA = 1
+
+2I:
+
+−⟨ψ−|
+�
+⃗σ(A) · ˆa
+��
+⃗σ(A) · ˆb
+�
+|ψ−⟩
+
+= −aibjtr
+�
+ρAσ(A)
+i
+σ(A)
+j
+�
+= −aibjδij = −ˆa · ˆb = −cos θ ,
+(4.24)
+
+where θ is the angle between the axes ˆa and ˆb. Thus we find that the
+measurement outcomes are always perfectly anticorrelated when we mea-
+sure both spins along the same axis ˆa, and we have also obtained a more
+general result that applies when the two axes are different.
+
+The projection operator onto the spin up (spin down) states along ˆn is
+
+
+4.2 The Bell inequality
+15
+
+E(ˆn, ±) = 1
+
+2(I ± ˆn · ⃗σ); we therefore obtain
+
+P(++) = ⟨ψ−|E(A)(ˆa, +)E(B)(ˆb, +)|ψ−⟩= 1
+
+4(1 −cos θ) ,
+
+P(−−) = ⟨ψ−|E(A)(ˆa, −)E(B)(ˆb, −)|ψ−⟩= 1
+
+4(1 −cos θ) ,
+
+P(+−) = ⟨ψ−|E(A)(ˆa, +)E(B)(ˆb, −)|ψ−⟩= 1
+
+4(1 + cos θ) ,
+
+P(−+) = ⟨ψ−|E(A)(ˆa, −)E(B)(ˆb, +)|ψ−⟩= 1
+
+4(1 + cos θ) ;
+(4.25)
+
+here P(++) is the probability that Alice and Bob both obtain the spin-
+up outcome when Alice measures along ˆa and Bob measures along ˆb, etc.
+The probability that their outcomes are the same is
+
+Psame = P(++) + P(−−) = 1
+
+2(1 −cos θ) ,
+(4.26)
+
+and the probability that their outcomes are opposite is
+
+Popposite = P(+−) + P(−+) = 1
+
+2(1 + cos θ) .
+(4.27)
+
+Now suppose that Alice measures her spin along one of the three sym-
+metrically distributed axes in the x −z plane,
+
+ˆa1 = (0, 0, 1) ,
+
+ˆa2 =
+
+�√
+
+3
+2 , 0, −1
+
+2
+
+�
+
+,
+
+ˆa3 =
+
+�
+
+−
+√
+
+3
+2 , 0, −1
+
+2
+
+�
+
+,
+(4.28)
+
+so that
+
+ˆa1 · ˆa2 = ˆa2 · ˆa3 = ˆa3 · ˆa1 = −1
+
+2 .
+(4.29)
+
+And suppose that Bob measures along one of three axes that are diamet-
+rically opposed to Alice’s:
+
+ˆb1 = −ˆa1 ,
+ˆb2 = −ˆa2 ,
+ˆb3 = −ˆa3 .
+(4.30)
+
+When Alice and Bob choose opposite axes, then θ = 180◦and Psame = 1.
+But otherwise θ = ±60◦so that cos θ = 1/2 and Psame = 1/4. This is just
+the behavior that Alice and Bob found in their experiment, in violation
+of Bell’s prediction.
+
+
+16
+4 Quantum Entanglement
+
+Bell’s logic seemed compelling but something went wrong, so we are
+forced to reconsider his tacit assumptions. First, Bell assumed that there
+is a joint probability distribution that governs the possible outcomes of
+all measurements that Alice and Bob might perform. This is the hidden-
+variable hypothesis. He imagines that if the values of the hidden variables
+are exactly known, then the outcome of any measurement can be predicted
+with certainty — measurement outcomes are described probabilistically
+because the values of the hidden variables are drawn from an ensemble
+of possible values. Second, Bell assumed that Bob’s decision about what
+to measure in Chicago has no effect on the hidden variables that govern
+Alice’s measurement in Pasadena. This is the assumption that the hid-
+den variables are local. If we accept these two assumptions, there is no
+escaping Bell’s conclusion. We have found that the correlations predicted
+by quantum theory are incompatible with theses assumptions.
+What are the implications? Perhaps the moral of the story is that it
+can be dangerous to reason about what might have happened, but didn’t
+actually happen — what are sometimes called counterfactuals. Of course,
+we do this all the time in our everyday lives, and we usually get away with
+it; reasoning about counterfactuals seems to be acceptable in the classical
+world, but sometimes it gets us into trouble in the quantum world. We
+claimed that Alice knew what would happen when she measured along ˆa1,
+because Bob measured along −ˆa1, and every time we have ever checked,
+their measurement outcomes are always perfectly correlated. But Alice
+did not measure along ˆa1; she measured along ˆa2 instead. We got into
+trouble by trying to assign probabilities to the outcomes of measurements
+along ˆa1, ˆa2, and ˆa3, even though Alice can perform just one of those
+measurements. In quantum theory, assuming that there is a probability
+distribution that governs the outcomes of all three measurements that
+Alice might have made, even though she was able to carry out only one
+of these measurements, leads to mathematical inconsistencies, so we had
+better not do it. We have affirmed Bohr’s principle of complementary —
+we are forbidden to consider simultaneously the possible outcomes of two
+mutually exclusive experiments.
+One who rejects the complementarity principle may prefer to say that
+violations of the Bell inequalities (confirmed experimentally) have exposed
+an essential nonlocality built into the quantum description of Nature. If
+we do insist that it is legitimate to talk about outcomes of mutually ex-
+clusive experiments then we are forced to conclude that Bob’s choice of
+measurement actually exerted a subtle influence on the outcome of Al-
+ice’s measurement. Thus advocates of this viewpoint speak of “quantum
+nonlocality.”
+By ruling out local hidden variables, Bell demolished Einstein’s dream
+that the indeterminacy of quantum theory could be eradicated by adopt-
+
+
+4.3 More Bell inequalities
+17
+
+ing a more complete, yet still local, description of Nature. If we accept
+locality as an inviolable principle, then we are forced to accept random-
+ness as an unavoidable and intrinsic feature of quantum measurement,
+rather than a consequence of incomplete knowledge.
+To some, the peculiar correlations unmasked by Bell’s inequality call
+out for a deeper explanation than quantum mechanics seems to provide.
+They see the EPR phenomenon as a harbinger of new physics awaiting
+discovery. But they may be wrong. We have been waiting over 65 years
+since EPR, and so far no new physics.
+The human mind seems to be poorly equipped to grasp the correlations
+exhibited by entangled quantum states, and so we speak of the weirdness
+of quantum theory. But whatever your attitude, experiment forces you
+to accept the existence of the weird correlations among the measurement
+outcomes. There is no big mystery about how the correlations were estab-
+lished — we saw that it was necessary for Alice and Bob to get together
+at some point to create entanglement among their qubits. The novelty is
+that, even when A and B are distantly separated, we cannot accurately
+regard A and B as two separate qubits, and use classical information to
+characterize how they are correlated. They are more than just correlated,
+they are a single inseparable entity. They are entangled.
+
+4.3 More Bell inequalities
+
+4.3.1 CHSH inequality
+
+Experimental tests of Einstein locality typically are based on another
+form of the Bell inequality, which applies to a situation in which Alice can
+measure either one of two observables a and a′, while Bob can measure
+either b or b′. Suppose that the observables a, a′, b, b′ take values in
+{±1}, and are functions of hidden random variables.
+If a, a′ = ±1, it follows that either a+a′ = 0, in which case a−a′ = ±2,
+or else a −a′ = 0, in which case a + a′ = ±2; therefore
+
+C ≡(a + a′)b + (a −a′)b′ = ±2 .
+(4.31)
+
+(Here is where the local hidden-variable assumption sneaks in — we have
+imagined that values in {±1} can be assigned simultaneously to all four
+observables, even though it is impossible to measure both of a and a′, or
+both of b and b′.) Evidently
+
+|⟨C⟩| ≤⟨|C|⟩= 2,
+(4.32)
+
+so that
+
+|⟨ab⟩+ ⟨a′b⟩+ ⟨ab′⟩−⟨a′b′⟩| ≤2.
+(4.33)
+
+
+18
+4 Quantum Entanglement
+
+This result is called the CHSH inequality (for Clauser-Horne-Shimony-
+Holt). It holds for any random variables a, a′, b, b′ taking values in ±1
+that are governed by a joint probability distribution.
+To see that quantum mechanics violates the CHSH inequality, let a, a′
+
+denote the Hermitian operators
+
+a = ⃗σ(A) · ˆa ,
+a′ = ⃗σ(A) · ˆa′ ,
+(4.34)
+
+acting on a qubit in Alice’s possession, where ˆa, ˆa′ are unit 3-vectors.
+Similarly, let b, b′ denote
+
+b = ⃗σ(B) · ˆb ,
+b′ = ⃗σ(B) · ˆb′ ,
+(4.35)
+
+acting on Bob’s qubit. Each observable has eigenvalues ±1 so that an
+outcome of a measurement of the observable takes values in ±1.
+Recall that if Alice and Bob share the maximally-entangled state |ψ−⟩,
+then
+
+⟨ψ−|
+�
+⃗σ(A) · ˆa
+��
+⃗σ(B) · ˆb
+�
+|ψ−⟩= −ˆa · ˆb = −cos θ ,
+(4.36)
+
+where θ is the angle between ˆa and ˆb. Consider the case where ˆa′,ˆb, ˆa,ˆb′
+
+are coplanar and separated by successive 45◦angles. so that the quantum-
+mechanical predictions are
+
+⟨ab⟩= ⟨a′b⟩= ⟨ab′⟩= −cos π
+
+4 = −1
+√
+
+2,
+
+⟨a′b′⟩= −cos 3π
+
+4 =
+1
+√
+
+2 .
+(4.37)
+
+The CHSH inequality then becomes
+
+4 · 1
+√
+
+2 = 2
+√
+
+2 ≤2 ,
+(4.38)
+
+which is clearly violated by the quantum-mechanical prediction.
+
+4.3.2 Maximal violation
+
+In fact the case just considered provides the largest possible quantum-
+mechanical violation of the CHSH inequality, as we can see by the fol-
+lowing argument. Suppose that a, a′, b, b′ are Hermitian operators with
+eigenvalues ±1, so that
+
+a2 = a′2 = b2 = b′2 = I ,
+(4.39)
+
+
+4.3 More Bell inequalities
+19
+
+and suppose that “Alice’s observables” a, a′ commute with “Bob’s ob-
+servables” b, b′:
+
+0 = [a, b] = [a, b′] = [a′, b] = [a′, b′] .
+(4.40)
+
+Defining
+
+C = ab + a′b + ab′ −a′b′ ,
+(4.41)
+
+we evaluate
+
+C2 =
+
+I
++aa′
++bb′
+−aa′bb′
+
++a′a
++I
++a′abb′
+−bb′
+
++b′b
++aa′b′b
++I
+−aa′
+
+−a′ab′b
+−b′b
+−a′a
++I
+
+,
+(4.42)
+
+using eq. (4.39). All the quadratic terms cancel pairwise, so that we are
+left with
+
+C2
+=
+4I −aa′bb′ + a′abb′ + aa′b′b −a′ab′b
+=
+4I −[a, a′][b, b′] .
+(4.43)
+
+Now recall that the sup norm ∥M ∥sup of a bounded operator M is
+defined by
+
+∥M ∥sup= sup
+|ψ⟩
+
+�∥M|ψ⟩∥
+
+∥|ψ⟩∥
+
+�
+;
+(4.44)
+
+that is, the sup norm of M is the maximum eigenvalue of
+√
+
+M †M. It is
+easy to verify that the sup norm has the properties
+
+∥MN ∥sup ≤∥M ∥sup · ∥N ∥sup ,
+∥M + N ∥sup ≤∥M ∥sup + ∥N ∥sup .
+(4.45)
+
+A Hermitian operator with eigenvalues ±1 has unit sup norm, so that
+
+∥C2 ∥sup≤4 + 4 ∥a ∥sup · ∥a′ ∥sup · ∥b ∥sup · ∥b′ ∥sup= 8 .
+(4.46)
+
+Because C is Hermitian,
+
+∥C2 ∥sup=∥C ∥2
+sup ,
+(4.47)
+
+and therefore
+
+∥C ∥sup≤2
+√
+
+2 ,
+(4.48)
+
+which is known as Cirel’son’s inequality.
+
+
+20
+4 Quantum Entanglement
+
+The CHSH inequality is the statement |⟨C⟩| ≤2. Quantum mechani-
+cally, the absolute value of the expectation value of the Hermitian operator
+C can be no larger than its largest eigenvalue,
+
+|⟨C⟩| ≤∥C ∥sup≤2
+√
+
+2 .
+(4.49)
+
+We saw that this upper bound is saturated in the case where a′, b, a, b′
+
+are separated by successive 45o angles. Thus the violation of the CHSH
+inequality that we found is the largest violation allowed by quantum the-
+ory.
+
+4.3.3 Quantum strategies outperform classical strategies
+
+The CHSH inequality is a limitation on the strength of the correlations
+between the two parts of a bipartite classical system, and the Cirel’son in-
+equality is a limitation on the strength of the correlations between the two
+parts of a bipartite quantum system. We can deepen our appreciation of
+how quantum correlations differ from classical correlations by considering
+a game for which quantum strategies outperform classical strategies.
+Alice and Bob are playing a game with Charlie. Charlie prepares two
+bits x, y ∈{0, 1}; then he sends x to Alice and y to Bob. After receiving
+the input bit x, Alice is to produce an output bit a ∈{0, 1}, and after
+receiving y, Bob is to produce output bit b ∈{0, 1}. But Alice and Bob
+are not permitted to communicate, so that Alice does not know y and
+Bob does not know x.
+Alice and Bob win the game if their output bits are related to the input
+bits according to
+
+a ⊕b = x ∧y ,
+(4.50)
+
+where ⊕denotes the sum modulo 2 (the XOR gate) and ∧denotes the
+product (the AND gate). Can Alice and Bob find a strategy that enables
+them to win the game every time, no matter how Charlie chooses the
+input bits?
+No, it is easy to see that there is no such strategy. Let a0, a1 denote the
+value of Alice’s output if her input is x = 0, 1 and let b0, b1 denote Bob’s
+output if his input is y = 0, 1. For Alice and Bob to win for all possible
+inputs, their output bits must satisfy
+
+a0 ⊕b0 = 0 ,
+a0 ⊕b1 = 0 ,
+a1 ⊕b0 = 0 ,
+a1 ⊕b1 = 1 .
+(4.51)
+
+
+4.3 More Bell inequalities
+21
+
+But this is impossible, since by summing the four equations we obtain
+0=1.
+Suppose that Charlie generates the input bits at random. Then there is
+a very simple strategy that enables Alice and Bob to win the game three
+times our of four: they always choose the output a = b = 0 so that they
+lose only if the input is x = y = 1. The CHSH inequality can be regarded
+as the statement that, if Alice and Bob share no quantum entanglement,
+then there is no better strategy.
+To connect this statement with our previous formulation of the CHSH
+inequality, define random variables taking values ±1 as
+
+a = (−1)a0 ,
+a′ = (−1)a1 ,
+b = (−1)b0 ,
+b′ = (−1)b1 .
+(4.52)
+
+Then the CHSH inequality says that for any joint probability distribution
+governing a, a′, b, b′ ∈{±1}, the expectation values satisfy
+
+⟨ab⟩+ ⟨ab′⟩+ ⟨a′b⟩−⟨a′b′⟩≤2 .
+(4.53)
+
+Furthermore, if we denote by pxy the probability that eq. (4.51) is satisfied
+when the input bits are (x, y), then
+
+⟨ab⟩
+= 2p00 −1 ,
+⟨ab′⟩
+= 2p01 −1 ,
+⟨a′b⟩
+= 2p10 −1 ,
+⟨a′b′⟩
+= 1 −2p11 ;
+(4.54)
+
+for example ⟨ab⟩= p00 −(1 −p00) = 2p00 −1, because the value of ab is
++1 when Alice and Bob win and −1 when they lose. The CHSH inequality
+eq. (4.53) becomes
+
+2 (p00 + p01 + p10 + p11) −4 ≤2 ,
+(4.55)
+
+or
+
+⟨p⟩≡1
+
+4 (p00 + p01 + p10 + p11) ≤3
+
+4 ,
+(4.56)
+
+where ⟨p⟩denotes the probability of winning averaged over a uniform
+ensemble for the input bits. Thus, if the input bits are random, Alice and
+Bob cannot attain a probability of winning higher than 3/4.
+It is worthwhile to consider how the assumption that Alice and Bob
+take actions governed by “local hidden variables” limits their success in
+playing the game. Although Alice and Bob do not share any quantum
+entanglement, they are permitted to share a table of random numbers that
+
+
+22
+4 Quantum Entanglement
+
+they may consult to produce their output bits. Thus we may imagine that
+hidden variables drawn from an ensemble of possible values guide Alice
+and Bob to make correlated decisions.
+These correlations are limited
+by locality — Alice does not know Bob’s input and Bob does not know
+Alice’s. In fact, we have learned that for playing this game their shared
+randomness is of no value — their best strategy does not use the shared
+randomness at all.
+But if Alice and Bob share quantum entanglement, they can devise
+a better strategy. Based on the value of her input bit, Alice decides to
+measure one of two Hermitian observables with eigenvalues ±1: a if x = 0
+and a′ is x = 1. Similarly, Bob measures b if y = 0 and b′ if y = 1. Then
+the quantum-mechanical expectation values of these observables satisfy
+the Cirel’son inequality
+
+⟨ab⟩+ ⟨ab′⟩+ ⟨a′b⟩−⟨a′b′⟩≤2
+√
+
+2 ,
+(4.57)
+
+and the probability that Alice and Bob win the game is constrained by
+
+2 (p00 + p01 + p10 + p11) −4 ≤2
+√
+
+2 ,
+(4.58)
+
+or
+
+⟨p⟩≡1
+
+4 (p00 + p01 + p10 + p11) ≤1
+
+2 +
+1
+2
+√
+
+2 ≈.853 .
+(4.59)
+
+Furthermore, we have seen that this inequality can be saturated if Al-
+ice and Bob share a maximally entangled state of two qubits, and the
+observables a, a′, b, b′ are chosen appropriately.
+Thus we have found that Alice and Bob can play the game more suc-
+cessfully with quantum entanglement than without it. At least for this
+purpose, shared quantum entanglement is a more powerful resource than
+shared classical randomness. But even the power brought by entangle-
+ment has limits, limits embodied by the Cirel’son inequality.
+
+4.3.4 All entangled pure states violate Bell inequalities
+
+Separable states do not violate Bell inequalities. For example, in the case
+of a separable pure state, if a is an observable acting on Alice’s qubit, and
+b is an observable acting on Bob’s, then
+
+⟨ab⟩= ⟨a⟩⟨b⟩.
+(4.60)
+
+No Bell-inequality violation can occur, because we have already seen that
+a (local) hidden-variable theory does exist that correctly reproduces the
+predictions of quantum theory for a pure state of a single qubit. A general
+
+
+4.3 More Bell inequalities
+23
+
+separable state is just a probabilistic mixture of separable pure states, so
+that the correlations between the subsystems are entirely classical, and
+the Bell inequalities apply.
+On the other hand, we have seen that a maximally entangled state such
+as |ψ−⟩is Bell-inequality violating. But what about pure states that are
+only partially entangled such as
+
+|φ⟩= α|00⟩+ β|11⟩?
+(4.61)
+
+Any pure state of two qubits can be expressed this way in the Schmidt
+basis; with suitable phase conventions, α and β are real and nonnegative.
+Suppose that Alice and Bob both measure along an axis in the x-z
+plane, so that their observables are
+
+a = σ(A)
+3
+cos θA + σ(A)
+1
+sin θA ,
+
+b = σ(B)
+3
+cos θB + σ(B)
+1
+sinθB .
+(4.62)
+
+The state |φ⟩has the properties
+
+⟨φ|σ3 ⊗σ3|φ⟩= 1 ,
+⟨φ|σ1 ⊗σ1|φ⟩= 2αβ ,
+⟨φ|σ3 ⊗σ1|φ⟩= 0 = ⟨φ|σ1 ⊗σ3|φ⟩,
+(4.63)
+
+so that the quantum-mechanical expectation value of ab is
+
+⟨ab⟩= ⟨φ|ab|φ⟩= cos θA cos θB + 2αβ sin θA sinθB
+(4.64)
+
+(and we recover cos(θA −θB) in the maximally entangled case α = β =
+1/
+√
+
+2). Now let us consider, for simplicity, the (nonoptimal!) special case
+
+θA = 0,
+θ′
+A = π
+
+2 ,
+θ′
+B = −θB,
+(4.65)
+
+so that the quantum predictions are:
+
+⟨ab⟩= cos θB = ⟨ab′⟩,
+⟨a′b⟩= 2αβ sin θB = −⟨a′b′⟩.
+(4.66)
+
+Plugging into the CHSH inequality, we obtain
+
+| cos θB −2αβ sinθB| ≤1 ,
+(4.67)
+
+and we easily see that violations occur for θB close to 0 or π. Expanding
+to linear order in θB, the left-hand side is
+
+≃1 −2αβθB ,
+(4.68)
+
+
+24
+4 Quantum Entanglement
+
+which surely exceeds 1 for αβ > 0 and θB negative and small.
+We have shown that any entangled pure state of two qubits violates
+some Bell inequality.
+It is not hard to generalize the argument to an
+arbitrary bipartite pure state. For bipartite pure states, then, “entangled”
+is equivalent to “Bell-inequality violating.” For bipartite mixed states,
+however, we will see later that the situation is more subtle.
+
+4.3.5 Photons
+
+Experiments that test the Bell inequality usually are done with entangled
+photons, not with spin-1
+
+2 objects.
+What are the quantum-mechanical
+predictions for photons?
+Recall from §2.2.2 that for a photon traveling in the ˆz direction, we use
+the notation |x⟩, |y⟩for the states that are linearly polarized along the x
+and y axes respectively. In terms of these basis states, the states that are
+linearly polarized along “horizontal” and “vertical” axes that are rotated
+by angle θ relative to the x and y axes can be expressed as
+
+|H(θ)⟩=
+�cos θ
+sinθ
+
+�
+,
+|V (θ)⟩=
+�−sin θ
+cos θ
+
+�
+.
+(4.69)
+
+We can construct a 2×2 matrix whose eigenstates are |H(θ)⟩and |V (θ)⟩,
+with respective eigenvalues ±1; it is
+
+τ(θ) ≡|H(θ)⟩⟨H(θ)| −|V (θ)⟩⟨V (θ)| =
+�cos 2θ
+sin2θ
+sin2θ
+−cos 2θ
+
+�
+.
+(4.70)
+
+The generator of rotations about the ˆz axis is J = σ2, and the eigen-
+states of J with eigenvalues ±1 are the circularly polarized states
+
+|+⟩=
+1
+√
+
+2
+
+�1
+i
+
+�
+,
+|−⟩=
+1
+√
+
+2
+
+�i
+1
+
+�
+.
+(4.71)
+
+Suppose that an excited atom emits two photons that come out back to
+back, with vanishing angular momentum and even parity. The two-photon
+states
+
+|+⟩A|−⟩B
+|−⟩A|+⟩B
+(4.72)
+
+are invariant under rotations about ˆz. The photons have opposite val-
+ues of Jz, but the same helicity (angular-momentum along the axis of
+propagation), since they are propagating in opposite directions. Under a
+
+
+4.3 More Bell inequalities
+25
+
+reflection in the y−z plane, the polarization states are modified according
+to
+
+|x⟩→−|x⟩,
+|y⟩→|y⟩,
+(4.73)
+
+or
+
+|+⟩→+i|−⟩,
+|−⟩→−i|+⟩;
+(4.74)
+
+therefore, the parity eigenstates are entangled states
+
+1
+√
+
+2(|+⟩A|−⟩B ± |−⟩A|+⟩B) .
+(4.75)
+
+The state with Jz = 0 and even parity, then, expressed in terms of the
+linear polarization states, is
+
+−
+i
+√
+
+2(| + −⟩AB + | −+⟩AB)
+
+=
+1
+√
+
+2(|xx⟩AB + |yy⟩AB) ≡|φ+⟩AB .
+(4.76)
+
+Because of invariance under rotations about ˆz, the state has this form
+irrespective of how we orient the x and y axes.
+Alice or Bob can use a polarization analyzer to project the polarization
+state of a photon onto the basis {|H(θ)⟩, |V (θ)⟩}, and hence measure τ(θ).
+For two photons in the state |φ+⟩, if Alice orients her polarizer with angle
+θA and Bob with angle θB, then the correlations of their measurement
+outcomes are encoded in the expectation value
+
+⟨φ+|τ (A)(θA)τ (B)(θB)|φ+⟩.
+(4.77)
+
+Using rotational invariance:
+
+= ⟨φ+|τ (A)(0)τ(B)(θB −θA)|φ+⟩
+
+= 1
+
+2⟨x|τ (B)(θB −θA)|x⟩−1
+
+2⟨y|τ (B)(θB −θA)|y⟩
+
+= cos 2(θB −θA) .
+(4.78)
+
+Recall that for the measurement of qubits on the Bloch sphere, we found
+the similar expression cos θ, where θ is the angle between Alice’s polariza-
+tion axis and Bob’s. Here we have cos 2θ instead, because photons have
+spin-1 rather than spin-1
+
+2.
+If Alice measures one of the two observables a = τ (A)(θA) or a′ =
+τ (A)(θ′
+A) and Bob measures either b = τ (B)(θB) or b′ = τ (B)(θB), then
+under the local hidden-variable assumption the CHSH inequality applies.
+
+
+26
+4 Quantum Entanglement
+
+If we plug in the quantum predictions for the expectation values, we
+obtain
+��cos 2(θB −θA) + cos 2(θB −θ′
+A) + cos 2(θ′
+B −θA) −cos 2(θ′
+B −θ′
+A)
+��≤2 .
+(4.79)
+
+The maximal violation that saturates Cirel’son’s inequality — left-hand
+side equal to 2
+√
+
+2 — occurs when θ′
+A, θB, θA and θ′
+B are separated by
+successive 22 1
+
+2
+◦angles, so that
+
+1
+√
+
+2
+=
+cos 2(θB −θA) = cos 2(θB −θ′
+A)
+
+=
+= cos 2(θ′
+B −θA) = −cos 2(θ′
+B −θ′
+A) .
+(4.80)
+
+4.3.6 Experiments and loopholes
+
+Locality loophole. Experiments with entangled pairs of photons have tested
+the CHSH inequality in the form eq. (4.79). The experiments confirm the
+quantum predictions, and demonstrate convincingly that the CHSH in-
+equality is violated. These experiments, then, seem to show that Nature
+cannot be accurately described by a local hidden-variable theory.
+Or do they?
+A skeptic might raise objections. For example, in the
+derivation of the CHSH inequality, we assumed that after Alice decides
+to measure either a or a′, no information about Alice’s decision reaches
+Bob’s detector before Bob measures (and likewise, we assumed that if Bob
+measures first, no information about Bob’s decision reaches Alice before
+she measures). Otherwise, the marginal probability distribution for Bob’s
+outcomes could be updated after Alice’s measurement and before Bob’s,
+so that the CHSH inequality need not apply. The assumption that no such
+update can occur is justified by relativistic causality if Alice’s decision
+and measurement are events spacelike separated from Bob’s decision and
+measurement. The skeptic would insist that the experiment fulfill this
+condition, which is called the locality loophole.
+In 1982, Aspect and collaborators conducted an experiment that ad-
+dressed the locality loophole. Two entangled photons were produced in
+the decay of an excited calcium atom, and each photon was directed by a
+switch to one of two polarization analyzers, chosen pseudo-randomly. The
+photons were detected about 12m apart, corresponding to a light travel
+time of about 40 ns. This time was considerably longer than either the
+cycle time of the switch, or the difference in the times of arrival of the
+two photons. Therefore the “decision” about which observable to measure
+was made after the photons were already in flight, and the events that
+selected the axes for the measurement of photons A and B were spacelike
+
+
+4.4 Using entanglement
+27
+
+separated. The results were consistent with the quantum predictions, and
+violated the CHSH inequality by five standard deviations. Since Aspect,
+many other experiments have confirmed this finding, including ones in
+which detectors A and B are kilometers apart.
+
+Detection loophole. Another objection that the skeptic might raise is
+called the detection loophole. In experiments with photons, the detection
+efficiency is low. Most entangled photon pairs do not result in detections
+at both A and B. Among the things that can go wrong: a photon might
+be absorbed before reaching the detector, a photon might miss the detec-
+tor, or a photon might arrive in the detector but fail to trigger it. Data
+is accepted by the experiment only when two photons are detected in co-
+incidence, and in testing the CHSH inequality, we must assume that the
+data collected is a fair sample of all the entangled pairs.
+But, what if the local hidden variables govern not just what polarization
+state is detected, but also whether the detector fires at all? Then the data
+collected might be a biased sample, and the CHSH inequality need not
+apply.
+In Exercise 4.??, we will show that the detection loophole can be closed
+if the photons are detected with an efficiency above 82.84%. Current ex-
+periments with photons don’t approach the necessary efficiency. Experi-
+ments that use ion traps have tested the CHSH inequality with detection
+efficiency close to 100%, but these experiments do not address the local-
+ity loophole. No experiment that simultaneously closes the locality and
+detection loopholes has yet been done.
+
+Free-will loophole. Suppose that an experiment is done in which the pho-
+ton detection efficiency is perfect, and in which Alice and Bob appear to
+make spacelike-separated decisions. A skeptic might still resist the con-
+clusion that local hidden-variable theories are ruled out, by invoking the
+free-will loophole. Conceivably, the decisions that Alice and Bob make
+about what to measure are themselves governed by the local hidden vari-
+ables. Then their decisions might be correlated with the values of the
+hidden variables that determine the measurement outcomes, so that they
+are unable to obtain a fair sample of the distribution of the hidden vari-
+ables, and the CHSH inequality might be violated.
+All of us have to decide for ourselves how seriously to take this objec-
+tion.
+
+4.4 Using entanglement
+
+After Bell’s work, quantum entanglement became a subject of intensive
+study, among those interested in the foundations of quantum theory.
+
+
+28
+4 Quantum Entanglement
+
+Gradually, a new viewpoint evolved: entanglement is not just a unique
+tool for exposing the weirdness of quantum mechanics, but also a poten-
+tially valuable resource. By exploiting entangled quantum states, we can
+perform tasks that are otherwise difficult or impossible.
+
+4.4.1 Dense coding
+
+Our first example is an application of entanglement to communication.
+Alice wants to send messages to Bob. She might send classical bits (like
+dots and dashes in Morse code), but let’s suppose that Alice and Bob are
+linked by a quantum channel. For example, Alice can prepare qubits (like
+photons) in any polarization state she pleases, and send them to Bob,
+who measures the polarization along the axis of his choice. Is there any
+advantage to sending qubits instead of classical bits?
+In principle, if their quantum channel has perfect fidelity, and Alice and
+Bob perform the preparation and measurement with perfect efficiency,
+then they are no worse off using qubits instead of classical bits. Alice can
+prepare, say, either | ↑z⟩or | ↓z⟩, and Bob can measure along ˆz to infer
+the choice she made. This way, Alice can send one classical bit with each
+qubit. But in fact, that is the best she can do. Sending one qubit at a
+time, no matter how she prepares it and no matter how Bob measures it,
+no more than one classical bit can be carried by each qubit (even if the
+qubits are entangled with one another). This statement, a special case
+of the Holevo bound on the classical information capacity of a quantum
+channel, will be derived in Chapter 5.
+But now, let’s change the rules a bit — let’s suppose that Alice and
+Bob share an entangled pair of qubits in the state |φ+⟩AB. The pair was
+prepared last year; one qubit was shipped to Alice and the other to Bob,
+in the hope that the shared entanglement would come in handy someday.
+Now, use of the quantum channel is very expensive, so Alice can afford to
+send only one qubit to Bob. Yet it is of the utmost importance for Alice
+to send Bob two classical bits of information.
+Fortunately, Alice remembers about the entangled state |φ+⟩AB that
+she shares with Bob, and she carries out a protocol that she and Bob had
+arranged for just such an emergency. On her member of the entangled
+pair, she can perform one of four possible unitary transformations:
+
+1) I (she does nothing) ,
+
+2) σ1 (180o rotation about ˆx-axis) ,
+
+3) σ2 (180o rotation about ˆy-axis) ,
+
+4) σ3 (180o rotation about ˆz-axis) .
+
+
+4.4 Using entanglement
+29
+
+As we have seen, by doing so, she transforms |φ+⟩AB to one of 4 mutually
+orthogonal states:
+
+1) |φ+⟩AB ,
+
+2) |ψ+⟩AB ,
+
+3) |ψ−⟩AB (up to a phase) ,
+
+4) |φ−⟩AB .
+
+Now, she sends her qubit to Bob, who receives it and then performs
+an orthogonal collective measurement on the pair that projects onto the
+maximally entangled basis. The measurement outcome unambiguously
+distinguishes the four possible actions that Alice could have performed.
+Therefore the single qubit sent from Alice to Bob has successfully carried
+2 bits of classical information!
+Hence this procedure is called “dense
+coding.”
+A nice feature of this protocol is that, if the message is highly con-
+fidential, Alice need not worry that an eavesdropper will intercept the
+transmitted qubit and decipher her message. The transmitted qubit has
+density matrix ρA = 1
+
+2IA, and so carries no information at all. All the
+information is in the correlations between qubits A and B, and this infor-
+mation is inaccessible unless the adversary is able to obtain both members
+of the entangled pair. (Of course, the adversary can “jam” the channel,
+preventing the information from reaching Bob.)
+From one point of view, Alice and Bob really did need to use the channel
+twice to exchange two bits of information. For example, we can imagine
+that Alice prepared the state |φ+⟩herself. Last year, she sent half of the
+state to Bob, and now she sends him the other half. So in effect, Alice
+has sent two qubits to Bob in one of four mutually orthogonal states, to
+convey two classical bits of information as the Holevo bound allows.
+Still, dense coding is rather weird, for several reasons. First, Alice sent
+the first qubit to Bob long before she knew what her message was going
+to be. Second, each qubit by itself carries no information at all; all the
+information is encoded in the correlations between the qubits. Third, it
+would work just as well for Bob to prepare the entangled pair and send
+half to Alice; then two classical bits are transmitted from Alice to Bob
+by sending a single qubit from Bob to Alice and back again.
+Anyway, when an emergency arose and two bits had to be sent immedi-
+ately while only one use of the channel was possible, Alice and Bob could
+exploit the pre-existing entanglement to communicate more efficiently.
+They used entanglement as a resource.
+
+
+30
+4 Quantum Entanglement
+
+4.4.2 Quantum teleportation
+
+In dense coding, quantum information could be exploited to enhance the
+transmission of classical information. Specifically, if Alice and Bob share
+entanglement, then sending one qubit is sufficient to convey two classi-
+cal bits. Now one wonders about the converse. If Alice and Bob share
+entanglement, can sending two classical bits suffice to convey a qubit?
+Imagine that Charlie has prepared for Alice a qubit in the state |ψ⟩,
+but Alice doesn’t know anything about what state Charlie prepared. Bob
+needs this qubit desperately, and Alice wants to help him. But that darn
+quantum channel is down again! Alice can send only classical information
+to Bob.
+She could try measuring ⃗σ · ˆn, projecting her qubit to either | ↑ˆn⟩or
+| ↓ˆn⟩. She could send the one-bit measurement outcome to Bob who could
+then proceed to prepare the state that Alice found. But you showed in
+Exercise ?? that Bob’s state |ϕ⟩will not be a perfect copy of Alice’s; on
+the average it will match Alice’s qubit with fidelity
+
+F = |⟨ϕ|ψ⟩|2 = 2
+
+3,
+(4.81)
+
+This fidelity is better than could have been achieved if Bob had merely
+chosen a state at random (F = 1
+
+2), but it is not nearly as good as the
+fidelity that Bob requires.
+Furthermore, as we will see in Chapter 5,
+there is no protocol in which Alice measures the qubit and sends classical
+information to Bob that achieves a fidelity better than 2/3.
+Fortunately, Alice and Bob recall that they share the maximally en-
+tangled state |φ+⟩AB, which they prepared last year. Why not use the
+entanglement as a resource? If they are willing to consume the shared
+entanglement and communicate classically, can Alice send her qubit to
+Bob with fidelity better than 2/3?
+In fact they can achieve fidelity F = 1, by carrying out the following
+protocol: Alice unites the unknown qubit |ψ⟩C she wants to send to Bob
+with her half of the |φ+⟩AB pair that she shares with Bob. She measures
+the two commuting observables
+
+σ(C)
+1
+⊗σ(A)
+1
+,
+σ(C)
+3
+⊗σ(A)
+3
+,
+(4.82)
+
+thus performing Bell measurement — a projection of the two qubits onto
+one of the four maximally entangled states |φ±⟩CA, |ψ±⟩CA. She sends
+her measurement outcome (two bits of classical information) to Bob over
+the classical channel. Upon receiving this information, Bob performs one
+
+
+4.4 Using entanglement
+31
+
+of four operations on his qubit
+
+Alice measures
+|φ+⟩CA
+→
+Bob applies
+I(B) ,
+
+Alice measures
+|ψ+⟩CA
+→
+Bob applies
+σ(B)
+1
+,
+
+Alice measures
+|ψ−⟩CA
+→
+Bob applies
+σ(B)
+2
+,
+
+Alice measures
+|φ−⟩CA
+→
+Bob applies
+σ(B)
+3
+.
+(4.83)
+
+This action transforms Bob’s qubit (his member of the entangled pair that
+he initially shared with Alice) into a perfect copy of |ψ⟩C. This magic
+trick is called quantum teleportation.
+How does it work? We merely note that for |ψ⟩= a|0⟩+ b|1⟩, we may
+write
+
+|ψ⟩C|φ+⟩AB = (a|0⟩C + b|1⟩C) 1
+√
+
+2(|00⟩AB + |11⟩AB)
+
+=
+1
+√
+
+2(a|000⟩CAB + a|011⟩CAB + b|100⟩CAB + b|111⟩CAB)
+
+= 1
+
+2a(|φ+⟩CA + |φ−⟩CA)|0⟩B + 1
+
+2a(|ψ+⟩CA + |ψ−⟩CA)|1⟩B
+
++ 1
+
+2b(|ψ+⟩CA −|ψ−⟩CA)|0⟩B + 1
+
+2b(|φ+⟩CA −|φ−⟩CA)|1⟩B
+
+= 1
+
+2|φ+⟩CA(a|0⟩B + b|1⟩B)
+
++ 1
+
+2|ψ+⟩CA(a|1⟩B + b|0⟩B)
+
++ 1
+
+2|ψ−⟩CA(a|1⟩B −b|0⟩B)
+
++ 1
+
+2|φ−⟩CA(a|0⟩B −b|1⟩B)
+
+= 1
+
+2|φ+⟩CA|ψ⟩B + 1
+
+2|ψ+⟩CAσ1|ψ⟩B
+
++ 1
+
+2|ψ−⟩CA(−iσ2)|ψ⟩B + 1
+
+2|φ−⟩CAσ3|ψ⟩B.
+(4.84)
+
+Thus we see that when Alice performs the Bell measurement on qubits
+C and A, all four outcomes are equally likely. Once Bob learns Alice’s
+measurement outcome, he possesses the pure state σ|ψ⟩, where σ is a
+known Pauli operator, one of {I, σ1, σ2, σ3}. The action prescribed in
+eq. (4.83) restores Bob’s qubit to the initial state |ψ⟩.
+Quantum teleportation is a curious procedure. Initially, Bob’s qubit is
+completely uncorrelated with the unknown qubit |ψ⟩C, but Alice’s Bell
+
+
+32
+4 Quantum Entanglement
+
+measurement establishes a correlation between A and C. The measure-
+ment outcome is in fact completely random, so Alice (and Bob) actually
+acquire no information at all about |ψ⟩by making this measurement.
+And that is a good thing, as we know that if they were to collect any
+information about the state they would unavoidably disturb the state.
+How then does the quantum state manage to travel from Alice to Bob?
+It is a bit puzzling. On the one hand, we can hardly say that the two
+classical bits that were transmitted carried this information — the bits
+were random. So we are tempted to say that the shared entangled pair
+made the teleportation possible. But remember that the entangled pair
+was actually prepared last year, long before Alice ever dreamed that she
+would be sending the qubit to Bob . . .
+We should also note that the teleportation procedure is fully consistent
+with the no-cloning principle. True, a copy of the state |ψ⟩B appeared
+in Bob’s hands.
+But the original |ψ⟩C had to be destroyed by Alice’s
+measurement before the copy could be created.
+Our findings about dense coding and quantum teleportation can be
+summarized as statements about how one type of resource can simulate
+another. Let us introduce the terminology ebit for an entangled pair of
+qubits shared by two parties (e for entangled), and cbit for a classical bit
+(c for classical). We teleport one qubit from Alice to Bob by consuming
+one ebit and sending two cbits, and we send two cbits from Alice and
+Bob via dense coding by consuming one ebit and transporting one qubit.
+Thus we may say
+
+1 ebit + 2 cbits
+→
+1 qubit ,
+1 ebit + 1 qubit
+→
+2 cbits ,
+(4.85)
+
+meaning that the resources on the left suffice to simulate the resources on
+the right. Entanglement is essential in these protocols. Without ebits, a
+qubit is worth only one cbit, and without ebits, a “teleported” qubit has
+fidelity F ≤2/3.
+
+4.4.3 Quantum teleportation and maximal entanglement
+
+The teleportation concept has an air of mystery. One would like to un-
+derstand more deeply why it works. A helpful clue is that to teleport
+with fidelity F = 1 the entangled state consumed in the protocol must
+be maximally entangled. And the crucial feature of bipartite maximally
+entangled states is that either Alice or Bob can transform one maximally
+entangled state to another by applying a local unitary transformation.
+To see more clearly how quantum teleportation works, consider tele-
+porting an N-dimensional system using an N × N maximally entangled
+
+
+4.4 Using entanglement
+33
+
+state of the form
+
+|Φ⟩=
+1
+√
+
+N
+
+N−1
+�
+
+i=0
+|i⟩⊗|i⟩.
+(4.86)
+
+A useful property of this state is
+
+CA⟨Φ|Φ⟩AB
+=
+1
+N
+
+�
+
+i,j
+(C⟨i| ⊗A⟨i|)(|j⟩A ⊗|j⟩B)
+
+=
+1
+N
+
+�
+
+i
+|i⟩B C⟨i| ≡1
+
+N (T )BC
+(4.87)
+
+Here we have defined the transfer operator (T )BC which has the property
+
+T BC|ϕ⟩C = T BC
+
+��
+
+i
+ai|i⟩C
+
+�
+
+=
+�
+
+i
+ai|i⟩B = |ϕ⟩B ;
+(4.88)
+
+it maps a state in C to the identical state in B. This property has no
+invariant meaning independent of the choice of basis in B and C; rather
+T BC just describes an arbitrary way to relate the orthonormal bases of
+the two systems. Of course, Alice and Bob would need to align their bases
+in some way to verify that teleportation has really succeeded.
+Now recall that any other N × N maximally entangled state has a
+Schmidt decomposition of the form
+
+1
+√
+
+N
+
+N−1
+�
+
+i=0
+|i′⟩⊗|i⟩,
+(4.89)
+
+and so can be expressed as
+
+|Φ(U)⟩≡U ⊗I|Φ⟩,
+(4.90)
+
+where
+
+U|i⟩= |i′⟩=
+�
+
+j
+|j⟩Uji .
+(4.91)
+
+Writing
+
+|Φ(U)⟩AB =
+1
+√
+
+N
+
+�
+
+i,j
+|j⟩A ⊗|i⟩B Uji ,
+(4.92)
+
+we can easily verify that
+
+CA⟨Φ(U)|Φ(V T )⟩AB = 1
+
+N
+
+�
+V U−1�
+
+B T BC ,
+(4.93)
+
+
+34
+4 Quantum Entanglement
+
+where V T denotes the transpose of V in the standard basis (V T
+ij = Vji);
+in particular, then, the transfer operator can be expressed as
+
+1
+N T BC = CA⟨Φ(U)|Φ((UT)⟩AB ,
+(4.94)
+
+for any unitary U.
+Now suppose that Alice and Bob share |Φ⟩AB, and that Charlie has pre-
+pared the state |ψ⟩C and has deposited it in Alice’s laboratory. Alice per-
+forms a measurement that projects CA onto a maximally entangled basis,
+obtaining the outcome |Φ(Ua)⟩CA for some unitary U a. Then we know
+from eq. (4.94) that if Alice and Bob had shared the state |Φ((UT
+a )⟩AB
+instead of |Φ⟩AB, then Alice’s measurement would have prepared in Bob’s
+lab a perfect replica of the state |ψ⟩. Unfortunately, they did not have
+the foresight to share the right state to begin with. But it’s not too late!
+Bob realizes that
+
+|Φ(UT
+a )⟩= IA ⊗(U a)B |Φ⟩AB ,
+(4.95)
+
+and of course (Ua)B commutes with Alice’s measurement. Hence, when
+Bob hears from Alice that her measurement outcome was |Φ((UT
+a )⟩AB, he
+applies (U a)B to his half of the state he had shared with Alice. Then the
+protocol is equivalent to one in which they had shared the right maximally
+entangled state to begin with, and Bob’s state has been transformed into
+|ψ⟩B!
+This approach to teleportation has some conceptual advantages. For
+one, we can easily see that Alice is not required to perform an orthogonal
+measurement. To achieve teleportation with fidelity F = 1 it suffices that
+she perform a POVM with operation elements M a, where each M a has
+the property
+
+M †
+aM a ∝|Φ(Ua)⟩⟨Φ(Ua)|
+(4.96)
+
+for some unitary U a. Also, we can easily see how the teleportation proto-
+col should be modified if the initial maximally entangled state that Alice
+and Bob share is not |Φ⟩AB but rather
+
+|Φ(V T )⟩AB = IA ⊗V B|Φ⟩AB .
+(4.97)
+
+If Alice’s measurement outcome is |Φ(Ua)⟩CA, then eq. (4.93) tells us that
+the state Bob receives is
+
+V U −1
+a |ψ⟩B .
+(4.98)
+
+To recover |ψ⟩B, Bob must apply U aV −1.
+
+
+4.4 Using entanglement
+35
+
+The operator ordering in eq. (4.98) may seem counterintuitive at first —
+it seems as though Alice’s measurement (Ua) precedes the preparation of
+the shared entangled state (V ). But this “time reversal” has a straight-
+forward interpretation. If Alice’s measurement outcome is |Φ(Ua)⟩CA,
+then Bob would have received a perfect copy of |ψ⟩if the initial entangled
+state had been IA ⊗(U a)B |Φ⟩AB. To simulate the situation in which
+the entangled state had been chosen properly from the start, Bob first
+applies V −1 to undo the “twist” in |Φ(V T )⟩AB, recovering |Φ⟩AB, and
+then applies U a to transform the entangled state to the desired one.
+There is a more fanciful interpretation of eq. (4.98) which, while not
+necessary, is nonetheless irresistable. We might “explain” how quantum
+information is transferred from Alice and Bob by following the world
+line of a qubit traveling in spacetime. The qubit moves forward in time
+from Charlie’s preparation to Alice’s measurement, then backward in time
+from the measurement to the initial preparation of the entangled pair,
+and finally forward in time again from the preparation of the pair to
+Bob’s laboratory. Since this world line visits Alice’s measurement before
+arriving at the preparation of the entanglement, U−1
+a
+acts “first” and V
+acts “later on.”
+
+4.4.4 Quantum software
+
+Teleportation has some interesting applications. For example, imagine
+that Alice and Bob wish to apply the “quantum gate” V to the unknown
+state |ψ⟩C. But applying V requires sophisitcated hardware that they
+can’t afford.
+A more economical alternative is to purchase quantum software from a
+vendor. The software is a bipartite state that the vendor certifies to be
+
+|Φ(V T )⟩AB = IA ⊗V B|φ⟩AB .
+(4.99)
+
+Alice’s hardware is powerful enough for her to perform a measurement
+that projects onto the basis {|Φ(Ua)⟩CA}; once the outcome a is known,
+the state V U −1
+a |ψ⟩B has been prepared.
+Bob can then complete the
+execution of V to |ψ⟩by applying V U aV −1
+
+This procedure may seem silly — why assume that Bob is able to apply
+V UaV −1 but unable to apply V ? In fact it is not so silly, and has im-
+portant applications to fault-tolerant quantum computation that we will
+explore further in Chapter 8. In some cases, executing V U aV −1 really is
+a lot easier than applying V . Furthermore, Alice and Bob might be able
+to prepare the quantum software themselves, instead of buying it, even
+though they can’t apply V reliably. This is possible because it is easier
+to verify that a known quantum state has been properly prepared than to
+
+
+36
+4 Quantum Entanglement
+
+verify that a known unitary transformation has been successfully applied
+to an unknown state. If the hardware that applies V cannot be trusted,
+then we prefer to use it to prepare software offline, and then subject the
+software to quality assurance, rather than risk causing irrevocable damage
+to our unknown state through a faulty execution of V .
+Each application of V consumes one copy of the quantum software.
+Thus, this protocol for executing V with the help of quantum software
+uses entanglement as a resource.
+
+4.5 Quantum cryptography
+
+4.5.1 EPR quantum key distribution
+
+Everyone has secrets, including Alice and Bob.
+Alice needs to send a
+highly private message to Bob, but Alice and Bob have a very nosy friend,
+Eve, who they know will try to listen in. Can they communicate with
+assurance that Eve is unable to eavesdrop?
+Obviously, they should use some kind of code. Trouble is, aside from
+being very nosy, Eve is also very smart. Alice and Bob are not confident
+that they are clever enough to devise a code that Eve cannot break.
+Except there is one coding scheme that is surely unbreakable. If Alice
+and Bob share a private key, a string of random bits known only to them,
+then Alice can convert her message to ASCII (a string of bits no longer
+than the key) add each bit of her message (module 2) to the corresponding
+bit of the key, and send the result to Bob. Receiving this string, Bob can
+add the key to it to extract Alice’s message.
+This scheme is secure because even if Eve should intercept the trans-
+mission, she will not learn anything because the transmitted string itself
+carries no information — the message is encoded in a correlation between
+the transmitted string and the key (which Eve doesn’t know).
+There is still a problem, though, because Alice and Bob need to estab-
+lish a shared random key, and they must ensure that Eve can’t know the
+key. They could meet to exchange the key, but that might be impractical.
+They could entrust a third party to transport the key, but what if the in-
+termediary is secretly in cahoots with Eve? They could use “public key”
+distribution protocols, but the security of such protocols is founded on
+assumptions about the computational resources available to a potential
+adversary. Indeed, we will see in Chapter 6 that public key protocols are
+vulnerable to attack by an eavesdropper who is equipped with a quantum
+computer.
+Can Alice and Bob exploit quantum information (and specifically en-
+tanglement) to solve the key exchange problem? They can! Quantum key
+distribution protocols can be devised that are invulnerable to any attack
+
+
+4.5 Quantum cryptography
+37
+
+allowed by the laws of physics.
+Let’s suppose that Alice and Bob share a supply of entangled pairs,
+each prepared in the state |φ+⟩. To establish a shared private key, they
+may carry out this protocol:
+For each qubit in her/his possession, Alice and Bob decide to measure
+either σ1 or σ3. The decision is pseudo-random, each choice occuring
+with probability 1/2. Then, after the measurements are performed, both
+Alice and Bob publicly announce what observables they measured, but
+do not reveal the outcomes they obtained. For those cases (about half)
+in which they measured their qubits along different axes, their results are
+discarded (as Alice and Bob obtained uncorrelated outcomes). For those
+cases in which they measured along the same axis, their results, though
+random, are perfectly correlated. Hence, they have established a shared
+random key.
+But, is this protocol really invulnerable to a sneaky attack by Eve? In
+particular, Eve might have clandestinely tampered with the pairs at some
+time in the past. Then the pairs that Alice and Bob possess might be
+(unbeknownst to Alice and Bob) not perfect |φ+⟩’s, but rather pairs that
+are entangled with qubits in Eve’s possession. Eve can then wait until
+Alice and Bob make their public announcements, and proceed to measure
+her qubits in a manner designed to acquire maximal information about
+the results that Alice and Bob obtained. Alice and Bob must protect
+themselves against this type of attack.
+If Eve has indeed tampered with Alice’s and Bob’s pairs, then the most
+general possible state for an AB pair and a set of E qubits has the form
+
+|Υ⟩ABE = |00⟩AB|e00⟩E + |01⟩AB|e01⟩E
++ |10⟩AB|e10⟩E + |11⟩AB|e11⟩E ,
+(4.100)
+
+where Eve’s states |eij⟩E are neither normalized nor mutually orthogonal.
+Now recall that the defining property or |φ+⟩is that it is an eigenstate
+with eigenvalue +1 of both σ(A)
+1
+σ(B)
+1
+and σ(A)
+3
+σ(B)
+3
+. Suppose that A and
+B are able to verify that the pairs in their possession have this property.
+To satisfy σ(A)
+3
+σ(B)
+3
+= 1, we must have
+
+|Υ⟩AB = |00⟩AB|e00⟩E + |11⟩AB|e11⟩E ,
+(4.101)
+
+and to also satisfy σ(A)
+1
+σ(B)
+1
+= 1, we must have
+
+|Υ⟩ABE =
+1
+√
+
+2(|00⟩AB + |11⟩AB)|e⟩E = |φ+⟩AB|e⟩E .
+(4.102)
+
+We see that it is possible for the AB pairs to be eigenstates of σ(A)
+1
+σ(B)
+1
+and σ(A)
+3
+σ(B)
+3
+only if they are completely unentangled with Eve’s qubits.
+
+
+38
+4 Quantum Entanglement
+
+Therefore, Eve will not be able to learn anything about Alice’s and Bob’s
+measurement results by measuring her qubits. The random key is secure.
+To verify the properties σ(A)
+1
+σ(B)
+1
+= 1 = σ(A)
+3
+σ(B)
+3
+, Alice and Bob
+can sacrifice a portion of their shared key, and publicly compare their
+measurement outcomes. They should find that their results are indeed
+perfectly correlated. If so they will have high statistical confidence that
+Eve is unable to intercept the key. If not, they have detected Eve’s nefar-
+ious activity. They may then discard the key, and make a fresh attempt
+to establish a secure key.
+As I have just presented it, the quantum key distribution protocol seems
+to require entangled pairs shared by Alice and Bob, but this is not really
+so. We might imagine that Alice prepares the |φ+⟩pairs herself, and then
+measures one qubit in each pair before sending the other to Bob. This is
+completely equivalent to a scheme in which Alice prepares one of the four
+states
+
+| ↑z⟩, | ↓z⟩, | ↑x⟩, | ↓x⟩,
+(4.103)
+
+(chosen at random, each occuring with probability 1/4) and sends the
+qubit to Bob. Bob’s measurement and the verification are then carried
+out as before. This scheme (known as the BB84 quantum key distribution
+protocol) is just as secure as the entanglement-based scheme.†
+
+Another intriguing variation is called the “time-reversed EPR” scheme.
+Here both Alice and Bob prepare one of the four states in eq. (4.103),
+and they both send their qubits to Charlie. Then Charlie performs a Bell
+measurement on the pair — that is, he measures σ(A)
+1
+σ(B)
+1
+and σ(A)
+3
+σ(B)
+3
+,
+orthogonally projecting out one of |φ±⟩|ψ±⟩, and he publicly announces
+the result. Since all four of these states are simultaneous eigenstates of
+σ(A)
+1
+σ(B)
+1
+and σ(A)
+3
+σ(B)
+3
+, when Alice and Bob both prepared their spins
+along the same axis (as they do about half the time) they share a single
+bit.‡
+Of course, Charlie could be allied with Eve, but Alice and Bob
+can verify that Charlie and Eve have acquired no information as before,
+by comparing a portion of their key.
+This scheme has the advantage
+that Charlie could operate a central switching station by storing qubits
+received from many parties, and then perform his Bell measurement when
+two of the parties request a secure communication link. (Here we assume
+that Charlie has a stable quantum memory in which qubits can be stored
+
+† Except that in the EPR scheme, Alice and Bob can wait until just before they need
+to talk to generate the key, thus reducing the risk that Eve might at some point
+burglarize Alice’s safe to learn what states Alice prepared (and so infer the key).
+‡ Until Charlie makes his measurement, the states prepared by Bob and Alice are
+totally uncorrelated. A definite correlation (or anti-correlation) is established after
+Charlie performs his measurement.
+
+
+4.5 Quantum cryptography
+39
+
+accurately for as long as necessary.) A secure key can be established even
+if the quantum communication line is down temporarily, as long as both
+parties had the foresight to send their qubits to Charlie on an earlier
+occasion (when the quantum channel was open).
+So far, we have made the unrealistic assumption that the quantum
+communication channel is perfect, but of course in the real world errors
+will occur. Therefore even if Eve has been up to no mischief, Alice and
+Bob will sometimes find that their verification test will fail. But how are
+they to distinguish errors due to imperfections of the channel from errors
+that occur because Eve has been eavesdropping?
+To address this problem, Alice and Bob can enhance their protocol in
+two ways. First they implement (classical) error correction to reduce the
+effective error rate. For example, to establish each bit of their shared
+key they could actually exchange a block of three random bits. If the
+three bits are not all the same, Alice can inform Bob which of the three
+is different than the other two; Bob can flip that bit in his block, and
+then use majority voting to determine a bit value for the block. This way,
+Alice and Bob share the same key bit even if an error occured for one bit
+in the block of three.
+However, error correction alone does not suffice to ensure that Eve has
+acquired negligible information about the key — error correction must
+be supplemented by (classical) privacy amplification. For example, after
+performing error correction so that they are confident that they share the
+same key, Alice and Bob might extract a bit of “superkey” as the parity
+of n key bits. To know anything about the parity of n bits, Eve would
+need to know something about each of the bits. Therefore, the parity bit
+is considerably more secure, on the average, than each of the individual
+key bits.
+If the error rate of the channel is low enough, one can show that quan-
+tum key distribution, supplemented by error correction and privacy am-
+plification, is invulnerable to any attack that Eve might muster (in the
+sense that the information acquired by Eve can be guaranteed to be ar-
+bitrarily small). We will return to the problem of proving the security of
+quantum key distribution in Chapter 7.
+
+4.5.2 No cloning
+
+The security of quantum key distribution is based on an essential differ-
+ence between quantum information and classical information. It is not
+possible to acquire information that distinguishes between nonorthogonal
+quantum states without disturbing the states.
+For example, in the BB84 protocol, Alice sends to Bob any one of the
+four states | ↑z⟩| ↓z⟩| ↑x⟩| ↓x⟩, and Alice and Bob are able to verify that
+
+
+40
+4 Quantum Entanglement
+
+none of their states are perturbed by Eve’s attempt at eavesdropping.
+Suppose, more generally, that |ϕ⟩and |ψ⟩are two nonorthogonal states
+in H (⟨ψ|ϕ⟩̸= 0) and that a unitary transformation U is applied to H⊗HE
+(where HE is a Hilbert space accessible to Eve) that leaves both |ψ⟩and
+|ϕ⟩undisturbed. Then
+
+U :
+|ψ⟩⊗|0⟩E →|ψ⟩⊗|e⟩E ,
+|ϕ⟩⊗|0⟩E →|ϕ⟩⊗|f⟩E ,
+(4.104)
+
+and unitarity implies that
+
+⟨ψ|φ⟩= (E⟨0| ⊗⟨ψ|)(|ϕ⟩⊗|0⟩E)
+= (E⟨e| ⊗⟨ψ|)(|ϕ⟩⊗|f⟩E)
+= ⟨ψ|ϕ⟩⟨e|f⟩.
+(4.105)
+
+Hence, for ⟨ψ|ϕ⟩̸= 0, we have ⟨e|f⟩= 1, and therefore since the states
+are normalized, |e⟩= |f⟩. This means that no measurement in HE can
+reveal any information that distinguishes |ψ⟩from |ϕ⟩. In the BB84 case
+this argument shows that, if Eve does not disturb the states sent by Alice,
+then the state in HE is the same irrespective of which of the four states
+| ↑z⟩, | ↓z⟩, | ↑x⟩, | ↓x⟩is sent by Alice, and therefore Eve learns nothing
+about the key shared by Alice and Bob. On the other hand, if Alice is
+sending to Bob one of the two orthogonal states | ↑z⟩or | ↓z⟩, there is
+nothing to prevent Eve from acquiring a copy of the information (as with
+classical bits).
+We have noted earlier that if we have many identical copies of a qubit,
+then it is possible to measure the mean value of noncommuting observ-
+ables like σ1, σ2, and σ3 to completely determine the density matrix of
+the qubit. Inherent in the conclusion that nonorthogonal state cannot
+be distinguished without disturbing them, then, is the implicit provision
+that it is not possible to make a perfect copy of a qubit. (If we could,
+we would make as many copies as we need to find ⟨σ1⟩, ⟨σ2⟩, and ⟨σ3⟩to
+any specified accuracy.) Let’s now make this point explicit: there is no
+such thing as a perfect quantum Xerox machine.
+Orthogonal quantum states (like classical information) can be reliably
+copied. For example, the unitary transformation that acts as
+
+U :
+|0⟩A|0⟩E →|0⟩A|0⟩E ,
+|1⟩A|0⟩E →|1⟩A|1⟩E ,
+(4.106)
+
+copies the first qubit onto the second if the first qubit is in one of the
+states |0⟩A or |1⟩A. But if instead the first qubit is in the state |ψ⟩=
+a|0⟩A + b|1⟩A, then
+
+U :
+(a|0⟩A + b|1⟩A)|0⟩E
+→a|0⟩A|0⟩E + b|1⟩A|1⟩E .
+(4.107)
+
+
+4.6 Mixed-state entanglement
+41
+
+This is not the state |ψ⟩⊗|ψ⟩(a tensor product of the original and the
+copy); rather it is something very different – an entangled state of the
+two qubits.
+To consider the most general possible quantum Xerox machine, we allow
+the full Hilbert space to be larger than the tensor product of the space of
+the original and the space of the copy. Then the most general “copying”
+unitary transformation acts as
+
+U :
+|ψ⟩A|0⟩E|0⟩F →|ψ⟩A|ψ⟩E|e⟩F
+|ϕ⟩A|0⟩E|0⟩F →|ϕ⟩A|ϕ⟩E|f⟩F .
+(4.108)
+
+Unitarity then implies that
+
+⟨ψ|ϕ⟩= ⟨ψ|ϕ⟩⟨ψ|ϕ⟩⟨e|f⟩;
+(4.109)
+
+therefore, if ⟨ψ|ϕ⟩̸= 0, then
+
+1 = ⟨ψ|ϕ⟩⟨e|f⟩.
+(4.110)
+
+Since the states are normalized, we conclude that
+
+|⟨ψ|ϕ⟩| = 1,
+(4.111)
+
+so that |ψ⟩and |ϕ⟩actually represent the same ray.
+No unitary ma-
+chine can make a copy of both |ϕ⟩and |ψ⟩if |ϕ⟩and |ψ⟩are distinct,
+nonorthogonal states. This result is called the no-cloning theorem.
+
+4.6 Mixed-state entanglement
+
+The crucial property of quantum entanglement is that it cannot be created
+locally. Up to now in this chapter we have limited our attention to the
+properties of entangled pure states, but it is important to recognize that
+mixed states can be entangled, too.
+Recall that a bipartite pure state |Ψ⟩AB is separable if and only if it
+is a product state |Ψ⟩AB = |α⟩A ⊗|β⟩B. We say that a bipartite mixed
+state ρAB is separable if and only if it can be realized as an ensemble of
+separable pure states,
+
+ρAB =
+�
+
+i
+pi (|αi⟩⟨αi|)A ⊗(|βi⟩⟨βi|)B ,
+(4.112)
+
+where the pi’s are positive and sum to one. Alternatively, we may say
+that ρAB is separable if and only if it can be expressed as
+
+ρAB =
+�
+
+i,j
+pijρA,i ⊗ρB,j ,
+(4.113)
+
+
+42
+4 Quantum Entanglement
+
+where each ρA,i and ρB,j is a density operator, and the pij’s are positive
+and sum to one. Thus if a state is separable, the correlations between the
+state of part A and the state of part B are entirely classical, and embodied
+by the joint probability distribution pij. The two criteria eq. (4.112) and
+eq. (4.113) are equivalent because ρA,i and ρB,j can be realized as an
+ensemble of pure states.
+Of course, it may be possible to realize a separable mixed state as an
+ensemble of entangled pure states as well. A simple example is that the
+random state ρ = 1
+
+4I ⊗I of two qubits can be expressed as either
+
+ρ = 1
+
+4 (|00⟩⟨00| + |01⟩⟨10| + |10⟩⟨01| + |11⟩⟨11|)
+(4.114)
+
+(an ensemble of product states) or
+
+ρ = 1
+
+4
+
+�|φ+⟩⟨φ+| + |φ−⟩⟨φ−| + |ψ+⟩⟨ψ+| + |ψ−⟩⟨ψ−|
+�
+
+(4.115)
+
+(an ensemble of maximally entangled states). The state is separable if
+and only if there is some way to represent is as an ensemble of product
+states. As for a pure state, if a mixed state is not separable, we say that
+it is inseparable or entangled.
+Consider two distantly separated parties Alice and Bob who carry out a
+protocol involving local operations and classical communication. That is,
+Alice is permitted to perform quantum operations on her system A, Bob
+is permitted to perform quantum operations on his system B, and Alice
+and Bob are permitted to exchange classical bits as many times as they
+want. But no exchange of qubits is permitted. Then if Alice and Bob
+share a separable state to start with, their state will still be separable at
+the end of the protocol. The reason is that neither a local operation nor
+exchange of a classical bit can increase the Schmidt number of a bipartite
+pure state from the value 1 to a value greater than 1. Of course, Alice
+and Bob might have a mixed state, but in each step of the protocol an
+ensemble of product states is transformed to another ensemble of product
+states. Alice and Bob cannot create entanglement locally if they have
+none to begin with.
+In discussions of entanglement, the concept of a
+protocol that uses only Local Operations and Classical Communication is
+so prevalent that we will find it convenient to use the abbreviation LOCC.
+On the other hand, with LOCC, Alice and Bob can prepare any separa-
+ble state. To prepare ρAB in eq. (4.112), Alice generates random numbers
+to sample the probability distribution {pi}; if outcome i is found, she in-
+forms Bob, and Alice prepares the |αi⟩A while Bob prepares |βi⟩B.
+
+
+4.6 Mixed-state entanglement
+43
+
+4.6.1 Positive-partial-transpose criterion for separability
+
+Now, consider a bipartite density operator ρAB on HA ⊗HB, presented
+as (say) a matrix in some basis. We would like to know whether ρAB is
+separable. How do we decide? It is not obvious how to devise an efficient
+algorithm that will definitively answer whether ρAB can be realized as an
+ensemble of product states. However, it is useful to note that there are
+necessary conditions for separability that are easy to check.
+Recall that relative to a specified orthonormal basis {|i⟩} for a Hilbert
+space H, a transpose operation T can be defined — the transpose acts on
+a basis for the linear operators according to
+
+T : |i⟩⟨j| →(|i⟩⟨j|)T = |j⟩⟨i| ;
+(4.116)
+
+its action on a matrix Mij expressed in this basis is
+�
+MT �
+
+ij = Mji .
+(4.117)
+
+Evidently transposition preserves the trace of the matrix M. If M is
+Hermitian, then its transpose is its complex conjugate, which has the
+same (real) eigenvalues. Therefore, the transpose of a density operator is
+another density operator with the same eigenvalues — the transpose is a
+trace-preserving positive map.
+But we saw in §3.?? that the transpose, although positive, is not com-
+pletely positive; that is, the partial transpose I ⊗T can map a bipartite
+positive operator to an operator that is not positive. For example, the
+maximally entangled state
+
+|Φ⟩=
+1
+√
+
+N
+
+N−1
+�
+
+i=0
+|i⟩A ⊗|i⟩B
+(4.118)
+
+has density operator
+
+ρ = 1
+
+N
+
+�
+
+i,j
+|ii⟩⟨jj| .
+(4.119)
+
+Its partial transpose is
+
+(I ⊗T)(ρ) = 1
+
+N
+
+�
+
+i,j
+|ij⟩⟨ji| = 1
+
+N (SWAP) ;
+(4.120)
+
+the SWAP operator has eigenstates with eigenvalue +1 (symmetric states)
+and eigenstates with eigenvalue −1 (antisymmetric states) — hence it is
+not positive. We will use the notation
+
+ρPT = (I ⊗T)(ρ)
+(4.121)
+
+
+44
+4 Quantum Entanglement
+
+for the partial transpose of the bipartite density operator ρ.
+While the partial transpose is not a positive map in general, it is positive
+acting on separable states. The partial transpose of ρAB in eq. (4.113) is
+
+ρPT
+AB =
+�
+
+i,j
+pijρA,i ⊗ρT
+B,j ;
+(4.122)
+
+since ρT
+B,j is a density operator, so is ρPT
+AB. Thus we arrive at a useful
+necessary condition for separability.
+
+Positive partial-transpose criterion for separability: If ρAB is separa-
+ble, then ρPT
+AB is nonnegative.
+
+We will say that a bipartite density operator is PPT (for “positive partial
+transpose) if its partial transpose is nonnegative.
+Thus, if we are presented with a density operator ρAB, we may compute
+the eigenvalues of ρPT
+AB; if negative eigenvalues are found, then ρAB is
+known to be inseparable. But because the PPT condition is necessary
+but not sufficient for separability, if ρPT
+AB is found to be nonnegative,
+then whether ρAB is separable remains unsettled. The PPT criterion is
+sometimes called the Peres-Horodecki criterion for separability.
+Let’s apply the PPT criterion to a two-qubit state of the form
+
+ρ(λ) = λ|φ+⟩⟨φ+| + 1
+
+4(1 −λ)I .
+(4.123)
+
+This state may also be expressed as
+
+ρ(F)
+=
+F|φ+⟩⟨φ+|
+
++1
+
+3(1 −F)
+�
+|φ−⟩⟨φ−| + |ψ+⟩⟨ψ+| + |ψ−⟩⟨ψ−|
+�
+,(4.124)
+
+where (1−F) = 3
+
+4(1−λ), and as we saw in §3.??, it results from subjecting
+half of the state |φ+⟩to the depolarizing channel with error probability
+p = 1 −F. This state is sometimes called a Werner state with fidelity F.
+Now
+�
+|φ+⟩⟨φ+|
+�PT
+= 1
+
+2(SWAP) = 1
+
+2I −|ψ−⟩⟨ψ−| ,
+(4.125)
+
+where the second equality follows from the property that |φ±⟩, |ψ+⟩(which
+are symmetric) are eigenvalues of SWAP with eigenvalue 1, and |ψ−⟩
+(which is antisymmetric) is an eigenstate of SWAP with eigenvalue −1.
+Since also IPT = I, we see that the partial transpose of a Werner state is
+
+ρ(λ)PT
+=
+λ
+�1
+
+2I −|ψ−⟩⟨ψ−|
+�
++ 1
+
+4(1 −λ)I
+
+=
+1
+4(1 + λ)I −λ|ψ−⟩⟨ψ−| .
+(4.126)
+
+
+4.7 Nonlocality without entanglement
+45
+
+This operator has a negative eigenvalue if λ > 1/3, and we conclude that
+the Werner state is inseparable for λ > 1/3. Therefore, if half of the
+maximally entangled state |φ+⟩is subjected to the depolarizing channel
+with error probability p < 1/2, the resulting state remains entangled.
+Although we won’t prove it here, it turns out that for the case of two-
+qubit states, the PPT criterion is both necessary and sufficient for sepa-
+rability. Thus the Werner state with λ < 1/3 (or F < 1/2) is separable.
+While we found that a bipartite pure state is entangled if and only if
+it violates some Bell inequality, this equivalence does not hold for mixed
+states.
+You will show in Exercise 4.??
+that for a Werner state with
+λ = 1/2 (or any smaller value of λ) there is a local hidden-variable theory
+that fully accounts for the correlations between measurements of Alice’s
+qubit and Bob’s. Thus, Werner states with 1/3 < λ < 1/2 are inseparable
+states that violate no Bell inequality.
+Oddly, though a Werner state with 1/3 < λ < 1/2 is not Bell-inequality
+violating, it is nonetheless a shared resource more powerful than classical
+randomness. You will also show in Exercise 4.?? that by consuming a
+Werner state Alice and Bob can teleport a qubit in an unknown state
+with fidelity
+
+Fteleport = 1
+
+2(1 + λ) .
+(4.127)
+
+This fidelity exceeds the maximal fidelity Fteleport = 2/3 that can be
+achieved without any shared entanglement, for any λ > 1/3 — that is,
+for any inseparable Werner state, whether Bell-inequality violating or not.
+Even if well described by local hidden variables, an entangled mixed state
+can be useful.
+It seems rather strange that shared entangled states described by local
+hidden-variable theory should be a more powerful resource than classical
+shared randomness. Further observations to be discussed in §5.?? will
+deepen our grasp of the situation. There we will find that if Alice and
+Bob share many copies of the Werner state ρ(λ) with 1/3 < λ < 1/2,
+then while local hidden variables provide an adequate description of the
+correlations if Alice and Bob are restricted to measuring the pairs one at
+a time, violations of Bell inequalities still arise if they are permitted to
+perform more general kinds of measurements. These observations illus-
+trate that mixed-state entanglement is a surprisingly subtle and elusive
+concept.
+
+4.7 Nonlocality without entanglement
+
+Quantum entanglement typifies the principle that there are bipartite
+quantum operations that cannot be implemented using only local op-
+
+
+46
+4 Quantum Entanglement
+
+erations and classical communication (LOCC). For example, if Alice and
+Bob share no prior entanglement, they cannot perform Bell measurement
+or prepare the entangled state |φ+⟩AB unless they get together. Now we
+will encounter an interesting surprise: some things that Alice and Bob
+are unable to do with LOCC do not involve quantum entanglement, at
+least not directly.
+Consider a game played by Alice, Bob, and Charlie. Charlie prepares a
+state |ψi⟩AB selected from an ensemble of mutually orthogonal bipartite
+states, and distributes |ψi⟩AB to Alice and Bob. To win the game, Alice
+and Bob must identify the state that Charlie prepared. Of course, if Alice
+and Bob were permitted to unite, they could perform an orthogonal mea-
+surement that would identify the state with certainty, and they would be
+able to win every time. But the rules of the game require Alice and Bob to
+stay separated, and they are forbidden to exchange quantum information
+— only LOCC is allowed. Thus, if Charlie’s ensemble includes entangled
+states, Alice and Bob won’t be able to win in general.
+To make things easier for Alice and Bob, let’s impose a new rule: Char-
+lie is required to prepare a product state
+
+|ψ⟩AB = |αi⟩A ⊗|βi⟩B .
+(4.128)
+
+Now, since Alice has a pure state, and so does Bob, we might expect them
+to be able to devise a winning strategy. But on further reflection, this
+is not so obvious. Though the states {|ψi⟩AB} in Charlie’s ensemble are
+mutually orthogonal, the states {|αi⟩A} that Alice could receive need not
+be mutually orthogonal, and the same is true of the states {|βi⟩B} that
+Bob could receive.
+Indeed, even under the new rules, there is no winning strategy for Alice
+and Bob in general. Though Charlie sends a pure state to Alice and a
+pure state to Bob, there is no way for Alice and Bob, using LOCC, to fully
+decipher the message that Charlie has sent to them. This phenomenon is
+called nonlocality without entanglement.
+The best way to understand nonlocality without entanglement is to con-
+sider an example. Suppose that Alice and Bob share a pair of qutrits (3-
+level quantum systems), and denote the three elements of an orthonormal
+basis for the qutrit by {|0⟩, |1⟩, |2⟩}. In a streamlined notation, Charlie’s
+ensemble of nine mutually orthogonal states is
+
+|ψ⟩1,2
+=
+|0, 0 ± 1⟩,
+|ψ⟩3,4
+=
+|0 ± 1, 2⟩,
+|ψ⟩5,6
+=
+|2, 1 ± 2⟩,
+|ψ⟩7,8
+=
+|1 ± 2, 0⟩,
+|ψ⟩9
+=
+|1, 1⟩.
+(4.129)
+
+
+4.7 Nonlocality without entanglement
+47
+
+(Here, |0, 0 ± 1⟩denotes |0⟩A ⊗
+1
+√
+
+2(|0⟩B ± |1⟩B), etc.) For ease of visual-
+ization, it is very convenient to represent this basis pictorially, as a tiling
+of a square by rectangles:
+
+2
+
+1
+
+0
+
+0
+1
+2
+
+Bob
+
+Alice
+
+|ψ1,2⟩
+
+|ψ3,4⟩
+
+|ψ7,8⟩
+
+|ψ9⟩
+
+|ψ5,6⟩
+
+In the picture, the mutual orthogonality of the elements of Charlie’s basis
+is reflected in the property that the rectangles are nonoverlapping.
+When Charlie prepares one of these 9 states and distributes it, Alice
+receives one of the states
+
+|0⟩, |1⟩, |2⟩, |0± 1⟩, |1 ± 2⟩,
+(4.130)
+
+and similarly for Bob. These states are not mutually orthogonal, and so
+cannot be perfectly distinguished by the recipient.
+For example, Alice might perform an incomplete orthogonal measure-
+ment that distinguishes the state |2⟩from its orthogonal complement.
+Pictorially, this measurement “cuts” the square into two nonoverlapping
+parts. If Charlie prepared one of |ψ5,6⟩, |ψ7,8⟩, then Alice’s outcome could
+be |2⟩⟨2|; in that case the state prepared by her measurement can be
+represented as:
+
+2
+
+0
+1
+2
+
+Bob
+
+Alice
+|ψ7,8⟩
+|ψ5,6⟩
+
+After learning Alice’s measurement outcome, Bob can perform an orthog-
+onal measurement that projects on the basis
+
+{|0⟩, |1 + 2⟩, |1 −2⟩} .
+(4.131)
+
+
+48
+4 Quantum Entanglement
+
+If his outcome is |1 + 2⟩or |1 −2⟩, then Alice and Bob have successfully
+identified Charlie’s state as |ψ5⟩or |ψ6⟩. But if Bob’s outcome is |0⟩, then
+Alice and Bob remain uncertain whether Charlie prepared |ψ7⟩of |ψ8⟩. On
+the other hand, if Charlie prepared one of |ψ1,2⟩, |ψ3,4⟩, |ψ7,8⟩, |ψ9⟩, then
+Alice’s outcome could be |0⟩⟨0| + |1⟩⟨1|; in that case the state prepared
+by her measurement can be represented as:
+
+1
+
+0
+
+0
+1
+2
+
+Bob
+
+Alice
+
+|ψ1,2⟩
+
+|ψ3,4⟩
+
+|ψ7,8⟩
+|ψ9⟩
+
+Once again, Alice and Bob have lost any hope of distinguishing |ψ7⟩from
+|ψ8⟩, but in a few more rounds of LOCC, they can successfully identify
+any of the other five states. Bob projects onto |2⟩or its complement; if he
+finds |2⟩⟨2|, then Alice projects onto |0 ± 1⟩to complete the protocol. If
+Bob’s outcome is |0⟩⟨0| +|1⟩⟨1|, then Alice projects onto {|0⟩, |1⟩}; finally
+Bob measures in either the |0±1⟩basis (if Alice found |0⟩) or the {|0⟩, |1⟩}
+basis (if Alice found |1⟩).
+By choosing one of nine mutually orthogonal product states, Charlie
+has sent two trits of classical information to Alice and Bob. But their
+LOCC protocol, which fails to distinguish |ψ7⟩from |ψ8⟩, has not been
+able to recover all of the information in Charlie’s message. Of course, this
+is just one possible protocol, but one can prove (we won’t here) that no
+LOCC protocol can extract two trits of classical information. The trouble
+is that with LOCC, Alice and Bob cannot fully “dissect” the square into
+nonoverlapping rectangles. This is nonlocality without entanglement.
+
+4.8 Multipartite entanglement
+
+Up until now, we have mostly limited our attention to quantum states
+shared by two parties. We will conclude this chapter with some obser-
+vations about the properties of entanglement shared by three or more
+parties: multipartite entanglement.
+Consider for example the case of a pure state |ψ⟩A1,A2,...An shared by
+n parties A1, A2, . . .An, and suppose that there is no way to divide the
+parties into two smaller camps, where each camp shares a pure state.
+
+
+4.8 Multipartite entanglement
+49
+
+Thus the state is entangled, and furthermore, it can’t be expressed as a
+product of states each involving fewer than n parties. Hence we might
+say that the state exhibits n-party entanglement. If the parties start out
+with an n-fold product state |ψ1⟩A1 ⊗|ψ2⟩A2 ⊗· · ·|ψn⟩An, then there is
+no way for them to assemble the state |ψ⟩A1,A2,...An using LOCC alone —
+quantum communication is required. Indeed, no matter how we divide
+the n parties into two subsystems A and B, quantum communication
+between A and B is needed.
+What if we disallow quantum communication, but we do equip the
+parties with pairwise entanglement that has been established in advance?
+Then for the purpose of constructing the state |ψ⟩A1,A2,...An, it clearly
+sufficies for the first party A1 to share bipartite entanglement with each
+of the other n−1 parties. Party A1 can build the state |ψ⟩A1,A2,...An in her
+own laboratory, and then teleport the corresponding share of the state to
+each of the n−1 other parties. In this sense, then, bipartite entanglement
+and LOCC is as powerful a resource as multiparty entanglement.
+Nonetheless, multipartite entangled states exhibit some qualitatively
+new phenomena that we don’t encounter in the study of bipartite entan-
+glement, such as nonprobabilistic tests of Einstein locality, and entanglement-
+enhanced multiparty communication.
+
+4.8.1 Three quantum boxes
+
+In the wake of the wildly successful experiment with the three coins on
+the table, Alice and Bob are now world famous. They are both tenured
+professors, Alice at Caltech, and Bob at Chicago. They are much too
+important to spend much time in the lab, but they have many graduate
+students and remain scientifically active.
+Their best student, Charlie, who did all the hard work on the coin
+experiment, has graduated and is now an assistant professor at Princeton.
+Alice and Bob would like to nurture Charlie’s career, and help him earn
+tenure. One day, Alice and Bob are chatting on the phone:
+
+Alice: You know, Bob, we really ought to help Charlie. Can you think
+of a neat experiment that the three of us can do together?
+
+Bob: Well, I dunno, Alice. There are a lot of experiments I’d like to do
+with our entangled pairs of qubits. But in each experiment, there’s
+one qubit for me and one for you. It looks like Charlie’s the odd
+man out.
+
+Alice: [Long pause] Bob . . .. Have you ever thought of doing an exper-
+iment with three qubits?
+
+
+50
+4 Quantum Entanglement
+
+Bob’s jaw drops and his pulse races. In a sudden epiphany, his whole
+future career seems mapped out before him.
+Truth be told, Bob was
+beginning to wonder if pairs of qubits were getting to be old hat. Now
+he knows that for the next five years, he will devote himself slavishly to
+performing the definitive three-qubit experiment. By that time, he, Alice,
+and Charlie will have trained another brilliant student, and will be ready
+for a crack at four qubits. Then another student, and another qubit. And
+so on to retirement.
+Here is the sort of three-qubit experiment that Alice and Bob decide
+to try: Alice instructs her technician in her lab at Caltech to prepare
+carefully a state of three quantum boxes. (But Alice doesn’t know exactly
+how the technician does it.) She keeps one box for herself, and she ships
+the other two by quantum express, one to Bob and one to Charlie. Each
+box has a ball inside that can be either black or white, but the box is
+sealed tight shut. The only way to find out what is inside is to open the
+box, but there are two different ways to open it — the box has two doors,
+clearly marked X and Y . When either door opens, a ball pops out whose
+color can be observed. It isn’t possible to open both doors at once.
+Alice, Bob, and Charlie decide to study how the boxes are correlated.
+They conduct many carefully controlled trials.
+Each time, one of the
+three, chosen randomly, opens door X, while the other two open door
+Y. Lucky as ever, Alice, Bob, and Charlie make an astonishing discovery.
+They find that every single time they open the boxes this way, the number
+of black balls they find is always odd.
+That is, Alice, Bob and Charlie find that when they open door X on
+one box and door Y on the other two, the colors of the balls in the boxes
+are guaranteed to be one of
+
+0A0B1C ,
+0A1B0C ,
+1A0B0C ,
+1A1B1C ,
+(4.132)
+
+(0 for white, 1 for black); They never see any of
+
+1A1B0C ,
+1A0B1C ,
+0A1B1C ,
+0A0B0C .
+(4.133)
+
+It makes no difference which of the three boxes is opened through door
+X.
+After a while, Alice, Bob, and Charlie catch on that after opening two
+of the boxes, they can always predict what will happen before they open
+the third box. If the first two balls are the same color, the last ball is sure
+to be black, and if the first two are different colors, the last ball is sure
+to be white. They’ve tried it a zillion times, and it always works!
+
+
+4.8 Multipartite entanglement
+51
+
+Even after all the acclaim showered upon the three-coin experiment,
+Alice, Bob, and Charlie have never quite shaken their attachment to Ein-
+stein locality. One day they are having a three-way conference call:
+
+Alice: You know, guys, sometimes I just can’t decide whether to open
+door X or door Y of my box. I know I have to choose carefully . . .
+If I open door X, that’s sure to disturb the box; so I’ll never know
+what would have happened if I had opened door Y instead. And
+if I open door Y , I’ll never know what I would have found if I had
+opened door X. It’s frustrating!
+
+Bob: Alice, you’re so wrong! Our experiment shows that you can have
+it both ways. Don’t you see? Let’s say that you want to know what
+will happen when you open door X. Then just ask Charlie and me
+to open door Y of our boxes and to tell you what we find. You’ll
+know absolutely for sure, without a doubt, what’s going to happen
+when you open door X. We’ve tested that over and over again, and
+it always works. So why bother to open door X? You can go ahead
+and open door Y instead, and see what you find. That way, you
+really do know the result of opening both doors!
+
+Charlie: But how can you be sure? If Alice opens door Y , she passes
+up the opportunity to open door X. She can’t really ever have it
+both ways. After she opens door Y , we can never check whether
+opening door X would have given the result we expected.
+
+Bob: Oh come on, how can it be otherwise? Look, you don’t really
+believe that what you do to your box in Princeton and I do to mine
+in Chicago can exert any influence on what Alice finds when she
+opens her box in Pasadena, do you? When we open our boxes, we
+can’t be changing anything in Alice’s box; we’re just finding the
+information we need to predict with certainty what Alice is going
+to find.
+
+Charlie: Well, maybe we should do some more experiments to find out
+if you’re right about that.
+
+Indeed, the discovery of the three-box correlation has made Alice and
+Bob even more famous than before, but Charlie hasn’t gotten the credit
+he deserves — he still doesn’t have tenure. No wonder he wants to do
+more experiments! He continues:
+
+Charlie: Here’s something we can try. In all the experiments we’ve
+done up to now, we have always opened door Y on two boxes and
+door X on the other box. Maybe we should try something different.
+
+
+52
+4 Quantum Entanglement
+
+Like, maybe we should see what happens if we open the same door
+on all three boxes. We could try opening three X doors.
+
+Bob: Oh, come on! I’m tired of three boxes. We already know all about
+three boxes. It’s time to move on, and I think Diane is ready to
+help out. Let’s do four boxes!
+
+Alice: No, I think Charlie’s right. We can’t really say that we know
+everything there is to know about three boxes until we’ve experi-
+mented with other ways of opening the doors.
+
+Bob: Forget it. They’ll never fund us! After we’ve put all that effort
+into opening two Y ’s and an X, now we’re going to say we want to
+open three X’s? They’ll say we’ve done whiffnium and now we’re
+proposing whaffnium . . . We’ll sound ridiculous!
+
+Alice: Bob has a point. I think that the only way we can get funding
+to do this experiment is if we can make a prediction about what
+will happen. Then we can say that we’re doing the experiment to
+test the prediction. Now, I’ve heard about some theorists named
+Greenberger, Horne, Zeilinger, and Mermin (GHZM). They’ve been
+thinking a lot about our three-box experiments; maybe they’ll be
+able to suggest something.
+
+Bob: Well, these boxes are my life, and they’re just a bunch of theorists.
+I doubt that they’ll have anything interesting or useful to say. But
+I suppose it doesn’t really matter whether their theory makes any
+sense . . . If we can test it, then even I will accept that we have a
+reason for doing another three-box experiment.
+
+And so it happens that Alice, Bob, and Charlie make the pilgrimage
+to see GHZM. And despite Bob’s deep skepticism, GHZM make a very
+interesting suggestion indeed:
+
+GHZM: Bob says that opening a box in Princeton and a box in Chicago
+can’t possibly have any influence on what will happen when Alice
+opens a box in Pasadena. Well, let’s suppose that he’s right. Now
+you guys are going to do an experiment in which you all open your
+X doors. No one can say what’s going to happen, but we can reason
+this way: Let’s just assume that if you had opened three Y doors,
+you would have found three white balls. Then we can use Bob’s
+argument to see that if you open three X doors instead, you will
+have to find three black balls. It goes like this: if Alice opens X,
+Bob opens Y , and Charlie opens Y , then you know for certain that
+the number of black balls has to be odd. So, if we know that Bob
+
+
+4.8 Multipartite entanglement
+53
+
+and Charlie both would find white when they open door Y , then
+Alice has to find black when she opens door X. Similarly, if Alice
+and Charlie both would find white when they open Y , then Bob has
+to find black when he opens X, and if Alice and Bob both would
+find white when they open Y , then Charlie must find black when
+he opens X. So we see that§
+
+YAYBYC = 000 −→XAXBXC = 111 .
+(4.134)
+
+Don’t you agree?
+
+Bob: Well, maybe that’s logical enough, but what good is it? We don’t
+know what we’re going to find inside a box until we open it. You’ve
+assumed that we know YAYBYC = 000, but we never know that
+ahead of time.
+
+GHZM: Sure, but wait. Yes, you’re right that we can’t know ahead of
+time what we would find if we opened door Y on each box. But
+there are only eight possibilities for three boxes, and we can easily
+list them all. And for each of those eight possibilities for YAYBYC we
+can use the same reasoning as before to infer the value of XAXBXC.
+We obtain a table, like this:
+
+YAYBYC = 000 −→
+XAXBXC = 111
+YAYBYC = 001 −→
+XAXBXC = 001
+YAYBYC = 010 −→
+XAXBXC = 010
+YAYBYC = 100 −→
+XAXBXC = 100
+YAYBYC = 011 −→
+XAXBXC = 100
+YAYBYC = 101 −→
+XAXBXC = 010
+YAYBYC = 110 −→
+XAXBXC = 001
+YAYBYC = 111 −→
+XAXBXC = 111
+(4.135)
+
+Bob: Okay, but so what?
+
+GHZM: There’s something interesting about the table, Bob! Look at
+the values for XAXBXC . . . Every single entry has an odd number
+of 1’s. That’s our prediction: when you all open door X on your
+boxes, you’ll always find an odd number of black balls! Could be
+one, or could be three, but always odd.
+
+Naturally, Alice, Bob, and Charlie are delighted by this insight from
+GHZM. They proceed to propose the experiment, which is approved and
+
+§ Here 0 stands for white and 1 stands for black; YA is what Alice finds when she opens
+door Y on her box, and so on.
+
+
+54
+4 Quantum Entanglement
+
+generously funded. Finally the long awaited day arrives when they are to
+carry out the experiment for the first time. And when Alice, Bob, and
+Charlie each open door X on their boxes, can you guess what they find?
+Three white balls. Whaaaa??!!
+Suspecting an error, Alice and Bob and Charlie repeat the experiment,
+very carefully, over and over and over again. And in every trial, every
+single time, they find an even number of black balls when they open door
+X on all three boxes. Sometimes none, sometimes two, but never one
+and never three. What they find, every single time, is just the opposite
+of what GHZM had predicted would follow from the principle of Einstein
+locality!
+Desperation once again drives Alice, Bob, and Charlie into the library,
+seeking enlightenment. After some study of a quantum mechanics text-
+book, and a thorough interrogation of Alice’s lab technician, they realize
+that their three boxes had been prepared in a GHZM quantum state
+
+|ψ⟩ABC =
+1
+√
+
+2 (|000⟩ABC + |111⟩ABC) ,
+(4.136)
+
+a simultaneous eigenstate with eigenvalue one of the three observables
+
+ZA ⊗ZB ⊗IC ,
+IA ⊗ZB ⊗ZC ,
+XA ⊗XB ⊗XC .
+(4.137)
+
+And since ZX = iY , they realize that this state has the properties
+
+Y A ⊗Y B ⊗XC = −1
+XA ⊗Y B ⊗Y C = −1
+Y A ⊗XB ⊗Y C = −1
+XA ⊗XB ⊗XC = 1 .
+(4.138)
+
+In opening the box through door X or door Y , Alice, Bob, and Charlie
+are measuring the observable X or Y , where the outcome 1 signifies a
+white ball, and the outcome −1 a black ball. Thus if the three qubit state
+eq. (4.136) is prepared, eq. (4.138) says that an odd number of black balls
+will be found if door Y is opened on two boxes and door X on the third,
+while an even number of black balls will be found if door X is opened
+on all three boxes. This behavior, unambiguously predicted by quantum
+mechanics, is just what had seemed so baffling to Alice, Bob, and Charlie,
+and to their fellow die-hard advocates of Einstein locality.
+After much further study of the quantum mechanics textbook, Alice,
+Bob, and Charlie gradually come to recognize the flaw in their reasoning.
+They learn of Bohr’s principle of complementarity, of the irreconcilable
+incompatibility of noncommuting observables. And they recognized that
+
+
+4.8 Multipartite entanglement
+55
+
+to arrive at their prediction, they had postulated an outcome for the
+measurement of Y Y Y , and then proceeded to infer the consequences for
+a measurement of XXX. By failing to heed the insistent admonitions of
+Niels Bohr, they had fallen prey to the most pernicious of fallacies.
+As they had hoped, the experiment of the three boxes brings even
+further acclaim to Alice and Bob, and tenure to Charlie.
+Of course,
+the three-coin experiment had already convincingly struck down Einstein
+locality; even so, the three-box experiment had a different character. In
+the coin experiment, Alice and Bob could uncover any two of the three
+coins, finding any one of four possible configurations: HH, HT, TH, TT.
+Only by carrying out many trials could they amass a convincing statistical
+case for the violation of the Bell inequality. In contrast, in the three-box
+experiment, Alice, Bob, and Charlie had found a result inconsistent with
+Einstein locality in every single trial in which they opened door X on all
+three boxes!
+
+4.8.2 Cat states
+
+The GHZM state studied by Alice, Bob, and Charlie is a natural three-
+qubit generalization of the maximally entangled Bell pair. A Bell pair
+can be characterized as the simultaneous eigenstate of the two commuting
+operators ZZ, whose eigenvalue is the “parity bit” of the pair, and XX,
+whose eigenvalue is the phase bit. (Here we use a compressed notation in
+which the tensor product symbol ⊗is suppressed — e.g., XX denotes the
+operator that simultaneously applies X to both Alice’s qubit and Bob’s.)
+The GHZM state is the simultaneous eigenstate of ZZI, IZZ, and XXX.
+An n-qubit generalization of the GHZM state can be defined, which is
+the simultaneous eigenstate of the n commuting operators
+
+ZZIII . . .I ,
+IZZII . . .I ,
+IIZZI . . .I ,
+. . .
+III . . .IZZ ,
+XX . . .XX .
+(4.139)
+
+Each such simultaneous eigenstate has the form
+
+1
+√
+
+2
+
+�
+|x⟩± |¬x⟩
+�
+,
+(4.140)
+
+where ¬x denotes the complement of the binary string x. Since for large n
+this state is a coherent superposition of two “macroscopically distinguish-
+
+
+56
+4 Quantum Entanglement
+
+able” states, it is called an n-qubit cat state, in homage to Schr¨odinger’s
+cat. The n-qubit cat state has n −1 parity bits, and just one phase bit.
+Some noteworthy properties of cat states are:
+
+• Each qubit is maximally entangled with the rest. That is, if we trace
+over the other n −1 qubits, the qubit’s density operator is ρ = 1
+
+2I.
+For this reason, it is sometimes said that a cat state is a maximally
+entangled state of n qubits.
+
+• But this is a rather misleading locution. Because its parity and phase
+bits are treated quite asymmetrically, the cat is not so profoundly
+entangled as some other multiqubit states that we will encounter in
+Chapter 7. For example, for the cat state with x = 000 . . .0, if we
+trace over n −2 qubits, the density operator of the remaining two
+is
+
+ρ2−qubit = 1
+
+2
+
+�
+|00⟩⟨00| + |11⟩⟨11|
+�
+,
+(4.141)
+
+which has rank two rather than four. Correspondingly, we can ac-
+quire a bit of information about a cat state (one of its parity bits)
+by observing only two of the qubits in the state. Other multiqubit
+states, which might be regarded as more highly entangled than cat
+states, have the property that the density operator of two (or more)
+qubits is proportional to the identity, if we trace over the rest.
+
+• Suppose that Charlie prepares one of the 2n possible cat states and
+distributes it to n parties. Using LOCC, the parties can determine
+all n −1 parity bits of the state — each pary measures Z and all
+broadcast their results. But by measuring Z they destroy the phase
+bit. Alternatively, they can all measure X to determine the phase
+bit, but at the cost of destroying all the parity bits.
+
+• Each party, by applying one of {I, X, Y , Z} can transform a given
+cat state to any one of four other cat states; that is, the party
+can modify the phase bit and one of the n −1 parity bits. All n
+parties, working together, can transform one cat state to any one of
+the 2n mutually orthogonal cat states; for example, one party can
+manipulate the phase bit while each of the the other n −1 parties
+controls a parity bit.
+
+• If the parties unite, the phase bit and all parity bits can be simulta-
+neously measured.
+
+If the parties start out with a product state, the three-qubit cat state
+(for example) can be prepared by executing the quantum circuit:
+
+
+4.8 Multipartite entanglement
+57
+
+phase bit (0, 1)
+
+parity bits ˜x
+
+1
+√
+
+2
+
+�
+|0, ˜x⟩± |1, ˜x⟩
+�
+H
+u
+
+i
+
+u
+
+i
+
+For the n-party case, a similar circuit with n −1 CNOT gates does the
+job. Thus, to prepare the state, it suffices for the first party to visit each
+of the other n −1 parties. By running the circuit in reverse, a cat state
+can be transformed to a product state that can be measured locally.
+
+4.8.3 Entanglement-enhanced communication
+
+An intriguing property of the n-qubit cat state is that its phase bit can
+be manipulated by each one of the n parties that share the state. One
+wonders how this shared resource might be exploited.
+We will describe a setting in which possession of a cat state reduces the
+amount of communication that is required to accomplish a distributed
+information processing task. Suppose that each one of n parties labeled
+by index i = 1, 2, 3, . . ., n resides on a separate planet, and that party i
+possesses some data (a string of bits xi) known only to that party. The
+goal of the parties is to compute a function f (with a one-bit output) that
+depends on all the data:
+
+f(x1, x2, x3, . . ., xn) ∈{0, 1} .
+(4.142)
+
+In this universe, computation is cheap, and communication is expensive.
+Each party has unlimited computational power at her disposal, but since
+no party knows the full input of the function f, no one can compute
+f unless the parties communicate. For this purpose, they are equipped
+with a broadcast channel — if any party speaks, all the others can hear
+her. However, use of the broadcast channel is very expensive, so that the
+parties wish to compute f while making minimal use of the channel.
+With this motivation, we define the classical communication complexity
+CCC[f] of the function f:
+
+CCC[f]= the minimum of bits that must be broadcast (in the worst
+case) for all the parties to know the value of f(x1, x2, x3, . . ., xn).
+
+Here “in the worst case” means that we maximize the number of bits
+of communication required over all possible values for the input strings
+x1, x2, x3, . . ., xn.
+
+
+58
+4 Quantum Entanglement
+
+We are interested in whether using quantum information can reduced
+the amount of communication required to compute a function. Hence
+we contrast the function’s classical communication complexity with its
+quantum communication complexity. There are actually several different
+natural ways to generalize a classical communication setting to a quantum
+setting. In one, to which we return in Chapter 6, the parties are allowed
+to exchange qubits instead of classical bits. Here, we consider a scenario
+in which all communication is via the classical broadcast channel, but the
+parties are allowed to share entangled states that have been prepared in
+advance, and to manipulate their shared entanglement locally. Thus we
+define the quantum communication complexity QCC[f] as
+
+QCC[f]= the minimum of bits that must be broadcast (in the worst
+case) for all the parties to know the value of f(x1, x2, x3, . . ., xn),
+where the parties are permitted to share prior quantum entanglement.
+
+One way to argue that multipartite entanglement can be a useful resource
+is to establish that there are functions f such that
+
+QCC[f] < CCC[f] .
+(4.143)
+
+Here is an example of such a function: Each party holds an m-bit string,
+and they are to compute
+
+n
+�
+
+i=1
+xi (mod 2m) .
+(4.144)
+
+Except that they have been promised that the answer is either 0 or 2m−1;
+therefore, their function has just a one-bit output.
+First consider what strategy the parties should play if they share no
+entanglement. Suppose that parties 2 through n broadcast their data,
+and that the first party computes f and broadcasts the result. But note
+that it is not necessary for the parties to broadcast all of their bits, since
+some of the bits cannot affect the answer. Indeed, the k least significant
+bits are irrelevant as long as
+
+(n −1)
+�
+2k −1
+�
+< 2m−1 ,
+(4.145)
+
+which is satisfied provided that
+
+(n −1)2k ≤2m−1 .
+(4.146)
+
+It suffices then, for parties 2 through n to broadcast their m −k most
+significant bits, where
+
+m −k ≥log2(n −1) + 1 ;
+(4.147)
+
+
+4.9 Manipulating entanglement
+59
+
+including one more bit for the first party to broadcast the answer, we
+conclude that
+
+CCC[f] ≤(n −1)
+�
+log2(n −1) + 1
+�
++ 1 .
+(4.148)
+
+In fact, this protocol is close to optimal — it can be proved that
+
+CCC[f] > n log2 n −n .
+(4.149)
+
+But the amount of communication required can be reduced if the parties
+share an n-qubit cat state, for they can imprint the answer on their shared
+phase bit! Each applies to her qubit the transformation
+
+|0⟩
+→
+|0⟩,
+
+|1⟩
+→
+e2πi(xi/2m)|1⟩.
+(4.150)
+
+Thus the cat state
+
+|cat⟩=
+1
+√
+
+2
+
+�
+|000 . . .0⟩+ |111 . . .1⟩
+�
+(4.151)
+
+is transformed to
+
+|cat′⟩=
+1
+√
+
+2
+
+�
+|000 . . .0⟩+ η|111 . . .1⟩
+�
+,
+(4.152)
+
+where the phase η is
+
+η = exp
+
+�
+
+2πi
+
+�n
+�
+
+i=1
+xi
+
+�
+
+/2m
+�
+
+= (−1)f(x1,x2,...,xn) .
+(4.153)
+
+Thus the fu
+
+4.9 Manipulating entanglement
+
+4.10 Summary
+
+Summary 1.
+Summary 2.
+Summary 3.
+
+4.11 Bibliographical notes
+
+4.12 Exercises
+
+4.1 Hardy’s theorem
+
+
+60
+4 Quantum Entanglement
+
+Bob (in Boston) and Claire (in Chicago) share many identically
+prepared copies of the two-qubit state
+
+|ψ⟩=
+�
+
+(1 −2x) |00⟩+ √x |01⟩+ √x |10⟩,
+(4.154)
+
+where x is a real number between 0 and 1/2. They conduct many
+trials in which each measures his/her qubit in the basis {|0⟩, |1⟩},
+and they learn that if Bob’s outcome is 1 then Claire’s is always 0,
+and if Claire’s outcome is 1 then Bob’s is always 0.
+
+Bob and Claire conduct further experiments in which Bob measures
+in the basis {|0⟩, |1⟩} and Claire measures in the orthonormal basis
+{|ϕ⟩, |ϕ⊥⟩}. They discover that if Bob’s outcome is 0, then Claire’s
+outcome is always ϕ and never ϕ⊥. Similarly, if Claire measures in
+the basis {|0⟩, |1⟩} and Bob measures in the basis {|ϕ⟩, |ϕ⊥⟩}, then
+if Claire’s outcome is 0, Bob’s outcome is always ϕ and never ϕ⊥.
+
+a) Express the basis {|ϕ⟩, |ϕ⊥⟩} in terms of the basis {|0⟩, |1⟩}.
+
+Bob and Claire now wonder what will happen if they both measure
+in the basis {|ϕ⟩, |ϕ⊥⟩}.
+Their friend Albert, a firm believer in
+local realism, predicts that it is impossible for both to obtain the
+outcome ϕ⊥(a prediction known as Hardy’s theorem). Albert argues
+as follows:
+
+When both Bob and Claire measure in the basis {|ϕ⟩, |ϕ⊥⟩}, it
+is reasonable to consider what might have happened if one or
+the other had measured in the basis {|0⟩, |1⟩} instead.
+
+So suppose that Bob and Claire both measure in the basis
+{|ϕ⟩, |ϕ⊥⟩}, and that they both obtain the outcome ϕ⊥. Now if
+Bob had measured in the basis {|0⟩, |1⟩} instead, we can be cer-
+tain that his outcome would have been 1, since experiment has
+shown that if Bob had obtained 0 then Claire could not have
+obtained ϕ⊥.
+Similarly, if Claire had measured in the basis
+{|0⟩, |1⟩}, then she certainly would have obtained the outcome
+1. We conclude that if Bob and Claire both measured in the
+basis {|0⟩, |1⟩}, both would have obtained the outcome 1. But
+this is a contradiction, for experiment has shown that it is not
+possible for both Bob and Claire to obtain the outcome 1 if
+they both measure in the basis {|0⟩, |1⟩}.
+
+We are therefore forced to conclude that if Bob and Claire
+both measure in the basis {|ϕ⟩, |ϕ⊥⟩}, it is impossible for both
+to obtain the outcome ϕ⊥.
+
+
+4.12 Exercises
+61
+
+Though impressed by Albert’s reasoning, Bob and Claire decide to
+investigate what predictions can be inferred from quantum mechan-
+ics.
+
+b) If Bob and Claire both measure in the basis {|ϕ⟩, |ϕ⊥⟩}, what
+is the quantum-mechanical prediction for the probability P(x)
+that both obtain the outcome ϕ⊥?
+c) Find the “maximal violation” of Hardy’s theorem: show that the
+maximal value of P(x) is P[(3−
+√
+
+5)/2] = (5
+√
+
+5−11)/2 ≈.0902.
+d) Bob and Claire conduct an experiment that confirms the pre-
+diction of quantum mechanics. What was wrong with Albert’s
+reasoning?
+
+4.2 Closing the detection loophole
+
+Recall that the CHSH inequality
+
+|⟨ab⟩+ ⟨a′b⟩+ ⟨ab′⟩−⟨a′b′⟩| ≤2
+(4.155)
+
+holds if the random variables a, b, a′b′ take values ±1 and are gov-
+erned by a joint probability distribution. The maximal violation of
+this inequality by the quantum-mechanical predictions occurs when
+the left-hand-side is 2
+√
+
+2, which is achieved if Alice and Bob share
+the maximally entangled state |φ+⟩, a, a′ are measurements of Al-
+ice’s qubit along axes ˆx and ˆz, and b, b′ are measurements of Bob’s
+qubit along axes (ˆx + ˆz)/
+√
+
+2 and (ˆx −ˆz)/
+√
+
+2.
+Alice and Bob have done a beautiful experiment measuring the
+polarizations of entangled photon pairs, and have confirmed the
+CHSH inequality violation predicted by quantum mechanics. Al-
+bert is skeptical. He points out that the detectors used by Alice
+and Bob in their experiment are not very efficient. Usually, when
+Alice detects a photon, Bob does not, and when Bob detects a pho-
+ton, Alice does not. Therefore, they discard the data for most of
+the photon pairs, and retain the results only in the case when two
+photons are detected in coincidence. In their analysis of the data,
+Alice and Bob assume that their results are based on a fair sample of
+the probability distribution governing the measured variables. But
+Albert argues that their conclusions could be evaded if whether a
+photon is detected is correlated with the outcome of the polarization
+measurement.
+Alice and Bob wonder how much they will need to improve their
+detector efficiency to do an experiment that will impress Albert.
+
+Alice can choose to orient her detector along any axis, and if she
+aligns the detector with the axis a, then ideally the detector will
+
+
+62
+4 Quantum Entanglement
+
+click when her qubit’s spin is pointing up along a, but because of
+detector inefficiencies it sometimes fails to click even though the
+qubit points up. For pair number i, let xi ∈{0, 1} be a variable
+indicating whether Alice’s detector would click when aligned with
+a — if there would be a click then xi = 1, and if there would be no
+click then xi = 0. Since the detector is imperfect, xi may be 0 even
+though the qubit points up along a. Similarly, x′
+i ∈{0, 1} indicates
+whether Alice’s detector would click if aligned with a′, yi ∈{0, 1}
+indicates whether Bob’s detector would click if aligned with b and
+y′
+i ∈{0, 1} indicates whether Bob’s detector would click if aligned
+with b′. Under the assumption of local realism, each pair can be
+assigned values of x, x′, y, y′ that are determined by local hidden
+variables.
+Alice and Bob are free to decide how to align their detectors in
+each measurement; therefore they can fairly sample the values of
+x, x′, y, y′ and infer from their measurements the values of
+
+P++(ab)
+=
+N −1
+N
+�
+
+i=1
+xiyi ,
+
+P++(a′b)
+=
+N −1
+N
+�
+
+i=1
+x′
+iyi ,
+
+P++(ab′)
+=
+N −1
+N
+�
+
+i=1
+xiy′
+i ,
+
+P++(a′b′)
+=
+N −1
+N
+�
+
+i=1
+x′
+iy′
+i ,
+(4.156)
+
+where N is the total number of pairs tested.
+Here e.g P++(ab)
+is the probability that both detectors click when Alice and Bob
+orient their detectors along a and b (including the effects of detector
+inefficiency).
+
+a) If x, x′, y, y′ ∈{0, 1}, show that
+
+xy + xy′ + x′y −x′y′ ≤x + y .
+(4.157)
+
+b) Show that
+
+P++(ab) + P++(a′b) + P++(ab′) −P++(a′b′) ≤P+·(a) + P·+(b) ;
+(4.158)
+
+here P+·(a) denotes the probability that Alice’s detector clicks
+if oriented along a, and P·+(b) denotes the probability that
+Bob’s detector clicks if oriented along b.
+
+
+4.12 Exercises
+63
+
+c) Now compare with the predictions of quantum mechanics, where
+Alice’s detector has efficiency ηA and Bob’s detector has effi-
+ciency ηB. This means that Alice’s detector clicks with prob-
+ability P = ηAPperf, where Pperf is the probability of a click if
+her detector were perfect, and similarly for Bob. Choosing the
+a, a′, b, b′ that maximally violate the CHSH inequality, show
+that the quantum-mechanical predictions violate eq. (4.158)
+only if
+
+ηAηB
+ηA + ηB
+>
+1
+1 +
+√
+
+2 .
+(4.159)
+
+Thus, if ηA = ηB, Alice and Bob require detectors with effi-
+ciency above 82.84% to overcome Albert’s objection.
+
+4.3 Teleportation with continuous variables
+One complete orthonormal basis for the Hilbert space of two par-
+ticles on the real line is the (separable) position eigenstate basis
+{|q1⟩⊗|q2⟩}. Another is the entangled basis {|Q, P⟩}, where
+
+|Q, P⟩=
+1
+√
+
+2π
+
+�
+dq eiPq|q⟩⊗|q + Q⟩;
+(4.160)
+
+these are the simultaneous eigenstates of the relative position oper-
+ator Q ≡q2 −q1 and the total momentum operator P ≡p1 + p2.
+
+a) Verify that
+
+⟨Q′, P ′|Q, P⟩= δ(Q′ −Q)δ(P ′ −P) .
+(4.161)
+
+b) Since the states {|Q, P⟩} are a basis, we can expand a position
+eigenstate as
+
+|q1⟩⊗|q2⟩=
+�
+dQdP |Q, P⟩⟨Q, P| (|q1⟩⊗|q2⟩) .
+(4.162)
+
+Evaluate the coefficients ⟨Q, P| (|q1⟩⊗|q2⟩).
+c) Alice and Bob have prepared the entangled state |Q, P⟩AB of
+two particles A and B; Alice has kept particle A and Bob
+has particle B.
+Now Alice has received an unknown single-
+particle wavepacket |ψ⟩C =
+�dq |q⟩C C⟨q|ψ⟩C that she intends
+to teleport to Bob. Design a protocol that they can execute to
+achieve the teleportation. What should Alice measure? What
+information should she send to Bob?
+What should Bob do
+when he receives this information, so that particle B will be
+prepared in the state |ψ⟩B?
+
+
+64
+4 Quantum Entanglement
+
+4.4 Teleportation with mixed states.
+An operational way to define entanglement is that an entangled
+state can be used to teleport an unknown quantum state with better
+fidelity than could be achieved with local operations and classical
+communication only. In this exercise, you will show that there are
+mixed states that are entangled in this sense, yet do not violate any
+Bell inequality. Hence, for mixed states (in contrast to pure states)
+“entangled” and “Bell-inequality-violating” are not equivalent.
+Consider a “noisy” entangled pair with density matrix.
+
+ρ(λ) = (1 −λ)|ψ−⟩⟨ψ−| + λ1
+
+41.
+(4.163)
+
+a) Find the fidelity F that can be attained if the state ρ(λ) is used
+to teleport a qubit from Alice to Bob. [Hint: Recall that you
+showed in an earlier exercise that a “random guess” has fidelity
+F = 1
+
+2.]
+b) For what values of λ is the fidelity found in (a) better than what
+can be achieved if Alice measures her qubit and sends a classical
+message to Bob? [Hint: Earlier, you showed that F = 2/3 can
+be achieved if Alice measures her qubit. In fact this is the best
+possible F attainable with classical communication.]
+c) Compute
+
+Prob(↑ˆn↑ˆm) ≡tr (EA(ˆn)EB( ˆm)ρ(λ)),
+(4.164)
+
+where EA(ˆn) is the projection of Alice’s qubit onto | ↑ˆn⟩and
+EB( ˆm) is the projection of Bob’s qubit onto | ↑ˆm⟩.
+d) Consider the case λ = 1/2. Show that in this case the state ρ(λ)
+violates no Bell inequalities. Hint: It suffices to construct a
+local hidden-variable model that correctly reproduces the spin
+correlations found in (c), for λ = 1/2. Suppose that the hidden
+variable ˆα is uniformly distributed on the unit sphere, and that
+there are functions fA and fB such that
+
+ProbA(↑ˆn) = fA(ˆα · ˆn),
+ProbB(↑ˆm) = fB(ˆα · ˆm).
+(4.165)
+
+The problem is to find fA and fB (where 0 ≤fA,B ≤1) with
+the properties
+�
+
+ˆα
+fA(ˆα · ˆn) = 1/2,
+�
+
+ˆα
+fB(ˆα · ˆm) = 1/2,
+�
+
+ˆα
+fA(ˆα · ˆn)fB(ˆα · ˆm) = Prob(↑ˆn↑ˆm).
+(4.166)
+
+
+4.12 Exercises
+65
+
+4.5 Quantum key distribution
+
+Alice and Bob want to execute a quantum key distribution protocol.
+Alice is equipped to prepare either one of the two states |u⟩or |v⟩.
+These two states, in a suitable basis, can be expressed as
+
+|u⟩=
+�cos α
+sinα
+
+�
+,
+|v⟩=
+�sinα
+cos α
+
+�
+,
+(4.167)
+
+where 0 < α < π/4. Alice decides at random to send either |u⟩
+or |v⟩to Bob, and Bob is to make a measurement to determine
+what she sent. Since the two states are not orthogonal, Bob cannot
+distinguish the states perfectly.
+
+a) Bob realizes that he can’t expect to be able to identify Alice’s
+qubit every time, so he settles for a procedure that is successful
+only some of the time. He performs a POVM with three pos-
+sible outcomes: ¬u, ¬v, or DON’T KNOW. If he obtains the
+result ¬u, he is certain that |v⟩was sent, and if he obtains ¬v,
+he is certain that |u⟩was sent. If the result is DON’T KNOW,
+then his measurement is inconclusive. This POVM is defined
+by the operators
+
+f ¬u = A(I −|u⟩⟨u|) ,
+f ¬v = A(I −|v⟩⟨v|) ,
+fDK = (1 −2A)I + A (|u⟩⟨u| + |v⟩⟨v|) ,
+(4.168)
+
+where A is a positive real number. How should Bob choose
+A to minimize the probability of the outcome DK, and what
+is this minimal DK probability (assuming that Alice chooses
+from {|u⟩, |v⟩} equiprobably)? [Hint: If A is too large, f DK
+will have negative eigenvalues, and eq.(4.168) will not be a
+POVM.]
+
+b) Design a quantum key distribution protocol using Alice’s source
+and Bob’s POVM.
+
+c) Of course, Eve also wants to know what Alice is sending to Bob.
+Hoping that Alice and Bob won’t notice, she intercepts each
+qubit that Alice sends, by performing an orthogonal measure-
+ment that projects onto the basis
+��
+1
+0
+
+�
+,
+�
+0
+1
+
+��
+. If she obtains
+
+the outcome
+�
+1
+0
+
+�
+, she sends the state |u⟩on to Bob, and if she
+
+obtains the outcome
+�
+0
+1
+
+�
+, she sends |v⟩on to Bob. Therefore
+each time Bob’s POVM has a conclusive outcome, Eve knows
+with certainty what that outcome is.
+But Eve’s tampering
+causes detectable errors; sometimes Bob obtains a “conclusive”
+
+
+66
+4 Quantum Entanglement
+
+outcome that actually differs from what Alice sent. What is
+the probability of such an error?
+
+4.6 Minimal disturbance
+
+In Exercise 2.1, we studied a game in which Alice decides at random
+(equiprobably) whether to prepare one of two possible pure states
+of a single qubit, either
+
+|ψ⟩=
+�cos α
+sin α
+
+�
+,
+or
+| ˜ψ⟩=
+�sin α
+cos α
+
+�
+,
+(4.169)
+
+and sends the state to Bob. By performing an orthogonal measure-
+ment in the basis {|0⟩, |1⟩}, Bob can identify the state with minimal
+error probability
+
+(perror)optimal = sin2 α = 1
+
+2(1 −sinθ) ,
+(4.170)
+
+where we have defined θ by
+
+⟨ψ| ˜ψ⟩≡cos θ = sin(2α) .
+(4.171)
+
+But now let’s suppose that Eve wants to eavesdrop on the state as it
+travels from Alice to Bob. Like Bob, she wishes to extract optimal
+information that distinguishes |ψ⟩from | ˜ψ⟩, and she also wants to
+minimize the disturbance introduced by her eavesdropping, so that
+Alice and Bob are not likely to notice that anything is amiss.
+
+Eve realizes that the optimal POVM can be achieved by measure-
+ment operators
+
+M 0 = |φ0⟩⟨0| ,
+M 1 = |φ1⟩⟨1| ,
+(4.172)
+
+where the vectors |φ0⟩, and |φ1⟩are arbitrary. If Eve performs this
+measurement, then Bob receives the state
+
+ρ′ = cos2 α|φ0⟩⟨φ0| + sin2 α|φ1⟩⟨φ1| ,
+(4.173)
+
+if Alice sent |ψ⟩, and the state
+
+˜ρ′ = sin2 α|φ0⟩⟨φ0| + cos2 α|φ1⟩⟨φ1| ,
+(4.174)
+
+if Alice sent | ˜ψ⟩.
+
+Eve wants the average fidelity of the state received by Bob to be as
+large as possible. The quantity that she wants to minimize, which
+
+
+4.12 Exercises
+67
+
+we will call the “disturbance” D, measures how close this average
+fidelity is to one:
+
+D = 1 −1
+
+2(F + ˜F) ,
+(4.175)
+
+where
+
+F = ⟨ψ|ρ′|ψ⟩,
+˜F = ⟨˜ψ|˜ρ′| ˜ψ⟩.
+(4.176)
+
+The purpose of this exercise is to examine how effectively Eve can re-
+duce the disturbance by choosing her measurement operators prop-
+erly.
+
+a) Show that F + ˜F can be expressed as
+
+F + ˜F = ⟨φ0|A|φ0⟩+ ⟨φ1|B|φ1⟩,
+(4.177)
+
+where
+
+A
+=
+�1 −2 cos2 α sin2 α
+cos α sin α
+cos α sinα
+2 cos2 α sin2 α
+
+�
+,
+
+B
+=
+�2 cos2 α sin2 α
+cos α sin α
+cos α sinα
+1 −2 cos2 α sin2 α
+
+�
+. (4.178)
+
+b) Show that if |φ0⟩and |φ1⟩are chosen optimally, the minimal
+disturbance that can be attained is
+
+Dmin(cos2 θ) = 1
+
+2(1 −
+�
+
+1 −cos2 θ + cos4 θ) .
+(4.179)
+
+[Hint: We can choose |φ0⟩and |φ1⟩to maximize the two terms
+in eq. (4.177) independently. The maximal value is the maxi-
+mal eigenvalue of A, which since the eigenvalues sum to 1, can
+be expressed as λmax =
+1
+2
+
+�
+1 +
+√
+
+1 −4 · det A
+�
+.]
+Of course,
+Eve could reduce the disturbance further were she willing to
+settle for a less than optimal probability of guessing Alice’s
+state correctly.
+
+c) Sketch a plot of the function Dmin(cos2 θ). Interpret its value for
+cos θ = 1 and cos θ = 0. For what value of θ is Dmin largest?
+Find Dmin and (perror)optimal for this value of θ.
+
+4.7 Approximate cloning
+
+The no-cloning theorem shows that we can’t build a unitary machine
+that will make a perfect copy of an unknown quantum state. But
+
+
+68
+4 Quantum Entanglement
+
+suppose we are willing to settle for an imperfect copy — what fidelity
+might we achieve?
+
+Consider a machine that acts on three qubit states according to
+
+|000⟩ABC
+→
+
+�2
+
+3|00⟩AB|0⟩C +
+
+�1
+
+3|ψ+⟩AB|1⟩C
+
+|100⟩ABC
+→
+
+�2
+
+3|11⟩AB|1⟩C +
+
+�1
+
+3|ψ+⟩AB|0⟩C . (4.180)
+
+a) Is such a device physically realizable, in principle?
+
+If the machine operates on the initial state |ψ⟩A|00⟩BC, it pro-
+duces an pure entangled state |Ψ⟩ABC of the three qubits.
+But
+if we observe qubit A alone, its final state is the density operator
+ρ′
+A = trBC (|Ψ⟩ABC ABC⟨Ψ|). Similarly, the qubit B, observed in
+isolation, has the final state ρ′
+B. It is easy to see that ρ′
+A = ρ′
+B —
+these are the identical, but imperfect, copies of the input pure state
+|ψ⟩A.
+
+b) The mapping from the initial state |ψ⟩A A⟨ψ| to the final state
+ρ′
+A of qubit A defines a superoperator $. Find an operator-sum
+representation of $.
+
+c) For |ψ⟩A = a|0⟩A + b|1⟩A, find ρ′
+A, and compute its fidelity F ≡
+
+A⟨ψ|ρ′
+A|ψ⟩A.
+
+4.8 We’re so sorry, Uncle Albert
+
+Consider the n-qubit “cat” state
+
+|ψ⟩n =
+
+�1
+
+2 (|000 . . .0⟩+ |111 . . .1⟩) .
+(4.181)
+
+This state can be characterized as the simultaneous eigenstate (with
+eigenvalue 1) of the n operators
+
+σ3 ⊗σ3 ⊗I ⊗I ⊗· · · ⊗I ⊗I ⊗I
+I ⊗σ3 ⊗σ3 ⊗I ⊗· · · ⊗I ⊗I ⊗I
+. . .
+I ⊗I ⊗I ⊗I ⊗· · · ⊗I ⊗σ3 ⊗σ3
+σ1 ⊗σ1 ⊗σ1 ⊗· · · ⊗σ1 ⊗σ1 ⊗σ1
+(4.182)
+
+a) Show that |ψ⟩n is an eigenstate of the operator
+
+(σ1 + iσ2)⊗n + (σ1 −iσ2)⊗n ,
+(4.183)
+
+and compute its eigenvalue.
+
+
+4.12 Exercises
+69
+
+b) If we believe in local hidden variables, then we believe that, for
+each of the n qubits, both σ1 and σ2 have definite values once
+the hidden variables are specified. If so, then what can we say
+about the modulus of (σ1 + iσ2)⊗n or (σ1 −iσ2)⊗n, assuming
+definite values for the hidden variables?
+
+c) From (b), derive an upper bound on
+
+1
+2
+
+���(σ1 + iσ2)⊗n + (σ1 −iσ2)⊗n���
+(4.184)
+
+that follows from the local hidden-variable hypothesis.
+
+d) Compare with (a). What would Einstein say?
+
+4.9 Entanglement manipulation
+
+a) Twenty-five players on the New York Yankees, and twenty-five
+players on the San Diego Padres, want to share a 50-qubit cat
+state. The Yankees prepare a 26-qubit cat state, and give one
+of the qubits to Alice; so do the Padres. Now Alice is to sew the
+states together and prepare the 50-qubit state. What should
+she do? [Hint: Think about stabilizers.]
+
+b) After joining the Yankees, Alice assumed custody of one of the
+qubits in their 25-qubit cat state.
+But today she has been
+traded! Alice is ordered to pull her qubit out of the cat state,
+leaving an undamaged 24-qubit cat state for the other players.
+What should she do? [Hint: Think about stabilizers.]
+
+4.10 Peres-Horodecki criterion in d dimensions
+
+Recall that a Werner state of a pair of qubits can be expressed as
+
+ρ(λ) = λ|φ+⟩⟨φ+| + 1
+
+4(1 −λ)I ,
+(4.185)
+
+and that the partial transpose ρPT
+AB of a bipartite density operator
+ρAB is defined as
+
+ρPT
+AB ≡(IA ⊗TB)(ρAB)
+(4.186)
+
+where T is the transpose operation that acts in the computational
+basis {|i⟩} as
+
+T (|i⟩⟨j|) = |j⟩⟨i| .
+(4.187)
+
+We saw in class that the partial transpose of the Werner state ρ(λ)
+is negative for λ > 1/3; therefore, by the Peres-Horodecki criterion,
+the Werner state is inseparable for λ > 1/3.
+
+
+70
+4 Quantum Entanglement
+
+a) One natural way to generalize the Werner state to a pair of d-
+dimensional systems is to consider
+
+ρΦ(λ) = λ|Φ⟩⟨Φ| + 1
+
+d2 (1 −λ)I ,
+(4.188)
+
+where |Φ⟩is the maximally entangled state
+
+|Φ⟩=
+1
+√
+
+d
+
+d
+�
+
+i=1
+|i⟩⊗|i⟩.
+(4.189)
+
+Show that
+
+(|Φ⟩⟨Φ|)PT = 1
+
+d (I −2Eantisym) ,
+(4.190)
+
+where Eantisym is the projector onto the space that is antisym-
+metric under interchange of the two systems A and B.
+
+b) For what values of λ does the state ρΦ(λ) have a negative partial
+transpose?
+
+c) If the Werner state for two qubits is chosen to be
+
+ρ(λ) = λ|ψ−⟩⟨ψ−| + 1
+
+4(1 −λ)I ,
+(4.191)
+
+then another natural way to generalize the Werner state to a
+pair of d-dimensional systems is to consider
+
+ρanti(λ) = λ
+
+�
+1
+1
+2d(d −1)
+
+�
+
+Eantisym + 1
+
+d2(1 −λ)I . (4.192)
+
+For what values of λ does ρanti(λ) have a negative partial trans-
+pose?
+
+

@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "53",
+  "round": 0,
+  "reviewed_items": [
+    "def-qa-29-expectation-estimation-task",
+    "lem-qa-29-independent-trial-median-bound",
+    "lem-qa-29-certified-natural-logarithm-series",
+    "lem-qa-29-dyadic-parameters-terminate",
+    "thm-qa-29-classical-mc-chebyshev-baseline",
+    "thm-qa-29-counting-is-indicator-expectation",
+    "def-qa-29-coherent-sampler",
+    "lem-qa-29-coherent-sampler-outcome-law",
+    "alg-qa-29-amplitude-counting-consumer",
+    "alg-qa-29-quantum-expectation-estimation",
+    "alg-qa-29-variance-aware-monte-carlo",
+    "thm-qa-29-quantum-expectation-error-cost",
+    "lem-qa-29-positive-mean-dyadic-estimator",
+    "thm-qa-29-variance-aware-guarantee",
+    "thm-qa-29-coherent-query-cost-translation",
+    "cex-qa-29-unavailable-coherent-sampler",
+    "ex-qa-29-bernoulli-expectation"
+  ],
+  "reviewed_pages": [
+    "quantum-sampling-expectation-and-monte-carlo",
+    "quantum-sampling-expectation-and-monte-carlo-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete substantive review found two local algorithm-specification defects and finite/general probability-model gaps in four proofs. These are repairable within the assigned sources without narrowing the approved claims.",
+  "findings": [
+    {
+      "id": "alg-qa-29-amplitude-counting-consumer",
+      "type": "local",
+      "reason": "The input omits the phase-register size M, although the delegated QA13 algorithm requires it and the cited counting guarantee requires M=2^m≥4. Add and forward that parameter."
+    },
+    {
+      "id": "alg-qa-29-variance-aware-monte-carlo",
+      "type": "local",
+      "reason": "After measuring coarse value m=v/σ, B=v/σ−m leaves the second v ambiguous and is zero if read as the same output. Specify that PositiveMean uses fresh sampler executions, independent of m and conditioned on it, and count their preparations."
+    },
+    {
+      "id": "lem-qa-29-independent-trial-median-bound",
+      "type": "prerequisite",
+      "reason": "Proof steps 3.1 and 5.1 apply general expectation linearity to finite weighted-sum expectations without stating the finite-to-general identification. Use finite-space linearity or explicitly invoke cor-expectation-agrees-with-the-finite-weighted-sum."
+    },
+    {
+      "id": "thm-qa-29-classical-mc-chebyshev-baseline",
+      "type": "prerequisite",
+      "reason": "Proof steps 1.1–1.4 apply general expectation and variance suppliers to the finite weighted-sum model without stating their identification. Add the finite expectation bridge or derive these identities from finite sums."
+    },
+    {
+      "id": "lem-qa-29-positive-mean-dyadic-estimator",
+      "type": "prerequisite",
+      "reason": "Proof step 2.1 applies general Hölder to the finite sampler law while F7 uses the finite weighted-sum expectation. State the finite-to-general expectation bridge or use finite Cauchy–Schwarz."
+    },
+    {
+      "id": "thm-qa-29-variance-aware-guarantee",
+      "type": "prerequisite",
+      "reason": "Proof steps 1.2 and 2.1 apply general Chebyshev and expectation linearity to the finite sampler law without stating the finite-to-general identification. Add the finite expectation bridge or derive the finite bounds directly."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-qa-29-positive-mean-dyadic-estimator",
+      "decision": "repair",
+      "reason": "Its PositiveMean use remains compatible with the sampler clarification, but its finite-law Hölder use needs the explicit probability-model bridge."
+    },
+    {
+      "id": "thm-qa-29-variance-aware-guarantee",
+      "decision": "repair",
+      "reason": "The proof uses an independent fresh residual output conditional on coarse m; clarify that draw in the algorithm and state the conditioning in the proof. It also needs the finite expectation bridge."
+    },
+    {
+      "id": "thm-qa-29-coherent-query-cost-translation",
+      "decision": "accept",
+      "reason": "Its formula accounts for total fresh preparations and controlled Grover rounds, so the clarified sampler executions remain covered."
+    },
+    {
+      "id": "quantum-sampling-expectation-and-monte-carlo",
+      "decision": "accept",
+      "reason": "Its overview remains accurate once the estimator interface is clarified; its stated claim scope is preserved."
+    },
+    {
+      "id": "quantum-sampling-expectation-and-monte-carlo-examples",
+      "decision": "accept",
+      "reason": "Its Bernoulli example and sample-only counterexample remain valid with the main page as prerequisite."
+    },
+    {
+      "id": "quantum-optimization-sdp-and-variational-algorithms",
+      "decision": "accept",
+      "reason": "Its page-level prerequisite on the main page is contextual; its current content does not rely on the affected estimator instructions."
+    }
+  ]
+}

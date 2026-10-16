@@ -1,0 +1,57 @@
+6.10 QMA-completeness of the local Hamiltonian problem
+47
+
+quantum analogue of NP: the class of problems such that the solution can be verified
+efficiently with a quantum computer if a suitable “quantum witness” is provided.)
+For the classical case, we’ll recall the notion of a“reduction” of one computational
+problem to another (B reduces to A if a machine that solves A can be used to solve B),
+and then we’ll consider this sequence of reductions:
+
+1. Any problem in NP reduces to CIRCUIT-SAT (already discussed previously); i.e.,
+CIRCUIT-SAT is NP-complete.
+2. CIRCUIT-SAT reduces to 3-SAT (3-SAT is NP-complete).
+3. 3-SAT can be formulated as the problem of finding the ground state energy of a
+classical 3-local Hamiltonian to constant accuracy.
+4. MAX 2-SAT is also NP-hard and can be formulated as the problem of finding the
+ground state energy of a classical 2-local Hamiltonian to constant accuracy.
+5. The classical 2-local Hamiltonian problem is still hard in the case where the Hamil-
+tonian is geometrically local, in three or even in two dimensions (cases of interest for
+describing real spin glasses).
+
+(5) implies that a spin glass will not be able to relax to its ground state efficiently in any
+realistic physical process (which is part of what physicists mean by the word “glass”).
+
+6.10.1 3-SAT is NP-complete
+
+Language: Recall (as discussed earlier) that if f is a uniform family of Boolean functions
+with variable input size, f : {0, 1}∗�→{0, 1}, then the set of input strings accepted by
+f is called a language:
+
+L = {x ∈{0, 1}∗: f(x) = 1}
+(6.232)
+
+NP: We say that a language is in NP if there is a polynomial-size uniform classical circuit
+family (the verifier V (x, y)) such that:
+
+• If x ∈L, then there exists a witness y such that V (x, y) = 1 (completeness).
+• If x /∈L, then, for all y, V (x, y) = 0 (soundness).
+
+Reduction: We say that B reduces to A if there is a polynomial-size uniform classical
+circuit family R mapping x to R(x) such that B accepts x if and only if A accepts R(x).
+This means we can hook up R to a machine that solves A to construct a machine that
+solves B.
+An important problem in NP is CIRCUIT-SAT. The input to the problem is a Boolean
+circuit C (with an n-bit input and G = poly(n) gates), and we are to evaluate the
+Boolean function f(C), where f(C) = 1 if there is an input x such that C(x) = 1,
+f(C) = 0 otherwise. CIRCUIT-SAT is in NP because we can simulate the circuit C.
+Given as a witness the value of x that C accepts, we can verify efficiently that C(x) = 1.
+Furthermore, CIRCUIT-SAT is NP-complete (any problem in NP reduces to CIRCUIT-
+SAT), as we discussed previously. If V (x, .) is the verifier for an NP problem with a fixed
+instance x, we may think of V (x, .) as a circuit whose input is the witness y. Solving the
+CIRCUIT-SAT problem for this Boolean circuit tells us whether there exists a witness
+that the verifier accepts, and therefore solves the NP problem.
+Now we come to a further reduction that we did not discuss previously: CIRCUIT-SAT
+reduces to 3-SAT, and therefore 3-SAT, too, is an NP-complete problem (the Cook-Levin
+theorem). For the SAT problem, the input is a “Boolean formula” with n variables, where
+
+

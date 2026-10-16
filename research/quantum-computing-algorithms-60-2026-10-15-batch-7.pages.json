@@ -1,0 +1,535 @@
+[
+  {
+    "order": 2178,
+    "id": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Qubits, Bloch Sphere, Pauli Algebra, and One-Qubit Gates",
+    "companion": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates-examples",
+    "requires": [
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "registers-tensor-products-and-partial-trace",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "strongly-continuous-semigroups-and-hille-yosida"
+    ],
+    "items": [
+      {
+        "id": "def-qc-qubit-and-bloch-representation",
+        "kind": "definition",
+        "title": "Qubit spaces and states",
+        "statement_or_definition": "The **qubit space** is the one-qubit register $Q_2=\\mathbb C^2$ of [[def-qc-register-and-computational-basis]], with ordered computational basis $(|0\\rangle,|1\\rangle)=(e_0,e_1)$. This basis is orthonormal by [[thm-qc-computational-basis-orthonormal]]. A **qubit state** is a density operator on $Q_2$ in the sense of [[def-qc-density-operator]], namely a non-negative endomorphism of trace one. A **pure qubit state** is a pure-state ray on $Q_2$ in the sense of [[def-qc-pure-state-and-ray]]. The Bloch coordinates and their state-space constraints are defined and proved in the following items on this page.\n\nThe term qubit here names the two-dimensional register and its mathematical state space. No physical preparation or measurement postulate is part of this definition.",
+        "deps": [
+          "def-qc-pure-state-and-ray",
+          "def-qc-density-operator",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_obligations": [
+          "Fix basis order and derive real coefficients from Hermitian trace-one coordinates."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.2, PDF pp.7–8"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "§1.3, PDF pp.7–8"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2, PDF pp.1–2"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the basis and state spaces are finite and explicit."
+      },
+      {
+        "id": "def-qc-pauli-matrices",
+        "kind": "definition",
+        "title": "The Pauli matrices",
+        "statement_or_definition": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+        "deps": [
+          "def-qc-qubit-and-bloch-representation"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Verify adjoints, products and traces directly using the root-linear-first matrix convention."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.2.1, PDF pp.10–11"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "Appendix A.9, PDF p.198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; these are explicit finite matrices."
+      },
+      {
+        "id": "thm-qc-pauli-algebra",
+        "kind": "theorem",
+        "title": "Pauli matrix algebra and trace identities",
+        "statement_or_definition": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+        "deps": [
+          "def-qc-pauli-matrices",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-trace-of-a-square-matrix",
+          "thm-finite-dimensional-isometry-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_obligations": [
+          "Compute all nine products and track the sign determined by the displayed Y matrix."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.2.1, PDF pp.10–11"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "Appendix A.9, PDF p.198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all calculations are finite matrix products.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-bloch-coordinate-map",
+        "kind": "definition",
+        "title": "Bloch coordinate maps",
+        "statement_or_definition": "Let $Q_2$ be the qubit space of [[def-qc-qubit-and-bloch-representation]], and let $\\rho$ be a density operator on $Q_2$ in the sense of [[def-qc-density-operator]]. Define its candidate Bloch coordinates in $\\mathbb C^3$ by\n$$r_j(\\rho):=\\operatorname{tr}(\\rho\\sigma_j)\\quad(j\\in\\{x,y,z\\}),\\qquad \\mathbf r(\\rho):=(r_x(\\rho),r_y(\\rho),r_z(\\rho)).$$\nFor any $\\mathbf r=(r_x,r_y,r_z)\\in\\mathbb R^3$, define the associated Hermitian-matrix candidate\n$$\\rho(\\mathbf r):=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nWrite $\\mathbf r\\cdot\\boldsymbol{\\sigma}:=r_xX+r_yY+r_zZ$ and\n$$\\|\\mathbf r\\|_2:=\\sqrt{r_x^2+r_y^2+r_z^2}.$$\nThe next theorem proves that these trace coordinates are real and that every Hermitian trace-one $2\\times2$ matrix is uniquely $\\rho(\\mathbf r)$; the positivity theorem determines which real-coordinate candidates are states.",
+        "deps": [
+          "def-qc-qubit-and-bloch-representation",
+          "def-qc-pauli-matrices",
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix"
+        ],
+        "justified_by": [
+          "thm-qc-bloch-coordinate-existence-and-uniqueness"
+        ],
+        "dependency_level": 4,
+        "proof_obligations": [
+          "Show coordinates are real and recover rho from the orthogonal Pauli basis."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.3.2, PDF pp.21–22"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "Appendix A.9, PDF p.198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the coordinates are finite and explicit."
+      },
+      {
+        "id": "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "kind": "definition",
+        "title": "Exact one-qubit gates and rotations",
+        "statement_or_definition": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+        "deps": [
+          "def-qc-pauli-matrices",
+          "def-qc-bloch-coordinate-map",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-finite-dimensional-isometry-characterisations",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+          "lem-exponential-series-of-a-bounded-operator",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "justified_by": [
+          "thm-qc-axis-rotation-pauli-formula"
+        ],
+        "dependency_level": 5,
+        "proof_obligations": [
+          "State angle, axis and basis conventions and verify each matrix is unitary; controlled gates retain displayed scalars."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.2.1, PDF pp.10–11"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "§1.4 and Appendix A.9, PDF pp.9 and 198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; finite-dimensional boundedness and convergent power series are choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-bloch-coordinate-existence-and-uniqueness",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of Bloch coordinates",
+        "statement_or_definition": "For every $\\mathbf r\\in\\mathbb R^3$, the matrix $\\rho(\\mathbf r)$ of [[def-qc-bloch-coordinate-map]] is Hermitian with trace one. Conversely, every Hermitian trace-one matrix $\\rho\\in M_2(\\mathbb C)$ has a unique vector $\\mathbf r\\in\\mathbb R^3$ such that\n$$\\rho=\\rho(\\mathbf r)=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nFor a qubit density operator this vector is exactly $(\\operatorname{tr}(\\rho X),\\operatorname{tr}(\\rho Y),\\operatorname{tr}(\\rho Z))$, the coordinate map of [[def-qc-bloch-coordinate-map]]. In particular all three trace coordinates of every density operator are real.",
+        "deps": [
+          "def-qc-bloch-coordinate-map",
+          "thm-qc-pauli-algebra",
+          "def-qc-pauli-matrices",
+          "def-qc-qubit-and-bloch-representation",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-density-operator",
+          "def-non-negative-and-positive-operator",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_obligations": [
+          "Use {I,X,Y,Z} as an orthogonal real basis of Hermitian 2x2 matrices."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.3.2, PDF pp.21–22"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "Appendix A.9, PDF p.198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; only explicit two-dimensional coordinates are used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-axis-rotation-pauli-formula",
+        "kind": "theorem",
+        "title": "Pauli formula for an axis rotation",
+        "statement_or_definition": "For $\\theta\\in\\mathbb R$ and $\\mathbf n=(n_x,n_y,n_z)\\in\\mathbb R^3$ with $\\|\\mathbf n\\|_2=1$, put $\\Sigma=\\mathbf n\\cdot\\boldsymbol{\\sigma}=n_xX+n_yY+n_zZ$. Then\n$$R_{\\mathbf n}(\\theta)=\\exp\\!\\left(-\\frac{i\\theta}{2}\\Sigma\\right)=\\cos(\\theta/2)I-i\\sin(\\theta/2)\\Sigma,$$\nand $R_{\\mathbf n}(\\theta)$ is unitary. For the endpoint $\\theta=0$, it equals $I$.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qc-pauli-algebra",
+          "def-qc-qubit-and-bloch-representation",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-sine-and-cosine-by-power-series",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "lem-exponential-series-of-a-bounded-operator",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+          "thm-finite-dimensional-isometry-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Use (n·sigma)^2=I in the exponential series and multiply by the adjoint."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.2.1, PDF pp.10–11, Eqs. (2.29)–(2.31)"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "§1.4 and Appendix A.9, PDF pp.9 and 198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof uses norm-convergent finite-dimensional matrix series.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-hadamard-pauli-conjugation",
+        "kind": "theorem",
+        "title": "Hadamard conjugation of the Pauli matrices",
+        "statement_or_definition": "For $H$ as defined in [[def-qc-one-qubit-gate-alphabet-and-rotations]],\n$$HXH=Z,\\qquad HZH=X,\\qquad HYH=-Y.$$\nMoreover, if $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$ and $|-\\rangle=(|0\\rangle-|1\\rangle)/\\sqrt2$, then $H|0\\rangle=|+\\rangle$, $H|1\\rangle=|-\\rangle$, and $|+\\rangle,|-\\rangle$ are the $+1$ and $-1$ eigenvectors of $X$, respectively. Thus $H$ sends the computational basis to the $X$-eigenbasis.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qc-pauli-algebra",
+          "def-qc-pauli-matrices",
+          "def-qc-qubit-and-bloch-representation",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Multiply the stated matrices and verify the minus sign and normalization."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.2.1, PDF pp.10–11"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "§1.4, PDF p.9"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF p.3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof is a finite $2\\times2$ matrix calculation.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-bloch-positivity-ball",
+        "kind": "theorem",
+        "title": "The Bloch ball is exactly the qubit density-state space",
+        "statement_or_definition": "For every $\\mathbf r\\in\\mathbb R^3$, $\\rho(\\mathbf r)$ from [[def-qc-bloch-coordinate-map]] is a qubit density operator if and only if $\\|\\mathbf r\\|_2\\le1$. Its eigenvalues, counted with multiplicity, are\n$$\\lambda_\\pm=\\frac{1\\pm\\|\\mathbf r\\|_2}{2}.$$\nThe **Bloch ball** is $\\{\\mathbf r\\in\\mathbb R^3:\\|\\mathbf r\\|_2\\le1\\}$; its boundary $\\{\\|\\mathbf r\\|_2=1\\}$ is the **Bloch sphere**.",
+        "deps": [
+          "def-qc-bloch-coordinate-map",
+          "thm-qc-bloch-coordinate-existence-and-uniqueness",
+          "thm-qc-pauli-algebra",
+          "def-qc-pauli-matrices",
+          "def-qc-density-operator",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-operator-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Square r·sigma using anticommutation and compute its eigenvalues, including r=0."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.3.2, PDF pp.21–22"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "Appendix A.9, PDF p.198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3, Eq. (1.3)"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the only spectral input is the finite-dimensional Hermitian spectral theorem.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-bloch-purity-sphere",
+        "kind": "theorem",
+        "title": "Purity is the boundary of the Bloch ball",
+        "statement_or_definition": "If $\\rho$ is a qubit density operator and $\\mathbf r$ is its unique Bloch vector, then\n$$\\operatorname{tr}(\\rho^2)=\\frac{1+\\|\\mathbf r\\|_2^2}{2}.$$\nThe state $\\rho$ is pure, meaning it is the projector of a pure-state ray, if and only if $\\|\\mathbf r\\|_2=1$.",
+        "deps": [
+          "def-qc-bloch-coordinate-map",
+          "thm-qc-bloch-coordinate-existence-and-uniqueness",
+          "thm-qc-pauli-algebra",
+          "def-qc-density-operator",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "thm-qc-bloch-positivity-ball",
+          "thm-non-negative-operator-characterisations",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "For a density, eigenvalues are nonnegative and sum one, so tr(rho²)=1 iff precisely one eigenvalue is one; use rank-one density/ray theorem. Pauli trace multiplication gives the displayed formula."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.3.2, PDF pp.21–22"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "Appendix A.9, PDF p.198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the spectral statement is finite-dimensional and choice-free.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2179,
+    "id": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Qubits, Bloch Sphere, Pauli Algebra, and One-Qubit Gates — Examples",
+    "companion": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+    "requires": [
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-zero-plus-bloch-and-hadamard",
+        "kind": "example",
+        "title": "Bloch coordinates of |0> and H|0>",
+        "statement_or_definition": "Let $\\rho_0=|0\\rangle\\langle0|$. Apply $H$ to obtain $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$ and $\\rho_+=|+\\rangle\\langle+|$. The Bloch vectors are $(0,0,1)$ and $(1,0,0)$, respectively, and both states lie on the Bloch sphere.",
+        "deps": [
+          "def-qc-qubit-and-bloch-representation",
+          "def-qc-pure-state-and-ray",
+          "def-qc-density-operator",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-bloch-coordinate-map",
+          "thm-qc-bloch-coordinate-existence-and-uniqueness",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qc-bloch-purity-sphere",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "proof_obligations": [
+          "Compute the three Pauli expectations and verify the radius and purity identities."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles (updated July 2015)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+              "locator": "§2.3.2, PDF pp.21–22"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415v6",
+              "locator": "§1.4 and Appendix A.9, PDF pp.9 and 198"
+            },
+            {
+              "title": "Aram Harrow, 6.443/8.371/18.436 Quantum Information Science II, Lecture 1: Quantum states and operations (2018)",
+              "url": "https://web.mit.edu/8.371/www/lectures/lect01.pdf",
+              "locator": "§1.2.1, PDF pp.2–3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; both checks are exact two-dimensional matrix calculations.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

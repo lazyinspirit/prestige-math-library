@@ -1,0 +1,517 @@
+[
+  {
+    "order": 2168,
+    "id": "registers-tensor-products-and-partial-trace",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Registers, Tensor Products, and Partial Trace",
+    "companion": "registers-tensor-products-and-partial-trace-examples",
+    "requires": [
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "hilbert-space-geometry-and-riesz-representation",
+      "inner-product-spaces-and-orthogonality",
+      "linear-independence-bases-and-dimension",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "tensor-products-of-modules",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-qc-register-and-computational-basis",
+        "kind": "definition",
+        "title": "Finite registers and their ordered computational bases",
+        "statement": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-function-space",
+          "lem-standard-basis-of-f-n",
+          "prop-standard-coordinate-inner-products",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-commutative-ring-module-structure-on-a-tensor-product",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps"
+        ],
+        "justified_by": [
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-trace-pairing-nondegenerate",
+        "kind": "lemma",
+        "title": "The trace pairing on a finite endomorphism space is nondegenerate",
+        "statement": "Let $V$ be a finite-dimensional complex vector space. If $D:V\\to V$ is linear\nand $\\operatorname{tr}(D\\circ A)=0$ for every linear map $A:V\\to V$, then $D=0$.\nEquivalently, the trace pairing $(D,A)\\mapsto\\operatorname{tr}(D\\circ A)$\nhas the property that its only first input pairing to zero with every second\ninput is $D=0$. This includes the zero space.",
+        "deps": [
+          "def-dimension",
+          "def-linear-map",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "thm-matrix-of-a-composite-is-the-product",
+          "def-matrix-units",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": {
+            "references": [
+              {
+                "title": "John Watrous, The Theory of Quantum Information",
+                "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+              },
+              {
+                "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.7",
+                "url": "https://arxiv.org/pdf/1907.09415"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-ordered-bitstring-encoding",
+        "kind": "definition",
+        "title": "Big-endian encoding of ordered bit strings",
+        "statement": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+        "deps": [
+          "def-qc-register-and-computational-basis"
+        ],
+        "justified_by": [
+          "thm-qc-bitstring-index-is-bijection"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qc-tensor-register-and-permutation",
+        "kind": "definition",
+        "title": "Ordered tensor registers, their inner product, and wire permutations",
+        "statement": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-commutative-ring-module-structure-on-a-tensor-product",
+          "thm-tensor-product-basis-from-bases",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "cor-tensor-products-of-finite-free-modules-and-dimension",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-computational-basis-orthonormal",
+        "kind": "theorem",
+        "title": "The computational basis is orthonormal",
+        "statement": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "prop-standard-coordinate-inner-products",
+          "lem-standard-basis-of-f-n"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-partial-trace",
+        "kind": "definition",
+        "title": "Partial trace over a finite tensor factor",
+        "statement": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+        "deps": [
+          "def-qc-tensor-register-and-permutation",
+          "def-trace-of-an-endomorphism",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "def-linear-map"
+        ],
+        "justified_by": [
+          "thm-qc-partial-trace-characterization-and-basis-independence"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-tensor-map",
+        "kind": "definition",
+        "title": "Tensor products of finitely many linear maps",
+        "statement": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+        "deps": [
+          "def-qc-tensor-register-and-permutation",
+          "def-linear-map",
+          "thm-tensor-product-basis-from-bases",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-commutative-ring-module-structure-on-a-tensor-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tensor-product-basis-and-dimension",
+        "kind": "lemma",
+        "title": "The product basis is orthonormal and tensor dimensions multiply",
+        "statement": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+        "deps": [
+          "def-qc-tensor-register-and-permutation",
+          "thm-tensor-product-basis-from-bases",
+          "cor-tensor-products-of-finite-free-modules-and-dimension",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-bitstring-index-is-bijection",
+        "kind": "theorem",
+        "title": "Big-endian bit-string indices are bijective",
+        "statement": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+        "deps": [
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-induction-principle",
+          "def-natural-numbers"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "induction"
+      },
+      {
+        "id": "thm-qc-partial-trace-characterization-and-basis-independence",
+        "kind": "theorem",
+        "title": "The partial trace is characterized by the trace pairing and is basis-independent",
+        "statement": "For finite-dimensional complex inner-product spaces $H_A,H_B$, the partial\ntrace $\\operatorname{Tr}_B:\\operatorname{End}(H_A\\otimes H_B)\\to\n\\operatorname{End}(H_A)$ is the unique linear map satisfying\n\n$$\\operatorname{tr}\\bigl((\\operatorname{Tr}_B R)\\circ T\\bigr)=\\operatorname{tr}\\bigl(R\\circ(T\\otimes I_{H_B})\\bigr)\\quad\\text{for every }R\\in\\operatorname{End}(H_A\\otimes H_B)\\text{ and }T\\in\\operatorname{End}(H_A).$$\n\nHere $I_{H_B}$ is the identity map $y\\mapsto y$ on $H_B$; $\\operatorname{End}$\nis the notation defined in [[def-qc-partial-trace]].\n\nIts coordinate formula is independent of the chosen ordered orthonormal basis\nof $H_B$. The assertion includes zero-dimensional factors.",
+        "deps": [
+          "lem-composition-and-identity-linear-maps",
+          "def-qc-partial-trace",
+          "def-qc-tensor-map",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-linear-map",
+          "def-trace-of-an-endomorphism",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix",
+          "thm-matrix-of-a-composite-is-the-product",
+          "lem-qc-trace-pairing-nondegenerate",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tensor-map-composition-and-adjoint",
+        "kind": "theorem",
+        "title": "Tensor maps preserve composition, identities, and adjoints",
+        "statement": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+        "deps": [
+          "lem-composition-and-identity-linear-maps",
+          "def-qc-tensor-map",
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-wire-permutation-is-unitary",
+        "kind": "theorem",
+        "title": "Finite wire permutations are unitary basis permutations",
+        "statement": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]].",
+        "deps": [
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Appendix A.6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-partial-trace-positive-and-trace-preserving",
+        "kind": "theorem",
+        "title": "The partial trace preserves non-negativity and total trace",
+        "statement": "For finite-dimensional complex inner-product spaces $H_A,H_B$ and a\nnon-negative operator $R\\in\\operatorname{End}(H_A\\otimes H_B)$,\n$\\operatorname{Tr}_B(R)$ is non-negative and\n\n$$\\operatorname{tr}(\\operatorname{Tr}_B(R))=\\operatorname{tr}(R).$$\n\nHere $\\operatorname{End}(H)$ is the set of linear maps $H\\to H$ as in\n[[def-qc-partial-trace]], $I_H$ denotes the identity map $x\\mapsto x$, and both\nconclusions include zero-dimensional factors.",
+        "deps": [
+          "def-qc-partial-trace",
+          "def-qc-tensor-map",
+          "def-real-and-complex-inner-product-space",
+          "def-non-negative-and-positive-operator",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "lem-composition-and-identity-linear-maps",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2169,
+    "id": "registers-tensor-products-and-partial-trace-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Registers, Tensor Products, and Partial Trace — Examples",
+    "companion": "registers-tensor-products-and-partial-trace",
+    "requires": [
+      "registers-tensor-products-and-partial-trace"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-register-endian-partial-trace",
+        "kind": "example",
+        "title": "Register endianness and a two-qubit partial trace",
+        "statement": "Take two qubit factors with ordered bases $(e_0,e_1)$, and order the product\nbasis lexicographically as $(e_0\\otimes e_0,e_0\\otimes e_1,\ne_1\\otimes e_0,e_1\\otimes e_1)$. Let\n$|\\Phi^+\\rangle=(|00\\rangle+|11\\rangle)/\\sqrt2$ and\n$R=|\\Phi^+\\rangle\\langle\\Phi^+|$. Its matrix in this basis is\n$$R=\\frac12\\begin{pmatrix}1&0&0&1\\\\0&0&0&0\\\\0&0&0&0\\\\1&0&0&1\\end{pmatrix}.$$\nThe big-endian index of $101$ is $5$, and tracing out the second factor gives\n$\\operatorname{diag}(1/2,1/2)$, whose trace is $1$.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "thm-qc-bitstring-index-is-bijection",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-dirac-notation-coordinate-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§2.1.1–2.1.3, PDF pp.66–79"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

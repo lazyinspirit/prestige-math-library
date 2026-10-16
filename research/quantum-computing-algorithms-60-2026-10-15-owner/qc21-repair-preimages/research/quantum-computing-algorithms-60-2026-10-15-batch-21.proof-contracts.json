@@ -1,0 +1,2357 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "21",
+  "scope": [
+    "def-qc-local-stochastic-fault-set-law",
+    "lem-qc-local-stochastic-fault-witness-bound",
+    "def-qc-code-deviation-and-spread",
+    "def-qc-finite-channel-location-schedule",
+    "def-qc-noise-channel-model",
+    "lem-qc-noise-channel-model-composes-with-circuit-semantics",
+    "def-qc-fault-location-path-and-rectangle",
+    "lem-qc-disjoint-fault-location-events-are-independent",
+    "def-qc-ft-gadget-and-proper-code-contract",
+    "lem-qc-planar-mw-recovery-failure-yields-half-error-path",
+    "def-qc-level-r-good-and-bad-rectangles",
+    "def-qc-local-stochastic-noise-model",
+    "thm-qc-explicit-proper-code-and-universal-gadgets",
+    "thm-qc-planar-surface-code-iid-z-memory-bound",
+    "lem-qc-recursive-bad-rectangle-probability",
+    "lem-qc-sparse-fault-path-implies-code-deviation",
+    "thm-qc-t1-extended-rectangle-threshold",
+    "thm-qc-local-stochastic-concatenated-threshold",
+    "thm-qc-proper-code-concatenated-threshold",
+    "ex-qc-surface-memory-bound-hypotheses"
+  ],
+  "contracts": {
+    "def-qc-local-stochastic-fault-set-law": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition: For $S=\\varnothing$, the event is the whole sample space and the bound is $1=\\eta^0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition: At $\\eta=0$, every nonempty specified fault set has probability 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition: At $\\eta=1$, the bound is 1 and imposes no stronger restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition: The law defines the full range $\\eta\\in[0,1]$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "lem-qc-local-stochastic-fault-witness-bound": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-local-stochastic-fault-set-law",
+          "source_section": "Definition",
+          "quote": "\\mathbb P\\{\\omega\\in\\Omega:S\\subseteq F(\\omega)\\}\\le \\eta^{|S|}",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For a leaf $v$, its single location is a witness set $S$ whose fault forces $v$ to be bad. At depth zero there is one such witness, its size is $1=(q+1)^0$, and [F1] bounds the bad probability by $\\eta$.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Suppose a depth-$(r+1)$ node is bad. It has a $(q+1)$-subset $J$ of bad children. For each child $j\\in J$, select one witness set $S_j$ that forces that child to be bad. The child location sets are disjoint, so $S=\\bigcup_{j\\in J}S_j$ has size $(q+1)(q+1)^r=(q+1)^{r+1}$ and its occurrence forces the parent to be bad. There are at most $A w_r^{q+1}$ such witness sets if $w_r$ bounds their number at depth $r$. Only finite selection from finite sets is used.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The witness-count recurrence $w_0=1$, $w_{r+1}\\le A w_r^{q+1}$ gives $w_r\\le A^{((q+1)^r-1)/q}$. This follows by induction: it is equality at $r=0$, and substituting the bound at level $r$ gives exponent $1+(q+1)((q+1)^r-1)/q=((q+1)^{r+1}-1)/q$.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Each fixed witness set has probability at most $\\eta^{(q+1)^r}$ by [F1]. The union bound over all witnesses gives $\\mathbb P(\\text{root bad})\\le A^{((q+1)^r-1)/q}\\eta^{(q+1)^r}=A^{-1/q}(A^{1/q}\\eta)^{(q+1)^r}$. Since $A\\eta^q<1$, the base $A^{1/q}\\eta$ is below one, so the bound tends to zero.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats depth zero and its single location witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 gives zero bad probability when $\\eta=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The boundary $q=1$ is included in $1\\le q<a$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: When $A=1$, the displayed bound reduces to $\\eta^{(q+1)^r}$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The strict boundary $A\\eta^q=1$ is excluded because decay is not implied."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only finite selection among finitely many child witness sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "def-qc-code-deviation-and-spread": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition: At $s=0$, the supported-operator span is the scalar identity span."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition: For $s\\ge m$, every block operator is supported on at most $s$ coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "def-qc-finite-channel-location-schedule": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "A **quantum channel** from $H$ to $K$ is a complex-linear map",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-channels-compose-and-tensor",
+          "source_section": "Statement",
+          "quote": "Then $\\Psi\\circ\\Phi$ is a channel.",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-local-operator-support-and-weight",
+          "source_section": "Definition",
+          "quote": "\\Pi_S E\\Pi_S^{-1}=E_S\\otimes I_{S^c}",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Each $\\Phi_{\\ell_t}$ is a complex-linear endomorphism of $\\mathcal L(H)$ by [F1] and is assigned its declared local support by [F3], so the displayed finite chronological composition is well-typed; for $M=0$ it is the identity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For $M>0$, repeated application of [F2] shows the composition is completely positive and trace-preserving. For $M=0$, tensoring the identity with any finite reference identity leaves every positive operator positive, and $\\operatorname{tr}(\\operatorname{id}(X))=\\operatorname{tr}(X)$, so the identity is a channel. Thus every schedule has a well-defined channel denotation.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "empty-schedule-identity",
+          "status": "checked",
+          "claim": "When M=0, the denotation is id_L(H), which is completely positive and trace-preserving.",
+          "inputs": [
+            "2.1"
+          ],
+          "evidence": "Verification step 2.1."
+        },
+        {
+          "id": "single-slot-schedule",
+          "status": "checked",
+          "claim": "When M=1, the denotation is the supplied full-register channel Phi_l1.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "Verification steps 1.1 and 2.1."
+        }
+      ],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 2.1 proves the empty schedule denotes the identity channel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "M=0 is the empty schedule handled in Verification step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "M=1 is the single channel slot; Verification steps 1.1 and 2.1 type and close its denotation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The register is required to be nonzero and no degenerate channel parameter is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The schedule definition has no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The schedule is a supplied finite ordered list and the proof selects no element from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "def-qc-noise-channel-model": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-finite-channel-location-schedule",
+          "source_section": "Definition",
+          "quote": "A finite channel-location schedule is an ordered list of slots $\\ell_1,\\ldots,\\ell_M$.",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "The family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural number $n\\ge1$, every choice of distinct indices",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For every $F\\subseteq L$, the displayed weight is nonnegative because $\\eta,1-\\eta\\in[0,1]$. Its total mass is one by induction on $|L|$: the empty location set has one pattern of weight $1$; for nonempty $L$, choose $\\ell_0\\in L$ and split the sum into patterns omitting and containing $\\ell_0$. Each part is respectively $(1-\\eta)$ and $\\eta$ times the same normalized sum on $L\\setminus\\{\\ell_0\\}$, so their sum is one. The powers use the stated empty-product convention, including when $\\eta=0$ or $1$. Thus the weights define a finite probability space by [F3].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "choose",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Fix distinct locations $\\ell_1,\\ldots,\\ell_k$ and prescribed fault/no-fault values $b_i\\in\\{0,1\\}$. Splitting a pattern into its restriction to these $k$ locations and its restriction to the complement, then summing over all complement patterns using step 1.1, gives $\\mathbb P(X_{\\ell_i}=b_i\\text{ for all }i)=\\prod_{i=1}^k\\eta^{b_i}(1-\\eta)^{1-b_i}$. This is the product of the single-location atom probabilities. Summing over the finitely many atom choices belonging to any selected event in each indicator class proves the finite-subfamily independence condition [F2].",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "empty-location-set",
+          "status": "checked",
+          "claim": "The empty set of locations has one pattern with weight 1.",
+          "inputs": [
+            "1.1"
+          ],
+          "evidence": "Verification step 1.1."
+        },
+        {
+          "id": "single-location-law",
+          "status": "checked",
+          "claim": "For one location the fault and no-fault weights are eta and 1-eta.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "Verification steps 1.1-1.2."
+        },
+        {
+          "id": "probability-rate-endpoints",
+          "status": "checked",
+          "claim": "At eta=0 only the empty fault set has positive weight; at eta=1 only the all-fault set does.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "Verification steps 1.1-1.2."
+        }
+      ],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 1.1 has one empty pattern of weight 1 when L is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At eta=0, step 1.1 uses the empty-product convention; nonempty patterns have weight 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one location, Verification step 2.1 gives atom probabilities eta and 1-eta."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At eta=1, step 1.1 concentrates weight on the all-fault pattern."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and 2.1 use x^0=1 and cover eta=0 and eta=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects one element from a finite nonempty L; finite selection requires no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "lem-qc-noise-channel-model-composes-with-circuit-semantics": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-channels-compose-and-tensor",
+          "source_section": "Statement",
+          "quote": "Then $\\Psi\\circ\\Phi$ is a channel.",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-finite-channel-location-schedule",
+          "source_section": "Definition",
+          "quote": "The order is chronological: slot $\\ell_1$ acts first. Its circuit denotation is the linear map",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Fix a fault pattern $F$. At each $\\ell\\in F$, insert its declared local CPTP replacement; at each $\\ell\\notin F$, use the ideal CPTP location map. Each is a full-register channel by the schedule definition [F3]. Applying [F2] successively in chronological order shows the finite composition $\\Phi_F$ is CPTP.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Let $w_F$ be the probability of pattern $F$. The mutually disjoint pattern events cover the finite sample space, so their weights are nonnegative and sum to one by [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Define $\\overline\\Phi=\\sum_Fw_F\\Phi_F$. It is completely positive: for every finite reference $R$ and positive $X$, $(\\overline\\Phi\\otimes\\operatorname{id}_R)(X)=\\sum_Fw_F(\\Phi_F\\otimes\\operatorname{id}_R)(X)$ is a nonnegative weighted sum of positive operators. It is trace-preserving because $\\operatorname{tr}\\overline\\Phi(X)=\\sum_Fw_F\\operatorname{tr}\\Phi_F(X)=\\sum_Fw_F\\operatorname{tr}(X)=\\operatorname{tr}(X)$ by steps 1.1 and 1.2.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "For each input operator, averaging the conditional schedule outputs is exactly application of $\\overline\\Phi$. Thus the finite stochastic schedule has a well-defined CPTP denotation.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the empty location set as the base of its finite induction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: At $\\eta=0$ the mixture has only the fault-free pattern."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-location probability split is explicit in Step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: At $\\eta=1$ the mixture has only the all-fault pattern."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The finite pattern weights are defined for $\\eta=0$ and $\\eta=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "def-qc-fault-location-path-and-rectangle": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "lem-qc-disjoint-fault-location-events-are-independent": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-noise-channel-model",
+          "source_section": "Definition",
+          "quote": "Thus each location faults with probability $\\eta$, and the event classes generated by the fault/no-fault indicator at each location form an independent family in the sense of [[def-independent-families-of-event-classes]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-fault-location-path-and-rectangle",
+          "source_section": "Definition",
+          "quote": "in the ordinary rectangle recursion these child sets are disjoint.",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "\\mathbb P\\left(\\bigcap_{k<n}A_k\\right)=\\prod_{k<n}\\mathbb P(A_k).",
+          "uses": [
+            "1.2"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For each $j$, let $X_j=\\{0,1\\}^{L_j}$ be the finite set of fault-indicator patterns on $L_j$, and let $A_j\\subseteq X_j$ be the patterns that realize $E_j$. The event $E_j$ is the disjoint union of the pattern events $\\{X|_{L_j}=x_j\\}$ over $x_j\\in A_j$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "For any tuple $x_j\\in A_j$, the joint pattern event fixes one bit at each location in $\\bigcup_jL_j$. The product fault law [F1] gives its probability as the product of the one-location bit probabilities; this is the finite-intersection condition in [F3].",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Summing over the finite Cartesian product $A_1\\times\\cdots\\times A_s$ and distributing finite sums gives $\\mathbb P(\\bigcap_{j=1}^sE_j)=\\sum_{x_1\\in A_1,\\ldots,x_s\\in A_s}\\prod_{j=1}^s\\mathbb P(X|_{L_j}=x_j)=\\prod_{j=1}^s\\sum_{x_j\\in A_j}\\mathbb P(X|_{L_j}=x_j)=\\prod_{j=1}^s\\mathbb P(E_j)$. Thus $E_1,\\ldots,E_s$ are mutually independent.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 permits an empty location subset and its single empty pattern."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-indicator case is a one-event family in Step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses finite event-pattern sets only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": []
+    },
+    "def-qc-ft-gadget-and-proper-code-contract": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ]
+    },
+    "lem-qc-planar-mw-recovery-failure-yields-half-error-path": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-square-planar-surface-code",
+          "source_section": "Definition",
+          "quote": "The X-check matrix is $H_X=\\partial_1$, with rows indexed by vertices outside $R$ and columns by physical edges.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "status": "pending-supplier-body"
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-stabilizer-syndrome-and-logical-operators",
+          "source_section": "Definition",
+          "quote": "E g_j=(-1)^{s_j(E)}g_jE",
+          "uses": [
+            "1.1"
+          ],
+          "status": "pending-supplier-body"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "Distinct Pauli matrices anticommute.",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-square-planar-surface-code-distance-and-path-count",
+          "source_section": "Statement",
+          "quote": "Every nontrivial Z logical class contains a rough-to-rough path of length at least $d$, and a straight row attains $d$.",
+          "uses": [
+            "2.1"
+          ],
+          "status": "pending-supplier-body"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For a $Z$-error chain $E$, its commutation sign with the $X$ check at nonrough vertex $u$ is $(-1)^{(\\partial_1 E)_u}$: the exponent is the parity of incident error edges by [F1], and every overlapping $Z$ and $X$ factor anticommutes by [F3]. Thus the syndrome vector is $\\partial_1 E$ by [F2]. Equality of the perfect syndromes of $E$ and $R$ gives $\\partial_1(E\\triangle R)=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Put $C=E\\triangle R$. Logical failure means that $C$ is a nontrivial $Z$-logical class. By [F4], it contains a rough-to-rough path of length at least $d$. If that path repeats a vertex, delete the closed subpath between two occurrences; finitely many such deletions produce a self-avoiding path $P$ whose edges remain in $C$ and whose endpoints remain on the left and right rough boundaries. It crosses every one of the $d$ vertical cuts, so $\\ell:=|P|\\ge d$, and self-avoidance bounds $\\ell\\le n$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The path $P$ has zero relative boundary because its internal vertices have even degree and its two endpoints are omitted rough vertices. Hence $R\\triangle P$ has the same syndrome as $R$. Minimum cardinality gives $|R|\\le|R\\triangle P|$. Since $P\\subseteq E\\triangle R$, each edge of $P$ belongs to exactly one of $E$ and $R$; comparing the two cardinalities and canceling the edges outside $P$ yields $|R\\cap P|\\le|P\\setminus R|=|E\\cap P|$. These counts sum to $\\ell$, so $|E\\cap P|\\ge\\lceil\\ell/2\\rceil$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is restricted to a finite square patch with d at least 2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma has no probability-rate parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma has no scalar parameter equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate patch outside d at least 2 is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses connectedness of a finite support graph to obtain a path."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-square-planar-surface-code",
+          "fact": "transitive",
+          "required": "Raw supplier body was inspected, but scoped renderer validation reports frontmatter-unparsable in the current QC20 item; the renderer drops it. Repair the supplier outside this batch before clearing readiness."
+        },
+        {
+          "supplier": "def-qc-stabilizer-syndrome-and-logical-operators",
+          "fact": "transitive",
+          "required": "Raw supplier body was inspected, but scoped renderer validation reports frontmatter-unparsable in the current QC20 item; the renderer drops it. Repair the supplier outside this batch before clearing readiness."
+        },
+        {
+          "supplier": "thm-qc-square-planar-surface-code-distance-and-path-count",
+          "fact": "transitive",
+          "required": "Raw supplier body was inspected, but scoped renderer validation reports frontmatter-unparsable in the current QC20 item; the renderer drops it. Repair the supplier outside this batch before clearing readiness."
+        }
+      ]
+    },
+    "def-qc-level-r-good-and-bad-rectangles": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ]
+    },
+    "def-qc-local-stochastic-noise-model": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ]
+    },
+    "thm-qc-explicit-proper-code-and-universal-gadgets": {
+      "kind": "theorem",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "proof_status": "not_supplied",
+      "unresolved": [
+        "No complete local proof is supplied for a fixed code and universal recursively closed gadget family. The source appendix is a blueprint and leaves the ancilla verification, syndrome-processing, initialization, readout, universal-gate, exact location/depth, spread, recursive-closure, and zero-, one-, and sparse-multifault contracts to be verified locally.",
+        "Proposed A-page suppliers: lem-qc-steane-one-fault-ec-gadget-contract, lem-qc-steane-transversal-clifford-gadget-contract, lem-qc-steane-t-gate-injection-contract, and lem-qc-recursive-gadget-family-closure. The current QC09 gate and measurement bodies and QC21 finite channel schedule are available; the local gadget construction, verified fault contracts, and recursive closure still need complete proofs before this theorem can be contracted."
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "thm-qc-css-syndrome-correction",
+          "fact": "transitive",
+          "required": "The current supplier body is present, but renderer validation reports malformed frontmatter (and multiline display math for the CSS correction theorem); the explicit construction proof remains unsupplied."
+        },
+        {
+          "supplier": "alg-qc-stabilizer-encoder-by-symplectic-elimination",
+          "fact": "transitive",
+          "required": "The current supplier body is present, but renderer validation reports malformed frontmatter (and multiline display math for the CSS correction theorem); the explicit construction proof remains unsupplied."
+        }
+      ]
+    },
+    "thm-qc-planar-surface-code-iid-z-memory-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-planar-mw-recovery-failure-yields-half-error-path",
+          "source_section": "Statement",
+          "quote": "In that case $E\\triangle R$ contains a self-avoiding primal path $P$ joining the left and right rough boundaries. Writing $\\ell=|P|$, one has $d\\le\\ell\\le n$ and $|P\\cap E|\\ge\\lceil\\ell/2\\rceil$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-square-planar-surface-code-distance-and-path-count",
+          "source_section": "Statement",
+          "quote": "For each $\\ell\\ge1$, the number of self-avoiding rough-to-rough paths of length $\\ell$ is at most $(d+1)3^\\ell$.",
+          "uses": [
+            "2.1"
+          ],
+          "status": "pending-supplier-body"
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "The family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural number $n\\ge1$, every choice of distinct indices",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$, $$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Fix a candidate path $P$ of length $\\ell$. A logical failure witness on it requires at least $k=\\lceil\\ell/2\\rceil$ actual errors by [F2]. If at least $k$ of its $\\ell$ edges are faulty, some $k$-subset is entirely faulty. There are at most $\\binom\\ell k\\le2^\\ell$ such subsets; by [F4] each has probability $\\epsilon^k\\le\\epsilon^{\\ell/2}$ for $\\epsilon\\in[0,1]$. The union bound [F5] gives $\\mathbb P(P\\text{ is a failure witness})\\le2^\\ell\\epsilon^{\\ell/2}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "There are at most $(d+1)3^\\ell$ candidate paths of length $\\ell$ by [F3]. By [F2], every logical failure lies in the union of witness events for paths with $d\\le\\ell\\le n$. The finite union bound [F5] and step 1.1 therefore give $P_{\\mathrm{logical}}\\le\\sum_{\\ell=d}^{n}(d+1)3^\\ell 2^\\ell\\epsilon^{\\ell/2}=(d+1)\\sum_{\\ell=d}^{n}(36\\epsilon)^{\\ell/2}$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "If $\\epsilon<1/36$, set $r=6\\sqrt{\\epsilon}<1$. The finite sum is at most $\\sum_{\\ell=d}^{\\infty}r^\\ell=r^d/(1-r)$, so $P_{\\mathrm{logical}}\\le\\frac{d+1}{1-6\\sqrt{\\epsilon}}(6\\sqrt{\\epsilon})^d$. The denominator is a fixed positive constant for fixed $\\epsilon<1/36$, while $d+1$ is polynomial in $d$; hence the bound decays exponentially up to a polynomial prefactor.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At $\\epsilon=0$, Step 1.1 gives zero for every nonempty path."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: At $\\epsilon=1/36$, the geometric ratio is 1, so the theorem correctly requires strict inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "thm-qc-square-planar-surface-code-distance-and-path-count",
+          "fact": "transitive",
+          "required": "Raw supplier body was inspected, but scoped renderer validation reports frontmatter-unparsable in the current QC20 item; the renderer drops it. Repair the supplier outside this batch before clearing readiness."
+        },
+        {
+          "supplier": "def-qc-square-planar-surface-code",
+          "fact": "transitive",
+          "required": "This direct QC20 supplier body is present but scoped renderer validation reports malformed frontmatter, so the renderer drops it. Repair the supplier outside this batch before clearing planar-memory readiness."
+        },
+        {
+          "supplier": "def-qc-stabilizer-syndrome-and-logical-operators",
+          "fact": "transitive",
+          "required": "This direct QC20 supplier body is present but scoped renderer validation reports malformed frontmatter, so the renderer drops it. Repair the supplier outside this batch before clearing planar-memory readiness."
+        }
+      ]
+    },
+    "lem-qc-recursive-bad-rectangle-probability": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-noise-channel-model",
+          "source_section": "Definition",
+          "quote": "Thus each location faults with probability $\\eta$, and the event classes generated by the fault/no-fault indicator at each location form an independent family in the sense of [[def-independent-families-of-event-classes]].",
+          "uses": [
+            "1.2"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-level-r-good-and-bad-rectangles",
+          "source_section": "Definition",
+          "quote": "Recursively, a level-$(r+1)$ rectangle is $q$-good exactly when at most $q$ of its level-$r$ child rectangles are bad; it is $q$-bad otherwise.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-disjoint-fault-location-events-are-independent",
+          "source_section": "Statement",
+          "quote": "In the independent local fault model, events determined by pairwise disjoint finite sets of location fault indicators are mutually independent.",
+          "uses": [
+            "1.2"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Fix a level-$(r+1)$ rectangle. If it is bad, then some $(q+1)$-subset $J$ of its children consists entirely of bad level-$r$ rectangles. There are at most $A=\\binom{a}{q+1}$ such subsets.",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "For each fixed $J$, its child-bad events depend on pairwise disjoint location sets, so they are independent by [F3]. Each has probability at most $p_r$; hence the probability that every child in $J$ is bad is at most $p_r^{q+1}$. Since the indicator of a finite union is at most the sum of its event indicators, summing probabilities over the at most $A$ choices of $J$ proves $p_{r+1}\\le A p_r^{q+1}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Set $\\theta=A^{1/q}\\eta$. The asserted closed form holds at $r=0$, since $A^{-1/q}\\theta=\\eta$. If it holds at $r$, then $p_{r+1}\\le A(A^{-1/q}\\theta^{(q+1)^r})^{q+1}=A^{-1/q}\\theta^{(q+1)^{r+1}}$, because $1-(q+1)/q=-1/q$. Induction proves the formula for every $r$.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The condition $A\\eta^q<1$ is equivalent to $0\\le\\theta<1$. For $A\\ge1$ and $q+1>1$, the exponent $(q+1)^r$ tends to infinity, so the closed-form upper bound tends to zero.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement: The level-zero rectangle has one elementary location and $p_0=\\eta$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: At $\\eta=0$ the recurrence gives $p_r=0$ for every level."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The endpoint case $q=1$ is included whenever $q<a$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: When $q+1=a$, $A=1$ and the formula remains defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The strict threshold endpoint $A\\eta^q=1$ is not claimed to give decay."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ]
+    },
+    "lem-qc-sparse-fault-path-implies-code-deviation": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-code-deviation-and-spread",
+          "source_section": "Definition",
+          "quote": "A density operator $\\rho$ on the block and $R$ is $s$-deviated from a code-supported density operator $\\sigma$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-ft-gadget-and-proper-code-contract",
+          "source_section": "Definition",
+          "quote": "For every integer $q\\ge1$ with $2q\\ell\\le d$, the checked computation-stage contract must say that an input with at most $q\\ell$ supported errors and at most $q$ bad child rectangles has at most $2q\\ell$ supported errors before correction",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-level-r-good-and-bad-rectangles",
+          "source_section": "Definition",
+          "quote": "Recursively, a level-$(r+1)$ rectangle is $q$-good exactly when at most $q$ of its level-$r$ child rectangles are bad; it is $q$-bad otherwise.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "At the initial encoded boundary the target has zero deviation, hence at most $q\\ell$-deviation. This is the induction invariant before the first computation stage.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Suppose a computation stage begins with at most $q\\ell$ supported errors per block. At most $q$ bad child rectangles each add support of size at most $\\ell$ per block by [F2]; the union-of-supports bound in [F1] gives at most $2q\\ell\\le d$ supported errors before correction. The local recovery therefore corrects this deviation and restores the encoded ideal target.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "step": "1.3",
+          "claim": "The correction stage itself has at most $q$ bad child rectangles. Its correction contract in [F2] maps the result to the same encoded target with at most $q\\ell$ residual supported errors. Thus the induction invariant holds after the correction stage.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Induction over the finite sequence of computation and correction stages at each concatenation level gives at most $q\\ell\\le d$ deviation after every correction stage. The recovery contract in [F2] corrects that residual channel, so the decoded logical output is the ideal target. The contract and every correction step retain the identity on the reference.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem assumes $q\\ge1$ and $\\ell\\ge1$, so the zero-spread case is outside its domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The permitted boundary $q=1$ is included in the induction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The equality case $2q\\ell=d$ is allowed by Step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is part of the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ]
+    },
+    "thm-qc-t1-extended-rectangle-threshold": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-noise-channel-model",
+          "source_section": "Definition",
+          "quote": "Thus each location faults with probability $\\eta$, and the event classes generated by the fault/no-fault indicator at each location form an independent family in the sense of [[def-independent-families-of-event-classes]].",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-disjoint-fault-location-events-are-independent",
+          "source_section": "Statement",
+          "quote": "In the independent local fault model, events determined by pairwise disjoint finite sets of location fault indicators are mutually independent.",
+          "uses": [
+            "1.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$, $$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Fix a level-$(r+1)$ extended rectangle. By [A1], its bad event is contained in the union over at most $A_1=\\binom b2$ candidate pairs of the event that both witnesses in that pair are bad. Each pair's events are independent by [F2] under the independent location model [F1], so each intersection has probability at most $p_r^2$. The finite union bound [F3] gives $p_{r+1}\\le A_1p_r^2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The closed form holds at $r=0$, since $A_1^{-1}(A_1\\eta)=\\eta=p_0$. If it holds at $r$, then $p_{r+1}\\le A_1(A_1^{-1}(A_1\\eta)^{2^r})^2=A_1^{-1}(A_1\\eta)^{2^{r+1}}$. Induction proves the claimed bound.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The strict threshold assumption $\\eta<1/A_1$ gives $0\\le A_1\\eta<1$, so the exponent $2^r$ forces $p_r\\to0$. For $N$ output extended rectangles, the event of any failure is a union of $N$ bad events; [F3] bounds its probability by $Np_r$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: The recurrence gives $p_r=0$ when $\\eta=0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: For $b=2$, $A_1=1$ and the bound is well-defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The strict endpoint $\\eta=1/A_1$ is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ],
+      "unresolved": [
+        "The recurrence proof is conditional on A1. The truncated extended-rectangle witness reduction for overlapping exRecs remains unproved; proposed A-page supplier: lem-qc-t1-truncated-exrec-witness-reduction, with disjoint witness location sets and a bound of binom(b,2) candidate pairs."
+      ]
+    },
+    "thm-qc-local-stochastic-concatenated-threshold": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-local-stochastic-noise-model",
+          "source_section": "Definition",
+          "quote": "Its law is $\\eta$-local-stochastic as in [[def-qc-local-stochastic-fault-set-law]]. For each pattern $F\\subseteq L$ and each $\\ell\\in F$, specify a CPTP replacement map supported on the same declared support $S_\\ell$ as the ideal channel at $\\ell$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-level-r-good-and-bad-rectangles",
+          "source_section": "Definition",
+          "quote": "Recursively, a level-$(r+1)$ rectangle is $q$-good exactly when at most $q$ of its level-$r$ child rectangles are bad; it is $q$-bad otherwise.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-local-stochastic-fault-witness-bound",
+          "source_section": "Statement",
+          "quote": "A^{-1/q}\\bigl(A^{1/q}\\eta\\bigr)^{(q+1)^r}",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-sparse-fault-path-implies-code-deviation",
+          "source_section": "Statement",
+          "quote": "If each computation stage and its correction stage have at most $q$ bad child rectangles,",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-trace-distance",
+          "source_section": "Definition",
+          "quote": "D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-trace-distance-range-and-equality",
+          "source_section": "Statement",
+          "quote": "0\\le D(\\rho,\\sigma)\\le1.",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-measurement-variation-at-most-trace-distance",
+          "source_section": "Statement",
+          "quote": "\\frac12\\sum_{a\\in\\mathcal A}|p_a-q_a|\\le D(\\rho,\\sigma).",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-ft-gadget-and-proper-code-contract",
+          "source_section": "Definition",
+          "quote": "They quantify over arbitrary CPTP maps supported on the union of the faulty child supports, not only product fault maps.",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-finite-channel-location-schedule",
+          "source_section": "Definition",
+          "quote": "The order is chronological: slot $\\ell_1$ acts first. Its circuit denotation is the linear map",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-noise-channel-model-composes-with-circuit-semantics",
+          "source_section": "Statement",
+          "quote": "Every conditional denotation is a CPTP channel, and the probability-weighted average of these denotations is a CPTP channel.",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F11",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$, $$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Apply [F3] to each level-$r$ rectangle. Its proof counts fault-witness sets and uses only the local-stochastic subset bound, so it requires no independence between child fault indicators. Thus each top-level circuit rectangle is bad with probability at most $p_r=A^{-1/q}(A^{1/q}\\eta)^{(q+1)^r}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "If $\\eta=0$, each single-location fault event has probability zero by the local-stochastic subset bound; the finite union bound gives no faults almost surely, so level zero suffices. Otherwise put $\\theta=A^{1/q}\\eta\\in(0,1)$ and $c=-\\log\\theta>0$. Any $r$ with $(q+1)^r\\ge c^{-1}\\log(NA^{-1/q}/\\delta)$ is sufficient; if the logarithm is nonpositive or its positive value is at most $c$, $r=0$ suffices. For fixed parameters, the least qualifying $r$ is $O(\\log\\log(N/\\delta))$ as $N/\\delta\\to\\infty$.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "By [F11], the probability $\\alpha$ that at least one of the $N$ top-level circuit rectangles is bad satisfies $\\alpha\\le Np_r$. For every fault pattern, [F9] gives a conditional channel, so its output on the fixed input and reference is a density operator. On the complementary event, recursive goodness gives at most $q$ bad children in every stage. The contract [F8] and sparse-path correction guarantee [F4] make each corrected logical stage ideal for the per-location channels allowed by [F1]. Thus every pattern with no bad top-level rectangle outputs $\\rho_{\\mathrm{id}}$. If $\\alpha>0$, the normalized finite mixture of bad-pattern outputs is a density operator $\\tau$; if $\\alpha=0$, choose any density operator for $\\tau$. Then $\\rho_{\\mathrm{out}}=(1-\\alpha)\\rho_{\\mathrm{id}}+\\alpha\\tau$, and [F10] confirms that the weighted schedule output is a channel.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "By homogeneity of trace distance and [F6], $D(\\rho_{\\mathrm{out}},\\rho_{\\mathrm{id}})=\\alpha D(\\tau,\\rho_{\\mathrm{id}})\\le\\alpha\\le Np_r$. Applying [F7] to the final POVM bounds its output total-variation distance by $Np_r$, and every success event changes by at most that total-variation distance.",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Because the gadget family is fixed and finite, some constant $\\kappa\\ge1$ bounds size and depth expansion at every replacement level. Thus total size and depth are at most $C\\kappa^r$ for a fixed $C$, which is polylogarithmic in $N/\\delta$ by step 1.2.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats $\\eta=0$ separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The theorem includes $q=1$ when $1<a$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: When $A=1$, the threshold condition is $\\eta<1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The strict endpoint $A\\eta^q=1$ is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement: The witness proof uses only finite selection from finite sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ]
+    },
+    "thm-qc-proper-code-concatenated-threshold": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-level-r-good-and-bad-rectangles",
+          "source_section": "Definition",
+          "quote": "Recursively, a level-$(r+1)$ rectangle is $q$-good exactly when at most $q$ of its level-$r$ child rectangles are bad; it is $q$-bad otherwise.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-recursive-bad-rectangle-probability",
+          "source_section": "Statement",
+          "quote": "Then $p_{r+1}\\le A p_r^{q+1}$ and $p_r\\le A^{-1/q}\\bigl(A^{1/q}\\eta\\bigr)^{(q+1)^r}$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-sparse-fault-path-implies-code-deviation",
+          "source_section": "Statement",
+          "quote": "If each computation stage and its correction stage have at most $q$ bad child rectangles,",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-trace-distance",
+          "source_section": "Definition",
+          "quote": "D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1",
+          "uses": [
+            "4.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-trace-distance-range-and-equality",
+          "source_section": "Statement",
+          "quote": "0\\le D(\\rho,\\sigma)\\le1.",
+          "uses": [
+            "4.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-measurement-variation-at-most-trace-distance",
+          "source_section": "Statement",
+          "quote": "\\frac12\\sum_{a\\in\\mathcal A}|p_a-q_a|\\le D(\\rho,\\sigma).",
+          "uses": [
+            "5.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-ft-gadget-and-proper-code-contract",
+          "source_section": "Definition",
+          "quote": "For every integer $q\\ge1$ with $2q\\ell\\le d$, the checked computation-stage contract must say that an input with at most $q\\ell$ supported errors and at most $q$ bad child rectangles has at most $2q\\ell$ supported errors before correction",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F8",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$, $$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$",
+          "uses": [
+            "2.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-finite-channel-location-schedule",
+          "source_section": "Definition",
+          "quote": "The order is chronological: slot $\\ell_1$ acts first. Its circuit denotation is the linear map",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-noise-channel-model-composes-with-circuit-semantics",
+          "source_section": "Statement",
+          "quote": "Every conditional denotation is a CPTP channel, and the probability-weighted average of these denotations is a CPTP channel.",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Since $q=\\lfloor d/(2\\ell)\\rfloor$, we have $2q\\ell\\le d$. Also $A\\ge1$, and $A\\eta^q<1$ gives $\\theta:=A^{1/q}\\eta<1$. Apply [F2] to obtain $p_r\\le A^{-1/q}\\theta^{(q+1)^r}$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "If $\\eta=0$, the product fault law gives probability zero to every nonempty fault pattern, so $p_0=0$ and level zero suffices. If $\\eta>0$, put $c=-\\log\\theta>0$. Any $r$ with $(q+1)^r\\ge c^{-1}\\log(NA^{-1/q}/\\delta)$ gives $Np_r\\le\\delta$ by [F2]; if the logarithm is nonpositive or its positive value is at most $c$, level $r=0$ suffices. For fixed $A,q,\\eta$ with $0<\\theta<1$, the least qualifying level is $O(\\log\\log(N/\\delta))$ as $N/\\delta\\to\\infty$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The event that any of the $N$ top-level circuit rectangles is bad is the union of $N$ events, each of probability at most $p_r$. The finite union bound [F8] gives $\\alpha:=\\mathbb P(\\text{some top-level rectangle is bad})\\le Np_r$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "For every fault pattern, [F9] gives a conditional channel, so its output on the fixed input and reference is a density operator. On the event that all top-level rectangles are $q$-good, recursive goodness gives at most $q$ bad children in each computation and correction stage. The gadget contracts [F7] and sparse-path induction [F3] then make every corrected stage ideal, so every such pattern outputs $\\rho_{\\mathrm{id}}$. If $\\alpha>0$, the normalized finite mixture of outputs from bad patterns is a density operator $\\tau$; if $\\alpha=0$, choose any density operator for $\\tau$. Thus $\\rho_{\\mathrm{out}}=(1-\\alpha)\\rho_{\\mathrm{id}}+\\alpha\\tau$, and [F10] confirms that this weighted schedule output is a channel.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F7",
+            "F9",
+            "F10",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "By homogeneity of the trace norm, $D(\\rho_{\\mathrm{out}},\\rho_{\\mathrm{id}})=\\alpha D(\\tau,\\rho_{\\mathrm{id}})\\le\\alpha\\le Np_r$, where the first inequality is [F5]. The same identity holds after tensoring any reference identity, since the gadget contracts preserve the reference.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "Apply [F6] to the final finite POVM. Its output total-variation distance is at most $D(\\rho_{\\mathrm{out}},\\rho_{\\mathrm{id}})\\le Np_r$. For any success event $E$, $|P_{\\mathrm{out}}(E)-P_{\\mathrm{id}}(E)|\\le \\tfrac12\\sum_x|P_{\\mathrm{out}}(x)-P_{\\mathrm{id}}(x)|$, so the success-probability change is at most $Np_r$.",
+          "inputs": [
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "step": "6.1",
+          "claim": "Because the gadget family is fixed and finite, some constant $\\kappa\\ge1$ bounds size and depth expansion at every replacement level. Thus total size and depth are at most $C\\kappa^r$ for a fixed $C$. Since $r=O(\\log\\log(N/\\delta))$, this is a fixed power of $\\log(N/\\delta)$, hence the overhead is polylogarithmic.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 treats $\\eta=0$ separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The theorem includes $q=1$ provided $1<a$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: The case $A=1$ is valid and gives threshold $\\eta<1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The strict endpoint $A\\eta^q=1$ is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "def-qc-stabilizer-distance",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        },
+        {
+          "supplier": "thm-qc-stabilizer-distance-detection-and-correction",
+          "fact": "transitive",
+          "required": "The gadget-contract carrier is present, but its direct QC20 dependencies def-qc-stabilizer-distance and thm-qc-stabilizer-distance-detection-and-correction fail renderer frontmatter parsing. The FT contract and downstream threshold claims remain escalated."
+        }
+      ]
+    },
+    "ex-qc-surface-memory-bound-hypotheses": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-planar-surface-code-iid-z-memory-bound",
+          "source_section": "Statement",
+          "quote": "P_{\\mathrm{logical}}\\le (d+1)\\sum_{\\ell=d}^{n}(36\\epsilon)^{\\ell/2}.",
+          "uses": [
+            "3.1"
+          ],
+          "status": "verified-local-excerpt"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Compute $36\\epsilon=36/144=1/4$, so $(36\\epsilon)^{\\ell/2}=((1/4)^{1/2})^\\ell=2^{-\\ell}$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The finite geometric sum is $\\sum_{\\ell=5}^{50}2^{-\\ell}=2^{-5}(1-2^{-46})/(1-1/2)=\\frac1{16}(1-2^{-46})$. Multiplying by $d+1=6$ gives $\\frac38(1-2^{-46})<\\frac38$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Applying [F1] yields the stated conditional failure-probability bound. The hypotheses include perfect syndrome extraction; this example makes no faulty-gate threshold claim.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "distance-five-geometric-series",
+          "status": "checked",
+          "claim": "For d=5, n=50, and epsilon=1/144, the bound is 3/8(1-2^-46), strictly below 3/8.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "Verification steps 1.1–2.1."
+        }
+      ],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-object case beyond the finite domain fixed in its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is asserted for this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the stated hypotheses is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes both finite-sum endpoints $\\ell=5$ and $\\ell=25$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not require a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ],
+      "pending_supplier_checks": [
+        {
+          "supplier": "thm-qc-square-planar-surface-code-distance-and-path-count",
+          "fact": "transitive",
+          "required": "Raw supplier body was inspected, but scoped renderer validation reports frontmatter-unparsable in the current QC20 item; the renderer drops it. Repair the supplier outside this batch before clearing readiness."
+        }
+      ]
+    }
+  }
+}

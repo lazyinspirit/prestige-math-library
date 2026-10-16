@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-hahn-banach-norm-preserving-extension.json
 id: thm-hahn-banach-norm-preserving-extension
 kind: theorem
 title: "A bounded real linear functional on a subspace of a real normed space extends with the same norm"
@@ -7,9 +9,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-axiom-of-choice, thm-hahn-banach-dominated-extension, def-bounded-linear-operator,
-       def-operator-norm, def-normed-subspace,
-       rem-real-and-complex-normed-space-convention]
+deps: [def-axiom-of-choice, thm-hahn-banach-dominated-extension, def-bounded-linear-operator, def-operator-norm, def-normed-subspace]
 justified_by: []
 proof_strategy: direct
 sources:
@@ -19,16 +19,6 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Daniel Daners, Introduction to Functional Analysis, Theorem 26.1"
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf"
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
 ---
 
 ## Statement

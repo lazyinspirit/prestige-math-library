@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-banach-space.json
 id: def-banach-space
 kind: definition
 title: "Banach space"
@@ -7,17 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-norm-and-normed-space, def-complete-metric-space]
+deps: [def-complex-norm-and-complex-normed-space, def-norm-and-normed-space, def-complete-metric-space, lem-complex-norm-realification-is-a-real-norm]
 justified_by: []
 aliases: []
 landmark: true
-verification:
-  audited: 2026-09-01
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -30,8 +25,8 @@ pipeline_run: frontier-27
 
 ## Definition
 
-Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with
-induced metric $d(x,y)=\|x-y\|$. Then $V$ is a **Banach space** when this
+Let $V$ be a normed space over $\mathbb K\in\{\mathbb R,\mathbb C\}$, in the sense of [[def-norm-and-normed-space]] for $\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] for $\mathbb C$, with
+induced metric $d(x,y)=\|x-y\|$ (in the complex case supplied by [[lem-complex-norm-realification-is-a-real-norm]]). Then $V$ is a **Banach space** when this
 metric space is complete in the sense of [[def-complete-metric-space]].
 
 Equivalently: every Cauchy sequence in $V$ for the norm metric converges to a
@@ -41,5 +36,4 @@ point of $V$.
 
 - The metric is part of the data. Completeness is always completeness for the
   metric induced by the named norm.
-- By [[rem-real-and-complex-normed-space-convention]], the same definition is
-  used over $\mathbb{R}$ and over $\mathbb{C}$.
+- The scalar field is part of the normed-space data; completeness is the same metric condition in either case.

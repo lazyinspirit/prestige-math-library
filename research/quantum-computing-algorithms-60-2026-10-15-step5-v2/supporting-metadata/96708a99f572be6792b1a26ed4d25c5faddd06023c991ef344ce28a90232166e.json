@@ -1,0 +1,1540 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-annihilator-restriction-cut",
+    "lem-qa-common-kernel-repetition-bound",
+    "lem-qa-hidden-coset-state-law",
+    "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+    "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+    "thm-qa-finite-abelian-hidden-subgroup-cost",
+    "ex-qa-hsp-common-kernel-recovery",
+    "ex-qa-hsp-cyclic-subgroup-annihilator"
+  ],
+  "contracts": {
+    "lem-qa-annihilator-restriction-cut": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by\n$$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$\nFor any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define\n$$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$\nThe pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-double-annihilator",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group and $H\\le G$. Under the canonical evaluation identification $G\\cong\\widehat{\\widehat G}$,\n$$(H^\\perp)^\\perp=H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$, the pointwise product, constant-one identity and pointwise inverse on $\\widehat G$ make it a finite abelian group. Its order is $|\\widehat G|=|G|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]), written **additively**: its\noperation is written $+$, its identity is written $0$, and its underlying set is\nfinite. Let $\\mathbb C^{\\times}$ be the group of units of the field $\\mathbb C$\n([[thm-complex-numbers-form-a-field]], [[lem-ring-units-form-a-group]]), that\nis, the nonzero complex numbers under multiplication.\n\nAn **additive character** of $G$ is a group homomorphism\n([[def-group-homomorphism]])\n\n$$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$\n\nWrite $\\widehat G$ for the set of all additive characters of $G$. Since $G$ and\n$\\mathbb C^{\\times}$ are groups, every additive character automatically\nsatisfies $\\chi(0)=1$ and $\\chi(-x)=\\chi(x)^{-1}$\n([[lem-group-homomorphism-basic-properties]]), so multiplicativity is the whole\nrequirement.\n\n**This is not the representation-theoretic character.** The word \"character\"\nalready names the function $\\chi_V(g)=\\operatorname{tr}(\\rho_V(g))$ attached to\na finite-dimensional complex representation $V$ of $G$\n([[def-character-of-a-complex-representation]],\n[[def-finite-dimensional-representation-of-a-group-over-a-field]]). That\nfunction need not be multiplicative — only for a one-dimensional representation\nis it a homomorphism to $\\mathbb C^{\\times}$ — and the next item proves the\nprecise bridge: the additive characters of a finite abelian group are exactly\nthe characters of its one-dimensional complex representations, and exactly its\nirreducible ones.\n\n**Well-definedness.** $\\widehat G$ is defined as a set of functions\n$G\\to\\mathbb C^{\\times}$, so the definition itself selects nothing. In\nparticular it chooses no decomposition of $G$, no enumeration of $G$, and no\nisomorphism $G\\cong\\widehat G$, and it asserts nothing here about a group\nstructure on $\\widehat G$; the dictionary proved in the next item records what\nstructure there is.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is\na **subgroup** of $G$, written $H \\le G$, when\n\n- **(S1)** $e \\in H$;\n- **(S2)** $H$ is closed under the operation: $x, y \\in H$ implies $xy \\in H$\n  ([[def-binary-operation]]);\n- **(S3)** $H$ is closed under inverses: $x \\in H$ implies $x^{-1} \\in H$.\n\nBy (S2) the operation of $G$ restricts to a binary operation on $H$; it is\nassociative there because it is associative on $G$, the element $e$ of (S1) is a\ntwo-sided identity for it ([[def-identity-element]]), and (S3) supplies for each\n$x \\in H$ a two-sided inverse lying in $H$ ([[def-invertible-element]]). So a\nsubgroup, with the restricted operation, is itself a group, and its identity and\nits inverses are those of $G$.\n\nEvery group $G$ has the two **trivial subgroups** $\\{e\\}$ and $G$ itself; a\nsubgroup $H$ with $H \\ne G$ is called **proper**.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-finite-abelian-evaluation-map-isomorphism",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$, give $\\widehat G$ its pointwise multiplication. Its dual $\\widehat{\\widehat G}$ consists of functions $\\Phi:\\widehat G\\to\\mathbb C^{\\times}$ satisfying $\\Phi(\\chi\\psi)=\\Phi(\\chi)\\Phi(\\psi)$. The evaluation map\n$$\\operatorname{ev}:G\\longrightarrow\\widehat{\\widehat G},\\qquad \\operatorname{ev}(g)(\\chi):=\\chi(g),$$\nis a group isomorphism. The map itself is canonical; a decomposition into cyclic factors is used only to prove it is injective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-finite-abelian-annihilators-are-subgroups",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group. For every subgroup $H\\le G$, $H^\\perp$ is a subgroup of $\\widehat G$. For every subgroup $K\\le\\widehat G$, $K^\\perp$ is a subgroup of $G$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $g\\in K\\setminus H$. Under the canonical evaluation identification [F5], [F1] gives $(H^\\perp)^\\perp=H$, so there is $\\chi_0\\in H^\\perp$ with $\\chi_0(g)\\ne1$. By [F6], $H^\\perp$ is a group; the evaluation map $\\epsilon_g:H^\\perp\\to\\mathbb C^\\times$, $\\epsilon_g(\\chi)=\\chi(g)$, is a homomorphism because pointwise multiplication gives $\\epsilon_g(\\chi\\psi)=\\chi(g)\\psi(g)$. Its image is finite by [F2] and is a subgroup because it is the image of a group homomorphism. It contains $1$ and the nonidentity value $\\chi_0(g)$, so it has at least two elements.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every nonempty fiber of $\\epsilon_g$ is a coset of its kernel: $\\epsilon_g(\\chi)=\\epsilon_g(\\psi)$ exactly when $\\epsilon_g(\\chi\\psi^{-1})=1$. Therefore at most half of $H^\\perp$ maps to $1$. A uniform $\\chi\\in H^\\perp$ has $\\chi(g)\\ne1$ with probability at least $1/2$, and each such character is nontrivial on $K$ because $g\\in K$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any $\\chi\\in H^\\perp$, every $h\\in H$ satisfies $\\chi(h)=1$, so $H\\subseteq K\\cap\\ker\\chi$. The set $\\ker\\chi$ is a subgroup: it contains $0$ by [F3], and the homomorphism law gives closure under addition and inverses. Its intersection with $K$ is a subgroup by [F4]. If $\\chi|_K\\ne1$, the homomorphism $\\chi|_K$ has at least two values; its fibers are cosets of $K\\cap\\ker\\chi$, so $[K:K\\cap\\ker\\chi]=|\\chi(K)|\\ge2$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A finite group and its subgroups contain the identity, so the empty set is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the identity element 0 in every character kernel and subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: H is a proper subgroup of K, so K has at least two elements and the claimed index bound is meaningful."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis H⊊K excludes the equal-subgroup case; no separate degenerate quotient claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is a finite-group argument with no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses one element from the explicitly nonempty finite set K\\H; no choice axiom is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a probability and index lower bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a probability and index lower bound, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Independently checked steps 1.1–3.1 and all seven direct suppliers. Double annihilation supplies a character detecting g in K\\H; evaluation on the finite subgroup H-perp has equal-size kernel cosets and at least two image values. Thus probability of nontrivial restriction is at least 1/2. Each resulting intersection is a subgroup containing H with index equal to the nontrivial finite image size. Proper inclusion excludes K=H and trivial G; H={0} is allowed. Only one finite witness is selected; no AC. Evaluation and double-annihilator supplier proofs were inspected, including their cardinality and injectivity arguments. Childs local source, Chapter 6.1 equations (6.19)–(6.20), supports the cut argument; no defect found."
+      }
+    },
+    "lem-qa-common-kernel-repetition-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by\n$$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$\nFor any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define\n$$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$\nThe pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qa-annihilator-restriction-cut",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group, and let $H\\subsetneq K\\le G$. Choose a character $\\chi$ uniformly from $H^\\perp$. Then\n$$\\mathbb P(\\chi|_K\\ne 1)\\ge \\frac12.$$\nFor every outcome with $\\chi|_K\\ne1$, the updated common kernel $K\\cap\\ker\\chi$, where $\\ker\\chi=\\{g\\in G:\\chi(g)=1\\}$, contains $H$ and has index at least two in $K$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-chernoff-bound-for-independent-bernoulli-trials",
+          "source_section": "Statement",
+          "quote": "Let $X_1,\\ldots,X_N$ be mutually independent Bernoulli$(p_i)$ variables on a finite probability space. Set $S=\\sum_iX_i$ and $\\mu=\\sum_i p_i$. For $\\delta\\ge0$,\n$$\\mathbb P(S\\ge(1+\\delta)\\mu)\\le\\exp\\{-\\mu((1+\\delta)\\log(1+\\delta)-\\delta)\\}.$$\nFor $0\\le\\delta<1$,\n$$\\mathbb P(S\\le(1-\\delta)\\mu)\\le\\exp\\{-\\mu(\\delta+(1-\\delta)\\log(1-\\delta))\\}.$$\nFor $0\\le\\delta\\le1$ the upper and lower tails are respectively at most $\\exp(-\\mu\\delta^2/3)$ and $\\exp(-\\mu\\delta^2/2)$, and\n$$\\mathbb P(|S-\\mu|\\ge\\delta\\mu)\\le2\\exp(-\\mu\\delta^2/3).$$\nAt $\\delta=1$ the lower optimized bound is $\\exp(-\\mu)$, proved directly rather than by taking $\\log0$. Empty sums and $\\mu=0$ are included. Also, for $N>0$ and $t\\ge0$,\n$$\\mathbb P(|S-\\mu|\\ge t)\\le2\\exp(-2t^2/N).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $s$ cuts have occurred, repeated halving gives $|K|\\le N/2^s\\le1$. Since $H\\le K$ and a subgroup contains the identity, this forces $K=H$. Consequently, on the event $K_M\\ne H$, the process remained strictly above $H$ for all $M$ trials and fewer than $s$ actual cuts occurred.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Couple each trial, while $K_{t-1}>H$, by first drawing its cut indicator $C_t$ with conditional probability $p_t\\ge1/2$ and then drawing $\\chi_t$ from the uniform distribution conditioned on that indicator. If $C_t=1$, draw an auxiliary $Y_t\\in\\{0,1\\}$ with conditional probability $\\mathbb P(Y_t=1\\mid C_t=1,\\text{past})=1/(2p_t)$; if $C_t=0$, set $Y_t=0$. Then $Y_t\\le C_t$ and $\\mathbb P(Y_t=1\\mid\\text{past})=1/2$. After the process reaches $H$, draw fresh independent $Y_t\\sim\\mathrm{Bernoulli}(1/2)$. Thus the $Y_t$ are independent Bernoulli$(1/2)$ variables, and on every failure outcome $\\sum_tY_t\\le\\sum_tC_t<s$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $X:=\\sum_{t=1}^M Y_t$ and $\\mu=M/2$. The coupling and Step 1.1 give $\\mathbb P(K_M\\ne H)\\le\\mathbb P(X<s)$. Since $\\mu\\ge2s+8\\ln(1/\\delta)$, we have $s\\le\\mu/2$, so $\\{X<s\\}\\subseteq\\{X\\le\\mu/2\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] with $\\eta=1/2$ to obtain $\\mathbb P(X\\le\\mu/2)\\le e^{-\\mu/8}$. The bound on $\\mu$ implies $e^{-\\mu/8}\\le e^{-\\ln(1/\\delta)}=\\delta$. Hence $\\mathbb P(K_M\\ne H)\\le\\delta$. If $H=K_0$, the process stays at $H$ by definition, giving the stated zero failure probability.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group contains the identity, and the statement assumes N≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses that each subgroup contains the identity to conclude that order at most one forces the trivial subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: when H=K0 the process stays at H and failure probability is exactly zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and step 3.1 explicitly cover H=K0, the immediate-success case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes 0<δ<1; the excluded endpoints are not used in the logarithm or Chernoff parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Each trial draws from a specified finite distribution and the proof uses an explicit Bernoulli coupling, not a choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way probability bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way probability bound, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        "Symbolic boundary: for N≥2, s=ceil(log2 N)≥1 and M/2≥2s+8 ln(1/δ); the Chernoff exponent is therefore at most δ."
+      ]
+    },
+    "lem-qa-hidden-coset-state-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-finite-abelian-hidden-subgroup-problem",
+          "source_section": "Definition",
+          "quote": "An input group is given in explicit invariant-factor coordinates\n$$G=\\prod_{i=1}^r\\mathbb Z/n_i\\mathbb Z,\\qquad 2\\le n_1\\mid n_2\\mid\\cdots\\mid n_r,$$\nwith componentwise addition and $N:=|G|=\\prod_i n_i$. The empty product has $G=\\{0\\}$ and $N=1$. No procedure for finding these coordinates from a black-box group is included. A character label is a tuple $\\mathbf k=(k_1,\\ldots,k_r)$ with $k_i\\in\\mathbb Z/n_i\\mathbb Z$, representing\n$$\\chi_{\\mathbf k}(\\mathbf g):=\\prod_{i=1}^r\\exp(2\\pi i k_i g_i/n_i).$$\nThe cyclic-character and product-character suppliers identify these labels with all of $\\widehat G$.\n\nThe hiding input is a finite set $S$, an injective encoding $\\eta:S\\to\\{0,1\\}^m$, and a total function $F:G\\to S$ for which there is an unknown subgroup $H\\le G$ such that\n$$F(\\mathbf g)=F(\\mathbf g')\\quad\\Longleftrightarrow\\quad \\mathbf g-\\mathbf g'\\in H.$$\nThis is the hiding promise. Put $b_i:=\\lceil\\log_2 n_i\\rceil$ and $b:=\\sum_i b_i$. Encode $g_i\\in\\mathbb Z/n_i\\mathbb Z$ by the $b_i$-bit big-endian binary word of its least residue in $\\{0,\\ldots,n_i-1\\}$, and encode $\\mathbf g$ by concatenating these words in coordinate order; denote this injective code by $\\operatorname{code}_G(\\mathbf g)$. This uses the first-wire-most-significant-bit convention of [[def-qc-ordered-bitstring-encoding]]. Use the same coordinate widths and convention to encode character labels $\\mathbf k$ as $\\operatorname{code}_{\\widehat G}(\\mathbf k)$.\n\nThe hiding input also supplies a total Boolean function $\\widetilde F:\\{0,1\\}^b\\to\\{0,1\\}^m$ agreeing with $\\eta\\circ F$ on valid group codes; its values on invalid bit strings are part of the declared extension. The coherent XOR oracle acts by\n$$O_{\\widetilde F}|x,y\\rangle=|x,y\\oplus\\widetilde F(x)\\rangle$$\non all ordered input and target bit-string basis states. In particular, on valid codes it adds $\\eta(F(\\mathbf g))$ to the target. A named oracle call is charged as one query; a Boolean-circuit implementation is charged for its reversible gates. The model makes no claim that an arbitrary function has an efficient circuit.\n\nThe recovery algorithm outputs a finite list of character labels $\\mathbf k^{(1)},\\ldots,\\mathbf k^{(M)}$. It denotes the constraint set\n$$K:=\\{\\mathbf g\\in G:\\chi_{\\mathbf k^{(j)}}(\\mathbf g)=1\\text{ for every }1\\le j\\le M\\}=\\bigcap_{j=1}^M\\ker\\chi_{\\mathbf k^{(j)}},$$\nwhere $\\ker\\chi:=\\{\\mathbf g:\\chi(\\mathbf g)=1\\}$ and the empty intersection is defined to be $G$. Success means $K=H$. The output remains this implicit common-kernel presentation; converting it to subgroup generators is outside the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-finite-abelian-hidden-subgroup-problem",
+          "source_section": "Definition",
+          "quote": "An input group is given in explicit invariant-factor coordinates\n$$G=\\prod_{i=1}^r\\mathbb Z/n_i\\mathbb Z,\\qquad 2\\le n_1\\mid n_2\\mid\\cdots\\mid n_r,$$\nwith componentwise addition and $N:=|G|=\\prod_i n_i$. The empty product has $G=\\{0\\}$ and $N=1$. No procedure for finding these coordinates from a black-box group is included. A character label is a tuple $\\mathbf k=(k_1,\\ldots,k_r)$ with $k_i\\in\\mathbb Z/n_i\\mathbb Z$, representing\n$$\\chi_{\\mathbf k}(\\mathbf g):=\\prod_{i=1}^r\\exp(2\\pi i k_i g_i/n_i).$$\nThe cyclic-character and product-character suppliers identify these labels with all of $\\widehat G$.\n\nThe hiding input is a finite set $S$, an injective encoding $\\eta:S\\to\\{0,1\\}^m$, and a total function $F:G\\to S$ for which there is an unknown subgroup $H\\le G$ such that\n$$F(\\mathbf g)=F(\\mathbf g')\\quad\\Longleftrightarrow\\quad \\mathbf g-\\mathbf g'\\in H.$$\nThis is the hiding promise. Put $b_i:=\\lceil\\log_2 n_i\\rceil$ and $b:=\\sum_i b_i$. Encode $g_i\\in\\mathbb Z/n_i\\mathbb Z$ by the $b_i$-bit big-endian binary word of its least residue in $\\{0,\\ldots,n_i-1\\}$, and encode $\\mathbf g$ by concatenating these words in coordinate order; denote this injective code by $\\operatorname{code}_G(\\mathbf g)$. This uses the first-wire-most-significant-bit convention of [[def-qc-ordered-bitstring-encoding]]. Use the same coordinate widths and convention to encode character labels $\\mathbf k$ as $\\operatorname{code}_{\\widehat G}(\\mathbf k)$.\n\nThe hiding input also supplies a total Boolean function $\\widetilde F:\\{0,1\\}^b\\to\\{0,1\\}^m$ agreeing with $\\eta\\circ F$ on valid group codes; its values on invalid bit strings are part of the declared extension. The coherent XOR oracle acts by\n$$O_{\\widetilde F}|x,y\\rangle=|x,y\\oplus\\widetilde F(x)\\rangle$$\non all ordered input and target bit-string basis states. In particular, on valid codes it adds $\\eta(F(\\mathbf g))$ to the target. A named oracle call is charged as one query; a Boolean-circuit implementation is charged for its reversible gates. The model makes no claim that an arbitrary function has an efficient circuit.\n\nThe recovery algorithm outputs a finite list of character labels $\\mathbf k^{(1)},\\ldots,\\mathbf k^{(M)}$. It denotes the constraint set\n$$K:=\\{\\mathbf g\\in G:\\chi_{\\mathbf k^{(j)}}(\\mathbf g)=1\\text{ for every }1\\le j\\le M\\}=\\bigcap_{j=1}^M\\ker\\chi_{\\mathbf k^{(j)}},$$\nwhere $\\ker\\chi:=\\{\\mathbf g:\\chi(\\mathbf g)=1\\}$ and the empty intersection is defined to be $G$. Success means $K=H$. The output remains this implicit common-kernel presentation; converting it to subgroup generators is outside the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, the map\n$\\operatorname{tr}:M_n(F)\\to F$ is linear:\n\n$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $N=|G|$ and $h=|H|$. The oracle output on the initial state is $|\\Psi\\rangle=N^{-1/2}\\sum_{g\\in G}|\\operatorname{code}_G(g)\\rangle|\\eta(F(g))\\rangle$. The unreduced density matrix has terms $N^{-1}|\\operatorname{code}_G(g)\\rangle\\langle\\operatorname{code}_G(g')|\\otimes|\\eta(F(g))\\rangle\\langle\\eta(F(g'))|$. By [L1] and output-register orthonormality [F3], tracing out the second register retains exactly the pairs with $\\eta(F(g))=\\eta(F(g'))$. Injectivity of $\\eta$ in [F2] makes this equivalent to $F(g)=F(g')$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the retained pairs are exactly those lying in a common coset $C\\in G/H$. Translation gives $|C|=h$. By [F3], the vectors $|g\\rangle$ are orthonormal, so $\\langle C,C\\rangle=h^{-1}\\sum_{g,g'\\in C}\\langle g,g'\\rangle=1$ for $|C\\rangle:=h^{-1/2}\\sum_{g\\in C}|g\\rangle$. Hence $\\rho_G=N^{-1}\\sum_{C\\in G/H}\\sum_{g,g'\\in C}|g\\rangle\\langle g'|$. The rank-one matrix $|C\\rangle\\langle C|$ has diagonal entries $1/h$ on the $h$ labels in $C$ and zero elsewhere, so its trace is $1$ by [F5]. Put $P_C:=|C\\rangle\\langle C|$. By [F6], $P_Cv=\\langle v,C\\rangle_{\\rm root}|C\\rangle$, and for all $u,v$ the root pairing gives $\\langle P_Cu,v\\rangle_{\\rm root}=\\langle u,C\\rangle_{\\rm root}\\langle C,v\\rangle_{\\rm root}=\\langle u,P_Cv\\rangle_{\\rm root}$. Thus $P_C$ is self-adjoint. Also $\\langle |C\\rangle\\langle C|v,v\\rangle_{\\rm root}=|\\langle v,C\\rangle_{\\rm root}|^2\\ge0$. Therefore $|C\\rangle\\langle C|=h^{-1}\\sum_{g,g'\\in C}|g\\rangle\\langle g'|$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitution gives $\\rho_G=(h/N)\\sum_{C\\in G/H}|C\\rangle\\langle C|$. The real positive weighted sum of the self-adjoint summands in step 2.1 is self-adjoint, and its quadratic form is the corresponding weighted sum of nonnegative quadratic forms. Thus $\\rho_G$ is nonnegative by [F4]. The cosets partition the $N$ group elements into blocks of size $h$, so there are $N/h$ distinct cosets and the weights sum to $(h/N)(N/h)=1$. By trace linearity [F5] and the unit trace of each summand, $\\operatorname{tr}(\\rho_G)=1$. Thus [F4] makes $\\rho_G$ a density operator, and the formula is the uniform mixture over distinct cosets.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A finite group and subgroup contain the identity; the empty set is outside the statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "The source derives a density-matrix identity over the finite cosets. G and H contain the identity, so all coset vectors have positive normalization; summing over the quotient needs no representative selection.",
+            "item_sha256": "d8576c8cb29c155769c36bb7707fb6982e4f6f5e6a170ec30bec5252ead4beaa",
+            "row_sha256": "6298cad634f3bffdfb67a952c46647d8a195ee66a8c921afb6fbae9113ed9135",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-early.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "The source derives a density-matrix identity over the finite cosets. G and H contain the identity, so all coset vectors have positive normalization; summing over the quotient needs no representative selection."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include the group identity among the orthonormal labels and retain its oracle-output terms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: when H=G there is one coset, and the displayed mixture reduces to the rank-one uniform-group state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: when H={0}, each coset is a singleton and the formula reduces to the uniform diagonal mixture over group labels."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof uses finite sums over group elements and cosets, with no interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cosets form a finite quotient set and the proof sums over all cosets without selecting representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a density-matrix identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a density-matrix identity, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u34",
+        "notes": "Local adjudication/repair, not independent review of the repair. The hiding promise and injective output encoding retain precisely the same-coset terms under partial trace. Cosets have h>0 elements. Explicit root-pairing calculation now establishes self-adjointness of each P_C; the weighted sum is self-adjoint with nonnegative quadratic form, and trace is (h/N)(N/h)=1. Includes N=h=1, H=G, H={0} and empty encoded registers. No representative choice or AC is used. Statement unchanged; no external source reading claimed."
+      }
+    },
+    "thm-qa-finite-abelian-hidden-subgroup-sample-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-coset-fourier-transform",
+          "source_section": "Statement",
+          "quote": "Let $G$ be finite abelian, $H\\le G$, and $x_0\\in G$. Put $N:=|G|$, $M:=|H|$, and $Q:=|H^\\perp|$, which is finite by [[thm-qa-finite-abelian-subgroup-annihilator-cardinality]]. Write $N_{\\mathbb R}:=\\iota_{\\mathbb R}(N)$, $M_{\\mathbb R}:=\\iota_{\\mathbb R}(M)$, and $Q_{\\mathbb R}:=\\iota_{\\mathbb R}(Q)$ for their canonical real images, as in [[def-qa-normalized-finite-abelian-fourier-transform]]. These are positive since $G$ and $H$ contain their identities and $H^\\perp$ contains the trivial character, and they are viewed in $\\mathbb C$ through its embedded copy of $\\mathbb R$. For the indicator $1_{x_0+H}$,\n$$F_G1_{x_0+H}(\\chi)=\\begin{cases}M_{\\mathbb R}N_{\\mathbb R}^{-1/2}\\overline{\\chi(x_0)},&\\chi\\in H^\\perp,\\\\0,&\\chi\\notin H^\\perp.\\end{cases}$$\nConsequently, the normalized uniform-coset function $M_{\\mathbb R}^{-1/2}1_{x_0+H}$ transforms to the function supported on $H^\\perp$ with value $M_{\\mathbb R}^{1/2}N_{\\mathbb R}^{-1/2}\\overline{\\chi(x_0)}=Q_{\\mathbb R}^{-1/2}\\overline{\\chi(x_0)}$ there. The unnormalized indicator amplitude and normalized-state amplitude are distinct.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-finite-character-values-have-unit-modulus",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group, $\\chi:G\\to\\mathbb C^{\\times}$ is an additive character, and $x\\in G$, then $|\\chi(x)|=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-hidden-coset-state-law",
+          "source_section": "Statement",
+          "quote": "Let $G$ be finite abelian, $H\\le G$, $N=|G|$, and $h=|H|$. Write $\\mathcal C_H:=\\{g+H:g\\in G\\}$ for the set of distinct additive cosets, where $g+H:=\\{g+h':h'\\in H\\}$. Start with the uniform group state, evaluate an exact hiding oracle into a fresh output register, then discard that register. On the group register the resulting density matrix is\n$$\\rho_G=\\frac{h}{N}\\sum_{C\\in\\mathcal C_H}|C\\rangle\\langle C|,\\qquad |C\\rangle:=h^{-1/2}\\sum_{g\\in C}|g\\rangle.$$\nThus it is the uniform mixture of one normalized coset state for each distinct coset.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+          "source_section": "Statement",
+          "quote": "For a subgroup $H\\le G$ of a finite abelian group, restriction and inflation identify $H^\\perp$ with the character dual of $G/H$. Consequently\n$$|H^\\perp|=|G/H|=[G:H]=\\frac{|G|}{|H|},\\qquad |H^\\perp|\\,|H|=|G|.$$\nThe quotient convention is left cosets, with additive notation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-finite-abelian-fourier-transform-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $N_{\\mathbb R}$ be the canonical positive real image of $|G|$ from [[def-qa-normalized-finite-abelian-fourier-transform]]. Define the finite coefficient matrix $U$, with rows indexed by $\\widehat G$ and columns by $G$, by\n$$U_{\\chi,x}=N_{\\mathbb R}^{-1/2}\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G,\\ x\\in G.$$\nIt is square and satisfies $U^*U=I_G$ and $UU^*=I_{\\widehat G}$, where $U^*$ is the conjugate transpose and $I_X$ is the identity matrix indexed by $X$, with $(I_X)_{x,y}=1$ when $x=y$ and $0$ otherwise. These two identities are the meaning of “unitary” here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-finite-abelian-dual-character-orthogonality",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$ and $x,y\\in G$,\n$$\\sum_{\\chi\\in\\widehat G}\\chi(x)\\overline{\\chi(y)}=\\begin{cases}|G|,&x=y,\\\\0,&x\\ne y.\\end{cases}$$\nThis is orthogonality of the columns indexed by group elements. It is proved from cyclic root sums and is not inferred from row orthogonality.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-dirac-notation-coordinate-identity",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces with ordered\northonormal bases $E=(e_j)_{j<n}$ and $F=(f_i)_{i<m}$. Let $T:H\\to K$ be\nlinear ([[def-linear-map]]), and write $T_{ij}$ for the $(i,j)$ entry of its\nmatrix in these bases.\nThen, for every $z\\in H$,\n\n$$Tz=\\sum_{j<n}\\sum_{i<m}T_{ij}\\langle z,e_j\\rangle_{H,\\mathrm{root}}f_i, \\qquad T=\\sum_{j<n}\\sum_{i<m}T_{ij}|f_i\\rangle\\langle e_j|.$$\n\nFor $x\\in K$ and $y\\in H$, the rank-one map $|x\\rangle\\langle y|$ has\ncoordinate matrix $[x]_F[y]_E^\\dagger$, where $M^\\dagger=\\overline M^{\\mathsf T}$.\nIts amplitude satisfies\n$\\langle x|T|y\\rangle_D=\\langle Ty,x\\rangle_{K,\\mathrm{root}}$.\nAll sums are empty when an index dimension is zero, and the identities include\nthose cases.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, the map\n$\\operatorname{tr}:M_n(F)\\to F$ is linear:\n\n$$\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B),\\qquad \\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by\n$$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$\nFor any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define\n$$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$\nThe pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "alg-qa-finite-abelian-hidden-subgroup-sample",
+          "source_section": "Definition",
+          "quote": "Inputs are a hiding instance from [[def-qa-finite-abelian-hidden-subgroup-problem]], a fresh $b$-qubit group register and supplied exact circuits with declared access/costs, where $b$ is the group-code width in that definition:\n\n- $P_G$ prepares the normalized uniform state $|G\\rangle=N^{-1/2}\\sum_{g\\in G}|\\operatorname{code}_G(g)\\rangle$ on valid group labels and returns its workspace to the declared initial state.\n- $O_F$ is the supplied coherent XOR oracle for the total extension $\\widetilde F$ in [[def-qa-finite-abelian-hidden-subgroup-problem]], acting on the group register and a fresh $m$-qubit output register initialized to the all-zero word $0^m$.\n- $Q_G$ is the supplied exact product QFT, with the fixed negative-character convention\n$$Q_G|\\operatorname{code}_G(g)\\rangle=N^{-1/2}\\sum_{\\mathbf k}\\overline{\\chi_{\\mathbf k}(g)}|\\operatorname{code}_{\\widehat G}(\\mathbf k)\\rangle$$\non the valid group subspace. It is supplied as a unitary on the full $b$-qubit register, so any extension from the valid-label subspace is part of the circuit input.\n\nIf $N=1$, return the unique trivial character without a query. Otherwise:\n\n1. Prepare $|G\\rangle$ with $P_G$.\n2. Apply $O_F$ once to the group register and fresh output register.\n3. Discard the output register by the declared partial-trace operation; do not measure it.\n4. Apply $Q_G$ to the group register and measure the full $b$-qubit register in its ordered computational basis; the prescribed QFT action places the state in the valid character-code subspace.\n5. Decode the measured valid character code as the tuple $\\mathbf k$ and return $\\chi_{\\mathbf k}$.\n\nThis procedure assumes the preparation, oracle, and QFT circuits are supplied exactly. It makes no existence, uniformity, or efficiency claim for those circuits.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qa-finite-abelian-hidden-subgroup-problem",
+          "source_section": "Definition",
+          "quote": "An input group is given in explicit invariant-factor coordinates\n$$G=\\prod_{i=1}^r\\mathbb Z/n_i\\mathbb Z,\\qquad 2\\le n_1\\mid n_2\\mid\\cdots\\mid n_r,$$\nwith componentwise addition and $N:=|G|=\\prod_i n_i$. The empty product has $G=\\{0\\}$ and $N=1$. No procedure for finding these coordinates from a black-box group is included. A character label is a tuple $\\mathbf k=(k_1,\\ldots,k_r)$ with $k_i\\in\\mathbb Z/n_i\\mathbb Z$, representing\n$$\\chi_{\\mathbf k}(\\mathbf g):=\\prod_{i=1}^r\\exp(2\\pi i k_i g_i/n_i).$$\nThe cyclic-character and product-character suppliers identify these labels with all of $\\widehat G$.\n\nThe hiding input is a finite set $S$, an injective encoding $\\eta:S\\to\\{0,1\\}^m$, and a total function $F:G\\to S$ for which there is an unknown subgroup $H\\le G$ such that\n$$F(\\mathbf g)=F(\\mathbf g')\\quad\\Longleftrightarrow\\quad \\mathbf g-\\mathbf g'\\in H.$$\nThis is the hiding promise. Put $b_i:=\\lceil\\log_2 n_i\\rceil$ and $b:=\\sum_i b_i$. Encode $g_i\\in\\mathbb Z/n_i\\mathbb Z$ by the $b_i$-bit big-endian binary word of its least residue in $\\{0,\\ldots,n_i-1\\}$, and encode $\\mathbf g$ by concatenating these words in coordinate order; denote this injective code by $\\operatorname{code}_G(\\mathbf g)$. This uses the first-wire-most-significant-bit convention of [[def-qc-ordered-bitstring-encoding]]. Use the same coordinate widths and convention to encode character labels $\\mathbf k$ as $\\operatorname{code}_{\\widehat G}(\\mathbf k)$.\n\nThe hiding input also supplies a total Boolean function $\\widetilde F:\\{0,1\\}^b\\to\\{0,1\\}^m$ agreeing with $\\eta\\circ F$ on valid group codes; its values on invalid bit strings are part of the declared extension. The coherent XOR oracle acts by\n$$O_{\\widetilde F}|x,y\\rangle=|x,y\\oplus\\widetilde F(x)\\rangle$$\non all ordered input and target bit-string basis states. In particular, on valid codes it adds $\\eta(F(\\mathbf g))$ to the target. A named oracle call is charged as one query; a Boolean-circuit implementation is charged for its reversible gates. The model makes no claim that an arbitrary function has an efficient circuit.\n\nThe recovery algorithm outputs a finite list of character labels $\\mathbf k^{(1)},\\ldots,\\mathbf k^{(M)}$. It denotes the constraint set\n$$K:=\\{\\mathbf g\\in G:\\chi_{\\mathbf k^{(j)}}(\\mathbf g)=1\\text{ for every }1\\le j\\le M\\}=\\bigcap_{j=1}^M\\ker\\chi_{\\mathbf k^{(j)}},$$\nwhere $\\ker\\chi:=\\{\\mathbf g:\\chi(\\mathbf g)=1\\}$ and the empty intersection is defined to be $G$. Success means $K=H$. The output remains this implicit common-kernel presentation; converting it to subgroup generators is outside the definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a coset $g+H$ in the mixture of [F3] and write its transformed vector as $\\psi_g=\\sum_{\\chi\\in\\widehat G}\\alpha_{g,\\chi}|\\chi\\rangle$. The input coset ket is normalized by [F3], with its valid group-code coordinates orthonormal by [F13], and the supplied circuit $Q_G$ is unitary by [F12], so $\\|\\psi_g\\|=1$. For any vector $v$, [F8] gives $\\langle\\rho_gv,v\\rangle_{\\rm root}=|\\langle v,\\psi_g\\rangle_{\\rm root}|^2\\ge0$ for $\\rho_g=|\\psi_g\\rangle\\langle\\psi_g|$. In character coordinates, $\\rho_g$ has diagonal entries $|\\alpha_{g,\\chi}|^2$, whose sum is $\\|\\psi_g\\|^2=1$; [F7] gives $\\operatorname{tr}(\\rho_g)=1$. Thus [F6] makes $\\rho_g$ a density operator.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The valid character-code basis is orthonormal by [F13], independently of the abstract matrix unitarity in [F5]. The exact action in [F12] places $\\psi_g$ in its span, so every invalid $b$-bit outcome has probability zero. For a valid character $\\chi$, its rank-one projector $P_\\chi=|\\chi\\rangle\\langle\\chi|$ has a single diagonal $1$ at that code. The matrix of $\\rho_g$ has entries $\\alpha_{g,\\mu}\\overline{\\alpha_{g,\\nu}}$, so the projective-measurement weight [F9], computed by [F7]–[F8], is $\\operatorname{tr}(\\rho_gP_\\chi)=|\\alpha_{g,\\chi}|^2$. By [F1], [F2], and the support definition [F11], this is $|Q_{\\mathbb R}^{-1/2}\\overline{\\chi(g)}|^2=Q_{\\mathbb R}^{-1}=1/Q_{\\mathbb R}$ when $\\chi\\in H^\\perp$ and $0$ otherwise; the square root is the positive real one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "F11",
+            "F12",
+            "F13",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The probability in step 1.2 does not depend on the coset representative. The discarded-output state is the uniform mixture [F3], and trace linearity [F10] makes its measurement distribution the average of the same per-coset distribution. Hence the measured character is uniform on all of $H^\\perp$ and has zero probability outside it.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F10",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], $N=MQ$, so the canonical real images in [F1] satisfy $N_{\\mathbb R}=M_{\\mathbb R}Q_{\\mathbb R}$: each image is the sum of the corresponding number of copies of $1$, and distributivity preserves this product. Hence each supported outcome has probability $Q_{\\mathbb R}^{-1}=M_{\\mathbb R}/N_{\\mathbb R}$, which is $1/|H^\\perp|=|H|/|G|$ in the probability notation of [F1]. In the boundary case $H=G$, $Q=1$ and the coset-transform formula [F1] gives the single trivial character with probability one.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A finite group contains its identity, so an empty group is outside the theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 include the trivial character and all finite labels in the projective outcome law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: for H=G the support is the single trivial character with probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the H=G boundary; H={0} is covered by the same formula with |H^perp|=|G|."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The probability law is over finite character labels and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sums and mixtures are finite; no family of representatives is selected in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a probability distribution statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a probability distribution statement, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed the N=1 introductory branch and steps 1.1, 1.2, 2.1, 3.1 against every direct supplier. Inspected the actual coset Fourier, annihilator cardinality, dual orthogonality, matrix-unitarity, character modulus, bit order, coordinate/Dirac and measurement arguments. Encoded computational states are orthonormal by tensor factors and injective fixed-width codes; abstract Fourier unitarity is not used as a substitute. Full-register QFT sends the valid subspace into the valid character subspace, giving zero invalid-code probability. Rank-one matrices vv-dagger are self-adjoint and positive; trace against the basis projector is exactly squared amplitude. Mixture averaging preserves uniform 1/|H-perp|=h/N probabilities. N=1, H=G and H={0} checked; no division by zero, infinite choice or approximate-QFT claim. Childs Chapter 6.1 equations (6.5)–(6.18) checked with conjugated local sign convention. No defect."
+      }
+    },
+    "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+          "source_section": "Statement",
+          "quote": "For every finite abelian hidden-subgroup instance with hidden subgroup $H\\le G$, one execution of the exact sample procedure returns a valid character code with probability one. Each $\\chi\\in H^\\perp$ has probability $1/|H^\\perp|=|H|/|G|$, every character outside $H^\\perp$ has probability zero, and every invalid $b$-bit code has probability zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-annihilator-restriction-cut",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group, and let $H\\subsetneq K\\le G$. Choose a character $\\chi$ uniformly from $H^\\perp$. Then\n$$\\mathbb P(\\chi|_K\\ne 1)\\ge \\frac12.$$\nFor every outcome with $\\chi|_K\\ne1$, the updated common kernel $K\\cap\\ker\\chi$, where $\\ker\\chi=\\{g\\in G:\\chi(g)=1\\}$, contains $H$ and has index at least two in $K$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-common-kernel-repetition-bound",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group with $N:=|G|\\ge2$, let $H\\le G$, and start with a current subgroup $K_0$ satisfying $H\\le K_0\\le G$. At each of $M$ fresh independent trials, if the current subgroup $K_{t-1}$ strictly contains $H$, draw a uniform $\\chi_t\\in H^\\perp$ and replace $K_{t-1}$ by $K_t=K_{t-1}\\cap\\ker\\chi_t$; after reaching $H$, leave the subgroup equal to $H$. Each cut reduces the current order by a factor of at least two. For $0<\\delta<1$, put\n$$s:=\\left\\lceil\\log_2 N\\right\\rceil,\\qquad M:=\\left\\lceil4s+16\\ln(1/\\delta)\\right\\rceil.$$\nThen the failure event $K_M\\ne H$ has probability at most $\\delta$. If $H=K_0$, the failure probability is zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $|G|=1$, its only subgroup is $G$, and the algorithm outputs the empty constraint list denoting $G$. Thus the conclusion holds with probability one and zero queries.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $|G|\\ge2$. Each measured character belongs to $H^\\perp$ by [F1], so it is trivial on $H$. Hence every kernel in the output list contains $H$, and their intersection $K$ satisfies $H\\le K$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Starting with $K_0=G$, whenever $K_{t-1}>H$ the conditional cut probability and index reduction are those of [F2]. After $s=\\lceil\\log_2|G|\\rceil$ cuts, the subgroup order is at most $|G|/2^s\\le1$; since it contains the nonempty subgroup $H$, it must equal $H$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The reconstruction procedure makes exactly $M$ independent samples. Therefore [F3] bounds the event that the final common kernel is not $H$ by $\\delta$. Combining with $H\\le K$ from step 1.2 gives success probability at least $1-\\delta$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group contains the identity; the theorem covers the trivial group as N=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 shows every character kernel and their intersection contain H, hence contain the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves exact success with probability one when |G|=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 separate the trivial group from |G|≥2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes 0<δ<1, so the repetition count and logarithm are defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses independent finite samples and the already stated adaptive coupling; it adds no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way success-probability bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way success-probability bound, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed steps 1.1–2.1, reconstruction instructions, uniform sample law, cut lemma, full repetition coupling proof and the cited published Chernoff proof. Each fresh independent sample preserves H; intersections are subgroups and stay at H once reached. The adaptive cut indicators are not asserted independent: the supplier thins them to Bernoulli(1/2) with constant conditional probability given the augmented past, giving independent Y variables on a finite probability space. On failure sum(Y)<s; M ceiling yields mu=M/2>=2s+8 ln(1/delta), so s<=mu/2 and exp(-mu/8)<=delta. All hypotheses of the finite independent Bernoulli lower tail apply with eta=1/2. Trivial G returns empty list with exact success; H=G succeeds automatically; 0<delta<1 makes M positive. No generator extraction, infinite choice or efficiency assumption. No defect."
+      }
+    },
+    "thm-qa-finite-abelian-hidden-subgroup-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+          "source_section": "Definition",
+          "quote": "Inputs are a finite abelian hidden-subgroup instance with explicit invariant-factor coordinates, a supplied positive integer $M$, and the exact circuits $P_G$, $O_F$, and $Q_G$ with the access, cost, workspace, and full-register action contracts specified in [[alg-qa-finite-abelian-hidden-subgroup-sample]]. If $|G|=1$, output the empty character list, which denotes $G$, and make no oracle calls. Otherwise run the exact Fourier-sample procedure [[alg-qa-finite-abelian-hidden-subgroup-sample]] independently $M$ times, passing those supplied circuits and using fresh registers and a fresh measurement each time. Store the resulting character labels $\\mathbf k^{(1)},\\ldots,\\mathbf k^{(M)}$ and output that list as the implicit common-kernel presentation\n$$K=\\bigcap_{j=1}^M\\ker\\chi_{\\mathbf k^{(j)}}.$$\nDo not convert $K$ to a generating set. The algorithm consumes $M$ as an integer input; the success theorem specifies a choice of $M$ for each confidence target.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-character-dual-of-a-product-factors",
+          "source_section": "Statement",
+          "quote": "Let $G_1,\\ldots,G_r$ be finite abelian groups and let $P=G_1\\times\\cdots\\times G_r$ be their recursively parenthesized external direct product. By convention, $P$ is the trivial group when $r=0$. Restriction to the coordinate factors gives a bijection\n$$\\widehat P\\longrightarrow\\widehat{G_1}\\times\\cdots\\times\\widehat{G_r}.$$\nIts inverse sends $(\\chi_1,\\ldots,\\chi_r)$ to $\\chi(g_1,\\ldots,g_r)=\\prod_{i=1}^r\\chi_i(g_i)$. For $r=0$, both sides are singletons.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-cyclic-group-has-n-characters",
+          "source_section": "Statement",
+          "quote": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, and $w(C)$ its total number of wires.\n\nEach clean or dirty ancilla coordinate additionally requires a declared ordered partition of the circuit wires into data register $D$ and ancilla register $A$, and a declared target unitary $V$ on $D$. In that factor order, the complete circuit unitary must satisfy the corresponding exact contract of [[def-qc-clean-and-dirty-ancillas]]. For such a supplied clean contract set $a_{\\rm clean}(C)=|A|$, and for such a supplied dirty contract set $a_{\\rm dirty}(C)=|A|$; the notation suppresses the declared interface, which is part of the cost instance and may differ between the two coordinates. If no corresponding contract is supplied, mark that coordinate not applicable. These are counts of declared contract registers, not maxima over possible partitions. Zero initialization alone supplies neither return contract. Every auxiliary wire remains counted in $w(C)$ ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-qa-finite-abelian-hidden-subgroup-sample",
+          "source_section": "Definition",
+          "quote": "Inputs are a hiding instance from [[def-qa-finite-abelian-hidden-subgroup-problem]], a fresh $b$-qubit group register and supplied exact circuits with declared access/costs, where $b$ is the group-code width in that definition:\n\n- $P_G$ prepares the normalized uniform state $|G\\rangle=N^{-1/2}\\sum_{g\\in G}|\\operatorname{code}_G(g)\\rangle$ on valid group labels and returns its workspace to the declared initial state.\n- $O_F$ is the supplied coherent XOR oracle for the total extension $\\widetilde F$ in [[def-qa-finite-abelian-hidden-subgroup-problem]], acting on the group register and a fresh $m$-qubit output register initialized to the all-zero word $0^m$.\n- $Q_G$ is the supplied exact product QFT, with the fixed negative-character convention\n$$Q_G|\\operatorname{code}_G(g)\\rangle=N^{-1/2}\\sum_{\\mathbf k}\\overline{\\chi_{\\mathbf k}(g)}|\\operatorname{code}_{\\widehat G}(\\mathbf k)\\rangle$$\non the valid group subspace. It is supplied as a unitary on the full $b$-qubit register, so any extension from the valid-label subspace is part of the circuit input.\n\nIf $N=1$, return the unique trivial character without a query. Otherwise:\n\n1. Prepare $|G\\rangle$ with $P_G$.\n2. Apply $O_F$ once to the group register and fresh output register.\n3. Discard the output register by the declared partial-trace operation; do not measure it.\n4. Apply $Q_G$ to the group register and measure the full $b$-qubit register in its ordered computational basis; the prescribed QFT action places the state in the valid character-code subspace.\n5. Decode the measured valid character code as the tuple $\\mathbf k$ and return $\\chi_{\\mathbf k}$.\n\nThis procedure assumes the preparation, oracle, and QFT circuits are supplied exactly. It makes no existence, uniformity, or efficiency claim for those circuits.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-finite-abelian-hidden-subgroup-problem",
+          "source_section": "Definition",
+          "quote": "An input group is given in explicit invariant-factor coordinates\n$$G=\\prod_{i=1}^r\\mathbb Z/n_i\\mathbb Z,\\qquad 2\\le n_1\\mid n_2\\mid\\cdots\\mid n_r,$$\nwith componentwise addition and $N:=|G|=\\prod_i n_i$. The empty product has $G=\\{0\\}$ and $N=1$. No procedure for finding these coordinates from a black-box group is included. A character label is a tuple $\\mathbf k=(k_1,\\ldots,k_r)$ with $k_i\\in\\mathbb Z/n_i\\mathbb Z$, representing\n$$\\chi_{\\mathbf k}(\\mathbf g):=\\prod_{i=1}^r\\exp(2\\pi i k_i g_i/n_i).$$\nThe cyclic-character and product-character suppliers identify these labels with all of $\\widehat G$.\n\nThe hiding input is a finite set $S$, an injective encoding $\\eta:S\\to\\{0,1\\}^m$, and a total function $F:G\\to S$ for which there is an unknown subgroup $H\\le G$ such that\n$$F(\\mathbf g)=F(\\mathbf g')\\quad\\Longleftrightarrow\\quad \\mathbf g-\\mathbf g'\\in H.$$\nThis is the hiding promise. Put $b_i:=\\lceil\\log_2 n_i\\rceil$ and $b:=\\sum_i b_i$. Encode $g_i\\in\\mathbb Z/n_i\\mathbb Z$ by the $b_i$-bit big-endian binary word of its least residue in $\\{0,\\ldots,n_i-1\\}$, and encode $\\mathbf g$ by concatenating these words in coordinate order; denote this injective code by $\\operatorname{code}_G(\\mathbf g)$. This uses the first-wire-most-significant-bit convention of [[def-qc-ordered-bitstring-encoding]]. Use the same coordinate widths and convention to encode character labels $\\mathbf k$ as $\\operatorname{code}_{\\widehat G}(\\mathbf k)$.\n\nThe hiding input also supplies a total Boolean function $\\widetilde F:\\{0,1\\}^b\\to\\{0,1\\}^m$ agreeing with $\\eta\\circ F$ on valid group codes; its values on invalid bit strings are part of the declared extension. The coherent XOR oracle acts by\n$$O_{\\widetilde F}|x,y\\rangle=|x,y\\oplus\\widetilde F(x)\\rangle$$\non all ordered input and target bit-string basis states. In particular, on valid codes it adds $\\eta(F(\\mathbf g))$ to the target. A named oracle call is charged as one query; a Boolean-circuit implementation is charged for its reversible gates. The model makes no claim that an arbitrary function has an efficient circuit.\n\nThe recovery algorithm outputs a finite list of character labels $\\mathbf k^{(1)},\\ldots,\\mathbf k^{(M)}$. It denotes the constraint set\n$$K:=\\{\\mathbf g\\in G:\\chi_{\\mathbf k^{(j)}}(\\mathbf g)=1\\text{ for every }1\\le j\\le M\\}=\\bigcap_{j=1}^M\\ker\\chi_{\\mathbf k^{(j)}},$$\nwhere $\\ker\\chi:=\\{\\mathbf g:\\chi(\\mathbf g)=1\\}$ and the empty intersection is defined to be $G$. Success means $K=H$. The output remains this implicit common-kernel presentation; converting it to subgroup generators is outside the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-qa-finite-abelian-hidden-subgroup-sample",
+          "source_section": "Definition",
+          "quote": "Inputs are a hiding instance from [[def-qa-finite-abelian-hidden-subgroup-problem]], a fresh $b$-qubit group register and supplied exact circuits with declared access/costs, where $b$ is the group-code width in that definition:\n\n- $P_G$ prepares the normalized uniform state $|G\\rangle=N^{-1/2}\\sum_{g\\in G}|\\operatorname{code}_G(g)\\rangle$ on valid group labels and returns its workspace to the declared initial state.\n- $O_F$ is the supplied coherent XOR oracle for the total extension $\\widetilde F$ in [[def-qa-finite-abelian-hidden-subgroup-problem]], acting on the group register and a fresh $m$-qubit output register initialized to the all-zero word $0^m$.\n- $Q_G$ is the supplied exact product QFT, with the fixed negative-character convention\n$$Q_G|\\operatorname{code}_G(g)\\rangle=N^{-1/2}\\sum_{\\mathbf k}\\overline{\\chi_{\\mathbf k}(g)}|\\operatorname{code}_{\\widehat G}(\\mathbf k)\\rangle$$\non the valid group subspace. It is supplied as a unitary on the full $b$-qubit register, so any extension from the valid-label subspace is part of the circuit input.\n\nIf $N=1$, return the unique trivial character without a query. Otherwise:\n\n1. Prepare $|G\\rangle$ with $P_G$.\n2. Apply $O_F$ once to the group register and fresh output register.\n3. Discard the output register by the declared partial-trace operation; do not measure it.\n4. Apply $Q_G$ to the group register and measure the full $b$-qubit register in its ordered computational basis; the prescribed QFT action places the state in the valid character-code subspace.\n5. Decode the measured valid character code as the tuple $\\mathbf k$ and return $\\chi_{\\mathbf k}$.\n\nThis procedure assumes the preparation, oracle, and QFT circuits are supplied exactly. It makes no existence, uniformity, or efficiency claim for those circuits.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $N\\ge2$, the reconstruction algorithm executes exactly $M$ independent sample procedures by [F1]. Under [F7], each sample's explicit call to the hiding oracle is its only hiding-oracle access, so the query coordinate is exactly $M$. If the oracle is compiled from a Boolean circuit, its $M$ evaluations contribute $M C_F$ ordinary gates by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Still assuming $N\\ge2$, write $G=\\prod_{i=1}^r\\mathbb Z/n_i\\mathbb Z$ with each $n_i\\ge2$. By [F2] and [F6], each character is represented by one tuple with coordinate $k_i\\in\\mathbb Z/n_i\\mathbb Z$ and its fixed-width binary encoding uses $b=\\sum_i\\lceil\\log_2n_i\\rceil\\le\\log_2N+r\\le2\\log_2N$ bits, since $r\\le\\log_2N$. Thus the output list has $Mb=O(M\\log_2N)$ bits, and writing those bits takes the same order of classical bit operations.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $N\\ge2$, by [F5], one sample uses one preparation, one QFT, one label measurement, one output-register discard, and one explicit hiding-oracle evaluation. Under [F7], that is one hiding-oracle query per sample. Sequentially composing $M$ samples multiplies each additive per-sample coordinate by $M$: the named-query coordinate is $M$, and the ordinary gate count is $M(C_P+C_Q+C_F)$ when an explicit oracle circuit is used. Measurements and discarding are charged in their own declared coordinates; they are not added to gate or query counts. The cost model [F3] also keeps description generation and the classical computation of $M$ separate.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $C_P+C_Q=O(\\log^2N)$ and the oracle is compiled with $C_F$ gates per evaluation, the gate count in step 1.3 is $O(M(C_F+\\log^2N))$; the query and classical-output bounds remain separate. For $N=1$, [F1] gives the immediate empty-list return, denoting $G$, with zero queries and constant control work.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group contains the identity; the N=1 branch is explicitly specified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 encodes every coordinate as a residue class, including zero, in the finite output list."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 give the zero-query constant-work branch for N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the proof separates N=1; for N≥2 every invariant factor has n_i≥2 and r≤log2 N."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the cost bound is conditional on supplied finite circuits; no limiting or endpoint claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All cost coordinates and circuits are declared inputs; the theorem makes no circuit-selection claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a resource bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a resource bound, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        "The N=1 branch has zero queries; for N≥2, sum_i ceil(log2 n_i)≤log2 N+r≤2log2 N."
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u34",
+        "notes": "Local adjudication/repair, not independent review of the repair. F1 and F5 now distinguish N>=2 operation counts from the N=1 immediate return, and the proof explicitly carries the branch condition and cites F1 for the trivial branch. With P_G,Q_G making no hiding access, M repetitions use exactly M hiding calls. Gate, measurement, discard and classical-output costs remain separate; b<=log2 N+r<=2 log2 N. Reconstruction now explicitly receives the same supplied circuits already assumed by this theorem. No new efficiency/existence claim; Statement unchanged."
+      }
+    },
+    "ex-qa-hsp-common-kernel-recovery": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-cyclic-group-has-n-characters",
+          "source_section": "Statement",
+          "quote": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qa-character-dual-of-a-product-factors",
+          "source_section": "Statement",
+          "quote": "Let $G_1,\\ldots,G_r$ be finite abelian groups and let $P=G_1\\times\\cdots\\times G_r$ be their recursively parenthesized external direct product. By convention, $P$ is the trivial group when $r=0$. Restriction to the coordinate factors gives a bijection\n$$\\widehat P\\longrightarrow\\widehat{G_1}\\times\\cdots\\times\\widehat{G_r}.$$\nIts inverse sends $(\\chi_1,\\ldots,\\chi_r)$ to $\\chi(g_1,\\ldots,g_r)=\\prod_{i=1}^r\\chi_i(g_i)$. For $r=0$, both sides are singletons.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+          "source_section": "Statement",
+          "quote": "For every finite abelian hidden-subgroup instance with hidden subgroup $H\\le G$, one execution of the exact sample procedure returns a valid character code with probability one. Each $\\chi\\in H^\\perp$ has probability $1/|H^\\perp|=|H|/|G|$, every character outside $H^\\perp$ has probability zero, and every invalid $b$-bit code has probability zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+          "source_section": "Definition",
+          "quote": "Inputs are a finite abelian hidden-subgroup instance with explicit invariant-factor coordinates, a supplied positive integer $M$, and the exact circuits $P_G$, $O_F$, and $Q_G$ with the access, cost, workspace, and full-register action contracts specified in [[alg-qa-finite-abelian-hidden-subgroup-sample]]. If $|G|=1$, output the empty character list, which denotes $G$, and make no oracle calls. Otherwise run the exact Fourier-sample procedure [[alg-qa-finite-abelian-hidden-subgroup-sample]] independently $M$ times, passing those supplied circuits and using fresh registers and a fresh measurement each time. Store the resulting character labels $\\mathbf k^{(1)},\\ldots,\\mathbf k^{(M)}$ and output that list as the implicit common-kernel presentation\n$$K=\\bigcap_{j=1}^M\\ker\\chi_{\\mathbf k^{(j)}}.$$\nDo not convert $K$ to a generating set. The algorithm consumes $M$ as an integer input; the success theorem specifies a choice of $M$ for each confidence target.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+          "source_section": "Definition",
+          "quote": "Inputs are a finite abelian hidden-subgroup instance with explicit invariant-factor coordinates, a supplied positive integer $M$, and the exact circuits $P_G$, $O_F$, and $Q_G$ with the access, cost, workspace, and full-register action contracts specified in [[alg-qa-finite-abelian-hidden-subgroup-sample]]. If $|G|=1$, output the empty character list, which denotes $G$, and make no oracle calls. Otherwise run the exact Fourier-sample procedure [[alg-qa-finite-abelian-hidden-subgroup-sample]] independently $M$ times, passing those supplied circuits and using fresh registers and a fresh measurement each time. Store the resulting character labels $\\mathbf k^{(1)},\\ldots,\\mathbf k^{(M)}$ and output that list as the implicit common-kernel presentation\n$$K=\\bigcap_{j=1}^M\\ker\\chi_{\\mathbf k^{(j)}}.$$\nDo not convert $K$ to a generating set. The algorithm consumes $M$ as an integer input; the success theorem specifies a choice of $M$ for each confidence target.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $H$ is trivial, every character is trivial on $H$. The labels are $a\\in\\{0,1\\}$ and $b\\in\\{0,1,2,3,4,5\\}$, so $|H^\\perp|=12$ and both $(1,0)$ and $(0,1)$ label allowed outcomes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], the probability that two independent samples occur in the specified order is $(1/12)(1/12)=1/144$. The first sampled character has kernel $\\{0\\}\\times\\mathbb Z/6\\mathbb Z$, since $\\chi_{1,0}(x,y)=(-1)^x$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The second character has kernel $\\mathbb Z/2\\mathbb Z\\times\\{0\\}$, since $\\chi_{0,1}(x,y)=\\exp(2\\pi i y/6)$ equals $1$ exactly for $y\\equiv0\\pmod6$. Intersecting the two kernels gives $\\{(0,0)\\}=H$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each constraint kernel contains $H$, and the ordered sample list therefore presents the exact hidden subgroup without converting it to generators.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked group is explicitly the nonempty finite group Z/2×Z/6."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include the identity label and compute both character kernels on every residue class."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked group has order 12 and the example does not claim the one-element case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the hidden subgroup is trivial; the two explicit kernels intersect exactly in it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 enumerate the full residue ranges a∈{0,1}, b∈{0,…,5}."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All labels and group elements are explicitly enumerated in the finite example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete sample outcome and kernel intersection, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete sample outcome and kernel intersection, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        "For Z/2×Z/6 and H={(0,0)}, |H^perp|=12; the specified ordered pair has probability 1/144; its kernels are {0}×Z/6 and Z/2×{0}, with intersection H."
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Checked all four verification steps and five direct suppliers already reviewed. In Z/2 x Z/6 the 12 product characters all annihilate trivial H. Fresh uniform samples give ordered pair probability 1/144. Kernels of (1,0) and (0,1) are respectively {0} x Z/6 and Z/2 x {0}; their intersection is exactly H. Both implications in each kernel calculation follow from the primitive roots; labels and group meet invariant-factor conditions. This is a possible two-sample trace, not guaranteed recovery in two trials. No AC, hidden generator conversion or unsupported efficiency assertion; no defect."
+      }
+    },
+    "ex-qa-hsp-cyclic-subgroup-annihilator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-cyclic-group-has-n-characters",
+          "source_section": "Statement",
+          "quote": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by\n$$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$\nFor any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define\n$$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$\nThe pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-normalized-finite-abelian-fourier-transform",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group and $\\widehat G$ its character dual ([[def-qa-finite-abelian-character-dual]]), which is finite with $|\\widehat G|=|G|$ ([[thm-qa-finite-abelian-dual-has-same-cardinality]]). Put $N:=|G|$ and $N_{\\mathbb R}:=\\iota_{\\mathbb R}(N)$ its canonical real image ([[def-order-in-a-group]], [[def-canonical-natural]]). Since $G$ contains its identity, $N\\ge1$, and hence $N_{\\mathbb R}>0$ ([[lem-of-naturals-positive]]). Its rational power $N_{\\mathbb R}^{-1/2}$ is therefore well defined ([[def-rational-power]], [[lem-rational-power-well-defined]]).\n\nFor $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by\n$$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$\nHere $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+          "source_section": "Statement",
+          "quote": "For every finite abelian hidden-subgroup instance with hidden subgroup $H\\le G$, one execution of the exact sample procedure returns a valid character code with probability one. Each $\\chi\\in H^\\perp$ has probability $1/|H^\\perp|=|H|/|G|$, every character outside $H^\\perp$ has probability zero, and every invalid $b$-bit code has probability zero.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-finite-character-values-have-unit-modulus",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group, $\\chi:G\\to\\mathbb C^{\\times}$ is an additive character, and $x\\in G$, then $|\\chi(x)|=1$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A character $\\chi_k$ is trivial on $H$ exactly when $\\chi_k(3)=\\exp(2\\pi i k/4)=1$, which holds exactly when $4\\mid k$. Among residues modulo $12$ this gives $k\\in\\{0,4,8\\}$, so $|H^\\perp|=3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The amplitude of label $k$ after the normalized QFT is $\\frac{1}{\\sqrt{48}}\\sum_{j=0}^{3}\\overline{\\chi_k(a+3j)}=\\frac{\\overline{\\chi_k(a)}}{\\sqrt{48}}\\sum_{j=0}^{3}\\exp(-2\\pi i kj/4)$. If $4\\mid k$, the sum is $4$ and the amplitude has modulus $4/\\sqrt{48}=1/\\sqrt3$ by [F4]. If $4\\nmid k$, the ratio $q=\\exp(-2\\pi i k/4)$ is a nontrivial fourth root of unity, so $(1-q)\\sum_{j=0}^3q^j=1-q^4=0$ and the sum vanishes.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Squaring the amplitudes in step 1.2 gives probability $1/3$ for each of $k=0,4,8$ and zero for the other nine labels. These probabilities sum to one and agree with the uniform annihilator law.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked group is the nonempty cyclic group Z/12."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include character label k=0 and the identity of Z/12."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked group has order 12; the example makes no one-element-group claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the subgroup H=3Z/12 and its three-element annihilator explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 enumerate all 12 labels modulo 12 and all four coset elements."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cyclic sum and residue classes are explicitly finite, so no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a finite Fourier calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a finite Fourier calculation, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        "For Z/12 and H={0,3,6,9}, H^perp={0,4,8}; each supported label has probability 1/3 and the total probability is 1."
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Checked all three verification steps and all six direct supplier bodies. H={0,3,6,9} has order four in Z/12. A character annihilates H iff it sends generator 3 to one iff 4 divides k, giving labels 0,4,8. The normalized coset amplitude uses 1/(2 sqrt(12))=1/sqrt(48); the length-four geometric sum is four on those labels and zero otherwise. Arbitrary representative a only changes a unit-modulus phase. Probabilities are 1/3 on three labels and zero on nine others, summing to one. Both iff directions and all 12 residue classes checked algebraically. No choice or approximate-circuit assumption; no defect."
+      }
+    }
+  },
+  "pending_supplier_interfaces": [],
+  "resolved_supplier_interfaces": [
+    {
+      "id": "def-qc-circuit-denotational-semantics",
+      "owner_batch": "9",
+      "status": "actual_body_present_inspected",
+      "planned_interface": "Embed local gates by identities and tensor permutations; disjoint layers are tensor products and chronological L1,...,Ld denote U_Ld...U_L1.",
+      "required_hypotheses": "Requires def-qc-circuit-syntax-and-register-order, def-qc-tensor-register-and-permutation, lem-qc-local-gate-wire-embedding, and lem-qc-disjoint-layer-order-independence. The planned proof obligation is to prove local embedding well-defined and each layer/circuit unitary.",
+      "actual_source": "items/def-qc-circuit-denotational-semantics.md",
+      "current_dependency_level": 6,
+      "inspection": "Actual U_C=U_Ld...U_L1 uses full-register local embeddings, proved unitary. Updated embedding proof uses tensor composition/adjoints; ordered disjoint replacements commute. Consumer composition/order hypotheses match.",
+      "actual_supplier_excerpt": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$."
+    },
+    {
+      "id": "def-qc-circuit-syntax-and-register-order",
+      "owner_batch": "9",
+      "status": "actual_body_present_inspected",
+      "planned_interface": "Specify finite ordered wires, input/output/measured wires, gate tuples and a finite sequence of disjoint-support layers.",
+      "required_hypotheses": "Uses def-qc-register-and-computational-basis and def-qc-ordered-bitstring-encoding; the planned proof obligation states chronological layer order.",
+      "actual_source": "items/def-qc-circuit-syntax-and-register-order.md",
+      "current_dependency_level": 2,
+      "actual_supplier_excerpt": "Write $\\mathcal Q_n$ for the ordered tensor product of $n$ copies of the two-level register from [[def-qc-register-and-computational-basis]], with $\\mathcal Q_0=\\mathbb C$. Fix a finite gate alphabet $G$. Each $g\\in G$ has an arity $r(g)\\ge1$ and a specified unitary $U_g:\\mathcal Q_{r(g)}\\to\\mathcal Q_{r(g)}$. An operation model states which listed gates may be called and what access or cost is assigned to them; the matrix $U_g$ by itself is only the mathematical gate data.\n\nFor $n\\ge0$, the circuit wire set is $[n]=\\{0,\\ldots,n-1\\}$ in its displayed order and its state space is $\\mathcal Q_n$. The computational basis word $x=(x_0,\\ldots,x_{n-1})$ is assigned slot $\\operatorname{enc}_n(x)$ from [[def-qc-ordered-bitstring-encoding]], so wire $0$ is the most significant bit and the empty register has its single basis vector in slot $0$.\n\nA gate occurrence on the $n$ wires is a pair $(g,(w_0,\\ldots,w_{r(g)-1}))$ with distinct wire labels $w_j\\in[n]$; the tuple order is the input and output factor order of the local gate. A layer is a finite ordered list of gate occurrences whose wire supports are pairwise disjoint. A unitary circuit is a finite chronological list $L_1,\\ldots,L_d$ of such layers, with $L_1$ applied first and $L_d$ last; $d=0$ is the empty circuit. Its input, output, and terminally measured wires are specified as ordered lists without repetitions in $[n]$. This syntax specifies finite data only; the semantic action of gates on the full register is defined separately.",
+      "inspection": "Actual ordered wire tuples are distinct; layers have disjoint supports; chronology applies L1 first. Complete register and ordered input/output/terminal measurement wire lists agree with these consumers."
+    },
+    {
+      "id": "def-qc-elementary-circuit-resources",
+      "owner_batch": "9",
+      "status": "actual_body_present_inspected",
+      "planned_interface": "Fix finite alphabet/max arity k; size counts gate occurrences, depth explicit disjoint layers, width all data/ancilla wires; clean ancillas start/end |0>, dirty ancillas are arbitrary and exactly restored uncorrelated; count oracle queries separately.",
+      "required_hypotheses": "Requires the circuit syntax and register-order interface; no gate alphabet or efficient implementation is inferred.",
+      "actual_source": "items/def-qc-elementary-circuit-resources.md",
+      "current_dependency_level": 8,
+      "actual_supplier_excerpt": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call unless the model explicitly combines them. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+      "inspection": "Actual size counts gate occurrences, declared depth counts written layers, width counts all wires. Clean restoration and dirty V_D tensor I are exact, and controlled/inverse capabilities are separately declared. QC14 Remarks preserve d_min separately from d_decl; HSP/QA17 do not equate them."
+    },
+    {
+      "id": "lem-qc-local-gate-wire-embedding",
+      "owner_batch": "9",
+      "status": "actual_body_present_inspected",
+      "planned_interface": "Every ordered tuple of distinct wires has a unique global unitary embedding of its local gate, acting as identity elsewhere.",
+      "required_hypotheses": "Planned proof checks product-basis vectors and extends linearly; depends on circuit syntax and tensor-register conventions.",
+      "actual_source": "items/lem-qc-local-gate-wire-embedding.md",
+      "current_dependency_level": 4,
+      "actual_supplier_excerpt": "Let $n\\ge r\\ge1$, let $w=(w_0,\\ldots,w_{r-1})$ be an ordered tuple of distinct wires in $[n]$, and let $U:\\mathcal Q_r\\to\\mathcal Q_r$ be unitary. There is a unique unitary $\\widetilde U_w:\\mathcal Q_n\\to\\mathcal Q_n$ that applies $U$ to the ordered wires $w_0,\\ldots,w_{r-1}$ and acts as the identity on the other wires.",
+      "inspection": "The proof constructs a wire permutation, conjugates U tensor I, and proves uniqueness on the spanning computational basis."
+    },
+    {
+      "id": "lem-qc-disjoint-layer-order-independence",
+      "owner_batch": "9",
+      "status": "actual_body_present_inspected",
+      "planned_interface": "Gates on disjoint supports commute, so layer denotation is independent of within-layer ordering.",
+      "required_hypotheses": "Planned proof evaluates both compositions on product-basis vectors; depends on local gate-wire embedding.",
+      "actual_source": "items/lem-qc-disjoint-layer-order-independence.md",
+      "current_dependency_level": 5,
+      "actual_supplier_excerpt": "Let $U$ and $V$ be local gates embedded on two disjoint ordered wire sets in $\\mathcal Q_n$. Their global embeddings commute.",
+      "inspection": "The proof checks both gate orders on each computational basis vector and extends equality linearly."
+    },
+    {
+      "id": "def-qc-one-qubit-gate-alphabet-and-rotations",
+      "owner_batch": "7",
+      "status": "actual_body_present_inspected",
+      "planned_interface": "Fix H=(X+Z)/sqrt(2), X,Y,Z, S=diag(1,i), T=diag(1,e^{i pi/4}), R_z(theta)=exp(-i theta Z/2), and R_n(theta)=exp(-i theta n·sigma/2); preserve exact scalar phases.",
+      "required_hypotheses": "theta is real, n is a real unit 3-vector, and exp is the convergent finite-matrix power series; controlled gates preserve displayed scalar phases.",
+      "actual_source": "items/def-qc-one-qubit-gate-alphabet-and-rotations.md",
+      "current_dependency_level": 5,
+      "actual_supplier_excerpt": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+      "inspection": "Actual exact one-qubit matrices and convergent rotation series exist; control use retains scalar phases. The focused controlled-access interface agrees."
+    },
+    {
+      "id": "def-qc-circuit-cost-model",
+      "kind": "item-level-reconciliation",
+      "owner_batch": "14",
+      "status": "actual_body_present_inspected",
+      "frontmatter_dependency_level": 10,
+      "computed_dependency_level": 10,
+      "required_hypotheses": "The cost theorem uses gate-count, named-query, measurement/discard, and output-bit coordinates. The current definition supplies these coordinates, but its source label (6) disagrees with the run item graph (10); owner reconciliation is needed for run-wide level consistency.",
+      "affected_items": [
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ],
+      "inspection": "Actual gate/query/description/classical coordinates stay separate. Existing d(C)=d_min and QC09 written d_decl are distinct; separate Remarks give d_min<=d_decl. These consumers use no equality of depths.",
+      "actual_source": "items/def-qc-circuit-cost-model.md",
+      "actual_supplier_excerpt": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, $w(C)$ its total number of wires, and $a_{\\rm clean}(C),a_{\\rm dirty}(C)$ the numbers of wires that satisfy the exact clean and dirty ancilla contracts of [[def-qc-clean-and-dirty-ancillas]]. Auxiliary wires that satisfy neither contract are still counted in $w(C)$ and are not silently included in either ancilla count ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+      "current_dependency_level": 10
+    },
+    {
+      "id": "def-qc-elementary-circuit-resources",
+      "kind": "item-level-reconciliation",
+      "owner_batch": "9",
+      "status": "actual_body_present_inspected",
+      "frontmatter_dependency_level": 8,
+      "manifest_dependency_level": 8,
+      "computed_dependency_level": 8,
+      "required_hypotheses": "The circuit-resource definition supplies gate occurrences, explicit-layer depth, width, and separate access coordinates. Its current actual body was inspected, but the source and manifest labels (7) disagree with the current graph-computed level (8).",
+      "affected_items": [
+        "def-qa-finite-abelian-hidden-subgroup-problem",
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ],
+      "inspection": "Actual size counts gate occurrences, declared depth counts written layers, width counts all wires. Clean restoration and dirty V_D tensor I are exact, and controlled/inverse capabilities are separately declared. QC14 Remarks preserve d_min separately from d_decl; HSP/QA17 do not equate them.",
+      "actual_source": "items/def-qc-elementary-circuit-resources.md",
+      "actual_supplier_excerpt": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call unless the model explicitly combines them. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+      "current_dependency_level": 8
+    },
+    {
+      "id": "measurements-povms-and-instruments",
+      "kind": "page",
+      "owner_batch": "4",
+      "status": "actual_page_body_present_inspected",
+      "source_path": "library/quantum-computing/measurements-povms-and-instruments.md",
+      "actual_excerpt": "This page defines finite projective measurements and POVMs as algebraic families of operators, then proves positivity and normalization of their outcome laws. It defines finite POVM probability kernels with an explicit matrix-coordinate Borel structure and proves measurability and affinity. It defines complete positivity through all finite ancilla block amplifications, supplies the finite block-map construction, and proves a finite Naimark isometric compression. Finally, it defines instruments and conditional states and proves outcome normalization, the Lüders construction, positive-probability state validity, zero-probability branch behavior, and the density and mixture formulas for nonselective outputs. No physical postulate is used as a mathematical premise.",
+      "affected_items": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law"
+      ],
+      "inspection": "The current page body lists the projective-measurement definition and its outcome-law theorem. Both item bodies were read; the definition gives finite orthogonal projections and the trace weight, while the theorem proves nonnegativity and normalization for density inputs. The HSP measurement register is nonzero in the N>=2 branch; N=1 returns without measuring. This records an actual draft interface, not acceptance.",
+      "actual_source": "library/quantum-computing/measurements-povms-and-instruments.md",
+      "actual_supplier_excerpt": "This page defines finite projective measurements and POVMs as algebraic families of operators, then proves positivity and normalization of their outcome laws. It defines finite POVM probability kernels with an explicit matrix-coordinate Borel structure and proves measurability and affinity. It defines complete positivity through all finite ancilla block amplifications, supplies the finite block-map construction, and proves a finite Naimark isometric compression. Finally, it defines instruments and conditional states and proves outcome normalization, the Lüders construction, positive-probability state validity, zero-probability branch behavior, and the density and mixture formulas for nonselective outputs. No physical postulate is used as a mathematical premise."
+    },
+    {
+      "id": "circuit-syntax-denotational-semantics-and-measurement",
+      "kind": "page",
+      "owner_batch": "9",
+      "status": "actual_page_body_present_inspected",
+      "source_path": "library/quantum-computing/circuit-syntax-denotational-semantics-and-measurement.md",
+      "actual_excerpt": "This page defines finite layered circuit syntax on ordered qubit wires, the local embedding of gates, and the chronological denotation of a circuit. Same-layer order independence follows from disjoint supports. The resource model separates gate occurrences, depth, width, controlled access, inverse access, and oracle charges. Measurement stages are represented by finite instruments; their branch Kraus operators satisfy a locally proved total normalization identity, and the induced POVM law is distinguished from the conditional output and hidden Kraus indices. Deferred measurement is proved at the exact finite-dimensional operator level, preserving branch maps and reference correlations. Any unitary dilation or block control used by a circuit model must be explicitly available and costed. No physical postulate or free implementation theorem is assumed.",
+      "affected_items": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "lem-qa-hidden-coset-state-law",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ],
+      "inspection": "The current page body gives the exact layer chronology, local embedding, denotational order, resource separation, and terminal measurement/instrument scope. The listed circuit supplier statements and proofs were inspected for the HSP uses. These are actual draft interfaces, not acceptance.",
+      "actual_source": "library/quantum-computing/circuit-syntax-denotational-semantics-and-measurement.md",
+      "actual_supplier_excerpt": "This page defines finite layered circuit syntax on ordered qubit wires, the local embedding of gates, and the chronological denotation of a circuit. Same-layer order independence follows from disjoint supports. The resource model separates gate occurrences, depth, width, controlled access, inverse access, and oracle charges. Measurement stages are represented by finite instruments; local proofs establish their Kraus normalization, induced POVM, and nonzero output-space prerequisites before the coherent record construction. The observed law is distinguished from conditional outputs and hidden Kraus indices. Deferred measurement is proved at the exact finite-dimensional operator level, preserving branch maps and reference correlations. Any unitary dilation or block control used by a circuit model must be explicitly available and costed. No physical postulate or free implementation theorem is assumed."
+    }
+  ]
+}

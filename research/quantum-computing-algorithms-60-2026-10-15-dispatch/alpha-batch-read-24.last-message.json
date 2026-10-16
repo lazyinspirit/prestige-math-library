@@ -1,0 +1,447 @@
+{
+  "group": "t",
+  "batches": ["24"],
+  "pages_read": [
+    "state-preparation-isometry-synthesis-and-limits",
+    "state-preparation-isometry-synthesis-and-limits-examples"
+  ],
+  "items_read": [
+    "lem-qc-countable-compact-null-union",
+    "lem-qc-open-cube-is-not-null",
+    "def-qc-projective-chord-distance",
+    "def-qc-projective-space-atlas",
+    "lem-qc-projective-chord-distance-formula",
+    "thm-qc-projective-chart-dimension",
+    "lem-qc-signed-ray-packing-code",
+    "def-qc-clean-ancilla-output-projection",
+    "def-qc-state-preparation-cost-model",
+    "alg-qc-isometry-unitary-completion",
+    "alg-qc-state-preparation",
+    "thm-qc-continuous-parameter-state-preparation-lower-bound",
+    "thm-qc-finite-width-topology-count",
+    "lem-qc-prefix-norm-rotation-identities",
+    "thm-qc-discrete-alphabet-approximate-preparation-lower-bound",
+    "thm-qc-finite-alphabet-exact-nonuniversality",
+    "thm-qc-isometry-completion-and-synthesis",
+    "thm-qc-state-preparation-rotation-level-upper-bound",
+    "thm-qc-amplitude-table-precision-and-compilation",
+    "thm-qc-state-preparation-cost",
+    "ex-qc-amplitude-table-state-preparation-cost"
+  ],
+  "conventions": [
+    {
+      "convention": "The root inner product is linear in its first argument. Projective chord distance minimizes Euclidean distance over unit scalar phases between unit representatives.",
+      "fixed_by": "def-qc-projective-chord-distance",
+      "matters_for": [
+        "lem-qc-projective-chord-distance-formula",
+        "lem-qc-signed-ray-packing-code",
+        "thm-qc-discrete-alphabet-approximate-preparation-lower-bound",
+        "thm-qc-amplitude-table-precision-and-compilation"
+      ]
+    },
+    {
+      "convention": "Projective space has the quotient topology; patch j consists of rays with nonzero jth coordinate, and its coordinates are z_i/z_j in increasing original index order.",
+      "fixed_by": "def-qc-projective-space-atlas",
+      "matters_for": [
+        "thm-qc-projective-chart-dimension",
+        "thm-qc-continuous-parameter-state-preparation-lower-bound"
+      ]
+    },
+    {
+      "convention": "Inputs are explicit normalized classical amplitude tables in big-endian basis order. Input length, preprocessing, gates, workspace, depth and error are separate charges; no QRAM or free coherent loading is granted.",
+      "fixed_by": "def-qc-state-preparation-cost-model",
+      "matters_for": [
+        "alg-qc-state-preparation",
+        "thm-qc-state-preparation-cost",
+        "thm-qc-amplitude-table-precision-and-compilation",
+        "ex-qc-amplitude-table-state-preparation-cost"
+      ]
+    },
+    {
+      "convention": "A nonzero zero-workspace projection is only a branch. Exact clean output requires the full unconditional output to equal a unit target vector times a unit phase, tensored with zero workspace.",
+      "fixed_by": "def-qc-clean-ancilla-output-projection",
+      "matters_for": [
+        "thm-qc-continuous-parameter-state-preparation-lower-bound",
+        "thm-qc-discrete-alphabet-approximate-preparation-lower-bound",
+        "thm-qc-finite-alphabet-exact-nonuniversality"
+      ]
+    },
+    {
+      "convention": "The preparation procedure uses ideal exact arithmetic and explicitly granted continuous-angle gates. Zero-norm prefixes are skipped; leaf phases are relative to the first nonzero amplitude. At n=0 the empty circuit prepares the unique ray.",
+      "fixed_by": "alg-qc-state-preparation",
+      "matters_for": [
+        "lem-qc-prefix-norm-rotation-identities",
+        "thm-qc-state-preparation-rotation-level-upper-bound",
+        "thm-qc-state-preparation-cost",
+        "thm-qc-amplitude-table-precision-and-compilation"
+      ]
+    },
+    {
+      "convention": "Isometry completion retains all output coordinates. Extra output wires need not return to zero; width-zero exact circuit synthesis is asserted only for the identity scalar.",
+      "fixed_by": "thm-qc-isometry-completion-and-synthesis",
+      "matters_for": [
+        "thm-qc-isometry-completion-and-synthesis"
+      ]
+    },
+    {
+      "convention": "Nullity uses countable closed-cube covers. Compact null sets are indexed from zero, and their covers are assigned by least natural codes without a choice principle.",
+      "fixed_by": "lem-qc-countable-compact-null-union",
+      "matters_for": [
+        "thm-qc-continuous-parameter-state-preparation-lower-bound"
+      ]
+    },
+    {
+      "convention": "Compilation rephases complete unconditional bounded-arity blocks, including their controls. Its error guarantee concerns the joint output ray and does not assert exact restoration of compiled workspace.",
+      "fixed_by": "thm-qc-amplitude-table-precision-and-compilation",
+      "matters_for": [
+        "thm-qc-amplitude-table-precision-and-compilation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qc-state-preparation-rotation-level-upper-bound",
+      "statement": "For n≥0, D=2^n, and a normalized explicit amplitude table, alg-qc-state-preparation exactly prepares the target ray using at most D−1 prefix rotations and at most D leaf phases. Its Toffoli flag construction uses O((n+1)D) bounded-arity gates and serial depth and at most max{n−1,0} reusable clean work bits. At n=0 no gate is needed.",
+      "used_by": [
+        "thm-qc-state-preparation-cost",
+        "thm-qc-amplitude-table-precision-and-compilation",
+        "ex-qc-amplitude-table-state-preparation-cost",
+        "def-qa-21-lcu-input-and-access-model",
+        "alg-qa-22-lcu-block-encoding"
+      ]
+    },
+    {
+      "id": "alg-qc-state-preparation",
+      "statement": "Given a valid explicit exact normalized amplitude table, compute prefix norms, apply the specified prefix-controlled rotations with clean Toffoli flags, and apply relative leaf phases; return the continuous-gate circuit and angle table. Invalid length or normalization returns INVALID.",
+      "used_by": [
+        "lem-qc-prefix-norm-rotation-identities",
+        "thm-qc-state-preparation-rotation-level-upper-bound",
+        "thm-qc-amplitude-table-precision-and-compilation",
+        "thm-qc-state-preparation-cost",
+        "def-qa-21-lcu-input-and-access-model",
+        "alg-qa-22-lcu-block-encoding",
+        "def-qa-34-output-and-cost-types"
+      ]
+    },
+    {
+      "id": "lem-qc-projective-chord-distance-formula",
+      "statement": "For unit vectors u,v in C^D, d_ch([u],[v])=√(2−2|⟨u,v⟩root|). This is independent of unit representatives and vanishes exactly for equal rays.",
+      "used_by": [
+        "lem-qc-signed-ray-packing-code",
+        "thm-qc-discrete-alphabet-approximate-preparation-lower-bound",
+        "thm-qc-amplitude-table-precision-and-compilation"
+      ]
+    },
+    {
+      "id": "lem-qc-signed-ray-packing-code",
+      "statement": "For even D≥2 and 0<δ<1/4, there are at least exp(cδD) unit sign vectors with first D/2 coordinates fixed at 1/√D and pairwise projective chord distance at least 2√δ, where cδ=(ln 2/2)(1−H₂(2δ))>0.",
+      "used_by": [
+        "thm-qc-discrete-alphabet-approximate-preparation-lower-bound"
+      ]
+    },
+    {
+      "id": "thm-qc-finite-width-topology-count",
+      "statement": "For W,A,k≥1 and g≥0, length-g serial descriptions number at most ((k+1)AW^k)^g. A parallel circuit with g occurrences has a serial ordering with the same gate count and denotation.",
+      "used_by": [
+        "thm-qc-discrete-alphabet-approximate-preparation-lower-bound",
+        "thm-qc-finite-alphabet-exact-nonuniversality"
+      ]
+    },
+    {
+      "id": "lem-qc-countable-compact-null-union",
+      "statement": "For m≥1, a sequence (K_i) indexed by i≥0 of compact null subsets of R^m has null union in the closed-cube-cover sense; the proof uses least-coded finite rational-cube covers without choice.",
+      "used_by": [
+        "thm-qc-continuous-parameter-state-preparation-lower-bound"
+      ]
+    },
+    {
+      "id": "thm-qc-projective-chart-dimension",
+      "statement": "For D≥1 the standard projective patches are smooth charts with coordinate space C^(D−1)=R^(2D−2). For D≥2 each fixed standard patch is proper.",
+      "used_by": [
+        "thm-qc-continuous-parameter-state-preparation-lower-bound"
+      ]
+    },
+    {
+      "id": "lem-qc-prefix-norm-rotation-identities",
+      "statement": "For a prefix p with 0≤|p|<n and r_p>0, θ_p=2 atan2(r_p1,r_p0) satisfies cos(θ_p/2)=r_p0/r_p and sin(θ_p/2)=r_p1/r_p.",
+      "used_by": [
+        "thm-qc-state-preparation-rotation-level-upper-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-null-and-content-zero-in-rn",
+      "used_for": "Exact closed-cube-cover definition of nullity and inheritance by subsets.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of closed cubes and finite subcovers without choice.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-rectangle-and-volume",
+      "used_for": "Cube volumes and finite coordinate-cut additivity.",
+      "opened": true
+    },
+    {
+      "id": "thm-rationals-countable",
+      "used_for": "Coding rational cubes and their finite lists.",
+      "opened": true
+    },
+    {
+      "id": "thm-n-cross-n-countable",
+      "used_for": "Pairing codes for finite descriptions and covers.",
+      "opened": true
+    },
+    {
+      "id": "thm-well-ordering-principle",
+      "used_for": "Canonical least qualifying cover codes.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite covering costs, empty sums and recursion.",
+      "opened": true
+    },
+    {
+      "id": "def-series",
+      "used_for": "Nonnegative covering-volume series and starting-index conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Additivity, monotonicity and finite-subfamily bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-series-bounded-partial-sums",
+      "used_for": "Convergence and total-cost bounds from bounded partial sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-recursion",
+      "used_for": "Cumulative cover-block lengths and finite tuple coding.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-addition",
+      "used_for": "Cumulative block-length arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-order",
+      "used_for": "Ordered block intervals in the countable cover construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-nat-linear-order",
+      "used_for": "Disjoint block intervals and largest finite block indices.",
+      "opened": true
+    },
+    {
+      "id": "lem-rat-embeds-dense",
+      "used_for": "Rational cube enlargements, rational bases and internal error budgets.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Cube-volume powers and geometric budgets.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-theorem",
+      "used_for": "Explicit enlargement-cost bounds and the entropy packing estimate.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Linear-first pairing, induced norms and orthogonal residuals.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Nonnegativity of the chord-distance formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Derivative computation for binary entropy.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strict entropy bound H₂(x)<1 for 0<x<1/2.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Entropy differentiation, positivity and logarithm identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Product-rule computation of entropy derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiating logarithms of 1−t.",
+      "opened": true
+    },
+    {
+      "id": "cor-differentiable-implies-continuous",
+      "used_for": "Continuity needed for the entropy mean-value argument.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Identity and constant derivatives in the entropy computation.",
+      "opened": true
+    },
+    {
+      "id": "def-function-limit",
+      "used_for": "Difference-quotient interpretation of those elementary derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Isometry input and finite-dimensional unitary completion.",
+      "opened": true
+    },
+    {
+      "id": "thm-polar-form-with-unique-principal-argument",
+      "used_for": "Principal arguments and relative leaf phases.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Polar/exponential conversion and unit-modulus phase gates.",
+      "opened": true
+    },
+    {
+      "id": "thm-morse-sard-for-euclidean-maps",
+      "used_for": "Nullity of smooth circuit-chart images when parameter dimension is smaller than target dimension, including source dimension zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-compactness-under-continuous-maps",
+      "used_for": "Compactness of chart images of parameter cubes.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Packing separation, normalization error and compilation hybrids.",
+      "opened": true
+    },
+    {
+      "id": "thm-r-uncountable",
+      "used_for": "Uncountability of the ray space via t ↦ [e₀+t e₁].",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Surjectivity of the square injective completion.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Support embeddings and whole-circuit approximation error.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Telescoping compilation-error estimates.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "state-preparation-isometry-synthesis-and-limits",
+      "concern": "The assigned item lem-qc-countable-compact-null-union appears in this page's batch-24.pages.json inventory but is absent from the actual page's items list. A search of library/ found no page placement for it. The continuous-parameter lower-bound theorem depends on this lemma, whose proof is present and was reviewed. Reconcile its page placement with the assigned inventory.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "The fixed-arity compiler is used for complete unconditional blocks with a supplied exact factorization. Whole-block projective error and gate counts are retained; compiler bit-time is explicitly excluded."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Chronological products, ordered local embeddings, occurrence counts and positive gate arity are preserved, including the width-zero scalar exception."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "clifford-t-exact-and-approximate-synthesis",
+      "faithful": true,
+      "note": "This is contextual: no direct Clifford+T synthesis theorem is invoked. The batch makes no claim of exact arbitrary-angle finite-alphabet implementation or efficient arithmetic synthesis."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "continuous-gate-universality-and-exact-synthesis",
+      "faithful": true,
+      "note": "QSD is applied directly to WΠ with the stated CNOT bound and width-zero/one exceptions. Fixed-arity factor-count bounds use the unoptimized recursion and the explicit two-qubit base construction."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled rotations are explicitly granted and constructed on ordered control-first supports. Relative phases are retained; projective compiler phases are introduced only after including controls in each complete block."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "Targets are pure-state rays represented by normalized nonzero vectors. No vector-level equality is inferred merely from equality of rays."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "The stated Y sign and exp(−iθY/2) convention give the displayed real R_y matrix and its positive sine lower-left entry."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Big-endian encoding, tensor-factor order, linear-first pairing, empty register and basis permutations agree with the suppliers."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The Toffoli ladder uses distinct controls and targets, explicitly reverses its computation and reuses restored clean work bits. No arbitrary multicontrol primitive or free oracle is assumed."
+    },
+    {
+      "from": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "to": "state-preparation-isometry-synthesis-and-limits",
+      "faithful": true,
+      "note": "The LCU access definition quotes the O((q+1)2^q) continuous-gate bound and max{q−1,0} clean-work count. It permits the preparation phase, explains its cancellation, and separately charges inverse access, table work and finite-gate synthesis."
+    },
+    {
+      "from": "block-encodings",
+      "to": "state-preparation-isometry-synthesis-and-limits",
+      "faithful": true,
+      "note": "The optional LCU table construction quotes the correct rotation, phase, gate, workspace and input-bit bounds. Its nonnegative coefficient amplitudes have zero reference argument, so the supplier's ray preparation gives the required vector."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "state-preparation-isometry-synthesis-and-limits",
+      "faithful": true,
+      "note": "The sorted-XOR sparse-isometry lemma uses the cost model to charge supplied uniform preparation and associated arithmetic/access separately; it does not infer a free preparation circuit or bit-time bound."
+    },
+    {
+      "from": "algorithm-composition-precision-and-dequantization",
+      "to": "state-preparation-isometry-synthesis-and-limits",
+      "faithful": true,
+      "note": "The output-and-cost definition accurately identifies the explicit-table continuous-rotation guarantee and keeps input, preprocessing, inverse/control access, finite-gate approximation and classical output costs separate."
+    }
+  ]
+}

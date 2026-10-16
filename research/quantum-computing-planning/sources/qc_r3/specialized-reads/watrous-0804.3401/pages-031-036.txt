@@ -1,0 +1,335 @@
+===== PDF PAGE 31 =====
+
+It is clear that QAM ⊆QIP(2), but unlike the classical case [57] equality is not known in the quan-
+tum setting. It is straightforward to prove the upper bound QAM ⊆PSPACE, while containment
+QIP(2) ⊆PSPACE is not known.
+The class QMAM may be defined through a similar analogy with classical Arthur–Merlin
+games. Here, Merlin sends the first message, Arthur responds with a selection of random bits,
+and then Merlin sends a second message.
+
+QMAM
+A promise problem A = (Ayes, Ano) is in QMAM if and only if it has a quan-
+tum interactive proof system of the following restricted form. Merlin sends a
+polynomial-bounded number of qubits to Arthur. Without performing any com-
+putations, Arthur uniformly chooses some polynomial-bounded number of clas-
+sical random bits, and sends a copy of these bits to Merlin. Merlin responds with
+a second collection of qubits. Arthur then performs a polynomial-time quantum
+computation on the input, the random bits, and the quantum information sent by
+Merlin in order to determine acceptance or rejection.
+
+Even when Arthur is restricted to a single random bit, this class has the full power of QIP [80].
+
+Theorem 15. QMAM = QIP.
+
+Quantum interactive proofs with competing provers
+
+Another variant of interactive proof systems that has been studied is one where a verifier interacts
+with two competing provers, sometimes called the yes-prover and the no-prover. Unlike ordinary
+two-prover interactive proof systems, it is now assumed that the provers have conflicting goals:
+the yes-prover wants to convince the verifier that a given input string is a yes-instance of the
+problem being considered, while the no-prover wants to convince the verifier that the input is a
+no-instance. The verifier is sometimes called the referee in this setting, given that interactive proof
+systems of this form are naturally modeled as competitive games between the two players. Two
+complexity classes based on interactive proofs with competing provers are the following.
+
+RG
+A promise problem A = (Ayes, Ano) is in RG (short for refereed games) if and only
+if it has a classical interactive proof system with two competing provers. The
+completeness and soundness conditions for such a proof system are replaced by
+the following conditions:
+
+1. For every x ∈Ayes, there exists a yes-prover Pyes that convinces the referee
+to accept with probability at least 2/3, regardless of the strategy employed
+by the no-prover Pno.
+
+2. For every x ∈Ano, there exists a no-prover Pno that convinces the referee to
+reject with probability at least 2/3, regardless of the strategy employed by
+the yes-prover Pyes.
+
+QRG
+A promise problem A = (Ayes, Ano) is in QRG (quantum refereed games) if and only
+if it has a quantum interactive proof system with two competing provers. The
+completeness and soundness conditions for such a proof system are analogous to
+RG.
+
+31
+
+
+===== PDF PAGE 32 =====
+
+Classical refereed games have the computational power of deterministic exponential time [46],
+and the same is true in the quantum setting [58]: RG = QRG = EXP. The containment EXP ⊆RG
+represents an application of the arithmetization technique, while QRG ⊆EXP exemplifies the
+power of semidefinite programming.
+
+VII
+Other selected notions in quantum complexity
+
+In this section of this article, a few other topics in quantum computational complexity theory
+are surveyed that do not fall under the headings of the previous sections. While incomplete,
+this selection should provide the reader with some sense for the topics that have been studied in
+quantum complexity.
+
+VII.1
+Quantum advice
+
+Quantum advice is a formal abstraction that addresses this question: how powerful is quantum
+software? More precisely, let us suppose that some polynomial-time generated family of quantum
+circuits Q = {Qn : n ∈N} is given. Rather than assuming that each circuit Qn takes n input
+qubits as for the class BQP, however, it is now assumed that Qn takes n + p(n) qubits for p some
+polynomial-bounded function: in addition to a given input x ∈Σn, the circuit Qn will take an
+advice state ρn on p(n) qubits. This advice state may be viewed as pre-loaded quantum software for
+a quantum computer. The advice state may depend on the input length n, but not on the particular
+input x ∈Σn. Similar to a quantum proof, the difficulty of preparing this state is ignored; but
+unlike a quantum proof the advice state is completely trusted. The quantum complexity class
+BQP/qpoly is now defined to be the class of promise problems that are solved by polynomial-
+time quantum algorithms with quantum advice in the natural way. The first published paper on
+quantum advice was [85], while the definitions and most of the results discussed in this section
+are due to Aaronson [2].
+
+BQP/qpoly
+A promise problem A = (Ayes, Ano) is in BQP/qpoly if and only if there exists
+a polynomial-bounded function p, a collection of quantum states {ρn : n ∈N}
+where each ρn is a p(n)-qubit state, and a polynomial-time generated family of
+quantum circuits Q = {Qn : n ∈N} with the following properties. For all
+x ∈Ayes, Q accepts (x, ρ|x|) with probability at least 2/3; and for all x ∈Ano, Q
+accepts (x, ρ|x|) with probability at most 1/3.
+
+Similar to BQP without advice, it is straightforward to shown that the constants 2/3 and 1/3 in
+this definition can be replaced by a wide range of functions a, b : N →[0, 1].
+As the notation suggests, BQP/qpoly is a quantum analogue of the class P/poly. This analogy
+may be used as the basis for several relevant points about BQP/qpoly, quantum advice, and their
+relationship to classical complexity classes and notions.
+
+1. As is well-known, P/poly may be defined either in a manner similar to the above definition
+for BQP/qpoly, or more simply as the class of promise problems solvable by polynomial-
+size Boolean circuit families with no uniformity restrictions. Based on similar ideas, the class
+BQP/qpoly does not change if the circuit family {Qn : n ∈N} is taken to be an arbitrary
+polynomial-size circuit family without uniformity constraints.
+
+2. There is a good argument to be made that quantum advice is better viewed as a quantum
+analogue of randomized advice rather than deterministic advice. That is, BQP/qpoly can equally
+
+32
+
+
+===== PDF PAGE 33 =====
+
+well be viewed as a quantum analogue of the (suitably defined) complexity class BPP/rpoly.
+It happens to be the case, however, that BPP/rpoly = P/poly. (The situation is rather dif-
+ferent for logarithmic-length advice, where randomized advice is strictly more powerful than
+ordinary deterministic advice.)
+
+3. Any combination of quantum, randomized, or deterministic advice with quantum, random-
+ized, or deterministic circuits can be considered. This leads to classes such as BQP/rpoly,
+BQP/poly, P/qpoly, P/rpoly, and so on. (The only reasonable interpretation of BPP/qpoly
+and P/qpoly is that classical circuits effectively measure quantum states in the standard ba-
+sis the instant that they touch them.)
+
+At most three distinct classes among these possibilities arise: BQP/qpoly, BQP/poly, and
+P/poly. This is because BQP/rpoly = BQP/poly and
+
+BPP/qpoly = BPP/rpoly = BPP/poly = P/qpoly = P/rpoly = P/poly.
+
+The principle behind these equalities is that nonuniformity is stronger than randomness [7].
+
+The following theorem places an upper-bound on the power of polynomial-time quantum
+algorithms with quantum advice [2].
+
+Theorem 16. BQP/qpoly ⊆PP/poly.
+
+Although in all likelihood the class PP/poly is enormous, containing many interesting problems
+that one can have little hope of being able to solve in practice, the upper-bound represented by
+this theorem is far from obvious. The most important thing to notice is that the power of quantum
+advice (to a BQP machine) is simulated by deterministic advice (to a PP machine). This means
+that no matter how complex, a polynomial-size quantum advice state can never encode more
+information accessible to a polynomial-time quantum computer than a polynomial-length string
+can, albeit to an unbounded error probabilistic machine.
+Quantum advice has also been considered for other quantum complexity classes such as QMA
+and QIP. For instance, the following bound is known on the power of QMA with quantum ad-
+vice [3].
+
+Theorem 17. QMA/qpoly ⊆PSPACE/poly.
+
+Generally speaking, the study of both quantum and randomized advice is reasonably de-
+scribed as a sticky business when unbounded error machines or interactive protocols are involved.
+In these cases, complexity classes defined by both quantum and randomized advice can be highly
+non-intuitive and dependent on specific interpretations of models. For example, Raz [88] has
+shown that both QIP/qpoly and IP/rpoly contain all languages, provided that the advice is not
+accessible to the prover. Likewise, Aaronson [2] has observed that both PP/rpoly and PQP/qpoly
+contain all languages. These results are quite peculiar, given that significantly more powerful
+models can become strictly less powerful in the presence of quantum or randomized advice. For
+instance, even a Turing machine running in exponential space cannot decide all languages with
+bounded error given randomized advice.
+
+VII.2
+Space-bounded quantum computation
+
+The quantum complexity classes that have been discussed thus far in this article are based on the
+abstraction that efficient quantum computations are those that can be performed in polynomial
+
+33
+
+
+===== PDF PAGE 34 =====
+
+finite
+control
+
+input tape (read-only)
+
+classical work tape
+
+qubit tape
+
+Figure 13: A quantum Turing machine. This variant of quantum Turing machine is classical with
+the exception of a quantum work tape, each square of which contains a qubit. Quantum operations
+and measurements can be performed on the qubits scanned by the quantum tape heads.
+
+time. Quantum complexity classes may also be defined by bounds on space rather than time, but
+here a different computational model is required to reasonably compare with classical models of
+space-bounded computation. One simple choice of a suitable model is a hybrid between quantum
+circuits and classical Turing machines—and although this model is different from the variants
+of quantum Turing machines that were originally studied in the theory of quantum computing
+[41, 31], the term quantum Turing machine (QTM for short) is nevertheless appropriate. A different
+quantum Turing machine model that is suitable for studying time-space trade-offs has recently
+been proposed in [81].
+Figure 13 illustrates a quantum Turing machine. A quantum Turing machine has a read-only
+classical input tape, a classical work tape, and a quantum tape consisting of an infinite sequence
+of qubits each initialized to the zero-state. Three tape heads scan the quantum tape, allowing
+quantum operations to be performed on the corresponding qubits. (It would be sufficient to have
+just two, but allowing three tape heads parallels the choice of a universal gate set that allows
+three-qubit operations.) A single step of a QTM’s computation may involve ordinary moves by
+the classical parts of the machine and quantum operations on the quantum tape: Toffoli gates,
+Hadamard gates, phase-shift gates, or single-qubit measurements in the computational basis.
+The running time of a quantum Turing machine is defined as for ordinary Turing machines.
+The space used by such a machine is the number of squares on the classical work tape plus the
+number of qubits on the quantum tape that are ever visited by one of the tape heads. Similar to
+the classical case, the input tape does not contribute to the space used by the machine because it
+is a read-only tape.
+The following complexity classes are examples of classes that can be defined using this model.
+
+BQL
+A promise problem A = (Ayes, Ano) is in BQL (bounded-error quantum
+logarithmic space) if and only if there exists a quantum Turing machine M
+running in polynomial time and logarithmic space that accepts every string
+x ∈Ayes with probability at least 2/3 and accepts every string x ∈Ano with
+probability at most 1/3.
+
+34
+
+
+===== PDF PAGE 35 =====
+
+PQL
+A promise problem A = (Ayes, Ano) is in PQL (unbounded-error quantum
+logarithmic space) if and only if there exists a quantum Turing machine M
+running in polynomial time and logarithmic space that accepts every string
+x ∈Ayes with probability strictly greater than 1/2 and accepts every string
+x ∈Ano with probability at most 1/2.
+
+BQPSPACE
+A promise problem A = (Ayes, Ano) is in BQPSPACE (bounded-error quan-
+tum polynomial space) if and only if there exists a quantum Turing machine
+M running in polynomial space that accepts every string x ∈Ayes with prob-
+ability at least 2/3 and accepts every string x ∈Ano with probability at most
+1/3.
+
+PQPSPACE
+A promise problem A = (Ayes, Ano) is in PQPSPACE (unbounded-error
+quantum polynomial space) if and only if there exists a quantum Turing ma-
+chine M running in polynomial space that accepts every string x ∈Ayes with
+probability strictly greater than 1/2 and accepts every string x ∈Ano with
+probability at most 1/2.
+
+Unlike polynomial-time computations, it is known that quantum information does not give a
+significant increase in computational power in the space-bounded case [100, 103].
+
+Theorem 18. The following relationships hold.
+
+1. BQL ⊆PQL = PL.
+
+2. BQPSPACE = PQPSPACE = PSPACE.
+
+The key relationship in the above theorem, from the perspective of quantum complexity, is PQL ⊆
+PL, which can be shown using space-bounded counting complexity. In particular, the proof relies
+on a theory of GapL functions [13] that parallels the theory of GapP functions, and allows for a
+variety of matrix computations to be performed in PL.
+The above theorem, together with the containment PL ⊆NC [34], implies that both BQL
+and PQL are contained in NC. An interpretation of this fact is that logarithmic-space quantum
+computations can be very efficiently simulated in parallel.
+
+VII.3
+Bounded-depth quantum circuits
+
+The depth of a classical or quantum circuit is the maximum number of gates encountered on any
+path from an input bit or qubit to an output bit or qubit in the circuit. One may reasonably think
+of circuit depth as the parallel running time, or the number of time units needed to apply a circuit
+when operations may be parallelized in any way that respects the topology of the circuit.
+The following complexity class, first defined by Moore and Nilsson [82], represent bounded-
+error quantum variants of the class NC.
+
+QNC
+A promise problem A = (Ayes, Ano) is in QNC (bounded-error quantum NC)
+if and only if there exists a logarithmic-space generated family {Qn : n ∈N}
+of poly-logarithmic depth quantum circuits, where each circuit Qn takes n input
+qubits and produces one output qubit, such that Pr[Q accepts x] ≥2/3 for all
+x ∈Ayes, and Pr[Q accepts x] ≤1/3 for all x ∈Ano.
+
+35
+
+
+===== PDF PAGE 36 =====
+
+Many other complexity classes based on bounded-depth quantum circuits have been studied as
+well. The survey of Bera, Green, and Homer [29] discusses several examples.
+In the classical case there is a very close relationship between space-bounded and depth-
+bounded computation [33, 34]. This close relationship is based on two main ideas: the first is
+that space-bounded computations can be simulated efficiently by bounded-depth circuits using
+parallel algorithms for matrix computations, and the second is that bounded-depth Boolean cir-
+cuits can be efficiently simulated by space-bounded computations via depth-first traversals of the
+circuit to be simulated.
+For quantum computation this close relationship is not known to exist. One direction indeed
+holds, as was discussed in the previous subsection: space-bounded quantum computations can be
+efficiently simulated by depth-bounded circuits. The other direction, which is an efficient space-
+bounded simulation of bounded-depth quantum circuits, is not known to hold and is arguably
+quite unlikely. Informally speaking, bounded-depth quantum circuits are computationally pow-
+erful, whereas space-bounded quantum Turing machines are not. Three facts that support this
+claim are as follows.
+
+1. Computing the acceptance probability for even constant-depth quantum circuits is as hard
+as computing acceptance probabilities for arbitrary polynomial-size quantum circuits [49].
+
+2. Shor’s factoring algorithm can be implemented by quantum circuits having logarithmic-
+depth, along with classical pre- and post-processing [39].
+
+3. The quantum circuit distinguishability problem remains complete for QIP when restricted
+to logarithmic-depth quantum circuits [89].
+
+It is reasonable to conjecture that QNC is incomparable with BPP and properly contained in BQP.
+
+VIII
+Future directions
+
+There are many future directions for research in quantum computational complexity theory. The
+following list suggests just a few of many possibilities.
+
+1. The power of multiple-prover quantum interactive proofs, for both quantum and classi-
+cal verifiers, is very poorly understood. In particular: (i) no interesting upper-bounds are
+known for either MIP∗or QMIP, and (ii) neither the containment NEXP ⊆MIP∗nor NEXP ⊆
+QMIP is known to hold.
+
+2. The containment NP ⊆BQP would be a very powerful incentive to build a quantum com-
+puter, to say the least. While there is little reason to hope that this containment holds, there
+is at the same time little evidence against it aside from the fact that it fails relative to an
+oracle [28]. A better understanding of the relationship between BQP and NP, including pos-
+sible consequences of one being contained in the other, is an interesting direction for further
+research in quantum complexity.
+
+3. Along similar lines to the previous item, an understanding of the relationship between BQP
+and the polynomial-time hierarchy has remained elusive. It is not known whether BQP is
+contained in the polynomial-time hierarchy, whether there is an oracle relative to which this
+is false, or even whether there is an oracle relative to which BQP is not contained in AM.
+
+36
+

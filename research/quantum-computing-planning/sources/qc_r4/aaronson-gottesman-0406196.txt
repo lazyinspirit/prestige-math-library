@@ -1,0 +1,861 @@
+
+
+===== PDF PAGE 1 =====
+
+                         Improved Simulation of Stabilizer Circuits
+
+                                                         Scott Aaronson∗
+                                               MIT
+
+                                                      Daniel Gottesman†
+                                                          Perimeter Institute
+
+                    The Gottesman-Knill theorem says that a stabilizer circuit—that is, a quantum circuit consisting
+                           solely of CNOT, Hadamard, and phase gates—can be simulated eﬃciently on a classical computer.
+                      This paper improves that theorem in several directions.  First, by removing the need for Gaussian
+                         elimination, we make the simulation algorithm much faster at the cost of a factor-2 increase in
+                       the number of bits needed to represent a state. We have implemented the improved algorithm in
+                     a freely-available program called CHP (CNOT-Hadamard-Phase), which can handle thousands of
+                        qubits easily.  Second, we show that the problem of simulating stabilizer circuits is complete for the
+                           classical complexity class ⊕L, which means that stabilizer circuits are probably not even universal
+                           for classical computation.   Third, we give eﬃcient algorithms for computing the inner product2008
+                     between two stabilizer states, putting any n-qubit stabilizer circuit into a “canonical form” that
+                         requires at most O ` n2/ log n´ gates, and other useful tasks.   Fourth, we extend our simulation
+                       algorithm to circuits acting on mixed states, circuits containing a limited number of non-stabilizerJun                          gates, and circuits acting on general tensor-product initial states but containing only a limited
+18              number of measurements.
+                  PACS numbers: 03.67.Lx, 03.67.Pp, 02.70.-c
+
+
+                                 I. INTRODUCTION                 Viamontes et al.  [3, 4], and the parallel quantum com-
+                                                                  puter simulator of Obenland and Despain [5]. The draw-
+                                                             back of such simulators, of course, is that their running
+        Among the many diﬃculties that quantum computer
+                                                               time grows exponentially in the number of qubits.  This
+          architects face, one of them is almost intrinsic to the task
+                                                                                            is true not only in the worst case but in practice.  For
+          at hand: how do you design and debug circuits that you
+                                                                example, even though it uses a variant of binary decision
+          can’t even simulate eﬃciently with existing tools?  Ob-
+                                                              diagrams to avoid storing an entire amplitude vector for
+           viously, if a quantum computer output the factors of a
+                                                        some states, Viamontes et al. [3] report that the QuIDD
+          3000-digit number, then you wouldn’t need to simulate it
+                                                               package took more than 22 hours to simulate Grover’s al-
+          to verify its correctness, since multiplying is easier than
+                                                              gorithm on 40 qubits. With a general-purpose package,
+          factoring.  But what  if the quantum computer didn’t
+                                                                     then, simulating hundreds or thousands of qubits is out
+        work?  Ordinarily architects might debug a computer by
+                                                                            of the question.
+         adding test conditions, monitoring registers, halting at
+         intermediate steps, and so on. But for a quantum com-    A diﬀerent direction of research has sought to ﬁnd non-
+          puter, all of these standard techniques would probably     trivial classes of quantum circuits that can be simulated
+           entail measurements that destroy coherence.  Besides, it    eﬃciently on a classical computer.  For example, Vidal
+        would be nice to design and debug a quantum computer     [6] showed that, so long as a quantum computer’s state atarXiv:quant-ph/0406196v5         using classical CAD tools, before trying to implement it!    every time step has polynomially-bounded entanglement
+                                                             under a measure related to Schmidt rank, the computer
+         Quantum architecture is one motivation for studying
+                                                             can be simulated classically in polynomial time. Notably,
+           classical algorithms to simulate and manipulate quan-                                                                          in a follow-up paper [7], Vidal actually implemented his
+       tum circuits, but it is not the only motivation. Chemists                                                                 algorithm and used it to simulate 1-dimensional quantum
+        and physicists have long needed to simulate quantum sys-                                                                     spin chains consisting of hundreds of spins. A second ex-
+         tems, and they have not had the patience to wait for a                                                           ample is a result of Valiant [8], which reduces the problem
+        quantum computer to be built.  Instead, they have devel-                                                                            of simulating a restricted class of quantum computers to
+        oped limited techniques such as Quantum Monte-Carlo                                                                   that of computing the Pfaﬃan of a matrix. The latter is
+       (QMC) [1] for computing properties of certain ground
+                                                      known to be solvable in classical polynomial time.  Ter-
+           states. More recently, several general-purpose quantum                                                                     hal and DiVincenzo [9] have shown that Valiant’s class
+        computer simulators have appeared, including Oemer’s
+                                                                 corresponds to a model of noninteracting fermions.
+        quantum programming language QCL [2], the QuIDD
+        (Quantum Information Decision Diagrams) package of     There is one class of quantum circuits that is known to
+                                                            be simulable in classical polynomial time, that does not
+                                                             impose any limit on entanglement, and that arises natu-
+                                                                             rally in several applications. This is the class of stabilizer
+           ∗Electronic address: aaronson@csail.mit.edu                         circuits introduced to analyze quantum error-correcting
+           †Electronic address: dgottesman@perimeterinstitute.ca             codes [10, 11, 12, 13].  A stabilizer circuit is simply
+
+===== PDF PAGE 2 =====
+
+                                                                                                     2
+
+      CNOT   |a〉                         |a〉                      In Section VI we prove a canonical form theorem that
+                                              we expect will have many applications to the study of
+                      |b〉                   |b⊕a〉                                                                   stabilizer circuits. The theorem says that given any sta-
+                                                                     bilizer circuit, there exists an equivalent stabilizer cir-     Hadamard  α|0〉+β|1〉   H       (α+β)|0〉+(α-β)|1〉
+                                                               cuit that applies a round of Hadamard gates, followed by
+                                                     a round of phase gates, followed by a round of CNOT
+        Phase  α|0〉+β|1〉    P       α|0〉+iβ|1〉
+                                                               gates, and so on in the sequence H-C-P-C-P-C-H-P-C-
+                                             P-C (where H, C, P stand for Hadamard, CNOT, Phase
+  Measurement  α|0〉+β|1〉                 |α|2|0〉〈0|+|β|2|1〉〈1|
+                                                                respectively).  One immediate corollary, building on a
+                                                                result by Patel, Markov, and Hayes [18] and improving
+FIG. 1: The four types of gate allowed in the stabilizer for-    one by Dehaene and De Moor [19], is that any stabilizer
+malism                                                           circuit on n qubits has an equivalent circuit with only
+                                   O n2/ log n  gates.
+                                                                   Finally, Section VII extends our simulation algorithm
+                                                            to situations beyond the usual one considered in the
+a quantum circuit in which every gate is a controlled-    Gottesman-Knill theorem. For example, we show how to
+NOT, Hadamard, phase, or 1-qubit measurement gate.    handle mixed states, without keeping track of pure states
+We call a stabilizer circuit unitary if it does not contain    from which the mixed states are obtainable by discarding
+measurement gates.  Unitary stabilizer circuits are also    qubits.  We also show how to simulate circuits involv-
+known as Cliﬀord group circuits.                           ing a small number of non-stabilizer gates; or involving
+  Stabilizer circuits can be used to perform the encoding    arbitrary tensor-product initial states, but only a small
+and decoding steps for a quantum error-correcting code,   number of measurements. Both of these latter two sim-
+and they play an important role in fault-tolerant circuits.    ulations take time that is polynomial in the number of
+However, the stabilizer formalism used to describe these    qubits, but exponential in the number of non-stabilizer
+circuits has many other applications.   This formalism    gates or measurements.   Presumably this exponential
+is rich enough to encompass most of the “paradoxes” of    dependence is necessary, since otherwise we could simu-
+quantum mechanics, including the GHZ (Greenberger-    late arbitrary quantum computations in classical subex-
+Horne-Zeilinger) experiment [14], dense quantum coding    ponential time.
+[15], and quantum teleportation [16]. On the other hand,    We conclude in Section VIII with some directions for
+it is not so rich as to preclude eﬃcient simulation by a    further research.
+classical computer.  That conclusion, sometimes known
+as the Gottesman-Knill theorem, is the starting point for
+                                                                                         II.  PRELIMINARIES
+the contributions of this paper.
+  Our results are as follows.  In Section III we give a
+new tableau algorithm for simulating stabilizer circuits    We assume familiarity with quantum computing. This
+that is faster than the algorithm directly implied by the    section provides a crash course on the stabilizer formal-
+Gottesman-Knill theorem.  By removing the need for    ism, conﬁning attention to those aspects we will need.
+Gaussian elimination, this algorithm enables measure-    See Section 10.5.1 of Nielsen and Chuang [20] for more
+ments to be simulated in O n2  steps instead of O n3      details.
+(where n is the number of qubits), at a cost of a factor-     Throughout this paper we will use the following four
+2 increase in the number of bits needed to represent a    Pauli matrices:
+quantum state.
+                                                                      1 0            0 1
+  Section IV describes CHP, a high-performance stabi-                 I =       X =                                                                      0 1            1 0
+lizer circuit simulator that implements our tableau algo-                                                                      0             1  0rithm. We present the results of an experiment designed             Y =    −i  Z =                                                                                                      i  0          0to test how CHP’s performance is aﬀected by properties                             −1
+of the stabilizer circuit being simulated.  CHP has al-    These matrices satisfy the following identities:
+ready found application in simulations of quantum fault-
+tolerance circuits [17].                                X2 = Y 2 = Z2 = I
+  Section V proves that the problem of simulating sta-         XY = iZ  Y Z = iX  ZX = iY
+bilizer        circuits                    is complete                               for the                                        classical                                          complexity
+                                                     Y X = −iZ ZY = −iX XZ = −iYclass           Informally,                        this means                                that                                 any stabilizer                                                                cir-    ⊕L.cuit can be simulated using CNOT gates alone; the avail-    In particular, every two Pauli matrices either commute or
+ability of Hadamard and phase gates provides at most a    anticommute.  The rule for whether to include a minus
+polynomial advantage.  This result removes some of the    sign is the same as that for quaternions,  if we replace
+mystery about the Gottesman-Knill theorem by showing     (I, X, Y, Z) by (1, i, j, k).
+that stabilizer circuits are unlikely to be capable even of    We deﬁne the group Pn of n-qubit Pauli operators touniversal classical computation.                             consist of all tensor products of n Pauli matrices, together
+
+===== PDF PAGE 3 =====
+
+                                                                                                     3
+
+with a multiplicative factor of ±1 or ±i (so the total    gates a stabilizer circuit, and any state obtainable by
+number of operators is |Pn| = 4n+1).  We omit tensor    applying a stabilizer circuit to |0⟩⊗n a stabilizer state. As
+product signs for brevity; thus −Y ZZI should be read    a warmup to our later results, the following proposition
+−Y ⊗Z⊗Z⊗I (we will use + to represent the Pauli group    counts the number of stabilizer states.
+operation).  Given two Pauli operators P = ikP1 · · · Pn   Proposition 2 Let N be the number of pure stabilizer
+and Q = ilQ1 · · · Qn, it is immediate that P commutes    states on n qubits. Then
+with Q if and only if the number of indices j ∈{1, . . . , n}such that Pj anticommutes with Qj is even; otherwise P                  n−1                           Y
+anticommutes with Q.  Also, for all P ∈Pn, if P has       N = 2n     2n−k + 1 = 2(1/2+o(1))n2.
+                                                                      k=0a phase of ±1 then P + P = I · · · I, whereas if P has aphase       of           then            P + P =       ±i                   −I · · · I.  Given        a          pure            quantum                          state                           we say a unitary ma-     Proof. We have N = G/A, where G is the total num-                                 |ψ⟩,trix U stabilizes            an                                  eigenvector of U with    ber of generating sets and A is the number of equivalent                |ψ⟩if |ψ⟩iseigenvalue 1, or equivalently                                            if U             we do    generating sets for a given stabilizer S. To ﬁnd G, note                        |ψ⟩=                                 |ψ⟩wherenot ignore global phase.  To illustrate,                                      the                                            following ta-    that there are 4n −1 choices for the ﬁrst generator M1
+ble lists the Pauli matrices and their opposites, together    (ignoring overall sign), because it can be anything but
+with the unique 1-qubit states that they stabilize:          the identity. The second generator must commute with
+                                      M1 and cannot be I or M1, so there are 4n/2 −2 choices
+      X : |0⟩+ |1⟩   −X : |0⟩−|1⟩                  for M2.  Similarly, M3 must commute with M1 and M2,
+        Y  : |0⟩+ i |1⟩  −Y  : |0⟩−i |1⟩             but cannot be in the group generated by them, so there
+       Z :  |0⟩      −Z :  |1⟩                     are 4n/4 −4 choices for it, and so on.  Hence, including                                                                overall signs,
+The identity matrix I stabilizes all states, whereas −I             n−1                     n−1stabilizes no states.                  Y  4n       Y
+  The key idea of the stabilizer formalism is to repre-    G = 2n         = 2n(n+1)/2     4n−k         .                                                                        2k −2k              −1
+sent a quantum state |ψ⟩, not by a vector of amplitudes,             k=0                      k=0but by a stabilizer group, consisting of unitary matrices
+                                                                Similarly, to ﬁnd A, note that given S, there are 2n −1that stabilize      Notice that if U and V both stabilize                                                             choices for M1, 2n     choices for M2, 2n     choices for               |ψ⟩.         so do UV and U −1, and thus the set Stab                 −2           −4                                                     and so on. Thus|ψ⟩then                                            (|ψ⟩)   M3,
+of stabilizers of |ψ⟩is a group.  Also, it is not hard to            n−1                   n−1                        Y                                 Yshow     that                                   Stab                                          But                if |ψ⟩̸=                |ϕ⟩then                        Stab (|ψ⟩) ̸=                                                  (|ϕ⟩).                                      A =                                                                  2n    = 2n(n−1)/2why does           this              strange                       representation                               buy                                        us                                          anything?                                                     −2k                2n−k −1  .
+To write down generators for Stab (|ψ⟩) (even approxi-             k=0                     k=0mately) still takes exponentially many bits in general by                                                        Therefore
+an information-theoretic argument.   Indeed stabilizers
+seem worse than amplitude vectors, since they require       G     n−1Y  4n−k          n−1Y                                  N =  = 2n       −1 = 2n     2n−k + 1  .about 22n parameters to specify instead of about 2n!                                        A          2n−k
+                                                                                         k=0  Remarkably, though, a  large and  interesting  class                  k=0     −1
+of quantum states can be speciﬁed uniquely by much
+smaller stabilizer groups—speciﬁcally, the intersection of
+Stab (|ψ⟩) with the Pauli group [11, 12, 13].  This class     III.  EFFICIENT SIMULATION OF STABILIZERof states, which arises in quantum error correction and
+                                                       CIRCUITSmany other settings, is characterized by the following the-
+orem.
+                                                 Theorem 1 immediately suggests a way to simulate sta-
+Theorem 1 Given an n-qubit state     the following are                                                                     bilizer circuits eﬃciently on a classical computer. A well-                                      |ψ⟩,equivalent:                                              known fact from group theory says that any ﬁnite group
+          can  be                    obtained                           from   (i) |ψ⟩                                    |0⟩⊗n  by CNOT,  Gis ahasstabilizera generatingstate seton ofn sizequbits,at mostthen log2the |G|.groupSoS if |ψ⟩     Hadamard,              and                    phase gates                                   only.                                                                                                                  (|ψ⟩)                                                                 of Pauli operators that stabilize        a generating set  (ii)     can  be  obtained  from         by CNOT,                               |ψ⟩has      |ψ⟩                           |0⟩⊗n                   of size n = log2 2n. Each generator takes 2n + 1 bits to     Hadamard, phase, and measurement gates only.
+                                                                 specify: 2 bits for each of the n Pauli matrices, and 1 bit
+ (iii) |ψ⟩is stabilized by exactly 2n Pauli operators.          for the phase [40].  So the total number of bits needed
+           uniquely                   determined                              by                                       Stab (iv) |ψ⟩is                         S (|ψ⟩) =                                              (|ψ⟩)∩    toshowed,specifyfurthermore,|ψ⟩is n (2n +is 1).thatWhattheseGottesmanbits can beandupdatedKnill          or              the group                          of Pauli                                 operators                                             that                                                       stabilize     Pn,                                                      in polynomial time after a CNOT, Hadamard, phase, or
+      |ψ⟩.                                          measurement gate is applied to     The updates cor-                                                                                                   |ψ⟩.  Because of Theorem 1, we call any circuit consisting    responding to unitary gates are very eﬃcient, requiring
+entirely of CNOT, Hadamard, phase, and measurement    only O (n) time for each gate.
+
+===== PDF PAGE 4 =====
+
+                                                                                                     4
+
+  However, the updates corresponding to measurements    which i is raised (either 0, 1, or −1) when the Pauliare not so eﬃcient. We can decide in O (n) time whether    matrices represented by x1z1 and x2z2 are multiplied.
+a measurement of qubit a will yield a deterministic or   More explicitly,  if x1 = z1 = 0 then g = 0;  if x1 =
+random outcome.   If the outcome is random, then up-    z1 = 1 then g = z2 −x2;  if x1 = 1 and z1 = 0 then
+dating the state after the measurement takes O n2     g = z2 (2x2 −1); and if x1 = 0 and z1 = 1 then g =
+time, but  if the outcome is deterministic, then decid-    x2 (1 −2z2). Then set rh := 0 if
+                                                                     ning whether the outcome is |0⟩or |1⟩seems to require      X
+inverting an n×n matrix, which takes O  n2.376  time in        2rh + 2ri +    g (xij, zij, xhj, zhj)    (mod 4) ,theory [21] but order n3 time in practice. What that n3                        ≡0
+                                                                         j=1
+complexity means is that simulations of, say, 2000-qubit
+systems would already be prohibitive on a desktop PC,   and set rh := 1 if the sum is congruent to 2 mod 4 (it
+given      that         measurements                         are                              frequent.                                                                    will                                                             never                                                             be                                                                    congruent                                                                                    to 1 or                                                                                                         3).                                                                                           Next,                                                                                                                    for                                                                                                                                       all j ∈  This        section               describes a                    new                              simulation algorithm, by                                                                                                    . .                                                                                                       . ,                                                                            set                                                                           and                                                                                                        set                                                                        xhj := xij                                                                                                        zhj :=                                                                                                                                   zij                                                              {1,                                                                n},                                                               ⊕xhj                                                                                     ⊕zhjwhich both deterministic and random measurements can    (here                                                      and                                                                  throughout,                                                                                          exclusive-OR).be performed in O n2  time. The cost is a factor-2 in-                     ⊕denotes
+                                        We now give the algorithm.   It will be convenient tocrease in the number of bits needed to specify a state.
+                                                 add an additional (2n + 1)st row for “scratch space.” TheFor in addition to the n stabilizer generators, we now
+store n “destabilizer” generators, which are Pauli opera-     initial state |0⟩⊗n has ri = 0 for all i ∈{1, . . . , 2n + 1},
+tors that together with the stabilizer generators generate   and xij = δij and zij = δ(i−n)j for all i ∈{1, . . . , 2n + 1}
+the     full        Pauli            group Pn.  So the number of bits needed   andThe jalgorithm∈{1, . . . , proceedsn}, wherethroughδij is 1 ifthei =gatesj andin0 otherwise.order; foris  2n     (2n     + 1)           ≈4n2.  The algorithm                 represents a state by a tableau consist-    each one it does one of the following depending on the
+ing of binary variables xij, zij for all i ∈{1, . . . , 2n},    gate type.j          . . . ,   and ri for all i          . . . ,      [41]:                               CNOT from control a to target  b.   For all i ∈{1,    n},            ∈{1,    2n}                                                                           ∈                                       . . . ,      set ri := ri          (xib              xib :=      x11        x1n     z11         z1n    r1             {1,    2n},            ⊕xiazib    ⊕zia ⊕1),                   · · ·                            · · ·                            xib      and zia := zia                                            ...      ...                      ...                                   ...      ...                     ...                             ...           ⊕xia,              ⊕zib.
+                             Hadamard on qubit a.  For all i           . . . ,      set   xn1       xnn     zn1        znn    rn                                  ∈{1,    2n},               · · ·                            · · ·                ri := ri        and swap xia with zia.                                                            ⊕xiazia  x(n+1)1     x(n+1)n z(n+1)1     z(n+1)n rn+1                 · · ·                            · · ·             Phase on qubit a.  For all i          . . . ,      set ri :=                                                                     ∈{1,    2n},                   ...      ...                      ...                                   ...      ...                     ...                             ...                                                                           ri        and then set zia := zia                                                       ⊕xiazia                    ⊕xia.
+     x(2n)1   · · ·  x(2n)n   z(2n)1   · · ·  z(2n)n  r2n         Measurement of qubit a in standard basis.  First
+Rows 1 to n of the tableau represent the destabilizer gen-    check whether there exists a p ∈{n + 1, . . . , 2n} such
+erators R1, . . . , Rn, and rows n + 1 to 2n represent the    that xpa = 1.
+                                             Case                                                                              I:                                                          Such                                                                  a p exists (if                                                                        more                                                                                   than                                                                                        one                                                                                                                       exists, thenstabilizer         generators                  Rn+1, . .                                              . , R2n.                                                 If Ri                        = ±P1                                                                              · · · Pn,                                                                       let p be                                                                  the                                                                             smallest).                                                                                  In                                                                                                 this case                                                                                              the                                                                                      measurementthen bits                           the                                  jth Pauli                                      matrix                                               00           xij, zij determine                                                 Pj:
+means I, 01 means X, 11 means Y , and 10 means Z.   outcome is random, so the state needs to be updated.
+Finally, ri is 1 if Ri has negative phase and 0 if ri has    This is done as follows.   First call rowsum (i, p) for all
+positive phase.  As an example, the 2-qubit state |00⟩     i ∈{1, . . . , 2n} such that i ̸= p and xia = 1. Second, set
+is stabilized by the Pauli operators +ZI and +IZ, so a    entire the (p −n)th row equal to the pth row.  Third, set
+possible tableau for |00⟩is                                the pth row to be identically 0, except that rp is 0 or 1                                     with equal probability, and zpa = 1.  Finally, return rp
+                  1  0  0  0  0                        as the measurement outcome.
+                  
+          0  1  0  0  0                 Case II: Such an p does not exist.   In this case the
+                  
+          0  0  1  0  0                   outcome is determinate, so measuring the state will not
+                                                     change it; the only task is to determine whether 0 or                  0  0  0  1  0
+                                                     1  is observed.   This  is done as follows.    First set
+Indeed, we will take the obvious generalization of the    the (2n + 1)st row to be identically 0.   Second,  call
+above  “identity matrix”  to be  the  standard  initial   rowsum(2n + 1, i + n) for all i ∈{1, . . . , n} such thattableau.                                                      xia = 1.  Finally return r2n+1 as the measurement out-
+  The algorithm uses a subroutine called rowsum(h, i),    come.
+which sets generator h equal to i + h.  Its purpose is to
+                                                 Once we interpret the xij, zij, and ri bits for i   +keep track, in particular, of the phase bit rh, including                            ≥n                                                     1 as representing generators of S      and rowsum asall the factors of i that appear when multiplying Pauli                                          (|ψ⟩),                                                           representing the group operation in    the correctness ofmatrices. The subroutine is implemented as follows.                                     Pn,                                                         the CNOT, Hadamard, phase, and random measurement
+rowsum(h, i):  Let g (x1, z1, x2, z2) be a function that    procedures follows immediately from previous analyses
+takes 4 bits as input, and that returns the exponent to   by Gottesman [13].  It remains only to explain why the
+
+===== PDF PAGE 5 =====
+
+                                                                                                     5
+
+determinate measurement procedure is correct. Observe    IV. IMPLEMENTATION AND EXPERIMENTS
+that Rh commutes with Ri if the symplectic inner product
+                                        We have implemented the tableau algorithm of Sec-
+Rh · Ri = xh1zi1 ⊕· · · ⊕xhnzin ⊕xi1zh1 ⊕· · · ⊕xinzhn     tion III in a C program called CHP (CNOT-Hadamard-
+                                                         Phase), which  is available for download [42].  CHP
+equals 0, and anticommutes with Ri if Rh·Ri = 1. Using    takes as input a program in a simple “quantum assemblythat fact it is not hard to show the following.
+                                                         language,” consisting of four instructions: c a b (apply
+                                    CNOT from control a to target b), h a (apply Hadamard
+Proposition 3 The  following  are  invariants  of  the
+                                                            to a), p a (apply phase gate to a), and m a (measure a
+tableau algorithm:
+                                                               in the standard basis, output the result, and update the
+   (i) Rn+1, . . . , R2n generate S (|ψ⟩), and R1, . . . , R2n    state accordingly).  Here a and b are nonnegative inte-
+      generate Pn.                                          gers indexing qubits; the maximum a or b that occurs in                                                   any instruction is assumed to be n     where n is the  (ii) R1, . . . , Rn commute.                                                  −1,                                                number of qubits. As an example, the following program
+ (iii) For  all h ∈{1, . . . , n}, Rh anticommutes with    demonstrates the famous quantum teleportation protocol     Rh+n.                                                    of Bennett et al. [16]:
+ (iv) For all i, h ∈{1, . . . , n} such that i ̸= h, Ri com-       )
+     mutes with Rh+n.                                 h 1    EPR pair is prepared (qubit 1 is
+                                                     c 1 2    Alice’s half; qubit 2 is Bob’s half)
+  Now suppose that a measurement of qubit a yields a       
+determinate outcome. Then the Za operator must com-      c 0 1  Alice interacts qubit 0 (the state to
+mute with all elements of the stabilizer, so                 h 0
+                                                               be teleported) with her half of the
+      Xn                                                     m 0  EPR pair
+                                      )                  chRh+n = ±Za                      m 1
+                 h=1                                  c 0 3
+                                                                         Alice sends 2 classical bits to Bob
+                                                     c 1 4for a unique             choice                                              goal is to                     of c1,                                        . . . , cn                                                            ∈{0,                                       1}. Our                                                     c 4 2determine          the                       then                         by                          summing                                         the appropri-                 ch’s, since                                   
+ate Rh+n’s we can learn whether the phase representing      h 2     Bob uses the bits from Alice to
+the   outcome                 is positive or negative.  Notice that for all
+                                                     c 3 2  recover the teleported statei           . . . , ∈{1,    n},                                         h 2
+ Xn       Xn
+ci ≡    ch (Ri · Rh+n) ≡Ri·   chRh+n ≡Ri·Za (mod 2)    We also have available CHP programs that demon-    h=1                  h=1                              strate the Bennett-Wiesner dense quantum coding proto-
+                                                                col [15], the GHZ (Greenberger-Horne-Zeilinger) experi-
+by Proposition 3.   Therefore by checking whether Ri   ment [14], Simon’s algorithm [22], and the Shor 9-qubit
+anticommutes with Za—which  it does  if and only  if   quantum error-correcting code [23].
+xia = 1—we learn whether ci = 1 and thus whether                                                Our main design goal for CHP was high performance
+rowsum (2n + 1, i + n) needs to be called.                                                      with a large number of qubits and frequent measure-
+ We end this section by explaining how to compute the                                                       ments. The only reason to use CHP instead of a general-
+inner product between two stabilizer states                                                      purpose quantum computer simulator such as QuIDD [3]                                   |ψ⟩and |ϕ⟩,given their full tableaus.  The inner product is 0 if the                                                           or QCL [2] is performance, so we wanted to leverage that
+stabilizers contain the same Pauli operator with oppo-                                                      advantage and make thousands of qubits easily simula-
+site signs.   Otherwise it equals 2−s/2, where s is the                                                              ble rather than just hundreds.  Also, the results of Sec-
+minimum, over all sets of generators         . . . ,      for                                                             tion V suggest that classical postprocessing is unavoid-                                  {G1,   Gn}Stab     and         . . . ,      for Stab       of the num-                                                           able for stabilizer circuits, since stabilizer circuits are not     (|ψ⟩)     {H1,   Hn}          (|ϕ⟩),
+                                                      even universal for classical computation.  So if we wantber of i for which Gi ̸= Hi.  For example, ⟨XX, ZZ⟩and               inner product 1/ √2, since                to simulate (for example) Simon’s algorithm, then one    ⟨ZI, IZ⟩have                        ⟨ZI, IZ⟩=
+⟨ZI, ZZ⟩.  The proof is easy: it suﬃces to observe that   measurement is needed for each bit of the ﬁrst register.
+neither the inner product nor s is aﬀected if we transform   CHP’s execution time will be dominated by these mea-
+|ψ⟩and |ϕ⟩to U |ψ⟩and U |ϕ⟩respectively, for some uni-    surements, since as discussed in Section III, each unitary
+                                                         gate takes only O (n) time to simulate.tary U such that U |ψ⟩= |0⟩⊗n has the trivial stabilizer.
+This same observation yields an algorithm to compute     Our experimental results, summarized in Figure 2,
+the inner product: ﬁrst transform the tableau of |ψ⟩to   show that CHP makes practical the simulation of ar-
+that of U |ψ⟩= |0⟩⊗n using Theorem 8; then perform    bitrary stabilizer circuits on up to about 3000 qubits.
+Gaussian elimination on the tableau of U |ϕ⟩to obtain s.    Since the number of bits needed to represent n qubitsUnfortunately, this algorithm takes order n3 steps.        grows quadratically in n, the main limitation is available
+
+===== PDF PAGE 6 =====
+
+                                                                                                     6
+
+
+memory. On a machine with 256MB of RAM, CHP can     is called, which in turn is determined by how many i’s
+handle up to about 20000 qubits before virtual memory    there are such that xia = 1 (where a is the qubit being
+is needed, in which case thrashing makes its performance    measured).   Initially xia = 1 if and only if a = i, so a
+intolerable.  The original version of CHP required ˜8n2    measurement takes O (n) time.  For a random state, by
+bits for memory; we were able to reduce this to ˜4n2    contrast, the expected number of i’s such that xia = 1 is
+bits, enabling a 41% increase in the number of qubits   n by symmetry, so a measurement takes order n2 time.
+for a ﬁxed memory size.  More trivially, we obtained    In general, the more 1’s there are in the tableau, the
+an eightfold improvement in memory by storing 8 bits    longer measurements take.  But where does the transi-
+to each byte instead of 1.  Not only did that change    tion from linear to quadratic time occur, and how sharp
+increase the number of storable qubits by 183%, but it     is it?
+also made CHP about 50% faster—presumably because      Consider n people, each of whom initially knows one se-
+(1) the rowsum subroutine now needed to exclusive-OR    cret (with no two people knowing the same secret). Each
+only 1/8 as many bytes, and (2) the memory penalty    day, two people chosen uniformly at random meet and ex-
+was reduced.   Storing the bits in 32-bit words yielded    change all the secrets they know. What is the expected
+a further 10% performance gain, presumably because of   number of days until everyone knows everyone else’s se-
+(1) rather than (2) (since even with byte-addressing, a    crets?  Intuitively, the answer is Θ (n log n), because any
+whole memory line is loaded into the cache on a cache    given person has to wait Θ (n) days between meetings,
+miss).                                            and at each meeting, the number of secrets he knows ap-
+  As expected, the experimentally measured execution    proximately doubles (or towards the end, the number of
+time per unitary gate grows linearly in n, whereas the    secrets he doesn’t know is approximately halved).  Re-
+time per measurement grows somewhere between linearly    placing people by qubits and meetings by CNOT gates,
+and quadratically, depending on the states being mea-    one can see why a ‘phase transition’ from a sparse to a
+sured.  Thus the time needed for measurements gener-    dense tableau might occur after Θ (n log n) random uni-
+ally dominates execution time.  So the key question is    tary gates are applied. However, this argument does not
+this: what properties of a circuit determine whether the    pin down the proportionality constant β, so that is what
+time per measurement is linear, quadratic, or somewhere   we varied in the experiment.
+in between?  To investigate this question we performed     The results of the experiment are presented in Figure
+the following experiment.                                        2.  When β = 0.6, the time per measurement appears
+ We randomly generated stabilizer circuits on n qubits,    to grow roughly linearly in n, whereas when β = 1.2
+for n ranging from 200 to 3200 in increments of 200. For    (meaning that the number of unitary gates has only dou-
+each n, we used the following distribution over circuits:    bled), the time per measurement appears to grow roughly
+Fix a parameter β > 0; then choose ⌊βn log2 n⌋random    quadratically, so that running the simulations took 4unitary gates: a CNOT from control a to target  b, a    hours of computing time [43]. Thus, Figure 2 gives strik-
+Hadamard on qubit a, or a phase gate on qubit a, each    ing evidence for a “phase transition” in simulation time,
+with probability 1/3, where a and b are drawn uniformly    as increasing the number of unitary gates by only a con-
+at random from {1, . . . , n} subject to a ̸= b. Then mea-    stant factor shifts us from a regime of simple states that
+sure qubit a for each a ∈{1, . . . , n} in sequence.            are easy to measure, to a regime of complicated states We simulated the resulting circuits in CHP. For each    that are hard to measure. This result demonstrates that
+circuit, we counted the number of seconds needed for all n   CHP’s performance depends strongly on the circuit be-
+measurement steps (ignoring the time for unitary gates),    ing simulated.  Without knowing what sort of tableaus
+then divided by n to obtain the number of seconds per    a circuit will produce, all we can say is that the time
+measurement. We repeated the whole procedure for β    per measurement will be somewhere between linear and
+ranging from 0.6 to 1.2 in increments of 0.1.               quadratic in n.
+  There were several reasons for placing measurements
+at the end of a circuit rather than interspersing them with
+unitary gates.  First, doing so models how many quan-         V. COMPLEXITY OF SIMULATING
+                                                   STABILIZER CIRCUITStum algorithms actually work (apply unitary gates, then
+measure, then perform classical postprocessing); second,
+it allowed us to ignore the eﬀect of measurements on sub-     The Gottesman-Knill theorem shows that stabilizer
+sequent computation; third, it ‘standardized’ the mea-     circuits are not universal for quantum computation, un-
+surement stage, making comparisons between diﬀerent     less quantum computers can be simulated eﬃciently by
+circuits more meaningful; and fourth, it made simulation     classical ones.  To a computer scientist, this theorem
+harder by increasing the propensity for the measurements    immediately raises a question: where do stabilizer cir-
+to be nontrivially correlated.                                  cuits sit in the hierarchy of computational complexity
+  The decision to make the number of unitary gates pro-    theory?   In this section we resolve that question, by
+portional to n log n was based on the following heuristic    proving that the problem of simulating stabilizer circuits
+argument. The time needed to simulate a measurement     is complete for a classical complexity class known as ⊕Lis determined by how many times the rowsum procedure    (pronounced “parity-L”) [44].  The usual deﬁnition of
+
+===== PDF PAGE 7 =====
+
+                                                                                                     7
+
+
+                                                                 ory. The reduction works as follows: ﬁrst M speciﬁes a
+                                    CNOT circuit on its output tape; then an “oracle” tells
+     1                        M the circuit’s output (which we can take to be, say,
+    0.9            =1.2                                     the value of the ﬁrst qubit after the circuit is applied),
+    0.8            =1.1                                   then M speciﬁes another CNOT circuit on its output
+                      =1.0                                       tape, and so on. A useful result of Hertrampf, Reith,    0.7            =0.9
+                      =0.8                                and Vollmer [25] says that this seemingly powerful kind    0.6
+                      =0.7                                          of reduction, in which M can make multiple calls to the     measurement  0.5            =0.6                       CNOT oracle, is actually no more powerful than the kind
+ per  0.4                                               with only one oracle call.  (In complexity language, what
+    0.3                                                           [25] showed is that ⊕L = L⊕L:                                                                            any problem in L with ⊕L                                                             oracle is also in      itself.)    0.2                                                   ⊕L   Seconds                                                                         It is conjectured                                                                            that L        in other words, that an
+    0.1                                                                                                 ̸= ⊕L;                                                             oracle for simulating CNOT                                                                                                  circuits would let an L ma-
+     0                                                           chine compute more functions than it could otherwise.
+         200  600  1000 1400 1800 2200 2600 3000
+                                                                   Intuitively, this is because writing down the intermediate
+                Number of qubits n
+                                                               states of such a circuit requires more than a logarithmic
+                                                number of read/write bits.   Indeed, ⊕L contains some                                                              surprisingly “hard” problems, such as inverting matrices
+FIG. 2: Average time needed to simulate a measurement after    over GF2 [24]. On the other hand, it is also conjectured
+applying       βn             log2 n                   unitary                           gates to n qubits, on a 650MHz    that                                                                                that                                                                               even                                                                                     with                                                                                  an oracle                                                                                                                       for sim-                                           ⊕L                                                                              ̸= P, meaningPentium III           with            256MB                 RAM.                                                            ulating                                        CNOT                                                                                      circuits,                                                                     an L                                                                            machine                                                                                            could                                                                                              not simulate
+                                                more general circuits with AND and OR gates. As usual
+                                                               in complexity theory, neither conjecture has been proved.
+                                          Now deﬁne the Gottesman-Knill problem as fol-
+⊕L is as the class of all problems that are solvable by a    lows. We are given a stabilizer circuit   as a sequencenondeterministic logarithmic-space Turing machine, that                                     C                                                                 of gates of the form CNOT a     Hadamard a, Phaseaccepts if and only if the total number of accepting paths                      →b,                                                                 a, or Measure a, where a, b           . . . ,    are indices ofis odd. But there is an alternate deﬁnition that is prob-                        ∈{1,    n}                                                              qubits.  The problem is to decide whether qubit 1 willably more intuitive to non-computer-scientists.  This is
+                                                    be         certainty after   is applied to the initial statethat                     of problems                              that                                 reduce                                           to simulating                                                         |1⟩with                                                                        C   ⊕L is the class                                                                                     (If not, then qubita polynomial-size           CNOT                             circuit,                                              i.e.                                 a circuit                                      composed                                                             |0⟩⊗n.                   1 will be |1⟩with probability
+entirely of NOT and CNOT gates, acting on the initial    either 1/2 or 0.)
+state            (It is easy to show that the two deﬁnitions      Since stabilizer circuits are a generalization of CNOT      |0 · · · 0⟩.are equivalent,             but this would require us ﬁrst to explain     circuits,  it is obvious that Gottesman-Knill is ⊕L-                                                    hard                                                                                      (i.e.                                                           anywhat the usual deﬁnition means!)
+                                                                 sult                                                               says                                                                  that                                                       Gottesman-Knill⊕L problem can be reducedis in   to it).Intuitively,Our re-  From the second deﬁnition, it is clear that          in                                                                                   ⊕L.                              ⊕L ⊆P;       this means that any stabilizer circuit can be simulatedother words, any problem reducible to simulating CNOT
+                                                         eﬃciently using CNOT gates alone—the additional avail-circuits is also solvable in polynomial time on a classical
+                                                                  ability of Hadamard and phase gates gives stabilizer cir-computer. But this raises a question: what do we mean
+                                                                cuits at most a polynomial advantage.  In our view, thisby “reducible”?  Problem A is reducible to problem B
+                                                             surprising fact helps to explain the Gottesman-Knill the-if any instance of problem A can be transformed into
+                                                      orem, by providing strong evidence that stabilizer circuitsan instance of problem B; this means that problem B
+                                                           are not even universal for classical computation (assum-is “harder” than problem A in the sense that the ability
+                                                                 ing, of course, that classical postprocessing is forbidden).to answer an arbitrary instance of problem B implies the
+ability to answer an arbitrary instance of problem A (but
+not necessarily vice-versa).                       Theorem 4 Gottesman-Knill is in ⊕L.
+ We must, however, insist that the reduction transform-
+ing instances of problem A into instances of problem B      Proof. We will show how to solve Gottesman-Knill
+not be too diﬃcult to perform.  Otherwise, we could re-    using a logarithmic-space machine M with an oracle for
+duce hard problems to easy ones by doing all the diﬃcult    simulating CNOT circuits. By the result of Hertrampf,
+                                                       and                                                                 Vollmer                                                                                          [25] described above, this will suﬃcework in       the reduction                            itself. In                              the case                                    we                                             cannot    Reith,                                           of ⊕L,                                                            to prove                                                                  the                                                                   theorem.mean      “reducible                  in polynomial                              time,”                                 which                                                         is a                                  common
+restriction, since then the reduction would be at least as     By the principle of deferred measurement, we can as-
+powerful as the problem it reduces to! Instead we require   sume that the stabilizer circuit C has only a single mea-
+the reduction to be performed in the complexity class L,    surement gate at the end (say of qubit 1), with all other
+or logarithmic space—that is, by a Turing machine M    measurements replaced by CNOT’s into ancilla qubits.
+that is given a read-only input of size n, and a write-only    In the tableau algorithm of Section III, let x(t)ij , z(t)ij , r(t)i
+output tape, but only O (log n) bits of read/write mem-    be the values of the variables xij, zij, ri after t gates of C
+
+===== PDF PAGE 8 =====
+
+                                                                                                     8
+
+have been applied. Then M will simulate C by comput-                       if x(t)                                                                                             ia z(t)ia = 1 then α := −αing these values. The ﬁrst task of M is to decide whether           end if
+the measurement has a determinate outcome—or equiv-                    if (t + 1)st gate is a CNOT from a to b
+                                                                  ask oracle for x(t)ia , z(t)ia , x(t)ib , z(t)ibalently, whether x(Ti1 ) = 0 for every i ∈{n + 1, . . . , 2n},where T  is the number of unitary gates.  Observe that                                                                                                            if x(t)ia z(t)ib   x(t)ib      ia    = 1 then α :=in the CNOT, Hadamard, and phase procedures, every                           ⊕z(t) ⊕1          −α
+                                                           end ifupdate to an xij or zij variable replaces it by the sum
+                                                             next tmodulo 2 of one or two other xij or zij variables.  Also,
+                                                       end if
+iterating over all t ∈{0, . . . , T} and i ∈{1, . . . , 2n} takes      next ionly O (log n) bits of memory.   Therefore, despite its
+memory          restriction,          M                      can easily                                    write                                   on                                                         its output                                                                                             +1) , is then                                                The                                                        measurement                                                                        outcome,                                                                                              r(T2n+1                                                                                            1 if α = −1tape a description                    of                   a CNOT                                  circuit                                    that                                          simulates                                                  the   and                                                         0                                                                                                     if α = 1.  As                                                                                described                                                                                        above,                                                                                                the machine                                                   M
+tableau algorithm using 4n2 bits (the ri’s being omitted),    needs only O (log n) bits to keep track of the loop indices
+and that returns x(Ti1 ) for any desired i. Then to decide      i, j, t, and O (1) additional bits to keep track of other
+whether the measurement outcome is determinate, M     variables.  Its correctness follows straightforwardly from
+simply iterates over all i from n + 1 to 2n.                 the correctness of the tableau algorithm.
+  The hard part is to decide whether |0⟩or |1⟩is mea-      For a problem to be ⊕L-complete simply means thatsured      in         case the               measurement                           outcome                                                  is                                          determinate,                                                                               it                                                                                  is
+for    this       problem                  involves                                   variables,                                     which                                         do not                                                     4 is                                                              that                                                      ⊕L-hardGottesman-Knilland in ⊕L.  Thus,is a corollary of Theorem                         the ri                                                                                    ⊕L-complete.evolve in a linear way as the xij’s and zij’s do.  Even
+worse, it involves the complicated-looking and nonlinear
+rowsum procedure.   Fortunately, though, it turns out               VI. CANONICAL FORM
+that the measurement outcome r(T2n+1+1) can be computed
+by keeping track of a single complex number α.  This α     Having studied the simulation of stabilizer circuits, in
+is a product of phases of the form ±1 or ±i, and there-    this section we turn our attention to manipulating thosefore takes only 2 bits to specify.  Furthermore, although     circuits.   This task is of direct relevance to quantum
+the “obvious” ways to compute α use more than O (log n)    computer architecture: because the eﬀects of decoher-
+bits of memory, M can get around that by making liberal    ence build up over time, it is imperative (even more so
+use of the oracle.                                      than for classical circuits) to minimize the number of
+  First M computes what r(T2n+1+1) would be if the CNOT,    gates as well as wires and other resources. Even if fault-
+Hadamard, and phase procedures did not modify the ri’s.    tolerant techniques will eventually be used to tame de-
+Let P be a Pauli matrix with a phase of ±1 or (T±i,) which    coherence, there remains the bootstrapping problem of
+therefore takes 4 bits to specify.  Also, let Pij  be the    building the fault-tolerance hardware! In that regard we
+                                                            )      )           should point out that fault-tolerance hardware is likely
+Pauli matrix represented by the bits x(Tij  , z(Tij   in the                                                            to consist mainly of CNOT, Hadamard, and phase gates,
+usual way: I = 00, X = 10, Y = 11, Z = 01.  Then
+                                                              since the known fault-tolerant constructions (for exam-
+the procedure is as follows.
+                                                                    ple, that of Aharonov and Ben-Or [26]) are based on sta-
+  α := 1                                                           bilizer codes.
+   for j := 1 to n                                       Although there has been some previous work on syn-
+   P := I                                                   thesizing CNOT circuits [18, 27, 28] and general classical
+     for i := n + 1 to 2n                                      reversible circuits [29, 30], to our knowledge there has not
+      ask oracle for x(T(i−n)1,)    x(Tij ) , z(Tij )                   been work on synthesizing stabilizer circuits. In this sec-
+                 )                       (T )                         tion we prove a canonical form theorem that is extremely
+          if x(T(i−n)1 = 1 then P := Pij P                        useful for stabilizer circuit synthesis. The theorem says
+    next i                                                that given any circuit consisting of CNOT, Hadamard,
+    multiply α by the phase of P (±1 or ±i)            and phase gates, there exists an equivalent circuit that
+  next j                                                     applies a round of Hadamard gates only, then a round
+                                                                 of CNOT gates only, and so on in the sequence H-C-P-
+  The “answer” is 1 if α = −1 and 0 if α = 1 (note that   C-P-C-H-P-C-P-C. One easy corollary of the theorem is
+α will never be ±i at the end).  However, M also needs    that any tableau satisfying the commutativity conditionsto account for the ri’s, as follows.
+                                                                 of Proposition 3 can be generated by some stabilizer cir-
+   for i := n + 1 to 2n                                            cuit.   Another corollary is that any unitary stabilizer
+    ask oracle for x(T(i−n)1)                                         circuit has an equivalent circuit with only O n2/ log n
+              )                                                    gates.
+       if x(T(i−n)1 = 1                                      Given two n-qubit unitary stabilizer circuits      we                                                                                                                C1, C2,        for t := 0 to T                                     say that   and   are equivalent if     =                                                                                                                             for             −1                                                                 C1                                                                        C2                                                                                          C1 (|ψ⟩)                                                                                                    C2                                                                                                               (|ψ⟩)              if (t + 1)st gate                                 is a Hadamard or phase on a        all stabilizer                                                                             states                                                                         where                                                                                                                                  is the                                                                                                  ﬁnal                                                                                      |ψ⟩,        Ci (|ψ⟩)             state
+          ask oracle for x(t)ia , z(t)ia                     when Ci is applied to |ψ⟩[45]. By linearity, it is easy to
+
+===== PDF PAGE 9 =====
+
+                                                                                                     9
+
+see that equivalent stabilizer circuits will behave identi-    performing Hadamards on the rightmost n −k qubitscally on all states, not just stabilizer states.  Further-    yields a state
+more, there exists a one-to-one correspondence between                      !
+circuits and tableaus:                                              A1 B2 B1 A2
+                                                                        0   I D  0
+Lemma 5 Let C1, C2 be unitary stabilizer circuits, and
+let T1, T2 be their respective ﬁnal tableaus when we run   whose X matrix has full rank.them     on the standard                           initial                               tableau.
+are    equivalent                     if and only                                      if                  =                               Then C1 and C2   Lemma 7 For any symmetric matrix A     2    , there                                                                   ∈Zn×n                          T1   T2.                          exists a diagonal matrix Λ such that A+Λ                                                         = MM T , with
+  Proof.  Clearly T1 = T2  if C1 and C2 are equivalent.  M some invertible binary matrix.For the other direction, it suﬃces to observe that a uni-
+                                                     Proof. We will let M be a lower-triangular matrixtary stabilizer circuit acts linearly on Pauli operators
+                                                      with 1s all along the diagonal:(that is, rows of the tableau):  if it maps P1 to Q1 and
+P2 to Q2, then it maps P1 + P2 to Q1 + Q2.  Since the                                                                     Mii = 1                         (1)
+rows      of the           standard initial tableau form a basis for Pn,                    Mij = 0   i < j                  (2)the lemma            follows.
+  Our proof of the canonical form theorem will use the                                                   Such an M  is always invertible.  Then there exists a
+following two lemmas.                                                                    T                                                         diagonal Λ such that A + Λ = MM    if and only if
+                          X
+Lemma 6 Given an n-qubit stabilizer state, it is always                                                                             Aij =   MikMjk                 (3)
+possible to apply Hadamard gates to a subset of the qubits
+                                                                                         k
+so as to make the X matrix have full rank (or equiva-
+lently, make all 2n basis states have nonzero amplitude).     for all pairs (i, j) with i > j. (We pick Λ appropriately
+                                                            to satisfy the equations for Aii automatically, and both
+  Proof. We can always perform row additions on the    sides of the equation are symmetric, covering the cases
+n × 2n stabilizer matrix without changing the state that    with i < j.)it represents.  Suppose the X matrix has rank k < n;    We will perform induction on i and j to solve for the
+then by Gaussian elimination, we can put the stabilizer    undetermined elements of M. For the base case, we know
+matrix in the form                                        that M11 = 1. We will determine Mij for i > j by
+                    !                    supposing we have already determined Mi′j′ for either
+              A    B                                         i′ < i, j′ ≤j or i′ ≤i, j′ < j. We consider equation (3)
+                    0    C                              for Aij and note that MikMjk = 0 unless k ≤j. Then
+                         X
+                                                                MikMjk + Mij.             (4)where    A                      rank k.                         Then                                        since                                          the                                          rows are                   Aij =           is k×n and has                                                                             k<jlinearly        independent,             C must                          have                               rank                              n                                                therefore                              −k;
+it has an (n −k) × (n −k) submatrix C2 of full rank.   By the induction hypothesis, we have already determinedLet us permute the columns of the X and Z matrices
+                                                               in the sum both Mik (since k < j) and Mjk (since j < i
+simultaneously to obtain
+                                                 and k < j), so this equation uniquely determines Mij.
+                   !                                      We can thus ﬁnd a unique M that satisﬁes (3) for all
+                A1 A2 B1 B2                                                          ,                             i > j.
+                   0  0 C1 C2                        Say a unitary stabilizer circuit is in canonical form  if
+                                                                               it consists of 11 rounds in the sequence H-C-P-C-P-C-H-
+and then perform Gaussian elimination on the bottom    P-C-P-C.
+n −k rows to obtain                   !                Theorem 8 Any unitary stabilizer circuit has an equiv-
+                A1 A2 B1 B2                           alent circuit in canonical form.
+                                                          .
+                   0  0 D  I
+                                                     Proof. Divide a 2n × 2n tableau into four n × n ma-                                                                    trices A = (aij), B = (bij), C = (cij), and D = (dij),
+Now commutativity relations imply                                                          containing the destabilizer xij bits, destabilizer zij bits,
+                   !                           stabilizer xij bits, and stabilizer zij bits respectively:
+                    DT                                !              A1 A2       = 0
+                               I                                A B
+                                                     C D
+and therefore A1DT = A2.   Notice that this implies
+that the k × k matrix A1 has full rank, since otherwise   (We can ignore the phase bits ri.)  Since unitary circuitsthe X matrix would have column rank less than k.  So    are reversible, by Lemma 5 it suﬃces to show how to
+
+===== PDF PAGE 10 =====
+
+                                                                                                   10
+
+
+obtain the standard initial tableau starting from an ar-   (10) Use phases to produce
+bitrary A, B, C, D by applying CNOT, Hadamard, and                   !
+phase gates [46]. We cannot use row additions, since al-                N 0
+though they leave states invariant they do not in general                                                          ;                                                                           0 C
+leave circuits invariant.
+  The procedure is as follows.
+                                                      then by commutativity relations, NCT = I. Next apply
+(1) Use Hadamards to make C have full rank (this is
+                                                   two phases each to some subset of qubits in order to
+possible by Lemma 6).
+                                                           preserve the above tableau, but set r1 =  = rn = 0.(2) Use CNOT’s to perform Gaussian elimination on C,                                                                       · · ·                                                    (11) Use CNOT’s to produce
+producing
+                                                  !
+                 !
+                                                                                      I 0
+               A B                                                                                                  .
+                                                   .                                              0 I
+                         I D
+
+(3) Commutativity of the stabilizer implies that IDT is      Since Theorem 8 relied only on a tableau satisfying the
+symmetric, therefore D  is symmetric, and we can ap-    commutativity conditions, not on its being generated by
+ply phase gates to add a diagonal matrix to D and use   some stabilizer circuit, an immediate corollary is that any
+Lemma 7 to convert D to the form D = MM T for some    tableau satisfying the conditions is generated by some
+invertible M.                                                    stabilizer circuit. We can also use Theorem 8 to answer
+(4) Use CNOT’s to produce                              the following question: how many gates are needed for
+                 !                       an n-qubit stabilizer circuit in the worst case?   Cleve
+              A B                         and Gottesman [31] showed that O n2  gates suﬃce for
+                                                    .                                                         the special case of state preparation, and Gottesman [32]           M M
+                                                 and Dehaene and De Moor [19] showed that O n2  gates
+                                                 suﬃce for stabilizer circuits more generally; even theseNote that when we map I to IM, we also map D to
+     T −1        T    T −1                                  results were not obvious a priori. However, with the helpD M   = MM M   = M.
+                                                                 of our canonical form theorem we can show a stronger
+(5) Apply phases to all n qubits to obtain
+                                                    upper bound.
+                 !
+               A B                         Corollary 9 Any unitary stabilizer circuit has an equiv-                                                    .
+           M 0                                alent circuit with only O n2/ log n  gates.
+
+Since M is full rank, there exists some subset S of qubits     Proof.  Patel, Markov, and Hayes [18] showed that
+such that applying two phases in succession to every a ∈   any CNOT circuit has an equivalent CNOT circuit with
+S will preserve the above tableau, but set rn+1 = · · · =    only O n2/ log n  gates. So given a stabilizer circuit C,
+r2n = 0. Apply two phases to every a ∈S.                 ﬁrst put C into canonical form, then minimize the CNOT(6) Use CNOT’s to perform Gaussian elimination on M,    segments.  Clearly the Hadamard and Phase segments
+producing                                                   require only O (n) gates each.
+                 !                             Corollary 9 is easily seen to be optimal by a Shannon
+               A B                             counting argument: there are 2Θ(n2) distinct stabilizer
+                                                   .                                                            T
+                         I 0                                  circuits on n qubits, but at most  n2   with T gates.
+                                     A ﬁnal remark: as noted by Moore and Nilsson [28],
+By commutativity relations, IBT = A0T + I, therefore   any CNOT circuit has an equivalent CNOT circuit with
+B = I.                               O n2  gates and parallel depth O (log n).  Thus, using
+(7) Use Hadamards to produce                           the same idea as in Corollary 9, we obtain that any uni-
+                                                          tary stabilizer circuit has an equivalent stabilizer circuit                 !
+                                                      with O n2  gates and parallel depth O (log n).  (Moore                          I A
+                                                   .                      and Nilsson showed this for the special case of stabilizer
+                      0 I                                                                  circuits composed of CNOT and Hadamard gates only.)
+
+(8) Now commutativity of the destabilizer implies that
+A is symmetric, therefore we can again use phase gates        VII. BEYOND STABILIZER CIRCUITS
+and Lemma 7 to make A = NN T for some invertible N.
+(9) Use CNOT’s to produce
+                                                            In this section, we discuss generalizations of stabilizer
+                 !                                                                  circuits that are  still eﬃciently simulable.   The ﬁrst
+              N N                                                    .                           (easy) generalization, in Section VII A, is to allow the
+                      0 C                        quantum computer to be in a mixed rather than a pure
+
+===== PDF PAGE 11 =====
+
+                                                                                                   11
+
+
+state.  Mixed states could be simulated by simply pu-    the stabilizer and the destabilizer. We can choose them
+rifying the state, and then simulating the puriﬁcation,    so that  Xi, Xj =  Zi, Zj =  Xi, Zj = 0 for i ̸= j,
+but we present an alternative and slightly more eﬃcient    but  Xi, Zi = 0.  This can be done by solving a set
+strategy.                                                                 of linear equations, which in practice takes time O n3  .
+  The second generalization, in Section VII B, is to initial                                                                               If we start with an initial mixed state, we will assume
+states other than the computational basis state.  Taken
+                                                                               it is of the form |00 · · ·0⟩⟨00 · · · 0| ⊗I (so 0 on the ﬁrstto an extreme, one could even have noncomputable initial
+                                            n −r qubits and the completely mixed state on the laststates. When combined with arbitrary quantum circuits,                                                           r qubits).   In that case, we choose Xi = Xi+r and
+such quantum advice is very powerful, although its ex-                                                   Zi = Zi+r.
+act power (relative to classical advice) is unknown [33].                                        We could purify this state by adding ZiZn+i and
+We consider a more modest situation, in which the initial                                              XiXn+i to the stabilizer and Xn+i and Zn+i to the desta-
+state may include speciﬁc ancilla states, consisting of at                                                                     bilizer for i = 1, . . . , r. Then we could simulate the sys-
+most b qubits each. The initial state is therefore a tensor                                                tem by just simulating the evolution of this pure state
+product of blocks of b qubits. Given an initial state of                                                     through the circuit; the extra r qubits are never altered.
+this form and general stabilizer circuits, including mea-                                     A more economical simulation is possible, however, by
+surements and classical feedback based on measurement                                                                just keeping track of the original r-generator stabilizer
+outcomes, universal quantum computation is again possi-
+                                                 and destabilizer, plus the 2 (n −r) operators Xi and Zi.ble [34, 35]. However, we show that an eﬃcient classical                                                          Formally, this allows us to maintain a complete tableau
+simulation exists, provided only a few measurements are                                                 and generalize the O n2  tableau algorithm from Sec-
+allowed.                                                             tion III. We place the r generators of the stabilizer as
+  The ﬁnal generalization, in Section VII C, is to circuits                                                     rows n + 1, . . . , n + r of the tableau, and the correspond-
+containing a few non-stabilizer gates. The qualiﬁer “few”                                                           ing elements of the destabilizer as rows 1, . . . , r.  The
+is essential here, since it is known that unitary stabilizer
+                                              new operators Xi and Zi (i = 1, . . . , n −r) become rowscircuits plus any additional gate yields a universal set
+                                                           r + i and n + r + i, respectively.  Let i = i + n if i ≤nof quantum gates [36, 37].  The running time of our
+                                                 and i = i −n if i ≥n + 1. Then we have that rows Risimulation procedure is polynomial in n, the number of                                                 and Rj commute unless i = j, in which case Ri and Rj
+qubits, but is exponential in the d, the number of non-                                                     anticommute.
+stabilizer gates.                                        We can keep track of this new kind of tableau in much
+                                                         the same way as the old kind. Unitary operations trans-
+                                                    form the new rows the same way as rows of the stabilizer               A.  Mixed States
+                                                           or destabilizer.  For example, to perform a CNOT from
+                                                             control                                                                qubit a to                                                                              target                                                                                 qubit                                                                                                                b,                                                                                                    set xib := xib ⊕xia and We ﬁrst present the simulation for mixed states. We                                                                                    for                                                                                                   all i                                                                                                                                              . .                                                                                                                                                 . ,                                                                   zia := zia                                                               ⊕zib,                                                                  ∈{1,                                                                                        2n}.allow only stabilizer mixed states—that is, states that     Measurement                                                                                   of qubit                                                                       a is slightly                                                                              more complex than
+are uniform distributions over all states in a subspace (or    before.  There are now three cases:
+equivalently, all stabilizer states in the subspace) with a
+given stabilizer of r < n generators.  Such mixed states   Case I: xpa = 1 for some p ∈{n + 1, . . . , n + r}.  In this
+can always be written as the partial trace of a pure sta-    case Za anticommutes with an element of the stabilizer,
+bilizer state, which immediately provides one way of sim-   and the measurement outcome is random.  We update
+ulating them.                                              as before, for all rows of the tableau.
+   It will be useful to see how to write the density ma-   Case II: xpa = 0 for all p > r.  In this case Za is in the
+trix of the mixed state in terms of the stabilizer.  The     stabilizer.  The measurement outcome is determinate,
+operator (I + M) /2, when M  is a Pauli operator, is a   and we can predict the result as before, by calling rowsum
+projection onto the +1 eigenspace of M.  Therefore, if    to add up rows rn+i for those i with xia = 1.
+the stabilizer of a pure state has generators M1, . . . , Mn,   Case  III: xpa =  0  for  all p ∈{n + 1, . . . , n + r},
+then the density matrix for that state is                  but xma = 1 for some m ∈{r + 1, . . . , n} or m ∈                                    + r + 1, . . . ,        In this case Za commutes with
+         Yn                          {nall elements of the2n}.stabilizer but is not itself in the sta-                    1
+               ρ =        (I + Mi) .                          bilizer.  We get a random measurement result, but a                    2n
+                          i=1                                   slightly diﬀerent transformation of the stabilizer than in
+                                                   Case I.  Observe that row Rm anticommutes with Za.The density matrix for a stabilizer mixed state with sta-
+                                                      This row takes the role of row p from Case I, and thebilizer generated by M1, . . . , Mr is
+                                                                    takes                                                                       the role of                                                                       row p                                                                                 Update                                                                                                         as                                                                                                            before                                                 row Rm                                                                −n.                                                                       this                                                                 modiﬁcation.                                                                  Then                                                                          swap                                                                                     rows                                                                           n + r                                                             +                                                                                                 1 and         Yr                              with                    1
+               ρ =       (I + Mi) .           m and rows r + 1 and m.  Finally, increase r to r + 1:
+                      2r
+                          i=1                               the stabilizer has gained a new generator.
+
+  To perform our simulation, we ﬁnd a collection of     Another operation that we might want to apply is dis-
+2 (n −r) operators Xi and Zi that commute with both    carding the qubit a, which has the eﬀect of performing
+
+===== PDF PAGE 12 =====
+
+                                                                                                   12
+
+
+a partial trace over that qubit in the density matrix.     By ﬂipping an appropriately biased coin, Alice can gen-
+Again, this can be done by simply keeping the qubit    erate an outcome of the ﬁrst measurement according to
+in our simulation and not using it in future operations.    the correct probabilities.  Conditioned on this outcome
+Here is an alternative: put the stabilizer in a form such    (say of 0), the state of the system is
+that there is at most one generator with an X on qubit
+a, and at most one with a Z on qubit a. Then drop                     (I + Z1) U1ρU 1† (1 + Z1)                                                                                                                                                               .
+those two generators (or one, if there is only one total).                         4p (0)
+The remaining generators describe the stabilizer of the
+reduced mixed state. We also must put the Xi and Zi    After the next stabilizer circuit U2, the state is
+operators in a form where they have no entries in the                                        †             †
+                                                           U2 (I + Z1) U1ρU 1 (1 + Z1) U 2discarded location, while preserving the structure of the                                                                                                                                                                   .
+tableau (namely, the commutation relations of Proposi-                         4p (0)
+tion 3).  This can also be done in time O(n2), but we
+                                              The probability of obtaining outcome 0 for the second
+omit the details, as they are rather involved.
+                                                    measurement, conditioned on the outcome of the ﬁrst
+                                                  measurement being 0, is then
+                                                                    h                                    i
+         B.  Non-Stabilizer Initial States                                                                  †             †
+                                                            Tr  (I + Z2) U2 (I + Z1) U1ρU 1 (I + Z1) U 2
+                                                     p (0|0) =                 8p (0)                              . We now show how to simulate a stabilizer circuit where
+the initial state is more general, involving non-stabilizer                                           By expanding out the 8 terms, and then commuting U1
+initial states. We allow any number of ancillas in arbi-                                                 and U2 past Z1 and Z2, we can write this as
+trary states, but the overall ancilla state must be a tensor
+product of blocks of at most b qubits each. An arbitrary       X8 Ym
+stabilizer circuit is then applied to this state. We allow                         Tr Pij(2) ρij   .
+measurements, but only d of them in total throughout                      i=1 j=1
+the computation. We do allow classical operations con-
+ditioned on the outcomes of measurements, so we also   Each Tr Pij(2) ρij  term can again be computed in time
+allow polynomial-time classical computation during the                                   O  22b  .
+circuit.
+                                                                  Similarly, the probability of any particular sequence of
+  Let the initial state have density matrix ρ: a tensor
+                                                  measurement outcomes m1m2  md can be written as aproduct of m blocks of at most b qubits each.  Without                                                      · · ·                                            sum
+loss of generality, we ﬁrst apply the unitary stabilizer
+circuit U1, followed by the measurement Z1 (that is, a                                  22d−1X Ym
+                                                                                                                               (d) ρij   ,                                                                                                                                                 ijmeasurement of the ﬁrst qubit in the standard basis).          p (m1m2 · · · md) =        Tr PWe then apply the stabilizer circuit U2, followed by mea-                                i=1 j=1
+surement Z2 on the second qubit, and so on up to Ud, Zd.
+ We can calculate the probability p (0) of obtaining out-    where each trace can be computed in time O  22b  .   It
+come 0 for the ﬁrst measurement Z1 as follows:             follows that the probabilities of the two outcomes of the
+                                                              dth measurement can be computed in time O m22b+2d  .                    h              i
+          p (0) = Tr  (I + Z1) U1ρU 1† /2
+                    h               i
+                                   †                                     C.  Non-Stabilizer Gates
+         = Tr   I + U 1Z1U1  ρ /2
+                         h           i
+         = 1/2 + Tr  U 1Z1U1†      ρ /2.             The last case that we consider is that of a circuit con-
+                                                            taining d non-stabilizer gates, each of which acts on at
+                                               †                 most b qubits. We allow an unlimited number of Pauli
+But U1 is a stabilizer operation, so U 1Z1U1 is a Pauli                                                   measurements and unitary stabilizer gates, but the initial
+matrix, and is therefore a tensor product operation. We
+                                                              state is required to be a stabilizer state—for concreteness,
+also know ρ is a tensor product of blocks of at most b
+qubits, and the trace of a tensor product is the product    |0⟩⊗n.
+                                              †                  To analyze this case, we examine the density matrix
+of the traces.  Let ρ = ⊗mj=1ρj and U 1Z1U1 = ⊗mj=1Pj     ρt at the tth step of the computation.   Initially, ρ0 iswhere j ranges over the blocks. Then                                                     a stabilizer state whose stabilizer is generated by some
+                 m                        M1, . . . , Mn, so we can write it as         Y                    1
+             p (0) =  +   Tr (Pjρj) .                    2                                           1                          j=1                                ρ =    (I + M1) (I + M2)    (I + Mn) .                                                                2n                               · · ·
+Since Pj and ρj are both 2b × 2b-dimensional matrices,     If we perform a stabilizer operation, the Mi’s become aeach Tr (Pjρj) can be computed in time O  22b  .           diﬀerent set of Pauli operators, but keeping track of them
+
+===== PDF PAGE 13 =====
+
+                                                                                                   13
+
+
+requires at most n (2n + 1) bits at any given time (or    the stabilizer, Q is actually in the stabilizer, so projecting
+2n (2n + 1) if we include the destabilizer).  If we perform   on Q+ either is redundant (if Q has eigenvalue +1) or
+a measurement, the Mi’s change in a more complicated    annihilates the state (if Q has eigenvalue −1). Therefore,way, but remain Pauli group elements.                 we can see that ρ (0) has the same form as before:
+  Now consider a single non-stabilizer gate U. Expand-      X  Y                                                                 1
+ing U in terms of Pauli operations Pi,                       ρ (0) =        cikPik     I +       Mj   ,                                                                2n                  (−1)Mj·Pk
+              !             !                                   i,k           j
+     X  Y   X          †    1  UρU =          ciPi      (I + Mj)      c∗kPk         where now the sum over i is only over those Pik’s that           2n                             i            j              k             commute with Q, and the sum over k is only over those
+     X   Y                            Pk’s that give eigenvalue +1 for Q.           1
+     =        cic∗kPiPk     I +       Mj   .       When Q anticommutes with an element of the stabi-           2n                    (−1)Mj·Pk
+                      i,k               j                                      lizer, we can change our choice of generators so that Q
+                                                commutes with all of the generators except for M1. Then
+                                              we write ρ (0) as:Here Mj ·Pk is the symplectic inner product between thecorresponding vectors, which is 0 whenever Mj and Pk                      Xcommute and 1 when they anticommute.  In what fol-             1                                                    ρ (0) =         cikQ+Pik  I +       M1 Q+Λk                                                                                     (−1)Mj·Pklows, let cik = cic∗k and Pik = PiPk. Then we can write           2n+2  i,k
+the density matrix after U as a sum of terms, each de-     X         h                      i                                                              1
+scribed by a Pauli matrix Pik and a vector of eigenvalues      =         cikQ+Pik Q+ +       Q−M1 Λk                                        †                              2n+2                   (−1)Mj·Pkfor the stabilizer.  Since U and U  each act on at most b                          i,k
+qubits, there are at most 42b terms in this sum.
+                                                   where   If we apply a stabilizer gate to this state, all of the                           Y
+Pauli      matrices                in the                    decomposition                                    are                                      transformed                                                      to             Λk =                                                                                   I + (−1)Mj·Pk Mj   .other Pauli            matrices,                    according                               to the                                     usual                                                  rules.  If we                                                                           j>1
+perform another non-stabilizer gate, we can again expand
+                                                                               If Pik and Q commute, then we keep only the ﬁrst termit in terms of Pauli matrices, and put it in the same form.
+                                     Q+ in the square brackets. If Pik and Q anticommute, weThe new gate can act on b new qubits, however, giving
+                                                      keep only the second term Q−M1 in the square brackets.us more terms in the sum.  After d such operations, we
+                                                          In either case, we can rewrite the density matrix in thethus need to keep track of at most 42bd complex numbers
+                                                same kind of decomposition:(the coeﬃcients cik), 4bd strings each of 2n bits (the Pauli
+matrices Pik), and 4bd strings each of n bits (the inner              1 X   Y
+                                                      ρ (0) =       cikPikQ+     I +       Mj   ,products Mj  Pk).  We also need to keep track of the              2n                     (−1)Mj·Pk                     ·                                                                                     i,k          j>1stabilizer generators M1, . . . , Mn, and it will be helpful
+to also keep track of the destabilizer, for a total of an   where Q has replaced M1 in the stabilizer, and any Pik
+additional 2n (2n + 1) bits.                                that anticommutes with Q has been replaced by PikM1,
+  The above allows us to describe the evolution when
+                                                                           its corresponding cik replaced by (−1)Mj·Pk cik.there are no measurements.  What happens when we                                                             Therefore, we can always write the density matrix after
+perform a measurement?   Consider the unnormalized                                                         the measurement in the same kind of sum decomposition
+density matrix corresponding to outcome 0 for measure-                                                           as before, with no more terms than there were before the
+ment of the Pauli operator Q:                                                    measurement. The density matrices are unnormalized,
+     X  Y                             so we need to calculate Tr ρ (0) to determine the proba-          1
+  ρ(0) =    Q+    cikPik     I +         Q+       bility of obtaining outcome 0.  Computing the trace of        2n+2                   (−1)Mj·PkMj                          i,k           j                           a single term is straightforward:  it is 0 if Pik is not in
+                                                         the stabilizer and ±2ncik if Pik is in the stabilizer (with
+where here and throughout we let Q+ = I +Q and Q−=  + or −determined by the eigenvalue of Pik).  To cal-
+I −Q.  As usual, either Q commutes with everything    culate Tr ρ (0), we just need to sum the traces of thein the stabilizer, or Q anticommutes with some element    42bd individual terms. We then choose a random number
+of the stabilizer.  (However, the measurement outcome    to determine the actual outcome.  Thereafter, we only
+can be indeterminate in both cases, and may have a non-    need to keep track of ρ (0) or ρ (1), which we can easily
+uniform distribution.)  In the ﬁrst case, we can rewrite    renormalize to have unit trace.  Overall, this simulation
+the density matrix as                                        therefore takes time and space O 42bdn + n2  .
+
+    X     Y         1
+ ρ (0) =        cikQ+PikQ+     I +       Mj   .        2n+2                        (−1)Mj·Pk                       VIII. OPEN PROBLEMS
+                    i,k                    j
+
+But Q+PikQ+ = 2PikQ+  if Pik and Q commute, and    (1) Iwama, Kambayashi, and Yamashita [27] gave a set
+Q+PikQ+ = Q+Q−Pik = 0 if Pik and Q anticommute.    of local transformation rules by which any CNOT cir-
+Furthermore, as usual, as Q commutes with everything in    cuit (that is, a circuit consisting solely of CNOT gates)
+
+===== PDF PAGE 14 =====
+
+                                                                                                   14
+
+
+can be transformed into any equivalent CNOT circuit.     trol of future quantum operations conditioned on mea-
+For example, a CNOT from a to b followed by another    surement results, then universal quantum computation
+CNOT from a to b can be replaced by the identity, and a     is possible [34, 35]. However, if all measurements are de-
+CNOT from a to b followed by a CNOT from c to d can    layed until the end of the computation, then the quantum
+be replaced by a CNOT from c to d followed by a CNOT    part of such a circuit (though not the classical postpro-
+from a to b, provided that a ̸= d and b ̸= c.   Using    cessing) can be compressed to constant depth. On theTheorem 8, can we similarly give a set of local transfor-    other hand, Terhal and DiVincenzo [39] have given evi-
+mation rules by which any unitary stabilizer circuit can    dence that even constant-depth quantum circuits might
+be transformed into any equivalent unitary stabilizer cir-    be diﬃcult to simulate classically.
+cuit? Such a rule set could form the basis of an eﬃcient    (6) Is there an eﬃcient algorithm that, given a CNOT
+heuristic algorithm for minimizing stabilizer circuits.       or stabilizer circuit, produces an equivalent circuit of
+(2) Can the tableau algorithm be modiﬁed to compute    (approximately) minimum size?  Would the existence
+measurement outcomes in only O (n) time?   (In case    of such an algorithm have unlikely complexity conse-
+the measurement yields a random outcome, updating the    quences?   This might be related to the hard problem
+state might still take order n2 time.)                          of proving superlinear lower bounds on CNOT or stabi-
+(3) In Theorem 8, is the 11-round sequence H-C-P-C-     lizer circuit size for explicit functions.
+P-C-H-P-C-P-C really necessary, or is there a canonical
+form that uses fewer rounds?  Note that if we are only
+concerned with state preparation, and not with how a cir-
+cuit behaves on any initial state other than the standard                                                               IX. ACKNOWLEDGMENTS
+one, then the 5-round sequence H-P-C-P-H is suﬃcient.
+(4) Is there a set of quantum gates that is neither univer-
+sal for quantum computation, nor classically simulable in    We thank John Kubiatowicz, Michael Nielsen, Isaac
+polynomial time?  Shi [38] has shown that if we gener-   Chuang, Cris Moore, and George Viamontes for help-
+alize stabilizer circuits by adding any 1- or 2-qubit gate     ful discussions, Andrew Cross for ﬁxing an error in the
+not generated by CNOT, Hadamard, and phase, then we    manuscript and software, and Martin Laforest for point-
+immediately obtain a universal set.                         ing out an error in the proof of Theorem 8. SA was sup-
+(5) What is the computational power of stabilizer circuits    ported by an NSF Graduate Fellowship and by DARPA.
+with arbitrary tensor product initial states, but measure-  DG is supported by funds from NSERC of Canada, and
+ments delayed until the end of the computation?   It is   by the CIAR in the Quantum Information Processing
+known that, if we allow classical postprocessing and con-    program.
+
+
+
+
+
+ [1] M. Suzuki  (editor), Quantum Monte Carlo Methods        quant-ph/9604038.
+     in Equilibrium and Nonequilibrium Systems (Springer,     [13] D.  Gottesman,   talk  at   International  Conference
+     1986).                                                on  Group  Theoretic  Methods  in  Physics   (1998).
+ [2] B. Oemer (2003). http://tph.tuwien.ac.at/˜oemer/qcl.html.     quant-ph/9807006.
+ [3] G.  F. Viamontes,   I.  L. Markov, and  J.  P. Hayes,     [14] D. M. Greenberger, M. A. Horne, and A. Zeilinger, in
+   Quantum  Information  Processing  2(5),  347  (2004).          Bell’s Theorem, Quantum Theory, and Conceptions of
+    quant-ph/0309060.                                               the Universe (Kluwer, 1989), p. 73.
+ [4] G. F. Viamontes, M. Rajagopalan, I. L. Markov, and J.     [15] C. H. Bennett and S. J. Wiesner, Phys. Rev. Lett. 69,
+     P. Hayes, in Proc. Asia and South-Paciﬁc Design Au-        2881 (1992).
+    tomation Conference (2003), p. 295. quant-ph/0208003.     [16] C. H. Bennett, G. Brassard, C. Crepeau, R. Jozsa,
+ [5] K. M. Obenland and A. M. Despain, in High Performance        A. Peres, and W. Wootters, Phys. Rev. Lett. 70, 1895
+    Computing (1998). quant-ph/9804039.                          (1993).
+ [6] G.  Vidal,  Phys.  Rev.  Lett.  91,  147902  (2003).     [17] A. W. Cross, Synthesis and Evaluation of Fault-Tolerant
+    quant-ph/0301063.                                   Quantum Computer Architectures, Masters thesis, MIT
+ [7] G. Vidal (2003). quant-ph/0310089.                             (2005).
+ [8] L. G. Valiant, in Proc. ACM Symp. on Theory of Com-     [18] K. N. Patel,  I. L. Markov, and J. P. Hayes (2003).
+    puting (2001), p. 114.                                       quant-ph/0302002.
+ [9] B. M. Terhal and D. P. DiVincenzo, Phys. Rev. A 65,     [19] J. Dehaene and B. De Moor, Phys. Rev. A 68, 042318
+    032325 (2002). quant-ph/0108010.                               (2003). quant-ph/0304125.
+[10] C.  H.  Bennett,  D.  P.  DiVincenzo,  J.  A.  Smolin,     [20] M. A. Nielsen and I. L. Chuang, Quantum Computation
+    and W. K. Wootters, Phys. Rev. A 54, 3824 (1996).       and Quantum Information (Cambridge, 2000).
+    quant-ph/9604024.                                                [21] D. Coppersmith and S. Winograd, J. Symbolic Comput.
+[11] A. R. Calderbank,  E. M. Rains,  P. W. Shor, and          9(3), 251 (1990).
+    N.  J. A.  Sloane, Phys. Rev.  Lett.  78,  405  (1997).     [22] D. R. Simon, SIAM J. Comput. 26(5), 1474 (1997).
+    quant-ph/9605005.                                                [23] P. W. Shor, Phys. Rev. A 52, 2493 (1995).
+[12] D.  Gottesman,  Phys.  Rev. A  54,  1862  (1996).     [24] C. Damm, Information Proc. Lett. 36, 247 (1990).
+
+===== PDF PAGE 15 =====
+
+                                                                                                   15
+
+
+[25] U. Hertrampf, S. Reith, and H. Vollmer, Information     [38] Y. Shi, Quantum Information and Computation 3(1), 84
+    Proc. Lett. 75(3), 91 (2000).                                     (2003). quant-ph/0205115.
+[26] D. Aharonov and M. Ben-Or, in Proc. ACM Symp. on     [39] B.  M.  Terhal  and  D.  P.  DiVincenzo,  Quantum
+    Theory of Computing (1997), p. 176. quant-ph/9906129.        Information  and  Computation   4(2),   134  (2004).
+[27] K. Iwama, Y. Kambayashi, and S. Yamashita, in Proc.        quant-ph/0205133.
+    Design Automation Conference (2002), p. 419.                [40] If P ∈S (|ψ⟩), then P can only have a phase of ±1,
+                                                                                                                2
+[28] C. Moore and M. Nilsson, SIAM J. Comput. 31(3), 799        not ±i: for in the latter case P = −I · · · I would be in
+     (2002). quant-ph/9808027.                           S (|ψ⟩), but we saw that −I does not stabilize anything.
+[29] V. V. Shende, A. K. Prasad,  I. L. Markov, and  J.     [41] Dehaene and De Moor [19] came up with something like
+     P. Hayes, IEEE Trans. on CAD 22, 710 (June 2003).          this tableau representation independently, though they
+    quant-ph/0207001.                                            did not use it to simulate measurements in O `n2´ time.
+[30] J.-S.  Lee,  Y. Chung,  J. Kim,  and  S. Lee  (1999).     [42] At www.scottaaronson.com/chp
+    quant-ph/9911053.                                                [43] Based on our heuristic analysis, we conjecture that for
+[31] R. Cleve and D. Gottesman, Phys. Rev. A 56, 76 (1997).         intermediate β, the time per measurement grows as nc
+    quant-ph/9607030.                                                   for some 1 < c < 2.  However, we do not have enough
+[32] D.  Gottesman,  Phys.  Rev. A  57,  127  (1998).        data to conﬁrm or refute this conjecture
+    quant-ph/9702029.                                                [44] See www.complexityzoo.com for deﬁnitions of ⊕L and
+[33] S. Aaronson, in Proc. IEEE Conf. on Computational         several hundred other complexity classes
+    Complexity (2004), p. 320. quant-ph/0402095.                [45] The reason we restrict attention to unitary circuits is sim-
+[34] P. W. Shor, in Proc. IEEE Symp. on Foundations of         ply that, if measurements are included, then it is unclear
+    Computer Science (1996), p. 56. quant-ph/9605011.          what it even means for two circuits to be equivalent. For
+[35] D. Gottesman and I. Chuang, Nature 402, 390 (1999).        example, does deferring all measurements to the end of
+    quant-ph/9908010.                                         a computation preserve equivalence or not?
+[36] G. Nebe, E. M. Rains and N. J. A. Sloane, Designs, Codes     [46] Actually, this gives the canonical form for the inverse of
+    and Cryptography 24, 99 (2001). math.CO/0001038.           the circuit, but of course the same argument holds for
+[37] R. Solovay, talk at Mathematical Sciences Research In-        the inverse circuit too, which is also a stabilizer circuit
+     stitute (2000).

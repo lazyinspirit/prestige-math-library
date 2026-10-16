@@ -1,0 +1,11 @@
+# Mandatory mathematical prerequisite repairs
+
+This is a draft authoring plan, not an executed library change. Both quantum scaffolds require these repairs before dependent authoring and normal build review.
+
+The [machine-readable bundle](prerequisite-repairs.json) preserves six reader recipes, 18 exact existing-consumer dependency rewrites, source hashes, body-edit locations, hypotheses, proof obligations and affected-consumer review duties. Fourteen proposed typed mathematical suppliers replace missing complex-coordinate, path, complex-norm and extended-real interfaces. Final page placement, item carriers, proofs and native reviews remain authoring work. Existing proved suppliers are reused wherever their actual contracts suffice.
+
+The ten inherited remarks appear in [the edge audit](inherited-remark-edges.json). Choice-cost, supremum, metric and rational-exponent commentary can be removed from logical dependencies while retaining proper suppliers and hypothesis scopes. Complex norms, coordinate transport, contour rectifiability and zero-times-infinity require definitions or proved bridges. The Euclidean-topology remark has no direct nonremark consumer here; its nested entry disappears when the enclosing complex-plane dictionary is replaced. The extended-real recipe also identifies undefined absolute-value/subtraction notation needing explicit corrections.
+
+[The actual receipt](mechanical-check.json) remains **FAIL** because current source prerequisites reach ten remarks. [The planned-view receipt](planned-repair-check.json) is **PASS**: virtual dependency rewrites yield 2,729 closure nodes for 896 proposed items, without forbidden suppliers, unresolved dependencies or cycles. This checks declared graph structure only. It does not verify future proofs, execute repairs, certify placement, publish content or clear draft-review holds. The current receipt records no unparsed source frontmatters; no consumed dependency is waived.
+
+Reproduce with `python3 research/quantum-planning-review/assemble-repairs.py`, then `node research/quantum-planning-review/check-planned-repairs.mjs`. Preserve the actual `check-proposals.mjs` receipt separately until source repairs are genuinely accepted.

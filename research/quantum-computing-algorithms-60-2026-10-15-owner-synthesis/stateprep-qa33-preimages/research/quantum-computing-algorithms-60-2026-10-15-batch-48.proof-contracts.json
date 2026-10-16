@@ -1,0 +1,1966 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qa-24-pue-svd-data",
+    "lem-qa-24-pue-svd-invariant-subspaces",
+    "def-qa-24-singular-value-transform",
+    "alg-qa-24-qsvt",
+    "lem-qa-24-singular-transform-basis-independence",
+    "thm-qa-24-projector-phase-implementation",
+    "thm-qa-24-qsvt-query-count",
+    "thm-qa-24-qsvt-singular-space-action",
+    "lem-qa-24-qsvt-robustness-amplitude-bound",
+    "thm-qa-24-real-polynomial-extraction",
+    "thm-qa-24-qsvt-error-and-resource-bound",
+    "cex-qa-24-parity-violation",
+    "ex-qa-24-rank-one-pue"
+  ],
+  "contracts": {
+    "def-qa-24-pue-svd-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\dots,x_n$ be pairwise orthogonal vectors in a real or complex inner-product space, that is $\\langle x_i,x_j\\rangle=0$ whenever $i\\ne j$ ([[def-orthogonality-and-orthogonal-complement]]). Then\n\n$$\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2 ,$$\n\nthe empty sum on the right being $0$ at $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "If $H_R=0$, then $A$ is the zero map and its operator norm is zero by [F4]. Otherwise take any unit $x\\in H_R$. The decomposition $Ux=\\Pi_LUx+(I-\\Pi_L)Ux$ has orthogonal terms by [F1], so [F2] gives $\\|\\Pi_LUx\\|^2\\le\\|Ux\\|^2$. By [F3], $\\|Ux\\|=1$, hence $\\|Ax\\|\\le1$. Taking the maximum over unit $x$ proves $\\|A\\|_{\\mathrm{op}}\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply [F5] to the finite-dimensional map $A:H_R\\to H_L$. For each positive singular pair, $Av_j=\\sigma_j u_j$ and $\\|v_j\\|=\\|u_j\\|=1$, so [F4] and step 1.1 give $\\sigma_j=\\|Av_j\\|\\le1$. The rank-one terms in the SVD sum have the coordinate action fixed by [F6]. When $r=0$, the positive singular list and the displayed sum are empty; the kernel bases still exist by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "In the square block-encoding case, $J_a$ is the isometric identification of the system with $H_R=H_L=\\operatorname{ran}(\\Pi_a)$. The definition of the projected block in [F7] is exactly $J_a^*UJ_a$, and the exact case identifies it with the normalized target. Thus this is the stated special case.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly allow zero domain and empty SVD bases."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover the zero compression and empty positive-singular list."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a one-dimensional singular pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows rank zero and empty kernel bases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves singular values are at most one, including equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use a finite SVD and declared embeddings."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The PUE data definition and its SVD verification: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The PUE data definition and its SVD verification: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-24-pue-svd-invariant-subspaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-24-pue-svd-data",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $U:H\\to H$ be unitary, and let $\\Pi_R,\\Pi_L:H\\to H$ be orthogonal projections. Write $H_R=\\operatorname{ran}(\\Pi_R)$ and $H_L=\\operatorname{ran}(\\Pi_L)$. The **projected-unitary encoding** (PUE) of this data is the linear map\n\n$$A:H_R\\to H_L,\\qquad Ax=\\Pi_L Ux.$$\n\nEquivalently, its ambient-space compression is $\\Pi_LU\\Pi_R$, restricted to $H_R$ and regarded as taking values in $H_L$. The map $A$ is a contraction: $\\|A\\|_{\\mathrm{op}}\\le1$.\n\nPut $n=\\dim H_R$, $m=\\dim H_L$, and $r=\\operatorname{rank}(A)$. A singular-value decomposition consists of orthonormal bases $v_1,\\ldots,v_n$ of $H_R$ and $u_1,\\ldots,u_m$ of $H_L$, and positive singular values $1\\ge\\sigma_1\\ge\\cdots\\ge\\sigma_r>0$, such that\n\n$$A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|.$$\n\nThe remaining right basis vectors span $\\ker A$ and the remaining left basis vectors span $\\ker A^*$. Empty bases and sums are allowed when a dimension or the rank is zero. The pairing in each rank-one map is the root-linear-first Dirac conversion of [[def-qc-dirac-notation-conversion]].\n\nAn exact square block encoding is a special case: identify the system with the all-zero ancilla subspace and take $\\Pi_L=\\Pi_R$ equal to that subspace. Under the injection $J_a$ of [[def-qa-22-block-encoding]], the compression is $J_a^*UJ_a$; an exact $(\\alpha,a,0)$ block encoding has compressed block $A/\\alpha$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\dots,x_n$ be pairwise orthogonal vectors in a real or complex inner-product space, that is $\\langle x_i,x_j\\rangle=0$ whenever $i\\ne j$ ([[def-orthogonality-and-orthogonal-complement]]). Then\n\n$$\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2 ,$$\n\nthe empty sum on the right being $0$ at $n=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For $0<\\sigma_i,\\sigma_j<1$, [F1] gives $\\Pi_RU^*u_i=\\sigma_i v_i$. Since $U^*$ preserves inner products by [F3]–[F4], orthogonal projection and [F6] give $\\langle (I-\\Pi_R)U^*u_i,(I-\\Pi_R)U^*u_j\\rangle=\\langle U^*u_i,U^*u_j\\rangle-\\langle \\Pi_RU^*u_i,\\Pi_RU^*u_j\\rangle=\\delta_{ij}(1-\\sigma_i^2)$. Dividing by the positive square roots shows that the $w_i$ are orthonormal and lie in $\\ker\\Pi_R$. The same calculation, using $\\Pi_LUv_i=\\sigma_i u_i$, proves that the $\\widetilde w_i$ are orthonormal in $\\ker\\Pi_L$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "If $\\sigma_i=1$, then $\\Pi_RU^*u_i=v_i$ has norm one, as does $U^*u_i$. By the orthogonal decomposition in [F5] and Pythagoras [F6], its component in $\\ker\\Pi_R$ is zero, so $U^*u_i=v_i$ and $Uv_i=u_i$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Decompose $Uv_i=\\Pi_LUv_i+(I-\\Pi_L)Uv_i=\\sigma_i u_i+\\sqrt{1-\\sigma_i^2}\\,\\widetilde w_i$. Also $\\sqrt{1-\\sigma_i^2}\\,Uw_i=U(I-\\Pi_R)U^*u_i=u_i-U\\Pi_RU^*u_i=u_i-\\sigma_iUv_i$, where the middle equality uses $UU^*=I$ and the last uses [F1]. Substitution of the first equation yields $Uw_i=\\sqrt{1-\\sigma_i^2}\\,u_i-\\sigma_i\\widetilde w_i$, which is the displayed matrix.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "If $v\\in\\ker A\\cap H_R$, then $\\Pi_LUv=Av=0$, so $Uv\\in\\ker\\Pi_L$. If $u\\in\\ker A^*\\cap H_L$, then $\\Pi_RU^*u=A^*u=0$, so $U^*u\\in\\ker\\Pi_R$. Every right singular vector lies in $H_R$ and is orthogonal to each $w_i$ and each $U^*u$ from the left kernel, since those vectors lie in $\\ker\\Pi_R$. For a positive singular vector and a left-kernel vector, $\\langle (I-\\Pi_R)U^*u_i,U^*u_k\\rangle=\\langle U^*u_i,U^*u_k\\rangle-\\langle \\Pi_RU^*u_i,\\Pi_RU^*u_k\\rangle=0-0=0$, because $u_i\\perp u_k$ and $\\Pi_RU^*u_k=0$. Thus the listed source blocks are mutually orthogonal. Their orthogonal complement is contained in $\\ker\\Pi_R$, because the right singular vectors, including a basis of $\\ker A$, span $H_R$. Applying $U$ preserves orthogonality. The listed output blocks are also mutually orthogonal: the left singular vectors, including a basis of $\\ker A^*$, span $H_L$; the vectors $\\widetilde w_i$ are orthonormal by step 1.1; and for $v\\in\\ker A$, $\\langle \\widetilde w_i,Uv\\rangle=\\langle Uv_i,Uv\\rangle-\\langle \\Pi_LUv_i,\\Pi_LUv\\rangle=0$, since $v_i\\perp v$ and $Av=0$. The remaining named output vectors $Uv$ lie in $\\ker\\Pi_L$, so they are orthogonal to $H_L$. The output complement is therefore contained in $\\ker\\Pi_L$. Since $U$ maps each listed source block onto its corresponding output block, it maps the source complement onto the output complement. These are ambient-space decompositions; the residual blocks are not part of $H_R$ or $H_L$. Each projector phase is scalar on the residual source and output blocks, so no residual component mixes into a projected singular-space block.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 has empty positive families and the same complement argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats both zero kernels."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats sigma equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 covers repeated values and unmatched kernels."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 cover sigma one and zero vectors."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite SVD bases and their images."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The singular-plane and ambient-complement decomposition: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The singular-plane and ambient-complement decomposition: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-qa-24-singular-value-transform": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition permits an empty positive-singular sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition specifies the odd zero value and even canonical kernel projections."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies the scalar value at every positive singular value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition cites basis independence for repeated singular values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition gives the positive-value and zero-kernel formulas."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The odd and even singular-value transform definitions: The argument makes no unverified witness choice for this boundary axis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The odd and even singular-value transform definitions: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The odd and even singular-value transform definitions: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "alg-qa-24-qsvt": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly states d=0 has no signal call and one right-projector phase."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed finite QSVT circuit procedure: The item does not make a separate claim about a zero input for this boundary axis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits d=1 with two phases and one signal call."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed finite QSVT circuit procedure: The item states no additional degenerate branch beyond the cases handled in its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The fixed finite QSVT circuit procedure: Endpoint behavior is not a separate claim of this item beyond its explicitly stated interval or singular-value cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition takes an exact finite phase list as input."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed finite QSVT circuit procedure: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The fixed finite QSVT circuit procedure: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-24-singular-transform-basis-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-24-singular-value-transform",
+          "source_section": "Definition",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular-value decomposition $A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|$. Let $p:[-1,1]\\to\\mathbb C$ be a scalar function.\n\nIf $p$ is **odd**, define the odd singular-value transform by\n\n$$p^{\\mathrm{SV}}_{\\mathrm{odd}}(A):H_R\\to H_L,\\qquad p^{\\mathrm{SV}}_{\\mathrm{odd}}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle v_j|.$$\n\nIf $p$ is **even**, define its right-space transform by\n\n$$p^{\\mathrm{SV}}_{R}(A):H_R\\to H_R,\\qquad p^{\\mathrm{SV}}_{R}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|v_j\\rangle\\langle v_j|+p(0)\\Pi_{\\ker A},$$\n\nwhere $\\Pi_{\\ker A}$ is the orthogonal projection in $H_R$ onto $\\ker A$. The left-space version is\n\n$$p^{\\mathrm{SV}}_{L}(A):H_L\\to H_L,\\qquad p^{\\mathrm{SV}}_{L}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle u_j|+p(0)\\Pi_{\\ker A^*}.$$\n\nThe odd transform annihilates the right kernel because oddness gives $p(0)=0$; the even transforms use the canonical kernel projections. The resulting operators are independent of the chosen SVD by [[lem-qa-24-singular-transform-basis-independence]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For each distinct positive singular value $\\sigma$, define $E_\\sigma=\\ker(A^*A-\\sigma^2I)$ in $H_R$ and $F_\\sigma=\\ker(AA^*-\\sigma^2I)$ in $H_L$. The adjoint rule [F4] makes $A^*A$ and $AA^*$ self-adjoint, and [F2] identifies these eigenspaces with the right and left singular subspaces. If $v\\in E_\\sigma$, then $Av\\in F_\\sigma$ because $AA^*Av=A(A^*Av)=\\sigma^2Av$. Also [F3] gives $\\|Av\\|^2=\\langle v,A^*Av\\rangle=\\sigma^2\\|v\\|^2$. Thus $J_\\sigma:=A/\\sigma$ is an isometry from $E_\\sigma$ into $F_\\sigma$. For $y\\in F_\\sigma$, [F4] gives $A^*y\\in E_\\sigma$, and $J_\\sigma(A^*y/\\sigma)=y$; hence $J_\\sigma$ maps $E_\\sigma$ onto $F_\\sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Group the positive singular terms in the odd transform by their common value $\\sigma$. In any orthonormal basis $(v_j)$ of $E_\\sigma$, the paired left vectors are $u_j=J_\\sigma v_j$, so $\\sum_{j:\\sigma_j=\\sigma}|u_j\\rangle\\langle v_j|=J_\\sigma\\Pi_{E_\\sigma}$, where $\\Pi_{E_\\sigma}$ is the unique projection from [F5]. The grouped term is therefore $p(\\sigma)J_\\sigma\\Pi_{E_\\sigma}$, independent of the basis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For the even right transform, grouping by positive singular value gives $p(\\sigma)\\Pi_{E_\\sigma}$, and the zero-singular part is $p(0)\\Pi_{\\ker A}$; both are canonical projections. For the even left transform the corresponding terms are $p(\\sigma)\\Pi_{F_\\sigma}$ and $p(0)\\Pi_{\\ker A^*}$. The zero right and left singular vectors may be chosen independently, but the even definitions use only these unique subspace projections, while the odd definition omits zero singular pairs. Thus all three transforms are independent of the SVD choices.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 covers empty positive subspaces through zero projections."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats canonical right and left kernel projections."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a one-dimensional positive subspace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 group repeated values canonically."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 separates zero from positive singular values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use unique finite-dimensional orthogonal projections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The canonical spectral-subspace basis-independence proof: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The canonical spectral-subspace basis-independence proof: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-24-projector-phase-implementation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-reflection",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection on $H$. Fix the two signs\n\n$$R_\\Pi:=2\\Pi-I,\\qquad S_\\Pi:=I-2\\Pi=-R_\\Pi.$$\n\nThus $R_\\Pi$ acts as $+I$ on $\\operatorname{ran}\\Pi$ and $-I$ on $\\ker\\Pi$; $S_\\Pi$ reverses those signs. They are not interchangeable inside a controlled block. For a unit vector $\\psi$, the rank-one reflection is $R_\\psi=2|\\psi\\rangle\\langle\\psi|-I$ with the Dirac convention of [[def-qc-dirac-notation-conversion]].\n\nAn access model counts a direct reflection as one primitive call only when that call is explicitly declared. Controlled reflection access is a separate declaration. If $|0\\rangle$ is a specified unit input in the same space $H$, the state is prepared as $\\psi=U|0\\rangle$ for a declared unitary $U$, and a reflection is implemented by conjugating $R_0=2|0\\rangle\\langle0|-I$, the construction is $UR_0U^\\dagger$ and its cost must include the calls to $U$, $R_0$, and $U^\\dagger$. A state vector or matrix description alone implies neither an efficient reflection nor inverse access.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Define the ancilla-controlled bit flip $X_\\Pi:=H_aC(S_\\Pi)H_a$, where $H_a=H\\otimes I_H$. On $\\operatorname{ran}\\Pi$, $S_\\Pi=-I$, so [L2] makes $C(S_\\Pi)$ act as $Z_a$ on the ancilla; conjugating by $H_a$ gives $X_a$. On $\\ker\\Pi$, $S_\\Pi=I$, so $C(S_\\Pi)$ acts as $I$ and $X_\\Pi$ is the identity. Thus $X_\\Pi$ flips the ancilla exactly on the range of $\\Pi$. By [L3], each use of $C(S_\\Pi)$ is one supplied call to $C(R_\\Pi)$ plus one ancilla $Z_a$ gate.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply $X_\\Pi$, then $R_z(2\\phi)=e^{-i\\phi Z_a}$, then $X_\\Pi$ again. On $\\operatorname{ran}\\Pi$, the ancilla operation is $X_a e^{-i\\phi Z_a}X_a=e^{i\\phi Z_a}$; on $\\ker\\Pi$ it is $e^{-i\\phi Z_a}$. Acting on $|0\\rangle$, these give phases $e^{i\\phi}$ and $e^{-i\\phi}$, respectively, and both branches return the ancilla to $|0\\rangle$. The induced system operation is therefore $e^{i\\phi}(\\Pi)+e^{-i\\phi}(I-\\Pi)=e^{i\\phi(2\\Pi-I)}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The construction uses two occurrences of $X_\\Pi$, hence two controlled-reflection calls by step 1.1, and one variable $R_z(2\\phi)$ rotation. Its Hadamard and ancilla-$Z$ gates have constant count per phase slot. Applying the same construction with $\\Pi_R$ or $\\Pi_L$ gives the two projector-phase operations used by the QSVT sequence; no direct or controlled reflection cost is inferred from the matrix description alone.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Let $c$ be an external branch qubit. Replace the middle rotation by its controlled version, leaving both occurrences of $X_\\Pi$ unchanged. On branch $c=1$, step 2.1 gives $e^{i\\phi R_\\Pi}$. On branch $c=0$, the middle operation is identity and the two adjacent $X_\\Pi$ operations cancel because $X_\\Pi^2=I$; the system operation is identity. Thus this is the controlled projector phase. It uses the same two controlled-reflection calls as the uncontrolled construction and one separately supplied and charged branch-controlled rotation.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 gives identity on the projection complement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the phase for Pi=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the phase for Pi=I."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the range/kernel decomposition for every projection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates both eigenphases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 use a specified clean ancilla and supplied gates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The clean-ancilla projector-phase circuit: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The clean-ancilla projector-phase circuit: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-24-qsvt-query-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-24-qsvt",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-dimensional complex-inner-product space $H$, a unitary $U:H\\to H$, orthogonal projections $\\Pi_R,\\Pi_L$, an integer $d\\ge0$, and an exact real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$. The input access contract states separately whether $U$, $U^*$, controlled-$U$, and controlled-$U^*$ are supplied and gives their individual costs. The scalar signal sequence is $U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}(W_R(x)Z(\\phi_j))$ from [[def-qa-23-qsp-signal-sequence]], with its admissible polynomial pair from [[def-qa-23-qsp-admissible-polynomial-pair]]. A desired polynomial target is supplied with a certificate that $\\Phi$ realizes its scalar polynomial; generation of $\\Phi$ is a separate classical/circuit input.\n\n**Output.** The procedure returns the finite unitary sequence below and uses its compression from $H_R=\\operatorname{ran}(\\Pi_R)$ to $H_L=\\operatorname{ran}(\\Pi_L)$ for odd $d$, or from $H_R$ to itself for even $d$. No measurement or state-preparation circuit is implicit in this block description.\n\n**Instructions.** For $d\\ge0$, set the current side to $R$ and apply the projector phase $e^{i\\phi_d(2\\Pi_R-I)}$. For $j=d-1,d-2,\\ldots,0$, apply $U$ and switch the current side from $R$ to $L$ if it is $R$; otherwise apply $U^*$ and switch from $L$ to $R$. Then apply $e^{i\\phi_j(2\\Pi_{\\mathrm{current}}-I)}$. Thus there are $d$ alternating signal calls and $d+1$ projector-phase operations; $d=0$ has no signal call and consists only of the phase at $\\Pi_R$.\n\nFor a real target polynomial, run the two phase lists $\\Phi$ and $-\\Phi$ in coherent control branches, with the control initialized in $|+\\rangle$, and take the $|+\\rangle$-to-$|+\\rangle$ block. The procedure uses the reflected signal convention $W_R$ throughout. If a circuit is built through the alternative SU(2) convention, its control-dependent scalar phase must be retained as a relative phase. The exact block action, the real-part extraction, and the implementation costs are established in the separate theorem items on this page. Every phase list, inverse call, controlled call, phase rotation, and finite-gate compilation is supplied or charged separately.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-24-projector-phase-implementation",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be an orthogonal projection on a finite-dimensional space $H$, with reflection $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi=-R_\\Pi$. Suppose the control-first call $C(R_\\Pi)$ is explicitly supplied, together with an ancilla initialized in $|0\\rangle$ and exact one-qubit $H$ and $R_z$ gates. Then the unitary $e^{i\\phi R_\\Pi}$ is implemented exactly by two controlled-reflection calls and one variable phase rotation, with a constant number of additional one-qubit gates, and the ancilla is returned to $|0\\rangle$. If an external branch qubit is present and a branch-controlled $R_z(2\\phi)$ is supplied, controlling only that rotation implements the controlled projector phase; the two controlled-reflection calls remain unconditional with respect to the external branch. In QSVT the construction is applied separately to $\\Pi_R$ and $\\Pi_L$; each projector-phase slot uses two controlled calls to the corresponding reflection. The access and gate costs are charged separately.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, $w(C)$ its total number of wires, and $a_{\\rm clean}(C),a_{\\rm dirty}(C)$ the numbers of wires that satisfy the exact clean and dirty ancilla contracts of [[def-qc-clean-and-dirty-ancillas]]. Auxiliary wires that satisfy neither contract are still counted in $w(C)$ and are not silently included in either ancilla count ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The loop in [F1] executes once for each integer $j=d-1,\\ldots,0$, hence it makes exactly $d$ signal calls. The side starts at $R$, so the first call is $U$ and directions alternate; therefore the counts are $\\lceil d/2\\rceil$ forward calls and $\\lfloor d/2\\rfloor$ inverse calls. If $d=0$, the loop is empty.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "For a controlled sequence against identity, control each phase rotation. When the outer control is zero, every phase is the identity, so the remaining alternating signal calls cancel in adjacent $UU^*$ or $U^*U$ pairs. If $d$ is even all signal calls pair and cancel. If $d$ is odd, leave one signal call controlled and pair all others; on the zero branch that controlled call is also identity, while the one branch executes the original sequence. Thus this variant requires zero extra controlled signal calls for even $d$ and one for odd $d$, whose availability is explicit by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "For a branch selector between $\\Phi$ and $-\\Phi$, the signal call at every position is the same $U$ or $U^*$. Apply that call unconditionally and control only the phase rotation at each slot. Hence this two-branch construction adds no controlled signal query; its controlled phase and reflection gates remain charged.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "There is one phase at the initial $R$ side and one after each of the $d$ signal calls, for $d+1$ slots. Their sides alternate beginning at $R$, giving $\\lceil(d+1)/2\\rceil$ right-projector slots and $\\lfloor(d+1)/2\\rfloor$ left-projector slots.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Apply [F2] to each slot counted in step 2.1. The total controlled-reflection calls are $2\\lceil(d+1)/2\\rceil$ for $\\Pi_R$ and $2\\lfloor(d+1)/2\\rfloor$ for $\\Pi_L$; the variable phase rotations number $d+1$, with constant one-qubit overhead per slot.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "The counts above describe only the listed operations. By [F4], the cost of supplied $U$, $U^*$, controlled calls, phase gates, ancilla wires, classical phase generation, and finite-gate compilation are recorded in their applicable separate coordinates; none is inferred from the matrix $A$ alone.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles d=0 and the empty loop."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero signal calls for d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 count the d=1 sequence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 count factors independently of singular-value multiplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1–3.1 make the counts depend only on d."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 specify every operation in the finite procedure."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The degree-indexed QSVT resource count: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The degree-indexed QSVT resource count: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-24-qsvt-singular-space-action": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-24-pue-svd-data",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $U:H\\to H$ be unitary, and let $\\Pi_R,\\Pi_L:H\\to H$ be orthogonal projections. Write $H_R=\\operatorname{ran}(\\Pi_R)$ and $H_L=\\operatorname{ran}(\\Pi_L)$. The **projected-unitary encoding** (PUE) of this data is the linear map\n\n$$A:H_R\\to H_L,\\qquad Ax=\\Pi_L Ux.$$\n\nEquivalently, its ambient-space compression is $\\Pi_LU\\Pi_R$, restricted to $H_R$ and regarded as taking values in $H_L$. The map $A$ is a contraction: $\\|A\\|_{\\mathrm{op}}\\le1$.\n\nPut $n=\\dim H_R$, $m=\\dim H_L$, and $r=\\operatorname{rank}(A)$. A singular-value decomposition consists of orthonormal bases $v_1,\\ldots,v_n$ of $H_R$ and $u_1,\\ldots,u_m$ of $H_L$, and positive singular values $1\\ge\\sigma_1\\ge\\cdots\\ge\\sigma_r>0$, such that\n\n$$A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|.$$\n\nThe remaining right basis vectors span $\\ker A$ and the remaining left basis vectors span $\\ker A^*$. Empty bases and sums are allowed when a dimension or the rank is zero. The pairing in each rank-one map is the root-linear-first Dirac conversion of [[def-qc-dirac-notation-conversion]].\n\nAn exact square block encoding is a special case: identify the system with the all-zero ancilla subspace and take $\\Pi_L=\\Pi_R$ equal to that subspace. Under the injection $J_a$ of [[def-qa-22-block-encoding]], the compression is $J_a^*UJ_a$; an exact $(\\alpha,a,0)$ block encoding has compressed block $A/\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-24-pue-svd-invariant-subspaces",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$. For every $0<\\sigma_j<1$, set\n\n$$w_j=\\frac{(I-\\Pi_R)U^*u_j}{\\sqrt{1-\\sigma_j^2}},\\qquad \\widetilde w_j=\\frac{(I-\\Pi_L)Uv_j}{\\sqrt{1-\\sigma_j^2}}.$$\n\nThe vectors $w_j$ form an orthonormal family in $\\ker\\Pi_R$ and the vectors $\\widetilde w_j$ form an orthonormal family in $\\ker\\Pi_L$. In the input basis $(v_j,w_j)$ and output basis $(u_j,\\widetilde w_j)$,\n\n$$U\\big|_{\\operatorname{span}(v_j,w_j)}=\\begin{pmatrix}\\sigma_j&\\sqrt{1-\\sigma_j^2}\\\\\\sqrt{1-\\sigma_j^2}&-\\sigma_j\\end{pmatrix}.$$\n\nFor $\\sigma_j=1$, $Uv_j=u_j$ and the complementary vector is absent. A right zero-singular vector $v\\in\\ker A\\cap H_R$ satisfies $Uv\\in\\ker\\Pi_L$; a left zero-singular vector $u\\in\\ker A^*\\cap H_L$ satisfies $U^*u\\in\\ker\\Pi_R$. Let $M_R$ be the orthogonal sum of all positive-singular input planes or lines, $\\ker A$, and $U^*(\\ker A^*)$; let $M_L$ be the corresponding sum of positive-singular output planes or lines, $U(\\ker A)$, and $\\ker A^*$. Then $U(M_R)=M_L$. The residual ambient subspaces $M_R^\\perp$ and $M_L^\\perp$ lie in $\\ker\\Pi_R$ and $\\ker\\Pi_L$, and $U(M_R^\\perp)=M_L^\\perp$. Thus each named block is invariant under its corresponding projector, with no implicit pairing of the two kernels.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-23-qsp-signal-sequence",
+          "source_section": "Definition",
+          "quote": "Let $x\\in[-1,1]$, put $s(x)=\\sqrt{1-x^2}$ using the nonnegative real square root, and define the Hermitian-reflection signal matrix\n$$W_R(x)=\\begin{pmatrix}x&s(x)\\\\s(x)&-x\\end{pmatrix}.$$\nFor each real $\\phi$, define $Z(\\phi)=\\operatorname{diag}(e^{i\\phi},e^{-i\\phi})$. For an integer $d\\ge0$ and real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$, the length-$d$ QSP sequence is the ordered matrix product\n$$U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}\\bigl(W_R(x)Z(\\phi_j)\\bigr),$$\nwhere the product is written left to right in increasing $j$ and matrix multiplication acts right to left. For $d=0$ this is $Z(\\phi_0)$. This definition fixes the sign of the off-diagonal signal entry, both endpoint phases, and the product order.\n\nThe phases are in matrix order: when the factors are applied as chronological circuit layers, the rightmost factor acts first, in accordance with [[def-qc-circuit-denotational-semantics]]. In the ordered signal basis, if both coordinates are nonzero, applying $Z(\\phi)$ multiplies the ratio of the second coordinate to the first by $e^{-2i\\phi}$; if either coordinate is zero, that relative phase is undefined, while the displayed matrix action remains defined. This is the relative phase convention fixed by [[def-qc-relative-phase]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-23-phase-sequence-unitarity",
+          "source_section": "Statement",
+          "quote": "For every $x\\in[-1,1]$ and phase list $\\Phi$ of length $d+1$, $U_\\Phi(x)$ is unitary with determinant $(-1)^d$. There are polynomials $P,Q\\in\\mathbb C[x]$ such that\n$$U_\\Phi(x)=\\begin{pmatrix}P(x)&s(x)Q(x)\\\\(-1)^{d+1}s(x)Q^*(x)&(-1)^dP^*(x)\\end{pmatrix},$$\nwhere $P=0$ or $\\deg P\\le d$ with parity $d$, $Q=0$ or $\\deg Q\\le d-1$ with parity $d-1$, and $PP^*+(1-x^2)QQ^*=1$ as a formal polynomial identity.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-24-singular-value-transform",
+          "source_section": "Definition",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular-value decomposition $A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|$. Let $p:[-1,1]\\to\\mathbb C$ be a scalar function.\n\nIf $p$ is **odd**, define the odd singular-value transform by\n\n$$p^{\\mathrm{SV}}_{\\mathrm{odd}}(A):H_R\\to H_L,\\qquad p^{\\mathrm{SV}}_{\\mathrm{odd}}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle v_j|.$$\n\nIf $p$ is **even**, define its right-space transform by\n\n$$p^{\\mathrm{SV}}_{R}(A):H_R\\to H_R,\\qquad p^{\\mathrm{SV}}_{R}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|v_j\\rangle\\langle v_j|+p(0)\\Pi_{\\ker A},$$\n\nwhere $\\Pi_{\\ker A}$ is the orthogonal projection in $H_R$ onto $\\ker A$. The left-space version is\n\n$$p^{\\mathrm{SV}}_{L}(A):H_L\\to H_L,\\qquad p^{\\mathrm{SV}}_{L}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle u_j|+p(0)\\Pi_{\\ker A^*}.$$\n\nThe odd transform annihilates the right kernel because oddness gives $p(0)=0$; the even transforms use the canonical kernel projections. The resulting operators are independent of the chosen SVD by [[lem-qa-24-singular-transform-basis-independence]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-24-singular-transform-basis-independence",
+          "source_section": "Statement",
+          "quote": "For a finite-dimensional PUE map $A:H_R\\to H_L$, the odd singular-value transform and both even singular-value transforms of [[def-qa-24-singular-value-transform]] are independent of the chosen singular-vector bases. On a positive singular-value subspace, $A/\\sigma$ canonically pairs the right and left eigenspaces; on repeated singular values the transform is scalar on the whole corresponding subspace. The even transforms use the canonical orthogonal projection onto $\\ker A$ or $\\ker A^*$ with coefficient $p(0)$; the odd transform has no zero-singular cross term.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qa-23-real-polynomial-completion",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge0$ and let $p\\in\\mathbb R[x]$ have degree at most $d$, parity $d\\bmod2$, and $|p(x)|\\le1$ for every $x\\in[-1,1]$. Then there is a QSP-admissible pair $P,Q$ of degree bound $d$ such that $\\operatorname{Re}P(x)=p(x)$ on $[-1,1]$. In fact, the completion is exact, so for every $\\delta>0$ it also satisfies $|\\operatorname{Re}P(x)-p(x)|\\le\\delta$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qa-23-qsp-phase-factorization",
+          "source_section": "Statement",
+          "quote": "For every integer $d\\ge0$, a pair $P,Q\\in\\mathbb C[x]$ is QSP-admissible of degree bound $d$ if and only if there is a real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ such that\n$$U_\\Phi(x)=\\begin{pmatrix}P(x)&s(x)Q(x)\\\\(-1)^{d+1}s(x)Q^*(x)&(-1)^dP^*(x)\\end{pmatrix}\\quad (x\\in[-1,1]).$$\nThe converse is constructive: a leading-coefficient phase peel reduces the degree at each nonconstant stage. The polynomial identity, determinant signs, product order, and phase convention are exactly those in [[def-qa-23-qsp-admissible-polynomial-pair]] and [[def-qa-23-qsp-signal-sequence]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qa-23-hermitian-signal-convention-conversion",
+          "source_section": "Statement",
+          "quote": "Put $s=\\sqrt{1-x^2}$, $W_R=\\begin{pmatrix}x&s\\\\s&-x\\end{pmatrix}$, $W_S=\\begin{pmatrix}x&is\\\\is&x\\end{pmatrix}$, and $C=Z(\\pi/4)$. Then\n$$CW_RC=iW_S^\\dagger,\\qquad W_S^\\dagger=Z(\\pi/2)W_SZ(-\\pi/2).$$\nFor $d\\ge1$, define $U_S(\\Psi)=Z(\\psi_0)\\prod_{j=1}^d(W_SZ(\\psi_j))$. If $\\Psi$ is the SU(2)-convention phase list with $\\psi_0=\\phi_0+\\pi/4$, $\\psi_j=\\phi_j-\\pi/2$ for $1\\le j<d$, and $\\psi_d=\\phi_d-3\\pi/4$, then\n$$U_R(\\Phi)=i^dU_S(\\Psi).$$\nThe affine phase-list map is invertible. The scalar $i^d$ is part of the identity: in a control-first block $\\operatorname{diag}(I,U)$ it acts on the active control branch and cannot be discarded as a global phase.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Fix $0<\\sigma_j<1$. In the input basis $(v_j,w_j)$ and output basis $(u_j,\\widetilde w_j)$, [F2] says that $U$ is $W_R(\\sigma_j)$, and $U^*$ has the same matrix because it is real symmetric. The right-projector phase is $Z(\\phi)$ on the input basis since $2\\Pi_R-I$ has eigenvalues $+1,-1$ there; the left-projector phase is the same $Z(\\phi)$ on the output basis. Thus the alternating sequence multiplies in the fixed order $Z(\\phi_0)W_R(\\sigma_j)Z(\\phi_1)\\cdots W_R(\\sigma_j)Z(\\phi_d)=U_\\Phi(\\sigma_j)$, whose upper-left entry is $P_\\Phi(\\sigma_j)$ by [F3]–[F4].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "If $\\sigma_j=1$, [F2] gives $Uv_j=u_j$ and the complementary component is zero; the surviving one-dimensional action is the first-coordinate action of $U_\\Phi(1)$, namely $P_\\Phi(1)$. For $\\sigma_j=0$, $Uv_j$ lies in $\\ker\\Pi_L$ and $U^*(Uv_j)=v_j$. The alternating calls therefore swap this right-kernel vector and its left-complement image exactly as $W_R(0)=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ does. If $d$ is odd the final vector lies in $\\ker\\Pi_L$ and the left compression is zero, equal to $P_\\Phi(0)$ because [F4] makes $P_\\Phi$ odd. If $d$ is even it returns to $v_j$ with coefficient $P_\\Phi(0)$, the prescribed even-kernel term in [F5]. Left-kernel inputs and the residual complement contribute nothing to the stated compression by [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The positive singular planes, the $\\sigma=1$ lines, the right zero-kernel lines, and the residual blocks are orthogonal and exhaust the relevant projected spaces by [F2]. Summing the scalar coefficients from steps 1.1–1.2 therefore gives the displayed odd and even compressed-block formulas.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For real $p$ under the stated parity and bound, [F7] gives an admissible pair $P,Q$ with $\\operatorname{Re}P=p$, and [F8] supplies its exact phase list $\\Phi$. Since $W_R(x)$ has real entries and $Z(-\\phi)=\\overline{Z(\\phi)}$, entrywise conjugation of the product gives $U_{-\\Phi}(x)=\\overline{U_\\Phi(x)}$, so its upper-left polynomial is $P_\\Phi^*$. The control initialized and projected in $|+\\rangle$ has block $\\frac12(U_\\Phi+U_{-\\Phi})$. By step 2.1, on each positive singular pair its coefficient is $\\frac12(P_\\Phi(\\sigma_j)+\\overline{P_\\Phi(\\sigma_j)})=\\operatorname{Re}P_\\Phi(\\sigma_j)=p(\\sigma_j)$; for an even transform the same identity gives $p(0)$ on $\\ker A$. Thus its compressed block is $p^{\\mathrm{SV}}(A)$. If the supplied scalar approximation has uniform error $\\eta$, each singular coefficient changes by at most $\\eta$; orthonormality of the singular bases then gives operator-norm error at most $\\eta$. The proof stays in the reflected convention; [F10]'s scalar is not discarded if a circuit is translated to the SU(2) convention.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 sums an empty positive family and step 3.1 handles zero spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the zero-singular pair."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the sigma-one line."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 sums the full orthogonal singular decomposition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 separates sigma zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use a finite SVD decomposition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The singular-plane QSVT action theorem: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The singular-plane QSVT action theorem: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-24-qsvt-robustness-amplitude-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-24-pue-svd-data",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $U:H\\to H$ be unitary, and let $\\Pi_R,\\Pi_L:H\\to H$ be orthogonal projections. Write $H_R=\\operatorname{ran}(\\Pi_R)$ and $H_L=\\operatorname{ran}(\\Pi_L)$. The **projected-unitary encoding** (PUE) of this data is the linear map\n\n$$A:H_R\\to H_L,\\qquad Ax=\\Pi_L Ux.$$\n\nEquivalently, its ambient-space compression is $\\Pi_LU\\Pi_R$, restricted to $H_R$ and regarded as taking values in $H_L$. The map $A$ is a contraction: $\\|A\\|_{\\mathrm{op}}\\le1$.\n\nPut $n=\\dim H_R$, $m=\\dim H_L$, and $r=\\operatorname{rank}(A)$. A singular-value decomposition consists of orthonormal bases $v_1,\\ldots,v_n$ of $H_R$ and $u_1,\\ldots,u_m$ of $H_L$, and positive singular values $1\\ge\\sigma_1\\ge\\cdots\\ge\\sigma_r>0$, such that\n\n$$A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|.$$\n\nThe remaining right basis vectors span $\\ker A$ and the remaining left basis vectors span $\\ker A^*$. Empty bases and sums are allowed when a dimension or the rank is zero. The pairing in each rank-one map is the root-linear-first Dirac conversion of [[def-qc-dirac-notation-conversion]].\n\nAn exact square block encoding is a special case: identify the system with the all-zero ancilla subspace and take $\\Pi_L=\\Pi_R$ equal to that subspace. Under the injection $J_a$ of [[def-qa-22-block-encoding]], the compression is $J_a^*UJ_a$; an exact $(\\alpha,a,0)$ block encoding has compressed block $A/\\alpha$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ has parity $d\\bmod2$ and $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\dots,x_n$ be pairwise orthogonal vectors in a real or complex inner-product space, that is $\\langle x_i,x_j\\rangle=0$ whenever $i\\ne j$ ([[def-orthogonality-and-orthogonal-complement]]). Then\n\n$$\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2 ,$$\n\nthe empty sum on the right being $0$ at $n=0$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "If either $H_R$ or $H_L$ is zero, both maps are zero and the odd transforms agree; when $H_R=0$ the even right transforms are also the same scalar map on the zero space, and when $H_L=0$ the even right transforms are $P(0)I_{H_R}$ for both. The inequality is then immediate. Assume both dimensions are positive. Let $m=\\dim H_L$, $n=\\dim H_R$, $q=\\min(m,n)$, and extend an SVD of any contraction $C:H_R\\to H_L$ to orthonormal bases $u_1,\\ldots,u_m$ and $v_1,\\ldots,v_n$, with $\\sigma_j=0$ for any missing singular values up to $q$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "On $K=H_L\\oplus H_R$, choose orthonormal input bases $a_1,\\ldots,a_m$ in the first summand and $v_1,\\ldots,v_n$ in the second, and output bases $u_1,\\ldots,u_m$ and $b_1,\\ldots,b_n$ in the two summands. For $1\\le j\\le q$, define $V_Ca_j=\\sqrt{1-\\sigma_j^2}\\,u_j-\\sigma_j b_j$ and $V_Cv_j=\\sigma_j u_j+\\sqrt{1-\\sigma_j^2}\\,b_j$. These two images are orthonormal by direct expansion; map any remaining $a_j$ to the corresponding unused $u_j$, and any remaining $v_j$ to the corresponding unused $b_j$. The resulting images form an orthonormal basis, so $V_C$ is unitary. If $\\Pi_R^0$ projects onto the second summand and $\\Pi_L^0$ onto the first, then $\\Pi_L^0V_C\\Pi_R^0|_{H_R}=C$ by the SVD formula. Thus every finite contraction has a PUE unitary completion with fixed subspaces of dimensions $n,m$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F10",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Let $\\delta>0$ and set $D=(B-A)/\\delta$. Homogeneity of the operator norm gives $\\|D\\|_{\\mathrm{op}}=1$, so $D$ is a contraction. By step 1.2, choose unitary completions $V_A,V_D$ of $A,D$ on the same $K$ with the same projectors $\\Pi_R^0,\\Pi_L^0$. On $K\\oplus K$, let $V=V_A\\oplus V_D$ and let $\\Pi_R,\\Pi_L$ select the right and left subspaces, respectively, in the first copy only. Put $c=(1+\\delta)^{-1/2}$, $s=\\sqrt{\\delta/(1+\\delta)}$, and $W=\\begin{pmatrix}cI&-sI\\\\sI&cI\\end{pmatrix}$; $c^2+s^2=1$ makes $W$ unitary. For $x$ in the first-copy right subspace, $W(x,0)=(cx,sx)$, $V$ maps this to $(cV_Ax,sV_Dx)$, and $W^*$ returns first component $c^2V_Ax+s^2V_Dx$. Projection to the first-copy left subspace therefore gives $c^2Ax+s^2Dx=(A+\\delta D)x/(1+\\delta)=Bx/(1+\\delta)$. Since $V$ and $W$ are unitary, [F8]–[F9] show $V'=W^*VW$ is unitary; it is a PUE completion of $B/(1+\\delta)$ for the same projectors.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Direct multiplication gives $(W-I)^*(W-I)=2(1-c)I$, hence $\\|W-I\\|_{\\mathrm{op}}=\\sqrt{2-2c}$. With $t=\\sqrt{1+\\delta}\\ge1$, the inequality $2-2/t\\le t^2-1$ follows from $(t-1)^2(t+2)\\ge0$, so $\\|W-I\\|_{\\mathrm{op}}\\le\\sqrt{\\delta}$. For every unit $x$, write $Vx-W^*VW x=(I-W^*)Vx+W^*V(I-W)x$. By [F10], $V$ and $W^*$ preserve norms; the two summands therefore have norms at most $\\|W-I\\|_{\\mathrm{op}}$. Using [F5] and [F4] gives $\\|V-V'\\|_{\\mathrm{op}}\\le2\\sqrt{\\delta}$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "The exact QSVT phase product contains $d$ signal factors, each either $V$ or $V^*$; its remaining phase factors are identical for $V$ and $V'$. Telescoping the two products one signal factor at a time gives operator-norm difference at most $d\\|V-V'\\|_{\\mathrm{op}}$: the factor differences for $V$ have that norm, and for $V^*$ the identity $V^*-V'^*=V^*(V'-V)V'^*$ plus [F10]–[F11] gives the same norm; multiplying by unchanged unitary factors preserves the bound. Compression by orthogonal projections cannot increase the bound, since projections are contractions by [F6]–[F7]. By [F3], the compressed blocks are $P^{\\mathrm{SV}}(A)$ and $P^{\\mathrm{SV}}(B/(1+\\delta))$. Steps 2.1–2.2 therefore give $\\|P^{\\mathrm{SV}}(A)-P^{\\mathrm{SV}}(B/(1+\\delta))\\|_{\\mathrm{op}}\\le2d\\sqrt{\\delta}$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "F11",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Apply the same construction to the contractions $B/(1+\\delta)$ and $B$. Their distance is $\\delta'=\\|B-B/(1+\\delta)\\|_{\\mathrm{op}}=\\delta\\|B\\|_{\\mathrm{op}}/(1+\\delta)\\le\\delta$. It follows that $\\|P^{\\mathrm{SV}}(B/(1+\\delta))-P^{\\mathrm{SV}}(B)\\|_{\\mathrm{op}}\\le2d\\sqrt{\\delta'}\\le2d\\sqrt\\delta$. The triangle inequality gives the asserted $4d\\sqrt\\delta$ bound. If $\\delta=0$ the two transforms are identical, and if $d=0$ the transform is independent of the input; both cases satisfy the same bound.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles zero-dimensional spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1 include zero distance and zero contractions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 permits singular values equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 include rectangular sizes and missing singular pairs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 cover singular values zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 construct finite completions from SVD bases."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The square-root operator perturbation inequality: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The square-root operator perturbation inequality: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-24-real-polynomial-extraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-23-real-polynomial-completion",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge0$ and let $p\\in\\mathbb R[x]$ have degree at most $d$, parity $d\\bmod2$, and $|p(x)|\\le1$ for every $x\\in[-1,1]$. Then there is a QSP-admissible pair $P,Q$ of degree bound $d$ such that $\\operatorname{Re}P(x)=p(x)$ on $[-1,1]$. In fact, the completion is exact, so for every $\\delta>0$ it also satisfies $|\\operatorname{Re}P(x)-p(x)|\\le\\delta$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-23-qsp-phase-factorization",
+          "source_section": "Statement",
+          "quote": "For every integer $d\\ge0$, a pair $P,Q\\in\\mathbb C[x]$ is QSP-admissible of degree bound $d$ if and only if there is a real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ such that\n$$U_\\Phi(x)=\\begin{pmatrix}P(x)&s(x)Q(x)\\\\(-1)^{d+1}s(x)Q^*(x)&(-1)^dP^*(x)\\end{pmatrix}\\quad (x\\in[-1,1]).$$\nThe converse is constructive: a leading-coefficient phase peel reduces the degree at each nonconstant stage. The polynomial identity, determinant signs, product order, and phase convention are exactly those in [[def-qa-23-qsp-admissible-polynomial-pair]] and [[def-qa-23-qsp-signal-sequence]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-23-qsp-signal-sequence",
+          "source_section": "Definition",
+          "quote": "Let $x\\in[-1,1]$, put $s(x)=\\sqrt{1-x^2}$ using the nonnegative real square root, and define the Hermitian-reflection signal matrix\n$$W_R(x)=\\begin{pmatrix}x&s(x)\\\\s(x)&-x\\end{pmatrix}.$$\nFor each real $\\phi$, define $Z(\\phi)=\\operatorname{diag}(e^{i\\phi},e^{-i\\phi})$. For an integer $d\\ge0$ and real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$, the length-$d$ QSP sequence is the ordered matrix product\n$$U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}\\bigl(W_R(x)Z(\\phi_j)\\bigr),$$\nwhere the product is written left to right in increasing $j$ and matrix multiplication acts right to left. For $d=0$ this is $Z(\\phi_0)$. This definition fixes the sign of the off-diagonal signal entry, both endpoint phases, and the product order.\n\nThe phases are in matrix order: when the factors are applied as chronological circuit layers, the rightmost factor acts first, in accordance with [[def-qc-circuit-denotational-semantics]]. In the ordered signal basis, if both coordinates are nonzero, applying $Z(\\phi)$ multiplies the ratio of the second coordinate to the first by $e^{-2i\\phi}$; if either coordinate is zero, that relative phase is undefined, while the displayed matrix action remains defined. This is the relative phase convention fixed by [[def-qc-relative-phase]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ has parity $d\\bmod2$ and $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-24-projector-phase-implementation",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be an orthogonal projection on a finite-dimensional space $H$, with reflection $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi=-R_\\Pi$. Suppose the control-first call $C(R_\\Pi)$ is explicitly supplied, together with an ancilla initialized in $|0\\rangle$ and exact one-qubit $H$ and $R_z$ gates. Then the unitary $e^{i\\phi R_\\Pi}$ is implemented exactly by two controlled-reflection calls and one variable phase rotation, with a constant number of additional one-qubit gates, and the ancilla is returned to $|0\\rangle$. If an external branch qubit is present and a branch-controlled $R_z(2\\phi)$ is supplied, controlling only that rotation implements the controlled projector phase; the two controlled-reflection calls remain unconditional with respect to the external branch. In QSVT the construction is applied separately to $\\Pi_R$ and $\\Pi_L$; each projector-phase slot uses two controlled calls to the corresponding reflection. The access and gate costs are charged separately.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-qa-24-qsvt",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-dimensional complex-inner-product space $H$, a unitary $U:H\\to H$, orthogonal projections $\\Pi_R,\\Pi_L$, an integer $d\\ge0$, and an exact real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$. The input access contract states separately whether $U$, $U^*$, controlled-$U$, and controlled-$U^*$ are supplied and gives their individual costs. The scalar signal sequence is $U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}(W_R(x)Z(\\phi_j))$ from [[def-qa-23-qsp-signal-sequence]], with its admissible polynomial pair from [[def-qa-23-qsp-admissible-polynomial-pair]]. A desired polynomial target is supplied with a certificate that $\\Phi$ realizes its scalar polynomial; generation of $\\Phi$ is a separate classical/circuit input.\n\n**Output.** The procedure returns the finite unitary sequence below and uses its compression from $H_R=\\operatorname{ran}(\\Pi_R)$ to $H_L=\\operatorname{ran}(\\Pi_L)$ for odd $d$, or from $H_R$ to itself for even $d$. No measurement or state-preparation circuit is implicit in this block description.\n\n**Instructions.** For $d\\ge0$, set the current side to $R$ and apply the projector phase $e^{i\\phi_d(2\\Pi_R-I)}$. For $j=d-1,d-2,\\ldots,0$, apply $U$ and switch the current side from $R$ to $L$ if it is $R$; otherwise apply $U^*$ and switch from $L$ to $R$. Then apply $e^{i\\phi_j(2\\Pi_{\\mathrm{current}}-I)}$. Thus there are $d$ alternating signal calls and $d+1$ projector-phase operations; $d=0$ has no signal call and consists only of the phase at $\\Pi_R$.\n\nFor a real target polynomial, run the two phase lists $\\Phi$ and $-\\Phi$ in coherent control branches, with the control initialized in $|+\\rangle$, and take the $|+\\rangle$-to-$|+\\rangle$ block. The procedure uses the reflected signal convention $W_R$ throughout. If a circuit is built through the alternative SU(2) convention, its control-dependent scalar phase must be retained as a relative phase. The exact block action, the real-part extraction, and the implementation costs are established in the separate theorem items on this page. Every phase list, inverse call, controlled call, phase rotation, and finite-gate compilation is supplied or charged separately.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qa-24-qsvt-query-count",
+          "source_section": "Statement",
+          "quote": "For degree $d\\ge0$, one un-controlled QSVT sequence makes exactly $d$ signal calls: $\\lceil d/2\\rceil$ calls to $U$ and $\\lfloor d/2\\rfloor$ calls to $U^*$, beginning with $U$ when $d>0$. It applies exactly $d+1$ projector-phase operations, with $\\lceil(d+1)/2\\rceil$ about $\\Pi_R$ and $\\lfloor(d+1)/2\\rfloor$ about $\\Pi_L$. By [[thm-qa-24-projector-phase-implementation]], each phase operation uses two controlled calls to the corresponding reflection and one variable one-qubit phase rotation, plus a constant number of one-qubit gates. A coherent control of one sequence against the identity requires no controlled signal call when $d$ is even and one controlled signal call when $d$ is odd. Selecting between the two phase lists $\\Phi$ and $-\\Phi$ uses the same unconditioned signal list in both branches and controls only the phase rotations. Phase generation, inverse access, and finite-gate compilation retain their separately declared costs. At $d=0$ there is no signal or controlled-signal call.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [F1], choose a QSP-admissible pair $P,Q$ with $\\operatorname{Re}P=p$. By [F2], choose a phase list $\\Phi$ whose ordered signal product has upper-left entry $P_\\Phi=P$. The real part identity is therefore exact for every real $x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "At each phase slot, apply the same projector-reflection gadget from [F5] in both branches and condition only its one-qubit rotation on the outer control. The gadget is the identity on the $\\Phi/-\\Phi$ control-zero branch and implements the signed projector phase on the control-one branch. By [F6] and [F10], the signal calls occur between the same phase slots in both branches and are therefore shared unconditioned calls. The full controlled unitary has branch operators $U_{-\\Phi}$ and $U_\\Phi$; projecting $|+\\rangle$ to $|+\\rangle$ gives their arithmetic mean, since $\\langle+|b\\rangle\\langle b|+\\rangle=1/2$ for each $b\\in\\{0,1\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Since each entry of $W_R(x)$ is real and $\\overline{Z(\\phi)}=Z(-\\phi)$, entrywise conjugation of the ordered product in [F3] gives $U_{-\\Phi}(x)=\\overline{U_\\Phi(x)}$. Thus its upper-left polynomial is $P_{-\\Phi}(x)=\\overline{P_\\Phi(x)}$ for every $x\\in[-1,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Fix a positive singular pair $(\\sigma_j,v_j,u_j)$. By [F4], the two branch compressions contribute coefficients $P_\\Phi(\\sigma_j)$ and $P_{-\\Phi}(\\sigma_j)$. Their mean is $\\operatorname{Re}P_\\Phi(\\sigma_j)=p(\\sigma_j)$ by steps 1.1–2.1. For even $d$, [F4] gives the same mean $p(0)$ on each vector in $\\ker A$; for odd $d$, $p(0)=0$ and the output block annihilates that kernel. Thus the averaged compression has exactly the stated singular-value transform on all of $H_R$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "There are $d$ alternating signal positions and $d+1$ phase slots by [F7]. The control changes only the phase rotation at each slot, so one signal list is used in both branches; each slot uses the two reflection calls and one branch-controlled rotation from [F5]. By [F9], the controlled rotations and reflection calls are supplied and costed separately. For $d=0$, there is one controlled phase slot and no signal call, so the same count applies.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 covers d=0 with one phase and no signal calls."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero singular values and the even kernel term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies at every positive singular value, including one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 cover repeated values and shared calls."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats zero and positive singular endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses finite completion and phase factorization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The controlled real-polynomial extraction theorem: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The controlled real-polynomial extraction theorem: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-24-qsvt-error-and-resource-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-24-singular-value-transform",
+          "source_section": "Definition",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular-value decomposition $A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|$. Let $p:[-1,1]\\to\\mathbb C$ be a scalar function.\n\nIf $p$ is **odd**, define the odd singular-value transform by\n\n$$p^{\\mathrm{SV}}_{\\mathrm{odd}}(A):H_R\\to H_L,\\qquad p^{\\mathrm{SV}}_{\\mathrm{odd}}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle v_j|.$$\n\nIf $p$ is **even**, define its right-space transform by\n\n$$p^{\\mathrm{SV}}_{R}(A):H_R\\to H_R,\\qquad p^{\\mathrm{SV}}_{R}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|v_j\\rangle\\langle v_j|+p(0)\\Pi_{\\ker A},$$\n\nwhere $\\Pi_{\\ker A}$ is the orthogonal projection in $H_R$ onto $\\ker A$. The left-space version is\n\n$$p^{\\mathrm{SV}}_{L}(A):H_L\\to H_L,\\qquad p^{\\mathrm{SV}}_{L}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle u_j|+p(0)\\Pi_{\\ker A^*}.$$\n\nThe odd transform annihilates the right kernel because oddness gives $p(0)=0$; the even transforms use the canonical kernel projections. The resulting operators are independent of the chosen SVD by [[lem-qa-24-singular-transform-basis-independence]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-24-qsvt-robustness-amplitude-bound",
+          "source_section": "Statement",
+          "quote": "Let $A,B:H_R\\to H_L$ be contractions between the same finite-dimensional complex-inner-product spaces, let $P$ be the scalar polynomial of an exact degree-$d$ QSVT phase sequence, and put $\\delta=\\|A-B\\|_{\\mathrm{op}}$. Then, for the corresponding odd or even singular-value transforms,\n\n$$\\|P^{\\mathrm{SV}}(A)-P^{\\mathrm{SV}}(B)\\|_{\\mathrm{op}}\\le4d\\sqrt{\\delta}.$$\n\nFor $d=0$ the transform is constant on the relevant singular space and the difference is zero. The lemma is an operator statement; the unitary completions used in the proof are finite-dimensional existence constructions and do not supply an efficient implementation or any additional query access.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-24-qsvt-query-count",
+          "source_section": "Statement",
+          "quote": "For degree $d\\ge0$, one un-controlled QSVT sequence makes exactly $d$ signal calls: $\\lceil d/2\\rceil$ calls to $U$ and $\\lfloor d/2\\rfloor$ calls to $U^*$, beginning with $U$ when $d>0$. It applies exactly $d+1$ projector-phase operations, with $\\lceil(d+1)/2\\rceil$ about $\\Pi_R$ and $\\lfloor(d+1)/2\\rfloor$ about $\\Pi_L$. By [[thm-qa-24-projector-phase-implementation]], each phase operation uses two controlled calls to the corresponding reflection and one variable one-qubit phase rotation, plus a constant number of one-qubit gates. A coherent control of one sequence against the identity requires no controlled signal call when $d$ is even and one controlled signal call when $d$ is odd. Selecting between the two phase lists $\\Phi$ and $-\\Phi$ uses the same unconditioned signal list in both branches and controls only the phase rotations. Phase generation, inverse access, and finite-gate compilation retain their separately declared costs. At $d=0$ there is no signal or controlled-signal call.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, $w(C)$ its total number of wires, and $a_{\\rm clean}(C),a_{\\rm dirty}(C)$ the numbers of wires that satisfy the exact clean and dirty ancilla contracts of [[def-qc-clean-and-dirty-ancillas]]. Auxiliary wires that satisfy neither contract are still counted in $w(C)$ and are not silently included in either ancilla count ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ has parity $d\\bmod2$ and $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qa-24-pue-svd-data",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $U:H\\to H$ be unitary, and let $\\Pi_R,\\Pi_L:H\\to H$ be orthogonal projections. Write $H_R=\\operatorname{ran}(\\Pi_R)$ and $H_L=\\operatorname{ran}(\\Pi_L)$. The **projected-unitary encoding** (PUE) of this data is the linear map\n\n$$A:H_R\\to H_L,\\qquad Ax=\\Pi_L Ux.$$\n\nEquivalently, its ambient-space compression is $\\Pi_LU\\Pi_R$, restricted to $H_R$ and regarded as taking values in $H_L$. The map $A$ is a contraction: $\\|A\\|_{\\mathrm{op}}\\le1$.\n\nPut $n=\\dim H_R$, $m=\\dim H_L$, and $r=\\operatorname{rank}(A)$. A singular-value decomposition consists of orthonormal bases $v_1,\\ldots,v_n$ of $H_R$ and $u_1,\\ldots,u_m$ of $H_L$, and positive singular values $1\\ge\\sigma_1\\ge\\cdots\\ge\\sigma_r>0$, such that\n\n$$A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|.$$\n\nThe remaining right basis vectors span $\\ker A$ and the remaining left basis vectors span $\\ker A^*$. Empty bases and sums are allowed when a dimension or the rank is zero. The pairing in each rank-one map is the root-linear-first Dirac conversion of [[def-qc-dirac-notation-conversion]].\n\nAn exact square block encoding is a special case: identify the system with the all-zero ancilla subspace and take $\\Pi_L=\\Pi_R$ equal to that subspace. Under the injection $J_a$ of [[def-qa-22-block-encoding]], the compression is $J_a^*UJ_a$; an exact $(\\alpha,a,0)$ block encoding has compressed block $A/\\alpha$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\dots,x_n$ be pairwise orthogonal vectors in a real or complex inner-product space, that is $\\langle x_i,x_j\\rangle=0$ whenever $i\\ne j$ ([[def-orthogonality-and-orthogonal-complement]]). Then\n\n$$\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2 ,$$\n\nthe empty sum on the right being $0$ at $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Let $E_{\\rm in},E_{\\rm out}$ be the declared isometric padding maps in [F1], so $\\widehat A=E_{\\rm out}AE_{\\rm in}^*$ and $E_{\\rm in}^*E_{\\rm in}=I$. Put $P_{\\rm in}=E_{\\rm in}E_{\\rm in}^*$. By [L3]–[L4], $P_{\\rm in}^*=P_{\\rm in}=P_{\\rm in}^2$; [L5] makes it an orthogonal projection, and [L6] gives $\\|P_{\\rm in}z\\|\\le\\|z\\|$. The adjoint identity [L3] then yields $\\|E_{\\rm in}^*z\\|^2=\\langle P_{\\rm in}z,z\\rangle=\\|P_{\\rm in}z\\|^2\\le\\|z\\|^2$. Since both padding maps preserve norms by [L2], [F9] gives $\\|\\widehat A\\|_{\\rm op}=\\|E_{\\rm out}AE_{\\rm in}^*\\|_{\\rm op}\\le\\|A\\|_{\\rm op}$; conversely $\\widehat A E_{\\rm in}x=E_{\\rm out}Ax$ for every $x$, so taking maxima over unit vectors gives equality. Thus $A_0:=\\widehat A/\\alpha$ is a contraction. The PUE compression $B$ is a contraction by [L1], and [F1] gives $\\|B-A_0\\|_{\\rm op}\\le\\varepsilon_{\\rm BE}$. Applying [F3] gives $\\|P^{\\mathrm{SV}}(B)-P^{\\mathrm{SV}}(A_0)\\|_{\\rm op}\\le4d\\sqrt{\\varepsilon_{\\rm BE}}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "F9",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Choose the SVD bases of $A_0$ from [F8]. For odd parity, the difference $P^{\\mathrm{SV}}(A_0)-f^{\\mathrm{SV}}(A_0)$ sends each right singular vector $v_j$ to $(P(\\sigma_j)-f(\\sigma_j))u_j$ and annihilates $\\ker A_0$. Orthonormality gives, for $x=\\sum_j c_jv_j+x_0$, $\\|(P^{\\mathrm{SV}}-f^{\\mathrm{SV}})x\\|^2=\\sum_j|P(\\sigma_j)-f(\\sigma_j)|^2|c_j|^2\\le\\eta_{\\mathrm{poly}}^2\\|x\\|^2$. For even parity the same bound follows by diagonal action on the right singular basis, including $P(0)-f(0)$ on the kernel. Taking the maximum over unit vectors by [F6] yields $\\|P^{\\mathrm{SV}}(A_0)-f^{\\mathrm{SV}}(A_0)\\|_{\\mathrm{op}}\\le\\eta_{\\mathrm{poly}}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F6",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Replace the ideal phase operations one slot at a time by their implemented unitaries. The product difference is a sum of $d+1$ terms, each containing one phase difference and otherwise unitary factors. By [F9], multiplying by those unitary factors preserves or bounds the operator norm by their norm $1$; [F7] and [F6] then give $\\|\\widetilde U_\\Phi-U_\\Phi\\|_{\\mathrm{op}}\\le\\sum_\\ell\\zeta_\\ell$. Compression by the input and output projections is contractive, so the same upper bound holds for the compressed blocks. The exact ideal compressed block is $P^{\\mathrm{SV}}(B)$ by [F10].",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The implemented block differs from $f^{\\mathrm{SV}}(A_0)$ by the sum of its phase-implementation, input-block, and scalar-approximation differences. Applying the triangle inequality to steps 1.1, 1.2, and 1.3 yields $\\|\\widetilde B-f^{\\mathrm{SV}}(A_0)\\|_{\\mathrm{op}}\\le\\eta_{\\mathrm{poly}}+4d\\sqrt{\\varepsilon_{\\mathrm{BE}}}+\\sum_\\ell\\zeta_\\ell$. The resource statement follows from [F4]–[F5]; each absent access, synthesis, data-loading, or compilation operation remains a separate supplied cost.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers empty singular spaces and zero-domain norm."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include zero error and degree zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes singular value one in the target set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 use the full orthogonal basis and finite product."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 cover zero error and interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses a finite SVD and the uniform scalar bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The compositional QSVT operator-norm upper bound: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The compositional QSVT operator-norm upper bound: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cex-qa-24-parity-violation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-24-singular-value-transform",
+          "source_section": "Definition",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular-value decomposition $A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|$. Let $p:[-1,1]\\to\\mathbb C$ be a scalar function.\n\nIf $p$ is **odd**, define the odd singular-value transform by\n\n$$p^{\\mathrm{SV}}_{\\mathrm{odd}}(A):H_R\\to H_L,\\qquad p^{\\mathrm{SV}}_{\\mathrm{odd}}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle v_j|.$$\n\nIf $p$ is **even**, define its right-space transform by\n\n$$p^{\\mathrm{SV}}_{R}(A):H_R\\to H_R,\\qquad p^{\\mathrm{SV}}_{R}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|v_j\\rangle\\langle v_j|+p(0)\\Pi_{\\ker A},$$\n\nwhere $\\Pi_{\\ker A}$ is the orthogonal projection in $H_R$ onto $\\ker A$. The left-space version is\n\n$$p^{\\mathrm{SV}}_{L}(A):H_L\\to H_L,\\qquad p^{\\mathrm{SV}}_{L}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle u_j|+p(0)\\Pi_{\\ker A^*}.$$\n\nThe odd transform annihilates the right kernel because oddness gives $p(0)=0$; the even transforms use the canonical kernel projections. The resulting operators are independent of the chosen SVD by [[lem-qa-24-singular-transform-basis-independence]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For $A=0$, the entire domain and codomain are zero-singular spaces; both $u=1$ and $u=-1$ are unit left-kernel vectors, and $v=1$ is a unit right-kernel vector. With the first pairing, $|1\\rangle\\langle1|$ sends $x$ to $x$, so the false zero-pair sum with coefficient $f(0)=1$ is $I$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "With the second equally valid left singular basis, $|-1\\rangle\\langle1|$ sends $x$ to $-x$, so the same false rule gives $-I$. Since $I\\ne-I$ on $\\mathbb C$, this rule is not basis independent. The valid odd definition avoids the defect because odd polynomials have $f(0)=0$ and the sum contains only positive singular values; the valid even definition adds $f(0)\\Pi_{\\ker A}=I$, which is canonical and unchanged by the choice of kernel basis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1 use the empty positive singular list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly take A=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one-dimensional kernel vectors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 compares two independent valid left-kernel bases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero singular value is the endpoint in this counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly exhibits the kernel bases."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The one-dimensional zero-map parity counterexample: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The one-dimensional zero-map parity counterexample: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-qa-24-rank-one-pue": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-24-pue-svd-invariant-subspaces",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$. For every $0<\\sigma_j<1$, set\n\n$$w_j=\\frac{(I-\\Pi_R)U^*u_j}{\\sqrt{1-\\sigma_j^2}},\\qquad \\widetilde w_j=\\frac{(I-\\Pi_L)Uv_j}{\\sqrt{1-\\sigma_j^2}}.$$\n\nThe vectors $w_j$ form an orthonormal family in $\\ker\\Pi_R$ and the vectors $\\widetilde w_j$ form an orthonormal family in $\\ker\\Pi_L$. In the input basis $(v_j,w_j)$ and output basis $(u_j,\\widetilde w_j)$,\n\n$$U\\big|_{\\operatorname{span}(v_j,w_j)}=\\begin{pmatrix}\\sigma_j&\\sqrt{1-\\sigma_j^2}\\\\\\sqrt{1-\\sigma_j^2}&-\\sigma_j\\end{pmatrix}.$$\n\nFor $\\sigma_j=1$, $Uv_j=u_j$ and the complementary vector is absent. A right zero-singular vector $v\\in\\ker A\\cap H_R$ satisfies $Uv\\in\\ker\\Pi_L$; a left zero-singular vector $u\\in\\ker A^*\\cap H_L$ satisfies $U^*u\\in\\ker\\Pi_R$. Let $M_R$ be the orthogonal sum of all positive-singular input planes or lines, $\\ker A$, and $U^*(\\ker A^*)$; let $M_L$ be the corresponding sum of positive-singular output planes or lines, $U(\\ker A)$, and $\\ker A^*$. Then $U(M_R)=M_L$. The residual ambient subspaces $M_R^\\perp$ and $M_L^\\perp$ lie in $\\ker\\Pi_R$ and $\\ker\\Pi_L$, and $U(M_R^\\perp)=M_L^\\perp$. Thus each named block is invariant under its corresponding projector, with no implicit pairing of the two kernels.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ has parity $d\\bmod2$ and $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Put $s=\\sqrt{1-\\sigma^2}$. Direct multiplication gives $U_\\sigma^*U_\\sigma=U_\\sigma^2=\\begin{pmatrix}\\sigma^2+s^2&\\sigma s-\\sigma s\\\\\\sigma s-\\sigma s&s^2+\\sigma^2\\end{pmatrix}=I$, so $U_\\sigma$ is unitary. The projection onto $|0\\rangle$ gives $A|0\\rangle=\\Pi_LU_\\sigma|0\\rangle=\\sigma|0\\rangle$, hence the PUE block is $[\\sigma]$. Its complementary matrix entry is $s$, so the displayed basis realizes the $W_R(\\sigma)$ singular plane, including the degenerate endpoint values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The zero phases make both endpoint phase matrices the identity, so the degree-one sequence is $U_\\sigma$ itself. Its compressed block is $\\Pi_LU_\\sigma\\Pi_R|_{H_R}=[\\sigma]$. The scalar polynomial is the upper-left entry of $W_R(x)$, namely $P(x)=x$; therefore for $\\sigma>0$ the odd transform is $P^{\\mathrm{SV}}_{\\mathrm{odd}}(A)=[P(\\sigma)]=[\\sigma]$, and for $\\sigma=0$ the positive singular sum is empty and both blocks are zero. The same formulas give $[1]$ at $\\sigma=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 covers sigma zero and the empty positive sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes both blocks at sigma zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the block at sigma one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the matrix identity for every sigma in the interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies both endpoints without division."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example gives explicit matrices and vectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The explicit rank-one PUE calculation: The statement gives no biconditional or forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The explicit rank-one PUE calculation: The statement gives no biconditional or reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

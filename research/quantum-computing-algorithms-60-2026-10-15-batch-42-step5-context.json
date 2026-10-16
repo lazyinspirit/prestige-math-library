@@ -1,0 +1,361 @@
+{
+  "group": "f",
+  "batches": [
+    "42"
+  ],
+  "pages_read": [
+    "quantum-walk-search-and-element-distinctness",
+    "quantum-walk-search-and-element-distinctness-examples"
+  ],
+  "items_read": [
+    "def-qa-18-marked-set-and-stationary-mass",
+    "def-qa-18-classical-hitting-time",
+    "lem-qa-18-absorbing-walk-discriminant-decomposition",
+    "lem-qa-18-symmetric-compressed-walk-bound",
+    "thm-qa-18-classical-spectral-hitting-bound",
+    "def-qa-18-random-access-gate-model",
+    "alg-qa-18-reversible-walk-finding",
+    "def-qa-18-element-distinctness-johnson-walk",
+    "def-qa-18-canonical-skip-list-for-element-distinctness",
+    "lem-qa-18-johnson-walk-spectrum",
+    "thm-qa-18-reversible-search-cost",
+    "alg-qa-18-szegedy-phase-detection",
+    "lem-qa-18-johnson-stored-data-query-access",
+    "thm-qa-18-element-distinctness-query-cost",
+    "thm-qa-18-detection-correctness-cost",
+    "thm-qa-18-element-distinctness-qr-access-gate-cost",
+    "cex-qa-18-query-cost-is-not-gate-cost",
+    "ex-qa-18-johnson-walk-parameters",
+    "ex-qa-18-element-distinctness-unique-collision"
+  ],
+  "conventions": [
+    {
+      "convention": "Detection returns a decision bit; finding returns a verified marked label. Nonempty instances have stationary marked mass at least the supplied threshold.",
+      "fixed_by": "def-qa-18-marked-set-and-stationary-mass",
+      "matters_for": [
+        "alg-qa-18-reversible-walk-finding",
+        "alg-qa-18-szegedy-phase-detection",
+        "thm-qa-18-detection-correctness-cost",
+        "thm-qa-18-reversible-search-cost"
+      ]
+    },
+    {
+      "convention": "Hitting starts at time zero; survival at integer t is μ_U P_UU^t 1_U, and expectation is the sum of survival probabilities over t ≥ 0.",
+      "fixed_by": "def-qa-18-classical-hitting-time",
+      "matters_for": [
+        "thm-qa-18-classical-spectral-hitting-bound"
+      ]
+    },
+    {
+      "convention": "The Johnson walk is one-half lazy, with N ≥ 4 and 2 ≤ r ≤ floor(N/2); values have an injective bit encoding.",
+      "fixed_by": "def-qa-18-element-distinctness-johnson-walk",
+      "matters_for": [
+        "lem-qa-18-johnson-walk-spectrum",
+        "lem-qa-18-johnson-stored-data-query-access",
+        "thm-qa-18-element-distinctness-query-cost",
+        "ex-qa-18-johnson-walk-parameters",
+        "ex-qa-18-element-distinctness-unique-collision"
+      ]
+    },
+    {
+      "convention": "A QRAM call swaps a target bit with the addressed memory bit and costs one model-defined unit; memory construction and ordinary gates are separate costs.",
+      "fixed_by": "def-qa-18-random-access-gate-model",
+      "matters_for": [
+        "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "cex-qa-18-query-cost-is-not-gate-cost"
+      ]
+    },
+    {
+      "convention": "Finding uses the stationary edge state, separately supplied controlled forward/inverse walk access, and an all-zero QPE branch applying R_A = 2TT* − I. Failed marked tests use the specified Lüders instrument and retain every existing auxiliary register.",
+      "fixed_by": "alg-qa-18-reversible-walk-finding",
+      "matters_for": [
+        "thm-qa-18-reversible-search-cost",
+        "thm-qa-18-element-distinctness-query-cost",
+        "thm-qa-18-element-distinctness-qr-access-gate-cost"
+      ]
+    },
+    {
+      "convention": "Detection uses the one-reflection walk U′, certified finite dyadic brackets for real parameters, and a strict phase-distance cutoff; equality is rejected.",
+      "fixed_by": "alg-qa-18-szegedy-phase-detection",
+      "matters_for": [
+        "thm-qa-18-detection-correctness-cost"
+      ]
+    },
+    {
+      "convention": "Canonical storage is relative to the fixed field representation and seed; level H is retained, and every search is capped at D entries per level.",
+      "fixed_by": "def-qa-18-canonical-skip-list-for-element-distinctness",
+      "matters_for": [
+        "thm-qa-18-element-distinctness-qr-access-gate-cost"
+      ]
+    },
+    {
+      "convention": "The QRAM gate bound assumes compatible complete row access with charged G_row and supplied subset preparation with charged G_subset; it does not establish polylogarithmic implementations of those interfaces.",
+      "fixed_by": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "matters_for": [
+        "thm-qa-18-element-distinctness-qr-access-gate-cost"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-18-reversible-search-cost",
+      "statement": "For a finite ergodic reversible chain with supplied positive dyadic lower absolute-gap and marked-mass bounds, one low-mass outer trial has one-sided error, constant finding success, and cost S_0 + O(ε_0^(-1/2)(U_0/√δ_0 + C)) in the declared query/update/check coordinates; the capped wrapper adds a factor O(1 + ln(1/ρ)).",
+      "used_by": [
+        "thm-qa-18-element-distinctness-query-cost",
+        "thm-qa-18-element-distinctness-qr-access-gate-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-18-johnson-stored-data-query-access",
+      "statement": "Encoded vertex preparation costs r value queries; row preparation and its inverse, including controlled versions, cost at most two each; controlled row reflection costs at most four; controlled W and its inverse cost at most eight; stationary edge setup costs at most r+2; marked checking uses zero value queries.",
+      "used_by": [
+        "thm-qa-18-element-distinctness-query-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-18-johnson-walk-spectrum",
+      "statement": "For N ≥ 4 and 2 ≤ r ≤ floor(N/2), the lazy Johnson eigenvalues are λ_j = 1 − j(N+1−j)/(2r(N−r)), with multiplicity binom(N,j) − binom(N,j−1), for 0 ≤ j ≤ r. Its absolute gap is N/(2r(N−r)).",
+      "used_by": [
+        "thm-qa-18-element-distinctness-query-cost",
+        "ex-qa-18-johnson-walk-parameters"
+      ]
+    },
+    {
+      "id": "lem-qa-18-symmetric-compressed-walk-bound",
+      "statement": "For a symmetric lazy chain on n ≥ 2 states with second eigenvalue at most 1−δ, 0 < δ ≤ 1, the compression outside a marked set of uniform mass ε satisfies ||P_U|| ≤ 1−δε; the empty compression has norm zero.",
+      "used_by": [
+        "thm-qa-18-classical-spectral-hitting-bound",
+        "alg-qa-18-szegedy-phase-detection",
+        "thm-qa-18-detection-correctness-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-18-absorbing-walk-discriminant-decomposition",
+      "statement": "For a finite symmetric row-stochastic P, replacing marked rows by absorbing rows gives the general row-stochastic discriminant D(P′) = P_UU ⊕ I_M; P′ need not be symmetric or reversible.",
+      "used_by": [
+        "alg-qa-18-szegedy-phase-detection",
+        "thm-qa-18-detection-correctness-cost"
+      ]
+    },
+    {
+      "id": "thm-qa-18-element-distinctness-query-cost",
+      "statement": "On an input with a collision and 2 ≤ r ≤ floor(N/2), reversible Johnson-walk finding uses r + O(N/√r) value queries. The specified clamped choice r = Θ(N^(2/3)) gives O(N^(2/3)) queries and permits output of a colliding pair from stored values.",
+      "used_by": [
+        "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "ex-qa-18-johnson-walk-parameters",
+        "ex-qa-18-element-distinctness-unique-collision"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+      "used_for": "Existence of the fixed polynomial-basis field representation used by canonical hashing.",
+      "opened": true
+    },
+    {
+      "id": "cor-sine-and-cosine-are-one-lipschitz",
+      "used_for": "Phase-gap lower bounds and amplification-angle estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Reflection errors, conditional-state comparisons, and the capped-operation hybrid.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Amplification-plane calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Adjoint relation between Johnson incidence maps.",
+      "opened": true
+    },
+    {
+      "id": "def-boolean-circuit-size-depth-fanin-and-basis",
+      "used_for": "Optional explicit Boolean value-circuit resource parameters.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "Linear-first coordinate inner products in the Johnson spectral proof.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Validity of the explicitly chosen Lüders instruments.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Compression norm and its zero-domain convention.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-complement",
+      "used_for": "Johnson harmonic subspaces and incidence-map decompositions.",
+      "opened": true
+    },
+    {
+      "id": "def-principal-inverse-sine-and-cosine",
+      "used_for": "Principal spectral phases and amplification angles.",
+      "opened": true
+    },
+    {
+      "id": "def-promise-problem",
+      "used_for": "Detection promise semantics.",
+      "opened": true
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "used_for": "Self-adjoint compression and spectral arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Trace of pure projected branches in the retained-state instrument proof.",
+      "opened": true
+    },
+    {
+      "id": "def-transition-matrix-and-n-step-transition-probabilities",
+      "used_for": "Row-transition and time-zero conventions for classical survival.",
+      "opened": true
+    },
+    {
+      "id": "lem-reverse-triangle-inequality-in-a-normed-space",
+      "used_for": "Projected-amplitude errors, normalization estimates, and final success-probability comparison.",
+      "opened": true
+    },
+    {
+      "id": "prop-adjoint-algebra",
+      "used_for": "Self-adjointness of the Johnson adjacency operator.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Stochastic contraction, compression estimate, and survival bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Finite orthonormal spectral decompositions in compression and hitting arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-double-angle-and-power-reduction-identities",
+      "used_for": "Phase-gap inequalities and amplification matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-of-finite-fields",
+      "used_for": "Finite fields for the polynomial hash family.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Dimension calculations for Johnson incidence maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-gram-schmidt-orthonormalisation",
+      "used_for": "Finite unitary completion in the pure query-model row-access construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+      "used_for": "Explicit upper bounds π < 4 and π < 7/2 used by the finding constants.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Identifying projectors as their own nonnegative square roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Trigonometric endpoints in detection and finding.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Dimensions and surjectivity of Johnson down maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Principal-angle comparisons and exact detection thresholds.",
+      "opened": true
+    },
+    {
+      "id": "thm-triple-angle-identities",
+      "used_for": "Recursive amplification and its error recurrence.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "concern": "Proof 3.3 bounds monochromatic consecutive windows only at levels ℓ < H, then concludes that “every search during one Johnson replacement then uses at most D=2s+1 entries per level.” This does not establish the bound at the highest level H: its initial traversal can visit the entire level-H list, and excluding long consecutive runs of promotion bits in level H−1 does not bound the total number of promoted nodes. Step 4.1 defines bad seeds solely by bucket occupancy and those run events, so the assertion that capped operations agree with ideal operations on every good configuration, subsequently used in 5.1–6.1, lacks this highest-level case. A separate highest-level occupancy argument is needed. I checked the cited Ambainis source, §6.2, PDF pp. 28–29 (https://arxiv.org/pdf/quant-ph/0311001); its consecutive-run discussion does not resolve this total-occupancy issue. This finding concerns the support supplied by the current proof, not a counterexample to the final asymptotic theorem.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "Kernel, circular tail, exact-zero phase, coherent eigenspace action, and Q−1 repeated controlled-step costs are used with the stated domains. Coherent reversal separately supplies inverse access."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "discrete-quantum-walks-and-szegedy-theory",
+      "faithful": true,
+      "note": "Preserves row-stochastic orientation, general discriminant construction, absolute-gap convention, reflection sign, distinction between U and W=U², and the complementary zero-phase subspace."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Algorithms explicitly choose Lüders branch maps, retain existing registers, and assign conditional states only to positive-probability branches."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered computational bases, product registers, and swaps respect the supplied register conventions; the search state spaces are nonempty."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Gate occurrences, written-layer depth, width, queries, and inverse/control access remain separate. Deferred measurement is used denotationally in the hybrid argument without claiming a free implementation."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Finite query constructions do not assert efficient full-list generation or a fixed-alphabet implementation; uniform generation, description, precision, and synthesis costs are explicitly separate."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled and inverse calls are supplied separately; reflection signs are retained inside controlled branches."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Stored-data access uses compute-copy-uncompute and explicit XOR-oracle cancellation. Compiler bounds preserve constant-node, repeated-port, and full-DAG layer conventions."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Dirac outer products and computational coordinates agree with the root pairing linear in its first argument."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+# Batch 23 — Step 1 authoring notes
+
+Run `quantum-computing-algorithms-60-2026-10-15`; role `beta`; assigned pair `circuit-optimization-resource-tradeoffs-and-lower-bounds` and its Examples companion. Assigned carriers and pages remain drafts. These records describe authoring readiness and do not constitute independent proof approval or publication approval.
+
+## Inventory, plan, and scheduling
+
+The A page is order 2210 and has 25 items; the B page is order 2211 and has one example. The A inventory began with 23 assigned items. Two local prerequisites were added before use: `lem-qc-multiplexed-rz-gray-code` and `lem-qc-unoptimized-qsd-recursive-decomposition-and-count`. The A page remains below the 100-item cap. `plan-spec.json` has matching page IDs, category, title, companion, order, and page requirements; its `items: []` is a pre-authoring inventory, not a conflict. The track design at `plan-quantum-computing-track.md` L97 limits this pair to circuit optimization, resource tradeoffs, and lower bounds under explicit models. The older prose hold is superseded by the binding owner-authoring direction, which permits authoring against the declared interfaces. No shared plan was edited.
+
+The task assigns `dependency_level: 11` and prerequisite batches 9–14. Recomputed item levels are acyclic and have maximum 14:
+
+- L0: `def-qc-unbounded-error-time-space-counting-model`, `lem-qc-logspace-uniform-cook-formula-encoding`, `lem-qc-logspace-uniform-iterated-multiplication-tc0`.
+- L1: `def-qc-bqtisp-model`, `lem-qc-logspace-predicates-in-linear-counting-hierarchy`, `lem-qc-unbounded-error-tie-normalization`, `lem-qc-uniform-probabilistic-clocked-simulation`, `thm-qc-uniform-threshold-iterated-integer-arithmetic`.
+- L2: `lem-qc-counting-time-space-to-linear-hierarchy`, `lem-qc-tight-majority-formula-completeness`, `thm-qc-probabilistic-polynomial-time-hierarchy`.
+- L3: `thm-qc-unbounded-error-counting-time-space-alternative`.
+- L9: `lem-qc-multiplexed-rz-gray-code`.
+- L10: `alg-qc-basic-clifford-t-rewrite`, `lem-qc-circuit-resource-composition`, `lem-qc-unoptimized-qsd-recursive-decomposition-and-count`.
+- L11: `def-qc-circuit-optimization-task`, `lem-qc-ninefold-nearest-neighbor-multiplexor-routing`, `thm-qc-basic-rewrite-correct-and-terminating`, `thm-qc-bqtisp-to-ptisp-simulation`.
+- L12: `thm-qc-clean-ancilla-multicontrolled-tradeoff`, `thm-qc-counting-hierarchy-time-space-lower-bound`, `thm-qc-nearest-neighbor-cnot-overhead`, `thm-qc-qsd-cnot-upper-bound`.
+- L13: B example `ex-qc-two-qubit-qsd-cnot-count`.
+- L14: `thm-qc-generic-circuit-count-lower-bound`.
+
+Current direct in-run item edges add batches 2, 7, and 8 to the dispatch prerequisites. The batch-23 cross-batch input records 52 edges: 46 item edges and six page edges. Two item edges are open, matching the QSD optimized-count and BQTISP compiler escalations; the other current interfaces are recorded as verified-for-authoring, not accepted.
+
+The dispatch scheduling input is `5853a948dc662edf4f617f17513f4733c3faab723214e776cad31c223b0b0a60`. The coverage file retains `input_sha256: 9b2c249d4992d9068191bb0f9b1490b0713c8529fcbaa1869bd16d178d892f85`. The shared `batch-dependency-levels.json` records `3097ae8fe82fb1d0d4b327dafae1991b306dfce9741a5aa065f4536103343bc9`; the latest read-only recomputation gives `a21e1c312f682c6a7952e280e4befd4bd24d707ec111b127b3b3a4dc0da0f92e` and batch 23 remains at level 11 with prerequisites 2, 7, 8, 9–14. `batch-dependency-levels.mjs check` reports stale shared metadata. The shared schedule file was left owner-owned and unchanged. The dispatch input SHA is preserved in the evidence rows of `batch-23.cross-batch-dependencies.json`.
+
+## Mathematical scope and supplier audit
+
+The local unoptimized QSD helper proves exact no-ancilla synthesis by CSD, two-block demultiplexing, the local multiplexed-rotation construction, and the exact three-CNOT two-qubit base. It proves the recurrence
+`c_n <= 4 c_(n-1) + 3*2^(n-1)`, `c_2 <= 3`, and the resulting bound `c_n <= (9/16)4^n - (3/2)2^n`. It makes no optimized 23/48, compilation-time, or finite-precision claim. The nearest-neighbor result counts the stated adjacent routing sequence by a factor of nine under its contiguous-interval and endpoint hypotheses; it asserts no depth bound. Circuit-resource definitions distinguish size, written depth, minimum-layer depth, width, and separately charged costs. The optimization-task definition now fixes the denotation, whole-circuit phase relation, exact clean/dirty ancilla policy, and the selected resource coordinate; T-count is only applicable when the alphabet includes the defined T and T† gates.
+
+The current QC09 syntax, denotation, and elementary-resource definitions were inspected. The current QC10 clean/dirty contracts and QC11 borrowed-bit construction were inspected; the borrowed bit is returned exactly on every basis input, hence on every superposition by linearity. The current QC11 terminal-diagonal migration proof is present and supports its stated separator conditions. The current QC11 optimized QSD theorem remains insufficient for the consumer’s 23/48 claim: its Step 3.1 does not fully establish the recursive central controlled-Z absorption identity that saves one CNOT per nonterminal node. Proposed interface: `lem-qc-recursive-qsd-central-cz-absorption`. No Batch11 carrier was edited. The current QC11 one-qubit Euler Step 6.1 cites steps 3.1–5.1 in order; no earlier handoff concern about that citation applies to the current body.
+
+The BQTISP carrier now proves the measurement-history operator-error bound using fixed two-qubit record slots, then expands the F/H path weights and constructs synchronized #P counts. Its denominator scaling uses `H_* - h_mu` binary choices and two five-way choices per missing F factor; the path counts filter accepting terminal configurations. The inclusion remains conditional and escalated because current Solovay–Kitaev arithmetic is exact-real and does not establish density/base-net for determinant-normalized VMW F/H representatives or the finite-bit projective compiler costs. The proof accounts for scalar phases only within orthogonal classical-history blocks. Proposed interfaces: `lem-qc-vmw-fh-density-and-base-net` and `lem-qc-vmw-finite-precision-sk-compiler`. The counting-hierarchy consequence remains escalated because the VMW random-access simulation does not supply the sequential-profile transfer `lem-qc-vmw-random-access-to-sequential-prtisp`.
+
+Other escalations retain their exact unresolved IDs and required interfaces in the proof contracts: near-linear Pippenger–Fischer simulation for the Cook formula encoding; residue-to-binary and discrete-log subcircuits for iterated multiplication; uniform logspace-predicate and variable-description simulators; uniform iterated addition; LCH1/LCH2 majority-formula reductions; and the strict sequential time-hierarchy route. The optimized QSD example remains escalated with its theorem. No missing supplier excerpt or completion was invented.
+
+## Sources and retrieval history
+
+The A-page coverage record contains ten full-text, fetch-verified sources with locators, inspected scopes, supported items, harvested-result dispositions, and hashes: Allender et al.; Hesse–Allender–Barrington; Van Melkebeek–Watson; de Wolf; Childs; Shende–Bullock–Markov; Barenco et al.; Cook; Pippenger–Fischer; and Dawson–Nielsen. The full VMW paper and the full synthesis/complexity sources were inspected; their retrieval supports the local proof routes but does not imply acceptance. The final `source-fetch-check --stamp` resolved 10/10 sources, newly stamped zero, and recorded no drops.
+
+An optional Arora–Barak book URL, `https://theory.cs.princeton.edu/complexity/book.pdf`, returned HTTP 403 on two attempts. It is not cited or relied on. The relevant proof routes instead use the successfully fetched Allender, Pippenger–Fischer, de Wolf, Childs, Shende, and Barenco sources listed in coverage. The retained evidence did not preserve exact timestamps or search strings for those two optional attempts; none is invented here, and no source is labeled dropped.
+
+## Step 1 decisions and checks
+
+There are 13 `ready` and 13 `escalated` item decisions. The escalations remain open for the unresolved suppliers above; the existing escalation records were not overwritten. Eight escalation rows have no SHA-256 because their original CLI record attempts failed during dependency-hash closure; they remain escalated. Two changed ready definitions, `def-qc-circuit-optimization-task` and `thm-qc-clean-ancilla-multicontrolled-tradeoff`, were refreshed with `step1-decisions.mjs record` without `--owner`, using their complete current dependency lists. The BQTISP carrier was updated but its existing escalation was preserved.
+
+- `manifest-deps`: 26 items, zero missing and zero errors.
+- `content-policy`: 26 scoped items, zero errors and zero warnings.
+- Strict `proof-contract`: 26/26 items, zero errors and zero warnings.
+- `proof-layout` on all 26 assigned item carriers: 71 steps, zero defects.
+- `rendercheck` on the 26 item carriers and two page carriers: 28 files, no delimiter, KaTeX, wikilink-in-math, or frontmatter defects.
+- `source-fetch-check --stamp`: 10/10 source stamps verified, zero newly stamped, zero documented drops.
+- Full-run `item-dependency-levels check`: no batch-23 mismatch or cycle; the latest observed run had 10 unrelated errors—four empty inventories on the A/B pages `block-encoding-linear-systems-and-variable-time-amplification` and `adiabatic-computation-and-circuit-equivalence`, plus stale levels on six QA34 items (`lem-qa-34-exponential-gram-concentration`, `lem-qa-34-two-sketch-threshold-band-bound`, `thm-qa-34-modfkv-low-rank-approximation`, `thm-qa-34-tang-recommendation-sampler`, `rem-qa-34-dequantization-scope`, `cex-qa-34-tang-without-sampling-access`). The run-wide manifests were changing during this audit; this is the latest captured snapshot.
+- `batch-dependency-levels.mjs check`: stale shared input hash, as recorded above; the shared file was not changed.
+
+The read-only `step1-decisions.mjs check` could not load the run-wide item snapshot because unrelated `items/lem-hh-commutative-or-cocommutative-antipode-is-involutive.md` has malformed YAML at line 22 (an unclosed single-quoted locator). That carrier is outside this assignment and was not edited. The two changed ready decision records themselves were successfully refreshed through the CLI without `--owner`; the broader check remains blocked at the global snapshot load.
+
+The live `.autopilot/quantum-computing-algorithms-60-2026-10-15` status was recomputed from disk: run stage `1-scaffold`, 36/60 covered, nothing in flight. Owner-held blockers remain `Invalid pair undefined`, construction item `def-qc-effective-unitary-matrix-input` in batch 12, a malformed QC20 handoff YAML title, and the Step 1 owner repair/recertification blocker in `research/quantum-computing-algorithms-60-2026-10-15-step1-blockers.json`. `git log -8` was checked; the current HEAD `0d8633c57d` is unrelated to this batch. No engine state, shared schedule, verdict, or published content was changed, and no tests were run.

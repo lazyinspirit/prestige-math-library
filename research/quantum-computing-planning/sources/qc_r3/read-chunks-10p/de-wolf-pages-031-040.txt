@@ -1,0 +1,675 @@
+===== PDF PAGE 31 =====
+
+Applying the second batch of Hadamards gives (again by Equation (2.1)) the final superposition
+
+1
+2n
+�
+
+i∈{0,1}n
+(−1)xi
+�
+
+j∈{0,1}n
+(−1)i·j|j⟩,
+
+where i · j = �n
+k=1 ikjk as before. Since i · 0n = 0 for all i ∈{0, 1}n, we see that the amplitude of
+the |0n⟩-state in the final superposition is
+
+1
+2n
+�
+
+i∈{0,1}n
+(−1)xi =
+
+
+
+
+
+
+1
+if xi = 0 for all i,
+−1
+if xi = 1 for all i,
+0
+if x is balanced.
+
+Hence the final observation will yield |0n⟩if x is constant and will yield some other state if x
+is balanced. Accordingly, the Deutsch-Jozsa problem can be solved with certainty using only 1
+quantum query and O(n) other operations (the original solution of Deutsch and Jozsa used 2
+queries, the 1-query solution is from [96]).
+In contrast, it is easy to see that any classical deterministic algorithm needs at least N/2 + 1
+queries: if it has made only N/2 queries and seen only 0s, the correct output is still undetermined.
+However, a classical algorithm can solve this problem efficiently if we allow a small error probability:
+just query x at two random positions, output “constant” if those bits are the same and “balanced”
+if they are different. This algorithm outputs the correct answer with probability 1 if x is constant
+and outputs the correct answer with probability 1/2 if x is balanced. Thus the quantum-classical
+separation of this problem only holds if we consider algorithms without error probability.
+
+2.4.2
+Bernstein-Vazirani
+
+Bernstein-Vazirani problem [55]:
+For N = 2n, we are given x ∈{0, 1}N with the property that there is some unknown a ∈{0, 1}n
+
+such that xi = (i · a) mod 2. The goal is to find a.
+
+The Bernstein-Vazirani algorithm is exactly the same as the Deutsch-Jozsa algorithm, but now
+the final observation miraculously yields a. Since (−1)xi = (−1)(i·a) mod 2 = (−1)i·a, we can write
+the state obtained after the query as:
+
+1
+√
+
+2n
+�
+
+i∈{0,1}n
+(−1)xi|i⟩=
+1
+√
+
+2n
+�
+
+i∈{0,1}n
+(−1)i·a|i⟩.
+
+Since Hadamard is its own inverse, from Equation (2.1) we can see that applying a Hadamard to
+each qubit of the above state will turn it into the classical state |a⟩. This solves the Bernstein-
+Vazirani problem with 1 query and O(n) other operations. In contrast, any classical algorithm
+(even a randomized one with small error probability) needs to ask n queries for information-theoretic
+reasons: the final answer consists of n bits and one classical query gives at most 1 bit of information.
+Bernstein and Vazirani also defined a recursive version of this problem, which can be solved
+exactly by a quantum algorithm in poly(n) steps, but for which every classical randomized algorithm
+needs nΩ(log n) steps (queries). However, we’ll see a much better classical-quantum separation in
+the next chapter.
+
+19
+
+
+===== PDF PAGE 32 =====
+
+Exercises
+
+1. Is the controlled-NOT operation C Hermitian? Determine C−1.
+
+2. Construct a CNOT from two Hadamard gates and one controlled-Z (the controlled-Z gate
+maps |11⟩�→−|11⟩and acts like the identity on the other basis states).
+
+3. A SWAP-gate interchanges two qubits: it maps basis state |a, b⟩to |b, a⟩. Implement a SWAP-
+gate using a few CNOTs (when using a CNOT, you’re allowed to use either of the 2 bits as
+the control, but be explicit about this).
+
+4. Show that every 1-qubit unitary with real entries can be written as a rotation matrix, possibly
+preceded and followed by Z-gates. More precisely, show that for every 2 × 2 real unitary U,
+there exist signs s1, s2, s3 ∈{1, −1} and angle θ ∈[0, π/2] such that
+
+U = s1
+
+�1
+0
+0
+s2
+
+��cos(θ)
+−sin(θ)
+sin(θ)
+cos(θ)
+
+��1
+0
+0
+s3
+
+�
+.
+
+5. Show that for every 1-qubit unitary U there exist angles α, β, γ ∈[0, 2π) and θ ∈[0, π/2] such
+that
+
+U = eiα
+�1
+0
+0
+eiβ
+
+��cos(θ)
+−sin(θ)
+sin(θ)
+cos(θ)
+
+��1
+0
+0
+eiγ
+
+�
+.
+
+6. Let U be a 1-qubit unitary of determinant 1 that we would like to implement in a controlled
+way, i.e., we want to implement a map |c⟩|b⟩�→|c⟩Uc|b⟩for all c, b ∈{0, 1} (here U0 = I and
+U1 = U). One can show there exist 1-qubit unitaries A, B, and C, such that ABC = I and
+AXBXC = U (X is the NOT-gate); you may assume this without proof. Give a circuit that
+acts on two qubits and implements a controlled-U gate, using CNOTs and (uncontrolled) A,
+B, and C gates.
+
+7. (H) Let C be a given quantum circuit consisting of T many gates, which may be CNOTs
+and single-qubit gates.
+Show that we can implement C in a controlled way using O(T)
+Toffoli gates, CNOTs and arbitrary single-qubit gates, and no auxiliary qubits other than the
+controlling qubit.
+
+8. (H) It is possible to avoid doing any intermediate measurements in a quantum circuit, using
+one auxiliary qubit for each 1-qubit measurement that needs to be delayed until the end of
+the computation. Show how.
+
+9.
+(a) Give a circuit that maps |0n, b⟩�→|0n, 1 −b⟩for b ∈{0, 1}, and that maps |i, b⟩�→
+|i, b⟩whenever i ∈{0, 1}n\{0n}. You are allowed to use every type of elementary gate
+mentioned in the lecture notes (incl. Toffoli gates), as well as auxiliary qubits that are
+initially |0⟩and that should be put back to |0⟩at the end of the computation.
+
+(b) Suppose we can make queries of the type |i, b⟩�→|i, b ⊕xi⟩to input x ∈{0, 1}N, with
+N = 2n. Let x′ be the input x with its first bit flipped (e.g., if x = 0110 then x′ = 1110).
+Give a circuit that implements a query to x′. Your circuit may use one query to x.
+
+(c) Give a circuit that implements a query to an input x′′ that is obtained from x (analo-
+gously to (b)) by setting its first bit to 0. Your circuit may use one query to x.
+
+20
+
+
+===== PDF PAGE 33 =====
+
+10. In Section 2.4 we showed that a standard query, which maps |i, b⟩�→|i, b ⊕xi⟩(where
+i ∈{0, . . . , N −1} and b ∈{0, 1}), can be used to implement a phase-query to x, i.e., one of
+the type |i⟩�→(−1)xi|i⟩(this is an uncontrolled phase-query).
+
+(a) Show that a standard query can be implemented using one controlled phase-query to x
+(which maps |c, i⟩�→(−1)cxi|c, i⟩, so the phase is added only if the control bit is c = 1),
+and possibly some auxiliary qubits and other gates.
+
+(b) Can you also implement a standard query using one or more uncontrolled phase-queries
+to x, and possibly some auxiliary qubits and other gates? If yes, show how. If no, prove
+why not.
+
+11. Suppose we have a 2-bit input x = x0x1 and a phase-query that maps
+
+Ox,± : |b⟩�→(−1)xb|b⟩for b ∈{0, 1}.
+
+(a) Suppose we run the 1-qubit circuit HOx,±H on initial state |0⟩and then measure (in
+the computational basis). What is the probability distribution on the output bit, as a
+function of x?
+
+(b) Now suppose the query leaves some workspace in a second qubit, which is initially |0⟩:
+
+O′
+x,± : |b, 0⟩�→(−1)xb|b, b⟩for b ∈{0, 1}.
+
+Suppose we just ignore the workspace and run the algorithm of (a) on the first qubit
+with O′
+x,± instead of Ox,± (and H ⊗I instead of H, and initial state |00⟩). What is now
+the probability distribution on the output bit (i.e., if we measure the first of the two
+bits)?
+
+Comment: This exercise illustrates why it’s important to “clean up” (i.e., set back to |0⟩) workspace
+
+qubits of some subroutine before running it on a superposition of inputs: the unintended entanglement
+
+between the address and workspace registers can thwart the intended interference effects.
+
+12. Give a randomized classical algorithm (i.e., one that can flip coins during its operation) that
+makes only two queries to x, and decides the Deutsch-Jozsa problem with success probability
+at least 2/3 on every possible input. A high-level description is enough, no need to write out
+the classical circuit.
+
+13. Let N = 2n. Suppose our N-bit input x satisfies the following promise:
+either (1) the first N/2 bits of x are all 0 and the second N/2 bits are all 1; or (2) the number
+of 1s in the first half of x plus the number of 0s in the second half, equals N/2. Modify the
+Deutsch-Jozsa algorithm to efficiently distinguish these two cases (1) and (2).
+
+14. (H) Let N = 2n. A parity query to input x ∈{0, 1}N corresponds to the (N + 1)-qubit
+unitary map Qx : |y, b⟩�→|y, b ⊕(x · y)⟩, where x · y = �N−1
+i=0 xiyi mod 2. For a fixed function
+f : {0, 1}N →{0, 1}, give a quantum algorithm that computes f(x) using only one such query
+(i.e., one application of Qx), and as many elementary gates as you want. You do not need to
+give the circuit in full detail, an informal description of the algorithm is good enough.
+
+21
+
+
+===== PDF PAGE 34 =====
+
+22
+
+
+===== PDF PAGE 35 =====
+
+Chapter 3
+
+Simon’s Algorithm
+
+The Deutsch-Jozsa problem showed an exponential quantum improvement over the best determin-
+istic classical algorithms; the Bernstein-Vazirani problem showed a polynomial improvement over
+the best randomized classical algorithms that have error probability ≤1/3. In this chapter we will
+combine these two features: we will see a computational problem due to Simon [243] where quantum
+computers are provably exponentially more efficient (in terms of number of queries) than bounded-
+error randomized algorithms. Simon’s problem may look rather contrived at first sight, but his
+quantum algorithm to solve it was the main inspiration for Shor’s important quantum algorithm
+for the very natural problem of integer factorization, which we will see in Chapter 5. More recently,
+Simon’s algorithm itself was also used to break some classical cryptographic systems [154, 230].
+
+3.1
+The problem
+
+Let N = 2n, and identify the set {0, . . . , N −1} with {0, 1}n. Let j ⊕s be the n-bit string obtained
+by bitwise adding the n-bit strings j and s mod 2, so for example 00110 ⊕10101 = 10011.
+
+Simon’s problem [243]:
+For N = 2n, we are given x = (x0, . . . , xN−1), with xi ∈{0, 1}n, with the property that there is
+some unknown nonzero s ∈{0, 1}n such that xi = xj iff (i = j or i = j ⊕s). The goal is to find s.
+
+Note that x, viewed as a function from {0, . . . , N −1} to {0, . . . , N −1}, is a 2-to-1 function,
+where the 2-to-1-ness is determined by the unknown mask s. The queries to the input here are
+slightly different from before: the input x = (x0, . . . , xN−1) now has variables xi that themselves
+are n-bit strings, and one query gives such a string completely (|i, 0n⟩�→|i, xi⟩). However, we can
+also view this problem as having n2n binary variables that we can query individually. Since we can
+simulate one xi-query using only n binary queries (just query all n bits of xi), this alternative view
+will not affect the number of queries very much.
+
+3.2
+The quantum algorithm
+
+The main “subroutine” of Simon’s algorithm starts out very similar to Deutsch-Jozsa: start in a
+state of 2n zero qubits |0n⟩|0n⟩and apply Hadamard transforms to the first n qubits to put them
+
+23
+
+
+===== PDF PAGE 36 =====
+
+in a uniform superposition, giving
+1
+√
+
+2n
+�
+
+i∈{0,1}n
+|i⟩|0n⟩.
+
+At this point, the second n-qubit register still holds only zeroes. A query turns this into
+
+1
+√
+
+2n
+�
+
+i∈{0,1}n
+|i⟩|xi⟩.
+
+Now the algorithm measures the second n-qubit register in the computational basis (see Exercise 1);
+this measurement is actually not necessary, but it facilitates analysis. The measurement outcome
+will be some value xi and the first register will collapse to the superposition of the two indices
+having that xi-value:
+1
+√
+
+2(|i⟩+ |i ⊕s⟩)|xi⟩.
+
+We will now ignore the second register and apply Hadamard transforms to the first n qubits. Using
+Equation (2.1) and the fact that (i ⊕s) · j = (i · j) ⊕(s · j), we can write the resulting state as
+
+1
+√
+
+2n+1
+
+
+
+
+�
+
+j∈{0,1}n
+(−1)i·j|j⟩+
+�
+
+j∈{0,1}n
+(−1)(i⊕s)·j|j⟩
+
+
+
+=
+
+1
+√
+
+2n+1
+
+
+
+
+�
+
+j∈{0,1}n
+(−1)i·j �
+1 + (−1)s·j�
+|j⟩
+
+
+
+.
+
+Note that |j⟩has nonzero amplitude iff s · j = 0 mod 2. Measuring the state gives a uniformly
+random element from the set {j | s·j = 0 mod 2}. Accordingly, we get a linear equation that gives
+information about s. We repeat this algorithm until we have obtained n −1 independent linear
+equations involving s. The solutions to these equations will be 0n and the correct s, which we can
+compute efficiently by a classical algorithm (Gaussian elimination modulo 2). This can be done by
+means of a classical circuit of size roughly O(n3).
+Note that if the j’s you have generated at some point span a space of size 2k, for some k < n−1,
+then the probability that your next run of the algorithm produces a j that is linearly independent
+of the earlier ones, is (2n−1 −2k)/2n−1 ≥1/2. Hence an expected number of O(n) runs of the
+algorithm suffices to find n −1 linearly independent j’s. Simon’s algorithm thus finds s using an
+expected number of O(n) xi-queries and polynomially many other operations (Exercise 7.13 will
+show how to make the success probability equal to 1).
+
+3.3
+Classical algorithms for Simon’s problem
+
+3.3.1
+Upper bound
+
+Let us first sketch a classical randomized algorithm that solves Simon’s problem using O(
+√
+
+2n)
+queries. The algorithm is based on the so-called “birthday paradox,” which is the phenomenon that
+in a group of only 23 people, there is already a fairly large probability (slightly higher than 1/2) that
+two people share the same birthday, despite the fact that the number of possible birthdays (365) is
+much larger than the number of people (23). The intuitive explanation is that the number of pairs of
+
+24
+
+
+===== PDF PAGE 37 =====
+
+people is actually quadratic in the number of people, and each pair has a 1/365 probability to have
+the same birthday (assuming dates of birth are distributed uniformly; otherwise that probability is
+even > 1/365). Of course, different pairs may overlap and hence are not independent, but the idea
+still works.
+Our algorithm will make T randomly chosen distinct queries i1, . . . , iT , for some T to be de-
+termined later. If there is a collision among those queries (i.e., xik = xiℓfor some k ̸= ℓ, so ik
+and iℓhappen to have the same “birthday”), then we are done, because then we know ik = iℓ⊕s,
+equivalently s = ik ⊕iℓ. There won’t be any collisions if s = 0n, but how large should T be such
+that we are likely to see a collision in case s ̸= 0n? There are
+�T
+2
+�
+= 1
+
+2T(T −1) pairs in our sequence
+that could be a collision, and since the indices are chosen uniformly at random, the probability for
+a fixed pair to form a collision is 1/(2n −1). Hence by linearity of expectation, the expected number
+of collisions in our sequence will be
+�T
+2
+�
+/2n ≈T 2/2n+1. If we choose T =
+√
+
+2n+1, we expect to have
+roughly 1 collision in our sequence, which is good enough to find s. Of course, an expected value of
+1 collision does not mean that we will have at least one collision with high probability, but a slightly
+more involved calculation shows the latter statement as well.
+
+3.3.2
+Lower bound
+
+Simon [243] proved that any classical randomized algorithm that finds s with high probability needs
+to make Ω(
+√
+
+2n) queries, so the above classical algorithm is essentially optimal. This was the first
+proven exponential separation between quantum algorithms and classical bounded-error algorithms
+(let us stress again that this does not prove an exponential separation in the usual circuit model,
+because we are counting queries rather than ordinary operations here). Simon’s algorithm inspired
+Shor to his factoring algorithm, which we describe in Chapter 5.
+We will prove the classical lower bound for a decision version of Simon’s problem, where we
+now also allow s = 0n as a possibility:
+
+Given: input x = (x0, . . . , xN−1), where N = 2n and xi ∈{0, 1}n
+
+Promise: ∃s ∈{0, 1}n such that: xi = xj iff (i = j or i = j ⊕s)
+Task: decide whether s = 0n
+
+Consider the input distribution µ that is defined as follows. With probability 1/2, x is a uniformly
+random permutation of {0, 1}n; this corresponds to the case s = 0n. With probability 1/2, we pick
+a nonzero string s at random, and for each pair (i, i ⊕s), we pick a unique value for xi = xi⊕s at
+random. If there exists a randomized T-query algorithm that achieves success probability ≥2/3
+under this input distribution µ, then there also is deterministic T-query algorithm that achieves
+success probability ≥2/3 under µ (because the behavior of the randomized algorithm is an average
+over a number of deterministic algorithms). Now consider a deterministic algorithm with error
+≤1/3 under µ, that makes T queries to x. We want to show that T = Ω(
+√
+
+2n).
+First consider the case s = 0n. We can assume the algorithm never queries the same point
+twice. Then the T outcomes of the queries are T distinct n-bit strings, and each sequence of T
+strings is equally likely.
+Now consider the case s ̸= 0n. Suppose the algorithm queries the indices i1, . . . , iT (this sequence
+depends on x) and gets outputs xi1, . . . , xiT . Call a sequence of queries i1, . . . , iT good if it shows
+a collision (i.e., xik = xiℓfor some k ̸= ℓ), and bad otherwise. If the sequence of queries of the
+algorithm is good, then we can find s, since ik ⊕iℓ= s. On the other hand, if the sequence is bad,
+
+25
+
+
+===== PDF PAGE 38 =====
+
+then each sequence of T distinct outcomes is equally likely—just as in the s = 0n case! We will
+now show that the probability of the bad case is very close to 1 for small T.
+If i1, . . . , ik−1 is bad, then we have excluded at most
+�k−1
+2
+�
+possible values of s (namely all values
+ij ⊕ij′ for all distinct j, j′ ∈[k −1]), and all other values of s are equally likely. The probability
+that the next query ik makes the sequence good, is the probability that xik = xij for some j < k,
+equivalently, that the set Sk = {ik ⊕ij | j < k} happens to contain the string s. But Sk has only
+k −1 members, while there are at least 2n −1 −
+�k−1
+2
+�
+equally likely remaining possibilities for s.
+This means that the probability that the sequence is still bad after query ik is made, is very close
+to 1. In formulas:
+
+Pr[i1, . . . , iT is bad]
+=
+
+T
+�
+
+k=2
+Pr[i1, . . . , ik is bad | i1, . . . , ik−1 is bad]
+
+≥
+
+T
+�
+
+k=2
+
+�
+
+1 −
+k −1
+
+2n −1 −
+�k−1
+2
+�
+
+�
+
+≥
+1 −
+
+T
+�
+
+k=2
+
+k −1
+
+2n −1 −
+�k−1
+2
+�.
+
+Here we used the fact that (1 −a)(1 −b) ≥1 −(a + b) if a, b ≥0. Note that �T
+k=2(k −1) =
+T(T −1)/2 ≤T 2/2, and 2n −1 −
+�k−1
+2
+�
+≥2n/2 as long as k <
+√
+
+2n. Hence
+
+Pr[i1, . . . , iT is good] ≤
+
+T
+�
+
+k=2
+
+k −1
+
+2n −1 −
+�k−1
+2
+�≤T 2/2n.
+
+Accordingly, if T ≤c
+√
+
+2n for some small constant c, then with probability nearly 1 (probability
+taken over the input distribution µ) the algorithm’s sequence of queries is bad. If it gets a bad
+sequence, it cannot “see” the difference between the s = 0n case and the s ̸= 0n case, since both
+cases result in a uniformly random sequence of T distinct n-bit strings as answers to the T queries.
+This shows that T has to be Ω(
+√
+
+2n) in order to enable the algorithm to get a good sequence of
+queries with high probability.
+
+Exercises
+
+1. Give the projectors of the 2n-outcome projective measurement that is applied to the whole
+2n-qubit state in Simon’s algorithm right after the query.
+
+2. Analyze the different steps of Simon’s algorithm if s = 0n (so all xi-values are distinct), and
+show that the final output j is uniformly distributed over {0, 1}n.
+
+3. Suppose we run Simon’s algorithm on the following input x (with N = 8 and hence n = 3):
+
+x000 = x111 = 000
+x001 = x110 = 001
+x010 = x101 = 010
+x011 = x100 = 011
+
+26
+
+
+===== PDF PAGE 39 =====
+
+Note that x is 2-to-1 and xi = xi⊕111 for all i ∈{0, 1}3, so s = 111.
+
+(a) Give the starting state of Simon’s algorithm.
+(b) Give the state after the first Hadamard transforms on the first 3 qubits.
+
+(c) Give the state after applying the oracle query.
+(d) Give the state after measuring the second register (suppose the measurement gave |001⟩).
+
+(e) Using H⊗n|i⟩=
+1
+√
+
+2n
+�
+j∈{0,1}n(−1)i·j|j⟩, give the state after the final Hadamards.
+
+(f) Why does a measurement of the first 3 qubits of the final state give information about s?
+(g) Suppose the first run of the algorithm gives j = 011 and a second run gives j = 101.
+Show that, assuming s ̸= 000, those two runs of the algorithm already determine s.
+
+4. Consider the following generalization of Simon’s problem: the input is x = (x0, . . . , xN−1),
+with N = 2n and xi ∈{0, 1}n, with the property that there is some unknown subspace V ⊆
+{0, 1}n (where {0, 1}n is the vector space of n-bit strings with entrywise addition modulo 2)
+such that xi = xj iff there exists a v ∈V such that i = j ⊕v. The usual definition of Simon’s
+problem corresponds to the case of 1-dimensional subspace V = {0, s}.
+
+Show that one run of the circuit of the main subroutine in Simon’s algorithm now produces
+a j ∈{0, 1}n that is orthogonal to the whole subspace (i.e., j · v = 0 mod 2 for every v ∈V ).
+
+5. Let f : {0, 1}n →{0, 1}n−1 be a 2-to-1 function, meaning that every y ∈{0, 1}n−1 has exactly
+two distinct pre-images x, x′ ∈{0, 1}n. Suppose there is an efficient quantum circuit (i.e.,
+with number of elementary gates that’s polynomial in n) to compute f, but no efficient circuit
+that can produce from given x ∈{0, 1}n an x′ ̸= x such that f(x) = f(x′).
+
+Show how a quantum computer can efficiently generate a uniformly random y ∈{0, 1}n−1
+
+and an associated n-qubit state |ϕy⟩such that:
+(1) when asked, from |ϕy⟩you can efficiently generate an x such that f(x) = y;
+and
+(2) when asked, you can efficiently sample uniformly from the set
+{a ∈{0, 1}n : a · (x ⊕x′) = 0 mod 2}, where x and x′ are the two pre-images of y.
+
+Comment: After having generated y and |ϕy⟩, you should give an algorithm that can do task (1) and another
+
+algorithm that can do task (2), but not necessarily an algorithm that can do both task (1) and (2) simultane-
+
+ously (since doing task (1) might affect the state in a way that makes it impossible to do task (2), and vice
+
+versa). This problem may look arbitrary but was recently used to design an efficient protocol through which
+
+a classical computer can efficiently verify that a quantum computer works as intended [194].
+
+6.
+(a) Suppose x is an N-bit string. What happens if we apply a Hadamard transform to each
+
+qubit of the N-qubit state
+1
+√
+
+2N
+
+�
+
+y∈{0,1}N
+(−1)x·y|y⟩?
+
+(b) Give a quantum algorithm that uses T queries to N-bit string x, and that maps |y⟩�→
+(−1)x·y|y⟩for every y ∈{0, 1}N that contains at most T 1s (i.e., for every y of Hamming
+weight ≤T). You can argue on a high level, no need to write out circuits in detail.
+(c) (H) Give a quantum algorithm that with high probability outputs x, using at most
+N/2 + 2
+√
+
+N queries to x.
+(d) Argue that a classical algorithm needs at least N queries in order to have success prob-
+ability > 1/2 of outputting the correct x.
+
+27
+
+
+===== PDF PAGE 40 =====
+
+28
+

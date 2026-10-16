@@ -1,0 +1,30 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "pack": "pack-0001",
+  "lane": 2,
+  "input_sha256": "48d8b4a9ef31a95e35cfe77d9e595225bc9f8703b280e15de62b38654f0e5d31",
+  "decisions": [
+    {
+      "id": "alg-qa-29-certified-natural-logarithm-enclosure",
+      "disposition": "sound",
+      "reason": "The supplier event replaces its embedded increasing-N search with a reference to this extracted algorithm, while retaining the same S_N, T_N, positive rational input domain, logarithm enclosure and width bound. This algorithm computes exactly those rational expressions, starts at N=1, tests T_N<=tau, increments on failure and returns the certified interval on success. Its justified_by reference therefore remains valid without any item edit.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Read the complete assigned Definition and current supplier Statement, Facts and Proof, and the exact prerequisite statements in items/def-natural-logarithm.md, def-real-exponential-function-and-e.md, cor-exponential-reciprocal-and-positivity.md, thm-logarithm-derivative-and-integral.md, thm-chain-rule.md, thm-algebra-of-derivatives.md, lem-derivative-of-a-power.md, thm-ftc-second-part.md, thm-continuous-implies-integrable.md, thm-monotonicity-of-the-integral.md and lem-geometric-sequence-null.md. Read the old supplier statement recorded under repair_notes in research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u53.json. The argument uses familiar elementary calculus: for H(u)=ln((1+u)/(1-u)), H'-P_N'=2u^(2N)/(1-u^2). Integrating on [0,s] for 0<s<1 bounds the remainder by 2s^(2N+1)/((2N+1)(1-s^2)); reciprocal symmetry handles negative y, and y=0 is evaluated directly. The derivative domain (-1,1) is open, each nondegenerate integration interval lies inside it, and the integral comparison has its required positive orientation. For rational x>0, |y|<1 and both denominators are nonzero. Geometric decay gives T_N->0, so the sequential exact rational tests terminate for every tau>0. No external URL was read or needed for this familiar argument.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "efe9a83e035fedef702cec2a82f17bd2eb77cba9bd74d8a2e4588b036bf133e5",
+          "affected_use": "The frontmatter justified_by entry uses lem-qa-29-certified-natural-logarithm-series to establish well-definedness of the positive-rational-input search and certification of its returned rational interval.",
+          "reason": "The updated supplier explicitly proves termination and certification for this very algorithm, with unchanged formulas and hypotheses. When x=1, y=0 and T_1=0, so the first test succeeds and returns [0,0]. Otherwise 0<|y|<1 gives T_N->0, ensuring a successful finite test; the supplier's error bound places ln(x) in the returned interval and gives width 2T_N<=2tau. Extracting the procedure changes none of these uses. The reciprocal deps/justified_by arrangement is the ordinary definition well-definedness rule, not a logical prerequisite cycle."
+        }
+      ],
+      "affected_use": "Only the algorithm's justified_by connection to the logarithm enclosure lemma is assigned here; its rational formulas, positive input conditions and increment-and-test loop coincide exactly with the updated lemma's analyzed procedure.",
+      "invalidated_claim": "No claim is invalidated: the supplier continues to certify the same enclosure for every rational x>0 and termination for every rational tau>0, including its separate treatment of y=0.",
+      "minimality": "No repair is necessary because the updated supplier certifies the existing procedure without changing its required hypotheses or guarantees. Preserve the complete frozen item carrier byte-for-byte; no shared metadata change or downstream discovery is required.",
+      "edits": []
+    }
+  ]
+}

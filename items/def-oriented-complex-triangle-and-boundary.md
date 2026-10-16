@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-oriented-complex-triangle-and-boundary.json
 id: def-oriented-complex-triangle-and-boundary
 kind: definition
 title: "Filled complex triangles, their oriented three-edge boundary contours, diameter, and perimeter"
@@ -7,13 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [rem-complex-plane-euclidean-dictionary, def-complex-contours-reversal-concatenation-and-closedness, def-metric-bounded-diameter, lem-complex-conjugation-and-modulus-laws, cor-piecewise-c1-paths-have-additive-speed-integral-length]
+deps: [def-complex-contours-reversal-concatenation-and-closedness, def-metric-bounded-diameter, lem-complex-conjugation-and-modulus-laws, def-complex-metric-convergence-and-continuity, def-complex-path-polygonal-length-and-rectifiability, thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed]
 justified_by: []
 aliases: []
 landmark: true
-verification:
-  precheck: n/a
-  audited: 2026-08-17
 sources:
   scraped: []
   references:
@@ -28,7 +27,7 @@ For $u,v\in\mathbb C$, write
 
 $$\ell_{uv}(t)=(1-t)u+tv\qquad(0\le t\le1)$$
 
-for the directed line segment from $u$ to $v$. It is a piecewise-$C^1$ complex contour, and its length is $|v-u|$ by [[cor-piecewise-c1-paths-have-additive-speed-integral-length]].
+for the directed line segment from $u$ to $v$. It is a piecewise-$C^1$ complex contour, and its length is $|v-u|$ by [[thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed]]: its coordinate path is affine with constant derivative $\Phi(v)-\Phi(u)$, whose Euclidean norm is $|v-u|$.
 
 For an ordered triple $a,b,c\in\mathbb C$, the **filled complex triangle** is
 
@@ -48,7 +47,7 @@ and
 
 $$\operatorname{diam}(\Delta[a,b,c])=\sup\{|z-w|:z,w\in\Delta[a,b,c]\},$$
 
-where the latter is the metric diameter of [[def-metric-bounded-diameter]] under the standard identification of [[rem-complex-plane-euclidean-dictionary]]. These quantities are defined for every ordered triple: the filled triangle is nonempty because it contains $a$, and if $z=(1-s-t)a+sb+tc$ then the modulus laws of [[lem-complex-conjugation-and-modulus-laws]] give $|z-a|\le |b-a|+|c-a|$. Hence it lies in a ball of finite positive radius and is bounded. Its perimeter is the length of its boundary contour, including in the degenerate cases.
+where the latter is the metric diameter of [[def-metric-bounded-diameter]] for $d_{\mathbb C}(z,w)=|z-w|$ of [[def-complex-metric-convergence-and-continuity]]. These quantities are defined for every ordered triple: the filled triangle is nonempty because it contains $a$, and if $z=(1-s-t)a+sb+tc$ then the modulus laws of [[lem-complex-conjugation-and-modulus-laws]] give $|z-a|\le |b-a|+|c-a|$. Hence it lies in a ball of finite positive radius and is bounded. Its perimeter is the length of its boundary contour, including in the degenerate cases: each affine concatenation piece has its edge length by the complex speed-integral theorem, and the sum of those integrals is the sum of the three edge lengths. Zero edges contribute zero.
 
 If $f$ is continuous on the trace of the boundary, abbreviate
 

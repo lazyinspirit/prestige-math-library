@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "focused-efficient-cyclotomic-norm-prerequisite-evidence",
+  "confirmed_defect": "The existing complete cyclotomic norm solver uses exhaustive O-factor search and explicitly asserts no polynomial runtime bound; it does not supply the efficient given-factorization interface used by QC13.",
+  "smallest_prerequisite": "An exact polynomial modular-root procedure plus constructive rational-prime recovery, bit-controlled Euclidean gcds, and bounded unit correction for the given-factorization solver.",
+  "new_items": [
+    "lem-qc-modular-square-root-expected-polynomial",
+    "thm-qc-factored-cyclotomic-norm-equation-efficient"
+  ],
+  "existing_items_edited": [],
+  "actual_source_read": "research/quantum-computing-planning/sources/qc_r3/ross-selinger-1403.2975.txt, Appendix C.1-C.6, including Lemmas C.12,C.20-C.25 and reproduced Theorem6.2. Source cites a modular-root algorithm; new lemma supplies actual Tonelli-Shanks instructions/invariants locally.",
+  "interface": [
+    "Given valid complete rational-prime factorization of numerator n, return an exact solution or correct NO; almost-sure termination and expected polynomial bit time.",
+    "General bound includes explicit coefficient/denominator input bits L; no erroneous dependence on norm numerator size alone when units have large coefficients.",
+    "For bounded embeddings and residual least sqrt2-denominator k, input size is O(k+1); for candidate u denominator h, residual exponent<=2h, n<=4^h and expected cost polynomial in h+1.",
+    "Prime factors are promised prime. Neither helper computes or certifies rational primality; a separate prime recognizer or factoring-oracle contract is necessary for any candidate-search prime-success claim."
+  ],
+  "local_proof_obligations_discharged": [
+    "Tonelli-Shanks initialization, strictly decreasing 2-power-order invariant, nonsquare-search success probability, exact rejection and O(log(p)^4) expected modular bit bound.",
+    "Explicit rounding-error norm contraction rho<=81/100 proved by coordinate inequalities, replacing the temporary compactness dependency. Balance both embeddings by lambda powers before each Euclidean division to control coefficient bits.",
+    "Recover real prime factors by gcd(p,sqrt2-b); recover O-primes by gcd(pi,b+i) or gcd(p,b+i sqrt2). Explicit quotient-field/product proofs establish irreducibility and completeness for all odd congruence classes.",
+    "Include unique prime above2, divide actual eta into all recovered classes, apply existing complete conjugation-orbit parity criterion.",
+    "Recover totally positive real-unit square via exact lambda exponent reduction, with exponent bounded by coefficient bits; prove polynomial factor/product/quotient sizes."
+  ],
+  "coordination": "quantum_cyclotomic_escalation owns page, manifests, proof-contract integration, existing algorithm and affected QC13 consumers. Helper author did not edit these carriers.",
+  "focused_review": "Cyclotomic owner read both drafts and the final literal prime-grid calibration. It confirmed least-r coefficient bounds, explicit .81 contraction/division counts, balanced storage/unit iteration bounds, field-action and modular-root bit totals, and P=2^200(h+1)^20 under the specified schoolbook binary-array implementation; root separately accepted that calibration. This is focused prerequisite review within the original cycle, not native acceptance credit.",
+  "checks": {
+    "proof_layout_command": "node tools/proof-layout.mjs items/thm-qc-factored-cyclotomic-norm-equation-efficient.md",
+    "proof_layout_result": "proof-layout: 1 items, 13 steps, 0 defects",
+    "proof_layout_exit_code": 0,
+    "tests_run": false,
+    "gates_run": false,
+    "hashes_run": false,
+    "readiness_written": false,
+    "commits_created": false,
+    "review_repair_cycles": 2
+  },
+  "root_followup": "Root retains final stable bindings, readiness decisions, and recertification. Integration owner must preserve given-factorization/primality distinctions in consumer complexity claims.",
+  "calibrated_majorant": {
+    "scope": "Bounded grid residual from u with least sqrt2 denominator h, reduced numerator n prime or0/1.",
+    "P": "2^200*(h+1)^20 expected bit operations",
+    "derivation": "Theorem5.1-5.4: least denominator clearing; explicit .81 norm contraction; <2^40H^4 fixed-degree actions with stored coordinates B=2^20H^2 bits; each action<2^70(B+1)^4 bit steps; at most8 modular-root calls<2^31H^5 expected; total<2^195H^12<=P.",
+    "prime_recognition": "No primality claim added; an interrupted prospective run on a falsely promised composite can fail or time out, with any proposed output separately checked exactly.",
+    "preimage": ".autopilot/quantum-computing-algorithms-60-2026-10-15/owner-norm-calibration-preimages/items/thm-qc-factored-cyclotomic-norm-equation-efficient.md"
+  }
+}

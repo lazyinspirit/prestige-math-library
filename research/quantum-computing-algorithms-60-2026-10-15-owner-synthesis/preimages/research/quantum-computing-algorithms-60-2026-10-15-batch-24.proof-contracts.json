@@ -1,0 +1,2161 @@
+{
+  "version": 1,
+  "level": "quantum-computing-algorithms-60-2026-10-15-batch-24",
+  "scope": [
+    "lem-qc-open-cube-is-not-null",
+    "lem-qc-countable-compact-null-union",
+    "lem-qc-projective-chord-distance-formula",
+    "thm-qc-projective-chart-dimension",
+    "lem-qc-signed-ray-packing-code",
+    "thm-qc-finite-width-topology-count",
+    "thm-qc-finite-alphabet-exact-nonuniversality",
+    "thm-qc-discrete-alphabet-approximate-preparation-lower-bound",
+    "thm-qc-continuous-parameter-state-preparation-lower-bound",
+    "thm-qc-isometry-completion-and-synthesis",
+    "lem-qc-prefix-norm-rotation-identities",
+    "thm-qc-state-preparation-rotation-level-upper-bound",
+    "thm-qc-state-preparation-cost",
+    "thm-qc-amplitude-table-precision-and-compilation",
+    "ex-qc-amplitude-table-state-preparation-cost"
+  ],
+  "contracts": {
+    "lem-qc-open-cube-is-not-null": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-null-and-content-zero-in-rn",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$. A **closed cube** is a rectangle $\\prod_{j<m}[a_j,a_j+\\ell]$ with $\\ell\\ge0$; its volume is $\\ell^m$. A set $E\\subseteq\\mathbb R^m$ is **null** when, for every $\\varepsilon>0$, it is covered by a sequence of closed cubes whose nonnegative volume series converges with sum at most $\\varepsilon$. It has **content zero** when such a cover can be finite.\n\nThe series and finite sums are [[def-series]] and [[def-finite-sum]], and their nonnegative bounds use [[thm-nonnegative-series-bounded-partial-sums]] and [[lem-finite-sum-laws]]. Both properties pass to subsets. Padding a finite cover with degenerate zero-volume cubes proves that content zero implies null. This terminology defines only cover-nullity; it does not define a measure on arbitrary sets.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multidimensional-rectangle-and-volume",
+          "source_section": "Definition",
+          "quote": "Fix a natural number $m\\ge1$. For $a,b\\in\\mathbb R^m$ with $a_j\\le b_j$ for $j<m$, define\n$$[a,b]:=\\{x\\in\\mathbb R^m:a_j\\le x_j\\le b_j\\ (j<m)\\},\\qquad \\operatorname{vol}[a,b]:=\\prod_{j<m}(b_j-a_j).$$\nThe product is the recursively defined finite product of [[def-finite-sum]]. The rectangle is **nondegenerate** when every $a_j<b_j$, and it is a **cube** when all side lengths are equal.\n\nEvery factor is nonnegative, so volume is nonnegative. For a coordinate index $r<m$, cutting at $c\\in[a_r,b_r]$ gives two rectangles whose volumes add to the original, by distributivity in that factor and [[lem-finite-sum-laws]]. Under the standard identification $\\mathbb R^1\\cong\\mathbb R$ ([[lem-metrics-on-rn]], [[def-p-norms-on-rn]]), this is the interval $[a_0,b_0]$ and its length.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $x\\in O$ and $r>0$ with the Euclidean ball $B(x,r)\\subseteq O$. Put $s=r/(2\\sqrt m)>0$ and let $Q=\\prod_{j=1}^m[x_j-s/2,x_j+s/2]$. For every $y\\in Q$, $\\|y-x\\|_2\\le\\sqrt m\\,s/2=r/4<r$, so $Q\\subseteq O$ and $\\operatorname{vol}(Q)=s^m>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $O$ were null. By [F1], with $\\varepsilon=s^m/4$ there is a sequence of closed cubes $C_i$ covering $Q$ whose side lengths $\\ell_i\\ge0$ have $\\sum_i\\ell_i^m\\le s^m/4$. For each $i\\ge0$, set $\\delta_i=\\min\\{1,\\,s^m2^{-i-5}/(3^m(1+\\ell_i)^{m-1})\\}$ and enlarge $C_i$ concentrically to an open cube $C_i'$ of side $\\ell_i+2\\delta_i$. The binomial formula and $\\delta_i\\le1$ give $(\\ell_i+2\\delta_i)^m-\\ell_i^m\\le3^m\\delta_i(1+\\ell_i)^{m-1}\\le s^m2^{-i-5}$. Hence the total enlarged volume is at most $s^m/4+s^m/16=5s^m/16<s^m/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The open cubes $C_i'$ cover the closed box $Q$, so [F2] gives a finite subcover $C_{i_1}',\\ldots,C_{i_t}'$. Their total volume is less than $s^m/2$ by step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Cut $Q$ and the finitely many covering cubes at all their coordinate endpoints. The positive-side grid cells inside $Q$ partition it; the interior of each cell lies in one covering cube because no covering-cube boundary crosses the cell. Assign each cell to the least index of a covering cube containing its interior. By finite cut-additivity from [F3], the assigned cells for each cube have total volume at most that cube's volume, while all cells sum to $\\operatorname{vol}(Q)=s^m$. Thus $s^m\\le\\sum_{j=1}^t\\operatorname{vol}(C_{i_j}')<s^m/2$, a contradiction. Therefore $O$ is not null.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes O is nonempty; it makes no claim about the empty open set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For m>=1, step 1.1 selects a closed cube of strictly positive side and volume inside O; step 2.1 uses a positive cover budget."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction in step 1.1 applies when m=1, with s=r/2 and a positive interval inside O."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows zero-side cubes in a null cover and enlarges each by a positive delta before using compactness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the closed box Q, so its boundary is included in the finite subcover and in the volume comparison."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one witness x from nonemptiness; step 4.1 assigns each finite grid cell to its least covering index, so no countable choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-qc-projective-chord-distance-formula": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-projective-chord-distance",
+          "source_section": "Definition",
+          "quote": "For an integer $D\\ge1$ and unit vectors $u,v\\in\\mathbb C^D$, write $[u]$ and $[v]$ for their pure-state rays and define the projective chord distance by\n\n$$d_{\\mathrm{ch}}([u],[v])=\\inf_{|\\lambda|=1}\\|u-\\lambda v\\|_2.$$\n\nHere $\\|\\cdot\\|_2$ is the norm induced by the root inner product, which is linear in its first argument. The infimum is over unit complex scalars, so it removes only the common phase of a state vector. The companion lemma [[lem-qc-projective-chord-distance-formula]] evaluates this infimum, proves it is attained, gives the closed formula, and proves independence from the chosen unit representatives.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pure-state-and-ray",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $c=\\langle v,u\\rangle_{\\mathrm{root}}$. For every $|\\lambda|=1$, expand by [F2]: $\\|u-\\lambda v\\|_2^2=2-\\overline\\lambda\\langle u,v\\rangle_{\\mathrm{root}}-\\lambda\\langle v,u\\rangle_{\\mathrm{root}}=2-2\\operatorname{Re}(\\lambda c)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $c=0$, the real part is zero for every unit $\\lambda$; if $c\\ne0$, choose $\\lambda=\\overline c/|c|$, giving $\\operatorname{Re}(\\lambda c)=|c|$. Since $\\operatorname{Re}(\\lambda c)\\le|c|$ for every unit $\\lambda$, this phase attains the infimum in [F1]; the value is $\\sqrt{2-2|c|}$, a real nonnegative number by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Replacing $u$ and $v$ by unit scalar multiples changes $\\langle u,v\\rangle_{\\mathrm{root}}$ by a unit scalar, so its modulus and the displayed value do not change. Since the infimum is attained, it is zero exactly when a minimizing phase satisfies $u=\\lambda v$, which is exactly equality of the represented rays by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on a given pair of unit vectors, not an empty-family assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats c=0 directly: every phase gives squared distance 2 and the formula gives sqrt(2)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At |c|=1, Cauchy–Schwarz equality and step 3.1 identify the vectors as the same ray, whose distance is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The argument includes D=1 and collinear unit vectors; step 3.1 reduces zero distance exactly to phase proportionality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Fact F4 and step 2.1 bound |c| between 0 and 1, so the square root is real at both overlap endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 gives an explicit minimizing phase: any unit phase when c=0 and conjugate(c)/|c| otherwise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward implication from zero distance to the same ray follows from attainment in step 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication follows because same-ray unit representatives differ by a unit phase, which makes the infimum zero in step 3.1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-projective-chart-dimension": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-projective-space-atlas",
+          "source_section": "Definition",
+          "quote": "For an integer $D\\ge1$, let $\\mathbb{CP}^{D-1}$ be the quotient of $\\mathbb C^D\\setminus\\{0\\}$ by $z\\sim w$ when $w=\\lambda z$ for a nonzero complex scalar $\\lambda$. Give $\\mathbb C^D\\setminus\\{0\\}$ its usual Euclidean topology and the quotient the topology in which a subset is open exactly when its inverse image is open. Every nonzero ray has a unit representative, and two unit representatives of one ray differ by a unit scalar, so this is the pure-state ray space of [[def-qc-pure-state-and-ray]].\n\nFor $j\\in\\{0,\\ldots,D-1\\}$ define the standard patch $U_j=\\{[z]\\in\\mathbb{CP}^{D-1}:z_j\\ne0\\}$ and the candidate coordinate map $\\phi_j([z])=(z_i/z_j)_{i\\ne j}$, with the coordinates kept in increasing original index order. Its candidate inverse sends $w\\in\\mathbb C^{D-1}$ to the ray of the vector with $j$th coordinate $1$ and other coordinates given by $w$ in that same order. [[thm-qc-projective-chart-dimension]] proves these are smooth charts, computes their real dimension, and notes that a single standard patch omits part of projective space when $D\\ge2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $[z]\\in U_j$, multiplying $z$ by any nonzero complex scalar leaves every ratio $z_i/z_j$ unchanged, so $\\phi_j$ is well-defined on rays. The representative $z/z_j$ has $j$th coordinate $1$ and all other coordinates equal to those ratios, so the stated inverse sends $\\phi_j([z])$ back to $[z]$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, applying $\\phi_j$ to the inverse representative with $j$th coordinate $1$ returns each entry of $w$; hence the two maps are inverse bijections. The composite of $\\phi_j$ with the quotient map is given by continuous coordinate ratios on $\\mathbb C^D\\setminus\\{0\\}$, so $\\phi_j$ is continuous by the defining quotient topology. The inverse is the quotient map composed with the continuous representative map $w\\mapsto e_j+\\sum_{i\\ne j}w_i e_i$, hence is continuous.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $\\pi:\\mathbb C^D\\setminus\\{0\\}\\to\\mathbb{CP}^{D-1}$ be the quotient map. Then $\\pi^{-1}(U_j)=\\{z:z_j\\ne0\\}$ is Euclidean open, so $U_j$ is open by the quotient topology. On $U_j\\cap U_k$ with $j\\ne k$, write $w=\\phi_j([z])$. Then $w_k\\ne0$, the transition coordinates satisfy $w'_j=1/w_k$ and $w'_i=w_i/w_k$ for $i\\ne j,k$. Conversely, $w_k=1/w'_j$ and $w_i=w'_i/w'_j$ for $i\\ne j,k$. These rational maps are smooth as real maps on their open coordinate domains, so the charts are compatible and form a smooth atlas.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The patches cover every ray because a nonzero vector has at least one nonzero coordinate. If $D\\ge2$, choose $k\\ne j$; the ray of the basis vector $e_k$ has $j$th coordinate zero and is not in $U_j$, so each fixed standard patch is proper. Finally, $\\mathbb C^{D-1}$ has $D-1$ complex, or $2D-2$ real, coordinates.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "algebra",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns each standard patch indexed by an existing coordinate j; it is not an empty-index claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 maps the zero coordinate tuple to the ray [e_j], and the inverse identities still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For D=1, C^{D-1}=C^0 is a point and the unique patch is the whole ray space; step 4.1 restricts properness to D>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 has no distinct-index transition when D=1; the one-chart atlas remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only overlaps where w_k is nonzero, so reciprocal transition formulas are defined on precisely their domains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The patch cover in step 4.1 follows by taking any nonzero coordinate of each nonzero representative; the index set is finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The chart-to-inverse identity is verified in step 1.1 and inverse-to-chart identity in step 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 verify both inverse identities, including the reverse map-to-coordinate identity."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-qc-signed-ray-packing-code": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-projective-chord-distance-formula",
+          "source_section": "Statement",
+          "quote": "For unit vectors $u,v\\in\\mathbb C^D$,\n\n$$d_{\\mathrm{ch}}([u],[v])=\\sqrt{2-2|\\langle u,v\\rangle_{\\mathrm{root}}|}.$$\n\nIn particular, this value is independent of the chosen unit representatives, and it is zero exactly when the two vectors represent the same ray.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m=D/2$, $x=2\\delta\\in(0,1/2)$ and $R=\\lceil xm\\rceil-1$. Greedily scan the finite set $\\{0,1\\}^m$ in lexicographic order: select the least remaining word and delete all words at Hamming distance at most $R$, repeating until none remain. Distinct selected words have distance $h\\ge R+1\\ge xm=\\delta D$, and each selection deletes at most $B=\\sum_{j=0}^{R}\\binom mj$ words, so the selected code has at least $2^m/B$ words.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $j\\le R<xm$, the ratio $x/(1-x)<1$ gives $x^j(1-x)^{m-j}\\ge x^{xm}(1-x)^{(1-x)m}$. The binomial identity $1=\\sum_{j=0}^m\\binom mjx^j(1-x)^{m-j}$ therefore yields $B\\le[x^{-x}(1-x)^{-(1-x)}]^m=2^{mH_2(x)}$. By [F2], $\\ln2=\\int_1^2du/u>0$. On $0<t<1$, differentiation gives $H_2'(t)=\\ln((1-t)/t)/\\ln2$. For $0<t<1/2$, the ratio exceeds $1$, so [F2] gives $\\ln((1-t)/t)=\\int_1^{(1-t)/t}du/u>0$. Since $H_2$ is continuous on $[x,1/2]$ and differentiable inside, [F3] implies $H_2(1/2)-H_2(x)=H_2'(\\xi)(1/2-x)>0$ for some $\\xi\\in(x,1/2)$. As $H_2(1/2)=1$, we have $H_2(x)<1$. Thus the code size is at least $2^{m(1-H_2(x))}=\\exp(c_\\delta D)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Map each selected bit word $b$ to the sign word $s_i=(-1)^{b_i}$; this is a bijection preserving Hamming distance. Form $u_s=D^{-1/2}(1,\\ldots,1,s_1,\\ldots,s_m)$. It is unit because it has $D$ entries of modulus $D^{-1/2}$. If two selected words differ in $h$ places, then $\\langle u_s,u_t\\rangle_{\\mathrm{root}}=1-2h/D$. Since $h\\le m=D/2$ and $h\\ge\\delta D$, this lies in $[0,1-2\\delta]$, so [F1] gives $d_{\\mathrm{ch}}([u_s],[u_t])=2\\sqrt{h/D}\\ge2\\sqrt\\delta$. The first half of each vector is fixed and nonzero, so scalar-proportional unit vectors must have scalar $1$ and identical last-half signs; distinct code words therefore give distinct rays.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes even D>=2, so the finite Boolean cube being packed is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypotheses keep delta>0; step 1.1 chooses R=ceil(2delta*m)-1 and obtains positive minimum Hamming separation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the smallest width D=2, m=1 and R=0; the greedy code contains both bit words and step 3.1 verifies their rays are separated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The allowed case R=0 is handled by the same finite greedy scan and the binomial sum B=1 in steps 1.1-1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses h<=m=D/2 to keep the overlap nonnegative and h>=delta D for the lower distance bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 scans the finite cube in lexicographic order and deterministically deletes a Hamming ball at each selected word."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-finite-width-topology-count": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A gate of arity $r\\le k$ has at most $W^r$ ordered wire tuples. Summing over possible arities $0\\le r\\le k$ gives at most $\\sum_{r=0}^kW^r\\le(k+1)W^k$ tuples because $W\\ge1$; including its label gives at most $C_k A W^k$ choices for one occurrence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A length-$g$ serial description is an ordered list of $g$ such choices, so there are at most $(C_k A W^k)^g$ descriptions. For two gates on disjoint supports, reorder the tensor factors as the first support, the second support, and the remaining wires. Their embeddings are then $G\\otimes I\\otimes I$ and $I\\otimes H\\otimes I$. By [F2], both compositions act as $Gx\\otimes Hy\\otimes z$ on elementary tensors, which span the register; thus they commute. By [F3], serially listing each layer therefore preserves its operator; listing the layers in circuit order preserves the full denotation and adds no occurrence.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For g=0, step 2.1 gives exactly one empty serial description, consistent with the bound (C_k A W^k)^0=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement requires W>=1 and A>=1, so zero width and an empty alphabet are outside the model."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At W=1, step 1.1 still bounds the sum of arity choices by (k+1)W^k=k+1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Arity zero contributes one empty wire tuple in the sum in step 1.1; pairwise-disjoint empty supports commute."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint arities r=0 and r=k are included in the sum in step 1.1, and r>W contributes no distinct tuple."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite serial list and layer order in step 2.1 give a deterministic serialization without a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-finite-alphabet-exact-nonuniversality": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-finite-width-topology-count",
+          "source_section": "Statement",
+          "quote": "Fix integers $W\\ge1$, $A\\ge1$, $k\\ge1$, and $g\\ge0$, and an ordered-wire circuit model with a finite gate alphabet of size $A$ and maximum arity $k$. A serial length-$g$ description is an ordered list of $g$ gate labels and ordered tuples of at most $k$ distinct wire positions; its denotation is the ordered product of the corresponding local gate embeddings. Each parallel layer consists of pairwise wire-disjoint occurrences and denotes their product. With $C_k=k+1$, the number of length-$g$ serial descriptions is at most $(C_k A W^k)^g$. Any parallel circuit with $g$ total occurrences has a serial ordering with the same gate count and denotation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-r-uncountable",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nThen $\\mathbb{R}$ is **uncountable** ([[def-countable]]): there is no surjection\n$\\mathbb{N} \\to \\mathbb{R}$, so $\\mathbb{R}$ is neither finite nor countably\ninfinite.\n\nThe proof is Cantor's original argument of 1874, not the decimal diagonal.\nAssuming a surjection $f : \\mathbb{N} \\to \\mathbb{R}$, one builds nested closed\nintervals $[a_n, b_n]$ with $a_n < b_n$ and $f(n) \\notin [a_{n+1}, b_{n+1}]$, and\nthen $\\sup\\{a_n\\}$ is a real number that $f$ misses. **The decimal diagonal is\ndeliberately avoided**: decimal expansions are infinite series, which this\nlibrary has not yet constructed, so a diagonal proof here would rest on machinery\nthat does not exist. The diagonal argument survives in its non-circular form, on\npower sets, as Cantor's theorem earlier on this page; see the remarks below.\n\n**The construction uses no choice, and that is what the thirds are for.** Given\n$[a_n, b_n]$ of length $d$, its three closed thirds\n$[a_n, a_n + d/3]$, $[a_n + d/3, a_n + 2d/3]$, $[a_n + 2d/3, b_n]$ cannot all\ncontain $f(n)$, because the first and the third are disjoint; the rule takes the\n**first one in that fixed order** which does not contain $f(n)$. That is a\ndefinition by cases, so the whole construction is a single application of the\nrecursion theorem ([[thm-recursion]]) to one explicitly given function. A version\nof the argument that says \"pick a third avoiding $f(n)$\" would be using dependent\nchoice, silently and unnecessarily.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pure-state-and-ray",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $A=0$, the empty alphabet allows only the empty circuit, so at most one ray is reachable. If $A\\ge1$, put $B=(k+1)AW^k\\ge2$. Fix a finite listing of the alphabet and order wire tuples lexicographically; then [F1] gives at most $B^g$ descriptions of length $g\\in\\mathbb N$. Code each description by its length and its base-$B$ index, then pair these two natural numbers; this gives an injection of all finite descriptions into $\\mathbb N$. In either case the reachable rays form a countable set without a choice principle.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $t\\mapsto[e_0+t e_1]$ from $\\mathbb R$ into the rays of $\\mathbb C^D$ is injective: if $e_0+t e_1=\\lambda(e_0+s e_1)$, comparison of the $e_0$ coordinate gives $\\lambda=1$, then comparison of the $e_1$ coordinate gives $t=s$. These nonzero vectors define rays by [F3]. By [F2], the ray space is uncountable and cannot equal the countable reachable set.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles A=0 separately: only the empty circuit exists, so the reachable set has at most one ray."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement fixes n>=1 and D=2^n>=2; there is no zero-dimensional ray space case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When A=1, B=(k+1)AW^k>=2; step 1.1 still codes each finite description by length and base-B index."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 allow W=n, so the exact clean-workspace output convention reduces to the data ray."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses two distinct basis coordinates available for every D>=2; the map t->[e0+t e1] remains injective."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes a finite alphabet listing and lexicographic wire order; the countability coding uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-discrete-alphabet-approximate-preparation-lower-bound": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-signed-ray-packing-code",
+          "source_section": "Statement",
+          "quote": "Let $D\\ge2$ be an even integer and let $\\delta\\in\\mathbb R$ satisfy $0<\\delta<1/4$. There is a family of at least $\\exp(c_\\delta D)$ unit sign vectors in $\\mathbb C^D$, with their first $D/2$ coordinates fixed at $1/\\sqrt D$, such that the projective chord distance between distinct resulting rays is at least $2\\sqrt\\delta$. Here $c_\\delta=(\\ln2/2)(1-H_2(2\\delta))>0$ and $H_2(t)=-t\\log_2t-(1-t)\\log_2(1-t)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-finite-width-topology-count",
+          "source_section": "Statement",
+          "quote": "Fix integers $W\\ge1$, $A\\ge1$, $k\\ge1$, and $g\\ge0$, and an ordered-wire circuit model with a finite gate alphabet of size $A$ and maximum arity $k$. A serial length-$g$ description is an ordered list of $g$ gate labels and ordered tuples of at most $k$ distinct wire positions; its denotation is the ordered product of the corresponding local gate embeddings. Each parallel layer consists of pairwise wire-disjoint occurrences and denotes their product. With $C_k=k+1$, the number of length-$g$ serial descriptions is at most $(C_k A W^k)^g$. Any parallel circuit with $g$ total occurrences has a serial ordering with the same gate count and denotation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-projective-chord-distance-formula",
+          "source_section": "Statement",
+          "quote": "For unit vectors $u,v\\in\\mathbb C^D$,\n\n$$d_{\\mathrm{ch}}([u],[v])=\\sqrt{2-2|\\langle u,v\\rangle_{\\mathrm{root}}|}.$$\n\nIn particular, this value is independent of the chosen unit representatives, and it is zero exactly when the two vectors represent the same ray.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A single output ray cannot be within $\\varepsilon$ of two distinct packed rays. Indeed, if $d_{\\mathrm{ch}}([u],[q])\\le\\varepsilon$ and $d_{\\mathrm{ch}}([v],[q])\\le\\varepsilon$, [F3] gives unit phases $\\lambda,\\mu$ with $\\|u-\\lambda q\\|_2\\le\\varepsilon$ and $\\|v-\\mu q\\|_2\\le\\varepsilon$; then [F4] gives $\\|u-(\\lambda/\\mu)v\\|_2\\le2\\varepsilon<2\\sqrt\\delta$, contradicting [F1]. Thus each circuit covers at most one packed ray.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $B=C_k A W^k\\ge2$. By [F2], the number of descriptions of length at most $g$ is $\\sum_{j=0}^g B^j\\le B^{g+1}$. If these circuits approximate all packed rays, step 1.1 implies $\\exp(c_\\delta D)\\le B^{g+1}$, so $g\\ge c_\\delta D/\\log B-1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $A,k$ are fixed and $W\\ge2$, there is a constant $K>0$ with $\\log B=\\log(C_kA)+k\\log W\\le K\\log W$. Put $X=c_\\delta D/(K\\log W)$. Step 2.1 gives $g+1\\ge X$. If $X\\ge2$, then $g\\ge X-1\\ge X/2$. If $X<2$, a family with $g=0$ has only the single zero-gate output ray, whereas the packing in [F1] contains at least two rays for $D\\ge4$; hence $g\\ge1>X/2$. Thus $g\\ge X/2=\\Omega(D/\\log W)$. If $W=\\operatorname{poly}(n)$, then $\\log W=O(\\log n)$ and also $W\\ge n$, so $\\log W=\\Theta(\\log n)$, giving $\\Omega(2^n/\\log n)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives at most one packed ray per output, and step 3.1 uses the at-least-two-ray packing to exclude a zero-gate universal family in the small-X case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The allowed epsilon=0 case is included in step 1.1 because its phase-aligned output distance is at most 0<sqrt(delta)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For D=4, the packed family in F1 contains at least two rays; step 3.1 uses this fact in the X<2 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The allowed boundary W=n is valid: the data register has no workspace, and the count in step 2.1 remains finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict hypothesis epsilon<sqrt(delta) is used in step 1.1 to contradict packed separation; equality would not give a contradiction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A finite gate alphabet admits a fixed finite listing, and step 2.1 counts all words without any choice over an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-continuous-parameter-state-preparation-lower-bound": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-projective-chart-dimension",
+          "source_section": "Statement",
+          "quote": "For every integer $D\\ge1$, the standard patches $U_j$ of [[def-qc-projective-space-atlas]] are smooth charts with coordinate space $\\mathbb C^{D-1}=\\mathbb R^{2D-2}$. If $D\\ge2$, each fixed patch is proper, so a single standard coordinate patch does not cover all of $\\mathbb{CP}^{D-1}$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-morse-sard-for-euclidean-maps",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge0$, $n\\ge1$, and $r\\ge1$ be integers, let $U\\subseteq\\mathbb R^m$\nbe open, and let $f:U\\to\\mathbb R^n$ be a $C^r$ map with\n\n$$ r>\\max\\{m-n,0\\}. $$\n\nThen the critical value set of $f$ is a null subset of $\\mathbb R^n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-countable-compact-null-union",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$ and let $(K_i)_{i\\ge0}$ be a sequence of compact null subsets of $\\mathbb R^m$, where nullity is in the closed-cube-cover sense of [[def-null-and-content-zero-in-rn]]. Then $\\bigcup_{i\\ge0}K_i$ is null. The proof selects finite rational-cube covers by their least codes and uses no choice principle.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), and let $\\mathbb{R}$ carry its usual topology, the\nmetric topology of $d_{\\mathbb{R}}(s,t) = |s-t|$\n([[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). Then:\n\n1. **Continuous images.** If $f : X \\to Y$ is continuous\n   ([[def-continuous-map-top]]) and $(X, \\mathcal{T}_X)$ is compact\n   ([[def-compact-space]]), then $f[X]$ is a compact subset of $Y$. More\n   generally, if $K \\subseteq X$ is a compact subset of $X$ then $f[K]$ is a\n   compact subset of $Y$.\n2. **Extreme values.** If $(X, \\mathcal{T}_X)$ is compact and nonempty and\n   $g : X \\to \\mathbb{R}$ is continuous, then $g[X]$ has a maximum and a minimum\n   ([[def-max-min]]): there are $x_{\\max}, x_{\\min} \\in X$ with\n   $$g(x_{\\min}) \\;\\le\\; g(x) \\;\\le\\; g(x_{\\max}) \\qquad \\text{for every } x \\in X .$$\n3. **Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y,\n   \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a\n   continuous bijection, then $f$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]).\n\nNonemptiness in claim 2 is a hypothesis and not an oversight: for\n$X = \\varnothing$ the image is empty and has neither a maximum nor a minimum. **No\nchoice principle is used**: the one selection made below is over a finite index\nset, where [[lem-finite-choice]] is a theorem of ZF.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-open-cube-is-not-null",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$, every nonempty open subset $O\\subseteq\\mathbb R^m$ is not null in the closed-cube-cover sense of [[def-null-and-content-zero-in-rn]]. The proof uses no choice principle.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-clean-ancilla-output-projection",
+          "source_section": "Definition",
+          "quote": "Let $n,a\\ge0$ be integers and $D=2^n$. Let the data and workspace registers have ordered computational spaces $\\mathbb C^D$ and $\\mathbb C^{2^a}$, with the ordered tensor factors and product basis of [[def-qc-tensor-register-and-permutation]]. For a circuit unitary $U$ on their tensor product, its all-zero-workspace projection on a fixed input $|0^n\\rangle|0^a\\rangle$ is\n\n$$v=(I_D\\otimes\\langle0^a|)U(|0^n\\rangle\\otimes|0^a\\rangle)\\in\\mathbb C^D.$$\n\nThe projected joint vector is $v\\otimes|0^a\\rangle$. An exact clean-workspace output on this input means that the full, unconditional output equals $\\lambda|\\psi\\rangle\\otimes|0^a\\rangle$ for a unit data vector $\\psi$ and a unit scalar $\\lambda$; then $v=\\lambda\\psi$. A merely nonzero $v$ defines only the zero-workspace projection branch and does not assert that the workspace is deterministically clean.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-null-and-content-zero-in-rn",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$. A **closed cube** is a rectangle $\\prod_{j<m}[a_j,a_j+\\ell]$ with $\\ell\\ge0$; its volume is $\\ell^m$. A set $E\\subseteq\\mathbb R^m$ is **null** when, for every $\\varepsilon>0$, it is covered by a sequence of closed cubes whose nonnegative volume series converges with sum at most $\\varepsilon$. It has **content zero** when such a cover can be finite.\n\nThe series and finite sums are [[def-series]] and [[def-finite-sum]], and their nonnegative bounds use [[thm-nonnegative-series-bounded-partial-sums]] and [[lem-finite-sum-laws]]. Both properties pass to subsets. Padding a finite cover with degenerate zero-volume cubes proves that content zero implies null. This terminology defines only cover-nullity; it does not define a measure on arbitrary sets.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix one gate topology, one choice of its gate-family parameter charts, and one standard target patch $U_j$ from [F1]. The product $\\Omega$ of the finitely many selected open parameter charts is open in $\\mathbb R^q$. By [F8] and [F9], each local embedding has matrix entries that are fixed finite linear combinations of the local gate entries, and the circuit matrix is a finite ordered product of those embeddings. Its entries are therefore finite sums of products of smooth gate-matrix entries. The projected data vector $v(\\theta)$ from [F6] depends smoothly on $\\theta\\in\\Omega$. The set $\\Omega_j=\\{\\theta\\in\\Omega:v_j(\\theta)\\ne0\\}$ is open. Under the fixed real/imaginary identification $\\mathbb C^{D-1}\\cong\\mathbb R^{2D-2}$, the chart map $f_j(\\theta)=(v_i(\\theta)/v_j(\\theta))_{i\\ne j}$ is $C^\\infty$ on $\\Omega_j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F8",
+            "F9",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The parameter dimension $q$ is at most $pg<2D-2$, so the derivative of $f_j$ has rank at most $q$ at every point; every point is critical. With target dimension $m=2D-2$ and $r=1$, the hypothesis $r>\\max\\{q-m,0\\}=0$ holds, and [F2] makes $f_j(\\Omega_j)$ null.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The gate-family choices and parameter charts are countable, and at fixed $W,g$ there are finitely many wire placements. By [F10], each open parameter domain is covered by the countable enumeration of rational closed cubes whose closures lie inside it. The image of each such compact cube is compact by [F4] and null as a subset of the Sard-null image in step 2.1 by [F7]. Applying [F3] to this countable family shows that all exactly preparable rays in the patch have a null coordinate image.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F7",
+            "F10",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If every ray were exactly preparable with $g$ gates, then the coordinate image of all rays in the chosen standard patch would be $\\mathbb R^{2D-2}$ and hence would contain a nonempty open cube. Step 3.1 makes that image null, while [F5] says a nonempty open cube is not null. This contradiction proves the noncoverage claim for each patch.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 3.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Set $g_0=\\lceil(2D-2)/p\\rceil-1$. Then $pg_0<2D-2$, so steps 1.1–2.1 with budget $g_0$ show that the targets exactly preparable with at most $g_0$ gates form a null set in each chart. Every target outside this null coordinate subset therefore requires at least $g_0+1=\\lceil(2D-2)/p\\rceil$ gates. For fixed $p$, this is $\\Omega(D)$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Gate budget g=0 gives q=0; step 2.1 still has every point critical when q<m and Sard applies to each zero-dimensional parameter domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes p>=1, so a zero parameter allowance is represented by q=0 gate charts rather than p=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 give target chart dimension 2 when D=2 and use the strict condition pg<2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A gate chart with q=0 is an open subset of R^0; step 2.1 gives rank zero and includes its image in the Sard-null case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict inequality pg<2D-2 is used in step 2.1; the equality boundary is not claimed to be null."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Slicing uses all witnessed interval/cube-list pairs and finitely many witnesses. The local countable compact-image union uses least-coded finite rational covers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "checked",
+        "evidence": "The slicing supplier considers all witnessed interval/finite-cube-cover pairs, with explicit volume-controlled open enlargements. Compactness gives slab neighborhoods without sequential choices; only finitely many witnesses enter the partition cover. No uncountable choice is used. Euclidean Sard and local steps 2.1–5.1 retain their stated hypotheses."
+      },
+      "unresolved_suppliers": []
+    },
+    "thm-qc-isometry-completion-and-synthesis": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-isometry-unitary-completion",
+          "source_section": "Definition",
+          "quote": "**Input.** Integers $1\\le D\\le M$, ordered orthonormal bases of $\\mathbb C^D$ and $\\mathbb C^M$, and an exact $M\\times D$ matrix $V$ whose columns are orthonormal, so $V$ represents a linear isometry in the convention of [[def-linear-isometry-and-orthogonal-or-unitary-operator]]. Arithmetic is ideal exact complex arithmetic with conjugation, norms, square roots, and exact zero tests; no bit-time bound is part of this procedure.\n\n**Procedure.** Initialize an ordered list $L$ with the $D$ columns of $V$. For $j=0,1,\\ldots,M-1$, compute\n\n$$r_j=e_j-\\sum_{w\\in L}\\langle e_j,w\\rangle_{\\mathrm{root}}w.$$\n\nIf $\\|r_j\\|_2=0$, leave $L$ unchanged. Otherwise append $r_j/\\|r_j\\|_2$ to $L$. After the finite loop, return the square matrix $W$ whose columns are the final list, and return INVALID if the input dimensions or orthonormal-column condition fail.\n\nFor integer widths $0\\le n\\le w$, put $D=2^n$, $M=2^w$, and $a=w-n$. The input data and clean workspace use the ordered tensor-register convention of [[def-qc-tensor-register-and-permutation]] and the big-endian basis encoding of [[def-qc-ordered-bitstring-encoding]]. A clean workspace register starts at $|0^a\\rangle$ under [[def-qc-clean-and-dirty-ancillas]]. Let $\\Pi$ be the ordered wire permutation that swaps the $n$-wire data block with the $a$-wire zero-workspace block, so $\\Pi(|x\\rangle|0^a\\rangle)=|0^a\\rangle|x\\rangle$. This sends the declared clean-input basis to the first $D$ standard basis vectors. The matrix $W\\Pi$ is the full-unitary extension interface used by [[thm-qc-isometry-completion-and-synthesis]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qc-exact-arbitrary-unitary-qsd-upper-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, every $n$-qubit unitary has an exact no-ancilla circuit with arbitrary one-qubit gates and at most\n$$\\frac{23}{48}4^n-\\frac32 2^n+\\frac43$$\nCNOTs. For $n=0$ or $n=1$, no CNOT is needed. This is a gate-count bound; it makes no numerical decomposition-time or finite-precision bit-complexity claim.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The initial list is orthonormal by the input hypothesis. If the current list is orthonormal, then for each $w_i\\in L$ the residual satisfies $\\langle r_j,w_i\\rangle=\\langle e_j,w_i\\rangle-\\sum_{w\\in L}\\langle e_j,w\\rangle\\langle w,w_i\\rangle=0$ by [F2] and orthonormality. If it is nonzero, division by its positive norm gives a unit vector orthogonal to every previous column; if it is zero, $e_j$ already lies in their span. Thus each update preserves orthonormality and puts $e_j$ in the span of the updated list.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After the finite loop, every standard basis vector $e_j$ lies in the final span by step 1.1. The standard basis spans $\\mathbb C^M$, so the final orthonormal list spans $\\mathbb C^M$ and has exactly $M$ vectors. If $z=\\sum_{j=1}^M c_jw_j$ is its expansion in that list, orthonormality and [F2] give $\\|z\\|_2^2=\\sum_j|c_j|^2$; the same coordinate calculation for the standard basis gives $\\|Wc\\|_2^2=\\sum_j|c_j|^2$. Thus the column map $W$ preserves norms and is injective by [F4]. By [F5] it is surjective in finite dimension, hence invertible; as a square norm-preserving map it is unitary by [F4]. Its first $D$ columns are the original list, namely $V$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $D=2^n$, $M=2^w$, [F3] identifies $|0^{w-n}\\rangle|x\\rangle$ with the standard basis vector $e_{\\operatorname{enc}_n(x)}$ among the first $D$ vectors. The declared permutation obeys $\\Pi(|x\\rangle|0^{w-n}\\rangle)=|0^{w-n}\\rangle|x\\rangle$. The first $D$ columns of $W$ then give $(W\\Pi)(|x\\rangle|0^{w-n}\\rangle)=V|x\\rangle$ for every computational basis input $x$; linearity gives the identity on the entire clean-input subspace.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The product $W\\Pi$ is itself one $w$-qubit unitary, so applying the QSD interface [A1] directly to this matrix gives the stated full-unitary gate upper bound, with the $w=0,1$ cases treated separately. Because the permutation is absorbed into the target matrix before synthesis, no separate permutation gate count is added. The construction places no condition on the $M$ output coordinates beyond the isometry equation, so it makes no claim that the extra output wires are clean.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires D>=1 and an isometry with at least one column."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero-dimensional input is outside the declared D>=1 matrix interface."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 cover D=M=1; the input column is already a unitary matrix and no residual is appended."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 cover D=M, where the input columns already span the output space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cases w=0 and w=1 are explicitly separated from the QSD CNOT formula in the Statement and step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The completion algorithm takes the first nonzero residual in the fixed standard-basis order; step 1.1 makes every finite selection deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The extension statement is established from V to the first D columns of W and then on the clean-input subspace in step 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a construction and upper bound, not an equivalence; there is no reverse direction to verify."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_suppliers": [
+        {
+          "supplier": "thm-qc-exact-arbitrary-unitary-qsd-upper-bound",
+          "affected_claim": "the numeric CNOT upper bound for synthesizing W Pi in local step 4.1",
+          "evidence": "The QSD supplier proof leaves its diagonal-extraction identity as explicit assumption [A1] at supplier step 2.2; local step 4.1 is therefore conditional and escalated."
+        }
+      ]
+    },
+    "lem-qc-prefix-norm-rotation-identities": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-state-preparation",
+          "source_section": "Definition",
+          "quote": "**Input and output.** Input an integer $n\\ge0$ and an explicit exact table $(a_x)_{x\\in\\{0,1\\}^n}$ in the ordered basis convention of [[def-qc-ordered-bitstring-encoding]]. If the table length is not $D=2^n$ or $\\sum_x|a_x|^2\\ne1$, return INVALID. Otherwise return a finite continuous-gate circuit which prepares the ray $[a]$ from $|0^n\\rangle$, together with its classical angle table. When the table is supplied as a dense fixed-width bit encoding, read all $b$ bits of each real and imaginary coordinate before computation. Arithmetic is ideal and exact: it supplies complex arithmetic, absolute value, exact zero tests and square roots; for $x,y\\ge0$ not both zero, $\\operatorname{atan2}(y,x)$ returns the unique $\\phi\\in[0,\\pi/2]$ with $\\cos\\phi=x/\\sqrt{x^2+y^2}$ and $\\sin\\phi=y/\\sqrt{x^2+y^2}$. For $z\\ne0$, $\\arg z\\in(-\\pi,\\pi]$ is the unique principal angle in the polar form of [[thm-polar-form-with-unique-principal-argument]], so $z=|z|e^{i\\arg z}$ by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. No Turing bit-time bound is asserted.\n\n**Prefix norms and rotations.** For every binary prefix $p$ of length at most $n$, set\n\n$$r_p=\\sqrt{\\sum_{x\\text{ extends }p}|a_x|^2}.$$\n\nFor $\\theta\\in\\mathbb R$ define\n\n$$R_y(\\theta)=\\begin{pmatrix}\\cos(\\theta/2)&-\\sin(\\theta/2)\\\\\\sin(\\theta/2)&\\cos(\\theta/2)\\end{pmatrix}$$\n\nin basis $(|0\\rangle,|1\\rangle)$. This is the $y$-axis rotation in the QC07 exponent convention; [[thm-qc-axis-rotation-pauli-formula]] gives this matrix and its unitarity. Define $C(U)=\\operatorname{diag}(I_2,U)$ with the control as the first wire, following [[def-qc-controlled-unitary-access]]. For each $l=0,\\ldots,n-1$ and each length-$l$ prefix $p$ in lexicographic order, skip the operation if $r_p=0$; otherwise set $\\theta_p=2\\operatorname{atan2}(r_{p1},r_{p0})$ and apply $R_y(\\theta_p)$ to bit $l$, controlled on the first $l$ bits equaling $p$. Length zero means no control. Thus no division is performed on a zero-norm branch.\n\n**Exact bounded-arity control construction.** For a control pattern with $m\\ge2$ bits, conjugate each zero-control bit by $X$ so the desired condition becomes all ones. Allocate $m-1$ clean work bits $w_1,\\ldots,w_{m-1}$. Compute $w_1=c_1c_2$ with one Toffoli; for $j=3,\\ldots,m$, compute $w_{j-1}=w_{j-2}c_j$ with one Toffoli. Use the final work bit as the control for the desired two-wire unitary, then apply the Toffolis in reverse order and undo the $X$ conjugations. For a leaf phase, apply $P_\\phi=\\operatorname{diag}(1,e^{i\\phi})$ to the final work bit instead. For $m=1$ use the corresponding one-control unitary directly; for $m=0$ apply the one-qubit operation directly. The work bits return to zero after each operation and are reused. A one-bit leaf phase uses $P_\\phi$ directly for pattern $1$ and $XP_\\phi X$ for pattern $0$.\n\n**Leaf phases.** For a basis string $x$, define $P_{x,\\phi}=I+(e^{i\\phi}-1)|x\\rangle\\langle x|$. Let $x_*$ be the lexicographically first index with $a_{x_*}\\ne0$. For each other $x$ with $a_x\\ne0$ and $\\arg(a_x)\\not\\equiv0\\pmod{2\\pi}$, apply $P_{x,\\arg(a_x)}$ using the control construction above. Zero entries and zero phases require no gate. Omitting $\\arg(a_{x_*})$ changes only a common scalar, so the output is the target ray. When $n=0$, the valid table has one unit-modulus entry and the empty circuit already prepares its unique ray.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every string extending $p$ extends exactly one of $p0$ or $p1$, so splitting the finite sum in the definition of the prefix radii gives $r_p^2=r_{p0}^2+r_{p1}^2$. Both child radii are nonnegative and $r_p>0$, so the pair $(r_{p0},r_{p1})$ is not $(0,0)$. By the declared $\\operatorname{atan2}$ convention, $\\phi=\\operatorname{atan2}(r_{p1},r_{p0})$ lies in $[0,\\pi/2]$ and has cosine $r_{p0}/r_p$ and sine $r_{p1}/r_p$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\theta_p/2=\\phi$, substituting gives both displayed identities, including the cases where exactly one child radius is zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 include the empty prefix because the hypothesis allows |p|=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If one child radius is zero, step 1.1 gives angle 0 or pi and step 2.1 verifies the corresponding cosine/sine endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When n=1, the only eligible prefix is empty; the finite descendant partition in step 1.1 still gives the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The degenerate case r_p=0 is expressly excluded, since the ratios and atan2 pair would be undefined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes either endpoint r_{p0}=0 or r_{p1}=0 through the declared atan2 convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the declared first-quadrant atan2 rule directly to the nonnegative child-radius pair; no arbitrary phase is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-state-preparation-rotation-level-upper-bound": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-state-preparation",
+          "source_section": "Definition",
+          "quote": "**Input and output.** Input an integer $n\\ge0$ and an explicit exact table $(a_x)_{x\\in\\{0,1\\}^n}$ in the ordered basis convention of [[def-qc-ordered-bitstring-encoding]]. If the table length is not $D=2^n$ or $\\sum_x|a_x|^2\\ne1$, return INVALID. Otherwise return a finite continuous-gate circuit which prepares the ray $[a]$ from $|0^n\\rangle$, together with its classical angle table. When the table is supplied as a dense fixed-width bit encoding, read all $b$ bits of each real and imaginary coordinate before computation. Arithmetic is ideal and exact: it supplies complex arithmetic, absolute value, exact zero tests and square roots; for $x,y\\ge0$ not both zero, $\\operatorname{atan2}(y,x)$ returns the unique $\\phi\\in[0,\\pi/2]$ with $\\cos\\phi=x/\\sqrt{x^2+y^2}$ and $\\sin\\phi=y/\\sqrt{x^2+y^2}$. For $z\\ne0$, $\\arg z\\in(-\\pi,\\pi]$ is the unique principal angle in the polar form of [[thm-polar-form-with-unique-principal-argument]], so $z=|z|e^{i\\arg z}$ by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. No Turing bit-time bound is asserted.\n\n**Prefix norms and rotations.** For every binary prefix $p$ of length at most $n$, set\n\n$$r_p=\\sqrt{\\sum_{x\\text{ extends }p}|a_x|^2}.$$\n\nFor $\\theta\\in\\mathbb R$ define\n\n$$R_y(\\theta)=\\begin{pmatrix}\\cos(\\theta/2)&-\\sin(\\theta/2)\\\\\\sin(\\theta/2)&\\cos(\\theta/2)\\end{pmatrix}$$\n\nin basis $(|0\\rangle,|1\\rangle)$. This is the $y$-axis rotation in the QC07 exponent convention; [[thm-qc-axis-rotation-pauli-formula]] gives this matrix and its unitarity. Define $C(U)=\\operatorname{diag}(I_2,U)$ with the control as the first wire, following [[def-qc-controlled-unitary-access]]. For each $l=0,\\ldots,n-1$ and each length-$l$ prefix $p$ in lexicographic order, skip the operation if $r_p=0$; otherwise set $\\theta_p=2\\operatorname{atan2}(r_{p1},r_{p0})$ and apply $R_y(\\theta_p)$ to bit $l$, controlled on the first $l$ bits equaling $p$. Length zero means no control. Thus no division is performed on a zero-norm branch.\n\n**Exact bounded-arity control construction.** For a control pattern with $m\\ge2$ bits, conjugate each zero-control bit by $X$ so the desired condition becomes all ones. Allocate $m-1$ clean work bits $w_1,\\ldots,w_{m-1}$. Compute $w_1=c_1c_2$ with one Toffoli; for $j=3,\\ldots,m$, compute $w_{j-1}=w_{j-2}c_j$ with one Toffoli. Use the final work bit as the control for the desired two-wire unitary, then apply the Toffolis in reverse order and undo the $X$ conjugations. For a leaf phase, apply $P_\\phi=\\operatorname{diag}(1,e^{i\\phi})$ to the final work bit instead. For $m=1$ use the corresponding one-control unitary directly; for $m=0$ apply the one-qubit operation directly. The work bits return to zero after each operation and are reused. A one-bit leaf phase uses $P_\\phi$ directly for pattern $1$ and $XP_\\phi X$ for pattern $0$.\n\n**Leaf phases.** For a basis string $x$, define $P_{x,\\phi}=I+(e^{i\\phi}-1)|x\\rangle\\langle x|$. Let $x_*$ be the lexicographically first index with $a_{x_*}\\ne0$. For each other $x$ with $a_x\\ne0$ and $\\arg(a_x)\\not\\equiv0\\pmod{2\\pi}$, apply $P_{x,\\arg(a_x)}$ using the control construction above. Zero entries and zero phases require no gate. Omitting $\\arg(a_{x_*})$ changes only a common scalar, so the output is the target ray. When $n=0$, the valid table has one unit-modulus entry and the empty circuit already prepares its unique ray.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-prefix-norm-rotation-identities",
+          "source_section": "Statement",
+          "quote": "For a prefix $p$ with $0\\le |p|<n$ and $r_p>0$, the angle $\\theta_p=2\\operatorname{atan2}(r_{p1},r_{p0})$ in [[alg-qc-state-preparation]] satisfies\n\n$$\\cos(\\theta_p/2)=r_{p0}/r_p,\\qquad \\sin(\\theta_p/2)=r_{p1}/r_p.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-axis-rotation-pauli-formula",
+          "source_section": "Statement",
+          "quote": "For $\\theta\\in\\mathbb R$ and $\\mathbf n=(n_x,n_y,n_z)\\in\\mathbb R^3$ with $\\|\\mathbf n\\|_2=1$, put $\\Sigma=\\mathbf n\\cdot\\boldsymbol{\\sigma}=n_xX+n_yY+n_zZ$. Then\n$$R_{\\mathbf n}(\\theta)=\\exp\\!\\left(-\\frac{i\\theta}{2}\\Sigma\\right)=\\cos(\\theta/2)I-i\\sin(\\theta/2)\\Sigma,$$\nand $R_{\\mathbf n}(\\theta)$ is unitary. For the endpoint $\\theta=0$, it equals $I$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-polar-form-with-unique-principal-argument",
+          "source_section": "Statement",
+          "quote": "Every $z\\ne0$ has a unique representation $z=r(\\cos\\theta+i\\sin\\theta)$ with $r=|z|>0$ and $-\\pi<\\theta\\le\\pi$. The conventions and prerequisite facts used below are recorded in [[def-complex-conjugate-real-imaginary-part-and-modulus]], [[thm-sine-and-cosine-parametrize-the-unit-circle]], [[thm-sine-cosine-zero-sets-and-fundamental-period]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Before any rotation the only nonzero prefix amplitude is the empty-prefix amplitude $1=r_{\\emptyset}$ because the table is normalized.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Consider a computational-basis control word $c_1,\\ldots,c_m$. Conjugating each zero-control by $X$ turns the requested pattern into all ones by [F5]. Starting from zero work bits, [F3] first sets $w_1=c_1c_2$ and then, successively, $w_{j-1}=w_{j-2}c_j$; induction on $j$ shows the final flag is $1$ exactly on the requested control pattern. The controlled operation in [F4] therefore acts only on that branch and changes neither the controls nor the flag. The basis action [F3] shows each Toffoli is its own inverse, and [F5] shows $X$ is its own inverse, so reversing the Toffoli list and undoing the $X$ conjugations restores all work bits to zero. For a leaf phase, the phase gate is diagonal and also leaves the flag's bit value unchanged. For one control the direct controlled block has the same branch action, and for no controls the one-qubit block acts on every branch. The Toffoli and $X$ are basis permutations, the rotations are unitary by [F7], and controlled blocks are unitary by [F4]; the phase gates are unitary by [F10]. The basis calculation extends linearly to superpositions under [F8] and [F9].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "construct",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose at depth $l$ every prefix $p$ has amplitude $r_p$ on $|p0^{n-l}\\rangle$ under the basis order in [F6]. If $r_p>0$, [F1], [F2], and [F7] split that amplitude into the nonnegative real amplitudes $r_p(r_{p0}/r_p)=r_{p0}$ and $r_p(r_{p1}/r_p)=r_{p1}$ on the two child prefixes. Step 1.2 shows the rotation is confined to the selected prefix branch; distinct length-$l$ prefixes therefore leave each other's amplitudes unchanged. If $r_p=0$, both children have radius zero and the zero branch remains zero without division. Thus induction gives the nonnegative real leaf amplitude $r_x=|a_x|$ at every leaf.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each nonzero leaf, [F10] gives $e^{i\\arg(a_x)}=a_x/|a_x|$, so the phase instruction multiplies its magnitude $|a_x|$ from step 2.1 to the target amplitude $a_x$, except for the omitted reference phase which is one common unit scalar. Its flag ladder restores the work bits by step 1.2, while a diagonal phase leaves the flag's bit value unchanged. Zero leaves stay zero. Hence the output ray is exactly $[a]$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F10",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The number of prefixes at depths $0$ through $n-1$ is $\\sum_{l=0}^{n-1}2^l=D-1$, and there are at most $D$ leaf phases. A control of $m\\ge2$ bits uses $2(m-1)$ Toffolis, at most $m$ $X$ gates for zero-controls, and one controlled one-qubit block; it uses $m-1$ clean work bits. Prefix rotations have $m\\le n-1$ controls and leaf phases have $m=n$, so the maximum work count is $\\max\\{n-1,0\\}$; the $m=0,1$ cases use constant resources. Since $m\\le n$, each of at most $2D-1$ operations costs $O(n+1)$ gates and serial depth, and step 1.2 shows the same work bits are restored and reused. For $n=0$, both operation lists are empty and the normalized one-entry table has a single ray.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 4.1 cover n=0: both operation lists are empty and the normalized one-entry table has one ray."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 skips r_p=0 branches and keeps both zero-radius descendants zero without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, prefix rotations have no controls and leaf phases use one control; step 4.1 assigns constant resources and zero extra work bits."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The workspace bound max{n-1,0} equals zero for n=0,1 and the statement handles both cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Angles 0 or pi for a vanishing child are covered by step 2.1; zero leaves remain zero in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The phase reference is fixed by the algorithm and omitted phase is common to all amplitudes; the Toffoli ladder is deterministically reversed in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the output magnitudes and step 3.1 applies the phases to obtain the target ray."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way construction and resource upper bound, not an iff characterization."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-state-preparation-cost": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-state-preparation-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge0$ and $D=2^n$. An explicit amplitude-table input is a list of $D$ exact complex numbers $(a_x)_{x\\in\\{0,1\\}^n}$ in the ordered basis convention of [[def-qc-ordered-bitstring-encoding]]; it is valid when $\\sum_x|a_x|^2=1$. Its target is the pure-state ray $[a]$ under [[def-qc-pure-state-and-ray]]: nonzero scalar multiples represent the same ray, and $a$ is a unit representative when the table is normalized. A claim must state whether its output error is projective chord distance [[def-qc-projective-chord-distance]] or a representative-level vector error.\n\nThe cost record keeps these quantities separate: (1) the classical encoding length and table-reading/preprocessing work; (2) continuous-angle gate occurrences, or finite-alphabet gate occurrences when that model is specified; (3) width, clean-workspace and serial-depth usage; and (4) the declared output-error metric. If an encoding assigns exactly $b$ bits to each real coordinate and $b$ bits to each imaginary coordinate, with basis order implicit, the dense table contains exactly $2Db$ input bits. Those bits must decode to the input table in an exact-table claim; finite-precision approximations are separate inputs with separate error hypotheses. An explicit table is classical input: this definition grants no coherent table oracle, QRAM, or free loading operation. Ideal exact complex arithmetic and finite-precision bit cost are distinct models.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qc-state-preparation",
+          "source_section": "Definition",
+          "quote": "**Input and output.** Input an integer $n\\ge0$ and an explicit exact table $(a_x)_{x\\in\\{0,1\\}^n}$ in the ordered basis convention of [[def-qc-ordered-bitstring-encoding]]. If the table length is not $D=2^n$ or $\\sum_x|a_x|^2\\ne1$, return INVALID. Otherwise return a finite continuous-gate circuit which prepares the ray $[a]$ from $|0^n\\rangle$, together with its classical angle table. When the table is supplied as a dense fixed-width bit encoding, read all $b$ bits of each real and imaginary coordinate before computation. Arithmetic is ideal and exact: it supplies complex arithmetic, absolute value, exact zero tests and square roots; for $x,y\\ge0$ not both zero, $\\operatorname{atan2}(y,x)$ returns the unique $\\phi\\in[0,\\pi/2]$ with $\\cos\\phi=x/\\sqrt{x^2+y^2}$ and $\\sin\\phi=y/\\sqrt{x^2+y^2}$. For $z\\ne0$, $\\arg z\\in(-\\pi,\\pi]$ is the unique principal angle in the polar form of [[thm-polar-form-with-unique-principal-argument]], so $z=|z|e^{i\\arg z}$ by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. No Turing bit-time bound is asserted.\n\n**Prefix norms and rotations.** For every binary prefix $p$ of length at most $n$, set\n\n$$r_p=\\sqrt{\\sum_{x\\text{ extends }p}|a_x|^2}.$$\n\nFor $\\theta\\in\\mathbb R$ define\n\n$$R_y(\\theta)=\\begin{pmatrix}\\cos(\\theta/2)&-\\sin(\\theta/2)\\\\\\sin(\\theta/2)&\\cos(\\theta/2)\\end{pmatrix}$$\n\nin basis $(|0\\rangle,|1\\rangle)$. This is the $y$-axis rotation in the QC07 exponent convention; [[thm-qc-axis-rotation-pauli-formula]] gives this matrix and its unitarity. Define $C(U)=\\operatorname{diag}(I_2,U)$ with the control as the first wire, following [[def-qc-controlled-unitary-access]]. For each $l=0,\\ldots,n-1$ and each length-$l$ prefix $p$ in lexicographic order, skip the operation if $r_p=0$; otherwise set $\\theta_p=2\\operatorname{atan2}(r_{p1},r_{p0})$ and apply $R_y(\\theta_p)$ to bit $l$, controlled on the first $l$ bits equaling $p$. Length zero means no control. Thus no division is performed on a zero-norm branch.\n\n**Exact bounded-arity control construction.** For a control pattern with $m\\ge2$ bits, conjugate each zero-control bit by $X$ so the desired condition becomes all ones. Allocate $m-1$ clean work bits $w_1,\\ldots,w_{m-1}$. Compute $w_1=c_1c_2$ with one Toffoli; for $j=3,\\ldots,m$, compute $w_{j-1}=w_{j-2}c_j$ with one Toffoli. Use the final work bit as the control for the desired two-wire unitary, then apply the Toffolis in reverse order and undo the $X$ conjugations. For a leaf phase, apply $P_\\phi=\\operatorname{diag}(1,e^{i\\phi})$ to the final work bit instead. For $m=1$ use the corresponding one-control unitary directly; for $m=0$ apply the one-qubit operation directly. The work bits return to zero after each operation and are reused. A one-bit leaf phase uses $P_\\phi$ directly for pattern $1$ and $XP_\\phi X$ for pattern $0$.\n\n**Leaf phases.** For a basis string $x$, define $P_{x,\\phi}=I+(e^{i\\phi}-1)|x\\rangle\\langle x|$. Let $x_*$ be the lexicographically first index with $a_{x_*}\\ne0$. For each other $x$ with $a_x\\ne0$ and $\\arg(a_x)\\not\\equiv0\\pmod{2\\pi}$, apply $P_{x,\\arg(a_x)}$ using the control construction above. Zero entries and zero phases require no gate. Omitting $\\arg(a_{x_*})$ changes only a common scalar, so the output is the target ray. When $n=0$, the valid table has one unit-modulus entry and the empty circuit already prepares its unique ray.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-state-preparation-rotation-level-upper-bound",
+          "source_section": "Statement",
+          "quote": "For an integer $n\\ge0$, $D=2^n$, and a normalized explicit amplitude table, [[alg-qc-state-preparation]] exactly prepares the target ray using at most $D-1$ prefix rotations and at most $D$ leaf phases. The specified Toffoli flag chain expands each operation into $O(n+1)$ bounded-arity gates using at most $\\max\\{n-1,0\\}$ reusable clean work bits, so the complete circuit has $O((n+1)D)$ gates and serial depth, in addition to the $n$ data qubits. For $n=0$, the ray is trivial and no gate is needed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] the table is a finite explicit classical input, and by [F3] its prefix procedure prepares the target ray. Summing $2^l$ over prefix lengths $l<n$ gives $D-1$ rotations, and there are at most $D$ leaf phases; the same theorem supplies the bounded-arity gate, serial-depth and workspace counts.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If the exact table is supplied in the fixed-width encoding of [F1], each of $D$ entries contains $b$ bits for its real coordinate and $b$ for its imaginary coordinate, with no per-entry index because the order is fixed. The procedure reads each encoded coordinate in its full-table preprocessing scan to form subtree norms and phases, so it reads exactly $2Db$ input bits in this bit-read model. This is an input and preprocessing charge separate from coherent gate cost; no alternate oracle or compressed-input lower bound is asserted.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The gate construction uses continuous-angle operations under ideal exact arithmetic. A fixed finite alphabet only supplies the separate approximation claim once its compiler hypotheses are verified; the present exact gate-count statement makes no arbitrary-angle finite-set or uniform Turing-time claim.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For n=0, D=1 and the procedure reads the one-entry dense input; step 1.1 gives zero rotations and at most one phase."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 permits zero table coordinates and uses the exact procedure’s zero-branch convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 include D=1: the one-entry ray is trivial and the bit formula 2Db remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The fixed-width bit charge is asserted only when the encoding decodes exactly to the stated amplitudes; step 1.2 states this premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed ordering eliminates per-entry index fields, so step 1.2 counts exactly two b-bit coordinates per entry."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit preprocessing pass reads each coordinate; the Statement separates this input scan from coherent gate cost and assumes no QRAM."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-qc-amplitude-table-precision-and-compilation": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-state-preparation",
+          "source_section": "Definition",
+          "quote": "**Input and output.** Input an integer $n\\ge0$ and an explicit exact table $(a_x)_{x\\in\\{0,1\\}^n}$ in the ordered basis convention of [[def-qc-ordered-bitstring-encoding]]. If the table length is not $D=2^n$ or $\\sum_x|a_x|^2\\ne1$, return INVALID. Otherwise return a finite continuous-gate circuit which prepares the ray $[a]$ from $|0^n\\rangle$, together with its classical angle table. When the table is supplied as a dense fixed-width bit encoding, read all $b$ bits of each real and imaginary coordinate before computation. Arithmetic is ideal and exact: it supplies complex arithmetic, absolute value, exact zero tests and square roots; for $x,y\\ge0$ not both zero, $\\operatorname{atan2}(y,x)$ returns the unique $\\phi\\in[0,\\pi/2]$ with $\\cos\\phi=x/\\sqrt{x^2+y^2}$ and $\\sin\\phi=y/\\sqrt{x^2+y^2}$. For $z\\ne0$, $\\arg z\\in(-\\pi,\\pi]$ is the unique principal angle in the polar form of [[thm-polar-form-with-unique-principal-argument]], so $z=|z|e^{i\\arg z}$ by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. No Turing bit-time bound is asserted.\n\n**Prefix norms and rotations.** For every binary prefix $p$ of length at most $n$, set\n\n$$r_p=\\sqrt{\\sum_{x\\text{ extends }p}|a_x|^2}.$$\n\nFor $\\theta\\in\\mathbb R$ define\n\n$$R_y(\\theta)=\\begin{pmatrix}\\cos(\\theta/2)&-\\sin(\\theta/2)\\\\\\sin(\\theta/2)&\\cos(\\theta/2)\\end{pmatrix}$$\n\nin basis $(|0\\rangle,|1\\rangle)$. This is the $y$-axis rotation in the QC07 exponent convention; [[thm-qc-axis-rotation-pauli-formula]] gives this matrix and its unitarity. Define $C(U)=\\operatorname{diag}(I_2,U)$ with the control as the first wire, following [[def-qc-controlled-unitary-access]]. For each $l=0,\\ldots,n-1$ and each length-$l$ prefix $p$ in lexicographic order, skip the operation if $r_p=0$; otherwise set $\\theta_p=2\\operatorname{atan2}(r_{p1},r_{p0})$ and apply $R_y(\\theta_p)$ to bit $l$, controlled on the first $l$ bits equaling $p$. Length zero means no control. Thus no division is performed on a zero-norm branch.\n\n**Exact bounded-arity control construction.** For a control pattern with $m\\ge2$ bits, conjugate each zero-control bit by $X$ so the desired condition becomes all ones. Allocate $m-1$ clean work bits $w_1,\\ldots,w_{m-1}$. Compute $w_1=c_1c_2$ with one Toffoli; for $j=3,\\ldots,m$, compute $w_{j-1}=w_{j-2}c_j$ with one Toffoli. Use the final work bit as the control for the desired two-wire unitary, then apply the Toffolis in reverse order and undo the $X$ conjugations. For a leaf phase, apply $P_\\phi=\\operatorname{diag}(1,e^{i\\phi})$ to the final work bit instead. For $m=1$ use the corresponding one-control unitary directly; for $m=0$ apply the one-qubit operation directly. The work bits return to zero after each operation and are reused. A one-bit leaf phase uses $P_\\phi$ directly for pattern $1$ and $XP_\\phi X$ for pattern $0$.\n\n**Leaf phases.** For a basis string $x$, define $P_{x,\\phi}=I+(e^{i\\phi}-1)|x\\rangle\\langle x|$. Let $x_*$ be the lexicographically first index with $a_{x_*}\\ne0$. For each other $x$ with $a_x\\ne0$ and $\\arg(a_x)\\not\\equiv0\\pmod{2\\pi}$, apply $P_{x,\\arg(a_x)}$ using the control construction above. Zero entries and zero phases require no gate. Omitting $\\arg(a_{x_*})$ changes only a common scalar, so the output is the target ray. When $n=0$, the valid table has one unit-modulus entry and the empty circuit already prepares its unique ray.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-state-preparation-rotation-level-upper-bound",
+          "source_section": "Statement",
+          "quote": "For an integer $n\\ge0$, $D=2^n$, and a normalized explicit amplitude table, [[alg-qc-state-preparation]] exactly prepares the target ray using at most $D-1$ prefix rotations and at most $D$ leaf phases. The specified Toffoli flag chain expands each operation into $O(n+1)$ bounded-arity gates using at most $\\max\\{n-1,0\\}$ reusable clean work bits, so the complete circuit has $O((n+1)D)$ gates and serial depth, in addition to the $n$ data qubits. For $n=0$, the ray is trivial and no gate is needed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-projective-chord-distance",
+          "source_section": "Definition",
+          "quote": "For an integer $D\\ge1$ and unit vectors $u,v\\in\\mathbb C^D$, write $[u]$ and $[v]$ for their pure-state rays and define the projective chord distance by\n\n$$d_{\\mathrm{ch}}([u],[v])=\\inf_{|\\lambda|=1}\\|u-\\lambda v\\|_2.$$\n\nHere $\\|\\cdot\\|_2$ is the norm induced by the root inner product, which is linear in its first argument. The infimum is over unit complex scalars, so it removes only the common phase of a state vector. The companion lemma [[lem-qc-projective-chord-distance-formula]] evaluates this infimum, proves it is attained, gives the closed formula, and proves independence from the chosen unit representatives.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-state-preparation-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge0$ and $D=2^n$. An explicit amplitude-table input is a list of $D$ exact complex numbers $(a_x)_{x\\in\\{0,1\\}^n}$ in the ordered basis convention of [[def-qc-ordered-bitstring-encoding]]; it is valid when $\\sum_x|a_x|^2=1$. Its target is the pure-state ray $[a]$ under [[def-qc-pure-state-and-ray]]: nonzero scalar multiples represent the same ray, and $a$ is a unit representative when the table is normalized. A claim must state whether its output error is projective chord distance [[def-qc-projective-chord-distance]] or a representative-level vector error.\n\nThe cost record keeps these quantities separate: (1) the classical encoding length and table-reading/preprocessing work; (2) continuous-angle gate occurrences, or finite-alphabet gate occurrences when that model is specified; (3) width, clean-workspace and serial-depth usage; and (4) the declared output-error metric. If an encoding assigns exactly $b$ bits to each real coordinate and $b$ bits to each imaginary coordinate, with basis order implicit, the dense table contains exactly $2Db$ input bits. Those bits must decode to the input table in an exact-table claim; finite-precision approximations are separate inputs with separate error hypotheses. An explicit table is classical input: this definition grants no coherent table oracle, QRAM, or free loading operation. Ideal exact complex arithmetic and finite-precision bit cost are distinct models.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qc-fixed-arity-unitary-error-budget",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge1$, $U\\in U(2^k)$, and a real $0<\\varepsilon<1/2$. Suppose a supplied exact decomposition of\n$U$ has $m\\ge1$ one-qubit $U(2)$ factors and $c\\ge0$ exact CNOT factors,\nwith no ancillas. Compiling the special-unitary part of each one-qubit factor\nto error $\\varepsilon/m$ gives a circuit $C$ such that\n$$\\min_{|\\lambda|=1}\\|U-\\lambda C\\|\\le\\varepsilon.$$\nIts gate count is at most\n$c+O(m\\log^{\\log_{3/2}5}(m/\\varepsilon))$ for fixed $k$ and fixed base net.\nFor every unit vector $\\psi$ and every nonnegative contraction $E$ on the\n$2^k$-dimensional space, the event value\n$p_E(V,\\psi):=\\|E^{1/2}V\\psi\\|^2$ changes by at most $2\\varepsilon$ between\n$V=U$ and $V=C$. The phase guarantee is for the whole unconditional block.\nHere nonnegative contraction means $E=E^*$, $\\langle Ev,v\\rangle\\ge0$ for\nall $v$, and $\\|E\\|\\le1$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each of the $2D$ real coordinates differs by at most $2^{-b}$, so $\\|v-a\\|_2^2\\le2D\\,2^{-2b}$ and $\\|v-a\\|_2\\le\\eta$. The reverse triangle inequality gives $|\\|v\\|_2-1|\\le\\eta$, hence $\\|v\\|_2\\ge1-\\eta>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Use [F8] to choose a rational $\\varepsilon'_c$ with $\\varepsilon_c/2<\\varepsilon'_c<\\varepsilon_c$. Let the exact normalized-table circuit be $U_G\\cdots U_1$. By [A1], for each whole block choose a unit scalar $\\lambda_j$ and a compiled block $\\widetilde U_j$ with $\\|U_j-\\lambda_j\\widetilde U_j\\|_{\\mathrm{op}}\\le\\varepsilon'_c/G<\\varepsilon_c/G$. Each block includes all of its controls and targets before compilation; thus $\\lambda_j$ is a scalar on its entire support and becomes one global scalar when tensored with identities on the other wires.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Split the normalization error through $v$: by [F5], $\\|v/\\|v\\|_2-a\\|_2\\le\\|v/\\|v\\|_2-v\\|_2+\\|v-a\\|_2=|1-\\|v\\|_2|+\\|v-a\\|_2\\le2\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Insert the $G$ intermediate products between $U_G\\cdots U_1$ and $(\\prod_j\\lambda_j)\\widetilde U_G\\cdots\\widetilde U_1$ to obtain the telescoping sum with one block difference in each term. For any unit input vector, [F5] bounds the norm of the sum by the sum of term norms; [F6] gives norm $1$ for every surrounding unitary factor, so [F7] bounds each term by $\\varepsilon'_c/G$. Taking the maximum over unit inputs with [F6] gives whole-circuit operator error at most $\\sum_{j=1}^G\\varepsilon'_c/G=\\varepsilon'_c<\\varepsilon_c$. Applying this to the fixed initial vector gives projective chord error at most $\\varepsilon'_c$ from the exact normalized-$v$ output.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], choose a phase aligning the compiled output to the exact normalized-$v$ joint output within $\\varepsilon'_c$, and a phase aligning that exact output to $a\\otimes|0^s\\rangle$ within $2\\eta$ by step 2.1. Multiplying the second phase by the first and applying [F5] gives $d_{\\mathrm{ch}}([\\mathrm{out}],[a\\otimes|0^s\\rangle])\\le2\\eta+\\varepsilon'_c<2\\eta+\\varepsilon_c$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For fixed maximum arity, [A1] uses $O(\\log^c(G/\\varepsilon'_c))$ finite-alphabet gates per block at accuracy $\\varepsilon'_c/G$, so $G$ blocks use $O(G\\log^c(G/\\varepsilon'_c))=O(G\\log^c(G/\\varepsilon_c))$ gates because $\\varepsilon'_c>\\varepsilon_c/2$. If the rational input table $v$ has an encoding as in [F4], it contains $2Db$ bits, and [F1] reads every real/imaginary coordinate in its preprocessing pass before exact normalization; this input scan is separate from quantum gate count. No angle-computation or compiler bit-time follows from these bounds.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For n=0, the Statement uses the empty circuit and zero error before introducing G>=1 for n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses eta<1/2 to obtain ||v||>=1-eta>0, so normalization is defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When G=1, the telescoping sum in step 2.2 has one term and the same epsilon-prime/G bound applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The boundary eta=1/2 is excluded because step 1.1 would no longer prove v nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses a rational internal budget strictly between the two epsilon endpoints, using rational density."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses one rational budget and then only finitely many block approximants; the theorem makes no uniform bit-time claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_suppliers": []
+    },
+    "ex-qc-amplitude-table-state-preparation-cost": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-state-preparation-rotation-level-upper-bound",
+          "source_section": "Statement",
+          "quote": "For an integer $n\\ge0$, $D=2^n$, and a normalized explicit amplitude table, [[alg-qc-state-preparation]] exactly prepares the target ray using at most $D-1$ prefix rotations and at most $D$ leaf phases. The specified Toffoli flag chain expands each operation into $O(n+1)$ bounded-arity gates using at most $\\max\\{n-1,0\\}$ reusable clean work bits, so the complete circuit has $O((n+1)D)$ gates and serial depth, in addition to the $n$ data qubits. For $n=0$, the ray is trivial and no gate is needed.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The norm is $|a_{00}|^2+|a_{01}|^2+|a_{10}|^2+|a_{11}|^2=1/2+0+1/4+1/4=1$, so the table is a valid normalized input. Four complex entries with $b$ bits for each of their two real coordinates occupy $8b$ bits.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The subtree norms are $r_{\\emptyset}=1$, $r_0=r_1=1/\\sqrt2$, and $r_{00}=r_{01}=r_{10}=r_{11}=1/2$. Hence $\\theta_{\\emptyset}=\\theta_0=\\theta_1=\\pi/2$ by the prefix formula in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The first rotation gives amplitudes $1/\\sqrt2$ on prefixes $0$ and $1$. The controlled $p=0$ rotation splits its branch equally between $|00\\rangle$ and $|01\\rangle$, and the $p=1$ rotation splits its branch equally between $|10\\rangle$ and $|11\\rangle$. The resulting vector is $(1/2,1/2,1/2,1/2)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Applying the phase $e^{i\\arg(a_{01})}=i$ to the $|01\\rangle$ branch yields $(1/2,i/2,1/2,1/2)$ exactly. The table's classical bit scan and these controlled gates are separate costs; none is a QRAM access.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2 and presents a nonempty four-entry table."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The real coordinate of a_01 is zero; step 1.1 includes zero coordinates in the exact norm and fixed-width count."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the squared norm is exactly one, so the table satisfies the normalized-input condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the exact dyadic coordinates, including the zero real coordinate, are representable for b>=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives all three rotation angles as pi/2, and step 4.1 applies the phase i only to the 01 branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The fixed table order determines the scan; the example explicitly states that no QRAM query is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one construction and does not assert an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one construction and does not assert an iff criterion."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-qc-countable-compact-null-union": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-null-and-content-zero-in-rn",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$. A **closed cube** is a rectangle $\\prod_{j<m}[a_j,a_j+\\ell]$ with $\\ell\\ge0$; its volume is $\\ell^m$. A set $E\\subseteq\\mathbb R^m$ is **null** when, for every $\\varepsilon>0$, it is covered by a sequence of closed cubes whose nonnegative volume series converges with sum at most $\\varepsilon$. It has **content zero** when such a cover can be finite.\n\nThe series and finite sums are [[def-series]] and [[def-finite-sum]], and their nonnegative bounds use [[thm-nonnegative-series-bounded-partial-sums]] and [[lem-finite-sum-laws]]. Both properties pass to subsets. Padding a finite cover with degenerate zero-volume cubes proves that content zero implies null. This terminology defines only cover-nullity; it does not define a measure on arbitrary sets.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-n-cross-n-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{N} \\times \\mathbb{N} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the\nplane of pairs of naturals is countably infinite ([[def-countable]]).\n\nThe bijection is exhibited, not merely asserted to exist. Define $2^m$ by\nrecursion on $m$ ([[thm-recursion]]) by $2^0 = 1$ and $2^{\\sigma(m)} = 2^m + 2^m$,\nand set\n\n$$J(m,n) = 2^m \\cdot \\sigma(n + n), \\qquad \\text{that is} \\qquad J(m,n) = 2^m(2n+1).$$\n\nThen $J$ is a bijection from $\\mathbb{N} \\times \\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, and $\\sigma$ is a bijection from $\\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, so $\\sigma^{-1} \\circ J$ is a bijection\n$\\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$. What makes $J$ bijective is the\ndecomposition of a nonzero natural into a power of two times an odd number,\nexistence and uniqueness both.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-multidimensional-rectangle-and-volume",
+          "source_section": "Definition",
+          "quote": "Fix a natural number $m\\ge1$. For $a,b\\in\\mathbb R^m$ with $a_j\\le b_j$ for $j<m$, define\n$$[a,b]:=\\{x\\in\\mathbb R^m:a_j\\le x_j\\le b_j\\ (j<m)\\},\\qquad \\operatorname{vol}[a,b]:=\\prod_{j<m}(b_j-a_j).$$\nThe product is the recursively defined finite product of [[def-finite-sum]]. The rectangle is **nondegenerate** when every $a_j<b_j$, and it is a **cube** when all side lengths are equal.\n\nEvery factor is nonnegative, so volume is nonnegative. For a coordinate index $r<m$, cutting at $c\\in[a_r,b_r]$ gives two rectangles whose volumes add to the original, by distributivity in that factor and [[lem-finite-sum-laws]]. Under the standard identification $\\mathbb R^1\\cong\\mathbb R$ ([[lem-metrics-on-rn]], [[def-p-norms-on-rn]]), this is the interval $[a_0,b_0]$ and its length.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals with $a_k \\ge 0$ for every $k \\in \\mathbb{N}$,\nlet $s_n = \\sum_{k<n} a_k$ be its partial sums and let\n$S = \\{\\, s_n : n \\in \\mathbb{N} \\,\\}$ be the range of $(s_n)$ ([[def-series]]).\nThen:\n\n1. $(s_n)$ is nondecreasing ([[def-monotone-sequence]]) and $s_n \\ge 0$ for every\n   $n$;\n2. $\\sum a_k$ converges **if and only if** $S$ is bounded above\n   ([[def-bounded-set]]), and in that case\n   $$\\sum_{k=0}^{\\infty} a_k \\;=\\; \\sup S ,$$\n   so in particular $s_n \\le \\sum_{k=0}^{\\infty} a_k$ for every $n$;\n3. if $S$ is not bounded above then $s_n \\to +\\infty$\n   ([[def-divergence-to-infinity]]) and $\\sum a_k$ diverges.\n\nThis is the theorem that makes the nonnegative theory work: for terms of one\nsign, convergence is a boundedness question and no candidate limit is ever\nneeded. Every comparison test on this page is an application of it.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-nat-addition",
+          "source_section": "Definition",
+          "quote": "**Addition** $+ : \\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$ is defined by\nrecursion on the second argument: for each fixed $m \\in \\mathbb{N}$,\n\n$$m + 0 = m, \\qquad m + \\sigma(n) = \\sigma(m + n).$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-nat-order",
+          "source_section": "Definition",
+          "quote": "For $m, n \\in \\mathbb{N}$, define the **order** by\n\n$$m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n),$$\n\nand the **strict order** by $m < n \\iff (m \\le n \\text{ and } m \\neq n)$, using\naddition ([[def-nat-addition]]).",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nat-linear-order",
+          "source_section": "Statement",
+          "quote": "The relation $\\le$ on $\\mathbb{N}$, where $m \\le n \\iff \\exists k\\ (m + k = n)$ ([[def-nat-order]]), is a linear (total) order: reflexive, antisymmetric, transitive, and total.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $K\\subseteq\\mathbb R^m$ be compact and null, and let $\\eta>0$. If $K=\\varnothing$, the empty family covers it. Otherwise [F1] gives a countable closed-cube cover $(C_j)$ with total volume at most $\\eta/8$. Write $C_j=\\prod_{r<m}[a_{jr},a_{jr}+\\ell_j]$ and let $x_{jr}=a_{jr}+\\ell_j/2$ be its center coordinates. Set $\\delta_j=\\min\\{1,\\eta2^{-j-5}/(3^m(1+\\ell_j)^{m-1})\\}$ and let $C'_j=\\prod_{r<m}(x_{jr}-(\\ell_j+2\\delta_j)/2,x_{jr}+(\\ell_j+2\\delta_j)/2)$, an open concentric enlargement. By the binomial formula, $(\\ell_j+2\\delta_j)^m-\\ell_j^m=\\sum_{r=1}^{m}\\binom mr\\ell_j^{m-r}(2\\delta_j)^r\\le\\delta_j(1+\\ell_j)^{m-1}\\sum_{r=1}^{m}\\binom mr2^r<3^m\\delta_j(1+\\ell_j)^{m-1}\\le\\eta2^{-j-5}$, because $\\delta_j^r\\le\\delta_j$, $\\ell_j^{m-r}\\le(1+\\ell_j)^{m-1}$ and $\\sum_{r=1}^m\\binom mr2^r=3^m-1$. Define the covering cost of an open cube of side $s$ to be $s^m$; this agrees with [F5] for its closed counterpart. The open cubes cover $K$ and their total covering cost is at most $\\eta/8+\\eta/16=3\\eta/16<\\eta/4$, using the geometric series. Compactness [F2] gives a finite subcover.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Order the finite subcover by its original indices and write $L_r$ and $x_r$ for the side and center of its $r$th open cube. The finite polynomial sum $\\sum_r(L_r+\\zeta)^m$ is continuous at $\\zeta=0$, so choose $\\zeta>0$ for which it is less than $\\sum_rL_r^m+\\eta/8<3\\eta/8$. By [F4], choose rational $q_r$ with $L_r<q_r<L_r+\\zeta$ and a rational center $y_r\\in\\mathbb Q^m$ whose coordinates differ from $x_r$ by less than $(q_r-L_r)/4$. The closed rational cube of side $q_r$ centered at $y_r$ contains the open cube of side $L_r$ centered at $x_r$, since each coordinate displacement is less than $L_r/2+(q_r-L_r)/4<q_r/2$. These finitely many rational cubes cover $K$, and their total volume is less than $3\\eta/8<\\eta/2$ by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix a bijection $\\nu:\\mathbb N\\to\\mathbb Q$ and a pairing bijection $\\pi:\\mathbb N^2\\to\\mathbb N$ from [F3]. A list of $t$ rational cubes is determined by $(m+1)t$ rationals: its side and its $m$ center coordinates for each cube. Encode a tuple $(a_0,\\ldots,a_{r-1})\\in\\mathbb N^r$ recursively by $c_0=0$ and $c_{r+1}(a_0,\\ldots,a_r)=\\pi(a_0,c_r(a_1,\\ldots,a_r))$. Since $\\pi$ and $\\nu$ are injective, pairing the list length $t$ with the code of its $(m+1)t$ rational coordinates gives an injection from all finite rational cube lists into $\\mathbb N$. For each natural code, use its unique list preimage if it has one, and otherwise use the empty list; this defines an enumeration $(\\mathcal C_s)_{s\\ge0}$ that includes every list. By step 2.1, every compact null $K$ has at least one enumerated list covering it with total volume less than $\\eta/2$. The set of qualifying codes is nonempty, so it has a least member by [F6]. The least-code rule assigns a unique cover to each pair $(K,\\eta)$ without choosing from an arbitrary family.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 2.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $\\varepsilon>0$. For each $i\\ge0$, apply the unique rule of step 3.1 to $(K_i,\\eta_i)$ with $\\eta_i=\\varepsilon2^{-i-1}$. Let $t_i$ be the finite length of its selected list, whose total volume is less than $\\varepsilon2^{-i-2}$. Define $N_0=0$ and $N_{i+1}=N_i+t_i$ recursively as in [F8]. For each $n\\in\\mathbb N$, if $N_i\\le n<N_{i+1}$ for some $i$, take the cube at position $n-N_i$ in the $i$th list; otherwise take the degenerate zero-side cube at the origin. The half-open index intervals are disjoint: if $i<j$, then $N_{i+1}\\le N_j$, so no $n$ lies in both. Each cube of the $i$th list, at position $j<t_i$, occurs at index $N_i+j$; thus every selected list occurs in the sequence.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F8",
+            "step 3.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Any finite initial segment meets only finitely many blocks. If it meets none, its total volume is zero. Otherwise, its finite set of block indices has a largest member $r$: scan the finite list and retain the larger at each comparison using the linear order in [F8]. Each partial block costs at most its full-list bound from step 4.1. By [F9], the budget sum $B_r=\\sum_{i=0}^{r}\\varepsilon2^{-i-2}$ satisfies $B_0=\\varepsilon/4=\\frac{\\varepsilon}{2}(1-2^{-1})$ and $B_{r+1}=B_r+\\varepsilon2^{-r-3}=\\frac{\\varepsilon}{2}(1-2^{-r-1})+\\varepsilon2^{-r-3}=\\frac{\\varepsilon}{2}(1-2^{-r-2})$. So induction gives $B_r=\\frac{\\varepsilon}{2}(1-2^{-r-1})<\\varepsilon/2$. Thus every partial sum of the nonnegative volume series is at most $\\varepsilon/2$, and [F7] gives convergence with total at most $\\varepsilon/2<\\varepsilon$. The sequence covers $\\bigcup_iK_i$, so [F1] shows that this union is null. Since every selected list is assigned by the unique least-code rule of step 3.1, the proof uses no choice principle.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "step 3.1",
+            "step 4.1",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles K=empty using the empty finite cover, whose total cost is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 admits zero-side cubes in the initial null cover and enlarges each by a positive delta_j before compactness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 4.1-5.1 cover a one-term sequence of compact null sets; the resulting cover has total volume below epsilon."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles an empty set and degenerate input cubes, while the positive enlargement gives open cubes for the finite subcover."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 replaces the finite open subcover by closed rational cubes that contain it, so boundary points remain covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 3.1-5.1 use the least qualifying rational-cover code and a fixed sequence construction, avoiding a countable choice of covers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional and asserts no equivalence; this worksheet direction is not part of its claim."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

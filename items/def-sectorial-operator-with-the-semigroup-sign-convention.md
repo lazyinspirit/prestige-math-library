@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-sectorial-operator-with-the-semigroup-sign-convention.json
 id: def-sectorial-operator-with-the-semigroup-sign-convention
 kind: definition
 title: Sectorial operator with the semigroup sign convention
@@ -6,7 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3
-deps: [def-complex-sector-and-bounded-analytic-semigroup, def-resolvent-of-a-closed-operator, def-densely-defined-closed-and-closable-operator, def-banach-space, def-unbounded-linear-operator-domain-and-graph, rem-real-and-complex-normed-space-convention, lem-canonical-banach-complexification-of-a-real-banach-space]
+deps: [def-complex-sector-and-bounded-analytic-semigroup, def-resolvent-of-a-closed-operator, def-densely-defined-closed-and-closable-operator, def-banach-space, def-unbounded-linear-operator-domain-and-graph, def-complex-norm-and-complex-normed-space, lem-canonical-banach-complexification-of-a-real-banach-space]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -19,18 +21,12 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: 'Chapter 2 Section 2.3, Definition 2.18 and the sign remark after it, printed p. 56'
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 ---
 
 ## Definition
 
 Let $X$ be a Banach space over $\mathbb K\in\{\mathbb R,\mathbb C\}$
-([[def-banach-space]], [[rem-real-and-complex-normed-space-convention]]) and let
+([[def-banach-space]], [[def-complex-norm-and-complex-normed-space]]) and let
 $A:D(A)\subseteq X\to X$ be a closed densely defined linear operator with
 resolvent $R(\lambda,A)=(\lambda I-A)^{-1}$
 ([[def-resolvent-of-a-closed-operator]],

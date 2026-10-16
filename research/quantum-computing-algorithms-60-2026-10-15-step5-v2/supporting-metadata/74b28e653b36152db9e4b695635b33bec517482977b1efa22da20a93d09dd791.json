@@ -1,0 +1,597 @@
+[
+  {
+    "order": 2234,
+    "id": "grover-search-and-invariant-plane-rotations",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Grover Search and Invariant-Plane Rotations",
+    "companion": "grover-search-and-invariant-plane-rotations-examples",
+    "requires": [
+      "reversible-arithmetic-and-oracle-conversion",
+      "computational-problems-promises-and-cost-models",
+      "registers-tensor-products-and-partial-trace",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "controlled-gates-phase-and-entanglement",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "inner-product-spaces-and-orthogonality",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "power-and-sample-size-planning",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "def-qa-11-marked-search-problem",
+        "kind": "definition",
+        "title": "Finite marked-item search and its bit oracle",
+        "deps": [
+          "def-qa-input-encoding-and-size",
+          "def-qa-phase-query",
+          "def-qa-standard-bit-query",
+          "def-qa-task-and-promise-domain",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-bitstring-index-is-bijection"
+        ],
+        "dependency_level": 19,
+        "local_order": 1,
+        "axiom_use": "No proof phase is supplied; the definition is finite operational data and uses only the declared input operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qa-11-grover-iterate",
+        "kind": "algorithm",
+        "title": "One Grover iterate in the standard bit-query model",
+        "deps": [
+          "def-qa-11-marked-search-problem",
+          "def-qa-standard-bit-query",
+          "thm-qa-bit-query-to-phase-query",
+          "def-qc-reflection",
+          "def-qa-quantum-query-algorithm",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "dependency_level": 20,
+        "local_order": 2,
+        "axiom_use": "No proof phase is supplied; the definition is finite operational data and uses only the declared input operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-11-good-bad-decomposition",
+        "kind": "lemma",
+        "title": "Orthogonal marked and unmarked components of the uniform state",
+        "deps": [
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-inner-product-space",
+          "def-principal-inverse-sine-and-cosine",
+          "def-qa-11-marked-search-problem",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-pure-state-and-ray",
+          "lem-of-square-monotone",
+          "thm-of-square-roots",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ],
+        "dependency_level": 20,
+        "local_order": 3,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-grover-iterate-query-cost",
+        "kind": "theorem",
+        "title": "One Grover iterate uses one standard bit query",
+        "deps": [
+          "alg-qa-11-grover-iterate",
+          "def-qa-quantum-query-complexity",
+          "thm-qa-bit-query-to-phase-query"
+        ],
+        "dependency_level": 21,
+        "local_order": 4,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-11-known-count-grover-search",
+        "kind": "algorithm",
+        "title": "Known-count Grover search by exact integer maximization",
+        "deps": [
+          "alg-qa-11-grover-iterate",
+          "def-qa-11-marked-search-problem",
+          "def-qa-phase-query",
+          "def-qa-quantum-query-algorithm",
+          "def-qa-standard-bit-query",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-reflection",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "thm-of-square-roots",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "dependency_level": 21,
+        "local_order": 5,
+        "axiom_use": "No proof phase is supplied; the definition is finite operational data and uses only the declared input operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "prop-qa-11-known-count-preprocessing-cost"
+        ]
+      },
+      {
+        "id": "lem-qa-11-grover-invariant-plane-rotation",
+        "kind": "lemma",
+        "title": "The Grover iterate rotates the marked/unmarked plane",
+        "deps": [
+          "alg-qa-11-grover-iterate",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-reflection",
+          "lem-qa-11-good-bad-decomposition",
+          "thm-double-angle-and-power-reduction-identities"
+        ],
+        "dependency_level": 21,
+        "local_order": 6,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-11-known-count-random-iteration-search",
+        "kind": "algorithm",
+        "title": "Known-count search by randomized Grover iteration",
+        "deps": [
+          "alg-qa-11-grover-iterate",
+          "def-qa-11-marked-search-problem",
+          "def-qa-classical-bit-cost",
+          "def-qa-quantum-query-algorithm",
+          "def-qa-standard-bit-query",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-reflection",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "thm-of-square-roots",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "dependency_level": 21,
+        "local_order": 7,
+        "axiom_use": "No proof phase is supplied; the definition is finite operational data and uses only the declared input operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "prop-qa-11-known-count-random-selection-bit-cost"
+        ]
+      },
+      {
+        "id": "alg-qa-11-bbht-unknown-count-search",
+        "kind": "algorithm",
+        "title": "BBHT search when the marked count is unknown",
+        "deps": [
+          "alg-qa-11-grover-iterate",
+          "def-qa-11-marked-search-problem",
+          "def-qa-phase-query",
+          "def-qa-quantum-query-algorithm",
+          "def-qa-standard-bit-query",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-reflection",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "dependency_level": 21,
+        "local_order": 8,
+        "axiom_use": "No proof phase is supplied; the definition is finite operational data and uses only the declared input operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-11-exact-integer-iteration-formula",
+        "kind": "theorem",
+        "title": "Exact success probability after an integer number of Grover iterates",
+        "deps": [
+          "alg-qa-11-grover-iterate",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-inner-product-space",
+          "def-qa-finite-branch-output-law",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-register-and-computational-basis",
+          "lem-qa-11-good-bad-decomposition",
+          "lem-qa-11-grover-invariant-plane-rotation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-unit-vector-projector-is-density",
+          "thm-sine-and-cosine-addition-formulas"
+        ],
+        "dependency_level": 22,
+        "local_order": 9,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-qa-11-known-count-preprocessing-cost",
+        "kind": "proposition",
+        "title": "Bit cost of exact known-count iteration selection",
+        "deps": [
+          "alg-qa-11-known-count-grover-search",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-principal-inverse-sine-and-cosine",
+          "def-qa-classical-bit-cost",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "lem-of-square-monotone",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-of-square-roots",
+          "thm-sine-and-cosine-addition-formulas"
+        ],
+        "dependency_level": 22,
+        "local_order": 10,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-qa-11-known-count-random-selection-bit-cost",
+        "kind": "proposition",
+        "title": "Classical bit cost of randomized known-count search",
+        "deps": [
+          "alg-qa-11-known-count-random-iteration-search",
+          "def-qa-classical-bit-cost",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "lem-of-square-monotone",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 22,
+        "local_order": 11,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-qa-11-known-count-random-gate-accounting",
+        "kind": "proposition",
+        "title": "Gate and reflection accounting for randomized known-count search",
+        "deps": [
+          "alg-qa-11-known-count-random-iteration-search",
+          "def-qc-circuit-cost-model",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-reflection",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "thm-of-square-roots",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "dependency_level": 22,
+        "local_order": 12,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-integer-iteration-regime",
+        "kind": "theorem",
+        "title": "Integer rounding gives a high-success Grover iterate",
+        "deps": [
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-pi-via-first-positive-cosine-zero",
+          "def-principal-inverse-sine-and-cosine",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "lem-integer-part",
+          "lem-of-square-monotone",
+          "thm-cosine-has-a-smallest-positive-zero",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-of-square-roots",
+          "thm-qa-11-exact-integer-iteration-formula",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ],
+        "dependency_level": 23,
+        "local_order": 14,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-11-random-iteration-average",
+        "kind": "lemma",
+        "title": "Average Grover success for a uniform integer iteration count",
+        "deps": [
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-principal-inverse-sine-and-cosine",
+          "def-qa-11-marked-search-problem",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "lem-of-square-monotone",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-of-square-roots",
+          "thm-qa-11-exact-integer-iteration-formula",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ],
+        "dependency_level": 23,
+        "local_order": 15,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-11-bbht-stage-success-bound",
+        "kind": "lemma",
+        "title": "Constant BBHT stage success beyond the threshold scale",
+        "deps": [
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-principal-inverse-sine-and-cosine",
+          "lem-of-square-monotone",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-of-square-roots",
+          "thm-qa-11-exact-integer-iteration-formula",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ],
+        "dependency_level": 23,
+        "local_order": 21,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-bbht-termination-and-success",
+        "kind": "theorem",
+        "title": "Unknown-count search halts almost surely when a marked item exists",
+        "deps": [
+          "alg-qa-11-bbht-unknown-count-search",
+          "def-qa-11-marked-search-problem",
+          "lem-qa-11-bbht-stage-success-bound"
+        ],
+        "dependency_level": 24,
+        "local_order": 13,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-known-count-success-bound",
+        "kind": "theorem",
+        "title": "Success guarantee and boundary behavior of known-count Grover search",
+        "deps": [
+          "alg-qa-11-known-count-grover-search",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-of-square-roots",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "prop-qa-11-known-count-preprocessing-cost",
+          "thm-qa-11-exact-integer-iteration-formula",
+          "thm-qa-11-integer-iteration-regime"
+        ],
+        "dependency_level": 24,
+        "local_order": 17,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-known-count-random-success",
+        "kind": "theorem",
+        "title": "Nine-round randomized known-count search succeeds with probability at least two-thirds",
+        "deps": [
+          "alg-qa-11-known-count-random-iteration-search",
+          "lem-qa-11-random-iteration-average"
+        ],
+        "dependency_level": 24,
+        "local_order": 18,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-bbht-expected-query-cost",
+        "kind": "theorem",
+        "title": "Expected bit-query cost of unknown-count BBHT search",
+        "deps": [
+          "alg-qa-11-bbht-unknown-count-search",
+          "def-qa-expected-query-cost",
+          "def-qa-quantum-query-complexity",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "lem-of-square-monotone",
+          "lem-qa-11-bbht-stage-success-bound",
+          "thm-of-square-roots",
+          "thm-qa-11-bbht-termination-and-success",
+          "thm-qa-11-grover-iterate-query-cost"
+        ],
+        "dependency_level": 25,
+        "local_order": 16,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-known-count-query-cost",
+        "kind": "theorem",
+        "title": "Known-count Grover search uses O of the square root of N over t bit queries",
+        "deps": [
+          "alg-qa-11-known-count-grover-search",
+          "def-qa-quantum-query-complexity",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "lem-of-square-monotone",
+          "thm-of-square-roots",
+          "thm-qa-11-grover-iterate-query-cost",
+          "thm-qa-11-known-count-success-bound"
+        ],
+        "dependency_level": 25,
+        "local_order": 19,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-11-known-count-random-query-cost",
+        "kind": "theorem",
+        "title": "Query cost of randomized known-count Grover search",
+        "deps": [
+          "alg-qa-11-known-count-random-iteration-search",
+          "def-qa-quantum-query-complexity",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "lem-of-square-monotone",
+          "thm-of-square-roots",
+          "thm-qa-11-grover-iterate-query-cost"
+        ],
+        "dependency_level": 22,
+        "local_order": 20,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2235,
+    "id": "grover-search-and-invariant-plane-rotations-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Grover Search and Invariant-Plane Rotations \u2014 Examples",
+    "companion": "grover-search-and-invariant-plane-rotations",
+    "requires": [
+      "grover-search-and-invariant-plane-rotations"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-11-small-grover-rotation",
+        "kind": "example",
+        "title": "Exact Grover rotation for four addresses and one marked item",
+        "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-cosine-has-a-smallest-positive-zero",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-of-square-roots",
+          "thm-qa-11-exact-integer-iteration-formula",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ],
+        "dependency_level": 23,
+        "local_order": 1,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-11-rounding-can-overshoot",
+        "kind": "counterexample",
+        "title": "A real-valued optimum is not a fractional Grover iteration",
+        "deps": [
+          "alg-qa-11-known-count-grover-search",
+          "def-pi-via-first-positive-cosine-zero",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-cosine-has-a-smallest-positive-zero",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-of-square-roots",
+          "thm-qa-11-exact-integer-iteration-formula",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ],
+        "dependency_level": 23,
+        "local_order": 2,
+        "axiom_use": "None; only finite sums, finite random choices, elementary real arithmetic, and natural-number induction are used; no choice principle is needed.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

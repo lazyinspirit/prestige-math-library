@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-bounded-linear-operator.json
 id: def-bounded-linear-operator
 kind: definition
 title: "A bounded linear operator between normed spaces"
@@ -7,14 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-linear-map, def-norm-and-normed-space,
-       rem-real-and-complex-normed-space-convention]
+deps: [def-linear-map, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space]
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  audited: 2026-09-01
-  precheck: n/a
 sources:
   scraped: []
   references:
@@ -27,9 +25,9 @@ pipeline_run: frontier-28
 
 ## Definition
 
-Let $X$ and $Y$ be normed spaces over the same scalar field $\mathbb K$, read in
+Let $X$ and $Y$ be normed spaces over the same scalar field $\mathbb K\in\{\mathbb R,\mathbb C\}$, read in
 the real case from [[def-norm-and-normed-space]] and in the complex case from
-[[rem-real-and-complex-normed-space-convention]]. A linear map
+[[def-complex-norm-and-complex-normed-space]]. A $\mathbb K$-linear map
 $T:X\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a
 real constant $C \ge 0$ such that
 

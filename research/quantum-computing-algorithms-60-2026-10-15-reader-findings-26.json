@@ -1,0 +1,32 @@
+{
+  "batch": "26",
+  "findings": [
+    {
+      "id": "def-qc-toffoli-and-fredkin",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "alg-qa-reversible-binary-dot-product",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "d114da7930580de00e29a297836bd8e44954d6dfd5c736f307b8376c3521ffb4"
+      },
+      "location": "Definition, opening sentence and Toffoli action (line 38)",
+      "defect": "ill-formed",
+      "evidence": "The definition uses addition \\oplus and multiplication ab on \\mathbb F_2, but has no dependency on def-qa-binary-field-f2 and states no local operation table. The assigned consumer uses this Toffoli action to compute coordinate products; the exact bit operations need to be supplied by this definition or an explicit dependency.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "thm-qc-controlled-global-phase-is-relative-phase",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "thm-qa-global-phase-under-control",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "2db1ceb8162d151fb0924bd7c765cbaf75ddb0d84e29222a4fc77400b0102dcb"
+      },
+      "location": "Proof, step 4.1 (line 109), citation [F2]",
+      "defect": "citation-inaccurate",
+      "evidence": "[F2] is thm-finite-dimensional-isometry-characterisations and gives no complex-exponential identities. [F4] gives Euler's formula and modulus, but not z^2=e^{iθ}; thm-complex-exponential-addition-and-real-extension states the required addition law and should support the exponent identities in this step. The probability claim remains correct.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Reviewed all 12 assigned items, both assigned page summaries, their direct item suppliers, the nine required-page summaries, and the batch-26 proof-contract derivations and boundary summaries. I first opened def-qa-binary-field-f2 during scope inventory before opening its three published suppliers, then assessed its proof after reading them. I did not independently audit every transitive proof dependency of the direct suppliers; the findings are limited to the exact source claims and supporting statements inspected."
+}

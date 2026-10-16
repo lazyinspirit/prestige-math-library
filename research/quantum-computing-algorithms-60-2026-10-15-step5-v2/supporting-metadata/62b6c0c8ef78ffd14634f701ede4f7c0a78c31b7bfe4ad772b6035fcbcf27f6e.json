@@ -1,0 +1,844 @@
+[
+  {
+    "order": 2174,
+    "id": "channels-kraus-choi-and-stinespring-representations",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Channels, Kraus, Choi, and Stinespring Representations",
+    "companion": "channels-kraus-choi-and-stinespring-representations-examples",
+    "requires": [
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "inner-product-spaces-and-orthogonality",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "measurements-povms-and-instruments",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "registers-tensor-products-and-partial-trace",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-qc-kraus-representation",
+        "kind": "definition",
+        "title": "Finite Kraus representation",
+        "statement": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that\n\n$$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere $K_a^\\dagger:K\\to H$ is the adjoint\n([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]), which exists\nuniquely in finite dimensions ([[thm-adjoint-exists-and-is-unique-in-finite-dimension]]).\nThe composition $K_a\\circ X\\circ K_a^\\dagger$ maps $K$ to $K$, so the sum\ndefines an output endomorphism for each input endomorphism $X$. The index set\n$A$ may be empty; its sum is then the zero map. Zero operators are allowed in\na nonempty family.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Specify the input endomorphism and output rectangular operators/adjoints.",
+          "Define empty and zero-operator families without asserting complete positivity."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.2.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qc-linear-isometry-adjoint-identities",
+        "kind": "lemma",
+        "title": "Finite-dimensional linear isometries satisfy the adjoint identity",
+        "statement": "Let $H,K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces and let\n$V:H\\to K$ be a linear isometry. Then $V^\\dagger V=I_H$. If $V$ is also\nsurjective, then $VV^\\dagger=I_K$.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "thm-jordan-von-neumann-polarization"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Use the first-linear polarization formula to derive inner-product preservation from norm preservation.",
+          "Use adjoint existence and pairing nondegeneracy for V†V=I; prove VV†=I from surjectivity without a choice axiom."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), Theorem 2.22",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-qc-unitary-conjugation-channel",
+        "kind": "definition",
+        "title": "Unitary conjugation map",
+        "statement": "Let $H,K$ be nonzero finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces of equal\ndimension. We call a surjective linear isometry\n$U:H\\to K$ ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]) a\n**unitary map** between these spaces. By\n[[lem-qc-linear-isometry-adjoint-identities]], its adjoint exists uniquely,\n$U^\\dagger U=I_H$, and $UU^\\dagger=I_K$. Define the\n**unitary conjugation map**\n$$\\operatorname{Ad}_U:\\mathcal L(H)\\to\\mathcal L(K),\\qquad \\operatorname{Ad}_U(X)=UXU^\\dagger.$$ \nHere $\\mathcal L(H)$ and $\\mathcal L(K)$ are the complex-linear endomorphism\nspaces ([[def-linear-map]]). It is well-defined because the composition is\n$U\\circ X\\circ U^\\dagger:K\\to K$, and it is complex-linear in $X$.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "lem-qc-linear-isometry-adjoint-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_obligations": [
+          "Specify a surjective linear isometry U:H→K and the domains of U and U†.",
+          "Define Ad_U on the full operator spaces and state the channel property as a separate proposition."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qc-trace-preserving-kraus-normalization",
+        "kind": "theorem",
+        "title": "Trace preservation is Kraus normalization",
+        "statement": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-qc-kraus-representation",
+          "lem-qc-trace-pairing-nondegenerate",
+          "prop-trace-is-linear"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Expand the trace of the Kraus sum and cycle compatible rectangular products.",
+          "Use the nondegenerate trace pairing for the converse on all input operators, including dimension zero."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), Theorem 2.26",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.2.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-qc-unitary-conjugation-global-phase-invariant",
+        "kind": "proposition",
+        "title": "Unitary conjugation is invariant under a global phase",
+        "statement": "Let $H,K$ be nonzero finite-dimensional complex inner-product spaces of equal\ndimension, let $U:H\\to K$ be a unitary map, and let $z\\in\\mathbb C$ satisfy\n$|z|=1$. Then $zU$ is unitary and\n$$\\operatorname{Ad}_{zU}=\\operatorname{Ad}_{U}.$$\nThis equality concerns conjugation by a single unitary. It makes no assertion\nabout controlled uses, where a scalar on one control branch may be a relative\nphase.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "prop-adjoint-algebra",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-qc-unitary-conjugation-channel",
+          "lem-qc-linear-isometry-adjoint-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Prove zU remains surjective and norm-preserving when |z|=1.",
+          "Compute conjugation on every operator and state why this does not settle a controlled use."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.2.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-qc-choi-matrix",
+        "kind": "definition",
+        "title": "Choi matrix with input factor first",
+        "statement": "Let $H_{\\mathrm{in}}$ and $H_{\\mathrm{out}}$ be finite-dimensional (have\nfinite bases by [[def-dimension]]) complex inner-product spaces\n([[def-real-and-complex-inner-product-space]]), and fix an\nordered orthonormal basis $\\mathcal B=(e_0,\\ldots,e_{n-1})$ of\n$H_{\\mathrm{in}}$ (the register basis convention is in\n[[def-qc-register-and-computational-basis]]). For $i,j<n$, let\n$E_{ij}\\in\\mathcal L(H_{\\mathrm{in}})$ be the matrix unit, where\n$\\mathcal L(H_{\\mathrm{in}})$ denotes the complex-linear endomorphisms\n([[def-linear-map]]),\n$E_{ij}x:=\\langle x,e_j\\rangle e_i$, using the root inner product convention\nthat the first argument is linear. Given a complex-linear map\n$\\Phi:\\mathcal L(H_{\\mathrm{in}})\\to\\mathcal L(H_{\\mathrm{out}})$\n([[def-linear-map]]), its **Choi matrix relative to $\\mathcal B$** is\n\n$$J_{\\mathcal B}(\\Phi):=\\sum_{i,j<n} E_{ij}\\otimes\\Phi(E_{ij})\\in\\mathcal L(H_{\\mathrm{in}}\\otimes H_{\\mathrm{out}}),$$\nwhere the operator tensor is the tensor map of [[def-qc-tensor-map]] and the\ntensor inner product is the finite product pairing in\n[[def-qc-tensor-register-and-permutation]].\n\nThe tensor factors are ordered input first and output second. The coordinate\nmatrix has size $(n\\,\\dim H_{\\mathrm{out}})\\times(n\\,\\dim H_{\\mathrm{out}})$.\nThe chosen input basis is part of this definition. If the input basis is\nempty, the displayed sum is empty; if $\\dim H_{\\mathrm{out}}=0$, each\nsummand is zero and $J_{\\mathcal B}(\\Phi)$ is the unique endomorphism of the\nzero-dimensional tensor product.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Fix the ordered input basis and input-first/output-second factor order.",
+          "Define matrix units in the first-linear root convention and state the finite matrix size and zero cases."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.1–2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.3.1–3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qc-isometric-stinespring-representation",
+        "kind": "definition",
+        "title": "Isometric Stinespring representation",
+        "statement": "Let $H$, $K$, and $E$ be finite-dimensional (have finite bases by\n[[def-dimension]]) complex inner-product spaces\n([[def-real-and-complex-inner-product-space]]), and let\n$V:H\\to K\\otimes E$ be a linear isometry\n([[def-linear-isometry-and-orthogonal-or-unitary-operator]]), so\n$V^\\dagger V=I_H$ by [[lem-qc-linear-isometry-adjoint-identities]]. The map\n\n$$\\Phi_V(X):=\\operatorname{Tr}_E(VXV^\\dagger),\\qquad X\\in\\mathcal L(H),$$\n\nis the **isometric Stinespring form** associated with $V$. An **isometric\nStinespring representation** ([[def-linear-map]]) of\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is such a formula, where\n$\\operatorname{Tr}_E$ is the finite partial trace\n([[def-qc-partial-trace]]) under the tensor convention\n[[def-qc-tensor-register-and-permutation]], together with its chosen finite\nenvironment $E$ and isometry $V$. The composition\n$V\\circ X\\circ V^\\dagger$ is an endomorphism of $K\\otimes E$, and the\npartial trace maps it linearly to an endomorphism of $K$. Thus the displayed\nformula defines a complex-linear map on the full input operator space. This\ndefinition makes no existence assertion for an arbitrary map.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-partial-trace",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "lem-qc-linear-isometry-adjoint-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Define the finite environment and partial-trace formula with K first and E second.",
+          "Separate definition of the form from universal existence and the channel property."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.1–2.2.3",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qc-tensor-products-of-operator-matrix-units-form-a-basis",
+        "kind": "lemma",
+        "title": "Tensor products of operator matrix units form a basis",
+        "statement": "Let $H,H'$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces with ordered\northonormal bases $(e_u)_{u<n}$ and $(f_s)_{s<m}$. For $u,v<n$ and $s,t<m$\ndefine $E_{uv}x:=\\langle x,e_v\\rangle e_u$ and\n$F_{st}y:=\\langle y,f_t\\rangle f_s$. Then\n$(E_{uv}\\otimes F_{st})_{u,v,s,t}$ is a basis of\n$\\mathcal L(H\\otimes H')$. Empty dimensions give the empty basis of the zero\nendomorphism space. The root pairing is linear in its first argument, so the\ndisplayed matrix-unit maps are linear.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute each tensor matrix unit on the ordered product basis.",
+          "Use coordinate columns for spanning and uniqueness, including zero factors."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.2.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-qc-positive-choi-matrix-yields-kraus-operators",
+        "kind": "lemma",
+        "title": "A positive Choi matrix yields finite Kraus operators",
+        "statement": "Let $H,K$ be finite-dimensional complex inner-product spaces, let\n$\\mathcal B=(e_i)_{i<n}$ be an ordered orthonormal basis of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. If\n$J_{\\mathcal B}(\\Phi)$ is non-negative, then $\\Phi$ has a finite Kraus\nrepresentation with at most $\\dim(H)\\dim(K)$ operators.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-qc-choi-matrix",
+          "def-qc-kraus-representation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Use a positive square root and its finite orthonormal eigenbasis to construct rectangular Kraus maps.",
+          "Verify every input-first Choi matrix-unit entry and handle zero spaces and the zero Choi operator."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.3.1–3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-qc-quantum-channel",
+        "kind": "definition",
+        "title": "Finite-dimensional quantum channel",
+        "statement": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-linear-map",
+          "def-qc-completely-positive-map",
+          "def-trace-of-an-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_obligations": [
+          "Specify finite input/output spaces and trace preservation on the full operator space.",
+          "State that no physical realization is assumed."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.2.1 and 3.2.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qc-complete-positivity-implies-choi-positivity",
+        "kind": "lemma",
+        "title": "Complete positivity implies Choi positivity",
+        "statement": "Let $H$ and $K$ be finite-dimensional complex inner-product spaces, fix an\nordered orthonormal basis $\\mathcal B$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be completely positive. Then\n$J_{\\mathcal B}(\\Phi)$ is non-negative.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "prop-adjoint-algebra",
+          "def-non-negative-and-positive-operator",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "prop-standard-coordinate-inner-products",
+          "def-qc-completely-positive-map",
+          "def-qc-choi-matrix",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "lem-qc-linear-isometry-adjoint-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Apply the defining block amplification to a positive rank-one operator on H tensor C^n.",
+          "Swap the amplified output/reference factors explicitly to reach the input-first Choi order; include zero spaces."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.2.6 and 3.3.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qc-kraus-map-completely-positive",
+        "kind": "theorem",
+        "title": "A finite Kraus sum is completely positive",
+        "statement": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ have a finite Kraus representation\n$\\Phi(X)=\\sum_{a\\in A}K_a X K_a^\\dagger$. Then $\\Phi$ is completely positive.",
+        "deps": [
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "prop-adjoint-algebra",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-matrix-product-and-identity-matrix",
+          "prop-standard-coordinate-inner-products",
+          "def-qc-kraus-representation",
+          "def-qc-completely-positive-map",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "def-non-negative-and-positive-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Show every finite block amplification agrees with the Kraus sum on product matrix units.",
+          "Show each operator conjugation and its finite sum preserves non-negativity, including an empty family."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.2.1 and 3.2.6",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qc-isometry-partial-trace-is-channel",
+        "kind": "theorem",
+        "title": "An isometry followed by partial trace is a channel",
+        "statement": "Let $H,K,E$ be finite-dimensional complex inner-product spaces and let\n$V:H\\to K\\otimes E$ be a linear isometry. Then\n$$\\Phi(X)=\\operatorname{Tr}_E(VXV^\\dagger),\\qquad X\\in\\mathcal L(H),$$\nis a quantum channel from $H$ to $K$.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "prop-adjoint-algebra",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "def-trace-of-an-endomorphism",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-qc-isometric-stinespring-representation",
+          "def-qc-partial-trace",
+          "def-qc-completely-positive-map",
+          "def-qc-quantum-channel",
+          "def-qc-kraus-representation",
+          "thm-qc-kraus-map-completely-positive",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "lem-qc-linear-isometry-adjoint-identities",
+          "thm-qc-partial-trace-characterization-and-basis-independence"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Express partial trace as a finite Kraus sum using environment coordinate blocks.",
+          "Compose that Kraus family with the isometry and use V†V=I to prove trace preservation."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qc-kraus-choi-equivalence",
+        "kind": "theorem",
+        "title": "Kraus and Choi characterizations of complete positivity",
+        "statement": "Let $H,K$ be finite-dimensional complex inner-product spaces, fix an ordered\northonormal basis $\\mathcal B$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. The following are\nequivalent: $\\Phi$ is completely positive; $J_{\\mathcal B}(\\Phi)$ is\nnon-negative; and $\\Phi$ has a finite Kraus representation.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-qc-completely-positive-map",
+          "def-qc-choi-matrix",
+          "def-qc-kraus-representation",
+          "lem-qc-complete-positivity-implies-choi-positivity",
+          "lem-qc-positive-choi-matrix-yields-kraus-operators",
+          "thm-qc-kraus-map-completely-positive"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Assemble CP to Choi non-negativity, positive Choi to a finite Kraus representation, and Kraus to CP from the separate proofs.",
+          "Keep one fixed input basis and the stated Choi factor order in every direction."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.2.6 and 3.3.1–3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-qc-unitary-conjugation-is-channel",
+        "kind": "proposition",
+        "title": "Unitary conjugation is a channel",
+        "statement": "Let $H,K$ be nonzero finite-dimensional complex inner-product spaces and let\n$U:H\\to K$ be a unitary map. Then $\\operatorname{Ad}_U$ is a channel. For\nany nonzero finite-dimensional complex inner-product space $L$ and unitary\nmap $V:K\\to L$,\n$\\operatorname{Ad}_{VU}=\\operatorname{Ad}_V\\circ\\operatorname{Ad}_U$; the\ninverse channel to $\\operatorname{Ad}_U$ is $\\operatorname{Ad}_{U^\\dagger}$.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "prop-adjoint-algebra",
+          "def-qc-quantum-channel",
+          "def-qc-unitary-conjugation-channel",
+          "thm-qc-kraus-map-completely-positive",
+          "thm-qc-trace-preserving-kraus-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Use the one-element Kraus family U to prove complete positivity and trace preservation.",
+          "Check composition and inverse as typed identities on every input operator."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qc-channels-compose-and-tensor",
+        "kind": "theorem",
+        "title": "Finite-dimensional channels compose and tensor",
+        "statement": "Let $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ and\n$\\Psi:\\mathcal L(K)\\to\\mathcal L(L)$ be finite-dimensional quantum channels.\nThen $\\Psi\\circ\\Phi$ is a channel. If\n$\\Theta:\\mathcal L(H')\\to\\mathcal L(K')$ is another finite-dimensional\nchannel, the tensor map\n$\\Phi\\otimes\\Theta:\\mathcal L(H\\otimes H')\\to\\mathcal L(K\\otimes K')$\nis the linear map specified on product matrix units by\n$(\\Phi\\otimes\\Theta)(E_{uv}\\otimes F_{st})=\n\\Phi(E_{uv})\\otimes\\Theta(F_{st})$. The basis result\n[[lem-qc-tensor-products-of-operator-matrix-units-form-a-basis]] makes this\nmap well-defined and unique. It is also a channel, with the displayed factor\norder.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "prop-adjoint-algebra",
+          "def-qc-quantum-channel",
+          "def-qc-kraus-representation",
+          "def-qc-tensor-map",
+          "lem-qc-tensor-products-of-operator-matrix-units-form-a-basis",
+          "thm-qc-kraus-choi-equivalence",
+          "thm-qc-kraus-map-completely-positive",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "thm-qc-tensor-map-composition-and-adjoint"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Construct Kraus families for composition and tensor maps and verify their actions on every input.",
+          "Prove complete positivity and normalization, using the product matrix-unit basis to define the tensor map."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §§2.2.1–2.2.3",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.2–3.3",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qc-choi-trace-preservation-condition",
+        "kind": "theorem",
+        "title": "The Choi partial trace characterizes trace preservation",
+        "statement": "Let $H,K$ be finite-dimensional complex inner-product spaces, fix an ordered\northonormal basis $\\mathcal B=(e_i)_{i<n}$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be completely positive. Then\n$\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$ for every\n$X\\in\\mathcal L(H)$ if and only if\n$$\\operatorname{Tr}_K J_{\\mathcal B}(\\Phi)=I_H,$$\nwhere $\\operatorname{Tr}_K$ is the partial trace over the output factor in the\ninput-first/output-second Choi convention.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-trace-of-an-endomorphism",
+          "def-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-qc-completely-positive-map",
+          "def-qc-choi-matrix",
+          "def-qc-partial-trace",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "thm-qc-kraus-choi-equivalence",
+          "thm-qc-trace-preserving-kraus-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute the output partial-trace coefficient (i,j) as S_ji in the fixed product basis.",
+          "Use the all-operator Kraus normalization theorem in both directions and check zero input/output cases."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), Theorem 2.26 and Corollary 2.27",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.2.6 and 3.3.1",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qc-finite-stinespring-dilation",
+        "kind": "theorem",
+        "title": "Every finite-dimensional channel has a finite isometric dilation",
+        "statement": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be a quantum channel. It has a finite\nKraus representation, and for any chosen such representation with $N$\noperators $K_a:H\\to K$ there are an $N$-dimensional environment $E$ and a\nlinear isometry $V:H\\to K\\otimes E$ such that\n$$\\Phi(X)=\\operatorname{Tr}_E(VXV^\\dagger)\\quad\\text{for every }X\\in\\mathcal L(H).$$",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "prop-adjoint-algebra",
+          "def-qc-quantum-channel",
+          "def-qc-kraus-representation",
+          "def-qc-isometric-stinespring-representation",
+          "def-qc-partial-trace",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "prop-standard-coordinate-inner-products",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-kraus-choi-equivalence",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "lem-qc-linear-isometry-adjoint-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "For any chosen finite Kraus family construct Vx=Σa K_ax tensor u_a and prove it is an isometry.",
+          "Compute the partial trace in the product basis and recover the given map, including the empty environment case."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), Theorem 2.22",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qc-finite-kraus-choi-stinespring-equivalence",
+        "kind": "theorem",
+        "title": "Finite channel, Kraus, Choi, and Stinespring equivalence",
+        "statement": "Let $H,K$ be finite-dimensional complex inner-product spaces, fix an ordered\northonormal basis $\\mathcal B$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. The following four\nconditions are equivalent:\n\n1. $\\Phi$ is a quantum channel.\n2. $J_{\\mathcal B}(\\Phi)\\succeq0$ and\n   $\\operatorname{Tr}_KJ_{\\mathcal B}(\\Phi)=I_H$.\n3. $\\Phi(X)=\\sum_aK_aXK_a^\\dagger$ for a finite family of maps\n$K_a:H\\to K$ with\n   $\\sum_aK_a^\\dagger K_a=I_H$.\n4. There are a finite-dimensional $E$ and an isometry $V:H\\to K\\otimes E$\n   with $\\Phi(X)=\\operatorname{Tr}_E(VXV^\\dagger)$ for every $X$.\n\nThe Choi order is input factor first, output factor second.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-qc-quantum-channel",
+          "def-qc-choi-matrix",
+          "def-qc-kraus-representation",
+          "def-qc-isometric-stinespring-representation",
+          "def-qc-partial-trace",
+          "thm-qc-kraus-choi-equivalence",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "thm-qc-choi-trace-preservation-condition",
+          "thm-qc-finite-stinespring-dilation",
+          "thm-qc-isometry-partial-trace-is-channel"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Assemble only the preceding proved implications and make each direction explicit.",
+          "Track the fixed Choi basis, factor order, Kraus domains, and environment order without circular dependencies."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §§2.2.2–2.2.3",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §§3.2.6–3.3.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2175,
+    "id": "channels-kraus-choi-and-stinespring-representations-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Channels, Kraus, Choi, and Stinespring Representations — Examples",
+    "companion": "channels-kraus-choi-and-stinespring-representations",
+    "requires": [
+      "channels-kraus-choi-and-stinespring-representations"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-dephasing-channel-kraus-choi",
+        "kind": "example",
+        "title": "Qubit dephasing channel in Kraus and Choi forms",
+        "statement": "Let $H=\\mathbb C^2$ with standard basis $e_0,e_1$, let $0\\le p\\le1$, and\nput $Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$,\n$K_0=\\sqrt p\\,I$, and $K_1=\\sqrt{1-p}\\,Z$, using the nonnegative real\nsquare roots. For $\\Phi(X)=K_0XK_0^\\dagger+K_1XK_1^\\dagger$, compute the\nKraus normalization, the action on a density matrix, and the Choi matrix in\nthe input-first/output-second convention. The map is a phase-flip family;\nat $p=1/2$ it is the completely dephasing channel.",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "prop-adjoint-algebra",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-matrix-product-and-identity-matrix",
+          "def-non-negative-and-positive-operator",
+          "def-qc-density-operator",
+          "prop-standard-coordinate-inner-products",
+          "def-qc-choi-matrix",
+          "def-qc-kraus-representation",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "thm-qc-finite-kraus-choi-stinespring-equivalence"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute the Kraus normalization, action on an arbitrary density operator, and the input-first Choi matrix explicitly.",
+          "Check the Choi eigenvalues and output partial trace, including p=0, p=1, and p=1/2."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §2.2.3",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 3, §3.4.2",
+              "url": "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

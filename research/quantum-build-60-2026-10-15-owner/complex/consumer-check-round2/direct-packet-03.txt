@@ -1,0 +1,668 @@
+
+315 def-complex-chain-and-cycle
+CONTRACT 
+Let $\Omega\subseteq\mathbb C$ be open. A **complex chain in $\Omega$** is a
+finite list
+
+$$\Gamma=\bigl((m_0,\gamma_0),\dots,(m_{r-1},\gamma_{r-1})\bigr),\qquad r\in\mathbb N,$$
+
+each $m_k$ an integer ([[def-integers]]) and each
+$\gamma_k:[a_k,b_k]\to\mathbb C$ a complex contour
+([[def-complex-contours-reversal-concatenation-and-closedness]]) whose trace
+lies in $\Omega$. It is written $\sum_{k<r}m_k\gamma_k$. The list of length $r=0$
+is the **empty chain**.
+
+Its **trace** is the set
+
+$$\Gamma^\ast:=\bigcup\{\,\gamma_k^\ast\ :\ k<r\text{ and }m_k\ne0\,\},$$
+
+a subset of $\Omega$; a term with $m_k=0$ contributes nothing to it.
+
+Its **boundary** is the function $\partial\Gamma:\mathbb C\to\mathbb Z$ given by
+
+$$\partial\Gamma(q):=\sum_{\substack{k<r\\ \gamma_k(b_k)=q}}m_k\ -\ \sum_{\substack{k<r\\ \gamma_k(a_k)=q}}m_k,$$
+
+each sum being a finite sum over a subset of $\{k:k<r\}$
+([[def-finite-sum-in-a-commutative-monoid]], [[def-finite-cardinality]]), and
+the subtraction is that of the commutative ring $\mathbb Z$
+([[thm-int-comm-ring]]). The chain $\Gamma$ is a **cycle** when $\partial\Gamma(q)=0$ for every
+$q\in\mathbb C$.
+
+**Sum and negation.** For chains $\Gamma_1$ and $\Gamma_2$ in $\Omega$, the sum
+$\Gamma_1+\Gamma_2$ is the concatenated list, and $-\Gamma$ is the list with
+every coefficient replaced by $-m_k$ and every contour unchanged. Write
+$\Gamma_1-\Gamma_2:=\Gamma_1+(-\Gamma_2)$. The **reversal** $\Gamma^-$ is the
+list with every coefficient unchanged and every contour replaced by its
+reversal; the additive inverse $-m_k$ is taken in $\mathbb Z$
+([[thm-int-comm-ring]]).
+
+
+
+
+SUPPLIER def-complex-contours-reversal-concatenation-and-closedness
+each $m_k$ an integer ([[def-integers]]) and each
+$\gamma_k:[a_k,b_k]\to\mathbb C$ a complex contour
+([[def-complex-contours-reversal-concatenation-and-closedness]]) whose trace
+lies in $\Omega$. It is written $\sum_{k<r}m_k\gamma_k$. The list of length $r=0$
+is the **empty chain**.
+
+SUPPLIER def-complex-domain
+**Ambient set.** A chain is a chain *in* $\Omega$; the same list is a chain in
+every open set containing all the $\gamma_k^\ast$, and in particular in
+$\mathbb C$. When a nonempty connected $\Omega$ is wanted it is called a complex
+domain ([[def-complex-domain]]). Finite sums of integers and of complex numbers
+are finite sums in their additive commutative monoids, as in
+[[def-finite-sum-in-a-commutative-monoid]].
+
+
+318 def-complex-line-integral-over-a-rectifiable-path
+CONTRACT 
+Let $\gamma=x+iy:[a,b]\to\mathbb C$ be a rectifiable contour in the sense of [[def-complex-contours-reversal-concatenation-and-closedness]] and let $f=u+iv$ be continuous on its trace, with real and imaginary parts from [[def-complex-conjugate-real-imaginary-part-and-modulus]]. Define
+$$\int_\gamma f(z)\,dz:=\int_a^b u(\gamma(t))\,dx(t)-\int_a^b v(\gamma(t))\,dy(t)+i\left(\int_a^b v(\gamma(t))\,dx(t)+\int_a^b u(\gamma(t))\,dy(t)\right),$$
+where the four integrals are the real Riemann–Stieltjes integrals of [[def-riemann-stieltjes-sum-and-integral]]. Their existence is proved in [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]. On a singleton parameter interval the integral is $0$.
+
+
+
+
+SUPPLIER def-complex-contours-reversal-concatenation-and-closedness
+Let $\gamma=x+iy:[a,b]\to\mathbb C$ be a rectifiable contour in the sense of [[def-complex-contours-reversal-concatenation-and-closedness]] and let $f=u+iv$ be continuous on its trace, with real and imaginary parts from [[def-complex-conjugate-real-imaginary-part-and-modulus]]. Define
+$$\int_\gamma f(z)\,dz:=\int_a^b u(\gamma(t))\,dx(t)-\int_a^b v(\gamma(t))\,dy(t)+i\left(\int_a^b v(\gamma(t))\,dx(t)+\int_a^b u(\gamma(t))\,dy(t)\right),$$
+where the four integrals are the real Riemann–Stieltjes integrals of [[def-riemann-stieltjes-sum-and-integral]]. Their existence is proved in [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]. On a singleton parameter interval the integral is $0$.
+
+
+322 def-complex-sector-and-bounded-analytic-semigroup
+CONTRACT 
+For $\delta\in(0,\pi]$ put
+$$\Sigma_\delta:=\{z\in\mathbb C\setminus\{0\}:|\arg z|<\delta\},$$
+the open sector of half-angle $\delta$ around the positive real axis
+([[def-complex-domain]]; we use the principal argument in $(-\pi,\pi]$). Let $X$ be a Banach
+space over $\mathbb C$ ([[def-banach-space]]). A family
+$(T(z))_{z\in\Sigma_\delta\cup\{0\}}\subseteq\mathcal B(X)$
+([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]) is
+an **analytic semigroup of angle $\delta\in(0,\pi/2]$** if:
+
+(i) $T(0)=I$ and $T(z_1+z_2)=T(z_1)T(z_2)$ for all
+$z_1,z_2\in\Sigma_\delta$;
+
+(ii) $z\mapsto T(z)$ is holomorphic on $\Sigma_\delta$ in the operator norm:
+the difference quotients $h^{-1}(T(z+h)-T(z))$ converge in $\mathcal B(X)$ for
+every $z\in\Sigma_\delta$;
+
+(iii) $\lim_{\Sigma_{\delta'}\ni z\to0}T(z)x=x$ for every $x\in X$ and every
+$0<\delta'<\delta$.
+
+It is a **bounded analytic semigroup** of angle $\delta$ if in addition
+
+(iv) $\sup_{z\in\Sigma_{\delta'}}\|T(z)\|<\infty$ for every $0<\delta'<\delta$.
+
+Its **generator** is the infinitesimal generator of the strongly continuous
+semigroup $(T(t))_{t\ge0}$
+([[def-strongly-continuous-semigroup]],
+[[def-infinitesimal-generator-of-a-c-zero-semigroup]]), and its **angle** is
+the supremum of the $\delta$ for which such a family exists and extends the
+given one.
+
+Strong continuity is required only at the vertex and only in the strong
+operator topology; holomorphy is asserted on the open sector, not at $0$. For a
+real Banach space $X$ the definition is applied through a complexification
+([[lem-canonical-banach-complexification-of-a-real-banach-space]],
+[[rem-real-and-complex-normed-space-convention]]).
+
+### Remarks
+
+- The sector $\Sigma_\delta\cup\{0\}$ is a convex cone for $\delta\le\pi/2$, so
+  $z_1+z_2$ stays in the index set in (i); the vertex is the only boundary
+  point at which values are prescribed. Condition (iii) is an assumption on the
+  approach to the vertex along every strictly smaller sector, and it implies
+  that $(T(t))_{t\ge0}$ is a strongly continuous semigroup, since
+  $[0,\infty)\subseteq\Sigma_\delta\cup\{0\}$.
+- No norm continuity at $0$ is asserted: when the generator is unbounded the
+  family is only strongly continuous there, as the companion counterexample
+  records. Likewise $T$ is not required to be holomorphic at $0$; only the
+  values $T(z)$ for $z$ in the open sector carry the holomorphy of (ii).
+- Condition (iv) is a boundedness requirement on every strictly smaller sector
+  and not on all of $\Sigma_\delta$; this is the distinction between a bounded
+  analytic semigroup and an analytic semigroup whose norm may blow up near the
+  boundary of the sector.
+
+
+
+
+SUPPLIER def-complex-domain
+For $\delta\in(0,\pi]$ put
+$$\Sigma_\delta:=\{z\in\mathbb C\setminus\{0\}:|\arg z|<\delta\},$$
+the open sector of half-angle $\delta$ around the positive real axis
+([[def-complex-domain]]; we use the principal argument in $(-\pi,\pi]$). Let $X$ be a Banach
+space over $\mathbb C$ ([[def-banach-space]]). A family
+$(T(z))_{z\in\Sigma_\delta\cup\{0\}}\subseteq\mathcal B(X)$
+([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]) is
+an **analytic semigroup of angle $\delta\in(0,\pi/2]$** if:
+
+
+326 def-conformal-removable-compact-set
+CONTRACT 
+Write $\widehat{\mathbb C}=\mathbb C\cup\{\infty\}$ for the Riemann sphere ([[rem-riemann-sphere-one-point-compactification]]) with its standard holomorphic charts ([[def-riemann-sphere-holomorphic-charts]]). A compact set $K\subseteq\widehat{\mathbb C}$ is **globally conformally removable** (or **CH-removable**) if every homeomorphism $F:\widehat{\mathbb C}\to\widehat{\mathbb C}$ that is conformal on $\widehat{\mathbb C}\setminus K$ is a Möbius transformation ([[def-mobius-transformation]]). Here conformality on the complement is understood chartwise, on each of its open components; the underlying homeomorphism is as in [[def-homeomorphism-and-open-maps]].
+
+For a compact set $K\subset\mathbb C$, the **neighborhood-local condition** is that for every open $U\subseteq\mathbb C$ containing $K$, each homeomorphic embedding $h:U\to\mathbb C$ that is conformal on $U\setminus K$ is conformal on $U$. This is Lyubich's local formulation. Under AC the two conditions are equivalent, by the proof below. The predicates themselves make sense without Choice; the equivalence uses the stated analytic extension and measurable-Riemann-mapping interfaces.
+
+Global conformal removability is monotone under taking compact subsets: if $K$ is globally conformally removable and $K'\subseteq K$ is compact, then a homeomorphism conformal off $K'$ is also conformal off $K$, so it is Möbius. No monotonicity assertion for the neighborhood-local condition is used here.
+
+The global condition is Möbius invariant: for every Möbius map $M$, $K$ is globally conformally removable if and only if $M(K)$ is. Indeed, conjugating a sphere homeomorphism by $M$ preserves its homeomorphism type and conformality off the corresponding compact set, and a conjugate of a Möbius transformation is Möbius.
+
+No size condition is part of either definition. Positive-area nonremovability is a separate result proved later on the page. The predicates, compact-subset monotonicity and Möbius invariance use no Choice. The local/global equivalence below is conditional on AC and its exact MRMT/extension interfaces.
+
+
+
+
+SUPPLIER def-complex-domain
+
+
+
+328 def-continuous-argument-and-holomorphic-logarithm-branches
+CONTRACT 
+Let $\gamma:[a,b]\to\mathbb C$ be a complex contour
+([[def-complex-contours-reversal-concatenation-and-closedness]]) with trace
+$\gamma^\ast$, and let $p\in\mathbb C$ with $p\notin\gamma^\ast$.
+
+A **continuous logarithm of $\gamma-p$ along $\gamma$** is a continuous function
+$\lambda:[a,b]\to\mathbb C$ with
+
+$$\exp(\lambda(t))=\gamma(t)-p\qquad\text{for every }t\in[a,b],$$
+
+the exponential being that of [[def-complex-exponential]]. The associated
+**continuous argument of $\gamma-p$ along $\gamma$** is
+$\theta:=\operatorname{Im}\lambda:[a,b]\to\mathbb R$
+([[def-complex-conjugate-real-imaginary-part-and-modulus]]).
+
+Let $V\subseteq\mathbb C$ be open with $p\notin V$. A **holomorphic logarithm
+branch of $z-p$ on $V$** is a holomorphic function $L:V\to\mathbb C$
+([[def-complex-differentiability-holomorphic-and-entire]]) with
+
+$$\exp(L(z))=z-p\qquad\text{for every }z\in V.$$
+
+
+
+
+SUPPLIER def-complex-contours-reversal-concatenation-and-closedness
+Let $\gamma:[a,b]\to\mathbb C$ be a complex contour
+([[def-complex-contours-reversal-concatenation-and-closedness]]) with trace
+$\gamma^\ast$, and let $p\in\mathbb C$ with $p\notin\gamma^\ast$.
+
+
+337 def-edgewise-riemann-integral-around-complex-triangle
+CONTRACT 
+For an ordered complex triangle and a function on its boundary trace, if the pullback along each affine edge multiplied by that edge's constant velocity is Riemann integrable, define the edgewise triangle integral to be the sum of those three complex Riemann integrals.
+
+Precisely, let the directed edges $\ell_{ab}$, $\ell_{bc}$, and $\ell_{ca}$ be those of [[def-oriented-complex-triangle-and-boundary]], and let $f$ be defined on their combined trace. When the functions
+
+$$t\longmapsto f(\ell_{ab}(t))(b-a),\qquad t\longmapsto f(\ell_{bc}(t))(c-b),\qquad t\longmapsto f(\ell_{ca}(t))(a-c)$$
+
+are Riemann integrable on $[0,1]$ as maps into $\mathbb C=\mathbb R^2$ ([[thm-complex-numbers-are-the-real-coordinate-plane]], [[def-vector-valued-derivative-and-integral]]), put
+
+$$\int_{\partial\Delta[a,b,c]}^{\mathrm{edge}} f(z)\,dz:=\int_0^1 f(\ell_{ab}(t))(b-a)\,dt+\int_0^1 f(\ell_{bc}(t))(c-b)\,dt+\int_0^1 f(\ell_{ca}(t))(a-c)\,dt.$$
+
+The integrability hypothesis makes every term a uniquely defined complex number, so the displayed sum is well-defined. If $f$ is continuous on the trace, [[thm-riemann-stieltjes-and-parametric-contour-integrals-agree]] identifies this edgewise value with the published contour integral $\int_{\partial\Delta[a,b,c]}f(z)\,dz$. Constant edges cause no ambiguity because their velocity is zero.
+
+
+
+
+SUPPLIER def-oriented-complex-triangle-and-boundary
+Precisely, let the directed edges $\ell_{ab}$, $\ell_{bc}$, and $\ell_{ca}$ be those of [[def-oriented-complex-triangle-and-boundary]], and let $f$ be defined on their combined trace. When the functions
+
+
+341 def-extremal-length-and-curve-family-modulus
+CONTRACT 
+Assume Countable Choice ([[def-countable-choice]]). Fix a complex domain $\Omega\subseteq\mathbb C$ ([[def-complex-domain]]), read as an open subset of the Euclidean plane, with its Borel $\sigma$-algebra ([[def-borel-sigma-algebra]]) and planar Lebesgue area measure ([[thm-lebesgue-measure-is-a-radon-measure-on-rn]]).
+
+A **path** in $\Omega$ is a continuous map $\gamma:[a,b]\to\Omega$. It is **rectifiable** when its two coordinate functions have bounded variation ([[thm-rectifiable-iff-coordinate-functions-have-bounded-variation]]), and $s_\gamma$ denotes its arc-length function ([[def-arc-length-function]]). A **path family** $\Gamma$ is a set of paths. When curves joining specified boundary sets of $\Omega$ are used, allow paths $\gamma:[a,b]\to\overline\Omega$ with $\gamma((a,b))\subseteq\Omega$ and endpoints in the named sets; read complex paths as planar rectifiable paths ([[rem-complex-contours-as-planar-rectifiable-paths]]). Only the interior contributes to length, since each density below is extended by $0$ outside $\Omega$.
+
+Let $\rho:\Omega\to[0,+\infty]$ be Borel measurable with respect to the Borel $\sigma$-algebra of $\Omega$ ([[def-extended-real-valued-measurable-function]]). Extending it by $0$ on $\mathbb C\setminus\Omega$ gives a Borel function on the plane by the trace identity for subspaces ([[thm-borel-sigma-algebra-of-a-subspace-is-the-trace]]). For a rectifiable path $\gamma:[a,b]\to\overline\Omega$, its arc-length function is continuous and nondecreasing ([[lem-arc-length-function-is-continuous-and-nondecreasing]]). Extend $s_\gamma$ to a continuous nondecreasing function $S_\gamma:\mathbb R\to\mathbb R$ by $S_\gamma(t)=0$ for $t\le a$, $S_\gamma(t)=s_\gamma(t)$ for $a\le t\le b$, and $S_\gamma(t)=s_\gamma(b)$ for $t\ge b$. Countable Choice gives the associated Lebesgue-Stieltjes Borel measure $dS_\gamma$ ([[def-countable-choice]], [[thm-existence-of-the-lebesgue-stieltjes-measure]]). Define the **$\rho$-length** by
+$$\ell_\rho(\gamma):=\int_{[a,b]}\rho(\gamma(t))\,dS_\gamma(t),$$
+using the nonnegative Lebesgue integral ([[def-nonnegative-lebesgue-integral]]). This value lies in $[0,+\infty]$; set $\ell_\rho(\gamma)=+\infty$ when $\gamma$ is not rectifiable. For finite-valued continuous $\rho$ and a rectifiable path whose full trace lies in $\Omega$, this agrees with the published absolute line integral $\int_\gamma\rho\,|dz|$ ([[def-absolute-line-integral-over-a-rectifiable-path]], [[thm-riemann-stieltjes-integral-agrees-with-lebesgue-stieltjes-integral]], [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]). Continuity only on $\Omega$ does not assert that the zero extension is continuous at boundary endpoints. The continuity of $S_\gamma$ makes $dS_\gamma$ atomless, so changing the integrand on finitely many parameter values does not change the length.
+
+For a path family put $\ell_\rho(\Gamma):=\inf_{\gamma\in\Gamma}\ell_\rho(\gamma)$, with $\inf\varnothing:=+\infty$, and define its **area** by
+$$A(\rho):=\int_\Omega\rho^2\,dA\in[0,+\infty].$$
+
+The **extremal length** of $\Gamma$ is
+$$\lambda(\Gamma):=\sup_{\rho}\frac{\ell_\rho(\Gamma)^2}{A(\rho)}\in[0,+\infty],$$
+where the supremum is over Borel $\rho:\Omega\to[0,+\infty]$ with $0<A(\rho)<+\infty$. A supremum of an empty set is $0$; since $\Omega$ is a nonempty open domain, it contains a nondegenerate rectangle $Q$, and its indicator has positive finite area ([[thm-lebesgue-measure-of-a-box-of-every-kind]]). The value $\ell_\rho(\Gamma)=+\infty$ is allowed. The **curve-family modulus** is the reciprocal
+$$\mu(\Gamma):=\frac1{\lambda(\Gamma)}\in[0,+\infty],$$
+with $1/0:=+\infty$ and $1/+\infty:=0$. Thus $\lambda(\varnothing)=+\infty$ and $\mu(\varnothing)=0$, while any family containing a constant path has $\lambda(\Gamma)=0$ and $\mu(\Gamma)=+\infty$.
+
+**Conventions.** (1) This library defines extremal length by the displayed supremum and calls its reciprocal the modulus. Sources that define modulus by $\inf_\rho\int\rho^2$ over metrics with $\ell_\rho(\Gamma)\ge1$ call $\mu(\Gamma)$ the modulus and $\lambda(\Gamma)$ the extremal length. (2) Extending $\rho$ by zero outside $\Omega$ makes densities supported in $\Omega$ admissible and makes the value independent of an ambient enlargement; parameterization invariance, this ambient-domain independence, and agreement with the continuous line integral are the well-definedness obligations recorded for [[lem-rho-length-and-extremal-length-are-well-defined]]. (3) The page's rectangle and round-annulus constants are fixed by the computations stated there, and each cited source is translated into this library convention.
+
+
+
+
+SUPPLIER def-absolute-line-integral-over-a-rectifiable-path
+Let $\rho:\Omega\to[0,+\infty]$ be Borel measurable with respect to the Borel $\sigma$-algebra of $\Omega$ ([[def-extended-real-valued-measurable-function]]). Extending it by $0$ on $\mathbb C\setminus\Omega$ gives a Borel function on the plane by the trace identity for subspaces ([[thm-borel-sigma-algebra-of-a-subspace-is-the-trace]]). For a rectifiable path $\gamma:[a,b]\to\overline\Omega$, its arc-length function is continuous and nondecreasing ([[lem-arc-length-function-is-continuous-and-nondecreasing]]). Extend $s_\gamma$ to a continuous nondecreasing function $S_\gamma:\mathbb R\to\mathbb R$ by $S_\gamma(t)=0$ for $t\le a$, $S_\gamma(t)=s_\gamma(t)$ for $a\le t\le b$, and $S_\gamma(t)=s_\gamma(b)$ for $t\ge b$. Countable Choice gives the associated Lebesgue-Stieltjes Borel measure $dS_\gamma$ ([[def-countable-choice]], [[thm-existence-of-the-lebesgue-stieltjes-measure]]). Define the **$\rho$-length** by
+$$\ell_\rho(\gamma):=\int_{[a,b]}\rho(\gamma(t))\,dS_\gamma(t),$$
+using the nonnegative Lebesgue integral ([[def-nonnegative-lebesgue-integral]]). This value lies in $[0,+\infty]$; set $\ell_\rho(\gamma)=+\infty$ when $\gamma$ is not rectifiable. For finite-valued continuous $\rho$ and a rectifiable path whose full trace lies in $\Omega$, this agrees with the published absolute line integral $\int_\gamma\rho\,|dz|$ ([[def-absolute-line-integral-over-a-rectifiable-path]], [[thm-riemann-stieltjes-integral-agrees-with-lebesgue-stieltjes-integral]], [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]). Continuity only on $\Omega$ does not assert that the zero extension is continuous at boundary endpoints. The continuity of $S_\gamma$ makes $dS_\gamma$ atomless, so changing the integrand on finitely many parameter values does not change the length.
+
+SUPPLIER def-complex-domain
+Assume Countable Choice ([[def-countable-choice]]). Fix a complex domain $\Omega\subseteq\mathbb C$ ([[def-complex-domain]]), read as an open subset of the Euclidean plane, with its Borel $\sigma$-algebra ([[def-borel-sigma-algebra]]) and planar Lebesgue area measure ([[thm-lebesgue-measure-is-a-radon-measure-on-rn]]).
+
+
+345 def-function-element-and-direct-analytic-continuation
+CONTRACT 
+A **function element** is a pair $(f,U)$ where $U \subseteq \mathbb C$ is a
+complex domain ([[def-complex-domain]]) and $f:U \to \mathbb C$ is holomorphic
+([[def-complex-differentiability-holomorphic-and-entire]]).
+
+Let $(f,U)$ and $(g,V)$ be function elements. We say that $(g,V)$ is a
+**direct analytic continuation** of $(f,U)$ when there is a point
+$a \in U \cap V$ such that the germs $[f]_a$ and $[g]_a$ agree
+([[def-holomorphic-germ]]).
+
+Because equality of germs is symmetric, direct analytic continuation is a
+symmetric relation on function elements. It records local agreement on an
+overlap, not inclusion of one domain in the other.
+
+
+
+
+SUPPLIER def-complex-domain
+A **function element** is a pair $(f,U)$ where $U \subseteq \mathbb C$ is a
+complex domain ([[def-complex-domain]]) and $f:U \to \mathbb C$ is holomorphic
+([[def-complex-differentiability-holomorphic-and-entire]]).
+
+
+348 def-geometric-quasiconformal-homeomorphism
+CONTRACT 
+Let $\Omega,\Omega'\subseteq\mathbb C$ be complex domains and $f:\Omega\to\Omega'$ a homeomorphism ([[def-complex-domain]], [[def-homeomorphism-and-open-maps]]).
+
+**Orientation.** For $a\in\Omega$, $f$ induces an isomorphism
+$$f_*:H_2(\Omega,\Omega\setminus\{a\};\mathbb Z)\longrightarrow H_2(\Omega',\Omega'\setminus\{f(a)\};\mathbb Z).$$
+Excision and the local-homology calculation identify both groups with $\mathbb Z$ ([[thm-excision-for-singular-homology]], [[thm-local-homology-detects-interior-points-boundary-points-and-dimension]]). The generators are those determined by the standard orientation of $\mathbb C\cong\mathbb R^2$, with positively oriented basis $(1,i)$ ([[def-orientation-of-a-finite-dimensional-real-vector-space]], [[def-r-orientation-of-a-topological-manifold]]); the restriction isomorphisms from coordinate balls to points are supplied by [[lem-coordinate-ball-classes-identify-local-homology-stalks]]. Write $\varepsilon_f(a)\in\{+1,-1\}$ for the multiplier of $f_*$. Naturality of relative homology ([[prop-relative-homology-is-functorial-for-maps-of-pairs]]) makes these maps compatible with coordinate-ball restrictions. In the local-system charts of [[def-r-orientation-of-a-topological-manifold]], their multiplier is locally constant. Since $\Omega$ is connected, $\varepsilon_f$ is constant. The map $f$ is **orientation-preserving** when this sign is $+1$, and **orientation-reversing** when it is $-1$.
+
+**A quadrilateral.** A **quadrilateral in $\Omega$** is a set $Q=\varphi(\overline\Pi)$, where $\Pi=(0,w)\times(0,h)$ with $w,h>0$ and $\varphi:\overline\Pi\to\mathbb C$ is continuous and injective. Its two marked sides are either $\varphi(\{0\}\times[0,h])$ and $\varphi(\{w\}\times[0,h])$, or the other pair of opposite sides. For one such choice, let $\Gamma(Q)$ be the family of continuous paths in $Q$ whose endpoints lie on different marked sides and whose interior lies in $\operatorname{int}Q$. This is a curve family in $\Omega$; its modulus $\mu(\Gamma(Q))$ is defined in [[def-extremal-length-and-curve-family-modulus]]. The image $f(Q)$ is again a quadrilateral with marked sides carried by $f$, and $f\Gamma(Q)=\Gamma(f(Q))$.
+
+**Geometric definition.** Let $K\ge1$. The homeomorphism $f$ is **$K$-geometrically quasiconformal** when it is orientation-preserving and, for every quadrilateral $Q$ with $\overline Q\subseteq\Omega$ and for each choice of its marked sides,
+$$\frac1K\,\mu\bigl(\Gamma(Q)\bigr)\le\mu\bigl(\Gamma(f(Q))\bigr)\le K\,\mu\bigl(\Gamma(Q)\bigr),$$
+using the conventions of [[def-extremal-length-and-curve-family-modulus]] for zero and infinite values. It is **geometrically quasiconformal** if it is $K$-geometrically quasiconformal for some finite $K$; the least such $K$ is $K_f\ge1$, its maximal dilatation.
+
+The modulus condition uses the extremal-length construction and its Countable-Choice hypothesis; the orientation sign itself uses no choice ([[def-countable-choice]]). The inverse of a $K$-geometrically quasiconformal map is also $K$-geometrically quasiconformal: its local-homology map is the inverse isomorphism, and the two modulus inequalities rearrange to the same bounds for $f^{-1}$. Thus $K_{f^{-1}}=K_f$. The local orientation clause and the modulus inequality are distinct parts of this definition.
+
+
+
+
+SUPPLIER def-complex-domain
+Let $\Omega,\Omega'\subseteq\mathbb C$ be complex domains and $f:\Omega\to\Omega'$ a homeomorphism ([[def-complex-domain]], [[def-homeomorphism-and-open-maps]]).
+
+
+351 def-green-function-plane-domain
+CONTRACT 
+Let $\Omega\subset\mathbb C$ be a **proper plane domain**, that is, a nonempty
+connected open set with $\Omega\ne\mathbb C$ ([[def-complex-domain]]), and let
+$a\in\Omega$. Moduli are those of
+[[def-complex-conjugate-real-imaginary-part-and-modulus]], and harmonicity is
+that of [[def-plane-harmonic-function]].
+
+**Logarithmic-pole candidates.** A function $u:\Omega\setminus\{a\}\to\mathbb R$
+is a **logarithmic-pole candidate at $a$** when:
+
+1. $u(z)\ge 0$ for every $z\in\Omega\setminus\{a\}$;
+2. $u$ is harmonic on $\Omega\setminus\{a\}$;
+3. $u+\log|z-a|$ **extends harmonically across $a$**: there is a harmonic
+   function $h$ on $\Omega$ with
+   $$h(z)=u(z)+\log|z-a|\qquad(z\in\Omega\setminus\{a\}).$$
+
+The function $h$ in clause 3 is the **harmonic corrector** of $u$ at $a$; it is
+unique when it exists, because two harmonic functions on the connected open set
+$\Omega$ that agree on the nonempty open set $\Omega\setminus\{a\}$ agree on
+$\Omega$.
+
+**Order.** Candidates at $a$ are compared pointwise on $\Omega\setminus\{a\}$.
+
+**Canonical Green function.** Suppose the family of candidates at $a$ is
+nonempty. Its **canonical Green function** is its pointwise least member, when
+such a member exists: a candidate $g$ with $g\le u$ pointwise on
+$\Omega\setminus\{a\}$ for every candidate $u$. A pointwise least member is
+unique, and it is written $z\mapsto g_\Omega(z,a)$. If the family is empty, or
+if it is nonempty but has no pointwise least member, then $g_\Omega(\cdot,a)$ is
+not defined by this definition. The domain $\Omega$ is called **Greenian** when
+$g_\Omega(\cdot,a)$ exists for every $a\in\Omega$.
+
+The coefficient of $\log|z-a|$ is fixed to equal exactly one, so for the
+canonical kernel the corrector $h_a:=g_\Omega(\cdot,a)+\log|\cdot-a|$ is
+harmonic on all of $\Omega$ and finite at $a$.
+
+
+
+
+SUPPLIER def-complex-domain
+Let $\Omega\subset\mathbb C$ be a **proper plane domain**, that is, a nonempty
+connected open set with $\Omega\ne\mathbb C$ ([[def-complex-domain]]), and let
+$a\in\Omega$. Moduli are those of
+[[def-complex-conjugate-real-imaginary-part-and-modulus]], and harmonicity is
+that of [[def-plane-harmonic-function]].
+
+
+352 def-green-function-with-pole-at-infinity
+CONTRACT 
+Let $K\subseteq\mathbb C$ be **compact and nonpolar**, meaning that
+$\operatorname{cap}(K)>0$ for the logarithmic capacity of
+[[def-logarithmic-capacity-compact-set]]; by [[def-polar-set-and-quasi-everywhere]]
+this is exactly the statement that $K$ is not capacity-polar. Such a $K$ is
+nonempty, the complement $\mathbb C\setminus K$ is a nonempty open set, and it
+has exactly one unbounded connected component
+([[thm-complement-of-a-compact-plane-set-has-one-unbounded-component]]); that
+component is written
+
+$$\Omega:=\Omega(K)\subseteq\mathbb C\setminus K .$$
+
+By [[def-complex-domain]], $\Omega$ is a complex domain, and $\Omega\ne\mathbb C$
+because $K\ne\varnothing$ is disjoint from it. It is called the **exterior
+domain of $K$**. Its boundary $\partial\Omega$ (interior, closure and boundary
+in the sense of [[def-metric-interior-closure-boundary]]) is a compact subset of
+$K$: indeed $\partial\Omega\subseteq\partial(\mathbb C\setminus K)\subseteq K$,
+and it is called the **outer boundary of $K$**. Every point of $\partial\Omega$
+is a finite point of $\mathbb C$; the point $\infty$ is not part of it.
+
+Since $\operatorname{cap}(K)>0$, the Robin constant
+$V_K=\inf_{\mu\in P(K)}I(\mu)$ of $K$ is a real number, $V_K<+\infty$
+([[def-logarithmic-capacity-compact-set]]); it is the **Robin constant in the
+pole at infinity**. Harmonicity below is that of
+[[def-plane-harmonic-function]], and moduli are those of
+[[def-complex-conjugate-real-imaginary-part-and-modulus]].
+
+A **Green function of $\Omega$ with pole at infinity and Robin constant
+$V_K$** is a function $g:\Omega\to\mathbb R$ with the following four
+properties.
+
+1. **Positive and harmonic.** $g(z)>0$ for every $z\in\Omega$, and $g$ is
+   harmonic on $\Omega$.
+2. **Logarithmic normalization at infinity.** Writing $\log$ for the natural
+   logarithm and $|{\cdot}|$ for the modulus,
+
+   $$g(z)-\log|z|\longrightarrow V_K\qquad\text{as }|z|\to\infty,\ z\in\Omega, $$
+
+   meaning: for every real $\varepsilon>0$ there is a real $r$ such that
+   $|g(z)-\log|z|-V_K|<\varepsilon$ for every $z\in\Omega$ with $|z|>r$.
+   Because $\Omega$ is unbounded, this condition is never vacuous.
+3. **Local boundedness near finite boundary points.** For every
+   $\xi\in\partial\Omega$ there is a real $r>0$ with
+
+   $$\sup\{\,g(z):z\in\Omega,\ |z-\xi|<r\,\}<+\infty .$$
+
+4. **Zero boundary limit quasi-everywhere.** There is a Borel capacity-polar
+   set $E\subseteq\partial\Omega$ such that
+
+   $$\lim_{\Omega\ni z\to\xi}g(z)=0\qquad\text{for every }\xi\in\partial\Omega\setminus E .$$
+
+   That is, $g$ has boundary limit $0$ **quasi-everywhere on the outer
+   boundary**, in the sense of [[def-polar-set-and-quasi-everywhere]] applied
+   to the compact conductor $\partial\Omega$.
+
+**Notation.** If a Green function with pole at infinity and Robin constant
+$V_K$ exists and is unique under properties 1–4, that unique function is
+written
+
+$$z\mapsto g_\Omega(z,\infty),\qquad\text{equivalently } z\mapsto g_{\Omega(K)}(z,\infty).$$
+
+Neither existence nor uniqueness is asserted by this definition: they are
+conclusions of the theorem that builds the Green function from the equilibrium
+potential, and it is only there that the notation $g_\Omega(\cdot,\infty)$ is
+licensed.
+
+**Independence from the finite-pole kernel.** Properties 1–4 are stated for an
+unbounded exterior domain and normalize the logarithmic term with coefficient
+$+1$ and the additive constant $V_K$ at infinity. This is not the published
+finite-pole canonical Green kernel $z\mapsto g_\Omega(z,a)$ of
+[[def-green-function-plane-domain]], whose pole is a point $a\in\Omega$ and
+whose local form is $g_\Omega(z,a)=-\log|z-a|+h(z)$ with $h$ harmonic across $a$. No clause
+above is imported from, or reduces to, that kernel; the two are different
+objects even on a common domain.
+
+
+
+
+SUPPLIER def-complex-domain
+By [[def-complex-domain]], $\Omega$ is a complex domain, and $\Omega\ne\mathbb C$
+because $K\ne\varnothing$ is disjoint from it. It is called the **exterior
+domain of $K$**. Its boundary $\partial\Omega$ (interior, closure and boundary
+in the sense of [[def-metric-interior-closure-boundary]]) is a compact subset of
+$K$: indeed $\partial\Omega\subseteq\partial(\mathbb C\setminus K)\subseteq K$,
+and it is called the **outer boundary of $K$**. Every point of $\partial\Omega$
+is a finite point of $\mathbb C$; the point $\infty$ is not part of it.
+
+
+355 def-harmonic-measure-plane-domain
+CONTRACT 
+Let $\Omega\subseteq\mathbb C$ be a bounded complex domain
+([[def-complex-domain]]) every boundary point of which is regular in the sense
+of [[def-barrier-and-regular-boundary-point]], and let $z\in\Omega$. The
+Euclidean boundary $\partial\Omega$ is closed and, $\Omega$ being bounded, also
+bounded, hence compact ([[thm-heine-borel-rn]]), and it carries the Borel
+$\sigma$-algebra ([[def-borel-sigma-algebra]]).
+
+For every real continuous function $\varphi:\partial\Omega\to\mathbb R$, let
+$H_\varphi$ denote the regularized Perron envelope of the bounded plane
+Dirichlet problem with boundary datum $\varphi$
+([[def-perron-envelope-for-the-plane-dirichlet-problem]]).
+
+A **harmonic measure for $\Omega$ at $z$** is a Radon Borel probability measure
+$\omega_\Omega^z$ on $\partial\Omega$, in the sense of
+[[def-radon-measure-on-an-lch-space]], such that
+
+$$H_\varphi(z)=\int_{\partial\Omega}\varphi\,d\omega_\Omega^z$$
+for every real continuous $\varphi:\partial\Omega\to\mathbb R$.
+
+The measure is written in the superscript slot $z$ because it is a measure
+attached to the point $z$; for a fixed Borel set $E\subseteq\partial\Omega$ the
+assignment $z\mapsto\omega_\Omega^z(E)$ is a scalar function on $\Omega$, a
+distinct object from the measure itself.
+
+
+
+
+SUPPLIER def-complex-domain
+Let $\Omega\subseteq\mathbb C$ be a bounded complex domain
+([[def-complex-domain]]) every boundary point of which is regular in the sense
+of [[def-barrier-and-regular-boundary-point]], and let $z\in\Omega$. The
+Euclidean boundary $\partial\Omega$ is closed and, $\Omega$ being bounded, also
+bounded, hence compact ([[thm-heine-borel-rn]]), and it carries the Borel
+$\sigma$-algebra ([[def-borel-sigma-algebra]]).
+
+
+361 def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface
+CONTRACT 
+Let $X$ be a Riemann surface with maximal holomorphic atlas $\mathcal A$ ([[def-riemann-surface-and-holomorphic-atlas]]). A **smooth complex line bundle** $\pi:E\to X$ is a smooth real rank-two vector bundle whose fibres carry complex vector-space structures and which has local trivializations $\theta_i:E|_{U_i}\to U_i\times\mathbb C$ that are complex-linear on each fibre. The transition functions are defined by
+$$\theta_i\circ\theta_j^{-1}(x,v)=(x,g_{ij}(x)v),\qquad g_{ij}:U_i\cap U_j\to\mathbb C^\times.$$
+A **holomorphic line bundle** is such a bundle with a trivializing cover by domains of holomorphic charts for which every $g_{ij}$ is holomorphic. These functions obey $g_{ij}g_{jk}=g_{ik}$ on triple overlaps. Conversely, a holomorphic $\mathbb C^\times$-valued cocycle on a supplied countable open cover constructs a holomorphic line bundle: regard each scalar as its real $2\times2$ multiplication matrix, apply the smooth cocycle construction, and note that the resulting transitions commute with multiplication by $i$ and are holomorphic.
+
+Write $e_i=\theta_i^{-1}(1)$ for the associated local frame. A smooth section has the form $s=f_i e_i$ locally, with $f_i\in C^\infty(U_i;\mathbb C)$ and $f_i=g_{ij}f_j$ on overlaps. It is **holomorphic** when each $f_i$ is holomorphic; $H^0(X,E)$ denotes the complex vector space of holomorphic sections. A **meromorphic section** is a family of meromorphic functions $f_i$ with the same transition law. For a nonzero meromorphic section, define its order at $p$ by $\operatorname{ord}_p(s):=\operatorname{ord}_{z_i(p)}(f_i)$ in any holomorphic chart and local frame. Its divisor is $(s):=\sum_{p\in X}\operatorname{ord}_p(s)\,p$; this sum is locally finite and is finite when $X$ is compact.
+
+The **canonical bundle** is $K:=\Lambda^{1,0}T^*X$. If $z_i,z_j$ are holomorphic coordinates on an overlap, then its transition function in the convention above is $g_{ij}=dz_j/dz_i$: a local differential satisfies $f_i\,dz_i=f_j\,dz_j$. Hence holomorphic sections of $K$ are precisely holomorphic differentials, and meromorphic sections of $K$ are meromorphic differentials ([[def-meromorphic-differential-on-a-riemann-surface]]). The conjugate cocycle $\overline{g_{ij}}$ defines $\Lambda^{0,1}T^*X=\overline K$, while $\Lambda^{0,0}T^*X=X\times\mathbb C$. Thus the bundles of $E$-valued $(0,0)$- and $(0,1)$-forms are $E$ and $\Lambda^{0,1}T^*X\otimes E$; locally the latter has the form $f(z)\,d\bar z\otimes e$ ([[def-bigraded-complex-differential-forms]], [[def-exterior-power-bundle-of-the-cotangent-bundle]]).
+
+For a holomorphic line bundle $E$, the **Dolbeault operator** is
+$$\bar\partial_E:C^\infty(X,E)\longrightarrow C^\infty(X,\Lambda^{0,1}T^*X\otimes E),\qquad \bar\partial_E(fe_i):=(\partial_{\bar z}f)\,d\bar z\otimes e_i$$
+in a holomorphic frame $e_i$ and coordinate $z$. It is $\mathbb C$-linear, satisfies $\bar\partial_E(fs)=\bar\partial f\otimes s+f\,\bar\partial_Es$, and $\bar\partial_Es=0$ exactly when $s$ is holomorphic. It extends coefficientwise to $E$-valued forms: in a holomorphic frame, $\bar\partial_E(\alpha\otimes e_i)=(\bar\partial\alpha)\otimes e_i$. This extension satisfies $\bar\partial_E^2=0$ and
+$$\bar\partial_E(\beta\wedge s)=\bar\partial\beta\wedge s+(-1)^{\deg\beta}\beta\wedge\bar\partial_Es$$
+for complex-valued forms $\beta$. The complex dual $E^*$ has inverse holomorphic cocycle $g_{ij}^{-1}$ and its corresponding Dolbeault operator.
+
+
+
+
+SUPPLIER def-wirtinger-derivatives
+[F5] For a smooth complex-valued function, $\partial_{\bar z}f=0$ is equivalent to complex differentiability and hence holomorphy; the chain rule gives the change-of-coordinate formula ([[def-wirtinger-derivatives]], [[thm-chain-rule-for-complex-derivatives]], [[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]).
+1.4 On an overlap with $z_j=\phi(z_i)$ and $e_j=g_{ij}e_i$, a section has coefficients $f_i=g_{ij}f_j$. The chain rule and holomorphy of $g_{ij}$ give $\bar\partial f_i=g_{ij}\bar\partial f_j$ as $(0,1)$-forms, so the local formula defines a global operator. The same calculation applies to $E$-valued forms; the scalar graded Leibniz rule gives the displayed rule, and scalar $\bar\partial^2=0$ gives $\bar\partial_E^2=0$. By [F5], its kernel on sections is exactly the holomorphic sections. [F3, F5, given, algebra]
+
+
+363 def-homologically-simply-connected-complex-domain
+CONTRACT 
+A complex domain $\Omega$ ([[def-complex-domain]]) is **homologically simply
+connected** when every complex chain which is a cycle and whose trace lies in
+$\Omega$ ([[def-complex-chain-and-cycle]]) is null-homologous in $\Omega$
+([[def-null-homologous-and-homologous-complex-cycles]]); equivalently, when
+
+$$n(\Gamma,p)=0\qquad\text{for every cycle }\Gamma\text{ in }\Omega\text{ and every }p\in\mathbb C\setminus\Omega,$$
+
+with the index of [[def-integration-and-index-of-complex-chain]].
+
+
+
+
+SUPPLIER def-complex-domain
+A complex domain $\Omega$ ([[def-complex-domain]]) is **homologically simply
+connected** when every complex chain which is a cycle and whose trace lies in
+$\Omega$ ([[def-complex-chain-and-cycle]]) is null-homologous in $\Omega$
+([[def-null-homologous-and-homologous-complex-cycles]]); equivalently, when
+
+
+372 def-john-domain-and-john-constant
+CONTRACT 
+Assume Countable Choice. Let $n\ge2$ and let $\Omega\subseteq\mathbb R^n$ be
+open, bounded and nonempty. Its boundary $\partial\Omega$ is then a nonempty
+compact subset of $\mathbb R^n$ contained in a sufficiently large closed ball
+([[def-metric-interior-closure-boundary]],
+[[cor-euclidean-closed-balls-and-spheres-are-compact]]), and the distance
+$\operatorname{dist}(x,\partial\Omega)$ is defined for every $x$ and is a
+$1$-Lipschitz function of $x$ ([[lem-distance-to-set-is-lipschitz]]).
+
+Rectifiable curves, their arclength functions are used with the conventions of [[def-arc-length-function]].
+
+**John domain and John constant.** A pair $(\Omega,x_0)$ with $x_0\in\Omega$
+satisfies the **John condition** with constant $c\ge1$ if for every $x\in\Omega$
+there is a rectifiable curve $\gamma:[0,l]\to\Omega$ parametrised by arclength,
+with $\gamma(0)=x$, $\gamma(l)=x_0$ and
+$$\operatorname{dist}(\gamma(t),\partial\Omega)\ge c^{-1}|x-\gamma(t)|\qquad\text{for every }t\in[0,l].$$
+Write $c_J(\Omega,x_0)$ for the infimum of the admissible constants $c\ge1$;
+with the convention $\inf\varnothing=+\infty$, this value belongs to $[1,+\infty]$. The domain $\Omega$ is a
+**John domain** if $c_J(\Omega,x_0)<\infty$ for some $x_0\in\Omega$, and
+$c_J(\Omega,x_0)$ is the **John constant of the pair** $(\Omega,x_0)$. The
+estimates below use an admissible constant, never the finiteness of the
+infimum alone, and whether the infimum is attained is immaterial.
+
+**Arclength form.** If $\gamma$ is arclength parametrised from $x$, then
+$t\ge|\gamma(t)-x|$ for $0\le t\le l$, because the straight segment from $x$ to
+$\gamma(t)$ is no longer than the curve. Hence a curve satisfying the
+arclength normalisation $\operatorname{dist}(\gamma(t),\partial\Omega)\ge
+c^{-1}t$ for all $t$ also satisfies the displayed relative-distance condition
+with the same constant $c$. Only this implication is used here; the chain construction below uses the displayed relative-distance condition.
+
+**Connectedness.** A John domain is path-connected and hence connected: given
+$x,y\in\Omega$, choose curves $\gamma_x$ from $x$ to $x_0$ and $\gamma_y$ from
+$y$ to $x_0$ as in the definition (under Countable Choice the two curves may be
+chosen simultaneously) and traverse $\gamma_x$ followed by the reverse of
+$\gamma_y$. No regularity of $\partial\Omega$ is assumed beyond what the
+definition uses.
+
+
+
+
+SUPPLIER def-absolute-line-integral-over-a-rectifiable-path
+
+
+
+386 def-measurable-beltrami-coefficient
+CONTRACT 
+Assume Countable Choice and identify the complex plane with the Euclidean plane by $z=x+iy\leftrightarrow(x,y)$ ([[def-countable-choice]], [[rem-complex-plane-euclidean-dictionary]]). All planar domains carry two-dimensional Lebesgue area measure.
+
+(a) **Plane domains.** Let $\Omega\subseteq\mathbb C$ be a complex domain ([[def-complex-domain]]). A **Beltrami coefficient** on $\Omega$ is an almost-everywhere class of Lebesgue-measurable functions $\mu:\Omega\to\mathbb C$ with finite essential supremum $\|\mu\|_\infty$ ([[def-borel-and-lebesgue-measurable-function-on-rn]], [[def-l-infinity-on-a-measure-space]]). Here $L^\infty(\Omega;\mathbb C)$ means this class with norm $\operatorname*{ess\,sup}_{z\in\Omega}|\mu(z)|$; equivalently, its real and imaginary coordinate functions belong to the real-valued $L^\infty(\Omega)$. The defining bound is strict:
+$$\|\mu\|_\infty<1.$$
+Thus $|\mu|<1$ almost everywhere, and representatives differing on a Lebesgue-null set determine the same coefficient. Its **dilatation** is
+$$K(\mu):=\frac{1+\|\mu\|_\infty}{1-\|\mu\|_\infty}\in[1,\infty).$$
+In particular, an essentially bounded measurable function with $\|\mu\|_\infty=1$ is not a Beltrami coefficient.
+
+(b) **Ellipse-field reading.** Regard an ellipse as a shape, ignoring positive rescaling. A measurable field of ellipses of bounded eccentricity has, almost everywhere, measurable major and minor semiaxes $a(z)\ge b(z)>0$ and a measurable unoriented major-axis direction $\theta(z)\pmod\pi$, with $a(z)/b(z)\le C$ for some finite constant $C$. Such a field determines the coefficient
+$$\mu(z)=\frac{a(z)-b(z)}{a(z)+b(z)}e^{2i\theta(z)}.$$
+When $a(z)=b(z)$ the ellipse is a circle and this formula gives $\mu(z)=0$, with no distinguished direction. Conversely, at every Lebesgue point of a representative of $\mu$, its ellipse has major-to-minor semiaxis ratio $(1+|\mu(z)|)/(1-|\mu(z)|)$ and, when $\mu(z)\ne0$, major-axis direction $\tfrac12\arg\mu(z)\pmod\pi$. These formulas identify measurable coefficients with measurable conformal structures up to null sets, and
+$$K(\mu)=\operatorname*{ess\,sup}_{z\in\Omega}\frac{1+|\mu(z)|}{1-|\mu(z)|}.$$
+
+(c) **Biholomorphic change of coordinates.** If $\psi:\Omega'\to\Omega$ is biholomorphic ([[def-biholomorphic-map]]) and $\mu$ is a Beltrami coefficient on $\Omega$, define its **pullback** by
+$$(\psi^*\mu)(\zeta):=\mu\bigl(\psi(\zeta)\bigr)\,\frac{\overline{\psi'(\zeta)}}{\psi'(\zeta)},\qquad \zeta\in\Omega'.$$
+Since $\psi$ and $\psi^{-1}$ are holomorphic, they are $C^1$ in real coordinates ([[cor-holomorphic-functions-are-real-analytic-and-smooth]]); together with their inverse identities this makes $\psi$ a $C^1$ diffeomorphism. The complex differentiability criterion identifies the real derivative $D\psi(\zeta)$ with multiplication by $\psi'(\zeta)$ ([[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]). The real chain rule applied to $\psi^{-1}\circ\psi=\operatorname{id}$ makes this derivative invertible, hence $\psi'(\zeta)\ne0$. Therefore the factor has modulus one ([[lem-complex-conjugation-and-modulus-laws]]). Both $\psi$ and $\psi^{-1}$ send Lebesgue-null sets to null sets, so composition preserves Lebesgue measurability and essential supremum ([[lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets]]). Consequently $\psi^*\mu$ is a Beltrami coefficient, $\|\psi^*\mu\|_\infty=\|\mu\|_\infty$, and $K(\psi^*\mu)=K(\mu)$. The chain rule gives functoriality: for biholomorphisms $\chi:\Omega''\to\Omega'$ and $\psi:\Omega'\to\Omega$,
+$$(\psi\circ\chi)^*\mu=\chi^*(\psi^*\mu).$$
+
+(d) **The Riemann sphere.** Write $z$ for the finite chart and $w=1/z$ for the chart at infinity ([[def-riemann-sphere-holomorphic-charts]], [[rem-riemann-sphere-one-point-compactification]]). A Beltrami coefficient on $\widehat{\mathbb C}$ is an almost-everywhere class of measurable chart representatives related on their overlap by (c). The overlap transition is biholomorphic and preserves null sets by the cited $C^1$ null-set lemma, so the chartwise almost-everywhere notion is consistent; no common global scalar representative is intended. Equivalently, a coefficient on the sphere is determined by a coefficient $\mu_0$ on the finite chart $\mathbb C$ with $\|\mu_0\|_\infty<1$; its expression in the infinity chart is
+$$\mu_\infty(w)=\mu_0(1/w)\frac{w^2}{\overline w^{\,2}},\qquad w\ne0,$$
+and the value at $w=0$ is immaterial to the almost-everywhere class. This is the pullback law (c) for $\psi(w)=1/w$, since $\overline{\psi'(w)}/\psi'(w)=w^2/\overline w^{\,2}$; the single missing point is null. In particular, the condition $\|\mu\|_\infty<1$ and the dilatation $K(\mu)$ are independent of the chosen chart expression.
+
+
+
+
+SUPPLIER def-complex-domain
+(a) **Plane domains.** Let $\Omega\subseteq\mathbb C$ be a complex domain ([[def-complex-domain]]). A **Beltrami coefficient** on $\Omega$ is an almost-everywhere class of Lebesgue-measurable functions $\mu:\Omega\to\mathbb C$ with finite essential supremum $\|\mu\|_\infty$ ([[def-borel-and-lebesgue-measurable-function-on-rn]], [[def-l-infinity-on-a-measure-space]]). Here $L^\infty(\Omega;\mathbb C)$ means this class with norm $\operatorname*{ess\,sup}_{z\in\Omega}|\mu(z)|$; equivalently, its real and imaginary coordinate functions belong to the real-valued $L^\infty(\Omega)$. The defining bound is strict:
+$$\|\mu\|_\infty<1.$$
+Thus $|\mu|<1$ almost everywhere, and representatives differing on a Lebesgue-null set determine the same coefficient. Its **dilatation** is
+$$K(\mu):=\frac{1+\|\mu\|_\infty}{1-\|\mu\|_\infty}\in[1,\infty).$$
+In particular, an essentially bounded measurable function with $\|\mu\|_\infty=1$ is not a Beltrami coefficient.
+
+
+387 def-meromorphic-differential-on-a-riemann-surface
+CONTRACT 
+Let $X$ be a Riemann surface with its maximal holomorphic atlas
+$\mathcal A$ ([[def-riemann-surface-and-holomorphic-atlas]]). Let
+$\mathcal A_c$ be the subatlas of all charts in $\mathcal A$ with nonempty
+connected domain. It covers $X$: a chart restricts to each connected component
+of its domain, and these components are open because its image is open in
+$\mathbb C$. Thus every image of a chart in $\mathcal A_c$ is a plane domain
+([[def-meromorphic-function-complex-domain]]).
+
+A **meromorphic differential** $\omega$ on $X$ is a family
+$(h_\varphi)_{\varphi\in\mathcal A_c}$, where each $h_\varphi$ is a meromorphic
+function on the domain $\varphi(U_\varphi)$
+([[def-meromorphic-function-complex-domain]]), subject to the **transition
+law**: for charts $\varphi,\psi$ with coordinates $z=\varphi(x)$ and
+$w=\psi(x)$ and transition $z=z(w)=\varphi\circ\psi^{-1}(w)$, on each connected
+component of $\psi(U_\varphi\cap U_\psi)$,
+
+$$h_\psi(w)=h_\varphi\bigl(z(w)\bigr)\,z'(w).$$
+
+One writes $\omega=h_\varphi\,dz$ in the chart $\varphi$, so that the law is the
+familiar $h_\psi\,dw=h_\varphi\,dz$. The differential is **zero** when every
+$h_\varphi$ is the zero function, and **nonzero** otherwise; a nonzero
+differential has a local expression that is not identically zero near every
+point, as the well-definedness argument below shows. The differential is
+**holomorphic at** $p\in X$ when some, equivalently every, local expression
+$h_\varphi$ is holomorphic at $\varphi(p)$, and **holomorphic** when it is
+holomorphic at every point.
+
+The **pole set** of $\omega$ is the set of points $p$ at which some, equivalently
+every, local expression of a nonzero $\omega$ has a pole. Since poles of a
+meromorphic function on a plane domain are isolated
+([[def-isolated-singularity-types]]), the pole set of a nonzero $\omega$ is a
+discrete subset of $X$.
+
+**Order and residue.** Let $\omega\ne0$ and $p\in X$, and choose a chart
+$\varphi$ with $\varphi(p)=0$; such centred charts exist, since translations of
+charts are again compatible with the maximal atlas. Writing $h=h_\varphi$, the
+**order** of $\omega$ at $p$ is
+
+$$\operatorname{ord}_p(\omega):=\begin{cases} k,& h \text{ has a zero of order } k \text{ at } 0,\\ -k,& h \text{ has a pole of order } k \text{ at } 0,\\ 0,& h(0)\ne0, \end{cases}$$
+
+and the **residue** of $\omega$ at $p$ is the coefficient
+$\operatorname{Res}_p(\omega):=c_{-1}$ of $z^{-1}$ in the Laurent expansion of
+$h$ at $0$ ([[def-residue-isolated-singularity]],
+[[thm-laurent-expansion-annulus]]); in particular
+$\operatorname{Res}_p(\omega)=0$ when $\omega$ is holomorphic at $p$. The point
+$p$ is a zero, respectively a pole, of $\omega$ of order $k\ge1$ when
+$\operatorname{ord}_p(\omega)=k$, respectively $\operatorname{ord}_p(\omega)=-k$.
+
+**Conventions.**
+
+- On a disconnected chart of $\mathcal A$, its coefficient is determined
+  component by component by the coefficients of its restrictions in
+  $\mathcal A_c$; meromorphic on such an open set means meromorphic on each
+  nonempty connected component. No plane-domain definition is applied to a
+  disconnected set.
+- Each local expression $h_\varphi$ is meromorphic on a possibly different
+  domain, and the transition law is required only on connected components of
+  overlaps; the two charts may be taken from any atlas contained in
+  $\mathcal A$, because compatibility is a local condition on overlaps.
+- On a plane domain $\Omega\subseteq\mathbb C$ with its identity atlas, a
+  meromorphic differential is exactly an expression $h(z)\,dz$ with $h$
+  meromorphic on $\Omega$, and the order and residue above are the usual
+  Laurent order and residue of $h$ ([[def-isolated-singularity-types]],
+  [[def-residue-isolated-singularity]]).
+- **No choice principle is used**: the data are functions indexed by the charts
+  of a fixed atlas, and the well-definedness argument below uses only the
+  identity theorem and local Laurent expansions.
+
+
+
+
+SUPPLIER lem-local-holomorphic-logarithm-nonvanishing-function-on-disc
+[F5] A function analytic at a point has a holomorphic primitive on some neighbourhood of that point, and a nowhere-zero holomorphic function on a disc has a holomorphic logarithm whose derivative is $f'/f$ ([[cor-complex-analytic-functions-have-local-primitives]], [[lem-local-holomorphic-logarithm-nonvanishing-function-on-disc]], [[cor-holomorphic-logarithm-has-the-logarithmic-derivative]]).
+4.1 (Residue is chart-independent.) Keep two centred charts as in step 3.1 and write $h_\psi=P+H$ with finite principal part $P(w)=\sum_{k=-N}^{-1}a_kw^k$ and $H$ holomorphic near $0$ by [F2], so that $h_\varphi(z)=P(w(z))w'(z)+H(w(z))w'(z)$; the term $H(w(z))w'(z)$ is the derivative of $K(w(z))$ for a local primitive $K$ of $H$ by [F5] and hence is holomorphic at $0$, contributing nothing to the coefficient of $z^{-1}$; in the finite sum the term with $k=-1$ equals $a_{-1}w(z)^{-1}w'(z)=a_{-1}\bigl(1/z+\text{holomorphic}\bigr)$, using $w(z)=z\,v(z)$ with $v(0)\ne0$ and the local logarithm of $v$ by [F5], so it contributes exactly $a_{-1}$ to that coefficient; and for $k\le-2$, writing $w(z)^{k+1}=z^{-m}s(z)$ with $m\ge1$ and $s$ holomorphic, the product $w^kw'=\frac{1}{k+1}\bigl(w^{k+1}\bigr)'$ has vanishing coefficient of $z^{-1}$ because $(-m)z^{-m-1}s+z^{-m}s'$ receives $-ms_m+m s_m=0$ there, $s_m$ being the coefficient of $z^m$ in $s$; hence the coefficient of $z^{-1}$ in $h_\varphi$ is $a_{-1}=\operatorname{Res}_p(\omega)$ in the $\psi$-chart, and the residue is chart-independent. [F2, F3, F5, F7, step 3.1]

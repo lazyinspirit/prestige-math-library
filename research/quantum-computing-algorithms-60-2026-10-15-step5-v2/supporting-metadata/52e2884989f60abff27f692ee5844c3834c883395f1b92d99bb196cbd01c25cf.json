@@ -1,0 +1,938 @@
+[
+  {
+    "order": 2210,
+    "id": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Circuit Optimization, Resource Tradeoffs, and Lower Bounds",
+    "companion": "circuit-optimization-resource-tradeoffs-and-lower-bounds-examples",
+    "requires": [
+      "approximate-universality-and-solovay-kitaev",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "clifford-t-exact-and-approximate-synthesis",
+      "continuous-gate-universality-and-exact-synthesis",
+      "counting-complexity-and-sharpp",
+      "effective-numberings-reductions-resources-and-randomness",
+      "formal-languages-encodings-and-decision-problems",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "classical-zero-free-region-and-the-prime-number-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-qc-unbounded-error-time-space-counting-model",
+        "kind": "definition",
+        "title": "Unbounded error time space counting model",
+        "statement": "Use fixed finite-control fair-bit probabilistic machines with read-only binary input followed by blanks and a fixed finite number of work tapes and heads, with a finite explicit transition-table code. Each nonhalting transition consumes one independent fair bit as in [[def-probabilistic-polynomial-time-machine-interface]]. Fix one access profile for each complexity class.\n\nIn the **sequential** profile, heads move locally by at most one cell per transition. In the **erased-index head-access** profile, use the head-access mechanism of the final 2012 Van Melkebeek–Watson model: a zero-initialized binary classical work tape, a fixed finite number of input/work heads, and classical finite control. Each head may move left, right, stay, or jump in one transition to an address computed on a designated one-way sequential-access write-only index tape. Index tapes are initially empty, writing each bit is charged to the ordinary transition count, and an index tape is erased after each use. The original input tape is read-only and contains the input followed by blanks. If coincident work heads make an operation undefined, omit that work-tape operation in the transition. All heads start at the left boundary; left motion there clamps at zero.\n\nThe **published VMW derived basis restriction**, denoted the **basis** profile, also permits the classical basis action of the source's native coherent input query. On a contiguous block $[l,r]$ of a specified binary work tape, the first $r-l$ bits give the binary input index $i$ in most-significant-first order and the last cell holds $b$; the query replaces only $b$ by $b\\mathbin\\oplus x_i$, using zero on invalid input indices. Both endpoints are freshly emitted on erased index tapes. The native query costs one transition, as in the published quantum model. The input indices are $1,\\ldots,n$, with $x_0=0$; the empty address word denotes zero, and reversed endpoints cause omission of the query. Allow a fixed finite number of binary work tapes, local operations of fixed finite arity, and native queries on any specified tape: this is the fixed finite product of these classical basis operations, permitting separate path-simulation rows. This is an explicit locally defined comparison model derived from the quantum operations. The source does not separately state a formal classical block-query machine definition, and no equivalence with the index-only profile is assumed. The clocked-normalization lemma proves the required time-only simulation into that profile for clocks at least the input length; no general sublinear-time equivalence is asserted.\n\nFor historical comparison, the **preprint-delimited VMW profile** retains the 2007 preprint convention: a jump reads the address written between two classical work-tape heads, without the final paper's write-only erased index tapes. This is a separately named profile. No equivalence or preservation of time/space bounds between the preprint-delimited and published profiles is asserted. Results proved below for the published profile do not establish their extension to the preprint-delimited profile.\n\nTime is the maximum number of transitions on every branch. Sequential space counts distinct visited work cells. Erased-index and basis space use the maximum address of every work cell accessed on any branch, including the highest endpoint of every native basis-query block; read-only input and index tapes are not counted in this maximum-address measure. The preprint-delimited space convention is likewise its maximum visited work-head address. For a fixed profile, $\\mathrm{PrTIME}(t)$ uses strict acceptance probability greater than $1/2$ on members and at most $1/2$ on nonmembers; $\\mathrm{PrTISP}(t,s)$ adds the stated space bound. Subscripts $\\mathrm{seq}$, $\\mathrm{index}$, $\\mathrm{basis}$, and $\\mathrm{preprint}$ distinguish the four profiles. An exact classical oracle is deterministic; writing its queries and returning from them are charged, and total query-string length is at most the outer running time.\n\nFor either $P\\in\\{\\mathrm{seq},\\mathrm{basis}\\}$, define $\\mathrm{LCH}_{P,1}=\\mathrm{PrTIME}_P(n)$ and $\\mathrm{LCH}_{P,j+1}=\\mathrm{PrTIME}_P(n)^{\\mathrm{LCH}_{P,j}}$. Oracle queries are exact and all fair-bit branches belong to the outer machine. An omitted profile in an item must be fixed explicitly by that item's hypotheses; profiles are never silently identified.\n\nA $\\mathrm{MajSAT}$ formula has a fixed finite set of Boolean variables and is accepted when at least half of assignments satisfy it. A $\\mathrm{MajMajSAT}$ formula has two disjoint ordered variable blocks and is accepted when at least half of outer assignments leave a residual formula true on at least half of inner assignments. Use a common explicit plain-formula encoding for MajSAT. MajMajSAT accepts this same plain encoding with one implicit fresh unused outer variable and all formula variables in the inner block; it also accepts a separately tagged encoding with the two variable blocks explicitly listed. Thus every plain MajSAT instance embeds identically, bit for bit, into MajMajSAT with unchanged truth value. The unused outer variable is part of the decoded fixed finite variable set. Concretely, use distinct fixed tags for plain and partitioned inputs, a unary declaration of the number of variables, fixed-width variable indices, and prefix-encoded binary AND/OR and unary NOT gates (with constant tokens). The partitioned form also gives the outer-block split; variables are renamed into block order. Plain-format validity is checked by one pending-subexpression counter, variable-range checks and a scan of the declared fields, using $O(n\\,\\mathrm{polylog}\\,n)$ time and $O(\\log n)$ workspace. These conventions do not alter either at-least-half threshold. Malformed encodings are rejected by both problems.",
+        "deps": [
+          "def-probabilistic-polynomial-time-machine-interface",
+          "def-effective-binary-encoding-and-decoder"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Van Melkebeek and Watson, A Quantum Time-Space Lower Bound for the Counting Hierarchy, Sections 2–3",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-logspace-uniform-iterated-addition-tc0",
+        "kind": "lemma",
+        "title": "DLOGTIME uniform iterated addition threshold circuits",
+        "statement": "For $m,w\\ge1$, the exact sum of $m$ nonnegative $w$-bit integers has constant-depth polynomial-size circuits over AND, OR, NOT and MAJ, with $w+\\lceil\\log_2m\\rceil$ output bits. The circuits are DLOGTIME-uniform under the following explicit array convention: the input bit $x_{i,j}$ has tuple address $(i,j)$; array dimensions and gate-coordinate domains may be padded to powers of two, with padded inputs zero. Gate addresses use a fixed number of binary coordinate fields, and the uniformity machine receives the binary dimensions and gate addresses. Equivalently, the input is a bit matrix with both dimensions padded to powers of two. Constants and output truncation are included in the family. The claim does not apply to arbitrary effectively decodable encodings.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-logspace-uniform-iterated-multiplication-tc0",
+        "kind": "lemma",
+        "title": "Logspace uniform iterated multiplication threshold circuits",
+        "statement": "For $m,w\\ge1$, let the input be an explicit array of $m$ nonnegative $w$-bit integers, with tuple-addressed bits $x_{i,j}$ and fixed dimensions supplied to the uniformity machine. Power-of-two padding of the array dimensions is permitted, with padded entries zero. Their exact product, zero-padded to $mw$ bits, is computed by constant-depth polynomial-size circuits over AND, OR, NOT and MAJ. Circuit descriptions and gate-predecessor predicates are computable in logarithmic space in the total input length. This item does not assert DLOGTIME-uniform multiplication, and its encoding convention does not include arbitrary effectively decodable encodings.",
+        "deps": [
+          "cor-prime-number-theorem",
+          "cor-primitive-roots-modulo-prime",
+          "lem-qc-logspace-uniform-iterated-addition-tc0"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hesse, Allender, and Barrington, Uniform Threshold Circuits for Division",
+              "url": "https://www.cs.rutgers.edu/~allender/papers/division.pdf"
+            },
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-bqtisp-model",
+        "kind": "definition",
+        "title": "BQTISP Model",
+        "statement": "Use the **published VMW model** from Van Melkebeek and Watson, Theory of Computing 8 (2012), §2.3.1–2.3.2. It has three semi-infinite tapes: read-only binary input followed by blanks; a zero-initialized classical binary work tape; and a zero-initialized quantum work tape. There are a fixed finite number of heads, possibly several per tape. Each classical control state has an associated local classical function and local quantum operation, applied jointly to the cells under the respective work heads. The next control state and head movements depend on the current state, the input/classical symbols scanned at the beginning of the transition, and that transition's measurement outcome, if any. Earlier outcomes can influence later operations through the control state. These choices do not depend on the quantum basis path. A quantum operation is a unitary on the cells under the quantum heads or a single-qubit computational-basis measurement.\n\nEach head may move left, right, stay, or jump in one transition to a precomputed classical address. Addresses are written on special one-way sequential-access write-only index tapes and those tapes are erased after every use; all index-bit writing is charged to ordinary transitions. Coherent input access may apply $|i,b\\rangle\\mapsto|i,b\\mathbin\\oplus x_i\\rangle$ to a contiguous quantum-work block, with out-of-range input bit zero. The endpoint convention is $[l,r]$: the MSB-first address occupies $[l,r)$ and the answer is cell $r$; use input indices $1,\\ldots,n$, $x_0=0$, empty address zero, and omit a reversed-endpoint query. Its two endpoint addresses are likewise supplied on these erased index tapes. The coherent query itself costs one transition. The classical input tape's out-of-range cells are blank. These two output conventions are distinct and fixed by the source. If colliding work heads make an operation undefined, omit the operation on that work tape.\n\nInput cells and the separate index tapes are not counted in the maximum-workhead-address space measure. Space is the maximum address of any work operand: ordinary classical/quantum head visits and the highest endpoint of every native query block are all charged; time and space maximize over every branch, including branches of probability zero. For each fixed unitary matrix entry, real and imaginary parts have deterministic approximators computing precision $p$ in time polynomial in $p$. This permits polylogarithmic time and workspace at precision $p=O(\\log t)$; it does not assert linear-space approximators for arbitrary entries.\n\nFor a promise problem $(Y,N)$, $\\mathrm{BQTISP}(t,s)$ means such a machine takes $O(t)$ transitions and maximum work address $O(s)$ on every branch, accepts $Y$ with probability at least $2/3$, and accepts $N$ with probability at most $1/3$. No acceptance guarantee is required off the promise; the resource bounds remain worst-case. $\\mathrm{BQTIME}(t)$ omits the space bound. Its classical comparison classes are the explicitly derived full-basis comparison classes $\\mathrm{PrTIME}_{\\mathrm{basis}}$ and $\\mathrm{PrTISP}_{\\mathrm{basis}}$ in [[def-qc-unbounded-error-time-space-counting-model]]. They permit a fixed finite product of classical basis tapes with the same native input-query operation. No generic inclusion into the narrower erased-index head-access-only class is assumed.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "def-qc-unbounded-error-time-space-counting-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, Time-Space Efficient Simulations of Quantum Computation",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-unbounded-error-tie-normalization",
+        "kind": "lemma",
+        "title": "Bounded-overhead tie normalization for fair-bit machines",
+        "statement": "For a fair-bit probabilistic machine with an explicit time-constructible integer clock $R(n)\\ge1$, a machine with no exact $1/2$ acceptance probability can be formed with $O(R(n))$ additional time. It preserves strict-majority membership, and swapping its accept/reject labels decides the complement.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "def-probabilistic-polynomial-time-machine-interface",
+          "def-time-and-space-constructible-function"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, A Quantum Time-Space Lower Bound for the Counting Hierarchy, randomization conventions",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-uniform-probabilistic-clocked-simulation",
+        "kind": "lemma",
+        "title": "Uniform clocked simulation of encoded probabilistic machines",
+        "statement": "Fix the explicit complete transition-table coding specified below. There are two distinct fixed finite-alphabet probabilistic interpreters, one for the sequential access profile and one for the erased-index head-access-only random-access profile. Each interpreter simulates valid descriptions $e$ with input $x$ and an external binary clock $b$, reproducing exactly the source acceptance or rejection reached in at most $b$ source transitions and rejecting nonhalting expiry. The simulated fair-bit distribution is exact. Writing $n=|x|$ and $L=|e|+1$, there are absolute constants $C,d$ such that each simulation takes time\n$$ C L^d\\bigl(n+(b+1)\\log^d(n+b+L+2)\\bigr). $$\nFor the index-only profile, jump addresses are written on one-way sequential write-only index tapes erased after use; the older nonerasing delimited-head profile is a distinct profile and is not covered by this index-only assertion. The fixed interpreter has a fixed finite physical head count even when the described source head count varies. Malformed descriptions halt rejecting. This is a time simulation; no preservation of the source's simultaneous space bound is asserted.\n\nIn particular, for each fixed polynomially bounded time-constructible $T(n)\\ge n$ and fixed $c$, descriptions of length at most $c\\log(n+2)$ are simulated in either one fixed declared profile in $O(T(n)\\,\\mathrm{polylog}(n+2))$ time, including the clock constructor. Arbitrary superpolynomial clocks retain the general displayed bound rather than this specialization.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-clocked-universal-simulation-with-time-and-space-bounds",
+          "def-effective-binary-encoding-and-decoder",
+          "def-time-and-space-constructible-function"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, §2: probabilistic machine and LCH conventions",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-bounded-space-virtual-input-simulation",
+        "kind": "lemma",
+        "title": "Bounded-space simulation of a generated input",
+        "statement": "Let $x$ have length $n$, and let $y(x)$ have known length $N\\le(n+2)^K$. Suppose its zero-based bit $y_i(x)$ can be generated deterministically in $\\log^{O(1)}(n+2)$ time and $O(\\log(n+2))$ work cells, with ordinary direct indexed access to $x$. Fix a classical derived-basis machine whose run on $y(x)$ takes at most a known polynomial clock $T\\le(n+2)^K$ and whose work operands, including native query endpoints, all lie below a known power of two $M\\le(n+2)^K$. The dimensions and clocks have polylogarithmic-time/logspace binary generators. There is an index-only erased-index simulation on $x$ with identical branch outcomes and probabilities, time $O((n+T+1)\\log^{O(1)}(n+2))$, and work-access extent $O(M+\\log(n+2))$. The simulated machine has fixed finite head and tape counts; its constants may depend on that machine, the generators and $K$. This does not assert a sublinear-time simulation or normalization of unrestricted work addresses.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-logspace-predicates-in-linear-counting-hierarchy",
+        "kind": "lemma",
+        "title": "Logspace predicates in a fixed linear counting hierarchy level",
+        "statement": "Every language in conventional deterministic logarithmic space lies in $\\mathrm{LCH}_{\\mathrm{seq},k}$ and $\\mathrm{LCH}_{\\mathrm{basis},k}$ for some fixed integer $k$. Here logarithmic space has its standard uniformity meaning: the read-only input positions are bounded by endmarkers, and any input-address register counts toward workspace. The level may depend on the fixed predicate machine. This statement is used for the standard logspace wiring predicate of polynomial-size circuits.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-unbounded-error-tie-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, proof of Lemma 5, step 2",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-uniform-threshold-iterated-integer-arithmetic",
+        "kind": "theorem",
+        "title": "Uniform threshold iterated integer arithmetic",
+        "statement": "For $m,w\\ge1$ explicitly listed nonnegative $w$-bit integers, iterated sum and product have constant-depth polynomial-size uniform threshold-circuit families over AND, OR, NOT and MAJ. Their exact binary outputs need at most $w+\\lceil\\log_2m\\rceil$ and $mw$ bits, respectively. Addition is DLOGTIME-uniform and multiplication is logspace-uniform, each in the total input length, under the explicit bit-array convention: input bit $x_{i,j}$ has tuple address $(i,j)$, dimensions are supplied to the uniformity machine, and power-of-two padding uses zero entries. Circuit gate addresses have a fixed number of binary coordinate fields. The claim concerns this explicit representation, rather than arbitrary effectively decodable encodings.",
+        "deps": [
+          "lem-qc-logspace-uniform-iterated-addition-tc0",
+          "lem-qc-logspace-uniform-iterated-multiplication-tc0"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Hesse, Allender, and Barrington, Uniform Threshold Circuits for Division",
+              "url": "https://www.cs.rutgers.edu/~allender/papers/division.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-basis-query-time-normalization",
+        "kind": "lemma",
+        "title": "Time normalization of classical basis queries",
+        "statement": "For an explicitly coded machine in the derived full classical basis profile, input $x$ of length $n$, and external transition clock $b\\ge n$, there is a fixed finite-head index-only erased-index interpreter reproducing exact acceptance, rejection and timeout probabilities. Writing $L=|e|+1$ for source description length, its time and maximum physical work-access address are bounded by\n$$C L^d\\bigl(n+(b+1)\\log^d(n+b+L+2)\\bigr)$$\nfor absolute constants $C,d$. In particular, logarithmic descriptions and each fixed polynomial clock $T(n)\\ge n$ have $O(T(n)\\,\\mathrm{polylog}(n+2))$ overhead, including clock construction. This is a time-only normalization; it does not preserve a smaller original source space bound and makes no general equivalence claim for clocks below input length.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-uniform-probabilistic-clocked-simulation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-logspace-uniform-cook-formula-encoding",
+        "kind": "lemma",
+        "title": "Logspace uniform near-linear Cook formula encoding",
+        "statement": "Use raw binary input pairs and the fixed-width clause encoding in the proof. For each fixed deterministic sequential multitape computation of worst-case time $T\\ge1$ on $(x,y)$, there is a formula $F(x,y,z)$ of size $O(T\\log^{O(1)}(T+2))$, each encoded output bit generated in $\\log^{O(1)}(T+2)$ time and $O(\\log(T+2))$ workspace with direct input-bit access. Its input-dependent constants form one ordered initial block, permitting sequential on-demand generation with the same polylogarithmic overhead per output-head transition. For fixed $x,y$ there is exactly one satisfying $z$ when the computation accepts, and none otherwise. The same conclusions hold for a fixed derived-basis machine when $T$ is at least its input length. Variable blocks and malformed-input behavior are fixed with the machine.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-uniform-probabilistic-clocked-simulation",
+          "lem-qc-basis-query-time-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen A. Cook, Short Propositional Formulas Represent Nondeterministic Computations",
+              "url": "https://www.ccs.neu.edu/home/viola/classes/papers/Cook1988.pdf"
+            },
+            {
+              "title": "Pippenger and Fischer, Relations among Complexity Measures",
+              "url": "https://www.khoury.northeastern.edu/~viola/classes/papers/PippengerF-Oblivious.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-counting-time-space-to-linear-hierarchy",
+        "kind": "lemma",
+        "title": "Counting time space to linear hierarchy",
+        "statement": "For constants $\\alpha>1$ and $0<\\beta<1$ there is a finite integer $\\tau(\\alpha,\\beta)$ such that $\\mathrm{PrTISP}_P(n^\\alpha,n^{1-\\beta})\\subseteq\\mathrm{LCH}_{P,\\tau}$ for either fixed profile $P\\in\\{\\mathrm{seq},\\mathrm{basis}\\}$. The basis profile is the explicitly derived full-basis comparison, with native queries and charged operand endpoints.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-qc-uniform-threshold-iterated-integer-arithmetic",
+          "lem-qc-logspace-predicates-in-linear-counting-hierarchy",
+          "lem-qc-unbounded-error-tie-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, Lemma 5",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Hesse, Allender, and Barrington, Uniform Threshold Circuits for Division",
+              "url": "https://www.cs.rutgers.edu/~allender/papers/division.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-probabilistic-polynomial-time-hierarchy",
+        "kind": "theorem",
+        "title": "Probabilistic polynomial time hierarchy",
+        "statement": "For rational $1\\le a<b$ with time-constructible polynomial bounds, $\\mathrm{PrTIME}(n^a)$ is properly contained in $\\mathrm{PrTIME}(n^b)$ in either one fixed declared access profile $P\\in\\{\\mathrm{seq},\\mathrm{basis}\\}$, with basis denoting the explicitly derived full-basis comparison model. The separation proof uses the explicit uniform interpreters [[lem-qc-uniform-probabilistic-clocked-simulation]] and [[lem-qc-basis-query-time-normalization]].",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-unbounded-error-tie-normalization",
+          "lem-qc-uniform-probabilistic-clocked-simulation",
+          "lem-qc-basis-query-time-normalization",
+          "def-time-and-space-constructible-function",
+          "def-effective-binary-encoding-and-decoder"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, probabilistic computation and diagonalization background",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tight-majority-formula-completeness",
+        "kind": "lemma",
+        "title": "Tight majority formula completeness",
+        "statement": "For either fixed profile $P\\in\\{\\mathrm{seq},\\mathrm{basis}\\}$, every $\\mathrm{LCH}_{P,1}$ language reduces to MajSAT, and every $\\mathrm{LCH}_{P,2}$ language reduces to MajMajSAT, with output length n log^O(1)n and each output bit computable in log^O(1)n time and O(log n) space, in the explicit input/machine/formula encodings. Basis means the derived full-basis restriction; isolated output-bit generation has direct source-input bit access, and the reduction also admits sequential on-demand generation with polylogarithmic overhead per formula-head transition.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-unbounded-error-tie-normalization",
+          "lem-qc-logspace-uniform-cook-formula-encoding",
+          "lem-qc-basis-query-time-normalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, proof of Theorem 7",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Cook, Short propositional formulas represent nondeterministic computations",
+              "url": "https://www.ccs.neu.edu/home/viola/classes/papers/Cook1988.pdf"
+            },
+            {
+              "title": "Pippenger and Fischer, Relations among complexity measures",
+              "url": "https://www.khoury.northeastern.edu/~viola/classes/papers/PippengerF-Oblivious.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-unbounded-error-counting-time-space-alternative",
+        "kind": "theorem",
+        "title": "Unbounded error counting time space alternative",
+        "statement": "For either fixed profile $P\\in\\{\\mathrm{seq},\\mathrm{basis}\\}$, every real $d$ and every $\\varepsilon>0$, there is a constant $c>1$ such that at least one of the following holds: $\\mathrm{MajMajSAT}\\notin\\mathrm{PrTIME}_{P}(n^c)$, or $\\mathrm{MajSAT}\\notin\\mathrm{PrTISP}_{P}(n^d,n^{1-\\varepsilon})$. The basis profile is the derived full-basis comparison model. Formula thresholds are at least-half and machine acceptance is strict majority.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-qc-probabilistic-polynomial-time-hierarchy",
+          "lem-qc-counting-time-space-to-linear-hierarchy",
+          "lem-qc-tight-majority-formula-completeness",
+          "lem-qc-basis-query-time-normalization",
+          "lem-qc-bounded-space-virtual-input-simulation"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-vmw-fh-density-and-base-net",
+        "kind": "lemma",
+        "title": "The VMW F/H Alphabet Has an Algebraic Dense SU(2) Lift and a Fixed Base Net",
+        "statement": "Put $w=(2+i)/\\sqrt5$, $F=\\operatorname{diag}(1,w^2)$ and $H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$. The alphabet\n$$G=\\{D,D^*,J,J^*\\},\\qquad D=\\operatorname{diag}(\\overline w,w),\\quad J=iH$$\nis an inverse-closed subset of $SU(2)$ whose generated subgroup is dense, with algebraic coordinates admitting fixed minimal-polynomial and rational-isolating-interval descriptions. For every fixed rational $0<\\eta_0<1/4096$, it has a fixed finite base-net certificate of radius $\\eta_0/4$ as in [[def-qc-inverse-closed-dense-su2-gate-set]]. Erasing scalar phases maps its letters respectively to $F,F^*,H,H$ and preserves word length.",
+        "deps": [
+          "lem-qc-irrational-rotation-dense-on-circle",
+          "lem-qc-two-axis-su2-generation",
+          "def-qc-inverse-closed-dense-su2-gate-set",
+          "lem-qc-fixed-dimension-interval-arithmetic"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-multiplexed-rz-gray-code",
+        "kind": "lemma",
+        "title": "Gray-code synthesis of a multiplexed Z rotation",
+        "statement": "For $k\\ge0$ control bits $x\\in\\{0,1\\}^k$ and real angles $\\theta_x$, define\n$$M_z=\\sum_{x\\in\\{0,1\\}^k}|x\\rangle\\langle x|\\otimes R_z(\\theta_x),\\qquad R_z(t):=\\operatorname{diag}(e^{-it/2},e^{it/2}).$$\nIf $k>0$, this multiplexed rotation has an exact circuit with $2^k$ one-qubit $R_z$ gates and $2^k$ CNOTs; for $k=0$ it is one $R_z$ gate and no CNOT. The CNOT count includes the final parity-restoring CNOT.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qc-axis-rotation-pauli-formula",
+          "def-qc-pauli-matrices",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits, arXiv:quant-ph/0406176v5",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qc-basic-clifford-t-rewrite",
+        "kind": "algorithm",
+        "title": "Basic Clifford T Rewrite",
+        "statement": "Input is a finite word of H,T,T†,CNOT gates with ordered wire labels. Fix the rules H²→ε, T⁸→ε, TT†→ε, T†T→ε, and CNOT²→ε, where ε means the empty subword; apply the cancellation rules only when the adjacent gates have the same ordered support. Scan left-to-right, choose the first match, delete the matched subword, restart the scan, and halt when no rule matches. Empty words are permitted. The output remains a word over the input gate alphabet and is locally irreducible for this displayed rule set; it makes no global-minimum claim.\n\nThe gate labels use the exact matrices and ordered supports fixed by [[def-qc-clifford-t-gate-library]].",
+        "deps": [
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barenco et al., Elementary gates for quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/9503016"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-circuit-resource-composition",
+        "kind": "lemma",
+        "title": "Circuit Resource Composition",
+        "statement": "For circuits placed on a declared common physical register, sequential composition adds gate counts and explicit depths; its width is the declared common-register width. Reusing workspace can make that width the maximum of the component widths only when the alignment and ancilla contracts permit reuse; otherwise all required wires remain allocated. Parallel composition on disjoint registers adds gate counts and widths and has depth equal to the maximum component depth. A clean ancilla is counted as clean only when the complete composed block returns it exactly to zero for every allowed data input.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-tensor-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-unoptimized-qsd-recursive-decomposition-and-count",
+        "kind": "lemma",
+        "title": "Unoptimized recursive QSD decomposition and CNOT count",
+        "statement": "For every $n\\ge2$, the recursive cosine-sine/demultiplexing construction gives an exact no-ancilla circuit for any $n$-qubit unitary. At each nonterminal level, split off the first wire as target and let the recursive children act on the remaining contiguous wire interval; the node uses four recursive $(n-1)$-qubit unitaries, one multiplexed $R_y$, and two multiplexed $R_z$ rotations, each with $n-1$ controls. If $c_n$ is the construction's CNOT count, then $c_2\\le3$ and\n$$c_n\\le4c_{n-1}+3\\cdot2^{n-1}\\quad(n\\ge3),\\qquad c_n\\le\\frac9{16}4^n-\\frac32 2^n.$$\nThis is the unoptimized recursive count; it does not include cross-block cancellations or terminal diagonal extraction and makes no compilation-time or finite-precision claim.",
+        "deps": [
+          "thm-qc-cosine-sine-block-decomposition",
+          "lem-qc-two-unitary-block-demultiplexing",
+          "lem-qc-multiplexed-axis-rotation-gray-code",
+          "lem-qc-multiplexed-rz-gray-code",
+          "thm-qc-two-qubit-unitary-three-cnot-synthesis",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-polar-form-with-unique-principal-argument",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits, arXiv:quant-ph/0406176v5",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-vmw-finite-precision-sk-compiler",
+        "kind": "lemma",
+        "title": "Finite-Bit Compilation into the VMW F/H Alphabet",
+        "statement": "Fix a finite family of one-qubit unitary matrices whose first $b$ real and imaginary coordinate bits are computable in time polynomial in $b$. For every rational $0<\\varepsilon<1/2$, each matrix $U$ in this family can be compiled deterministically into a word $W$ over $\\{F,F^*,H\\}$ with\n$$\\inf_{|\\lambda|=1}\\|W-\\lambda U\\|\\le\\varepsilon.$$\nThe expanded word length, bit time including output, and workspace are polynomial in $\\log(1/\\varepsilon)$ plus the binary encoding length of $\\varepsilon$. Constants may depend on the fixed family. In particular, accuracy $1/(Ct)$ for fixed positive rational $C$ has polylogarithmic bit time, workspace and word length in $t$. The output acts on the original qubit and allocates no additional quantum work space.",
+        "deps": [
+          "lem-qc-vmw-fh-density-and-base-net",
+          "thm-qc-solovay-kitaev-bit-complexity",
+          "lem-qc-fixed-dimension-interval-arithmetic"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-circuit-optimization-task",
+        "kind": "definition",
+        "title": "Circuit Optimization Task",
+        "statement": "A circuit-optimization instance consists of (i) a finite circuit in the ordered syntax of [[def-qc-circuit-syntax-and-register-order]], with denotation given by [[def-qc-circuit-denotational-semantics]], over one fixed finite exact gate alphabet, (ii) a declared equivalence relation—exact equality of those denoted matrices, or the whole-circuit phase relation $U\\sim_{\\mathrm{phase}}V$ from [[def-qc-global-phase-equivalence]], and (iii) an ancilla policy and one applicable cost coordinate. The ancilla policy specifies the allowed initial ancilla states and exact return obligations under [[def-qc-clean-and-dirty-ancillas]]. The cost coordinate is chosen from gate-occurrence count (size), minimum-layer depth, T-count, or width, using the precise meanings of [[def-qc-elementary-circuit-resources]] and [[def-qc-circuit-cost-model]]. Here minimum-layer depth is $d(C)$ from [[def-qc-circuit-cost-model]]; T-count is the number of occurrences labeled $T$ or $T^\\dagger$ from [[def-qc-clifford-t-gate-library]], so that coordinate is applicable only when the instance's alphabet contains those gates. The selected coordinate is part of the instance and remains fixed when comparing outputs.\n\nPhase equivalence is applied only to the denotation of the whole standalone circuit. A phase on a unitary generally becomes a relative phase when that unitary is placed under control, so an optimizer may not silently replace a controlled subcircuit by a phase-equivalent one. The instance must specify controlled access explicitly when controls are present.\n\nA feasible output is a circuit over the same gate alphabet and wire policy, with the same denotation under the chosen equivalence and no greater value of the selected cost coordinate. A globally optimal output has minimum selected cost among all feasible circuits in that declared model. This defines an optimization task; it supplies no algorithm or general optimality guarantee.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-circuit-cost-model",
+          "def-qc-global-phase-equivalence",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-ninefold-nearest-neighbor-multiplexor-routing",
+        "kind": "lemma",
+        "title": "Ninefold nearest-neighbor multiplexor routing",
+        "statement": "For the unoptimized recursive QSD circuit, use the contiguous interval layout in which each multiplexed-rotation target is an endpoint, each recursive child acts on the remaining contiguous interval, and each two-qubit terminal block acts on adjacent wires. The line architecture permits both ordered orientations of adjacent CNOT. Replacing each length-$k$ CNOT in a multiplexor by the explicit line-neighbor network below uses at most nine times the original CNOT count. This is an architecture-specific gate-count bound; it asserts no depth bound or arbitrary-layout guarantee.",
+        "deps": [
+          "lem-qc-unoptimized-qsd-recursive-decomposition-and-count",
+          "lem-qc-multiplexed-axis-rotation-gray-code",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits, nearest-neighbor decomposition section",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-basic-rewrite-correct-and-terminating",
+        "kind": "theorem",
+        "title": "Basic Rewrite Correct And Terminating",
+        "statement": "Each registered rewrite preserves the exact matrix; the procedure terminates and returns a local normal form relative only to the declared finite rewrite set. It is not claimed globally minimal.",
+        "deps": [
+          "alg-qc-basic-clifford-t-rewrite",
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barenco et al., Elementary gates for quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/9503016"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-clean-ancilla-multicontrolled-tradeoff",
+        "kind": "theorem",
+        "title": "Clean Ancilla Multicontrolled Tradeoff",
+        "statement": "For $m\\ge1$ controls, reuse the exact no-workspace $O(m^2)$ and one-clean-bit $O(m)$ constructions from QC11, with total widths $m+1$ and $m+2$ and exact return of the clean bit. These compare construction upper bounds rather than optimal complexities.",
+        "deps": [
+          "thm-qc-multicontrolled-ancilla-resource-tradeoff",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-clean-and-dirty-ancillas"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barenco et al., Elementary gates for quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/9503016"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-nearest-neighbor-cnot-overhead",
+        "kind": "theorem",
+        "title": "Nearest Neighbor CNOT Overhead",
+        "statement": "For the unoptimized recursive QSD circuit in the contiguous interval layout—each multiplexor target is an endpoint, recursive children use the remaining contiguous interval, and terminal two-qubit blocks act on adjacent wires—with both directed orientations of adjacent CNOT allowed, the explicit line routing uses at most nine times the original CNOT count. This is an architecture-specific gate-count bound, not a depth bound or a guarantee for other layouts.",
+        "deps": [
+          "lem-qc-ninefold-nearest-neighbor-multiplexor-routing"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits, §6",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-qsd-cnot-upper-bound",
+        "kind": "theorem",
+        "title": "QSD CNOT Upper Bound",
+        "statement": "Reuse QC11 exact QSD: no-ancilla $n$-qubit $U$ needs at most $(23/48)4^n-(3/2)2^n+4/3$ CNOTs. Report one-qubit gates separately; a CNOT count alone is not total classical compilation time. Use $n\\ge2$ for this formula; $n=1$ needs zero CNOT. For $n=0$, an exact circuit exists only for the identity scalar $U=1$, realized by the empty circuit.",
+        "deps": [
+          "thm-qc-exact-arbitrary-unitary-qsd-upper-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-fixed-arity-polynomial-cauchy-gate-decomposition",
+        "kind": "lemma",
+        "title": "Effective Exact Gate Factors for Fixed Local Unitaries",
+        "statement": "Fix a positive integer $k$ and a finite collection $\\mathcal U$ of fixed unitary matrices, each on between one and $k$ qubits. Suppose every real and imaginary matrix coordinate has a deterministic Cauchy procedure returning error at most $2^{-p}$ in time polynomial in $p+1$. There exist exact no-ancilla one-qubit/CNOT factor lists for all $U\\in\\mathcal U$, with a common constant bound on their lengths, such that every coordinate of every one-qubit factor also has a polynomial-time Cauchy procedure. All scalar phases in the exact matrix products are retained.\n\nThe lists and Cauchy programs may depend on the fixed collection $\\mathcal U$. In particular their finite zero/nonzero decisions and branch choices may be hardcoded. The claim is an existence statement for each fixed machine's finite transition set, not an algorithm that decides equality of arbitrary Cauchy-name inputs. It supplies effective target matrices for finite-precision compilation, not a compiler by itself.",
+        "deps": [
+          "lem-qc-fixed-dimension-interval-arithmetic",
+          "alg-qc-two-level-unitary-elimination",
+          "thm-qc-two-level-unitary-elimination-correct",
+          "alg-qc-two-level-gate-to-elementary-gates",
+          "thm-qc-multicontrolled-ancilla-resource-tradeoff",
+          "thm-qc-one-control-unitary-two-cnot",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-bqtisp-to-ptisp-simulation",
+        "kind": "theorem",
+        "title": "BQTISP to Derived-Basis PrTISP Simulation",
+        "statement": "For sufficiently constructible $t,s\\ge\\log n$, the published VMW model with charged operand extent satisfies\n$$\\mathrm{BQTISP}(t,s)\\subseteq\\mathrm{PrTISP}_{\\rm basis}(t\\,\\mathrm{polylog}\\,t,s+\\mathrm{polylog}\\,t).$$\nThe output uses the derived classical basis profile in [[def-qc-unbounded-error-time-space-counting-model]], with a fixed finite number of separate binary work tapes and native basis input queries. All work cells addressed by local operations or a query, including the highest query endpoint, count toward work extent. This is the explicit operand-space formalization of the published model; no general conversion to the erased-index head-access-only or sequential profile is asserted.",
+        "deps": [
+          "def-qc-bqtisp-model",
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-fixed-arity-polynomial-cauchy-gate-decomposition",
+          "def-qc-clifford-t-gate-library",
+          "lem-qc-vmw-fh-density-and-base-net",
+          "lem-qc-vmw-finite-precision-sk-compiler",
+          "def-time-and-space-constructible-function",
+          "lem-operator-norm-is-a-norm",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, Time-Space Efficient Simulations of Quantum Computation",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Dawson and Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-generic-circuit-count-lower-bound",
+        "kind": "theorem",
+        "title": "Generic Circuit Count Lower Bound",
+        "statement": "Fix a nonempty finite gate alphabet of $A\\ge1$ gates, each of arity at most $k$ with $1\\le k\\le3$, and count circuits on $n\\ge1$ classical input wires with zero-initialized ancillas and one designated measured output bit. No additional classical acceptance predicate is free. For a gate budget $C\\ge n$, put $W=n+kC+1$. After deleting unused ancillas, every such circuit has at most $W$ wires, and there are at most\n$$W\\sum_{j=0}^{C}(AW^k)^j=\\exp(O(C\\log C))$$\noutput-designated gate-list descriptions. Each description computes at most one Boolean function with success probability at least $2/3$ on every input. Hence, for all sufficiently large $n$, at least $99\\%$ of Boolean functions on $n$ bits require $\\Omega(2^n/n)$ gates. If arbitrary classical postprocessing is allowed, its circuit or description cost must be included; otherwise this conclusion need not hold.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-bqp-promise-class",
+          "def-qc-quantum-acceptance-probability"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "kind": "theorem",
+        "title": "Counting Hierarchy Time Space Lower Bound",
+        "statement": "In the final published VMW erased-index quantum model, for every real $d$ and $\\varepsilon>0$ there exists $c>1$ such that either $\\mathrm{MajMajSAT}$ has no bounded-error algorithm of time $O(n^c)$, or $\\mathrm{MajSAT}$ has no bounded-error algorithm using both time $O(n^d)$ and space $O(n^{1-\\varepsilon})$. Consequently, for every $\\varepsilon>0$, $\\mathrm{MajMajSAT}$ has no bounded-error algorithm with time $n^{1+o(1)}$ and space $O(n^{1-\\varepsilon})$. The fixed gates have the polynomial-time precision approximation condition of the model definition.",
+        "deps": [
+          "thm-qc-bqtisp-to-ptisp-simulation",
+          "thm-qc-unbounded-error-counting-time-space-alternative",
+          "def-qc-unbounded-error-time-space-counting-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, Time-Space Efficient Simulations of Quantum Computation",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2211,
+    "id": "circuit-optimization-resource-tradeoffs-and-lower-bounds-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Circuit Optimization, Resource Tradeoffs, and Lower Bounds — Examples",
+    "companion": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+    "requires": [
+      "circuit-optimization-resource-tradeoffs-and-lower-bounds"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-two-qubit-qsd-cnot-count",
+        "kind": "example",
+        "title": "Two-qubit QSD CNOT upper-bound instance",
+        "statement": "Substituting n=2 into the stated no-ancilla QSD count gives (23/48)·16−(3/2)·4+4/3=3 CNOTs, with one-qubit gates counted separately.",
+        "deps": [
+          "thm-qc-qsd-cnot-upper-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

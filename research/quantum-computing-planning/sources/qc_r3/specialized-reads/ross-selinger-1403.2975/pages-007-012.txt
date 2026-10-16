@@ -1,0 +1,733 @@
+===== PDF PAGE 7 =====
+
+Proof. By assumption, A = Ax × Ay and B = Bx × By, where Ax, Ay, Bx, and By are closed intervals.
+By
+Lemma 5.5, any potential solution is of the form u = α+βi or u = α+βi+ω, where α, β ∈Z[
+√
+
+2]. When u = α+βi,
+then u• = α• + β•i. Therefore, the two-dimensional grid constraints u ∈A and u• ∈B are equivalent to the
+one-dimensional constraints α ∈Ax, α• ∈Bx and β ∈Ay, β• ∈By. On the other hand, when u = α + βi + ω,
+let v = u −ω = α + βi. Then v• = u• + ω, and the constraints u ∈A and u• ∈B are equivalent to v ∈A −ω
+and v• ∈B + ω, which reduces to the one-dimensional constraints α ∈Ax −
+1
+√
+
+2, α• ∈Bx +
+1
+√
+
+2 and β ∈Ay −
+1
+√
+
+2,
+β• ∈By +
+1
+√
+
+2. In both cases, the solutions to the one-dimensional constraints can be efficiently enumerated by
+Proposition 4.5.
+
+5.2
+Upright sets
+
+We can generalize the method of Section 5.1 to convex sets that are close to upright rectangles in a suitable sense.
+
+Definition 5.7. Let A be a bounded convex subset of R2. The bounding box of A, denoted BBox(A), is the smallest
+set of the form [x0, x1] × [y0, y1] that contains A. The uprightness of A, denoted up(A), is defined to be the ratio of
+the area of A to the area of its bounding box:
+
+up(A) =
+area(A)
+area(BBox(A)).
+(6)
+
+Therefore, the uprightness is a real number between 0 and 1. We say that A is M-upright if up(A) ⩾M.
+
+Lemma 5.8. There exists an algorithm which, given a pair A, B of convex M-upright sets, enumerates all solutions
+of the two-dimensional grid problem for A and B. Moreover, the algorithm requires O(1/M 2) arithmetic operations
+per solution produced. In particular, when M > 0 is fixed, it requires only a constant number of operations per
+solution.
+
+Proof. By Lemma 5.6, we can efficiently enumerate the solutions of the grid problem for BBox(A) and BBox(B).
+Moreover, as shown in the proof of Lemma 5.6, the solutions are arranged in rows and columns. For each such
+candidate solution u, we only need to check whether u is also a solution for A and B. To establish the efficiency of
+the algorithm, we need to ensure that the total number of solutions is not too small in relation to the total number of
+candidates produced. To see this, note that, with the exception of trivial cases, when the number of rows or columns
+is very small, M-uprightness and convexity ensure that the proportion of candidates u that are solutions for A and
+B is approximately M 2 : 1. Therefore, the runtime per solution differs from that of Lemma 5.6 by at most a factor
+of O(1/M 2).
+
+Example 5.9. Figure 3 shows three different examples of grid problems.
+Each example uses the same set B =
+[−1, 1] × [−1, 1], shown in green. The grid for B is shown as black dots. The sets Ai are shown in red, for i = 1, 2, 3,
+and their bounding boxes are shown in outline. The typical case of an upright set is A1. Here, a fixed proportion
+of grid points from the bounding box of A1 are elements of A1. The exceptional case of an upright set is A2. Its
+bounding box spans only two columns of the grid. Therefore, although the bounding box contains many grid points,
+A2 does not. However, this case is easily dealt with, by solving a one-dimensional grid problem for each of the grid
+columns separately. Finally, the set A3 is not upright. In this case, Lemma 5.8 is not helpful, and a priori, it could
+be a difficult problem to find grid points in A3.
+
+5.3
+Grid operators
+
+The method of Section 5.2 can be further generalized by using certain linear transformations to turn non-upright
+sets into upright sets. The linear transformations that are useful for this purpose are special grid operators:
+
+Definition 5.10. As before, we regard Z[ω] as a subset of R2. A real linear operator G : R2 →R2 is called a grid
+operator if G(Z[ω]) ⊆Z[ω]. Moreover, a grid operator G is called special if it has determinant ±1.
+
+Grid operators are characterized by the following lemma.
+
+Lemma 5.11. Let G : R2 →R2 be a linear operator, which we can identify with a real 2×2-matrix with real entries.
+Then G is a grid operator if and only if it is of the form
+
+G =
+
+�
+a + a′
+
+√
+
+2
+b + b′
+
+√
+
+2
+c + c′
+
+√
+
+2
+d + d′
+
+√
+
+2
+
+�
+
+,
+(7)
+
+where a, b, c, d, a′, b′, c′, d′ are integers satisfying a + b + c + d ≡0 (mod 2) and a′ ≡b′ ≡c′ ≡d′ (mod 2).
+
+7
+
+
+===== PDF PAGE 8 =====
+
+B
+
+A1
+A2
+
+A3
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+Figure 3: Grid problems for upright and non-upright sets
+
+Proof. By Lemma 5.5, we know that a vector u ∈R2 is in Z[ω] if and only if it can be written of the form
+
+u =
+
+�
+x1 + x2
+√
+
+2
+y1 + y2
+√
+
+2
+
+�
+
+,
+(8)
+
+where x1, x2, y1, y2 are integers and x2 ≡y2 (mod 2).
+A simple computation then shows that every operator of
+the form (7) is a grid operator. For the converse, consider an arbitrary grid operator G. We prove the claim by
+applying G to the three particular points [ 1
+0 ], [ 0
+1 ], and
+1
+√
+
+2[ 1
+1 ] ∈Z[ω]. From G[ 1
+0 ] ∈Z[ω] and G[ 0
+1 ] ∈Z[ω], it follows
+that the columns of G are of the form (8), so that G is of the form (7), with integers a, b, c, d, a′, b′, c′, d′ satisfying
+a′ ≡c′ (mod 2) and b′ ≡d′ (mod 2). Moreover, we have
+
+G
+�
+1/
+√
+
+2
+1/
+√
+
+2
+
+�
+=
+
+�a′+b′
+
+2
++ a+b
+√
+
+2
+c′+d′
+
+2
++ c+d
+√
+
+2
+
+�
+
+∈Z[ω],
+
+which implies a+ b ≡c+ d (mod 2) and a′ + b′ ≡c′ + d′ ≡0 (mod 2). Together, these conditions imply a+ b+ c+ d ≡
+0 (mod 2) and a′ ≡b′ ≡c′ ≡d′ (mod 2), as claimed.
+
+Remark 5.12. The composition of two (special) grid operators is again a (special) grid operator. If G is a special
+grid operator, then G is invertible and G−1 is a special grid operator. If G is a (special) grid operator, then G• is a
+(special) grid operator, defined by applying (−)• separately to each matrix entry, and satisfying G•u• = (Gu)•.
+
+The interest of special grid operators lies in the following fact:
+
+Proposition 5.13. Let G be a special grid operator, and let A and B be subsets of R2. Define
+
+G(A) = {Gu | u ∈A},
+G•(B) = {G•u | u ∈B}.
+
+Then u ∈Z[ω] is a solution to the two-dimensional grid problem for A and B if and only if Gu is a solution to the
+two-dimensional grid problem for G(A) and G•(B). In particular, the two-dimensional grid problem for A and B is
+computationally equivalent to that for G(A) and G•(B).
+
+Proof. Let u ∈Z[ω]. Then u is a solution to the grid problem for A and B if and only if u ∈A and u• ∈B, if and
+only if Gu ∈G(A) and G•u• = (Gu)• ∈G•(B), if and only if Gu is a solution to the grid problem for G(A) and
+G•(B).
+
+8
+
+
+===== PDF PAGE 9 =====
+
+(a)
+
+A
+
+B
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+(b)
+
+G(A)
+
+G•(B)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+Figure 4: (a) The grid problem for two sets A and B. (b) The grid problem with G(A) and G•(B). Note that the
+solutions of (a), which are the grid points in the set A, are in one-to-one correspondence with the solutions of (b),
+which are the grid points in the set G(A).
+
+Example 5.14. Figure 4(a) illustrates the grid problem for a pair of sets A and B. As before, the set B is shown in
+green, and Grid(B) is shown as black dots. The set A is shown in red, and the solutions to the grid problem are the
+seven grid points that lie in A. Figure 4(b) shows the grid problem for the sets G(A) and G•(B), where G is the
+special grid operator
+
+G =
+�
+1
+√
+
+2
+0
+1
+
+�
+.
+
+Note that, as predicted by Proposition 5.13, the solutions of the transformed grid problem are in one-to-one corre-
+spondence with those of the original problem; namely, in each case, there are seven solutions.
+
+5.4
+Ellipses
+
+Combining the results of Sections 5.2 and 5.3, we know that the grid problem for convex sets A and B can be solved
+efficiently, provided that we can find a grid operator G such that G(A) and G•(B) are sufficiently upright. Our key
+technical result is that in case A and B are ellipses, this is always the case.
+
+Definition 5.15. Let D be a positive definite real 2 × 2-matrix with non-zero determinant, and let p ∈R2 be a
+point. The ellipse defined by D and centered at p is the set
+
+E = {u ∈R2 | (u −p)†D(u −p) ⩽1}.
+
+Theorem 5.16. Suppose A, B ⊆R2 are ellipses. Then there exists a grid operator G such that G(A) and G•(B)
+are 1/6-upright. Moreover, if A and B are M-upright, then G can be efficiently computed in O(log(1/M)) arithmetic
+operations.
+
+Since the proof is long and technical, we give it in Appendix A.
+
+5.5
+The enclosing ellipse of a bounded convex set
+
+Our final step in the solution of the two-dimensional grid problem is to generalize Theorem 5.16 from ellipses to
+arbitrary bounded convex sets with non-empty interior. This can be done because every such set A can be inscribed
+in an ellipse whose area is not much greater than that of A, as stated in the following proposition.
+
+9
+
+
+===== PDF PAGE 10 =====
+
+Proposition 5.17. Let A be a bounded convex subset of R2 with non-empty interior. Then there exists an ellipse E
+such that A ⊆E, and such that
+
+area(E) ⩽4π
+
+3
+√
+
+3 area(A).
+
+The proof is in Appendix B. Note that
+4π
+3
+√
+
+3 ≈2.4184. We remark that the bound in Proposition 5.17 is sharp;
+the bound is attained in case A is an equilateral triangle. In this case, the enclosing ellipse is a circle, and the ratio
+of the areas is exactly
+4π
+3
+√
+
+3.
+
+5.6
+General solution of the two-dimensional grid problem
+
+We are finally in a position to solve the two-dimensional grid problem for arbitrary bounded convex sets of non-empty
+interior.
+
+Theorem 5.18. There is an algorithm which, given two bounded convex subset A and B of R2 with non-empty
+interior, enumerates all solutions of the two-dimensional grid problem for A and B. Moreover, if A and B are M-
+upright, then the algorithm requires O(log(1/M)) arithmetic operations overall, plus a constant number of arithmetic
+operations per solution produced.
+
+Proof. Given two such sets A and B, we can first find ellipses A′ and B′ containing A and B, respectively, and
+whose areas exceed those of A and B by at most a fixed constant factor N. Such ellipses exist by Proposition 5.17;
+moreover, it is not hard to see that they can be found efficiently if A and B are polygons with rational vertices. Since
+we assume that each given convex set is equipped with such an enclosing rational polygon (Remark 5.4), A′ and B′
+
+can be found efficiently for arbitrary given A and B.
+Next, by Theorem 5.16, we can use O(log(1/M)) arithmetic operations to find a grid operator G such that G(A′)
+and G•(B′) are 1/6-upright. It follows that G(A) and G•(B) are N/6-upright. By Lemma 5.8, we can efficiently
+enumerate all solutions u of the grid problem for G(A) and G•(B). By Proposition 5.13, G−1u then enumerates the
+solutions to the grid problem for A and B.
+
+Remark 5.19. Note that the complexity of O(log(1/M)) overall operations in Theorem 5.18 is exponentially better
+than the complexity of O(1/M 2) per candidate we obtained in Lemma 5.8. This improvement is entirely due to the
+use of grid operators in Theorem 5.16.
+
+5.7
+Scaled grid problems
+
+Sometimes we want to find solutions to a grid problem where the points are taken in D[ω] instead of Z[ω]. There are
+two variants of this problem: we may either enumerate the solutions for a fixed denominator exponent, or enumerate
+all solutions in order of increasing least denominator exponent.
+
+Definition 5.20. Let A and B be subsets of R2. The two-dimensional scaled grid problem for fixed k ⩾0 is to find
+u ∈
+1
+√
+
+2k Z[ω] satisfying u ∈A and u• ∈B. The two-dimensional scaled grid problem for arbitrary k ⩾0 is to find
+u ∈D[ω] satisfying u ∈A and u• ∈B.
+
+Proposition 5.21. There is an algorithm which, given two bounded convex subsets A and B of R2 with non-empty
+interior and an integer k ⩾0, enumerates all solutions of the two-dimensional scaled grid problem for A, B, and k.
+Moreover, if A and B are M-upright, then the algorithm requires O(log(1/M)) arithmetic operations overall, plus a
+constant number of arithmetic operations per solution produced.
+
+Proof. Note that u =
+1
+√
+
+2k v is a solution to the scaled grid problem for A, B, and k if and only if v is a solution to the
+
+(unscaled) grid problem for
+√
+
+2kA and (−
+√
+
+2)kB. The claim then immediately follows from Proposition 5.18.
+
+Proposition 5.22. There is an algorithm which, given two bounded convex subsets A and B of R2 with non-empty
+interior, enumerates (the infinite sequence of) all solutions u of the two-dimensional scaled grid problem for A, B,
+and arbitrary k ⩾0, in order of increasing k. Moreover, if A and B are M-upright, then the algorithm requires
+O(log(1/M)) arithmetic operations overall, plus a constant number of arithmetic operations per solution produced.
+
+10
+
+
+===== PDF PAGE 11 =====
+
+Proof. This can be done by applying Lemma 5.21 to each k = 0, 1, 2, . . ., in increasing order. In principle, this
+method enumerates each solution multiple times, since each solution for k is also a solution for k + 1. As a slight
+optimization, such duplicate enumeration can be avoided by noting that for k > 0, u =
+1
+√
+
+2k (aω3 + bω2 + cω + d)
+
+is an element of Z[ω]/
+√
+
+2k −Z[ω]/
+√
+
+2 k−1 if and only if a −c or b −d (or both) are odd. Finally, we note that,
+because uprightness is invariant under scaling, the grid operator G in the proof of Proposition 5.18 only needs to be
+computed once, rather than once for every k.
+
+We end this section with some lower bounds on the number of solutions to two-dimensional scaled grid problems.
+
+Lemma 5.23. Let A and B be convex subsets of R2, and let k ⩾0. Assume A contains a circle of radius r and B
+contains a circle of radius R, such that rR ⩾
+1
+2k (1+
+√
+
+2)2. Then the scaled grid problem for k has at least 2 solutions.
+
+Proof. By scaling the problem by a factor of
+√
+
+2k, we can assume without loss of generality that k = 0. Let δ = r/
+√
+
+2
+and ∆= R
+√
+
+2, and inscribe two squares of size δ × δ in the first circle, and one square of size ∆× ∆in the second
+circle, as shown here:
+
+δ
+δ
+
+x0
+x1 x2
+x3
+α
+α′
+
+y0
+
+y1
+
+β
+•
+•
+
+∆
+
+z0
+z1
+
+w0
+
+w1
+
+•
+
+α•
+
+•
+
+α′•
+
+β•
+
+Since δ∆= rR ⩾(1 +
+√
+
+2)2, by Lemma 4.4, we can find α, α′, β ∈Z[
+√
+
+2] such that α ∈[x0, x1], α• ∈[z0, z1],
+α′ ∈[x2, x3], α′• ∈[z0, z1], β ∈[y0, y1], and β• ∈[w0, w1]. Then u = α + iβ and v = α′ + iβ are two different
+solutions to the two-dimensional grid problem as claimed.
+
+Lemma 5.24. Let A and B be convex subsets of R2, and assume that the two-dimensional scaled grid problem for k
+has at least two distinct solutions. Then for all ℓ⩾0, the scaled grid problem for k + 2ℓhas at least 2ℓ+ 1 solutions.
+
+Proof. Let u ̸= v be solutions of the scaled grid problem for k. For each j = 0, 1, . . . , 2ℓ, let φ =
+j
+2ℓ, and consider
+uj = φu+(1−φ)v. Then uj has denominator exponent k+2ℓ. Also, uj is a convex combination of u and v; moreover,
+since φ• = φ, we also know that u•
+j = φu• + (1 −φ)v• is a convex combination of u• and v•. Since A and B are
+convex, it follows that uj is a solution of the scaled grid problem for k + 2ℓ, yielding 2ℓ+ 1 distinct solutions.
+
+Remark 5.25. The bound in Lemma 5.24 is sufficient for our purposes, but it is not tight. In fact, the number of
+solutions grows as O(4k).
+
+6
+Solving a Diophantine equation
+
+We will be interested in solving equations of the following form: given ξ ∈D[
+√
+
+2], find t ∈D[ω] such that
+
+t†t = ξ.
+(9)
+
+The following necessary condition is immediate:
+
+Lemma 6.1 (Necessary condition). The equation (9) has a solution only if ξ ⩾0 and ξ• ⩾0.
+
+Proof. Assume t†t = ξ. Since t is a complex number, we have ξ = t†t ⩾0. Similarly, since t• is a complex number,
+we have ξ• = (t•)†(t•) ⩾0.
+
+The following theorem states that the problem of solving the equation (9) can be reduced to the prime factorization
+problem for integers.
+
+Theorem 6.2. Let ξ ∈D[
+√
+
+2]. Note that ξ•ξ ∈D, so we can write ξ•ξ = n
+
+2ℓfor some n ∈Z and ℓ∈N. There exists
+a probabilistic algorithm which, given ξ and, in case n ̸= 0, a prime factorization of n, determines whether or not
+the equation (9) has a solution, and finds a solution if there is one. Moreover, the expected runtime of this algorithm
+is polynomial in the size of n.
+
+Theorem 6.2 is a well-known result in computational algebraic number theory. For the benefit readers who are
+not experts in number theory, we give an elementary and more or less self-contained proof in Appendix C.
+
+11
+
+
+===== PDF PAGE 12 =====
+
+7
+The approximate synthesis algorithm
+
+7.1
+The approximate synthesis problem
+
+Recall that the z-rotation by angle θ is the unitary operator
+
+Rz(θ) = e−iθZ/2 =
+�
+e−iθ/2
+0
+0
+eiθ/2
+
+�
+.
+
+Definition 7.1. Given θ and a precision ε > 0, the approximate synthesis problem for z-rotations is to find an
+operator U expressible in the single-qubit Clifford+T gate set, such that
+
+∥Rz(θ) −U∥⩽ε.
+(10)
+
+Moreover, we want the T -count of the operator U to be as small as possible; here, the T -count of a Clifford+T circuit
+is the number of T -gates appearing in it. The norm in (10) is the operator norm.
+
+It is known from [10] that a single-qubit operator can be exactly represented over the Clifford+T gate set if and
+only if it can be written of the form
+
+U =
+�
+u −t†ωℓ
+t
+u†ωℓ
+
+�
+,
+(11)
+
+where u, t ∈D[ω] and ℓis an integer. The following lemma shows that, for the purposes of approximate synthesis,
+we may assume without loss of generality that ℓ= 0.
+
+Lemma 7.2. If ε < |1 −eiπ/8|, then all solutions of the approximate synthesis problem have the form
+
+U =
+�
+u −t†
+t
+u†
+
+�
+.
+(12)
+
+If ε ⩾|1 −eiπ/8|, then there exists a solution of T -count 0 (i.e., a Clifford operator), and it is also of the form (12).
+
+Proof. To prove the first claim, assume ε < |1 −eiπ/8|. Let U be of the form (11), satisfying (10). Let eiφ1 and
+eiφ2 be the eigenvalues of URz(θ)−1, with φ1, φ2 ∈[−π, π]. Using (10), we have ∥I −URz(θ)−1∥⩽ε < |1 −eiπ/8|.
+On the other hand, ∥I −URz(θ)−1∥= max{|1 −eiφ1|, |1 −eiφ2|}.
+It follows that |1 −eiφj| < |1 −eiπ/8| for
+j = 1, 2, hence −π/8 < φj < π/8, hence −π/4 < φ1 + φ2 < π/4, so |1 −ei(φ1+φ2)| < |1 −eiπ/4| = |1 −ω|. On
+other hand, we have ei(φ1+φ2) = det(URz(θ)−1) = ωℓ, hence |1 −ωℓ| < |1 −ω|, which implies ωℓ= 1. Therefore,
+U is of the form (12).
+To prove the second claim, assume ε ⩾|1 −eiπ/8|.
+Let j be the integer closest to
+2θ
+
+π ,
+so that |j −2θ
+
+π | ⩽
+1
+2, or equivalently, |j π
+
+4 −θ
+
+2| ⩽
+π
+8 .
+Let U be as in (12), with u = ω−j and t = 0.
+Then
+∥Rz(θ) −U∥= |eiθ/2 −u†| = |1 −u†e−iθ/2| = |1 −ei(j π
+
+4 −θ
+
+2 )| ⩽|1 −ei π
+
+8 | ⩽ε. So (10) holds. But U = Sjω−j is a
+Clifford operator, so has T -count 0.
+
+Our strategy is therefore to approximate Rz(θ) by an operator U of the form (12), with u, t ∈D[ω], and then use
+the exact synthesis algorithm of [10] to synthesize U into a sequence of Clifford+T gates with minimal T -count. The
+following lemma relates the T -count of the resulting circuit to the least denominator exponent k of u.
+
+Lemma 7.3. Let U be a unitary operator as in (12), where u, t ∈D[ω], and let k be the least denominator exponent
+of u. Then the T -count of U is either 2k −2 or 2k. Moreover, if k > 0 and U has T -count 2k, then U ′ = T UT †
+
+has T -count 2k −2. We further note that ∥Rz(θ) −U ′∥= ∥Rz(θ) −U∥, so for the purpose of solving (10), it does
+not matter whether U or U ′ is used. Hence, without loss of generality, we may assume that U as in (12) always has
+T -count exactly 2k −2 when k > 0, and 0 when k = 0.
+
+Proof. Because U is unitary, we have t†t + u†u = 1. We first claim that t and u have the same least denominator
+exponent. Indeed, in the ring Z[ω], an element s is divisible by
+√
+
+2 if and only if s†s is divisible by 2. The left-to-right
+implication is obvious, and the right-to-left implication follows, e.g., from Lemma 2 of [6]. Then for any k ⩾0, we
+have
+√
+
+2ku ∈Z[ω] iff 2ku†u ∈Z[ω] iff 2k(1 −t†t) ∈Z[ω] iff 2kt†t ∈Z[ω] iff
+√
+
+2kt ∈Z[ω]. This proves that u and t
+have the same denominator exponents, and in particular, the same least denominator exponent.
+The claims about the T -counts of U and U ′ follow by inspection of Figure 2 of [7]. Using the terminology of
+Definitions 7.4 and 7.6 of [7], this figure shows every possible k-residue of a Clifford+T operator, modulo a right
+action of the group ⟨S, X, ω⟩. Because U is of the form (12), only a subset of the k-residues is actually possible, and
+the figure shows that for this subset, the T -count is 2k or 2k −2. Moreover, in each of the possible cases where k > 0
+and U has T -count 2k, the figure also shows that U ′ = T UT † has T -count 2k −2.
+For the final claim, we have ∥Rz(θ)−U∥= ∥T Rz(θ)T †−T UT †∥= ∥Rz(θ)−U ′∥because Rz(θ) and T commute.
+
+12
+

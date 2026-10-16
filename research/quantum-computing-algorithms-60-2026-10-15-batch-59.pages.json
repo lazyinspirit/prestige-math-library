@@ -1,0 +1,851 @@
+[
+  {
+    "order": 2282,
+    "id": "quantum-communication-and-fingerprinting",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Quantum Communication and Fingerprinting",
+    "companion": "quantum-communication-and-fingerprinting-examples",
+    "requires": [
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "measurements-povms-and-instruments",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "the-polynomial-hierarchy-and-relativization",
+      "registers-tensor-products-and-partial-trace",
+      "trace-distance-fidelity-and-information-limits",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "finite-probability-spaces-and-random-variables",
+      "randomized-complexity-and-amplification"
+    ],
+    "items": [
+      {
+        "id": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+        "kind": "definition",
+        "title": "Finite distributions, entropy, divergence, and stochastic matrices",
+        "statement": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+        "deps": [
+          "def-finite-probability-space-and-event"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "local_order": 1,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          },
+          {
+            "title": "John Watrous, The Theory of Quantum Information",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§5.1.1, Definitions 5.1 and 5.3, printed pp.250–252 (PDF pp.258–260); classical entropy and relative entropy, converted here from base-2 logarithms to natural logarithms."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-log-tangent-bound",
+        "kind": "lemma",
+        "title": "The logarithm tangent inequality",
+        "statement": "For every $t>0$, $\\ln t\\le t-1$, with equality exactly when $t=1$.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "local_order": 2,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-kl-event-separation",
+        "kind": "lemma",
+        "title": "A separating event forces relative entropy",
+        "statement": "For finite distributions P,Q and a vector X∈[0,1]^m, if P·X≤0.06 and Q·X≥0.94, then D(Q∥P)≥1 (with +∞ allowed).",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-qa-35-log-tangent-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "local_order": 3,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-smp-prior-message-decomposition",
+        "kind": "lemma",
+        "title": "Conditioning on a private message separates average acceptance",
+        "statement": "Let A,B be N×m row-stochastic matrices, M∈[0,1]^{m×m}, and let C=AMBᵀ satisfy C_xx≥0.99 and C_xy≤0.01 for x≠y. For every probability row vector D with ||D||₂²≤0.01 there are weights q_j and probability rows D_j with D=Σ_jq_jD_j such that, for columns X_j of M, Σ_j q_j(DA)X_jᵀ≤0.02 and Σ_jq_j(D_jA)X_jᵀ≥0.99.",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "local_order": 4,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games",
+            "url": "https://dl.acm.org/doi/10.1145/237814.238004",
+            "locator": "§4.1–4.2, PDF pp.4–9, matrix packing theorem and complete proof."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-smp-entropy-drop",
+        "kind": "lemma",
+        "title": "Private-message conditioning lowers output entropy",
+        "statement": "Under the hypotheses and decomposition of [[lem-qa-35-smp-prior-message-decomposition]], the weights and posteriors can be chosen so that Σ_jq_j H(D_jA)≤H(DA)−1/2.",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-qa-35-kl-event-separation",
+          "lem-qa-35-smp-prior-message-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "local_order": 5,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games",
+            "url": "https://dl.acm.org/doi/10.1145/237814.238004",
+            "locator": "§4.1–4.2, PDF pp.4–9, matrix packing theorem and complete proof."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-35-swap-test-effect",
+        "kind": "definition",
+        "title": "Symmetric and antisymmetric swap-test measurement",
+        "statement": "Let $H$ be a finite-dimensional complex inner-product space. On $H\\otimes H$ define the **swap** $F$ by $F(u\\otimes v)=v\\otimes u$ and linear extension. Define the symmetric and antisymmetric effects\n$$P_+=(I+F)/2,\\qquad P_-=(I-F)/2.$$\nThe “equal” outcome corresponds to $P_+$ and “unequal” to $P_-$. When $H\\ne\\{0\\}$, the following theorem proves well-definedness as a two-outcome projective measurement and calculates its pure-product law. For $H=\\{0\\}$ the operators are still defined, but no density input or measurement interpretation under the cited nonzero-space convention is asserted.",
+        "deps": [
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-density-operator",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-projective-measurement-outcome-law"
+        ],
+        "justified_by": [
+          "thm-qa-35-swap-test-measurement-effect"
+        ],
+        "dependency_level": 3,
+        "local_order": 6,
+        "proof_obligations": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+              "url": "https://arxiv.org/pdf/quant-ph/0102001",
+              "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "§1.1.3 (operator decompositions and norms), §2.1.2 (density operators), §2.3.1 (measurements), and §3.1.1, Theorem 3.4 (binary state discrimination)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-identity-matrix-packing",
+        "kind": "lemma",
+        "title": "Packing bound for separated randomized message rows",
+        "statement": "If A,B are N×m row-stochastic matrices and M∈[0,1]^{m×m} satisfies (AMBᵀ)_xx≥0.99 and (AMBᵀ)_xy≤0.01 for x≠y, then for every m≥2, N≤exp(60(ln m)²).",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-qa-35-smp-entropy-drop",
+          "lem-qa-35-log-tangent-bound",
+          "lem-qa-35-smp-prior-message-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "local_order": 7,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games",
+            "url": "https://dl.acm.org/doi/10.1145/237814.238004",
+            "locator": "§4.1–4.2, PDF pp.4–9, matrix packing theorem and complete proof."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-trace-norm-tensor-density-identity",
+        "kind": "lemma",
+        "title": "Trace distance is unchanged by a fixed tensor factor",
+        "statement": "For density operators $\\rho,\\sigma$ on $H$ and $\\tau$ on $K$, $D(\\rho\\otimes\\tau,\\sigma\\otimes\\tau)=D(\\rho,\\sigma)$.",
+        "deps": [
+          "def-qc-density-operator",
+          "def-qc-trace-distance",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "thm-qc-trace-norm-spectral-formula",
+          "thm-non-negative-operator-characterisations",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-trace-norm",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-trace-of-an-endomorphism",
+          "def-self-adjoint-and-normal-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "local_order": 8,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§1.1.3 (operator decompositions and norms), §2.1.2 (density operators), §2.3.1 (measurements), and §3.1.1, Theorem 3.4 (binary state discrimination)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-35-swap-test-measurement-effect",
+        "kind": "theorem",
+        "title": "Swap-test measurement and pure-state outcome law",
+        "statement": "The operators $P_\\pm=(I\\pm F)/2$ are complementary orthogonal projections, and on unit vectors $\\psi,\\phi$ the antisymmetric outcome on $|\\psi\\otimes\\phi\\rangle$ has probability $(1-|\\langle\\psi|\\phi\\rangle|^2)/2$.",
+        "deps": [
+          "def-qa-35-swap-test-effect",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-dirac-notation-conversion",
+          "def-trace-of-an-endomorphism",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-density-operator",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-ray-projector-well-defined-and-bijective"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "local_order": 9,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          },
+          {
+            "title": "John Watrous, The Theory of Quantum Information",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§1.1.3 (operator decompositions and norms), §2.1.2 (density operators), §2.3.1 (measurements), and §3.1.1, Theorem 3.4 (binary state discrimination)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-35-finite-communication-protocol",
+        "kind": "definition",
+        "title": "Finite communication problem and protocol model",
+        "statement": "A **finite communication problem** consists of nonempty finite input sets $X,Y$, disjoint sets $YES,NO\\subseteq X\\times Y$ with nonempty promise $P=YES\\cup NO$, and a required output bit on promised pairs. This is the finite-relation generalization of a binary-string promise problem ([[def-promise-problem]]): choose fixed injective labels $c_X:X\\to\\{0,1\\}^*$ and $c_Y:Y\\to\\{0,1\\}^*$, and encode a pair by\n$$e(x,y):=1^{|c_X(x)|}0\\,c_X(x)c_Y(y).$$\nThe unary length prefix makes $e$ injective, so $e(YES)$ and $e(NO)$ are disjoint subsets of $\\{0,1\\}^*$. This encoding only formalizes the relation; it is not a transmitted message or part of communication cost unless a protocol explicitly sends it. A protocol specifies who receives each input, the message schedule and number of rounds, each message alphabet or finite-dimensional register ([[def-qc-register-and-computational-basis]]), the local maps that produce messages, the referee's finite POVM ([[def-qc-povm-and-outcome-law]]) and output rule, and any shared randomness or entanglement. A quantum message state is a density operator, meaning nonnegative with trace one ([[def-qc-density-operator]]). Its worst-case error is the supremum of the probability of a wrong output over promised input pairs; its communication cost is the maximum total number of transmitted bits or qubits on any promised input. Local computation, referee computation, and shared resources are separately declared and are not silently included in that communication count.\n\nIn a simultaneous-message protocol (SMP), Alice and Bob each send one message to a referee without seeing the other's message. For classical private-coin SMP with no shared resource, conditional on inputs $x,y$ the two messages are independent, so their joint law is a product of their individual message distributions. For quantum SMP with no shared entanglement or randomness, the received state is a product of the two locally prepared density operators. These factorization properties are part of the stated resource model.",
+        "deps": [
+          "def-promise-problem",
+          "def-qc-register-and-computational-basis",
+          "def-qc-density-operator",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "local_order": 10,
+        "proof_obligations": [
+          "Specify worst-case promised-input error and separate communicated bits/qubits from local work and shared resources."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          },
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          },
+          {
+            "title": "John Watrous, The Theory of Quantum Information",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§1.1.3 (operator decompositions and norms), §2.1.2 (density operators), §2.3.1 (measurements), and §3.1.1, Theorem 3.4 (binary state discrimination)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-35-equality-promise",
+        "kind": "definition",
+        "title": "Equality communication problem",
+        "statement": "For $n\\ge1$, the **Equality promise problem** has $X=Y=\\{0,1\\}^n$, YES set $\\{(x,x):x\\in\\{0,1\\}^n\\}$ and NO set $\\{(x,y):x\\ne y\\}$. The required output is $1$ on YES and $0$ on NO. This is a total promise problem, and a bounded-error protocol must meet its error bound on every pair.",
+        "deps": [
+          "def-promise-problem",
+          "def-qa-35-finite-communication-protocol"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "local_order": 11,
+        "proof_obligations": [
+          "Use the total promise and fixed output convention."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          },
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-35-code-fingerprint-state",
+        "kind": "definition",
+        "title": "Code-based quantum fingerprint",
+        "statement": "For $n\\ge1$ and $N\\ge1$, let $E:\\{0,1\\}^n\\to\\{0,1\\}^N$ be a binary code map. Define its relative distance by\n$$\\delta(E):=\\frac1N\\min_{x\\ne y}d_H(E(x),E(y)),$$\nwhere $d_H(u,v):=|\\{i<N:u_i\\ne v_i\\}|$ and the minimum is over distinct inputs. Thus duplicate codewords are allowed and give relative distance $0$, and $\\delta(E)\\in[0,1]$; the minimum is over a nonempty finite set because $n\\ge1$. For every such map, with no positive-distance assumption, let $m=\\lceil\\log_2N\\rceil$ and use the ordered computational basis of the $m$-qubit index register, padding unused indices by zero amplitude. The **fingerprint state** of $x$ is\n$$|h_x\\rangle:=\\frac1{\\sqrt N}\\sum_{i=0}^{N-1}|i\\rangle|E_i(x)\\rangle,$$\nwhere $E_i(x)$ is bit $i$ of $E(x)$, indexed from $0$ to $N-1$. It is a vector in the $(m+1)$-qubit index-and-data register. The following theorem proves it is normalized and computes its overlap. This is a state definition; it makes no uniformity or encoder-time claim.",
+        "deps": [
+          "def-qa-35-equality-promise",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [
+          "thm-qa-35-code-fingerprint-state-properties"
+        ],
+        "dependency_level": 13,
+        "local_order": 12,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-private-coin-error-reduction",
+        "kind": "lemma",
+        "title": "Constant private-coin error reduction by repetition",
+        "statement": "If a private-coin simultaneous-message Equality protocol has worst-case error at most 1/3 and each sender sends at most c bits, then for any fixed odd t independent repetitions followed by majority have error at most exp(−t/48) and each sender sends at most t(c+1) bits under a fixed-length encoding.",
+        "deps": [
+          "def-qa-35-finite-communication-protocol",
+          "def-qa-35-equality-promise",
+          "lem-chernoff-bound-for-bernoulli-trials"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "local_order": 13,
+        "proof_obligations": [
+          "State finite message padding and independence of private random tapes across repetitions."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          },
+          {
+            "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach",
+            "url": "https://theory.cs.princeton.edu/complexity/book.pdf",
+            "locator": "Chapter 10, Chernoff bounds; local amplification argument uses the published Bernoulli lower-tail form."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-35-deterministic-smp-equality-lower-bound",
+        "kind": "theorem",
+        "title": "Deterministic SMP equality costs Ω(n) bits",
+        "statement": "Every deterministic simultaneous-message protocol for Equality on n-bit inputs has Alice’s message map injective, hence her worst-case message length is at least n bits, whether messages are fixed-length or strings of length at most the charged bound.",
+        "deps": [
+          "def-qa-35-equality-promise",
+          "def-qa-35-finite-communication-protocol"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "local_order": 14,
+        "proof_obligations": [
+          "Count fixed and variable length messages and exhibit the referee transcript contradiction."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-35-quantum-fingerprint-message-lower-bound",
+        "kind": "theorem",
+        "title": "Entanglement-free, randomness-free quantum fingerprints require Ω(log n) qubits",
+        "statement": "In an SMP Equality protocol on n≥2 bits with worst-case error at most 1/3, no shared randomness or entanglement, and fixed q-qubit messages, each sender must transmit Ω(log n) qubits. For fixed Bob input y, the referee’s equality POVM separates ρ_y from each ρ_x, x≠y, by trace distance at least 1/3; packing d×d density matrices in trace distance yields 2ⁿ≤(26d^(3/2))^(d²), d=2^q, and hence q=Ω(log n).",
+        "deps": [
+          "def-qa-35-finite-communication-protocol",
+          "def-qa-35-equality-promise",
+          "def-qc-trace-distance",
+          "thm-qc-measurement-variation-at-most-trace-distance",
+          "def-qc-density-operator",
+          "def-qc-povm-and-outcome-law",
+          "lem-qa-35-trace-norm-tensor-density-identity",
+          "thm-qc-trace-norm-spectral-formula",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-qc-trace-norm",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-trace-of-an-endomorphism",
+          "def-non-negative-and-positive-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "local_order": 15,
+        "proof_obligations": [
+          "Handle complex Hermitian coordinates, entry bounds, trace-distance mesh, the two senders, and the fixed message-dimension convention."
+        ],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          },
+          {
+            "title": "John Watrous, The Theory of Quantum Information",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§1.1.3 (operator decompositions and norms), §2.1.2 (density operators), §2.3.1 (measurements), and §3.1.1, Theorem 3.4 (binary state discrimination)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-35-random-code-existence-nonuniform",
+        "kind": "lemma",
+        "title": "Random linear-size fingerprint code exists nonuniformly",
+        "statement": "For every n≥1 there is a map E:{0,1}ⁿ→{0,1}^(32n) of relative distance at least 1/4. Choosing the lexicographically first such codebook defines a nonuniform family; this argument gives no efficient uniform encoder.",
+        "deps": [
+          "def-qa-35-code-fingerprint-state",
+          "def-finite-probability-space-and-event",
+          "lem-chernoff-bound-for-bernoulli-trials"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "local_order": 16,
+        "proof_obligations": [
+          "Use N=32n, δ=1/4, Chernoff α=1/2, and a union bound over fewer than 2^(2n) distinct pairs."
+        ],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-35-code-fingerprint-state-properties",
+        "kind": "theorem",
+        "title": "Fingerprint states are normalized and encode agreement as overlap",
+        "statement": "For every $n\\ge1$, every positive-length binary code map $E:\\{0,1\\}^n\\to\\{0,1\\}^N$ with $N\\ge1$, and all $x,y\\in\\{0,1\\}^n$, $|h_x\\rangle$ has norm one, uses $\\lceil\\log_2N\\rceil+1$ qubits, and $\\langle h_x|h_y\\rangle=N^{-1}|\\{i<N:E_i(x)=E_i(y)\\}|$.",
+        "deps": [
+          "def-qa-35-code-fingerprint-state",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "local_order": 17,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-35-private-coin-equality-lower-bound",
+        "kind": "theorem",
+        "title": "Private-coin SMP equality requires Ω(√n) bits",
+        "statement": "For a classical simultaneous-message Equality protocol on n-bit inputs, with independent private randomness, no shared resource, and worst-case error at most 1/3, let c be the maximum of the two senders’ worst-case message lengths. For the fixed odd t used in the proof, c+1≥sqrt(n/(60 ln 2))/t; consequently the total communication is Ω(√n).",
+        "deps": [
+          "def-qa-35-equality-promise",
+          "def-qa-35-finite-communication-protocol",
+          "lem-qa-35-private-coin-error-reduction",
+          "lem-qa-35-identity-matrix-packing"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "local_order": 18,
+        "proof_obligations": [
+          "Derive the stochastic matrices from private message distributions and apply the proved matrix-packing estimate; no citation substitutes for the local proof."
+        ],
+        "sources": [
+          {
+            "title": "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games",
+            "url": "https://dl.acm.org/doi/10.1145/237814.238004",
+            "locator": "§4.1–4.2, PDF pp.4–9, matrix packing theorem and complete proof."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-35-swap-test-fingerprint",
+        "kind": "algorithm",
+        "title": "Simultaneous-message equality by quantum fingerprints",
+        "statement": "**Inputs:** Integers $n\\ge1$, $N\\ge1$, and $r\\ge1$; a fixed binary code map $E:\\{0,1\\}^n\\to\\{0,1\\}^N$ known to both senders and the referee; and inputs $x,y\\in\\{0,1\\}^n$. The parties use no shared randomness or shared entanglement. State preparation and local computation are permitted and are not included in the communicated-qubit count.\n\n**Output:** A bit $b\\in\\{0,1\\}$, where $b=1$ means the referee declares $x=y$ and $b=0$ means the referee declares $x\\ne y$.\n\nSet $m=\\lceil\\log_2N\\rceil$ and $L=m+1$. Alice prepares $r$ copies of the fingerprint state $|h_x\\rangle$ and sends the $r$ registers, each with $L$ qubits, to the referee. Bob prepares and sends $r$ copies of $|h_y\\rangle$ in the same way. The referee groups the received registers as pairs $(A_j,B_j)$ in increasing order $j=1,\\ldots,r$. For each pair, the referee appends a fresh control qubit $|0\\rangle$, applies the Hadamard gate $H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$, then applies one Fredkin gate to each of the $L$ corresponding pairs of message wires, using this fresh control qubit as the gate's control. The referee applies $H$ again and measures the control in the computational basis. If any test returns $1$, stop the loop and output $b=0$. If all $r$ tests return $0$, output $b=1$. Thus each sender transmits exactly $rL$ qubits, and the referee uses at most $rL$ Fredkin gates and $2r$ Hadamard gates.",
+        "deps": [
+          "def-qa-35-code-fingerprint-state",
+          "def-qa-35-equality-promise",
+          "def-qa-35-swap-test-effect",
+          "thm-qa-35-swap-test-measurement-effect",
+          "def-qc-toffoli-and-fredkin",
+          "def-qc-register-and-computational-basis",
+          "def-qa-35-finite-communication-protocol",
+          "def-qc-circuit-cost-model",
+          "thm-qa-35-code-fingerprint-state-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "local_order": 19,
+        "proof_obligations": [
+          "Expand the H-controlled-swap-H state and count transmitted wires and Fredkin gates; pad the index by zero amplitudes when N is not a power of two."
+        ],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-qa-35-private-coin-lower-bound-unresolved",
+        "kind": "remark",
+        "title": "Private-coin SMP Equality lower bound and source recovery",
+        "statement": "The standard $\\Omega(\\sqrt n)$ private-coin simultaneous-message Equality lower bound is proved locally in [[thm-qa-35-private-coin-equality-lower-bound]]. The full Newman–Szegedy author-hosted manuscript was recovered and read after the ACM PDF endpoint returned HTTP 403; its matrix-packing theorem supplies the proof route, while the library theorem above contains the complete local derivation. A constant-communication public-coin hash uses a shared seed and is a different resource model.",
+        "deps": [
+          "def-qa-35-equality-promise",
+          "def-qa-35-finite-communication-protocol",
+          "thm-qa-35-private-coin-equality-lower-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "local_order": 20,
+        "proof_obligations": [],
+        "sources": [
+          {
+            "title": "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games",
+            "url": "https://dl.acm.org/doi/10.1145/237814.238004",
+            "locator": "§4.1–4.2, PDF pp.4–9, matrix packing theorem and complete proof."
+          },
+          {
+            "title": "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games",
+            "url": "https://cs.haifa.ac.il/~ilan/online-papers/mario-cc.ps",
+            "locator": "Author-hosted full PostScript, §4.1–4.2, pp.4–9; recovered after the ACM endpoint returned HTTP 403."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-35-fingerprint-correctness-and-cost",
+        "kind": "theorem",
+        "title": "Fingerprint swap-test error and communication cost",
+        "statement": "Let $n,N\\ge1$ and let $E:\\{0,1\\}^n\\to\\{0,1\\}^N$ have relative distance $\\delta(E)=\\delta\\in(0,1]$. Equal inputs yield antisymmetric probability $0$; unequal inputs yield $p\\ge p_0=[1-(1-\\delta)^2]/2=\\delta-\\delta^2/2>0$. For $0<\\epsilon<1$, set\n$$r=\\left\\lceil\\frac{\\ln(1/\\epsilon)}{-\\ln(1-p_0)}\\right\\rceil.$$\nThe bounded loop in [[alg-qa-35-swap-test-fingerprint]] halts after at most $r$ tests. On $r$ fresh pairs, declaring unequal iff any anti outcome occurs gives worst-case error at most $\\epsilon$, with $r(\\lceil\\log_2N\\rceil+1)$ qubits sent by each party. If $N\\le Cn$ and $C,\\delta$ are fixed, this is $O((1+\\log n)(1+\\log(1/\\epsilon)))$ qubits per sender, conditional on a supplied code with those parameters.",
+        "deps": [
+          "def-qc-dirac-notation-conversion",
+          "alg-qa-35-swap-test-fingerprint",
+          "def-qc-toffoli-and-fredkin",
+          "def-qa-35-swap-test-effect",
+          "def-qa-35-code-fingerprint-state",
+          "thm-qa-35-code-fingerprint-state-properties",
+          "def-qa-35-equality-promise",
+          "thm-qa-35-swap-test-measurement-effect",
+          "def-qc-povm-and-outcome-law",
+          "def-finite-probability-space-and-event",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-trace-of-an-endomorphism",
+          "lem-qa-35-random-code-existence-nonuniform",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qc-ray-projector-well-defined-and-bijective"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "local_order": 21,
+        "proof_obligations": [
+          "Keep δ>0 and ε∈(0,1); handle δ=1; distinguish a supplied efficient code from the nonuniform existence result."
+        ],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, §2, PDF pp.2–4; fingerprinting and swap-test argument."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §16.6, PDF pp.151–153; code-fingerprint construction, SWAP-test outcome probability, and repetition-cost context."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all experiments and message registers are finite.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2283,
+    "id": "quantum-communication-and-fingerprinting-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Quantum Communication and Fingerprinting — Examples",
+    "companion": "quantum-communication-and-fingerprinting",
+    "requires": [
+      "quantum-communication-and-fingerprinting"
+    ],
+    "items": [
+      {
+        "id": "cex-qa-35-public-vs-private-randomness",
+        "kind": "counterexample",
+        "title": "Public-coin and private-coin SMP are different models",
+        "statement": "For each n≥1, a shared uniformly random pair r₁,r₂∈𝔽₂ⁿ lets Alice send (r₁·x,r₂·x) and Bob send (r₁·y,r₂·y); the referee accepts equality iff both bits match. Equal inputs always match and unequal inputs collide with probability 1/4. The shared seed has 2n bits and is a separately declared public resource; independent private seeds do not give this guarantee.",
+        "deps": [
+          "def-qa-35-finite-communication-protocol",
+          "def-qa-35-equality-promise"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "local_order": 1,
+        "proof_obligations": [
+          "Compute the collision probability and show replacing shared seeds by independent seeds fails on a specific equal input."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 16 §§16.1 and 16.6, PDF pp.147–153; private/public-coin SMP and equality lower-bound context (§16.1), quantum fingerprint construction and SWAP-test analysis (§16.6)."
+          },
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-35-length-eight-fingerprints",
+        "kind": "example",
+        "title": "Finite length-eight fingerprint overlap",
+        "statement": "Let four inputs be assigned codewords 00000000, 00001111, 11110000, and 11111111. Distinct codewords have distance at least four. For the first two, the fingerprint overlap is 1/2 and one swap test declares unequal with probability 3/8; equal inputs yield anti probability zero. Each fingerprint uses four qubits.",
+        "deps": [
+          "def-qa-35-code-fingerprint-state",
+          "thm-qa-35-fingerprint-correctness-and-cost",
+          "thm-qa-35-code-fingerprint-state-properties",
+          "thm-qa-35-swap-test-measurement-effect"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "local_order": 2,
+        "proof_obligations": [
+          "Compute the inner product from the eight orthogonal index states and substitute into the proved swap-test formula."
+        ],
+        "sources": [
+          {
+            "title": "Harry Buhrman, Richard Cleve, John Watrous, Ronald de Wolf, Quantum Fingerprinting",
+            "url": "https://arxiv.org/pdf/quant-ph/0102001",
+            "locator": "Complete 8-page paper, especially §2, PDF pp.2–4, code fingerprints and swap-test analysis."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all distributions, sums, bases, and selection sets are finite.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

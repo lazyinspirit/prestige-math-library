@@ -6,4 +6,4 @@ items: [def-boolean-circuit-size-depth-fanin-and-basis, def-circuit-family-and-p
 examples: [fs-polynomial-size-implies-uniform-generation, fs-shannon-counting-gives-an-explicit-hard-function]
 ---
 
-This draft page develops the assigned conventions and keeps every resource, type, and quantifier explicit.
+This page develops the assigned conventions and keeps every resource, type, and quantifier explicit.

@@ -1,0 +1,495 @@
+
+
+===== PAGE 1 =====
+        Fast Monte-Carlo Algorithms for ﬁnding low-rank approximations
+
+               Alan Frieze                          Ravi Kannan
+    Department of Mathematical Sciences,      Computer Science Department,
+         Carnegie Mellon University,                  Yale University,
+              Pittsburgh, PA 15213.             New Haven, CT 06511.
+      Email: af1p@andrew.cmu.edu.      Email: kannan@cs.yale.edu.
+                                Santosh Vempala
+                        Department of Mathematics and
+                         Laboratory for Computer Science,
+                              M.I.T., Cambridge, MA 02139.
+                        Email: vempala@math.mit.edu
+
+                                October 22, 1998
+
+
+
+                                           Abstract
+
+          In several applications,the data consists of an       matrix   and it is of interest to ﬁnd an
+      approximation   of a speciﬁed rank  to   where,   is much smaller than  and   . Traditional
+      methods like the Singular Value Decomposition (SVD) help us ﬁnd the “best” such approxima-
+        tion. However, these methods take time polynomial in     which is often too prohibitive.
+          In this paper, we develop an algorithm which is qualitativelyfaster provided we may sample
+       the entries of the matrix according to a natural probability distribution. Indeed, in the applica-
+       tions such sampling is possible.
+        Our main result is that we can ﬁnd the description of a matrix     of rank at most  so that
+                                         rank          #         %$    &'                                                                            "!
+      holds            with                 probabilityat                                 least                                                                                        of the                                                                                      squares
+       of all the                 entries                        of    The                                                                                          only,                                                                                    indepen-                                algorithm*)  . (Fortakesanytimematrixpolynomialin, #             -,  denotes the sum
+      dent of         .             .)                                                                                                                  (/.     10 24365  (7.   )48      9:
+
+1  Introduction
+
+In many applications, the data consists of an       matrix           it is of interest to ﬁnd an approx-
+imation      a speciﬁed rank               ;=<?>much smallerandthan           Traditional methodslike the Singularof   Value Decomposition(SVD)to where, ishelp us ﬁnd the “best” suchandapproximation..         However,
+these methods take time polynomial in         . In this paper, we essentially reduce the problem to a
+singular value problem in                     ;DC/>where          only upon           .                in part by NSF grantdimensionsCCR-9530974.   depends                    BFC4G4HJI   Supported
+
+===== PAGE 2 =====
+The traditional“random projection” method (where one projects the problem into a randomly chosen
+subspace of small dimension) would also accomplish a similar reduction in dimension; but carrying
+out the random projection amounts to premultiplying the given                   a
+which itself takes time dependent upon     (and in fact, it can be<arguedmatrixthat thisbyis not<competitivematrix
+with known Numerical Analysis techniques;DC/>  like the Lanczos method, in the case where the top few
+singular values dominate.)
+In this paper, we describe an algorithm which is qualitatively faster provided we may sample the
+entries of the matrix according to a natural probability distribution which we describe presently.
+For a matrix      ,        denotes                  , where      denotes the th entry of      ..Our main result is expressed as the following:
+
+Theorem 1 Given an              and           , there is a randomized algorithm which ﬁnds the
+description of a matrix< matrixof rank at,most   BFC Cthat                     so
+                                    rank                                                         %$     A      A#        I" @#                                                                      "!
+holds with probability at least          . The algorithm takes time polynomial in                  only,
+independent of         . The mostG&complex#     computational task is to ﬁnd the ﬁrst BFC4G4H  C('*),+"- valuesG4H.0/  of arandomly chosen;DC/>            where                         . The matrix   can be singularexplicitly constructedfrom its description< insubmatrixtime.    E21    3%- B547I7698:/
+                               3;- ;    ></
+This depends on the following existence theorem. Let
+
+                                                                                                   (1)
+      >?@? AB?@?   D    rank  A# &E                                                                         "!
+Let be as deﬁned in Assumption 1 (below).
+Theorem 2 Let     an       matrix. Let    be any positive integers. Suppose we independently
+choose a set  be  <%>rows of       aBFC/Edistribution satisfying (5) (below). Let      the vectorspace spannedCHbyGItheJ1  (atofmost)  fromof                 be                   rows  chosen.With probability at least 9/10, there exist vectors                    in         that                                                                                                                            !N                                                                                                                                                                   C(L            EME:E     such
+        (2)                        -@O   @#-                        /M                                        >TSUWV   /: -@#                                                                        (Q
+This theorem asserts the existence of “good” vectors                                !N in the row space of                                                                                                                                                                               C(L            EME:E            .It follows from Linear Algebra that we may take                                   !N to be the         generalizedeigenvectors of           with respect to         . NoteCYL that bothEME:EZE of these matriceslargestare      wherewe should take @   @;[\X][     . They can bothX\X<[be exactly computed (by direct multiplication)E%< ,in time
+            ; so it followsE^1_3;- thatHJI`/in time                                , we can ﬁnd the vectors of the Theorem. This
+time3;- ; bound>]/   may be good enough for3;- several;                                                           $ba applications.),'*c   EM/(/
+The paper is organized as follows. After recalling the SVD and related deﬁnitions, we prove Theo-
+rem 2. As already remarked this immediately leads to an       poly       time algorithm.                                                                                3;- >FB I           B  I,/(/
+
+===== PAGE 3 =====
+We develop a theoretically better (“constant time”) algorithm in Section 5, which relies heavily on
+sampling and in the last two sections we analyse its quality and efﬁciency.
+Assumptions on sampling
+We now state in detail the assumptions we make on the ability to sample. We discuss in the next
+section some prominent applications where these assumptions are naturally satisﬁed. Also, in the
+important “dense” case, uniformly sampling the entries satisﬁes the assumptions. (See Remark 1).
+In any case, after a one-pass preprocessing of the matrix, the assumptions can be satisﬁed. (See
+Remark 2).
+For a matrix      ,      denotes the  th row,      denotes the  th column.
+
+Assumption 1 We can choose row  of the matrix        probability   satisfying
+      for some constant                   of  with. The    are known to us.                F,          H" @#                       independent     ;DC7>Assumption 2 For any given             we can pick a                        probabilities
+           satisfying                      "G CwhereE:EZE ,                          . %1The C   areE:EME knownwith to us.
+                    @%   H" @# @
+Remark 1: Note that if the matrix     dense, i.e.,                        for some constant   then
+we may take                          . Thenisof course we can take -@#      H"- >]/ we may take  ,for all    G  H"- .></                         G4H and       G >    and F&1      G4H,FRemark 2: For any matrix at all, we claim that after making one pass through the entire matrix, we
+can set up data structures so that after that we can sample the entries fast -      time per sample, so
+as to satisfy Assumptions (1) and (2).                                                 3%-  G:/
+During the one pass, we do several things. Suppose     is such that for all
+                                                                                                                                                                        CT
+
+      ORWe create                  in the one-pass, we put into the  th bin all the entries      such that
+               3;-  '*),+   bins; . We also keep track of the number of entries in each bin.-W  CT5/ After this,
+we pretend*6        all-@  entries@     in a bin are of equal absolute value and then it is easy to set up a sampler - the
+details of the data structures are elementary and left to the reader. In the pass, we also set up similar
+data structures for each row, so that the other assumptions can be staisﬁed.
+Remark 3: If the matrix has a known sparsityallstructure, i.e.,, andif therein additionifis a simple set 9-W  CT5/forGallC  EME:E then1we mayC        E:EZEtakeand  forfor  C 9/ G    0 otherwise. If the set   @# simpleH"@GBenough,,we can clearly ﬁnd     G4H"in unit@GBtime andC 9/we mayandtake                         .   is
+                                                     1!     H"
+2  Some applications
+
+In this section we discussour algorithm in the context of applicationsthat rely on computing the (ﬁrst
+terms of the) SVD. We show that in several situations we can satisfy the sampling assumptions of
+
+===== PAGE 4 =====
+our algorithm and thus obtain the SVD approximation more efﬁciently. Applications that we do not
+discuss include face recognition and picture compression.
+
+2.1  Low-Rank Approximations and the Regularity Lemma
+
+The fundamental Regularity Lemma of Szemer´edi’s in Graph Theory gives a partition of the vertex
+set of any graph so that “most” pairs of parts are “nearly regular”. (We do not give details here.) This
+lemma has a host of applications (see [10]) in Graph Theory. The Lemma was non-constructive in
+that it only asserted the existence of the partition (but did not give an algorithm to ﬁnd it.) Alon,
+Duke, Lefmann, R¨odl aand Yuster were ﬁnally able to give an algorithm to ﬁnd such a partition in
+polynomial time [1]. In earlier papers [6, 7], we related low-rank approximations of the adjacency
+matrix of the graph to regular partitions and from that were able to derive both Szemer´edi’s Lemma
+and a “more user friendly version” and in fact showed that the partition could be constructed in con-
+stant time for any graph. While this connection is not directly relevant to this paper, we point this
+out here as one more case where low-rank approximations come in handy.
+
+2.2  Latent Semantic Indexing
+
+This is a general techniquefor analysinga collectionof “documents” which are assumed to be related
+(for example, they are all documents dealing with a particular subject, or a portion of the web; see
+[2, 3, 4, 5] for details and empirical results). We give a very cursory description of this broad area
+here and discuss its relation to our main problem.
+Suppose there are             and         which occur in the documents. (Terms may be all
+the words that occurdocumentsin the documents“terms”or key words that occur in them.) The model hypothesizes
+that (because there are relationships among the documents), there are a small number     main
+(unknown) “topics” which the documents are about. The ﬁrst aim of the technique is to ﬁndofa set of
+topics which best describe the documents. (This is the only part which concerns us here.)A topic is modelled as an    vector of non-negative reals summing to 1, where the interpretation is
+that the  th component of>\a topic vector gives the frequency with which the  th term occurs in (a
+discussion of) the topic. With this model on hand, it is easy to argue (using Linear Algebra and a
+line of reasoning similar to the ﬁeld of “Factor Analysis” in Statistics) that the       topics are the
+top           vectors of the so-called “document-term” matrix, which is an  best   singularbeing the frequency of the  th term in the th document. Alternatively, one<canmatrixdeﬁne withas 0
+or 1 depending upon whether the  th term occurs in the  th document.
+Here we argue that in practice, we can implement the assumptions of our algorithm. It is easy to see
+that if we are allowed one pass through each document, we can set up data structures for sampling
+(in a pragmatic situation one could have the creator of a document supply a vector of squared term
+frequencies). Otherwise, if no frequency is too large (this is typical since words that occur too often,
+so-called “buzz words”, are removed from the analysis), all we need to precompute is the length
+(                     ), of each document. This is typically available (as say “ﬁle size”). In this case,
+assumption@ (1) is easily implemented — we pick a document with probability proportional to its
+length. This is easily seen to satisfy Assumption 1, but without the squares (i.e. we sample the  th
+entry with probability         ). It can be then argued that the assumption with the squares is satisﬁed
+
+===== PAGE 5 =====
+(because the frequencies are all in some small range). Assumption 2 is similarly implemented —
+given a document, we pick a word uniformly at random from it, i.e.,                    .
+
+2.3  Web Search model
+
+Kleinberg [9] considered the ubiquitous problem of how to glean the most relevant documents from
+the (usually large) set of documents returned by a standard Web Search program for a key word.
+The intuition is to deﬁne a document to be an “authority” if a lot of other documents (returned by
+the search) point to (have a hypertext link to) it. He argues why it is not a good idea just to take
+documents which are pointed to by a lot of others. He deﬁnes a dual notion - a document is a “hub”
+if it points to a lot of other documents. More genarally, suppose              are returned by the
+search engine. Then, he deﬁnes an                                 is 1 documentsor 0 depending upon whether the th document points to the   th. [He>9<doesmatrixnot explicitlywheredeal with this large matrix.]
+He sets out to ﬁnd two             -                  is the “hub weight” of document  (the weight is
+higher if the document -vectorsis a good hub)whereand    is the “authority weight” of document   . With the
+normalization                he argues (and we do not reproduce the argument here) that it is
+desirable to ﬁnd\B1   <B1  ,      (since in the maximizing        expect the hub weights andauthority weights to be,? mutually:?       consistent.)C          we
+This is of course the problem of ﬁnding the singular vectors of    Since      large, he judiciously
+chooses a submatrix of      computes only the singular vectors.of it. is           andHe also points out that especially in the case when the key word has multiple meanings, not only the
+top, but some of the other singular vectors (with large singular values) are interesting. For example,
+when the key word is “JAVA” the top few singular vectors put high authority weights on documents
+about the programming language JAVA whereas another set of singular vectors put high weights on
+documents about the Island, others on documents about the coffee etc. So, it is of interest to ﬁnd the
+largest singular vectors for some small ; this is indeed the problem we consider here.We also ﬁnd the singular vectors of a submatrix, but a randomly chosen one.  It is worthwhile to
+consider our assumptions in this case. For Assumption 1, it is sufﬁcient to sample the documents
+(roughly) according to the number of hypertext links from them. For Assumption 2, it is sufﬁcient
+to be able to follow a random link from a document.
+
+3  Some Notation and Constants
+
+For a matrix     ,     denotesthe throw,      denotesthe thcolumn and       denotes                 .
+If                             is a vector valued random variable,      denotes the expectation vector
+componentwise,-                   E:EME 7/                                    .         denotes B/                 the Chebychevinequality becomes-   C      C  E:EME -            /(/         7- I/                             7-  and
+                        Pr
+                                                                      -(      B/:             9- B/(/for any          .
+For a positive integer   , we let                                 .
+                            !"1    "G C   EMEZE "
+
+===== PAGE 6 =====
+For a matrix   and vectors        we deﬁne
+
+           1
+Using the fact that   Tr [ for any matrix     , we see that             equals
+                                          Tr
+
+                              Tr
+
+                                                                                                            -W  (3)
+
+4  Proof of Theorem 2
+
+4.1  Singular Value Decomposition
+
+Every real matrix can be expressed
+
+              1
+where                      and the    form an orthonormal set of vectors and so do the       .
+Also                              E:EME                        for                  .            and    1
+This is called the singular value decomposition of .So if in (3) the vectors           are singular vectors of M then
+                            1  (4)
+                                                                   amongFrom     Linear Algebra,                       [8] we                     know                                     that the                                       matrix  producing the minimum ofall   matrices                rank                             less                                     is given                                by                                    %A#     of   or
+
+This implies (see (1) for the deﬁnition of ) that
+
+                                          -@#
+
+===== PAGE 7 =====
+We now       show               that             we                   can ﬁnd                            a good                                  approximation
+small     number             of              rows                     of                         This                                  will be                                 done by independentlychoosing                                                      to by looking in a subspaceof Agenerated(       by a
+large) from a distribution.                     the probability    that werowschoose rowsufﬁcientlysatisﬁes                                                                         E:EME where
+                                                                             F,                                                (5)
+                                           @#
+for    and some absolute constant      .
+4.2  The proof itself
+Let be the randomvector randomset of rowsvariabledescribed in the statement of the theorem. We deﬁne forC        E:EZE the
+
+
+
+Then
+                         1and since                                     ,
+                         F,         @ @# @
+                                           -Y                                                              H"        @# (6)                                                                                                                                                                                   EMF
+Now let                for                        let                                                          !N            .          G C   E:E:E and    ,  L    L            EME:E L KLet                     be an orthonormal basis of    with   ,                         C(L            EME:E    CYL                                                                                            L             CYL            E:EME    C(L   . Let
+                         and                                                  @bL
+Then
+
+                           @       L                      @bL
+                                                                             @       L           (7)
+Now
+
+                                 @            /:
+
+===== PAGE 8 =====
+Taking expectations and using (6) we get
+
+                                                               -(                           @# (8)                                                                                                                                                          EMF
+Since    is of rank we have
+                                                  -@#
+
+Thus                            is a non-negative random variable and (8) implies
+                       -@             @#
+                    Pr
+                                                          -( -@O           @#       SU   @#The result now follows from (7).                                           S
+We note next that a good low-rank approximation with respect to Frobenius norm, implies a good
+low-rank approximation with respect to the norm                 7?                                                                                              M1
+Theorem 3  If
+
+                     @O                                                 I`/M @#
+Then
+
+     @         >         I,/: @#
+
+                                                             uniteigenvector  with eigenvalueProof    Let              . Suppose that   has a  such that   O1 @_
+                  >         I,/: @#Then we see that
+
+      ;                          @# (9)
+But the rank of                                  at most      and we know that this cannot be better
+than the best rank                      tois i.e.,     ,                  approximation ,
+
+ @
+
+                                                                                            -@#
+which contradicts (9).
+
+===== PAGE 9 =====
+5  Sampling Algorithm
+
+The aim of this section is to develop a “constanttime” algorithm to produce the approximation. What
+we do below is to ﬁrst pick a set of  rows of   We form a matrix        these rows after scaling
+them. We then pick again  columns of  . a probability distributionfromsatisfying a condition ofthe type stated in Assumtion (1) and scalefromthe columns to get a                           . We ﬁnd the singularvectors of this matrix and argue that from those, we may get a goodmatrixlow-rank approxmation toWe ﬁrst present the algorithm.                        .
+Algorithm
+
+                                               is given and   7B (10)
+   1. Independently choose             according to distribution                    on
+whichsatisﬁes                               EME:E   CN          -                   EME:E I/
+                                                                                                                                                                                       -@        @
+      Let      the      matrix with rows         @# for
+     be        <D>              G C  EME:E .   2. Independentlychoose (columns)                   according to a distribution
+onsatisﬁes                                       E:E:E (of )                                        "1                         E:EME      which
+
+       (Later, we see that we can do such sampling.)
+      Let    be the  matrix with columns               for G C   E:EME .
+   3. Compute the maximum of                    over all sets of       vectors in the column
+      space of      . (We may assume at this point that/               theunitﬁrst           vectors of             .)                              are       singular
+   4. Let
+     where                                                                                      "C
+                                                     I
+     For        let
+                                                                                                          X<[
+   5. Output     for           . (I.e., output                             as the approximation to ).                               @_
+Note that
+                                                           @# (11)                                  -@#and@       @                                       and
+                                                          -(    1   @#                                                                                                         -Y    1 (12)
+
+===== PAGE 10 =====
+5.1  Implementation Issues
+
+Implementation Issues We explore some issues related to the implementation of the above algo-
+rithm.
+First of all, how do we carry out Step 2? We ﬁrst pick a row of   each row with probability      ;
+suppose the chosen row is the th row of   Then pick      ,         probabilities        . ThisG4Hdeﬁnes the probabilities     . We then have. (with                "G Cis EZE:Ea rowwithof             J         ),
+                                    @
+                                    @#
+                                F                                                           @#                @#
+Let
+Then            Pr -(          -@#  ,/
+                                                            G2                                  -@#        @#           @#from which it follows that
+                                                                  "- G2#FZ/
+It follows that with probablity          ^
+                                               G2we have,                      ^#F
+                                                                                                   @ (13)
+So let us assume from now on that
+
+                                   and also that
+                               @#
+5.2  Basic Lemma
+
+Lemma 1 Let   be an           and let                   be a probability distribution on
+                   that  matrix                                               E:EME"G C   E:EZE such
+      1  C        E:EZE
+for some      .Let                   a sequence of  independent samples from     , each chosen according to
+distribution-W        . LetE:EME   CN bebethe             with                  matrix
+                   G C  EME:E
+
+===== PAGE 11 =====
+Then for all           ,
+                    Pr
+                                                           -(                 9
+Proof
+
+
+
+            1
+
+
+
+
+         -(                                                                                                             -(-
+                                                                                                     @
+
+
+
+Thus
+                                                                            -(            1
+                                                                                -(
+                                                                                              @
+
+The result follows from the Markov inequality.
+It follows from the above lemma and the deﬁnition of  – (10) – that with probability at least 9/10
+both of the following events hold:
+
+  9 X        9 @#               and
+                                                                                           (14)
+                                            5  X\X              9
+where
+                                             8 (                                        ^1
+
+===== PAGE 12 =====
+Assume from now on that they do.
+So if are unit vectors in the row space of then
+                                           9 @#
+and if      are unit vectors in the column space of
+
+                                                                                           (15)
+                                            9
+It follows after a little calculation that if                               unit vectors in the row space
+of                                                                                                         EME:E       are  then
+                              @             CN        /\               -TX                        /:     9 @# (16)
+Similarly,                                 !N are unit vectors in the column space of                                             E:EME                             then
+                                                                              -TX               CN       W/H                                      /M     9 (17)
+5.3  Analysis of the Algorithm
+
+It follows from Theorem 2 that with probability at least 9/10 there are unit vectors
+the row space of         that                            in          such
+      @            W/   G&        S    I`/: @#
+                                                        G&              I,/: @#
+Applying (16) we see that
+
+                -TX      /        @            W/     9 @#
+                                                        G&              I,/: @#
+               the same singular values and so there exist unit vectors                the column
+spaceand ofhave that                           in     such
+                                                                                                    -TX      (L     /   G2              I`/: -@#Applying Theorem 2 with A replaced by      S replaced by         see that with probability at
+least 9/10 there are unit vectors      andthe column space ofwesuch that                  in
+                -TX      /                      -TX      YL     /\   S
+                                                        G&              I,/: @#
+Applying (17) we see that
+
+          /                      -TX       /\    9
+                                                        G&              I,/: @#
+
+===== PAGE 13 =====
+Therefore the vectors       computed by the algorithm satisfy
+                      /   G2              I,/: @#
+Now because      are singular vectors we see from (4) that
+                        /\
+                                                        G&              I,/: @#It follows from (17) that
+
+                -TX          B  9
+                                                        G&              I,/: @#In Section 6 we prove that
+
+                                                                                           (18)
+                                                                                      -TX                                                                   -TX        @#and that
+
+                                                                                           (19)
+
+for           .
+It follows from (16) that
+
+      @                                                                     -TX   B  9 -@#
+                                                                                   G              I`/: -@#(assuming         ) which completes the proof of Theorem 1.
+
+6  Proof of (18) and (19)
+
+Observe ﬁrst that
+
+       XHX      XHX
+                                         X\X    XHX                       /M               -TX\X                                       (20)
+                                                9            -(               Cand that for                   ,
+
+                                                     1!Now consider                   . Then
+
+                                  /:-         1
+                                                                                                         XHX<[                /:-          X\X][   XHX<[
+                                            \      H
+
+===== PAGE 14 =====
+Furthermore,
+Similarly, using (20),         XHX            ,1                  -TXHX                 9
+
+                                                         X\X      X\X        9            -YHence,
+
+                             J,            -( @                  @                                    /:-                           /:
+                      J          (21)                                                                          @#
+For any vector  and any matrix
+                                                                   XHX<[                 X<[
+So for
+                                                                                       X\X X\X        [
+Observe that (15) implies
+                                           9So,
+
+       (22)                         \
+Equation (19) follows immediately.
+We then have
+
+                          G                                 X\X
+                       - G2         XSo,
+                                    B9 0                                                             -TX                   G                                 -TX                   /\          @#
+which completes the proof of (18).
+
+References
+
+ [1] N. Alon, R. A. Duke, H Lefmann, V. R¨odl and R. Yuster, “The algorithmic aspects of the Reg-
+      ularity Lemma,” Journal of Algorithms 16 (1994) 80-109.
+
+ [2] M. W. Berry, S. T. Dumais, and G. W. O’Brien. “Using linear algebra for intelligentinformation
+      retrieval”, SIAM Review, 37(4), 1995, 573-595, 1995.
+
+===== PAGE 15 =====
+ [3] S. Deerwester, S. T. Dumais, T.K. Landauer, G.W. Furnas, and R.A. Harshman. “Indexing
+    by latent semantic analysis,” Journal of the Society for Information Science, 41(6), 391-407,
+     1990.
+
+ [4] S.T. Dumais, G.W. Furnas, T.K. Landauer, and S. Deerwester, “Using latent semantic analysis
+      to improve information retrieval,” In Proceedings of CHI’88: Conference on Human Factors
+      in Computing, New York: ACM, 281-285, 1988.
+
+ [5] S.T. Dumais, “Improving the retrieval of information from external sources”, Behavior Re-
+     search Methods, Instruments and Computers, 23(2), 229-236, 1991.
+
+ [6] A.M.Frieze and R. Kannan, “The Regularity Lemma and approximation schemes for dense
+     problems”,Proceedings of the 37th Annual IEEE Symposium on Foundations of Computing,
+     (1996) 12-20.
+
+ [7] A.M.Frieze and R. Kannan, “Quick approximations to matrices and applications,” to appear in
+     Combinatorica. http://www.math.cmu.edu/  af1p/papers.html.
+
+ [8] G. H. Golub and C. F. Van Loan, Matrix Computations, Johns Hopkins University Press, Lon-
+     don, 1989.
+
+ [9]  J. Kleinberg, “Authoritative sources in a hyperlinked environment,” Proc. 9th ACM-SIAM
+    Symposium on Discrete Algorithms, 1998.
+
+[10]  J. Koml´os and M. Simonovits, “Szemer´edi’s Regularity Lemma and its applications in graph
+     theory”, to appear.

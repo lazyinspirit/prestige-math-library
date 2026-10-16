@@ -1,0 +1,72 @@
+6.3 Factoring
+17
+
+Suppose that a is coprime to N (which is overwhelmingly likely if p and q are very
+large – anyway Alice can check before she encodes). Then
+
+aϕ(N) ≡1 (mod N)
+(6.77)
+
+(Euler’s theorem). This is so because the numbers less than N and coprime to N form a
+group (of order ϕ(N)) under mod N multiplication. The order of any group element must
+divide the order of the group (the powers of a form a subgroup). Since GCD(e, ϕ(N) = 1,
+we know that e has a multiplicative inverse d = e−1 mod ϕ(N):
+
+ed ≡1 (mod ϕ(N)).
+(6.78)
+
+The value of d is Bob’s closely guarded secret; he uses it to decode by computing:
+
+f−1(b) = bd (mod N)
+
+= aed (mod N)
+
+= a · (aϕ(N))integer (mod N)
+
+= a (mod N).
+(6.79)
+
+[Aside: How does Bob compute d = e−1? The multiplicative inverse is a byproduct
+of carrying out the Euclidean algorithm to compute GCD(e, ϕ(N)) = 1. Tracing
+the chain of remainders from the bottom up, starting with Rn = 1:
+
+1 = Rn = Rn−2 −qn−1Rn−1
+Rn−1 = Rn−3 −qn−2Rn−2
+Rn−2 = Rn−4 −qn−3Rn−3
+etc. . . .
+(6.80)
+
+(where the qj’s are the quotients), so that
+
+1 = (1 + qn−1qn−2)Rn−2 −qn−1Rn−3
+1 = (−qn−1 −qn−3(1 + qn−1qn−2))Rn−3
++ (1 + qn−1qn−2)Rn−4,
+
+etc. . . . .
+(6.81)
+
+Continuing, we can express 1 as a linear combination of any two successive
+remainders; eventually we work our way up to
+
+1 = d · e + q · ϕ(N),
+(6.82)
+
+and identify d as e−1 (mod ϕ(N)).]
+
+Of course, if Eve has a superfast factoring engine, the RSA scheme is insecure. She
+factors N, finds ϕ(N), and quickly computes d. In fact, she does not really need to factor
+N; it is sufficient to compute the order modulo N of the encoded message ae (mod N).
+Since e is coprime with ϕ(N), the order of ae (mod N) is the same as the order of a
+(both elements generate the same orbit, or cyclic subgroup). Once the order Ord(a) is
+known, Eve computes ˜d such that
+
+˜de ≡1 (mod Ord(a))
+(6.83)
+
+so that
+
+(ae)
+˜d ≡a · (aOrd(a))integer (mod N) ≡a (mod N),
+(6.84)
+
+

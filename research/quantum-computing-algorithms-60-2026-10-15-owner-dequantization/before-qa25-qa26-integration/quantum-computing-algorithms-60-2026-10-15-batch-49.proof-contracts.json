@@ -1,0 +1,2561 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-25-isometry-error-implies-trace-distance",
+    "lem-qa-25-parity-path-transfer",
+    "def-qa-25-qubitization-access-model",
+    "def-qa-25-hamiltonian-simulation-polynomial",
+    "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+    "thm-qa-25-qubitization-signal-sequence",
+    "thm-qa-25-bounded-error-parity-query-lower-bound",
+    "alg-qa-25-qubitized-hamiltonian-simulation",
+    "alg-qa-25-sparse-hamiltonian-block-encoding",
+    "thm-qa-25-sparse-no-fast-forwarding-lower-bound",
+    "alg-qa-25-small-time-aware-simulator",
+    "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+    "lem-qa-25-jacobi-anger-truncation",
+    "thm-qa-25-qubitized-simulation-correctness",
+    "thm-qa-25-small-time-aware-simulator-correctness",
+    "thm-qa-25-qubitized-simulation-resource-bound",
+    "ex-qa-25-two-dimensional-block-encoding",
+    "ex-qa-25-parity-no-fast-forwarding",
+    "ex-qa-25-chebyshev-truncation"
+  ],
+  "contracts": {
+    "lem-qa-25-isometry-error-implies-trace-distance": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $A=V-W$, and let $(r_j)$ be an orthonormal basis of $R$. By [F1], diagonalizing $A^*A$ in a right singular basis shows that $(A\\otimes I_R)^*(A\\otimes I_R)=A^*A\\otimes I_R$ has the same largest eigenvalue as $A^*A$: its eigenvectors are the products of right singular vectors of $A$ with the $r_j$, and its eigenvalues are the corresponding squared singular values. Therefore $\\|V_R-W_R\\|_{\\rm op}=\\|A\\otimes I_R\\|_{\\rm op}=\\|A\\|_{\\rm op}\\le\\delta$. For every unit vector $\\psi\\in H\\otimes R$, the vectors $a=V_R\\psi$ and $b=W_R\\psi$ have norm one and satisfy $\\|a-b\\|\\le\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $Z=V_R\\rho V_R^*$, positivity follows from $y^*Zy=(V_R^*y)^*\\rho(V_R^*y)\\ge0$ for every $y$; the same holds with $W_R$. For a vector $z\\in K\\otimes R$, the entry-sum formula gives $z^*(\\operatorname{Tr}_E\\otimes I_R)Zz=\\sum_e (I_K\\otimes|e\\rangle\\otimes I_R\\,z)^*Z(I_K\\otimes|e\\rangle\\otimes I_R\\,z)\\ge0$, and likewise for $W_R$; hence both reduced outputs are positive. That formula also gives $\\operatorname{tr}((\\operatorname{Tr}_E\\otimes I_R)Z)=\\operatorname{tr}Z$. Since $V_R^*V_R=W_R^*W_R=I$, cyclicity of finite matrix trace gives $\\operatorname{tr}Z=\\operatorname{tr}\\rho=1$ for both outputs. Thus $\\rho_V,\\rho_W$ are density matrices.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In an orthonormal basis of $\\operatorname{span}\\{a,b\\}$, write $b=za+s e_2$, where $z=a^*b$, $s=\\sqrt{1-|z|^2}$, and $e_2\\perp a$ is unit if $s>0$. The matrix of $aa^*-bb^*$ on this span is Hermitian, has trace zero and determinant $-s^2$, so its eigenvalues are $s,-s$; outside the span it is zero. Thus $\\tfrac12\\|aa^*-bb^*\\|_1=s$. Also $s^2=1-|z|^2\\le2-2\\operatorname{Re}z=\\|a-b\\|^2$, because the difference of the right side and left side is $|1-z|^2$. This proves $D(aa^*,bb^*)\\le\\delta$ for every pure input, including $s=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $X$ be Hermitian on $K\\otimes E\\otimes R$, and set $Y=(\\operatorname{Tr}_E\\otimes I_R)X$. For a matrix $B$ on $K\\otimes R$, define $\\widetilde B$ on $K\\otimes E\\otimes R$ by applying $B$ to the $K,R$ coordinates and leaving the $E$ coordinate fixed. The entry-sum definition of partial trace gives $\\operatorname{tr}(B^*Y)=\\operatorname{tr}(\\widetilde B^*X)$. Reordering the product basis from $K,E,R$ to $K,R,E$ conjugates $\\widetilde B$ to $B\\otimes I_E$, so $\\|\\widetilde B\\|_{\\rm op}=\\|B\\|_{\\rm op}$ by the same singular-basis argument as in step 1.1. For any square matrix $X=U\\Sigma V^*$, [F1] gives its singular value decomposition, and $|\\operatorname{tr}(C^*X)|=|\\operatorname{tr}(V^*C^*U\\Sigma)|\\le\\|C\\|_{\\rm op}\\sum_j\\Sigma_{jj}=\\|C\\|_{\\rm op}\\|X\\|_1,$ since every diagonal entry of a contraction has modulus at most one. Taking the supremum over $\\|B\\|_{\\rm op}\\le1$, and using the equality case $B=U_YV_Y^*$ in a singular value decomposition of $Y$, proves $\\|Y\\|_1\\le\\|X\\|_1$. This dual formula also gives the triangle inequality and homogeneity for $\\|\\cdot\\|_1$ by applying it to a sum and scalar multiple.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a pure input $\\rho=\\psi\\psi^*$, step 2.1 bounds the trace distance before discarding $E$, and step 2.2 shows the partial trace cannot increase the trace norm of the Hermitian difference. Hence the reduced output distance is at most $\\delta$. For general positive trace-one $\\rho$, [F2] gives a spectral decomposition $\\rho=\\sum_j p_j\\psi_j\\psi_j^*$ with $p_j\\ge0$ and $\\sum_jp_j=1$. The maps and partial trace are linear; the triangle inequality and homogeneity from step 2.2 therefore bound the reduced output distance by $\\sum_jp_j\\delta=\\delta$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or endpoint limit is a separate conclusion in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "finite_checks": []
+    },
+    "lem-qa-25-parity-path-transfer": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-19-finite-matrix-dynamics",
+          "source_section": "Definition",
+          "quote": "In this page a **Hamiltonian** is a self-adjoint endomorphism $H$ of a\nfinite-dimensional complex inner-product space $V$; no physical postulate is\npart of the term. Let $\\sigma(H)$ be the set of its distinct eigenvalues and\nlet $P_\\lambda$ be the orthogonal projection onto the $\\lambda$-eigenspace.\nFor real time $t$, define the finite matrix evolution\n\n$$U_H(t):=\\sum_{\\lambda\\in\\sigma(H)}e^{-it\\lambda}P_\\lambda = f_t(H),\\qquad f_t(\\lambda)=e^{-it\\lambda}.$$\n\nThe second expression uses the finite spectral functional calculus\n[[def-functional-calculus-for-a-normal-endomorphism]]. If $V$ is the zero\nspace, the spectrum is empty and the empty sum is the unique endomorphism,\nwhich is also the identity on $V$. This definition specifies a mathematical\nunitary from a finite matrix; it makes no claim that the operation has an\nefficient circuit or a free access cost.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $V_x$ permutes the finite orthonormal basis and satisfies $V_x^2=I$, so it is unitary. In a term indexed by $i,b$, the endpoints become $|i-1,b\\oplus p_{i-1}\\rangle$ and $|i,b\\oplus x_i\\oplus p_i\\rangle$. Since $p_i=p_{i-1}\\oplus x_i$, the second bit is $b\\oplus p_{i-1}$; the edge is therefore an ordinary adjacent path edge with the spectator bit unchanged. Thus $V_xH_xV_x$ is two identical path matrices $H_0$, one for each bit $b$, and $V_x$ fixes $|0,0\\rangle$ while sending $|n,0\\rangle$ to $|n,p_n\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $|D_i^n\\rangle$ be the normalized uniform superposition of $n$-bit strings of Hamming weight $i$, and set $|D_{-1}^n\\rangle=|D_{n+1}^n\\rangle=0$. Counting the $i$ downward flips and $n-i$ upward flips gives $J|D_i^n\\rangle=\\tfrac12\\sqrt{i(n+1-i)}|D_{i-1}^n\\rangle+\\tfrac12\\sqrt{(i+1)(n-i)}|D_{i+1}^n\\rangle$ for every $0\\le i\\le n$. Thus $(2/n)J$ has the stated path weights on the symmetric subspace.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each Pauli $X_r$ has eigenvalues $\\pm1$, so [F2] gives $\\|X_r\\|_{\\rm op}=1$. The triangle inequality then gives $\\|J\\|_{\\rm op}\\le n/2$, so $\\|H_0\\|_{\\rm op}\\le1$; unitary conjugation in step 1.1 gives $\\|H_x\\|_{\\rm op}\\le1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each sign string $\\sigma\\in\\{-1,1\\}^n$, put $u_\\sigma=2^{-n/2}\\sum_{y\\in\\{0,1\\}^n}(\\prod_r\\sigma_r^{y_r})|y\\rangle$. Factorizing the finite inner-product sum gives $\\langle u_\\sigma,u_\\tau\\rangle=2^{-n}\\prod_r(1+\\sigma_r\\tau_r)$, so these $2^n$ vectors form an orthonormal basis. Flipping bit $r$ gives $X_ru_\\sigma=\\sigma_ru_\\sigma$. By [F1]–[F2], $e^{-i(\\pi/2)\\sum_rX_r}$ acts on $u_\\sigma$ by $\\exp(-i\\pi\\sum_r\\sigma_r/2)$. The scalar addition law in [F1] factors this as $\\prod_r\\exp(-i\\pi\\sigma_r/2)$, and Euler's formula [F3] gives each factor as $-i\\sigma_r$. Hence $e^{-i(\\pi/2)\\sum_rX_r}=(-i)^nX_1\\cdots X_n$. This maps $|D_0^n\\rangle=|0^n\\rangle$ to $(-i)^n|D_n^n\\rangle=(-i)^n|1^n\\rangle$. The path basis identifies $|D_0^n\\rangle,|D_n^n\\rangle$ with $|0\\rangle,|n\\rangle$; step 1.1 then sends the endpoint to $|n,p_n\\rangle$. The time $t=\\pi n/2$ for $H_0=(2/n)J$ is time $\\pi/2$ for $J$, proving the transfer identity.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero scalar, zero object, or zero-parameter branch is a separate conclusion in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "finite_checks": []
+    },
+    "def-qa-25-qubitization-access-model": {
+      "risk": "high",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition/example explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the one-unit or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition/example explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qc-circuit-cost-model",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access",
+        "def-qc-reflection",
+        "def-qc-uniform-circuit-family",
+        "thm-qa-25-qubitization-signal-sequence"
+      ],
+      "finite_checks": []
+    },
+    "def-qa-25-hamiltonian-simulation-polynomial": {
+      "risk": "high",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition/example explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the one-unit or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition/example explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qa-25-qubitization-access-model"
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-25-hermitian-block-encoding-signal-subspaces": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-25-qubitization-access-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $K=K^*$ on $H$, and let $\\alpha>0$ satisfy $\\|K\\|_{\\mathrm{op}}\\le\\alpha$. Put $A=K/\\alpha$. Let $U$ be a unitary on an ancilla-system space $H_A\\otimes H$, let $J:H\\to H_A\\otimes H$ be the isometry $Jv=|0^a\\rangle\\otimes v$, and let $\\Pi=JJ^*$. An **exact Hermitian block encoding** is the data $(U,J,\\alpha)$ with $J^*UJ=A$. The matrix $K$ is Hermitian; $U$ itself need not be Hermitian.\n\nThe signal-register reflection is $R_\\Pi=2\\Pi-I$. The access record lists, separately, each supplied call to $U$, $U^*$, controlled-$U$, controlled-$U^*$, and $R_\\Pi$, together with their circuit, query, gate, width, ancilla, precision, and classical-generation costs from [[def-qa-22-block-encoding-access-model]] and [[def-qc-circuit-cost-model]]. A state description or block matrix alone supplies none of these calls. A controlled reflection is also separate. Any PREPARE, SELECT, sparse-location, value, or coefficient operation used by a construction is a separately supplied, reversible interface with its inverse and cost recorded.\n\nHere is the standard-form **qubiterate** for this access instance. Add a flag qubit and define $\\widetilde U=|0\\rangle\\langle0|\\otimes U+|1\\rangle\\langle1|\\otimes U^*$, $J'v=|+\\rangle\\otimes Jv$, $S=X\\otimes I$, $F=S\\widetilde U$, and $W_{\\mathrm q}=(2J'J'^*-I)F$. Implementing $\\widetilde U$ requires the separately declared controlled-$U$ and controlled-$U^*$ calls; $S$, the preparation of $|+\\rangle$, and the reflection about $\\operatorname{ran}(J')$ also have declared costs. [[thm-qa-25-qubitization-signal-sequence]] proves its compressed block and spectral relation.\n\nFor the QSVT simulation sequence, the signal operations are the alternating $U,U^*$ calls interleaved with the projector phases $e^{i\\phi(2\\Pi-I)}$ from [[def-qa-23-qsp-signal-sequence]]. Their exact phase list, parity, real-polynomial extraction, controls, inverse calls, and phase-synthesis precision are part of the supplied circuit description. The scalar polynomial pairs must satisfy [[def-qa-23-qsp-admissible-polynomial-pair]]; singular-value transformations use the convention of [[def-qa-24-singular-value-transform]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-24-pue-svd-invariant-subspaces",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$. For every $0<\\sigma_j<1$, set\n\n$$w_j=\\frac{(I-\\Pi_R)U^*u_j}{\\sqrt{1-\\sigma_j^2}},\\qquad \\widetilde w_j=\\frac{(I-\\Pi_L)Uv_j}{\\sqrt{1-\\sigma_j^2}}.$$\n\nThe vectors $w_j$ form an orthonormal family in $\\ker\\Pi_R$ and the vectors $\\widetilde w_j$ form an orthonormal family in $\\ker\\Pi_L$. In the input basis $(v_j,w_j)$ and output basis $(u_j,\\widetilde w_j)$,\n\n$$U\\big|_{\\operatorname{span}(v_j,w_j)}=\\begin{pmatrix}\\sigma_j&\\sqrt{1-\\sigma_j^2}\\\\\\sqrt{1-\\sigma_j^2}&-\\sigma_j\\end{pmatrix}.$$\n\nFor $\\sigma_j=1$, $Uv_j=u_j$ and the complementary vector is absent. A right zero-singular vector $v\\in\\ker A\\cap H_R$ satisfies $Uv\\in\\ker\\Pi_L$; a left zero-singular vector $u\\in\\ker A^*\\cap H_L$ satisfies $U^*u\\in\\ker\\Pi_R$. Let $M_R$ be the orthogonal sum of all positive-singular input planes or lines, $\\ker A$, and $U^*(\\ker A^*)$; let $M_L$ be the corresponding sum of positive-singular output planes or lines, $U(\\ker A)$, and $\\ker A^*$. Then $U(M_R)=M_L$. The residual ambient subspaces $M_R^\\perp$ and $M_L^\\perp$ lie in $\\ker\\Pi_R$ and $\\ker\\Pi_L$, and $U(M_R^\\perp)=M_L^\\perp$. Thus each named block is invariant under its corresponding projector, with no implicit pairing of the two kernels.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an eigenvector $\\psi_j$ with unit norm and write $v_j=J\\psi_j$. From [F1], $\\Pi Uv_j=x_jv_j$ and $\\Pi U^*v_j=x_jv_j$, because $K=K^*$. Since $U,U^*$ preserve norm, orthogonal decomposition by $\\Pi$ gives $\\|(I-\\Pi)Uv_j\\|^2=\\|(I-\\Pi)U^*v_j\\|^2=1-x_j^2=s_j^2$. For $|x_j|<1$, the displayed $\\eta_j,\\widetilde\\eta_j$ are therefore unit vectors in $\\ker\\Pi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $i\\ne j$, orthogonality of eigenvectors and [F4] give $\\langle Uv_i,Uv_j\\rangle=\\langle v_i,v_j\\rangle=0$, while $\\langle\\Pi Uv_i,\\Pi Uv_j\\rangle=x_ix_j\\langle v_i,v_j\\rangle=0$. Subtracting the projected components shows $\\langle\\eta_i,\\eta_j\\rangle=0$; the same calculation for $U^*$ proves orthogonality of the $\\widetilde\\eta_j$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Decomposing $Uv_j$ into its $\\Pi$ and $I-\\Pi$ parts gives $Uv_j=x_jv_j+s_j\\eta_j$. Also $s_jU\\widetilde\\eta_j=U(I-\\Pi)U^*v_j=v_j-U\\Pi U^*v_j=v_j-x_jUv_j=s_j^2v_j-x_js_j\\eta_j.$ Division by $s_j>0$ yields $U\\widetilde\\eta_j=s_jv_j-x_j\\eta_j$, which is the second column of the displayed matrix. Taking adjoints gives the reverse-basis action of $U^*$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $|x_j|=1$, the orthogonal complement of $\\Pi Uv_j=x_jv_j$ has squared norm $1-|x_j|^2=0$, so $Uv_j=x_jv_j$; the same argument for $U^*$ gives $U^*v_j=x_jv_j$. Thus the endpoint plane collapses. At $x_j=0$, step 1.1 has $s_j=1$, so both normalized vectors are well-defined. The mutually orthogonal paired spaces and endpoint lines exhaust the clean input and output signal spaces by the SVD decomposition in [F2]; their orthogonal residual complements stay in $\\ker\\Pi$ and cannot contribute to the clean compression.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats the zero eigenvalue and verifies the normalized signal vectors."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qa-25-qubitization-access-model"
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-25-qubitization-signal-sequence": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-25-qubitization-access-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $K=K^*$ on $H$, and let $\\alpha>0$ satisfy $\\|K\\|_{\\mathrm{op}}\\le\\alpha$. Put $A=K/\\alpha$. Let $U$ be a unitary on an ancilla-system space $H_A\\otimes H$, let $J:H\\to H_A\\otimes H$ be the isometry $Jv=|0^a\\rangle\\otimes v$, and let $\\Pi=JJ^*$. An **exact Hermitian block encoding** is the data $(U,J,\\alpha)$ with $J^*UJ=A$. The matrix $K$ is Hermitian; $U$ itself need not be Hermitian.\n\nThe signal-register reflection is $R_\\Pi=2\\Pi-I$. The access record lists, separately, each supplied call to $U$, $U^*$, controlled-$U$, controlled-$U^*$, and $R_\\Pi$, together with their circuit, query, gate, width, ancilla, precision, and classical-generation costs from [[def-qa-22-block-encoding-access-model]] and [[def-qc-circuit-cost-model]]. A state description or block matrix alone supplies none of these calls. A controlled reflection is also separate. Any PREPARE, SELECT, sparse-location, value, or coefficient operation used by a construction is a separately supplied, reversible interface with its inverse and cost recorded.\n\nHere is the standard-form **qubiterate** for this access instance. Add a flag qubit and define $\\widetilde U=|0\\rangle\\langle0|\\otimes U+|1\\rangle\\langle1|\\otimes U^*$, $J'v=|+\\rangle\\otimes Jv$, $S=X\\otimes I$, $F=S\\widetilde U$, and $W_{\\mathrm q}=(2J'J'^*-I)F$. Implementing $\\widetilde U$ requires the separately declared controlled-$U$ and controlled-$U^*$ calls; $S$, the preparation of $|+\\rangle$, and the reflection about $\\operatorname{ran}(J')$ also have declared costs. [[thm-qa-25-qubitization-signal-sequence]] proves its compressed block and spectral relation.\n\nFor the QSVT simulation sequence, the signal operations are the alternating $U,U^*$ calls interleaved with the projector phases $e^{i\\phi(2\\Pi-I)}$ from [[def-qa-23-qsp-signal-sequence]]. Their exact phase list, parity, real-polynomial extraction, controls, inverse calls, and phase-synthesis precision are part of the supplied circuit description. The scalar polynomial pairs must satisfy [[def-qa-23-qsp-admissible-polynomial-pair]]; singular-value transformations use the convention of [[def-qa-24-singular-value-transform]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+          "source_section": "Statement",
+          "quote": "Let $(U,J,\\alpha)$ be an exact Hermitian block encoding from [[def-qa-25-qubitization-access-model]], and choose an orthonormal eigenbasis $K\\psi_j=\\lambda_j\\psi_j$. Put $x_j=\\lambda_j/\\alpha$ and $s_j=\\sqrt{1-x_j^2}$. For $|x_j|<1$, define\n$$\\eta_j=(I-\\Pi)UJ\\psi_j/s_j,\\qquad \\widetilde\\eta_j=(I-\\Pi)U^*J\\psi_j/s_j.$$\nThe $\\eta_j$ are orthonormal in $\\ker\\Pi$, as are the $\\widetilde\\eta_j$. In the paired input basis $(J\\psi_j,\\widetilde\\eta_j)$ and output basis $(J\\psi_j,\\eta_j)$, $U$ has matrix\n$$\\begin{pmatrix}x_j&s_j\\\\s_j&-x_j\\end{pmatrix}.$$\nThe unitary $U^*$ maps in the reverse direction by the same matrix. If $|x_j|=1$, the complement is absent and $UJ\\psi_j=x_jJ\\psi_j=U^*J\\psi_j$; no division by zero is used. The value $x_j=0$ is an ordinary two-dimensional signal plane.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-23-qsp-signal-sequence",
+          "source_section": "Definition",
+          "quote": "Let $x\\in[-1,1]$, put $s(x)=\\sqrt{1-x^2}$ using the nonnegative real square root, and define the Hermitian-reflection signal matrix\n$$W_R(x)=\\begin{pmatrix}x&s(x)\\\\s(x)&-x\\end{pmatrix}.$$\nFor each real $\\phi$, define $Z(\\phi)=\\operatorname{diag}(e^{i\\phi},e^{-i\\phi})$. For an integer $d\\ge0$ and real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$, the length-$d$ QSP sequence is the ordered matrix product\n$$U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}\\bigl(W_R(x)Z(\\phi_j)\\bigr),$$\nwhere the product is written left to right in increasing $j$ and matrix multiplication acts right to left. For $d=0$ this is $Z(\\phi_0)$. This definition fixes the sign of the off-diagonal signal entry, both endpoint phases, and the product order.\n\nThe phases are in matrix order: when the factors are applied as chronological circuit layers, the rightmost factor acts first, in accordance with [[def-qc-circuit-denotational-semantics]]. In the ordered signal basis, if both coordinates are nonzero, applying $Z(\\phi)$ multiplies the ratio of the second coordinate to the first by $e^{-2i\\phi}$; if either coordinate is zero, that relative phase is undefined, while the displayed matrix action remains defined. This is the relative phase convention fixed by [[def-qc-relative-phase]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ has parity $d\\bmod2$ and $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-23-qsp-phase-factorization",
+          "source_section": "Statement",
+          "quote": "For every integer $d\\ge0$, a pair $P,Q\\in\\mathbb C[x]$ is QSP-admissible of degree bound $d$ if and only if there is a real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ such that\n$$U_\\Phi(x)=\\begin{pmatrix}P(x)&s(x)Q(x)\\\\(-1)^{d+1}s(x)Q^*(x)&(-1)^dP^*(x)\\end{pmatrix}\\quad (x\\in[-1,1]).$$\nThe converse is constructive: a leading-coefficient phase peel reduces the degree at each nonconstant stage. The polynomial identity, determinant signs, product order, and phase convention are exactly those in [[def-qa-23-qsp-admissible-polynomial-pair]] and [[def-qa-23-qsp-signal-sequence]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qa-23-hermitian-signal-convention-conversion",
+          "source_section": "Statement",
+          "quote": "Put $s=\\sqrt{1-x^2}$, $W_R=\\begin{pmatrix}x&s\\\\s&-x\\end{pmatrix}$, $W_S=\\begin{pmatrix}x&is\\\\is&x\\end{pmatrix}$, and $C=Z(\\pi/4)$. Then\n$$CW_RC=iW_S^\\dagger,\\qquad W_S^\\dagger=Z(\\pi/2)W_SZ(-\\pi/2).$$\nFor $d\\ge1$, define $U_S(\\Psi)=Z(\\psi_0)\\prod_{j=1}^d(W_SZ(\\psi_j))$. If $\\Psi$ is the SU(2)-convention phase list with $\\psi_0=\\phi_0+\\pi/4$, $\\psi_j=\\phi_j-\\pi/2$ for $1\\le j<d$, and $\\psi_d=\\phi_d-3\\pi/4$, then\n$$U_R(\\Phi)=i^dU_S(\\Psi).$$\nThe affine phase-list map is invertible. The scalar $i^d$ is part of the identity: in a control-first block $\\operatorname{diag}(I,U)$ it acts on the active control branch and cannot be discarded as a global phase.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In control-first order, $F:=S\\widetilde U=\\begin{pmatrix}0&U^*\\\\U&0\\end{pmatrix},$ so $F^*=F$ and $F^2=I$. Also $J'^*FJ'=\\tfrac12(J^*U^*J+J^*UJ)=K/\\alpha$ because $J^*UJ=K/\\alpha$ is self-adjoint. For a unit eigenvector $K\\psi_\\lambda=\\lambda\\psi_\\lambda$, put $g_\\lambda=J'\\psi_\\lambda$, $x=\\lambda/\\alpha$, and $s=\\sqrt{1-x^2}$. The compression identity gives $Fg_\\lambda=xg_\\lambda+s h_\\lambda$ for a unit $h_\\lambda\\perp\\operatorname{ran}J'$ when $|x|<1$. Applying $F^2=I$ then gives $Fh_\\lambda=sg_\\lambda-xh_\\lambda$. The reflection $R_{J'}$ has matrix $\\operatorname{diag}(1,-1)$ in this basis, so $W_{\\rm q}=R_{J'}F$ has matrix $\\begin{pmatrix}x&s\\\\-s&x\\end{pmatrix}$. Its characteristic polynomial is $z^2-2xz+1$, whose roots are $x\\pm i\\sqrt{1-x^2}=e^{\\pm i\\arccos x}$. If $|x|=1$, the orthogonal component has norm zero and the clean eigenline has eigenvalue $x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On a paired signal plane from [F2], $2\\Pi-I$ is diagonal with entries $+1,-1$, so $e^{i\\phi(2\\Pi-I)}$ is $Z(\\phi)$. The signal calls switch between the input and output bases of [F2]; therefore their chronological product, written in matrix order, is $Z(\\phi_0)W_R(x)Z(\\phi_1)\\cdots W_R(x)Z(\\phi_d)=U_\\Phi(x)$ by [F3]. The determinant and polynomial-entry conventions are those proved by the scalar QSP supplier in [F4].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every clean system vector is a finite linear combination of eigenvectors of $K$. Step 1.2 acts on each eigenvector by the same scalar polynomial $P_\\Phi(\\lambda/\\alpha)$, so linearity gives the compressed operator $P_\\Phi(K/\\alpha)$. Repeated eigenvalues cause no ambiguity because the same scalar is applied to every vector in that eigenspace; zero signal and endpoint spaces have the actions specified in [F2] and [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The reflected convention in step 1.2 is the one used by [F3], [F4], and [F5]. If the implementation instead uses the SU(2) signal, [F7] supplies the scalar $i^d$; applying it to only the active control branch changes a relative phase, so it must be implemented as stated rather than discarded as an uncontrolled global scalar.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the collapsed endpoint signal line."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the endpoints |x|=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qa-25-qubitization-access-model",
+        "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+        "thm-qc-reflection-unitary-involution"
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-25-bounded-error-parity-query-lower-bound": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-promise-problem",
+          "source_section": "Definition",
+          "quote": "A **promise problem** is a pair $(Y,N)$ of disjoint subsets of $\\{0,1\\}^*$. Its promise is $Y\\cup N$. A deterministic solver must accept every word of $Y$ and reject every word of $N$, with either answer allowed elsewhere. The pair belongs to $\\mathrm{PromiseP}$ if such a solver has a polynomial time bound on every input.\n\nIt belongs to $\\mathrm{PromiseNP}$ if there are a polynomial $p$ and a deterministic polynomial-time predicate $V(x,w)$ such that every $x\\in Y$ has some $w$ with $|w|\\le p(|x|)$ and $V(x,w)=1$, whereas for every $x\\in N$ every such $w$ has $V(x,w)=0$. The promise need not be decidable; either side or both sides may be empty. When $Y\\cup N=\\{0,1\\}^*$, this is the ordinary language decision convention.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-uniform-circuit-family",
+          "source_section": "Definition",
+          "quote": "A **full-list uniform quantum circuit family** is a sequence $(C_n)_{n\\ge0}$ together with one fixed deterministic one-tape Turing machine $G$ and constants $c\\ge1$ and $k\\in\\mathbb N$ such that, on input the unary word $1^n$, $G$ halts within $c(n+1)^k$ transitions and its final tape is a valid self-delimiting binary description of the entire circuit $C_n$. The machine output convention is that of [[def-deterministic-one-tape-turing-machine]] and [[def-partial-function-computed-by-a-machine]], and running time is as in [[def-worst-case-time-and-space-complexity]].\n\nThe following fixed-order code makes the full circuit and its designated input/output wires effective. A unary natural $r\\in\\mathbb N$ is written $1^r0$, including the one-symbol code $0$ for $r=0$. A self-delimiting binary natural $r$ is written $1^{|\\operatorname{bin}(r)|}0\\operatorname{bin}(r)$, where $\\operatorname{bin}(r)$ is its ordinary binary numeral with no leading zeros and $\\operatorname{bin}(0)=0$. The header gives the input-wire count $n$ and total wire count $m$ in unary, followed by the gate count $g$ as a self-delimiting natural; validity requires $m\\ge n$.\n\nEach gate record consists of a two-bit label ($00,01,10,11$ for $H,T,T^\\dagger,\\mathrm{CNOT}$ respectively), followed by one self-delimiting wire index for $H,T,T^\\dagger$ and two ordered self-delimiting indices for CNOT. Every index is less than $m$; CNOT indices are distinct, with the first the control and the second the target. The list contains exactly $g$ records. After the gate list, an output-count self-delimiting natural is followed by that many ordered, pairwise distinct wire indices, each less than $m$. Parsing rejects every other label, malformed or out-of-range index, repeated output index, truncated field, or trailing bit. This defines a total decoder by returning a fixed malformed-code symbol on any invalid word; effective binary encodings and total decoders are as in [[def-effective-binary-encoding-and-decoder]].\n\nThe gate labels and matrices are the fixed finite library $H,T,T^\\dagger,\\mathrm{CNOT}$ of [[def-qc-clifford-t-gate-library]], with entries in $\\mathbb Q(\\zeta_8)=\\mathbb Q(i,\\sqrt2)$; CNOT is control-first. The remaining $m-n$ wires are auxiliary wires; their initial states are determined when a family is used in a computation model. This family convention adopts full-list generation. It makes no equivalence claim with indexed-gate uniformity and, in particular, does not assert that an indexed-gate generator can be expanded to the full list in polynomial time.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-reversible-xor-oracle-unitary",
+          "source_section": "Statement",
+          "quote": "For every total Boolean function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$, including noninjective functions, the coherent XOR oracle $O_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle$ is unitary and satisfies $O_f^2=I$. Hence $O_f^{-1}=O_f$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $z_i=(-1)^{x_i}\\in\\{-1,1\\}$. On a basis query address $i$, the matrix entries of the XOR target flip are either $(1+z_i)/2$ or $(1-z_i)/2$; the input address and all other bits are unchanged. Thus one oracle call raises the degree of every amplitude polynomial in $z_1,\\ldots,z_n$ by at most one. The inter-query unitaries are input-independent by [F2] and take fixed linear combinations of amplitudes. Induction over the $q$ queries shows each final amplitude is a multilinear polynomial of degree at most $q$, replacing any $z_i^2$ by $1$ without increasing degree.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The signed output expectation $p(z)=\\Pr[y=0]-\\Pr[y=1]$ is a sum of squared moduli of final amplitudes with fixed signs, so it is a real multilinear polynomial of degree at most $2q$. If $\\chi(z)=\\prod_{i=1}^nz_i=(-1)^{\\operatorname{parity}(x)}$, the error bound gives $\\chi(z)p(z)\\ge 1/3$ pointwise. Therefore the uniform average of $\\chi p$ is positive.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $2q<n$, every monomial of $p$ is $z_S=\\prod_{i\\in S}z_i$ for a proper subset $S\\subsetneq[n]$. Under independent uniform signs, $\\mathbb E[\\chi z_S]=\\mathbb E[\\prod_{i\\notin S}z_i]=0$, since at least one independent sign appears to the first power and has mean zero. Linearity gives $\\mathbb E[\\chi p]=0$, contradicting step 2.1. Hence $2q\\ge n$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate construction beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or endpoint limit is a separate conclusion in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qc-uniform-circuit-family"
+      ],
+      "finite_checks": []
+    },
+    "alg-qa-25-qubitized-hamiltonian-simulation": {
+      "risk": "high",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition/example explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the one-unit or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition/example explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "alg-qa-23-qsp-phase-synthesis",
+        "def-qa-25-hamiltonian-simulation-polynomial",
+        "def-qa-25-qubitization-access-model",
+        "thm-qa-25-qubitization-signal-sequence"
+      ],
+      "finite_checks": []
+    },
+    "alg-qa-25-sparse-hamiltonian-block-encoding": {
+      "risk": "high",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition/example explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the one-unit or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition/example explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "def-qa-25-qubitization-access-model",
+        "thm-qa-25-sparse-hamiltonian-block-encoding-correctness"
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-25-sparse-no-fast-forwarding-lower-bound": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-20-sparse-hamiltonian-oracle-model",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge1$, a sparsity bound $d\\ge1$, an integer $b\\ge1$, and an injective code $\\mathrm{enc}:C\\to\\{0,1\\}^b$ for a finite set $C\\subset\\mathbb C$ containing $0$ and closed under conjugation. Put $w=\\lceil\\log_2N\\rceil$ and $v=\\lceil\\log_2d\\rceil$, identify $[N]$ with the first $N$ strings in $\\{0,1\\}^w$, and regard any remaining strings as invalid labels. A valid $w$-bit index is zero-extended to $w+1$ bits. Let $H=(H_{xy})_{x,y\\in[N]}$ be Hermitian, have entries in $C$, and have at most $d$ nonzero entries in every row. For each valid row $x$, list its nonzero column indices in increasing order. Define the total location function $f_H(x,\\ell)$ to be the $\\ell$-th listed index for a valid slot $0\\le\\ell<d$ when that slot exists, and a distinguished sentinel otherwise. Invalid row labels and invalid slot labels also return the sentinel. Encode the sentinel by a fixed $(w+1)$-bit word outside the valid index codes. Define the total value function $g_H(x,y)$ to return $\\mathrm{enc}(H_{xy})$ on valid labels and $\\mathrm{enc}(0)$ on invalid labels. All label widths and codes are part of the finite input description.\n\nThe **row-location oracle** and **entry-value oracle** are the coherent XOR maps $O_{f_H}|x,\\ell,z\\rangle=|x,\\ell,z\\oplus f_H(x,\\ell)\\rangle$ and $O_{g_H}|x,y,z\\rangle=|x,y,z\\oplus g_H(x,y)\\rangle$, where the output target has respectively $w+1$ and $b$ bits. The slot register has $v$ bits; all unused slot strings are invalid and use the sentinel. These are total Boolean-function oracles on every bitstring basis input. They are instances of [[def-qc-coherent-function-oracle]], whose justified-by supplier proves unitarity and involutivity for arbitrary total functions. Each named call and any separately granted controlled or inverse call is charged under [[def-qc-circuit-cost-model]]. This exact-code model describes the decoded matrix $H$; approximating a different target matrix requires a separate bound on the matrix difference. Row and value access alone does not supply a term list or term-evolution circuits.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-25-parity-path-transfer",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal B_n$ be the complex inner-product space with orthonormal basis $\\{|y\\rangle:y\\in\\{0,1\\}^n\\}$. For $1\\le r\\le n$, define $X_r|y_1\\cdots y_n\\rangle=|y_1\\cdots(y_r\\oplus1)\\cdots y_n\\rangle$, and put $J=\\frac12\\sum_{r=1}^nX_r$. For $0\\le i\\le n$, let $|D_i^n\\rangle$ be the normalized uniform sum of basis vectors of Hamming weight $i$; define $\\mathcal S_n=\\operatorname{span}\\{|D_i^n\\rangle:0\\le i\\le n\\}$. On a separate path space with orthonormal basis $\\{|i\\rangle:0\\le i\\le n\\}$, define $H_0$ to have off-diagonal entries $w_i=\\sqrt{i(n+1-i)}/n$ between $|i-1\\rangle$ and $|i\\rangle$ for every 1≤i≤n, and all other matrix entries zero.\n\nLet $n\\ge1$, $x\\in\\{0,1\\}^n$, and $p_0=0,\\ p_i=x_1\\oplus\\cdots\\oplus x_i$. On the basis $\\{|i,b\\rangle:0\\le i\\le n,\\ b\\in\\{0,1\\}\\}$, put\n$$H_x=\\sum_{i=1}^n w_i\\sum_{b=0}^1\\left(|i-1,b\\rangle\\langle i,b\\oplus x_i|+|i,b\\oplus x_i\\rangle\\langle i-1,b|\\right).$$\nWrite $\\operatorname{parity}(x)=p_n=x_1\\oplus\\cdots\\oplus x_n$. The basis permutation $V_x|i,b\\rangle=|i,b\\oplus p_i\\rangle$ conjugates $H_x$ to two copies of $H_0$. The counting identity proved below gives $H_0=(2/n)J|_{\\mathcal S_n}$, under the isometry $|i\\rangle\\mapsto|D_i^n\\rangle$. Consequently $\\|H_x\\|_{\\rm op}\\le1$ and\n$$e^{-iH_x\\pi n/2}|0,0\\rangle=(-i)^n|n,\\operatorname{parity}(x)\\rangle.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-reversible-xor-oracle-unitary",
+          "source_section": "Statement",
+          "quote": "For every total Boolean function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$, including noninjective functions, the coherent XOR oracle $O_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle$ is unitary and satisfies $O_f^2=I$. Hence $O_f^{-1}=O_f$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qa-25-bounded-error-parity-query-lower-bound",
+          "source_section": "Statement",
+          "quote": "Any quantum query algorithm that, on every $x\\in\\{0,1\\}^n$, outputs $\\operatorname{parity}(x)$ with error at most $1/3$ using the coherent XOR oracle for $x$ makes at least $n/2$ oracle queries.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-uniform-circuit-family",
+          "source_section": "Definition",
+          "quote": "A **full-list uniform quantum circuit family** is a sequence $(C_n)_{n\\ge0}$ together with one fixed deterministic one-tape Turing machine $G$ and constants $c\\ge1$ and $k\\in\\mathbb N$ such that, on input the unary word $1^n$, $G$ halts within $c(n+1)^k$ transitions and its final tape is a valid self-delimiting binary description of the entire circuit $C_n$. The machine output convention is that of [[def-deterministic-one-tape-turing-machine]] and [[def-partial-function-computed-by-a-machine]], and running time is as in [[def-worst-case-time-and-space-complexity]].\n\nThe following fixed-order code makes the full circuit and its designated input/output wires effective. A unary natural $r\\in\\mathbb N$ is written $1^r0$, including the one-symbol code $0$ for $r=0$. A self-delimiting binary natural $r$ is written $1^{|\\operatorname{bin}(r)|}0\\operatorname{bin}(r)$, where $\\operatorname{bin}(r)$ is its ordinary binary numeral with no leading zeros and $\\operatorname{bin}(0)=0$. The header gives the input-wire count $n$ and total wire count $m$ in unary, followed by the gate count $g$ as a self-delimiting natural; validity requires $m\\ge n$.\n\nEach gate record consists of a two-bit label ($00,01,10,11$ for $H,T,T^\\dagger,\\mathrm{CNOT}$ respectively), followed by one self-delimiting wire index for $H,T,T^\\dagger$ and two ordered self-delimiting indices for CNOT. Every index is less than $m$; CNOT indices are distinct, with the first the control and the second the target. The list contains exactly $g$ records. After the gate list, an output-count self-delimiting natural is followed by that many ordered, pairwise distinct wire indices, each less than $m$. Parsing rejects every other label, malformed or out-of-range index, repeated output index, truncated field, or trailing bit. This defines a total decoder by returning a fixed malformed-code symbol on any invalid word; effective binary encodings and total decoders are as in [[def-effective-binary-encoding-and-decoder]].\n\nThe gate labels and matrices are the fixed finite library $H,T,T^\\dagger,\\mathrm{CNOT}$ of [[def-qc-clifford-t-gate-library]], with entries in $\\mathbb Q(\\zeta_8)=\\mathbb Q(i,\\sqrt2)$; CNOT is control-first. The remaining $m-n$ wires are auxiliary wires; their initial states are determined when a family is used in a computation model. This family convention adopts full-list generation. It makes no equivalence claim with indexed-gate uniformity and, in particular, does not assert that an indexed-gate generator can be expanded to the full list in polynomial time.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-promise-problem",
+          "source_section": "Definition",
+          "quote": "A **promise problem** is a pair $(Y,N)$ of disjoint subsets of $\\{0,1\\}^*$. Its promise is $Y\\cup N$. A deterministic solver must accept every word of $Y$ and reject every word of $N$, with either answer allowed elsewhere. The pair belongs to $\\mathrm{PromiseP}$ if such a solver has a polynomial time bound on every input.\n\nIt belongs to $\\mathrm{PromiseNP}$ if there are a polynomial $p$ and a deterministic polynomial-time predicate $V(x,w)$ such that every $x\\in Y$ has some $w$ with $|w|\\le p(|x|)$ and $V(x,w)=1$, whereas for every $x\\in N$ every such $w$ has $V(x,w)=0$. The promise need not be decidable; either side or both sides may be empty. When $Y\\cup N=\\{0,1\\}^*$, this is the ordinary language decision convention.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, $w(C)$ its total number of wires, and $a_{\\rm clean}(C),a_{\\rm dirty}(C)$ the numbers of wires that satisfy the exact clean and dirty ancilla contracts of [[def-qc-clean-and-dirty-ancillas]]. Auxiliary wires that satisfy neither contract are still counted in $w(C)$ and are not silently included in either ancilla count ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The maximum weight satisfies $1/2\\le \\max_iw_i\\le1$: $i(n+1-i)\\le(n+1)^2/4\\le n^2$ gives the upper bound, and a central integer $i$ has $i(n+1-i)\\ge n^2/4$ for the lower bound. Every edge satisfies $i(n+1-i)-n=(i-1)(n-i)\\ge0$, so $w_i\\ge w_1=1/\\sqrt n>\\eta$. The grid spacing $2^{-b}\\le1/(3\\pi n)=2\\eta$, hence nearest rounding gives $|q_i-w_i|\\le\\eta$ and $q_i>0$; the support is unchanged. It follows that each row and column of $E_x=\\widetilde H_x-H_x$ has at most two nonzero entries, each of magnitude at most $\\eta$, and $2/9<\\max_iq_i<2$; in particular $2\\max_iq_i$ is bounded above and below by positive constants independent of $n,x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Order path vertices lexicographically by $(i,b_0)$. A location query's predecessor slot, when present, uses only $x_i$, and its successor slot, when present, uses only $x_{i+1}$; their order is fixed by the path index. For an arbitrary candidate pair of vertices, the value query tests the single relevant edge bit and returns the known dyadic $q_i$ or zero. Each oracle function can thus be computed reversibly using one parity-bit query into scratch, an XOR into the requested target, and a second parity-bit query to erase scratch. The same construction controls the target XOR by any query-control bit, so each controlled or uncontrolled sparse-oracle call costs at most two calls to the parity-bit oracle. The x-independent $q_i$ table is generated by integer arithmetic: binary search finds the nearest grid point by comparing squared integers with $2^{2b}i(n+1-i)/n^2$, using $O(\\log(n+1))$-bit numbers and polynomially many steps in $n$. The location and value encodings are total, including sentinels, and this x-independent arithmetic is part of the fixed inter-query circuit.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any vector $v$, Cauchy–Schwarz in each row gives $|(E_xv)_r|^2\\le\\Big(\\sum_c|(E_x)_{rc}|\\Big)\\Big(\\sum_c|(E_x)_{rc}||v_c|^2\\Big).$ Summing over $r$, each row sum and each column sum of $|E_x|$ is at most $2\\eta$. Hence $\\|E_xv\\|^2\\le(2\\eta)(2\\eta)\\|v\\|^2$, proving $\\|\\widetilde H_x-H_x\\|_{\\rm op}\\le2\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0\\le s\\le t$, differentiate $G(s)=e^{-i(t-s)\\widetilde H_x}e^{-isH_x}$. By [F3], $G'(s)=i e^{-i(t-s)\\widetilde H_x}(\\widetilde H_x-H_x)e^{-isH_x}.$ The two outside factors are unitary, so [F4] gives $\\|G'(s)\\|_{\\rm op}\\le\\|\\widetilde H_x-H_x\\|_{\\rm op}$. Integrating from $0$ to $t$ and using step 2.1 yields $\\|e^{-it\\widetilde H_x}-e^{-itH_x}\\|_{\\rm op}\\le t(2\\eta)=\\pi n\\eta=\\tfrac16.$",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the assumed simulator to the initial state $|0,0\\rangle$ with clean work registers. The triangle inequality, step 3.1, and [F2] show that its output vector is within $1/3+1/6=1/2$ of $J_{\\rm out}(-i)^n|n,\\operatorname{parity}(x)\\rangle$. The orthogonal projection onto outcomes whose second path bit is not $\\operatorname{parity}(x)$ annihilates this target vector. Its norm on the simulator output is therefore at most $1/2$, so measuring the path bit computes parity with error at most $1/4$. This is a valid bounded-error parity algorithm on every $x$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F8",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Replacing each of the algorithm's $q$ sparse-oracle calls by this reversible simulation yields a parity algorithm using at most $2q$ bit queries and error at most $1/4\\le1/3$. By [F7], $2q\\ge n/2$, hence $q\\ge n/4$. From step 1.1 the sparse normalization is $\\Theta(1)$, and $t=\\pi n/2$, so the lower bound is equivalently $\\Omega(n)=\\Omega(t)=\\Omega(\\alpha_{\\rm sp}t)$ on this family.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 4.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate construction beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or endpoint limit is a separate conclusion in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "def-qc-circuit-cost-model",
+        "def-qc-uniform-circuit-family",
+        "thm-qa-25-bounded-error-parity-query-lower-bound"
+      ],
+      "finite_checks": []
+    },
+    "alg-qa-25-small-time-aware-simulator": {
+      "risk": "high",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition/example explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the one-unit or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition/example explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition/example explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "alg-qa-25-qubitized-hamiltonian-simulation",
+        "def-qa-25-qubitization-access-model"
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-25-sparse-hamiltonian-block-encoding-correctness": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-25-sparse-hamiltonian-block-encoding",
+          "source_section": "Definition",
+          "quote": "**Input.** A finite $d_H$-row-sparse Hermitian matrix $H$, with $d_H\\ge1$, and $h_{\\max}=\\max_{i,j}|H_{ij}|\\ge0$. Supply exact row and column enumerations, each listing every nonzero entry exactly once and padded to $d_H$ distinct labels with sentinels that never create a good-flag overlap; supply reversible in-place permutations $O_r,O_c$ and their inverses, each with its actual query and gate costs. Supply an exact unitary $D_{d_H}$ preparing $d_H^{-1/2}\\sum_{k=1}^{d_H}|k\\rangle$, its inverse, and their costs. A classical table is not a free state-preparation circuit. If $h_{\\max}=0$, use one flag qubit and return $X_{\\rm flag}\\otimes I$ with normalization $1$; its all-zero flag compression is $0=H$. Otherwise set $\\alpha=d_Hh_{\\max}$.\n\n**Instructions when $h_{\\max}>0$.** Put $\\widehat H=H/h_{\\max}$, so every queried entry $h_{ij}=\\widehat H_{ij}$ obeys $|h_{ij}|\\le1$. On the paired row/column index registers define\n$$V_L=O_r(I\\otimes D_{d_H})\\,\\mathrm{SWAP},\\qquad V_R=O_c(D_{d_H}\\otimes I).$$\nLet $U_L=I_{\\rm flag}\\otimes V_L$. Define $U_R$ by first applying $V_R$, then querying $h_{ij}$, applying to the flag\n$$\\begin{pmatrix} h_{ij}&-\\sqrt{1-|h_{ij}|^2}\\\\ \\sqrt{1-|h_{ij}|^2}&\\overline{h_{ij}} \\end{pmatrix},$$\nand unquerying the value and arithmetic workspace. The square root is the nonnegative real root. Invalid sentinel pairs use $h_{ij}=0$. Return $U_L^*U_R$ with the all-zero auxiliary block designated as the encoded block. Every index, flag, value, state-preparation, inverse, controlled, arithmetic, and finite-precision operation is supplied or charged separately.\n\nThe routine requires the in-place location permutations as explicit input. The total XOR row-location oracle of [[def-qa-20-sparse-hamiltonian-oracle-model]] does not itself supply an $O(1)$-query in-place permutation or its inverse. Any scan or inverse-location construction must be specified and charged before claiming such a sparse-oracle cost.\n\nThe block identity and its exact query accounting are proved in [[thm-qa-25-sparse-hamiltonian-block-encoding-correctness]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-25-qubitization-access-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $K=K^*$ on $H$, and let $\\alpha>0$ satisfy $\\|K\\|_{\\mathrm{op}}\\le\\alpha$. Put $A=K/\\alpha$. Let $U$ be a unitary on an ancilla-system space $H_A\\otimes H$, let $J:H\\to H_A\\otimes H$ be the isometry $Jv=|0^a\\rangle\\otimes v$, and let $\\Pi=JJ^*$. An **exact Hermitian block encoding** is the data $(U,J,\\alpha)$ with $J^*UJ=A$. The matrix $K$ is Hermitian; $U$ itself need not be Hermitian.\n\nThe signal-register reflection is $R_\\Pi=2\\Pi-I$. The access record lists, separately, each supplied call to $U$, $U^*$, controlled-$U$, controlled-$U^*$, and $R_\\Pi$, together with their circuit, query, gate, width, ancilla, precision, and classical-generation costs from [[def-qa-22-block-encoding-access-model]] and [[def-qc-circuit-cost-model]]. A state description or block matrix alone supplies none of these calls. A controlled reflection is also separate. Any PREPARE, SELECT, sparse-location, value, or coefficient operation used by a construction is a separately supplied, reversible interface with its inverse and cost recorded.\n\nHere is the standard-form **qubiterate** for this access instance. Add a flag qubit and define $\\widetilde U=|0\\rangle\\langle0|\\otimes U+|1\\rangle\\langle1|\\otimes U^*$, $J'v=|+\\rangle\\otimes Jv$, $S=X\\otimes I$, $F=S\\widetilde U$, and $W_{\\mathrm q}=(2J'J'^*-I)F$. Implementing $\\widetilde U$ requires the separately declared controlled-$U$ and controlled-$U^*$ calls; $S$, the preparation of $|+\\rangle$, and the reflection about $\\operatorname{ran}(J')$ also have declared costs. [[thm-qa-25-qubitization-signal-sequence]] proves its compressed block and spectral relation.\n\nFor the QSVT simulation sequence, the signal operations are the alternating $U,U^*$ calls interleaved with the projector phases $e^{i\\phi(2\\Pi-I)}$ from [[def-qa-23-qsp-signal-sequence]]. Their exact phase list, parity, real-polynomial extraction, controls, inverse calls, and phase-synthesis precision are part of the supplied circuit description. The scalar polynomial pairs must satisfy [[def-qa-23-qsp-admissible-polynomial-pair]]; singular-value transformations use the convention of [[def-qa-24-singular-value-transform]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-22-block-encoding",
+          "source_section": "Definition",
+          "quote": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-20-sparse-hamiltonian-oracle-model",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge1$, a sparsity bound $d\\ge1$, an integer $b\\ge1$, and an injective code $\\mathrm{enc}:C\\to\\{0,1\\}^b$ for a finite set $C\\subset\\mathbb C$ containing $0$ and closed under conjugation. Put $w=\\lceil\\log_2N\\rceil$ and $v=\\lceil\\log_2d\\rceil$, identify $[N]$ with the first $N$ strings in $\\{0,1\\}^w$, and regard any remaining strings as invalid labels. A valid $w$-bit index is zero-extended to $w+1$ bits. Let $H=(H_{xy})_{x,y\\in[N]}$ be Hermitian, have entries in $C$, and have at most $d$ nonzero entries in every row. For each valid row $x$, list its nonzero column indices in increasing order. Define the total location function $f_H(x,\\ell)$ to be the $\\ell$-th listed index for a valid slot $0\\le\\ell<d$ when that slot exists, and a distinguished sentinel otherwise. Invalid row labels and invalid slot labels also return the sentinel. Encode the sentinel by a fixed $(w+1)$-bit word outside the valid index codes. Define the total value function $g_H(x,y)$ to return $\\mathrm{enc}(H_{xy})$ on valid labels and $\\mathrm{enc}(0)$ on invalid labels. All label widths and codes are part of the finite input description.\n\nThe **row-location oracle** and **entry-value oracle** are the coherent XOR maps $O_{f_H}|x,\\ell,z\\rangle=|x,\\ell,z\\oplus f_H(x,\\ell)\\rangle$ and $O_{g_H}|x,y,z\\rangle=|x,y,z\\oplus g_H(x,y)\\rangle$, where the output target has respectively $w+1$ and $b$ bits. The slot register has $v$ bits; all unused slot strings are invalid and use the sentinel. These are total Boolean-function oracles on every bitstring basis input. They are instances of [[def-qc-coherent-function-oracle]], whose justified-by supplier proves unitarity and involutivity for arbitrary total functions. Each named call and any separately granted controlled or inverse call is charged under [[def-qc-circuit-cost-model]]. This exact-code model describes the decoded matrix $H$; approximating a different target matrix requires a separate bound on the matrix difference. Row and value access alone does not supply a term list or term-evolution circuits.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-25-qubitization-access-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $K=K^*$ on $H$, and let $\\alpha>0$ satisfy $\\|K\\|_{\\mathrm{op}}\\le\\alpha$. Put $A=K/\\alpha$. Let $U$ be a unitary on an ancilla-system space $H_A\\otimes H$, let $J:H\\to H_A\\otimes H$ be the isometry $Jv=|0^a\\rangle\\otimes v$, and let $\\Pi=JJ^*$. An **exact Hermitian block encoding** is the data $(U,J,\\alpha)$ with $J^*UJ=A$. The matrix $K$ is Hermitian; $U$ itself need not be Hermitian.\n\nThe signal-register reflection is $R_\\Pi=2\\Pi-I$. The access record lists, separately, each supplied call to $U$, $U^*$, controlled-$U$, controlled-$U^*$, and $R_\\Pi$, together with their circuit, query, gate, width, ancilla, precision, and classical-generation costs from [[def-qa-22-block-encoding-access-model]] and [[def-qc-circuit-cost-model]]. A state description or block matrix alone supplies none of these calls. A controlled reflection is also separate. Any PREPARE, SELECT, sparse-location, value, or coefficient operation used by a construction is a separately supplied, reversible interface with its inverse and cost recorded.\n\nHere is the standard-form **qubiterate** for this access instance. Add a flag qubit and define $\\widetilde U=|0\\rangle\\langle0|\\otimes U+|1\\rangle\\langle1|\\otimes U^*$, $J'v=|+\\rangle\\otimes Jv$, $S=X\\otimes I$, $F=S\\widetilde U$, and $W_{\\mathrm q}=(2J'J'^*-I)F$. Implementing $\\widetilde U$ requires the separately declared controlled-$U$ and controlled-$U^*$ calls; $S$, the preparation of $|+\\rangle$, and the reflection about $\\operatorname{ran}(J')$ also have declared costs. [[thm-qa-25-qubitization-signal-sequence]] proves its compressed block and spectral relation.\n\nFor the QSVT simulation sequence, the signal operations are the alternating $U,U^*$ calls interleaved with the projector phases $e^{i\\phi(2\\Pi-I)}$ from [[def-qa-23-qsp-signal-sequence]]. Their exact phase list, parity, real-polynomial extraction, controls, inverse calls, and phase-synthesis precision are part of the supplied circuit description. The scalar polynomial pairs must satisfy [[def-qa-23-qsp-admissible-polynomial-pair]]; singular-value transformations use the convention of [[def-qa-24-singular-value-transform]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $h_{\\max}=0$, every entry of $H$ is zero. The returned $X_{\\rm flag}\\otimes I$ is unitary and its compression against the clean flag $|0\\rangle$ is $\\langle0|X|0\\rangle I=0$, so normalization $1$ encodes $H=0$. Now suppose $h_{\\max}>0$. For each system label $i$, $V_L|0,i\\rangle=d_H^{-1/2}\\sum_{k=1}^{d_H}|i,\\rho(i,k)\\rangle$, where $\\rho(i,k)$ is its listed column or a distinct sentinel. For each system label $j$, $V_R|0,j\\rangle=d_H^{-1/2}\\sum_{\\ell=1}^{d_H}|\\kappa(j,\\ell),j\\rangle$. Each is normalized because its $d_H$ terms are orthonormal and have coefficient $d_H^{-1/2}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $|h|\\le1$, the two columns of the stated flag matrix have unit norm and inner product $\\overline h(-\\sqrt{1-|h|^2})+\\sqrt{1-|h|^2}\\,\\overline h=0$; hence it is unitary and its flag-zero output amplitude from $|0\\rangle$ is $h$. The value oracle is uncomputed after this rotation, so the good-flag overlap retains no value workspace.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the root inner product linear in its first argument, the $(i,j)$ matrix entry of $U_L^*U_R$ is $\\langle U_R(|0\\rangle\\otimes|j\\rangle),\\,U_L(|0\\rangle\\otimes|i\\rangle)\\rangle_{\\rm root}$, by the adjoint identity and the ordered-basis coordinate convention in [F5]. The row and column lists contain the pair $(i,j)$ once each exactly when $H_{ij}\\ne0$, by Hermiticity and the nonzero-entry enumeration. In that case the unique matching basis pair contributes $d_H^{-1}h_{ij}=H_{ij}/(d_Hh_{\\max})$: the $U_R$ amplitude is first in the root pairing and equals $h_{ij}/\\sqrt{d_H}$, while the row-state amplitude is $1/\\sqrt{d_H}$. If $H_{ij}=0$, there is no valid matching pair, and the sentinel branch has flag-zero amplitude $0$. Thus every clean matrix entry is the stated one, proving the compressed block identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The displayed circuit for $U_L^*U_R$ applies the inverse row-location permutation once through $V_L^*$, the column-location permutation once through $V_R$, and the entry-value oracle twice to compute and uncompute the value. Its state preparations, inverses, arithmetic, flag rotations, controlled operations, and gate synthesis are separate declared costs, so no additional sparse-access operation has been counted as free.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate construction beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or endpoint limit is a separate conclusion in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "alg-qa-25-sparse-hamiltonian-block-encoding",
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "def-qa-25-qubitization-access-model"
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-25-jacobi-anger-truncation": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-25-hamiltonian-simulation-polynomial",
+          "source_section": "Definition",
+          "quote": "For a finite Hermitian $H$ with exact block-encoding normalization $\\alpha>0$, $\\|H\\|_{\\rm op}\\le\\alpha$, and real time $t$, put $\\tau=\\alpha t$. On $x\\in[-1,1]$ the scalar target is $f_\\tau(x)=\\exp(-i\\tau x)$; if $H\\psi_\\lambda=\\lambda\\psi_\\lambda$, then $f_\\tau(\\lambda/\\alpha)=\\exp(-it\\lambda)$, the eigenvalue of the finite matrix evolution [[def-qa-19-finite-matrix-dynamics]].\n\nFor $k\\ge0$, define the Chebyshev polynomials by $T_0(x)=1$, $T_1(x)=x$, $T_{k+1}(x)=2xT_k(x)-T_{k-1}(x)$. Define the Bessel coefficients used here by the series\n$$J_k(\\tau)=\\sum_{j=0}^{\\infty}\\frac{(-1)^j(\\tau/2)^{2j+k}}{j!(j+k)!}.$$\nFor fixed $k,\\tau$, the ratio of consecutive absolute summands is $\\tau^2/[4(j+1)(j+k+1)]\\to0$, so this series converges absolutely and defines $J_k(\\tau)$ before any estimate is used. The exponential uses the series convention of [[def-complex-exponential]], whose absolute convergence is supplied by [[lem-complex-exponential-series-converges-everywhere]]. This definition specifies the target and coefficient series; it does not assert a Jacobi–Anger expansion or a truncation bound. A real QSP or QSVT theorem alone does not implement this full complex, non-parity target; the finite even/odd combination, complementary-polynomial certificates, normalization, and controlled relative phase are separate operations in the binding simulator.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-qa-25-qubitized-hamiltonian-simulation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite Hermitian $H$, $\\alpha>0$, an exact $(\\alpha,a,0)$ block encoding $U$ with $J^*UJ=H/\\alpha$, a rational time $t$, rational $0<\\epsilon\\le1$, and separately declared access and cost for $U,U^*,$ controlled-$U$, controlled-$U^*$, both projector-phase circuits, coefficient preparation, SELECT, OAA reflections, phase synthesis, data access, and classical arithmetic. The input description also supplies terminating certified comparisons and rational-interval evaluations for the scalar arithmetic below. A bounded block-error input is a separate variant with a certified block-error budget; it is not silently treated as exact.\n\n**Output.** Return the finite circuit list and error certificate for a unitary dilation $V_{\\rm impl}$. Its success claim is on the clean-input isometry $J_{\\rm clean}|\\psi\\rangle=|0_{\\rm work}\\rangle|\\psi\\rangle$; auxiliary output registers are approximate and are not measured to clean an unknown system input. On a failed polynomial or phase certificate, return the phase routine's declared failure status and do not report a simulator.\n\n**Generation and execution.** Set $\\tau=\\alpha t$ and $\\rho=\\epsilon^2/10000$. For $t=0$, return the identity circuit and zero query count. Otherwise:\n\n1. Starting at $d=\\max(1,\\lceil|\\tau|\\rceil)$, increase $d$ until $u=|\\tau|/(2(d+2))<1$ and\n   $$\\frac{2(|\\tau|/2)^{d+1}}{(d+1)!(1-u)}\\le\\rho/8.$$\n   Evaluate each strict comparison by the certified interval routine named in OP0 of the binding operational appendix; an undecided equality is not rounded toward success.\n2. For each $k=0,\\ldots,d$, compute $J_k(\\tau)$ from the series in [[def-qa-25-hamiltonian-simulation-polynomial]]. Stop its alternating-series evaluation only after its ratio $\\tau^2/[4(j+1)(j+k+1)]$ is below $1$ and its geometric remainder is at most $\\rho/(32(d+1))$. Store a rational coefficient and its error interval. Form $T_0=1,T_1=x,T_{k+1}=2xT_k-T_{k-1}$. Set\n   $$E=J_0+2\\sum_{1\\le 2r\\le d}(-1)^rJ_{2r}T_{2r},\\qquad O=2\\sum_{1\\le 2r+1\\le d}(-1)^rJ_{2r+1}T_{2r+1}.$$\n   Thus $Q:=E-iO$ is the rounded Jacobi–Anger truncation and its certified scalar error is $\\|Q-f_\\tau\\|_{[-1,1]}\\le\\rho$; the sign $(-i)^k$ is literal.\n3. Require a certified combined polynomial error at most $\\rho$. Then $|E(x)|,|O(x)|\\le1+\\rho$ on $[-1,1]$. Put $B=1+2\\rho$, $p_E=E/B$, and $p_O=O/B$. Call [[alg-qa-23-qsp-phase-synthesis]] separately on these two real targets with their actual degree and parity, retaining its complementary-polynomial certificate, phase list, precision, and every explicit failure branch. Execute each real QSVT extraction using [[alg-qa-24-qsvt]] and the exact signal access of [[def-qa-25-qubitization-access-model]]. If an extraction fails certification, return that failure.\n4. Pad both extraction workspaces to the same ordered register space. Prepare a clean coefficient qubit in $|+\\rangle$. SELECT applies the $p_E(H/\\alpha)$ block in branch $0$ and $-i$ times the $p_O(H/\\alpha)$ block in branch $1$. Unprepare the coefficient qubit. The resulting clean block before amplification is $M/2$, where $M=p_E(H/\\alpha)-i p_O(H/\\alpha)=Q(H/\\alpha)/B$. Since $B=1+2\\rho$, the scalar error bound gives\n$$\\|M-e^{-itH}\\|_{\\rm op}\\le\\frac{\\rho}{B}+\\frac{B-1}{B}=\\frac{3\\rho}{1+2\\rho}<3\\rho;$$\nhere $f_\\tau(H/\\alpha)=e^{-itH}$ by finite spectral calculus and $|f_\\tau(x)|=1$. The factor $-i$ is a relative phase under any outer control and is not discarded.\n5. Apply the explicit phase-corrected oblivious-amplitude-amplification unitary $C=-WRW^*RW$, where $R=I-2\\Pi_{\\rm zero}$ and $W$ is the complete even/odd block-combination circuit. Retain its work registers. Allocate total phase, gate, and block implementation error at most $\\epsilon/4$ after amplification. A controlled simulator controls every whole block and the known correction, using the separately supplied controlled access.\n\nThe arithmetic, coefficient series, two phase-generation calls, controlled QSVT sequences, coefficient register, SELECT, and OAA list are finite outputs; their gate, query, precision, workspace, description-bit, and classical computation costs are separate coordinates. The phase-generation call is the finite procedure of [[alg-qa-23-qsp-phase-synthesis]], not a free source routine. A sparse input uses its actually supplied block-encoding circuit and its exact row-location, value, precision, and state-preparation costs; standard XOR sparse access alone does not imply an in-place reversible location permutation.",
+          "uses": [
+            "1.3",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "alg-qa-25-small-time-aware-simulator",
+          "source_section": "Definition",
+          "quote": "**Input.** An exact Hermitian block encoding of $H/\\alpha$, $\\alpha>0$, a rational time $t$, $0<\\epsilon<1$, and a terminating certified comparison of $\\tau=\\alpha|t|$ with $\\epsilon$, charged under the access model.\n\n**Instructions.**\n\n1. If $\\tau\\le\\epsilon$, return the identity circuit on the system, with every work register left at zero. The query, gate, and bit costs of this branch are zero.\n2. If $\\tau>\\epsilon$, invoke [[alg-qa-25-qubitized-hamiltonian-simulation]] with $t,\\epsilon$, and return its circuit and error certificate. Propagate any INVALID, CERTIFICATE_ERROR, or IMPLEMENTATION_ERROR result without labeling it a successful simulation.\n\nThe comparison cost is recorded separately. The second branch is exactly the OP4 procedure; this wrapper does not modify OP4 or infer inverse, controlled, state-preparation, or phase-synthesis access.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Chebyshev recurrence and $\\cos((k+1)\\theta)+\\cos((k-1)\\theta)=2\\cos\\theta\\cos(k\\theta)$ show by induction that $T_k(\\cos\\theta)=\\cos(k\\theta)$ for all $k\\ge0$. Every $x\\in[-1,1]$ is $\\cos\\theta$ for some real $\\theta$, so $|T_k(x)|\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\tau\\ne0$, the ratio of consecutive absolute terms in the defining series of $J_k(\\tau)$ is $|\\tau|^2/[4(j+1)(j+k+1)]$, which tends to zero, so the series converges absolutely; for $\\tau=0$ the series is immediate. For the integral $I_{k,j}=\\int_0^1 u^{j-1/2}(1-u)^{k-1/2}\\,du$, splitting $1=u+(1-u)$ and integrating the derivative of $u^{j+1/2}(1-u)^{k+1/2}$ gives $I_{k,j+1}/I_{k,j}=(j+1/2)/(j+k+1)$. Iterating yields $I_{k,j}/I_{k,0}=(2j)!k!/[4^j j!(j+k)!]$. Expanding $e^{i\\tau t}$ uniformly on $[-1,1]$, substituting $u=t^2$, and using this moment ratio gives $J_k(\\tau)=\\frac{(\\tau/2)^k}{k! I_{k,0}}\\int_{-1}^{1}e^{i\\tau t}(1-t^2)^{k-1/2}\\,dt.$ The weight is nonnegative and its normalized integral is one; [F4] therefore gives $|J_k(\\tau)|\\le(|\\tau|/2)^k/k!$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $L=\\ln(1/\\epsilon)>0$, $\\tau_0=|\\tau|>\\epsilon$, and $S=\\tau_0+L/\\ln(e+L/\\tau_0)$. If $\\tau_0\\ge1/4$, then $S\\ge1/4$. If $\\tau_0<1/4$, put $u=1/\\tau_0>4$, so $L>\\ln u$. The function $g(y)=y/\\ln(e+uy)$ is increasing for $y>0$, since its derivative has numerator $\\ln(e+uy)-uy/(e+uy)>0$; the first term exceeds $1$ and the second is below $1$. Also $\\ln u\\le u/2$ for $u\\ge4$ (the difference has positive derivative and is positive at $4$), and $e\\le u^2/2$, so $e+u\\ln u\\le u^2$. Therefore $S\\ge g(L)>g(\\ln u)\\ge1/2$. In all cases $S\\ge1/4$. Set $m=\\lceil64S\\rceil$; then $m\\ge16$, $m\\ge64\\tau_0$, and $d=m-1\\ge\\max(1,\\lceil\\tau_0\\rceil)$, so this is an eligible candidate in the OP4 loop starting rule [F7]. The real parameter $\\tau$ is defined in [F1].",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x=\\cos\\theta$, [F6] writes $e^{-i\\tau x}$ as the product of the absolutely convergent exponential series for $e^{-i\\tau e^{i\\theta}/2}$ and $e^{-i\\tau e^{-i\\theta}/2}$. Absolute convergence permits grouping terms by the exponent difference $k$; for each $k\\ge0$ the coefficient of $e^{ik\\theta}$ is $(-i)^kJ_k(\\tau)$, and the coefficient of $e^{-ik\\theta}$ is the same. Pairing these terms and using [F1] gives $e^{-i\\tau x}=J_0(\\tau)+2\\sum_{k\\ge1}(-i)^kJ_k(\\tau)T_k(x).$ By [F1], [F3], [F4], and [F6], the defining product is absolutely and uniformly convergent in $\\theta$ on bounded intervals, so the regrouping is valid.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Subtracting the degree-$d$ partial sum in step 2.1, applying the triangle inequality, and using $|T_k(x)|\\le1$ from step 1.1 gives error at most $2\\sum_{k>d}|J_k(\\tau)|$. With $m=d+1$, the ratio of consecutive factorial majorants $(|\\tau|/2)^k/k!$ for $k\\ge m$ is at most $u=|\\tau|/(2(m+1))<1$. The geometric-series bound from step 1.2 now yields the stated factorial tail.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F7], each of the $d+1$ OP4 coefficient errors is at most $\\rho/(32(d+1))$. Since a nonconstant Chebyshev term has coefficient multiplier $2$, their total uniform contribution is at most $(1+2d)\\rho/(32(d+1))<\\rho/16$; adding the tail $\\rho/8$ from step 3.1 gives a combined error $<\\rho$. The coefficients and multiplier $2$ are those of the expansion in [F1].",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Let $r=L/\\tau_0$. If $r\\ge1$, then $m\\ge64\\tau_0(1+r/\\ln(e+r))$. Since $\\ln y\\le\\sqrt y$ for $y\\ge1$ and $r/(e+r)\\ge1/(e+1)$, we have $r/\\ln(e+r)\\ge\\sqrt{e+r}/(e+1)$. Thus $2m/(e\\tau_0)\\ge[128/(e(e+1))]\\sqrt{e+r}>\\sqrt{e+r}$, because $e<3$ gives $128/(e(e+1))>128/12>1$; hence $\\ln(2m/(e\\tau_0))\\ge\\frac12\\ln(e+r)$. If $r<1$, $m\\ge64\\tau_0$ gives $2m/(e\\tau_0)\\ge128/e$, hence $\\ln(2m/(e\\tau_0))>1$, since $e<3$ implies $128/e>42>e$. For $r\\ge1$, these bounds give $m\\ln(2m/(e\\tau_0))\\ge32\\tau_0(\\ln(e+r)+r)\\ge32(L+\\tau_0)$, because $\\ln(e+r)>1$. For $r<1$, they give $m\\ln(2m/(e\\tau_0))>64\\tau_0>32(L+\\tau_0)$, because $L<\\tau_0$. Also $u_m=\\tau_0/[2(m+1)]\\le1/128$, so $2/(1-u_m)\\le256/127<4$, and the factorial tail expression is bounded by the estimate of step 3.1. The real $\\tau$ is defined in [F1]. $\\ln(m!)=\\sum_{j=1}^m\\ln j\\ge\\int_1^m\\ln x\\,dx\\ge m\\ln m-m,$ so $m!\\ge(m/e)^m$. The factorial-tail test at $d=m-1$ is consequently at most $\\frac{2(\\tau_0/2)^m}{m!(1-u_m)} \\le4\\exp\\!\\left(-m\\ln\\frac{2m}{e\\tau_0}\\right) \\le4e^{-32(L+\\tau_0)} \\le e^{-2L}/80000=\\rho/8.$ The last inequality holds because $L+\\tau_0>1$: for $0<\\epsilon<1$, the function $\\ln(1/\\epsilon)-(1-\\epsilon)$ is positive (its derivative is $(\\epsilon-1)/\\epsilon<0$ as $\\epsilon$ increases to $1$, and its value at $1$ is zero), and $\\tau_0>\\epsilon$. Hence $30(L+\\tau_0)>30>\\ln(320000)$; the numerical comparison follows from $e>2$, which gives $e^{30}>2^{30}>320000$. Since $m\\le64S+1\\le68S$ using $S\\ge1/4$, the passing degree $d=m-1$ is $O(S)$. The factorial tail is the estimate of step 3.1 and the OP4 threshold is [F7].",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "F7",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $\\tau_0\\le\\epsilon$, the derivative fact [F5] and $|e^{-isx}|=1$ from [F4] give $e^{-i\\tau x}-1=\\int_0^\\tau -ix e^{-isx}\\,ds,\\qquad |e^{-i\\tau x}-1|\\le|\\tau x|\\le\\epsilon$ for every $x\\in[-1,1]$. Thus the wrapper [F8] has the stated small-time error, including $\\tau=0$.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate construction beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "alg-qa-25-qubitized-hamiltonian-simulation",
+        "alg-qa-25-small-time-aware-simulator",
+        "def-qa-25-hamiltonian-simulation-polynomial"
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-25-qubitized-simulation-correctness": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-25-qubitized-hamiltonian-simulation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite Hermitian $H$, $\\alpha>0$, an exact $(\\alpha,a,0)$ block encoding $U$ with $J^*UJ=H/\\alpha$, a rational time $t$, rational $0<\\epsilon\\le1$, and separately declared access and cost for $U,U^*,$ controlled-$U$, controlled-$U^*$, both projector-phase circuits, coefficient preparation, SELECT, OAA reflections, phase synthesis, data access, and classical arithmetic. The input description also supplies terminating certified comparisons and rational-interval evaluations for the scalar arithmetic below. A bounded block-error input is a separate variant with a certified block-error budget; it is not silently treated as exact.\n\n**Output.** Return the finite circuit list and error certificate for a unitary dilation $V_{\\rm impl}$. Its success claim is on the clean-input isometry $J_{\\rm clean}|\\psi\\rangle=|0_{\\rm work}\\rangle|\\psi\\rangle$; auxiliary output registers are approximate and are not measured to clean an unknown system input. On a failed polynomial or phase certificate, return the phase routine's declared failure status and do not report a simulator.\n\n**Generation and execution.** Set $\\tau=\\alpha t$ and $\\rho=\\epsilon^2/10000$. For $t=0$, return the identity circuit and zero query count. Otherwise:\n\n1. Starting at $d=\\max(1,\\lceil|\\tau|\\rceil)$, increase $d$ until $u=|\\tau|/(2(d+2))<1$ and\n   $$\\frac{2(|\\tau|/2)^{d+1}}{(d+1)!(1-u)}\\le\\rho/8.$$\n   Evaluate each strict comparison by the certified interval routine named in OP0 of the binding operational appendix; an undecided equality is not rounded toward success.\n2. For each $k=0,\\ldots,d$, compute $J_k(\\tau)$ from the series in [[def-qa-25-hamiltonian-simulation-polynomial]]. Stop its alternating-series evaluation only after its ratio $\\tau^2/[4(j+1)(j+k+1)]$ is below $1$ and its geometric remainder is at most $\\rho/(32(d+1))$. Store a rational coefficient and its error interval. Form $T_0=1,T_1=x,T_{k+1}=2xT_k-T_{k-1}$. Set\n   $$E=J_0+2\\sum_{1\\le 2r\\le d}(-1)^rJ_{2r}T_{2r},\\qquad O=2\\sum_{1\\le 2r+1\\le d}(-1)^rJ_{2r+1}T_{2r+1}.$$\n   Thus $Q:=E-iO$ is the rounded Jacobi–Anger truncation and its certified scalar error is $\\|Q-f_\\tau\\|_{[-1,1]}\\le\\rho$; the sign $(-i)^k$ is literal.\n3. Require a certified combined polynomial error at most $\\rho$. Then $|E(x)|,|O(x)|\\le1+\\rho$ on $[-1,1]$. Put $B=1+2\\rho$, $p_E=E/B$, and $p_O=O/B$. Call [[alg-qa-23-qsp-phase-synthesis]] separately on these two real targets with their actual degree and parity, retaining its complementary-polynomial certificate, phase list, precision, and every explicit failure branch. Execute each real QSVT extraction using [[alg-qa-24-qsvt]] and the exact signal access of [[def-qa-25-qubitization-access-model]]. If an extraction fails certification, return that failure.\n4. Pad both extraction workspaces to the same ordered register space. Prepare a clean coefficient qubit in $|+\\rangle$. SELECT applies the $p_E(H/\\alpha)$ block in branch $0$ and $-i$ times the $p_O(H/\\alpha)$ block in branch $1$. Unprepare the coefficient qubit. The resulting clean block before amplification is $M/2$, where $M=p_E(H/\\alpha)-i p_O(H/\\alpha)=Q(H/\\alpha)/B$. Since $B=1+2\\rho$, the scalar error bound gives\n$$\\|M-e^{-itH}\\|_{\\rm op}\\le\\frac{\\rho}{B}+\\frac{B-1}{B}=\\frac{3\\rho}{1+2\\rho}<3\\rho;$$\nhere $f_\\tau(H/\\alpha)=e^{-itH}$ by finite spectral calculus and $|f_\\tau(x)|=1$. The factor $-i$ is a relative phase under any outer control and is not discarded.\n5. Apply the explicit phase-corrected oblivious-amplitude-amplification unitary $C=-WRW^*RW$, where $R=I-2\\Pi_{\\rm zero}$ and $W$ is the complete even/odd block-combination circuit. Retain its work registers. Allocate total phase, gate, and block implementation error at most $\\epsilon/4$ after amplification. A controlled simulator controls every whole block and the known correction, using the separately supplied controlled access.\n\nThe arithmetic, coefficient series, two phase-generation calls, controlled QSVT sequences, coefficient register, SELECT, and OAA list are finite outputs; their gate, query, precision, workspace, description-bit, and classical computation costs are separate coordinates. The phase-generation call is the finite procedure of [[alg-qa-23-qsp-phase-synthesis]], not a free source routine. A sparse input uses its actually supplied block-encoding circuit and its exact row-location, value, precision, and state-preparation costs; standard XOR sparse access alone does not imply an in-place reversible location permutation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-25-jacobi-anger-truncation",
+          "source_section": "Statement",
+          "quote": "With $J_k,T_k$ defined in [[def-qa-25-hamiltonian-simulation-polynomial]], for every real $\\tau$ and integer $d\\ge0$,\n$$\\sup_{|x|\\le1}\\left|\\exp(-i\\tau x)-\\left(J_0(\\tau)+2\\sum_{k=1}^{d}(-i)^kJ_k(\\tau)T_k(x)\\right)\\right| \\le 2\\sum_{k>d}|J_k(\\tau)| \\le \\frac{2(|\\tau|/2)^{d+1}}{(d+1)!\\left(1-|\\tau|/(2(d+2))\\right)}$$\nwhenever $|\\tau|/(2(d+2))<1$. In the OP4 simulator, $\\rho=\\epsilon^2/10000$ and the factorial-tail stopping test therefore certifies truncation error at most $\\rho/8$; rounding each coefficient to error at most $\\rho/(32(d+1))$ keeps the combined polynomial error below $\\rho$. For the nontrivial simulation regime $|\\tau|>\\epsilon$, an integer $d$ passing OP4's test exists with\n$$d=O\\left(|\\tau|+\\frac{\\ln(1/\\epsilon)}{\\ln(e+\\ln(1/\\epsilon)/|\\tau|)}\\right).$$\nFor $|\\tau|\\le\\epsilon$, the constant polynomial $1$ approximates the target within $\\epsilon$; the wrapper algorithm uses the exact identity circuit in that branch.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-23-qsp-synthesis-correctness",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb R[x]$ be supplied exactly, with degree bound $d\\ge0$, parity $d\\bmod2$, $|p(x)|\\le1$ on $[-1,1]$, and rational tolerance $\\delta>0$. On a `SUCCESS` output of [[alg-qa-23-qsp-phase-synthesis]], the exact phase list has an ideal QSP matrix whose upper-left matrix entry $P$ satisfies $\\operatorname{Re}P=p$ in exact mode and $|\\operatorname{Re}P(x)-p(x)|\\le\\delta_0/8\\le\\delta/8$ in numerical mode, for every $x\\in[-1,1]$, where $\\delta_0=\\min(\\delta,8)$. If numerical phase gates are used, each compiled phase error is at most $\\delta_0/(8(d+1))$ in operator norm, so the implemented upper-left matrix entry has real-part error at most $\\delta_0/4\\le\\delta$. This is a matrix-entry accuracy claim; no measurement or scalar-extraction circuit is included. The algorithm terminates on every promised input when its optional compiler terminates with a certificate or an explicit failure result; failed exact checks return their declared non-success branch.\n\nIn `efficient-numerical` mode without a supplied complement or finite-basis compiler, the algorithm requires $\\operatorname{poly}(d,1+\\log_+(1/\\delta))$ charged arithmetic operations, ideal exact algebraic field/equality/order tests, root-descriptor operations, and polynomially many written tower/DAG certificate bits. Here $\\log_+(x)=\\max(0,\\log x)$. Input reading and conversion from an arbitrary original coefficient encoding, expanded minimal-polynomial conversion, operation implementation bit cost, and optional compiler work are separate resource coordinates. This is the explicit exact-algebraic arithmetic model of the algorithm; complete modes retain finite termination without the same height-independent bound.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-24-qsvt-singular-space-action",
+          "source_section": "Statement",
+          "quote": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ has parity $d\\bmod2$ and $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-reflection-unitary-involution",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qa-25-isometry-error-implies-trace-distance",
+          "source_section": "Statement",
+          "quote": "Let $V,W:H\\to K\\otimes E$ be linear isometries between finite-dimensional complex inner-product spaces, meaning $V^*V=W^*W=I_H$, and assume $\\delta\\ge0$ and $\\|V-W\\|_{\\rm op}\\le\\delta$. For every nonzero finite-dimensional reference space $R$ and density matrix $\\rho$ on $H\\otimes R$ (a positive semidefinite matrix of trace one), define $V_R=V\\otimes I_R$ and $W_R=W\\otimes I_R$ on the ordered product bases. Define the partial trace by\n$$(\\operatorname{Tr}_E X)_{(k,r),(k',r')}=\\sum_e X_{(k,e,r),(k',e,r')},$$\nand define $\\|X\\|_1$ as the sum of singular values and $D(\\sigma,\\omega)=\\tfrac12\\|\\sigma-\\omega\\|_1$. The output density matrices\n$$\\rho_V=(\\operatorname{Tr}_E\\otimes I_R)(V_R\\rho V_R^*),\\qquad \\rho_W=(\\operatorname{Tr}_E\\otimes I_R)(W_R\\rho W_R^*)$$\nsatisfy $D(\\rho_V,\\rho_W)\\le\\delta$. Tensor products use the ordered product orthonormal basis and product inner product; the displayed matrix formula fixes the partial-trace convention used here. For column vectors, $a^*$ denotes conjugate transpose and $aa^*$ the rank-one matrix with entries $a_i\\overline{a_j}$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qa-25-qubitization-access-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $K=K^*$ on $H$, and let $\\alpha>0$ satisfy $\\|K\\|_{\\mathrm{op}}\\le\\alpha$. Put $A=K/\\alpha$. Let $U$ be a unitary on an ancilla-system space $H_A\\otimes H$, let $J:H\\to H_A\\otimes H$ be the isometry $Jv=|0^a\\rangle\\otimes v$, and let $\\Pi=JJ^*$. An **exact Hermitian block encoding** is the data $(U,J,\\alpha)$ with $J^*UJ=A$. The matrix $K$ is Hermitian; $U$ itself need not be Hermitian.\n\nThe signal-register reflection is $R_\\Pi=2\\Pi-I$. The access record lists, separately, each supplied call to $U$, $U^*$, controlled-$U$, controlled-$U^*$, and $R_\\Pi$, together with their circuit, query, gate, width, ancilla, precision, and classical-generation costs from [[def-qa-22-block-encoding-access-model]] and [[def-qc-circuit-cost-model]]. A state description or block matrix alone supplies none of these calls. A controlled reflection is also separate. Any PREPARE, SELECT, sparse-location, value, or coefficient operation used by a construction is a separately supplied, reversible interface with its inverse and cost recorded.\n\nHere is the standard-form **qubiterate** for this access instance. Add a flag qubit and define $\\widetilde U=|0\\rangle\\langle0|\\otimes U+|1\\rangle\\langle1|\\otimes U^*$, $J'v=|+\\rangle\\otimes Jv$, $S=X\\otimes I$, $F=S\\widetilde U$, and $W_{\\mathrm q}=(2J'J'^*-I)F$. Implementing $\\widetilde U$ requires the separately declared controlled-$U$ and controlled-$U^*$ calls; $S$, the preparation of $|+\\rangle$, and the reflection about $\\operatorname{ran}(J')$ also have declared costs. [[thm-qa-25-qubitization-signal-sequence]] proves its compressed block and spectral relation.\n\nFor the QSVT simulation sequence, the signal operations are the alternating $U,U^*$ calls interleaved with the projector phases $e^{i\\phi(2\\Pi-I)}$ from [[def-qa-23-qsp-signal-sequence]]. Their exact phase list, parity, real-polynomial extraction, controls, inverse calls, and phase-synthesis precision are part of the supplied circuit description. The scalar polynomial pairs must satisfy [[def-qa-23-qsp-admissible-polynomial-pair]]; singular-value transformations use the convention of [[def-qa-24-singular-value-transform]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $t=0$, [F1] returns the identity circuit with no signal query, and $e^{-itH}=I$; hence its clean-input isometry error is zero. If $t\\ne0$, continue with the certified OP4 output.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On an eigenvector of $H$ with eigenvalue $\\lambda$, $H/\\alpha$ has eigenvalue $x=\\lambda/\\alpha\\in[-1,1]$, by [F8] and [F9]. Put $Q=E-iO$ and $B=1+2\\rho$. The OP4 certificate gives $\\|Q-f_\\tau\\|_{[-1,1]}\\le\\rho$ by [F1]–[F2], and $|f_\\tau(x)|=1$. Since $M=Q/B$, $|M(x)-f_\\tau(x)|\\le |Q(x)-f_\\tau(x)|/B +(B-1)|f_\\tau(x)|/B \\le 3\\rho/(1+2\\rho)<3\\rho.$ The finite spectral calculus therefore gives $\\|M(H/\\alpha)-e^{-itH}\\|_{\\rm op}<\\eta:=3\\rho$. The two real QSVT extractions act on each eigenspace by their scalar polynomials by [F3]–[F4], so their coefficient-qubit combination has clean block $M/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $P$ be the clean-work projector and $B=PWP=M/2$ the compressed block of the complete even/odd circuit $W$, by step 1.2. Expanding $R=I-2P$ gives $P(-WRW^*RW)P=3B-4BB^*B=3M/2-MM^*M/2.$ Indeed, $RWP=WP-2B$, $W^*RWP=P-2W^*B$, and a second application of $R$, followed by $PW$, yields $-3B+4B(PW^*P)B=-3B+4BB^*B$ before the leading minus sign. The full OAA circuit $C=-WRW^*RW$ is unitary by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\|M\\|_{\\rm op}\\le1+\\eta$, telescoping $MM^*M-VV^*V$ into three factors gives $\\|MM^*M-V\\|_{\\rm op}\\le\\eta\\bigl((1+\\eta)^2+(1+\\eta)+1\\bigr).$ By step 2.1, $D=3M/2-MM^*M/2$, so $\\|D-V\\|_{\\rm op}\\le\\tfrac32\\eta+\\tfrac12\\eta\\bigl((1+\\eta)^2+(1+\\eta)+1\\bigr)\\le4\\eta,$ where the last inequality follows from $\\eta\\le3/10000<1/100$. Here $D=P C P|_{\\operatorname{ran}P}$ is the clean block.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Write $CJ_{\\rm clean}=J_{\\rm clean}D+L$, where $L=(I-P)CJ_{\\rm clean}$ is the work-space leakage. Unitarity of $C$ gives $L^*L=I-D^*D$, and $D$ is a contraction as a compression of $C$. Thus $\\|L\\|_{\\rm op}^2=\\|I-D^*D\\|_{\\rm op} \\le\\|D^*(D-V)\\|_{\\rm op}+\\|(D^*-V^*)V\\|_{\\rm op} \\le 2\\|D-V\\|_{\\rm op}\\le8\\eta.$ It follows that $\\|CJ_{\\rm clean}-J_{\\rm clean}V\\|_{\\rm op}\\le4\\eta+\\sqrt{8\\eta}\\le10\\sqrt{\\eta}$, since $\\eta<1$ implies $4\\eta\\le4\\sqrt\\eta$ and $\\sqrt8<3$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Because $\\eta=3\\epsilon^2/10000$, $10\\sqrt{\\eta}=(\\sqrt3/10)\\epsilon$. Adding the post-amplification implementation budget $\\epsilon/4$ from [F1] gives at most $(\\sqrt3/10+1/4)\\epsilon<\\epsilon$. This is the asserted clean-input isometry error, with the residual leakage retained in $V_{\\rm impl}J_{\\rm clean}$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The $t=0$ branch has zero isometry error by step 1.1; when $t\\ne0$, step 5.1 gives error at most $\\epsilon$. Apply [F7] in either case; it includes arbitrary reference systems and discarding the work registers, so the trace distance is at most $\\epsilon$.",
+          "step": "6.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate construction beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "alg-qa-25-qubitized-hamiltonian-simulation",
+        "def-qa-25-qubitization-access-model",
+        "lem-qa-25-jacobi-anger-truncation",
+        "thm-qa-23-qsp-synthesis-correctness",
+        "thm-qc-reflection-unitary-involution"
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-25-small-time-aware-simulator-correctness": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-25-small-time-aware-simulator",
+          "source_section": "Definition",
+          "quote": "**Input.** An exact Hermitian block encoding of $H/\\alpha$, $\\alpha>0$, a rational time $t$, $0<\\epsilon<1$, and a terminating certified comparison of $\\tau=\\alpha|t|$ with $\\epsilon$, charged under the access model.\n\n**Instructions.**\n\n1. If $\\tau\\le\\epsilon$, return the identity circuit on the system, with every work register left at zero. The query, gate, and bit costs of this branch are zero.\n2. If $\\tau>\\epsilon$, invoke [[alg-qa-25-qubitized-hamiltonian-simulation]] with $t,\\epsilon$, and return its circuit and error certificate. Propagate any INVALID, CERTIFICATE_ERROR, or IMPLEMENTATION_ERROR result without labeling it a successful simulation.\n\nThe comparison cost is recorded separately. The second branch is exactly the OP4 procedure; this wrapper does not modify OP4 or infer inverse, controlled, state-preparation, or phase-synthesis access.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-25-qubitized-simulation-correctness",
+          "source_section": "Statement",
+          "quote": "For the exact access model of [[def-qa-25-qubitization-access-model]], rational $t$, and $0<\\epsilon\\le1$, a successful execution of [[alg-qa-25-qubitized-hamiltonian-simulation]] returns a unitary dilation $V_{\\rm impl}$ satisfying\n$$\\|V_{\\rm impl}J_{\\rm clean}-J_{\\rm out}e^{-itH}\\|_{\\rm op}\\le\\epsilon$$\non the clean-input isometry $J_{\\rm clean}$, where $J_{\\rm out}$ appends every work register in zero. Output work registers are approximate; no full-space error on arbitrary dirty work inputs or exact cleanup is asserted. For $t=0$, the declared identity branch is exact. For every reference system, tracing out work gives the corresponding system-output trace-distance bound at most $\\epsilon$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-19-finite-matrix-dynamics",
+          "source_section": "Definition",
+          "quote": "In this page a **Hamiltonian** is a self-adjoint endomorphism $H$ of a\nfinite-dimensional complex inner-product space $V$; no physical postulate is\npart of the term. Let $\\sigma(H)$ be the set of its distinct eigenvalues and\nlet $P_\\lambda$ be the orthogonal projection onto the $\\lambda$-eigenspace.\nFor real time $t$, define the finite matrix evolution\n\n$$U_H(t):=\\sum_{\\lambda\\in\\sigma(H)}e^{-it\\lambda}P_\\lambda = f_t(H),\\qquad f_t(\\lambda)=e^{-it\\lambda}.$$\n\nThe second expression uses the finite spectral functional calculus\n[[def-functional-calculus-for-a-normal-endomorphism]]. If $V$ is the zero\nspace, the spectrum is empty and the empty sum is the unique endomorphism,\nwhich is also the identity on $V$. This definition specifies a mathematical\nunitary from a finite matrix; it makes no claim that the operation has an\nefficient circuit or a free access cost.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-25-isometry-error-implies-trace-distance",
+          "source_section": "Statement",
+          "quote": "Let $V,W:H\\to K\\otimes E$ be linear isometries between finite-dimensional complex inner-product spaces, meaning $V^*V=W^*W=I_H$, and assume $\\delta\\ge0$ and $\\|V-W\\|_{\\rm op}\\le\\delta$. For every nonzero finite-dimensional reference space $R$ and density matrix $\\rho$ on $H\\otimes R$ (a positive semidefinite matrix of trace one), define $V_R=V\\otimes I_R$ and $W_R=W\\otimes I_R$ on the ordered product bases. Define the partial trace by\n$$(\\operatorname{Tr}_E X)_{(k,r),(k',r')}=\\sum_e X_{(k,e,r),(k',e,r')},$$\nand define $\\|X\\|_1$ as the sum of singular values and $D(\\sigma,\\omega)=\\tfrac12\\|\\sigma-\\omega\\|_1$. The output density matrices\n$$\\rho_V=(\\operatorname{Tr}_E\\otimes I_R)(V_R\\rho V_R^*),\\qquad \\rho_W=(\\operatorname{Tr}_E\\otimes I_R)(W_R\\rho W_R^*)$$\nsatisfy $D(\\rho_V,\\rho_W)\\le\\delta$. Tensor products use the ordered product orthonormal basis and product inner product; the displayed matrix formula fixes the partial-trace convention used here. For column vectors, $a^*$ denotes conjugate transpose and $aa^*$ the rank-one matrix with entries $a_i\\overline{a_j}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-25-qubitization-access-model",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $K=K^*$ on $H$, and let $\\alpha>0$ satisfy $\\|K\\|_{\\mathrm{op}}\\le\\alpha$. Put $A=K/\\alpha$. Let $U$ be a unitary on an ancilla-system space $H_A\\otimes H$, let $J:H\\to H_A\\otimes H$ be the isometry $Jv=|0^a\\rangle\\otimes v$, and let $\\Pi=JJ^*$. An **exact Hermitian block encoding** is the data $(U,J,\\alpha)$ with $J^*UJ=A$. The matrix $K$ is Hermitian; $U$ itself need not be Hermitian.\n\nThe signal-register reflection is $R_\\Pi=2\\Pi-I$. The access record lists, separately, each supplied call to $U$, $U^*$, controlled-$U$, controlled-$U^*$, and $R_\\Pi$, together with their circuit, query, gate, width, ancilla, precision, and classical-generation costs from [[def-qa-22-block-encoding-access-model]] and [[def-qc-circuit-cost-model]]. A state description or block matrix alone supplies none of these calls. A controlled reflection is also separate. Any PREPARE, SELECT, sparse-location, value, or coefficient operation used by a construction is a separately supplied, reversible interface with its inverse and cost recorded.\n\nHere is the standard-form **qubiterate** for this access instance. Add a flag qubit and define $\\widetilde U=|0\\rangle\\langle0|\\otimes U+|1\\rangle\\langle1|\\otimes U^*$, $J'v=|+\\rangle\\otimes Jv$, $S=X\\otimes I$, $F=S\\widetilde U$, and $W_{\\mathrm q}=(2J'J'^*-I)F$. Implementing $\\widetilde U$ requires the separately declared controlled-$U$ and controlled-$U^*$ calls; $S$, the preparation of $|+\\rangle$, and the reflection about $\\operatorname{ran}(J')$ also have declared costs. [[thm-qa-25-qubitization-signal-sequence]] proves its compressed block and spectral relation.\n\nFor the QSVT simulation sequence, the signal operations are the alternating $U,U^*$ calls interleaved with the projector phases $e^{i\\phi(2\\Pi-I)}$ from [[def-qa-23-qsp-signal-sequence]]. Their exact phase list, parity, real-polynomial extraction, controls, inverse calls, and phase-synthesis precision are part of the supplied circuit description. The scalar polynomial pairs must satisfy [[def-qa-23-qsp-admissible-polynomial-pair]]; singular-value transformations use the convention of [[def-qa-24-singular-value-transform]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\alpha|t|>\\epsilon$, the algorithm invokes OP4, and [F2] gives the clean-input isometry bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $\\alpha|t|\\le\\epsilon$. For a unit vector $\\psi$, the differential identity [F4] and the fundamental theorem of calculus give $U_H(t)\\psi-\\psi=\\int_0^t -iHU_H(s)\\psi\\,ds$. Each integrand has norm at most $\\|H\\|_{\\rm op}$, because $U_H(s)$ preserves norm. The triangle inequality for Riemann sums and continuity yield $\\|(U_H(t)-I)\\psi\\|\\le |t|\\|H\\|_{\\rm op}\\le\\alpha|t|\\le\\epsilon$, using [F7]. Taking the maximum over unit $\\psi$ proves the clean-input operator bound for the identity circuit. The work registers are exactly zero, so the same isometry bound holds.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In either branch, the implementation on clean inputs and the target $J_{\\rm out}e^{-itH}$ are isometries whose operator-norm difference is at most $\\epsilon$, by steps 1.1 and 1.2. Apply [F6] with $\\delta=\\epsilon$ to obtain the reference-system trace-distance conclusion after tracing work.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate construction beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or endpoint limit is a separate conclusion in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "alg-qa-25-small-time-aware-simulator",
+        "def-qa-25-qubitization-access-model",
+        "thm-qa-25-qubitized-simulation-correctness"
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-25-qubitized-simulation-resource-bound": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-25-small-time-aware-simulator",
+          "source_section": "Definition",
+          "quote": "**Input.** An exact Hermitian block encoding of $H/\\alpha$, $\\alpha>0$, a rational time $t$, $0<\\epsilon<1$, and a terminating certified comparison of $\\tau=\\alpha|t|$ with $\\epsilon$, charged under the access model.\n\n**Instructions.**\n\n1. If $\\tau\\le\\epsilon$, return the identity circuit on the system, with every work register left at zero. The query, gate, and bit costs of this branch are zero.\n2. If $\\tau>\\epsilon$, invoke [[alg-qa-25-qubitized-hamiltonian-simulation]] with $t,\\epsilon$, and return its circuit and error certificate. Propagate any INVALID, CERTIFICATE_ERROR, or IMPLEMENTATION_ERROR result without labeling it a successful simulation.\n\nThe comparison cost is recorded separately. The second branch is exactly the OP4 procedure; this wrapper does not modify OP4 or infer inverse, controlled, state-preparation, or phase-synthesis access.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-25-jacobi-anger-truncation",
+          "source_section": "Statement",
+          "quote": "With $J_k,T_k$ defined in [[def-qa-25-hamiltonian-simulation-polynomial]], for every real $\\tau$ and integer $d\\ge0$,\n$$\\sup_{|x|\\le1}\\left|\\exp(-i\\tau x)-\\left(J_0(\\tau)+2\\sum_{k=1}^{d}(-i)^kJ_k(\\tau)T_k(x)\\right)\\right| \\le 2\\sum_{k>d}|J_k(\\tau)| \\le \\frac{2(|\\tau|/2)^{d+1}}{(d+1)!\\left(1-|\\tau|/(2(d+2))\\right)}$$\nwhenever $|\\tau|/(2(d+2))<1$. In the OP4 simulator, $\\rho=\\epsilon^2/10000$ and the factorial-tail stopping test therefore certifies truncation error at most $\\rho/8$; rounding each coefficient to error at most $\\rho/(32(d+1))$ keeps the combined polynomial error below $\\rho$. For the nontrivial simulation regime $|\\tau|>\\epsilon$, an integer $d$ passing OP4's test exists with\n$$d=O\\left(|\\tau|+\\frac{\\ln(1/\\epsilon)}{\\ln(e+\\ln(1/\\epsilon)/|\\tau|)}\\right).$$\nFor $|\\tau|\\le\\epsilon$, the constant polynomial $1$ approximates the target within $\\epsilon$; the wrapper algorithm uses the exact identity circuit in that branch.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-24-qsvt-query-count",
+          "source_section": "Statement",
+          "quote": "For degree $d\\ge0$, one un-controlled QSVT sequence makes exactly $d$ signal calls: $\\lceil d/2\\rceil$ calls to $U$ and $\\lfloor d/2\\rfloor$ calls to $U^*$, beginning with $U$ when $d>0$. It applies exactly $d+1$ projector-phase operations, with $\\lceil(d+1)/2\\rceil$ about $\\Pi_R$ and $\\lfloor(d+1)/2\\rfloor$ about $\\Pi_L$. By [[thm-qa-24-projector-phase-implementation]], each phase operation uses two controlled calls to the corresponding reflection and one variable one-qubit phase rotation, plus a constant number of one-qubit gates. A coherent control of one sequence against the identity requires no controlled signal call when $d$ is even and one controlled signal call when $d$ is odd. Selecting between the two phase lists $\\Phi$ and $-\\Phi$ uses the same unconditioned signal list in both branches and controls only the phase rotations. Phase generation, inverse access, and finite-gate compilation retain their separately declared costs. At $d=0$ there is no signal or controlled-signal call.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-23-qsp-query-cost",
+          "source_section": "Statement",
+          "quote": "A length-$d$ sequence from [[def-qa-23-qsp-signal-sequence]] has exactly $d$ signal factors $W_R(x)$ and exactly $d+1$ phase factors $Z(\\phi_j)$, for $0\\le j\\le d$. In the scalar QSP model the signal acts on one two-dimensional signal register. If each $W_R$ is provided by a named query oracle, the sequence uses exactly $d$ calls to that oracle; it makes no controlled or inverse signal calls. The oracle's work registers, implementation, and query/gate charges are those explicitly supplied with it. The phase-rotation, ordinary-gate, circuit-description, bit, and numerical-precision coordinates remain separate as in [[def-qc-circuit-cost-model]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-24-qsvt-error-and-resource-bound",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite square or rectangular matrix with a declared isometric padding $\\widehat A$, and let $\\alpha>0$ satisfy $\\alpha\\ge\\|A\\|_{\\mathrm{op}}$. Let $B$ be the exact compressed PUE block of the supplied input unitary and assume\n\n$$\\|B-\\widehat A/\\alpha\\|_{\\mathrm{op}}\\le\\varepsilon_{\\mathrm{BE}}.$$\n\nLet $P$ be the degree-$d$ parity polynomial of an admissible QSVT phase sequence, and let $f$ have the same parity. Put $S:=\\{0\\}\\cup\\{\\sigma_j:\\sigma_j>0\\text{ is a singular value of }\\widehat A/\\alpha\\}$, so zero is included even when the two matrix dimensions differ. If $\\sup_{\\sigma\\in S}|P(\\sigma)-f(\\sigma)|\\le\\eta_{\\mathrm{poly}}$, and the implemented phase operation at slot $\\ell$ is a unitary within operator-norm error $\\zeta_\\ell$ of its ideal operation, then the implemented compressed block $\\widetilde B$ satisfies\n\n$$\\|\\widetilde B-f^{\\mathrm{SV}}(\\widehat A/\\alpha)\\|_{\\mathrm{op}}\\le\\eta_{\\mathrm{poly}}+4d\\sqrt{\\varepsilon_{\\mathrm{BE}}}+\\sum_{\\ell}\\zeta_\\ell.$$\n\nThe exact sequence uses $d$ calls alternating between $U$ and $U^*$, $d+1$ projector-phase operations, and the reflection and one-qubit resources in [[thm-qa-24-qsvt-query-count]]. A real-polynomial control wrapper has its separately listed controlled gates. Matrix-data access, block-encoding construction, inverse and controlled access, phase-list generation, finite-gate compilation, and classical bit costs are charged through their declared interfaces; no cost follows from a bare matrix.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "For a nonzero $d_H$-row-sparse Hermitian $H$, the designated all-zero auxiliary compression of $U_L^*U_R$ from [[alg-qa-25-sparse-hamiltonian-block-encoding]] is $H/(d_Hh_{\\max})$. In the zero case the returned $X_{\\rm flag}\\otimes I$ has zero all-zero-flag compression and normalization $1$. One nonzero-case block-encoding call uses one supplied inverse row-location permutation, one supplied column-location permutation, two entry-value queries (compute and uncompute), and the declared $D_{d_H}$, inverse, flag-rotation, and arithmetic implementations. No constant-cost conversion from XOR locations to in-place permutations is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qa-25-qubitized-simulation-correctness",
+          "source_section": "Statement",
+          "quote": "For the exact access model of [[def-qa-25-qubitization-access-model]], rational $t$, and $0<\\epsilon\\le1$, a successful execution of [[alg-qa-25-qubitized-hamiltonian-simulation]] returns a unitary dilation $V_{\\rm impl}$ satisfying\n$$\\|V_{\\rm impl}J_{\\rm clean}-J_{\\rm out}e^{-itH}\\|_{\\rm op}\\le\\epsilon$$\non the clean-input isometry $J_{\\rm clean}$, where $J_{\\rm out}$ appends every work register in zero. Output work registers are approximate; no full-space error on arbitrary dirty work inputs or exact cleanup is asserted. For $t=0$, the declared identity branch is exact. For every reference system, tracing out work gives the corresponding system-output trace-distance bound at most $\\epsilon$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\tau\\le\\epsilon$, [F1] returns the exact identity and makes no signal call. If $\\tau>\\epsilon$, the degree test of [F2] has a finite passing candidate and its least accepted degree obeys the stated $O(S)$ bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In one OAA application, $W$ contains one even and one odd real QSVT extraction. By [F3], they use $d_E+d_O$ signal calls and $d_E+d_O+2$ projector-phase slots. OAA uses $W,W^*,W$, so the total is exactly $3(d_E+d_O)$ signal calls and $3(d_E+d_O+2)$ phase slots, bounded above by $6d$ and $6d+6$, respectively.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], controlling each selected real extraction against identity needs one controlled signal call exactly when its degree is odd. OAA contains the three signal blocks $W,W^*,W$, so the even and odd extractions together use exactly $3(\\mathbf1_{d_E\\text{ odd}}+\\mathbf1_{d_O\\text{ odd}})$ such calls. By [F4], the control selecting $\\Phi$ or $-\\Phi$ acts only on phase rotations and adds no signal query. Any further external control invokes the separately supplied controlled-$U$ or controlled-$U^*$ operations by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The lists in OP4 are generated once, while the OAA circuit reuses the declared phase lists, coefficient preparation, and SELECT circuits in its three block calls and their inverses. Every implementation cost named in the Statement is retained from [F5]; the sparse branch multiplies these signal counts by the supplied block-encoding operations and normalization in [F6]. Thus no sparse location/value, phase-synthesis, or classical bit cost is absorbed into an oracle count.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "When $0<c\\le\\tau\\le C<\\infty$ and $\\epsilon\\to0$, $L=\\ln(1/\\epsilon)\\to\\infty$ and $\\ln(e+L/\\tau)=\\Theta(\\ln L)$, since $L/C\\le L/\\tau\\le L/c$. Substituting this comparison into $S$ gives $O(\\tau+L/\\ln L)$, the stated standard-regime form. Correctness remains the separate theorem [F7].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero scalar, zero object, or zero-parameter branch is a separate conclusion in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate construction beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or endpoint limit is a separate conclusion in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "alg-qa-25-small-time-aware-simulator",
+        "def-qa-25-qubitization-access-model",
+        "lem-qa-25-jacobi-anger-truncation",
+        "thm-qa-25-qubitized-simulation-correctness",
+        "thm-qa-25-small-time-aware-simulator-correctness",
+        "thm-qa-25-sparse-hamiltonian-block-encoding-correctness"
+      ],
+      "finite_checks": []
+    },
+    "ex-qa-25-two-dimensional-block-encoding": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-25-hermitian-block-encoding-signal-subspaces",
+          "source_section": "Statement",
+          "quote": "Let $(U,J,\\alpha)$ be an exact Hermitian block encoding from [[def-qa-25-qubitization-access-model]], and choose an orthonormal eigenbasis $K\\psi_j=\\lambda_j\\psi_j$. Put $x_j=\\lambda_j/\\alpha$ and $s_j=\\sqrt{1-x_j^2}$. For $|x_j|<1$, define\n$$\\eta_j=(I-\\Pi)UJ\\psi_j/s_j,\\qquad \\widetilde\\eta_j=(I-\\Pi)U^*J\\psi_j/s_j.$$\nThe $\\eta_j$ are orthonormal in $\\ker\\Pi$, as are the $\\widetilde\\eta_j$. In the paired input basis $(J\\psi_j,\\widetilde\\eta_j)$ and output basis $(J\\psi_j,\\eta_j)$, $U$ has matrix\n$$\\begin{pmatrix}x_j&s_j\\\\s_j&-x_j\\end{pmatrix}.$$\nThe unitary $U^*$ maps in the reverse direction by the same matrix. If $|x_j|=1$, the complement is absent and $UJ\\psi_j=x_jJ\\psi_j=U^*J\\psi_j$; no division by zero is used. The value $x_j=0$ is an ordinary two-dimensional signal plane.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $s^2=1-x^2$, direct multiplication gives $U_x^*=U_x$ and $U_x^2=I$. Also $J^*U_xJ=[x]=K/\\alpha$, so $U_x$ is unitary and has the claimed block encoding. Its clean and complementary components are $U_x|0\\rangle=x|0\\rangle+s|1\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $|x|<1$, then $s>0$, so the normalized complement defined in [F1] is $|1\\rangle$; both input and output paired bases are $(|0\\rangle,|1\\rangle)$, and the matrix is exactly $U_x$. At $x=0$, $s=1$, hence $U_0=X$, confirming that zero is a regular two-dimensional signal plane.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $x=1$ or $x=-1$, then $s=0$ and $U_x|0\\rangle=x|0\\rangle=U_x^*|0\\rangle$. No complement vector is normalized in these cases; this verifies the endpoint convention and the encoded eigenvalue $\\lambda/\\alpha=x$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks x=0, where the signal plane is regular."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks the one-unit or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "lem-qa-25-hermitian-block-encoding-signal-subspaces"
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-dimensional block and endpoint matrices",
+          "method": "exact finite check",
+          "command": "Direct two-by-two multiplication in proof Steps 1.1–2.1.",
+          "inputs": {
+            "x": "0, 1, -1",
+            "s": "sqrt(1-x^2)"
+          },
+          "computation": "Compute U_x^2 and J^*U_xJ; substitute x=0 and x=±1.",
+          "observed": "U_x^2=I and J^*U_xJ=x. At x=0, U_x=X; at x=1 or -1, the clean line is an eigenline with eigenvalue x.",
+          "scope": "Checks the stated block and signal-plane boundary matrices; the general signal-subspace result is proved separately."
+        }
+      ]
+    },
+    "ex-qa-25-parity-no-fast-forwarding": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-25-parity-path-transfer",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal B_n$ be the complex inner-product space with orthonormal basis $\\{|y\\rangle:y\\in\\{0,1\\}^n\\}$. For $1\\le r\\le n$, define $X_r|y_1\\cdots y_n\\rangle=|y_1\\cdots(y_r\\oplus1)\\cdots y_n\\rangle$, and put $J=\\frac12\\sum_{r=1}^nX_r$. For $0\\le i\\le n$, let $|D_i^n\\rangle$ be the normalized uniform sum of basis vectors of Hamming weight $i$; define $\\mathcal S_n=\\operatorname{span}\\{|D_i^n\\rangle:0\\le i\\le n\\}$. On a separate path space with orthonormal basis $\\{|i\\rangle:0\\le i\\le n\\}$, define $H_0$ to have off-diagonal entries $w_i=\\sqrt{i(n+1-i)}/n$ between $|i-1\\rangle$ and $|i\\rangle$ for every 1≤i≤n, and all other matrix entries zero.\n\nLet $n\\ge1$, $x\\in\\{0,1\\}^n$, and $p_0=0,\\ p_i=x_1\\oplus\\cdots\\oplus x_i$. On the basis $\\{|i,b\\rangle:0\\le i\\le n,\\ b\\in\\{0,1\\}\\}$, put\n$$H_x=\\sum_{i=1}^n w_i\\sum_{b=0}^1\\left(|i-1,b\\rangle\\langle i,b\\oplus x_i|+|i,b\\oplus x_i\\rangle\\langle i-1,b|\\right).$$\nWrite $\\operatorname{parity}(x)=p_n=x_1\\oplus\\cdots\\oplus x_n$. The basis permutation $V_x|i,b\\rangle=|i,b\\oplus p_i\\rangle$ conjugates $H_x$ to two copies of $H_0$. The counting identity proved below gives $H_0=(2/n)J|_{\\mathcal S_n}$, under the isometry $|i\\rangle\\mapsto|D_i^n\\rangle$. Consequently $\\|H_x\\|_{\\rm op}\\le1$ and\n$$e^{-iH_x\\pi n/2}|0,0\\rangle=(-i)^n|n,\\operatorname{parity}(x)\\rangle.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+          "source_section": "Statement",
+          "quote": "For a nonzero $d_H$-row-sparse Hermitian $H$, the designated all-zero auxiliary compression of $U_L^*U_R$ from [[alg-qa-25-sparse-hamiltonian-block-encoding]] is $H/(d_Hh_{\\max})$. In the zero case the returned $X_{\\rm flag}\\otimes I$ has zero all-zero-flag compression and normalization $1$. One nonzero-case block-encoding call uses one supplied inverse row-location permutation, one supplied column-location permutation, two entry-value queries (compute and uncompute), and the declared $D_{d_H}$, inverse, flag-rotation, and arithmetic implementations. No constant-cost conversion from XOR locations to in-place permutations is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-25-sparse-no-fast-forwarding-lower-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $H_x$ be the $2(n+1)$-dimensional, at-most-two-sparse Hermitian path matrix of [[lem-qa-25-parity-path-transfer]] for $x\\in\\{0,1\\}^n$, with weights $w_i=\\sqrt{i(n+1-i)}/n$. Put $\\eta=1/(6\\pi n)$, choose $b=\\lceil\\log_2(3\\pi n)\\rceil$, and round each nonzero weight to the nearest dyadic $q_i=2^{-b}\\operatorname{round}(2^bw_i)$, with ties rounded upward. Let $\\widetilde H_x$ be the same path matrix with weights $q_i$, and encode its entries exactly in the row-location/value XOR-oracle model of [[def-qa-20-sparse-hamiltonian-oracle-model]], using $O(\\log(n+1))$ value bits for the finite set $\\{0,q_1,\\ldots,q_n\\}$. Then $\\|H_x-\\widetilde H_x\\|_{\\rm op}\\le2\\eta$ and the sparse normalization $\\alpha_{\\rm sp}=2\\max_i q_i$ lies between positive absolute constants.\n\nSuppose a uniform sparse-oracle query algorithm uses $q$ total row-location and value-oracle calls and returns a clean-input isometry $V_xJ_{\\rm clean}$ satisfying\n$$\\|V_xJ_{\\rm clean}-J_{\\rm out}e^{-it\\widetilde H_x}\\|_{\\rm op}\\le\\tfrac13, \\qquad t=\\pi n/2,$$\nwhere $J_{\\rm out}$ appends its work registers in zero. Then $q\\ge n/4$. Thus this sparse row/value model requires $\\Omega(n)=\\Omega(t)=\\Omega(\\alpha_{\\rm sp}t)$ queries for this family. The result does not assert a lower bound for arbitrary block-encoding access.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $n=2$ gives $w_1=w_2=\\sqrt2/2$. For $b\\in\\{0,1\\}$, edge 1 joins $|0,b\\rangle$ to $|1,b\\oplus x_1\\rangle$, and edge 2 joins $|1,b\\rangle$ to $|2,b\\oplus x_2\\rangle$. Starting with $b=0$, these two edges produce the four paths in the table; each endpoint bit is $x_1\\oplus x_2$. Each internal path vertex has degree two and each endpoint degree one.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $d_H=2$ and $h_{\\max}=1/\\sqrt2$, so [F2] gives $\\alpha_{\\rm sp}=d_Hh_{\\max}=\\sqrt2$. This is the $n=2$ instance of the constant-normalization family in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the parity-free basis, the path matrix is $H_0=\\frac1{\\sqrt2}\\begin{pmatrix}0&1&0\\\\1&0&1\\\\0&1&0\\end{pmatrix},\\qquad H_0^2=\\frac12\\begin{pmatrix}1&0&1\\\\0&2&0\\\\1&0&1\\end{pmatrix}.$ Its eigenvalues are $1,0,-1$, so spectral functional calculus gives $e^{-i\\pi H_0}=I-2H_0^2$, which sends $|0\\rangle$ to $-|2\\rangle$. The prefix-parity basis permutation of [F1] restores the endpoint bit $x_1\\oplus x_2$; equivalently, [F1] gives $(-i)^2=-1$ times the same endpoint.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly checks the one-unit or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "thm-qa-25-sparse-hamiltonian-block-encoding-correctness",
+        "thm-qa-25-sparse-no-fast-forwarding-lower-bound"
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-bit weighted path and transfer",
+          "method": "exact finite matrix calculation",
+          "command": "Enumerate x in {00,01,10,11} and multiply the displayed three-by-three matrix.",
+          "inputs": {
+            "n": "2",
+            "x": "00,01,10,11"
+          },
+          "computation": "Each edge weight is 1/sqrt(2); H_0^2 is the displayed matrix and the eigenvalues of H_0 are -1,0,1.",
+          "observed": "The endpoint bits are 0,1,1,0 respectively; e^{-i pi H_0}|0>=-|2>. The sparse maximum entry is 1/sqrt(2), giving alpha_sp=sqrt(2).",
+          "scope": "Checks the finite n=2 illustration; the lower bound is proved for every n>=1 in the theorem."
+        }
+      ]
+    },
+    "ex-qa-25-chebyshev-truncation": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-25-hamiltonian-simulation-polynomial",
+          "source_section": "Definition",
+          "quote": "For a finite Hermitian $H$ with exact block-encoding normalization $\\alpha>0$, $\\|H\\|_{\\rm op}\\le\\alpha$, and real time $t$, put $\\tau=\\alpha t$. On $x\\in[-1,1]$ the scalar target is $f_\\tau(x)=\\exp(-i\\tau x)$; if $H\\psi_\\lambda=\\lambda\\psi_\\lambda$, then $f_\\tau(\\lambda/\\alpha)=\\exp(-it\\lambda)$, the eigenvalue of the finite matrix evolution [[def-qa-19-finite-matrix-dynamics]].\n\nFor $k\\ge0$, define the Chebyshev polynomials by $T_0(x)=1$, $T_1(x)=x$, $T_{k+1}(x)=2xT_k(x)-T_{k-1}(x)$. Define the Bessel coefficients used here by the series\n$$J_k(\\tau)=\\sum_{j=0}^{\\infty}\\frac{(-1)^j(\\tau/2)^{2j+k}}{j!(j+k)!}.$$\nFor fixed $k,\\tau$, the ratio of consecutive absolute summands is $\\tau^2/[4(j+1)(j+k+1)]\\to0$, so this series converges absolutely and defines $J_k(\\tau)$ before any estimate is used. The exponential uses the series convention of [[def-complex-exponential]], whose absolute convergence is supplied by [[lem-complex-exponential-series-converges-everywhere]]. This definition specifies the target and coefficient series; it does not assert a Jacobi–Anger expansion or a truncation bound. A real QSP or QSVT theorem alone does not implement this full complex, non-parity target; the finite even/odd combination, complementary-polynomial certificates, normalization, and controlled relative phase are separate operations in the binding simulator.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-25-jacobi-anger-truncation",
+          "source_section": "Statement",
+          "quote": "With $J_k,T_k$ defined in [[def-qa-25-hamiltonian-simulation-polynomial]], for every real $\\tau$ and integer $d\\ge0$,\n$$\\sup_{|x|\\le1}\\left|\\exp(-i\\tau x)-\\left(J_0(\\tau)+2\\sum_{k=1}^{d}(-i)^kJ_k(\\tau)T_k(x)\\right)\\right| \\le 2\\sum_{k>d}|J_k(\\tau)| \\le \\frac{2(|\\tau|/2)^{d+1}}{(d+1)!\\left(1-|\\tau|/(2(d+2))\\right)}$$\nwhenever $|\\tau|/(2(d+2))<1$. In the OP4 simulator, $\\rho=\\epsilon^2/10000$ and the factorial-tail stopping test therefore certifies truncation error at most $\\rho/8$; rounding each coefficient to error at most $\\rho/(32(d+1))$ keeps the combined polynomial error below $\\rho$. For the nontrivial simulation regime $|\\tau|>\\epsilon$, an integer $d$ passing OP4's test exists with\n$$d=O\\left(|\\tau|+\\frac{\\ln(1/\\epsilon)}{\\ln(e+\\ln(1/\\epsilon)/|\\tau|)}\\right).$$\nFor $|\\tau|\\le\\epsilon$, the constant polynomial $1$ approximates the target within $\\epsilon$; the wrapper algorithm uses the exact identity circuit in that branch.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The recurrence gives $T_2(x)=2xT_1(x)-T_0(x)=2x^2-1$. The $k=0$ term of the Chebyshev expansion is $J_0$; the $k=1$ coefficient is $2(-i)J_1=-2iJ_1$; and the $k=2$ coefficient is $2(-i)^2J_2=-2J_2$. Therefore the degree-two truncation is exactly the displayed $P_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The series in [F1] is real for real $\\tau$, so $J_0,J_1,J_2$ are real. Since $T_2$ is even and $T_1$ is odd, $\\operatorname{Re}P_2=J_0-2J_2T_2$ is even and $\\operatorname{Im}P_2=-2J_1T_1$ is odd. Applying [F2] with $d=2$ gives the uniform tail $2\\sum_{k>2}|J_k(\\tau)|$; its factorial denominator condition is $|\\tau|/[2(2+2)]=|\\tau|/8<1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $\\tau=0$, the series gives $J_0(0)=1$ and $J_1(0)=J_2(0)=0$, so $P_2(x)=1=e^0$. At $x=\\pm1$, $T_1(x)=x$ and $T_2(x)=1$, and the same tail bound from [F2] applies without an endpoint exception.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns fixed finite-dimensional objects, not an empty input family or empty list; no empty-family extension is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton input or unit-parameter boundary is separate from the stated general case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks the endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary selection from a nonempty family; finite bases and constructions are explicit under the stated hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no separate reverse implication."
+        }
+      ],
+      "unresolved_suppliers": [
+        "def-qa-25-hamiltonian-simulation-polynomial",
+        "lem-qa-25-jacobi-anger-truncation"
+      ],
+      "finite_checks": [
+        {
+          "name": "Degree-two Chebyshev parity check",
+          "method": "exact coefficient expansion",
+          "command": "Expand the k=0,1,2 terms in proof Step 1.1.",
+          "inputs": {
+            "degree": "2",
+            "parameter": "real tau"
+          },
+          "computation": "Use (-i)^1=-i, (-i)^2=-1, T_1=x, and T_2=2x^2-1.",
+          "observed": "P_2=J_0-2J_2(2x^2-1)-2iJ_1x; its real part is even and imaginary part is odd.",
+          "scope": "Checks finite truncation coefficients and parity; the infinite remainder is bounded by the cited local lemma."
+        }
+      ]
+    }
+  }
+}

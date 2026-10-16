@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-canonical-banach-complexification-of-a-real-banach-space.json
 id: lem-canonical-banach-complexification-of-a-real-banach-space
 kind: lemma
 title: Canonical Banach complexification of a real Banach space
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: ["def-banach-space", "def-norm-and-normed-space", "def-bounded-linear-operator", "def-operator-norm", "def-complex-numbers-and-arithmetic", "def-complex-conjugate-real-imaginary-part-and-modulus", "def-complete-ordered-field", "thm-sine-and-cosine-addition-formulas", "thm-polar-form-with-unique-principal-argument", "thm-complex-numbers-form-a-field", "lem-complex-conjugation-and-modulus-laws", "rem-real-and-complex-normed-space-convention", "cor-cauchy-reals-lub-complete", "cor-trigonometric-parity-and-pythagorean-identity", "thm-quarter-turn-values-and-shift-formulas"]
+deps: [def-banach-space, def-norm-and-normed-space, def-bounded-linear-operator, def-operator-norm, def-complex-numbers-and-arithmetic, def-complex-conjugate-real-imaginary-part-and-modulus, def-complete-ordered-field, thm-sine-and-cosine-addition-formulas, thm-polar-form-with-unique-principal-argument, thm-complex-numbers-form-a-field, lem-complex-conjugation-and-modulus-laws, def-complex-norm-and-complex-normed-space, cor-cauchy-reals-lub-complete, cor-trigonometric-parity-and-pythagorean-identity, thm-quarter-turn-values-and-shift-formulas]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -17,8 +19,6 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.1, printed pp. 19–24"
       url: "https://arxiv.org/pdf/1211.3404"
-verification:
-  audited: 2026-09-22
 ---
 
 ## Statement
@@ -35,7 +35,7 @@ $X_{\mathbb C} := X \times X$ carry
 Then:
 
 1. $\rho$ is a norm on the complex vector space $X_{\mathbb C}$ (the complex norm
-   axioms of [[rem-real-and-complex-normed-space-convention]]), and $X_{\mathbb C}$ is complete
+   axioms of [[def-complex-norm-and-complex-normed-space]]), and $X_{\mathbb C}$ is complete
    for it, hence a complex Banach space;
 2. $j : X \to X_{\mathbb C}$, $j(x) := (x,0)$, is a real-linear isometry, and
    for every bounded real-linear $T : X \to X$ the map
@@ -63,7 +63,7 @@ comparison model has the same rotation-supremum norm under its unique coordinate
 
 **Given:** A real Banach space $X$ with norm $\|\cdot\|$; the set $X_{\mathbb C} = X \times X$ with complex scalar multiplication $(a+bi)(x,y) = (ax-by,bx+ay)$; the function $\rho(x,y) = \sup_\theta\|\cos\theta x - \sin\theta y\|$.
 
-[L1] $X$ is a real normed space that is complete: $\|x\| \ge 0$ with equality only for $x = 0$, $\|\lambda x\| = |\lambda|\,\|x\|$ for real $\lambda$, and $\|x+y\| \le \|x\|+\|y\|$; the closed unit ball and all bounded sets are as in [[def-norm-and-normed-space]], and completeness is [[def-banach-space]]. For complex spaces we use the modulus-homogeneity convention of [[rem-real-and-complex-normed-space-convention]].
+[L1] $X$ is a real normed space that is complete: $\|x\| \ge 0$ with equality only for $x = 0$, $\|\lambda x\| = |\lambda|\,\|x\|$ for real $\lambda$, and $\|x+y\| \le \|x\|+\|y\|$; the closed unit ball and all bounded sets are as in [[def-norm-and-normed-space]], and completeness is [[def-banach-space]]. For complex spaces we use the modulus-homogeneity convention of [[def-complex-norm-and-complex-normed-space]].
 
 [L2] $\mathbb C$ is a field with the specified real subfield, $|\mu| \ge 0$ vanishes exactly at $\mu = 0$, and $|\mu\nu| = |\mu|\,|\nu|$ ([[thm-complex-numbers-form-a-field]], [[lem-complex-conjugation-and-modulus-laws]]).
 

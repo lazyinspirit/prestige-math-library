@@ -1,0 +1,491 @@
+[
+  {
+    "order": 2192,
+    "id": "uniform-circuit-families-promise-problems-and-complexity",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Uniform Circuit Families, Promise Problems, and Complexity",
+    "companion": "uniform-circuit-families-promise-problems-and-complexity-examples",
+    "requires": [
+      "approximate-universality-and-solovay-kitaev",
+      "boolean-circuits-and-nonuniform-complexity",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "clifford-t-exact-and-approximate-synthesis",
+      "continuous-gate-universality-and-exact-synthesis",
+      "effective-numberings-reductions-resources-and-randomness",
+      "finite-probability-spaces-and-random-variables",
+      "formal-languages-encodings-and-decision-problems",
+      "hilbert-space-geometry-and-riesz-representation",
+      "inner-product-spaces-and-orthogonality",
+      "logarithmic-space-nl-and-reachability",
+      "measurements-povms-and-instruments",
+      "randomized-complexity-and-amplification",
+      "registers-tensor-products-and-partial-trace",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "the-polynomial-hierarchy-and-relativization",
+      "trace-distance-fidelity-and-information-limits"
+    ],
+    "items": [
+      {
+        "id": "def-qc-circuit-cost-model",
+        "kind": "definition",
+        "title": "Circuit-family and computation cost model",
+        "statement": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, and $w(C)$ its total number of wires.\n\nEach clean or dirty ancilla coordinate additionally requires a declared ordered partition of the circuit wires into data register $D$ and ancilla register $A$, and a declared target unitary $V$ on $D$. In that factor order, the complete circuit unitary must satisfy the corresponding exact contract of [[def-qc-clean-and-dirty-ancillas]]. For such a supplied clean contract set $a_{\\rm clean}(C)=|A|$, and for such a supplied dirty contract set $a_{\\rm dirty}(C)=|A|$; the notation suppresses the declared interface, which is part of the cost instance and may differ between the two coordinates. If no corresponding contract is supplied, mark that coordinate not applicable. These are counts of declared contract registers, not maxima over possible partitions. Zero initialization alone supplies neither return contract. Every auxiliary wire remains counted in $w(C)$ ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-effective-binary-encoding-and-decoder",
+          "def-deterministic-one-tape-turing-machine",
+          "def-partial-function-computed-by-a-machine",
+          "def-worst-case-time-and-space-complexity"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections III.2 and IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qc-promise-computation-model",
+        "kind": "definition",
+        "title": "Finite quantum promise-computation model",
+        "statement": "Let $\\Pi=(Y,N)$ be a promise problem: $Y,N\\subseteq\\{0,1\\}^*$ are disjoint, and no answer is required outside $Y\\cup N$ ([[def-promise-problem]]). For every input length $n\\ge0$, let $a(n)\\in\\mathbb N$ be the number of auxiliary qubits. The $n$ input wires are ordered with the first wire most significant: for $x=(x_0,\\ldots,x_{n-1})$, $|x\\rangle$ is the computational-basis vector indexed by\n$$\\operatorname{enc}_n(x)=\\sum_{k<n}x_k2^{n-1-k}$$\n([[def-qc-register-and-computational-basis]], [[def-qc-ordered-bitstring-encoding]]). The auxiliary register has $a(n)$ wires and is initialized to $|0^{a(n)}\\rangle$. When $n=0$ or $a(n)=0$, the corresponding zero-qubit register is the one-dimensional space $\\mathbb C$, not the zero vector space.\n\nFor each $n$, a finite circuit $C_n$ acts on the ordered register of $n+a(n)$ wires and has the unitary denotation $U_{C_n}$ specified by [[def-qc-circuit-syntax-and-register-order]] and [[def-qc-circuit-denotational-semantics]]. The circuit syntax designates an ordered tuple of distinct output-wire indices; an acceptance specification uses that same tuple $O_n$, whose indices lie in $\\{0,\\ldots,n+a(n)-1\\}$. It consists of this tuple and a total predicate $A_n(x,z)\\in\\{0,1\\}$ for $x\\in\\{0,1\\}^n$ and $z\\in\\{0,1\\}^{|O_n|}$. The tuple may be empty; then its measured output set contains only the empty word. Auxiliary wires are initialized to zero, but this definition does not require them to return to zero after the computation; that stronger clean-ancilla condition is defined in [[def-qc-clean-and-dirty-ancillas]].\n\nA **finite quantum promise computation** is the data $(\\Pi,(C_n)_{n\\ge0},a,O,A)$ with these registers and predicates. Its output is classical: measure only the named output wires in the computational basis and accept exactly when $A_n(x,z)=1$. No intermediate measurement is part of this base model. Unless a full-list uniformity condition is imposed separately, the family need not be generated uniformly. When uniformity or cost is claimed, $A$ is supplied by one fixed deterministic Turing machine with an explicit polynomial worst-case time bound in the encoded pair $(x,z)$ ([[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], [[def-worst-case-time-and-space-complexity]]). This is a mathematical finite-circuit model and makes no assertion about physical realization.",
+        "deps": [
+          "def-promise-problem",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-deterministic-one-tape-turing-machine",
+          "def-partial-function-computed-by-a-machine",
+          "def-worst-case-time-and-space-complexity"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections IV.1–IV.2",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qc-uniform-circuit-family",
+        "kind": "definition",
+        "title": "Full-list uniform quantum circuit family",
+        "statement": "A **full-list uniform quantum circuit family** is a sequence $(C_n)_{n\\ge0}$ together with one fixed deterministic one-tape Turing machine $G$ and constants $c\\ge1$ and $k\\in\\mathbb N$ such that, on input the unary word $1^n$, $G$ halts within $c(n+1)^k$ transitions and its final tape is a valid self-delimiting binary description of the entire circuit $C_n$. The machine output convention is that of [[def-deterministic-one-tape-turing-machine]] and [[def-partial-function-computed-by-a-machine]], and running time is as in [[def-worst-case-time-and-space-complexity]].\n\nThe following fixed-order code makes the full circuit and its designated input/output wires effective. A unary natural $r\\in\\mathbb N$ is written $1^r0$, including the one-symbol code $0$ for $r=0$. A self-delimiting binary natural $r$ is written $1^{|\\operatorname{bin}(r)|}0\\operatorname{bin}(r)$, where $\\operatorname{bin}(r)$ is its ordinary binary numeral with no leading zeros and $\\operatorname{bin}(0)=0$. The header gives the input-wire count $n$ and total wire count $m$ in unary, followed by the gate count $g$ as a self-delimiting natural; validity requires $m\\ge n$.\n\nEach gate record consists of a two-bit label ($00,01,10,11$ for $H,T,T^\\dagger,\\mathrm{CNOT}$ respectively), followed by one self-delimiting wire index for $H,T,T^\\dagger$ and two ordered self-delimiting indices for CNOT. Every index is less than $m$; CNOT indices are distinct, with the first the control and the second the target. The list contains exactly $g$ records. After the gate list, an output-count self-delimiting natural is followed by that many ordered, pairwise distinct wire indices, each less than $m$. Parsing rejects every other label, malformed or out-of-range index, repeated output index, truncated field, or trailing bit. This defines a total decoder by returning a fixed malformed-code symbol on any invalid word; effective binary encodings and total decoders are as in [[def-effective-binary-encoding-and-decoder]].\n\nThe gate labels and matrices are the fixed finite library $H,T,T^\\dagger,\\mathrm{CNOT}$ of [[def-qc-clifford-t-gate-library]], with entries in $\\mathbb Q(\\zeta_8)=\\mathbb Q(i,\\sqrt2)$; CNOT is control-first. The remaining $m-n$ wires are auxiliary wires; their initial states are determined when a family is used in a computation model. This family convention adopts full-list generation. It makes no equivalence claim with indexed-gate uniformity and, in particular, does not assert that an indexed-gate generator can be expanded to the full list in polynomial time.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "def-deterministic-one-tape-turing-machine",
+          "def-partial-function-computed-by-a-machine",
+          "def-worst-case-time-and-space-complexity",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections III.2 and IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qc-quantum-acceptance-probability",
+        "kind": "definition",
+        "title": "Quantum acceptance probability for a finite promise computation",
+        "statement": "Fix a length-$n$ finite promise computation from [[def-qc-promise-computation-model]], with input $x\\in\\{0,1\\}^n$, zero-initialized auxiliary register $|0^{a(n)}\\rangle$, circuit unitary $U_{C_n}$, and ordered output-wire tuple $O_n$. Let $P_{O_n}$ be the tensor-factor permutation that moves $O_n$, in its declared order, to the front, and let $W_n$ be the ordered tuple of all remaining wires ([[def-qc-tensor-register-and-permutation]]). Set\n$$\\psi_x:=U_{C_n}(|x\\rangle\\otimes|0^{a(n)}\\rangle),\\qquad v_x:=\\operatorname{coord}(P_{O_n}\\psi_x).$$\nHere coordinates are in the ordered computational basis, and the root inner product is linear in its first argument and conjugate-linear in its second ([[def-real-and-complex-inner-product-space]]). For $z\\in\\{0,1\\}^{|O_n|}$ and $w\\in\\{0,1\\}^{|W_n|}$, write $e_{z,w}$ for the corresponding product-basis vector and define\n$$p_{C_n}(z\\mid x):=\\sum_{w\\in\\{0,1\\}^{|W_n|}}\\left|\\langle P_{O_n}\\psi_x,e_{z,w}\\rangle_{\\rm root}\\right|^2.$$\nThe acceptance probability is\n$$p_{C_n}(x):=\\sum_{\\substack{z\\in\\{0,1\\}^{|O_n|}\\\\A_n(x,z)=1}}p_{C_n}(z\\mid x).$$\nEquivalently, if $E_{A,x}$ is the diagonal projection onto the basis vectors $(z,w)$ with $A_n(x,z)=1$, then $p_{C_n}(x)=\\operatorname{Tr}(E_{A,x}v_xv_x^\\dagger)$; the matrix adjoint is conjugate transpose in an orthonormal basis ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]).\n\nThese are finite sums. The definition itself does not assert normalization, positivity of the resulting operator expression, or a probability bound; those consequences are the purpose of [[thm-qc-output-acceptance-law-normalizes]]. No Dirac bra convention is used here: every amplitude uses the root pairing displayed above.",
+        "deps": [
+          "def-qc-promise-computation-model",
+          "def-real-and-complex-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections III.2 and IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qc-uniform-family-size-bound",
+        "kind": "lemma",
+        "title": "A full-list uniform generator bounds circuit size and width",
+        "statement": "If the generator in [[def-qc-uniform-circuit-family]] halts on input $1^n$ within $T(n)\\le c(n+1)^k$ transitions, then the generated description has length at most $n+T(n)+O(1)$. Consequently its number of gates and total number of wires are polynomial in $n$. This is a full-list size bound; it does not establish equivalence with indexed-gate uniformity.",
+        "deps": [
+          "def-qc-uniform-circuit-family",
+          "def-deterministic-one-tape-turing-machine",
+          "def-partial-function-computed-by-a-machine"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-qc-oracle-full-list-circuit-family",
+        "kind": "definition",
+        "title": "Oracle-aware full-list quantum circuit family",
+        "statement": "An **oracle-aware full-list family** has an access specification and a deterministic polynomial-time full-list generator on unary input $1^n$, with the same machine, clock, and final-tape conventions as [[def-qc-uniform-circuit-family]]. The access specification gives, at each length $n$, finitely many named ports $\\mathcal O_{n,j}$, each a unitary on a positive number $k_{n,j}$ of qubits. These are mathematical unitary data supplied by the access specification, not matrices computed by the generator. For a parametrized oracle instance, fix that instance throughout a computation and all its repetitions. The generator, printed descriptors, and final classical predicate are independent of the hidden instance: its influence enters only through the granted unitary ports. Any public parameters are fixed explicitly as part of the family specification; oracle comparisons hold them fixed. A port acts only on the wires in its occurrence; there is no persistent private oracle memory, stochastic resampling, or communication between disjoint occurrences through hidden registers.\n\nEach port has a descriptor: a distinct nonempty binary name, its width $k_{n,j}$, and four grant bits for forward, inverse, controlled-forward, and controlled-inverse access. At least one variant is granted. A granted variant has an explicitly specified positive integer query charge $c_{n,j,v}$; an ungranted variant cannot occur. Forward and inverse have arity $k_{n,j}$; controlled variants have arity $k_{n,j}+1$, with the first wire the control and the remaining ordered wires the target. Their mathematical actions are respectively $\\mathcal O_{n,j}$, $\\mathcal O_{n,j}^{\\dagger}$, and the corresponding controlled unitary (identity on control $0$, the indicated unitary on control $1$). Mathematical existence of an inverse or controlled unitary grants no access to it. The descriptors printed by the generator must agree with the supplied access specification at every length; syntactic decoding alone does not decide this semantic condition.\n\nThe following is a separate binary format; the original two-bit Clifford+T format of [[def-qc-uniform-circuit-family]] remains unchanged. Use its unary and self-delimiting natural codes. The header gives $n,m$ in unary with $m\\ge n$, then the total number $g$ of operation occurrences and the number of port descriptors as self-delimiting naturals. Each descriptor gives the name length as a self-delimiting natural followed by exactly that many name bits, the positive port width in unary, four grant bits in the order above, and one positive self-delimiting charge for each granted variant in that order. Descriptor order fixes port indices starting at zero.\n\nThe header and descriptors are followed by exactly $g$ operation records. A three-bit label $000,001,010,011$ denotes respectively ordinary $H,T,T^{\\dagger},\\mathrm{CNOT}$ and is followed by the same ordered wire-index fields as in the original format. Label $100$ denotes an oracle slot: a self-delimiting port index, a two-bit variant index in the descriptor order, and exactly the variant's arity many ordered self-delimiting wire indices. Every index is below $m$, and wires within each record are distinct. The final output-count and ordered distinct output-wire list use the original format. All other labels, duplicate names, ungranted variants, invalid fields, truncations, and trailing bits are rejected. As in the original code, the decoder is total by returning a malformed-code symbol on rejection. The generator prints this entire description, including every descriptor and every slot, within its explicit polynomial clock. The port count, widths, names, and charges must therefore fit in that printed description; neither an exponentially long list nor an implicit operation subroutine counts as full-list output.\n\nFor a fixed length and oracle instance, instantiating the slots gives an ordinary finite unitary circuit with a finite enlarged gate alphabet in the sense underlying [[def-qc-uniform-circuit-family]]. Use the ordered wire embedding and chronological composition of that item. Zero auxiliary initialization, final output measurement, and a separately supplied total polynomial-time classical predicate are exactly those of [[def-qc-promise-computation-model]]; acceptance is the finite coordinate sum in [[def-qc-quantum-acceptance-probability]]. No oracle call is performed by the classical generator or predicate unless a separate classical access interface is declared; here neither is granted one.\n\nIn the cost convention of [[def-qc-circuit-cost-model]], $g(C)$ counts all operation occurrences. Write $g_{\\rm ord}(C)$ for the number of ordinary records and $N_{j,v}(C)$ for the number of slots for port $j$, variant $v$. Thus $g(C)=g_{\\rm ord}(C)+\\sum_{j,v}N_{j,v}(C)$. Record the raw call count $q_j(C)=\\sum_vN_{j,v}(C)$ and, separately, the declared charged query cost $Q_j(C)=\\sum_v c_{n,j,v}N_{j,v}(C)$. A polynomial bound on the binary description length does not imply a polynomial bound on $Q_j$ if charges have large binary values. Ordinary CNOT records incur ordinary gate cost and no query, even if a named port happens to have the same matrix. Oracle records remain query records even when their matrices admit an ordinary implementation; substituting such an implementation is a separate construction and cost claim.\n\nThe **ordinary mode** instead uses the exact original full-list code with no ports or query slots. In particular the oracle-aware format does not enlarge the gate library or alter the exact arithmetic convention of the QC14 BQP definition.",
+        "deps": [
+          "def-qc-uniform-circuit-family",
+          "def-qc-circuit-cost-model",
+          "def-qc-promise-computation-model",
+          "def-qc-quantum-acceptance-probability"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections III.2 and IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapters 2 and 13",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qc-bounded-error-amplification",
+        "kind": "algorithm",
+        "title": "Bounded-error repetition amplification",
+        "statement": "**Inputs.** In ordinary mode, a full-list uniform family generator $G$ in the exact fixed-library format of [[def-qc-uniform-circuit-family]]; or, in oracle mode, an oracle-aware full-list generator and its granted access specification as in [[def-qc-oracle-full-list-circuit-family]]. In either mode supply a total deterministic acceptance-predicate machine $A$ and explicit polynomial clock bounds, with zero auxiliary initialization, output tuples, and acceptance as in [[def-qc-promise-computation-model]] and [[def-qc-quantum-acceptance-probability]]; machines that output exact binary rationals $\\alpha(n),\\beta(n),\\delta(n)$ with explicit polynomial clock bounds; and a fixed positive integer-valued polynomial $s(n)$ with an exact rational-coefficient representation. The machine descriptions and clock bounds are fixed parts of the input data, and each rational output has polynomial bit length. Valid inputs satisfy, for every $n$,\n$$0\\le \\beta(n)<\\alpha(n)\\le1,\\qquad \\alpha(n)-\\beta(n)\\ge\\frac1{s(n)},\\qquad 0<\\delta(n)\\le\\frac12.$$\nThe procedure checks the clock and syntax at each requested length and returns INVALID if a run exceeds its supplied clock, a code is malformed, or any displayed inequality fails. Its domain consists of descriptions whose stated polynomial bounds and inequalities hold for all $n$; the procedure does not decide that global validity property for arbitrary machine descriptions.\n\n**Instructions at length $n$.**\n\n1. Run the supplied machines within their polynomial clocks to obtain the full description of $C_n$, $\\alpha=\\alpha(n)$, $\\beta=\\beta(n)$, and $\\delta=u/v$ with positive integers $u,v$. In oracle mode, also compare the printed port descriptors with the supplied access specification at length $n$; on any mismatch return INVALID. Evaluate $s(n)$ exactly from its fixed rational-coefficient polynomial. Check that it is a positive integer, check exact rational syntax, and check the validity inequalities by integer arithmetic; on failure return INVALID.\n2. Let $\\ell(v)$ be the number of binary digits of $v$ and set\n$$r:=2s^2\\bigl(\\ell(v)+1\\bigr).$$\nThis is a positive integer. No logarithm or irrational ceiling is evaluated.\n3. Allocate $r$ disjoint copies of the entire $C_n$ wire register in block order, with block $1$ first. Put the classical-basis input $|x\\rangle$ on the first block's first $n$ wires; initialize every other wire to zero. For $j=2,\\ldots,r$ in increasing order, and then $i=0,\\ldots,n-1$ in increasing order, append a CNOT from wire $i$ of block $1$ to wire $i$ of block $j$, with the first wire as control. These operations map $|x\\rangle|0^n\\rangle^{\\otimes(r-1)}$ to $|x\\rangle^{\\otimes r}$ and do not clone arbitrary superpositions. Then, for blocks $j=1,\\ldots,r$ in order, append the records of $C_n$ in their supplied chronological order, shifting each wire index by $(j-1)w(C_n)$. This serializes each base circuit's records; gates listed in a common layer have disjoint supports, so serialization preserves its denotation. Keep the first block's $n$ input wires first in the output wire order and encode input count $n$; every other wire is auxiliary. In oracle mode, retain each slot's port and granted variant, shift only its ordered wire indices by the block offset, and copy the access descriptors once. The added CNOTs are ordinary records, never query slots. The repeated circuit has $r w(C_n)$ wires and $r g(C_n)+n(r-1)$ operation occurrences; in oracle mode its ordinary count is $r g_{\\rm ord}(C_n)+n(r-1)$.\n4. Concatenate the $r$ copies of the declared output tuple in copy order and measure that tuple at the final readout. For measured strings $z_1,\\ldots,z_r$, compute $S=\\#\\{i:A_n(x,z_i)=1\\}$. The single total output predicate returns YES exactly when $2S\\ge r(\\alpha+\\beta)$, evaluated exactly: if $\\alpha=A/B$ and $\\beta=C/D$ with positive denominators, compare $2SBD$ with $r(AD+CB)$. Return NO otherwise.\n\nThe output is one full-list repeated circuit in the input mode's format and its total classical predicate. Ordinary mode uses only the original fixed library. In oracle mode every base port/variant occurrence is repeated $r$ times: $N_{j,v}$, raw call counts $q_j$, and charged query costs $Q_j$ all scale by $r$, with unchanged grants and per-call charges ([[def-qc-oracle-full-list-circuit-family]]). Query costs remain separate from ordinary gates and classical bit costs ([[def-qc-circuit-cost-model]]). The endpoint comparison is classical postprocessing, not an intermediate measurement or coherent amplitude-amplification step. Correctness, uniformity, and resource bounds are separate claims proved by [[thm-qc-bounded-error-amplification-correct]].",
+        "deps": [
+          "def-qc-uniform-circuit-family",
+          "def-qc-oracle-full-list-circuit-family",
+          "def-qc-promise-computation-model",
+          "def-qc-quantum-acceptance-probability",
+          "def-qc-circuit-cost-model",
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.2",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2 and Appendix B.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qc-acceptance-probability-phase-invariance",
+        "kind": "lemma",
+        "title": "Acceptance is invariant under an unconditional global phase",
+        "statement": "For a finite promise computation, replacing its entire unconditional circuit unitary $U_C$ by $\\lambda U_C$, where $\\lambda\\in\\mathbb C$ and $|\\lambda|=1$, leaves every output probability $p_C(z\\mid x)$ and hence $p_C(x)$ unchanged. A scalar inserted only in the target block of a controlled operation need not preserve acceptance: there is an explicit two-qubit finite-circuit witness below.",
+        "deps": [
+          "def-qc-quantum-acceptance-probability",
+          "def-promise-problem",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections III.2 and IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-qc-output-acceptance-law-normalizes",
+        "kind": "theorem",
+        "title": "The partial-output acceptance law is a finite probability law",
+        "statement": "For every finite promise computation, every length $n$, and every classical input $x\\in\\{0,1\\}^n$, the output weights $p_{C_n}(z\\mid x)$ from [[def-qc-quantum-acceptance-probability]] are nonnegative and sum to one over $z\\in\\{0,1\\}^{|O_n|}$. The acceptance probability is the probability of the event $\\{z:A_n(x,z)=1\\}$, lies in $[0,1]$, and agrees with the finite computational-basis POVM outcome law on the named output register.",
+        "deps": [
+          "def-qc-quantum-acceptance-probability",
+          "def-qc-promise-computation-model",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-finite-probability-space-and-event",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "def-real-and-complex-inner-product-space",
+          "def-trace-of-an-endomorphism",
+          "def-matrix-product-and-identity-matrix",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections III.2 and IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-qc-bqp-promise-class",
+        "kind": "definition",
+        "title": "BQP for promise problems in the fixed QC14 model",
+        "statement": "A promise problem $\\Pi=(Y,N)$ belongs to **BQP in the QC14 model** when there exist a full-list uniform family $(C_n)$ and a polynomial-time acceptance predicate $A_n$ as in [[def-qc-uniform-circuit-family]] and [[def-qc-quantum-acceptance-probability]] such that, for every $x\\in Y$,\n$$p_{C_{|x|}}(x)\\ge\\frac23,$$\nand for every $x\\in N$,\n$$p_{C_{|x|}}(x)\\le\\frac13.$$\nBy [[thm-qc-output-acceptance-law-normalizes]], $p_{C_n}(x)$ is the probability of the specified acceptance event and lies in $[0,1]$. No condition is imposed for $x\\notin Y\\cup N$ ([[def-promise-problem]]). The gate alphabet is exactly $H,T,T^\\dagger,\\mathrm{CNOT}$; its matrix entries lie in $\\mathbb Q(\\zeta_8)=\\mathbb Q(i,\\sqrt2)$ as specified by [[def-qc-uniform-circuit-family]]. This definition does not assert a BQP-versus-classical separation, nor does it assert an unproved equivalence with another circuit-uniformity convention.",
+        "deps": [
+          "def-promise-problem",
+          "def-qc-uniform-circuit-family",
+          "def-qc-quantum-acceptance-probability",
+          "thm-qc-output-acceptance-law-normalizes"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections IV.1–IV.2",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qc-bounded-error-amplification-correct",
+        "kind": "theorem",
+        "title": "Bounded-error repetition amplification is correct and uniform",
+        "statement": "Assume the input family, rational threshold functions, gap polynomial, and clocks satisfy the valid-input conditions of [[alg-qc-bounded-error-amplification]]. Assume also that the base acceptance satisfies $p_{C_n}(x)\\ge\\alpha(n)$ for every length-$n$ YES input and $p_{C_n}(x)\\le\\beta(n)$ for every length-$n$ NO input, where $0\\le\\beta(n)<\\alpha(n)\\le1$ and $\\alpha(n)-\\beta(n)\\ge1/s(n)$. On every input in the YES promise set, the amplified acceptance probability is at least $1-\\delta(n)$; on every input in the NO promise set, it is at most $\\delta(n)$. If $g(C_n)$ and $w(C_n)$ are the base gate count and total wire count, the repeated family has gate count $r(n)g(C_n)+n(r(n)-1)$ and width $r(n)w(C_n)$. Its depth, complete-description length, generator time, and classical predicate time and space are polynomial in $n$. Ordinary mode retains the exact original fixed gate library and full-list code. In oracle mode its ordinary gate count is $r(n)g_{\\rm ord}(C_n)+n(r(n)-1)$, every port/variant count satisfies $N_{j,v}(C_n^{\\rm rep})=r(n)N_{j,v}(C_n)$, and both raw query counts $q_j$ and charged query costs $Q_j$ are multiplied by $r(n)$ with the same granted access. Raw query counts are polynomial; charged query costs are polynomial whenever the base charged costs are polynomial. For a base clean or dirty interface whose declared ancillary register is disjoint from the first $n$ input wires, the input-copy stage acts only on data, and the corresponding exact contract is preserved with its declared register count multiplied by $r(n)$; the extra input-copy wires remain in total width and are not counted as returned clean ancillas.",
+        "deps": [
+          "alg-qc-bounded-error-amplification",
+          "def-qc-oracle-full-list-circuit-family",
+          "def-qc-promise-computation-model",
+          "def-qc-circuit-cost-model",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-clifford-t-gate-library",
+          "def-finite-probability-space-and-event",
+          "lem-chernoff-bound-for-independent-bernoulli-trials",
+          "thm-qc-output-acceptance-law-normalizes",
+          "lem-qc-uniform-family-size-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.2",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2 and Appendix B.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-qc-bqp-error-robustness",
+        "kind": "theorem",
+        "title": "BQP is unchanged by polynomially small bounded error",
+        "statement": "Let $q:\\mathbb N\\to\\mathbb N$ be computable in deterministic polynomial time and polynomially bounded, with $q(n)\\ge2$ for all sufficiently large $n$. For every promise problem, the following are equivalent in the QC14 full-list model:\n\n1. it has a uniformly generated family and polynomial-time acceptance predicate with acceptance at least $2/3$ on YES and at most $1/3$ on NO;\n2. it has a uniformly generated family and polynomial-time acceptance predicate with acceptance at least $1-2^{-q(n)}$ on YES and at most $2^{-q(n)}$ on NO.\n\nMore generally, suppose a uniformly generated family with a polynomial-time acceptance predicate satisfies $p_{C_n}(x)\\ge\\alpha(n)$ on length-$n$ YES inputs and $p_{C_n}(x)\\le\\beta(n)$ on length-$n$ NO inputs, where $\\alpha(n),\\beta(n)$ are polynomial-time computable rationals and there is a positive integer-valued polynomial $s(n)$ such that $0\\le\\beta(n)<\\alpha(n)\\le1$ and $\\alpha(n)-\\beta(n)\\ge1/s(n)$ for all sufficiently large $n$. It can be modified to achieve the same exponentially small target error $2^{-q(n)}$. This result does not assert the gap-only implication $\\mathrm{BQP}(\\alpha,\\beta)=\\mathrm{BQP}$ for arbitrary endpoint thresholds.",
+        "deps": [
+          "thm-qc-bounded-error-amplification-correct",
+          "def-qc-bqp-promise-class",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.2",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2 and Appendix B.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2193,
+    "id": "uniform-circuit-families-promise-problems-and-complexity-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Uniform Circuit Families, Promise Problems, and Complexity — Examples",
+    "companion": "uniform-circuit-families-promise-problems-and-complexity",
+    "requires": [
+      "uniform-circuit-families-promise-problems-and-complexity"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-bqp-promise-off-domain",
+        "kind": "example",
+        "title": "A BQP promise pair with unrestricted off-promise inputs",
+        "statement": "Let $Y=\\{0\\}$ and $N=\\{1\\}$ as subsets of $\\{0,1\\}^*$. They are disjoint, and every other binary word is off the promise. For each $n\\ge1$, let $C_n$ be the gate-free identity circuit with the first input wire as its one-bit output. For $n=0$, let $C_0$ have one zero-initialized auxiliary wire as output. Use one total predicate that accepts exactly when $x$ is the one-bit word $0$ and the measured output is $0$.",
+        "deps": [
+          "def-qc-bqp-promise-class",
+          "def-promise-problem",
+          "def-qc-uniform-circuit-family"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections II.2 and IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

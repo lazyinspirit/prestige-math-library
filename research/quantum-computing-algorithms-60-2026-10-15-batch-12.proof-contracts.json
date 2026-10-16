@@ -1,0 +1,2635 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qc-fixed-dimension-interval-arithmetic",
+    "lem-qc-irrational-rotation-dense-on-circle",
+    "lem-qc-su2-near-identity-logarithm",
+    "lem-qc-compact-su2-base-net",
+    "lem-qc-pauli-vector-multiplication",
+    "lem-qc-su2-balanced-commutator",
+    "lem-qc-two-axis-su2-generation",
+    "lem-qc-clifford-t-projective-density",
+    "lem-qc-commutator-error-cancellation",
+    "thm-qc-solovay-kitaev-bit-complexity",
+    "thm-qc-solovay-kitaev-error-and-resource-bound",
+    "thm-qc-fixed-arity-unitary-error-budget",
+    "thm-qc-controlled-phase-approximation",
+    "ex-qc-solovay-kitaev-error-budget"
+  ],
+  "contracts": {
+    "lem-qc-fixed-dimension-interval-arithmetic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-effective-binary-encoding-and-decoder",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb B:=\\{0,1\\}$. A **binary encoding** of a set $X$ is an injective\nfunction\n$$ e:X\\to\\mathbb B^* $$\n([[def-function]], [[def-injection-surjection-bijection]]).\n\nFix a symbol $\\mathtt{mal}$ not belonging to $X$. A **total decoder** for $e$\nis a function\n$$ d:\\mathbb B^*\\to X\\cup\\{\\mathtt{mal}\\} $$\nsuch that\n$$ d(e(x))=x\\quad(x\\in X),\\qquad d(w)=\\mathtt{mal}\\quad(w\\notin e[X]). $$\nThus $\\mathtt{mal}$ is exactly the output on malformed codes, and the decoder\nis defined on every binary word, not only on words in the image of $e$.\n\nThe encoding $e$ is **effective** when such a total decoder is specified.\n\nThe encoding is **prefix-free** when no codeword is a proper prefix of another:\nthere do not exist distinct $x,y\\in X$ and a nonempty binary word $u$ with\n$e(y)=e(x)u$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "step": "1.1",
+          "claim": "Query each Cauchy procedure at precision $q+4$, obtaining a rational $r$ with $|r-x|\\le2^{-q-4}$. Round $r$ to a dyadic $a$ with $|a-r|\\le2^{-q-4}$ and return $[a-2^{-q-3},a+2^{-q-3}]$; it contains $x$ and has width $2^{-q-2}$. This rounding costs $O(L+q^2)$ for an $L$-bit rational: scan its numerator and denominator to determine their binary lengths, discard values below the error tolerance, and otherwise retain their leading $q+O(1)$ bits before long division. Since $|r|\\le4$, truncating both integers at that relative precision changes the quotient by at most $2^{-q-5}$ after a fixed guard increase; the dyadic division rounding fits the remaining error budget. The scan costs $O(L)$ and the shortened division $O(q^2)$, while $L=O((q+1)^c)$ by the query-time bound. If the fixed composition has no operations, copying this input interval already gives the claimed enclosure. Choose $q=p+K'(B+1)+K'\\lceil\\log_2(p+2)\\rceil+C_0$ with sufficiently large fixed $K',C_0$. The interval endpoints have $O(p+B)$ bits after the binary point. Addition, comparison, and rounding use $O(p+B)$ bit operations; schoolbook multiplication and long division use $O((p+B)^2)$. Outward rounding at $q$ fractional bits adds at most $C2^{-q}$ local error per operation. Induction through the fixed expression tree, using the input bound $3$ and divisor lower bound $2^{-B}$, gives a bound $M=2^{K(B+1)}$ for all exact intermediate magnitudes and error-amplification factors, with fixed $K$: sums and products of a fixed number of quantities bounded by $2^{K(B+1)}$ remain so after increasing $K$, while a quotient has magnitude at most $M2^B$ and error gain at most $2^{O(B+1)}$ by the estimate below. The expression has only a fixed number of such operations, so one larger $K$ covers every stage. For a quotient $x/y$, let $x',y'$ be its midpoint inputs, each within $\\delta$ of the exact value, where $\\delta\\le2^{-B-1}$. Then $|y'|\\ge2^{-B-1}$ and $|x'|\\le2M$, so $\\left|\\frac{x}{y}-\\frac{x'}{y'}\\right| \\le2^B\\delta+M2^{2B+2}\\delta=2^{O(B+1)}\\delta$. The stated guard precision therefore makes propagated input and rounding errors at most $2^{-p-4}$. Each Cauchy query costs $O((q+1)^c)$ and each dyadic operation costs $O((p+B)^2)$, so the fixed routine costs $O((p+B+1)^{\\max(c,2)})$ and encloses the exact answer.",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "step": "2.1",
+          "claim": "To compute $\\sqrt{x}$ for $0\\le x\\le1$, request an interval $[x_-,x_+]$ of width at most $2^{-2p-12}$ and set $\\ell=\\max(0,x_-)$ and $u=\\min(1,x_+)$. Then $\\ell\\le x\\le u$ and $u-\\ell\\le2^{-2p-12}$. The inequality $|\\sqrt{x}-\\sqrt{y}|\\le\\sqrt{|x-y|}$ shows that the input uncertainty contributes at most $2^{-p-6}$. Bisect separately for the exact rational endpoints $\\ell,u$ on $[0,1]$, comparing squared dyadic midpoints with those endpoints. After $O(p)$ bisections the two square roots are enclosed by dyadic intervals of width at most $2^{-p-4}$; monotonicity encloses $\\sqrt{x}$ in their combined interval, whose width is at most $2^{-p-6}+2^{-p-3}<2^{-p}$. Each comparison uses $O(p^2)$ bit operations, so the total is $O(p^3)$. For normalization, choose a fixed power of two $R\\ge3\\sqrt d$ and compute $\\|v\\|_2=R\\sqrt{\\sum_i(v_i/R)^2}$ to $q$ bits, so the square-root input lies in $[0,1]$. The norm changes by at most $\\|v-v'\\|_2$; division by a norm at least $2^{-B}$ and the preceding division estimate show that $q$ guard bits suffice to return each coordinate of $v/\\|v\\|_2$ within $2^{-p}$. The vector has fixed dimension, so this costs $O((p+B+1)^{\\max(c,3)})$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-2.2",
+          "step": "2.2",
+          "claim": "Request the entries of $A$ to $q'$ bits, where $q'=p+2\\lceil\\log_2(p+2)\\rceil+C_0$ and $C_0$ is a sufficiently large absolute constant. Let $A'$ be the midpoint matrix. Since $d$ is fixed, $\\|A-A'\\|\\le C2^{-q'}$ and $\\|A'\\|\\le3/2$. The telescoping identity for powers gives $\\|A^j-A'^j\\|\\le j(3/2)^{j-1}\\|A-A'\\|$, so their exponential series differ by at most $e^{3/2}\\|A-A'\\|$. Truncate the series for $e^{A'}$ at $m=24(p+2)$. Using $j!\\ge2^{j-1}$, its tail is at most $8(3/4)^{m+1}<2^{-p-4}$. Compute terms recursively as $T_0=I$ and $T_j=T_{j-1}A'/j$, rounding each product and division outward to $q'$ fractional bits. The error recurrence is $e_j\\le(3/2)e_{j-1}/j+C2^{-q'}$; after $j=1$, its multiplier is at most $3/4$, so $e_j\\le C'2^{-q'}$ uniformly. Summing $m$ terms contributes at most $C'm2^{-q'}$. The choice of $q'$ makes total error, including the input perturbation, less than $2^{-p}$. There are $O(p)$ products and divisions of fixed-size matrices with $O(p)$-bit operands, hence the dyadic arithmetic cost is $O((p+1)^3)$. Including Cauchy queries as in step 1.1, the routine cost is $O((p+1)^{\\max(c,3)})$. For $\\|E\\|\\le1/2$, request the entries to the same precision and let $E'$ be the midpoint, so $\\|E'\\|\\le3/4$. The series difference between $E$ and $E'$ is bounded by $\\sum_{j\\ge1}\\|E^j-E'^j\\|/j\\le4\\|E-E'\\|$. Truncate the logarithm series for $E'$ at $m=24(p+2)$. Its tail is at most $\\sum_{j>m}(3/4)^j/j\\le4(3/4)^{m+1}<2^{-p-4}$. Successive computed powers have errors bounded by a geometric sum of their rounding errors, since $\\|E'\\|\\le3/4$. After multiplication by $1/j$ and summation, total power, coefficient and outward-rounding error is at most $C(m+1)2^{-q'}$, below $2^{-p-2}$ after increasing the fixed constant $C_0$. Thus the logarithm interval also has diameter at most $2^{-p}$ and dyadic arithmetic cost $O((p+1)^3)$; including Cauchy queries, its cost is $O((p+1)^{\\max(c,3)})$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-3.1",
+          "step": "3.1",
+          "claim": "Let $\\alpha$ be a fixed algebraic real constant, described by a rational polynomial $f$ and an open rational interval with nonroot endpoints on which $f$ has opposite endpoint signs and exactly one real root, namely $\\alpha$. At each bisection, evaluate $f$ exactly at the rational midpoint. If it is a root, return it exactly; otherwise the unique-root and sign-change conditions identify the half containing $\\alpha$. After $O(p)$ bisections the interval has width at most $2^{-p-3}$; round its lower endpoint down and its upper endpoint up to multiples of $2^{-p-3}$. The resulting dyadic interval has width at most $3\\cdot2^{-p-3}<2^{-p}$. An exact rational root is enclosed by the same outward-rounding rule. Each evaluation has $O(p)$-bit operands and fixed degree, and there are $O(p)$ bisections, giving $O(p^3)$ bit operations. Real and imaginary parts are handled separately. The number of matrix coordinates is fixed, so all coordinatewise bounds above give the claimed matrix-interval bounds.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 copies the input enclosure when the fixed composition has no operations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 handles x=0 by clipping the interval to [0,1]; zero normalizers are excluded by the stated lower bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 include square-root endpoint x=1 and the exponential endpoint norm ||A||=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 keeps every divisor interval away from zero at the allowed lower bound; step 2.1 uses the normalizer lower bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 use closed bounds x in [0,1], ||A||<=1, and ||E||<=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 uses the supplied unique sign-changing isolator and deterministic rational bisection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the specified Cauchy, bounded-divisor and fixed-dimension inputs admit certified interval routines within the displayed polynomial bit bound. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the specified Cauchy, bounded-divisor and fixed-dimension inputs admit certified interval routines within the displayed polynomial bit bound. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "2f10f80abed2c81e9ca7adf2685af2bdc26afca8ecef8fd5f66e2c1cf8a2c5cc",
+            "row_sha256": "827840d92f603fa89431946107016589b847786b7f8944e775eca43f4aedcc8d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the specified Cauchy, bounded-divisor and fixed-dimension inputs admit certified interval routines within the displayed polynomial bit bound. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the specified Cauchy, bounded-divisor and fixed-dimension inputs admit certified interval routines within the displayed polynomial bit bound. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "2f10f80abed2c81e9ca7adf2685af2bdc26afca8ecef8fd5f66e2c1cf8a2c5cc",
+            "row_sha256": "1e96be57bf43d03f866a55af2baa5618098fa6c5184531d0b6d4c31db30149dd",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all four proof steps and exact F1/F2 supplier interfaces. Confirmed refuter:12:1: a non-dyadic rational cannot center a dyadic-endpoint interval; repaired with a q+4 query, dyadic rounding and radius 2^(-q-3), including linear scanning of long rational outputs before short division. Fixed the same dyadic-endpoint issue for rational algebraic isolators in 3.1 and made fixed rescaling explicit before the normalization square root. Checked empty composition, x=0 and x=1, divisor/norm lower bound, ||A||=1, ||E||=1/2, fixed-degree sign-changing unique-root isolators, geometric/factorial tails and O((p+B+1)^max(c,3)) cost. Fixed dimension absorbs conversion between coordinate widths and matrix norms through constant guard precision. No AC or missing supplier; mathematical statement and dependency interfaces unchanged. Step-5 unit 12: the Statement now fixes signed binary numerator/positive-denominator rational data with a fixed delimiter and charges complete query output length. F1 explicitly supplies no decoding-time bound. Under this concrete representation, scanning costs O(L), retaining leading q+O(1) bits preserves a bounded quotient to O(2^-q), and short long division costs O(q^2); all original numerical and bit-cost conclusions are retained."
+      },
+      "repair_confidence": 1
+    },
+    "lem-qc-irrational-rotation-dense-on-circle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an integer $M\\ge2$. Among the $M+1$ fractional parts $\\{j\\alpha\\}$ for $0\\le j\\le M$, two lie in one of the $M$ half-open intervals of length $1/M$. Their difference is nonzero, since $\\alpha$ is irrational, and has absolute value $\\delta<1/M$. Choosing the sign of the index difference gives an integer $q\\ne0$ with $\\{q\\alpha\\}=\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $\\beta\\in[0,1)$, let $k=\\lfloor\\beta/\\delta\\rfloor$. Then $0\\le\\beta-k\\delta<\\delta$ and $k\\delta<1$. Since $\\{kq\\alpha\\}=k\\delta$, a power of $e^{2\\pi i\\alpha}$ has parameter within $1/M$ of $\\beta$ modulo integers. By [F2], this approximates the circle point $e^{2\\pi i\\beta}$; as $M$ is arbitrary, the integer powers are dense.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 include the identity power n=0, so the set of integer powers is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 proves the fractional-part difference delta is nonzero; step 2.1 covers beta=0 with k=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The partition parameter is restricted to M>=2; there is no M=1 case in the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 rules out coincident fractional parts for distinct indices because alpha is irrational."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 treats beta in the half-open interval [0,1), including beta=0 and values arbitrarily close to 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 selects a pair from a finite pigeonhole argument, and step 2.1 uses the unique integer part; no infinite choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: irrational alpha implies density of its integer circle-rotation powers. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: irrational alpha implies density of its integer circle-rotation powers. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "65425a4552fac1c06e80c1ee2cead744a6e9122722e2c0541d9ce4596dd29a26",
+            "row_sha256": "2fd211e5d484d40166a1e00377a6b3c929ab4c8c7d73e245ce474e7d5ca58eb2",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: irrational alpha implies density of its integer circle-rotation powers. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: irrational alpha implies density of its integer circle-rotation powers. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "65425a4552fac1c06e80c1ee2cead744a6e9122722e2c0541d9ce4596dd29a26",
+            "row_sha256": "bcb59f83aeffe5b558bec428ed94ad82f8c800ae9bf6783eb0749dd70c5c9ff4",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read both proof steps and all six actual supplier Statements. Pigeonhole gives nonzero delta<1/M because irrationality forbids equal fractional parts; the signed index q is allowed since n ranges over Z. k=floor(beta/delta) is nonnegative and k delta<1, including beta=0, so no wrap invalidates the approximation. Continuity and surjectivity of the exponential parameterization give density for arbitrary circle points. No positive-powers-only claim or AC is used."
+      }
+    },
+    "lem-qc-su2-near-identity-logarithm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-cofunction-supplementary-and-reflection-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(\\pi/2-x)=\\cos x,\\quad \\cos(\\pi/2-x)=\\sin x,\\quad \\sin(\\pi-x)=\\sin x,\\quad \\cos(\\pi-x)=-\\cos x,$$\nand the quarter-turn and reflection formulas are\n$$\\sin(x+\\pi/2)=\\cos x,\\quad \\cos(x+\\pi/2)=-\\sin x,\\quad \\sin(-x)=-\\sin x,\\quad \\cos(-x)=\\cos x.$$\nOn the common natural domains of the two sides,\n$$\\tan(\\pi/2-x)=\\cot x,\\quad \\cot(\\pi/2-x)=\\tan x,\\quad \\sec(\\pi/2-x)=\\csc x,\\quad \\csc(\\pi/2-x)=\\sec x,$$\nand\n$$\\tan(\\pi-x)=-\\tan x,\\quad \\cot(\\pi-x)=-\\cot x,\\quad \\sec(\\pi-x)=-\\sec x,\\quad \\csc(\\pi-x)=\\csc x.$$\nThe conventions and prerequisite facts used below are recorded in [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[thm-quarter-turn-values-and-shift-formulas]], [[thm-sine-and-cosine-addition-formulas]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-double-angle-and-power-reduction-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(2x)=2\\sin x\\cos x,\\quad \\cos(2x)=\\cos^2x-\\sin^2x=2\\cos^2x-1=1-2\\sin^2x,$$\nand\n$$\\sin^2x=(1-\\cos2x)/2,\\qquad \\cos^2x=(1+\\cos2x)/2.$$\nWhen defined, $\\tan(2x)=2\\tan x/(1-\\tan^2x)$. The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-termwise-differentiation-of-complex-power-series",
+          "source_section": "Statement",
+          "quote": "Let $f(z)=\\sum_{n\\ge0}c_n(z-a)^n$ have radius $R$. If $|z-a|<R$, then $f$ is complex differentiable at $z$ and\n$$f'(z)=\\sum_{n\\ge1}n c_n(z-a)^{n-1}.$$\nConsequently $f$ is holomorphic on its open disc of convergence ([[def-complex-differentiability-holomorphic-and-entire]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-chain-rule-for-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V$ and $g:V\\to\\mathbb C$, where $U,V\\subseteq\\mathbb C$ are open. If $f$ is complex differentiable at $a\\in U$ and $g$ is complex differentiable at $f(a)$, then $g\\circ f$ is complex differentiable at $a$ and\n\n$$ (g\\circ f)'(a)=g'(f(a))f'(a). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-algebra-of-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f,g:U\\to\\mathbb C$ be complex differentiable at $a\\in U$, and let $\\alpha,\\beta\\in\\mathbb C$. Then\n\n$$ (\\alpha f+\\beta g)'(a)=\\alpha f'(a)+\\beta g'(a), $$\n\n$$ (fg)'(a)=f'(a)g(a)+f(a)g'(a). $$\n\nIf $g(a)\\ne0$, then $g$ is nonzero on some neighbourhood of $a$, the reciprocal $1/g$ is complex differentiable at $a$, and\n\n$$ (1/g)'(a)=-\\frac{g'(a)}{g(a)^2},\\qquad (f/g)'(a)=\\frac{f'(a)g(a)-f(a)g'(a)}{g(a)^2}. $$\n\nEvery constant function has derivative $0$, and the identity function has derivative $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-zero-complex-derivative-on-a-domain-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be a domain. If $f:U\\to\\mathbb C$ is holomorphic and $f'(z)=0$ for every $z\\in U$, then $f$ is constant on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $s=\\sin(\\pi/6)$. Since $0<\\pi/6<\\pi/2$, [F8] and [F9] give $s>0$. By [F10], $s=\\cos(\\pi/3)=1-2s^2$, so $(2s-1)(s+1)=0$ and positivity gives $s=1/2$. By [F1], $D$ is unitarily diagonalizable with eigenvalues $\\lambda_1,\\lambda_2$ on the unit circle. Since $\\det D=1$, $\\lambda_1\\lambda_2=1$. Choose principal angular representatives $\\theta_j\\in(-\\pi,\\pi]$ using [F7]. The norm bound and [F5] give $2|\\sin(\\theta_j/2)|=|\\lambda_j-1|\\le\\rho\\le1/2$, hence $|\\sin(\\theta_j/2)|\\le1/4<1/2=\\sin(\\pi/6)$. Oddness and strict monotonicity in [F9] force $|\\theta_j|<\\pi/3$. Now [F6] gives $\\theta_1+\\theta_2\\in2\\pi\\mathbb Z$; the bound on their sum forces $\\theta_2=-\\theta_1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $|z|<1$, the scalar power series $L(z)=\\sum_{j\\ge1}(-1)^{j+1}z^j/j$ converges absolutely by comparison with $\\sum_{j\\ge1}|z|^j$, so its disc of convergence contains the unit disk. By [F11], $$L'(z)=\\sum_{j\\ge1}(-1)^{j+1}z^{j-1}=\\sum_{k\\ge0}(-z)^k=\\frac1{1+z},$$ where the last equality is the finite geometric-sum identity followed by a limit. Since $1+z\\ne0$ on the unit disk, [F12] gives $$\\left(\\frac{e^{L(z)}}{1+z}\\right)'=\\frac{e^{L(z)}L'(z)(1+z)-e^{L(z)}}{(1+z)^2}=0.$$ The open unit disk is convex, hence a connected open domain, so [F12] makes this quotient constant there. Its value at $0$ is $1$, and therefore $e^{L(z)}=1+z$. For $z=e^{it}-1$ with $|t|<\\pi/3$, [F5], [F9], and [F10] show $|z|=2|\\sin(t/2)|<1$. Thus [F6] gives $L(e^{it}-1)-it\\in2\\pi i\\mathbb Z$. This difference is continuous in $t$ by [F13], [F5], and [F8]. Dividing it by $2\\pi i$ gives a continuous integer-valued real function. If it took distinct values at two points, restrict to the closed interval between them; [F14] would force it to take a noninteger value between them; hence it is constant and, at $t=0$, zero. Substitution of $z=\\lambda_j-1$ now shows the matrix series diagonalizes to $i\\theta_1,i\\theta_2$, so exponentiating it gives $D$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2], the norm of the series is at most $\\sum_{j\\ge1}\\rho^j/j$. The scalar identity from step 2.1 at $z=-\\rho$ and [F4] identify this sum with $-\\log(1-\\rho)$. Since $1/j\\le1$ and $\\sum_{j\\ge1}\\rho^j=\\rho/(1-\\rho)\\le2\\rho$ for $0\\le\\rho\\le1/2$, the claimed bound follows. The eigenvalues of $\\log D$ are $i\\theta_1,-i\\theta_1$, so it is skew-Hermitian and has trace zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes D in SU(2), not a zero-dimensional matrix, and the series is indexed by all j>=1. At D=I every term is zero, rather than an empty index set; step 2.1 gives log(I)=0.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement fixes D in SU(2), not a zero-dimensional matrix, and the series is indexed by all j>=1. At D=I every term is zero, rather than an empty index set; step 2.1 gives log(I)=0.",
+            "item_sha256": "5e412fd55e62acc5f2cfebf4d3045f2a941783427f25283ba4a7226b1a0fa9ba",
+            "row_sha256": "ec275f59280ed9b7d7175925f3042557f4adb31c94b00e7ab949e85216cca2ba",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement fixes D in SU(2), not a zero-dimensional matrix, and the series is indexed by all j>=1. At D=I every term is zero, rather than an empty index set; step 2.1 gives log(I)=0."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 give theta_1=theta_2=0 and log(I)=0 when rho=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter equal to one is admitted; rho is at most 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 includes the repeated-eigenvalue identity case D=I."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1 allow rho=1/2 by weak inequalities and the convergent logarithm series."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses principal angular representatives in a fixed interval; no arbitrary family choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the norm-ball assumption on D gives a convergent traceless skew-Hermitian logarithm, exponential D and norm bound <=2rho. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the norm-ball assumption on D gives a convergent traceless skew-Hermitian logarithm, exponential D and norm bound <=2rho. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "5e412fd55e62acc5f2cfebf4d3045f2a941783427f25283ba4a7226b1a0fa9ba",
+            "row_sha256": "859722cebdeecb47ef4460542139b7c33e62e0bb8586cdf492a4ce5745599227",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the norm-ball assumption on D gives a convergent traceless skew-Hermitian logarithm, exponential D and norm bound <=2rho. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the norm-ball assumption on D gives a convergent traceless skew-Hermitian logarithm, exponential D and norm bound <=2rho. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "5e412fd55e62acc5f2cfebf4d3045f2a941783427f25283ba4a7226b1a0fa9ba",
+            "row_sha256": "a313d589760238307650d3d508e6cf6e4895ca8d5f60f512e188b5dba4ae89cb",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all three steps and the nineteen actual supplier Statements/Definitions. The spectral theorem applies to the unitary normal D; determinant one pairs eigenvalues. Verified sin(pi/6)=1/2 and the strict angular bound |theta_j|<pi/3 even at rho=1/2. The convergent scalar logarithm has derivative 1/(1+z); exp(L(z))/(1+z) is constant on the open connected unit disk. The continuous integer-valued branch difference vanishes on (-pi/3,pi/3) by IVT. The paired eigenangles give trace zero and skew-Hermitian log; geometric comparison gives -log(1-rho)<=2rho, including rho=0. No unproved branch selection, AC or missing supplier is needed."
+      }
+    },
+    "lem-qc-compact-su2-base-net": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-closed-unit-ball-compact-iff-finite-dimensional",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and write\n\n$$\\overline B_X:=\\{x\\in X:\\|x\\|\\le1\\}.$$\n\nThen the following are equivalent.\n\n1. $\\overline B_X$ is compact in the norm metric ([[def-metric-compactness]]).\n2. $X$ admits an ordered basis of finite length.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The ambient space $M_2(\\mathbb C)$ is finite-dimensional over $\\mathbb C$. For $U\\in SU(2)$, norm preservation gives $\\|U\\|=1$ by [F2], so $SU(2)$ lies in the closed operator-norm unit ball. It is closed there because $U^*U=I$ and $\\det U=1$ are continuous equations in the matrix entries and their conjugates. [F1] makes the closed unit ball compact; therefore its closed subset $SU(2)$ is compact.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $S$ be the values of finite words in $G$ and let $H=\\overline S\\subseteq SU(2)$. Since $S$ is closed under multiplication and matrix multiplication is continuous, $H$ is a closed semigroup. For each integer $n\\ge1$, let $N_n$ be the least number of operator-norm balls of radius $1/n$ covering $SU(2)$; compactness gives such a finite cover. Fix $g\\in G$. Two of $I,g,\\ldots,g^{N_n}$ lie in one cover ball, say $g^r,g^s$ with $r<s$. By [F2], $\\|g^{s-r}-I\\|=\\|(g^s-g^r)g^{-r}\\|<2/n$. Let $d_n$ be the least $d\\in\\{1,\\ldots,N_n\\}$ with $\\|g^d-I\\|<2/n$. If $d_n=1$ for infinitely many $n$, then $g=I$ and $g^{-1}=g\\in S$; otherwise $d_n\\ge2$ eventually, and $g^{d_n-1}\\in S$ satisfies $\\|g^{d_n-1}-g^{-1}\\|=\\|(g^{d_n}-I)g^{-1}\\|<2/n$, so $g^{-1}\\in H$. This holds for every $g\\in G$. Hence $H$ contains $G$ and its inverses, so it contains $\\langle G\\rangle$; closedness of $H$ and density of $\\langle G\\rangle$ give $H=SU(2)$. Therefore word values in $G$ are dense.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $U\\in SU(2)$, density supplies a word value $g_U\\in S$ with $\\|U-g_U\\|<\\delta/2$. The open balls of radius $\\delta/2$ centered at these word values cover $SU(2)$. Compactness gives a finite subcover with centers $g_1,\\ldots,g_r$. Choose one finite word representing each $g_j$; the resulting list is a $\\delta$-net, and the maximum of its finitely many word lengths is finite. The compactness argument supplies no effective search cutoff or certificate.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 includes I in SU(2), so the covered set is nonempty; the finite subcover in step 3.1 supplies a nonempty finite word list."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The net radius is assumed strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result gives a finite net but does not assert a one-word net."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 proves SU(2) is closed inside the compact unit ball, including its boundary points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 uses open balls of radius delta/2 and obtains a delta-net with strict slack."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 defines each cover size and exponent difference using a least natural number, and step 3.1 selects only finitely many word representatives; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: density of the subgroup and compactness give a finite delta-net of word values with finite maximum length, without claiming a computed net. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: density of the subgroup and compactness give a finite delta-net of word values with finite maximum length, without claiming a computed net. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "42b8de329d7413f658de786e0bd9e4e6b510947c751d4743db57635e0e85f3cd",
+            "row_sha256": "4ba2b7bbc8d82dff22abc925d25571709350a1c8b5b2b93ba7fc6f8477bd308d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: density of the subgroup and compactness give a finite delta-net of word values with finite maximum length, without claiming a computed net. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: density of the subgroup and compactness give a finite delta-net of word values with finite maximum length, without claiming a computed net. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "42b8de329d7413f658de786e0bd9e4e6b510947c751d4743db57635e0e85f3cd",
+            "row_sha256": "bf82d91cfd8c2fbb7e0c640b37b638ba86489651810f2bf79ff91ea5acd9ee0e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all three current steps and exact gate-package, operator-norm and finite-dimensional compact-ball supplier interfaces. Closed bounded SU(2) is compact. Pigeonhole on I,g,...,g^N gives positive powers approaching I without assuming inverse closure; eventual d>=2 gives positive powers approaching g inverse, while infinitely many d=1 implies g=I. Thus the closed positive-word semigroup contains the dense subgroup. Cover by all word-centered delta/2 balls can be used in step 3.1, so its pointwise g_U notation requires no arbitrary choice; only finitely many word representatives are selected. delta>0 is essential; empty G violates density. Existence gives no effective certificate or cutoff. Reader repair is mathematically sound, Statement unchanged; complete historical preimage comparison is documented separately."
+      }
+    },
+    "lem-qc-pauli-vector-multiplication": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Taking conjugate transposes of the displayed matrices gives $X^*=X,Y^*=Y,Z^*=Z$, and their traces are all zero. Direct multiplication gives $X^2=Y^2=Z^2=I$ and $XY=iZ$, $YX=-iZ$, $YZ=iX$, $ZY=-iX$, $ZX=iY$, $XZ=-iY$. For example, $XY=\\begin{pmatrix}i&0\\\\0&-i\\end{pmatrix}=iZ$ and $YX=\\begin{pmatrix}-i&0\\\\0&i\\end{pmatrix}=-iZ$; the remaining four products are respectively $\\begin{pmatrix}0&i\\\\i&0\\end{pmatrix}=iX$, $\\begin{pmatrix}0&-i\\\\-i&0\\end{pmatrix}=-iX$, $\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}=iY$, and $\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}=-iY$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expand $(u\\cdot\\sigma)(v\\cdot\\sigma)$ bilinearly. The three diagonal terms are $(u_1v_1+u_2v_2+u_3v_3)I$ by step 1.1. The paired off-diagonal terms are $i(u_2v_3-u_3v_2)X+i(u_3v_1-u_1v_3)Y+ i(u_1v_2-u_2v_1)Z$, exactly $i(u\\times v)\\cdot\\sigma$. Put $A=i u\\cdot\\sigma$ and $B=i v\\cdot\\sigma$. Then $[A,B]=AB-BA=-(u\\cdot\\sigma)(v\\cdot\\sigma)+(v\\cdot\\sigma)(u\\cdot\\sigma)$; the vector-product formula and $v\\times u=-u\\times v$ give $[A,B]=-2i(u\\times v)\\cdot\\sigma$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A traceless Hermitian matrix has the form $\\begin{pmatrix}a&b-ic\\\\b+ic&-a\\end{pmatrix}$ with real $a,b,c$, which equals $bX+cY+aZ$. This proves the basis assertion. The product identity at $u=v$ gives $(u\\cdot\\sigma)^2=|u|^2I$; since $u\\cdot\\sigma$ is Hermitian, for every vector $x$ we have $\\|(u\\cdot\\sigma)x\\|^2=\\langle (u\\cdot\\sigma)^2x,x\\rangle =|u|^2\\|x\\|^2$. Taking the supremum over unit vectors gives $\\|u\\cdot\\sigma\\|=|u|$. Also $i u\\cdot\\sigma$ is traceless skew-Hermitian by the established matrix traces and adjoints.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The vector domain is the fixed nonempty space R^3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 includes u=0 and the product identity then gives the zero matrix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1 verify the coordinate Pauli matrices and the basis vectors directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 covers parallel vectors, whose cross product and commutator both vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite matrix calculation and makes no existence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the fixed Pauli matrices satisfy the dot/cross product identity, real basis statement, norm identity and resulting commutator formula. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the fixed Pauli matrices satisfy the dot/cross product identity, real basis statement, norm identity and resulting commutator formula. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "2b099bb96a48ccb8cf228965da98aa3c77a2c3b38a7d6aafe6e4cad46b5470ee",
+            "row_sha256": "bd8548b7b41831ad3c851f3fa4e6f85757f6c250fdb2547ac3f732c1a1e97a0c",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the fixed Pauli matrices satisfy the dot/cross product identity, real basis statement, norm identity and resulting commutator formula. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the fixed Pauli matrices satisfy the dot/cross product identity, real basis statement, norm identity and resulting commutator formula. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "2b099bb96a48ccb8cf228965da98aa3c77a2c3b38a7d6aafe6e4cad46b5470ee",
+            "row_sha256": "a7304ff0ae340f6b6c92737b82097d96b7bf1caf6611438e8162cc5f5e10e3ca",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": []
+    },
+    "lem-qc-su2-balanced-commutator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-su2-near-identity-logarithm",
+          "source_section": "Statement",
+          "quote": "For a matrix $M$, write $e^M=\\sum_{j\\ge0}M^j/j!$. Here\n$SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. If\n$D\\in SU(2)$ and $\\|D-I\\|\\le\\rho\\le1/2$, then the operator-norm\nconvergent series\n$$\\log D=\\sum_{j=1}^{\\infty}(-1)^{j+1}(D-I)^j/j$$\nsatisfies $e^{\\log D}=D$, is traceless and skew-Hermitian, and\n$\\|\\log D\\|\\le-\\log(1-\\rho)\\le2\\rho$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-pauli-vector-multiplication",
+          "source_section": "Statement",
+          "quote": "For the Pauli matrices $X,Y,Z$ in\n[[def-qc-pauli-matrices]], the matrices\nare Hermitian, traceless, and square to $I$. For $u,v\\in\\mathbb R^3$, writing\n$u\\cdot\\sigma=u_1X+u_2Y+u_3Z$ gives\n$$ (u\\cdot\\sigma)(v\\cdot\\sigma)=(u\\cdot v)I+i(u\\times v)\\cdot\\sigma.$$\nAlso, the Pauli triple is a real basis of the traceless Hermitian $2\\times2$\nmatrices, $\\|u\\cdot\\sigma\\|=|u|$, and the commutator therefore satisfies\n$$[iu\\cdot\\sigma,iv\\cdot\\sigma]=-2i(u\\times v)\\cdot\\sigma.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $X=\\log D=i v\\cdot\\sigma$ with $v\\in\\mathbb R^3$; the Pauli matrices form a real basis of the traceless skew-Hermitian $2\\times2$ matrices, and [F2] gives $\\|X\\|=|v|$. If $v=0$, take $a=b=0$ and $V=W=I$. Otherwise set $u=v/|v|$, choose the smallest index $k\\in\\{1,2,3\\}$ attaining $\\min_i|u_i|$, and let $e_k$ be the corresponding coordinate vector. Then $w=u\\times e_k$ has norm at least $\\sqrt{2/3}>1/2$; put $e=w/|w|$. This is a deterministic choice with $e\\perp u$. Set $a=\\sqrt{|v|/2}\\,e$ and $b=-\\sqrt{|v|/2}\\,(u\\times e)$. Then $a\\times b=-v/2$ and $|a|=|b|=\\sqrt{|v|/2}\\le\\sqrt\\eta$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every real $t$, $|\\sin t|\\le|t|$: it is immediate at $t=0$, and otherwise [F5] and the mean value theorem give $\\sin t-\\sin0=\\cos(c)t$ for some $c$ between $0$ and $t$; [F4] implies $|\\cos c|\\le1$. Put $A=i a\\cdot\\sigma$, $B=i b\\cdot\\sigma$, $V=e^A$ and $W=e^B$. For $a\\ne0$, $P=a\\cdot\\sigma/|a|$ is Hermitian, traceless and satisfies $P^2=I$ by [F2]; its eigenvalues are $1,-1$. Thus $e^A=I\\cos|a|+iP\\sin|a|$ by the power series and [F4], so it is unitary with determinant $1$ and $\\|e^A-I\\|=2|\\sin(|a|/2)|\\le|a|$. If $a=0$, $e^A=I$; the same argument applies to $B$. By [F2], $[A,B]=X$, and both distances are at most $\\sqrt\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expand $e^Ae^Be^{-A}e^{-B}$ as a sum of homogeneous terms in $A,B$. Its degree-one terms cancel, and direct multiplication of the degree-two terms gives $AB-BA=[A,B]$. By [F3], products have norm at most the product of their norms; the triangle inequality [F6] therefore bounds the sum of norms of all terms of total degree $n$ by $(4s)^n/n!$, where $s=\\max(\\|A\\|,\\|B\\|)\\le1/4$. Hence the degree-at-least-three remainder has norm at most $(4s)^3e^{4s}/6<32s^3$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The exponential series and [F3] give $\\|e^X-I-X\\|\\le\\|X\\|^2e^{\\|X\\|}/2\\le2s^4e^{2s^2}\\le s^3$, since $\\|X\\|=\\|[A,B]\\|\\le2s^2$ and $s\\le1/4$. By the triangle inequality [F6], $\\|e^X-e^Ae^Be^{-A}e^{-B}\\|\\le33s^3\\le40\\eta^{3/2}$. By [F1], $e^X=D$; step 2.1 gives $[A,B]=X$, and step 3.1 controls the commutator expansion. These facts prove the claim.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes D in the nonempty 2-by-2 group SU(2) and asks for two such factors. The infinite exponential series is not a variable empty word; step 1.1 handles D=I by V=W=I, which is a zero-distance case.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement fixes D in the nonempty 2-by-2 group SU(2) and asks for two such factors. The infinite exponential series is not a variable empty word; step 1.1 handles D=I by V=W=I, which is a zero-distance case.",
+            "item_sha256": "a8996e63812f75010d2632992ada1d51ce261ac13e0ee5c947dd7d5f810c191c",
+            "row_sha256": "48b738799691d2eaae54f185481d45f19ce1b52d7b7af3aa149eda3cdba7f690",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement fixes D in the nonempty 2-by-2 group SU(2) and asks for two such factors. The infinite exponential series is not a variable empty word; step 1.1 handles D=I by V=W=I, which is a zero-distance case."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles v=0 by taking a=b=0 and V=W=I."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter equal to one is in the stated range eta<=1/16."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 chooses the smallest minimizing coordinate and proves the cross-product normalizer is at least sqrt(2/3)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–4.1 retain the endpoint eta=1/16, for which s<=1/4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 makes a deterministic smallest-index choice among three coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: a supplied SU(2) target within eta of I has balanced factors V,W with distances <=sqrt(eta) and commutator error <=40 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: a supplied SU(2) target within eta of I has balanced factors V,W with distances <=sqrt(eta) and commutator error <=40 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "a8996e63812f75010d2632992ada1d51ce261ac13e0ee5c947dd7d5f810c191c",
+            "row_sha256": "fe52dc07ae23f60e200f56f127a970884316e7ade7f952380f563345ebcaa557",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: a supplied SU(2) target within eta of I has balanced factors V,W with distances <=sqrt(eta) and commutator error <=40 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: a supplied SU(2) target within eta of I has balanced factors V,W with distances <=sqrt(eta) and commutator error <=40 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "a8996e63812f75010d2632992ada1d51ce261ac13e0ee5c947dd7d5f810c191c",
+            "row_sha256": "6e334bde43e43c12bb77a39741de277d9cf564b691731bd57ea54c6acf18faa4",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all four proof steps, near-identity and Pauli proofs, and exact norm, Euler, sine-derivative and MVT suppliers. v=0 returns I,I; otherwise the least-coordinate axis gives |u cross e_k|>=sqrt(2/3), and the selected a,b satisfy a cross b=-v/2. Verified [A,B]=log D, determinant-one exponentials and ||e^A-I||<=|a|. With s<=1/4, (4s)^3 exp(4s)/6<32s^3 and 2s^4 exp(2s^2)<=s^3, giving 33s^3<=40 eta^(3/2), including eta=0 and 1/16. Deterministic finite axis selection uses no AC. No defect."
+      }
+    },
+    "lem-qc-two-axis-su2-generation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-pauli-vector-multiplication",
+          "source_section": "Statement",
+          "quote": "For the Pauli matrices $X,Y,Z$ in\n[[def-qc-pauli-matrices]], the matrices\nare Hermitian, traceless, and square to $I$. For $u,v\\in\\mathbb R^3$, writing\n$u\\cdot\\sigma=u_1X+u_2Y+u_3Z$ gives\n$$ (u\\cdot\\sigma)(v\\cdot\\sigma)=(u\\cdot v)I+i(u\\times v)\\cdot\\sigma.$$\nAlso, the Pauli triple is a real basis of the traceless Hermitian $2\\times2$\nmatrices, $\\|u\\cdot\\sigma\\|=|u|$, and the commutator therefore satisfies\n$$[iu\\cdot\\sigma,iv\\cdot\\sigma]=-2i(u\\times v)\\cdot\\sigma.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $P_a=a\\cdot\\sigma$. By [F1], $P_a=P_a^*$, $P_a^2=I$ and $\\operatorname{tr}P_a=0$. Its eigenvalues are $1,-1$ by [F2], so the power series gives $e^{tA}=I\\cos t+iP_a\\sin t$ and its eigenvalues are $e^{it},e^{-it}$. By [F4] it is unitary, and its determinant is one. The same holds for $B$. Thus the generated subgroup lies in $SU(2)$; its closure $H$ also lies there because the defining matrix equations for $SU(2)$ are closed. Continuity of multiplication and inversion makes $H$ a subgroup.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $[A,B]=-2i(a\\times b)\\cdot\\sigma$. Let $c=a\\times b\\ne0$ and $s_0=\\max(\\|A\\|,\\|B\\|)$. For $|t|\\le1$, multiplying the four exponential series $e^{tA}e^{tB}e^{-tA}e^{-tB}$ gives degree-one coefficient $A+B-A-B=0$ and degree-two coefficient $AB-BA=[A,B]$. Submultiplicativity bounds the sum of norms of all degree-$m$ terms by $(4s_0)^m/m!$. Hence the terms of degree at least three have norm at most $K|t|^3$, where $K=(4s_0)^3e^{4s_0}/6$. For fixed $r\\ge0$, put $t=\\sqrt{r/n}$. The commutator factor is $X_n=I+r[A,B]/n+R_n$ with $\\|R_n\\|\\le Kr^{3/2}n^{-3/2}$. Set $Y_n=I+r[A,B]/n$. For fixed $r$, the norms of $X_n^k$ and $Y_n^k$ are bounded uniformly over $0\\le k\\le n$, because each one-step norm is at most $1+C_r/n$ for all sufficiently large $n$. The telescoping identity $X_n^n-Y_n^n=\\sum_{k=0}^{n-1}X_n^{n-1-k}(X_n-Y_n)Y_n^k$ bounds their difference by $O(n^{-1/2})$. The binomial expansion of $Y_n^n$ converges to the exponential series for $e^{r[A,B]}$: its $k$th term is bounded by $(r\\|[A,B]\\|)^k/k!$, a summable sequence. Swapping $A$ and $B$ gives $e^{-r[A,B]}$ for $r\\ge0$. Every approximant belongs to the generated subgroup, so closedness gives $e^{s[A,B]}\\in H$ for every real $s$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vectors $a,b,c$ form a basis of $\\mathbb R^3$, since $c$ is nonzero and orthogonal to both $a$ and $b$. By [F1], every traceless skew-Hermitian $2\\times2$ matrix $L$ is a real linear combination $xA+yB+z[A,B]$. For fixed matrices $S,T$, exponential-series expansion gives $e^{S/n}e^{T/n}=I+(S+T)/n+O(n^{-2})$ and $e^{(S+T)/n}=I+(S+T)/n+O(n^{-2})$. The one-step difference is $O(n^{-2})$; the norms of intermediate powers up to $n$ are bounded by $e^{\\|S\\|+\\|T\\|+1}$ for sufficiently large $n$. Telescoping therefore gives $(e^{S/n}e^{T/n})^n\\to e^{S+T}$. The same estimate for three factors gives $(e^{xA/n}e^{yB/n}e^{z[A,B]/n})^n\\to e^L$. Every factor lies in $H$ by step 1.1 and step 2.1, so closedness gives $e^L\\in H$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Every $U\\in SU(2)$ is normal, so [F2] diagonalizes it. Its eigenvalues lie on the unit circle and their product is one, so they are $e^{i\\theta},e^{-i\\theta}$ for some real $\\theta$. In that orthonormal eigenbasis, the matrix with diagonal entries $i\\theta,-i\\theta$ is traceless and skew-Hermitian, and its exponential is $U$. Step 3.1 gives $U\\in H$. Since $H\\subseteq SU(2)$ by step 1.1, $H=SU(2)$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 shows the generated subgroup contains I and its closure is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 allows r=0, giving t=0 and the identity commutator approximant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-parameter endpoint is singled out; all real parameters are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 handles repeated eigenvalues, including U=I and U=-I, by choosing theta=0 or pi."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–4.1 cover all real parameters, including t=0 and negative parameters via swapping A and B."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit parameter limits and no existential selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: nonparallel unit axes imply the closure of their rotation-generated subgroup equals SU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: nonparallel unit axes imply the closure of their rotation-generated subgroup equals SU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "1e601eb2777f88dc186b7a0f7a7d5ea5072923f6a6519d4d89c682c8b83f80f8",
+            "row_sha256": "7c22af47a5df89a09d52350e115bcf6e6c613caea15b36ecebf97bd8d9d62919",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: nonparallel unit axes imply the closure of their rotation-generated subgroup equals SU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: nonparallel unit axes imply the closure of their rotation-generated subgroup equals SU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "1e601eb2777f88dc186b7a0f7a7d5ea5072923f6a6519d4d89c682c8b83f80f8",
+            "row_sha256": "1e037dadf2b5fa94a200c57e4d92468f7357999e7ef67dbe453681dad486e9bf",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all four proof steps and all five exact cited supplier interfaces, including the Pauli proof. Nonparallel unit axes make a,b,a cross b a basis. The four-series expansion has [A,B] coefficient and O(t^3) remainder; t=sqrt(r/n) and telescoping give O(n^-1/2), and swapping axes covers negative r. The binomial terms are dominated by a summable factorial series. Two/three-factor telescoping proves the local product formula without assuming BCH. Closedness supplies all traceless skew-Hermitian exponentials, and unitary diagonalization supplies every SU(2) matrix including I and -I. No local Lie-group prerequisite, AC, or unresolved defect."
+      }
+    },
+    "lem-qc-clifford-t-projective-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-pauli-vector-multiplication",
+          "source_section": "Statement",
+          "quote": "For the Pauli matrices $X,Y,Z$ in\n[[def-qc-pauli-matrices]], the matrices\nare Hermitian, traceless, and square to $I$. For $u,v\\in\\mathbb R^3$, writing\n$u\\cdot\\sigma=u_1X+u_2Y+u_3Z$ gives\n$$ (u\\cdot\\sigma)(v\\cdot\\sigma)=(u\\cdot v)I+i(u\\times v)\\cdot\\sigma.$$\nAlso, the Pauli triple is a real basis of the traceless Hermitian $2\\times2$\nmatrices, $\\|u\\cdot\\sigma\\|=|u|$, and the commutator therefore satisfies\n$$[iu\\cdot\\sigma,iv\\cdot\\sigma]=-2i(u\\times v)\\cdot\\sigma.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-algebraic-integer-minimal-polynomial-criterion",
+          "source_section": "Statement",
+          "quote": "For $\\alpha\\in K$, $\\alpha\\in\\mathcal O_K$ if and only if its monic minimal polynomial over $\\mathbb Q$ lies in $\\mathbb Z[X]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-number-field",
+          "source_section": "Definition",
+          "quote": "A **number field** is a finite extension $K/\\mathbb Q$; write $n=[K:\\mathbb Q]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-irrational-rotation-dense-on-circle",
+          "source_section": "Statement",
+          "quote": "If $\\alpha\\in\\mathbb R\\setminus\\mathbb Q$, then\n$\\{e^{2\\pi i n\\alpha}:n\\in\\mathbb Z\\}$ is dense in the unit circle.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-two-axis-su2-generation",
+          "source_section": "Statement",
+          "quote": "For a matrix $M$, write $e^M=\\sum_{j\\ge0}M^j/j!$. Write\n$SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. Let\n$a,b\\in\\mathbb R^3$ be nonparallel unit vectors, let $\\sigma=(X,Y,Z)$ be the\nPauli triple, and put $A=i\\,a\\cdot\\sigma$ and $B=i\\,b\\cdot\\sigma$. If $H$ is\nthe operator-norm closure of the subgroup generated by\n$\\{e^{tA},e^{tB}:t\\in\\mathbb R\\}$, then $H=SU(2)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F9",
+            "F11",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The number $x$ is a root of the monic rational quartic $P(X)=X^4-2X^2+1/2$. It has no rational root: if $r\\in\\mathbb Q$ were a root, then $r^2$ would solve $z^2-2z+1/2=0$, whose roots $1\\pm\\sqrt2/2$ are irrational. Indeed, if $\\sqrt2=a/b$ in lowest terms, then $a^2=2b^2$ is even, so $a$ is even because an odd integer has odd square. Substituting $a=2c$ gives $b^2=2c^2$ even, so $b$ is even too, a contradiction. If $P$ factored over $\\mathbb Q$, its lack of a rational root forces a factorization into two monic rational quadratics; write $P=(X^2+aX+b)(X^2-aX+d)$. Comparing coefficients gives $a(d-b)=0$, $b+d-a^2=-2$, and $bd=1/2$. If $a=0$, then $b,d$ would be rational roots of $Z^2+2Z+1/2$, whose discriminant is $2$, not a rational square. If $d=b$, then $b^2=1/2$, also impossible in $\\mathbb Q$. Thus $P$ is irreducible and is the monic minimal polynomial of $x$. Every power of $x$ reduces using $P(x)=0$ to a rational linear combination of $1,x,x^2,x^3$, while these four powers are linearly independent over $\\mathbb Q$ by irreducibility of $P$. Hence $[\\mathbb Q(x):\\mathbb Q]=4$, so $\\mathbb Q(x)$ is a number field by",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write the eigenvalues of $V$ as $e^{i\\alpha},e^{-i\\alpha}$, so $x=2\\cos\\alpha$. If $\\alpha/\\pi$ were rational, these eigenvalues would be roots of unity. For each positive integer $m$, the polynomials $S_0=2$, $S_1=X$, $S_{m+1}=XS_m-S_{m-1}$ are monic integer polynomials for $m\\ge1$ and satisfy $S_m(\\lambda+\\lambda^{-1})=\\lambda^m+\\lambda^{-m}$. For a root of unity of order $m$, this makes $x$ a root of the monic integer polynomial $S_m(X)-2$, contradicting step 2.1. Hence $\\alpha/\\pi$ is irrational.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F11",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F10",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 5.1 identifies the image of the dense word subgroup under the onto quotient map; the subgroup contains its identity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed H and T gates have nonzero scalar and Pauli components; no zero input parameter is varied."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The algebraic argument rules out rational eigenangle ratios rather than evaluating a one-value boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 proves the two axes are nonparallel using their nonzero z and xy coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint occurs in the density statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 4.1–5.1 use eigenbases and a determinant phase; each existence is proved from finite-dimensional spectral theory or the unit-circle parametrization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the specified normalized h,t generate a dense subgroup of SU(2), hence H,T projective classes are dense in PU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the specified normalized h,t generate a dense subgroup of SU(2), hence H,T projective classes are dense in PU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "6e43cb1fbdc1e79036228f996b058f4dc9d6b8d12bc2cda3c361d98ee2031629",
+            "row_sha256": "0c2bdd84f32aede4632467c7d4985e4c20245abeff018b9529b93f70ed20a866",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the specified normalized h,t generate a dense subgroup of SU(2), hence H,T projective classes are dense in PU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the specified normalized h,t generate a dense subgroup of SU(2), hence H,T projective classes are dense in PU(2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "6e43cb1fbdc1e79036228f996b058f4dc9d6b8d12bc2cda3c361d98ee2031629",
+            "row_sha256": "71ef4c0f823abd1926120a3e98c61217d52feef31c3bf8e136f9be9a34eefb84",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "repair_confidence": 1,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all five proof steps, fourteen actual supplier interfaces and the prerequisite proofs used for irrational rotation and two-axis generation. Checked h=iH and t=exp(-i pi/8)T phases, the sign of the Y coordinate, x^2=1-sqrt(2)/2, and irreducibility by ruling out rational roots and both quadratic factorizations. Q(x) is a number field, so the minimal-polynomial algebraic-integer criterion applies. The root-of-unity polynomial recurrence proves irrational eigenangle; the nonzero Z and XY coordinates force nonparallel conjugate axes. Corrected the single sentence that wrongly placed a conjugate torus in the countable generated subgroup: its closure contains it. Quotient surjectivity follows by a determinant square root, and density passes to PU(2). Statement unchanged; no AC or outside consumer repair."
+      }
+    },
+    "lem-qc-commutator-error-cancellation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Keeping $W$ fixed, the commutator difference caused by replacing $V$ by $\\widetilde V=VE$ is $V(EWE^*-W)V^*W^*$. Unitary left and right multiplication from",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "After the first replacement, keep $\\widetilde V$ fixed and replace $W$ by $\\widetilde W=WF$. The commutator difference is $\\widetilde V W(F\\widetilde V^*F^*-\\widetilde V^*)W^*$. The expansion in step 2.1, with $\\widetilde V^*-I$ in place of $W-I$, bounds its norm by $2\\|F-I\\|\\|\\widetilde V-I\\|\\le2\\eta(\\sqrt\\eta+\\eta)$, since $\\|\\widetilde V-I\\|\\le\\|V-I\\|+\\|\\widetilde V-V\\|\\le\\sqrt\\eta+\\eta$. The operator-norm triangle inequality follows from",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The four matrices are elements of the nonempty group SU(2)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives E=F=I when eta=0, and steps 2.1–3.1 give zero difference."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The error parameter is at most 1/16."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 applies when either replacement is exact, with its corresponding perturbation norm zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 sums the two bounds for all 0<=eta<=1/16, including eta=1/16."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is an explicit norm estimate and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the four near-identity and approximation bounds imply commutator error <=4 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the four near-identity and approximation bounds imply commutator error <=4 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "77c72e4e242dd25d016f62ce7ab5876e409bc082d03391265fd12f28914b2e31",
+            "row_sha256": "8d85773cccbaa16f3503d4d7d78eb4cc6aa4d1b6616e96d120af6b6eb80bf70b",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the four near-identity and approximation bounds imply commutator error <=4 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the four near-identity and approximation bounds imply commutator error <=4 eta^(3/2). These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "77c72e4e242dd25d016f62ce7ab5876e409bc082d03391265fd12f28914b2e31",
+            "row_sha256": "3a703aeb46b41ba01ceee9e5b03ddf5a46b56ada188f1c49b2c7fbce2f4e0ace",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "repair_confidence": 1,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Independent supplier review found false constant 4: the second replacement must use tilde V, whose distance to I is <=sqrt(eta)+eta. Exact rational quaternion witness at eta=1/10000 refutes 4 eta^(3/2). Repaired bound to 4 eta^(3/2)+2 eta^2<=5 eta^(3/2), with explicit sequential expansion. Checked eta=0 and 1/16 and all direct consumers: the algorithm needs no instruction change; the resource and bit-complexity proofs now use 40+5=45<=64. No direct consumer outside batch 12 exists."
+      }
+    },
+    "thm-qc-solovay-kitaev-bit-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-effective-unitary-matrix-input",
+          "source_section": "Definition",
+          "quote": "A **finite gate alphabet** is a finite list of distinct labels, each assigned\none exact matrix in $SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. A\n**Cauchy name** for a target $U\\in SU(2)$ is a\ndeterministic procedure which, on unary input $1^b$, returns a rational\n$2\\times2$ complex matrix $Q_b$ whose real and imaginary entries differ from\nthe corresponding entries of $U$ by at most $2^{-b}$. The name has a stated\ntime bound $T(b)$. A precision request is a positive rational\n$\\varepsilon\\in(0,1/2)$ in binary, using the effective encoding convention of\n[[def-effective-binary-encoding-and-decoder]].\n\nThe Cauchy name specifies the exact target through all its approximants; an\nindividual $Q_b$ need not be unitary. An exact-real target handle and a\nCauchy-name input are distinct interfaces: the first permits ideal exact\ncomparisons, while a finite Turing implementation must use the second.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qc-solovay-kitaev-unitary-compiler",
+          "source_section": "Definition",
+          "quote": "**Inputs:** A fixed inverse-closed dense gate package $G$ with the finite\nbase-net certificate $(\\mathcal N_0,\\eta_0,L_0)$ from\n[[def-qc-inverse-closed-dense-su2-gate-set]], an exact-real target\n$U\\in SU(2)$, and a rational $0<\\varepsilon\\le\\eta_0$. This is an ideal\nexact-real procedure: fixed-dimensional exact matrix arithmetic, matrix\nlogarithm/exponential, and exact comparisons are unit-cost operations. It is\nnot, by this definition alone, a finite Turing algorithm.\n\nSet $\\eta_{j+1}=64\\eta_j^{3/2}$ for $j\\ge0$. Choose the least integer\n$J\\ge0$ with $\\eta_J\\le\\varepsilon$. Define $\\operatorname{Compile}(U,j)$\nrecursively:\n\n1. If $j=0$, return the first word $A\\in\\mathcal N_0$ with\n   $\\|U-A\\|\\le\\eta_0$.\n2. If $j>0$, set $A=\\operatorname{Compile}(U,j-1)$ and $D=UA^*$.\n   If $D=I$, set $V=W=I$. Otherwise apply the Pauli-coordinate construction\n   in [[lem-qc-su2-balanced-commutator]] to $D$ and $\\eta_{j-1}$, obtaining\n   $V,W\\in SU(2)$ with $D$ approximated by $VWV^*W^*$.\n3. Set $B=\\operatorname{Compile}(V,j-1)$ and\n   $C=\\operatorname{Compile}(W,j-1)$. Return the word\n   $BCB^*C^*A$. Store concatenations and inverses as a shared expression DAG;\n   an inverse word is formed by reversing its label order and replacing each\n   label by its listed inverse. Expanding the DAG writes the ordinary gate word.\n\nReturn $\\operatorname{Compile}(U,J)$. The recursion depth is finite because\neach call decreases the nonnegative integer $j$.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-su2-balanced-commutator",
+          "source_section": "Statement",
+          "quote": "For a matrix $M$, write $e^M=\\sum_{j\\ge0}M^j/j!$. Here\n$SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. If\n$D\\in SU(2)$ and $0\\le\\|D-I\\|\\le\\eta\\le1/16$, there are\n$V,W\\in SU(2)$ such that\n$$\\|V-I\\|,\\|W-I\\|\\le\\sqrt\\eta,\\qquad \\|D-VWV^*W^*\\|\\le40\\eta^{3/2}.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-commutator-error-cancellation",
+          "source_section": "Statement",
+          "quote": "Let $V,W,\\widetilde V,\\widetilde W\\in SU(2)$ and $0\\le\\eta\\le1/16$, with\n$\\|V-I\\|,\\|W-I\\|\\le\\sqrt\\eta$ and\n$\\|\\widetilde V-V\\|,\\|\\widetilde W-W\\|\\le\\eta$. Then\n$$\\|VWV^*W^*-\\widetilde V\\widetilde W\\widetilde V^*\\widetilde W^*\\|\\le4\\eta^{3/2}+2\\eta^2\\le5\\eta^{3/2}.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-fixed-dimension-interval-arithmetic",
+          "source_section": "Statement",
+          "quote": "Fix a positive matrix dimension $d$ and an integer $c\\ge1$. A dyadic interval is a\nclosed interval with dyadic-rational endpoints; a complex matrix interval\nstores one such interval for every real and imaginary entry. Suppose each\ninput is given by a Cauchy procedure which, on unary request $1^q$, returns a\nrational approximation to each real and imaginary entry with error at most\n$2^{-q}$ and uses $O((q+1)^c)$ bit operations. Suppose exact scalar and\nmatrix inputs have entries of modulus at most $3$. Each fixed algebraic real\nconstant is supplied by a rational polynomial and an open rational interval\nwith nonroot endpoints on which the polynomial has opposite endpoint signs\nand exactly one real root.\nHere rational outputs and fixed rational data are stored as a sign and\nbinary numerator and positive denominator, separated by a fixed delimiter;\nthe fraction need not be reduced. The complete output length is charged to\nthe Cauchy procedure's bit time.\nWhen each scalar divisor\nand each norm used for normalization has modulus at\nleast $2^{-B}$, the following routines return dyadic intervals of diameter at\nmost $2^{-p}$ containing the exact answer, using\n$O((p+B+1)^{\\max(c,3)})$ bit operations:\n\n- any fixed finite composition of sums and products;\n- quotient by a scalar whose modulus is at least $2^{-B}$;\n- the nonnegative square root of a real in $[0,1]$;\n- normalization $v/\\|v\\|_2$ of a real vector with $\\|v\\|_2\\ge2^{-B}$;\n- the matrix exponential $e^A$ when $\\|A\\|\\le1$; and\n- the matrix logarithm $\\log(I+E)=\\sum_{j\\ge1}(-1)^{j+1}E^j/j$\n  when $\\|E\\|\\le1/2$.\n\nHere $d$ and the number of scalar operations in the fixed composition are\nconstants. The exponent $B$ is needed only for divisions and normalization;\nthe square-root routine also works at input zero. The constants in the\ncomplexity bound may depend on the fixed dimension, routine, and Cauchy-time\nconstant.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-su2-near-identity-logarithm",
+          "source_section": "Statement",
+          "quote": "For a matrix $M$, write $e^M=\\sum_{j\\ge0}M^j/j!$. Here\n$SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. If\n$D\\in SU(2)$ and $\\|D-I\\|\\le\\rho\\le1/2$, then the operator-norm\nconvergent series\n$$\\log D=\\sum_{j=1}^{\\infty}(-1)^{j+1}(D-I)^j/j$$\nsatisfies $e^{\\log D}=D$, is traceless and skew-Hermitian, and\n$\\|\\log D\\|\\le-\\log(1-\\rho)\\le2\\rho$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-pauli-vector-multiplication",
+          "source_section": "Statement",
+          "quote": "For the Pauli matrices $X,Y,Z$ in\n[[def-qc-pauli-matrices]], the matrices\nare Hermitian, traceless, and square to $I$. For $u,v\\in\\mathbb R^3$, writing\n$u\\cdot\\sigma=u_1X+u_2Y+u_3Z$ gives\n$$ (u\\cdot\\sigma)(v\\cdot\\sigma)=(u\\cdot v)I+i(u\\times v)\\cdot\\sigma.$$\nAlso, the Pauli triple is a real basis of the traceless Hermitian $2\\times2$\nmatrices, $\\|u\\cdot\\sigma\\|=|u|$, and the commutator therefore satisfies\n$$[iu\\cdot\\sigma,iv\\cdot\\sigma]=-2i(u\\times v)\\cdot\\sigma.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-inverse-closed-dense-su2-gate-set",
+          "source_section": "Definition",
+          "quote": "Write $SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. An\n**inverse-closed dense $SU(2)$ gate package** consists of a finite set\n$G\\subset SU(2)$ of exact matrices with finite labels such that $g^{-1}=g^*$\nbelongs to $G$ for each $g\\in G$ and the subgroup $\\langle G\\rangle$ of finite\nproducts is dense in $SU(2)$ in operator norm. A word is a finite ordered list\nof labels; its value is the corresponding matrix product, and its length is\nthe number of labels.\n\nFor a compiler package, also fix a rational $0<\\eta_0<1/4096$, a finite list\n$\\mathcal N_0$ of words, and an integer $L_0$ such that every $U\\in SU(2)$ is\nwithin operator-norm distance $\\eta_0/4$ of the value of some word in\n$\\mathcal N_0$, and every listed word has length at most $L_0$. This is a\nfinite **base-net certificate**. Density proves that such a certificate\nexists, but does not compute the list or its maximum word length.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constructed-factor-commutator-estimate",
+          "step": "4.1",
+          "claim": "Put $s=\\|A_0\\|=\\|B_0\\|=\\sqrt{r/2}\\le\\sqrt{\\eta_{j-1}}<1/64$. The Hermitian involution $Q_a$ in step 3.1 has eigenvalues $1,-1$, so its displayed exponential formula gives $\\|V-I\\|=|e^{is}-1|=2|\\sin(s/2)|\\le s$, and likewise $\\|W-I\\|\\le s$. Here the scalar exponential product identity follows by multiplying its absolutely convergent series; together with [F7] it gives the sine expression, and [F8] gives the last inequality as in step 2.1. From [F9], applying the vector triangle inequality to unit inputs gives the operator-norm triangle inequality, and $\\|YZv\\|\\le\\|Y\\|\\|Zv\\|\\le\\|Y\\|\\|Z\\|$ gives submultiplicativity. Expand $e^{A_0}e^{B_0}e^{-A_0}e^{-B_0}$ in homogeneous degrees: degrees zero, one and two sum to $I+[A_0,B_0]=I+X$, and the sum of norms in degree $n$ is at most $(4s)^n/n!$ by the multinomial identity. Its remaining tail is therefore at most $(4s)^3e^{4s}/6<32s^3$, since $4s<1$ and $e=\\sum_{n\\ge0}1/n!<3$. Also $\\|X\\|=\\|[A_0,B_0]\\|\\le2s^2$, so $\\|e^X-I-X\\|\\le2s^4e^{2s^2}\\le s^3$; indeed $e^{2s^2}\\le(1-2s^2)^{-1}$ and $2s/(1-2s^2)<1$. Since $D=e^X$ and $V^*=e^{-A_0},W^*=e^{-B_0}$, these estimates give $\\|D-VWV^*W^*\\|\\le33s^3\\le40\\eta_{j-1}^{3/2}$ for these exact factors, independently of the existential clause of [F3].",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "step": "1.1",
+          "claim": "Set $q_0=4096\\eta_0<1$. The exact error recurrence is $\\eta_{j+1}=64\\eta_j^{3/2}$, so for $q_j=4096\\eta_j$ we have $q_{j+1}=q_j^{3/2}$ and $\\eta_j=2^{-12}q_0^{(3/2)^j}$. Choose fixed integers $K,A$ with $q_0^{(3/2)^K}<1/2$ and $2^Aq_0\\ge1$. Let $j_N$ be the least integer with $(3/2)^{j_N}\\ge N$ and set $J=K+j_N$. Then $q_J\\le2^{-N}\\le\\varepsilon/2$, hence $\\eta_J\\le\\varepsilon$. Write the encoded rational tolerance as $\\varepsilon=p/q$ with positive integers $p,q$. Since $q<2^{s_\\varepsilon}$ and $p\\ge1$, we have $N\\le s_\\varepsilon+1$; binary search over integers $0,\\ldots,s_\\varepsilon+1$ using exact comparisons $2^N p\\ge2q$ computes $N$ in time polynomial in $s_\\varepsilon$. The integer $j_N$ is found by repeated rational multiplication by $3/2$; $J=O(\\log N)$. Put $B=12+A\\lceil(3/2)^J\\rceil$, $L_J=L_0 5^J$, and $P=64(B+\\lceil\\log_2(L_J+1)\\rceil+32)$. For every $j\\le J$, $\\eta_j\\ge2^{-B}$; also $B=O(N)$, $\\log_2(L_J+1)=O(\\log N)$, and $P=O(N)$. Each routine is requested at precision $P$ or higher, so word-product errors and interval widths are below $2^{-B-20}$; in particular, an interval for $\\tau_j:=\\eta_j/128$ has width at most $\\tau_j/4$. Compute these recurrence intervals from the rational $\\eta_0$ using certified square-root and multiplication calls at precision $P$; since $2^{-P}\\le2^{-B-9}$, each resulting interval is narrower than $\\eta_j/512$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-1.2",
+          "step": "1.2",
+          "claim": "At level zero, compute certified Frobenius-distance intervals from the target to each word in the fixed base net, and return the first word whose upper endpoint is at most $\\eta_0$. By the base-net certificate in [F6], some word is at operator-norm distance at most $\\eta_0/4$; its Frobenius distance is at most $\\sqrt2\\,\\eta_0/4$. Since the fixed dimension is two, the chosen precision $P$ makes the Frobenius-distance interval error less than $\\eta_0/8$, so this word's upper endpoint is below $\\eta_0$. For the selected word, operator norm is bounded by Frobenius norm, giving actual error at most $\\eta_0$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "step": "2.1",
+          "claim": "At a nonbase node of level $j$, recursively obtain the exact gate word $A$ for the lower-level call and set $D=UA^*$. Inductively, by [F9], for any unitary $Q$ one has $\\|XQ\\|=\\max_{\\|v\\|=1}\\|XQv\\|=\\max_{\\|w\\|=1}\\|Xw\\|=\\|X\\|$ because $Q$ maps the unit sphere bijectively to itself; thus $\\|D-I\\|=\\|(U-A)A^*\\|=\\|U-A\\|\\le\\eta_{j-1}<1/2$. Use interval routines to enclose $X=\\log D$ and $r=\\|X\\|$ by rational intervals $[r_-,r_+]$ of width at most $\\tau_j/4$, and compute a rational interval $[\\tau_j^-,\\tau_j^+]$ for $\\tau_j=\\eta_j/128$ of width at most $\\tau_j/4$. These intervals are certified; branch by comparing rational endpoints: if $r_+\\le2\\tau_j^-$, return $A$ with no correction. Then $r\\le r_+\\le2\\tau_j^-\\le2\\tau_j$. Since the eigenvalues of the traceless skew-Hermitian $X$ are $ir,-ir$ and $D=e^X$, $\\|D-I\\|=2|\\sin(r/2)|\\le r\\le2\\tau_j<\\eta_j$; here $|\\sin t|\\le|t|$ follows from [F8], the mean value theorem, and [F7]. Otherwise, $r_+>2\\tau_j^-$. The interval widths imply $\\tau_j^-\\ge3\\tau_j/4$ and $r_-\\ge r_+-\\tau_j/4$, hence $r\\ge r_->2\\tau_j^- -\\tau_j/4\\ge5\\tau_j/4>\\tau_j$. Thus the balanced branch has the certified denominator lower bound it needs. The branch comparison uses only rational interval endpoints, not an exact-real comparison with $\\tau_j$ or an exact-zero test.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "routine-3.1",
+          "step": "3.1",
+          "claim": "In the balanced branch write $X=i\\,v\\cdot\\sigma$, so $|v|=r$ by [F5], and set $u=v/r$. At least one coordinate satisfies $|u_k|\\le1/\\sqrt3$. Compute intervals for $|u_1|,|u_2|,|u_3|$ of width at most $1/16$, and choose the first whose certified upper endpoint is at most $3/4$; one exists since $1/\\sqrt3+1/16<3/4$. For its coordinate vector $e_k$, set $e=(u\\times e_k)/|u\\times e_k|$, $a=\\sqrt{r/2}\\,e$, and $b=-\\sqrt{r/2}\\,(u\\times e)$. The denominator is at least $\\sqrt7/4>1/2$, so interval normalization is conditioned; also $e\\perp u$, $|u\\times e|=1$, and $a\\times b=-(r/2)u=-v/2$. Thus, for $A_0=i\\,a\\cdot\\sigma$ and $B_0=i\\,b\\cdot\\sigma$, the Pauli commutator identity gives $[A_0,B_0]=X$. The near-identity bound gives $r\\le2\\eta_{j-1}$, hence $\\|a\\|=\\|b\\|=\\sqrt{r/2}\\le\\sqrt{\\eta_{j-1}}$. Exponentiating defines exact $V=e^{A_0},W=e^{B_0}$; interval routines provide Cauchy names for these exact child targets. The lower bound $r>\\tau_j\\ge2^{-B-7}$ from step 2.1 and the cross-product bound show every denominator has at most $B+O(1)$ conditioning bits. For example, with $Q_a=(a\\cdot\\sigma)/|a|$, [F5] gives $Q_a^*=Q_a$, $Q_a^2=I$, and $\\operatorname{tr}(Q_a)=0$. Grouping the even and odd terms of the exponential series gives $V=\\cos|a|I+i\\sin|a|Q_a$ by [F7]. This formula implies $V^*V=I$; writing $Q_a=\\begin{pmatrix}x&z\\\\\\overline z&-x\\end{pmatrix}$, the identity $Q_a^2=I$ gives $x^2+|z|^2=1$, and direct determinant calculation then gives $\\det V=\\cos^2|a|+\\sin^2|a|=1$. The same calculation gives $W\\in SU(2)$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-5.1",
+          "step": "5.1",
+          "claim": "Recursively compile these exact $V,W$ at level $j-1$, obtaining words $\\widetilde V,\\widetilde W$ within $\\eta_{j-1}$ of them. Step 4.1 approximates $D$ by $VWV^*W^*$ within $40\\eta_{j-1}^{3/2}$ and verifies both factor distances required by the cancellation bound in [F3], which adds at most $5\\eta_{j-1}^{3/2}$ when $V,W$ are replaced by $\\widetilde V,\\widetilde W$. Since $U-(\\widetilde V\\widetilde W\\widetilde V^*\\widetilde W^*A)=(D-\\widetilde V\\widetilde W\\widetilde V^*\\widetilde W^*)A$ and $A$ is unitary, [F9] right-multiplication invariance gives the same error norm. Thus the returned word $\\widetilde V\\widetilde W\\widetilde V^*\\widetilde W^*A$ approximates $U$ within $45\\eta_{j-1}^{3/2}\\le\\eta_j$. Together with the small-residual branch and step 1.2, induction proves the claimed error. The recursion has at most three calls per node and each output length satisfies $L_j\\le5L_{j-1}$, so its expanded length is at most $L_0 5^J$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "routine-6.1",
+          "step": "6.1",
+          "claim": "Every exact target in a recursive call is represented by a Cauchy name obtained from its parent using matrix products, logarithms, Pauli coordinates, division by $r\\ge\\tau_j$, normalization, square roots and exponentials. In the balanced branch the only small square-root radicand is $x=r/2>\\tau_j/2$. Request an enclosing interval of width at most $2^{-b}\\sqrt{\\tau_j}/16$ and at most $\\tau_j/4$; its endpoints are then at least $\\tau_j/4$. The identity $|\\sqrt{x}-\\sqrt{y}|=|x-y|/(\\sqrt{x}+\\sqrt{y})$ bounds the spread of their square roots by $2^{-b}/16$. Both width requirements follow from $b+O(1+\\log_2(1/\\tau_j))$ input bits, using the levelwise dyadic lower bound $\\tau_j\\ge2^{-19-A\\lceil(3/2)^j\\rceil}$ from step 1.1; no exact square-root comparison is needed to select the precision. Bisect the rational endpoints to $b+O(1)$ output bits as in [F4], costing cubic bit time in the working precision. Use this conditioned routine for $\\sqrt{r/2}$. For norms used in normalization, the Lipschitz estimate $|\\|v\\|-\\|v'\\||\\le\\|v-v'\\|$ in [F4] likewise permits additive input precision; computing the norm of the rational midpoint by square-root bisection needs no further parent query. Each such query uses one parent matrix query at the required guard precision; the query returns all entries together, which the routines reuse. The interval routines have conditioning-bit bound $O(1+\\log_2(1/\\eta_j))$. The sum of these bounds along a branch is $O(B)$, because $\\log_2(1/\\eta_j)\\le12+A(3/2)^j$ is geometric. Put $r_0=\\max(c,3)$. Induction through the at most $J$ derived-name layers therefore bounds a query at precision $b$ by $O(J(b+B+\\log L_J+1)^{r_0})$. At requested precision $P=O(N)$, this is polynomial in $N$ for every node. The finitely many algebraic gate entries are enclosed once by the minimal-polynomial bisection in [F4], in $O(P^3)$ time. The recursion tree has at most $3^J$ nodes. After this precomputation, direct evaluation of all word matrices costs at most $O(3^J J L_J P^2)$ bit operations; the remaining fixed-dimensional interval routines and derived target-name evaluations cost at most $O(3^J J(P+B+\\log L_J+1)^{r_0})$. Since $J=O(\\log N)$, $5^J=O(N^{\\log_{3/2}5})$ and $3^J=O(N^{\\log_{3/2}3})$, each of these costs, together with reading $\\varepsilon$ and printing the expanded output, is bounded by $O((N+s_\\varepsilon)^{c+10})$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.2 uses the fixed nonempty certified base net; epsilon=eta_0 permits a fixed finite recursion depth."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 returns the lower-level word when the residual logarithm is zero, without an exact-zero comparison."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem uses N>=1 and a fixed gate package; it has no one-value output claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 handles a zero residual, and step 3.1 certifies all denominators in the balanced branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 allow epsilon=eta_0 and use the strict base condition eta_0<64^-2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 selects the first certified base-net word and step 3.1 selects the first certified coordinate, both deterministically."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the prescribed algebraic gate data, Cauchy input and encoded positive rational precision admit a deterministic compiler with the stated word and bit-time bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the prescribed algebraic gate data, Cauchy input and encoded positive rational precision admit a deterministic compiler with the stated word and bit-time bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "4a2616b63db111da0a5623ae33426e00875197d1425b456a5cf9306ed534b09c",
+            "row_sha256": "612c55b98f635c6006aa961be1113067e17183abb88d0b5b75ef6d79f42e44d0",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the prescribed algebraic gate data, Cauchy input and encoded positive rational precision admit a deterministic compiler with the stated word and bit-time bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the prescribed algebraic gate data, Cauchy input and encoded positive rational precision admit a deterministic compiler with the stated word and bit-time bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "4a2616b63db111da0a5623ae33426e00875197d1425b456a5cf9306ed534b09c",
+            "row_sha256": "716eaf48a9727090f096a1cfe8fbd328a97d5a16a561d908058f16fdf78d3b78",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "repair_confidence": 1,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all six steps and sixteen actual supplier interfaces; reviewed ideal recursion and corrected cancellation proof. F3 and 4.1 now use 5 eta^(3/2) and total 45<=64. N is computed from the full binary rational encoding, so huge unreduced p/q input is charged; J=O(log N), B and P are O(N) with fixed package constants. Base-net Frobenius threshold has strict slack. The small residual branch uses certified endpoint tests; the other branch forces r>tau_j. First-certified coordinate selection gives cross-product norm >=sqrt(7)/4, preventing a singular normalizer. All actual child targets are exact SU(2), while dyadic intermediates need not be unitary. Nonzero balanced square roots permit additive guard precision (|sqrt x-sqrt y|<=|x-y|/sqrt x), and conditioning guards sum geometrically to O(B) along a name layer chain. One parent matrix query per layer reuses all entries. Checked D=I, threshold overlap and equality, algebraic isolator termination, output cost and O((N+s_epsilon)^(c+10)) bound. No exact real comparison, external finite-input theorem substitution, AC or unresolved prerequisite."
+      }
+    },
+    "thm-qc-solovay-kitaev-error-and-resource-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-solovay-kitaev-unitary-compiler",
+          "source_section": "Definition",
+          "quote": "**Inputs:** A fixed inverse-closed dense gate package $G$ with the finite\nbase-net certificate $(\\mathcal N_0,\\eta_0,L_0)$ from\n[[def-qc-inverse-closed-dense-su2-gate-set]], an exact-real target\n$U\\in SU(2)$, and a rational $0<\\varepsilon\\le\\eta_0$. This is an ideal\nexact-real procedure: fixed-dimensional exact matrix arithmetic, matrix\nlogarithm/exponential, and exact comparisons are unit-cost operations. It is\nnot, by this definition alone, a finite Turing algorithm.\n\nSet $\\eta_{j+1}=64\\eta_j^{3/2}$ for $j\\ge0$. Choose the least integer\n$J\\ge0$ with $\\eta_J\\le\\varepsilon$. Define $\\operatorname{Compile}(U,j)$\nrecursively:\n\n1. If $j=0$, return the first word $A\\in\\mathcal N_0$ with\n   $\\|U-A\\|\\le\\eta_0$.\n2. If $j>0$, set $A=\\operatorname{Compile}(U,j-1)$ and $D=UA^*$.\n   If $D=I$, set $V=W=I$. Otherwise apply the Pauli-coordinate construction\n   in [[lem-qc-su2-balanced-commutator]] to $D$ and $\\eta_{j-1}$, obtaining\n   $V,W\\in SU(2)$ with $D$ approximated by $VWV^*W^*$.\n3. Set $B=\\operatorname{Compile}(V,j-1)$ and\n   $C=\\operatorname{Compile}(W,j-1)$. Return the word\n   $BCB^*C^*A$. Store concatenations and inverses as a shared expression DAG;\n   an inverse word is formed by reversing its label order and replacing each\n   label by its listed inverse. Expanding the DAG writes the ordinary gate word.\n\nReturn $\\operatorname{Compile}(U,J)$. The recursion depth is finite because\neach call decreases the nonnegative integer $j$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-su2-balanced-commutator",
+          "source_section": "Statement",
+          "quote": "For a matrix $M$, write $e^M=\\sum_{j\\ge0}M^j/j!$. Here\n$SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. If\n$D\\in SU(2)$ and $0\\le\\|D-I\\|\\le\\eta\\le1/16$, there are\n$V,W\\in SU(2)$ such that\n$$\\|V-I\\|,\\|W-I\\|\\le\\sqrt\\eta,\\qquad \\|D-VWV^*W^*\\|\\le40\\eta^{3/2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-commutator-error-cancellation",
+          "source_section": "Statement",
+          "quote": "Let $V,W,\\widetilde V,\\widetilde W\\in SU(2)$ and $0\\le\\eta\\le1/16$, with\n$\\|V-I\\|,\\|W-I\\|\\le\\sqrt\\eta$ and\n$\\|\\widetilde V-V\\|,\\|\\widetilde W-W\\|\\le\\eta$. Then\n$$\\|VWV^*W^*-\\widetilde V\\widetilde W\\widetilde V^*\\widetilde W^*\\|\\le4\\eta^{3/2}+2\\eta^2\\le5\\eta^{3/2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-inverse-closed-dense-su2-gate-set",
+          "source_section": "Definition",
+          "quote": "Write $SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. An\n**inverse-closed dense $SU(2)$ gate package** consists of a finite set\n$G\\subset SU(2)$ of exact matrices with finite labels such that $g^{-1}=g^*$\nbelongs to $G$ for each $g\\in G$ and the subgroup $\\langle G\\rangle$ of finite\nproducts is dense in $SU(2)$ in operator norm. A word is a finite ordered list\nof labels; its value is the corresponding matrix product, and its length is\nthe number of labels.\n\nFor a compiler package, also fix a rational $0<\\eta_0<1/4096$, a finite list\n$\\mathcal N_0$ of words, and an integer $L_0$ such that every $U\\in SU(2)$ is\nwithin operator-norm distance $\\eta_0/4$ of the value of some word in\n$\\mathcal N_0$, and every listed word has length at most $L_0$. This is a\nfinite **base-net certificate**. Density proves that such a certificate\nexists, but does not compute the list or its maximum word length.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We prove by induction that level $j$ has error at most $\\eta_j$. The base net gives error at most $\\eta_0$ at level zero. Suppose the lower-level word $A$ has error at most $\\eta_{j-1}$. Since $A$ is unitary, right multiplication by $A^*$ maps the unit sphere bijectively to itself; the operator-norm definition in",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $q_j=64^2\\eta_j$ and $q_0=64^2\\eta_0\\in(0,1)$. The recurrence gives $q_{j+1}=q_j^{3/2}$; with the positive-real-power convention in",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The recursive word contains two copies each of the level-$(j-1)$ words $B,C$ and one copy of $A$, so its length is at most $5L_{j-1}$ and hence at most $L_0 5^j$. The recursion tree has three recursive calls per node, so its shared-DAG arithmetic count is $O(3^j)$; expanding and printing the word takes at most $O(5^j)$. Since $j=O(\\log\\log(1/\\varepsilon))$, these are respectively $O(\\log^{\\log_{3/2}3}(1/\\varepsilon))$ and $O(\\log^{\\log_{3/2}5}(1/\\varepsilon))$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 permits J=0 when the requested tolerance is already met at level zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 covers D=I through the compiler branch and step 2.1 applies the residual estimate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The recurrence uses the fixed factor 3/2 and has no one-parameter case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 gives a positive residual bound and step 2.1 allows the identity residual."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1–4.1 cover epsilon=eta_0 and the chosen base-net radius range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem invokes the fixed finite base-net certificate and makes no new choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the fixed certified net and dense inverse-closed gate set give the stated error recurrence, word length and exact-real arithmetic bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the fixed certified net and dense inverse-closed gate set give the stated error recurrence, word length and exact-real arithmetic bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "6103defed39db50341ba9122ec3fa1e445d0158a9caa5d2338696805fcb95b38",
+            "row_sha256": "58e953733adbece5edacbfed47ea7dc88c447ab67dd2cde957f6ccdc4ac94504",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the fixed certified net and dense inverse-closed gate set give the stated error recurrence, word length and exact-real arithmetic bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the fixed certified net and dense inverse-closed gate set give the stated error recurrence, word length and exact-real arithmetic bounds. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "6103defed39db50341ba9122ec3fa1e445d0158a9caa5d2338696805fcb95b38",
+            "row_sha256": "00f8fdb99fae27e269a96b0a0e35235009ef83318e9a24e3bd859f46ba3b68ee",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "repair_confidence": 1,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all four proof steps, actual algorithm instructions, gate package and logarithm/floor suppliers; independently reviewed balanced construction and repaired cancellation supplier. Updated F3 and step 2.1 to use 5 eta^(3/2) and total 45<=64. Unitary invariance transfers lower-level approximation error to D-I and back to the output. q_j=4096 eta_j gives q_(j+1)=q_j^(3/2), with q_0 in (0,1); checked least J formula at epsilon=eta_0 (J=0), positivity, monotone shrink and all call admissibility. Three recursive targets, five word copies, shared-DAG O(3^J) and expanded O(5^J) are distinct exact-real bounds. No Statement change, AC or unresolved defect. Step-5 unit 12: preserved the every-real-tolerance guarantee by explicitly applying the already-defined level subroutine Compile(U,J), rather than passing an irrational tolerance to the rational-only top-level interface. The Given now allows real epsilon. Proof 3.1 establishes finite least J for any such real; repeated exact recurrence comparisons select it in O(J+1) ideal operations, absorbed by O(3^J). The induction and exact recurrence formulas need no rationality of epsilon. Step-5 unit 12: revalidated under the acquired shared lock. The real-tolerance guarantee uses the existing Compile(U,J) subroutine; proof 3.1 establishes its finite least J for every real epsilon>0. The same induction gives approximation error, and O(J+1) ideal level-selection operations are absorbed by O(3^J). The top-level algorithm interface remains rational."
+      }
+    },
+    "thm-qc-fixed-arity-unitary-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-solovay-kitaev-error-and-resource-bound",
+          "source_section": "Statement",
+          "quote": "For a fixed inverse-closed dense $G\\subset SU(2)$ and a certified base net of\nradius $0<\\eta_0<64^{-2}$ and a target $U\\in SU(2)$, the level recursion\n$\\operatorname{Compile}(U,J)$ of\n[[alg-qc-solovay-kitaev-unitary-compiler]] returns, for every real\n$0<\\varepsilon\\le\\eta_0$, a word $W$ with\n$\\|U-W\\|\\le\\varepsilon$, where $J$ is the least nonnegative integer\nwith $\\eta_J\\le\\varepsilon$. For a real tolerance this means selecting\n$J$ by ideal exact-real comparisons and calling the level subroutine\ndirectly; the algorithm's top-level tolerance input is rational.\nThe level errors may be chosen as\n$$\\eta_j=64^{-2}(64^2\\eta_0)^{(3/2)^j}.$$\nThe word length is at most $L_0 5^j$ at level $j$, hence\n$O(\\log^{\\log_{3/2}5}(1/\\varepsilon))=O(\\log^{3.97}(1/\\varepsilon))$.\nWith shared recursive words, the exact-real arithmetic count is\n$O(\\log^{\\log_{3/2}3}(1/\\varepsilon))=O(\\log^{2.71}(1/\\varepsilon))$;\nprinting the expanded word takes $O(\\log^{3.97}(1/\\varepsilon))$ time.\nThe latter are exact-real arithmetic bounds, not bit-complexity bounds.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-closed-unit-ball-compact-iff-finite-dimensional",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and write\n\n$$\\overline B_X:=\\{x\\in X:\\|x\\|\\le1\\}.$$\n\nThen the following are equivalent.\n\n1. $\\overline B_X$ is compact in the norm metric ([[def-metric-compactness]]).\n2. $X$ admits an ordered basis of finite length.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each one-qubit factor $G_j\\in U(2)$, determinant multiplicativity and $G_j^*G_j=I$ give $|\\det G_j|^2=1$. Thus [F7] gives $\\det G_j=e^{i\\theta_j}$ for a real $\\theta_j$. Put $\\phi_j=\\theta_j/2$ and $S_j=e^{-i\\phi_j}G_j$. Then $\\det S_j=e^{-2i\\phi_j}\\det G_j=1$ and $S_j$ is unitary, so $S_j\\in SU(2)$ and $G_j=e^{i\\phi_j}S_j$.",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $h=\\min(\\eta_0,\\varepsilon/m)>0$. Let $r$ be the least nonnegative integer with $2^{-r}\\le h$ and put $\\delta=2^{-r}$. Such an $r$ exists since $2^{-r}\\to0$; since $h<1$, minimality gives $h/2<\\delta\\le h$. Thus $\\delta$ is rational, satisfies $0<\\delta\\le\\eta_0$ and $\\delta\\le\\varepsilon/m$, and is a permitted input to the compiler in [F1]. Apply it to each $S_j$. It gives a gate word $W_j$ with $\\|S_j-W_j\\|\\le\\delta$. The phase factors $e^{i\\phi_j}$ commute with all factors and multiply to one scalar for the entire circuit; after factoring it out, the exact and compiled products have the same CNOT slots and respectively $S_j$ and $W_j$ in each one-qubit slot.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "First justify the full-register error at each local slot. Group its one-qubit support first and unused wires second, using the unitary wire permutation of [F10]. For a finite orthonormal basis $(e_\\ell)$ of the unused register, every vector is uniquely $v=\\sum_\\ell v_\\ell\\otimes e_\\ell$, and the product inner product gives $\\|v\\|^2=\\sum_\\ell\\|v_\\ell\\|^2$. For a local difference $A$, it also gives $\\|(A\\otimes I)v\\|^2=\\sum_\\ell\\|Av_\\ell\\|^2\\le\\|A\\|^2\\sum_\\ell\\|v_\\ell\\|^2=\\|A\\|^2\\|v\\|^2$ by [F8]. Thus $\\|A\\otimes I\\|\\le\\|A\\|$. Conjugation by the wire permutation preserves norm, since a unitary preserves vector norms and maps the unit sphere onto itself. This includes the empty unused register. Apply this to each $S_j-W_j$ from step 2.1, giving full-register slot error at most $\\delta$. Index the full ordered circuit product by $q=m+c$ slots, so the two products are $A_q\\cdots A_1$ and $B_q\\cdots B_1$. At a CNOT slot set $A_r=B_r$ to that exact gate; at a one-qubit slot use the exact $S_j$ and its compiled word $W_j$. Insert one factor at a time to obtain $A_q\\cdots A_1-B_q\\cdots B_1=\\sum_{r=1}^q A_q\\cdots A_{r+1}(A_r-B_r)B_{r-1}\\cdots B_1$. Every surrounding factor is unitary: exact factors, compiled words, and CNOTs are all unitary. For a unitary $Q$, $\\|Qv\\|=\\|v\\|$ for every unit vector $v$, so [F8] gives $\\|Q\\|=1$. The operator-norm triangle inequality follows from [F8] by applying [F9] to each unit input and taking the maximum. Then [F2] bounds the product difference by the sum of the $q$ factor errors. The CNOT slots contribute zero, and the $m$ one-qubit slots each contribute at most $\\delta$, giving $m\\delta\\le\\varepsilon$. The scalar from step 2.1 is a single whole-circuit phase, proving the projective operator bound.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The unit circle is a closed subset of the closed unit ball in $\\mathbb C$, so it is compact by [F6]. The continuous function $\\lambda\\mapsto\\|U-\\lambda C\\|$ therefore attains its minimum at some $|\\lambda|=1$. The phase from step 3.1 gives one value at most $\\varepsilon$, so this minimum is also at most $\\varepsilon$. By [F4], diagonalize $E$ in an orthonormal basis with eigenvalues $\\lambda_1,\\ldots,\\lambda_{2^k}$. Nonnegativity [F3] makes each $\\lambda_i\\ge0$, and $\\|E\\|\\le1$ gives $\\lambda_i\\le1$ by applying the norm to a corresponding unit eigenvector. Define $E^{1/2}$ in this basis by diagonal entries $\\sqrt{\\lambda_i}$, which exist by [F5]. Its square is $E$, it is self-adjoint, and direct calculation on coordinates gives $\\|E^{1/2}\\|=\\max_i\\sqrt{\\lambda_i}\\le1$. The factors $U,C$ are unitary, so [F8] gives $\\|U\\psi\\|=\\|C\\psi\\|=1$. The two vectors $E^{1/2}U\\psi$ and $E^{1/2}\\lambda C\\psi$ have norms at most $1$, and their distance is at most $\\varepsilon$ by step 3.1 and [F2]. The reverse triangle inequality from [F9] gives $|\\|x\\|-\\|y\\||\\le\\|x-y\\|$ for these vectors; factoring the difference of their squared norms therefore bounds it by $(1+1)\\varepsilon=2\\varepsilon$. Since the scalar phase does not change a norm, this proves the event bound.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Each one-qubit word uses $O(\\log^{\\log_{3/2}5}(1/\\delta))$ gates by [F1]. Since $1/\\delta<2\\max(1/\\eta_0,m/\\varepsilon)$ and $m/\\varepsilon>2$, this is $O(\\log^{\\log_{3/2}5}(m/\\varepsilon))$, with constants depending on the fixed base-net radius. Summing over $m$ factors and adding the $c$ exact CNOTs gives the stated count. The factorization and all replacements use the same wires, so no ancillas are introduced.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the Statement requires m>=1 and permits c=0; step 5.1 adds zero exact CNOTs when c=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 covers E=0; zero factor errors are included in the telescoping estimate of step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 allow m=1: delta<=epsilon and the telescoping sum has one nonzero slot difference. Step 3.1 expressly includes an empty unused register, so k=1 is covered. Step 4.1 includes the event E=I, whose value remains exactly one for both unitaries.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Steps 2.1–3.1 allow m=1: delta<=epsilon and the telescoping sum has one nonzero slot difference. Step 3.1 expressly includes an empty unused register, so k=1 is covered. Step 4.1 includes the event E=I, whose value remains exactly one for both unitaries.",
+            "item_sha256": "43f233a5e61962fe241981e505125e9f797fc54ecbc69bf5c0769f29238f8d62",
+            "row_sha256": "4cc5c1fbaed6c965d61e44d2117b21b022e894001ad06e9d24791ea34528b9ea",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 retains exact scalar phases for every one-qubit factor, including determinant-one factors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and Given require real 0<epsilon<1/2. The dyadic delta is positive and at most eta_0 and epsilon/m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1 use the unit-circle parametrization and compactness to obtain phases/minima; no Choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: compiling the supplied one-qubit slots to epsilon/m gives whole-block projective error <=epsilon, the stated gate count and event-value change <=2epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: compiling the supplied one-qubit slots to epsilon/m gives whole-block projective error <=epsilon, the stated gate count and event-value change <=2epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "43f233a5e61962fe241981e505125e9f797fc54ecbc69bf5c0769f29238f8d62",
+            "row_sha256": "86fe3e121d8d41b2275b665bdfc60d23f3f6b45f7f9b6ef3e00ac5c6f6778a09",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: compiling the supplied one-qubit slots to epsilon/m gives whole-block projective error <=epsilon, the stated gate count and event-value change <=2epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: compiling the supplied one-qubit slots to epsilon/m gives whole-block projective error <=epsilon, the stated gate count and event-value change <=2epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "43f233a5e61962fe241981e505125e9f797fc54ecbc69bf5c0769f29238f8d62",
+            "row_sha256": "36e3c8cb8e9adeade5523cad219e47814c8bbe227979de398d8ebd24e2d78c7c",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all five steps and actual eleven supplier Statements/Definitions. Input is a supplied no-ancilla factorization, not a uniform exact-synthesis assertion. Splitting each U(2) factor by a determinant square root leaves one global circuit phase. Dyadic delta in (h/2,h] handles real tolerances and epsilon/m>eta_0. Checked m=1, c=0, k=1 and the empty spectator register; product-basis expansion proves full-register amplification <=1 without a later tensor theorem. Telescoping counts only m nonzero errors. Compact scalar circle gives the displayed minimum, spectral positivity constructs a contraction E^(1/2), and reverse triangle inequality gives event error <=2 epsilon, including E=0,I. Gate count and wires are preserved. No AC or defect."
+      }
+    },
+    "thm-qc-controlled-phase-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-controlled-phase-rotation",
+          "source_section": "Definition",
+          "quote": "For a real angle $\\theta$, define the one-qubit phase matrix $P_\\theta=\\operatorname{diag}(1,e^{i\\theta})$. In control-first order define\n\n$$CP(\\theta):=C(P_\\theta)=\\operatorname{diag}(1,1,1,e^{i\\theta})$$\n\nin the ordered basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$. This is the exact controlled phase; no circuit cost or controlled access to an arbitrary black-box unitary is implied.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-global-phase-under-control",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional target space, let $U$ be unitary on $H$, and let $|\\lambda|=1$. In control-first order put\n$$C(U)=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix},\\qquad P_\\lambda=\\begin{pmatrix}1&0\\\\0&\\lambda\\end{pmatrix}.$$\nThen $C(\\lambda U)=(P_\\lambda\\otimes I_H)C(U)$. A scalar multiplying an entire output leaves every defined finite-POVM outcome law unchanged, whereas a scalar attached to a target matrix inside a control gives a phase on only the active control block; applying $P_{\\overline\\lambda}$ on the control restores the exact controlled matrix.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-fixed-arity-unitary-error-budget",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge1$, $U\\in U(2^k)$, and a real $0<\\varepsilon<1/2$. Suppose a supplied exact decomposition of\n$U$ has $m\\ge1$ one-qubit $U(2)$ factors and $c\\ge0$ exact CNOT factors,\nwith no ancillas. Compiling the special-unitary part of each one-qubit factor\nto error $\\varepsilon/m$ gives a circuit $C$ such that\n$$\\min_{|\\lambda|=1}\\|U-\\lambda C\\|\\le\\varepsilon.$$\nIts gate count is at most\n$c+O(m\\log^{\\log_{3/2}5}(m/\\varepsilon))$ for fixed $k$ and fixed base net.\nFor every unit vector $\\psi$ and every nonnegative contraction $E$ on the\n$2^k$-dimensional space, the event value\n$p_E(V,\\psi):=\\|E^{1/2}V\\psi\\|^2$ changes by at most $2\\varepsilon$ between\n$V=U$ and $V=C$. The phase guarantee is for the whole unconditional block.\nHere nonnegative contraction means $E=E^*$, $\\langle Ev,v\\rangle\\ge0$ for\nall $v$, and $\\|E\\|\\le1$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a basis vector $|ab\\rangle$, the first CNOT maps it to $|a,b\\oplus a\\rangle$. The target phase contributes $e^{-i\\theta(b\\oplus a)/2}$; the second CNOT restores $|ab\\rangle$; and the two final phase gates contribute $e^{i\\theta(a+b)/2}$. The product is $e^{i\\theta ab}$, which is $1$ on $|00\\rangle,|01\\rangle,|10\\rangle$ and $e^{i\\theta}$ on $|11\\rangle$. This is exactly $CP_\\theta$ from [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct diagonal multiplication gives $P_\\alpha=e^{i\\alpha/2}R_z(\\alpha)$, hence $R_z(\\alpha)=e^{-i\\alpha/2}P_\\alpha$. Replacing $P_{-\\theta/2}$ on the target contributes $e^{i\\theta/4}$, while replacing each of the two $P_{\\theta/2}$ gates contributes $e^{-i\\theta/4}$. Their product is $e^{-i\\theta/4}$, so the resulting $R_z$ circuit is $e^{-i\\theta/4}CP_\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The circuit in step 1.1 is an exact factorization of the two-qubit $CP_\\theta$ into three one-qubit phase gates and two CNOTs. Applying [F3] therefore gives a word $W$ and unit scalar $\\mu$ with $\\|CP_\\theta-\\mu W\\|\\le\\varepsilon$. By [F2], $C(\\mu W)=(\\operatorname{diag}(1,\\mu)\\otimes I_4)C(W)$. The difference $C(CP_\\theta)-C(\\mu W)=\\operatorname{diag}(0,CP_\\theta-\\mu W)$ has norm exactly $\\|CP_\\theta-\\mu W\\|$: on a vector $(x,y)$ it acts as $(0,(CP_\\theta-\\mu W)y)$, giving the upper bound, and vectors $(0,y)$ give equality. Consequently the displayed phase-corrected controlled approximation has error at most $\\varepsilon$. If $\\mu\\ne1$, the correction $\\operatorname{diag}(1,\\mu)$ is not a scalar on the control. Omitting it is not justified by the two-qubit projective bound; using it requires both the control phase and $C(W)$ to be available.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With $\\lambda_R=e^{-i\\theta/4}$ from step 2.1, [F2] gives $C(\\lambda_R CP_\\theta)=(\\operatorname{diag}(1,\\lambda_R)\\otimes I_4) C(CP_\\theta)$. Applying $P_{\\theta/4}=\\operatorname{diag}(1,\\overline{\\lambda_R})$ to the outer control restores the exact controlled target in the continuous phase-gate model.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The complete controlled target is the diagonal three-qubit matrix $D_\\theta=\\operatorname{diag}(1,1,1,1,1,1,1,e^{i\\theta})$. For bits $a,b,c\\in\\{0,1\\}$, put $p_{ab}=a\\oplus b$, $p_{ac}=a\\oplus c$, $p_{bc}=b\\oplus c$, and $p_{abc}=a\\oplus b\\oplus c$. Checking the four possible Hamming weights $0,1,2,3$ makes the right side respectively $0,0,0,4$, so $4abc=a+b+c-p_{ab}-p_{ac}-p_{bc}+p_{abc}$. Apply $P_{\\theta/4}$ to each single bit. To apply $P_{-\\theta/4}$ to $p_{ab}$, use a CNOT with control $b$ and target $a$, apply $P_{-\\theta/4}$ to wire $a$, and undo that CNOT; the target wire then again contains $a$. Use the corresponding pairs for $p_{ac}$ and $p_{bc}$. To apply $P_{\\theta/4}$ to $p_{abc}$, use two CNOTs into wire $a$, apply $P_{\\theta/4}$ there, and undo both CNOTs. On each basis state these circuits restore the original bits and contribute exactly the indicated signed parity phase. The resulting phase is $e^{i\\theta abc}$, so this is an exact factorization of $D_\\theta$ with seven one-qubit phase gates and ten CNOTs. Applying [F3] to this complete three-qubit factorization gives a projective operator approximation to $D_\\theta$ itself; its scalar is global on the three-qubit block. This supplies the complete-block compilation option in the statement.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the Statement defines CP_theta and the complete three-qubit target; theta=0 gives the identity block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 give identity phases and zero global correction when theta=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The qubit count is fixed at two and three; no one-qubit target boundary is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.2–3.1 distinguish mu=1 from a nontrivial control-relative phase and lambda_R=1 from a required correction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the basis-state calculations in steps 1.1 and 4.1 hold for every real theta, including multiples of 2pi."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1 gives explicit CNOT and phase-gate sequences with no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the specified CNOT/phase circuits implement CP_theta and its controlled extension with explicit relative-phase restoration and whole-block approximation. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the specified CNOT/phase circuits implement CP_theta and its controlled extension with explicit relative-phase restoration and whole-block approximation. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "671dd83a3d1a279df964a9311b9d45a2c8fb7779c528dea91bbfa830d8f9bac9",
+            "row_sha256": "6015fa6a71d76b54deb0e895d2bef1fd93b67e0e5db86eeaa537ca65b5bfcce7",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the specified CNOT/phase circuits implement CP_theta and its controlled extension with explicit relative-phase restoration and whole-block approximation. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: the specified CNOT/phase circuits implement CP_theta and its controlled extension with explicit relative-phase restoration and whole-block approximation. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "671dd83a3d1a279df964a9311b9d45a2c8fb7779c528dea91bbfa830d8f9bac9",
+            "row_sha256": "4fab3bb0e4c7bec1974f3cbf2c2d63d52f5f156a2bfb56214b46f16995090c1f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all five proof steps, exact controlled-phase Definition/Verification and global-phase-under-control Statement/Proof, and the reviewed fixed-arity budget. Checked all four two-bit basis actions using a+b-(a xor b)=2ab. Three P-to-Rz scalar replacements multiply to exp(-i theta/4). The extra control has nonzero four-dimensional target so the supplier phase identity applies, including lambda=1; P_(theta/4) cancels the relative control phase exactly. The three-bit identity was checked at all Hamming weights 0,1,2,3. Each parity network uncomputes its bits; 3 single phases, 3 pair phases and one triple phase use seven one-qubit gates and ten CNOTs. Thus a genuine supplied factorization permits compilation of the entire three-qubit block. No unsupported uniform synthesis theorem, uncontrolled black-box access, AC or defect. Step-5 unit 12: removed the false necessity of complete-three-qubit compilation. Proof 2.2 now proves ||diag(0,CP_theta-mu W)||=||CP_theta-mu W|| and the phase-restored controlled approximation. Availability and finite-gate cost of C(W) and the control correction remain separate requirements. The original parity-phase factorization still supplies a sufficient full-block option. The Statement and Given explicitly retain the fixed-arity supplier tolerance range 0<epsilon<1/2."
+      }
+    },
+    "ex-qc-solovay-kitaev-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Insert one factor at a time: $S_3S_2S_1-W_3W_2W_1=(S_3-W_3)S_2S_1+ W_3(S_2-W_2)S_1+W_3W_2(S_1-W_1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $S_j$ and $W_j$ is unitary by the Given. For any unitary $Q$, $\\|Qv\\|=\\|v\\|$ for every unit vector $v$, so [F2] gives $\\|Q\\|=1$. The submultiplicativity in [F1] and the triangle inequality in [F2] therefore bound the norm of the right side by $\\|S_3-W_3\\|+\\|S_2-W_2\\|+\\|S_1-W_1\\|\\le\\varepsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By Given, the scalar factors in $G_3G_2G_1$ multiply to $\\lambda=e^{i(\\phi_1+\\phi_2+\\phi_3)}$. Therefore $\\|U-\\lambda C\\|=\\|S_3S_2S_1-W_3W_2W_1\\|\\le\\varepsilon$ by step 2.1. This is an unconditional-block guarantee; it does not license discarding $\\lambda$ inside a later control.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes exactly three one-qubit factors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1 include zero local errors and yield zero product error."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has three factors and no one-factor boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 allows any scalar phases, including a zero total phase modulo 2pi."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter is part of the example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The verification is a fixed telescoping identity and uses no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: three prescribed special-unitary factor errors <=epsilon/3 imply projective product error <=epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: three prescribed special-unitary factor errors <=epsilon/3 imply projective product error <=epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-forward is not a separate obligation.",
+            "item_sha256": "1f439e22691b060d7d6d401bfa5f26b90aa899df792ff2d24f00139fdd4f0228",
+            "row_sha256": "669f2e09d50a984bab362be00c77568acb92af086f1453aefa367a4ae9c5bf79",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: three prescribed special-unitary factor errors <=epsilon/3 imply projective product error <=epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement: three prescribed special-unitary factor errors <=epsilon/3 imply projective product error <=epsilon. These are sufficient-hypothesis guarantees, not an equivalence with a reverse characterization, so iff-reverse is not a separate obligation.",
+            "item_sha256": "1f439e22691b060d7d6d401bfa5f26b90aa899df792ff2d24f00139fdd4f0228",
+            "row_sha256": "eebdabbad8fd6fd81211cdfb50ad32da3d4daf8d08665bee35b313021789f422",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_review": "No nonstandard axioms or axiom of choice are used. The finite selections are explicit or finite; all invoked mathematical inputs are listed in Facts & Assumptions and the dependency graph.",
+      "unresolved_supplier_excerpts": []
+    }
+  }
+}

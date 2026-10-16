@@ -1,0 +1,223 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "55",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "alg-qa-dihedral-hidden-subgroup-sieve",
+      "model": "gpt-6-luna",
+      "context_sha256": "1f410510abb940fd52048fd895113ab6b930f9d9d906ed2e1c1f82aeecd5c156",
+      "outcome": "false_positive",
+      "reason": "The current deps list does not contain thm-qa-dihedral-sieve-scope, and justified_by is empty. Its terminal link describes where the properties are proved; it is not a prerequisite used to execute the sieve. The theorem depends on the algorithm in the correct direction. The supplied Fourier and CNOT identities give the specified phase and difference branches; the parity recursion uses the explicit injective coordinate maps and strictly lowers r.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-finite-cyclic-discrete-logarithm",
+      "model": "gpt-6-luna",
+      "context_sha256": "adf5ca48262959dafafb03f3859280cce6e812685a8a51ab8f83ba49eb7ee1b0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "A problem instance may supply only uncontrolled group-operation oracles and no direct f oracle. The power-evaluation supplier then returns UNSUPPORTED_ACCESS, which is not the total XOR oracle required by the sampler. Added a pre-sampling availability test for the complete profile-2 interfaces and an immediate UNSUPPORTED_ACCESS return. Supported direct-oracle and explicit-wrapper executions, confidence arithmetic, annihilator congruence d=ac and unit-coordinate recovery are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-cyclic-group-power-evaluation-correctness",
+      "model": "gpt-6-luna",
+      "context_sha256": "a50dae08929957e2a8ce97dcd462d155a3b05121bf4b4964315f6201df32de50",
+      "outcome": "false_positive",
+      "reason": "Step 1.1 explicitly defines u_j and v_j by their significance expansions u=sum_j u_j 2^j and v=sum_j v_j 2^j; these are not declared to be the ordered word coordinates in the encoding definition. For a big-endian physical word b, u_j=b_(L-1-j). Thus q=4 and u=2 has physical word 10 but significance digits u_0=0,u_1=1: the loop applies g_1=g^2, not g_0. The accumulator induction and clean compute-copy-uncompute argument are valid, with 2L forward calls, 4L wrapper calls and at most 3w extra flips/copies. No text asserts that digit subscript j is physical wire j.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-qa-dihedral-hidden-subgroup-sieve",
+      "disposition": "unaffected",
+      "post_sha256": "5c108d221ba4951f4e93c3d188361351062c6dc7fe12483776e4d5fa78f6b77c",
+      "review_context_sha256": "93c6d55380213e7e812d857bef4c37157849d74789a61bfe8a58ff376616abb8",
+      "reason": "The current deps list does not contain thm-qa-dihedral-sieve-scope, and justified_by is empty. Its terminal link describes where the properties are proved; it is not a prerequisite used to execute the sieve. The theorem depends on the algorithm in the correct direction. The supplied Fourier and CNOT identities give the specified phase and difference branches; the parity recursion uses the explicit injective coordinate maps and strictly lowers r.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-finite-cyclic-discrete-logarithm",
+      "disposition": "repaired",
+      "post_sha256": "9315f3e2927df1186d22a5f03689630a8909b2d9a1846278362c0490ac66ed24",
+      "review_context_sha256": "3d04668e6c977b196613d9d53a5253871390b6865bd9a9a9336459e46b7a4530",
+      "reason": "A problem instance may supply only uncontrolled group-operation oracles and no direct f oracle. The power-evaluation supplier then returns UNSUPPORTED_ACCESS, which is not the total XOR oracle required by the sampler. Added a pre-sampling availability test for the complete profile-2 interfaces and an immediate UNSUPPORTED_ACCESS return. Supported direct-oracle and explicit-wrapper executions, confidence arithmetic, annihilator congruence d=ac and unit-coordinate recovery are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-cyclic-group-power-evaluation-correctness",
+      "disposition": "unaffected",
+      "post_sha256": "193256c854f4017e806680bb1f8f4815734427672c00ca637d2a600aab4eb48c",
+      "review_context_sha256": "ea14660cd89d943d9c9b8fbb5e435e3cbcea0ee0062aa09e2b89050d59fa719b",
+      "reason": "Step 1.1 explicitly defines u_j and v_j by their significance expansions u=sum_j u_j 2^j and v=sum_j v_j 2^j; these are not declared to be the ordered word coordinates in the encoding definition. For a big-endian physical word b, u_j=b_(L-1-j). Thus q=4 and u=2 has physical word 10 but significance digits u_0=0,u_1=1: the loop applies g_1=g^2, not g_0. The accumulator induction and clean compute-copy-uncompute argument are valid, with 2L forward calls, 4L wrapper calls and at most 3w extra flips/copies. No text asserts that digit subscript j is physical wire j.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost",
+    "ex-qa-cyclic-discrete-log-fourier-sample"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "alg-qa-finite-cyclic-discrete-logarithm",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "locus": "definition",
+      "finding": "Unsupported access previously fell through to an oracle-dependent sampler. The explicit early return repairs this missing branch.",
+      "repair": "Check for complete power-evaluation profile 2 before constructing f; return UNSUPPORTED_ACCESS when absent."
+    },
+    {
+      "ledger": "defect-ledger",
+      "id": "alg-qa-dihedral-hidden-subgroup-sieve",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "finding": "The current deps list does not contain thm-qa-dihedral-sieve-scope, and justified_by is empty. Its terminal link describes where the properties are proved; it is not a prerequisite used to execute the sieve. The theorem depends on the algorithm in the correct direction. The supplied Fourier and CNOT identities give the specified phase and difference branches; the parity recursion uses the explicit injective coordinate maps and strictly lowers r."
+    },
+    {
+      "ledger": "defect-ledger",
+      "id": "thm-qa-cyclic-group-power-evaluation-correctness",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "finding": "Step 1.1 explicitly defines u_j and v_j by their significance expansions u=sum_j u_j 2^j and v=sum_j v_j 2^j; these are not declared to be the ordered word coordinates in the encoding definition. For a big-endian physical word b, u_j=b_(L-1-j). Thus q=4 and u=2 has physical word 10 but significance digits u_0=0,u_1=1: the loop applies g_1=g^2, not g_0. The accumulator induction and clean compute-copy-uncompute argument are valid, with 2L forward calls, 4L wrapper calls and at most 3w extra flips/copies. No text asserts that digit subscript j is physical wire j."
+    },
+    {
+      "ledger": "defect-ledger",
+      "id": "thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost",
+      "status": "owner_route",
+      "route": "frontier-owner",
+      "finding": "The repaired procedure now explicitly returns UNSUPPORTED_ACCESS before any sample on an uncontrolled-only profile without f. The theorem must distinguish such profiles from the supported profiles to which its sampling/success guarantee applies.",
+      "affected_use": "Statement: For every valid access profile ... every returned value is verified and equals the unique a; success at least 1-delta. Fact F1 assumes t exact samples are performed.",
+      "minimality": "Qualify the success guarantee and Fact F1 with availability of a direct total f oracle or the complete supported power-evaluation fallback; restrict returned-value wording to exponent outputs. No change to the sample law, success calculation or resource bounds for supported executions is needed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "alg-qa-dihedral-hidden-subgroup-sieve",
+      "status": "review_complete",
+      "evidence_paths": [
+        "items/alg-qa-dihedral-hidden-subgroup-sieve.md",
+        "items/thm-qa-dihedral-sieve-scope.md",
+        "items/lem-qa-dihedral-coset-state-fourier-law.md",
+        "items/lem-qa-dihedral-sieve-pair-combination.md"
+      ],
+      "contract": "No proof-bearing carrier contract is required for this definition-like algorithm. No item edit.",
+      "next_action": "Review DLP unsupported-access branch, then the power-evaluation theorem."
+    },
+    {
+      "id": "alg-qa-finite-cyclic-discrete-logarithm",
+      "status": "complete",
+      "missing_claim": "No missing mathematical prerequisite: the supplied-access failure branch was omitted.",
+      "evidence_paths": [
+        "items/def-qa-finite-cyclic-discrete-logarithm-problem.md",
+        "items/alg-qa-cyclic-group-power-evaluation.md",
+        "items/alg-qa-finite-abelian-hidden-subgroup-sample.md",
+        "items/lem-qa-cyclic-dlp-hidden-subgroup.md",
+        "items/lem-qa-cyclic-dlp-annihilator-equation.md"
+      ],
+      "conventions": "Known exact q>=2; f(u,v)=g^u x^v; subgroup generated by (-a,1); annihilator d=ac; no inferred controlled access. No AC.",
+      "validation": "review-contexts initially failed because another current-run item alg-qa-29-certified-natural-logarithm-enclosure was temporarily unreadable; the immediate retry succeeded.",
+      "next_action": "Controller collects the report and schedules the direct-consumer frontier-owner review; no assigned-item repair remains.",
+      "metadata_repair": "Updated only this algorithm Definition mirror in research/quantum-computing-algorithms-60-2026-10-15-batch-55.pages.json under acquire/reread/edit/check/release. JSON parse and exact mirror equality passed. No proof contract exists or is required for this algorithm."
+    },
+    {
+      "id": "thm-qa-cyclic-group-power-evaluation-correctness",
+      "status": "review_complete",
+      "evidence_paths": [
+        "items/thm-qa-cyclic-group-power-evaluation-correctness.md",
+        "items/alg-qa-cyclic-group-power-evaluation.md",
+        "items/def-qc-ordered-bitstring-encoding.md",
+        "items/lem-qa-controlled-cyclic-multiplication-clean.md",
+        "research/quantum-computing-algorithms-60-2026-10-15-batch-55.proof-contracts.json"
+      ],
+      "conventions": "Significance indices in step 1.1 are the reverse of positional wire indices; no change to big-endian storage. Cyclic constants commute. All inverse controlled operations and classical precomputation are supplied and separately charged.",
+      "validation": "Focused precheck passed the theorem; rendercheck passed all three assigned items with zero errors and warnings.",
+      "next_action": "No item edit or downstream propagation; controller retains current review evidence."
+    },
+    {
+      "status": "operational",
+      "note": "No judges, stamps, certificates, round transitions, workers, or shared ledgers were written. Edited the assigned DLP algorithm and its owning manifest mirror only. Proof-layout ran once after the final item edit and passed."
+    },
+    {
+      "status": "command_diagnostics",
+      "note": "The precheck --help probe exited 1 because this CLI treats --help as a path. The rendercheck --help probe unexpectedly selected the corpus (35178 files, 125 errors, exit 1); these unrelated diagnostics were not used as scoped evidence or repaired. The explicit-path focused precheck and rendercheck commands recorded in checks subsequently passed."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "id": "thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost",
+      "supplier": "alg-qa-finite-cyclic-discrete-logarithm",
+      "path": "items/thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost.md",
+      "disposition": "frontier_owner_repair",
+      "affected_use": "Statement: For every valid access profile ... every returned value is verified and equals the unique a; success at least 1-delta. Fact F1 assumes t exact samples are performed.",
+      "invalidated_claim": "The repaired procedure now explicitly returns UNSUPPORTED_ACCESS before any sample on an uncontrolled-only profile without f. The theorem must distinguish such profiles from the supported profiles to which its sampling/success guarantee applies.",
+      "minimality": "Qualify the success guarantee and Fact F1 with availability of a direct total f oracle or the complete supported power-evaluation fallback; restrict returned-value wording to exponent outputs. No change to the sample law, success calculation or resource bounds for supported executions is needed.",
+      "uncertain": false
+    },
+    {
+      "id": "ex-qa-cyclic-discrete-log-fourier-sample",
+      "supplier": "alg-qa-finite-cyclic-discrete-logarithm",
+      "path": "items/ex-qa-cyclic-discrete-log-fourier-sample.md",
+      "disposition": "unaffected",
+      "affected_use": "The dependency and worked example use the conditional annihilator sample (c,d)=(2,8) and recover a=4 modulo 15.",
+      "invalidated_claim": "None: arithmetic is conditional on a valid Fourier sample and does not promise constructing unavailable controlled access.",
+      "minimality": "The existing calculation 8*8=4 mod 15 and 9^4=20 mod 31 needs no change. The missing Example heading is a pre-existing Step-4 presentation concern outside this assignment.",
+      "uncertain": false
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/quantum-algorithms/period-hidden-shift-and-number-theoretic-algorithms.md",
+      "affected_use": "Lists the DLP algorithm and describes finite cyclic discrete logarithm with explicit encodings and costed interfaces.",
+      "disposition": "unaffected",
+      "reason": "The summary promises no successful execution for uncontrolled-only interfaces; the explicit unsupported-access branch preserves its stated scope."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-finite-cyclic-discrete-logarithm.md items/thm-qa-cyclic-group-power-evaluation-correctness.md --json",
+      "exit_code": 0,
+      "result": "Two selected files; one checked proof passed, algorithm not-applicable, zero failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qa-dihedral-hidden-subgroup-sieve.md items/alg-qa-finite-cyclic-discrete-logarithm.md items/thm-qa-cyclic-group-power-evaluation-correctness.md --json",
+      "exit_code": 0,
+      "result": "Three selected files, zero errors and zero warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-55.proof-contracts.json --items thm-qa-cyclic-group-power-evaluation-correctness --strict --json",
+      "exit_code": 0,
+      "result": "One selected theorem contract passed with zero errors and warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qa-finite-cyclic-discrete-logarithm.md",
+      "exit_code": 0,
+      "result": "One changed item, zero phase steps, zero defects."
+    },
+    {
+      "command": "Exact owning batch manifest JSON parse and Definition mirror equality assertion",
+      "exit_code": 0,
+      "result": "Only the assigned DLP row statement mirror updated; exact equality with current item Definition verified."
+    }
+  ],
+  "published_ledger_updates": []
+}

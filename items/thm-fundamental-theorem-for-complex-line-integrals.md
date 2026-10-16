@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-fundamental-theorem-for-complex-line-integrals.json
 id: thm-fundamental-theorem-for-complex-line-integrals
 kind: theorem
 title: "The line integral of a continuous function admitting a primitive is that primitive's endpoint increment along every rectifiable path"
@@ -7,13 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-complex-primitive, thm-existence-of-complex-line-integrals-on-rectifiable-paths, cor-chord-length-is-at-most-arc-length, cor-continuous-complex-derivative-gives-c1-components, thm-gradient-theorem-for-line-integrals, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact, thm-lebesgue-number-lemma, thm-heine-cantor-metric, cor-ml-estimate-for-complex-line-integrals, thm-arc-length-is-additive-over-subintervals]
+deps: [thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed, thm-complex-coordinate-isometry-and-topology-transport, thm-riemann-stieltjes-and-parametric-contour-integrals-agree, def-complex-primitive, thm-existence-of-complex-line-integrals-on-rectifiable-paths, cor-chord-length-is-at-most-arc-length, cor-continuous-complex-derivative-gives-c1-components, thm-gradient-theorem-for-line-integrals, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact, thm-lebesgue-number-lemma, thm-heine-cantor-metric, cor-ml-estimate-for-complex-line-integrals, thm-arc-length-is-additive-over-subintervals]
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -29,7 +28,7 @@ $$\int_\gamma f(z)\,dz=F(\gamma(b))-F(\gamma(a)).$$
 
 ## Facts & Assumptions
 
-**Given:** A rectifiable contour $\gamma$ and a primitive $F$ with continuous derivative $f$.
+**Given:** A rectifiable contour $\gamma$ and a primitive $F$ with continuous derivative $f$. All Euclidean path statements [L2] and [L9] apply to $\Phi\circ\gamma$; [[thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed]] transfers their chord and subpath-length assertions to $\gamma$. Open balls and segments transfer by [[thm-complex-coordinate-isometry-and-topology-transport]]. In [L4] use the coordinate straight segment and the real and imaginary components of $F\circ\Phi^{-1}$. Their vector-integral endpoint identities recombine into the complex segment integral by [[thm-riemann-stieltjes-and-parametric-contour-integrals-agree]].
 
 [L1] A primitive is holomorphic and satisfies $F'=f$ ([[def-complex-primitive]]).
 

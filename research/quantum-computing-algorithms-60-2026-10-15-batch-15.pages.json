@@ -1,0 +1,721 @@
+[
+  {
+    "order": 2194,
+    "id": "pauli-and-clifford-groups-binary-symplectic-tableaux",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Pauli and Clifford Groups, Binary Symplectic Tableaux",
+    "companion": "pauli-and-clifford-groups-binary-symplectic-tableaux-examples",
+    "requires": [
+      "algebraic-extensions-degree-and-finite-fields",
+      "congruences-and-the-chinese-remainder-theorem",
+      "controlled-gates-phase-and-entanglement",
+      "dual-spaces-bilinear-forms-and-inertia",
+      "inner-product-spaces-and-orthogonality",
+      "linear-independence-bases-and-dimension",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "registers-tensor-products-and-partial-trace",
+      "vector-spaces-and-subspaces"
+    ],
+    "items": [
+      {
+        "id": "def-qc-phase-aware-n-qubit-pauli-group",
+        "kind": "definition",
+        "title": "Phase aware n qubit pauli group",
+        "statement": "The displayed tensor powers are tensor maps on the ordered factors, using [[def-qc-tensor-map]].\nFix an integer $n\\ge 1$. Let $\\mathcal H_n=Q_2^{\\otimes n}$ be the ordered tensor register of $n$ qubits from [[def-qc-tensor-register-and-permutation]], and let $\\mathbb F_2=\\mathbb Z/2\\mathbb Z$. We name the wires $1,\\ldots,n$; wire $j$ is position $j-1$ in the source's $0$-based factor list. Bit tuples use the big-endian encoding from [[def-qc-ordered-bitstring-encoding]], so the first wire is the most significant bit. Write $X_j$ and $Z_j$ for the tensor maps with the displayed one-qubit matrix on wire $j$ and the identity on every other wire. For $x,z\\in\\mathbb F_2^n$, set $X^x=\\bigotimes_{j=1}^n X^{x_j}$ and $Z^z=\\bigotimes_{j=1}^n Z^{z_j}$, where an exponent $0$ means the identity on that factor and an exponent $1$ means the displayed Pauli matrix. For $k\\in\\mathbb Z/4\\mathbb Z$, define\n\n$$P(k,x,z):=i^kX^xZ^z.$$\n\nThe **phase-aware $n$-qubit Pauli set** $\\mathcal P_n$ is the set of these operators with matrix multiplication. Its scalar subset is $Z_n:=\\{i^k I_{\\mathcal H_n}:k\\in\\mathbb Z/4\\mathbb Z\\}$. The product-and-adjoint theorem proves that $\\mathcal P_n$ is a group and that $Z_n$ is its center.",
+        "deps": [
+          "thm-z-mod-p-is-a-field",
+          "def-finite-field-and-its-order",
+          "def-vector-space",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-tensor-map",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [
+          "thm-qc-pauli-product-and-adjoint"
+        ],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "define multiplication and identity conventions before using the group name."
+        ],
+        "axiom_use": "None; this is a finite-dimensional definition."
+      },
+      {
+        "id": "lem-qc-hadamard-pauli-action",
+        "kind": "lemma",
+        "title": "Hadamard pauli action",
+        "statement": "For a Hadamard gate $H_j$ on factor $j$, conjugation swaps the binary coordinates $x_j,z_j$ and changes the phase exactly by $2x_jz_j$ modulo $4$. In particular $HXH=Z$, $HZH=X$, and $HYH=-Y$.",
+        "deps": [
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "explicit matrix/conjugation computation."
+        ],
+        "axiom_use": "None; the proof is a finite matrix and tensor calculation."
+      },
+      {
+        "id": "lem-qc-phase-gate-pauli-action",
+        "kind": "lemma",
+        "title": "Phase gate pauli action",
+        "statement": "For a phase gate $S_j=\\operatorname{diag}(1,i)$ on factor $j$, the binary update is $(x_j,z_j)\\mapsto(x_j,z_j+x_j)$ and the phase update is $k\\mapsto k+x_j$ modulo $4$. In particular $SXS^*=Y$ and $SZS^*=Z$.",
+        "deps": [
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "explicit matrix calculation consistent with item 3’s phase convention."
+        ],
+        "axiom_use": "None; the proof is a finite matrix and tensor calculation."
+      },
+      {
+        "id": "thm-qc-pauli-product-and-adjoint",
+        "kind": "theorem",
+        "title": "Pauli product and adjoint",
+        "statement": "For $k,k'\\in\\mathbb Z/4\\mathbb Z$ and $x,z,x',z'\\in\\mathbb F_2^n$, with $P(k,x,z)=i^kX^xZ^z$ and $X^xZ^z$ ordered as written,\n\n$$P(k,x,z)P(k',x',z')=P(k+k'+2(z\\cdot x'),x+x',z+z'),$$\n\nwhere the dot product is first evaluated in $\\mathbb F_2$ as $0$ or $1$, and then multiplied by $2$ in $\\mathbb Z/4\\mathbb Z$. The set $\\mathcal P_n$ is a group. If $p\\in\\{0,1\\}$ represents $x\\cdot z\\in\\mathbb F_2$, then $P(k,x,z)^*=P(2p-k,x,z)=P(k,x,z)^{-1}$, and its center is $Z_n=\\{i^k I:k\\in\\mathbb Z/4\\mathbb Z\\}$.",
+        "deps": [
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "commute Zᶻ past Xˣ′ and track the scalar i power, including the integer representative of the parity bit."
+        ],
+        "axiom_use": "None; all arguments are finite tensor and matrix calculations."
+      },
+      {
+        "id": "def-qc-binary-pauli-label-and-quotient",
+        "kind": "definition",
+        "title": "Binary Pauli label and quotient",
+        "statement": "Let $Z_n$ be the scalar center of $\\mathcal P_n$. Define $P\\sim Q$ when $P^{-1}Q\\in Z_n$, and let $Q_n$ be the set of equivalence classes $[P]=PZ_n$. The proposed coset product is $[P][Q]=[PQ]$. The quotient theorem verifies this product is well-defined and proves that the assignment\n\n$$\\lambda:Q_n\\longrightarrow V_n:=\\mathbb F_2^n\\oplus\\mathbb F_2^n,\\qquad [P(k,x,z)]\\longmapsto(x,z)$$\n\nis a group isomorphism to the additive group of $V_n$. A binary label deliberately forgets the scalar phase.",
+        "deps": [
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "thm-qc-pauli-product-and-adjoint",
+          "thm-z-mod-p-is-a-field",
+          "def-finite-field-and-its-order",
+          "def-vector-space",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "justified_by": [
+          "thm-qc-binary-pauli-quotient-isomorphism"
+        ],
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            },
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_obligations": [
+          "show the map is well-defined, onto, a homomorphism, and has exactly the scalar center as kernel."
+        ],
+        "axiom_use": "None; this is a finite quotient construction."
+      },
+      {
+        "id": "def-qc-clifford-normalizer",
+        "kind": "definition",
+        "title": "Clifford normalizer",
+        "statement": "Work with actual unitary matrices, not equivalence classes modulo global phase. The $n$-qubit **Clifford normalizer** is\n\n$$\\mathcal C_n:=\\{U\\text{ unitary on }\\mathcal H_n:U\\mathcal P_nU^*=\\mathcal P_n\\}.$$\n\nIt is a group under matrix multiplication. Every scalar unitary $\\lambda I$ with $|\\lambda|=1$ belongs to $\\mathcal C_n$ and has the same conjugation action as $I$; the chosen convention retains these distinct matrices.",
+        "deps": [
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "thm-qc-pauli-product-and-adjoint",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "verify closure under products/inverses and distinguish global scalar phase from Pauli center."
+        ],
+        "axiom_use": "None; group closure follows from finite matrix multiplication and unitary inverses."
+      },
+      {
+        "id": "lem-qc-cnot-pauli-action",
+        "kind": "lemma",
+        "title": "CNOT Pauli action",
+        "statement": "Let $n\\ge2$ and let distinct $c,t\\in\\{1,\\ldots,n\\}$ be control and target indices. For CNOT $C_{c\\to t}$ acting on $y\\in\\mathbb F_2^n$ by toggling coordinate $t$ by $y_c$, conjugation sends\n\n$$P(k,x,z)\\longmapsto P(k,x',z'),\\qquad x'_t=x_t+x_c,\\quad z'_c=z_c+z_t,$$\n\nwith all other coordinates unchanged and additions in $\\mathbb F_2$. In particular, $X_c\\mapsto X_cX_t$, $Z_c\\mapsto Z_c$, $X_t\\mapsto X_t$, and $Z_t\\mapsto Z_cZ_t$; the phase coordinate $k$ is unchanged in the fixed $X^xZ^z$ order.",
+        "deps": [
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-controlled-unitary-access",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "calculate images on the four generators and extend using item 3."
+        ],
+        "axiom_use": "None; the gate rules are finite basis and matrix calculations."
+      },
+      {
+        "id": "thm-qc-hermitian-pauli-phase-criterion",
+        "kind": "theorem",
+        "title": "Hermitian Pauli phase criterion",
+        "statement": "For $P(k,x,z)=i^kX^xZ^z\\in\\mathcal P_n$, the operator is Hermitian exactly when $k\\equiv x\\cdot z\\pmod 2$. In that case $P(k,x,z)^2=I$.",
+        "deps": [
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "thm-qc-pauli-product-and-adjoint",
+          "def-qc-pauli-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "compute the adjoint under the fixed Xᶻ ordering."
+        ],
+        "axiom_use": "None; the proof uses the finite phase-aware product law."
+      },
+      {
+        "id": "def-qc-binary-symplectic-form",
+        "kind": "definition",
+        "title": "Binary symplectic form",
+        "statement": "On $V_n=\\mathbb F_2^n\\oplus\\mathbb F_2^n$, with coordinate order $(x,z)$, define\n\n$$\\omega((x,z),(x',z')):=x\\cdot z'+z\\cdot x'.$$\n\nThis is a nondegenerate alternating bilinear form over $\\mathbb F_2$; $V_n$ has dimension $2n$. In characteristic two, alternating also implies symmetry.",
+        "deps": [
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-z-mod-p-is-a-field",
+          "def-finite-field-and-its-order",
+          "def-vector-space",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            },
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "check bilinearity and alternation in characteristic two; prove nondegeneracy by testing coordinate vectors. Optional supplier: thm-alternating-forms-have-a-symplectic-normal-form."
+        ],
+        "axiom_use": "None; all claims follow by finite coordinate calculations."
+      },
+      {
+        "id": "thm-qc-binary-pauli-quotient-isomorphism",
+        "kind": "theorem",
+        "title": "Binary Pauli quotient isomorphism",
+        "statement": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+        "deps": [
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-pauli-product-and-adjoint",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra",
+          "def-qc-ordered-bitstring-encoding",
+          "thm-qc-bitstring-index-is-bijection",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "thm-z-mod-p-is-a-field",
+          "def-finite-field-and-its-order",
+          "def-vector-space",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            },
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "Prove exact Pauli label uniqueness up to scalar using ordered computational-basis vectors.",
+          "Use the phase-aware multiplication law to prove homomorphism, kernel, surjectivity, and dimension, including n=1."
+        ],
+        "axiom_use": "None; surjectivity, injectivity, and dimension use explicit finite coordinates."
+      },
+      {
+        "id": "def-qc-binary-clifford-tableau",
+        "kind": "definition",
+        "title": "Phase-aware binary Clifford tableau",
+        "statement": "Fix the generator order $X_1,\\ldots,X_n,Z_1,\\ldots,Z_n$ and label order $(x,z)$, with wire indices as in [[def-qc-phase-aware-n-qubit-pauli-group]]. For an actual Clifford unitary $U\\in\\mathcal C_n$, write each exact generator image uniquely as\n\n$$UX_jU^*=P(k_j,x_j,z_j),\\qquad UZ_jU^*=P(k_{n+j},x_{n+j},z_{n+j}).$$\n\nIts **phase-aware binary Clifford tableau** is the pair $(S,p)$, where $S\\in M_{2n}(\\mathbb F_2)$ has as its ordered columns the $2n$ labels $(x_j,z_j)$ just listed and $p=(k_1,\\ldots,k_{2n})\\in(\\mathbb Z/4\\mathbb Z)^{2n}$. The phase vector retains the exact mod-$4$ generator-image phases; it is not discarded with the binary labels. The columns define the unique linear map on $V_n$ taking the ordered standard basis to those columns. Only pairs arising from a Clifford are called Clifford tableaux; arbitrary binary matrices and phase vectors need not be valid. A scalar global phase on $U$ does not change its tableau.",
+        "deps": [
+          "def-qc-clifford-normalizer",
+          "def-qc-phase-aware-n-qubit-pauli-group",
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "def-qc-pauli-matrices",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "Fix generator and wire order explicitly.",
+          "Keep exact mod-4 phases distinct from the binary label block."
+        ],
+        "axiom_use": "None; the tableau records finitely many exact generator images."
+      },
+      {
+        "id": "lem-qc-clifford-lifts-symplectic-transvections",
+        "kind": "lemma",
+        "title": "Clifford circuits lift binary symplectic transvections",
+        "statement": "For every nonzero $v=(x,z)\\in V_n$, the transvection $\\tau_v(w)=w+\\omega(w,v)v$ is induced on binary Pauli labels by an explicit Clifford circuit made from local $H$, $S$, $S^*$, CNOT, and wire swaps. Its mod-$4$ phase lift is computed by applying the exact gate update rules in sequence; no phase coordinate is suppressed.",
+        "deps": [
+          "def-qc-binary-symplectic-form",
+          "def-qc-clifford-normalizer",
+          "thm-qc-pauli-product-and-adjoint",
+          "thm-qc-hermitian-pauli-phase-criterion",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qc-hadamard-pauli-action",
+          "lem-qc-phase-gate-pauli-action",
+          "lem-qc-cnot-pauli-action"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "construct a local Clifford circuit sending any nonzero Hermitian Pauli to Z_1",
+          "conjugate the S_1 lift and track every phase update"
+        ],
+        "axiom_use": "None; each circuit and reduction is finite and uses no choice principle."
+      },
+      {
+        "id": "lem-qc-symplectic-transvections-generate",
+        "kind": "lemma",
+        "title": "Symplectic transvections generate the binary symplectic group",
+        "statement": "Let $V$ be any finite-dimensional vector space over $\\mathbb F_2$ with a nondegenerate alternating form $\\omega$, and let $\\dim V=2n$. Call an invertible linear map $T:V\\to V$ **symplectic** when $\\omega(Tu,Tw)=\\omega(u,w)$ for all $u,w\\in V$. For each $v\\in V$, define the transvection $\\tau_v(w)=w+\\omega(w,v)v$. Every symplectic map is a finite composition of these transvections. The form on $V_n$ from [[def-qc-binary-symplectic-form]] is the application needed here. This is a choice-free finite-dimensional reduction.",
+        "deps": [
+          "def-qc-binary-symplectic-form",
+          "def-linear-map",
+          "thm-rank-nullity",
+          "def-linear-basis",
+          "def-dimension",
+          "thm-induction-principle",
+          "def-natural-numbers"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_obligations": [
+          "prove transvections are symplectic involutions",
+          "prove transitivity on nonzero vectors and the stabilizer reduction",
+          "induct on n using the orthogonal complement"
+        ],
+        "axiom_use": "None; the reduction uses finite-dimensional linear algebra and finite induction, with no choice principle."
+      },
+      {
+        "id": "thm-qc-pauli-commutator-is-symplectic-pairing",
+        "kind": "theorem",
+        "title": "Pauli commutator is symplectic pairing",
+        "statement": "For $a=(x,z)$ and $b=(x',z')$ in $V_n$ and any phases $k,k'$, \n\n$$P(k,x,z)P(k',x',z')=(-1)^{\\omega(a,b)}P(k',x',z')P(k,x,z).$$\n\nThus the Pauli operators commute exactly when their labels are symplectically orthogonal.",
+        "deps": [
+          "thm-qc-pauli-product-and-adjoint",
+          "def-qc-binary-symplectic-form"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            },
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Scott Aaronson and Daniel Gottesman, Improved Simulation of Stabilizer Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406196"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "compare the two exact phase-aware products; binary labels alone do not prove signed group identities."
+        ],
+        "axiom_use": "None; the proof compares the finite phase-aware products."
+      },
+      {
+        "id": "thm-qc-clifford-induces-symplectic-map",
+        "kind": "theorem",
+        "title": "Clifford induces symplectic map",
+        "statement": "For each $U\\in\\mathcal C_n$, conjugation induces an invertible $\\mathbb F_2$-linear map $S_U:V_n\\to V_n$ satisfying $\\omega(S_Ua,S_Ub)=\\omega(a,b)$ for all $a,b\\in V_n$. Thus $S_U$ is symplectic. The assignment respects multiplication: $S_{UV}=S_U\\circ S_V$ for all $U,V\\in\\mathcal C_n$.",
+        "deps": [
+          "def-qc-binary-pauli-label-and-quotient",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "def-qc-binary-symplectic-form",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "def-qc-clifford-normalizer",
+          "def-linear-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "show conjugation descends through the scalar quotient and is invertible",
+          "derive linearity and preservation of the commutator pairing"
+        ],
+        "axiom_use": "None; conjugation and the quotient action use finite-dimensional algebra only."
+      },
+      {
+        "id": "thm-qc-clifford-symplectic-surjectivity",
+        "kind": "theorem",
+        "title": "Clifford to binary symplectic action is surjective",
+        "statement": "For every $n\\ge1$, write $\\operatorname{Sp}(V_n,\\omega)$ for the group of invertible $\\mathbb F_2$-linear maps $T:V_n\\to V_n$ satisfying $\\omega(Ta,Tb)=\\omega(a,b)$ for all $a,b$. For every $T\\in\\operatorname{Sp}(V_n,\\omega)$ there is a Clifford circuit $U$ made from Hadamard gates $H$, phase gates $S,S^*$, CNOT, and wire swaps whose induced action on binary Pauli labels is $T$. Since the phase gate satisfies $S^*=S^3$, this group is also generated by $H$, $S$, CNOT, and swaps. Hence the conjugation homomorphism from the Clifford normalizer to $\\operatorname{Sp}(V_n,\\omega)$ is onto. The proof uses finite transvection reduction and exact mod-$4$ phase updates at every gate.",
+        "deps": [
+          "def-qc-binary-symplectic-form",
+          "def-qc-clifford-normalizer",
+          "thm-qc-binary-pauli-quotient-isomorphism",
+          "thm-qc-clifford-induces-symplectic-map",
+          "lem-qc-symplectic-transvections-generate",
+          "lem-qc-clifford-lifts-symplectic-transvections"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hein et al., Entanglement in Graph States and Its Applications",
+              "url": "https://arxiv.org/pdf/quant-ph/0602096"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Understanding Quantum Information and Computation, Lesson 14",
+              "url": "https://jhwatrous.github.io/UQIC.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_obligations": [
+          "prove transvection generation by finite symplectic reduction",
+          "give an explicit Clifford circuit lifting each transvection and track mod-4 phases"
+        ],
+        "axiom_use": "None; the decomposition and synthesis use finite induction, not arbitrary choice."
+      }
+    ]
+  },
+  {
+    "order": 2195,
+    "id": "pauli-and-clifford-groups-binary-symplectic-tableaux-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Pauli and Clifford Groups, Binary Symplectic Tableaux — Examples",
+    "companion": "pauli-and-clifford-groups-binary-symplectic-tableaux",
+    "requires": [
+      "pauli-and-clifford-groups-binary-symplectic-tableaux"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-pauli-commutator-binary-symplectic",
+        "kind": "example",
+        "title": "Pauli commutator and binary symplectic sign",
+        "statement": "For one qubit, the labels of $X$ and $Z$ have symplectic pairing $1$, so the binary form records their anticommutation. The two operators $Z$ and $-Z$ have the same binary label but different mod-$4$ phases.",
+        "deps": [
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-algebra"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Error Correction, Physics 229 Lecture Notes, Chapter 7",
+              "url": "https://www.preskill.caltech.edu/ph229/notes/chap7.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_obligations": [
+          "Use the phase-aware product law and compute the binary alternating form."
+        ],
+        "axiom_use": "None; the example is a direct one-qubit matrix calculation."
+      }
+    ]
+  }
+]

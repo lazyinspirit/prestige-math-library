@@ -1,0 +1,1362 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "7",
+  "scope": [
+    "thm-qc-pauli-algebra",
+    "def-qc-one-qubit-gate-alphabet-and-rotations",
+    "thm-qc-bloch-coordinate-existence-and-uniqueness",
+    "thm-qc-axis-rotation-pauli-formula",
+    "thm-qc-hadamard-pauli-conjugation",
+    "thm-qc-bloch-positivity-ball",
+    "thm-qc-bloch-purity-sphere",
+    "ex-qc-zero-plus-bloch-and-hadamard"
+  ],
+  "contracts": {
+    "thm-qc-pauli-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiplying the entries of the matrices in [F1] gives the nine row-by-column products $X^2=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=I$, $XY=\\begin{pmatrix}i&0\\\\0&-i\\end{pmatrix}=iZ$, $XZ=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}=-iY$, $YX=\\begin{pmatrix}-i&0\\\\0&i\\end{pmatrix}=-iZ$, $Y^2=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=I$, $YZ=\\begin{pmatrix}0&i\\\\i&0\\end{pmatrix}=iX$, $ZX=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}=iY$, $ZY=\\begin{pmatrix}0&-i\\\\-i&0\\end{pmatrix}=-iX$, and $Z^2=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=I$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and [F2], $X^*=X$, $Y^*=Y$, and $Z^*=Z$; the diagonal entries of each product $X^*X,Y^*Y,Z^*Z$ are $1$ and its off-diagonal entries are $0$, so each product is $I$. By [F4] each is a unitary operator, in the sense of [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The six off-diagonal products in step 1.1 have opposite signs when their order is reversed, so the matrices anticommute pairwise and the table is exactly the $\\delta,\\epsilon$ product formula in the Statement. The same matrices have $\\operatorname{tr}(X)=\\operatorname{tr}(Y)=\\operatorname{tr}(Z)=0$ and $\\operatorname{tr}(I)=2$ by [F3]. Taking traces in step 1.1 gives $\\operatorname{tr}(\\sigma_j\\sigma_k)=2$ when $j=k$ and $0$ otherwise.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sum is over the fixed three-element axis set {x,y,z}; step 1.1 computes all nine products. There is no variable empty axis family or zero-dimensional Pauli space.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Focused boundary review of items/thm-qc-pauli-algebra.md (empty): The sum is over the fixed three-element axis set {x,y,z}; step 1.1 computes all nine products. There is no variable empty axis family or zero-dimensional Pauli space.",
+            "item_sha256": "1f7bac132a8ad8945af63f1a88af144a31c71285db075842d6fb4f2226bdb75e",
+            "row_sha256": "e09ec6b36113f4a968a2513e84b039baa23ce3f377328a49c341027d3de78502",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Focused boundary review of items/thm-qc-pauli-algebra.md (empty): The sum is over the fixed three-element axis set {x,y,z}; step 1.1 computes all nine products. There is no variable empty axis family or zero-dimensional Pauli space."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter; all nine ordered Pauli products are computed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Equal indices j=k give the identity products in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement has no eigenvalue multiplicity parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 compute finite matrices and traces without any choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a list of algebraic identities, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a list of algebraic identities, not an iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qc-one-qubit-gate-alphabet-and-rotations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and assume $X$\nadmits an ordered basis of finite length. Then every linear map $S:X\\to Y$ is a\nbounded linear operator in the sense of [[def-bounded-linear-operator]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-exponential-series-of-a-bounded-operator",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a real or complex Banach space and let $A\\in\\mathcal B(X)$ ([[def-bounded-linear-operator]]). For $t\\in\\mathbb R$ define $E(t):=\\sum_{n=0}^\\infty\\frac{t^n}{n!}A^n$. Then the series converges absolutely in the operator norm $\\|\\cdot\\|$ of $\\mathcal B(X)$, uniformly for $t$ in compact subsets of $\\mathbb R$; $E(t)\\in\\mathcal B(X)$ with $\\|E(t)\\| \\le e^{|t|\\|A\\|}$; $E(0)=I$ and $E(t+s)=E(t)E(s)$ for all $s,t\\in\\mathbb R$; $t\\mapsto E(t)$ is of class $C^\\infty$ in the operator norm with $$E'(t)=AE(t)=E(t)A,$$ and $\\|E(t)-I-tA\\| \\le\\frac{t^2}{2}\\|A\\|^2e^{|t|\\|A\\|}$, so that $\\frac{E(t)-I}{t}\\to A$ in operator norm as $t\\to0$. In particular $E$ is a uniformly continuous (hence strongly continuous) group of bounded operators on $X$ whose generator is the bounded operator $A$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2], $X^*=X$, $Y^*=Y$, and $Z^*=Z$. Multiplying the displayed matrices gives $X^*X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}=I$, $Y^*Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}=I$, and $Z^*Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}=I$. By [F4] each fixed Pauli matrix is unitary in the sense of [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L1] and [F2], the displayed matrix for $H$ is self-adjoint, and direct multiplication gives $H^*H=H^2=\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=I$. Thus $H$ is unitary by [F4] and [F3].",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "From [L1], $S^*=\\operatorname{diag}(1,-i)$, so $S^*S=\\operatorname{diag}(1,1)=I$. Also $T^*T=\\operatorname{diag}(1,|e^{i\\pi/4}|^2)=I$ by [F5]. Hence $S,T$ are unitary by [F4] and [F3].",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\mathbf n$ and $\\theta$ as in the Given clause, $B=-i\\theta(\\mathbf n\\cdot\\boldsymbol{\\sigma})/2$ is a linear endomorphism of $Q_2$. By [F6], $Q_2$ is Banach and $B$ is bounded, so [F7] makes the series defining $\\exp(B)$ converge absolutely in operator norm. Thus $R_{\\mathbf n}(\\theta)$ is well-defined as a matrix.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition fixes 2×2 gates and the exponential series indexed by all k≥0, including its identity term. Its series is not an optional empty family; step 2.1 proves convergence.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Focused boundary review of items/def-qc-one-qubit-gate-alphabet-and-rotations.md (empty): The Definition fixes 2×2 gates and the exponential series indexed by all k≥0, including its identity term. Its series is not an optional empty family; step 2.1 proves convergence.",
+            "item_sha256": "252e2ef677931d50675b5fa7ec57d4983fe77ef275379188463a70215d5a91db",
+            "row_sha256": "120ffcd11c7168e78507b6449c4ccfc4d1eeb839cb66c537c64d9c421783b13b",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Focused boundary review of items/def-qc-one-qubit-gate-alphabet-and-rotations.md (empty): The Definition fixes 2×2 gates and the exponential series indexed by all k≥0, including its identity term. Its series is not an optional empty family; step 2.1 proves convergence."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition defines exp(B) by the operator-norm series; for theta=0 its generator is 0 and the series equals I."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Definition has no one-dimensional space input; Q2 is fixed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Definition has no variable eigenvalue or multiplicity condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The rotation parameter ranges over all real theta, with the zero-angle case discharged in thm-qc-axis-rotation-pauli-formula, not this Definition verification."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit matrices and finite-dimensional boundedness; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed Definition and Verification 1.1–2.1, the explicit Pauli matrices, adjoint/isometry criteria, finite-dimensional Banach/boundedness results, operator exponential convergence at parameter 1, and complex exponential modulus. Corrected the first displayed factor of Y*Y from -Y to Y; the old displayed product was -I. H*H=I, S*T diagonal products and exact T phase are valid; theta=0 and arbitrary real theta are admissible, real unit axes exclude n=0. No quotient or choice is used. The original Definition and all consumer interfaces are unchanged. Repair confidence 1; defect qca60-b7-3a-y-adjoint-sign."
+      },
+      "repair_confidence": 1
+    },
+    "thm-qc-bloch-coordinate-existence-and-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-qubit-and-bloch-representation",
+          "source_section": "Definition",
+          "quote": "The **qubit space** is the one-qubit register $Q_2=\\mathbb C^2$ of [[def-qc-register-and-computational-basis]], with ordered computational basis $(|0\\rangle,|1\\rangle)=(e_0,e_1)$. This basis is orthonormal by [[thm-qc-computational-basis-orthonormal]]. A **qubit state** is a density operator on $Q_2$ in the sense of [[def-qc-density-operator]], namely a non-negative endomorphism of trace one. A **pure qubit state** is a pure-state ray on $Q_2$ in the sense of [[def-qc-pure-state-and-ray]]. The Bloch coordinates and their state-space constraints are defined and proved in the following items on this page.\n\nThe term qubit here names the two-dimensional register and its mathematical state space. No physical preparation or measurement postulate is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-bloch-coordinate-map",
+          "source_section": "Definition",
+          "quote": "Let $Q_2$ be the qubit space of [[def-qc-qubit-and-bloch-representation]], and let $\\rho$ be a density operator on $Q_2$ in the sense of [[def-qc-density-operator]]. Define its candidate Bloch coordinates in $\\mathbb C^3$ by\n$$r_j(\\rho):=\\operatorname{tr}(\\rho\\sigma_j)\\quad(j\\in\\{x,y,z\\}),\\qquad \\mathbf r(\\rho):=(r_x(\\rho),r_y(\\rho),r_z(\\rho)).$$\nFor any $\\mathbf r=(r_x,r_y,r_z)\\in\\mathbb R^3$, define the associated Hermitian-matrix candidate\n$$\\rho(\\mathbf r):=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nWrite $\\mathbf r\\cdot\\boldsymbol{\\sigma}:=r_xX+r_yY+r_zZ$ and\n$$\\|\\mathbf r\\|_2:=\\sqrt{r_x^2+r_y^2+r_z^2}.$$\nThe next theorem proves that these trace coordinates are real and that every Hermitian trace-one $2\\times2$ matrix is uniquely $\\rho(\\mathbf r)$; the positivity theorem determines which real-coordinate candidates are states.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For arbitrary real $\\mathbf r$, the matrices in [F6] give $\\rho(\\mathbf r)=\\frac12\\begin{pmatrix}1+r_z&r_x-ir_y\\\\r_x+ir_y&1-r_z\\end{pmatrix}$. Its diagonal entries are real, its lower-left entry is the conjugate of the upper-right, and its trace is $1$, so it is Hermitian trace one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write the arbitrary Hermitian trace-one matrix $\\rho=\\begin{pmatrix}a&z\\\\\\overline z&1-a\\end{pmatrix}$ with $a\\in\\mathbb R$: [F2] makes the computational basis orthonormal, and [F3]–[F4] give the conjugate-transpose matrix criterion for $\\rho^*=\\rho$, so its diagonal entries are real and its lower-left entry is the conjugate of the upper-right; trace one fixes the second diagonal entry. Put $r_x=2\\operatorname{Re}z$, $r_y=-2\\operatorname{Im}z$, and $r_z=2a-1$, which are real. The matrices in [F6] and formula in [F8] give $\\rho(\\mathbf r)=\\frac12\\begin{pmatrix}1+r_z&r_x-ir_y\\\\r_x+ir_y&1-r_z\\end{pmatrix}=\\begin{pmatrix}a&z\\\\\\overline z&1-a\\end{pmatrix}=\\rho$. This proves existence.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the entries $a,z$ of step 1.2, direct multiplication using [F6] and summing diagonal entries by [F9] gives $\\operatorname{tr}(\\rho X)=z+\\overline z=2\\operatorname{Re}z=r_x$, $\\operatorname{tr}(\\rho Y)=i(z-\\overline z)=-2\\operatorname{Im}z=r_y$, and $\\operatorname{tr}(\\rho Z)=a-(1-a)=2a-1=r_z$. If $\\rho=\\rho(\\mathbf s)$ for another real vector $\\mathbf s$, [F7] applied to [F8] gives $\\operatorname{tr}(\\rho\\sigma_j)=s_j$ for each $j$, so $\\mathbf s=\\mathbf r$ and uniqueness follows. When $\\rho$ is a density operator, [F5] makes it Hermitian and trace one, and [F8] identifies these same real trace coordinates with the map $\\mathbf r(\\rho)$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns the fixed nonzero space Q2=C2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes r=0 and gives rho(0)=I/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 cover every Hermitian trace-one matrix, including rank-one matrices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes z=0, the diagonal-matrix case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: the unique real Bloch coordinates of a Hermitian trace-one 2×2 matrix. Its assertion has no varying scalar on a closed interval; the identities or construction do not introduce an interval endpoint case.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Focused boundary review of items/thm-qc-bloch-coordinate-existence-and-uniqueness.md (endpoints): Statement: the unique real Bloch coordinates of a Hermitian trace-one 2×2 matrix. Its assertion has no varying scalar on a closed interval; the identities or construction do not introduce an interval endpoint case.",
+            "item_sha256": "0dc60b27b5cf57052161f3a188215df68a5e7e74a84fce5fa8df85750cc0d441",
+            "row_sha256": "082f469e88541894bc4db1a1b81c5dec9c0896a5498eb9579bf58590bc311e30",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 use explicit finite coordinates and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is existence and uniqueness, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is existence and uniqueness, not an iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Read Proof 1.1, 1.2, 2.1 and actual cited definitions/theorems. For Hermitian trace-one [[a,z],[conj(z),1-a]], a is real and (2 Re z,-2 Im z,2a-1) gives the exact inverse. Direct trace multiplication has the correct Y sign; Pauli trace orthogonality gives uniqueness for every real candidate, without positivity. Density operators are Hermitian trace one by definition. r=0 gives I/2; no zero-dimensional, empty-coordinate, choice or nonunique cases are suppressed. No defect found."
+      }
+    },
+    "thm-qc-axis-rotation-pauli-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-qubit-and-bloch-representation",
+          "source_section": "Definition",
+          "quote": "The **qubit space** is the one-qubit register $Q_2=\\mathbb C^2$ of [[def-qc-register-and-computational-basis]], with ordered computational basis $(|0\\rangle,|1\\rangle)=(e_0,e_1)$. This basis is orthonormal by [[thm-qc-computational-basis-orthonormal]]. A **qubit state** is a density operator on $Q_2$ in the sense of [[def-qc-density-operator]], namely a non-negative endomorphism of trace one. A **pure qubit state** is a pure-state ray on $Q_2$ in the sense of [[def-qc-pure-state-and-ray]]. The Bloch coordinates and their state-space constraints are defined and proved in the following items on this page.\n\nThe term qubit here names the two-dimensional register and its mathematical state space. No physical preparation or measurement postulate is part of this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$\n\nThese are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\sin ^2x+\\cos ^2x=1$, $\\sin(-x)=-\\sin x$, and $\\cos(-x)=\\cos x$. Wherever the displayed quotients are defined, $\\tan(-x)=-\\tan x$, $\\cot(-x)=-\\cot x$, $\\sec(-x)=\\sec x$, $\\csc(-x)=-\\csc x$, $1+\\tan^2x=\\sec^2x$, and $1+\\cot^2x=\\csc^2x$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-exponential-series-of-a-bounded-operator",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a real or complex Banach space and let $A\\in\\mathcal B(X)$ ([[def-bounded-linear-operator]]). For $t\\in\\mathbb R$ define $E(t):=\\sum_{n=0}^\\infty\\frac{t^n}{n!}A^n$. Then the series converges absolutely in the operator norm $\\|\\cdot\\|$ of $\\mathcal B(X)$, uniformly for $t$ in compact subsets of $\\mathbb R$; $E(t)\\in\\mathcal B(X)$ with $\\|E(t)\\| \\le e^{|t|\\|A\\|}$; $E(0)=I$ and $E(t+s)=E(t)E(s)$ for all $s,t\\in\\mathbb R$; $t\\mapsto E(t)$ is of class $C^\\infty$ in the operator norm with $$E'(t)=AE(t)=E(t)A,$$ and $\\|E(t)-I-tA\\| \\le\\frac{t^2}{2}\\|A\\|^2e^{|t|\\|A\\|}$, so that $\\frac{E(t)-I}{t}\\to A$ in operator norm as $t\\to0$. In particular $E$ is a uniformly continuous (hence strongly continuous) group of bounded operators on $X$ whose generator is the bounded operator $A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and assume $X$\nadmits an ordered basis of finite length. Then every linear map $S:X\\to Y$ is a\nbounded linear operator in the sense of [[def-bounded-linear-operator]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $\\Sigma^2=\\sum_j n_j^2\\sigma_j^2+\\sum_{j<k}n_jn_k(\\sigma_j\\sigma_k+\\sigma_k\\sigma_j)=(\\sum_j n_j^2)I=I$. Also $\\Sigma^*=\\Sigma$, since the $n_j$ are real and every $\\sigma_j$ is Hermitian.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $B=-i\\theta\\Sigma/2$. By [F1], $Q_2$ is finite-dimensional; [F9] makes it Banach and [F10] makes $B$ bounded, so [F6] makes $\\sum_{k\\ge0}B^k/k!$ absolutely convergent. From [step 1.1], induction gives $B^{2m}=(-1)^m(\\theta/2)^{2m}I$ and $B^{2m+1}=-i(-1)^m(\\theta/2)^{2m+1}\\Sigma$. Grouping its even and odd terms is valid by absolute convergence; [F4] identifies the two scalar series as $\\cos(\\theta/2)$ and $\\sin(\\theta/2)$. Thus $R_{\\mathbf n}(\\theta)=\\cos(\\theta/2)I-i\\sin(\\theta/2)\\Sigma$. When $\\theta=0$, this is $I$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\Sigma^*=\\Sigma$, the adjoint of the displayed formula is $\\cos(\\theta/2)I+i\\sin(\\theta/2)\\Sigma$. Multiplying this by $R_{\\mathbf n}(\\theta)$ and using $\\Sigma^2=I$ from step 1.1 gives $R_{\\mathbf n}(\\theta)^*R_{\\mathbf n}(\\theta)=(\\cos^2(\\theta/2)+\\sin^2(\\theta/2))I=I$ by [F5]. Hence [F7] makes $R_{\\mathbf n}(\\theta)$ unitary in the sense of [F8].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem fixes the nonzero two-dimensional Q2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the formula gives I when theta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit-axis hypothesis is used in step 1.1 to obtain Sigma^2=I."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem has no eigenvalue-degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The stated zero-angle endpoint is checked in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use a given finite axis and norm-convergent series, without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a formula and unitarity claim, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a formula and unitarity claim, not an iff."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed Proof 1.1–3.1 and all cited suppliers. Real unit n gives Hermitian Sigma and Sigma squared I by pairwise anticommutation. Finite-dimensional Banach/boundedness hypotheses apply to B=-i theta Sigma/2; absolute operator-norm convergence permits even/odd grouping, and the exact sine/cosine series give the stated negative-i half-angle formula. Multiplication with its adjoint cancels cross terms; the real Pythagorean identity yields I and the finite-dimensional isometry theorem gives unitarity. theta=0 gives I, negative theta is allowed, n=0 is excluded. No defect or choice use."
+      }
+    },
+    "thm-qc-hadamard-pauli-conjugation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Using [F1] and [F2], direct multiplication gives $HXH=\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=Z$, $HZH=\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=X$, and $HYH=\\frac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=-Y$. The products agree with the Pauli multiplication table in [F3], including the negative sign.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The first column of $H$ in [F1] gives $H|0\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2=|+\\rangle$, and its second gives $H|1\\rangle=(|0\\rangle-|1\\rangle)/\\sqrt2=|-\\rangle$. By [F2], $X|+\\rangle=|+\\rangle$ and $X|-\\rangle=-|-\\rangle$. Expanding with [F4] gives $\\langle +,+\\rangle_{\\rm root}=\\tfrac12(1+0+0+1)=1$, $\\langle -,-\\rangle_{\\rm root}=\\tfrac12(1-0-0+1)=1$, and $\\langle +,-\\rangle_{\\rm root}=\\tfrac12(1-0+0-1)=0$. Thus these vectors form the $X$-eigenbasis.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem fixes the nonzero two-dimensional Q2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the action on |0> explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the action on |1> explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No variable spectral multiplicity is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: HXH=Z, HZH=X, HYH=−Y and the explicit Hadamard basis action. Its assertion has no varying scalar on a closed interval; the identities or construction do not introduce an interval endpoint case.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Focused boundary review of items/thm-qc-hadamard-pauli-conjugation.md (endpoints): Statement: HXH=Z, HZH=X, HYH=−Y and the explicit Hadamard basis action. Its assertion has no varying scalar on a closed interval; the identities or construction do not introduce an interval endpoint case.",
+            "item_sha256": "bcad336f0354c526698d1df328fc5054c2c1264142cfba73825cd2e408e18e09",
+            "row_sha256": "daabe1dede9c3b41f9abed0b2c0e1ee724fc83edf0c788daac9ad871a623cffb",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 are finite matrix and basis computations with no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed Proof 1.1–2.1 and the actual H/Pauli definitions, multiplication table and computational basis theorem. Recomputed HXH=Z, HZH=X and HYH=-Y with the fixed Y sign. The two columns are normalized orthogonal plus/minus eigenvectors of X with eigenvalues +1 and -1 in the root inner-product convention. Fixed dimension two has no empty basis case. No choice, defect or interface change."
+      }
+    },
+    "thm-qc-bloch-positivity-ball": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-bloch-coordinate-map",
+          "source_section": "Definition",
+          "quote": "Let $Q_2$ be the qubit space of [[def-qc-qubit-and-bloch-representation]], and let $\\rho$ be a density operator on $Q_2$ in the sense of [[def-qc-density-operator]]. Define its candidate Bloch coordinates in $\\mathbb C^3$ by\n$$r_j(\\rho):=\\operatorname{tr}(\\rho\\sigma_j)\\quad(j\\in\\{x,y,z\\}),\\qquad \\mathbf r(\\rho):=(r_x(\\rho),r_y(\\rho),r_z(\\rho)).$$\nFor any $\\mathbf r=(r_x,r_y,r_z)\\in\\mathbb R^3$, define the associated Hermitian-matrix candidate\n$$\\rho(\\mathbf r):=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nWrite $\\mathbf r\\cdot\\boldsymbol{\\sigma}:=r_xX+r_yY+r_zZ$ and\n$$\\|\\mathbf r\\|_2:=\\sqrt{r_x^2+r_y^2+r_z^2}.$$\nThe next theorem proves that these trace coordinates are real and that every Hermitian trace-one $2\\times2$ matrix is uniquely $\\rho(\\mathbf r)$; the positivity theorem determines which real-coordinate candidates are states.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-bloch-coordinate-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "For every $\\mathbf r\\in\\mathbb R^3$, the matrix $\\rho(\\mathbf r)$ of [[def-qc-bloch-coordinate-map]] is Hermitian with trace one. Conversely, every Hermitian trace-one matrix $\\rho\\in M_2(\\mathbb C)$ has a unique vector $\\mathbf r\\in\\mathbb R^3$ such that\n$$\\rho=\\rho(\\mathbf r)=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nFor a qubit density operator this vector is exactly $(\\operatorname{tr}(\\rho X),\\operatorname{tr}(\\rho Y),\\operatorname{tr}(\\rho Z))$, the coordinate map of [[def-qc-bloch-coordinate-map]]. In particular all three trace coordinates of every density operator are real.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $t=\\|\\mathbf r\\|_2$ and $\\Sigma=\\mathbf r\\cdot\\boldsymbol\\sigma$. By [F3], $\\Sigma^*=\\Sigma$ and $\\Sigma^2=\\sum_jr_j^2\\sigma_j^2+\\sum_{j<k}r_jr_k(\\sigma_j\\sigma_k+\\sigma_k\\sigma_j)=t^2I$. Using the displayed matrices in [F4], $\\Sigma=\\begin{pmatrix}r_z&r_x-ir_y\\\\r_x+ir_y&-r_z\\end{pmatrix}$, so $\\operatorname{tr}(\\Sigma)=0$ and $\\det(\\Sigma)=-t^2$. Thus its characteristic polynomial is $\\lambda^2-t^2$. If $t>0$, its two eigenvalues are $t$ and $-t$; if $t=0$, $\\Sigma=0$. Therefore $\\rho(\\mathbf r)=\\tfrac12(I+\\Sigma)$ has eigenvalues $(1+t)/2$ and $(1-t)/2$, both $1/2$ at the zero vector.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since [F2] gives trace one, [F5]–[F7] show that $\\rho(\\mathbf r)$ is a density operator exactly when both eigenvalues are nonnegative. The eigenvalue $(1+t)/2$ is always positive; $(1-t)/2\\ge0$ exactly when $t\\le1$. At $t=1$ the zero eigenvalue is allowed by non-negativity; at $t=0$ both eigenvalues are $1/2$. Hence the condition is precisely $\\|\\mathbf r\\|_2\\le1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns density operators on the fixed nonzero Q2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 handle t=||r||=0, giving eigenvalues 1/2,1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles t=1, including the permitted zero eigenvalue."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At t=0 the two eigenvalues coincide; step 1.1 records both as 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 check t=0 and t=1, the endpoints of the admissible radius interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use explicit 2x2 coordinates and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that rho(r) density implies t<=1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that t<=1 makes both eigenvalues nonnegative and hence rho(r) a density operator."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed Proof 1.1–2.1 and all seven cited suppliers, including the actual finite-dimensional nonnegative-operator criterion. The displayed two-by-two matrix has characteristic polynomial lambda squared minus t squared; for t>0 both eigenvalues occur, and for t=0 Sigma=0. Hence rho has both eigenvalues (1 plus/minus t)/2 with multiplicities. Every real candidate is Hermitian trace one by the previous theorem, so the cited nonnegative-eigenvalue criterion applies in both directions. t=0 gives I/2; t=1 permits the zero eigenvalue; t>1 has a negative eigenvalue and is excluded. No defect or choice use."
+      }
+    },
+    "thm-qc-bloch-purity-sphere": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-bloch-coordinate-map",
+          "source_section": "Definition",
+          "quote": "Let $Q_2$ be the qubit space of [[def-qc-qubit-and-bloch-representation]], and let $\\rho$ be a density operator on $Q_2$ in the sense of [[def-qc-density-operator]]. Define its candidate Bloch coordinates in $\\mathbb C^3$ by\n$$r_j(\\rho):=\\operatorname{tr}(\\rho\\sigma_j)\\quad(j\\in\\{x,y,z\\}),\\qquad \\mathbf r(\\rho):=(r_x(\\rho),r_y(\\rho),r_z(\\rho)).$$\nFor any $\\mathbf r=(r_x,r_y,r_z)\\in\\mathbb R^3$, define the associated Hermitian-matrix candidate\n$$\\rho(\\mathbf r):=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nWrite $\\mathbf r\\cdot\\boldsymbol{\\sigma}:=r_xX+r_yY+r_zZ$ and\n$$\\|\\mathbf r\\|_2:=\\sqrt{r_x^2+r_y^2+r_z^2}.$$\nThe next theorem proves that these trace coordinates are real and that every Hermitian trace-one $2\\times2$ matrix is uniquely $\\rho(\\mathbf r)$; the positivity theorem determines which real-coordinate candidates are states.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-bloch-coordinate-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "For every $\\mathbf r\\in\\mathbb R^3$, the matrix $\\rho(\\mathbf r)$ of [[def-qc-bloch-coordinate-map]] is Hermitian with trace one. Conversely, every Hermitian trace-one matrix $\\rho\\in M_2(\\mathbb C)$ has a unique vector $\\mathbf r\\in\\mathbb R^3$ such that\n$$\\rho=\\rho(\\mathbf r)=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nFor a qubit density operator this vector is exactly $(\\operatorname{tr}(\\rho X),\\operatorname{tr}(\\rho Y),\\operatorname{tr}(\\rho Z))$, the coordinate map of [[def-qc-bloch-coordinate-map]]. In particular all three trace coordinates of every density operator are real.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-bloch-positivity-ball",
+          "source_section": "Statement",
+          "quote": "For every $\\mathbf r\\in\\mathbb R^3$, $\\rho(\\mathbf r)$ from [[def-qc-bloch-coordinate-map]] is a qubit density operator if and only if $\\|\\mathbf r\\|_2\\le1$. Its eigenvalues, counted with multiplicity, are\n$$\\lambda_\\pm=\\frac{1\\pm\\|\\mathbf r\\|_2}{2}.$$\nThe **Bloch ball** is $\\{\\mathbf r\\in\\mathbb R^3:\\|\\mathbf r\\|_2\\le1\\}$; its boundary $\\{\\|\\mathbf r\\|_2=1\\}$ is the **Bloch sphere**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-pure-state-and-ray",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\Sigma=\\mathbf r\\cdot\\boldsymbol\\sigma$. From [F3] and [F4], $\\operatorname{tr}(\\rho^2)=\\tfrac14\\operatorname{tr}(I+2\\Sigma+\\Sigma^2)=\\tfrac14(2+2\\|\\mathbf r\\|_2^2)=\\tfrac12(1+\\|\\mathbf r\\|_2^2)$, because $\\Sigma^2=\\|\\mathbf r\\|_2^2I$ by the Pauli anticommutation relation in [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\lambda_+,\\lambda_-$ be the eigenvalues from [F5]. They are nonnegative and sum to one by [F1]. Then $\\operatorname{tr}(\\rho^2)=\\lambda_+^2+\\lambda_-^2=1$ exactly when $2\\lambda_+\\lambda_-=0$, equivalently the eigenvalue pair is $(1,0)$. By [F2], $\\rho$ has an orthonormal eigenbasis; in this case it is the orthogonal projection onto its one-dimensional $1$-eigenspace, so surjectivity in [F6] makes it the projector of a pure-state ray. Conversely, if $\\rho$ is pure, [F7] gives a unit representative $u$ with $\\rho=P_u$, and [F6] makes $P_u$ an orthogonal projection, so $\\rho^2=\\rho$. By [F1], $\\operatorname{tr}(\\rho)=1$, hence $\\operatorname{tr}(\\rho^2)=1$. Thus purity is equivalent to $\\operatorname{tr}(\\rho^2)=1$; step 1.1 makes this equivalent to $\\|\\mathbf r\\|_2=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns density operators on the fixed nonzero Q2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At r=0, steps 1.1–2.1 give tr(rho^2)=1/2 and equal eigenvalues, so the state is not pure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At ||r||=1, step 2.1 gives eigenvalues 1 and 0, hence rank one and purity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At r=0 the eigenvalues coincide; step 2.1 treats this mixed boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 treat radius 0 and radius 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite-dimensional spectral theorem in [F2] supplies a finite eigenbasis; steps 1.1–2.1 require no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves purity implies ||r||=1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves ||r||=1 implies rank one and hence purity."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed Proof 1.1–2.1, all cited suppliers and the actual ray-projector bijection proof under the root convention. Sigma squared equals radius squared times I, yielding tr(rho squared)=(1+radius squared)/2. Positivity and trace one make the two eigenvalues a probability pair; square-sum one forces (1,0) and the orthonormal eigenbasis makes rho the rank-one orthogonal projection, to which ray-projector surjectivity applies. Conversely a ray projector is idempotent of trace one. Both iff directions hold; radius zero gives purity 1/2 and radius one gives a pure state. A unit vector in one fixed line requires no AC. No defect."
+      }
+    },
+    "ex-qc-zero-plus-bloch-and-hadamard": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-qubit-and-bloch-representation",
+          "source_section": "Definition",
+          "quote": "The **qubit space** is the one-qubit register $Q_2=\\mathbb C^2$ of [[def-qc-register-and-computational-basis]], with ordered computational basis $(|0\\rangle,|1\\rangle)=(e_0,e_1)$. This basis is orthonormal by [[thm-qc-computational-basis-orthonormal]]. A **qubit state** is a density operator on $Q_2$ in the sense of [[def-qc-density-operator]], namely a non-negative endomorphism of trace one. A **pure qubit state** is a pure-state ray on $Q_2$ in the sense of [[def-qc-pure-state-and-ray]]. The Bloch coordinates and their state-space constraints are defined and proved in the following items on this page.\n\nThe term qubit here names the two-dimensional register and its mathematical state space. No physical preparation or measurement postulate is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-pure-state-and-ray",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-bloch-coordinate-map",
+          "source_section": "Definition",
+          "quote": "Let $Q_2$ be the qubit space of [[def-qc-qubit-and-bloch-representation]], and let $\\rho$ be a density operator on $Q_2$ in the sense of [[def-qc-density-operator]]. Define its candidate Bloch coordinates in $\\mathbb C^3$ by\n$$r_j(\\rho):=\\operatorname{tr}(\\rho\\sigma_j)\\quad(j\\in\\{x,y,z\\}),\\qquad \\mathbf r(\\rho):=(r_x(\\rho),r_y(\\rho),r_z(\\rho)).$$\nFor any $\\mathbf r=(r_x,r_y,r_z)\\in\\mathbb R^3$, define the associated Hermitian-matrix candidate\n$$\\rho(\\mathbf r):=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nWrite $\\mathbf r\\cdot\\boldsymbol{\\sigma}:=r_xX+r_yY+r_zZ$ and\n$$\\|\\mathbf r\\|_2:=\\sqrt{r_x^2+r_y^2+r_z^2}.$$\nThe next theorem proves that these trace coordinates are real and that every Hermitian trace-one $2\\times2$ matrix is uniquely $\\rho(\\mathbf r)$; the positivity theorem determines which real-coordinate candidates are states.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-bloch-coordinate-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "For every $\\mathbf r\\in\\mathbb R^3$, the matrix $\\rho(\\mathbf r)$ of [[def-qc-bloch-coordinate-map]] is Hermitian with trace one. Conversely, every Hermitian trace-one matrix $\\rho\\in M_2(\\mathbb C)$ has a unique vector $\\mathbf r\\in\\mathbb R^3$ such that\n$$\\rho=\\rho(\\mathbf r)=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nFor a qubit density operator this vector is exactly $(\\operatorname{tr}(\\rho X),\\operatorname{tr}(\\rho Y),\\operatorname{tr}(\\rho Z))$, the coordinate map of [[def-qc-bloch-coordinate-map]]. In particular all three trace coordinates of every density operator are real.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-bloch-purity-sphere",
+          "source_section": "Statement",
+          "quote": "If $\\rho$ is a qubit density operator and $\\mathbf r$ is its unique Bloch vector, then\n$$\\operatorname{tr}(\\rho^2)=\\frac{1+\\|\\mathbf r\\|_2^2}{2}.$$\nThe state $\\rho$ is pure, meaning it is the projector of a pure-state ray, if and only if $\\|\\mathbf r\\|_2=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F9], $|0\\rangle=(1,0)^{\\mathsf T}$ is a unit vector; [F2]–[F3] give the rank-one projector convention, so direct coordinates give $\\rho_0=\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$. Multiplication by [F4] gives $\\operatorname{tr}(\\rho_0X)=0$, $\\operatorname{tr}(\\rho_0Y)=0$, and $\\operatorname{tr}(\\rho_0Z)=1$, so [F6] gives $\\mathbf r(\\rho_0)=(0,0,1)$. The matrix satisfies $\\rho_0^2=\\rho_0$ and $\\operatorname{tr}(\\rho_0)=1$; by [F2] it is the projector of the pure ray $[|0\\rangle]$, and [F10] makes it a density operator. Thus also $\\operatorname{tr}(\\rho_0^2)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1] and [F5], $H|0\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2=|+\\rangle$. From [F9], $\\|+\\|^2=\\tfrac12(\\langle0,0\\rangle_{\\rm root}+\\langle0,1\\rangle_{\\rm root}+\\langle1,0\\rangle_{\\rm root}+\\langle1,1\\rangle_{\\rm root})=1$, so [F2]–[F3] give $\\rho_+=|+\\rangle\\langle+|=\\frac12\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$. Multiplying by [F4] gives $\\operatorname{tr}(\\rho_+X)=1$, $\\operatorname{tr}(\\rho_+Y)=0$, and $\\operatorname{tr}(\\rho_+Z)=0$, so [F6] gives $\\mathbf r(\\rho_+)=(1,0,0)$. Direct multiplication gives $\\rho_+^2=\\rho_+$ and $\\operatorname{tr}(\\rho_+)=1$; by [F2], $\\rho_+$ is a pure-ray projector, so [F10] makes it a density operator and $\\operatorname{tr}(\\rho_+^2)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The computed vectors have norms $\\|(0,0,1)\\|_2=\\sqrt{0^2+0^2+1^2}=1$ and $\\|(1,0,0)\\|_2=\\sqrt{1^2+0^2+0^2}=1$. Steps 1.1 and 1.2 prove both matrices are density operators. By [F7] these are the unique Bloch vectors, and [F8] confirms both states are pure and lie on the Bloch sphere.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero two-dimensional Q2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 compute the zero Bloch coordinates for |0> and |+>."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 give unit representatives, including the normalized |+> vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example has no variable eigenvalue multiplicity claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes both Bloch-vector norms as 1, the radius-one boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.1 use two explicit vectors and finite matrices; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example verifies two cases and states no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example verifies two cases and states no iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed Verification 1.1–2.1 and all fourteen actual prerequisite interfaces. The root-linear-first outer product has matrix u u-dagger in the ordered orthonormal basis. e0 and (e0+e1)/sqrt(2) are unit, so the ray-projector theorem supplies density operators before invoking Bloch purity. Direct products give trace vectors (0,0,1) and (1,0,0), both radius one; H e0 is exactly plus, and both projectors are idempotent of trace one. Bloch uniqueness and purity apply with all hypotheses met. This generated example is a logical leaf. No defect or choice use."
+      }
+    }
+  }
+}

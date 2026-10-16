@@ -1,0 +1,222 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "56",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "lem-qa-32-indexed-to-full-list-conversion",
+      "model": "gpt-6-luna",
+      "context_sha256": "df361eaab4613f7f41a674410e52fe01a3381996d42c2302f9f93b3d71508763",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.1 omits the n input-node records: the indexed interface supplies input labels but does not fix their positions. The theorem and polynomial bound are sound; the missing routine enumeration is repaired by querying all N_n <= n+q(n) nodes, including labels and constants. No statement or prerequisite changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qa-32-exact-clifford-t-boolean-circuit-embedding",
+      "model": "gpt-6-luna",
+      "context_sha256": "92bfac2e175acc28737fbd6e09e06a0ce7cac34633bec18da5653acf1b1af80f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 inaccurately restates layered syntax as a gate list. The actual QC14 full-list encoding and Clifford+T word convention already supply serial gate lists; singleton layers provide the immediate faithful interpretation. Corrected F4 and constructed singleton layers explicitly in 6.1. This representational omission does not invalidate the phase identity, compiler action or resource bounds.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qa-32-simon-small-instance",
+      "model": "gpt-6-luna",
+      "context_sha256": "2fc6aae1a6f53be52714ed953467a84b21da904d6ca0c9deb3f2347b1198ca09",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 wrongly attributes uniformity to the general finite-probability definition. Uniform YES samples and independent runs are already explicit in Given and supplied by the Simon theorem and algorithm, so the count remains valid. Corrected F1/F2 and explicitly multiplied the four 1/4 probabilities before summing event weights in 2.1. This repairs a citation inaccuracy, not a false numerical conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-32-indexed-to-full-list-conversion",
+      "disposition": "repaired",
+      "post_sha256": "dc72319913f56d9fbccc51cea958f68c6ce472db066db3a54c65a47230ed09b3",
+      "review_context_sha256": "9faad46cc78f5d7ef523e486cf8fe304eb3a1510a2016b5b15eac2f9e2254deb",
+      "reason": "Checked the published indexed interface and all three proof steps. A halting deterministic logspace query has polynomially many internal configurations. Enumerating every actual node retains each input label, constant and predecessor; designated output and n=0 are preserved. Repaired Facts/proof only; Statement and page interface unchanged. The synchronized strict contract check passed. This records my repair, not independent review of it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qa-32-exact-clifford-t-boolean-circuit-embedding",
+      "disposition": "repaired",
+      "post_sha256": "593823d366f6411c3232733f10f4bed9ed6e868d39591602bcd8e9fd53725338",
+      "review_context_sha256": "a52ad5238542eacee78a3b15960b03cbb99327105ade63b27c4aa50d105d99a6",
+      "reason": "Checked all six proof steps and the actual reversible procedure/cost proof, matrices, layered semantics and QC14 decoder. The integer phase is 4abc, seven phase gates plus eighteen CNOTs implement clean-scratch CCZ, and two Hadamards give Toffoli. Six gates implement X; fixed replacements preserve the displayed bound and clean work. Singleton layers and distinct target output indices now explicitly satisfy syntax and code. Statement unchanged; strict contract passed. This is a repair account, not independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qa-32-simon-small-instance",
+      "disposition": "repaired",
+      "post_sha256": "be7dd43aa8111d1cc404848af3a3a395621f9fe867f37e1a253feec6fe670a52",
+      "review_context_sha256": "11f13ea7a400a2e89101894c250e9bdc383ee8147c3581c74d5a3d8b505b48ba",
+      "reason": "Checked the actual finite-space definition, independent-run algorithm, Simon sampling theorem and its complete proof. For s=01, orthogonality forces second coordinate zero and rank at most one. The three lines in V_2 give 3*16-3+1=46 failing four-tuples; independence and uniformity give weight 1/256 each, hence 23/128 and union bound 3/16. Exhaustive XOR-span enumeration confirms all 256 cases. Citation repair only, Example unchanged; strict contract passed. This is my repair account, not independent review of it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "id": "lem-qa-32-indexed-to-full-list-conversion",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "disposition": "fixed",
+      "finding": "Step 2.1 enumerated at most q(n) nodes although that bounds only non-input nodes. Input locations and labels were omitted.",
+      "repair": "Enumerate N_n <= n+q(n) actual nodes, retaining input labels and constant values; step 3.1 now checks all records.",
+      "evidence": "items/lem-qa-32-indexed-to-full-list-conversion.md, F1 and steps 2.1–3.1; supplier items/def-logspace-uniform-circuit-family.md, Definition."
+    },
+    {
+      "ledger": "defect",
+      "id": "lem-qa-32-exact-clifford-t-boolean-circuit-embedding",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "finding": "F4 described the syntax supplier as defining a plain ordered gate list, although it defines chronological disjoint-support layers.",
+      "repair": "State layered syntax faithfully and explicitly assign every emitted gate to a singleton layer before QC14 full-list serialization.",
+      "evidence": "items/lem-qa-32-exact-clifford-t-boolean-circuit-embedding.md, F4 and step 6.1; items/def-qc-circuit-syntax-and-register-order.md, Definition; items/def-qc-uniform-circuit-family.md, gate records."
+    },
+    {
+      "ledger": "defect",
+      "id": "ex-qa-32-simon-small-instance",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "finding": "F2 attributed a uniform sample law to a definition permitting arbitrary nonnegative weights summing to one. The needed uniformity and independence were already correctly given elsewhere.",
+      "repair": "F2 now states only weights and event summation. F1 supplies uniform YES law; 2.1 derives the 1/256 tuple weight from independent runs before summing.",
+      "evidence": "items/ex-qa-32-simon-small-instance.md, F1–F2 and step 2.1; items/def-finite-probability-space-and-event.md, Definition; items/thm-qa-32-simon-sample-rank-correctness.md, Statement and proof 2.1, 3.2; items/alg-qa-32-simon-query-rank-test.md, independent runs."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "lem-qa-32-indexed-to-full-list-conversion",
+      "claim": "Polynomial-time full-list generation preserving every node, input label and designated output of the indexed circuit.",
+      "conventions": "Topological numbering need not put input nodes first; n=0 permitted; bounded fan-in and one designated output.",
+      "dependencies": [
+        "def-logspace-uniform-circuit-family"
+      ],
+      "source_paths": [
+        "items/def-logspace-uniform-circuit-family.md#Definition"
+      ],
+      "checks": [
+        {
+          "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-56.proof-contracts.json --items lem-qa-32-indexed-to-full-list-conversion --strict --json",
+          "exit_code": 0,
+          "result": "ok=true; errors=[]; warnings=[]"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Completed; hand off to engine for ordinary collection and rejudgment as applicable."
+    },
+    {
+      "id": "lem-qa-32-exact-clifford-t-boolean-circuit-embedding",
+      "claim": "Exact XOR embedding, clean workspace and at most 27(6S+4E+m) QC14 gate occurrences.",
+      "conventions": "Control-first CNOT; chronological product puts later gates left; one emitted gate per singleton layer; output tuple consists of distinct target wires.",
+      "dependencies": [
+        "alg-qc-reversible-embedding",
+        "thm-qc-reversible-embedding-cost",
+        "def-qc-clifford-t-gate-library",
+        "def-qc-elementary-circuit-resources",
+        "def-qc-circuit-syntax-and-register-order",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-uniform-circuit-family",
+        "def-boolean-circuit-size-depth-fanin-and-basis"
+      ],
+      "source_paths": [
+        "items/alg-qc-reversible-embedding.md#Definition",
+        "items/thm-qc-reversible-embedding-cost.md#Proof",
+        "items/def-qc-clifford-t-gate-library.md#Definition",
+        "items/def-qc-circuit-syntax-and-register-order.md#Definition",
+        "items/def-qc-circuit-denotational-semantics.md#Definition",
+        "items/def-qc-uniform-circuit-family.md#Definition"
+      ],
+      "checks": [
+        {
+          "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-56.proof-contracts.json --items lem-qa-32-exact-clifford-t-boolean-circuit-embedding --strict --json",
+          "exit_code": 0,
+          "result": "ok=true; errors=[]; warnings=[]"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Completed; hand off to engine for ordinary collection and rejudgment as applicable."
+    },
+    {
+      "id": "ex-qa-32-simon-small-instance",
+      "claim": "For n=2, mask 01 forces NO rank below two; YES rank failure is exactly 23/128 with bound 3/16.",
+      "conventions": "Sample space V_2^4; product weight (1/4)^4; s=01 tests the second coordinate; repeated samples and all-zero tuple included.",
+      "dependencies": [
+        "alg-qa-32-simon-query-rank-test",
+        "thm-qa-32-simon-sample-rank-correctness",
+        "def-finite-probability-space-and-event"
+      ],
+      "source_paths": [
+        "items/alg-qa-32-simon-query-rank-test.md#Definition",
+        "items/thm-qa-32-simon-sample-rank-correctness.md#Proof",
+        "items/def-finite-probability-space-and-event.md#Definition"
+      ],
+      "checks": [
+        {
+          "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-56.proof-contracts.json --items ex-qa-32-simon-small-instance --strict --json",
+          "exit_code": 0,
+          "result": "ok=true; errors=[]; warnings=[]"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Completed; hand off to engine for ordinary collection and rejudgment as applicable."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-32-indexed-to-full-list-conversion.md items/lem-qa-32-exact-clifford-t-boolean-circuit-embedding.md items/ex-qa-32-simon-small-instance.md",
+      "exit_code": 0,
+      "result": "3 checked, 0 failing."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-qa-32-indexed-to-full-list-conversion.md items/lem-qa-32-exact-clifford-t-boolean-circuit-embedding.md items/ex-qa-32-simon-small-instance.md --json",
+      "exit_code": 0,
+      "result": "checked=3; errors=[]; warnings=[]"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-qa-32-indexed-to-full-list-conversion.md items/lem-qa-32-exact-clifford-t-boolean-circuit-embedding.md items/ex-qa-32-simon-small-instance.md",
+      "exit_code": 0,
+      "result": "3 items, 12 steps, 0 defects; run once after all final item edits."
+    },
+    {
+      "command": "Inline Python exhaustive Boolean-triple phase and V_2 four-tuple XOR-span enumeration.",
+      "exit_code": 0,
+      "result": "All 8 phase exponents equal 4abc; exactly 46 of 256 tuples fail to span."
+    },
+    {
+      "command": "Inline Node comparison using tools/step5-statement.mjs statementHash against frozen initial-1.json before_statements.",
+      "exit_code": 0,
+      "result": "All three Statement/Definition hashes match frozen inputs; the Example section also remains unchanged. No downstream interface event."
+    }
+  ],
+  "outside_findings": [
+    {
+      "id": "alg-qa-32-simon-query-rank-test",
+      "route": "frontier owner/controller, batch 56; outside this three-item assignment",
+      "path": "items/alg-qa-32-simon-query-rank-test.md",
+      "affected_use": "Final Definition paragraph asserts exactly n+2 oracle queries, 2n(n+2) ordinary Hadamard gates, two readouts per run and O(n^3) elimination operations.",
+      "finding": "The existing Step-4 digest presentation concern is borne out by the current Definition: resource properties belong in a separate proved result under the algorithm convention. The query/elimination bounds are already in thm-qa-32-simon-sample-rank-correctness; the remaining direct counts can be recorded there. No mathematical error in these counts was found.",
+      "minimality": "Owner may move resource assertions to the correctness theorem and prove the two direct per-run counts there. No edit or adjudication of this unassigned frontier item was performed."
+    }
+  ],
+  "published_findings": []
+}

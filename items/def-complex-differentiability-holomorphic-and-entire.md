@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-complex-differentiability-holomorphic-and-entire.json
 id: def-complex-differentiability-holomorphic-and-entire
 kind: definition
 title: "Complex differentiability at a point, the complex derivative, holomorphic functions, and entire functions"
@@ -7,17 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [rem-complex-plane-euclidean-dictionary, def-complex-metric-convergence-and-continuity, def-metric-topology]
+deps: [def-complex-metric-convergence-and-continuity, def-metric-topology]
 justified_by: [lem-uniqueness-of-the-complex-derivative]
 aliases: []
 landmark: true
-verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-13
-  audited: 2026-08-13
 sources:
   scraped: []
   references:

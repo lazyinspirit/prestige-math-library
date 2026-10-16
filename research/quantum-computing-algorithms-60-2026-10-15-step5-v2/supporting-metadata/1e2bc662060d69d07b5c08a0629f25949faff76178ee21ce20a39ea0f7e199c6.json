@@ -1,0 +1,658 @@
+[
+  {
+    "order": 2218,
+    "id": "exact-oracle-algorithms",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Exact Oracle Algorithms",
+    "companion": "exact-oracle-algorithms-examples",
+    "requires": [
+      "reversible-arithmetic-and-oracle-conversion",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "registers-tensor-products-and-partial-trace",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "computational-problems-promises-and-cost-models",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "lem-qa-hadamard-f2-kernel",
+        "kind": "lemma",
+        "title": "Hadamard character sum on F_2^n",
+        "statement_or_definition": "For $n\\ge1$ and $z\\in\\{0,1\\}^n$, with the binary dot product of [[def-qa-binary-dot-product]],\n$$\n\\sum_{x\\in\\{0,1\\}^n}(-1)^{x\\cdot z}=\\begin{cases}2^n,&z=0^n,\\\\0,&z\\ne0^n.\\end{cases}\n$$\nConsequently, for every $x\\in\\{0,1\\}^n$,\n$$\nH^{\\otimes n}|x\\rangle=2^{-n/2}\\sum_{y\\in\\{0,1\\}^n}(-1)^{x\\cdot y}|y\\rangle,\n$$\nwhere $H$ is the exact one-qubit gate of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and tensor factors follow the ordered register convention of [[def-qc-tensor-register-and-permutation]].",
+        "deps": [
+          "def-qa-binary-dot-product",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Factor the finite sum into ∏_i Σ_{x_i∈{0,1}}(-1)^{x_i z_i}; state tensor order and normalization."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-deutsch-promise",
+        "kind": "definition",
+        "title": "Deutsch constant-versus-balanced promise",
+        "statement_or_definition": "Let $f:\\{0,1\\}\\to\\{0,1\\}$ be the total Boolean function of a [[def-qa-promise-query-instance]]. The **Deutsch promise** is the decision task with YES set $Y=\\{f:f(0)=f(1)\\}$ and NO set $N=\\{f:f(0)\\ne f(1)\\}$. The required output is $0$ on $Y$ (constant) and $1$ on $N$ (balanced). All four Boolean functions on one bit are promised.",
+        "deps": [
+          "def-qa-promise-query-instance",
+          "def-qa-task-and-promise-domain"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_obligations": [
+          "Check the four truth tables partition into two constant and two balanced cases."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-deutsch-jozsa-promise",
+        "kind": "definition",
+        "title": "Deutsch–Jozsa promise",
+        "statement_or_definition": "Let $n\\ge1$, let $N:=2^n$, and let $f:\\{0,1\\}^n\\to\\{0,1\\}$ be the total function of a [[def-qa-promise-query-instance]]. The **Deutsch–Jozsa promise** is the decision task with YES set consisting of constant functions and NO set consisting of functions taking each value $0$ and $1$ exactly $N/2$ times. The required output is constant or balanced, respectively. Here $n$ is the address width, and $N$ is the number of addresses, as supplied by [[thm-qc-bitstring-index-is-bijection]] and [[def-finite-cardinality]]. Encode an instance by its $N$-bit truth table in lexicographic address order; its encoded input size is therefore $N$, not $n$, under [[def-qa-input-encoding-and-size]]. In the query-instance convention, the length-$N$ family has address width $a(N)=n$ and reply width $b(N)=1$; the public parameter $n$ determines the registers, while the unknown truth table is supplied through oracle queries. Lengths that are not powers of two at least two have empty promise.",
+        "deps": [
+          "def-finite-cardinality",
+          "def-qa-input-encoding-and-size",
+          "def-qa-promise-query-instance",
+          "def-qa-task-and-promise-domain",
+          "thm-qc-bitstring-index-is-bijection"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_obligations": [
+          "Verify the two promise sets are disjoint and state n≥1 so the balanced class is meaningful."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-bernstein-vazirani-promise",
+        "kind": "definition",
+        "title": "Bernstein–Vazirani no-offset promise",
+        "statement_or_definition": "Let $n\\ge1$. The **Bernstein–Vazirani no-offset promise** consists of the total functions\n$$\nf_a:\\{0,1\\}^n\\to\\{0,1\\},\\qquad f_a(x):=a\\cdot x,\n$$\nfor an unknown secret $a\\in\\{0,1\\}^n$, using [[def-qa-binary-dot-product]]. The task is to output $a$. This version has no additive offset: the oracle is exactly $f_a$, not $x\\mapsto a\\cdot x\\oplus b$.",
+        "deps": [
+          "def-qa-binary-dot-product",
+          "def-qa-promise-query-instance",
+          "def-qa-task-and-promise-domain"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_obligations": [
+          "State whether the query function is total and verify the secret a is uniquely determined by its values."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-deutsch-classical-query-lower-bound",
+        "kind": "theorem",
+        "title": "One classical query cannot solve Deutsch exactly",
+        "statement_or_definition": "On the Deutsch promise, the exact deterministic classical query complexity is $2$. Every randomized classical algorithm making at most one query has worst-case success probability at most $1/2$ under per-input correctness.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-qa-classical-query-algorithm",
+          "def-qa-deutsch-promise"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "For either first query address, pair a constant oracle with a balanced oracle agreeing at that address; use their indistinguishable transcripts."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-deutsch-jozsa-deterministic-query-lower-bound",
+        "kind": "theorem",
+        "title": "Exact deterministic Deutsch–Jozsa needs N/2+1 queries",
+        "statement_or_definition": "For $n\\ge1$ and $N=2^n$, the exact deterministic classical query complexity of the Deutsch–Jozsa promise is $N/2+1$.",
+        "deps": [
+          "def-finite-cardinality",
+          "def-qa-classical-query-algorithm",
+          "def-qa-deutsch-jozsa-promise"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "Construct a balanced completion of the all-zero transcript for any set of at most N/2 queried points."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound",
+        "kind": "theorem",
+        "title": "Three classical samples solve Deutsch–Jozsa with bounded error",
+        "statement_or_definition": "For $n\\ge2$, a randomized classical algorithm that samples three distinct addresses uniformly without replacement and outputs constant exactly when all three replies agree has success probability at least $3/4$ on every Deutsch–Jozsa input. For $n=1$, querying both addresses solves the promise exactly with two queries. Thus the deterministic exact lower bound is not a bounded-error exponential separation.",
+        "deps": [
+          "def-finite-cardinality",
+          "def-finite-probability-space-and-event",
+          "def-qa-classical-query-algorithm",
+          "def-qa-deutsch-jozsa-promise"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "Compute the without-replacement probability and handle N=2 separately; state that this bounded-error upper bound means the exact deterministic separation is not a bounded-error exponential separation."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-bernstein-vazirani-classical-query-lower-bound",
+        "kind": "theorem",
+        "title": "Classical Bernstein–Vazirani needs n queries for bounded error",
+        "statement_or_definition": "For the no-offset Bernstein–Vazirani promise on $n\\ge1$ bits, every randomized classical algorithm with worst-case success at least $2/3$ needs at least $n$ queries. Querying the $n$ standard basis addresses recovers the secret exactly, so the bounded-error and exact classical query complexities are both $n$.",
+        "deps": [
+          "def-finite-cardinality",
+          "def-finite-probability-space-and-event",
+          "def-qa-bernstein-vazirani-promise",
+          "def-qa-binary-dot-product",
+          "def-qa-classical-query-algorithm"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "Formalize adaptive decision-tree leaves and average over the 2^n secrets; distinguish query cost from bit-processing cost."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-deutsch-query",
+        "kind": "algorithm",
+        "title": "One-query Deutsch algorithm",
+        "statement_or_definition": "**Input.** A one-bit total Boolean oracle $f$ satisfying the Deutsch promise of [[def-qa-deutsch-promise]], with an address qubit $A$ and target qubit $T$ initialized to $|0\\rangle_A|0\\rangle_T$.\n\n**Output.** One classical bit: output $0$ for constant and $1$ for balanced.\n\n**Gate model.** The declared nonoracle gate alphabet permits exact callable $H$ and $X$ gates, each occurrence charged as one nonoracle gate under [[def-qa-nonoracle-gate-cost]]. The supplied standard bit query is charged separately as one oracle call.\n\n**Procedure.** Apply $X$ to $T$, then apply $H$ to $T$ and $H$ to $A$. Invoke the standard XOR oracle $U_f$ once on the ordered pair $(A,T)$. Apply $H$ to $A$, measure $A$ in its ordered computational basis, and output the measured bit. There are no intermediate measurements, loops, or failure branches.\n\nThe terminal measurement is specified by [[def-qa-finite-branch-output-law]] and is separate from the declared one-qubit gate resource. No circuit-uniformity or classical bit-time bound is asserted.\n\nThe standard bit query and its controlled-access conventions are those of [[def-qa-standard-bit-query]] and [[def-qa-quantum-query-algorithm]]. The one-query phase action used by this procedure is verified by [[thm-qa-bit-query-to-phase-query]].",
+        "deps": [
+          "def-qa-deutsch-promise",
+          "def-qa-finite-branch-output-law",
+          "def-qa-nonoracle-gate-cost",
+          "def-qa-quantum-query-algorithm",
+          "def-qa-standard-bit-query",
+          "def-qc-coherent-function-oracle",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qa-hadamard-f2-kernel",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "proof_obligations": [
+          "Specify zero initialization, ordered registers, exact X/H instructions, the single oracle invocation and terminal output rule; resource totals are proved in thm-qa-deutsch-query-correct."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers."
+      },
+      {
+        "id": "alg-qa-deutsch-jozsa-query",
+        "kind": "algorithm",
+        "title": "One-query Deutsch–Jozsa algorithm",
+        "statement_or_definition": "**Input.** An integer $n\\ge1$ and a total Boolean oracle $f:\\{0,1\\}^n\\to\\{0,1\\}$ satisfying the Deutsch–Jozsa promise of [[def-qa-deutsch-jozsa-promise]], with an ordered $n$-qubit address register $A$ and one target qubit $T$ initialized to $|0^n\\rangle_A|0\\rangle_T$.\n\n**Output.** One classical bit: output $0$ (constant) exactly when the measured address is $0^n$; otherwise output $1$ (balanced).\n\n**Gate model.** The declared nonoracle gate alphabet permits exact callable $H$ and $X$ gates, each occurrence charged as one nonoracle gate under [[def-qa-nonoracle-gate-cost]]. The supplied standard bit query is charged separately as one oracle call.\n\n**Procedure.** Apply $H^{\\otimes n}$ to $A$. Apply $X$ and then $H$ to $T$. Invoke the standard XOR oracle $U_f$ once on $(A,T)$. Apply $H^{\\otimes n}$ to $A$, measure $A$ in its ordered computational basis, and apply the output rule. There are no intermediate measurements, loops, or failure branches.\n\nThe terminal measurement is specified by [[def-qa-finite-branch-output-law]] and is separate from the declared one-qubit gate resource. No circuit-uniformity or classical bit-time bound is asserted.\n\nThe standard XOR query and quantum-query algorithm conventions are those of [[def-qa-standard-bit-query]] and [[def-qa-quantum-query-algorithm]]. The phase action used by the procedure is verified by [[thm-qa-bit-query-to-phase-query]].",
+        "deps": [
+          "def-qa-deutsch-jozsa-promise",
+          "def-qa-finite-branch-output-law",
+          "def-qa-nonoracle-gate-cost",
+          "def-qa-quantum-query-algorithm",
+          "def-qa-standard-bit-query",
+          "def-qc-coherent-function-oracle",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qa-hadamard-f2-kernel",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "proof_obligations": [
+          "Specify zero initialization, ordered registers, exact X/H instructions, the single oracle invocation and terminal output rule; resource totals are proved in thm-qa-deutsch-jozsa-query-correct."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers."
+      },
+      {
+        "id": "alg-qa-bernstein-vazirani-query",
+        "kind": "algorithm",
+        "title": "One-query Bernstein–Vazirani algorithm",
+        "statement_or_definition": "**Input.** An integer $n\\ge1$ and an oracle $f_a(x)=a\\cdot x$ satisfying the no-offset Bernstein–Vazirani promise of [[def-qa-bernstein-vazirani-promise]], on an ordered $n$-qubit address register $A$ and one target qubit $T$ initialized to $|0^n\\rangle_A|0\\rangle_T$.\n\n**Output.** The measured $n$-bit address, interpreted as the secret $a$.\n\n**Gate model.** The declared nonoracle gate alphabet permits exact callable $H$ and $X$ gates, each occurrence charged as one nonoracle gate under [[def-qa-nonoracle-gate-cost]]. The supplied standard bit query is charged separately as one oracle call.\n\n**Procedure.** Apply $H^{\\otimes n}$ to $A$. Apply $X$ and then $H$ to $T$. Invoke the standard XOR oracle $U_{f_a}$ once on $(A,T)$. Apply $H^{\\otimes n}$ to $A$, measure $A$ in its ordered computational basis, and output the measured string. There are no intermediate measurements, loops, or failure branches.\n\nThe terminal measurement is specified by [[def-qa-finite-branch-output-law]] and is separate from the declared one-qubit gate resource. No circuit-uniformity or classical bit-time bound is asserted.\n\nThe standard XOR query and quantum-query algorithm conventions are those of [[def-qa-standard-bit-query]] and [[def-qa-quantum-query-algorithm]]. The phase action used by the procedure is verified by [[thm-qa-bit-query-to-phase-query]].",
+        "deps": [
+          "def-qa-bernstein-vazirani-promise",
+          "def-qa-finite-branch-output-law",
+          "def-qa-nonoracle-gate-cost",
+          "def-qa-quantum-query-algorithm",
+          "def-qa-standard-bit-query",
+          "def-qc-coherent-function-oracle",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qa-hadamard-f2-kernel",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "proof_obligations": [
+          "Specify zero initialization, ordered registers, exact X/H instructions, the single oracle invocation and terminal output rule; resource totals are proved in thm-qa-bernstein-vazirani-query-correct."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers."
+      },
+      {
+        "id": "thm-qa-deutsch-query-correct",
+        "kind": "theorem",
+        "title": "Deutsch algorithm is exact",
+        "statement_or_definition": "For either promised one-bit function $f$, the final measurement of [[alg-qa-deutsch-query]] outputs $0$ with probability one when $f$ is constant and $1$ with probability one when $f$ is balanced. In the algorithm's declared exact $X,H$ gate model, it uses exactly one oracle query and one $X$ and three $H$ gates, totaling four one-qubit gates. The terminal measurement is a separate resource.",
+        "deps": [
+          "alg-qa-deutsch-query",
+          "def-qa-deutsch-promise",
+          "def-qa-finite-branch-output-law",
+          "def-qa-nonoracle-gate-cost",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-unit-vector-projector-is-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 20,
+        "proof_obligations": [
+          "Evaluate the phase state and the final two-term Hadamard transform in both promise cases.",
+          "Count the single oracle call and all X/H occurrences in the declared gate model; report terminal measurement separately."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-deutsch-jozsa-query-correct",
+        "kind": "theorem",
+        "title": "Deutsch–Jozsa algorithm is exact",
+        "statement_or_definition": "For every $n\\ge1$ and every function satisfying the Deutsch–Jozsa promise, [[alg-qa-deutsch-jozsa-query]] outputs constant with probability one on constant inputs and balanced with probability one on balanced inputs. In the algorithm's declared exact $X,H$ gate model, it uses exactly one oracle query and one $X$ and $2n+1$ $H$ gates, totaling $2n+2$ one-qubit gates. The terminal measurement is a separate resource.",
+        "deps": [
+          "alg-qa-deutsch-jozsa-query",
+          "def-qa-deutsch-jozsa-promise",
+          "def-qa-finite-branch-output-law",
+          "def-qa-nonoracle-gate-cost",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qa-hadamard-f2-kernel",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-unit-vector-projector-is-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 20,
+        "proof_obligations": [
+          "Use the exact y=0 amplitude 2^{-n}Σ_x(-1)^{f(x)} and balance promise.",
+          "Count the single oracle call and all X/H occurrences in the declared gate model; report terminal measurement separately."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-bernstein-vazirani-query-correct",
+        "kind": "theorem",
+        "title": "Bernstein–Vazirani algorithm returns the secret exactly",
+        "statement_or_definition": "For every $n\\ge1$ and every no-offset Bernstein–Vazirani function $f_a(x)=a\\cdot x$, [[alg-qa-bernstein-vazirani-query]] outputs the secret $a$ with probability one. In the algorithm's declared exact $X,H$ gate model, it uses exactly one oracle query and one $X$ and $2n+1$ $H$ gates, totaling $2n+2$ one-qubit gates. The terminal measurement is a separate resource.",
+        "deps": [
+          "alg-qa-bernstein-vazirani-query",
+          "def-qa-bernstein-vazirani-promise",
+          "def-qa-binary-dot-product",
+          "def-qa-finite-branch-output-law",
+          "def-qa-nonoracle-gate-cost",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "lem-qa-hadamard-f2-kernel",
+          "thm-qa-bit-query-to-phase-query",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-unit-vector-projector-is-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 20,
+        "proof_obligations": [
+          "Apply the F2 Hadamard kernel with z=a xor y.",
+          "Count the single oracle call and all X/H occurrences in the declared gate model; report terminal measurement separately."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2219,
+    "id": "exact-oracle-algorithms-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Exact Oracle Algorithms — Examples",
+    "companion": "exact-oracle-algorithms",
+    "requires": [
+      "exact-oracle-algorithms"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-exact-oracle-algorithms",
+        "kind": "example",
+        "title": "Deutsch, Deutsch–Jozsa and Bernstein–Vazirani examples",
+        "statement_or_definition": "Take all four one-bit Deutsch truth tables. For the two-bit examples use address order $00,01,10,11$ and the first bit as the most significant bit. In both the Deutsch–Jozsa and Bernstein–Vazirani example, choose $f(x_0x_1)=x_0$, equivalently secret $a=10$ for Bernstein–Vazirani.",
+        "deps": [
+          "alg-qa-bernstein-vazirani-query",
+          "alg-qa-deutsch-jozsa-query",
+          "alg-qa-deutsch-query",
+          "def-qa-bernstein-vazirani-promise",
+          "def-qa-binary-dot-product",
+          "def-qa-deutsch-jozsa-promise",
+          "def-qa-deutsch-promise",
+          "lem-qa-hadamard-f2-kernel",
+          "thm-qa-bernstein-vazirani-classical-query-lower-bound",
+          "thm-qa-bernstein-vazirani-query-correct",
+          "thm-qa-deutsch-classical-query-lower-bound",
+          "thm-qa-deutsch-jozsa-deterministic-query-lower-bound",
+          "thm-qa-deutsch-jozsa-query-correct",
+          "thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound",
+          "thm-qa-deutsch-query-correct"
+        ],
+        "justified_by": [],
+        "dependency_level": 21,
+        "proof_obligations": [
+          "Check each displayed finite calculation directly from the companion-page contract."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 2 §2.4, PDF pp.29-33: complete DJ and BV promises, amplitudes, query bounds."
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+              "locator": "§6.1, PDF pp.7-11 (printed pp.1-5): independent direct Deutsch, DJ and BV derivations and classical comparisons."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all arguments use finite sums, finite sets, and explicit finite-dimensional registers.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

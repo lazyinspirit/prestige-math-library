@@ -1,0 +1,276 @@
+===== PDF PAGE 1 =====
+arXiv:quant-ph/0505030v2  23 Aug 2005
+
+Quantum Information and Computation, Vol. 0, No. 0 (2005) 000–000
+c⃝Rinton Press
+
+THE SOLOVAY-KITAEV ALGORITHM
+
+CHRISTOPHER M. DAWSON
+School of Physical Sciences, The University of Queensland,
+Brisbane, Queensland 4072, Australia
+
+MICHAEL A. NIELSEN
+School of Physical Sciences, The University of Queensland,
+Brisbane, Queensland 4072, Australia
+
+Received November 26, 2024
+Revised
+
+This pedagogical review presents the proof of the Solovay-Kitaev theorem in the form of
+an efficient classical algorithm for compiling an arbitrary single-qubit gate into a sequence
+of gates from a fixed and finite set. The algorithm can be used, for example, to compile
+Shor’s algorithm, which uses rotations of π/2k, into an efficient fault-tolerant form using
+only Hadamard, controlled-not, and π/8 gates. The algorithm runs in O(log2.71(1/ǫ))
+time, and produces as output a sequence of O(log3.97(1/ǫ)) quantum gates which is
+guaranteed to approximate the desired quantum gate to an accuracy within ǫ > 0. We
+also explain how the algorithm can be generalized to apply to multi-qubit gates and to
+gates from SU(d).
+
+Keywords: Solovay-Kitaev algorithm, universality, fault-tolerance
+
+1
+Introduction
+
+“I have been impressed by numerous instances of mathematical theories that are
+really about particular algorithms; these theories are typically formulated in math-
+ematical terms that are much more cumbersome and less natural than the equiva-
+lent formulation today’s computer scientists would use.” — Donald E. Knuth [16]
+
+The Solovay-Kitaev (SK) theorem is one of the most important fundamental results in the
+theory of quantum computation. In its simplest form the SK theorem shows that, roughly
+speaking, if a set of single-qubit quantum gates generates a dense subset of SU(2), then that
+set is guaranteed to fill SU(2) quickly, i.e., it is possible to obtain good approximations to
+any desired gate using surprisingly short sequences of gates from the given generating set.
+The SK theorem is important if one wishes to apply a wide variety of different single-qubit
+gates during a quantum algorithm, but is restricted to use gates from a more limited reper-
+toire. Such a situation arises naturally in the context of fault-tolerant quantum computation,
+where direct fault-tolerant constructions are typically available only for a limited number of
+gates (e.g., the Clifford group gates and π/8 gate), but one may wish to implement a wider
+variety of gates, such as the π/2k rotations occurring in Shor’s algorithm [22, 23]. In this sit-
+uation one must use the limited set of fault-tolerant gates to build up accurate fault-tolerant
+
+1
+
+
+===== PDF PAGE 2 =====
+
+2
+The Solovay-Kitaev algorithm . . .
+
+approximations to all the gates used in the algorithm, preferably in the most efficient manner
+possible. The SK theorem tells us that such efficient constructions are possible.
+The purpose of the present paper is to present the proof of the SK theorem in the form of
+a concrete algorithm which can be used to approximate a desired unitary, U, using a given set
+of quantum gates. We believe that this algorithmic perspective is useful in its own right, and,
+as the quote by Knuth suggests, also makes the ideas behind the SK theorem considerably
+easier to understand than in previous presentations. However, we stress that the paper is a
+review paper, as all the essential ideas appear in previous work; a detailed history of the SK
+theorem and algorithm is given in Section 6.
+The structure of the paper is as follows. Section 2 introduces the fundamental defini-
+tions needed to understand the SK theorem and algorithm, and provides a formal statement
+of the SK theorem.
+Section 3 explains the SK algorithm for qubits, in the form of nine
+easily-understood lines of pseudocode. This section concentrates on developing a broad un-
+derstanding of how the SK algorithm works. The few remaining details of the algorithm which
+need verification are explained in Section 4. Section 5 extends the algorithm so it applies also
+to qudits, i.e., quantum systems with d-dimensional state spaces. As a special case we ob-
+tain a version of the SK algorithm applicable to multiple qubits, simply by setting d = 2n.
+Section 6 discusses the relationship of the results we have presented to prior work on the SK
+theorem. This placement of the discussion of prior work is perhaps somewhat unusual, and
+deserves comment: we chose to defer the discussion until late in the paper in order to make
+the comparisons between the present paper and prior work as concrete and transparent as
+possible. Section 7 concludes.
+
+2
+Fundamentals
+
+In this section we introduce the fundamental definitions necessary to understand the SK
+theorem and algorithm, and give a precise statement of the SK theorem.
+The basic goal of the SK algorithm is to take an arbitrary quantum gate U and find a
+good approximation to it using a sequence of gates g1, . . . , gm drawn from some finite set
+G.
+In analogy with classical computation, where an algorithm written in a programming
+language such as C or Perl must be compiled into a sequence of instructions in the native
+machine language, we will call the set G of quantum gates an instruction set, and the process
+of finding good approximations compilation. Note that while this nomenclature, introduced
+in [10], is inspired by classical computer science, the analogies between the classical and
+quantum concepts are obviously somewhat imprecise, and should not be taken too seriously.
+Let’s define these concepts more precisely, beginning with instruction sets:
+Definition 1 An instruction set G for a d-dimensional qudit is a finite set of quantum
+gates satisfying:
+
+1. All gates g ∈G are in SU(d), that is, they are unitary and have determinant 1.
+
+2. For each g ∈G the inverse operation g† is also in G.
+
+3. G is a universal set for SU(d), i.e., the group generated by G is dense in SU(d). This
+means that given any quantum gate U ∈SU(d) and any accuracy ǫ > 0 there exists a
+product S ≡g1 . . . gm of gates from G which is an ǫ-approximation to U.
+
+
+===== PDF PAGE 3 =====
+
+Christopher M. Dawson and Michael A. Nielsen. . .
+3
+
+The notion of approximation being used in this definition, and throughout this paper, is
+approximation in operator norm. That is, a sequence of instructions generating a unitary
+operation S is said to be an ǫ-approximation to a quantum gate U if d(U, S) ≡∥U −S∥≡
+sup∥ψ∥=1 ∥(U −S)ψ∥< ǫ. In different contexts we will find it convenient to use both the
+operator norm ∥· ∥, and the associated distance function d(·, ·). Another convenient notation
+is to use S to refer both to a sequence of instructions, g1, g2, . . . gm, and also to the unitary
+operation g1g2 . . . gm corresponding to that sequence. With this convention the “sequence”
+g1, g2, . . . corresponds to the unitary formed by applying g1, g2, . . . in the reverse order. While
+this is somewhat nonintuitive, in later use it will prove to be the simplest and most natural
+convention.
+
+We assume the reader is familiar with the elementary properties of the operator norm,
+which we will mostly use without note. One perhaps somewhat less familiar property we’ll
+have occasion to use is that if H is Hermitian then d(I, exp(iH)) = maxE 2 sin(|E|/2), where
+the maximum is over all eigenvalues E of H. From this it follows easily that d(I, exp(iH)) ≤
+∥H∥. Furthermore, provided all the eigenvalues are in the range −π to π it follows that
+d(I, exp(iH)) = ∥H∥+ O(∥H∥3).
+
+It is easy to understand the motivation behind parts 1 and 3 of our definition of an
+instruction set. Less clear is the reason for part 2, namely, the requirement that if g ∈G
+then we must also have g† ∈G. Our reason for imposing this requirement is that it is used in
+the proof of the SK theorem, not for any a priori reason. In particular, we will make use of
+the easily-verified fact that if we have an instruction sequence providing an ǫ-approximation
+to some unitary U, then we can obtain an ǫ-approximation to U † simply by reversing the
+order of the sequence, and applying the corresponding inverse instructions. It appears to be
+an open problem whether a result analogous to the SK theorem holds when condition 2 is
+relaxed.
+
+The problem of quantum compilation may now be stated more precisely: given an in-
+struction set, G, how may we approximate an arbitrary quantum gate with a sequence of
+instructions from G; how does the sequence length increase as we require more accurate ap-
+proximations; and how quickly may we find such an approximating sequence? These final two
+questions are vitally important, as an inaccurate or inefficient quantum compiler may negate
+any improvements quantum computers have over classical computers.
+
+As an illustration, suppose we have a quantum algorithm, such as Shor’s, which can be
+broken up into a sequence of m quantum gates, U1, . . . , Um. However, let us also suppose that
+not all of those quantum gates are in our instruction set, and so it is necessary to compile
+the algorithm so that each gate Uj is re-expressed in terms of the available instruction set.
+If the compiled algorithm is required to approximate the original to within ǫ, then it is
+sufficient that each gate Uj be approximated to an accuracy ǫ/m [3].
+If we make the a
+priori reasonable assumption [20] that an accuracy of δ > 0 requires an instruction sequence
+of length O(1/δ), then each gate Uj will require a sequence of length O(m/ǫ), and so the
+total number of instructions required to implement the algorithm is O(m2/ǫ) — a quadratic
+increase in the complexity of the algorithm. For quantum algorithms such as Grover’s search
+algorithm [7, 8], which purports to give a quadratic increase over the best classical algorithm,
+this may be problematic if the available instruction set does not coincide with the gates used
+in the algorithm.
+
+
+===== PDF PAGE 4 =====
+
+4
+The Solovay-Kitaev algorithm . . .
+
+The SK theorem may be stated as follows:
+Theorem 1 (Solovay-Kitaev) Let G be an instruction set for SU(d), and let a desired
+accuracy ǫ > 0 be given. There is a constant c such that for any U ∈SU(d) there exists a
+finite sequence S of gates from G of length O(logc (1/ǫ)) and such that d(U, S) < ǫ.
+Different proofs of the theorem give different values for c; the proof we describe gives
+c ≈3.97. We discuss some other proofs (and their corresponding values of c) in Section 6.
+A critical issue not addressed in this statement of the SK theorem is the question of
+how efficiently the approximating sequence S may be found on a classical computer. The
+SK algorithm both provides a proof of the SK theorem, and also shows that an approxi-
+mating sequence S may be found efficiently on a classical computer, with a running time of
+O(log2.71(1/ǫ)).
+At first sight it appears paradoxical that the SK algorithm can produce as output a
+gate sequence of length O(log3.97(1/ǫ)) in the asymptotically shorter time O(log2.71(1/ǫ)).
+We will see that the reason this is possible is because the gate sequence has considerable
+redundancy, enabling the output to be substantially compressed, i.e., not all the gates need
+be explicitly output. When this compression is not done, the SK algorithm runs instead in
+time O(log3.97(1/ǫ)). Regardless of which method is used, the key point is that the running
+time is polylogarithmic in 1/ǫ.
+Returning to our earlier example, suppose we have a quantum algorithm expressed in
+terms of quantum gates U1, . . . , Um. If we wish for the compiled algorithm to have accuracy
+ǫ, then each gate needs accuracy ǫ/m. Using the SK algorithm this can be achieved using
+a sequence of O(log3.97(m/ǫ)) quantum gates, and a running time of O(log2.71(m/ǫ)) on a
+classical computer. The total number of instructions required to implement the algorithm is
+therefore O(m log3.97(m/ǫ)), with an associated classical compile time of O(m log2.71(m/ǫ)).
+Thus, the SK algorithm reduces the overhead due to quantum compilation from quadratic to
+polylogarithmic, which is much more acceptable.
+
+3
+The Solovay-Kitaev algorithm for qubits
+
+In this section we present the main ideas used in the SK algorithm. At the conclusion of the
+section the reader should have a good broad understanding of how and why the algorithm
+works. Rigorous verification of a few details has been deferred until the next section, in order
+that those details not obscure the big picture. We also restrict our attention in this section to
+that form of the SK theorem which applies to qubits. The extension to qudits involves some
+new ideas, and is described in Section 5.
+The SK algorithm may be expressed in nine lines of pseudocode. We explain each of these
+lines in detail below, but present it here in its entirety both for the reader’s reference, and to
+stress the conceptual simplicity of the algorithm:
+
+function Solovay-Kitaev(Gate U, depth n)
+if (n == 0)
+Return Basic Approximation to U
+else
+Set Un−1 = Solovay-Kitaev(U,n−1)
+Set V , W = GC-Decompose(UU †
+n−1)
+
+
+===== PDF PAGE 5 =====
+
+Christopher M. Dawson and Michael A. Nielsen. . .
+5
+
+Set Vn−1 = Solovay-Kitaev(V ,n −1)
+Set Wn−1 = Solovay-Kitaev(W,n −1)
+Return Un = Vn−1Wn−1V †
+n−1W †
+n−1Un−1;
+
+Let’s examine each of these lines in detail. The first line:
+
+function Solovay-Kitaev(Gate U, depth n)
+
+indicates that the algorithm is a function with two inputs: an arbitrary single-qubit quan-
+tum gate, U, which we desire to approximate, and a non-negative integer, n, which controls
+the accuracy of the approximation. The function returns a sequence of instructions which
+approximates U to an accuracy ǫn, where ǫn is a decreasing function of n, so that as n gets
+larger, the accuracy gets better, with ǫn →0 as n →∞. We describe ǫn in detail below.
+The Solovay-Kitaev function is recursive, so that to obtain an ǫn-approximation to U,
+it will call itself to obtain ǫn−1-approximations to certain unitaries. The recursion terminates
+at n = 0, beyond which no further recursive calls are made:
+
+if (n == 0)
+Return Basic Approximation to U
+
+In order to implement this step we assume that a preprocessing stage has been completed
+which allows us to find a basic ǫ0-approximation to arbitrary U ∈SU(2).
+Since ǫ0 is a
+constant, in principle this preprocessing stage may be accomplished simply by enumerating
+and storing a large number of instruction sequences from G, say up to some sufficiently large
+(but fixed) length l0, and then providing a lookup routine which, given U, returns the closest
+sequence. Appropriate values for ǫ0 and l0 will be discussed later in this section.
+At higher levels of recursion, to find an ǫn-approximation to U, we begin by finding an
+ǫn−1-approximation to U:
+
+else
+Set Un−1 = Solovay-Kitaev(U,n−1)
+
+We will use Un−1 as a step towards finding an improved approximation to U.
+Defining
+∆≡UU †
+n−1, the next three steps of the algorithm aim to find an ǫn-approximation to ∆,
+where ǫn is some improved level of accuracy, i.e., ǫn < ǫn−1. Finding such an approxima-
+tion also enables us to obtain an ǫn-approximation to U, simply by concatenating our exact
+sequence of instructions for Un−1 with our ǫn-approximating sequence for ∆.
+How do we find such an approximation to ∆? First, observe that ∆is within a distance
+ǫn−1 of the identity. This follows from the definition of ∆and the fact that Un−1 is within a
+distance ǫn−1 of U.
+Second, decompose ∆as a group commutator ∆= V WV †W † of unitary gates V and
+W. For any ∆it turns out — this is not obvious — that there is always an infinite set of
+choices for V and W such that ∆= V WV †W †. For our purposes it is important that we
+find V and W such that d(I, V ), d(I, W) < cgc√ǫn−1 for some constant cgc. We call such
+

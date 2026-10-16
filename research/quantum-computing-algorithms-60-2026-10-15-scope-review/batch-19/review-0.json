@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "19",
+  "round": 0,
+  "reviewed_items": [
+    "lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement",
+    "lem-qc-knill-laflamme-product-operator-matrix-units-form-a-basis",
+    "def-qc-first-factor-partial-trace",
+    "lem-qc-knill-laflamme-coefficient-matrix-is-positive",
+    "lem-qc-knill-laflamme-orthogonal-error-basis",
+    "def-qc-exact-recovery-of-a-quantum-code",
+    "lem-qc-kraus-operators-of-the-identity-channel-are-scalars",
+    "lem-qc-orthogonal-error-syndrome-projectors",
+    "lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form",
+    "thm-qc-knill-laflamme-explicit-recovery",
+    "thm-qc-knill-laflamme-necessity",
+    "cor-qc-distance-corrects-t-errors-and-erasures",
+    "def-qc-correctable-subsystem-and-gauge-factor",
+    "ex-qc-degenerate-code-kl-matrix",
+    "thm-qc-subsystem-knill-laflamme",
+    "ex-qc-knill-laflamme-orthogonal-error-recovery"
+  ],
+  "reviewed_pages": [
+    "knill-laflamme-recovery-and-subsystem-codes",
+    "knill-laflamme-recovery-and-subsystem-codes-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The assigned claims and page scope were reviewed against their current suppliers. The Kraus complete-positivity proof has an unresolved basis prerequisite, and the isometric-encoding theorem has a false dimension conclusion. These supplier issues require owner reconciliation; local defects are also recorded below.",
+  "findings": [
+    {
+      "id": "thm-qc-kraus-map-completely-positive",
+      "type": "prerequisite",
+      "reason": "Step 1.1 chooses an arbitrary ordered basis of H, then cites A2 for an orthonormal product basis. That does not follow for an arbitrary basis. The smallest repair is to choose an orthonormal basis and supply cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, or to cite the general product-basis result and use only its spanning conclusion. This out-of-batch supplier is used by assigned recovery and example proofs; see consumer dispositions."
+    },
+    {
+      "id": "thm-qc-isometric-encoding-projector",
+      "type": "prerequisite",
+      "reason": "The statement asserts 1 ≤ K for any finite-dimensional isometry, but the zero space H_L with its unique map into H_P is an isometry and has K=0. Step 3.1 does not establish K≥1. Add H_L≠{0} or remove the lower bound. Assigned consumers use only V*V and projector properties, with nonzero logical or subsystem spaces stated separately; those exact uses were checked."
+    },
+    {
+      "id": "def-qc-correctable-subsystem-and-gauge-factor",
+      "type": "prerequisite",
+      "reason": "The equivalence paragraph applies lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form to the corrected map R∘N∘Ad_J, but that lemma assumes a finite-Kraus channel. The definition does not explicitly establish that premise. Add the channel-composition and finite-Kraus argument and its supplier references; this is locally resolvable once the upstream CP proof is reconciled."
+    },
+    {
+      "id": "def-qc-exact-recovery-of-a-quantum-code",
+      "type": "local",
+      "reason": "The equivalence sentence says Ad_V∘R returns VρV* from a logical-state input ρ, but Ad_V∘R has input space B(H_O). State the full composition Ad_V∘R∘N∘Ad_V(ρ)=VρV*."
+    },
+    {
+      "id": "ex-qc-degenerate-code-kl-matrix",
+      "type": "local",
+      "reason": "Verification step 3.2 calls the recovery construction [F1], but F1 is the code/projector definition. The recovery theorem is F3."
+    },
+    {
+      "id": "ex-qc-knill-laflamme-orthogonal-error-recovery",
+      "type": "local",
+      "reason": "Verification step 2.2 calls the orthogonal-syndrome recovery branch [F1], but F1 is the code/projector definition. The recovery theorem is F3."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qc-knill-laflamme-explicit-recovery",
+      "decision": "escalate",
+      "reason": "Step 2.2 uses the incomplete Kraus complete-positivity supplier to certify the constructed recovery is a channel."
+    },
+    {
+      "id": "lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form",
+      "decision": "escalate",
+      "reason": "Steps 3.1 and 4.1 use that supplier to certify finite Kraus maps are completely positive."
+    },
+    {
+      "id": "thm-qc-subsystem-knill-laflamme",
+      "decision": "escalate",
+      "reason": "Fact F3 is used to certify the constructed corrected and recovery maps as channels."
+    },
+    {
+      "id": "ex-qc-degenerate-code-kl-matrix",
+      "decision": "escalate",
+      "reason": "Step 1.1 relies on the incomplete CP supplier; step 3.2 also needs the F1-to-F3 reference repair."
+    },
+    {
+      "id": "ex-qc-knill-laflamme-orthogonal-error-recovery",
+      "decision": "escalate",
+      "reason": "Step 1.1 relies on the incomplete CP supplier; step 2.2 also needs the F1-to-F3 reference repair."
+    },
+    {
+      "id": "cor-qc-distance-corrects-t-errors-and-erasures",
+      "decision": "escalate",
+      "reason": "Its exact-recovery conclusion uses thm-qc-knill-laflamme-explicit-recovery, whose channel proof depends on the unresolved CP supplier."
+    },
+    {
+      "id": "def-qc-correctable-subsystem-and-gauge-factor",
+      "decision": "escalate",
+      "reason": "Its gauge-only equivalence depends on the affected subsystem marginal lemma and needs the finite-Kraus premise made explicit."
+    },
+    {
+      "id": "knill-laflamme-recovery-and-subsystem-codes",
+      "decision": "escalate",
+      "reason": "The page includes recovery and subsystem results that use the unresolved CP supplier."
+    },
+    {
+      "id": "knill-laflamme-recovery-and-subsystem-codes-examples",
+      "decision": "escalate",
+      "reason": "Its worked recovery example uses the unresolved CP supplier through its channel claim."
+    },
+    {
+      "id": "thm-qc-kraus-choi-equivalence",
+      "decision": "escalate",
+      "reason": "Its Step 1.2 uses the CP supplier for the Kraus-to-CP implication. The CP-to-Kraus implication used by the assigned necessity proof is independently supported by its earlier lemmas."
+    },
+    {
+      "id": "thm-qc-knill-laflamme-necessity",
+      "decision": "accept",
+      "reason": "Its Step 1.1 needs the CP-to-Kraus implication of thm-qc-kraus-choi-equivalence, which is established by that proof's Choi-positivity and positive-Choi lemmas, independently of the affected reverse implication."
+    },
+    {
+      "id": "lem-qc-knill-laflamme-coefficient-matrix-is-positive",
+      "decision": "accept",
+      "reason": "Its use of thm-qc-isometric-encoding-projector is V*V=I and the projector identities; its statement separately assumes a nonzero logical space."
+    },
+    {
+      "id": "lem-qc-knill-laflamme-orthogonal-error-basis",
+      "decision": "accept",
+      "reason": "Its use of thm-qc-isometric-encoding-projector is V*V=I and the projector identities; its statement separately assumes a nonzero logical space."
+    },
+    {
+      "id": "def-qc-exact-recovery-of-a-quantum-code",
+      "decision": "repair",
+      "reason": "Clarify the physical-recovery composition; its use of the isometric-encoding theorem relies only on V*V=I under the stated nonzero-space hypotheses."
+    },
+    {
+      "id": "thm-qc-channels-compose-and-tensor",
+      "decision": "escalate",
+      "reason": "Its composition and tensor-channel proofs also use the unresolved Kraus complete-positivity supplier."
+    }
+  ]
+}

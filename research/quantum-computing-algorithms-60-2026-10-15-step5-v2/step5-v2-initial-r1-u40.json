@@ -1,0 +1,495 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "40",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "def-qa-16-boolean-query-domain",
+      "model": "gpt-6-luna",
+      "context_sha256": "fb0c6ca73bd131e2ab3103ea0919b89953839cde42bbdd6356295387ceca08ba",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F2 defines XOR queries only for total functions on bit-string addresses. For N=3 the local three-address action does not by itself specify F2 on the fourth word, so the original invocation of F2 lacks an encoding and total function. Added the i-1 binary encoding, zero extension on unused words, and invariant active C^N restriction; the oracle remains the same on all N legal addresses."
+    },
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "def-qa-16-filtered-gamma2",
+      "model": "gpt-6-luna",
+      "context_sha256": "df7fbcf607e175173ce8c653e5f57a0956142444862d5a31dcb3a07e94466e6f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The literal defining sentence permits an empty finite D and unspecified Boolean masks; maxima over empty D are undefined. Its proof also needs actual coordinate-mismatch masks to assert that every off-diagonal pair is covered. The intended query setting is clear from F1 and the contract but must be explicit in the Definition. Added that setting, corrected the nonfatal Dirac-linearity wording, and made the conjugate-row construction and span bound explicit."
+    },
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "thm-qa-16-controlled-consistency-reflection-correct",
+      "model": "gpt-6-luna",
+      "context_sha256": "04d78307b5e637f7ba5033aaf774523798af2b9fa6a84e645998b83f39bc5cb5",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The original F25 incorrectly credits the register definition with the algorithm-specific mode decomposition. Step 1.1 already obtains that decomposition and the unit orthogonal start vector from the algorithm input and uses F25 only for the standard coordinate pairing. Thus the projection and circuit proof are sound, but the factual attribution needs repair. F25 now separates the two sources explicitly."
+    },
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "thm-qa-16-general-adversary-tightness",
+      "model": "gpt-6-luna",
+      "context_sha256": "ced809e85bbac9498294d2d14285bf1054f09179a150516528d3290f4f55a7b4",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 omits its supplier nonconstancy hypothesis and is cited in the constant branch. This is an inaccurate extra identification, but the tightness argument itself already follows from the nonconstant lower bound, attained certificate/evaluator upper bound, and zero conventions for constants. Qualified F2, moved it to the nonconstant branch, and cited def-qa-16-general-adversary-bound directly for the constant zero value."
+    }
+  ],
+  "reviews": [
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "def-qa-16-boolean-query-domain",
+      "disposition": "repaired",
+      "post_sha256": "66fc707b94e677f00b4bab843df34dd81c163c63f7d3432c4e96ae55b391f831",
+      "review_context_sha256": "041b083ecbe925128e3c9af62e98cf13015e1358f2b028526c0fd2421fa95af2",
+      "reason": "The total extension toggles by x_{j+1} on j<N and by zero elsewhere. Its active subspace is invariant and restricts to the declared oracle, including a=0 for N=1. The local per-input error and worst-branch cost definitions remain valid for constants and singleton domains. This is an author repair and local mathematical check, not independent review of the repair."
+    },
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "def-qa-16-filtered-gamma2",
+      "disposition": "repaired",
+      "post_sha256": "0fe27c0a7e4dec867e2418154b576616d32022bce3a709d9d1cd24310ba01fff",
+      "review_context_sha256": "502c6b8882c969f4517cf3456a589f0f248c597f54e634d6e77f02346e174522",
+      "reason": "For nonempty D the two finite maxima exist. Mismatch masks kill diagonal entries and cover every distinct pair; conjugate rows and coordinate vectors factor any zero-diagonal target. Restricting a feasible family to the span of its 2|D| vectors preserves pairings and costs. The zero and singleton cases are valid, and no arbitrary Choice is used. This records a local check of the repair, not independent review."
+    },
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "thm-qa-16-controlled-consistency-reflection-correct",
+      "disposition": "repaired",
+      "post_sha256": "de31dc116691f884adfebaa19e96cd63a99b1fc8be283f61ad81daf1c7b2a68b",
+      "review_context_sha256": "1def162c9b2c809b29ee86321312dd6c2676cf6dde28407be4c4ce71cfc3d03d",
+      "reason": "The algorithm provides the orthogonal decomposition and unit start vector; the register definition supplies the standard pairing. Orthogonal summands prove Pi_x is a projection. The two XOR calls compute and uncompute query scratch, fix plus scratch in start mode, and produce exactly diag(I,2Pi_x-I) for both control values and all superpositions. The preceding domain encoding implements these same local addresses. Statement unchanged; local repair check only."
+    },
+    {
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "id": "thm-qa-16-general-adversary-tightness",
+      "disposition": "repaired",
+      "post_sha256": "a130d6d704c498df1e8c7b693e18e8953b79c531db667641d15da1d49a50cb66",
+      "review_context_sha256": "2085997529dd94731e0b94c82070102ac4d147176d6e14c161aa3c8999a27692",
+      "reason": "The positive lower coefficient is obtained by substituting epsilon=1/3. The dual theorem attains the optimum and permits reciprocal balancing; Adv±>=1 meets the evaluator domain and the cost theorem gives <2048Adv±. Constants are computed exactly without queries and their adversary value is zero by definition. F2 is used only for nonconstant functions. The repaired domain and factorization interfaces preserve all these hypotheses. Statement unchanged; local repair check only."
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-qa-16-controlled-consistency-reflection",
+    "alg-qa-16-dual-adversary-reflection-evaluator",
+    "def-qa-16-input-mismatch-matrices",
+    "def-qa-16-query-address-projectors",
+    "ex-qa-16-or-dual-certificate",
+    "lem-qa-16-adversary-progress-endpoints",
+    "lem-qa-16-filtered-gamma2-well-defined",
+    "lem-qa-16-general-adversary-finite-and-attained",
+    "prop-qa-16-ambainis-base-separation",
+    "thm-qa-16-adversary-composition-lower-bound",
+    "thm-qa-16-controlled-consistency-reflection-correct",
+    "thm-qa-16-dual-evaluator-success",
+    "thm-qa-16-dual-vector-characterization",
+    "thm-qa-16-filtered-gamma-adversary-equality",
+    "thm-qa-16-general-adversary-lower-bound",
+    "thm-qa-16-general-adversary-tightness"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "id": "def-qa-16-boolean-query-domain",
+      "severity": "fatal",
+      "classification": "dependency_citation",
+      "locus": "definition",
+      "finding": "F2 defines XOR queries only for total functions on bit-string addresses. For N=3 the local three-address action does not by itself specify F2 on the fourth word, so the original invocation of F2 lacks an encoding and total function. Added the i-1 binary encoding, zero extension on unused words, and invariant active C^N restriction; the oracle remains the same on all N legal addresses.",
+      "status": "fixed",
+      "evidence_report": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u40.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "id": "def-qa-16-filtered-gamma2",
+      "severity": "fatal",
+      "classification": "logic",
+      "locus": "definition",
+      "finding": "The literal defining sentence permits an empty finite D and unspecified Boolean masks; maxima over empty D are undefined. Its proof also needs actual coordinate-mismatch masks to assert that every off-diagonal pair is covered. The intended query setting is clear from F1 and the contract but must be explicit in the Definition. Added that setting, corrected the nonfatal Dirac-linearity wording, and made the conjugate-row construction and span bound explicit.",
+      "status": "fixed",
+      "evidence_report": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u40.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "id": "thm-qa-16-controlled-consistency-reflection-correct",
+      "severity": "nonfatal",
+      "classification": "dependency attribution without an essential inference gap",
+      "locus": "facts-block",
+      "finding": "The original F25 incorrectly credits the register definition with the algorithm-specific mode decomposition. Step 1.1 already obtains that decomposition and the unit orthogonal start vector from the algorithm input and uses F25 only for the standard coordinate pairing. Thus the projection and circuit proof are sound, but the factual attribution needs repair. F25 now separates the two sources explicitly.",
+      "status": "fixed",
+      "evidence_report": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u40.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "id": "thm-qa-16-general-adversary-tightness",
+      "severity": "nonfatal",
+      "classification": "dependency attribution without an essential inference gap",
+      "locus": "facts-block",
+      "finding": "F2 omits its supplier nonconstancy hypothesis and is cited in the constant branch. This is an inaccurate extra identification, but the tightness argument itself already follows from the nonconstant lower bound, attained certificate/evaluator upper bound, and zero conventions for constants. Qualified F2, moved it to the nonconstant branch, and cited def-qa-16-general-adversary-bound directly for the constant zero value.",
+      "status": "fixed",
+      "evidence_report": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u40.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "id": "def-qa-16-filtered-gamma2",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "finding": "Original step 1.1 said the Dirac cross pairing is linear in each vector factor; it is conjugate-linear in u and linear in v. The repair corrects the wording and gives the explicit conjugate-row construction.",
+      "status": "fixed",
+      "evidence_report": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u40.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "route_unassigned_frontier_finding_to_owner",
+      "id": "lem-qa-16-adversary-progress-endpoints",
+      "severity": "fatal",
+      "classification": "logic",
+      "locus": "statement",
+      "affected_use": "The Statement quantifies Gamma and its principal unit eigenvector without requiring Gamma to vanish on equal-output pairs; proof step 1.1 uses: Since Γ has only cross-output blocks, write Γ=[[0,B],[B^T,0]].",
+      "invalidated_claim": "The standalone final endpoint bound is false for arbitrary real symmetric Gamma: for N=1, D={0,1}, f(x)=x, an exact one-query algorithm, Gamma=I_2 and alpha=(1,0), W_0=W_T=1 but 2sqrt(epsilon(1-epsilon))||Gamma||=0 at epsilon=0.",
+      "minimality": "Add the intended admissible adversary-matrix hypothesis to the Statement, retaining the current proof. Its Facts/Given already state that hypothesis. Do not edit this unassigned carrier in unit 40.",
+      "route": "ordinary frontier-owner lane, separate from this assigned adjudication",
+      "status": "owner_action_required",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "record_no_published_consumer_effect",
+      "suppliers": [
+        "def-qa-16-boolean-query-domain",
+        "def-qa-16-filtered-gamma2"
+      ],
+      "reason": "All 17 direct supplier/consumer events examined above involve draft items in the frozen frontier, covering 16 unique consumers. No direct outside-frontier or published consumer was found in the current dependency/reference inventory; no published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-qa-16-boolean-query-domain",
+      "before_interface": "Fix an integer N≥1, a nonempty finite set D⊆{0,1}^N, and a Boolean function f:D→{0,1}. A Boolean query problem is the tuple (N,D,f) with input x∈D and standard XOR oracle\n$$O_x|i,b,w\\rangle=|i,b\\oplus x_i,w\\rangle\\quad (i\\in[N],\\ b\\in\\{0,1\\}).$$\nFor 0≤ε<1/2, Q_ε(f) is the least worst-case number of these oracle calls of an algorithm outputting f(x) with probability at least 1−ε for every x∈D. The input promise does not restrict the oracle address. Only query calls are counted here; no gate-efficiency assertion is part of this definition.",
+      "repair": "Explicit active C^N address basis, binary encoding, total zero extension, and invariant-subspace restriction; no arbitrary Choice. N=1 uses the empty address word. Definition heading corrected.",
+      "checked_dependencies": [
+        "def-qa-task-and-promise-domain",
+        "def-qa-standard-bit-query",
+        "def-qa-quantum-query-complexity",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "source_reading": "Current local supplier arguments; no external source reading claimed.",
+      "pending": [],
+      "validation": "The four focused check commands in validation all exited 0."
+    },
+    {
+      "id": "def-qa-16-filtered-gamma2",
+      "before_interface": "For a finite matrix A indexed by D×D and Boolean masks Δ={Δ_i}_{i=1}^N, define\n$$\n\\gamma_2(A\\mid\\Delta):=\\inf \\max\\!\\left\\{\\max_{x\\in D}\\sum_i\\|u_{x,i}\\|^2,\\ \\max_{y\\in D}\\sum_i\\|v_{y,i}\\|^2\\right\\},\n$$\nwhere the infimum is over finite-dimensional complex inner-product spaces and vector families satisfying\n$$A_{xy}=\\sum_i(\\Delta_i)_{xy}\\langle u_{x,i}|v_{y,i}\\rangle_D\\quad(x,y\\in D).$$\nSet the value to $+\\infty$ if no such families exist. Every feasible family may be taken in dimension at most $2|D|$ for each i.",
+      "repair": "Explicit nonempty finite Boolean domain and actual mismatch masks. Corrected Dirac conjugate-linearity, supplied conjugate-row factorization, and justified 2|D| span compression. Singleton zero target has value zero; a nonzero diagonal is infeasible.",
+      "checked_dependencies": [
+        "def-qa-16-input-mismatch-matrices",
+        "def-inner-product-space",
+        "def-qc-dirac-notation-conversion",
+        "lem-qa-16-filtered-gamma2-well-defined"
+      ],
+      "pending": [],
+      "validation": "The four focused check commands in validation all exited 0."
+    },
+    {
+      "id": "thm-qa-16-controlled-consistency-reflection-correct",
+      "repair": "F25 now attributes only C^d, standard coordinate pairing and ordered basis to the register definition; the orthogonal mode decomposition is explicitly attributed to the algorithm input. Statement unchanged.",
+      "checked_dependencies": [
+        "alg-qa-16-controlled-consistency-reflection",
+        "def-qc-register-and-computational-basis",
+        "def-qc-dirac-notation-conversion",
+        "def-qa-standard-bit-query",
+        "def-qa-16-boolean-query-domain"
+      ],
+      "mathematical_check": "Unit start gives an orthogonal rank-one projection; address and response basis summands are mutually orthogonal. In query mode the two XOR calls compute and erase x_i; the phase is negative exactly on controlled inconsistent response. In start mode X fixes the Hadamard-prepared plus scratch on both calls and the final Hadamard restores zero. Linearity gives arbitrary superpositions.",
+      "pending": [],
+      "validation": "The four focused check commands in validation all exited 0."
+    },
+    {
+      "id": "thm-qa-16-general-adversary-tightness",
+      "repair": "Qualified F2 by nonconstancy and moved its use to step 1.2. Constant branch now constructs the zero-query algorithm and cites the actual adversary definition through new F8/direct dependency. Removed the extraneous historical-source comparison from the proof without changing its Statement.",
+      "checked_dependencies": [
+        "thm-qa-16-general-adversary-lower-bound",
+        "thm-qa-16-filtered-gamma-adversary-equality",
+        "thm-qa-16-dual-evaluator-query-cost",
+        "thm-qa-16-dual-vector-characterization",
+        "lem-qa-16-nonconstant-adversary-at-least-one",
+        "def-qa-16-general-adversary-bound",
+        "def-qa-16-boolean-query-domain"
+      ],
+      "mathematical_check": "At epsilon=1/3 the lower coefficient is 1/2-sqrt(2)/3>0. The attained certificate has positive class costs, reciprocal rescaling preserves the constraints and does not increase the maximum, and A>=1 admits the evaluator whose cost is <2048A. For constants, output the fixed value with no query and apply the explicit zero adversary convention.",
+      "pending": [],
+      "validation": "The four focused check commands in validation all exited 0."
+    },
+    {
+      "metadata": "Under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release, updated only owning batch-40 contracts and assigned manifest projections. Refreshed exact same-batch quotation mirrors for the two changed definitions. Added the algorithm-input quotation for F25 and the adversary zero-convention quotation for tightness F8. Preserved historical boundary reviews and frozen round evidence.",
+      "unresolved_assigned_obligations": [],
+      "next_action": "Engine collection, routed consumer work and independent rejudgment; no judgments, verification stamps, certificates or round-state edits were made."
+    },
+    {
+      "unassigned_digest_concerns": "The schema-heading concerns for input-mismatch/projector/adversary/nonnegative definitions and the example/counterexample lie outside this four-item assignment. Their carriers were not edited or adjudicated; retain the original digest for owner routing. The assigned definition headings and Dirac wording were corrected here."
+    },
+    {
+      "handoff_integrity": "Directly recomputed itemHashGuard for each of the four final current item files and matched every recorded post_sha256. The immediately captured review_context_sha256 values were preserved. Exact rejected tuple coverage, required evidence fields, repaired dispositions, and all assigned frontier memberships were checked. There are no unresolved mathematical obligations in this assignment; the separately routed unassigned endpoint-lemma defect requires owner handling before certification."
+    }
+  ],
+  "consumer_examinations": [
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "alg-qa-16-controlled-consistency-reflection",
+      "path": "items/alg-qa-16-controlled-consistency-reflection.md",
+      "affected_use": "**Instructions.** In query mode route address $i$ to the oracle and use $u$ as its target. In start mode route the oracle address to the fixed $i_0$ and apply a Hadamard to $u$, so its query target is $|+\\rangle$. Make one unconditional standard XOR oracle call. Apply phase $-1$ exactly when $c=1$, the mode is query, and the response bit $z$ differs from $u$; disable this phase on start and when $c=0$. Make a second unconditional XOR call with the same address routing. In start mode apply the Hadamard to $u$ again. Return the data and control registers and the scratch. No controlled unknown-oracle call is invoked.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Every routed address i and fixed i_0 is in [N], so the encoded restriction has precisely the two XOR actions used by the procedure.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "def-qa-16-input-mismatch-matrices",
+      "path": "items/def-qa-16-input-mismatch-matrices.md",
+      "affected_use": "[F1] [[def-qa-16-boolean-query-domain]]: every row/column label is an element of the same finite D⊆{0,1}^N with output f(x).",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: The same nonempty D, N-bit coordinates, and output function are retained; no matrix entry involves an unused oracle word.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "def-qa-16-query-address-projectors",
+      "path": "items/def-qa-16-query-address-projectors.md",
+      "affected_use": "1.1 On H=C^N⊗H_response⊗H_work define Π_i=|i⟩⟨i|⊗I_response⊗I_work. Since ⟨i|j⟩=δ_{ij}, Π_iΠ_j=0 for i≠j and Π_i²=Π_i=Π_i*. [given, F2, F3, algebra]",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: The explicitly retained active address space is C^N. Its N basis vectors still resolve its identity; the physical encoding does not add local addresses.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "lem-qa-16-general-adversary-finite-and-attained",
+      "path": "items/lem-qa-16-general-adversary-finite-and-attained.md",
+      "affected_use": "[F1] [[def-qa-16-boolean-query-domain]]: D is a finite subset of {0,1}^N and f labels each input 0 or 1.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Finiteness, positive length, opposite-output support, and all coordinate-mismatch matrices are unchanged.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "lem-qa-16-filtered-gamma2-well-defined",
+      "path": "items/lem-qa-16-filtered-gamma2-well-defined.md",
+      "affected_use": "[F7] [[def-qa-16-boolean-query-domain]]: $N\\ge1$ and the finite query domain $D$ is nonempty.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: N>=1 and nonempty D remain explicit; its positive-dimensional compactness setting is unchanged.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "thm-qa-16-controlled-consistency-reflection-correct",
+      "path": "items/thm-qa-16-controlled-consistency-reflection-correct.md",
+      "affected_use": "2.1 Append a clean scratch bit u=0. In query mode, call O_x at address i to write u=x_i. In start mode route the oracle address to a fixed i_0∈[N] and apply H to u so the target is |+⟩; since X^{x_{i_0}}|+⟩=|+⟩, the unconditional oracle call leaves start unchanged. Apply a fixed phase −1 exactly when c=1, the mode is a query state, and z≠u; apply +1 on the start mode and when c=0. On query basis states this phase is +1 exactly when z=x_i, and −1 otherwise. [given, F21, F22, F23, step 1.1, algebra]",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Query and fixed start-mode addresses lie in [N]; both XOR calls and the plus-target identity are unaffected. This item received its assigned F25 attribution repair.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "lem-qa-16-adversary-progress-endpoints",
+      "path": "items/lem-qa-16-adversary-progress-endpoints.md",
+      "affected_use": "[F2] [[def-qa-16-boolean-query-domain]]: the function has finite domain D and Boolean output.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: The finite input labels and Boolean output classes are unchanged. A separate preexisting missing support hypothesis is routed below, not caused by address encoding.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "alg-qa-16-dual-adversary-reflection-evaluator",
+      "path": "items/alg-qa-16-dual-adversary-reflection-evaluator.md",
+      "affected_use": "**Instructions.** Use the finite work space\n$$\\mathcal H=\\operatorname{span}\\{|start\\rangle\\}\\oplus(\\mathbb C^N\\otimes V\\otimes\\mathbb C^2).$$\nHere the address basis is $|i\\rangle=e_{i-1}$ for $i\\in[N]$, and $|start\\rangle$ is a specified unit vector orthogonal to the query summand.\nThe witness family is classical instance data used to specify a subspace, not an input-dependent state preparation. Define\n$$\\nu_x=1+\\frac1{2A}\\sum_i\\|v_{x,i}\\|^2,\\qquad |\\psi_x\\rangle=\\nu_x^{-1/2}\\left(|start\\rangle+\\frac1{\\sqrt{2A}}\\sum_i|i\\rangle|v_{x,i}\\rangle|x_i\\rangle\\right).$$\nLet $\\Delta$ project onto the span of all $|\\psi_y\\rangle$ with $f(y)=1$, and let\n$$\\Pi_x=|start\\rangle\\langle start|+\\sum_{i=1}^N|i\\rangle\\langle i|\\otimes I_V\\otimes|x_i\\rangle\\langle x_i|$$\nproject onto $|start\\rangle$ plus query states whose response is $x_i$. Form the exact ordered product\n$$U_x=(2\\Pi_x-I)(2\\Delta-I).$$",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Its finite query summand uses C^N and the same N input coordinates; the consistency circuit uses only the active addresses.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "thm-qa-16-general-adversary-lower-bound",
+      "path": "items/thm-qa-16-general-adversary-lower-bound.md",
+      "affected_use": "[F3] [[def-qa-16-boolean-query-domain]]: $Q_\\epsilon(f)$ is the least worst-case number of standard XOR calls among algorithms correct with probability at least $1-\\epsilon$ on every promised input.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: The same local per-input error and least worst-case query count are counted. The proof uses active N-address XOR calls.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "prop-qa-16-ambainis-base-separation",
+      "path": "items/prop-qa-16-ambainis-base-separation.md",
+      "affected_use": "[F1] [[def-qa-16-boolean-query-domain]]: the input set is {0,1}^4 with the Boolean function fixed in the Statement.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: The declared full four-bit domain, coordinate masks, and spectral certificates are unchanged; N=4 has no unused address codeword.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "thm-qa-16-adversary-composition-lower-bound",
+      "path": "items/thm-qa-16-adversary-composition-lower-bound.md",
+      "affected_use": "[F6] [[def-qa-16-boolean-query-domain]]: a Boolean query problem has a finite nonempty domain and a positive input length.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Positive input lengths and nonempty promise domains, including explicitly nonempty D_h, are preserved; the matrix construction uses coordinate strings only.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "thm-qa-16-dual-evaluator-success",
+      "path": "items/thm-qa-16-dual-evaluator-success.md",
+      "affected_use": "1.1 Use the supplied finite dual certificate from [F21] and its bound A≥max{C_0,C_1,1}; the domain condition A≥1 agrees with [F22]. The algorithm input specifies |start⟩ to be a unit vector orthogonal to the query summand. In the finite space H=span{|start⟩}⊕(C^N⊗V⊗C^2), define ν_x=1+(1/(2A))Σ_i||v_{x,i}||², |ψ_x⟩=ν_x^{-1/2}(|start⟩+(1/√(2A))Σ_i|i⟩|v_{x,i}⟩|x_i⟩). The start mode and distinct addresses are orthogonal, so ||ψ_x||²=ν_x^{-1}ν_x=1. [given, F1, F21, F22, F24, construct]",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: The same C^N basis, supplied certificate and unit start vector define the witness states; every queried x_i is supplied identically.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "thm-qa-16-general-adversary-tightness",
+      "path": "items/thm-qa-16-general-adversary-tightness.md",
+      "affected_use": "[F7] [[def-qa-16-boolean-query-domain]]: $Q_{1/3}(f)$ is the least worst-case standard XOR query count for success probability at least $2/3$ on every promised input.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Per-input success 2/3 and the worst-case local XOR count are unchanged. The item received its separate assigned constant-case citation repair.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-boolean-query-domain",
+      "id": "ex-qa-16-or-dual-certificate",
+      "path": "items/ex-qa-16-or-dual-certificate.md",
+      "affected_use": "1.1 Let D={0,e_1,…,e_N}⊂{0,1}^N and f(x)=OR_N(x). For every i set v_{0,i}=N^{-1/4} and v_{e_j,i}=N^{1/4}δ_{ij} in the one-dimensional real space. If x=0,y=e_j, the only mismatch is coordinate j and the corresponding product is 1. If x=e_j,y=e_k with j≠k, the mismatch coordinates are j,k and both products vanish. Reverse pairs give the same real values. Thus all constraints in [F4] hold. [given, F1, F2, F4, construct]",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: For N>=1 the domain {0,e_1,...,e_N} remains a nonempty Boolean query problem, with exactly the same certificate and masks.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-filtered-gamma2",
+      "id": "lem-qa-16-filtered-gamma2-well-defined",
+      "path": "items/lem-qa-16-filtered-gamma2-well-defined.md",
+      "affected_use": "1.1 If A_{xx}≠0, the factorization equation at (x,x) has right side zero because every Δ_i(x,x)=0, so A is infeasible. If A has zero diagonal, assign each off-diagonal entry A_{xy} to the least i with x_i≠y_i, forming matrices A^{(i)} supported on Δ_i and satisfying A=Σ_i A^{(i)}. For d=|D|, put u_{x,i}=(\\overline{A^{(i)}_{x1}},…,\\overline{A^{(i)}_{xd}}) and v_{y,i}=e_y in C^d; then ⟨u_{x,i}|v_{y,i}⟩_D=A^{(i)}_{xy}. This is a finite feasible factorization. [given, F1, F2, F3, F7, construct]",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Its target is already on the nonempty Boolean domain by F7; its conjugate-row construction is exactly the now explicit mismatch-mask setting.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-filtered-gamma2",
+      "id": "thm-qa-16-dual-vector-characterization",
+      "path": "items/thm-qa-16-dual-vector-characterization.md",
+      "affected_use": "1.1 For $A=J-F$, minimize $t$ over real symmetric blocks $Z_i=\\begin{bmatrix}X_i&W_i\\\\W_i^T&Y_i\\end{bmatrix}\\succeq0$ subject to $\\sum_i\\Delta_i\\circ W_i=A$, $\\sum_iX_i(xx)\\le t$, and $\\sum_iY_i(yy)\\le t$ for every input. By [F5,F6], each $Z_i$ is a Gram matrix of real vectors $u_{x,i},v_{y,i}$ with $W_i(x,y)=\\langle u_{x,i}|v_{y,i}\\rangle_D$ and the diagonal entries equal to their squared norms. Conversely, realify any complex feasible families by $u\\mapsto(\\operatorname{Re}u,\\operatorname{Im}u)$ and $v\\mapsto(\\operatorname{Re}v,\\operatorname{Im}v)$; norms are preserved and each real dot product is $\\operatorname{Re}\\langle u|v\\rangle_D$. Since each target entry $A_{xy}$ is real, taking real parts preserves every constraint. Thus the real SDP has the filtered factorization value in [F12]. [given, F2, F4, F5, F6, F12, construct]",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Nonconstant f gives nonempty D and the same mismatch masks. Its real SDP constraints and row/column cost agree with the repaired definition.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-qa-16-filtered-gamma2",
+      "id": "thm-qa-16-filtered-gamma-adversary-equality",
+      "path": "items/thm-qa-16-filtered-gamma-adversary-equality.md",
+      "affected_use": "1.1 For A=J−F, the defining factorization equations for γ₂(A|Δ) are exactly Σ_{i:x_i≠y_i}⟨u_{x,i}|v_{y,i}⟩=1 for opposite outputs and 0 for equal outputs. The target has zero diagonal, so [F2] gives a finite attained value. [given, F1, F2, F3, algebra]",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None from this supplier-interface change: Nonconstant f has a nonempty Boolean domain, and J-F is a zero-diagonal target for exactly the coordinate-mismatch masks now specified.",
+      "minimality": "No consumer item edit is required; the cited mathematical interface is preserved.",
+      "route": "frontier-owner"
+    }
+  ],
+  "page_examinations": [
+    {
+      "path": "library/quantum-algorithms/adversary-methods-and-quantum-query-complexity.md",
+      "affected_use": "This page fixes the finite partial Boolean query model and develops the signed general adversary method with the same XOR oracle and operator-norm convention throughout.",
+      "disposition": "unchanged_sound",
+      "reason": "The total binary encoding restricts to the same local XOR oracle; explicitly nonempty Boolean mismatch-mask domains retain the advertised SDP and vector interfaces. Page item order and query-versus-gate cost prose remain accurate."
+    },
+    {
+      "path": "library/quantum-algorithms/adversary-methods-and-quantum-query-complexity-examples.md",
+      "affected_use": "The OR_N calculation gives a balanced dual-vector certificate of cost √N and a matching adversary matrix.",
+      "disposition": "unchanged_sound",
+      "reason": "The explicit domain and oracle encoding do not change the partial OR problem or the four-bit matrix example; no page interface repair is required."
+    }
+  ],
+  "validation": [
+    {
+      "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-40.proof-contracts.json --strict --items def-qa-16-boolean-query-domain,def-qa-16-filtered-gamma2,thm-qa-16-controlled-consistency-reflection-correct,thm-qa-16-general-adversary-tightness",
+      "exit_code": 0,
+      "result": "0 errors, 0 warnings; 4/4 assigned items checked."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-qa-16-boolean-query-domain.md items/def-qa-16-filtered-gamma2.md items/thm-qa-16-controlled-consistency-reflection-correct.md items/thm-qa-16-general-adversary-tightness.md",
+      "exit_code": 0,
+      "result": "4 proofs checked, 0 failing; no automatic repair proposed."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-qa-16-boolean-query-domain.md items/def-qa-16-filtered-gamma2.md items/thm-qa-16-controlled-consistency-reflection-correct.md items/thm-qa-16-general-adversary-tightness.md",
+      "exit_code": 0,
+      "result": "All 4 files passed real KaTeX and renderer YAML parsing."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-qa-16-boolean-query-domain.md items/def-qa-16-filtered-gamma2.md items/thm-qa-16-controlled-consistency-reflection-correct.md items/thm-qa-16-general-adversary-tightness.md",
+      "exit_code": 0,
+      "result": "4 items, 11 steps, 0 defects; run once after the final item edits."
+    },
+    {
+      "command": "node tools/manifest-deps.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-40.pages.json",
+      "exit_code": 0,
+      "result": "31 manifest item records, 0 normalized, 0 errors; read-only metadata check."
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "60",
+  "round": 0,
+  "reviewed_items": [
+    "thm-qa-36-finite-cheeger-bound",
+    "lem-qa-36-clock-penalty-gap-perturbation",
+    "lem-qa-36-partial-trace-contracts-trace-distance",
+    "def-qa-36-finite-adiabatic-path-model",
+    "lem-qa-36-gapped-projection-regularity",
+    "def-qa-36-adiabatic-resource-model",
+    "lem-qa-36-jrs-finite-band-estimates",
+    "thm-qa-36-jrs-finite-adiabatic-bound",
+    "alg-qa-36-five-local-history-path",
+    "lem-qa-36-history-state-ground-and-output",
+    "lem-qa-36-history-path-ground-vector-monotonicity",
+    "alg-qa-36-discretized-path-simulation",
+    "lem-qa-36-history-path-restricted-gap",
+    "thm-qa-36-adiabatic-path-to-circuit-simulation",
+    "lem-qa-36-history-path-full-gap",
+    "thm-qa-36-circuit-to-adiabatic-simulation",
+    "ex-qa-36-two-level-avoided-crossing",
+    "cex-qa-36-gap-closing-failure",
+    "ex-qa-36-two-gate-history-state"
+  ],
+  "reviewed_pages": [
+    "adiabatic-computation-and-circuit-equivalence",
+    "adiabatic-computation-and-circuit-equivalence-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved scope is preserved, and the assigned pages, items, prerequisite pages, and actual supplier statements and proofs were reviewed. The finite JRS argument was also checked against [Jansen–Ruskai–Seiler, Theorem 3](https://arxiv.org/pdf/quant-ph/0603175). The principal claims appear sound, but local proof and algorithm-contract obligations remain; one consolidated local repair is appropriate.",
+  "findings": [
+    {
+      "id": "thm-qa-36-finite-cheeger-bound",
+      "type": "prerequisite",
+      "reason": "Step 2.1 uses Cauchy–Schwarz without listing a supplier. Step 4.1 uses the Rayleigh/min–max characterization on the mean-zero subspace, but the cited complex spectral theorem supplies an eigenbasis, not Courant–Fischer. Add the Cauchy–Schwarz and real min–max prerequisites or derive both locally."
+    },
+    {
+      "id": "thm-qa-36-finite-cheeger-bound",
+      "type": "local",
+      "reason": "Step 4.1 proves the 1-eigenspace consists of constants but does not establish that 1 is the top eigenvalue. Show that P is an L²(π) contraction using stationarity and the row probabilities; then irreducibility gives a simple top eigenvalue 1."
+    },
+    {
+      "id": "lem-qa-36-partial-trace-contracts-trace-distance",
+      "type": "prerequisite",
+      "reason": "Steps 1.2 and 2.1 use the operator norm and Cauchy–Schwarz to bound self-adjoint contractions and A⊗I, but neither supplier is listed. Add the operator-norm definition and Cauchy–Schwarz supplier, or include the needed bounds directly."
+    },
+    {
+      "id": "lem-qa-36-jrs-finite-band-estimates",
+      "type": "prerequisite",
+      "reason": "Fact F2 attributes submultiplicativity to the operator-norm definition, which only defines the norm. Steps 2.1, 5.1 and 6.1 also use submultiplicativity, adjoint norm invariance, and a finite column-to-operator norm bound. Add the operator-norm properties and Cauchy–Schwarz suppliers, and state the short consequences used."
+    },
+    {
+      "id": "lem-qa-36-history-state-ground-and-output",
+      "type": "local",
+      "reason": "Step 1.1 treats each h_l as a block on two local clock patterns but does not account for the other clock bits on which the term acts as identity. Decompose by each assignment to those other bits and verify the block positivity; Step 5.1 uses this for the full-space ground-state claim."
+    },
+    {
+      "id": "lem-qa-36-history-path-ground-vector-monotonicity",
+      "type": "prerequisite",
+      "reason": "Fact F1 attributes the minimum-Rayleigh-quotient characterization to the complex spectral theorem, whose statement only supplies an eigenbasis. Step 2.2 needs that variational fact. Add the real Courant–Fischer supplier or derive the minimum directly from the eigenbasis."
+    },
+    {
+      "id": "alg-qa-36-discretized-path-simulation",
+      "type": "prerequisite",
+      "reason": "The first-order commutator supplier assumes self-adjoint summands, but the algorithm does not require its coefficient approximations to be real. Specify real finite encodings for the approximations, and finite encoded upper-bound certificates for M1 and B so q and rPF are computable."
+    },
+    {
+      "id": "alg-qa-36-discretized-path-simulation",
+      "type": "local",
+      "reason": "This algorithm item includes correctness and termination in a Proof section. Move those properties into the assigned simulation theorem and prove them there; procedure instructions and an algorithm’s own proof are not a substitute for a separate result."
+    },
+    {
+      "id": "lem-qa-36-history-path-restricted-gap",
+      "type": "prerequisite",
+      "reason": "Steps 2.1 and 5.1 use the min–max/Rayleigh characterization, while the listed spectral theorem only supplies an eigenbasis. Add thm-courant-fischer-min-max-principle or give the required variational argument locally."
+    },
+    {
+      "id": "thm-qa-36-adiabatic-path-to-circuit-simulation",
+      "type": "prerequisite",
+      "reason": "Fact F2 assumes the discretized algorithm already supplies a circuit with the requested error. The theorem should establish that guarantee from the algorithm’s instructions and the product-formula supplier, including the error and termination bounds."
+    },
+    {
+      "id": "lem-qa-36-history-path-full-gap",
+      "type": "prerequisite",
+      "reason": "Step 2.1 uses Courant–Fischer to bound the second eigenvalue and compression, but Fact F5 cites only the spectral theorem. Add the real min–max supplier or prove those comparisons locally."
+    },
+    {
+      "id": "lem-qa-36-history-path-full-gap",
+      "type": "local",
+      "reason": "In step 3.1, p=1 at s=0, so w=(c0−√p v)/√(1−p) is undefined. Handle s=0 separately or give an argument valid when p=1."
+    },
+    {
+      "id": "thm-qa-36-circuit-to-adiabatic-simulation",
+      "type": "prerequisite",
+      "reason": "Step 5.1 uses the triangle inequality for trace distance, but the listed trace-distance definition does not establish it. Add the trace-norm norm-properties theorem or prove this inequality locally. Fact F6 also treats algorithm correctness as a supplier; use the proved adiabatic-path-to-circuit theorem after completing its proof."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-qa-36-history-path-restricted-gap",
+      "decision": "repair",
+      "reason": "Its use of the Cheeger bound is mathematically appropriate, but the item has its own missing min–max prerequisite."
+    },
+    {
+      "id": "lem-qa-36-history-path-full-gap",
+      "decision": "repair",
+      "reason": "Its use of the restricted gap and monotone ground vector is appropriate; the item has separate min–max and s=0 proof gaps."
+    },
+    {
+      "id": "thm-qa-36-jrs-finite-adiabatic-bound",
+      "decision": "accept",
+      "reason": "It uses the rank-m derivative estimates and their constants consistently; the missing norm foundations belong to the estimate lemma."
+    },
+    {
+      "id": "thm-qa-36-adiabatic-path-to-circuit-simulation",
+      "decision": "repair",
+      "reason": "It is the assigned result that should prove the discretized algorithm’s correctness, termination, and error bound."
+    },
+    {
+      "id": "thm-qa-36-circuit-to-adiabatic-simulation",
+      "decision": "repair",
+      "reason": "It uses the simulator guarantee and trace-distance triangle inequality without proved result suppliers; consume the completed path-to-circuit theorem and supply the trace-norm triangle result."
+    },
+    {
+      "id": "ex-qa-36-two-level-avoided-crossing",
+      "decision": "accept",
+      "reason": "Its gap, derivative, and rank-one JRS calculations are consistent with the supplied theorem."
+    },
+    {
+      "id": "cex-qa-36-gap-closing-failure",
+      "decision": "accept",
+      "reason": "The closing-gap path and its failure of ground-state following are calculated correctly, and it does not invoke the uniform-gap conclusion."
+    },
+    {
+      "id": "ex-qa-36-two-gate-history-state",
+      "decision": "accept",
+      "reason": "The padded prefix states and adjacent legal-clock propagation equations are correct; the local repair to the history-state lemma concerns its full-space block positivity argument."
+    }
+  ]
+}

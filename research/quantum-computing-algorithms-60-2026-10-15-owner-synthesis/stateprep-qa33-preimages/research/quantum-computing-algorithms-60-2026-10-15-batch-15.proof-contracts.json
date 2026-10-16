@@ -1,0 +1,2163 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qc-hadamard-pauli-action",
+    "lem-qc-phase-gate-pauli-action",
+    "thm-qc-pauli-product-and-adjoint",
+    "def-qc-clifford-normalizer",
+    "lem-qc-cnot-pauli-action",
+    "thm-qc-hermitian-pauli-phase-criterion",
+    "def-qc-binary-symplectic-form",
+    "thm-qc-binary-pauli-quotient-isomorphism",
+    "def-qc-binary-clifford-tableau",
+    "lem-qc-clifford-lifts-symplectic-transvections",
+    "lem-qc-symplectic-transvections-generate",
+    "thm-qc-pauli-commutator-is-symplectic-pairing",
+    "thm-qc-clifford-induces-symplectic-map",
+    "thm-qc-clifford-symplectic-surjectivity",
+    "ex-qc-pauli-commutator-binary-symplectic"
+  ],
+  "contracts": {
+    "lem-qc-hadamard-pauli-action": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qc-hadamard-pauli-action-step-1-1",
+          "step": "1.1",
+          "claim": "Direct multiplication of the displayed $2\\times2$ matrices gives $HXH=Z$ and $HZH=X$. Since $Y=iXZ$, conjugation preserves product order and gives $HYH=i(ZX)=-iXZ=-Y$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-hadamard-pauli-action-step-2-1",
+          "step": "2.1",
+          "claim": "On factor $j$, $H X^{x_j}Z^{z_j}H=Z^{x_j}X^{z_j}=(-1)^{x_jz_j}X^{z_j}Z^{x_j}$; all other tensor factors are unchanged by [F4] and [F5]. As $(-1)^{x_jz_j}=i^{2x_jz_j}$, this is $P(k+2x_jz_j,x',z')$ with $x'_j=z_j$, $z'_j=x_j$, and all other coordinates unchanged.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-gate-update-exhaustion",
+          "status": "checked",
+          "claim": "The bounded one-qubit gate calculation checked 48 phase-aware gate/input cases, including the H and S update rules.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "The one-off finite calculation reported 48 cases and no mismatches; this is sanity evidence for the displayed gate updates, not a proof for arbitrary n."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-phase-gate-pauli-action": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qc-phase-gate-pauli-action-step-1-1",
+          "step": "1.1",
+          "claim": "Multiplying the matrices gives $SXS^*=Y=iXZ$ and $SZS^*=Z$. Therefore $SYS^*=i(SXS^*)(SZS^*)=iYZ=-X$, using $YZ=iX$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-phase-gate-pauli-action-step-2-1",
+          "step": "2.1",
+          "claim": "On factor $j$, $S X^{x_j}Z^{z_j}S^*=(iXZ)^{x_j}Z^{z_j}=i^{x_j}X^{x_j}Z^{z_j+x_j}$; other tensor factors are unchanged. Thus the total phase increases by $x_j$ modulo $4$ and the binary $z_j$ coordinate increases by $x_j$ modulo $2$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-gate-update-exhaustion",
+          "status": "checked",
+          "claim": "The bounded one-qubit gate calculation checked 48 phase-aware gate/input cases, including the H and S update rules.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "The one-off finite calculation reported 48 cases and no mismatches; this is sanity evidence for the displayed gate updates, not a proof for arbitrary n."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-pauli-product-and-adjoint": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-qc-pauli-product-and-adjoint-step-1-1",
+          "step": "1.1",
+          "claim": "On one factor, $Z^{z_j}X^{x'_j}=(-1)^{z_jx'_j}X^{x'_j}Z^{z_j}$, since the factors commute unless both exponents are $1$, when $ZX=-XZ$ by [F1]. Multiplying these identities over the ordered factors gives $Z^zX^{x'}=(-1)^pX^{x'}Z^z$, where $p$ is the integer representative $0$ or $1$ of $z\\cdot x'\\in\\mathbb F_2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-pauli-product-and-adjoint-step-2-1",
+          "step": "2.1",
+          "claim": "Substituting that reordering into $i^{k+k'}X^xZ^zX^{x'}Z^{z'}$ gives $i^{k+k'+2p}X^{x+x'}Z^{z+z'}$, which is exactly the stated product formula; all binary exponents add modulo $2$, while the phase exponent adds modulo $4$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-pauli-product-and-adjoint-step-3-1",
+          "step": "3.1",
+          "claim": "The formula proves closure. $P(0,0,0)=I$ is an identity, and associativity is inherited from matrix multiplication, so $\\mathcal P_n$ is a group once inverses are supplied below.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-pauli-product-and-adjoint-step-3-2",
+          "step": "3.2",
+          "claim": "Taking the adjoint reverses the order and conjugates $i^k$: $(i^kX^xZ^z)^*=i^{-k}Z^zX^x=i^{-k}(-1)^pX^xZ^z=P(2p-k,x,z)$, where $p$ represents $x\\cdot z$. The product formula then gives $P^*P=PP^*=I$, so this adjoint is the inverse and completes the group proof.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-pauli-product-and-adjoint-step-4-1",
+          "step": "4.1",
+          "claim": "Scalar operators $i^kI$ commute with every matrix and belong to $\\mathcal P_n$. Conversely, if $P(k,x,z)$ commutes with every $X_j$, the product law forces $z_j=0$ for each $j$; commuting with every $Z_j$ forces $x_j=0$ for each $j$. Thus every central element is scalar and the center is exactly $Z_n$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-pauli-product-exhaustion",
+          "status": "checked",
+          "claim": "For n=1, all 256 ordered pairs of phase-aware Pauli parameter tuples satisfy the exact product formula.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ],
+          "evidence": "A bounded exact-matrix calculation returned 256/256 matching products; it checks only n=1."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-qc-clifford-normalizer": {
+      "risk": "high",
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-pauli-product-and-adjoint",
+          "source_section": "Statement",
+          "quote": "For $k,k'\\in\\mathbb Z/4\\mathbb Z$ and $x,z,x',z'\\in\\mathbb F_2^n$, with $P(k,x,z)=i^kX^xZ^z$ and $X^xZ^z$ ordered as written,\n\n$$P(k,x,z)P(k',x',z')=P(k+k'+2(z\\cdot x'),x+x',z+z'),$$\n\nwhere the dot product is first evaluated in $\\mathbb F_2$ as $0$ or $1$, and then multiplied by $2$ in $\\mathbb Z/4\\mathbb Z$. The set $\\mathcal P_n$ is a group. If $p\\in\\{0,1\\}$ represents $x\\cdot z\\in\\mathbb F_2$, then $P(k,x,z)^*=P(2p-k,x,z)=P(k,x,z)^{-1}$, and its center is $Z_n=\\{i^k I:k\\in\\mathbb Z/4\\mathbb Z\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-qc-clifford-normalizer-step-1-1",
+          "step": "1.1",
+          "claim": "The identity conjugates $\\mathcal P_n$ to itself. If $U,V\\in\\mathcal C_n$, then $(UV)\\mathcal P_n(UV)^*=U(V\\mathcal P_nV^*)U^*=U\\mathcal P_nU^*=\\mathcal P_n$, so $UV\\in\\mathcal C_n$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-qc-clifford-normalizer-step-2-1",
+          "step": "2.1",
+          "claim": "If $U\\mathcal P_nU^*=\\mathcal P_n$, multiplying this equality by $U^*$ on the left and $U$ on the right gives $U^*\\mathcal P_nU=\\mathcal P_n$, so $U^*\\in\\mathcal C_n$ by [F2]. Thus the set is a group. For $|\\lambda|=1$, $(\\lambda I)P(\\lambda I)^*=P$ for every $P$, and conjugation by $\\lambda U$ equals conjugation by $U$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-cnot-pauli-action": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qc-cnot-pauli-action-step-1-1",
+          "step": "1.1",
+          "claim": "For control $c=1$ and target $t=2$, the controlled-X definition [F3,F4] gives $C|y_1,\\ldots,y_n\\rangle=|y_1,\\ldots,y_t+y_c,\\ldots,y_n\\rangle$. Applying this rule twice gives $C^2=I$; it permutes the ordered orthonormal basis, so $C=C^*$. On a basis vector, in $C X_c C$ the right CNOT first changes $y_t$ to $y_t+y_c$, the middle $X_c$ changes $y_c$ to $y_c+1$, and the left CNOT changes the target to $y_t+y_c+(y_c+1)=y_t+1$. Thus $C X_c C=X_cX_t$. In $C X_t C$, the right CNOT changes the target to $y_t+y_c$, the middle $X_t$ toggles it, and the left CNOT toggles it back by $y_c$, leaving $y_t+1$; hence $C X_t C=X_t$. The middle $Z_c$ contributes $(-1)^{y_c}$ and the two CNOTs restore the bits, giving $C Z_c C=Z_c$. The middle $Z_t$ contributes $(-1)^{y_t+y_c}$, giving $C Z_t C=Z_cZ_t$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-cnot-pauli-action-step-2-1",
+          "step": "2.1",
+          "claim": "For arbitrary distinct wires $c,t\\in\\{1,\\ldots,n\\}$, assign source positions $0,1$ to $c-1,t-1$. This partial assignment is injective; list its remaining source and target positions in increasing order and match them in order to extend it to a permutation $\\sigma$. By [F6], $P_\\sigma$ moves those factors into the first two positions and permutes an orthonormal basis bijectively, so $P_\\sigma$ is unitary. The operator $P_\\sigma^{-1}(C_{1\\to2}\\otimes I_{\\rm remaining})P_\\sigma$ therefore has the stated basis action, and its Pauli conjugation rules are the first-two-wire rules of step 1.1 with local wire names $1,2$ replaced by $c,t$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-cnot-pauli-action-step-3-1",
+          "step": "3.1",
+          "claim": "Write $P(k,x,z)$ as its ordered product of all $X$-factor maps followed by all $Z$-factor maps. Conjugation preserves this product order. Using step 2.1, the images of the $X$ factors combine to $X_c^{x_c}X_t^{x_t+x_c}$ with all other $X$ exponents unchanged; the images of the $Z$ factors combine to $Z_c^{z_c+z_t}Z_t^{z_t}$ with all other $Z$ exponents unchanged. Tensor-map composition in [F5] justifies these factorwise products, and no $X$ factor is moved past a $Z$ factor. Thus no scalar is introduced, $k$ is unchanged, and the stated binary updates follow.",
+          "inputs": [
+            "given",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies the required finite choice or construction from the stated nonempty support/hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "two-qubit-cnot-update-exhaustion",
+          "status": "checked",
+          "claim": "All 64 phase-aware two-qubit Pauli parameter tuples were checked against the CNOT conjugation update.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "evidence": "A bounded exact-matrix calculation reported 64 cases and no mismatches; the proof covers arbitrary n and wires separately."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-hermitian-pauli-phase-criterion": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-pauli-product-and-adjoint",
+          "source_section": "Statement",
+          "quote": "For $k,k'\\in\\mathbb Z/4\\mathbb Z$ and $x,z,x',z'\\in\\mathbb F_2^n$, with $P(k,x,z)=i^kX^xZ^z$ and $X^xZ^z$ ordered as written,\n\n$$P(k,x,z)P(k',x',z')=P(k+k'+2(z\\cdot x'),x+x',z+z'),$$\n\nwhere the dot product is first evaluated in $\\mathbb F_2$ as $0$ or $1$, and then multiplied by $2$ in $\\mathbb Z/4\\mathbb Z$. The set $\\mathcal P_n$ is a group. If $p\\in\\{0,1\\}$ represents $x\\cdot z\\in\\mathbb F_2$, then $P(k,x,z)^*=P(2p-k,x,z)=P(k,x,z)^{-1}$, and its center is $Z_n=\\{i^k I:k\\in\\mathbb Z/4\\mathbb Z\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-qc-hermitian-pauli-phase-criterion-step-1-1",
+          "step": "1.1",
+          "claim": "Put $p=x\\cdot z\\in\\mathbb F_2$ and use its representative $0$ or $1$. By [F1], equality $P^*=P$ is equivalent to $2p-k\\equiv k\\pmod4$, or $2(k-p)\\equiv0\\pmod4$, which holds exactly when $k-p$ is even, that is, $k\\equiv p\\pmod2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-hermitian-pauli-phase-criterion-step-2-1",
+          "step": "2.1",
+          "claim": "The same product formula gives $P^2=i^{2(k+p)}I=(-1)^{k+p}I$, which equals $I$ exactly under the parity condition in 1.1. Conversely, if $P$ is Hermitian then 1.1 gives that condition.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 derives the parity condition from Hermiticity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 reverses the same congruence to show the parity condition implies Hermiticity."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-hermitian-phase-exhaustion",
+          "status": "checked",
+          "claim": "For n=1, all 16 phase-aware Pauli parameter tuples match the Hermitian parity criterion.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "A bounded exact-matrix calculation reported 16/16 matching cases; this does not replace the general proof."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-qc-binary-symplectic-form": {
+      "risk": "high",
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-binary-pauli-label-and-quotient",
+          "source_section": "Definition",
+          "quote": "Let $Z_n$ be the scalar center of $\\mathcal P_n$. Define $P\\sim Q$ when $P^{-1}Q\\in Z_n$, and let $Q_n$ be the set of equivalence classes $[P]=PZ_n$. The proposed coset product is $[P][Q]=[PQ]$. The quotient theorem verifies this product is well-defined and proves that the assignment\n\n$$\\lambda:Q_n\\longrightarrow V_n:=\\mathbb F_2^n\\oplus\\mathbb F_2^n,\\qquad [P(k,x,z)]\\longmapsto(x,z)$$\n\nis a group isomorphism to the additive group of $V_n$. A binary label deliberately forgets the scalar phase.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-qc-binary-symplectic-form-step-1-1",
+          "step": "1.1",
+          "claim": "The dot product is linear in each variable, and the displayed formula is a sum of two such terms; hence $\\omega$ is bilinear in each of its two vector arguments.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-qc-binary-symplectic-form-step-2-1",
+          "step": "2.1",
+          "claim": "For every $(x,z)$, $\\omega((x,z),(x,z))=x\\cdot z+z\\cdot x=2(x\\cdot z)=0$ in $\\mathbb F_2$, so the form is alternating. Swapping the arguments leaves its displayed value unchanged, so it is symmetric.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-qc-binary-symplectic-form-step-3-1",
+          "step": "3.1",
+          "claim": "If $x_j=1$ for some $j$, then $\\omega((x,z),(0,e_j))=1$; if $x=0$ and $z_j=1$, then $\\omega((0,z),(e_j,0))=1$. Thus every nonzero vector pairs nontrivially with some vector, which is nondegeneracy.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-qc-binary-symplectic-form-step-4-1",
+          "step": "4.1",
+          "claim": "The $2n$ vectors $(e_j,0)$ and $(0,e_j)$ span by coordinate expansion; a zero linear combination has every coordinate zero, so they are linearly independent. By [F3] they form a basis, and [F4] gives dimension $2n$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that every nonzero vector pairs nontrivially, so the defined form is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 supplies the required finite choice or construction from the stated nonempty support/hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-binary-pauli-quotient-isomorphism": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-pauli-product-and-adjoint",
+          "source_section": "Statement",
+          "quote": "For $k,k'\\in\\mathbb Z/4\\mathbb Z$ and $x,z,x',z'\\in\\mathbb F_2^n$, with $P(k,x,z)=i^kX^xZ^z$ and $X^xZ^z$ ordered as written,\n\n$$P(k,x,z)P(k',x',z')=P(k+k'+2(z\\cdot x'),x+x',z+z'),$$\n\nwhere the dot product is first evaluated in $\\mathbb F_2$ as $0$ or $1$, and then multiplied by $2$ in $\\mathbb Z/4\\mathbb Z$. The set $\\mathcal P_n$ is a group. If $p\\in\\{0,1\\}$ represents $x\\cdot z\\in\\mathbb F_2$, then $P(k,x,z)^*=P(2p-k,x,z)=P(k,x,z)^{-1}$, and its center is $Z_n=\\{i^k I:k\\in\\mathbb Z/4\\mathbb Z\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-tensor-map-composition-and-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-qc-binary-pauli-quotient-isomorphism-step-1-1",
+          "step": "1.1",
+          "claim": "By the one-factor actions in [F3] and the factorwise tensor-map rules in [F4], $P(k,x,z)|y〉=i^k(-1)^{z·y}|y+x〉$. Distinct bit strings give distinct basis vectors by [F2], so the output basis index of the image of |0〉 is x.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-binary-pauli-quotient-isomorphism-step-2-1",
+          "step": "2.1",
+          "claim": "Suppose $P(k,x,z)=\\lambda P(k',x',z')$ for a nonzero scalar $\\lambda$. Applying both sides to $|0^n\\rangle$ gives nonzero multiples of $|x\\rangle$ and $|x'\\rangle$; distinct bit strings index distinct basis vectors by [F2], so $x=x'$. Comparing the coefficients of this common basis vector gives $i^k=\\lambda i^{k'}$. Applying the operators to $|e_j\\rangle$ gives the common output basis vector $|e_j+x\\rangle$ with coefficients $i^k(-1)^{z_j}$ and $\\lambda i^{k'}(-1)^{z'_j}$; their equality and the preceding phase equality imply $z_j=z'_j$ for every $j$. Thus operators equal up to scalar exactly when their binary labels agree; when $\\lambda=1$, the same coefficient comparison gives $k=k'$ modulo $4$, so the exact parameter triple is unique.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-binary-pauli-quotient-isomorphism-step-3-1",
+          "step": "3.1",
+          "claim": "The parameter uniqueness in step 2.1 makes π an unambiguous map on operators. The product formula [F1] makes π a homomorphism; its kernel is exactly the zero-label operators P(k,0,0)=i^kI=Z_n, and every (x,z) is the image of P(0,x,z). For cosets, if representatives change from P,Q to Pz,Qw with z,w∈Z_n, centrality gives PzQw=PQzw, so [P][Q]=[PQ] is well-defined. Step 2.1 makes the induced coset map injective, while P(0,x,z) gives surjectivity. It is therefore the asserted quotient isomorphism.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-binary-pauli-quotient-isomorphism-step-4-1",
+          "step": "4.1",
+          "claim": "The 2n vectors (e_j,0) and (0,e_j) span V_n by coordinate expansion and are linearly independent because a zero linear combination has each x and z coordinate zero. They form a basis by [F5], so dim V_n=2n.",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-pauli-parameter-uniqueness",
+          "status": "checked",
+          "claim": "For n=1, the 16 parameter triples give 16 distinct operators and their binary labels classify scalar cosets.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "evidence": "The bounded exact calculation reported 16 unique parameter operators and checked all 256 one-qubit products."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-qc-binary-clifford-tableau": {
+      "risk": "high",
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-clifford-normalizer",
+          "source_section": "Definition",
+          "quote": "Work with actual unitary matrices, not equivalence classes modulo global phase. The $n$-qubit **Clifford normalizer** is\n\n$$\\mathcal C_n:=\\{U\\text{ unitary on }\\mathcal H_n:U\\mathcal P_nU^*=\\mathcal P_n\\}.$$\n\nIt is a group under matrix multiplication. Every scalar unitary $\\lambda I$ with $|\\lambda|=1$ belongs to $\\mathcal C_n$ and has the same conjugation action as $I$; the chosen convention retains these distinct matrices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-binary-pauli-label-and-quotient",
+          "source_section": "Definition",
+          "quote": "Let $Z_n$ be the scalar center of $\\mathcal P_n$. Define $P\\sim Q$ when $P^{-1}Q\\in Z_n$, and let $Q_n$ be the set of equivalence classes $[P]=PZ_n$. The proposed coset product is $[P][Q]=[PQ]$. The quotient theorem verifies this product is well-defined and proves that the assignment\n\n$$\\lambda:Q_n\\longrightarrow V_n:=\\mathbb F_2^n\\oplus\\mathbb F_2^n,\\qquad [P(k,x,z)]\\longmapsto(x,z)$$\n\nis a group isomorphism to the additive group of $V_n$. A binary label deliberately forgets the scalar phase.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-qc-binary-clifford-tableau-step-1-1",
+          "step": "1.1",
+          "claim": "By [F2], each of the $2n$ conjugated generators is some $P(k,x,z)$; [F1] makes this phase and label unique, so the phase vector and binary columns are well-defined.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "def-qc-binary-clifford-tableau-step-2-1",
+          "step": "2.1",
+          "claim": "The labels of $X_1,\\ldots,X_n,Z_1,\\ldots,Z_n$ are the ordered coordinate basis of $V_n$ by [F3]. Let their image labels be $\\ell_1,\\ldots,\\ell_{2n}$ and define $S_U(a_1,\\ldots,a_{2n})=\\sum_{j=1}^{2n}a_j\\ell_j$. Coordinatewise addition and scalar multiplication distribute over this finite sum, so $S_U$ is linear and takes each ordered basis vector to its prescribed column. Any other linear map with those columns agrees on every vector because every vector is the corresponding finite coordinate combination. Multiplying $U$ by any unit-modulus scalar leaves each conjugation unchanged, so its phase vector and tableau are unchanged.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-input boundary is asserted; all quantified inputs are nonzero or are handled by the general formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-clifford-lifts-symplectic-transvections": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-hadamard-pauli-action",
+          "source_section": "Statement",
+          "quote": "For a Hadamard gate $H_j$ on factor $j$, conjugation swaps the binary coordinates $x_j,z_j$ and changes the phase exactly by $2x_jz_j$ modulo $4$. In particular $HXH=Z$, $HZH=X$, and $HYH=-Y$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-phase-gate-pauli-action",
+          "source_section": "Statement",
+          "quote": "For a phase gate $S_j=\\operatorname{diag}(1,i)$ on factor $j$, the binary update is $(x_j,z_j)\\mapsto(x_j,z_j+x_j)$ and the phase update is $k\\mapsto k+x_j$ modulo $4$. In particular $SXS^*=Y$ and $SZS^*=Z$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-cnot-pauli-action",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$ and let distinct $c,t\\in\\{1,\\ldots,n\\}$ be control and target indices. For CNOT $C_{c\\to t}$ acting on $y\\in\\mathbb F_2^n$ by toggling coordinate $t$ by $y_c$, conjugation sends\n\n$$P(k,x,z)\\longmapsto P(k,x',z'),\\qquad x'_t=x_t+x_c,\\quad z'_c=z_c+z_t,$$\n\nwith all other coordinates unchanged and additions in $\\mathbb F_2$. In particular, $X_c\\mapsto X_cX_t$, $Z_c\\mapsto Z_c$, $X_t\\mapsto X_t$, and $Z_t\\mapsto Z_cZ_t$; the phase coordinate $k$ is unchanged in the fixed $X^xZ^z$ order.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-hermitian-pauli-phase-criterion",
+          "source_section": "Statement",
+          "quote": "For $P(k,x,z)=i^kX^xZ^z\\in\\mathcal P_n$, the operator is Hermitian exactly when $k\\equiv x\\cdot z\\pmod 2$. In that case $P(k,x,z)^2=I$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-binary-symplectic-form",
+          "source_section": "Definition",
+          "quote": "On $V_n=\\mathbb F_2^n\\oplus\\mathbb F_2^n$, with coordinate order $(x,z)$, define\n\n$$\\omega((x,z),(x',z')):=x\\cdot z'+z\\cdot x'.$$\n\nThis is a nondegenerate alternating bilinear form over $\\mathbb F_2$; $V_n$ has dimension $2n$. In characteristic two, alternating also implies symmetry.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-clifford-normalizer",
+          "source_section": "Definition",
+          "quote": "Work with actual unitary matrices, not equivalence classes modulo global phase. The $n$-qubit **Clifford normalizer** is\n\n$$\\mathcal C_n:=\\{U\\text{ unitary on }\\mathcal H_n:U\\mathcal P_nU^*=\\mathcal P_n\\}.$$\n\nIt is a group under matrix multiplication. Every scalar unitary $\\lambda I$ with $|\\lambda|=1$ belongs to $\\mathcal C_n$ and has the same conjugation action as $I$; the chosen convention retains these distinct matrices.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qc-clifford-lifts-symplectic-transvections-step-1-1",
+          "step": "1.1",
+          "claim": "Each listed gate and its inverse normalizes $\\mathcal P_n$ by its exact Pauli action. On binary labels, $H_j$ preserves $\\omega$ because swapping $x_j,z_j$ in both arguments leaves $x_jz'_j+z_jx'_j$ unchanged by [F6]. For $S_j$, the local pairing becomes $x_j(z'_j+x'_j)+(z_j+x_j)x'_j=x_jz'_j+z_jx'_j+2x_jx'_j$, equal to the old value in $\\mathbb F_2$; its inverse has the same label action. For CNOT $c\\to t$, write $a=(x,z)$ and $b=(u,w)$, with $w$ the $z$-part of $b$. The affected contribution after the updates in [F3] is $x_c(w_c+w_t)+(x_t+x_c)w_t+(z_c+z_t)u_c+z_t(u_t+u_c)$. The added terms $x_cw_t$ and $z_tu_c$ each occur twice and cancel, leaving the original pairing. By [F5], wire swaps permute the paired coordinate summands and preserve the form. Hadamard and swap are involutions, CNOT is self-inverse, and $S_j^*$ is the inverse of $S_j$; hence each binary gate map is invertible. Thus every finite gate word $G$ has an invertible symplectic map $M_G$, and its unitary lies in $\\mathcal C_n$ by [F7].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-clifford-lifts-symplectic-transvections-step-2-1",
+          "step": "2.1",
+          "claim": "Let $h\\in\\{0,1\\}$ be the representative of $x\\cdot z\\in\\mathbb F_2$, so $P(h,x,z)$ is Hermitian by [F4]. Choose a wire $p$ on which $v$ is nonzero and swap it to wire $1$. On each supported wire, the local factor is proportional to $X$, $Y$, or $Z$. Apply no gate to an $X$ factor, $H$ to a $Z$ factor, and $S^*$ to a $Y$ factor; [F1] and [F2] send each local binary label to $X$, while their phase updates compute the accumulated scalar exactly modulo $4$. The resulting binary label is the nonempty product of $X$ on the support of $v$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-clifford-lifts-symplectic-transvections-step-3-1",
+          "step": "3.1",
+          "claim": "For each other supported wire $j$, apply CNOT $1\\to j$. By [F3], it sends $X_1X_j$ to $X_1$, so the finite list removes all $X_j$ labels while retaining $X_1$; then apply $H_1$ to change $X_1$ to $Z_1$. This constructs a circuit $C$ with $CP(h,x,z)C^*=\\pm Z_1$: conjugation preserves Hermiticity, so the phase of an image with label $(0,e_1)$ is $0$ or $2$ modulo $4$. For $D=C^*$, the induced symplectic map sends the label $z_1=(0,e_1)$ of $Z_1$ to $v$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-clifford-lifts-symplectic-transvections-step-4-1",
+          "step": "4.1",
+          "claim": "The binary action of $S_1$ is $\\tau_{z_1}$ by [F2], since [F6] gives $\\omega((x,z),(0,e_1))=x_1$. Therefore $DS_1D^*$ acts by $M_D\\tau_{z_1}M_D^{-1}=\\tau_v$: for any $w$, symplecticity of $M_D$ gives $M_D(M_D^{-1}w+\\omega(M_D^{-1}w,z_1)z_1)=w+\\omega(w,v)v$. The circuit lies in $\\mathcal C_n$ by step 1.1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-clifford-lifts-symplectic-transvections-step-5-1",
+          "step": "5.1",
+          "claim": "Each gate formula in [F1]–[F3] gives the exact image phase in $\\mathbb Z/4\\mathbb Z$ as well as the binary label; [F5] gives the exact no-change phase for swaps. Induction on the finite gate list for $DS_1D^*$ therefore computes each generator-image phase by repeated application of those formulas, without replacing it by its binary parity.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 4.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-input boundary is asserted; all quantified inputs are nonzero or are handled by the general formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies the required finite choice or construction from the stated nonempty support/hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-transvection-lift-exhaustion",
+          "status": "checked",
+          "claim": "All three nonzero vectors in V_1 have an explicit transvection lift in the finite gate check.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "evidence": "The bounded calculation checked three nonzero V_1 transvections; each was lifted by the stated local gate construction and exact phase updates."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-symplectic-transvections-generate": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-binary-symplectic-form",
+          "source_section": "Definition",
+          "quote": "On $V_n=\\mathbb F_2^n\\oplus\\mathbb F_2^n$, with coordinate order $(x,z)$, define\n\n$$\\omega((x,z),(x',z')):=x\\cdot z'+z\\cdot x'.$$\n\nThis is a nondegenerate alternating bilinear form over $\\mathbb F_2$; $V_n$ has dimension $2n$. In characteristic two, alternating also implies symmetry.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qc-symplectic-transvections-generate-step-1-1",
+          "step": "1.1",
+          "claim": "Alternation and bilinearity imply $0=\\omega(u+w,u+w)=\\omega(u,w)+\\omega(w,u)$ for all $u,w$; since subtraction equals addition in $\\mathbb F_2$, $\\omega$ is symmetric. For $v=0$, $\\tau_v$ is the identity. For any $v$, alternation gives $\\omega(v,v)=0$, so applying $\\tau_v$ twice adds $\\omega(w,v)v$ twice and returns $w$. For $u,w\\in V$, bilinearity gives\n$$\\omega(\\tau_vu,\\tau_vw)=\\omega(u,w)+\\omega(w,v)\\omega(u,v)+\\omega(u,v)\\omega(v,w).$$\nSymmetry from the first sentence makes the last two terms the same product, which sums to zero in $\\mathbb F_2$; therefore $\\tau_v$ preserves $\\omega$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qc-symplectic-transvections-generate-step-1-2",
+          "step": "1.2",
+          "claim": "These maps act transitively on nonzero vectors. If $a=b$, no map is needed. If $\\omega(a,b)=1$, then $v=a+b$ satisfies $\\omega(a,v)=1$, hence $\\tau_v(a)=b$. If $a\\ne b$ and $\\omega(a,b)=0$, then $a,b$ are independent over $\\mathbb F_2$. Their pairing functionals are independent: a relation $r\\omega(a,\\cdot)+s\\omega(b,\\cdot)=0$ gives $\\omega(ra+sb,w)=0$ for every $w$, so nondegeneracy gives $ra+sb=0$, and independence gives $r=s=0$. Set $L(w)=(\\omega(a,w),\\omega(b,w))$. If its image were proper, choose a basis $q_1,\\ldots,q_r$ for that image, where $r<2$. The map $\\alpha\\mapsto(\\alpha\\cdot q_1,\\ldots,\\alpha\\cdot q_r)$ from $\\mathbb F_2^2$ to $\\mathbb F_2^r$ has a nonzero kernel by rank-nullity [F2], so some nonzero $\\alpha$ annihilates every value of $L$. This would make a nontrivial linear combination of the pairing functionals zero, a contradiction. Thus choose $c$ with both pairings $1$. Then $\\tau_{a+c}(a)=c$ and $\\tau_{c+b}(c)=b$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "lem-qc-symplectic-transvections-generate-step-2-1",
+          "step": "2.1",
+          "claim": "Fix $e,f$ with $\\omega(e,f)=1$. If $y$ and $f$ both pair to $1$ with $e$, then transvections fixing $e$ send $y$ to $f$ as follows. If $y=f$, use the identity. If $\\omega(y,f)=1$, the center $y+f$ lies in $e^\\perp$ and $\\tau_{y+f}(y)=f$. If $y\\ne f$ and $\\omega(y,f)=0$, the vectors $e,y,f$ are independent: pairing a relation $r e+s y+t f=0$ with $e$ gives $s=t$ by symmetry from step 1.1; if $s=t=1$, then $y+f=r e$, which would give either $y=f$ or $\\omega(y,f)=\\omega(f+r e,f)=r=1$, both impossible. Their pairing functionals are independent because a relation among them is the pairing with the corresponding linear combination of $e,y,f$, which nondegeneracy forces to be zero. Put $L(w)=(\\omega(e,w),\\omega(y,w),\\omega(f,w))$. If its image is proper, choose a basis of it with fewer than three vectors; the map from $\\mathbb F_2^3$ taking dot products with those basis vectors has nonzero kernel by rank-nullity [F2], giving a nonzero linear functional annihilating the image. This contradicts independence of the three pairing functionals. Hence choose $c$ with all three values $1$. The centers $y+c$ and $c+f$ lie in $e^\\perp$, and $\\tau_{c+f}\\tau_{y+c}(y)=f$; both transvections fix $e$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "lem-qc-symplectic-transvections-generate-step-3-1",
+          "step": "3.1",
+          "claim": "Let $T$ be a symplectic map. For the application $V=V_n$, the nondegenerate alternating form hypotheses hold by [F1]; the following argument is for any such $V$. Choose $e\\ne0$ and choose $f$ with $\\omega(e,f)=1$, possible by nondegeneracy. By step 1.2, left composition with transvections makes $T(e)=e$. Its image $y=T(f)$ satisfies $\\omega(e,y)=1$, so step 2.1 then makes a further left composition, using transvections fixing $e$, give a symplectic map $G$ fixing both $e$ and $f$. Let $W=\\{w:\\omega(w,e)=\\omega(w,f)=0\\}$. Bilinearity makes $\\Phi:V\\to\\mathbb F_2^2$, $\\Phi(u)=(\\omega(u,f),\\omega(u,e))$, linear by [F4]; it is surjective because $\\Phi(e)=(1,0)$ and $\\Phi(f)=(0,1)$, and its kernel is $W$. Rank-nullity [F2] gives $\\dim W=\\dim V-2$. For any $u$, bilinearity and $\\omega(e,f)=1$ show that $w=u+\\omega(u,f)e+\\omega(u,e)f$ satisfies $\\omega(w,e)=\\omega(w,f)=0$, so every $u$ is a sum of an element of $E=\\{r e+s f:r,s\\in\\mathbb F_2\\}$ and an element of $W$; the intersection is zero since pairing $r e+s f\\in W$ with $f$ and $e$ gives $r=s=0$. The two summands therefore give a direct decomposition of $V$. The restriction of $\\omega$ to $W$ is nondegenerate: a vector in its radical is orthogonal to $W,e,f$, hence to all of $V$, and is zero. Since $G$ fixes $e,f$ and preserves $\\omega$, it maps $W$ to itself. By induction [F5] on $n$, its restriction to $W$ is a product of transvections centered in $W$; those same transvections fix $e,f$ in $V$ and agree with $G$ on $W$, so their product is $G$. Reversing the earlier left compositions expresses $T$ as a finite product of transvections. The base case $n=0$ has only the zero space and its identity map by [F3]. All choices are finite-stage existential choices; the proof uses no choice principle.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the n=0 base case, where V is zero and its only map is the identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 supplies the required finite choice or construction from the stated nonempty support/hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "sp2f2-transvection-generation-exhaustion",
+          "status": "checked",
+          "claim": "In dimension two over F_2, the six symplectic matrices are exactly the six generated by the three nonzero transvections.",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ],
+          "evidence": "The bounded enumeration reported 6 elements in Sp(2,2) and 6 in the transvection-generated subgroup; the proof supplies the all-dimension reduction."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-pauli-commutator-is-symplectic-pairing": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-pauli-product-and-adjoint",
+          "source_section": "Statement",
+          "quote": "For $k,k'\\in\\mathbb Z/4\\mathbb Z$ and $x,z,x',z'\\in\\mathbb F_2^n$, with $P(k,x,z)=i^kX^xZ^z$ and $X^xZ^z$ ordered as written,\n\n$$P(k,x,z)P(k',x',z')=P(k+k'+2(z\\cdot x'),x+x',z+z'),$$\n\nwhere the dot product is first evaluated in $\\mathbb F_2$ as $0$ or $1$, and then multiplied by $2$ in $\\mathbb Z/4\\mathbb Z$. The set $\\mathcal P_n$ is a group. If $p\\in\\{0,1\\}$ represents $x\\cdot z\\in\\mathbb F_2$, then $P(k,x,z)^*=P(2p-k,x,z)=P(k,x,z)^{-1}$, and its center is $Z_n=\\{i^k I:k\\in\\mathbb Z/4\\mathbb Z\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-binary-symplectic-form",
+          "source_section": "Definition",
+          "quote": "On $V_n=\\mathbb F_2^n\\oplus\\mathbb F_2^n$, with coordinate order $(x,z)$, define\n\n$$\\omega((x,z),(x',z')):=x\\cdot z'+z\\cdot x'.$$\n\nThis is a nondegenerate alternating bilinear form over $\\mathbb F_2$; $V_n$ has dimension $2n$. In characteristic two, alternating also implies symmetry.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-qc-pauli-commutator-is-symplectic-pairing-step-1-1",
+          "step": "1.1",
+          "claim": "The forward product has phase $k+k'+2(z\\cdot x')$ by [F1]; the reversed product has phase $k+k'+2(z'\\cdot x)$. Their binary labels agree. The difference of the exponents modulo $4$ is $2((z\\cdot x')-(z'\\cdot x))$, and subtraction equals addition in $\\mathbb F_2$, so this difference is $2\\omega(a,b)$ modulo $4$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-pauli-commutator-is-symplectic-pairing-step-2-1",
+          "step": "2.1",
+          "claim": "Multiplication by the phase ratio $i^{2\\omega(a,b)}=(-1)^{\\omega(a,b)}$ gives the displayed identity. If $\\omega=0$ it is commutation; if $\\omega=1$, equality with the negative is impossible because a Pauli is a nonzero invertible matrix over $\\mathbb C$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats arbitrary coordinate or wire indices, including the first and last allowed positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows symplectic orthogonality implies commutation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 uses invertibility to show commutation forces symplectic orthogonality."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-commutator-exhaustion",
+          "status": "checked",
+          "claim": "For n=1, all 256 ordered pairs of phase-aware Pauli operators satisfy the symplectic commutator sign formula.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "The bounded exact-matrix calculation reported 256/256 matching pairs."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-clifford-induces-symplectic-map": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "source_section": "Statement",
+          "quote": "For $a=(x,z)$ and $b=(x',z')$ in $V_n$ and any phases $k,k'$, \n\n$$P(k,x,z)P(k',x',z')=(-1)^{\\omega(a,b)}P(k',x',z')P(k,x,z).$$\n\nThus the Pauli operators commute exactly when their labels are symplectically orthogonal.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-clifford-normalizer",
+          "source_section": "Definition",
+          "quote": "Work with actual unitary matrices, not equivalence classes modulo global phase. The $n$-qubit **Clifford normalizer** is\n\n$$\\mathcal C_n:=\\{U\\text{ unitary on }\\mathcal H_n:U\\mathcal P_nU^*=\\mathcal P_n\\}.$$\n\nIt is a group under matrix multiplication. Every scalar unitary $\\lambda I$ with $|\\lambda|=1$ belongs to $\\mathcal C_n$ and has the same conjugation action as $I$; the chosen convention retains these distinct matrices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-qc-clifford-induces-symplectic-map-step-1-1",
+          "step": "1.1",
+          "claim": "Conjugation sends each Pauli to a Pauli by [F3]. It fixes every scalar, so representatives in the same scalar coset have images in the same coset. Therefore it defines a map $S_U$ on $V_n$ under [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-clifford-induces-symplectic-map-step-2-1",
+          "step": "2.1",
+          "claim": "For Pauli operators $P,Q$, $U(PQ)U^*=(UPU^*)(UQU^*)$, so the quotient map [F1] shows $S_U(a+b)=S_U(a)+S_U(b)$. An additive map between $\\mathbb F_2$ vector spaces is linear because the only scalars are $0$ and $1$. Conjugation by $U^*$ is its inverse, so $S_U$ is invertible. Applying the same identity successively gives $S_{UV}=S_U\\circ S_V$ for Clifford unitaries $U,V$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qc-clifford-induces-symplectic-map-step-3-1",
+          "step": "3.1",
+          "claim": "The commutator identity from [F2] remains the same after conjugating both sides by $U$, because conjugation preserves products and scalar signs. Applying [F2] to the image Paulis yields $(-1)^{\\omega(S_Ua,S_Ub)}=(-1)^{\\omega(a,b)}$. The map $r\\mapsto(-1)^r$ is injective on $\\mathbb F_2$, hence $\\omega(S_Ua,S_Ub)=\\omega(a,b)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-clifford-symplectic-surjectivity": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-symplectic-transvections-generate",
+          "source_section": "Statement",
+          "quote": "Let $V$ be any finite-dimensional vector space over $\\mathbb F_2$ with a nondegenerate alternating form $\\omega$, and let $\\dim V=2n$. Call an invertible linear map $T:V\\to V$ **symplectic** when $\\omega(Tu,Tw)=\\omega(u,w)$ for all $u,w\\in V$. For each $v\\in V$, define the transvection $\\tau_v(w)=w+\\omega(w,v)v$. Every symplectic map is a finite composition of these transvections. The form on $V_n$ from [[def-qc-binary-symplectic-form]] is the application needed here. This is a choice-free finite-dimensional reduction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-clifford-lifts-symplectic-transvections",
+          "source_section": "Statement",
+          "quote": "For every nonzero $v=(x,z)\\in V_n$, the transvection $\\tau_v(w)=w+\\omega(w,v)v$ is induced on binary Pauli labels by an explicit Clifford circuit made from local $H$, $S$, $S^*$, CNOT, and wire swaps. Its mod-$4$ phase lift is computed by applying the exact gate update rules in sequence; no phase coordinate is suppressed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-clifford-normalizer",
+          "source_section": "Definition",
+          "quote": "Work with actual unitary matrices, not equivalence classes modulo global phase. The $n$-qubit **Clifford normalizer** is\n\n$$\\mathcal C_n:=\\{U\\text{ unitary on }\\mathcal H_n:U\\mathcal P_nU^*=\\mathcal P_n\\}.$$\n\nIt is a group under matrix multiplication. Every scalar unitary $\\lambda I$ with $|\\lambda|=1$ belongs to $\\mathcal C_n$ and has the same conjugation action as $I$; the chosen convention retains these distinct matrices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-clifford-induces-symplectic-map",
+          "source_section": "Statement",
+          "quote": "For each $U\\in\\mathcal C_n$, conjugation induces an invertible $\\mathbb F_2$-linear map $S_U:V_n\\to V_n$ satisfying $\\omega(S_Ua,S_Ub)=\\omega(a,b)$ for all $a,b\\in V_n$. Thus $S_U$ is symplectic. The assignment respects multiplication: $S_{UV}=S_U\\circ S_V$ for all $U,V\\in\\mathcal C_n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-qc-clifford-symplectic-surjectivity-step-1-1",
+          "step": "1.1",
+          "claim": "Let $T\\in\\operatorname{Sp}(V_n,\\omega)$. By [F1], choose a finite factorization $T=\\tau_{v_m}\\cdots\\tau_{v_1}$, omitting zero vectors if desired. This factorization is obtained by the finite induction in [F1], so no choice axiom is used.",
+          "inputs": [
+            "given",
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "thm-qc-clifford-symplectic-surjectivity-step-2-1",
+          "step": "2.1",
+          "claim": "For each factor, take a Clifford circuit $U_j$ from [F2] whose binary action is $\\tau_{v_j}$. The finite product $U=U_m\\cdots U_1$ lies in $\\mathcal C_n$ by [F3]. By [F5], its induced symplectic action is $S_U=S_{U_m}\\cdots S_{U_1}=\\tau_{v_m}\\cdots\\tau_{v_1}=T$. The quotient identification [F4] ensures these are exactly the binary labels of conjugated Paulis. Every constituent gate updates its phase coordinate modulo $4$ by the formulas in [F2], so the product is an exact Clifford lift as well as a binary one.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the zero label, identity operator, or zero transvection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 supplies the required finite choice or construction from the stated nonempty support/hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "sp2f2-clifford-surjectivity-exhaustion",
+          "status": "checked",
+          "claim": "The six maps in Sp(2,2) are realized by products of the one-qubit transvection lifts.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "The bounded enumeration reported all 6 elements of Sp(2,2) generated; this checks the n=1 instance only."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-qc-pauli-commutator-binary-symplectic": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "source_section": "Statement",
+          "quote": "For $a=(x,z)$ and $b=(x',z')$ in $V_n$ and any phases $k,k'$, \n\n$$P(k,x,z)P(k',x',z')=(-1)^{\\omega(a,b)}P(k',x',z')P(k,x,z).$$\n\nThus the Pauli operators commute exactly when their labels are symplectically orthogonal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-qc-pauli-commutator-binary-symplectic-step-1-1",
+          "step": "1.1",
+          "claim": "The labels are $\\lambda(X)=(1,0)$ and $\\lambda(Z)=(0,1)$. Their pairing is $1\\cdot1+0\\cdot0=1$ in $\\mathbb F_2$, so [F1] gives $XZ=-ZX$, which also follows by multiplying the matrices in [F2].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-qc-pauli-commutator-binary-symplectic-step-2-1",
+          "step": "2.1",
+          "claim": "The operators $Z=P(0,0,1)$ and $-Z=P(2,0,1)$ have equal binary label $(0,1)$ and distinct scalar phases $1$ and $-1$. Thus the label quotient records commutation but alone does not recover the exact signed Pauli.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes n≥1, so the empty register is outside its stated scope."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-input boundary is asserted; all quantified inputs are nonzero or are handled by the general formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the n=1 case of the stated finite-coordinate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item assumes a nondegenerate symplectic form or contains no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-qubit-example-exact-matrices",
+          "status": "checked",
+          "claim": "The exact one-qubit matrices give XZ=-ZX and Z and -Z have the same binary label with different scalar phases.",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "Direct exact matrix calculation for X,Z,-Z and their binary labels."
+        }
+      ],
+      "unresolved_suppliers": []
+    }
+  }
+}

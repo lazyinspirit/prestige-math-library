@@ -1,0 +1,794 @@
+===== PDF PAGE 71 =====
+
+Exercises
+
+1.
+(a) Suppose n = 2, and x = x00x01x10x11 = 0001. Give the specific initial state, three
+intermediate states, and final state in Grover’s algorithm, for k = 1 iterations (using
+the decomposition of one Grover iterate into a product of four unitaries from Eq. (7.1)).
+What is the success probability?
+
+(b) Give the final state after k = 2 iterations. What is now the success probability?
+
+2.
+(a) Suppose you have a quantum algorithm for some computational problem that takes
+√
+
+N operations on inputs of size N, each operation of constant cost C. And the best-
+possible classical algorithm for the same computational problem takes N operations,
+each of constant cost c. Suppose C is much larger than c (which is certainly the case in
+the current state of quantum technology: doing one elementary quantum gate is much
+more expensive than doing one classical logic gate). How large does the input-size N
+have to be before the quantum algorithm has lower cost than the best-possible classical
+algorithm?
+
+(b) Suppose you have a quantum algorithm of cost C
+√
+
+2n for satisfiability of n-variable
+Boolean formulas, where the best-possible classical algorithm has cost c2n, and again C
+is much larger than c. How large does n have to be before the quantum algorithm has
+lower cost than the best-possible classical algorithm?
+
+3. Show that if the number of solutions is t = N/4, then Grover’s algorithm always finds a
+solution with certainty after just one query. How many queries would a classical algorithm
+need to find a solution with certainty if t = N/4? And if we allow the classical algorithm
+error probability 1/10?
+
+4. Suppose we have a string of N = 2n bits, containing t ones (solutions) and N −t zeroes. You
+may assume you know the number t.
+
+(a) Show that we can use Grover’s algorithm to find the positions of all t ones, using an
+expected number of O(t
+√
+
+N) queries. You can argue on a high level, no need to draw
+actual quantum circuits.
+
+(b) (H) Show that this can be improved to an expected number of O(
+√
+
+tN) queries.
+
+5. At the end of Section 7.2 we claimed without proof that Grover’s algorithm can be tweaked to
+work with probability 1 if we know the number of solutions exactly. For N = 2n, this question
+asks you to provide such an exact algorithm for an x ∈{0, 1}N with a unique solution (so we
+are promised that there is exactly one i ∈{0, 1}n with xi = 1, and our goal is to find this i).
+
+(a) Give the success probability of the basic version of Grover’s algorithm after k iterations.
+
+(b) Suppose the optimal number of iterations ˜k =
+π
+4 arcsin(1/
+√
+
+N) −1
+
+2 is not an integer. Show
+
+that if we round ˜k up to the nearest integer, doing ⌈˜k⌉iterations, then the algorithm
+will have success probability strictly less than 1.
+
+(c) Define a new 2N-bit string y ∈{0, 1}2N, indexed by (n + 1)-bit strings j = j1 . . . jnjn+1,
+by setting
+
+yj =
+�1
+if xj1...jn = 1 and jn+1 = 0,
+0
+otherwise.
+
+59
+
+
+===== PDF PAGE 72 =====
+
+Show how you can implement the following (n + 1)-qubit unitary
+
+Sy : |j⟩�→(−1)yj|j⟩,
+
+using one query to x (of the usual form Ox : |i, b⟩�→|i, b ⊕xi⟩) and a few elementary
+gates.
+
+(d) Let γ ∈[0, 2π) and let Uγ =
+�cos γ
+−sin γ
+sin γ
+cos γ
+
+�
+be the corresponding rotation matrix.
+
+Let A = H⊗n ⊗Uγ be an (n + 1)-qubit unitary. What is the probability (as a function
+of γ) that measuring the state A|0n+1⟩in the computational basis gives a solution
+j ∈{0, 1}n+1 for y (i.e., such that yj = 1)?
+
+(e) (H) Give a quantum algorithm that finds the unique solution in string x with probabil-
+ity 1 using O(
+√
+
+N) queries to x.
+
+6. Given query access to x ∈{0, 1}N, with unknown Hamming weight t = |x|, we want to find
+a solution, i.e., an index i ∈{0, . . . , N −1} such that xi = 1. If x = 0N then our search
+algorithm should output “no solution.”
+
+(a) (H) Suppose we know an integer s such that t ∈{1, . . . , s}. Give a quantum algorithm
+that finds a solution with probability 1, using O(
+√
+
+sN) queries to x.
+
+(b) Suppose we know that t ∈{s + 1, . . . , N}.
+Give a quantum algorithm that finds a
+solution with probability at least 1 −2−s, using O(
+√
+
+sN) queries to x.
+
+(c) For given ε > 2−N, give a quantum algorithm that solves the search problem with
+probability ≥1 −ε using O(
+�
+
+N log(1/ε)) queries, without assuming anything about t.
+
+7. (H) Here we will approximately count the number of 1s in a string x ∈{0, 1}N. Let t = |x|
+denote that (unknown) number.
+
+(a) Given an integer m ∈{1, . . . , N}, describe a quantum algorithm that makes O(
+�
+
+N/m)
+queries to x and decides between the cases t ≤m/2 and t ∈[m, 2m] with probability
+at least 2/3. That is, the algorithm has to output 0 with probability ≥2/3 whenever
+t ≤m/2, has to output 1 with probability ≥2/3 whenever t ∈[m, 2m], and can output
+whatever it wants for other values of t.
+
+(b) Give a quantum algorithm that uses O(
+√
+
+N log log N) queries to x and that outputs an
+integer m such that, with probability ≥2/3, the unknown t lies between m/2 and 2m.
+
+8. Suppose we have a quantum circuit A acting on m qubits, such that
+
+A|0m⟩= √a|ϕ1⟩|1⟩+
+√
+
+1 −a|ϕ0⟩|0⟩,
+
+where |ϕ1⟩and |ϕ0⟩are arbitrary normalized (m −1)-qubit states, and a ∈[0, 1/4] is an
+unknown number. Our goal is to estimate a (this is known as amplitude estimation). Let S
+be the 2-dimensional subspace spanned by |ϕ1⟩|1⟩and |ϕ0⟩|0⟩.
+
+(a) Show that in S, the unitary I ⊗Z (where I is the identity on m −1 qubits and Z is the
+phase-flip gate) is a reflection through |ϕ0⟩|0⟩.
+
+(b) Let R0 = 2|0m⟩⟨0m| −I be a reflection through |0m⟩.
+Show that in S, the unitary
+AR0A−1 is a reflection through A|0m⟩.
+
+60
+
+
+===== PDF PAGE 73 =====
+
+(c) Show that in S, the unitary U = AR0A−1 · (I ⊗Z) is a rotation over angle 2θ, where
+θ = arcsin √a.
+
+(d) (H) Given some ε ∈(0, 1/2), show how you can use phase estimation (Section 4.6) with
+O(1/ε) applications of U to find an approximation ˜a of a such that |
+√
+
+˜a −√a| ≤ε.
+
+(e) (H) Suppose we have query-access to a string x ∈{0, 1}N of unknown Hamming weight
+t = |x|. Use (d) to compute an integer ˜t such that |˜t −t| ≤
+√
+
+N with success probability
+≥2/3, using O(
+√
+
+N) queries to x.
+
+(f) Suppose x ∈{0, 1}N has |x| ∈{0, 1}. Use (d) to compute |x| with success probability
+≥2/3, using O(
+√
+
+N) queries to x (you may not invoke Grover here).
+
+9. Suppose you are given query access to x ∈{0, 1}N, where |x| = 1 and N = 2n. You want to
+find the unique index i = in−1 . . . i0 ∈{0, 1}n such that xi = 1.
+
+(a) Let k ∈{1, . . . , n −1}. Fix the first n −k bits of the n-bit index in−1 . . . i0 to specific
+values i∗
+n−1 . . . i∗
+k. Give a quantum algorithm to find a solution with success probability 1
+(if one exists) among the 2k indices i ∈{0, 1}n that start with i∗
+n−1 . . . i∗
+k, using O(
+√
+
+2k)
+queries and O(
+√
+
+2k k) other gates.
+
+(b) Give a quantum algorithm that solves the search problem on x using O(
+√
+
+N) queries
+and O(
+√
+
+N log log N) other gates.
+
+Comment: The O(
+√
+
+N log log N) gates achieved here is better than standard Grover, which uses O(
+√
+
+N log N)
+
+gates. The log log N can be reduced a bit further, to nearly-constant [29].
+
+10. (H) Let x = x0 . . . xN−1 be a sequence of distinct real numbers, where N = 2n, and each xi
+can be written exactly using b bits. We can query these in the usual way, i.e., we can apply
+(n + b)-qubit unitary Ox : |i, 0b⟩�→|i, xi⟩, as well as its inverse. The minimum of x is defined
+as min{xi | i ∈{0, . . . , N −1}}. Give a quantum algorithm that finds (with probability
+≥2/3) an index achieving the minimum, using at most O(
+√
+
+N log N) queries to the input,
+and prove that this algorithm works.
+
+Bonus: give a quantum algorithm that uses O(
+√
+
+N) queries.
+
+11. Let x = x0 . . . xN−1, where N = 2n and xi ∈{0, 1}n, be an input that we can query in the
+usual way. We are promised that this input is 2-to-1: for each i there is exactly one other j
+such that xi = xj.3 Such an (i, j)-pair is called a collision.
+
+(a) Suppose S is a uniformly randomly chosen set of s ≤N/2 elements of {0, . . . , N −1}.
+What is the probability that there exists a collision in S?
+
+(b) (H) Give a classical randomized algorithm that finds a collision (with probability ≥2/3)
+using O(
+√
+
+N) queries to x.
+
+(c) (H) Give a quantum algorithm that finds a collision (with probability ≥2/3) using
+O(N1/3) queries.
+
+12. Consider an undirected graph G = (V, E), with vertex set V = {1, . . . , n} and edge-set E.
+We say G is connected if, for every pair of vertices i, j ∈V , there is a path between i and
+
+3The 2-to-1 inputs for Simon’s algorithm are a very special case of this, where the collisions are determined by a
+secret string s ∈{0, 1}n: xi equals xj if i = j ⊕s.
+
+61
+
+
+===== PDF PAGE 74 =====
+
+j in the graph. The adjacency matrix of G is the n × n Boolean matrix M where Mij = 1
+iff (i, j) ∈E (note that M is a symmetric matrix because G is undirected). Suppose we are
+given input graph G in the form of a unitary that allows us to query whether an edge (i, j)
+is present in G or not:
+OM : |i, j, b⟩�→|i, j, b ⊕Mij⟩.
+
+(a) Assume G is connected. Suppose we have a set A of edges which we already know to be
+in the graph (so A ⊆E; you can think of A as given classically, you don’t have to query
+it). Let GA = (V, A) be the subgraph induced by only these edges, and suppose GA is
+not connected, so it consists of c > 1 connected components. Call an edge (i, j) ∈E
+“good” if it connects two of these components. Give a quantum algorithm that finds a
+good edge with an expected number of O(n/√c −1) queries to M.
+
+(b) Give a quantum algorithm that uses at most O(n3/2) queries to M and decides (with
+success probability at least 2/3) whether G is connected or not.
+
+(c) Show that classical algorithms for deciding (with success probability at least 2/3) whether
+G is connected, need to make Ω(n2) queries to M.
+
+13. This exercise is about reducing the error probability in Simon’s algorithm (Chapter 3) to 0.
+
+(a) (H) Suppose we already have k ≤n −2 linearly independent strings j1, . . . , jk ∈{0, 1}n
+
+that are orthogonal to the hidden string s (i.e., jℓ· s = 0 mod 2, for all ℓ∈{1, . . . , k}).
+Let V be the subspace of 2k strings that they span (with bitwise addition mod 2). In
+the setting of Simon’s problem, give a quantum algorithm that uses O(1) queries and
+with probability 1 outputs some j ̸∈V such that j · s = 0 mod 2. You don’t need to
+write out the circuit fully, but be precise about what you’re applying, what the different
+components are etc.
+
+(b) Give a quantum algorithm that finds s with probability 1, using O(n) queries.
+
+62
+
+
+===== PDF PAGE 75 =====
+
+Chapter 8
+
+Quantum Walk Algorithms
+
+8.1
+Classical random walks
+
+Consider an undirected graph G with N vertices. Suppose at least an ε-fraction of the vertices are
+“marked,” and we would like to find a marked vertex. One way to do this is with a random walk:
+
+Start at some specific vertex y of the graph.
+Repeat the following a number of times: Check if y is marked, and if not then choose
+one of its neighbors at random and set y to be that neighbor.
+
+This may seem like a stupid algorithm, but it has certain advantages. For instance, it only needs
+space O(log N), because you only need to keep track of the current vertex y, and maybe a counter
+that keeps track of how many steps you’ve already taken.1 Such an algorithm can for example
+decide whether there is a path from a specific vertex y to a specific vertex x using O(log N) space.
+We’d start the walk at y and only x would be marked; one can show that if there exists a path
+from y to x in G, then we will reach x in poly(N) steps.
+Let us restrict attention to d-regular graphs without self-loops, so each vertex has exactly d
+neighbors. A random walk on such a graph G corresponds to an N × N symmetric matrix P,
+where Px,y = 1/d if (x, y) is an edge in G, and Px,y = 0 otherwise. This P is the normalized
+adjacency matrix of G. If v ∈RN is a vector with a 1 at position y and 0s elsewhere, then Pv is
+a vector whose x-th entry is (Pv)x = 1/d if (x, y) is an edge, and (Pv)x = 0 otherwise. In other
+words, Pv is the uniform probability distribution over the neighbors of y, which is what you get by
+taking one step of the random walk starting at y. More generally, if v is a probability distribution
+on the vertices, then Pv is the new probability distribution on vertices after taking one step of the
+random walk, and P kv is the probability distribution after taking k steps.
+Suppose we start with some probability-distribution vector v (which may or may not be concen-
+trated at one vertex y). We will assume G is connected and not bipartite. Then P kv will converge
+to the uniform distribution over all vertices, and the speed of convergence is determined by the
+“gap” between the first eigenvalue of P and all other eigenvalues. This can be seen as follows. Let
+λ1 ≥λ2 ≥· · · ≥λN be the eigenvalues of P, ordered by size, and v1, . . . , vN be corresponding
+orthonormal eigenvectors.2 The largest eigenvalue is λ1 = 1, and corresponds to the eigenvector
+
+1Here we’re assuming the neighbors of a given vertex are efficiently computable, so you don’t actually need to
+keep the whole graph in memory. This will be true for all graphs we consider here.
+2Analyzing graphs by looking at the eigenvalues and eigenvectors of their adjacency matrix is called “algebraic
+graph theory” or “spectral graph theory,” see for instance [73].
+
+63
+
+
+===== PDF PAGE 76 =====
+
+v1, which is
+√
+
+N times u = (1/N), the uniform distribution over all vertices. One can show that
+our assumption that G is connected implies λ2 < 1, and our assumption that G is not bipartite
+implies λN > −1. Hence all eigenvalues λi for i ∈{2, . . . , N} will be in (−1, 1); the corresponding
+eigenvector vi will be orthogonal to the uniform vector v1, so the sum of its entries is 0. Let δ > 0
+be the difference between λ1 = 1 and maxi≥2 |λi| (hence |λi| ≤1 −δ for all i ≥2). This δ is called
+the “spectral gap” of the graph.
+Now decompose the starting distribution v as v = �N
+i=1 αivi. Since the sum of v’s entries is 1,
+and each eigenvector vi with i ≥2 has entries summing to 0, it follows that α1v1 = u. Now let us
+see what happens if we apply the random walk for k steps, starting from v:
+
+P kv = P k
+��
+
+i
+αivi
+
+�
+
+=
+�
+
+i
+αiλk
+i vi = u +
+�
+
+i≥2
+αiλk
+i vi.
+
+Consider the squared norm of the difference between P kv and u:
+
+���P kv −u
+���
+2
+=
+
+������
+
+�
+
+i≥2
+αiλk
+i vi
+
+������
+
+2
+
+=
+�
+
+i≥2
+|αi|2|λi|2k ≤∥v∥2(1 −δ)2k.
+
+Since v is a probability distribution, we have ∥v∥2 ≤1.
+By choosing k = ln(1/η)/δ, we get
+��P kv −u
+��≤η. In particular, if δ is not too small, then we get quick convergence of the random
+walk to the uniform distribution u, no matter which distribution v we started with.3 Once we are
+close to the uniform distribution, we have probability roughly ε of hitting a marked vertex. Of
+course, the same happens if we just pick a vertex uniformly at random, but that may not always
+be an option if the graph is given implicitly.
+Suppose it costs S to set up an initial state v; it costs U to update the current vertex, i.e., to
+perform one step of the random walk; and it costs C to check whether a given vertex is marked.
+“Cost” is left undefined for now, but typically it will count number of queries to some input, or
+number of elementary operations. Consider a classical search algorithm that starts at v, and then
+repeats the following until it finds a marked vertex: check if the current vertex is marked, and if
+not run a random walk for roughly 1/δ steps to get close to the uniform distribution. Ignoring
+constant factors, the expected cost before this procedure finds a marked item, is on the order of
+
+S + 1
+
+ε
+
+�
+C + 1
+
+δ U
+�
+.
+(8.1)
+
+8.2
+Quantum walks
+
+We will now modify the classical random walk algorithm preceding Eq. (8.1) to a quantum algo-
+rithm, where the distribution-preserving matrix P is changed to a norm-preserving matrix W(P)
+(i.e., a unitary). This is due to Magniez et al. [192], inspired by Szegedy [247]; our presentation is
+mostly based on Santha’s survey paper [229], to which we refer for more details and references.
+While the basis state of a classical random walk is the current vertex we are at, a basis state
+of a quantum walk has two registers, the first corresponding to the current vertex and the second
+
+3Convergence in total variation distance can be derived from this by Cauchy-Schwarz, choosing η ≪1/
+√
+
+N.
+
+64
+
+
+===== PDF PAGE 77 =====
+
+corresponding to the previous vertex. Equivalently, a basis state of a quantum walk corresponds
+to an edge of the graph.
+Our resulting quantum walk algorithm for search will actually be quite analogous to Grover’s
+algorithm. We’ll call a basis state |x⟩|y⟩“good” if x is a marked vertex, and “bad” otherwise.
+Define |px⟩= �
+y
+�
+
+Pxy|y⟩to be the uniform superposition over the neighbors of x. As for Grover,
+define “good” and “bad” states as the superpositions over good and bad basis states:
+
+|G⟩=
+1
+�
+
+|M|
+
+�
+
+x∈M
+|x⟩|px⟩and |B⟩=
+1
+�
+
+N −|M|
+
+�
+
+x̸∈M
+|x⟩|px⟩,
+
+where M denotes the set of marked vertices. Note that |G⟩is just the uniform superposition over
+all edges (x, y) where the first coordinate is marked, and |B⟩is just the uniform superposition over
+all edges (x, y) where the first coordinate is not marked.
+If ε = |M|/N and θ := arcsin √ε, then the uniform state over all edges can be written as
+
+|U⟩=
+1
+√
+
+N
+
+�
+
+x
+|x⟩|px⟩= sin(θ)|G⟩+ cos(θ)|B⟩.
+
+Here is the algorithm for searching a marked vertex if an ε-fraction is marked4:
+
+1. Setup the starting state |U⟩
+
+2. Repeat the following O(1/√ε) times:
+
+(a) Reflect through |B⟩
+
+(b) Reflect through |U⟩
+
+3. Measure the first register and check that the resulting vertex x is marked.
+
+The description and analysis of this algorithm takes places in the 2-dimensional space spanned
+by |G⟩and |B⟩. We’ll explain in a moment how to implement (a) and (b). Assuming we know
+how to do that, the proof that this algorithm finds a marked vertex is the same as for Grover and
+for amplitude amplification (Chapter 7). We start with |U⟩= sin(θ)|G⟩+ cos(θ)|B⟩. The two
+reflections (a) and (b) increase the angle from θ to 3θ, moving us towards the good state (similarly
+to the analysis for Grover, you can draw a 2-dimensional picture with axes |B⟩and |G⟩to see this).
+More generally, after k applications of (a) and (b) our state has become
+
+sin((2k + 1)θ)|G⟩+ cos((2k + 1)θ)|B⟩.
+
+Choosing k ≈
+π
+4θ = O(1/√ε), we will have sin((2k + 1)θ) ≈1, at which point measuring the first
+register will probably yield a vertex x that is marked. We now look more closely how to implement
+the two kinds of reflections.
+
+(a) Reflect through |B⟩.
+Reflecting through |B⟩is relatively straightforward: we just have
+to “recognize” whether the first register contains a marked x, and put a −1 if so (note that this
+is really a reflection through the subspace spanned by the bad basis states, but restricted to the
+2-dimensional subspace spanned by |G⟩and |B⟩that’s the same as a reflection through |B⟩).
+
+4As in Grover, if we don’t know ε then we just run the algorithm repeatedly with exponentially decreasing guesses
+for ε (1/2, 1/4, 1/8, . . . ). If at the end we still haven’t found a marked item, we’ll conclude that probably none exists.
+
+65
+
+
+===== PDF PAGE 78 =====
+
+(b) Reflect through |U⟩.
+This is where the quantum walk comes in. Let A be the subspace
+span{|x⟩|px⟩} and B be span{|py⟩|y⟩}. Let ref(A) and ref(B) denote reflections through A and B,
+respectively. Define W(P) = ref(B)ref(A) to be the product of these two reflections. This may be
+viewed as an indirect unitary analogue of the classical random-walk operator P. Suppose we are
+able to implement the following two operations (in a controlled manner):
+
+(1) |x⟩|0⟩�→|x⟩|px⟩
+(2) |0⟩|y⟩�→|py⟩|y⟩
+
+Since (1) and (2) prepare a uniform superposition over the neighbors of x and y, respectively, one
+can think of them as taking one classical walk step “in superposition.” Note that ref(A) can be
+implemented by applying the inverse of (1), putting a minus if the second register is not |0⟩, and
+applying (1). We can similarly implement ref(B) using (2) and its inverse. Hence we can think of
+W(P) = ref(B)ref(A) as corresponding to four steps of the classical walk in superposition.
+Let us sketch the main idea for how to implement the reflection through |U⟩up to small error.
+Consider the eigenvalues and eigenvectors of W(P). The eigenvalues of W(P) can be related to
+the eigenvalues λ1, λ2, . . . of P as follows. Let θj ∈[0, π/2] be such that |λj| = cos(θj). We won’t
+prove it here, but it turns out that the eigenvalues of W(P) are of the form e±2iθj. The state |U⟩
+is an eigenvalue-1 eigenvector of W(P), corresponding to θ1 = 0. The spectral gap of P is δ, so
+all eigenvectors of W(P) that do not have eigenvalue 1, have eigenvalue e±2iθj where θj ≥
+√
+
+2δ,
+because 1 −δ ≥|λj| = cos(θj) ≥1 −θ2
+j/2. We now want to implement a reflection R(P) through
+the subspace spanned by the eigenvalue-1 eigenvectors of W(P); restricted to the 2-dimensional
+subspace spanned by |G⟩and |B⟩this will be the desired reflection through |U⟩.
+We will implement R(P) by using phase estimation (see Section 4.6) with precision
+√
+
+δ/2 on
+W(P) to distinguish the eigenvalue-1 eigenvectors from the other eigenvectors.
+This precision
+requires O(1/
+√
+
+δ) applications of W(P), and O(log(1/δ)) auxiliary qubits that start in |0⟩and where
+the estimate will be stored. Assume for simplicity that phase estimation always gives an estimate
+˜θj of θj that is within precision
+√
+
+δ/2.5 Because the nonzero θj are at least
+√
+
+2δ, approximating
+them within additive error
+√
+
+δ/2 is good enough to determine whether the actual value θj itself is 0
+or not. We then multiply the state with a −1 if the estimate is sufficiently far from 0, and finally
+reverse the phase estimation to put the auxiliary qubits back to 0. Applied to some eigenvector
+|w⟩of W(P) with corresponding eigenvalue e±2iθj, R(P) maps
+
+R(P) : |w⟩|0⟩PE
+�→
+|w⟩|˜θj⟩�→(−1)[θj̸=0]|w⟩|˜θj⟩PE
+−1
+�→
+(−1)[θj̸=0]|w⟩|0⟩.
+
+This has the desired effect: ignoring the auxiliary qubits (which start and end in 0), R(P) maps
+eigenvalue-1 eigenvectors of W(P) to themselves, and puts a −1 in front of the other eigenvectors.
+
+Now that we know how to implement the algorithm, let us look at its complexity. Consider the
+following setup, update, and checking costs:
+
+• Setup cost S: the cost of constructing |U⟩
+
+• Checking cost C: the cost of the unitary map |x⟩|y⟩�→mx|x⟩|y⟩, where mx = −1 if x is
+marked, and mx = 1 otherwise
+
+5Phase estimation will actually give a superposition over estimates ˜θj, with small but nonzero amplitudes on bad
+estimates, but we’ll skip the technical details that are needed to deal with this.
+
+66
+
+
+===== PDF PAGE 79 =====
+
+• Update cost U: the cost of one step of the quantum walk, i.e., of W(P)
+
+The cost of part (a) of the algorithm is C. Since R(P) uses O(1/
+√
+
+δ) applications of W(P), and
+a few other gates, the cost of part (b) of the algorithm is essentially O(U/
+√
+
+δ). Ignoring constant
+factors, the total cost of the algorithm is then
+
+S + 1
+√ε
+
+�
+C + 1
+√
+
+δ
+U
+�
+.
+(8.2)
+
+Compare this with the classical cost of Eq. (8.1): quantum search square-roots both ε and δ.
+
+8.3
+Applications
+
+There are a number of interesting quantum walk algorithms that beat the best classical algorithms.
+We’ll give three examples here. More can be found in [229].
+
+8.3.1
+Grover search
+
+Let us first derive a quantum algorithm for search. Suppose we have an N-bit string x of weight t,
+and we know t/N ≥ε. Consider the complete graph G on N vertices. Then the matrix P for the
+random walk on G has 0s on its diagonal, and its off-diagonal entries are all equal to 1/(N −1).
+This can be written as P =
+1
+N−1J −
+1
+N−1I, where J is the all-1 matrix and I is the identity. The
+only nonzero eigenvalue of J is N, and adding a multiple of I just shifts the eigenvalues of a matrix,
+hence the largest eigenvalue of P is λ1 = N/(N −1)−1/(N −1) = 1 (corresponding to the uniform
+vector) and all its other eigenvalues are −1/(N −1). Note that the spectral gap δ is very large
+here: δ = 1 −1/(N −1) ≈1. We’ll mark a vertex i iff xi = 1. Then, measuring cost by number
+of queries, a quantum walk on G will have S = U = 0 and C = 1. Plugging this into Eq. (8.2),
+the quantum walk will find a marked vertex (with high probability) using O(1/√ε) queries. The
+worst case is ε = 1/N, in which case we’ll use O(
+√
+
+N) queries. Not surprisingly, we’ve essentially
+rederived Grover’s algorithm.
+
+8.3.2
+Finding collisions
+
+Consider the following problem:
+
+Input: x = x0, . . . , xn−1, where each xi is an integer.6
+
+Goal: find distinct i and j such that xi = xj if these exist, otherwise output “all elements
+are distinct.”
+
+The problem of finding collisions is important in cryptography, in particular if the map i �→xi is
+a so-called “hash function.” The decision version of this problem (deciding if there exists at least
+one collision) is also known as element distinctness.
+Consider the graph whose vertices correspond to the sets R ⊆{0, . . . , n −1} of r elements. The
+total number of vertices is N =
+�n
+r
+�
+. We’ll put an edge between the vertices for R and R′ iff these
+two sets differ in exactly two elements; in other words, you can get from R to R′ by removing one
+element i from R and replacing it by a new element j. The resulting graph J(n, r) is known as
+
+6Say, all xi ≤n2 to avoid having to use too much space to store these numbers.
+
+67
+
+
+===== PDF PAGE 80 =====
+
+the Johnson graph. It is r(n −r)-regular, since every R has r(n −r) different neighbors R′. Its
+spectral gap is known to be δ =
+n
+r(n−r) [73, Sec. 12.3.2]; we won’t prove that here, just note that if
+r ≪n, then δ ≈1/r. For each set R we also keep track of the corresponding sequence of x-values,
+xR = (xi)i∈R. Hence the full “name” of a vertex is the pair (R, xR).
+We’ll call a vertex in J(n, r) marked if it contains a collision, i.e., the corresponding set R
+contains distinct i, j such that xi = xj. In the worst case there is exactly one colliding pair i, j
+(more collisions only make the problem easier). The probability that i and j are both in a random
+r-set R, is ε = r
+
+n
+r−1
+n−1. Hence the fraction of marked vertices is at least ε ≈(r/n)2.
+We will now determine the setup, checking, and update costs. The setup cost (measured in
+terms of queries) is S = r + 1: we have to create a uniform superposition |U⟩over all edges R, R′,
+and for each such basis state query all r + 1 elements of R ∪R′ to add the information xR and xR′.
+Checking whether a given vertex R, xR contains a collision doesn’t take any queries because we
+already have xR, hence C = 0. To determine the update cost, note that mapping the second register
+of |R, xR⟩|0⟩to a superposition of all neighbors R′, xR′ requires querying (in superposition for all
+neighbors R′) the value xj of the element j that was added to get R′, as well as “unquerying” the
+value xi of the element i that was removed from R (since xi’s value shouldn’t be present anymore
+in the information we write down for R′). Hence U = 2. Plugging this into Eq. (8.2), the cost of a
+quantum walk algorithm for collision-finding is
+
+S + 1
+√ε
+
+�
+C + 1
+√
+
+δ
+U
+�
+= O(r + n/√r).
+
+This cost is O(n2/3) if we choose to set r = n2/3 (rounded to an integer). What the quantum walk
+produces at the end is a superposition where, if we measure the first register, with high probability
+we’ll see a marked vertex. That way we obtain a set R that contains a collision; and because R is
+small, we can now cheaply find the colliding indices i, j ∈R.
+This query complexity O(n2/3) turns out to be the optimal quantum query complexity for
+finding collisions [5]. By some more work involving efficient data structures, using a quantum-
+accessible classical RAM, the time complexity (= total number of elementary quantum gates plus
+total number of queries) can be brought down to n2/3(log n)O(1) [15].
+
+8.3.3
+Finding a triangle in a graph
+
+Consider the following triangle-finding problem:
+
+Input: the adjacency matrix of a graph H on n vertices.
+Goal: find vertices u, v, w that form a triangle (i.e., (u, v), (v, w), (w, u) are all edges in
+the graph), if they exist.
+
+We’ll assume we have query access to the entries of the adjacency matrix of H, which tells us
+whether (u, v) is an edge or not. There are
+�n
+2
+�
+bits in this oracle, one for each potential edge
+of H. It is not hard to see that a classical algorithm needs Ω(n2) queries before it can decide
+with good probability whether a graph contains a triangle or not. For example, take a bipartite
+graph consisting of 2 sets of n/2 vertices each, such that any pair of vertices from different sets is
+connected by an edge. Such a graph is triangle-free, but adding any one edge will create a triangle.
+A classical algorithm would have to query all those edges separately.
+Let us try a quantum walk approach. Again consider the Johnson graph J(n, r). Each vertex
+will correspond to a set R ⊆{0, . . . , n −1} of r vertices, annotated with the result of querying
+
+68
+

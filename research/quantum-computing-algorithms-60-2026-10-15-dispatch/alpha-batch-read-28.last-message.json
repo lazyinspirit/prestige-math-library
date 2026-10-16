@@ -1,0 +1,291 @@
+{
+  "group": "b",
+  "batches": ["28"],
+  "pages_read": [
+    "simon-algorithm-and-finite-field-recovery",
+    "simon-algorithm-and-finite-field-recovery-examples"
+  ],
+  "items_read": [
+    "thm-qa-binary-field-f2-is-a-field",
+    "def-qa-binary-vector-space",
+    "alg-qa-f2-gaussian-elimination",
+    "lem-qa-computational-basis-measurement-law",
+    "def-qa-simon-promise",
+    "lem-qa-simon-annihilator-subspace-basis",
+    "alg-qa-simon-one-sample",
+    "def-qa-simon-random-instance-distribution",
+    "thm-qa-simon-postquery-coset-state",
+    "thm-qa-f2-gaussian-elimination-correct-and-cost",
+    "thm-qa-simon-classical-randomized-query-lower-bound",
+    "thm-qa-simon-hadamard-sampling-law",
+    "def-qa-simon-rank-process",
+    "thm-qa-simon-rank-growth-probability",
+    "alg-qa-simon-recovery-with-budget",
+    "thm-qa-simon-recovery-correctness-and-query-bound",
+    "ex-qa-simon-finite-rank-and-sampling"
+  ],
+  "conventions": [
+    {
+      "convention": "The binary carrier is Z/2Z with quotient operations; binary strings use coordinatewise field operations, including the empty tuple at dimension zero.",
+      "fixed_by": "def-qa-binary-vector-space",
+      "matters_for": [
+        "alg-qa-f2-gaussian-elimination",
+        "lem-qa-simon-annihilator-subspace-basis",
+        "thm-qa-f2-gaussian-elimination-correct-and-cost",
+        "thm-qa-simon-rank-growth-probability"
+      ]
+    },
+    {
+      "convention": "The Simon promise requires n≥1, m≥n−1, a total oracle, and a unique nonzero mask s; equal outputs occur iff the addresses are equal or differ by s. Only n,m and oracle access are supplied.",
+      "fixed_by": "def-qa-simon-promise",
+      "matters_for": [
+        "alg-qa-simon-one-sample",
+        "def-qa-simon-random-instance-distribution",
+        "thm-qa-simon-postquery-coset-state",
+        "thm-qa-simon-classical-randomized-query-lower-bound",
+        "thm-qa-simon-hadamard-sampling-law",
+        "thm-qa-simon-recovery-correctness-and-query-bound"
+      ]
+    },
+    {
+      "convention": "Target measurement uses Lüders branch maps P_v X P_v on the joint register. The target outcome is discarded; each sample uses fresh zero-initialized registers and one ordinary XOR query.",
+      "fixed_by": "alg-qa-simon-one-sample",
+      "matters_for": [
+        "thm-qa-simon-postquery-coset-state",
+        "thm-qa-simon-hadamard-sampling-law",
+        "def-qa-simon-rank-process"
+      ]
+    },
+    {
+      "convention": "The lower-bound distribution chooses a uniform nonzero mask and, conditionally, a uniform injection from its two-element cosets into the m-bit labels.",
+      "fixed_by": "def-qa-simon-random-instance-distribution",
+      "matters_for": [
+        "thm-qa-simon-classical-randomized-query-lower-bound"
+      ]
+    },
+    {
+      "convention": "Rank-process probabilities are finite-prefix product probabilities for fresh executions of the same fixed oracle; expected query cost is a supremum of finite-prefix expectations.",
+      "fixed_by": "def-qa-simon-rank-process",
+      "matters_for": [
+        "thm-qa-simon-rank-growth-probability",
+        "thm-qa-simon-recovery-correctness-and-query-bound"
+      ]
+    },
+    {
+      "convention": "The budget input is δ=a/b with positive binary integers a<b; B is their total binary length. The cap is ceil(2(n−1)/δ), and n=1 returns 1 without querying.",
+      "fixed_by": "alg-qa-simon-recovery-with-budget",
+      "matters_for": [
+        "thm-qa-simon-recovery-correctness-and-query-bound",
+        "ex-qa-simon-finite-rank-and-sampling"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-simon-hadamard-sampling-law",
+      "statement": "For every Simon hidden nonzero string s∈{0,1}^n, the one-sample algorithm returns a string uniformly distributed on s⊥={y∈{0,1}^n:s·y=0}. The set s⊥ has 2^(n−1) elements.",
+      "used_by": [
+        "def-qa-simon-rank-process",
+        "thm-qa-simon-rank-growth-probability",
+        "ex-qa-simon-finite-rank-and-sampling"
+      ]
+    },
+    {
+      "id": "lem-qa-simon-annihilator-subspace-basis",
+      "statement": "Let n≥1 and let s∈F2^n be nonzero. Then s⊥ is a linear subspace of dimension d=n−1 and has exactly 2^d elements. The assertion includes n=1, when s⊥={0} has dimension zero.",
+      "used_by": [
+        "thm-qa-simon-hadamard-sampling-law",
+        "def-qa-simon-rank-process",
+        "thm-qa-simon-rank-growth-probability"
+      ]
+    },
+    {
+      "id": "thm-qa-f2-gaussian-elimination-correct-and-cost",
+      "statement": "For n≥1 and a binary (n−1)×n matrix Y, the algorithm terminates, returns FAIL exactly when rank(Y)<n−1, and otherwise returns the unique nonzero vector in ker Y. Independent rows annihilating a fixed nonzero Simon mask s therefore recover s. The algorithm uses O(n^3) classical bit operations.",
+      "used_by": [
+        "thm-qa-simon-recovery-correctness-and-query-bound",
+        "ex-qa-simon-finite-rank-and-sampling"
+      ]
+    },
+    {
+      "id": "thm-qa-simon-rank-growth-probability",
+      "statement": "At a finite history with k<d accepted rows, the next independent sample increases rank with probability p_k=1−2^(k−d)≥1/2. With q_k=2^(k−d), Pr(A_{k,r})=q_k^r and E[W_{k,M}]=sum from j=0 to M−1 of q_k^j≤1/p_k≤2.",
+      "used_by": [
+        "thm-qa-simon-recovery-correctness-and-query-bound",
+        "ex-qa-simon-finite-rank-and-sampling"
+      ]
+    },
+    {
+      "id": "thm-qa-simon-postquery-coset-state",
+      "statement": "Immediately after the one standard query the joint state is 2^(−n/2) sum_x |x⟩|f(x)⟩. Each image value v has target Lüders probability 2^(1−n) and normalized conditional joint vector (|x_0⟩+|x_0⊕s⟩)/sqrt(2) tensor |v⟩. Outcomes outside the image have probability zero.",
+      "used_by": [
+        "thm-qa-simon-hadamard-sampling-law",
+        "ex-qa-simon-finite-rank-and-sampling"
+      ]
+    },
+    {
+      "id": "thm-qa-binary-field-f2-is-a-field",
+      "statement": "The quotient operations on Z/2Z make the carrier F2 of def-qa-binary-field-f2 a field.",
+      "used_by": [
+        "def-qa-binary-vector-space",
+        "alg-qa-f2-gaussian-elimination",
+        "lem-qa-simon-annihilator-subspace-basis",
+        "thm-qa-f2-gaussian-elimination-correct-and-cost",
+        "def-qa-simon-rank-process",
+        "thm-qa-simon-rank-growth-probability"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-prime",
+      "used_for": "The positive-divisor definition used to verify that 2 is prime.",
+      "opened": true
+    },
+    {
+      "id": "thm-z-mod-p-is-a-field",
+      "used_for": "Specialization at p=2 establishes the binary field axioms.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-space",
+      "used_for": "Coordinatewise verification of the binary vector-space axioms.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-independence",
+      "used_for": "List and subset independence, including empty lists and injective lists into a basis set.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-combination-and-span",
+      "used_for": "Finite linear combinations, the empty sum, and the subspace span.",
+      "opened": true
+    },
+    {
+      "id": "lem-span-is-the-set-of-linear-combinations",
+      "used_for": "Explicit coefficient descriptions of coordinate spaces, annihilators, and accepted-row spans.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-basis",
+      "used_for": "Independent spanning sets and bases of subspaces.",
+      "opened": true
+    },
+    {
+      "id": "def-dimension",
+      "used_for": "Dimensions of the coordinate space, annihilator, kernel, and accepted-row span.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-equation-augmented-matrix-and-linear-system",
+      "used_for": "Interpreting Yx=0 as the homogeneous row equations.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "A rank n−1 map from F2^n has a one-dimensional kernel.",
+      "opened": true
+    },
+    {
+      "id": "thm-gaussian-elimination-produces-row-echelon-form",
+      "used_for": "Finite field row-reduction context; the owned correctness proof additionally establishes the particular reduced-pivot invariants.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Computing basis-measurement and target-branch probabilities from diagonal entries.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-subspace",
+      "used_for": "The explicit annihilator span is a binary linear subspace.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Finite oracle distributions, sample prefixes, continuation events, and transcript probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "A nonnegative projector is its own nonnegative square root, identifying the target Lüders maps.",
+      "opened": true
+    },
+    {
+      "id": "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+      "used_for": "Transferring the matrix pivot rank to the associated map before applying rank-nullity.",
+      "opened": true
+    },
+    {
+      "id": "def-row-space-column-space-nullspace-and-matrix-ranks",
+      "used_for": "Matrix rank as row-space dimension and preservation under invertible row operations.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-real-random-variable-and-distribution",
+      "used_for": "Truncated waiting counts are random variables on finite continuation spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Finite indicator-sum calculations of truncated waiting expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Bounding the waiting-count partial sum starting at j=0 by 1/(1−q_k).",
+      "opened": true
+    },
+    {
+      "id": "thm-markov-inequality",
+      "used_for": "The finite capped count Q_M and positive threshold M bound the budget failure probability.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-qa-binary-vector-space",
+      "concern": "The item has kind: definition but introduces its coordinate structure under '## Statement', whereas SCHEMA.md requires '## Definition' for definitions. The coordinate construction and its verification are mathematically sound.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qa-simon-promise",
+      "concern": "Verification 3.1 says: 'Any other nonzero period must equal the unique other member x⊕s for every x, so it is s.' A period t is the displacement, whereas the other fiber member is x⊕t. The immediate uniqueness argument is x⊕t=x⊕s, hence t=s; the current sentence conflates the displacement with the fiber member.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "simon-algorithm-and-finite-field-recovery",
+      "to": "exact-oracle-algorithms",
+      "faithful": true,
+      "note": "The cited Hadamard kernel supplies exactly the ordered tensor-Hadamard character formula for n≥1. Simon uses that formula without importing a finite-abelian Fourier theorem or a stronger classical lower bound."
+    },
+    {
+      "from": "simon-algorithm-and-finite-field-recovery",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The total multi-output XOR query, quotient binary operations, and parity dot product match their supplier definitions. Simon uses ordinary query access and requests neither controlled nor inverse access."
+    },
+    {
+      "from": "simon-algorithm-and-finite-field-recovery",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "The lower bound fixes n,m and excludes other oracle-dependent input. Query cost remains separate from multitape bit work. Expected queries use finite-prefix suprema, and the recovery proof applies finite-space Markov only to Q_M."
+    },
+    {
+      "from": "simon-algorithm-and-finite-field-recovery",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "The consumer specifies the Lüders instrument rather than inferring a conditional state from POVM effects alone. Conditional states are asserted only on positive-probability image outcomes; outside-image outcomes receive zero weight."
+    },
+    {
+      "from": "simon-algorithm-and-finite-field-recovery",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "The Born-weight proof respects the root-linear-first convention: ⟨y,ψ⟩root is the conjugate of a_y, producing the diagonal entry |a_y|². Outer products and ordered product bases are used consistently."
+    }
+  ]
+}

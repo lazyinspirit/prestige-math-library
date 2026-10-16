@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann.json
 id: thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann
 kind: theorem
 title: "Complex differentiability is equivalent to real total differentiability together with a complex-linear derivative, with $\\partial_{\\bar z}f=0$, or with the Cauchy–Riemann equations"
@@ -7,7 +9,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-complex-differentiability-holomorphic-and-entire, def-wirtinger-derivatives,
+deps: [thm-complex-coordinate-map-preserves-real-total-differentiability, thm-complex-coordinate-map-preserves-real-scalar-multiplication, def-complex-differentiability-holomorphic-and-entire, def-wirtinger-derivatives,
        def-total-derivative-in-euclidean-space, def-euclidean-linear-map,
        lem-euclidean-linear-maps-have-matrices-and-are-bounded,
        def-jacobian-matrix-and-gradient,
@@ -17,9 +19,6 @@ deps: [def-complex-differentiability-holomorphic-and-entire, def-wirtinger-deriv
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -50,7 +49,7 @@ $$ f'(a)=u_x(a)+iv_x(a)=v_y(a)-iu_y(a)=\partial_zf(a). $$
 
 [F1] Complex differentiability at $a$ is existence of the limit $(f(a+h)-f(a))/h$ as $h\to0$ through nonzero increments with $a+h\in U$ ([[def-complex-differentiability-holomorphic-and-entire]]).
 
-[F2] Real total differentiability at $a$ means that for some real-linear $L$, $f(a+h)=f(a)+Lh+r(h)$ with $\|r(h)\|_2/\|h\|_2\to0$ ([[def-total-derivative-in-euclidean-space]], [[def-euclidean-linear-map]]).
+[F2] By [[thm-complex-coordinate-map-preserves-real-total-differentiability]], real total differentiability at $a$ means that for some real-linear $L$, $f(a+h)=f(a)+Lh+r(h)$ with $|r(h)|/|h|\to0$ ([[def-total-derivative-in-euclidean-space]], [[def-euclidean-linear-map]]).
 
 [L1] If a map is totally differentiable at $a$, then its directional derivatives exist and equal $Df(a)v$; its partial derivatives are the columns of its Jacobian matrix ([[thm-total-derivative-computes-directional-and-partial-derivatives]], [[def-jacobian-matrix-and-gradient]]).
 
@@ -74,7 +73,7 @@ $$ f'(a)=u_x(a)+iv_x(a)=v_y(a)-iu_y(a)=\partial_zf(a). $$
 
 1.4 By [F3], $\partial_{\bar z}f(a)=0$ exactly when both $u_x-v_y=0$ and $v_x+u_y=0$. Hence condition 3 is equivalent to condition 4. [F3, algebra]
 
-2.1 The map $h\mapsto Lh$ is real-linear by the coordinate formula [L3], so step 1.1 is the remainder condition [F2]. Thus condition 2 holds. [step 1.1, F2, L2, L3]
+2.1 The map $h\mapsto Lh$ is real-linear: its coordinate matrix is real linear by [L3], and [[thm-complex-coordinate-map-preserves-real-scalar-multiplication]] transports real linearity back to $\mathbb C$. so step 1.1 is the remainder condition [F2]. Thus condition 2 holds. [step 1.1, F2, L2, L3]
 
 2.2 Therefore condition 2 is equivalent to condition 4: equality with the multiplication matrix is exactly $u_x=v_y$ and $u_y=-v_x$. In that case $\alpha=u_x=v_y$, $\beta=v_x=-u_y$, so the multiplier is $u_x+iv_x=v_y-iu_y$. [step 1.3, algebra]
 

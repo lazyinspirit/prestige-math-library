@@ -1,0 +1,794 @@
+[
+  {
+    "order": 2222,
+    "id": "finite-abelian-fourier-analysis",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Finite Abelian Fourier Analysis",
+    "companion": "finite-abelian-fourier-analysis-examples",
+    "requires": [
+      "cosets-and-lagranges-theorem",
+      "cyclic-groups-and-direct-products",
+      "finite-abelian-characters-for-combinatorics",
+      "group-homomorphisms-and-the-isomorphism-theorems",
+      "monoids-groups-and-subgroups",
+      "normal-subgroups-and-quotient-groups",
+      "rings-subrings-and-integral-domains",
+      "roots-and-rational-powers",
+      "the-complex-exponential-and-eulers-formula",
+      "the-structure-of-finite-abelian-groups",
+      "vector-spaces-and-subspaces"
+    ],
+    "items": [
+      {
+        "id": "def-qa-finite-abelian-character-dual",
+        "kind": "definition",
+        "title": "Dual group of a finite abelian group",
+        "statement": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is\n$$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$\nwhere an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.\n\nThis specifies a set and operations. The later theorem `thm-qa-finite-abelian-character-dual-is-finite-abelian-group` proves that these operations make $\\widehat G$ a finite abelian group; no isomorphism $G\\cong\\widehat G$ is part of this definition.",
+        "deps": [
+          "def-additive-character-of-a-finite-abelian-group",
+          "def-group"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "def-qa-finite-abelian-convolution",
+        "kind": "definition",
+        "title": "Unnormalized convolution on a finite abelian group",
+        "statement": "Let $G$ be a finite abelian group ([[def-group]]), written additively, and let $f,g\\in\\mathbb C^G$ be functions ([[def-function-space]]). Their (unnormalized) convolution is the function\n$$ (f*g)(z):=\\sum_{x\\in G}f(x)g(z-x),\\qquad z\\in G. $$\nThe sum is the finite sum of [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of $\\mathbb C$; it is independent of any enumeration of $G$. No factor of $|G|^{-1}$ is included. The Fourier convolution theorem below proves the resulting normalization factor.",
+        "deps": [
+          "def-group",
+          "def-function-space",
+          "def-finite-sum-in-a-commutative-monoid"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-qa-finite-character-values-have-unit-modulus",
+        "kind": "lemma",
+        "title": "Values of additive characters of finite abelian groups have modulus one",
+        "statement": "If $G$ is a finite abelian group, $\\chi:G\\to\\mathbb C^{\\times}$ is an additive character, and $x\\in G$, then $|\\chi(x)|=1$.",
+        "deps": [
+          "def-additive-character-of-a-finite-abelian-group",
+          "def-order-in-a-group",
+          "lem-group-homomorphism-basic-properties",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-qa-cyclic-group-has-n-characters",
+        "kind": "lemma",
+        "title": "A cyclic group of order n has exactly n additive characters",
+        "statement": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "def-additive-character-of-a-finite-abelian-group",
+          "lem-group-homomorphism-basic-properties",
+          "lem-group-power-laws",
+          "thm-classification-of-cyclic-groups",
+          "thm-complex-nth-roots-and-roots-of-unity"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-qa-character-dual-of-a-product-factors",
+        "kind": "lemma",
+        "title": "Characters of a finite product factor coordinatewise",
+        "statement": "Let $G_1,\\ldots,G_r$ be finite abelian groups and let $P=G_1\\times\\cdots\\times G_r$ be their recursively parenthesized external direct product. By convention, $P$ is the trivial group when $r=0$. Restriction to the coordinate factors gives a bijection\n$$\\widehat P\\longrightarrow\\widehat{G_1}\\times\\cdots\\times\\widehat{G_r}.$$\nIts inverse sends $(\\chi_1,\\ldots,\\chi_r)$ to $\\chi(g_1,\\ldots,g_r)=\\prod_{i=1}^r\\chi_i(g_i)$. For $r=0$, both sides are singletons.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "def-additive-character-of-a-finite-abelian-group",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "def-qa-finite-abelian-subgroup-annihilator",
+        "kind": "definition",
+        "title": "Character annihilator of a subgroup",
+        "statement": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by\n$$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$\nFor any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define\n$$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$\nThe pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "def-subgroup"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-dual-has-same-cardinality",
+        "kind": "theorem",
+        "title": "A finite abelian group and its character dual have equal order",
+        "statement": "If $G$ is a finite abelian group with invariant-factor decomposition $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$, then $|\\widehat G|=\\prod_i n_i=|G|$. The empty product is allowed: it represents the trivial group and has value $1$. This is a finite-set cardinality assertion; it does not choose an isomorphism $G\\cong\\widehat G$.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+          "lem-qa-cyclic-group-has-n-characters",
+          "lem-qa-character-dual-of-a-product-factors",
+          "prop-order-of-finite-direct-product",
+          "thm-product-rule",
+          "def-group-isomorphism-and-automorphism",
+          "lem-inverse-of-bijective-group-homomorphism",
+          "def-order-in-a-group"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+        "kind": "theorem",
+        "title": "Pointwise character dual is a finite abelian group",
+        "statement": "For a finite abelian group $G$, the pointwise product, constant-one identity and pointwise inverse on $\\widehat G$ make it a finite abelian group. Its order is $|\\widehat G|=|G|$.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "def-additive-character-of-a-finite-abelian-group",
+          "lem-group-homomorphism-basic-properties",
+          "thm-complex-numbers-form-a-field",
+          "thm-qa-finite-abelian-dual-has-same-cardinality"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-dual-character-orthogonality",
+        "kind": "theorem",
+        "title": "Dual-index character orthogonality",
+        "statement": "For a finite abelian group $G$ and $x,y\\in G$,\n$$\\sum_{\\chi\\in\\widehat G}\\chi(x)\\overline{\\chi(y)}=\\begin{cases}|G|,&x=y,\\\\0,&x\\ne y.\\end{cases}$$\nThis is orthogonality of the columns indexed by group elements. It is proved from cyclic root sums and is not inferred from row orthogonality.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "def-additive-character-of-a-finite-abelian-group",
+          "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+          "def-group-isomorphism-and-automorphism",
+          "lem-inverse-of-bijective-group-homomorphism",
+          "lem-qa-character-dual-of-a-product-factors",
+          "lem-qa-cyclic-group-has-n-characters",
+          "lem-qa-finite-character-values-have-unit-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "def-qa-normalized-finite-abelian-fourier-transform",
+        "kind": "definition",
+        "title": "Normalized Fourier transform on a finite abelian group",
+        "statement": "Let $G$ be a finite abelian group and $\\widehat G$ its character dual ([[def-qa-finite-abelian-character-dual]]), which is finite with $|\\widehat G|=|G|$ ([[thm-qa-finite-abelian-dual-has-same-cardinality]]). Put $N:=|G|$ and $N_{\\mathbb R}:=\\iota_{\\mathbb R}(N)$ its canonical real image ([[def-order-in-a-group]], [[def-canonical-natural]]). Since $G$ contains its identity, $N\\ge1$, and hence $N_{\\mathbb R}>0$ ([[lem-of-naturals-positive]]). Its rational power $N_{\\mathbb R}^{-1/2}$ is therefore well defined ([[def-rational-power]], [[lem-rational-power-well-defined]]).\n\nFor $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by\n$$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$\nHere $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "def-function-space",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-rational-power",
+          "lem-rational-power-well-defined",
+          "def-order-in-a-group",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+        "kind": "theorem",
+        "title": "Subgroup-annihilator cardinality",
+        "statement": "For a subgroup $H\\le G$ of a finite abelian group, descent and inflation identify $H^\\perp$ with the character dual of $G/H$. Consequently\n$$|H^\\perp|=|G/H|=[G:H]=\\frac{|G|}{|H|},\\qquad |H^\\perp|\\,|H|=|G|.$$\nThe quotient convention is left cosets, with additive notation.",
+        "deps": [
+          "def-qa-finite-abelian-subgroup-annihilator",
+          "def-subgroup",
+          "def-additive-character-of-a-finite-abelian-group",
+          "cor-subgroups-of-abelian-groups-are-normal",
+          "def-quotient-group",
+          "def-index",
+          "thm-quotient-group-laws",
+          "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "thm-lagrange",
+          "cor-quotient-of-an-abelian-group-is-abelian",
+          "lem-coset-membership-and-equality",
+          "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-qa-finite-abelian-annihilators-are-subgroups",
+        "kind": "lemma",
+        "title": "Annihilators of subgroups are subgroups",
+        "statement": "Let $G$ be a finite abelian group. For every subgroup $H\\le G$, $H^\\perp$ is a subgroup of $\\widehat G$. For every subgroup $K\\le\\widehat G$, $K^\\perp$ is a subgroup of $G$.",
+        "deps": [
+          "def-qa-finite-abelian-subgroup-annihilator",
+          "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "def-subgroup",
+          "def-additive-character-of-a-finite-abelian-group"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-fourier-transform-is-unitary",
+        "kind": "theorem",
+        "title": "Finite abelian Fourier transform is unitary",
+        "statement": "Let $N_{\\mathbb R}$ be the canonical positive real image of $|G|$ from [[def-qa-normalized-finite-abelian-fourier-transform]]. Define the finite coefficient matrix $U$, with rows indexed by $\\widehat G$ and columns by $G$, by\n$$U_{\\chi,x}=N_{\\mathbb R}^{-1/2}\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G,\\ x\\in G.$$\nIt is square and satisfies $U^*U=I_G$ and $UU^*=I_{\\widehat G}$, where $U^*$ is the conjugate transpose and $I_X$ is the identity matrix indexed by $X$, with $(I_X)_{x,y}=1$ when $x=y$ and $0$ otherwise. These two identities are the meaning of “unitary” here.",
+        "deps": [
+          "def-qa-normalized-finite-abelian-fourier-transform",
+          "thm-qa-finite-abelian-dual-character-orthogonality",
+          "lem-additive-character-orthogonality-from-representation-orthogonality",
+          "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "lem-finite-sum-reindexing-and-fubini",
+          "def-rational-power",
+          "lem-rational-power-laws"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-fourier-convolution",
+        "kind": "theorem",
+        "title": "Fourier transform of unnormalized convolution",
+        "statement": "For a finite abelian group $G$, $f,g:G\\to\\mathbb C$, and $\\chi\\in\\widehat G$, put $N_{\\mathbb R}:=\\iota_{\\mathbb R}(|G|)$. With the transform and unnormalized convolution defined above,\n$$F_G(f*g)(\\chi)=N_{\\mathbb R}^{1/2}(F_Gf)(\\chi)(F_Gg)(\\chi).$$\nThus the factor is $\\sqrt{|G|}$, not $1$ or $|G|$, for this pair of conventions.",
+        "deps": [
+          "def-qa-finite-abelian-convolution",
+          "def-qa-normalized-finite-abelian-fourier-transform",
+          "def-additive-character-of-a-finite-abelian-group",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-rational-power-laws"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-evaluation-map-isomorphism",
+        "kind": "theorem",
+        "title": "Finite abelian group is canonically isomorphic to its double dual",
+        "statement": "For a finite abelian group $G$, give $\\widehat G$ its pointwise multiplication. Its dual $\\widehat{\\widehat G}$ consists of functions $\\Phi:\\widehat G\\to\\mathbb C^{\\times}$ satisfying $\\Phi(\\chi\\psi)=\\Phi(\\chi)\\Phi(\\psi)$. The evaluation map\n$$\\operatorname{ev}:G\\longrightarrow\\widehat{\\widehat G},\\qquad \\operatorname{ev}(g)(\\chi):=\\chi(g),$$\nis a group isomorphism. The map itself is canonical; a decomposition into cyclic factors is used only to prove it is injective.",
+        "deps": [
+          "def-qa-finite-abelian-character-dual",
+          "def-additive-character-of-a-finite-abelian-group",
+          "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+          "lem-qa-character-dual-of-a-product-factors",
+          "lem-qa-cyclic-group-has-n-characters",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "thm-subset-of-a-finite-set",
+          "def-finite-cardinality",
+          "def-group-isomorphism-and-automorphism"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-coset-fourier-transform",
+        "kind": "theorem",
+        "title": "Fourier transform of a subgroup coset indicator",
+        "statement": "Let $G$ be finite abelian, $H\\le G$, and $x_0\\in G$. Put $N:=|G|$, $M:=|H|$, and $Q:=|H^\\perp|$, which is finite by [[thm-qa-finite-abelian-subgroup-annihilator-cardinality]]. Write $N_{\\mathbb R}:=\\iota_{\\mathbb R}(N)$, $M_{\\mathbb R}:=\\iota_{\\mathbb R}(M)$, and $Q_{\\mathbb R}:=\\iota_{\\mathbb R}(Q)$ for their canonical real images, as in [[def-qa-normalized-finite-abelian-fourier-transform]]. These are positive since $G$ and $H$ contain their identities and $H^\\perp$ contains the trivial character, and they are viewed in $\\mathbb C$ through its embedded copy of $\\mathbb R$. For the indicator $1_{x_0+H}$,\n$$F_G1_{x_0+H}(\\chi)=\\begin{cases}M_{\\mathbb R}N_{\\mathbb R}^{-1/2}\\overline{\\chi(x_0)},&\\chi\\in H^\\perp,\\\\0,&\\chi\\notin H^\\perp.\\end{cases}$$\nConsequently, the normalized uniform-coset function $M_{\\mathbb R}^{-1/2}1_{x_0+H}$ transforms to the function supported on $H^\\perp$ with value $M_{\\mathbb R}^{1/2}N_{\\mathbb R}^{-1/2}\\overline{\\chi(x_0)}=Q_{\\mathbb R}^{-1/2}\\overline{\\chi(x_0)}$ there. The unnormalized indicator amplitude and normalized-state amplitude are distinct.",
+        "deps": [
+          "def-qa-normalized-finite-abelian-fourier-transform",
+          "def-qa-finite-abelian-subgroup-annihilator",
+          "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+          "lem-additive-character-orthogonality-from-representation-orthogonality",
+          "lem-qa-finite-character-values-have-unit-modulus",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-rational-power",
+          "lem-rational-power-well-defined",
+          "lem-rational-power-laws"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-fourier-inversion",
+        "kind": "theorem",
+        "title": "Finite abelian Fourier inversion",
+        "statement": "For every $f:G\\to\\mathbb C$ and $x\\in G$,\n$$f(x)=N_{\\mathbb R}^{-1/2}\\sum_{\\chi\\in\\widehat G}(F_Gf)(\\chi)\\chi(x),\\qquad N_{\\mathbb R}:=\\iota_{\\mathbb R}(|G|).$$\nThus the inverse uses the positive character rather than its conjugate.",
+        "deps": [
+          "thm-qa-finite-abelian-fourier-transform-is-unitary",
+          "def-qa-normalized-finite-abelian-fourier-transform"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-parseval",
+        "kind": "theorem",
+        "title": "Finite abelian Parseval identity",
+        "statement": "For $f,g:G\\to\\mathbb C$,\n$$\\sum_{\\chi\\in\\widehat G}(F_Gf)(\\chi)\\overline{(F_Gg)(\\chi)}=\\sum_{x\\in G}f(x)\\overline{g(x)}.$$\nFor a finite set $X$, the counting inner product on $\\mathbb C^X$ is $\\langle f,g\\rangle_X:=\\sum_{x\\in X}f(x)\\overline{g(x)}$; it is linear in the first argument. The displayed identity says this inner product is preserved.",
+        "deps": [
+          "thm-qa-finite-abelian-fourier-transform-is-unitary",
+          "def-qa-normalized-finite-abelian-fourier-transform"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-qa-finite-abelian-double-annihilator",
+        "kind": "theorem",
+        "title": "Double annihilator returns the subgroup",
+        "statement": "Let $G$ be a finite abelian group and $H\\le G$. Under the canonical evaluation identification $G\\cong\\widehat{\\widehat G}$,\n$$(H^\\perp)^\\perp=H.$$",
+        "deps": [
+          "def-qa-finite-abelian-subgroup-annihilator",
+          "def-subgroup",
+          "lem-qa-finite-abelian-annihilators-are-subgroups",
+          "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+          "thm-qa-finite-abelian-evaluation-map-isomorphism",
+          "thm-subset-of-a-finite-set"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2223,
+    "id": "finite-abelian-fourier-analysis-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Finite Abelian Fourier Analysis — Examples",
+    "companion": "finite-abelian-fourier-analysis",
+    "requires": [
+      "finite-abelian-fourier-analysis"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-finite-abelian-fourier-tables-and-convolution",
+        "kind": "example",
+        "title": "Finite abelian Fourier and convolution examples",
+        "statement": "Write $C_n=\\mathbb Z/n\\mathbb Z$ additively, let $\\omega_n:=\\exp(2\\pi i/\\iota_{\\mathbb R}(n))$ for $n\\in\\{2,3,4\\}$, and put $\\omega:=\\omega_3$, $\\eta:=\\omega_4$. Define $\\delta_{r,s}=1$ when the indicated residue labels are equal and $0$ otherwise. Character tables have characters indexing rows and group elements indexing columns:\n$$T_{C_2}=\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad T_{C_3}=\\begin{pmatrix}1&1&1\\\\1&\\omega&\\omega^2\\\\1&\\omega^2&\\omega\\end{pmatrix},\\qquad T_{C_4}=\\begin{pmatrix}1&1&1&1\\\\1&\\eta&-1&-\\eta\\\\1&-1&1&-1\\\\1&-\\eta&-1&\\eta\\end{pmatrix}$$\n\nFor $C_2\\times C_3$, order columns by $(0,0),(0,1),(0,2),(1,0),(1,1),(1,2)$ and rows by $(0,0),(0,1),(0,2),(1,0),(1,1),(1,2)$. Its table is\n$$T_{C_2\\times C_3}=\\begin{pmatrix}1&1&1&1&1&1\\\\1&\\omega&\\omega^2&1&\\omega&\\omega^2\\\\1&\\omega^2&\\omega&1&\\omega^2&\\omega\\\\1&1&1&-1&-1&-1\\\\1&\\omega&\\omega^2&-1&-\\omega&-\\omega^2\\\\1&\\omega^2&\\omega&-1&-\\omega^2&-\\omega\\end{pmatrix}$$\n\nFor $C_2\\times C_2$, order rows and columns by $(0,0),(0,1),(1,0),(1,1)$. Its table is\n$$T_{C_2\\times C_2}=\\begin{pmatrix}1&1&1&1\\\\1&-1&1&-1\\\\1&1&-1&-1\\\\1&-1&-1&1\\end{pmatrix}$$\n\nIn each table the Fourier matrix uses the conjugate of the displayed character entry and divides by the square root of the group order, as in [[def-qa-normalized-finite-abelian-fourier-transform]]. Scalar powers of $|G|$ mean powers of its canonical positive real image from that definition.",
+        "deps": [
+          "def-additive-character-of-a-finite-abelian-group",
+          "def-subgroup",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "def-qa-finite-abelian-character-dual",
+          "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "def-qa-normalized-finite-abelian-fourier-transform",
+          "def-qa-finite-abelian-convolution",
+          "def-qa-finite-abelian-subgroup-annihilator",
+          "lem-qa-cyclic-group-has-n-characters",
+          "lem-qa-character-dual-of-a-product-factors",
+          "prop-order-of-finite-direct-product",
+          "thm-product-rule",
+          "lem-qa-finite-character-values-have-unit-modulus",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-numbers-form-a-field"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, version 6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms",
+              "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

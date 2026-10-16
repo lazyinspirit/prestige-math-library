@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "53",
+  "round": 1,
+  "reviewed_items": [
+    "def-qa-29-expectation-estimation-task",
+    "lem-qa-29-independent-trial-median-bound",
+    "lem-qa-29-certified-natural-logarithm-series",
+    "lem-qa-29-dyadic-parameters-terminate",
+    "thm-qa-29-classical-mc-chebyshev-baseline",
+    "thm-qa-29-counting-is-indicator-expectation",
+    "def-qa-29-coherent-sampler",
+    "lem-qa-29-coherent-sampler-outcome-law",
+    "alg-qa-29-amplitude-counting-consumer",
+    "alg-qa-29-quantum-expectation-estimation",
+    "alg-qa-29-variance-aware-monte-carlo",
+    "thm-qa-29-quantum-expectation-error-cost",
+    "lem-qa-29-positive-mean-dyadic-estimator",
+    "thm-qa-29-variance-aware-guarantee",
+    "thm-qa-29-coherent-query-cost-translation",
+    "cex-qa-29-unavailable-coherent-sampler",
+    "ex-qa-29-bernoulli-expectation"
+  ],
+  "reviewed_pages": [
+    "quantum-sampling-expectation-and-monte-carlo",
+    "quantum-sampling-expectation-and-monte-carlo-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The six review-0 findings are repaired, and the listed in-batch repair consumers check out. Escalation remains for a narrowing of the approved PositiveMean input scope, a missing definition-level well-definedness link, and an unparameterized estimator call in an out-of-batch consumer.",
+  "findings": [
+    {
+      "id": "lem-qa-29-positive-mean-dyadic-estimator",
+      "type": "scope",
+      "reason": "Approved OP3 gives PositiveMean the domain 0<a<1/2, while the current algorithm and lemma restrict it to 0<a≤1/64. The variance algorithm's actual call is within that narrower range, but the approved subroutine scope is reduced."
+    },
+    {
+      "id": "alg-qa-29-variance-aware-monte-carlo",
+      "type": "local",
+      "reason": "The Definition uses dyadic searches and certified logarithm loops whose termination is established by lem-qa-29-dyadic-parameters-terminate and lem-qa-29-certified-natural-logarithm-series, but justified_by is empty despite the required definition-level well-definedness links."
+    },
+    {
+      "id": "alg-qa-30-sdp-matrix-expectation-oracle",
+      "type": "outside-batch",
+      "reason": "Its final instruction invokes alg-qa-29-quantum-expectation-estimation without specifying rational accuracy and failure inputs or estimator output. Clarify whether this item only constructs the sampler or parameterize the estimator call."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-qa-29-positive-mean-dyadic-estimator",
+      "decision": "accept",
+      "reason": "The finite-law expectation bridge is now explicit for the Holder application; the variance algorithm's current PositiveMean call is within the stated 1/64 bound."
+    },
+    {
+      "id": "thm-qa-29-variance-aware-guarantee",
+      "decision": "accept",
+      "reason": "The proof now states the fresh residual draw conditional on the coarse value and explicitly bridges the finite sampler law to the general expectation and Chebyshev suppliers."
+    },
+    {
+      "id": "thm-qa-29-coherent-query-cost-translation",
+      "decision": "accept",
+      "reason": "The revised accounting includes heterogeneous value-rotated samplers and the separate coarse unrotated preparations."
+    },
+    {
+      "id": "quantum-sampling-expectation-and-monte-carlo",
+      "decision": "accept",
+      "reason": "Its current summary matches the repaired amplitude-counting parameter and fresh-residual procedure."
+    },
+    {
+      "id": "quantum-sampling-expectation-and-monte-carlo-examples",
+      "decision": "accept",
+      "reason": "Its examples remain consistent with the current sampler definition and require the reviewed A page."
+    },
+    {
+      "id": "alg-qa-30-sdp-matrix-expectation-oracle",
+      "decision": "escalate",
+      "reason": "The estimator invocation has no stated accuracy or failure inputs; the out-of-batch definition needs owner reconciliation."
+    },
+    {
+      "id": "thm-qa-30-sdp-matrix-expectation-cost",
+      "decision": "accept",
+      "reason": "This theorem independently supplies tolerance τ/2 and failure δ to the QA29 guarantee, and the normalized-observable lemma proves the signed sampler mean."
+    },
+    {
+      "id": "quantum-optimization-sdp-and-variational-algorithms",
+      "decision": "escalate",
+      "reason": "The page includes the out-of-batch matrix-expectation algorithm whose QA29 estimator invocation is unparameterized."
+    },
+    {
+      "id": "quantum-optimization-sdp-and-variational-algorithms-examples",
+      "decision": "accept",
+      "reason": "Its current examples do not invoke the QA29 estimator or the changed variance-aware procedure."
+    }
+  ]
+}

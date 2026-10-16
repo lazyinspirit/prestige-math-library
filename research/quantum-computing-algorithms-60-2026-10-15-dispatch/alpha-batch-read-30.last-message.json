@@ -1,0 +1,353 @@
+{
+  "group": "b",
+  "batches": ["30"],
+  "pages_read": [
+    "quantum-fourier-transform-circuits",
+    "quantum-fourier-transform-circuits-examples"
+  ],
+  "items_read": [
+    "thm-qa-projective-operator-closeness-bounds-output-distribution",
+    "lem-qa-pi-over-two-exceeds-sqrt-two",
+    "def-qa-cyclic-quantum-fourier-transform",
+    "lem-qa-binary-qft-product-factorization",
+    "lem-qa-tensor-extension-preserves-operator-norm",
+    "lem-qa-swap-is-three-cnot-circuit",
+    "def-qa-qft-gate-cost-model",
+    "alg-qa-exact-binary-qft-circuit",
+    "thm-qa-exact-binary-qft-circuit-correct",
+    "thm-qa-exact-binary-qft-gate-count",
+    "alg-qa-truncated-binary-qft-circuit",
+    "thm-qa-truncated-qft-operator-norm-error",
+    "thm-qa-truncated-qft-gate-count",
+    "thm-qa-qft-finite-gate-set-compile-cost",
+    "ex-qa-qft-fourier-circuit-order-and-truncation"
+  ],
+  "conventions": [
+    {
+      "convention": "QFT_N is the inverse of the negative-sign, N^(-1/2)-normalized DFT, so its basis kernel has positive exponent 2πixy/N. QFT_1 is the identity.",
+      "fixed_by": "def-qa-cyclic-quantum-fourier-transform",
+      "matters_for": [
+        "lem-qa-binary-qft-product-factorization",
+        "alg-qa-exact-binary-qft-circuit",
+        "thm-qa-exact-binary-qft-circuit-correct",
+        "ex-qa-qft-fourier-circuit-order-and-truncation"
+      ]
+    },
+    {
+      "convention": "Wire order is q_(n-1), …, q_0, with integer x = Σ x_j 2^j. Targets are processed in descending j; each Hadamard precedes its lower-control phases; reversal swaps occur last.",
+      "fixed_by": "alg-qa-exact-binary-qft-circuit",
+      "matters_for": [
+        "thm-qa-exact-binary-qft-circuit-correct",
+        "thm-qa-exact-binary-qft-gate-count",
+        "alg-qa-truncated-binary-qft-circuit",
+        "ex-qa-qft-fourier-circuit-order-and-truncation"
+      ]
+    },
+    {
+      "convention": "The integer cutoff m is at least one; phases CP_s are omitted exactly when s > m. Hadamards and reversal swaps remain. If m ≥ n, truncation is exact.",
+      "fixed_by": "alg-qa-truncated-binary-qft-circuit",
+      "matters_for": [
+        "thm-qa-truncated-qft-operator-norm-error",
+        "thm-qa-truncated-qft-gate-count",
+        "thm-qa-qft-finite-gate-set-compile-cost",
+        "ex-qa-qft-fourier-circuit-order-and-truncation"
+      ]
+    },
+    {
+      "convention": "Each ideal Hadamard, exact controlled phase, and named SWAP costs one gate. Expanding a SWAP replaces it with three exact CNOTs. Finite-set synthesis is counted separately.",
+      "fixed_by": "def-qa-qft-gate-cost-model",
+      "matters_for": [
+        "thm-qa-exact-binary-qft-gate-count",
+        "thm-qa-truncated-qft-gate-count",
+        "thm-qa-qft-finite-gate-set-compile-cost",
+        "ex-qa-qft-fourier-circuit-order-and-truncation"
+      ]
+    },
+    {
+      "convention": "Total variation is one half of the sum of absolute probability differences. Projective operator distance is infimum over unit scalars of ||U − λV||; measurement guarantees concern unit inputs and computational-basis output laws.",
+      "fixed_by": "thm-qa-projective-operator-closeness-bounds-output-distribution",
+      "matters_for": [
+        "thm-qa-qft-finite-gate-set-compile-cost"
+      ]
+    },
+    {
+      "convention": "Finite-set compilation assumes a fixed certified inverse-closed dense SU(2) package, rational tolerances within its exact-real compiler range, and exact CNOTs. Scalar phases become metadata for the standalone circuit; no outer-controlled-QFT or classical bit-time guarantee is asserted.",
+      "fixed_by": "thm-qa-qft-finite-gate-set-compile-cost",
+      "matters_for": [
+        "thm-qa-qft-finite-gate-set-compile-cost"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-qa-binary-qft-product-factorization",
+      "statement": "For n ≥ 0 and binary input x = Σ x_i2^i, set R_j = 2^(-1/2)(|0⟩ + exp(2πi Σ_(i=0)^j x_i2^(-(j-i+1)))|1⟩). In wire order q_(n-1), …, q_0, QFT_(2^n)|x⟩ is R_0 ⊗ … ⊗ R_(n-1); before final reversal the factors are R_(n-1) ⊗ … ⊗ R_0. The n = 0 case is the empty tensor 1.",
+      "used_by": [
+        "alg-qa-exact-binary-qft-circuit",
+        "thm-qa-exact-binary-qft-circuit-correct"
+      ]
+    },
+    {
+      "id": "thm-qa-exact-binary-qft-circuit-correct",
+      "statement": "For every n ≥ 0, the exact binary circuit implements the positive-sign QFT_(2^n) in the declared output order on every state. Reversing the gate list and taking adjoints gives the negative-sign inverse QFT with the same ideal gate count.",
+      "used_by": [
+        "thm-qa-truncated-qft-operator-norm-error",
+        "alg-qa-quantum-phase-estimation",
+        "lem-qa-phase-estimation-outcome-kernel",
+        "thm-qa-phase-estimation-superposition-law",
+        "lem-qa-30-finite-grid-quantum-subgradient"
+      ]
+    },
+    {
+      "id": "lem-qa-tensor-extension-preserves-operator-norm",
+      "statement": "For nonzero finite-dimensional complex inner-product spaces S,R with specified orthonormal bases and linear T:S→S, ||T ⊗ I_R|| = ||T||. Conjugating an endomorphism A by a unitary wire permutation P preserves its operator norm.",
+      "used_by": [
+        "thm-qa-truncated-qft-operator-norm-error",
+        "thm-qa-qft-finite-gate-set-compile-cost"
+      ]
+    },
+    {
+      "id": "thm-qa-truncated-qft-operator-norm-error",
+      "statement": "For n ≥ 1 and integers 1 ≤ m < n, ||QFT_(2^n) − QFT_(2^n)^(m)|| ≤ Σ_(s=m+1)^n (n−s+1)2π/2^s ≤ 2πn2^(-m). For m ≥ n the error is zero. For 0 < ε < 1, m = min{n, ceil(log_2(2πn/ε))} gives error at most ε.",
+      "used_by": [
+        "thm-qa-truncated-qft-gate-count",
+        "thm-qa-qft-finite-gate-set-compile-cost",
+        "ex-qa-qft-fourier-circuit-order-and-truncation"
+      ]
+    },
+    {
+      "id": "thm-qa-projective-operator-closeness-bounds-output-distribution",
+      "statement": "For unitaries U,V on a nonzero finite-dimensional complex inner-product space with fixed orthonormal computational basis, a unit input ψ, and ε ≥ 0, d_pr(U,V) ≤ ε implies d_TV(p_U^ψ,p_V^ψ) ≤ ε.",
+      "used_by": [
+        "thm-qa-qft-finite-gate-set-compile-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-swap-is-three-cnot-circuit",
+      "statement": "On two ordered qubit wires, S = C_12 C_21 C_12, where products act right to left. Thus a wire swap has an exact three-CNOT implementation without ancillas.",
+      "used_by": [
+        "thm-qa-exact-binary-qft-gate-count",
+        "thm-qa-truncated-qft-gate-count",
+        "thm-qa-qft-finite-gate-set-compile-cost",
+        "ex-qa-qft-fourier-circuit-order-and-truncation"
+      ]
+    },
+    {
+      "id": "thm-qa-exact-binary-qft-gate-count",
+      "statement": "For n ≥ 0, the exact circuit uses n Hadamards, n(n−1)/2 controlled phases, floor(n/2) SWAPs, and no ancillas. Expanding the SWAPs replaces them with 3 floor(n/2) CNOTs.",
+      "used_by": [
+        "thm-qa-phase-estimation-access-cost"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-inner-product-space",
+      "used_for": "Complex inner-product spaces and the linear-first convention in the output-distribution estimate.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+      "used_for": "The fixed orthonormal computational basis.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "The definition of a unitary as an invertible linear isometry.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Coordinate squared moduli define finite probability laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-finite",
+      "used_for": "Bounding total variation by the Euclidean distance of output vectors.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Maximum-over-unit-vectors norm and its zero-domain convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-isometry-characterisations",
+      "used_for": "Unitary norm preservation and adjoint inverses.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Phase invariance, modulus estimates, determinant-root normalization, and the finite example.",
+      "opened": true
+    },
+    {
+      "id": "thm-bessel-inequality-and-finite-parseval-identity",
+      "used_for": "Coordinate norm identities and the omitted phase's operator norm.",
+      "opened": true
+    },
+    {
+      "id": "cor-inner-product-induces-a-norm",
+      "used_for": "Absolute homogeneity in the projective measurement estimate.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "Identifying π/2 with the first positive cosine zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-cosine-has-a-smallest-positive-zero",
+      "used_for": "Existence and location of that zero in (0,2).",
+      "opened": true
+    },
+    {
+      "id": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+      "used_for": "Strict cosine decrease in the proof that √2 < π/2.",
+      "opened": true
+    },
+    {
+      "id": "def-sine-and-cosine-by-power-series",
+      "used_for": "The alternating cosine tail at √2.",
+      "opened": true
+    },
+    {
+      "id": "thm-alternating-series-test",
+      "used_for": "Bracketing the cosine tail by consecutive partial sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-cauchy-complete",
+      "used_for": "The complete real-field interface used with square roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "The nonnegative square root √2.",
+      "opened": true
+    },
+    {
+      "id": "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "used_for": "Negative-sign, unitary-normalized DFT convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-fourier-inversion",
+      "used_for": "Existence and positive-sign formula for the inverse transform.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Tensor/permutation estimates and telescoping circuit error bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Deriving the operator-norm triangle inequality used in error accumulation.",
+      "opened": true
+    },
+    {
+      "id": "cor-sine-and-cosine-are-one-lipschitz",
+      "used_for": "The estimate |sin(t/2)| ≤ |t|/2.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "The value sin(0) = 0.",
+      "opened": true
+    },
+    {
+      "id": "thm-double-angle-and-power-reduction-identities",
+      "used_for": "The identity |1−exp(it)|² = 4 sin²(t/2).",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Euler's formula and unit modulus of real-angle phases.",
+      "opened": true
+    },
+    {
+      "id": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+      "used_for": "Unit modulus of one-qubit unitary determinants in SU(2) normalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-every-complex-number-has-a-square-root",
+      "used_for": "Selecting a square root of each one-qubit determinant.",
+      "opened": true
+    },
+    {
+      "id": "thm-eulers-formula",
+      "used_for": "Evaluating the N = 4 Fourier phases.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "The values i, −1, and −i in the finite Fourier matrix.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Expressing the finite example's phases as powers of i.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-qa-tensor-extension-preserves-operator-norm",
+      "concern": "Proof 3.1 says, “P and P^{-1} preserve norms, so each has operator norm 1.” The permutation clause permits any finite ordered tensor register, and its cited tensor-register definition explicitly permits a zero-dimensional factor. On the resulting zero space both norms are 0 under the cited operator-norm definition. The conjugation equality remains true there, but the proof needs the immediate zero-space case or bounds by 1 instead of the asserted equalities.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "Compilation preserves the certified base-net, inverse-closure, SU(2), rational-tolerance and exact-real hypotheses; it uses the word-length bound without claiming bit complexity or outer-controlled phase invariance."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Ket and coordinate uses respect the root linear-first pairing and the Dirac argument reversal."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Big-endian indices, lexicographic tensor order, factor permutations, and the empty register agree. The minor zero-space proof issue is recorded separately in concerns."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled phases use the exact control-first diagonal matrix; CNOT orientations and inverse chronology agree. The compilation caveat respects the controlled relative-phase distinction."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "The Hadamard matrix and its basis action retain the supplier's exact scalar phase."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Chronological lists denote right-to-left products of gates embedded on distinct ordered wires. Counts distinguish named gates, workspace and explicitly available operations."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "quantum-fourier-transform-circuits",
+      "faithful": true,
+      "note": "The algorithm reverses and adjoints the positive-sign QFT, producing the negative kernel used in the outcome and superposition formulas. Its access-cost theorem quotes the exact ideal gate counts faithfully."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "quantum-fourier-transform-circuits",
+      "faithful": true,
+      "note": "The finite-grid subgradient lemma uses the negative-sign inverse on power-of-two coordinate registers, consistently with its positive phase encoding. QFT gate costs remain separate from its value-query count."
+    }
+  ]
+}

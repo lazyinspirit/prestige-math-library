@@ -1,0 +1,2204 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-finite-rational-legendre-criterion",
+    "lem-qa-rational-reconstruction-candidate-uniqueness",
+    "lem-qa-totient-ratio-logarithmic-lower-bound",
+    "thm-qa-rational-reconstruction-correctness",
+    "thm-qa-modular-multiplication-circuit-correctness",
+    "thm-qa-modular-arithmetic-cost",
+    "thm-qa-modular-order-finding-success",
+    "thm-qa-rational-reconstruction-bit-cost",
+    "thm-qa-modular-order-finding-cost",
+    "ex-qa-rational-reconstruction-boundary",
+    "ex-qa-order-finding-noncoprime-phase"
+  ],
+  "contracts": {
+    "lem-qa-finite-rational-legendre-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rational-continued-fraction-termination",
+          "source_section": "Statement",
+          "quote": "For a real number $\\alpha$, the continued-fraction algorithm terminates if and\nonly if $\\alpha$ is rational. When $\\alpha$ is rational, the continued-fraction\ndigits are exactly the successive quotient digits of the Euclidean algorithm.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-normalized-finite-continued-fraction-uniqueness",
+          "source_section": "Statement",
+          "quote": "Every rational number has a unique **normalized** finite regular continued\nfraction: either the expansion has length $0$, or its last digit is at least\n$2$. If the rational is not an integer, then it has exactly one other finite\nregular continued-fraction expansion, obtained by replacing the last digit\n$a_n\\ge2$ by the pair $a_n-1,1$. An integer $m$ has exactly the two expansions\n$[m]$ and $[m-1;1]$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-convergent-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,\\ldots,a_n]$ be a finite regular continued fraction, and let\n$p_k,q_k$ be its convergent numerators and denominators as in\n[[def-convergents-of-regular-continued-fraction]]. Then\n$$[a_0; a_1,\\ldots,a_n] = \\frac{p_n}{q_n}.$$\n\nMore generally, for every real $t > 0$ one has\n$$[a_0; a_1,\\ldots,a_n,t] = \\frac{t p_n + p_{n-1}}{t q_n + q_{n-1}},$$\nwhere $[a_0; a_1,\\ldots,a_n,t]$ means the finite continued fraction obtained by\nappending the last tail $t$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-complete-quotient-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number, let $a_n$ and $\\alpha_n$ be its continued-fraction\ndigits and complete quotients, and let $p_n/q_n$ be the convergents attached to\n$a_0,a_1,\\ldots$. Whenever $\\alpha_{n+1}$ is defined,\n$$\\alpha = \\frac{\\alpha_{n+1}p_n + p_{n-1}}{\\alpha_{n+1}q_n + q_{n-1}}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "2.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "2.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coprime",
+          "source_section": "Definition",
+          "quote": "Integers $a$ and $b$ are **coprime**, or **relatively prime**, when\n\n$$\\gcd(a,b) \\;=\\; 1$$\n\n([[def-common-divisor-and-gcd]]). The relation is symmetric, since\n$\\gcd(a,b) = \\gcd(b,a)$ ([[lem-gcd-basic-values]]), and unchanged by signs, since\n$\\gcd(a,b) = \\gcd(|a|,|b|)$.\n\n**Boundary values.** $\\mathbb{N}$ contains $0$ and $\\mathbb{Z}$ contains $0$ and\n$1$, so the three degenerate pairs are recorded explicitly, each read off\n[[lem-gcd-basic-values]]:\n\n- $a$ and $1$ are coprime for **every** integer $a$, since $\\gcd(a,1) = 1$;\n  in particular $0$ and $1$ are coprime.\n- $0$ and $b$ are coprime exactly when $b = 1$ or $b = -1$. Indeed\n  $\\gcd(0,b) = \\gcd(b,0) = |b|$, so coprimality says $|b| = 1$, and by\n  [[lem-int-abs-properties]] together with the case split of [[def-int-abs]] this\n  holds exactly for $b = 1$ and $b = -1$, the two units of $\\mathbb{Z}$\n  ([[lem-units-of-z]]).\n- $0$ and $0$ are **not** coprime, since $\\gcd(0,0) = 0$ by the convention of\n  [[def-common-divisor-and-gcd]], and $0 \\ne 1$: if $1$ were $0$ then\n  $-1 = -0 = 0 = 1$, contradicting the two units being distinct\n  ([[lem-units-of-z]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-coprime-divides-product",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c \\in \\mathbb{Z}$.\n\n1. If $\\gcd(a,b) = 1$ and $a \\mid bc$, then $a \\mid c$.\n2. If $a \\mid c$, $b \\mid c$ and $\\gcd(a,b) = 1$, then $ab \\mid c$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rat-triangle",
+          "source_section": "Statement",
+          "quote": "For $x \\in \\mathbb{Q}$ set $|x| = x$ if $x \\ge 0$ and $|x| = -x$\notherwise. Then $|xy| = |x|\\,|y|$, $|x + y| \\le |x| + |y|$, and\n$\\bigl||x| - |y|\\bigr| \\le |x - y|$.\n\nThe proof uses only the axioms of a totally ordered field, so it applies\nverbatim to any such field (in particular to $\\mathbb{R}$ once constructed).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], write $A/D=[a_0;\\ldots,a_s]$ in normalized finite form. Since $D>2q\\ge2$, $A/D$ is not an integer, so $s\\ge1$. Its terminal convergent equals $A/D$ by [F1] and [F2]. By [F3], any common divisor of $p_s,q_s$ divides $1$, so this pair is coprime. Cross multiplication gives $Aq_s=p_sD$. Since $\\gcd(A,D)=1$, [F5] gives $D\\mid q_s$; since $\\gcd(p_s,q_s)=1$, it also gives $q_s\\mid D$. Both denominators are positive, so they are equal: $q_s=D$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $q=1$, then $p$ is an integer and $|A/D-p|<1/2$. Put $a_0=\\lfloor A/D\\rfloor$ and $e:=A/D-a_0\\in(0,1)$. The only possible such integers are $a_0$ and $a_0+1$. The first is the zeroth convergent. If $p=a_0+1$, then $e>1/2$, hence $a_1=\\lfloor1/e\\rfloor=1$; the recurrence in [F2] gives $p_1/q_1=(a_0+1)/1$. Thus $p/q$ is a convergent.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $q\\ge2$. Since $q<D=q_s$, choose the largest $j$ with $q_j\\le q$. Then $0\\le j<s$; the only repeated initial denominator can be $q_0=q_1=1$, so $q_j>0$ and $s_0:=q_{j-1}/q_j$ lies in $[0,1]$ (with $q_{-1}=0$ when $j=0$). Put $T=a_{j+1}$ if $j+1=s$, and otherwise let $T$ be the complete quotient after the prefix. By [F4], $T\\ge a_{j+1}$, and $x:=q/q_j$ satisfies $1\\le x<a_{j+1}+s_0\\le T+s_0=:L$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $\\varepsilon=p_jq_{j-1}-p_{j-1}q_j=\\pm1$ by [F3]. The integers $u=\\varepsilon(q_{j-1}p-p_{j-1}q)$ and $v=\\varepsilon(p_jq-q_jp)$ satisfy $(p,q)=u(p_j,q_j)+v(p_{j-1},q_{j-1})$ by expansion and $\\varepsilon^2=1$; hence $x=u+vs_0$. Cross multiplication using the tail formula [F2] gives $\\frac pq-\\frac AD=\\frac{(up_j+vp_{j-1})(Tq_j+q_{j-1})-(Tp_j+p_{j-1})(uq_j+vq_{j-1})}{q(Tq_j+q_{j-1})}=\\frac{\\varepsilon(u-vT)}{q_j^2xL}$. Since $q=xq_j$, it follows that $q^2|A/D-p/q|=x|u-vT|/L$. Finally $L=T+s_0$ and $x=u+vs_0$, so $u-vT=x-vL$ and $q^2|A/D-p/q|=x|x-vL|/L$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The hypothesis makes the expression in step 3.1 less than $1/2$. If $v\\le-1$, then $|x-vL|\\ge x+L$, so $x|x-vL|/L>x\\ge1$. If $v\\ge2$, then $|x-vL|\\ge2L-x>L$ because $x<L$, so again $x|x-vL|/L>x\\ge1$. Both alternatives are impossible.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "If $v=1$, then $u=x-s_0$ is an integer. If $s_0<1$, $x\\ge1$ implies $u>0$; if $s_0=1$, then $j\\ge1$ and $q_j=q_{j-1}=1$, while $q\\ge2$ forces $x\\ge2$. Thus $u\\ge1$. Also $q<q_{j+1}$ implies $u<a_{j+1}$, so $L-x=T-u\\ge1$. Hence $x(L-x)/L\\ge x/(x+1)\\ge1/2$, contradicting the strict hypothesis. Thus $v\\ne1$.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F4",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The alternatives $v\\le-1$, $v\\ge2$, and $v=1$ were excluded in steps 4.1–4.2, so $v=0$. Then $(p,q)=u(p_j,q_j)$, hence $p/q=p_j/q_j$ and $p/q$ is the $j$th convergent. The proof includes the terminal case $j+1=s$ because only $T\\ge a_{j+1}$ was used, allowing equality at the terminal tail.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "D>2q>0 excludes an integer input and forces a nonempty finite continued fraction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The q=1 integer-part case, including p=0, is proved in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles denominator q=1 and a possible first partial quotient 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 records and handles the repeated initial denominator q0=q1=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The terminal denominator is identified in step 1.1 and terminal-tail equality is allowed in step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses the largest index in a finite nonempty denominator list."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a one-way implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse is not asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite-rational-prefix-example",
+          "input": "A/D=3/8, p/q=1/3",
+          "expected": "3/8=[0;2,1,2] contains 1/3; D=8>6 and |3/8−1/3|=1/24<1/18",
+          "status": "finite continued-fraction and integer comparison checked directly"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked all seven steps against the current finite CF definitions, recurrence, determinant, tail, termination and normalization suppliers. Terminal q_s=D follows from reducedness both ways. For q=1 the two possible integers are handled; for q>=2 largest j excludes the terminal denominator and permits the initial repeated 1. In unimodular coordinates x|x-vL|/L<1/2 rules out v<=-1 and v>=2; v=1 has integral u>=1 and L-x>=1, giving >=1/2. Thus v=0. Negative A and terminal T=a are allowed; no AC or limiting theorem used."
+      }
+    },
+    "lem-qa-rational-reconstruction-candidate-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-common-divisor-and-gcd",
+          "source_section": "Definition",
+          "quote": "Let $a, b \\in \\mathbb{Z}$. An integer $d$ is a **common divisor** of $a$ and $b$\nwhen $d \\mid a$ and $d \\mid b$ ([[def-divides-in-z]]). Write\n\n$$D(a,b) \\;:=\\; \\{\\, d \\in \\mathbb{Z} \\;:\\; d \\mid a \\ \\text{ and } \\ d \\mid b \\,\\}$$\n\nfor the set of common divisors.\n\n**Case $(a,b) \\ne (0,0)$: the greatest element exists.** $D(a,b)$ is nonempty,\nsince $1 \\mid a$ and $1 \\mid b$ for every $a$ and $b$ ([[def-divides-in-z]]). It\nis bounded above: at least one of $a$ and $b$ is nonzero, say $a \\ne 0$ (if\ninstead $b \\ne 0$, argue with $b$ throughout), and every $d \\in D(a,b)$ divides\n$a$, so $d \\le |a|$ by [[lem-divisor-bound]]. A nonempty set of integers bounded\nabove has a unique greatest element ([[lem-int-bounded-above-has-greatest]]), and\nwe define\n\n$$\\gcd(a,b) \\;:=\\; \\text{the greatest element of } D(a,b).$$\n\nSince $1 \\in D(a,b)$ and $\\gcd(a,b)$ is greatest, $\\gcd(a,b) \\ge 1$; in\nparticular $\\gcd(a,b) > 0$.\n\n**Case $(a,b) = (0,0)$: a convention, fixed here.** Every integer divides $0$\n([[def-divides-in-z]]), so $D(0,0) = \\mathbb{Z}$, which has no greatest element\nat all: the clause above defines nothing, and leaving $\\gcd(0,0)$ undefined would\nput a hole in every identity below. We therefore set\n\n$$\\gcd(0,0) \\;:=\\; 0 .$$\n\nWith both cases together, $\\gcd(a,b)$ is defined for every pair of integers, and\n$\\gcd(a,b) \\ge 0$ always.\n\n**Why $0$, and not some other value.** The convention is not arbitrary, and the\nreasons are recorded here rather than deferred:\n\n- **It is the greatest common divisor in the divisibility ordering.** $0$ is a\n  common divisor of $0$ and $0$, and every common divisor of $0$ and $0$ divides\n  $0$. So $0$ is greatest at $(0,0)$ in the sense \"divisible by every common\n  divisor\", which is the sense that [[cor-common-divisor-divides-gcd]] shows\n  holds at **every** pair, $(0,0)$ included, whereas \"greatest in the order of\n  $\\mathbb{Z}$\" fails there.\n- **It is the only value under which the scaling identity extends to this\n  boundary.** Requiring $\\gcd(ca,cb) = |c|\\gcd(a,b)$ to hold at every triple\n  leaves no freedom here. At $c = 0$ with any $(a,b) \\ne (0,0)$ it would read\n  $\\gcd(0,0) = |0|\\gcd(a,b) = 0$, whose right-hand side does not involve\n  $\\gcd(0,0)$ at all; and at $a = b = 0$ with $c = 1 + 1$ it reads $g = g + g$,\n  again giving $g = 0$. The value is therefore chosen here, and\n  [[lem-gcd-scaling]] then proves the identity for every triple with this\n  convention in force; its own $(0,0)$ case reads the value off this definition\n  rather than establishing it.\n- **It is consistent with the product formula** —\n  $\\gcd(a,b)\\operatorname{lcm}(a,b) = |ab|$ ([[thm-gcd-lcm-product]]) reads\n  $0 \\cdot 0 = 0$ at $(0,0)$, using $\\operatorname{lcm}(0,0) = 0$ from\n  [[def-lcm]]. This one is a check, **not** a second forcing argument: with\n  $\\operatorname{lcm}(0,0) = 0$ the left side vanishes whatever value\n  $\\gcd(0,0)$ is given, so the product formula is silent at $(0,0)$ and only the\n  scaling identity above pins the value down.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-coprime",
+          "source_section": "Definition",
+          "quote": "Integers $a$ and $b$ are **coprime**, or **relatively prime**, when\n\n$$\\gcd(a,b) \\;=\\; 1$$\n\n([[def-common-divisor-and-gcd]]). The relation is symmetric, since\n$\\gcd(a,b) = \\gcd(b,a)$ ([[lem-gcd-basic-values]]), and unchanged by signs, since\n$\\gcd(a,b) = \\gcd(|a|,|b|)$.\n\n**Boundary values.** $\\mathbb{N}$ contains $0$ and $\\mathbb{Z}$ contains $0$ and\n$1$, so the three degenerate pairs are recorded explicitly, each read off\n[[lem-gcd-basic-values]]:\n\n- $a$ and $1$ are coprime for **every** integer $a$, since $\\gcd(a,1) = 1$;\n  in particular $0$ and $1$ are coprime.\n- $0$ and $b$ are coprime exactly when $b = 1$ or $b = -1$. Indeed\n  $\\gcd(0,b) = \\gcd(b,0) = |b|$, so coprimality says $|b| = 1$, and by\n  [[lem-int-abs-properties]] together with the case split of [[def-int-abs]] this\n  holds exactly for $b = 1$ and $b = -1$, the two units of $\\mathbb{Z}$\n  ([[lem-units-of-z]]).\n- $0$ and $0$ are **not** coprime, since $\\gcd(0,0) = 0$ by the convention of\n  [[def-common-divisor-and-gcd]], and $0 \\ne 1$: if $1$ were $0$ then\n  $-1 = -0 = 0 = 1$, contradicting the two units being distinct\n  ([[lem-units-of-z]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rat-operations",
+          "source_section": "Definition",
+          "quote": "On $\\mathbb{Q}$ ([[def-rationals]]) define, on representatives,\n\n$$[(a,b)] + [(c,d)] := [(ad + cb,\\; bd)], \\qquad [(a,b)] \\cdot [(c,d)] := [(ac,\\; bd)],$$\n$$-[(a,b)] := [(-a, b)], \\qquad 0 := [(0,1)], \\qquad 1 := [(1,1)],$$\n\nand, for $[(a,b)] \\ne 0$ (equivalently $a \\ne 0$), the inverse\n$[(a,b)]^{-1} := [(b,a)]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-rat-triangle",
+          "source_section": "Statement",
+          "quote": "For $x \\in \\mathbb{Q}$ set $|x| = x$ if $x \\ge 0$ and $|x| = -x$\notherwise. Then $|xy| = |x|\\,|y|$, $|x + y| \\le |x| + |y|$, and\n$\\bigl||x| - |y|\\bigr| \\le |x - y|$.\n\nThe proof uses only the axioms of a totally ordered field, so it applies\nverbatim to any such field (in particular to $\\mathbb{R}$ once constructed).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any fraction $p/q$ passing the test, division by the positive integer $2Qq$ gives $|y/Q-p/q|\\le1/(2Q)$. Thus two passing fractions have distance at most $1/Q$ by the triangle inequality.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $p_1/q_1$ and $p_2/q_2$ are distinct reduced fractions, [F2] makes their difference a nonzero integer divided by $q_1q_2$, so its absolute value is at least $1/(q_1q_2)\\ge1/N^2$. Since $Q>4N^2$, $1/Q<1/(4N^2)<1/N^2$, contradicting the bound from step 1.1. Therefore the two fractions coincide.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If there are no passing fractions, the at-most-one conclusion is vacuous by the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The phase y=0 is covered by the exact window estimate in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The denominator bound N=1 is included in the separation contradiction in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 assumes any two distinct passing fractions and derives a contradiction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The hypotheses include both endpoint labels 0≤y<Q in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 argues for an arbitrary pair and uses no infinite choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an at-most-one assertion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an at-most-one assertion, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "denominator-two-window",
+          "input": "N=2,Q=17,y=9; candidate 1/2",
+          "expected": "2|9·2−1·17|=2; any distinct denominator≤2 fraction is separated by at least 1/4>1/17",
+          "status": "exact integer inequalities checked directly"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked both steps against rational subtraction, gcd/coprimality and triangle suppliers. Passing implies error <=1/(2Q); distinct fractions differ by >=1/(q1q2)>=1/N^2, contradicting distance <=1/Q. N=1, y=0 and equality in the integer test cause no exception. This is uniqueness of fractions, not a claimed enumeration theorem; no AC."
+      }
+    },
+    "lem-qa-totient-ratio-logarithmic-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euler-totient-product-formula",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let $p_0,\\ldots,p_{r-1}$ be an injective finite list\nconsisting exactly of the prime divisors of $n$. Put\n$k_i:=v_{p_i}(n)$, so $k_i\\ge1$. Then\n\n$$\\varphi(n)=\\prod_{i<r}\\bigl(p_i^{k_i}-p_i^{k_i-1}\\bigr).$$\n\nAfter carrying the natural numbers into $\\mathbb Q$, the same identity is\n\n$$\\varphi(n)=n\\prod_{i<r}\\left(1-\\frac1{p_i}\\right).$$\n\nAt $n=1$ the list is empty, both products are empty products equal to $1$, and\n$\\varphi(1)=1$. These finite-list formulas are the precise meanings of the two\nproducts displayed in the title.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-prime",
+          "source_section": "Definition",
+          "quote": "Let $p \\in \\mathbb{Z}$ ([[def-integers]]), ordered as in [[def-int-order]], with\ndivisibility as in [[def-divides-in-z]]. Then $p$ is **prime** when\n\n$$p > 1 \\qquad \\text{and} \\qquad d \\mid p \\ \\text{ with } \\ d > 0 \\ \\text{ force } \\ d = 1 \\ \\text{ or } \\ d = p .$$\n\nIn words: $p$ exceeds $1$, and its only positive divisors are $1$ and $p$. An\ninteger $n$ with $n > 1$ that is not prime is **composite**; unfolding the\ndefinition, $n$ is composite exactly when $n > 1$ and $n$ has a positive divisor\n$d$ with $d \\ne 1$ and $d \\ne n$.\n\n**Numerals.** For $k \\in \\mathbb{N}$ the symbol $k$ inside $\\mathbb{Z}$ means\n$\\iota(k)$, the embedding of [[lem-nat-embeds-int]]; in particular $0$ and $1$\nare the ring constants of [[def-int-operations]].\n\n**Boundary values, stated rather than assumed.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]) and $\\mathbb{Z}$ contains $0$, $1$ and the negatives,\nso the small cases are recorded explicitly. The clause $p > 1$ decides all of\nthem at once:\n\n- $1$ is **not** prime, since $1 > 1$ is false, and not composite either, since\n  composite also requires $n > 1$.\n- $0$ is **not** prime, since $0 > 1$ is false. This is decided by the size\n  clause alone and not by counting divisors: every integer divides $0$\n  ([[def-divides-in-z]]), so the divisor condition is not what rules $0$ out.\n- Every negative integer is neither prime nor composite, again because $p > 1$\n  fails. So a prime is in particular positive, and $-2$, $-3$, $-5$ are not\n  primes in this library, though each is $-1$ times one.\n\nThus \"prime\" and \"composite\" between them classify exactly the integers greater\nthan $1$, and nothing else.\n\n**The same condition read over all divisors.** For $p > 1$ the following are\nequivalent:\n\n1. the only positive divisors of $p$ are $1$ and $p$;\n2. the only divisors of $p$ are $1$, $-1$, $p$ and $-p$.\n\nThat 2 implies 1 is immediate, since of those four only $1$ and $p$ are positive\n($p > 1 > 0$, so $-1 < 0$ and $-p < 0$). For the converse let $d \\mid p$. Since\n$p > 1$ we have $p \\ne 0$, so $d \\ne 0$ by [[lem-divisor-bound]]; and\n$|d| \\mid p$, because $|d|$ is $d$ or $-d$ ([[def-int-abs]]) and those two divide\n$p$ together ([[lem-divisibility-basic]]). Also $|d| \\ge 0$ and $|d| \\ne 0$\n([[lem-int-abs-properties]]), so $|d| > 0$ and clause 1 gives $|d| = 1$ or\n$|d| = p$. If $|d| = 1$ then $d = 1$ or $d = -1$, by the case split defining\n$|d|$; and if $|d| = p = |p|$ then $d = up$ for a unit $u \\in \\{1,-1\\}$\n([[lem-associates-characterisation]], [[lem-units-of-z]]), that is $d = p$ or\n$d = -p$. Both readings are used below without further comment.\n\n**Why $1$ is excluded, and it is not a matter of taste.** The exclusion is\nforced by the uniqueness half of [[thm-fundamental-theorem-of-arithmetic]],\nproved on this page: if $1$ counted as a prime, a factorisation could be padded\nwith any number of factors $1$, so lists of different lengths would represent\nthe same integer and no permutation could match them. Existence of a\nfactorisation would survive the change; it is uniqueness alone that fixes the\nconvention, and the explicit witness is recorded on the companion page.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fundamental-theorem-of-arithmetic",
+          "source_section": "Statement",
+          "quote": "Finite products are taken in the commutative monoid $(\\mathbb{Z},\\cdot,1)$ of\n[[lem-units-of-z]] as in [[def-monoid-finite-product]], and a **list of primes\nof length $r$** is a function $p : r \\to \\mathbb{Z}$ on the von Neumann natural\n$r = \\{0,\\dots,r-1\\}$ with every $p_i$ prime ([[def-prime]]).\n\n1. **Existence.** Every $n \\in \\mathbb{Z}$ with $n \\ge 1$ is $\\prod_{i<r} p_i$\n   for some $r \\in \\mathbb{N}$ and some list $p$ of primes of length $r$\n   ([[thm-prime-factorisation-exists]]).\n2. **Uniqueness up to order.** Let $p$ and $q$ be lists of primes, of lengths\n   $r$ and $s$. If\n\n   $$\\prod_{i<r} p_i \\;=\\; \\prod_{j<s} q_j ,$$\n\n   then $r = s$, and there is a permutation $\\pi \\in \\operatorname{Sym}(r)$\n   ([[def-symmetric-group]]) with\n\n   $$q_i \\;=\\; p_{\\pi(i)} \\qquad \\text{for every } i < r .$$\n\nAt $r = 0$ clause 2 says that the only list of primes whose product is $1$ is the\nempty list, and the permutation condition is vacuous.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-int-comm-ring",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Z}, +, \\cdot, 0, 1)$ with the operations of [[def-int-operations]] is\na commutative ring with multiplicative identity, in which every element has the\nadditive inverse $-[(a,b)] = [(b,a)]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-divides-in-z",
+          "source_section": "Definition",
+          "quote": "Let $d, a \\in \\mathbb{Z}$ ([[def-integers]]). We say **$d$ divides $a$**, and\nwrite $d \\mid a$, when\n\n$$a \\;=\\; d q \\qquad \\text{for some } q \\in \\mathbb{Z},$$\n\nthe product being that of [[def-int-operations]]. We write $d \\nmid a$ when this\nfails. In this situation $d$ is called a **divisor**, or a **factor**, of $a$,\nand $a$ is called a **multiple** of $d$.\n\n**This is the relation the library already has, not a second one.** The published\n[[thm-division-algorithm-in-z]] introduces it in its own Statement, in these\nwords: \"We say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$.\" Since multiplication on $\\mathbb{Z}$ is commutative\n([[thm-int-comm-ring]]), $a = qd$ and $a = dq$ are the same condition, so the\ndefinition above is that relation verbatim and the two usages agree everywhere.\nThe theorem defined it for use on its own page and left the systematic theory to\na later page; this is that page, and this item records the agreement rather than\nintroducing a rival notion.\n\n**The remainder test.** For $b > 0$ the same Statement records that $b \\mid a$\nholds exactly when the remainder $r$ in $a = qb + r$, $0 \\le r < b$, is $0$.\n\n**Boundary values.** Each is one line from the ring axioms, and each is used\nbelow, so all three are recorded here rather than assumed:\n\n- $d \\mid 0$ for **every** integer $d$, including $d = 0$, since $0 = d \\cdot 0$;\n- $0 \\mid a$ only for $a = 0$, since $a = 0 \\cdot q$ forces $a = 0$;\n- $1 \\mid a$ and $a \\mid a$ for every $a$, since $a = 1 \\cdot a$ and\n  $a = a \\cdot 1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $r=1$, then $\\omega=0$ and [F1] gives $\\varphi(1)/1=1$, which is the claimed bound. Suppose $r>1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $i$, the increasing distinct primes satisfy $p_i\\ge i+1$: there are only $i-1$ integers strictly between $1$ and $i+1$, so fewer than $i$ distinct primes can lie there. Therefore each factor in [F1] obeys $1-1/p_i\\ge1-1/(i+1)=i/(i+1)$. Multiplying positive factors gives $\\varphi(r)/r\\ge\\prod_{i=1}^{\\omega}i/(i+1)=1/(\\omega+1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take a prime factor list for $r$ from [F2] and sort its distinct entries as $p_1<\\cdots<p_\\omega$, choosing for each value its first occurrence in that finite list. By associativity and commutativity in [F3], regrouping the list gives $r=(p_1\\cdots p_\\omega)c$ for a positive integer $c$. Thus the distinct-prime product divides $r$, and since every $p_i\\ge2$, $r\\ge2^\\omega$. Therefore $\\omega\\le\\log_2r$, so $1/(\\omega+1)\\ge1/(1+\\log_2r)$. This proves the assertion.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty prime product at r=1 is verified in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The quantified integer satisfies r≥1, so r=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles r=1 and φ(1)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The empty distinct-prime list at r=1 is handled directly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over positive integers and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 constructs the finite distinct-prime list from the factor list."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a lower-bound inequality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse inequality is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "totient-ratio-r8",
+          "input": "r=8",
+          "expected": "φ(8)/8=4/8=1/2 ≥ 1/(1+log₂8)=1/4",
+          "status": "finite totient and logarithm values checked exactly"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked all three steps and current totient-product, prime-factorisation, prime, integer-ring and divisibility suppliers. r=1 gives empty product 1. Distinct ordered primes satisfy p_i>=i+1; finite positive-factor comparison telescopes to 1/(omega+1). Regrouping a finite prime list proves product p_i divides r and 2^omega<=r, hence the logarithmic bound. No stronger analytic prime estimate or choice is assumed."
+      }
+    },
+    "thm-qa-rational-reconstruction-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-circular-phase-distance",
+          "source_section": "Definition",
+          "quote": "For a real $x\\in[-1,1]$, define its circular distance to the nearest integer by\n$$d_{\\mathbb T}(x):=\\min\\{|x|,\\,1-|x|\\}.$$\nHere $|x|$ is the real absolute value and $\\min$ is the minimum of the displayed finite set ([[def-real-order]], [[def-max-min]]); existence of this finite minimum follows from [[lem-finite-set-has-max]]. Both entries lie in $[0,1]$, so the value lies in $[0,1/2]$. If $|x|\\le1/2$, the nearest integer is $0$; if $x>1/2$, it is $1$; if $x<-1/2$, it is $-1$, so the formula is the distance to the nearest integer. For phases $\\theta,\\phi\\in[0,1)$, their circular distance is $d_{\\mathbb T}(\\theta-\\phi)$; the difference belongs to $(-1,1)$, the stated domain.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-rational-reconstruction-from-phase-sample",
+          "source_section": "Definition",
+          "quote": "**Input.** Integers $N\\ge1$, $Q>4N^2$, and $y\\in\\{0,\\ldots,Q-1\\}$, with $Q=2^m$ and $y$ the label from [[alg-qa-quantum-phase-estimation]] when this routine is called from QPE.\n\n**Output.** A reduced fraction $p/q$ with $1\\le q\\le N$, or FAIL.\n\n**Instructions.** Set $u:=y$, $v:=Q$, and $j:=0$. Repeatedly divide $u$ by the positive integer $v$, obtaining the unique quotient $a_j$ and remainder $r_j$ with $u=a_jv+r_j$ and $0\\le r_j<v$. Append $a_j$; if $r_j=0$, stop, and otherwise set $(u,v):=(v,r_j)$, increment $j$, and repeat. For $y=0$ this immediately gives the one-digit expansion $[0]$; for every other input, [[thm-rational-continued-fraction-termination]] gives termination and the resulting normalized finite expansion is the one in [[def-qa-rational-phase-reconstruction]]. Starting from $p_{-2}=0,p_{-1}=1,q_{-2}=1,q_{-1}=0$, process the digits in order using $p_j=a_jp_{j-1}+p_{j-2}$ and $q_j=a_jq_{j-1}+q_{j-2}$; this lists all convergents including the terminal one by [[def-convergents-of-regular-continued-fraction]]. For each convergent, reject it if $q>N$; otherwise compute $2|yq-pQ|$ exactly and accept it precisely when this integer is at most $q$. Return the first accepted candidate, or FAIL if none exists. The uniqueness result `lem-qa-rational-reconstruction-candidate-uniqueness` shows there cannot be two. The algorithm makes no floating-point comparison. Its deterministic bit bound is proved separately in `thm-qa-rational-reconstruction-bit-cost`, which also establishes that these instructions terminate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-rational-phase-reconstruction",
+          "source_section": "Definition",
+          "quote": "Let $N,Q$ be integers with $N\\ge1$ and $Q>4N^2$. A measured phase label is represented by the unique integer $y$ with $0\\le y<Q$ as in [[thm-standard-representatives-modulo-n]]. Write the normalized finite regular continued fraction of $y/Q$ as $[a_0;\\ldots,a_s]$ and denote its convergents by $p_j/q_j$. Every convergent is reduced by [[lem-continued-fraction-determinant-identity]]. A **candidate** is a convergent whose numerator and denominator are reduced, whose denominator satisfies $1\\le q_j\\le N$, and which passes the exact integer test\n$$2|yq_j-p_jQ|\\le q_j.$$\n\nThe **reconstruction result** is the unique candidate if the candidate set is nonempty, and is FAIL otherwise. The candidate set includes the terminal convergent whenever it meets the same conditions. Uniqueness, and hence well-definedness of this value, follows from [[lem-qa-rational-reconstruction-candidate-uniqueness]] under $Q>4N^2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-finite-rational-legendre-criterion",
+          "source_section": "Statement",
+          "quote": "Let $A,p\\in\\mathbb Z$ and $D,q\\in\\mathbb Z_{>0}$, with $A/D$ and $p/q$ reduced and $D>2q$. If $|A/D-p/q|<1/(2q^2)$, then $p/q$ is a convergent of the normalized finite regular continued fraction of $A/D$. This is a finite-rational statement; it does not invoke the irrational-input Legendre theorem.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-rational-reconstruction-candidate-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$, $Q>4N^2$ be integers and $0\\le y<Q$. There is at most one reduced fraction $p/q$ with $1\\le q\\le N$ satisfying $2|yq-pQ|\\le q$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $k=0$, reducedness forces $r=1$. The only nearest circular grid label is $y=0$, so $y/Q=0$ and its normalized finite expansion is $[0]$ with terminal convergent $0/1$. This convergent has denominator $1\\le N$ and passes the exact test, so [F2] and [F4] return $0/1=k/r$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $k>0$. The distance from $k/r$ to either endpoint $0,1$ is at least $1/r\\ge1/N>1/(2Q)$, by $Q>4N^2$. Therefore a nearest circular label cannot cross an endpoint: if $y/Q$ were on the other side of $0$ or $1$, the circular distance would be at least the distance of $k/r$ from that endpoint, contradicting [F1]. Thus $|y/Q-k/r|\\le1/(2Q)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Reduce $y/Q$ to $A/D$ with $D>0$. If $A/D=k/r$, its normalized finite expansion terminates at that fraction; its terminal convergent is $k/r$, whose denominator is at most $N$, and step 1.2 gives $2|yr-kQ|\\le r$. Thus it passes [F2], and uniqueness [F4] makes the algorithm return it.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $A/D\\ne k/r$, then $|Ar-kD|$ is a positive integer, so $|A/D-k/r|\\ge1/(Dr)$. Combining with step 1.2 gives $D\\ge2Q/r>8N^2/r\\ge8r>2r$, because $r\\le N$. Also $Q>4N^2\\ge4r^2$ gives $|A/D-k/r|\\le1/(2Q)<1/(8r^2)<1/(2r^2)$. Applying [F3] with $p/q=k/r$ shows it is a convergent of $A/D$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same linear error bound in step 1.2 gives $2|yr-kQ|\\le r$. Therefore this convergent passes the exact test and denominator bound in [F2]. By [F4] it is the unique accepted candidate, so the algorithm returns $k/r$. The two cases establish correctness and candidate uniqueness.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires a positive denominator r and Q>4N²."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats phase 0/1 and the exact grid label y=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The order-one phase is covered in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats A/D=k/r and step 2.2 treats A/D≠k/r."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The no-wrap argument at both phase endpoints is proved in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement quantifies over any nearest label, including a tie."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a sufficient reconstruction condition, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstruction criterion is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N2-Q17-phase-half",
+          "input": "N=2,Q=17,θ=1/2,y=8 or 9",
+          "expected": "both nearest labels reconstruct reduced denominator 2",
+          "status": "finite exact inequalities checked against steps 1.2–3.1"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked all five steps against the now-reviewed reconstruction algorithm/definition, circular-distance definition and two arithmetic lemmas. k=0 forces r=1 and y=0. For k>0 distance from endpoints >=1/r excludes wraparound. Exact y/Q=k/r uses the terminal convergent; otherwise integer numerator separation gives D>=2Q/r>2r and error <=1/(2Q)<1/(2r^2), so finite Legendre applies. Integer acceptance and fraction uniqueness conclude. Includes nearest-grid ties and all admissible N=1 inputs; no AC."
+      }
+    },
+    "thm-qa-modular-multiplication-circuit-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-modular-multiplication-circuit",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $N\\ge2$, $n=\\lceil\\log_2N\\rceil$, a one-bit control $c$, an $n$-bit data register $z$, and integers $a,a^{-1}$ with $0\\le a,a^{-1}<N$ and $aa^{-1}\\equiv1\\pmod N$. The data encoding is valid when its unsigned value is less than $N$.\n\nResidue addition and multiplication are in $\\mathbb Z/N$ with the class operations of [[def-integers-modulo-n]], [[def-addition-and-multiplication-modulo-n]], and [[thm-integers-modulo-n-basic-algebra]]. The inverse condition says $[a]_N$ is a unit, equivalently $\\gcd(a,N)=1$ by [[def-unit-group-modulo-n-and-euler-totient]] and [[thm-unit-criterion-modulo-n]]. Kets use [[def-qc-dirac-notation-conversion]]; $c,z$ are ordered computational-basis registers with the unsigned encoding of [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]], tensor order as in [[def-qc-tensor-register-and-permutation]], and circuit denotation as in [[def-qc-circuit-denotational-semantics]]. “Clean work” means initialized and returned to zero under [[def-qc-clean-and-dirty-ancillas]].\n\n**Output.** A reversible circuit on $c,z$ and clean work registers which implements the controlled map $z\\mapsto az\\bmod N$ for $c=1$ and valid $z$, and is the identity on invalid encodings and when $c=0$.\n\n**Instructions.** Define the total Boolean function on $(c,z)$ by\n$$f_a(c,z)=\\begin{cases}az\\bmod N,&c=1\\text{ and }z<N,\\\\z,&\\text{otherwise.}\\end{cases}$$\nGenerate the following explicit NOT/AND/OR DAG for this function. Bit arrays in the instructions below are indexed from least significant bit $0$; the input and output port lists retain the repository's most-significant-first register order. Begin with the distinct input identifiers $c,z_{n-1},\\ldots,z_0$ and two constant nodes $0,1$. Every gate emission appends a fresh identifier in consecutive order, referencing only existing identifiers. A named bit below is an alias of its node identifier, never an additional gate. Expand every macro call immediately in the stated loop order.\n\n1. Define $\\operatorname{XOR}(u,v)$ by emitting, in order, $o=\\operatorname{OR}(u,v)$, $h=\\operatorname{AND}(u,v)$, $d=\\operatorname{NOT}(h)$, and $e=\\operatorname{AND}(o,d)$, returning $e$. Define $\\operatorname{ADD}_w(U,V,d_0)$ by looping $i=0,\\ldots,w-1$: emit $e_i=\\operatorname{XOR}(U_i,V_i)$, $s_i=\\operatorname{XOR}(e_i,d_i)$, $h_i=\\operatorname{AND}(U_i,V_i)$, $j_i=\\operatorname{AND}(e_i,d_i)$, and $d_{i+1}=\\operatorname{OR}(h_i,j_i)$. Return $(s_0,\\ldots,s_{w-1})$ and $d_w$. Define $\\operatorname{SUB}_w(U,V)$ by first emitting $\\operatorname{NOT}(V_i)$ in increasing $i$ and then calling $\\operatorname{ADD}_w(U,\\operatorname{NOT}(V),1)$; return its difference bits and carry bit $h$ (the no-borrow bit).\n2. Define $\\operatorname{SELECT}_w(h,U,V)$ by emitting $d=\\operatorname{NOT}(h)$ and, for $i=0,\\ldots,w-1$, $u_i=\\operatorname{AND}(h,U_i)$, $v_i=\\operatorname{AND}(d,V_i)$, $s_i=\\operatorname{OR}(u_i,v_i)$. It returns the selected bit array $S$. Public constant arrays below refer to the shared $0,1$ nodes and are zero-padded to the displayed width.\n3. Initialize a $2n$-bit accumulator $P$ with zero aliases. For $i=0,\\ldots,n-1$, form a $2n$-bit row $H$: for $j=0,\\ldots,n-1$, emit $H_{i+j}=\\operatorname{AND}(a_i,z_j)$, where $a_i$ is the constant bit of $a$; all other row bits alias $0$. Replace $P$ by the sum output of $\\operatorname{ADD}_{2n}(P,H,0)$, ignoring the carry output.\n4. Initialize $R$ to $n$ zero aliases. For $\\ell=2n-1,\\ldots,0$, form the $(n+1)$-bit array $V$ by $V_0=P_\\ell$ and $V_i=R_{i-1}$ for $1\\le i\\le n$. Call $\\operatorname{SUB}_{n+1}(V,N)$, obtaining difference $D$ and carry $h$. Set $R$ to the low $n$ bits of $\\operatorname{SELECT}_{n+1}(h,D,V)$.\n5. Pad $z$ by a zero high bit, call $\\operatorname{SUB}_{n+1}(z,N)$, and let $h$ be its carry. Emit $v=\\operatorname{NOT}(h)$ and $g=\\operatorname{AND}(c,v)$. Set $F=\\operatorname{SELECT}_n(g,R,z)$. The ordered output ports are $F_{n-1},\\ldots,F_0$. This completes the finite DAG and its topological order. Construct a second DAG by the identical recipe with constant $a^{-1}$ in place of $a$.\n\nCompile each DAG to the clean-target XOR oracle of [[def-qc-coherent-function-oracle]] using [[alg-qc-reversible-embedding]], whose exact gate-emission rules apply also to repeated-source ports. Allocate an $n$-bit clean target, compute $f_a(c,z)$ into it, swap the data and target registers with three CNOT gates per bit, then apply the compiled XOR computation for $f_{a^{-1}}$ to the old-data target, using the new data as input. Each compiled XOR oracle is an involution by [[thm-qc-reversible-xor-oracle-unitary]]. Return the concatenated gate list with every compute-copy-uncompute stage included. Separate items `thm-qa-modular-multiplication-circuit-correctness` and `thm-qa-modular-arithmetic-cost` establish its basis action and gate/work bounds. No depth bound is part of this algorithm.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-reversible-embedding-cost",
+          "source_section": "Statement",
+          "quote": "Let $n,m\\ge0$, $x\\in\\{0,1\\}^n$, and $y\\in\\{0,1\\}^m$. Let a finite topologically ordered Boolean DAG have $S$ non-input nodes, including constants, and $E$ input-port uses counted with multiplicity. Its gates are NOT, AND, OR, and constants, with fan-in at most two, and it has $m$ ordered output ports computing $f(x)$. Under the fixed elementary alphabet in [[def-qc-elementary-circuit-resources]], counting each occurrence of $X$, CNOT, and Toffoli as one gate and one serial layer, [[alg-qc-reversible-embedding]] returns a circuit on the ordered input, target, and work registers implementing\n$$\n|x,y,0^w\\rangle\\longmapsto|x,y\\oplus f(x),0^w\\rangle\n$$\nfor every basis input $x$ and every target string $y$. It uses at most $6S+4E+m$ elementary gate occurrences, at most $S+E$ clean work bits, and serial depth at most $6S+4E+m$. The same operator action holds coherently on arbitrary superpositions and after adjoining any finite reference register.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-clean-and-dirty-ancillas",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a finite ordered quantum register and let $A$ be an ordered register of $k\\ge0$ ancilla qubits, with Hilbert spaces $\\mathcal H_D$ and $\\mathcal H_A$. Write $|0_A\\rangle=|0^k\\rangle$, including $|0_A\\rangle=1$ when $k=0$. Let $U$ be a unitary on $\\mathcal H_D\\otimes\\mathcal H_A$ and let $V$ be a unitary on $\\mathcal H_D$.\n\nThe register $A$ is a **clean ancilla register for $U$ and $V$** when\n$$\nU(|\\psi\\rangle_D\\otimes|0_A\\rangle)=V|\\psi\\rangle_D\\otimes|0_A\\rangle\n$$\nfor every vector $|\\psi\\rangle_D$. Thus the data operation is independent of the input vector and all clean wires return exactly to zero.\n\nThe register $A$ is a **dirty ancilla register for $U$ and $V$** when the operator identity $U=V\\otimes I_A$ holds on $\\mathcal H_D\\otimes\\mathcal H_A$. Equivalently, every product input $|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$ is mapped to $V|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$, with the same $V$ for every data and ancilla vector. This requires exact restoration of an arbitrary, initially unknown ancilla state and forbids residual data–ancilla correlation.\n\nThese are exact contracts for the complete subroutine. A temporary intermediate alteration of an ancilla is permitted if the full unitary satisfies the stated identity.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-reversible-xor-oracle-unitary",
+          "source_section": "Statement",
+          "quote": "For every total Boolean function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$, including noninjective functions, the coherent XOR oracle $O_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle$ is unitary and satisfies $O_f^2=I$. Hence $O_f^{-1}=O_f$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The DAG's XOR formula is $(u\\lor v)\\land\\neg(u\\land v)$, which is $u+v$ modulo $2$ for each of the four input pairs. In its adder, $U_i+V_i+d_i=s_i+2d_{i+1}$: if both input bits are $1$ the carry is $1$, if exactly one is $1$ the carry is $d_i$, and if both are $0$ the carry is $0$; the displayed sum bit has the corresponding parity. Multiplying by $2^i$ and summing proves $U+V+d_0=S+2^w d_w$. Subtraction therefore represents $U+(2^w-1-V)+1=U-V+2^w$; its carry is $1$ exactly when $U\\ge V$, and its low bits are $U-V$ modulo $2^w$. The selector's disjoint branches give $U$ for $h=1$ and $V$ for $h=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After the first $i$ product rows, the accumulator is $z\\sum_{j<i}a_j2^j$. This holds initially and is preserved by step 1.1; no overflow occurs because every partial sum is at most $az<2^{2n}$. Thus the final product bits represent $az$ even for invalid input encodings. In the remainder loop, the invariant is that $R$ is the remainder modulo $N$ of the already scanned product prefix and $0\\le R<N$. Appending bit $P_\\ell$ gives $V=2R+P_\\ell<2N$. Subtraction and selection from step 1.1 give $V-N$ if $V\\ge N$ and $V$ otherwise, so the next value lies in $[0,N)$ and is the new prefix remainder. It fits $n$ bits, making the discarded high bit zero, even when $N=2^n$. Induction proves the final $R=az\\bmod N$. The final no-borrow comparison gives $v=1$ exactly when $z<N$, and selection by $c\\land v$ therefore computes precisely $f_a(c,z)$. The same argument applies to $a^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $c,z$. If $c=0$ or $z\\ge N$, the defining function and its inverse-function counterpart both return $z$. If $c=1$ and $z<N$, the first function returns $z'=az\\bmod N<N$ and the inverse function returns $a^{-1}z'\\bmod N=z$, by [F4]. Thus in every case $f_{a^{-1}}(c,f_a(c,z))=z$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F2] and [F3], the first computation adds $f_a(c,z)$ into a clean target and restores all value-computation work. A bitwise swap made from CNOTs acts as $(u,v)\\mapsto(u,u\\oplus v)\\mapsto(v,u\\oplus v)\\mapsto(v,u)$, so after the three CNOTs per bit the data register contains $f_a(c,z)$ and the target contains the old $z$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Apply the clean XOR computation for $f_{a^{-1}}$ to the new data and the target holding old $z$. Step 3.1 says its output is exactly that old $z$, so XOR changes the target to $z\\oplus z=0$ and restores its computation work by [F2]. Hence all temporary registers are clean and the data/control action is the claimed one.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "On valid residue encodings, multiplication by $a$ is a bijection of the residue register because $a^{-1}$ is its inverse; on invalid encodings and at control $0$ the map is the identity. It is therefore a permutation of the full finite computational basis. A basis permutation is unitary, and [F2] supplies the same action on arbitrary superpositions with clean work. This proves the statement.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N≥2 gives a positive-width data register and a specified control bit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the c=0 identity branch and cleanup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the c=1 valid and invalid branches."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 includes invalid encodings as fixed points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 partitions the full n-bit data register into z<N and z≥N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 6.1 verifies the map on every computational-basis state."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement specifies a circuit action, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is stated."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N5-a2-control-and-invalid-encoding",
+          "input": "N=5,n=3,a=2,z=3 or z=6",
+          "expected": "c=1,z=3 maps to 1; z=6 fixed; c=0,z=3 fixed; temporary target/work clean",
+          "status": "finite basis arithmetic checked against steps 1.1–4.1"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked explicit DAG and six proof steps against exact XOR-embedding, unit/inverse, register and clean-work interfaces. Four truth-table cases give XOR; full-adder identity telescopes, subtraction carry tests U>=V, selector branches disjoint. Partial products az<2^(2n); remainder invariant 0<=R<N makes V<2N and one conditional subtraction sufficient including N=2^n. Valid residues have inverse a^-1 and invalid encodings/control zero are fixed. Compute/swap/inverse-XOR clears old data and all compiler work, so linear extension is coherent and unitary; no dirty-ancilla claim or AC."
+      }
+    },
+    "thm-qa-modular-arithmetic-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-reversible-embedding-cost",
+          "source_section": "Statement",
+          "quote": "Let $n,m\\ge0$, $x\\in\\{0,1\\}^n$, and $y\\in\\{0,1\\}^m$. Let a finite topologically ordered Boolean DAG have $S$ non-input nodes, including constants, and $E$ input-port uses counted with multiplicity. Its gates are NOT, AND, OR, and constants, with fan-in at most two, and it has $m$ ordered output ports computing $f(x)$. Under the fixed elementary alphabet in [[def-qc-elementary-circuit-resources]], counting each occurrence of $X$, CNOT, and Toffoli as one gate and one serial layer, [[alg-qc-reversible-embedding]] returns a circuit on the ordered input, target, and work registers implementing\n$$\n|x,y,0^w\\rangle\\longmapsto|x,y\\oplus f(x),0^w\\rangle\n$$\nfor every basis input $x$ and every target string $y$. It uses at most $6S+4E+m$ elementary gate occurrences, at most $S+E$ clean work bits, and serial depth at most $6S+4E+m$. The same operator action holds coherently on arbitrary superpositions and after adjoining any finite reference register.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-modular-multiplication-circuit-correctness",
+          "source_section": "Statement",
+          "quote": "For $N\\ge2$, $n=\\lceil\\log_2N\\rceil$, and a unit $a\\pmod N$ with supplied inverse $a^{-1}$, the circuit of [[alg-qa-modular-multiplication-circuit]] is unitary. On a computational-basis state it fixes the control bit, sends $|z\\rangle$ to $|az\\bmod N\\rangle$ if $c=1$ and $z<N$, and fixes $z$ if $c=0$ or $z\\ge N$. All Boolean value, target, and scratch registers return to zero. Its action therefore extends coherently to superpositions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-modular-multiplication-circuit",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $N\\ge2$, $n=\\lceil\\log_2N\\rceil$, a one-bit control $c$, an $n$-bit data register $z$, and integers $a,a^{-1}$ with $0\\le a,a^{-1}<N$ and $aa^{-1}\\equiv1\\pmod N$. The data encoding is valid when its unsigned value is less than $N$.\n\nResidue addition and multiplication are in $\\mathbb Z/N$ with the class operations of [[def-integers-modulo-n]], [[def-addition-and-multiplication-modulo-n]], and [[thm-integers-modulo-n-basic-algebra]]. The inverse condition says $[a]_N$ is a unit, equivalently $\\gcd(a,N)=1$ by [[def-unit-group-modulo-n-and-euler-totient]] and [[thm-unit-criterion-modulo-n]]. Kets use [[def-qc-dirac-notation-conversion]]; $c,z$ are ordered computational-basis registers with the unsigned encoding of [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]], tensor order as in [[def-qc-tensor-register-and-permutation]], and circuit denotation as in [[def-qc-circuit-denotational-semantics]]. “Clean work” means initialized and returned to zero under [[def-qc-clean-and-dirty-ancillas]].\n\n**Output.** A reversible circuit on $c,z$ and clean work registers which implements the controlled map $z\\mapsto az\\bmod N$ for $c=1$ and valid $z$, and is the identity on invalid encodings and when $c=0$.\n\n**Instructions.** Define the total Boolean function on $(c,z)$ by\n$$f_a(c,z)=\\begin{cases}az\\bmod N,&c=1\\text{ and }z<N,\\\\z,&\\text{otherwise.}\\end{cases}$$\nGenerate the following explicit NOT/AND/OR DAG for this function. Bit arrays in the instructions below are indexed from least significant bit $0$; the input and output port lists retain the repository's most-significant-first register order. Begin with the distinct input identifiers $c,z_{n-1},\\ldots,z_0$ and two constant nodes $0,1$. Every gate emission appends a fresh identifier in consecutive order, referencing only existing identifiers. A named bit below is an alias of its node identifier, never an additional gate. Expand every macro call immediately in the stated loop order.\n\n1. Define $\\operatorname{XOR}(u,v)$ by emitting, in order, $o=\\operatorname{OR}(u,v)$, $h=\\operatorname{AND}(u,v)$, $d=\\operatorname{NOT}(h)$, and $e=\\operatorname{AND}(o,d)$, returning $e$. Define $\\operatorname{ADD}_w(U,V,d_0)$ by looping $i=0,\\ldots,w-1$: emit $e_i=\\operatorname{XOR}(U_i,V_i)$, $s_i=\\operatorname{XOR}(e_i,d_i)$, $h_i=\\operatorname{AND}(U_i,V_i)$, $j_i=\\operatorname{AND}(e_i,d_i)$, and $d_{i+1}=\\operatorname{OR}(h_i,j_i)$. Return $(s_0,\\ldots,s_{w-1})$ and $d_w$. Define $\\operatorname{SUB}_w(U,V)$ by first emitting $\\operatorname{NOT}(V_i)$ in increasing $i$ and then calling $\\operatorname{ADD}_w(U,\\operatorname{NOT}(V),1)$; return its difference bits and carry bit $h$ (the no-borrow bit).\n2. Define $\\operatorname{SELECT}_w(h,U,V)$ by emitting $d=\\operatorname{NOT}(h)$ and, for $i=0,\\ldots,w-1$, $u_i=\\operatorname{AND}(h,U_i)$, $v_i=\\operatorname{AND}(d,V_i)$, $s_i=\\operatorname{OR}(u_i,v_i)$. It returns the selected bit array $S$. Public constant arrays below refer to the shared $0,1$ nodes and are zero-padded to the displayed width.\n3. Initialize a $2n$-bit accumulator $P$ with zero aliases. For $i=0,\\ldots,n-1$, form a $2n$-bit row $H$: for $j=0,\\ldots,n-1$, emit $H_{i+j}=\\operatorname{AND}(a_i,z_j)$, where $a_i$ is the constant bit of $a$; all other row bits alias $0$. Replace $P$ by the sum output of $\\operatorname{ADD}_{2n}(P,H,0)$, ignoring the carry output.\n4. Initialize $R$ to $n$ zero aliases. For $\\ell=2n-1,\\ldots,0$, form the $(n+1)$-bit array $V$ by $V_0=P_\\ell$ and $V_i=R_{i-1}$ for $1\\le i\\le n$. Call $\\operatorname{SUB}_{n+1}(V,N)$, obtaining difference $D$ and carry $h$. Set $R$ to the low $n$ bits of $\\operatorname{SELECT}_{n+1}(h,D,V)$.\n5. Pad $z$ by a zero high bit, call $\\operatorname{SUB}_{n+1}(z,N)$, and let $h$ be its carry. Emit $v=\\operatorname{NOT}(h)$ and $g=\\operatorname{AND}(c,v)$. Set $F=\\operatorname{SELECT}_n(g,R,z)$. The ordered output ports are $F_{n-1},\\ldots,F_0$. This completes the finite DAG and its topological order. Construct a second DAG by the identical recipe with constant $a^{-1}$ in place of $a$.\n\nCompile each DAG to the clean-target XOR oracle of [[def-qc-coherent-function-oracle]] using [[alg-qc-reversible-embedding]], whose exact gate-emission rules apply also to repeated-source ports. Allocate an $n$-bit clean target, compute $f_a(c,z)$ into it, swap the data and target registers with three CNOT gates per bit, then apply the compiled XOR computation for $f_{a^{-1}}$ to the old-data target, using the new data as input. Each compiled XOR oracle is an involution by [[thm-qc-reversible-xor-oracle-unitary]]. Return the concatenated gate list with every compute-copy-uncompute stage included. Separate items `thm-qa-modular-multiplication-circuit-correctness` and `thm-qa-modular-arithmetic-cost` establish its basis action and gate/work bounds. No depth bound is part of this algorithm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-classical-bit-cost",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]], bit-operation cost is the number of transitions of a declared multitape Turing machine over a fixed finite alphabet; the $k$-tape transition reads and writes one symbol on each of its $k\\ge1$ tapes and moves each head once per transition ([[def-multitape-and-nondeterministic-machines]]). It includes random-bit generation, any encoding work actually performed by that machine on declared public data or received replies, address formation, reading and writing every bit of an oracle reply, comparison/postprocessing, and writing the classical output. The abstract instance encoding in [[def-qa-input-encoding-and-size]] fixes the size parameter; it supplies neither a readable hidden input nor an encoding procedure to execute. The fair-bit machine convention is supplied by [[def-probabilistic-polynomial-time-machine-interface]]. The oracle invocation itself is one separately counted query action; its returned bits are not free to process.\n\nFor a query with an $a(n)$-bit address and a $b(n)$-bit reply, the machine's charged work includes forming the address and processing the $b(n)$ reply symbols. A claimed time bound also specifies whether it is worst-case over promised inputs and random tapes, as in [[def-probabilistic-polynomial-time-machine-interface]]. Query, nonoracle quantum gate, measurement, and classical bit costs remain distinct.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, and $w(C)$ its total number of wires.\n\nEach clean or dirty ancilla coordinate additionally requires a declared ordered partition of the circuit wires into data register $D$ and ancilla register $A$, and a declared target unitary $V$ on $D$. In that factor order, the complete circuit unitary must satisfy the corresponding exact contract of [[def-qc-clean-and-dirty-ancillas]]. For such a supplied clean contract set $a_{\\rm clean}(C)=|A|$, and for such a supplied dirty contract set $a_{\\rm dirty}(C)=|A|$; the notation suppresses the declared interface, which is part of the cost instance and may differ between the two coordinates. If no corresponding contract is supplied, mark that coordinate not applicable. These are counts of declared contract registers, not maxima over possible partitions. Zero initialization alone supplies neither return contract. Every auxiliary wire remains counted in $w(C)$ ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-division-algorithm-in-z",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$ ([[def-integers]]) with $b > 0$. Then there exist\nintegers $q$ and $r$ with\n\n$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.\n\nWe say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$; by the above, for $b > 0$ this holds exactly when the\nremainder $r$ is $0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-algorithm",
+          "source_section": "Statement",
+          "quote": "Let $a \\in \\mathbb{Z}$ and $b > 0$. Define $\\Phi : \\mathbb{Z} \\times \\mathbb{Z} \\to \\mathbb{Z} \\times \\mathbb{Z}$ by\n\n$$\\Phi(u,v) \\;=\\; \\begin{cases} (v,\\; u - qv) & \\text{if } v > 0, \\\\ (u,v) & \\text{if } v \\le 0, \\end{cases}$$\n\nwhere in the first clause $q$ is the unique quotient of $u$ by $v$ given by\n[[thm-division-algorithm-in-z]], so that $u - qv$ is the remainder and\n$0 \\le u - qv < v$.\n\nLet $R : \\mathbb{N} \\to \\mathbb{Z} \\times \\mathbb{Z}$ be the unique function\nwith $R(0) = (a,b)$ and $R(\\sigma(k)) = \\Phi(R(k))$ supplied by the recursion\ntheorem ([[thm-recursion]]). Write $R(k) = (a_k, b_k)$; the sequence\n$b_0, b_1, b_2, \\dots$ is the **remainder descent** from $(a,b)$.\n\nThen:\n\n1. $b_k \\ge 0$ for every $k$, and $b_{\\sigma(k)} < b_k$ whenever $b_k > 0$;\n2. $\\gcd(a_k, b_k) = \\gcd(a,b)$ for every $k$\n   ([[def-common-divisor-and-gcd]]);\n3. there is a least $N \\in \\mathbb{N}$ with $b_N = 0$, and $N \\ne 0$; writing\n   $N = \\sigma(M)$, the value $b_M$ is the **last nonzero remainder**, and\n   $b_M > 0$;\n4. $a_N = b_M = \\gcd(a,b)$.\n\nSo the descent terminates, and the last nonzero remainder is $\\gcd(a,b)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the explicit DAG of [F2], XOR emits four nodes, each adder bit emits two XORs and three carry nodes, hence $11$ nodes, and subtraction emits one additional NOT per bit, hence $12w$ nodes at width $w$. Selection emits $1+3w$ nodes. The product uses $n^2$ partial-product AND nodes and $n$ adders of width $2n$, totaling $23n^2$ nodes. Its $2n$ remainder stages use $2n(12(n+1)+1+3(n+1))$ nodes. The final comparison uses $12(n+1)$ nodes, validity/control uses two more, final selection uses $1+3n$, and the two shared constant nodes complete the count. Thus $S\\le100(n+1)^2$ suffices for all $n\\ge1$; every gate has at most two input ports, so $E\\le2S$. The correctness supplier in [F2] proves that the row sums never overflow and that each remainder stage needs only one conditional subtraction; these are exactly the loops just counted.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the inverse computation, initialize $(R,S,U,V)=(N,x,0,1)$ and, while $S>0$, divide $R=qS+r$ with $0\\le r<S$, set $h=(U-qV)\\bmod N$ to its least residue, and simultaneously update $(R,S,U,V)$ to $(S,r,V,h)$. Initially $R\\equiv Ux$ and $S\\equiv Vx\\pmod N$; these two congruences are preserved because $r=R-qS\\equiv(U-qV)x\\equiv hx\\pmod N$ by [F5]. The remainder pair is exactly the Euclidean descent in [F4], so it terminates at $(R,S)=(\\gcd(N,x),0)=(1,0)$ by [F6]. The invariant then gives $Ux\\equiv1\\pmod N$, and [F7] gives the returned inverse constant $b_0=U\\in[0,N)$. For its cost, at every division $0<S<R\\le N$; the new remainder is $r<R/2$: if $S\\le R/2$, then $r<S\\le R/2$, while if $S>R/2$, then $q=1$ and $r=R-S<R/2$. Thus every two successive positive remainder values shrink by at least a factor of two, giving $O(n)$ iterations. The quotients and remainders have $O(n)$ bits, and $U,V$ always lie in $[0,N)$, so the signed intermediate $U-qV$ has $O(n)$ bits as well (its magnitude is at most $N^2+N$). Schoolbook division, multiplication, subtraction and reduction each take $O(n^2)$ multitape transitions, including signed reduction by dividing the absolute value and, when needed, replacing a nonzero remainder $d$ by $N-d$. Hence this explicit loop costs $O(n^3)$ transitions. Set $a_0=x$, and for the remaining $O(n)$ powers compute $a_{j+1}=a_j^2\\bmod N$ and $b_{j+1}=b_j^2\\bmod N$. Induction gives $a_j\\equiv x^{2^j}$ and $a_jb_j\\equiv1\\pmod N$; each stage uses two $O(n^2)$ schoolbook modular products, so all powers and inverses still cost $O(n^3)$ transitions.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 counts the complete Boolean function DAG, including the validity comparison, control, and conditional output, and gives $S,E=O(n^2)$. Apply [F1] separately to the forward and inverse functions; the two compiled XOR maps and their clean work each cost $O(n^2)$. The swap uses $3n$ CNOT gates. Adding these counts proves the claimed $O(n^2)$ gate and clean-work bounds; [F2] ensures they implement the required map.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The resource definition [F3] keeps gate count, classical bit transitions, and oracle queries separate. The preceding counts establish only gate/work and stated classical arithmetic bounds; no circuit layering or depth estimate follows from them.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem hypothesis fixes N≥2 and a positive register width."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 give asymptotic arithmetic counts for every n≥1; the result claims no depth bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 give asymptotic arithmetic counts for every n≥1; the result claims no depth bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 give asymptotic arithmetic counts for every n≥1; the result claims no depth bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 give asymptotic arithmetic counts for every n≥1; the result claims no depth bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 give asymptotic arithmetic counts for every n≥1; the result claims no depth bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–1.2 count the explicit schoolbook Boolean DAG and Euclidean/repeated-squaring preprocessing; step 2.1 counts clean reversible compilation and step 3.1 separates resources. The Statement asserts upper costs for that construction and no converse or optimality characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–1.2 count the explicit schoolbook Boolean DAG and Euclidean/repeated-squaring preprocessing; step 2.1 counts clean reversible compilation and step 3.1 separates resources. The Statement asserts upper costs for that construction and no converse or optimality characterization.",
+            "item_sha256": "9f9339450e44c0718da471df7e374f04a33d13d80db3f82ca395745acb4397bf",
+            "row_sha256": "e0b153b9910b2b83603c30620a035b43fa4d19efbd20438f8309fa1ccc79659d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–1.2 count the explicit schoolbook Boolean DAG and Euclidean/repeated-squaring preprocessing; step 2.1 counts clean reversible compilation and step 3.1 separates resources. The Statement asserts upper costs for that construction and no converse or optimality characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–1.2 count the explicit schoolbook Boolean DAG and Euclidean/repeated-squaring preprocessing; step 2.1 counts clean reversible compilation and step 3.1 separates resources. The Statement asserts upper costs for that construction and no converse or optimality characterization.",
+            "item_sha256": "9f9339450e44c0718da471df7e374f04a33d13d80db3f82ca395745acb4397bf",
+            "row_sha256": "b24dc2fdba6a09b9d89c87d5cfcf157921b65d519db89c54cb5c1707a73650cc",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked all four steps with actual multiplier loops and current compiler bound 6S+4E+m (port uses counted with multiplicity). XOR 4 nodes, adder 11w, subtraction 12w and selector 1+3w give S<=100(n+1)^2 and E<=2S including constants. Two XOR compilations plus 3n swap gates and clean work are O(n^2). Current bounded-residue Euclid maintains R=Ux,S=Vx mod N; gcd=1 returns inverse. Every two remainders halve; q,U,V and signed U-qV have O(n) bits, giving O(n^3) schoolbook preprocessing. O(n) paired squarings preserve a_j b_j=1 and same cost. N=2 and x=1 included; no depth or generator-time bound."
+      }
+    },
+    "thm-qa-modular-order-finding-success": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-unit-group-modulo-n-and-euler-totient",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer. Multiplication makes $\\mathbb Z/n$ a commutative\nmonoid with identity $[1]_n$ by [[thm-integers-modulo-n-basic-algebra]]. A class\n$u\\in\\mathbb Z/n$ is a **unit** when it is invertible in that monoid\n([[def-invertible-element]]). The set of all units is\n\n$$(\\mathbb Z/n)^\\times:=\\{\\,u\\in\\mathbb Z/n:\\text{some }v\\in\\mathbb Z/n\\text{ satisfies }uv=[1]_n\\,\\}.$$\n\nBy [[lem-monoid-units-form-a-group]], multiplication restricts to a group\noperation on $(\\mathbb Z/n)^\\times$, called the **unit group modulo $n$**.\n\nThe quotient $\\mathbb Z/n$ is finite with cardinality $n$ by\n[[thm-standard-representatives-modulo-n]], and its unit set is a finite subset by\n[[thm-subset-of-a-finite-set]]. Euler's **totient function** is therefore defined\nfor every positive integer $n$ by\n\n$$\\varphi(n):=\\big|(\\mathbb Z/n)^\\times\\big|\\in\\mathbb N$$\n\n([[def-finite-cardinality]]). For $n=1$, the quotient has one element, which is\nits multiplicative identity and hence a unit, so $\\varphi(1)=1$ follows from the\ndefinition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-order-of-element-divides-group-order",
+          "source_section": "Statement",
+          "quote": "If $G$ is finite and $g\\in G$, then $g$ has finite order and\n\n$$\\iota(\\operatorname{ord}(g))\\mid\\iota(|G|)$$\n\nin $\\mathbb Z$, where $\\iota:\\mathbb N\\to\\mathbb Z$ is the canonical\nembedding.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-modular-multiplication-circuit",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $N\\ge2$, $n=\\lceil\\log_2N\\rceil$, a one-bit control $c$, an $n$-bit data register $z$, and integers $a,a^{-1}$ with $0\\le a,a^{-1}<N$ and $aa^{-1}\\equiv1\\pmod N$. The data encoding is valid when its unsigned value is less than $N$.\n\nResidue addition and multiplication are in $\\mathbb Z/N$ with the class operations of [[def-integers-modulo-n]], [[def-addition-and-multiplication-modulo-n]], and [[thm-integers-modulo-n-basic-algebra]]. The inverse condition says $[a]_N$ is a unit, equivalently $\\gcd(a,N)=1$ by [[def-unit-group-modulo-n-and-euler-totient]] and [[thm-unit-criterion-modulo-n]]. Kets use [[def-qc-dirac-notation-conversion]]; $c,z$ are ordered computational-basis registers with the unsigned encoding of [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]], tensor order as in [[def-qc-tensor-register-and-permutation]], and circuit denotation as in [[def-qc-circuit-denotational-semantics]]. “Clean work” means initialized and returned to zero under [[def-qc-clean-and-dirty-ancillas]].\n\n**Output.** A reversible circuit on $c,z$ and clean work registers which implements the controlled map $z\\mapsto az\\bmod N$ for $c=1$ and valid $z$, and is the identity on invalid encodings and when $c=0$.\n\n**Instructions.** Define the total Boolean function on $(c,z)$ by\n$$f_a(c,z)=\\begin{cases}az\\bmod N,&c=1\\text{ and }z<N,\\\\z,&\\text{otherwise.}\\end{cases}$$\nGenerate the following explicit NOT/AND/OR DAG for this function. Bit arrays in the instructions below are indexed from least significant bit $0$; the input and output port lists retain the repository's most-significant-first register order. Begin with the distinct input identifiers $c,z_{n-1},\\ldots,z_0$ and two constant nodes $0,1$. Every gate emission appends a fresh identifier in consecutive order, referencing only existing identifiers. A named bit below is an alias of its node identifier, never an additional gate. Expand every macro call immediately in the stated loop order.\n\n1. Define $\\operatorname{XOR}(u,v)$ by emitting, in order, $o=\\operatorname{OR}(u,v)$, $h=\\operatorname{AND}(u,v)$, $d=\\operatorname{NOT}(h)$, and $e=\\operatorname{AND}(o,d)$, returning $e$. Define $\\operatorname{ADD}_w(U,V,d_0)$ by looping $i=0,\\ldots,w-1$: emit $e_i=\\operatorname{XOR}(U_i,V_i)$, $s_i=\\operatorname{XOR}(e_i,d_i)$, $h_i=\\operatorname{AND}(U_i,V_i)$, $j_i=\\operatorname{AND}(e_i,d_i)$, and $d_{i+1}=\\operatorname{OR}(h_i,j_i)$. Return $(s_0,\\ldots,s_{w-1})$ and $d_w$. Define $\\operatorname{SUB}_w(U,V)$ by first emitting $\\operatorname{NOT}(V_i)$ in increasing $i$ and then calling $\\operatorname{ADD}_w(U,\\operatorname{NOT}(V),1)$; return its difference bits and carry bit $h$ (the no-borrow bit).\n2. Define $\\operatorname{SELECT}_w(h,U,V)$ by emitting $d=\\operatorname{NOT}(h)$ and, for $i=0,\\ldots,w-1$, $u_i=\\operatorname{AND}(h,U_i)$, $v_i=\\operatorname{AND}(d,V_i)$, $s_i=\\operatorname{OR}(u_i,v_i)$. It returns the selected bit array $S$. Public constant arrays below refer to the shared $0,1$ nodes and are zero-padded to the displayed width.\n3. Initialize a $2n$-bit accumulator $P$ with zero aliases. For $i=0,\\ldots,n-1$, form a $2n$-bit row $H$: for $j=0,\\ldots,n-1$, emit $H_{i+j}=\\operatorname{AND}(a_i,z_j)$, where $a_i$ is the constant bit of $a$; all other row bits alias $0$. Replace $P$ by the sum output of $\\operatorname{ADD}_{2n}(P,H,0)$, ignoring the carry output.\n4. Initialize $R$ to $n$ zero aliases. For $\\ell=2n-1,\\ldots,0$, form the $(n+1)$-bit array $V$ by $V_0=P_\\ell$ and $V_i=R_{i-1}$ for $1\\le i\\le n$. Call $\\operatorname{SUB}_{n+1}(V,N)$, obtaining difference $D$ and carry $h$. Set $R$ to the low $n$ bits of $\\operatorname{SELECT}_{n+1}(h,D,V)$.\n5. Pad $z$ by a zero high bit, call $\\operatorname{SUB}_{n+1}(z,N)$, and let $h$ be its carry. Emit $v=\\operatorname{NOT}(h)$ and $g=\\operatorname{AND}(c,v)$. Set $F=\\operatorname{SELECT}_n(g,R,z)$. The ordered output ports are $F_{n-1},\\ldots,F_0$. This completes the finite DAG and its topological order. Construct a second DAG by the identical recipe with constant $a^{-1}$ in place of $a$.\n\nCompile each DAG to the clean-target XOR oracle of [[def-qc-coherent-function-oracle]] using [[alg-qc-reversible-embedding]], whose exact gate-emission rules apply also to repeated-source ports. Allocate an $n$-bit clean target, compute $f_a(c,z)$ into it, swap the data and target registers with three CNOT gates per bit, then apply the compiled XOR computation for $f_{a^{-1}}$ to the old-data target, using the new data as input. Each compiled XOR oracle is an involution by [[thm-qc-reversible-xor-oracle-unitary]]. Return the concatenated gate list with every compute-copy-uncompute stage included. Separate items `thm-qa-modular-multiplication-circuit-correctness` and `thm-qa-modular-arithmetic-cost` establish its basis action and gate/work bounds. No depth bound is part of this algorithm.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-modular-multiplication-circuit-correctness",
+          "source_section": "Statement",
+          "quote": "For $N\\ge2$, $n=\\lceil\\log_2N\\rceil$, and a unit $a\\pmod N$ with supplied inverse $a^{-1}$, the circuit of [[alg-qa-modular-multiplication-circuit]] is unitary. On a computational-basis state it fixes the control bit, sends $|z\\rangle$ to $|az\\bmod N\\rangle$ if $c=1$ and $z<N$, and fixes $z$ if $c=0$ or $z\\ge N$. All Boolean value, target, and scratch registers return to zero. Its action therefore extends coherently to superpositions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then\n\n$$\\sum_{x=0}^{N-1}e^{2\\pi i(k-\\ell)x/N}=\\begin{cases}N,&k\\equiv\\ell\\pmod N,\\\\\\\\ 0,&k\\not\\equiv\\ell\\pmod N.\\end{cases}$$\n\nAt $N=1$ the congruence holds for all $k,\\ell$ and the sum is $1$. The sum is the finite sum of the complex family $x\\mapsto e^{2\\pi i(k-\\ell)x/N}$ over the von Neumann natural $N=\\{0,\\dots,N-1\\}$ ([[def-finite-sum-in-a-commutative-monoid]]), and $N$ on the right is the natural number $N$ read in $\\mathbb C$ as the additive multiple $N\\cdot1_{\\mathbb C}$, that is, the value at $N$ of the canonical embedding $\\mathbb N\\to\\mathbb C$ ([[def-canonical-natural]], [[lem-integer-multiples-agree-with-canonical-natural]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-phase-estimation-superposition-law",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a unitary on a nonzero finite-dimensional complex inner-product space $H$. Let $\\Theta\\subset[0,1)$ be its finite set of distinct eigenphases, and let $\\Pi_\\theta$ denote the orthogonal projection onto the full eigenspace for eigenvalue $\\exp(2\\pi i\\theta)$; degeneracies are grouped in one projection. For $Q=2^m$, $m\\ge1$, define\n$$a_y(\\theta):=Q^{-1}\\sum_{j=0}^{Q-1}\\exp(2\\pi ij(\\theta-y/Q)),\\qquad K_y:=\\sum_{\\theta\\in\\Theta}a_y(\\theta)\\Pi_\\theta.$$\nFor a unit input $\\psi=\\sum_{\\theta\\in\\Theta}\\Pi_\\theta\\psi$, the unnormalized branch vector is $K_y\\psi$ and\n$$p_y=\\|K_y\\psi\\|^2=\\sum_{\\theta\\in\\Theta}|a_y(\\theta)|^2\\|\\Pi_\\theta\\psi\\|^2.$$\nIf $p_y>0$, the conditional vector is $K_y\\psi/\\sqrt{p_y}$; if $p_y=0$, no conditional vector is assigned. The outcome law is an eigenspace-weighted mixture, while the conditional branch can retain coherent cross terms between distinct eigenspaces.\n\nAfter discarding the phase register, the induced system instrument has branch maps $\\mathcal I_y(X)=K_yXK_y^\\dagger$ for operators $X$ on $H$. More generally, for a density operator $\\rho$ on $H\\otimes R$, where $R$ is a nonzero finite-dimensional reference space, the unnormalized reference-preserving branch after measuring and discarding the phase register is\n$$\\mathcal I_y^{(R)}(\\rho)=(K_y\\otimes I_R)\\rho(K_y^\\dagger\\otimes I_R).$$\nIts probability is $\\operatorname{tr}\\mathcal I_y^{(R)}(\\rho)$, and the conditional state is $\\mathcal I_y^{(R)}(\\rho)/\\operatorname{tr}\\mathcal I_y^{(R)}(\\rho)$ exactly when that probability is positive. With $w_\\theta=\\operatorname{tr}((\\Pi_\\theta\\otimes I_R)\\rho)$, the reference outcome law is $p_y=\\sum_{\\theta\\in\\Theta}|a_y(\\theta)|^2w_\\theta$, where $w_\\theta\\ge0$ and $\\sum_\\theta w_\\theta=1$. If every eigenphase is on the $Q$-grid, then $K_y=\\Pi_{y/Q}$ when $y/Q\\in\\Theta$ and $K_y=0$ otherwise, so the instrument branch is $X\\mapsto K_yXK_y^\\dagger$. If any eigenphase is off-grid, its nonzero coefficient has modulus less than one in every $K_y$, so $K_y^\\dagger K_y$ is not a projection and the induced instrument is not the spectral projection instrument.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-phase-estimation-success-and-tail",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. Every nearest grid label $y$ has $P_\\theta(y)\\ge4/\\pi^2$. For any $\\eta\\in\\mathbb R$ with $K=\\lfloor Q\\eta\\rfloor\\ge2$,\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$\nIf $Q\\theta$ is an integer $t$, then $P_\\theta(t)=1$ and all other labels have probability $0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-unit-group-modulo-n-and-euler-totient",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer. Multiplication makes $\\mathbb Z/n$ a commutative\nmonoid with identity $[1]_n$ by [[thm-integers-modulo-n-basic-algebra]]. A class\n$u\\in\\mathbb Z/n$ is a **unit** when it is invertible in that monoid\n([[def-invertible-element]]). The set of all units is\n\n$$(\\mathbb Z/n)^\\times:=\\{\\,u\\in\\mathbb Z/n:\\text{some }v\\in\\mathbb Z/n\\text{ satisfies }uv=[1]_n\\,\\}.$$\n\nBy [[lem-monoid-units-form-a-group]], multiplication restricts to a group\noperation on $(\\mathbb Z/n)^\\times$, called the **unit group modulo $n$**.\n\nThe quotient $\\mathbb Z/n$ is finite with cardinality $n$ by\n[[thm-standard-representatives-modulo-n]], and its unit set is a finite subset by\n[[thm-subset-of-a-finite-set]]. Euler's **totient function** is therefore defined\nfor every positive integer $n$ by\n\n$$\\varphi(n):=\\big|(\\mathbb Z/n)^\\times\\big|\\in\\mathbb N$$\n\n([[def-finite-cardinality]]). For $n=1$, the quotient has one element, which is\nits multiplicative identity and hence a unit, so $\\varphi(1)=1$ follows from the\ndefinition.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-totient-ratio-logarithmic-lower-bound",
+          "source_section": "Statement",
+          "quote": "For every integer $r\\ge1$, $\\varphi(r)/r\\ge1/(1+\\log_2 r)$, with $\\varphi(1)=1$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-order-characterisation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group, $g \\in G$, and let orders be as in [[def-order-in-a-group]].\nThroughout, a natural number written where an integer is expected means its image\nunder the embedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ of [[lem-nat-embeds-int]].\n\n**Finite order.** Suppose $\\operatorname{ord}(g) = n$ with $n \\in \\mathbb{N}$,\n$n \\ge 1$. Then:\n\n1. for every $k \\in \\mathbb{Z}$, $g^{k} = e$ if and only if $k = qn$ for some\n   $q \\in \\mathbb{Z}$, that is, if and only if $n \\mid k$\n   ([[thm-division-algorithm-in-z]]);\n2. the powers $g^{0}, g^{1}, \\dots, g^{n-1}$ are pairwise distinct: if\n   $i, j \\in \\mathbb{N}$ with $i < n$, $j < n$ and $g^{i} = g^{j}$, then $i = j$;\n3. $\\langle g \\rangle = \\{\\, g^{s} : s \\in \\mathbb{N},\\ s < n \\,\\}$ and\n   $\\langle g \\rangle \\approx n$; so $\\langle g \\rangle$ is finite with\n   $|\\langle g \\rangle| = n = \\operatorname{ord}(g)$.\n\n**Infinite order.** If $\\operatorname{ord}(g) = \\infty$ then for $j, k \\in \\mathbb{Z}$,\n$g^{j} = g^{k}$ implies $j = k$; so the integer powers of $g$ are pairwise\ndistinct and $\\langle g \\rangle$ is not finite.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-archimedean-polygon-perimeter-characterization-of-pi",
+          "source_section": "Statement",
+          "quote": "For every natural $n\\ge3$, let $I_n$ and $O_n$ be the perimeters of the regular $n$-gons respectively inscribed in and circumscribed about the unit circle. Then\n\n$$I_n=2n\\sin(\\pi/n),\\qquad O_n=2n\\tan(\\pi/n),$$\n\n$$I_n<2\\pi<O_n.$$\n\nThe sequence $(I_n)_{n\\ge3}$ is strictly increasing, $(O_n)_{n\\ge3}$ is strictly decreasing, and both converge to $2\\pi$, the circumference of the unit circle.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cofunction-supplementary-and-reflection-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(\\pi/2-x)=\\cos x,\\quad \\cos(\\pi/2-x)=\\sin x,\\quad \\sin(\\pi-x)=\\sin x,\\quad \\cos(\\pi-x)=-\\cos x,$$\nand the quarter-turn and reflection formulas are\n$$\\sin(x+\\pi/2)=\\cos x,\\quad \\cos(x+\\pi/2)=-\\sin x,\\quad \\sin(-x)=-\\sin x,\\quad \\cos(-x)=\\cos x.$$\nOn the common natural domains of the two sides,\n$$\\tan(\\pi/2-x)=\\cot x,\\quad \\cot(\\pi/2-x)=\\tan x,\\quad \\sec(\\pi/2-x)=\\csc x,\\quad \\csc(\\pi/2-x)=\\sec x,$$\nand\n$$\\tan(\\pi-x)=-\\tan x,\\quad \\cot(\\pi-x)=-\\cot x,\\quad \\sec(\\pi-x)=-\\sec x,\\quad \\csc(\\pi-x)=\\csc x.$$\nThe conventions and prerequisite facts used below are recorded in [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[thm-quarter-turn-values-and-shift-formulas]], [[thm-sine-and-cosine-addition-formulas]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\sin ^2x+\\cos ^2x=1$, $\\sin(-x)=-\\sin x$, and $\\cos(-x)=\\cos x$. Wherever the displayed quotients are defined, $\\tan(-x)=-\\tan x$, $\\cot(-x)=-\\cot x$, $\\sec(-x)=\\sec x$, $\\csc(-x)=-\\csc x$, $1+\\tan^2x=\\sec^2x$, and $1+\\cot^2x=\\csc^2x$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma$ be the unique smallest positive zero of cosine supplied by [[thm-cosine-has-a-smallest-positive-zero]]. Define\n$$\\pi:=2\\gamma.$$\n\nThus $\\pi>0$ and $\\pi/2=\\gamma$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-tangent-cotangent-secant-cosecant",
+          "source_section": "Definition",
+          "quote": "Define\n$$\\tan x:=\\frac{\\sin x}{\\cos x}\\quad(x\\ne\\pi/2+m\\pi),\\qquad\\cot x:=\\frac{\\cos x}{\\sin x}\\quad(x\\ne m\\pi),$$\n$$\\sec x:=\\frac1{\\cos x}\\quad(x\\ne\\pi/2+m\\pi),\\qquad\\csc x:=\\frac1{\\sin x}\\quad(x\\ne m\\pi),$$\nwhere $m$ ranges over the integers. The exclusions are exactly the zero sets of [[thm-sine-cosine-zero-sets-and-fundamental-period]].",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $r$ is a positive integer and $r\\le\\varphi(N)\\le N$: write $\\varphi(N)=dr$ with integer $d$ by divisibility in [F1]. The group contains its identity, so $\\varphi(N)>0$; since $r>0$, $d>0$ and thus $d\\ge1$. Consequently $r\\le\\varphi(N)$, while the group counts only standard residue representatives and so $\\varphi(N)\\le N$. The orbit $|x^s\\bmod N\\rangle$, $0\\le s<r$, consists of distinct valid computational-basis vectors, since equality of two residues would imply a smaller positive power of $x$ is $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The algorithm starts with $a_0=x$ and $b_0=x^{-1}$ in standard representatives. Suppose $a_j\\equiv x^{2^j}$ and $a_jb_j\\equiv1\\pmod N$. Squaring the first identity gives $a_{j+1}\\equiv x^{2^{j+1}}$, and the two loop updates give $a_{j+1}b_{j+1}\\equiv(a_jb_j)^2\\equiv1$. Induction proves both identities for all $j<m$; every constant remains in $[0,N)$ and is a unit with the supplied inverse. On valid residues, repeated application of [F2] therefore gives $U_x^{2^j}|z\\rangle=|a_jz\\bmod N\\rangle$; on invalid encodings both this power and the multiplier are identity. Thus each controlled multiplier in the QPE gate list is the required controlled power on the full data register, with its work returned clean.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $|\\psi_k\\rangle=r^{-1/2}\\sum_{s=0}^{r-1}e^{-2\\pi iks/r}|x^s\\bmod N\\rangle$ for $0\\le k<r$. The shift action in [F2] gives $U_x|\\psi_k\\rangle=e^{2\\pi ik/r}|\\psi_k\\rangle$, including the wrap from $s=r-1$ to $s=0$. By [F11] and [F3] these are orthonormal unit vectors; the same character sum gives $|1\\rangle=r^{-1/2}\\sum_{k=0}^{r-1}|\\psi_k\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the QPE circuit from [F4] to this decomposition. Its outcome law is the uniform mixture over $k=0,\\ldots,r-1$, each phase being $k/r$; this uses the superposition law in [F4], rather than an eigenvector promise for $|1\\rangle$. There are exactly $\\varphi(r)$ indices with $\\gcd(k,r)=1$, counted by [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each coprime $k$, [F4] gives probability at least $4/\\pi^2$ to a nearest grid label. Here $m=2n+3$, $Q=2^m>4N^2$, and $r\\le N$ by step 1.1, so the reconstruction correctness theorem applies and returns reduced denominator $r$ on that event. By [F6], $x^r=1$; hence the algorithm's exact verification retains this denominator. Summing the disjoint eigenspace-mixture probabilities gives one-sample success at least $(4/\\pi^2)\\varphi(r)/r$. By [F5] and $r\\le N$, this is at least $4/[\\pi^2(1+\\log_2N)]$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Every retained $q$ passes $x^q=1$, so [F6] implies $r\\mid q$. If the exact denominator $r$ is ever retained, no retained candidate is smaller than $r$ and $r$ itself is present; the algorithm's minimum rule therefore returns $r$.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "First put $\\theta=\\pi/4$. Since $\\pi>0$ by [F9], $0<\\theta<\\pi/2$. The cofunction law [F8] gives $\\sin\\theta=\\cos\\theta$; strict monotonicity and the endpoint values in [F9] show both are positive. Thus [F10] gives $\\tan(\\pi/4)=1$, and [F7] at $s=4$ gives $2\\pi<O_4=8\\tan(\\pi/4)=8$, so $\\pi<4$. Now put $n=\\lceil\\log_2N\\rceil$ and $u=1/[4(n+1)]$. The one-sample lower bound in step 4.1 and $\\pi<4$, together with $1+\\log_2N\\le n+1$, give $p\\ge u$. Independent resets make the $t=4(n+1)b$ samples independent, hence the probability that no successful sample occurs is at most $(1-u)^t$. Since $1-u\\le(1+u)^{-1}$, and with integer $K=4(n+1)$ the binomial expansion gives $(1+1/K)^K\\ge1+K(1/K)=2$, we obtain $(1-u)^{Kb}\\le2^{-b}$. By step 5.1, the output is the exact order except on this event.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "For arbitrary $0<\\delta<1$, choosing $b=\\lceil\\log_2(1/\\delta)\\rceil$ gives $2^{-b}\\le\\delta$. Thus the stated guarantee follows without using an inexact floating-point threshold.",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N≥3 and the unit order r are positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Fourier basis and phase mixture include k=0 in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include order r=1 and its single orbit phase."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the Fourier basis for each r, including r=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The elementary π<4 bound is derived in step 6.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–6.1 use finite orbit indices and a finite sample count."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a success-probability bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N5-x2-order-four",
+          "input": "N=5,x=2,r=4",
+          "expected": "φ(4)/4=1/2; every retained q is a multiple of 4; k=1 or 3 reconstructs denominator 4",
+          "status": "finite group and phase-index arithmetic checked against steps 1.1–6.1"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked eight steps and exact current suppliers. Finite unit group gives 1<=r<=phi(N)<=N; orbit powers are distinct, and full-register controlled powers fix invalid encodings. Negative-sign Fourier orbit vectors have eigenvalues exp(2 pi i k/r), orthonormality and expansion of |1> give uniform weights even with larger ambient eigenspaces. Each of phi(r) coprime indices has nearest-label mass >=4/pi^2 and reconstruction returns r; r=1 uses k=0, phi(1)=1. Retained denominators are positive order multiples, so one r sample forces minimum r. Local pi<4 follows from circumscribed square and tan(pi/4)=1; binomial (1+1/K)^K>=2 proves failure<=2^-b with K=4(n+1). Arbitrary delta ceiling is valid; independence comes from reset samples, no AC."
+      }
+    },
+    "thm-qa-rational-reconstruction-bit-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-rational-reconstruction-from-phase-sample",
+          "source_section": "Definition",
+          "quote": "**Input.** Integers $N\\ge1$, $Q>4N^2$, and $y\\in\\{0,\\ldots,Q-1\\}$, with $Q=2^m$ and $y$ the label from [[alg-qa-quantum-phase-estimation]] when this routine is called from QPE.\n\n**Output.** A reduced fraction $p/q$ with $1\\le q\\le N$, or FAIL.\n\n**Instructions.** Set $u:=y$, $v:=Q$, and $j:=0$. Repeatedly divide $u$ by the positive integer $v$, obtaining the unique quotient $a_j$ and remainder $r_j$ with $u=a_jv+r_j$ and $0\\le r_j<v$. Append $a_j$; if $r_j=0$, stop, and otherwise set $(u,v):=(v,r_j)$, increment $j$, and repeat. For $y=0$ this immediately gives the one-digit expansion $[0]$; for every other input, [[thm-rational-continued-fraction-termination]] gives termination and the resulting normalized finite expansion is the one in [[def-qa-rational-phase-reconstruction]]. Starting from $p_{-2}=0,p_{-1}=1,q_{-2}=1,q_{-1}=0$, process the digits in order using $p_j=a_jp_{j-1}+p_{j-2}$ and $q_j=a_jq_{j-1}+q_{j-2}$; this lists all convergents including the terminal one by [[def-convergents-of-regular-continued-fraction]]. For each convergent, reject it if $q>N$; otherwise compute $2|yq-pQ|$ exactly and accept it precisely when this integer is at most $q$. Return the first accepted candidate, or FAIL if none exists. The uniqueness result `lem-qa-rational-reconstruction-candidate-uniqueness` shows there cannot be two. The algorithm makes no floating-point comparison. Its deterministic bit bound is proved separately in `thm-qa-rational-reconstruction-bit-cost`, which also establishes that these instructions terminate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "A **finite regular continued fraction** is an expression\n$$[a_0; a_1,\\ldots,a_n]$$\nwith $a_0 \\in \\mathbb{Z}$ and $a_i \\in \\mathbb{Z}_{>0}$ for $i \\ge 1$. Its value\nis defined recursively in $\\mathbb{Q}$ ([[def-rationals]], [[def-rat-operations]])\nby\n$$[a_n] := a_n,\\qquad [a_0; a_1,\\ldots,a_n] := a_0 + \\frac{1}{[a_1;\\ldots,a_n]} \\quad(n \\ge 1).$$\n\nThis recursion is well defined. Indeed, starting from the last digit and\nworking backwards, every tail $[a_i;\\ldots,a_n]$ with $i\\ge1$ is a positive\nrational: the last tail is $a_n>0$, and $a_i+1/t>0$ whenever $a_i>0$ and\n$t>0$. In particular every denominator occurring in the recursion is nonzero.\n\nAn **infinite regular continued fraction** is a digit sequence\n$(a_n)_{n \\ge 0}$ with $a_0 \\in \\mathbb{Z}$ and $a_n \\in \\mathbb{Z}_{>0}$ for\n$n \\ge 1$, written\n$$[a_0; a_1,a_2,\\ldots].$$\nIts value is not assumed by the notation; existence and uniqueness of the value\nare proved in [[thm-convergence-of-infinite-regular-continued-fractions]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-division-algorithm-in-z",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$ ([[def-integers]]) with $b > 0$. Then there exist\nintegers $q$ and $r$ with\n\n$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.\n\nWe say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$; by the above, for $b > 0$ this holds exactly when the\nremainder $r$ is $0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-classical-bit-cost",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]], bit-operation cost is the number of transitions of a declared multitape Turing machine over a fixed finite alphabet; the $k$-tape transition reads and writes one symbol on each of its $k\\ge1$ tapes and moves each head once per transition ([[def-multitape-and-nondeterministic-machines]]). It includes random-bit generation, any encoding work actually performed by that machine on declared public data or received replies, address formation, reading and writing every bit of an oracle reply, comparison/postprocessing, and writing the classical output. The abstract instance encoding in [[def-qa-input-encoding-and-size]] fixes the size parameter; it supplies neither a readable hidden input nor an encoding procedure to execute. The fair-bit machine convention is supplied by [[def-probabilistic-polynomial-time-machine-interface]]. The oracle invocation itself is one separately counted query action; its returned bits are not free to process.\n\nFor a query with an $a(n)$-bit address and a $b(n)$-bit reply, the machine's charged work includes forming the address and processing the $b(n)$ reply symbols. A claimed time bound also specifies whether it is worst-case over promised inputs and random tapes, as in [[def-probabilistic-polynomial-time-machine-interface]]. Query, nonoracle quantum gate, measurement, and classical bit costs remain distinct.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $q_j$ be the convergent denominators, with $q_0=1$ and $q_1\\ge1$. The recurrence in [F1] gives $q_{j+2}\\ge q_{j+1}+q_j\\ge2q_j$ whenever both indices exist. Since the terminal denominator is at most $Q$, every two quotient steps at least double a positive denominator, so the number of Euclidean divisions is at most $2L+O(1)=O(L)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The reduced denominator of $y/Q$ is at most $Q$, so the recurrence in [F1] makes each convergent denominator at most its terminal denominator. Since $0\\le y/Q<1$, the normalized expansion starts with $a_0=0$; its initial convergents satisfy $0\\le p_0\\le q_0$ and $0\\le p_1\\le q_1$, and the recurrence with positive later digits preserves $0\\le p_j\\le q_j$. Thus all convergent numerators and denominators have $O(L)$ bits. By the division algorithm in [F1], binary long division of two such integers can be performed by at most $O(L)$ compare/subtract scans of at most $O(L)$ bits, hence $O(L^2)$ multitape transitions under [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Updating a convergent numerator and denominator by [F1] uses a constant number of products and sums on $O(L)$-bit integers, hence $O(L^2)$ transitions per update. Each convergent candidate also requires a constant number of products $yq_j$ and $p_jQ$, an absolute difference, a doubling, and a comparison with $q_j$. Schoolbook multiplication and these scans each cost $O(L^2)$ transitions. There are $O(L)$ candidates by step 1.1, so total comparison work is $O(L^3)$; writing the selected numerator and denominator costs only $O(L)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The routine normalizes the rational by exact Euclidean divisions and applies only the integer test from [F1]; all work is covered by the above bounds. Hence its deterministic multitape bit cost is $O(L^3)$ and it performs no floating-point comparison.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement hypotheses specify a nonempty integer/register domain; no empty object is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 include y=0, the terminal denominator, and every convergent candidate in the finite Euclidean list."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 include y=0, the terminal denominator, and every convergent candidate in the finite Euclidean list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 include y=0, the terminal denominator, and every convergent candidate in the finite Euclidean list."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 include y=0, the terminal denominator, and every convergent candidate in the finite Euclidean list."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 include every candidate in the finite Euclidean list and charge its exact comparison."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–4.1 bound Euclidean divisions via denominator growth and count exact integer operations. The Statement is an upper complexity guarantee for the specified routine and no iff characterization of reconstruction or minimal cost.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–4.1 bound Euclidean divisions via denominator growth and count exact integer operations. The Statement is an upper complexity guarantee for the specified routine and no iff characterization of reconstruction or minimal cost.",
+            "item_sha256": "d4b6663bc296f70cb0b273982beb08a7ffbc1173819fddfb03718f362887fe9e",
+            "row_sha256": "0a76396862c51090d51ce8266452392abf6f3a09f303b267d74f21244b51c78e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–4.1 bound Euclidean divisions via denominator growth and count exact integer operations. The Statement is an upper complexity guarantee for the specified routine and no iff characterization of reconstruction or minimal cost.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–4.1 bound Euclidean divisions via denominator growth and count exact integer operations. The Statement is an upper complexity guarantee for the specified routine and no iff characterization of reconstruction or minimal cost.",
+            "item_sha256": "d4b6663bc296f70cb0b273982beb08a7ffbc1173819fddfb03718f362887fe9e",
+            "row_sha256": "354a2700207c1e732286a36b811511754c58e68afa6c1637096dd5dcc5828f14",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "euclidean-count-q9-over17",
+          "input": "Q=17,y=9,N=2,L=5",
+          "expected": "9/17=[0;1,1,8] uses three Euclidean quotient divisions, bounded by O(L)",
+          "status": "continued-fraction list computed exactly"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked four proof steps against current explicit Euclidean/convergent routine, CF conventions, division and multitape model. q_(j+2)>=2q_j and terminal reduced denominator<=Q bound digits by O(L); y=0 terminates immediately with [0]. Nonnegative numerator<=denominator<=Q, digits and product intermediates have O(L) bits. Long division and schoolbook recurrence/test scans cost O(L^2) per digit, O(L^3) total, with output charged. Enumeration includes terminal convergent, denominator rejection and exact tie test; no floating arithmetic or AC."
+      }
+    },
+    "thm-qa-modular-order-finding-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-modular-order-finding",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $N\\ge3$, the standard representative $x\\in\\{1,\\ldots,N-1\\}$ of a unit class modulo $N$, and an integer $b\\ge1$ specifying target failure probability $\\delta=2^{-b}$.\n\nThe representative is the unique one in $0\\le x<N$ by [[thm-standard-representatives-modulo-n]]; unit membership is equivalent to $\\gcd(x,N)=1$ by [[def-unit-group-modulo-n-and-euler-totient]] and [[thm-unit-criterion-modulo-n]]. The register ket $|1\\rangle$ uses [[def-qc-dirac-notation-conversion]]. The superposition output law for applying the QPE gate list to this non-eigenvector input is supplied by [[thm-qa-phase-estimation-superposition-law]].\n\n**Output.** An accepted candidate, or FAIL.\n\n**Instructions.** Set $n=\\lceil\\log_2N\\rceil$, $m=2n+3$, $Q=2^m$, and $t=4(n+1)b$. The inequality $Q>4N^2$ follows from $N\\le2^n$. Compute the inverse constant by the following binary-integer loop. Initialize $(R,S,U,V):=(N,x,0,1)$. While $S>0$, use division with remainder to compute $q,r$ with $R=qS+r$ and $0\\le r<S$, compute the least residue $h=(U-qV)\\bmod N$, and simultaneously replace $(R,S,U,V)$ by $(S,r,V,h)$. Division and least residues use [[thm-division-algorithm-in-z]] and [[thm-standard-representatives-modulo-n]]; use schoolbook binary arithmetic for every update. When the loop stops, return FAIL if $R\\ne1$; otherwise set $b_0:=U$ and $a_0:=x$. The inverse identity, termination, and preprocessing bit cost are established in [[thm-qa-modular-arithmetic-cost]]. For $j=0,\\ldots,m-2$, compute $a_{j+1}=a_j^2\\bmod N$ and $b_{j+1}=b_j^2\\bmod N$. Then $a_j=x^{2^j}\\bmod N$ and $b_j=a_j^{-1}\\bmod N$ for all $j<m$.\n\nRepeat independently for samples $s=1,\\ldots,t$. Initialize the system register to the valid residue $|1\\rangle$ and apply the QPE phase-estimation circuit with phase-register length $m$. Its controlled $U_x^{2^j}$ gate is implemented by the explicit controlled modular-multiplication circuit for $a_j$ from [[alg-qa-modular-multiplication-circuit]]. This procedure uses the QPE gate list on $|1\\rangle$; it does not assert that $|1\\rangle$ is an eigenvector. Measure the phase register to obtain $y$. Run [[alg-qa-rational-reconstruction-from-phase-sample]] with $(N,Q,y)$. If it returns FAIL, retain no denominator from this sample. If it returns $p/q$, compute $x^q\\bmod N$ as follows: set $v:=1$, $a:=x$, $e:=q$; while $e>0$, if $e$ is odd set $v:=va\\bmod N$, then set $a:=a^2\\bmod N$ and $e:=\\lfloor e/2\\rfloor$. Retain $q$ exactly when the final $v=1$.\n\nAfter all samples, return the smallest retained positive denominator; return FAIL if none was retained. A passing candidate is not called the order unless it is minimal. The exact criterion $x^q=1$ iff the order divides $q$ is [[lem-order-characterisation]]. The separate item `thm-qa-modular-order-finding-success` proves the probability guarantee and the fact that every retained candidate is an order multiple.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-phase-estimation-access-cost",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$ and $Q=2^m$. Count costs in the ideal continuous-rotation submodel, where each exact controlled phase used by the binary QFT is one gate. If the controlled powers $C(U^{2^j})$, $0\\le j<m$, are supplied as one query each, one run uses exactly $m$ controlled-power queries. If the only oracle is $C(U)$, the repeated implementation uses exactly $Q-1$ controlled-$U$ queries. If the supplied controlled-power circuits have ordinary gate counts $C_j$, the unitary gate count after the eigenstate input is provided is\n$$\\sum_{j=0}^{m-1}C_j+2m+\\frac{m(m-1)}2+\\left\\lfloor\\frac m2\\right\\rfloor.$$\nThe final register measurement reads $m$ bits and is not included in this unitary gate count. No cost-free power construction, fixed finite gate alphabet, uniform family, or state-preparation bound is asserted.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-modular-arithmetic-cost",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$, $n=\\lceil\\log_2N\\rceil$, and let $1\\le x<N$ be the standard representative of a known unit modulo $N$. In the explicit schoolbook Boolean construction of [[alg-qa-modular-multiplication-circuit]], each controlled multiplication by a known unit has a Boolean DAG with $S,E=O(n^2)$. Under the compiler of [[thm-qc-reversible-embedding-cost]], the complete clean circuit, including both XOR computations, $n$ swaps, and inverse cleanup, uses $O(n^2)$ elementary gates and $O(n^2)$ clean work bits. Repeated-squaring constants $x^{2^j}\\bmod N$ and their inverses for $O(n)$ powers can be computed in $O(n^3)$ deterministic multitape bit transitions. No depth bound is asserted.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-rational-reconstruction-bit-cost",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$, $m\\ge0$, $Q=2^m>4N^2$, and $y\\in\\{0,\\ldots,Q-1\\}$ be integers, and set $L=\\lceil\\log_2(Q+1)\\rceil$. Under the multitape bit-transition model of [[def-qa-classical-bit-cost]], [[alg-qa-rational-reconstruction-from-phase-sample]] uses $O(L)$ Euclidean divisions and $O(L^3)$ deterministic bit transitions. No real-number arithmetic is used.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-classical-bit-cost",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]], bit-operation cost is the number of transitions of a declared multitape Turing machine over a fixed finite alphabet; the $k$-tape transition reads and writes one symbol on each of its $k\\ge1$ tapes and moves each head once per transition ([[def-multitape-and-nondeterministic-machines]]). It includes random-bit generation, any encoding work actually performed by that machine on declared public data or received replies, address formation, reading and writing every bit of an oracle reply, comparison/postprocessing, and writing the classical output. The abstract instance encoding in [[def-qa-input-encoding-and-size]] fixes the size parameter; it supplies neither a readable hidden input nor an encoding procedure to execute. The fair-bit machine convention is supplied by [[def-probabilistic-polynomial-time-machine-interface]]. The oracle invocation itself is one separately counted query action; its returned bits are not free to process.\n\nFor a query with an $a(n)$-bit address and a $b(n)$-bit reply, the machine's charged work includes forming the address and processing the $b(n)$ reply symbols. A claimed time bound also specifies whether it is worst-case over promised inputs and random tapes, as in [[def-probabilistic-polynomial-time-machine-interface]]. Query, nonoracle quantum gate, measurement, and classical bit costs remain distinct.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, and $w(C)$ its total number of wires.\n\nEach clean or dirty ancilla coordinate additionally requires a declared ordered partition of the circuit wires into data register $D$ and ancilla register $A$, and a declared target unitary $V$ on $D$. In that factor order, the complete circuit unitary must satisfy the corresponding exact contract of [[def-qc-clean-and-dirty-ancillas]]. For such a supplied clean contract set $a_{\\rm clean}(C)=|A|$, and for such a supplied dirty contract set $a_{\\rm dirty}(C)=|A|$; the notation suppresses the declared interface, which is part of the cost instance and may differ between the two coordinates. If no corresponding contract is supplied, mark that coordinate not applicable. These are counts of declared contract registers, not maxima over possible partitions. Zero initialization alone supplies neither return contract. Every auxiliary wire remains counted in $w(C)$ ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $Q=2^{2n+3}$, its bit length is $O(n)$; [F1] has $m=O(n)$ and $t=O(nb)$. There are exactly $tm=O(n^2b)$ controlled modular-multiplier circuits.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], those arithmetic circuits contribute $O(n^2)\\cdot O(n^2b)=O(n^4b)$ gates. Each QPE phase preparation and ideal inverse QFT contributes $O(m^2)=O(n^2)$ more gates per sample by [F2], for total $O(n^3b)$, which is bounded by $O(n^4b)$ since $n\\ge2$. Thus the stated gate bound follows.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Precomputing all modular powers and inverses costs $O(n^3)$ bits by [F3]. In each sample, reconstruction costs $O(n^3)$ by [F4]. Testing a candidate $q\\le N$ by binary modular exponentiation uses $O(n)$ modular products on $O(n)$-bit values, each with $O(n^2)$ schoolbook transitions as in [F3], hence $O(n^3)$ bits. Across $t=O(nb)$ samples this is $O(n^4b)$, including preprocessing because $n\\ge2$ and $b\\ge1$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under only controlled-$U_x$ access, [F2] charges exactly $Q-1$ calls for each run, so $t(Q-1)$ is the total query count. Under compiled known modular arithmetic, the multiplier circuits have the separate cost in step 2.1. The cost coordinates in [F4] are independent, so this gate bound does not turn a black-box controlled-$U_x$ query into a polynomial-cost circuit.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $b\\ge1$, $1+b=O(1+\\ln(1/\\delta))$ when $\\delta=2^{-b}$, since $\\ln(1/\\delta)=b\\ln2$. This gives the equivalent logarithmic forms. The ideal QFT model uses exact continuous rotations, and none of [F1]–[F4] provides a finite-alphabet compilation or a uniform-family generator, so those claims are outside this theorem.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement hypotheses specify a nonempty integer/register domain; no empty object is quantified.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "Proof counts a nonempty phase register with m≥1 and a controlled-power family j=0,...,m-1. These are finite explicit repeated-squaring inputs, not an empty choice family. Statement is a resource bound, not a biconditional.",
+            "item_sha256": "5e46528ef4e4d797fad708f8fa17c7842bcc08eda9bf15d83909d9ddcc9e6284",
+            "row_sha256": "bc61e08778ade4336661ae03e1b323056a5c749c2a61f7614d867c2be519bfef",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-early.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "Proof counts a nonempty phase register with m≥1 and a controlled-power family j=0,...,m-1. These are finite explicit repeated-squaring inputs, not an empty choice family. Statement is a resource bound, not a biconditional."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.3 count controlled multipliers, gates, and bit transitions separately for n≥2 and b≥1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.3 count controlled multipliers, gates, and bit transitions separately for n≥2 and b≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.3 count controlled multipliers, gates, and bit transitions separately for n≥2 and b≥1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.3 count controlled multipliers, gates, and bit transitions separately for n≥2 and b≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 count the finite sample loop and each declared cost coordinate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 separately count tm modular circuits, compiled gates, bit processing and t(Q-1) one-step queries. Step 4.1 rewrites b using ln(1/delta)=b ln2; this algebraic equivalent expression is the same bound, not an iff proposition with a converse correctness direction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 separately count tm modular circuits, compiled gates, bit processing and t(Q-1) one-step queries. Step 4.1 rewrites b using ln(1/delta)=b ln2; this algebraic equivalent expression is the same bound, not an iff proposition with a converse correctness direction.",
+            "item_sha256": "0b153d3674e3486e6eb2292f672a296b78d9a2a6f7e41183a8be58f08783bc65",
+            "row_sha256": "0becf5bc12dd4c28c21175b25b61a7bfd71f8f77c3543edaa43de1f1e644d17d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 separately count tm modular circuits, compiled gates, bit processing and t(Q-1) one-step queries. Step 4.1 rewrites b using ln(1/delta)=b ln2; this algebraic equivalent expression is the same bound, not an iff proposition with a converse correctness direction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 separately count tm modular circuits, compiled gates, bit processing and t(Q-1) one-step queries. Step 4.1 rewrites b using ln(1/delta)=b ln2; this algebraic equivalent expression is the same bound, not an iff proposition with a converse correctness direction.",
+            "item_sha256": "0b153d3674e3486e6eb2292f672a296b78d9a2a6f7e41183a8be58f08783bc65",
+            "row_sha256": "8cd1bb8b086cfd58a33f454f1fd70e3a8b8a1b9b7ce60e677e72bfdff49c14af",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "order-cost-N5-b1",
+          "input": "N=5,n=3,b=1,m=9,Q=512,t=16",
+          "expected": "144 controlled modular-multiplier circuits; controlled-U-only query count 16·511=8176",
+          "status": "finite resource counts computed exactly from the statement and algorithm"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked all five steps against current algorithm, QPE access-cost, arithmetic and reconstruction bounds and separate cost models. m=2n+3=O(n), t=4(n+1)b=O(nb) give exactly tm controlled multipliers and O(n^4 b) gates; O(n^2) QFT per sample is absorbed. O(n^3) preprocessing plus O(n^3) reconstruction/exact exponent test per sample gives O(n^4 b) bit work. Bare controlled-U access costs t(Q-1) queries exactly and is exponential in n; no finite-alphabet, generator-time or depth claim imported. N>=3 ensures n>=2 and b>=1 includes endpoint delta=1/2."
+      }
+    },
+    "ex-qa-rational-reconstruction-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-rational-phase-reconstruction",
+          "source_section": "Definition",
+          "quote": "Let $N,Q$ be integers with $N\\ge1$ and $Q>4N^2$. A measured phase label is represented by the unique integer $y$ with $0\\le y<Q$ as in [[thm-standard-representatives-modulo-n]]. Write the normalized finite regular continued fraction of $y/Q$ as $[a_0;\\ldots,a_s]$ and denote its convergents by $p_j/q_j$. Every convergent is reduced by [[lem-continued-fraction-determinant-identity]]. A **candidate** is a convergent whose numerator and denominator are reduced, whose denominator satisfies $1\\le q_j\\le N$, and which passes the exact integer test\n$$2|yq_j-p_jQ|\\le q_j.$$\n\nThe **reconstruction result** is the unique candidate if the candidate set is nonempty, and is FAIL otherwise. The candidate set includes the terminal convergent whenever it meets the same conditions. Uniqueness, and hence well-definedness of this value, follows from [[lem-qa-rational-reconstruction-candidate-uniqueness]] under $Q>4N^2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rational-continued-fraction-termination",
+          "source_section": "Statement",
+          "quote": "For a real number $\\alpha$, the continued-fraction algorithm terminates if and\nonly if $\\alpha$ is rational. When $\\alpha$ is rational, the continued-fraction\ndigits are exactly the successive quotient digits of the Euclidean algorithm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-rational-reconstruction-candidate-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$, $Q>4N^2$ be integers and $0\\le y<Q$. There is at most one reduced fraction $p/q$ with $1\\le q\\le N$ satisfying $2|yq-pQ|\\le q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-finite-rational-legendre-criterion",
+          "source_section": "Statement",
+          "quote": "Let $A,p\\in\\mathbb Z$ and $D,q\\in\\mathbb Z_{>0}$, with $A/D$ and $p/q$ reduced and $D>2q$. If $|A/D-p/q|<1/(2q^2)$, then $p/q$ is a convergent of the normalized finite regular continued fraction of $A/D$. This is a finite-rational statement; it does not invoke the irrational-input Legendre theorem.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Euclidean divisions $17=1\\cdot9+8$, $9=1\\cdot8+1$, and $8=8\\cdot1$ give the displayed normalized expansion and its convergents by [F2]. The denominator-$2$ convergent $1/2$ satisfies the exact equality in [F1], so it passes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The other denominator-$1$ convergents fail: for $0/1$, $2|9|=18>1$; for $1/1$, $2|9-17|=16>1$. The terminal fraction has denominator $17>N$ and is excluded. Thus $1/2$ is the only candidate; this also follows from [F3]. The algorithm's weak inequality accepts the tie, while [F4] uses a separate strict approximation hypothesis and is not invoked to turn equality into strictness.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite example fixes Q=17 and lists its four convergents."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the convergent 0/1 exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks both denominator-one convergents."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies equality in the weak integer test for 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks that the terminal convergent denominator 17 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 lists all four convergents."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example checks one concrete reconstruction, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is checked."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N2-Q17-y9-boundary-tie",
+          "input": "N=2,Q=17,y=9,p/q=1/2",
+          "expected": "2|9·2−1·17|=2=q; denominator 2 passes and is unique",
+          "status": "computed exactly in steps 1.1 and 2.1"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked 9/17=[0;1,1,8], recurrence convergents 0/1,1/1,1/2,9/17, N=2 and Q=17>16. Test at 1/2 is 2=q and both denominator-one candidates fail; terminal denominator 17 excluded. Weak integer-window equality is correctly distinguished from the separate strict Legendre hypothesis; no general boundary inference is asserted."
+      }
+    },
+    "ex-qa-order-finding-noncoprime-phase": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-modular-order-finding",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $N\\ge3$, the standard representative $x\\in\\{1,\\ldots,N-1\\}$ of a unit class modulo $N$, and an integer $b\\ge1$ specifying target failure probability $\\delta=2^{-b}$.\n\nThe representative is the unique one in $0\\le x<N$ by [[thm-standard-representatives-modulo-n]]; unit membership is equivalent to $\\gcd(x,N)=1$ by [[def-unit-group-modulo-n-and-euler-totient]] and [[thm-unit-criterion-modulo-n]]. The register ket $|1\\rangle$ uses [[def-qc-dirac-notation-conversion]]. The superposition output law for applying the QPE gate list to this non-eigenvector input is supplied by [[thm-qa-phase-estimation-superposition-law]].\n\n**Output.** An accepted candidate, or FAIL.\n\n**Instructions.** Set $n=\\lceil\\log_2N\\rceil$, $m=2n+3$, $Q=2^m$, and $t=4(n+1)b$. The inequality $Q>4N^2$ follows from $N\\le2^n$. Compute the inverse constant by the following binary-integer loop. Initialize $(R,S,U,V):=(N,x,0,1)$. While $S>0$, use division with remainder to compute $q,r$ with $R=qS+r$ and $0\\le r<S$, compute the least residue $h=(U-qV)\\bmod N$, and simultaneously replace $(R,S,U,V)$ by $(S,r,V,h)$. Division and least residues use [[thm-division-algorithm-in-z]] and [[thm-standard-representatives-modulo-n]]; use schoolbook binary arithmetic for every update. When the loop stops, return FAIL if $R\\ne1$; otherwise set $b_0:=U$ and $a_0:=x$. The inverse identity, termination, and preprocessing bit cost are established in [[thm-qa-modular-arithmetic-cost]]. For $j=0,\\ldots,m-2$, compute $a_{j+1}=a_j^2\\bmod N$ and $b_{j+1}=b_j^2\\bmod N$. Then $a_j=x^{2^j}\\bmod N$ and $b_j=a_j^{-1}\\bmod N$ for all $j<m$.\n\nRepeat independently for samples $s=1,\\ldots,t$. Initialize the system register to the valid residue $|1\\rangle$ and apply the QPE phase-estimation circuit with phase-register length $m$. Its controlled $U_x^{2^j}$ gate is implemented by the explicit controlled modular-multiplication circuit for $a_j$ from [[alg-qa-modular-multiplication-circuit]]. This procedure uses the QPE gate list on $|1\\rangle$; it does not assert that $|1\\rangle$ is an eigenvector. Measure the phase register to obtain $y$. Run [[alg-qa-rational-reconstruction-from-phase-sample]] with $(N,Q,y)$. If it returns FAIL, retain no denominator from this sample. If it returns $p/q$, compute $x^q\\bmod N$ as follows: set $v:=1$, $a:=x$, $e:=q$; while $e>0$, if $e$ is odd set $v:=va\\bmod N$, then set $a:=a^2\\bmod N$ and $e:=\\lfloor e/2\\rfloor$. Retain $q$ exactly when the final $v=1$.\n\nAfter all samples, return the smallest retained positive denominator; return FAIL if none was retained. A passing candidate is not called the order unless it is minimal. The exact criterion $x^q=1$ iff the order divides $q$ is [[lem-order-characterisation]]. The separate item `thm-qa-modular-order-finding-success` proves the probability guarantee and the fact that every retained candidate is an order multiple.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-phase-estimation-superposition-law",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a unitary on a nonzero finite-dimensional complex inner-product space $H$. Let $\\Theta\\subset[0,1)$ be its finite set of distinct eigenphases, and let $\\Pi_\\theta$ denote the orthogonal projection onto the full eigenspace for eigenvalue $\\exp(2\\pi i\\theta)$; degeneracies are grouped in one projection. For $Q=2^m$, $m\\ge1$, define\n$$a_y(\\theta):=Q^{-1}\\sum_{j=0}^{Q-1}\\exp(2\\pi ij(\\theta-y/Q)),\\qquad K_y:=\\sum_{\\theta\\in\\Theta}a_y(\\theta)\\Pi_\\theta.$$\nFor a unit input $\\psi=\\sum_{\\theta\\in\\Theta}\\Pi_\\theta\\psi$, the unnormalized branch vector is $K_y\\psi$ and\n$$p_y=\\|K_y\\psi\\|^2=\\sum_{\\theta\\in\\Theta}|a_y(\\theta)|^2\\|\\Pi_\\theta\\psi\\|^2.$$\nIf $p_y>0$, the conditional vector is $K_y\\psi/\\sqrt{p_y}$; if $p_y=0$, no conditional vector is assigned. The outcome law is an eigenspace-weighted mixture, while the conditional branch can retain coherent cross terms between distinct eigenspaces.\n\nAfter discarding the phase register, the induced system instrument has branch maps $\\mathcal I_y(X)=K_yXK_y^\\dagger$ for operators $X$ on $H$. More generally, for a density operator $\\rho$ on $H\\otimes R$, where $R$ is a nonzero finite-dimensional reference space, the unnormalized reference-preserving branch after measuring and discarding the phase register is\n$$\\mathcal I_y^{(R)}(\\rho)=(K_y\\otimes I_R)\\rho(K_y^\\dagger\\otimes I_R).$$\nIts probability is $\\operatorname{tr}\\mathcal I_y^{(R)}(\\rho)$, and the conditional state is $\\mathcal I_y^{(R)}(\\rho)/\\operatorname{tr}\\mathcal I_y^{(R)}(\\rho)$ exactly when that probability is positive. With $w_\\theta=\\operatorname{tr}((\\Pi_\\theta\\otimes I_R)\\rho)$, the reference outcome law is $p_y=\\sum_{\\theta\\in\\Theta}|a_y(\\theta)|^2w_\\theta$, where $w_\\theta\\ge0$ and $\\sum_\\theta w_\\theta=1$. If every eigenphase is on the $Q$-grid, then $K_y=\\Pi_{y/Q}$ when $y/Q\\in\\Theta$ and $K_y=0$ otherwise, so the instrument branch is $X\\mapsto K_yXK_y^\\dagger$. If any eigenphase is off-grid, its nonzero coefficient has modulus less than one in every $K_y$, so $K_y^\\dagger K_y$ is not a projection and the induced instrument is not the spectral projection instrument.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-phase-estimation-success-and-tail",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. Every nearest grid label $y$ has $P_\\theta(y)\\ge4/\\pi^2$. For any $\\eta\\in\\mathbb R$ with $K=\\lfloor Q\\eta\\rfloor\\ge2$,\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$\nIf $Q\\theta$ is an integer $t$, then $P_\\theta(t)=1$ and all other labels have probability $0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-rational-reconstruction-correctness",
+          "source_section": "Statement",
+          "quote": "Let integers $N\\ge1$, $m\\ge0$, $Q=2^m$, and $1\\le r\\le N$ satisfy $Q>4N^2$, and let $k\\in\\mathbb Z$ with $0\\le k<r$ and $\\gcd(k,r)=1$. Let $y\\in\\{0,\\ldots,Q-1\\}$ be any nearest grid label to phase $k/r$ in circular distance, meaning $\\min_{z\\in\\mathbb Z}|k/r-y/Q-z|\\le1/(2Q)$. Then [[alg-qa-rational-reconstruction-from-phase-sample]] returns $k/r$. For every phase label $y$, there is at most one passing candidate with denominator at most $N$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-order-characterisation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group, $g \\in G$, and let orders be as in [[def-order-in-a-group]].\nThroughout, a natural number written where an integer is expected means its image\nunder the embedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ of [[lem-nat-embeds-int]].\n\n**Finite order.** Suppose $\\operatorname{ord}(g) = n$ with $n \\in \\mathbb{N}$,\n$n \\ge 1$. Then:\n\n1. for every $k \\in \\mathbb{Z}$, $g^{k} = e$ if and only if $k = qn$ for some\n   $q \\in \\mathbb{Z}$, that is, if and only if $n \\mid k$\n   ([[thm-division-algorithm-in-z]]);\n2. the powers $g^{0}, g^{1}, \\dots, g^{n-1}$ are pairwise distinct: if\n   $i, j \\in \\mathbb{N}$ with $i < n$, $j < n$ and $g^{i} = g^{j}$, then $i = j$;\n3. $\\langle g \\rangle = \\{\\, g^{s} : s \\in \\mathbb{N},\\ s < n \\,\\}$ and\n   $\\langle g \\rangle \\approx n$; so $\\langle g \\rangle$ is finite with\n   $|\\langle g \\rangle| = n = \\operatorname{ord}(g)$.\n\n**Infinite order.** If $\\operatorname{ord}(g) = \\infty$ then for $j, k \\in \\mathbb{Z}$,\n$g^{j} = g^{k}$ implies $j = k$; so the integer powers of $g$ are pairwise\ndistinct and $\\langle g \\rangle$ is not finite.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-modular-order-finding-success",
+          "source_section": "Statement",
+          "quote": "Let integer $N\\ge3$, and let $x$ be a unit modulo $N$ of order $r$. Use [[alg-qa-modular-order-finding]] with $b\\in\\mathbb Z_{\\ge1}$ and $\\delta=2^{-b}$. One independent phase sample yields denominator $r$ with probability at least\n$$\\frac4{\\pi^2}\\frac{\\varphi(r)}r\\ge\\frac4{\\pi^2(1+\\log_2N)}.$$\nAfter $t=4(n+1)b$ independent samples, where $n=\\lceil\\log_2N\\rceil$, the algorithm returns the exact order with probability at least $1-2^{-b}$. For any requested $0<\\delta<1$, taking $b=\\lceil\\log_2(1/\\delta)\\rceil$ gives success probability at least $1-\\delta$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives $2^1\\equiv2$, $2^2\\equiv4$, $2^3\\equiv3$, and $2^4\\equiv1\\pmod5$, with no earlier power equal to $1$; thus the order is exactly $4$. The specified register size gives $n=\\lceil\\log_2 5\\rceil=3$, $m=2n+3=9$, and $Q=2^9=512$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $k=2$, the phase reduces to $1/2$, so the exact grid label is $y=512/2=256$. Applying [F3] with reduced numerator $1$, denominator $2$, and $N=5$ gives reconstructed denominator $q=2$. The verification test is $2^2=4\\not\\equiv1\\pmod5$, hence [F1] rejects this candidate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The four vectors $|\\psi_k\\rangle=\\frac12\\sum_{s=0}^3i^{-ks}|2^s\\bmod5\\rangle$ are eigenvectors with phases $k/4$: multiplication by $2$ cycles $1,2,4,3$, and shifting the sum multiplies it by $i^k$. The four-term geometric sum gives $|1\\rangle=\\frac12\\sum_{k=0}^3|\\psi_k\\rangle$, so [F2] assigns weight $1/4$ to each phase and returns its exact grid label. For $k=1$, $y=512/4=128$; [F3] reconstructs denominator $4$, and $2^4=16\\equiv1\\pmod5$, so [F1] retains it. Thus both the rejected $k=2$ outcome and a successful $k=1$ outcome have positive probability.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], every retained denominator is a multiple of $4$. The bad denominator $2$ is rejected by step 2.1, while the denominator-$4$ sample in step 2.2 is retained; [F5] then makes the minimum retained value $4$. This example verifies that a reconstructed divisor is never silently reported as the exact order.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has four phase indices and a positive order."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 gives the four-phase mixture, including index k=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the first modular power and the exact order."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 contrast the non-coprime and coprime phase indices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 compute exact grid labels 256 and 128."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 lists the full modular orbit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete verification, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is checked."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N5-x2-order-four-noncoprime-index",
+          "input": "N=5,x=2,r=4,Q=512,k=2 and k=1",
+          "expected": "k=2 gives y=256,q=2 and 2² mod5=4 (reject); k=1 gives y=128,q=4 and 2⁴ mod5=1 (retain)",
+          "status": "computed exactly in steps 1.1–3.1"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Checked all four steps against current order routine, success/reconstruction results, exact-grid mixture and order characterisation. Powers 2,4,3,1 mod 5 give exact order 4; n=3,m=9,Q=512>100. k=2 has y=256, reduced 1/2 and q=2 fails; k=1 has y=128, 1/4 and q=4 passes. Four explicit orbit Fourier vectors are orthonormal, each has weight 1/4, and grid probabilities are one. Every retained q is a multiple of 4 and q<=5, so any retained value is 4. Citation locator about order candidate verification is inaccurate in de Wolf, independently confirmed from §§5.3–5.4 PDF pages 51–54; correction is source attribution only, with no mathematical change."
+      }
+    }
+  }
+}

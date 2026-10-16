@@ -1,0 +1,1396 @@
+===== PDF PAGE 201 =====
+
+168]: if the initial error-rate of the quantum hardware can be brought down below some constant
+(known as the “fault-tolerance threshold,” though it depends on the assumed noise model, the
+allowed gate set, and the code used, it is not one number), then we can use software-solutions
+like quantum error-correcting codes and fault-tolerant computing to ensure that we can quantum
+compute for long periods of time without serious errors.
+Much research has gone into finding the best value for this fault-tolerance threshold, under
+realistic assumptions on the noise. The more efficient our basic quantum error-correcting codes
+are (i.e., the smaller C and D), the higher (= better) the value of the threshold is. Currently the
+best rigorous lower bounds for the threshold are around 0.1% for reasonable assumptions on the
+noise, but there is numerical evidence that even a few percent might be tolerable (there are also
+some largish upper bounds known on the threshold value, e.g. [157]). The existence of a constant
+threshold is actually one of the most important results in the area of quantum computing, and is
+the main answer to the quantum-computing skeptics mentioned at the start of this chapter: as long
+as experimentalists manage to implement basic operations with an error below that threshold, in
+a scalable way, then we should be able to build large-scale quantum computers.5 This is starting
+to happen [128], and as far as we know there is no fundamental reason why we shouldn’t be able
+to do this at scale. It is, however, an extremely hard engineering problem.
+
+Exercises
+
+1. (H) Let E be an arbitrary 1-qubit unitary. We know that it can be written as
+
+E = α0I + α1X + α2Y + α3Z,
+
+for some complex coefficients αi. Show that �3
+i=0 |αi|2 = 1.
+
+2.
+(a) Write the 1-qubit Hadamard transform H as a linear combination of the four Pauli
+matrices.
+
+(b) Suppose an H-error happens on the first qubit of α|0⟩+ β|1⟩using the 9-qubit code.
+Give the various steps in the error-correction procedure that corrects this error.
+
+3. Give a quantum circuit for the encoding of Shor’s 9-qubit code, i.e., a circuit that maps
+|008⟩�→|0⟩and |108⟩�→|1⟩. Explain why the circuit works.
+
+4. Shor’s 9-qubit code allows to correct a bit flip and/or a phase flip on one of its 9 qubits.
+Below we give a 4-qubit code which allows to detect a bitflip and/or a phaseflip. By this we
+mean that after the detection procedure we either have the original uncorrupted state back,
+or we know that an error occurred (though we do not know which one). The logical 0 and 1
+are encoded as:
+
+|0⟩= 1
+
+2(|00⟩+ |11⟩) ⊗(|00⟩+ |11⟩)
+
+|1⟩= 1
+
+2(|00⟩−|11⟩) ⊗(|00⟩−|11⟩)
+
+(a) Give a procedure (either as a circuit or as sufficiently-detailed pseudo-code) that detects
+a bitflip error on one of the 4 qubits of α|0⟩+ β|1⟩.
+
+5This is of course assuming our simple model of independent noise on each physical qubit is not too far off; if the
+noise can be correlated in devious ways, then it becomes much harder (though often still possible) to protect against.
+
+189
+
+
+===== PDF PAGE 202 =====
+
+(b) Give a procedure (either as a circuit or as sufficiently-detailed pseudo-code) that detects
+a phaseflip error on one of the 4 qubits of α|0⟩+ β|1⟩.
+
+(c) Does that mean that we can now detect any unitary 1-qubit error on one of the 4 qubits?
+Explain your answer.
+
+5. This exercise is about the Steane code, which (as you’ll show) encodes 1 logical qubit into 7
+physical qubits, and can correct an error on any one of the 7 physical qubits.
+
+(a) Consider the subspace C ⊆{0, 1}7 spanned by the 3 elements 0001111, 0110011, 1010101.
+Write out a list of the 8 elements of C.
+
+(b) Let C′ = {c⊕17 | c ∈C} be the set of binary complements of C. It is easy to verify that
+the minimal Hamming distance between any two elements of C ∪C′ is at least 3 (you
+may assume this without proof in your answer). Show that there exists a procedure
+that, for every c ∈C ∪C′, maps Xj|c⟩|0⟩�→Xj|c⟩|j⟩, where j ∈{1, . . . , 7} (so the
+bitflip-error acts on the j-th qubit, and the procedure finds out the location j) and the
+second register consists of a number of initially-|0⟩qubits. You don’t have to write out
+the details, just argue clearly why such a procedure exists.
+
+(c) The Steane code is defined by the two logical basis states
+
+|0⟩=
+1
+√
+
+8
+
+�
+
+c∈C
+|c⟩
+and
+|1⟩=
+1
+√
+
+8
+
+�
+
+c′∈C′
+|c′⟩
+
+What is the 7-qubit unitary X on the physical qubits that corresponds to the logical
+X-gate? In other words, what simple 7-qubit unitary maps |b⟩�→|1 −b⟩?
+
+(d) Show that there exists a quantum procedure (which may involve measurements in the
+computational basis) that identifies and corrects a bitflip-error on any one of the 7 qubits,
+i.e., that maps Xj(α|0⟩+ β|1⟩)|0⟩�→(α|0⟩+ β|1⟩)|j⟩.
+
+(e) (H) Show that there exists a quantum procedure (which may involve measurements in
+the computational basis) that identifies and corrects a phaseflip-error on any one of the
+7 qubits, i.e., that maps Zj(α|0⟩+ β|1⟩)|0⟩�→(α|0⟩+ β|1⟩)|j⟩.
+
+6. (H) Show that there cannot be a quantum code that encodes one logical qubit into 2k physical
+qubits while being able to correct errors on up to k of the physical qubits.
+
+7. Suppose we have a qubit whose density matrix is ρ = α0I + α1X + α2Y + α3Z, where
+α0, α1, α2, α3 are real coefficients and I, X, Y, Z are the Pauli matrices.
+
+(a) Show that α0 = 1/2.
+
+(b) Depolarizing noise (of strength p ∈[0, 1]) acts on a qubit as follows: with probability
+1 −p nothing happens to the qubit, and with probability p the qubit is replaced by the
+“completely mixed state” of a qubit, whose density matrix is I/2.
+Show that depolarizing noise on the above qubit doesn’t change the coefficient α0, but
+shrinks each of α1, α2, α3 by a factor of 1 −p.
+
+8. Consider a quantum-error correcting code that encodes k qubits (and n −k |0⟩s) into an
+n-qubit codeword state, via the unitary encoding map
+
+U : |x, 0n−k⟩�→|C(x)⟩, where x ∈{0, 1}k, and |C(x)⟩need not be a basis state.
+
+190
+
+
+===== PDF PAGE 203 =====
+
+A “weight-w Pauli error” is the tensor product of n Pauli matrices, of which at most w are
+not identity (e.g., something like X ⊗I ⊗Z ⊗I ⊗I if w = 2 and n = 5). Suppose that there is
+a unitary map S on 3n qubits that can identify every weight-w Pauli error E on a codeword,
+by writing the name of E (the “error syndrome,” which we can think of as a 2n-bit string
+”E”, for example writing 00 for I, 10 for X, 01 for Z, 11 for Y ) in a second register that’s
+initially 02n. In other words, for every x ∈{0, 1}k and weight-w Pauli error E, this S maps
+
+S : (E|C(x)⟩)|02n⟩�→(E|C(x)⟩)|”E”⟩.
+
+(a) Show that if x and y are k-bit strings, and E and F are weight-w Pauli errors, then the
+n-qubit states E|C(x)⟩and F|C(y)⟩are orthogonal unless both x = y and E = F.
+
+(b) Prove the inequality 2k
+w
+�
+
+i=0
+
+�n
+i
+
+�
+3i ≤2n.
+
+Comment: This inequality implies a lower bound on the required number of qubits n, in terms of the
+
+number of encoded qubits k and the weight w of errors that you can correct, but you don’t need to
+
+derive that consequence.
+
+9. In this exercise we will see that the argument about concatenating the classical 3-bit code at
+the end of Section 21.2 still works if the initial error rate is p ≤1/2 −ε for some ε > 0.
+
+(a) Define the function f as f(p) = 3p2(1 −p) + p3. Show that if p = 1/2 −ε for some
+ε ∈[0, 1/6], then f(p) ≤1/2 −(13/9)ε.
+
+(b) Show that there is an m = O(log(1/ε)) such that m levels of concatenation reduce the
+error to pm < 1/3.
+
+(c) Show that m + k levels of concatenation reduce the error to something exponentially
+small in 2k.
+
+(d) How many bits are used to encode one logical bit in the scheme from (c)?
+
+191
+
+
+===== PDF PAGE 204 =====
+
+192
+
+
+===== PDF PAGE 205 =====
+
+Appendix A
+
+Some Useful Linear Algebra
+
+In this appendix we quickly introduce the basic elements of linear algebra, most of which will be
+used somewhere or other in these notes.
+
+A.1
+Vector spaces
+
+A vector space V over a field F is a set of objects (called vectors) satisfying that if v, w ∈V , then
+cv + dw ∈V for all c, d ∈F. In other words, V is closed under addition and scalar multiplication.
+A (linear) subspace W is a subset W ⊆V which is itself a vector space (i.e., closed under addition
+and scalar multiplication). For example, V = Cd is the d-dimensional complex vector space, which
+is the set of all column vectors of d complex numbers. The set W ⊆V of vectors whose first two
+entries are 0 is a subspace of V . As another example, the set V = {0, 1}d of d-bit vectors, with
+entrywise addition modulo 2, is a linear space. The field here is F2 = {0, 1}. The set W ⊆V of
+vectors whose first two entries are equal is a subspace of V .
+A set of vectors v1, . . . , vm ∈V is linearly independent if the only way to get �m
+i=1 aivi equal
+to the zero-vector 0, is to set a1 = · · · = am = 0. The span (over field F) of a set of vectors
+S = {v1, . . . , vm} ⊆V is the set span(S) of vectors that can be written as a linear combination
+�m
+i=1 aivi (with coefficients a1, . . . , am ∈F). A basis for V is a linearly independent set S of vectors
+such that span(S) = V . One can show that all bases of V have the same size; this size is called
+the dimension of V . If we fix an ordered basis S = (v1, . . . , vm), then every w ∈V can be written
+uniquely as a linear combination �m
+i=1 wivi with coefficients wi, and can also be written (in that
+basis) as (w1, . . . , wm). The support of such a w is the set {i | wi ̸= 0} of locations where w is
+nonzero. For example, the support of w = (1, 5, 0, 4) is {1, 2, 4} if we number the locations starting
+from 1 (we will also sometimes number positions from 0 in these notes).
+
+A.2
+Matrices
+
+Matrices represent linear maps between two vector spaces with particular bases. We assume famil-
+iarity with the basic rules of matrix addition and multiplication. We use Aij for the (i, j)-entry of
+a matrix A, and AT for its transpose, which has AT
+ij = Aji. We use Id to denote the d × d identity
+matrix, which has 1s on its diagonal and 0s elsewhere; we usually omit the subscript d when the
+dimension is clear from context. If A is square and there is a matrix B such that AB = BA = I,
+
+193
+
+
+===== PDF PAGE 206 =====
+
+then we use A−1 to denote this B, which is called the inverse of A (and is unique if it exists). Note
+that (AB)−1 = B−1A−1.
+In the remainder of this appendix we will mostly consider the complex field. If A is a matrix
+(not necessarily square), then A∗denotes its conjugate transpose (or adjoint): the matrix obtained
+by transposing A and taking the complex conjugates of all entries. Note that (AB)∗= B∗A∗.
+Physicists usually write A† (pronounced “A-dagger”) instead of A∗, but in these notes we will stick
+with the A∗notation that is common in mathematics.
+
+A.3
+Inner product and norms for vectors
+
+For vectors v, w with real or complex entries, we use ⟨v|w⟩= v∗w = �
+i v∗
+i wi for their inner
+product.1 The combination of the vector space V with this inner product is called a Hilbert space.
+Two vectors v, w are orthogonal if ⟨v|w⟩= 0. A set {vi} of vectors is called orthogonal if all vectors
+are pairwise orthogonal: ⟨vi|vj⟩= 0 if i ̸= j. If additionally the vectors all have norm 1, then the
+set is called orthonormal.
+The inner product induces a vector norm ∥v∥=
+�
+
+⟨v|v⟩=
+��
+i |vi|2.
+This is the usual
+Euclidean norm (or “length” of the vector). The norm in turn induces a distance ∥v −w∥between
+vectors v and w. Note that distance and inner product are closely related:
+
+∥v −w∥2 = ⟨v −w|v −w⟩= ∥v∥2 + ∥w∥2 −⟨v|w⟩−⟨w|v⟩.
+
+In particular, for unit vectors v and w the real part of their inner product equals 1 −1
+
+2∥v −w∥2.
+Hence unit vectors that are close together have an inner product close to 1, and vice versa. The
+Cauchy-Schwarz inequality gives |⟨v|w⟩| ≤∥v∥· ∥w∥(see also Appendix B).
+The outer product of v and w is the matrix vw∗.
+
+A.4
+Unitary matrices
+
+Below we will restrict attention to square matrices, unless explicitly mentioned otherwise.
+A matrix A is unitary if A−1 = A∗. The following conditions are equivalent:
+
+1. A is unitary
+
+2. A preserves inner product: ⟨Av|Aw⟩= ⟨v|w⟩for all v, w
+
+3. A preserves norm: ∥Av∥= ∥v∥for all v
+
+4. ∥Av∥= 1 if ∥v∥= 1
+
+(1) implies (2) because if A is unitary then A∗A = I, and hence ⟨Av|Aw⟩= (v∗A∗)Aw = ⟨v|w⟩. (2)
+implies (1) as follows: if A is not unitary then A∗A ̸= I, so then there is a w such that A∗Aw ̸= w
+and, hence, a v such that ⟨v|w⟩̸= ⟨v|A∗Aw⟩= ⟨Av|Aw⟩, contradicting (2). Clearly (2) implies (3).
+Moreover, (3) implies that A preserves the real part of the inner product via the following identity:
+
+∥v + w∥2 = ∥v∥2 + ∥w∥2 + ⟨v|w⟩+ ⟨w|v⟩= ∥v∥2 + ∥w∥2 + 2R(⟨v|w⟩).
+
+1Here we follow a physics convention by conjugating the entries of the first vector; mathematicians usually conju-
+gate the entries of the second vector, defining ⟨v|w⟩= �
+
+i viw∗
+i .
+
+194
+
+
+===== PDF PAGE 207 =====
+
+Similarly it preserves the imaginary part of the inner product, so (3) implies (2). The equivalence
+of (3) and (4) is obvious.
+Note that by (4), the eigenvalues of a unitary matrix have absolute value 1.
+
+A.5
+Diagonalization and singular values
+
+The complex number λ is an eigenvalue of (square) matrix A if there is some nonzero vector v
+(called an eigenvector) such that Av = λv. The set of such eigenvalues is called the spectrum of A.
+Matrices A and B are similar if there is an invertible matrix S such that A = SBS−1. Note
+that if Av = λv, then BS−1v = λS−1v, so similar matrices have the same eigenvalues. Schur’s
+triangularization theorem states that every matrix A is similar to an upper triangular matrix:
+A = UTU−1 for some unitary U and upper triangular T. Since similar matrices have the same
+eigenvalues and the eigenvalues of an upper triangular matrix are exactly its diagonal entries, the
+diagonal of T has the eigenvalues of A.
+A matrix D is diagonal if Dij = 0 whenever i ̸= j. Let S be some matrix satisfying AS = SD
+for some diagonal matrix D. Let vi be the i-th column of S and λi be the i-th entry on the diagonal
+of D, then
+
+
+
+
+
+
+...
+...
+Av1
+· · ·
+Avd
+...
+...
+
+
+
+
+
+
+
+�
+��
+�
+AS
+
+=
+
+
+
+
+
+
+
+...
+...
+λ1v1
+· · ·
+λdvd
+...
+...
+
+
+
+
+
+
+
+�
+��
+�
+SD
+
+,
+
+and we see that vi is an eigenvector of A associated with eigenvalue λi. Conversely, if v1, . . . , vd are
+eigenvectors of A with eigenvalues λ1, . . . , λd, then we have AS = SD, where S has the vi as columns
+and D is the diagonal matrix of λi. We call a square matrix A diagonalizable if it is similar to some
+diagonal matrix D: A = SDS−1. This D then has A’s eigenvalues λi on its diagonal, some of which
+may be zero. Note that A is diagonalizable iff it has a linearly independent set of d eigenvectors.
+These eigenvectors will form the columns of S, giving AS = SD, and linear independence ensures
+that S has an inverse, giving A = SDS−1. A matrix A is unitarily diagonalizable iff it can be
+diagonalized via a unitary matrix U: A = UDU−1. If the columns of U are the vectors ui, and the
+diagonal entries of D are λi, then we can also write A = �
+i λiuiu∗
+i ; this is sometimes called the
+spectral decomposition of A. By the same argument as before, A will be unitarily diagonalizable iff
+it has an orthonormal set of d eigenvectors.
+A matrix A is normal if it commutes with its conjugate transpose (A∗A = AA∗). For example,
+unitary matrices are normal. If A is normal and A = UTU−1 for some upper triangular T (which
+must exist because of Schur’s triangularization theorem), then T = U−1AU and T ∗= U−1A∗U, so
+TT ∗= U−1AA∗U = U−1A∗AU = T ∗T. Hence T is normal and upper triangular, which implies
+(with a little work) that T is diagonal. This shows that normal matrices are unitarily diagonalizable.
+Conversely, if A is unitarily diagonalizable as UDU−1, then AA∗= UDD∗U∗= UD∗DU−1 = A∗A,
+so then A is normal. Thus a matrix is normal iff it is unitarily diagonalizable. If A is not normal,
+it may still be diagonalizable via a non-unitary S, for example:
+�1
+1
+0
+2
+
+�
+
+�
+��
+�
+A
+
+=
+�1
+1
+0
+1
+
+�
+
+�
+��
+�
+S
+
+·
+�1
+0
+0
+2
+
+�
+
+�
+��
+�
+D
+
+·
+�1
+−1
+0
+1
+
+�
+
+�
+��
+�
+S−1
+
+.
+
+195
+
+
+===== PDF PAGE 208 =====
+
+If A = UDU−1 then A∗= UD∗U−1, so the eigenvalues of A∗are the complex conjugates of the
+eigenvalues of A.
+An important class of normal (and hence unitarily diagonalizable) matrices are the Hermitian
+matrices, which are the ones satisfying A = A∗. Note that the last line of the previous paragraph
+implies that the eigenvalues of Hermitian matrices are real.
+A Hermitian matrix A is called positive semidefinite (resp. positive definite), if all its eigenvalues
+are nonnegative (resp. positive). An equivalent definition is that A is positive semidefinite (psd) iff
+there exists a matrix C such that A = C∗C (in other words, there exist vectors ci such that for all
+i, j, we have Aij = ⟨ci|cj⟩). A useful and easy to prove property is that A is psd iff Tr(AB) ≥0 for
+all psd matrices B. By defining A ⪰B iff A−B is positive semidefinite, we obtain a partial ordering
+on the set of all Hermitian matrices. If all eigenvalues are 0 or 1, then A is called a projection (or
+projection matrix or projector). This is equivalent to requiring A2 = A.
+
+Not all matrices are diagonalizable, for instance A =
+�0
+1
+0
+0
+
+�
+is not. However, every matrix
+
+has a singular value decomposition (SVD), which is almost as useful as a diagonalization. We will
+derive this below for an arbitrary (not necessarily square) matrix A. Since A∗A is psd, we can write
+A∗A = V DV −1 for some unitary V whose columns vi are the orthonormal eigenvectors of A∗A,
+and some nonnegative diagonal matrix D with the corresponding eigenvalues. The entries σi of the
+matrix Σ =
+√
+
+D are called the singular values of A (some of which may be zero). Define vectors
+ui = Avi/σi. Note that the ui form an orthonormal system because u∗
+i uj = v∗
+i (A∗Avj)/σiσj =
+v∗
+i (σ2
+j vj)/σiσj, which is 1 if i = j and 0 if i ̸= j.
+Hence the matrix U that has these ui’s as
+columns is unitary. We have U = AV Σ−1, so we can write A = UΣV −1, which is the SVD of A.
+Equivalently, we can write A = �
+i σiuiv∗
+i . This derivation of the SVD A = UΣV −1 can easily be
+extended to arbitrary m × n matrices A; U will be an m × m unitary, Σ will be m × n (padded
+with 0s if the rank of A is < m, n), and V will be an n × n unitary.
+
+A.6
+Tensor products
+
+If A = (Aij) is an m×n matrix and B an m′×n′ matrix, then their tensor product (a.k.a. Kronecker
+product) is the mm′ × nn′ matrix
+
+A ⊗B =
+
+
+
+
+
+
+
+
+A11B
+· · ·
+A1nB
+A21B
+· · ·
+A2nB
+...
+Am1B
+· · ·
+AmnB
+
+
+
+
+
+
+.
+
+For example:
+
+�
+1
+√
+
+2
+1
+√
+
+2
+1
+√
+
+2
+−1
+√
+
+2
+
+�
+
+⊗
+�
+0
+1
+−1
+0
+
+�
+=
+
+
+
+
+
+
+
+
+0
+1
+√
+
+2
+0
+1
+√
+
+2
+−1
+√
+
+2
+0
+−1
+√
+
+2
+0
+0
+1
+√
+
+2
+0
+−1
+√
+
+2
+−1
+√
+
+2
+0
+1
+√
+
+2
+0
+
+
+
+
+
+
+.
+
+Note that the tensor product of two numbers (i.e., 1 × 1 matrices) is itself just a number, and the
+tensor product of two column vectors is itself a column vector.
+The following properties of the tensor product are easily verified:
+
+196
+
+
+===== PDF PAGE 209 =====
+
+• c(A ⊗B) = (cA) ⊗B = A ⊗(cB) for all scalars c
+
+• (A⊗B)∗= A∗⊗B∗, and similarly for inverse and transpose (note that the order of the tensor
+factors doesn’t change).
+
+• A ⊗(B + C) = (A ⊗B) + (A ⊗C)
+
+• A ⊗(B ⊗C) = (A ⊗B) ⊗C
+
+• (A ⊗B)(C ⊗D) = (AC) ⊗(BD)
+
+Different vector spaces can also be combined using tensor products. If V and V ′ are vector spaces of
+dimension d and d′ with basis {v1, . . . , vd} and {v′
+1, . . . , v′
+d′}, respectively, then their tensor product
+space is the d · d′-dimensional space W = V ⊗V ′ spanned by {vi ⊗v′
+j | 1 ≤i ≤d, 1 ≤j ≤d′}.
+Applying a linear operation A to V and B to V ′ corresponds to applying the tensor product A ⊗B
+to the tensor product space W.
+
+A.7
+Trace
+
+The trace of a square matrix A is the sum of its diagonal entries: Tr(A) = �
+i Aii. Some important
+and easily verified properties of Tr(A) are:
+
+• Tr(A + B) = Tr(A) + Tr(B)
+
+• Tr(AB) = Tr(BA), which is known as the “cyclic property” or “cyclicity” of the trace.
+For example, Tr(Avv∗) = v∗Av.
+
+• Tr(A) is the sum of the eigenvalues of A.2
+
+(This follows from Schur and the previous item: Tr(A) = Tr(UTU−1) = Tr(U−1UT) =
+Tr(T) = �
+i λi)
+
+• Tr(A ⊗B) = Tr(A)Tr(B)
+
+A.8
+Rank
+
+The rank of a matrix A (over a field F) is the size of a largest linearly independent set of rows
+of A (linear independence taken over F). Unless mentioned otherwise, we take F to be the field
+of complex numbers. We say that A has full rank if its rank equals its dimension. The following
+properties are all easy to show:
+
+• rank(A) = rank(A∗)
+
+• rank(A) equals the number of nonzero singular values of A (counting multiplicity)
+
+• rank(A + B) ≤rank(A) + rank(B)
+
+• rank(AB) ≤min{rank(A), rank(B)}
+
+• rank(A ⊗B) = rank(A) · rank(B)
+
+• A has an inverse iff A has full rank
+
+2The product of the eigenvalues is the determinant of A, but we will rarely use that in these notes.
+
+197
+
+
+===== PDF PAGE 210 =====
+
+A.9
+The Pauli matrices
+
+The four Pauli matrices are:
+
+I =
+�1
+0
+0
+1
+
+�
+, X =
+�0
+1
+1
+0
+
+�
+, Y =
+�0
+−i
+i
+0
+
+�
+, and Z =
+�1
+0
+0
+−1
+
+�
+.
+
+Note that each Pauli matrix P is both unitary and Hermitian, and hence self-inverse: P −1 = P.
+This implies that their eigenvalues are in {−1, 1}. Distinct non-identity Paulis anti-commute: if
+P, Q ∈{X, Y, Z} are distinct then PQ = −QP. Note that Y = iXZ. Also, products of two distinct
+Pauli matrices have trace 0.
+Define the Hilbert-Schmidt inner product on the space of d × d matrices as ⟨A, B⟩= 1
+
+dTr(A∗B).
+With respect to this inner product (for d = 2), the four Pauli matrices form an orthonormal set.
+This implies that every complex 2 × 2 matrix A can be written as a linear combination of the Pauli
+matrices:
+A = α0I + α1X + α2Y + α3Z,
+
+with complex coefficients αi. If A is Hermitian, then these coefficients will be real.
+We can also consider the n-qubit Paulis, which are n-fold tensor products of the above 2 × 2
+Paulis. For example X ⊗Z ⊗I ⊗Y ⊗Z is a 5-qubit Pauli. There are 4n n-qubit Paulis, since we
+have 4 possibilities for each of the n tensor factors, and these 4n matrices form an orthonormal set
+w.r.t. Hilbert-Schmidt inner product. Accordingly, every 2n ×2n matrix A can be written uniquely
+as a linear combination of the 4n n-qubit Paulis. Again, if A is Hermitian, then the 4n coefficients
+will be real.
+
+A.10
+Dirac notation
+
+Physicists often write their linear algebra in Dirac notation, and we will follow that custom for
+denoting quantum states. In this notation we write |v⟩= v and ⟨v| = v∗. The first is called a ket,
+the second a bra. Some points about this notation:
+
+• ⟨v|w⟩= ⟨v||w⟩: inner products are bra-ket (“bracket”) products.
+
+• If matrix A is unitarily diagonalizable, then A = �
+i λi|vi⟩⟨vi| for some orthonormal set of
+eigenvectors {vi}.
+
+• |v⟩⟨v| ⊗|w⟩⟨w| = (|v⟩⊗|w⟩)(⟨v| ⊗⟨w|), the latter is often abbreviated to |v⟩⊗|w⟩⟨v| ⊗⟨w|.
+Abbreviating the latter further by omitting the tensor product leads to dangerous ambiguity,
+though sometimes it’s still clear from context.
+
+• (U|v⟩)∗= ⟨v|U∗and (|u⟩⊗|v⟩)∗= ⟨u| ⊗⟨v| (the ordering of tensor factors doesn’t change).
+
+• Don’t write kets inside of other kets or bras: the notation ⟨u|(α|v⟩+ β|w⟩)⟩doesn’t really
+make sense.
+
+198
+
+
+===== PDF PAGE 211 =====
+
+Appendix B
+
+Some other Useful Math and CS
+
+Here we collect various basic but useful facts and definitions needed in parts of the lecture notes.
+
+B.1
+Some notation, equalities and inequalities
+
+• We use [n] to denote the set {1, . . . , n}. If P is a statement which can be true or false, then
+[P] ∈{0, 1} denotes its truth value. We write δa,b = [a = b], indicating whether a = b or not.
+Logarithms will always be to base 2 unless stated otherwise.
+
+• A complex number is of the form c = a + bi, where a, b ∈R, and i is the imaginary unit,
+which satisfies i2 = −1. Such a c can also be written as c = reiϕ where r = |c| =
+√
+
+a2 + b2
+
+is the magnitude (a.k.a. modulus or norm) of c, and ϕ ∈[0, 2π) is the angle that c makes
+with the positive horizontal axis when we view it as a point (a, b) in the plane. Note that
+complex numbers of magnitude 1 lie on the unit circle in this plane. We can also write those
+as eiϕ = cos(ϕ) + i sin(ϕ). The complex conjugate c∗is a −ib, equivalently c∗= re−iϕ.
+
+• The Cauchy-Schwarz inequality: for a = (a1, . . . , an) ∈Cn and b = (b1, . . . , bn) ∈Cn
+
+�����
+
+n
+�
+
+i=1
+a∗
+i bi
+
+�����≤
+
+�
+�
+�
+�
+
+n
+�
+
+i=1
+|ai|2
+
+�
+�
+�
+�
+
+n
+�
+
+i=1
+|bi|2.
+
+Equivalently, written in terms of inner products and norms of vectors: |⟨a|b⟩| ≤∥a∥· ∥b∥.
+
+Proof for the case with real entries: for every real λ we have 0 ≤⟨a −λb|a −λb⟩= ∥a∥2 + λ2∥b∥2 −2λ⟨a|b⟩.
+
+Now set λ = ∥a∥/∥b∥and rearrange (a slightly more complicated proof works if a, b ∈Cn).
+
+• Geometric sum:
+
+m−1
+�
+
+j=0
+zj =
+�m
+if z = 1
+1−zm
+
+1−z
+if z ̸= 1
+
+Proof: The case z = 1 is obvious; for the case z ̸= 1, observe (1−z)(�m−1
+j=0 zj) = �m−1
+j=0 zj −�m
+j=1 zj = 1−zm.
+
+For example, if z = e2πir/N is a root of unity, with r an integer in {1, . . . , N −1}, then
+�N−1
+j=0 zj =
+1−e2πir
+1−e2πir/N = 0.
+
+• The ratio in the previous line can be rewritten using the identity |1 −eiθ| = 2| sin(θ/2)|;
+this identity can be seen by drawing the numbers 1 and eiθ as vectors from the origin in the
+
+199
+
+
+===== PDF PAGE 212 =====
+
+complex plane, and dividing their angle θ in two. Some other useful trigonometric identities:
+cos(θ)2 + sin(θ)2 = 1, sin(2θ) = 2 sin(θ) cos(θ).
+
+• 1 + x ≤ex for all real numbers x (positive as well as negative).
+
+• If εj ∈[0, 1] for all j ∈[k], then 1 −
+
+k
+�
+
+j=1
+εj ≤
+
+k
+�
+
+j=1
+(1 −εj) ≤e−�k
+j=1 εj.
+
+Proof: The upper bound comes from the preceding item. The lower bound follows easily by induction on k,
+
+using the fact that (1 −ε1)(1 −ε2) = 1 −ε1 −ε2 + ε1ε2 ≥1 −ε1 −ε2.
+
+B.2
+Algorithms and probabilities
+
+• When we don’t care about constant factors, we’ll often use big-O notation: T(n) = O(f(n))
+means there exist constants c, n0 ≥0 such that for all integers n ≥n0, we have T(n) ≤cf(n).
+Similarly, big-Omega notation is used for lower bounds: T(n) = Ω(f(n)) means there exist
+constants c, n0 ≥0 such that T(n) ≥cf(n) for all n ≥n0. T(n) = Θ(f(n)) means that
+simultaneously T(n) = O(f(n)) and T(n) = Ω(f(n)). Such notation is often used to write
+upper and/or lower bounds on running time of algorithms as a function of input-length n.
+
+• For N = 2n, we can identify the integers {0, . . . , N −1} with their n-bit binary representations
+as follows: the bitstring x = xn−1 . . . x1x0 ∈{0, 1}n corresponds to the integer �n−1
+i=0 xi2i.
+The leftmost bit xn−1 is called the most significant bit of x (since it corresponds to the largest
+power of two, 2n−1), and the rightmost bit x0 is its least significant bit (it corresponds to
+20 = 1, so determines whether x is an even or odd integer). For example, if n = 3 then the
+bitstring x = x2x1x0 = 101 corresponds to the integer x2 · 4 + x1 · 2 + x0 · 1 = 4 + 1 = 5.
+The integer 0 corresponds to the bitstring 0n (if we use 0 to denote a bitstring of 0s, then the
+value of n should be clear from context).
+
+We can also use binary notation for non-integral numbers, with the bits to the right of the
+decimal dot corresponding to negative powers of two (1/2, 1/4, 1/8, etc.).
+For example,
+0.1 denotes 1/2 and 10.101 denotes 2 + 1/2 + 1/8 = 21/8. Note that multiplying by two
+corresponds to shifting the dot to the right, and dividing corresponds to shifting to the left.
+
+• The union bound says that the probability of the union (or logical “or”) of two events is at
+most the sum of their probabilities: Pr[A ∨B] ≤Pr[A] + Pr[B]. This inequality should be
+obvious from drawing a Venn diagram. More generally, if we have T events A1, . . . , AT , then
+Pr[A1 ∨· · · ∨AT ] ≤�T
+i=1 Pr[Ai].
+
+• A (discrete) random variable X is an object that takes value xi with probability pi.
+Its
+expected value (or expectation) is µ = E[X] = �
+i pixi.
+Its variance is σ2 = Var[X] =
+E[(X −E[X])2] = E[X2] −E[X]2. Its standard deviation is σ.
+
+• Linearity of expectation says that, for values a1, . . . , am and random variables X1, . . . , Xm,
+we have E[�m
+j=1 ajXj] = �m
+j=1 ajE[Xj] (easily verified using the definition of expectation).
+
+• Random variable X is independent from random variable Y , if the value of Y does not affect
+the probability distribution of X, i.e., Pr[X = x and Y = y] = Pr[X = x] · Pr[Y = y] for all
+possible values x, y. If X and Y are independent, then E[X · Y ] = E[X] · E[Y ].
+
+200
+
+
+===== PDF PAGE 213 =====
+
+• Three basic upper bounds on the tails of probability distributions:
+Markov: if X is a nonnegative random variable with expectation µ, then Pr[X ≥kµ] ≤1/k.
+
+Proof: Since X is nonnegative, µ ≥Pr[X ≥kµ] · kµ.
+Chebyshev: if X is a random variable with expectation µ and standard deviation σ, then
+Pr[|X −µ| ≥kσ] ≤1/k2.
+
+Proof: Apply Markov to the random variable |X −µ|2, whose expectation is σ2.
+Chernoff/Hoeffding: if X = �n
+i=1 Xi is the sum of n independent, identically distributed
+random variables Xi ∈{0, 1}, each with expectation Pr[Xi = 1] = p, then X has expectation
+µ = np, and exponentially decreasing tail bound Pr[|X −µ| ≥αn] ≤2e−2α2n.
+
+Proof idea: For all parameters λ ≥0, we have Pr[X −µ ≥t] = Pr[eλX ≥eλ(t+µ)].
+Upper bound the
+
+latter probability by applying Markov to random variable eλX. This is a product of n independent random
+
+variables eλXi, so its expectation is the product of n simpler expectations. Choose λ to minimize the bound.
+
+• A randomized algorithm is a classical algorithm that can flip random coins during its op-
+eration, meaning its behavior is partially determined by chance and its output is a random
+variable that depends on its input, rather than a deterministic function of its input. One can
+think of a randomized algorithm as a probability distribution over deterministic algorithms
+(one deterministic algorithm for each setting of the coins).
+
+• When we say a (randomized or quantum) algorithm has error probability ≤1/3, this typically
+means in the worst case: for every possible input, the algorithm produces the correct answer
+with probability ≥2/3, where probability is taken over the random coin flips and/or quantum
+measurements during its operation. Such statements do not refer to “most” inputs under some
+distribution on the inputs, unless stated explicitly.
+
+• If a (randomized or quantum) algorithm produces the correct answer in expected running
+time T (meaning for each input its expected running time is ≤T), then we can convert that
+into an algorithm with worst-case running time 3T and error probability ≤1/3, as follows.
+Run the original algorithm for 3T steps, and just cut it off if it hasn’t terminated by itself.
+The probability of non-termination within 3T steps is at most 1/3 by Markov’s inequality.
+Hence with probability ≥2/3 we will have received the correct answer from the algorithm.
+
+• The union bound is very useful for analyzing an algorithm with T randomized subroutines,
+each of which has its own small failure probability ≤1/(3T). If these failure events are inde-
+pendent, then the probability that none of the T subroutines fails is at least (1 −1/(3T))T ≥
+1 −T/(3T) = 2/3 (using the last bullet of B.1). But what if these events are dependent on
+each other, which may well happen if the subroutines depend on what happens elsewhere in
+the algorithm? Then by the union bound, the probability that one or more of the subroutines
+fails is ≤T · 1/(3T) ≤1/3. In other words, the probability that none of the T subroutines
+fails is still ≥2/3.
+
+• If a (randomized or quantum) algorithm with 0/1-outputs has error probability ≤1/3, then
+we can cheaply reduce this error probability to small ε > 0, as follows. Choose odd n =
+O(log(1/ε)) such that 2e−2α2n ≤ε for α = 1/6. Run the original algorithm n times, each
+time with newly-chosen randomness, and output the majority among the n output bits. The
+probability that this majority is wrong (i.e., that the number of correct output bits is more
+than αn below its expectation), is at most ε by the Chernoff bound.
+
+201
+
+
+===== PDF PAGE 214 =====
+
+202
+
+
+===== PDF PAGE 215 =====
+
+Appendix C
+
+Hints for Exercises
+
+Chapter 1
+
+11. Find the maximal p such that I −2p|−⟩⟨−| −2p|1⟩⟨1| is still psd.
+12. Consider what U has to do when |ϕ⟩= |0⟩, when |ϕ⟩= |1⟩, and when |ϕ⟩is a superposition of
+these two.
+15.b. Use the facts that Tr(D|ψ⟩⟨ψ|) = ⟨ψ|D|ψ⟩for every D, and that products of 2 distinct Paulis
+have trace 0 because at least one them has to be different from I (i.e., X, Y , or Z). This exercise
+is just superdense coding in disguise.
+
+Chapter 2
+
+7. Use Exercise 6.
+8. Instead of measuring the qubit, apply a CNOT that “copies” it to a new |0⟩-qubit, which is then
+left alone until the end of the computation. Analyze what happens.
+14. Use the Bernstein-Vazirani algorithm.
+
+Chapter 3
+
+6.c. Approximate the state of part (a) using the subroutine of part (b), and see what happens if
+
+you apply Hadamards to the approximate state. Use the fact that
+1
+2N
+�N/2+2
+√
+
+N
+w=0
+�N
+w
+�
+is nearly 1,
+because this is the probability that if you flip N fair coins, N/2 −2
+√
+
+N or more of them come up
+“heads.”
+
+Chapter 4
+
+3. Use |α2
+i −β2
+i | = |αi −βi| · |αi + βi| and the Cauchy-Schwarz inequality.
+4.e. Use triangle inequality.
+4.f. Drop all phase-gates with small angles ϕ < 1/n3 from the O(n2)-gate circuit for F2n explained
+in Section 4.5. Upper bound the number of gates that are left in the new circuit, and analyze the
+distance between the unitaries corresponding to the new circuit and the original circuit.
+
+203
+
+
+===== PDF PAGE 216 =====
+
+Chapter 5
+
+1.a. You may invoke here (without proof) the Sch¨onhage-Strassen algorithm for fast multiplica-
+tion [231, 169]. This allows you to multiply two n-bit integers mod N using O(n log(n) log log(n))
+steps (where n = ⌈log N⌉).1
+
+3.a. The prime number theorem implies that Ω(N/ ln N) of the numbers between 1 and N are
+prime; also there is an efficient classical algorithm to test if a given number is prime [6]. You may
+use these facts, but be explicit in how many bits your primes p and q will have. You may also
+invoke the extended Euclidean algorithm without providing detail of how/why it works.
+3.b. Use the result of Exercise 1 (no need to rederive that here).
+3.c. The set of all possible messages forms a group of size ϕ(N). Euler’s Theorem says that in any
+group G, we have a|G| = 1 for all a ∈G (here ‘1’ is the identity element in the group).
+
+Chapter 6
+
+4.b. For M = �K
+i=1 Ei, show that ∥M∥2 =
+��M2��≤2
+
+3∥M∥+ a small constant.
+5. You could use the SWAP-test from Section 16.6.
+
+Chapter 7
+
+4.b. Recall that if there are i > 0 solutions, then one variant of Grover’s algorithm finds a solution
+using an expected number of O(
+�
+
+N/i) queries.
+5.e. Choose γ in (d) such that applying ⌈˜k⌉rounds of amplitude amplification to A results in a
+solution for y with probability 1.
+6.a. Try running the exact version of Grover (see end of Section 7.2) with different guesses for what
+the actual t is.
+7.a. Run the basic Grover search with a cleverly chosen number of iterations.
+7.b. Use binary search on top of (a).
+8.d. The eigenvalues of a 2-dimensional rotation matrix over angle λ are eiλ and e−iλ (you don’t need
+to prove this). You may also assume a ≪1, so that the differences between √a, sin √a, arcsin √a
+are negligible. You may refer to the lecture notes for phase estimation without further proof, incl.
+the fact that phase estimation gives a good n-bit approximation with high probability even if the
+phase cannot be represented exactly with n bits of precision.
+8.e. Define an A that involves one query to x and where a = t/N. Invoke (d) with ε proportional
+to 1/
+√
+
+N. You can use |˜a −a| = |
+√
+
+˜a −√a| · |
+√
+
+˜a + √a| in your analysis of the approximation error.
+9.b. Combine amplitude amplification with the algorithm of (a), for a smart choice of k. Your
+answer may refer to the lecture notes for the details of amplitude amplification.
+10. Start with m = xi for a random i, and repeatedly use Grover’s algorithm to find an index j
+such that xj < m and update m = xj. Continue this until you can find no element smaller than m,
+and analyze the number of queries of this algorithm. You are allowed to argue about this algorithm
+on a high level (i.e., things like “use Grover to search for a j such that. . . ” are OK), no need to
+write out complete circuits. You do, however, have to take into account that the various runs of
+Grover each have their own error probability
+11.b. What is the probability in (a) if you set s to roughly
+√
+
+N?
+
+1In his original paper, Shor used the Sch¨onhage-Strassen algorithm for fast integer multiplication. We could also
+invoke the more recent improvement of Harvey and van der Hoeven [142], who remove the log log n factor.
+
+204
+
+
+===== PDF PAGE 217 =====
+
+11.c. Choose a set S of size s = O(N1/3), and classically query all its elements. First check if S
+contains a collision. If yes, then you’re done. If not, then use Grover to find a j ̸∈S that collides
+with an i ∈S.
+
+13.a. Amplitude amplification can be made exact if we know the success probability p, similar
+to Exercise 5; you may use this here without proof.
+
+Chapter 8
+
+4.a. Choose a uniformly random vector v ∈{0, 1}n, calculate ABv and Cv, and check whether
+these two vectors are the same.
+4.b. Consider the case where A is the all-0 matrix.
+4.c. Modify the algorithm for collision-finding: use a quantum walk on the Johnson graph J(n, r),
+where each vertex corresponds to a set R ⊆[n], and that vertex is marked if there are i, j ∈R such
+that (AB)i,j ̸= Ci,j. Optimize over r.
+5.b. There’s no need to use the C, U, S-framework of the chapter here; the answer is much simpler.
+View the 3n-step random walk algorithm as a deterministic algorithm with an additional input
+r ∈{0, 1}n ×{1, 2, 3}3n, where the first n bits determine x, and the last 3n entries determine which
+variable of the leftmost false clauses will be flipped in the 3n steps of the random walk. Use Grover
+search or amplitude amplification (no need to write out complete circuits here).
+
+Chapter 9
+
+3. Use induction on m, and the fact that there exists a constant c such that for A, B of small norm
+we have eA+B = eAeB + E for some E of norm ∥E∥≤c∥A∥· ∥B∥.
+4. The sequence of inequalities is very similar to the analysis of basic Trotter of Section 9.2.
+7. Calculate the subnormalized second-register state (⟨0| ⊗I)(W −1 ⊗I)V (W ⊗I)|0⟩|ψ⟩.
+9.d. Like in the analysis of Grover’s algorithm and regular amplitude amplification (Chapter 7),
+the product of two reflections on S is a rotation of S.
+10. Use triangle inequality, ∥H∥≤1, and the fact that k! ≥(k/e)k.
+11.b. W2 just implements a rotation on the first qubit, by an angle that depends on Akj. If you
+have a basis state |0⟩|a⟩where a ∈[−1, 1] is some real number written in some fixed finite number
+of bits, then you can rotate the first qubit to a|0⟩+
+√
+
+1 −a2|1⟩by a small circuit that does some
+single-qubit gates on the first qubit, conditioned on the number a in the |a⟩-part. That circuit is
+the same for all values of a, so it’s independent of the particular |0⟩|a⟩you’re acting on. You may
+just assume you can do this circuit, without writing out its details.
+12.d. Note that the computational basis states |x⟩are the eigenstates of P and hence also of U, so
+the only thing you need to do is multiply with the right phases for them.
+12.e. By conjugating with single-qubit gates you can change non-Z Paulis to Zs, in order to reduce
+to the case of (d).
+
+Chapter 10
+
+No hints for this chapter, sorry!
+
+205
+
+
+===== PDF PAGE 218 =====
+
+Chapter 11
+
+4.a. Use Exercise 2.
+4.b. Show that the symmetrized approximate polynomial r induced by the algorithm has degree
+at least N.
+6.c. Use the result of Exercise 5 for N = 2.
+7.b. When defining the relation R, consider that the hardest task for this algorithm is to distinguish
+inputs of weight N/2 from inputs of weight N/2 + 1.
+9.b.
+Consider the Boolean-valued problem of distinguishing the inputs where 0 sits at an odd
+location i in the string x from those where 0 sits at an even location.
+10. Show how you can use sorting to solve the Majority-problem and then use the lower bound
+from Exercise 7 to get an Ω(N) lower bound on sorting. (It is actually known that sorting takes
+Ω(N log N) comparisons even on a quantum computer, but you don’t have to show that.)
+11.a. Reduce the bs(f)-bit OR function (restricted to inputs of weight 0 or 1) to f and invoke the
+lower bound that we know for OR.
+12.b. Use induction on T and triangle inequality.
+12.d. Add up the inequalities of (b) and (c) over all i, and use the Cauchy-Schwarz inequality.
+13.b. Compare the expected value of a monomial of degree ≤2T under distributions U and D,
+and then use the fact that a polynomial is a sum of monomials.
+
+Chapter 12
+
+2.a. Use that I = P0P0 + P1P1.
+2.b. Note that t = T here, so we’re considering the final states of an algorithm that, for every
+input x, outputs the wrong value 1 −f(x) with probability ≤ε.
+2.c. Use (a), the fact that Pf(x)P1−f(y) + Pf(y)P1−f(x) = I whenever f(x) ̸= f(y), and the fact that
+Γxy = 0 whenever f(x) = f(y).
+2.d. Cauchy-Schwarz and the definition of operator norm imply |⟨ϕ|M|ψ⟩| ≤∥|ϕ⟩∥· ∥M|ψ⟩∥≤
+∥|ϕ⟩∥· ∥M∥· ∥|ψ⟩∥for all matrices M and vectors |ϕ⟩, |ψ⟩.
+3.b. Note that the |ϕt
+i⟩’s are pairwise orthogonal for different i, i′ due to having a different basis
+state in their query register.
+3.c. Show and use that I −Ox,±Oy,± = 2 �
+i:xi̸=yi Pi. Also use that (Γi)xy = 0 whenever xi = yi.
+
+3.d. Cauchy-Schwarz and the definition of operator norm imply |⟨ϕt
+i|(I⊗Γi)|ϕt
+i⟩| ≤∥I ⊗Γi∥·
+��|ϕt
+i⟩
+��2.
+4. Take feasible solutions for primal and dual. Use that C −�m
+i=1 yiAi is psd.
+
+Chapter 13
+
+1. Use binary search, running the algorithm with different choices of k to “zoom in” on the largest
+prime factor.
+3.a. Use the last item of Appendix B.2 to make the error probability exponentially small.
+3.c. Use the error analysis of Exercise 4.4.
+4.a. Write |ψx⟩= α|0⟩|ϕ0⟩+β|1⟩|ϕ1⟩, and consider the inner product between (Z ⊗I)|ψx⟩and |ψx⟩.
+4.b. Use part (a). Analyze the amplitude of |x, 0S−n⟩in the final state |ψx⟩, using ideas from the
+proof of BQP ⊆PSPACE in Section 13.3. Note that in contrast to that proof, you cannot use
+more than polynomial time for this exercise.
+5. Recall the satisfiability problem: given a logical formula ϕ with m Boolean variables, decide
+
+206
+
+
+===== PDF PAGE 219 =====
+
+if there is a setting of those m variables that makes the formula true. We know this problem is
+NP-complete, meaning that every problem in NP can be efficiently reduced to satisfiability (you
+can just assume this here, no need to prove it). Show how satisfiability can be efficiently solved if
+we have an efficient algorithm for the entanglement-detection problem. Be explicit about what the
+circuit C induced by an satisfiability-instance ϕ does (without writing out the circuit fully). If you
+claim some state is entangled, then you have to prove that.
+
+Chapter 14
+
+3. Use binary search with different values of a, b to zoom in on the right value.
+5.b. Argue about the penalty given by Hclock, which can’t be larger than λmin.
+
+5.d. Use ⟨ψ′′|H|ψ′′⟩=
+���
+√
+
+H|ψ′′⟩
+���
+2
+and triangle inequality.
+5.e. Use Eq. (14.3).
+5.f. Use (e) and Cauchy-Schwarz.
+5.g. Sum (f) over all (T + 1)2 pairs t, t′ to lower bound ⟨ψ′|ψ′′⟩.
+5.j. Once all three simplifying assumptions have been satisfied, we can invoke the energy lower
+bound of Ω(1/T 2) proved in Section 14.3.1.
+6.a. Invoke the Marriott-Watrous result mentioned at the end of Section 14.1 (without proving it).
+7. Combine ideas from Exercises 6.b and 13.4.
+8.a. Note that from the description of H you can infer the circuit Cn = UT · · · U1 for n-bit instances,
+and you can then run Ut · · · U1 in a controlled manner, for every t ∈{0, . . . , T} of your choice.
+
+Chapter 15
+
+2.a. It suffices to use pure states with real amplitudes as encoding. Try to “spread out” the 4
+encodings |ϕ00⟩, |ϕ01⟩, |ϕ10⟩, |ϕ11⟩in the 2-dimensional real plane as well as possible.
+3. Use the fact that 1 classical bit of communication can only send 1 bit of information, no matter
+how much entanglement Alice and Bob share. Combine this fact with superdense coding.
+6.b. Think of the first n qubits as Alice and the last n qubits as Bob; use Holevo’s theorem.
+7.a. Consider the positive and negative eigenvalues in the spectral decomposition of ρ0 −ρ1, and
+analyze the success probability minus the error probability.
+
+Chapter 16
+
+1. Argue that if Alice sends the same message for distinct inputs x and x′, then Bob doesn’t know
+what to output if his input is y = x.
+2.a. Argue that if P is a projector then we can’t have both P|ϕ⟩= |ϕ⟩and P|ψ⟩= 0.
+2.c. Observe that among Alice’s possible n-bit inputs are the n codewords of the Hadamard code
+that encodes log n bits (see Section 15.3); each pair of distinct Hadamard codewords is at Hamming
+distance exactly n/2. Now use part (b), applied to equality protocols with n′ = log n inputs bits.
+3. Use the fact that 2 non-orthogonal states cannot be distinguished perfectly (Exercise 2), and
+that a set of 2n vectors that are pairwise orthogonal must have dimension 2n.
+5. Invoke the quantum random access lower bound, Theorem 4 of Section 15.2.
+6. Partition the n positions into disjoint sets and run (in parallel) a separate r-message intersection
+protocol for each of these sets.
+8.b. Let Alice send a random row of C(x) (with the row-index) and let Bob send a random column
+
+207
+
+
+===== PDF PAGE 220 =====
+
+of C(y) (with the column-index).
+9.a. Two distinct polynomials, each of degree ≤d, are equal on at most d points of the domain Fp.
+10.b. Run the protocol of part (a) on an initial state where Bob has a well-chosen superposition
+over many |y⟩.
+11.b. You can derive this from one of the communication lower bounds mentioned in this chapter,
+you don’t need to prove this from scratch.
+12. The matching M induces a projective measurement that Bob can do on the message he receives.
+13.d. Alice could send a uniform superposition over all h ∈H.
+
+Chapter 17
+
+1.b. You could write this out, but you can also get the answer almost immediately from part (a)
+and the fact that HT = H−1.
+2.b. It’s helpful here to write the EPR-pair in the basis |+⟩=
+1
+√
+
+2(|0⟩+ |1⟩), |−⟩=
+1
+√
+
+2(|0⟩−|1⟩).
+4. For every fixed input x, y, there is a classical strategy that gives a wrong output only on that
+input, and that gives a correct output on all other possible inputs. Use the shared randomness to
+randomly choose one of those deterministic strategies.
+7.b. Argue that 1
+
+4⟨ψ|C|ψ⟩= Pr[win] −Pr[lose].
+7.c. Use that A2
+x and B2
+y are the k-qubit identity matrix.
+7.d. Use Cauchy-Schwarz to show (⟨ψ|C|ψ⟩)2 ≤⟨ψ|C2|ψ⟩, and then upper bound the latter.
+7.e. cos(π/8)2 = 1
+
+2 +
+1
+√
+
+8.
+
+Chapter 18
+
+6. Use the encoding of Exercise 5, so that Alice and Bob need to cooperate to learn the key used
+to change ρ.
+7. Show that a unitary on Alice’s side of the state won’t change Bob’s local density matrix ρB.
+9.a. The singular value decomposition (see end of Appendix A.5) of the d × d matrix M whose
+entries are Mij = αij can be computed in polynomial time, you may assume this without proof.
+
+Chapter 19
+
+6.a. Start with a uniform superposition over all x ∈{0, 1}n and end with an inverse QFT. You’re
+allowed to use a unitary like |c⟩�→e2πic|c⟩since it does not depend on f.
+7.a. It’s helpful to write eiρη = I + iρη + F for some matrix F with ∥F∥1 = O(η2) whose precise
+form doesn’t matter. This follows from Taylor series and the fact that ρ has trace 1, you don’t
+need to prove this. Here the trace norm ∥A∥1 is defined as the sum of A’s singular values.
+7.b. You can first prove this for the case where σ = |a⟩⟨a| and ρ = |b⟩⟨b| are pure states, and then
+extend to general mixed states by linearity.
+7.d. Apply part (b) some r times with small η, choosing r, η such that rη = t (and hence (Uη)r = Ut)
+and you can upper bound the overall error using triangle inequality.
+8.a. Use the SWAP-test from Section 16.6. “O(1) given copies” means you are allowed to use any
+number of copies of |ϕ⟩and |ψ⟩, as long as that number is independent of n. You may count the
+3-qubit gate which is the controlled SWAP of a pair of qubits as an elementary gate here.
+
+208
+

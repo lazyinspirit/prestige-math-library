@@ -1,0 +1,209 @@
+
+tolerant computation. Since we want to convert any arbitrary circuit to a more reliable one, we need
+the set of gates that have l-spread procedures to be universal.
+
+Definition 2 A quantum block code C is said to be a quantum computation code with spread l if there
+exists a universal set of quantum gates G such that (1) for any gate g ∈G there exists a procedure Pg
+with respect to C, with spread l, and (2) There exist correction , initialization and reading procedures
+with spread l.
+
+3.3
+Improving reliability by block simulations
+
+To simulate some circuit by a quantum computation code, we first convert it to a circuit which uses
+only gates from the universal set of the code. Then we simulate this new circuit as was explained: We
+now convert each qubit to a block of qubits, each time step to a working period, and each gate to the
+corresponding procedure, and besides that we add in each working period a correction procedure on
+each block. Apart from all that, we also add initialization procedures before the first working period
+of each computation block and a reading procedure after the last working period of each result block.
+The space-time of the simulating circuit M1 can be devided to rectangles, where each rectangle
+will correspond to one procedure, in the following way: First, devide the time to alternating stages:
+computation stages, in which one time step of M0 is simulated, i.e. one level of gate procedures is
+applied, and a corrections stage, in which one level of error correction procedures are applied. Each
+stage is a “strip” in the space time. Each strip can be devided to rectangles by deviding the qubits
+to sets: A correction strip will be devided such that in each rectangle a correction of one qubit is
+computed. In a computation strip, we devide the strip to rectangles by deviding the qubits to sets,
+where each set of qubits participates in exactly one procedure. Each rectangle thus corresponds to
+one procedure.
+We show that if a fault path in M1 is such that no more than a few faults occured in each rectangle,
+then indeed the computation succeeds. The number of faults allowed in one rectangle is bounded so
+that when taking into account the spread of the fault, the number of qubits effected in each block at
+the end of one working period is not too big, so that the density matrix can still be recovered.
+
+Definition 3 A fault path of a medium M1 that block simulates M0 is said to be a “k−sparse fault
+path” if no more than k faults occured in each rectangle.
+
+Lemma 1 Let C be a quantum computation code that corrects d errors, with spread l. Let M1 be
+a block simulating circuit. Consider a computation of M1 subjected to a k−sparse fault path with
+d ≥2kl. At the end of each working period the density matrix is d−deviated from the correct one.
+
+Proof: We will prove by induction on t a stronger assertion, that at the end of the t′th working period
+the density matrix is d/2−deviated from the correct one. For t = 0 the deviation is zero. Suppose
+that the density matrix at the end of the t′th working period is d/2-deviated from the correct matrix.
+After the computation stage, not more than kl qubits are effected in each block, so the density matrix
+is kl + d/2-deviated. Since kl + d/2 ≤d, the correction procedure indeed corrects the error, only that
+during the corrections new errors occur. Again, the number of effected qubits is not more than kl in
+each block, and all the other qubits transform as they should, so they are corrected. Hence after the
+correction procedure the matrix is kl-deviated. Since kl ≤d/2 this proves the induction step.
+
+We can now compute the effective noise rate of M1. This will be smaller than η if the parameters
+are chosen correctly:
+
+Theorem 1 Let M1 simulate M0 by the computation code C, which corrects d errors, have spread l,
+
+with all rectangles smaller than a. The effective noise rate of M1 is ≤2
+�
+a
+d/2l + 1
+
+�
+η
+d
+2l +1.
+
+7
+
+
+
+
+
+Proof: If the fault path in M1 is d/2l sparse, the final density matrix is d−deviated from the
+correct one by lemma 1. Measuring all the qubits in the result blocks, and taking majority in each
+block, gives the correct answer by lemma 3 in the appendixes. The number of the rectangles in M1 is
+less than twice the number of points where faults can occur in M0. Therefore the effective noise rate
+is smaller than the probability for not more than d/2l faults in two rectangles of M1. The probability
+for a rectangle to have more than k faults is smaller then the number of possibilities to choose k + 1
+points in the rectangle, times the probability for these points to have a fault, which gives the result.
+
+4
+Concatenated simulations
+
+In this section, we define proper quantum code, and concatenated simulations by such codes. We
+prove that the reliability of the computation can be improved to a constant using log(log(n)) levels
+of simulations, when the noise is smaller then some constant imposed by the parameters of the code.
+
+4.1
+Improving reliability to a constant
+
+We define a proper quantum code:
+
+Definition 4 A quantum computation code which is associated a set of gates G is proper if (1) The
+gate procedures, and the initialization, reading and correction procedures use only gates from G, and
+(2) The correction procedure takes any density matrix to some word in the code.
+
+Let M0 be a quantum circuit. We define recursively Mr, an r-simulating circuit of a circuit M0 by
+the proper quantum computation code C, as the simulation by C of Mr−1. The recursive simulations
+induce a definition of s-blocks: Every qubit in one stage of the simulation transforms to a block of m
+qubits in the next stage of the simulation, and this block transforms to m blocks and so on. One qubit
+in Mr−s transforms to ms qubits in Mr. This set of qubits in Mr is called an s-block. An 0-block in
+Mr is simply a qubit. The recursive simulations also induce a definition of s-rectangles: Each space
+time point in Mr−s transforms to a set of space time points in the following simulation M(r−s+1),
+which in their turn transform to more points in the following stages of the simulation. The set of all
+these points in Mr that originated from one space time point in M(r−s) are called an s-rectangle. The
+definition of s-rectangles defines a devision of the space time of Mr, and this devision is a refinement
+of the devision to (s + 1)-rectangles. An 0-rectangle is just a space time point in Mr.
+A density matrix of Mr is recovarable if it deviates on a “sparse” set of qubits, i.e that in each
+level, there are enough blocks that can be recovered. If at some level there are enough blocks that
+can be recovered, the other blocks will be corrected by the error corrections in the upper level.
+
+Definition 5 Let B be the set of qubits in n r−blocks . An (r, k)-sparse set of qubits A in B is a set
+of qubits in which for every r−block in B, there are at most k (r −1)−blocks such that the set A in
+these blocks is not (r −1, k) sparse. An (0, k)−sparse set of qubits A is an empty set of qubits. Two
+density matrices ρ1, ρ2, are said to be (r, k)-deviated if there exist an (r, k)-sparse set of qubits A ∈B,
+such that ρ1|B−A = ρ2|B−A.
+
+The deviation is a metric, as is shown in the appendixes, lemma 4. We define “sparse” fault paths,
+that do not increase the deviation in this metric too much:
+
+Definition 6 A set of space time points in an r−rectangle is said to be (r, k)-sparse if there are no
+more than k (r −1)−rectangles, in which the set is not (r −1, k)-sparse. An (0, k)-sparse set in an
+0−rectangles (which is one space time point) is an empty set. a fault path in Mr is (r, k)-sparse if in
+each r−rectangle, the set is (r, k)−sparse.
+
+We claim that if the fault path is sparse enough, then the error corrections keep the deviation small.
+
+8
+
+
+
+
+
+Lemma 2 Let C be a proper code that corrects d errors, with spread l. Let Mr be a medium which
+r−simulates M0 by C. Consider a computation subjected to an (r, k)-sparse fault path with 2kl ≤d.
+At the end of each r−working period the density matrix is (r, d/2)-deviated from the correct one.
+
+Proof:The proof is by induction on r. The structure of the proof goes as follows: we first prove
+by induction on the number of levels, r, three assertions together. Assuming that the fault path is
+(r, k)-sparse, an r-computation stage does not cause too much r−deviation, an r−correction corrects
+a small enough r−deviation, and an r−correction brings any state to a density metric which is not
+too r−deviated from some word in the code.
+The first two assertions applied alternately for the
+r−computation and r−correction stage in Mr, will give the desired result. The proof involves many
+details, and is given in the appendixes.
+
+We can now prove the main result of this paper:
+
+Theorem 2 Let C be a quantum computation code, which corrects d errors, have spread l, and size
+of all procedures smaller than a. Let M0 be a quantum circuit, with size s and depth t. There exists a
+quantum circuit Mr of size O(s · polylog(s)) and depth O(t · polylog(t)), such that in the presence of
+
+noise η which satisfies
+�
+a
+d/2l + 1
+
+�
+ηd/2l < 1 Mr outputs the correct answer with probability ≥2/3.
+
+Proof: If the fault path is (r, d/2l)-sparse, than the final density matrix is indeed (r, d)-deviated from
+the correct one, by lemma 2. Measuring all result blocks in a density matrix (r, d)-deviated from the
+correct final density matrix, and taking majority in each r-block, gives the correct answer by lemma
+3 in the appendixes. Hence the probability for Mr to succeed is larger than the probability for a fault
+path to be (r, d/2l)-sparse. With the assumption on η, the probability for one rectangle to have a set
+of faults which is (r, d/2l)-sparse can be shown to be exponentially (in r) close to one. Again, details
+can be found in the appendix. Taking r to be O(log(log(V (M0))) makes this probability high enough.
+Since the growth in cost is exponential in r, (we use codes with a constant size), and the number of
+levels is O(log(log(V (M0))), the cost is polylogarithmic.
+
+Remark: Theorem 2 requires that the code can correct d > 1 errors. A similar result holds for
+
+d = 1, with the threshold
+�
+b
+2
+
+�
+η < 1 where b is the maximal size of slightly different rectangles,
+
+defined to contain a computation and a correction procedure together. The proof is almost the same.
+In some cases this threshold is better.
+
+5
+Explicit proper quantum computation codes
+
+Linear quantum codes[4] are represented, using classical codes over Fp, and shown to be proper for
+p = 2. A subclass of linear codes, polynomial quantum codes, is defined and shown to be proper.
+
+5.1
+Linear quantum codes over Fp.
+
+A linear code of length m and dimension k over the field Fp is a subspace of dimension k in F m
+p ,
+where F m
+p
+is the m dimensional vector space over the field of p elements. Given two linear codes C1
+and C2 such that {0} ⊂C2 ⊂C1 ⊂F m
+p
+consider the following set of quantum states in the Hilbert
+space Cpm:
+
+∀a ∈C1 : |Sa >= p−(m−k)/2 �
+
+v∈C2
+|a + v > .
+
+If (a1 −a2) ∈C2 than |Sa1 >= |Sa2 >, otherwise < Sa1|Sa2 >= 0. Hence these states construct
+a basis for a linear subspace of the Hilbert space Cpm, with dimention z = pdim(C1)−dim(C2). This
+
+9
+

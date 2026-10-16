@@ -1,0 +1,145 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "27",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "def-qa-deutsch-promise",
+      "model": "gpt-6-luna",
+      "context_sha256": "4eddede611d64a631c0166d40ebf7503e6d051a381925b0a4060904665897e7d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The original Definition literally made Y and N sets of functions, while def-qa-task-and-promise-domain requires subsets of binary strings. This is a nonfatal encoding omission: Verification 1.1 already enumerated the bijective truth-table representation and correctly partitioned 00,11 versus 01,10. Made z=f(0)f(1), its length two, and f_z=f explicit, and defined Y={00,11}, N={01,10}. All functions, outputs and oracle access are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-qa-deutsch-promise",
+      "disposition": "repaired",
+      "post_sha256": "381cb76909e438715a6b0e6965c6ee9ed8322ebf7f4c8d6db9ea77d2c49d242f",
+      "review_context_sha256": "fabad64f2d4466ca4539610b0764c934abf0e9eefe2ff2801b6fbf6033a3287d",
+      "reason": "Checked both complete local prerequisite Definitions, the assigned Definition, both Verification steps, its exact proof contract, and the owning page. The encoding z=f(0)f(1) is a bijection onto the four length-two strings; Y and N are disjoint and exhaustive at that length. Equality and inequality give the required constant/balanced outputs, and the oracle remains hidden. Verification 1.1 and 2.1 and their cited suppliers require no changes. This records the local repair review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-qa-deutsch-classical-query-lower-bound",
+    "alg-qa-deutsch-query",
+    "thm-qa-deutsch-query-correct",
+    "ex-qa-exact-oracle-algorithms"
+  ],
+  "downstream_findings": [
+    {
+      "id": "thm-qa-deutsch-classical-query-lower-bound",
+      "path": "items/thm-qa-deutsch-classical-query-lower-bound.md",
+      "affected_use": "Facts F1: the four truth tables 00,01,10,11 are promised, with equal pairs constant and unequal pairs balanced; Proof 1.1, 2.1, 3.1.",
+      "disposition": "mathematically_sound_unchanged",
+      "reason": "The new encoding preserves precisely these four total functions and their classification. The indistinguishable pair, exact two-query procedure, and four-input averaging bound are unchanged. Its contract F1 quote was synchronized to the current Definition under the shared-write lock."
+    },
+    {
+      "id": "alg-qa-deutsch-query",
+      "path": "items/alg-qa-deutsch-query.md",
+      "affected_use": "Definition Input: A one-bit total Boolean oracle f satisfying the Deutsch promise; Output: output 0 for constant and 1 for balanced.",
+      "disposition": "mathematically_sound_unchanged",
+      "reason": "All four total one-bit oracle functions remain admissible, and the encoding supplies no readable truth-table access. The algorithm input and output clauses therefore remain valid without changes."
+    },
+    {
+      "id": "thm-qa-deutsch-query-correct",
+      "path": "items/thm-qa-deutsch-query-correct.md",
+      "affected_use": "Facts F2: constant means f(0)=f(1) and balanced means f(0) differs from f(1); Proof 2.1 applies this dichotomy to alpha_0 and alpha_1.",
+      "disposition": "mathematically_sound_unchanged",
+      "reason": "The new string classes correspond exactly to the same equality dichotomy, so the amplitude computation, deterministic output law, and gate count are unchanged. Its contract F2 quote was synchronized to the current Definition under the shared-write lock."
+    },
+    {
+      "id": "ex-qa-exact-oracle-algorithms",
+      "path": "items/ex-qa-exact-oracle-algorithms.md",
+      "affected_use": "Facts F1: 00,11 are constant and 01,10 are balanced truth tables; Verification 1.1 gives output 0 on the first pair and 1 on the latter pair.",
+      "disposition": "mathematically_sound_unchanged",
+      "reason": "The example already uses exactly the truth-table encoding now explicit in the Definition. No example or verification changes are necessary. Its contract F1 quote was synchronized to the current Definition under the shared-write lock."
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "id": "def-qa-deutsch-promise",
+      "run": "quantum-computing-algorithms-60-2026-10-15",
+      "severity": "nonfatal",
+      "class": "accuracy",
+      "subclass": "ill-typed-construction",
+      "location": "definition",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "reason": "The original promise sets contained functions instead of encoded inputs. The existing Verification already supplied the four truth-table encodings; made that bijection explicit in the Definition and used binary-string YES and NO sets without altering the promised task."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "All four discovered direct item consumers are draft members of the frozen frontier. Their mathematical uses remain sound; no published or outside consumer defect was discovered."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "One-bit total Boolean functions; hidden encoding z=f(0)f(1) of length two; Y={00,11}, N={01,10}; output 0 for constant and 1 for balanced; oracle access only. No choice assumption or new prerequisite.",
+    "local_source_evidence": [
+      "items/def-qa-task-and-promise-domain.md: Definition, complete",
+      "items/def-qa-promise-query-instance.md: Definition, complete",
+      "items/def-qa-deutsch-promise.md: Definition and Verification 1.1, 2.1",
+      "research/quantum-computing-algorithms-60-2026-10-15-batch-27.proof-contracts.json: contracts.def-qa-deutsch-promise"
+    ],
+    "external_sources_consulted": [],
+    "dependencies": [
+      "def-qa-promise-query-instance",
+      "def-qa-task-and-promise-domain"
+    ],
+    "interface_change": "Only the Definition paragraph changes. The proof, facts, dependency arrays and assigned contract are unchanged. Direct consumers were examined without changing their Statements or Definitions; propagation stops at those consumers.",
+    "page_checks": [
+      "library/quantum-algorithms/exact-oracle-algorithms.md: summary fixes the same constant-versus-balanced task; unchanged and sound.",
+      "library/quantum-algorithms/exact-oracle-algorithms-examples.md: summary refers to the same four one-bit truth tables; unchanged and sound."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-qa-deutsch-promise.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 checked, 0 failed; pass"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-qa-deutsch-promise.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-27.proof-contracts.json --items def-qa-deutsch-promise --strict --json",
+        "exit_code": 0,
+        "result": "ok true, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-qa-deutsch-promise.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-27.proof-contracts.json --items def-qa-deutsch-promise,thm-qa-deutsch-classical-query-lower-bound,thm-qa-deutsch-query-correct,ex-qa-exact-oracle-algorithms --strict --json",
+        "exit_code": 0,
+        "result": "All four selected contracts checked; ok true; no errors or warnings."
+      },
+      {
+        "command": "Read-only report consistency check using digest(pack), itemHashGuard and direct item-reference search",
+        "exit_code": 0,
+        "result": "Exact input digest, tuple identity, current item guard and four-consumer inventory verified."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Controller collects this adjudication and schedules any required current-context frontier owner work and rejudgment; no judges, stamps or certification were launched by this worker.",
+    "metadata_repairs": "Under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release, changed exactly the three Definition citation quote strings for thm-qa-deutsch-classical-query-lower-bound F1, thm-qa-deutsch-query-correct F2 and ex-qa-exact-oracle-algorithms F1 in the owning batch-27 proof contract. Preserved every other contract field. No consumer item was edited.",
+    "unresolved_obligations": []
+  }
+}

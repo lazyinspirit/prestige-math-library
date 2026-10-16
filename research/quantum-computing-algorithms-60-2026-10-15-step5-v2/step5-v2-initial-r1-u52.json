@@ -1,0 +1,99 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "52",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "ex-qa-28-two-level-spectral-estimate",
+      "model": "gpt-6-luna",
+      "context_sha256": "04ace064347f2ae17e72a688989d9e1be493b2135457405f4931a131d427cd5e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 falsely states the alternating-series remainder rule without requiring magnitudes to tend to zero: the constant magnitudes in 1-1+1-... disprove it. This is nonfatal for the worked example because F3 already supplies convergence of the sine series at 4, hence its terms tend to zero; the decreasing tail therefore does satisfy the actual supplier hypotheses. Restored the missing F4 hypothesis and made its verification explicit in step 1.2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-qa-28-two-level-spectral-estimate",
+      "disposition": "repaired",
+      "post_sha256": "ad1b185734e98fbff5d9927e63851bf1ff289c32ca126ccd75180f29b4d056a7",
+      "review_context_sha256": "80f8f91bf4d83e8b2a7932cd15a8523ca11783bfea1b26601ff1de1b285cc9e2",
+      "reason": "Checked all four verification steps against the actual cited interfaces. The sine tail is nonincreasing and null, its first-omitted-term bound gives sin(4)<0 and pi<4. The canonical phases, spectral weights 3/5 and 2/5, K>=4 circular tail <=1/6, principal-branch lift, disjoint accuracy intervals and 127 controlled-U calls are valid. The superposition uses the kernel mixture, never the fixed-eigenstate median theorem. Only F4 and the supporting sentence of step 1.2 changed; the Example and all interfaces and dependencies are preserved. No AC or new prerequisite is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-qa-28-two-level-spectral-estimate",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "reason": "F4 falsely states the alternating-series remainder rule without requiring magnitudes to tend to zero: the constant magnitudes in 1-1+1-... disprove it. This is nonfatal for the worked example because F3 already supplies convergence of the sine series at 4, hence its terms tend to zero; the decreasing tail therefore does satisfy the actual supplier hypotheses. Restored the missing F4 hypothesis and made its verification explicit in step 1.2.",
+      "affected_use": "Facts F4 and Verification 1.2 invoke the first-omitted-term bound for the convergent sine series at 4.",
+      "minimality": "Restore the null-sequence hypothesis and explicitly discharge it from the existing F3 convergence supplier; preserve the Example and dependencies.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "id": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+      "status": "maintenance-proposed",
+      "severity": "nonfatal",
+      "path": "items/lem-sine-positive-and-cosine-decreasing-on-zero-two.md",
+      "source_excerpt": "[L2] An alternating series with decreasing nonnegative terms has its sum between consecutive partial sums ([[thm-alternating-series-test]]).",
+      "affected_use": "Published Facts L2 omits the null-sequence hypothesis; Proof 1.1 uses L2 to bound sine from below and Proof 1.2 uses it to bound cos(2) from above.",
+      "invalidated_claim": "The unrestricted general L2 paraphrase is false for constant magnitudes. The lemma conclusions are not invalidated: L1 cites def-sine-and-cosine-by-power-series, whose Definition explicitly discharges convergence everywhere through lem-sine-and-cosine-series-converge-everywhere.",
+      "minimality": "Separate maintenance may add terms tending to zero to L2 and make that already available convergence explicit at its uses. No published item edited or adjudicated; no Statement change proposed and no consumer propagation licensed by this proof-only observation.",
+      "reason": "Report the same confirmed fact-block omission in a published supplier to owner maintenance. Its sine and cosine applications have convergence available locally, so this does not invalidate the assigned example or require a frontier repair to that published carrier.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "Fixed H=diag(-1/2,1/3), normalized psi with spectral weights 3/5,2/5; Q=128, epsilon=1/4, U=e^(iH), canonical phases in [0,1), principal decoder in (-1/2,1/2]. Accuracy is relative to the sampled spectral component.",
+    "evidence": "Read assigned Step-4 digest, frozen tuple and contract; read local thm-alternating-series-test Statement and proof, thm-complex-trigonometric-and-hyperbolic-power-series Statement and proof, and actual QPE, access, spectral-law, sine-zero and positivity interfaces. Familiar mathematics; no external source consultation claimed.",
+    "interface_comparison": "No Statement or Definition section changed; the Example is byte-for-byte unchanged. No new prerequisite or downstream examination event.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-qa-28-two-level-spectral-estimate.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failed"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-qa-28-two-level-spectral-estimate.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-qa-28-two-level-spectral-estimate.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects"
+      },
+      {
+        "command": "Python fractions.Fraction exact arithmetic",
+        "exit_code": 0,
+        "result": "Verified sine partial sum and first omitted term, spectral weights, interval gap, tail bound and controlled-query total"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-52.proof-contracts.json --items ex-qa-28-two-level-spectral-estimate --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; assigned item checked, no errors or warnings"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment of the changed item; published fact-block observation routed separately to owner maintenance.",
+    "contract_repair": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u52, reread the live owning contract, replaced only the assigned step-1-2 claim with the exact current proof text, passed the focused strict contract check, and released the lock. No source interface or dependency changed."
+  }
+}

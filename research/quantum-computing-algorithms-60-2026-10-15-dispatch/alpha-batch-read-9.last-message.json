@@ -1,0 +1,459 @@
+{
+  "group": "o",
+  "batches": ["9"],
+  "pages_read": [
+    "circuit-syntax-denotational-semantics-and-measurement",
+    "circuit-syntax-denotational-semantics-and-measurement-examples"
+  ],
+  "items_read": [
+    "def-qc-circuit-syntax-and-register-order",
+    "lem-qc-finite-isometry-unitary-extension",
+    "lem-qc-local-gate-wire-embedding",
+    "lem-qc-disjoint-layer-order-independence",
+    "def-qc-circuit-denotational-semantics",
+    "lem-qc-instrument-output-space-is-nonzero",
+    "thm-qc-instrument-kraus-normalization",
+    "lem-qc-coherent-record-isometry",
+    "thm-qc-instrument-induces-povm",
+    "def-qc-classical-control-and-measurement-circuit",
+    "def-qc-elementary-circuit-resources",
+    "def-qc-measurement-branch-output-law",
+    "thm-qc-circuit-inverse-reversal",
+    "thm-qc-deferred-measurement",
+    "thm-qc-terminal-measurement-circuit-equivalence",
+    "ex-qc-deferred-measurement-one-bit"
+  ],
+  "conventions": [
+    {
+      "convention": "Wire labels start at zero; wire 0 is most significant. Gate operand tuple order determines local factor order. Every gate has positive arity; the zero-qubit space is C.",
+      "fixed_by": "def-qc-circuit-syntax-and-register-order",
+      "matters_for": [
+        "lem-qc-local-gate-wire-embedding",
+        "def-qc-circuit-denotational-semantics",
+        "ex-qc-deferred-measurement-one-bit"
+      ]
+    },
+    {
+      "convention": "Layers are chronological, with the first layer applied first; later operators multiply on the left. Empty circuits and empty layers denote identity.",
+      "fixed_by": "def-qc-circuit-denotational-semantics",
+      "matters_for": [
+        "thm-qc-circuit-inverse-reversal",
+        "ex-qc-deferred-measurement-one-bit"
+      ]
+    },
+    {
+      "convention": "A layer contains gates with pairwise disjoint wire supports.",
+      "fixed_by": "def-qc-circuit-syntax-and-register-order",
+      "matters_for": [
+        "lem-qc-disjoint-layer-order-independence",
+        "def-qc-circuit-denotational-semantics",
+        "thm-qc-circuit-inverse-reversal"
+      ]
+    },
+    {
+      "convention": "Only observed instrument outcomes enter classical histories; Kraus indices are hidden environment data. Conditional outputs are undefined, represented by ⊥, on zero-probability branches.",
+      "fixed_by": "def-qc-measurement-branch-output-law",
+      "matters_for": [
+        "def-qc-classical-control-and-measurement-circuit",
+        "thm-qc-deferred-measurement",
+        "thm-qc-terminal-measurement-circuit-equivalence"
+      ]
+    },
+    {
+      "convention": "History trees are finite and operate on one fixed qubit data register; each edge applies its specified outcome-dependent unitary.",
+      "fixed_by": "def-qc-classical-control-and-measurement-circuit",
+      "matters_for": [
+        "thm-qc-terminal-measurement-circuit-equivalence"
+      ]
+    },
+    {
+      "convention": "Size counts gate occurrences, declared depth counts written layers, and width counts every wire. Controlled and inverse access require explicit availability and separately declared charges.",
+      "fixed_by": "def-qc-elementary-circuit-resources",
+      "matters_for": [
+        "thm-qc-circuit-inverse-reversal",
+        "thm-qc-deferred-measurement",
+        "thm-qc-terminal-measurement-circuit-equivalence"
+      ]
+    },
+    {
+      "convention": "Deferred measurement is exact equality of branch maps, including arbitrary finite reference systems; it supplies no same-alphabet synthesis or implementation-cost bound.",
+      "fixed_by": "thm-qc-deferred-measurement",
+      "matters_for": [
+        "thm-qc-terminal-measurement-circuit-equivalence",
+        "ex-qc-deferred-measurement-one-bit"
+      ]
+    },
+    {
+      "convention": "Finite unitary extension assumes nonzero H, K, and E and uses padding registers A=Q_(ke) and B=Q_h; it asserts a surjective isometry between equal-dimensional spaces.",
+      "fixed_by": "lem-qc-finite-isometry-unitary-extension",
+      "matters_for": [
+        "thm-qc-deferred-measurement"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qc-circuit-denotational-semantics",
+      "statement": "For chronological layers L₁,…,L_d, U_C=U_(L_d)⋯U_(L₁). The empty circuit and every empty layer denote the identity on Q_n.",
+      "used_by": [
+        "thm-qc-circuit-inverse-reversal",
+        "ex-qc-deferred-measurement-one-bit"
+      ]
+    },
+    {
+      "id": "thm-qc-deferred-measurement",
+      "statement": "For a finite instrument H→K with nonzero finite-dimensional input H and specified unitary suffix S_a on K, the coherent construction reproduces every outcome-a data-reference branch map for every finite-dimensional reference R and every operator X on H⊗R, retaining the observed label and tracing out hidden Kraus and padding registers. Newly used dilation and block operations require explicit access and cost.",
+      "used_by": [
+        "thm-qc-terminal-measurement-circuit-equivalence",
+        "ex-qc-deferred-measurement-one-bit"
+      ]
+    },
+    {
+      "id": "lem-qc-coherent-record-isometry",
+      "statement": "Every finite instrument with nonzero finite-dimensional input admits common-length padded Kraus families satisfying total normalization. The map Vx=Σ_(a,j) M_(a,j)x⊗e_a⊗f_j is an isometry, and projecting the observed label a then tracing E recovers I_a(X) for every input operator X.",
+      "used_by": [
+        "thm-qc-deferred-measurement"
+      ]
+    },
+    {
+      "id": "thm-qc-instrument-kraus-normalization",
+      "statement": "For a finite instrument from nonzero finite-dimensional H to finite-dimensional K, any finite Kraus family for each branch satisfies Σ_(a,j) M_(a,j)†M_(a,j)=I_H.",
+      "used_by": [
+        "lem-qc-coherent-record-isometry",
+        "thm-qc-instrument-induces-povm"
+      ]
+    },
+    {
+      "id": "lem-qc-local-gate-wire-embedding",
+      "statement": "Let n≥r≥1, let w be an ordered tuple of distinct wires in [n], and let U on Q_r be unitary. There is a unique unitary global embedding applying U to those wires in tuple order and identity to the other wires.",
+      "used_by": [
+        "lem-qc-disjoint-layer-order-independence",
+        "def-qc-circuit-denotational-semantics",
+        "thm-qc-circuit-inverse-reversal"
+      ]
+    },
+    {
+      "id": "thm-qc-instrument-induces-povm",
+      "statement": "Every finite instrument H→K with nonzero finite-dimensional H induces a unique finite POVM E_a satisfying tr_K(I_a(X))=tr_H(XE_a) for every X in L(H) and every outcome a.",
+      "used_by": [
+        "def-qc-classical-control-and-measurement-circuit",
+        "def-qc-measurement-branch-output-law"
+      ]
+    },
+    {
+      "id": "lem-qc-finite-isometry-unitary-extension",
+      "statement": "For nonzero finite-dimensional H,K,E and an isometry V:H→K⊗E, with h=dim H, k=dim K, e=dim E, A=Q_(ke), and B=Q_h, there is a surjective linear isometry W:H⊗A→K⊗E⊗B satisfying W(x⊗a₀)=Vx⊗b₀ for every x.",
+      "used_by": [
+        "thm-qc-deferred-measurement"
+      ]
+    },
+    {
+      "id": "lem-qc-instrument-output-space-is-nonzero",
+      "statement": "If a finite instrument from a nonzero finite-dimensional complex inner-product space H to a finite-dimensional complex inner-product space K exists, then K is nonzero.",
+      "used_by": [
+        "lem-qc-coherent-record-isometry",
+        "thm-qc-deferred-measurement"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Choosing finite orthonormal bases, including empty bases, for the unitary extension and arbitrary reference spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Completing the prescribed isometry by matching orthogonal complements.",
+      "opened": true
+    },
+    {
+      "id": "cor-tensor-products-of-finite-free-modules-and-dimension",
+      "used_for": "Equal dimensions of the padded input and output spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-dimension",
+      "used_for": "Finite basis lengths and the equivalence of dimension zero with the zero space.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Norm preservation and the unitary convention in embedding and extension arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-isometry-characterisations",
+      "used_for": "Adjoint identities and invertibility of finite-dimensional unitary endomorphisms.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The adjoint pairing identity under the first-linear inner-product convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+      "used_for": "Existence of the coherent isometry's adjoint.",
+      "opened": true
+    },
+    {
+      "id": "prop-adjoint-algebra",
+      "used_for": "Adjoints of products, self-adjoint Kraus effects, and circuit reversal.",
+      "opened": true
+    },
+    {
+      "id": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+      "used_for": "Closure of circuit layer and circuit products under unitary composition.",
+      "opened": true
+    },
+    {
+      "id": "def-coordinate-column-and-matrix-of-a-linear-map",
+      "used_for": "Identity matrices, trace computations, and ordered coordinate conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Identity matrices and finite matrix calculations, including zero-sized shapes.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Basis-independent branch traces and the nonzero-output-space argument.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Diagonal trace sums and trace zero on the zero space.",
+      "opened": true
+    },
+    {
+      "id": "prop-trace-is-linear",
+      "used_for": "Passing finite Kraus sums through trace.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Rectangular cyclicity in Kraus normalization and induced POVM identities.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Self-adjointness and nonnegative quadratic forms of induced POVM effects.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Induction on finite measurement-history-tree height.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-qc-terminal-measurement-circuit-equivalence",
+      "concern": "Proof step 4.1 says, “Conditional outputs agree after division when that common probability is positive,” immediately after computing the joint probability of history h and terminal POVM outcome z. Only a terminal POVM is specified, and a POVM does not determine a conditional output state. The theorem's stated preterminal history-branch equality and joint-law conclusion are supported; this sentence needs to identify preterminal history-conditioned outputs or explicitly specify a common terminal instrument.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "lem-qc-positive-choi-matrix-yields-kraus-operators",
+      "finding": "In lem-qc-positive-choi-matrix-yields-kraus-operators, proof step 2.1 first discusses the Choi matrix's “$(i,\\alpha),(j,\\beta)$ entry” and then says, “The same entry of $\\sum_aK_aE_{ij}K_a^\\dagger$ is $\\sum_a(K_a)_{\\alpha i}\\overline{(K_a)_{\\beta j}}$”. The latter operator acts on K and has an m×m matrix, so its entry is indexed by (α,β), not by the Choi product indices ((i,α),(j,β)). The displayed coefficient calculation supplies the intended comparison, but “same entry” is ill-typed as written.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "circuit-syntax-denotational-semantics-and-measurement",
+      "to": "channels-kraus-choi-and-stinespring-representations",
+      "faithful": true,
+      "note": "Kraus existence is used for finite-dimensional completely positive branch maps; instrument normalization is proved separately."
+    },
+    {
+      "from": "circuit-syntax-denotational-semantics-and-measurement",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Control-first blocks and separate controlled/inverse access are preserved."
+    },
+    {
+      "from": "circuit-syntax-denotational-semantics-and-measurement",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Instrument normalization, finite amplification, and positive-probability conditioning are used within their stated domains."
+    },
+    {
+      "from": "circuit-syntax-denotational-semantics-and-measurement",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered factors, big-endian labels, empty tensor unit, tensor adjoints, and partial-trace coordinates agree."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Finite chronological protocols and separately charged access are restated faithfully."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Declared gate occurrences and oracle charges remain separate."
+    },
+    {
+      "from": "quantum-fourier-transform-circuits",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Local embeddings, chronological products, and explicitly chosen gate counts match the suppliers."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Ordered wires, chronological composition, and separate resource coordinates agree."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Modular-multiplier circuits use the supplied chronological denotation without inferring free implementation."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Circuit semantics are contextual prerequisites; exact preparation and QFT circuits are explicitly supplied."
+    },
+    {
+      "from": "grover-search-and-invariant-plane-rotations",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Gate occurrences, queries, and classical work are distinct cost coordinates."
+    },
+    {
+      "from": "amplitude-estimation-and-counting",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Preparation gates and query/classical costs retain the declared accounting convention."
+    },
+    {
+      "from": "discrete-quantum-walks-and-szegedy-theory",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Page-level circuit context does not infer an implementation or cost from a transition matrix."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Written-depth accounting agrees. Deferred measurement is used as an analysis construction preserving branches, without charging it as a free implementation."
+    },
+    {
+      "from": "block-encodings",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Unitary constructions require supplied or compiled operations and explicitly charged controlled access."
+    },
+    {
+      "from": "quantum-signal-processing",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Matrix-order phase products explicitly apply the rightmost factor first."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Chronological projector-phase and extraction operations use reverse operator-product order."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Measured procedures require an actual compatible coherent implementation and explicit inverse/control access."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Variational and reference-state constructions use finite chronological unitary products."
+    },
+    {
+      "from": "period-hidden-shift-and-number-theoretic-algorithms",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Declared ordered-wire actions and separately counted resources agree."
+    },
+    {
+      "from": "algorithm-composition-precision-and-dequantization",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Stage 1 acts first in the right-to-left composition convention."
+    },
+    {
+      "from": "reversible-computation-ancillas-and-coherent-oracles",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Clean/dirty restoration, chronological products, and conditional availability of inverse circuits agree."
+    },
+    {
+      "from": "continuous-gate-universality-and-exact-synthesis",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Exact products, declared gate counts, and the positive-arity zero-wire boundary are preserved."
+    },
+    {
+      "from": "clifford-t-exact-and-approximate-synthesis",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Local embeddings and chronological exact matrix products are cited faithfully."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "The consumer explicitly distinguishes minimum-layer depth from written depth and initialization from clean return."
+    },
+    {
+      "from": "stabilizer-circuits-and-gottesman-knill-simulation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Ordered operands, empty-circuit identity, and separately charged classical operations agree."
+    },
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Finite observed-outcome control and local gate-occurrence accounting match the interfaces."
+    },
+    {
+      "from": "stabilizer-css-codes-syndromes-and-procedures",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Encoder chronology and syndrome-dependent suffixes preserve observed/hidden-label distinctions."
+    },
+    {
+      "from": "noise-fault-tolerance-concatenation-and-thresholds",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Finite instrument and suffix-control uses stay within the mathematical circuit interface."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Local CZ embeddings, disjoint-layer reordering, observed transcripts, and separately charged suffixes agree."
+    },
+    {
+      "from": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Exact denotation and occurrence counts agree; minimum-layer optimization is explicitly distinguished from declared depth."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Ordered products, workspace costs, per-instance gate data, and zero-wire identity are used faithfully."
+    }
+  ]
+}

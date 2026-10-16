@@ -1,0 +1,324 @@
+{
+  "group": "j",
+  "batches": ["52"],
+  "pages_read": [
+    "quantum-spectral-estimation-and-matrix-functions",
+    "quantum-spectral-estimation-and-matrix-functions-examples"
+  ],
+  "items_read": [
+    "thm-qa-28-polynomial-matrix-function-error",
+    "def-qa-28-state-spectral-distribution",
+    "lem-qa-28-normalized-function-target",
+    "def-qa-28-spectral-estimation-access",
+    "alg-qa-28-phase-spectral-estimation",
+    "alg-qa-28-median-spectral-estimation",
+    "thm-qa-28-spectral-law-measurement",
+    "alg-qa-28-qsvt-matrix-function",
+    "thm-qa-28-matrix-function-error-cost",
+    "thm-qa-28-spectral-estimation-guarantee",
+    "ex-qa-28-exponential-polynomial",
+    "ex-qa-28-two-level-spectral-estimate"
+  ],
+  "conventions": [
+    {
+      "convention": "The spectral distribution assigns one atom to each distinct eigenvalue, with weight ||Pλψ||²; degeneracy does not produce separate eigenvector atoms.",
+      "fixed_by": "def-qa-28-state-spectral-distribution",
+      "matters_for": [
+        "thm-qa-28-spectral-law-measurement",
+        "ex-qa-28-two-level-spectral-estimate"
+      ]
+    },
+    {
+      "convention": "Spectral access separately supplies and charges preparation, controlled operations, inverse operations and powers. The phase encoding must be injective on the promised spectrum, and the decoder specifies its branch and output units. The Hamiltonian simulator uses e^(−itH), so e^(iH) corresponds to time −1.",
+      "fixed_by": "def-qa-28-spectral-estimation-access",
+      "matters_for": [
+        "alg-qa-28-phase-spectral-estimation",
+        "alg-qa-28-median-spectral-estimation",
+        "thm-qa-28-spectral-estimation-guarantee"
+      ]
+    },
+    {
+      "convention": "For U=e^(iH) and spectrum in [−1,1], decode y/Q using its principal representative in (−1/2,1/2], then multiply by 2π. The phase register has m≥1 and Q=2^m; repeated controlled-U access costs Q−1 calls per trial.",
+      "fixed_by": "alg-qa-28-phase-spectral-estimation",
+      "matters_for": [
+        "thm-qa-28-spectral-law-measurement",
+        "thm-qa-28-spectral-estimation-guarantee",
+        "ex-qa-28-two-level-spectral-estimate"
+      ]
+    },
+    {
+      "convention": "Median amplification uses fresh preparations, the least dyadic Q with Qε≥6π₊, and the least positive odd r with r≥8L₊. Its fixed-eigenvalue guarantee requires an eigenstate; independent fresh superposition samples do not estimate one fixed eigenvalue with amplified confidence.",
+      "fixed_by": "alg-qa-28-median-spectral-estimation",
+      "matters_for": [
+        "thm-qa-28-spectral-estimation-guarantee"
+      ]
+    },
+    {
+      "convention": "The spectral-law theorem uses the ideal QPE circuit with its specified Lüders readout. Conditional vectors are defined only for positive-probability outcomes and retain coherent contributions from different eigenspaces.",
+      "fixed_by": "thm-qa-28-spectral-law-measurement",
+      "matters_for": [
+        "thm-qa-28-spectral-estimation-guarantee",
+        "ex-qa-28-two-level-spectral-estimate"
+      ]
+    },
+    {
+      "convention": "Matrix-function construction uses a caller-supplied extension on [−α,α], four real even/odd components, a nonempty active set J, positive component scales γj, and exact zero certificates for omitted components. Its normalization is B=Σj∈J γj. Phase lists use the reflected QSP convention and certified real-part extraction.",
+      "fixed_by": "alg-qa-28-qsvt-matrix-function",
+      "matters_for": [
+        "thm-qa-28-matrix-function-error-cost",
+        "ex-qa-28-exponential-polynomial"
+      ]
+    },
+    {
+      "convention": "Block-encoding error is normalized compression error. The input compression approximates H/α, while the output compression approximates f(H)/B. Component κj includes phase-generation, compilation and signal implementation error; κLCU is an additional projected-block error.",
+      "fixed_by": "thm-qa-28-matrix-function-error-cost",
+      "matters_for": [
+        "ex-qa-28-exponential-polynomial"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-28-polynomial-matrix-function-error",
+      "statement": "Let V be a finite-dimensional complex inner-product space, H:V→V Hermitian, I⊆R contain its spectrum, f:I→C, p∈C[x], and η≥0. If |p(λ)−f(λ)|≤η for every λ∈σ(H), then ||p(H)−f(H)||≤η. In particular, a uniform bound on all of I suffices.",
+      "used_by": [
+        "lem-qa-28-normalized-function-target",
+        "thm-qa-28-matrix-function-error-cost",
+        "ex-qa-28-exponential-polynomial"
+      ]
+    },
+    {
+      "id": "thm-qa-28-spectral-law-measurement",
+      "statement": "For a finite-dimensional Hermitian H, unit vector ψ, and ideal QPE sampler whose unitary acts with phase class θ(λ) on each spectral subspace, Pr(Y=y)=Σλ μψ({λ})Pθ̄(λ)(y). At every positive-probability outcome, the conditional system vector is (Σλ ay(λ)Pλψ)/√Pr(Y=y). The weights μψ form a probability distribution and satisfy ⟨ψ|g(H)|ψ⟩=Σλ μψ({λ})g(λ) for every function g on σ(H).",
+      "used_by": [
+        "thm-qa-28-spectral-estimation-guarantee",
+        "ex-qa-28-two-level-spectral-estimate",
+        "lem-qa-30-spectral-minimum-shift"
+      ]
+    },
+    {
+      "id": "thm-qa-28-matrix-function-error-cost",
+      "statement": "Under alg-qa-28-qsvt-matrix-function and the stated component and implementation error bounds, B≥||f(H)|| and ||W00−f(H)/B||≤B⁻¹Σj∈J γj(τj+4dj√εBE+κj)+κLCU. Exact polynomial phase lists and exact phase, signal and LCU implementations permit all κ bounds to be zero.",
+      "used_by": [
+        "ex-qa-28-exponential-polynomial",
+        "thm-qa-30-sdp-gibbs-state-error-cost"
+      ]
+    },
+    {
+      "id": "thm-qa-28-spectral-estimation-guarantee",
+      "statement": "For Hermitian H with spectrum in [−1,1], a normalized eigenvector of eigenvalue λ, U=e^(iH), the stated principal-branch Hamiltonian access instance, rational 0<ε≤1 and 0<δ<1, and the specified least schedules from certified π₊>π and L₊≥ln(1/δ), the median estimate satisfies Pr(|λ̃−λ|≤ε)≥1−δ. If each trial has final state-vector deviation at most ξ, the bound is 1−δ−rξ. Repeated controlled-U access uses r(Q−1) calls, with the other stated costs additional.",
+      "used_by": [
+        "ex-qa-28-two-level-spectral-estimate",
+        "lem-qa-30-spectral-minimum-shift"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Finite orthonormal eigenbases for Hermitian matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-resolution-and-polynomial-spectral-projections",
+      "used_for": "Orthogonal spectral projections, completeness and finite spectral decompositions.",
+      "opened": true
+    },
+    {
+      "id": "def-functional-calculus-for-a-normal-endomorphism",
+      "used_for": "Definition of f(H) on the finite spectrum.",
+      "opened": true
+    },
+    {
+      "id": "prop-functional-calculus-for-normal-endomorphisms",
+      "used_for": "Polynomial evaluation, linearity, products and scalar-function composition.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Operator error estimates, including the zero-domain norm convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+      "used_for": "Transfer of scalar spectral error to operator norm.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Summing component approximation and implementation errors.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-exponential",
+      "used_for": "Exponential phases and their series definition.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Unit-modulus eigenphases and the cosine/sine exponential decomposition.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "The inverse relation between logarithm and exponential in amplification bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-logarithm",
+      "used_for": "Integral-logarithm convention used to certify the median tail constant.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-logarithm-agrees-with-natural-logarithm",
+      "used_for": "Identification of the integral logarithm with ln.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-logarithm-is-strictly-increasing",
+      "used_for": "Comparison of ln(2/√3) with ln(8/7).",
+      "opened": true
+    },
+    {
+      "id": "thm-integral-logarithm-derivative-and-normalisation",
+      "used_for": "Derivative 1/x and normalization at one in the explicit median-tail estimate.",
+      "opened": true
+    },
+    {
+      "id": "cor-differentiable-implies-continuous",
+      "used_for": "Continuity hypotheses for applying the mean value theorem to the logarithm.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The estimate ln(8/7)>1/8.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Converting the repetition schedule into a failure bound δ.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Monotonic exponential comparisons in the median proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Negative-exponent and reciprocal identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Termination of the dyadic and odd-integer schedule searches.",
+      "opened": true
+    },
+    {
+      "id": "cor-pi-is-the-first-positive-sine-zero",
+      "used_for": "Principal-branch margin and the example's certification that π<4.",
+      "opened": true
+    },
+    {
+      "id": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+      "used_for": "The bound π>2 used in decoder branch checks.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-finite",
+      "used_for": "Summing projected-vector norm bounds in the measurement perturbation argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Bounding measurement probability changes by state-vector distance.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-trigonometric-and-hyperbolic-power-series",
+      "used_for": "Taylor estimates for sine and cosine in both examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-alternating-series-test",
+      "used_for": "First-omitted-term bounds for the example computations.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-qa-28-matrix-function-error-cost",
+      "concern": "The resource paragraph says, “Inside a single LCU SELECT call, the worst-path base-signal query count is max_{j∈J} d_j”; Proof 4.1 justifies this by considering one selected component. Clarify that this is a component-branch length, rather than the implemented circuit's oracle-occurrence count. The algorithm permits supplied or compiled SELECT implementations, and def-qa-22-block-encoding-access-model explicitly distinguishes them. A serial implementation using separately controlled component circuits can contain the sum of their signal-call counts even though each index sector activates only its own component. The existing separately charged SELECT-cost qualification protects the broader accounting, but the undefined “worst-path” query coordinate remains easy to confuse with the circuit query coordinate.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "quantum-singular-value-transformation",
+      "finding": "The page prose says, “The exact block action treats repeated singular values, $sigma=0$, $sigma=1$, unmatched kernels, and zero-dimensional spaces.” The two math expressions use the letters sigma instead of the LaTeX command for σ, so they render as products of letters rather than singular-value notation.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The sampler preserves the positive eigenphase/inverse positive-sign QFT convention, finite kernel, Lüders readout and separate access models. The accuracy theorem uses the supplier's circular tail with K≥3."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "The access definition correctly converts e^(−itH) to e^(iH) at t=−1 and retains declared signed-time, control and simulation-error costs."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "quantum-singular-value-transformation",
+      "faithful": true,
+      "note": "Uses reflected-convention real-part extraction, the odd/even kernel conventions, degree-dependent counts and the 4d√ε perturbation bound. The robustness estimate extends to the real-part extraction by averaging the two phase branches."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "Uses a normalized vector representing a pure-state ray; no stronger ensemble or preparation conclusion is inferred."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Dirac expectations and spectral weights respect the root linear-first convention and argument reversal."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "block-encodings",
+      "faithful": true,
+      "note": "Preserves normalized compression error, positive normalization, the normalization lower bound on the target norm, and LCU weighted-sum compression. The SELECT query-coordinate wording is recorded separately as an owned presentation concern."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled and inverse operations remain separate supplied capabilities; phase conventions are retained under coherent control."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Preparation, generation, gates, queries, compilation, precision and classical costs remain separate. No efficient uniform implementation follows merely from matrix or phase-list existence."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Outcome normalization and the explicitly specified QPE Lüders instrument support the projected-vector conditional state; zero-probability outcomes are excluded."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "quantum-spectral-estimation-and-matrix-functions",
+      "faithful": true,
+      "note": "Opened the spectral-minimum and Gibbs-error consumers. The minimum lemma explicitly derives its own schedule and conditional eigenindex repetition bound rather than applying the least-schedule theorem to another QPE size or independently redrawing eigenvalues. The Gibbs theorem retains supplied preparation error, normalization and implementation costs."
+    }
+  ]
+}

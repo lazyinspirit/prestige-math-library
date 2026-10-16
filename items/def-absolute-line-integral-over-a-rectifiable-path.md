@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-absolute-line-integral-over-a-rectifiable-path.json
 id: def-absolute-line-integral-over-a-rectifiable-path
 kind: definition
 title: "The absolute line integral over a rectifiable path using its arc-length function"
@@ -7,17 +9,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-complex-contours-reversal-concatenation-and-closedness, def-arc-length-function, def-riemann-stieltjes-sum-and-integral]
+deps: [thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed, def-complex-contours-reversal-concatenation-and-closedness, def-arc-length-function, def-riemann-stieltjes-sum-and-integral]
 justified_by: [thm-existence-of-complex-line-integrals-on-rectifiable-paths]
 aliases: []
 landmark: false
-verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-16
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -28,6 +23,6 @@ pipeline_run: null
 
 ## Definition
 
-Let $\gamma:[a,b]\to\mathbb C$ be a rectifiable contour in the sense of [[def-complex-contours-reversal-concatenation-and-closedness]] and let $f$ be continuous on its trace. With $s_\gamma$ the arc-length function of [[def-arc-length-function]], define the **absolute line integral** by
+Let $\gamma:[a,b]\to\mathbb C$ be a rectifiable contour in the sense of [[def-complex-contours-reversal-concatenation-and-closedness]] and let $f$ be continuous on its trace. Put $\Gamma=\Phi\circ\gamma$ and $s_\gamma:=s_\Gamma$, using the Euclidean arc-length function of [[def-arc-length-function]]. The complex coordinate-length theorem [[thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed]], applied to every restriction, gives $s_\gamma(t)=L_{\mathbb C}(\gamma|_{[a,t]})$. Thus this is exactly the complex path arc-length function. With this notation, define the **absolute line integral** by
 $$\int_\gamma |f(z)|\,|dz|:=\int_a^b |f(\gamma(t))|\,ds_\gamma(t),$$
 using [[def-riemann-stieltjes-sum-and-integral]]. Its existence is proved in [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]. On a singleton interval it is $0$.

@@ -1,0 +1,518 @@
+===== PDF PAGE 1 =====
+Quantum Computing:
+
+Lecture Notes
+
+Ronald de Wolf
+
+QuSoft, CWI and University of Amsterdam
+
+arXiv:1907.09415v6  [quant-ph]  27 Aug 2026
+
+
+===== PDF PAGE 2 =====
+
+Dedicated to the memory of my father
+
+Abraham de Wolf (1942–2019)
+
+ii
+
+
+===== PDF PAGE 3 =====
+
+Preface from 2011
+
+These lecture notes were formed in small chunks during my “Quantum computing” course at the
+University of Amsterdam, Feb-May 2011, and compiled into one text thereafter. Each chapter
+was covered in a lecture of 2 × 45 minutes, with an additional 45-minute lecture for exercises and
+homework. The first half of the course (Chapters 1–7) covers quantum algorithms, the second half
+covers quantum complexity (Chapters 8–9), stuff involving Alice and Bob (Chapters 10–13), and
+error-correction (Chapter 14). A 15th lecture about physical implementations and general outlook
+was more sketchy, and I didn’t write lecture notes for it.
+These chapters may also be read as a general introduction to the area of quantum computation
+and information from the perspective of a theoretical computer scientist. While I made an effort
+to make the text self-contained and consistent, it may still be somewhat rough around the edges; I
+hope to continue polishing and adding to it. Comments & constructive criticism are very welcome,
+and can be sent to rdewolf@cwi.nl
+Those who want to read more (much more. . . ): see the book by Nielsen and Chuang [206] for
+the general area, the book of John Watrous [261] for quantum information theory, and the lecture
+notes of John Preskill [210] for the theoretical physics perspective.
+
+Attribution, acknowledgments, subsequent updates
+
+Most of the material in Chapters 1–6 [chapter numbers in this paragraph are for the 2011 version]
+comes from the first chapter of my PhD thesis [263], with a number of additions: the lower bound for
+Simon, the Fourier transform, the geometric explanation of Grover. Chapter 7 is newly written for
+these notes, inspired by Santha’s survey [229]. Chapters 8 and 9 are largely new as well. Section 3
+of Chapter 8, and most of Chapter 10 are taken (with many changes) from my “quantum proofs”
+survey paper with Andy Drucker [105]. Chapters 11 and 12 are partly taken from my non-locality
+survey with Harry Buhrman, Richard Cleve, and Serge Massar [76]. Chapters 13 and 14 are new.
+Thanks to Giannicola Scarpa (the teaching assistant for the first two editions of this course) for
+useful comments on some of the chapters.
+
+January’13: Updated and corrected a few things for the Feb-Mar 2013 version of this course, and
+included exercises for each chapter. Thanks to Harry Buhrman, Florian Speelman, and Jeroen
+Zuiddam for spotting some typos in the earlier version.
+
+April’13: More updates, clarifications and corrections; moved some material from Chapter 2 to 1;
+changed and added some exercises. Thanks to Jouke Witteveen for useful comments.
+
+April’14: Fixed and clarified a few more things. Thanks to Maarten Wegewijs for spotting a typo
+in Chapter 4.
+
+March’15: Updated a few small things.
+
+July’15: Updated and corrected a few small things, added more exercises. Thanks to Srinivasan
+Arunachalam, Carla Groenland, and Koen Groenland for useful comments.
+
+iii
+
+
+===== PDF PAGE 4 =====
+
+May’16: A few more corrections, thanks to Ralph Bottesch for useful comments.
+
+January’18: Many more corrections, more exercises, a new chapter about the Hidden Subgroup
+Problem (Chapter 6; the above-mentioned chapter numbers are for the earlier version of the notes),
+and moved the hints about exercises to an Appendix for students who want to try the exercises
+first without hints. Thanks to Joran van Apeldoorn, Srinivasan Arunachalam, Rens Baardman,
+Alexander Belov, Koen de Boer, Daniel Chernowitz, Andr´as Gily´en, Ronald de Haan, Leon Ingelse,
+Stacey Jeffery, Rafael Kiesel, Jens Klooster, Sam Kuypers, Christian Nesenberend, and Christian
+Schaffner for useful comments.
+
+January’19: More corrections, clarifications and exercises, and new chapters about Hamiltonian
+simulation (Chapter 9) and the HHL algorithm (Chapter 10). These two chapters can be taught
+together in two lectures, with the longer Chapter 9 spilling over into the second lecture if necessary.
+I marked by ‘(H)’ the exercises having a hint in Appendix C, and removed citations from exercises
+to prevent students looking up the original papers when doing the exercises (which is neither nec-
+essary nor helpful). Those references are [51, 101, 108, 69, 107, 120, 79, 39, 52, 36, 123, 91, 20].
+Thanks to Arjan Cornelissen, Sven Cornets de Groot, Gerrit Vos, and Harm de Vries for useful
+comments, and to Andr´as Gily´en for much help with Chapters 9 and 10. Thanks to my father
+and Mieke Beer for hosting me for two months while I was recovering from an ankle fracture in a
+wheelchair, from which much of these two chapters was written.
+
+July’19: More corrections, clarifications and exercises. Thanks to Joran van Apeldoorn, Andr´as
+Gily´en, Stephanie Gonzalez, Sander Gribling, Jaco ter Hoeve, Arnold Kole, Lotte Mertens, Stefano
+Pironio, Merel Schalkers, Jim Skulte, Iris Smit, Manuel Van, and Sebastian Zur for useful com-
+ments. Thanks to Barbara Terhal for suggesting the possibility of dedicating these notes.
+
+January’21: More corrections, clarifications and exercises, and a new chapter about QMA and the
+local Hamiltonian problem (Chapter 14). Thanks to Dorit Aharonov, Tomas Ehrencron, Alex Grilo,
+Joris Kattem¨olle, Stan de Lange, Noah Linden, Tessel Majtlis, Nikhil Mande, Andrea Mazzocco,
+Robert Modderman, Thomas Preu, Philip Verduyn Lunel, Baer Ververgaert, and Carel Wagenaar
+for useful comments.
+
+January’22: More corrections, clarifications and exercises. Thanks to Simon Apers, Christiaan
+van Asperen, Yanlin Chen, Lynn Engelberts, Sevag Gharibian, Andr´as Gily´en, Diego Gonz´alez-
+S´anchez, Bruno Jedynak, Joris Kattem¨olle, Julius Krebbekx, Zeph Landau, Noah Linden, Fr´ed´eric
+Magniez, Ryan Mann, and Yanelle Stolwijk for useful comments.
+
+August’22: More corrections, clarifications and exercises, and a new chapter about some aspects
+of quantum machine learning (Chapter 19).
+Thanks to Danish Alvi, Srinivasan Arunachalam,
+Nikolaos Chatzis, Li Chen, Yanlin Chen, Iordanis Kerenidis, Mikhail Kudinov, Casper Loman,
+Fr´ed´eric Magniez, Galina Pass, Benjamin Shaffrey, Mario Szegedy, and Michael Walter for useful
+comments.
+
+January’23: More corrections and clarifications, and a new chapter about the generalized ad-
+versary bound (Chapter 12). Thanks to Srinivasan Arunachalam, Martijn Brehm, Yanlin Chen,
+
+iv
+
+
+===== PDF PAGE 5 =====
+
+Lynn Engelberts, Noah Linden, Fr´ed´eric Magniez, Mehrdad Tahmasbi, Quinten Tupker, and Jordi
+Weggemans for useful comments.
+
+August’26: More corrections, clarifications, exercises, and a new chapter about stabilizer states
+(Chapter 20). Thanks to Simon Apers, Floor Beks, Raufs Dunamalijevs, Lynn Engelberts, Chi-
+nook Felix, Timo Gils, Chris de Hart, Rik Heurter, Milena Kapr´alov´a, Lorenzo Laneve, Noah
+Linden, Manideep Mamindlapally, Lois de la Mar, Harold Nieuwboer, Manaswi Paraashar, Sub-
+hasree Patro, Oded Regev, Giannicola Scarpa, Daan Schoneveld, Steven Wagter, and Stefan Wolf
+for useful comments. And ChatGPT for proofreading.
+
+© Ronald de Wolf, August 2026, Amsterdam
+All translations of these notes into other languages are unauthorized and violate this copyright.
+
+v
+
+
+===== PDF PAGE 6 =====
+
+vi
+
+
+===== PDF PAGE 7 =====
+
+Contents
+
+1
+Quantum Computing
+1
+1.1
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.2
+Quantum mechanics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+1.2.1
+Superposition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+1.2.2
+Measurement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+1.2.3
+Unitary evolution . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+1.3
+Qubits and quantum memory . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+1.4
+Elementary gates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+1.5
+Example: quantum teleportation . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10
+
+2
+The Circuit Model and the Deutsch-Jozsa Algorithm
+13
+2.1
+Quantum computation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+2.1.1
+Classical circuits . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+2.1.2
+Quantum circuits . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+2.2
+Universality of various sets of elementary gates . . . . . . . . . . . . . . . . . . . . .
+16
+2.3
+Quantum parallelism . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+2.4
+The early algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+2.4.1
+Deutsch-Jozsa . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+2.4.2
+Bernstein-Vazirani . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+
+3
+Simon’s Algorithm
+23
+3.1
+The problem
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+23
+3.2
+The quantum algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+23
+3.3
+Classical algorithms for Simon’s problem . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+3.3.1
+Upper bound . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+3.3.2
+Lower bound . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+25
+
+4
+The Fourier Transform
+29
+4.1
+The classical discrete Fourier transform
+. . . . . . . . . . . . . . . . . . . . . . . . .
+29
+4.2
+The Fast Fourier Transform . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+4.3
+Application: multiplying two polynomials . . . . . . . . . . . . . . . . . . . . . . . .
+30
+4.4
+The quantum Fourier transform . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31
+4.5
+An efficient quantum circuit . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+32
+4.6
+Application: phase estimation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+33
+
+vii
+
+
+===== PDF PAGE 8 =====
+
+5
+Shor’s Factoring Algorithm
+37
+5.1
+Factoring
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+37
+5.2
+Reduction from factoring to period-finding . . . . . . . . . . . . . . . . . . . . . . . .
+37
+5.3
+Shor’s period-finding algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+5.4
+Continued fractions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+41
+
+6
+Hidden Subgroup Problem
+45
+6.1
+Hidden Subgroup Problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+45
+6.1.1
+Group theory reminder
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+45
+6.1.2
+Definition and some instances of the HSP . . . . . . . . . . . . . . . . . . . .
+46
+6.2
+An efficient quantum algorithm if G is Abelian . . . . . . . . . . . . . . . . . . . . .
+47
+6.2.1
+Representation theory and the quantum Fourier transform . . . . . . . . . . .
+47
+6.2.2
+A general algorithm for Abelian HSP . . . . . . . . . . . . . . . . . . . . . . .
+48
+6.3
+General non-Abelian HSP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+50
+6.3.1
+The symmetric group and the graph isomorphism problem
+. . . . . . . . . .
+50
+6.3.2
+Non-Abelian QFT on coset states . . . . . . . . . . . . . . . . . . . . . . . . .
+50
+6.3.3
+Query-efficient algorithm
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+51
+
+7
+Grover’s Search Algorithm
+53
+7.1
+The problem
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+53
+7.2
+Grover’s algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+53
+7.3
+Amplitude amplification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+56
+7.4
+Application: faster solution for satisfiability . . . . . . . . . . . . . . . . . . . . . . .
+58
+
+8
+Quantum Walk Algorithms
+63
+8.1
+Classical random walks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+63
+8.2
+Quantum walks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+64
+8.3
+Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+67
+8.3.1
+Grover search . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+67
+8.3.2
+Finding collisions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+67
+8.3.3
+Finding a triangle in a graph . . . . . . . . . . . . . . . . . . . . . . . . . . .
+68
+
+9
+Hamiltonian Simulation
+71
+9.1
+Hamiltonians . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+71
+9.2
+Method 1: Lie-Suzuki-Trotter methods . . . . . . . . . . . . . . . . . . . . . . . . . .
+72
+9.3
+Method 2: Linear combination of unitaries (LCU)
+. . . . . . . . . . . . . . . . . . .
+74
+9.3.1
+Hamiltonian simulation via LCU . . . . . . . . . . . . . . . . . . . . . . . . .
+75
+9.4
+Method 3: Transforming block-encoded matrices
+. . . . . . . . . . . . . . . . . . . .
+76
+9.4.1
+Hamiltonian simulation via transforming block-encoded matrices . . . . . . .
+78
+
+10 The HHL Algorithm
+83
+10.1 The linear-system problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+83
+10.2 The basic HHL algorithm for linear systems . . . . . . . . . . . . . . . . . . . . . . .
+84
+10.3 Improving the efficiency of the HHL algorithm
+. . . . . . . . . . . . . . . . . . . . .
+85
+
+viii
+
+
+===== PDF PAGE 9 =====
+
+11 Quantum Query Lower Bounds
+89
+11.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+89
+11.2 The polynomial method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+90
+11.3 The quantum adversary method
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+92
+
+12 Quantum Algorithms from the Generalized Adversary Bound
+99
+12.1 The generalized adversary bound . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+99
+12.2 The dual of the generalized adversary bound
+. . . . . . . . . . . . . . . . . . . . . . 101
+12.3 ADV± is an upper bound on quantum query complexity . . . . . . . . . . . . . . . . 102
+12.4 Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 104
+12.5 Perfect composition and AND-OR trees . . . . . . . . . . . . . . . . . . . . . . . . . 105
+
+13 Quantum Complexity Theory
+109
+13.1 Most functions need exponentially many gates . . . . . . . . . . . . . . . . . . . . . . 109
+13.2 Classical and quantum complexity classes . . . . . . . . . . . . . . . . . . . . . . . . 110
+13.3 Classically simulating quantum computers in polynomial space
+. . . . . . . . . . . . 112
+
+14 QMA and the Local Hamiltonian Problem
+115
+14.1 Quantum Merlin-Arthur (QMA) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+14.2 The local Hamiltonian problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116
+14.3 Local Hamiltonian is QMA-complete
+. . . . . . . . . . . . . . . . . . . . . . . . . . 118
+14.3.1 Completeness and soundness
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 119
+14.3.2 Reducing the locality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121
+14.4 Other interesting problems in QMA . . . . . . . . . . . . . . . . . . . . . . . . . . . 121
+14.5 Quantum interactive proofs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 122
+
+15 Quantum Encodings, with a Non-Quantum Application
+127
+15.1 Mixed states and general measurements . . . . . . . . . . . . . . . . . . . . . . . . . 127
+15.2 Quantum encodings and their limits
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 128
+15.3 Lower bounds on locally decodable codes
+. . . . . . . . . . . . . . . . . . . . . . . . 130
+
+16 Quantum Communication Complexity
+135
+16.1 Classical communication complexity
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 135
+16.2 The quantum question . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 136
+16.3 Example 1: Distributed Deutsch-Jozsa . . . . . . . . . . . . . . . . . . . . . . . . . . 137
+16.4 Example 2: The Intersection problem
+. . . . . . . . . . . . . . . . . . . . . . . . . . 138
+16.5 Example 3: The vector-in-subspace problem . . . . . . . . . . . . . . . . . . . . . . . 139
+16.6 Example 4: Quantum fingerprinting
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 139
+
+17 Entanglement and Non-Locality
+145
+17.1 Quantum non-locality
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145
+17.2 CHSH: Clauser-Horne-Shimony-Holt . . . . . . . . . . . . . . . . . . . . . . . . . . . 147
+17.3 Magic square game . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 148
+17.4 A non-local version of distributed Deutsch-Jozsa
+. . . . . . . . . . . . . . . . . . . . 150
+
+ix
+
+
+===== PDF PAGE 10 =====
+
+18 Quantum Cryptography
+155
+18.1 Saving cryptography from Shor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 155
+18.2 Quantum key distribution . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 155
+18.3 Reduced density matrices and the Schmidt decomposition . . . . . . . . . . . . . . . 158
+18.4 The impossibility of perfect bit commitment . . . . . . . . . . . . . . . . . . . . . . . 159
+18.5 More quantum cryptography
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 160
+
+19 Quantum Machine Learning
+163
+19.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 163
+19.2 Supervised learning from quantum data . . . . . . . . . . . . . . . . . . . . . . . . . 164
+
+19.2.1 The PAC model of learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . 164
+19.2.2 Learning from quantum examples under the uniform distribution . . . . . . . 165
+19.2.3 Learning from quantum examples under all distributions . . . . . . . . . . . . 166
+19.2.4 Learning quantum states from classical data . . . . . . . . . . . . . . . . . . . 167
+19.3 Unsupervised learning from quantum data . . . . . . . . . . . . . . . . . . . . . . . . 167
+19.4 Optimization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 168
+
+19.4.1 Variational quantum algorithms
+. . . . . . . . . . . . . . . . . . . . . . . . . 169
+19.4.2 Some provable quantum speed-ups for optimization . . . . . . . . . . . . . . . 169
+
+20 Stabilizer States, Clifford Circuits, and One-Way Quantum Computing
+173
+20.1 Stabilizer states . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 173
+20.2 Clifford circuits . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 174
+20.3 Efficient simulation of Cliffords: Gottesman-Knill theorem . . . . . . . . . . . . . . . 175
+20.4 T-gates and magic states . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 176
+20.5 Efficient simulation of circuits with few T-gates . . . . . . . . . . . . . . . . . . . . . 177
+20.6 One-way quantum computing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 178
+
+21 Error-Correction and Fault-Tolerance
+183
+21.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 183
+21.2 Classical error-correction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 183
+21.3 Quantum errors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 184
+21.4 Quantum error-correcting codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 185
+21.5 Fault-tolerant quantum computation . . . . . . . . . . . . . . . . . . . . . . . . . . . 187
+21.6 Concatenated codes and the threshold theorem . . . . . . . . . . . . . . . . . . . . . 188
+
+A Some Useful Linear Algebra
+193
+A.1 Vector spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 193
+A.2 Matrices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 193
+A.3 Inner product and norms for vectors . . . . . . . . . . . . . . . . . . . . . . . . . . . 194
+A.4 Unitary matrices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 194
+A.5 Diagonalization and singular values . . . . . . . . . . . . . . . . . . . . . . . . . . . . 195
+A.6 Tensor products . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 196
+A.7 Trace . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 197
+A.8 Rank . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 197
+A.9 The Pauli matrices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 198
+A.10 Dirac notation
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 198
+
+x
+

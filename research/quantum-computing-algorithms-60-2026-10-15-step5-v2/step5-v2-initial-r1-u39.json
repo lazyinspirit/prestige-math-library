@@ -1,0 +1,136 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "39",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "lem-qa-15-branch-density-degree",
+      "model": "gpt-6-luna",
+      "context_sha256": "0ad9dcffd20b97f9c017b856f54ae0b7a64747026d936e20771f868b0b4d1c80",
+      "outcome": "false_positive",
+      "reason": "The Statement explicitly asserts absence of supported monomials above 2t(h), so zero entries satisfy it vacuously without assigning a formal degree to zero. The title abbreviates this support bound. The root projector is constant; fixed linear unitary/instrument maps preserve support bounds; trace-zero positivity handles zero-weight outcomes without division; each XOR matrix entry is affine, so conjugation adds at most two. Finite tree-depth induction proves the claim, including N=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-15-acceptance-degree-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "5a60b273ac84267900fe28cc9e14e7474e77f6fec0f0ddaf12e99f735dd5d7e4",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The query-complexity notation is defined only for 0<=epsilon<1/2, but the original consequence omitted that restriction. This is a nonfatal domain qualification: the full-cube polynomial bound and the approximate-degree consequence for every epsilon>=0 are sound, and the ceiling inequality is sound throughout the defined query-complexity domain. The Statement, Given, F4 and step 3.1 now make those ranges explicit without restricting the polynomial conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-15-branch-density-degree",
+      "disposition": "unaffected",
+      "post_sha256": "204aa93bf91f8a318053a4f0513906129c7874c6e9387243ffbfde1f042ee695",
+      "review_context_sha256": "87eb3b4ee2a83ad3c5bceca3a88460acef28bb26d8b8bdc6177d92b3149b7a7e",
+      "reason": "The Statement explicitly asserts absence of supported monomials above 2t(h), so zero entries satisfy it vacuously without assigning a formal degree to zero. The title abbreviates this support bound. The root projector is constant; fixed linear unitary/instrument maps preserve support bounds; trace-zero positivity handles zero-weight outcomes without division; each XOR matrix entry is affine, so conjugation adds at most two. Finite tree-depth induction proves the claim, including N=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-15-acceptance-degree-bound",
+      "disposition": "repaired",
+      "post_sha256": "415039f264cf8df033a8e91a002889416daf5cf209458c76c8201517f22828d4",
+      "review_context_sha256": "63c2868577d725353881b2bdce37f7d58bb7fc23627930a584b1cca99773a69c",
+      "reason": "Terminal branch diagonal sums have support in degrees <=2T; taking coefficientwise real parts preserves their real Boolean-cube values, and squarefree reduction preserves those values without increasing supported degree. This includes zero polynomials, T=0, N=0 and empty promise domains. The approximate-degree conclusion remains valid for every epsilon>=0; only the Q^bit consequence and its minimum-query proof now require the defining range 0<=epsilon<1/2. Focused precheck, renderer, proof-layout and strict proof-contract checks passed. This records a local repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-qa-15-or-approximate-degree-lower-bound",
+    "thm-qa-15-parity-approximate-degree"
+  ],
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "id": "thm-qa-15-acceptance-degree-bound",
+        "locus": "statement",
+        "severity": "nonfatal",
+        "status": "fixed",
+        "finding": "The query-complexity notation is defined only for 0<=epsilon<1/2, but the original consequence omitted that restriction. This is a nonfatal domain qualification: the full-cube polynomial bound and the approximate-degree consequence for every epsilon>=0 are sound, and the ceiling inequality is sound throughout the defined query-complexity domain. The Statement, Given, F4 and step 3.1 now make those ranges explicit without restricting the polynomial conclusion."
+      }
+    ],
+    "published_ledger": []
+  },
+  "repair_notes": [
+    {
+      "id": "lem-qa-15-branch-density-degree",
+      "claim_and_conventions": "Support above 2t(h) is empty, including the zero polynomial; finite linear maps preserve this bound, and affine XOR conjugation adds at most two. No AC is used.",
+      "source_evidence": [
+        "items/lem-qa-15-branch-density-degree.md Statement, F1-F6 and complete Proof",
+        "items/def-qa-15-bit-oracle-query-model.md Definition",
+        "items/def-qa-finite-branch-output-law.md Definition and Verification",
+        "items/def-qa-standard-bit-query.md Definition and Verification",
+        "items/def-monomials-multidegree-and-total-degree.md Definition",
+        "research/quantum-computing-algorithms-60-2026-10-15-batch-39.proof-contracts.json branch-density citation excerpts for registers, instruments, CP maps, trace, spectral positivity, polynomial rings and complex arithmetic"
+      ],
+      "sources_consulted": "Local item bodies and exact supplier excerpts only; the finite linear algebra and polynomial argument is familiar. No external source-reading claim is made.",
+      "unresolved_obligations": []
+    },
+    {
+      "id": "thm-qa-15-acceptance-degree-bound",
+      "claim_and_conventions": "Terminal diagonal sums, real coefficient parts and Boolean multilinear reduction give a full-cube acceptance polynomial with support in degrees <=2T. Approximate degree is defined for epsilon>=0; the Q^bit minimum is defined only for 0<=epsilon<1/2. No AC is used.",
+      "dependencies": [
+        "def-qa-15-bit-oracle-query-model",
+        "def-qa-15-acceptance-polynomial",
+        "def-qa-15-bit-oracle-query-complexity",
+        "lem-qa-15-branch-density-degree",
+        "def-qa-finite-branch-output-law",
+        "lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction"
+      ],
+      "source_evidence": [
+        "items/def-qa-15-bit-oracle-query-complexity.md Definition, opening range and finite minimum",
+        "items/def-qa-15-acceptance-polynomial.md Definition, epsilon>=0 and support convention",
+        "items/lem-qa-15-branch-density-degree.md Statement and complete Proof",
+        "items/lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction.md Statement and complete Proof",
+        "library/quantum-algorithms/polynomial-method-and-approximate-degree.md page interface"
+      ],
+      "checks": [
+        "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-15-branch-density-degree.md items/thm-qa-15-acceptance-degree-bound.md --json: exit 0, 2 proofs checked, 0 failed",
+        "node tools/rendercheck.mjs items/lem-qa-15-branch-density-degree.md items/thm-qa-15-acceptance-degree-bound.md --json: exit 0, 2 checked, 0 errors/warnings",
+        "node tools/proof-layout.mjs items/thm-qa-15-acceptance-degree-bound.md: exit 0, 1 item, 3 steps, 0 defects",
+        "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-39.proof-contracts.json --strict --items lem-qa-15-branch-density-degree,thm-qa-15-acceptance-degree-bound,thm-qa-15-or-approximate-degree-lower-bound,thm-qa-15-parity-approximate-degree --json: exit 0, 4 checked, ok=true, 0 errors/warnings"
+      ],
+      "consumer_examination": [
+        {
+          "id": "thm-qa-15-or-approximate-degree-lower-bound",
+          "path": "items/thm-qa-15-or-approximate-degree-lower-bound.md",
+          "affected_use": "F5 and proof step 3.1 apply the half-approximate-degree query lower bound to OR, using 0<=epsilon<1/2 in the Statement and Given.",
+          "disposition": "unaffected",
+          "reason": "The added range is already an explicit hypothesis. Neither the degree bound nor the resulting ceiling inequality changes. Its contract F5 quotation was refreshed to the qualified supplier Statement; the item carrier is unchanged."
+        },
+        {
+          "id": "thm-qa-15-parity-approximate-degree",
+          "path": "items/thm-qa-15-parity-approximate-degree.md",
+          "affected_use": "F5 and proof step 3.1 apply the half-approximate-degree query lower bound after proving approximate degree N; Statement and Given impose 0<=epsilon<1/2.",
+          "disposition": "unaffected",
+          "reason": "The range required by the repaired supplier is already assumed. The final query lower bound remains ceil(N/2). Its contract F5 quotation was refreshed to the qualified supplier Statement; the item carrier is unchanged."
+        },
+        {
+          "page": "polynomial-method-and-approximate-degree",
+          "path": "library/quantum-algorithms/polynomial-method-and-approximate-degree.md",
+          "affected_use": "The page promises acceptance polynomials of degree at most twice the query count and function-level oracle-only query lower bounds.",
+          "disposition": "unaffected",
+          "reason": "The full-cube polynomial claim is unchanged, and the query-complexity symbol retains exactly its defining domain."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Controller collection and any required downstream scheduling; no judges, stamps, central certificates or round state were written.",
+      "contract_repair": "Under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release, updated only the repaired step 3.1 derivation and the two exact consumer F5 supplier quotations in the owning batch-39 contract. Historical review and boundary evidence was preserved."
+    }
+  ],
+  "gate_resolutions": []
+}

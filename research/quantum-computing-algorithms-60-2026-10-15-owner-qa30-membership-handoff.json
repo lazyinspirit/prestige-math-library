@@ -1,0 +1,1010 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "scope": "Membership/separation only; sole54 shared-metadata writer is quantum_precision_choice_escalation. Source edits stopped.",
+  "items": [
+    {
+      "id": "def-qa-30-quantum-membership-separation-model",
+      "path": "items/def-qa-30-quantum-membership-separation-model.md",
+      "kind": "definition",
+      "title": "Quantum convex membership and weak-separation model",
+      "deps": [
+        "def-qa-30-classical-optimizer-interface",
+        "def-qc-coherent-function-oracle",
+        "def-qc-inverse-unitary-access"
+      ],
+      "statement": "Let $B(x,t)=\\{z\\in\\mathbb R^n:\\|z-x\\|_2\\le t\\}$ and let $B(K,t)=\\bigcup_{x\\in K}B(x,t)$ for $t\\ge0$; $B(K,-t)$ denotes the inward erosion consisting of points whose radius-$t$ ball is contained in $K$. A convex body is a closed convex set with nonempty interior. Assume rationally encoded $0<r\\le R$ and $B(0,r)\\subseteq K\\subseteq B(0,R)$. The deterministic weak-membership oracle $\\mathrm{MEM}_{\\varepsilon,0}(K)$ is queried at a finite-precision point $y$ and must correctly assert either $y\\in B(K,\\varepsilon)$ or $y\\notin B(K,-\\varepsilon)$. In the overlap it may return either valid assertion. The coherent interface is a supplied reversible Boolean unitary with a fixed deterministic completion on every encoded input, together with its inverse and any controlled forms used.\n\nA weak separation oracle $\\mathrm{SEP}_{\\eta,\\rho}(K)$, queried at $y$, with probability at least $1-\\rho$, either asserts $y\\in B(K,\\eta)$ or asserts $y\\notin B(K,-\\eta)$ and returns a unit vector $g$ satisfying $\\langle g,z\\rangle\\le\\langle g,y\\rangle+\\eta$ for every $z\\in B(K,-\\eta)$. The membership-to-separation algorithm is promised only on the query domain in its theorem; no unique answer is required in the boundary bands. A finite unit-normal encoding may be a nonzero rational vector v with the normalization g=v/||v|| interpreted exactly; rational bisection supplies an upper norm bound N between ||v|| and2||v|| when a classical reduction requires rational halfspaces. Radius, point, unit-normal and offset encodings and all query/inverse/gate/bit costs are part of the contract.\n\nThis specifies oracle behavior; a membership-to-separation theorem and any separation-to-optimization composition are separate claims with their own hypotheses.",
+      "new": false
+    },
+    {
+      "id": "alg-qa-30-quantum-membership-to-separation",
+      "path": "items/alg-qa-30-quantum-membership-to-separation.md",
+      "kind": "algorithm",
+      "title": "Quantum membership-to-separation procedure",
+      "deps": [
+        "def-qa-30-quantum-membership-separation-model",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access"
+      ],
+      "statement": "This finite algorithm takes a convex body, a rational query point and radii, a precision/failure budget, and supplied coherent deterministic weak-membership access with inverse. It returns IN when the membership interface certifies that branch; otherwise it returns a finite-precision weak separating normal and halfspace or an explicitly distinguished INVALID, RANDOM_FAIL, or FAILURE branch. The algorithm charges the membership oracle and inverse, all controlled queries, point rotations, numerical arithmetic, random sampling, phase estimation, QFTs, output bits, and every gate.",
+      "new": false
+    },
+    {
+      "id": "lem-qa-30-membership-height-geometry",
+      "path": "items/lem-qa-30-membership-height-geometry.md",
+      "kind": "lemma",
+      "title": "Height geometry and weak-membership binary search",
+      "deps": [
+        "def-qa-30-quantum-membership-separation-model",
+        "def-subgradient-and-subdifferential",
+        "thm-nearest-point-in-a-nonempty-closed-convex-set",
+        "cor-bolzano-weierstrass-in-rn",
+        "thm-heine-borel-rn",
+        "thm-cauchy-schwarz-and-the-euclidean-norm"
+      ],
+      "statement": "Let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body in $\\mathbb R^n$, $n\\ge2$. In any rotated coordinates set $C=\\{y:\\exists t,(y,t)\\in K\\}$ and $h(y)=\\min\\{t:(y,t)\\in K\\}$. Then $h$ is convex, finite on $B(0,r)$, and $L=2R/r$-Lipschitz on $B(0,r/2)$. Every interior point of $C$ has a subgradient, and every such subgradient at a point in the interior of this ball has norm at most $L$.\n\nFor $\\|y\\|\\le r/2$, a $\\mathrm{MEM}_{\\varepsilon,0}$ query at $(y,t)$, $t\\le-r/2$, has these implications: an IN answer implies $t\\ge h(y)-3R\\varepsilon/r$; an OUT answer implies $t\\le h(y)+2R\\varepsilon/r$. Hence binary search on $[-R,-r/2]$, returning its final upper endpoint when its width is at most $\\delta/3$, approximates $h(y)$ within $\\delta$ if $\\varepsilon\\le r\\delta/(3R)$. It uses $O(1+\\log(R/\\delta))$ membership queries and has a clean coherent implementation using the same order of queries and inverse queries.\n\nFinally, if $x=-\\|x\\|e_n$ receives OUT and $h(y)\\ge h(0)+\\langle v,y\\rangle-a\\|y\\|-b$ on $C$, then $s=(-v,1)/\\|(-v,1)\\|$ satisfies $\\langle s,z\\rangle\\ge\\langle s,x\\rangle-aR-b-2R\\varepsilon/r$ for every $z\\in K$.",
+      "new": true
+    },
+    {
+      "id": "lem-qa-30-finite-grid-quantum-subgradient",
+      "path": "items/lem-qa-30-finite-grid-quantum-subgradient.md",
+      "kind": "lemma",
+      "title": "A finite-grid quantum subgradient from approximate values",
+      "deps": [
+        "def-subgradient-and-subdifferential",
+        "thm-riemann-fubini-on-product-rectangles",
+        "lem-chernoff-bound-for-independent-bernoulli-trials",
+        "thm-qa-exact-binary-qft-circuit-correct",
+        "def-qa-cyclic-quantum-fourier-transform",
+        "lem-qa-13-pi-rational-bounds",
+        "thm-cauchy-schwarz-and-the-euclidean-norm"
+      ],
+      "statement": "Let $1\\le d\\le n$, let $f:C\\to\\mathbb R$ be convex, and suppose it is $L$-Lipschitz on a neighborhood of $[-2r_1,2r_1]^d\\subset C$. Every point there is assumed to have a subgradient of norm at most $L$. Let $0<\\rho\\le1/3$, $\\rho_0=99\\rho/100$, $0<\\delta\\le nr_1L/\\rho_0$, and $r_2=\\sqrt{\\delta r_1\\rho_0/(nL)}$. A deterministic clean value oracle approximates $f$ to error at most $\\delta$ on the finite query grids.\n\nChoose a finite uniform grid of cell centers $z$ of $[-r_1,r_1]^d$, with $2^b$ cells per coordinate and mesh $h_0=2r_1/2^b\\le(\\rho/1000)r_2^2/(8n^2r_1)$. Put $a=2r_2/n$, $B=La$, $m=\\max\\{5,\\lceil\\log_2(B/(28\\pi\\delta))\\rceil\\}$, $M=2^m$, and $B_*=28\\pi\\delta M$. On each independent run prepare the uniform product grid $u_i=(j_i+1/2)/M-1/2$, apply phase $\\exp(2\\pi iM\\widetilde f(z+au)/(3B_*))$ with clean uncomputation, apply the negative-sign QFT to each coordinate, and decode signed integers $y_i$ as $3B_*y_i/(aM)$. Use at least $18\\ln(1000n/\\rho)+3$ independent runs and coordinate medians. A total implemented-phase operator error at most $1/1000$ per run is permitted.\n\nWith probability at least $1-\\rho$, the resulting vector $v$ satisfies, simultaneously for every $y\\in C$,\n$$f(y)\\ge f(0)+\\langle v,y\\rangle-(23n)^2\\sqrt{\\frac{\\delta L}{\\rho_0r_1}}\\|y\\|-2L\\sqrt n\\,r_1.$$\nThe number of value-oracle and inverse calls is $O(\\log(n/\\rho))$. Random bits, phases, QFT gates, arithmetic, and output costs are separate.",
+      "new": true
+    },
+    {
+      "id": "lem-qa-30-centroid-weak-separation-optimization",
+      "path": "items/lem-qa-30-centroid-weak-separation-optimization.md",
+      "kind": "lemma",
+      "title": "Query-only optimization from weak separation by centroid cuts",
+      "deps": [
+        "def-qa-30-quantum-membership-separation-model",
+        "thm-brunn-minkowski-for-compact-convex-sets",
+        "thm-jensen-inequality-for-expectation",
+        "thm-linear-change-of-variables-for-lebesgue-measure",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "def-countable-choice"
+      ],
+      "statement": "Assume countable choice, with positive rationally encoded radii and accuracy/failure parameters. Let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body, let $0<\\zeta\\le R$, $0<\\nu\\le1/3$, and let $c$ be a unit objective vector with supplied finite rational approximations to any requested error. Put\n$$\\tau=\\zeta/8,\\qquad s=r\\tau/(16R),\\qquad \\eta=s/(100n).$$\nLet $T$ be the least integer with $(3/4)^T(2R)^n<(2s/n)^n$, and $B$ the least positive integer with $2^B\\tau\\ge8R$. There is a finite classical procedure using at most $BT=O(n\\log(nR/s)\\log(R/\\zeta))$ calls to $\\mathrm{SEP}_{\\eta,\\nu/(2BT)}(K)$ that, with probability at least $1-\\nu$, returns $y\\in B(K,\\zeta)$ with\n$$\\langle c,y\\rangle\\ge\\max_{x\\in K}\\langle c,x\\rangle-\\zeta.$$\nThe normal encoding must supply a nonzero rational direction $u$ for its unit normal $u/\\|u\\|$; a rational $N$ with $\\|u\\|\\le N\\le2\\|u\\|$ can be computed by bisection. Query points and polytope arithmetic are rational. Computing exact centroids by exhaustive finite triangulation is allowed and charged separately: this result asserts no polynomial arithmetic, gate, or bit-time bound.",
+      "new": true
+    },
+    {
+      "id": "thm-qa-30-quantum-membership-separation-cost",
+      "path": "items/thm-qa-30-quantum-membership-separation-cost.md",
+      "kind": "theorem",
+      "title": "Quantum weak-separation query bound",
+      "deps": [
+        "alg-qa-30-quantum-membership-to-separation",
+        "def-qa-30-quantum-membership-separation-model",
+        "lem-qa-30-membership-height-geometry",
+        "lem-qa-30-finite-grid-quantum-subgradient",
+        "lem-qa-30-centroid-weak-separation-optimization",
+        "def-countable-choice"
+      ],
+      "statement": "Let $n\\ge1$, with rationally encoded radii, precision and failure budgets as in the model, and let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body, $0<\\eta\\le R$, and $0<\\rho\\le1/3$. The completed deterministic coherent oracle $\\mathrm{MEM}_{\\varepsilon,0}(K)$ and its inverse are supplied, with\n$$\\varepsilon\\le\\eta(58n)^{-9/2}(r/R)^3(\\eta/R)^2\\rho.$$\nUnder the finite encoding and numerical-error budgets of [[alg-qa-30-quantum-membership-to-separation]], that procedure implements $\\mathrm{SEP}_{\\eta,\\rho}(K)$ using\n$$O\\!\\left(\\log(n/\\rho)\\log\\!\\left((n/\\rho)(R/\\eta)(R/r)\\right)\\right)$$\nmembership and inverse queries combined. The promise applies to all encoded query points; in particular it applies throughout the bounded rational localization queries used below. The oracle completion need not be unique in the weak boundary band.\n\nFor the optimization composition assume countable choice. Given $0<\\zeta\\le R$, $0<\\nu\\le1/3$, and a unit objective with costed rational approximations, use $\\tau,s,\\eta_*,T,B$ from [[lem-qa-30-centroid-weak-separation-optimization]] and $\\rho_* =\\nu/(2BT)$. Membership access at any precision\n$$\\varepsilon_*\\le\\eta_*(58n)^{-9/2}(r/R)^3(\\eta_*/R)^2\\rho_*$$\nthen returns, with probability at least $1-\\nu$, a point $y\\in B(K,\\zeta)$ satisfying $\\langle c,y\\rangle\\ge\\max_{x\\in K}\\langle c,x\\rangle-\\zeta$, with at most $BT$ times the preceding per-separation membership-query bound, evaluated at $(\\eta_*,\\rho_*)$. This is $\\widetilde O(n)$ membership queries, where the suppressed factors are logarithmic in $n,R/r,R/\\zeta,1/\\nu$. It implies the corresponding weak-optimization guarantee over $B(K,-\\zeta)$. Output, QFT/phase gates, rotations, numerical precision, centroid computation, and all classical arithmetic/bit costs are additional. No polynomial-time centroid implementation is asserted.",
+      "new": false
+    }
+  ],
+  "contracts": {
+    "def-qa-30-quantum-membership-separation-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive inner radius excludes an empty body; grid dimension is positive where invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An exact zero-width membership oracle is relabeled to a positive allowed weak boundary width; zero query point returns IN. All denominators/radii and finite-grid dimensions are positive on their stated domains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Main proof1.1 handles n=1 separately; height lemma assumes n>=2; finite-grid lemma includes d=1; centroid proof1.2 handles one-dimensional intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nondifferentiable convex heights use supporting subgradients. Empty/lower-dimensional localization polytopes return FAIL, which contradicts the promised interior ball only in the successful feasibility regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Weak-oracle overlap permits either completed answer; equality endpoints in binary search retain the two explicit boundary invariants. Fixed Fourier size M>=32 covers signed wrap, and rounding budgets remain strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Centroid/optimization clauses explicitly assume countable choice for Brunn\u2013Minkowski and volume integration; height uses unique projections and choice-free Euclidean subsequence compactness. No hidden arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        }
+      ]
+    },
+    "alg-qa-30-quantum-membership-to-separation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive inner radius excludes an empty body; grid dimension is positive where invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An exact zero-width membership oracle is relabeled to a positive allowed weak boundary width; zero query point returns IN. All denominators/radii and finite-grid dimensions are positive on their stated domains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Main proof1.1 handles n=1 separately; height lemma assumes n>=2; finite-grid lemma includes d=1; centroid proof1.2 handles one-dimensional intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nondifferentiable convex heights use supporting subgradients. Empty/lower-dimensional localization polytopes return FAIL, which contradicts the promised interior ball only in the successful feasibility regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Weak-oracle overlap permits either completed answer; equality endpoints in binary search retain the two explicit boundary invariants. Fixed Fourier size M>=32 covers signed wrap, and rounding budgets remain strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Centroid/optimization clauses explicitly assume countable choice for Brunn\u2013Minkowski and volume integration; height uses unique projections and choice-free Euclidean subsequence compactness. No hidden arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        }
+      ]
+    },
+    "lem-qa-30-membership-height-geometry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-30-quantum-membership-separation-model",
+          "source_section": "Definition",
+          "quote": "Let $B(x,t)=\\{z\\in\\mathbb R^n:\\|z-x\\|_2\\le t\\}$ and let $B(K,t)=\\bigcup_{x\\in K}B(x,t)$ for $t\\ge0$; $B(K,-t)$ denotes the inward erosion consisting of points whose radius-$t$ ball is contained in $K$. A convex body is a closed convex set with nonempty interior. Assume rationally encoded $0<r\\le R$ and $B(0,r)\\subseteq K\\subseteq B(0,R)$. The deterministic weak-membership oracle $\\mathrm{MEM}_{\\varepsilon,0}(K)$ is queried at a finite-precision point $y$ and must correctly assert either $y\\in B(K,\\varepsilon)$ or $y\\notin B(K,-\\varepsilon)$. In the overlap it may return either valid assertion. The coherent interface is a supplied reversible Boolean unitary with a fixed deterministic completion on every encoded input, together with its inverse and any controlled forms used.\n\nA weak separation oracle $\\mathrm{SEP}_{\\eta,\\rho}(K)$, queried at $y$, with probability at least $1-\\rho$, either asserts $y\\in B(K,\\eta)$ or asserts $y\\notin B(K,-\\eta)$ and returns a unit vector $g$ satisfying $\\langle g,z\\rangle\\le\\langle g,y\\rangle+\\eta$ for every $z\\in B(K,-\\eta)$. The membership-to-separation algorithm is promised only on the query domain in its theorem; no unique answer is required in the boundary bands. A finite unit-normal encoding may be a nonzero rational vector v with the normalization g=v/||v|| interpreted exactly; rational bisection supplies an upper norm bound N between ||v|| and2||v|| when a classical reduction requires rational halfspaces. Radius, point, unit-normal and offset encodings and all query/inverse/gate/bit costs are part of the contract.\n\nThis specifies oracle behavior; a membership-to-separation theorem and any separation-to-optimization composition are separate claims with their own hypotheses.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $x\\in\\mathbb R^n$. Then there is a unique $p\\in C$ such that $\\|x-p\\|_2\\le\\|x-z\\|_2$ for every $z\\in C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-bolzano-weierstrass-in-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $\\bigl(x^{(j)}\\bigr)_{j\\in\\mathbb{N}}$\nbe a sequence in $\\mathbb{R}^{n}$ whose range\n$\\{\\, x^{(j)} : j \\in \\mathbb{N} \\,\\}$ is a bounded subset of\n$(\\mathbb{R}^{n}, d_2)$ ([[def-metric-bounded-diameter]], [[lem-metrics-on-rn]]).\nThen there are a strictly increasing $i : \\mathbb{N} \\to \\mathbb{N}$\n([[def-sequence]], [[lem-index-map-grows]]) and a point $p \\in \\mathbb{R}^{n}$\nwith\n\n$$x^{(i_j)} \\longrightarrow p \\quad \\text{in } (\\mathbb{R}^{n}, d_2)$$\n\n([[def-metric-convergence]]). By [[thm-all-norms-on-rn-are-equivalent]] the same\nstatement holds with $d_2$ replaced by the metric of any norm on\n$\\mathbb{R}^{n}$, boundedness and convergence both being unchanged by that\nreplacement ([[def-equivalent-norms]]).\n\n**This is assembled from published theorems and is not proved again by\nbisection.** The bisection is in [[thm-heine-borel-rn]], published at order 120;\nwhat is added here is the passage from compactness to sequential compactness and\nthe reading of the conclusion in $\\mathbb{R}^{n}$.\n\n**Choice cost: none.** [[thm-heine-borel-rn]] is proved by bisection and uses no\nchoice principle, and \"compact implies sequentially compact\" is a theorem of ZF\n([[thm-compact-implies-the-other-compactness-forms]]). The five-way equivalence\n[[thm-metric-compactness-equivalences]] is **not** used, precisely because it is\nstated under countable choice and dependent choice ([[def-dependent-choice]]) and\nwould overcharge this corollary; the arrow-by-arrow account is\n[[rem-compactness-choice-ledger-metric]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-subgradient-and-subdifferential",
+          "source_section": "Definition",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.\n\nThe **subdifferential** is the set\n\n$$\\partial f(a):=\\{v\\in\\mathbb R^n:f(y)\\ge f(a)+\\langle v,y-a\\rangle\\text{ for every }y\\in C\\},$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\\partial f(a)$ to be empty or to contain more than one vector.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qa-30-membership-height-geometry-1_1",
+          "step": "1.1",
+          "claim": "Compactness of $K$ makes each nonempty vertical section compact, so its minimum exists; projection makes $C$ compact and convex. Convex combinations of two minimizing boundary points show convexity of $h$. For $\\|y\\|\\le r$, the inner ball supplies a point at height zero, while the outer ball bounds all heights below by $-R$. Thus $-R\\le h(y)\\le0$ on that ball.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-membership-height-geometry-1_2",
+          "step": "1.2",
+          "claim": "More generally on $B(0,d)$, $0<d<r$, let $y,y'$ be distinct and extend the directed line from $y$ through $y'$ by $r-d$ to $p=y'+(r-d)(y'-y)/\\|y'-y\\|$. Then $p\\in B(0,r)$ and convexity on the segment $[y,p]$ gives $h(y')-h(y)\\le R\\|y'-y\\|/(r-d)$. Exchange $y,y'$ and put $d=r/2$ to obtain the Lipschitz claim.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-membership-height-geometry-2_1",
+          "step": "2.1",
+          "claim": "For completeness, subgradients here need no arbitrary selection. The truncated epigraph $E=\\{(y,t):y\\in C,\\ h(y)\\le t\\le R+1\\}$ is compact and convex: it is the image of the compact set of pairs consisting of a point of $K$ and a permitted upward vertical displacement. Fix interior $y$ and $p=(y,h(y))$. Let $p_j=p-e_n/j$, and let $q_j$ be its unique nearest point in $E$ by [F2]. Minimality along a segment gives $\\langle q_j-p_j,w-q_j\\rangle\\ge0$ for all $w\\in E$, by expanding squared distance and taking the right derivative at zero. Moreover $\\|q_j-p\\|\\le2/j$. A subsequence of the unit normals $(q_j-p_j)/\\|q_j-p_j\\|$ converges by [F3] to a unit normal $(u,t)$ with $\\langle(u,t),w-p\\rangle\\ge0$ on $E$. Upward vertical segments imply $t\\ge0$; if $t=0$, interior displacements of $y$ in both horizontal directions force $u=0$, a contradiction. Thus $t>0$ and $-u/t$ is a subgradient of $h$ on $C$. At a point where the Lipschitz bound holds on a neighborhood, applying the subgradient inequality in the directions $\\pm p/\\|p\\|$ gives $\\|p\\|\\le L$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-membership-height-geometry-3_1",
+          "step": "3.1",
+          "claim": "Fix $\\|y\\|\\le r/2$. A subgradient $p$ of norm at most $2R/r$ gives the supporting inequality $\\langle(-p,1),(z,t')-(y,h(y))\\rangle\\ge0$ on $K$. If $(y,t)$ is within $\\varepsilon$ of $K$, Cauchy\u2013Schwarz gives $t\\ge h(y)-\\varepsilon\\|(-p,1)\\|\\ge h(y)-3R\\varepsilon/r$. This proves the IN implication, also at the transverse-ball boundary by the bound from step 1.2 on slightly larger balls and passage to its limit.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-membership-height-geometry-3_2",
+          "step": "3.2",
+          "claim": "The ball $B((y,0),r/2)$ lies in $K$. Its convex hull with $(y,h(y))$ contains a ball of radius $\\theta r/2$ about $(y,(1-\\theta)h(y))$ for every $0\\le\\theta\\le1$: combine the vertex with every point of that ball. Consequently all heights between $h(y)(1-2\\varepsilon/r)$ and $-r/2$ lie in the inward $\\varepsilon$-erosion, whenever this interval is nonempty. If $\\varepsilon\\ge r/2$ the claimed OUT bound is automatic from $h(y)\\ge-R$ and $t\\le-r/2$; otherwise OUT therefore implies $t\\le h(y)(1-2\\varepsilon/r)\\le h(y)+2R\\varepsilon/r$. This uses an inclusion of balls, not an incorrect identity for the erosion of a cone.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-membership-height-geometry-4_1",
+          "step": "4.1",
+          "claim": "Maintain endpoints $\\ell,u$. Initially $\\ell=-R\\le h(y)+2\\delta/3$ and $u=-r/2\\ge h(y)-\\delta$. An IN answer replaces $u$ by the midpoint and preserves its lower bound by step 3.1; OUT replaces $\\ell$ and preserves its upper bound by step 3.2. When $u-\\ell\\le\\delta/3$, these invariants give $h(y)-\\delta\\le u\\le h(y)+\\delta$. Each iteration halves the bracket, proving the logarithmic query count. Fixed finite arithmetic and the deterministic oracle completion make the whole binary-search transcript a function of the input label. Store its transcript, copy its output, and reverse its computation and oracle calls; this implements that value oracle with clean work and only a constant factor more queries.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 3.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-membership-height-geometry-5_1",
+          "step": "5.1",
+          "claim": "Write $z=(y,t)\\in K$. The approximate-subgradient inequality gives $\\langle(-v,1),z\\rangle=t-\\langle v,y\\rangle\\ge h(0)-aR-b$. At $x=(0,-\\|x\\|)$ the OUT implication gives $h(0)\\ge-\\|x\\|-2R\\varepsilon/r$; if its height is below $-R$, this inequality follows directly from $h(0)\\ge-R$. If $\\|x\\|<r/2$, an OUT answer requires $\\varepsilon\\ge r/2$ by the inner ball, and the same inequality again follows from $h(0)\\ge-R$. Divide by $\\|(-v,1)\\|\\ge1$ to obtain the stated separation inequality.",
+          "inputs": [
+            "step 3.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive inner radius excludes an empty body; grid dimension is positive where invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An exact zero-width membership oracle is relabeled to a positive allowed weak boundary width; zero query point returns IN. All denominators/radii and finite-grid dimensions are positive on their stated domains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Main proof1.1 handles n=1 separately; height lemma assumes n>=2; finite-grid lemma includes d=1; centroid proof1.2 handles one-dimensional intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nondifferentiable convex heights use supporting subgradients. Empty/lower-dimensional localization polytopes return FAIL, which contradicts the promised interior ball only in the successful feasibility regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Weak-oracle overlap permits either completed answer; equality endpoints in binary search retain the two explicit boundary invariants. Fixed Fourier size M>=32 covers signed wrap, and rounding budgets remain strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Centroid/optimization clauses explicitly assume countable choice for Brunn\u2013Minkowski and volume integration; height uses unique projections and choice-free Euclidean subsequence compactness. No hidden arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        }
+      ]
+    },
+    "lem-qa-30-finite-grid-quantum-subgradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-chernoff-bound-for-independent-bernoulli-trials",
+          "source_section": "Statement",
+          "quote": "Let $X_1,\\ldots,X_N$ be mutually independent Bernoulli$(p_i)$ variables on a finite probability space. Set $S=\\sum_iX_i$ and $\\mu=\\sum_i p_i$. For $\\delta\\ge0$,\n$$\\mathbb P(S\\ge(1+\\delta)\\mu)\\le\\exp\\{-\\mu((1+\\delta)\\log(1+\\delta)-\\delta)\\}.$$\nFor $0\\le\\delta<1$,\n$$\\mathbb P(S\\le(1-\\delta)\\mu)\\le\\exp\\{-\\mu(\\delta+(1-\\delta)\\log(1-\\delta))\\}.$$\nFor $0\\le\\delta\\le1$ the upper and lower tails are respectively at most $\\exp(-\\mu\\delta^2/3)$ and $\\exp(-\\mu\\delta^2/2)$, and\n$$\\mathbb P(|S-\\mu|\\ge\\delta\\mu)\\le2\\exp(-\\mu\\delta^2/3).$$\nAt $\\delta=1$ the lower optimized bound is $\\exp(-\\mu)$, proved directly rather than by taking $\\log0$. Empty sums and $\\mu=0$ are included. Also, for $N>0$ and $t\\ge0$,\n$$\\mathbb P(|S-\\mu|\\ge t)\\le2\\exp(-2t^2/N).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-exact-binary-qft-circuit-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the exact binary circuit of [[alg-qa-exact-binary-qft-circuit]] implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$: it maps each computational basis vector $|x\\rangle$, $0\\le x<2^n$, to\n\n$$2^{-n/2}\\sum_{y=0}^{2^n-1}e^{2\\pi ixy/2^n}|y\\rangle,$$\n\nwith the declared output register order. Hence its denotation is $\\operatorname{QFT}_{2^n}$ on every state. Reversing the gate list and replacing every gate by its adjoint gives the negative-sign inverse QFT with the same ideal gate count.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For an integer $N\\ge1$, let $\\mathcal F_N$ be the negative-sign, $N^{-1/2}$-normalized transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Define the **cyclic quantum Fourier transform** by $\\operatorname{QFT}_N:=\\mathcal F_N^{-1}$. The inverse exists by [[thm-finite-fourier-inversion]], and its matrix on the standard basis indexed by $0,\\ldots,N-1$ is\n\n$$\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle,\\qquad 0\\le x<N.$$\n\nHere the standard-basis ket convention is the one specified by [[def-qc-dirac-notation-conversion]]. Thus the transform has the positive sign and the same $N^{-1/2}$ normalization as the inverse Fourier formula. At $N=1$ it is the identity on the one-dimensional register. In the binary specialization $N=2^n$, the circuit page writes each index in its unique base-two expansion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-13-pi-rational-bounds",
+          "source_section": "Statement",
+          "quote": "The circle constant satisfies $3<\\pi<22/7$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-subgradient-and-subdifferential",
+          "source_section": "Definition",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.\n\nThe **subdifferential** is the set\n\n$$\\partial f(a):=\\{v\\in\\mathbb R^n:f(y)\\ge f(a)+\\langle v,y-a\\rangle\\text{ for every }y\\in C\\},$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\\partial f(a)$ to be empty or to contain more than one vector.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-1_1",
+          "step": "1.1",
+          "claim": "Put $\\tau=r_2$, $D_i(z)=(f(z+\\tau e_i)-2f(z)+f(z-\\tau e_i))/\\tau^2$, $D=\\sum_iD_i$, and $p_i(z)=(f(z+\\tau e_i)-f(z-\\tau e_i))/(2\\tau)$. Convexity makes every $D_i\\ge0$. On any coordinate line, cancellation of shifted integrals leaves only two boundary strips, each bounded using the Lipschitz constant. Explicitly, $\\int_{-r_1}^{r_1}(f(t+\\tau)-2f(t)+f(t-\\tau))dt$ equals the difference between the integrals of $f(t+\\tau)-f(t)$ on the upper and lower strips of length $\\tau$, hence is at most $2L\\tau^2$. Applying [F1] to the other coordinates gives $\\mathbb E D(Z)\\le dL/r_1\\le nL/r_1$ for continuous uniform $Z$. The domain contains all shifted points because $\\tau\\le r_1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-1_2",
+          "step": "1.2",
+          "claim": "Coupling $Z$ to its cell center $z$, each of the four terms in a second difference moves by at most its Lipschitz constant times $\\sqrt d\\,h_0/2$. Thus $|D(z)-D(Z)|\\le4n^2Lh_0/\\tau^2\\le(\\rho/1000)L/(2r_1)$. For the finite uniform center distribution, Markov's inequality follows by summing its nonnegative weights. Therefore $D(z)\\le2nL/(\\rho_0r_1)$ except with probability at most $\\rho_0/2+(\\rho/1000)\\rho_0/(4n)$.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-2_1",
+          "step": "2.1",
+          "claim": "Fix such a good center. On the symmetric points $\\pm\\tau e_i$, the convex function $q(u)=f(z+u)-f(z)-\\langle p(z),u\\rangle$ has value $\\tau^2D_i(z)/2\\le\\tau^2D(z)/2$. Every point of the $\\ell_1$ ball of radius $\\tau$ is a convex combination of these points. Convexity gives the upper bound there; applying convexity to $u,-u$ and $q(0)=0$ gives the same lower bound. Hence $|q(u)|\\le\\tau^2D(z)/2\\le\\delta$ on that ball. The cube $a[-1/2,1/2]^d$ lies in it. Lipschitzness gives $|p_i(z)|\\le L$.",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-3_1",
+          "step": "3.1",
+          "claim": "Put $\\gamma=ap(z)/(3B_*)$; then $\\|\\gamma\\|_\\infty\\le1/3$. The ideal affine phase on the product grid produces independent one-coordinate Fourier distributions centered at $M\\gamma_i$. For an integer output at circular distance $D$ from this center, summing the geometric progression gives probability $\\sin^2(\\pi M\\gamma_i)/(M^2\\sin^2(\\pi D/M))\\le1/(4D^2)$ for $0<D\\le M/2$. Thus the probability of circular error greater than four is at most $\\frac12\\sum_{j\\ge4}j^{-2}\\le1/6$. Because $M\\ge32$ and $|\\gamma_i|\\le1/3$, the signed interval endpoints are farther than four from the center; circular error at most four therefore also gives ordinary signed error at most four.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-3_2",
+          "step": "3.2",
+          "claim": "The affine error from step 2.1 plus value error is at most $2\\delta$. Since $B_*=28\\pi\\delta M$, the phase angle perturbation is at most $1/21$ at every address. The Euclidean distance of the resulting unit vectors is at most $1/21$; a measurement event changes by at most that distance, as follows by resolving the two pure states in their two-dimensional span and maximizing the projection difference. The allowed implemented-phase operator error adds at most $1/1000$. Each coordinate therefore has ordinary signed error at most four with probability greater than $1-1/6-1/21-1/1000>2/3$. The decoded gradient error on this event is at most $12B_* /(aM)=336\\pi\\delta/a$.",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-4_1",
+          "step": "4.1",
+          "claim": "For fixed $z$, the runs are independent trials for this same coordinate, not independently sampled target functions. A median fails only if at least half the runs fail. The bound from [F2] is at most $2e^{-N/18}$, because the expected bad count is at most $N/3$ and the excess is at least $N/6$. The chosen count and a union bound give simultaneous coordinate accuracy except with probability at most $\\rho/500$. Every phase run uses one value query and its inverse.",
+          "inputs": [
+            "F2",
+            "step 3.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-5_1",
+          "step": "5.1",
+          "claim": "Let $s$ be any subgradient at the good center. Applying [F5] at the two coordinate offsets yields $|s_i-p_i(z)|\\le\\tau D_i(z)/2$, hence $\\|s-p(z)\\|_\\infty\\le nL\\tau/(\\rho_0r_1)$. Add the gradient error from step 4.1 and use $\\tau^2=\\delta r_1\\rho_0/(nL)$. This gives $\\|s-v\\|_\\infty\\le(1+168\\pi)\\sqrt{\\delta n^3L/(\\rho_0r_1)}<23^2\\sqrt{\\delta n^3L/(\\rho_0r_1)}$ by [F4].",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-finite-grid-quantum-subgradient-6_1",
+          "step": "6.1",
+          "claim": "The subgradient inequality gives $f(y)\\ge f(z)+\\langle s,y-z\\rangle$. Both $|f(z)-f(0)|$ and $|\\langle s,z\\rangle|$ are at most $L\\sqrt n r_1$. Replacing $s$ by $v$ costs at most $\\|s-v\\|_\\infty\\|y\\|_1\\le\\sqrt n\\|s-v\\|_\\infty\\|y\\|$. Step 5.1 gives exactly the displayed inequality. The total failure is at most $\\rho_0/2+(\\rho/1000)\\rho_0/(4n)+\\rho/500<\\rho$. The query count is that of step 4.1; choosing the finite shift costs no function query.",
+          "inputs": [
+            "step 1.2",
+            "step 4.1",
+            "step 5.1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive inner radius excludes an empty body; grid dimension is positive where invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An exact zero-width membership oracle is relabeled to a positive allowed weak boundary width; zero query point returns IN. All denominators/radii and finite-grid dimensions are positive on their stated domains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Main proof1.1 handles n=1 separately; height lemma assumes n>=2; finite-grid lemma includes d=1; centroid proof1.2 handles one-dimensional intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nondifferentiable convex heights use supporting subgradients. Empty/lower-dimensional localization polytopes return FAIL, which contradicts the promised interior ball only in the successful feasibility regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Weak-oracle overlap permits either completed answer; equality endpoints in binary search retain the two explicit boundary invariants. Fixed Fourier size M>=32 covers signed wrap, and rounding budgets remain strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Centroid/optimization clauses explicitly assume countable choice for Brunn\u2013Minkowski and volume integration; height uses unique projections and choice-free Euclidean subsequence compactness. No hidden arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        }
+      ]
+    },
+    "lem-qa-30-centroid-weak-separation-optimization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-brunn-minkowski-for-compact-convex-sets",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $d\\ge1$ and let $A,B\\subseteq\\mathbb R^d$ be\nnonempty compact convex sets. With $A+B=\\{a+b:a\\in A,b\\in B\\}$ and\n$\\lambda_d$ denoting Lebesgue measure,\n$$\\lambda_d(A+B)^{1/d}\\ge \\lambda_d(A)^{1/d}+\\lambda_d(B)^{1/d}.$$\nZero-volume and lower-dimensional sets are included.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which [[def-extended-reals]]\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-30-quantum-membership-separation-model",
+          "source_section": "Definition",
+          "quote": "Let $B(x,t)=\\{z\\in\\mathbb R^n:\\|z-x\\|_2\\le t\\}$ and let $B(K,t)=\\bigcup_{x\\in K}B(x,t)$ for $t\\ge0$; $B(K,-t)$ denotes the inward erosion consisting of points whose radius-$t$ ball is contained in $K$. A convex body is a closed convex set with nonempty interior. Assume rationally encoded $0<r\\le R$ and $B(0,r)\\subseteq K\\subseteq B(0,R)$. The deterministic weak-membership oracle $\\mathrm{MEM}_{\\varepsilon,0}(K)$ is queried at a finite-precision point $y$ and must correctly assert either $y\\in B(K,\\varepsilon)$ or $y\\notin B(K,-\\varepsilon)$. In the overlap it may return either valid assertion. The coherent interface is a supplied reversible Boolean unitary with a fixed deterministic completion on every encoded input, together with its inverse and any controlled forms used.\n\nA weak separation oracle $\\mathrm{SEP}_{\\eta,\\rho}(K)$, queried at $y$, with probability at least $1-\\rho$, either asserts $y\\in B(K,\\eta)$ or asserts $y\\notin B(K,-\\eta)$ and returns a unit vector $g$ satisfying $\\langle g,z\\rangle\\le\\langle g,y\\rangle+\\eta$ for every $z\\in B(K,-\\eta)$. The membership-to-separation algorithm is promised only on the query domain in its theorem; no unique answer is required in the boundary bands. A finite unit-normal encoding may be a nonzero rational vector v with the normalization g=v/||v|| interpreted exactly; rational bisection supplies an upper norm bound N between ||v|| and2||v|| when a classical reduction requires rational halfspaces. Radius, point, unit-normal and offset encodings and all query/inverse/gate/bit costs are part of the contract.\n\nThis specifies oracle behavior; a membership-to-separation theorem and any separation-to-optimization composition are separate claims with their own hypotheses.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-1_1",
+          "step": "1.1",
+          "claim": "Let $P$ be a full-dimensional compact convex body and $X$ uniform on $P$. For any unit $a$, the survival function $S(t)=\\Pr(\\langle a,X\\rangle\\ge t)$ is log-concave on the open projection interval: the Minkowski interpolation of the two caps at $t_0,t_1$ lies in the cap at their interpolated threshold, so [F1] gives concavity of $S^{1/n}$, and the increasing concave logarithm gives concavity of $\\log S$. Slices and [F3] show that the projected distribution has continuous strictly increasing cumulative distribution on that interval and no atoms. Consequently $S(\\langle a,X\\rangle)$ is uniform on $(0,1)$, by inverting this strictly monotone continuous function. Thus $\\mathbb E[-\\log S(\\langle a,X\\rangle)]=\\int_0^1-\\log t\\,dt=1$. Jensen [F2] yields $S(\\langle a,\\mathbb EX\\rangle)\\ge e^{-1}$. Applying this to $-a$ shows that either halfspace through the centroid contains at least $1/e$ of the volume.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-1_2",
+          "step": "1.2",
+          "claim": "If $P$ contains a radius-$s$ ball, its width in every direction is at least $2s$. The projected density is at most $n/(2s)$. Indeed, for $n\\ge2$ the $(n-1)$-slice area to the power $1/(n-1)$ is concave by [F1]. A slice of area $A$ at position $t$ therefore gives cone lower bounds $A((v-a)/(t-a))^{n-1}$ to its left and $A((b-v)/(b-t))^{n-1}$ to its right, where $[a,b]$ is the projection interval. Integrating gives $\\operatorname{vol}(P)\\ge A(b-a)/n$. Taking limits at endpoints proves the density bound for every interior slice. For $n=1$ the density is $1/(b-a)$ directly. A slab of thickness $h$ thus has relative volume at most $nh/(2s)$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-2_1",
+          "step": "2.1",
+          "claim": "Choose a rational vector $v$ with $\\|v-c\\|\\le\\zeta/(64R)$, so $\\|v\\|\\le2$. For a rational threshold $\\gamma$, initialize a localization polytope $P=[-R,R]^n$ and make at most $T$ iterations. If it is empty or lower-dimensional, return FAIL. Otherwise compute its exact centroid $p_0$ and round to a fixed-point rational $p$ with $\\|p-p_0\\|\\le\\eta$. If $\\langle v,p\\rangle<\\gamma$, keep $P\\cap\\{x:\\langle v,x\\rangle\\ge\\langle v,p\\rangle\\}$ without an oracle call. Otherwise query weak separation at $p$: IN returns $p$ as a witness; on an OUT answer in rational direction $u$, keep $P\\cap\\{x:\\langle u,x\\rangle\\le\\langle u,p\\rangle+\\eta N\\}$. After $T$ iterations without a witness, return FAIL. All constraints are rational. Every retained polytope contains $F_\\gamma=B(K,-\\eta)\\cap\\{x:\\langle v,x\\rangle\\ge\\gamma\\}$ whenever the oracle answers succeed. The oracle cut has geometric displacement at most $3\\eta$ from the true centroid, including point rounding; the objective cut has displacement at most $\\eta$. Common fixed-point query registers can therefore be chosen from the bounded initial box and this explicit rounding precision, despite growth of the internal exact centroid denominators.",
+          "inputs": [
+            "F4",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-2_2",
+          "step": "2.2",
+          "claim": "This is a finite arithmetic procedure. Vertices of a bounded rational polytope are found by enumerating all subsets of $n$ defining hyperplanes, solving each nonsingular linear system, and retaining feasible solutions. A nonempty full-dimensional bounded polytope has vertices, since successively minimizing coordinates on a minimizing face eventually gives a zero-dimensional face. Supporting facets can be enumerated from its finite vertex list and checked by rational sign tests. Triangulate a facet inductively by choosing one vertex and coning its nonincident boundary facets; then cone the resulting boundary simplices to a rational interior point such as the average of all vertices. This partitions $P$ up to common faces. A simplex has volume $|\\det(v_1-v_0,\\ldots,v_n-v_0)|/n!$ and centroid $(v_0+\\cdots+v_n)/(n+1)$: the first identity is [F3], and the second follows by permutation symmetry of barycentric coordinates and their sum being one. The volume-weighted average of these simplex centroids is the exact rational centroid of $P$. Dimensions, incidences, and zero determinants are decided by finite rational elimination. No efficiency of this enumeration is asserted.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-3_1",
+          "step": "3.1",
+          "claim": "Put $h=\\max_{x\\in K}\\langle v,x\\rangle$ and take a maximizer $x_*$. If $\\gamma\\le h-\\tau$, let $\\alpha=\\tau/(8R)$ and $z=(1-\\alpha)x_*$. Convexity gives $B(z,\\alpha r)\\subset K$. Since $s=\\alpha r/2$ and $\\eta\\le s$, the ball $B(z,s)$ lies in $B(K,-\\eta)$. Also $\\langle v,z\\rangle\\ge h-\\alpha|h|\\ge h-\\tau/4$, and its value on that ball drops by at most $2s\\le\\tau/8$. Therefore $F_\\gamma$ contains this radius-$s$ ball.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-3_2",
+          "step": "3.2",
+          "claim": "Under this condition, every localization polytope contains the ball from step 3.1. The rounded-centroid objective and oracle cuts remove at least $1/e-n(3\\eta)/(2s)=1/e-3/200>1/4$ of the volume by steps 1.1\u20131.2. Thus each nonterminating iteration leaves at most $3/4$ of the volume. But the radius-$s$ ball contains a cube of side $2s/n$, whereas after $T$ cuts the volume is less than $(2s/n)^n$ by the defining rational test for $T$. This is impossible. Hence FAIL implies $\\gamma>h-\\tau$ on successful oracle answers; IN returns a witness in $B(K,\\eta)$ with $\\langle v,p\\rangle\\ge\\gamma$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-4_1",
+          "step": "4.1",
+          "claim": "Maintain an upper bound $H=2R\\ge h$, a lower threshold $L=0$, and its witness $y=0$. Repeatedly test $\\gamma=(L+H)/2$. A witness sets $L=\\gamma$ and saves it. FAIL sets $H=\\min\\{H,\\gamma+\\tau\\}$, preserving $H\\ge h$ by step 3.2. Stop when $H-L\\le4\\tau$, and in any event after $B$ iterations. The width obeys $w_{j+1}\\le w_j/2+\\tau$; hence $w_B\\le2R/2^B+2\\tau<4\\tau$. A saved witness satisfies $\\langle v,y\\rangle\\ge L\\ge h-4\\tau$ and $y\\in B(K,\\eta)$. If a successful witness threshold exceeds $h$, the same conclusion holds and early stopping is valid; no assumption $L\\le h$ was used. There are at most $BT$ separation calls, and $T=O(n\\log(nR/s))$, $B=O(1+\\log(R/\\zeta))$ follow from their geometric tests.",
+          "inputs": [
+            "step 3.2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qa-30-centroid-weak-separation-optimization-5_1",
+          "step": "5.1",
+          "claim": "The failure probability of any successful-answer guarantee among these adaptive calls is at most $BT\\cdot\\nu/(2BT)=\\nu/2$, conditioning on previous outputs and using a union bound. On the complement, $\\|y\\|\\le R+\\eta\\le2R$, so changing from $v$ to $c$ costs at most $3R\\|v-c\\|\\le3\\zeta/64$ in the difference between the optimum and output objective. The remaining gap is at most $4\\tau=\\zeta/2$. Thus $y\\in B(K,\\zeta)$ and $\\langle c,y\\rangle\\ge\\max_K\\langle c,x\\rangle-\\zeta$ with probability at least $1-\\nu$. All omitted operations are the explicitly charged arithmetic of step 2.2 and the oracle encoding; they are not hidden query calls.",
+          "inputs": [
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive inner radius excludes an empty body; grid dimension is positive where invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An exact zero-width membership oracle is relabeled to a positive allowed weak boundary width; zero query point returns IN. All denominators/radii and finite-grid dimensions are positive on their stated domains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Main proof1.1 handles n=1 separately; height lemma assumes n>=2; finite-grid lemma includes d=1; centroid proof1.2 handles one-dimensional intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nondifferentiable convex heights use supporting subgradients. Empty/lower-dimensional localization polytopes return FAIL, which contradicts the promised interior ball only in the successful feasibility regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Weak-oracle overlap permits either completed answer; equality endpoints in binary search retain the two explicit boundary invariants. Fixed Fourier size M>=32 covers signed wrap, and rounding budgets remain strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Centroid/optimization clauses explicitly assume countable choice for Brunn\u2013Minkowski and volume integration; height uses unique projections and choice-free Euclidean subsequence compactness. No hidden arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        }
+      ]
+    },
+    "thm-qa-30-quantum-membership-separation-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-30-membership-height-geometry",
+          "source_section": "Statement",
+          "quote": "Let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body in $\\mathbb R^n$, $n\\ge2$. In any rotated coordinates set $C=\\{y:\\exists t,(y,t)\\in K\\}$ and $h(y)=\\min\\{t:(y,t)\\in K\\}$. Then $h$ is convex, finite on $B(0,r)$, and $L=2R/r$-Lipschitz on $B(0,r/2)$. Every interior point of $C$ has a subgradient, and every such subgradient at a point in the interior of this ball has norm at most $L$.\n\nFor $\\|y\\|\\le r/2$, a $\\mathrm{MEM}_{\\varepsilon,0}$ query at $(y,t)$, $t\\le-r/2$, has these implications: an IN answer implies $t\\ge h(y)-3R\\varepsilon/r$; an OUT answer implies $t\\le h(y)+2R\\varepsilon/r$. Hence binary search on $[-R,-r/2]$, returning its final upper endpoint when its width is at most $\\delta/3$, approximates $h(y)$ within $\\delta$ if $\\varepsilon\\le r\\delta/(3R)$. It uses $O(1+\\log(R/\\delta))$ membership queries and has a clean coherent implementation using the same order of queries and inverse queries.\n\nFinally, if $x=-\\|x\\|e_n$ receives OUT and $h(y)\\ge h(0)+\\langle v,y\\rangle-a\\|y\\|-b$ on $C$, then $s=(-v,1)/\\|(-v,1)\\|$ satisfies $\\langle s,z\\rangle\\ge\\langle s,x\\rangle-aR-b-2R\\varepsilon/r$ for every $z\\in K$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-30-finite-grid-quantum-subgradient",
+          "source_section": "Statement",
+          "quote": "Let $1\\le d\\le n$, let $f:C\\to\\mathbb R$ be convex, and suppose it is $L$-Lipschitz on a neighborhood of $[-2r_1,2r_1]^d\\subset C$. Every point there is assumed to have a subgradient of norm at most $L$. Let $0<\\rho\\le1/3$, $\\rho_0=99\\rho/100$, $0<\\delta\\le nr_1L/\\rho_0$, and $r_2=\\sqrt{\\delta r_1\\rho_0/(nL)}$. A deterministic clean value oracle approximates $f$ to error at most $\\delta$ on the finite query grids.\n\nChoose a finite uniform grid of cell centers $z$ of $[-r_1,r_1]^d$, with $2^b$ cells per coordinate and mesh $h_0=2r_1/2^b\\le(\\rho/1000)r_2^2/(8n^2r_1)$. Put $a=2r_2/n$, $B=La$, $m=\\max\\{5,\\lceil\\log_2(B/(28\\pi\\delta))\\rceil\\}$, $M=2^m$, and $B_*=28\\pi\\delta M$. On each independent run prepare the uniform product grid $u_i=(j_i+1/2)/M-1/2$, apply phase $\\exp(2\\pi iM\\widetilde f(z+au)/(3B_*))$ with clean uncomputation, apply the negative-sign QFT to each coordinate, and decode signed integers $y_i$ as $3B_*y_i/(aM)$. Use at least $18\\ln(1000n/\\rho)+3$ independent runs and coordinate medians. A total implemented-phase operator error at most $1/1000$ per run is permitted.\n\nWith probability at least $1-\\rho$, the resulting vector $v$ satisfies, simultaneously for every $y\\in C$,\n$$f(y)\\ge f(0)+\\langle v,y\\rangle-(23n)^2\\sqrt{\\frac{\\delta L}{\\rho_0r_1}}\\|y\\|-2L\\sqrt n\\,r_1.$$\nThe number of value-oracle and inverse calls is $O(\\log(n/\\rho))$. Random bits, phases, QFT gates, arithmetic, and output costs are separate.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-30-quantum-membership-separation-model",
+          "source_section": "Definition",
+          "quote": "Let $B(x,t)=\\{z\\in\\mathbb R^n:\\|z-x\\|_2\\le t\\}$ and let $B(K,t)=\\bigcup_{x\\in K}B(x,t)$ for $t\\ge0$; $B(K,-t)$ denotes the inward erosion consisting of points whose radius-$t$ ball is contained in $K$. A convex body is a closed convex set with nonempty interior. Assume rationally encoded $0<r\\le R$ and $B(0,r)\\subseteq K\\subseteq B(0,R)$. The deterministic weak-membership oracle $\\mathrm{MEM}_{\\varepsilon,0}(K)$ is queried at a finite-precision point $y$ and must correctly assert either $y\\in B(K,\\varepsilon)$ or $y\\notin B(K,-\\varepsilon)$. In the overlap it may return either valid assertion. The coherent interface is a supplied reversible Boolean unitary with a fixed deterministic completion on every encoded input, together with its inverse and any controlled forms used.\n\nA weak separation oracle $\\mathrm{SEP}_{\\eta,\\rho}(K)$, queried at $y$, with probability at least $1-\\rho$, either asserts $y\\in B(K,\\eta)$ or asserts $y\\notin B(K,-\\eta)$ and returns a unit vector $g$ satisfying $\\langle g,z\\rangle\\le\\langle g,y\\rangle+\\eta$ for every $z\\in B(K,-\\eta)$. The membership-to-separation algorithm is promised only on the query domain in its theorem; no unique answer is required in the boundary bands. A finite unit-normal encoding may be a nonzero rational vector v with the normalization g=v/||v|| interpreted exactly; rational bisection supplies an upper norm bound N between ||v|| and2||v|| when a classical reduction requires rational halfspaces. Radius, point, unit-normal and offset encodings and all query/inverse/gate/bit costs are part of the contract.\n\nThis specifies oracle behavior; a membership-to-separation theorem and any separation-to-optimization composition are separate claims with their own hypotheses.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-qa-30-quantum-membership-to-separation",
+          "source_section": "Definition",
+          "quote": "This finite algorithm takes a convex body, a rational query point and radii, a precision/failure budget, and supplied coherent deterministic weak-membership access with inverse. It returns IN when the membership interface certifies that branch; otherwise it returns a finite-precision weak separating normal and halfspace or an explicitly distinguished INVALID, RANDOM_FAIL, or FAILURE branch. The algorithm charges the membership oracle and inverse, all controlled queries, point rotations, numerical arithmetic, random sampling, phase estimation, QFTs, output bits, and every gate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-30-centroid-weak-separation-optimization",
+          "source_section": "Statement",
+          "quote": "Assume countable choice, with positive rationally encoded radii and accuracy/failure parameters. Let $B(0,r)\\subseteq K\\subseteq B(0,R)$ be a closed convex body, let $0<\\zeta\\le R$, $0<\\nu\\le1/3$, and let $c$ be a unit objective vector with supplied finite rational approximations to any requested error. Put\n$$\\tau=\\zeta/8,\\qquad s=r\\tau/(16R),\\qquad \\eta=s/(100n).$$\nLet $T$ be the least integer with $(3/4)^T(2R)^n<(2s/n)^n$, and $B$ the least positive integer with $2^B\\tau\\ge8R$. There is a finite classical procedure using at most $BT=O(n\\log(nR/s)\\log(R/\\zeta))$ calls to $\\mathrm{SEP}_{\\eta,\\nu/(2BT)}(K)$ that, with probability at least $1-\\nu$, returns $y\\in B(K,\\zeta)$ with\n$$\\langle c,y\\rangle\\ge\\max_{x\\in K}\\langle c,x\\rangle-\\zeta.$$\nThe normal encoding must supply a nonzero rational direction $u$ for its unit normal $u/\\|u\\|$; a rational $N$ with $\\|u\\|\\le N\\le2\\|u\\|$ can be computed by bisection. Query points and polytope arithmetic are rational. Computing exact centroids by exhaustive finite triangulation is allowed and charged separately: this result asserts no polynomial arithmetic, gate, or bit-time bound.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-qa-30-quantum-membership-separation-cost-1_1",
+          "step": "1.1",
+          "claim": "If the supplied boundary width is smaller than half its positive admissible upper bound, regard the same oracle as having that larger width. Its two assertions remain valid because outer bands enlarge and inward erosions shrink; the same is true for an exact zero-width oracle. Write $\\varepsilon>0$ for this working allowance, which still satisfies the displayed input bound. First query membership at $x$. IN implies $x\\in B(K,\\varepsilon)\\subseteq B(K,\\eta)$, which is a permitted output. OUT implies $x\\notin B(K,-\\varepsilon)$, hence $x\\notin B(K,-\\eta)$ since inward erosions decrease with their radius. For $n=1$, $K$ is an interval containing $[-r,r]$ and $\\varepsilon<r/2$. A positive OUT point must be at or beyond the positive endpoint minus $\\varepsilon$; a negative one has the analogous property. Its outward signed normal therefore satisfies the separation contract with slack at most $\\varepsilon$. The point zero necessarily has an IN answer. This proves the scalar case with a single query.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qa-30-quantum-membership-separation-cost-2_1",
+          "step": "2.1",
+          "claim": "Suppose $n\\ge2$ and OUT occurs. Rotate $x$ to $-\\|x\\|e_n$ and use the height function of [F1]. Set $L=2R/r$, $\\rho_0=99\\rho/100$, $r_1=r\\eta/(12\\sqrt nR)$ and\n$$\\delta=\\frac{\\eta\\rho_0 n^{-9/2}}{96\\cdot23^4}\\left(\\frac{r\\eta}{R^2}\\right)^2.$$\nThen $[-2r_1,2r_1]^{n-1}\\subseteq B(0,r/2)$ since $2\\sqrt n r_1\\le r/6$. Moreover $\\delta\\le nr_1L/\\rho_0$, by substituting $r_1,L$, $r\\le R$, $\\eta\\le R$ and $\\rho_0\\le1/3$. Thus the height and grid lemma hypotheses hold.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qa-30-quantum-membership-separation-cost-2_2",
+          "step": "2.2",
+          "claim": "Substitution of the input bound shows $\\varepsilon<0.97\\,r\\delta/(3R)$: squaring verifies $58^9>(300\\cdot23^4)^2$, while the remaining factor is at most $288/(300\\cdot0.99)<0.97$. The deterministic address perturbation in [F4] is at most $\\varepsilon/1000$ and its height displacement at most $\\delta/1000$. Thus effective membership uncertainty is less than $0.98\\,r\\delta/(3R)$. The lower height error is less than $0.98\\delta$, and the upper one is at most $2(0.98)\\delta/3+\\delta/3<0.987\\delta$ before the additional $\\delta/1000$ value rounding. Hence the implemented clean height-value oracle has uniform error below $\\delta$. Binary search and its inverse use $O(1+\\log(R/\\delta))$ membership/inverse calls by [F1]. This explicit slack also permits the certified rotation/address rounding in [F4]; those are bit costs, not uncounted queries.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qa-30-quantum-membership-separation-cost-3_1",
+          "step": "3.1",
+          "claim": "Apply [F2] to the transverse dimension $d=n-1$, using its finite shift and $M\\ge32$ grid. With failure probability at most $\\rho$, it returns $g$ satisfying\n$$h(y)\\ge h(0)+\\langle g,y\\rangle-(23n)^2\\sqrt{\\delta L/(\\rho_0r_1)}\\|y\\|-2L\\sqrt n r_1.$$\nThe parameter substitutions are exact: $2L\\sqrt n r_1=\\eta/3$ and $(23n)^2\\sqrt{\\delta L/(\\rho_0r_1)}=\\eta/(2R)$. No differentiability of $h$ or exact membership at boundary points is used.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qa-30-quantum-membership-separation-cost-4_1",
+          "step": "4.1",
+          "claim": "The separator conversion [F1] therefore gives, on this event, a unit inward normal $s$ with $\\langle s,z\\rangle\\ge\\langle s,x\\rangle-5\\eta/6-2R\\varepsilon/r$ on all of $K$. The input precision implies $2R\\varepsilon/r<\\eta/100$, so the additional encoded direction/rotation slack $\\eta/100$ in [F4] still leaves error below $\\eta$. Emit $G=-s$ in the original coordinates. This gives $\\langle G,z\\rangle\\le\\langle G,x\\rangle+\\eta$ on $K$, in particular on its inward $\\eta$-erosion, with the OUT assertion already justified in step 1.1. Together with the IN branch this is exactly [F3]. The rational-direction encoding in [F4] specifies an exact unit normal by normalization; its output approximation was charged in the displayed slack.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qa-30-quantum-membership-separation-cost-5_1",
+          "step": "5.1",
+          "claim": "The finite shift uses no membership query. There are $O(\\log(n/\\rho))$ phase/median runs by [F2], each using a height query and its inverse; step 2.2 supplies their logarithmic membership cost. Since $R/\\delta$ is a fixed constant times a product of powers of $n$, $1/\\rho$, $R/r$ and $R/\\eta$, its logarithm is $O(\\log((n/\\rho)(R/\\eta)(R/r)))$. Initial queries and the scalar branch are absorbed because the displayed logarithms are bounded below by positive constants. This proves the first bound, counting forward and inverse calls separately and then adding them.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-qa-30-quantum-membership-separation-cost-6_1",
+          "step": "6.1",
+          "claim": "For optimization, [F5] makes at most $BT$ adaptive weak-separation calls at precision $\\eta_*$ and per-call failure $\\rho_*$. Each is implemented by the first part with the stated $\\varepsilon_*$; the conditional oracle guarantee is uniform over its input point and completed membership oracle, so the classical adaptive reduction applies. Its failure accounting and output guarantee are exactly those proved in [F5]. Now $BT=O(n\\log(nR/s)\\log(R/\\zeta))$ and $s=r\\zeta/(128R)$, while $1/\\eta_*$ and $1/\\rho_*$ have only polynomial dependence on these radius/precision ratios, $n$, and $1/\\nu$. Multiplying by step 5.1 therefore gives the claimed $\\widetilde O(n)$ membership queries. This multiplication charges every call; it imports neither the stronger arithmetic bound from a cited cutting-plane paper nor a free centroid operation.",
+          "inputs": [
+            "F5",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive inner radius excludes an empty body; grid dimension is positive where invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An exact zero-width membership oracle is relabeled to a positive allowed weak boundary width; zero query point returns IN. All denominators/radii and finite-grid dimensions are positive on their stated domains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Main proof1.1 handles n=1 separately; height lemma assumes n>=2; finite-grid lemma includes d=1; centroid proof1.2 handles one-dimensional intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nondifferentiable convex heights use supporting subgradients. Empty/lower-dimensional localization polytopes return FAIL, which contradicts the promised interior ball only in the successful feasibility regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Weak-oracle overlap permits either completed answer; equality endpoints in binary search retain the two explicit boundary invariants. Fixed Fourier size M>=32 covers signed wrap, and rounding budgets remain strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Centroid/optimization clauses explicitly assume countable choice for Brunn\u2013Minkowski and volume integration; height uses unique projections and choice-free Euclidean subsequence compactness. No hidden arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence statement is made."
+        }
+      ]
+    }
+  },
+  "procedure_sections": {
+    "alg-qa-30-quantum-membership-to-separation": {
+      "OP0": "**Certified elementary evaluation.** For rational x and error 2^-b, evaluate exp, sin and cos by their rational Taylor sums until the absolute remainder bound `3^ceil(|x|+1)|x|^(N+1)/(N+1)!` is below the error budget; sine/cosine may first reduce the argument by a certified interval for \u03c0. Compute \u03c0 by the arctangent identity `\u03c0=16 arctan(1/5)\u22124 arctan(1/239)` with alternating-series bounds. For x\u22650 compute square roots by rational bisection between 0 and `max(1,x)`; x=0 returns0 and x<0 returns INVALID in the real routine. For x>0 compute log x with `2\u03a3_(j=0)^(N\u22121)y^(2j+1)/(2j+1)`, y=(x\u22121)/(x+1), and tail `2|y|^(2N+1)/((2N+1)(1\u2212y\u00b2))`. Each loop increases N or b until its explicit rational remainder test passes. Store the interval, not an uncertified floating result. Complex exponentials use the resulting sine/cosine intervals. For atan2(y,x), the zero vector returns INVALID; otherwise select its quadrant by certified signs (exact zero coordinates use their explicit axis angles), and bisect an angle interval in that quadrant using monotonic sine/cosine comparisons with the normalized vector until its width meets the requested error. If an interval straddles an equality, retain the adjoining angle intervals rather than request a real zero test. Return the midpoint plus its error interval. Whenever a numerical logarithm/angle appears in a ceiling or resource cutoff, compute an upper rational enclosure of width\u22641/4 and take its ceiling; this defines a terminating conservative integer rule even at exact integer boundaries. Norms are square roots of explicit sums of squared coordinates; a zero norm takes the separately stated zero-output/INVALID branch before division. Bounds on the number/size of these operations are separate classical bit-cost obligations.",
+      "OP7": "Binds `alg-qa-30-quantum-membership-to-separation` and its radius/precision/query result.\n\n**Inputs.** Rationally encoded query point x\u2208R^n, radii 0<r\u2264R, \u03b7\u2208(0,R],\u03c1\u2208(0,1/3], and coherent MEM_(\u03b5,0) plus inverse, with the exact weak-boundary promise in QA30. Require `\u03b5\u2264\u03b5_adm=\u03b7(58n)^(-9/2)(r/R)^3(\u03b7/R)^2\u03c1`. Use the positive allowance `\u03b5_work=max(\u03b5,\u03b5_adm/2)`; an oracle with a smaller boundary width also satisfies this larger-width promise, including an exact \u03b5=0 oracle. In the remaining numerical instructions \u03b5 denotes \u03b5_work; rounding the encoded point and emitted hyperplane consumes an explicit share of \u03b7, so use exact-algebraic arithmetic or a requested membership precision sufficient for that share. The zero failure parameter refers to oracle correctness outside its \u03b5 boundary band, not to a unique answer inside that band. All queried addresses have fixed-point encodings and the same declared deterministic oracle completion.\n\n1. Query MEM at x. An inside answer returns the allowed `IN` label. If x=0 return IN under the interior-ball promise. For n=1, return the outward signed normal sign(x) after OUT; the interval/inner-ball promise and \u03b5<r place x within \u03b5 of or beyond that same signed endpoint. No zero-dimensional gradient circuit is invoked. For n\u22652 use a finite list of coordinate-plane rotations to send x to `\u2212||x||e_n`, zeroing coordinates one at a time. Store both the rotation and inverse; charge their arithmetic.\n2. In rotated coordinates let `h(y)=inf{z:(y,z)\u2208K}`, y\u2208R^(n\u22121). Set \u03c1\u2080=99\u03c1/100, `r\u2081=r\u03b7/(12sqrt(n)R)`, `\u03b4=\u03b7\u03c1\u2080 n^(-9/2)(r\u03b7/R\u00b2)^2/(96\u00b723^4)`, L=2R/r and `r\u2082=sqrt(\u03b4r\u2081\u03c1\u2080/(nL))`. The source input bound implies \u03b5\u2264r\u03b4/(3R); check this interval inequality with certified arithmetic. If an input encoding cannot certify its promised bounds, return INVALID rather than silently tighten the promise.\n3. **h-value oracle.** On each y\u2208B(0,r/2), initialize low=\u2212R,high=\u2212r/2. For `q=ceil(log\u2082(3R/\u03b4))+2` iterations compute mid=(low+high)/2, query MEM at (y,mid), and set high=mid on an inside answer, low=mid otherwise. Return high. In the coherent version retain branch bits, copy the fixed-point high value, then reverse the whole computation and oracle calls to erase workspace. The final bracket has width\u2264\u03b4/3. The weak-boundary inequalities, rather than exact membership, justify its \u03b4 value error. h is evaluated only on the declared transverse ball.\n4. **Finite random shift.** Set \u03c3_grid=\u03c1/1000. Choose b by increasing integers so that the mesh h\u2080=2r\u2081/2^b satisfies `h\u2080\u2264\u03c3_grid r\u2082\u00b2/(8n\u00b2r\u2081)`, by repeated halving. Draw b independent uniform bits per transverse coordinate to select its cell center; retain the resulting finite algebraic description of z. There are exactly 2^b cells in each coordinate, so this step has no rejection tail. All subsequent oracle addresses are rounded coherently to the fixed-point query encoding with the deterministic accuracy budget below. Continuous uniform sampling is not an instruction to a discrete computer. The discrete Laplacian changes by at most `4n\u00b2L h\u2080/r\u2082\u00b2` within a mesh cell, which is the local proof route controlling this replacement.\n5. Set a=2r\u2082/n, B=La and m=max(5,ceil(log\u2082(B/(28\u03c0\u03b4)))). Let M=2^m and **B*=28\u03c0\u03b4M**; this \u2265B normalization handles non-dyadic source M without invalidating the phase tolerance. On each of `ceil(18 ln(1000n/\u03c1))+3` independent gradient runs, prepare a uniform m-bit register for each transverse coordinate. Decode each address as `u_i=(j_i+1/2)/M\u22121/2`, compute the h approximation at z+a u, apply phase `exp(2\u03c0i M h_tilde(z+a u)/(3B*))`, and uncompute h. Apply the negative-sign QFT separately to every coordinate and measure. Decode each y_i to signed y_i/M\u2208[-1/2,1/2), and output `g_i=3B* y_i/(aM)` when y_i denotes the signed integer. Equivalently multiply the signed fraction by 3B*/a. Take each coordinate's median across the runs. Phase/value/gate implementation error is separately summed into the gradient tolerance. No eigenstate resampling issue occurs: these are repeated estimates of a fixed gradient at the same z.\n6. Form s\u2032=(\u2212g,1), normalize s=s\u2032/||s\u2032|| and apply the stored inverse rotation. Internally s satisfies the inward inequality `\u27e8s,z_K\u27e9\u2265\u27e8s,x\u27e9\u2212\u03b7`. Emit its NEGATIVE as the outward normal G, so the library contract is `\u27e8G,z_K\u27e9\u2264\u27e8G,x\u27e9+\u03b7`. Represent G by a nonzero rational direction v and the normalization G=v/||v||; refine the output rounding until its angular error on B(0,R) and x uses at most \u03b7/100. Record a rational N with ||v||\u2264N\u22642||v|| for classical rational halfspace arithmetic. Encoded output errors consume the reserved slack; they are not ignored.\n\n**Deterministic precision budget.** Refine rotated point/address coordinates until their total Euclidean error per membership query is at most min(\u03b5/1000,\u03b4/(1000L)); refine coherent phase synthesis until the accumulated per-run operator error is at most1/1000. The strict slack in the displayed \u03b5 bound makes the effective weak-membership tolerance, including address error, less than0.98\u00b7r\u03b4/(3R). In the height search, the resulting boundary error plus the final bracket and value rounding is therefore below\u03b4. Rotations and emitted direction rounding use the remaining \u03b7/100 output budget. Every refinement is a finite rational interval calculation on the named input quantities; its bit cost is additional.\n\nThis is a finite procedure. The local proof combines h's convexity/Lipschitz and weak-boundary search, the finite mesh error, Jordan's phase-grid law, coordinate medians, and the normalized separator. B*=28\u03c0\u03b4M ensures the phase approximation condition at a power-of-two M; replacing the source non-dyadic M by a larger M with unchanged B would not. The chosen \u03c1\u2080 leaves slack for mesh and random-sampler failure; the exact constants and finite-bit budgets are proved in the local suppliers and query theorem, not accepted from a source citation. Source: van Apeldoorn et al. Lemmas14\u201315,18\u201321 and Theorem23, PDF pp.10\u201318. Rotation, coherent h-evaluation, logarithmic arithmetic, data/query bits and the emitted n-dimensional normal all contribute costs."
+    }
+  },
+  "integration_notes": [
+    "Add three new lemma IDs to54 A inventory/page, coverage and source evidence as local established prerequisites; no scope claim about unused SDP routines.",
+    "Main source has four complete local proof suppliers/steps: existing algorithm+model and three new lemmas. Remove original not-supplied/unresolved-proof observations only for this repaired branch; preserve original escalation file.",
+    "Do not manufacture verification/audit/readiness/worker-execution stamps. Numeric levels, current evidence binding and owner decisions remain root-owned.",
+    "Algorithm unused ROOTS/RawMean/RelProb/CapAmplify boilerplate was removed from membership carrier; OP7 uses the retained elementary certified arithmetic only.",
+    "Classical query-only centroid proof does not inherit the stronger LSV/LSW arithmetic-time bound. It explicitly uses countable choice for the actual volume suppliers."
+  ],
+  "validation": [
+    "proof-layout six explicit changed paths:6items,30steps,0defects exit0",
+    "After final encoded-budget wording changes, proof-layout centroid+main exact2paths:2items,15steps,0defects exit0; no later source edits."
+  ],
+  "source_reading": [
+    "Cached complete van Apeldoorn etal1809.00643v4: actual Definitions3\u20137, Lemmas14\u201321, Theorem23 proof and Introduction classical-composition claim read.",
+    "Downloaded complete LSV1706.07357 PDF; Section4/Theorem15 and its weak-oracle/precision/classical-operation qualification read. Cached /tmp/qa30-lsv-membership.pdf and text.",
+    "Actual published nearest-point, bounded-subsequence, Brunn\u2013Minkowski and Jensen statements and proofs read; Riemann\u2013Fubini, linear volume change and Tonelli supplier statements checked for the uses here. Brunn\u2013Minkowski proof explicitly uses countable choice."
+  ],
+  "focused_consumer_closure": {
+    "alg-qa-30-quantum-membership-to-separation": [
+      "def-qa-30-quantum-membership-separation-model",
+      "thm-qa-30-quantum-membership-separation-cost"
+    ],
+    "lem-qa-30-centroid-weak-separation-optimization": [
+      "def-qa-30-quantum-membership-separation-model"
+    ],
+    "lem-qa-30-membership-height-geometry": [
+      "def-qa-30-quantum-membership-separation-model"
+    ],
+    "thm-qa-30-quantum-membership-separation-cost": [
+      "alg-qa-30-quantum-membership-to-separation",
+      "def-qa-30-quantum-membership-separation-model",
+      "lem-qa-30-centroid-weak-separation-optimization",
+      "lem-qa-30-finite-grid-quantum-subgradient",
+      "lem-qa-30-membership-height-geometry"
+    ]
+  }
+}

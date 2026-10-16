@@ -1,0 +1,489 @@
+{
+  "group": "c",
+  "batches": ["31"],
+  "pages_read": [
+    "quantum-phase-estimation",
+    "quantum-phase-estimation-examples"
+  ],
+  "items_read": [
+    "lem-qa-phase-estimation-geometric-sum",
+    "lem-qa-phase-estimation-sine-chord-bounds",
+    "def-qa-circular-phase-distance",
+    "def-qa-eigenphase-estimation-model",
+    "alg-qa-quantum-phase-estimation",
+    "lem-qa-phase-estimation-outcome-kernel",
+    "thm-qa-phase-estimation-access-cost",
+    "lem-qa-phase-estimation-nearest-grid-bound",
+    "lem-qa-phase-estimation-tail-bound",
+    "thm-qa-phase-estimation-exact-grid",
+    "thm-qa-phase-estimation-superposition-law",
+    "thm-qa-phase-estimation-success-and-tail",
+    "ex-qa-exact-phase-estimation",
+    "ex-qa-phase-estimation-nearest-grid-and-tail"
+  ],
+  "conventions": [
+    {
+      "convention": "Eigenphases satisfy Uψ = exp(2πiθ)ψ with θ ∈ [0,1); m ≥ 1 and Q = 2^m. The phase register is big-endian, with weight 2^j on wire q_(m−1−j).",
+      "fixed_by": "def-qa-eigenphase-estimation-model",
+      "matters_for": [
+        "alg-qa-quantum-phase-estimation",
+        "lem-qa-phase-estimation-outcome-kernel",
+        "thm-qa-phase-estimation-exact-grid",
+        "thm-qa-phase-estimation-superposition-law"
+      ]
+    },
+    {
+      "convention": "Controlled-power access and repeated single controlled-U access are distinct capabilities. Controlled inverse powers require a separate promise; forward QPE does not use U inverse.",
+      "fixed_by": "def-qa-eigenphase-estimation-model",
+      "matters_for": [
+        "alg-qa-quantum-phase-estimation",
+        "thm-qa-phase-estimation-access-cost"
+      ]
+    },
+    {
+      "convention": "Forward QPE applies controlled positive powers followed by the inverse of the positive-sign QFT, including its declared wire swaps.",
+      "fixed_by": "alg-qa-quantum-phase-estimation",
+      "matters_for": [
+        "lem-qa-phase-estimation-outcome-kernel",
+        "thm-qa-phase-estimation-exact-grid",
+        "thm-qa-phase-estimation-superposition-law"
+      ]
+    },
+    {
+      "convention": "For x ∈ [−1,1], d_T(x) = min(|x|,1−|x|). Phase error is circular distance, including wrap-around; it is not ordinary absolute error.",
+      "fixed_by": "def-qa-circular-phase-distance",
+      "matters_for": [
+        "lem-qa-phase-estimation-nearest-grid-bound",
+        "lem-qa-phase-estimation-tail-bound",
+        "thm-qa-phase-estimation-success-and-tail",
+        "ex-qa-phase-estimation-nearest-grid-and-tail"
+      ]
+    },
+    {
+      "convention": "Readout uses the specified computational-basis Lüders branch Z ↦ P_y Z P_y. Conditional states are assigned only to positive-probability outcomes.",
+      "fixed_by": "alg-qa-quantum-phase-estimation",
+      "matters_for": [
+        "thm-qa-phase-estimation-superposition-law"
+      ]
+    },
+    {
+      "convention": "The gate count uses ideal exact continuous rotations, counts named SWAPs as one gate, excludes eigenstate preparation and final measurement, and asserts no fixed-alphabet compilation or uniform-family bound.",
+      "fixed_by": "thm-qa-phase-estimation-access-cost",
+      "matters_for": [
+        "thm-qa-phase-estimation-access-cost"
+      ]
+    },
+    {
+      "convention": "The nearest-grid bound holds for every minimizing label, including either tied label. The tail event uses ≥ η and requires K = floor(Qη) ≥ 2.",
+      "fixed_by": "thm-qa-phase-estimation-success-and-tail",
+      "matters_for": [
+        "ex-qa-phase-estimation-nearest-grid-and-tail"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-qa-phase-estimation-outcome-kernel",
+      "statement": "Let m ≥ 1, Q = 2^m, and let the input be an eigenvector with Uψ = exp(2πiθ)ψ, where θ ∈ [0,1). For each y ∈ {0,…,Q−1}, the probability is P_θ(y) = Q^−2 |Σ_(j=0)^(Q−1) exp(2πij(θ−y/Q))|², including grid phases.",
+      "used_by": [
+        "lem-qa-phase-estimation-nearest-grid-bound",
+        "lem-qa-phase-estimation-tail-bound",
+        "thm-qa-phase-estimation-exact-grid",
+        "thm-qa-phase-estimation-superposition-law",
+        "thm-qa-phase-estimation-success-and-tail",
+        "ex-qa-exact-phase-estimation",
+        "ex-qa-phase-estimation-nearest-grid-and-tail"
+      ]
+    },
+    {
+      "id": "alg-qa-quantum-phase-estimation",
+      "statement": "For the promised eigenphase input and declared forward access, initialize the registers, apply phase-register Hadamards, controlled U^(2^j) on the weight-2^j wires, the inverse positive-sign binary QFT, and the specified computational-basis Lüders readout; output y and y/Q.",
+      "used_by": [
+        "lem-qa-phase-estimation-outcome-kernel",
+        "thm-qa-phase-estimation-access-cost",
+        "thm-qa-phase-estimation-superposition-law",
+        "ex-qa-exact-phase-estimation"
+      ]
+    },
+    {
+      "id": "lem-qa-phase-estimation-geometric-sum",
+      "statement": "For n ∈ N and z ∈ C, S_n(z) = Σ_(j=0)^(n−1) z^j equals the canonical natural n when z = 1 and (1−z^n)/(1−z) otherwise, with S_0(z) = 0. For z = exp(2πi(θ−y/Q)), z^Q = exp(2πiQθ), and z = 1 exactly when Qθ−y ∈ QZ.",
+      "used_by": [
+        "lem-qa-phase-estimation-outcome-kernel",
+        "lem-qa-phase-estimation-nearest-grid-bound",
+        "lem-qa-phase-estimation-tail-bound",
+        "thm-qa-phase-estimation-superposition-law",
+        "ex-qa-phase-estimation-nearest-grid-and-tail"
+      ]
+    },
+    {
+      "id": "lem-qa-phase-estimation-sine-chord-bounds",
+      "statement": "For 0 ≤ u ≤ 1/2 and v ≥ 0, sin(πu) ≥ 2u and sin(v) ≤ v.",
+      "used_by": [
+        "lem-qa-phase-estimation-nearest-grid-bound",
+        "lem-qa-phase-estimation-tail-bound"
+      ]
+    },
+    {
+      "id": "thm-qa-phase-estimation-superposition-law",
+      "statement": "For a unitary U on nonzero finite-dimensional H, group distinct eigenphases θ into their full spectral projections Π_θ. With a_y(θ) = Q^−1 Σ_(j=0)^(Q−1) exp(2πij(θ−y/Q)) and K_y = Σ_θ a_y(θ)Π_θ, the branch is K_yψ, its probability is Σ_θ |a_y(θ)|² ||Π_θψ||², and the reference-preserving instrument is ρ ↦ (K_y ⊗ I)ρ(K_y† ⊗ I). Conditioning requires positive probability. Grid phases give spectral-projection branches; an off-grid eigenphase makes the effects nonprojective.",
+      "used_by": [
+        "thm-qa-modular-order-finding-success",
+        "thm-qa-13-amplitude-estimation-guarantee",
+        "thm-qa-18-detection-correctness-cost",
+        "thm-qa-18-reversible-search-cost"
+      ]
+    },
+    {
+      "id": "thm-qa-phase-estimation-success-and-tail",
+      "statement": "For m ≥ 1, Q = 2^m and θ ∈ [0,1), every nearest grid label has probability at least 4/π². If K = floor(Qη) ≥ 2, the probability of circular error at least η is at most 1/[2(K−1)]. If Qθ is an integer t, label t has probability one and all other labels have probability zero.",
+      "used_by": [
+        "ex-qa-phase-estimation-nearest-grid-and-tail",
+        "thm-qa-modular-order-finding-success",
+        "thm-qa-13-amplitude-estimation-guarantee",
+        "thm-qa-16-dual-evaluator-success",
+        "thm-qa-18-detection-correctness-cost",
+        "thm-qa-28-spectral-estimation-guarantee",
+        "lem-qa-30-spectral-minimum-shift"
+      ]
+    },
+    {
+      "id": "thm-qa-phase-estimation-access-cost",
+      "statement": "One run uses exactly m supplied controlled-power queries, or exactly Q−1 repeated controlled-U queries. With controlled-power circuit gate counts C_j, its unitary gate count after the eigenstate input is provided is Σ_j C_j + 2m + m(m−1)/2 + floor(m/2), in the stated ideal continuous-rotation model.",
+      "used_by": [
+        "thm-qa-modular-order-finding-cost",
+        "thm-qa-13-amplitude-estimation-query-complexity",
+        "thm-qa-16-dual-evaluator-query-cost",
+        "thm-qa-18-detection-correctness-cost",
+        "thm-qa-18-reversible-search-cost"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Combining eigenphases, exponential powers, and integer-period shifts.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Geometric-sum division and complex arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-integer-powers",
+      "used_for": "Natural-power recursion in the geometric sum.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum-in-a-commutative-monoid",
+      "used_for": "Finite sums and the empty-sum convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-reindexing-and-fubini",
+      "used_for": "Splitting and rearranging finite amplitude and normalization sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Geometric-sum identities and repeated-query counts.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-natural",
+      "used_for": "Interpreting natural counts inside the complex field.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-exponential",
+      "used_for": "Meaning of the scalar phase exponential.",
+      "opened": true
+    },
+    {
+      "id": "thm-kernel-and-fibres-of-complex-exponential",
+      "used_for": "Identifying coincident phases, periodicity, and nonzero geometric denominators.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "The positive π convention in the sine inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Sine endpoint values and phase-shift identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Cosine monotonicity in the chord-bound proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Differentiating the chord comparison function.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Deriving the sine chord inequality from decreasing derivative.",
+      "opened": true
+    },
+    {
+      "id": "cor-sine-and-cosine-are-one-lipschitz",
+      "used_for": "The inequality sin(v) ≤ v for v ≥ 0.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Differentiating sin(t)−2t/π.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "The identity function's derivative and interval derivative conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-max-min",
+      "used_for": "The finite minimum defining circular distance.",
+      "opened": true
+    },
+    {
+      "id": "def-real-order",
+      "used_for": "Real absolute value in circular distance.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Existence of the two-element minimum defining circular distance.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Positivity of projectors and instrument branch sandwiches.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Identifying each readout projection as its own nonnegative square root.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Unit-modulus phases, conjugate phases, and sine forms of geometric denominators.",
+      "opened": true
+    },
+    {
+      "id": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+      "used_for": "Kernel normalization and exact-grid recovery.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Squared amplitude and conjugation conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Expanding squared amplitudes and bounding geometric numerators.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Density, measurement, and instrument traces.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Coordinate computation of rank-one traces.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Measurement probabilities and trace preservation of the induced instrument.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-addition",
+      "used_for": "Natural-valued query-count recursion.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-finite-sum-and-product",
+      "used_for": "The sum of repeated controlled-U calls and truncated natural subtraction.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-multiplication",
+      "used_for": "Doubling in the query-count induction.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-power",
+      "used_for": "The natural recursion for 2^m.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-add-associative",
+      "used_for": "Rearranging the finite query-count recurrence.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-add-commutative",
+      "used_for": "Rearranging natural sums and identifying Q−1.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-mult-identity",
+      "used_for": "Natural doubling and power identities.",
+      "opened": true
+    },
+    {
+      "id": "lem-integer-part",
+      "used_for": "Nearest-label construction, modular lifts, and tail annuli.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Reducing either circular-error orientation to the same sine modulus.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Orthogonal eigenspace decomposition of the unitary.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-parametrize-the-unit-circle",
+      "used_for": "Existence and uniqueness of phase representatives in [0,1).",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-projection",
+      "used_for": "Spectral projection notation and eigenspace branches.",
+      "opened": true
+    },
+    {
+      "id": "prop-trace-is-linear",
+      "used_for": "Summing instrument probabilities and spectral mixture weights.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-isometry-characterisations",
+      "used_for": "Unitary normality and the explicit coherence witness.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Norm preservation and unit-modulus eigenvalues.",
+      "opened": true
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "used_for": "Applying the normal spectral theorem to U.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-qa-quantum-phase-estimation",
+      "concern": "Instruction 4 invokes the inverse of the exact binary QFT circuit, but deps omits alg-qa-exact-binary-qft-circuit. It lists thm-qa-exact-binary-qft-circuit-correct, which supplies that procedure transitively, so the mathematics remains supported. The explicit algorithm-composition rule nevertheless requires the smaller procedure's ID in the larger algorithm's deps.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-phase-estimation",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "QPE expressly disclaims a uniform-family or finite-alphabet bound. Its separate resource accounting does not imply either."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "quantum-fourier-transform-circuits",
+      "faithful": true,
+      "note": "Positive-sign normalization, inverse negative sign, final swaps, adjoint reversal, and ideal gate counts agree. The direct procedure-dependency omission is recorded in concerns."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Big-endian weights, ordered tensor maps, tensor adjoints, and discarding the measured phase factor agree with the supplier interfaces."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Root inner products are linear first; bras and rank-one maps use the corresponding reversed Dirac pairing and coordinate matrices."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "Unit vectors give trace-one rank-one densities. System and reference state spaces are nonzero where density operators are used."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled access is explicitly granted; inverse access is separate. Controlled scalar phases are not discarded."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Chronological products and declared wire positions agree. Gate, query, preparation, and measurement costs remain separate."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "The algorithm explicitly selects Lüders readout. The superposition theorem proves complete positivity and trace preservation and conditions only on positive-probability branches."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The orbit input is treated as an eigenphase mixture. Nearest-label recovery handles endpoint wrap-around, and repeated controlled-U cost is Q−1 per sample."
+    },
+    {
+      "from": "amplitude-estimation-and-counting",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "Signed Grover eigenphases, mixture weights, exact endpoint phases, and the finite kernel are preserved. The stronger two-label mass and strict tail estimate are proved locally rather than attributed to QPE."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The evaluator retains exact reflection signs, uses repeated controlled powers, converts angular error to phase error by 2π, and establishes K ≥ 20 before applying the tail bound."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "Detection uses the circular tail and mixture law. Coherent reflection explicitly omits measurement, supplies inverse powers for uncomputation, and derives a vector-error bound from the kernel."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The sine-window analysis uses the geometric sum and sine bounds with their stated domains. Its different prepared window and moment estimate are derived locally; the uniform-window QPE law is not substituted."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The spectral sampler retains coherent conditional branches. Its eigenstate median guarantee checks the principal decoder and K ≥ 3, with fresh preparations and explicit access costs."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The spectral-minimum sampler establishes K ≥ 4 for its own schedule and repeats conditionally on a preserved spectral index. Power-evolution time and repeated base-unitary query costs are distinguished."
+    }
+  ]
+}

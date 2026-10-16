@@ -1,0 +1,2448 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-17-stochastic-l2-contraction",
+    "lem-qa-17-reversible-transition-self-adjoint-on-l2-pi",
+    "thm-qa-17-absolute-gap-eigenvalue-characterization",
+    "thm-qa-17-discriminant-self-adjoint",
+    "lem-qa-17-walk-reflection-unitarity",
+    "lem-qa-17-invariant-eigenplane",
+    "thm-qa-17-szegedy-spectral-mapping",
+    "thm-qa-17-walk-access-cost",
+    "cex-qa-17-zero-stationary-weight",
+    "cex-qa-17-nonreversible-discriminant",
+    "ex-qa-17-period-two-walk",
+    "ex-qa-17-two-state-reversible-walk"
+  ],
+  "contracts": {
+    "lem-qa-17-stochastic-l2-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-finite-reversible-chain",
+          "source_section": "Definition",
+          "quote": "A **finite reversible Markov chain** is a finite row-stochastic kernel $(X,P)$ together with a supplied probability vector $\\pi=(\\pi_x)_{x\\in X}$ such that $\\pi_x>0$ for every $x$, $\\sum_x\\pi_x=1$, $\\pi P=\\pi$, and\n\n$$\\pi_xP_{xy}=\\pi_yP_{yx}\\qquad(x,y\\in X).$$\n\nThe stationary law and detailed balance are explicit input hypotheses; the definition does not invoke a theorem that produces a stationary law. No irreducibility or aperiodicity is assumed. In particular, a periodic reversible chain is included.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $x$, set $m_x:=\\sum_yP_{xy}f_y$. Expanding the nonnegative sum gives $\\sum_yP_{xy}|f_y-m_x|^2=\\sum_yP_{xy}|f_y|^2-|m_x|^2\\ge0$, because the row weights sum to one. Thus $|m_x|^2\\le\\sum_yP_{xy}|f_y|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply the inequality in step 1.1 by $\\pi_x$ and sum over $x$. All sums are finite, so reindexing gives $\\sum_x\\pi_x|m_x|^2\\le\\sum_y(\\sum_x\\pi_xP_{xy})|f_y|^2=\\sum_y\\pi_y|f_y|^2$ by stationarity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The left and right sides in step 2.1 are $\\|Pf\\|_{2,\\pi}^2$ and $\\|f\\|_{2,\\pi}^2$ by definition; taking nonnegative square roots proves the contraction claim. Positivity of every $\\pi_x$ makes the weighted form positive definite.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite reversible-chain hypothesis supplies sum_x pi_x=1, excluding X empty. The weighted space itself may contain the zero vector; that is not an empty state set.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The finite reversible-chain hypothesis supplies sum_x pi_x=1, excluding X empty. The weighted space itself may contain the zero vector; that is not an empty state set.",
+            "item_sha256": "013348851f709ad8a1fe2d300c0c7b6bd1c606574adfbfb8a4bbb516a3503e70",
+            "row_sha256": "0cd70551d2442435958e00673dfb68b83115ad55432d3ea627dfbf295825df56",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes zero row weights and the zero function in its nonnegative variance identity. Step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.1 is a finite sum and applies to the one-state row. Step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–3.1 use only row stochasticity and stationarity, not irreducibility. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 allow P_xy=0 or 1: the variance identity uses nonnegative row weights only, and stationarity still yields the same contraction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Steps 1.1–2.1 allow P_xy=0 or 1: the variance identity uses nonnegative row weights only, and stationarity still yields the same contraction.",
+            "item_sha256": "013348851f709ad8a1fe2d300c0c7b6bd1c606574adfbfb8a4bbb516a3503e70",
+            "row_sha256": "edd48fc83dd900663c251a170fde46b73c264b6ead2890987b9545d272a7f476",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The weighted variance identity in step 1.1 and stationarity sum in step 2.1 establish only the contraction inequality; neither claims its converse. The finite sums use the supplied P and pi, with no family of witnesses selected.",
+            "item_sha256": "013348851f709ad8a1fe2d300c0c7b6bd1c606574adfbfb8a4bbb516a3503e70",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 prove the one-way norm inequality by row variance and stationarity; the Statement does not characterize stationarity or reversibility by contraction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–2.1 prove the one-way norm inequality by row variance and stationarity; the Statement does not characterize stationarity or reversibility by contraction.",
+            "item_sha256": "013348851f709ad8a1fe2d300c0c7b6bd1c606574adfbfb8a4bbb516a3503e70",
+            "row_sha256": "fa9622489a927f820ffa06e86ecd42360b4cb6a683fc3b59b745104c71c24e18",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 prove the one-way norm inequality by row variance and stationarity; the Statement does not characterize stationarity or reversibility by contraction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–2.1 prove the one-way norm inequality by row variance and stationarity; the Statement does not characterize stationarity or reversibility by contraction.",
+            "item_sha256": "013348851f709ad8a1fe2d300c0c7b6bd1c606574adfbfb8a4bbb516a3503e70",
+            "row_sha256": "a66d861c6d14fa797a55f8baac6cb3b0a2bb11c9ddcad5a6216672daa99e51de",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ]
+    },
+    "lem-qa-17-reversible-transition-self-adjoint-on-l2-pi": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-finite-reversible-chain",
+          "source_section": "Definition",
+          "quote": "A **finite reversible Markov chain** is a finite row-stochastic kernel $(X,P)$ together with a supplied probability vector $\\pi=(\\pi_x)_{x\\in X}$ such that $\\pi_x>0$ for every $x$, $\\sum_x\\pi_x=1$, $\\pi P=\\pi$, and\n\n$$\\pi_xP_{xy}=\\pi_yP_{yx}\\qquad(x,y\\in X).$$\n\nThe stationary law and detailed balance are explicit input hypotheses; the definition does not invoke a theorem that produces a stationary law. No irreducibility or aperiodicity is assumed. In particular, a periodic reversible chain is included.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Positivity of every $\\pi_x$ makes $\\langle f,f\\rangle_\\pi=\\sum_x\\pi_x|f_x|^2$ nonnegative and zero only when $f=0$; the finite weighted sum is sesquilinear and conjugate-symmetric, so it is an inner product.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For arbitrary $f,g$, expand and use detailed balance: $\\langle Pf,g\\rangle_\\pi=\\sum_{x,y}\\pi_xP_{xy}f_y\\overline{g_x}=\\sum_{x,y}\\pi_yP_{yx}f_y\\overline{g_x}=\\sum_y\\pi_yf_y\\overline{(Pg)_y}=\\langle f,Pg\\rangle_\\pi$. Thus $P$ is self-adjoint.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Stationarity gives $\\sum_x\\pi_x(Pf)_x=\\sum_y(\\sum_x\\pi_xP_{xy})f_y=\\sum_y\\pi_yf_y$. Hence a mean-zero $f$ has mean-zero image, so $H_0$ is invariant; restricting the identity in step 2.1 to $H_0$ proves the restriction is self-adjoint.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite reversible-chain hypothesis supplies sum_x pi_x=1, excluding X empty. The weighted space itself may contain the zero vector; that is not an empty state set.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The finite reversible-chain hypothesis supplies sum_x pi_x=1, excluding X empty. The weighted space itself may contain the zero vector; that is not an empty state set.",
+            "item_sha256": "f363bd6398236192ae462aa57720a6fb1e536bd1ffb06c9640d5470e8794fb50",
+            "row_sha256": "0cd70551d2442435958e00673dfb68b83115ad55432d3ea627dfbf295825df56",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 permits zero transition probabilities in detailed balance. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–3.1 apply to a singleton state set with positive stationary weight. Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 2.1–3.1 use detailed balance and stationarity without irreducibility. Step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 remain identities when transition entries are 0 or 1; no transition probability is divided out. The supplied stationary coordinates remain strictly positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Steps 2.1–3.1 remain identities when transition entries are 0 or 1; no transition probability is divided out. The supplied stationary coordinates remain strictly positive.",
+            "item_sha256": "f363bd6398236192ae462aa57720a6fb1e536bd1ffb06c9640d5470e8794fb50",
+            "row_sha256": "d579627bc8981e0b4484a976a03cff041887a046fd60ac9b2c70fcd764579c05",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Steps 2.1 and 3.1 derive self-adjointness and mean-zero invariance from detailed balance and stationarity. They do not characterize detailed balance by those conclusions; all vectors and sums are already given.",
+            "item_sha256": "f363bd6398236192ae462aa57720a6fb1e536bd1ffb06c9640d5470e8794fb50",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 2.1–3.1 deduce self-adjointness and invariance from detailed balance and stationarity. The displayed equality defining H_0 identifies two descriptions of the same subspace, rather than asserting a converse from self-adjointness to the supplied chain hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 2.1–3.1 deduce self-adjointness and invariance from detailed balance and stationarity. The displayed equality defining H_0 identifies two descriptions of the same subspace, rather than asserting a converse from self-adjointness to the supplied chain hypotheses.",
+            "item_sha256": "f363bd6398236192ae462aa57720a6fb1e536bd1ffb06c9640d5470e8794fb50",
+            "row_sha256": "007d0cd9b8287f981d9e162e6c6623160a22446f1d50e75080d853fced1243ba",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 2.1–3.1 deduce self-adjointness and invariance from detailed balance and stationarity. The displayed equality defining H_0 identifies two descriptions of the same subspace, rather than asserting a converse from self-adjointness to the supplied chain hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 2.1–3.1 deduce self-adjointness and invariance from detailed balance and stationarity. The displayed equality defining H_0 identifies two descriptions of the same subspace, rather than asserting a converse from self-adjointness to the supplied chain hypotheses.",
+            "item_sha256": "f363bd6398236192ae462aa57720a6fb1e536bd1ffb06c9640d5470e8794fb50",
+            "row_sha256": "995765443c2a30680495890fea25f68dae2fd00eac4f13b4e86194ad778ec869",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed Proof 1.1–3.1 against the current positive stationary-chain definition, linear-first inner product, adjoint existence/uniqueness and self-adjointness interfaces. Strict positivity makes the weighted form definite; detailed balance reindexes the real transition coefficients to give <Pf,g>=<f,Pg>. Stationarity preserves the weighted mean, and restriction of the same identity establishes self-adjointness on H0. The probability-vector hypothesis excludes empty X; singleton X gives H0=0 and reducibility/periodicity cause no exception. All sums are finite; no AC or stationary-law existence assertion is used. Reader and refuter have no findings; independent review found no defect."
+      }
+    },
+    "thm-qa-17-absolute-gap-eigenvalue-characterization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-absolute-spectral-gap",
+          "source_section": "Definition",
+          "quote": "For a finite reversible chain $(X,P,\\pi)$, let $H_0=\\{f:\\sum_x\\pi_xf_x=0\\}$ with the weighted inner product from [[lem-qa-17-reversible-transition-self-adjoint-on-l2-pi]]. Define its **absolute spectral gap** by\n\n$$\\delta_{\\mathrm{abs}}(P):=1-\\|P|_{H_0}\\|_{2,\\pi}.$$\n\nThe norm of the restriction to the zero subspace is $0$ by [[def-operator-norm-on-a-finite-dimensional-inner-product-space]], so a one-state chain has absolute gap $1$. No irreducibility or aperiodicity is built into this definition: a reducible chain with a nonconstant stationary vector in $H_0$ can have gap $0$, and a periodic chain can have gap $0$ because of an eigenvalue $-1$. The eigenvalue form of the definition is proved in [[thm-qa-17-absolute-gap-eigenvalue-characterization]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-17-reversible-transition-self-adjoint-on-l2-pi",
+          "source_section": "Statement",
+          "quote": "For a finite reversible chain $(X,P,\\pi)$, equip $\\mathbb C^X$ with $\\langle f,g\\rangle_\\pi:=\\sum_x\\pi_x f_x\\overline{g_x}$. Then $P$ is self-adjoint for this inner product, and the mean-zero subspace\n\n$$H_0:=\\{f:\\sum_x\\pi_xf_x=0\\}=\\{f:\\langle f,\\mathbf 1\\rangle_\\pi=0\\}$$\n\nis invariant under $P$. The restriction $P|_{H_0}$ is therefore a well-defined endomorphism and is self-adjoint for the restricted inner product.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-17-stochastic-l2-contraction",
+          "source_section": "Statement",
+          "quote": "Let $(X,P,\\pi)$ be a finite reversible chain and let $f:X\\to\\mathbb C$. Define $\\|f\\|_{2,\\pi}^2:=\\sum_x\\pi_x|f_x|^2$ and $(Pf)_x:=\\sum_yP_{xy}f_y$. Then\n\n$$\\|Pf\\|_{2,\\pi}^2\\le\\|f\\|_{2,\\pi}^2,$$\n\nso $P$ is a contraction on the finite weighted inner-product space $L^2(X,\\pi)$. Detailed balance is not needed for this inequality beyond the stated stationary-law hypotheses.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-17-finite-reversible-chain",
+          "source_section": "Definition",
+          "quote": "A **finite reversible Markov chain** is a finite row-stochastic kernel $(X,P)$ together with a supplied probability vector $\\pi=(\\pi_x)_{x\\in X}$ such that $\\pi_x>0$ for every $x$, $\\sum_x\\pi_x=1$, $\\pi P=\\pi$, and\n\n$$\\pi_xP_{xy}=\\pi_yP_{yx}\\qquad(x,y\\in X).$$\n\nThe stationary law and detailed balance are explicit input hypotheses; the definition does not invoke a theorem that produces a stationary law. No irreducibility or aperiodicity is assumed. In particular, a periodic reversible chain is included.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $H_0=\\{0\\}$, the restriction has zero domain, so its operator norm is $0$ by [F1] and the gap is $1$. Otherwise, [F2] and [F4] give an orthonormal eigenbasis $e_1,\\ldots,e_m$ of $H_0$. Each eigenvalue is real: if $Pe_j=\\lambda_je_j$, self-adjointness and [F7] give $\\lambda_j\\|e_j\\|^2=\\langle Pe_j,e_j\\rangle_\\pi=\\langle e_j,Pe_j\\rangle_\\pi=\\overline{\\lambda_j}\\|e_j\\|^2$. [F5] identifies these eigenvalues as the spectrum of the restriction.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $f=\\sum_j c_je_j$. Orthonormality gives $\\|f\\|_{2,\\pi}^2=\\sum_j|c_j|^2$ and $\\|Pf\\|_{2,\\pi}^2=\\sum_j|\\lambda_j|^2|c_j|^2\\le (\\max_j|\\lambda_j|)^2\\|f\\|_{2,\\pi}^2$, with equality at an eigenvector whose eigenvalue has largest modulus. Therefore $\\|P|_{H_0}\\|_{2,\\pi}=\\max_j|\\lambda_j|$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3] the restriction norm is at most $1$, and it is nonnegative by definition; substituting step 1.2 into [F1] proves both the eigenvalue formula and $0\\le\\delta_{\\mathrm{abs}}(P)\\le1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $Pf=f$ and $f\\notin\\operatorname{span}\\{\\mathbf1\\}$, put $c=\\sum_x\\pi_xf_x$ and $h=f-c\\mathbf1$. The normalization $\\sum_x\\pi_x=1$ gives $h\\in H_0$, while $h\\ne0$ because $f$ is not constant. Since $P\\mathbf1=\\mathbf1$, $Ph=Pf-cP\\mathbf1=h$. Thus $1$ is an eigenvalue of $P|_{H_0}$ and step 1.2 gives $\\|P|_{H_0}\\|=1$, so [F1] gives $\\delta_{\\mathrm{abs}}(P)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 explicitly treat H_0={0}: the restriction norm is 0 and the gap is 1; the maximum over the empty spectrum is not taken. The probability normalization excludes an empty state set.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Statement and step 1.1 explicitly treat H_0={0}: the restriction norm is 0 and the gap is 1; the maximum over the empty spectrum is not taken. The probability normalization excludes an empty state set.",
+            "item_sha256": "c941f7cc0da4278a1d5b9a4647855969e645df77c03e7c458ad1b0627d0eb7b0",
+            "row_sha256": "1e37acddf5066fc1a69753a06aa356ddbc59a39a48d1ec43177ff9f8e41bb9e3",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles H0={0} and the zero-domain operator norm. Step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 gives absolute gap one when H0={0}, as for a one-state chain. Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 3.1 handles a nonconstant fixed function and proves gap zero without irreducibility. Step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.2–2.1 use the maximum eigenvalue modulus, including eigenvalues of modulus one. Step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The Statement gives a spectral formula for the already defined gap and a sufficient fixed-vector criterion for gap zero, not a biconditional characterizing fixed vectors. The finite eigenbasis and maximizing eigenvector in steps 1.1–1.2 come from F4 and a finite maximum.",
+            "item_sha256": "c941f7cc0da4278a1d5b9a4647855969e645df77c03e7c458ad1b0627d0eb7b0",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 evaluate the already defined restriction norm in an orthonormal eigenbasis, and step 3.1 only deduces zero gap from a nonconstant fixed function. No converse to that sufficient condition is stated (a -1 eigenvalue can also give zero absolute gap).",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–2.1 evaluate the already defined restriction norm in an orthonormal eigenbasis, and step 3.1 only deduces zero gap from a nonconstant fixed function. No converse to that sufficient condition is stated (a -1 eigenvalue can also give zero absolute gap).",
+            "item_sha256": "c941f7cc0da4278a1d5b9a4647855969e645df77c03e7c458ad1b0627d0eb7b0",
+            "row_sha256": "042ab1d3f76b1eb53e5cec1c8f2450852d72e01ac25f8a458cac8904b153b5b9",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 evaluate the already defined restriction norm in an orthonormal eigenbasis, and step 3.1 only deduces zero gap from a nonconstant fixed function. No converse to that sufficient condition is stated (a -1 eigenvalue can also give zero absolute gap).",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–2.1 evaluate the already defined restriction norm in an orthonormal eigenbasis, and step 3.1 only deduces zero gap from a nonconstant fixed function. No converse to that sufficient condition is stated (a -1 eigenvalue can also give zero absolute gap).",
+            "item_sha256": "c941f7cc0da4278a1d5b9a4647855969e645df77c03e7c458ad1b0627d0eb7b0",
+            "row_sha256": "f7339b0d381bff11063dadecfe680aa0c36a731451b95d76b0da68afced9ed04",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed Proof 1.1–3.1, the gap definition, proved weighted self-adjointness/contraction and finite complex spectral theorem. Self-adjoint restriction is normal; its orthonormal eigenbasis gives the upper norm bound and attainment at a maximal-modulus eigenvector. H0=0 is handled before taking a maximum; contraction makes the gap lie in [0,1]. Subtracting the normalized stationary mean from a nonconstant fixed function produces a nonzero fixed vector in H0, forcing norm one. No irreducibility, aperiodicity or positive-gap claim is smuggled in. De Wolf §8.1, printed pp.63–64, supplies symmetric-graph context only; the weighted generalization is proved locally. Reader/refuter report no findings; no defect or AC use found."
+      }
+    },
+    "thm-qa-17-discriminant-self-adjoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-szegedy-transition-isometry",
+          "source_section": "Definition",
+          "quote": "For a finite row-stochastic kernel $(X,P)$, let $\\mathbb C^X$ and $\\mathbb C^{X\\times X}$ carry the standard orthonormal label and ordered-product bases. If $X\\ne\\varnothing$, these coordinate spaces are implemented as two ordered registers; if $X=\\varnothing$, they are zero spaces and every map below is the unique zero-dimensional map. Define the row-preparation linear map $T:\\mathbb C^X\\to\\mathbb C^{X\\times X}$ and the swap $S$ on basis vectors by\n\n$$T|x\\rangle=|x\\rangle\\otimes\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,\\qquad S|x,y\\rangle=|y,x\\rangle.$$\n\nEvery scalar square root is the unique nonnegative real root. Define the **discriminant** by $D:=T^*ST$, using the adjoint characterized by $\\langle Tv,w\\rangle=\\langle v,T^*w\\rangle$ for the root inner product, which is linear in its first argument. The row-preparation map is an isometry; its complete verification is [[thm-qa-17-discriminant-self-adjoint]]. This is the general row-stochastic construction and assumes no reversibility.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-17-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "A **finite row-stochastic kernel** is a finite set $X$ and a matrix $P=(P_{xy})_{x,y\\in X}$ with $P_{xy}\\in[0,1]$ and\n\n$$\\sum_{y\\in X}P_{xy}=1\\qquad(x\\in X).$$\n\nThe row convention is $P_{xy}=\\Pr(Y=y\\mid X=x)$: distributions are row vectors and one transition sends $\\mu$ to $\\mu P$. If $X=\\varnothing$, the row conditions are vacuous and there is no probability distribution on $X$. No stationary distribution, reversibility, irreducibility, aperiodicity, or efficient circuit access is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bessel-inequality-and-finite-parseval-identity",
+          "source_section": "Statement",
+          "quote": "If $(e_0,\\ldots,e_{r-1})$ is a finite orthonormal list and $v$ is any vector, then\n\n$$\\sum_{i<r}|\\langle v,e_i\\rangle|^2\\le\\lVert v\\rVert^2.$$\n\nEquality holds exactly when $v\\in\\operatorname{span}(e_0,\\ldots,e_{r-1})$. If the list is an orthonormal basis, then for all $v,w$,\n\n$$v=\\sum_{i<r}\\langle v,e_i\\rangle e_i,\\qquad \\langle v,w\\rangle=\\sum_{i<r}\\langle v,e_i\\rangle\\overline{\\langle w,e_i\\rangle},$$\n\nand\n\n$$\\lVert v\\rVert^2=\\sum_{i<r}|\\langle v,e_i\\rangle|^2.$$\n\nThe empty-list case is included.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-17-finite-reversible-chain",
+          "source_section": "Definition",
+          "quote": "A **finite reversible Markov chain** is a finite row-stochastic kernel $(X,P)$ together with a supplied probability vector $\\pi=(\\pi_x)_{x\\in X}$ such that $\\pi_x>0$ for every $x$, $\\sum_x\\pi_x=1$, $\\pi P=\\pi$, and\n\n$$\\pi_xP_{xy}=\\pi_yP_{yx}\\qquad(x,y\\in X).$$\n\nThe stationary law and detailed balance are explicit input hypotheses; the definition does not invoke a theorem that produces a stationary law. No irreducibility or aperiodicity is assumed. In particular, a periodic reversible chain is included.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "source_section": "Statement",
+          "quote": "In a real or complex inner product space:\n\n1. if $\\langle u,v\\rangle=0$ for every $v$, then $u=0$;\n2. $\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert$ for every scalar $\\lambda$ and vector $v$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $X=\\varnothing$, the domain and codomain are zero spaces, so $T^*T=I_0$ and $D$ is the zero endomorphism. Assume now $X\\ne\\varnothing$. For basis labels $x,x'$, the first register gives $\\langle T|x\\rangle,T|x'\\rangle\\rangle=0$ when $x\\ne x'$, while for $x=x'$ the value is $\\sum_yP_{xy}=1$ by [F2]. Hence the images of the orthonormal basis are orthonormal, which by expansion of arbitrary vectors proves $T$ is an isometry. Moreover, for all $x,x'$, [F3] gives $\\langle |x\\rangle,T^*T|x'\\rangle=\\langle T|x\\rangle,T|x'\\rangle=\\langle |x\\rangle,|x'\\rangle$. Sesquilinearity extends this equality to pairings against every vector; conjugate symmetry and nondegeneracy [F9] then give $T^*T|x'\\rangle=|x'\\rangle$. Therefore $T^*T=I$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the linear-first root inner product, the matrix entry is $D_{xy}=\\langle D e_y,e_x\\rangle_{\\mathrm{root}}=\\overline{\\langle e_x,D e_y\\rangle_{\\mathrm{root}}}=\\overline{\\langle T e_x,S T e_y\\rangle_{\\mathrm{root}}}$ by [F3]. Expanding the two row states, only $|x,y\\rangle$ overlaps, with real coefficient $\\sqrt{P_{xy}P_{yx}}$; hence $D_{xy}=\\sqrt{P_{xy}P_{yx}}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For any $w$ in the product space, Parseval in the domain basis and [F3] give $\\|T^*w\\|^2=\\sum_x|\\langle T^*w,|x\\rangle\\rangle|^2=\\sum_x|\\langle w,T|x\\rangle\\rangle|^2$. The vectors $T|x\\rangle$ are orthonormal by step 1.1, so Bessel's inequality [F5] makes this sum at most $\\|w\\|^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The formula in step 2.1 is unchanged by exchanging $x,y$ and is real, so $D$ is represented by a real symmetric matrix in the orthonormal label basis. Therefore $D^*=D$ and $D$ is self-adjoint by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $X=\\varnothing$, then the domain is zero and [F8] gives $\\|D\\|=0$. Otherwise, for every unit vector $v$, $\\|Dv\\|=\\|T^*STv\\|\\le\\|STv\\|=\\|Tv\\|=1$, using step 2.2, the swap's basis-permutation norm preservation, and step 1.1. Taking the maximum over the nonempty unit sphere proves $\\|D\\|\\le1$; [F8] ensures the finite-dimensional maximum exists.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F8",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $v\\ne0$ and $Dv=\\lambda v$, self-adjointness gives $\\lambda\\|v\\|^2=\\langle Dv,v\\rangle=\\langle v,Dv\\rangle=\\overline\\lambda\\|v\\|^2$, so $\\lambda$ is real by [F10]. Step 3.2, applied after scaling $v$ to a unit vector, gives $|\\lambda|\\|v\\|=\\|Dv\\|\\le\\|v\\|$; hence $|\\lambda|\\le1$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F10",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In the reversible case, detailed balance and $\\pi_y>0$ give $P_{yx}=\\pi_xP_{xy}/\\pi_y$. Since $P_{xy}\\ge0$, step 2.1 becomes $D_{xy}=P_{xy}\\sqrt{\\pi_x/\\pi_y}$, exactly the $(x,y)$ entry of $\\operatorname{diag}(\\sqrt\\pi)P\\operatorname{diag}(1/\\sqrt\\pi)$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 treats the empty state set and zero endomorphisms. Step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 derives the entry formula for zero transition probabilities using nonnegative square roots. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The entry formula and norm proof in steps 1.1–3.2 include a one-state stochastic kernel. Step 3.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Theorem statement and proof require no irreducibility or aperiodicity. Step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 4.1 includes eigenvalues at both endpoints -1 and 1. Step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The assertions are the row-isometry identity, discriminant entry formula, norm bound and reversible specialization, not equivalences. Steps 1.1–5.1 use the supplied coordinate bases and positive square roots rather than choosing arbitrary indexed witnesses.",
+            "item_sha256": "7c057865f8afb4c26e71536d96b51f2965fa043454c4f395bfb744ff4ae9f930",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–4.1 prove the isometry, entry formula and spectral bounds for every row-stochastic kernel; step 5.1 deduces the similarity under supplied detailed balance. The Statement does not assert that the similarity or symmetry characterizes reversibility.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–4.1 prove the isometry, entry formula and spectral bounds for every row-stochastic kernel; step 5.1 deduces the similarity under supplied detailed balance. The Statement does not assert that the similarity or symmetry characterizes reversibility.",
+            "item_sha256": "7c057865f8afb4c26e71536d96b51f2965fa043454c4f395bfb744ff4ae9f930",
+            "row_sha256": "180ab1156a08494059a57de63683a325bd1fe214cbd2156ae9d8ed19dad62130",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–4.1 prove the isometry, entry formula and spectral bounds for every row-stochastic kernel; step 5.1 deduces the similarity under supplied detailed balance. The Statement does not assert that the similarity or symmetry characterizes reversibility.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–4.1 prove the isometry, entry formula and spectral bounds for every row-stochastic kernel; step 5.1 deduces the similarity under supplied detailed balance. The Statement does not assert that the similarity or symmetry characterizes reversibility.",
+            "item_sha256": "7c057865f8afb4c26e71536d96b51f2965fa043454c4f395bfb744ff4ae9f930",
+            "row_sha256": "9fda6663a4a1ee3a60816e2fe6565c444244d0ba57ed776494a9a579b6ba3122",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed all seven steps and exact isometry, adjoint, Bessel/Parseval, square-root, operator-norm and positive detailed-balance interfaces. Orthonormal row states yield T*T=I; the linear-first conjugation in 2.1 gives sqrt(Pxy Pyx). Bessel bounds T*, and swap preserves norms, proving contractivity without reversibility. Real symmetry gives real eigenvalues; normalized eigenvectors bound their moduli. Similarity uses strictly positive pi and detailed balance only in 5.1. Empty X has norm zero and empty spectrum. Checked Childs §§18.2–18.3, (18.5)–(18.34), translating its column convention to rows; de Wolf §8.2 is corroboration, not a substituted proof. Reader/refuter have no findings; no defect or AC use found."
+      }
+    },
+    "lem-qa-17-walk-reflection-unitarity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-17-discriminant-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For every finite row-stochastic kernel, the map $T$ of [[def-qa-17-szegedy-transition-isometry]] satisfies $T^*T=I$ and is an isometry, and the matrix entries of $D=T^*ST$ are\n\n$$D_{xy}=\\sqrt{P_{xy}P_{yx}}.$$\n\nHence $D$ is real symmetric, self-adjoint, and $\\|D\\|\\le1$. If $(X,P,\\pi)$ is also finite reversible, then\n\n$$D=\\operatorname{diag}(\\sqrt\\pi)\\,P\\,\\operatorname{diag}(1/\\sqrt\\pi).$$\n\nEvery eigenvalue of $D$ is real and belongs to $[-1,1]$. The empty state set has the zero endomorphism and empty spectrum; the similarity assertion is only made when a positive stationary probability vector is supplied.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-17-szegedy-walk",
+          "source_section": "Definition",
+          "quote": "For the finite row-stochastic kernel and row-preparation map of [[def-qa-17-szegedy-transition-isometry]], let $\\Pi:=TT^*$, the orthogonal projection onto $\\operatorname{ran}(T)$, and choose the reflection sign\n\n$$R_A:=2\\Pi-I.$$\n\nWith $S$ the two-register swap, define the one-reflection Szegedy step and its square by\n\n$$U:=S R_A,\\qquad W:=U^2=(S R_A S)R_A=(2S\\Pi S-I)(2\\Pi-I).$$\n\nProducts act right to left. This fixes $U$ and $W$ as different operators. Algebraically, if $Uv=\\mu v$, then $Wv=\\mu^2v$ on the same vector. The other common reflection sign is $I-2\\Pi=-R_A$ and is not interchangeable inside a controlled operation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "An endomorphism $P$ of a finite-dimensional inner product space is the orthogonal projection onto some subspace if and only if\n\n$$P^2=P\\qquad\\text{and}\\qquad P^*=P.$$\n\nIn that case it is the orthogonal projection onto $\\operatorname{im}P$, along $\\ker P=(\\operatorname{im}P)^\\perp$. The cases $P=0$ and $P=I$ are included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-17-szegedy-transition-isometry",
+          "source_section": "Definition",
+          "quote": "For a finite row-stochastic kernel $(X,P)$, let $\\mathbb C^X$ and $\\mathbb C^{X\\times X}$ carry the standard orthonormal label and ordered-product bases. If $X\\ne\\varnothing$, these coordinate spaces are implemented as two ordered registers; if $X=\\varnothing$, they are zero spaces and every map below is the unique zero-dimensional map. Define the row-preparation linear map $T:\\mathbb C^X\\to\\mathbb C^{X\\times X}$ and the swap $S$ on basis vectors by\n\n$$T|x\\rangle=|x\\rangle\\otimes\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,\\qquad S|x,y\\rangle=|y,x\\rangle.$$\n\nEvery scalar square root is the unique nonnegative real root. Define the **discriminant** by $D:=T^*ST$, using the adjoint characterized by $\\langle Tv,w\\rangle=\\langle v,T^*w\\rangle$ for the root inner product, which is linear in its first argument. The row-preparation map is an isometry; its complete verification is [[thm-qa-17-discriminant-self-adjoint]]. This is the general row-stochastic construction and assumes no reversibility.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From [F1], $\\Pi^2=TT^*TT^*=T(T^*T)T^*=TT^*=\\Pi$. For all $u,v$, [F6] and conjugate symmetry give $\\langle\\Pi u,v\\rangle=\\langle T^*u,T^*v\\rangle=\\langle u,\\Pi v\\rangle$, so $\\Pi^*=\\Pi$. By [F3], $\\Pi$ is the orthogonal projection onto its image, which is $A=\\operatorname{ran}(T)$ because it fixes every $Tv$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\Pi^2=\\Pi$ and $\\Pi^*=\\Pi$, $R_A^*=2\\Pi^*-I=R_A$ and $R_A^2=4\\Pi^2-4\\Pi+I=I$. Thus $\\lVert R_Aw\\rVert^2=\\langle R_Aw,R_Aw\\rangle=\\langle w,R_A^*R_Aw\\rangle=\\lVert w\\rVert^2$ for every $w$. By [F7], $S$ permutes the orthonormal product basis by the transposition $(x,y)\\mapsto(y,x)$, so its permutation matrix is its own inverse and adjoint: $S^2=I$ and $S^*=S$. It is therefore an invertible isometry and is unitary.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $w\\in A^\\perp$, then [F6] gives $\\langle v,T^*w\\rangle=\\langle Tv,w\\rangle=0$ for every $v$, so taking $v=T^*w$ and using positive definiteness [F5] gives $T^*w=0$ and $\\Pi w=0$; hence $Uw=S(2\\Pi-I)w=-Sw$. Both $S$ and $R_A$ are invertible norm-preserving maps by step 2.1, so $U=SR_A$ and $W=U^2$ are unitary.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 applies to the zero-dimensional projection and unique maps. Step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–2.1 cover the zero projection, for which RA=-I. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The projection and involution identities in steps 1.1–3.1 apply in dimension one. Step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof uses only idempotence, self-adjointness and the swap, not chain connectivity. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The projection identities in steps 1.1–2.1 include the extreme projections Pi=0 and Pi=I, giving R_A=-I or +I and R_A^2=I without any spectral division.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The projection identities in steps 1.1–2.1 include the extreme projections Pi=0 and Pi=I, giving R_A=-I or +I and R_A^2=I without any spectral division.",
+            "item_sha256": "0e7116ae8b9a30636b70746062cbd4bdd0ea819300694aa768a9c3c5ed3f8f38",
+            "row_sha256": "01288f50afb137d38eee97032f5321221248e4ece56f236d8497ec8c61f65013",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Idempotence and self-adjointness of TT* give involutions and then unitarity in steps 1.1–3.1. No reverse implication from unitarity to the transition hypotheses is claimed, and the operators are explicit formulas.",
+            "item_sha256": "0e7116ae8b9a30636b70746062cbd4bdd0ea819300694aa768a9c3c5ed3f8f38",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 derive the projection, involution and unitary identities from T* T=I and the fixed swap. The conditional action U=-S on A-perp is a consequence, with no claim that arbitrary unitary operators arise this way.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 derive the projection, involution and unitary identities from T* T=I and the fixed swap. The conditional action U=-S on A-perp is a consequence, with no claim that arbitrary unitary operators arise this way.",
+            "item_sha256": "0e7116ae8b9a30636b70746062cbd4bdd0ea819300694aa768a9c3c5ed3f8f38",
+            "row_sha256": "8f1c31e80c8250fe5509dbd5de878a36e6a7a53883affebacfc2112ab0473144",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 derive the projection, involution and unitary identities from T* T=I and the fixed swap. The conditional action U=-S on A-perp is a consequence, with no claim that arbitrary unitary operators arise this way.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 derive the projection, involution and unitary identities from T* T=I and the fixed swap. The conditional action U=-S on A-perp is a consequence, with no claim that arbitrary unitary operators arise this way.",
+            "item_sha256": "0e7116ae8b9a30636b70746062cbd4bdd0ea819300694aa768a9c3c5ed3f8f38",
+            "row_sha256": "2232d094b4e191983f02622d11022a0e87bcde34a9bdae3bf07aab6130d1e77c",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed Proof 1.1–3.1 and exact adjoint, isometry, positive-definite, projection and reflection interfaces. T*T=I makes TT* a self-adjoint idempotent with image ran T; 2Pi-I is a self-adjoint involution and the swap is its own adjoint/inverse. Products therefore preserve norms and are invertible. For w in A-perp, testing T*w against itself gives T*w=0, hence Uw=-Sw; the statement does not falsely assert A-perp invariant. Zero spaces also satisfy the identities. Childs §18.2 (18.7)–(18.10) and de Wolf §8.2 have the same selected reflection sign. Reader/refuter have no findings; no defect or choice use found."
+      }
+    },
+    "lem-qa-17-invariant-eigenplane": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-17-discriminant-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For every finite row-stochastic kernel, the map $T$ of [[def-qa-17-szegedy-transition-isometry]] satisfies $T^*T=I$ and is an isometry, and the matrix entries of $D=T^*ST$ are\n\n$$D_{xy}=\\sqrt{P_{xy}P_{yx}}.$$\n\nHence $D$ is real symmetric, self-adjoint, and $\\|D\\|\\le1$. If $(X,P,\\pi)$ is also finite reversible, then\n\n$$D=\\operatorname{diag}(\\sqrt\\pi)\\,P\\,\\operatorname{diag}(1/\\sqrt\\pi).$$\n\nEvery eigenvalue of $D$ is real and belongs to $[-1,1]$. The empty state set has the zero endomorphism and empty spectrum; the similarity assertion is only made when a positive stationary probability vector is supplied.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-17-szegedy-walk",
+          "source_section": "Definition",
+          "quote": "For the finite row-stochastic kernel and row-preparation map of [[def-qa-17-szegedy-transition-isometry]], let $\\Pi:=TT^*$, the orthogonal projection onto $\\operatorname{ran}(T)$, and choose the reflection sign\n\n$$R_A:=2\\Pi-I.$$\n\nWith $S$ the two-register swap, define the one-reflection Szegedy step and its square by\n\n$$U:=S R_A,\\qquad W:=U^2=(S R_A S)R_A=(2S\\Pi S-I)(2\\Pi-I).$$\n\nProducts act right to left. This fixes $U$ and $W$ as different operators. Algebraically, if $Uv=\\mu v$, then $Wv=\\mu^2v$ on the same vector. The other common reflection sign is $I-2\\Pi=-R_A$ and is not interchangeable inside a controlled operation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-17-szegedy-transition-isometry",
+          "source_section": "Definition",
+          "quote": "For a finite row-stochastic kernel $(X,P)$, let $\\mathbb C^X$ and $\\mathbb C^{X\\times X}$ carry the standard orthonormal label and ordered-product bases. If $X\\ne\\varnothing$, these coordinate spaces are implemented as two ordered registers; if $X=\\varnothing$, they are zero spaces and every map below is the unique zero-dimensional map. Define the row-preparation linear map $T:\\mathbb C^X\\to\\mathbb C^{X\\times X}$ and the swap $S$ on basis vectors by\n\n$$T|x\\rangle=|x\\rangle\\otimes\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,\\qquad S|x,y\\rangle=|y,x\\rangle.$$\n\nEvery scalar square root is the unique nonnegative real root. Define the **discriminant** by $D:=T^*ST$, using the adjoint characterized by $\\langle Tv,w\\rangle=\\langle v,T^*w\\rangle$ for the root inner product, which is linear in its first argument. The row-preparation map is an isometry; its complete verification is [[thm-qa-17-discriminant-self-adjoint]]. This is the general row-stochastic construction and assumes no reversibility.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\Pi Tv=Tv$, [F2] gives $Ua=SR_A Tv=STv=b$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The adjoint identity gives $\\Pi b=TT^*STv=T(T^*ST)v=TDv=\\lambda Tv=\\lambda a$. Hence $Ub=S(2\\Pi-I)STv=S(2\\lambda a-b)=2\\lambda b-a$, because [F5] gives $S^2=I$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1–2.1 and [F4] show the span is invariant. Since $T$ is an isometry by [F1], $\\|a\\|=\\|v\\|$. Write $Tv=\\sum_{x,y}c_{xy}|x,y\\rangle$ in the orthonormal product basis. By [F5], $S$ bijectively permutes that basis, so $\\|b\\|^2=\\sum_{x,y}|c_{xy}|^2=\\|Tv\\|^2$ and $\\|b\\|=\\|v\\|$. The adjoint identity gives $\\langle a,b\\rangle=\\langle v,Dv\\rangle=\\lambda\\|v\\|^2$, which is real. If $\\lambda=\\pm1$, expansion gives $\\|b-\\lambda a\\|^2=0$, hence $b=\\lambda a$. If $|\\lambda|<1$ and $b=ca$, equality of norms gives $|c|=1$, while $\\langle a,b\\rangle=\\overline c\\|v\\|^2=\\lambda\\|v\\|^2$ gives $|c|=|\\lambda|<1$, a contradiction; thus $a,b$ are independent.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied eigenpair requires v nonzero, excluding an empty state register or zero eigenspace; step 3.1 uses ||Tv||=||v||>0.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The supplied eigenpair requires v nonzero, excluding an empty state register or zero eigenspace; step 3.1 uses ||Tv||=||v||>0.",
+            "item_sha256": "50c250486a23f573043af37d178a8322055d32712842595148cf1a98f13cbe93",
+            "row_sha256": "9df8cefd6d26194f4a1f40e3fc4a3c79ee3237a1f26bad3262db1c109e98dde1",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The premise requires a nonzero eigenvector, so there is no zero-space instance. Step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint cases in proof step 3.1 give one-dimensional invariant lines. Step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 3.1 explicitly separates endpoint and interior eigenvalues. Step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1 proves b=lambda a at lambda=+1 and lambda=-1. Step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The supplied eigenpair determines a=Tv and b=STv; steps 1.1–3.1 prove their action and span dimension. This does not assert that every invariant plane arises this way, and neither vector requires a witness choice.",
+            "item_sha256": "50c250486a23f573043af37d178a8322055d32712842595148cf1a98f13cbe93",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 calculate Ua=b and Ub=-a+2lambda b for a supplied discriminant eigenpair, with separate endpoint and interior dimension cases. The Statement supplies the eigenpair as a hypothesis and does not assert a converse eigenpair reconstruction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 calculate Ua=b and Ub=-a+2lambda b for a supplied discriminant eigenpair, with separate endpoint and interior dimension cases. The Statement supplies the eigenpair as a hypothesis and does not assert a converse eigenpair reconstruction.",
+            "item_sha256": "50c250486a23f573043af37d178a8322055d32712842595148cf1a98f13cbe93",
+            "row_sha256": "441b22403ce7255e2cb00c291269fb96c144e529e5f4b0566fa0ed7095f1160d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 calculate Ua=b and Ub=-a+2lambda b for a supplied discriminant eigenpair, with separate endpoint and interior dimension cases. The Statement supplies the eigenpair as a hypothesis and does not assert a converse eigenpair reconstruction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 calculate Ua=b and Ub=-a+2lambda b for a supplied discriminant eigenpair, with separate endpoint and interior dimension cases. The Statement supplies the eigenpair as a hypothesis and does not assert a converse eigenpair reconstruction.",
+            "item_sha256": "50c250486a23f573043af37d178a8322055d32712842595148cf1a98f13cbe93",
+            "row_sha256": "35d23c7d1fbba6be6ff4060bfea4751a8477cc8188c94ad0d84c6f369c0efec8",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed all three proof steps against current discriminant/isometry, walk sign/order, adjoint, eigenpair and span interfaces. Pi Tv=Tv gives Ua=b; Pi STv=lambda Tv and S²=I give Ub=2 lambda b-a. T and swap preserve norms, and the linear-first adjoint pairing gives real <a,b>=lambda ||v||². At lambda=±1 the expanded squared norm forces b=lambda a; for interior lambda, proportionality contradicts equal nonzero norms. Nonzero v excludes empty X and ensures a is nonzero. Childs §18.3 equations (18.24)–(18.34) agree after row translation; local proof additionally handles collapse. Reader/refuter have no findings; no defect or AC use found."
+      }
+    },
+    "thm-qa-17-szegedy-spectral-mapping": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-17-discriminant-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For every finite row-stochastic kernel, the map $T$ of [[def-qa-17-szegedy-transition-isometry]] satisfies $T^*T=I$ and is an isometry, and the matrix entries of $D=T^*ST$ are\n\n$$D_{xy}=\\sqrt{P_{xy}P_{yx}}.$$\n\nHence $D$ is real symmetric, self-adjoint, and $\\|D\\|\\le1$. If $(X,P,\\pi)$ is also finite reversible, then\n\n$$D=\\operatorname{diag}(\\sqrt\\pi)\\,P\\,\\operatorname{diag}(1/\\sqrt\\pi).$$\n\nEvery eigenvalue of $D$ is real and belongs to $[-1,1]$. The empty state set has the zero endomorphism and empty spectrum; the similarity assertion is only made when a positive stationary probability vector is supplied.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-17-invariant-eigenplane",
+          "source_section": "Statement",
+          "quote": "For any eigenpair $Dv=\\lambda v$ with $v\\ne0$ and $\\lambda\\in[-1,1]$, put $a:=Tv$ and $b:=STv$. Then $\\operatorname{span}\\{a,b\\}$ is invariant under $U$, and\n\n$$U a=b,\\qquad U b=-a+2\\lambda b.$$\n\nAll eigenvalues of $D$ satisfy the displayed interval hypothesis by [[thm-qa-17-discriminant-self-adjoint]]. If $\\lambda=1$ or $\\lambda=-1$, then $b=\\lambda a$ and the span is one-dimensional. If $-1<\\lambda<1$, the two vectors are linearly independent and the invariant subspace is two-dimensional.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-17-walk-reflection-unitarity",
+          "source_section": "Statement",
+          "quote": "For the projection $\\Pi=TT^*$ onto $A=\\operatorname{ran}(T)$, the operators $R_A=2\\Pi-I$ and $S$ are self-adjoint involutions. Hence $U=SR_A$ and $W=U^2$ are unitary. On $A^\\perp$, $\\Pi=0$ and therefore $U=-S$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "For a linear subspace $W$ ([[def-linear-subspace]]) of an inner product space $V$, using the preceding notion of orthogonality ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]), its **orthogonal complement** is\n\n$$W^\\perp:=\\{v\\in V:\\langle v,w\\rangle=0\\text{ for every }w\\in W\\}.$$\n\nThis is a linear subspace: $0\\in W^\\perp$, and linearity in the first argument shows that $au+bv\\in W^\\perp$ whenever $u,v\\in W^\\perp$ and $a,b$ are scalars. One has $V^\\perp=\\{0\\}$ by positive definiteness and $\\{0\\}^\\perp=V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-principal-inverse-sine-and-cosine",
+          "source_section": "Definition",
+          "quote": "Sine is differentiable, hence continuous, and strictly increasing on\n$[-\\pi/2,\\pi/2]$; its endpoint values are $-1$ and $1$\n([[thm-sine-and-cosine-derivatives]],\n[[cor-differentiable-implies-continuous]],\n[[thm-sine-cosine-signs-monotonicity-and-ranges]],\n[[thm-quarter-turn-values-and-shift-formulas]],\n[[cor-trigonometric-parity-and-pythagorean-identity]]). The intermediate value\ntheorem therefore makes its restricted image exactly $[-1,1]$\n([[thm-intermediate-value]]). Likewise, cosine is continuous and strictly\ndecreasing on $[0,\\pi]$, with endpoint values $1$ and $-1$, so its restricted\nimage is $[-1,1]$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]],\n[[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]],\n[[thm-quarter-turn-values-and-shift-formulas]], [[thm-intermediate-value]]).\nTheir principal inverses are denoted\n\n$$\\arcsin:[-1,1]\\to[-\\pi/2,\\pi/2],\\qquad\\arccos:[-1,1]\\to[0,\\pi],$$\n\nand are characterised by\n\n$$\\sin(\\arcsin y)=y,\\qquad\\cos(\\arccos y)=y\\qquad(-1\\le y\\le1).$$\n\nThe chosen target intervals are part of the notation: without them, inverse\nsine and inverse cosine would be multivalued relations rather than functions.\nTheir continuity follows from [[thm-continuous-inverse]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-eulers-formula",
+          "source_section": "Statement",
+          "quote": "For every real $\\theta$, $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-linear-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are\nlinear subspaces. Moreover, $T$ is injective if and only if $\\ker T=\\{0_V\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $X=\\varnothing$, then $\\mathbb C^X=\\mathbb C^{X\\times X}=\\{0\\}$, so there are no eigenvalues and the claims are vacuous. Assume now $X\\ne\\varnothing$. By [F1] and [F4], choose an orthonormal eigenbasis $(v_j)$ of the self-adjoint $D$, with real eigenvalues $\\lambda_j\\in[-1,1]$; the bound follows from $\\|D\\|\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For distinct basis vectors $v_j,v_k$, the spans $\\operatorname{span}\\{Tv_j,STv_j\\}$ and $\\operatorname{span}\\{Tv_k,STv_k\\}$ are orthogonal: the $T$-images and their swapped images pair to $\\langle v_j,v_k\\rangle=0$, while the cross pairings equal $\\langle v_j,Dv_k\\rangle=\\lambda_k\\langle v_j,v_k\\rangle=0$. These spans together generate $A+B$, where $A=\\operatorname{ran}T$ and $B=\\operatorname{ran}(ST)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix an eigenvalue $\\lambda_j\\in(-1,1)$ and its plane basis $a=Tv_j,b=STv_j$. By [F2], the matrix of $U$ in the ordered basis $(a,b)$ is $\\begin{pmatrix}0&-1\\\\1&2\\lambda_j\\end{pmatrix}$, so its characteristic equation is $z^2-2\\lambda_jz+1=0$. Its roots are $z=\\lambda_j\\pm i\\sqrt{1-\\lambda_j^2}$; each root has eigenvector $(1,-z)$ in these coordinates, and the roots are distinct because $|\\lambda_j|<1$. Put $\\theta_j=\\arccos\\lambda_j\\in(0,\\pi)$. By [F7], $\\cos\\theta_j=\\lambda_j$. If $0<\\theta_j\\le\\pi/2$, strict increase from $\\sin0=0$ on $[0,\\pi/2]$ gives $\\sin\\theta_j>0$; if $\\pi/2<\\theta_j<\\pi$, strict decrease to $\\sin\\pi=0$ on $[\\pi/2,\\pi]$ gives the same. These monotonicity and endpoint facts are [F12] and [F14]. Then [F8] and uniqueness in [F9] yield $\\sin\\theta_j=\\sqrt{1-\\lambda_j^2}$. [F10] identifies the roots as $\\exp(\\pm i\\theta_j)$, and [F11] squares them to $\\exp(\\pm2i\\theta_j)$ for $W=U^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F14",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "If $\\lambda_j=\\pm1$, [F2] gives $STv_j=\\lambda_jTv_j$, so the corresponding line contributes the single eigenvalue $\\lambda_j$ to $U$ and $+1$ to $W$. This counts one endpoint eigenvalue per eigendirection, not two coincident plane eigenvalues.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $H=A+B$, the sum of the images of $T$ and $ST$ as identified by [F15]; both are subspaces by [F13], so their sum is a subspace. By [F6], $\\mathbb C^{X\\times X}=H\\oplus K$ with $K=H^\\perp$. Since $K\\subseteq A^\\perp$, [F3] gives $U|_K=-S|_K$. The swap preserves $K$: for $a\\in A$ and $w\\in K$, $\\langle a,Sw\\rangle=\\langle Sa,w\\rangle=0$ because $Sa\\in B$, and for $b\\in B$ and $w\\in K$, $\\langle b,Sw\\rangle=\\langle Sb,w\\rangle=0$ because $Sb\\in A$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F13",
+            "F15",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On $K$, $S^2=I$, so each $w\\in K$ decomposes as $(w+Sw)/2+(w-Sw)/2$; these summands lie in $K$ by step 3.1 and satisfy $S(w+Sw)=w+Sw$ and $S(w-Sw)=-(w-Sw)$. Thus $U=-S$ has eigenvalues only $\\pm1$ on $K$, and $W=U^2$ is identity there. Combining this with steps 2.2–2.3 gives the complete eigenvalue multiset, including repeated eigenvalues and any overlap of endpoint values with the complement. No irreducibility, aperiodicity, or choice principle is used.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 treats the empty spaces and vacuous spectra. Step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The interior mapping in proof step 2.2 includes lambda=0. Step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint line in proof step 2.3 covers the one-state discriminant. Step 2.3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 2.1 and 3.1–4.1 decompose the full space without irreducibility. Step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.3 handles both lambda=+1 and lambda=-1 and counts one line per eigendirection. Step 2.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Steps 2.2–2.3 compute signal eigenvalues and step 4.1 computes the complement action. These give the walk multiset from D, not an iff about arbitrary operators. Step 1.1 uses the finite spectral theorem F4 to obtain its eigenbasis.",
+            "item_sha256": "cc1e6b62c155b7279faa789717dabc0d84f2e48d18ed66623b4bca23d7020b19",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 2.2–2.3 compute the walk eigenvalues on the supplied discriminant eigendirections, and steps 3.1–4.1 separately cover K. The complete multiset description is not an iff identifying each walk eigenvalue with a unique discriminant eigenvalue; endpoint and complement values overlap.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 2.2–2.3 compute the walk eigenvalues on the supplied discriminant eigendirections, and steps 3.1–4.1 separately cover K. The complete multiset description is not an iff identifying each walk eigenvalue with a unique discriminant eigenvalue; endpoint and complement values overlap.",
+            "item_sha256": "cc1e6b62c155b7279faa789717dabc0d84f2e48d18ed66623b4bca23d7020b19",
+            "row_sha256": "8d806ea03ac21b3894adeaa62b5029e2126b0f16198e9b12502761b306732ea9",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 2.2–2.3 compute the walk eigenvalues on the supplied discriminant eigendirections, and steps 3.1–4.1 separately cover K. The complete multiset description is not an iff identifying each walk eigenvalue with a unique discriminant eigenvalue; endpoint and complement values overlap.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 2.2–2.3 compute the walk eigenvalues on the supplied discriminant eigendirections, and steps 3.1–4.1 separately cover K. The complete multiset description is not an iff identifying each walk eigenvalue with a unique discriminant eigenvalue; endpoint and complement values overlap.",
+            "item_sha256": "cc1e6b62c155b7279faa789717dabc0d84f2e48d18ed66623b4bca23d7020b19",
+            "row_sha256": "2c873f6e146dd0ec2786a045ea998c940b29830d188d74b293271ce333f01c20",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed all six steps and every cited finite-dimensional and trigonometric interface. The orthonormal discriminant eigenbasis induces mutually orthogonal spans, even with repeated eigenvalues, generating A+B. Each interior block [[0,-1],[1,2lambda]] has distinct roots lambda±i sqrt(1-lambda²) and nonzero eigenvectors (1,-z); principal arccos and positive sine identify their phases. Squaring gives doubled phases with multiplicity retained, including lambda=0. Endpoint spans contribute one line each. K=(A+B)-perp is swap-invariant because swap exchanges A and B; U=-S there, and (w±Sw)/2 splits its signs, completing the full spectrum. Empty X is separated. Childs §18.3 complete Theorem 18.1 proof was read; local endpoint accounting is explicit, and de Wolf §8.2 only sketches doubled phases. Reader/refuter have no findings; no defect or arbitrary choice use found."
+      }
+    },
+    "thm-qa-17-walk-access-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-walk-access-model",
+          "source_section": "Definition",
+          "quote": "For a nonempty finite row-stochastic kernel $(X,P)$, a **row-preparation access model** supplies an explicit bijection $\\eta:X\\to\\{0,\\ldots,|X|-1\\}$; write $\\kappa_x$ for the image of $x$ under this bijection. Every ket $|x\\rangle$ below denotes the basis vector $|\\kappa_x\\rangle$. The model supplies a finite work register $W$ with a specified clean unit vector $|0_W\\rangle$ and a unitary $V_P$ on the ordered register product $\\mathbb C^X\\otimes\\mathbb C^X\\otimes W$ satisfying\n\n$$V_P\\bigl(|x\\rangle\\otimes|0\\rangle\\otimes|0_W\\rangle\\bigr)=\\left(|x\\rangle\\otimes\\sum_y\\sqrt{P_{xy}}|y\\rangle\\right)\\otimes|0_W\\rangle\\qquad(x\\in X).$$\n\nThe state encoding and its description are part of the supplied circuit interface and are included in the circuit description or uniform generator. The model separately declares access and costs for the forward call $V_P$, inverse call $V_P^*$, controlled $V_P$, controlled $V_P^*$, a direct range-reflection call, controlled range-reflection access, the clean-state reflection $R_0$, controlled $R_0$, the swap on the first two registers, and controlled swap access. The clean-state reflection is\n\n$$R_0:=2\\bigl(I_X\\otimes|0,0_W\\rangle\\langle0,0_W|\\bigr)-I,$$\n\nwhere the second register and work register are in their specified clean states. When range reflection is implemented from row preparation, the supplied circuit word is $V_PR_0V_P^*$; the access-cost theorem proves that on the clean-work subspace it realizes the logical reflection $2TT^*-I$. The swap acts as $S$ on the first two registers and as the identity on $W$.\n\nQuery calls, gate counts, circuit-description bits, uniform-generation time, and precision are separate cost coordinates. A controlled walk implemented factor by factor needs controlled access to each constituent, including the preparation calls, $R_0$, and the swap. A matrix $P$ by itself supplies none of these circuits or efficient costs. For a family of encoded chains, a uniform circuit family is an additional explicit input, not a consequence of the finite matrix definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-17-szegedy-walk",
+          "source_section": "Definition",
+          "quote": "For the finite row-stochastic kernel and row-preparation map of [[def-qa-17-szegedy-transition-isometry]], let $\\Pi:=TT^*$, the orthogonal projection onto $\\operatorname{ran}(T)$, and choose the reflection sign\n\n$$R_A:=2\\Pi-I.$$\n\nWith $S$ the two-register swap, define the one-reflection Szegedy step and its square by\n\n$$U:=S R_A,\\qquad W:=U^2=(S R_A S)R_A=(2S\\Pi S-I)(2\\Pi-I).$$\n\nProducts act right to left. This fixes $U$ and $W$ as different operators. Algebraically, if $Uv=\\mu v$, then $Wv=\\mu^2v$ on the same vector. The other common reflection sign is $I-2\\Pi=-R_A$ and is not interchangeable inside a controlled operation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-17-discriminant-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For every finite row-stochastic kernel, the map $T$ of [[def-qa-17-szegedy-transition-isometry]] satisfies $T^*T=I$ and is an isometry, and the matrix entries of $D=T^*ST$ are\n\n$$D_{xy}=\\sqrt{P_{xy}P_{yx}}.$$\n\nHence $D$ is real symmetric, self-adjoint, and $\\|D\\|\\le1$. If $(X,P,\\pi)$ is also finite reversible, then\n\n$$D=\\operatorname{diag}(\\sqrt\\pi)\\,P\\,\\operatorname{diag}(1/\\sqrt\\pi).$$\n\nEvery eigenvalue of $D$ is real and belongs to $[-1,1]$. The empty state set has the zero endomorphism and empty spectrum; the similarity assertion is only made when a positive stationary probability vector is supplied.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-inverse-unitary-access",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional unitary $U$, **inverse access** is the explicitly granted operation $U^\\dagger=U^{-1}$. Its availability and query or gate charge are recorded separately from forward access, including any controlled access in [[def-qc-controlled-unitary-access]]. For a chronological sequence of length $k\\ge0$ that applies $U_1$ first and $U_k$ last, the total operator is $W=U_k\\cdots U_1$ when $k>0$ and $W=I_H$ when $k=0$. For $k>0$, the inverse sequence applies $U_k^\\dagger$ first, then $U_{k-1}^\\dagger$, down to $U_1^\\dagger$; for $k=0$ it is the empty sequence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, and $w(C)$ its total number of wires.\n\nEach clean or dirty ancilla coordinate additionally requires a declared ordered partition of the circuit wires into data register $D$ and ancilla register $A$, and a declared target unitary $V$ on $D$. In that factor order, the complete circuit unitary must satisfy the corresponding exact contract of [[def-qc-clean-and-dirty-ancillas]]. For such a supplied clean contract set $a_{\\rm clean}(C)=|A|$, and for such a supplied dirty contract set $a_{\\rm dirty}(C)=|A|$; the notation suppresses the declared interface, which is part of the cost instance and may differ between the two coordinates. If no corresponding contract is supplied, mark that coordinate not applicable. These are counts of declared contract registers, not maxima over possible partitions. Zero initialization alone supplies neither return contract. Every auxiliary wire remains counted in $w(C)$ ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,\n\n$$(S+T)^*=S^*+T^*,\\qquad (\\lambda T)^*=\\overline\\lambda T^*,\\qquad (ST)^*=T^*S^*,\\qquad T^{**}=T.$$\n\nAlso $I^*=I$ and $0^*=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "An endomorphism $P$ of a finite-dimensional inner product space is the orthogonal projection onto some subspace if and only if\n\n$$P^2=P\\qquad\\text{and}\\qquad P^*=P.$$\n\nIn that case it is the orthogonal projection onto $\\operatorname{im}P$, along $\\ker P=(\\operatorname{im}P)^\\perp$. The cases $P=0$ and $P=I$ are included.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $T^*T=I$, so $\\Pi:=TT^*$ is idempotent; [F8] gives $\\Pi^*=\\Pi$, and [F9] identifies it as the orthogonal projection onto $\\operatorname{ran}T$ (it maps into $\\operatorname{ran}T$ and fixes every $Tv$). Let $J:\\mathbb C^X\\to\\mathbb C^X\\otimes\\mathbb C^X\\otimes W$ send $|x\\rangle$ to $|x,0,0_W\\rangle$. The orthonormal product basis [F7] makes $J$ an isometry and gives $JJ^*=I_X\\otimes|0,0_W\\rangle\\langle0,0_W|$. By [F1], $V_PJ=T\\otimes|0_W\\rangle$. Hence, using [F5] and unitarity of $V_P$,\n$$V_PR_0V_P^*=2(V_PJ)(V_PJ)^*-I=2\\bigl(TT^*\\otimes|0_W\\rangle\\langle0_W|\\bigr)-I.$$\nFor any logical state $h\\in\\mathbb C^{X\\times X}$, this operator sends $h\\otimes|0_W\\rangle$ to $(2TT^*-I)h\\otimes|0_W\\rangle=R_Ah\\otimes|0_W\\rangle$. The extended swap sends $h\\otimes|0_W\\rangle$ to $Sh\\otimes|0_W\\rangle$. Thus the word $SV_PR_0V_P^*$ restricts to $SR_A=U$ and returns the work register to its clean state.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Reading $SV_PR_0V_P^*$ from right to left applies one $V_P^*$ call, one $R_0$, one $V_P$ call, and one swap. The inverse and forward preparation, reflection and swap costs are therefore each charged once in this implementation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the factorwise controlled implementation, replace each factor in step 2.1 by its control-first block. By [F4], their product is the controlled full word: the control-zero block is identity and the control-one block is $SV_PR_0V_P^*$. It uses controlled $V_P^*$, $R_0$, $V_P$, and $S$, with each declared cost charged separately; without one of these capabilities this particular construction is unavailable.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F2], $W=U^2$ is two successive $U$ steps, and step 1.1 shows the work state is clean again after each step. Thus exactly two copies of the step counts in step 2.1 implement $W$. The resource coordinates remain separate by [F6].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement expressly requires a nonempty chain so the clean second-register label exists; an empty row register cannot supply that access instance.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The Statement expressly requires a nonempty chain so the clean second-register label exists; an empty row register cannot supply that access instance.",
+            "item_sha256": "fc066aa2adc328c008e1d2e0452712425cc00e9c7666cbf05a8dd9da78408f5f",
+            "row_sha256": "f14808206e2f72a52840a355a8e1de016e7ae09f2cd4ec93ead292fe976971f5",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero row probabilities only change amplitudes in the supplied unitary; the word and call count in proof steps 1.1–2.1 are unchanged. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-state nonempty chain uses the same four constituent operations in proof step 2.1. Step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The word count is independent of connectivity, as shown by the operator substitution in proof step 2.1. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 is an exact conjugation of the clean-input projection and step 4.1 composes two clean-return words. Row amplitudes 0 or 1 introduce no normalization division or different factor count.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Step 1.1 is an exact conjugation of the clean-input projection and step 4.1 composes two clean-return words. Row amplitudes 0 or 1 introduce no normalization division or different factor count.",
+            "item_sha256": "fc066aa2adc328c008e1d2e0452712425cc00e9c7666cbf05a8dd9da78408f5f",
+            "row_sha256": "28e9ab62c3ac2c94a400d301e4c7694f28091fb382dc1c2fa6a6b20fec288439",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The full-workspace conjugation in step 1.1 and factor counts in steps 2.1–4.1 establish this particular supplied implementation. They do not characterize all walk implementations; its registers and constituent calls are specified inputs.",
+            "item_sha256": "fc066aa2adc328c008e1d2e0452712425cc00e9c7666cbf05a8dd9da78408f5f",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Step 1.1 proves that the specified workspace word restricts to U, and steps 2.1–4.1 count that implementation and its controlled factors. These are implementation-specific counts, without a necessity or converse claim about all possible walk implementations.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Step 1.1 proves that the specified workspace word restricts to U, and steps 2.1–4.1 count that implementation and its controlled factors. These are implementation-specific counts, without a necessity or converse claim about all possible walk implementations.",
+            "item_sha256": "fc066aa2adc328c008e1d2e0452712425cc00e9c7666cbf05a8dd9da78408f5f",
+            "row_sha256": "2815fa48378470eaa8ffd97689bf1248a9257e3b0008152b203200c469baa953",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 1.1 proves that the specified workspace word restricts to U, and steps 2.1–4.1 count that implementation and its controlled factors. These are implementation-specific counts, without a necessity or converse claim about all possible walk implementations.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Step 1.1 proves that the specified workspace word restricts to U, and steps 2.1–4.1 count that implementation and its controlled factors. These are implementation-specific counts, without a necessity or converse claim about all possible walk implementations.",
+            "item_sha256": "fc066aa2adc328c008e1d2e0452712425cc00e9c7666cbf05a8dd9da78408f5f",
+            "row_sha256": "fb5b84d08222d8f3071687d0c78a0d9f112bcc86f31d0f3ef5b4e55caaa56ff2",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed all four steps against current supplied access Definition, adjoint algebra, projection, ordered tensor, control/inverse and cost interfaces. The clean-input embedding J is an isometry; V_P J=T tensor |0W>, so conjugation of 2JJ*-I gives 2(TT* tensor |0W><0W|)-I on the entire workspace. Restriction to h tensor |0W> implements the logical reflection and restores clean work; swap also preserves clean work. Right-to-left order charges one inverse, clean reflection, forward preparation and swap. Factorwise control yields identity in control-zero and the full word in control-one; two repetitions implement W with clean return between them. This counts the specified construction, not an optimal query lower bound; no efficient circuit is inferred from P. Nonempty X ensures a clean second-register label, singleton and zero amplitudes are allowed. De Wolf §8.2 printed p.66 confirms conjugated-reflection implementation. Reader/refuter have no findings; no defect or AC use found."
+      }
+    },
+    "cex-qa-17-zero-stationary-weight": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "A **finite row-stochastic kernel** is a finite set $X$ and a matrix $P=(P_{xy})_{x,y\\in X}$ with $P_{xy}\\in[0,1]$ and\n\n$$\\sum_{y\\in X}P_{xy}=1\\qquad(x\\in X).$$\n\nThe row convention is $P_{xy}=\\Pr(Y=y\\mid X=x)$: distributions are row vectors and one transition sends $\\mu$ to $\\mu P$. If $X=\\varnothing$, the row conditions are vacuous and there is no probability distribution on $X$. No stationary distribution, reversibility, irreducibility, aperiodicity, or efficient circuit access is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-17-szegedy-transition-isometry",
+          "source_section": "Definition",
+          "quote": "For a finite row-stochastic kernel $(X,P)$, let $\\mathbb C^X$ and $\\mathbb C^{X\\times X}$ carry the standard orthonormal label and ordered-product bases. If $X\\ne\\varnothing$, these coordinate spaces are implemented as two ordered registers; if $X=\\varnothing$, they are zero spaces and every map below is the unique zero-dimensional map. Define the row-preparation linear map $T:\\mathbb C^X\\to\\mathbb C^{X\\times X}$ and the swap $S$ on basis vectors by\n\n$$T|x\\rangle=|x\\rangle\\otimes\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,\\qquad S|x,y\\rangle=|y,x\\rangle.$$\n\nEvery scalar square root is the unique nonnegative real root. Define the **discriminant** by $D:=T^*ST$, using the adjoint characterized by $\\langle Tv,w\\rangle=\\langle v,T^*w\\rangle$ for the root inner product, which is linear in its first argument. The row-preparation map is an isometry; its complete verification is [[thm-qa-17-discriminant-self-adjoint]]. This is the general row-stochastic construction and assumes no reversibility.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each row of $P$ is a probability vector, and $\\pi P=(1,0)=\\pi$, so $\\pi$ is stationary.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The second coordinate has $\\pi_1=0$, so the diagonal matrix $\\operatorname{diag}(1/\\sqrt{\\pi_0},1/\\sqrt{\\pi_1})$ is undefined over $\\mathbb R$; hence the proposed full-state similarity matrix is not defined.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The proposed assertion identifies the full-state expression with the discriminant $D$ of [F3] and requires the displayed matrix to be defined for every stationary probability vector. Step 1.2 shows it is undefined for this valid stationary vector, so the universal assertion is false. A restriction to the positive support is a different statement.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness is the two-state chain with stationary law (1,0). Its second coordinate is essential to the undefined reciprocal square root, so removing every state would not be this counterexample.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root (focused current boundary refinement)",
+            "reason": "The witness is the two-state chain with stationary law (1,0). Its second coordinate is essential to the undefined reciprocal square root, so removing every state would not be this counterexample.",
+            "item_sha256": "d96c7be3f7b3c3442fdcae4f7c5c79f42da7f161a5fb4caa59a98cbfb4b3fc2c",
+            "row_sha256": "ae223aa2cc362879231e9494dc262907044f184d4af183decfff697defece296",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-root.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample’s stationary vector has a zero coordinate, and proof step 1.2 identifies the undefined inverse. Step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The calculation uses the displayed two-state matrix. A one-state replacement is outside this fixed example and is unnecessary to establish its conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The calculation uses the displayed two-state matrix. A one-state replacement is outside this fixed example and is unnecessary to establish its conclusion.",
+            "item_sha256": "d96c7be3f7b3c3442fdcae4f7c5c79f42da7f161a5fb4caa59a98cbfb4b3fc2c",
+            "row_sha256": "b7ba1b3e0f26095ed45bebfb75e8f1c48aa6cc07c52bc53c760399a58d8372db",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two-state absorbing chain in the counterexample is reducible. Step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement refuted is defeated by a single fixed matrix, not a varying interval parameter; the zero-coordinate/zero-transition features of that matrix are the actual counterexample cases.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The Statement refuted is defeated by a single fixed matrix, not a varying interval parameter; the zero-coordinate/zero-transition features of that matrix are the actual counterexample cases.",
+            "item_sha256": "d96c7be3f7b3c3442fdcae4f7c5c79f42da7f161a5fb4caa59a98cbfb4b3fc2c",
+            "row_sha256": "02bd74ae472350a7374ecc4bace6bdf307cec0b163d4edde8d7bfd023a9fe7a9",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The fixed two-state P and pi=(1,0) witness an undefined reciprocal square root in step 1.2 and refute a universal assertion in step 2.1. There is no equivalence to reverse or unspecified witness family to select.",
+            "item_sha256": "d96c7be3f7b3c3442fdcae4f7c5c79f42da7f161a5fb4caa59a98cbfb4b3fc2c",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Counterexample steps 1.1–2.1 refute a universal full-state similarity assertion using pi=(1,0), where 1/sqrt(pi_1) is undefined. The claim being refuted is universal, rather than an equivalence between positivity and similarity.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Counterexample steps 1.1–2.1 refute a universal full-state similarity assertion using pi=(1,0), where 1/sqrt(pi_1) is undefined. The claim being refuted is universal, rather than an equivalence between positivity and similarity.",
+            "item_sha256": "d96c7be3f7b3c3442fdcae4f7c5c79f42da7f161a5fb4caa59a98cbfb4b3fc2c",
+            "row_sha256": "98d5eda259491c0f601e344e45d7a417c2c06db29c73652f8216d9ab15d0d6a4",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Counterexample steps 1.1–2.1 refute a universal full-state similarity assertion using pi=(1,0), where 1/sqrt(pi_1) is undefined. The claim being refuted is universal, rather than an equivalence between positivity and similarity.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Counterexample steps 1.1–2.1 refute a universal full-state similarity assertion using pi=(1,0), where 1/sqrt(pi_1) is undefined. The claim being refuted is universal, rather than an equivalence between positivity and similarity.",
+            "item_sha256": "d96c7be3f7b3c3442fdcae4f7c5c79f42da7f161a5fb4caa59a98cbfb4b3fc2c",
+            "row_sha256": "70849315f5ef4614d75095fb8db4f6bd8a5385c17242bce9142323f4f7406008",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ]
+    },
+    "cex-qa-17-nonreversible-discriminant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "A **finite row-stochastic kernel** is a finite set $X$ and a matrix $P=(P_{xy})_{x,y\\in X}$ with $P_{xy}\\in[0,1]$ and\n\n$$\\sum_{y\\in X}P_{xy}=1\\qquad(x\\in X).$$\n\nThe row convention is $P_{xy}=\\Pr(Y=y\\mid X=x)$: distributions are row vectors and one transition sends $\\mu$ to $\\mu P$. If $X=\\varnothing$, the row conditions are vacuous and there is no probability distribution on $X$. No stationary distribution, reversibility, irreducibility, aperiodicity, or efficient circuit access is part of this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-reversible-measure-and-detailed-balance",
+          "source_section": "Definition",
+          "quote": "Let $p$ be the transition matrix of a countable state space $E$\n([[def-transition-matrix-and-n-step-transition-probabilities]]), so that\n$p(x,y)\\ge0$ and $\\sum_{y\\in E}p(x,y)=1$ for every $x\\in E$. A **state measure**\nis a function $\\mu:E\\to[0,+\\infty)$ with $\\mu(x)<+\\infty$ for every $x$; it is\n**nonzero** when $\\mu(x)>0$ for at least one $x$. Such a measure $\\mu$ is\n**reversible** for $p$, and $\\mu$ satisfies **detailed balance** for $p$, when\n\n$$\\mu(x)\\,p(x,y)=\\mu(y)\\,p(y,x)\\qquad\\text{for all }x,y\\in E .$$\n\nIf in addition $\\sum_{x\\in E}\\mu(x)=1$, then $\\mu$ is a **reversible\nprobability distribution** for $p$.\n\nBecause each value $\\mu(x)$ is finite and each transition entry lies in $[0,1]$,\nevery product $\\mu(x)p(x,y)$ is a well-defined element of $[0,+\\infty)$; the\nidentity is between nonnegative numbers and involves no subtraction of infinite\nquantities. Every entry $p(x,x)$ satisfies the identity trivially, including\nwhen $\\mu(x)=0$. A state with $\\mu(x)=0$ may have $p(x,\\cdot)$ arbitrary; the\nidentity then forces $\\mu(y)p(y,x)=0$ for all $y$, so no flow from the positive\nsupport of $\\mu$ enters $x$. The definition imposes no irreducibility,\naperiodicity or normalization hypothesis, and a nonzero reversible measure may\nhave infinite total mass; normalization to total mass one is stated separately.\nThe reversal interpretation of detailed balance is given by\n[[thm-time-reversal-of-a-stationary-markov-chain]], and the lemma\n[[lem-detailed-balance-implies-invariance]] shows that a reversible measure is\ninvariant even when its total mass is infinite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-17-discriminant-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For every finite row-stochastic kernel, the map $T$ of [[def-qa-17-szegedy-transition-isometry]] satisfies $T^*T=I$ and is an isometry, and the matrix entries of $D=T^*ST$ are\n\n$$D_{xy}=\\sqrt{P_{xy}P_{yx}}.$$\n\nHence $D$ is real symmetric, self-adjoint, and $\\|D\\|\\le1$. If $(X,P,\\pi)$ is also finite reversible, then\n\n$$D=\\operatorname{diag}(\\sqrt\\pi)\\,P\\,\\operatorname{diag}(1/\\sqrt\\pi).$$\n\nEvery eigenvalue of $D$ is real and belongs to $[-1,1]$. The empty state set has the zero endomorphism and empty spectrum; the similarity assertion is only made when a positive stationary probability vector is supplied.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every row of $P$ has one entry equal to $1$, and each column also has one such entry, so $P$ is row-stochastic and $\\pi P=\\pi$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Detailed balance fails at $(x,y)=(0,1)$ because $\\pi_0P_{01}=1/3$ but $\\pi_1P_{10}=0$. Thus the chain is stationary but not reversible.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "No pair of distinct states has transitions in both directions, and all diagonal entries are zero, so $P_{xy}P_{yx}=0$ for every $x,y$ and [F4] gives $D=0$. Since the stationary vector is uniform, its diagonal similarity transform is $\\operatorname{diag}(\\sqrt\\pi)P\\operatorname{diag}(1/\\sqrt\\pi)=P\\ne0$. The claimed identity fails.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed witness/family has exactly three states; no assertion about an empty witness is needed for its stated calculation or refutation.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The displayed witness/family has exactly three states; no assertion about an empty witness is needed for its stated calculation or refutation.",
+            "item_sha256": "b032661f0a406b57abc64c0def722ebb8bdea1a09ec26e7c74fb2095850f17a4",
+            "row_sha256": "0cd5c14b0bfca88221292afc0dc8f5339fc38f91a6a9435a309dd799606bfd46",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 3.1 computes zero discriminant entries for all directed-cycle pairs. Step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The calculation uses the displayed three-state matrix. A one-state replacement is outside this fixed example and is unnecessary to establish its conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The calculation uses the displayed three-state matrix. A one-state replacement is outside this fixed example and is unnecessary to establish its conclusion.",
+            "item_sha256": "b032661f0a406b57abc64c0def722ebb8bdea1a09ec26e7c74fb2095850f17a4",
+            "row_sha256": "35d61714b9fe5eba1fe3a7bcce98bfe1dabb62ae8dc17f41774389c4f55bfe50",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 gives an explicit detailed-balance failure despite stationarity. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement refuted is defeated by a single fixed matrix, not a varying interval parameter; the zero-coordinate/zero-transition features of that matrix are the actual counterexample cases.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The Statement refuted is defeated by a single fixed matrix, not a varying interval parameter; the zero-coordinate/zero-transition features of that matrix are the actual counterexample cases.",
+            "item_sha256": "b032661f0a406b57abc64c0def722ebb8bdea1a09ec26e7c74fb2095850f17a4",
+            "row_sha256": "02bd74ae472350a7374ecc4bace6bdf307cec0b163d4edde8d7bfd023a9fe7a9",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The specified directed three-cycle has uniform stationary law but D=0 distinct from P in step 3.1. It refutes the unrestricted similarity assertion, not an iff, and the matrices and vector are explicitly written.",
+            "item_sha256": "b032661f0a406b57abc64c0def722ebb8bdea1a09ec26e7c74fb2095850f17a4",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use the directed three-cycle with uniform stationary law to obtain D=0 but stationary similarity=P≠0. This refutes the claimed universal extension without detailed balance, rather than proving an iff characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use the directed three-cycle with uniform stationary law to obtain D=0 but stationary similarity=P≠0. This refutes the claimed universal extension without detailed balance, rather than proving an iff characterization.",
+            "item_sha256": "b032661f0a406b57abc64c0def722ebb8bdea1a09ec26e7c74fb2095850f17a4",
+            "row_sha256": "48bb062833418364246d0202f6a3cd8d749926b5bf002cf2d2dc21d1cf69cdcb",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use the directed three-cycle with uniform stationary law to obtain D=0 but stationary similarity=P≠0. This refutes the claimed universal extension without detailed balance, rather than proving an iff characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use the directed three-cycle with uniform stationary law to obtain D=0 but stationary similarity=P≠0. This refutes the claimed universal extension without detailed balance, rather than proving an iff characterization.",
+            "item_sha256": "b032661f0a406b57abc64c0def722ebb8bdea1a09ec26e7c74fb2095850f17a4",
+            "row_sha256": "5f9586694b732e3d2d86e5dd4d2724ea7219f37d15a69a217d7559c91d0c1eb8",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed all three counterexample steps against current row-stochastic, stationarity, detailed-balance definitions and discriminant theorem. The directed 3-cycle has one unit in each row and column, so uniform pi is positive stationary; balance fails at (0,1). Every reciprocal product including the diagonal is zero, giving D=0, while the uniform stationary similarity equals nonzero P. Thus the stated universal equality is refuted; the title is also sound since no nonzero matrix is similar to zero. Modulo 3 labels only a finite explicit witness, with no quotient prerequisite or AC. Childs §18.3 gives the general discriminant formula independently verified locally. Reader/refuter have no findings; no defect found."
+      }
+    },
+    "ex-qa-17-period-two-walk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-finite-reversible-chain",
+          "source_section": "Definition",
+          "quote": "A **finite reversible Markov chain** is a finite row-stochastic kernel $(X,P)$ together with a supplied probability vector $\\pi=(\\pi_x)_{x\\in X}$ such that $\\pi_x>0$ for every $x$, $\\sum_x\\pi_x=1$, $\\pi P=\\pi$, and\n\n$$\\pi_xP_{xy}=\\pi_yP_{yx}\\qquad(x,y\\in X).$$\n\nThe stationary law and detailed balance are explicit input hypotheses; the definition does not invoke a theorem that produces a stationary law. No irreducibility or aperiodicity is assumed. In particular, a periodic reversible chain is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-period-of-a-state",
+          "source_section": "Definition",
+          "quote": "For $x\\in E$, let\n\n$$R_x:=\\{n\\in\\mathbb N:n\\ge1\\text{ and }p^{(n)}(x,x)>0\\}.$$\n\nIf $R_x=\\varnothing$, set $d(x):=0$. If $R_x\\ne\\varnothing$, define $d(x)$ to be the greatest positive integer dividing every element of $R_x$ (the gcd convention of [[def-common-divisor-and-gcd]]). This greatest divisor exists: fix one $t\\in R_x$; every common positive divisor of $R_x$ is a divisor of $t$, so the set of such divisors is a nonempty finite subset of the positive divisors of $t$, and therefore has a greatest element. The set being maximized is intrinsic to $R_x$, so the result is independent of the auxiliary $t$. Only positive return times enter; $p^{(0)}(x,x)=1$ does not force $d(x)=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-17-absolute-spectral-gap",
+          "source_section": "Definition",
+          "quote": "For a finite reversible chain $(X,P,\\pi)$, let $H_0=\\{f:\\sum_x\\pi_xf_x=0\\}$ with the weighted inner product from [[lem-qa-17-reversible-transition-self-adjoint-on-l2-pi]]. Define its **absolute spectral gap** by\n\n$$\\delta_{\\mathrm{abs}}(P):=1-\\|P|_{H_0}\\|_{2,\\pi}.$$\n\nThe norm of the restriction to the zero subspace is $0$ by [[def-operator-norm-on-a-finite-dimensional-inner-product-space]], so a one-state chain has absolute gap $1$. No irreducibility or aperiodicity is built into this definition: a reducible chain with a nonconstant stationary vector in $H_0$ can have gap $0$, and a periodic chain can have gap $0$ because of an eigenvalue $-1$. The eigenvalue form of the definition is proved in [[thm-qa-17-absolute-gap-eigenvalue-characterization]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both rows of $P$ sum to one, $\\pi P=\\pi$, and $\\pi_0P_{01}=\\pi_1P_{10}=1/2$; the diagonal detailed-balance equations are automatic. Hence $(X,P,\\pi)$ is a finite reversible chain.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Starting from either state, a return occurs exactly at positive even times, so the return-time set is $\\{2,4,6,\\ldots\\}$ and its gcd is $2$. The chain is period two.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The constant vector $\\mathbf1=(1,1)$ has eigenvalue $1$, while $h=(1,-1)$ spans $H_0$ and satisfies $Ph=-h$. Thus the restriction to $H_0$ has norm $1$, so [F3] gives $\\delta_{\\mathrm{abs}}(P)=0$. The eigenvalues of $P$ are exactly $1$ and $-1$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed transition exchanges two states with equal stationary weights. Its positive return times are the even integers, whose gcd is two; the calculation makes no claim about an absent state space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root (focused current boundary refinement)",
+            "reason": "The fixed transition exchanges two states with equal stationary weights. Its positive return times are the even integers, whose gcd is two; the calculation makes no claim about an absent state space.",
+            "item_sha256": "9ae913e359e11ab6d92602d5e067d7d864df5ec59283e6644fcafb5a42b47c47",
+            "row_sha256": "748e6694dd9ad98ba133860b1edc24b310f5826929a573c2984d7aa0682c1e52",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-root.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 computes absolute gap zero. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The calculation uses the displayed two-state matrix. A one-state replacement is outside this fixed example and is unnecessary to establish its conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The calculation uses the displayed two-state matrix. A one-state replacement is outside this fixed example and is unnecessary to establish its conclusion.",
+            "item_sha256": "9ae913e359e11ab6d92602d5e067d7d864df5ec59283e6644fcafb5a42b47c47",
+            "row_sha256": "b7ba1b3e0f26095ed45bebfb75e8f1c48aa6cc07c52bc53c760399a58d8372db",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example is periodic, as verified by the return-time gcd in proof step 1.2. Step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 computes the eigenvalue -1, an endpoint of the stochastic spectrum. Step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "The fixed alternating two-state chain has period 2 and mean-zero eigenvalue -1 by steps 1.2–2.1. These computations are not equivalences, and the spanning vector h=(1,-1) is explicit.",
+            "item_sha256": "9ae913e359e11ab6d92602d5e067d7d864df5ec59283e6644fcafb5a42b47c47",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.2 computes the positive even return times and their gcd 2; step 2.1 computes eigenvalues ±1 and absolute gap 0 for this fixed chain. These are computations of one example, without a converse criterion for period two.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.2 computes the positive even return times and their gcd 2; step 2.1 computes eigenvalues ±1 and absolute gap 0 for this fixed chain. These are computations of one example, without a converse criterion for period two.",
+            "item_sha256": "9ae913e359e11ab6d92602d5e067d7d864df5ec59283e6644fcafb5a42b47c47",
+            "row_sha256": "7012a8eecb84efd2bc43ed9dda5e85d7faf03933a54b0924436552efb6eb4a01",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.2 computes the positive even return times and their gcd 2; step 2.1 computes eigenvalues ±1 and absolute gap 0 for this fixed chain. These are computations of one example, without a converse criterion for period two.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.2 computes the positive even return times and their gcd 2; step 2.1 computes eigenvalues ±1 and absolute gap 0 for this fixed chain. These are computations of one example, without a converse criterion for period two.",
+            "item_sha256": "9ae913e359e11ab6d92602d5e067d7d864df5ec59283e6644fcafb5a42b47c47",
+            "row_sha256": "2f29e2c66cbc4fa15b3aa4fdd087e8de306f64e1dde8b80323a97ea2d110dbec",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed Verification 1.1–2.1 and exact period, positive reversible-chain, gap and eigenvalue interfaces. The supplied swap is stochastic, uniform stationary and balanced; returns occur exactly at positive even times, with gcd two. Constant and mean-zero vectors form a basis with eigenvalues +1 and -1, so the restricted norm is exactly one and absolute gap zero. There is no assertion that reversibility excludes periodicity or forces positive gap. De Wolf §8.1 uses absolute eigenvalue modulus and separately excludes bipartite graphs for convergence; this example correctly exposes that boundary. Reader/refuter have no findings; no defect or choice use found."
+      }
+    },
+    "ex-qa-17-two-state-reversible-walk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-17-finite-reversible-chain",
+          "source_section": "Definition",
+          "quote": "A **finite reversible Markov chain** is a finite row-stochastic kernel $(X,P)$ together with a supplied probability vector $\\pi=(\\pi_x)_{x\\in X}$ such that $\\pi_x>0$ for every $x$, $\\sum_x\\pi_x=1$, $\\pi P=\\pi$, and\n\n$$\\pi_xP_{xy}=\\pi_yP_{yx}\\qquad(x,y\\in X).$$\n\nThe stationary law and detailed balance are explicit input hypotheses; the definition does not invoke a theorem that produces a stationary law. No irreducibility or aperiodicity is assumed. In particular, a periodic reversible chain is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-17-discriminant-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For every finite row-stochastic kernel, the map $T$ of [[def-qa-17-szegedy-transition-isometry]] satisfies $T^*T=I$ and is an isometry, and the matrix entries of $D=T^*ST$ are\n\n$$D_{xy}=\\sqrt{P_{xy}P_{yx}}.$$\n\nHence $D$ is real symmetric, self-adjoint, and $\\|D\\|\\le1$. If $(X,P,\\pi)$ is also finite reversible, then\n\n$$D=\\operatorname{diag}(\\sqrt\\pi)\\,P\\,\\operatorname{diag}(1/\\sqrt\\pi).$$\n\nEvery eigenvalue of $D$ is real and belongs to $[-1,1]$. The empty state set has the zero endomorphism and empty spectrum; the similarity assertion is only made when a positive stationary probability vector is supplied.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-17-szegedy-transition-isometry",
+          "source_section": "Definition",
+          "quote": "For a finite row-stochastic kernel $(X,P)$, let $\\mathbb C^X$ and $\\mathbb C^{X\\times X}$ carry the standard orthonormal label and ordered-product bases. If $X\\ne\\varnothing$, these coordinate spaces are implemented as two ordered registers; if $X=\\varnothing$, they are zero spaces and every map below is the unique zero-dimensional map. Define the row-preparation linear map $T:\\mathbb C^X\\to\\mathbb C^{X\\times X}$ and the swap $S$ on basis vectors by\n\n$$T|x\\rangle=|x\\rangle\\otimes\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,\\qquad S|x,y\\rangle=|y,x\\rangle.$$\n\nEvery scalar square root is the unique nonnegative real root. Define the **discriminant** by $D:=T^*ST$, using the adjoint characterized by $\\langle Tv,w\\rangle=\\langle v,T^*w\\rangle$ for the root inner product, which is linear in its first argument. The row-preparation map is an isometry; its complete verification is [[thm-qa-17-discriminant-self-adjoint]]. This is the general row-stochastic construction and assumes no reversibility.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-17-szegedy-walk",
+          "source_section": "Definition",
+          "quote": "For the finite row-stochastic kernel and row-preparation map of [[def-qa-17-szegedy-transition-isometry]], let $\\Pi:=TT^*$, the orthogonal projection onto $\\operatorname{ran}(T)$, and choose the reflection sign\n\n$$R_A:=2\\Pi-I.$$\n\nWith $S$ the two-register swap, define the one-reflection Szegedy step and its square by\n\n$$U:=S R_A,\\qquad W:=U^2=(S R_A S)R_A=(2S\\Pi S-I)(2\\Pi-I).$$\n\nProducts act right to left. This fixes $U$ and $W$ as different operators. Algebraically, if $Uv=\\mu v$, then $Wv=\\mu^2v$ on the same vector. The other common reflection sign is $I-2\\Pi=-R_A$ and is not interchangeable inside a controlled operation.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-17-invariant-eigenplane",
+          "source_section": "Statement",
+          "quote": "For any eigenpair $Dv=\\lambda v$ with $v\\ne0$ and $\\lambda\\in[-1,1]$, put $a:=Tv$ and $b:=STv$. Then $\\operatorname{span}\\{a,b\\}$ is invariant under $U$, and\n\n$$U a=b,\\qquad U b=-a+2\\lambda b.$$\n\nAll eigenvalues of $D$ satisfy the displayed interval hypothesis by [[thm-qa-17-discriminant-self-adjoint]]. If $\\lambda=1$ or $\\lambda=-1$, then $b=\\lambda a$ and the span is one-dimensional. If $-1<\\lambda<1$, the two vectors are linearly independent and the invariant subspace is two-dimensional.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-17-walk-reflection-unitarity",
+          "source_section": "Statement",
+          "quote": "For the projection $\\Pi=TT^*$ onto $A=\\operatorname{ran}(T)$, the operators $R_A=2\\Pi-I$ and $S$ are self-adjoint involutions. Hence $U=SR_A$ and $W=U^2$ are unitary. On $A^\\perp$, $\\Pi=0$ and therefore $U=-S$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qa-17-szegedy-spectral-mapping",
+          "source_section": "Statement",
+          "quote": "Let $D=T^*ST$ be the discriminant of a finite row-stochastic kernel and let $U=S(2TT^*-I)$ and $W=U^2$. For every eigenvalue $\\lambda\\in(-1,1)$ of $D$, counted with multiplicity, its invariant planes contribute eigenvalues\n\n$$\\exp(i\\arccos\\lambda),\\ \\exp(-i\\arccos\\lambda)\\quad\\text{for }U,\\qquad \\exp(2i\\arccos\\lambda),\\ \\exp(-2i\\arccos\\lambda)\\quad\\text{for }W.$$\n\nFor each eigendirection with $\\lambda=1$ (respectively $\\lambda=-1$), the plane collapses to a line on which $U$ acts as $+I$ (respectively $-I$), so $W$ acts as $+I$. On the remaining subspace $K=(\\operatorname{ran}T+\\operatorname{ran}(ST))^\\perp$, $U=-S$ and its eigenvalues lie in $\\{+1,-1\\}$; therefore all eigenvalues of $W$ there are $+1$. If $X=\\varnothing$, both spaces are zero and the statements about eigenvalues are vacuous.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-linear-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are\nlinear subspaces. Moreover, $T$ is injective if and only if $\\ker T=\\{0_V\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "For a linear subspace $W$ ([[def-linear-subspace]]) of an inner product space $V$, using the preceding notion of orthogonality ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]), its **orthogonal complement** is\n\n$$W^\\perp:=\\{v\\in V:\\langle v,w\\rangle=0\\text{ for every }w\\in W\\}.$$\n\nThis is a linear subspace: $0\\in W^\\perp$, and linearity in the first argument shows that $au+bv\\in W^\\perp$ whenever $u,v\\in W^\\perp$ and $a,b$ are scalars. One has $V^\\perp=\\{0\\}$ by positive definiteness and $\\{0\\}^\\perp=V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both rows of $P_a$ sum to one, $\\pi P_a=\\pi$, and $P_a$ is symmetric, so $\\pi_x(P_a)_{xy}=\\pi_y(P_a)_{yx}$ for all $x,y$. Thus $\\pi$ is a positive stationary reversible law.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $P_a$ is symmetric and has nonnegative entries, [F2] gives $D=P_a$. The vectors $u_+=(1,1)$ and $u_-=(1,-1)$ form a basis with $Du_+=u_+$ and $Du_-=(1-2a)u_-$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "At $a=0$, $T|0\\rangle=|00\\rangle$ and $T|1\\rangle=|11\\rangle$, so $A=B=\\operatorname{span}\\{|00\\rangle,|11\\rangle\\}$. On $A$, $R_A=2TT^*-I$ is $+I$ and $S=I$, so $U=+I$. On $K=\\operatorname{span}\\{|01\\rangle,|10\\rangle\\}$, [F6] gives $U=-S$, whose eigenvectors $|01\\rangle+|10\\rangle$ and $|01\\rangle-|10\\rangle$ have eigenvalues $-1$ and $+1$. Hence $\\sigma_{\\mathrm{mult}}(U)=\\{1,1,1,-1\\}$ and $W=I$ has four eigenvalues $+1$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "At $a=1$, $T|0\\rangle=|01\\rangle$ and $T|1\\rangle=|10\\rangle$, so $A=B=\\operatorname{span}\\{|01\\rangle,|10\\rangle\\}$. On $A$, $R_A=+I$ and $U=S$, with eigenvalues $+1,-1$. On $K=\\operatorname{span}\\{|00\\rangle,|11\\rangle\\}$, $S=I$, so [F6] gives $U=-I$. Thus $\\sigma_{\\mathrm{mult}}(U)=\\{1,-1,-1,-1\\}$ and $W=I$ has four eigenvalues $+1$.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $0<a<1$ and set $\\lambda=1-2a\\in(-1,1)$ and $\\theta=\\arccos\\lambda\\in(0,\\pi)$. By [F7], the $u_+$ endpoint line contributes $+1$ to $U$ and $W$, and the $u_-$ invariant plane contributes $e^{i\\theta},e^{-i\\theta}$ to $U$ and $e^{2i\\theta},e^{-2i\\theta}$ to $W$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the hypothesis of step 2.1, put $r=\\sqrt{1-a}$ and $s=\\sqrt a$. Let $A=\\operatorname{im}T$ and $B=\\operatorname{im}(ST)$; these are subspaces by [F9]–[F10]. By [F3], their spanning vectors are $T|0\\rangle=r|00\\rangle+s|01\\rangle$, $T|1\\rangle=s|10\\rangle+r|11\\rangle$, $ST|0\\rangle=r|00\\rangle+s|10\\rangle$, and $ST|1\\rangle=s|01\\rangle+r|11\\rangle$. The vector $k=(s|00\\rangle-r|01\\rangle-r|10\\rangle+s|11\\rangle)/\\sqrt2$ has norm one because $r^2+s^2=1$ and is orthogonal to each spanning vector by cancellation of the two $rs$ terms. Hence [F11] gives $0\\ne k\\in K:=(A+B)^\\perp$; since the product register has dimension four, [F12] implies $\\dim(A+B)\\le3$. By [F5], $STu_+=Tu_+$ gives a common nonzero vector in $A\\cap B$, while $Tu_-$ and $STu_-$ are linearly independent because $-1<\\lambda<1$. These two vectors are orthogonal to the common vector: $\\langle Tu_+,Tu_-\\rangle=\\langle STu_+,STu_-\\rangle=0$ by isometry of $T$ and unitarity of $S$, and $\\langle Tu_+,STu_-\\rangle=\\langle u_+,Du_-\\rangle=0$ by the distinct eigenvalues in step 1.2; the reverse cross-pairing vanishes by conjugate symmetry. Thus $\\dim(A+B)\\ge3$, so it is exactly $3$ and $K$ is one-dimensional, hence $K=\\operatorname{span}\\{k\\}$. The coefficients of $|01\\rangle$ and $|10\\rangle$ in $k$ are equal, so [F3] gives $Sk=k$. By [F6], $U=-S=-I$ on $K$. Combining this complement eigenvalue with the line and plane eigenvalues from step 2.1 yields $\\sigma_{\\mathrm{mult}}(U)=\\{1,-1,e^{i\\theta},e^{-i\\theta}\\}$ and $\\sigma_{\\mathrm{mult}}(W)=\\{1,1,e^{2i\\theta},e^{-2i\\theta}\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every member of the displayed parameter family remains a two-by-two chain, including the disconnected and deterministic endpoint matrices. The four-dimensional walk register is not removed at either endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root (focused current boundary refinement)",
+            "reason": "Every member of the displayed parameter family remains a two-by-two chain, including the disconnected and deterministic endpoint matrices. The four-dimensional walk register is not removed at either endpoint.",
+            "item_sha256": "7c8b067ccee9aaa81ba217b3443085b56115dc257f68c068d029b36bf7105b33",
+            "row_sha256": "f742d981147dd032e54483f3bb2297d6f8a1091ed9b0466daa36ad335478c0fe",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-root.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At a=0 and a=1 the transition matrix has zero entries; proof steps 1.3–1.4 compute the endpoint operators. Step 1.4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is a two-state family, so a one-state case is outside its stated setup."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.3–1.4 compute the degenerate endpoint subspaces directly. Step 1.4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.3 and 1.4 give complete eigenvalue multisets for a=0 and a=1. Step 1.4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim makes no nonempty-choice or selection assertion; no arbitrary choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u2 (focused boundary review)",
+            "reason": "The family supplies P_a and pi=(1/2,1/2). Verification 1.3-1.4 calculates a=0 and a=1 directly; 3.1 explicitly gives the interior complement vector k and proves it spans K. These finite formulas require no selection of a stationary law or arbitrary family of eigenvectors.",
+            "item_sha256": "1e69c18078530c8c117647e2aeea579a23204b34027b38999566893af06af8a9",
+            "row_sha256": "3904265d36436444d61ef462af0c1eea064f07ec18a60eb03e362d3a6fd9014e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-gate-r1-u2.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.2–3.1 computes the whole U and W multisets for P_a, including separately calculated a=0 and a=1 complements. The requested output is a spectral calculation for the given family, rather than an equivalence of two independently quantified properties.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.2–3.1 computes the whole U and W multisets for P_a, including separately calculated a=0 and a=1 complements. The requested output is a spectral calculation for the given family, rather than an equivalence of two independently quantified properties.",
+            "item_sha256": "7c8b067ccee9aaa81ba217b3443085b56115dc257f68c068d029b36bf7105b33",
+            "row_sha256": "9b02f2e7e5518658b7ca8fdaee3cc68a1ec6413cb4f2a09d2dbf1f77cef8854b",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.2–3.1 computes the whole U and W multisets for P_a, including separately calculated a=0 and a=1 complements. The requested output is a spectral calculation for the given family, rather than an equivalence of two independently quantified properties.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.2–3.1 computes the whole U and W multisets for P_a, including separately calculated a=0 and a=1 complements. The requested output is a spectral calculation for the given family, rather than an equivalence of two independently quantified properties.",
+            "item_sha256": "7c8b067ccee9aaa81ba217b3443085b56115dc257f68c068d029b36bf7105b33",
+            "row_sha256": "86a54941546ff2a433124dabb2c9c03e7491c93eff4761b4178d972fe5ba3a4e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Reviewed all six verification steps against current reversible-chain, discriminant, eigenplane, unitarity, spectral-mapping, image and orthogonal-decomposition interfaces. Symmetry/nonnegativity give D=P_a, with eigenvalues 1 and 1-2a. At a=0, the diagonal range contributes two +1 values and off-diagonal complement contributes ±1; at a=1, the off-diagonal range contributes ±1 and diagonal complement contributes two -1 values. For 0<a<1 the +1 line and interior plane are orthogonal. The displayed unit vector k is orthogonal to all four spanning vectors and swap-symmetric; dimension bounds make it the full one-dimensional complement, adding -1 to U and +1 to W. Hence all four eigenvalues, with repetitions, are accounted for, including coincident doubled phases at a=1/2. Childs §18.3 and de Wolf §8.2 support the adopted U/W conventions; the example computations are local. Reader/refuter have no findings; no defect or choice use found."
+      }
+    }
+  }
+}

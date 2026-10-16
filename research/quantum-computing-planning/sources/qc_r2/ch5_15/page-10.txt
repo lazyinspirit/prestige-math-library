@@ -1,0 +1,53 @@
+10
+5 Classical and quantum circuits
+
+whether any input x is accepted by C. The function to be evaluated is
+
+f(C) =
+�
+1
+if there exists x with C(x) = 1,
+0
+otherwise.
+(5.21)
+
+This problem is in NP because if the circuit C has polynomial size, then
+if we are provided with an input x accepted by C it is easy to check that
+C(x) = 1.
+The problem CIRCUIT-SAT is particularly interesting because it has a
+remarkable property — if we have a machine that solves CIRCUIT-SAT
+we can use it to solve any other problem in NP. We say that every problem
+in NP is (efficiently) reducible to CIRCUIT-SAT. More generally, we say
+that problem B reduces to problem A if a machine that solves A can be
+used to solve B as well.
+That is, if A and B are Boolean function families, then “B reduces to
+A” means there is a function family R, computed by poly-size circuits,
+such that B(x) = A(R(x)). Thus B accepts x iff A accepts R(x). In
+particular, then, if we have a poly-size circuit family that solves A, we
+can hook A up with R to obtain a poly-size circuit family that solves B.
+A problem B in NP reduces to CIRCUIT-SAT because problem B has
+a poly-size verifier V (x, y), such that B accepts x iff there exists some
+witness y such that V accepts (x, y). For each fixed x, asking whether
+such a witness y exists is an instance of CIRCUIT-SAT. So a poly-size
+circuit family that solves CIRCUIT-SAT can also be used to solve problem
+B.
+We say a problem A in NP is NP-complete if every problem in NP is
+reducible to A. Hence, CIRCUIT-SAT is NP-complete. The NP-complete
+problems are the “hardest” problems in NP, in the sense that if we can
+solve any NP-complete problem then we can solve every NP problem.
+Furthermore, to show that problem A is NP-complete, it is enough to
+show that B reduces to A where B is NP-complete. If C is any problem in
+NP and B is NP-complete then there is a poly-size reduction R such that
+C(x) = B(R(x)), and if B is reducible to A then there is another poly-size
+reduction R′ such that B(y) = A(R′(y)). Hence C(x) = A(R′(R(x))), and
+since the composition R′ ◦R of two poly-size reductions is also poly-size,
+we see that an arbitrary problem C in NP reduces to A, and therefore A
+is NP-complete. NP-completeness is a useful concept because hundreds
+of “natural” computational problems turn out to be NP-complete. For
+example, one can exhibit a polynomial reduction of CIRCUIT-SAT to
+HAMILTONIAN PATH, and it follows that HAMILTONIAN PATH is
+also NP-complete.
+Another noteworthy complexity class is called co-NP. While NP prob-
+lems can be decided by exhibiting an example if the answer is YES, co-NP
+
+

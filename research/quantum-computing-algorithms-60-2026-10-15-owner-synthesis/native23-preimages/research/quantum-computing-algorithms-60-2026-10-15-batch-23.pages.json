@@ -1,0 +1,828 @@
+[
+  {
+    "order": 2210,
+    "id": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Circuit Optimization, Resource Tradeoffs, and Lower Bounds",
+    "companion": "circuit-optimization-resource-tradeoffs-and-lower-bounds-examples",
+    "requires": [
+      "approximate-universality-and-solovay-kitaev",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "clifford-t-exact-and-approximate-synthesis",
+      "continuous-gate-universality-and-exact-synthesis",
+      "counting-complexity-and-sharpp",
+      "effective-numberings-reductions-resources-and-randomness",
+      "formal-languages-encodings-and-decision-problems",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "uniform-circuit-families-promise-problems-and-complexity"
+    ],
+    "items": [
+      {
+        "id": "def-qc-unbounded-error-time-space-counting-model",
+        "kind": "definition",
+        "title": "Unbounded error time space counting model",
+        "statement": "Use fixed multitape fair-bit probabilistic machines with read-only uncharged input and charged work tapes. Fix either the sequential profile (local heads) or VMW random-access profile (classical input/work-head jumps and maximum-address space); define PrTIME/PrTISP with strict majority and exact oracle answers. The sequential LCH uses at-least-half majority formulas, with tie normalization proved separately.",
+        "deps": [
+          "def-probabilistic-polynomial-time-machine-interface",
+          "def-effective-binary-encoding-and-decoder"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Van Melkebeek and Watson, A Quantum Time-Space Lower Bound for the Counting Hierarchy, Sections 2–3",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-logspace-uniform-cook-formula-encoding",
+        "kind": "lemma",
+        "title": "Logspace uniform near-linear Cook formula encoding",
+        "statement": "For each fixed deterministic multitape computation of worst-case time T on an input pair (x,y), there is a Boolean formula F(x,y,z) of size O(T log^O(1) T), with each output bit computable in log^O(1) T time and O(log T) space. For fixed x,y, F has a satisfying assignment to z exactly when the computation accepts, and that satisfying z is unique. All variable blocks and the encoding of malformed strings are fixed with the machine.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen A. Cook, Short Propositional Formulas Represent Nondeterministic Computations",
+              "url": "https://www.ccs.neu.edu/home/viola/classes/papers/Cook1988.pdf"
+            },
+            {
+              "title": "Pippenger and Fischer, Relations among Complexity Measures",
+              "url": "https://www.khoury.northeastern.edu/~viola/classes/papers/PippengerF-Oblivious.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-logspace-uniform-iterated-multiplication-tc0",
+        "kind": "lemma",
+        "title": "Logspace uniform iterated multiplication threshold circuits",
+        "statement": "This is the local supplier interface for the iterated-product part of constant-depth threshold arithmetic. The input lists m≥1 nonnegative w-bit integers in the explicit binary encoding. The output is their exact product, zero-padded to mw bits. The claimed circuit family has polynomial size in the total input length and constant depth; its circuit description and gate-predecessor predicates are computable in logarithmic space in the input length. This item does not assert a DLOGTIME-uniform multiplication circuit.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "cor-prime-number-theorem"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hesse, Allender, and Barrington, Uniform Threshold Circuits for Division",
+              "url": "https://www.cs.rutgers.edu/~allender/papers/division.pdf"
+            },
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-bqtisp-model",
+        "kind": "definition",
+        "title": "BQTISP Model",
+        "statement": "Define the VMW quantum random-access Turing model: read-only input, classical and quantum work tapes, fixed heads, classical control depending on measurements but not quantum path, coherent input query gates, computable amplitudes, maximum work-head-address space, and bounded-error promise thresholds. Its classical comparison class uses the matching VMW random-access profile.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "def-qc-unbounded-error-time-space-counting-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, Time-Space Efficient Simulations of Quantum Computation",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-logspace-predicates-in-linear-counting-hierarchy",
+        "kind": "lemma",
+        "title": "Logspace predicates in a fixed linear counting hierarchy level",
+        "statement": "For every language decidable by a deterministic O(log n)-space machine on strings of length n, there is a fixed integer k such that the language lies in LCH_k under the declared sequential or random-access convention. The level may depend on the machine and its uniformity encoding.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, proof of Lemma 5, step 2",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-unbounded-error-tie-normalization",
+        "kind": "lemma",
+        "title": "Bounded-overhead tie normalization for fair-bit machines",
+        "statement": "For a fair-bit probabilistic machine with an explicit time-constructible integer clock $R(n)\\ge1$, a machine with no exact $1/2$ acceptance probability can be formed with $O(R(n))$ additional time. It preserves strict-majority membership, and swapping its accept/reject labels decides the complement.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "def-probabilistic-polynomial-time-machine-interface",
+          "def-time-and-space-constructible-function"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, A Quantum Time-Space Lower Bound for the Counting Hierarchy, randomization conventions",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-uniform-probabilistic-clocked-simulation",
+        "kind": "lemma",
+        "title": "Uniform clocked simulation of encoded probabilistic machines",
+        "statement": "A single clocked probabilistic multitape simulator uniformly simulates descriptions $e$ of length $O(\\log n)$ for a time-constructible bound $T(n)\\ge n$, preserving each described machine's random-bit distribution and declared input-access profile with time $O(T(n)\\,\\mathrm{polylog}\\,n)$. The fixed-description clocked-simulator bound does not itself state this uniform-in-description conclusion.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-clocked-universal-simulation-with-time-and-space-bounds",
+          "def-effective-binary-encoding-and-decoder",
+          "def-time-and-space-constructible-function"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, §2: probabilistic machine and LCH conventions",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-uniform-threshold-iterated-integer-arithmetic",
+        "kind": "theorem",
+        "title": "Uniform threshold iterated integer arithmetic",
+        "statement": "For $m\\ge1$ explicitly listed nonnegative binary integers of at most $w$ bits, iterated sum and product have constant-depth polynomial-size uniform threshold-circuit families over AND/OR/NOT/MAJ. Their exact binary outputs need at most $w+\\lceil\\log_2m\\rceil$ and $mw$ bits, respectively; the claimed uniformity uses the source's logspace-uniform multiplication and DLOGTIME-uniform addition conventions.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "cor-prime-number-theorem",
+          "lem-qc-logspace-uniform-iterated-multiplication-tc0"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Hesse, Allender, and Barrington, Uniform Threshold Circuits for Division",
+              "url": "https://www.cs.rutgers.edu/~allender/papers/division.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-counting-time-space-to-linear-hierarchy",
+        "kind": "lemma",
+        "title": "Counting time space to linear hierarchy",
+        "statement": "For constants alpha>1 and 0<beta<1 there exists finite integer tau(alpha,beta) with PrTISP(n^alpha,n^(1−beta)) contained in LCH_tau.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-qc-uniform-threshold-iterated-integer-arithmetic",
+          "lem-qc-logspace-predicates-in-linear-counting-hierarchy"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, Lemma 5",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Hesse, Allender, and Barrington, Uniform Threshold Circuits for Division",
+              "url": "https://www.cs.rutgers.edu/~allender/papers/division.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tight-majority-formula-completeness",
+        "kind": "lemma",
+        "title": "Tight majority formula completeness",
+        "statement": "Every LCH1 language reduces to MajSAT, and every LCH2 language reduces to MajMajSAT, with output length n log^O(1)n and each output bit computable in log^O(1)n time and O(log n) space, in the stated input/machine/formula encodings.",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-unbounded-error-tie-normalization",
+          "lem-qc-logspace-uniform-cook-formula-encoding"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allender et al., Time-Space Tradeoffs in the Counting Hierarchy, proof of Theorem 7",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Cook, Short propositional formulas represent nondeterministic computations",
+              "url": "https://www.ccs.neu.edu/home/viola/classes/papers/Cook1988.pdf"
+            },
+            {
+              "title": "Pippenger and Fischer, Relations among complexity measures",
+              "url": "https://www.khoury.northeastern.edu/~viola/classes/papers/PippengerF-Oblivious.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-probabilistic-polynomial-time-hierarchy",
+        "kind": "theorem",
+        "title": "Probabilistic polynomial time hierarchy",
+        "statement": "For rational $1\\le a<b$ with time-constructible polynomial bounds, $\\mathrm{PrTIME}(n^a)$ is properly contained in $\\mathrm{PrTIME}(n^b)$ in either one fixed declared access profile. The separation proof requires the uniform-in-description interpreter recorded as [[lem-qc-uniform-probabilistic-clocked-simulation]].",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-unbounded-error-tie-normalization",
+          "lem-qc-uniform-probabilistic-clocked-simulation",
+          "def-time-and-space-constructible-function",
+          "def-effective-binary-encoding-and-decoder"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, probabilistic computation and diagonalization background",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-unbounded-error-counting-time-space-alternative",
+        "kind": "theorem",
+        "title": "Unbounded error counting time space alternative",
+        "statement": "For every real $d$ and every $\\varepsilon>0$, there is a constant $c>1$ such that at least one of the following holds in the sequential machine profile: $\\mathrm{MajMajSAT}\\notin\\mathrm{PrTIME}_{\\rm seq}(n^c)$, or $\\mathrm{MajSAT}\\notin\\mathrm{PrTISP}_{\\rm seq}(n^d,n^{1-\\varepsilon})$. Formula thresholds are at least-half, and machine acceptance uses strict majority as defined in [[def-qc-unbounded-error-time-space-counting-model]].",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-qc-probabilistic-polynomial-time-hierarchy",
+          "lem-qc-counting-time-space-to-linear-hierarchy",
+          "lem-qc-tight-majority-formula-completeness"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-multiplexed-rz-gray-code",
+        "kind": "lemma",
+        "title": "Gray-code synthesis of a multiplexed Z rotation",
+        "statement": "For $k\\ge0$ control bits $x\\in\\{0,1\\}^k$ and real angles $\\theta_x$, define\n$$M_z=\\sum_{x\\in\\{0,1\\}^k}|x\\rangle\\langle x|\\otimes R_z(\\theta_x),\\qquad R_z(t):=\\operatorname{diag}(e^{-it/2},e^{it/2}).$$\nIf $k>0$, this multiplexed rotation has an exact circuit with $2^k$ one-qubit $R_z$ gates and $2^k$ CNOTs; for $k=0$ it is one $R_z$ gate and no CNOT. The CNOT count includes the final parity-restoring CNOT.",
+        "deps": [
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qc-axis-rotation-pauli-formula",
+          "def-qc-pauli-matrices",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits, arXiv:quant-ph/0406176v5",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qc-basic-clifford-t-rewrite",
+        "kind": "algorithm",
+        "title": "Basic Clifford T Rewrite",
+        "statement": "On H,T,T†,CNOT words, repeatedly apply a fixed finite rule list such as H²→I, T⁸→I, TT†→I, and CNOT²→I when adjacent gates act on the same wires. Scan a deterministic left-to-right first match; terminate when no rule applies.",
+        "deps": [
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barenco et al., Elementary gates for quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/9503016"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-circuit-resource-composition",
+        "kind": "lemma",
+        "title": "Circuit Resource Composition",
+        "statement": "For circuits placed on a declared common physical register, sequential composition adds gate counts and explicit depths; its width is the declared common-register width. Reusing workspace can make that width the maximum of the component widths only when the alignment and ancilla contracts permit reuse; otherwise all required wires remain allocated. Parallel composition on disjoint registers adds gate counts and widths and has depth equal to the maximum component depth. A clean ancilla is counted as clean only when the complete composed block returns it exactly to zero for every allowed data input.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-tensor-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-unoptimized-qsd-recursive-decomposition-and-count",
+        "kind": "lemma",
+        "title": "Unoptimized recursive QSD decomposition and CNOT count",
+        "statement": "For every $n\\ge2$, the recursive cosine-sine/demultiplexing construction gives an exact no-ancilla circuit for any $n$-qubit unitary. At each nonterminal level, split off the first wire as target and let the recursive children act on the remaining contiguous wire interval; the node uses four recursive $(n-1)$-qubit unitaries, one multiplexed $R_y$, and two multiplexed $R_z$ rotations, each with $n-1$ controls. If $c_n$ is the construction's CNOT count, then $c_2\\le3$ and\n$$c_n\\le4c_{n-1}+3\\cdot2^{n-1}\\quad(n\\ge3),\\qquad c_n\\le\\frac9{16}4^n-\\frac32 2^n.$$\nThis is the unoptimized recursive count; it does not include cross-block cancellations or terminal diagonal extraction and makes no compilation-time or finite-precision claim.",
+        "deps": [
+          "thm-qc-cosine-sine-block-decomposition",
+          "lem-qc-two-unitary-block-demultiplexing",
+          "lem-qc-multiplexed-axis-rotation-gray-code",
+          "lem-qc-multiplexed-rz-gray-code",
+          "thm-qc-two-qubit-unitary-three-cnot-synthesis",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-polar-form-with-unique-principal-argument",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits, arXiv:quant-ph/0406176v5",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-circuit-optimization-task",
+        "kind": "definition",
+        "title": "Circuit Optimization Task",
+        "statement": "Input a finite circuit over a fixed exact gate alphabet, a declared equality notion (matrix exact, or whole-circuit global-phase equivalence), ancilla policy, and a cost coordinate (count, depth, T-count, width). Output an equivalent circuit with no larger cost; “globally optimal” means no equivalent circuit in the declared model has smaller cost.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-circuit-cost-model",
+          "def-qc-global-phase-equivalence",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qc-ninefold-nearest-neighbor-multiplexor-routing",
+        "kind": "lemma",
+        "title": "Ninefold nearest-neighbor multiplexor routing",
+        "statement": "For the unoptimized recursive QSD circuit, use the contiguous interval layout in which each multiplexed-rotation target is an endpoint, each recursive child acts on the remaining contiguous interval, and each two-qubit terminal block acts on adjacent wires. The line architecture permits both ordered orientations of adjacent CNOT. Replacing each length-$k$ CNOT in a multiplexor by the explicit line-neighbor network below uses at most nine times the original CNOT count. This is an architecture-specific gate-count bound; it asserts no depth bound or arbitrary-layout guarantee.",
+        "deps": [
+          "lem-qc-unoptimized-qsd-recursive-decomposition-and-count",
+          "lem-qc-multiplexed-axis-rotation-gray-code",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits, nearest-neighbor decomposition section",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-basic-rewrite-correct-and-terminating",
+        "kind": "theorem",
+        "title": "Basic Rewrite Correct And Terminating",
+        "statement": "Each registered rewrite preserves the exact matrix; the procedure terminates and returns a local normal form relative only to the declared finite rewrite set. It is not claimed globally minimal.",
+        "deps": [
+          "alg-qc-basic-clifford-t-rewrite",
+          "def-qc-clifford-t-gate-library"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barenco et al., Elementary gates for quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/9503016"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-bqtisp-to-ptisp-simulation",
+        "kind": "theorem",
+        "title": "BQTISP To PTISP Simulation",
+        "statement": "For sufficiently constructible $t,s\\ge\\log n$, the VMW model satisfies\n$$\\mathrm{BQTISP}(t,s)\\subseteq\\mathrm{PrTISP}_{\\rm VMW}(t\\,\\mathrm{polylog}\\,t,s+\\mathrm{polylog}\\,t).$$\nThe output is an unbounded-error classical probabilistic simulation in the matching VMW random-access profile; it does not assert conversion to the sequential profile.",
+        "deps": [
+          "def-qc-bqtisp-model",
+          "def-qc-unbounded-error-time-space-counting-model",
+          "lem-qc-unoptimized-qsd-recursive-decomposition-and-count",
+          "def-qc-clifford-t-gate-library",
+          "thm-qc-solovay-kitaev-error-and-resource-bound",
+          "def-time-and-space-constructible-function",
+          "def-sharpp-and-gap-p-functions",
+          "lem-operator-norm-is-a-norm",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, Time-Space Efficient Simulations of Quantum Computation",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Dawson and Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-clean-ancilla-multicontrolled-tradeoff",
+        "kind": "theorem",
+        "title": "Clean Ancilla Multicontrolled Tradeoff",
+        "statement": "For $m\\ge1$ controls, reuse the exact no-workspace $O(m^2)$ and one-clean-bit $O(m)$ constructions from QC11, with total widths $m+1$ and $m+2$ and exact return of the clean bit. These compare construction upper bounds rather than optimal complexities.",
+        "deps": [
+          "thm-qc-multicontrolled-ancilla-resource-tradeoff",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-clean-and-dirty-ancillas"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barenco et al., Elementary gates for quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/9503016"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "kind": "theorem",
+        "title": "Counting Hierarchy Time Space Lower Bound",
+        "statement": "In the VMW random-access quantum Turing model, for every real $d$ and $\\varepsilon>0$ there exists $c>1$ such that either $\\mathrm{MajMajSAT}$ has no bounded-error algorithm of time $O(n^c)$, or $\\mathrm{MajSAT}$ has no bounded-error algorithm using both time $O(n^d)$ and space $O(n^{1-\\varepsilon})$. Consequently, for every $\\varepsilon>0$, $\\mathrm{MajMajSAT}$ has no bounded-error algorithm with time $n^{1+o(1)}$ and space $O(n^{1-\\varepsilon})$.",
+        "deps": [
+          "thm-qc-bqtisp-to-ptisp-simulation",
+          "thm-qc-unbounded-error-counting-time-space-alternative",
+          "def-qc-unbounded-error-time-space-counting-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Melkebeek and Watson, Time-Space Efficient Simulations of Quantum Computation",
+              "url": "https://arxiv.org/pdf/0712.2545"
+            },
+            {
+              "title": "Eric Allender et al., Time-Space Tradeoffs in the Counting Hierarchy",
+              "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-nearest-neighbor-cnot-overhead",
+        "kind": "theorem",
+        "title": "Nearest Neighbor CNOT Overhead",
+        "statement": "For the unoptimized recursive QSD circuit in the contiguous interval layout—each multiplexor target is an endpoint, recursive children use the remaining contiguous interval, and terminal two-qubit blocks act on adjacent wires—with both directed orientations of adjacent CNOT allowed, the explicit line routing uses at most nine times the original CNOT count. This is an architecture-specific gate-count bound, not a depth bound or a guarantee for other layouts.",
+        "deps": [
+          "lem-qc-ninefold-nearest-neighbor-multiplexor-routing"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits, §6",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-qsd-cnot-upper-bound",
+        "kind": "theorem",
+        "title": "QSD CNOT Upper Bound",
+        "statement": "Reuse QC11 exact QSD: no-ancilla $n$-qubit $U$ needs at most $(23/48)4^n-(3/2)2^n+4/3$ CNOTs. Report one-qubit gates separately; a CNOT count alone is not total classical compilation time. Use $n\\ge2$ for this formula; $n\\le1$ needs zero CNOT.",
+        "deps": [
+          "thm-qc-exact-arbitrary-unitary-qsd-upper-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-generic-circuit-count-lower-bound",
+        "kind": "theorem",
+        "title": "Generic Circuit Count Lower Bound",
+        "statement": "Fix a nonempty finite gate alphabet of $A\\ge1$ gates, each of arity at most $k$ with $1\\le k\\le3$, and count circuits on $n\\ge1$ classical input wires with zero-initialized ancillas and one designated measured output bit. No additional classical acceptance predicate is free. For a gate budget $C\\ge n$, put $W=n+kC+1$. After deleting unused ancillas, every such circuit has at most $W$ wires, and there are at most\n$$W\\sum_{j=0}^{C}(AW^k)^j=\\exp(O(C\\log C))$$\noutput-designated gate-list descriptions. Each description computes at most one Boolean function with success probability at least $2/3$ on every input. Hence, for all sufficiently large $n$, at least $99\\%$ of Boolean functions on $n$ bits require $\\Omega(2^n/n)$ gates. If arbitrary classical postprocessing is allowed, its circuit or description cost must be included; otherwise this conclusion need not hold.",
+        "deps": [
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-bqp-promise-class",
+          "def-qc-quantum-acceptance-probability"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2211,
+    "id": "circuit-optimization-resource-tradeoffs-and-lower-bounds-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Circuit Optimization, Resource Tradeoffs, and Lower Bounds — Examples",
+    "companion": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+    "requires": [
+      "circuit-optimization-resource-tradeoffs-and-lower-bounds"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-two-qubit-qsd-cnot-count",
+        "kind": "example",
+        "title": "Two-qubit QSD CNOT upper-bound instance",
+        "statement": "Substituting n=2 into the stated no-ancilla QSD count gives (23/48)·16−(3/2)·4+4/3=3 CNOTs, with one-qubit gates counted separately.",
+        "deps": [
+          "thm-qc-qsd-cnot-upper-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shende, Bullock, and Markov, Synthesis of Quantum Logic Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

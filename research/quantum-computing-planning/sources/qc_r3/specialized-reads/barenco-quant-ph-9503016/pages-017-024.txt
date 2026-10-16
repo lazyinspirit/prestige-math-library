@@ -1,0 +1,730 @@
+===== PDF PAGE 17 =====
+
+7
+n-Bit Networks
+
+The technique for simulating ∧2(U) gates in Lemma 6.1 generalizes to ∧m(U) gates
+
+for m > 2. For example, to simulate a ∧3(U) gate for any unitary U, set V so that
+
+V 4 = U and then construct a network as follows.
+
+U
+
+t
+
+t
+
+t
+
+=
+
+t
+t
+
+t
+
+t
+
+t
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+❤
+❤
+
+❤
+❤
+❤
+❤
+
+V
+V †
+V
+V †
+V
+V †
+V
+
+The intuition behind this construction is similar to that behind the construction of
+
+Lemma 6.1.
+If the first three input bits are x1, x2, and x3 then the sequence of
+
+operations performed on the fourth bit is:
+V
+iff x1 = 1
+(100)
+V †
+iff x1 ⊕x2 = 1
+(110)
+V
+iff x2 = 1
+(010)
+V †
+iff x2 ⊕x3 = 1
+(011)
+V
+iff x1 ⊕x2 ⊕x3 = 1
+(111)
+V †
+iff x1 ⊕x3 = 1
+(101)
+V
+iff x3 = 1
+(001).
+The strings on the right encode the condition for the operation V or V † at each step—
+
+the “1”’s indicate which input bits are involved in the condition. For an efficient
+
+implementation of ∧3(U), these strings form a grey code sequence. Note also that the
+
+parity of each bit string determines whether to apply V or V †. By comparing this
+
+sequence of operations with the terms in the equation
+
+x1 + x2 + x3 −(x1 ⊕x2) −(x1 ⊕x3) −(x2 ⊕x3) + (x1 ⊕x2 ⊕x3) = 4 · (x1 ∧x2 ∧x3),
+
+it can be verified that the above sequence of operations is equivalent to performing
+
+V 4 on the fourth bit iff x1 ∧x2 ∧x3 = 1, which is the ∧3(V 4) gate.
+
+The foregoing can be generalized to simulate ∧m(U) for larger values of m.
+
+Lemma 7.1: For any n ≥3 and any unitary 2 × 2 matrix U, a ∧n−1(U) gate can
+
+be simulated by an n-bit network consisting of 2n−1 −1 ∧1(V ) and ∧1(V †) gates and
+
+17
+
+
+===== PDF PAGE 18 =====
+
+2n−1 −2 ∧1(σx) gates, where V is unitary.
+
+We omit the proof of Lemma 7.1, but point out that it is a generalization of the
+
+n = 4 case above and based on setting V so that V 2n−2 = U and “implementing” the
+
+identity
+
+�
+
+k1
+xk1 −
+�
+
+k1<k2
+(xk1 ⊕xk2) +
+�
+
+k1<k2<k3
+(xk1 ⊕xk2 ⊕xk3) −· · · + (−1)m−1(x1 ⊕x2 ⊕· · · ⊕xm)
+
+= 2m−1 · (x1 ∧x2 ∧· · · ∧xm)
+
+with a grey-code sequence of operations.
+
+For some specific small values of n (for n = 3, 4, 5, 6, 7, and 8), this is the most
+
+efficient technique that we are aware of for simulating arbitrary ∧n−1(U) gates as
+
+well as ∧n−1(σx) gates; taking account of mergers (see Corollary 6.2), the simulation
+
+requires 3·2n−1−4 ∧1(σx)’s and 2·2n−1 ∧0’s. However, since this number is Θ(2n), the
+
+simulation is very inefficient for large values of n. For the remainder of this section,
+
+we focus on the asymptotic growth rate of the simulations with respect to n, and show
+
+that this can be quadratic in the general case and linear in many cases of interest.
+
+7.1
+Linear Simulation of ∧n−2(σx) Gates on n-Bit Networks
+
+Lemma 7.2: If n ≥5 and m ∈{3, . . . , ⌈n
+
+2⌉} then a ∧m(σx) gate can be simulated
+
+by a network consisting of 4(m −2) ∧2(σx) gates that is of the form
+
+18
+
+
+===== PDF PAGE 19 =====
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+❤
+
+t
+
+t
+
+t
+
+t
+
+t
+
+=
+
+❤
+❤
+
+❤
+❤
+❤
+❤
+
+❤
+❤
+❤
+❤
+
+❤
+❤
+
+t
+t
+
+t
+t
+t
+t
+
+t
+t
+t
+t
+
+t
+t
+
+t
+t
+t
+t
+
+t
+t
+t
+t
+
+t
+
+t
+
+t
+
+t
+
+(illustrated for n = 9 and m = 5).
+
+Proof:
+Consider the group of the first 7 gates in the above network. The sixth bit
+
+(from the top) is negated iff the first two bits are 1, the seventh bit is negated iff the
+
+first three bits are 1, the eighth bit is negated iff the first four bits are 1, and the
+
+ninth bit is negated iff the first five bits are 1. Thus, the last bit is correctly set, but
+
+the three preceding bits are altered. The last 5 gates in the network reset the values
+
+of these three preceding bits.✷
+
+Note that in this construction and in the ones following, although many of the bits
+
+not involved in the gate are operated upon, the gate operation is performed correctly
+
+independent of the initial state of the bits (i.e., they do not have to be “cleared” to
+
+0 first), and they are reset to their initial values after the operations of the gate (as
+
+in the computations which occur in [41] and [40]). This fact makes constructions like
+
+the following possible.
+
+Lemma 7.3: For any n ≥5, and m ∈{2, . . ., n−3} a ∧n−2(σx) gate can be simulated
+
+by a network consisting of two ∧m(σx) gates and two ∧n−m−1(σx) gates which is of
+
+the form
+
+19
+
+
+===== PDF PAGE 20 =====
+
+❤
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+=
+
+❤
+❤
+
+❤
+❤
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+(illustrated for n = 9 and m = 5).
+
+Proof:
+By inspection.✷
+
+Corollary 7.4: On an n-bit network (where n ≥7), a ∧n−2(σx) gate can be simulated
+
+by 8(n−5) ∧2(σx) gates (3-bit Toffoli gates), as well as by 48n−204 basic operations.
+
+Proof:
+First apply Lemma 7.2 with m1 = ⌈n
+
+2⌉and m2 = n −m1 −1 to simulate
+
+∧m1(σx) and ∧m2(σx) gates.
+Then combine these by Lemma 7.3 to simulate the
+
+∧n−2(σx) gate. Then, each ∧2(σx) gate in the above simulation may be simulated by
+
+a set of basic operations (as in Corollary 6.2). We find that almost all of these Toffoli
+
+gates need only to be simulated modulo phase factors as in Sec. 6.2; in particular,
+
+only 4 of the Toffoli gates, the ones which involve the last bit in the diagram above,
+
+need to be simulated exactly according to the construction of Corollary 6.2. Thus
+
+these 4 gates are simulated by 16 basic operations, while the other 8n −36 Toffoli
+
+gates are simulated in just 6 basic operations. A careful accounting of the mergers
+
+of ∧0 gates which are then possible leads to the total count of basic operations given
+
+above. ✷
+
+The above constructions, though asymptotically efficient, requires at least one “extra”
+
+bit, in that an n-bit network is required to simulate the (n −1)-bit gate ∧n−2(σx). In
+
+20
+
+
+===== PDF PAGE 21 =====
+
+the next subsection, we shall show how to construct ∧n−1(U) for an arbitrary unitary
+
+U using a quadratic number of basic operations on an n-bit network, which includes
+
+the n-bit Toffoli gate ∧n−1(σx) as a special case.
+
+7.2
+Quadratic Simulation of General ∧n−1(U) Gates on n-Bit
+Networks
+
+Lemma 7.5: For any unitary 2 × 2 matrix U, a ∧n−1(U) gate can be simulated by
+
+a network of the form
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+U
+
+=
+
+❤
+❤
+t
+t
+
+t
+t
+t
+
+t
+t
+t
+
+t
+t
+t
+
+t
+t
+t
+
+t
+t
+t
+
+t
+t
+t
+
+t
+t
+t
+
+V
+V
+V †
+
+(illustrated for n = 9), where V is unitary.
+
+Proof:
+The proof is very similar to that of Lemma 6.1, setting V so that V 2 = U.✷
+
+Corollary 7.6: For any unitary U, a ∧n−1(U) gate can be simulated in terms of
+
+Θ(n2) basic operations.
+
+Proof:
+This is a recursive application of Lemma 7.5. Let Cn−1 denote the cost
+
+of simulating a ∧n−1(U) (for an arbitrary U). Consider the simulation in Lemma
+
+7.5. The cost of simulating the ∧1(V ) and ∧1(V †) gates is Θ(1) (by Corollary 5.3).
+
+The cost of simulating the two ∧n−2(σx) gates is Θ(n) (by Corollary 7.4). The cost
+
+of simulating the ∧n−2(V ) gate (by a recursive application of Lemma 7.5) is Cn−2.
+
+21
+
+
+===== PDF PAGE 22 =====
+
+Therefore, Cn−1 satisfies a recurrence of the form
+
+Cn−1 = Cn−2 + Θ(n),
+
+which implies that Cn−1 ∈Θ(n2).✷
+
+In fact, we find that using the gate-counting mentioned in Corollary 7.4, the number
+
+of basic operations is 48n2 + O(n).
+
+Although Corollary 7.6 is significant in that it permits any ∧n−1(U) to be simulated
+
+with “polynomial complexity”, the question remains as to whether a subquadratic
+
+simulation is possible. The following is an Ω(n) lower bound on this complexity.
+
+Lemma 7.7: Any simulation of a nonscalar ∧n−1(U) gate (i.e. where U ̸= Ph(δ) · I)
+
+requires at least n −1 basic operations.
+
+Proof:
+Consider any n-bit network with arbitrarily many 1-bit gates and fewer than
+
+n −1 ∧1(σx) gates. Call two bits adjacent if there there is a ∧1(σx) gate between
+
+them, and connected if there is a sequence of consecutively adjacent bits between
+
+them. Since there are fewer than n −1 ∧1(σx) gates, it must be possible to partition
+
+the bits into two nonempty sets A and B such that no bit in A is connected to any
+
+bit in B. This implies that the unitary transformation associated with the network is
+
+of the form A ⊗B, where A is 2|A|-dimensional and B is 2|B|-dimensional. Since the
+
+transformation ∧n−1(U) is not of this form, the network cannot compute ∧n−1(U).✷
+
+It is conceivable that a linear size simulation of ∧n−1(U) gates is possible. Al-
+
+though we cannot show this presently, in the remaining subsections, we show that
+
+something “similar” (in a number of different senses) to a linear size simulation of
+
+∧n−1(U) gates is possible.
+
+7.3
+Linear Approximate Simulation of General ∧n−1(U) Gates
+on n-Bit Networks
+
+Definition:
+We say that one network approximates another one within ε if the
+
+distance (induced by the Euclidean vector norm) between the unitary transformations
+
+22
+
+
+===== PDF PAGE 23 =====
+
+associated with the two networks is at most ε.
+
+This notion of approximation in the context of reducing the complexity of quantum
+
+computations was introduced by Coppersmith[33], and is useful for the following
+
+reason. Suppose that two networks that are approximately the same (in the above
+
+sense) are executed with identical inputs and their outputs are observed. Then the
+
+probability distributions of the two outcomes will be approximately the same in the
+
+sense that, for any event, its probability will differ by at most 2ε between the two
+
+networks.
+
+Lemma 7.8: For any unitary 2 × 2 matrix U and ε > 0, a ∧n−1(U) gate can be
+
+approximated within ε by Θ(n log(1
+
+ε)) basic operations.
+
+Proof:
+The idea is to apply Lemma 7.5 recursively as in Corollary 7.6, but to observe
+
+that, with suitable choices for V , the recurrence can be terminated after Θ(log(1
+
+ε))
+
+levels.
+
+Since U is unitary, there exist unitary matrices P and D, such that U = P † ·D ·P
+
+and
+
+D =
+
+�
+eid1
+0
+0
+eid2
+
+�
+
+where d1 and d2 are real. eid1 and eid2 are the eigenvalues of U. If Vk is the matrix used
+
+in the kth recursive application of Lemma 7.3 (k ∈{0, 1, 2, . . .}) then it is sufficient
+
+that V 2
+k+1 = Vk for each k ∈{0, 1, 2, . . .}. Thus, it suffices to set Vk = P † · Dk · P,
+
+where
+
+Dk =
+
+�
+eid1/2k
+0
+0
+eid2/2k
+
+�
+,
+
+for each k ∈{0, 1, 2, . . .}. Note that then
+
+∥Vk −I∥2
+=
+∥P † · Dk · P −I∥2
+
+=
+∥P † · (Dk −I) · P∥2
+
+≤
+∥P †∥2 · ∥Dk −I∥2 · ∥P∥2
+
+=
+∥Dk −I∥2
+
+23
+
+
+===== PDF PAGE 24 =====
+
+≤
+π/2k.
+
+Therefore, if the recursion is terminated after k = ⌈log2( π
+
+ε )⌉steps then the discrepancy
+
+between what the resulting network computes and ∧n−1(U) is an (n −k)-bit trans-
+
+formation of the form ∧n−k−1(Vk). Since ∥∧n−k−1 (Vk) −∧n−k−1(I)∥2 = ∥Vk −I∥2 ≤
+
+π/2⌈log2( π
+
+ε )⌉≤ε, the network approximates ∧n−1(U) within ε.✷
+
+7.4
+Linear Simulation in Special Cases
+
+Lemma 7.9: For any SU(2) matrix W, a ∧n−1(W) gate can be simulated by a
+
+network of the form
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+W
+
+=
+
+❤
+❤
+
+t
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+A
+B
+C
+
+where A, B, and C ∈SU(2).
+
+Proof:
+The proof is very similar to that of Lemma 5.1, referring to Lemma 4.3.✷
+
+Combining Lemma 7.9 with Corollary 7.4, we obtain the following.
+
+Corollary 7.10: For any W ∈SU(2), a ∧n−2(W) gate can be simulated by Θ(n)
+
+basic operations.
+
+As in Section 5, a noteworthy example is when
+
+W =
+
+�
+0
+1
+−1
+0
+
+�
+= Ph( π
+
+2) · σy.
+
+24
+

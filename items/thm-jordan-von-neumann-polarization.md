@@ -1,21 +1,17 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-jordan-von-neumann-polarization.json
 id: thm-jordan-von-neumann-polarization
 kind: theorem
 title: "Jordan–von Neumann: a norm is induced by an inner product exactly when it satisfies the parallelogram law"
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-parallelogram-law, def-real-and-complex-inner-product-space, def-inner-product-norm, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, lem-rat-embeds-dense, cor-archimedean-reciprocal, lem-complex-conjugation-and-modulus-laws, lem-of-square-monotone, thm-of-square-roots]
+deps: [thm-parallelogram-law, def-real-and-complex-inner-product-space, def-inner-product-norm, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, lem-rat-embeds-dense, cor-archimedean-reciprocal, lem-complex-conjugation-and-modulus-laws, lem-of-square-monotone, thm-of-square-roots]
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §1.3.3, p.39"
@@ -46,7 +42,7 @@ in the complex case with the first-variable-linear convention.
 
 [A2] The induced length is the unique nonnegative square root of the diagonal pairing ([[def-inner-product-norm]]).
 
-[A3] A norm satisfies $q(\lambda z)=|\lambda|^2q(z)$ for $q(z)=\|z\|^2$, in particular $q(0)=0$, $q(-z)=q(z)$ and $q(iz)=q(z)$ in the complex case, and it satisfies the triangle inequality; complex normed spaces follow the scalar convention of the remark ([[def-norm-and-normed-space]], [[rem-real-and-complex-normed-space-convention]]).
+[A3] A norm satisfies $q(\lambda z)=|\lambda|^2q(z)$ for $q(z)=\|z\|^2$, in particular $q(0)=0$, $q(-z)=q(z)$ and $q(iz)=q(z)$ in the complex case, and it satisfies the triangle inequality; complex normed spaces follow the complex norm axioms ([[def-norm-and-normed-space]], [[def-complex-norm-and-complex-normed-space]]).
 
 [A4] Every real or complex inner-product norm satisfies the parallelogram law ([[thm-parallelogram-law]]).
 

@@ -1,0 +1,1339 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-qa-20-first-order-commutator-error",
+    "thm-qa-20-second-order-conservative-error",
+    "thm-qa-20-first-order-resource-bound",
+    "lem-qa-20-suzuki-order-cancellation",
+    "thm-qa-20-suzuki-conservative-error-and-resources",
+    "ex-qa-20-commuting-two-term-simulation",
+    "cex-qa-20-sparse-oracle-does-not-give-term-list",
+    "ex-qa-20-noncommuting-pauli-error"
+  ],
+  "contracts": {
+    "thm-qa-20-first-order-commutator-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-20-first-order-product-formula",
+          "source_section": "Definition",
+          "quote": "For a term-list input $H=\\sum_{j=1}^m H_j$, a real time $h$, and the announced order $1,\\ldots,m$, define\n$$S_1(h):=e^{-ihH_1}e^{-ihH_2}\\cdots e^{-ihH_m}.$$\nOperator products are written in their ordinary left-to-right algebraic order, so the rightmost factor acts first on a vector. For an integer $r\\ge1$, the $r$-step first-order approximation at time $t$ is $S_1(t/r)^r$. Each exponential is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]]; this definition does not identify the product with $e^{-itH}$ when terms fail to commute.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $V=\\{0\\}$, every endomorphism is the unique zero map and both sides of the theorem are zero. Otherwise, for self-adjoint $H_1,H_2$, put $A=-iH_1$ and $B=-iH_2$. For $h\\ge0$ define $F(s)=e^{(h-s)(A+B)}e^{sA}e^{sB}$ for $0\\le s\\le h$. Its endpoints are $F(0)=e^{h(A+B)}$ and $F(h)=e^{hA}e^{hB}$. Differentiating the three finite-matrix evolutions using [F2] and the entrywise product rule gives $F'(s)=e^{(h-s)(A+B)}(e^{sA}B-Be^{sA})e^{sB}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $s\\ge0$, differentiating $e^{uA}Be^{(s-u)A}$ for $0\\le u\\le s$ and integrating yields $e^{sA}B-Be^{sA}=\\int_0^s e^{uA}[A,B]e^{(s-u)A}\\,du$. For unitaries $R,S$, [F2] and [F4] give $\\|R\\|=\\|S\\|=\\|R^{-1}\\|=\\|S^{-1}\\|=1$; [F3] applied to $RXS$ and then to $R^{-1}(RXS)S^{-1}$ gives $\\|RXS\\|=\\|X\\|$. Thus the unitary factors in the integrands and in [step 1.1] give $\\|F'(s)\\|\\le s\\|[A,B]\\|$. Integrating from $0$ to $h$ gives $\\|e^{h(A+B)}-e^{hA}e^{hB}\\|\\le h^2\\|[A,B]\\|/2$. For $h<0$ apply the same result to $-A,-B$ and $|h|$; since $[A,B]=-[H_1,H_2]$, the bound is $h^2\\|[H_1,H_2]\\|/2$ for all real $h$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $A_j=-iH_j$. For $k=1,\\ldots,m$, let $P_k=e^{hA_1}\\cdots e^{hA_k}$ and $T_k=e^{h\\sum_{j=1}^kA_j}$. Adding and subtracting $e^{h\\sum_{j<k}A_j}e^{hA_k}$ and applying the two-term estimate in [step 2.1] gives $\\|T_k-P_k\\|\\le\\|T_{k-1}-P_{k-1}\\|+\\frac{h^2}{2}\\|[\\sum_{j<k}A_j,A_k]\\|$. Linearity gives $[\\sum_{j<k}A_j,A_k]=\\sum_{j<k}[A_j,A_k]$, and $[A_j,A_k]=-[H_j,H_k]$; the triangle inequality from [F4] bounds this norm by $\\sum_{j<k}\\|[H_j,H_k]\\|$. Right multiplication by $e^{hA_k}$ preserves the norm by the unitary norm argument in [step 2.1]. Starting with $T_1=P_1$ and iterating proves the local $m$-term bound $\\|e^{-ihH}-S_1(h)\\|\\le\\frac{h^2}{2}\\sum_{j<k}\\|[H_j,H_k]\\|$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $h=t/r$. The identity $S^r-U^r=\\sum_{\\ell=0}^{r-1}S^{r-1-\\ell}(S-U)U^\\ell$ writes the difference as $r$ terms. The unitary norm argument in [step 2.1] bounds each term by $\\|S_1(h)-U_H(h)\\|$, so [step 3.1] gives $\\|S_1(h)^r-U_H(h)^r\\|\\le\\frac{t^2}{2r}\\sum_{j<k}\\|[H_j,H_k]\\|$. By [F2], $U_H(h)^r=U_H(t)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 1.1 treats the zero-dimensional space and notes both sides are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 3.1 yields zero error when all commutators vanish; the zero Hamiltonian is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 3.1 covers m=1, where the commutator sum is empty and the formula is exact."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification steps 2.1 and 3.1 require no noncommuting or nonzero-term assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 4.1 covers t=0 and every r>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 defines the interpolation F(s) explicitly and steps 3.1–4.1 use the fixed term order and finite telescoping sums. Neither the integration parameter nor the given integer r requires a choice function.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Step 1.1 defines the interpolation F(s) explicitly and steps 3.1–4.1 use the fixed term order and finite telescoping sums. Neither the integration parameter nor the given integer r requires a choice function.",
+            "item_sha256": "dc03b53b85cc6db0b364b455a2e50af23d846f2ad5ba7a912655de661c09fbbb",
+            "row_sha256": "5682044d400e7035918056779ea828455d721380a5e1a22bb849cd176bb87c91",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 integrate the two-term commutator and extend to m terms; step 4.1 telescopes r steps to the sufficient error bound. The Statement does not claim that small actual error forces a small commutator sum.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 integrate the two-term commutator and extend to m terms; step 4.1 telescopes r steps to the sufficient error bound. The Statement does not claim that small actual error forces a small commutator sum.",
+            "item_sha256": "dc03b53b85cc6db0b364b455a2e50af23d846f2ad5ba7a912655de661c09fbbb",
+            "row_sha256": "856b69fa4ef02c1c6b05482ac9587cd75eb9f8dedf31e81b0444819090851bdb",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 integrate the two-term commutator and extend to m terms; step 4.1 telescopes r steps to the sufficient error bound. The Statement does not claim that small actual error forces a small commutator sum.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 integrate the two-term commutator and extend to m terms; step 4.1 telescopes r steps to the sufficient error bound. The Statement does not claim that small actual error forces a small commutator sum.",
+            "item_sha256": "dc03b53b85cc6db0b364b455a2e50af23d846f2ad5ba7a912655de661c09fbbb",
+            "row_sha256": "fb6bae588e7760f9bb5ee95cfe4880ce321e040d8fa5cd1ea074128ee4bff18a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Independently checked all four steps and exact F1-F4 supplier interfaces: differentiation leaves e^(sA)B-Be^(sA), its integral is bounded by s||[A,B]||, and integration gives h^2/2. Negating both generators covers h<0. Partial-sum insertion gives exactly sum_{j<k}||[H_j,H_k]||; noncommutative telescoping powers gives t^2/(2r). Zero domain is treated before unitary norm=1; m=1, t=0, r=1 and commuting terms satisfy the bound. Reader/refuter contain no outstanding finding. Source context checked in Childs 27.3 and de Wolf 9.2; exact constant is proved locally. No AC and no unresolved prerequisite."
+      }
+    },
+    "thm-qa-20-second-order-conservative-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-20-symmetric-second-order-formula",
+          "source_section": "Definition",
+          "quote": "For the announced term order $1,\\ldots,m$ and real $h$, define the palindromic product\n$$S_2(h):=e^{-ihH_1/2}e^{-ihH_2/2}\\cdots e^{-ihH_{m-1}/2}e^{-ihH_m}e^{-ihH_{m-1}/2}\\cdots e^{-ihH_2/2}e^{-ihH_1/2}.$$\nFor $m=1$ this is just $e^{-ihH_1}$. The $r$-step approximation is $S_2(t/r)^r$, with $r\\ge1$. A written product acts right-to-left, as in [[def-qa-20-first-order-product-formula]]. Every term call and any signed-time implementation cost must be declared by [[def-qa-20-term-list-access-model]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The claim is immediate on the zero-dimensional space, so assume $V\\ne\\{0\\}$. Write $A_j=-iH_j$, $A=\\sum_jA_j$, $P(h)=S_2(h)$, and $Q(h)=U_H(h)$. Every factor is unitary by [F1], and the palindromic word gives $P(-h)=P(h)^{-1}$; also $Q(-h)=Q(h)^{-1}$. Differentiating the factors at zero, the two occurrences with coefficient $1/2$ contribute a total coefficient $1$ for each $A_j$, so $P(0)=Q(0)=I$ and $P'(0)=Q'(0)=A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $E(h)=P(h)-Q(h)$. Smoothness follows by repeatedly differentiating the constant-generator identity in [F1]. Thus $E(h)=Ch^2+O(h^3)$ for some endomorphism $C$ by [L1]. The inverse identities in step 1.1 give $E(-h)=P(h)^{-1}-Q(h)^{-1}=-P(h)^{-1}E(h)Q(h)^{-1}$. Since both inverse factors equal $I+O(h)$, comparing degree-two coefficients yields $C=-C$, hence $C=0$. Therefore $P$ and $Q$ have matching Taylor coefficients through degree two.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $P(h)=F_1(h)\\cdots F_{2m-1}(h)$ in its displayed order, with $F_\\ell(h)=e^{c_\\ell h A_{j_\\ell}}$ and the coefficients $c_\\ell$ equal to the half-step palindrome in [F2]. Repeated product differentiation and [F1] give $\\|P'''(h)\\|\\le(\\sum_\\ell |c_\\ell|\\|H_{j_\\ell}\\|)^3=M^3$: each $j<m$ occurs twice with coefficient $1/2$, and $j=m$ occurs once with coefficient $1$. Also $Q'''(h)=A^3Q(h)$. For a unit vector $v$, the vector triangle inequality gives $\\|Av\\|\\le\\sum_j\\|H_jv\\|\\le\\sum_j\\|H_j\\|=M$, so [F4] yields $\\|A\\|\\le M$. Then [F3], [F4], and unitarity give $\\|Q'''(h)\\|\\le M^3$. The integral Taylor remainder after degree two therefore gives $\\|P(h)-Q(h)\\|\\le(2M^3)|h|^3/3!=M^3|h|^3/3$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Expand $P(h)^r-Q(h)^r$ by telescoping. The definition [F4] and submultiplicativity [F3] show that unitary factors preserve the norm, so its norm is at most $rM^3|h|^3/3$ by [step 3.1]. With $h=t/r$, this is $|t|^3M^3/(3r^2)$; [F1] gives $Q(h)^r=U_H(t)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 1.1 and the statement cover the zero-dimensional space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 3.1 gives zero remainder when M=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 1.1 includes m=1, for which the symmetric product is the exact one-term evolution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–2.1 do not assume any commutation or nonzero norm."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 4.1 covers t=0 and all r>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The palindrome is fixed by the supplied term list. Steps 1.1–3.1 differentiate that finite word and step 4.1 uses the given r; Taylor coefficients are uniquely determined, not arbitrary choices.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "The palindrome is fixed by the supplied term list. Steps 1.1–3.1 differentiate that finite word and step 4.1 uses the given r; Taylor coefficients are uniquely determined, not arbitrary choices.",
+            "item_sha256": "364877d030ea240016944782e88748c2ac61121d3cebffda866096ff65b3c3e6",
+            "row_sha256": "a41aebaf44bbfccf4d41bdd114d0f2a3f04f8da60d73e7fa5f52efafbb53794f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use palindrome symmetry to cancel degree two and bound the third derivative; step 4.1 gives the global upper estimate. The error estimate is sufficient and is not an iff or a lower bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use palindrome symmetry to cancel degree two and bound the third derivative; step 4.1 gives the global upper estimate. The error estimate is sufficient and is not an iff or a lower bound.",
+            "item_sha256": "364877d030ea240016944782e88748c2ac61121d3cebffda866096ff65b3c3e6",
+            "row_sha256": "b8033f9e588a2d60d7a118dea916d6930ba355f154ab59929df4b28c705c3d5d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use palindrome symmetry to cancel degree two and bound the third derivative; step 4.1 gives the global upper estimate. The error estimate is sufficient and is not an iff or a lower bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use palindrome symmetry to cancel degree two and bound the third derivative; step 4.1 gives the global upper estimate. The error estimate is sufficient and is not an iff or a lower bound.",
+            "item_sha256": "364877d030ea240016944782e88748c2ac61121d3cebffda866096ff65b3c3e6",
+            "row_sha256": "a505b5b26bb9ed67aabee3392531b1ad08d8e9ac05c7bb379cb83ec9c82edc06",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Checked every step and F1-F4 definitions/unitary supplier proof. P(-h)=P(h)^-1 and equal first derivatives imply the degree-two defect C=-C, with smooth finite-matrix Taylor expansions justified by repeated constant-generator differentiation. Multinomial third differentiation bounds the third derivative of P by M^3 because half-step weights sum termwise to one; ||H||<=M gives the same target bound. Integral remainder is 2 M^3 |h|^3/3!, and noncommutative unitary telescoping gives |t|^3 M^3/(3r^2). Checked zero domain before norm=1, m=1, M=0, t=0, h<0 and r=1. Source Exercise 4 assumes only the two-term cubic fact; full local proof supplies the general bound. Corrected erroneous printed page 78 to actual 79, with no theorem/proof change. No AC, no outstanding finding or unmet prerequisite."
+      }
+    },
+    "thm-qa-20-first-order-resource-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-20-first-order-term-list-simulation",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite term-list access input with $H=\\sum_{j=1}^m H_j$, a finite time code $t$ in the expression language of [[def-qa-20-term-list-access-model]], a rational tolerance $0<\\epsilon<1$, a certified rational $C_2\\ge0$ satisfying $C_2\\ge\\sum_{1\\le j<\\ell\\le m}\\|[H_j,H_\\ell]\\|$, and a supplied certified rational upper bound $R\\ge0$ satisfying $R\\ge t^2C_2/\\epsilon$. For $t\\ne0$, put $r=\\max\\{1,\\lceil R\\rceil\\}$ and $h=t/r$; the access declarations must supply each term call at this exact signed code $h$, with its implementation and costs. A call may be directly supported at $h$ or supplied by separately declared inverse or time-reversed access, with that route's own costs. When $t\\ne0$, every approximate call must have a certified error, and the sum of those errors over all $rm$ calls must be at most $\\epsilon/2$. The time-code and call conventions are those of [[def-qa-20-term-list-access-model]].\n\n**Output:** The composed unitary circuit for the declared product order, together with its query, gate, ancilla, coefficient-bit, description-bit, and classical-generation cost record.\n\n**Instructions:**\n\n1. Compare the exact value of the supplied time code with $0$. If it is $0$, return the identity circuit.\n2. Otherwise set $r=\\max\\{1,\\lceil R\\rceil\\}$ using rational arithmetic and set $h=t/r$ as a supported finite expression code.\n3. For each of exactly $r$ repetitions, execute the declared term calls chronologically in order $m,m-1,\\ldots,1$. By [[def-qc-circuit-denotational-semantics]], later executed gates multiply on the left. The ideal exact-call operator for one repetition is therefore $e^{-ihH_1}\\cdots e^{-ihH_m}$ of [[def-qa-20-first-order-product-formula]]; with supplied implementations the actual operator is $V_1(h)\\cdots V_m(h)$, with the declared call errors accumulated separately. If the call at $h$ is supplied through inverse or time-reversed access, use that separately declared route and its cost and error record; do not infer it from forward access alone.\n4. Keep circuit-generation, coefficient, and all oracle costs in their separate declared coordinates. When $t\\ne0$ and calls are approximate, retain their per-call error records; admissibility requires their sum over all $rm$ calls to be at most $\\epsilon/2$.\n\nThe procedure makes no claim that the required term calls or their uniform generator exist for an arbitrary matrix.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-20-first-order-commutator-error",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space, let $H_1,\\ldots,H_m$ be self-adjoint endomorphisms of $V$ with $m\\ge1$, and set $H=\\sum_{j=1}^mH_j$. For every real $t$ and integer $r\\ge1$,\n$$\\left\\|S_1(t/r)^r-U_H(t)\\right\\|\\le\\frac{t^2}{2r}\\sum_{1\\le j<k\\le m}\\|[H_j,H_k]\\|,$$\nwhere $S_1$ has the fixed order of [[def-qa-20-first-order-product-formula]] and $U_H(t)=e^{-itH}$ is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-20-term-list-access-model",
+          "source_section": "Definition",
+          "quote": "A **term-list access input** consists of an integer $m\\ge1$, finite-dimensional self-adjoint endomorphisms $H_1,\\ldots,H_m$ on one stated register, and the exact target $H=\\sum_{j=1}^m H_j$. A supported time code is a finite expression whose leaves are rational numbers or symbols $\\rho_q$ denoting the unique positive real root of $x^q=4$ for an odd integer $q\\ge1$; [[thm-nth-roots-exist]] gives a unique nonnegative root; it is positive because $0^q=0\\ne4$. Internal operations are addition, subtraction, multiplication, or division by a nonzero expression. Its exact real value and bit length are recorded. These codes include rational times and every coefficient-scaled rational time in the finite Suzuki recursion.\n\nFor each $j$, the input declares which time codes are supported and supplies either the exact operation $e^{-isH_j}$ or a full-list uniform circuit generator, in the sense of [[def-qc-uniform-circuit-family]], that returns a unitary $V_j(s)$ together with a certified error $\\eta_j(s)\\ge0$ satisfying $\\|V_j(s)-e^{-isH_j}\\|\\le\\eta_j(s)$. If a circuit uses auxiliary registers, it supplies the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] so that its induced operation $V_j(s)$ on the target is well-defined: clean registers start and return to zero for every target input, and dirty registers are acted on by the identity. The operator-norm error is measured on the induced target operation. The provider specifies how each supported code is passed to the generator and records its actual description length and generation time; no polynomial bound is inferred. This is an explicit access promise, not a claim that every matrix has such a family.\n\nFor each supported call the input records its named-oracle query counts, gate count, ancillary wires, description bits, coefficient bits, and classical generation cost. Costs of composing the calls into a full product and generating that product are separately recorded as $Q_{\\rm wrap}$ and $G_{\\rm wrap}$. A controlled form is available only when separately declared as the block operation of [[def-qc-controlled-unitary-access]]. Inverse access to a call is available only when separately declared under [[def-qc-inverse-unitary-access]], with its own cost and error record. Forward access implies neither capability. The term list supplies no promise that any operation or coefficient computation is free.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $t=0$, the algorithm returns the identity and the exact evolution is also the identity. Otherwise $r=\\max\\{1,\\lceil R\\rceil\\}\\ge R\\ge t^2C_2/\\epsilon$. Since $C_2$ bounds the commutator sum, [F2] gives exact product error at most $t^2C_2/(2r)\\le\\epsilon/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replace the exact term calls one at a time by their supplied unitary implementations. For unitaries, the definition [F5] and submultiplicativity [F4] show that left and right multiplication preserve operator norm. Thus a telescoping expansion of the two products bounds the operator-norm change by the sum of the individual call errors. The input certificate in [F1] makes this total at most $\\epsilon/2$. The triangle inequality with step 1.1 gives total error at most $\\epsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $t\\ne0$, each of the $m$ term circuits occurs once in each of $r$ repetitions, so their query and gate totals are $r\\sum_jq_j$ and $r\\sum_jg_j$. For $t=0$ there are no term calls, and hence zero term-call query and gate costs. Adding the separately declared composition/generation overhead gives the stated bounds in either branch; the other resource coordinates are charged separately by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof step 1.1 cover the zero-dimensional target; the term-call and resource counts remain as declared."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1 covers t=0 and the identity branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 3.1 counts the single call per segment when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1 covers C2=0, where r=1 and the exact formula error vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The input requires 0<epsilon<1; verification step 1.1 covers t=0 and r>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The rational certificates and signed-time implementations are supplied; r=max(1,ceil R) is explicit. Steps 1.1–3.1 use this r and the declared rm calls, without selecting a circuit from an unspecified nonempty family.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "The rational certificates and signed-time implementations are supplied; r=max(1,ceil R) is explicit. Steps 1.1–3.1 use this r and the declared rm calls, without selecting a circuit from an unspecified nonempty family.",
+            "item_sha256": "7b0920e13e0a9de81210e8176c6860f4c5fcfe63c1fea578ba44575a8431f11e",
+            "row_sha256": "53116d85017c9d366609762d1c939f9085ad363b6eaeea01e96efa5c97b93392",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use the certified r to allocate epsilon/2 exact-product and implementation error and count rm calls. This proves a sufficient resource/error certificate, without claiming that the certificate is necessary for error≤epsilon.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use the certified r to allocate epsilon/2 exact-product and implementation error and count rm calls. This proves a sufficient resource/error certificate, without claiming that the certificate is necessary for error≤epsilon.",
+            "item_sha256": "7b0920e13e0a9de81210e8176c6860f4c5fcfe63c1fea578ba44575a8431f11e",
+            "row_sha256": "96057e2c2f7d5be89509f0eea1e159a5ea0647a2032f24b704f960a9434848ae",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use the certified r to allocate epsilon/2 exact-product and implementation error and count rm calls. This proves a sufficient resource/error certificate, without claiming that the certificate is necessary for error≤epsilon.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use the certified r to allocate epsilon/2 exact-product and implementation error and count rm calls. This proves a sufficient resource/error certificate, without claiming that the certificate is necessary for error≤epsilon.",
+            "item_sha256": "7b0920e13e0a9de81210e8176c6860f4c5fcfe63c1fea578ba44575a8431f11e",
+            "row_sha256": "0fbce3ed037244bb4c5bc04be0c2c00810e443998e5b000e0d12fce524e9ae2a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all three proof steps, first-order algorithm Definition, exact commutator theorem and term-access/norm interfaces. r=max(1,ceil R)>=t^2 C2/epsilon gives epsilon/2 even for C2=0; t=0 returns identity before calls. Unitary replacement telescoping adds each of rm errors once and gives epsilon with the implementation budget. For t!=0 exactly m calls per segment yield r sum q_j and r sum g_j plus declared overhead. Negative encoded times require actual signed access; no inverse or controlled calls, ancillary semantics or coefficient/generation costs are inferred for free. Checked m=1,r=1 and zero domain. No reader/refuter finding or open mathematical prerequisite; source asymptotics are only context, local counting establishes this statement. No AC."
+      }
+    },
+    "lem-qa-20-suzuki-order-cancellation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-20-symmetric-second-order-formula",
+          "source_section": "Definition",
+          "quote": "For the announced term order $1,\\ldots,m$ and real $h$, define the palindromic product\n$$S_2(h):=e^{-ihH_1/2}e^{-ihH_2/2}\\cdots e^{-ihH_{m-1}/2}e^{-ihH_m}e^{-ihH_{m-1}/2}\\cdots e^{-ihH_2/2}e^{-ihH_1/2}.$$\nFor $m=1$ this is just $e^{-ihH_1}$. The $r$-step approximation is $S_2(t/r)^r$, with $r\\ge1$. A written product acts right-to-left, as in [[def-qa-20-first-order-product-formula]]. Every term call and any signed-time implementation cost must be declared by [[def-qa-20-term-list-access-model]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-20-suzuki-recursive-product-formula",
+          "source_section": "Definition",
+          "quote": "**Input:** Integers $k,r\\ge1$, a finite time code $t$ in the expression language of [[def-qa-20-term-list-access-model]], and a finite term-list access input.\n\n**Admissible conditions:** If $t\\ne0$, for every term occurrence $e^{-i c_\\nu tH_{j_\\nu}/r}$ in the fully expanded segment, the access input supports that exact signed time code for term $H_{j_\\nu}$ and declares its implementation, per-call costs, and any approximation-error record. The call may be supplied directly at the signed code or through separately declared inverse or time-reversed access with its own cost and error record. This condition includes the half-time calls in the base formula and every signed central call in the recursion.\n\n**Output:** The finite product circuit and its declared query, gate, ancilla, coefficient-bit, description-bit, and classical-generation costs.\n\n**Instructions:**\n\n1. Compare the exact value of the supplied time code with $0$. If it is $0$, return the identity. Otherwise begin with $S_2(h)$ from [[def-qa-20-symmetric-second-order-formula]], where $h=t/r$.\n2. For each $j=2,\\ldots,k$, let $\\rho_{2j-1}$ be the unique nonnegative root of $x^{2j-1}=4$ from [[thm-nth-roots-exist]]; it is positive since $0^{2j-1}\\ne4$. Put $p_j=(4-\\rho_{2j-1})^{-1}$, and recursively replace the current even-order formula $S_{2j-2}(h)$ by\n$$S_{2j}(h):=S_{2j-2}(p_jh)^2S_{2j-2}((1-4p_j)h)S_{2j-2}(p_jh)^2.$$\n3. Recursively expand one segment until only the term exponentials remain, retaining their displayed operator order. For exactly $r$ repetitions, execute the factors of each expanded segment chronologically in the reverse of their displayed operator order. Since later executed gates multiply on the left by [[def-qc-circuit-denotational-semantics]], the exact-call operator is $S_{2k}(t/r)^r$. If calls are approximate, execute their supplied unitary implementations in that same chronological order and retain the per-call error records; the displayed $S_{2k}$ remains the ideal exact-call word.\n4. For each central coefficient $1-4p_j$, use the implementation declared for that actual signed call time. For $q=2j-1\\ge3$, let $\\rho_q$ be the positive root of $\\rho_q^q=4$. It is positive, and $\\rho_q<4$: otherwise monotonicity of positive integer powers ([[lem-power-monotone]]) would give $\\rho_q^q\\ge4^q>4$, a contradiction. Hence $4-\\rho_q>0$, $p_j=(4-\\rho_q)^{-1}>1/4$, and $1-4p_j<0$. Thus the central coefficient is negative; the actual call time is this coefficient times the current recursive time argument. Use the resulting signed code, which may be positive or negative, with its directly supported implementation or separately declared inverse or time-reversed access. Charge exact coefficient descriptions and classical generation separately.\n\nThe recursion is finite because $j$ increases only from $2$ through $k$, and each expansion makes five calls to the preceding formula. No asymptotic error or cost guarantee is part of this procedure definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-19-finite-matrix-dynamics",
+          "source_section": "Definition",
+          "quote": "In this page a **Hamiltonian** is a self-adjoint endomorphism $H$ of a\nfinite-dimensional complex inner-product space $V$; no physical postulate is\npart of the term. Let $\\sigma(H)$ be the set of its distinct eigenvalues and\nlet $P_\\lambda$ be the orthogonal projection onto the $\\lambda$-eigenspace.\nFor real time $t$, define the finite matrix evolution\n\n$$U_H(t):=\\sum_{\\lambda\\in\\sigma(H)}e^{-it\\lambda}P_\\lambda = f_t(H),\\qquad f_t(\\lambda)=e^{-it\\lambda}.$$\n\nThe second expression uses the finite spectral functional calculus\n[[def-functional-calculus-for-a-normal-endomorphism]]. If $V$ is the zero\nspace, the spectrum is empty and the empty sum is the unique endomorphism,\nwhich is also the identity on $V$. This definition specifies a mathematical\nunitary from a finite matrix; it makes no claim that the operation has an\nefficient circuit or a free access cost.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-20-term-list-access-model",
+          "source_section": "Definition",
+          "quote": "A **term-list access input** consists of an integer $m\\ge1$, finite-dimensional self-adjoint endomorphisms $H_1,\\ldots,H_m$ on one stated register, and the exact target $H=\\sum_{j=1}^m H_j$. A supported time code is a finite expression whose leaves are rational numbers or symbols $\\rho_q$ denoting the unique positive real root of $x^q=4$ for an odd integer $q\\ge1$; [[thm-nth-roots-exist]] gives a unique nonnegative root; it is positive because $0^q=0\\ne4$. Internal operations are addition, subtraction, multiplication, or division by a nonzero expression. Its exact real value and bit length are recorded. These codes include rational times and every coefficient-scaled rational time in the finite Suzuki recursion.\n\nFor each $j$, the input declares which time codes are supported and supplies either the exact operation $e^{-isH_j}$ or a full-list uniform circuit generator, in the sense of [[def-qc-uniform-circuit-family]], that returns a unitary $V_j(s)$ together with a certified error $\\eta_j(s)\\ge0$ satisfying $\\|V_j(s)-e^{-isH_j}\\|\\le\\eta_j(s)$. If a circuit uses auxiliary registers, it supplies the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] so that its induced operation $V_j(s)$ on the target is well-defined: clean registers start and return to zero for every target input, and dirty registers are acted on by the identity. The operator-norm error is measured on the induced target operation. The provider specifies how each supported code is passed to the generator and records its actual description length and generation time; no polynomial bound is inferred. This is an explicit access promise, not a claim that every matrix has such a family.\n\nFor each supported call the input records its named-oracle query counts, gate count, ancillary wires, description bits, coefficient bits, and classical generation cost. Costs of composing the calls into a full product and generating that product are separately recorded as $Q_{\\rm wrap}$ and $G_{\\rm wrap}$. A controlled form is available only when separately declared as the block operation of [[def-qc-controlled-unitary-access]]. Inverse access to a call is available only when separately declared under [[def-qc-inverse-unitary-access]], with its own cost and error record. Forward access implies neither capability. The term list supplies no promise that any operation or coefficient computation is free.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be an ordered field ([[def-ordered-field]]), let\n$a, b \\in \\mathbb{R}$ and let $n \\in \\mathbb{N}$, with powers as in\n[[def-integer-power]].\n\n1. **Signs.** If $a \\ge 0$ then $a^n \\ge 0$, and if $a > 0$ then $a^n > 0$.\n2. **Strict monotonicity in the base.** If $0 \\le a < b$ and $n \\ge 1$ then $a^n < b^n$. Consequently, for $a, b \\ge 0$ and $n \\ge 1$: $a < b \\iff a^n < b^n$ and $a \\le b \\iff a^n \\le b^n$, and $x \\mapsto x^n$ is injective on $\\{x \\in \\mathbb{R} : x \\ge 0\\}$.\n3. **Comparison with the base.** If $a \\ge 1$ and $n \\ge 1$ then $a^n \\ge a \\ge 1$; if $a > 1$ and $n \\ge 1$ then $a^n \\ge a > 1$; and if $0 \\le a \\le 1$ then $a^n \\le 1$.\n4. **Monotonicity in the exponent.** If $a > 1$ then $a^m < a^n$ whenever $m < n$ in $\\mathbb{N}$; if $a = 1$ then $a^n = 1$ for all $n$; and if $0 < a < 1$ then $a^m > a^n$ whenever $m < n$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $A_j=-iH_j$ and $A=\\sum_jA_j$. The base word $S_2(h)$ is palindromic by [F1], so [F3] gives $S_2(-h)=S_2(h)^{-1}$; the same identity holds for $U(h)$ by [F3] and [F4]. Its derivative at zero is $A$, because the two half-time occurrences of every outer $A_j$ sum to one full occurrence, while the middle term occurs once. Also $U(0)=S_2(0)=I$. By [L2], $E(h)=S_2(h)-U(h)=Ch^2+O(h^3)$ for some matrix $C$. The inverse identities imply $E(-h)=-S_2(h)^{-1}E(h)U(h)^{-1}$; comparing degree-two terms gives $C=-C$, hence $C=0$. Thus $E(h)=O(h^3)$, proving the base order-two claim as well as the symmetry base case.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "L1",
+            "L2",
+            "algebra",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $j\\ge2$ and assume as the induction hypothesis [ih] that $S_{2j-2}(-h)=S_{2j-2}(h)^{-1}$ and that $S_{2j-2}$ agrees with $U$ through degree $2j-2$. Put $q=2j-1$, $p=p_j$, and $c=1-4p$. By [L2] and Taylor's theorem, $S_{2j-2}(h)-U(h)=Eh^q+O(h^{q+1})$. By [F6], the unique nonnegative root $\\rho_q$ with $\\rho_q^q=4$ exists; it is positive because zero has zero $q$-th power. Since $q\\ge3$, [F7] gives $\\rho_q<4$: otherwise $\\rho_q^q\\ge4^q>4$, contradicting $\\rho_q^q=4$. Thus $p=(4-\\rho_q)^{-1}>1/4$ and $c=1-4p=-\\rho_qp<0$. The five scaled copies in [F2] have leading error coefficients $p^qE,p^qE,c^qE,p^qE,p^qE$. Their other factors equal $I+O(h)$, so multiplying an error term by those factors changes it only by $O(h^{q+1})$. The ideal factors $U(ph)^2U(ch)U(ph)^2$ equal $U((4p+c)h)=U(h)$ by [F3]. The coefficient $c$ is an expression in the rational and positive-root tokens of [F5], so the signed call has a finite exact code. Hence the coefficient of $h^q$ in $S_{2j}(h)-U(h)$ is $(4p^q+c^q)E$. Since $c=-\\rho_qp$ and $\\rho_q^q=4$, $c^q=-4p^q$, so this coefficient vanishes and the difference is $O(h^{q+1})=O(h^{2j})$.",
+          "step": "1.2",
+          "inputs": [
+            "ih",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $A(h)=S_{2j-2}(ph)$ and $B(h)=S_{2j-2}(ch)$. The recursive word is $A(h)A(h)B(h)A(h)A(h)$. The induction hypothesis in step 1.2 gives inverse symmetry for $A$ and $B$; reversing the five factors shows $S_{2j}(-h)=S_{2j}(h)^{-1}$. Also $U(-h)=U(h)^{-1}$. By step 1.2 and [L2], write $S_{2j}(h)-U(h)=Dh^{2j}+O(h^{2j+1})$. The inverse identity gives $Dh^{2j}=-Dh^{2j}+O(h^{2j+1})$, hence $D=0$ and the difference is $O(h^{2j+1})$. Therefore $S_{2j}$ agrees with $U$ through degree $2j$ and has inverse symmetry. Together with the base case in step 1.1, induction proves both claims for every finite $k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "F3",
+            "L1",
+            "L2",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Base proof step 1.1 uses the finite-matrix evolution and inverse identities, which include the zero-dimensional space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-H case follows from the statement and definitions: every recursive factor and U is I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Base step 1.1 covers S_2 for m=1; steps 1.2–3.1 preserve the exact single-generator evolution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The induction step 1.2 uses no commutation or nonzero-term assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The formula identities hold for every real h; step 2.1 establishes inverse symmetry for all h."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.2 uses the unique positive q-th root of 4 to define p and c and step 2.1 uses the five-copy recursion. These uniquely specified coefficients and finite induction require no AC.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Step 1.2 uses the unique positive q-th root of 4 to define p and c and step 2.1 uses the five-copy recursion. These uniquely specified coefficients and finite induction require no AC.",
+            "item_sha256": "42b1f1321c7e7f771472b819f16138de1a310c0fcb71c1c03582214a3545bfd8",
+            "row_sha256": "c487efe9cdd61128456897888772ef7fd3a258c9df60308a95393470c9e5b4ac",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 inductively cancel the odd leading coefficient using 4p^q+c^q=0 and then the even coefficient by inverse symmetry. The Statement asserts the order and symmetry of this explicit recursive family, with no converse classifying all formulas of order 2k.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–2.1 inductively cancel the odd leading coefficient using 4p^q+c^q=0 and then the even coefficient by inverse symmetry. The Statement asserts the order and symmetry of this explicit recursive family, with no converse classifying all formulas of order 2k.",
+            "item_sha256": "42b1f1321c7e7f771472b819f16138de1a310c0fcb71c1c03582214a3545bfd8",
+            "row_sha256": "7a514724a5bc65058c3a26c5d2977a546ca45feaa6437b3d3dada5dedabef366",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 inductively cancel the odd leading coefficient using 4p^q+c^q=0 and then the even coefficient by inverse symmetry. The Statement asserts the order and symmetry of this explicit recursive family, with no converse classifying all formulas of order 2k.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–2.1 inductively cancel the odd leading coefficient using 4p^q+c^q=0 and then the even coefficient by inverse symmetry. The Statement asserts the order and symmetry of this explicit recursive family, with no converse classifying all formulas of order 2k.",
+            "item_sha256": "42b1f1321c7e7f771472b819f16138de1a310c0fcb71c1c03582214a3545bfd8",
+            "row_sha256": "5e8da0df6e151a58f285c9fa91e761db4c204c5ac0e17528f9636e5dd047ead3",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Independently read all three steps, F1-F7 and L1-L2, the actual algorithm Definition, finite matrix dynamics and unitary supplier proof, root existence and monotonicity claims/proofs. Base palindrome and derivative matching imply C=-C at degree two. At induction q=2j-1>=3 is odd; rho^q=4, 0<rho<4, p=1/(4-rho)>1/4, c=-rho p. Leading scaled errors add to (4p^q+c^q)E=0; surrounding ideal factors are I+O(h) and their exact product is U(h). Noncommutativity changes only higher-degree errors. Five-copy inverse symmetry then removes the even degree 2j term. All finite Taylor orders follow by repeated differentiation; zero matrices, m=1, zero dimension and negative h are allowed. The corrected algorithm uses the actual signed recursive argument and preserves every formula identity used here. No AC or unmet prerequisite. Reader/refuter findings are empty; p.78 citation corrected to actual p.79, while the substantive reader monotonicity enrichment is retained."
+      }
+    },
+    "thm-qa-20-suzuki-conservative-error-and-resources": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-20-suzuki-order-cancellation",
+          "source_section": "Statement",
+          "quote": "Let $H_1,\\ldots,H_m$ be fixed finite-dimensional self-adjoint matrices, $m\\ge1$, and let $U(h)=e^{-ih\\sum_jH_j}$. The recursive formulas $S_{2k}$ of [[alg-qa-20-suzuki-recursive-product-formula]] have the same Taylor coefficients as $U(h)$ through degree $2k$ at $h=0$. They are symmetric: $S_{2k}(-h)=S_{2k}(h)^{-1}$ for all real $h$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-20-suzuki-recursive-product-formula",
+          "source_section": "Definition",
+          "quote": "**Input:** Integers $k,r\\ge1$, a finite time code $t$ in the expression language of [[def-qa-20-term-list-access-model]], and a finite term-list access input.\n\n**Admissible conditions:** If $t\\ne0$, for every term occurrence $e^{-i c_\\nu tH_{j_\\nu}/r}$ in the fully expanded segment, the access input supports that exact signed time code for term $H_{j_\\nu}$ and declares its implementation, per-call costs, and any approximation-error record. The call may be supplied directly at the signed code or through separately declared inverse or time-reversed access with its own cost and error record. This condition includes the half-time calls in the base formula and every signed central call in the recursion.\n\n**Output:** The finite product circuit and its declared query, gate, ancilla, coefficient-bit, description-bit, and classical-generation costs.\n\n**Instructions:**\n\n1. Compare the exact value of the supplied time code with $0$. If it is $0$, return the identity. Otherwise begin with $S_2(h)$ from [[def-qa-20-symmetric-second-order-formula]], where $h=t/r$.\n2. For each $j=2,\\ldots,k$, let $\\rho_{2j-1}$ be the unique nonnegative root of $x^{2j-1}=4$ from [[thm-nth-roots-exist]]; it is positive since $0^{2j-1}\\ne4$. Put $p_j=(4-\\rho_{2j-1})^{-1}$, and recursively replace the current even-order formula $S_{2j-2}(h)$ by\n$$S_{2j}(h):=S_{2j-2}(p_jh)^2S_{2j-2}((1-4p_j)h)S_{2j-2}(p_jh)^2.$$\n3. Recursively expand one segment until only the term exponentials remain, retaining their displayed operator order. For exactly $r$ repetitions, execute the factors of each expanded segment chronologically in the reverse of their displayed operator order. Since later executed gates multiply on the left by [[def-qc-circuit-denotational-semantics]], the exact-call operator is $S_{2k}(t/r)^r$. If calls are approximate, execute their supplied unitary implementations in that same chronological order and retain the per-call error records; the displayed $S_{2k}$ remains the ideal exact-call word.\n4. For each central coefficient $1-4p_j$, use the implementation declared for that actual signed call time. For $q=2j-1\\ge3$, let $\\rho_q$ be the positive root of $\\rho_q^q=4$. It is positive, and $\\rho_q<4$: otherwise monotonicity of positive integer powers ([[lem-power-monotone]]) would give $\\rho_q^q\\ge4^q>4$, a contradiction. Hence $4-\\rho_q>0$, $p_j=(4-\\rho_q)^{-1}>1/4$, and $1-4p_j<0$. Thus the central coefficient is negative; the actual call time is this coefficient times the current recursive time argument. Use the resulting signed code, which may be positive or negative, with its directly supported implementation or separately declared inverse or time-reversed access. Charge exact coefficient descriptions and classical generation separately.\n\nThe recursion is finite because $j$ increases only from $2$ through $k$, and each expansion makes five calls to the preceding formula. No asymptotic error or cost guarantee is part of this procedure definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-20-term-list-access-model",
+          "source_section": "Definition",
+          "quote": "A **term-list access input** consists of an integer $m\\ge1$, finite-dimensional self-adjoint endomorphisms $H_1,\\ldots,H_m$ on one stated register, and the exact target $H=\\sum_{j=1}^m H_j$. A supported time code is a finite expression whose leaves are rational numbers or symbols $\\rho_q$ denoting the unique positive real root of $x^q=4$ for an odd integer $q\\ge1$; [[thm-nth-roots-exist]] gives a unique nonnegative root; it is positive because $0^q=0\\ne4$. Internal operations are addition, subtraction, multiplication, or division by a nonzero expression. Its exact real value and bit length are recorded. These codes include rational times and every coefficient-scaled rational time in the finite Suzuki recursion.\n\nFor each $j$, the input declares which time codes are supported and supplies either the exact operation $e^{-isH_j}$ or a full-list uniform circuit generator, in the sense of [[def-qc-uniform-circuit-family]], that returns a unitary $V_j(s)$ together with a certified error $\\eta_j(s)\\ge0$ satisfying $\\|V_j(s)-e^{-isH_j}\\|\\le\\eta_j(s)$. If a circuit uses auxiliary registers, it supplies the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] so that its induced operation $V_j(s)$ on the target is well-defined: clean registers start and return to zero for every target input, and dirty registers are acted on by the identity. The operator-norm error is measured on the induced target operation. The provider specifies how each supported code is passed to the generator and records its actual description length and generation time; no polynomial bound is inferred. This is an explicit access promise, not a claim that every matrix has such a family.\n\nFor each supported call the input records its named-oracle query counts, gate count, ancillary wires, description bits, coefficient bits, and classical generation cost. Costs of composing the calls into a full product and generating that product are separately recorded as $Q_{\\rm wrap}$ and $G_{\\rm wrap}$. A controlled form is available only when separately declared as the block operation of [[def-qc-controlled-unitary-access]]. Inverse access to a call is available only when separately declared under [[def-qc-inverse-unitary-access]], with its own cost and error record. Forward access implies neither capability. The term list supplies no promise that any operation or coefficient computation is free.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The claim is immediate on the zero-dimensional space, so assume $V\\ne\\{0\\}$. Write the expanded segment as $P(h)=F_1(h)\\cdots F_L(h)$, where $F_\\nu(h)=e^{-ihc_\\nu H_{j_\\nu}}$. Repeated differentiation gives $F_\\nu^{(a)}(h)=(-ic_\\nu H_{j_\\nu})^aF_\\nu(h)$, so [F3]–[F5] imply $\\|F_\\nu^{(a)}(h)\\|\\le |c_\\nu|^a\\|H_{j_\\nu}\\|^a$. The full multinomial sum is $\\sum_{a_1+\\cdots+a_L=q}\\frac{q!}{a_1!\\cdots a_L!}\\prod_\\nu(|c_\\nu|\\|H_{j_\\nu}\\|)^{a_\\nu}=(\\sum_\\nu|c_\\nu|\\|H_{j_\\nu}\\|)^q=B_k^q$, proving $\\|P^{(q)}(h)\\|\\le B_k^q$. Repeatedly differentiating [F3] gives $U_H^{(q)}(h)=(-iH)^qU_H(h)$. The triangle inequality from [F4] gives $\\|H\\|\\le\\sum_j\\|H_j\\|=M$, hence $\\|U_H^{(q)}(h)\\|\\le M^q$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $P-U_H$ has zero Taylor coefficients through degree $q-1$. The integral Taylor remainder of order $q$ gives $\\|P(h)-U_H(h)\\|\\le\\int_0^{|h|}\\frac{(|h|-s)^{q-1}}{(q-1)!}(B_k^q+M^q)\\,ds=\\frac{(B_k^q+M^q)|h|^q}{q!}$, using a change of variable when $h<0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both $P(h)$ and $U_H(h)$ are unitary. Their operator norms and those of their inverses are one by the unit-vector definition [F4]; submultiplicativity [F5] then shows that each unitary factor preserves the norm in a telescoping expansion. Thus their $r$th-power difference is at most $r$ times the local bound in step 2.1. Substituting $h=t/r$ yields the displayed global error.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The base segment has $2m-1$ term calls by [F2]; every recursive level replaces one formula by five copies, so induction gives $L=(2m-1)5^{k-1}$. When $t\\ne0$, [A1] supplies each call at signed time $c_\\nu t/r$ with its query and gate costs, so $r$ identical segments multiply their term-call contributions by $r$; when $t=0$, the procedure returns the identity and makes no term calls. Add the separately declared product-composition charges $Q_{\\rm wrap}$ and $G_{\\rm wrap}$ to obtain total query and gate costs; coefficient, description-bit, ancilla, and classical-generation costs stay separate as required by [F6]. If the $\\nu$th exact call is replaced by a unitary call with error $\\eta_\\nu$, expanding the difference of the two products one factor at a time and applying the norm invariance in step 3.1 bounds the total change by $\\sum_\\nu\\eta_\\nu$ over all $rL$ calls. Finally, the integer search terminates because its left side grows without bound; its inequality and the certified upper bounds make the exact-call error at most $\\epsilon$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 1.1 explicitly treats the zero-dimensional space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When M=0 all term matrices vanish and steps 1.1–2.1 give zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 4.1 gives L=1 when m=1 and k=1, and the theorem still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof step 1.1 cover zero and repeated terms without a noncommutation hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement allows t=0 and every r>=1; the integer search uses rational epsilon>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 4.1 counts the fixed recursively expanded word and selects r by the stated least-integer inequality. Every signed-time implementation is a supplied input under A1, not chosen by an existence assumption.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Step 4.1 counts the fixed recursively expanded word and selects r by the stated least-integer inequality. Every signed-time implementation is a supplied input under A1, not chosen by an existence assumption.",
+            "item_sha256": "6b687f716a64e90548a9007e2acc21adfda963ed7620be17da484aa4f1873767",
+            "row_sha256": "c40106b4b511daa9f4975c40dac4df73f82efd129d0e119ad23675f3e7757968",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 bound the derivative remainder and telescope; step 4.1 counts the expanded signed word and proves the sufficient integer search terminates. The Statement supplies an upper bound and a sufficient selection rule, not a necessary error condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 bound the derivative remainder and telescope; step 4.1 counts the expanded signed word and proves the sufficient integer search terminates. The Statement supplies an upper bound and a sufficient selection rule, not a necessary error condition.",
+            "item_sha256": "6b687f716a64e90548a9007e2acc21adfda963ed7620be17da484aa4f1873767",
+            "row_sha256": "7b80825d718310d9cf9a2a5d1b2254101d5cdd95c00d9aced5879f0c2c971aa9",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 bound the derivative remainder and telescope; step 4.1 counts the expanded signed word and proves the sufficient integer search terminates. The Statement supplies an upper bound and a sufficient selection rule, not a necessary error condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 bound the derivative remainder and telescope; step 4.1 counts the expanded signed word and proves the sufficient integer search terminates. The Statement supplies an upper bound and a sufficient selection rule, not a necessary error condition.",
+            "item_sha256": "6b687f716a64e90548a9007e2acc21adfda963ed7620be17da484aa4f1873767",
+            "row_sha256": "85ab8cc2f2b54a740785d5a27dbc1ff3441030422680220055fee65e659d345a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all four steps and all actual cited supplier interfaces after finishing cancellation review. Multinomial differentiation gives ||P^(q)||<=B_k^q for real h even with negative c_nu; ||H||<=M gives ||U^(q)||<=M^q. Matching through q-1=2k and integral Taylor remainder yield (B_k^q+M^q)|h|^q/q!; noncommutative unitary telescoping gives the stated r exponent. L=(2m-1)5^(k-1) counts the literal expanded word, without merging coincident factors, also for m=1 and k=1. Rational epsilon>0 and upper bounds make increasing integer search finite; replacing epsilon by epsilon/2 plus summed unitary call errors gives the approximate budget. Costs are declared at each actual signed c_nu t/r and multiplied by r with separate overhead; the corrected algorithm sign language preserves this promise. Checked t=0, negative t, zero terms/space, r=1, k=1. No free inverse/controlled access or hidden resource promise, no AC and no unresolved mathematical prerequisite. Reader/refuter findings are empty; source context read and wrong p.78 locator corrected to actual p.79."
+      }
+    },
+    "ex-qa-20-commuting-two-term-simulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-20-first-order-product-formula",
+          "source_section": "Definition",
+          "quote": "For a term-list input $H=\\sum_{j=1}^m H_j$, a real time $h$, and the announced order $1,\\ldots,m$, define\n$$S_1(h):=e^{-ihH_1}e^{-ihH_2}\\cdots e^{-ihH_m}.$$\nOperator products are written in their ordinary left-to-right algebraic order, so the rightmost factor acts first on a vector. For an integer $r\\ge1$, the $r$-step first-order approximation at time $t$ is $S_1(t/r)^r$. Each exponential is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]]; this definition does not identify the product with $e^{-itH}$ when terms fail to commute.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $A=-iH_1$ and $B=-iH_2$, so $AB=BA$. Define $Y(s)=e^{sA}e^{sB}$. By [F2] and the product rule, $Y'(s)=Ae^{sA}e^{sB}+e^{sA}Be^{sB}=(A+B)Y(s)$, where commutation lets $B$ pass through $e^{sA}$. Also $Y(0)=I$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The unique solution of $Z'=(A+B)Z$, $Z(0)=I$, is $U_{H_1+H_2}(s)$ by [F2]. Hence $Y(h)=U_{H_1+H_2}(h)$ for every real $h$, which proves the one-step identity in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking $h=t/r$ and composing the exact identity $r$ times gives $S_1(t/r)^r=U_{H_1+H_2}(t/r)^r=U_{H_1+H_2}(t)$ by the group law in [F2] and the product definition [F1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 2.1 uses the finite matrix uniqueness statement, including its zero-dimensional case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 3.1 includes t=0, where the identity is returned."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example fixes two terms, so the one-term boundary is not part of this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example Verification step 2.1 proves the exact commuting branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 3.1 covers every real t and r>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Verification 1.1 explicitly defines Y(s) from the two supplied matrices and step 2.1 uses uniqueness of the evolution. No state, basis or implementation is selected from a nonempty family.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.1 explicitly defines Y(s) from the two supplied matrices and step 2.1 uses uniqueness of the evolution. No state, basis or implementation is selected from a nonempty family.",
+            "item_sha256": "9f5343c09af245b55769945b856b0a3ba1848253a3f18b4ad16b2bfebe55760d",
+            "row_sha256": "1315a8c9dcab966aebab3ee03de6c835748745bad93d7d09088d994c37242ddf",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–3.1 uses commutation and uniqueness of the initial-value problem to prove exact products for all h and r. It asserts the implication from commuting terms to exactness, without a separately stated converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.1–3.1 uses commutation and uniqueness of the initial-value problem to prove exact products for all h and r. It asserts the implication from commuting terms to exactness, without a separately stated converse.",
+            "item_sha256": "9f5343c09af245b55769945b856b0a3ba1848253a3f18b4ad16b2bfebe55760d",
+            "row_sha256": "66bd28fb5d4c443d20dbc93f4f5f2d722e0966c260ae547c91197b88af7e4c6e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–3.1 uses commutation and uniqueness of the initial-value problem to prove exact products for all h and r. It asserts the implication from commuting terms to exactness, without a separately stated converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.1–3.1 uses commutation and uniqueness of the initial-value problem to prove exact products for all h and r. It asserts the implication from commuting terms to exactness, without a separately stated converse.",
+            "item_sha256": "9f5343c09af245b55769945b856b0a3ba1848253a3f18b4ad16b2bfebe55760d",
+            "row_sha256": "bb6022e5e75089bbaa68f4f296403f883247a1f26bfefe3e4cd0626c99478e86",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Exact 2-by-2 commuting instance",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "H1": "Z=diag(1,-1)",
+            "H2": "Z=diag(1,-1)",
+            "time": "pi",
+            "repetitions": 2
+          },
+          "calculation": "For one step h=pi/2, S1(h)=exp(-i pi Z/2)exp(-i pi Z/2)=exp(-i pi Z)=-I2. Thus S1(h)^2=I2. The target is exp(-i pi(H1+H2))=exp(-i 2 pi Z)=I2.",
+          "expected": {
+            "product": "I2",
+            "target": "I2",
+            "operator_norm_error": 0
+          }
+        }
+      ]
+    },
+    "cex-qa-20-sparse-oracle-does-not-give-term-list": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-20-sparse-hamiltonian-oracle-model",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge1$, a sparsity bound $d\\ge1$, an integer $b\\ge1$, and an injective code $\\mathrm{enc}:C\\to\\{0,1\\}^b$ for a finite set $C\\subset\\mathbb C$ containing $0$ and closed under conjugation. Put $w=\\lceil\\log_2N\\rceil$ and $v=\\lceil\\log_2d\\rceil$, identify $[N]$ with the first $N$ strings in $\\{0,1\\}^w$, and regard any remaining strings as invalid labels. A valid $w$-bit index is zero-extended to $w+1$ bits. Let $H=(H_{xy})_{x,y\\in[N]}$ be Hermitian, have entries in $C$, and have at most $d$ nonzero entries in every row. For each valid row $x$, list its nonzero column indices in increasing order. Define the total location function $f_H(x,\\ell)$ to be the $\\ell$-th listed index for a valid slot $0\\le\\ell<d$ when that slot exists, and a distinguished sentinel otherwise. Invalid row labels and invalid slot labels also return the sentinel. Encode the sentinel by a fixed $(w+1)$-bit word outside the valid index codes. Define the total value function $g_H(x,y)$ to return $\\mathrm{enc}(H_{xy})$ on valid labels and $\\mathrm{enc}(0)$ on invalid labels. All label widths and codes are part of the finite input description.\n\nThe **row-location oracle** and **entry-value oracle** are the coherent XOR maps $O_{f_H}|x,\\ell,z\\rangle=|x,\\ell,z\\oplus f_H(x,\\ell)\\rangle$ and $O_{g_H}|x,y,z\\rangle=|x,y,z\\oplus g_H(x,y)\\rangle$, where the output target has respectively $w+1$ and $b$ bits. The slot register has $v$ bits; all unused slot strings are invalid and use the sentinel. These are total Boolean-function oracles on every bitstring basis input. They are instances of [[def-qc-coherent-function-oracle]], whose justified-by supplier proves unitarity and involutivity for arbitrary total functions. Each named call and any separately granted controlled or inverse call is charged under [[def-qc-circuit-cost-model]]. This exact-code model describes the decoded matrix $H$; approximating a different target matrix requires a separate bound on the matrix difference. Row and value access alone does not supply a term list or term-evolution circuits.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-20-term-list-access-model",
+          "source_section": "Definition",
+          "quote": "A **term-list access input** consists of an integer $m\\ge1$, finite-dimensional self-adjoint endomorphisms $H_1,\\ldots,H_m$ on one stated register, and the exact target $H=\\sum_{j=1}^m H_j$. A supported time code is a finite expression whose leaves are rational numbers or symbols $\\rho_q$ denoting the unique positive real root of $x^q=4$ for an odd integer $q\\ge1$; [[thm-nth-roots-exist]] gives a unique nonnegative root; it is positive because $0^q=0\\ne4$. Internal operations are addition, subtraction, multiplication, or division by a nonzero expression. Its exact real value and bit length are recorded. These codes include rational times and every coefficient-scaled rational time in the finite Suzuki recursion.\n\nFor each $j$, the input declares which time codes are supported and supplies either the exact operation $e^{-isH_j}$ or a full-list uniform circuit generator, in the sense of [[def-qc-uniform-circuit-family]], that returns a unitary $V_j(s)$ together with a certified error $\\eta_j(s)\\ge0$ satisfying $\\|V_j(s)-e^{-isH_j}\\|\\le\\eta_j(s)$. If a circuit uses auxiliary registers, it supplies the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] so that its induced operation $V_j(s)$ on the target is well-defined: clean registers start and return to zero for every target input, and dirty registers are acted on by the identity. The operator-norm error is measured on the induced target operation. The provider specifies how each supported code is passed to the generator and records its actual description length and generation time; no polynomial bound is inferred. This is an explicit access promise, not a claim that every matrix has such a family.\n\nFor each supported call the input records its named-oracle query counts, gate count, ancillary wires, description bits, coefficient bits, and classical generation cost. Costs of composing the calls into a full product and generating that product are separately recorded as $Q_{\\rm wrap}$ and $G_{\\rm wrap}$. A controlled form is available only when separately declared as the block operation of [[def-qc-controlled-unitary-access]]. Inverse access to a call is available only when separately declared under [[def-qc-inverse-unitary-access]], with its own cost and error record. Forward access implies neither capability. The term list supplies no promise that any operation or coefficient computation is free.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $N=2^n$, equip $\\mathbb C^N$ with its standard inner product, and let $|x\\rangle$ denote its standard basis. For any function $f:[N]\\to\\{-1,+1\\}$ define $H_f=\\sum_{x=1}^N f(x)|x\\rangle\\langle x|$. This diagonal matrix is Hermitian and each row has exactly one nonzero entry; the row-location oracle returns $x$ at the nonzero slot, and the entry-value oracle returns $f(x)$ on the diagonal query $(x,x)$. Thus the input is $1$-sparse in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The canonical ordered rank-one list is $H_f=\\sum_{x=1}^N f(x)|x\\rangle\\langle x|$, with $N$ terms, and is determined by $(f(1),\\ldots,f(N))$. There are $2^N$ such lists but only $2^N-1$ binary strings of length less than $N$, so any lossless binary encoding has a worst-case length of at least $N$ bits. If a deterministic exact recovery procedure makes fewer than $N$ classical row-value queries, some row $x$ is unqueried; changing only $f(x)$ preserves every reply in its transcript but changes the canonical list, so that transcript cannot determine the list for both inputs.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $N=2^n$, this canonical list's description and exact classical recovery costs grow exponentially in the index length $n$. The sparse model supplies only the row/value calls by [F1], whereas the term-list model additionally requires the list and term-evolution access by [F2]; those extra promises therefore cannot be inferred from the sparse interface. No lower bound for every possible alternative decomposition, quantum query procedure, or circuit implementation is asserted.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires N>=1, so an empty matrix dimension is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witness uses nonzero diagonal entries; the zero-matrix branch is not needed for this counterexample."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The asymptotic information lower bound uses arbitrarily large N; N=1 is not needed to refute the universal polynomial-size claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1 verifies Hermiticity and 1-sparsity for every sign function."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "No time or precision endpoint is part of the counterexample statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 defines H_f for every sign string and step 2.1 uses an unqueried coordinate in a finite N-row transcript. A least unqueried coordinate can be used; no AC or infinite selection is involved.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Step 1.1 defines H_f for every sign string and step 2.1 uses an unqueried coordinate in a finite N-row transcript. A least unqueried coordinate can be used; no AC or infinite selection is involved.",
+            "item_sha256": "964952822a7ffacb82cccf8a79f30534ba08765923381517dde0472e15fa2999",
+            "row_sha256": "908f389eb30b5fb7114a30312be089d836304d12006d84564527920c49508c5f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use the diagonal sign family to prove N-bit description and deterministic classical recovery bounds for the canonical list. This separates access interfaces and does not assert an iff for every alternative decomposition or quantum procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use the diagonal sign family to prove N-bit description and deterministic classical recovery bounds for the canonical list. This separates access interfaces and does not assert an iff for every alternative decomposition or quantum procedure.",
+            "item_sha256": "964952822a7ffacb82cccf8a79f30534ba08765923381517dde0472e15fa2999",
+            "row_sha256": "8d92cd2aeefac8a411b9f08a873fa3340a1022d40fddecf2c9f3afdea6a4ac39",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use the diagonal sign family to prove N-bit description and deterministic classical recovery bounds for the canonical list. This separates access interfaces and does not assert an iff for every alternative decomposition or quantum procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Steps 1.1–3.1 use the diagonal sign family to prove N-bit description and deterministic classical recovery bounds for the canonical list. This separates access interfaces and does not assert an iff for every alternative decomposition or quantum procedure.",
+            "item_sha256": "964952822a7ffacb82cccf8a79f30534ba08765923381517dde0472e15fa2999",
+            "row_sha256": "e34f0f50654c907bdcac7021f884bccfe353b5be6dd52609eaf96764d1b399b1",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Four-row diagonal oracle counting instance",
+          "method": "exact finite counting argument",
+          "input": {
+            "N": 4,
+            "possible_sign_functions": "all 2^4=16 maps from [4] to {-1,+1}"
+          },
+          "calculation": "There are 1+2+4+8=15 binary strings of length less than 4, so at least one of the 16 sign lists needs at least 4 description bits. Any transcript of fewer than 4 row-value queries leaves an unqueried row; flipping its sign gives a distinct input with the same transcript.",
+          "expected": {
+            "worst_case_description_bits_at_least": 4,
+            "worst_case_queries_for_exact_recovery_at_least": 4
+          }
+        }
+      ]
+    },
+    "ex-qa-20-noncommuting-pauli-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-20-first-order-commutator-error",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space, let $H_1,\\ldots,H_m$ be self-adjoint endomorphisms of $V$ with $m\\ge1$, and set $H=\\sum_{j=1}^mH_j$. For every real $t$ and integer $r\\ge1$,\n$$\\left\\|S_1(t/r)^r-U_H(t)\\right\\|\\le\\frac{t^2}{2r}\\sum_{1\\le j<k\\le m}\\|[H_j,H_k]\\|,$$\nwhere $S_1$ has the fixed order of [[def-qa-20-first-order-product-formula]] and $U_H(t)=e^{-itH}$ is the finite-matrix evolution of [[def-qa-19-finite-matrix-dynamics]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the standard inner product, direct conjugate transpose gives $X^*=X$ and $Z^*=Z$. Matrix multiplication gives $XZ=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}=-iY$ and $ZX=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}=iY$. Therefore $[X,Z]=XZ-ZX=-2iY$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same matrices give $Y^*Y=I_2$. Hence [F2] and [F3] give $\\|Y\\|=1$, and scalar homogeneity of the operator norm yields $\\|[X,Z]\\|=2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting $H_1=X$, $H_2=Z$ and $\\|[X,Z]\\|=2$ into [F1] gives $\\|S_1(t/r)^r-U_{X+Z}(t)\\|\\le(t^2/(2r))2=t^2/r$. For the exact finite boundary $t=0$, both evolutions are $I_2$ and the error is zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $H_1=\\lambda X$ and $H_2=Z-\\lambda X$, both terms are Hermitian and their sum is $Z$. Direct multiplication gives $Z^*Z=I_2$, and [F2]–[F3] give $\\|Z\\|=1$. Bilinearity and $[X,X]=0$ give $[H_1,H_2]=\\lambda[X,Z]$, whose norm is $2\\lambda$ by [step 2.1] and $\\lambda\\ge0$. Thus [F1] gives the sufficient certificate $\\lambda t^2/r$. To make this particular bound at most $\\epsilon$ requires $r\\ge\\lambda t^2/\\epsilon$ when $t\\ne0$. For fixed $t\\ne0$ and $\\epsilon>0$, this threshold is unbounded as $\\lambda$ grows while the total matrix and its norm stay fixed; it shows that this error certificate cannot choose a uniform $r$ from $\\|H\\|$ and $\\epsilon$ alone. It is not a lower bound on the actual simulation error.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes the two-dimensional space C^2, so an empty-space case is not part of the example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 3.1 treats t=0 exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example concerns two terms; m=1 is outside this example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The displayed Pauli matrices are explicitly noncommuting in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 3.1 covers t=0 and each r>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All three Pauli matrices and H_1=lambda X,H_2=Z-lambda X are explicit. Verification 1.1–4.1 performs matrix products and norm substitutions, without choosing a decomposition from an existence theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "All three Pauli matrices and H_1=lambda X,H_2=Z-lambda X are explicit. Verification 1.1–4.1 performs matrix products and norm substitutions, without choosing a decomposition from an existence theorem.",
+            "item_sha256": "86c040fd5e3bc12e37b5f9a6a468f47d3a378656de6a0e1f1e70afeb4bc47c1e",
+            "row_sha256": "96fcc6f17b32595a536a5cda36c6652f8390d0420287451e98cced1da93933c8",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–4.1 calculates [X,Z]=-2iY and the sufficient certificates t^2/r and lambda t^2/r. The Example explicitly disclaims an actual-error lower bound, so the certificate threshold is not a necessary-and-sufficient condition on simulation accuracy.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.1–4.1 calculates [X,Z]=-2iY and the sufficient certificates t^2/r and lambda t^2/r. The Example explicitly disclaims an actual-error lower bound, so the certificate threshold is not a necessary-and-sufficient condition on simulation accuracy.",
+            "item_sha256": "86c040fd5e3bc12e37b5f9a6a468f47d3a378656de6a0e1f1e70afeb4bc47c1e",
+            "row_sha256": "95cfba2d2fc6dad4ffbd2d015e342ab217ec1d94de8b8770d2a4bec431fcc7c4",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–4.1 calculates [X,Z]=-2iY and the sufficient certificates t^2/r and lambda t^2/r. The Example explicitly disclaims an actual-error lower bound, so the certificate threshold is not a necessary-and-sufficient condition on simulation accuracy.",
+          "template_review": {
+            "upheld": true,
+            "by": "Root binding of actual current review: batches31-45",
+            "reason": "Verification 1.1–4.1 calculates [X,Z]=-2iY and the sufficient certificates t^2/r and lambda t^2/r. The Example explicitly disclaims an actual-error lower bound, so the certificate threshold is not a necessary-and-sufficient condition on simulation accuracy.",
+            "item_sha256": "86c040fd5e3bc12e37b5f9a6a468f47d3a378656de6a0e1f1e70afeb4bc47c1e",
+            "row_sha256": "9ce9926c395f4c06799187e17fdc9b6b77713683cf082259783156b0a9c8ad82",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step3-boundary-repair/batches31-45.md"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Exact Pauli commutator and norm",
+          "method": "exact 2-by-2 matrix calculation",
+          "input": {
+            "X": "[[0,1],[1,0]]",
+            "Y": "[[0,-i],[i,0]]",
+            "Z": "[[1,0],[0,-1]]"
+          },
+          "calculation": "Direct multiplication gives XZ=[[0,-1],[1,0]]=-iY and ZX=[[0,1],[-1,0]]=iY, hence [X,Z]=-2iY. Since Y*Y=I2, ||Y||=1 and ||[X,Z]||=2.",
+          "expected": {
+            "commutator": "-2iY",
+            "commutator_operator_norm": 2,
+            "first_order_two_term_bound": "t^2/r"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,503 @@
+{
+  "group": "q",
+  "batches": [
+    "14"
+  ],
+  "pages_read": [
+    "uniform-circuit-families-promise-problems-and-complexity",
+    "uniform-circuit-families-promise-problems-and-complexity-examples"
+  ],
+  "items_read": [
+    "def-qc-circuit-cost-model",
+    "def-qc-promise-computation-model",
+    "def-qc-uniform-circuit-family",
+    "def-qc-quantum-acceptance-probability",
+    "lem-qc-uniform-family-size-bound",
+    "def-qc-oracle-full-list-circuit-family",
+    "alg-qc-bounded-error-amplification",
+    "lem-qc-acceptance-probability-phase-invariance",
+    "thm-qc-output-acceptance-law-normalizes",
+    "def-qc-bqp-promise-class",
+    "thm-qc-bounded-error-amplification-correct",
+    "thm-qc-bqp-error-robustness",
+    "ex-qc-bqp-promise-off-domain"
+  ],
+  "conventions": [
+    {
+      "convention": "Lengths start at n=0; a zero-qubit register is C with basis {1}. Output tuples have distinct ordered wires and may be empty. Auxiliary initialization does not require restoration.",
+      "fixed_by": "def-qc-promise-computation-model",
+      "matters_for": [
+        "def-qc-quantum-acceptance-probability",
+        "thm-qc-output-acceptance-law-normalizes",
+        "alg-qc-bounded-error-amplification",
+        "ex-qc-bqp-promise-off-domain"
+      ]
+    },
+    {
+      "convention": "The root inner product is linear first and conjugate-linear second. Acceptance sums squared coordinate moduli over every unmeasured wire.",
+      "fixed_by": "def-qc-quantum-acceptance-probability",
+      "matters_for": [
+        "lem-qc-acceptance-probability-phase-invariance",
+        "thm-qc-output-acceptance-law-normalizes",
+        "thm-qc-bounded-error-amplification-correct"
+      ]
+    },
+    {
+      "convention": "Full-list uniformity means one polynomial-time deterministic one-tape machine prints the complete circuit from unary length. Input and total-wire counts are unary; gates are exactly H, T, T†, and control-first CNOT.",
+      "fixed_by": "def-qc-uniform-circuit-family",
+      "matters_for": [
+        "lem-qc-uniform-family-size-bound",
+        "def-qc-bqp-promise-class",
+        "alg-qc-bounded-error-amplification",
+        "thm-qc-bqp-error-robustness"
+      ]
+    },
+    {
+      "convention": "YES and NO sets are disjoint; off-promise behavior is unrestricted. The total polynomial-time terminal predicate receives both classical input x and measured output z.",
+      "fixed_by": "def-qc-promise-computation-model",
+      "matters_for": [
+        "def-qc-bqp-promise-class",
+        "thm-qc-bqp-error-robustness",
+        "ex-qc-bqp-promise-off-domain"
+      ]
+    },
+    {
+      "convention": "Clean and dirty counts require declared exact return contracts for a specified data/ancilla partition and target unitary. Zero initialization alone supplies neither contract. Minimum-layer depth differs from declared depth.",
+      "fixed_by": "def-qc-circuit-cost-model",
+      "matters_for": [
+        "thm-qc-bounded-error-amplification-correct",
+        "def-qc-oracle-full-list-circuit-family"
+      ]
+    },
+    {
+      "convention": "Oracle ports are fixed memoryless unitaries. Forward, inverse, controlled-forward, and controlled-inverse access require separate grants. Raw calls and positive charged query costs are separate; binary charges can be exponentially large.",
+      "fixed_by": "def-qc-oracle-full-list-circuit-family",
+      "matters_for": [
+        "alg-qc-bounded-error-amplification",
+        "thm-qc-bounded-error-amplification-correct"
+      ]
+    },
+    {
+      "convention": "For δ=u/v, repetition uses r=2s(n)^2(ell(v)+1); ties at the rational midpoint are accepted. Only computational-basis inputs are copied.",
+      "fixed_by": "alg-qc-bounded-error-amplification",
+      "matters_for": [
+        "thm-qc-bounded-error-amplification-correct",
+        "thm-qc-bqp-error-robustness"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qc-promise-computation-model",
+      "statement": "A finite quantum promise computation consists of a disjoint promise pair, finite unitary circuits on classical-basis inputs with zero-initialized auxiliary wires, distinct ordered output-wire tuples, and total terminal predicates; no intermediate measurement or off-promise correctness requirement is imposed.",
+      "used_by": [
+        "def-qc-quantum-acceptance-probability",
+        "def-qc-oracle-full-list-circuit-family",
+        "alg-qc-bounded-error-amplification",
+        "thm-qc-output-acceptance-law-normalizes"
+      ]
+    },
+    {
+      "id": "def-qc-uniform-circuit-family",
+      "statement": "A full-list uniform quantum circuit family is a sequence (C_n) for n≥0 together with one fixed deterministic one-tape Turing machine G and constants c≥1 and k∈N such that G, on unary input 1^n, halts within c(n+1)^k transitions with a valid complete circuit description on its final tape.",
+      "used_by": [
+        "lem-qc-uniform-family-size-bound",
+        "def-qc-oracle-full-list-circuit-family",
+        "def-qc-bqp-promise-class",
+        "alg-qc-bounded-error-amplification",
+        "ex-qc-bqp-promise-off-domain"
+      ]
+    },
+    {
+      "id": "thm-qc-output-acceptance-law-normalizes",
+      "statement": "For every finite promise computation, every length n, and every classical input x of length n, the output weights are nonnegative and sum to one. Acceptance is the probability of the specified acceptance event, lies in [0,1], and agrees with the computational-basis POVM outcome law on the named output register.",
+      "used_by": [
+        "def-qc-bqp-promise-class",
+        "thm-qc-bounded-error-amplification-correct"
+      ]
+    },
+    {
+      "id": "def-qc-circuit-cost-model",
+      "statement": "The cost record separates complete-description length, gate count, minimum-layer depth, width, declared exact clean/dirty ancilla counts, generator time, predicate time and space, named oracle queries, and applicable precision data; inapplicable coordinates are marked not applicable.",
+      "used_by": [
+        "def-qc-oracle-full-list-circuit-family",
+        "alg-qc-bounded-error-amplification",
+        "thm-qc-bounded-error-amplification-correct",
+        "thm-qc-bqp-error-robustness"
+      ]
+    },
+    {
+      "id": "thm-qc-bounded-error-amplification-correct",
+      "statement": "Under the algorithm's valid-input conditions and base YES acceptance at least α(n) and NO acceptance at most β(n), with α(n)−β(n)≥1/s(n), amplified YES acceptance is at least 1−δ(n) and NO acceptance at most δ(n). The repeated gate count is r(n)g(C_n)+n(r(n)−1), width is r(n)w(C_n), and depth, description length, generation time, and predicate time and space are polynomial.",
+      "used_by": [
+        "thm-qc-bqp-error-robustness"
+      ]
+    },
+    {
+      "id": "def-qc-bqp-promise-class",
+      "statement": "A promise problem belongs to BQP in the QC14 model when a full-list uniform fixed-library family and polynomial-time acceptance predicate have acceptance at least 2/3 on every YES input and at most 1/3 on every NO input, without off-promise conditions.",
+      "used_by": [
+        "thm-qc-bqp-error-robustness",
+        "ex-qc-bqp-promise-off-domain"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-promise-problem",
+      "used_for": "Disjoint YES/NO sets, possibly empty or undecidable promises, and unrestricted off-promise behavior.",
+      "opened": true
+    },
+    {
+      "id": "def-effective-binary-encoding-and-decoder",
+      "used_for": "Injective binary encodings and total malformed-code decoders.",
+      "opened": true
+    },
+    {
+      "id": "def-deterministic-one-tape-turing-machine",
+      "used_for": "Fixed deterministic machine model and one-cell writes per transition.",
+      "opened": true
+    },
+    {
+      "id": "def-partial-function-computed-by-a-machine",
+      "used_for": "Encoded finite-word machine outputs.",
+      "opened": true
+    },
+    {
+      "id": "def-worst-case-time-and-space-complexity",
+      "used_for": "Transition-count and visited-cell resource conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Linearity in the first argument and conjugate-linearity in the second.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The adjoint identity underlying matrix acceptance expressions.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Unitary norm preservation.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Finite orthonormal coordinate bases, including dimension zero.",
+      "opened": true
+    },
+    {
+      "id": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+      "used_for": "Closure of finite unitary products.",
+      "opened": true
+    },
+    {
+      "id": "thm-bessel-inequality-and-finite-parseval-identity",
+      "used_for": "Coordinate expansions and normalization by squared coordinate moduli.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "used_for": "Conjugate-transpose matrix convention in orthonormal bases.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Matrix shapes and zero-based indices.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Finite row-by-column products in density and trace calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Trace as the diagonal sum.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Basis-independent operator trace and the partial-trace comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Normalized finite weights, event probabilities, and event containment.",
+      "opened": true
+    },
+    {
+      "id": "lem-chernoff-bound-for-independent-bernoulli-trials",
+      "used_for": "The additive two-sided bound P(|S−μ|≥t)≤2 exp(−2t²/r), including deterministic Bernoulli endpoints.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-qc-bounded-error-amplification-correct",
+      "concern": "The Statement says, 'Whenever the base interface declares clean or dirty ancillary registers satisfying the corresponding exact contract, each such register's count is multiplied by r(n).' Proof 4.1 asserts preservation without requiring these registers to avoid the first n input wires. The cited cost definition permits an arbitrary declared data/ancilla partition. At n=1 take the gate-free identity circuit on one input wire, declare D empty and that wire A, with target I_C. Its exact dirty contract holds. Choose output wire 0, YES={1}, NO={0}, α=2/3, β=1/3, s=3, δ=1/4, giving r=72. The repeated circuit is the input-copy CNOT fanout. On the purported repeated dirty register it maps |1,0,...,0> to |1,1,...,1>, so it is not I and does not satisfy the asserted repeated dirty contract. The probability amplification remains valid; the ancillary-contract conclusion needs an explicit restriction or a separate treatment of partitions intersecting input wires.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-qa-25-bounded-error-parity-query-lower-bound",
+      "finding": "F2 states, '[[def-qc-uniform-circuit-family]]: the fixed inter-query circuits do not depend on the oracle input; the output is a measured computational-basis bit.' That supplier defines ordinary H/T/T†/CNOT full-list families, contains no oracle-query interface, and permits arbitrary ordered output tuples. It does not state either attributed query-model condition. Proof 1.1 uses the input-independence assertion and Proof 2.1 uses the output-bit interpretation. These are standard query-model assumptions, but their stated citation does not supply them.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "item": "thm-qa-25-sparse-no-fast-forwarding-lower-bound",
+      "finding": "F8 states, '[[def-qc-uniform-circuit-family]] and [[def-promise-problem]]: the query algorithm is input-independent between oracle calls and must meet its error guarantee on every input in the full Boolean-cube promise.' The promise supplier supports the correctness scope, but def-qc-uniform-circuit-family defines an ordinary finite-gate family and supplies no hidden-instance oracle-query independence condition. Proof 1.2 and 4.1 invoke F8. The oracle-query condition needs the actual query/access interface rather than this attribution.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "item": "def-qa-33-witness-verifier-interface",
+      "finding": "The Definition calls A_n 'a clean-ancilla register' and subsequently says only that 'the clean ancillas start in |0^{a(n)}>.' Its cited def-qc-clean-and-dirty-ancillas defines clean ancillas by exact return to zero for every data vector, while def-qc-promise-computation-model explicitly distinguishes initialization from that stronger contract. This verifier definition imposes no return condition. The term 'clean' therefore attributes a contract not supplied by the displayed interface; zero-initialized workspace is the property actually stated.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "approximate-universality-and-solovay-kitaev",
+      "faithful": true,
+      "note": "Contextual prerequisite; no compilation or gate-set equivalence is inferred."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Ordered supports, disjoint layers, chronological composition, unitary denotation, and resource distinctions agree."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "clifford-t-exact-and-approximate-synthesis",
+      "faithful": true,
+      "note": "Exact H/T/T†/CNOT matrices, control order, number field, and controlled-phase caveat agree."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "continuous-gate-universality-and-exact-synthesis",
+      "faithful": true,
+      "note": "Context only; no continuous-gate implementation is granted in the fixed finite library."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "The normalization proof constructs density operators and a finite nonempty computational-basis POVM before applying its outcome formula."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Big-endian order, linear-first pairing, empty tensor unit, and partial-trace formula agree."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": false,
+      "note": "The cost definition faithfully imports exact clean/dirty contracts, but amplification's unrestricted dirty-contract preservation has the input-wire counterexample recorded in concerns."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "trace-distance-fidelity-and-information-limits",
+      "faithful": true,
+      "note": "Contextual requirement; repetition claims copying only classical-basis inputs and invokes no arbitrary-state cloning result."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Finite instrument branches are explicitly an extension; hidden inputs and charged resource coordinates remain distinguished."
+    },
+    {
+      "from": "quantum-phase-estimation",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Controlled-power access and ideal gate costs are explicitly supplied rather than inferred from ordinary uniformity."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Gate, bit, and query costs are separate; the page explicitly disclaims a finite-alphabet uniform-family bound."
+    },
+    {
+      "from": "shors-factoring-algorithm",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The cost citation preserves separate coordinates and makes no generator-time or finite-alphabet claim."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Supplied exact preparation, oracle, and Fourier circuits are distinguished from uniform generation and classical output cost."
+    },
+    {
+      "from": "grover-search-and-invariant-plane-rotations",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Query, preparation, reflection, verification, and classical preprocessing costs remain separate."
+    },
+    {
+      "from": "amplitude-amplification",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Cost citations grant no free inverse, control, preparation, or exact phase implementation."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The acceptance projection used in the state-distance lemma is the terminal-event specialization of the coordinate acceptance law."
+    },
+    {
+      "from": "polynomial-method-and-approximate-degree",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The page explicitly specializes to oracle-only access and does not grant its terminal predicate hidden-input access."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Output-one projection acceptance is used after the separately cited query normal form."
+    },
+    {
+      "from": "discrete-quantum-walks-and-szegedy-theory",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The walk-access cost citation preserves separate circuit, generator, query, and precision coordinates."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Preparation, row access, controls, checks, gates, and query costs remain explicitly supplied."
+    },
+    {
+      "from": "continuous-time-quantum-walks",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Mathematical evolution is separated from implementation, synthesis, and uniformity claims."
+    },
+    {
+      "from": "hamiltonian-simulation-and-product-formulas",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Term providers state access and exact ancillary contracts; cost definitions infer no polynomial implementation from matrices."
+    },
+    {
+      "from": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "PREPARE, SELECT, inverses, controls, tables, and generation costs are separately declared."
+    },
+    {
+      "from": "block-encodings",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Access records preserve inapplicable coordinates and distinguish matrices from supplied circuits."
+    },
+    {
+      "from": "quantum-signal-processing",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Signal queries, phase rotations, generation, and implementation precision remain separate."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Query counts do not silently include controls, phase compilation, workspace, or classical generation."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": false,
+      "note": "Resource citations agree, but the parity and no-fast-forwarding theorems attribute oracle-query independence to the ordinary uniform-family definition; exact findings are in alerts."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Simulator, preparation, reflection, inverse/control, gate, and classical costs are separately charged."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Capped amplification explicitly charges iterate factors, controlled variants, and classical work."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Fresh preparation, controlled simulation, phase generation, and implementation costs remain explicit."
+    },
+    {
+      "from": "quantum-sampling-expectation-and-monte-carlo",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Sampler and estimator citations preserve separate preparation, query, reflection, arithmetic, precision, and output costs."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The page retains explicit oracle and computational-model qualifications without claiming free uniform compilation."
+    },
+    {
+      "from": "period-hidden-shift-and-number-theoretic-algorithms",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Sieve and discrete-logarithm resource citations keep queries, controlled/inverse access, gates, and classical work separate."
+    },
+    {
+      "from": "quantum-complexity-classes-and-oracle-separations",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "EQP, bounded-failure ZQP, and containment proofs preserve full-list generation, normalized output law, exact gates, BQP thresholds, and off-promise freedom."
+    },
+    {
+      "from": "quantum-complexity-classes-and-oracle-separations-examples",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The oracle-versus-gate separation example uses the separate query and ordinary-gate coordinates faithfully."
+    },
+    {
+      "from": "qma-verification-and-local-hamiltonian",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": false,
+      "note": "The witness extension and generator convention are explicit, but the verifier calls merely zero-initialized workspace clean ancillas; see the terminology alert."
+    },
+    {
+      "from": "algorithm-composition-precision-and-dequantization",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Cost composition includes connecting operations and distinguishes additive costs, width allocations, error fields, and conditional-state guarantees."
+    },
+    {
+      "from": "quantum-communication-and-fingerprinting",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Promise context and local computation are distinguished from communicated qubits; no circuit-uniformity claim is inferred from code existence."
+    },
+    {
+      "from": "adiabatic-computation-and-circuit-equivalence",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The history-path algorithm preserves chronological circuit order and separately records initial preparation and term-access costs."
+    },
+    {
+      "from": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Optimization distinguishes minimum-layer depth and whole-circuit phase. Circuit counting explicitly fixes the measured-bit event and excludes free classical postprocessing."
+    }
+  ]
+}

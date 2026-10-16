@@ -1,0 +1,1441 @@
+
+
+=== PDF PAGE 1 ===
+arXiv:0811.3171v3  [quant-ph]  30 Sep 2009
+Quantum algorithm for linear systems of equations
+Aram W. Harrow,1 Avinatan Hassidim,2 and Seth Lloyd3
+1Department of Mathematics, University of Bristol, Bristol, BS8 1TW, U.K.
+2MIT - Research Laboratory for Electronics, Cambridge, MA 02139, USA
+3MIT - Research Laboratory for Electronics and Department of Mechanical Engineering, Cambridge, MA 02139, USA
+Solving linear systems of equations is a common problem that arises both on its own and as a
+subroutine in more complex problems: given a matrix A and a vector ⃗b, ﬁnd a vector ⃗x such that
+A⃗x = ⃗b. We consider the case where one doesn’t need to know the solution ⃗x itself, but rather an
+approximation of the expectation value of some operator associated with ⃗x, e.g., ⃗x†M⃗x for some
+matrix M. In this case, when A is sparse, N × N and has condition number κ, classical algorithms
+can ﬁnd ⃗x and estimate ⃗x†M⃗x in ˜O(N√κ) time. Here, we exhibit a quantum algorithm for this task
+that runs in poly(log N, κ) time, an exponential improvement over the best classical algorithm.
+I.
+INTRODUCTION
+Quantum computers are devices that harness quantum mechanics to perform computations in ways that classical
+computers cannot. For certain problems, quantum algorithms supply exponential speedups over their classical coun-
+terparts, the most famous example being Shor’s factoring algorithm [1]. Few such exponential speedups are known,
+and those that are (such as the use of quantum computers to simulate other quantum systems [2]) have so far found
+limited use outside the domain of quantum mechanics. This paper presents a quantum algorithm to estimate features
+of the solution of a set of linear equations. Compared to classical algorithms for the same task, our algorithm can be
+as much as exponentially faster.
+Linear equations play an important role in virtually all ﬁelds of science and engineering. The sizes of the data sets
+that deﬁne the equations are growing rapidly over time, so that terabytes and even petabytes of data may need to
+be processed to obtain a solution. In other cases, such as when discretizing partial diﬀerential equations, the linear
+equations may be implicitly deﬁned and thus far larger than the original description of the problem. For a classical
+computer even to approximate the solution of N linear equations in N unknowns in general requires time that scales
+at least as N. Indeed, merely to write out the solution takes time of order N. Frequently, however, one is interested
+not in the full solution to the equations, but rather in computing some function of that solution, such as determining
+the total weight of some subset of the indices. We show that in some cases, a quantum computer can approximate the
+value of such a function in time which scales logarithmically in N, and polynomially in the condition number (deﬁned
+below) and desired precision. The dependence on N is exponentially better than what is achievable classically, while
+the dependence on condition number is comparable, and the dependence on error is worse. Thus our algorithm can
+achieve useful, and even exponential, speedups in a wide variety of settings where N is large and the condition number
+is small.
+We sketch here the basic idea of our algorithm, and then discuss it in more detail in the next section. Given a
+Hermitian N × N matrix A, and a unit vector ⃗b, suppose we would like to ﬁnd ⃗x satisfying A⃗x = ⃗b. (We discuss
+later questions of eﬃciency as well as how the assumptions we have made about A and ⃗b can be relaxed.) First, the
+algorithm represents ⃗b as a quantum state |b⟩= PN
+i=1 bi |i⟩. Next, we use techniques of Hamiltonian simulation[3, 4]
+to apply eiAt to |b⟩for a superposition of diﬀerent times t. This ability to exponentiate A translates, via the well-
+known technique of phase estimation[5–7], into the ability to decompose |b⟩in the eigenbasis of A and to ﬁnd the
+corresponding eigenvalues λj. Informally, the state of the system after this stage is close to PN
+j=1 βj |uj⟩|λj⟩, where
+uj is the eigenvector basis of A, and |b⟩= PN
+j=1 βj |uj⟩. We would then like to perform the linear map taking |λj⟩
+to Cλ−1
+j
+|λj⟩, where C is a normalizing constant. As this operation is not unitary, it has some probability of failing,
+which will enter into our discussion of the run-time below. After it succeeds, we uncompute the |λj⟩register and are
+left with a state proportional to PN
+j=1 βjλ−1
+j
+|uj⟩= A−1 |b⟩= |x⟩.
+An important factor in the performance of the matrix inversion algorithm is κ, the condition number of A, or the
+ratio between A’s largest and smallest eigenvalues. As the condition number grows, A becomes closer to a matrix which
+cannot be inverted, and the solutions become less stable. Such a matrix is said to be “ill-conditioned.” Our algorithms
+will generally assume that the singular values of A lie between 1/κ and 1; equivalently κ−2I ≤A†A ≤I. In this
+case, our runtime will scale as κ2 log(N)/ǫ, where ǫ is the additive error achieved in the output state |x⟩. Therefore,
+the greatest advantage our algorithm has over classical algorithms occurs when both κ and 1/ǫ are poly log(N), in
+which case it achieves an exponential speedup. However, we will also discuss later some techniques for handling
+ill-conditioned matrices.
+
+
+=== PDF PAGE 2 ===
+2
+This procedure yields a quantum-mechanical representation |x⟩of the desired vector ⃗x. Clearly, to read out all the
+components of ⃗x would require one to perform the procedure at least N times. However, often one is interested not
+in ⃗x itself, but in some expectation value ⃗xT M⃗x, where M is some linear operator (our procedure also accommodates
+nonlinear operators as described below). By mapping M to a quantum-mechanical operator, and performing the
+quantum measurement corresponding to M, we obtain an estimate of the expectation value ⟨x| M |x⟩= ⃗xT M⃗x, as
+desired. A wide variety of features of the vector ⃗x can be extracted in this way, including normalization, weights in
+diﬀerent parts of the state space, moments, etc.
+A simple example where the algorithm can be used is to see if two diﬀerent stochastic processes have similar stable
+state [8]. Consider a stochastic process ⃗xt = A⃗xt−1 + ⃗b, where the i’th coordinate in the vector ⃗xt represents the
+abundance of item i in time t. The stable state of this distribution is given by |x⟩= (I −A)−1 |b⟩. Let ⃗x′
+t = A′⃗x′
+t−1+⃗b′,
+and |x′⟩= (I −A′)−1 |b′⟩. To know if |x⟩and |x′⟩are similar, we perform the SWAP test between them [9]. We note
+that classically ﬁnding out if two probability distributions are similar requires at least O(
+√
+N) samples [10].
+The strength of the algorithm is that it works only with O(log N)-qubit registers, and never has to write down all
+of A, ⃗b or ⃗x. In situations (detailed below) where the Hamiltonian simulation and our non-unitary step incur only
+poly log(N) overhead, this means our algorithm takes exponentially less time than a classical computer would need
+even to write down the output. In that sense, our algorithm is related to classical Monte Carlo algorithms, which
+achieve dramatic speedups by working with samples from a probability distribution on N objects rather than by
+writing down all N components of the distribution. However, while these classical sampling algorithms are powerful,
+we will prove that in fact any classical algorithm requires in general exponentially more time than our quantum
+algorithms to perform the same matrix inversion task.
+Outline
+The rest of the Letter proceeds by ﬁrst describing our algorithm in detail, analyzing its run-time and com-
+paring it with the best known classical algorithms. Next, we prove (modulo some complexity-theoretic assumptions)
+hardness results for matrix inversion that imply both that our algorithm’s run-time is nearly optimal, and that it runs
+exponentially faster than any classical algorithm. We conclude with a discussion of applications, generalizations and
+extensions.
+Related work
+Previous papers gave quantum algorithms to perform linear algebraic operations in a limited setting
+[11]. Our work was extended by [12] to solving nonlinear diﬀerential equations.
+II.
+ALGORITHM
+We now give a more detailed explanation of the algorithm. First, we want to transform a given Hermitian matrix A
+into a unitary operator eiAt which we can apply at will. This is possible (for example) if A is s-sparse and eﬃciently
+row computable, meaning it has at most s nonzero entries per row and given a row index these entries can be computed
+in time O(s). Under these assumptions, Ref. [3] shows how to simulate eiAt in time
+˜O(log(N)s2t),
+where the ˜O suppresses more slowly-growing terms (described in [13]). If A is not Hermitian, deﬁne
+C =
+ 0
+A
+A† 0
+
+(1)
+As C is Hermitian, we can solve the equation C⃗y =
+⃗b
+0
+
+to obtain y =
+
+0
+⃗x
+
+. Applying this reduction if necessary,
+the rest of the Letter assumes that A is Hermitian.
+We also need an eﬃcient procedure to prepare |b⟩. For example, if bi and Pi2
+i=i1 |bi|2 are eﬃciently computable then
+we can use the procedure of Ref. [14] to prepare |b⟩. Alternatively, our algorithm could be a subroutine in a larger
+quantum algorithm of which some other component is responsible for producing |b⟩.
+The next step is to decompose |b⟩in the eigenvector basis, using phase estimation [5–7].
+Denote by |uj⟩the
+eigenvectors of A (or equivalently, of eiAt), and by λj the corresponding eigenvalues. Let
+|Ψ0⟩:=
+r
+2
+T
+T −1
+X
+τ=0
+sin π(τ + 1
+2)
+T
+|τ⟩
+(2)
+for some large T . The coeﬃcients of |Ψ0⟩are chosen (following [5, 7]) to minimize a certain quadratic loss function
+which appears in our error analysis (see [13] for details).
+
+
+=== PDF PAGE 3 ===
+3
+Next we apply the conditional Hamiltonian evolution PT −1
+τ=0 |τ⟩⟨τ|C ⊗eiAτt0/T on |Ψ0⟩C ⊗|b⟩, where t0 = O(κ/ǫ).
+Fourier transforming the ﬁrst register gives the state
+N
+X
+j=1
+T −1
+X
+k=0
+αk|jβj |k⟩|uj⟩,
+(3)
+where |k⟩are the Fourier basis states, and |αk|j| is large if and only if λj ≈2πk
+t0 . Deﬁning ˜λk := 2πk/t0, we can relabel
+our |k⟩register to obtain
+N
+X
+j=1
+T −1
+X
+k=0
+αk|jβj
+˜λk
+E
+|uj⟩
+Adding an ancilla qubit and rotating conditioned on
+˜λk
+E
+yields
+N
+X
+j=1
+T −1
+X
+k=0
+αk|jβj
+˜λk
+E
+|uj⟩
+ s
+1 −C2
+˜λ2
+k
+|0⟩+ C
+˜λk
+|1⟩
+!
+,
+where C = O(1/κ). We now undo the phase estimation to uncompute the
+˜λk
+E
+. If the phase estimation were perfect,
+we would have αk|j = 1 if ˜λk = λj, and 0 otherwise. Assuming this for now, we obtain
+N
+X
+j=1
+βj |uj⟩
+ s
+1 −C2
+λ2
+j
+|0⟩+ C
+λj
+|1⟩
+!
+To ﬁnish the inversion we measure the last qubit. Conditioned on seeing 1, we have the state
+s
+1
+PN
+j=1 C2|βj|2/|λj|2
+N
+X
+j=1
+βj
+C
+λj
+|uj⟩
+which corresponds to |x⟩= Pn
+j=1 βjλ−1
+j
+|uj⟩up to normalization. We can determine the normalization factor from
+the probability of obtaining 1. Finally, we make a measurement M whose expectation value ⟨x| M |x⟩corresponds to
+the feature of ⃗x that we wish to evaluate.
+Run-time and error analysis
+We present an informal description of the sources of error; the exact error analysis and
+runtime considerations are presented in [13]. Performing the phase estimation is done by simulating eiAt. Assuming
+that A is s-sparse, this can be done with error ǫ in time proportional to ts2(t/ǫ)o(1) =: ˜O(ts2).
+The dominant source of error is phase estimation. This step errs by O(1/t0) in estimating λ, which translates into
+a relative error of O(1/λt0) in λ−1. If λ ≥1/κ taking t0 = O(κ/ǫ) induces a ﬁnal error of ǫ. Finally, we consider the
+success probability of the post-selection process. Since C = O(1/κ) and λ ≤1, this probability is at least Ω(1/κ2).
+Using amplitude ampliﬁcation [15], we ﬁnd that O(κ) repetitions are suﬃcient. Putting this all together, we obtain
+the stated runtime of ˜O
+ log(N)s2κ2/ǫ
+
+.
+III.
+OPTIMALITY
+Classical matrix inversion algorithms
+To put our algorithm in context, one of the best general-purpose classical ma-
+trix inversion algorithms is the conjugate gradient method [16], which, when A is positive deﬁnite, uses O(√κ log(1/ǫ))
+matrix-vector multiplications each taking time O(Ns) for a total runtime of O(Ns√κ log(1/ǫ)). (If A is not positive
+deﬁnite, O(κ log(1/ǫ)) multiplications are required, for a total time of O(Nsκ log(1/ǫ)).) An important question is
+whether classical methods can be improved when only a summary statistic of the solution, such as ⃗x†M⃗x, is required.
+Another question is whether our quantum algorithm could be improved, say to achieve error ǫ in time proportional to
+poly log(1/ǫ). We show that the answer to both questions is negative, using an argument from complexity theory. Our
+strategy is to prove that the ability to invert matrices (with the right choice of parameters) can be used to simulate
+a general quantum computation.
+
+
+=== PDF PAGE 4 ===
+4
+The complexity of matrix inversion
+We show that a quantum circuit using n qubits and T gates can be simulated
+by inverting an O(1)-sparse matrix A of dimension N = O(2nκ). The condition number κ is O(T 2) if we need A to
+be positive deﬁnite or O(T ) if not. This implies that a classical poly(log N, κ, 1/ǫ)-time algorithm would be able to
+simulate a poly(n)-gate quantum algorithm in poly(n) time. Such a simulation is strongly conjectured to be false,
+and is known to be impossible in the presence of oracles [17].
+The reduction from a general quantum circuit to a matrix inversion problem also implies that our algorithm cannot
+be substantially improved (under standard assumptions). If the run-time could be made polylogarithmic in κ, then any
+problem solvable on n qubits could be solved in poly(n) time (i.e. BQP=PSPACE), a highly unlikely possibility.
+Even improving our κ-dependence to κ1−δ for δ > 0 would allow any time-T quantum algorithm to be simulated
+in time o(T ); iterating this would again imply that BQP=PSPACE. Similarly, improving the error dependence
+to poly log(1/ǫ) would imply that BQP includes PP, and even minor improvements would contradict oracle lower
+bounds [18].
+The reduction
+We now present the key reduction from simulating a quantum circuit to matrix inversion. Let C be
+a quantum circuit acting on n = log N qubits which applies T two-qubit gates U1, . . . UT . The initial state is |0⟩⊗n
+and the answer is determined by measuring the ﬁrst qubit of the ﬁnal state.
+Now adjoin an ancilla register of dimension 3T and deﬁne a unitary
+U =
+T
+X
+t=1
+|t+1⟩⟨t| ⊗Ut + |t+T +1⟩⟨t+T | ⊗I + |t+2T +1 mod 3T⟩⟨t+2T | ⊗U †
+3T +1−t.
+(4)
+We have chosen U so that for T + 1 ≤t ≤2T , applying U t to |1⟩|ψ⟩yields |t + 1⟩⊗UT · · · U1 |ψ⟩. If we now deﬁne
+A = I −Ue−1/T then κ(A) = O(T ), and we can expand
+A−1 =
+X
+k≥0
+U ke−k/T ,
+(5)
+This can be interpreted as applying U t for t a geometrically-distributed random variable. Since U 3T = I, we can
+assume 1 ≤t ≤3T . If we measure the ﬁrst register and obtain T + 1 ≤t ≤2T (which occurs with probability
+e−2/(1 + e−2 + e−4) ≥1/10) then we are left with the second register in the state UT · · · U1 |ψ⟩, corresponding to a
+successful computation. Sampling from |x⟩allows us to sample from the results of the computation. This establishes
+that matrix inversion is BQP-complete, and proves our above claims about the diﬃculty of improving our algorithm.
+IV.
+DISCUSSION
+There are a number of ways to extend our algorithm and relax the assumptions we made while presenting it. We will
+discuss ﬁrst how to invert a broader class of matrices and then consider measuring other features of ⃗x and performing
+operations on A other than inversion.
+Certain non-sparse A can be simulated and therefore inverted; see [4] for techniques and examples. It is also possible
+to invert non-square matrices, using the reduction presented from the non-Hermitian case to the Hermitian one.
+The matrix inversion algorithm can also handle ill-conditioned matrices by inverting only the part of |b⟩which is
+in the well-conditioned part of the matrix. Formally, instead of transforming |b⟩= P
+j βj |uj⟩to |x⟩= P
+j λ−1
+j βj |uj⟩,
+we transform it to a state which is close to
+X
+j,λj<1/κ
+λ−1
+j βj |uj⟩|well⟩+
+X
+j,λj≥1/κ
+βj |uj⟩|ill⟩
+in time proportional to κ2 for any chosen κ (i.e. not necessarily the true condition number of A). The last qubit is a
+ﬂag which enables the user to estimate what the size of the ill-conditioned part, or to handle it in any other way she
+wants. This behavior can be advantageous if we know that A is not invertible and we are interested in the projection
+of |b⟩on the well-conditioned part of A.
+Another method that is often used in classical algorithms to handle ill-conditioned matrices is to apply a
+preconditioner[19]. If we have a method of generating a preconditioner matrix B such that κ(AB) is smaller than
+κ(A), then we can solve A⃗x = ⃗b by instead solving the possibly easier matrix inversion problem (AB)⃗c = B⃗b. Further,
+if A and B are both sparse, then AB is as well. Thus, as long as a state proportional to B |b⟩can be eﬃciently
+prepared, our algorithm could potentially run much faster if a suitable preconditioner is used.
+
+
+=== PDF PAGE 5 ===
+5
+The outputs of the algorithm can also be generalized. We can estimate degree-2k polynomials in the entries of ⃗x
+by generating k copies of |x⟩and measuring the nk-qubit observable
+X
+i1,...,ik,j1,...,jk
+Mi1,...,ik,j1,...,jk |i1, . . . , ik⟩⟨j1, . . . , jk|
+on the state |x⟩⊗k . Alternatively, one can use our algorithm to generate a quantum analogue of Monte-Carlo, where
+given A and ⃗b we sample from the vector ⃗x, meaning that the value i occurs with probability |⃗xi|2.
+Perhaps the most far-reaching generalization of the matrix inversion algorithm is not to invert matrices at all!
+Instead, it can compute f(A) |b⟩for any computable f. Depending on the degree of nonlinearity of f, nontrivial
+tradeoﬀs between accuracy and eﬃciency arise. Some variants of this idea are considered in [4, 12, 20].
+Acknowledgements. We thank the W.M. Keck foundation for support, and AWH thanks them as well as MIT
+for hospitality while this work was carried out. AWH was also funded by the U.K. EPSRC grant “QIP IRC.” SL
+thanks R. Zecchina for encouraging him to work on this problem. We are grateful as well to R. Cleve, D. Farmer, S.
+Gharabian, J. Kelner, S. Mitter, P. Parillo, D. Spielman and M. Tegmark for helpful discussions.
+APPENDIX A: PROOF DETAILS
+In this appendix, we describe and analyze our algorithm in full detail. While the body of the paper attempted to
+convey the spirit of the procedure and left out various improvements, here we take the opposite approach and describe
+everything, albeit possibly in a less intuitive way. We also describe in more detail our reductions from non-Hermitian
+matrix inversion to Hermitian matrix inversion (Section A 4) and from a general quantum computation to matrix
+inversion (Section A 5).
+As inputs we require a procedure to produce the state |b⟩, a method of producing the ≤s non-zero elements of any
+row of A and a choice of cutoﬀκ. Our run-time will be roughly quadratic in κ and our algorithm is guaranteed to be
+correct if ∥A∥≤1 and ∥A−1∥≤κ.
+The condition number is a crucial parameter in the algorithm. Here we present one possible method of handling
+ill-conditioned matrices. We will deﬁne the well-conditioned part of A to be the span of the eigenspaces corresponding
+to eigenvalues ≥1/κ and the ill-conditioned part to be the rest. Our strategy will be to ﬂag the ill-conditioned part of
+the matrix (without inverting it), and let the user choose how to further handle this. Since we cannot exactly resolve
+any eigenvalue, we can only approximately determine whether vectors are in the well- or ill-conditioned subspaces.
+Accordingly, we choose some κ′ > κ (say κ′ = 2κ). Our algorithm then inverts the well-conditioned part of the matrix,
+ﬂags any eigenvector with eigenvalue ≤1/κ′ as ill-conditioned, and interpolates between these two behaviors when
+1/κ′ < |λ| < 1/κ. This is described formally in the next section. We present this strategy not because it is necessarily
+ideal in all cases, but because it gives a concrete illustration of the key components of our algorithm.
+Finally, the algorithm produces |x⟩only up to some error ǫ which is given as part of the input. We work only with
+pure states, and so deﬁne error in terms of distance between vectors, i.e. ∥|α⟩−|β⟩∥=
+p
+2(1 −Re ⟨α|β⟩). Since
+ancilla states are produced and then imperfectly uncomputed by the algorithm, our output state will technically have
+high ﬁdelity not with |x⟩but with |x⟩|000 . . .⟩. In general we do not write down ancilla qubits in the |0⟩state, so we
+write |x⟩instead of |x⟩|000 . . .⟩for the target state, |b⟩instead of |b⟩|000 . . .⟩for the initial state, and so on.
+1.
+Detailed description of the algorithm
+To produce the input state |b⟩, we assume that there exists an eﬃciently-implementable unitary B, which when
+applied to |initial⟩produces the state |b⟩, possibly along with garbage in an ancilla register. We make no further
+assumption about B; it may represent another part of a larger algorithm, or a standard state-preparation procedure
+such as [14]. Let TB be the number of gates required to implement B. We neglect the possibility that B errs in
+producing |b⟩since, without any other way of producing or verifying the state |b⟩, we have no way to mitigate these
+errors. Thus, any errors in producing |b⟩necessarily translate directly into errors in the ﬁnal state |x⟩.
+Next, we deﬁne the state
+|Ψ0⟩=
+r
+2
+T
+T −1
+X
+τ=0
+sin π(τ + 1
+2)
+T
+|τ⟩
+(A1)
+for a T to be chosen later. Using [14], we can prepare |Ψ0⟩up to error ǫΨ in time poly log(T/ǫΨ).
+
+
+=== PDF PAGE 6 ===
+6
+One other subroutine we will need is Hamiltonian simulation. Using the reductions described in Section A 4, we
+can assume that A is Hermitian. To simuluate eiAt for some t ≥0, we use the algorithm of [3]. If A is s-sparse, t ≤t0
+and we want to guarantee that the error is ≤ǫH, then this requires time
+TH = O(log(N)(log∗(N))2s2t09
+√
+log(s2t0/ǫH)) = ˜O(log(N)s2t0)
+(A2)
+The scaling here is better than any power of 1/ǫH, which means that the additional error introduced by this step
+introduces is negligible compared with the rest of the algorithm, and the runtime is almost linear with t0. Note that
+this is the only step where we require that A be sparse; as there are some other types of Hamiltonians which can be
+simulated eﬃciently (e.g. [3, 4, 21]), this broadens the set of matrices we can handle.
+The key subroutine of the algorithm, denoted Uinvert, is deﬁned as follows:
+1. Prepare |Ψ0⟩C from |0⟩up to error ǫΨ.
+2. Apply the conditional Hamiltonian evolution PT −1
+τ=0 |τ⟩⟨τ|C ⊗eiAτt0/T up to error ǫH.
+3. Apply the Fourier transform to the register C. Denote the resulting basis states with |k⟩, for k = 0, . . . T −1.
+Deﬁne ˜λk := 2πk/t0.
+4. Adjoin a three-dimensional register S in the state
+h(˜λk)
+ES
+:=
+q
+1 −f(˜λk)2 −g(˜λk)2 |nothing⟩S + f(˜λk) |well⟩S + g(˜λk) |ill⟩S ,
+for functions f(λ), g(λ) deﬁned below in (A3). Here ‘nothing’ indicates that the desired matrix inversion hasn’t
+taken place, ‘well’ indicates that it has, and ‘ill’ means that part of |b⟩is in the ill-conditioned subspace of A.
+5. Reverse steps 1-3, uncomputing any garbage produced along the way.
+The functions f(λ), g(λ) are known as ﬁlter functions[22], and are chosen so that for some constant C > 1:
+f(λ) = 1/Cκλ for λ ≥1/κ, g(λ) = 1/C for λ ≤1/κ′ := 1/2κ and f 2(λ) + g2(λ) ≤1 for all λ. Additionally, f(λ)
+should satisfy a certain continuity property that we will describe in the next section. Otherwise the functions are
+arbitrary. One possible choice is
+f(λ) =
+
+
+
+
+
+1
+2κλ
+when λ ≥1/κ
+1
+2 sin
+
+π
+2 ·
+λ−1
+κ′
+1
+κ −1
+κ′
+
+when 1
+κ > λ ≥1
+κ′
+0
+when
+1
+κ′ > λ
+(A3a)
+g(λ) =
+
+
+
+
+
+0
+when λ ≥1/κ
+1
+2 cos
+
+π
+2 ·
+λ−1
+κ′
+1
+κ −1
+κ′
+
+when 1
+κ > λ ≥1
+κ′
+1
+2
+when
+1
+κ′ > λ
+(A3b)
+If Uinvert is applied to |uj⟩it will, up to an error we will discuss below, adjoin the state |h(λj)⟩. Instead if we apply
+Uinvert to |b⟩(i.e. a superposition of diﬀerent |uj⟩), measure S and obtain the outcome ‘well’, then we will have
+approximately applied an operator proportional to A−1. Let ˜p (computed in the next section) denote the success
+probability of this measurement. Rather than repeating 1/˜p times, we will use amplitude ampliﬁcation [15] to obtain
+the same results with O(1/√˜p) repetitions. To describe the procedure, we introduce two new operators:
+Rsucc = IS −2|well⟩⟨well|S,
+acting only on the S register and
+Rinit = I −2|initial⟩⟨initial|.
+Our main algorithm then follows the amplitude ampliﬁcation procedure: we start with UinvertB |initial⟩and repeat-
+edly apply UinvertBRinitB†U †
+invertRsucc. Finally we measure S and stop when we obtain the result ‘well’. The number
+of repetitions would ideally be π/4√˜p, which in the next section we will show is O(κ). While ˜p is initially unknown,
+the procedure has a constant probability of success if the number of repetitions is a constant fraction of π/4˜p. Thus,
+following [15] we repeat the entire procedure with a geometrically increasing number of repetitions each time: 1, 2,
+4, 8, . . . , until we have reached a power of two that is ≥κ. This yields a constant probability of success using ≤4κ
+repetitions.
+Putting everything together, the run-time is ˜O(κ(TB+t0s2 log(N)), where the ˜O suppresses the more-slowly growing
+terms of (log∗(N))2, exp(O(1/
+p
+log(t0/ǫH))) and poly log(T/ǫΨ). In the next section, we will show that t0 can be
+taken to be O(κ/ǫ) so that the total run-time is ˜O(κTB + κ2s2 log(N)/ǫ).
+
+
+=== PDF PAGE 7 ===
+7
+2.
+Error Analysis
+In this section we show that taking t0 = O(κ/ǫ) introduces an error of ≤ǫ in the ﬁnal state. The main subtlety in
+analyzing the error comes from the post-selection step, in which we choose only the part of the state attached to the
+|well⟩register. This can potentially magnify errors in the overall state. On the other hand, we may also be interested
+in the non-postselected state, which results from applying Uinvert a single time to |b⟩. For instance, this could be used
+to estimate the amount of weight of |b⟩lying in the ill-conditioned components of A. Somewhat surprisingly, we show
+that the error in both cases is upper-bounded by O(κ/t0).
+In this section, it will be convenient to ignore the error terms ǫH and ǫΨ, as these can be made negligible with
+relatively little eﬀort and it is the errors from phase estimation that will dominate. Let ˜U denote a version of Uinvert
+in which everything except the phase estimation is exact. Since ∥˜U −Uinvert∥≤O(ǫH + ǫΨ), it is suﬃcient to work
+with ˜U. Deﬁne U to be the ideal version of Uinvert in which there is no error in any step.
+Theorem 1 (Error bounds).
+1. In the case when no post-selection is performed, the error is bounded as
+∥˜U −U∥≤O(κ/t0).
+(A4)
+2. If we post-select on the ﬂag register being in the space spanned by {|well⟩, |ill⟩} and deﬁne the normalized ideal
+state to be |x⟩and our actual state to be |˜x⟩then
+∥|˜x⟩−|x⟩∥≤O(κ/t0).
+(A5)
+3. If |b⟩is entirely within the well-conditioned subspace of A and we post-select on the ﬂag register being |well⟩then
+∥|˜x⟩−|x⟩∥≤O(κ/t0).
+(A6)
+The third claim is often of the most practical interest, but the other two are useful if we want to work with the
+ill-conditioned space, or estimate its weight.
+The rest of the section is devoted to the proof of Theorem 1. We ﬁrst show that the third claim is a corollary of
+the second, and then prove the ﬁrst two claims more or less independently. To prove (A5 assuming (A4), observe
+that if |b⟩is entirely in the well-conditioned space, the ideal state |x⟩is proportional to A−1 |b⟩|well⟩. Model the
+post-selection on |well⟩by a post-selection ﬁrst on the space spanned by {|well⟩, |ill⟩}, followed by a post-selection
+onto |well⟩. By (A4), the ﬁrst post-selection leaves us with error O(κ/t0). This implies that the second post-selection
+will succeed with probability ≥1 −O(κ2/t2
+0) and therefore will increase the error by at most O(κ/t0). The ﬁnal error
+is then O(κ/t0) as claimed in (A6).
+Now we turn to the proof of (A4). A crucial piece of the proof will be the following statement about the continuity
+of |h(λ)⟩.
+Lemma 2. The map λ 7→|h(λ)⟩is O(κ)-Lipschitz, meaning that for any λ1 ̸= λ2,
+∥|h(λ1)⟩−|h(λ2)⟩∥=
+p
+2(1 −Re ⟨h(λ1)|h(λ2)⟩) ≤cκ|λ1 −λ2|,
+for some c = O(1).
+Proof. Since λ 7→|h(λ)⟩is continuous everywhere and diﬀerentiable everywhere except at 1/κ and 1/κ′, it suﬃces to
+bound the norm of the derivative of |h(λ)⟩. We consider it piece by piece. When λ > 1/κ,
+d
+dλ |h(λ)⟩=
+1
+2κ2λ3p
+1 −1/2κ2λ2 |nothing⟩−
+1
+2κλ2 |well⟩,
+which has squared norm
+1
+2κ2λ4(2κ2λ2−1) +
+1
+4κ2λ4 ≤κ2. Next, when 1/κ′ < λ < 1/κ, the norm of
+d
+dλ |h(λ)⟩is
+1
+2 · π
+2 ·
+1
+1
+κ −1
+κ′
+= π
+2 κ.
+Finally
+d
+dλ |h(λ)⟩= 0 when λ < 1/κ′. This completes the proof, with c = π
+2 .
+
+
+=== PDF PAGE 8 ===
+8
+Now we return to the proof of (A4). Let ˜P denote the ﬁrst three steps of the algorithm. They can be thought of
+as mapping the initial zero qubits to a |k⟩register, together with some garbage, as follows:
+˜P =
+n
+X
+j=1
+|uj⟩⟨uj| ⊗
+X
+k
+αk|j |k⟩|garbage(j, k)⟩⟨initial| ,
+where the guarantee that the phase estimation algorithm gives us is that αk|j is concentrated around λj ≈2πk/t0 =:
+˜λk. Technically, ˜P should be completed to make it a unitary operator by deﬁning some arbitrary behavior on inputs
+other than |initial⟩in the last register.
+Consider a test state |b⟩= PN
+j=1 βj |uj⟩. The ideal functionality is deﬁned by
+|ϕ⟩= U |b⟩=
+N
+X
+j=1
+βj |uj⟩|h(λj)⟩,
+while the actual algorithm produces the state
+| ˜ϕ⟩= ˜U |b⟩= ˜P †
+N
+X
+j=1
+βj |uj⟩
+X
+k
+αk|j |k⟩
+h(˜λk)
+E
+,
+We wish to calculate ⟨˜ϕ|ϕ⟩, or equivalently the inner product between ˜P | ˜ϕ⟩and ˜P |ϕ⟩= P
+j,k βjαk|j |uj⟩|k⟩|h(λj)⟩.
+This inner product is
+⟨˜ϕ|ϕ⟩=
+N
+X
+j=1
+|βj|2 X
+k
+|αk|j|2 D
+h(˜λk)|h(λj)
+E
+:= EjEk
+D
+h(˜λk)|h(λj)
+E
+,
+where we think of j and k as random variables with joint distribution Pr(j, k) = |βj|2|αk|j|2. Thus
+Re ⟨˜ϕ|ϕ⟩= EjEkRe
+D
+h(˜λk)|h(λj)
+E
+.
+Let δ = λjt0 −2πk = t0(λj −˜λk). From Lemma 2, Re
+D
+h(˜λk)|h(λj)
+E
+≥1 −c2κ2δ2/2t2
+0, where c ≤π
+2 is a constant.
+There are two sources of inﬁdelity. For δ ≤2π, the inner product is at least 1 −2π2c2κ2/t2
+0. For larger values of δ,
+we use the bound |αk|j|2 ≤64π2/(λjt0 −2πk)4 (proved in Section A 3) to ﬁnd an inﬁdelity contribution that is
+≤2
+∞
+X
+k=
+λj t0
+2π +1
+64π2
+δ4
+c2κ2δ2
+2t2
+0
+= 64π2c2κ2
+t2
+0
+∞
+X
+k=1
+1
+4π2k2 = 8π2c2
+3
+· κ2
+t2
+0
+.
+Summarizing, we ﬁnd that Re ⟨˜ϕ|ϕ⟩≥1 −5π2c2κ2/t2
+0, which translates into ∥| ˜ϕ⟩−|ϕ⟩∥≤4πcκ/t0 = 2π2κ/t0.
+Since the initial state |b⟩was arbitrary, this bounds the operator distance ∥˜U −U∥as claimed in (A4).
+Turning now to the post-selected case, we observe that
+|x⟩:= f(A) |b⟩|well⟩+ g(A) |b⟩|ill⟩
+p
+⟨b| (f(A)2 + g(A)2) |b⟩
+(A7)
+=
+P
+j βj |uj⟩(f(λj) |well⟩+ g(λj) |ill⟩)
+qP
+j |βj|2(f(λj)2 + g(λj)2)
+(A8)
+=:
+P
+j βj |uj⟩(f(λj) |well⟩+ g(λj) |ill⟩)
+√p
+.
+(A9)
+Where in the last step we have deﬁned
+p := Ej[f(λj)2 + g(λj)2]
+to be the probability that the post-selection succeeds. Naively, this post-selection could magnify the errors by as
+much as 1/√p, but by careful examination of the errors, we ﬁnd that this worst-case situation only occurs when the
+
+
+=== PDF PAGE 9 ===
+9
+errors are small in the ﬁrst place. This is what will allow us to obtain the same O(κ/t0) error bound even in the
+post-selected state.
+Now write the actual state that we produce as
+|˜x⟩:=
+˜P † PN
+j=1 βj |uj⟩P
+k αk|j |k⟩(f(˜λk) |well⟩+ g(˜λk) |ill⟩)
+q
+Ej,kf(˜λk)2 + g(˜λk)2
+(A10)
+=:
+˜P † PN
+j=1 βj |uj⟩P
+k αk|j |k⟩(f(˜λk) |well⟩+ g(˜λk) |ill⟩)
+√˜p
+,
+(A11)
+where we have deﬁned ˜p = Ej,k[f(˜λk)2 + g(˜λk)2].
+Recall that j and k are random variables with joint distribution Pr(j, k) = |βj|2|αk|j|2. We evaluate the contribution
+of a single j value. Deﬁne λ := λj and ˜λ := 2πk/t0. Note that δ = t0(λ−˜λ) and that Eδ, Eδ2 = O(1). Here δ depends
+implicitly on both j and k, and the above bounds on its expectations hold even when conditioning on an arbitrary
+value of j.
+We further abbreviate f := f(λ), ˜f := ˜f(λ), g := g(λ) and ˜g = ˜g(λ).
+Thus p := E[f 2 + g2] and
+˜p = E[ ˜f 2 + ˜g2].
+Our goal is to bound ∥|x⟩−|˜x⟩∥in (A5). We work instead with the ﬁdelity
+F := ⟨˜x|x⟩= E[f ˜f + g˜g]
+√p˜p
+= E[f 2 + g2] + E[( ˜f −f)f + (˜g −g)g]
+p
+q
+1 + ˜p−p
+p
+(A12)
+=
+1 + E[( ˜f−f)f+(˜g−g)g]
+p
+q
+1 + ˜p−p
+p
+≥
+ 
+1 + E[( ˜f −f)f + (˜g −g)g]
+p
+! 
+1 −1
+2 · ˜p −p
+p
+
+(A13)
+Next we expand
+˜p −p = E[ ˜f 2 −f 2] + E[˜g2 −g2]
+(A14)
+= E[( ˜f −f)( ˜f + f)] + E[(˜g −g)(˜g + g)]
+(A15)
+= 2E[( ˜f −f)f] + 2E[(˜g −g)g] + E[( ˜f −f)2] + E[(˜g −g)2]
+(A16)
+Substituting into (A13), we ﬁnd
+F ≥1 −E[( ˜f −f)2 + (˜g −g)2]
+2p
+−E[( ˜f −f)f + (˜g −g)g]
+p
+· ˜p −p
+2p
+(A17)
+We now need an analogue of the Lipschitz condition given in Lemma 2.
+Lemma 3. Let f, ˜f, g, ˜g be deﬁned as above, with κ′ = 2κ. Then
+|f −˜f|2 + |g −˜g|2 ≤cκ2
+t2
+0
+δ2|f 2 + g2|
+where c = π2/2.
+Proof. Remember that ˜f = f(λ −δ/t0) and similarly for ˜g.
+Consider the case ﬁrst when λ ≥1/κ. In this case g = 0, and we need to show that
+|f −˜f| ≤2κ|δf|
+t0
+= |λ −˜λ|
+λ
+(A18)
+To prove this, we consider four cases. First, suppose ˜λ ≥1/κ. Then |f −˜f| =
+1
+2κ
+|˜λ−λ|
+˜λ·λ
+≤|δ|/2t0λ. Next, suppose
+λ = 1/κ (so f = 1/2) and ˜λ < 1/κ. Since sin π
+2 α ≥α for 0 ≤α ≤1, we have
+|f −˜f| ≤1
+2 −1
+2
+˜λ −1
+κ′
+1
+κ −1
+κ′
+= 1
+2 −κ(˜λ −1
+2) = κ( 1
+κ −˜λ),
+(A19)
+
+
+=== PDF PAGE 10 ===
+10
+and using λ = 1/κ we ﬁnd that |f −˜f| = λ−˜λ
+λ , as desired. Next, if ˜λ < 1/κ < λ and f < ˜f then replacing λ with 1/κ
+only makes the inequality tighter. Finally, suppose ˜λ < 1/κ < λ and ˜f < f. Using (A19) and λ > 1/κ we ﬁnd that
+f −˜f ≤1 −κ˜λ < 1 −˜λ/λ = (λ −˜λ)/λ, as desired.
+Now, suppose that λ < 1/κ. Then
+|f −˜f|2 ≤δ2
+t2
+0
+max |f ′|2 = π2
+4
+δ2
+t2
+0
+κ2.
+And similarly
+|g −˜g|2 ≤δ2
+t2
+0
+max |g′|2 = π2
+4
+δ2
+t2
+0
+κ2.
+Finally f(λ)2 + g(λ)2 = 1/2 for any λ ≤1/κ, implying the result.
+Now we use Lemma 3 to bound the two error contributions in (A13). First bound
+E[( ˜f −f)2 + (˜g −g)2]
+2p
+≤O
+κ2
+t2
+0
+
+· E[(f 2 + g2)δ2]
+E[f 2 + g2]
+≤O
+κ2
+t2
+0
+
+(A20)
+The ﬁrst inequality used Lemma 3 and the second used the fact that E[δ2] ≤O(1) even when conditioned on an
+arbitrary value of j (or equivalently λj).
+Next,
+E[( ˜f −f)f + (˜g −g)g]
+p
+≤
+E
+r
+( ˜f −f)2 + (˜g −g)2
+
+(f 2 + g2)
+
+p
+≤
+E
+hq
+δ2κ2
+t2
+0 (f 2 + g2)2
+i
+p
+≤O
+ κ
+t0
+
+,
+(A21)
+where the ﬁrst inequality is Cauchy-Schwartz, the second is Lemma 3 and the last uses the fact that E[|δ|] ≤
+p
+E[δ2] =
+O(1) even when conditioned on j.
+We now substitute (A20) and (A21) into (A16) (and assume κ ≤t0) to ﬁnd
+|˜p −p|
+p
+≤O
+ κ
+t0
+
+.
+(A22)
+Substituting (A20), (A21) and (A22) into (A17), we ﬁnd Re ⟨˜x|x⟩≥1−O(κ2/t2
+0), or equivalently, that ∥|˜x⟩−|x⟩∥≤ǫ.
+This completes the proof of Theorem 1.
+3.
+Phase estimation calculations
+Here we describe, in our notation, the improved phase-estimation procedure of [5, 7], and prove the concentration
+bounds on |αk|j|. Adjoin the state
+|Ψ0⟩=
+r
+2
+T
+T −1
+X
+τ=0
+sin π(τ + 1
+2)
+T
+|τ⟩.
+Apply the conditional Hamiltonian evolution P
+τ |τ⟩⟨τ| ⊗eiAτt0/T . Assume the target state is |uj⟩, so this becomes
+simply the conditional phase P
+τ |τ⟩⟨τ|eiλjt0τ/T. The resulting state is
+Ψλjt0
+
+=
+r
+2
+T
+T −1
+X
+τ=0
+e
+iλj t0τ
+T
+sin π(τ + 1
+2)
+T
+|τ⟩|uj⟩.
+
+
+=== PDF PAGE 11 ===
+11
+We now measure in the Fourier basis, and ﬁnd that the inner product with
+1
+√
+T
+PT −1
+τ=0 e
+2πikτ
+T
+|τ⟩|uj⟩is (deﬁning
+δ := λjt0 −2πk):
+αk|j =
+√
+2
+T
+T −1
+X
+τ=0
+ei τ
+T (λjt0−2πk) sin π(τ + 1
+2)
+T
+(A23)
+=
+1
+i
+√
+2T
+T −1
+X
+τ=0
+ei τδ
+T
+
+e
+iπ(τ+1/2)
+T
+−e−iπ(τ+1/2)
+T
+
+(A24)
+=
+1
+i
+√
+2T
+T −1
+X
+τ=0
+e
+iπ
+2T eiτ δ+π
+T
+−e−iπ
+2T eiτ δ−π
+T
+(A25)
+=
+1
+i
+√
+2T
+
+e
+iπ
+2T 1 −eiπ+iδ
+1 −ei δ+π
+T
+−e−iπ
+2T 1 −eiπ+iδ
+1 −ei δ−π
+T
+
+(A26)
+= 1 + eiδ
+i
+√
+2T
+
+e−iδ/2T
+e−i
+2T (δ+π) −e
+i
+2T (δ+π) −
+e−iδ/2T
+e−
+i
+2T (δ−π) −e
+i
+2T (δ−π)
+
+(A27)
+= (1 + eiδ)e−iδ/2T
+i
+√
+2T
+ 
+1
+−2i sin
+  δ+π
+2T
+ −
+1
+−2i sin
+  δ−π
+2T
+
+!
+(A28)
+= −ei δ
+2 (1−1
+T )
+√
+2 cos( δ
+2)
+T
+ 
+1
+sin
+  δ+π
+2T
+ −
+1
+sin
+  δ−π
+2T
+
+!
+(A29)
+= −ei δ
+2 (1−1
+T )
+√
+2 cos( δ
+2)
+T
+· sin
+  δ−π
+2T
+
+−sin
+  δ+π
+2T
+
+sin
+  δ+π
+2T
+
+sin
+  δ−π
+2T
+
+(A30)
+= ei δ
+2 (1−1
+T )
+√
+2 cos( δ
+2)
+T
+· 2 cos
+  δ
+2T
+
+sin
+  π
+2T
+
+sin
+  δ+π
+2T
+
+sin
+  δ−π
+2T
+
+(A31)
+Following [5, 7], we make the assumption that 2π ≤δ ≤T/10. Further using α −α3/6 ≤sin α ≤α and ignoring
+phases we ﬁnd that
+|αk|j| ≤
+4π
+√
+2
+(δ2 −π2)(1 −δ2+π2
+3T 2 )
+≤8π
+δ2 .
+(A32)
+Thus |αk|j|2 ≤64π2/δ2 whenever |k −λjt0/2π| ≥1.
+4.
+The non-Hermitian case
+Suppose A ∈CM×N with M ≤N. Generically Ax = b is now underconstrained. Let the singular value decompo-
+sition of A be
+A =
+M
+X
+j=1
+λj |uj⟩⟨vj| ,
+with |uj⟩∈CM, |vj⟩∈CN and λ1 ≥· · · λM ≥0. Let V = span{|v1⟩, . . . , |vM⟩}. Deﬁne
+H =
+ 0
+A
+A† 0
+
+.
+(A33)
+H is Hermitian with eigenvalues ±λ1, . . . , ±λM, corresponding to eigenvectors
+w±
+j
+
+:=
+1
+√
+2(|0⟩|uj⟩± |1⟩|vj⟩). It also
+has N −M zero eigenvalues, corresponding to the orthogonal complement of V .
+To run our algorithm we use the input |0⟩|b⟩. If |b⟩= PM
+j=1 βj |uj⟩then
+|0⟩|b⟩=
+M
+X
+j=1
+βj
+1
+√
+2(
+w+
+j
+
++
+w−
+j
+
+)
+
+
+=== PDF PAGE 12 ===
+12
+and running the inversion algorithm yields a state proportional to
+H−1 |0⟩|b⟩=
+M
+X
+j=1
+βjλ−1
+j
+1
+√
+2(
+w+
+j
+
+−
+w−
+j
+
+) =
+M
+X
+j=1
+βjλ−1
+j
+|1⟩|vj⟩.
+Dropping the inital |1⟩, this deﬁnes our solution |x⟩. Note that our algorithm does not produce any component in
+V ⊥, although doing so would have also yielded valid solutions. In this sense, it could be said to be ﬁnding the |x⟩
+that minimizes ⟨x|x⟩while solving A |x⟩= |b⟩.
+On the other hand, if M ≥N then the problem is overconstrained. Let U = span{|u1⟩, . . . , |uN⟩}. The equation
+A |x⟩= |b⟩is satisﬁable only if |b⟩∈U. In this case, applying H to |0⟩|b⟩will return a valid solution. But if |b⟩
+has some weight in U ⊥, then |0⟩|b⟩will have some weight in the zero eigenspace of H, which will be ﬂagged as
+ill-conditioned by our algorithm. We might choose to ignore this part, in which case the algorithm will return an |x⟩
+satisfying A |x⟩= PN
+j=1 |uj⟩⟨uj| |b⟩.
+5.
+Optimality
+In this section, we explain in detail two important ways in which our algorithm is optimal up to polynomial factors.
+First, no classical algorithm can perform the same matrix inversion task; and second, our dependence on condition
+number and accuracy cannot be substantially improved.
+We present two versions of our lower bounds; one based on complexity theory, and one based on oracles. We say
+that an algorithm solves matrix inversion if its input and output are
+1. Input: An O(1)-sparse matrix A speciﬁed either via an oracle or via a poly(log(N))-time algorithm that returns
+the nonzero elements in a row.
+2. Output: A bit that equals one with probability ⟨x| M |x⟩±ǫ, where M = |0⟩⟨0|⊗IN/2 corresponds to measuring
+the ﬁrst qubit and |x⟩is a normalized state proportional to A−1 |b⟩for |b⟩= |0⟩.
+Further we demand that A is Hermitian and κ−1I ≤A ≤I. We take ǫ to be a ﬁxed constant, such as 1/100, and later
+deal with the dependency in ǫ. If the algorithm works when A is speciﬁed by an oracle, we say that it is relativizing.
+Even though this is a very weak deﬁnition of inverting matrices, this task is still hard for classical computers.
+Theorem 4.
+1. If a quantum algorithm exists for matrix inversion running in time κ1−δ · poly log(N) for some
+δ > 0, then BQP=PSPACE.
+2. No relativizing quantum algorithm can run in time κ1−δ · poly log(N).
+3. If a classical algorithm exists for matrix inversion running in time poly(κ, log(N)), then BPP=BQP.
+Given an n-qubit T -gate quantum computation, deﬁne U as in (4). Deﬁne
+A =
+
+0
+I −Ue−1
+T
+I −U †e−1
+T
+0
+
+.
+(A34)
+Note that A is Hermitian, has condition number κ ≤2T and dimension N = 6T 2n. Solving the matrix inversion
+problem corresponding to A produces an ǫ-approximation of the quantum computation corresponding to applying
+U1, . . . , UT, assuming we are allowed to make any two outcome measurement on the output state |x⟩. Recall that
+
+I −Ue−1
+T
+−1
+=
+X
+k≥0
+U ke−k/T .
+(A35)
+We deﬁne a measurement M0, which outputs zero if the time register t is between T + 1 and 2T , and the original
+measurement’s output was one. As Pr(T + 1 ≤k ≤2T ) = e−2/(1 + e−2 + e−4) and is independent of the result of the
+measurement M, we can estimate the expectation of M with accuracy ǫ by iterating this procedure O
+ 1/ǫ2
+times.
+In order to perform the simulation when measuring only the ﬁrst qubit, deﬁne
+B =
+I6T 2n
+0
+0
+I3T 2n −Ue−1
+T
+
+.
+(A36)
+
+
+=== PDF PAGE 13 ===
+13
+We now deﬁne ˜B to be the matrix B, after we permuted the rows and columns such that if
+C =
+
+0
+˜B
+˜B†
+0
+
+.
+(A37)
+and C⃗y =
+⃗b
+0
+
+, then measuring the ﬁrst qubit of |y⟩would correspond to perform M0 on |x⟩. The condition number
+of C is equal to that of A, but the dimension is now N = 18T 2n.
+Now suppose we could solve matrix inversion in time κ1−δ(log(N)/ǫ)c1 for constants c1 ≥2, δ > 0.
+Given a
+computation with T ≤22n/18, let m = 2
+δ
+log(2n)
+log(log(n)) and ǫ = 1/100m. For suﬃciently large n, ǫ ≥1/ log(n). Then
+κ1−δ
+log(N)
+ǫ
+c1
+≤(2T )1−δ
+3n
+ǫ
+c1
+≤T 1−δc2(n log(n))c1,
+where c2 = 21−δ3c1 is another constant.
+We now have a recipe for simulating an ni-qubit Ti-gate computation with ni+1 = ni + log(18Ti) qubits, Ti+1 =
+T 1−δ
+i
+c3(ni log(ni))c1 gates and error ǫ. Our strategy is to start with an n0-qubit T0-gate computation and iterate this
+simulation ℓ≤m times, ending with an nℓ-qubit Tℓ-gate computation with error ≤mǫ ≤1/100. We stop iterating
+either after m steps, or whenever Ti+1 > T 1−δ/2
+i
+, whichever comes ﬁrst. In the latter case, we set ℓequal to the ﬁrst
+i for which Ti+1 > T 1−δ/2
+i
+.
+In the case where we iterated the reduction m times, we have Ti ≤T (1−δ/2)i ≤2(1−δ/2)i2n0, implying that Tm ≤n0.
+On the other hand, suppose we stop for some ℓ< m. For each i < ℓwe have Ti+1 ≤T 1−δ/2
+i
+. Thus Ti ≤2(1−δ/2)i2n0
+for each i ≤ℓ.
+This allows us to bound ni = n0 + Pi−1
+j=0 log(18Ti) = n0 + 2n0
+Pi−1
+j=0(1 −δ/2)j + i log(18) ≤
+  4
+δ + 1
+
+n0 + m log(18). Deﬁning yet another constant, this implies that Ti+1 ≤T 1−δ
+i
+c3(n0 log(n0))c1. Combining this
+with our stopping condition Tℓ+1 > T 1−δ/2
+ℓ
+we ﬁnd that
+Tℓ≤(c3(n0 log(n0))c1)
+2
+δ = poly(n0).
+Therefore, the runtime of the procedure is polynomial in n0 regardless of the reason we stopped iterating the procedure.
+The number of qubits used increases only linearly.
+Recall that the TQBF (totally quantiﬁed Boolean formula satisﬁability) problem is PSPACE-complete, meaning
+that any k-bit problem instance for any language in PSPACE can be reduced to a TQBF problem of length n =
+poly(k) (see [23] for more information). The formula can be solved in time T ≤22n/18, by exhaustive enumeration
+over the variables. Thus a PSPACE computation can be solved in quantum polynomial time. This proves the ﬁrst
+part of the theorem.
+To incorporate oracles, note that our construction of U in (4) could simply replace some of the Ui’s with oracle
+queries. This preserves sparsity, although we need the rows of A to now be speciﬁed by oracle queries. We can now
+iterate the speedup in exactly the same manner. However, we conclude with the ability to solve the OR problem on
+2n inputs in poly(n) time and queries. This, of course, is impossible [24], and so the purported relativizing quantum
+algorithm must also be impossible.
+The proof of part 3 of Theorem 4 simply formulates a poly(n)-time, n-qubit quantum computation as a κ = poly(n),
+N = 2n · poly(n) matrix inversion problem and applies the classical algorithm which we have assumed exists.
+Theorem 4 established the universality of the matrix inversion algorithm. To extend the simulation to problems
+which are not decision problems, note that the algorithm actually supplies us with |x⟩(up to some accuracy). For
+example, instead of measuring an observable M, we can measure |x⟩in the computational basis, obtaining the result i
+with probability | ⟨i|x⟩|2. This gives a way to simulate quantum computation by classical matrix inversion algorithms.
+In turn, this can be used to prove lower bounds on classical matrix inversion algorithms, where we assume that the
+classical algorithms output samples according to this distribution.
+Theorem 5. No relativizing classical matrix inversion algorithm can run in time N α2βκ unless 3α + 4β ≥1/2.
+If we consider matrix inversion algorithms that work only on positive deﬁnite matrices, then the N α2βκ bound
+becomes N α2β√κ.
+Proof. Recall Simon’s problem [17], in which we are given f : Zn
+2 →{0, 1}2n such that f(x) = f(y) iﬀx + y = a for
+some a ∈Zn
+2 that we would like to ﬁnd. It can be solved by running a 3n-qubit 2n + 1-gate quantum computation
+O(n) times and performing a poly(n) classical computation. The randomized classical lower bound is Ω(2n/2) from
+birthday arguments.
+
+
+=== PDF PAGE 14 ===
+14
+Converting Simon’s algorithm to a matrix A yields κ ≈4n and N ≈36n23n. The run-time is N α2βκ ≈2(3α+4β)n ·
+poly(n). To avoid violating the oracle lower bound, we must have 3α + 4β ≥1/2, as required.
+Next, we argue that the accuracy of algorithm cannot be substantially improved.
+Returning now to the
+problem of estimating ⟨x| M |x⟩, we recall that classical algorithms can approximate this to accuracy ǫ in time
+O(Nκ poly(log(1/ǫ))). This poly(log(1/ǫ)) dependence is because when writing the vectors |b⟩and |x⟩as bit strings
+means that adding an additional bit will double the accuracy. However, sampling-based algorithms such as ours
+cannot hope for a better than poly(1/ǫ) dependence of the run-time on the error. Thus proving that our algorithm’s
+error performance cannot be improved will require a slight redeﬁnition of the problem.
+Deﬁne the matrix inversion estimation problem as follows. Given A, b, M, ǫ, κ, s with ∥A∥≤1, ∥A−1∥≤κ, A s-
+sparse and eﬃciently row-computable, |b⟩= |0⟩and M = |0⟩⟨0| ⊗IN/2: output a number that is within ǫ of ⟨x| M |x⟩
+with probability ≥2/3, where |x⟩is the unit vector proportional to A−1 |b⟩.
+The algorithm presented in our paper can be used to solve this problem with a small amount of overhead. By
+producing |x⟩up to trace distance ǫ/2 in time ˜O(log(N)κ2s2/ǫ), we can obtain a sample of a bit which equals one
+with probability µ with |µ −⟨x| M |x⟩| ≤ǫ/2. Since the variance of this bit is ≤1/4, taking 1/3ǫ2 samples gives us a
+≥2/3 probability of obtaining an estimate within ǫ/2 of µ. Thus quantum computers can solve the matrix inversion
+estimation problem in time ˜O(log(N)κ2s2/ǫ3).
+We can now show that the error dependence of our algorithm cannot be substantially improved.
+Theorem 6.
+1. If a quantum algorithm exists for the matrix inversion estimation problem running in time
+poly(κ, log(N), log(1/ǫ)) then BQP=PP.
+2. No relativizing quantum algorithm for the matrix inversion estimation problem can run in time N α poly(κ)/ǫβ
+unless α + β ≥1.
+Proof.
+1. A complete problem for the class PP is to count the number of satisfying assignments to a SAT formula.
+Given such formula φ, a quantum circuit can apply it on a superposition of all 2n assignments for variables,
+generating the state
+X
+z1,...,zn∈{0,1}
+|z1, . . . , zn⟩|φ(z1, . . . zn)⟩.
+The probability of obtaining 1 when measuring the last qubit is equal to the number of satisfying truth assign-
+ments divided by 2n. A matrix inversion estimation procedure which runs in time poly log(1/ǫ) would enable
+us to estimate this probability to accuracy 2−2n in time poly(log(22n)) = poly(n). This would imply that BQP
+= PP as required.
+2. Now assume that φ(z) is provided by the output of an oracle. Let C denote the number of z ∈{0, 1}n such that
+φ(z) = 1. From [18], we know that determining the parity of C requires Ω(2n) queries to φ. However, exactly
+determining C reduces to the matrix inversion estimation problem with N = 2n, κ = O(n2) and ǫ = 2−n−2. By
+assumption we can solve this in time 2(α+β)n · poly(n), implying that α + β ≥1.
+[1] P. W. Shor. Algorithms for quantum computation: discrete logarithms and factoring. In S. Goldwasser, editor, Proceedings
+of the 35th Annual Symposium on Foundations of Computer Science, pages 124–134, New York, 1994. IEEE Computer
+Society Press.
+[2] S. Lloyd. Universal quantum simulators. Science, 273:1073–1078, August 1996.
+[3] D.W. Berry, G. Ahokas, R. Cleve, and B.C. Sanders. Eﬃcient Quantum Algorithms for Simulating Sparse Hamiltonians.
+Comm. Math. Phys., 270(2):359–371, 2007. arXiv:quant-ph/0508139.
+[4] A.M. Childs. On the relationship between continuous- and discrete-time quantum walk, 2008. arXiv:0810.0312.
+[5] A. Luis and J. Peˇrina. Optimum phase-shift estimation and the quantum description of the phase diﬀerence. Phys. Rev.
+A, 54(5):4564–4570, Nov 1996.
+[6] R. Cleve, A. Ekert, C. Macchiavello, and M. Mosca. Quantum Algorithms Revisited, 1997. arXiv:quant-ph/9708016.
+[7] V. Buzek, R. Derka, and S. Massar.
+Optimal quantum clocks.
+Phys. Rev. Lett., 82:2207–2210, 1999.
+arXiv:quant-
+ph/9808042.
+[8] D.G. Luenberger. Introduction to Dynamic Systems: Theory, Models, and Applications. Wiley, New York, 1979.
+[9] H. Buhrman, R. Cleve, J. Watrous, and R. de Wolf. Quantum ﬁngerprinting. Phys. Rev. Lett., 87(16):167902–167902,
+2001.
+
+
+=== PDF PAGE 15 ===
+15
+[10] P. Valiant. Testing symmetric properties of distributions. In Proceedings of the 40th Annual ACM Symposium on Theory
+of computing (STOC), pages 383–392. ACM Press New York, NY, USA, 2008.
+[11] A. Klappenecker and M. Rotteler. Quantum Physics Title: Engineering Functional Quantum Algorithms. Phys. Rev. A,
+67:010302(R), 2003.
+[12] S. K. Leyton and T. J. Osborne. A quantum algorithm to solve nonlinear diﬀerential equations, 2008. arXiv:0812.4423.
+[13] A.W. Harrow, A. Hassidim, and S. Lloyd.
+Quantum algorithm for solving linear systems of equations, 2008.
+arXiv:0811.3171.
+[14] L. Grover and T. Rudolph. Creating superpositions that correspond to eﬃciently integrable probability distributions.
+arXiv:quant-ph/0208112.
+[15] G. Brassard, P. Høyer, M. Mosca, and A. Tapp.
+Quantum Amplitude Ampliﬁcation and Estimation, volume 305 of
+Contemporary Mathematics Series Millenium Volume. AMS, New York, 2002. arXiv:quant-ph/0005055.
+[16] Jonathan R. Shewchuk. An Introduction to the Conjugate Gradient Method Without the Agonizing Pain. Technical
+Report CMU-CS-94-125, School of Computer Science, Carnegie Mellon University, Pittsburgh, Pennsylvania, March 1994.
+[17] Daniel R. Simon. On the power of quantum computation. SIAM J. Comp., 26:1474–1483, 1997.
+[18] E. Farhi, J. Goldstone, S. Gutmann, and M. Sipser. A limit on the speed of quantum computation in determining parity.
+Phys. Rev. Lett., 81:5442–5444, 1998. arXiv:quant-ph/9802045.
+[19] K. Chen. Matrix preconditioning techniques and applications. Cambridge Univ. Press, Cambridge, U.K., 2005.
+[20] L. Sheridan, D. Maslov, and M. Mosca. Approximating fractional time quantum evolution, 2009. arXiv:0810.3843.
+[21] D. Aharonov and A. Ta-Shma. Adiabatic quantum state generation and statistical zero knowledge. In Proceedings of the
+35th Annual ACM Symposium on Theory of computing (STOC), pages 20–29. ACM Press New York, NY, USA, 2003.
+arXiv:quant-ph/0301023.
+[22] P.C. Hansen. Rank-deﬁcient and discrete ill-posted problems: Numerical aspects of linear inversion. SIAM, Philadelphia,
+PA, 1998.
+[23] M. Sipser. Introduction to the Theory of Computation. International Thomson Publishing, 1996.
+[24] C.H. Bennett, E. Bernstein, G. Brassard, and U. Vazirani. The strengths and weaknesses of quantum computation. SIAM
+Journal on Computing, 26:1510–1523, 1997.

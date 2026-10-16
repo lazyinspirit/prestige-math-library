@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-dual-space-of-a-normed-space.json
 id: def-dual-space-of-a-normed-space
 kind: definition
 title: "The dual space X^* of a normed space and its dual norm"
@@ -7,17 +9,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-space-of-bounded-linear-operators, def-operator-norm,
-       def-algebraic-dual-and-linear-functional,
-       rem-real-and-complex-normed-space-convention]
+deps: [def-space-of-bounded-linear-operators, def-operator-norm, def-algebraic-dual-and-linear-functional, def-complex-norm-and-complex-normed-space]
 justified_by: []
-verification:
-  audited: 2026-09-05
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -30,8 +23,7 @@ sources:
 ## Definition
 
 Let $X$ be a normed space over the scalar field $\mathbb{K}$, where
-$\mathbb{K}=\mathbb{R}$ in the literal definition and $\mathbb{K}=\mathbb{C}$
-by the convention of [[rem-real-and-complex-normed-space-convention]]. The
+$\mathbb{K}\in\{\mathbb R,\mathbb C\}$, using [[def-norm-and-normed-space]] over $\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] over $\mathbb C$. The
 **dual space** of $X$ is
 
 $$X^*:=\mathcal{B}(X,\mathbb{K}),$$

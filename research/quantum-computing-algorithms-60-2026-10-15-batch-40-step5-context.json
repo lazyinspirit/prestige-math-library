@@ -1,0 +1,411 @@
+{
+  "group": "f",
+  "batches": [
+    "40"
+  ],
+  "pages_read": [
+    "adversary-methods-and-quantum-query-complexity",
+    "adversary-methods-and-quantum-query-complexity-examples"
+  ],
+  "items_read": [
+    "lem-qa-16-finite-sdp-strong-duality",
+    "lem-qa-16-schur-product-psd",
+    "lem-qa-16-effective-spectral-gap",
+    "lem-qa-16-query-unitary-normal-form",
+    "def-qa-16-boolean-query-domain",
+    "alg-qa-16-controlled-consistency-reflection",
+    "def-qa-16-input-mismatch-matrices",
+    "def-qa-16-query-address-projectors",
+    "def-qa-16-filtered-gamma2",
+    "lem-qa-16-general-adversary-finite-and-attained",
+    "thm-qa-16-controlled-consistency-reflection-correct",
+    "def-qa-16-general-adversary-bound",
+    "lem-qa-16-filtered-gamma2-well-defined",
+    "thm-qa-16-controlled-consistency-reflection-query-cost",
+    "def-qa-16-nonnegative-adversary-bound",
+    "lem-qa-16-adversary-progress-endpoints",
+    "lem-qa-16-nonconstant-adversary-at-least-one",
+    "lem-qa-16-one-query-progress-change",
+    "thm-qa-16-dual-vector-characterization",
+    "alg-qa-16-dual-adversary-reflection-evaluator",
+    "lem-qa-16-nonnegative-dual-overlap-upper-bound",
+    "prop-qa-16-general-versus-nonnegative-adversary",
+    "thm-qa-16-filtered-gamma-adversary-equality",
+    "thm-qa-16-general-adversary-lower-bound",
+    "prop-qa-16-ambainis-base-separation",
+    "thm-qa-16-adversary-composition-lower-bound",
+    "thm-qa-16-dual-evaluator-success",
+    "thm-qa-16-dual-evaluator-query-cost",
+    "thm-qa-16-general-adversary-tightness",
+    "ex-qa-16-or-dual-certificate",
+    "cex-qa-16-negative-weights-matter"
+  ],
+  "conventions": [
+    {
+      "convention": "N≥1, D is a nonempty finite subset of {0,1}^N, and correctness is per promised input with 0≤ε<1/2. The oracle is the standard XOR bit oracle on every address; only its calls count toward Q_ε.",
+      "fixed_by": "def-qa-16-boolean-query-domain",
+      "matters_for": [
+        "lem-qa-16-query-unitary-normal-form",
+        "thm-qa-16-general-adversary-lower-bound",
+        "thm-qa-16-general-adversary-tightness",
+        "thm-qa-16-adversary-composition-lower-bound"
+      ]
+    },
+    {
+      "convention": "Δ_i marks coordinate mismatches, F marks equal outputs, and J−F marks opposite outputs. All matrices use the same fixed ordering of D.",
+      "fixed_by": "def-qa-16-input-mismatch-matrices",
+      "matters_for": [
+        "def-qa-16-general-adversary-bound",
+        "thm-qa-16-dual-vector-characterization",
+        "lem-qa-16-one-query-progress-change",
+        "prop-qa-16-ambainis-base-separation"
+      ]
+    },
+    {
+      "convention": "Adversary matrices are real symmetric, nonzero, and vanish on equal-output pairs. The denominator is max_i ||Γ∘Δ_i|| in operator norm. Signed entries are allowed; constant functions have value zero.",
+      "fixed_by": "def-qa-16-general-adversary-bound",
+      "matters_for": [
+        "lem-qa-16-adversary-progress-endpoints",
+        "thm-qa-16-dual-vector-characterization",
+        "thm-qa-16-general-adversary-lower-bound",
+        "thm-qa-16-adversary-composition-lower-bound"
+      ]
+    },
+    {
+      "convention": "Filtered γ₂ uses Dirac cross pairings and minimizes the maximum of row and column sums of squared vector norms. Infeasibility has value +∞.",
+      "fixed_by": "def-qa-16-filtered-gamma2",
+      "matters_for": [
+        "lem-qa-16-filtered-gamma2-well-defined",
+        "thm-qa-16-dual-vector-characterization",
+        "thm-qa-16-filtered-gamma-adversary-equality"
+      ]
+    },
+    {
+      "convention": "The consistency reflection has sign 2Π_x−I, fixes the unit start vector, and is implemented under control with two unconditional XOR queries and one clean scratch bit.",
+      "fixed_by": "alg-qa-16-controlled-consistency-reflection",
+      "matters_for": [
+        "thm-qa-16-controlled-consistency-reflection-correct",
+        "thm-qa-16-controlled-consistency-reflection-query-cost",
+        "alg-qa-16-dual-adversary-reflection-evaluator",
+        "thm-qa-16-dual-evaluator-success"
+      ]
+    },
+    {
+      "convention": "The evaluator uses U_x=(2Π_x−I)(2Δ−I), preserving both signs and chronological order. M is the least power of two at least 512A; it accepts exactly phase label zero. Witness-span reflections are input-independent nonoracle operations with no asserted efficient gate synthesis.",
+      "fixed_by": "alg-qa-16-dual-adversary-reflection-evaluator",
+      "matters_for": [
+        "thm-qa-16-dual-evaluator-success",
+        "thm-qa-16-dual-evaluator-query-cost",
+        "thm-qa-16-general-adversary-tightness"
+      ]
+    },
+    {
+      "convention": "The finite SDP lemma assumes strict feasibility on both sides and finite optimal values; it uses real symmetric matrices and the Frobenius pairing counting both off-diagonal blocks.",
+      "fixed_by": "lem-qa-16-finite-sdp-strong-duality",
+      "matters_for": [
+        "thm-qa-16-dual-vector-characterization"
+      ]
+    },
+    {
+      "convention": "Composition uses disjoint input blocks and the natural promise domain D_h; nonemptiness of D_h is explicitly required.",
+      "fixed_by": "thm-qa-16-adversary-composition-lower-bound",
+      "matters_for": [
+        "cex-qa-16-negative-weights-matter"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-16-dual-vector-characterization",
+      "statement": "For every finite nonconstant partial Boolean function, Adv±(f) equals the attained minimum of max{C_0,C_1} over finite vector families satisfying Σ_{i:x_i≠y_i}⟨v_{x,i}|v_{y,i}⟩_D=1[f(x)≠f(y)] for all distinct x,y.",
+      "used_by": [
+        "alg-qa-16-dual-adversary-reflection-evaluator",
+        "thm-qa-16-filtered-gamma-adversary-equality",
+        "thm-qa-16-general-adversary-tightness",
+        "ex-qa-16-or-dual-certificate"
+      ]
+    },
+    {
+      "id": "lem-qa-16-finite-sdp-strong-duality",
+      "statement": "For the stated finite real primal/dual SDP pair, if both feasible sets contain strict points and both optimal values are finite, then p*=d*, and both extrema are attained.",
+      "used_by": [
+        "thm-qa-16-dual-vector-characterization"
+      ]
+    },
+    {
+      "id": "lem-qa-16-effective-spectral-gap",
+      "statement": "For finite-dimensional orthogonal projections Π,Δ, U=(2Π−I)(2Δ−I), and the spectral projection E_ω onto principal eigenphases of magnitude at most ω, 0≤ω≤π, Δw=0 implies ||E_ωΠw||≤ω||w||/2.",
+      "used_by": [
+        "thm-qa-16-dual-evaluator-success"
+      ]
+    },
+    {
+      "id": "lem-qa-16-query-unitary-normal-form",
+      "statement": "For any finite-input standard XOR bit-query algorithm using at most T queries on every branch, there is an algorithm with the same output probabilities whose evolution consists of an input-independent initial state, input-independent unitaries between exactly T unconditional calls to O_x, and a final measurement. It uses no controlled access to O_x and no more than T oracle calls.",
+      "used_by": [
+        "lem-qa-16-adversary-progress-endpoints",
+        "lem-qa-16-one-query-progress-change"
+      ]
+    },
+    {
+      "id": "thm-qa-16-controlled-consistency-reflection-correct",
+      "statement": "For every promised input x, the supplied circuit realizes diag(I_H,2Π_x−I), restores its scratch qubit to zero for arbitrary control/data superpositions, and requires no controlled unknown-oracle call.",
+      "used_by": [
+        "thm-qa-16-controlled-consistency-reflection-query-cost",
+        "alg-qa-16-dual-adversary-reflection-evaluator",
+        "thm-qa-16-dual-evaluator-success"
+      ]
+    },
+    {
+      "id": "thm-qa-16-dual-evaluator-success",
+      "statement": "For every x∈D, the dual reflection evaluator outputs f(x) with probability at least 2/3. On 1-inputs its exact common witness vector has zero phase and squared overlap with |start⟩ at least 2/3. On 0-inputs its false-positive probability is at most 3/64+1/38<1/3.",
+      "used_by": [
+        "thm-qa-16-dual-evaluator-query-cost",
+        "thm-qa-16-general-adversary-tightness"
+      ]
+    },
+    {
+      "id": "thm-qa-16-general-adversary-lower-bound",
+      "statement": "For every finite Boolean query problem and 0≤ε<1/2, Q_ε(f)≥(1/2−√(ε(1−ε)))Adv±(f).",
+      "used_by": [
+        "thm-qa-16-general-adversary-tightness"
+      ]
+    },
+    {
+      "id": "thm-qa-16-adversary-composition-lower-bound",
+      "statement": "For the stated finite partial Boolean block composition with nonempty domain, Adv±(h)≥Adv±(f)Adv±(g) and Adv(h)≥Adv(f)Adv(g).",
+      "used_by": [
+        "cex-qa-16-negative-weights-matter"
+      ]
+    },
+    {
+      "id": "prop-qa-16-ambainis-base-separation",
+      "statement": "For the sorted four-bit function specified by its eight 1-inputs, Adv(f)=5/2 and Adv±(f)>2.511486>5/2.",
+      "used_by": [
+        "cex-qa-16-negative-weights-matter"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Finite coordinate realizations, dimension compression, and orthonormal expansions.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Real principal eigenvectors, PSD trace estimates, and symmetric certificate norms.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The SDP adjoint and Q_i*Q_i in the query-progress argument.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "Root linear-first convention and finite Gram factorizations.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-interior-closure-boundary",
+      "used_for": "Closure argument establishing closedness of the SDP objective-image cone.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "PSD and strict positivity conventions in the SDP arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Common spectral normalization and elementary induced-norm bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Trace bounds controlling PSD matrices in the SDP compactness proof.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Basis-independent trace calculation in the one-query progress bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Finite Euclidean and Frobenius estimates in SDP duality.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Endpoint overlap estimates and nonnegative adversary certificates.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-subset-is-closed-and-bounded",
+      "used_for": "Closedness of the compact image used in finite SDP strong duality.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Unitary spectral projections in the effective spectral gap and adversary eigenvectors.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-image-of-a-compact-space-is-compact",
+      "used_for": "Compact image in the closed-cone proof for finite SDP duality.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment of bounded finite optimization problems and positive minima on unit spheres.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Removing the kernel of the SDP adjoint before proving dual attainment.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of normalized adversary matrices, bounded vector families, and SDP level sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Finite PSD Gram factorizations, eigenvalue bounds, and cone self-duality.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Cross-block norm identities, singular-vector optimization, and composition.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Bipartite adversary norm identities and paired/null/singleton components in composition.",
+      "opened": true
+    },
+    {
+      "id": "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+      "used_for": "Separating (b,γ) from the closed SDP objective-image cone.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-qa-16-adversary-progress-endpoints",
+      "concern": "The Statement introduces Γ and its principal eigenvector without requiring Γ to be an admissible adversary matrix, although Facts & Assumptions supplies that intended restriction. The displayed final bound is false without the opposite-output support hypothesis: take N=1, D={0,1}, f(x)=x, an exact one-query algorithm, Γ=I_2, and α=(1,0). Then W_0=W_T=1, whereas ε=0 makes the asserted final bound zero. The proof uses Γ∘F=0 in step 1.1; that essential hypothesis should be explicit in the Statement.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "def-qa-16-filtered-gamma2",
+      "concern": "Proof 1.1 says the Dirac convention makes the factorization expression 'linear in each matrix factor'. It is conjugate-linear in u and linear in v; the Definition's formula and subsequent proofs use the correct convention. This sentence misdescribes the scalar behavior.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qa-16-boolean-query-domain",
+      "concern": "The definition is headed '## Statement' rather than the '## Definition' heading prescribed for definitions by SCHEMA.md.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qa-16-input-mismatch-matrices",
+      "concern": "The definition is headed '## Statement' rather than the prescribed '## Definition'.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qa-16-query-address-projectors",
+      "concern": "The definition is headed '## Statement' rather than the prescribed '## Definition'.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qa-16-filtered-gamma2",
+      "concern": "The definition is headed '## Statement' rather than the prescribed '## Definition'.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qa-16-general-adversary-bound",
+      "concern": "The definition is headed '## Statement' rather than the prescribed '## Definition'.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-qa-16-nonnegative-adversary-bound",
+      "concern": "The definition is headed '## Statement' rather than the prescribed '## Definition'.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-qa-16-or-dual-certificate",
+      "concern": "This kind: example item uses '## Statement' and '## Proof' instead of the schema's '## Example' and optional '## Verification' headings.",
+      "severity": "presentation"
+    },
+    {
+      "id": "cex-qa-16-negative-weights-matter",
+      "concern": "This kind: counterexample item uses '## Statement' and '## Proof' instead of the schema's '## Statement refuted' and '## Counterexample' structure. The current Statement is the proved separation result, rather than an explicit assertion being refuted.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The standard-bit-query supplier gives the XOR action and involution used locally. The normal form and consistency reflection construct their control behavior with unconditional calls rather than assuming controlled unknown-oracle access."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "The repeated controlled-U schedule uses M−1 calls. Circular phases are converted from radians by 2π, and the tail invocation has floor(Mω/(2π))≥20. Extension from eigenvectors to start-state superpositions follows the orthogonal spectral mixture law, also checked in its supplier."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "The local circuits preserve control-first blocks, plus-on-range reflection signs, chronological product order, and the distinction between standalone and controlled scalar phase."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Cross-Gram and bra-ket formulas use the supplier's reversed Dirac pairing consistently. The isolated linearity wording defect is recorded as an owned concern."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "The local Boolean interface specializes hidden-instance oracle access, per-input correctness, and worst-branch query cost. It explicitly defines its variable ε rather than relying on a supplier to provide that parameterization."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Address projectors and query-mode decompositions use finite ordered orthonormal registers. The local 1-based address labels are explicitly identified with e_{i−1}."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The scratch contract is clean restoration for every control/data superposition. Compute-phase-uncompute restores query-mode scratch, while start mode uses a |+⟩ target during both calls."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "The endpoint argument uses normalized pure representatives after finite purification and coherent record retention; it makes no physical preparation or efficient synthesis claim."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Output probabilities are interpreted through terminal projections. The page asserts query complexity only and does not infer full-list polynomial-time generation or fixed-alphabet synthesis from its finite witness-span reflection."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "amplitude-estimation-and-counting",
+      "faithful": true,
+      "note": "The actual direct use is the rational bound π<22/7 from lem-qa-13-pi-rational-bounds. It correctly implies 64/π>224/11>20 in the evaluator tail calculation."
+    }
+  ]
+}

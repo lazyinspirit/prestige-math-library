@@ -1,0 +1,216 @@
+
+get an n-string i when measuring ρ1, and taking the majority is the same. When measuring the qubits
+in A, in σ1, one gets the same answer on all the qubits in one block, since σ1 reduced to A equals
+ρ1. Hence, these qubits determine the majority vote, so the probability to get an n-string i when
+measuring σ1, and taking the majority is the same as the probability to get this n-string i duplicated
+on A when measuring A in σ1, which is the same as the probability to get this n-string i duplicated
+on A when measuring A in ρ1, which is the correct probability.
+
+9
+Appendix B
+
+We prove that the deviation is a metric:
+
+Lemma 4 : Let C be the set of qubits in n r−blocks. Let A, B ∈C be two sets of qubits which are
+(r, l1), (r, l2) sparse respectively. Then, A ∩B is (r, l1 + l2) sparse.
+
+Proof: To see this, use induction on r. For r = 0, the union of two empty sets is empty. Let us
+assume for r, and prove for r + 1. A is (r + 1, l1) sparse, so there are at most l1 r−blocks which are
+not (r, l1) sparse. B is (r + 1, l2) sparse, so there are at most l2 r−blocks which are not (r, l2) sparse.
+In all the other r−blocks, the union of A and B is (r, l1 +l2) sparse by induction. So there are at most
+l1 + l2 r−blocks in which the union is not (r, l1 + l2) sparse, so the union is (r + 1, l1 + l2) sparse.
+
+10
+Appendix C
+
+In this appendix we give the proof of the main theorem, that concatanated simulation provide noise
+resistance. We first prove a lemma and than give the theorem:
+Lemma 2: Let C be a proper code that corrects d errors, with spread l. Let Mr be a medium
+which r−simulates M0 by C. Consider a computation subjected to an (r, k)-sparse fault path with
+2kl ≤d. At the end of each r−working period the density matrix is (r, d/2) deviated from the correct
+one.
+
+Proof:We first prove by induction on the number of levels r three assertions, together.
+
+1. Consider n r−blocks, in a density matrix which is (r, kl)−deviated from φr(ρ0), where ρ0 is
+a density matrix of n qubits. After applying one stage of r −computations on these blocks,
+simulating the operation g on ρ0, with an (r, k) sparse set of faults, the density matrix is (r, d)
+deviated from φr(g ◦ρ0).
+
+2. Consider n r−blocks, in a density matrix ρr, which is (r, d) deviated from a word φr(ρ0), where
+ρ0 is a density matrix of n qubits. After applying r−corrections, on all of the r−blocks, with
+an (r, k) sparse set of faults, the density matrix is (r, kl) deviated from φr(ρ0).
+
+3. Consider n r−blocks, in some density matrix, ρr. After applying r−corrections, on all of the
+r−blocks, with an (r, k) sparse set of faults, the density matrix is (r, kl) deviated from a word
+φr(ρ0), where ρ0 is a density matrix of n qubits.
+
+For r = 0 the proof is trivial. The computations are just faultless, and 0−corrections are the
+identity. For instructiveness, let us consider also the case of r = 1. Claims 1,2 are satisfied merely
+because we use a computation code. Claim 3 is satisfied by the extra restriction on the error correction
+which a proper code satisfies. Let us now assume all the claims for r, and prove each of the claims for
+r + 1, starting with claim number 1.
+1. We consider one stage of (r+1)−computations on these blocks, (r+1)−simulating the operation
+g on ρ0. The stage of computation (r+1)−rectangles can be viewed as a sequence of alternating stages
+
+13
+
+
+
+
+
+of computation (r)−rectangles and correction (r)−rectangles. ( The number of stages of r−rectangles
+during this (r+1)−rectangle is w.) Let us consider the density matrices in the trajectory of φr+1(ρ0),
+at the end of each of these r−stages. These matrices can be written as φr(ρt
+1). Where ρ0
+1 = φ(ρ0)
+and ρw
+1 = φ(g ◦ρ0). Let us assume for a second that all the (r)−rectangles in the (r + 1)−stage have
+(r, k) sparse set of faults. (This assumption is wrong- in each (r + 1)−rectangle we might have k
+(r)−rectangles in which the faults are not (r, k) sparse, but we will deal with this in a second.) Let us
+also assume that the density matrix we start with is (r, kl)-deviated from φr+1(ρ0), meaning that we
+do not allow kl r−blocks in each (r+1)−block to be more than kl−deviated. With these assumptions,
+we now prove by induction on t that applying an r−correction stage followed by an r−computation
+stage, on a matrix which is (r, kl)-deviated from φr(ρt
+1), gives a matrix which is (r, kl)-deviated from
+φr(ρt+1
+1
+). This is true by applying the induction assumption of claims 1, and 2. Now, there might
+still be k r−rectangles with more faults than we assumed, in each (r + 1)−rectangle, and in the
+initial density matrix there might still be kl r−blocks with more deviations than we assumed, in each
+(r+1)−block. Since the (r+1)−stage simulates a computation procedure which has a maximal spread
+l, these r−rectangles and r−blocks can effect only l(kl +l) number of r−blocks in each (r +1)−block,
+at the end of the (r + 1)−stage- so if l(kl + l) < d, we have that the final density matrix at the end
+of the (r + 1)−stage is (r + 1, d)−deviated from the correct one.
+2. We consider one stage of (r + 1)−corrections on the n (r + 1)−blocks. This stage can be viewed
+as a sequence of alternating stages of computation (r)−rectangles and correction (r)−rectangles. (
+The number of stages of r−rectangles during this (r + 1)−rectangle is w.)
+Let us consider the
+trajectory of φr(ρ1), where ρ1 is a density matrix which is (1, d)−deviated from some word φ(ρ0),
+and denote the density matrices in this trajectory at the end of each r−stages by φr(ρt
+1). Then since
+the (r + 1)−rectangle simulates error correction, and the simulated matrix is not too deviated, the
+trajectory which starts with ρ0
+1 = ρ1 r−simulated, will end with ρw
+1 = φ(ρ0), r−simulated. Now,
+let us assume, again, that all the (r)−rectangles in the (r + 1)−stage have (r, k) sparse set of faults,
+and that the density matrix we start with is (r, d)-deviated from φr(ρ1). With these assumptions, we
+can now prove by induction on t that applying an r−correction stage followed by an r−computation
+stage, on a matrix which is (r, kl)-deviated from φr(ρt
+1), gives a matrix which is (r, kl)-deviated from
+φr(ρt+1
+1
+). This is true by applying the induction assumption of claims 1, and 2. So under the above
+assumptions, we end up with a matrix which is (r, d)-deviated from φr+1(ρ0).
+Now, we actually
+start the computation with a matrix which is (r + 1, d)−deviated from φr+1(ρ0). So most of the
+r−blocks are (r, d)−deviated from φr+1(ρ0), except maybe d r−blocks in each (r + 1)−block which
+are not. By the induction stage on claims 2 and 3, after the first stage of r−corrections, most of the
+r−blocks are (r, kl)−deviated from φr+1(ρ0), except maybe d r−blocks in each (r + 1)−block which
+are (r, kl)−deviated from φr(ρ′
+1). So after the first r−correction the density matrix is (r, kl)−deviated
+from φr(ρ1), where ρ1 is (1, d)−deviated from φ(ρ0). We can now use the induction from before and
+say that the final density matrix is (r, kl)-deviated from φr+1(ρ0). We now take into account the
+fact that there where r−rectangles where the faults where not (r, k)−sparse. By the fact that the
+(r + 1)−correction simulates an l−fualt tolerant procedure, these can effect only kl r−blocks in each
+(r + 1)−block, at the end of the (r + 1)−stage, so we have that the final density matrix at the end of
+the (r + 1)−stage is (r + 1, kl)−deviated from the correct one.
+3. We consider one stage of (r + 1)−corrections on the n (r + 1)−blocks. in some density matrix.
+This stage can be viewed as a sequence of alternating stages of computation (r)−rectangles and
+correction (r)−rectangles. ( The number of stages of r−rectangles during this (r + 1)−rectangle is
+w.) Again, let us assume that the faults in all the r−rectangles are (r, k)−sparse. By the induction
+stage on claim 3, after one stage of r−corrections, the density matrix is (r, kl)−deviated from some
+φr(ρ1). Let us consider the trajectory of φr(ρ1) in the (r + 1)−correction rectangle. Since it is an
+r−simulation of a correction, it takes the density matrix to some word φr+1(ρ0). As before, we can
+prove by induction on the r−stages that at the end of the (r + 1)−rectangle we end up with a matrix
+which is (r, kl)−deviated from φr+1(ρ0), and taking into account the r−rectangles with faults which
+are not (r, k)−sparse, we end up with a density matrix which is (r + 1, kl)−deviated from φr+1(ρ0).
+
+14
+
+
+
+
+
+We can now use claims 2 and 1 alternately to prove by induction on the number of r−working
+period that at the end of each r−working period in Mr the density matrix is (r, kl)−deviated from
+the correct one.
+
+We can now prove the main result of this paper:
+Theorem 2: Let C be a quantum computation code, which corrects d errors, have block size m,
+(2d < m), have spread l, and size of all procedures smaller than a. Let M0 be a quantum circuit,
+with size s and depth d.
+There exists a quantum circuit Mr of size O(s · polylog(s)) and depth
+
+O(d · polylog(d)), such that in the presence of noise η which satisfies
+�
+a
+d/2l + 1
+
+�
+ηd/2l < 1 Mr
+
+outputs the correct answer with probability ≥2/3.
+
+Proof: When measuring all qubits in a density matrix (r, d)-deviated from the correct final density
+matrix, and taking majority in each r-block gives the correct answer by lemma 3. If the fault path
+is (r, d/2l)-sparse, than the final density matrix is indeed (r, d)-deviated from the correct one, by
+lemma 2. Hence the probability for Mr to succeed is larger than the probability for a fault path to be
+(r, d/2l)-sparse. Let us show by induction on r that the probability of the faults in an r−rectangle to
+
+be (r, d/2l) sparse is higher than 1 −η(1+ǫ)r, where we set
+�
+a
+d/2l + 1
+
+�
+ηd/2l+1 = η1+ǫ. We can do
+
+that because of the assumption on the parameters. ǫ is therefore a positive constant. The probability
+for an 0−rectangle, i.e. one space time point, to have faults which are (0, d/2l) sparse, i.e. that in this
+point a fault did not occur, is 1 −η. For the step of the induction, assume for r, and let us prove for
+r+1. For the faults in an (r+1)-rectangle to be (r+1, k) sparse, there must be at most k r−rectangles
+
+in which the fault is not (r, k) sparse. So P(r + 1) ≥1 −
+�
+a
+d/2l + 1
+
+�
+(1 −Pr)d/2l+1, which gives
+
+the desired result using the induction assumption and the definition of η1+ǫ. This proves that the
+probability of success of Mr, satisfies Pr ≥(1 −η(1+ǫ)r)2V (M0) since the number of r−rectangles is
+less than 2V (M0). Taking r to be O(log(log(V (M0))) gives Pr which is a constant. Since the growth
+in cost is exponential in r, (we use codes with a constant size) the blowup that is accumulated in
+O(log(log(V (M0))) is polylogarithmic.
+
+11
+Appendix D
+
+This appendix gives a full description of the fault tolerant procedures for linear codes.
+(1) Initialization procedure:
+The initialization procedure is actually a correction procedure by the code of one word, which is
+|s0 >. We will need m3 ancilla qubits. First apply on each qubit in the first block a rotation around
+the x axis. After [19], let us refer to the state
+1
+√
+
+2(|0m > +|1m >) on m qubits as a “cat state”. To
+generate such a “cat state” apply a rotation around the x axis of the first qubit and then a controlled
+not from this qubit to all the other m −1 qubits. To compute the syndrome of a word in a quantum
+code which contains only |s0 >, generate k such “cat states” on mk ancilla qubits, and add km ancilla
+qubits which are all in |0 >. To compute the j′th bit of the syndrome, apply controlled not from
+the block we are initializing to each of the “cat states” bitwise, only on the coordinates which in the
+j′th raw of the parity check matrix of Cperp are 1. Now apply a controlled not from these cat states
+to the “blank” ancilla states, to imitate a measurement on them. Now compute from each cat state
+the syndrome bit, using only gates from the universal set. To perform the initialization procedure,
+compute the syndrome in the above way independently for each qubit, i.e. m times. ¿From each j′th
+copy of the syndrome, compute whether the j′th bit is wrong or not. This is done as follows: the
+vector space can be divided to strange cosets of the subspace Cperp. Each coset can be written as
+Cperp + e where e is a vector. Each such e gives one possible syndrome.(He=s). Given the syndrome,
+we compute the table s−> e, and decide whether a qubit is wrong by asking whether it is in the
+support of e, meaning that the corresponding coordinate in e is 1. Finally apply controlled not from
+
+15
+

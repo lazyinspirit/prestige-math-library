@@ -1,0 +1,92 @@
+52
+Quantum Algorithms
+
+witness itself) are set to the right initial values. E.g. for each scratch qubit labeled j
+that should be in the state |0⟩at time t = 0, we include in Hin the term
+
+H(j)
+in = (|1⟩⟨1|)(j) ⊗I(else) ⊗(|0⟩⟨0|)(clock).
+(6.243)
+
+There is an energy penality of 1 if the scratch qubit is set to |1⟩rather than |0⟩as the
+execution of the verifier circuit begins (time t = 0). Similar terms in Hin enforce that the
+input register is set to the desired value x. The purpose of Hout is to impose a penalty
+if the verifier circuit for the QMA problem fails to accept:
+
+Hout = (|0⟩⟨0|)(output) ⊗I(else) ⊗(|T⟩⟨T|)(clock).
+(6.244)
+
+There is an energy cost of 1 if the output qubit has the value |0⟩rather than |1⟩after
+the verifier circuit is fully executed (time t = T). The purpose of Hclock is to impose a
+penalty if the clock register is not properly encoded (we’ll return to this issue later).
+The purpose of the Hprop is to impose a penalty if the state |ψ(t)⟩does not have the
+form Ut|ψ(t −1)⟩; i.e., was not obtained by faithfully executing step t of the verifier
+circuit. Hence we write:
+
+Hprop =
+
+T
+�
+
+t=1
+Hprop(t),
+(6.245)
+
+where
+
+Hprop(t) = 1
+
+2
+
+�
+I ⊗|t⟩⟨t| + I ⊗|t −1⟩⟨t −1| −Ut ⊗|t⟩⟨t −1| −U†
+t ⊗|t −1⟩⟨t|
+�
+.
+
+(6.246)
+
+The action of Hprop(t) on the relevant part of the valid history state |η⟩is
+
+|ψ(t −1)⟩⊗|t −1⟩�→1
+
+2 (|ψ(t −1)⟩⊗|t −1⟩−Ut|ψ(t −1)⟩⊗|t⟩+ . . . ) ,
+
+|ψ(t)⟩⊗|t⟩�→1
+
+2
+
+�
+|ψ(t)⟩⊗|t⟩−U†
+t |ψ(t)⟩⊗|t −1⟩+ . . .
+�
+.
+(6.247)
+
+Acting on |η⟩, the terms I⊗|t⟩⟨t| and −Ut⊗|t⟩⟨t−1| in Hprop give canceling contributions.
+Hence
+
+Hprop|η⟩= 0
+if |η⟩is a valid history state.
+(6.248)
+
+Therefore, a valid history state (where the state at time t is obtained from the state at
+time t −1 by applying the proper gate), such that the initial state is also valid, is a null
+vector of both Hprop and Hin. Furthermore, if the quantum verifier accepts the input
+with probability 1 −ϵ, then
+
+E0 ≤⟨η|Hout|η⟩=
+ϵ
+T + 1.
+(6.249)
+
+(If the history is valid, the only term in the Hamiltonian that makes a nonzero contri-
+bution to ⟨H⟩is the term that penalizes an incorrect final readout.) Note also that it
+is possible to amplify the success probability by repeating the verification of multiple
+copies of the witness. Actually, the amplification is a little bit subtle: Merlin might try
+to fool Arthur: Instead of sending a product state |ψx⟩⊗m (m copies of the witness) he
+might send an entangled state instead. But the amplification still works even in that
+case. Each copy sent by Merlin may be a mixed state (obtained from the partial trace
+over the other copies), a mixture of a state the verifier accepts with probability ≥2/3
+
+

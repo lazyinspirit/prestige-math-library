@@ -1,0 +1,2376 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qc-ancilla-identities-stable-under-reference-and-mixtures",
+    "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+    "lem-qc-toffoli-clean-target-and-uncomputation",
+    "lem-qc-fresh-target-not-and-or-gadgets",
+    "thm-qc-reversible-embedding-cost",
+    "thm-qc-reversible-xor-oracle-unitary",
+    "thm-qc-phase-kickback-from-xor-oracle",
+    "thm-qc-reversible-embedding-parallel-depth",
+    "thm-qc-clean-uncomputation-restores-workspace",
+    "thm-qc-oracle-phase-query-cost-boundary",
+    "ex-qc-reversible-and-oracle-compute-copy-uncompute"
+  ],
+  "contracts": {
+    "lem-qc-ancilla-identities-stable-under-reference-and-mixtures": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-clean-and-dirty-ancillas",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a finite ordered quantum register and let $A$ be an ordered register of $k\\ge0$ ancilla qubits, with Hilbert spaces $\\mathcal H_D$ and $\\mathcal H_A$. Write $|0_A\\rangle=|0^k\\rangle$, including $|0_A\\rangle=1$ when $k=0$. Let $U$ be a unitary on $\\mathcal H_D\\otimes\\mathcal H_A$ and let $V$ be a unitary on $\\mathcal H_D$.\n\nThe register $A$ is a **clean ancilla register for $U$ and $V$** when\n$$\nU(|\\psi\\rangle_D\\otimes|0_A\\rangle)=V|\\psi\\rangle_D\\otimes|0_A\\rangle\n$$\nfor every vector $|\\psi\\rangle_D$. Thus the data operation is independent of the input vector and all clean wires return exactly to zero.\n\nThe register $A$ is a **dirty ancilla register for $U$ and $V$** when the operator identity $U=V\\otimes I_A$ holds on $\\mathcal H_D\\otimes\\mathcal H_A$. Equivalently, every product input $|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$ is mapped to $V|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$, with the same $V$ for every data and ancilla vector. This requires exact restoration of an arbitrary, initially unknown ancilla state and forbids residual data–ancilla correlation.\n\nThese are exact contracts for the complete subroutine. A temporary intermediate alteration of an ancilla is permitted if the full unitary satisfies the stated identity.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the clean case, for every $w\\in\\mathcal H_R\\otimes\\mathcal H_D$, write $w$ as a finite sum of elementary tensors. The clean identity in [F1] and the tensor-map rule [F2] give $(I_R\\otimes U)(w\\otimes|0_A\\rangle)=((I_R\\otimes V)w)\\otimes|0_A\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any linear map $A$ with adjoint and vectors $u,v$, conjugate symmetry and the defining adjoint relation give $\\langle A^\\dagger q,v\\rangle_{\\rm root}=\\overline{\\langle v,A^\\dagger q\\rangle_{\\rm root}}=\\overline{\\langle Av,q\\rangle_{\\rm root}}=\\langle q,Av\\rangle_{\\rm root}$ for every $q$. Hence $A R_{u,v}A^\\dagger=R_{Au,Av}$. By [F3], $R_{w,z}\\otimes P_0=R_{w\\otimes|0_A\\rangle,z\\otimes|0_A\\rangle}$. Apply the rank-one identity with $A=I_R\\otimes U$, $u=e_i\\otimes|0_A\\rangle$, and $v=e_j\\otimes|0_A\\rangle$, where $e_i,e_j$ range over the product orthonormal basis of $R\\otimes D$. Step 1.1 gives the clean conjugation formula for each $R_{e_i,e_j}\\otimes P_0$. Every matrix $X$ on $R\\otimes D$ equals $\\sum_{i,j}\\langle Xe_j,e_i\\rangle_{\\rm root}R_{e_i,e_j}$, since the right side agrees with $X$ on each basis vector; hence these matrix units span and linearity proves the clean identity for every $X$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the dirty case, [F1] and [F2] give $I_R\\otimes U=I_R\\otimes V\\otimes I_A$ on every elementary tensor and hence on the whole product space. The product inner product [F3] makes its adjoint $I_R\\otimes V^\\dagger\\otimes I_A$: this follows first on elementary tensors from the defining adjoint relation for $V$, then on all vectors because they span by [F4]. Substitution yields the dirty identity for every matrix $Y$, including every density matrix; for a product $Y=Z_{RD}\\otimes S_A$, the output is $((I_R\\otimes V)Z_{RD}(I_R\\otimes V^\\dagger))\\otimes S_A$, so the dirty factor remains unchanged and uncorrelated in this product case.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero-qubit ancilla and reference registers are the one-dimensional scalar register; the tensor identity in Steps 1.1 and 3.1 remains valid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The rank-one identity in Step 2.1 includes zero vectors and the zero matrix by linearity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to every pair of basis vectors, including one-dimensional registers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The operator identities hold for every matrix, including rank-one and maximally mixed density matrices. Step 2.1 supplies the check."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has arbitrary finite matrices X,Y and register R; no threshold or angle interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has arbitrary finite matrices X,Y and register R; no threshold or angle interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "cd1bdca0288a2f3d0df08d0f2e60b607d33c45ef1a0e845273bb1c7d1951bb47",
+            "row_sha256": "009c6fdfb7155521890801b429e2b6fe18d79e251c1420cef8656fc2a05edea8",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite tensor expansions and finite matrix-unit sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement extends the supplied clean/dirty operator identities to all matrices and finite reference registers in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement extends the supplied clean/dirty operator identities to all matrices and finite reference registers in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "cd1bdca0288a2f3d0df08d0f2e60b607d33c45ef1a0e845273bb1c7d1951bb47",
+            "row_sha256": "9f64e0978729db589fe943c5949d75ba298bc8323929d134e094b1528acea669",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement extends the supplied clean/dirty operator identities to all matrices and finite reference registers in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement extends the supplied clean/dirty operator identities to all matrices and finite reference registers in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "cd1bdca0288a2f3d0df08d0f2e60b607d33c45ef1a0e845273bb1c7d1951bb47",
+            "row_sha256": "f80053a2d6f0b858deaa547ac9a90f86c936cf9ed1556159c0fe10bab71eb4b4",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–3.1 and exact clean/dirty, tensor-map, product-inner-product and basis suppliers. Clean action extends on elementary tensors; rank-one conjugation uses full-space e_i tensor 0 and e_j tensor 0, with linear-first adjoint pairing explicitly derived; matrix units span all matrices. Dirty equality holds on the whole tensor space, hence for correlated states as well as product inputs. Zero ancilla/reference qubits mean the scalar tensor unit, not a zero space. No AC or density positivity inference is needed. Reader repair is accepted; generic tensor-span findings are false positives because cited tensor-register F6 states that fact. No unresolved mathematical defect."
+      }
+    },
+    "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions": {
+      "citations": [
+        {
+          "fact": "F5",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix in [F5] sends $|t\\rangle$ to $|t\\oplus1\\rangle$. Applying it twice sends $t$ to $t\\oplus1\\oplus1=t$, so $X^2=I$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], applying CNOT twice sends $|a,t\\rangle$ to $|a,t\\oplus a\\oplus a\\rangle=|a,t\\rangle$, so $\\operatorname{CNOT}^2=I$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Applying $T$ twice leaves $a,b$ unchanged and sends $t$ to $t\\oplus ab\\oplus ab=t$. Thus $T^2=I$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "When the Fredkin control is $0$, each application fixes $(a,b)$. When it is $1$, each application swaps $a,b$ and leaves the control unchanged. In either case two applications restore all three bits, so $F^2=I$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The four maps permute the ordered orthonormal computational basis by [F1]–[F5]. A permutation of an orthonormal basis preserves inner products, so each linear extension is unitary; by Steps 1.1–1.4 each is its own inverse.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the gates chronologically as prescribed by [F6] to $|c,a,b\\rangle$. After CNOT$(a,b)$ the last two bits are $(a,b\\oplus a)$. If $c=0$, Toffoli does nothing and the last CNOT restores $(a,b)$. If $c=1$, Toffoli changes its target to $a\\oplus(b\\oplus a)=b$, and the last CNOT changes the other bit to $(b\\oplus a)\\oplus b=a$. Thus the output is $|c,a,b\\rangle$ for $c=0$ and $|c,b,a\\rangle$ for $c=1$, exactly the Fredkin action.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement concerns X, CNOT, Toffoli and Fredkin on their required positive arities. It does not assert a zero-wire member of that list.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement concerns X, CNOT, Toffoli and Fredkin on their required positive arities. It does not assert a zero-wire member of that list.",
+            "item_sha256": "5cef2b4863bdccee0c26e67adedfe1dee203a27fa807928adbf21382bf0406fd",
+            "row_sha256": "b7dd50fdc2855a8c3ffd0c6822b820c79c03ab3453d312438ce86c9affbfd6fa",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.4 checks Fredkin control 0 and Step 3.1 verifies the decomposition in that branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.4 checks Fredkin control 1 and Step 3.1 verifies the conditional swap in that branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid when the two Fredkin data values agree; their swap then fixes the value pair."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has the named one-, two- and three-wire gates and binary inputs; no continuous parameter. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has the named one-, two- and three-wire gates and binary inputs; no continuous parameter. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "5cef2b4863bdccee0c26e67adedfe1dee203a27fa807928adbf21382bf0406fd",
+            "row_sha256": "397411aa767ff1b340ca4377685d704af94e5196e434eb5204a775733797b27a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof checks all four gate actions on the finite ordered basis and both Fredkin control branches. Step 1.1 supplies the check."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves the named gates involutive and the fixed Fredkin decomposition, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves the named gates involutive and the fixed Fredkin decomposition, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "5cef2b4863bdccee0c26e67adedfe1dee203a27fa807928adbf21382bf0406fd",
+            "row_sha256": "3a731ec6c9eff2d14896d0984636872417ada0361d92b1ce56af9f25b96efcbe",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement proves the named gates involutive and the fixed Fredkin decomposition, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves the named gates involutive and the fixed Fredkin decomposition, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "5cef2b4863bdccee0c26e67adedfe1dee203a27fa807928adbf21382bf0406fd",
+            "row_sha256": "e61fc2906efd53ba48cc35d81a59edbd777bd6199f1361ece48d40ace61676b7",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "Involutions on the complete computational bases",
+          "method": "exact finite check",
+          "command": "Manual exhaustive case split in proof Steps 1.1–1.4.",
+          "inputs": {
+            "X": "t in {0,1}",
+            "CNOT": "(a,t) in {0,1}^2",
+            "Toffoli": "(a,b,t) in {0,1}^3",
+            "Fredkin": "(c,a,b) in {0,1}^3"
+          },
+          "computation": "Apply each displayed basis action twice; for Fredkin split c=0 and c=1.",
+          "observed": "X fixes both inputs after two applications; CNOT fixes all 4 pairs; Toffoli fixes all 8 triples; Fredkin fixes all 8 triples.",
+          "scope": "Checks the local finite gate actions. Unitarity follows separately from the proved orthonormal-basis permutation argument."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read all six steps and exact Pauli X, control-first CNOT, Toffoli/Fredkin actions, chronological semantics and orthonormal basis suppliers. Each bit toggle cancels twice; controlled swap squares to identity. Basis permutations preserve the specified inner product. Chronological CNOT(a,b), T(c,b,a), CNOT(a,b) restores a,b at c=0 and gives b,a at c=1, including equal source values. Distinct wire labels are required by definitions. No AC, zero-dimensional register or phase ambiguity. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "lem-qc-toffoli-clean-target-and-uncomputation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+          "source_section": "Statement",
+          "quote": "On the ordered computational basis, $X$, CNOT, Toffoli $T$, and Fredkin $F$ are involutions. Their linear extensions are unitary. With chronological order meaning the gates are applied in the written order, Fredkin is implemented by CNOT$(a,b)$, then $T(c,b,a)$, then CNOT$(a,b)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-clean-and-dirty-ancillas",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a finite ordered quantum register and let $A$ be an ordered register of $k\\ge0$ ancilla qubits, with Hilbert spaces $\\mathcal H_D$ and $\\mathcal H_A$. Write $|0_A\\rangle=|0^k\\rangle$, including $|0_A\\rangle=1$ when $k=0$. Let $U$ be a unitary on $\\mathcal H_D\\otimes\\mathcal H_A$ and let $V$ be a unitary on $\\mathcal H_D$.\n\nThe register $A$ is a **clean ancilla register for $U$ and $V$** when\n$$\nU(|\\psi\\rangle_D\\otimes|0_A\\rangle)=V|\\psi\\rangle_D\\otimes|0_A\\rangle\n$$\nfor every vector $|\\psi\\rangle_D$. Thus the data operation is independent of the input vector and all clean wires return exactly to zero.\n\nThe register $A$ is a **dirty ancilla register for $U$ and $V$** when the operator identity $U=V\\otimes I_A$ holds on $\\mathcal H_D\\otimes\\mathcal H_A$. Equivalently, every product input $|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$ is mapped to $V|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$, with the same $V$ for every data and ancilla vector. This requires exact restoration of an arbitrary, initially unknown ancilla state and forbids residual data–ancilla correlation.\n\nThese are exact contracts for the complete subroutine. A temporary intermediate alteration of an ancilla is permitted if the full unitary satisfies the stated identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $t=0$, Toffoli sets $t$ to $0\\oplus ab=ab$. The four control cases $00,01,10,11$ give target values $0,0,0,1$, respectively, and the controls are unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "CNOT from this work bit to the disjoint target changes $y$ to $y\\oplus ab$ and leaves $a,b,t$ otherwise unchanged. The final Toffoli toggles $t$ by the same $ab$, returning it to $ab\\oplus ab=0$; by [F2] it is the inverse compute gate. Thus each basis input has the stated output and clean work.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vectors $|a,b,y,0\\rangle$, as $(a,b,y)$ ranges over its eight values, form a basis of the input subspace with the work factor fixed to $|0\\rangle$, by [F7]–[F8]. Every gate is linear, so the basis-vector identity in Step 2.1 extends to every superposition in that subspace. The tensor-map rule [F6] makes each gate act factorwise on the ordered wires, preserving the displayed register order.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires four distinct roles a,b,t,y and a clean target. It does not quantify a variable-length control or gate list.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement requires four distinct roles a,b,t,y and a clean target. It does not quantify a variable-length control or gate list.",
+            "item_sha256": "3d5ea9a082ff15cbaa0426f13f868c373d956c84b0094bdfad95202aabe002ff",
+            "row_sha256": "b541885e90481161abab928f5ca27e00eb41f4627159a780be6616d5061799b3",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers control pairs 00, 01, and 10, each writing zero to the work bit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers control pair 11, which writes one to the work bit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two control wires are distinct physical wires but may carry equal logical values; both 00 and 11 are checked in Step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has binary a,b,y and fixed clean t=0; no precision interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has binary a,b,y and fixed clean t=0; no precision interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "3d5ea9a082ff15cbaa0426f13f868c373d956c84b0094bdfad95202aabe002ff",
+            "row_sha256": "d6f4311c410a24d91c9b2fe21dff48cb628cdb52e9b05170bff1d1dae058c3cf",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses finite basis expansion and linearity; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives the exact clean-work compute-copy-uncompute identity on basis states and superpositions, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement gives the exact clean-work compute-copy-uncompute identity on basis states and superpositions, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "3d5ea9a082ff15cbaa0426f13f868c373d956c84b0094bdfad95202aabe002ff",
+            "row_sha256": "b4649436de211f04813e7e0a9bd6960bd04a5b48f73ac33651c651ef470b5e78",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives the exact clean-work compute-copy-uncompute identity on basis states and superpositions, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement gives the exact clean-work compute-copy-uncompute identity on basis states and superpositions, by steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "3d5ea9a082ff15cbaa0426f13f868c373d956c84b0094bdfad95202aabe002ff",
+            "row_sha256": "7bf9255871b1aee5407d41edbb0d6e5c4396cb1d1c805b82e0eff8113f6d0dfb",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "Clean-target Toffoli truth table",
+          "method": "exact finite check",
+          "command": "Manual exhaustive calculation in proof Steps 1.1–2.1.",
+          "inputs": {
+            "controls": "(a,b) in {0,1}^2",
+            "target": "y in {0,1}",
+            "work": "t=0"
+          },
+          "computation": "Compute t=ab, copy t to y, then toggle t by ab again.",
+          "observed": "For each (a,b), y_final=y xor ab and t_final=0; this covers all 8 clean-work basis inputs.",
+          "scope": "Checks the claimed action on the entire finite clean-input basis; superpositions follow by linearity."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–3.1 against Toffoli/CNOT, clean contract, tensor rules, basis and semantics suppliers. For all four control words and both y values compute gives ab, CNOT writes y xor ab, final T returns t=0. The eight displayed vectors span precisely the clean-input subspace; linearity is asserted only there. All four wires distinct; no dirty-work or arbitrary-space claim. No AC. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "lem-qc-fresh-target-not-and-or-gadgets": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+          "source_section": "Statement",
+          "quote": "On the ordered computational basis, $X$, CNOT, Toffoli $T$, and Fredkin $F$ are involutions. Their linear extensions are unitary. With chronological order meaning the gates are applied in the written order, Fredkin is implemented by CNOT$(a,b)$, then $T(c,b,a)$, then CNOT$(a,b)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Starting with $t=0$, $X(t)$ sets it to $1$ and the following CNOT changes it to $1\\oplus a$. Both gates target only $t$, so $a$ is unchanged; [F5] supplies their gate unitarity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the second sequence, the final target is $0\\oplus a\\oplus b\\oplus ab$. For $(a,b)=(0,0),(0,1),(1,0),(1,1)$ these values are $0,1,1,1$, respectively, which are exactly $a\\lor b$. The two CNOTs and Toffoli have controls only on $a,b$, so neither source changes; [F5] supplies their gate unitarity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires distinct source wires a,b and a target t; its NOT and OR lists each contain gates and no empty-source instance is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement requires distinct source wires a,b and a target t; its NOT and OR lists each contain gates and no empty-source instance is asserted.",
+            "item_sha256": "1470a79ed86b4fa5a6d9f319d3eff99180729f8498e66bd1453a510ecd6916d6",
+            "row_sha256": "79e00687111e8b3b87ce5c921270ff1185921406d2e1f264f248f498759c1ce8",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates input pair 00 and obtains OR value zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates 01, 10, and 11 and obtains OR value one; Step 1.1 checks both NOT inputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes equal logical control values 00 and 11 while the physical source wires remain distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has the fixed binary source and target values; no real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has the fixed binary source and target values; no real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "1470a79ed86b4fa5a6d9f319d3eff99180729f8498e66bd1453a510ecd6916d6",
+            "row_sha256": "601607a785ee4a2d97f9aca00adcd43f198c5930e9dd9e9dc7118659ef2b7d4a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly exhausts the four Boolean assignments."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement prescribes two finite gate lists computing 1 XOR a and a OR b into a clean target; steps 1.1–2.1 verify the bit values. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement prescribes two finite gate lists computing 1 XOR a and a OR b into a clean target; steps 1.1–2.1 verify the bit values. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "1470a79ed86b4fa5a6d9f319d3eff99180729f8498e66bd1453a510ecd6916d6",
+            "row_sha256": "770db9cc7fa6a09518d5cb40b3ff0b82539ceb9a628e9238019c006f712a7d8d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement prescribes two finite gate lists computing 1 XOR a and a OR b into a clean target; steps 1.1–2.1 verify the bit values. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement prescribes two finite gate lists computing 1 XOR a and a OR b into a clean target; steps 1.1–2.1 verify the bit values. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "1470a79ed86b4fa5a6d9f319d3eff99180729f8498e66bd1453a510ecd6916d6",
+            "row_sha256": "4bb02deca59c89d1ded77a3462ed431f55f63af3348b990a5c34393361fc8383",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "Fresh-target NOT and OR truth tables",
+          "method": "exact finite check",
+          "command": "Manual exhaustive enumeration in proof Step 2.1.",
+          "inputs": {
+            "not_source": "a in {0,1}",
+            "or_sources": "(a,b) in {0,1}^2",
+            "target": "t=0"
+          },
+          "computation": "NOT gives 1 xor a. OR gives a xor b xor ab.",
+          "observed": "NOT outputs [1,0]; OR outputs (0,0)->0, (0,1)->1, (1,0)->1, (1,1)->1; source bits stay fixed.",
+          "scope": "Checks the stated finite gate identities on every Boolean input."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–2.1 with gate actions, chronological composition and involution suppliers. Fresh t=0 yields 1 xor a for NOT and a xor b xor ab for OR; all four pairs give 0,1,1,1. Controls are unchanged, source and target labels distinct. Unitarity follows from the proved gate supplier; no assertion of cloning arbitrary quantum data. No choice, empty loop or endpoint issue. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "thm-qc-reversible-embedding-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-boolean-circuit-size-depth-fanin-and-basis",
+          "source_section": "Definition",
+          "quote": "A Boolean circuit on $n$ inputs is a finite directed acyclic graph with inputs\n$x_1,\\ldots,x_n$, constants $0$ and $1$, and NOT, AND, and OR gates; AND and\nOR have fan-in two, while NOT has fan-in one. One node is designated as the\n**output**. The circuit's value is the value at that node after evaluating the\ngraph in topological order. Its **size** is its number of non-input gates, and\nits **depth** is the largest number of non-input gates on a directed path\nending at the output (a path may begin at an input or a constant).\n\nIf two fixed finite bounded-arity bases can simulate every gate (and every\nconstant) of one another by fixed finite circuits, then changing between them\ncosts only constant factors in size and depth. In particular this holds for\nany two such functionally complete bases with simulable constants. No such\nclaim is made for an arbitrary finite basis that may fail to express one of\nthe Boolean operations.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qc-reversible-embedding",
+          "source_section": "Definition",
+          "quote": "Inputs are integers $n,m\\ge0$, $n$ distinct ordered Boolean input wires, an $m$-bit target register $y$ disjoint from the input wires, and a finite Boolean DAG with an explicit topological order and an ordered list of exactly $m$ output ports. Every vertex has a unique identifier; each non-input node is a constant $0$ or $1$, a NOT node of fan-in one, or an AND or OR node of fan-in two. Each source reference must name an input vertex or an earlier node in the supplied order. Each output port may name any input or non-input node, and repeated output ports are allowed. The Boolean graph uses the NOT/AND/OR basis with constants from [[def-boolean-circuit-size-depth-fanin-and-basis]], extended here to multiple ordered output ports sharing one graph.\n\nReturn INVALID if the input wires or graph vertices do not have distinct identifiers, a target wire overlaps an input or graph vertex, an unsupported gate or incorrect fan-in occurs, a source reference is unavailable at that position, the supplied order is invalid, or an output port names no available vertex. Otherwise:\n\n1. Allocate one fresh clean value bit $w_v$ for each non-input node $v$.\n2. Process nodes in the supplied order. Leave a constant-$0$ bit untouched; apply $X$ to a constant-$1$ bit. For a NOT node with input wire $u$, apply $X(w_v)$ then $\\operatorname{CNOT}_{u\\to w_v}$. For an AND node with inputs $u,v$, apply $T(u,v,w_v)$. For an OR node, apply $\\operatorname{CNOT}_{u\\to w_v}$, then $\\operatorname{CNOT}_{v\\to w_v}$, then $T(u,v,w_v)$. If a two-port node uses the same source identifier twice, first allocate a fresh clean scratch bit $s$, copy the source into $s$ by CNOT, use the distinct physical wires as the gate inputs, and uncopy $s$ immediately after writing $w_v$.\n3. For each output port $j$, apply CNOT from its named input or value wire to target bit $y_j$.\n4. Append the inverse of the entire node-evaluation list in reverse chronological order, including the temporary source-copy and uncopy instructions. Return the resulting finite gate list, with the input register unchanged and the target changed only by the stated XOR into $y$.\n\nThe inverse-list operation is defined instruction by instruction: $X$, CNOT, and Toffoli are each replaced by themselves, in reverse order. The Boolean graph is an explicit finite input; this procedure makes no uniform-generation, oracle, or Turing-time claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-fresh-target-not-and-or-gadgets",
+          "source_section": "Statement",
+          "quote": "Let $a,b$ be distinct source wires and let $t$ be a distinct target wire initialized to $0$. The chronological sequence $X(t)$ followed by $\\operatorname{CNOT}_{a\\to t}$ writes $1\\oplus a$ into $t$. The sequence $\\operatorname{CNOT}_{a\\to t}$, $\\operatorname{CNOT}_{b\\to t}$, $T(a,b,t)$ writes $a\\lor b$ into $t$, since $a\\lor b=a\\oplus b\\oplus ab$. Every source wire is unchanged.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-toffoli-clean-target-and-uncomputation",
+          "source_section": "Statement",
+          "quote": "Let $a,b$ be the values on two distinct control wires, let $t$ be a distinct clean target wire with value $0$, and let $y$ be another distinct target wire with arbitrary value. Toffoli changes $t$ to $ab$ while preserving the controls. Copying that value into $y$ by CNOT and applying Toffoli again, in the written chronological order, sends\n$$\n|a,b,y,0\\rangle\\longmapsto|a,b,y\\oplus ab,0\\rangle.\n$$\nThe same operator identity holds on superpositions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-ancilla-identities-stable-under-reference-and-mixtures",
+          "source_section": "Statement",
+          "quote": "Let $U$ and $V$ satisfy either the clean or dirty identity in [[def-qc-clean-and-dirty-ancillas]], and let $R$ be any finite ordered reference register. Put $P_0=R_{0_A,0_A}$, where the rank-one operator notation used here is defined by $R_{u,v}(z)=\\langle z,v\\rangle_{\\rm root}u$. In the clean case, for every matrix $X$ on $R\\otimes D$,\n$$\n(I_R\\otimes U)(X\\otimes P_0)(I_R\\otimes U^\\dagger)=\\big((I_R\\otimes V)X(I_R\\otimes V^\\dagger)\\big)\\otimes P_0.\n$$\nIn the dirty case, for every matrix $Y$ on $R\\otimes D\\otimes A$,\n$$\n(I_R\\otimes U)Y(I_R\\otimes U^\\dagger)=(I_R\\otimes V\\otimes I_A)Y(I_R\\otimes V^\\dagger\\otimes I_A).\n$$\nThus the stated identities apply in particular to density matrices, meaning positive semidefinite matrices of trace one.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+          "source_section": "Statement",
+          "quote": "On the ordered computational basis, $X$, CNOT, Toffoli $T$, and Fredkin $F$ are involutions. Their linear extensions are unitary. With chronological order meaning the gates are applied in the written order, Fredkin is implemented by CNOT$(a,b)$, then $T(c,b,a)$, then CNOT$(a,b)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qc-elementary-circuit-resources",
+          "source_section": "Definition",
+          "quote": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call. Inverse availability and query or gate charges are also recorded separately from controlled forward access. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $q$ be the number of two-port nodes whose two ports name the same source. Each non-input node uses at most three evaluation gates: at most one for a constant, two for NOT, one for AND, and three for OR. Each repeated-source node adds one CNOT copy and one uncopy, so the forward pass uses at most $3S+2q$ gates. Since each such node accounts for two of the $E$ port uses, $q\\le E$, and the forward bound is at most $3S+2E$. It uses $S$ value bits and $q\\le E$ temporary bits.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The $m$ output ports are copied by $m$ CNOTs into distinct target bits. Reversing the complete node-evaluation list uses at most another $3S+2E$ gates. By [F6], each gate is its own inverse; reversing both order and gate sequence therefore implements the inverse computation and returns every value and temporary bit to zero. The total is at most $2(3S+2E)+m=6S+4E+m$ gate occurrences. A serial execution assigns each occurrence its own explicit layer, so the depth has the same bound by [F13]; [F11] specifies the chronological operator product.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F6",
+            "F11",
+            "F13",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use [F9]–[F10] to identify each ordered bit string with its unique basis vector. Induct along the supplied topological order. A constant-$0$ node leaves its zero bit unchanged and a constant-$1$ node uses [F8]; NOT and OR nodes receive the outputs in [F3], and AND nodes receive the output in [F4]. If a two-port node repeats a source value $c$, its fresh scratch bit is set to $c$ by CNOT; the two distinct physical control wires then both hold $c$, so AND gives $c\\land c=c$ and OR gives $c\\lor c=c$. The scratch is immediately uncomputed by the same CNOT. Thus every value bit equals its Boolean node value and all temporary bits are zero before the output copy. The $m$ output CNOTs produce $y\\oplus f(x)$; reversing the node list then restores every work bit without touching the input or target registers, whose order is fixed by [F7]. Since applying $y\\mapsto y\\oplus f(x)$ twice returns $y$, the target action is a permutation of the ordered basis and is unitary by [F12]; the compiled gate list is unitary by [F6] and [F11].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The basis identity in Step 3.1 extends by linearity to every input vector, so it is the clean-ancilla identity required by [F5]. The lemma then extends it to every finite reference register and every matrix, hence to density matrices. The construction uses only the supplied finite list; no choice principle is used.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For S=E=m=0, Step 2.1 gives zero gates and zero work."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 also permits S=E=0; when m=0 the identity circuit has zero depth, and input-only output ports are copied by m CNOTs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one AND node, S=1, E=2, m=1; the local compiled example uses three gates, within the 15-gate bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles a repeated source port by a distinct clean scratch copy and explicitly uses c AND c=c and c OR c=c."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has nonnegative integers n,m,S,E and a supplied Boolean DAG; no continuous endpoint. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has nonnegative integers n,m,S,E and a supplied Boolean DAG; no continuous endpoint. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "aa0ed2b1870c58d88e0147983825904a0f6b2063c30085e6fd028baf64e28a30",
+            "row_sha256": "5c6dff3ff00be915302169ecdbc4e7db38bd12c76341fb8a6c48a05e90e1fc52",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof follows the finite topological order supplied as input and makes no choice of an order. Step 1.1 supplies the check."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives coherent clean-work XOR and bounds 6S+4E+m gates/depth and S+E work, by steps 1.1–4.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement gives coherent clean-work XOR and bounds 6S+4E+m gates/depth and S+E work, by steps 1.1–4.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "aa0ed2b1870c58d88e0147983825904a0f6b2063c30085e6fd028baf64e28a30",
+            "row_sha256": "ddb631df9a959933541e88e94fff271a11355786d38a729129e2c7e68b6dc886",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives coherent clean-work XOR and bounds 6S+4E+m gates/depth and S+E work, by steps 1.1–4.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement gives coherent clean-work XOR and bounds 6S+4E+m gates/depth and S+E work, by steps 1.1–4.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "aa0ed2b1870c58d88e0147983825904a0f6b2063c30085e6fd028baf64e28a30",
+            "row_sha256": "2ce59f6366ce04162a68db22c19e3864fb52dfe8e612b90b4ac90a77f6458158",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "One-AND resource bound",
+          "method": "exact finite check",
+          "command": "Direct arithmetic from the theorem bound; no code execution claimed.",
+          "inputs": {
+            "S": 1,
+            "E": 2,
+            "m": 1,
+            "Boolean_DAG": "one AND node with two input-port uses"
+          },
+          "computation": "Gate bound=6S+4E+m=15; work bound=S+E=3.",
+          "observed": "The explicit compute-copy-uncompute circuit uses 3 gate occurrences and 1 clean work bit, within both bounds.",
+          "scope": "Checks one finite instance of the general resource inequalities; the theorem proof supplies the general count."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–4.1, full algorithm Definition and all actual gate, basis, clean-identity and resource suppliers. Topological induction computes constants/NOT/AND/OR into fresh zero targets. Repeated-source nodes use distinct scratch controls, restored before output; reverse includes every copy and uncopy. With q repeated-source nodes, q<=E, forward<=3S+2E, work<=S+E, total<=6S+4E+m and serial depth same. Repeated output ports and inputs as outputs are legal. S=E=0 permits input-only outputs, m=0 has empty copy, n=0 permits constants; all bounds hold. Basis permutation is unitary and clean identity extends to references. No AC, uniform-generation or free query assumption. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "thm-qc-reversible-xor-oracle-unitary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply $O_f$ twice to a basis vector. The first application gives $|x,y\\oplus f(x)\\rangle$; the second gives $|x,(y\\oplus f(x))\\oplus f(x)\\rangle=|x,y\\rangle$ because every bit added modulo two twice is zero. The input $x$ is preserved throughout, so injectivity of $f$ is not needed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2]–[F6], the input and target strings label the entire finite orthonormal product basis in the declared order. Step 1.1 shows that the oracle map is a permutation of this basis, so its matrix has orthonormal columns and satisfies $O_f^\\dagger O_f=I$. Therefore it is unitary, and Step 1.1 gives its inverse as itself.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers n=0 or m=0; the empty bit string has one basis value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes y=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-bit target is a special case of Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No injectivity of f is used; a constant function still gives an involutive permutation on input-target pairs. Step 2.1 supplies the check."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has a total Boolean function on finite strings; no precision or probability interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has a total Boolean function on finite strings; no precision or probability interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "b435289b05ccbdcb146707e0721b009991de9381050e714bf6d0f7ddd46072eb",
+            "row_sha256": "78a8eacb64db4a9abaf2ab15af99587bbee2db8b60d42747ac4eab4d60c907f5",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the specified finite register basis only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves O_f squared is I and hence O_f is its own inverse, even for noninjective f, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves O_f squared is I and hence O_f is its own inverse, even for noninjective f, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "b435289b05ccbdcb146707e0721b009991de9381050e714bf6d0f7ddd46072eb",
+            "row_sha256": "1d13e1c6490b70d922ca097d81fe2ecf7735e74d7b8d4fc960b610e30fc71335",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement proves O_f squared is I and hence O_f is its own inverse, even for noninjective f, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves O_f squared is I and hence O_f is its own inverse, even for noninjective f, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "b435289b05ccbdcb146707e0721b009991de9381050e714bf6d0f7ddd46072eb",
+            "row_sha256": "8e3ecc33fce36772270aa4dbb754f7d3420fe70017642570cee75b29be9c3355",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "Noninjective constant XOR oracle",
+          "method": "exact finite check",
+          "command": "Manual enumeration of a two-element input and one-bit target.",
+          "inputs": {
+            "f": "{0,1}->{0}, a constant and noninjective function",
+            "basis_inputs": "(x,y) in {0,1}^2"
+          },
+          "computation": "O_f|x,y>=|x,y xor 0>=|x,y>.",
+          "observed": "All four basis vectors are fixed and O_f^2=I.",
+          "scope": "Illustrates why injectivity of f is not needed for the XOR-oracle involution."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–2.1 and exact oracle, register, encoding and orthonormal tensor-basis suppliers. Preserving x and toggling y twice proves an involution for every total f, with no injectivity hypothesis. Its basis permutation is unitary. n=0 leaves one input word; m=0 gives identity; both zero give the scalar unit. No extension of partial f or quotient assumption occurs. No AC. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "thm-qc-phase-kickback-from-xor-oracle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-reversible-xor-oracle-unitary",
+          "source_section": "Statement",
+          "quote": "For every total Boolean function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$, including noninjective functions, the coherent XOR oracle $O_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle$ is unitary and satisfies $O_f^2=I$. Hence $O_f^{-1}=O_f$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4]–[F6], the $2^m$ target basis vectors are orthonormal and the encoding lists each exactly once; hence $|\\chi_s\\rangle$ has squared norm $2^m2^{-m}=1$. Applying the oracle termwise gives $2^{-m/2}\\sum_y(-1)^{s\\cdot y}|x,y\\oplus f(x)\\rangle$. Set $z=y\\oplus f(x)$. Then $y=z\\oplus f(x)$ and $s\\cdot y=s\\cdot z\\oplus s\\cdot f(x)$, so the sum is $(-1)^{s\\cdot f(x)}|x\\rangle|\\chi_s\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3]–[F6], the ordered input basis spans its register, so linearity gives the same phase action on every superposition $\\sum_x\\alpha_x|x\\rangle$, with the target factor unchanged. When $m=1$ and $s=1$, multiplying the matrix in [F7] by $|1\\rangle=(0,1)^T$ gives $H|1\\rangle=(|0\\rangle-|1\\rangle)/\\sqrt2=|-\\rangle$. Also $H^*H=\\tfrac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=I$, so this is a unitary target preparation. The unitary character of the oracle is supplied by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles m=0: the target is the one-dimensional empty-register basis and the phase is one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives phase one when s=0 or s dot f(x)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 multiplies the exact H matrix by |1> and obtains |-> for m=1,s=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The parity s dot f(x) gives exactly the two cases phase +1 and phase -1 for arbitrary total f. Step 2.1 supplies the check."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has finite bit strings and their binary dot product; no real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has finite bit strings and their binary dot product; no real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "ea0479c62de4f84ce0db93a87ff24a2b27b95a1538e1d3396720bfc751c52a82",
+            "row_sha256": "48d305f603f60d30d0973c20e734e33185499acc99ec3fe2e6436dfc68456034",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The change of variables in Step 1.1 is a bijection on a finite bit-string set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves the character-target phase action in one invocation, with its m=1 preparation in steps 1.1–2.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves the character-target phase action in one invocation, with its m=1 preparation in steps 1.1–2.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "ea0479c62de4f84ce0db93a87ff24a2b27b95a1538e1d3396720bfc751c52a82",
+            "row_sha256": "50887e699e7507688b6d101f5d17bad5c8b98a2a3f6ea892779299c7cfb17756",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement proves the character-target phase action in one invocation, with its m=1 preparation in steps 1.1–2.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves the character-target phase action in one invocation, with its m=1 preparation in steps 1.1–2.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "ea0479c62de4f84ce0db93a87ff24a2b27b95a1538e1d3396720bfc751c52a82",
+            "row_sha256": "210a08fbcf636cdcab4a3a5e728732766dbede30c34d114bcbb4947087f91acb",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "One-bit phase kickback",
+          "method": "exact finite check",
+          "command": "Direct two-term calculation in proof Steps 1.1–2.1.",
+          "inputs": {
+            "m": 1,
+            "s": 1,
+            "target": "(|0>-|1>)/sqrt(2)",
+            "f_value": "0 or 1"
+          },
+          "computation": "For f(x)=0 the target is unchanged; for f(x)=1 the XOR oracle swaps |0> and |1> in the antisymmetric target.",
+          "observed": "The output is (-1)^f(x)|x>|->.",
+          "scope": "Checks the stated one-bit character target; the general m-bit character identity is proved in Step 1.1."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–2.1 and exact XOR unitarity/action, ordered basis and Hadamard suppliers. Character normalization is 2^m terms of squared magnitude 2^-m. Translation y->z xor f(x) is bijective and splits the mod-two character sign, preserving the target for all x and superpositions. s=0 gives no phase; m=0 gives the single scalar character; n=0 has one word. For m=s=1, exact H applied to |1> gives normalized minus state and H*H=I directly. One query suffices only under declared access; target preparation separately charged. No AC or implicit control. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "thm-qc-reversible-embedding-parallel-depth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-reversible-embedding-cost",
+          "source_section": "Statement",
+          "quote": "Let $n,m\\ge0$, $x\\in\\{0,1\\}^n$, and $y\\in\\{0,1\\}^m$. Let a finite topologically ordered Boolean DAG have $S$ non-input nodes, including constants, and $E$ input-port uses counted with multiplicity. Its gates are NOT, AND, OR, and constants, with fan-in at most two, and it has $m$ ordered output ports computing $f(x)$. Under the fixed elementary alphabet in [[def-qc-elementary-circuit-resources]], counting each occurrence of $X$, CNOT, and Toffoli as one gate and one serial layer, [[alg-qc-reversible-embedding]] returns a circuit on the ordered input, target, and work registers implementing\n$$\n|x,y,0^w\\rangle\\longmapsto|x,y\\oplus f(x),0^w\\rangle\n$$\nfor every basis input $x$ and every target string $y$. It uses at most $6S+4E+m$ elementary gate occurrences, at most $S+E$ clean work bits, and serial depth at most $6S+4E+m$. The same operator action holds coherently on arbitrary superpositions and after adjoining any finite reference register.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-elementary-circuit-resources",
+          "source_section": "Definition",
+          "quote": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call. Inverse availability and query or gate charges are also recorded separately from controlled forward access. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qc-fresh-target-not-and-or-gadgets",
+          "source_section": "Statement",
+          "quote": "Let $a,b$ be distinct source wires and let $t$ be a distinct target wire initialized to $0$. The chronological sequence $X(t)$ followed by $\\operatorname{CNOT}_{a\\to t}$ writes $1\\oplus a$ into $t$. The sequence $\\operatorname{CNOT}_{a\\to t}$, $\\operatorname{CNOT}_{b\\to t}$, $T(a,b,t)$ writes $a\\lor b$ into $t$, since $a\\lor b=a\\oplus b\\oplus ab$. Every source wire is unchanged.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+          "source_section": "Statement",
+          "quote": "On the ordered computational basis, $X$, CNOT, Toffoli $T$, and Fredkin $F$ are involutions. Their linear extensions are unitary. With chronological order meaning the gates are applied in the written order, Fredkin is implemented by CNOT$(a,b)$, then $T(c,b,a)$, then CNOT$(a,b)$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a source wire used $r\\ge1$ times in one DAG layer, start with that wire as one leaf and in each round apply CNOT from each current leaf to at most one fresh zero target. After $j$ rounds there are at least $\\min(r,2^j)$ distinct leaves, so at most $\\lceil\\log_2(r+1)\\rceil\\le L$ rounds suffice. The tree needs $r-1$ CNOTs, and summing $r-1$ over source wires and layers gives at most $E$ copies. By [F4], each leaf carries the source's basis value and each CNOT leaves its control unchanged. The rounds are successive explicit layers in the order specified by [F9], counted by [F10].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "F10",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a DAG layer and suppose each source wire at its start holds its Boolean circuit value. Fan out every source to private leaves by Step 1.1. Each non-input node has a distinct fresh zero value bit. A constant-$0$ node leaves that bit unchanged, and a constant-$1$ node flips it by [F5]. For NOT, the two sublayers in [F7] write $1\\oplus a$; for AND, [F6] writes $ab$; for OR, [F7] writes $a\\oplus b\\oplus ab=a\\lor b$. Repeated logical sources have distinct physical leaves, and every gate preserves its leaves. Targets are distinct between nodes, so each of these at most three gate sublayers has disjoint supports. Reversing the fan-out trees restores all private leaves to zero, since the evaluation gates did not change them; [F8] supplies the inverse CNOTs. By [F9] these are chronological sublayers, and [F10] counts them. The layer therefore takes at most $L+3+L=2L+3$ depth.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a non-input node $u$ feeds a node $v$, every longest path ending at $u$ extends by that edge, so the layer index of $u$ is strictly smaller than the layer index of $v$. Induct on the layer index. At the first layer all non-input predecessors are absent; at a later layer every non-input predecessor has its correct value by induction. Step 2.1 then writes the Boolean value of each node in the current layer and clears its temporary leaves. Thus after all $D$ layers every value bit equals its node's Boolean evaluation, including when two ports use the same source, and all fan-out leaves are zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each output source selected $r$ times, use Step 1.1 to produce $r$ private leaves in at most $L_m$ rounds. Copy each leaf into its distinct target bit in one layer, then reverse the tree in at most $L_m$ rounds. Summing $r-1$ over output sources gives at most $m$ temporary targets, and the output stage has depth at most $2L_m+1$. This also covers repeated output ports and output sources that are input wires. The chronological composition is the one in [F9], and [F10] counts the explicit layers.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Copy each output into its target, then reverse the layer computations. In reverse order the fan-out tree is first recreated, the node gates are inverted to clear their value bits, and the fan-out tree is then undone; [F8] makes these same CNOT, X, and Toffoli gates available as inverses. This costs at most another $D(2L+3)$ depth and returns every value bit and temporary copy to zero. Adding this reverse depth, the output stage from Step 4.1, and the forward depth from Steps 2.1–3.1 gives $2D(2L+3)+2L_m+1$. There are $S$ value bits, at most $E$ temporary input-copy bits, and at most $m$ output-copy bits, for $O(S+E+m)$ work. The input-copy trees and their reversals in both computation passes use at most $4E$ CNOTs, and the output-copy trees and their reversals use at most $2m$ CNOTs, output copying uses $m$ CNOTs, and Boolean evaluation and reversal use at most $6S$ gates, hence the total is $O(S+E+m)$. Since fan-in is at most two, $E\\le2S$. By Step 3.1 each output source holds its Boolean value, so Step 4.1 changes the target to $y\\oplus f(x)$; reversing node computations restores the work without changing the input or target. This is the XOR embedding specified by [F1]. By [F11]–[F14], ordered bit strings identify the complete computational basis of the input, target, and work registers, including the zero-qubit case; the basis identity therefore extends by linearity to superpositions. The finite circuit denotes the chronological operator product [F9], its resource coordinates are counted by [F10], and fan-out CNOTs may entangle copies during computation, but reversing them restores each copy bit to zero, so no arbitrary unknown state is cloned.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 remains a valid upper bound for D=0 and m=0; it may overestimate the identity circuit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 builds no input-copy tree when F=0, so L=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For F=1, the source itself is the sole leaf and the stated L=1 bound is conservative. Step 1.1 supplies the check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives distinct leaves for repeated ports; Step 4.1 separately handles repeated output sources."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has integer graph size, fanout F and output count m; log arguments use F+1,m+1 and include zero counts, not a real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has integer graph size, fanout F and output count m; log arguments use F+1,m+1 and include zero counts, not a real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "a883d65d6d021542164444327186710262d83e2bf72fdf05cb9e3e78cf9b135c",
+            "row_sha256": "a0ee32a1d54e829bab21cc08503f7024c91367ad13df729ee60e6b67ad1822c7",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each finite copy tree is built deterministically from the listed ports; no choice principle is used. Step 1.1 supplies the check."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement constructs a finite layered XOR embedding with depth 2D(2L+3)+2L_m+1, proved in steps 1.1–5.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement constructs a finite layered XOR embedding with depth 2D(2L+3)+2L_m+1, proved in steps 1.1–5.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "a883d65d6d021542164444327186710262d83e2bf72fdf05cb9e3e78cf9b135c",
+            "row_sha256": "9d6655555cc95e1e6fc2197d607e5d6dffde4532ae6aeb68659e07b26e78cdf1",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement constructs a finite layered XOR embedding with depth 2D(2L+3)+2L_m+1, proved in steps 1.1–5.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement constructs a finite layered XOR embedding with depth 2D(2L+3)+2L_m+1, proved in steps 1.1–5.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "a883d65d6d021542164444327186710262d83e2bf72fdf05cb9e3e78cf9b135c",
+            "row_sha256": "57d4f02166cad9007e3b4c9e9d833a3953955dc0d77e1f8876e1d23a3cdd539f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read all five steps and exact cost, gate, basis and resource suppliers. A source used r times needs r distinct leaves including the original, r-1 fresh copies, and ceil(log2(r)) rounds <=L. Distinct per-port leaves make even repeated-source gates disjoint. Three node sublayers preserve leaves, allowing tree reversal; topological height makes all non-input predecessors earlier. Output leaves use <=L_m rounds each way and one copy layer, even for repeated ports/input sources. Reversing node computations costs another D(2L+3); total stated depth follows, gates<=6S+4E+3m and work<=S+E+m. D=F=m=0 is an empty construction within upper bound 1; F=0 with constants uses no fanout. E<=2S. Linear extension gives coherent action, not cloning. No AC or free controlled calls. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "thm-qc-clean-uncomputation-restores-workspace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-clean-and-dirty-ancillas",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a finite ordered quantum register and let $A$ be an ordered register of $k\\ge0$ ancilla qubits, with Hilbert spaces $\\mathcal H_D$ and $\\mathcal H_A$. Write $|0_A\\rangle=|0^k\\rangle$, including $|0_A\\rangle=1$ when $k=0$. Let $U$ be a unitary on $\\mathcal H_D\\otimes\\mathcal H_A$ and let $V$ be a unitary on $\\mathcal H_D$.\n\nThe register $A$ is a **clean ancilla register for $U$ and $V$** when\n$$\nU(|\\psi\\rangle_D\\otimes|0_A\\rangle)=V|\\psi\\rangle_D\\otimes|0_A\\rangle\n$$\nfor every vector $|\\psi\\rangle_D$. Thus the data operation is independent of the input vector and all clean wires return exactly to zero.\n\nThe register $A$ is a **dirty ancilla register for $U$ and $V$** when the operator identity $U=V\\otimes I_A$ holds on $\\mathcal H_D\\otimes\\mathcal H_A$. Equivalently, every product input $|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$ is mapped to $V|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$, with the same $V$ for every data and ancilla vector. This requires exact restoration of an arbitrary, initially unknown ancilla state and forbids residual data–ancilla correlation.\n\nThese are exact contracts for the complete subroutine. A temporary intermediate alteration of an ancilla is permitted if the full unitary satisfies the stated identity.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-ancilla-identities-stable-under-reference-and-mixtures",
+          "source_section": "Statement",
+          "quote": "Let $U$ and $V$ satisfy either the clean or dirty identity in [[def-qc-clean-and-dirty-ancillas]], and let $R$ be any finite ordered reference register. Put $P_0=R_{0_A,0_A}$, where the rank-one operator notation used here is defined by $R_{u,v}(z)=\\langle z,v\\rangle_{\\rm root}u$. In the clean case, for every matrix $X$ on $R\\otimes D$,\n$$\n(I_R\\otimes U)(X\\otimes P_0)(I_R\\otimes U^\\dagger)=\\big((I_R\\otimes V)X(I_R\\otimes V^\\dagger)\\big)\\otimes P_0.\n$$\nIn the dirty case, for every matrix $Y$ on $R\\otimes D\\otimes A$,\n$$\n(I_R\\otimes U)Y(I_R\\otimes U^\\dagger)=(I_R\\otimes V\\otimes I_A)Y(I_R\\otimes V^\\dagger\\otimes I_A).\n$$\nThus the stated identities apply in particular to density matrices, meaning positive semidefinite matrices of trace one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-circuit-inverse-reversal",
+          "source_section": "Statement",
+          "quote": "Let $C$ be a finite measurement-free unitary circuit. Assume that for every gate occurrence its adjoint is a legal gate occurrence on the same ordered wires and that the operation model explicitly grants each inverse call, as required by [[def-qc-inverse-unitary-access]]. Reverse the chronological layer order and, within each layer, reverse its gate list while replacing each gate by its adjoint. The resulting circuit $C^{-1}$ has\n$$U_{C^{-1}}=U_C^\\dagger=U_C^{-1}.$$\nIt has the same number of gate occurrences as $C$; inverse calls retain their separately declared access cost.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+          "source_section": "Statement",
+          "quote": "On the ordered computational basis, $X$, CNOT, Toffoli $T$, and Fredkin $F$ are involutions. Their linear extensions are unitary. With chronological order meaning the gates are applied in the written order, Fredkin is implemented by CNOT$(a,b)$, then $T(c,b,a)$, then CNOT$(a,b)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a basis input, the forward computation gives $|x,g(x),r(x)\\rangle$. Since $Y$ is disjoint, bitwise CNOT from the designated $g(x)$ subregister changes an arbitrary target $y$ to $y\\oplus g(x)$ and leaves $XW$ unchanged. The intermediate state is therefore $|x,y\\oplus g(x),g(x),r(x)\\rangle$, with $g(x),r(x)$ together occupying $W$; [F12] supplies the CNOT gate unitarity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying $C^{-1}$ to $XW$ returns $|x,g(x),r(x)\\rangle$ to $|x,0_W\\rangle$ by the assumed forward basis action and [F6]. The inverse is supplied on $XW$ by the Given clause, so the disjoint target $Y$ is untouched and remains $y\\oplus g(x)$. This proves the displayed basis action and exact restoration of all work required by the clean-ancilla contract [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F7]–[F11], the ordered basis vectors $|x,y,0_W\\rangle$ form a basis of the subspace with work fixed to zero. Step 2.1 therefore extends by linearity to every superposition in that subspace, with data action $V|x,y\\rangle=|x,y\\oplus g(x)\\rangle$. This data map is an involutive permutation of its orthonormal computational basis, since applying it twice restores $y$; hence $V$ is unitary. The complete compute-copy-inverse operation thus satisfies the clean identity in [F1], and [F2] extends it to every finite reference register and matrix. The tensor-map and chronological-circuit conventions [F4]–[F5] preserve the ordered factors in these extensions.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 also holds when m=0; the copy layer is empty and the inverse clears all work."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes y=0 as one of the arbitrary target strings."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The basis argument applies to one-bit input and target registers. Step 1.1 supplies the check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The arbitrary garbage string r(x) is not restricted; Step 2.1 reverses all of it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has finite registers and a supplied unitary computation C; no real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has finite registers and a supplied unitary computation C; no real interval. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "fa91796ff4829098025c73927a188e58faa1a2388828a5ab9fb493b672193092",
+            "row_sha256": "6f602f69b9ae210b95e1d184319f8e335cbc16b11ed145f370f6262ea58918d5",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The argument uses a supplied finite circuit and inverse and finite linearity only. Step 1.1 supplies the check."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves the supplied C,copy,C-inverse sequence restores work and gives coherent XOR by g, in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves the supplied C,copy,C-inverse sequence restores work and gives coherent XOR by g, in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "fa91796ff4829098025c73927a188e58faa1a2388828a5ab9fb493b672193092",
+            "row_sha256": "fc09f12f4edc145ac84dea81a57c1c343de44a1fcdc3ce25f22437dc3c72d6a1",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement proves the supplied C,copy,C-inverse sequence restores work and gives coherent XOR by g, in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement proves the supplied C,copy,C-inverse sequence restores work and gives coherent XOR by g, in steps 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "fa91796ff4829098025c73927a188e58faa1a2388828a5ab9fb493b672193092",
+            "row_sha256": "5bfcdad780e23b5566e9fcc76203c3565bda2a307be73fec3d09dc1ba3fb2a7d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–3.1 and actual inverse-reversal, ordered basis/bitstring, CNOT, tensor and ancilla extension suppliers. Disjoint arbitrary y receives xor g(x) while XW remains the exact forward state, so supplied C inverse restores all work. Data action is an involutive basis permutation and hence unitary, meeting clean contract before reference/matrix extension. Empty output gives empty copy; zero work is allowed only with m=0; n=0 has single scalar input word. Inverse access explicitly assumed, not inferred from a matrix. No AC. No unresolved reader/refuter defect; no defect found."
+      }
+    },
+    "thm-qc-oracle-phase-query-cost-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-coherent-function-oracle",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge0$ and let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be a total Boolean function on ordered bit strings. Its coherent XOR oracle is the linear extension of\n$$\nO_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle\n$$\non the ordered input and target computational basis, where XOR is componentwise. The declared access contract states how many invocations count as queries and whether a controlled invocation is supplied. A query to this declared black box is counted separately from elementary gate size, depth, and width.\n\nIf $f$ is supplied instead by an explicit Boolean circuit, implementing $O_f$ means compiling that circuit and paying its reversible elementary-gate and workspace costs; the function description alone is not a free query. For this XOR oracle, its inverse is the same map, as proved in [[thm-qc-reversible-xor-oracle-unitary]]. Controlled access remains a separate capability unless the contract explicitly provides it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-phase-kickback-from-xor-oracle",
+          "source_section": "Statement",
+          "quote": "Let $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ be total, let $s\\in\\{0,1\\}^m$, and define the normalized character target\n$$\n|\\chi_s\\rangle=2^{-m/2}\\sum_{y\\in\\{0,1\\}^m}(-1)^{s\\cdot y}|y\\rangle,\n$$\nwhere $s\\cdot y$ is the dot product modulo two. Then\n$$\nO_f(|x\\rangle|\\chi_s\\rangle)=(-1)^{s\\cdot f(x)}|x\\rangle|\\chi_s\\rangle.\n$$\nFor a one-bit output with $s=1$, $|\\chi_s\\rangle=|-\\rangle=(|0\\rangle-|1\\rangle)/\\sqrt2=H|1\\rangle$. Thus the phase action is obtained with one invocation of the declared XOR oracle, with target preparation cost accounted separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-reversible-embedding-cost",
+          "source_section": "Statement",
+          "quote": "Let $n,m\\ge0$, $x\\in\\{0,1\\}^n$, and $y\\in\\{0,1\\}^m$. Let a finite topologically ordered Boolean DAG have $S$ non-input nodes, including constants, and $E$ input-port uses counted with multiplicity. Its gates are NOT, AND, OR, and constants, with fan-in at most two, and it has $m$ ordered output ports computing $f(x)$. Under the fixed elementary alphabet in [[def-qc-elementary-circuit-resources]], counting each occurrence of $X$, CNOT, and Toffoli as one gate and one serial layer, [[alg-qc-reversible-embedding]] returns a circuit on the ordered input, target, and work registers implementing\n$$\n|x,y,0^w\\rangle\\longmapsto|x,y\\oplus f(x),0^w\\rangle\n$$\nfor every basis input $x$ and every target string $y$. It uses at most $6S+4E+m$ elementary gate occurrences, at most $S+E$ clean work bits, and serial depth at most $6S+4E+m$. The same operator action holds coherently on arbitrary superpositions and after adjoining any finite reference register.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-reversible-xor-oracle-unitary",
+          "source_section": "Statement",
+          "quote": "For every total Boolean function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$, including noninjective functions, the coherent XOR oracle $O_f|x,y\\rangle=|x,y\\oplus f(x)\\rangle$ is unitary and satisfies $O_f^2=I$. Hence $O_f^{-1}=O_f$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-controlled-unitary-access",
+          "source_section": "Definition",
+          "quote": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-elementary-circuit-resources",
+          "source_section": "Definition",
+          "quote": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call. Inverse availability and query or gate charges are also recorded separately from controlled forward access. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A phase oracle for a Boolean function $g$ means the diagonal map $P_g|x\\rangle=(-1)^{g(x)}|x\\rangle$, and a declared query contract counts each invocation of its named black box as one query. Thus a declared phase-oracle invocation is one phase query. If the supplied black box is instead the XOR map, [F2] gives the same phase action using exactly one XOR-oracle invocation; target-state preparation is a separate ordinary circuit operation, charged in the separate coordinates of [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the only input for $f$ is an explicit Boolean circuit, [F3] replaces each required function evaluation by its finite compiled gate list, so the listed gates, depth, and work are charged under the separate resource coordinates [F6]. There is no black-box invocation to count unless the contract separately supplies one. Likewise a controlled black-box call requires declared controlled access [F5]; and although $O_f^{-1}=O_f$ by [F4], each call made to apply it remains one query invocation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A zero-call algorithm has zero query count by the invocation-count convention. Step 1.1 supplies the check."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 counts one invocation only when the phase action is requested; zero requested calls cost zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses exactly one XOR-oracle call for the one-bit Boolean phase query."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes explicit circuits from black boxes and requires declared controlled access; an inverse XOR call remains charged."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has access contracts and integer resource counts; no probability or precision threshold. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has access contracts and integer resource counts; no probability or precision threshold. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "dcfa2df1985ccfd3f6c0e081a2e15e4acf18f8ee15a0a0c4b6c2371bbfaf2fd3",
+            "row_sha256": "12008bde0387de5d8cd9892aabe9c82fdb1af863ba5e9c1423d820730e60e96b",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The result uses an explicit finite access contract and no existence choice. Step 1.1 supplies the check."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement charges one declared invocation as one query and charges compiled, controlled and inverse work under its own access model, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement charges one declared invocation as one query and charges compiled, controlled and inverse work under its own access model, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "dcfa2df1985ccfd3f6c0e081a2e15e4acf18f8ee15a0a0c4b6c2371bbfaf2fd3",
+            "row_sha256": "89181162e6bbe9141397c7b8eb47fdedd6cd8a372ddbd3384aa93fcf9463a971",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement charges one declared invocation as one query and charges compiled, controlled and inverse work under its own access model, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement charges one declared invocation as one query and charges compiled, controlled and inverse work under its own access model, by steps 1.1–2.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "dcfa2df1985ccfd3f6c0e081a2e15e4acf18f8ee15a0a0c4b6c2371bbfaf2fd3",
+            "row_sha256": "81cafe23582fe75c1af5e6ba26a775a340a8115ed7e3f8df6ded2a4eadab9456",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read Proof 1.1–2.1 with exact declared XOR/controlled-access and elementary resource contracts, kickback and compiler conclusions. Boolean one-bit output phase uses |- > and one supplied XOR call; a declared phase call is one phase query by convention. Explicit circuit descriptions instead incur compiler gate/depth/work coordinates. XOR self-inverse supplies the same operation but does not remove the charge for a call; controlled access remains separately declared or constructed. Empty input remains a scalar phase and does not change accounting. No lower-bound or free target-preparation claim. No AC. No reader/refuter finding targets this carrier; no defect found."
+      }
+    },
+    "ex-qc-reversible-and-oracle-compute-copy-uncompute": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-clean-and-dirty-ancillas",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a finite ordered quantum register and let $A$ be an ordered register of $k\\ge0$ ancilla qubits, with Hilbert spaces $\\mathcal H_D$ and $\\mathcal H_A$. Write $|0_A\\rangle=|0^k\\rangle$, including $|0_A\\rangle=1$ when $k=0$. Let $U$ be a unitary on $\\mathcal H_D\\otimes\\mathcal H_A$ and let $V$ be a unitary on $\\mathcal H_D$.\n\nThe register $A$ is a **clean ancilla register for $U$ and $V$** when\n$$\nU(|\\psi\\rangle_D\\otimes|0_A\\rangle)=V|\\psi\\rangle_D\\otimes|0_A\\rangle\n$$\nfor every vector $|\\psi\\rangle_D$. Thus the data operation is independent of the input vector and all clean wires return exactly to zero.\n\nThe register $A$ is a **dirty ancilla register for $U$ and $V$** when the operator identity $U=V\\otimes I_A$ holds on $\\mathcal H_D\\otimes\\mathcal H_A$. Equivalently, every product input $|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$ is mapped to $V|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$, with the same $V$ for every data and ancilla vector. This requires exact restoration of an arbitrary, initially unknown ancilla state and forbids residual data–ancilla correlation.\n\nThese are exact contracts for the complete subroutine. A temporary intermediate alteration of an ancilla is permitted if the full unitary satisfies the stated identity.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-reversible-embedding-cost",
+          "source_section": "Statement",
+          "quote": "Let $n,m\\ge0$, $x\\in\\{0,1\\}^n$, and $y\\in\\{0,1\\}^m$. Let a finite topologically ordered Boolean DAG have $S$ non-input nodes, including constants, and $E$ input-port uses counted with multiplicity. Its gates are NOT, AND, OR, and constants, with fan-in at most two, and it has $m$ ordered output ports computing $f(x)$. Under the fixed elementary alphabet in [[def-qc-elementary-circuit-resources]], counting each occurrence of $X$, CNOT, and Toffoli as one gate and one serial layer, [[alg-qc-reversible-embedding]] returns a circuit on the ordered input, target, and work registers implementing\n$$\n|x,y,0^w\\rangle\\longmapsto|x,y\\oplus f(x),0^w\\rangle\n$$\nfor every basis input $x$ and every target string $y$. It uses at most $6S+4E+m$ elementary gate occurrences, at most $S+E$ clean work bits, and serial depth at most $6S+4E+m$. The same operator action holds coherently on arbitrary superpositions and after adjoining any finite reference register.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first Toffoli changes $w=0$ to $ab$ and preserves $a,b$. For $(a,b)=(0,0),(0,1),(1,0),(1,1)$, this gives $w=0,0,0,1$, respectively, as the eight-row table records for both values of $y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The CNOT changes $y$ to $y\\oplus ab$ and does not change $a,b,w$; the final Toffoli again toggles $w$ by $ab$, so $w=ab\\oplus ab=0$. The chronological product in [F5] is therefore exactly the tabled action on all eight basis inputs and clean-work outputs.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vectors $|a,b,y,0\\rangle$ in the eight table rows form a basis of the subspace with clean work fixed to zero, by [F6]–[F7]. Each gate is linear, so the verified basis action in Step 2.1 extends to every superposition in that subspace. For $S=1$, $E=2$, and $m=1$, the circuit uses three gate occurrences and one clean work bit, within the stated bounds $6S+4E+m=15$ and $S+E=3$ from [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example is the fixed four-wire three-gate circuit; the one-AND graph and eight input rows cannot be empty inputs.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Example is the fixed four-wire three-gate circuit; the one-AND graph and eight input rows cannot be empty inputs.",
+            "item_sha256": "e2a707b00b96a4e3a7575230ee1832692a7abdb72b10eb145c39ca98103048c1",
+            "row_sha256": "3b6b52d9cf15427504089196180fc57ed97c8c1ab4efd143ba272047998c439c",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example table and Step 1.1 include input 00 and leave the target unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example table and Step 1.1 include 01, 10, and 11; only 11 toggles the target."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The table checks all eight (a,b,y) inputs, including equal control values 00 and 11 and both target values. Step 2.1 supplies the check."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Example has bits a,b,y and a clean work bit; no real-valued parameter. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement/Example has bits a,b,y and a clean work bit; no real-valued parameter. Its conclusion is an exact circuit identity or count, not a limit assertion.",
+            "item_sha256": "e2a707b00b96a4e3a7575230ee1832692a7abdb72b10eb145c39ca98103048c1",
+            "row_sha256": "1cc22e598814224671fa49aba9530cb0c60a5bc8900956fd9f2124122e88e66a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite verification enumerates all four input pairs and both target values. Step 1.1 supplies the check."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example fixes three gates on four wires and proves |a,b,y,0> to |a,b,y XOR ab,0> in Verification 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Example fixes three gates on four wires and proves |a,b,y,0> to |a,b,y XOR ab,0> in Verification 1.1–3.1. No biconditional characterization is asserted, so no iff-forward implication is owed.",
+            "item_sha256": "e2a707b00b96a4e3a7575230ee1832692a7abdb72b10eb145c39ca98103048c1",
+            "row_sha256": "c10ffb3348f545a8c3c441a0de467ac8c2bf65375353cb164a8960de8a3edb38",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example fixes three gates on four wires and proves |a,b,y,0> to |a,b,y XOR ab,0> in Verification 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Example fixes three gates on four wires and proves |a,b,y,0> to |a,b,y XOR ab,0> in Verification 1.1–3.1. No biconditional characterization is asserted, so no iff-reverse implication is owed.",
+            "item_sha256": "e2a707b00b96a4e3a7575230ee1832692a7abdb72b10eb145c39ca98103048c1",
+            "row_sha256": "5afc3a54753115fd0d0c2c85d6ebfe8f341fa78ca2e747ef511186c67f589f60",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "unresolved_supplier_excerpts": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "All clean-work AND-oracle inputs",
+          "method": "exact finite check",
+          "command": "The complete eight-row table under ## Example in items/ex-qc-reversible-and-oracle-compute-copy-uncompute.md.",
+          "inputs": {
+            "triples": "(a,b,y) in {0,1}^3",
+            "work": "w=0"
+          },
+          "computation": "Apply Toffoli(a,b,w), CNOT(w,y), Toffoli(a,b,w).",
+          "observed": "For all 8 triples, output is (a,b,y xor ab,w=0); the table includes every input and both target values.",
+          "scope": "Exhausts the example circuit’s clean-input basis and checks its three-gate count."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Read all eight table rows, Verification 1.1–3.1 and actual Toffoli/CNOT, clean, basis, semantics and compiler suppliers. w takes ab then stays ab during y xor ab and returns 0; both y values and all controls explicitly checked. Exactly two Toffoli plus one CNOT, one clean work bit, within 15 gates/3 bits at S=1,E=2,m=1. Coherent extension is restricted to clean-work subspace. Compiled gates are not assumed free oracle access. No AC or missing endpoint case. No reader/refuter finding targets this carrier; no defect found."
+      }
+    }
+  }
+}

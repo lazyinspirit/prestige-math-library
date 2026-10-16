@@ -1,0 +1,102 @@
+6.6 Quantum Searching
+29
+
+We can model this situation in the black box setting. Suppose we are promised that
+the function evaluated by the box has the form
+
+fw(x) =
+
+�
+0
+x ̸= w,
+
+1
+x = w,
+(6.148)
+
+where x ∈{0, 1, 2.., N −1} for some unknown w. Our task is to find w, the marked string.
+Classically, we’ll need to query the box more than N/2 times to find w with success
+probability above 1/2. This is a black-box version of an NP-hard problem, where there
+is a unique witness accepted by a circuit, but the problem has no structure, so there is
+no better option than exhaustive searching.
+Now we ask, can exhaustive search be done faster on a quantum computer? The
+answer is yes, using Grover’s algorithm. With quantum queries, we can find the marked
+string using O(
+√
+
+N) queries. Thus we can solve NP-hard problems by exhaustive search
+in time O(
+√
+
+NpolylogN).
+We say that Grover’s algorithm achieves a quadratic speedup relative to exhaustive
+search on a classical computer. Though the speedup is only quadratic rather than ex-
+ponential, Grover’s algorithm is interesting because of its broad applicability. And it is
+rather remarkable: in effect we can interrogate N potential witnesses by asking O(
+√
+
+N)
+questions.
+In the quantum setting, the black box applies the unitary
+
+Uw : |x⟩⊗|y⟩�→|x⟩⊗|y ⊕fw(x)⟩,
+(6.149)
+
+where x ∈{0, 1}n and y ∈{0, 1}n. By the standard trick, Uw becomes a phase oracle:
+
+Uw : |x⟩⊗|−⟩�→(−1)fw(x)|x⟩⊗|−⟩
+(6.150)
+
+where
+
+(−1)fw(x) =
+
+�
+1
+x ̸= w,
+
+−1
+x = w.
+(6.151)
+
+Ignoring the output register (which is unaffected by Uw), we can express Uw acting on
+input as
+
+Uw = I −2|w⟩⟨w|.
+(6.152)
+
+We can express a general n-qubit state |ψ⟩as
+
+Uw : |ψ⟩= a|w⟩+ b|ψ⊥⟩�→−a|w⟩+ b|ψ⊥⟩,
+(6.153)
+
+where ⟨w|ψ⊥⟩= 0. That is, we resolve |ψ⟩into a component along |w⟩and a component
+in the hyperplane orthogonal to |w⟩. Uw induces a reflection of the vector |ψ⟩about this
+hyperplane.
+The first step in Grover’s algorithm is to prepare the uniform superposition of all
+values of x:
+
+|s⟩= H⊗n|0⟩=
+1
+√
+
+N
+
+N−1
+�
+
+x=1
+|x⟩;
+(6.154)
+
+this state |s⟩has overlap with the marked string |w⟩
+
+⟨w|s⟩=
+1
+√
+
+N
+.
+(6.155)
+
+

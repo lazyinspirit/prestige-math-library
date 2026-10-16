@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-hopf-hecke-75-2026-10-15-owner/published-repairs/def-p-norms-on-rn.json
 id: def-p-norms-on-rn
 kind: definition
 title: "The $p$-norms $\\lVert x\\rVert_p$ for rational $p \\ge 1$, and $\\lVert x\\rVert_\\infty$"
@@ -7,17 +9,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-norm-and-normed-space, def-euclidean-inner-product, def-rational-power, lem-rational-power-well-defined, lem-rational-power-laws, lem-rational-power-monotone, rem-real-exponents-deferred, thm-minkowski-finite, def-finite-sum, lem-finite-sum-laws, lem-finite-set-has-max, def-max-min, lem-metrics-on-rn, def-abs-value, lem-of-abs-value, thm-of-square-roots]
+deps: [def-norm-and-normed-space, def-euclidean-inner-product, def-rational-power, lem-rational-power-well-defined, lem-rational-power-laws, lem-rational-power-monotone, thm-minkowski-finite, def-finite-sum, lem-finite-sum-laws, lem-finite-set-has-max, def-max-min, lem-metrics-on-rn, def-abs-value, lem-of-abs-value, thm-of-square-roots]
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -55,13 +50,11 @@ $1/p$ is a positive rational, so the outer power is defined for the same two
 reasons. The value does not depend on which representative of $p$ or of $1/p$ is
 used ([[lem-rational-power-well-defined]]).
 
-**The exponent is a rational, and that is not a matter of taste.**
-[[def-rational-power]] supplies $a^{r}$ for a nonnegative base and a **rational**
-exponent only; real exponents do not exist at this point in the reading order,
-and [[rem-real-exponents-deferred]] records exactly why. This is also why the
-published Minkowski inequality [[thm-minkowski-finite]], which is what makes the
-triangle inequality work below, is itself stated for rational $p \ge 1$. **No
-statement on this page is written for $p$ ranging over a real interval.**
+**The exponent is rational in this definition.**
+[[def-rational-power]] supplies the nonnegative-base powers used here, and
+[[thm-minkowski-finite]] supplies the corresponding triangle inequality for
+rational $p \ge 1$. This item makes no claim with $p$ ranging over a real
+interval; its rational domain is unchanged.
 
 ### The maximum norm
 

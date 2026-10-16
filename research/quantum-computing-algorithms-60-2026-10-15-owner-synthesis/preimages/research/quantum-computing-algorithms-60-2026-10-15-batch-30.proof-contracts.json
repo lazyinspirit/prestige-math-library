@@ -1,0 +1,2022 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-binary-qft-product-factorization",
+    "thm-qa-projective-operator-closeness-bounds-output-distribution",
+    "lem-qa-pi-over-two-exceeds-sqrt-two",
+    "lem-qa-tensor-extension-preserves-operator-norm",
+    "lem-qa-swap-is-three-cnot-circuit",
+    "thm-qa-exact-binary-qft-circuit-correct",
+    "thm-qa-exact-binary-qft-gate-count",
+    "thm-qa-truncated-qft-operator-norm-error",
+    "thm-qa-truncated-qft-gate-count",
+    "thm-qa-qft-finite-gate-set-compile-cost",
+    "ex-qa-qft-fourier-circuit-order-and-truncation"
+  ],
+  "contracts": {
+    "lem-qa-binary-qft-product-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "is a bijection",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The product basis is ordered lexicographically by its tuple of factor indices.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "The ket $|x\\rangle$ denotes the vector $x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "qft-phase-expansion",
+          "claim": "Expand xy/2^n by output bit and isolate each fractional binary phase.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1"
+          ]
+        },
+        {
+          "id": "qft-output-product",
+          "claim": "Factor the finite output sum into ordered one-qubit factors.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "qft-reversal-and-zero-width",
+          "claim": "Apply the reversal permutation and check the n=0 identity case.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The n=0 empty tensor and N=1 identity are handled in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The binary expansion in step 1.1 includes x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 register is included in steps 1.1\u20133.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-wire case is checked in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All input and output indices in the inclusive finite ranges are covered in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The output is a finite sum over all bit strings; no choice is used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a factorization identity, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a factorization identity, not an iff."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qa-projective-operator-closeness-bounds-output-distribution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "$T$ preserves norms",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "|zw|=|z||w|",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-bessel-inequality-and-finite-parseval-identity",
+          "source_section": "Statement",
+          "quote": "\\lVert v\\rVert^2=\\sum_{i<r}|\\langle v,e_i\\rangle|^2",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "amplitude-tv",
+          "claim": "Bound total variation of two normalized coordinate laws by the Euclidean distance of their amplitude vectors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "phase-and-operator-bound",
+          "claim": "Remove a unit scalar from the output law and bound the amplitude difference by operator norm.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "projective-infimum",
+          "claim": "Take the infimum over phases without assuming a minimizing scalar.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonzero space and a finite orthonormal basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case epsilon=0 is covered by the same inequalities in steps 1.1\u20133.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-dimensional nonzero space is included by the finite-basis argument in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement requires a unit input in a nonzero space, excluding a zero vector or zero-dimensional space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The case d_pr=epsilon, including epsilon=0, follows in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses an infimum phase bound and chooses no minimizing phase."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper bound, not an iff."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qa-tensor-extension-preserves-operator-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "The elementary tensors of the factor bases, ordered lexicographically, form an orthonormal basis of the tensor register",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "the map $P_\\sigma$ that reorders the factors is a bijective linear isometry",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "spectator-upper-bound",
+          "claim": "Expand an arbitrary tensor vector in a product basis and bound the tensor-with-identity map.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "spectator-lower-bound",
+          "claim": "Test on a maximizing unit vector tensored with a unit spectator vector.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "unitary-conjugation-invariance",
+          "claim": "Use norm-one wire permutations and submultiplicativity in both directions.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both S and R are assumed nonzero."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement excludes zero-dimensional tensor factors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-dimensional spectator basis has d=1 and is included in steps 1.1\u20132.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-operator case is covered by the upper and lower bounds in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The maximizing unit vector and unit spectator vector attain the lower bound in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The specified finite bases are used directly in steps 1.1 and 2.1; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an equality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an equality, not an iff."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qa-swap-is-three-cnot-circuit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "maps the product basis vector indexed by",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "is an orthonormal basis",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cnot-involutions-and-action",
+          "claim": "Check the reverse CNOT is a basis permutation and calculate the three maps on an arbitrary basis label.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "swap-operator-identity",
+          "claim": "Identify the resulting basis action with the wire swap and extend equality to all vectors.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "swap-three-cnot-table",
+          "input": "00, 01, 10, 11 on ordered wires 1,2",
+          "expected": "00->00, 01->10, 10->01, 11->11",
+          "status": "computed by the arbitrary (a,b) calculation in step 1.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma fixes two qubit wires."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no numerical parameter equal to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "All four one-bit values in each wire are covered by the arbitrary labels a,b in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The full computational basis action is calculated in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two-wire gate list and the arbitrary basis labels are explicit in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an operator identity, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an operator identity, not an iff."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qa-exact-binary-qft-circuit-correct": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-binary-qft-product-factorization",
+          "source_section": "Statement",
+          "quote": "the standard-basis output $\\operatorname{QFT}_{2^n}|x\\rangle$ is $R_0\\otimes R_1\\otimes\\cdots\\otimes R_{n-1}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "\\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s})",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "The product basis is ordered lexicographically by its tuple of factor indices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "The ket $|x\\rangle$ denotes the vector $x$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-inverse-unitary-access",
+          "source_section": "Definition",
+          "quote": "the inverse sequence applies $U_k^\\dagger$ first",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": null,
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "acts as the identity on the other wires.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "Define the **cyclic quantum Fourier transform** by $\\operatorname{QFT}_N:=\\mathcal F_N^{-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "basis-gate-trace",
+          "claim": "Track a basis input through descending Hadamards and lower controls to obtain the pre-swap product.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "F6"
+          ]
+        },
+        {
+          "id": "swap-output",
+          "claim": "Use the reversal and product factorization to identify the positive-sign QFT basis output.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "linearity-and-inverse",
+          "claim": "Extend basis equality by linearity and reverse the list with adjoints for the inverse transform.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "A1",
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The n=0 empty-register case is handled in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The all-zero basis input is included in the arbitrary basis trace of step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 circuit is covered by steps 1.1\u20132.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-wire circuit is checked in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The argument applies to every basis index in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite basis and gate lists are explicit in steps 1.1\u20133.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is circuit correctness, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is circuit correctness, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [
+        {
+          "id": "def-qc-circuit-denotational-semantics",
+          "status": "supplier body absent at handoff; exact excerpt unavailable",
+          "actual_excerpt": null
+        }
+      ]
+    },
+    "thm-qa-exact-binary-qft-gate-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-exact-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "For $j=n-1,n-2,\\ldots,0$, apply $H$ to target $q_j$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "S=C_{12}C_{21}C_{12}",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "count-controlled-pairs",
+          "claim": "Count one Hadamard per wire, one controlled phase per ordered pair, and floor(n/2) reversal swaps.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "sum-and-expansion",
+          "claim": "Sum the ideal count and use the exact SWAP identity for the CNOT expansion.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "All loops and counts vanish at n=0, as noted in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "All gate counts vanish at n=0, as checked in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the sum has one Hadamard and no pair or swap, covered in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-wire register has no gates, covered in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The last target and the reversal endpoint are counted in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The pair set is finite and counted by the triangular sum in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an exact gate count, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an exact gate count, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [
+        {
+          "id": "def-qc-elementary-circuit-resources",
+          "status": "transitive resource convention supplier body absent at handoff",
+          "actual_excerpt": null
+        }
+      ]
+    },
+    "thm-qa-truncated-qft-operator-norm-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-exact-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "For $j=n-1,n-2,\\ldots,0$, apply $H$ to target $q_j$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "\\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s})",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "$T$ preserves norms",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "\\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "\\exp(x+iy)=e^x(\\cos y+i\\sin y)",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "|\\sin u-\\sin v|\\le|u-v|",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "Also $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-double-angle-and-power-reduction-identities",
+          "source_section": "Statement",
+          "quote": "\\cos(2x)=\\cos^2x-\\sin^2x=2\\cos^2x-1=1-2\\sin^2x",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qa-exact-binary-qft-circuit-correct",
+          "source_section": "Statement",
+          "quote": "implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "is a bijective linear isometry",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-qa-tensor-extension-preserves-operator-norm",
+          "source_section": "Statement",
+          "quote": "Thus a one- or two-register gate has the same operator norm after identity factors are added on spectators and its wires are moved to their declared positions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "is an orthonormal basis",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-bessel-inequality-and-finite-parseval-identity",
+          "source_section": "Statement",
+          "quote": "\\lVert v\\rVert^2=\\sum_{i<r}|\\langle v,e_i\\rangle|^2",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": null,
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "acts as the identity on the other wires.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "phase-chord-bound",
+          "claim": "Derive |1-exp(it)| <= |t| from Euler, Lipschitz continuity and the double-angle identity.",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "single-omission",
+          "claim": "Compute one local omitted controlled-phase norm and lift it to the full register.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F13",
+            "F15",
+            "F16",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "unitary-telescope",
+          "claim": "Use circuit product semantics and the unitary product telescope.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "step 2.1",
+            "F17"
+          ]
+        },
+        {
+          "id": "sum-levels",
+          "claim": "Count omissions at each denominator level and sum the geometric bound.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "cutoff-boundary",
+          "claim": "Check the exact m>=n case and logarithmic epsilon cutoff.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The logarithmic cutoff assumes 0<epsilon<1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 every m>=1 is exact by step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The m>=n no-omission branch is checked in step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The empty omission range at m=n and last level s=n are covered in steps 4.1\u20135.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite product telescope is explicit in step 3.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper error bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper error bound, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [
+        {
+          "id": "def-qc-circuit-denotational-semantics",
+          "status": "supplier body absent at handoff; exact excerpt unavailable",
+          "actual_excerpt": null
+        }
+      ]
+    },
+    "thm-qa-truncated-qft-gate-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "S=C_{12}C_{21}C_{12}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-truncated-qft-operator-norm-error",
+          "source_section": "Statement",
+          "quote": "m=\\min\\{n,\\lceil\\log_2(2\\pi n/\\varepsilon)\\rceil\\}",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "retained-level-count",
+          "claim": "Count the retained phase gates at each denominator level.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "truncated-total-count",
+          "claim": "Sum the ideal count, exact CNOT expansion, and inverse-polynomial cutoff bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement assumes n>=1, so the empty-register case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement requires 0<epsilon<1 for the asymptotic cutoff branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, tilde m=1 and the sum over phase levels is empty, as covered in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The m>=n exact branch is counted by setting tilde m=n in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The final retained phase level and all reversal swaps are included in steps 1.1\u20132.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The retained pair set is finite and counted directly in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a count and asymptotic bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a count and asymptotic bound, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [
+        {
+          "id": "def-qc-elementary-circuit-resources",
+          "status": "transitive through def-qa-qft-gate-cost-model; supplier body absent at handoff",
+          "actual_excerpt": null
+        }
+      ]
+    },
+    "thm-qa-qft-finite-gate-set-compile-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-truncated-qft-operator-norm-error",
+          "source_section": "Statement",
+          "quote": "For $m\\ge n$, the truncated circuit is exact and the error is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-projective-operator-closeness-bounds-output-distribution",
+          "source_section": "Statement",
+          "quote": "d_{\\rm TV}(p_U^\\psi,p_V^\\psi)\\le\\varepsilon",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "\\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "$T$ preserves norms",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-qc-solovay-kitaev-unitary-compiler",
+          "source_section": "Definition",
+          "quote": "an exact-real target $U\\in SU(2)$, and a rational $0<\\varepsilon\\le\\eta_0$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-solovay-kitaev-error-and-resource-bound",
+          "source_section": "Statement",
+          "quote": "The word length is $L_0 5^j$ at level $j$, hence $O(\\log^{\\log_{3/2}5}(1/\\varepsilon))=O(\\log^{3.97}(1/\\varepsilon))$.",
+          "uses": [
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-inverse-closed-dense-su2-gate-set",
+          "source_section": "Definition",
+          "quote": "An **inverse-closed dense $SU(2)$ gate package** consists of a finite set $G\\subset SU(2)$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+          "source_section": "Statement",
+          "quote": "|\\det T|=1.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-every-complex-number-has-a-square-root",
+          "source_section": "Statement",
+          "quote": "Every $z=a+bi\\in\\mathbb C$ has a square root.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "|zw|=|z||w|",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-qa-tensor-extension-preserves-operator-norm",
+          "source_section": "Statement",
+          "quote": "\\lVert T\\otimes I_R\\rVert=\\lVert T\\rVert",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "S=C_{12}C_{21}C_{12}",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qc-one-control-unitary-two-cnot",
+          "source_section": "Proof",
+          "quote": "This is one additional one-qubit control gate and preserves the exact scalar phase.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-qc-elementary-circuit-resources",
+          "source_section": "Definition",
+          "quote": "the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "U_C:=U_{L_d}\\cdots U_{L_1}.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "thm-qc-controlled-global-phase-is-relative-phase",
+          "source_section": "Statement",
+          "quote": "The $E_+$ outcome has probability $1$ after $C(U)$ and $\\cos^2(\\theta/2)$ after $C(e^{i\\theta}U)",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "acts as the identity on the other wires.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-controlled-phase-rotation",
+          "source_section": "Definition",
+          "quote": "CP(\\theta):=C(P_\\theta)=\\operatorname{diag}(1,1,1,e^{i\\theta})",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "truncation-budget",
+          "claim": "Select m so truncation uses at most half the output error budget.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "compile-blocks",
+          "claim": "Apply the explicit controlled-unitary decomposition to all L retained blocks and bound the total one-qubit and CNOT factors.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "projective-telescope",
+          "claim": "Track scalar phases and telescope the compiled local errors on the full register.",
+          "step": "3.1",
+          "inputs": [
+            "A3",
+            "F3",
+            "F5",
+            "F6",
+            "F16",
+            "step 2.1",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "output-law",
+          "claim": "Combine truncation and compilation projective errors and apply the projective output theorem.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "gate-count",
+          "claim": "Bound compiler word lengths and add the exact decomposition CNOT and SWAP contributions.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "F8",
+            "F15",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "compile-local-factors",
+          "claim": "Convert each one-qubit U(2) factor to a phase times an SU(2) target, then apply the exact-real compiler and lift its error.",
+          "step": "1.3",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "outer-control-phase-caveat",
+          "claim": "Record why the whole-circuit scalar is harmless for a standalone circuit and changes behavior under outer control.",
+          "step": "4.2",
+          "inputs": [
+            "F4",
+            "A4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "retained-block-count",
+          "claim": "Count the retained one- or two-qubit blocks and the exact CNOT contribution of the final reversal.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F15",
+            "A2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target accuracy satisfies 0<eta<1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the cutoff is m=n and truncation is exact by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The m=n exact branch is handled in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both m<n and m=n cases are included in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many gate factors are considered; their local compilation is specified in step 1.3 and the decomposition list is finite by step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a conditional compiler bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a conditional compiler bound, not an iff."
+        }
+      ]
+    },
+    "ex-qa-qft-fourier-circuit-order-and-truncation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-pi-over-two-exceeds-sqrt-two",
+          "source_section": "Statement",
+          "quote": "\\sqrt2<\\frac\\pi2",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "S=C_{12}C_{21}C_{12}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-qa-exact-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "The chronological order is exactly the order listed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": null,
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "acts as the identity on the other wires.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "The ket $|x\\rangle$ denotes the vector $x$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "$T$ preserves norms",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-eulers-formula",
+          "source_section": "Statement",
+          "quote": "For every real $\\theta$, $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "z\\overline z=|z|^2",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "The elementary tensors of the factor bases, ordered lexicographically, form an orthonormal basis of the tensor register",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qa-truncated-qft-operator-norm-error",
+          "source_section": "Statement",
+          "quote": "\\sum_{s=m+1}^{n}(n-s+1)\\frac{2\\pi}{2^s}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "qft4-matrix",
+          "claim": "Trace the two-qubit exact circuit on all four basis inputs and compare the columns with F4+.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "A1",
+            "F4",
+            "L5",
+            "F6",
+            "F7",
+            "F12"
+          ]
+        },
+        {
+          "id": "truncation-norm",
+          "claim": "Compute the norm of the omitted CP2-I factor and compare with the general level sum.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "F1",
+            "A1",
+            "F4",
+            "L5",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "reverse-wire-matrix",
+          "claim": "Conjugate by the bit-reversal permutation and check the reversed matrix.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1",
+            "A1",
+            "L5"
+          ]
+        },
+        {
+          "id": "finite-gate-count",
+          "claim": "Count both ideal lists and their exact SWAP-to-CNOT expansion.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The x=00 column is calculated in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-qubit register, not N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch occurs for n=2,m=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All four basis inputs, including 00 and 11, are calculated in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The four basis inputs and finite gate lists are explicitly enumerated in steps 1.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a finite example, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a finite example, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "qft4-standard-wire-order",
+          "input": "x=00,01,10,11; ordered wires q1,q0",
+          "expected_matrix": "1/2[[1,1,1,1],[1,i,-1,-i],[1,-1,1,-1],[1,-i,-1,i]]",
+          "status": "computed in step 1.1"
+        },
+        {
+          "name": "qft4-reversed-wire-order",
+          "input": "P F4+ P with P exchanging 01 and 10",
+          "expected_matrix": "1/2[[1,1,1,1],[1,1,-1,-1],[1,-1,i,-i],[1,-1,-i,i]]",
+          "status": "computed in step 2.1"
+        },
+        {
+          "name": "qft4-cutoff-m1",
+          "input": "n=2,m=1; omit CP2",
+          "operator_norm_error": "sqrt(2)",
+          "omitted_level_sum": "pi/2",
+          "status": "computed in step 1.2"
+        },
+        {
+          "name": "qft4-gate-count",
+          "input": "n=2 exact and m=1 truncated",
+          "expected": "4 ideal exact; 3 ideal truncated; 3 CNOTs per expanded SWAP; no ancillas",
+          "status": "computed in step 3.1"
+        }
+      ],
+      "unresolved_suppliers": [
+        {
+          "id": "def-qc-circuit-denotational-semantics",
+          "status": "supplier body absent at handoff; exact excerpt unavailable",
+          "actual_excerpt": null
+        }
+      ]
+    },
+    "lem-qa-pi-over-two-exceeds-sqrt-two": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cosine-has-a-smallest-positive-zero",
+          "source_section": "Statement",
+          "quote": "There is a unique $\\gamma\\in(0,2)$ with $\\cos\\gamma=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "Thus $\\pi>0$ and $\\pi/2=\\gamma$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-alternating-series-test",
+          "source_section": "Statement",
+          "quote": "lies between the two consecutive partial sums",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{R}$ is a complete totally ordered field",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-cosine-tail",
+          "claim": "Show the cosine series at sqrt(2) is positive by bounding its alternating tail after the cancelling first two terms.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "sqrt-two-in-comparison-interval",
+          "claim": "Place sqrt(2) in the interval [0,2] where cosine is strictly decreasing.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "compare-to-first-zero",
+          "claim": "Compare the positive cosine value at sqrt(2) with the unique first positive zero gamma=pi/2.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "cosine-tail-first-ratio",
+          "input": "k=2 and x^2=2",
+          "expected": "a_3/a_2=1/15",
+          "status": "computed exactly in step 1.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma has no finite-list or empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The strict comparison concerns the fixed positive constants sqrt(2) and pi/2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No parameter takes a one-valued endpoint branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The first zero gamma lies in (0,2), and its comparison with sqrt(2) is completed in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The fixed alternating tail indexed by k>=2 is handled directly in step 1.1, with no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a strict inequality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a strict inequality, not an iff."
+        }
+      ],
+      "unresolved_suppliers": []
+    }
+  }
+}

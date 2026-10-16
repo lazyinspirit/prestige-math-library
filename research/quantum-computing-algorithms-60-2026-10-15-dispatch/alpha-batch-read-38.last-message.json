@@ -1,0 +1,222 @@
+{
+  "group": "e",
+  "batches": ["38"],
+  "pages_read": [
+    "quantum-query-lower-bounds-and-search-optimality",
+    "quantum-query-lower-bounds-and-search-optimality-examples"
+  ],
+  "items_read": [
+    "lem-qa-14-coherent-query-normal-form",
+    "def-qa-14-boolean-search-query-model",
+    "alg-qa-14-zero-completion-query-simulation",
+    "def-qa-14-query-mismatch-projectors",
+    "def-qa-14-search-promise",
+    "lem-qa-14-state-distance-from-acceptance-gap",
+    "lem-qa-14-one-query-hybrid-bound",
+    "thm-qa-14-zero-completion-query-simulation-correct",
+    "alg-qa-14-one-marked-search-with-verification",
+    "lem-qa-14-cumulative-hybrid-bound",
+    "lem-qa-14-aggregate-hybrid-squared-distance",
+    "lem-qa-14-chebyshev-recurrence-matches-grover-success",
+    "thm-qa-14-grover-search-upper-query-cost",
+    "thm-qa-14-bbbv-search-lower-bound",
+    "thm-qa-14-grover-search-upper-success",
+    "thm-qa-14-optimal-search-query-complexity",
+    "ex-qa-14-hybrid-budget-for-n-small",
+    "cex-qa-14-query-parallelism-does-not-give-exponential-search"
+  ],
+  "conventions": [
+    {
+      "convention": "N ≥ 1; input coordinates are 1-based and query addresses are 0-based. The XOR query at address j reads x_{j+1}; no controlled-oracle access is implicit.",
+      "fixed_by": "def-qa-14-boolean-search-query-model",
+      "matters_for": [
+        "lem-qa-14-one-query-hybrid-bound",
+        "lem-qa-14-cumulative-hybrid-bound",
+        "thm-qa-14-bbbv-search-lower-bound",
+        "alg-qa-14-zero-completion-query-simulation"
+      ]
+    },
+    {
+      "convention": "The promise consists exactly of the all-zero input and singleton inputs. Bounded-error correctness is required on every promised input; candidate verification costs a separate query.",
+      "fixed_by": "def-qa-14-search-promise",
+      "matters_for": [
+        "thm-qa-14-bbbv-search-lower-bound",
+        "thm-qa-14-grover-search-upper-success",
+        "thm-qa-14-optimal-search-query-complexity"
+      ]
+    },
+    {
+      "convention": "Finite adaptive protocols have input-independent nonoracle operations and finite outcome sets. Their coherent realization uses exactly T ordinary XOR queries without asserting uniform generation or bounded gate cost.",
+      "fixed_by": "lem-qa-14-coherent-query-normal-form",
+      "matters_for": [
+        "def-qa-14-boolean-search-query-model",
+        "lem-qa-14-cumulative-hybrid-bound",
+        "thm-qa-14-bbbv-search-lower-bound"
+      ]
+    },
+    {
+      "convention": "The address projectors include identities on response and work and sum to identity. With an explicitly adjoined skip address, the search-address sum is only at most identity.",
+      "fixed_by": "def-qa-14-query-mismatch-projectors",
+      "matters_for": [
+        "lem-qa-14-aggregate-hybrid-squared-distance",
+        "ex-qa-14-hybrid-budget-for-n-small"
+      ]
+    },
+    {
+      "convention": "Padding uses a power of two M with N ≤ M < 2N, assigns zero to invalid addresses, and restores added scratch registers after each simulated query.",
+      "fixed_by": "alg-qa-14-zero-completion-query-simulation",
+      "matters_for": [
+        "thm-qa-14-zero-completion-query-simulation-correct",
+        "alg-qa-14-one-marked-search-with-verification",
+        "thm-qa-14-grover-search-upper-query-cost",
+        "thm-qa-14-grover-search-upper-success"
+      ]
+    },
+    {
+      "convention": "The Grover schedule assumes one mark only as a schedule parameter, maximizes an exact rational recurrence over 0 ≤ k ≤ ceil(sqrt(M)), and verifies the measured candidate. Exact preparation, reflection, and classical preprocessing costs are separate from query cost.",
+      "fixed_by": "alg-qa-14-one-marked-search-with-verification",
+      "matters_for": [
+        "lem-qa-14-chebyshev-recurrence-matches-grover-success",
+        "thm-qa-14-grover-search-upper-query-cost",
+        "thm-qa-14-grover-search-upper-success",
+        "thm-qa-14-optimal-search-query-complexity"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-qa-14-coherent-query-normal-form",
+      "statement": "A finite-branch algorithm using at most T ordinary Boolean XOR queries on every branch has a finite pure-state unitary realization with exactly T ordinary queries and the same output distribution, without controlled-oracle access.",
+      "used_by": [
+        "def-qa-14-boolean-search-query-model",
+        "lem-qa-14-cumulative-hybrid-bound",
+        "thm-qa-14-bbbv-search-lower-bound"
+      ]
+    },
+    {
+      "id": "lem-qa-14-cumulative-hybrid-bound",
+      "statement": "For the coherent T-query realization, ||ψ_T^i − ψ_T^0|| ≤ 2 sum_{t=0}^{T−1} sqrt(q_{t,i}), where q_{t,i} = ||Π_{i−1} ψ_t^0||².",
+      "used_by": [
+        "lem-qa-14-aggregate-hybrid-squared-distance",
+        "thm-qa-14-bbbv-search-lower-bound",
+        "ex-qa-14-hybrid-budget-for-n-small"
+      ]
+    },
+    {
+      "id": "lem-qa-14-aggregate-hybrid-squared-distance",
+      "statement": "For every T ≥ 0 query algorithm on N addresses, with final states and query magnitudes as in the cumulative hybrid bound, sum_{i=1}^N ||ψ_T^i − ψ_T^0||² ≤ 4T².",
+      "used_by": [
+        "thm-qa-14-bbbv-search-lower-bound"
+      ]
+    },
+    {
+      "id": "thm-qa-14-zero-completion-query-simulation-correct",
+      "statement": "For N ≥ 1 and M = 2^m with N ≤ M < 2N, the zero-completion procedure implements exactly one zero-completed XOR query per raw N-address query, restores all scratch registers, and uses no controlled oracle call.",
+      "used_by": [
+        "alg-qa-14-one-marked-search-with-verification",
+        "thm-qa-14-grover-search-upper-query-cost",
+        "thm-qa-14-grover-search-upper-success"
+      ]
+    },
+    {
+      "id": "thm-qa-14-bbbv-search-lower-bound",
+      "statement": "Every bounded-error decision algorithm and every bounded-error finder for P_N uses at least sqrt(N)/24 standard bit queries. Decision satisfies the stronger bound T ≥ sqrt(N)/12.",
+      "used_by": [
+        "thm-qa-14-optimal-search-query-complexity",
+        "cex-qa-14-query-parallelism-does-not-give-exponential-search"
+      ]
+    },
+    {
+      "id": "thm-qa-14-grover-search-upper-success",
+      "statement": "On every promised input the fixed-one procedure returns the correct decision and, on a one-marked input, its marked coordinate with probability at least 1−1/M. For N=1 it succeeds with certainty; on the zero input verification always returns no.",
+      "used_by": [
+        "thm-qa-14-optimal-search-query-complexity"
+      ]
+    },
+    {
+      "id": "thm-qa-14-grover-search-upper-query-cost",
+      "statement": "For every N ≥ 1, the fixed-one search procedure uses at most 3 sqrt(2N) standard bit queries, including final verification. Nonoracle costs are separate; no polynomial-time claim is made.",
+      "used_by": [
+        "thm-qa-14-optimal-search-query-complexity"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Finite orthonormal basis completion in the coherent instrument dilation.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The adjoint identity in the Kraus-isometry calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Acceptance-gap and aggregate hybrid estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-double-angle-and-power-reduction-identities",
+      "used_for": "Identifying q with cos(2θ) and converting the Chebyshev recurrence into Grover success probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Deriving the cosine recurrence.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-subtraction-formulas",
+      "used_for": "Deriving the cosine recurrence together with the addition formula.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-qa-14-state-distance-from-acceptance-gap",
+      "concern": "The Statement permits a general 'common final two-outcome measurement', but F1 and proof step 1.1 assume its acceptance operator is a diagonal orthogonal projection. The cited acceptance-probability definition supplies that representation for computational-basis acceptance events, not arbitrary two-outcome POVMs. The claim remains true: for a general acceptance effect 0 ≤ E ≤ I, contractivity gives the same step-2.1 estimate. The proof needs this elementary extension or an explicit measurement-dilation justification.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "grover-search-and-invariant-plane-rotations",
+      "faithful": true,
+      "note": "The exact success law, integer-rounding range, one-query iterate cost, and exact gate-access qualifications match their uses. The fixed-one schedule is applied only to singleton inputs in the success analysis."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Uses preserve hidden-instance independence, finite adaptive branching, per-instance 2/3 correctness, and worst-case branch query cost. Query complexity is kept separate from gate and preprocessing costs."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The standard bit-query interface is invoked directly on dyadic registers and explicitly extended by the same XOR basis action to N-level registers. Neither phase kickback nor padding assumes controlled-oracle access."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Dirac outer products respect the root first-argument-linear convention. The counterexample uses the Hermitian trace-zero positive/negative-parts identity with the correct factor of two."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Uses preserve ordered orthonormal computational bases, positive-dimensional registers, big-endian indexing, and the one-dimensional zero-qubit register at N=1."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The cited acceptance definition does supply a diagonal projection for its computational-basis event. The acceptance-gap lemma's extension to arbitrary measurements needs the justification recorded in concerns. No uniform-generation claim is inferred for the coherent realization or upper-bound preprocessing."
+    }
+  ]
+}

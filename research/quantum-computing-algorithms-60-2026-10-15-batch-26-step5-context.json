@@ -1,0 +1,251 @@
+{
+  "group": "a",
+  "batches": [
+    "26"
+  ],
+  "pages_read": [
+    "reversible-arithmetic-and-oracle-conversion",
+    "reversible-arithmetic-and-oracle-conversion-examples"
+  ],
+  "items_read": [
+    "def-qa-binary-field-f2",
+    "def-qa-binary-dot-product",
+    "alg-qa-reversible-binary-dot-product",
+    "thm-qa-reversible-binary-dot-product-correct-and-cost",
+    "def-qa-standard-bit-query",
+    "def-qa-phase-query",
+    "thm-qa-phase-kickback",
+    "thm-qa-compute-copy-uncompute-clean-query",
+    "thm-qa-global-phase-under-control",
+    "thm-qa-bit-query-to-phase-query",
+    "thm-qa-controlled-phase-query-to-bit-query",
+    "ex-qa-oracle-conversion-and-uncomputation"
+  ],
+  "conventions": [
+    {
+      "convention": "F₂ denotes the two residue classes modulo 2 with quotient addition and multiplication; this item does not assert the field axioms.",
+      "fixed_by": "def-qa-binary-field-f2",
+      "matters_for": [
+        "def-qa-binary-dot-product",
+        "alg-qa-reversible-binary-dot-product",
+        "thm-qa-reversible-binary-dot-product-correct-and-cost"
+      ]
+    },
+    {
+      "convention": "The binary dot product is the left-to-right XOR fold of coordinatewise conjunctions, with empty fold 0 and n ≥ 0.",
+      "fixed_by": "def-qa-binary-dot-product",
+      "matters_for": [
+        "alg-qa-reversible-binary-dot-product",
+        "thm-qa-reversible-binary-dot-product-correct-and-cost",
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "convention": "The standard query acts on address followed by target, preserves the address, and XORs a total function value into an arbitrary target. Address and target widths may be zero. One invocation is one query, separately from elementary gate costs.",
+      "fixed_by": "def-qa-standard-bit-query",
+      "matters_for": [
+        "thm-qa-phase-kickback",
+        "thm-qa-compute-copy-uncompute-clean-query",
+        "thm-qa-bit-query-to-phase-query",
+        "thm-qa-controlled-phase-query-to-bit-query"
+      ]
+    },
+    {
+      "convention": "The Boolean phase query is P_f|x⟩ = (−1)^{f(x)}|x⟩. Its access contract supplies uncontrolled access only; controlled access requires a separate promise.",
+      "fixed_by": "def-qa-phase-query",
+      "matters_for": [
+        "thm-qa-global-phase-under-control",
+        "thm-qa-controlled-phase-query-to-bit-query",
+        "thm-qa-bit-query-to-phase-query"
+      ]
+    },
+    {
+      "convention": "The reversible dot-product procedure uses one distinct zero-initialized work bit and callable Toffoli and CNOT gates, counts each occurrence once, and makes no oracle calls.",
+      "fixed_by": "alg-qa-reversible-binary-dot-product",
+      "matters_for": [
+        "thm-qa-reversible-binary-dot-product-correct-and-cost",
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "convention": "Preparing the kickback target from zero applies X first and H second, yielding |−⟩. The conversion leaves that target in |−⟩ and counts two preparation gates.",
+      "fixed_by": "thm-qa-bit-query-to-phase-query",
+      "matters_for": [
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "convention": "For reverse conversion, the output qubit is the first, control register of C(P_f); Hadamards act on that output before and after the explicitly supplied controlled call.",
+      "fixed_by": "thm-qa-controlled-phase-query-to-bit-query",
+      "matters_for": [
+        "thm-qa-controlled-phase-query-to-bit-query"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qa-standard-bit-query",
+      "statement": "For a total function f:{0,1}^a → {0,1}^b with a,b ≥ 0, U_f|x⟩|y⟩ = |x⟩|y ⊕ f(x)⟩. The map is an involution and is unitary; no injectivity is assumed.",
+      "used_by": [
+        "thm-qa-phase-kickback",
+        "thm-qa-compute-copy-uncompute-clean-query",
+        "thm-qa-bit-query-to-phase-query",
+        "thm-qa-controlled-phase-query-to-bit-query",
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "id": "def-qa-phase-query",
+      "statement": "For a Boolean function f:{0,1}^a → {0,1}, P_f|x⟩ = (−1)^{f(x)}|x⟩. This definition supplies uncontrolled access only; controlled access is a separate promise.",
+      "used_by": [
+        "thm-qa-phase-kickback",
+        "thm-qa-global-phase-under-control",
+        "thm-qa-bit-query-to-phase-query",
+        "thm-qa-controlled-phase-query-to-bit-query",
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "id": "thm-qa-phase-kickback",
+      "statement": "For every total Boolean f, U_f(|x⟩|−⟩) = (−1)^{f(x)}|x⟩|−⟩. Thus the address acquires exactly P_f, the target returns unchanged, and the same identity holds for every address superposition.",
+      "used_by": [
+        "thm-qa-bit-query-to-phase-query",
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "id": "def-qa-binary-dot-product",
+      "statement": "For n ≥ 0 and a,x ∈ {0,1}^n, a·x is the left-to-right XOR fold of a_i ∧ x_i, with empty fold 0; its residue class is the sum of the coordinate products modulo 2.",
+      "used_by": [
+        "alg-qa-reversible-binary-dot-product",
+        "thm-qa-reversible-binary-dot-product-correct-and-cost",
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "id": "thm-qa-reversible-binary-dot-product-correct-and-cost",
+      "statement": "For every n ≥ 0, the algorithm maps |a⟩|x⟩|z⟩|0⟩_r to |a⟩|x⟩|z ⊕ (a·x)⟩|0⟩_r, extends linearly to superpositions, and uses exactly 2n Toffoli gates, one CNOT, and one clean work bit, with no failure branch.",
+      "used_by": [
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    },
+    {
+      "id": "thm-qa-global-phase-under-control",
+      "statement": "For constant Boolean f with value c, P_f = (−1)^c I and a standalone call preserves every pure-state measurement law. Explicit controlled phase access distinguishes c=0 from c=1 with certainty using a |+⟩ control and measurement in the {|+⟩,|−⟩} basis.",
+      "used_by": [
+        "ex-qa-oracle-conversion-and-uncomputation"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-congruence-modulo-an-integer",
+      "used_for": "Congruence modulo 2 means divisibility of the difference; used to verify the two residue classes and their distinction.",
+      "opened": true
+    },
+    {
+      "id": "def-integers-modulo-n",
+      "used_for": "Defines the quotient carrier and identifies equality of residue classes with congruence of representatives.",
+      "opened": true
+    },
+    {
+      "id": "def-addition-and-multiplication-modulo-n",
+      "used_for": "Supplies representative-independent quotient addition and multiplication, specialized to modulus 2 for XOR, conjunction, and the parity sum.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Total address functions, instance promises, zero initialization, and separate query and nonoracle gate costs are preserved."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Clean-work restoration and XOR involutivity match the suppliers. The Boolean-DAG bound is quoted as 6S+4E+b gates and S+E work bits without applying compute-copy-uncompute a second time."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Ket notation and the root linear-first inner-product convention are used consistently; the calculations introduce no conjugation discrepancy."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered computational bases and linear extension are used within their stated domains, including the one-dimensional zero-qubit register."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Control-first blocks, separately granted controlled and inverse access, and the distinction between global and controlled relative phase are preserved."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "The normalized |−⟩ target is used as a pure-state representative; no additional preparation capability follows from the pure-state definition."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "Exact H and X matrices give HX|0⟩=|−⟩ and H diag(1,−1) H=X. Callable-gate assumptions are stated separately."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Gate occurrences, chronological inverse circuits, workspace, and query charges retain the supplier resource conventions."
+    },
+    {
+      "from": "exact-oracle-algorithms",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The cited parity definition and kickback identity agree with the suppliers; the exact-query procedures explicitly prepare their response with X followed by H."
+    },
+    {
+      "from": "simon-algorithm-and-finite-field-recovery",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "Consumers use the total multi-output XOR query and parity dot product. Field properties have a separate field theorem rather than being inferred from the residue-carrier definition."
+    },
+    {
+      "from": "grover-search-and-invariant-plane-rotations",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The phase mark uses one ordinary XOR call with an explicitly prepared |−⟩ response; candidate verification is charged separately."
+    },
+    {
+      "from": "amplitude-estimation-and-counting",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "Counting explicitly requires controlled membership-reflection access and distinguishes controlled powers from repeated controlled calls. It does not infer either from a bare phase oracle."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The XOR action and involution are preserved. The model explicitly distinguishes binary addresses from its general N-level address-register extension."
+    },
+    {
+      "from": "polynomial-method-and-approximate-degree",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The one-hot address function is explicitly completed to a total Boolean function, including N=0, before invoking the standard XOR query."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "reversible-arithmetic-and-oracle-conversion",
+      "faithful": true,
+      "note": "The finite address model uses the same XOR basis action and involution. Controlled consistency reflection uses two unconditional XOR calls and does not assume controlled unknown-oracle access."
+    }
+  ]
+}

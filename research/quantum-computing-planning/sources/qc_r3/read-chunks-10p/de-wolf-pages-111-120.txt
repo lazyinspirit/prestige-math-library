@@ -1,0 +1,824 @@
+===== PDF PAGE 111 =====
+
+Chapter 12
+
+Quantum Algorithms from the
+Generalized Adversary Bound
+
+12.1
+The generalized adversary bound
+
+In the previous chapter we saw two different lower bound methods for the quantum query complexity
+of a given function f: the polynomial method and the adversary method. Neither is optimal for
+every possible f.
+For example, the polynomial method doesn’t give optimal lower bounds for
+iterations of some small functions [14] (see Exercise 1), while the adversary bound of Section 11.3
+cannot prove optimal lower bounds for instance for distinguishing 2-to-1 from 1-to-1 inputs.
+In this chapter we will look at a stronger version of the adversary bound, which turns out to
+give optimal quantum query complexity lower bounds for all Boolean functions. The beauty of
+an optimal lower bound method is that it can also produce algorithms: if the best-possible lower
+bound on the query complexity of f is T, then there must actually exist a T-query algorithm for f!
+Suppose f : D →{0, 1}, with D ⊆{0, 1}N, is a Boolean function whose quantum query complex-
+ity we’d like to determine.1 Consider a T-query quantum algorithm A = UT OxUT−1 · · · U1OxU0,
+with initial state |0m⟩, that computes f with error probability ≤ε < 1/2 for each x ∈D. Let |ψt
+x⟩
+denote the algorithm’s state after Ut has been applied, given input x. Note that |ψ0
+x⟩= U0|0m⟩is
+independent of x. The crucial property, already used in the earlier version of the adversary bound,
+is that ⟨ψt
+x|ψt
+y⟩is 1 at the start (t = 0), but has to be small at the end (t = T) for every (x, y)-pair
+with different function values f(x) ̸= f(y).
+The generalized adversary matrix puts weights αx ∈C on the inputs x ∈D, with the constraint
+�
+x∈D |αx|2 = 1 for normalization. It also puts real (but possibly negative!) weights Γxy on (x, y)-
+pairs with different function values.
+We impose the constraint that Γxy = Γyx, and Γxy = 0
+whenever f(x) = f(y). A |D| × |D| matrix Γ with these properties is called an adversary matrix.
+Let us use these weights to define a progress measure:2
+
+St =
+�
+
+x,y∈D
+Γxyα∗
+xαy⟨ψt
+x|ψt
+y⟩.
+
+In the same spirit as Section 11.3, we will show that |S0| is large, that |ST | is much smaller, and
+
+1If the domain is D = {0, 1}N then f is called a total function, otherwise it’s a partial function.
+2We could have just absorbed the α∗
+xαy into the Γxy and dispensed with the αx’s altogether, but it will be cleaner
+to have separate weights on the x’s and separate weights Γxy on the pairs.
+
+99
+
+
+===== PDF PAGE 112 =====
+
+that St+1 can’t be much smaller than St (i.e., St can’t decrease very fast if we spend one more
+query). This will give the lower bound on T.
+At the start of the algorithm (t = 0), before any queries have been made, we have ⟨ψ0
+x|ψ0
+y⟩= 1
+for all x, y and hence S0 = �
+x,y Γxyα∗
+xαy = α∗Γα. Since α is restricted to a unit vector, the biggest
+we can make |S0| is
+|S0| = ∥Γ∥,
+
+the operator norm (largest singular value) of Γ, by choosing α to be an eigenvector of Γ correspond-
+ing to the largest eigenvalue in absolute value.
+At the end of the algorithm (t = T), the final states |ψT
+x ⟩and |ψT
+y ⟩must be distinguishable
+with success probability ≥1 −ε whenever f(x) ̸= f(y). The following claim, proved in Exercise 2,
+shows that this forces |ST | to be significantly smaller than |S0|.
+
+Claim 1 |ST | ≤2
+�
+
+ε(1 −ε) ∥Γ∥.
+
+For example, if our algorithm has error probability ε = 1/3, then |ST | < 0.95 ∥Γ∥. Accordingly, the
+progress measure has to change significantly in the course of the T-query algorithm. How much can
+one more query change St? This is upper bounded by the following claim, proved in Exercise 3.
+
+Claim 2 Let Γi denote the |D| × |D| matrix obtained from Γ by setting Γxy to 0 if xi = yi. For all
+t ∈{0, . . . , T −1} we have |St −St+1| ≤2 maxi∈[N] ∥Γi∥.
+
+These two claims, together with our value for the initial |S0|, imply
+
+�
+1 −2
+�
+
+ε(1 −ε)
+�
+∥Γ∥≤|S0|−|ST | ≤|S0 −ST | = |
+
+T−1
+�
+
+t=0
+St −St+1| ≤
+
+T−1
+�
+
+t=0
+|St −St+1| ≤2T max
+i∈[N] ∥Γi∥.
+
+We get the following lower bound on quantum query complexity, due to Høyer, Lee, and ˇSpalek [146]:
+
+Theorem 2 (Generalized adversary bound) Let f : D →{0, 1}, with D ⊆{0, 1}N, and Γ
+be an adversary matrix for f. Every quantum algorithm that computes f with worst-case error
+
+probability ≤ε, needs at least
+�1
+
+2 −
+�
+
+ε(1 −ε)
+�
+∥Γ∥
+maxi∈[N] ∥Γi∥queries.
+
+As an example, let us (again) prove the Ω(
+√
+
+N) lower bound for search. Consider the domain
+D = {0N, e1, . . . , eN} of inputs of weight 0 or 1 (ej is the N-bit string that has a 1 only at position j).
+Define (N + 1) × (N + 1) adversary matrix
+
+Γ =
+
+
+
+
+
+
+
+
+0
+1
+· · ·
+1
+1
+0
+· · ·
+0
+...
+...
+...
+...
+1
+0
+· · ·
+0
+
+
+
+
+
+
+.
+
+Then ∥Γ∥≥
+��Γ(1, 0, . . . , 0)T ��=
+√
+
+N. Each Γi is the 2 × 2 X-matrix padded with extra rows and
+columns of 0s, so ∥Γi∥= 1. Hence we obtain the familiar lower bound of Ω(
+√
+
+N) queries for search.
+More generally, we can recover the lower bound of Section 11.3 by constructing an appropriate
+adversary matrix Γ based on the relation R. The rows and columns of Γ are indexed by D =
+
+100
+
+
+===== PDF PAGE 113 =====
+
+f−1(0) ∪f−1(1). Define dx = |{y : (x, y) ∈R}| and similarly define dy. Define Γxy = 1/
+�
+
+dxdy if
+(x, y) ∈R or (y, x) ∈R, and Γxy = 0 otherwise. Let v be the vector with entries √dx, and note that
+
+∥v∥2 = 2|R|. We have ∥Γ∥≥
+1
+∥v∥2 vT Γv =
+1
+2|R|
+�
+(x,y)∈R 2 = 1. We can also show ∥Γi∥≤
+�
+
+ℓ0ℓ1
+m0m1
+for all i.3 Now Theorem 2 gives the Ω
+��
+
+m0m1
+
+ℓ0ℓ1
+
+�
+bound of Eq. (11.1).
+
+12.2
+The dual of the generalized adversary bound
+
+Consider the best-possible lower bound that we can obtain by optimizing over adversary matrix Γ:
+
+max
+∥Γ∥
+s.t.
+∥Γi∥≤1
+∀i ∈[N]
+Γ is symmetric
+Γxy = 0
+∀x, y ∈D with f(x) = f(y)
+
+We will call the optimal value the generalized adversary bound for f (a.k.a. the negative-weights
+adversary bound), and denote it by ADV±(f). Because the statement ∥Γi∥≤1 is equivalent to
+the matrix inequality −I ⪯Γi ⪯I, the above maximization problem can be written in the form
+of a so-called semidefinite program: an optimization problem over real-valued variables, typically
+arranged in one or more matrices, with an objective function that’s linear in the variables, and
+psd constraints that are linear in the variables as well. Every maximization-SDP has an associated
+minimization-SDP which (under mild assumptions that hold in our case) has the same optimal
+value. The first SDP is called the primal SDP, the second is called the dual SDP.4 The equality of
+the optimal values of these two SDPs is called strong duality (see Exercise 4 for a proof of the easy
+half of this equality). This generalizes the better-known strong duality of linear programs, which
+correspond to SDPs with diagonal matrices.
+With some effort that we will skip here, one can show that the dual of the above maximization-
+SDP can be written as the following minimization-SDP:
+
+min
+max
+x∈D max
+
+
+
+�
+
+j∈[N]
+∥uxj∥2,
+�
+
+j∈[N]
+∥vxj∥2
+
+
+
+
+
+s.t.
+�
+
+j:xj̸=yj
+⟨uxj|vyj⟩= [f(x) ̸= f(y)]
+∀x, y ∈D
+
+The truth-value [f(x) ̸= f(y)] is 1 if f(x) ̸= f(y), and 0 if f(x) = f(y). This SDP associates with
+every x ∈D and every j ∈[N] two vectors uxj and vxj (of some dimension d that will implicitly be
+optimized over). We can write this more explicitly as an optimization problem over psd matrices
+
+3Define two |D| × |D| matrices A, B by Axy = 1/√dx if xi ̸= yi and ((x, y) ∈R or (y, x) ∈R), and Axy = 0
+otherwise; and Bxy = 1/
+�
+
+dy if xi ̸= yi and ((x, y) ∈R or (y, x) ∈R), and Bxy = 0 otherwise. Note that Γi = A ◦B,
+where ‘◦’ denotes the entrywise product. For matrices with nonnegative entries, it is known [244, Appendix A] that
+∥A ◦B∥is at most the largest norm among the rows of A (which is ≤
+�
+
+ℓ0/m0, because each row of A has at most
+ℓ0 nonzero entries, each of which is at most 1/√m0) times the largest norm among the columns of B (which is
+
+≤
+�
+
+ℓ1/m1). Hence ∥Γi∥≤
+�
+
+ℓ0ℓ1
+m0m1 .
+
+4Strictly speaking the maximum in the primal should be a supremum and the minimum in the dual should be an
+infimum, because the optimal value need not always be attained; it could be that there’s only an infinite sequence of
+feasible solutions whose objective values converge to the optimum without ever reaching it.
+
+101
+
+
+===== PDF PAGE 114 =====
+
+by defining, for each j ∈[N], a 2|D| × 2|D| psd matrix Zj whose entries are given by the pairwise
+inner products of the 2|D| vectors uxj, vxj (these vectors are the “Gram vectors” of Zj). Then the
+optimization is over psd matrices Z1, . . . , ZN, the objective function is the largest diagonal entry
+of the matrix �
+j∈[N] Zj, and the constraints are linear functions of the entries of the Zj’s.
+By strong duality, the optimal value of this minimization-SDP is ADV±(f) as well. A feasible so-
+lution Γ to the primal gives a lower bound on ADV±(f), while a feasible solution {uxj, vxj}x∈D,j∈[N]
+for the dual gives an upper bound on ADV±(f). The central result of this chapter is that ADV±(f)
+is not only a lower bound on the quantum query complexity of f (which follows from Theorem 2)
+but also an upper bound, as we will see in the next section. This means that a feasible solution to
+the dual SDP actually gives us an algorithm for f!
+
+12.3
+ADV± is an upper bound on quantum query complexity
+
+In this section we will construct a bounded-error quantum algorithm for computing f, derived from
+a feasible solution {uxj, vxj}x∈D,j∈[N] of the dual SDP for ADV±(f).5 Let’s say the objective value
+of this feasible solution is A; the query complexity of our algorithm will turn out to be O(A). Below
+x, y always range over D, and j always ranges over [N].
+Our algorithm will act on 3 registers. The first register is spanned by |j⟩, j ∈[N], and |0⟩, the
+second is 1 qubit, and the third contains the states |vxj⟩∈span{|1⟩, . . . , |d⟩} and the special state
+|0⟩(so the third register has ⌈log(d + 1)⌉qubits). For each x, define the following two 3-register
+states:
+
+|t+
+x ⟩=
+1
+√
+
+2(|0⟩|0⟩|0⟩+ |1⟩|f(x)⟩|0⟩)
+and
+|t−
+x ⟩=
+1
+√
+
+2(|0⟩|0⟩|0⟩−|1⟩|f(x)⟩|0⟩).
+
+The algorithm starts with the all-0 state
+
+|0⟩|0⟩|0⟩=
+1
+√
+
+2(|t+
+x ⟩+ |t−
+x ⟩).
+
+The goal of the algorithm is to (approximately) multiply |t+
+x ⟩with +1 and |t−
+x ⟩with −1, which
+rather magically gives a final state that tells us f(x):
+
+1
+√
+
+2(|t+
+x ⟩−|t−
+x ⟩) = |1⟩|f(x)⟩|0⟩.
+
+The key will be to use phase estimation (Section 4.6) with a well-chosen unitary Ux that depends
+on x, to distinguish |t+
+x ⟩and |t−
+x ⟩. Define Ux = (2Πx −I)(2Λ −I) as the product of two reflections:
+
+• Consider (unnormalized) states |ψy⟩= 0.01
+√
+
+A
+|t−
+y ⟩−
+�
+
+j
+|j⟩|yj⟩|vyj⟩, where yj = 1 −yj.
+
+Note that ∥|ψy⟩∥≤0.01
+√
+
+A +
+√
+
+A, using triangle inequality and the fact that �
+j ∥vyj∥2 ≤A. Let
+Λ be the projector on the subspace that is orthogonal to the span of these |ψy⟩’s, and 2Λ −I
+
+5Note that we only focus on query complexity here, not total number of gates.
+Our presentation follows the
+approach of [174], modified and simplified for our special case of computing Boolean functions rather than their more
+general case of state-transformation. For other generalizations of the adversary bound to different scenarios, see [46].
+Reichardt’s first proof of the optimality of the generalized adversary bound [218, 220] went through so-called “span
+programs,” but we won’t need those here.
+
+102
+
+
+===== PDF PAGE 115 =====
+
+be the reflection through this subspace. In other words, the unitary 2Λ −I puts a −in front
+of all |ψy⟩’s and leaves states alone if they are orthogonal to all |ψy⟩’s. This reflection costs
+no queries to implement, since it doesn’t depend on the actual input x.
+
+• Let Πx be the projector on the subspace spanned by states that have |j⟩|xj⟩in their first two
+registers (with arbitrary states in the third register) and by states having |0⟩in their third
+register. Then the reflection 2Πx−I through this subspace puts a −in front of states |j⟩|xj⟩|v⟩
+if ⟨v|0⟩= 0, and leaves the states alone that are in the subspace of Πx. This reflection can
+be implemented with 1 query to x (Exercise 5).
+
+We now relate |t+
+x ⟩and |t−
+x ⟩to the eigenstates of this unitary Ux. In the next two claims, the
+informal “close” should be read as “within small constant Euclidean distance.”
+
+Claim 3 |t+
+x ⟩is close to an eigenstate |ϕ⟩of Ux that has eigenvalue 1 (i.e., phase 0).
+
+Proof.
+Define
+
+|ϕ⟩= |t+
+x ⟩+ 0.01
+√
+
+A
+
+�
+
+j
+|j⟩|xj⟩|uxj⟩.
+
+The second term on the right-hand side has norm ≤0.01 because �
+j ∥uxj∥2 ≤A, so |t+
+x ⟩is indeed
+close to |ϕ⟩(|ϕ⟩’s norm is close to but not equal to 1, but this doesn’t matter).
+Note that ⟨ϕ|ψy⟩= 0 for all y, because ⟨t+
+x |t−
+y ⟩= 1
+
+2[f(x) ̸= f(y)] and
+
+
+
+�
+
+j
+|j⟩|xj⟩|uxj⟩
+
+
+
+
+
+∗
+�
+
+j
+|j⟩|yj⟩|vyj⟩=
+�
+
+j
+⟨xj|yj⟩· ⟨uxj|vyj⟩=
+�
+
+j:xj̸=yj
+⟨uxj|vyj⟩= [f(x) ̸= f(y)],
+
+and because |t+
+x ⟩, |t−
+x ⟩have |0⟩in the third register and so are orthogonal to all |j⟩|b⟩|uxj⟩, |j⟩|b⟩|vxj⟩,
+b ∈{0, 1}. This shows that |ϕ⟩lies in the subspace of Λ, so it is an eigenvalue-1 eigenvector of 2Λ−I.
+Also, |ϕ⟩is a linear combination of |t+
+x ⟩(which has |0⟩in its third register) and states that have
+|j⟩|xj⟩in their first two registers, so |ϕ⟩lies in the subspace of Πx and hence is also an eigenvalue-1
+eigenvector of 2Πx −I. Hence |ϕ⟩is an eigenvalue-1 eigenvector of Ux = (2Πx −I)(2Λ −I).
+2
+
+Claim 4 |t−
+x ⟩is close to a superposition of eigenstates of Ux with eigenvalues of the form eiθ with
+θ ∈(−π, π] and |θ| > Θ = 1/(1000A).
+
+Proof.
+Let {|β⟩} be a complete orthonormal set of eigenvectors of Ux, with respective eigenvalues
+eiθβ, θβ ∈(−π, π]. Let PΘ = �
+β:|θβ|≤Θ |β⟩⟨β| be the projector on the eigenvectors with small
+
+eigenphase. Define vectors w = 100
+√
+
+A|ψx⟩and v = PΘΠxw = PΘ|t−
+x ⟩. Our goal is to show that v
+has small norm.
+To that end, define v′ = (2Λ −I)v and v′′ = (2Πx −I)v′ = Uxv, and note that
+
+��v −v′′��2 =
+
+������
+
+�
+
+β:|θβ|≤Θ
+(1 −eiθβ)⟨β|v⟩|β⟩
+
+������
+
+2
+
+=
+�
+
+β:|θβ|≤Θ
+|1−eiθβ|2·|⟨β|v⟩|2 ≤2(1−cos Θ)∥v∥2 ≤Θ2∥v∥2.
+
+103
+
+
+===== PDF PAGE 116 =====
+
+Because v + v′ = 2Λv, the vector v + v′ lies in the subspace corresponding to Λ and hence is
+orthogonal to |ψx⟩and to w = 100
+√
+
+A|ψx⟩. We then have
+
+0 = ⟨v + v′|w⟩= ⟨v + v′|Πx|w⟩+ ⟨v + v′|(I −Πx)|w⟩= ⟨v + v′′|Πx|w⟩+ ⟨v −v′′|(I −Πx)|w⟩,
+
+where the last equality used that v′ + v′′ = 2Πxv′ (hence Πx(v′ + v′′) = 2Πxv′ and so Πxv′ = Πxv′′)
+and v′ −v′′ = 2(I −Πx)v′ (hence (I −Πx)v′ = −(I −Πx)v′′). We can now upper bound ∥v∥by
+
+∥v∥2 = |⟨v|PΘΠx|w⟩| = |⟨v|Πx|w⟩|
+
+= 1
+
+2|⟨v −v′′|Πx|w⟩+ ⟨v + v′′|Πx|w⟩| = 1
+
+2|⟨v −v′′|(2Πx −I)|w⟩|
+
+≤1
+
+2
+
+��v −v′′��· ∥w∥≤1
+
+2Θ∥v∥· 100
+√
+
+A∥ψx∥
+
+≤1
+
+2
+1
+1000A∥v∥· 100
+√
+
+A
+�0.01
+√
+
+A
++
+√
+
+A
+�
+=
+�1
+
+20 +
+1
+2000A
+
+�
+∥v∥,
+
+where the first inequality is Cauchy-Schwarz. This implies ∥v∥≤1/20 + 1/(2000A), which is small
+(we may assume A ≥1).
+2
+
+Phase estimation with precision Θ/2 can distinguish between these two cases (eigenphase 0 vs
+≥Θ). This allows us to put a + in front of |t+
+x ⟩and a −in front of |t−
+x ⟩: run phase estimation,
+multiply with −1 whenever the absolute value of the phase estimate is > Θ/2, and then invert
+the phase estimation. Phase estimation uses O(1/Θ) = O(A) applications of Ux, and hence O(A)
+queries to x, as promised. There are small errors in this process due to the fact that Claims 3 and 4
+say “close to” rather than “equal,” and due to the small approximation errors of phase estimation.
+Accordingly, our final state will be close to |1⟩|f(x)⟩|0⟩but not necessarily equal to it, and we end
+up with an O(A)-query quantum algorithm for f that has a small error probability.
+It should be noted that the upper bound is on the algorithm’s query complexity, not on its
+gate complexity. The number of gates of the algorithm is O(A) times the number of gates needed
+to implement the reflection 2Λ −I (the reflection 2Πx −I is relatively easy to implement, see
+Exercise 5). In general this number of gates could be very large, though in some cases it can be
+made quite small, for instance [18].
+
+12.4
+Applications
+
+Let us see how we can derive an O(
+√
+
+N)-query quantum algorithm for the N-bit OR function from
+the dual adversary, for the special case where the N-bit input x is promised to have at most one
+1-bit. Consider the set D = {0N, e1, . . . , eN} of possible inputs. For the dual adversary bound
+we need to choose vectors uxj, vxj for each x ∈D and j ∈[N]. Here vectors of dimension 1 (i.e.,
+numbers) already suffice: we define u0Nj = v0Nj = 1/N1/4 for all j, and uekj = vekj = N1/4 if
+j = k and uekj = vekj = 0 otherwise. For the objective function, note that for each x, �
+j u2
+ekj =
+�
+j v2
+ekj =
+√
+
+N; for x = 0N this is because each of the N j’s contributes (1/N1/4)2 = 1/
+√
+
+N to the
+sum, while for x = ek there is only one nonzero contribution, namely (N1/4)2 =
+√
+
+N for j = k. It
+is also easy to verify that �
+j:xj̸=yj uxjvyj = [f(x) ̸= f(y)] for all x, y ∈D.
+A number of new quantum algorithms have been derived from the dual SDP for ADV±, for
+instance for finding k-collisions [42], learning and testing “juntas” (functions that only depend on
+
+104
+
+
+===== PDF PAGE 117 =====
+
+few coordinates) [45, 18], st-connectivity in graphs [48], and formula evaluation [221, 19]. In general
+it is often quite hard and non-intuitive to come up with a feasible solution {uxj, vxj} for the dual
+SDP with a small objective value, but Belovs’s learning graphs [43] can sometimes help with more
+intuitive constructions of feasible solutions.
+
+12.5
+Perfect composition and AND-OR trees
+
+If we have two Boolean functions f : {0, 1}n →{0, 1} and g : {0, 1}m →{0, 1}, then we can define
+the function F = f ◦gn (on N = nm bits) which is their composition, as
+
+F(x1, . . . , xn) = f(g(x1), . . . , g(xn))
+
+where each xi ∈{0, 1}m. One beautiful property of the adversary bound is perfect composition:
+
+ADV±(F) = ADV±(f)ADV±(g).
+
+There are no hidden constant factors here! The upper bound ADV±(F) ≤ADV±(f)ADV±(g)
+of this composition property can be proved by combining feasible solutions for the dual SDPs for
+f and g to a feasible solution for the dual SDP for F. Similarly, the lower bound ADV±(F) ≥
+ADV±(f)ADV±(g) can be proved by combining feasible solutions for the primal SDPs for f and g.
+We will skip the rather technical details, see [47] for proof of a stronger and more general result.
+Because of the optimality of the generalized adversary bound, it follows from the composition
+property that the quantum query complexity of F equals the product of the query complexities of f
+and g, up to a constant factor. For example, for the 2-level AND-OR tree on N = k2 bits mentioned
+at the end of Chapter 11, we immediately get an optimal O(
+√
+
+N)-query quantum algorithm from the
+fact that the k-bit AND and OR functions each have quantum query complexity (and hence ADV±)
+equal to Θ(
+√
+
+k). Note that we are not directly composing bounded-error algorithms here (e.g.,
+trying to put Grover on top of another Grover to compute the AND-OR tree): reasoning about the
+composed function at the level of the adversary bound and then only translating to quantum query
+algorithms at the end, cleanly circumvents the problem of how the error probabilities of composed
+bounded-error algorithms for f and g affect the error probability of the resulting algorithm for F.
+This composition result, used in a more subtle way, can also give a quantum speed-up for
+evaluating game trees. Imagine a two-player game, such as chess. First white chooses one of several
+possible moves, then black chooses one of several moves, etc. We can picture this as a tree where
+the root is the initial position and the leaves are the final positions (which are win, lose, or draw).
+If we assign a binary value to each leaf indicating whether white wins, then the evaluation of the
+game as a whole is a large, multilevel, unbalanced, AND-OR tree. If it’s white’s turn and at least
+one subtree evaluates to 1, then the current position is a 1 as well: there is a winning move for white
+(this corresponds to an OR function). If it’s black’s turn and one of the subtrees from the current
+position is labeled 0, then the current position is also labeled 0 because black has a non-losing move
+(this is an AND function). The value at the root of the tree indicates whether white has a sequence
+of moves guaranteed to win or not. Using the adversary bound to do a more subtle AND-OR
+composition, there is a quantum algorithm that evaluates this tree using roughly
+√
+
+N queries to
+the binary values at the leaves [19, 219]. In contrast, a classical algorithm has to evaluate nearly
+all N leaves in the worst case unless the fan-out of the tree is very small [228].
+
+105
+
+
+===== PDF PAGE 118 =====
+
+Exercises
+
+1. Consider the 4-bit Boolean function g(x0, x1, x2, x3) which is 1 iff the 4-bit input x is increasing
+or decreasing, i.e., if x ∈{0000, 0001, 0011, 0111, 1111, 1110, 1100, 1000}. Let f be the function
+on N = 4d input bits obtained by composing g with itself d times, in a tree of depth d, where
+the value of each internal node is obtained by applying g to the values of its 4 children, and
+with the input bits at the N leaves.
+
+(a) Show that deg(g) ≤2 and deg(f) ≤2d.
+
+(b) Show that the polynomial method cannot prove a lower bound better than O(
+√
+
+N) on
+the bounded-error quantum query complexity of f.
+
+(c) It is known that ADV±(g) > 2.51 . . . (see [44, Example 3.35] for a proof, or you could
+use an SDP-solver). Use this to show that ADV±(f) ≥Nc for some c > 1/2.
+
+Comment:
+This exercise shows that the generalized adversary bound can sometimes prove substantially
+
+stronger lower bounds than the polynomial method. Incidentally,
+[44, Example 3.3] also shows that if we
+
+restrict the adversary matrix to have nonnegative entries, then the best adversary lower bound we can prove
+
+for g is 2.5, and hence the best lower bound we can prove for the quantum query complexity f with such
+
+restricted Γ, is at most Ω(2.5d).
+So this example also shows that the “negative weights” ADV± can give
+
+substantially better bounds than the “nonnegative weights” version of the adversary bound.
+
+2. (H) This exercise justifies Claim 1. Below, the x, y always range over D.
+
+(a) Let P1, P0 denote the projectors on the subspaces corresponding to outputs 1 and 0,
+respectively. Suppose inputs x, y have f(x) ̸= f(y).
+Show that ⟨ψt
+x|ψt
+y⟩= ⟨ψt
+x|Pf(x) · P1−f(y)|ψt
+y⟩+ ⟨ψt
+x|P1−f(x) · Pf(y)|ψt
+y⟩for all t, x, y.
+
+(b) Define unnormalized states |ϕ⟩= �
+x αxPf(x)|ψT
+x ⟩|x⟩and |ϕ⊥⟩= �
+x αxP1−f(x)|ψT
+x ⟩|x⟩.
+
+Show that ∥|ϕ⟩∥2 +
+��|ϕ⊥⟩
+��2 = 1,
+��|ϕ⊥⟩
+��2 ≤ε, and ∥|ϕ⟩∥·
+��|ϕ⊥⟩
+��≤
+�
+
+ε(1 −ε).
+
+(c) Show that |ST | ≤2|⟨ϕ|(I ⊗Γ)|ϕ⊥⟩|.
+
+(d) Show that |ST | ≤2
+�
+
+ε(1 −ε) ∥Γ∥.
+
+3. (H) This exercise justifies Claim 2. It will be convenient for the proof to assume a phase-
+oracle, so the T-query algorithm will be of the form UT Ox,±UT−1 · · · U1Ox,±U0, applied to
+initial state |0m⟩and followed by a measurement of the first qubit to produce the output bit.
+Below, the x, y always range over D and the i ranges over [N].
+
+(a) Show that St −St+1 = �
+x,y Γxyα∗
+xαy⟨ψt
+x|(I −Ox,±Oy,±)|ψt
+y⟩.
+
+(b) Let Pi = |i⟩⟨i|⊗I be the projector on the subspace where the query register is |i⟩. Define
+|ϕt
+i⟩= �
+x αxPi|ψt
+x⟩|x⟩. Show that �
+i
+��|ϕt
+i⟩
+��2 = 1.
+
+(c) Show that St −St+1 = 2 �
+i⟨ϕt
+i|(I ⊗Γi)|ϕt
+i⟩.
+
+(d) Show that |St −St+1| ≤2 maxi ∥Γi∥.
+
+4. (H) The following is a primal-dual pair of SDPs in so-called standard form:
+
+min
+Tr(CX)
+max
+bT y
+s.t.
+Tr(AiX) = bi ∀i ∈[m]
+s.t.
+�m
+i=1 yiAi ⪯C
+X ⪰0
+
+106
+
+
+===== PDF PAGE 119 =====
+
+The input here consists of Hermitian n × n matrices C, A1, . . . , Am and vector b ∈Rm. The
+n × n matrix X is the variable of the primal, and the vector y ∈Rm is the variable of the
+dual. Prove that “weak duality” always holds: for every feasible solution X for the primal
+and every feasible solution y for the dual, we have Tr(CX) ≥bT y.
+
+5. Show how the reflection 2Πx −I can be implemented with 1 phase-query to x, a Z-gate, and
+a circuit that decides if the third register is |0⟩.
+
+107
+
+
+===== PDF PAGE 120 =====
+
+108
+

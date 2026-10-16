@@ -1,0 +1,83 @@
+We can now use claims 2 and 1 alternately to prove by induction on the number of r−working
+period that at the end of each r−working period in Mr the density matrix is (r, kl)−deviated from
+the correct one.
+
+We can now prove the main result of this paper:
+Theorem 2: Let C be a quantum computation code, which corrects d errors, have block size m,
+(2d < m), have spread l, and size of all procedures smaller than a. Let M0 be a quantum circuit,
+with size s and depth d.
+There exists a quantum circuit Mr of size O(s · polylog(s)) and depth
+
+O(d · polylog(d)), such that in the presence of noise η which satisfies
+�
+a
+d/2l + 1
+
+�
+ηd/2l < 1 Mr
+
+outputs the correct answer with probability ≥2/3.
+
+Proof: When measuring all qubits in a density matrix (r, d)-deviated from the correct final density
+matrix, and taking majority in each r-block gives the correct answer by lemma 3. If the fault path
+is (r, d/2l)-sparse, than the final density matrix is indeed (r, d)-deviated from the correct one, by
+lemma 2. Hence the probability for Mr to succeed is larger than the probability for a fault path to be
+(r, d/2l)-sparse. Let us show by induction on r that the probability of the faults in an r−rectangle to
+
+be (r, d/2l) sparse is higher than 1 −η(1+ǫ)r, where we set
+�
+a
+d/2l + 1
+
+�
+ηd/2l+1 = η1+ǫ. We can do
+
+that because of the assumption on the parameters. ǫ is therefore a positive constant. The probability
+for an 0−rectangle, i.e. one space time point, to have faults which are (0, d/2l) sparse, i.e. that in this
+point a fault did not occur, is 1 −η. For the step of the induction, assume for r, and let us prove for
+r+1. For the faults in an (r+1)-rectangle to be (r+1, k) sparse, there must be at most k r−rectangles
+
+in which the fault is not (r, k) sparse. So P(r + 1) ≥1 −
+�
+a
+d/2l + 1
+
+�
+(1 −Pr)d/2l+1, which gives
+
+the desired result using the induction assumption and the definition of η1+ǫ. This proves that the
+probability of success of Mr, satisfies Pr ≥(1 −η(1+ǫ)r)2V (M0) since the number of r−rectangles is
+less than 2V (M0). Taking r to be O(log(log(V (M0))) gives Pr which is a constant. Since the growth
+in cost is exponential in r, (we use codes with a constant size) the blowup that is accumulated in
+O(log(log(V (M0))) is polylogarithmic.
+
+11
+Appendix D
+
+This appendix gives a full description of the fault tolerant procedures for linear codes.
+(1) Initialization procedure:
+The initialization procedure is actually a correction procedure by the code of one word, which is
+|s0 >. We will need m3 ancilla qubits. First apply on each qubit in the first block a rotation around
+the x axis. After [19], let us refer to the state
+1
+√
+
+2(|0m > +|1m >) on m qubits as a “cat state”. To
+generate such a “cat state” apply a rotation around the x axis of the first qubit and then a controlled
+not from this qubit to all the other m −1 qubits. To compute the syndrome of a word in a quantum
+code which contains only |s0 >, generate k such “cat states” on mk ancilla qubits, and add km ancilla
+qubits which are all in |0 >. To compute the j′th bit of the syndrome, apply controlled not from
+the block we are initializing to each of the “cat states” bitwise, only on the coordinates which in the
+j′th raw of the parity check matrix of Cperp are 1. Now apply a controlled not from these cat states
+to the “blank” ancilla states, to imitate a measurement on them. Now compute from each cat state
+the syndrome bit, using only gates from the universal set. To perform the initialization procedure,
+compute the syndrome in the above way independently for each qubit, i.e. m times. ¿From each j′th
+copy of the syndrome, compute whether the j′th bit is wrong or not. This is done as follows: the
+vector space can be divided to strange cosets of the subspace Cperp. Each coset can be written as
+Cperp + e where e is a vector. Each such e gives one possible syndrome.(He=s). Given the syndrome,
+we compute the table s−> e, and decide whether a qubit is wrong by asking whether it is in the
+support of e, meaning that the corresponding coordinate in e is 1. Finally apply controlled not from
+
+15
+
+

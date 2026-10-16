@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-bounded-linear-operator-equivalences.json
 id: thm-bounded-linear-operator-equivalences
 kind: theorem
 title: "For a linear operator, boundedness, continuity at 0, continuity, and Lipschitz continuity are equivalent"
@@ -13,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   scraped: []
   references:
@@ -62,6 +57,6 @@ $T:X\to Y$ be linear. Then the following are equivalent:
 
 2.1 Step 1.1 proves $(1)\Rightarrow(4)$, and [L2] gives $(4)\Rightarrow(3)$. [step 1.1, L2]
 
-2.2 Let $x \in X$ with $x \ne 0$ and put $u := \dfrac{\delta}{2\|x\|}x$. Then $\|u\|=\delta/2 < \delta$, so $\|Tu\| < 1$ by step 1.3. By linearity, $Tu = \dfrac{\delta}{2\|x\|}Tx$, hence $\|Tx\| < \dfrac{2}{\delta}\|x\|$. The same inequality is trivial at $x=0$, so $T$ is bounded. [step 1.3, L1, algebra]
+2.2 Let $x \in X$ with $x \ne 0$ and put $u := \dfrac{\delta}{2\|x\|}x$. Then $\|u\|=\delta/2 < \delta$, so $\|Tu\| < 1$ by step 1.3. By linearity, $Tu = \dfrac{\delta}{2\|x\|}Tx$, hence $\|Tx\| < \dfrac{2}{\delta}\|x\|$. The corresponding non-strict inequality $\|Tx\|\le(2/\delta)\|x\|$ holds also at $x=0$ because $T0=0$, so $T$ is bounded. [step 1.3, L1, algebra]
 
 3.1 Thus $(2)\Rightarrow(1)$. Combining steps 2.1, 1.2, and 2.2 gives all four equivalences. [step 2.1, step 1.2, step 2.2] ∎

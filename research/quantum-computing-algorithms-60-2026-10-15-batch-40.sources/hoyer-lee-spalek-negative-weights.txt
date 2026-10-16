@@ -1,0 +1,2564 @@
+arXiv:quant-ph/0611054v2  24 Apr 2007
+
+Negative weights make adversaries stronger
+
+Peter Høyer∗
+
+hoyer@cpsc.ucalgary.ca
+Troy Lee†
+
+troyjlee@gmail.com
+
+Robert ˇSpalek‡
+
+spalek@eecs.berkeley.edu
+
+Abstract
+The quantum adversary method is one of the most successful techniques for proving lower
+bounds on quantum query complexity. It gives optimal lower bounds for many problems, has
+application to classical complexity in formula size lower bounds, and is versatile with equiva-
+lent formulations in terms of weight schemes, eigenvalues, and Kolmogorov complexity. All
+these formulations rely on the principle that if an algorithm successfully computes a function
+then, in particular, it is able to distinguish between inputs which map to different values.
+We present a stronger version of the adversary method which goes beyond this principle to
+make explicit use of the stronger condition that the algorithm actually computes the function.
+This new method, which we call ADV±, has all the advantages of the old: it is a lower bound
+on bounded-error quantum query complexity, its square is a lower bound on formula size, and
+it behaves well with respect to function composition. Moreover ADV± is always at least as
+large as the adversary method ADV, and we show an example of a monotone function for
+which ADV±(f) = Ω(ADV(f)1.098). We also give examples showing that ADV± does not
+face limitations of ADV like the certificate complexity barrier and the property testing barrier.
+
+1
+Introduction
+
+Quantum query complexity is a popular model for study as it seems to capture much of the power
+of quantum computing—in particular, the search algorithm of Grover [Gro96] and the period find-
+ing routine of Shor’s factoring algorithm [Sho97] can be formulated in this model—yet is still
+
+∗Department of Computer Science, University of Calgary. Supported by Canada’s Natural Sciences and Engi-
+neering Research Council (NSERC), the Canadian Institute for Advanced Research (CIAR), and The Mathematics of
+Information Technology and Complex Systems (MITACS).
+†LRI, Universit´e Paris-Sud. Supported by a Rubicon grant from the Netherlands Organisation for Scientific Re-
+search (NWO) and by the European Commission under the Integrated Project Qubit Applications (QAP) funded by
+the IST directorate as Contract Number 015848. Part of this work conducted while at CWI, Amsterdam, and while
+visiting the University of Calgary.
+‡University of California, Berkeley. Supported by NSF Grant CCF-0524837 and ARO Grant DAAD 19-03-1-0082.
+Work conducted in part while at CWI and the University of Amsterdam, supported by the European Commission under
+project QAP, IST-015848, and while visiting the University of Calgary.
+
+1
+
+
+simple enough that we can often hope to prove tight lower bounds. In this model, complexity is
+measured by the number of queries made to the input, and other operations are for free. For most
+known quantum algorithms, the time complexity is bigger than the query complexity by only a
+polylogarithmic factor.
+The two most successful techniques for proving lower bounds on quantum query complexity
+are the polynomial method [BBC+01] and the quantum adversary method [Amb02]. The adversary
+method gives tight lower bounds for many problems and is quite versatile with formulations in
+terms of weight schemes [Amb06, Zha05], eigenvalues [BSS03], and Kolmogorov complexity
+[LM04]. ˇSpalek and Szegedy [ˇSS06] show that in fact all these formulations are equivalent. All
+these versions of the adversary method rest on the principle that, if an algorithm is able to compute
+a function f, then in particular it is able to distinguish inputs which map to different values. The
+method actually bounds the difficulty of this distinguishing task.
+We present a stronger version of the adversary method which goes beyond this principle to
+essentially make use of the stronger condition that the algorithm actually computes the function—
+namely, we make use of the existence of a measurement which gives the correct answer with high
+probability from the final state of the algorithm. This new method, which we call ADV±, is always
+at least as large as the adversary bound ADV, and we show an example of a monotone function
+f for which ADV±(f) = Ω(ADV(f)1.098). Moreover, ADV± possesses all the nice properties
+of the old adversary method: it is a lower bound on bounded-error quantum query complexity, its
+square is a lower bound on formula size, and it behaves well with respect to function composition.
+Using this last property, and the fact that our bound is larger than the adversary bound for the base
+function of Ambainis, we improve the best known separation between quantum query complexity
+and polynomial degree giving an f such that Qǫ(f) = Ω(deg(f)1.329).
+The limitations of the adversary method are fairly well understood. One limitation is the “cer-
+tificate complexity barrier.” This says that ADV(f) ≤
+�
+
+C0(f)C1(f) for a total function f with
+Boolean output [Zha05, ˇSS06], where C0(f) is the certificate complexity of the inputs x which
+evaluate to zero on f, and C1(f) is the certificate complexity of inputs which evaluate to one.
+This means that for problems like determining if a graph contains a triangle, or element distinct-
+ness, where one of the certificate complexities is constant, the best bound which can be proven by
+the adversary method is Ω(
+√
+
+N). For triangle finding, the best known upper bound is O(N13/20)
+[MSS05], and for element distinctness the polynomial method is able to prove a tight lower bound
+of Ω(N2/3) [AS04]. We show that our new method can break the certificate complexity barrier—
+we give an example where ADV±(f) = Ω((C0(f)C1(f))0.549).
+Another limitation of the adversary method is the “property testing barrier.” For a partial
+Boolean function f where all zero-inputs have relative Hamming distance at least ǫ from all one-
+inputs, it holds that ADV(f) ≤1/ǫ. A prime example where this limitation applies is the collision
+problem of determining if a function is 2-to-1 or 1-to-1. Here all zero-inputs have relative Ham-
+ming distance at least 1/2 from all one inputs and so the best bound provable by the adversary
+method is 2, while the polynomial method is able to prove a tight lower bound of Ω(n1/3) [AS04].
+We show the property testing barrier does not apply in this strict sense to ADV±, although we do
+not know of an asymptotic separation for constant ǫ.
+Breaking these barriers opens the possibility that ADV± can prove tight lower bounds for
+
+2
+
+
+problems like element distinctness and the collision problem, and improve the best known Ω(
+√
+
+N)
+lower bound for triangle finding.
+
+1.1
+Comparison with previous methods
+
+We now take a closer look at our new method and how it compares with previous adversary meth-
+ods. We use the setting of the spectral formulation of the adversary method [BSS03].
+Let f : S →ΣO be a function, with S ⊆Σn
+I the set of inputs.
+We assume ΣI =
+{0, 1, . . . , |ΣI| −1}, and call this the input alphabet and ΣO the output alphabet. Let Γ be a
+Hermitian matrix with rows and columns labeled by elements of S. We say that Γ is an adversary
+matrix for f if Γ[x, y] = 0 whenever f(x) = f(y). We let ∥M∥denote the spectral norm of the
+matrix M, and for a real matrix M use M ≥0 to say the entries of M are nonnegative. We now
+give the spectral formulation of the adversary method:
+
+Definition 1
+
+ADV(f) = max
+Γ≥0
+Γ̸=0
+
+∥Γ∥
+maxi ∥Γ ◦Di∥.
+
+Here the maximum is taken over nonnegative symmetric adversary matrices Γ, and Di is a zero-
+one matrix where Di[x, y] = 1 if xi ̸= yi and Di[x, y] = 0 otherwise. Γ◦Di denotes the entry-wise
+(Hadamard) product of Γ and Di.
+
+Let Qǫ(f) be the two-sided ǫ-bounded error quantum query complexity of f. Barnum, Saks, and
+Szegedy show that the spectral version of the adversary method is a lower bound on Qǫ(f):
+
+Theorem 1 ([BSS03]) For any function f, Qǫ(f) ≥
+1−2√
+
+ǫ(1−ǫ)
+2
+ADV(f).
+
+Note that the definition of ADV(f) restricts the maximization to adversary matrices whose
+entries are all nonnegative and real. Our new bound removes these restrictions:
+
+Definition 2
+
+ADV±(f) = max
+Γ̸=0
+∥Γ∥
+maxi ∥Γ ◦Di∥.
+
+It is clear that ADV±(f) ≥ADV(f) for any function f as the maximization is taken over a larger
+set. Our main theorem, presented in Section 3, states that ADV±(f) is a lower bound on Qǫ(f).
+
+Theorem 2 For any function f, Qǫ(f) ≥
+1−2√
+
+ǫ(1−ǫ)−2ǫ
+
+2
+ADV±(f). If f has Boolean output, i.e. if
+
+|ΣO| = 2, then Qǫ(f) ≥
+1−2√
+
+ǫ(1−ǫ)
+2
+ADV±(f).
+
+While it is clear that ADV± is always least as large as ADV, it might at first seem surprising
+that ADV± can achieve bounds super-linear in ADV. An intuition for why negative weights help
+is that it is good to give negative weight to entries with large Hamming distance, entries which
+are easier to distinguish by queries. Consider an entry (x, y) where x and y have large Hamming
+distance. This entry appears in several Γ ◦Di matrices but only appears in the Γ matrix once. Thus
+
+3
+
+
+by giving this entry negative weight we can simultaneously decrease ∥Γ◦Di∥for several i’s, while
+doing relatively little damage to the large Γ matrix.
+While in form the ADV± bound is very similar to the ADV bound, our proof of Theorem 2
+departs from the standard adversary principle. The standard adversary principle is based on the
+fact that an algorithm A which is able to compute a function f is, in particular, able to distinguish
+inputs x, y such that f(x) ̸= f(y). Distinguishing quantum states is closely related to the inner
+product of the states as given by the following quantitative principle:
+
+Theorem 3 Suppose we are given one of two known states |ψx⟩, |ψy⟩. Let 0 ≤ǫ ≤1/2. There is a
+measurement which correctly identifies which of the two states we are given with error probability
+ǫ if and only if ⟨ψx|ψy⟩≤2
+�
+
+ǫ(1 −ǫ).
+
+Let |ψt
+x⟩be the state of an algorithm on input x after t queries. The adversary method works by
+defining a “progress function” based on the inner product ⟨ψt
+x|ψt
+y⟩. Initially, before the algorithm
+has made any queries, all inputs look the same and thus ⟨ψ0
+x|ψ0
+y⟩= 1 for all x, y, and thus the
+progress function is large. On the other hand, if a T-query algorithm computes a function f within
+error ǫ, then by Theorem 3 for x, y with f(x) ̸= f(y) we must have ⟨ψT
+x |ψT
+y ⟩≤2
+�
+
+ǫ(1 −ǫ), and
+thus the final progress function is small. In [BSS03] this is termed the Ambainis output condition.
+The adversary method then works by showing an upper bound on how much the progress function
+can change by a single query.
+Our proof follows the same basic reasoning, but the Ambainis output condition no longer seems
+to suffice to show that the final progress function is small. We use in an essential way the stronger
+output condition that if a T-query algorithm A computes a function f, then there exists orthogonal
+projectors {Πb}b∈ΣO which sum to the identity such that ∥Πb|ψT
+x ⟩∥2 ≥1 −ǫ when f(x) = b.
+
+2
+Preliminaries
+
+We assume standard background from quantum computing and Boolean function complexity, see
+[NC00] and [BW02] for nice references. In this section, we restrict ourselves to more specific
+background.
+
+2.1
+Linear algebra
+
+The background we need about matrices can be found in, for example, [Bha97]. We use standard
+notations such as | · | for absolute value, A for the entrywise complex conjugate of a matrix A, A∗
+
+for the conjugate transpose of A, and ∥x∥=
+√
+
+x∗x for the ℓ2-norm of a vector x. For two matrices
+A, B of the same size, the Hadamard product or entrywise product is the matrix (A ◦B)[x, y] =
+A[x, y]B[x, y].
+For an indexed set of vectors {|ψx⟩: x ∈S}, we associate an |S|-by-|S| Gram matrix M =
+Gram(|ψx⟩: s ∈S) where
+M[x, y] = ⟨ψx|ψy⟩.
+
+It is easy to see that M is Hermitian and positive semidefinite.
+
+4
+
+
+We will make use of several matrix norms. For a matrix A let ∥A∥be the spectral norm of A
+
+∥A∥= max
+x,y
+|x∗Ay|
+∥x∥∥y∥.
+
+For two matrices A, B let ⟨A, B⟩be the Hilbert-Schmidt inner product. This is the inner product
+of A, B viewed as long vectors,
+
+⟨A, B⟩= Tr(A∗B) =
+�
+
+i,j
+
+A[i, j]B[i, j].
+
+The Frobenius norm, denoted ∥A∥F, is the norm associated with this inner product,
+
+∥A∥F =
+�
+
+⟨A, A⟩=
+��
+
+i,j
+|A[i, j]|2.
+
+Finally, we will use the trace norm, denoted ∥A∥tr, where
+
+∥A∥tr = max
+B
+|⟨A, B⟩|
+
+∥B∥
+,
+
+and B runs over all complex matrices of the same size as A. The following theorem is an easy
+consequence of this definition.
+
+Theorem 4 Let A, B be n-by-n matrices. Then |⟨A, B⟩| ≤∥A∥· ∥B∥tr.
+
+In our proof that ADV± is a lower bound on quantum query complexity we will need one more
+tool for bounding norms:
+
+Theorem 5 (H ¨OLDER’S INEQUALITY, [BHA97] COROLLARY IV.2.6) Let A, B be matrices
+such that AB∗is defined. Then
+∥AB∗∥tr ≤∥A∥F∥B∥F.
+
+A partial trace is a linear mapping TrA : L(A ⊗B) →L(A) mapping linear operators (e.g.,
+density matrices) over the joint system AB to linear operators over A. This mapping is uniquely
+determined by the requirement
+
+TrA(ρA ⊗ρB) = ρA · Tr(ρB).
+
+and linearity. For example, since TrA(|i⟩⟨j|A ⊗|ψi⟩⟨ψj|B) = |i⟩⟨j|A · ⟨ψj|ψi⟩, by linearity
+
+TrA
+��
+
+i,j
+|i⟩⟨j|A ⊗|ψi⟩⟨ψj|B
+�
+=
+�
+
+i,j
+|i⟩⟨j|A · ⟨ψj|ψi⟩.
+
+5
+
+
+2.2
+Quantum query complexity
+
+As with the classical model of decision trees, in the quantum query model we wish to compute
+some function f and we access the input through queries. The complexity of f is the number of
+queries needed to compute f on a worst-case input x. Unlike the classical case, however, we can
+now make queries in superposition.
+The memory of a quantum query algorithm is described by three registers: the input register,
+HI, which holds the input x ∈S ⊆Σn
+I , the query register, HQ, which holds two integers 1 ≤i ≤n
+and 0 ≤p < |ΣI|, and the working memory, HW, which holds an arbitrary value. The query
+register and working memory together form the accessible memory, denoted HA.
+The accessible memory of a quantum query algorithm A is initialized to a fixed state. For
+convenience, on input x we assume the state of the algorithm is |x⟩I|1, 0⟩Q|0⟩W where all qubits in
+the working memory are initialized to 0. The state of the algorithm then evolves through queries,
+which depend on the input register, and accessible memory operators which do not. We now
+describe these operations.
+We will model a query by a unitary operator where the oracle answer is given in the phase.
+This operator O is defined by its action on the basis state |x⟩|i, p⟩as
+
+O|x⟩|i, p⟩= e
+
+2πi
+|ΣI | pxi|x⟩|i, p⟩,
+
+where 1 ≤i ≤n is the index of the queried input variable and 0 ≤p < |ΣI| is the phase multiplier.
+This operation can be extended to act on the whole space by interpreting it as O × IW, where IW
+is the identity operation on the workspace HW. In the sequel, we will refer to the action of O both
+on HI ⊗HQ and the full space HI ⊗HQ ⊗HW, and let context dictate which we mean.
+For a function with ΣI = {0, 1}, the query operator simply becomes
+
+O|x⟩|i, p⟩= (−1)pxi|x⟩|i, p⟩,
+
+An alternative, perhaps more common, way to model a quantum query is through an operator
+O′ : |x⟩|i, p⟩→|x⟩|i, (xi + p) mod |ΣI|⟩that encodes the result in a register. These two query
+models are equivalent, as can be seen by conjugating with the quantum Fourier transform on |p⟩.
+For our results, it is more convenient to work with the phase oracle.
+An accessible memory operator is an arbitrary unitary operation U on the accessible memory
+HA. This operation is extended to act on the whole space by interpreting it as II ⊗U, where II
+is the identity operation on the input space HI. Thus the state of the algorithm on input x after t
+queries can be written
+|φt
+x⟩= UtOUt−1 · · · U1OU0|x⟩|1, 0⟩|0⟩.
+
+As the input register is left unchanged by the algorithm, we can decompose |φt
+x⟩as |φt
+x⟩= |x⟩|ψt
+x⟩,
+where |ψt
+x⟩is the state of the accessible memory after t queries.
+The output of a T-query algorithm A on input x is chosen according to a probability distribution
+which depends on the final state of the accessible memory |ψT
+x ⟩. Namely, the probability that the
+algorithm outputs some b ∈ΣO on input x is ∥Πb|ψT
+x ⟩∥2, for a fixed set of projectors {Πb} which
+are orthogonal and complete, that is, sum to the identity. The ǫ-error quantum query complexity
+of a function f, denoted Qǫ(f), is the minimum number of queries made by an algorithm which
+outputs f(x) with probability at least 1 −ǫ for every x.
+
+6
+
+
+3
+Bounded-error quantum query complexity
+
+We now show that ADV±(f) is a lower bound on the bounded-error quantum query complexity of
+f.
+Proof of Theorem 2 Let f : S →ΣO, where S ⊆Σn
+I , be a function and let Γ be a |S|-by-|S|
+Hermitian matrix such that Γ[x, y] = 0 if f(x) = f(y). As Γ is Hermitian, its eigenvalues will
+be equal to its singular values, up to sign. Notice that Γ and −Γ have the same adversary value,
+thus without loss of generality we will assume Γ has largest eigenvalue equal to its spectral norm.
+Therefore, let δ be an eigenvector of Γ corresponding to the eigenvalue ∥Γ∥.
+We imagine that we initially prepare the state |Ψ0⟩= �
+
+x δx|x⟩|1, 0⟩|0⟩and run the algorithm
+on this superposition. Thus after t queries we have the state
+
+|Ψt⟩= UtOUt−1 . . . U1OU0
+�
+
+x
+δx|x⟩|1, 0⟩|0⟩=
+�
+
+x
+δx|x⟩|ψt
+x⟩,
+
+where |ψt
+x⟩is the state of the accesible memory of the algorithm on input x after t queries. We
+define ρ(t) = TrI|Ψt⟩⟨Ψt| to be the reduced density matrix of the state |Ψt⟩on the input register,
+that is we trace out the accessible memory. In other words, ρ(t) = Gram(δx|ψt
+x⟩: x ∈S).
+We define a progress function W t based on ρ(t) as W t = ⟨Γ, ρ(t)⟩. Although phrased differ-
+ently, this is in fact the same progress function used by Høyer and ˇSpalek [HˇS05] in their proof
+that the regular adversary method is a lower bound on bounded-error quantum query complexity.
+Note that W t is real, as both Γ and ρ(t) are Hermitian. Our proof rests on three claims:
+
+1. At the beginning of the algorithm W 0 = ∥Γ∥.
+
+2. With any one query, the progress measure changes by at most W t−W t+1 ≤2 maxi ∥Γ◦Di∥.
+
+3. At the end of the algorithm W T ≤(2
+�
+
+ǫ(1 −ǫ) + 2ǫ)∥Γ∥.
+
+The theorem clearly follows from these three claims. The main novelty of the proof lies in the
+third step. This is where we depart from the standard adversary principle in using a stronger output
+condition implied by a successful algorithm.
+
+Item 1
+As the state of the accessible memory |ψ0
+x⟩is independent of the oracle, ⟨ψ0
+x|ψ0
+y⟩= 1 for
+every x, y, and so ρ(0) = δδ∗. Thus W 0 = ⟨Γ, δδ∗⟩= Tr(δ∗Γ∗δ) = ∥Γ∥.
+
+Item 2
+After the t + 1st query, the quantum state is |Ψt+1⟩= Ut+1O|Ψt⟩and thus
+
+ρ(t+1) = TrI(Ut+1O|Ψt⟩⟨Ψt|O∗U∗
+t+1) = TrI(O|Ψt⟩⟨Ψt|O∗),
+
+because the unitary operator Ut+1 acts as identity on the input register. The oracle operator O
+only acts on the input register and the query register, hence we can trace out the working memory.
+
+7
+
+
+Denote ρ = TrI,Q|Ψt⟩⟨Ψt| and ρ′ = OρO∗. Then ρ(t) = TrI(ρ) and ρ(t+1) = TrI(ρ′). We re-
+express the progress function in terms of ρ, ρ′. Define two block-diagonal matrices on HI ⊗HQ:
+
+G = Γ ⊗In ⊗I|ΣI| =
+�n
+
+i=1
+
+�|ΣI|−1
+
+p=0
+Γ
+
+D =
+�n
+
+i=1
+
+�|ΣI|−1
+
+p=0
+Di,
+
+where Di is the zero-one symmetric matrix from Definition 1. Then W t = ⟨Γ, ρ(t)⟩= ⟨G, ρ⟩and
+W t+1 = ⟨Γ, ρ(t+1)⟩= ⟨G, ρ′⟩. We upper-bound the change of the progress function as follows:
+
+W t −W t+1 = ⟨G, ρ⟩−⟨G, ρ′⟩
+= ⟨G, ρ −OρO∗⟩
+ρ′ = OρO∗
+
+= ⟨G, (ρ −OρO∗) ◦D⟩
+ρ −OρO∗= (ρ −OρO∗) ◦D
+= ⟨G ◦D, ρ −OρO∗⟩
+D is real
+≤∥G ◦D∥· ∥ρ −OρO∗∥tr
+Theorem 4
+≤∥G ◦D∥· (∥ρ∥tr + ∥OρO∗∥tr)
+triangle inequality
+= 2∥G ◦D∥· ∥ρ∥tr
+O is unitary
+= 2∥G ◦D∥
+∥ρ∥tr = 1
+= 2 max
+i
+∥Γ ◦Di∥.
+
+The third equality holds because O is diagonal in the computational basis and thus, in the block
+corresponding to the value |i, p⟩of the query register, (ρ−OρO∗)[x, y] = (1−e
+
+2πi
+|ΣI | p(xi−yi))ρ[x, y],
+which is 0 if xi = yi. For the remaining equalities note that conjugating with a unitary operator
+does not change the trace norm and that density matrices have trace norm 1.
+
+Item 3
+Now consider the algorithm at the final time T. We want to upper bound ⟨Γ, ρ(T)⟩. The
+first thing to notice is that as Γ[x, y] = 0 when f(x) = f(y), we have Γ = Γ ◦F, where F is a
+zero-one matrix such that F[x, y] = 1 if f(x) ̸= f(y) and F[x, y] = 0 otherwise.
+As F is a real matrix, it is clear from the definition of the Hilbert-Schmidt inner product that
+⟨Γ◦F, ρ(T)⟩= ⟨Γ, F ◦ρ(T)⟩. Now applying Theorem 4 we have ⟨Γ, F ◦ρ(T)⟩≤∥Γ∥·∥ρ(T) ◦F∥tr.
+It remains to upper bound ∥ρ(T) ◦F∥tr, which we do using Theorem 5. To be able to apply
+this theorem, we would like to find matrices X, Y such that XY ∗= ρ(T) ◦F, and the product
+∥X∥F∥Y ∥F is small.
+Let {Πz}z∈ΣO be a complete set of orthogonal projectors that determine the output probabili-
+ties, that is the probability that the algorithm outputs z on input x is ∥Πz|ψT
+x ⟩∥2. We will use these
+projectors to help decompose ρ(T) in such a way as to apply Theorem 5. The correctness of the
+algorithm tells us that ∥Πf(x)|ψT
+x ⟩∥2 ≥1 −ε. For an i ∈{0, 1, . . . , |ΣO| −1}, let Xi denote the
+matrix with |S| rows {Πf(x)+iδx|ψT
+x ⟩}x∈S, where f(x) + i is computed modulo |ΣO|. Intuitively,
+X0 is the matrix where we project onto the correct answers, and Xi for i ≥1 where we project
+onto some incorrect answer. The matrices Xi for i ≥1 will therefore have small Frobenius norm.
+
+8
+
+
+We claim ρ(T) ◦F = �
+
+i̸=j XiX∗
+j :
+��
+
+i̸=j
+XiX∗
+j
+�
+[x, y] =
+�
+
+i̸=j
+δxδ∗
+y · ⟨ψT
+y |Πf(y)+jΠf(x)+i|ψT
+x ⟩
+
+=
+
+�
+0
+f(x) = f(y)
+δxδ∗
+y⟨ψT
+y |ψT
+x ⟩
+f(x) ̸= f(y)
+
+= (ρ(T) ◦F)[x, y],
+
+because Πz1Πz2 = 0 for z1 ̸= z2, Π2
+z = Πz, and �
+
+z Πz = I. Then
+
+∥ρ(T) ◦F∥tr =
+���
+�
+
+i̸=j
+XiX∗
+j
+���
+tr
+
+≤
+���
+�
+
+i≥1
+(X0X∗
+i + XiX∗
+0)
+���
+tr +
+���
+�
+
+i̸=j
+i,j≥1
+
+XiX∗
+j
+���
+tr
+triangle inequality
+
+= ∥X0(X⊥
+0 )∗+ X⊥
+0 X∗
+0∥tr +
+���
+�
+
+i,j≥1
+XiX∗
+j −
+�
+
+i≥1
+XiX∗
+i
+���
+tr
+�
+��
+�
+only present for |ΣO| > 2
+
+define X⊥
+0 =
+�
+
+i≥1
+Xi
+
+≤2∥X0(X⊥
+0 )∗∥tr + ∥X⊥
+0 (X⊥
+0 )∗∥tr +
+���
+�
+
+i≥1
+XiX∗
+i
+���
+tr
+triangle inequality
+
+≤2∥X0∥F∥X⊥
+0 ∥F + ∥X⊥
+0 ∥2
+F +
+���
+�
+
+i≥1
+XiX∗
+i
+���
+tr.
+Theorem 5
+
+We now bound the term ∥�
+
+i≥1 XiX∗
+i ∥tr. As each XiX∗
+i is positive semidefinite, the trace norm
+of this sum is equal to its trace. Notice that Tr(XiX∗
+j ) = 0 if i ̸= j, because (XiX∗
+j )[x, x] =
+|δx|2⟨ψT
+x |Πf(x)+iΠf(x)+j|ψT
+x ⟩= 0. Thus
+���
+�
+
+i≥1
+XiX∗
+i
+���
+tr = Tr
+��
+
+i≥1
+XiX∗
+i
+�
+= Tr(X⊥
+0 (X⊥
+0 )∗) = ∥X⊥
+0 ∥2
+F.
+
+Therefore ∥ρ(T) ◦F∥tr ≤2ab + 2b2, where a = ∥X0∥F and b = ∥X⊥
+0 ∥F. We know that a, b satisfy
+the following constraints:
+
+a2 + b2 = ∥X0∥2
+F + ∥X⊥
+0 ∥2
+F =
+�
+
+x∈S
+|δx|2(∥Πf(x)|ψT
+x ⟩∥2 + ∥(I −Πf(x))|ψT
+x ⟩∥2) = ∥δ∥2 = 1
+
+and
+a2 = ∥X0∥2
+F =
+�
+
+x∈S
+|δx|2∥Πf(x)|ψT
+x ⟩∥2 ≥(1 −ǫ)
+�
+
+x∈S
+|δx|2 = 1 −ǫ.
+
+Assuming ε ≤1
+
+2, the maximum of the expression 2ab+2b2 under these constraints is the boundary
+case a = √1 −ε. Hence ∥ρ(T) ◦F∥tr ≤2
+�
+
+ε(1 −ε) + 2ε. As we note above, the bound can be
+strengthened to 2
+�
+
+ε(1 −ε) if the function has Boolean output, that is |ΣO| = 2.
+✷
+
+9
+
+
+4
+Formula size
+
+Laplante, Lee, and Szegedy [LLS06] show that the adversary method can also be used to prove
+classical lower bounds—they show that ADV(f)2 is a lower bound on the formula size of f.
+A formula is circuit with AND, OR, and NOT gates with the restriction that every gate has out-
+degree exactly one. The size of a formula is the number of leaves and the size of a smallest formula
+computing f is denoted L(f). We show that ADV±(f)2 remains a lower bound on the formula
+size of f.
+Before we prove this statement, note that it implies a limitation of ADV±(f)—it is upper
+bounded by the square root of the formula size of f. Thus for the binary AND-OR tree—or read-
+once formulae in general— the largest lower bounds provable by ADV± are √n. Laplante, Lee,
+and Szegedy conjecture that this is not a limitation at all— that is, they conjecture that bounded-
+error quantum query complexity squared is in general a lower bound on quantum query complexity.
+A major step has recently been taken toward proving this conjecture by [FGG07, CRˇSZ07], who
+show that Q2(f) ≤L(f)1/2+ǫ for any ǫ > 0.
+We will work in the setting of Karchmer and Wigderson, who characterize formula size in
+terms of a communication complexity game [KW88]. Since this seminal work, nearly all formula
+size lower bounds have been formulated in the language of communication complexity.
+Let f : {0, 1}n →{0, 1} be a Boolean function. Following Karchmer and Wigderson, we
+associate with f a relation Rf ⊆{0, 1}n × {0, 1}n × [n] where
+
+Rf = {(x, y, z) : f(x) = 0, f(y) = 1, xz ̸= yz}.
+
+For a relation R, let CP(R) denote the number of leaves in a smallest communication protocol for
+R, and let L(f) be the number of leaves in a smallest formula for f. Karchmer and Wigderson
+show the following:
+
+Theorem 6 L(f) = CP(R).
+
+We say that a set S ⊆X × Y is monochromatic with respect to R if there exists z ∈Z
+such that (x, y, z) ∈R for all (x, y) ∈S. It is well known, see for example [KN97], that a
+successful communication protocol for a relation R ⊆X × Y × Z partitions X × Y into disjoint
+combinatorial rectangles which are monochromatic with respect to R. Let CD(R) be the size of
+a smallest decomposition of X × Y into disjoint rectangles monochromatic with respect to R.
+Clearly, CD(R) ≤CP(R). We are actualy able to show the stronger statement that the square of
+ADV±(f) is a lower bound on the size of a smallest rectangle decomposition of Rf.
+
+Theorem 7 L(f) ≥CD(Rf) ≥(ADV±(f))2.
+
+Proof. Laplante, Lee, and Szegedy [LLS06] show that two conditions are sufficient for a measure
+to lower bound formula size. The first is rectangle subadditivity—they show that the spectral norm
+squared is subadditive over rectangles, and this result holds for an arbitrary, possibly negative,
+matrix.
+
+10
+
+
+Lemma 8 (Laplante, Lee, Szegedy) Let A be an arbitrary |X|-by-|Y | matrix and R a rectangle
+partition of |X| × |Y |. Then ∥A∥2 ≤�
+
+R∈R ∥AR∥2.
+
+The second property is monotonicity, and here we need to modify their argument to handle
+negative entries. They use the property that if A, B are nonnegative matrices, and if A ≤B
+entrywise, then ∥A∥≤∥B∥. In our application, however, we actually know more: if R is a
+rectangle monochromatic with respect to a color i, then AR is a submatrix of Ai. And, for arbitrary
+matrices A, B, if A is a submatrix of B then ∥A∥≤∥B∥.
+This allows us to complete the proof: let R be a monochromatic partition of Rf with |R| =
+CD(Rf). Then for any matrix A
+
+∥A∥2 ≤
+�
+
+R∈R
+∥AR∥2 ≤CD(Rf) · max
+R
+∥AR∥2
+
+≤CD(Rf) · max
+i
+∥Ai∥2.
+
+And so we conclude
+
+L(f) ≥CD(Rf) ≥max
+A̸=0
+∥A∥2
+
+maxi ∥Ai∥2.
+
+✷
+
+5
+Automorphism Principle
+
+In practice, many of the functions we are interested in possess a high degree of symmetry. We now
+show how to take advantage of this symmetry to simplify the computation of the adversary bound.
+We will state this principle in a general way for possibly non-Boolean functions. Thus let Σ, T
+be two finite sets, and let f : Σn →T be a function. We will define a group action of Sn × Sn
+Σ
+on our set of inputs Σn. A natural action of an element τ ∈Sn on input x ∈Σn is to permute
+the indices of x. Namely, we define τ · x = y to be the string where xi = yτ(i). An element
+σ ∈Sn
+Σ = (σ1, . . . , σn) similarly has a natural action on an input x ∈Σn. Namely, we define
+σ · x = y to be the string where yi = σi(xi). In general we can combine these actions and for
+(τ, σ) ∈Sn × Sn
+Σ define (τ, σ) · x = τ · (σ · x). From now on, we will use the more convenient
+functional notation (τ, σ)(x) = τ · (σ · x).
+
+Definition 3 Let f : Σn →T be a function, and π ∈Sn × Sn
+Σ. We say that π is an automorphism
+of f if f(x) ̸= f(y) ⇒f(π(x)) ̸= f(π(y)) for all x, y ∈Σn.
+
+Note that the automorphisms of a function form a group.
+Intuitively, when choosing a weight matrix Γ, it seems that pairs (x, y) and (π(x), π(y)) “look
+the same” when π is an automorphism of f and therefore should be given the same weight. The
+automorphism principle makes this intuition rigorous. This principle can vastly simplify the com-
+putation of the adversary bound, helping both in choosing good weight matrices, and in showing
+upper bounds on the adversary value.
+
+11
+
+
+Definition 4 Let G be a group of automorphisms for a function f. We say that G is f-transitive if
+for every x, y such that f(x) = f(y), there is π ∈G such that π(x) = y.
+
+Theorem 9 (Automorphism Principle) Let G be a group of automorphisms of f. There is an
+optimal adversary matrix Γ for which Γ[x, y] = Γ[π(x), π(y)] for all π ∈G and x, y. Furthermore,
+if G is f-transitive then Γ has a principal eigenvector β for which β[x] = β[y] whenever f(x) =
+f(y).
+
+Proof. Let Γ be an optimal adversary matrix for f. By normalizing as necessary, we assume that
+ADV±(f) = ∥Γ∥—that is, maxi ∥Γ ◦Di∥= 1. For an automorphism π, we let Γπ be the matrix
+obtained from Γ by permuting the rows and columns by π, that is Γπ[x, y] = Γ[π(x), π(y)]. Letting
+P be the permutation matrix representing π, where P[x, y] = 1 if x = π(y) and 0 otherwise, we
+see that P TΓP = Γπ. As P is unitary, this means that ∥Γ∥= ∥Γπ∥. Notice that if π sends the
+index i to j, then if xi ̸= yi it follows π(x)j ̸= π(y)j. Thus P T(Γ ◦Di)P = Γπ ◦Dj, and these
+matrices also have the same spectral norm. It follows that Γπ achieves the same adversary bound
+as Γ, and so is an optimal adversary matrix.
+Let δ be a principal eigenvector of Γ. We may assume without loss of generality that all entries
+of δ are nonzero, as the rows and columns of Γ corresponding to zero entries of δ can be removed
+without affecting the adversary bound. We now see how δ relates to a principal eigenvector of Γπ:
+note that P TΓP(P Tδ) = P TΓPP Tδ = ∥Γ∥P Tδ, thus P Tδ will be a principal eigenvector of Γπ.
+The vector P Tδ has entries P Tδ[x] = δ[π(x)]. For convenience we set δπ = P Tδ.
+To prove the automorphism principle, we will now “average” the matrices Γπ over π ∈G in
+the following way. We define a vector β as
+
+β[x] =
+��
+
+π∈G
+δ[π(x)]2
+
+Notice that β has norm
+�
+
+|G|. Now form the matrix Γ′, where
+
+Γ′[x, y] =
+�
+
+π∈G Γ[π(x), π(y)]δ[π(x)]∗δ[π(y)]
+
+β[x]∗β[y]
+(1)
+
+We claim that Γ′ is an optimal adversary matrix. The spectral norm of Γ′ is at least
+
+∥Γ′∥≥1
+
+|G|β∗Γ′β = 1
+
+|G|
+
+�
+
+π∈G
+∥Γπ∥= ∥Γ∥.
+
+We will now show that ∥Γ′ ◦Di∥≤1 for all i ∈[n]. This is equivalent to showing I ±
+Γ′ ◦Di ⪰0. As argued above, we have I ± Γπ ◦Di ⪰0, for all π ∈G. It follows that also
+δπδ∗
+π ◦(I ± Γπ ◦Di) ⪰0. Now adding these equations over π ∈G we obtain
+��
+
+π∈G
+δπδ∗
+π
+
+�
+
+◦I ±
+
+��
+
+π∈G
+Γπ ◦δπδ∗
+π
+
+�
+
+◦Di ⪰0.
+
+12
+
+
+We can further take the Hadamard product of this matrix with the rank one matrix A, where
+A[x, y] = [1/β[x]∗β[y]], with the result remaining positive semidefinite. This gives
+
+I ± (
+�
+
+π∈G
+Γπ ◦δπδ∗
+π) ◦Di ◦A = I ± Γ′ ◦Di ⪰0,
+
+which concludes the proof that Γ′ is an optimal adversary matrix.
+Note that this argument has actually shown that β is a principal eigenvector of Γ′. Let σ be an
+arbitrary element of G. We have
+
+β[σ(x)] =
+��
+
+π∈G
+δ[πσ(x)]2 =
+�
+�
+
+πσ−1:π∈G
+δ[π(x)]2 = β[x].
+
+If G is f-transitive, then for every x, y with f(x) = f(y), there is some σ such that σ(x) = y, and
+thus β(x) = β(y). This proves the “furthermore” of the theorem.
+Now we will show that Γ′[x, y] = Γ′[σ(x), σ(y)]. We have just argued that β[x] = β[σ(x)],
+which gives that the denominators of these terms, defined by Equation (1), are equal. That the
+numerators are equal follows similarly since summing over π ∈G is the same as summing over
+πσ−1 : π ∈G as G is a group.
+✷
+
+We single out another class of functions which arise frequently in practice and where the auto-
+morphism principle can give the adversary bound a particularly simple form.
+
+Definition 5 Let f : Σn →T be a function, and let G ⊆Sn × Sn
+Σ be its group of automorphisms.
+We say that G is index transitive if for every i, j ∈[n] there is an automorphism π = (σ, τ) ∈G
+with σ(i) = j.
+
+Corollary 10 If f has a group of automorphisms which is index transitive, then there is an optimal
+adversary matrix Γ such that ∥Γ ◦Di∥= ∥Γ ◦Dj∥for all i, j ∈[n].
+
+This corollary means that if a function has an automorphism group which is index transitive
+we can do away with the maximization in the denominator of the adversary bound—all Γ ◦Di will
+have the same spectral norm.
+Proof. Let i, j ∈[n], and let G be the group of automorphisms of f. By assumption, there is a
+π = (σ, τ) ∈G such that σ(i) = j. Applying Theorem 9, there is an optimal adversary matrix Γ
+such that Γ[π(x), π(y)] = Γ[x, y], for all x, y. Notice that xi ̸= yi if and only if π(x)j ̸= π(y)j.
+Letting P be the permutation matrix representing π, it then follows that P T(Γ ◦Di)P = Γ ◦Dj,
+and so Γ ◦Di and Γ ◦Dj have the same spectral norm.
+✷
+
+6
+Composition theorem
+
+One nice property of the adversary method is that it behaves very well with respect to iterated
+functions. In this section we will exclusively deal with Boolean functions. For a function f :
+
+13
+
+
+{0, 1}n →{0, 1} we define the dth iteration of f, f d : {0, 1}nd →{0, 1} recursively as f 1 = f
+and f d = f ◦(f d−1, . . . , f d−1) for d > 1. Ambainis [Amb06] shows that ADV(f d) ≥ADV(f)d.
+Thus by proving a good adversary bound on the base function f, one can easily obtain good lower
+bounds on the iterates of f. In this way, Ambainis shows a super-linear gap between the bound
+given by the polynomial degree of a function and the adversary method, thus separating polynomial
+degree and quantum query complexity.
+Laplante, Lee, and Szegedy [LLS06] show a matching upper bound for iterated functions,
+namely that if ADV(f) ≤a then ADV(f d) ≤ad. Thus we conclude that the adversary method
+possesses the following composition property.
+
+Theorem 11 ([Amb06, LLS06]) For any function f : S →{0, 1}, with S ⊆{0, 1}n and natural
+number d > 0,
+ADV(f d) = ADV(f)d.
+
+Høyer, Lee, and ˇSpalek [HLˇS05] generalize this composition theorem to functions that can be
+written in the form
+h = f ◦(g1, . . . , gk).
+(2)
+
+They give an exact expression for the adversary bound of h in terms of the adversary bounds of f
+and gi for 1 ≤i ≤k. We will also look at the composition of the ADV± bound in this general
+setting.
+One may think of h as a two-level decision tree with the top node being labeled by a function
+f : {0, 1}k →{0, 1}, and each of the k internal nodes at the bottom level being labeled by a
+function gi : {0, 1}ni →{0, 1}. We do not require that the inputs to the inner functions gi have the
+same length. An input x ∈{0, 1}n to h is a bit string of length n = �
+
+i ni, which we think of as
+being comprised of k parts, x = (x1, x2, . . . , xk), where xi ∈{0, 1}ni. We may evaluate h on input
+x by first computing the k bits ˜xi = gi(xi), and then evaluating f on input ˜x = (˜x1, ˜x2, . . . , ˜xk).
+
+Adversary bound with costs
+To show their composition theorem, [HLˇS05] consider as an inter-
+mediate step a generalization of the adversary method allowing input bits to be given an arbitrary
+positive cost. For any function f : {0, 1}n →{0, 1}, and any vector α ∈Rn
++ of length n of positive
+reals, they define a quantity ADVα(f) as follows:
+
+ADVα(f) = max
+Γ≥0
+Γ̸=0
+min
+i
+
+�
+αi
+∥Γ∥
+∥Γ ◦Di∥
+
+�
+.
+
+We define the analogous quantity ADV±
+α(f) by enlarging the maximization over all nonzero adver-
+sary matrices. We will use the notation ADV(±) to simultaneously refer to both ADV and ADV±.
+One may think of αi as expressing the cost of querying the ith input bit xi. For example, xi could
+be equal to the parity of αi new input bits, or, alternatively, each query to xi could reveal only a
+fraction of 1/αi bits of information about xi. When α = (a, . . . , a) and all costs are equal to a,
+the new adversary bound ADV(±)
+α (f) reduces to a·ADV(±)(f), the product of a and the adversary
+bound ADV(±)(f). In particular, when all costs a = 1 we have Qǫ(f) = Ω(ADV(±)
+⃗1 (f)). When
+α is not the all-one vector, then ADV(±)
+α (f) will not necessarily be a lower bound on the quantum
+
+14
+
+
+query complexity of f, but this quantity can still be very useful in computing the adversary bound
+of composed functions. We will show the following composition theorem for the nonnegative
+ADV bound:
+
+Theorem 12 (Exact expression for adversary bound of composed functions) For any function
+h : S →{0, 1} of the form h = f ◦(g1, . . . , gk) with domain S ⊆{0, 1}n, and any cost function
+α ∈Rn
++,
+ADVα(h) = ADVβ(f),
+
+where βi = ADVαi(gi), α = (α1, α2, . . . , αk), and β = (β1, . . . , βk).
+
+We show that one direction of this theorem, the lower bound, also holds for the ADV± bound.
+This is the direction which is useful for proving separations.
+
+Theorem 13 Let h, f, gi be as in the previous theorem. Then
+
+ADV±
+α(h) ≥ADV±
+β (f),
+
+where βi = ADV±
+αi(gi), α = (α1, α2, . . . , αk), and β = (β1, . . . , βk).
+
+As with the proof that ADV± is a lower bound on quantum query complexity, the presence of
+negative entries again causes new difficulties in the proof of the composition theorem. In particular,
+previous proofs of composition theorems do not seem to work for ADV± and we prove Theorem 13
+in a quite different manner. Also, as the dual of the ADV± bound is more complicated than that of
+the ADV bound, we have not yet been able to show the upper bound in this theorem.
+The usefulness of such a theorem is that it allows one to divide and conquer—it reduces the
+computation of the adversary bound for h into the disjoint subproblems of first computing the ad-
+versary bound for each gi, and then, having determined βi = ADV(±)(gi), computing ADV(±)
+β (f),
+the adversary bound for f with costs β.
+One need not compute exactly the adversary bound for each gi to apply the theorem. Indeed, a
+bound of the form a ≤ADV(gi) ≤b for all i already gives some information about h.
+
+Corollary 14 If h = f ◦(g1, . . . , gk) and a ≤ADV(gi) ≤b for all i, then a · ADV(f) ≤
+ADV(h) ≤b · ADV(f).
+
+One limitation of our theorem is that we require the sub-functions gi to act on disjoint subsets of
+the input bits. Thus one cannot use this theorem to compute the adversary bound of any function by,
+say, proceeding inductively on the structure of a {∧, ∨, ¬}-formula for the function. One general
+situation where the theorem can be applied, however, is to read-once functions, as by definition
+these functions are described by a formula over {∧, ∨, ¬} where each variable appears only once.
+To demonstrate how Theorem 12 can be applied, we give a simple proof of the Ω(√n) lower
+bound due to Barnum and Saks [BS04] on the bounded-error quantum query complexity of read-
+once functions.
+
+Corollary 15 (Barnum-Saks) Let h be a read-once Boolean function with n variables. Then
+Qǫ(h) = Ω(√n).
+
+15
+
+
+Proof. We prove by induction on the number of variables n that ADV(f) ≥√n. If n = 1 then the
+formula is either xi or ¬xi and taking Γ = 1 shows the adversary bound is at least 1.
+Now assume the induction hypothesis holds for read-once formulas on n variables, and let h
+be given by a read-once formula with n + 1 variables. As usual, we can push any NOT gates down
+to the leaves, and assume that the root gate in the formula for h is labeled either by an AND gate
+or an OR gate. Assume it is AND—the other case follows similarly. In this case, h can be written
+as h = g1 ∧g2 where g1 is a read-once function on n1 ≤n bits and g2 is a read-once function on
+n2 ≤n bits, where n1 + n2 = n + 1. We want to calculate ADV⃗1(h). Applying Theorem 12, we
+proceed to first calculate β1 = ADV(g1) and β2 = ADV(g2). By the induction hypothesis, we
+know β1 ≥√n1 and β2 ≥√n2. We now proceed to calculate ADV⃗1(h) = ADV(β1,β2)(AND).
+We set up our AND adversary matrix as follows:
+
+00
+01
+10
+11
+00
+0
+0
+0
+0
+01
+0
+0
+0
+β1
+10
+0
+0
+0
+β2
+11
+0
+β1
+β2
+0
+
+This matrix has spectral norm
+�
+
+β2
+1 + β2
+2, and ∥Γ ◦D1∥= β1, and ∥Γ ◦D2∥= β2. Thus
+
+β1
+∥Γ∥
+∥Γ ◦D1∥= β2
+∥Γ∥
+∥Γ ◦D2∥=
+�
+
+β2
+1 + β2
+2 ≥
+√
+
+n + 1.
+
+✷
+
+6.1
+Composition Lemma
+
+We now turn to the proof of the composition theorem. Given an adversary matrix Γf realizing
+the adversary bound for f and adversary matrices Γgi realizing the adversary bound for gi where
+i = 1, . . . , k, we build an adversary matrix Γh for the function h = f ◦(g1, . . . , gk). Lemma 16
+expresses the spectral norm of this Γh in terms of the spectral norms of Γf and Γgi. Moreover, if
+Γf, Γgi are nonnegative, then Γh will be nonnegative.
+Let Γf be an adversary matrix for f, i.e. a Hermitian matrix satisfying Γf[x, y] = 0 if f(x) =
+f(y), and let δf be a prinicipal eigenvector of Γf with unit norm. Similarly, let Γgi be a spectral
+matrix for gi and let δgi be a principal eigenvector of unit norm, for every i = 1, . . . , k.
+It is helpful to visualize an adversary matrix in the following way. Let Xf = f −1(0) and
+Yf = f −1(1). We order the rows first by elements from Xf and then by elements of Yf. In this
+way, the matrix has the following form:
+
+Γf =
+�
+0
+Γf
+(0,1)
+
+Γf
+(1,0)
+0
+
+�
+
+where Γf
+(0,1) is the submatrix of Γf with rows labeled from Xf and columns labeled from Yf and
+Γf
+(1,0) is the conjugate transpose of Γf
+(0,1).
+
+16
+
+
+Thus one can see that an adversary matrix for a Boolean function corresponds to a (weighted)
+bipartite graph where the two color classes are the domains where the function takes the values 0
+and 1. For b ∈{0, 1} let δ↾b
+gi[x] = δgi[x] if gi(x) = b and δ↾b
+gi[x] = 0 otherwise. In other words, δ↾b
+gi
+is the vector δgi restricted to the color class b.
+Before we define our composition matrix, we need one more piece of notation. Let Γf
+(0,0) =
+∥Γf∥I|Xf |, where I is a |Xf|-by-|Xf| identity matrix and similarly Γf
+(1,1) = ∥Γf∥I|Yf|.
+We are now ready to define the matrix Γh:
+
+Definition 6 Γh[x, y] = Γf[˜x, ˜y] ·
+��
+
+i Γ(˜xi,˜yi)
+gi
+�
+[x, y]
+
+Lemma 16 Let Γh be as in Definition 6. Then ∥Γh∥= ∥Γf∥· �k
+i=1 ∥Γgi∥and a principal eigenvec-
+tor of Γh is δh[x] = δf[˜x] · �k
+i=1 δgi[xi].
+
+Proof. The more difficult direction is to show ∥Γh∥≤∥Γf∥· �k
+i=1 ∥Γgi∥, and we do this first. The
+outline of this direction is as follows:
+
+1. We first define 2k+n many vectors δα,c ∈C2n.
+
+2. We show that each δα,c is an eigenvector of Γh.
+
+3. We show that {δα,c}α,c span a space of dimension 2n. This implies that every eigenvalue
+of Γh is an eigenvalue associated to at least one of the δα,c as eigenvectors corresponding to
+different eigenvalues of a symmetric matrix are orthogonal.
+
+4. We upper bound the absolute value of the eigenvalues corresponding to the δα,c by ∥Γf∥·
+�k
+i=1 ∥Γgi∥.
+
+Let c = (c1, . . . , ck) where ci ∈[2ni] for i = 1, . . . , k. Let δci be an eigenvector of unit norm
+corresponding to the cith largest eigenvalue of Γgi—that is Γgiδci = λci(Γgi)δci.
+It is helpful to look at the matrix Γh as composed of blocks labeled by a, b ∈{0, 1}k where the
+(a, b) block of the matrix consists of all x, y pairs with ˜x = a and ˜y = b. Notice that the (a, b)
+block of Γh is the matrix Γf[a, b] · ⊗Γ(ai,bi)
+gi
+.
+Let λ0
+ci(A) = ∥A∥and λ1
+ci(A) = λci(A). We claim that Γ(ai,bi)
+gi
+δ↾bi
+ci = λai⊕bi
+ci
+(Γgi)δ↾ai
+ci . This is
+because if ai ̸= bi then Γ(ai,bi)
+gi
+is one half of the bipartite matrix Γgi and so Γ(ai,bi)
+gi
+δ↾bi
+ci = λci(Γgi)δ↾ai
+ci .
+On the other hand, if ai = bi then Γ(ai,bi)
+gi
+= ∥Γgi∥I and so Γ(ai,bi)
+gi
+δ↾bi
+ci = ∥Γgi∥δ↾bi
+ci = ∥Γgi∥δ↾ai
+ci .
+Thus for the tensor product matrix ⊗Γ(ai,bi)
+gi
+we have that
+
+⊗Γ(ai,bi)
+gi
+⊗δ↾bi
+ci =
+
+k
+�
+
+i=1
+λai⊕bi
+ci
+(Γgi) · ⊗δ↾ai
+ci .
+
+Expanding this equation gives that for every x such that ˜x = a
+
+�
+
+y:˜y=b
+⊗Γ(ai,bi)
+gi
+[x, y] · (⊗δci)[y] =
+
+k
+�
+
+i=1
+λai⊕bi
+ci
+(Γgi) · (⊗δci)[x].
+(3)
+
+17
+
+
+Now consider a 2k-by-2k matrix Ac where
+
+Ac[a, b] = Γf[a, b] ·
+
+k
+�
+
+i=1
+λai⊕bi
+ci
+(Γgi).
+
+Let α be a unit norm eigenvector of this matrix, say with eigenvalue µα,c. Explicitly writing out
+the eigenvalue equation means that for every a,
+
+�
+
+b
+Γf[a, b] ·
+
+k
+�
+
+i=1
+λai⊕bi
+ci
+(Γgi) · α[b] = µα,c α[a].
+(4)
+
+Item 1:
+We are ready to define our proposed eigenvectors of Γh. For any c = (c1, . . . , ck) and α
+an eigenvector of Ac let
+
+δα,c[x] = α[˜x] ·
+
+k
+�
+
+i=1
+δci[xi] = α[˜x] · (⊗δci)[x].
+
+Item 2:
+We claim that δα,c is an eigenvector of Γh with eigenvalue µα,c. This can be verified as
+follows: for any x,
+�
+
+y
+Γh[x, y]δα,c[y] =
+�
+
+y
+Γf[˜x, ˜y]α[˜y] · (⊗Γ(˜xi,˜yi)
+gi
+)[x, y] · (⊗δci)[y]
+
+=
+�
+
+b
+Γf[˜x, b]α[b] ·
+�
+
+y:˜y=b
+(⊗Γ(˜xi,˜yi)
+gi
+)[x, y] · (⊗δci)[y]
+
+Applying Equation (3) gives
+
+�
+
+y
+Γh[x, y]δα,c[y] =
+�
+
+b
+Γf[˜x, b]α[b] ·
+
+k
+�
+
+i=1
+λ˜xi⊕bi
+ci
+(Γgi) · (⊗δci)[x]
+
+= (⊗δci)[x] ·
+�
+
+b
+Γf[˜x, b] ·
+
+k
+�
+
+i=1
+λ˜xi⊕bi
+ci
+(Γgi)α[b].
+
+And now applying Equation (4) gives
+�
+
+y
+Γh[x, y]δα,c[y] = µα,cα[˜x] · (⊗δci)[x] = µα,c δα,c[x].
+
+Thus δα,c is an eigenvector of Γh with eigenvalue µα,c. This completes the second step of the proof.
+
+18
+
+
+Item 3:
+We now claim that the vectors {δα,c}α,c span C2n. For a fixed c, the set of eigenvectors
+{αℓ}2k
+ℓ=1 of Ac forms an orthogonal basis for the space of vectors of dimension 2k, hence there is
+a linear combination γ of αℓ’s such that �
+
+ℓγℓαℓ= (1, 1, . . . , 1). Then �
+
+ℓγℓδαℓ,c = ⊗δci. Now,
+since {δci}2ni
+ci=1 form an orthogonal basis for every i, linear combinations of δα,c span the whole
+space of dimension 2
+P
+i ni, which is the dimension of Γh. Hence every eigenvector of Γh can be
+expressed in this form. This completes step three of the proof.
+
+Item 4:
+It now remains to show that µα,c ≤∥Γf∥· �
+
+i ∥Γgi∥for every α, c. To do this, fix c and
+consider the matrix Ac.
+
+µα,c = α∗Acα =
+�
+
+a,b
+Γf[a, b] ·
+
+k
+�
+
+i=1
+λai⊕bi
+ci
+(Γgi) · α[a]α[b].
+(5)
+
+Notice that −∥Γgi∥≤λci(Γgi) ≤∥Γgi∥. Our first claim is that we can replace λci(Γgi) by either
+∥Γgi∥or −∥Γgi∥in such a way that the sum in (5) does not decrease. To see this, we can first factor
+out λc1(Γg1) of the above sum and look at the term it multiplies. If this term is positive, then setting
+λc1(Γg1) to ∥Γg1∥will not decrease the sum; on the other hand, if the term it multiplies is negative,
+then replacing λc1(Γg1) by −∥Γg1∥will not decrease the sum. We continue this process in turn with
+i = 2, . . . , k.
+Let di = 1 if in this process we replaced λci(Γgi) by −∥Γgi∥and di = 0 if λci(Γgi) was replaced
+by ∥Γgi∥. Note that if ai = bi, then no replacement was made and the coefficient remains ∥Γgi∥.
+We thus now have
+
+µα,c ≤
+�
+
+a,b
+Γf[a, b]α[a]α[b] ·
+
+k
+�
+
+i=1
+(−1)di(ai+bi)∥Γgi∥,
+(6)
+
+A key fact here is that the sign of ∥Γgi∥will be the same everywhere ai ̸= bi—the signs of entries
+cannot be flipped at will.
+We now mimic the pattern of signs in Equation (6) by defining a new unit vector α′. Let
+α′[a] = α[a] �
+
+i(−1)di·ai. Then
+
+µα,c ≤
+�
+
+a,b
+Γf[a, b]α[a]α[b] ·
+
+k
+�
+
+i=1
+(−1)di(ai+bi)∥Γgi∥
+
+=
+
+k
+�
+
+i=1
+∥Γgi∥
+�
+
+a,b
+Γf[a, b]α′[a]α′[b]
+
+≤∥Γf∥·
+�
+∥Γgi∥,
+
+which we wished to show.
+
+Other direction:
+We now show that ∥Γh∥≥∥Γf∥· �k
+i=1 ∥Γgi∥. Let δf be a principal eigenvector
+of Γf and δgi a principal eigenvector for Γgi for i = 1, . . . , k. We have already argued that δh =
+
+19
+
+
+δf[˜x] · �k
+i=1 δgi[xi] is an eigenvector of Γh whose eigenvalue is the eigenvalue of the matrix A⃗1
+where
+
+A⃗1[a, b] = Γf[a, b] ·
+
+k
+�
+
+i=1
+∥Γgi∥.
+
+Factoring out �k
+i=1 ∥Γgi∥from A⃗1 we are simply left with the matrix Γf, thus the largest eigenvalue
+of A⃗1 is ∥Γf∥· �k
+i=1 ∥Γgi∥.
+✷
+
+6.2
+Composition lower bound
+
+With Lemma 16 in hand, it is a relatively easy matter to show a lower bound on the adversary value
+of the composed function h. Let ADV(±) denote either ADV or ADV±.
+
+Lemma 17 ADV(±)
+α (h) ≥ADV(±)
+β (f), where βi = ADV(±)
+αi (gi),
+
+Proof. Due to the maximization over all matrices Γ, the spectral bound of the composite function h
+is at least ADV(±)
+α (h) ≥minn
+ℓ=1(αℓ∥Γh∥/∥Γh ◦Dℓ∥), where Γh is defined as in Lemma 16. Notice
+that in Lemma 16, if the component matrices are nonnegative, then Gh will be as well, thus we
+can simultaneously treat both adversary bounds.
+We compute ∥Γh ◦Dℓ∥for ℓ= 1, . . . , n. Let the ℓth input bit be the qth bit in the pth block.
+Recall that
+
+Γh[x, y] = Γf[˜x, ˜y] ·
+
+k
+�
+
+i=1
+Γ(˜xi,˜yi)
+gi
+[xi, yi].
+
+We prove that
+
+(Γh ◦Dℓ)[x, y] = (Γf ◦Dp)[˜x, ˜y] · (Γgp ◦Dq)(˜xp,˜yp)[xp, yp] ·
+�
+
+i̸=p
+Γ(˜xi,˜yi)
+gi
+[xi, yi].
+
+If xℓ̸= yℓand ˜xp ̸= ˜yp then both sides are equal because all multiplications by Dp, Dq, Dℓare
+multiplications by 1. If this is not the case—that is, if xℓ= yℓor ˜xp = ˜yp—then both sides are
+zero. We see this by means of two cases:
+
+1. xℓ= yℓ: In this case the left hand side is zero due to (Γh ◦Dℓ)[x, y] = 0. The right hand side
+is also zero because
+
+(a) if ˜xp = ˜yp then the right hand side is zero as (Γf ◦Dp)[˜x, ˜y] = 0.
+
+(b) else if ˜xp ̸= ˜yp then the right hand side is zero as (Γgp ◦Dq)[xp, yp] = 0.
+
+2. xℓ̸= yℓ, ˜xp = ˜yp: The left side is zero because Γ(˜xp,˜yp)
+gp
+[xp, yp] = ∥Γgp∥I[xp, yp] = 0 since
+xp ̸= yp. The right side is also zero due to (Γf ◦Dp)[˜x, ˜y] = 0.
+
+20
+
+
+Since Γh ◦Dℓhas the same structure as Γh, by Lemma 16, ∥Γh ◦Dℓ∥= ∥Γf ◦Dp∥·∥Γgp ◦Dq∥·
+�
+
+i̸=p ∥Γgi∥. By dividing the two spectral norms,
+
+∥Γh∥
+∥Γh ◦Dℓ∥=
+∥Γf∥
+∥Γf ◦Dp∥·
+∥Γgp∥
+∥Γgp ◦Dq∥.
+(7)
+
+Since the spectral adversary maximizes over all adversary matrices, we conclude that
+
+ADV(±)
+α (h) ≥
+n
+min
+ℓ=1
+∥Γh∥
+∥Γh ◦Dℓ∥· αℓ
+
+=
+k
+min
+i=1
+∥Γf∥
+∥Γf ◦Di∥·
+ni
+min
+j=1
+∥Γgi∥
+∥Γgi ◦Dj∥· αi
+j
+
+=
+k
+min
+i=1
+∥Γf∥
+∥Γf ◦Di∥· ADV(±)
+αi (gi)
+
+=
+k
+min
+i=1
+∥Γf∥
+∥Γf ◦Di∥· βi
+
+= ADV(±)
+β (f),
+
+which we had to prove.
+✷
+
+6.3
+Composition upper bound
+
+The non-negative adversary bound ADV satisfies the matching upper bound ADVα(h)
+≤
+ADVβ(f). Interestingly, we do not know yet how to show this for the ADV± bound.
+We apply the duality theory of semidefinite programming to obtain an equivalent expression
+for ADVα in terms of a minimization problem. We then upper bound ADVα(h) by showing how
+to compose solutions to the minimization problems.
+
+Definition 7 Let f : S →{0, 1} be a partial boolean function, where S ⊆{0, 1}n, and let
+α ∈Rn
++. The minimax bound of f with costs α is
+
+MMα(f) = min
+p
+max
+x,y
+f(x)̸=f(y)
+
+1
+�
+
+i:xi̸=yi
+�
+
+px(i)py(i)/αi
+,
+
+where p : S × [n] →[0, 1] ranges over all sets of |S| probability distributions over input bits, that
+is, px(i) ≥0 and �
+
+i px(i) = 1 for every x ∈S.
+
+This definition is a natural generalization of the minimax bound introduced in [LM04, ˇSS06].
+As [ˇSS06] show that the minimax bound is equal to the spectral norm formulation of the adversary
+method, one can similarly show that the versions of these methods with costs are equal.
+
+Theorem 18 (Duality of adversary bounds) For every f : {0, 1}n →{0, 1} and α ∈Rn
++,
+
+ADVα(f) = MMα(f).
+
+21
+
+
+Sketch of proof.
+We start with the minimax bound with costs, substitute qx(i)px(i)/αi, and
+rewrite the condition �
+
+i px(i) = 1 into �
+
+i αiqx(i) = 1. Using similar arguments as in [ˇSS06], we
+rewrite the bound as a semidefinite program, compute its dual, and after a few simplifications, get
+the spectral bound with costs.
+✷
+
+Lemma 19 ADVα(h) ≤ADVβ(f).
+
+Proof. Let pf and pgi for i = 1, . . . , k be optimal sets of probability distributions achieving the
+minimax bounds. Thus using Theorem 18 we have
+
+ADVβ(f) =
+max
+x,y
+f(x)̸=f(y)
+
+1
+�
+
+i:xi̸=yi
+
+�
+
+pf
+x(i)pf
+y(i)/βi
+,
+
+ADVαi(gi) =
+max
+x,y
+gi(x)̸=gi(y)
+
+1
+�
+
+j:xj̸=yj
+�
+
+pgi
+x (j)pgi
+y (j)/αi
+j
+.
+
+Define the set of probability distributions ph as ph
+x(ℓ) = pf
+˜x(i)pgi
+xi(j), where the ℓth input bit is the
+jth bit in the ith block. This construction was used by Laplante, Lee, and Szegedy [LLS06] to prove
+a similar bound in the stronger setting where the sub-functions gi can act on the same input bits.
+We claim that ph witnesses that ADVα(h) ≤ADVβ(f):
+
+ADVα(h) ≤
+max
+x,y
+h(x)̸=h(y)
+
+1
+�
+
+ℓ:xℓ̸=yℓ
+
+�
+
+ph
+x(ℓ)ph
+y(ℓ)/αℓ
+
+= 1
+
+�
+
+min
+x,y
+h(x)̸=h(y)
+
+�
+
+ℓ:xℓ̸=yℓ
+
+�
+
+pf
+˜x(i)pf
+˜y(i)
+�
+
+pgi
+xi(j)pgi
+yi(j)/αi
+j
+
+= 1
+
+�
+
+min
+˜x,˜y
+f(˜x)̸=f(˜y)
+
+�
+
+i
+
+�
+
+pf
+˜x(i)pf
+˜y(i)
+min
+xi,yi
+
+gi(xi)=˜xi
+gi(yi)=˜yi
+
+�
+
+j:xi
+j̸=yi
+j
+
+�
+
+pgi
+xi(j)pgi
+yi(j)/αi
+j
+
+≤1
+
+�
+
+min
+˜x,˜y
+f(˜x)̸=f(˜y)
+
+�
+
+i:˜xi̸=˜yi
+
+�
+
+pf
+˜x(i)pf
+˜y(i)
+min
+xi,yi
+
+gi(xi)̸=gi(yi)
+
+�
+
+j:xi
+j̸=yi
+j
+
+�
+
+pgi
+xi(j)pgi
+yi(j)/αi
+j
+
+= 1
+
+�
+
+min
+˜x,˜y
+f(˜x)̸=f(˜y)
+
+�
+
+i:˜xi̸=˜yi
+
+�
+
+pf
+˜x(i)pf
+˜y(i) / ADVαi(gi)
+
+= 1
+
+�
+
+min
+˜x,˜y
+f(˜x)̸=f(˜y)
+
+�
+
+i:˜xi̸=˜yi
+
+�
+
+pf
+˜x(i)pf
+˜y(i) / βi
+
+= ADVβ(f),
+
+where the second inequality follows from that fact that we have removed i : ˜xi = ˜yi from the sum
+and the last equality follows from Theorem 18.
+✷
+
+22
+
+
+7
+Examples
+
+In this section, we look at some examples to see how negative weights can help to achieve larger
+lower bounds. We consider two examples in detail: a 4-bit function giving the largest known
+separation between the polynomial degree and quantum query complexity, and a 6-bit function
+breaking the certificate complexity and property testing barriers.
+To help find good adversary matrices, we implemented both adversary bounds as semidefinite
+programs and used the convex optimization package SeDuMi [sed06] for Matlab. Using these
+programs, we tested both ADV and ADV± bounds for all 222 functions on 4 or fewer variables
+which are not equivalent under negation of output and input variables and permutation of input
+variables (see sequence number A000370 in [Slo]). The ADV± bound is strictly larger than the
+ADV bound for 128 of these functions. The source code of our semidefinite programs and more
+examples can be downloaded from [HLˇS06].
+
+7.1
+Ambainis function
+
+In order to separate quantum query complexity and polynomial degree, Ambainis defines a Boolean
+function f : {0, 1}4 →{0, 1} which is one if and only if the four input bits are sorted1, that is
+they are either in a non-increasing or non-decreasing order. This function has polynomial degree
+2, and an adversary bound of 2.5. Thus by the composition theorem for the nonnegative adversary
+method, Ambainis obtains a separation between quantum query complexity and polynomial degree
+of Qǫ(f d) = Ω(deg(f d)1.321). We have verified that this function indeed gives the largest separa-
+tion between adversary bounds and polynomial degree over all functions on 4 or fewer variables.
+In the next theorem, we construct an adversary matrix with negative weights which shows
+that ADV±(f) ≥2.5135. Using the composition theorem Theorem 13 we obtain ADV±(f) ≥
+ADV(f)1.005 and improve the separation between quantum query complexity and polynomial de-
+gree to Qǫ(f d) = Ω(deg(f d)1.3296).
+
+Theorem 20 Let f : {0, 1}4 →{0, 1} be Ambainis’ function. Then ADV±(f) ≥2.5135.
+
+Proof. Following our own advice, to design a good adversary matrix the first thing we do is look
+at the automorphisms of the function. Notice that the element g = (1432) × ((01), id, id, id) ∈
+S4 × S4
+{0,1} preserves the property of the bits being ordered, and thus also the function value. We
+are using cycle notation here, so for example, (1432) × ((01), id, id, id) · 0000 = 0001. Let G
+be the group generated by g. As g has order eight, this group is isomorphic to Z8. The group G
+is both f-transitive and index transitive, thus we know that the uniform vector will be a principal
+eigenvector of our eventual adversary matrix, and that all Γ ◦Di will be unitarily equivalent.
+We now construct our adversary matrix. If f(x) = f(y) we set Γ[x, y] = 0. So now we just
+consider the “interesting” part of the adversary matrix with rows labeled by inputs which map to
+
+1The function was first described in this way by Laplante, Lee, and Szegedy [LLS06]. The function defined by
+Ambainis [Amb06] can be obtained from this function by exchanging the first and third input bits and negating the
+output.
+
+23
+
+
+one, and columns labeled by inputs which map to 0. To highlight the group structure in the matrix,
+we let the ith row be gi(0000) and similarly let the ith column be gi(0010).
+It turns out there are four types of pairs (x, y) which are not equivalent under automorphism.
+We let Γ[x, y] = a if (x,y) have Hamming distance one. If (x, y) have Hamming distance 3, they
+are also related by automorphism, and we set Γ[x, y] = d in this case. There are two automorphism
+types for (x, y) pairs which have Hamming distance 2. If they differ on bits which are both sensitive
+or both not sensitive, we set Γ[x, y] = b; otherwise, we set Γ[x, y] = c. The adversary matrix then
+looks as follows:
+
+0010
+0101
+1011
+0110
+1101
+1010
+0100
+1001
+0000
+a
+c
+d
+b
+d
+c
+a
+b
+0001
+b
+a
+c
+d
+b
+d
+c
+a
+0011
+a
+b
+a
+c
+d
+b
+d
+c
+0111
+c
+a
+b
+a
+c
+d
+b
+d
+1111
+d
+c
+a
+b
+a
+c
+d
+b
+1110
+b
+d
+c
+a
+b
+a
+c
+d
+1100
+d
+b
+d
+c
+a
+b
+a
+c
+1000
+c
+d
+b
+d
+c
+a
+b
+a
+
+As we have remarked, all Γ◦Di matrices are equivalent up to permutation, and it can be shown
+that they consist of four 4-by-4 disjoint blocks, each of these blocks being some permutation of
+rows and columns of the following matrix B:
+
+B =
+
+
+
+
+
+
+
+c
+b
+d
+d
+b
+c
+d
+a
+d
+d
+c
+b
+d
+a
+b
+c
+
+
+
+
+
+.
+(8)
+
+The particular block B above is one of the four blocks of Γ ◦D1 with columns indexed by
+zero-inputs 0010, 0100, 0101, 0110, and rows indexed by one-inputs 1000, 1110, 1111, 1100. A
+principal eigenvector of Γ is given by the uniform vector, which has eigenvalue 2(a + b + c + d).
+Thus our optimization problem is to maximize 2(a + b + c + d) while keeping ∥B∥≤1. The
+optimal setting of the four variables can be found numerically by semidefinite programming and is
+the following:
+
+ADV
+ADV±
+
+a
+3/4
+0.5788
+b
+1/2
+0.7065
+c
+0
+0.1834
+d
+0
+−0.2120
+λ
+5/2
+2.5135
+
+(9)
+
+The eigenvalues of Γ ◦Di are {1, 1, 1
+
+4, 1
+
+4},
+and the eigenvalues of Γ± ◦Di are
+{1, 1, −1, −0.2664}. Both spectral bounds are tight due to the existence of matching dual so-
+lutions; we, however, omit them here.
+✷
+
+24
+
+
+7.2
+Breaking the certificate complexity barrier
+
+We now consider a function on six bits. We will consider this function in two guises. We first define
+a partial function f to show that ADV± can break the property testing barrier. We then extend this
+partial function to a total monotone function g which gives a larger separation between the ADV
+and ADV± bounds, and also shows that ADV± can break the certificate complexity barrier.
+We define the partial function f on six bits as follows:
+
+• The zero inputs of f are: 111000, 011100, 001110, 100110, 110010, 101001, 010101,
+001011, 100101, 010011.
+
+• The one inputs of f are: 000111, 100011, 110001, 011001, 001101, 010110, 101010,
+110100, 011010, 101100.
+
+Notice that f is defined on all inputs with Hamming weight three, and only on these inputs. This
+function is inspired by a function defined by Kushilevitz which appears in [NW95] and is also
+discussed by Ambainis [Amb06]. Kushilevitz’s function has the same behavior as the above on
+inputs of Hamming weight three; it is additionally defined to be 0 on inputs with Hamming weight
+0, 4, or 5, and to be 1 on inputs with Hamming weight 1, 2, or 6.
+All zero inputs of f have Hamming distance at least 2 from any one input, thus the relative
+Hamming distance between any zero and one input is ǫ = 1/3. In Theorem 21 we show that
+ADV±(f) ≥2 + 3
+√
+
+5/5 ≈3.341. This implies ADV±(f) ≥(1/ǫ(f))1.098, and as both bounds
+compose we obtain ADV±(f d) ≥(1/ǫ(f d))1.098. This shows that the property testing barrier does
+not apply to ADV± as it does to ADV. The relative Hamming distance ǫ(f d), however, goes to
+zero when d increases. We don’t know of an asymptotic separation for constant ǫ.
+We also consider a monotone extension of f to a total function, denoted g. It is additionally
+defined to be 0 on inputs with Hamming weight 0, 1, or 2, and to be 1 on inputs with Hamming
+weight 4, 5, or 6. Recall that the maxterms of a monotone Boolean function are the maximal,
+under subset ordering, inputs x which evaluate to 0, and similarly the minterms are the minimal
+inputs which evaluate to 1. The zero inputs of f become maxterms of g and the one inputs become
+minterms. Since f is defined on all inputs with Hamming weight three, g is a total function. The
+extended function g is at least as hard as its sub-function f, hence ADV±(g) ≥ADV±(f). The
+0-certificates of g are given by the location of 0’s in the maxterms and the 1-certificates are given
+by the location of 1’s in the minterms, thus C0(g) = C1(g) = 3. Both bounds compose thus
+C0(gd) = C1(gd) = 3d.
+Applying the composition theorem Theorem 13 we obtain ADV±(gd) ≥(C0(g)C1(g))0.549. As
+ADV(h) ≤
+�
+
+C0(h)C1(h) for a total function h, we also conclude ADV±(gd) ≥ADV(gd)1.098.
+
+Theorem 21 ADV±(f) ≥2 + 3
+√
+
+5/5.
+
+Proof. To design an adversary matrix for f, we again first consider its automorphisms. The
+automorphism group G of f contains a subgroup isomorphic to A5, the alternating group on five
+elements. As we have listed the zero and one instances of the function, one can easily see that the
+permutation (12345), in cycle notation, is an automorphism. This automorphism fixes the sixth
+
+25
+
+
+bit. It turns out that for every 1 ≤i ≤6 there is an automorphism of f of order 5 which fixes the
+ith bit. Here are some examples: (25643), (15643), (12456), (16235), (14362), (12345). Taking
+the closure of these elements gives a group isomorphic to A5. This group is f-transitive and index
+transitive, thus we know that the uniform eigenvector will be a principal eigenvector of our eventual
+adversary matrix, and that all Γ ◦Di will have the same spectral norm.
+Any two pairs (x, y) and (x′, y′) with the same Hamming distance are related by automorphism,
+thus the (x, y) entry of Γ will only depend on Hamming distance. As all valid inputs to f have
+Hamming weight three, the Hamming distance between x and y is even and is either two, four, or
+six. We label the matrix entries a, b, c respectively for Hamming distances two, four, six.
+
+000
+100
+110
+011
+001
+010
+101
+110
+011
+101
+111
+011
+001
+001
+101
+110
+010
+100
+010
+100
+111000
+c
+b
+a
+a
+b
+b
+a
+a
+a
+a
+011100
+b
+c
+b
+a
+a
+a
+b
+a
+a
+a
+001110
+a
+b
+c
+b
+a
+a
+a
+b
+a
+a
+100110
+a
+a
+b
+c
+b
+a
+a
+a
+b
+a
+110010
+b
+a
+a
+b
+c
+a
+a
+a
+a
+b
+101001
+b
+a
+a
+a
+a
+c
+a
+b
+b
+a
+010101
+a
+b
+a
+a
+a
+a
+c
+a
+b
+b
+001011
+a
+a
+b
+a
+a
+b
+a
+c
+a
+b
+100101
+a
+a
+a
+b
+a
+b
+b
+a
+c
+a
+010011
+a
+a
+a
+a
+b
+a
+b
+b
+a
+c
+Notice that all rows have the same sum, thus the uniform vector is an eigenvector with eigenvalue
+6a + 3b + c.
+From this ordering of rows and columns, one can easily read off the matrix Γ ◦D6. This is a
+block diagonal matrix with each block equal, up to permutation, to a matrix B:
+
+B =
+
+
+
+
+
+
+
+
+
+c
+b
+a
+a
+b
+b
+c
+b
+a
+a
+a
+b
+c
+b
+a
+a
+a
+b
+c
+b
+b
+a
+a
+b
+c
+
+
+
+
+
+
+
+
+.
+
+Our optimization problem then becomes: maximize 6a+3b+c while keeping the spectral norm of
+B at most one. As B is a sum of circulants, its eigenvalues will be c + bωk + aω2k + aω3k + bω4k,
+for 0 ≤k ≤4, where ω is a 5th root of unity. An optimal solution is obtained by setting a =
+(1+
+√
+
+5)/5, b = (1−
+√
+
+5)/5, c = 1/5. This makes the eigenvalues of B equal to {1, 1, 1, −1, −1},
+while 6a + 3b + c = 2 + 3
+√
+
+5/5.
+✷
+
+8
+Conclusion
+
+Breaking the certificate complexity and property testing barriers opens the possibility that ADV±
+
+can prove better lower bounds where we know ADV cannot. Salient examples are element distinct-
+
+26
+
+
+ness, the collision problem, and triangle finding. For element distinctness, the best bound provable
+by the standard adversary method is O(√n) while the polynomial method is able to prove a tight
+lower bound of Ω(n2/3) [AS04]. For the collision problem, the adversary method is only able
+to prove a constant lower bound while the polynomial method again proves a tight lower bound
+of Ω(n1/3) [AS04]. Finally, for the problem of determining if a graph contains a triangle, the
+best bound provable by the adversary method is O(n) and the best known algorithm is O(n1.3)
+[MSS05].
+It is also interesting to determine what limitations our new adversary method might face. The
+only limitation we are aware of is that the square of ADV± is a lower bound on formula size.
+This is probably not a limitation, however, as [FGG07, CRˇSZ07] have recently taken a major step
+towards proving the conjecture of Laplante, Lee, and Szegedy that the square of bounded-error
+quantum query complexity is in general a lower bound on formula size.
+
+Acknowledgements
+
+We would like to thank Aram Harrow and Umesh Vazirani for interesting discussions on the topics
+of this paper, and Ronald de Wolf for many valuable comments on an earlier draft.
+
+References
+
+[Amb02]
+A. Ambainis. Quantum lower bounds by quantum arguments. Journal of Computer
+and System Sciences, 64(4):750–767, 2002. Earlier version in STOC’00.
+
+[Amb06]
+A. Ambainis. Polynomial degree vs. quantum query complexity. Journal of Computer
+and System Sciences, 72(2):220–238, 2006. Earlier version in FOCS’03.
+
+[AS04]
+S. Aaronson and Y. Shi. Quantum lower bounds for the collision and the element
+distinctness problem. Journal of the ACM, 51(4):595–605, 2004.
+
+[BBC+01] R. Beals, H. Buhrman, R. Cleve, M. Mosca, and R. de Wolf. Quantum lower bounds by
+polynomials. Journal of the ACM, 48(4):778–797, 2001. Earlier version in FOCS’98.
+
+[Bha97]
+R. Bhatia. Matrix Analysis. Springer-Verlag, 1997.
+
+[BS04]
+H. Barnum and M. Saks. A lower bound on the quantum query complexity of read-
+once functions. Journal of Computer and System Sciences, 69(2):244–258, 2004.
+
+[BSS03]
+H. Barnum, M. Saks, and M. Szegedy. Quantum decision trees and semidefinite pro-
+gramming. In Proc. of 18th IEEE Complexity, pages 179–193, 2003.
+
+[BW02]
+H. Buhrman and R. de Wolf. Complexity measures and decision tree complexity: A
+survey. Theoretical Computer Science, 288(1):21–43, 2002.
+
+27
+
+
+[CRˇSZ07] A. M. Childs, B. W. Reichardt, R. ˇSpalek, and S. Zhang. Every NAND formula of size
+N can be evaluated in time O(N1/2+ε) on a quantum computer. quant-ph/0703015,
+2007.
+
+[FGG07]
+E. Farhi, J. Goldstone, and S. Gutmann. A quantum algorithm for the Hamiltonian
+NAND tree. quant-ph/0702144, 2007.
+
+[Gro96]
+L. K. Grover. A fast quantum mechanical algorithm for database search. In Proc. of
+28th ACM STOC, pages 212–219, 1996.
+
+[HLˇS05]
+P. Høyer, T. Lee, and R. ˇSpalek. Tight adversary bounds for composite functions.
+quant-ph/0509067, 2005.
+
+[HLˇS06]
+P. Høyer, T. Lee, and R. ˇSpalek. Source codes of semidefinite programs for ADV±.
+http://www.ucw.cz/˜robert/papers/adv/, 2006.
+
+[HˇS05]
+P. Høyer and R. ˇSpalek. Lower bounds on quantum query complexity. EATCS Bulletin,
+87:78–103, October, 2005.
+
+[KN97]
+E. Kushilevitz and N. Nisan. Communication Complexity. Cambridge University Press,
+1997.
+
+[KW88]
+M. Karchmer and A. Wigderson.
+Monotone connectivity circuits require super-
+logarithmic depth. In Proc. of 20th ACM STOC, pages 539–550, 1988.
+
+[LLS06]
+S. Laplante, T. Lee, and M. Szegedy. The quantum adversary method and classical
+formula size lower bounds. Computational Complexity, 15:163–196, 2006. Earlier
+version in Complexity’05.
+
+[LM04]
+S. Laplante and F. Magniez. Lower bounds for randomized and quantum query com-
+plexity using Kolmogorov arguments. In Proc. of 19th IEEE Complexity, pages 294–
+304, 2004.
+
+[MSS05]
+F. Magniez, M. Santha, and M. Szegedy. Quantum algorithms for the triangle problem.
+In Proc. of 16th ACM-SIAM SODA, pages 1109–1117, 2005.
+
+[NC00]
+M. A. Nielsen and I. L. Chuang. Quantum Computation and Quantum Information.
+Cambridge University Press, 2000.
+
+[NW95]
+N. Nisan and A. Wigderson. A note on rank vs. communication complexity. Combi-
+natorica, 15(4):557–566, 1995.
+
+[sed06]
+SeDuMi version 1.1. available from http://sedumi.mcmaster.ca/, 2006.
+
+[Sho97]
+P. Shor. Polynomial-time algorithms for prime factorization and discrete logarithms on
+a quantum computer. SIAM Journal on Computing, 26(5):1484–1509, 1997. Earlier
+version in FOCS’94.
+
+28
+
+
+[Slo]
+N.
+Sloane.
+On-line
+encyclopedia
+of
+integer
+sequences.
+http://www.research.att.com/˜njas/sequences/.
+
+[ˇSS06]
+R. ˇSpalek and M. Szegedy. All quantum adversary methods are equivalent. Theory of
+Computing, 2(1):1–18, 2006. Earlier version in ICALP’05.
+
+[Zha05]
+S. Zhang. On the power of Ambainis’s lower bounds. Theoretical Computer Science,
+339(2–3):241–256, 2005. Earlier version in ICALP’04.
+
+29
+
+

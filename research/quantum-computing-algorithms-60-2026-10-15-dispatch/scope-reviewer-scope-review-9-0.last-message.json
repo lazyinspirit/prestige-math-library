@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "9",
+  "round": 0,
+  "reviewed_items": [
+    "def-qc-circuit-syntax-and-register-order",
+    "lem-qc-finite-isometry-unitary-extension",
+    "lem-qc-local-gate-wire-embedding",
+    "lem-qc-disjoint-layer-order-independence",
+    "def-qc-circuit-denotational-semantics",
+    "lem-qc-instrument-output-space-is-nonzero",
+    "thm-qc-instrument-kraus-normalization",
+    "lem-qc-coherent-record-isometry",
+    "thm-qc-instrument-induces-povm",
+    "def-qc-classical-control-and-measurement-circuit",
+    "def-qc-elementary-circuit-resources",
+    "def-qc-measurement-branch-output-law",
+    "thm-qc-circuit-inverse-reversal",
+    "thm-qc-deferred-measurement",
+    "thm-qc-terminal-measurement-circuit-equivalence",
+    "ex-qc-deferred-measurement-one-bit"
+  ],
+  "reviewed_pages": [
+    "circuit-syntax-denotational-semantics-and-measurement",
+    "circuit-syntax-denotational-semantics-and-measurement-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved scope and page prerequisites are covered, and the supplier arguments support the batch claims. One local repair pass should make an isometry prerequisite explicit, complete the local gate unitarity justification, and clarify the example's gate model.",
+  "findings": [
+    {
+      "id": "qc09-finite-isometry-inner-product",
+      "type": "prerequisite",
+      "reason": "In lem-qc-finite-isometry-unitary-extension proof 1.2, norm preservation is used to infer that (V u_i tensor a_0) is orthonormal. The cited definition specifies norm preservation but not inner-product preservation. Add an inline polarization proof or explicitly cite lem-qc-linear-isometry-preserves-inner-products. thm-qc-deferred-measurement consumes this lemma."
+    },
+    {
+      "id": "qc09-local-gate-unitarity",
+      "type": "local",
+      "reason": "In lem-qc-local-gate-wire-embedding proof 1.2, T-dagger T = T T-dagger = I is followed by the conclusion that T is unitary. The repository defines unitary as invertible and norm-preserving; state the adjoint calculation that gives norm preservation or cite the exact finite-dimensional characterization."
+    },
+    {
+      "id": "qc09-example-h-gate-model",
+      "type": "local",
+      "reason": "ex-qc-deferred-measurement-one-bit applies H, but its operation-model text grants ordinary X and C(X) without explicitly listing H. State that H is available as unitary gate data, and either verify H and X are unitary or declare those properties."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qc-deferred-measurement",
+      "decision": "accept",
+      "reason": "Its use of the finite isometry extension is correct; no consumer edit is needed once the supplier proof states the missing isometry consequence."
+    },
+    {
+      "id": "thm-qc-terminal-measurement-circuit-equivalence",
+      "decision": "accept",
+      "reason": "Its induction and use of deferred branch operators are sound; no consumer edit is needed after the supplier proof repair."
+    },
+    {
+      "id": "lem-qc-disjoint-layer-order-independence",
+      "decision": "accept",
+      "reason": "Its use of the local embedding's support action is correct; the unitarity clarification does not change that interface."
+    },
+    {
+      "id": "def-qc-circuit-denotational-semantics",
+      "decision": "accept",
+      "reason": "Its layer products and chronological convention are correct; recheck after the local embedding's unitarity justification is completed."
+    },
+    {
+      "id": "thm-qc-circuit-inverse-reversal",
+      "decision": "accept",
+      "reason": "Its reversal argument uses the embedding claim correctly; no consumer edit is indicated."
+    },
+    {
+      "id": "ex-qc-deferred-measurement-one-bit",
+      "decision": "repair",
+      "reason": "The branch calculations and deferral use are sound, but the example needs the local H gate-model clarification in finding qc09-example-h-gate-model."
+    }
+  ]
+}

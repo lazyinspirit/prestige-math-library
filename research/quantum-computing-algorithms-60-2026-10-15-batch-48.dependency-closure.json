@@ -1,0 +1,2868 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "48",
+  "assigned_item_count": 13,
+  "assigned_items": [
+    {
+      "id": "def-qa-24-pue-svd-data",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 8,
+      "computed_dependency_level": 8,
+      "deps": [
+        "def-qa-22-block-encoding",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "thm-singular-value-decomposition",
+        "def-qc-dirac-notation-conversion",
+        "def-orthogonal-projection",
+        "def-linear-isometry-and-orthogonal-or-unitary-operator",
+        "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $H$ be a finite-dimensional complex inner-product space, let $U:H\\to H$ be unitary, and let $\\Pi_R,\\Pi_L:H\\to H$ be orthogonal projections. Write $H_R=\\operatorname{ran}(\\Pi_R)$ and $H_L=\\operatorname{ran}(\\Pi_L)$. The **projected-unitary encoding** (PUE) of this data is the linear map\n\n$$A:H_R\\to H_L,\\qquad Ax=\\Pi_L Ux.$$\n\nEquivalently, its ambient-space compression is $\\Pi_LU\\Pi_R$, restricted to $H_R$ and regarded as taking values in $H_L$. The map $A$ is a contraction: $\\|A\\|_{\\mathrm{op}}\\le1$.\n\nPut $n=\\dim H_R$, $m=\\dim H_L$, and $r=\\operatorname{rank}(A)$. A singular-value decomposition consists of orthonormal bases $v_1,\\ldots,v_n$ of $H_R$ and $u_1,\\ldots,u_m$ of $H_L$, and positive singular values $1\\ge\\sigma_1\\ge\\cdots\\ge\\sigma_r>0$, such that\n\n$$A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|.$$\n\nThe remaining right basis vectors span $\\ker A$ and the remaining left basis vectors span $\\ker A^*$. Empty bases and sums are allowed when a dimension or the rank is zero. The pairing in each rank-one map is the root-linear-first Dirac conversion of [[def-qc-dirac-notation-conversion]].\n\nAn exact square block encoding is a special case: identify the system with the all-zero ancilla subspace and take $\\Pi_L=\\Pi_R$ equal to that subspace. Under the injection $J_a$ of [[def-qa-22-block-encoding]], the compression is $J_a^*UJ_a$; an exact $(\\alpha,a,0)$ block encoding has compressed block $A/\\alpha$."
+    },
+    {
+      "id": "lem-qa-24-pue-svd-invariant-subspaces",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 9,
+      "computed_dependency_level": 9,
+      "deps": [
+        "def-qa-24-pue-svd-data",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "prop-adjoint-algebra",
+        "thm-singular-value-decomposition",
+        "def-orthogonal-projection",
+        "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$. For every $0<\\sigma_j<1$, set\n\n$$w_j=\\frac{(I-\\Pi_R)U^*u_j}{\\sqrt{1-\\sigma_j^2}},\\qquad \\widetilde w_j=\\frac{(I-\\Pi_L)Uv_j}{\\sqrt{1-\\sigma_j^2}}.$$\n\nThe vectors $w_j$ form an orthonormal family in $\\ker\\Pi_R$ and the vectors $\\widetilde w_j$ form an orthonormal family in $\\ker\\Pi_L$. In the input basis $(v_j,w_j)$ and output basis $(u_j,\\widetilde w_j)$,\n\n$$U\\big|_{\\operatorname{span}(v_j,w_j)}=\\begin{pmatrix}\\sigma_j&\\sqrt{1-\\sigma_j^2}\\\\\\sqrt{1-\\sigma_j^2}&-\\sigma_j\\end{pmatrix}.$$\n\nFor $\\sigma_j=1$, $Uv_j=u_j$ and the complementary vector is absent. A right zero-singular vector $v\\in\\ker A\\cap H_R$ satisfies $Uv\\in\\ker\\Pi_L$; a left zero-singular vector $u\\in\\ker A^*\\cap H_L$ satisfies $U^*u\\in\\ker\\Pi_R$. Let $M_R$ be the orthogonal sum of all positive-singular input planes or lines, $\\ker A$, and $U^*(\\ker A^*)$; let $M_L$ be the corresponding sum of positive-singular output planes or lines, $U(\\ker A)$, and $\\ker A^*$. Then $U(M_R)=M_L$. The residual ambient subspaces $M_R^\\perp$ and $M_L^\\perp$ lie in $\\ker\\Pi_R$ and $\\ker\\Pi_L$, and $U(M_R^\\perp)=M_L^\\perp$. Thus each named block is invariant under its corresponding projector, with no implicit pairing of the two kernels."
+    },
+    {
+      "id": "def-qa-24-singular-value-transform",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 9,
+      "computed_dependency_level": 9,
+      "deps": [
+        "def-qa-24-pue-svd-data",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [
+        "lem-qa-24-singular-transform-basis-independence"
+      ],
+      "argument_summary": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular-value decomposition $A=\\sum_{j=1}^{r}\\sigma_j|u_j\\rangle\\langle v_j|$. Let $p:[-1,1]\\to\\mathbb C$ be a scalar function.\n\nIf $p$ is **odd**, define the odd singular-value transform by\n\n$$p^{\\mathrm{SV}}_{\\mathrm{odd}}(A):H_R\\to H_L,\\qquad p^{\\mathrm{SV}}_{\\mathrm{odd}}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle v_j|.$$\n\nIf $p$ is **even**, define its right-space transform by\n\n$$p^{\\mathrm{SV}}_{R}(A):H_R\\to H_R,\\qquad p^{\\mathrm{SV}}_{R}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|v_j\\rangle\\langle v_j|+p(0)\\Pi_{\\ker A},$$\n\nwhere $\\Pi_{\\ker A}$ is the orthogonal projection in $H_R$ onto $\\ker A$. The left-space version is\n\n$$p^{\\mathrm{SV}}_{L}(A):H_L\\to H_L,\\qquad p^{\\mathrm{SV}}_{L}(A)=\\sum_{j=1}^{r}p(\\sigma_j)|u_j\\rangle\\langle u_j|+p(0)\\Pi_{\\ker A^*}.$$\n\nThe odd transform annihilates the right kernel because oddness gives $p(0)=0$; the even transforms use the canonical kernel projections. The resulting operators are independent of the chosen SVD by [[lem-qa-24-singular-transform-basis-independence]]."
+    },
+    {
+      "id": "alg-qa-24-qsvt",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 10,
+      "computed_dependency_level": 10,
+      "deps": [
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "def-qa-23-qsp-admissible-polynomial-pair",
+        "thm-qa-23-qsp-phase-factorization",
+        "def-qa-23-qsp-signal-sequence",
+        "def-qc-reflection",
+        "def-qc-circuit-denotational-semantics",
+        "def-qc-dirac-notation-conversion",
+        "thm-qc-reflection-unitary-involution",
+        "def-qc-controlled-unitary-access",
+        "def-qc-inverse-unitary-access"
+      ],
+      "justified_by": [],
+      "argument_summary": "**Inputs.** A finite-dimensional complex-inner-product space $H$, a unitary $U:H\\to H$, orthogonal projections $\\Pi_R,\\Pi_L$, an integer $d\\ge0$, and an exact real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$. The input access contract states separately whether $U$, $U^*$, controlled-$U$, and controlled-$U^*$ are supplied and gives their individual costs. The scalar signal sequence is $U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}(W_R(x)Z(\\phi_j))$ from [[def-qa-23-qsp-signal-sequence]], with its admissible polynomial pair from [[def-qa-23-qsp-admissible-polynomial-pair]]. A desired polynomial target is supplied with a certificate that $\\Phi$ realizes its scalar polynomial; generation of $\\Phi$ is a separate classical/circuit input.\n\n**Output.** The procedure returns the finite unitary sequence below and uses its compression from $H_R=\\operatorname{ran}(\\Pi_R)$ to $H_L=\\operatorname{ran}(\\Pi_L)$ for odd $d$, or from $H_R$ to itself for even $d$. No measurement or state-preparation circuit is implicit in this block description.\n\n**Instructions.** For $d\\ge0$, set the current side to $R$ and apply the projector phase $e^{i\\phi_d(2\\Pi_R-I)}$. For $j=d-1,d-2,\\ldots,0$, apply $U$ and switch the current side from $R$ to $L$ if it is $R$; otherwise apply $U^*$ and switch from $L$ to $R$. Then apply $e^{i\\phi_j(2\\Pi_{\\mathrm{current}}-I)}$. Thus there are $d$ alternating signal calls and $d+1$ projector-phase operations; $d=0$ has no signal call and consists only of the phase at $\\Pi_R$.\n\nFor a real target polynomial, run the two phase lists $\\Phi$ and $-\\Phi$ in coherent control branches, with the control initialized in $|+\\rangle$, and take the $|+\\rangle$-to-$|+\\rangle$ block. The procedure uses the reflected signal convention $W_R$ throughout. If a circuit is built through the alternative SU(2) convention, its control-dependent scalar phase must be retained as a relative phase. The exact block action, the real-part extraction, and the implementation costs are established in the separate theorem items on this page. Every phase list, inverse call, controlled call, phase rotation, and finite-gate compilation is supplied or charged separately."
+    },
+    {
+      "id": "lem-qa-24-singular-transform-basis-independence",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 10,
+      "computed_dependency_level": 10,
+      "deps": [
+        "def-qa-24-singular-value-transform",
+        "thm-singular-value-decomposition",
+        "def-orthogonal-projection",
+        "prop-adjoint-algebra",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces"
+      ],
+      "justified_by": [],
+      "argument_summary": "For a finite-dimensional PUE map $A:H_R\\to H_L$, the odd singular-value transform and both even singular-value transforms of [[def-qa-24-singular-value-transform]] are independent of the chosen singular-vector bases. On a positive singular-value subspace, $A/\\sigma$ canonically pairs the right and left eigenspaces; on repeated singular values the transform is scalar on the whole corresponding subspace. The even transforms use the canonical orthogonal projection onto $\\ker A$ or $\\ker A^*$ with coefficient $p(0)$; the odd transform has no zero-singular cross term."
+    },
+    {
+      "id": "thm-qa-24-projector-phase-implementation",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 10,
+      "computed_dependency_level": 10,
+      "deps": [
+        "def-qa-24-pue-svd-data",
+        "def-qc-reflection",
+        "def-qc-controlled-unitary-access",
+        "thm-qc-reflection-unitary-involution",
+        "def-qc-one-qubit-gate-alphabet-and-rotations",
+        "def-qc-circuit-denotational-semantics"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $\\Pi$ be an orthogonal projection on a finite-dimensional space $H$, with reflection $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi=-R_\\Pi$. Suppose the control-first call $C(R_\\Pi)$ is explicitly supplied, together with an ancilla initialized in $|0\\rangle$ and exact one-qubit $H$ and $R_z$ gates. Then the unitary $e^{i\\phi R_\\Pi}$ is implemented exactly by two controlled-reflection calls and one variable phase rotation, with a constant number of additional one-qubit gates, and the ancilla is returned to $|0\\rangle$. If an external branch qubit is present and a branch-controlled $R_z(2\\phi)$ is supplied, controlling only that rotation implements the controlled projector phase; the two controlled-reflection calls remain unconditional with respect to the external branch. In QSVT the construction is applied separately to $\\Pi_R$ and $\\Pi_L$; each projector-phase slot uses two controlled calls to the corresponding reflection. The access and gate costs are charged separately."
+    },
+    {
+      "id": "thm-qa-24-qsvt-query-count",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 11,
+      "computed_dependency_level": 11,
+      "deps": [
+        "alg-qa-24-qsvt",
+        "thm-qa-24-projector-phase-implementation",
+        "def-qc-circuit-cost-model",
+        "def-qc-controlled-unitary-access"
+      ],
+      "justified_by": [],
+      "argument_summary": "For degree $d\\ge0$, one un-controlled QSVT sequence makes exactly $d$ signal calls: $\\lceil d/2\\rceil$ calls to $U$ and $\\lfloor d/2\\rfloor$ calls to $U^*$, beginning with $U$ when $d>0$. It applies exactly $d+1$ projector-phase operations, with $\\lceil(d+1)/2\\rceil$ about $\\Pi_R$ and $\\lfloor(d+1)/2\\rfloor$ about $\\Pi_L$. By [[thm-qa-24-projector-phase-implementation]], each phase operation uses two controlled calls to the corresponding reflection and one variable one-qubit phase rotation, plus a constant number of one-qubit gates. A coherent control of one sequence against the identity requires no controlled signal call when $d$ is even and one controlled signal call when $d$ is odd. Selecting between the two phase lists $\\Phi$ and $-\\Phi$ uses the same unconditioned signal list in both branches and controls only the phase rotations. Phase generation, inverse access, and finite-gate compilation retain their separately declared costs. At $d=0$ there is no signal or controlled-signal call."
+    },
+    {
+      "id": "thm-qa-24-qsvt-singular-space-action",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 11,
+      "computed_dependency_level": 11,
+      "deps": [
+        "def-qa-24-pue-svd-data",
+        "alg-qa-24-qsvt",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "def-qa-24-singular-value-transform",
+        "lem-qa-24-singular-transform-basis-independence",
+        "def-qa-23-qsp-signal-sequence",
+        "lem-qa-23-phase-sequence-unitarity",
+        "def-qc-dirac-notation-conversion",
+        "thm-qc-reflection-unitary-involution",
+        "lem-qa-23-hermitian-signal-convention-conversion",
+        "thm-qa-23-real-polynomial-completion",
+        "thm-qa-23-qsp-phase-factorization"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $A:H_R\\to H_L$ be the PUE map of [[def-qa-24-pue-svd-data]], with positive singular pairs $(\\sigma_j,v_j,u_j)$, and let $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ be the exact phase list in [[alg-qa-24-qsvt]]. Let $P_\\Phi$ be the upper-left scalar polynomial of its QSP signal sequence. On every positive two-dimensional singular plane from [[lem-qa-24-pue-svd-invariant-subspaces]], the QSVT sequence is exactly $U_\\Phi(\\sigma_j)$. Consequently, if $d$ is odd,\n\n$$\\Pi_LU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|u_j\\rangle\\langle v_j|=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_{\\mathrm{odd}}(A),$$\n\nand if $d$ is even,\n\n$$\\Pi_RU_\\Phi\\Pi_R\\big|_{H_R}=\\sum_{j=1}^{r}P_\\Phi(\\sigma_j)|v_j\\rangle\\langle v_j|+P_\\Phi(0)\\Pi_{\\ker A}=\\bigl(P_\\Phi\\bigr)^{\\mathrm{SV}}_R(A).$$\n\nThe formulas include singular values $0$ and $1$, repeated singular values, unmatched left and right kernels, and zero-dimensional singular spaces. If $p\\in\\mathbb R[x]$ has parity $d\\bmod2$ and $|p(x)|\\le1$ on $[-1,1]$, the exact completion and phase-factorization suppliers give a phase list with $\\operatorname{Re}P_\\Phi=p$. The coherent $\\Phi$/$-\\Phi$ branch then has compressed block $p^{\\mathrm{SV}}(A)$; for a supplied uniform scalar error $\\eta$, its block differs from $p^{\\mathrm{SV}}(A)$ by at most $\\eta$."
+    },
+    {
+      "id": "lem-qa-24-qsvt-robustness-amplitude-bound",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 12,
+      "computed_dependency_level": 12,
+      "deps": [
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-singular-value-decomposition",
+        "def-qc-dirac-notation-conversion",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "cor-triangle-inequality-for-inner-product-norm",
+        "def-orthogonal-projection",
+        "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+        "prop-adjoint-algebra",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "def-linear-isometry-and-orthogonal-or-unitary-operator",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $A,B:H_R\\to H_L$ be contractions between the same finite-dimensional complex-inner-product spaces, let $P$ be the scalar polynomial of an exact degree-$d$ QSVT phase sequence, and put $\\delta=\\|A-B\\|_{\\mathrm{op}}$. Then, for the corresponding odd or even singular-value transforms,\n\n$$\\|P^{\\mathrm{SV}}(A)-P^{\\mathrm{SV}}(B)\\|_{\\mathrm{op}}\\le4d\\sqrt{\\delta}.$$\n\nFor $d=0$ the transform is constant on the relevant singular space and the difference is zero. The lemma is an operator statement; the unitary completions used in the proof are finite-dimensional existence constructions and do not supply an efficient implementation or any additional query access."
+    },
+    {
+      "id": "thm-qa-24-real-polynomial-extraction",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 12,
+      "computed_dependency_level": 12,
+      "deps": [
+        "thm-qa-24-qsvt-singular-space-action",
+        "alg-qa-24-qsvt",
+        "thm-qa-23-real-polynomial-completion",
+        "thm-qa-23-qsp-phase-factorization",
+        "def-qa-23-qsp-signal-sequence",
+        "def-qa-23-qsp-admissible-polynomial-pair",
+        "def-qc-controlled-unitary-access",
+        "def-qc-circuit-denotational-semantics",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-query-count",
+        "thm-singular-value-decomposition"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $A:H_R\\to H_L$ be a finite PUE map and let $p\\in\\mathbb R[x]$ have degree at most $d$, parity $d\\bmod 2$, and $|p(x)|\\le1$ on $[-1,1]$. The exact real-polynomial completion and phase-factorization results give a phase list $\\Phi$ whose scalar QSP polynomial satisfies $\\operatorname{Re}P_\\Phi=p$. Run the degree-$d$ QSVT sequence with a control qubit prepared in $|+\\rangle$, using the phase lists $\\Phi$ and $-\\Phi$ in its two branches, and project the control back onto $|+\\rangle$. The resulting compressed block is exactly $p^{\\mathrm{SV}}_{\\mathrm{odd}}(A)$ for odd $d$, and exactly $p^{\\mathrm{SV}}_R(A)$ for even $d$, including the even value $p(0)$ on $\\ker A$. The result includes $d=0$, zero and unit singular values, repeated values, and unmatched kernels.\n\nThe two branches share the same $d$ unconditioned alternating calls to $U$ and $U^*$. Each of the $d+1$ projector-phase slots uses two controlled-reflection calls for its phase gadget and one branch-controlled one-qubit rotation; the controlled-rotation and reflection-access costs are charged separately. No controlled signal call is needed for the $\\Phi/-\\Phi$ selector. Phase-list generation and any finite-gate compilation remain separately charged."
+    },
+    {
+      "id": "thm-qa-24-qsvt-error-and-resource-bound",
+      "page": "quantum-singular-value-transformation",
+      "dependency_level": 13,
+      "computed_dependency_level": 13,
+      "deps": [
+        "thm-qa-24-qsvt-singular-space-action",
+        "def-qa-24-singular-value-transform",
+        "def-qa-22-block-encoding",
+        "def-qa-24-pue-svd-data",
+        "def-qc-circuit-cost-model",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-query-count",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-singular-value-decomposition",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "cor-triangle-inequality-for-inner-product-norm",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "def-linear-isometry-and-orthogonal-or-unitary-operator",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "prop-adjoint-algebra",
+        "def-orthogonal-projection",
+        "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $A$ be a finite square or rectangular matrix with a declared isometric padding $\\widehat A$, and let $\\alpha>0$ satisfy $\\alpha\\ge\\|A\\|_{\\mathrm{op}}$. Let $B$ be the exact compressed PUE block of the supplied input unitary and assume\n\n$$\\|B-\\widehat A/\\alpha\\|_{\\mathrm{op}}\\le\\varepsilon_{\\mathrm{BE}}.$$\n\nLet $P$ be the degree-$d$ parity polynomial of an admissible QSVT phase sequence, and let $f$ have the same parity. Put $S:=\\{0\\}\\cup\\{\\sigma_j:\\sigma_j>0\\text{ is a singular value of }\\widehat A/\\alpha\\}$, so zero is included even when the two matrix dimensions differ. If $\\sup_{\\sigma\\in S}|P(\\sigma)-f(\\sigma)|\\le\\eta_{\\mathrm{poly}}$, and the implemented phase operation at slot $\\ell$ is a unitary within operator-norm error $\\zeta_\\ell$ of its ideal operation, then the implemented compressed block $\\widetilde B$ satisfies\n\n$$\\|\\widetilde B-f^{\\mathrm{SV}}(\\widehat A/\\alpha)\\|_{\\mathrm{op}}\\le\\eta_{\\mathrm{poly}}+4d\\sqrt{\\varepsilon_{\\mathrm{BE}}}+\\sum_{\\ell}\\zeta_\\ell.$$\n\nThe exact sequence uses $d$ calls alternating between $U$ and $U^*$, $d+1$ projector-phase operations, and the reflection and one-qubit resources in [[thm-qa-24-qsvt-query-count]]. A real-polynomial control wrapper has its separately listed controlled gates. Matrix-data access, block-encoding construction, inverse and controlled access, phase-list generation, finite-gate compilation, and classical bit costs are charged through their declared interfaces; no cost follows from a bare matrix."
+    },
+    {
+      "id": "cex-qa-24-parity-violation",
+      "page": "quantum-singular-value-transformation-examples",
+      "dependency_level": 10,
+      "computed_dependency_level": 10,
+      "deps": [
+        "def-qa-24-singular-value-transform",
+        "def-qc-dirac-notation-conversion"
+      ],
+      "justified_by": [],
+      "argument_summary": "A false extension of the odd singular-value formula that assigns a nonzero coefficient to zero-singular-vector pairs depends on arbitrary basis choices. Take $A=0:\\mathbb C\\to\\mathbb C$ and the scalar function $f(x)=1$. Pair the right zero vector $v=1$ with either left zero vector $u=1$ or $u=-1$. The resulting rank-one sums are respectively $I$ and $-I$, despite the same zero map $A$."
+    },
+    {
+      "id": "ex-qa-24-rank-one-pue",
+      "page": "quantum-singular-value-transformation-examples",
+      "dependency_level": 12,
+      "computed_dependency_level": 12,
+      "deps": [
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "thm-qa-24-qsvt-singular-space-action"
+      ],
+      "justified_by": [],
+      "argument_summary": "Let $0\\le\\sigma\\le1$, $H=\\mathbb C^2$, $U_\\sigma=\\begin{pmatrix}\\sigma&\\sqrt{1-\\sigma^2}\\\\\\sqrt{1-\\sigma^2}&-\\sigma\\end{pmatrix}$, and $\\Pi_R=\\Pi_L=|0\\rangle\\langle0|$. The PUE block is the scalar matrix $A=[\\sigma]$. Use the degree-one phase list $(0,0)$, whose scalar polynomial is $P(x)=x$."
+    }
+  ],
+  "item_dependency_computed_levels": {
+    "def-qa-24-pue-svd-data": 8,
+    "lem-qa-24-pue-svd-invariant-subspaces": 9,
+    "def-qa-24-singular-value-transform": 9,
+    "alg-qa-24-qsvt": 10,
+    "lem-qa-24-singular-transform-basis-independence": 10,
+    "thm-qa-24-projector-phase-implementation": 10,
+    "thm-qa-24-qsvt-query-count": 11,
+    "thm-qa-24-qsvt-singular-space-action": 11,
+    "lem-qa-24-qsvt-robustness-amplitude-bound": 12,
+    "thm-qa-24-real-polynomial-extraction": 12,
+    "thm-qa-24-qsvt-error-and-resource-bound": 13,
+    "cex-qa-24-parity-violation": 10,
+    "ex-qa-24-rank-one-pue": 12
+  },
+  "transitive_in_run_supplier_count": 42,
+  "transitive_suppliers": [
+    {
+      "id": "def-qc-dirac-notation-conversion",
+      "page": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "batch": "1",
+      "planned_dependency_level": 0,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 0,
+      "computed_dependency_level": 0,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-dirac-notation-coordinate-identity",
+      "page": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "batch": "1",
+      "planned_dependency_level": 1,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 1,
+      "computed_dependency_level": 1,
+      "dependency_kinds": [
+        "deps",
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "Let $H,K$ be finite-dimensional complex inner-product spaces with ordered\northonormal bases $E=(e_j)_{j<n}$ and $F=(f_i)_{i<m}$. Let $T:H\\to K$ be\nlinear ([[def-linear-map]]), and write $T_{ij}$ for the $(i,j)$ entry of its\nmatrix in these bases.\nThen, for every $z\\in H$,\n\n$$Tz=\\sum_{j<n}\\sum_{i<m}T_{ij}\\langle z,e_j\\rangle_{H,\\mathrm{root}}f_i, \\qquad T=\\sum_{j<n}\\sum_{i<m}T_{ij}|f_i\\rangle\\langle e_j|.$$\n\nFor $x\\in K$ and $y\\in H$, the rank-one map $|x\\rangle\\langle y|$ has\ncoordinate matrix $[x]_F[y]_E^\\dagger$, where $M^\\dagger=\\overline M^{\\mathsf T}$.\nIts amplitude satisfies\n$\\langle x|T|y\\rangle_D=\\langle Ty,x\\rangle_{K,\\mathrm{root}}$.\nAll sums are empty when an index dimension is zero, and the identities include\nthose cases.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-ordered-bitstring-encoding",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 1,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 1,
+      "computed_dependency_level": 1,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-14.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-register-and-computational-basis",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 0,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 0,
+      "computed_dependency_level": 0,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-14.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-tensor-map",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 2,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 2,
+      "computed_dependency_level": 2,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-15.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-tensor-register-and-permutation",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 1,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 1,
+      "computed_dependency_level": 1,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-14.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "lem-qc-tensor-product-basis-and-dimension",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 2,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 2,
+      "computed_dependency_level": 2,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-25.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-bitstring-index-is-bijection",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 3,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 3,
+      "computed_dependency_level": 3,
+      "dependency_kinds": [
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-15.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-computational-basis-orthonormal",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 1,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 1,
+      "computed_dependency_level": 1,
+      "dependency_kinds": [
+        "deps",
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-25.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-tensor-map-composition-and-adjoint",
+      "page": "registers-tensor-products-and-partial-trace",
+      "batch": "2",
+      "planned_dependency_level": 3,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 3,
+      "computed_dependency_level": 3,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-15.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "Let $(T_k:H_k\\to K_k)_{k<n}$ and $(S_k:K_k\\to L_k)_{k<n}$ be finite ordered\nfamilies of linear maps between finite-dimensional complex inner-product\nspaces. Then\n\n$$\\left(\\bigotimes_{k<n}S_k\\right)\\left(\\bigotimes_{k<n}T_k\\right)=\\bigotimes_{k<n}(S_kT_k),\\qquad \\bigotimes_{k<n}I_{H_k}=I_{\\otimes_{k<n}H_k},\\qquad \\left(\\bigotimes_{k<n}T_k\\right)^*=\\bigotimes_{k<n}T_k^*.$$\n\nIn the first formula, $S_kT_k$ means $S_k\\circ T_k$. Here $I_{H_k}$ denotes\nthe identity map $x\\mapsto x$. All adjoints use the\nrepository pairing, linear in the first argument. The empty tensor-map\nidentity is the identity map $z\\mapsto z$ on $\\mathbb C$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-density-operator",
+      "page": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "batch": "3",
+      "planned_dependency_level": 0,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 0,
+      "computed_dependency_level": 0,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-25.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-pure-state-and-ray",
+      "page": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "batch": "3",
+      "planned_dependency_level": 1,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 1,
+      "computed_dependency_level": 1,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-density-operator-existence",
+      "page": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "batch": "3",
+      "planned_dependency_level": 1,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 1,
+      "computed_dependency_level": 1,
+      "dependency_kinds": [
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "Every nonzero finite-dimensional complex inner-product space $H$ admits a density operator; specifically, if $d=\\dim_{\\mathbb C}H$, then $I_H/d$ is a density operator on $H$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-ray-projector-well-defined-and-bijective",
+      "page": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "batch": "3",
+      "planned_dependency_level": 2,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 2,
+      "computed_dependency_level": 2,
+      "dependency_kinds": [
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-bloch-coordinate-map",
+      "page": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "batch": "7",
+      "planned_dependency_level": 4,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 4,
+      "computed_dependency_level": 4,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "Let $Q_2$ be the qubit space of [[def-qc-qubit-and-bloch-representation]], and let $\\rho$ be a density operator on $Q_2$ in the sense of [[def-qc-density-operator]]. Define its candidate Bloch coordinates in $\\mathbb C^3$ by\n$$r_j(\\rho):=\\operatorname{tr}(\\rho\\sigma_j)\\quad(j\\in\\{x,y,z\\}),\\qquad \\mathbf r(\\rho):=(r_x(\\rho),r_y(\\rho),r_z(\\rho)).$$\nFor any $\\mathbf r=(r_x,r_y,r_z)\\in\\mathbb R^3$, define the associated Hermitian-matrix candidate\n$$\\rho(\\mathbf r):=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nWrite $\\mathbf r\\cdot\\boldsymbol{\\sigma}:=r_xX+r_yY+r_zZ$ and\n$$\\|\\mathbf r\\|_2:=\\sqrt{r_x^2+r_y^2+r_z^2}.$$\nThe next theorem proves that these trace coordinates are real and that every Hermitian trace-one $2\\times2$ matrix is uniquely $\\rho(\\mathbf r)$; the positivity theorem determines which real-coordinate candidates are states.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-one-qubit-gate-alphabet-and-rotations",
+      "page": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "batch": "7",
+      "planned_dependency_level": 5,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 5,
+      "computed_dependency_level": 5,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-pauli-matrices",
+      "page": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "batch": "7",
+      "planned_dependency_level": 3,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 3,
+      "computed_dependency_level": 3,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-15.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-qubit-and-bloch-representation",
+      "page": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "batch": "7",
+      "planned_dependency_level": 2,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 2,
+      "computed_dependency_level": 2,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "The **qubit space** is the one-qubit register $Q_2=\\mathbb C^2$ of [[def-qc-register-and-computational-basis]], with ordered computational basis $(|0\\rangle,|1\\rangle)=(e_0,e_1)$. This basis is orthonormal by [[thm-qc-computational-basis-orthonormal]]. A **qubit state** is a density operator on $Q_2$ in the sense of [[def-qc-density-operator]], namely a non-negative endomorphism of trace one. A **pure qubit state** is a pure-state ray on $Q_2$ in the sense of [[def-qc-pure-state-and-ray]]. The Bloch coordinates and their state-space constraints are defined and proved in the following items on this page.\n\nThe term qubit here names the two-dimensional register and its mathematical state space. No physical preparation or measurement postulate is part of this definition.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-axis-rotation-pauli-formula",
+      "page": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "batch": "7",
+      "planned_dependency_level": 6,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 6,
+      "computed_dependency_level": 6,
+      "dependency_kinds": [
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "For $\\theta\\in\\mathbb R$ and $\\mathbf n=(n_x,n_y,n_z)\\in\\mathbb R^3$ with $\\|\\mathbf n\\|_2=1$, put $\\Sigma=\\mathbf n\\cdot\\boldsymbol{\\sigma}=n_xX+n_yY+n_zZ$. Then\n$$R_{\\mathbf n}(\\theta)=\\exp\\!\\left(-\\frac{i\\theta}{2}\\Sigma\\right)=\\cos(\\theta/2)I-i\\sin(\\theta/2)\\Sigma,$$\nand $R_{\\mathbf n}(\\theta)$ is unitary. For the endpoint $\\theta=0$, it equals $I$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-bloch-coordinate-existence-and-uniqueness",
+      "page": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "batch": "7",
+      "planned_dependency_level": 5,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 5,
+      "computed_dependency_level": 5,
+      "dependency_kinds": [
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "For every $\\mathbf r\\in\\mathbb R^3$, the matrix $\\rho(\\mathbf r)$ of [[def-qc-bloch-coordinate-map]] is Hermitian with trace one. Conversely, every Hermitian trace-one matrix $\\rho\\in M_2(\\mathbb C)$ has a unique vector $\\mathbf r\\in\\mathbb R^3$ such that\n$$\\rho=\\rho(\\mathbf r)=\\frac12\\bigl(I+r_xX+r_yY+r_zZ\\bigr).$$\nFor a qubit density operator this vector is exactly $(\\operatorname{tr}(\\rho X),\\operatorname{tr}(\\rho Y),\\operatorname{tr}(\\rho Z))$, the coordinate map of [[def-qc-bloch-coordinate-map]]. In particular all three trace coordinates of every density operator are real.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-pauli-algebra",
+      "page": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "batch": "7",
+      "planned_dependency_level": 4,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 4,
+      "computed_dependency_level": 4,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-15.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-controlled-unitary-access",
+      "page": "controlled-gates-phase-and-entanglement",
+      "batch": "8",
+      "planned_dependency_level": 6,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 6,
+      "computed_dependency_level": 6,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Let $C=\\mathbb C^2$ be a control qubit with ordered orthonormal basis $|0\\rangle,|1\\rangle$, let $H$ be a finite-dimensional complex inner-product space, and let $U:H\\to H$ be unitary. On the control-first register $C\\otimes H$, define\n\n$$C(U):=\\begin{pmatrix}I_H&0\\\\0&U\\end{pmatrix}.$$\n\nThus $C(U)(|0\\rangle\\otimes v)=|0\\rangle\\otimes v$ and $C(U)(|1\\rangle\\otimes v)=|1\\rangle\\otimes Uv$. **Controlled access** means that the chosen operation model explicitly grants a call to this block operator. An ordinary call to a black-box $U$ does not silently grant a controlled call, and no query or gate cost is assigned unless the model states it.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-inverse-unitary-access",
+      "page": "controlled-gates-phase-and-entanglement",
+      "batch": "8",
+      "planned_dependency_level": 7,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 7,
+      "computed_dependency_level": 7,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "For a finite-dimensional unitary $U$, **inverse access** is the explicitly granted operation $U^\\dagger=U^{-1}$. Its availability and query or gate charge are recorded separately from forward access, including any controlled access in [[def-qc-controlled-unitary-access]]. For a chronological sequence of length $k\\ge0$ that applies $U_1$ first and $U_k$ last, the total operator is $W=U_k\\cdots U_1$ when $k>0$ and $W=I_H$ when $k=0$. For $k>0$, the inverse sequence applies $U_k^\\dagger$ first, then $U_{k-1}^\\dagger$, down to $U_1^\\dagger$; for $k=0$ it is the empty sequence.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-reflection",
+      "page": "controlled-gates-phase-and-entanglement",
+      "batch": "8",
+      "planned_dependency_level": 8,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 8,
+      "computed_dependency_level": 8,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection on $H$. Fix the two signs\n\n$$R_\\Pi:=2\\Pi-I,\\qquad S_\\Pi:=I-2\\Pi=-R_\\Pi.$$\n\nThus $R_\\Pi$ acts as $+I$ on $\\operatorname{ran}\\Pi$ and $-I$ on $\\ker\\Pi$; $S_\\Pi$ reverses those signs. They are not interchangeable inside a controlled block. For a unit vector $\\psi$, the rank-one reflection is $R_\\psi=2|\\psi\\rangle\\langle\\psi|-I$ with the Dirac convention of [[def-qc-dirac-notation-conversion]].\n\nAn access model counts a direct reflection as one primitive call only when that call is explicitly declared. Controlled reflection access is a separate declaration. If $|0\\rangle$ is a specified unit input in the same space $H$, the state is prepared as $\\psi=U|0\\rangle$ for a declared unitary $U$, and a reflection is implemented by conjugating $R_0=2|0\\rangle\\langle0|-I$, the construction is $UR_0U^\\dagger$ and its cost must include the calls to $U$, $R_0$, and $U^\\dagger$. A state vector or matrix description alone implies neither an efficient reflection nor inverse access.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-relative-phase",
+      "page": "controlled-gates-phase-and-entanglement",
+      "batch": "8",
+      "planned_dependency_level": 6,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 6,
+      "computed_dependency_level": 6,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-47.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "Fix an ordered orthonormal pair $e_0,e_1$ in a finite-dimensional complex inner-product space. If a vector has nonzero coordinates $\\alpha,\\beta$ on this pair, its **relative phase** on these coordinates is\n\n$$\\eta:=\\frac{\\beta/\\alpha}{|\\beta/\\alpha|}\\in\\mathbb C,\\qquad |\\eta|=1.$$\n\nThe relative phase is undefined when either coordinate is zero. It is unchanged by multiplying the whole vector by any nonzero complex scalar. It can distinguish rays: for the unit vectors $\\psi_\\eta=(e_0+\\eta e_1)/\\sqrt2$, distinct values of $\\eta$ give distinct rank-one projectors and distinct rays.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qc-rank-one-reflection-phase-and-control-sign",
+      "page": "controlled-gates-phase-and-entanglement",
+      "batch": "8",
+      "planned_dependency_level": 10,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 10,
+      "computed_dependency_level": 10,
+      "dependency_kinds": [
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Supplier statement and proof were read directly in this batch.",
+      "observed_excerpt": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\psi\\in H$ be a unit vector. Then $\\Pi_\\psi=|\\psi\\rangle\\langle\\psi|$ is a rank-one orthogonal projection, and $\\Pi_{\\lambda\\psi}=\\Pi_\\psi$ for every $|\\lambda|=1$. Therefore $R_\\psi=2\\Pi_\\psi-I$ and $S_\\psi=I-2\\Pi_\\psi$ are well-defined on the ray. Standalone they differ by the global scalar $-1$; when controlled in control-first order,\n\n$$C(S_\\psi)=(Z_C)C(R_\\psi),\\qquad Z_C=\\operatorname{diag}(I,-I).$$\n\nLet $C=Q_2$ be the control qubit with ordered basis $|0\\rangle,|1\\rangle$, and set $|\\pm\\rangle=(|0\\rangle\\pm|1\\rangle)/\\sqrt2$. For input $|+\\rangle\\otimes\\psi$, $C(S_\\psi)$ produces $| -\\rangle\\otimes\\psi$ and $C(R_\\psi)$ produces $|+\\rangle\\otimes\\psi$, so the control sign is relative rather than a target-wide global phase. If $a\\in H$ is a specified unit input denoted $|0\\rangle$ in an access model, $U:H\\to H$ is unitary, and $\\psi=Ua$, define $R_a=2|a\\rangle\\langle a|-I$ and $S_a=I-2|a\\rangle\\langle a|$ as in [[def-qc-reflection]]. Then $UR_aU^\\dagger=R_\\psi$ and $US_aU^\\dagger=S_\\psi$. This conjugation uses the separately supplied inverse call $U^\\dagger$; the equality itself grants no such access.",
+      "statement_provenance": null,
+      "proof_provenance": null,
+      "relevance": "The justified_by edge is visible in closure, but assigned claims use general projector reflections and do not use this rank-one ray branch."
+    },
+    {
+      "id": "thm-qc-reflection-unitary-involution",
+      "page": "controlled-gates-phase-and-entanglement",
+      "batch": "8",
+      "planned_dependency_level": 9,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 9,
+      "computed_dependency_level": 9,
+      "dependency_kinds": [
+        "deps",
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Let $H$ be a finite-dimensional complex-inner-product space and let $\\Pi$ be an orthogonal projection. The operators $R_\\Pi=2\\Pi-I$ and $S_\\Pi=I-2\\Pi$ are self-adjoint unitary involutions, with $R_\\Pi=-S_\\Pi$. On $\\operatorname{ran}\\Pi$ they act as $+I$ and $-I$, respectively; on $\\ker\\Pi$ they act as $-I$ and $+I$. In control-first order,\n\n$$C(S_\\Pi)=(Z_C)C(R_\\Pi),\\qquad Z_C:=\\operatorname{diag}(I_H,-I_H)=Z\\otimes I_H.$$",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-circuit-denotational-semantics",
+      "page": "circuit-syntax-denotational-semantics-and-measurement",
+      "batch": "9",
+      "planned_dependency_level": 6,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 6,
+      "computed_dependency_level": 6,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-circuit-syntax-and-register-order",
+      "page": "circuit-syntax-denotational-semantics-and-measurement",
+      "batch": "9",
+      "planned_dependency_level": 2,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 2,
+      "computed_dependency_level": 2,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-14.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "Write $\\mathcal Q_n$ for the ordered tensor product of $n$ copies of the two-level register from [[def-qc-register-and-computational-basis]], with $\\mathcal Q_0=\\mathbb C$. Fix a finite gate alphabet $G$. Each $g\\in G$ has an arity $r(g)\\ge1$ and a specified unitary $U_g:\\mathcal Q_{r(g)}\\to\\mathcal Q_{r(g)}$. An operation model states which listed gates may be called and what access or cost is assigned to them; the matrix $U_g$ by itself is only the mathematical gate data.\n\nFor $n\\ge0$, the circuit wire set is $[n]=\\{0,\\ldots,n-1\\}$ in its displayed order and its state space is $\\mathcal Q_n$. The computational basis word $x=(x_0,\\ldots,x_{n-1})$ is assigned slot $\\operatorname{enc}_n(x)$ from [[def-qc-ordered-bitstring-encoding]], so wire $0$ is the most significant bit and the empty register has its single basis vector in slot $0$.\n\nA gate occurrence on the $n$ wires is a pair $(g,(w_0,\\ldots,w_{r(g)-1}))$ with distinct wire labels $w_j\\in[n]$; the tuple order is the input and output factor order of the local gate. A layer is a finite ordered list of gate occurrences whose wire supports are pairwise disjoint. A unitary circuit is a finite chronological list $L_1,\\ldots,L_d$ of such layers, with $L_1$ applied first and $L_d$ last; $d=0$ is the empty circuit. Its input, output, and terminally measured wires are specified as ordered lists without repetitions in $[n]$. This syntax specifies finite data only; the semantic action of gates on the full register is defined separately.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-elementary-circuit-resources",
+      "page": "circuit-syntax-denotational-semantics-and-measurement",
+      "batch": "9",
+      "planned_dependency_level": 8,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 8,
+      "computed_dependency_level": 8,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-14.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call unless the model explicitly combines them. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "lem-qc-disjoint-layer-order-independence",
+      "page": "circuit-syntax-denotational-semantics-and-measurement",
+      "batch": "9",
+      "planned_dependency_level": 5,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 5,
+      "computed_dependency_level": 5,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "Let $U$ and $V$ be local gates embedded on two disjoint ordered wire sets in $\\mathcal Q_n$. Their global embeddings commute.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "lem-qc-local-gate-wire-embedding",
+      "page": "circuit-syntax-denotational-semantics-and-measurement",
+      "batch": "9",
+      "planned_dependency_level": 4,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 4,
+      "computed_dependency_level": 4,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-46.dependency-closure.json which records actual body inspection.",
+      "observed_excerpt": "Let $n\\ge r\\ge1$, let $w=(w_0,\\ldots,w_{r-1})$ be an ordered tuple of distinct wires in $[n]$, and let $U:\\mathcal Q_r\\to\\mathcal Q_r$ be unitary. There is a unique unitary $\\widetilde U_w:\\mathcal Q_n\\to\\mathcal Q_n$ that applies $U$ to the ordered wires $w_0,\\ldots,w_{r-1}$ and acts as the identity on the other wires.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-clean-and-dirty-ancillas",
+      "page": "reversible-computation-ancillas-and-coherent-oracles",
+      "batch": "10",
+      "planned_dependency_level": 9,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 9,
+      "computed_dependency_level": 9,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Reused current run evidence quantum-computing-algorithms-60-2026-10-15-batch-14.cross-batch-dependencies.json which records actual body inspection.",
+      "observed_excerpt": "Let $D$ be a finite ordered quantum register and let $A$ be an ordered register of $k\\ge0$ ancilla qubits, with Hilbert spaces $\\mathcal H_D$ and $\\mathcal H_A$. Write $|0_A\\rangle=|0^k\\rangle$, including $|0_A\\rangle=1$ when $k=0$. Let $U$ be a unitary on $\\mathcal H_D\\otimes\\mathcal H_A$ and let $V$ be a unitary on $\\mathcal H_D$.\n\nThe register $A$ is a **clean ancilla register for $U$ and $V$** when\n$$\nU(|\\psi\\rangle_D\\otimes|0_A\\rangle)=V|\\psi\\rangle_D\\otimes|0_A\\rangle\n$$\nfor every vector $|\\psi\\rangle_D$. Thus the data operation is independent of the input vector and all clean wires return exactly to zero.\n\nThe register $A$ is a **dirty ancilla register for $U$ and $V$** when the operator identity $U=V\\otimes I_A$ holds on $\\mathcal H_D\\otimes\\mathcal H_A$. Equivalently, every product input $|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$ is mapped to $V|\\psi\\rangle_D\\otimes|\\eta\\rangle_A$, with the same $V$ for every data and ancilla vector. This requires exact restoration of an arbitrary, initially unknown ancilla state and forbids residual data–ancilla correlation.\n\nThese are exact contracts for the complete subroutine. A temporary intermediate alteration of an ancilla is permitted if the full unitary satisfies the stated identity.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qc-circuit-cost-model",
+      "page": "uniform-circuit-families-promise-problems-and-complexity",
+      "batch": "14",
+      "planned_dependency_level": 10,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 10,
+      "computed_dependency_level": 10,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, $w(C)$ its total number of wires, and $a_{\\rm clean}(C),a_{\\rm dirty}(C)$ the numbers of wires that satisfy the exact clean and dirty ancilla contracts of [[def-qc-clean-and-dirty-ancillas]]. Auxiliary wires that satisfy neither contract are still counted in $w(C)$ and are not silently included in either ancilla count ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qa-22-block-encoding",
+      "page": "block-encodings",
+      "batch": "46",
+      "planned_dependency_level": 7,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 7,
+      "computed_dependency_level": 7,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Write $T^{\\dagger}$ for the adjoint $T^*$ characterized by [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]. Fix integers $m,n\\ge1$, $a\\ge0$, and $d\\ge\\max(m,n)$. On each coordinate space $\\mathbb C^r$ use $\\langle x,y\\rangle_{\\rm root}:=\\sum_{q=1}^r x_q\\overline{y_q}$, linear in the first argument. Put the ancilla register before the system register in every tensor product, and let $e_0=(1,0,\\ldots,0)$ be the first standard basis vector in $\\mathbb C^{2^a}$. For $A:\\mathbb C^n\\to\\mathbb C^m$, choose as part of the data padding maps $E_{\\rm in}:\\mathbb C^n\\to\\mathbb C^d$ and $E_{\\rm out}:\\mathbb C^m\\to\\mathbb C^d$ satisfying $E_{\\rm in}^{\\dagger}E_{\\rm in}=I_n$ and $E_{\\rm out}^{\\dagger}E_{\\rm out}=I_m$. The default padding sends a coordinate vector to the same coordinates followed by zeros. Set $\\widehat A:=E_{\\rm out}AE_{\\rm in}^{\\dagger}:\\mathbb C^d\\to\\mathbb C^d$.\n\nLet $J_a:\\mathbb C^d\\to\\mathbb C^{2^a}\\otimes\\mathbb C^d$ be $J_ax=e_0\\otimes x$, where $e_0$ is the all-zero computational basis vector, and let $\\Pi_a:=J_aJ_a^{\\dagger}$. For a unitary $U$ on $\\mathbb C^{2^a}\\otimes\\mathbb C^d$, its **projected block** is the endomorphism $B_U:=J_a^{\\dagger}UJ_a$ of $\\mathbb C^d$. It is not asserted to be unitary.\n\nFor $\\alpha>0$ and $\\varepsilon\\ge0$, the tuple $(U,a,\\alpha,\\varepsilon,d,E_{\\rm in},E_{\\rm out})$ is an **$(\\alpha,a,\\varepsilon)$ block encoding of $A$** when $\\alpha\\ge\\|A\\|_{\\rm op}$ and $\\|B_U-\\widehat A/\\alpha\\|_{\\rm op}\\le\\varepsilon$. The exact case is $\\varepsilon=0$. For square $A$, take $m=n=d$ and both embeddings equal to the identity. For rectangular $A$, the dimensions and embeddings remain part of the encoding data.\n\nThe equivalent projector notation identifies $B_U$ with the restriction of $\\Pi_aU\\Pi_a$ to $\\operatorname{ran}(\\Pi_a)$, transported to $\\mathbb C^d$ by $J_a$; it does not regard $\\Pi_aU\\Pi_a$ as a unitary.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qa-23-qsp-admissible-polynomial-pair",
+      "page": "quantum-signal-processing",
+      "batch": "47",
+      "planned_dependency_level": 8,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 8,
+      "computed_dependency_level": 8,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "For an integer $d\\ge0$, a pair $P,Q\\in\\mathbb C[x]$ is **QSP-admissible of degree bound $d$** when:\n\n- $P=0$ or $\\deg P\\le d$, and every exponent with nonzero coefficient in $P$ is congruent to $d$ modulo $2$;\n- $Q=0$ or $\\deg Q\\le d-1$, and every exponent with nonzero coefficient in $Q$ is congruent to $d-1$ modulo $2$;\n- the formal polynomial identity $P P^*+(1-x^2)Q Q^*=1$ holds, where $P^*(x)=\\sum_k\\overline{p_k}x^k$ if $P(x)=\\sum_kp_kx^k$.\n\nThe zero polynomial satisfies every degree bound and both parity conditions. On real $x$, coefficient conjugation gives $P^*(x)=\\overline{P(x)}$. The bound $d$ is nominal; a polynomial may have smaller degree of the same parity.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "def-qa-23-qsp-signal-sequence",
+      "page": "quantum-signal-processing",
+      "batch": "47",
+      "planned_dependency_level": 7,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 7,
+      "computed_dependency_level": 7,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Let $x\\in[-1,1]$, put $s(x)=\\sqrt{1-x^2}$ using the nonnegative real square root, and define the Hermitian-reflection signal matrix\n$$W_R(x)=\\begin{pmatrix}x&s(x)\\\\s(x)&-x\\end{pmatrix}.$$\nFor each real $\\phi$, define $Z(\\phi)=\\operatorname{diag}(e^{i\\phi},e^{-i\\phi})$. For an integer $d\\ge0$ and real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$, the length-$d$ QSP sequence is the ordered matrix product\n$$U_\\Phi(x)=Z(\\phi_0)\\prod_{j=1}^{d}\\bigl(W_R(x)Z(\\phi_j)\\bigr),$$\nwhere the product is written left to right in increasing $j$ and matrix multiplication acts right to left. For $d=0$ this is $Z(\\phi_0)$. This definition fixes the sign of the off-diagonal signal entry, both endpoint phases, and the product order.\n\nThe phases are in matrix order: when the factors are applied as chronological circuit layers, the rightmost factor acts first, in accordance with [[def-qc-circuit-denotational-semantics]]. In the ordered signal basis, if both coordinates are nonzero, applying $Z(\\phi)$ multiplies the ratio of the second coordinate to the first by $e^{-2i\\phi}$; if either coordinate is zero, that relative phase is undefined, while the displayed matrix action remains defined. This is the relative phase convention fixed by [[def-qc-relative-phase]].",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "lem-qa-23-hermitian-signal-convention-conversion",
+      "page": "quantum-signal-processing",
+      "batch": "47",
+      "planned_dependency_level": 8,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 8,
+      "computed_dependency_level": 8,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Put $s=\\sqrt{1-x^2}$, $W_R=\\begin{pmatrix}x&s\\\\s&-x\\end{pmatrix}$, $W_S=\\begin{pmatrix}x&is\\\\is&x\\end{pmatrix}$, and $C=Z(\\pi/4)$. Then\n$$CW_RC=iW_S^\\dagger,\\qquad W_S^\\dagger=Z(\\pi/2)W_SZ(-\\pi/2).$$\nFor $d\\ge1$, define $U_S(\\Psi)=Z(\\psi_0)\\prod_{j=1}^d(W_SZ(\\psi_j))$. If $\\Psi$ is the SU(2)-convention phase list with $\\psi_0=\\phi_0+\\pi/4$, $\\psi_j=\\phi_j-\\pi/2$ for $1\\le j<d$, and $\\psi_d=\\phi_d-3\\pi/4$, then\n$$U_R(\\Phi)=i^dU_S(\\Psi).$$\nThe affine phase-list map is invertible. The scalar $i^d$ is part of the identity: in a control-first block $\\operatorname{diag}(I,U)$ it acts on the active control branch and cannot be discarded as a global phase.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "lem-qa-23-phase-sequence-unitarity",
+      "page": "quantum-signal-processing",
+      "batch": "47",
+      "planned_dependency_level": 8,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 8,
+      "computed_dependency_level": 8,
+      "dependency_kinds": [
+        "deps",
+        "justified_by"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "For every $x\\in[-1,1]$ and phase list $\\Phi$ of length $d+1$, $U_\\Phi(x)$ is unitary with determinant $(-1)^d$. There are polynomials $P,Q\\in\\mathbb C[x]$ such that\n$$U_\\Phi(x)=\\begin{pmatrix}P(x)&s(x)Q(x)\\\\(-1)^{d+1}s(x)Q^*(x)&(-1)^dP^*(x)\\end{pmatrix},$$\nwhere $P=0$ or $\\deg P\\le d$ with parity $d$, $Q=0$ or $\\deg Q\\le d-1$ with parity $d-1$, and $PP^*+(1-x^2)QQ^*=1$ as a formal polynomial identity.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "lem-qa-23-positive-polynomial-complement-factorization",
+      "page": "quantum-signal-processing",
+      "batch": "47",
+      "planned_dependency_level": 9,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 9,
+      "computed_dependency_level": 9,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Supplier statement and proof were read directly in this batch.",
+      "observed_excerpt": "Let $d\\ge0$ and let $A\\in\\mathbb R[x]$ be even, of degree at most $2d$, and nonnegative on $[-1,1]$. Then there are $B,C\\in\\mathbb R[x]$ such that\n$$A(x)=B(x)^2+(1-x^2)C(x)^2,$$\nwhere $\\deg B\\le d$, $\\deg C\\le d-1$, $B$ has parity $d$, and $C$ has parity $d-1$. The zero polynomial is both even and odd and satisfies every degree bound.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qa-23-qsp-phase-factorization",
+      "page": "quantum-signal-processing",
+      "batch": "47",
+      "planned_dependency_level": 9,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 9,
+      "computed_dependency_level": 9,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "For every integer $d\\ge0$, a pair $P,Q\\in\\mathbb C[x]$ is QSP-admissible of degree bound $d$ if and only if there is a real phase list $\\Phi=(\\phi_0,\\ldots,\\phi_d)$ such that\n$$U_\\Phi(x)=\\begin{pmatrix}P(x)&s(x)Q(x)\\\\(-1)^{d+1}s(x)Q^*(x)&(-1)^dP^*(x)\\end{pmatrix}\\quad (x\\in[-1,1]).$$\nThe converse is constructive: a leading-coefficient phase peel reduces the degree at each nonconstant stage. The polynomial identity, determinant signs, product order, and phase convention are exactly those in [[def-qa-23-qsp-admissible-polynomial-pair]] and [[def-qa-23-qsp-signal-sequence]].",
+      "statement_provenance": null,
+      "proof_provenance": null
+    },
+    {
+      "id": "thm-qa-23-real-polynomial-completion",
+      "page": "quantum-signal-processing",
+      "batch": "47",
+      "planned_dependency_level": 10,
+      "current_status": "unknown",
+      "current_dependency_level": null,
+      "current_manifest_dependency_level": 10,
+      "computed_dependency_level": 10,
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ],
+      "actual_body_inspected": true,
+      "inspection_basis": "Current assigned consumer facts and proof contract inspect this supplier.",
+      "observed_excerpt": "Let $d\\ge0$ and let $p\\in\\mathbb R[x]$ have degree at most $d$, parity $d\\bmod2$, and $|p(x)|\\le1$ for every $x\\in[-1,1]$. Then there is a QSP-admissible pair $P,Q$ of degree bound $d$ such that $\\operatorname{Re}P(x)=p(x)$ on $[-1,1]$. In fact, the completion is exact, so for every $\\delta>0$ it also satisfies $|\\operatorname{Re}P(x)-p(x)|\\le\\delta$.",
+      "statement_provenance": null,
+      "proof_provenance": null
+    }
+  ],
+  "out_of_run_foundation_supplier_count": 67,
+  "out_of_run_foundation_suppliers": [
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-complex-exponential-cartesian-form-modulus-and-eulers-identity.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "cor-finite-dimensional-normed-spaces-are-banach",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-finite-dimensional-normed-spaces-are-banach.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-finite-iterated-tensor-products-represent-multilinear-maps.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-linear-maps-with-finite-dimensional-domain-are-bounded.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-operator-norm-submultiplicative-and-t-star-t-identity.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ]
+    },
+    {
+      "id": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "cor-tensor-products-of-finite-free-modules-and-dimension",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-tensor-products-of-finite-free-modules-and-dimension.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "current_status": "unknown",
+      "carrier_path": "items/cor-triangle-inequality-for-inner-product-norm.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound"
+      ]
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "current_status": "unknown",
+      "carrier_path": "items/def-adjoint-of-a-linear-map-between-inner-product-spaces.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "current_status": "unknown",
+      "carrier_path": "items/def-complex-conjugate-real-imaginary-part-and-modulus.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-coordinate-column-and-matrix-of-a-linear-map",
+      "current_status": "unknown",
+      "carrier_path": "items/def-coordinate-column-and-matrix-of-a-linear-map.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-deterministic-one-tape-turing-machine",
+      "current_status": "unknown",
+      "carrier_path": "items/def-deterministic-one-tape-turing-machine.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-dimension",
+      "current_status": "unknown",
+      "carrier_path": "items/def-dimension.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-effective-binary-encoding-and-decoder",
+      "current_status": "unknown",
+      "carrier_path": "items/def-effective-binary-encoding-and-decoder.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-function-space",
+      "current_status": "unknown",
+      "carrier_path": "items/def-function-space.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-inner-product-norm",
+      "current_status": "unknown",
+      "carrier_path": "items/def-inner-product-norm.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-kernel-and-image-of-a-linear-map",
+      "current_status": "unknown",
+      "carrier_path": "items/def-kernel-and-image-of-a-linear-map.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "current_status": "unknown",
+      "carrier_path": "items/def-linear-isometry-and-orthogonal-or-unitary-operator.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-linear-map",
+      "current_status": "unknown",
+      "carrier_path": "items/def-linear-map.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-linear-subspace",
+      "current_status": "unknown",
+      "carrier_path": "items/def-linear-subspace.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "current_status": "unknown",
+      "carrier_path": "items/def-matrix-product-and-identity-matrix.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-natural-numbers",
+      "current_status": "unknown",
+      "carrier_path": "items/def-natural-numbers.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "current_status": "unknown",
+      "carrier_path": "items/def-non-negative-and-positive-operator.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "current_status": "unknown",
+      "carrier_path": "items/def-operator-norm-on-a-finite-dimensional-inner-product-space.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-orthogonal-projection",
+      "current_status": "unknown",
+      "carrier_path": "items/def-orthogonal-projection.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-partial-function-computed-by-a-machine",
+      "current_status": "unknown",
+      "carrier_path": "items/def-partial-function-computed-by-a-machine.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-polynomial-degree-leading-coefficient-and-monic",
+      "current_status": "unknown",
+      "carrier_path": "items/def-polynomial-degree-leading-coefficient-and-monic.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-polynomial-ring-over-a-commutative-ring",
+      "current_status": "unknown",
+      "carrier_path": "items/def-polynomial-ring-over-a-commutative-ring.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-rank-and-nullity",
+      "current_status": "unknown",
+      "carrier_path": "items/def-rank-and-nullity.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "current_status": "unknown",
+      "carrier_path": "items/def-real-and-complex-inner-product-space.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-real-numbers",
+      "current_status": "unknown",
+      "carrier_path": "items/def-real-numbers.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "current_status": "unknown",
+      "carrier_path": "items/def-self-adjoint-and-normal-endomorphism.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-sine-and-cosine-by-power-series",
+      "current_status": "unknown",
+      "carrier_path": "items/def-sine-and-cosine-by-power-series.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-tensor-product-of-modules-by-generators-and-relations",
+      "current_status": "unknown",
+      "carrier_path": "items/def-tensor-product-of-modules-by-generators-and-relations.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "current_status": "unknown",
+      "carrier_path": "items/def-trace-of-a-square-matrix.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "current_status": "unknown",
+      "carrier_path": "items/def-trace-of-an-endomorphism.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-transpose-of-a-matrix",
+      "current_status": "unknown",
+      "carrier_path": "items/def-transpose-of-a-matrix.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "def-worst-case-time-and-space-complexity",
+      "current_status": "unknown",
+      "carrier_path": "items/def-worst-case-time-and-space-complexity.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "lem-exponential-series-of-a-bounded-operator",
+      "current_status": "unknown",
+      "carrier_path": "items/lem-exponential-series-of-a-bounded-operator.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs",
+      "current_status": "unknown",
+      "carrier_path": "items/lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+      "current_status": "unknown",
+      "carrier_path": "items/lem-pythagorean-theorem-and-finite-orthogonal-sums.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "lem-standard-basis-of-f-n",
+      "current_status": "unknown",
+      "carrier_path": "items/lem-standard-basis-of-f-n.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "prop-adjoint-algebra",
+      "current_status": "unknown",
+      "carrier_path": "items/prop-adjoint-algebra.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "current_status": "unknown",
+      "carrier_path": "items/prop-standard-coordinate-inner-products.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "prop-trace-is-linear",
+      "current_status": "unknown",
+      "carrier_path": "items/prop-trace-is-linear.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-adjoint-exists-and-is-unique-in-finite-dimension.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-bessel-inequality-and-finite-parseval-identity",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-bessel-inequality-and-finite-parseval-identity.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-commutative-ring-module-structure-on-a-tensor-product",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-commutative-ring-module-structure-on-a-tensor-product.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-complex-exponential-addition-and-real-extension.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-complex-numbers-form-a-field.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-eulers-formula",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-eulers-formula.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-finite-dimensional-isometry-characterisations",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-finite-dimensional-isometry-characterisations.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-fundamental-theorem-of-algebra-minimum-modulus-proof.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-induction-principle",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-induction-principle.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-matrix-of-the-adjoint-is-the-conjugate-transpose.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-of-square-roots",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-of-square-roots.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-polar-form-with-unique-principal-argument",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-polar-form-with-unique-principal-argument.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-polynomial-degree-of-a-product-over-a-domain",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-polynomial-degree-of-a-product-over-a-domain.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-polynomial-division-algorithm-over-a-field",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-polynomial-division-algorithm-over-a-field.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-reals-field",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-reals-field.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-reals-ordered-field",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-reals-ordered-field.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-self-adjoint-idempotents-are-exactly-orthogonal-projections.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-singular-value-decomposition.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-tensor-product-basis-from-bases",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-tensor-product-basis-from-bases.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    },
+    {
+      "id": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+      "current_status": "unknown",
+      "carrier_path": "items/thm-unique-coordinates-with-respect-to-an-ordered-basis.md",
+      "dependency_kinds": [
+        "deps"
+      ],
+      "affected_assigned_items": [
+        "alg-qa-24-qsvt",
+        "cex-qa-24-parity-violation",
+        "def-qa-24-pue-svd-data",
+        "def-qa-24-singular-value-transform",
+        "ex-qa-24-rank-one-pue",
+        "lem-qa-24-pue-svd-invariant-subspaces",
+        "lem-qa-24-qsvt-robustness-amplitude-bound",
+        "lem-qa-24-singular-transform-basis-independence",
+        "thm-qa-24-projector-phase-implementation",
+        "thm-qa-24-qsvt-error-and-resource-bound",
+        "thm-qa-24-qsvt-query-count",
+        "thm-qa-24-qsvt-singular-space-action",
+        "thm-qa-24-real-polynomial-extraction"
+      ]
+    }
+  ],
+  "dependency_cycle_check": {
+    "status": "no-cycle-in-assigned-deps",
+    "method": "Current run manifest dependencyLevels graph; the checker reports no cycle for assigned items. The local definition justified_by feedback is a well-definedness edge, excluded from dependency_level computation."
+  },
+  "removed_proposed_edges": [
+    {
+      "consumer": "thm-qa-24-qsvt-singular-space-action",
+      "supplier": "thm-qa-23-qsp-synthesis-correctness",
+      "reason": "Removed as a direct logical edge. The QSVT theorem takes an exact phase list and locally proves its singular-space action from the QSP sequence definition, phase-sequence identity, real completion and phase factorization. The full phase-synthesis algorithm correctness theorem is not needed for this exact-input claim."
+    },
+    {
+      "consumer": "thm-qa-24-real-polynomial-extraction",
+      "supplier": "thm-qa-23-qsp-synthesis-correctness",
+      "reason": "Removed as a direct logical edge. Exact real completion and phase factorization directly provide the required phase list; no numerical phase-synthesis algorithm is invoked."
+    },
+    {
+      "consumer": "thm-qa-24-qsvt-error-and-resource-bound",
+      "supplier": "thm-qa-23-qsp-query-cost",
+      "reason": "Removed as a direct logical edge. The assigned QA24 query-count theorem proves the PUE alternating U/U* and reflection counts directly."
+    },
+    {
+      "consumer": "thm-qa-24-qsvt-error-and-resource-bound",
+      "supplier": "thm-qa-22-block-encoding-error-and-query-cost",
+      "reason": "Removed as a direct logical edge. This error theorem takes a supplied normalized PUE block and rederives its QSVT error; it does not construct an LCU/product block encoding. The QA22 combined theorem has an independently escalated SELECT interface on its LCU branch, which is not used here."
+    },
+    {
+      "consumer": "thm-qa-24-qsvt-error-and-resource-bound",
+      "supplier": "def-qc-dirac-notation-conversion",
+      "reason": "Removed as a direct edge because the error proof uses SVD/operator-norm statements and no rank-one coordinate conversion."
+    }
+  ],
+  "schedule_reconciliation": {
+    "dispatch_input_sha256": "ad7aab40001758113c6b8fb4959cc4630eefa12ff1d00d1ae158821d7f181259",
+    "recorded_sidecar_input_sha256": "3097ae8fe82fb1d0d4b327dafae1991b306dfce9741a5aa065f4536103343bc9",
+    "current_computed_input_sha256": "6ed2e4b0625ecfbfe0e92c904ad1b2b1ca5c1fe5ec695d058bc196b8f7b06900",
+    "dispatch_required_batches": [
+      "1",
+      "8",
+      "9",
+      "14",
+      "46",
+      "47"
+    ],
+    "current_computed_required_batches": [
+      "1",
+      "7",
+      "8",
+      "9",
+      "14",
+      "46",
+      "47"
+    ],
+    "batch_dependency_level": 12,
+    "owner_reconciliation_required": true,
+    "affected_supplier": "def-qc-one-qubit-gate-alphabet-and-rotations",
+    "affected_assigned_items": [
+      "thm-qa-24-projector-phase-implementation",
+      "thm-qa-24-qsvt-query-count",
+      "thm-qa-24-real-polynomial-extraction",
+      "thm-qa-24-qsvt-error-and-resource-bound"
+    ],
+    "evidence": "The exact projector-phase implementation uses H and R_z from the batch-7 one-qubit gate definition. The dispatch omits batch 7 and records hash ad7a…; the checked-in sidecar has a different hash and also records batch 7; recomputation from current manifests yields hash 29ca… with prerequisites 1,7,8,9,14,46,47. node tools/batch-dependency-levels.mjs check reports the shared sidecar stale. No shared scheduling file was changed."
+  },
+  "dispatch_scheduling_input_sha256": "ad7aab40001758113c6b8fb4959cc4630eefa12ff1d00d1ae158821d7f181259",
+  "recorded_sidecar_scheduling_input_sha256": "3097ae8fe82fb1d0d4b327dafae1991b306dfce9741a5aa065f4536103343bc9",
+  "current_computed_scheduling_input_sha256": "6ed2e4b0625ecfbfe0e92c904ad1b2b1ca5c1fe5ec695d058bc196b8f7b06900",
+  "current_computed_prerequisite_batches": [
+    "1",
+    "7",
+    "8",
+    "9",
+    "14",
+    "46",
+    "47"
+  ],
+  "batch_dependency_level": 12,
+  "current_computed_batch_level": 12,
+  "scheduling_input_sha256": "6ed2e4b0625ecfbfe0e92c904ad1b2b1ca5c1fe5ec695d058bc196b8f7b06900",
+  "uninspected_transitive_supplier_ids": []
+}

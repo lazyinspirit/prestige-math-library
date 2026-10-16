@@ -1,0 +1,63 @@
+at time t. The volume of the circuit M, is the number of points in it’s space time and it is denoted
+by V (M).
+In our model of noisy quantum circuits each qubit and each gate are damaged with probability
+1/2 > η > 0 each time step. The damage operates as follows: A unitary operation operates on the
+qubit, (or on the qubits that are output from the gate in the case of a gate damage) and on a state
+of the environment (The environment can be represented by m qubits in some state). This operation
+results in a density matrix of the n + m qubits. We reduce this density matrix to the n qubits of the
+circuit to get the new density matrix after the damage. A noise step happens between two levels, or
+two time steps of computation, and in a noise step each gate or qubit is damaged with probability
+η. The density matrix of the circuit develops by applying alternately computation steps and noise
+steps. Each “run” of the computation is subjected to a specific “fault path”, which indicates where
+and when fault occured. Each run ends up with some output. The function computed by the noisy
+quantum circuit is naturally the average over the outputs, on the probabilistic process of noise.
+
+3
+Quantum computation on encoded states
+
+In the following section we define quantum codes and quantum computation codes.
+Then we
+describe how to improve reliability of computation using quantum computation codes.
+Quantum
+computation codes are used abstractly in this section, while explicit examples of such codes are given
+in section 5.
+
+3.1
+Quantum block codes
+
+A quantum linear block linear code is a function φ from the Hilbert space of a qubit to a Hilbert
+space of m qubits: φ : C2 �−→C2m. m is called the size of the block in the code. Such a code induces
+a linear function from C2n to C2mn in the following way: a pure state in C2n, |α⟩= �
+i ci|i⟩will
+transform to |β⟩= �
+i ciφ|i1⟩φ|i2⟩...φ|in⟩. A pure state in the image of φ is called a word in the code.
+The above definition can be extended to density matrices: A mixed state of n qubits will be encoded
+by the corresponding probability over the encoding of the pure states. A mixture of words in the code
+is also said to be in the code.
+The error in the encoded state is sparse if not too many qubits in each block are damaged. Using
+this notion of sparse sets, we can define a metric on block density matrices. They will be close if the
+deviation between them is confined to a sparse set of qubits:
+
+Definition 1 Let B be the qubits in n blocks of m qubits. A set A ∈B of qubits is said to be k−sparse
+if in each block there are not more than k qubits in A. Two density matrices ρ1 and ρ2 of the qubits
+B are said to be k−deviated if there is an k−sparse set of qubits, A, such that reduced on all qubits
+except those in A they are equal: ρ1|B−A = ρ2|B−A.
+
+The deviation is a metric since it satisfies the triangal inequality, and it is zero only for equal density
+matrices. The quantum code corrects d errors if there is some recovery procedure R, that when applied
+on all the blocks in any density matrix that d-deviates from a code word w, the output is the recovered
+word w (maybe tensored product with ancilla qubits used by the correction procedure).
+
+3.2
+Quantum computation codes
+
+A computation code is a quantum code which provides a way to perform gates on the encoded
+states fault tolerantly. The procedure Pg that simulates a gate g with respect to a quantum code is a
+sequence of gates which transforms the encoded state to the encoded output of the gate: Pg(φ(i)⊗|0 >
+) = φ(g(i)) ⊗|a >, where we have used extra ancilla qubits. These qubits are not counted as the
+inputs or outputs of the procedure. A quantum procedure is said to have spread l if no qubit or gate
+effects more than l outputs of the procedure. We will need procedures with small spread for fault
+
+6
+
+

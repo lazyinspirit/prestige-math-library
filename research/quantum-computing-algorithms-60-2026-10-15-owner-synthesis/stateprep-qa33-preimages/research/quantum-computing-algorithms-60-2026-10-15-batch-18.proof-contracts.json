@@ -1,0 +1,3033 @@
+{
+  "version": 1,
+  "level": "quantum-computing-algorithms-60-2026-10-15-batch-18",
+  "scope": [
+    "thm-qc-full-column-rank-matrix-image-has-dimension",
+    "lem-qc-linear-isometry-preserves-inner-products",
+    "def-qc-classical-linear-code-over-finite-field",
+    "def-qc-dual-of-a-finite-field-linear-code",
+    "def-qc-hamming-weight-distance-and-linear-code-distance",
+    "def-qc-quantum-code-isometry-and-code-projector",
+    "thm-qc-dual-code-dimension-and-double-dual",
+    "thm-qc-hamming-distance-is-a-metric-and-code-distance",
+    "thm-qc-isometric-encoding-projector",
+    "def-qc-generator-and-parity-check-matrices",
+    "def-qc-local-operator-support-and-weight",
+    "lem-qc-classical-code-distance-disjoint-error-balls",
+    "def-qc-quantum-code-distance-and-error-detection",
+    "lem-qc-local-operator-support-is-permutation-invariant",
+    "thm-qc-generator-and-parity-check-matrix-existence",
+    "def-qc-classical-error-syndrome",
+    "lem-qc-detectability-is-linear-and-encoding-invariant",
+    "lem-qc-classical-syndrome-is-error-only",
+    "lem-qc-equal-syndrome-errors-differ-by-a-codeword",
+    "thm-qc-quantum-distance-detects-low-weight-errors",
+    "thm-qc-classical-distance-correction-and-erasure-radius",
+    "ex-qc-binary-repetition-code-syndrome-table",
+    "ex-qc-quantum-repetition-projector-and-distance-boundary",
+    "ex-qc-binary-hamming-code-syndrome-table",
+    "ex-qc-repetition-three-syndrome-table",
+    "ex-qc-short-reed-solomon-syndrome-table"
+  ],
+  "contracts": {
+    "thm-qc-full-column-rank-matrix-image-has-dimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "The sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x,y\\in F^k$ and $a,b\\in F$, the entry formula for matrix multiplication gives $G(ax+by)=aGx+bGy$, so $T_G$ is linear by [F2] and [F3]. It sends zero to zero and its image is closed under linear combinations, hence its image is a subspace by [F4]; these calculations also cover empty coordinate sets. [F2, F3, F4, given]",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $x\\in\\ker T_G$, then $\\sum_{j<k}x_j g_j=0$, where $g_j$ is column $j$ of $G$. Independence of the columns forces every $x_j=0$, so $\\ker T_G=\\{0\\}$. For $k=0$, $F^0=\\{0\\}$ and the same conclusion holds. [given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $\\dim_F F^k=k$. Applying [F5] to [step 1.1] and [step 1.2] gives $\\dim_F\\operatorname{im}T_G=k$. Since the image of $x\\mapsto Gx$ is the span of the columns, it is the asserted subspace. [F1, F5, step 1.1, step 1.2] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: For $x,y\\in F^k$ and $a,b\\in F$, the entry formula for matrix multiplication gives $G(ax+by)=aGx+bGy$, so $T_G$ is linear by [F2] and [F3]. It sends zero to zero and its image is closed under linear combinations, hence i"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: If $x\\in\\ker T_G$, then $\\sum_{j<k}x_j g_j=0$, where $g_j$ is column $j$ of $G$. Independence of the columns forces every $x_j=0$, so $\\ker T_G=\\{0\\}$. For $k=0$, $F^0=\\{0\\}$ and the same conclusion holds. [given, algebr"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: If $x\\in\\ker T_G$, then $\\sum_{j<k}x_j g_j=0$, where $g_j$ is column $j$ of $G$. Independence of the columns forces every $x_j=0$, so $\\ker T_G=\\{0\\}$. For $k=0$, $F^0=\\{0\\}$ and the same conclusion holds. [given, algebr"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: If $x\\in\\ker T_G$, then $\\sum_{j<k}x_j g_j=0$, where $g_j$ is column $j$ of $G$. Independence of the columns forces every $x_j=0$, so $\\ker T_G=\\{0\\}$. For $k=0$, $F^0=\\{0\\}$ and the same conclusion holds. [given, algebr"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "def-qc-classical-linear-code-over-finite-field": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimensi"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimensi"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimensi"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimensi"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimensi"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimensi"
+        }
+      ]
+    },
+    "def-qc-dual-of-a-finite-field-linear-code": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "def-qc-hamming-weight-distance-and-linear-code-distance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$,"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$,"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$,"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "def-qc-quantum-code-isometry-and-code-projector": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register inter"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ],
+      "well_definedness": {
+        "proved_by": "thm-qc-isometric-encoding-projector",
+        "evidence": "The listed justified_by supplier statement is the precise result used for this definition’s well-definedness; actual supplier excerpts are recorded here without claiming independent review.",
+        "supplier_excerpts": [
+          {
+            "source": "thm-qc-isometric-encoding-projector",
+            "source_section": "Statement",
+            "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$."
+          }
+        ]
+      }
+    },
+    "thm-qc-dual-code-dimension-and-double-dual": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-dual-of-a-finite-field-linear-code",
+          "source_section": "Definition",
+          "quote": "For $x,y\\in F^n$, define the standard **bilinear dot product** $x\\cdot y:=\\sum_{j<n}x_jy_j$. For any linear subspace $C\\le F^n$ ([[def-linear-subspace]])—in particular, the codeword subspace of a classical linear code as in [[def-qc-classical-linear-code-over-finite-field]]—its **dual code** is\n\n$$C^\\perp:=\\{y\\in F^n: x\\cdot y=0\\text{ for every }x\\in C\\}.$$\n\nThis is a bilinear pairing over $F$; it is not a positive-definite or Hermitian inner product. The proof that $C^\\perp$ is a linear subspace, has dimension $n-k$, and satisfies $(C^\\perp)^\\perp=C$ is [[thm-qc-dual-code-dimension-and-double-dual]].\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(F)$. Its **row space** $\\operatorname{Row}(A)\\subseteq F^n$ is the span of its rows, its **column space** $\\operatorname{Col}(A)\\subseteq F^m$ is the span of its columns, and its **nullspace** is\n$$N(A):=\\{x\\in F^n:Ax=0\\}.$$\n\nThe **row rank** and **column rank** are\n$$\\operatorname{rrank}(A):=\\dim_F\\operatorname{Row}(A),\\qquad \\operatorname{crank}(A):=\\dim_F\\operatorname{Col}(A).$$\nThese dimensions are defined because each space is spanned by a finite list.\nStarting with the empty list, inspect the spanning vectors in order and retain a\nvector exactly when it is not in the span of those already retained. Induction\nshows that the retained list is independent and has the same span as the\noriginal finite list, so it is a finite basis. The **rank** of $A$ is its row\nrank; [[thm-row-rank-equals-column-rank]] proves that it also equals the column\nrank.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-row-rank-equals-column-rank",
+          "source_section": "Statement",
+          "quote": "For every finite matrix over a field,\n$$\\operatorname{rrank}(A)=\\operatorname{crank}(A).$$\nBoth dimensions equal the number of pivots in any echelon form of $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by\n\n$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$\n\nThen:\n\n1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.\n\nEvery index runs from $0$, so the coordinates of an element of $F^{n}$ are\n$x_0, \\dots, x_{n-1}$ and no statement above is restricted to $n \\ge 1$.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\dim_F D=r$, [F5] supplies a basis $d_0,\\ldots,d_{r-1}$. Form the $r\\times n$ matrix $A$ whose $i$th row is $d_i^T$. Its row space has dimension $r$ by [F1]. The map $T_A:F^n\\to F^r$, $y\\mapsto Ay$, is linear by [F3] and [F4]; the product formula writes $Ay$ as the linear combination of the columns of $A$ with coefficients $y_j$, so its image is the column space. Hence [F2] gives $\\dim\\operatorname{im}T_A=r$. This also works for $r=0$, with an empty row list. [L1, F1, F2, F3, F4, F5, F9]",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "F1",
+            "F3",
+            "F4",
+            "F2",
+            "L1",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A vector $y$ belongs to $\\ker T_A$ exactly when $d_i\\cdot y=0$ for every basis vector $d_i$, which by bilinearity is equivalent to $d\\cdot y=0$ for every $d\\in D$. Thus $\\ker T_A=D^\\perp$. Since $T_A$ is linear, this kernel contains zero and is closed under linear combinations, so it is a subspace. By [F6] and [F7], $\\dim D^\\perp=n-r$. [L1, F3, F4, F6, F7, F9, step 1.1]",
+          "step": "1.2",
+          "inputs": [
+            "F6",
+            "F7",
+            "L1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying steps 1.1–1.2 with $D^\\perp$ in place of $D$ gives $\\dim(D^\\perp)^\\perp=n-(n-r)=r$. Symmetry of the dot product gives $D\\subseteq(D^\\perp)^\\perp$. Apply [F8] to this inclusion inside the $r$-dimensional space $(D^\\perp)^\\perp$; equal dimensions force equality. This also covers $r=0$ and $r=n$. [L1, F5, F6, F7, F8, step 1.1, step 1.2] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F8",
+            "L1",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: Since $\\dim_F D=r$, [F5] supplies a basis $d_0,\\ldots,d_{r-1}$. Form the $r\\times n$ matrix $A$ whose $i$th row is $d_i^T$. Its row space has dimension $r$ by [F1]. The map $T_A:F^n\\to F^r$, $y\\mapsto Ay$, is linear by ["
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: the theorem includes D={0} (r=0), and the proof uses the empty row basis and the dimension argument to conclude D^perp=F^n and (D^perp)^perp=D."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: the theorem explicitly includes D={0} and D=F^n (r=0 and r=n); the empty matrix case is handled in step 1.1, and the dimension and inclusion arguments cover both endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: A vector $y$ belongs to $\\ker T_A$ exactly when $d_i\\cdot y=0$ for every basis vector $d_i$, which by bilinearity is equivalent to $d\\cdot y=0$ for every $d\\in D$. Thus $\\ker T_A=D^\\perp$. Since $T_A$ is linear, this ker"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: A vector $y$ belongs to $\\ker T_A$ exactly when $d_i\\cdot y=0$ for every basis vector $d_i$, which by bilinearity is equivalent to $d\\cdot y=0$ for every $d\\in D$. Thus $\\ker T_A=D^\\perp$. Since $T_A$ is linear, this ker"
+        }
+      ]
+    },
+    "thm-qc-hamming-distance-is-a-metric-and-code-distance": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-classical-linear-code-over-finite-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimension $n$, $0\\le k\\le n$ ([[lem-standard-basis-of-f-n]], [[thm-dimension-of-a-linear-subspace]]). A **classical linear code over $F$** with a specified encoding is the data $(F,n,C,\\operatorname{Enc})$, where $\\operatorname{Enc}:F^k\\to C$ is a linear isomorphism. Such an isomorphism exists because $\\dim_F F^k=k$ and finite-dimensional vector spaces of equal dimension are isomorphic ([[cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension]]). The field is part of the data: notation $F_q$ does not identify the field with $\\mathbb Z/q\\mathbb Z$; that quotient is a field only when $q$ is prime.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "source_section": "Definition",
+          "quote": "For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$, define its **minimum distance** by $d(C):=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)$. This minimum exists because its nonempty set of values lies in $\\{1,\\ldots,n\\}$ and the natural numbers are well ordered ([[thm-well-ordering-principle]]). For the zero code $C=\\{0\\}$, set $d(C):=n+1$ by convention; this sentinel exceeds every possible Hamming weight and makes the usual radius statements vacuously valid for distinct codewords.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Weight is nonnegative and vanishes exactly on the zero vector. Also $\\operatorname{wt}(-z)=\\operatorname{wt}(z)$ because $z_j=0$ exactly when $-z_j=0$. Hence $d_H(x,y)\\ge0$, $d_H(x,y)=0$ exactly when $x=y$, and $d_H(x,y)=d_H(y,x)$. [L2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $(x-z)_j\\ne0$, then at least one of $(x-y)_j$ or $(y-z)_j$ is nonzero, since their sum is $(x-z)_j$. Therefore the support of $x-z$ is contained in the union of the supports of $x-y$ and $y-z$, so $d_H(x,z)\\le d_H(x,y)+d_H(y,z)$. [L2, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $C\\ne\\{0\\}$ and $x,y\\in C$ are distinct, then [L1] gives $x-y\\in C\\setminus\\{0\\}$, so $d_H(x,y)\\ge d(C)$. Conversely every $c\\in C\\setminus\\{0\\}$ occurs as the difference of the pair $(c,0)$, and $d_H(c,0)=\\operatorname{wt}(c)$. Thus the two nonempty sets of distances have the same minimum. When $C=\\{0\\}$ no distinct pair exists, and [L2] supplies the separate convention. [L1, L2] ∎",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–1.2: n=0 is included in n∈N; F^0 has only the empty vector, so the weight and metric conditions reduce to zero distance on the singleton."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: For every finite field $F$ and $n\\in\\mathbb N$, $d_H(x,y)=\\operatorname{wt}(x-y)$ is a metric on $F^n$. If $n\\ge1$ and $C\\le F^n$ is the codeword subspace of a classical linear code, then for nonzero $C$, $\\min_{x\\ne y\\in C}d_H(x,y)=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)=d(C)$. For $C=\\{0\\}$ there are no distinct codewords, and the distance parameter is the stated convention $n+1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: the proof applies for n=1; the metric argument is coordinatewise, and the code-distance argument handles both the zero code and every nonzero subspace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: For every finite field $F$ and $n\\in\\mathbb N$, $d_H(x,y)=\\operatorname{wt}(x-y)$ is a metric on $F^n$. If $n\\ge1$ and $C\\le F^n$ is the codeword subspace of a classical linear code, then for nonzero $C$, $\\min_{x\\ne y\\in C}d_H(x,y)=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)=d(C)$. For $C=\\{0\\}$ there are no distinct codewords, and the distance parameter is the stated convention $n+1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: Weight is nonnegative and vanishes exactly on the zero vector. Also $\\operatorname{wt}(-z)=\\operatorname{wt}(z)$ because $z_j=0$ exactly when $-z_j=0$. Hence $d_H(x,y)\\ge0$, $d_H(x,y)=0$ exactly when $x=y$, and $d_H(x,y)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: Weight is nonnegative and vanishes exactly on the zero vector. Also $\\operatorname{wt}(-z)=\\operatorname{wt}(z)$ because $z_j=0$ exactly when $-z_j=0$. Hence $d_H(x,y)\\ge0$, $d_H(x,y)=0$ exactly when $x=y$, and $d_H(x,y)"
+        }
+      ]
+    },
+    "thm-qc-isometric-encoding-projector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-linear-isometry-preserves-inner-products",
+          "source_section": "Statement",
+          "quote": "Let $V:H\\to K$ be a linear isometry between finite-dimensional complex inner-product spaces whose pairings are linear in the first argument. Then $\\langle Vx,Vy\\rangle_K=\\langle x,y\\rangle_H$ for all $x,y\\in H$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "source_section": "Statement",
+          "quote": "In a real or complex inner product space:",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "An endomorphism $P$ of a finite-dimensional inner product space is the orthogonal projection onto some subspace if and only if",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Norm preservation and [F2] give $\\langle Vx,Vy\\rangle_P=\\langle x,y\\rangle_L$ for all $x,y$, since each of the four norms in the polarization formula is preserved. [F1, F2, given]",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The adjoint exists by [F4]. By [F3] and step 1.1, $\\langle x,(V^*V-I)y\\rangle_L=0$ for every $x$. Conjugate symmetry from [F1] and nondegeneracy [F5] imply $(V^*V-I)y=0$ for every $y$. Thus $V^*V=I$. [F1, F3, F4, F5, step 1.1]",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F3",
+            "F1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With $P=VV^*$, [F6] gives $P^*=VV^*=P$, and step 1.2 gives $P^2=V(V^*V)V^*=VV^*=P$. [F6, step 1.2, given]",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For every $z\\in\\mathcal H_P$, $Pz=V(V^*z)$ belongs to $\\operatorname{im}V$. Conversely, $P(Vx)=V(V^*V)x=Vx$, so every vector in $\\operatorname{im}V$ lies in $\\operatorname{im}P$. Therefore $\\operatorname{im}P=\\operatorname{im}V$, and [F7] identifies $P$ as the orthogonal projection onto the code subspace. [F7, step 1.2, step 2.1, given]",
+          "step": "2.2",
+          "inputs": [
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $Vx=0$, norm preservation gives $\\|x\\|=0$, hence $x=0$ by positive definiteness [F1]; so $V$ is injective. [F8] yields $\\dim\\operatorname{im}V=K$, and [F9] gives $K\\le N$. If $K=1$, the image is a line. If $K=N$, [F9] gives $\\operatorname{im}V=\\mathcal H_P$, so step 2.2 gives $P=I$. Since the code requires $K\\ge1$, all stated boundary cases are covered. [F1, F8, F9, step 2.2, given] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "F9",
+            "step 2.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: If $Vx=0$, norm preservation gives $\\|x\\|=0$, hence $x=0$ by positive definiteness [F1]; so $V$ is injective. [F8] yields $\\dim\\operatorname{im}V=K$, and [F9] gives $K\\le N$. If $K=1$, the image is a line. If $K=N$, [F9]"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: If $Vx=0$, norm preservation gives $\\|x\\|=0$, hence $x=0$ by positive definiteness [F1]; so $V$ is injective. [F8] yields $\\dim\\operatorname{im}V=K$, and [F9] gives $K\\le N$. If $K=1$, the image is a line. If $K=N$, [F9]"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: If $Vx=0$, norm preservation gives $\\|x\\|=0$, hence $x=0$ by positive definiteness [F1]; so $V$ is injective. [F8] yields $\\dim\\operatorname{im}V=K$, and [F9] gives $K\\le N$. If $K=1$, the image is a line. If $K=N$, [F9]"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: If $Vx=0$, norm preservation gives $\\|x\\|=0$, hence $x=0$ by positive definiteness [F1]; so $V$ is injective. [F8] yields $\\dim\\operatorname{im}V=K$, and [F9] gives $K\\le N$. If $K=1$, the image is a line. If $K=N$, [F9]"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and id"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and id"
+        }
+      ]
+    },
+    "def-qc-generator-and-parity-check-matrices": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Let $C\\le F^n$ have dimension $k$. A **generator matrix** for $C$ is a matrix $G\\in M_{n\\times k}(F)$ with linearly independent columns and column space $C$. A **parity-check matrix** for $C$ is a matrix $H\\in M_{(n-k)\\t"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "def-qc-local-operator-support-and-weight": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Fix an ordered physical register $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ with finite-dimensional factors. For $S\\subseteq[n]:=\\{0,\\ldots,n-1\\}$, form $\\mathcal H_S$ and $\\mathcal H_{S^c}$ in the inherited order, and "
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ],
+      "well_definedness": {
+        "proved_by": "lem-qc-local-operator-support-is-permutation-invariant",
+        "evidence": "The listed justified_by supplier statement is the precise result used for this definition’s well-definedness; actual supplier excerpts are recorded here without claiming independent review.",
+        "supplier_excerpts": [
+          {
+            "source": "lem-qc-local-operator-support-is-permutation-invariant",
+            "source_section": "Statement",
+            "quote": "Let the source register have ordered factors $\\mathcal H_0,\\ldots,\\mathcal H_{n-1}$, and let the target register have factors in the QC02 order $\\mathcal H_{\\sigma(0)},\\ldots,\\mathcal H_{\\sigma(n-1)}$. Let $\\Pi_\\sigma$ be the corresponding wire bijection and set $E':=\\Pi_\\sigma E\\Pi_\\sigma^{-1}$. An original factor labeled $i$ is in target position $\\sigma^{-1}(i)$. Thus $E$ is supported in $S$ exactly when $E'$ is supported in $\\sigma^{-1}(S)$; consequently $\\operatorname{wt}(E')=\\operatorname{wt}(E)$."
+          }
+        ]
+      }
+    },
+    "lem-qc-classical-code-distance-disjoint-error-balls": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "source_section": "Definition",
+          "quote": "For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$, define its **minimum distance** by $d(C):=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)$. This minimum exists because its nonempty set of values lies in $\\{1,\\ldots,n\\}$ and the natural numbers are well ordered ([[thm-well-ordering-principle]]). For the zero code $C=\\{0\\}$, set $d(C):=n+1$ by convention; this sentinel exceeds every possible Hamming weight and makes the usual radius statements vacuously valid for distinct codewords.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-qc-hamming-distance-is-a-metric-and-code-distance",
+          "source_section": "Statement",
+          "quote": "For every finite field $F$ and $n\\in\\mathbb N$, $d_H(x,y)=\\operatorname{wt}(x-y)$ is a metric on $F^n$. If $n\\ge1$ and $C\\le F^n$ is the codeword subspace of a classical linear code, then for nonzero $C$, $\\min_{x\\ne y\\in C}d_H(x,y)=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)=d(C)$. For $C=\\{0\\}$ there are no distinct codewords, and the distance parameter is the stated convention $n+1$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The defining floor gives $2t\\le d-1<d$. [L1, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $r$ belonged to both balls, [L2] and the triangle inequality would give $d_H(c,c')\\le d_H(c,r)+d_H(r,c')\\le2t<d$, contradicting the minimum-distance property [L2]. Thus the balls are disjoint. If $C=\\{0\\}$ there are no distinct codewords, so the conclusion is vacuous. [L1, L2, step 1.1] ∎",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The defining floor gives $2t\\le d-1<d$. [L1, given, algebra]"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "def-qc-quantum-code-distance-and-error-detection": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ],
+      "well_definedness": {
+        "proved_by": "lem-qc-detectability-is-linear-and-encoding-invariant",
+        "evidence": "The listed justified_by supplier statement is the precise result used for this definition’s well-definedness; actual supplier excerpts are recorded here without claiming independent review.",
+        "supplier_excerpts": [
+          {
+            "source": "lem-qc-detectability-is-linear-and-encoding-invariant",
+            "source_section": "Statement",
+            "quote": "Let $P$ be the code projector of an isometric encoding into an $n$-factor register and let $K$ be the logical dimension. Then:"
+          }
+        ]
+      }
+    },
+    "lem-qc-local-operator-support-is-permutation-invariant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-local-operator-support-and-weight",
+          "source_section": "Definition",
+          "quote": "Its **weight** is $\\operatorname{wt}(E):=\\min\\{|S|:E\\text{ is supported in }S\\}$. The minimum exists because the full set $[n]$ supports every operator and $[n]$ has finitely many subsets. Let $\\mathcal H_\\varnothing=\\mathbb C$; scalar identity operators have weight zero. The weight is invariant under reordering the tensor factors by their declared wire permutation ([[lem-qc-local-operator-support-is-permutation-invariant]]).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "For a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $S_\\sigma:=\\sigma^{-1}(S)$, the target positions occupied by source factors from $S$. Let $\\alpha_S$ reorder those source factors into their target order, and let $\\alpha_{S^c}$ reorder the complementary factors likewise; these are wire bijections by [F2]. On each elementary tensor, both $\\Pi_{S_\\sigma}^{\\rm target}\\Pi_\\sigma$ and $(\\alpha_S\\otimes\\alpha_{S^c})\\Pi_S^{\\rm source}$ place each factor vector in the same target order. Elementary tensors span by [F4], and the maps agree on them by [F1], so $\\Pi_{S_\\sigma}^{\\rm target}\\Pi_\\sigma=(\\alpha_S\\otimes\\alpha_{S^c})\\Pi_S^{\\rm source}$. [F1, F2, F3, F4, given]",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "F4",
+            "given",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $E$ is supported in $S$, [L1] gives $A_S$ with $\\Pi_S^{\\rm source}E(\\Pi_S^{\\rm source})^{-1}=A_S\\otimes I$. Conjugating by step 1.1 gives $\\Pi_{S_\\sigma}^{\\rm target}E'(\\Pi_{S_\\sigma}^{\\rm target})^{-1}=(\\alpha_S\\otimes\\alpha_{S^c})(A_S\\otimes I)(\\alpha_S\\otimes\\alpha_{S^c})^{-1}$. On $y\\otimes z$ the right side is $\\alpha_S A_S\\alpha_S^{-1}y\\otimes z$, hence equals $(\\alpha_S A_S\\alpha_S^{-1})\\otimes I$ by [F3]; thus $E'$ is supported in $S_\\sigma$. [L1, F2, F3, step 1.1]",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "F3",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the same implication to $E'$ and the inverse wire permutation. It gives the converse: if $E'$ is supported in $S_\\sigma$, then $E$ is supported in $S$. Thus $S\\mapsto\\sigma^{-1}(S)$ bijects the support sets of $E$ and $E'$, preserving cardinality; their minimum support sizes agree. [F2, L1, step 1.1, step 1.2, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Let the source register have ordered factors $\\mathcal H_0,\\ldots,\\mathcal H_{n-1}$, and let the target register have factors in the QC02 order $\\mathcal H_{\\sigma(0)},\\ldots,\\mathcal H_{\\sigma(n-1)}$. Let $\\Pi_\\sigma$ b"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: Let the source register have ordered factors $\\mathcal H_0,\\ldots,\\mathcal H_{n-1}$, and let the target register have factors in the QC02 order $\\mathcal H_{\\sigma(0)},\\ldots,\\mathcal H_{\\sigma(n-1)}$. Let $\\Pi_\\sigma$ b"
+        }
+      ]
+    },
+    "thm-qc-generator-and-parity-check-matrix-existence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-classical-linear-code-over-finite-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a finite field of order $q$, let $n\\ge1$, and let $C\\le F^n$ be a linear subspace ([[def-finite-field-and-its-order]], [[def-vector-space]], [[def-linear-subspace]]). Put $k:=\\dim_F C$; since $F^n$ has dimension $n$, $0\\le k\\le n$ ([[lem-standard-basis-of-f-n]], [[thm-dimension-of-a-linear-subspace]]). A **classical linear code over $F$** with a specified encoding is the data $(F,n,C,\\operatorname{Enc})$, where $\\operatorname{Enc}:F^k\\to C$ is a linear isomorphism. Such an isomorphism exists because $\\dim_F F^k=k$ and finite-dimensional vector spaces of equal dimension are isomorphic ([[cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension]]). The field is part of the data: notation $F_q$ does not identify the field with $\\mathbb Z/q\\mathbb Z$; that quotient is a field only when $q$ is prime.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-dual-of-a-finite-field-linear-code",
+          "source_section": "Definition",
+          "quote": "For $x,y\\in F^n$, define the standard **bilinear dot product** $x\\cdot y:=\\sum_{j<n}x_jy_j$. For any linear subspace $C\\le F^n$ ([[def-linear-subspace]])—in particular, the codeword subspace of a classical linear code as in [[def-qc-classical-linear-code-over-finite-field]]—its **dual code** is\n\n$$C^\\perp:=\\{y\\in F^n: x\\cdot y=0\\text{ for every }x\\in C\\}.$$\n\nThis is a bilinear pairing over $F$; it is not a positive-definite or Hermitian inner product. The proof that $C^\\perp$ is a linear subspace, has dimension $n-k$, and satisfies $(C^\\perp)^\\perp=C$ is [[thm-qc-dual-code-dimension-and-double-dual]].\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-qc-dual-code-dimension-and-double-dual",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a finite field, $n\\in\\mathbb N$, and let $D\\le F^n$ be a linear subspace ([[def-linear-subspace]]) of dimension $r$. Then $D^\\perp$ is a linear subspace of dimension $n-r$, and $(D^\\perp)^\\perp=D$. In particular this holds for every classical linear code, including $D=\\{0\\}$ and $D=F^n$ ([[def-qc-classical-linear-code-over-finite-field]]).\n\n",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-space",
+          "source_section": "Definition",
+          "quote": "**Both indices start at $0$.** The rows are indexed by $i \\in m = \\{0,\\dots,m-1\\}$\nand the columns by $j \\in n = \\{0,\\dots,n-1\\}$, so the entries of a $2$ by $3$\nmatrix are $a_{00}, a_{01}, a_{02}, a_{10}, a_{11}, a_{12}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "The sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(F)$. Its **row space** $\\operatorname{Row}(A)\\subseteq F^n$ is the span of its rows, its **column space** $\\operatorname{Col}(A)\\subseteq F^m$ is the span of its columns, and its **nullspace** is\n$$N(A):=\\{x\\in F^n:Ax=0\\}.$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose a basis $c_0,\\ldots,c_{k-1}$ of $C$; making these vectors the columns of $G$ gives shape $n\\times k$, independent columns, and column span exactly $C$. If $k=0$, the basis and column list are empty and $G$ is the unique $n\\times0$ matrix. [L1, F1, F2, choose]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L3], $C^\\perp$ has dimension $n-k$; [F1] supplies a basis $d_0,\\ldots,d_{n-k-1}$. Place their transposes as the rows of $H$. These rows are independent and span the row space corresponding to $C^\\perp$. If $k=n$, this is the empty row list and $H$ has shape $0\\times n$. [F1, L3, F2, choose]",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "F1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every row of $H$ is orthogonal to every column of $G$, by [L2] and [L3]. Hence every entry of $HG$ is zero by [F3], so $HG=0$ with shape $(n-k)\\times k$, including when a dimension is zero. [L2, L3, F3, step 1.1, step 1.2]",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F4], $Hx=0$ exactly when every row of $H$ has zero dot product with $x$. The transposed rows span $C^\\perp$ by step 1.2, so $\\ker H=(C^\\perp)^\\perp=C$ by [L3]. Thus $H$ is a parity-check matrix and $G$ is a generator matrix. [F4, L3, step 1.2, step 2.1] ∎",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "L3",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: By [F1], choose a basis $c_0,\\ldots,c_{k-1}$ of $C$; making these vectors the columns of $G$ gives shape $n\\times k$, independent columns, and column span exactly $C$. If $k=0$, the basis and column list are empty and $G"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: By [F1], choose a basis $c_0,\\ldots,c_{k-1}$ of $C$; making these vectors the columns of $G$ gives shape $n\\times k$, independent columns, and column span exactly $C$. If $k=0$, the basis and column list are empty and $G"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: By [F1], choose a basis $c_0,\\ldots,c_{k-1}$ of $C$; making these vectors the columns of $G$ gives shape $n\\times k$, independent columns, and column span exactly $C$. If $k=0$, the basis and column list are empty and $G"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: By [F1], choose a basis $c_0,\\ldots,c_{k-1}$ of $C$; making these vectors the columns of $G$ gives shape $n\\times k$, independent columns, and column span exactly $C$. If $k=0$, the basis and column list are empty and $G"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: By [F1], choose a basis $c_0,\\ldots,c_{k-1}$ of $C$; making these vectors the columns of $G$ gives shape $n\\times k$, independent columns, and column span exactly $C$. If $k=0$, the basis and column list are empty and $G"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and step 2.2: By [F4], $Hx=0$ exactly when every row of $H$ has zero dot product with $x$. The transposed rows span $C^\\perp$ by step 1.2, so $\\ker H=(C^\\perp)^\\perp=C$ by [L3]. Thus $H$ is a parity-check matrix and $G$ is a generator"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement and step 2.2: By [F4], $Hx=0$ exactly when every row of $H$ has zero dot product with $x$. The transposed rows span $C^\\perp$ by step 1.2, so $\\ker H=(C^\\perp)^\\perp=C$ by [L3]. Thus $H$ is a parity-check matrix and $G$ is a generator"
+        }
+      ]
+    },
+    "def-qc-classical-error-syndrome": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "lem-qc-detectability-is-linear-and-encoding-invariant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-quantum-code-isometry-and-code-projector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register interface. A **quantum code** is an isometric encoding $V:\\mathcal H_L\\to\\mathcal H_P$. Its **code subspace** is $\\mathcal C:=\\operatorname{im}V$, its logical dimension is $K:=\\dim\\mathcal H_L$, and its physical block length is the number $n$ of tensor factors. When each physical factor is a qubit, $\\mathcal H_P\\cong(\\mathbb C^2)^{\\otimes n}$; a logical $k$-qubit register has $K=2^k$. Require $K\\ge1$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-quantum-code-distance-and-error-detection",
+          "source_section": "Definition",
+          "quote": "Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P)$ is **detectable by the code** if there is a scalar $\\lambda_E\\in\\mathbb C$ such that",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-qc-local-operator-support-and-weight",
+          "source_section": "Definition",
+          "quote": "Its **weight** is $\\operatorname{wt}(E):=\\min\\{|S|:E\\text{ is supported in }S\\}$. The minimum exists because the full set $[n]$ supports every operator and $[n]$ has finitely many subsets. Let $\\mathcal H_\\varnothing=\\mathbb C$; scalar identity operators have weight zero. The weight is invariant under reordering the tensor factors by their declared wire permutation ([[lem-qc-local-operator-support-is-permutation-invariant]]).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-orthogonal-projection-formula-and-linearity",
+          "source_section": "Statement",
+          "quote": "The map $P_W$ is linear, with image $W$, kernel $W^\\perp$, and $P_W^2=P_W$. Moreover, regarding both projections as endomorphisms of $V$,",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-adjoint-algebra",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner product spaces,",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $E,F\\in\\mathcal D(P)$ with $PEP=\\lambda P$ and $PFP=\\mu P$, then for $a,b\\in\\mathbb C$, $P(aE+bF)P=(a\\lambda+b\\mu)P$. Thus $aE+bF\\in\\mathcal D(P)$, proving linearity. [L2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a unitary $U$ on $\\mathcal H_L$, [F3] gives $(VU)^*=U^*V^*$, so $(VU)(VU)^*=VUU^*V^*=VV^*=P$. The same projector gives the same detectable set, operator weights, and distance. [F3, L1, L2, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $K=1$, choose a unit vector $v$ spanning $\\operatorname{im}P$. By [F2], $Px=\\langle x,v\\rangle v$, and therefore $PEPx=\\langle x,v\\rangle\\langle Ev,v\\rangle v=\\langle Ev,v\\rangle Px$ for every $x$ and every $E$. So every operator is detectable. [F1, F2, L1, given]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $K\\ge2$. By [L1], the code subspace is $\\operatorname{im}P$; choose orthonormal $u,v$ in it using [F1], and let $E$ be projection onto $\\mathbb C u$. Since $Pu=u$ and $P=P^*$ by [L4], [F2] gives $PE=E$; [F4] gives $\\langle Px,u\\rangle=\\langle x,P^*u\\rangle=\\langle x,u\\rangle$, so $EP=E$ and $PEP=E$. It cannot equal $\\lambda P$, since applying both sides to $u$ forces $\\lambda=1$ while applying them to $v$ forces $\\lambda=0$. By [L3], $E$ has weight at most $n$. If an operator has weight zero, the support definition uses $S=\\varnothing$, so it is $A_\\varnothing\\otimes I=\\lambda I$ and satisfies $PEP=\\lambda P$. Thus the non-detectable weights form a nonempty subset of $\\{1,\\ldots,n\\}$ and have a minimum. [F1, F2, F4, L1, L2, L3, L4, given, algebra] ∎",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "F1",
+            "L4",
+            "F2",
+            "F4",
+            "L3",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.2: Suppose $K\\ge2$. By [L1], the code subspace is $\\operatorname{im}P$; choose orthonormal $u,v$ in it using [F1], and let $E$ be projection onto $\\mathbb C u$. Since $Pu=u$ and $P=P^*$ by [L4], [F2] gives $PE=E$; [F4] give"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: If $K=1$, choose a unit vector $v$ spanning $\\operatorname{im}P$. By [F2], $Px=\\langle x,v\\rangle v$, and therefore $PEPx=\\langle x,v\\rangle\\langle Ev,v\\rangle v=\\langle Ev,v\\rangle Px$ for every $x$ and every $E$. So ev"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: If $K=1$, choose a unit vector $v$ spanning $\\operatorname{im}P$. By [F2], $Px=\\langle x,v\\rangle v$, and therefore $PEPx=\\langle x,v\\rangle\\langle Ev,v\\rangle v=\\langle Ev,v\\rangle Px$ for every $x$ and every $E$. So ev"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: If $K=1$, choose a unit vector $v$ spanning $\\operatorname{im}P$. By [F2], $Px=\\langle x,v\\rangle v$, and therefore $PEPx=\\langle x,v\\rangle\\langle Ev,v\\rangle v=\\langle Ev,v\\rangle Px$ for every $x$ and every $E$. So ev"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: If $K=1$, choose a unit vector $v$ spanning $\\operatorname{im}P$. By [F2], $Px=\\langle x,v\\rangle v$, and therefore $PEPx=\\langle x,v\\rangle\\langle Ev,v\\rangle v=\\langle Ev,v\\rangle Px$ for every $x$ and every $E$. So ev"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Let $P$ be the code projector of an isometric encoding into an $n$-factor register and let $K$ be the logical dimension. Then: 1. The set $\\mathcal D(P):=\\{E:PEP\\in\\mathbb C P\\}$ of detectable operators is a complex line"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: Let $P$ be the code projector of an isometric encoding into an $n$-factor register and let $K$ be the logical dimension. Then: 1. The set $\\mathcal D(P):=\\{E:PEP\\in\\mathbb C P\\}$ of detectable operators is a complex line"
+        }
+      ]
+    },
+    "lem-qc-classical-syndrome-is-error-only": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-classical-error-syndrome",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-qc-generator-and-parity-check-matrix-existence",
+          "source_section": "Statement",
+          "quote": "Let $C\\le F^n$ have dimension $k$. There are matrices $G\\in M_{n\\times k}(F)$ and $H\\in M_{(n-k)\\times n}(F)$ such that the columns of $G$ form a basis of $C$, the rows of $H$ form a basis of $C^\\perp$ after transpose identification, $\\ker H=C$, and $HG=0$. This includes $k=0$ and $k=n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and the linearity of matrix multiplication, $s(r)=H(c+e)=Hc+He$. [L1, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $c\\in C=\\ker H$ by [L2], $Hc=0$, so step 1.1 gives $s(r)=He$. The value depends on $e$ and not on which codeword was transmitted. [L2, step 1.1] ∎",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "lem-qc-equal-syndrome-errors-differ-by-a-codeword": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-classical-error-syndrome",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-qc-generator-and-parity-check-matrix-existence",
+          "source_section": "Statement",
+          "quote": "Let $C\\le F^n$ have dimension $k$. There are matrices $G\\in M_{n\\times k}(F)$ and $H\\in M_{(n-k)\\times n}(F)$ such that the columns of $G$ form a basis of $C$, the rows of $H$ form a basis of $C^\\perp$ after transpose identification, $\\ker H=C$, and $HG=0$. This includes $k=0$ and $k=n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "source_section": "Definition",
+          "quote": "For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$, define its **minimum distance** by $d(C):=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)$. This minimum exists because its nonempty set of values lies in $\\{1,\\ldots,n\\}$ and the natural numbers are well ordered ([[thm-well-ordering-principle]]). For the zero code $C=\\{0\\}$, set $d(C):=n+1$ by convention; this sentinel exceeds every possible Hamming weight and makes the usual radius statements vacuously valid for distinct codewords.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $He=Hf$, linearity gives $H(e-f)=0$. By [L1] and [L2], $e-f\\in\\ker H=C$. This uses subtraction in $F^n$; in characteristic two it equals addition. [L1, L2, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The support of $e-f$ is contained in the union of the supports of $e$ and $f$, so $\\operatorname{wt}(e-f)\\le\\operatorname{wt}(e)+\\operatorname{wt}(f)\\le2t<d(C)$. If $e-f\\ne0$, [L3] contradicts that it is a codeword; for the zero code, its only codeword is already zero. Thus $e-f=0$ and $e=f$. [L3, step 1.1, given, algebra] ∎",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: The support of $e-f$ is contained in the union of the supports of $e$ and $f$, so $\\operatorname{wt}(e-f)\\le\\operatorname{wt}(e)+\\operatorname{wt}(f)\\le2t<d(C)$. If $e-f\\ne0$, [L3] contradicts that it is a codeword; for "
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: The support of $e-f$ is contained in the union of the supports of $e$ and $f$, so $\\operatorname{wt}(e-f)\\le\\operatorname{wt}(e)+\\operatorname{wt}(f)\\le2t<d(C)$. If $e-f\\ne0$, [L3] contradicts that it is a codeword; for "
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: The support of $e-f$ is contained in the union of the supports of $e$ and $f$, so $\\operatorname{wt}(e-f)\\le\\operatorname{wt}(e)+\\operatorname{wt}(f)\\le2t<d(C)$. If $e-f\\ne0$, [L3] contradicts that it is a codeword; for "
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "thm-qc-quantum-distance-detects-low-weight-errors": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-quantum-code-distance-and-error-detection",
+          "source_section": "Definition",
+          "quote": "When $K=1$, set $d:=n+1$ by convention; the non-detectable set is empty in that case, as proved in [[lem-qc-detectability-is-linear-and-encoding-invariant]]. The same theorem proves that the minimum for $K\\ge2$ exists, the condition is linear in $E$, and changing $V$ to $VU$ for a logical unitary $U$ leaves $d$ unchanged.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-qc-detectability-is-linear-and-encoding-invariant",
+          "source_section": "Statement",
+          "quote": "1. The set $\\mathcal D(P):=\\{E:PEP\\in\\mathbb C P\\}$ of detectable operators is a complex linear subspace of $\\operatorname{End}(\\mathcal H_P)$.\n2. Replacing the encoding $V$ by $VU$ for any unitary $U$ on $\\mathcal H_L$ leaves $P$, detectability, and distance unchanged.\n3. If $K=1$, every operator is detectable, so the distance convention $n+1$ is appropriate. If $K\\ge2$, a non-detectable operator of weight at most $n$ exists, while every weight-zero operator is detectable; hence the minimum defining distance exists and lies in $\\{1,\\ldots,n\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the logical dimension is one, [L2] directly gives detectability. [L2, given]",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If the logical dimension is at least two and $E$ were non-detectable, [L1] would imply $\\operatorname{wt}(E)\\ge d$, contradicting the hypothesis. Therefore $E$ is detectable. This proves only the compression identity $PEP=\\lambda_E P$, not existence of a recovery map. [L1, given] ∎",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For a finite-register quantum code of distance $d$, every operator $E$ with $\\operatorname{wt}(E)<d$ is detectable: $PEP=\\lambda_E P$ for some $\\lambda_E\\in\\mathbb C$. No correction-map conclusion is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "thm-qc-classical-distance-correction-and-erasure-radius": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "source_section": "Definition",
+          "quote": "For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$, define its **minimum distance** by $d(C):=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)$. This minimum exists because its nonempty set of values lies in $\\{1,\\ldots,n\\}$ and the natural numbers are well ordered ([[thm-well-ordering-principle]]). For the zero code $C=\\{0\\}$, set $d(C):=n+1$ by convention; this sentinel exceeds every possible Hamming weight and makes the usual radius statements vacuously valid for distinct codewords.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-qc-classical-code-distance-disjoint-error-balls",
+          "source_section": "Statement",
+          "quote": "Let $C\\le F^n$ have distance parameter $d=d(C)$ and put $t=\\lfloor(d-1)/2\\rfloor$. For distinct codewords $c,c'\\in C$, the closed Hamming balls $B_t(c):=\\{r:d_H(r,c)\\le t\\}$ and $B_t(c')$ are disjoint.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-qc-classical-error-syndrome",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-qc-classical-syndrome-is-error-only",
+          "source_section": "Statement",
+          "quote": "For a codeword $c\\in C$, an error $e\\in F^n$, and received word $r=c+e$, the syndrome satisfies $s(r)=He$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-qc-equal-syndrome-errors-differ-by-a-codeword",
+          "source_section": "Statement",
+          "quote": "Let $e,f\\in F^n$ and let $H$ be a parity-check matrix of $C$. If $He=Hf$, then $e-f\\in C$. If also $\\operatorname{wt}(e),\\operatorname{wt}(f)\\le t$ and $2t<d(C)$, then $e=f$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-qc-generator-and-parity-check-matrix-existence",
+          "source_section": "Statement",
+          "quote": "Let $C\\le F^n$ have dimension $k$. There are matrices $G\\in M_{n\\times k}(F)$ and $H\\in M_{(n-k)\\times n}(F)$ such that the columns of $G$ form a basis of $C$, the rows of $H$ form a basis of $C^\\perp$ after transpose identification, $\\ker H=C$, and $HG=0$. This includes $k=0$ and $k=n$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The floor formula gives $2t<d$. If $He=0$, [L6] gives $e\\in C$; if $e\\ne0$ and $\\operatorname{wt}(e)<d$, [L1] is contradicted. Hence every such nonzero error is detected. [L1, L6, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L6",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The transmitted codeword $c$ lies in the radius-$t$ ball around $r$. Any other codeword $c'$ in that ball would put $r$ in two distinct radius-$t$ balls, contradicting [L2]; therefore $c$ is the unique such word. [L2, given]",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If two errors $e,f$ of weight at most $t$ have the same syndrome, [L5] gives $e=f$. For a received word $r=c+e$, [L3] and [L4] identify the measured syndrome as $He$, so it uniquely identifies the error within that weight range. [L3, L4, L5, given]",
+          "step": "2.2",
+          "inputs": [
+            "L5",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $c,c'\\in C$ both agree with the received word outside the known set $S$, then $c-c'$ is supported in $S$, so $\\operatorname{wt}(c-c')\\le |S|<d$. If $c\\ne c'$, this is a nonzero codeword contradicting [L1]. Thus at most one codeword is compatible. For $C=\\{0\\}$, the only candidate is already unique and $d=n+1$. [L1, given, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: If $c,c'\\in C$ both agree with the received word outside the known set $S$, then $c-c'$ is supported in $S$, so $\\operatorname{wt}(c-c')\\le |S|<d$. If $c\\ne c'$, this is a nonzero codeword contradicting [L1]. Thus at mos"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: If $c,c'\\in C$ both agree with the received word outside the known set $S$, then $c-c'$ is supported in $S$, so $\\operatorname{wt}(c-c')\\le |S|<d$. If $c\\ne c'$, this is a nonzero codeword contradicting [L1]. Thus at mos"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The floor formula gives $2t<d$. If $He=0$, [L6] gives $e\\in C$; if $e\\ne0$ and $\\operatorname{wt}(e)<d$, [L1] is contradicted. Hence every such nonzero error is detected. [L1, L6, given, algebra]"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ]
+    },
+    "ex-qc-binary-repetition-code-syndrome-table": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-qc-generator-and-parity-check-matrix-existence",
+          "source_section": "Statement",
+          "quote": "Let $C\\le F^n$ have dimension $k$. There are matrices $G\\in M_{n\\times k}(F)$ and $H\\in M_{(n-k)\\times n}(F)$ such that the columns of $G$ form a basis of $C$, the rows of $H$ form a basis of $C^\\perp$ after transpose identification, $\\ker H=C$, and $HG=0$. This includes $k=0$ and $k=n$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-classical-error-syndrome",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-qc-classical-distance-correction-and-erasure-radius",
+          "source_section": "Statement",
+          "quote": "Let $C\\le F^n$ have distance parameter $d=d(C)$ and let $t=\\lfloor(d-1)/2\\rfloor$. Then:",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The prime $2$ makes $F$ a field by [F1]. The columns of $G$ span $\\{000,111\\}$. Multiplication gives $HG=\\begin{bmatrix}0\\\\0\\end{bmatrix}$. Solving $Hx=0$ gives $x_0=x_1=x_2$, so $\\ker H=C$ and $H$ has two independent rows. [F1, L1, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The only nonzero codeword is $111$, whose weight is $3$; hence $k=1$ and $d=3$. [given, L1, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct multiplication over $F_2$ gives $H(000)=00$, $H(100)=10$, $H(010)=11$, and $H(001)=01$. These are all four errors of weight at most one, and their syndromes are distinct. [L2, given, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For a received word $r=c+e$ with $c\\in C$ and $\\operatorname{wt}(e)\\le1$, step 2.1 identifies $e$ from $Hr=He$; subtracting it yields $r-e=c$. This realizes the one-error uniqueness guarantee of [L3]. [step 2.1, L2, L3, given] ∎",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "L2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 1.2: The only nonzero codeword is $111$, whose weight is $3$; hence $k=1$ and $d=3$. [given, L1, algebra]"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 1.2: The only nonzero codeword is $111$, whose weight is $3$; hence $k=1$ and $d=3$. [given, L1, algebra]"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and step 1.2: The only nonzero codeword is $111$, whose weight is $3$; hence $k=1$ and $d=3$. [given, L1, algebra]"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Work over $F=\\mathbb F_2=\\mathbb Z/2\\mathbb Z$. Let $C=\\{000,111\\}\\le F^3$, with column-vector generator and parity-check matrices $$G=\\begin{bmatrix}1\\\\1\\\\1\\end{bmatrix},\\qquad H=\\begin{bmatrix}1&1&0\\\\0&1&1\\end{bmatrix}"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "item_local_check": "Displayed four-row no-error/one-bit syndrome table, Hr=11 for r=101, unique erasure completion with |S|=2, and two-error distances 2 and 1.",
+          "steps": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ],
+          "status": "computed in the displayed proof; no registered finite_smoke check exists for this QC18 fixture"
+        }
+      ]
+    },
+    "ex-qc-quantum-repetition-projector-and-distance-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qc-quantum-code-isometry-and-code-projector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal H_L$ be a finite-dimensional complex inner-product space and let $\\mathcal H_P=\\bigotimes_{j<n}\\mathcal H_j$ be a fixed ordered finite register tensor product with $n\\ge1$, supplied by the QC register interface. A **quantum code** is an isometric encoding $V:\\mathcal H_L\\to\\mathcal H_P$. Its **code subspace** is $\\mathcal C:=\\operatorname{im}V$, its logical dimension is $K:=\\dim\\mathcal H_L$, and its physical block length is the number $n$ of tensor factors. When each physical factor is a qubit, $\\mathcal H_P\\cong(\\mathbb C^2)^{\\otimes n}$; a logical $k$-qubit register has $K=2^k$. Require $K\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-qc-isometric-encoding-projector",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H_L,\\mathcal H_P$ be finite-dimensional complex inner-product spaces and let $V:\\mathcal H_L\\to\\mathcal H_P$ be a linear isometry. Then $V^*V=I_{\\mathcal H_L}$. Consequently $P:=VV^*$ is self-adjoint and idempotent and is the orthogonal projection onto $\\operatorname{im}V$. If $K=\\dim\\mathcal H_L$ and $N=\\dim\\mathcal H_P$, then $1\\le K\\le N$; when $K=1$ the code is a line, and when $K=N$ the code subspace is all of $\\mathcal H_P$ and $P=I_{\\mathcal H_P}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-qc-local-operator-support-and-weight",
+          "source_section": "Definition",
+          "quote": "Its **weight** is $\\operatorname{wt}(E):=\\min\\{|S|:E\\text{ is supported in }S\\}$. The minimum exists because the full set $[n]$ supports every operator and $[n]$ has finitely many subsets. Let $\\mathcal H_\\varnothing=\\mathbb C$; scalar identity operators have weight zero. The weight is invariant under reordering the tensor factors by their declared wire permutation ([[lem-qc-local-operator-support-is-permutation-invariant]]).",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-qc-quantum-code-distance-and-error-detection",
+          "source_section": "Definition",
+          "quote": "Let $V:\\mathcal H_L\\to\\mathcal H_P$ be an isometric encoding into a fixed ordered $n$-factor register with $n\\ge1$, $K:=\\dim\\mathcal H_L\\ge1$, and code projector $P=VV^*$. An operator $E\\in\\operatorname{End}(\\mathcal H_P)$ is **detectable by the code** if there is a scalar $\\lambda_E\\in\\mathbb C$ such that",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-qc-detectability-is-linear-and-encoding-invariant",
+          "source_section": "Statement",
+          "quote": "1. The set $\\mathcal D(P):=\\{E:PEP\\in\\mathbb C P\\}$ of detectable operators is a complex linear subspace of $\\operatorname{End}(\\mathcal H_P)$.\n2. Replacing the encoding $V$ by $VU$ for any unitary $U$ on $\\mathcal H_L$ leaves $P$, detectability, and distance unchanged.\n3. If $K=1$, every operator is detectable, so the distance convention $n+1$ is appropriate. If $K\\ge2$, a non-detectable operator of weight at most $n$ exists, while every weight-zero operator is detectable; hence the minimum defining distance exists and lies in $\\{1,\\ldots,n\\}$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-qc-quantum-distance-detects-low-weight-errors",
+          "source_section": "Statement",
+          "quote": "For a finite-register quantum code of distance $d$, every operator $E$ with $\\operatorname{wt}(E)<d$ is detectable: $PEP=\\lambda_E P$ for some $\\lambda_E\\in\\mathbb C$. No correction-map conclusion is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1]–[F3], $u_{000},u_{111}$ are orthonormal members of the ordered three-qubit product basis. Hence $V$ maps the orthonormal basis $e_0,e_1$ to an orthonormal pair and is isometric. For each basis vector $u_x$, [F5] gives $\\langle e_i,V^*u_x\\rangle_L=\\langle Ve_i,u_x\\rangle_P$, which is $1$ for $(i,x)=(0,000)$ or $(1,111)$ and $0$ otherwise. Since $\\langle e_i,y\\rangle_L=\\overline{y_i}$, this computes $V^*u_{000}=e_0$, $V^*u_{111}=e_1$, and $V^*u_x=0$ for the other six basis strings. Thus $P=VV^*$ has exactly the stated diagonal entries and is the code projector in [L1] and [L2]. [F1, F2, F3, F5, L1, L2, given]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "L1",
+            "L2",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $E_X$ sends $u_{000}$ to $u_{100}$ and $u_{111}$ to $u_{011}$, both orthogonal to the code subspace by [F3]. Thus $PE_XP=0$, so $E_X$ is detectable with scalar $0$. By [F1] and [F4], its action on elementary tensors is $X\\otimes I\\otimes I$; hence it is supported on the first wire and has weight at most $1$. [F1, F3, F4, L2, L3, L4, given]",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "F4",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The map $E_Z$ fixes $u_{000}$ and negates $u_{111}$. Thus $PE_ZP$ acts by eigenvalues $+1$ and $-1$ on the two-dimensional code subspace and is not a scalar multiple of $P$. By [F1] and [F4], it is $Z\\otimes I\\otimes I$, so it has weight at most $1$. It is non-detectable; every weight-zero operator is detectable by [L5]. Therefore the minimum non-detectable weight is $d=1$, and $\\operatorname{wt}(E_Z)=d$. [F1, F4, L3, L4, L5, given, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "L5",
+            "L3",
+            "L4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L6], every operator of weight $<d=1$ is detectable; step 2.2 exhibits a non-detectable operator of weight exactly $d$. Thus the detection boundary is sharp, and no correction-map claim follows. [L6, step 2.2] ∎",
+          "step": "3.1",
+          "inputs": [
+            "L6",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item does not assert a zero code, zero dimensional space, zero space, or zero vector boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one error, one bit, one factor, or one dimensional boundary case in its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 3.1: By [L6], every operator of weight $<d=1$ is detectable; step 2.2 exhibits a non-detectable operator of weight exactly $d$. Thus the detection boundary is sharp, and no correction-map claim follows. [L6, step 2.2] ∎"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Example: Use the ordered three-qubit tensor basis $u_{x_0x_1x_2}$ supplied by the QC02 register interface. Let $e_0,e_1$ be the standard basis of $\\mathbb C^2$ and define $V e_0=u_{000}$, $V e_1=u_{111}$. The code projector is di"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Example: Use the ordered three-qubit tensor basis $u_{x_0x_1x_2}$ supplied by the QC02 register interface. Let $e_0,e_1$ be the standard basis of $\\mathbb C^2$ and define $V e_0=u_{000}$, $V e_1=u_{111}$. The code projector is di"
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "item_local_check": "Computed V* on all eight product basis vectors, the projector, E_X and E_Z compressions, weight-one supports, and distance-one boundary.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "status": "computed in the displayed proof; no registered finite_smoke check exists for this QC18 fixture"
+        }
+      ]
+    },
+    "ex-qc-binary-hamming-code-syndrome-table": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "The sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "source_section": "Definition",
+          "quote": "The **row rank** and **column rank** are\n$$\\operatorname{rrank}(A):=\\dim_F\\operatorname{Row}(A),\\qquad \\operatorname{crank}(A):=\\dim_F\\operatorname{Col}(A).$$\nThese dimensions are defined because each space is spanned by a finite list.\nStarting with the empty list, inspect the spanning vectors in order and retain a\nvector exactly when it is not in the span of those already retained. Induction\nshows that the retained list is independent and has the same span as the\noriginal finite list, so it is a finite basis. The **rank** of $A$ is its row\nrank; [[thm-row-rank-equals-column-rank]] proves that it also equals the column\nrank.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-qc-full-column-rank-matrix-image-has-dimension",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n,k\\in\\mathbb N$, and let $G\\in M_{n\\times k}(F)$. Regard $G$ as the linear map $T_G:F^k\\to F^n$, $x\\mapsto Gx$, using column vectors. If the columns of $G$ are linearly independent, then $\\operatorname{im}T_G$ is a $k$-dimensional linear subspace of $F^n$. This includes $k=0$ and $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-classical-error-syndrome",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-qc-classical-distance-correction-and-erasure-radius",
+          "source_section": "Statement",
+          "quote": "Let $C\\le F^n$ have distance parameter $d=d(C)$ and let $t=\\lfloor(d-1)/2\\rfloor$. Then:",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The last four rows of $G$ form $I_4$, so its columns are independent and [L1] gives $\\dim C=4$. The first three columns of $H$ form $I_3$, so for every $y\\in F_2^3$ the input $(y_0,y_1,y_2,0,0,0,0)$ maps to $y$. Also, a linear combination of the rows of $H$ has its first three entries equal to its three coefficients, so the rows are independent and [F5] gives rank $3$. For $x=(a,b,c,d)$, $Gx=(a+b+d,a+c+d,b+c+d,a,b,c,d)$; applying the three rows of $H$ gives $(0,0,0)$. Thus $HG=0$ and $C\\subseteq\\ker H$. [F1, F2, F5, L1, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F5",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The map $H:F_2^7\\to F_2^3$ is onto by its first three columns, so [F3] gives $\\dim\\ker H=7-3=4$. The subspace $C$ also has dimension $4$ by step 1.1; [F4] now gives $C=\\ker H$. [F3, F4, step 1.1]",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The columns of $H$ are $100,010,001,110,101,011,111$. They are all nonzero and pairwise distinct. A weight-one vector has syndrome one of these columns; a weight-two vector has syndrome the sum of two distinct columns, which is nonzero in characteristic two. Thus $C$ has no nonzero word of weight below $3$. The word $e_0+e_1+e_3$ has syndrome $100+010+110=000$ and weight $3$, so it lies in $C$ and $d(C)=3$. [F1, F2, L2, step 1.2, given, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L2",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Multiplying $H$ by the zero word and each unit vector gives $s(0000000)=000$, $s(1000000)=100$, $s(0100000)=010$, $s(0010000)=001$, $s(0001000)=110$, $s(0000100)=101$, $s(0000010)=011$, and $s(0000001)=111$; each nonzero value is the corresponding column of $H$. These eight syndromes are distinct, so [L3] guarantees unique correction of any one bit flip. [L2, L3, step 2.1, given] ∎",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "L2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Over $F_2=\\mathbb Z/2\\mathbb Z$, take the column-vector matrices $$G=\\begin{bmatrix}1&1&0&1\\\\1&0&1&1\\\\0&1&1&1\\\\1&0&0&0\\\\0&1&0&0\\\\0&0&1&0\\\\0&0&0&1\\end{bmatrix},\\qquad H=\\begin{bmatrix}1&0&0&1&1&0&1\\\\0&1&0&1&0&1&1\\\\0&0&1&0"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 2.2: The complete no-error/single-error syndrome table is | Error $e$ | Syndrome $He$ | |---|---| | $0000000$ | $000$ | | $1000000$ | $100$ | | $0100000$ | $010$ | | $0010000$ | $001$ | | $0001000$ | $110$ | | $0000100$ | $10"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no degenerate code, zero dimensional space, empty matrix, or one dimensional logical branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 1.1: The last four rows of $G$ form $I_4$, so its columns are independent and [L1] gives $\\dim C=4$. The first three columns of $H$ form $I_3$, so for every $y\\in F_2^3$ the input $(y_0,y_1,y_2,0,0,0,0)$ maps to $y$. Also, a "
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "item_local_check": "Verified HG=0, rank/dimensions, seven distinct nonzero check columns, minimum distance 3, and all eight weight-at-most-one syndromes.",
+          "steps": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ],
+          "status": "computed in the displayed proof; no registered finite_smoke check exists for this QC18 fixture"
+        }
+      ]
+    },
+    "ex-qc-repetition-three-syndrome-table": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qc-generator-and-parity-check-matrices",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have dimension $k$. A **generator matrix** for $C$ is a matrix $G\\in M_{n\\times k}(F)$ with linearly independent columns and column space $C$. A **parity-check matrix** for $C$ is a matrix $H\\in M_{(n-k)\\times n}(F)$ with linearly independent rows and nullspace $C$. With column-vector conventions, $G:F^k\\to F^n$ and $H:F^n\\to F^{n-k}$; the product $HG$ is defined and is the zero matrix. Existence for every code, the identity $HG=0$, and the boundary shapes are proved in [[thm-qc-generator-and-parity-check-matrix-existence]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-hamming-weight-distance-and-linear-code-distance",
+          "source_section": "Definition",
+          "quote": "For $x=(x_0,\\ldots,x_{n-1})\\in F^n$, its **Hamming weight** is $\\operatorname{wt}(x):=|\\{j<n:x_j\\ne0\\}|$. For $x,y\\in F^n$, their **Hamming distance** is $d_H(x,y):=\\operatorname{wt}(x-y)$. For a nonzero code $C\\le F^n$, define its **minimum distance** by $d(C):=\\min_{0\\ne c\\in C}\\operatorname{wt}(c)$. This minimum exists because its nonempty set of values lies in $\\{1,\\ldots,n\\}$ and the natural numbers are well ordered ([[thm-well-ordering-principle]]). For the zero code $C=\\{0\\}$, set $d(C):=n+1$ by convention; this sentinel exceeds every possible Hamming weight and makes the usual radius statements vacuously valid for distinct codewords.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-qc-classical-error-syndrome",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-qc-classical-distance-correction-and-erasure-radius",
+          "source_section": "Statement",
+          "quote": "1. Every nonzero error $e$ of weight less than $d$ is detected by a parity-check matrix: $He\\ne0$.\n2. If $r=c+e$ for $c\\in C$ and $\\operatorname{wt}(e)\\le t$, then $c$ is the unique codeword $c'\\in C$ with $\\operatorname{wt}(r-c')\\le t$; moreover distinct errors of weight at most $t$ have distinct syndromes.\n3. If the erased coordinate set $S\\subseteq\\{0,\\ldots,n-1\\}$ is known and $|S|<d$, at most one codeword agrees with the received word outside $S$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The codewords are $000$ and $111$, and [L2] gives $d(C)=3$. For $x=(x_0,x_1,x_2)$, multiplication gives $Hx=(x_0+x_1,x_1+x_2)$, so $Hx=0$ exactly when $x_0=x_1=x_2$ and $\\ker H=C$. The first two columns of $H$ form $I_2$, so its rows are independent. Therefore $H$ is a parity-check matrix by [L1]; the field operations are valid by [F1]. [F1, F2, L1, L2, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Direct multiplication gives the weight-at-most-one syndromes $s(000)=00$, $s(100)=10$, $s(010)=11$, and $s(001)=01$, all distinct. For $r=101$, [L3] gives $s(r)=Hr=(1+0,0+1)=11$, so the unique matching error is $e=010$ and $r-e=111$. The distinct syndromes give the one-error correction in [L4]. [L1, L3, L4, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If coordinates $0,1$ are erased and the received value at coordinate $2$ is $0$, the codeword $000$ is compatible and $111$ is not. More generally, two compatible codewords would differ only in $S$, so their distance would be at most $2<3$, contradicting [L4]. Hence the completion is unique. [L4, given, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If instead $000$ is sent, the two-bit error $e=110$ produces $r'=110$. Then $d_H(r',000)=2$ but $d_H(r',111)=1$, so $111$ is the unique radius-one decoding candidate. The unique-radius-one rule therefore miscorrects this word; [L4] gives no correction guarantee for the two-bit error. [L4, given, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Use the binary repetition code $C=\\{000,111\\}$ and $H=\\begin{bmatrix}1&1&0\\\\0&1&1\\end{bmatrix}$. A single middle-bit error in $111$ gives $r=101$ and a syndrome identifying that error. Two known erasures at coordinates $"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 1.2: Direct multiplication gives the complete table for errors of weight at most one: | Error $e$ | Syndrome $He$ | |---|---| | $000$ | $00$ | | $100$ | $10$ | | $010$ | $11$ | | $001$ | $01$ | For $r=101$, [L3] gives $s(r)=H"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Use the binary repetition code $C=\\{000,111\\}$ and $H=\\begin{bmatrix}1&1&0\\\\0&1&1\\end{bmatrix}$. A single middle-bit error in $111$ gives $r=101$ and a syndrome identifying that error. Two known erasures at coordinates $"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Example and step 1.1: The codewords are $000$ and $111$, and [L2] gives $d(C)=3$. For $x=(x_0,x_1,x_2)$, multiplication gives $Hx=(x_0+x_1,x_1+x_2)$, so $Hx=0$ exactly when $x_0=x_1=x_2$ and $\\ker H=C$. The first two columns of $H$ form $I_2$"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Example and step 1.1: The codewords are $000$ and $111$, and [L2] gives $d(C)=3$. For $x=(x_0,x_1,x_2)$, multiplication gives $Hx=(x_0+x_1,x_1+x_2)$, so $Hx=0$ exactly when $x_0=x_1=x_2$ and $\\ker H=C$. The first two columns of $H$ form $I_2$"
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "item_local_check": "Recomputed the four syndromes for H=[1 1 0;0 1 1], erasure completion on S={0,1}, and the two-error received word 110.",
+          "steps": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ],
+          "status": "computed in the displayed proof; no registered finite_smoke check exists for this QC18 fixture"
+        }
+      ]
+    },
+    "ex-qc-short-reed-solomon-syndrome-table": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-row-rank-equals-column-rank",
+          "source_section": "Statement",
+          "quote": "For every finite matrix over a field,\n$$\\operatorname{rrank}(A)=\\operatorname{crank}(A).$$\nBoth dimensions equal the number of pivots in any echelon form of $A$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-qc-full-column-rank-matrix-image-has-dimension",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n,k\\in\\mathbb N$, and let $G\\in M_{n\\times k}(F)$. Regard $G$ as the linear map $T_G:F^k\\to F^n$, $x\\mapsto Gx$, using column vectors. If the columns of $G$ are linearly independent, then $\\operatorname{im}T_G$ is a $k$-dimensional linear subspace of $F^n$. This includes $k=0$ and $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qc-classical-error-syndrome",
+          "source_section": "Definition",
+          "quote": "Let $C\\le F^n$ have parity-check matrix $H\\in M_{(n-k)\\times n}(F)$. The **syndrome map** is $s:F^n\\to F^{n-k}$, $s(r):=Hr$, defined on every received word $r$. If $r=c+e$ with transmitted codeword $c\\in C$ and error vector $e\\in F^n$, its syndrome is the vector $s(r)$. The identity $s(r)=He$ is proved in [[lem-qc-classical-syndrome-is-error-only]]. A syndrome is not itself a decoded error; a decoding rule is additional data.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-qc-classical-distance-correction-and-erasure-radius",
+          "source_section": "Statement",
+          "quote": "1. Every nonzero error $e$ of weight less than $d$ is detected by a parity-check matrix: $He\\ne0$.\n2. If $r=c+e$ for $c\\in C$ and $\\operatorname{wt}(e)\\le t$, then $c$ is the unique codeword $c'\\in C$ with $\\operatorname{wt}(r-c')\\le t$; moreover distinct errors of weight at most $t$ have distinct syndromes.\n3. If the erased coordinate set $S\\subseteq\\{0,\\ldots,n-1\\}$ is known and $|S|<d$, at most one codeword agrees with the received word outside $S$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $(a,b)\\mapsto(a,a+b,a+2b,a+3b)$ is injective because its first two coordinates recover $a$ and $b$. Hence the displayed $G$ has independent columns and [L1] gives $\\dim C=2$. [F1, L1, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Multiplication gives $HG=0$: the four row-column dot products are $10,10,10,20$, all zero in $F_5$. The first two columns of $H$, $(4,0)$ and $(3,3)$, are independent, so its column rank is $2$; [F5] makes its row rank $2$ as well. [F2, F5, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Therefore $C=\\operatorname{im}G\\subseteq\\ker H$. By [F3], $\\dim\\ker H=4-2=2=\\dim C$; [F4] gives $C=\\ker H$. [F3, F4, step 1.1, step 1.2]",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $b=0$ and $(a,b)\\ne(0,0)$, then $f(x)=a$ has no roots. If $b\\ne0$, the equation $a+bx=0$ has the unique solution $x=-ab^{-1}$, so at most one of the four distinct evaluation points is a root. Every nonzero codeword therefore has weight at least $3$, and $f(x)=x$ gives $(0,1,2,3)$ of weight $3$. Thus $d(C)=3$. [given, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The columns of $H$ are $h_0=(4,0)$, $h_1=(3,3)$, $h_2=(2,4)$, and $h_3=(1,3)$. Their six pairwise determinants in $F_5$ are $2,1,2,1,1,2$, all nonzero, so no two are scalar multiples. A nonzero error $a e_j$ has syndrome $a h_j$; within one position distinct nonzero $a$ give distinct syndromes, and across positions equality would force proportional columns. Hence all $4\\cdot4=16$ nonzero one-symbol errors have distinct syndromes. [F2, given, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For example, the error $e=2e_1$ has syndrome $2h_1=(6,6)=(1,1)$ in $F_5^2$. Since $d(C)=3$, [L3] gives unique one-symbol correction. The example uses the evaluation-code definition; its exact distance and syndrome claims above are proved here rather than inferred from a source formula. [L2, L3, step 2.1, step 2.2, given] ∎",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L2",
+            "step 2.1",
+            "step 2.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty set, empty list, empty tensor, zero length register, or zero size matrix case in its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 2.1: If $b=0$ and $(a,b)\\ne(0,0)$, then $f(x)=a$ has no roots. If $b\\ne0$, the equation $a+bx=0$ has the unique solution $x=-ab^{-1}$, so at most one of the four distinct evaluation points is a root. Every nonzero codeword th"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 2.2: The columns of $H$ are $h_0=(4,0)$, $h_1=(3,3)$, $h_2=(2,4)$, and $h_3=(1,3)$. Their six pairwise determinants in $F_5$ are $2,1,2,1,1,2$, all nonzero, so no two are scalar multiples. A nonzero error $a e_j$ has syndrome"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and step 2.1: If $b=0$ and $(a,b)\\ne(0,0)$, then $f(x)=a$ has no roots. If $b\\ne0$, the equation $a+bx=0$ has the unique solution $x=-ab^{-1}$, so at most one of the four distinct evaluation points is a root. Every nonzero codeword th"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no radius endpoint, limiting endpoint, boundary parameter, or extremal index case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no object from a nonempty family, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no forward equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional, so no reverse equivalence direction is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "item_local_check": "Verified HG=0 over F5, injectivity, distance 3 for the degree-one evaluation instance, six nonzero pairwise column determinants, and 16 distinct nonzero one-symbol-error syndromes.",
+          "steps": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "status": "computed in the displayed proof; no registered finite_smoke check exists for this QC18 fixture"
+        }
+      ]
+    },
+    "lem-qc-linear-isometry-preserves-inner-products": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $z=\\langle x,y\\rangle$. Expanding with [F1] and [F2] gives $\\|x\\pm y\\|^2=\\|x\\|^2+\\|y\\|^2\\pm z\\pm\\overline z$, so $\\|x+y\\|^2-\\|x-y\\|^2=2(z+\\overline z)=4\\operatorname{Re}z$ by [F3]. Also $\\langle x,iy\\rangle=-iz$, $\\langle iy,x\\rangle=i\\overline z$, and $\\|iy\\|^2=\\|y\\|^2$; hence $\\|x\\pm iy\\|^2=\\|x\\|^2+\\|y\\|^2\\pm i(\\overline z-z)$ and $\\|x+iy\\|^2-\\|x-iy\\|^2=2i(\\overline z-z)=4\\operatorname{Im}z$ by [F3]. [F1, F2, F3, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Linearity and norm preservation [L1] give $V(x\\pm y)=Vx\\pm Vy$ and $V(x\\pm iy)=Vx\\pm iVy$ and equate the four squared norms for $(Vx,Vy)$ with those for $(x,y)$. Applying step 1.1 in each space shows that $\\langle Vx,Vy\\rangle$ and $\\langle x,y\\rangle$ have the same real and imaginary parts; their equality follows from [F3]. [F1, F2, F3, L1, given, step 1.1, algebra] ∎",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim uses no empty set, list, tensor, or matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero-dimensional H. Then x=y=0 and both inner products are zero; the algebraic identities remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The expansion in step 1.1 applies without a dimension restriction, including one-dimensional spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or construction is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No radius or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    }
+  }
+}

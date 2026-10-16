@@ -1,0 +1,57 @@
+30
+5 Classical and quantum circuits
+
+where x, y ∈{0, 1 . . . , 2n −1}.
+Writing out the matrix multiplication
+explicitly, we have
+
+⟨a|U|0⟩=
+�
+
+{xt}
+⟨a|U T |xT−1⟩⟨xT−1|U T−1|xT−2⟩. . .
+
+. . . ⟨x2|U 2|x1⟩⟨x1|U 1|0⟩.
+(5.72)
+
+Eq.(5.72) is a sort of “path integral” representation of the quantum com-
+putation – the probability amplitude for the final outcome a is expressed
+as a coherent sum of amplitudes for each of a vast number (2n(T−1)) of
+possible computational paths that begin at 0 and terminate at a after T
+steps.
+Our classical simulator is to add up the 2n(T−1) complex numbers in
+eq.(5.72) to compute ⟨a|U|0⟩. The first problem we face is that finite
+size classical circuits do integer arithmetic, while the matrix elements
+⟨y|U t|x⟩need not be rational numbers.
+The classical simulator must
+therefore settle for an approximate calculation to reasonable accuracy.
+Each term in the sum is a product of T complex factors, and there are
+2n(T−1) terms in the sum. The accumulated errors are sure to be small
+if we express the matrix elements to m bits of accuracy, with m large
+compared to nT log T. Therefore, we can replace each complex matrix
+element by pairs of signed integers — the binary expansions, each m bits
+long, of the real and imaginary parts of the matrix element.
+Our simulator will need to compute each term in the sum eq.(5.72) and
+accumulate a total of all the terms. But each addition requires only a
+modest amount of scratch space, and furthermore, since only the accu-
+mulated subtotal need be stored for the next addition, not much space is
+needed to sum all the terms, even though there are exponentially many.
+So it only remains to consider the evaluation of a typical term in the
+sum, a product of T matrix elements. We will require a classical circuit
+that evaluates
+⟨y|U t|x⟩;
+(5.73)
+
+this circuit receives the 2n-bit input (x, y), and outputs the 2m-bit value of
+the (complex) matrix element. Given a circuit that performs this function,
+it will be easy to build a circuit that multiplies the complex numbers
+together without using much space.
+This task would be difficult if U t were an arbitrary 2n × 2n unitary
+transformation. But now we may appeal to the properties we have de-
+manded of our quantum gate set — the gates from a discrete set, and each
+gate acts on a bounded number of qubits. Because there are a fixed finite
+number of gates, there are only a fixed number of gate subroutines that
+our simulator needs to be able to call. And because the gate acts on only
+a few qubits, nearly all of its matrix elements vanish (when n is large),
+
+

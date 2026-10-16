@@ -1,0 +1,55 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "pack": "pack-0001",
+  "lane": 1,
+  "ids": [
+    "alg-qa-13-certified-count-output-rounding"
+  ],
+  "assignment": "research/quantum-computing-algorithms-60-2026-10-15-consumer-maintenance/pack-0001-lane-1.json",
+  "task": "research/quantum-computing-algorithms-60-2026-10-15-consumer-maintenance/pack-0001-lane-1.md",
+  "report": "research/quantum-computing-algorithms-60-2026-10-15-consumer-maintenance/pack-0001-lane-1-report.json",
+  "before": {
+    "alg-qa-13-certified-count-output-rounding": {
+      "sha256": "dcdd21fccb9194c71106217dcad96486d1875cca89c2e43fa2ffc6456e3366d9",
+      "guard_sha256": "940905863f3c7fbc550c303ad0061ade96b1e19db1af4aa61ca4e7c39488ccac",
+      "statement_sha256": "a6ef38fdab94021f2ab5d754ee6472ed43b3a66ea5e0497b61b711b3cc48f9f0",
+      "text": "---\nid: alg-qa-13-certified-count-output-rounding\nkind: algorithm\ntitle: \"Rational-interval rounding of a counting output\"\nstatus: draft\norigin: pipeline\npipeline_run: quantum-computing-algorithms-60-2026-10-15\ndependency_level: 18\ndeps:\n  - thm-principal-inverse-tangent-calculus\n  - thm-alternating-series-test\n  - def-qa-classical-bit-cost\njustified_by:\n  - lem-qa-13-certified-count-output-rounding\naxiom_use: \"No choice axiom is used; all selections are prescribed rational comparisons and integer arithmetic.\"\nprovenance:\n  statement: ai-altered\n  proof: not-applicable\nsources:\n  references:\n    - title: \"Brassard, Høyer, Mosca, and Tapp, Quantum Amplitude Amplification and Estimation, §4, integer rounding after Theorem 13; rational-interval realization specified here\"\n      url: \"https://arxiv.org/pdf/quant-ph/0005055\"\n---\n## Definition\n\n**Input.** Public integers $N\\ge1$, even $M\\ge2$, and $0\\le y<M$. The output is an integer $q$. All sums, factorials, comparisons and ceiling operations below use exact rational or integer arithmetic, charged as classical bit work under [[def-qa-classical-bit-cost]].\n\nIf $y=0$, return $q=0$. Otherwise initialize $r=4$. Compute $R_r=8^{2r+2}/(2r+2)!$; while $NR_r\\ge1/24$, increment $r$ by one and recompute $R_r$. At the first $r$ with $NR_r<1/24$, set\n$$D_r=\\sum_{k=1}^r\\frac{2k\\,8^{2k-1}}{(2k)!}.$$\n\nInitialize $h=1$. Compute\n$$S_h=\\sum_{k=0}^{h-1}\\frac{(-1)^k}{2k+1},\\qquad e_h=\\frac4{2h+1},\\qquad [a_h,b_h]=\\frac{2y}{M}[4S_h-e_h,4S_h+e_h].$$\nThese are the arctangent-series enclosures from [[thm-principal-inverse-tangent-calculus]] and [[thm-alternating-series-test]]. Set $x_h=(a_h+b_h)/2$ and $\\rho_h=(b_h-a_h)/2$. While either $[a_h,b_h]\\nsubseteq[0,8]$ or $ND_r\\rho_h\\ge1/24-NR_r$, increment $h$ by one and recompute $S_h,e_h,a_h,b_h,x_h,\\rho_h$.\n\nFor the first accepted $h$, compute\n$$C_r(x_h)=\\sum_{k=0}^r\\frac{(-1)^k x_h^{2k}}{(2k)!},\\qquad E=D_r\\rho_h+R_r,$$\n$$u=\\frac N2(1-C_r(x_h)-E),\\qquad v=\\frac N2(1-C_r(x_h)+E).$$\nReturn $q=\\lceil v-2/3\\rceil$, computing the rational ceiling by integer division. The termination and error guarantee are established in [[lem-qa-13-certified-count-output-rounding]].\n"
+    }
+  },
+  "obligations": [
+    {
+      "key": "d839a0b72a323aff97b45a476106bc178a996924e77aedd384a3312fb36d4842",
+      "id": "alg-qa-13-certified-count-output-rounding",
+      "event_key": "ee80e77c5d970ec35a0b4fb8ad29bc7290f1975d786de36ece50006cfa0f1e1d",
+      "status": "pending",
+      "paths": [
+        [
+          "def-qa-classical-bit-cost",
+          "alg-qa-13-certified-count-output-rounding"
+        ]
+      ],
+      "event": {
+        "id": "def-qa-classical-bit-cost",
+        "before_statement_sha256": "163fdf7d52361a20240194294b6bcb17ab91e18f21706a0b66b137c979b88341",
+        "after_statement_sha256": "2f13a2ab8970bc88603f0129635c061575638b2c0a737cee91108faeb0559d21"
+      }
+    },
+    {
+      "key": "edcd3bb28845ee4cd87fac1c8d14d6addd5312bc4a6d435caa8efca5aa0de913",
+      "id": "alg-qa-13-certified-count-output-rounding",
+      "event_key": "1439b1346366190e271435824c330877cb4cc0333e5f237fd43ffba903915c9b",
+      "status": "pending",
+      "paths": [
+        [
+          "lem-qa-13-certified-count-output-rounding",
+          "alg-qa-13-certified-count-output-rounding"
+        ]
+      ],
+      "event": {
+        "id": "lem-qa-13-certified-count-output-rounding",
+        "before_statement_sha256": "1a5a5c842ca329c1d63dd828ceb3ebb32a0c2f6a5dc118db1b962afe4693d757",
+        "after_statement_sha256": "d95337d7ac29114dd19298f51d97232d1ce72e3506d01c02928631806571483b"
+      }
+    }
+  ]
+}

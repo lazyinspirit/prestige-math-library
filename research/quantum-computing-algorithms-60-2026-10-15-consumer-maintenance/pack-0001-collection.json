@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "pack": "pack-0001",
+  "receipts": [
+    {
+      "id": "alg-qa-13-certified-count-output-rounding",
+      "disposition": "sound",
+      "reason": "The revised classical-bit-cost definition charges the algorithm's finite exact rational computations without imposing an efficiency bound. The current rounding lemma proves termination and the 2/3 error guarantee for precisely the r loop, h loop and ceiling output already specified here, with the same public integer hypotheses. Neither assigned supplier event invalidates this consumer; its bytes are preserved.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked by elementary alternating-series estimates and integer rounding, reading items/alg-qa-13-certified-count-output-rounding.md, items/def-qa-classical-bit-cost.md, items/lem-qa-13-certified-count-output-rounding.md, items/thm-principal-inverse-tangent-calculus.md, items/thm-alternating-series-test.md and items/lem-qa-13-pi-rational-bounds.md. The principal-arctangent theorem explicitly includes pi/4=sum((-1)^k/(2k+1)), so |pi-4S_h|<=4/(2h+1). For y>0 the true x=2*pi*y/M lies strictly inside (0,8), and the prescribed argument intervals contain x with radii tending to zero. R_(r+1)/R_r=64/((2r+4)(2r+3)) tends to zero, so a finite r has N*R_r<1/24; for that fixed r, D_r is finite and positive, so the h loop terminates. For t in [0,8], the cosine tail after r>=4 is bounded by R_r, since successive omitted term magnitudes have ratios at most 64/((2r+4)(2r+3))<1 and tend to zero. Factoring differences of powers bounds |C_r(x)-C_r(x_h)| by D_r*rho_h. Thus z=N*(1-cos(x))/2=N*sin^2(pi*y/M) lies in [u,v] with v-u=N*(D_r*rho_h+R_r)<1/24. Choose n=floor(z+1/2); then |n-z|<=1/2, so every point of [u,v] is within 1/2+1/24<2/3 of n. The eligible integer interval [v-2/3,u+2/3] therefore contains n, and q=ceil(v-2/3) lies in it, proving |q-z|<=2/3. The y=0 branch returns exactly z=0. All arithmetic is on finite integer representations, implementable by finite-alphabet multitape transitions with its actual work charged; no unit-cost rational-operation or polynomial-time assertion is used. No external source was consulted or claimed as read.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "ee80e77c5d970ec35a0b4fb8ad29bc7290f1975d786de36ece50006cfa0f1e1d",
+          "affected_use": "The input paragraph charges every exact sum, factorial, comparison and ceiling operation as classical bit work under def-qa-classical-bit-cost.",
+          "reason": "The revised definition counts actual fixed-alphabet multitape-machine transitions, including public-data encoding, comparison, postprocessing and output. Finite integer arithmetic implements all the prescribed rational calculations and rational comparisons, and integer division implements the final ceiling. These costs remain charged rather than treated as unit-cost operations. The algorithm neither reads a hidden abstract instance encoding nor claims a time bound or oracle-processing exemption, so the clarified cost model leaves this use valid."
+        },
+        {
+          "event_key": "1439b1346366190e271435824c330877cb4cc0333e5f237fd43ffba903915c9b",
+          "affected_use": "The justified_by entry and final Definition sentence use lem-qa-13-certified-count-output-rounding to establish termination and the error guarantee of the prescribed interval procedure.",
+          "reason": "The current lemma retains exactly N>=1, even M>=2, 0<=y<M and |q-N*sin^2(pi*y/M)|<=2/3, with no polynomial bit bound. Its fact F11 identifies this algorithm's exact instructions; proof steps 1.1 and 2.1 establish enclosure and termination for its R_r and h tests, and step 3.1 proves that its q=ceil(v-2/3) is eligible. The added exact cyclotomic identity imposes no additional input restriction and is unnecessary to execute this rational-only procedure. The supplier therefore still justifies this specific algorithm, rather than merely an unrelated existence assertion."
+        }
+      ],
+      "affected_use": "Only the exact-arithmetic cost convention and the existing justified_by termination/error reference are implicated by the two assigned events; both remain applicable to the unchanged rational-interval instructions.",
+      "invalidated_claim": "No claim is invalidated: the same admitted inputs yield a terminating rational procedure with the stated integer rounding guarantee, and all actual classical bit work remains charged.",
+      "minimality": "No edit is mathematically necessary, so edits is empty and the complete item remains identical to the frozen assignment carrier. No shared metadata was changed; no downstream discovery or unresolved mathematical obligation remains for this lane.",
+      "edits": [],
+      "before_sha256": "dcdd21fccb9194c71106217dcad96486d1875cca89c2e43fa2ffc6456e3366d9",
+      "after_sha256": "dcdd21fccb9194c71106217dcad96486d1875cca89c2e43fa2ffc6456e3366d9",
+      "before_guard_sha256": "940905863f3c7fbc550c303ad0061ade96b1e19db1af4aa61ca4e7c39488ccac",
+      "after_guard_sha256": "940905863f3c7fbc550c303ad0061ade96b1e19db1af4aa61ca4e7c39488ccac",
+      "before_statement_sha256": "a6ef38fdab94021f2ab5d754ee6472ed43b3a66ea5e0497b61b711b3cc48f9f0",
+      "after_statement_sha256": "a6ef38fdab94021f2ab5d754ee6472ed43b3a66ea5e0497b61b711b3cc48f9f0",
+      "obligation_keys": [
+        "d839a0b72a323aff97b45a476106bc178a996924e77aedd384a3312fb36d4842",
+        "edcd3bb28845ee4cd87fac1c8d14d6addd5312bc4a6d435caa8efca5aa0de913"
+      ]
+    },
+    {
+      "id": "alg-qa-29-certified-natural-logarithm-enclosure",
+      "disposition": "sound",
+      "reason": "The supplier event replaces its embedded increasing-N search with a reference to this extracted algorithm, while retaining the same S_N, T_N, positive rational input domain, logarithm enclosure and width bound. This algorithm computes exactly those rational expressions, starts at N=1, tests T_N<=tau, increments on failure and returns the certified interval on success. Its justified_by reference therefore remains valid without any item edit.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Read the complete assigned Definition and current supplier Statement, Facts and Proof, and the exact prerequisite statements in items/def-natural-logarithm.md, def-real-exponential-function-and-e.md, cor-exponential-reciprocal-and-positivity.md, thm-logarithm-derivative-and-integral.md, thm-chain-rule.md, thm-algebra-of-derivatives.md, lem-derivative-of-a-power.md, thm-ftc-second-part.md, thm-continuous-implies-integrable.md, thm-monotonicity-of-the-integral.md and lem-geometric-sequence-null.md. Read the old supplier statement recorded under repair_notes in research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u53.json. The argument uses familiar elementary calculus: for H(u)=ln((1+u)/(1-u)), H'-P_N'=2u^(2N)/(1-u^2). Integrating on [0,s] for 0<s<1 bounds the remainder by 2s^(2N+1)/((2N+1)(1-s^2)); reciprocal symmetry handles negative y, and y=0 is evaluated directly. The derivative domain (-1,1) is open, each nondegenerate integration interval lies inside it, and the integral comparison has its required positive orientation. For rational x>0, |y|<1 and both denominators are nonzero. Geometric decay gives T_N->0, so the sequential exact rational tests terminate for every tau>0. No external URL was read or needed for this familiar argument.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "efe9a83e035fedef702cec2a82f17bd2eb77cba9bd74d8a2e4588b036bf133e5",
+          "affected_use": "The frontmatter justified_by entry uses lem-qa-29-certified-natural-logarithm-series to establish well-definedness of the positive-rational-input search and certification of its returned rational interval.",
+          "reason": "The updated supplier explicitly proves termination and certification for this very algorithm, with unchanged formulas and hypotheses. When x=1, y=0 and T_1=0, so the first test succeeds and returns [0,0]. Otherwise 0<|y|<1 gives T_N->0, ensuring a successful finite test; the supplier's error bound places ln(x) in the returned interval and gives width 2T_N<=2tau. Extracting the procedure changes none of these uses. The reciprocal deps/justified_by arrangement is the ordinary definition well-definedness rule, not a logical prerequisite cycle."
+        }
+      ],
+      "affected_use": "Only the algorithm's justified_by connection to the logarithm enclosure lemma is assigned here; its rational formulas, positive input conditions and increment-and-test loop coincide exactly with the updated lemma's analyzed procedure.",
+      "invalidated_claim": "No claim is invalidated: the supplier continues to certify the same enclosure for every rational x>0 and termination for every rational tau>0, including its separate treatment of y=0.",
+      "minimality": "No repair is necessary because the updated supplier certifies the existing procedure without changing its required hypotheses or guarantees. Preserve the complete frozen item carrier byte-for-byte; no shared metadata change or downstream discovery is required.",
+      "edits": [],
+      "before_sha256": "9c3d25b597c98447b4ba12875bb8aa3535b0798f9ce6b7806bf63ae256df54bb",
+      "after_sha256": "9c3d25b597c98447b4ba12875bb8aa3535b0798f9ce6b7806bf63ae256df54bb",
+      "before_guard_sha256": "2697772de72ca8441c0d072a7f7c213ff2dc7c7d044955705a0daacdbf7faa76",
+      "after_guard_sha256": "2697772de72ca8441c0d072a7f7c213ff2dc7c7d044955705a0daacdbf7faa76",
+      "before_statement_sha256": "e05651d956b197fbea5f9a43618e8cdd6557e178f7818f6b6555db2b53fb017c",
+      "after_statement_sha256": "e05651d956b197fbea5f9a43618e8cdd6557e178f7818f6b6555db2b53fb017c",
+      "obligation_keys": [
+        "b7bfa7e1bbc7aee239497d30a18a6af0d0ab16c0c7f74827f08a36a32763d659"
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "lane": 1,
+      "report": {
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "pack": "pack-0001",
+        "lane": 1,
+        "input_sha256": "c2fd1bcbbf29be4bb0e718b730583595bdd8fd5cc81ea9fe61d7cbd7773c63b9",
+        "decisions": [
+          {
+            "id": "alg-qa-13-certified-count-output-rounding",
+            "disposition": "sound",
+            "reason": "The revised classical-bit-cost definition charges the algorithm's finite exact rational computations without imposing an efficiency bound. The current rounding lemma proves termination and the 2/3 error guarantee for precisely the r loop, h loop and ceiling output already specified here, with the same public integer hypotheses. Neither assigned supplier event invalidates this consumer; its bytes are preserved.",
+            "understanding": {
+              "basis": "familiarity",
+              "evidence": "Checked by elementary alternating-series estimates and integer rounding, reading items/alg-qa-13-certified-count-output-rounding.md, items/def-qa-classical-bit-cost.md, items/lem-qa-13-certified-count-output-rounding.md, items/thm-principal-inverse-tangent-calculus.md, items/thm-alternating-series-test.md and items/lem-qa-13-pi-rational-bounds.md. The principal-arctangent theorem explicitly includes pi/4=sum((-1)^k/(2k+1)), so |pi-4S_h|<=4/(2h+1). For y>0 the true x=2*pi*y/M lies strictly inside (0,8), and the prescribed argument intervals contain x with radii tending to zero. R_(r+1)/R_r=64/((2r+4)(2r+3)) tends to zero, so a finite r has N*R_r<1/24; for that fixed r, D_r is finite and positive, so the h loop terminates. For t in [0,8], the cosine tail after r>=4 is bounded by R_r, since successive omitted term magnitudes have ratios at most 64/((2r+4)(2r+3))<1 and tend to zero. Factoring differences of powers bounds |C_r(x)-C_r(x_h)| by D_r*rho_h. Thus z=N*(1-cos(x))/2=N*sin^2(pi*y/M) lies in [u,v] with v-u=N*(D_r*rho_h+R_r)<1/24. Choose n=floor(z+1/2); then |n-z|<=1/2, so every point of [u,v] is within 1/2+1/24<2/3 of n. The eligible integer interval [v-2/3,u+2/3] therefore contains n, and q=ceil(v-2/3) lies in it, proving |q-z|<=2/3. The y=0 branch returns exactly z=0. All arithmetic is on finite integer representations, implementable by finite-alphabet multitape transitions with its actual work charged; no unit-cost rational-operation or polynomial-time assertion is used. No external source was consulted or claimed as read.",
+              "uncertainty": false,
+              "sources": []
+            },
+            "event_uses": [
+              {
+                "event_key": "ee80e77c5d970ec35a0b4fb8ad29bc7290f1975d786de36ece50006cfa0f1e1d",
+                "affected_use": "The input paragraph charges every exact sum, factorial, comparison and ceiling operation as classical bit work under def-qa-classical-bit-cost.",
+                "reason": "The revised definition counts actual fixed-alphabet multitape-machine transitions, including public-data encoding, comparison, postprocessing and output. Finite integer arithmetic implements all the prescribed rational calculations and rational comparisons, and integer division implements the final ceiling. These costs remain charged rather than treated as unit-cost operations. The algorithm neither reads a hidden abstract instance encoding nor claims a time bound or oracle-processing exemption, so the clarified cost model leaves this use valid."
+              },
+              {
+                "event_key": "1439b1346366190e271435824c330877cb4cc0333e5f237fd43ffba903915c9b",
+                "affected_use": "The justified_by entry and final Definition sentence use lem-qa-13-certified-count-output-rounding to establish termination and the error guarantee of the prescribed interval procedure.",
+                "reason": "The current lemma retains exactly N>=1, even M>=2, 0<=y<M and |q-N*sin^2(pi*y/M)|<=2/3, with no polynomial bit bound. Its fact F11 identifies this algorithm's exact instructions; proof steps 1.1 and 2.1 establish enclosure and termination for its R_r and h tests, and step 3.1 proves that its q=ceil(v-2/3) is eligible. The added exact cyclotomic identity imposes no additional input restriction and is unnecessary to execute this rational-only procedure. The supplier therefore still justifies this specific algorithm, rather than merely an unrelated existence assertion."
+              }
+            ],
+            "affected_use": "Only the exact-arithmetic cost convention and the existing justified_by termination/error reference are implicated by the two assigned events; both remain applicable to the unchanged rational-interval instructions.",
+            "invalidated_claim": "No claim is invalidated: the same admitted inputs yield a terminating rational procedure with the stated integer rounding guarantee, and all actual classical bit work remains charged.",
+            "minimality": "No edit is mathematically necessary, so edits is empty and the complete item remains identical to the frozen assignment carrier. No shared metadata was changed; no downstream discovery or unresolved mathematical obligation remains for this lane.",
+            "edits": []
+          }
+        ]
+      },
+      "sha256": "503525df599c8b736484810d5b06b25ae3b8943a83a69ee8a4dc8199499ee589"
+    },
+    {
+      "lane": 2,
+      "report": {
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "pack": "pack-0001",
+        "lane": 2,
+        "input_sha256": "48d8b4a9ef31a95e35cfe77d9e595225bc9f8703b280e15de62b38654f0e5d31",
+        "decisions": [
+          {
+            "id": "alg-qa-29-certified-natural-logarithm-enclosure",
+            "disposition": "sound",
+            "reason": "The supplier event replaces its embedded increasing-N search with a reference to this extracted algorithm, while retaining the same S_N, T_N, positive rational input domain, logarithm enclosure and width bound. This algorithm computes exactly those rational expressions, starts at N=1, tests T_N<=tau, increments on failure and returns the certified interval on success. Its justified_by reference therefore remains valid without any item edit.",
+            "understanding": {
+              "basis": "familiarity",
+              "evidence": "Read the complete assigned Definition and current supplier Statement, Facts and Proof, and the exact prerequisite statements in items/def-natural-logarithm.md, def-real-exponential-function-and-e.md, cor-exponential-reciprocal-and-positivity.md, thm-logarithm-derivative-and-integral.md, thm-chain-rule.md, thm-algebra-of-derivatives.md, lem-derivative-of-a-power.md, thm-ftc-second-part.md, thm-continuous-implies-integrable.md, thm-monotonicity-of-the-integral.md and lem-geometric-sequence-null.md. Read the old supplier statement recorded under repair_notes in research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u53.json. The argument uses familiar elementary calculus: for H(u)=ln((1+u)/(1-u)), H'-P_N'=2u^(2N)/(1-u^2). Integrating on [0,s] for 0<s<1 bounds the remainder by 2s^(2N+1)/((2N+1)(1-s^2)); reciprocal symmetry handles negative y, and y=0 is evaluated directly. The derivative domain (-1,1) is open, each nondegenerate integration interval lies inside it, and the integral comparison has its required positive orientation. For rational x>0, |y|<1 and both denominators are nonzero. Geometric decay gives T_N->0, so the sequential exact rational tests terminate for every tau>0. No external URL was read or needed for this familiar argument.",
+              "uncertainty": false,
+              "sources": []
+            },
+            "event_uses": [
+              {
+                "event_key": "efe9a83e035fedef702cec2a82f17bd2eb77cba9bd74d8a2e4588b036bf133e5",
+                "affected_use": "The frontmatter justified_by entry uses lem-qa-29-certified-natural-logarithm-series to establish well-definedness of the positive-rational-input search and certification of its returned rational interval.",
+                "reason": "The updated supplier explicitly proves termination and certification for this very algorithm, with unchanged formulas and hypotheses. When x=1, y=0 and T_1=0, so the first test succeeds and returns [0,0]. Otherwise 0<|y|<1 gives T_N->0, ensuring a successful finite test; the supplier's error bound places ln(x) in the returned interval and gives width 2T_N<=2tau. Extracting the procedure changes none of these uses. The reciprocal deps/justified_by arrangement is the ordinary definition well-definedness rule, not a logical prerequisite cycle."
+              }
+            ],
+            "affected_use": "Only the algorithm's justified_by connection to the logarithm enclosure lemma is assigned here; its rational formulas, positive input conditions and increment-and-test loop coincide exactly with the updated lemma's analyzed procedure.",
+            "invalidated_claim": "No claim is invalidated: the supplier continues to certify the same enclosure for every rational x>0 and termination for every rational tau>0, including its separate treatment of y=0.",
+            "minimality": "No repair is necessary because the updated supplier certifies the existing procedure without changing its required hypotheses or guarantees. Preserve the complete frozen item carrier byte-for-byte; no shared metadata change or downstream discovery is required.",
+            "edits": []
+          }
+        ]
+      },
+      "sha256": "ca5c08d335927b49cf2eb71b2cc34cb97ff7beb86a7e1478f60b16cd004b7293"
+    },
+    {
+      "lane": 3,
+      "report": {
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "pack": "pack-0001",
+        "lane": 3,
+        "input_sha256": "948b2210089bcd547e35262ec6d6c33526de7d0105116da8de2596c347d550cf",
+        "decisions": []
+      },
+      "sha256": "5d8efe7e4c5554f68650cd0929aaac3020fe9a702e76224baaaf038a1bbd94c5"
+    }
+  ]
+}

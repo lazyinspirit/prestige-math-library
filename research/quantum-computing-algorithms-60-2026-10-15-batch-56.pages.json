@@ -1,0 +1,549 @@
+[
+  {
+    "order": 2276,
+    "id": "quantum-complexity-classes-and-oracle-separations",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Quantum Complexity Classes and Oracle Separations",
+    "companion": "quantum-complexity-classes-and-oracle-separations-examples",
+    "requires": [
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "counting-complexity-and-sharpp",
+      "sat-tableaux-and-quantified-space-completeness",
+      "the-polynomial-hierarchy-and-relativization",
+      "effective-numberings-reductions-resources-and-randomness",
+      "logarithmic-space-nl-and-reachability",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "clifford-t-exact-and-approximate-synthesis",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "registers-tensor-products-and-partial-trace",
+      "measurements-povms-and-instruments",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "def-qa-32-promise-bpp",
+        "kind": "definition",
+        "title": "PromiseBPP",
+        "statement": "Let $\\Pi=(Y,N)$ be a promise problem, so $Y,N\\subseteq\\{0,1\\}^*$ are disjoint ([[def-promise-problem]]). We say $\\Pi$ belongs to $\\mathrm{PromiseBPP}$ if there are one fixed probabilistic Turing machine $M$ and one positive integer polynomial $p$ such that every random branch halts within $p(|x|)$ transitions and\n\n$$ \\Pr[M(x)\\text{ accepts}]\\ge \\frac23\\quad(x\\in Y),\\qquad \\Pr[M(x)\\text{ accepts}]\\le \\frac13\\quad(x\\in N). $$\n\nThe probability is over the uniform finite tape $\\{0,1\\}^{p(|x|)}$ of independent fair bits; after the machine halts, unused suffix bits are ignored, as in [[def-probabilistic-polynomial-time-machine-interface]]. The pair has no correctness requirement outside $Y\\cup N$. For total promise pairs this is the ordinary BPP acceptance convention of [[def-rp-corp-zpp-bpp-and-pp-classes]].",
+        "deps": [
+          "def-promise-problem",
+          "def-probabilistic-polynomial-time-machine-interface",
+          "def-rp-corp-zpp-bpp-and-pp-classes"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-32-indexed-to-full-list-conversion",
+        "kind": "lemma",
+        "title": "Indexed uniform circuits convert to polynomial-time full lists",
+        "statement": "Let $(C_n)_{n\\ge0}$ be a polynomial-size Boolean circuit family generated in the indexed-gate, logspace sense of [[def-logspace-uniform-circuit-family]]. Assume a fixed polynomial $q$ bounds the number of non-input nodes of $C_n$ by $q(n)$. There is one deterministic polynomial-time machine which, on unary input $1^n$, writes a complete self-delimiting topological gate list for $C_n$, including its input count, all node records and its designated output. The resulting list describes the same circuit and therefore computes the same Boolean function.",
+        "deps": [
+          "def-logspace-uniform-circuit-family"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the proof counts configurations of one deterministic transducer and uses finite output lists."
+      },
+      {
+        "id": "lem-qa-32-simon-function-register-instrument",
+        "kind": "lemma",
+        "title": "Computational-basis instruments and conditional states on two registers",
+        "statement": "Let $A,B$ be nonzero finite-dimensional registers with ordered orthonormal bases $(e_a)_{a\\in\\Lambda}$ and $(g_b)_{b\\in\\Gamma}$. Define $P_a e_{a'}=\\delta_{a,a'}e_a$ and $Q_b g_{b'}=\\delta_{b,b'}g_b$; tensor products of these maps use [[def-qc-tensor-map]]. The maps\n\n$$ \\mathcal I_a(R)=(P_a\\otimes I_B)R(P_a\\otimes I_B),\\qquad \\mathcal J_b(R)=(I_A\\otimes Q_b)R(I_A\\otimes Q_b) $$\n\nform finite instruments on $A\\otimes B$. If $\\psi=\\sum_{a,b}c_{a,b}e_a\\otimes g_b$ is a unit vector, then their outcome probabilities are\n\n$$ p_A(a)=\\sum_b|c_{a,b}|^2,\\qquad p_B(b)=\\sum_a|c_{a,b}|^2. $$\n\nFor a positive-probability outcome, the conditional state is the rank-one density operator on the normalized projected vector. This applies to measuring either register of the Simon state after its coherent XOR query.",
+        "deps": [
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-completely-positive-map",
+          "def-qc-density-operator",
+          "def-qc-dirac-notation-conversion",
+          "def-non-negative-and-positive-operator",
+          "def-trace-of-an-endomorphism",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Section 2.3.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 3, Section 3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all outcome sets, registers, and sums are finite."
+      },
+      {
+        "id": "def-qa-32-eqp-promise-class",
+        "kind": "definition",
+        "title": "EQP on promise problems in the QC14 model",
+        "statement": "A promise problem $\\Pi=(Y,N)$ belongs to $\\mathrm{EQP}$ in the QC14 model if there is a full-list uniform family $(C_n)_{n\\ge0}$ and a polynomial-time total acceptance predicate $A_n$ as in [[def-qc-promise-computation-model]], [[def-qc-uniform-circuit-family]], and [[def-qc-quantum-acceptance-probability]], using the exact gate and cost conventions of [[def-qc-circuit-cost-model]] and [[def-qc-clifford-t-gate-library]], such that\n\n$$ p_{C_{|x|}}(x)=1\\quad(x\\in Y),\\qquad p_{C_{|x|}}(x)=0\\quad(x\\in N). $$\n\nNo condition is imposed on $x\\notin Y\\cup N$ ([[def-promise-problem]]). The finite output law is normalized by [[thm-qc-output-acceptance-law-normalizes]].",
+        "deps": [
+          "def-promise-problem",
+          "def-qc-promise-computation-model",
+          "def-qc-uniform-circuit-family",
+          "def-qc-quantum-acceptance-probability",
+          "def-qc-circuit-cost-model",
+          "def-qc-clifford-t-gate-library",
+          "thm-qc-output-acceptance-law-normalizes"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-32-zqp-promise-class",
+        "kind": "definition",
+        "title": "ZQP on promise problems with bounded failure",
+        "statement": "In this page, $\\mathrm{ZQP}$ denotes the following bounded-failure zero-error promise class. A promise problem $\\Pi=(Y,N)$ belongs to $\\mathrm{ZQP}$ if there are a full-list uniform QC14 family $(C_n)$, a polynomial-time total label decoder $D_n(x,z)\\in\\{\\mathrm{YES},\\mathrm{NO},?\\}$, and the finite output law of [[def-qc-promise-computation-model]], [[def-qc-uniform-circuit-family]], and [[def-qc-quantum-acceptance-probability]], such that for every $x\\in Y$ the probability of $\\mathrm{YES}$ is at least $2/3$ and the probability of $\\mathrm{NO}$ is zero, while for every $x\\in N$ the probability of $\\mathrm{NO}$ is at least $2/3$ and the probability of $\\mathrm{YES}$ is zero. All output strings receive one of the three labels, so the remaining probability is the allowed failure label $?$; the output law is normalized by [[thm-qc-output-acceptance-law-normalizes]]. No promise condition is imposed off $Y\\cup N$.\n\nThis explicit fixed-circuit, bounded-failure convention is sufficient for the containments proved on this page. No equivalence with an expected-time quantum zero-error model or with $\\mathrm{BQP}\\cap\\mathrm{coBQP}$ is asserted.",
+        "deps": [
+          "def-promise-problem",
+          "def-qc-promise-computation-model",
+          "def-qc-uniform-circuit-family",
+          "def-qc-quantum-acceptance-probability",
+          "def-qc-circuit-cost-model",
+          "def-qc-clifford-t-gate-library",
+          "thm-qc-output-acceptance-law-normalizes"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-32-exact-clifford-t-boolean-circuit-embedding",
+        "kind": "lemma",
+        "title": "Boolean circuits compile exactly into the QC14 gate alphabet",
+        "statement": "Let a finite Boolean DAG in the basis of [[def-boolean-circuit-size-depth-fanin-and-basis]] have $n$ ordered input bits, $m$ ordered output ports, $S$ non-input nodes and $E$ input-port uses counted with multiplicity. There is a deterministic compiler which, from its explicit topological list, emits a valid QC14 circuit over exactly $H,T,T^\\dagger,\\mathrm{CNOT}$ with the first $n$ wires as data, $m$ zero-initialized target wires, at most $S+E$ clean value wires and one additional clean scratch wire. For every $x\\in\\{0,1\\}^n$ and $y\\in\\{0,1\\}^m$, its unitary satisfies\n\n$$ |x,y,0^{S+E+1}\\rangle\\longmapsto |x,y\\oplus f(x),0^{S+E+1}\\rangle, $$\n\nwhere $f(x)$ is the ordered Boolean output. It uses at most $27(6S+4E+m)$ QC14 gate occurrences, and the full self-delimiting circuit list is produced in time polynomial in the Boolean-DAG description length. The same action holds on superpositions by linearity.",
+        "deps": [
+          "alg-qc-reversible-embedding",
+          "thm-qc-reversible-embedding-cost",
+          "def-qc-clifford-t-gate-library",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-uniform-circuit-family",
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits, Sections 5.2.2–5.2.3",
+              "url": "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Sections 2.1.2–2.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the compilation is a finite gate replacement and uses no choice."
+      },
+      {
+        "id": "rem-qa-32-bqp-pp-pspace-proof-obligations",
+        "kind": "remark",
+        "title": "BQP to PP and PSPACE proof obligations in the exact QC14 basis",
+        "statement": "## Remarks\n\nThe established containments $\\mathrm{BQP}\\subseteq\\mathrm{PP}$ and $\\mathrm{BQP}\\subseteq\\mathrm{PSPACE}$ remain proof obligations for the exact QC14 gate alphabet $H,T,T^\\dagger,\\mathrm{CNOT}$, whose entries lie in $\\mathbb Q(\\zeta_8)=\\mathbb Q(i,\\sqrt2)$ ([[def-qc-bqp-promise-class]], [[def-qc-clifford-t-gate-library]]). The PP route must encode amplitudes and acceptance weights over this number field, prove the required GapP closure, and compare against the strict $1/2$ threshold. The BQP thresholds $2/3$ and $1/3$ differ by $1/3$; each is at distance $1/6$ from $1/2$ (equivalently, $2p-1$ has margin at least $1/3$). A rational path count cannot simply replace the exact $\\mathbb Q(\\zeta_8)$ computation, since the probabilities can contain $\\sqrt2$. The PSPACE route needs exact-field or certified-precision recursive evaluation with explicit bit-length and space bounds for each arithmetic and threshold step. The source containment arguments are context, not local proof suppliers; no containment item is claimed here.",
+        "deps": [
+          "def-qc-bqp-promise-class",
+          "def-qc-clifford-t-gate-library",
+          "def-sharpp-and-gap-p-functions",
+          "thm-pp-is-sign-testing-gap-p",
+          "def-polynomial-space-and-nondeterministic-polynomial-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section III",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Sections 13.2–13.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-32-eqp-zqp-bqp-containments",
+        "kind": "theorem",
+        "title": "PromiseP is contained in EQP, EQP in ZQP, and ZQP in BQP",
+        "statement": "In the QC14 promise-problem model,\n\n$$ \\mathrm{PromiseP}\\subseteq\\mathrm{EQP}\\subseteq\\mathrm{ZQP}\\subseteq\\mathrm{BQP}. $$\n\nHere $\\mathrm{ZQP}$ has the bounded-failure, no-wrong-definite-answer convention of [[def-qa-32-zqp-promise-class]], and $\\mathrm{BQP}$ uses the exact $2/3,1/3$ thresholds of [[def-qc-bqp-promise-class]].",
+        "deps": [
+          "def-promise-problem",
+          "def-qa-32-eqp-promise-class",
+          "def-qa-32-zqp-promise-class",
+          "def-qc-bqp-promise-class",
+          "thm-qc-output-acceptance-law-normalizes",
+          "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+          "lem-qa-32-indexed-to-full-list-conversion",
+          "lem-qa-32-exact-clifford-t-boolean-circuit-embedding"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections IV.1–IV.3",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the compiler and output predicates are finite and deterministic."
+      },
+      {
+        "id": "thm-qa-32-promise-classical-containments",
+        "kind": "theorem",
+        "title": "PromiseP is contained in PromiseBPP and PromiseBPP in BQP",
+        "statement": "For promise problems in the QC14 model,\n\n$$ \\mathrm{PromiseP}\\subseteq\\mathrm{PromiseBPP}\\subseteq\\mathrm{BQP}, \\qquad \\mathrm{BPP}\\subseteq\\mathrm{BQP}. $$",
+        "deps": [
+          "def-promise-problem",
+          "def-qa-32-promise-bpp",
+          "def-rp-corp-zpp-bpp-and-pp-classes",
+          "def-probabilistic-polynomial-time-machine-interface",
+          "def-qc-bqp-promise-class",
+          "lem-polynomial-time-computations-have-logspace-uniform-circuits",
+          "lem-qa-32-indexed-to-full-list-conversion",
+          "lem-qa-32-exact-clifford-t-boolean-circuit-embedding",
+          "def-qc-clifford-t-gate-library",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-quantum-acceptance-probability",
+          "thm-qc-output-acceptance-law-normalizes"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections IV.1 and IV.3",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 13, Section 13.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; random tapes, circuit families, and compiler outputs are finite and explicitly encoded."
+      },
+      {
+        "id": "def-qa-32-simon-decision-oracle-promise",
+        "kind": "definition",
+        "title": "Simon injectivity decision promise with XOR-oracle access",
+        "statement": "Fix $n\\ge1$ and put $V_n=\\{0,1\\}^n$, with coordinatewise addition $\\oplus$ over $\\mathbb F_2$ and cardinality $N=2^n$. For $s,y\\in V_n$, define the dot product $s\\cdot y=\\sum_{j=0}^{n-1}s_jy_j\\pmod 2$. A table code consists of a unary header $1^n0$ followed by the $n$-bit words $f(x)$ in lexicographic order of $x\\in V_n$; this identifies function instances with binary strings as in [[def-promise-problem]], [[def-finite-field-and-its-order]], and [[def-qc-ordered-bitstring-encoding]].\n\nThe YES promise set $Y_n$ consists of table codes of injective maps $f:V_n\\to V_n$. The NO promise set $N_n$ consists of codes for which there is a nonzero $s\\in V_n$ such that, for every $x,y\\in V_n$,\n\n$$ f(x)=f(y)\\quad\\Longleftrightarrow\\quad y=x\\ \\text{or}\\ y=x\\oplus s. $$\n\nThe sets are disjoint: every NO function has a collision between the distinct inputs $x$ and $x\\oplus s$. Its mask is unique, since two different nonzero masks would give a third distinct input in the same fiber. Classical query access returns $f(x)$ at a chosen address. Quantum query access is the coherent XOR oracle $U_f|x,z\\rangle=|x,z\\oplus f(x)\\rangle$ of [[def-qc-coherent-function-oracle]], which is unitary and involutive by [[thm-qc-reversible-xor-oracle-unitary]]. Each call is one query; query charges remain separate from ordinary gate costs by [[def-qc-circuit-cost-model]]. In the query model the table is not supplied as gate data; the table code fixes the promised function only.",
+        "deps": [
+          "def-promise-problem",
+          "def-finite-field-and-its-order",
+          "def-qc-ordered-bitstring-encoding",
+          "thm-qc-bitstring-index-is-bijection",
+          "def-qc-coherent-function-oracle",
+          "thm-qc-reversible-xor-oracle-unitary",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 3, Sections 3.1–3.3",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 1, Section 1.6",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections I and V",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qa-32-simon-query-rank-test",
+        "kind": "algorithm",
+        "title": "Simon promise decision by sampled rank",
+        "statement": "Input: an integer $n\\ge1$ and oracle access to a promised function $f:V_n\\to V_n$ from [[def-qa-32-simon-decision-oracle-promise]]. Set $m=n+2$. For each of $m$ independent runs, initialize two ordered $n$-qubit registers $X,Y$ to $|0^n\\rangle|0^n\\rangle$, apply $H^{\\otimes n}$ to $X$, and query the coherent XOR oracle $U_f$ once on $X,Y$. Apply the computational-basis instrument on $Y$ from [[lem-qa-32-simon-function-register-instrument]], record and discard its classical outcome, apply $H^{\\otimes n}$ again to $X$, and measure $X$ in the computational basis using the same instrument. Record the resulting $y_j\\in V_n$.\n\nForm the $m\\times n$ binary matrix with rows $y_1,\\ldots,y_m$. Set the next pivot row to $r=1$ and scan columns $j=1,\\ldots,n$ from left to right. In column $j$, search rows $r,\\ldots,m$ for the first row with a $1$ in that column. If there is no such row, leave the column without a pivot and continue to the next column. Otherwise swap that row with row $r$, XOR row $r$ into every other row with a $1$ in column $j$, and increase $r$ by one. Accept (declare injective) exactly when the number of pivots is $n$.\n\nThe operation counts and correctness of this procedure are established in [[thm-qa-32-simon-sample-rank-correctness]]. A query is charged separately from an implementation of $f$ by [[def-qc-circuit-cost-model]]. It makes no gate-time separation claim.",
+        "deps": [
+          "def-qa-32-simon-decision-oracle-promise",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-clifford-t-gate-library",
+          "def-qc-coherent-function-oracle",
+          "thm-qc-reversible-xor-oracle-unitary",
+          "def-qc-instrument-and-conditional-state",
+          "lem-qa-32-simon-function-register-instrument",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 3, Section 3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 1, Section 1.6",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-32-simon-classical-randomized-query-lower-bound",
+        "kind": "theorem",
+        "title": "Classical randomized Simon decision requires square-root-many queries",
+        "statement": "Let $N=2^n$ with $n\\ge4$. A classical randomized adaptive algorithm that, given only classical query access $x\\mapsto f(x)$ to the Simon decision promise of [[def-qa-32-simon-decision-oracle-promise]], must decide injective versus nonzero-mask two-to-one with worst-case error at most $1/3$ requires $\\Omega(\\sqrt N)=\\Omega(2^{n/2})$ queries. Ordinary classical computation between queries is unrestricted.",
+        "deps": [
+          "def-qa-32-simon-decision-oracle-promise",
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 3, Section 3.3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Sections I and V",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the oracle families and randomized decision trees are finite."
+      },
+      {
+        "id": "thm-qa-32-simon-sample-rank-correctness",
+        "kind": "theorem",
+        "title": "Simon rank test correctness and linear query cost",
+        "statement": "For every $n\\ge1$, the sample in [[alg-qa-32-simon-query-rank-test]] is uniform on $V_n$ when $f$ is YES, and uniform on $s^\\perp=\\{y:s\\cdot y=0\\}$ when $f$ is NO with mask $s\\ne0$. The rank test rejects every NO instance. On YES its error probability is at most\n\n$$ (2^n-1)2^{-(n+2)}<\\frac14. $$\n\nIt uses exactly $n+2$ queries, $2n(n+2)$ ordinary Hadamard gates, $2(n+2)$ finite register readouts, and $O(n^3)$ classical bit operations.",
+        "deps": [
+          "alg-qa-32-simon-query-rank-test",
+          "def-qa-32-simon-decision-oracle-promise",
+          "lem-qa-32-simon-function-register-instrument",
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws",
+          "thm-product-probability-has-independent-coordinate-events",
+          "def-qc-clifford-t-gate-library",
+          "def-qc-tensor-map",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 3, Section 3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Watrous, Quantum Computational Complexity, Section IV.1",
+              "url": "https://arxiv.org/pdf/0804.3401"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the proof uses only finite sums, finite probability spaces, and explicit bit-vector operations."
+      }
+    ]
+  },
+  {
+    "order": 2277,
+    "id": "quantum-complexity-classes-and-oracle-separations-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Quantum Complexity Classes and Oracle Separations — Examples",
+    "companion": "quantum-complexity-classes-and-oracle-separations",
+    "requires": [
+      "quantum-complexity-classes-and-oracle-separations",
+      "uniform-circuit-families-promise-problems-and-complexity"
+    ],
+    "items": [
+      {
+        "id": "cex-qa-32-oracle-separation-is-not-gate-separation",
+        "kind": "counterexample",
+        "title": "Simon query lower bounds do not imply explicit-input gate lower bounds",
+        "statement": "For the Simon decision promise, the classical-versus-quantum oracle-query separation implies that the same promise problem, with an explicit full truth-table input of length $L$, has no deterministic algorithm running in time polynomial in $L$.",
+        "deps": [
+          "thm-qa-32-simon-classical-randomized-query-lower-bound",
+          "thm-qa-32-simon-sample-rank-correctness",
+          "def-qa-32-simon-decision-oracle-promise",
+          "def-qc-circuit-cost-model",
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-worst-case-time-and-space-complexity"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 3, Section 3.3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 1, Section 1.6",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-32-simon-small-instance",
+        "kind": "example",
+        "title": "Simon decision for n equals two",
+        "statement": "Take $n=2$, so $V_2=\\mathbb F_2^2$, and consider a NO function with mask $s=01$. Then $s^\\perp=\\{00,10\\}$, so every Simon sample lies in this one-dimensional subspace and the rank test rejects. On a YES permutation, the algorithm takes $m=n+2=4$ independent uniform samples. Its exact probability of failing to span is $23/128$, and the general union bound is $3/16$.",
+        "deps": [
+          "alg-qa-32-simon-query-rank-test",
+          "thm-qa-32-simon-sample-rank-correctness",
+          "def-finite-probability-space-and-event"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 3, Section 3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

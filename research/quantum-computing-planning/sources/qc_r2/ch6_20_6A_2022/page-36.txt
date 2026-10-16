@@ -1,0 +1,96 @@
+30
+Quantum Algorithms
+
+The next step is to apply the Grover iteration many times in succession, where each
+iteration enhances the overlap of the quantum superposition with the marked state |w⟩,
+while suppressing the amplitude for each |x⟩with x ̸= w. This iteration is
+
+UGrover = UsUw
+(6.156)
+
+where Uw is the query and
+
+Us = 2|s⟩⟨s| −I
+(6.157)
+
+reflects a vector about the axis determined by |s⟩. Note that Us is easy to construct as
+a quantum circuit. It can be expressed as
+
+Us = H⊗n(2|0⟩⟨0| −I)H⊗n
+(6.158)
+
+since H⊗n maps |s⟩to |0⟩, where H is the single qubit Hadamard gate. Furthermore a
+multiply controlled Z gate can be formed from a multiply controlled-not gate Λn−1(X)
+where the target qubit has a Hadamard before and after the gate, and we know that
+Λn−1(X) can be constructed from O(n) Toffoli gates. Finally, we can conjugate by X⊗n
+
+so the phase gate is triggered by |00..0⟩rather than |11..1⟩. Thus Us is realized by a
+circuit of size O(log N).
+What does UGrover do? It preserves the plane spanned by |s⟩and |w⟩, so we may
+confine our attention to that plane. First, Uw reflects |s⟩about the axis |w⊥⟩(the vector
+⊥to |w⟩in the span of |s⟩and |w⟩). Then Us reflects Uw|s⟩about the axis |s⟩. The net
+effect of UGrover, then, is a counterclockwise rotation in the plane by the angle 2θ, where
+θ is initial angle between |s⟩and |w⟩. Each time we repeat the Grover iteration the state
+vector rotates further in the counterclockwise direction by 2θ.
+The initial angle θ between |s⟩and |w⊥⟩is given by sin θ = ⟨w|s⟩= 1/
+√
+
+N. For
+N ≫1, then, we have θ = 1/
+√
+
+N + O(1/N3/2). If we repeat the Grover iteration T
+times, then the vector is rotated away from the |w⊥⟩axis by (2T + 1)θ.
+We may choose T such that (2T + 1)θ = π/2 + δ where |δ| ≤θ/2 ≈
+1
+2
+√
+
+N . Then
+if we measure in the computational basis, we find the outcome |w⟩with probability
+Prob(w) = cos2 δ ≥1 −δ2 ≥1 −
+1
+4N . Thus we find |w⟩with success probability close
+to 1 using T ≈π
+
+4θ ≈π
+
+4
+√
+
+N Grover iterations, making use of T quantum queries to the
+black box. This is Grover’s quadratic speedup.
+Suppose now that there are r marked states, where r is known. Classically, with each
+query the probability of finding a solution (wi such that f(wi) = 1) is r/N, so we need
+O(N/r) queries to find a solution with constant success probability. Quantumly, the
+uniform superposition of the marked states
+
+|marked⟩= 1
+√r
+
+r
+�
+
+i=1
+|wi⟩
+(6.159)
+
+has overlap with |s⟩=
+1
+√
+
+N
+�N−1
+x=0 |x⟩
+
+⟨marked|s⟩=
+�r
+
+N = sin θ
+(6.160)
+
+and the Grover iteration again rotates by 2θ in the plane spanned by |s⟩and |marked⟩
+(because the query reflects about the axis perpendicular to |marked⟩).
+As above, then, for N/r ≫1, we achieve success probability Prob = 1 −O(r/N)
+
+

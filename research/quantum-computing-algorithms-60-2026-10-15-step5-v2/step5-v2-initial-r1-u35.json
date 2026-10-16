@@ -1,0 +1,555 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "35",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "lem-qa-11-good-bad-decomposition",
+      "model": "gpt-6-luna",
+      "context_sha256": "848c2b1d5c6a72395c5df0a9aea30d28c65919dc0ea16be03d3c86d1a116cecf",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The equal-positive-amplitude meaning of uniform state was implicit and absent from its supplied definitions. The existing finite-sum decomposition is correct once this notation is explicit; Given now fixes it without changing the claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-qa-11-known-count-random-selection-bit-cost",
+      "model": "gpt-6-luna",
+      "context_sha256": "b7cfdd5d9a14d34d7218d83527e67883015e8b58e9cdc1de91de343283504876",
+      "outcome": "false_positive",
+      "reason": "False positive: lem-of-square-monotone states u<=v iff u^2<=v^2 for nonnegative u,v. By the supplied square-root theorem, u=sqrt(N/t), v=sqrt(N) are nonnegative with squares N/t<=N because t>=1. Thus F5 is an immediate specialization, not an unsupported premise. The binary-search invariant, O(n) halvings on O(n)-bit operands, O(n^3) schoolbook work and separate nine-round bookkeeping are valid, including n=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-11-integer-iteration-regime",
+      "model": "gpt-6-luna",
+      "context_sha256": "530dc1f9795284847b78336149690d8c60952bb7c520fca569341de2bacb8533",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 omitted the cited theorem restriction 0<t<N and failed to distinguish its t=N endpoint. The endpoint conclusion was correct but its fact restatement was inaccurate. F1 and step 4.1 now use the explicit endpoint probability 1; the interior rounding argument is unchanged in substance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-11-known-count-success-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "7964c79d6f1c3495df33b751927409338cc5c249a0afedc14d25b74724c55617",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F4 attributed the recurrence-to-sine identity to the preprocessing proposition although its Statement supplies only the recurrence and cost. Without that identity, maximizing the rational list does not establish the claimed success bound. Repaired by a local induction from cosine addition, parity, cos(0)=1 and power reduction, showing T_m(q)=cos(2m theta) and r_k=p_k, before comparing candidates.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-11-known-count-query-cost",
+      "model": "gpt-6-luna",
+      "context_sha256": "9cf505ff72a7f572b2b21ea1d0e8bb44efd1bd113fe8b9ca282dbd9168267bff",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 omitted the actual algorithm Definition clause returning none with no query at t=0, although step 3.1 attributed that clause to F1; F4 establishes only the output. The no-query fact is already explicit in the actual dependency. Added it to F1 and separated the two justifications in step 3.1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-11-good-bad-decomposition",
+      "disposition": "repaired",
+      "post_sha256": "b7f775f2a74eea964a2bea639a73c4da9e5315ea35f022665362828714c76da6",
+      "review_context_sha256": "841b9d493b6bbce4455d95d4c2704e1c39de5cffc696514e4f824442e42bb921",
+      "reason": "Added the missing uniform-state notation in Given. Disjoint finite orthonormal sums have norm one; arcsine range and Pythagoras give sin(theta)=sqrt(t/N) and cos(theta)=sqrt(1-t/N). No claim or dependency changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-qa-11-known-count-random-selection-bit-cost",
+      "disposition": "unaffected",
+      "post_sha256": "9ddfb4b7f82765737fffa90a1c95d43dda2f4cce7958fdc6c28e922912006663",
+      "review_context_sha256": "c09dedddb8e60f725cc0deba5340177d6c2c3fb0e1f04906428e0c180aaed911",
+      "reason": "False positive: lem-of-square-monotone states u<=v iff u^2<=v^2 for nonnegative u,v. By the supplied square-root theorem, u=sqrt(N/t), v=sqrt(N) are nonnegative with squares N/t<=N because t>=1. Thus F5 is an immediate specialization, not an unsupported premise. The binary-search invariant, O(n) halvings on O(n)-bit operands, O(n^3) schoolbook work and separate nine-round bookkeeping are valid, including n=0. Only the contract F4 quotation was synchronized after inspecting the concurrent supplier clarification: all work here uses public N,t, sampled labels and measured addresses, so hidden-input encoding is never assumed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-qa-11-integer-iteration-regime",
+      "disposition": "repaired",
+      "post_sha256": "f47daa8f29b3befe4146253e896dd236a5699fdc499cd5e2354e042629ddb614",
+      "review_context_sha256": "0b493f52fb55f0fb07ceb626de06eaf73bd888f79aeb0c91986292b2dc584114",
+      "reason": "Checked pi<4, sqrt(a)<=theta<=pi/4, nearest-integer error <=1/2 and k<=K. Monotone sine bounds failure by a. Corrected endpoint F1 and step 4.1, supplied the cosine-monotonicity clause actually used, and exhibited k_*=1/2 when a=1/2. No Statement changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-11-known-count-success-bound",
+      "disposition": "repaired",
+      "post_sha256": "b101b633c944a388a64c79e4bff1ce425b9adcbf641fa4333e4719a02dfbf305",
+      "review_context_sha256": "20fa6a33e35cec1574308ed9dbb23a113883825ab7a0dd5373bed2cda8d3ea02",
+      "reason": "Derived the recurrence identity locally at every computed index, identified the rational maximizing list with actual integer-iterate probabilities, and checked both sparse/dense candidate comparisons, exact verification and t=0,N endpoints. Statement preserved; this is author repair, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-11-known-count-query-cost",
+      "disposition": "repaired",
+      "post_sha256": "77dfd3c5d3bac0c9d65162549bcdccfe9105987e4deafc332a8b11174d4daa97",
+      "review_context_sha256": "b25550ead52bc827062db8b365cac799ff090889b418b83526e2bc5bfddb3db1",
+      "reason": "Checked each iterate costs one query, plus one verification, with k<=ceil(sqrt(N/t)); K+1<=3sqrt(N/t) because N/t>=1. F1 now records the no-query t=0 branch, and step 3.1 cites it accurately. The explicit candidate count for t=1 justifies the exponential classical-work caveat. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "record": {
+        "defect_id": "qa60-step5-initial-r1-u35-1",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T05:40:15.363782Z",
+        "class": "accuracy",
+        "subclass": "undefined-notation",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "lem-qa-11-good-bad-decomposition",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "35",
+        "basis": "The equal-positive-amplitude meaning of uniform state was implicit and absent from its supplied definitions. The existing finite-sum decomposition is correct once this notation is explicit; Given now fixes it without changing the claim.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "adjudication_ref": [
+          {
+            "id": "lem-qa-11-good-bad-decomposition",
+            "model": "gpt-6-luna",
+            "context_sha256": "848c2b1d5c6a72395c5df0a9aea30d28c65919dc0ea16be03d3c86d1a116cecf",
+            "item_sha256": "81d0d0591c355a782e43cdc939b3b9bd2489415ee0144855dd3822c671c8f96c"
+          }
+        ],
+        "pre_sha256": "270811088d3946a901af1546b32f68246a48e6958a42e2da75d8b54549c38f1f",
+        "post_sha256": "b7f775f2a74eea964a2bea639a73c4da9e5315ea35f022665362828714c76da6",
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u35.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "record": {
+        "defect_id": "qa60-step5-initial-r1-u35-2",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T05:40:15.363782Z",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "prop-qa-11-known-count-random-selection-bit-cost",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "false-positive",
+        "batch": "35",
+        "basis": "False positive: lem-of-square-monotone states u<=v iff u^2<=v^2 for nonnegative u,v. By the supplied square-root theorem, u=sqrt(N/t), v=sqrt(N) are nonnegative with squares N/t<=N because t>=1. Thus F5 is an immediate specialization, not an unsupported premise. The binary-search invariant, O(n) halvings on O(n)-bit operands, O(n^3) schoolbook work and separate nine-round bookkeeping are valid, including n=0.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "adjudication_ref": [
+          {
+            "id": "prop-qa-11-known-count-random-selection-bit-cost",
+            "model": "gpt-6-luna",
+            "context_sha256": "b7cfdd5d9a14d34d7218d83527e67883015e8b58e9cdc1de91de343283504876",
+            "item_sha256": "97f361640a6ead510248e10c23bebc9003f9ed75d86dae60cdac224131225159"
+          }
+        ],
+        "pre_sha256": "9ddfb4b7f82765737fffa90a1c95d43dda2f4cce7958fdc6c28e922912006663",
+        "post_sha256": "9ddfb4b7f82765737fffa90a1c95d43dda2f4cce7958fdc6c28e922912006663",
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u35.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "record": {
+        "defect_id": "qa60-step5-initial-r1-u35-3",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T05:40:15.363782Z",
+        "class": "accuracy",
+        "subclass": "citation-truncated",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-qa-11-integer-iteration-regime",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "35",
+        "basis": "F1 omitted the cited theorem restriction 0<t<N and failed to distinguish its t=N endpoint. The endpoint conclusion was correct but its fact restatement was inaccurate. F1 and step 4.1 now use the explicit endpoint probability 1; the interior rounding argument is unchanged in substance.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "adjudication_ref": [
+          {
+            "id": "thm-qa-11-integer-iteration-regime",
+            "model": "gpt-6-luna",
+            "context_sha256": "530dc1f9795284847b78336149690d8c60952bb7c520fca569341de2bacb8533",
+            "item_sha256": "b4e44f24a3de0d78423e682e938054b00a429242c70509db2dcef5b5a04919ac"
+          }
+        ],
+        "pre_sha256": "5390d74ca32809e6372f65eac46d88b1ae5d8e26a131ce73b4b50de4c9258d23",
+        "post_sha256": "f47daa8f29b3befe4146253e896dd236a5699fdc499cd5e2354e042629ddb614",
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u35.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "record": {
+        "defect_id": "qa60-step5-initial-r1-u35-4",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T05:40:15.363782Z",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "thm-qa-11-known-count-success-bound",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "35",
+        "basis": "F4 attributed the recurrence-to-sine identity to the preprocessing proposition although its Statement supplies only the recurrence and cost. Without that identity, maximizing the rational list does not establish the claimed success bound. Repaired by a local induction from cosine addition, parity, cos(0)=1 and power reduction, showing T_m(q)=cos(2m theta) and r_k=p_k, before comparing candidates.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "adjudication_ref": [
+          {
+            "id": "thm-qa-11-known-count-success-bound",
+            "model": "gpt-6-luna",
+            "context_sha256": "7964c79d6f1c3495df33b751927409338cc5c249a0afedc14d25b74724c55617",
+            "item_sha256": "a4ccad7d0450633d21024a3b0ec258ed2ad85bbdfbbaaed7a89665f3b4560de9"
+          }
+        ],
+        "pre_sha256": "2d6dd2fae5abb3351d4a651c1b87433f14e258e1718048f40e49cbaa43ae5274",
+        "post_sha256": "b101b633c944a388a64c79e4bff1ce425b9adcbf641fa4333e4719a02dfbf305",
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u35.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "record": {
+        "defect_id": "qa60-step5-initial-r1-u35-5",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T05:40:15.363782Z",
+        "class": "accuracy",
+        "subclass": "citation-truncated",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-qa-11-known-count-query-cost",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "35",
+        "basis": "F1 omitted the actual algorithm Definition clause returning none with no query at t=0, although step 3.1 attributed that clause to F1; F4 establishes only the output. The no-query fact is already explicit in the actual dependency. Added it to F1 and separated the two justifications in step 3.1.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "adjudication_ref": [
+          {
+            "id": "thm-qa-11-known-count-query-cost",
+            "model": "gpt-6-luna",
+            "context_sha256": "9cf505ff72a7f572b2b21ea1d0e8bb44efd1bd113fe8b9ca282dbd9168267bff",
+            "item_sha256": "ebb1b1fda9539a555907393fe0b200a53aeb9380820103ed59e739aed3d17fa9"
+          }
+        ],
+        "pre_sha256": "f60dcbff4d50b944ea69095fa5ec0bb657e618ba9bd8d2b9206a62b53c95af50",
+        "post_sha256": "77dfd3c5d3bac0c9d65162549bcdccfe9105987e4deafc332a8b11174d4daa97",
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u35.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "record": {
+        "defect_id": "qa60-step5-initial-r1-u35-contract-f4",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T05:40:15.363782Z",
+        "class": "accuracy",
+        "subclass": "contract-mismatch",
+        "severity": "nonfatal",
+        "location": "contract-row",
+        "subject": "prop-qa-11-known-count-random-selection-bit-cost",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "35",
+        "basis": "After inspecting the concurrent clarification to def-qa-classical-bit-cost, confirmed all arithmetic uses public N,t, random labels and measured addresses. The proposition stays sound and unchanged; only the exact F4 contract quotation needed synchronization. This is separate from the false-positive square-root-order rejection.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u35.json"
+          },
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-batch-35.proof-contracts.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "No assigned item Statement or Definition changed, no published item was edited, and no potentially defective published use was discovered in the examined interfaces. No maintenance event is generated by these proof, fact-restatement and metadata repairs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "lem-qa-11-good-bad-decomposition",
+      "claim": "For 0<t<N, normalized marked and unmarked sums are orthonormal and decompose the uniform address state with coefficients sin(theta),cos(theta).",
+      "repair": "Defined the existing uniform-state notation explicitly in Given; no Statement or Definition changed. Finite orthonormal sums give unit normalization and disjoint support. Principal arcsine, monotone sine, cosine positivity, Pythagoras and unique nonnegative roots give both coefficients.",
+      "dependencies": [
+        "def-qa-11-marked-search-problem",
+        "thm-qc-computational-basis-orthonormal",
+        "def-inner-product-space",
+        "def-principal-inverse-sine-and-cosine",
+        "thm-of-square-roots",
+        "lem-of-square-monotone"
+      ],
+      "sources_consulted": [
+        "items/alg-qa-11-grover-iterate.md: Definition fixes exactly this equal-positive-amplitude vector",
+        "library/quantum-algorithms/grover-search-and-invariant-plane-rotations.md: uniform-state and invariant-plane interface",
+        "research/quantum-computing-algorithms-60-2026-10-15-batch-35.proof-contracts.json: corresponding citations and derivations"
+      ],
+      "validation": {
+        "review_contexts": {
+          "lem-qa-11-good-bad-decomposition": {
+            "post_sha256": "b7f775f2a74eea964a2bea639a73c4da9e5315ea35f022665362828714c76da6",
+            "review_context_sha256": "841b9d493b6bbce4455d95d4c2704e1c39de5cffc696514e4f824442e42bb921"
+          }
+        }
+      },
+      "unresolved_obligations": [],
+      "next_action": "Review the classical random-selection bit-cost proposition."
+    },
+    {
+      "id": "prop-qa-11-known-count-random-selection-bit-cost",
+      "claim": "Classical selection costs O(n^3) bit operations, plus O(n) label and address handling; quantum operations remain separate.",
+      "decision": "Unchanged: root order is the direct substitution of nonnegative roots into the cited square-order equivalence, using their squared identities from thm-of-square-roots. No independent lemma or repair is needed.",
+      "sources_consulted": [
+        "items/lem-of-square-monotone.md: Statement (both strict and non-strict equivalences)",
+        "items/thm-of-square-roots.md: Statement (nonnegative roots and squared identities)",
+        "items/alg-qa-11-known-count-random-iteration-search.md: Definition (binary search and separate dense branch)",
+        "items/def-qa-classical-bit-cost.md: Definition",
+        "research/quantum-computing-algorithms-60-2026-10-15-batch-35.proof-contracts.json: corresponding citations, derivations and risk review"
+      ],
+      "validation": {
+        "review_contexts": {
+          "post_sha256": "9ddfb4b7f82765737fffa90a1c95d43dda2f4cce7958fdc6c28e922912006663",
+          "review_context_sha256": "c09dedddb8e60f725cc0deba5340177d6c2c3fb0e1f04906428e0c180aaed911"
+        }
+      },
+      "unresolved_obligations": [],
+      "next_action": "Repair the integer-iteration endpoint fact restatement."
+    },
+    {
+      "id": "thm-qa-11-integer-iteration-regime",
+      "status": "repair complete; corresponding contract synchronized under shared-write lock; focused checks passed",
+      "claim": "For 0<a<=1/2 nearest-integer rounding has failure <=a and k<=ceil(1/sqrt(a)); for a>1/2, k=0 has success a.",
+      "repair": "F1 restricted to 0<t<N with a separate t=N endpoint. Step 4.1 now uses the endpoint probability at a=1. F3 supplies the cosine monotonicity actually used. Step 2.1 exhibits k_*=1/2 at a=1/2.",
+      "dependencies": [
+        "thm-qa-11-exact-integer-iteration-formula",
+        "lem-integer-part",
+        "lem-ceiling-and-least-positive-integer-threshold",
+        "cor-sine-and-cosine-are-one-lipschitz",
+        "thm-sine-cosine-signs-monotonicity-and-ranges"
+      ],
+      "sources_consulted": [
+        "items/thm-qa-11-exact-integer-iteration-formula.md: Statement and Proof step 5.1",
+        "items/thm-sine-cosine-signs-monotonicity-and-ranges.md: Statement",
+        "items/thm-quarter-turn-values-and-shift-formulas.md: Statement",
+        "items/thm-cosine-has-a-smallest-positive-zero.md: Statement",
+        "research/quantum-computing-algorithms-60-2026-10-15-batch-35.proof-contracts.json: assigned citations and derivations"
+      ],
+      "validation": {
+        "precheck": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-11-good-bad-decomposition.md items/thm-qa-11-integer-iteration-regime.md --json; exit 0, both pass",
+        "review_contexts": {
+          "post_sha256": "f47daa8f29b3befe4146253e896dd236a5699fdc499cd5e2354e042629ddb614",
+          "review_context_sha256": "0b493f52fb55f0fb07ceb626de06eaf73bd888f79aeb0c91986292b2dc584114"
+        }
+      },
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned independent rejudgment and later round closure; no worker judgment or stamp written."
+    },
+    {
+      "id": "prop-qa-11-known-count-random-selection-bit-cost",
+      "status": "supplier interface effect examined and F4 quotation synchronized under shared-write lock",
+      "affected_use": "F4 charges random bits and public N,t/address bookkeeping separately from oracle invocations.",
+      "supplier_change": "def-qa-classical-bit-cost now specifies that abstract encoding supplies no readable hidden input; only work actually performed on declared public data or replies is charged. All work in this proposition is on public N,t, sampled labels and measured addresses, so its statement/proof remain sound.",
+      "validation": {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-35.proof-contracts.json --strict --items lem-qa-11-good-bad-decomposition,prop-qa-11-known-count-random-selection-bit-cost --json",
+        "exit_code": 1,
+        "finding": "Only prop F4 exact quotation is stale after concurrent supplier Definition clarification. The good/bad contract passes.",
+        "review_contexts_after_actual_effect_review": {
+          "post_sha256": "9ddfb4b7f82765737fffa90a1c95d43dda2f4cce7958fdc6c28e922912006663",
+          "review_context_sha256": "c09dedddb8e60f725cc0deba5340177d6c2c3fb0e1f04906428e0c180aaed911"
+        }
+      },
+      "unresolved_obligations": [],
+      "next_action": "No item edit or downstream propagation needed."
+    },
+    {
+      "id": "thm-qa-11-known-count-success-bound",
+      "claim": "Exact known-count search succeeds with probability at least max(t/N,1-t/N), returns none at t=0 and a marked item at t=N.",
+      "repair": "F1 distinguishes computed rational r_k from physical success p_k; F2 preserves the open-interval hypothesis and endpoints; F4 now quotes the actual recurrence interface. New step 1.2 proves cosine recurrence equality by induction and hence r_k=p_k using local proved trigonometric suppliers. Steps 2.1 and 3.1 then compare candidates without assuming the desired identity.",
+      "dependencies_added": [
+        "cor-trigonometric-parity-and-pythagorean-identity",
+        "def-principal-inverse-sine-and-cosine",
+        "thm-double-angle-and-power-reduction-identities",
+        "thm-of-square-roots",
+        "thm-sine-and-cosine-addition-formulas",
+        "thm-sine-and-cosine-derivatives"
+      ],
+      "sources_consulted": [
+        "items/prop-qa-11-known-count-preprocessing-cost.md: Statement and Proof step 1.2 (the identity was proved there but not exported in Statement)",
+        "items/alg-qa-11-known-count-grover-search.md: Definition (recurrence, maximization and verification)",
+        "items/thm-qa-11-exact-integer-iteration-formula.md: Statement",
+        "items/thm-qa-11-integer-iteration-regime.md: Statement and repaired proof",
+        "items/thm-double-angle-and-power-reduction-identities.md: Statement",
+        "items/thm-sine-and-cosine-addition-formulas.md: Statement",
+        "items/cor-trigonometric-parity-and-pythagorean-identity.md: Statement",
+        "items/thm-sine-and-cosine-derivatives.md: Statement",
+        "items/def-principal-inverse-sine-and-cosine.md: Definition",
+        "items/thm-of-square-roots.md: Statement"
+      ],
+      "validation": {
+        "review_contexts": {
+          "post_sha256": "b101b633c944a388a64c79e4bff1ce425b9adcbf641fa4333e4719a02dfbf305",
+          "review_context_sha256": "20fa6a33e35cec1574308ed9dbb23a113883825ab7a0dd5373bed2cda8d3ea02"
+        },
+        "initial_precheck": {
+          "exit_code": 1,
+          "result": "Requested canonical phases: interior recurrence 1.2, sparse comparison 2.1, dense comparison 3.1. Adopted this numbering and rechecked that both comparisons use the unconditional interior identity, with no changed mathematics."
+        }
+      },
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned independent rejudgment and later round closure; no worker judgment or stamp written.",
+      "status": "repair complete; corresponding contract synchronized under shared-write lock; focused checks passed",
+      "metadata_integration": "Added the six actual local trigonometric/square-root prerequisite IDs to only this item row in batch-35.pages.json and added their current-interface evidence in batch-35.cross-batch-dependencies.json under the shared-write lock. Item dependency level remains 24."
+    },
+    {
+      "id": "thm-qa-11-known-count-query-cost",
+      "claim": "For t>0 known-count search uses at most 3sqrt(N/t) bit queries; at t=0 it makes none. Classical exact maximization is separately charged.",
+      "repair": "Expanded F1 with the t=0 early return and full finite candidate computation from the actual algorithm. Step 3.1 now distinguishes output correctness from no-query execution. Step 2.1 records that t=1 requires explicitly computing at least 2^(n/2) candidates. No Statement, Definition or dependencies changed.",
+      "sources_consulted": [
+        "items/alg-qa-11-known-count-grover-search.md: Definition",
+        "items/thm-qa-11-grover-iterate-query-cost.md: Statement",
+        "items/def-qa-quantum-query-complexity.md: Definition",
+        "items/lem-ceiling-and-least-positive-integer-threshold.md: Statement",
+        "items/thm-of-square-roots.md: Statement",
+        "items/lem-of-square-monotone.md: Statement",
+        "items/thm-qa-11-known-count-success-bound.md: unchanged Statement and current repaired proof"
+      ],
+      "validation": {
+        "review_contexts": {
+          "post_sha256": "77dfd3c5d3bac0c9d65162549bcdccfe9105987e4deafc332a8b11174d4daa97",
+          "review_context_sha256": "b25550ead52bc827062db8b365cac799ff090889b418b83526e2bc5bfddb3db1"
+        }
+      },
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned independent rejudgment and later round closure; no worker judgment or stamp written.",
+      "status": "repair complete; corresponding contract synchronized under shared-write lock; focused checks passed"
+    },
+    {
+      "status": "handoff complete",
+      "assigned_items": [
+        "lem-qa-11-good-bad-decomposition",
+        "prop-qa-11-known-count-random-selection-bit-cost",
+        "thm-qa-11-integer-iteration-regime",
+        "thm-qa-11-known-count-success-bound",
+        "thm-qa-11-known-count-query-cost"
+      ],
+      "claim_interfaces": "Compared actual Statement sections via the canonical statementHash against frozen input; all five are unchanged. No Definition was edited.",
+      "outcomes": {
+        "confirmed_fatal": 1,
+        "confirmed_nonfatal": 3,
+        "false_positive": 1
+      },
+      "checks": "All scoped precheck/render/proof-contract checks pass. Final proof-layout after final item edits checked 4 items and 14 steps with 0 defects. Manifest dependency check passes.",
+      "unresolved_obligations": [],
+      "next_action": "Engine collects the report and schedules independent rejudgment. The confirmed-fatal item still counts as fatal in this round even though repaired."
+    }
+  ],
+  "validation_results": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-11-good-bad-decomposition.md items/prop-qa-11-known-count-random-selection-bit-cost.md items/thm-qa-11-integer-iteration-regime.md items/thm-qa-11-known-count-success-bound.md items/thm-qa-11-known-count-query-cost.md --json",
+      "exit_code": 0,
+      "result": "5 checked, 0 failed; canonical phase-number repair adopted on success bound."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-qa-11-good-bad-decomposition.md items/prop-qa-11-known-count-random-selection-bit-cost.md items/thm-qa-11-integer-iteration-regime.md items/thm-qa-11-known-count-success-bound.md items/thm-qa-11-known-count-query-cost.md --json",
+      "exit_code": 0,
+      "result": "5 checked, no errors or warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-35.proof-contracts.json --strict --items lem-qa-11-good-bad-decomposition,prop-qa-11-known-count-random-selection-bit-cost,thm-qa-11-integer-iteration-regime,thm-qa-11-known-count-success-bound,thm-qa-11-known-count-query-cost --json",
+      "exit_code": 0,
+      "result": "5 checked, no errors or warnings; performed under shared-write lock, then released."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-qa-11-good-bad-decomposition.md items/thm-qa-11-integer-iteration-regime.md items/thm-qa-11-known-count-success-bound.md items/thm-qa-11-known-count-query-cost.md",
+      "exit_code": 0,
+      "result": "4 items, 14 steps, 0 defects. Run after final item edit; no formatter used."
+    },
+    {
+      "command": "node tools/manifest-deps.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-35.pages.json",
+      "exit_code": 0,
+      "result": "23 item rows, explicit dependency arrays, 0 errors; run under shared-write lock after integrating the success-bound suppliers."
+    },
+    {
+      "command": "Read-only statementHash, itemHashGuard and reviewMatchesCurrent comparison against frozen initial-1.json and current library inputs",
+      "exit_code": 0,
+      "result": "All five original Statements unchanged; all five recorded item guards and review contexts current. Four item guards changed; the square-root-order false-positive item guard is unchanged."
+    }
+  ],
+  "supporting_evidence": {
+    "research/quantum-computing-algorithms-60-2026-10-15-batch-35.proof-contracts.json": "cefc0fbd822456e4cfc4c1ff92b1ea3796722bea35110a7768bbe3a02007e286",
+    "research/quantum-computing-algorithms-60-2026-10-15-batch-35.pages.json": "74b28e653b36152db9e4b695635b33bec517482977b1efa22da20a93d09dd791",
+    "research/quantum-computing-algorithms-60-2026-10-15-batch-35.cross-batch-dependencies.json": "d37ffb825e0c65198a0afa0314b6168ea0f999faf0d2c891d8d5f8f5e2ccc404"
+  }
+}

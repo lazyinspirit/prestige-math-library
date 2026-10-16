@@ -1,0 +1,2132 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-14-coherent-query-normal-form",
+    "def-qa-14-boolean-search-query-model",
+    "alg-qa-14-zero-completion-query-simulation",
+    "def-qa-14-query-mismatch-projectors",
+    "def-qa-14-search-promise",
+    "lem-qa-14-state-distance-from-acceptance-gap",
+    "lem-qa-14-one-query-hybrid-bound",
+    "thm-qa-14-zero-completion-query-simulation-correct",
+    "alg-qa-14-one-marked-search-with-verification",
+    "lem-qa-14-cumulative-hybrid-bound",
+    "lem-qa-14-aggregate-hybrid-squared-distance",
+    "lem-qa-14-chebyshev-recurrence-matches-grover-success",
+    "thm-qa-14-grover-search-upper-query-cost",
+    "thm-qa-14-bbbv-search-lower-bound",
+    "thm-qa-14-grover-search-upper-success",
+    "thm-qa-14-optimal-search-query-complexity",
+    "ex-qa-14-hybrid-budget-for-n-small",
+    "cex-qa-14-query-parallelism-does-not-give-exponential-search"
+  ],
+  "contracts": {
+    "lem-qa-14-coherent-query-normal-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-quantum-query-algorithm",
+          "source_section": "Definition",
+          "quote": "A **$T$-query algorithm** has at most $T$ designated calls to the oracle $U_{f_z}$ of [[def-qa-promise-query-instance]] and [[def-qc-coherent-function-oracle]] on every execution branch for every promised $z\\in P_n$. Calls count once each; gates in the circuit outside those designated calls are not query calls. Uniformity is asserted only when the family satisfies [[def-qc-uniform-circuit-family]]. A controlled call has the block action in [[def-qc-controlled-unitary-access]] and is available only when the access contract explicitly supplies and charges it. An inverse call to this XOR oracle has the same action as an ordinary call by [[thm-qc-reversible-xor-oracle-unitary]]; inverses of other unitaries use the separate availability and charge convention in [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-finite-branch-output-law",
+          "source_section": "Definition",
+          "quote": "Assign the root weight $w(\\varnothing)=1$. At a unitary edge set $\\rho_{h'}=U\\rho_hU^\\dagger$ and $w(h')=w(h)$. At an instrument node set $q_{h,a}=\\operatorname{tr}(\\mathcal I_a(\\rho_h))$ and $w(ha)=w(h)q_{h,a}$. If $q_{h,a}>0$, set $\\rho_{ha}=\\mathcal I_a(\\rho_h)/q_{h,a}$; if $q_{h,a}=0$, that child and its descendants have weight zero and contribute no state or output weight. The instrument and conditional-state conventions are those of [[def-qc-instrument-and-conditional-state]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex-inner-product space, let $K$ be a finite-dimensional complex-inner-product space, and let $\\Omega$ be a finite nonempty outcome set. A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive ([[def-qc-completely-positive-map]]) and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-kraus-choi-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces, fix an ordered\northonormal basis $\\mathcal B$ of $H$, and let\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. The following are\nequivalent: $\\Phi$ is completely positive; $J_{\\mathcal B}(\\Phi)$ is\nnon-negative; and $\\Phi$ has a finite Kraus representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-kraus-representation",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces ([[def-real-and-complex-inner-product-space]]),\nwith the root convention that\neach inner product is linear in its first argument. Write $\\mathcal L(H)$ for\nthe complex-linear endomorphisms of $H$ and $\\mathcal L(H,K)$ for the\ncomplex-linear maps from $H$ to $K$ ([[def-linear-map]]). A **finite Kraus\nrepresentation** of a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ is a finite family\n$(K_a)_{a\\in A}\\subseteq\\mathcal L(H,K)$ such that",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-trace-preserving-kraus-normalization",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex inner-product spaces and let\n$\\Phi(X)=\\sum_{a\\in A}K_aXK_a^\\dagger$ be a finite Kraus representation,\nwhere each $K_a:H\\to K$. The map $\\Phi$ is trace-preserving on all of\n$\\mathcal L(H)$, meaning $\\operatorname{tr}_K(\\Phi(X))=\\operatorname{tr}_H(X)$\nfor every $X\\in\\mathcal L(H)$, if and only if\n$$\\sum_{a\\in A}K_a^\\dagger K_a=I_H.$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qa-standard-bit-query",
+          "source_section": "Definition",
+          "quote": "Let $a,b\\ge 0$ and let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be a total function. The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register. Here $\\oplus$ is componentwise addition modulo two, and words label the ordered computational basis as in [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]]. The address is unchanged. One invocation is one query under [[def-qa-promise-query-instance]]; its query cost is separate from elementary gate cost.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "At an instrument node with outcome maps $(\\mathcal I_a)_{a\\in\\Omega}$, choose a finite Kraus family $(K_{a,r})_r$ for each $\\mathcal I_a$ by [F3]–[F4]. The formula in [F5] shows that their union is a Kraus family for the total map $\\Phi=\\sum_a\\mathcal I_a$. The trace identity in [F3] makes $\\Phi$ trace-preserving, so [F6] gives $\\sum_{a,r}K_{a,r}^\\dagger K_{a,r}=I$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "In each query slot, use the retained outcome history to identify branches that still make a query. On every other branch, use controlled Fredkin gates from [F12] to swap each caller address bit and response bit with fresh registers initialized to the valid zero address and, after applying $H$ from [F11], the response state $|+\\rangle$. The ordinary XOR oracle acts on the fresh response by either $I$ or $X$, both of which fix $|+\\rangle$; reversing the controlled swaps restores the caller's entire query-register state. Active branches are unchanged, so this pads the slot without controlled oracle access.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F8",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Add a finite label register with orthonormal basis $|a,r\\rangle$ and define $V\\psi=\\sum_{a,r}|a,r\\rangle\\otimes K_{a,r}\\psi$. Orthonormality [F9], the adjoint identity [F7], and step 1.1 give $\\langle V\\psi,V\\phi\\rangle=\\sum_{a,r}\\langle K_{a,r}\\psi,K_{a,r}\\phi\\rangle=\\langle\\psi,\\phi\\rangle$; hence $V$ is an isometry. For any density operator $\\rho$, projecting the label to outcome $a$ and discarding the orthogonal hidden labels $r$ leaves $\\sum_rK_{a,r}\\rho K_{a,r}^\\dagger$; the orthogonal label basis removes all unequal-label cross terms. By [F5] this is exactly $\\mathcal I_a(\\rho)$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Let $J\\psi=\\psi\\otimes|0\\rangle$ be the clean-ancilla embedding. The images under $J$ and $V$ of one orthonormal basis of the system are orthonormal lists of the same finite length in the same finite-dimensional space. Choose a finite spanning basis by [F10]; process it in order, subtracting its projections onto the current list and appending the normalized nonzero remainder. This finite Gram–Schmidt procedure completes each list to an orthonormal basis. Mapping the first completed basis to the second defines a unitary $U$ with $UJ=V$, so the instrument node is realized by an ordinary unitary and retained outcome/Kraus labels.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "F10",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "Keep all outcome labels in orthogonal record registers and implement each later branch-dependent unitary as a block-diagonal unitary controlled by the recorded classical history. By induction over the finite execution tree, each history has the same unnormalized system state as in the original instrument computation; summing over the orthogonal records gives exactly the output law in [F2].",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "claim": "Insert one such ordinary call in each of the $T$ slots, using input-independent history controls for active and padded branches. Steps 1.1–4.1 preserve every output probability, and step 1.2 pads only branches with fewer than $T$ calls. Thus the resulting pure-state circuit has exactly $T$ ordinary XOR calls and the original output distribution.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses a finite orthonormal basis and finite Gram–Schmidt completion; no infinite choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "def-qa-14-boolean-search-query-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-standard-bit-query",
+          "source_section": "Definition",
+          "quote": "Let $a,b\\ge 0$ and let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be a total function. The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register. Here $\\oplus$ is componentwise addition modulo two, and words label the ordered computational basis as in [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]]. The address is unchanged. One invocation is one query under [[def-qa-promise-query-instance]]; its query cost is separate from elementary gate cost.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Applying the displayed $O_x$ twice to a basis vector gives $|j,(b\\oplus x_{j+1})\\oplus x_{j+1},w\\rangle=|j,b,w\\rangle$. Thus it is an involution on the declared product basis.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F1], [F2], and [F4], the input and response basis vectors, tensored with any work basis, form a finite orthonormal basis. Step 1.1 shows that $O_x$ permutes this basis, so its linear extension is unitary. For $N=2^n$ it is the standard query in [F3] with the address labeling fixed in the Definition; for general $N$ it is the same XOR permutation on the $N$-level address basis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and address basis are defined for N=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "alg-qa-14-zero-completion-query-simulation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "def-qa-14-query-mismatch-projectors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-14-boolean-search-query-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, let the input be a bit string $x=(x_1,\\ldots,x_N)\\in\\{0,1\\}^N$, and let the address register have ordered orthonormal basis $|0\\rangle,\\ldots,|N-1\\rangle$ in the finite-dimensional register of [[def-qc-register-and-computational-basis]]. A standard Boolean query acts on address, response bit, and work register by\n$$O_x|j,b,w\\rangle=|j,b\\oplus x_{j+1},w\\rangle,\\qquad 0\\le j<N.$$\nThe response register is one qubit and the work register is any declared finite tensor product. For $N=2^n$, this is the standard bit query of [[def-qa-standard-bit-query]] under the big-endian address encoding; for general $N$, it is the same XOR basis action on the $N$-level address register.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "For finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For each address $j$, $\\Pi_j=|j\\rangle\\langle j|\\otimes I$ is self-adjoint and idempotent by [F1]–[F3], so it is an orthogonal projection. If $j\\ne k$, orthogonality gives $\\Pi_j\\Pi_k=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The address vectors form a complete basis by [F1]–[F2], hence $\\sum_{j=0}^{N-1}|j\\rangle\\langle j|=I$ and therefore $\\sum_{j=0}^{N-1}\\Pi_j=I$ on address, response, and work registers. If a no-query basis state is adjoined, the same basis expansion includes its projection and the search-address sum is then at most $I$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "def-qa-14-search-promise": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition explicitly includes 0^N as the no instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition names 0^N as the unique no input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition includes every singleton e_i."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and address basis are defined for N=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "lem-qa-14-state-distance-from-acceptance-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-quantum-acceptance-probability",
+          "source_section": "Definition",
+          "quote": "Fix a length-$n$ finite promise computation from [[def-qc-promise-computation-model]], with input $x\\in\\{0,1\\}^n$, zero-initialized auxiliary register $|0^{a(n)}\\rangle$, circuit unitary $U_{C_n}$, and ordered output-wire tuple $O_n$. Let $P_{O_n}$ be the tensor-factor permutation that moves $O_n$, in its declared order, to the front, and let $W_n$ be the ordered tuple of all remaining wires ([[def-qc-tensor-register-and-permutation]]). Set\n$$\\psi_x:=U_{C_n}(|x\\rangle\\otimes|0^{a(n)}\\rangle),\\qquad v_x:=\\operatorname{coord}(P_{O_n}\\psi_x).$$\nHere coordinates are in the ordered computational basis, and the root inner product is linear in its first argument and conjugate-linear in its second ([[def-real-and-complex-inner-product-space]]). For $z\\in\\{0,1\\}^{|O_n|}$ and $w\\in\\{0,1\\}^{|W_n|}$, write $e_{z,w}$ for the corresponding product-basis vector and define\n$$p_{C_n}(z\\mid x):=\\sum_{w\\in\\{0,1\\}^{|W_n|}}\\left|\\langle P_{O_n}\\psi_x,e_{z,w}\\rangle_{\\rm root}\\right|^2.$$\nThe acceptance probability is\n$$p_{C_n}(x):=\\sum_{\\substack{z\\in\\{0,1\\}^{|O_n|}\\\\A_n(x,z)=1}}p_{C_n}(z\\mid x).$$\nEquivalently, if $E_{A,x}$ is the diagonal projection onto the basis vectors $(z,w)$ with $A_n(x,z)=1$, then $p_{C_n}(x)=\\operatorname{Tr}(E_{A,x}v_xv_x^\\dagger)$; the matrix adjoint is conjugate transpose in an orthonormal basis ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-bounded-error-promise-correctness",
+          "source_section": "Definition",
+          "quote": "A quantum or classical solver in [[def-qa-quantum-query-algorithm]] and [[def-qa-classical-query-algorithm]] for a decision task $(Y,N)$ of [[def-qa-task-and-promise-domain]] has **bounded error** (with the QA convention) if its normalized output law assigns probability at least $2/3$ to the correct answer for every encoded promised instance. A search solver has bounded error if, for every encoded $z$ in its domain $D$, its output law assigns probability at least $2/3$ to outputs $w$ satisfying $(z,w)\\in R$. The guarantee is worst-case per instance, not averaged over an input distribution. The constant $2/3$ is a convention; amplification and its query/access cost are separate results.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Since $E$ is an orthogonal projection, $w=Ew+(I-E)w$ is an orthogonal decomposition for every $w$. Thus $\\|Ew\\|\\le\\|w\\|$ and $\\|E\\|\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Put $\\delta=\\psi-\\phi$. The acceptance-probability difference equals $\\langle E\\delta,\\psi\\rangle+\\langle E\\phi,\\delta\\rangle$. By [F2], unit normalization, and step 1.1, its absolute value is at most $\\|E\\delta\\|\\|\\psi\\|+\\|E\\phi\\|\\|\\delta\\|\\le2\\|\\delta\\|$. The probability gap in [F3] is at least $1/3$, so $\\|\\psi-\\phi\\|\\ge1/6$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "lem-qa-14-one-query-hybrid-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-14-boolean-search-query-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, let the input be a bit string $x=(x_1,\\ldots,x_N)\\in\\{0,1\\}^N$, and let the address register have ordered orthonormal basis $|0\\rangle,\\ldots,|N-1\\rangle$ in the finite-dimensional register of [[def-qc-register-and-computational-basis]]. A standard Boolean query acts on address, response bit, and work register by\n$$O_x|j,b,w\\rangle=|j,b\\oplus x_{j+1},w\\rangle,\\qquad 0\\le j<N.$$\nThe response register is one qubit and the work register is any declared finite tensor product. For $N=2^n$, this is the standard bit query of [[def-qa-standard-bit-query]] under the big-endian address encoding; for general $N$, it is the same XOR basis action on the $N$-level address register.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-14-query-mismatch-projectors",
+          "source_section": "Definition",
+          "quote": "For the address register of [[def-qa-14-boolean-search-query-model]], let $\\Pi_j$ be the orthogonal projection onto address $j$, tensored with the identity on the response and work registers, for $0\\le j<N$. For any finite input domain $D\\subseteq\\{0,1\\}^N$, define the mismatch matrix $\\Delta_j$ by $(\\Delta_j)_{x,y}=1$ when $x_{j+1}\\ne y_{j+1}$ and $0$ otherwise, for $x,y\\in D$. This model has no separate skip-query address; if an implementation adjoins one, its basis projection is included as an additional orthogonal summand.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-14-search-promise",
+          "source_section": "Definition",
+          "quote": "For every integer $N\\ge1$, use the identity encoding of [[def-qa-input-encoding-and-size]] and let $P_N=\\{0^N\\}\\cup\\{e_i:1\\le i\\le N\\}$, where $0^N$ is the all-zero string and $e_i$ has a $1$ exactly in coordinate $i$. This is a promise decision task in the sense of [[def-qa-task-and-promise-domain]]: its yes set is $\\{e_i:1\\le i\\le N\\}$, its no set is $\\{0^N\\}$, and its output is $\\operatorname{OR}(x)$. Equivalently, the search relation accepts output $i$ on input $e_i$ and the symbol none on input $0^N$. The marked query address corresponding to $e_i$ is $j=i-1$ in [[def-qa-14-boolean-search-query-model]]. Verifying a measured candidate costs a separate query. No correctness condition is imposed outside $P_N$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "On each address block other than $i-1$, the two oracle actions in [F1] agree; on block $i-1$, the singleton oracle applies Pauli $X$ to the response and the zero oracle applies identity. Hence $O_{e_i}-O_{0^N}=\\Pi_{i-1}(X-I)\\Pi_{i-1}$, where $X-I$ acts on response and identities act on address and work.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The orthogonal projection is contractive and $X$ preserves norm because it permutes the two orthonormal response basis vectors; thus $\\|(X-I)\\Pi_{i-1}\\psi\\|\\le\\|X\\Pi_{i-1}\\psi\\|+\\|\\Pi_{i-1}\\psi\\|=2\\|\\Pi_{i-1}\\psi\\|$. Step 1.1 and idempotence of $\\Pi_{i-1}$ give the claimed bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "thm-qa-14-zero-completion-query-simulation-correct": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-14-zero-completion-query-simulation",
+          "source_section": "Definition",
+          "quote": "1. If $N=M$, call $O_x$ directly on the padded address and response.\n2. Otherwise compute the validity bit $v=[j<N]$ by a reversible binary comparison. For most-significant-first address bits $j_r$ and the fixed binary digits $N_r$, initialize $E_0=1,L_0=0$ and update\n   $$E_{r+1}=E_r\\wedge\\bigl((j_r\\wedge N_r)\\vee(\\neg j_r\\wedge\\neg N_r)\\bigr),\\qquad L_{r+1}=L_r\\vee(E_r\\wedge\\neg j_r\\wedge N_r).$$\n   Set $v=L_m$. Compute the clean raw-address register $q$ by $q=j$ when $v=1$ and $q=0$ when $v=0$. The Boolean circuit for $(v,q)$ is implemented and uncomputed by [[alg-qc-reversible-embedding]].\n3. Prepare a fresh response bit $r$ in $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$. Controlled on $v=1$, swap the caller's response bit with $r$ using Fredkin gates.\n4. Make one ordinary call to $O_x$ on the clean valid raw address $q$ and response $r$.\n5. Reverse the controlled swaps and apply the reversible comparator/encoding circuit again to restore $q$, $v$, and all work bits to zero. Return the caller's address and response registers.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-14-boolean-search-query-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, let the input be a bit string $x=(x_1,\\ldots,x_N)\\in\\{0,1\\}^N$, and let the address register have ordered orthonormal basis $|0\\rangle,\\ldots,|N-1\\rangle$ in the finite-dimensional register of [[def-qc-register-and-computational-basis]]. A standard Boolean query acts on address, response bit, and work register by\n$$O_x|j,b,w\\rangle=|j,b\\oplus x_{j+1},w\\rangle,\\qquad 0\\le j<N.$$\nThe response register is one qubit and the work register is any declared finite tensor product. For $N=2^n$, this is the standard bit query of [[def-qa-standard-bit-query]] under the big-endian address encoding; for general $N$, it is the same XOR basis action on the $N$-level address register.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-qc-reversible-embedding",
+          "source_section": "Definition",
+          "quote": "Inputs are integers $n,m\\ge0$, $n$ distinct ordered Boolean input wires, an $m$-bit target register $y$ disjoint from the input wires, and a finite Boolean DAG with an explicit topological order and an ordered list of exactly $m$ output ports. Every vertex has a unique identifier; each non-input node is a constant $0$ or $1$, a NOT node of fan-in one, or an AND or OR node of fan-in two. Each source reference must name an input vertex or an earlier node in the supplied order. Each output port may name any input or non-input node, and repeated output ports are allowed. The Boolean graph uses the NOT/AND/OR basis with constants from [[def-boolean-circuit-size-depth-fanin-and-basis]], extended here to multiple ordered output ports sharing one graph.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-reversible-embedding-cost",
+          "source_section": "Statement",
+          "quote": "Let $n,m\\ge0$, $x\\in\\{0,1\\}^n$, and $y\\in\\{0,1\\}^m$. Let a finite topologically ordered Boolean DAG have $S$ non-input nodes, including constants, and $E$ input-port uses counted with multiplicity. Its gates are NOT, AND, OR, and constants, with fan-in at most two, and it has $m$ ordered output ports computing $f(x)$. Under the fixed elementary alphabet in [[def-qc-elementary-circuit-resources]], counting each occurrence of $X$, CNOT, and Toffoli as one gate and one serial layer, [[alg-qc-reversible-embedding]] returns a circuit on the ordered input, target, and work registers implementing\n$$\n|x,y,0^w\\rangle\\longmapsto|x,y\\oplus f(x),0^w\\rangle\n$$\nfor every basis input $x$ and every target string $y$. It uses at most $6S+4E+m$ elementary gate occurrences, at most $S+E$ clean work bits, and serial depth at most $6S+4E+m$. The same operator action holds coherently on arbitrary superpositions and after adjoining any finite reference register.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If $N=M$, the procedure is the raw oracle call, which has the required action and uses exactly one query. Suppose $N<M$. The recurrence in the instructions maintains $E_r=1$ exactly when the first $r$ bits of $j$ and $N$ agree, and $L_r=1$ exactly when the first differing bit has $j$-bit $0$ and $N$-bit $1$. Induction on $r$ therefore gives $v=L_m=1$ iff $j<N$. The output address $q=vj$ is consequently $j$ when valid and $0$ otherwise; [F5] computes it reversibly with clean work.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "When $v=1$, [F4] swaps the caller's response $b$ into $r$; the raw oracle then changes it to $b\\oplus x_{j+1}$, and reversing the swap returns exactly this bit to the caller. When $v=0$, $q=0$ is valid because $N\\ge1$, while $r=|+\\rangle$; the raw query applies either $I$ or $X$ to $r$, both of which fix $|+\\rangle$. The caller's response is therefore unchanged.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The oracle preserves $q$, so applying the reversible computation from [F5] again clears the validity and address work registers after the response swap is undone. The resulting action on each basis state is $|j,b\\rangle\\mapsto|j,b\\oplus x_{j+1}\\rangle$ for $j<N$ and $|j,b\\rangle$ for $j\\ge N$; linearity gives the same zero-completed action on every superposition. Exactly one raw oracle call occurred in either branch, and no controlled call was used.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles N=1, M=1, or the one-dimensional address boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "alg-qa-14-one-marked-search-with-verification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition step 4 rejects the all-zero input after candidate verification."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "lem-qa-14-cumulative-hybrid-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-14-coherent-query-normal-form",
+          "source_section": "Statement",
+          "quote": "Fix a promised input, a finite register space, and a finite-branch quantum query algorithm whose every execution branch makes at most $T$ calls to the standard Boolean XOR oracle. There is a finite pure-state unitary circuit, with input-independent unitaries between exactly $T$ ordinary oracle calls and a final output measurement, that has the same output distribution. The construction adds only finite ancillas and nonoracle gates; it does not require controlled access to the oracle and makes no claim that the transformed family is uniformly generated or has bounded gate cost.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-14-one-query-hybrid-bound",
+          "source_section": "Statement",
+          "quote": "For $N\\ge1$, $1\\le i\\le N$, and any vector $\\psi$ in the address, response, and work registers,\n$$\\bigl\\|(O_{e_i}-O_{0^N})\\psi\\bigr\\|\\le2\\bigl\\|\\Pi_{i-1}\\psi\\bigr\\|,$$\nwhere $e_i$ is the input with its only $1$ in coordinate $i$ and $\\Pi_{i-1}$ projects onto zero-based query address $i-1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-14-boolean-search-query-model",
+          "source_section": "Definition",
+          "quote": "A $T$-query algorithm is a finite circuit whose only input-dependent operations are at most $T$ invocations of $O_x$ on every execution branch. By [[lem-qa-14-coherent-query-normal-form]], it may be analyzed as a pure initial unit vector, input-independent unitaries between exactly $T$ ordinary queries, and one final measurement. The query coordinate counts these oracle invocations under [[def-qa-quantum-query-complexity]]; response preparation, verification queries, gates, and classical work are stated separately. No controlled access to $O_x$ follows from an ordinary query.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If $T=0$, both inputs give the same circuit and hence the final vectors agree, so the inequality holds with empty sum. Suppose $T\\ge1$. For each $r=0,\\ldots,T$, define $h_r$ as the final state of the circuit that uses the zero oracle in its first $r$ query slots and the $e_i$ oracle in its remaining $T-r$ slots. Then $h_0=\\psi_T^i$ and $h_T=\\psi_T^0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For each $1\\le r\\le T$, the circuits defining $h_{r-1}$ and $h_r$ have the same state immediately before query slot $r$: they have used the zero oracle for the first $r-1$ calls. This pre-query state is $\\psi_{r-1}^0$. At slot $r$ the oracle changes from $O_{e_i}$ to $O_{0^N}$; after that slot both circuits use the same suffix, whose unitaries preserve norm. By [F2], $\\|h_{r-1}-h_r\\|\\le2\\sqrt{q_{r-1,i}}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The triangle inequality gives $\\|\\psi_T^i-\\psi_T^0\\|=\\|h_0-h_T\\|\\le\\sum_{r=1}^T\\|h_{r-1}-h_r\\|\\le2\\sum_{t=0}^{T-1}\\sqrt{q_{t,i}}$. The normal form [F1] preserves the output distribution, so this bound applies to the original algorithm's pure-state realization.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats T=0 and the empty query sum explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "lem-qa-14-aggregate-hybrid-squared-distance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-14-cumulative-hybrid-bound",
+          "source_section": "Statement",
+          "quote": "For a $T$-query algorithm in the model of [[def-qa-14-boolean-search-query-model]], let $\\psi_t^0$ be its unit state on input $0^N$ immediately before query $t+1$, for $0\\le t<T$, and set $q_{t,i}=\\|\\Pi_{i-1}\\psi_t^0\\|^2$. If $\\psi_T^0$ and $\\psi_T^i$ are the final unit states on $0^N$ and $e_i$, then\n$$\\|\\psi_T^i-\\psi_T^0\\|\\le2\\sum_{t=0}^{T-1}\\sqrt{q_{t,i}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-14-query-mismatch-projectors",
+          "source_section": "Definition",
+          "quote": "For the address register of [[def-qa-14-boolean-search-query-model]], let $\\Pi_j$ be the orthogonal projection onto address $j$, tensored with the identity on the response and work registers, for $0\\le j<N$. For any finite input domain $D\\subseteq\\{0,1\\}^N$, define the mismatch matrix $\\Delta_j$ by $(\\Delta_j)_{x,y}=1$ when $x_{j+1}\\ne y_{j+1}$ and $0$ otherwise, for $x,y\\in D$. This model has no separate skip-query address; if an implementation adjoins one, its basis projection is included as an additional orthogonal summand.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If $T=0$, [F1] gives zero distance for every $i$, so the sum is zero. If $T\\ge1$, squaring [F1] and applying [F3] to the real numbers $\\sqrt{q_{t,i}}$ gives $\\|\\psi_T^i-\\psi_T^0\\|^2\\le4T\\sum_{t=0}^{T-1}q_{t,i}$; each $q_{t,i}$ is nonnegative because it is a squared norm.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Summing over $i$ and interchanging finite sums, completeness and orthogonality in [F2] give $\\sum_{i=1}^Nq_{t,i}=\\sum_{j=0}^{N-1}\\|\\Pi_j\\psi_t^0\\|^2=\\|\\psi_t^0\\|^2=1$ for each $t$. Therefore $\\sum_i\\|\\psi_T^i-\\psi_T^0\\|^2\\le4T\\sum_{t<T}1=4T^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats T=0 and the empty query sum explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "lem-qa-14-chebyshev-recurrence-matches-grover-success": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-11-known-count-grover-search",
+          "source_section": "Definition",
+          "quote": "Input $N=2^n$, standard bit-query access to $f=1_M$, and the exact integer $t=|M|$. If $t=0$, return none without a query. If $t>0$, find $K$ as the least positive integer with $tK^2\\ge N$: start with $\\mathrm{lo}=0,\\mathrm{hi}=1$, repeatedly set $\\mathrm{lo}=\\mathrm{hi},\\mathrm{hi}=2\\mathrm{hi}$ while $t\\mathrm{hi}^2<N$, then use upper-midpoint binary search on the false/true interval until $\\mathrm{hi}-\\mathrm{lo}=1$. Thus $K=\\mathrm{hi}=\\lceil\\sqrt{N/t}\\rceil$. Prepare $|s\\rangle=H^{\\otimes n}|0^n\\rangle$, set $q=1-2t/N$, and compute exactly the rational recurrence\n$$T_0(q)=1,\\qquad T_1(q)=q,\\qquad T_{m+1}(q)=2qT_m(q)-T_{m-1}(q)\\quad(1\\le m\\le2K).$$\nCompute the recurrence through index $m=2K+1$. For each integer $k=0,\\ldots,K$, compute $p_k=(1-T_{2k+1}(q))/2$. Choose the least $k$ attaining the maximum of this finite rational list, apply [[alg-qa-11-grover-iterate]] exactly $k$ times, measure the address register, and make one separate standard bit query to verify the candidate. Return the candidate if marked and the failure symbol otherwise. The state preparation, all-zero reflection, classical recurrence and comparison work, and oracle queries are distinct costs; this definition makes no polynomial-time preprocessing claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-11-exact-integer-iteration-formula",
+          "source_section": "Statement",
+          "quote": "For $0<t<N$, let $\\theta=\\arcsin\\sqrt{t/N}$. After an integer $k\\ge0$ Grover iterates starting from $|s\\rangle$, the probability of measuring a marked address is\n$$p_k=\\sin^2((2k+1)\\theta).$$\nFor $t=0$ this probability is $0$, and for $t=N$ it is $1$ for every integer $k\\ge0$; these endpoint cases are direct one-dimensional branches and do not normalize a nonexistent marked or unmarked state.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-subtraction-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n$$\\sin(u-v)=\\sin u\\cos v-\\cos u\\sin v,\\qquad \\cos(u-v)=\\cos u\\cos v+\\sin u\\sin v.$$ The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-double-angle-and-power-reduction-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(2x)=2\\sin x\\cos x,\\quad \\cos(2x)=\\cos^2x-\\sin^2x=2\\cos^2x-1=1-2\\sin^2x,$$\nand\n$$\\sin^2x=(1-\\cos2x)/2,\\qquad \\cos^2x=(1+\\cos2x)/2.$$\nWhen defined, $\\tan(2x)=2\\tan x/(1-\\tan^2x)$. The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Since $\\sin^2\\theta=t/N$, [F5] gives $\\cos(2\\theta)=1-2t/N=q$. Define $c_r=\\cos(2r\\theta)$. Then $c_0=1=T_0(q)$ and $c_1=q=T_1(q)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For every integer $r\\ge1$, applying [F3] and [F4] with $x=2r\\theta$ and $y=2\\theta$ and adding the identities gives $c_{r+1}=2\\cos(2\\theta)c_r-c_{r-1}=2q c_r-c_{r-1}$. This is the same recurrence as $T_r(q)$; the initial values in step 1.1 and induction on $r$ give $c_r=T_r(q)$ for every $r\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Setting $r=2k+1$ in step 2.1 and applying the power-reduction identity [F5] gives $(1-T_{2k+1}(q))/2=(1-\\cos((4k+2)\\theta))/2=\\sin^2((2k+1)\\theta)$. By [F2] this is the actual Grover success probability.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles N=1, M=1, or the one-dimensional address boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement permits t=N; the identity in steps 1.1–3.1 uses only sin^2(theta)=t/N and remains valid at theta=pi/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "thm-qa-14-grover-search-upper-query-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-14-one-marked-search-with-verification",
+          "source_section": "Definition",
+          "quote": "The schedule is defined on every input in $P_N$ and never receives an actual marked count. The recurrence and gate costs are classical/nonoracle costs; every simulated Grover or verification query uses one standard raw bit query.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-11-grover-iterate-query-cost",
+          "source_section": "Statement",
+          "quote": "One execution of [[alg-qa-11-grover-iterate]] makes exactly one standard bit-query call, through phase kickback. The response-qubit preparation and the reflection about $|s\\rangle$ make no oracle calls and are charged separately as gates or explicitly supplied reflection operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-14-zero-completion-query-simulation-correct",
+          "source_section": "Statement",
+          "quote": "For $N\\ge1$ and $M=2^m$ with $N\\le M<2N$, the procedure of [[alg-qa-14-zero-completion-query-simulation]] implements exactly one zero-completed XOR query per raw $N$-address query, restores all scratch registers, and uses no controlled oracle call.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-quantum-query-complexity",
+          "source_section": "Definition",
+          "quote": "In the pure query model, ordinary gates outside the oracle calls are uncharged by the query coordinate. If a task also reports gate, preparation, measurement, or classical costs, those are separate coordinates. Bounded-error query cost uses the same worst-case maximum; its success threshold is the per-instance condition in [[def-qa-bounded-error-promise-correctness]], not an average over oracle inputs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-qa-14-one-marked-search-with-verification",
+          "source_section": "Definition",
+          "quote": "1. Set $m=\\lceil\\log_2N\\rceil$, $M=2^m$, so $N\\le M<2N$, and hard-code the schedule parameter $t_0=1$. This is a fixed schedule; it is not an assertion that the actual input has one mark.\n2. Set $K=\\lceil\\sqrt M\\rceil$ and $q=1-2/M$. Compute exactly $T_0(q)=1$, $T_1(q)=q$, and $T_{r+1}(q)=2qT_r(q)-T_{r-1}(q)$ for $1\\le r<2K+1$. For $k=0,\\ldots,K$, compute $p_k=(1-T_{2k+1}(q))/2$ and choose the least $k$ maximizing this finite list.\n3. Prepare the uniform state on $M$ addresses, apply the Grover iterate of [[alg-qa-11-grover-iterate]] exactly $k$ times, implementing each padded bit query by [[alg-qa-14-zero-completion-query-simulation]].\n4. Measure the padded address $j$. Use [[alg-qa-14-zero-completion-query-simulation]] for the candidate-verification query. If $j<N$ and the query returns $1$, output yes and original coordinate $j+1$. Otherwise output no and no candidate.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The procedure of [F1] makes $k$ Grover iterates and one verification. By [F2] each iterate needs one padded bit query, and [F3] replaces every one of those calls and the verification with exactly one raw query. Therefore the total raw query count is at most $K+1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Since $K=\\lceil\\sqrt M\\rceil\\le\\sqrt M+1$, we have $K+1\\le\\sqrt M+2\\le3\\sqrt M$ because $M\\ge1$. By [F5], $3\\sqrt M<3\\sqrt{2N}$. Thus the worst-case standard bit-query cost is at most $3\\sqrt{2N}$ by [F4]. None of the reversible address tests, classical recurrence steps, or gates were counted as oracle invocations, so this estimate makes no claim about their cost.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "thm-qa-14-bbbv-search-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-14-search-promise",
+          "source_section": "Definition",
+          "quote": "For every integer $N\\ge1$, use the identity encoding of [[def-qa-input-encoding-and-size]] and let $P_N=\\{0^N\\}\\cup\\{e_i:1\\le i\\le N\\}$, where $0^N$ is the all-zero string and $e_i$ has a $1$ exactly in coordinate $i$. This is a promise decision task in the sense of [[def-qa-task-and-promise-domain]]: its yes set is $\\{e_i:1\\le i\\le N\\}$, its no set is $\\{0^N\\}$, and its output is $\\operatorname{OR}(x)$. Equivalently, the search relation accepts output $i$ on input $e_i$ and the symbol none on input $0^N$. The marked query address corresponding to $e_i$ is $j=i-1$ in [[def-qa-14-boolean-search-query-model]]. Verifying a measured candidate costs a separate query. No correctness condition is imposed outside $P_N$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-14-coherent-query-normal-form",
+          "source_section": "Statement",
+          "quote": "Fix a promised input, a finite register space, and a finite-branch quantum query algorithm whose every execution branch makes at most $T$ calls to the standard Boolean XOR oracle. There is a finite pure-state unitary circuit, with input-independent unitaries between exactly $T$ ordinary oracle calls and a final output measurement, that has the same output distribution. The construction adds only finite ancillas and nonoracle gates; it does not require controlled access to the oracle and makes no claim that the transformed family is uniformly generated or has bounded gate cost.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-14-state-distance-from-acceptance-gap",
+          "source_section": "Statement",
+          "quote": "If a common final two-outcome measurement accepts one unit state with probability at least $2/3$ and another with probability at most $1/3$, then the distance between their state vectors is at least $1/6$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-14-aggregate-hybrid-squared-distance",
+          "source_section": "Statement",
+          "quote": "For every $T\\ge0$ query algorithm on $N$ addresses, with final states and query magnitudes as in [[lem-qa-14-cumulative-hybrid-bound]],\n$$\\sum_{i=1}^{N}\\|\\psi_T^i-\\psi_T^0\\|^2\\le4T^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-bounded-error-promise-correctness",
+          "source_section": "Definition",
+          "quote": "A quantum or classical solver in [[def-qa-quantum-query-algorithm]] and [[def-qa-classical-query-algorithm]] for a decision task $(Y,N)$ of [[def-qa-task-and-promise-domain]] has **bounded error** (with the QA convention) if its normalized output law assigns probability at least $2/3$ to the correct answer for every encoded promised instance. A search solver has bounded error if, for every encoded $z$ in its domain $D$, its output law assigns probability at least $2/3$ to outputs $w$ satisfying $(z,w)\\in R$. The guarantee is worst-case per instance, not averaged over an input distribution. The constant $2/3$ is a convention; amplification and its query/access cost are separate results.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-quantum-query-complexity",
+          "source_section": "Definition",
+          "quote": "For a $T$-query quantum algorithm [[def-qa-quantum-query-algorithm]] at input length $n$, its **worst-case quantum query cost** is the maximum number of designated oracle calls over all promised instances in $P_n$ and all measurement branches. When $P_n$ is empty, define this cost to be $0$. For nonempty $P_n$, a finite circuit and finite branch sets ensure that this maximum exists; a solver whose branch counts are not uniformly bounded has infinite worst-case query cost. An expected-query bound is the separate quantity defined by [[def-qa-expected-query-cost]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Let a bounded-error decision algorithm use $T$ queries. Apply [F2] and use the common final acceptance event. For each $i$, correctness [F5] gives acceptance at least $2/3$ on $e_i$ and at most $1/3$ on $0^N$. By [F3], $\\|\\psi_T^i-\\psi_T^0\\|\\ge1/6$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Summing the squares of these $N$ inequalities gives $N/36\\le\\sum_i\\|\\psi_T^i-\\psi_T^0\\|^2$. By [F4], the right side is at most $4T^2$, so $T\\ge\\sqrt N/12$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Now let a bounded-error finder use $T$ queries. Append a decision step that measures its output and, if it is a coordinate $i$, makes one standard bit query at address $i-1$ with response initialized to $0$; accept exactly when that response is $1$. If the output is none or invalid, reject without a query. On $0^N$ this decision never accepts; on $e_i$ it accepts whenever the finder returns $i$, which has probability at least $2/3$ by [F1]. This is a bounded-error decision procedure with at most $T+1$ queries, so [F6] and step 2.1 give $T+1\\ge\\sqrt N/12$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "If $N\\ge576$, then $\\sqrt N/12\\ge2$, and step 3.1 gives $T\\ge\\sqrt N/12-1\\ge\\sqrt N/24$. If $1\\le N<576$, a zero-query finder has the same output law on $0^N$ and $e_1$, yet success would require probability at least $2/3$ on the disjoint outcomes none and $1$ under this one common law. Their probabilities would sum to at least $4/3$, impossible; hence $T\\ge1\\ge\\sqrt N/24$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 compares each e_i with the all-zero input 0^N."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 rules out a zero-query finder on the two distinct promised inputs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "thm-qa-14-grover-search-upper-success": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-14-one-marked-search-with-verification",
+          "source_section": "Definition",
+          "quote": "1. Set $m=\\lceil\\log_2N\\rceil$, $M=2^m$, so $N\\le M<2N$, and hard-code the schedule parameter $t_0=1$. This is a fixed schedule; it is not an assertion that the actual input has one mark.\n2. Set $K=\\lceil\\sqrt M\\rceil$ and $q=1-2/M$. Compute exactly $T_0(q)=1$, $T_1(q)=q$, and $T_{r+1}(q)=2qT_r(q)-T_{r-1}(q)$ for $1\\le r<2K+1$. For $k=0,\\ldots,K$, compute $p_k=(1-T_{2k+1}(q))/2$ and choose the least $k$ maximizing this finite list.\n3. Prepare the uniform state on $M$ addresses, apply the Grover iterate of [[alg-qa-11-grover-iterate]] exactly $k$ times, implementing each padded bit query by [[alg-qa-14-zero-completion-query-simulation]].\n4. Measure the padded address $j$. Use [[alg-qa-14-zero-completion-query-simulation]] for the candidate-verification query. If $j<N$ and the query returns $1$, output yes and original coordinate $j+1$. Otherwise output no and no candidate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-14-zero-completion-query-simulation-correct",
+          "source_section": "Statement",
+          "quote": "For $N\\ge1$ and $M=2^m$ with $N\\le M<2N$, the procedure of [[alg-qa-14-zero-completion-query-simulation]] implements exactly one zero-completed XOR query per raw $N$-address query, restores all scratch registers, and uses no controlled oracle call.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-14-chebyshev-recurrence-matches-grover-success",
+          "source_section": "Statement",
+          "quote": "Let $N=2^n$, let $1\\le t\\le N$, put $q=1-2t/N$ and $\\theta=\\arcsin\\sqrt{t/N}$. If $T_0(q)=1$, $T_1(q)=q$, and $T_{r+1}(q)=2qT_r(q)-T_{r-1}(q)$, then for every integer $k\\ge0$,\n$$(1-T_{2k+1}(q))/2=\\sin^2((2k+1)\\theta).$$\nThus the exact rational values used by the known-count Grover schedule equal its actual marked-address probabilities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-11-integer-iteration-regime",
+          "source_section": "Statement",
+          "quote": "Put $a=t/N$ and $\\theta=\\arcsin\\sqrt a$. If $0<a\\le1/2$, some integer $k$ with $0\\le k\\le K=\\lceil1/\\sqrt a\\rceil$ has\n$$p_k=\\sin^2((2k+1)\\theta)\\ge1-a.$$\nIf $1/2<a\\le1$, $k=0$ lies in this range and $p_0=a>1/2$. The real-valued optimizer $k_*=\\pi/(4\\theta)-1/2$ is not in general an integer.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-14-search-promise",
+          "source_section": "Definition",
+          "quote": "For every integer $N\\ge1$, use the identity encoding of [[def-qa-input-encoding-and-size]] and let $P_N=\\{0^N\\}\\cup\\{e_i:1\\le i\\le N\\}$, where $0^N$ is the all-zero string and $e_i$ has a $1$ exactly in coordinate $i$. This is a promise decision task in the sense of [[def-qa-task-and-promise-domain]]: its yes set is $\\{e_i:1\\le i\\le N\\}$, its no set is $\\{0^N\\}$, and its output is $\\operatorname{OR}(x)$. Equivalently, the search relation accepts output $i$ on input $e_i$ and the symbol none on input $0^N$. The marked query address corresponding to $e_i$ is $j=i-1$ in [[def-qa-14-boolean-search-query-model]]. Verifying a measured candidate costs a separate query. No correctness condition is imposed outside $P_N$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If $N=1$, then $M=1$ and the schedule in [F1] includes $k=0$. Its recurrence value is $p_0=(1-(-1))/2=1$, since $1-2/M=-1$ and $T_1(q)=q$. The maximizing choice in [F1] has value at least $p_0$, and [F3] identifies every list value with a probability at most $1$, so the selected success probability is $1$. If $N\\ge2$, then $M\\ge2$, so the padded one-mark input in [F5] has ratio $t/M=1/M\\le1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For $N\\ge2$, [F4] supplies an integer $k\\le\\lceil\\sqrt M\\rceil$ with actual marked probability at least $1-1/M$. The recurrence probabilities in [F1] equal these actual probabilities by [F3], so their finite maximizing choice has probability no smaller than that candidate. The $N=1$ case already has probability one by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The simulation in [F2] makes the algorithm's padded Grover evolution exactly the evolution analyzed in step 2.1. On a one-mark input, a marked measurement is valid and the final verification returns $1$, so the algorithm returns the correct marked coordinate with probability at least the bound from step 2.1. On $0^N$, every verification query returns $0$, so it returns no with certainty. Finally $M\\ge N$ implies $1-1/M\\ge1-1/N$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies every candidate and returns no on 0^N."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 shows the verification query rejects every candidate on 0^N."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles N=1, M=1, or the one-dimensional address boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats N=1, where M=1 and the recurrence gives success one; step 3.1 treats the zero-count input."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "thm-qa-14-optimal-search-query-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-14-bbbv-search-lower-bound",
+          "source_section": "Statement",
+          "quote": "For the promise $P_N=\\{0^N,e_1,\\ldots,e_N\\}$ of [[def-qa-14-search-promise]], every bounded-error quantum algorithm deciding whether the input is zero or one-marked uses at least $\\sqrt N/24$ standard bit queries. Every bounded-error finder that outputs a marked coordinate on each $e_i$ and none on $0^N$ also uses at least $\\sqrt N/24$ standard bit queries. The decision part satisfies the stronger bound $T\\ge\\sqrt N/12$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-14-grover-search-upper-success",
+          "source_section": "Statement",
+          "quote": "On every promised input of [[def-qa-14-search-promise]], the fixed-one procedure [[alg-qa-14-one-marked-search-with-verification]] returns the correct decision and, on a one-marked input, its marked coordinate with probability at least $1-1/M$, where $M=2^{\\lceil\\log_2N\\rceil}$ and $M=1$ when $N=1$. In particular, its one-marked success probability is at least $1-1/N$; when $N=1$ it succeeds with certainty. On $0^N$ verification always returns no.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-14-grover-search-upper-query-cost",
+          "source_section": "Statement",
+          "quote": "For every $N\\ge1$, [[alg-qa-14-one-marked-search-with-verification]] uses at most $3\\sqrt{2N}$ standard bit queries, including the final candidate verification. Hence its query cost is $O(\\sqrt N)$. Address comparison, reversible computation, recurrence evaluation, state preparation, reflection gates, and all other nonoracle work are separate costs; no polynomial-time claim is made.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-14-search-promise",
+          "source_section": "Definition",
+          "quote": "For every integer $N\\ge1$, use the identity encoding of [[def-qa-input-encoding-and-size]] and let $P_N=\\{0^N\\}\\cup\\{e_i:1\\le i\\le N\\}$, where $0^N$ is the all-zero string and $e_i$ has a $1$ exactly in coordinate $i$. This is a promise decision task in the sense of [[def-qa-task-and-promise-domain]]: its yes set is $\\{e_i:1\\le i\\le N\\}$, its no set is $\\{0^N\\}$, and its output is $\\operatorname{OR}(x)$. Equivalently, the search relation accepts output $i$ on input $e_i$ and the symbol none on input $0^N$. The marked query address corresponding to $e_i$ is $j=i-1$ in [[def-qa-14-boolean-search-query-model]]. Verifying a measured candidate costs a separate query. No correctness condition is imposed outside $P_N$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-quantum-query-complexity",
+          "source_section": "Definition",
+          "quote": "For a $T$-query quantum algorithm [[def-qa-quantum-query-algorithm]] at input length $n$, its **worst-case quantum query cost** is the maximum number of designated oracle calls over all promised instances in $P_n$ and all measurement branches. When $P_n$ is empty, define this cost to be $0$. For nonempty $P_n$, a finite circuit and finite branch sets ensure that this maximum exists; a solver whose branch counts are not uniformly bounded has infinite worst-case query cost. An expected-query bound is the separate quantity defined by [[def-qa-expected-query-cost]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The lower bound for both tasks is [F1], so each complexity is at least a positive constant times $\\sqrt N$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "For $N\\ge3$, the one-run success probability in [F2] is at least $1-1/N\\ge2/3$. For $N=1$, [F2] gives certainty. For $N=2$, run the fixed-one procedure twice with fresh registers and independent measurements, returning a verified candidate if either run verifies one. Each run has success probability at least $1/2$ by [F2]; conditional independence of the fresh runs gives failure probability at most $(1-1/2)^2=1/4$, hence success at least $3/4$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Verification prevents a false yes on $0^N$, by [F2] and [F4]. On each singleton input the procedures in step 1.2 return its marked coordinate with probability at least $2/3$. They are therefore bounded-error solvers for both the decision and finding tasks. The two-run case uses at most twice the cost in [F3], and the other cases use at most one run, so [F5] bounds their worst-case query cost by $6\\sqrt{2N}=O(\\sqrt N)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Combining steps 1.1 and 2.1 gives matching positive constant lower and upper multiples of $\\sqrt N$ for both decision and finding. All statements concern standard bit queries; nonoracle gate and preprocessing costs remain separate.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 checks that verification prevents yes on 0^N."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles N=1, M=1, or the one-dimensional address boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "ex-qa-14-hybrid-budget-for-n-small": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-14-query-mismatch-projectors",
+          "source_section": "Definition",
+          "quote": "For the address register of [[def-qa-14-boolean-search-query-model]], let $\\Pi_j$ be the orthogonal projection onto address $j$, tensored with the identity on the response and work registers, for $0\\le j<N$. For any finite input domain $D\\subseteq\\{0,1\\}^N$, define the mismatch matrix $\\Delta_j$ by $(\\Delta_j)_{x,y}=1$ when $x_{j+1}\\ne y_{j+1}$ and $0$ otherwise, for $x,y\\in D$. This model has no separate skip-query address; if an implementation adjoins one, its basis projection is included as an additional orthogonal summand.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-14-cumulative-hybrid-bound",
+          "source_section": "Statement",
+          "quote": "For a $T$-query algorithm in the model of [[def-qa-14-boolean-search-query-model]], let $\\psi_t^0$ be its unit state on input $0^N$ immediately before query $t+1$, for $0\\le t<T$, and set $q_{t,i}=\\|\\Pi_{i-1}\\psi_t^0\\|^2$. If $\\psi_T^0$ and $\\psi_T^i$ are the final unit states on $0^N$ and $e_i$, then\n$$\\|\\psi_T^i-\\psi_T^0\\|\\le2\\sum_{t=0}^{T-1}\\sqrt{q_{t,i}}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the root pairing linear in its first argument, and let $u\\in H$ satisfy $\\|u\\|=1$. Define $P_u:=|u\\rangle\\langle u|$ by the root-linear-first Dirac convention. Then $P_u$ is self-adjoint and idempotent, has one-dimensional range, is non-negative, and has trace one. In particular, $P_u$ is a density operator.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Let $|s\\rangle=\\frac12(|0\\rangle+|1\\rangle+|2\\rangle+|3\\rangle)$ be the first query's address state, with any fixed unit response and work state. By [F1], $\\|s\\|=1$ and each address probability is $q_{0,i}=1/4$. Hence $\\sum_iq_{0,i}=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Put $e_3=|3\\rangle$ and $u=s-e_3$. By [F1], $\\langle s,e_3\\rangle_{\\rm root}=1/2$, so $\\|u\\|^2=1+1-2(1/2)=1$. The map $P_u=|u\\rangle\\langle u|$ is an orthogonal projection by [F5], and $R=I-2P_u$ satisfies $R^*R=R^2=I$. By [F2], $P_us=\\langle s,u\\rangle_{\\rm root}u=(1/2)u$, so $Rs=s-u=e_3$. Use this input-independent reflection between the first and second queries. The all-zero oracle is identity, so the second pre-query address state is $|3\\rangle$; thus $q_{1,4}=1$, $q_{1,1}=q_{1,2}=q_{1,3}=0$, and $\\sum_iq_{1,i}=1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Apply [F4]. For $i=1,2,3$, $\\|\\psi_2^i-\\psi_2^0\\|\\le2(1/2+0)=1$; for $i=4$, $\\|\\psi_2^4-\\psi_2^0\\|\\le2(1/2+1)=3$. Therefore the sum of squared bounds is at most $3\\cdot1^2+3^2=12$, and the average squared distance is at most $12/4=3$. The general bound $4T^2$ gives total at most $16$ and average at most $4$, so the explicit address allocation is consistent with that budget.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This statement has no exactly-one-marked or one-dimensional success case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-dimensional, one-dimensional, or collapsed structural case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no parameter interval with a distinct endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    },
+    "cex-qa-14-query-parallelism-does-not-give-exponential-search": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-11-marked-search-problem",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge0$, put $N=2^n$, and let $D_n=\\{0,\\ldots,N-1\\}$. The big-endian encoding $\\operatorname{enc}_n:\\{0,1\\}^n\\to D_n$ is a bijection by [[thm-qc-bitstring-index-is-bijection]], so identify each address word $w$ with its slot $x=\\operatorname{enc}_n(w)$. A search instance is a total Boolean function $f:D_n\\to\\{0,1\\}$, equivalently the word-indexed function $w\\mapsto f(\\operatorname{enc}_n(w))$. Its marked set is $M=\\{x\\in D_n:f(x)=1\\}$ and its marked count is $t=|M|$. The standard bit query is the coherent XOR action $U_f|x,b\\rangle=|x,b\\oplus f(x)\\rangle$; the associated phase query is $O_M|x\\rangle=(-1)^{f(x)}|x\\rangle$. One standard bit query implements this phase action with a response qubit prepared in $|-\\rangle$, by [[thm-qa-bit-query-to-phase-query]]. A measured candidate $x$ is verified by a separate standard bit query. Knowing $t$ is additional classical input; no count promise is made in the unknown-count version. A correct search output is a verified $x\\in M$. The distinguished output none is used only by a procedure whose input includes the exact fact $t=0$; it is not a finite-time test for emptiness when $t$ is unknown.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with the root pairing linear in its first argument, and let $u\\in H$ satisfy $\\|u\\|=1$. Define $P_u:=|u\\rangle\\langle u|$ by the root-linear-first Dirac convention. Then $P_u$ is self-adjoint and idempotent, has one-dimensional range, is non-negative, and has trace one. In particular, $P_u$ is a density operator.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-trace-distance",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **trace distance** is\n$$D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1,$$\nwhere $\\|\\cdot\\|_1$ is the trace norm ([[def-qc-trace-norm]]). The factor $1/2$ is part of this state-distance convention. The diamond norm below is an unhalved norm on maps.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-pure-state-trace-distance",
+          "source_section": "Statement",
+          "quote": "For unit vectors $u,v$ in a finite-dimensional complex Hilbert space, let $P_u=|u\\rangle\\langle u|$ and $P_v=|v\\rangle\\langle v|$. Then\n$$D(P_u,P_v)=\\sqrt{1-|\\langle u|v\\rangle_D|^2},$$\nwhere $\\langle\\cdot|\\cdot\\rangle_D$ is the Dirac pairing converted from the root library's first-argument-linear inner product.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-hermitian-trace-norm-positive-negative-parts",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite-dimensional complex inner-product space and let\n$X:\\mathcal H\\to\\mathcal H$ be self-adjoint. There are non-negative\nendomorphisms $X_+,X_-$ such that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-measurement-variation-at-most-trace-distance",
+          "source_section": "Statement",
+          "quote": "Let $\\rho,\\sigma$ be density operators on a finite-dimensional complex Hilbert space and let $\\{E_a\\}_{a\\in\\mathcal A}$ be any finite POVM. If $p_a=\\operatorname{tr}(\\rho E_a)$ and $q_a=\\operatorname{tr}(\\sigma E_a)$, then\n$$\\frac12\\sum_{a\\in\\mathcal A}|p_a-q_a|\\le D(\\rho,\\sigma).$$\nThe two-effect projective measurement from the Holevo–Helstrom theorem attains equality.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qa-14-bbbv-search-lower-bound",
+          "source_section": "Statement",
+          "quote": "For the promise $P_N=\\{0^N,e_1,\\ldots,e_N\\}$ of [[def-qa-14-search-promise]], every bounded-error quantum algorithm deciding whether the input is zero or one-marked uses at least $\\sqrt N/24$ standard bit queries. Every bounded-error finder that outputs a marked coordinate on each $e_i$ and none on $0^N$ also uses at least $\\sqrt N/24$ standard bit queries. The decision part satisfies the stronger bound $T\\ge\\sqrt N/12$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Let $|s\\rangle=N^{-1/2}\\sum_{j=0}^{N-1}|j\\rangle$, $P_s=|s\\rangle\\langle s|$, and let the fixed marked coordinate be $i$. Its query address is $i-1$, so the phase query $O_i=I-2|i-1\\rangle\\langle i-1|$ sends $s$ to the unit vector $\\psi_i=s-2|i-1\\rangle/\\sqrt N$ because it only flips one basis sign; set $P_{\\psi_i}=|\\psi_i\\rangle\\langle\\psi_i|$. Orthonormality [F2] gives $\\langle s,\\psi_i\\rangle_D=1-2/N$; [F5]–[F6] give $D(P_s,P_{\\psi_i})=\\sqrt{1-(1-2/N)^2}=2\\sqrt{N-1}/N=O(N^{-1/2})$. This tends to zero with $N$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Suppose instead the mark is unknown and uniform on $\\{1,\\ldots,N\\}$. Each $P_{\\psi_i}$ is a density operator by [F4], so their finite average $\\rho=N^{-1}\\sum_iP_{\\psi_i}$ is self-adjoint, nonnegative, and trace one. Writing $e_i=|i-1\\rangle$, expansion gives $P_{\\psi_i}=P_s-\\frac2{\\sqrt N}(|s\\rangle\\langle e_i|+|e_i\\rangle\\langle s|)+\\frac4N|e_i\\rangle\\langle e_i|$. The two cross sums each equal $\\sqrt N P_s$, and $\\sum_i|e_i\\rangle\\langle e_i|=I$ by [F2]–[F3], so $\\rho=(1-4/N)P_s+4I/N^2$. Then $X=\\rho-P_s$ has eigenvalue $-4(N-1)/N^2$ on $\\operatorname{span}\\{s\\}$ and $4/N^2$ on $s^\\perp$ of dimension $N-1$; their sum with multiplicity is zero, so $X$ is trace-zero. Its negative part is $X_-=(4(N-1)/N^2)P_s$, whose trace is $4(N-1)/N^2$ because $P_s$ has trace one. By [F5] and [F7], $D(\\rho,P_s)=\\tfrac12\\|X\\|_1=4(N-1)/N^2=O(N^{-1})$. If $N=1$, $s^\\perp$ has dimension zero and the formula gives distance zero.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F8], any measurement on either post-query state changes its outcome law from the initial uniform state's law by at most the corresponding trace distance in steps 1.1 and 1.2. Both distances tend to zero with $N$, so neither specified experiment has constant measurement advantage for large $N$. The lower bound [F9] concerns arbitrary algorithms and is proved independently; it is not inferred from this example.",
+          "step": "2.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item does not make a claim about an empty marked set or empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This statement has no zero-iteration, zero-count, or zero-input endpoint requiring a separate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the exactly-one-marked case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles N=1, M=1, or the one-dimensional address boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 states the N=1 orthogonal-complement endpoint separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection; any finite basis or circuit is already specified in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no equivalence or biconditional claim."
+        }
+      ]
+    }
+  }
+}

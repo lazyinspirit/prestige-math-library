@@ -1,0 +1,130 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "54",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "lem-qa-30-finite-grid-quantum-subgradient",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e452bb78a30946341875e2522f870b699c180d2a176ee437f4fd2a8ff8e82d38",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original procedure permits N=ceil(18 ln(1000n/rho)+3)+2^n repetitions. Each repetition needs one value query and its inverse, so its 2N calls violate the asserted O(log(n/rho)) bound. Specifying N=ceil(18 ln(1000n/rho)+3) retains the concentration guarantee and proves the claimed bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-30-finite-grid-quantum-subgradient",
+      "disposition": "repaired",
+      "post_sha256": "dff253de754d7c4f245efc555788722669e71c1dfa0dd93e5bc0d6ba8c62f3cd",
+      "review_context_sha256": "75d2fbdade5e5e8445e08a342db5d783274f6f9fb2f002a8c59efdc5ea96b565",
+      "reason": "Fixed the exact ceiling count and proved 2N<=36 ln(1000n/rho)+8. Checked the Lipschitz/Fubini cancellation, nonnegative second-difference Markov bound, convex-hull affine approximation, signed Fourier tail, phase perturbation, conditional independent-run median, and supporting-inequality conversion. The ceiling gives d*2 exp(-N/18)<=rho/500; the remaining failure is less than rho. Actual suppliers provide the stated Fubini, additive Bernoulli, QFT-sign, pi and Euclidean inequalities. No change to approximation constants or choice assumptions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-qa-30-quantum-membership-separation-cost"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "qa60-step5-repeat-r1-u54-finite-grid-run-count",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T08:00:24.922277+00:00",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "lem-qa-30-finite-grid-quantum-subgradient",
+        "caught_at_stage": "5-rejudge",
+        "caught_by_role": "judge-sol",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "reason": "The original procedure permits N=ceil(18 ln(1000n/rho)+3)+2^n repetitions. Each repetition needs one value query and its inverse, so its 2N calls violate the asserted O(log(n/rho)) bound. Specifying N=ceil(18 ln(1000n/rho)+3) retains the concentration guarantee and proves the claimed bound.",
+        "adjudication_ref": [
+          {
+            "id": "lem-qa-30-finite-grid-quantum-subgradient",
+            "model": "gpt-6.1-sol",
+            "context_sha256": "e452bb78a30946341875e2522f870b699c180d2a176ee437f4fd2a8ff8e82d38"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-repeat-r1-u54.json",
+            "note": "Exact rejected tuple, completed ceiling-count repair, current review hashes and focused passing checks."
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "operation": "none",
+      "reason": "The changed supplier and its only direct item consumer are draft frontier items; no published consumer or outside-frontier maintenance finding was discovered."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Completed; all focused checks passed. This is repair evidence, not independent review or certification.",
+    "claim_and_conventions": "Convex locally L-Lipschitz f, finite shared center z, clean deterministic delta-value oracle, negative-sign inverse QFT, fixed N=ceil(18 ln(1000n/rho)+3); coordinate medians retain the original simultaneous approximate-subgradient inequality. No choice axiom.",
+    "sources_consulted": "Local dependency Statement/Definition sections only; no external source reading claimed.",
+    "dependencies": [
+      "def-subgradient-and-subdifferential",
+      "thm-riemann-fubini-on-product-rectangles",
+      "lem-chernoff-bound-for-independent-bernoulli-trials",
+      "thm-qa-exact-binary-qft-circuit-correct",
+      "def-qa-cyclic-quantum-fourier-transform",
+      "lem-qa-13-pi-rational-bounds",
+      "thm-cauchy-schwarz-and-the-euclidean-norm"
+    ],
+    "metadata": "Under the shared write lock, synchronized the assigned manifest Statement, assigned contract derivation 6.1 and the direct consumer contract F2 Statement quotation; strict contracts passed for both items. Consumer item and page unchanged.",
+    "consumer_examination": [
+      {
+        "id": "thm-qa-30-quantum-membership-separation-cost",
+        "path": "items/thm-qa-30-quantum-membership-separation-cost.md",
+        "affected_use": "F2 and proof steps 1.2, 3.1 and 3.2 invoke the finite-grid procedure at d=n-1, using its simultaneous approximate-subgradient inequality and logarithmic phase/median run count.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None after repair: the exact ceiling still meets the same confidence threshold, and now justifies the logarithmic number of phase/median runs in step 3.2.",
+        "minimality": "No consumer item edit is needed; its geometric parameters, value precision and resulting inequality are unchanged. Only its contract F2 quotation required synchronization."
+      }
+    ],
+    "page_examination": "library/quantum-algorithms/quantum-optimization-sdp-and-variational-algorithms.md lists the lemma; its summary retains the same oracle conventions and computational-model qualifications. No page clause changes.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary direct-consumer routing; no unresolved mathematical obligations in this assignment.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-54.proof-contracts.json --strict --items lem-qa-30-finite-grid-quantum-subgradient,thm-qa-30-quantum-membership-separation-cost --json",
+        "exit_code": 0,
+        "result": "Both scoped contracts passed; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-30-finite-grid-quantum-subgradient.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-qa-30-finite-grid-quantum-subgradient.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-qa-30-finite-grid-quantum-subgradient.md",
+        "exit_code": 0,
+        "result": "1 item, 8 steps, 0 defects."
+      }
+    ],
+    "statement_change": {
+      "before": "Use at least $18\\ln(1000n/\\rho)+3$ independent runs and coordinate medians.",
+      "after": "Use $N=\\lceil18\\ln(1000n/\\rho)+3\\rceil$ independent runs and coordinate medians."
+    }
+  }
+}

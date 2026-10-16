@@ -1,0 +1,84 @@
+46
+Quantum Algorithms
+
+observable can be expressed as:
+
+⟨ψ|O1 ⊗O2 ⊗.. ⊗On|ψ⟩=
+(6.230)
+
+=
+�
+
+j1..jn
+
+�
+
+i1..in
+tr
+�
+P j1∗
+1
+..P jn∗
+n
+�
+⟨j1|O1|i1⟩..⟨jn|On|in⟩× tr
+�
+P i1
+1 ..P in
+n
+�
+
+= tr (E1(O1)E2(O2)..En(On))
+
+where Ek(Ok) = �
+ikjk
+
+�
+P ik
+k ⊗P jk∗
+k
+�
+⟨jk|Ok|ik⟩is also a D2×D2 matrix. We can evaluate
+the trace of a product of n constant-size matrices in time O(n). This completes the proof
+that slightly entangled quantum computations can be classically simulated in polynomial
+time.
+Finally, let’s return to the problem of finding the energy of the ground state of a local
+Hamiltonian. In many one-dimensional systems studied in physics, the ground state and
+low-lying excited states can be well approximated by an MPS with a reasonable matrix
+size. That is, there is a good approximation to e.g. the ground state with maximal
+Schmidt number across any cut
+
+D = poly(n).
+(6.231)
+
+However there are local Hamiltonians (even translation-invariant ones) for which finding
+the ground state energy seems to be hard not only for classical computers but also for
+quantum computers! In these cases, either an accurate MPS representation requires
+matrices super-polynomial in size, or, if there is a good MPS approximation with D =
+poly(n), it must be a hard computational task to find that approximation.
+
+6.10 QMA-completeness of the local Hamiltonian problem
+
+As we have discussed, we expect that quantum computers can compute the ground state
+energy of local Hamiltonians in cases where the problem is hard classically; this may be
+an important application for quantum computers. On the other hand, we believe that in
+some cases computing the ground state energy of a local Hamiltonian is still hard even
+for quantum computers. Let us try to understand more deeply the reason for this belief.
+Physicists are often interested in translation-invariant geometrically local Hamiltoni-
+ans, in which all qubits interact in the same way with their neighbors (except for the
+qubits at the boundary of the sample), because such Hamiltonians provide good models
+of some real materials. But Hamiltonians that are not translationally invariant are also
+useful in physics (for example, when modeling a material with ”disorder” due to dirt and
+other imperfections in the sample). If the Hamiltonian is not translation invariant, then
+we can formulate an instance of an n-qubit local Hamiltonian problem by specifying
+how the Hamiltonian varies from site to site in the system. Physicists sometimes refer to
+such (not translationally-invariant) systems as spin glasses. Even in the classical case,
+where the variable at each site is a bit rather than a qubit, finding the ground state
+energy of a spin glass to constant accuracy can be an NP-hard problem. Therefore, we
+don’t expect classical or quantum computers to be able to solve the problem in general
+(unless NP is contained in BQP, which seems unlikely).
+Let’s first understand why the classical spin-glass problem can be NP-hard. Then we’ll
+discuss the hardness of the quantum problem. We’ll see that in the quantum case finding
+the ground state energy of a local Hamiltonian is QMA-hard. (Recall that QMA is the
+
+

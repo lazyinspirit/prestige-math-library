@@ -1,0 +1,98 @@
+# Step 3a adjudication — batch 29
+
+Run: `quantum-computing-algorithms-60-2026-10-15`; group: `batch-29`.
+
+## Dependency-ordered review
+
+- `lem-qa-finite-character-values-have-unit-modulus`: Read every step and F1–F5 against current supplier statements. Positive finite element order gives chi(x)^n=1; nth-root classification and imaginary-exponential modulus give unit modulus. x=0 has n=1. No empty group or choice use. Root-angle fractions use the conventional canonical-field interpretation recorded in def-canonical-natural; no mathematical defect. Dependencies: def-order-in-a-group, def-additive-character-of-a-finite-abelian-group, lem-group-homomorphism-basic-properties, thm-complex-nth-roots-and-roots-of-unity, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity. No routed decision. Next: level 1 factorization and cyclic enumeration.
+
+- `lem-qa-character-dual-of-a-product-factors`: Checked F1–F4 and all five steps: coordinate inclusions preserve addition, product of complex-valued characters is multiplicative by commutativity, and coordinate restrictions and products are inverse. Empty product and trivial group each have one character. Recursively parenthesized tuples are interpreted by the stated finite-product convention; no arbitrary choice. Current external direct-product definition/theorem, group-power laws and cyclic classification checked. No routed decisions.
+
+- `lem-qa-cyclic-group-has-n-characters`: Checked all three steps and F1–F5: evaluation at generator injects into nonzero nth roots; j−k=qn makes z^j independent of representative even for negative exponents; power laws prove multiplicativity and surjectivity. Exactly n distinct roots, including n=1. Cyclic-classification proof supplies the stated quotient map and kernel nZ. No choice assumption. Current external direct-product definition/theorem, group-power laws and cyclic classification checked. No routed decisions.
+
+Next: dual cardinality.
+
+- `thm-qa-finite-abelian-dual-has-same-cardinality`: Reviewed F1–F8 and four steps: invariant factors give one fixed isomorphism, pullback and inverse pullback biject character sets, finite product factorization and root counts give the order. Empty list handled separately by the trivial cyclic group. Binary product order/cardinality statements iterate finitely; choosing one isomorphism needs no AC. No canonical isomorphism with the dual is asserted. Checked current invariant-factor theorem, product order, product rule, isomorphism definition and inverse-homomorphism statement. No routed decision.
+
+Next: level 3 dual group, orthogonality, annihilator size.
+
+- `thm-qa-finite-abelian-character-dual-is-finite-abelian-group`: Read all three steps and cited definitions, field laws, homomorphism laws and dual cardinality. Pointwise multiplication/inversion preserve characters because the codomain is commutative; identity, associativity and inverse laws are pointwise. Earlier cardinality supplies finiteness without circularly assuming dual group structure. Trivial group included; no AC. No routed decision.
+
+- `thm-qa-finite-abelian-dual-character-orthogonality`: Read all four steps and F1–F10 against current suppliers. Pullback bijection reduces to cyclic coordinates. Distinct nth roots make q!=1 when residues differ; (1−q) times the finite geometric sum is 1−q^n, so cancellation is valid. Finite Fubini and distributivity factor the product sum. Equal indices give product n_i=|G|; unequal indices give a zero factor. Trivial group, n_i=1 and empty list handled. No row/column circularity or AC. No routed decision.
+
+- `thm-qa-finite-abelian-subgroup-annihilator-cardinality`: Read all five steps, annihilator definition and F1–F9. H normal makes quotient a finite abelian group. Inflation trivial on H and descent independent of representatives are inverse maps on all cosets, so dual cardinality applies to G/H. Lagrange gives the product identity; |H|>=1 permits the ratio. Checked H={0}, H=G and trivial G. No representative-selection function or AC is needed. No routed decision.
+
+Next: level 4 coset transform.
+
+- `thm-qa-finite-abelian-coset-fourier-transform`: Compared current full carrier with immutable supplier-before and native pre/post hashes. Current raw carrier equals reader-post. Translation reindexes the indicator sum, character restriction either is trivial or has zero sum, and conjugation gives the negative-character phase. M_R,N_R,Q_R are positive; natural product N=MQ maps to real product by finite induction/distributivity; rational-power laws give Q_R^(−1/2). Input/output counting norms equal one. H=G, H={0}, trivial G checked. All F1–F9 actual suppliers and contract derivations reviewed. Reader repair accepted with confidence 1. Direct foreign consumer sample-law still needs owner disposition; no acceptance of that carrier.
+
+- `thm-qa-finite-abelian-evaluation-map-isomorphism`: Checked all six steps and F1–F8. Evaluation is multiplicative on dual characters and a homomorphism in g. A primitive root character on a nonzero cyclic coordinate separates any g!=0; hence equal evaluations force g=h. Applying dual-cardinality to the already proved finite abelian dual gives equal finite sizes, and finite-subset equality gives surjectivity. Trivial group handled vacuously. Construction of ev is canonical independent of the auxiliary finite decomposition; no AC.
+
+Next: unitarity refuter finding.
+
+- `thm-qa-finite-abelian-fourier-transform-is-unitary`: Read all four steps, F1–F6 and exact supplier statements. Equal finite index sizes give squareness. Both matrix products have real prefactor N_R^(−1), because positive real N_R^(−1/2) equals its conjugate and squares as stated. Column orthogonality gives U*U and row orthogonality gives UU*, with correct conjugation order. N=1 gives [1]. F3/F4 originally used undeclared N; replaced their prefactors by the already defined N_R, leaving statement, dependencies and contract source quotes unchanged. This is the complete immediate nonfatal notation repair, confidence 1; no missing mathematical prerequisite and no AC. Verdict refuter:29:3: confirmed_nonfatal. The report also mentions |G|^(−1), but the actual current F3/F4 both contain N^(−1); the undeclared N is sufficient evidence. Next: finite examples.
+
+- `ex-qa-finite-abelian-fourier-tables-and-convolution`: Read all nine steps and all cited dependency statements. Checked each row by omega_n^(kj) or coordinate products, completeness by character counts, and both orthogonality directions by nonzero geometric denominators. Product tables use the declared row/column order. Reindexed convolution gives sqrt(|G|) and delta0 supplies an explicit normalization check. For H23,H4,H22 checked identity, addition/inverse closure, annihilator row membership, dual subgroup closure and double annihilator coordinates. Inversion/Parseval use the established finite column sums with the negative-character convention. Scalar-power convention is explicitly declared in Example. No empty-input claim, limit or AC; finite calculations cover all five stated groups. No routed item decision. Next: double annihilator.
+
+- `thm-qa-finite-abelian-double-annihilator`: Read every step and all seven prerequisites. Distinguishes annihilator A in double dual from its inverse image in G. Evaluation sends H into A; subgroup closure permits applying annihilator cardinality in G and in the finite abelian dual. The dual-group theorem (F3) also supplies |dual G|=|G|. Positive |H_perp| permits cancellation; finite-subset equality gives A=ev(H), and injective evaluation identifies its inverse image with H. H={0}, H=G and trivial G all satisfy the same argument. No choice or converse gap. No routed decision. All twelve HIGH/CRITICAL item risk reviews are complete.
+
+Next: page obligations, downstream owner disposition, ledger and focused checks.
+
+## Routed verdicts and repairs
+
+Exactly seven decisions are recorded in the task-named decisions JSON. No item-only decisions were added for unflagged risk-review subjects.
+
+| Obligation | Verdict | Defect row suffix |
+| --- | --- | --- |
+| touched:29:thm-qa-finite-abelian-coset-fourier-transform | amended_repair | b29-3a-01 |
+| page:29:finite-abelian-fourier-analysis | accepted_repair | b29-3a-02 |
+| reader:29:1 | confirmed_fatal | b29-3a-03 |
+| refuter:29:1 | confirmed_fatal (same defect as reader:29:1) | b29-3a-03 |
+| reader:29:2 | escalated | b29-3a-05 (open) |
+| refuter:29:2 | escalated | b29-3a-05 (open) |
+| refuter:29:3 | confirmed_nonfatal | b29-3a-04 |
+
+All row IDs have prefix `quantum-computing-algorithms-60-2026-10-15-`. Four distinct repaired defects have closed rows, owned at `3a-adjudicate`; the separately escalated foreign defect has one open row. All completed repairs have `repair_confidence: 1`. No mechanical failure generated a defect row.
+
+The coset-transform source is exactly the reader-post source, hash `89e862008e675b396f1dfcfda7a660e72dcd8d40e4d99aab5fc2864e1d4b0fe9`; its genuine pre-reader source is the owner archive `research/quantum-computing-algorithms-60-2026-10-15-owner-step3-downstream/supplier-before.md`, hash `9c3abe62c440f66764510a2fe169e92b158e03176a6c3f9377359c2e9243bf5e`. The manifest retained the old Statement even after the reader repair. Alpha copied the exact current Statement into that manifest entry, preserving all mathematical content and dependencies. This makes the full carrier verdict amended_repair, while accepting the mathematical source repair. Contract citation quotes and derivations were checked against actual sources; all quotes are literal substrings of their current cited carriers.
+
+For the A page, current raw bytes equal native post `a84634586532693aaa95a67954c09e5a44ce42d9ff5c9a478ee498373c1f7c1c`. Replacing the unique single `\sqrt` command by its doubled form yields exactly native pre `65681861a6a6b8f561338b56a2edf095df1513e692dd39a793b2fa0a26ff0f4e`. This is a hash-checked reversal of the reported literal edit, not a claim to have read an independent archived pre-page. Its summary is supported by the current convolution, inversion, Parseval, annihilator and coset proofs. The page-only repair is accepted.
+
+The examples page is owned by this batch. Its opening prose alone changed: two doubled `times` commands became single commands. Its assertions agree with the five exact finite tables and their Verification. Reader and refuter report the same defect on the same observed carrier, so both decisions reference one closed row. No new page obligation was invented for this repair.
+
+The unitarity repair changes only F3/F4's two prefactors from undeclared `N` to the already defined positive real `N_R`. The numerical claim, matrix Statement, proof steps, dependencies, source citation quotes and manifest claim are preserved. No material rewrite occurred and this item has no judge record to invalidate.
+
+## Outside consumer escalation and historical limits
+
+The exact authority is `research/quantum-computing-algorithms-60-2026-10-15-step3-owner-downstream-consumer-routes.json`, registered route from the batch-29 coset-transform supplier to batch-34 `thm-qa-finite-abelian-hidden-subgroup-sample-law`. Its focused evidence is `research/quantum-computing-algorithms-60-2026-10-15-owner-step3-downstream/owner-review-with-refuter.md`. That owner expressly grants routing and independent adjudication, with `edit_permission: false` and no mathematical acceptance.
+
+I read the current full sample-law carrier and its current F1 contract entry. The current contract F1 quote now matches the repaired coset-transform Statement, unlike the historical finding. The current item F1 still gives the amplitude as `|H^perp|^(-1/2)` without the source's explicit canonical-real base; step 1.2 still uses the old cardinality probability notation. The original citation/typing observation is therefore not dismissed as false-positive, nor is its originally reported stale contract quote asserted to describe today's contract.
+
+Attempted local closure: compared the actual supplier's pre/post arguments, its positive-real rational-power hypotheses and both current consumer loci. No additional Fourier lemma is missing: declare `Q_R` as the positive real image of `|H^perp|`, use `Q_R^(-1/2)` in F1 and the corresponding `Q_R^(-1)` probability, and reconcile all affected owned metadata. Batch-29 authority cannot implement that batch-34 source correction. Required owner decision: route this surgical reconciliation to the actual batch-34 owner, then return its current carrier for independent closure of both original findings. The quantum register/measurement prerequisite closure has not received whole-item acceptance from this dispatch. The escalation, defect and foreign risk review remain open; no repair confidence is asserted for them.
+
+Both original consumer observations are unbound. Decisions preserve `historical_delta_unknown: true` and an explicit owner-resolution explanation: the authority permits historical routing, the supplier archives bind genuine before/after bytes, and the consumer-registration capture binds owner-registration bytes only. None binds the original reader/refuter consumer bytes. This uncertainty and the open escalation survive this report.
+
+The batch-29 coset transform Statement repair changes scalar spelling and supplies positivity while preserving the normalized-coset law. The exact direct logical and reference-consumer scan is described below. The only necessary outside correction identified is the routed sample-law reconciliation; unitarity's own Statement did not change, so its consumer Statements need no propagated repair. No proposed withdrawal was deleted.
+
+## Sources, scope and dependency records
+
+The proofs here use the local proved suppliers as premises. I read the current 36 distinct direct external dependency Statements/Definitions (including the canonical-natural convention), all twenty batch-29 carriers and both assigned pages. The classification-of-cyclic-groups proof was additionally checked for its exact quotient map and congruence kernel. I did not recursively re-audit every published supplier proof or claim new reading of the three bibliography PDFs. The mathematics reviewed here is finite character theory; every asserted local inference was checked directly by finite algebra. Exact source locators for each proof are its F-labelled facts and corresponding contract citation `source_section`; these were checked against the named current item sections, not against the reader's characterization alone.
+
+Owned cross-batch item-interface records were enriched in `research/quantum-computing-algorithms-60-2026-10-15-batch-29.cross-batch-dependencies.json`; the engine merge tool refreshed the unified ledger. No foreign consumer input was edited. Published prerequisites remain read-only; this dispatch identifies no defective published item requiring a published-consumer-ledger row. The frontier note records the foreign owner disposition separately.
+
+## Focused checks and handoff
+
+- Initial risk report: all 16 proof-bearing items routed, twelve HIGH/CRITICAL. Required complete item-specific reviews are recorded in the owning contract.
+- `node tools/risk-report.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-29.proof-contracts.json --require-reviewed`: 0 errors.
+- `node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-29.proof-contracts.json --strict`: 16/16 checked, 0 errors, 0 warnings.
+- `node tools/tsx-run.mjs tools/reflow.mts items/thm-qa-finite-abelian-fourier-transform-is-unitary.md`: unchanged.
+- Focused precheck on coset-transform and unitarity: 2 checked, 0 failing.
+- Final batched `node tools/proof-layout.mjs items/thm-qa-finite-abelian-fourier-transform-is-unitary.md items/thm-qa-finite-abelian-coset-fourier-transform.md`: 2 items, 8 steps, 0 defects, after the last item edit and formatter.
+- Focused rendercheck on both items and both pages: 4 files, no hard errors; actual KaTeX and renderer YAML parser loaded.
+- Defect-ledger append: 5 rows accepted and generated view refreshed under the tool's append lock.
+
+An exploratory `precheck --help` invocation failed because that tool treats it as a filename; the explicit-file command above subsequently passed. An exploratory `rendercheck --help` selects the corpus because that tool has no help switch; no corpus result is used as scoped validation. No judge, stamp, engine battery, transition, publishing or commit was initiated.
+
+Handoff is blocked only on the explicitly open batch-34 source reconciliation for reader:29:2/refuter:29:2. The engine must stamp actual decision carriers and run its gates after owner resolution; these local checks do not self-certify mathematical acceptance or clear that escalation.
+
+Final direct/reference scan: `rg -l thm-qa-finite-abelian-coset-fourier-transform items library` returns only the supplier itself, its owning A-page inventory and the batch-34 sample-law consumer. Thus no second direct consumer needs a Statement/Definition compatibility check. The current batch-34 sample-law manifest entry was also inspected: it contains the declared direct coset-transform dependency and has no Statement mirror field. Its item probability Statement is unchanged; the manifest does not resolve the F1 notation escalation.

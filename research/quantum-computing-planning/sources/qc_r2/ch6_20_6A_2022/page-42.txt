@@ -1,0 +1,80 @@
+36
+Quantum Algorithms
+
+Physicists are interested in geometrically local Hamiltonians because they seem to pro-
+vide an accurate description of Nature. Therefore, it is noteworthy that quantum circuits
+can simulate quantum evolution governed by a local Hamiltonian efficiently: evolution
+of n qubits for time t can be simulated to constant accuracy using a circuit whose size
+is polynomial in n and t.
+We can formulate the problem this way: suppose we are given an initial quantum state
+|ψ(0)⟩, or a classical description of a quantum circuit that prepares the state. Our goal
+is to construct
+
+|ψ(t)⟩= U(t)|ψ(0)⟩
+(6.189)
+
+where U(t) satisfies d
+
+dtU(t) = −iH(t)U(t) and the boundary condition U(0) = I. (Thus
+U(t) = e−iHt in the case where H is time independent). We will settle for computing
+|ψ(t)⟩to accuracy δ, i.e. constructing ˜ψ(t)⟩where
+
+||| ˜ψ(t)⟩−|ψ(t)⟩|| < δ.
+(6.190)
+
+Depending on the situation, we might be satisfied if δ is a sufficiently small constant, or
+we might impose the stricter requirement that the error is smaller than some specified
+power of the size n of the system. To relate this simulation task to a task that can be
+described classically, suppose the goal is to sample from the probability distribution
+
+⟨ψ(t)|Πa|ψ(t)⟩
+(6.191)
+
+where Πa projects onto an eigenstate with eigenvalue a of an observable A that can be
+measured efficiently by a quantum computer. Classicaly this task is believed to be hard
+at least in some cases, because the unitary matrix U(t) is exponentially large (2n × 2n).
+But quantumly we can do the simulation efficiently if H is a local Hamiltonian.
+To simulate continuous time evolution on a classical or quantum computer, we choose
+a small step size ∆, and approximate evolution for time t by a sequence of t/∆steps. (If
+H is actually time dependent, assume ∆is small enough that the change of H during a
+time interval of width ∆can be neglected.) We wish to attain accuracy
+
+|| ˜U(t) −U(t)||∞< δ,
+(6.192)
+
+where ˜U is the simulated unitary and U is the ideal unitary. Hence the error per time
+step should be less than δ∆/t.
+Suppose H = �
+a Ha is a sum of M k-local terms, and let’s consider the geometrically
+local case, where M = O(n). We will show below that a single time step can be simulated
+by a product of M local “gates” (unitary transformations that act on a constant number
+of qubits) where each such “gate” has an error O(∆2h2). Therefore the simulation of
+evolution for time t uses all together Mt/∆gates where we require
+
+Mt
+
+∆∆2h2 ≈δ
+=⇒
+∆= O
+�
+δ
+h2Mt
+
+�
+.
+(6.193)
+
+Therefore the total number of gates is
+
+L = O
+�h2(Mt)2
+
+δ
+
+�
+.
+(6.194)
+
+Furthermore each “gate” can be simulated to accuracy O(∆2h2) with a universal gate
+
+

@@ -1,21 +1,17 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/cor-inner-product-induces-a-norm.json
 id: cor-inner-product-induces-a-norm
 kind: corollary
 title: The induced length is a norm
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cauchy-schwarz-in-an-inner-product-space, def-inner-product-norm, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, lem-complex-conjugation-and-modulus-laws, lem-of-abs-value, lem-of-square-monotone, thm-nth-roots-exist, def-complex-conjugate-real-imaginary-part-and-modulus]
+deps: [thm-cauchy-schwarz-in-an-inner-product-space, def-inner-product-norm, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, lem-complex-conjugation-and-modulus-laws, lem-of-abs-value, lem-of-square-monotone, thm-nth-roots-exist, def-complex-conjugate-real-imaginary-part-and-modulus]
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §1.3.3, pp.38–39"
@@ -26,7 +22,7 @@ sources:
 
 ## Statement
 
-Let $V$ be a real or complex inner-product space with induced length $\|v\|=\sqrt{\langle v,v\rangle}$. Then $\|v\|\ge0$ with $\|v\|=0$ exactly for $v=0$, $\|\lambda v\|=|\lambda|\,\|v\|$ for every scalar $\lambda$, and $\|u+v\|\le\|u\|+\|v\|$; hence $\|\cdot\|$ is a norm on $V$, read over $\mathbb R$ by [[def-norm-and-normed-space]] and over $\mathbb C$ by [[rem-real-and-complex-normed-space-convention]].
+Let $V$ be a real or complex inner-product space with induced length $\|v\|=\sqrt{\langle v,v\rangle}$. Then $\|v\|\ge0$ with $\|v\|=0$ exactly for $v=0$, $\|\lambda v\|=|\lambda|\,\|v\|$ for every scalar $\lambda$, and $\|u+v\|\le\|u\|+\|v\|$; hence $\|\cdot\|$ is a norm on $V$, read over $\mathbb R$ by [[def-norm-and-normed-space]] and over $\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].
 
 ## Facts & Assumptions
 
@@ -34,7 +30,7 @@ Let $V$ be a real or complex inner-product space with induced length $\|v\|=\sqr
 
 [A2] Cauchy–Schwarz gives $|\langle u,v\rangle|\le\|u\|\,\|v\|$ ([[thm-cauchy-schwarz-in-an-inner-product-space]]).
 
-[A3] A norm on a real vector space satisfies separation, absolute homogeneity and the triangle inequality, and a complex normed space is defined by the same clauses with the complex modulus ([[def-norm-and-normed-space]], [[rem-real-and-complex-normed-space-convention]]).
+[A3] A norm on a real vector space satisfies separation, absolute homogeneity and the triangle inequality, and a complex normed space is defined by the same clauses with the complex modulus ([[def-norm-and-normed-space]], [[def-complex-norm-and-complex-normed-space]]).
 
 [A4] For complex scalars $z\overline z=|z|^2$ and $\lambda\overline{\lambda}=|\lambda|^2$ ([[lem-complex-conjugation-and-modulus-laws]]), and for real scalars $|xy|=|x|\,|y|$ with $|x|\ge0$ ([[lem-of-abs-value]]).
 

@@ -1,0 +1,741 @@
+===== PDF PAGE 1 =====
+arXiv:1403.2975v3  [quant-ph]  15 Jun 2016
+
+Optimal ancilla-free Clifford+T approximation of z-rotations
+
+Neil J. Ross and Peter Selinger
+
+Department of Mathematics and Statistics
+Dalhousie University
+
+Abstract
+
+We consider the problem of approximating arbitrary single-qubit z-rotations by ancilla-free Clifford+T circuits,
+up to given epsilon. We present a fast new probabilistic algorithm for solving this problem optimally, i.e., for finding
+the shortest possible circuit whatsoever for the given problem instance. The algorithm requires a factoring oracle
+(such as a quantum computer). Even in the absence of a factoring oracle, the algorithm is still near-optimal under
+a mild number-theoretic hypothesis. In this case, the algorithm finds a solution of T -count m + O(log(log(1/ε))),
+where m is the T -count of the second-to-optimal solution. In the typical case, this yields circuit approximations
+of T -count 3 log2(1/ε) + O(log(log(1/ε))). Our algorithm is efficient in practice, and provably efficient under the
+above-mentioned number-theoretic hypothesis, in the sense that its expected runtime is O(polylog(1/ε)).
+
+1
+Introduction
+
+Practical quantum computing requires the fault-tolerant implementation of a universal gate set. The decomposition
+of arbitrary unitary operators into gates from this fixed set is then an important problem. Most of the common
+error correction schemes, including most stabilizer codes and surface codes, permit a relatively inexpensive fault-
+tolerant implementation of gates from the Clifford group. However, since Clifford gates are not universal for quantum
+computation, at least one non-Clifford gate must be added to the basic gate set to achieve universality. A common
+choice for this additional gate is the T -gate or π/8-gate.
+The T -gate is not the only possible extension of the
+Clifford group but it is considered to be the most practical one. This is due to the availability of fault-tolerant
+implementations of the T -gate. For this reason, the Clifford+T gate set is often considered as the most promising
+candidate for practical quantum computing.
+In this paper, we consider the problem of approximating arbitrary single-qubit z-rotations by Clifford+T circuits
+up to given ε. Until about two years ago, the state-of-the-art algorithm for this problem was the Solovay-Kitaev
+algorithm, which yields circuits of size O(logc(1/ε)), where c > 3. At the other end of the spectrum are algorithms
+based on exhaustive search. While such algorithms achieve optimal circuit sizes, they have exponential runtimes.
+For example, the algorithm of [5] is feasible up to ε ≈10−4. Even the improved algorithm of [11], which combines
+search-based and other methods and achieves optimal T -counts, still has exponential runtime which makes it feasible
+only for precisions up to ε ≈10−17.
+Within the last two years, a new generation of efficient number-theoretic algorithms have been proposed for the
+approximate synthesis problem, achieving circuit sizes of O(log(1/ε)) with polynomial runtime. Unlike the Solovay-
+Kitaev algorithm, which is based on a geometric method of successive approximations, these new algorithms are
+based on solving Diophantine equations. The first such algorithm was due to Kliuchnikov, Maslov, and Mosca [9].
+It uses a small number of ancilla qubits to approximate a given single-qubit operator. An improved algorithm was
+given in [14], which uses no ancillas and achieves T -counts of K +4 log2(1/ε) for approximating arbitrary z-rotations.
+This compares to the information-theoretic lower bound of K + 3 log2(1/ε).
+In this paper, we present a fast new probabilistic algorithm for solving the single-qubit approximate synthesis
+problem. Our algorithm is optimal in an absolute sense, i.e., it finds the shortest possible circuit whatsoever for
+any given problem instance. To achieve this optimality, the algorithm requires an oracle for integer factoring. Of
+course, a quantum computer can serve as such an oracle by using Shor’s algorithm [15]. But even in the absence of a
+factoring oracle, our algorithm is still nearly optimal: In this case, under a mild number-theoretic assumption, we can
+prove that the algorithm finds a solution of T -count m + O(log(log(1/ε))), where m is the T -count of the second-to-
+optimal solution. In the typical case, m is given by the information-theoretic lower bound 3 log2(1/ε). Therefore our
+algorithm, in the absence of a factoring oracle, yields circuit approximations of T -count 3 log2(1/ε)+O(log(log(1/ε)))
+in the typical case.
+
+1
+
+
+===== PDF PAGE 2 =====
+
+We note that our algorithm is optimal only for the specific problem of approximating a given z-rotation by a
+linear sequence of single-qubit Clifford+T gates. It is already known that even smaller gate counts and/or circuit
+depths are achievable using additional techniques, such as ancillas, measurements, or state distillation [4, 16, 3, 2].
+In particular, the methods of [3] produce so-called repeat-until-success circuits whose expected T -count is below the
+information theoretic lower bound for deterministic circuits.
+It is likely that in the future, the existence of an efficient approximate synthesis algorithm will be considered an
+essential requirement for any universal gate set proposed for practical quantum computing, of similar importance,
+say, as the existence of a fault-tolerant implementation. Our algorithm is specialized to the Clifford+T gate set
+which is arguably the most relevant gate set to practical quantum computing. However, similar number-theoretic
+methods are also applicable to certain other universal gate sets. For example, Bocharov et al. [1] gave an efficient
+synthesis algorithm for the Clifford+V gate set that achieves gate counts linear in log(1/ε), and Kliuchnikov et al.
+[8] did the same for the ⟨F, T ⟩gate set. One may reasonably expect these gate sets to be amenable to the same kind
+of optimal synthesis that we provide here for the Clifford+T gate set.
+
+2
+Overview
+
+Recall that the single-qubit Clifford group is generated by the Hadamard gate H, the phase gate S, and the scalar
+ω = eiπ/4. By adding the non-Clifford operator T , one obtains a universal gate set for quantum computing.
+
+ω = eiπ/4,
+H =
+1
+√
+
+2
+
+�1
+1
+1 −1
+
+�
+,
+S =
+�1 0
+0 i
+
+�
+,
+T =
+�1
+0
+0 eiπ/4
+
+�
+.
+
+Our goal is to approximate an arbitrary z-rotation
+
+Rz(θ) = e−iθZ/2 =
+�
+e−iθ/2
+0
+0
+eiθ/2
+
+�
+
+by a Clifford+T operator up to given ε > 0. By a result of Kliuchnikov, Maslov, and Mosca [10], a unitary 2 × 2-
+operator can be exactly written as a product of Clifford+T operators if and only if all of its matrix entries belong to
+the ring D[ω] = Z[ 1
+√
+
+2, i]. Our strategy is therefore to approximate Rz(θ) by a unitary operator of the form
+
+U =
+�
+u −t†
+
+t
+u†
+
+�
+,
+
+where u, t ∈D[ω]. This problem can be solved in two stages:
+
+(1) find a suitable candidate u ∈D[ω] that is a good approximation of e−iθ/2;
+
+(2) solve the Diophantine equation u†u + t†t = 1, to ensure that U is unitary.
+
+Problem (2) can be solved by standard number-theoretic methods. In the interest of self-containedness, we summarize
+these methods in Section 6 and Appendix C. In general, solving the Diophantine equation in (2) requires the ability
+to factor large integers. However, if no efficient factoring method is available, then (modulo a mild number-theoretic
+assumption), the Diophantine equation can still be solved with large enough probability to ensure that at most
+O(log(1/ε)) candidates need to be tried.
+The main new technical innovation of this paper is a new and optimal solution to problem (1). It turns out that
+the “suitability” of a candidate u can be expressed as a problem of the form u ∈A and u• ∈B, where A and B
+are fixed convex subsets of the complex plane depending only on θ and ε, and (−)• is the automorphism of the ring
+D[ω] obtained by mapping
+√
+
+2 to −
+√
+
+2. We call such a problem a two-dimensional grid problem. In Sections 4 and
+5, we formulate a general algorithm for solving one- and two-dimensional grid problems efficiently. Our algorithm
+proceeds by transforming the sets A and B using invertible linear operators that preserve solutions to the given
+problem, which we call grid operators. We show that for any two convex sets A and B one can construct a grid
+operator G such that the action of G on A and B normalizes the grid problem in an appropriate sense. The main
+technical ingredient that makes our solution efficient is an iterative process for constructing G, which is detailed in
+Appendix A.
+The rest of this paper is organized as follows. In Section 3, we review some basic notions from algebra. We
+discuss one- and two-dimensional grid problems in Sections 4 and 5, respectively. In Section 6, we show how to solve
+the relevant Diophantine equation. A detailed description of the main synthesis algorithm is given in Section 7. In
+Section 8, we analyze the algorithm’s correctness, optimality, and complexity. Some experimental results are given
+in Section 10. For better readability of the main body of the paper, certain technical results are proved in the
+appendices.
+
+2
+
+
+===== PDF PAGE 3 =====
+
+3
+Some algebra
+
+We introduce some notation and algebraic prerequisites. The set of natural numbers, including 0, is denoted by N,
+the ring of integers is denoted by Z, and we let ω = eiπ/4 = (1 + i)/
+√
+
+2.
+
+Definition 3.1. (Extensions of Z) We are interested in the following rings of algebraic integers:
+
+• Z[
+√
+
+2] = {a + b
+√
+
+2 | a, b ∈Z}, the ring of quadratic integers with radicand 2;
+
+• Z[ω] = {aω3 + bω2 + cω + d | a, b, c, d ∈Z}, the ring of cyclotomic integers of degree 8;
+
+• D = Z[ 1
+
+2] = { a
+
+2k | a ∈Z, k ∈N}, the ring of dyadic fractions;
+
+• D[
+√
+
+2] = Z[ 1
+√
+
+2 ] = {a + b
+√
+
+2 | a, b ∈D}; and
+
+• D[ω] = Z[ 1
+√
+
+2 , i] = {aω3 + bω2 + cω + d | a, b, c, d ∈D}.
+
+We have the inclusions Z ⊆Z[
+√
+
+2] ⊆Z[ω] and D ⊆D[
+√
+
+2] ⊆D[ω]. Moreover, Z ⊆D, Z[
+√
+
+2] ⊆D[
+√
+
+2], and
+Z[ω] ⊆D[ω]. Finally, Z[
+√
+
+2] and Z[ω] are dense in R and C, respectively.
+
+Definition 3.2. (Automorphisms) The following maps are automorphisms of D[ω]:
+
+• Complex conjugation, which we denote (−)†, acts on an arbitrary element of D[ω] or Z[ω] as follows:
+
+(aω3 + bω2 + cω + d)† = −cω3 −bω2 −aω + d.
+
+•
+√
+
+2-conjugation, which we denote (−)•, acts on an arbitrary element of D[ω] or Z[ω] as follows:
+
+(aω3 + bω2 + cω + d)• = −aω3 + bω2 −cω + d
+
+The action of (−)• on an element of D[
+√
+
+2] or Z[
+√
+
+2] is given by (a + b
+√
+
+2)• = a −b
+√
+
+2. In particular, this implies
+that if t = a + b
+√
+
+2 is an element of D[
+√
+
+2] (resp. Z[
+√
+
+2]), then t•t = a2 −2b2 is an element of D (resp. Z).
+
+Remark 3.3. If α and β are two distinct elements of Z[
+√
+
+2], then the following inequality holds:
+
+|α −β| · |α• −β•| ⩾1,
+(1)
+
+This follows from the fact that for t ∈Z[
+√
+
+2], t•t is an integer and t•t = 0 if and only if t = 0.
+
+Definition 3.4. Let t ∈D[ω] and k ∈N. If
+√
+
+2kt ∈Z[ω], then we say that k is a denominator exponent of t. The
+smallest such k ⩾0 is the least denominator exponent of t. For k ∈N, the elements of D[
+√
+
+2] (resp. D[ω]) having k
+as a denominator exponent form a ring, denoted
+1
+√
+
+2k Z[
+√
+
+2] (resp.
+1
+√
+
+2k Z[ω]).
+
+Definition 3.5. We frequently refer to the following elements of Z[
+√
+
+2] and Z[ω]:
+
+• λ = 1 +
+√
+
+2 ∈Z[
+√
+
+2] and
+
+• δ = 1 + ω ∈Z[ω].
+
+Remark 3.6. The element λ is invertible in the ring Z[
+√
+
+2], with inverse λ−1 = −1 +
+√
+
+2 = −λ•. The element δ of
+the ring Z[ω] satisfies δ2 = λω
+√
+
+2 and δ†δ = λ
+√
+
+2.
+
+4
+One-dimensional grid problems
+
+Definition 4.1. Let B be a set of real numbers. The (real) grid for B is the set
+
+grid(B) = {α ∈Z[
+√
+
+2] | α• ∈B}.
+(2)
+
+When B is clear from the context, we refer to the elements of this set as grid points.
+
+In the following, we will only be interested in the case where B is a closed interval [y0, y1] with y0 < y1. In this
+case, the grid is discrete and infinite. It is discrete because the distance between grid points is bounded below by
+(1). And it is infinite by the density of Z[
+√
+
+2]: there are infinitely many points β ∈B ∩Z[
+√
+
+2], and for each of them,
+β• is a grid point.
+
+3
+
+
+===== PDF PAGE 4 =====
+
+(a)
+
+−8
+−7
+−6
+−5
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+
+B
+
+(b)
+
+−8
+−7
+−6
+−5
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+
+B
+
+Figure 1: The real grid for two different intervals B. In both cases, the interval B is shown in green, and grid points
+are shown as black dots.
+
+Example 4.2. Figure 1 illustrates the grids for the intervals [−1, 1] and [−3, 3], respectively. For example, the first
+few non-negative points in grid([−1, 1]) are 0, 1, 1 +
+√
+
+2, 2 +
+√
+
+2, 2 + 2
+√
+
+2, 3 + 2
+√
+
+2, and 4 + 3
+√
+
+2. As one would
+expect, the grid for [−3, 3] is about three times denser than that for [−1, 1]. We also note that B ⊆B′ implies
+grid(B) ⊆grid(B′).
+
+Definition 4.3. Let A and B be sets of real numbers.
+The one-dimensional grid problem for A and B is the
+following:
+One-dimensional grid problem: Find α ∈Z[
+√
+
+2] satisfying α ∈A and α• ∈B.
+(3)
+
+Note that (3) can be equivalently written as α ∈A∩grid(B). In other words, the grid problem is to find points in
+some given set A that belong to the grid for B. We also refer to the conditions α ∈A and α• ∈B as grid constraints.
+In the case where A and B are finite intervals, the grid problem is guaranteed to have a finite number of solutions.
+We recall the following facts from [14]:
+
+Lemma 4.4. Let A = [x0, x1] and B = [y0, y1] be closed real intervals, such that x1 −x0 = δ and y1 −y0 = ∆. If
+δ∆< 1, then the grid problem (3) has at most one solution. If δ∆⩾(1 +
+√
+
+2)2, then the grid problem (3) has at
+least one solution.
+
+Proof. Lemmas 16 and 17 of [14].
+
+Proposition 4.5. There is an algorithm for enumerating all solutions of the one-dimensional grid problem for
+closed intervals A = [x0, x1] and B = [y0, y1]. Moreover, the algorithm is efficient in the sense that it only requires
+a constant number of arithmetic operations per solution produced.
+
+Proof. It was already noted in [14, Lemma 17] that there is an efficient algorithm for computing one solution. To
+see that we can efficiently enumerate all solutions, let δ = x1 −x0 and ∆= y1 −y0 as before. Recall that λ = 1 +
+√
+
+2
+and that λ−1 = −λ•. The grid problem for the sets A and B is equivalent to the grid problem for λ−1A and −λB,
+because α ∈A and α• ∈B hold if and only if λ−1α ∈λ−1A and (λ−1α)• ∈−λB. Using such rescaling, we may
+without loss of generality assume that λ−1 ⩽δ < 1.
+Now consider any solution α = a + b
+√
+
+2 ∈Z[
+√
+
+2]. From α ∈[x0, x1], we know that x0 −b
+√
+
+2 ⩽a ⩽x1 −b
+√
+
+2.
+But since x1 −x0 < 1, it follows that for any b ∈Z, there is at most one a ∈Z yielding a solution. Moreover, we
+note that b = (α −α•)/
+√
+
+23, so that any solution satisfies (x0 −y1)/
+√
+
+23 ⩽b ⩽(x1 −y0)/
+√
+
+23. The algorithm then
+proceeds by enumerating all the integers b in the interval [(x0 −y1)/
+√
+
+23, (x1 −y0)/
+√
+
+23]. For each such b, find the
+unique integer a (if any) in the interval [x0 −b
+√
+
+2, x1 −b
+√
+
+2]. Finally, check if a + b
+√
+
+2 is a solution. The runtime
+is governed by the number of b ∈Z that need to be checked, of which there are at most O(y1 −y0) = O(δ∆). As a
+consequence of Lemma 4.4, the total number of solutions is at least Ω(δ∆), and so the algorithm is efficient.
+
+Remark 4.6. For the purposes of this paper, by an arithmetic operation we mean addition, subtraction, multiplication,
+division, exponentiation, and logarithm.
+
+Remark 4.7. Since the inputs to the algorithm are real intervals, if we were to give a rigorous complexity-theoretic
+account, we should also clarify how these intervals are specified (for example, with rational endpoints, endpoints as
+computable real numbers, etc.). For our purposes, the manner in which an interval A = [x0, x1] is specified as an
+input to the algorithm does not matter very much; it would be sufficient, for example, to assume that we are given
+rational bounds a, b with a < x0 < x1 < b, such that b −a exceeds x1 −x0 by at most a fixed constant factor, as well
+as a procedure for deciding whether any given point of D[
+√
+
+2] is in A or not.
+
+4
+
+
+===== PDF PAGE 5 =====
+
+5
+Two-dimensional grid problems
+
+Recall that Z[ω] is a subset of the complex numbers. In what follows, it is often convenient to identify the complex
+numbers with the Euclidean plane R2, so we will often interchangeably regard Z[ω] as a subset of C and of R2.
+
+Definition 5.1. Let B be a subset of R2. The (complex) grid for B is the set
+
+Grid(B) = {u ∈Z[ω] | u• ∈B}.
+(4)
+
+We will only be interested in the case where B is a bounded convex set with non-empty interior. In this case, the
+grid is discrete and infinite, just as in the one-dimensional case.
+
+Example 5.2. Figure 2 illustrates the complex grids for several different convex sets B. Note that the grid has a
+90-degree symmetry in (a), a 45-degree symmetry in (b), and a 180-degree symmetry in (c).
+
+Definition 5.3. Let A and B be subsets of R2. The two-dimensional grid problem for A and B is the following:
+
+Two-dimensional grid problem: Find u ∈Z[ω] satisfying u ∈A and u• ∈B.
+(5)
+
+As in the one-dimensional case, the grid problem can be understood as looking for points in the intersection of
+the set A and the grid for B. Our goal will be to prove a two-dimensional analogue of Proposition 4.5, namely, that
+there is an efficient algorithm which, given two bounded convex subsets A and B of R2 with non-empty interior,
+enumerates all solutions of the two-dimensional grid problem for A and B.
+However, the proof is more complicated than in the one-dimensional case. We will consider several special cases
+before solving the general problem in Section 5.6.
+
+Remark 5.4. By analogy with Remark 4.7, we should indicate what it means for a bounded convex subset A of R2
+
+to be “given” as the input to an algorithm. Again, the details of this do not matter much. For our purposes, it will
+suffice to assume that a convex set is given along with the following information:
+
+• a convex polygon enclosing A, say with rational vertices, and such that the area of the polygon exceeds that
+of A by at most a fixed constant factor;
+
+• a method to decide, for any given point of D[ω], whether it is in A or not; and
+
+• a method to compute the intersection of A with any straight line in D[ω]. More precisely, given any straight
+line parameterized as L(t) = p + tq, with p, q ∈D[ω], we can effectively determine the interval {t | L(t) ∈A}
+in the sense of Remark 4.7.
+
+5.1
+Upright rectangles
+
+A special case of the two-dimensional grid problem arises when both A and B are upright rectangles, by which we
+mean sets of the form [x0, x1] × [y0, y1]. If A and B are upright rectangles, then the two-dimensional grid problem
+can easily be reduced to the one-dimensional case. We start with a lemma characterizing Z[ω].
+
+Lemma 5.5. A complex number u is in Z[ω] if and only it can be written of the form u = α + βi or of the form
+u = α + βi + ω, where α, β ∈Z[
+√
+
+2].
+
+Proof. The right-to-left implication is trivial. For the left-to-right implication, let u = aω3 + bω2 + cω + d, where
+a, b, c, d ∈Z. Noting that ω = 1+i
+√
+
+2 , we have
+
+u = (d + c −a
+
+2
+
+√
+
+2) + (b + c + a
+
+2
+
+√
+
+2)i.
+
+If c −a (and therefore c + a) is even, then u is of the first form, with α = d + c−a
+
+2
+√
+
+2 and β = b + c+a
+
+2
+√
+
+2. If c −a
+(and therefore c + a) is odd, then u is of the second form, with α = d + c−a−1
+
+2
+√
+
+2 and β = b + c+a−1
+
+2
+√
+
+2.
+
+Lemma 5.6. There is an algorithm which, given a pair of upright rectangles A and B, enumerates all solutions of the
+two-dimensional grid problem for A and B. Moreover, the algorithm requires only a constant number of arithmetic
+operations per solution produced.
+
+5
+
+
+===== PDF PAGE 6 =====
+
+(a)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+B
+
+(b)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+B
+
+(c)
+
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+B
+
+Figure 2: The complex grid for three different convex sets B. In each case, the set B is shown in green, and grid points
+are shown as black dots. (a) B = [−1, 1]2. (b) B = {(x, y) | x2 + y2 ⩽2}. (c) B = {(x, y) | 6x2 + 16xy + 11y2 ⩽2}.
+
+6
+

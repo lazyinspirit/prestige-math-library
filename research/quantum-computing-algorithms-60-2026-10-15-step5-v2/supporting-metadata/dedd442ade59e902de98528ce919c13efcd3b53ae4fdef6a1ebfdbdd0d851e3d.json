@@ -1,0 +1,464 @@
+[
+  {
+    "order": 2198,
+    "id": "bell-states-teleportation-and-dense-coding",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Bell States, Teleportation, and Dense Coding",
+    "companion": "bell-states-teleportation-and-dense-coding-examples",
+    "requires": [
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "controlled-gates-phase-and-entanglement",
+      "measurements-povms-and-instruments",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "registers-tensor-products-and-partial-trace"
+    ],
+    "items": [
+      {
+        "id": "def-qc-bell-basis",
+        "kind": "definition",
+        "title": "The Bell vectors",
+        "statement": "Let $Q_2=\\mathbb C^2$ be the ordered qubit register with computational basis\n$(|0\\rangle,|1\\rangle)$, and use the ordered two-factor register\n$Q_2\\otimes Q_2$ from [[def-qc-tensor-register-and-permutation]]. Define the\nfour **Bell vectors** by\n\n$$|\\Phi^+\\rangle:=\\frac{|00\\rangle+|11\\rangle}{\\sqrt2},\\qquad |\\Phi^-\\rangle:=\\frac{|00\\rangle-|11\\rangle}{\\sqrt2},\\qquad |\\Psi^+\\rangle:=\\frac{|01\\rangle+|10\\rangle}{\\sqrt2},\\qquad |\\Psi^-\\rangle:=\\frac{|01\\rangle-|10\\rangle}{\\sqrt2}.$$\n\nThe ordered label convention is\n$|00\\rangle\\mapsto|\\Phi^+\\rangle$,\n$|01\\rangle\\mapsto|\\Psi^+\\rangle$,\n$|10\\rangle\\mapsto|\\Phi^-\\rangle$, and\n$|11\\rangle\\mapsto|\\Psi^-\\rangle$. Thus the first label is the phase/sign\nbit and the second is the bit-flip bit. The next theorem verifies that these\nvectors form an orthonormal basis and gives the corresponding preparation and\ndecoding maps.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-one-qubit-gate-alphabet-and-rotations"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Example 6.50 and the Bell-basis discussion."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§7.2, equations (81)–(82), PDF pp.61–62."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-bell-transform-inverse",
+        "kind": "theorem",
+        "title": "Bell preparation transform and inverse",
+        "statement": "On the ordered two-qubit register, let\n$B:=\\operatorname{CNOT}_{1\\to2}(H\\otimes I)$, where operator products act\nright-to-left. For $a,b\\in\\{0,1\\}$,\n\n$$B|ab\\rangle=\\frac{|0,b\\rangle+(-1)^a|1,b\\mathbin\\oplus1\\rangle}{\\sqrt2}=(I\\otimes X^b)(Z^a\\otimes I)|\\Phi^+\\rangle.$$\n\nIn the label order $00,01,10,11$, these are respectively\n$|\\Phi^+\\rangle,|\\Psi^+\\rangle,|\\Phi^-\\rangle,|\\Psi^-\\rangle$. They form an\northonormal basis of $Q_2\\otimes Q_2$, and\n$B^\\dagger=(H\\otimes I)\\operatorname{CNOT}_{1\\to2}$ maps those four vectors\nback to their labels.",
+        "deps": [
+          "def-qc-bell-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-tensor-map",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Example 6.50 and Bell-basis discussion."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§7.2, equation (82) and the decoding table, PDF pp.61–62."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all spaces and basis calculations are finite-dimensional and choice-free."
+      },
+      {
+        "id": "alg-qc-teleportation",
+        "kind": "algorithm",
+        "title": "Qubit teleportation procedure",
+        "statement": "The **teleportation procedure** has input a normalized qubit vector $|\\psi\\rangle_A\\in Q_2$ and a preshared resource $|\\Phi^+\\rangle_{BC}$, with Alice holding wires $A,B$ and Bob holding $C$. The wire order is $A,B,C$. It uses $|\\Phi^+\\rangle$ from [[def-qc-bell-basis]], CNOT with $A$ control and $B$ target from [[def-qc-cnot-and-control-target-order]], the Hadamard $H$ from [[def-qc-one-qubit-gate-alphabet-and-rotations]], the Pauli matrices from [[def-qc-pauli-matrices]], and the finite projective measurement convention of [[def-qc-projective-measurement]].\n\n1. Alice applies $\\operatorname{CNOT}_{A\\to B}$ and then $H_A$, so the combined operator is $V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, with the rightmost gate applied first.\n2. Alice measures $A,B$ in their ordered computational basis and records the pair $(a,b)\\in\\{0,1\\}^2$, in that wire order.\n3. Alice sends the two classical bits $a,b$ to Bob.\n4. Bob applies $X_C^b$ and then $Z_C^a$, whose operator product is $Z_C^aX_C^b$.\n\nThe output is the corrected state on Bob's wire $C$. The shared Bell pair is an\ninput resource; its preparation and physical realization are outside this\nprocedure. A zero-probability measurement label has no conditional state and\nis assigned no branch output; the normalized-input hypotheses here are later\nshown to make all four labels positive.",
+        "deps": [
+          "def-qc-bell-basis",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-classical-control-and-measurement-circuit",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-pauli-matrices",
+          "def-qc-projective-measurement",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Scenario 6.46 and Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.2–10.3, PDF pp.81–85."
+            }
+          ]
+        },
+        "axiom_use": "None; this is a finite procedure on explicit finite-dimensional registers."
+      },
+      {
+        "id": "thm-qc-teleportation-bell-expansion",
+        "kind": "theorem",
+        "title": "Teleportation Bell-basis expansion",
+        "statement": "For arbitrary $\\alpha,\\beta\\in\\mathbb C$, put\n$|\\psi\\rangle=\\alpha|0\\rangle+\\beta|1\\rangle$ and\n$V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\rangle_{BC})=\\frac12\\sum_{a,b\\in\\{0,1\\}}|ab\\rangle_{AB}\\otimes X_C^bZ_C^a|\\psi\\rangle_C.$$\n\nNo normalization assumption on $|\\psi\\rangle$ is needed for this vector\nidentity.",
+        "deps": [
+          "alg-qc-teleportation",
+          "def-qc-bell-basis",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-pauli-matrices",
+          "def-qc-tensor-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.3, equations (135)–(138), PDF pp.82–83."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the expansion is a finite calculation in an explicit computational basis."
+      },
+      {
+        "id": "alg-qc-dense-coding",
+        "kind": "algorithm",
+        "title": "Dense-coding procedure",
+        "statement": "The **dense-coding procedure** takes classical input bits $a,b\\in\\{0,1\\}$ and\na preshared pair $|\\Phi^+\\rangle_{AB}$, with Alice holding $A$ and Bob holding\n$B$. The local convention is that $a$ is the phase bit and $b$ the flip bit.\n\n1. Alice applies $X_A^b$ and then $Z_A^a$, so the encoding operator is $Z_A^aX_A^b$.\n2. Alice sends the single qubit $A$ to Bob.\n3. Bob applies $\\operatorname{CNOT}_{A\\to B}$, then $H_A$, and measures the ordered register $A,B$ in the computational basis.\n4. Bob outputs the ordered pair of measured bits.\n\nIf a surrounding measurement model assigns an outcome zero weight, no\nconditional state is assigned for that outcome. The four decoded output\nweights in the correctness theorem are positive/deterministic as computed\nthere.\n\nThe Bell resource, Pauli matrices, Hadamard, CNOT wire order, and projective\nmeasurement use the conventions of [[def-qc-bell-basis]],\n[[def-qc-pauli-matrices]], [[def-qc-one-qubit-gate-alphabet-and-rotations]],\n[[def-qc-cnot-and-control-target-order]], and\n[[def-qc-projective-measurement]]. No optimality claim is part of this\nprocedure.",
+        "deps": [
+          "def-qc-bell-basis",
+          "thm-qc-bell-transform-inverse",
+          "def-qc-classical-control-and-measurement-circuit",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-pauli-matrices",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-projective-measurement",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Scenario 6.53, Proposition 6.54, and Example 6.55."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§7.2, PDF pp.61–62. Cleve labels the X-bit first and Z-bit second; the present $(a,b)$ order is phase bit then flip bit."
+            }
+          ]
+        },
+        "axiom_use": "None; the procedure has finite bit inputs, finite registers, and fixed gate and measurement instructions."
+      },
+      {
+        "id": "def-qc-teleportation-protocol-resource-count",
+        "kind": "definition",
+        "title": "Teleportation protocol resource record",
+        "statement": "For the procedure [[alg-qc-teleportation]], define a protocol-specific resource\nrecord with separate coordinates as follows. A **shared-pair use** is one\ninitial Bell pair supplied as an input resource; its preparation is excluded.\nA **classical communication bit** is one bit sent from Alice to Bob; the record\ncontains two. A **transmitted qubit** is a qubit sent during the protocol after\nthe shared pair is available; the record contains zero. A **measurement-record\nbit** is one of the two ordered computational-basis outcomes measured by Alice;\nthe record contains two such bits. A **local gate occurrence** is counted by\nthe size convention of [[def-qc-elementary-circuit-resources]], namely as one\ngate occurrence in the declared circuit: Alice uses one CNOT and one Hadamard,\nand Bob uses at most two conditional Pauli gate occurrences, $X^b$ and $Z^a$.\nThe pair preparation is not included among those gate occurrences. This record\ncounts the stated procedure only; it asserts no optimality or physical\nrealization.",
+        "deps": [
+          "def-qc-elementary-circuit-resources",
+          "alg-qc-teleportation"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Scenario 6.46 and Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.2–10.3, PDF pp.81–85."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qc-teleportation-equiprobable-outcomes",
+        "kind": "theorem",
+        "title": "Teleportation outcomes are equiprobable",
+        "statement": "For every normalized input qubit vector $|\\psi\\rangle$, the projective\nmeasurement of the first two wires after the pre-measurement gates in\n[[alg-qc-teleportation]] has\n$\\Pr[(a,b)]=1/4$ for each $(a,b)\\in\\{0,1\\}^2$.",
+        "deps": [
+          "thm-qc-teleportation-bell-expansion",
+          "alg-qc-teleportation",
+          "def-qc-projective-measurement",
+          "def-qc-density-operator",
+          "thm-qc-projective-measurement-outcome-law",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-pauli-matrices",
+          "def-trace-of-an-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.3, equation (139), PDF p.84."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the measurement has four explicitly listed outcomes and all sums are finite."
+      },
+      {
+        "id": "thm-qc-teleportation-correction-identity",
+        "kind": "theorem",
+        "title": "Teleportation Pauli correction identity",
+        "statement": "For every qubit vector $|\\psi\\rangle$ and bits $a,b\\in\\{0,1\\}$, the\nteleportation branch byproduct is $X^bZ^a|\\psi\\rangle$, and the prescribed\ncorrection returns it exactly:\n\n$$Z^aX^bX^bZ^a|\\psi\\rangle=|\\psi\\rangle.$$\n\nThe operator order is part of the statement; no Pauli factors are commuted.",
+        "deps": [
+          "thm-qc-teleportation-bell-expansion",
+          "def-qc-pauli-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.3, equation (140), PDF p.84."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the identity is a finite calculation for two bits."
+      },
+      {
+        "id": "thm-qc-dense-coding-correctness-and-resource-count",
+        "kind": "theorem",
+        "title": "Dense-coding correctness and resources",
+        "statement": "For each input pair $(a,b)\\in\\{0,1\\}^2$ in the procedure\n[[alg-qc-dense-coding]], with $a$ the phase bit and $b$ the flip bit, Alice's\nencoding $Z_A^aX_A^b$ sends $|\\Phi^+\\rangle$ to the Bell vector $B|ab\\rangle$.\nBob's inverse $B^\\dagger$ therefore returns the computational-basis vector\n$|ab\\rangle$, and the final projective measurement outputs the original two\nbits with probability one. This realizes two classical output bits using one\npreshared Bell pair and one transmitted qubit. It is an achievability result,\nnot an optimality claim.",
+        "deps": [
+          "alg-qc-dense-coding",
+          "def-qc-bell-basis",
+          "thm-qc-bell-transform-inverse",
+          "def-qc-projective-measurement",
+          "def-qc-density-operator",
+          "thm-qc-projective-measurement-outcome-law",
+          "def-qc-pauli-matrices",
+          "def-trace-of-an-endomorphism",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Proposition 6.54 and Example 6.55."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§7.2, equations (82) and the decoding table, PDF pp.61–62. Cleve's input labels are shift bit then phase bit, so they are exchanged to match the present phase/shift order."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the encoding labels and decoder outcomes are checked in four finite cases."
+      },
+      {
+        "id": "thm-qc-teleportation-reference-stability",
+        "kind": "theorem",
+        "title": "Teleportation preserves a finite reference",
+        "statement": "Let $R$ be any finite-dimensional complex inner-product space and let\n$|\\Psi\\rangle_{AR}$ be any normalized vector on $Q_2\\otimes R$, with no\nproduct-state assumption. Run teleportation on $A$ using a shared\n$|\\Phi^+\\rangle_{BC}$, keeping the global wire order $A,B,C,R$ and applying\nthe canonical ordered tensor identifications. For every measured label $(a,b)$,\nthe corrected joint vector on $C\\otimes R$ is exactly\n$|\\Psi\\rangle_{CR}$, with $A$ relabelled as the output wire $C$.",
+        "deps": [
+          "thm-qc-teleportation-bell-expansion",
+          "thm-qc-teleportation-correction-identity",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-qc-pauli-matrices",
+          "def-qc-projective-measurement",
+          "def-qc-density-operator",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qc-projective-conditional-state",
+          "def-trace-of-an-endomorphism",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Theorem 6.47 and Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.3, discussion following equation (140), PDF p.85."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the argument uses finite tensor bases and linearity, with no choice principle."
+      },
+      {
+        "id": "thm-qc-teleportation-correctness-and-resource-count",
+        "kind": "theorem",
+        "title": "Teleportation correctness and resources",
+        "statement": "For every normalized qubit input, the procedure [[alg-qc-teleportation]] has\nfour outcomes, each of probability $1/4$. Conditioned on outcome $(a,b)$, the\nreceiver's byproduct is $X^bZ^a|\\psi\\rangle$ and the prescribed correction\nreturns $|\\psi\\rangle$ exactly. The same corrected branch identity holds when\nthe input is entangled with any finite reference. Under the separate resource\nrecord [[def-qc-teleportation-protocol-resource-count]], the procedure uses one\npreshared Bell-pair resource and two classical bits sent from Alice to Bob;\nit sends no qubit during the protocol and makes no optimality claim.",
+        "deps": [
+          "alg-qc-teleportation",
+          "thm-qc-teleportation-bell-expansion",
+          "thm-qc-teleportation-equiprobable-outcomes",
+          "thm-qc-teleportation-correction-identity",
+          "thm-qc-teleportation-reference-stability",
+          "def-qc-teleportation-protocol-resource-count"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Theorem 6.47, Corollary 6.49, and Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.2–10.3, equations (139)–(140), PDF pp.84–85."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all outcome and resource lists are finite and explicit."
+      }
+    ]
+  },
+  {
+    "order": 2199,
+    "id": "bell-states-teleportation-and-dense-coding-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Bell States, Teleportation, and Dense Coding — Examples",
+    "companion": "bell-states-teleportation-and-dense-coding",
+    "requires": [
+      "bell-states-teleportation-and-dense-coding"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-teleportation-branch-correction",
+        "kind": "example",
+        "title": "Teleportation branch and Pauli correction",
+        "statement": "Let $|\\psi\\rangle=\\alpha|0\\rangle+\\beta|1\\rangle$ with\n$|\\alpha|^2+|\\beta|^2=1$. On input $|\\psi\\rangle_A$ and shared resource\n$|\\Phi^+\\rangle_{BC}$, compute the four post-gate measurement branches and\nverify the correction on wire $C$ for each label $(a,b)$.",
+        "deps": [
+          "thm-qc-teleportation-correctness-and-resource-count",
+          "thm-qc-teleportation-bell-expansion",
+          "thm-qc-teleportation-equiprobable-outcomes",
+          "def-qc-pauli-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information (2018), §6.3.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+              "locator": "Chapter 6, §6.3.1, Theorem 6.47, Corollary 6.49, and Example 6.50."
+            },
+            {
+              "title": "Richard Cleve, Quantum Information Processing course notes for QIC 710 / CS 768 / PHYS 767 / CO 681 / AMATH 871 / PMATH 871, version dated October 13, 2026",
+              "url": "https://cleve.iqc.uwaterloo.ca/resources/QIC-710-F26/Qic710LectureNotes2026V6.pdf",
+              "locator": "§10.3, equations (138)–(140), PDF pp.83–84."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; the two amplitudes and four measurement labels are handled by finite algebra."
+      }
+    ]
+  }
+]

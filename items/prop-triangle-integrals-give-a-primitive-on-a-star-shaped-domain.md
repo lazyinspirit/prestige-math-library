@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain.json
 id: prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain
 kind: proposition
 title: "Vanishing integrals around triangles construct a primitive for a continuous function on a star-shaped domain"
@@ -7,18 +9,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-oriented-complex-triangle-and-boundary, rem-plane-star-shaped-and-convex-dictionary, def-complex-primitive, thm-riemann-stieltjes-and-parametric-contour-integrals-agree, thm-existence-of-complex-line-integrals-on-rectifiable-paths, prop-reversal-and-concatenation-of-complex-line-integrals, cor-ml-estimate-for-complex-line-integrals, prop-linearity-of-complex-line-integrals]
+deps: [def-oriented-complex-triangle-and-boundary, def-star-shaped-open-subset-of-rn, thm-complex-coordinate-isometry-and-topology-transport, def-complex-primitive, thm-riemann-stieltjes-and-parametric-contour-integrals-agree, thm-existence-of-complex-line-integrals-on-rectifiable-paths, prop-reversal-and-concatenation-of-complex-line-integrals, cor-ml-estimate-for-complex-line-integrals, prop-linearity-of-complex-line-integrals]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-sonnet-5"
-    verdict: pass
-    date: 2026-08-17
-  audited: 2026-08-17
 sources:
   scraped: []
   references:
@@ -29,7 +24,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $U\subseteq\mathbb C$ be open and star-shaped with respect to $a\in U$ in the sense of [[rem-plane-star-shaped-and-convex-dictionary]], and let $f:U\to\mathbb C$ be continuous. Suppose
+Let $U\subseteq\mathbb C$ be open and star-shaped with respect to $a\in U$ meaning that $U$ is open for $d_{\mathbb C}$ and $\Phi[U]$ is star-shaped with respect to $\Phi(a)$ in [[def-star-shaped-open-subset-of-rn]], using [[thm-complex-coordinate-isometry-and-topology-transport]], and let $f:U\to\mathbb C$ be continuous. Suppose
 
 $$\int_{\partial\Delta[u,v,w]}f(\zeta)\,d\zeta=0$$
 
@@ -41,7 +36,7 @@ is holomorphic on $U$ and satisfies $F'(z)=f(z)$ for every $z\in U$. Thus $F$ is
 
 ## Facts & Assumptions
 
-**Given:** An open set $U$ star-shaped with respect to $a$, a continuous $f:U\to\mathbb C$, and vanishing boundary integral for every filled triangle contained in $U$.
+**Given:** A set $U$ open for $d_{\mathbb C}$ with $\Phi[U]$ star-shaped with respect to $\Phi(a)$, a continuous $f:U\to\mathbb C$, and vanishing boundary integral for every filled triangle contained in $U$.
 
 [L1] Reversal negates a contour integral and concatenation adds contour integrals ([[prop-reversal-and-concatenation-of-complex-line-integrals]]).
 
@@ -57,7 +52,7 @@ is holomorphic on $U$ and satisfies $F'(z)=f(z)$ for every $z\in U$. Thus $F$ is
 
 **Proof technique:** direct.
 
-1.1 Fix $z\in U$. The segment $\ell_{az}$ is rectifiable and $f$ is continuous on it, so $F(z)$ exists by [L5]. Since $U$ is open, choose $\rho>0$ with $B(z,\rho)\subseteq U$. If $0<|h|<\rho$, the short segment from $z$ to $z+h$ lies in that ball, and every segment from $a$ to a point of the short segment lies in $U$ by star-shapedness; hence $\Delta[a,z,z+h]\subseteq U$. [given, L5, choose]
+1.1 Fix $z\in U$. The segment $\ell_{az}$ is rectifiable and $f$ is continuous on it, so $F(z)$ exists by [L5]. The coordinate topology and affine-segment transport of [[thm-complex-coordinate-isometry-and-topology-transport]] give $(1-t)a+tw\in U$ for $w\in U$ and $0\le t\le1$. Since $U$ is open, choose $\rho>0$ with $B(z,\rho)\subseteq U$. If $0<|h|<\rho$, the short segment from $z$ to $z+h$ lies in that ball, and every segment from $a$ to a point of the short segment lies in $U$ by star-shapedness; hence $\Delta[a,z,z+h]\subseteq U$. [given, L5, choose]
 
 1.2 Parametrizing the short edge by $\zeta=z+th$ and using [L2] gives $\int_{\ell_{z,z+h}}f(z)\,d\zeta=f(z)h$. [L2, algebra]
 

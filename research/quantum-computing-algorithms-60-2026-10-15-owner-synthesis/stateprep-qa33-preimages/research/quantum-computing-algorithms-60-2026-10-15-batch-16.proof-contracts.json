@@ -1,0 +1,3067 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "16",
+  "level": "step-1-initial-authoring",
+  "scope": [
+    "def-qc-stabilizer-subgroup",
+    "def-qc-stabilizer-state",
+    "lem-qc-stabilizer-average-projector",
+    "thm-qc-stabilizer-projector-rank-and-code-dimension",
+    "def-qc-pauli-measurement-branch-semantics",
+    "lem-qc-zero-probability-branch",
+    "lem-qc-deterministic-stabilizer-measurement",
+    "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+    "lem-qc-random-measurement-stabilizer-update",
+    "def-qc-stabilizer-tableau",
+    "lem-qc-tableau-clifford-update",
+    "lem-qc-tableau-deterministic-sign",
+    "thm-qc-tableau-measurement-update",
+    "thm-qc-gottesman-knill-exact-simulation",
+    "ex-qc-stabilizer-x-measurement-branches",
+    "alg-qc-stabilizer-exact-simulator",
+    "lem-qc-pauli-measurement-projectors",
+    "lem-qc-pauli-measurement-positive-branch-is-density",
+    "lem-qc-pauli-measurement-defines-an-instrument",
+    "lem-qc-stabilizer-subgroup-label-space-and-order",
+    "lem-qc-stabilizer-maximal-isotropic-self-dual",
+    "lem-qc-computational-basis-stabilizer-tableau",
+    "def-qc-adaptive-pauli-circuit-tree"
+  ],
+  "contracts": {
+    "def-qc-stabilizer-subgroup": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated n≥0 domain includes the empty register with its scalar Pauli convention."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-qc-stabilizer-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated n≥0 domain includes the empty register with its scalar Pauli convention."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-stabilizer-average-projector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-stabilizer-subgroup",
+          "source_section": "Definition",
+          "quote": "The binary label convention and commutation form are supplied by the cited\nPauli items. [[lem-qc-stabilizer-subgroup-label-space-and-order]] proves that\nthis label span is isotropic, its dimension is independent of any generating\nset, and $|S|=2^{\\operatorname{rank}(S)}$. Matrix multiplication gives the\nphase-aware Pauli group operation by\n[[thm-qc-pauli-product-and-adjoint]]. For $n=0$, the Pauli group is the\nempty-register convention of [[def-qc-pauli-group-on-zero-qubits]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a stabilizer subgroup on $n$ qubits and let\n$\\lambda(P(k,x,z))=(x,z)$. Then $\\lambda|_S$ is injective, its image $L$ is an\nisotropic $\\mathbb F_2$-subspace, the rank $\\dim_{\\mathbb F_2}L$ depends only\non $S$ and not on a generating list, and\n$|S|=2^{\\dim_{\\mathbb F_2}L}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "The **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "The ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since every $g$ is Hermitian, $\\Pi_S^\\dagger=\\Pi_S$. In the product\n$\\Pi_S^2=|S|^{-2}\\sum_{g,h\\in S}gh$, each $k\\in S$ occurs exactly $|S|$\ntimes: for each $g$ there is exactly one $h=g^{-1}k\\in S$. Therefore\n$\\Pi_S^2=|S|^{-1}\\sum_{k\\in S}k=\\Pi_S$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For any $s\\in S$, left multiplication $g\\mapsto sg$ permutes $S$, so\n$s\\Pi_S=\\Pi_S$. Hence every vector in $\\operatorname{im}\\Pi_S$ is fixed by\nevery $s\\in S$. Conversely if $s v=v$ for all $s\\in S$, then\n$\\Pi_Sv=|S|^{-1}\\sum_{s\\in S}sv=v$. Thus\n$\\operatorname{im}\\Pi_S=\\mathcal C(S)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $\\mathcal C(S)=\\mathbb C\\psi$ with $\\|\\psi\\|=1$, then\n$\\Pi_S$ is a self-adjoint idempotent onto that line. Its kernel is orthogonal\nto its image: for $u=\\Pi_S w$ and $\\Pi_Sv=0$,\n$\\langle u,v\\rangle=\\langle w,\\Pi_Sv\\rangle=0$. Therefore it is the\northogonal projection onto $\\mathbb C\\psi$. By [A1] that projection is\n$|\\psi\\rangle\\langle\\psi|$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-stabilizer-projector-rank-and-code-dimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-stabilizer-average-projector",
+          "source_section": "Statement",
+          "quote": "is self-adjoint and idempotent, and its image is exactly the common $+1$ fixed\nspace $\\mathcal C(S)$. If this image is the span of a unit vector $\\psi$, then\n$\\Pi_S=|\\psi\\rangle\\langle\\psi|$ under the root-linear-first Dirac convention.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a stabilizer subgroup on $n$ qubits and let\n$\\lambda(P(k,x,z))=(x,z)$. Then $\\lambda|_S$ is injective, its image $L$ is an\nisotropic $\\mathbb F_2$-subspace, the rank $\\dim_{\\mathbb F_2}L$ depends only\non $S$ and not on a generating list, and\n$|S|=2^{\\dim_{\\mathbb F_2}L}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-phase-aware-n-qubit-pauli-group",
+          "source_section": "Definition",
+          "quote": "The displayed tensor powers are tensor maps on the ordered factors, using [[def-qc-tensor-map]].\nFix an integer $n\\ge 1$. Let $\\mathcal H_n=Q_2^{\\otimes n}$ be the ordered tensor register of $n$ qubits from [[def-qc-tensor-register-and-permutation]], and let $\\mathbb F_2=\\mathbb Z/2\\mathbb Z$. We name the wires $1,\\ldots,n$; wire $j$ is position $j-1$ in the source's $0$-based factor list. Bit tuples use the big-endian encoding from [[def-qc-ordered-bitstring-encoding]], so the first wire is the most significant bit. Write $X_j$ and $Z_j$ for the tensor maps with the displayed one-qubit matrix on wire $j$ and the identity on every other wire. For $x,z\\in\\mathbb F_2^n$, set $X^x=\\bigotimes_{j=1}^n X^{x_j}$ and $Z^z=\\bigotimes_{j=1}^n Z^{z_j}$, where an exponent $0$ means the identity on that factor and an exponent $1$ means the displayed Pauli matrix. For $k\\in\\mathbb Z/4\\mathbb Z$, define",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-pauli-group-on-zero-qubits",
+          "source_section": "Definition",
+          "quote": "Then $P_0(k)P_0(\\ell)=P_0(k+\\ell)$ and $P_0(k)^*=P_0(-k)$, so\n$\\mathcal P_0$ is the cyclic scalar Pauli group of order four. Its Hermitian\nelements are $I_{H_0}$ and $-I_{H_0}$. The binary-label space\n$\\mathbb F_2^0\\times\\mathbb F_2^0$ is the zero space, and the label of each\n$P_0(k)$ is its unique element.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-stabilizer-subgroup",
+          "source_section": "Definition",
+          "quote": "For an ordered register of $n$ qubits, a **stabilizer subgroup** is an abelian\nsubgroup $S$ of the Hermitian $n$-qubit Pauli operators such that\n$-I\\notin S$. The binary label of a phase-aware Pauli $P(k,x,z)$ is\n$(x,z)\\in\\mathbb F_2^{2n}$. Define the **rank** of $S$ by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-trace-of-an-idempotent-is-the-dimension-of-its-image",
+          "source_section": "Statement",
+          "quote": "If $P:V\\to V$ is an idempotent endomorphism of a finite-dimensional space over a field $k$, then $\\operatorname{tr}(P)=(\\dim_k\\operatorname{im}P)\\cdot1_k$. In positive characteristic this equality does not in general determine the integer rank from the trace.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-stabilizer-maximal-isotropic-self-dual",
+          "source_section": "Statement",
+          "quote": "Let $V=\\mathbb F_2^{2n}$ have the standard symplectic form\n$\\omega((x,z),(x',z'))=x\\cdot z'+z\\cdot x'$. If $L\\le V$ is isotropic and\n$r=\\dim L$, then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], [F2], and [F10], $0\\le r\\le n$ and\n$\\operatorname{Tr}(\\Pi_S)=|S|^{-1}\\sum_{g\\in S}\\operatorname{Tr}(g)$.\nFor $n>0$, the identity is $I^{\\otimes n}$. In the ordered product basis\n[F5]–[F6], its trace is a sum over bit words; [F11] factors this finite sum\ninto the product of its one-qubit diagonal sums, each equal to $2$. Thus its\ntrace is $2^n$. When $n=0$, [F6]–[F8] give trace $1=2^0$. For $n>0$, every\nother $g\\in S$ has nonzero binary label by [F2], hence at least one\nnonidentity tensor factor. By [F4] that factor is a scalar multiple of $X$,\n$Z$, or $XZ$. For any tensor Pauli, its trace is the sum over bit words of\nproducts of one-qubit diagonal coefficients; [F11] factors this finite sum\ninto the product of the one-qubit traces. By [F3], $X$ and $XZ$ are\noff-diagonal, while $Z$ has diagonal entries $1,-1$, so the nonidentity\nfactor has trace zero. Hence every such $g$ has trace zero. Therefore\n$\\operatorname{Tr}(\\Pi_S)=2^n/|S|=2^{n-r}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "As $\\Pi_S$ is idempotent, [F9] gives\n$\\operatorname{Tr}(\\Pi_S)=\\dim_{\\mathbb C}\\operatorname{im}\\Pi_S$.\nCombining with step 1.1 proves the dimension formula, including $r=0$ and\n$r=n$.",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "When $r=n$, step 1.2 gives a one-dimensional common fixed space, so the\nspace is nonzero and all of its nonzero vectors determine the same ray. This\nis the existence and uniqueness assertion used in the definition of a pure\nstabilizer state.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 makes the needed finite choice by a least index, finite basis extension, or finite spectral basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-qc-pauli-measurement-branch-semantics": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated n≥0 domain includes the empty register with its scalar Pauli convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-weight branch is assigned no conditional state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both bit labels b=0 and b=1 and their endpoint weights are specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-zero-probability-branch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "$$P_b:=\\frac{I+(-1)^bM}{2},\\qquad p_b:=\\operatorname{Tr}(\\rho P_b),\\qquad\n\\mathcal I_b(\\rho):=P_b\\rho P_b.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-pauli-measurement-projectors",
+          "source_section": "Statement",
+          "quote": "For the hypotheses of [[def-qc-pauli-measurement-branch-semantics]], the\noperators $P_0,P_1$ are complementary orthogonal projections and the branch\nweights satisfy $p_0,p_1\\ge 0$ and $p_0+p_1=1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Set $Q_b=P_b\\rho P_b$. For every $v$, self-adjointness of $P_b$ in [F2]\ngives $\\langle Q_bv,v\\rangle=\\langle\\rho P_bv,P_bv\\rangle\\ge0$ by [A1].\nThus $Q_b$ is nonnegative.",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F1], [F2], and cyclicity [F3],\n$\\operatorname{Tr}(Q_b)=\\operatorname{Tr}(P_b\\rho P_b)\n=\\operatorname{Tr}(\\rho P_b^2)=p_b=0$. By [F4], choose an orthonormal\neigenbasis of $Q_b$ whose eigenvalues are nonnegative; [F5] expresses its\ntrace as their finite sum. A finite sum of nonnegative reals is zero only\nwhen each term is zero, so $Q_b=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The instrument output is therefore zero. A conditional state would require\ndivision of $Q_b$ by $p_b=0$, which is undefined; equivalently there is no\nnonzero post-measurement branch vector or density operator. Thus the outcome\nhas probability zero and no normalized state.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 makes the needed finite choice by a least index, finite basis extension, or finite spectral basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-deterministic-stabilizer-measurement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a stabilizer subgroup on $n$ qubits and let\n$\\lambda(P(k,x,z))=(x,z)$. Then $\\lambda|_S$ is injective, its image $L$ is an\nisotropic $\\mathbb F_2$-subspace, the rank $\\dim_{\\mathbb F_2}L$ depends only\non $S$ and not on a generating list, and\n$|S|=2^{\\dim_{\\mathbb F_2}L}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "source_section": "Statement",
+          "quote": "For $a=(x,z)$ and $b=(x',z')$ in $V_n$ and any phases $k,k'$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-stabilizer-maximal-isotropic-self-dual",
+          "source_section": "Statement",
+          "quote": "Let $V=\\mathbb F_2^{2n}$ have the standard symplectic form\n$\\omega((x,z),(x',z'))=x\\cdot z'+z\\cdot x'$. If $L\\le V$ is isotropic and\n$r=\\dim L$, then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-hermitian-pauli-phase-criterion",
+          "source_section": "Statement",
+          "quote": "For $P(k,x,z)=i^kX^xZ^z\\in\\mathcal P_n$, the operator is Hermitian exactly when $k\\equiv x\\cdot z\\pmod 2$. In that case $P(k,x,z)^2=I$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-stabilizer-state",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a rank-$n$ stabilizer subgroup on an ordered $n$-qubit register\n$H_n=(\\mathbb C^2)^{\\otimes n}$. A **pure stabilizer state** is the unique ray\nin the common $+1$ fixed space",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-pure-state-and-ray",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "$$P_b:=\\frac{I+(-1)^bM}{2},\\qquad p_b:=\\operatorname{Tr}(\\rho P_b),\\qquad\n\\mathcal I_b(\\rho):=P_b\\rho P_b.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-pure-projective-branch-norm",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $\\psi\\in H$\nbe a unit vector, and let $P:H\\to H$ be an orthogonal projection. Under the\nroot-linear-first Dirac convention,",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $M$ commutes with $S$, [F2] gives $\\lambda(M)\\in L^\\perp$. By\n[F3], this is $L$, so there is $g\\in S$ with $\\lambda(g)=\\lambda(M)$.\nInjectivity in [F1] makes this $g$ unique.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Both $g$ and $M$ are Hermitian and have the same binary label, so [F4]\nand [F5] give $g=(-1)^bM$ for exactly one bit $b$. Since $g\\psi=\\psi$ by\n[F6], $M\\psi=(-1)^b\\psi$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The relation $M\\psi=(-1)^b\\psi$ gives $P_b\\psi=\\psi$ and\n$P_{1-b}\\psi=0$. By [F8], the unit ray has its rank-one density projector;\n[F9] and [F10] then give branch probabilities $1$ and $0$. The nonzero\nbranch is the original ray, while the zero-probability branch has no\nnormalized state by [[lem-qc-zero-probability-branch]].",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 makes the needed finite choice by a least index, finite basis extension, or finite spectral basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-anticommuting-stabilizer-measurement-is-fair": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-stabilizer-state",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a rank-$n$ stabilizer subgroup on an ordered $n$-qubit register\n$H_n=(\\mathbb C^2)^{\\otimes n}$. A **pure stabilizer state** is the unique ray\nin the common $+1$ fixed space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-hermitian-pauli-phase-criterion",
+          "source_section": "Statement",
+          "quote": "For $P(k,x,z)=i^kX^xZ^z\\in\\mathcal P_n$, the operator is Hermitian exactly when $k\\equiv x\\cdot z\\pmod 2$. In that case $P(k,x,z)^2=I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "$$P_b:=\\frac{I+(-1)^bM}{2},\\qquad p_b:=\\operatorname{Tr}(\\rho P_b),\\qquad\n\\mathcal I_b(\\rho):=P_b\\rho P_b.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-pure-projective-branch-norm",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $\\psi\\in H$\nbe a unit vector, and let $P:H\\to H$ be an orthogonal projection. Under the\nroot-linear-first Dirac convention,",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-pauli-measurement-projectors",
+          "source_section": "Statement",
+          "quote": "For the hypotheses of [[def-qc-pauli-measurement-branch-semantics]], the\noperators $P_0,P_1$ are complementary orthogonal projections and the branch\nweights satisfy $p_0,p_1\\ge 0$ and $p_0+p_1=1$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $g=g^\\dagger$ and $g^2=I$ by [F2], it is unitary. From\n$g\\psi=\\psi$ and $gMg=-M$, we get $gP_bg=P_{1-b}$ and\n$gP_b\\psi=P_{1-b}\\psi$. Hence $\\|P_b\\psi\\|=\\|P_{1-b}\\psi\\|$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F5], the unit ray projector is a density operator, so its branch law\n[F3] and the norm identity [F4] give\n$p_b=\\|P_b\\psi\\|^2=\\|P_{1-b}\\psi\\|^2=p_{1-b}$. The complementary\northogonal projections in [F6] satisfy\n$\\|P_0\\psi\\|^2+\\|P_1\\psi\\|^2=\\|\\psi\\|^2=1$, so equal probabilities must both\nbe $1/2$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "This proves that each outcome bit has probability $1/2$.",
+          "inputs": [
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires n≥1 or a nonempty input object, so an empty-register case is outside this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-random-measurement-stabilizer-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+          "source_section": "Statement",
+          "quote": "Let $\\rho=|\\psi\\rangle\\langle\\psi|$ be a pure stabilizer state density operator,\nand let $M$ be a Hermitian Pauli observable that anticommutes with one of its\nstabilizer generators. Then\n$\\operatorname{Tr}(P_0\\rho)=\\operatorname{Tr}(P_1\\rho)=1/2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qc-pauli-product-and-adjoint",
+          "source_section": "Statement",
+          "quote": "where the dot product is first evaluated in $\\mathbb F_2$ as $0$ or $1$, and then multiplied by $2$ in $\\mathbb Z/4\\mathbb Z$. The set $\\mathcal P_n$ is a group. If $p\\in\\{0,1\\}$ represents $x\\cdot z\\in\\mathbb F_2$, then $P(k,x,z)^*=P(2p-k,x,z)=P(k,x,z)^{-1}$, and its center is $Z_n=\\{i^k I:k\\in\\mathbb Z/4\\mathbb Z\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-stabilizer-subgroup",
+          "source_section": "Definition",
+          "quote": "The binary label convention and commutation form are supplied by the cited\nPauli items. [[lem-qc-stabilizer-subgroup-label-space-and-order]] proves that\nthis label span is isotropic, its dimension is independent of any generating\nset, and $|S|=2^{\\operatorname{rank}(S)}$. Matrix multiplication gives the\nphase-aware Pauli group operation by\n[[thm-qc-pauli-product-and-adjoint]]. For $n=0$, the Pauli group is the\nempty-register convention of [[def-qc-pauli-group-on-zero-qubits]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "The outcome $b$ has probability $p_b$. Its conditional density operator is\n$\\rho_b:=\\mathcal I_b(\\rho)/p_b$ when $p_b>0$; it is $\\bot$ (no assigned\nconditional density operator) when $p_b=0$.\nThe branch map $\\mathcal I_b$ is the projective measurement instrument for the\n$(-1)^b$ eigenspace of $M$. A phase-aware Pauli with phase $\\pm i$ is not an\nobservable and is outside this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-pure-projective-branch-norm",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $\\psi\\in H$\nbe a unit vector, and let $P:H\\to H$ be an orthogonal projection. Under the\nroot-linear-first Dirac convention,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a stabilizer subgroup on $n$ qubits and let\n$\\lambda(P(k,x,z))=(x,z)$. Then $\\lambda|_S$ is injective, its image $L$ is an\nisotropic $\\mathbb F_2$-subspace, the rank $\\dim_{\\mathbb F_2}L$ depends only\non $S$ and not on a generating list, and\n$|S|=2^{\\dim_{\\mathbb F_2}L}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-binary-symplectic-form",
+          "source_section": "Definition",
+          "quote": "$$\\omega((x,z),(x',z')):=x\\cdot z'+z\\cdot x'.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "source_section": "Statement",
+          "quote": "Thus the Pauli operators commute exactly when their labels are symplectically orthogonal.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-hermitian-pauli-phase-criterion",
+          "source_section": "Statement",
+          "quote": "For $P(k,x,z)=i^kX^xZ^z\\in\\mathcal P_n$, the operator is Hermitian exactly when $k\\equiv x\\cdot z\\pmod 2$. In that case $P(k,x,z)^2=I$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each unchanged row commutes with $M$. If $g_j$ anticommutes with $M$,\nthen $g_jg_1$ commutes with $M$ because both factors anticommute with $M$.\nThe changed and unchanged rows commute with each other because they are\nproducts of elements of the old abelian group. The new pivot $(-1)^bM$\ncommutes with each other row by the first two calculations and is Hermitian.\nEvery changed row is Hermitian because its two factors commute and are\nHermitian; its exact phase-aware product is the one computed by [A1].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Write $v_j=\\lambda(g_j)$ and $m=\\lambda(M)$. By [F6] and [F8], the\nupdated rows for $j>1$ have labels $v'_j=v_j+\\omega(v_j,m)v_1$. They remain\nindependent: in any zero linear combination, the coefficients of the\nindependent vectors $v_2,\\ldots,v_n$ are the coefficients of the updated\nrows, so each is zero. Also\n$\\omega(v'_j,m)=\\omega(v_j,m)+\\omega(v_j,m)\\omega(v_1,m)=0$; unchanged rows\nalready pair to zero with $m$. Every $v'_j$ lies in $L$, but $m\\notin L$\nbecause it pairs nontrivially with $v_1$ while isotropy in [F5] makes every\nvector in $L$ pair trivially with $v_1$. Thus adjoining $m$ gives $n$\nindependent labels. Any nonempty product of the new commuting generators has\none of these nonzero labels, so it cannot equal the zero-label scalar $-I$.\nThe generated subgroup therefore excludes $-I$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $g_1$ anticommutes with $M$, [F1] gives probability $1/2$ to each\nbit; [F4] therefore gives $\\|P_b|\\psi\\rangle\\|^2=1/2$, so the branch vector\nis nonzero. The new pivot stabilizes it because\n$M P_b=(-1)^b P_b$. Each unchanged row commutes with $P_b$ and fixes\n$|\\psi\\rangle$. For an updated row $g_jg_1$, commutation with $P_b$ and\n$g_jg_1|\\psi\\rangle=|\\psi\\rangle$ give\n$g_jg_1P_b|\\psi\\rangle=P_b|\\psi\\rangle$. Thus all updated generators fix\nthe normalized branch.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "The new generators have rank $n$, so their common fixed space is\none-dimensional by [[thm-qc-stabilizer-projector-rank-and-code-dimension]].\nIt contains the normalized post-measurement vector from step 2.1, hence it is\nexactly that post-measurement ray.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires n≥1 or a nonempty input object, so an empty-register case is outside this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement's n≥1 case includes n=1; the row formulas and one-wire/two-wire gate hypotheses are explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-qc-stabilizer-tableau": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated n≥0 domain includes the empty register with its scalar Pauli convention."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-tableau-clifford-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-stabilizer-tableau",
+          "source_section": "Definition",
+          "quote": "A **generator tableau** is an ordered list of $n$ Hermitian rows whose Pauli\noperators commute, have linearly independent labels, and generate a subgroup\nnot containing $-I$. It represents the unique common $+1$ ray when the rows\nstabilize a pure state. An **extended tableau** also stores Hermitian\ndestabilizer rows $d_1,\\ldots,d_n$ and stabilizer rows $s_1,\\ldots,s_n$ with",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qc-hadamard-pauli-action",
+          "source_section": "Statement",
+          "quote": "For a Hadamard gate $H_j$ on factor $j$, conjugation swaps the binary coordinates $x_j,z_j$ and changes the phase exactly by $2x_jz_j$ modulo $4$. In particular $HXH=Z$, $HZH=X$, and $HYH=-Y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qc-phase-gate-pauli-action",
+          "source_section": "Statement",
+          "quote": "For a phase gate $S_j=\\operatorname{diag}(1,i)$ on factor $j$, the binary update is $(x_j,z_j)\\mapsto(x_j,z_j+x_j)$ and the phase update is $k\\mapsto k+x_j$ modulo $4$. In particular $SXS^*=Y$ and $SZS^*=Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "The unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-cnot-pauli-action",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$ and let distinct $c,t\\in\\{1,\\ldots,n\\}$ be control and target indices. For CNOT $C_{c\\to t}$ acting on $y\\in\\mathbb F_2^n$ by toggling coordinate $t$ by $y_c$, conjugation sends",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-binary-symplectic-form",
+          "source_section": "Definition",
+          "quote": "$$\\omega((x,z),(x',z')):=x\\cdot z'+z\\cdot x'.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $H$, [A1] gives the exact coordinate swap and phase $2x_az_a$.\nFor $S$, $SXS^\\dagger=iXZ$ and $SZS^\\dagger=Z$ give the stated shear and\nphase increment. The second identity and unitarity give\n$S^\\dagger ZS=S^\\dagger(SZS^\\dagger)S=Z$. Then\n$X=S^\\dagger(SXS^\\dagger)S=i(S^\\dagger XS)Z$, so it follows that\n$S^\\dagger XS=-iXZ$; hence the inverse shear decrements the phase by $x_a$.\nAll other tensor factors are unchanged.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For CNOT, conjugation sends\n$X_c\\mapsto X_cX_t$, $X_t\\mapsto X_t$, $Z_c\\mapsto Z_c$, and\n$Z_t\\mapsto Z_cZ_t$ by [F3]. The image of the ordered $X^x$ part is a\nproduct of $X$ factors and the image of $Z^z$ is a product of $Z$ factors;\nthe order $X^xZ^z$ is retained, so no $X$ crosses a $Z$ and $k$ is\nunchanged. This gives the stated toggles.",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $H$, swapping $x_a,z_a$ in both labels leaves their contribution\n$x_az'_a+z_ax'_a$ unchanged. For $S$, replacing $z_a,z'_a$ by\n$z_a+x_a,z'_a+x'_a$ adds $x_ax'_a+x_ax'_a=0$. For CNOT, the control and\ntarget contributions change by, respectively,\n$x_cz'_t+z_tx'_c$ and $x_cz'_t+z_tx'_c$, whose sum is zero in $\\mathbb F_2$.\nThus each update preserves the displayed form [F4] and all row pairings.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Each label update is invertible (the H swap is its own inverse and the\nS and CNOT shears are invertible over $\\mathbb F_2$); conjugation also\npreserves Hermiticity and fixes $-I$. Consequently row independence,\ncommutation, exclusion of $-I$, and every extended pairing remain valid.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires n≥1 or a nonempty input object, so an empty-register case is outside this item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement's n≥1 case includes n=1; the row formulas and one-wire/two-wire gate hypotheses are explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-tableau-deterministic-sign": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-stabilizer-tableau",
+          "source_section": "Definition",
+          "quote": "A **generator tableau** is an ordered list of $n$ Hermitian rows whose Pauli\noperators commute, have linearly independent labels, and generate a subgroup\nnot containing $-I$. It represents the unique common $+1$ ray when the rows\nstabilize a pure state. An **extended tableau** also stores Hermitian\ndestabilizer rows $d_1,\\ldots,d_n$ and stabilizer rows $s_1,\\ldots,s_n$ with",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-stabilizer-subgroup-label-space-and-order",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a stabilizer subgroup on $n$ qubits and let\n$\\lambda(P(k,x,z))=(x,z)$. Then $\\lambda|_S$ is injective, its image $L$ is an\nisotropic $\\mathbb F_2$-subspace, the rank $\\dim_{\\mathbb F_2}L$ depends only\non $S$ and not on a generating list, and\n$|S|=2^{\\dim_{\\mathbb F_2}L}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-stabilizer-maximal-isotropic-self-dual",
+          "source_section": "Statement",
+          "quote": "$$\\dim L^\\perp=2n-r.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "source_section": "Statement",
+          "quote": "For $a=(x,z)$ and $b=(x',z')$ in $V_n$ and any phases $k,k'$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-hermitian-pauli-phase-criterion",
+          "source_section": "Statement",
+          "quote": "For $P(k,x,z)=i^kX^xZ^z\\in\\mathcal P_n$, the operator is Hermitian exactly when $k\\equiv x\\cdot z\\pmod 2$. In that case $P(k,x,z)^2=I$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-stabilizer-state",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a rank-$n$ stabilizer subgroup on an ordered $n$-qubit register\n$H_n=(\\mathbb C^2)^{\\otimes n}$. A **pure stabilizer state** is the unique ray\nin the common $+1$ fixed space",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-pauli-product-and-adjoint",
+          "source_section": "Statement",
+          "quote": "where the dot product is first evaluated in $\\mathbb F_2$ as $0$ or $1$, and then multiplied by $2$ in $\\mathbb Z/4\\mathbb Z$. The set $\\mathcal P_n$ is a group. If $p\\in\\{0,1\\}$ represents $x\\cdot z\\in\\mathbb F_2$, then $P(k,x,z)^*=P(2p-k,x,z)=P(k,x,z)^{-1}$, and its center is $Z_n=\\{i^k I:k\\in\\mathbb Z/4\\mathbb Z\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "The outcome $b$ has probability $p_b$. Its conditional density operator is\n$\\rho_b:=\\mathcal I_b(\\rho)/p_b$ when $p_b>0$; it is $\\bot$ (no assigned\nconditional density operator) when $p_b=0$.\nThe branch map $\\mathcal I_b$ is the projective measurement instrument for the\n$(-1)^b$ eigenspace of $M$. A phase-aware Pauli with phase $\\pm i$ is not an\nobservable and is outside this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qc-pure-projective-branch-norm",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Tr}(P|\\psi\\rangle\\langle\\psi|)\n=\\operatorname{Tr}(|\\psi\\rangle\\langle\\psi|P)\n=\\|P\\psi\\|^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $M$ commutes with every stabilizer row, [F4] gives\n$\\lambda(M)\\in L^\\perp=L$ by [F3]. The row labels form a basis of $L$ by [F2],\nso the linear system with those rows and target $\\lambda(M)$ is consistent\nand has a unique coefficient vector $c$. Gaussian elimination over\n$\\mathbb F_2$ returns it by pivoting on the independent rows.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Multiplying the selected commuting rows in increasing order using [F7]\nproduces the group element $G$ with label\n$\\sum_jc_j\\lambda(g_j)=\\lambda(M)$. By [F10], $G$ and $M$ differ by a\nscalar; as both are Hermitian, [F5] makes that scalar $+1$ or $-1$. The exact\nproduct phase therefore determines the unique bit $b$ with $G=(-1)^bM$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "F10",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $G$ is a product of stabilizer rows, [F6] gives $G\\psi=\\psi$.\nThus $M\\psi=(-1)^b\\psi$. By [F8] and [F9], the corresponding branch has\nprobability one and the opposite branch has probability zero. Hence the\nphase returned by the row reduction is exactly the deterministic measurement\nbit.",
+          "inputs": [
+            "F6",
+            "F8",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 makes the needed finite choice by a least index, finite basis extension, or finite spectral basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-tableau-measurement-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+          "source_section": "Statement",
+          "quote": "Let $\\rho=|\\psi\\rangle\\langle\\psi|$ be a pure stabilizer state density operator,\nand let $M$ be a Hermitian Pauli observable that anticommutes with one of its\nstabilizer generators. Then\n$\\operatorname{Tr}(P_0\\rho)=\\operatorname{Tr}(P_1\\rho)=1/2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-random-measurement-stabilizer-update",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $S=\\langle g_1,\\ldots,g_n\\rangle$ stabilize a pure\n$n$-qubit state with unit representative $\\psi$, and let $M$ anticommute with\n$g_1$. For either outcome $b\\in\\{0,1\\}$, define\n$g'_1=(-1)^bM$ and, for $j>1$, set $g'_j=g_jg_1$ if $g_j$ anticommutes with\n$M$, and $g'_j=g_j$ otherwise. Then the updated rows generate a rank-$n$\nstabilizer subgroup for the normalized post-measurement state\n$P_b|\\psi\\rangle/\\|P_b|\\psi\\rangle\\|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-deterministic-stabilizer-measurement",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a rank-$n$ stabilizer subgroup and let $M$ be a Hermitian Pauli\nobservable commuting with every element of $S$. There is a unique $g\\in S$\nwith the same binary label as $M$, and $g=(-1)^bM$ for a unique\n$b\\in\\{0,1\\}$. On the stabilizer state of $S$, outcome $b$ has probability\none and the other outcome has probability zero. Moreover $P_b\\psi=\\psi$, so\nthe conditional state in the nonzero branch is the original ray.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-tableau-deterministic-sign",
+          "source_section": "Statement",
+          "quote": "Let $g_1,\\ldots,g_n$ be the independent signed rows of a rank-$n$ stabilizer\ntableau with unit stabilizer representative $\\psi$, and let a Hermitian Pauli\n$M$ commute with every row. Binary Gaussian\nelimination finds the unique $c\\in\\mathbb F_2^n$ whose row-label sum is\n$\\lambda(M)$. The phase-aware product\n$G=\\prod_{j=1}^n g_j^{c_j}$, taken in increasing row order, is exactly\n$(-1)^bM$ for the deterministic measurement bit $b$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-zero-probability-branch",
+          "source_section": "Statement",
+          "quote": "If $\\rho$ is a density operator and a Pauli measurement branch has $p_b=0$,\nthen its unnormalized output $P_b\\rho P_b$ is the zero operator. The branch is\nimpossible and has no normalized conditional state.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-pauli-measurement-positive-branch-is-density",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator and let $P_b$ be a Pauli measurement\nprojector with probability $p_b>0$. Then the normalized branch",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qc-pure-projective-branch-norm",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space, let $\\psi\\in H$\nbe a unit vector, and let $P:H\\to H$ be an orthogonal projection. Under the\nroot-linear-first Dirac convention,",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If some row anticommutes with $M$, [F1] gives probability $1/2$ to each\nbit. For either sampled bit, [F2] proves the updated rows are a rank-$n$\nstabilizer for the normalized state obtained by applying $P_b$. Thus the\ntableau state is the ray of that branch vector. [F6] defines the instrument's\nnormalized branch density, and [F7] identifies it with the vector's\nrank-one projector; [F8] makes that projector independent of the chosen unit\nrepresentative. Therefore the tableau and instrument have the same two\nbranch states and probabilities.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If every row commutes with $M$, [F3] gives one deterministic outcome\nand [F4] computes its bit from the signed row product. The post-measurement\nstate for that bit is unchanged because it is already in the eigenspace.\nFacts F6, F7, and F8 identify its probability-one branch density with the\nrank-one projector of the same ray; [F5] says the other branch is impossible and has no normalized\nstate. Hence the tableau output agrees with the instrument in this case as\nwell.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every Hermitian Pauli either commutes or anticommutes with each stabilizer\nrow, so the two cases above exhaust all measurements. Therefore the tableau\nrule agrees with every defined branch of the projective instrument, including\nits zero-probability boundary.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qc-gottesman-knill-exact-simulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-circuit-syntax-and-register-order",
+          "source_section": "Definition",
+          "quote": "A gate occurrence on the $n$ wires is a pair $(g,(w_0,\\ldots,w_{r(g)-1}))$ with distinct wire labels $w_j\\in[n]$; the tuple order is the input and output factor order of the local gate. A layer is a finite ordered list of gate occurrences whose wire supports are pairwise disjoint. A unitary circuit is a finite chronological list $L_1,\\ldots,L_d$ of such layers, with $L_1$ applied first and $L_d$ last; $d=0$ is the empty circuit. Its input, output, and terminally measured wires are specified as ordered lists without repetitions in $[n]$. This syntax specifies finite data only; the semantic action of gates on the full register is defined separately.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-adaptive-pauli-circuit-tree",
+          "source_section": "Definition",
+          "quote": "The observed measurement transcript is the ordered list of measurement-edge\nlabels on a root-to-leaf path. The tree itself specifies every later\ninstruction from that observed history, so its classical control is\ndeterministic. A path whose edges all have positive weights has probability\nequal to their product. A path passing through a zero-weight edge has\nprobability zero, and its descendants are not evaluated because no\nconditional state is assigned. A leaf outputs its terminal state; a ray is\nassigned only on a positive-probability path whose input and gate/measurement\nupdates remain pure.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-elementary-circuit-resources",
+          "source_section": "Definition",
+          "quote": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-computational-basis-stabilizer-tableau",
+          "source_section": "Statement",
+          "quote": "For $n\\ge0$ and a bit string $x\\in\\mathbb F_2^n$, the basis state $|x\\rangle$ has\nstabilizer rows $s_j=(-1)^{x_j}Z_j$ and destabilizer rows $d_j=X_j$.\nTheir labels satisfy the extended tableau pairing conditions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-tableau-clifford-update",
+          "source_section": "Statement",
+          "quote": "For distinct wires $c,t$, $\\operatorname{CNOT}_{c\\to t}$ updates\n$x_t\\mapsto x_t\\oplus x_c$, $z_c\\mapsto z_c\\oplus z_t$, with all other label\ncoordinates and $k$ unchanged. Applying these conjugations to every row\npreserves the generator tableau and, when present, the extended pairing\ninvariant.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-tableau-measurement-update",
+          "source_section": "Statement",
+          "quote": "For a rank-$n$ stabilizer tableau and a Hermitian Pauli measurement $M$, the\ntableau measurement rule returns exactly the projective instrument branches:\nif some stabilizer row anticommutes with $M$, both bits occur with probability\n$1/2$ and the pivot update represents each conditional state; if every row\ncommutes with $M$, the signed row product returns the unique probability-one\nbit, leaves the state unchanged, and the opposite zero-probability branch has\nno normalized state.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "alg-qc-stabilizer-exact-simulator",
+          "source_section": "Definition",
+          "quote": "**Output.** The sampled measurement transcript and the final signed generator\nrows, which represent the final pure stabilizer ray. The algorithm uses a\nfair random bit for a measured Pauli exactly when it anticommutes with a\nstabilizer row.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-pauli-group-on-zero-qubits",
+          "source_section": "Definition",
+          "quote": "This supplies the empty-register case when an item uses Pauli notation whose\ngeneral positive-wire convention is stated separately.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Before the first instruction, [F5] gives a tableau for the exact input\nstate and transcript. This establishes the simulation invariant at prefix\nlength zero.",
+          "inputs": [
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose the invariant holds after a prefix of $k$ instructions. If the\nnext instruction is a Clifford generator, [F6] conjugates every stabilizer\nrow by the same unitary as the circuit, whose action is ordered by [F2]. If it\nis a Pauli measurement, [F3] supplies the finite instrument-history branch\nand [F7] gives its probability and updated tableau; [F8] samples a fair bit\nexactly in the random case and computes the signed bit in the deterministic\ncase. Equal transcripts therefore select the same next suffix by [F3]. Thus\nthe conditional transition laws agree after instruction $k+1$. A terminated\nbranch remains in the same final state. Induction through at most $T$\ninstructions proves equality of the complete transcript and final ray\ndistributions.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "A gate updates at most $2n$ rows, each with $O(n)$ bits. A measurement\ntests at most $n$ symplectic pairings, each in $O(n)$ bit operations. In its\nrandom case it updates at most $n$ rows by an $O(n)$ Pauli product each. In\nits deterministic case Gaussian elimination on a $2n$-by-$n$ binary system\nuses $O(n^3)$ bit operations, and multiplying at most $n$ selected rows uses\n$O(n^2)$. Thus every quantum instruction costs $O((n+1)^3)$, and summing\nover $T$ instructions and adding $C_{\\rm cl}$ gives the stated time bound.\nThe tableau has $O(n^2)$ bits, elimination scratch has $O(n^2)$ bits, and\nthe output transcript has at most $T$ bits. The register width and controller\ncharge use the accounting in [F4]; gate and measurement instructions are\ncounted in $T$ and charged by the bit-operation bounds just proved.",
+          "inputs": [
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "If $n=0$, no wire gate is admissible and [F9] makes every valid Pauli\nobservable $I$ or $-I$. Its label is the unique zero vector, so the empty row\nproduct determines the sign and each measurement is deterministic; the\ntableau uses constant space. The uniform $(n+1)$ bounds therefore include\nthis boundary.",
+          "inputs": [
+            "F1",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-qc-stabilizer-x-measurement-branches": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "Let $H_n=(\\mathbb C^2)^{\\otimes n}$ be an ordered $n$-qubit register, let\n$\\rho\\in M_{2^n}(\\mathbb C)$ be a density operator, and let $M\\in M_{2^n}(\\mathbb C)$\nbe a Hermitian Pauli observable with $M^2=I$. For $b\\in\\{0,1\\}$ define",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-anticommuting-stabilizer-measurement-is-fair",
+          "source_section": "Statement",
+          "quote": "Let $\\rho=|\\psi\\rangle\\langle\\psi|$ be a pure stabilizer state density operator,\nand let $M$ be a Hermitian Pauli observable that anticommutes with one of its\nstabilizer generators. Then\n$\\operatorname{Tr}(P_0\\rho)=\\operatorname{Tr}(P_1\\rho)=1/2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-random-measurement-stabilizer-update",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $S=\\langle g_1,\\ldots,g_n\\rangle$ stabilize a pure\n$n$-qubit state with unit representative $\\psi$, and let $M$ anticommute with\n$g_1$. For either outcome $b\\in\\{0,1\\}$, define\n$g'_1=(-1)^bM$ and, for $j>1$, set $g'_j=g_jg_1$ if $g_j$ anticommutes with\n$M$, and $g'_j=g_j$ otherwise. Then the updated rows generate a rank-$n$\nstabilizer subgroup for the normalized post-measurement state\n$P_b|\\psi\\rangle/\\|P_b|\\psi\\rangle\\|$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-zero-probability-branch",
+          "source_section": "Statement",
+          "quote": "If $\\rho$ is a density operator and a Pauli measurement branch has $p_b=0$,\nthen its unnormalized output $P_b\\rho P_b$ is the zero operator. The branch is\nimpossible and has no normalized conditional state.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The initial generator $Z$ fixes $|0\\rangle$, and it anticommutes with\n$X$ by [F1]. Hence [F3] gives $p_0=p_1=1/2$ for the first measurement.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Directly,\n$P_0|0\\rangle=(|0\\rangle+|1\\rangle)/2$ and\n$P_1|0\\rangle=(|0\\rangle-|1\\rangle)/2$. Each vector has squared norm $1/2$,\nso normalization gives $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$ and\n$|-\\rangle=(|0\\rangle-|1\\rangle)/\\sqrt2$. By [F4], their stabilizers are\n$+X$ and $-X$, respectively.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Measuring $X$ again on either state is deterministic: $|+\\rangle$ lies\nin $P_0H_1$ and $|-\\rangle$ lies in $P_1H_1$. The opposite projector\nannihilates the state, so its branch has probability zero and no normalized\nconditional state by [F5].",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "One-qubit X measurement on |0>",
+          "method": "Direct exact 2×2 calculation in verification steps 1.1–2.1.",
+          "checks": "P0|0>=(|0>+|1>)/2 and P1|0>=(|0>-|1>)/2, each of squared norm 1/2; the repeated X measurement has the matching deterministic branch and a zero opposite branch.",
+          "scope_limit": "This finite example checks the worked instance only; the general branch and simulator claims use their separate proofs."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires n≥1 or a nonempty input object, so an empty-register case is outside this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 compute the complete one-qubit, two-outcome example exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "alg-qc-stabilizer-exact-simulator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated n≥0 domain includes the empty register with its scalar Pauli convention."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all operation choices are fixed by the finite input tree."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-pauli-measurement-projectors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "$$P_b:=\\frac{I+(-1)^bM}{2},\\qquad p_b:=\\operatorname{Tr}(\\rho P_b),\\qquad\n\\mathcal I_b(\\rho):=P_b\\rho P_b.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "For a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "The **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $s=(-1)^b$, $P_b^\\dagger=P_b$ because $M^\\dagger=M$, and\n$P_b^2=(I+2sM+M^2)/4=(I+sM)/2=P_b$ by the distributive and identity laws\nfor matrix multiplication. Thus both $P_b$ are self-adjoint idempotents.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Direct multiplication gives $P_0+P_1=I$ and\n$P_0P_1=(I-M^2)/4=0=P_1P_0$. Hence their ranges are orthogonal and sum to\nthe full register.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $Q_b=P_b\\rho P_b$. For every vector $v$,\n$\\langle Q_bv,v\\rangle=\\langle \\rho P_bv,P_bv\\rangle\\ge0$, using the\nroot-linear-first inner-product convention and $P_b^\\dagger=P_b$. Therefore\n$Q_b$ is positive semidefinite.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "By cyclicity [F3] and $P_b^2=P_b$,\n$p_b=\\operatorname{Tr}(\\rho P_b)=\\operatorname{Tr}(P_b\\rho P_b)\n=\\operatorname{Tr}(Q_b)$. In the orthonormal eigenbasis supplied by [F4],\nthe diagonal entries of $Q_b$ are nonnegative; [F3] and [F5] therefore give\n$p_b=\\operatorname{Tr}(Q_b)\\ge0$. Linearity of the finite diagonal sum and\n$P_0+P_1=I$ give $p_0+p_1=\\operatorname{Tr}(\\rho)=1$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-pauli-measurement-positive-branch-is-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "Let $H_n=(\\mathbb C^2)^{\\otimes n}$ be an ordered $n$-qubit register, let\n$\\rho\\in M_{2^n}(\\mathbb C)$ be a density operator, and let $M\\in M_{2^n}(\\mathbb C)$\nbe a Hermitian Pauli observable with $M^2=I$. For $b\\in\\{0,1\\}$ define",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-pauli-measurement-projectors",
+          "source_section": "Statement",
+          "quote": "For the hypotheses of [[def-qc-pauli-measurement-branch-semantics]], the\noperators $P_0,P_1$ are complementary orthogonal projections and the branch\nweights satisfy $p_0,p_1\\ge 0$ and $p_0+p_1=1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-trace-is-linear",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, the map\n$\\operatorname{tr}:M_n(F)\\to F$ is linear:",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Set $Q_b=P_b\\rho P_b$. By [F2], $Q_b$ is nonnegative and has trace\n$p_b$. Since $p_b>0$, the scalar $1/p_b$ is positive. Hence, for every $v$,\n$\\langle (Q_b/p_b)v,v\\rangle=(1/p_b)\\langle Q_bv,v\\rangle\\ge0$.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F3] and [F2],\n$\\operatorname{Tr}(Q_b/p_b)=p_b^{-1}\\operatorname{Tr}(Q_b)=1$. Thus\n$Q_b/p_b$ is a density operator by [F4].",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The conditional state in [F1] is exactly $Q_b/p_b$, so it is the density\noperator established in step 1.2.",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-pauli-measurement-defines-an-instrument": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-pauli-measurement-branch-semantics",
+          "source_section": "Definition",
+          "quote": "The outcome $b$ has probability $p_b$. Its conditional density operator is\n$\\rho_b:=\\mathcal I_b(\\rho)/p_b$ when $p_b>0$; it is $\\bot$ (no assigned\nconditional density operator) when $p_b=0$.\nThe branch map $\\mathcal I_b$ is the projective measurement instrument for the\n$(-1)^b$ eigenspace of $M$. A phase-aware Pauli with phase $\\pm i$ is not an\nobservable and is outside this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-pauli-measurement-projectors",
+          "source_section": "Statement",
+          "quote": "For the hypotheses of [[def-qc-pauli-measurement-branch-semantics]], the\noperators $P_0,P_1$ are complementary orthogonal projections and the branch\nweights satisfy $p_0,p_1\\ge 0$ and $p_0+p_1=1$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "The map $\\Phi$ is **completely positive** if, for every finite $r\\ge1$, $\\Phi^{(r)}$ sends every nonnegative operator on $H\\otimes R$ to a nonnegative operator on $K\\otimes R$ ([[def-non-negative-and-positive-operator]]). The quantifier includes $r=1$; complete positivity therefore implies positivity. No Kraus, Choi, or Stinespring characterization is part of this definition.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-finite-ancilla-amplification-is-block-map",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex-inner-product spaces, let $r\\ge1$, and let $R=\\mathbb C^r$ have its standard ordered orthonormal basis $(e_0,\\ldots,e_{r-1})$. For every $X\\in\\mathcal L(H\\otimes R)$ there is a unique family $X_{ij}\\in\\mathcal L(H)$ such that",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex-inner-product space, let $K$ be a finite-dimensional complex-inner-product space, and let $\\Omega$ be a finite nonempty outcome set. A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive ([[def-qc-completely-positive-map]]) and",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each $\\mathcal I_b$ is complex-linear because matrix multiplication\ndistributes over finite sums and scalars:\n$P_b(aX+cY)P_b=aP_bXP_b+cP_bYP_b$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Fix $r\\ge1$, take an orthonormal basis $(e_j)_{j<r}$ of the ancilla, and\nwrite $X=[X_{ij}]$ for a nonnegative operator on $H\\otimes\\mathbb C^r$.\nSelf-adjointness of $X$ by [F6] gives $X_{ij}^\\dagger=X_{ji}$: for\n$\\xi,\\eta\\in H$,\n$\\langle X_{ij}\\xi,\\eta\\rangle\n=\\langle X(\\xi\\otimes e_j),\\eta\\otimes e_i\\rangle\n=\\langle \\xi\\otimes e_j,X(\\eta\\otimes e_i)\\rangle\n=\\langle \\xi,X_{ji}\\eta\\rangle$ by the product pairing [F5].\nConsequently the blocks $P_bX_{ij}P_b$ satisfy the same adjoint relation,\nso $\\mathcal I_b^{(r)}(X)$ is self-adjoint.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Write $v=\\sum_{j<r}v_j\\otimes e_j$ and\n$w=\\sum_{j<r}P_bv_j\\otimes e_j$. By [F4] and the product pairing [F5],\n$\\langle\\mathcal I_b^{(r)}(X)v,v\\rangle\n=\\sum_{i,j<r}\\langle P_bX_{ij}P_bv_j,v_i\\rangle\n=\\sum_{i,j<r}\\langle X_{ij}P_bv_j,P_bv_i\\rangle\n=\\langle Xw,w\\rangle\\ge0$. Thus the ampliation preserves nonnegative\noperators. Since $r$ was arbitrary, $\\mathcal I_b$ is completely positive\nby [F3].",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For every operator $X$, cyclicity [F7] and idempotence [F2] give\n$\\operatorname{Tr}(\\mathcal I_0(X))+\\operatorname{Tr}(\\mathcal I_1(X))\n=\\operatorname{Tr}(XP_0)+\\operatorname{Tr}(XP_1)\n=\\operatorname{Tr}(X(P_0+P_1))=\\operatorname{Tr}(X)$.\nFor a density operator $\\rho$, the same calculation gives\n$\\operatorname{Tr}(\\mathcal I_b(\\rho))=\\operatorname{Tr}(\\rho P_b)$, the\nweight in [F1].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The two maps are completely positive by step 1.3 and their total output\ntrace equals the input trace by step 2.1. They therefore form a finite\ninstrument by [F8].",
+          "inputs": [
+            "F8",
+            "step 1.3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires n≥1 or a nonempty input object, so an empty-register case is outside this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero branch weight, an impossible outcome, or the zero-rank boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-stabilizer-subgroup-label-space-and-order": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-stabilizer-subgroup",
+          "source_section": "Definition",
+          "quote": "For an ordered register of $n$ qubits, a **stabilizer subgroup** is an abelian\nsubgroup $S$ of the Hermitian $n$-qubit Pauli operators such that\n$-I\\notin S$. The binary label of a phase-aware Pauli $P(k,x,z)$ is\n$(x,z)\\in\\mathbb F_2^{2n}$. Define the **rank** of $S$ by",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-binary-pauli-label-and-quotient",
+          "source_section": "Definition",
+          "quote": "is a group isomorphism to the additive group of $V_n$. A binary label deliberately forgets the scalar phase.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "source_section": "Statement",
+          "quote": "Thus the Pauli operators commute exactly when their labels are symplectically orthogonal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-hermitian-pauli-phase-criterion",
+          "source_section": "Statement",
+          "quote": "For $P(k,x,z)=i^kX^xZ^z\\in\\mathcal P_n$, the operator is Hermitian exactly when $k\\equiv x\\cdot z\\pmod 2$. In that case $P(k,x,z)^2=I$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-field-and-its-order",
+          "source_section": "Definition",
+          "quote": "Once existence and uniqueness are proved, $\\mathbb F_q$ denotes a field of order $q$ up to isomorphism. The notation does not assert that the field is the quotient ring $\\mathbb Z/q\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cardinality-of-a-finite-dimensional-space-over-a-finite-field",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a finite field with $q$ elements, and let $V$ be a $d$-dimensional\n$F$-vector space. Then",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-phase-aware-n-qubit-pauli-group",
+          "source_section": "Definition",
+          "quote": "The displayed tensor powers are tensor maps on the ordered factors, using [[def-qc-tensor-map]].\nFix an integer $n\\ge 1$. Let $\\mathcal H_n=Q_2^{\\otimes n}$ be the ordered tensor register of $n$ qubits from [[def-qc-tensor-register-and-permutation]], and let $\\mathbb F_2=\\mathbb Z/2\\mathbb Z$. We name the wires $1,\\ldots,n$; wire $j$ is position $j-1$ in the source's $0$-based factor list. Bit tuples use the big-endian encoding from [[def-qc-ordered-bitstring-encoding]], so the first wire is the most significant bit. Write $X_j$ and $Z_j$ for the tensor maps with the displayed one-qubit matrix on wire $j$ and the identity on every other wire. For $x,z\\in\\mathbb F_2^n$, set $X^x=\\bigotimes_{j=1}^n X^{x_j}$ and $Z^z=\\bigotimes_{j=1}^n Z^{z_j}$, where an exponent $0$ means the identity on that factor and an exponent $1$ means the displayed Pauli matrix. For $k\\in\\mathbb Z/4\\mathbb Z$, define",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-pauli-group-on-zero-qubits",
+          "source_section": "Definition",
+          "quote": "Then $P_0(k)P_0(\\ell)=P_0(k+\\ell)$ and $P_0(k)^*=P_0(-k)$, so\n$\\mathcal P_0$ is the cyclic scalar Pauli group of order four. Its Hermitian\nelements are $I_{H_0}$ and $-I_{H_0}$. The binary-label space\n$\\mathbb F_2^0\\times\\mathbb F_2^0$ is the zero space, and the label of each\n$P_0(k)$ is its unique element.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The identity of $S$ has zero label. If $P,Q\\in S$, then $PQ\\in S$ and\n$\\lambda(PQ)=\\lambda(P)+\\lambda(Q)$ by [F3]. Thus $L=\\lambda(S)$ contains\nzero and is closed under addition; over $\\mathbb F_2$, closure under the only\nscalars $0,1$ follows, so $L$ is a subspace.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose $P,Q\\in S$ have the same label. By the homomorphism in [F3],\n$\\lambda(P^{-1}Q)=0$, so $P^{-1}Q$ is a scalar Pauli. Since Hermitian\nPaulis square to $I$ by [F5], $P^{-1}=P$; as $P,Q$ commute and are\nHermitian, $P^{-1}Q=PQ$ is Hermitian. The phase criterion [F5] then makes\nthis scalar equal to $I$ or $-I$. The latter is excluded by [F1], hence\n$P=Q$ and $\\lambda|_S$ is injective.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Any two labels in $L$ come from commuting elements of the abelian group\n$S$, so [F4] gives symplectic pairing zero. Bilinearity then makes every\npair in their span pair to zero; hence $L$ is isotropic. The image $L$ is\ndefined from $S$ alone, so its dimension is unchanged by replacing one\ngenerating list of $S$ by another.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The map $\\lambda|_S:S\\to L$ is onto by the definition of $L$ and injective\nby step 1.2, so it is a bijection of finite sets by [F8]. If\n$r=\\dim_{\\mathbb F_2}L$, [F6] and [F7] give $|L|=2^r$. Therefore\n$|S|=|L|=2^r$, as claimed.",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-stabilizer-maximal-isotropic-self-dual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-binary-symplectic-form",
+          "source_section": "Definition",
+          "quote": "This is a nondegenerate alternating bilinear form over $\\mathbb F_2$; $V_n$ has dimension $2n$. In characteristic two, alternating also implies symmetry.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $v=(x,z)\\in V$ pairs to zero with every vector, pairing with $(e_j,0)$\nand $(0,e_j)$ gives $z_j=x_j=0$ for every $j$. More generally, for any\nlinear functional $\\phi$ on $V$, set $a_j=\\phi(e_j,0)$ and\n$b_j=\\phi(0,e_j)$. Then $v=(b,a)$ satisfies\n$\\omega(v,(x',z'))=b\\cdot z'+a\\cdot x'=\\phi(x',z')$ by linearity. Thus\n$v\\mapsto\\omega(v,\\cdot)$ is both injective and onto.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Put $r=\\dim L$ and choose a basis $\\ell_1,\\ldots,\\ell_r$ of $L$.\nExtend it to a basis of $V$ using [F3]. For any\n$y\\in\\mathbb F_2^r$, define a linear functional on this basis by\n$\\phi(\\ell_j)=y_j$ and by zero on the added basis vectors. Step 1.1 supplies\n$v\\in V$ with $\\omega(v,\\cdot)=\\phi$, so\n$T:V\\to\\mathbb F_2^r$, $T(v)=(\\omega(v,\\ell_j))_{j=1}^r$, is onto. Its\nkernel is $L^\\perp$, and [F2] gives\n$\\dim L^\\perp=2n-r$. This includes $r=0$, where both the basis and\n$\\mathbb F_2^r$ are empty or zero-dimensional.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Isotropy gives $L\\subseteq L^\\perp$. Comparing dimensions with step 1.2\ngives $r\\le2n-r$, hence $r\\le n$. If $r=n$, both subspaces have dimension\n$n$, so [F3] gives $L=L^\\perp$. This argument uses only finite basis\nextension and no choice principle.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a degenerate rank, empty register, zero-probability branch, or deterministic/random boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the outcome endpoints b=0,1 or probability endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 makes the needed finite choice by a least index, finite basis extension, or finite spectral basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-qc-computational-basis-stabilizer-tableau": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "Thus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pauli-group-on-zero-qubits",
+          "source_section": "Definition",
+          "quote": "Then $P_0(k)P_0(\\ell)=P_0(k+\\ell)$ and $P_0(k)^*=P_0(-k)$, so\n$\\mathcal P_0$ is the cyclic scalar Pauli group of order four. Its Hermitian\nelements are $I_{H_0}$ and $-I_{H_0}$. The binary-label space\n$\\mathbb F_2^0\\times\\mathbb F_2^0$ is the zero space, and the label of each\n$P_0(k)$ is its unique element.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-stabilizer-tableau",
+          "source_section": "Definition",
+          "quote": "A **generator tableau** is an ordered list of $n$ Hermitian rows whose Pauli\noperators commute, have linearly independent labels, and generate a subgroup\nnot containing $-I$. It represents the unique common $+1$ ray when the rows\nstabilize a pure state. An **extended tableau** also stores Hermitian\ndestabilizer rows $d_1,\\ldots,d_n$ and stabilizer rows $s_1,\\ldots,s_n$ with",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-binary-symplectic-form",
+          "source_section": "Definition",
+          "quote": "$$\\omega((x,z),(x',z')):=x\\cdot z'+z\\cdot x'.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-binary-pauli-quotient-isomorphism",
+          "source_section": "Statement",
+          "quote": "The map $\\pi:\\mathcal P_n\\to V_n$, $P(k,x,z)\\mapsto(x,z)$, is a surjective group homomorphism with kernel exactly $Z_n$. Therefore the quotient map in [[def-qc-binary-pauli-label-and-quotient]] is an isomorphism $\\mathcal P_n/Z_n\\cong (V_n,+)$, and $\\dim_{\\mathbb F_2}V_n=2n$. No phase or label ambiguity occurs, including when $n=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-pauli-algebra",
+          "source_section": "Statement",
+          "quote": "For the matrices $X,Y,Z$ of [[def-qc-pauli-matrices]], each is self-adjoint and unitary, and $X^2=Y^2=Z^2=I$. Distinct Pauli matrices anticommute. For $j,k\\in\\{x,y,z\\}$,\n$$\\sigma_j\\sigma_k=\\delta_{jk}I+i\\sum_{\\ell\\in\\{x,y,z\\}}\\epsilon_{jk\\ell}\\sigma_\\ell,\\qquad \\operatorname{tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}.$$\nHere $\\sigma_x=X,\\sigma_y=Y,\\sigma_z=Z$, $\\delta_{jk}=1$ when $j=k$ and $0$ otherwise, and $\\epsilon$ is the alternating symbol with $\\epsilon_{xyz}=1$. Also $\\operatorname{tr}(I)=2$ and $\\operatorname{tr}(\\sigma_j)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "source_section": "Statement",
+          "quote": "Thus the Pauli operators commute exactly when their labels are symplectically orthogonal.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each $j<n$, the tensor Pauli $s_j=(-1)^{x_j}Z_j$ fixes $|x\\rangle$,\nsince its $j$th factor contributes $(-1)^{x_j}(-1)^{x_j}=1$ and all other\nfactors are identities. The normalized vector is a state by [F4].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The labels of $s_j$ are $(0,e_j)$ and of $d_i=X_i$ are $(e_i,0)$.\nTherefore $\\omega(d_i,s_j)=e_i\\cdot e_j=\\delta_{ij}$, and pairings within\neither family vanish by [F5]. By [F8], the stabilizer rows commute. The\n$s_j$ labels are independent, so no nonempty product has zero label; by [F6]\nthe generated group therefore excludes $-I$. For $n=0$, the empty row\nfamilies generate $\\{I\\}$ by [F3], and all pairing and independence\nconditions hold vacuously.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the n=0/empty-register case explicitly or through the zero-dimensional formulas."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-weight, zero-rank, or zero-vector case; its hypotheses keep the relevant quantity away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, probability, bit, or rank endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-qc-adaptive-pauli-circuit-tree": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires n≥1 or a nonempty input object, so an empty-register case is outside this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-weight branch is assigned no conditional state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 (or one generator/one outcome where relevant); the proof uses finite coordinate identities that remain valid at that size."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degenerate-case hypothesis or parameter; all objects in its stated domain retain the fixed nonzero structure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both bit labels b=0 and b=1 and their endpoint weights are specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses fixed finite data and no selection from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result or definition, not a biconditional, so there is no separate direction to audit."
+        }
+      ],
+      "unresolved_suppliers": []
+    }
+  }
+}

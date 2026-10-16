@@ -1,0 +1,67 @@
+6.3 Factoring
+13
+
+factoring to determining the period of a function. Although this reduction is not directly
+related to quantum computing, we will discuss it here for completeness, and because the
+prospect of using a quantum computer as a factoring engine has generated so much
+excitement.
+Suppose we want to find a factor of the n-bit number N. Select pseudo-randomly
+a < N, and compute the greatest common divisor GCD(a, N), which can be done
+efficiently (in a time of order (log N)3) using the Euclidean algorithm. If GCD(a, N) ̸= 1
+then the GCD is a nontrivial factor of N, and we are done. So suppose GCD(a, N) = 1.
+
+[Aside: The Euclidean algorithm. To compute GCD(N1, N2) (for N1 > N2) first
+divide N1 by N2 obtaining remainder R1. Then divide N2 by R1, obtaining
+remainder R2. Divide R1 by R2, etc. until the remainder is 0. The last nonzero
+remainder is R = GCD(N1, N2). To see that the algorithm works, just note that
+(1) R divides all previous remainders and hence also N1 and N2, and (2) any
+number that divides N1 and N2 will also divide all remainders, including R. A
+number that divides both N1 and N2, and also is divided by any number that
+divides both N1 and N2 must be GCD(N1, N2). To see how long the Euclidean
+algorithm takes, note that
+
+Rj = qRj+1 + Rj+2,
+(6.59)
+
+where q ≥1 and Rj+2 < Rj+1; therefore Rj+2 < 1
+
+2Rj. Two divisions reduce
+the remainder by at least a factor of 2, so no more than 2 log N1 divisions are
+required, with each division using O((log N)2) elementary operations; the total
+number of operations is O((log N)3).]
+
+The numbers a < N coprime to N (having no common factor with N) form a finite
+group under multiplication mod N. [Why? We need to establish that each element a has
+an inverse. But for given a < N coprime to N, each ab (mod N) is distinct, as b ranges
+over all b < N coprime to N. (If N divides ab −ab′, it must divide b −b′.) Therefore,
+for some b, we must have ab ≡1 (mod N); hence the inverse of a exists.] Each element
+a of this finite group has a finite order r, the smallest positive integer such that
+
+ar ≡1 (mod N).
+(6.60)
+
+The order of a mod N is the period of the function
+
+fN,a(x) = ax (mod N).
+(6.61)
+
+We know there is an efficient quantum algorithm that can find the period of a function;
+therefore, if we can compute fN,a efficiently, we can find the order of a efficiently.
+Computing fN,a may look difficult at first, since the exponent x can be very large.
+But if x < 2m and we express x as a binary expansion
+
+x = xm−1 · 2m−1 + xm−2 · 2m−2 + . . . + x0,
+(6.62)
+
+we have
+
+ax(mod N) = (a2m−1)xm−1(a2m−2)xm−2 . . . (a)x0 (mod N).
+(6.63)
+
+Each a2j has a large exponent, but can be computed efficiently by a classical computer,
+using repeated squaring
+
+a2j (mod N) = (a2j−1)2 (mod N).
+(6.64)
+
+

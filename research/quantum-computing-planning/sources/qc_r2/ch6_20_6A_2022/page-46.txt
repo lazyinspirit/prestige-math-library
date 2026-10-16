@@ -1,0 +1,78 @@
+40
+Quantum Algorithms
+
+if the matrix is very sparse and has a simple structure, but in some physically relevant
+cases efficient classical algorithms are not known.
+Sometimes, if we express H in a “natural” basis we find that all the off-diagonal terms
+in the matrix are non-positive, i.e.
+
+H = cI −h
+(6.209)
+
+where I is the identity and h has only non-negative entries. In that case, the ground state
+|ψ0⟩of H (the eigenvector with the lowest eigenvalue) can be expressed as |ψ0⟩= �
+i ci|i⟩
+where |i⟩is a basis element and all ci can be chosen non-negative. That is because |ψ0⟩
+maximizes
+
+⟨ψ0|h|ψ0⟩=
+�
+c∗
+i cjhij
+(6.210)
+
+and so it is optimal to choose c∗
+i cj ≥0 for all i and j. When all the ci are nonnegative,
+there are quantum Monte Carlo sampling algorithms that can find the {ci} efficiently
+and accurately in practice. But if the off-diagonal terms in H have both + and −signs,
+then sampling algorithms might not work well because there can be delicate cancellations
+between positive and negative terms contributing to ⟨ψ0|h|ψ0⟩. Computational physicists
+call this the sign problem.
+But on a quantum computer, we can estimate eigenvalues of a unitary matrix U using
+the phase estimation algorithm. To obtain m bits of accuracy, we prepare an m-qubit
+register in a uniform superposition state, and execute this circuit:
+
+-figure-
+
+The measured value of k provides an estimate of the eigenvalue to m bits of accuracy.
+To perform Ut conditioned on t we simulate e−iHt for t ∈T × {1, 2, 4, 8, ..2m−1}. This
+suffices to find the fractional part of ET
+
+2π to m-bit accuracy, where E is an eigenvalue
+of the Hamiltonian H. We choose the step size in the simulation of e−iHt so that the
+accuracy is δ ≈2−m for t = 2mT. If the Hamiltonian is geometrically local, we have seen
+that this approximation can be achieved with a circuit size (neglecting a log factor)
+
+L = O
+�h2(nt)2
+
+δ
+
+�
+= O
+�
+h2(nT)2 × 22m
+
+2−m
+
+�
+= O
+�
+(hT)2n223m�
+.
+(6.211)
+
+For a particular preparation of the input state |ψ⟩, suppose we repeat the computation
+many times, and plot a histogram of the results:
+
+-figure-
+
+The location of each narrow peak estimates an energy eigenvalue Ea, modulo 2π/T.
+The height of the peak estimates |⟨Ea|ψ⟩|2 – the overlap |ψ⟩with the corresponding
+energy eigenstate |Ea⟩. To compute the energy eigenvalue to accuracy polynomial in n,
+we choose
+
+δ ≈2−m ≈1/nc =⇒m = c log2 n.
+(6.212)
+
+

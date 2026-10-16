@@ -1,0 +1,225 @@
+
+the results to the initialized qubits. After the first rotations we have �2m−1
+i=0
+|i >. The corrections
+will then take this state to an equal distribution over all the basic states in Cperp. The fact that this
+distribution is uniform is due to the linearity of the code.
+So the initialization procedure is actually defined by correcting an ancilla block to |s0 > and than
+using the block we are interested in initializing, and apply a controlled not from each bit to the bit
+of the |s0 >. This will not change |s0 > if the input string is all 0′s but will convert it to |S1 > if the
+string is a string of 1′s, and the resulting state is the output of the initialization procedure.
+The spread of this procedure is 1: a fault in the cat states can only effect one qubit at the end. A
+fault in the first rotations and in the first controlled not gates can only effect one bit at the end.
+(2) Correction procedure: For the correction procedure we first create a state |s0 > on ancilla
+qubits. We than apply a correction procedure, exactly as the procedure in the initialization procedure,
+only that instead of computing from the j′th copy of a syndrome whether the j′th bit is wrong, we
+also compute whether the number of faults according to the syndrome is larger than d. The controlled
+not from the result to the j′th qubit is replaced by a Toffoli gate which also checks if the number of
+faults is smaller than d. We also add a gate which replaces the qubit with a qubit from the state |s0 >
+if the number of faults is indeed larger that d. After this, all the qubits are rotated in the x axis and
+than the whole sequence of gates is repeated, and than all the qubits are again rotated in the x axis.
+(3) Reading procedure: This procedure requires m(m + 1) ancilla qubits. First we apply con-
+trolled not from each of the qubits to one of the last m ancilla qubits.
+This simulates m basic
+measurements of these qubits[3]. We repeat this operation again to each one of the m blocks of m
+ancilla qubits, so we have m copies of the measured state. On each of these copy we apply an op-
+eration that computes the bit that is represented by this state, using only gates from the universal
+set. (This might require more ancilla qubits.) The resulting qubits are the m qubits which carry the
+results from these m computations. The spread of this procedure is 1. A fault in the first stage of
+copying the qubits m times can only effect one qubit in each of the copies, and if the number of faults
+is smaller than the critical number, the fault has no effect on the resulting qubits. A fault during the
+computation of one bit can only effect this bit. So the spread is 1, as long as the sum of damage in
+the block and number of faults in the first stage is smaller than half the minimal distance of the code.
+(4) The procedures of a controlled not gate: |Sa, Sb >�−→|Sa, S(a+b) >, The Fourier transform, or
+the rotation around the x axis by π: |Sa >�−→
+1
+√
+
+2
+�
+b(−1)ab|Sb >, the not gate |Sa >�−→|S(1−a) >,
+and also a rotation around the z axis by π/2: |Sa >�−→(i)a|Sa >, is achieved on the encoded state
+by applying bitwise the gates on each of the qubits in the block. The procedure’s spread is 1: a fault
+can only effect one qubit.
+(5) Toffoli gate: we define a Toffoli procedure as is described in [19], where all the measurements
+are replaced by controlled not gates. The only piece of this procedure which is not straight forward
+is creating the ancilla state |A >. The way we do that is create a cat state of encoded qubits: i.e.
+use m blocks of qubits that we first initialize to the state |S0 >m, and rotate the first block, and then
+copy this block bitwise on all the other blocks, giving the state:
+1
+√
+
+2(|S0 > |S0 > ...|S0 > +|s1 > |S1 >
+...|S1 >). create three such ancilla states. Also create |A > +|B > as in [19]. Now apply m times the
+transformation: |Sa > |b > |c > |d > −−−> (−1)a(bc+d)|Sa > |b > |c > |d > on a block in the first
+encoded cat state and three bits in the three blocks of |A >, then do the same thing with the second
+cat state and then the third. To measure the cat state, rotate each of the blocks in the cat states in
+the x direction. Now compute from each block the bit it represents, and than independently m times
+the parity of these bits in each cat state. For each qubit in the third block of |A >, compare three
+parity bits from the three cat states by a majority vote and apply a controlled not from the result to
+the qubit in |A >. If only one fault occurred in this procedure, than in each block of |A > there is at
+most one deviated qubit. This means that the procedure is fault tolerant.
+
+16
+
+
+
+
+
+12
+Appendix E
+
+In this section we describe the gate procedures for the polynomial quantum codes over Fp. The
+initialization,reading and correction procedure are like for general linear codes.
+(1)The procedure of a general not gate, |Sa >�−→|S(a + c) >. A general controlled not gate:
+|Sa > |Sb >�−→|Sa > |S(a + b) > and the following operations: For a fixed constant 0 ̸= c ∈F:
+|Sa >�−→|S(ac) > are done by applying the same gates pitwise on the qupits.
+(2)The procedure of a general Toffoli gate |Sa > |Sb > |Sc >�−→|Sa > |Sb > |S(c + ab) > is
+applied as follows: First we apply pitwise the general Toffoli gate on the m coordinates. On the third
+block we obtain the sum:
+�
+
+A(x),B(x),C(x)∈V 1,A(0)=a,B(0)=b,C(0)=c
+|A(α1)B(α1) + C(α1), ..., A(αm)B(αm) + C(αm) > .
+
+The polynomial D(x) = A(x)B(x) + C(x) satisfies D(0) = ab + c, and it’s degree deg(D) ≤2d. To
+reduce the degree we use a quantum analog of the techniques in [5], where we keep the procedure
+fault tolerant. we can still correct d errors in D since m = 4d + 1. We proceed as follows: we apply
+the initialization procedure to each coordinate in the third block, which will give the state
+�
+
+D(x),D(x)=A(x)B(x)+C(x)
+|S(d1), ...S(dm) > , with dj = D(αj).
+
+We then first run the error correcting procedure of the code with degree 2d, and after this compute
+the linear combination S(�
+
+l cldl) = Sd, where the cl are the interpolation coefficients such that
+∀f ∈F[x], deg(f) ≤m −1, f(0) = �m
+i=1 cif(αi).
+(3) The procedure |Sa >�−→wca|Sa > ∀c ∈F, (This generalizes a rotation around the z axis by
+the angle π.) is done by on the l′th qupit the gate |a >�−→wcla|a >. The proof that this achieves the
+desired operation is :
+
+|Sa >=
+1
+�
+
+|V 2|
+
+�
+
+f∈V,f(0)=a
+|f(α1), ..., f(αm) >�−→
+�
+
+f∈V 1,f(0)=a
+Πm
+i=1wclf(αl)|f(α1), ..., f(αm) >=
+
+=
+�
+
+f∈V,f(0)=a
+wa|f(α1), ..., f(αm) > .
+
+(4) The Fourier transform: |Sa >�−→
+1
+√p
+�
+b∈F wab|Sb > . (This can be done with any wr by
+replacing in the following w by wr. This operation generalizes the rotation around the x axis by the
+angle π.)
+To perform this procedure we first note that there are fixed non zero e1, ..., em such that for any
+polynomial f(x) over Fp with deg(f) ≤m −1, f2d = �
+ei eif(αi). This is true since interpolation via
+
+α1, ...αm is a linear functional. Denote wl = welα2d
+l , l = 1, ..., m. Let us operate on each coordinate,
+that is qupit, by the Fourier transform
+
+|a >�−→
+�
+
+b∈Fp
+wab
+l |a > .
+
+We claim that this indeed gives the desired operation. This is true since
+
+|Sa >=
+1
+�
+
+|V 2|
+
+�
+
+f∈V,f(0)=a
+|f(α1), ..., f(αm) >�−→
+1
+√p
+
+�
+
+b1,b2,..bm∈F
+
+�
+
+f∈V,f(0)=a
+w
+�m
+
+l=1 elα2d
+l f(αl)bl|b1, ..bm > .
+
+Let b(x) be the unique interpolation polynomial b(αl) = bl, with degree deg(b) ≤m −1, for some
+b1, ...bm ∈Fp. We distinguish two cases:
+
+17
+
+
+
+
+
+• CASE 1: Deg(b) ≤d. In this case the polynomial h(x) = x2db(x)f(x) for f(x) ∈V 1 is of degree
+≤4d = m −1 and so
+
+m
+�
+
+l=1
+elα2d
+l f(αl)bl = f(0)b(0) = coeff of x2d in h(x).
+
+In the above sum, we will have:
+
+1
+√p
+
+�
+
+b1,b2,..bm∈F,b(x)∈V 1
+
+�
+
+f∈V,f(0)=a
+wb(0)f(0)x|b1, ..bm >=
+�
+
+b∈Fp
+wab|Sb > .
+
+• CASE 2: Deg(b) > d. We claim that the sum vanishes for the b′s in this case. Let h(x) be the
+interpolating polynomial through the values α2d
+l f(αl)bl. Then h(x) = x2df(x)b(x)(modG(x)).
+recall the definition og G(x). The power of w in the sum is the coefficient of xd in this polynomial.
+It is enough to show that this is not always the same value when summing over f ∈V 1 with
+f(0) = a, since then the sum vanishes. Let r = deg(b) > d. Picking f(x) = a + cx2d−r+1,
+deg(f) ≤d, and deg x2df(x)b(x) = 4d + 1 = m. Therefore h(x) = x2df(x)b(x) −cBrG(x) where
+Br is the leading coefficient in b(x), i.e b(x) = Brxr +...+B0. Br ̸= 0. Looking at the coefficient
+of x2d of h(x) we have aB0 −cBrg2d where g2d ̸= 0 is the coefficient of x2d in G(x). This can
+obtain any value we want by selecting an appropriate c ∈Fp.
+
+18
+

@@ -1,0 +1,1677 @@
+Quantum query complexity of state conversion
+
+Troy Lee
+Rajat Mittal
+Ben W. Reichardt
+Robert ˇSpalek
+Mario Szegedy
+
+Abstract
+
+State conversion generalizes query complexity to the problem of converting between two
+input-dependent quantum states by making queries to the input. We characterize the complexity
+of this problem by introducing a natural information-theoretic norm that extends the Schur
+product operator norm. The complexity of converting between two systems of states is given by
+the distance between them, as measured by this norm.
+In the special case of function evaluation, the norm is closely related to the general adversary
+bound, a semi-definite program that lower-bounds the number of input queries needed by a
+quantum algorithm to evaluate a function. We thus obtain that the general adversary bound
+characterizes the quantum query complexity of any function whatsoever. This generalizes and
+simplifies the proof of the same result in the case of boolean input and output. Also in the
+case of function evaluation, we show that our norm satisfies a remarkable composition property,
+implying that the quantum query complexity of the composition of two functions is at most the
+product of the query complexities of the functions, up to a constant. Finally, our result implies
+that discrete and continuous-time query models are equivalent in the bounded-error setting, even
+for the general state-conversion problem.
+
+1
+Introduction
+
+A quantum query algorithm for evaluating a function f attempts to compute f(x) with as few
+queries to the input x as possible. Equivalently, the algorithm begins in a state |0⟩, and should
+approach |f(x)⟩⊗|0⟩. The state-conversion problem generalizes function evaluation to the case
+where the algorithm begins in a state |ρx⟩and the goal is to convert this to |σx⟩. State-conversion
+problems arise naturally in algorithm design, generalizing classical subroutines (Figure 1). For
+example, the graph isomorphism problem can be reduced to creating a certain quantum state [Shi02].
+We characterize the quantum query complexity of state conversion. We introduce a natural,
+information-theoretic norm, which extends the Schur product operator norm. The complexity
+of state conversion depends only on the Gram matrices of the sets of vectors {|ρx⟩} and {|σx⟩},
+and is characterized as the norm of the difference between these Gram matrices. For example, in
+function evaluation, the initial Gram matrix is the all-ones matrix, J, and the target Gram matrix
+is F = {δf(x),f(y)}x,y, so the query complexity depends only on the norm of F −J. Characterizing
+query complexity in terms of a norm-induced metric has interesting consequences. For example, it
+follows that if one can design an optimal algorithm for going from J to
+99
+100J +
+1
+100F, then one also
+obtains an optimal algorithm for evaluating f.
+The norm we introduce is related to the general adversary bound [HLˇS07], a strengthening of
+the popular adversary method for showing lower bounds on quantum query complexity [Amb02].
+A recent sequence of works [FGG08, CCJY09, ACR+10, RˇS08] has culminated in showing that
+the general adversary bound gives, up to a constant factor, the bounded-error quantum query
+
+1
+
+arXiv:1011.3020v2  [quant-ph]  23 Aug 2011
+
+
+complexity of any function with boolean output and binary input alphabet [Rei09, Rei11]. Our
+more general state-conversion result completes this picture by showing that the general adversary
+bound characterizes the bounded-error quantum query complexity of any function whatsoever:
+
+Theorem 1.1. Let f : D →E, where D ⊆Dn, and D and E are finite sets. Then the bounded-error
+quantum query complexity of f, Q(f), is characterized by the general adversary bound, Adv±(f):
+
+Q(f) = Θ
+�
+Adv±(f)
+�
+.
+(1.1)
+
+The general adversary bound is a semi-definite program (SDP). When phrased as a minimization
+problem, Adv±(f) only has constraints on x, y pairs where f(x) ̸= f(y). In contrast, we consider
+an SDP that places constraints on all input pairs x, y. Fortunately, these extra constraints increase
+the optimal value by at most a factor of two. The extra constraints, however, are crucial for the
+construction of the algorithm, and for any extension to state conversion. They also lead to a new
+conceptual understanding of the adversary bound.
+The modified SDP defines a norm, and we define the query distance as the metric induced
+by this new norm. Our main algorithmic theorem states that there is a quantum algorithm that
+converts |ρx⟩to a state with high fidelity to |σx⟩, and that makes a number of queries of order the
+query distance between ρ and σ, the respective Gram matrices of {|ρx⟩} and {|σx⟩}.
+The correctness of our algorithm has a direct and particularly simple proof. Though more general,
+it simplifies the previous characterization of boolean function evaluation. At its mathematical heart
+is a lemma that gives an “effective” spectral gap for the product of two reflections.
+The query distance also gives lower bounds on the query complexity of state conversion. It is
+straightforward to argue that the query distance between ρ and σ lower bounds the number of
+queries needed to reach σ exactly. To deal with the bounded-error case, we look at the minimum
+over all σ′ of the query distance between ρ and σ′, where σ′ is a valid Gram matrix for the final
+states of a successful algorithm. We show that a simpler necessary and sufficient condition for the
+latter is that σ and σ′ are close in the distance induced by the Schur product operator norm.
+As the query distance remains a lower bound on the continuous-time query complexity, a corollary
+of our algorithm is that the continuous-time and discrete query models are related up to a constant
+factor in the bounded-error setting. Previously, this equivalence was known up to a sub-logarithmic
+factor [CGM+09].
+Since the general adversary bound characterizes quantum query complexity, its properties
+immediately carry over thereto. We show that the general adversary bound satisfies a remarkable
+composition property, that Adv± of a composed function f ◦(g, g, . . . , g) is O
+�
+Adv±(f)Adv±(g)
+�
+.
+Previously this was known in the boolean case [Rei09], and, again, having constraints on all input
+pairs turns out to be crucial in the extension to non-boolean functions. When the input of f is
+boolean, we can show a matching lower bound, extending [HLˇS07].
+
+2
+Background
+
+For a natural number n, let [n] = {1, 2, . . . , n}. For two matrices A, B of the same size, A ◦B
+denotes their entrywise product, also known as Schur or Hadamard product. Let ⟨A, B⟩= Tr(A†B).
+Denote by ∥A∥the spectral norm of A. We will use 1 and J for the identity and all-ones matrices,
+respectively, where size can be inferred from the context. Let δa,b be the Kronecker delta function.
+
+2
+
+
+Figure 1: The state-conversion problem generalizes the state-generation problem, studied by
+Ambainis et al. [AMRR11], which in turn generalizes function evaluation. The quantum query
+complexity of evaluating boolean functions has been characterized by [Rei11].
+
+2.1
+Coherent and non-coherent state-conversion problems
+
+The quantum query complexity of a function f, Q(f), is the number of input queries needed to
+evaluate f with error at most 1/3 [BW02]. The state-conversion problem generalizes function
+evaluation to the case where the aim is to transform one quantum state into another, using queries
+to the input. The problem is parameterized by sets of states {|ρx⟩} and {|σx⟩}. On input x, we
+begin in a state |ρx⟩and wish to create the state |σx⟩, using as few queries to x as possible. State
+conversion is a slight generalization of the state-generation problem, in which in the initial state |ρx⟩
+is independent of x. This problem was introduced by Shi [Shi02], and recently studied systematically
+by Ambainis et al. [AMRR11].
+State conversion has two variants, coherent and non-coherent. Both versions allow the algorithm
+workspace.
+
+Definition 2.1 (Coherent output condition). An algorithm solves the coherent state-conversion
+problem with error ϵ if for every x it replaces the initial state |ρx⟩⊗|0⟩by a state |σ′
+x⟩such that
+Re(⟨σ′
+x|(|σx⟩⊗|0⟩)) ≥√1 −ϵ.
+
+Definition 2.2 (Non-coherent output condition). An algorithm solves the non-coherent state-
+conversion problem with error ϵ if for every x it replaces the initial state |ρx⟩⊗|0⟩by a state |σ′
+x⟩
+such that |⟨σ′
+x|(|σx⟩⊗|sx⟩)| ≥√1 −ϵ for some state |sx⟩that may depend on x.
+
+The query complexity of state conversion only depends on the Gram matrices of the initial
+and target states, i.e., on ρ = {⟨ρx|ρy⟩}x,y and σ = {⟨σx|σy⟩}x,y. (In function evaluation and state
+generation, ρ is the all-ones matrix.) Let Qϵ(ρ, σ) and Qnc
+ϵ (ρ, σ) be the minimum number of queries
+required to solve the coherent and non-coherent state-conversion problems, respectively, with error ϵ.
+For evaluating functions, coherent and non-coherent complexities are equal up to constant factors.
+An example that illustrates the difference between these output conditions is computing a boolean
+function in the phase, that is where the target state |σx⟩= (−1)f(x)|0⟩. In this case the non-coherent
+complexity is trivial, while the bounded-error coherent complexity is equal to Q(f), up to constant
+factors.
+
+3
+
+
+2.2
+The γ2 norm
+
+We will make use of the γ2 norm, also known as the Schur product operator norm [Bha07, LSˇS08].
+This norm has been introduced recently to complexity theory by Linial et al. [LMSS07], and has
+proven to be very useful in quantum information. It is currently the best lower bound known on
+quantum communication [LS09], and Tsirelson has shown that its dual norm characterizes the bias
+of a quantum XOR game [Tsi87, Ung08].
+
+Definition 2.3. Let A be matrix with rows labeled by D1 and columns by D2. Define
+
+γ2(A) =
+min
+m∈N,
+|ux⟩,|vy⟩∈Cm
+
+�
+max
+�
+max
+x∈D1 ∥|ux⟩∥2, max
+y∈D2 ∥|vy⟩∥2�
+: ∀x ∈D1, y ∈D2, Ax,y = ⟨ux|vy⟩
+�
+. (2.1)
+
+The following fact plays a key role in the design of our algorithm and in relating our new norm
+to the general adversary bound:
+
+Fact 2.4. For any k ∈N, let 1 and J be the k-by-k identity and all-ones matrices, respectively.
+Then γ2(J −1) ≤2(1 −1/k).
+
+Proof. We demonstrate unit vectors {|µi⟩}i∈[k], and {|νi⟩}i∈[k] such that ⟨µi|νj⟩= 1
+
+2
+k
+k−1(1 −δi,j):
+
+let |µi⟩= −α|i⟩+
+√
+
+1−α2
+√
+
+k−1
+�
+j̸=i |j⟩, |νi⟩=
+√
+
+1 −α2|i⟩+
+α
+√
+
+k−1
+�
+j̸=i |j⟩, for α =
+�
+
+1
+2 −
+√
+
+k−1
+
+k
+.
+
+3
+Filtered γ2 norm and query distance
+
+We define a natural generalization of the γ2 norm, in which the factorization is filtered through
+certain matrices:
+
+Definition 3.1 (Filtered γ2 norm). Let A be a matrix with rows indexed by elements of D1 and
+columns by D2, and let Z = {Z1, . . . , Zn} be a set of |D1|-by-|D2| matrices. Define γ2(A|Z) by
+
+γ2(A|Z) =
+min
+m∈N,
+|uxj⟩,|vyj⟩∈Cm
+max
+�
+max
+x∈D1
+
+�
+
+j
+∥|uxj⟩∥2, max
+y∈D2
+
+�
+
+j
+∥|vyj⟩∥2�
+
+∀x ∈D1, y ∈D2, Ax,y =
+�
+
+j
+(Zj)x,y⟨uxj|vyj⟩.
+(3.1)
+
+The filtered γ2 norm γ2( · |Z) is a norm. Among its many properties (see Appendix A) are that
+γ2(A) = γ2(A|{J}), where J is the all-ones matrix, and γ2(A|{A}) = 1 if A ̸= 0. We use below the
+general inequality
+γ2(A|{Zj}) ≤γ2(A|{Zj ◦B})γ2(B) .
+(3.2)
+
+The query distance is the metric induced when the filter matrices are related to the query process.
+Let D ⊆Dn be a finite set, and let ∆= {∆1, . . . , ∆n}, where ∆j = {1 −δxj,yj}x,y∈D. Thus ∆j
+encodes when a query to index j distinguishes input x from input y.
+
+Definition 3.2. The query distance between ρ and σ, two |D|-by-|D| matrices, is γ2(ρ −σ|∆).
+
+4
+
+
+Theorem 4.9 below shows that the query distance characterizes the quantum query complexity of
+state conversion. Furthermore, as we show now, it is closely related to the general adversary bound,
+a lower bound on the quantum query complexity for function evaluation introduced by [HLˇS07].
+Let f : D →E and let F = {δf(x),f(y)}x,y.
+
+Definition 3.3. The general adversary bound for f is given by
+
+Adv±(f) = max
+�
+∥Γ∥: ∀j ∈[n], ∥Γ ◦∆j∥≤1
+�
+,
+(3.3)
+
+where the maximization is over |D|-by-|D| real, symmetric matrices Γ satisfying Γ ◦F = 0.
+
+By taking the dual of this SDP, we obtain a bound that is the same as γ2(J −F|∆), ex-
+cept without any constraints on pairs x, y with f(x) = f(y).
+In other words, Adv±(f) =
+γ2(J −F|{∆j ◦(J −F)}).
+
+Theorem 3.4. The values of the general adversary bound and γ2(J −F|∆) differ by at most a
+factor of two, and are equal in the case that the function has boolean output:
+
+Adv±(f) ≤γ2(J −F|∆) ≤2
+�
+1 −1/|E|
+�
+Adv±(f) .
+
+Proof. Since Adv±(f) has fewer constraints as a minimization problem, Adv±(f) ≤γ2(J −F|∆).
+For the other direction, use Eq. (3.2) with Zj = ∆j, A = B = J −F = A ◦B. As it is readily
+seen that γ2 is invariant under adding or removing duplicate rows or columns, Fact 2.4 implies
+γ2(J −F) ≤2(1 −1/|E|).
+
+4
+Characterization of quantum query complexity
+
+In this section, we show that the query complexities for function evaluation, and coherent and
+non-coherent state conversion are characterized in terms of γ2 and γ2(·|∆). We begin with the upper
+bounds.
+
+4.1
+Quantum query algorithm for state conversion
+
+Theorem 4.1. Consider the problem of converting states {|ρx⟩} to {|σx⟩}, for x ∈D ⊆Dn. Let ρ
+and σ be the states’ Gram matrices. For any ϵ ∈(0, γ2(ρ −σ|∆)), this problem has query complexity
+
+Qϵ(ρ, σ) = O
+�
+γ2(ρ −σ|∆)log(1/ϵ)
+
+ϵ2
+
+�
+.
+
+Theorem 1.1 follows from Theorems 3.4 and 4.1, together with the lower bound from [HLˇS07].
+The mathematical heart of our analysis is to study the spectrum of the product of two reflections.
+The following lemma gives an “effective” spectral gap for two reflections applied to a vector. It is
+closely related to [Rei09, Theorem 8.7], but has a significantly simpler statement and proof.
+
+Lemma 4.2 (Effective spectral gap lemma). Let Π and Λ be projections, and let R = (2Π−1)(2Λ−1)
+be the product of the reflections about their ranges. Let {|β⟩} be a complete orthonormal set of
+eigenvectors of R, with respective eigenvalues eiθ(β), θ(β) ∈(−π, π].
+For any Θ ≥0, let PΘ = �
+β:|θ(β)|≤Θ |β⟩⟨β|. If Λ|w⟩= 0, then
+
+∥PΘΠ|w⟩∥≤Θ
+
+2 ∥|w⟩∥.
+
+5
+
+
+Proof. The claim can be shown via Jordan’s Lemma [Jor75]; we give a direct proof.
+Let |v⟩=
+PΘΠ|w⟩, |v′⟩= (2Λ −1)|v⟩and |v′′⟩= (2Π −1)|v′⟩= R|v⟩. When Θ is small, |v⟩and |v′′⟩are close:
+
+∥|v⟩−|v′′⟩∥2 =
+���
+�
+
+β:|θ(β)|≤Θ
+(1 −eiθ(β))⟨β|v⟩|β⟩
+���
+2
+≤2(1 −cos Θ)∥|v⟩∥2 ≤Θ2∥|v⟩∥2 .
+
+Notice that |v⟩+ |v′⟩is fixed by Λ. Similarly, Π fixes |v′⟩+ |v′′⟩and Π = 1 −Π fixes |v′⟩−|v′′⟩.
+Hence 0 = ⟨v + v′|w⟩= ⟨v + v′|Π|w⟩+ ⟨v + v′|Π|w⟩= ⟨v + v′′|Π|w⟩+ ⟨v −v′′|Π|w⟩. Therefore,
+∥|v⟩∥2 = |⟨v|Π|w⟩| = 1
+
+2|⟨v −v′′|Π|w⟩+ ⟨v + v′′|Π|w⟩| = 1
+
+2|⟨v −v′′|(Π −Π)|w⟩|. We conclude
+
+∥|v⟩∥2 ≤1
+
+2∥|v⟩−|v′′⟩∥∥(Π −Π)|w⟩∥≤Θ
+
+2 ∥|v⟩∥∥|w⟩∥.
+
+We will also use a routine that, roughly, reflects about the eigenvalue-one eigenspace of a unitary:
+
+Theorem 4.3 (Phase detection [Kit95, MNRS07]). For any Θ, δ > 0, there exists b = O(log 1
+
+δ log 1
+
+Θ)
+and, for any unitary U ∈L(H), a quantum circuit R(U) on H⊗(C2)⊗b that makes at most O
+�log(1/δ)
+
+Θ
+�
+
+controlled calls to U and U−1, and such that for any eigenvector |β⟩of U, with eigenvalue eiθ,
+θ ∈(−π, π],
+
+• If θ = 0, then R(U)|β⟩⊗|0b⟩= |β⟩⊗|0b⟩.
+
+• If |θ| > Θ, then R(U)|β⟩⊗|0b⟩= −|β⟩⊗(|0b⟩+ |δβ⟩) for some vector |δβ⟩with ∥|δβ⟩∥< δ.
+Thus, if |γ⟩∈H is orthogonal to all eigenvectors of U with eigenvalues eiθ for |θ| ≤Θ, then
+��(R(U) + 1)|γ⟩⊗|0b⟩
+��< δ.
+
+R(U) is constructed uniformly in the parameters Θ and δ, and its structure does not depend on U.
+
+The phase-detection procedure can be constructed using, for example, standard phase estima-
+tion [Kit95, CEMM98, NWZ09]. Phase detection is a common subroutine in quantum algorithms,
+used implicitly or explicitly in, e.g., [Sze04, ACR+10, MNRS07, RˇS08, MNRS09, Rei09, Rei11].
+Now we are ready to construct the algorithm to prove Theorem 4.1. Let W = γ2(ρ −σ|∆).
+Let {|uxj⟩} and {|vxj⟩}, vectors in Cm, be a solution to Eq. (3.1) for γ2(ρ −σ|∆).
+The first
+step is to turn this solution into a more natural geometric object. If the input alphabet size is
+|D| = k, let |µi⟩, |νi⟩be the vectors given in Fact 2.4. Notice that we can rewrite the sum from
+Eq. (3.1) �
+j∈[n](∆j)x,y⟨uxj|vyj⟩= �
+j: xj̸=yj ⟨uxj|vyj⟩as simply the inner product between the vec-
+
+tors �
+j |j⟩|uxj⟩|µxj⟩and 2(k−1)
+
+k
+�
+j |j⟩|vyj⟩|νyj⟩. Our algorithm is based on these combined vectors.
+Let H be the Hilbert space for the states |ρx⟩and |σx⟩. For y ∈D, let Πy = 1 −�
+j |j⟩⟨j| ⊗
+|µyj⟩⟨µyj| ⊗1Cm. Also, define vectors |ty±⟩, |ψy⟩∈(C2 ⊗H) ⊕(Cn ⊗Ck ⊗Cm) by
+
+|ty±⟩=
+1
+√
+
+2
+�
+|0⟩⊗|ρy⟩± |1⟩⊗|σy⟩
+�
+
+|ψy⟩=
+ϵ
+√
+
+W
+|ty−⟩−
+�
+
+j∈[n]
+|j⟩⊗|µyj⟩⊗|uyj⟩.
+
+Let Λ be the projection onto the orthogonal complement of the span of the vectors {|ψy⟩}y∈D. Then
+our algorithm is given by:
+
+Algorithm: On input x, let Ux = (2Πx −1)(2Λ −1). Apply the phase-detection
+circuit R(Ux), from Theorem 4.3, with precision Θ = ϵ2/W and error δ = ϵ, on input
+state |0⟩⊗|ρx⟩⊗|0b⟩. Output the result.
+
+6
+
+
+Figure 2: The algorithm can be interpreted as running a quantum walk on a bipartite graph with
+weighted biadjacency matrix Πx + �
+y |y⟩⟨ψy|. Shown above is an example graph for the function
+f(x1x2) = x2 mapping D = {0A, 0B, 1C} ⊂{0, 1} × {A, B, C} to E = {A, B, C}.
+
+Note that the reflection 2Πx−1 can be computed with a query to the input oracle and its inverse—
+compute xj, reflect in |µxj⟩, then uncompute xj. Therefore, the algorithm uses O(W/ϵ2 ·log 1
+
+ϵ) input
+queries. The algorithm is based on repeated reflections. As sketched in Figure 2, the algorithm can
+also be interpreted as a quantum walk on the bipartite graph with biadjacency matrix Πx+�
+y |y⟩⟨ψy|.
+To get some intuition for why this algorithm works, observe that the initial state |0⟩⊗|ρx⟩
+is
+1
+√
+
+2(|tx+⟩+ |tx−⟩). The vector |tx+⟩has large overlap with an eigenvalue-one eigenvector of Ux
+(Claim 4.4 below), whereas the cumulative squared overlap of |tx−⟩with eigenvectors of Ux with
+small angle is small (Claim 4.5). The phase-detection procedure therefore approximately reflects
+the |tx−⟩term, giving roughly
+1
+√
+
+2(|tx+⟩−|tx−⟩) = |1⟩⊗|σx⟩—our target state.
+Now we give the formal analysis of the algorithm. Let {|β⟩} be a complete set of eigenvectors of Ux
+with corresponding eigenvalues eiθ(β), θ(β) ∈(−π, π]. For an angle Θ ≥0, let PΘ = �
+β:|θ(β)|≤Θ |β⟩⟨β|,
+and P Θ = 1 −PΘ.
+
+Claim 4.4. ∥P0|tx+⟩∥2 ≥1 −ϵ2.
+
+Proof. We give a state |ϕ⟩such that Ux|ϕ⟩= |ϕ⟩and |⟨tx+|ϕ⟩|2/∥|ϕ⟩∥2 ≥1 −ϵ2. Let
+
+|ϕ⟩= |tx+⟩+ 1
+
+2
+ϵ
+√
+
+W
+2(k −1)
+
+k
+
+�
+
+j∈[n]
+|j⟩⊗|νxj⟩⊗|vxj⟩.
+
+Then |ϕ⟩is orthogonal to all |ψy⟩, since ⟨ty−|tx+⟩= 1
+
+2 (⟨ρy|ρx⟩−⟨σy|σx⟩) implies
+
+⟨ψy|ϕ⟩=
+ϵ
+√
+
+W
+⟨ty−|tx+⟩−1
+
+2
+ϵ
+√
+
+W
+
+�
+
+j:xj̸=yj
+⟨uyj|vxj⟩= 0 .
+
+Thus Λ|ϕ⟩= |ϕ⟩. Since Πx|tx+⟩= |tx+⟩and ⟨µxj|νxj⟩= 0 for all j ∈[n], also Πx|ϕ⟩= |ϕ⟩.
+
+7
+
+
+Claim 4.5. For all Θ ≥0, ∥PΘ|tx−⟩∥2 ≤Θ2
+
+4
+�W 2
+
+ϵ2 + 1
+�
+.
+
+Proof. Apply Lemma 4.2 with Π = Πx and |w⟩=
+√
+
+W
+ϵ |ψx⟩. Then ∆|w⟩= 0 and |tx−⟩= Πx|w⟩.
+
+The following proposition completes the proof of Theorem 4.1:
+
+Proposition 4.6. If W ≥ϵ, then with the parameters δ = ϵ and Θ = ϵ2/W,
+���R(Ux)|0⟩⊗|ρx⟩⊗|0b⟩−|1⟩⊗|σx⟩⊗|0b⟩
+���< 4ϵ .
+
+Proof. We have
+���R(Ux)|0⟩|ρx⟩|0b⟩−|1⟩|σx⟩|0b⟩
+���=
+1
+√
+
+2
+
+���R(Ux)(|tx+⟩+ |tx−⟩)|0b⟩−(|tx+⟩−|tx−⟩)|0b⟩
+���
+
+≤
+1
+√
+
+2
+
+���(R(Ux) −1)|tx+⟩|0b⟩
+���+ 1
+√
+
+2
+
+���(R(Ux) + 1)|tx−⟩|0b⟩
+���.
+
+By Theorem 4.3, the first term equals
+1
+√
+
+2∥(R(Ux) −1)P 0|tx+⟩|0b⟩∥≤
+√
+
+2∥P 0|tx+⟩∥≤
+√
+
+2ϵ, by
+
+Claim 4.4.
+The second term is at most
+1
+√
+
+2∥(R(Ux) + 1)P Θ|tx−⟩|0b⟩∥+
+√
+
+2∥PΘ|tx−⟩∥<
+δ
+√
+
+2 +
+
+Θ
+√
+
+2
+
+�
+
+W 2
+
+ϵ2 + 1, by Theorem 4.3 and Claim 4.5. Now substitute our choices of parameters and use
+
+W 2
+
+ϵ2 + 1 ≤2W 2/ϵ2 to conclude the proof.
+
+Notice that the constant factor hidden by the big-O notation in Theorem 4.1 is the same as the
+constant hidden in Theorem 4.3 for the number of calls to U and U−1, and is less than 100.
+
+4.2
+Lower bound for state conversion
+
+We now show how γ2(ρ −σ|∆) can be used to show query complexity lower bounds for the state-
+conversion problem. The argument has two parts. First, we show that γ2(ρ −σ|∆) lower-bounds the
+complexity of exactly converting ρ to σ. Second, we develop an output condition constraining those σ′
+
+that are viable final Gram matrices of a successful algorithm with error ϵ. These two parts have
+been present in all previous adversary arguments, but the separation has not been fully recognized.
+Once these two steps are finished, the lower bound naturally becomes minσ′≈ϵσ γ2(ρ −σ′|∆),
+where the notion of approximation is given by the output condition. This paradigm follows the use
+of approximation norms for lower bounds in communication complexity [LS07].
+We begin with the lower bound for exact state conversion:
+
+Lemma 4.7. Suppose that σ can be reached from ρ with one query. Then γ2(ρ −σ|∆) ≤2.
+
+Proof. Let Γj project onto the query register containing index j. For x ∈D, let Ox be the unitary
+query oracle. It satisfies O†
+xOyΓj = Γj when xj = yj. By assumption, σx,y = ⟨ρx|O†
+xOy|ρy⟩. Then
+
+(ρ −σ)x,y =
+�
+
+j
+⟨ρx|Γj|ρy⟩−⟨ρx|O†
+xOyΓj|ρy⟩=
+�
+
+j:xj̸=yj
+⟨ρx|Γj|ρy⟩−⟨ρx|O†
+xOyΓj|ρy⟩.
+
+Now define |uxj⟩= (Γj|ρx⟩, OxΓj|ρx⟩) and |vxj⟩= (Γj|ρx⟩, −OxΓj|ρx⟩). Then ⟨uxj|vyj⟩= ⟨ρx|(1 −
+O†
+xOy)Γj|ρy⟩, as desired. Furthermore, �
+j ∥|uxj⟩∥2 = �
+j ∥|vxj⟩∥2 = 2.
+
+8
+
+
+Lower bounds for approximate query problems follow by combining this lemma with appropriate
+output conditions. For example, in the functional case, one can use a condition based on ℓ∞
+distance [Amb02], or the full output condition from [BSS03]. The output condition traditionally
+used for the general adversary method is based on the γ2 norm [HLˇS07]. This condition has the
+advantage that it is an SDP, it extends to state conversion, and, as we now show, it is tight.
+
+Lemma 4.8. Let {|ρx⟩}, {|σx⟩} ⊂H be finite sets of vectors with the same index set, and let ρ, σ
+be their respective Gram matrices. Then
+
+• If Re(⟨ρx|σx⟩) ≥√1 −ϵ for every x, then γ2(ρ −σ) ≤2√ϵ [HLˇS07].
+
+• If γ2(ρ −σ) ≤ϵ, then there exists a unitary U such that ⟨ρx|U|σx⟩≥1 −
+√
+
+2ϵ for all x.
+
+The second item has recently been improved by [LR11] to γ2(ρ −σ) ≤ϵ implies there exists a
+unitary U such that ⟨ρx|U|σx⟩≥1 −ϵ/2 for all x.
+
+Proof. For the first part of the lemma, we can factorize ρ −σ as
+
+(ρ −σ)x,y = 1
+
+2 (⟨ρx + σx|ρy −σy⟩+ ⟨ρx −σx|ρy + σy⟩) .
+
+Thus by a triangle inequality γ2(ρ−σ) ≤maxx,y ∥ρx + σx∥∥ρy −σy∥≤2 maxy
+�
+
+2 −2Re(⟨ρy|σy⟩) ≤
+2√ϵ. For the last inequality we used √1 −ϵ ≥1 −ϵ
+
+2.
+To prove the second part, let {ux} and {vx} be arbitrary factorizations of ρ and σ, respectively.
+As γ2(ρ −σ) ≤ϵ, there exists a factorization (ρ −σ)x,y = ⟨αx|βy⟩with ∥αx∥, ∥βy∥≤√ϵ. Then
+
+⟨vx|vy⟩= ⟨ux|uy⟩−⟨αx|βy⟩
+
+= ⟨ux|uy⟩−1
+
+2⟨αx|βy⟩−1
+
+2⟨βx|αy⟩
+
+as ρ−σ is Hermitian. Let px = 1
+
+2(αx −βx) and qx = 1
+
+2(αx +βx). Then the previous equation implies
+
+⟨(ux, px)|(uy, py)⟩= ⟨(vx, qx)|(vy, qy)⟩.
+
+By unitary freedom of square roots, if AA† = BB† for any two matrices A and B, then AU = B for
+some unitary U. So there is a unitary U such that (ux, px)U = (vx, qx). As ⟨αx|βx⟩= 0 because
+ρ −σ has zeros on the diagonal, we have ∥px∥2 = ∥qx∥2 ≤ϵ/2.
+
+⟨(ux, 0)U|(vx, 0)⟩= ⟨(ux, px)U|(vx, qx)⟩−⟨(ux, 0)U|(0, qx)⟩−⟨(0, px)U|(vx, 0)⟩−⟨(0, px)U|(0, qx)⟩
+
+≥1 + ∥qx∥2 −∥px∥−∥qx∥−∥px∥∥qx∥
+
+≥1 −
+√
+
+2ϵ .
+
+Based on Lemma 4.8, we immediately derive tight SDPs for the query complexities of state
+conversion:
+
+Theorem 4.9. For δ > 0, let
+
+qδ(ρ, σ) = min
+σ′⪰0
+
+�
+γ2(ρ −σ′|∆) : γ2(σ′ −σ) ≤δ
+�
+
+qnc
+δ (ρ, σ) = min
+σ′,S⪰0
+
+�
+γ2(ρ −σ′|∆) : γ2(σ′ −σ ◦S) ≤δ, S ◦1 = 1
+�
+.
+(4.1)
+
+9
+
+
+Then the bounded-error coherent and non-coherent state-conversion query complexities satisfy
+
+Ω
+�
+q2
+√
+
+2ϵ(ρ, σ)
+�
+≤Qϵ(ρ, σ) ≤O
+�
+qϵ4/16(ρ, σ)log(1/ϵ)
+
+ϵ2
+
+�
+
+Ω
+�
+qnc
+2
+√
+
+2ϵ(ρ, σ)
+�
+≤Qnc
+ϵ (ρ, σ) ≤O
+�
+qnc
+ϵ4/16(ρ, σ)log(1/ϵ)
+
+ϵ2
+
+�
+.
+(4.2)
+
+Thus for coherent state conversion, the output condition used is γ2(σ′−σ) ≤δ for an appropriately
+chosen δ, and in the non-coherent case, optimization over additional garbage states is allowed.
+For well-behaved problems, i.e., problems satisfying Q1/3(ρ, σ) = O
+�
+Qϵ(ρ, σ) log(1/ϵ)
+�
+as in the
+functional case, this is true characterization. General state-conversion problems, however, do not
+necessarily satisfy this robustness condition. Just as the complexity of a boolean function can have
+a precipitous change around error 1/2, state-conversion problems can have non-continuous changes
+in complexity even around small values of ϵ. For such problems Theorem 4.9 may not be a true
+characterization because of the gap in error parameters on the left- and right-hand sides. The
+gap in the error dependence arises from the looseness of the necessary and sufficient conditions in
+Lemma 4.8, plus the error from Theorem 4.1. We do not know if the ϵ-dependence in Theorem 4.1
+can be improved to polylogarithmic in 1/ϵ.
+An advantage of using the γ2 output condition is that the quantities qδ and qnc
+δ
+are described
+by semi-definite programs. One could define analogous quantities with other output conditions,
+however, including the “true” output condition given by Definition 2.1 and Definition 2.2. In
+this case the only slack in the characterization would arise from Theorem 4.1 and thus the error
+parameters on left- and right-hand sides would agree up to constant factors.
+Ambainis et al. [AMRR11], previously extended both the general adversary bound and the
+multiplicative adversary bound [ˇSpa08] to the state-generation problem. A difference between our
+work and theirs is that we separate the bound for the exact problem from the output condition used
+to handle the bounded error case. [AMRR11] focus on the output condition introduced by [ˇSpa08]
+with the multiplicative adversary method and show how to extend the additive adversary method
+with this output condition to the state generation problem, calling this the hybrid adversary method.
+They show that the hybrid adversary method dominates the general adversary method, and that
+the hybrid adversary method is dominated by the bound of [ˇSpa08] extended to the case of state
+generation. We do not know if the hybrid adversary method also dominates the qδ(J, σ) measure.
+The proof in [AMRR11] that the multiplicative method dominates the hybrid method actually shows
+that the multiplicative method for exact state generation dominates the γ2(J −σ|∆) measure, as
+explicitly shown by [LR11]. Thus the multiplicative method will dominate the γ2(J −σ|∆) bound
+whenever they are paired with the same output condition.
+This line of research into discrete query complexity was launched by the discovery of a continuous-
+time query algorithm for evaluating AND-OR formulas [FGG08]. We now complete the circle:
+
+Theorem 4.10. The bounded-error continuous-time and discrete query models are equivalent.
+
+Cleve et al. [CGM+09] have shown that the models are equivalent up to a sub-logarithmic factor.
+The proof of Theorem 4.10, given in Appendix B, follows from our algorithm, Theorem 4.1, together
+with the observation that the general adversary bound remains a lower bound for continuous-
+time query algorithms. The latter result has been observed by Yonge-Mallo in 2007 [YM11] and,
+independently, Landahl (personal communication).
+
+10
+
+
+5
+Function composition
+
+In this section we show that the adversary method behaves well with respect to function composition,
+extending previous work for the boolean case [HLˇS07, Rei09]. Let g : C →D where C ⊆Cm and
+f : D →E (D ⊆Dn) for finite sets C, D, E. Define the composed function f ◦gn by
+
+(f ◦gn)(x) = f
+�
+g(x1, . . . , xm), . . . , g(x(n−1)m+1, . . . , xmn)
+�
+.
+
+Lemma 5.1. Letting G = {δg(x),g(y)}x,y, Adv±(f ◦gn) ≤Adv±(f) γ2(J −G|∆).
+
+The proof of this lemma follows in the natural way. We take optimal solutions to the Adv±(f)
+program and the γ2(J −G|∆) program, and form their tensor product to construct a solution to the
+composed program. This proof strategy does not directly work for the general adversary bound—we
+crucially use the extra constraints present in the γ2(J −G|∆) program. In fact, this lemma can be
+seen as a special case of the more general inequality γ2(A|Z) ≤γ2(A|Y ) maxj γ2(Yj|Z) (Lemma A.2).
+The proof is given in Appendix C.
+In the case where all the functions f and g have boolean inputs and outputs, a matching lower
+bound to Lemma 5.1 has been shown by Høyer et al. [HLˇS07]. In general, we cannot always show
+such a matching lower bound. For example, let g be a function that only outputs even numbers,
+and let f output the sum of its inputs modulo two; then f ◦gn is constant. We can, however, show
+a matching composition lower bound when the range of g is boolean:
+
+Lemma 5.2. Let g : C →{0, 1} and f : {0, 1}n →E. Then Adv±(f ◦gn) ≥Adv±(f)Adv±(g).
+
+The proof is given in Appendix C. The above composition lemmas also lead to direct-sum results
+for quantum query complexity:
+
+Corollary 5.3. Let g : D →E, and let gn : Dn →En consist of n independent copies of g, given
+by gn(x1, . . . , xn) =
+�
+g(x1), . . . , g(xn)
+�
+. Then
+
+Q(gn) = Θ
+�
+n Q(g)
+�
+.
+(5.1)
+
+The lower bound Adv±(gn) ≥n Adv±(g) has been shown by [ACLT10]. The corresponding
+upper bound Adv±(gn) ≤n Adv±(g) is a special case of Lemma 5.1, with f the identity function.
+Corollary 5.3 then follows from Theorem 1.1. Let us remark that when E = {0, 1}, the upper
+bound Q(fn) = O
+�
+n Q(f)
+�
+follows from the robust input recovery quantum algorithm [BNRW07,
+Theorem 3]. The same algorithm can be generalized to handle larger E.
+
+Acknowledgements
+
+We thank J´er´emie Roland and Miklos Santha for many helpful conversations on these topics, and
+thank Richard Cleve and Ronald de Wolf for useful comments on an earlier draft. Part of this
+work was done while T.L. was at Rutgers University, supported by an NSF postdoctoral fellowship
+and grant CCF-0728937. R.M. acknowledges support from NSERC and NSF grant CCF-0832787.
+B.R. acknowledges support from NSERC, ARO-DTO and MITACS.
+
+11
+
+
+References
+
+[ACLT10]
+Andris Ambainis, Andrew M. Childs, Fran¸cois Le Gall, and Seiichiro Tani.
+The
+quantum query complexity of certification. Quantum Inf. Comput., 10:181–188, 2010,
+arXiv:0903.1291 [quant-ph].
+
+[ACR+10]
+Andris Ambainis, Andrew M. Childs, Ben W. Reichardt, Robert ˇSpalek, and Shengyu
+Zhang. Any AND-OR formula of size N can be evaluated in time N1/2+o(1) on a
+quantum computer. SIAM J. Comput., 39(6):2513–2530, 2010. Earlier version in
+FOCS’07.
+
+[Amb02]
+Andris Ambainis. Quantum lower bounds by quantum arguments. J. Comput. Syst.
+Sci., 64:750–767, 2002, arXiv:quant-ph/0002066. Earlier version in STOC’00.
+
+[AMRR11] Andris Ambainis, Lo¨ıck Magnin, Martin Roetteler, and J´er´emie Roland. Symmetry-
+assisted adversaries for quantum state generation. In 26th IEEE Conference on Compu-
+tational Complexity, pages 167–177, 2011, arXiv:1012.2112 [quant-ph].
+
+[Bha07]
+Rajendra Bhatia. Positive Definite Matrices. Princeton University Press, Princeton,
+2007.
+
+[BNRW07] Harry Buhrman, Ilan Newman, Hein R¨ohrig, and Ronald de Wolf.
+Robust poly-
+nomials and quantum algorithms.
+Theory Comput. Syst., 40(4):379–395, 2007,
+arXiv:quant-ph/0309220. Earlier version in STACS’05.
+
+[BSS03]
+Howard Barnum, Michael Saks, and Mario Szegedy. Quantum query complexity and
+semidefinite programming. In Proc. 18th IEEE Complexity, pages 179–193, 2003.
+
+[BW02]
+Harry Buhrman and Ronald de Wolf. Complexity measures and decision tree complexity:
+A survey. Theoretical Computer Science, 288(1):21–43, 2002.
+
+[CCJY09]
+Andrew M. Childs, Richard Cleve, Stephen P. Jordan, and David Yeung. Discrete-
+query quantum algorithm for NAND trees. Theory of Computing, 5:119–123, 2009,
+arXiv:quant-ph/0702160.
+
+[CEMM98] Richard Cleve, Artur Ekert, Chiara Macchiavello, and Michele Mosca.
+Quan-
+tum algorithms revisited.
+Proc. R. Soc. London A, 454(1969):339–354, 1998,
+arXiv:quant-ph/9708016.
+
+[CGM+09] Richard Cleve, Daniel Gottesman, Michele Mosca, Rolando D. Somma, and David L.
+Yonge-Mallo. Efficient discrete-time simulations of continuous-time quantum query algo-
+rithms. In Proc. 41st ACM STOC, pages 409–416, 2009, arXiv:0811.4428 [quant-ph].
+
+[FGG08]
+Edward Farhi, Jeffrey Goldstone, and Sam Gutmann.
+A quantum algorithm
+for the Hamiltonian NAND tree.
+Theory of Computing,
+4:169–190,
+2008,
+arXiv:quant-ph/0702144.
+
+[HLˇS07]
+Peter Høyer, Troy Lee, and Robert ˇSpalek. Negative weights make adversaries stronger.
+In Proc. 39th ACM STOC, pages 526–535, 2007, arXiv:quant-ph/0611054.
+
+12
+
+
+[Jor75]
+Camille Jordan.
+Essai sur la g´eom´etrie `a n dimensions.
+Bulletin de la S. M. F.,
+3:103–174, 1875.
+
+[Kit95]
+A. Yu. Kitaev. Quantum measurements and the Abelian stabilizer problem. 1995,
+arXiv:quant-ph/9511026.
+
+[LMSS07]
+Nati Linial, Shahar Mendelson, Gideon Schechtman, and Adi Shraibman. Complexity
+measures of sign matrices. Combinatorica, 27:439–463, 2007.
+
+[Lov03]
+L´aszl´o Lov´asz. Semidefinite programs and combinatorial optimization. In B. A. Reed
+and C. Linhares Sales, editors, Recent Advances in Algorithms and Combinatorics,
+volume 11 of CMS Books Math., pages 137–194. Springer, 2003.
+
+[LR11]
+Troy Lee and J´er´emie Roland. A strong direct product theorem for quantum query
+complexity. 2011, arXiv:1104.4468 [quant-ph].
+
+[LS07]
+Troy Lee and Adi Shraibman. Lower bounds in communication complexity. Foundations
+and Trends in Theoretical Computer Science, 3(4):263–399, 2007.
+
+[LS09]
+Nati Linial and Adi Shraibman. Lower bounds in communication complexity based
+on factorization norms. Random Structures and Algorithms, 34:368–394, 2009. Earlier
+version in STOC’07.
+
+[LSˇS08]
+Troy Lee, Adi Shraibman, and Robert ˇSpalek. A direct product theorem for discrepancy.
+In Proc. 23rd Conference on Computational Complexity, pages 71–80, 2008.
+
+[MNRS07] Fr´ed´eric Magniez, Ashwin Nayak, J´er´emie Roland, and Miklos Santha. Search via quan-
+tum walk. In Proc. 39th ACM STOC, pages 575–584, 2007, arXiv:quant-ph/0608026.
+
+[MNRS09] Fr´ed´eric Magniez, Ashwin Nayak, Peter C. Richter, and Miklos Santha. On the hitting
+times of quantum versus random walks. In Proc. 20th ACM-SIAM SODA, pages 86–95,
+2009, arXiv:0808.0084 [quant-ph].
+
+[NWZ09]
+Daniel Nagaj, Pawel Wocjan, and Yong Zhang. Fast amplification of QMA. Quantum
+Inf. Comput., 9:1053–1068, 2009, arXiv:0904.1549 [quant-ph].
+
+[Rei09]
+Ben W. Reichardt.
+Span programs and quantum query complexity: The general
+adversary bound is nearly tight for every boolean function. 2009, arXiv:0904.2759
+[quant-ph]. Extended abstract in Proc. 50th IEEE FOCS, pages 544–551, 2009.
+
+[Rei11]
+Ben W. Reichardt. Reflections for quantum query algorithms. In Proc. 22nd ACM-
+SIAM Symp. on Discrete Algorithms (SODA), pages 560–569, 2011, arXiv:1005.1601
+[quant-ph].
+
+[RˇS08]
+Ben W. Reichardt and Robert ˇSpalek. Span-program-based quantum algorithm for
+evaluating formulas. In Proc. 40th ACM STOC, pages 103–112, 2008, arXiv:0710.2630
+[quant-ph].
+
+[Shi02]
+Yaoyun Shi. Quantum lower bounds for the collision and the element distinctness
+problems. In Proc. 43rd IEEE FOCS, pages 513–519, 2002, arXiv:quant-ph/0112086.
+
+13
+
+
+[ˇSpa08]
+Robert ˇSpalek. The multiplicative quantum adversary. In Proc. 23rd IEEE Complexity,
+pages 237–248, 2008, arXiv:quant-ph/0703237.
+
+[Sze04]
+Mario Szegedy. Quantum speed-up of Markov chain based algorithms. In Proc. 45th
+IEEE FOCS, pages 32–41, 2004.
+
+[Tsi87]
+B. S. Tsirelson. Quantum analogues of the Bell inequalities: The case of two spatially
+separated domains. J. Soviet Math., 36:557–570, 1987.
+
+[Ung08]
+Falk Unger. Noise in classical and quantum computation and non-locality. PhD thesis,
+University of Amsterdam and CWI, 2008.
+
+[YM11]
+David Yonge-Mallo. Adversary lower bounds in the Hamiltonian oracle model. 2011,
+arXiv:1108.2479 [quant-ph].
+
+Centre for Quantum Technologies
+E-mail address: troyjlee@gmail.com
+
+Institute for Quantum Computing, University of Waterloo
+E-mail address: r3mittal@uwaterloo.ca
+
+Institute for Quantum Computing, University of Waterloo
+E-mail address: breic@iqc.ca
+
+Google, Inc.
+E-mail address: spalek@google.com
+
+Rutgers University
+E-mail address: szegedy@cs.rutgers.edu
+
+A
+Properties of the filtered γ2 norm
+
+For reference, we list several useful properties of the filtered γ2 norm. First, we give an alternative
+formulation that explains why γ2 is also known as the Schur product operator norm:
+
+Lemma A.1. The γ2 and filtered γ2 norms can equivalently be expressed by
+
+γ2(A) = max
+M
+�
+∥A ◦M∥: ∥M∥≤1
+�
+(A.1)
+
+γ2(A|Z) = max
+M
+�
+∥A ◦M∥: max
+j
+∥Zj ◦M∥≤1
+�
+.
+(A.2)
+
+Proof. Both of these equations can be proven in the same way: Start with Eq. (2.1) or (3.1) for
+γ2(A) or γ2(A|Z), respectively, and take the dual. The semi-definite program given by Eq. (2.1) is
+always strictly feasible and that of Eq. (3.1) is strictly feasible provided that whenever Ax,y ̸= 0
+there is some j with (Zj)x,y ̸= 0, i.e., provided the maximum in (A.2) is finite. Thus by the duality
+principle [Lov03, Theorem 3.4] the primal and dual formulations are equal and the optimum is
+achieved.
+
+Lemma A.2. The quantity γ2(·|Z) is a norm when restricted to arguments supported on the union
+of the supports of the Zj. For matrices B, Y1, . . . , Yn of the appropriate dimensions it satisfies:
+
+14
+
+
+1. If A ̸= 0, then γ2(A|{A}) = 1. For J the all-ones matrix, γ2(A|{J}) = γ2(A).
+
+2. γ2(A|Z) = 0 if and only if A = 0. γ2(A|Z) = ∞, i.e., Eq. (3.1) is infeasible, if and only if
+there exists an entry (x, y) such that Ax,y ̸= 0 and (Zj)x,y = 0 for all j.
+
+3. Positive scalability: γ2(sA|Z) = |s|γ2(A|Z) and γ2(A|{sZ1, . . . , sZn}) =
+1
+|s|γ2(A|Z) for s ̸= 0.
+
+4. Triangle inequality: γ2(A + B|Z) ≤γ2(A|Z) + γ2(B|Z).
+
+5. γ2(A|Z) is invariant under duplicating corresponding rows or columns of A and all Zj.
+
+6. γ2(A|Y ∪Z) ≤γ2(A|Z). This is an equality if each Yi is a restriction of some Zj to a
+rectangular submatrix.
+
+7. Provided �
+j |pj| = 1, γ2(A|Z) = γ2(A|Z ∪{�
+j pjZj}). (Thus the second argument in γ2(A|Z)
+can be thought of as a convex set centered at the origin, where only the extremal points matter.)
+
+8. If the supports of Z1 and Z2 are row- and column-disjoint, then γ2(A|Z) = γ2(A|{Z1 + Z2, Z3, . . . , Zn}).
+
+9. γ2(A ◦B|Z) ≤γ2(A|Z)γ2(B).
+
+10. γ2(A ◦B|{Zj ◦B}) ≤γ2(A|Z) ≤γ2(A|{Zj ◦B})γ2(B).
+
+11. A composition property: γ2(A|Z) ≤γ2(A|Y ) maxj γ2(Yj|Z).
+
+12. A direct-sum property: γ2(A ⊕B|{Yj ⊕Zj}) = max{γ2(A|Y ), γ2(B|Z)}.
+
+13. A tensor-product property: γ2(A ⊗B|Y ⊗Z) = γ2(A|Y )γ2(B|Z), where Y ⊗Z = {Yi ⊗Zj},
+all pairwise tensor products.
+
+Proof. By items (2), (3) and (4), γ2(·|Z) is a norm on arguments restricted to the support of the Zj.
+The proofs of the first three properties follow easily from the definition of filtered γ2 norm, Eq. (3.1).
+Therefore we begin by showing the triangle inequality, property (4).
+
+4. Given optimal vector solutions to Eq. (3.1) for γ2(A|Z) and for γ2(B|Z), simply concatenate
+corresponding vectors to obtain a solution for γ2(A + B|Z), with objective value at most
+γ2(A|Z) + γ2(B|Z).
+
+5. Invariance of γ2(A|Z) under copying rows follows by copying the associated solution vectors.
+
+6. Any solution to Eq. (A.2) for γ2(A|Y ∪Z) also works for γ2(A|Z); hence γ2(A|Z) ≥γ2(A|Y ∪Z).
+However, if Yi is a submatrix restriction of Zj then the constraint ∥Yi ◦M∥≤1 is redundant
+to ∥Zj ◦M∥≤1; hence adding Yi to Z does not affect γ2(A|Z).
+
+7. If maxj ∥Zj ◦M∥≤1, then
+���
+j pjZj ◦M
+��≤1; again, the new constraint is redundant.
+
+8. Assuming without loss of generality that in a solution to γ2(A|Z) the vectors |uxj⟩(respec-
+tively, |vyj⟩) are nonzero only on rows (columns) where Zj has nonzero entries, concate-
+nating the vectors for Z1 and for Z2 gives a solution to γ2(A|{Z1 + Z2, Z3, . . . , Zn}). Thus
+γ2(A|{Z1 + Z2, Z3, . . . , Zn}) ≤γ2(A|Z). For the other direction, divide the vectors for Z1 +Z2
+according to whether they correspond to a nontrivial row or column of Z1, or of Z2.
+
+15
+
+
+9. Begin with an optimal solution {|ux⟩, |vy⟩} to Eq. (2.1) for γ2(B), and an optimal solution
+{|uxj⟩, |vyj⟩} to Eq. (3.1) for γ2(A|Z). The tensor products {|uxj⟩⊗|ux⟩, |vyj⟩⊗|vy⟩} give a
+solution for γ2(A ◦B|Z), with objective value at most γ2(A|Z)γ2(B).
+
+10. The second inequality in property (10) works in the same way as (9); the tensor product of
+vector solutions for γ2(B) and γ2(A|{Zj ◦B}) is a solution for γ2(A|Z). The first inequality
+follows since any vector solution for γ2(A|Z) also works for γ2(A ◦B|{Zj ◦B}).
+
+11. Let {|uxj⟩, |vyj⟩} be an optimal solution to Eq. (3.1) for γ2(A|Y ) and for each j let {|uj
+xi⟩, |vj
+yi⟩}
+be an optimal solution for γ2(Yj|Z). These vectors satisfy
+
+γ2(A|Y ) ≥max
+��
+
+j
+∥|uxj⟩∥2,
+�
+
+j
+∥|vyj⟩∥2�
+γ2(Yj|Z) ≥max
+��
+
+i
+∥|uj
+xi⟩∥2,
+�
+
+i
+∥|vj
+yi⟩∥2�
+
+Ax,y =
+�
+
+j
+(Yj)x,y⟨uxj|vyj⟩
+(Yj)x,y =
+�
+
+i
+(Zi)x,y⟨uj
+xi|vj
+yi⟩.
+
+Combining the last two equations gives Ax,y = �
+i(Zi)x,y
+�
+j ⟨uxj|vyj⟩⟨uj
+xi|vj
+yi⟩. Thus the
+
+vectors ⊕j(|uxj⟩⊗|uj
+xi⟩) and ⊕j(|vyj⟩⊗|vj
+yi⟩) give a solution for γ2(A|Z), with objective value at
+
+most max{maxx
+�
+i,j ∥|uxj⟩∥2∥|uj
+xi⟩∥2, maxy
+�
+i,j ∥|vyj⟩∥2∥|vj
+yi⟩∥2} ≤γ2(A|Y ) maxj γ2(Yj|Z).
+
+12. A union of the vectors for γ2(A|Y ) and γ2(B|Z) gives a vector solution for γ2(A ⊕B|Yj ⊕Zj).
+
+13. The inequality γ2(A ⊗B|Y ⊗Z) ≤γ2(A|Y )γ2(B|Z) is straightforward; if {|uxi⟩, |vyi⟩} form
+an optimal vector solution for γ2(A|Y ) and {|µαj⟩, |νβj⟩} form an optimal vector solution for
+γ2(B|Z), then the vectors |u(x,α)(i,j)⟩= |uxi⟩⊗|µαj⟩and |v(y,β)(i,j)⟩= |vyi⟩⊗|νβj⟩satisfy
+�
+
+i,j
+(Yi ⊗Zj)(x,α),(y,β)⟨u(x,α)(i,j)|v(y,β)(i,j)⟩=
+�
+
+i
+(Yi)x,y⟨uxi|vyi⟩
+�
+
+j
+(Zj)α,β⟨µαj|νβj⟩= Ax,yBα,β
+
+and therefore give a solution for γ2(A ⊗B|Y ⊗Z), with objective value at most γ2(A|Y )γ2(B|Z).
+
+For the other direction of the tensor-product inequality, let M be an optimal solution to
+the dual SDP Eq. (A.2) for γ2(A|Y ) and let N be an optimal solution to the dual SDP
+for γ2(B|Z). We claim that M ⊗N is a solution to the dual SDP for γ2(A ⊗B|Y ⊗Z).
+Indeed, for all i, j, ∥(Yi ⊗Zj) ◦(M ⊗N)∥= ∥(Yi ◦M) ⊗(Zj ◦N)∥= ∥Yi ◦M∥∥Zj ◦N∥≤1.
+The objective value is ∥(A ⊗B) ◦(M ⊗N)∥= γ2(A|Y )γ2(B|Z). Thus γ2(A|Y )γ2(B|Z) ≤
+γ2(A ⊗B|Y ⊗Z).
+
+For completeness, we also present the dual norm γ∗
+2( · |Z). Let ˆA =
+�0 A
+A† 0
+�
+. Then
+
+γ∗
+2(A|Z) =
+max
+B:γ2(B|Z)=1⟨A, B⟩
+
+= max
+{Yj⪰0}
+
+�1
+
+2
+
+�
+
+j
+⟨Yj, ˆZj ◦ˆA⟩:
+�
+
+j
+Yj ◦1 = 1
+�
+
+= min
+Ω
+
+�
+1
+2Tr Ω: Ω◦1 = Ωand ∀j, Ω−ˆA ◦ˆZj ⪰0
+�
+.
+
+(A.3)
+
+When A and the Zj are Hermitian, then γ∗
+2(A|Z) = minΩ{Tr Ω: Ω◦1 = Ωand ∀j, Ω± A ◦Zj ⪰0},
+a slightly simpler form that we will use below in Appendix C. The dual norm γ∗
+2 satisfies several sim-
+ilar properties to γ2, such as γ∗
+2(A|Z) ≤γ∗
+2(A|Y ∪Z), γ∗
+2(A|Z) = γ∗
+2(A|Z ∪{�
+j pjZj}) if �
+j |pj| =
+
+16
+
+
+1, and γ∗
+2(A ⊗B|Y ⊗Z) = γ∗
+2(A|Y )γ∗
+2(B|Z).
+It also satisfies γ∗
+2(A ◦B|Z) = γ∗
+2(A|Z ◦B) ≤
+γ∗
+2(A|Z)γ2(B). We leave the proofs of these claims to the reader.
+
+B
+Application to continuous-time query complexity
+
+The first step of the proof of Cleve et al. [CGM+09] is to show that the continuous-time model is
+equivalent to the fractional quantum query model, up to constant factors. For completeness, we now
+show that γ2(σ −ρ|∆) remains a lower bound on the fractional query complexity, up to a constant.
+Together with our upper bound, this gives Theorem 4.10. Yonge-Mallo [YM11] recently published
+a proof from 2007 which directly shows the general adversary bound is a lower bound on the
+continuous-time query model, and this was also independently observed by Landahl (unpublished).
+Let us first describe the fractional query model. For simplicity, we restrict to the case of boolean
+input. Here the λ-fractional query operator Ox(λ) behaves as Ox(λ)|i⟩|z⟩= eiλπxi|i⟩|z⟩. Thus the
+usual query operator is obtained with λ = 1. The query cost is λ times the number of applications
+of Ox.
+As before the key step is to bound how much a single query can change the distance.
+
+Lemma B.1. Suppose that σ can be reached from ρ with one λ-fractional query. Then γ2(ρ −σ|∆) ≤
+λπ
+√
+
+2.
+
+Proof. Let ρi
+x be the projection of ρx onto the part of the query register holding i. Then
+
+(ρ −σ)x,y =
+
+n
+�
+
+j=1
+
+�
+⟨ρj
+x|ρj
+y⟩−⟨ρj
+x|e−iλπxjeiλπyj|ρj
+y⟩
+�
+
+=
+�
+
+j:xj̸=yj
+⟨ρj
+x|ρj
+y⟩(1 −eiλπ(yj−xj))
+
+=
+�
+
+j:xj̸=yj
+⟨ρj
+x|ρj
+y⟩
+�
+(1 −cos(λπ)) + i(xj −yj) sin(λπ)
+�
+.
+
+Now we define positive semi-definite matrices {Pj}j∈[n] satisfying ρ −σ = �
+j Pj ◦∆j. For this let
+
+us define a couple of auxiliary matrices. Let Mj(x, y) = ⟨ρj
+x|ρj
+y⟩and let Ej(x, y) = ⟨exj|eyj⟩, where
+eb = b + i(1 −b) for b ∈{0, 1}. From this definition it is clear that Ej is positive semi-definite, and
+note that
+
+Ej(x, y) =
+
+�
+i(xj −yj)
+if xj ̸= yj
+1
+otherwise .
+
+Finally, we can define Pj = (1 −cos(λπ))Mj + sin(λπ)Mj ◦Ej. Then Pj is positive semi-definite,
+and satisfies ρ −σ = �
+j Pj ◦∆j. As �
+j∈[n] Mj(x, x) = 1 for all x we can upper bound the cost
+maxx
+�
+j∈[n] Pj(x, x) by p(λ) = (1 −cos(λπ)) + sin(λπ). Note that p(0) = 0 and the maximum value
+of the derivative of p(λ) is π
+√
+
+2. Thus for λ ≥0 we have p(λ) ≤λπ
+√
+
+2.
+
+C
+Function composition
+
+In this section we prove the composition lemmas, Lemmas 5.1 and 5.2.
+
+17
+
+
+We begin with some notation. Let g : C →D where C ⊆Cm and f : Dn →E for finite sets C, D
+and E. Let G = {δg(x),g(y)}x,y, and F = {δf(x),f(y)}x,y. For a string x ∈Cn we write x = (x1, . . . , xn)
+where each xi ∈C, and we let ˜x = g(x1) · · · g(xn) ∈Dn. For a |D|n-by-|D|n matrix A, define a
+|C|n-by-|C|n matrix ˜A by ˜Ax,y = A˜x,˜y. With this notation, ˜∆p = J⊗(p−1) ⊗(J −G) ⊗J⊗(n−p), and
+the filtering matrices for the composed function f ◦gn are ∆(p,q) = J⊗(p−1) ⊗∆q ⊗J⊗(n−p). To
+shorten expressions like these, we will use the notation (B)p ⊗�
+i̸=p Ai = A⊗p−1 ⊗B ⊗A⊗n−p.
+
+Proof of Lemma 5.1. The lemma is a consequence of the composition property (11) from Lemma A.2,
+together with several other properties of the filtered γ2 norm. Let ϝ = J −F, so Adv±(f ◦gn) =
+γ2(˜ϝ|{∆(p,q) ◦˜ϝ}). We have
+
+γ2(˜ϝ|{∆(p,q) ◦˜ϝ}) ≤γ2(˜ϝ|{ ˜∆p ◦˜ϝ}) max
+ρ
+γ2( ˜∆ρ ◦˜ϝ|{∆(p,q) ◦˜ϝ})
+property (11)
+
+≤γ2(ϝ|{∆p ◦ϝ}) max
+ρ
+γ2( ˜∆ρ|{∆(ρ,q) : q ∈[m]})
+(5, 10, 6)
+
+= Adv±(f)γ2(J −G|∆) .
+(1, 13)
+
+The last step uses γ2((J −G)ρ ⊗�
+i̸=ρ Ji|{(∆q)ρ ⊗�
+i̸=ρ Ji}q) = γ2(J −G|∆)γ2(J|J)n−1.
+
+Proof of Lemma 5.2. For the lower bound, we will use the dual formulation of the adversary
+bound. Either by writing Eq. (3.3) as an SDP and taking the dual or by noting that Adv±(g) =
+maxW {⟨J −G, W⟩: γ∗
+2(W|∆◦(J −G)) ≤1} and using Eq. (A.3), we find
+
+Adv±(g) = maximize
+Ω,W
+⟨J, W⟩
+
+subject to
+Ω◦1 = Ω
+
+Tr(Ω) = 1
+
+W ◦G = 0
+
+Ω± W ◦∆j ⪰0 .
+
+(C.1)
+
+We first note some basic properties of an optimal dual solution Ω, W.
+
+Claim C.1. Let g : C →D, where C ⊆Cm. Then there is an optimal solution Ω, W to Eq. (C.1) that
+satisfies Adv±(g)Ω±W ⪰0. If D = {0, 1} we may also assume �
+x:g(x)=1 Ωx,x = �
+x:g(x)=0 Ωx,x = 1
+
+2.
+
+Proof. Let Ω, W be an optimal solution to Eq. (C.1) and let dg = Adv±(g) = ⟨W, J⟩. Note that
+dgΩ+ W ⪰0 if and only if dgΩ−W ⪰0 since Ωis diagonal and W = W ◦(J −G) is bipartite.
+Suppose that dgΩ−W �0. Then there exists φ ⪰0, such that ⟨φ, W⟩> dg⟨φ, Ω⟩. By normalizing φ,
+we may assume that ⟨φ, Ω⟩= 1. This shows φ ◦Ω, φ ◦W is a feasible solution for g with objective
+value greater than dg, a contradiction.
+Now for the second part. We may reorder the rows and columns of Ω, W so that all elements x
+with g(x) = 0 come first, then all elements y with g(y) = 1. Then the matrices Ω± W ◦∆i have the
+form
+�Ω0
+0
+0
+Ω1
+
+�
+±
+�0
+X
+X†
+0
+
+�
+◦∆i ,
+
+where W =
+�0
+X
+X† 0
+�
+. Thus for any c > 0,
+�cΩ0
+0
+0
+1
+cΩ1
+
+�
+±
+�0
+X
+X†
+0
+
+�
+◦∆i ⪰0 .
+
+18
+
+
+If we did not originally have Tr(Ω0) = Tr(Ω1) then choosing c =
+�
+
+Tr(Ω1)
+Tr(Ω0) to balance them will result
+in a solution with smaller trace, a contradiction to the optimality of Ω, W.
+
+Notice that because of the second item we have that
+�
+
+x,y
+g(x)=a,g(y)=b
+
+Adv±(g)Ωx,y + Wx,y = Adv±(g)/2
+(C.2)
+
+for any a, b ∈{0, 1}. This is the main property of boolean functions we use.
+Now let df = Adv±(f), dg = Adv±(g), and let Λ, V and Ω, W be optimal solutions to Eq. (C.1)
+for f and g, respectively, satisfying the conditions of Claim C.1 as appropriate. Our proposed solution
+to Eq. (C.1) for the composed function f ◦gn is the diagonal matrix dn−1
+g
+˜Λ ◦Ω⊗n and weight matrix
+˜V ◦(dgΩ+ W)⊗n. Notice that the weight matrix satisfies the constraint ˜F ◦
+�˜V ◦(dgΩ+ W)⊗n�
+= 0
+as F ◦V = 0.
+Let us check the objective value.
+
+�
+J, ( ˜V ◦(dgΩ+ W)⊗n)
+�
+=
+�
+
+a,b∈{0,1}n
+f(a)̸=f(b)
+
+Va,b
+�
+
+x,y
+˜x=a,˜y=b
+
+�
+
+i
+
+�
+dgΩxi,yi + Wxi,yi
+�
+
+=
+�
+
+a,b∈{0,1}n
+f(a)̸=f(b)
+
+Va,b
+�
+
+i
+
+�
+
+xi,yi
+
+g(xi)=ai,g(yi)=bi
+
+�
+dgΩxi,yi + Wxi,yi
+�
+
+= df
+�dg
+
+2
+
+�n
+.
+
+The last line follows by Eq. (C.2).
+It remains to show that dn−1
+g
+˜Λ ◦Ω⊗n ± ˜V ◦(dgΩ+ W)⊗n ◦∆(p,q) ⪰0 for all (p, q).
+As
+Tr(dn−1
+g
+˜Λ ◦Ω⊗n) = dn−1
+g
+/2n by Claim C.1, this will complete the proof.
+We know that dgΩ+ W ⪰0, Ω+ W ◦∆q ⪰0. Also ˜Λ ± ˜V ◦˜∆p ⪰0 follows from Λ ± V ◦∆p ⪰0
+as they are equal up to repetition of some rows and columns. Thus
+
+0 ⪯(˜Λ ± ˜V ◦˜∆p) ◦
+�
+(Ω+ W ◦∆q)p ⊗
+�
+
+i̸=p
+(dgΩi + Wi)
+�
+
+= dn−1
+g
+˜Λ ◦Ω⊗n ± ˜V ◦˜∆p ◦
+�
+(Ω+ W ◦∆q)p ⊗
+�
+
+i̸=p
+(dgΩi + Wi)
+�
+.
+
+This equality follows as ˜Λx,y = 0 unless ˜x = ˜y, meaning that g(xi) = g(yi) for all i. On the other
+hand, Wxi,yi = 0 if g(xi) = g(yi), which kills all terms involving ˜Λ and W.
+Now substitute ˜∆p = (J −G)p ⊗�
+i̸=p Ji and simplify (J −G) ◦(Ω+ W ◦∆q) = (dgΩ+ W) ◦∆q
+since (J −G) ◦Ω= ∆q ◦Ω= G ◦W = 0. Since ∆(p,q) = (∆q)p ⊗�
+i̸=p Ji, this gives dn−1
+g
+˜Λ ◦Ω⊗n ±
+˜V ◦(dgΩ+ W)⊗n ◦∆(p,q) ⪰0, as desired.
+
+19
+
+

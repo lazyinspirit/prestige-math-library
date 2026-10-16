@@ -1,0 +1,3824 @@
+Lecture Notes for Ph219/CS219:
+Quantum Information
+Chapter 2
+
+John Preskill
+California Institute of Technology
+
+Updated July 2015
+
+
+Contents
+
+2
+Foundations I: States and Ensembles
+3
+2.1
+Axioms of quantum mechanics
+3
+2.2
+The Qubit
+7
+2.2.1 Spin-1
+
+2
+8
+2.2.2 Photon polarizations
+14
+2.3
+The density operator
+16
+2.3.1 The bipartite quantum system
+16
+2.3.2 Bloch sphere
+21
+2.4
+Schmidt decomposition
+23
+2.4.1 Entanglement
+25
+2.5
+Ambiguity of the ensemble interpretation
+26
+2.5.1 Convexity
+26
+2.5.2 Ensemble preparation
+28
+2.5.3 Faster than light?
+30
+2.5.4 Quantum erasure
+31
+2.5.5 The HJW theorem
+34
+2.6
+How far apart are two quantum states?
+36
+2.6.1 Fidelity and Uhlmann’s theorem
+36
+2.6.2 Relations among distance measures
+38
+2.7
+Summary
+41
+2.8
+Exercises
+43
+
+2
+
+
+2
+
+Foundations I: States and Ensembles
+
+2.1 Axioms of quantum mechanics
+
+In this chapter and the next we develop the theory of open quantum
+systems. We say a system is open if it is imperfectly isolated, and therefore
+exchanges energy and information with its unobserved environment. The
+motivation for studying open systems is that all realistic systems are open.
+Physicists and engineers may try hard to isolate quantum systems, but
+they never completely succeed.
+Though our main interest is in open systems we will begin by recalling
+the theory of closed quantum systems, which are perfectly isolated. To
+understand the behavior of an open system S, we will regard S combined
+with its environment E as a closed system (the whole “universe”), then
+ask how S behaves when we are able to observe S but not E.
+Quantum theory is a mathematical model of the physical world. For
+the case of closed systems we can characterize the model by stating five
+axioms; these specify how to represent states, observables, measurements,
+and dynamics, and also how to combine two systems to obtain a composite
+system.
+
+Axiom 1.
+States.
+A state is a complete description of a physical
+system. In quantum mechanics, a state is a ray in a Hilbert space.
+
+What is a Hilbert space?
+
+a) It is a vector space over the complex numbers C.
+Vectors will be
+denoted |ψ⟩(Dirac’s ket notation).
+
+b) It has an inner product ⟨ψ|ϕ⟩that maps an ordered pair of vectors to
+C, and that has the properties:
+
+i) Positivity: ⟨ψ|ψ⟩> 0 for |ψ⟩̸= 0.
+
+3
+
+
+4
+2 Foundations I: States and Ensembles
+
+ii) Linearity: ⟨ϕ|(a|ψ1⟩+ b|ψ2⟩) = a⟨ϕ|ψ1⟩+ b⟨ϕ|ψ2⟩.
+
+iii) Skew symmetry: ⟨ϕ|ψ⟩= ⟨ψ|ϕ⟩∗.
+
+(The ∗denotes complex conjugation.)
+
+c) It is complete in the norm ||ψ|| = ⟨ψ|ψ⟩1/2.
+
+(Completeness is an important proviso in infinite-dimensional function
+spaces, since it ensures the convergence of certain eigenfunction expan-
+sions.
+But mostly we will be content to work with finite-dimensional
+inner-product spaces.)
+What is a ray?
+It is an equivalence class of vectors that differ by
+multiplication by a nonzero complex scalar. For any nonzero ray, we can
+by convention choose a representative of the class, denoted |ψ⟩, that has
+unit norm:
+⟨ψ|ψ⟩= 1.
+(2.1)
+
+Thus states correspond to normalized vectors, and the overall phase of
+the vector has no physical significance: |ψ⟩and eiα|ψ⟩describe the same
+state, where |eiα| = 1.
+Since every ray corresponds to a possible state, given two states |ϕ⟩, |ψ⟩,
+another state can be constructed as the linear superposition of the two,
+a|ϕ⟩+ b|ψ⟩. The relative phase in this superposition is physically sig-
+nificant; we identify a|ϕ⟩+ b|ϕ⟩with eiα(a|ϕ⟩+ b|ψ⟩) but not with
+a|ϕ⟩+ eiαb|ψ⟩.
+We use the notation ⟨ψ| (Dirac’s bra notation) for a linear function (a
+dual vector) that takes vectors to complex numbers, defined by |ϕ⟩→
+⟨ψ|ϕ⟩.
+
+Axiom 2.
+Observables. An observable is a property of a physical
+system that in principle can be measured. In quantum mechanics,
+an observable is a self-adjoint operator.
+
+An operator is a linear map taking vectors to vectors,
+
+A : |ψ⟩�→A|ψ⟩,
+A (a|ψ⟩+ b|ϕ⟩) = aA|ψ⟩+ bA|ϕ⟩.
+(2.2)
+
+(We will often denote operators by boldface letters.) The adjoint A† of
+the operator A is defined by
+
+⟨ϕ|Aψ⟩= ⟨A†ϕ|ψ⟩,
+(2.3)
+
+for all vectors |ϕ⟩, |ψ⟩(where here A|ψ⟩has been denoted as |Aψ⟩). A
+is self-adjoint if A = A†, or in other words, if ⟨ϕ|A|ψ⟩= ⟨ψ|A|ϕ⟩∗for all
+vectors |ϕ⟩and |ψ⟩. If A and B are self adjoint, then so is A+B (because
+(A + B)† = A† + B†), but (AB)† = B†A†, so that AB is self adjoint
+
+
+2.1 Axioms of quantum mechanics
+5
+
+only if A and B commute. Note that AB + BA and i(AB −BA) are
+always self-adjoint if A and B are.
+A self-adjoint operator in a Hilbert space H has a spectral representa-
+tion – its eigenstates form a complete orthonormal basis in H. We can
+express a self-adjoint operator A as
+
+A =
+�
+
+n
+anEn.
+(2.4)
+
+Here each an is an eigenvalue of A, and En is the corresponding orthog-
+onal projection onto the space of eigenvectors with eigenvalue an. The
+En’s satisfy
+
+EnEm
+=
+δn,mEn.
+
+E†
+n
+=
+En.
+(2.5)
+
+The orthogonal projector onto the one-dimensional space spanned by the
+vector |ψ⟩may be expressed as |ψ⟩⟨ψ|, where ⟨ψ| is the bra that annihi-
+lates vectors orthogonal to |ψ⟩. Therefore, an alternative notation for the
+spectral representation of A is
+
+A =
+�
+
+n
+|n⟩an⟨n|,
+(2.6)
+
+where {|n⟩} is the orthonormal basis of eigenstates of A, with A|n⟩=
+an|n⟩.
+(For unbounded operators in an infinite-dimensional space, the defini-
+tion of self-adjoint and the statement of the spectral theorem are more
+subtle, but this need not concern us.)
+
+Axiom 3. Measurement. A measurement is a process in which in-
+formation about the state of a physical system is acquired by an
+observer. In quantum mechanics, the measurement of an observ-
+able A prepares an eigenstate of A, and the observer learns the
+value of the corresponding eigenvalue. If the quantum state just
+prior to the measurement is |ψ⟩, then the outcome an is obtained
+with a priori probability
+
+Prob(an) = ∥En|ψ⟩∥2 = ⟨ψ|En|ψ⟩;
+(2.7)
+
+if the outcome an is attained, then the (normalized) quantum state
+just after the measurement is
+
+En|ψ⟩
+∥En|ψ⟩∥.
+(2.8)
+
+
+6
+2 Foundations I: States and Ensembles
+
+If the measurement is immediately repeated, then according to this rule
+the same outcome is obtained again, with probability one. If many iden-
+tically prepared systems are measured, each described by the state |ψ⟩,
+then the expectation value of the outcomes is
+
+⟨a⟩≡
+�
+
+n
+anProb(an) =
+�
+
+n
+an⟨ψ|En|ψ⟩= ⟨ψ|A|ψ⟩.
+(2.9)
+
+Axiom 4. Dynamics. Dynamics describes how a state evolves over
+time. In quantum mechanics, the time evolution of a closed system
+is described by a unitary operator.
+
+In the Schr¨odinger picture of dynamics, if the initial state at time t is
+|ψ(t⟩, then the final state |ψ(t′)⟩at time t′ can be expressed as
+
+|ψ(t′)⟩= U(t′, t)|ψ(t)⟩|ψ(t)⟩,
+(2.10)
+
+where U(t′, t) is the unitary time evolution operator. Infinitesimal time
+evolution is governed by the Schr¨odinger equation
+
+d
+dt|ψ(t)⟩= −iH(t)|ψ(t)⟩,
+(2.11)
+
+where H(t) is a self-adjoint operator, called the Hamiltonian of the sys-
+tem. (The Hamiltonian has the dimensions of energy; we have chosen
+units in which Planck’s constant ℏ= h/2π = 1, so that energy has the
+dimensions of inverse time.) To first order in the infinitesimal quantity
+dt, the Schr¨odinger equation can be expressed as
+
+|ψ(t + dt)⟩= (I −iH(t)dt)|ψ(t)⟩.
+(2.12)
+
+Thus the operator U(t + dt, t) ≡I −iH(t)dt is unitary; because H is
+self-adjoint it satisfies U †U = 1 to linear order in dt. Since a product of
+unitary operators is unitary, time evolution governed by the Schr¨odinger
+equation over a finite interval is also unitary. In the case where H is time
+independent we may write U(t′, t) = e−i(t′−t)H.
+Our final axiom relates the description of a composite quantum system
+AB to the description of its component parts A and B.
+
+Axiom 5.
+Composite Systems. If the Hilbert space of system A
+is HA and the Hilbert space of system B is HB, then the Hilbert
+space of the composite systems AB is the tensor product HA ⊗HB.
+If system A is prepared in the state |ψ⟩A and system B is prepared
+in the state |ϕ⟩B, then the composite system’s state is the product
+|ψ⟩A ⊗|ϕ⟩B.
+
+
+2.2 The Qubit
+7
+
+What is a tensor product of Hilbert spaces?
+If {|i⟩A} denotes an or-
+thonormal basis for HA and {|µ⟩B} a basis for HB, then the states
+|i, µ⟩AB ≡|i⟩A ⊗|µ⟩B are a basis for HA ⊗HB, where the inner product
+on HA ⊗HB is defined by
+
+AB⟨i, µ|j, ν⟩AB = δijδµν.
+(2.13)
+
+The tensor product operator M A ⊗N B is the operator that applies M A
+to system A and N B to system B. Its action on the orthonormal basis
+|i, µ⟩AB is
+
+M A ⊗N B|i, µ⟩AB = M A|i⟩A ⊗N B|µ⟩B =
+�
+
+j,ν
+|j, ν⟩AB (MA)ji (NB)νµ .
+
+(2.14)
+An operator that acts trivially on system B can be denoted M A ⊗IB,
+where IB is the identity on HB, and an operator that acts trivially on
+system A can be denoted IA ⊗N B.
+These five axioms provide a complete mathematical formulation of
+quantum mechanics. We immediately notice some curious features. One
+oddity is that the Schr¨odinger equation is linear, while we are accustomed
+to nonlinear dynamical equations in classical physics. This property seems
+to beg for an explanation. But far more curious is a mysterious dualism;
+there are two quite distinct ways for a quantum state to change. On the
+one hand there is unitary evolution, which is deterministic. If we specify
+the initial state |ψ(0)⟩, the theory predicts the state |ψ(t)⟩at a later time.
+But on the other hand there is measurement, which is probabilistic.
+The theory does not make definite predictions about the measurement
+outcomes; it only assigns probabilities to the various alternatives. This is
+troubling, because it is unclear why the measurement process should be
+governed by different physical laws than other processes.
+The fundamental distinction between evolution and measurement, and
+in particular the intrinsic randomness of the measurement process, is
+sometimes called the measurement problem of quantum theory. Seeking a
+more pleasing axiomatic formulation of quantum theory is a worthy task
+which may eventually succeed. But these five axioms correctly account
+for all that we currently know about quantum physics, and provide the
+foundation for all that follows in this book.
+
+2.2 The Qubit
+
+The indivisible unit of classical information is the bit, which takes one
+of the two possible values {0, 1}.
+The corresponding unit of quantum
+information is called the “quantum bit” or qubit. It describes a state in
+the simplest possible quantum system.
+
+
+8
+2 Foundations I: States and Ensembles
+
+The smallest nontrivial Hilbert space is two-dimensional. We may de-
+note an orthonormal basis for a two-dimensional vector space as {|0⟩, |1⟩}.
+Then the most general normalized state can be expressed as
+
+a|0⟩+ b|1⟩,
+(2.15)
+
+where a, b are complex numbers that satisfy |a|2+|b|2 = 1, and the overall
+phase is physically irrelevant. A qubit is a quantum system described by
+a two-dimensional Hilbert space, whose state can take any value of the
+form eq.(2.15).
+We can perform a measurement that projects the qubit onto the basis
+{|0⟩, |1⟩}. Then we will obtain the outcome |0⟩with probability |a|2, and
+the outcome |1⟩with probability |b|2. Furthermore, except in the cases
+a = 0 and b = 0, the measurement irrevocably disturbs the state. If the
+value of the qubit is initially unknown, then there is no way to determine
+a and b with that single measurement, or any other conceivable measure-
+ment. However, after the measurement, the qubit has been prepared in a
+known state – either |0⟩or |1⟩– that differs (in general) from its previous
+state.
+In this respect, a qubit differs from a classical bit; we can measure a
+classical bit without disturbing it, and we can decipher all of the infor-
+mation that it encodes. But suppose we have a classical bit that really
+does have a definite value (either 0 or 1), but where that value is initially
+unknown to us. Based on the information available to us we can only say
+that there is a probability p0 that the bit has the value 0, and a probability
+p1 that the bit has the value 1, where p0 + p1 = 1. When we measure
+the bit, we acquire additional information; afterwards we know the value
+with 100% confidence.
+An important question is: what is the essential difference between a
+qubit and a probabilistic classical bit? In fact they are not the same, for
+several reasons that we will explore. To summarize the difference in brief:
+there is only one way to look at a bit, but there is more than one way to
+look at a qubit.
+
+2.2.1 Spin-1
+
+2
+First of all, the coefficients a and b in eq.(2.15) encode more than just the
+probabilities of the outcomes of a measurement in the {|0⟩, |1⟩} basis. In
+particular, the relative phase of a and b also has physical significance.
+The properties of a qubit are easier to grasp if we appeal to a geomet-
+rical interpretation of its state. For a physicist, it is natural to interpret
+eq.(2.15) as the spin state of an object with spin-1
+
+2 (like an electron).
+Then |0⟩and |1⟩are the spin up (| ↑⟩) and spin down (| ↓⟩) states along
+
+
+2.2 The Qubit
+9
+
+a particular axis such as the z-axis. The two real numbers characterizing
+the qubit (the complex numbers a and b, modulo the normalization and
+overall phase) describe the orientation of the spin in three-dimensional
+space (the polar angle θ and the azimuthal angle ϕ).
+We will not go deeply here into the theory of symmetry in quantum
+mechanics, but we will briefly recall some elements of the theory that
+will prove useful to us.
+A symmetry is a transformation that acts on
+a state of a system, yet leaves all observable properties of the system
+unchanged.
+In quantum mechanics, observations are measurements of
+self-adjoint operators. If A is measured in the state |ψ⟩, then the outcome
+|a⟩(an eigenvector of A) occurs with probability |⟨a|ψ⟩|2. A symmetry
+should leave these probabilities unchanged, when we “rotate” both the
+system and the apparatus.
+A symmetry, then, is a mapping of vectors in Hilbert space
+
+|ψ⟩�→|ψ′⟩,
+(2.16)
+
+that preserves the absolute values of inner products
+
+|⟨ϕ|ψ⟩| = |⟨ϕ′|ψ′⟩|,
+(2.17)
+
+for all |ϕ⟩and |ψ⟩. According to a famous theorem due to Wigner, a
+mapping with this property can always be chosen (by adopting suitable
+phase conventions) to be either unitary or antiunitary. The antiunitary
+alternative, while important for discrete symmetries, can be excluded for
+continuous symmetries. Then the symmetry acts as
+
+|ψ⟩�→|ψ′⟩= U|ψ⟩,
+(2.18)
+
+where U is unitary (and in particular, linear).
+Symmetries form a group: a symmetry transformation can be inverted,
+and the product of two symmetries is a symmetry. For each symmetry op-
+eration R acting on our physical system, there is a corresponding unitary
+transformation U(R). Multiplication of these unitary operators must re-
+spect the group multiplication law of the symmetries – applying R1 ◦R2
+should be equivalent to first applying R2 and subsequently R1. Thus we
+demand
+U(R1)U(R2) = Phase(R1, R2) · U(R1 ◦R2)
+(2.19)
+
+A phase depending on R1 and R2 is permitted in eq.(2.19) because quan-
+tum states are rays; we need only demand that U(R1 ◦R2) act the same
+way as U(R1)U(R2) on rays, not on vectors. We say that U(R) provides
+a unitary representation, up to a phase, of the symmetry group.
+So far, our concept of symmetry has no connection with dynamics.
+Usually, we demand of a symmetry that it respect the dynamical evolu-
+tion of the system. This means that it should not matter whether we
+
+
+10
+2 Foundations I: States and Ensembles
+
+first transform the system and then evolve it, or first evolve it and then
+transform it. In other words, the diagram
+
+Initial
+Final
+
+New Initial
+New Final
+
+-
+
+-
+
+?
+?
+
+dynamics
+
+dynamics
+
+transformation
+transformation
+
+is commutative, and therefore the time evolution operator e−itH com-
+mutes with the symmetry transformation U(R) :
+
+U(R)e−itH = e−itHU(R) ;
+(2.20)
+
+expanding to linear order in t we obtain
+
+U(R)H = HU(R).
+(2.21)
+
+For a continuous symmetry, we can choose R infinitesimally close to the
+identity, R = I + ϵT, and then U is close to I:
+
+U = I −iεQ + O(ε2),
+(2.22)
+
+where Q is an operator determined by T. From the unitarity of U (to
+order ε) it follows that Q is an observable, Q = Q†. Expanding eq.(2.21)
+to linear order in ε we find
+
+[Q, H] = 0 ;
+(2.23)
+
+the observable Q commutes with the Hamiltonian.
+Eq.(2.23) is a conservation law. It says, for example, that if we pre-
+pare an eigenstate of Q, then time evolution governed by the Schr¨odinger
+equation will preserve the eigenstate. Thus we see that symmetries imply
+conservation laws. Conversely, given a conserved quantity Q satisfying
+eq.(2.23) we can construct the corresponding symmetry transformations.
+Finite transformations can be built as a product of many infinitesimal
+ones:
+
+R =
+�
+(1 + θ
+
+N T
+�N
+⇒U(R) =
+�
+I + i θ
+
+N Q
+�N
+→eiθQ,
+(2.24)
+
+taking the limit N →∞. Once we have decided how infinitesimal symme-
+try transformations are represented by unitary operators, then it is also
+
+
+2.2 The Qubit
+11
+
+determined how finite transformations are represented, for these can be
+built as a product of infinitesimal transformations. We say that Q is the
+generator of the symmetry.
+Let us briefly recall how this general theory applies to spatial ro-
+tations and angular momentum.
+An infinitesimal rotation by dθ (in
+the counterclockwise sense) about the axis specified by the unit vector
+ˆn = (n1, n2, n3) can be expressed as
+
+R(ˆn, dθ) = I −idθˆn · ⃗J,
+(2.25)
+
+where (J1, J2, J3) are the components of the angular momentum. A finite
+rotation is expressed as
+
+R(ˆn, θ) = exp(−iθˆn · ⃗J).
+(2.26)
+
+Rotations about distinct axes don’t commute. From elementary proper-
+ties of rotations, we find the commutation relations
+
+[Jk, Jℓ] = iεkℓmJm,
+(2.27)
+
+where εkℓm is the totally antisymmetric tensor with ε123 = 1, and repeated
+indices are summed. To implement rotations on a quantum system, we
+find self-adjoint operators J1, J2, J3 in Hilbert space that satisfy these
+relations.
+The “defining” representation of the rotation group is three dimen-
+sional, but the simplest nontrivial irreducible representation is two di-
+mensional, given by
+
+Jk = 1
+
+2σk,
+(2.28)
+
+where
+
+σ1 =
+�
+0
+1
+1
+0
+
+�
+,
+σ2 =
+�
+0
+−i
+i
+0
+
+�
+,
+σ3 =
+�
+1
+0
+0
+−1
+
+�
+,
+(2.29)
+
+are the Pauli matrices. This is the unique two-dimensional irreducible
+representation, up to a unitary change of basis. Since the eigenvalues of
+Jk are ±1
+
+2, we call this the spin-1
+
+2 representation. (By identifying J as
+the angular-momentum, we have implicitly chosen units with ℏ= 1.)
+The Pauli matrices also have the properties of being mutually anticom-
+muting and squaring to the identity,
+
+σkσℓ+ σℓσk = 2δkℓI ;
+(2.30)
+
+therefore (ˆn · ⃗σ)2 = nknℓσkσℓ= nknkI = I (where repeated indices
+are summed).
+By expanding the exponential series, we see that finite
+rotations are represented as
+
+U(ˆn, θ) = e−i θ
+
+2 ˆn·⃗σ = I cos θ
+
+2 −iˆn · ⃗σ sin θ
+
+2.
+(2.31)
+
+
+12
+2 Foundations I: States and Ensembles
+
+The most general 2×2 unitary matrix with determinant 1 can be expressed
+in this form. Thus, we are entitled to think of a qubit as a spin-1
+
+2 object,
+and an arbitrary unitary transformation acting on the qubit’s state (aside
+from a possible physically irrelevant rotation of the overall phase) is a
+rotation of the spin.
+A peculiar property of the representation U(ˆn, θ) is that it is double-
+valued. In particular a rotation by 2π about any axis is represented non-
+trivially:
+U(ˆn, θ = 2π) = −I.
+(2.32)
+
+Our representation of the rotation group is really a representation “up to
+a sign”
+U(R1)U(R2) = ±U(R1 ◦R2).
+(2.33)
+
+But as already noted, this is acceptable, because the group multiplication
+is respected on rays, though not on vectors. These double-valued repre-
+sentations of the rotation group are called spinor representations. (The
+existence of spinors follows from a topological property of the group —
+that it is not simply connected.)
+While it is true that a rotation by 2π has no detectable effect on a
+spin-1
+
+2 object, it would be wrong to conclude that the spinor property
+has no observable consequences. Suppose I have a machine that acts on
+a pair of spins. If the first spin is up, it does nothing, but if the first spin
+is down, it rotates the second spin by 2π. Now let the machine act when
+the first spin is in a superposition of up and down. Then
+
+1
+√
+
+2 (| ↑⟩1 + | ↓⟩1) | ↑⟩2 �→
+1
+√
+
+2 (| ↑⟩1 −| ↓⟩1) | ↑⟩2 .
+(2.34)
+
+While there is no detectable effect on the second spin, the state of the
+first has flipped to an orthogonal state, which is very much observable.
+In a rotated frame of reference, a rotation R(ˆn, θ) becomes a rotation
+through the same angle but about a rotated axis. It follows that the three
+components of angular momentum transform under rotations as a vector:
+
+U(R)JkU(R)† = RkℓJℓ.
+(2.35)
+
+Thus, if a state |m⟩is an eigenstate of J3
+
+J3|m⟩= m|m⟩,
+(2.36)
+
+then U(R)|m⟩is an eigenstate of RJ3 with the same eigenvalue:
+
+RJ3 (U(R)|m⟩)
+=
+U(R)J3U(R)†U(R)|m⟩
+=
+U(R)J3|m⟩= m (U(R)|m⟩) .
+(2.37)
+
+
+2.2 The Qubit
+13
+
+Therefore, we can construct eigenstates of angular momentum along the
+axis ˆn = (sin θ cos ϕ, sin θ sin ϕ, cos θ) by applying a counterclockwise rota-
+tion through θ, about the axis ˆn′ = (−sin ϕ, cos ϕ, 0), to a J3 eigenstate.
+For our spin-1
+
+2 representation, this rotation is
+
+exp
+�
+−iθ
+
+2 ˆn′ · ⃗σ
+�
+=
+exp
+�θ
+
+2
+
+�
+0
+−e−iϕ
+
+eiϕ
+0
+
+��
+
+=
+�
+cos θ
+
+2
+−e−iϕ sin θ
+
+2
+eiϕ sin θ
+
+2
+cos θ
+
+2
+
+�
+,
+(2.38)
+
+and applying it to
+�1
+0
+�
+, the J3 eigenstate with eigenvalue 1, we obtain
+
+|ψ(θ, ϕ)⟩=
+�
+e−iϕ/2 cos θ
+
+2
+eiϕ/2 sin θ
+
+2
+
+�
+,
+(2.39)
+
+(up to an overall phase). We can check directly that this is an eigenstate
+of
+
+ˆn · ⃗σ =
+�
+cos θ
+e−iϕ sin θ
+eiϕ sin θ
+−cos θ
+
+�
+,
+(2.40)
+
+with eigenvalue one. We now see that eq.(2.15) with a = e−iϕ/2 cos θ
+
+2,
+b = eiϕ/2 sin θ
+
+2, can be interpreted as a spin pointing in the (θ, ϕ) direction.
+We noted that we cannot determine a and b with a single measurement.
+Furthermore, even with many identical copies of the state, we cannot
+completely determine the state by measuring each copy only along the
+z-axis. This would enable us to estimate |a| and |b|, but we would learn
+nothing about the relative phase of a and b. Equivalently, we would find
+the component of the spin along the z-axis
+
+⟨ψ(θ, ϕ)|σ3|ψ(θ, ϕ)⟩= cos2 θ
+
+2 −sin2 θ
+
+2 = cos θ,
+(2.41)
+
+but we would not learn about the component in the x-y plane. The prob-
+lem of determining |ψ⟩by measuring the spin is equivalent to determining
+the unit vector ˆn by measuring its components along various axes. Alto-
+gether, measurements along three different axes are required. E.g., from
+⟨σ3⟩and ⟨σ1⟩we can determine n3 and n1, but the sign of n2 remains
+undetermined. Measuring ⟨σ2⟩would remove this remaining ambiguity.
+If we are permitted to rotate the spin, then only measurements along
+the z-axis will suffice.
+That is, measuring a spin along the ˆn axis is
+equivalent to first applying a rotation that rotates the ˆn axis to the axis
+ˆz, and then measuring along ˆz.
+In the special case θ = π
+
+2 and ϕ = 0 (the ˆx-axis) our spin state is
+
+| ↑x⟩=
+1
+√
+
+2 (| ↑z⟩+ | ↓z⟩)
+(2.42)
+
+
+14
+2 Foundations I: States and Ensembles
+
+(“spin-up along the x-axis”). The orthogonal state (“spin down along the
+x-axis”) is
+
+| ↓x⟩=
+1
+√
+
+2 (| ↑z⟩−| ↓z⟩) .
+(2.43)
+
+For either of these states, if we measure the spin along the z-axis, we will
+obtain | ↑z⟩with probability 1
+
+2 and | ↓z⟩with probability 1
+
+2.
+Now consider the combination
+
+1
+√
+
+2 (| ↑x⟩+ | ↓x⟩) .
+(2.44)
+
+This state has the property that, if we measure the spin along the x-axis,
+we obtain | ↑x⟩or | ↓x⟩, each with probability 1
+
+2. Now we may ask, what
+if we measure the state in eq.(2.44) along the z-axis?
+If these were probabilistic classical bits, the answer would be obvious.
+The state in eq.(2.44) is in one of two states, and for each of the two,
+the probability is
+1
+2 for pointing up or down along the z-axis.
+So of
+course we should find up with probability 1
+
+2 when we measure the state
+1
+√
+
+2 (| ↑x⟩+ | ↓x⟩) along the z-axis.
+But not so for qubits! By adding eq.(2.42) and eq.(2.43), we see that
+the state in eq.(2.44) is really | ↑z⟩in disguise. When we measure along
+the z-axis, we always find | ↑z⟩, never | ↓z⟩.
+We see that for qubits, as opposed to probabilistic classical bits, proba-
+bilities can add in unexpected ways. This is, in its simplest guise, the phe-
+nomenon called “quantum interference,” an important feature of quantum
+information.
+To summarize the geometrical interpretation of a qubit: we may think
+of a qubit as a spin-1
+
+2 object, and its quantum state is characterized
+by a unit vector ˆn in three dimensions, the spin’s direction. A unitary
+transformation rotates the spin, and a measurement of an observable has
+two possible outcomes: the spin is either up or down along a specified
+axis.
+It should be emphasized that, while this formal equivalence with a spin-
+1
+2 object applies to any two-level quantum system, not every two-level
+system transforms as a spinor under spatial rotations!
+
+2.2.2 Photon polarizations
+
+Another important two-state system is provided by a photon, which can
+have two independent polarizations. These photon polarization states also
+transform under rotations, but photons differ from our spin-1
+
+2 objects in
+two important ways: (1) Photons are massless. (2) Photons have spin-1
+(they are not spinors).
+
+
+2.2 The Qubit
+15
+
+We will not present here a detailed discussion of the unitary represen-
+tations of the Poincare group. Suffice it to say that the spin of a particle
+classifies how it transforms under the little group, the subgroup of the
+Lorentz group that preserves the particle’s momentum. For a massive
+particle, we may always boost to the particle’s rest frame, and then the
+little group is the rotation group.
+For massless particles, there is no rest frame. The finite-dimensional
+unitary representations of the little group turn out to be representations
+of the rotation group in two dimensions, the rotations about the axis de-
+termined by the momentum. For a photon, this corresponds to a familiar
+property of classical light — the waves are polarized transverse to the
+direction of propagation.
+Under a rotation about the axis of propagation, the two linear polariza-
+tion states (|x⟩and |y⟩for horizontal and vertical polarization) transform
+as
+
+|x⟩
+→
+cos θ|x⟩+ sin θ|y⟩
+|y⟩
+→
+−sin θ|x⟩+ cos θ|y⟩.
+(2.45)
+
+This two-dimensional representation is actually reducible. The matrix
+�
+cos θ
+sin θ
+−sin θ
+cos θ
+
+�
+(2.46)
+
+has the eigenstates
+
+|R⟩=
+1
+√
+
+2
+
+�
+1
+i
+
+�
+|L⟩=
+1
+√
+
+2
+
+�
+i
+1
+
+�
+,
+(2.47)
+
+with eigenvalues eiθ and e−iθ, the states of right and left circular polar-
+ization. That is, these are the eigenstates of the rotation generator
+
+J =
+�
+0
+−i
+i
+0
+
+�
+= σ2,
+(2.48)
+
+with eigenvalues ±1. Because the eigenvalues are ±1 (not ±1
+
+2) we say
+that the photon has spin-1.
+In this context, the quantum interference phenomenon can be described
+as follows. The polarization states
+
+|+⟩
+=
+1
+√
+
+2 (|x⟩+ |y⟩) ,
+
+|−⟩
+=
+1
+√
+
+2 (−|x⟩+ |y⟩) ,
+(2.49)
+
+
+16
+2 Foundations I: States and Ensembles
+
+are mutually orthogonal and can be obtained by rotating the states |x⟩
+and |y⟩by 45◦. Suppose that we have a polarization analyzer that allows
+only one of two orthogonal linear photon polarizations to pass through,
+absorbing the other. Then an x or y polarized photon has probability 1
+
+2
+of getting through a 45◦rotated polarizer, and a 45◦polarized photon
+has probability 1
+
+2 of getting through an x or y analyzer. But an x photon
+never passes through a y analyzer.
+Suppose that a photon beam is directed at an x analyzer, with a y
+analyzer placed further downstream. Then about half of the photons will
+pass through the first analyzer, but every one of these will be stopped
+by the second analyzer. But now suppose that we place a 45◦-rotated
+analyzer between the x and y analyzers. Then about half of the photons
+pass through each analyzer, and about one in eight will manage to pass all
+three without being absorbed. Because of this interference effect, there
+is no consistent interpretation in which each photon carries one classical
+bit of polarization information. Qubits are different than probabilistic
+classical bits.
+A device can be constructed that rotates the linear polarization of a
+photon, and so applies the transformation Eq.
+(2.45) to our qubit; it
+functions by “turning on” a Hamiltonian for which the circular polar-
+ization states |L⟩and |R⟩are nondegenerate energy eigenstates.
+This
+is not the most general possible unitary transformation. But if we also
+have a device that alters the relative phase of the two orthogonal linear
+polarization states
+
+|x⟩
+→
+e−iϕ/2|x⟩,
+
+|y⟩
+→
+eiϕ/2|y⟩
+(2.50)
+
+(by turning on a Hamiltonian whose nondegenerate energy eigenstates are
+the linear polarization states), then the two devices can be employed to-
+gether to apply an arbitrary 2×2 unitary transformation (of determinant
+1) to the photon polarization state.
+
+2.3 The density operator
+
+2.3.1 The bipartite quantum system
+
+Having understood everything about a single qubit, we are ready to ad-
+dress systems with two qubits. Stepping up from one qubit to two is a
+bigger leap than you might expect. Much that is weird and wonderful
+about quantum mechanics can be appreciated by considering the proper-
+ties of the quantum states of two qubits.
+The axioms of §2.1 provide a perfectly acceptable general formulation
+of the quantum theory. Yet under many circumstances, we find that the
+
+
+2.3 The density operator
+17
+
+axioms appear to be violated. The trouble is that our axioms are intended
+to characterize the quantum behavior of a closed system that does not
+interact with its surroundings. In practice, closed quantum systems do
+not exist; the observations we make are always limited to a small part of
+a much larger quantum system.
+When we study open systems, that is, when we limit our attention to
+just part of a larger system, then (contrary to the axioms):
+
+1. States are not rays.
+
+2. Measurements are not orthogonal projections.
+
+3. Evolution is not unitary.
+
+To arrive at the laws obeyed by open quantum systems, we must recall
+our fifth axiom, which relates the description of a composite quantum
+system to the description of its component parts. As a first step toward
+understanding the quantum description of an open system, consider a
+two-qubit world in which we observe only one of the qubits. Qubit A is
+here in the room with us, and we are free to observe or manipulate it any
+way we please. But qubit B is locked in a vault where we can’t get access
+to it. The full system AB obeys the axioms of §2.1. But we would like
+to find a compact way to characterize the observations that can be made
+on qubit A alone.
+We’ll use {|0⟩A, |1⟩A} and {|0⟩B, |1⟩B} to denote orthonormal bases for
+qubits A and B respectively. Consider a quantum state of the two-qubit
+world of the form
+
+|ψ⟩AB = a|0⟩A ⊗|0⟩B + b|1⟩A ⊗|1⟩B.
+(2.51)
+
+In this state, qubits A and B are correlated. Suppose we measure qubit
+A by projecting onto the {|0⟩A, |1⟩A} basis. Then with probability |a|2
+
+we obtain the result |0⟩A, and the measurement prepares the state
+
+|0⟩A ⊗|0⟩B ;
+(2.52)
+
+with probability |b|2, we obtain the result |1⟩A and prepare the state
+
+|1⟩A ⊗|1⟩B.
+(2.53)
+
+In either case, a definite state of qubit B is picked out by the measure-
+ment. If we subsequently measure qubit B, then we are guaranteed (with
+probability one) to find |0⟩B if we had found |0⟩A, and we are guaran-
+teed to find |1⟩B if we had found |1⟩A. In this sense, the outcomes of the
+{|0⟩A, |1⟩A} and {|0⟩B, |1⟩B} measurements are perfectly correlated in the
+state |ψ⟩AB.
+
+
+18
+2 Foundations I: States and Ensembles
+
+But now we would like to consider more general observables acting on
+qubit A, and we would like to characterize the measurement outcomes for
+A alone (irrespective of the outcomes of any measurements of the inac-
+cessible qubit B). An observable acting on qubit A only can be expressed
+as
+M A ⊗IB,
+(2.54)
+
+where M A is a self-adjoint operator acting on A, and IB is the identity
+operator acting on B. The expectation value of the observable in the
+state |ψ⟩is:
+
+⟨M A⟩
+=
+⟨ψ|M A ⊗IB|ψ⟩
+=
+(a∗⟨00| + b∗⟨11|) (M A ⊗IB) (a|00⟩+ b|11⟩)
+=
+|a|2⟨0|M A|0⟩+ |b|2⟨1|MA|1⟩
+(2.55)
+
+(where we have used the orthogonality of |0⟩B and |1⟩B). This expression
+can be rewritten in the form
+
+⟨M A⟩= tr (M AρA) ,
+ρA = |a|2 |0⟩⟨0| + |b|2 |1⟩⟨1|
+(2.56)
+
+and tr(·) denotes the trace. The operator ρA is called the density operator
+(or density matrix) for qubit A. It is self-adjoint, positive (its eigenvalues
+are nonnegative) and it has unit trace (because |ψ⟩is a normalized state.)
+Because ⟨M A⟩has the form eq.(2.56) for any observable M A acting
+on qubit A, it is consistent to interpret ρA as representing an ensemble of
+possible quantum states, each occurring with a specified probability. That
+is, we would obtain precisely the same result for ⟨M A⟩if we stipulated
+that qubit A is in one of two quantum states. With probability p0 = |a|2
+
+it is in the quantum state |0⟩, and with probability p1 = |b|2 it is in
+the state |1⟩. To describe the measurement of an observable which acts
+on qubit A, we can consider M A to be the projection EA(an) onto the
+corresponding eigenstate of that observable. Then
+
+Prob(an) = p0⟨0|EA(an)|0⟩+ p1⟨1|EA(an)|1⟩,
+(2.57)
+
+which is the probability of outcome an summed over the ensemble, and
+weighted by the probability of each state in the ensemble.
+We have emphasized previously that there is an essential difference be-
+tween a coherent superposition of the states |0⟩and |1⟩, and a probabilistic
+ensemble, in which |0⟩and |1⟩can each occur with specified probabilities.
+For example, for a spin-1
+
+2 object we have seen that if we measure σ1 in
+the state
+1
+√
+
+2 (| ↑z⟩+ | ↓z⟩), we will obtain the result | ↑x⟩with probability
+one. But the ensemble in which | ↑z⟩and | ↓z⟩each occur with probability
+1
+2 is represented by the density operator
+
+ρ = 1
+
+2 (| ↑z⟩⟨↑z | + | ↓z⟩⟨↓z |) = 1
+
+2I,
+(2.58)
+
+
+2.3 The density operator
+19
+
+and the projection onto | ↑x⟩then has the expectation value
+
+tr (| ↑x⟩⟨↑x |ρ) = ⟨↑x |ρ| ↑x⟩= 1
+
+2.
+(2.59)
+
+Similarly, if we measure the spin along any axis labeled by polar angles θ
+and ϕ, the probability of obtaining the result “spin up” is
+
+⟨|ψ(θ, ϕ)⟩⟨ψ(θ, ϕ)|⟩
+=
+tr (|ψ(θ, ϕ)⟩⟨ψ(θ, ϕ)|ρ)
+
+=
+⟨ψ(θ, ϕ)|1
+
+2I|ψ(θ, ϕ)⟩= 1
+
+2.
+(2.60)
+
+Therefore, if in the two-qubit world an equally weighted coherent su-
+perposition of |00⟩and |11⟩is prepared, the state of qubit A behaves
+incoherently – along any axis it is an equiprobable mixture of spin up and
+spin down.
+This discussion of the correlated two-qubit state |ψ⟩AB is easily gener-
+alized to an arbitrary state of any bipartite quantum system (a system di-
+vided into two parts). The Hilbert space of a bipartite system is HA⊗HB
+where HA,B are the Hilbert spaces of the two parts. This means that if
+{|i⟩A} is an orthonormal basis for HA and {|µ⟩B} is an orthonormal basis
+for HB, then {|i⟩A ⊗|µ⟩B} is an orthonormal basis for HA ⊗HB. Thus
+an arbitrary pure state of HA ⊗HB can be expanded as
+
+|ψ⟩AB =
+�
+
+i,µ
+aiµ|i⟩A ⊗|µ⟩B,
+(2.61)
+
+where �
+i,µ |aiµ|2 = 1. The expectation value of an observable M A ⊗IB
+that acts only on subsystem A is
+
+⟨M A⟩= AB⟨ψ|M A ⊗IB|ψ⟩AB
+
+=
+�
+
+j,ν
+a∗
+jν (A⟨j| ⊗B ⟨ν|) (M A ⊗IB)
+�
+
+i,µ
+aiµ (|i⟩A ⊗|µ⟩B)
+
+=
+�
+
+i,j,µ
+a∗
+jµaiµ⟨j|M A|i⟩= tr (M AρA) ,
+(2.62)
+
+where
+
+ρA = trB (|ψ⟩⟨ψ|) ≡
+�
+
+i,j,µ
+aiµa∗
+jµ|i⟩⟨j|
+(2.63)
+
+is the density operator of subsystem A.
+We may say that the density operator ρA for subsystem A is obtained
+by performing a partial trace over subsystem B of the density operator
+(in this case a pure state) for the combined system AB. We may regard a
+
+
+20
+2 Foundations I: States and Ensembles
+
+dual vector (or bra) B⟨µ| as a linear map that takes vectors in HA ⊗HB
+to vectors of HA, defined through its action on a basis:
+
+B⟨µ|iν⟩AB = δµν|i⟩A ;
+(2.64)
+
+similarly, the ket |µ⟩B defines a map from the HA ⊗HB dual basis to the
+HA dual basis, via
+
+AB⟨iν|µ⟩B = δµν A⟨i|.
+(2.65)
+
+The partial trace operation is a linear map that takes an operator M AB
+on HA ⊗HB to an operator on HA defined as
+
+trB M AB =
+�
+
+µ
+B⟨µ|M AB|µ⟩B.
+(2.66)
+
+We see that the density operator acting on A is the partial trace
+
+ρA = trB (|ψ⟩⟨ψ|) .
+(2.67)
+
+From the definition eq.(2.63), we can immediately infer that ρA has the
+following properties:
+
+1. ρA is self-adjoint: ρA = ρ†
+A.
+
+2. ρA is positive: For any |ϕ⟩, ⟨ϕ|ρA|ϕ⟩= �
+µ | �
+i aiµ⟨ϕ|i⟩|2 ≥0.
+
+3. tr(ρA) = 1: We have tr(ρA) = �
+i,µ |aiµ|2 = 1, since |ψ⟩AB is
+normalized.
+
+It follows that ρA can be diagonalized in an orthonormal basis, that the
+eigenvalues are all real and nonnegative, and that the eigenvalues sum to
+one.
+If we are looking at a subsystem of a larger quantum system, then, even
+if the state of the larger system is a ray, the state of the subsystem need
+not be; in general, the state is represented by a density operator. In the
+case where the state of the subsystem is a ray, and we say that the state is
+pure. Otherwise the state is mixed. If the state is a pure state |ψ⟩A, then
+the density matrix ρA = |ψ⟩⟨ψ| is the projection onto the one-dimensional
+space spanned by |ψ⟩A. Hence a pure density matrix has the property
+ρ2 = ρ. A general density matrix, expressed in the basis {|a⟩} in which
+it is diagonal, has the form
+
+ρA =
+�
+
+a
+pa|a⟩⟨a|,
+(2.68)
+
+where 0 < pa ≤1 and �
+a pa = 1. If the state is not pure, there are two
+or more terms in this sum, and ρ2 ̸= ρ; in fact, tr ρ2 = �p2
+a < �pa = 1.
+
+
+2.3 The density operator
+21
+
+We say that ρ is an incoherent mixture of the states {|a⟩}; “incoherent”
+means that the relative phases of the |a⟩’s are experimentally inaccessible.
+Since the expectation value of any observable M acting on the subsys-
+tem can be expressed as
+
+⟨M⟩= tr Mρ =
+�
+
+a
+pa⟨a|M|a⟩,
+(2.69)
+
+we see as before that we may interpret ρ as describing an ensemble of pure
+quantum states, in which the state |a⟩occurs with probability pa. We
+have, therefore, come a long part of the way to understanding how prob-
+abilities arise in quantum mechanics when a quantum system A interacts
+with another system B. A and B become entangled, that is, correlated.
+The entanglement destroys the coherence of a superposition of states of
+A, so that some of the phases in the superposition become inaccessible if
+we look at A alone. We may describe this situation by saying that the
+state of system A collapses — it is in one of a set of alternative states,
+each of which can be assigned a probability.
+
+2.3.2 Bloch sphere
+
+Let’s return to the case in which system A is a single qubit, and consider
+the form of the general density matrix.
+The most general self-adjoint
+2 × 2 matrix has four real parameters, and can be expanded in the basis
+{I, σ1, σ2, σ3}.
+Since each σi is traceless, the coefficient of I in the
+expansion of a density matrix ρ must be 1
+
+2 (so that tr(ρ) = 1), and ρ
+may be expressed as
+
+ρ(⃗P) = 1
+
+2
+
+�
+I + ⃗P · ⃗σ
+�
+
+≡1
+
+2 (I + P1σ1 + P2σ2 + P3σ3)
+
+= 1
+
+2
+
+�
+1 + P3
+P1 −iP2
+P1 + iP2
+1 −P3
+
+�
+,
+(2.70)
+
+where P1, P2, P3 are real numbers. We can compute detρ = 1
+
+4
+�
+1 −⃗P 2�
+.
+Therefore, a necessary condition for ρ to have nonnegative eigenvalues is
+detρ ≥0 or ⃗P 2 ≤1. This condition is also sufficient; since tr ρ = 1,
+it is not possible for ρ to have two negative eigenvalues. Thus, there is
+a 1 −1 correspondence between the possible density matrices of a single
+qubit and the points on the unit 3-ball 0 ≤|⃗P| ≤1. This ball is usually
+called the Bloch sphere (although it is really a ball, not a sphere).
+The boundary
+�
+|⃗P| = 1
+�
+of the ball (which really is a sphere) contains
+the density matrices with vanishing determinant. Since tr ρ = 1, these
+
+
+22
+2 Foundations I: States and Ensembles
+
+density matrices must have the eigenvalues 0 and 1 — they are one-
+dimensional projectors, and hence pure states.
+We have already seen
+that any pure state of a single qubit is of the form |ψ(θ, ϕ)⟩and can be
+envisioned as a spin pointing in the (θ, ϕ) direction. Indeed using the
+property
+(ˆn · ⃗σ)2 = I,
+(2.71)
+
+where ˆn is a unit vector, we can easily verify that the pure-state density
+matrix
+ρ(ˆn) = 1
+
+2 (I + ˆn · ⃗σ)
+(2.72)
+
+satisfies the property
+
+(ˆn · ⃗σ) ρ(ˆn) = ρ(ˆn) (ˆn · ⃗σ) = ρ(ˆn),
+(2.73)
+
+and, therefore is the projector
+
+ρ(ˆn) = |ψ(ˆn)⟩⟨ψ(ˆn)| ;
+(2.74)
+
+that is, ˆn is the direction along which the spin is pointing up. Alterna-
+tively, from the expression
+
+|ψ(θ, φ)⟩=
+�
+e−iϕ/2 cos (θ/2)
+eiϕ/2 sin (θ/2)
+
+�
+,
+(2.75)
+
+we may compute directly that
+
+ρ(θ, φ)
+=
+|ψ(θ, φ)⟩⟨ψ(θ, φ)|
+
+=
+�
+cos2 (θ/2)
+cos (θ/2) sin (θ/2)e−iϕ
+
+cos (θ/2) sin (θ/2)eiϕ
+sin2 (θ/2)
+
+�
+
+=
+1
+2I + 1
+
+2
+
+�
+cos θ
+sin θe−iϕ
+
+sin θeiϕ
+−cos θ
+
+�
+= 1
+
+2(I + ˆn · ⃗σ)
+(2.76)
+
+where ˆn = (sin θ cos ϕ, sin θ sin ϕ, cos θ). One nice property of the Bloch
+parametrization of the pure states is that while |ψ(θ, ϕ)⟩has an arbitrary
+overall phase that has no physical significance, there is no phase ambiguity
+in the density matrix ρ(θ, ϕ) = |ψ(θ, ϕ)⟩⟨ψ(θ, ϕ)|; all the parameters in ρ
+have a physical meaning.
+From the property
+1
+2tr σiσj = δij
+(2.77)
+
+we see that
+⟨ˆn · ⃗σ⟩⃗P = tr
+�
+ˆn · ⃗σρ(⃗P)
+�
+= ˆn · ⃗P .
+(2.78)
+
+We say that the vector ⃗P in Eq. (2.70) parametrizes the polarization of
+the spin. If there are many identically prepared systems at our disposal,
+we can determine ⃗P (and hence the complete density matrix ρ(⃗P)) by
+measuring ⟨ˆn · ⃗σ⟩along each of three linearly independent axes.
+
+
+2.4 Schmidt decomposition
+23
+
+2.4 Schmidt decomposition
+
+A bipartite pure state can be expressed in a standard form (the Schmidt
+decomposition) that is often very useful.
+To arrive at this form, note that an arbitrary vector in HA ⊗HB can
+be expanded as
+
+|ψ⟩AB =
+�
+
+i,µ
+ψiµ|i⟩A ⊗|µ⟩B ≡
+�
+
+i
+|i⟩A ⊗|˜i⟩B.
+(2.79)
+
+Here {|i⟩A} and {|µ⟩B} are orthonormal basis for HA and HB respectively,
+but to obtain the second equality in eq.(2.79) we have defined
+
+|˜i⟩B ≡
+�
+
+µ
+ψiµ|µ⟩B.
+(2.80)
+
+Note that the |˜i⟩B’s need not be mutually orthogonal or normalized.
+Now let’s suppose that the {|i⟩A} basis is chosen to be the basis in
+which ρA is diagonal,
+
+ρA =
+�
+
+i
+pi|i⟩⟨i|.
+(2.81)
+
+We can also compute ρA by performing a partial trace,
+
+ρA = trB(|ψ⟩⟨ψ|)
+
+= trB(
+�
+
+i,j
+|i⟩⟨j| ⊗|˜i⟩⟨˜j|) =
+�
+
+i,j
+⟨˜j|˜i⟩(|i⟩⟨j|) .
+(2.82)
+
+We obtained the last equality in eq.(2.82) by noting that
+
+trB
+�
+|˜i⟩⟨˜j|
+�
+=
+�
+
+k
+⟨k|˜i⟩⟨˜j|k⟩
+
+=
+�
+
+k
+⟨˜j|k⟩⟨k|˜i⟩= ⟨˜j|˜i⟩,
+(2.83)
+
+where {|k⟩} is a complete orthonormal basis for HB.
+By comparing
+eq.(2.81) and eq. (2.82), we see that
+
+B⟨˜j|˜i⟩B = piδij.
+(2.84)
+
+Hence, it turns out that the {|˜i⟩B} are orthogonal after all. We obtain
+orthonormal vectors by rescaling,
+
+|i′⟩B = p−1/2
+i
+|˜i⟩B
+(2.85)
+
+
+24
+2 Foundations I: States and Ensembles
+
+(we may assume pi ̸= 0, because we will need eq.(2.85) only for i appearing
+in the sum eq.(2.81)), and therefore obtain the expansion
+
+|ψ⟩AB =
+�
+
+i
+
+√pi |i⟩A ⊗|i′⟩B,
+(2.86)
+
+in terms of a particular orthonormal basis of HA and HB.
+Eq.(2.86) is the Schmidt decomposition of the bipartite pure state
+|ψ⟩AB. Any bipartite pure state can be expressed in this form, but the
+bases used depend on the pure state that is being expanded. In general,
+we can’t simultaneously expand both |ψ⟩AB and |ϕ⟩AB ∈HA ⊗HB in the
+form eq.(2.86) using the same orthonormal bases for HA and HB.
+It is instructive to compare the Schmidt decomposition of the bipartite
+pure state |ψ⟩AB with its expansion in a generic orthonormal basis
+
+|ψ⟩AB =
+�
+
+a,µ
+ψaµ|a⟩A ⊗|µ⟩B.
+(2.87)
+
+The orthonormal bases {|a⟩A} and {|µ⟩B} are related to the Schmidt
+bases {|i⟩A} and {|i′⟩B} by unitary transformations U A and U B, hence
+
+|i⟩A =
+�
+
+a
+|a⟩A (UA)ai ,
+|i′⟩B =
+�
+
+µ
+|µ⟩B (UB)µi′ .
+(2.88)
+
+By equating the expressions for |ψ⟩AB in eq.(2.86) and eq.(2.87), we find
+
+ψaµ =
+�
+
+i
+(UA)ai
+√pi
+�
+UT
+B
+�
+
+iµ .
+(2.89)
+
+We see that by applying unitary transformations on the left and right,
+any matrix ψ can be transformed to a matrix which is diagonal and non-
+negative. (The “diagonal” matrix will be rectangular rather than square
+if the Hilbert spaces HA and HB have different dimensions.) Eq.(2.89) is
+said to be the singular value decomposition of ψ, and the weights {√pi}
+in the Schmidt decomposition are ψ’s singular values.
+Using eq.(2.86), we can also evaluate the partial trace over HA to obtain
+
+ρB = trA (|ψ⟩⟨ψ|) =
+�
+
+i
+pi|i′⟩⟨i′|.
+(2.90)
+
+We see that ρA and ρB have the same nonzero eigenvalues. If HA and
+HB do not have the same dimension, the number of zero eigenvalues of
+ρA and ρB will differ.
+If ρA (and hence ρB) have no degenerate eigenvalues other than zero,
+then the Schmidt decomposition of |ψ⟩AB is essentially uniquely deter-
+mined by ρA and ρB. We can diagonalize ρA and ρB to find the |i⟩A’s
+
+
+2.4 Schmidt decomposition
+25
+
+and |i′⟩B’s, and then we pair up the eigenstates of ρA and ρB with the
+same eigenvalue to obtain eq.(2.86). We have chosen the phases of our
+basis states so that no phases appear in the coefficients in the sum; the
+only remaining freedom is to redefine |i⟩A and |i′⟩B by multiplying by
+opposite phases (which leaves the expression eq.(2.86) unchanged).
+But if ρA has degenerate nonzero eigenvalues, then we need more in-
+formation than that provided by ρA and ρB to determine the Schmidt
+decomposition; we need to know which |i′⟩B gets paired with each |i⟩A.
+For example, if both HA and HB are d-dimensional and Uij is any d × d
+unitary matrix, then
+
+|ψ⟩AB =
+1
+√
+
+d
+
+d
+�
+
+i,j=1
+|i⟩AUij ⊗|j′⟩B,
+(2.91)
+
+will yield ρA = ρB = 1
+
+dI when we take partial traces. Furthermore, we
+are free to apply simultaneous unitary transformations in HA and HB;
+writing
+
+|i⟩A =
+�
+
+a
+|a⟩AVai,
+|i′⟩B =
+�
+
+b
+|b′⟩BV ∗
+bi,
+(2.92)
+
+where V is a unitary matrix, we have
+
+|ψ⟩AB =
+1
+√
+
+d
+
+�
+
+i
+|i⟩A ⊗|i′⟩B =
+1
+√
+
+d
+
+�
+
+i,a,b
+|a⟩AVai ⊗|b′⟩BV †
+ib
+
+=
+1
+√
+
+d
+
+�
+
+a
+|a⟩A ⊗|a′⟩B.
+(2.93)
+
+This simultaneous rotation preserves the state |ψ⟩AB, illustrating that
+there is an ambiguity in the basis used when we express |ψ⟩AB in the
+Schmidt form.
+
+2.4.1 Entanglement
+
+With any bipartite pure state |ψ⟩AB we may associate a positive integer,
+the Schmidt number, which is the number of nonzero eigenvalues in ρA
+(or ρB) and hence the number of terms in the Schmidt decomposition
+of |ψ⟩AB. In terms of this quantity, we can define what it means for a
+bipartite pure state to be entangled: |ψ⟩AB is entangled (or nonseparable)
+if its Schmidt number is greater than one; otherwise, it is separable (or
+unentangled). Thus, a separable bipartite pure state is a direct product
+of pure states in HA and HB,
+
+|ψ⟩AB = |ϕ⟩A ⊗|χ⟩B;
+(2.94)
+
+
+26
+2 Foundations I: States and Ensembles
+
+then the reduced density matrices ρA = |ϕ⟩⟨ϕ| and ρB = |χ⟩⟨χ| are pure.
+Any state that cannot be expressed as such a direct product is entangled;
+then ρA and ρB are mixed states.
+When |ψ⟩AB is entangled we say that A and B have quantum corre-
+lations. It is not strictly correct to say that subsystems A and B are
+uncorrelated if |ψ⟩AB is separable; after all, the two spins in the separable
+state
+| ↑⟩A| ↑⟩B,
+(2.95)
+
+are surely correlated – they are both pointing in the same direction. But
+the correlations between A and B in an entangled state have a different
+character than those in a separable state. One crucial difference is that
+entanglement cannot be created locally. The only way to entangle A and
+B is for the two subsystems to directly interact with one another.
+We can prepare the state eq.(2.95) without allowing spins A and B to
+ever come into contact with one another. We need only send a (classical!)
+message to two preparers (Alice and Bob) telling both of them to prepare
+a spin pointing along the z-axis.
+But the only way to turn the state
+eq.(2.95) into an entangled state like
+
+1
+√
+
+2 (| ↑⟩A| ↑⟩B + | ↓⟩A| ↓⟩B) ,
+(2.96)
+
+is to apply a collective unitary transformation to the state. Local unitary
+transformations of the form UA ⊗UB, and local measurements performed
+by Alice or Bob, cannot increase the Schmidt number of the two-qubit
+state, no matter how much Alice and Bob discuss what they do.
+To
+entangle two qubits, we must bring them together and allow them to
+interact.
+As we will discuss in Chapters 4 and 10, it is also possible to make the
+distinction between entangled and separable bipartite mixed states. We
+will also discuss various ways in which local operations can modify the
+form of entanglement, and some ways that entanglement can be put to
+use.
+
+2.5 Ambiguity of the ensemble interpretation
+
+2.5.1 Convexity
+
+Recall that an operator ρ acting on a Hilbert space H may be interpreted
+as a density operator if it has the three properties:
+
+(1) ρ is self-adjoint.
+
+(2) ρ is nonnegative.
+
+
+2.5 Ambiguity of the ensemble interpretation
+27
+
+(3) tr(ρ) = 1.
+
+It follows immediately that, given two density matrices ρ1, and ρ2, we can
+always construct another density matrix as a convex linear combination
+of the two:
+ρ(λ) = λρ1 + (1 −λ)ρ2
+(2.97)
+
+is a density matrix for any real λ satisfying 0 ≤λ ≤1. We easily see that
+ρ(λ) satisfies (1) and (3) if ρ1 and ρ2 do. To check (2), we evaluate
+
+⟨ψ|ρ(λ)|ψ⟩= λ⟨ψ|ρ1|ψ⟩+ (1 −λ)⟨ψ|ρ2|ψ⟩≥0;
+(2.98)
+
+⟨ρ(λ)⟩is guaranteed to be nonnegative because ⟨ρ1⟩and ⟨ρ2⟩are. We
+have, therefore, shown that in a Hilbert space H of dimension d, the
+density operators are a convex subset of the real vector space of d × d
+Hermitian operators. (A subset of a vector space is said to be convex if
+the set contains the straight line segment connecting any two points in
+the set.)
+Most density operators can be expressed as a sum of other density
+operators in many different ways. But the pure states are special in this
+regard – it is not possible to express a pure state as a convex sum of two
+other states. Consider a pure state ρ = |ψ⟩⟨ψ|, and let |ψ⊥⟩denote a
+vector orthogonal to |ψ⟩, ⟨ψ⊥|ψ⟩= 0. Suppose that ρ can be expanded
+as in eq.(2.97); then
+
+⟨ψ⊥|ρ|ψ⊥⟩= 0 = λ⟨ψ⊥|ρ1|ψ⊥⟩
++ (1 −λ)⟨ψ⊥|ρ2|ψ⊥⟩.
+(2.99)
+
+Since the right hand side is a sum of two nonnegative terms, and the
+sum vanishes, both terms must vanish. If λ is not 0 or 1, we conclude
+that ρ1 and ρ2 are orthogonal to |ψ⊥⟩. But since |ψ⊥⟩can be any vector
+orthogonal to |ψ⟩, we see that ρ1 = ρ2 = ρ.
+The vectors in a convex set that cannot be expressed as a linear com-
+bination of other vectors in the set are called the extremal points of the
+set. We have just shown that the pure states are extremal points of the
+set of density matrices. Furthermore, only the pure states are extremal,
+because any mixed state can be written ρ = �
+i pi|i⟩⟨i| in the basis in
+which it is diagonal, and so is a convex sum of pure states.
+We have already encountered this structure in our discussion of the
+special case of the Bloch sphere. We saw that the density operators are a
+(unit) ball in the three-dimensional set of 2 × 2 Hermitian matrices with
+unit trace. The ball is convex, and its extremal points are the points on
+the boundary. Similarly, the d × d density operators are a convex subset
+of the (d2−1)-dimensional set of d×d Hermitian matrices with unit trace,
+and the extremal points of the set are the pure states.
+
+
+28
+2 Foundations I: States and Ensembles
+
+However, the 2 × 2 case is atypical in one respect: for d > 2, the points
+on the boundary of the set of density matrices are not necessarily pure
+states.
+The boundary of the set consists of all density matrices with
+at least one vanishing eigenvalue (since there are nearby matrices with
+negative eigenvalues). Such a density matrix need not be pure, for d > 2,
+since the number of nonvanishing eigenvalues can exceed one.
+
+2.5.2 Ensemble preparation
+
+The convexity of the set of density matrices has a simple and enlightening
+physical interpretation. Suppose that a preparer agrees to prepare one of
+two possible states; with probability λ, the state ρ1 is prepared, and with
+probability 1 −λ, the state ρ2 is prepared. (A random number generator
+might be employed to guide this choice.) To evaluate the expectation
+value of any observable M, we average over both the choices of preparation
+and the outcome of the quantum measurement:
+
+⟨M⟩= λ⟨M⟩1 + (1 −λ)⟨M⟩2
+= λtr(Mρ1) + (1 −λ)tr(Mρ2)
+= tr (Mρ(λ)) .
+(2.100)
+
+All expectation values are thus indistinguishable from what we would
+obtain if the state ρ(λ) had been prepared instead. Thus, we have an
+operational procedure, given methods for preparing the states ρ1 and ρ2,
+for preparing any convex combination.
+Indeed, for any mixed state ρ, there are an infinite variety of ways to
+express ρ as a convex combination of other states, and hence an infinite
+variety of procedures we could employ to prepare ρ, all of which have
+exactly the same consequences for any conceivable observation of the sys-
+tem. But a pure state is different; it can be prepared in only one way.
+(This is what is “pure” about a pure state.) Every pure state is an eigen-
+state of some observable, e.g., for the state ρ = |ψ⟩⟨ψ|, measurement of
+the projection E = |ψ⟩⟨ψ| is guaranteed to have the outcome 1. (For
+example, recall that every pure state of a single qubit is “spin-up” along
+some axis.) Since ρ is the only state for which the outcome of measuring
+E is 1 with 100% probability, there is no way to reproduce this observ-
+able property by choosing one of several possible preparations. Thus, the
+preparation of a pure state is unambiguous (we can infer a unique prepa-
+ration if we have many copies of the state to experiment with), but the
+preparation of a mixed state is always ambiguous.
+How ambiguous is it? Since any ρ can be expressed as a sum of pure
+states, let’s confine our attention to the question: in how many ways
+can a density operator be expressed as a convex sum of pure states?
+
+
+2.5 Ambiguity of the ensemble interpretation
+29
+
+Mathematically, this is the question: in how many ways can ρ be written
+as a sum of extremal states?
+As a first example, consider the “maximally mixed” state of a single
+qubit:
+
+ρ = 1
+
+2I.
+(2.101)
+
+This can indeed be prepared as an ensemble of pure states in an infinite
+variety of ways. For example,
+
+ρ = 1
+
+2| ↑z⟩⟨↑z | + 1
+
+2| ↓z⟩⟨↓z |,
+(2.102)
+
+so we obtain ρ if we prepare either | ↑z⟩or | ↓z⟩, each occurring with
+probability 1
+
+2. But we also have
+
+ρ = 1
+
+2| ↑x⟩⟨↑x | + 1
+
+2| ↓x⟩⟨↓x |,
+(2.103)
+
+so we obtain ρ if we prepare either | ↑x⟩or | ↓x⟩, each occurring with
+probability 1
+
+2. Now the preparation procedures are undeniably different.
+Yet there is no possible way to tell the difference by making observations
+of the spin.
+More generally, the point at the center of the Bloch ball is the sum of
+any two antipodal points on the sphere – preparing either | ↑ˆn⟩or | ↓ˆn⟩,
+each occurring with probability 1
+
+2, will generate ρ = 1
+
+2I.
+Only in the case where ρ has two (or more) degenerate eigenvalues
+will there be distinct ways of generating ρ from an ensemble of mutually
+orthogonal pure states, but there is no good reason to confine our attention
+to ensembles of mutually orthogonal pure states. We may consider a point
+in the interior of the Bloch ball
+
+ρ(⃗P) = 1
+
+2(I + ⃗P · ⃗σ),
+(2.104)
+
+with 0 < |⃗P| < 1, and it too can be expressed as
+
+ρ(⃗P) = λρ(ˆn1) + (1 −λ)ρ(ˆn2),
+(2.105)
+
+if ⃗P = λˆn1 + (1 −λ)ˆn2 (or in other words, if ⃗P lies somewhere on the line
+segment connecting the points ˆn1 and ˆn2 on the sphere). Evidently, for
+any ⃗P, there is a an expression for ρ(⃗P) as a convex combination of pure
+states associated with any chord of the Bloch sphere that passes through
+the point ⃗P; all such chords comprise a two-parameter family.
+This highly ambiguous nature of the preparation of a mixed quantum
+state is one of the characteristic features of quantum information that
+contrasts sharply with classical probability distributions. Consider, for
+
+
+30
+2 Foundations I: States and Ensembles
+
+example, the case of a probability distribution for a single classical bit.
+The two extremal distributions are those in which either 0 or 1 occurs
+with 100% probability. Any probability distribution for the bit is a convex
+sum of these two extremal points. Similarly, if there are d possible states,
+there are d extremal distributions, and any probability distribution has
+a unique decomposition into extremal ones (the convex set of probability
+distributions is a simplex, the convex hull of its d vertices). If 0 occurs
+with 21% probability, 1 with 33% probability, and 2 with 46% probability,
+there is a unique “preparation procedure” that yields this probability
+distribution.
+
+2.5.3 Faster than light?
+
+Let’s now return to our earlier viewpoint — that a mixed state of system
+A arises because A is entangled with system B — to further consider the
+implications of the ambiguous preparation of mixed states. If qubit A has
+density matrix
+
+ρA = 1
+
+2| ↑z⟩⟨↑z | + 1
+
+2| ↓z⟩⟨↓z |,
+(2.106)
+
+this density matrix could arise from an entangled bipartite pure state
+|ψ⟩AB with the Schmidt decomposition
+
+|ψ⟩AB =
+1
+√
+
+2 (| ↑z⟩A| ↑z⟩B + | ↓z⟩A| ↓z⟩B) .
+(2.107)
+
+Therefore, the ensemble interpretation of ρA in which either | ↑z⟩A or
+| ↓z⟩A is prepared (each with probability p =
+1
+2) can be realized by
+performing a measurement of qubit B.
+We measure qubit B in the
+{| ↑z⟩B, | ↓z⟩B} basis; if the result | ↑z⟩B is obtained, we have prepared
+| ↑z⟩A, and if the result | ↓z⟩B is obtained, we have prepared | ↓z⟩A.
+But as we have already noted, in this case, because ρA has degenerate
+eigenvalues, the Schmidt basis is not unique. We can apply simultaneous
+unitary transformations to qubits A and B (actually, if we apply V to A
+we must apply V ∗to B as in eq.(2.92)) without modifying the bipartite
+pure state |ψ⟩AB. Therefore, for any unit 3-vector ˆn, |ψ⟩AB has a Schmidt
+decomposition of the form
+
+|ψ⟩AB =
+1
+√
+
+2 (| ↑ˆn⟩A| ↑ˆn′⟩B + | ↓ˆn⟩A| ↓ˆn′⟩B) .
+(2.108)
+
+We see that by measuring qubit B in a suitable basis, we can realize any
+interpretation of ρA as an ensemble of two pure states.
+This property suggests a mechanism for faster-than-light communica-
+tion. Many copies of |ψ⟩AB are prepared. Alice takes all of the A qubits
+
+
+2.5 Ambiguity of the ensemble interpretation
+31
+
+to the Andromeda galaxy and Bob keeps all of the B qubits on earth.
+When Bob wants to send a one-bit message to Alice, he chooses to mea-
+sure either σ1 or σ3 for all his spins, thus preparing Alice’s spins in either
+the {| ↑z⟩A, | ↓z⟩A} or {| ↑x⟩A, | ↓x⟩A} ensembles. (V is real in this case, so
+V = V ∗and ˆn = ˆn′.) To read the message, Alice immediately measures
+her spins to see which ensemble has been prepared.
+This scheme has a flaw.
+Though the two preparation methods are
+surely different, both ensembles are described by precisely the same den-
+sity matrix ρA.
+Thus, there is no conceivable measurement Alice can
+make that will distinguish the two ensembles, and no way for Alice to tell
+what action Bob performed. The “message” is unreadable.
+Why, then, do we confidently state that “the two preparation methods
+are surely different?” To ease any concerns about that, imagine that Bob
+either
+(1) measures all of his spins along the ˆz-axis, or
+(2) measures
+all of his spins along the ˆx-axis, and then calls Alice on the intergalactic
+telephone. He does not tell Alice whether he did (1) or (2), but he does
+tell her the results of all his measurements: “the first spin was up, the
+second was down,” etc.
+Now Alice performs either (1) or (2) on her
+spins. If both Alice and Bob measured along the same axis, Alice will
+find that every single one of her measurement outcomes agrees with what
+Bob found. But if Alice and Bob measured along different (orthogonal)
+axes, then Alice will find no correlation between her results and Bob’s.
+About half of her measurements agree with Bob’s and about half disagree.
+If Bob promises to do either (1) or (2), and assuming no preparation or
+measurement errors, then Alice will know that Bob’s action was different
+than hers (even though Bob never told her this information) as soon as
+one of her measurements disagrees with what Bob found.
+If all their
+measurements agree, then if many spins are measured, Alice will have
+very high statistical confidence that she and Bob measured along the
+same axis. (Even with occasional measurement errors, the statistical test
+will still be highly reliable if the error rate is low enough.) So Alice does
+have a way to distinguish Bob’s two preparation methods, but in this case
+there is certainly no faster-than-light communication, because Alice had
+to receive Bob’s phone call before she could perform her test.
+
+2.5.4 Quantum erasure
+
+We had said that the density matrix ρA =
+1
+2I describes a spin in an
+incoherent mixture of the pure states | ↑z⟩A and | ↓z⟩A. This was to be
+distinguished from coherent superpositions of these states, such as
+
+| ↑x, ↓x⟩=
+1
+√
+
+2 (| ↑z⟩± | ↓z⟩) ;
+(2.109)
+
+
+32
+2 Foundations I: States and Ensembles
+
+in the case of a coherent superposition, the relative phase of the two states
+has observable consequences (distinguishes | ↑x⟩from | ↓x⟩). In the case
+of an incoherent mixture, the relative phase is completely unobservable.
+The superposition becomes incoherent if spin A becomes entangled with
+another spin B, and spin B is inaccessible.
+Heuristically, the states | ↑z⟩A and | ↓z⟩A can interfere (the relative
+phase of these states can be observed) only if we have no information
+about whether the spin state is | ↑z⟩A or | ↓z⟩A. More than that, in-
+terference can occur only if there is in principle no possible way to find
+out whether the spin is up or down along the z-axis. Entangling spin A
+with spin B destroys interference, (causes spin A to decohere) because it
+is possible in principle for us to determine if spin A is up or down along
+ˆz by performing a suitable measurement of spin B.
+But we have now seen that the statement that entanglement causes
+decoherence requires a qualification. Suppose that Bob measures spin B
+along the ˆx-axis, obtaining either the result | ↑x⟩B or | ↓x⟩B, and that he
+sends his measurement result to Alice. Now Alice’s spin is a pure state
+(either | ↑x⟩A or | ↓x⟩A) and in fact a coherent superposition of | ↑z⟩A and
+| ↓z⟩A. We have managed to recover the purity of Alice’s spin before the
+jaws of decoherence could close!
+Suppose that Bob allows his spin to pass through a Stern–Gerlach appa-
+ratus oriented along the ˆz-axis. Well, of course, Alice’s spin can’t behave
+like a coherent superposition of | ↑z⟩A and | ↓z⟩A; all Bob has to do is
+look to see which way his spin moved, and he will know whether Al-
+ice’s spin is up or down along ˆz. But suppose that Bob does not look.
+Instead, he carefully refocuses the two beams without maintaining any
+record of whether his spin moved up or down, and then allows the spin to
+pass through a second Stern–Gerlach apparatus oriented along the ˆx-axis.
+This time he looks, and communicates the result of his σ1 measurement
+to Alice. Now the coherence of Alice’s spin has been restored!
+This situation has been called a quantum eraser. Entangling the two
+spins creates a “measurement situation” in which the coherence of | ↑z⟩A
+and | ↓z⟩A is lost because we can find out if spin A is up or down along ˆz by
+observing spin B. But when we measure spin B along ˆx, this information
+is “erased.” Whether the result is | ↑x⟩B or | ↓x⟩B does not tell us anything
+about whether spin A is up or down along ˆz, because Bob has been careful
+not to retain the “which way” information that he might have acquired
+by looking at the first Stern–Gerlach apparatus. Therefore, it is possible
+again for spin A to behave like a coherent superposition of | ↑z⟩A and
+| ↓z⟩A (and it does, after Alice hears about Bob’s result).
+We can best understand the quantum eraser from the ensemble view-
+point.
+Alice has many spins selected from an ensemble described by
+ρA = 1
+
+2I, and there is no way for her to observe interference between
+
+
+2.5 Ambiguity of the ensemble interpretation
+33
+
+| ↑z⟩A and | ↓z⟩A. When Bob makes his measurement along ˆx, a partic-
+ular preparation of the ensemble is realized. However, this has no effect
+that Alice can perceive – her spin is still described by ρA = 1
+
+2I as before.
+But, when Alice receives Bob’s phone call, she can select a subensemble
+of her spins that are all in the pure state | ↑x⟩A. The information that
+Bob sends allows Alice to distill purity from a maximally mixed state.
+
+Another wrinkle on the quantum eraser is sometimes called delayed
+choice. This just means that the situation we have described is really
+completely symmetric between Alice and Bob, so it can’t make any dif-
+ference who measures first. (Indeed, if Alice’s and Bob’s measurements
+are spacelike separated events, there is no invariant meaning to which
+came first; it depends on the frame of reference of the observer.) Alice
+could measure all of her spins today (say along ˆx) before Bob has made
+his mind up how he will measure his spins. Next week, Bob can decide
+to “prepare” Alice’s spins in the states | ↑ˆn⟩A and | ↓ˆn⟩A (that is the
+“delayed choice”). He then tells Alice which were the | ↑ˆn⟩A spins, and
+she can check her measurement record to verify that
+
+⟨σ1⟩ˆn = ˆn · ˆx .
+(2.110)
+
+The results are the same, irrespective of whether Bob “prepares” the spins
+before or after Alice measures them.
+
+We have claimed that the density matrix ρA provides a complete phys-
+ical description of the state of subsystem A, because it characterizes all
+possible measurements that can be performed on A. One might object
+that the quantum eraser phenomenon demonstrates otherwise. Since the
+information received from Bob enables Alice to recover a pure state from
+the mixture, how can we hold that everything Alice can know about A is
+encoded in ρA?
+
+I prefer to say that quantum erasure illustrates the principle that “in-
+formation is physical.” The state ρA of system A is not the same thing
+as ρA accompanied by the information that Alice has received from Bob.
+This information (which attaches labels to the subensembles) changes the
+physical description. That is, we should include Alice’s “state of knowl-
+edge” in our description of her system. An ensemble of spins for which
+Alice has no information about whether each spin is up or down is a dif-
+ferent physical state than an ensemble in which Alice knows which spins
+are up and which are down. This “state of knowledge” need not really
+be the state of a human mind; any (inanimate) record that labels the
+subensemble will suffice.
+
+
+34
+2 Foundations I: States and Ensembles
+
+2.5.5 The HJW theorem
+
+So far, we have considered the quantum eraser only in the context of
+a single qubit, described by an ensemble of equally probable mutually
+orthogonal states, (i.e., ρA = 1
+
+2I). The discussion can be considerably
+generalized.
+We have already seen that a mixed state of any quantum system can
+be realized as an ensemble of pure states in an infinite number of different
+ways. For a density matrix ρA, consider one such realization:
+
+ρA =
+�
+
+i
+pi|ϕi⟩⟨ϕi|,
+�
+pi = 1.
+(2.111)
+
+Here the states {|ϕi⟩A} are all normalized vectors, but we do not assume
+that they are mutually orthogonal. Nevertheless, ρA can be realized as
+an ensemble, in which each pure state |ϕi⟩⟨ϕi| occurs with probability pi.
+For any such ρA, we can construct a “purification” of ρA, a bipartite
+pure state |Φ1⟩AB that yields ρA when we perform a partial trace over
+HB. One such purification is of the form
+
+|Φ1⟩AB =
+�
+
+i
+
+√pi |ϕi⟩A ⊗|αi⟩B,
+(2.112)
+
+where the vectors |αi⟩B ∈HB are mutually orthogonal and normalized,
+
+⟨αi|αj⟩= δij.
+(2.113)
+
+Clearly, then,
+trB (|Φ1⟩⟨Φ1|) = ρA.
+(2.114)
+
+Furthermore, we can imagine performing an orthogonal measurement in
+system B that projects onto the |αi⟩B basis. (The |αi⟩B’s might not span
+HB, but in the state |Φ1⟩AB, measurement outcomes orthogonal to all
+the |αi⟩B’s never occur.) The outcome |αi⟩B will occur with probability
+pi, and will prepare the pure state |ϕi⟩⟨ϕi| of system A.
+Thus, given
+the purification |Φ1⟩AB of ρA, there is a measurement we can perform in
+system B that realizes the |ϕi⟩A ensemble interpretation of ρA. When
+the measurement outcome in B is known, we have successfully extracted
+one of the pure states |ϕi⟩A from the mixture ρA.
+What we have just described is a generalization of preparing | ↑z⟩A by
+measuring spin B along ˆz (in our discussion of two entangled qubits). But
+to generalize the notion of a quantum eraser, we wish to see that in the
+state |Φ1⟩AB, we can realize a different ensemble interpretation of ρA by
+performing a different measurement of B. So let
+
+ρA =
+�
+
+µ
+qµ|ψµ⟩⟨ψµ|,
+(2.115)
+
+
+2.5 Ambiguity of the ensemble interpretation
+35
+
+be another realization of the same density matrix ρA as an ensemble of
+pure states. For this ensemble as well, there is a corresponding purification
+
+|Φ2⟩AB =
+�
+
+µ
+
+√qµ |ψµ⟩A ⊗|βµ⟩B,
+(2.116)
+
+where again the {|βµ⟩B’s} are orthonormal vectors in HB. So in the state
+|Φ2⟩AB, we can realize the ensemble by performing a measurement in HB
+that projects onto the {|βµ⟩B} basis.
+Now, how are |Φ1⟩AB and |Φ2⟩AB related? In fact, we can easily show
+that
+|Φ1⟩AB = (IA ⊗U B) |Φ2⟩AB;
+(2.117)
+
+the two states differ by a unitary change of basis acting in HB alone, or
+
+|Φ1⟩AB =
+�
+
+µ
+
+√qµ |ψµ⟩A ⊗|γµ⟩B,
+(2.118)
+
+where
+|γµ⟩B = U B|βµ⟩B,
+(2.119)
+
+is yet another orthonormal basis for HB. We see, then, that there is a sin-
+gle purification |Φ1⟩AB of ρA, such that we can realize either the {|ϕi⟩A}
+ensemble or {|ψµ⟩A} ensemble by choosing to measure the appropriate
+observable in system B!
+Similarly, we may consider many ensembles that all realize ρA, where
+the maximum number of pure states appearing in any of the ensembles
+is d. Then we may choose a Hilbert space HB of dimension d, and a
+pure state |Φ⟩AB ∈HA ⊗HB, such that any one of the ensembles can
+be realized by measuring a suitable observable of B. This is the HJW
+theorem (for Hughston, Jozsa, and Wootters); it expresses the quantum
+eraser phenomenon in its most general form.
+In fact, the HJW theorem is an easy corollary to the Schmidt decom-
+position.
+Both |Φ1⟩AB and |Φ2⟩AB have Schmidt decompositions, and
+because both yield the same ρA when we take the partial trace over B,
+these decompositions must have the form
+
+|Φ1⟩AB =
+�
+
+k
+
+�
+
+λk |k⟩A ⊗|k′
+1⟩B,
+
+|Φ2⟩AB =
+�
+
+k
+
+�
+
+λk |k⟩A ⊗|k′
+2⟩B,
+(2.120)
+
+where the λk’s are the eigenvalues of ρA and the |k⟩A’s are the correspond-
+ing eigenvectors. But since {|k′
+1⟩B} and {|k′
+2⟩B} are both orthonormal
+bases for HB, there is a unitary U B such that
+
+|k′
+1⟩B = U B|k′
+2⟩B,
+(2.121)
+
+
+36
+2 Foundations I: States and Ensembles
+
+from which eq.(2.117) immediately follows.
+In the ensemble of pure states described by Eq. (2.111), we would say
+that the pure states |ϕi⟩A are mixed incoherently — an observer in sys-
+tem A cannot detect the relative phases of these states. Heuristically, the
+reason that these states cannot interfere is that it is possible in principle
+to find out which representative of the ensemble is actually realized by
+performing a measurement in system B, a projection onto the orthonor-
+mal basis {|αi⟩B}. However, by projecting onto the {|γµ⟩B} basis instead,
+and relaying the information about the measurement outcome to system
+A, we can extract one of the pure states |ψµ⟩A from the ensemble, even
+though this state may be a coherent superposition of the |ϕi⟩A’s. In effect,
+measuring B in the {|γµ⟩B} basis “erases” the “which way” information
+(whether the state of A is |ϕi⟩A or |ϕj⟩A). In this sense, the HJW theorem
+characterizes the general quantum eraser. The moral, once again, is that
+information is physical — the information acquired by measuring system
+B, when relayed to A, changes the physical description of a state of A.
+
+2.6 How far apart are two quantum states?
+
+2.6.1 Fidelity and Uhlmann’s theorem
+
+The distinguishability of two pure states |ψ⟩and |ϕ⟩is quantified by the
+deviation from 1 of their overlap |⟨ϕ|ψ⟩|2, also called fidelity. For two
+density operators ρ and σ the fidelity is defined by
+
+F(ρ, σ) ≡
+�
+tr
+�
+
+ρ
+1
+2 σρ
+1
+2
+�2
+.
+(2.122)
+
+(Some authors use the name “fidelity” for the square root of this quantity.)
+The fidelity is nonnegative, vanishes if ρ and σ have support on mutually
+orthogonal subspaces, and attains its maximum value 1 if and only if the
+two states are identical. If ρ = |ψ⟩⟨ψ| is a pure state, then the fidelity is
+
+F(ρ, σ) = ⟨ψ|σ|ψ⟩.
+(2.123)
+
+Suppose we perform an orthogonal measurement on ρ with the two out-
+comes: “Yes” if the state if |ψ⟩, “No” if the state is orthogonal to |ψ⟩.
+Then the fidelity is the probability that the outcome is “Yes.”
+We may also express the fidelity in terms of the L1 norm,
+
+F(ρ, σ) =
+���σ
+1
+2 ρ
+1
+2
+���
+2
+
+1 ,
+(2.124)
+
+where
+∥A∥1 = tr
+�
+
+A†A.
+(2.125)
+
+
+2.6 How far apart are two quantum states?
+37
+
+The L1 norm is also sometimes called the trace norm. (For Hermitian
+A, ∥A∥1 is just the sum of the absolute values of its eigenvalues.) The
+fidelity F(ρ, σ) is actually symmetric in its two arguments, although the
+symmetry is not manifest in eq. (2.122). To verify the symmetry, note
+that for any Hermitian A and B, the L1 norm obeys
+
+∥AB∥1 = ∥BA∥1 .
+(2.126)
+
+This holds because BAAB and ABBA have the same eigenvalues —
+if |ψ⟩is an eigenstate of ABBA with eigenvalue λ, the BA|ψ⟩is an
+eigenstate of BAAB with eigenvalue λ.
+It is useful to know how the fidelity of two density operators is related
+to the overlap of their purifications. We say that |Φ⟩AB is a purification
+of the density operator ρA if
+
+ρA = trB (|Φ⟩⟨Φ|) .
+(2.127)
+
+If
+ρ =
+�
+
+i
+pi|i⟩⟨i|,
+(2.128)
+
+where {|i⟩A} is an orthonormal basis for system A, then a particular
+purification of ρ has the form
+
+|Φρ⟩=
+�
+
+i
+
+√pi |i⟩A ⊗|i⟩B,
+(2.129)
+
+where {|i⟩B} is an orthonormal basis for system B.
+According to the
+HJW theorem, a general purification has the form
+
+|Φρ(V )⟩= I ⊗V |Φρ⟩
+(2.130)
+
+where V is unitary, which may also be written
+
+|Φρ(V )⟩=
+�
+ρ
+1
+2 ⊗V
+�
+|˜Φ⟩,
+(2.131)
+
+where |˜Φ⟩is the unconventionally normalized maximally entangled state
+
+|˜Φ⟩AB =
+�
+
+i
+|i⟩A ⊗|i⟩B.
+(2.132)
+
+If ρ and σ are two density operators on A, the inner product of their
+purifications on AB can be expressed as
+
+⟨Φσ(W )|Φρ(V )⟩= ⟨˜Φ|σ
+1
+2 ρ
+1
+2 ⊗W †V |˜Φ⟩.
+(2.133)
+
+
+38
+2 Foundations I: States and Ensembles
+
+Noting that
+
+U ⊗I|˜Φ⟩=
+�
+
+i,j
+|j⟩⊗|i⟩Uji =
+�
+
+i,j
+|j⟩⊗|i⟩UT
+ij = I ⊗U T |˜Φ⟩,
+(2.134)
+
+we have
+
+⟨Φσ(W )|Φρ(V )⟩= ⟨˜Φ|σ
+1
+2 ρ
+1
+2 U ⊗I|˜Φ⟩= tr
+�
+σ
+1
+2 ρ
+1
+2 U
+�
+,
+(2.135)
+
+where U =
+�
+W †V
+�T .
+Now we may use the polar decomposition
+
+A = U ′�
+
+A†A,
+(2.136)
+
+where U ′ is unitary, to rewrite the inner product as
+
+⟨Φσ(W )|Φρ(V )⟩= tr
+�
+UU ′
+�
+
+ρ
+1
+2 σρ
+1
+2
+�
+=
+�
+
+a
+λa⟨a|UU ′|a⟩,
+(2.137)
+
+where {λa} are the nonnegative eigenvalues of
+�
+
+ρ
+1
+2 σρ
+1
+2 and {|a⟩} are
+the corresponding eigenvectors. It is now evident that the inner product
+has the largest possible absolute value when we choose U = U ′−1, and
+hence we conclude
+
+F(ρ, σ) =
+�
+tr
+�
+
+ρ
+1
+2 σρ
+1
+2
+�2
+= max
+V ,W |⟨Φσ(W )|Φρ(V )⟩|2.
+(2.138)
+
+The fidelity of two density operators is the maximal possible overlap of
+their purifications, a result called Uhlmann’s theorem.
+One corollary of Uhlmann’s theorem is the monotonicity of fidelity:
+
+F(ρAB, ρAB) ≤F(ρA, ρA),
+(2.139)
+
+which says that tracing out a subsystem cannot decrease the fidelity of
+two density operators. Monotonicity means, unsurprisingly, that throwing
+away a subsystem does not make two quantum states easier to distinguish.
+It follows from Uhlmann’s theorem because any state purifying ρAB also
+provides a purification of A; therefore the optimal overlap of the purifi-
+cations of ρAB and σAB is surely achievable by purifications of ρA and
+σA.
+
+2.6.2 Relations among distance measures
+
+There are other possible ways besides fidelity for quantifying the difference
+between quantum states ρ and σ, such as the distance between the states
+using the L1 or L2 norm,
+
+∥ρ −σ∥1
+or
+∥ρ −σ∥2,
+(2.140)
+
+
+2.6 How far apart are two quantum states?
+39
+
+where the L2 norm of an operator is defined by
+
+∥A∥2 =
+�
+
+trA†A.
+(2.141)
+
+(For Hermitian A, ∥A∥2 is the square root of the sum of the squares
+of its eigenvalues.)
+The L1 distance is a particularly natural measure
+of state distinguishability, because (as shown in Exercise 2.5) it can be
+interpreted as the distance between the corresponding probability dis-
+tributions achieved by the optimal measurement for distinguishing the
+states. Although the fidelity, L1 distance, and L2 distance are not simply
+related to one another in general, there are useful inequalities relating
+these different measures.
+If {|λi|, i = 0, 1, 2, . . . d−1} denotes the eigenvalues of
+√
+
+A†A, then
+
+∥A∥1 =
+
+d−1
+�
+
+i=0
+|λi|;
+∥A∥2 =
+
+�
+�
+�
+�
+
+d−1
+�
+
+i=0
+|λi|2.
+(2.142)
+
+If we regard ∥A∥1 as the inner product of the two vectors (1, 1, 1, . . . , 1)
+and (|λ0|, |λ1|, . . . , |λd−1|), then from the Cauchy-Schwarz inequality we
+find
+∥A∥1 ≤
+√
+
+d ∥A∥2.
+(2.143)
+
+Because of the factor of
+√
+
+d on the right hand side, for a high-dimensional
+system density operators which are close together in the L2 norm might
+not be close in the L1 norm.
+There is, however, a dimension-independent inequality relating the L1
+
+distance between ρ and σ and the L2 distance between their square roots:
+
+∥√ρ −√σ∥2
+2 ≤∥ρ −σ∥1.
+(2.144)
+
+To derive this inequality, we first expand the difference of square roots in
+its basis of eigenvectors,
+
+√ρ −√σ =
+�
+
+i
+λi|i⟩⟨i|,
+(2.145)
+
+and note that the absolute value of this difference may be written as
+
+|√ρ −√σ| =
+�
+
+i
+|λi| |i⟩⟨i| =
+�√ρ −√σ
+�
+U = U
+�√ρ −√σ
+�
+,
+(2.146)
+
+where
+U =
+�
+
+i
+sign(λi)|i⟩⟨i|.
+(2.147)
+
+
+40
+2 Foundations I: States and Ensembles
+
+Using
+
+ρ −σ = 1
+
+2
+�√ρ −√σ
+��√ρ + √σ
+�
++ 1
+
+2
+�√ρ + √σ
+��√ρ −√σ
+�
+(2.148)
+
+and the cyclicity of the trace, we find
+
+tr (ρ −σ) U = tr|√ρ −√σ|
+�√ρ + √σ
+�
+=
+�
+
+i
+|λi| ⟨i|√ρ + √σ|i⟩
+
+≥
+�
+
+i
+|λi|
+��⟨i|√ρ −√σ|i⟩
+��=
+�
+
+i
+|λi|2 = ∥√ρ −√σ∥2
+2.
+
+(2.149)
+
+Finally, using
+
+∥ρ −σ∥1 = tr|ρ −σ| ≥tr (ρ −σ) U,
+(2.150)
+
+which is true for any unitary U, we obtain eq.(2.144).
+This L2 distance between square roots can be related to fidelity. First
+we note that
+��√ρ −√σ
+��2
+2 = tr
+�√ρ −√σ
+�2 = 2 −2 tr
+�√ρ√σ
+�
+,
+(2.151)
+
+since tr ρ = tr σ = 1. From the polar decomposition A = U
+√
+
+A†A
+(where U is unitary), we see that tr
+√
+
+A†A ≥|tr A|, and therefore
+
+�
+
+F(ρ, σ) = tr
+�
+
+ρ
+1
+2 σρ
+1
+2 ≥
+��tr
+�√ρ√σ
+���;
+(2.152)
+
+hence, from eq.(2.144) and eq.(2.151),
+
+�
+
+F(ρ, σ) ≥1 −1
+
+2
+
+��√ρ −√σ
+��2
+2 ≥1 −1
+
+2 ∥ρ −σ∥1 .
+(2.153)
+
+Eq.(2.153) tells us that if ρ and σ are close to one another in the L1 norm,
+then their fidelity is close to one.
+The L1 distance also provides an upper bound on fidelity:
+
+F(ρ, σ) ≤1 −1
+
+4 ∥ρ −σ∥2
+1 .
+(2.154)
+
+To derive eq.(2.154) we first show that it holds with equality for pure
+states. Any two vectors |ψ⟩and |ϕ⟩lie in some two-dimensional subspace,
+and by choosing a basis and phase conventions appropriately we may write
+
+|ψ⟩=
+�
+cos θ/2
+sin θ/2
+
+�
+,
+|ϕ⟩=
+�
+sin θ/2
+cos θ/2
+
+�
+,
+(2.155)
+
+
+2.7 Summary
+41
+
+for some angle θ; then
+
+|ψ⟩⟨ψ| −|ϕ⟩⟨ϕ| =
+�
+cos θ
+0
+0
+−cos θ
+
+�
+.
+(2.156)
+
+and
+|⟨ϕ|ψ⟩|2 = sin2 θ.
+(2.157)
+
+Therefore,
+
+∥|ψ⟩⟨ψ| −|ϕ⟩⟨ϕ|∥2
+1 = (2 cos θ)2 = 4 (1 −F(|ψ⟩⟨ψ|, |ϕ⟩⟨ϕ|)) .
+(2.158)
+
+Next, note that L1 distance, like fidelity, is monotonic:
+
+∥ρAB −σAB∥1 ≥∥ρA −σA∥1 .
+(2.159)
+
+This follows because the L1 distance is the optimal distance between
+probability distributions when we measure the two states, and the optimal
+measurement for distinguishing ρA and σA is also a possible measurement
+for ρAB and σAB, one that happens to act trivially on B.
+Finally, we invoke Uhlmann’s theorem. If ρAB and σAB are the purifi-
+cations of ρA and σA with the largest possible overlap, then
+
+F(ρA, σA) = F(ρAB, σAB) = 1 −1
+
+4 ∥ρAB −σAB∥2
+1
+
+≤1 −1
+
+4 ∥ρA −σA∥2
+1 ,
+(2.160)
+
+where the first equality uses Uhlmann’s theorem, the second uses
+eq.(2.158), and the final inequality uses monotonicity.
+By combining
+eq.(2.160) with eq.(2.153) we have
+
+1 −
+�
+
+F(ρ, σ) ≤1
+
+2∥ρ −σ∥1 ≤
+�
+
+1 −F(ρ, σ);
+(2.161)
+
+hence ρ and σ are close to one another in the L1 norm if and only if their
+fidelity is close to one.
+
+2.7 Summary
+
+Axioms. The arena of quantum mechanics is a Hilbert space H. The
+fundamental assumptions are:
+
+(1) A state is a ray in H.
+
+(2) An observable is a self-adjoint operator on H.
+
+(3) A measurement is an orthogonal projection.
+
+
+42
+2 Foundations I: States and Ensembles
+
+(4) Time evolution is unitary.
+
+(5) A composite system AB is described by the tensor product HA⊗HB.
+
+Density operator. But if we confine our attention to only a portion
+of a larger quantum system, assumptions (1)-(4) need not be satisfied. In
+particular, a quantum state is described not by a ray, but by a density
+operator ρ, a nonnegative operator with unit trace. The density operator
+is pure (and the state can be described by a ray) if ρ2 = ρ; otherwise, the
+state is mixed. An observable M has expectation value tr(Mρ) in this
+state.
+Qubit. A quantum system with a two-dimensional Hilbert space is
+called a qubit. The general density matrix of a qubit is
+
+ρ(⃗P) = 1
+
+2(I + ⃗P · ⃗σ)
+(2.162)
+
+where ⃗P is a three-component vector of length |⃗P| ≤1. Pure states have
+|⃗P| = 1.
+Schmidt decomposition. For any pure state |ψ⟩AB of a bipartite
+system, there are orthonormal bases {|i⟩A} for HA and {|i′⟩B} for HB
+such that
+|ψ⟩AB =
+�
+
+i
+
+√pi |i⟩A ⊗|i′⟩B;
+(2.163)
+
+Eq.(2.163) is called the Schmidt decomposition of |ψ⟩AB. In a bipartite
+pure state, subsystems A and B separately are described by density op-
+erators ρA and ρB; it follows from eq.(2.163) that ρA and ρB have the
+same nonvanishing eigenvalues (the pi’s). The number of nonvanishing
+eigenvalues is called the Schmidt number of |ψ⟩AB. A bipartite pure state
+is said to be entangled if its Schmidt number is greater than one.
+Ensembles. The density operators on a Hilbert space form a convex
+set, and the pure states are the extremal points of the set.
+A mixed
+state of a system A can be prepared as an ensemble of pure states in
+many different ways, all of which are experimentally indistinguishable if
+we observe system A alone.
+Given any mixed state ρA of system A,
+any preparation of ρA as an ensemble of pure states can be realized in
+principle by performing a measurement in another system B with which A
+is entangled. In fact given many such preparations of ρA, there is a single
+entangled state of A and B such that any one of these preparations can
+be realized by measuring a suitable observable in B (the HJW theorem).
+By measuring in system B and reporting the measurement outcome to
+system A, we can extract from the mixture a pure state chosen from one
+of the ensembles.
+
+
+2.8 Exercises
+43
+
+Fidelity. The fidelity F(ρ, σ) =
+���σ
+1
+2 ρ
+1
+2
+���
+2
+
+1 , quantifies the distinguisha-
+bility of two density operators — it is the maximum overlap achieved by
+their purifications (Uhlmann’s theorem). The fidelity F(ρ, σ) is close to
+one if and only if the L1 distance ∥ρ −σ∥1 is small.
+
+Further important ideas are developed in the Exercises.
+
+2.8 Exercises
+
+2.1 Fidelity of measurement
+
+a) For two states |ψ1⟩and |ψ2⟩in an N-dimensional Hilbert space,
+define the relative angle θ between the states by
+
+|⟨ψ2|ψ1⟩| ≡cos θ ,
+(2.164)
+
+where 0 ≤θ ≤π/2. Suppose that the two states are selected
+at random. Find the probability distribution p(θ)dθ for the
+relative angle. Hint: We can choose a basis such that
+
+|ψ1⟩
+= (1,⃗0)
+|ψ2⟩
+= (eiϕ cos θ, ψ⊥
+2 ) .
+(2.165)
+(2.166)
+
+“Selected at random” means that the probability distribution
+for the normalized vector |ψ2⟩is uniform on the (real) (2N −1)-
+sphere (this is the unique distribution that is invariant under
+arbitary unitary transformations). Note that, for fixed θ, eiϕ
+
+parametrizes a circle of radius cos θ, and |ψ⊥
+2 ⟩is a vector that
+lies on a 2N −3 sphere of radius sin θ.
+
+b) A density operator ρ is said to approximate a pure state |ψ⟩with
+fidelity
+F = ⟨ψ|ρ|ψ⟩.
+(2.167)
+
+Imagine that a state |ψ1⟩in an N-dimensional Hilbert space is
+selected at random, and we guess at random that the state is
+|ψ2⟩. On the average, what will be the fidelity of our guess?
+
+c) When we measure, we collect information and cause a distur-
+bance – an unknown state is replaced by a different state that
+is known. Suppose that the state |ψ⟩is selected at random,
+and then an orthogonal measurement is performed, projecting
+onto an orthonormal basis {|Ea⟩}. After the measurement, the
+
+
+44
+2 Foundations I: States and Ensembles
+
+state (averaged over all possible outcomes) is described by the
+density matrix
+ρ =
+�
+
+a
+Ea|ψ⟩⟨ψ|Ea ,
+(2.168)
+
+where Ea = |Ea⟩⟨Ea|; this ρ approximates |ψ⟩with fidelity
+
+F =
+�
+
+a
+(⟨ψ|Ea|ψ⟩)2 .
+(2.169)
+
+Evaluate F, averaged over the choice of |ψ⟩. Hint: Use Bayes’s
+rule and the result from (a) to find the probability distribution
+for the angle θ between the state |ψ⟩and the projected state
+Ea|ψ⟩/∥Ea|ψ⟩∥. Then evaluate
+�
+cos2 θ
+�
+in this distribution.
+
+Remark: The improvement in F in the answer to (c) compared to
+the answer to (b) is a crude measure of how much we learned by
+making the measurement.
+
+2.2 Measurement without disturbance?
+
+Charlie prepares the system A in one of two nonorthogonal states,
+|ϕ⟩A or | ˜ϕ⟩A, and he challenges Alice to collect some information
+about which state he prepared without in any way disturbing the
+state. Alice has an idea about how to meet the challenge.
+
+Alice intends to prepare a second “ancillary” system B in the state
+|β⟩B, and then apply to the composite system AB a unitary trans-
+formation U that acts according to
+
+U : |ϕ⟩A ⊗|β⟩B
+→
+|ϕ⟩A ⊗|β′⟩B
+| ˜ϕ⟩A ⊗|β⟩B
+→
+| ˜ϕ⟩A ⊗|˜β′⟩B,
+(2.170)
+
+which does indeed leave the state of system A undisturbed. Then
+she plans to perform a measurement on system B that is designed
+to distinguish the states |β′⟩B and |˜β′⟩B.
+
+a) What do you think of Alice’s idea? Hint: What does the uni-
+tarity of U tell you about how the states |β′⟩B and |˜β′⟩B are
+related to one another?
+
+b) Would you feel differently if the states |ϕ⟩A and | ˜ϕ⟩A were or-
+thogonal?
+
+2.3 Quantum bit commitment
+
+The Yankees are playing the Dodgers in the World Series. Alice is
+sure that she knows who will win. Alice doesn’t like Bob, so she
+
+
+2.8 Exercises
+45
+
+doesn’t want to tell him who the winner will be. But after the Series
+is over, Alice wants to be able to convince Bob that she knew the
+outcome all along. What to do?
+
+Bob suggests that Alice write down her choice (0 if the Yankees will
+win, 1 if the Dodgers will win) on a piece of paper, and lock the
+paper in a box. She is to give the box to Bob, but she will keep the
+key for herself. Then, when she is ready to reveal her choice, she
+will send the key to Bob, allowing him to open the box and read
+the paper.
+
+Alice rejects this proposal. She doesn’t trust Bob, and she knows
+that he is a notorious safe cracker. Who’s to say whether he will be
+able to open the box and sneak a look, even if he doesn’t have the
+key?
+
+Instead, Alice proposes to certify her honesty in another way, using
+quantum information. To commit to a value a ∈{0, 1} of her bit, she
+prepares one of two distinguishable density operators (ρ0 or ρ1) of
+the bipartite system AB, sends system B to Bob, and keeps system
+A for herself. Later, to unveil her bit, Alice sends system A to Bob,
+and he performs a measurement to determine whether the state of
+AB is ρ0 or ρ1. This protocol is called quantum bit commitment.
+
+We say that the protocol is binding if, after commitment, Alice is
+unable to change the value of her bit. We say that the protocol is
+concealing if, after commitment and before unveiling, Bob is unable
+to discern the value of the bit. The protocol is secure if it is both
+binding and concealing.
+
+Show that if a quantum bit commitment protocol is concealing, then
+it is not binding. Thus quantum bit commitment is insecure.
+
+Hint: First argue that without loss of generality, we may assume
+that the states ρ0 and ρ1 are both pure.
+Then apply the HJW
+Theorem.
+
+Remark: Note that the conclusion that quantum bit commitment
+is insecure still applies even if the shared bipartite state (ρ0 or ρ1) is
+prepared during many rounds of quantum communication between
+Alice and Bob, where in each round one party performs a quantum
+operation on his/her local system and on a shared message system,
+and then sends the message system to the other party.
+
+2.4 Completeness of subsystem correlations
+
+Consider a bipartite system AB. Suppose that many copies of the
+(not necessarily pure) state ρAB have been prepared. An observer
+Alice with access only to subsystem A can measure the expectation
+
+
+46
+2 Foundations I: States and Ensembles
+
+value of any observable of the form M A⊗IB, while an observer Bob
+with access only to subsystem B can measure the expectation value
+of any observable of the form IA ⊗N B. Neither of these observers,
+working alone, can expect to gain enough information to determine
+the joint state ρAB.
+
+But now suppose that Alice and Bob can communicate, exchang-
+ing (classical) information about how their measurement outcomes
+are correlated.
+Thereby, they can jointly determine the expecta-
+tion value of any observable of the form M A ⊗N B (an observable
+whose eigenstates are separable direct products states of the form
+|ϕ⟩A ⊗|χ⟩B).
+
+The point of this exercise is to show that if Alice and Bob have
+complete knowledge of the nature of the correlations between sub-
+systems A and B (know the expectation values of any tensor product
+observable M A⊗N B), then in fact they know everything about the
+bipartite state ρAB – there will be no surprises when they measure
+entangled observables, those whose eigenstates are entangled states.
+
+a) Let {M a, a = 1, 2, . . . , d2} denote a set of d2 linearly inde-
+pendent self-adjoint operators acting on a Hilbert space H of
+dimension d. Show that if ρ is a density operator acting on H,
+and tr (ρM a) is known for each a, then ⟨ϕ|ρ|ϕ⟩is known for
+any vector |ϕ⟩in H.
+
+b) Show that if ⟨ϕ|ρ|ϕ⟩is known for each vector |ϕ⟩, then ρ is
+completely known.
+
+c) Show that if {M a} denotes a basis for self-adjoint operators on
+HA, and {N b} denotes a basis for self-adjoint operators on
+HB, then {M a ⊗N b} is a basis for the self-adjoint operators
+on HA ⊗HB.
+
+Remark: It follows from (c) alone that the correlations of the “lo-
+cal” observables determine the expectation values of all the observ-
+ables.
+Parts (a) and (b) serve to establish that ρ is completely
+determined by the expectation values of a complete set of observ-
+ables.
+
+d) State and prove the result corresponding to (c) that applies to
+a n-part system with Hilbert space H1 ⊗H2 ⊗· · · ⊗Hn.
+
+e) Discuss how the world would be different if quantum states
+resided in a real Hilbert space rather than a complex Hilbert
+space. Consider, in particular, whether (c) is true for symmet-
+ric operators acting on a real vector space.
+
+
+2.8 Exercises
+47
+
+2.5 Optimal measurement distinguishing two quantum states
+
+Consider two quantum states described by density operators ρ and
+σ in an d-dimensional Hilbert space, and consider the complete
+orthogonal measurement {Ea, a = 0, 1, 2, . . . d−1}, where the Ea’s
+are one-dimensional projectors satisfying
+
+d−1
+�
+
+a=0
+Ea = I.
+(2.171)
+
+When the measurement is performed, outcome a occurs with proba-
+bility pa = tr ρEa if the state is ρ and with probability qa = tr σEa
+if the state is σ.
+
+The L1 distance between the two probability distributions is defined
+as
+
+d(p, q) ≡∥p −q∥1 ≡
+
+d−1
+�
+
+a=0
+|pa −qa| ;
+(2.172)
+
+this distance is zero if the two distributions are identical, and attains
+its maximum value two if the two distributions have support on
+disjoint sets.
+
+a) Show that
+
+d(p, q) ≤
+
+d−1
+�
+
+i=0
+|λi| = ∥ρ −σ∥1 ≡d(ρ, σ),
+(2.173)
+
+where the λi’s are the eigenvalues of the Hermitian operator
+ρ −σ. Hint: Working in the basis in which ρ −σ is diagonal,
+find an expression for |pa −qa|, and then find an upper bound
+on |pa −qa|. Finally, use the completeness property eq.(2.171)
+to bound d(p, q).
+
+b) Find a choice for the orthogonal projector {Ea} that saturates
+the upper bound eq.(2.173).
+
+c) If the states ρ = |ψ⟩⟨ψ| and σ = |ϕ⟩⟨ϕ| are pure, show that
+
+d(p, q) ≤2 ∥|ψ⟩−|ϕ⟩∥
+(2.174)
+
+where ∥· ∥denotes the Hilbert space norm.
+
+2.6 What probability distributions are consistent with a mixed
+state?
+
+
+48
+2 Foundations I: States and Ensembles
+
+A density operator ρ, expressed in the orthonormal basis {|αi⟩} that
+diagonalizes it, is
+
+ρ =
+�
+
+i
+pi|αi⟩⟨αi|.
+(2.175)
+
+We would like to realize this density operator as an ensemble of pure
+states {|ϕµ⟩}, where |ϕµ⟩is prepared with a specified probability qµ.
+This preparation is possible if the |ϕµ⟩’s can be chosen so that
+
+ρ =
+�
+
+µ
+qµ|ϕµ⟩⟨ϕµ|.
+(2.176)
+
+We say that a probability vector q (a vector whose components are
+nonnegative real numbers that sum to 1) is majorized by a proba-
+bility vector p (denoted q ≺p), if there exists a doubly stochastic
+matrix D such that
+qµ =
+�
+
+i
+Dµi pi.
+(2.177)
+
+A matrix is doubly stochastic if its entries are nonnegative real num-
+bers such that �
+µ Dµi = �
+i Dµi = 1. That the columns sum to one
+assures that D maps probability vectors to probability vectors (i.e.,
+is stochastic). That the rows sum to one assures that D maps the
+uniform distribution to itself. Applied repeatedly, D takes any input
+distribution closer and closer to the uniform distribution (unless D
+is a permutation, with one nonzero entry in each row and column).
+Thus we can view majorization as a partial order on probability
+vectors such that q ≺p means that q is more nearly uniform than p
+(or equally close to uniform, in the case where D is a permutation).
+
+Show that normalized pure states {|ϕµ⟩} exist such that eq.(2.176)
+is satisfied if and only if q ≺p, where p is the vector of eigenvalues
+of ρ.
+
+Hint: Recall that, according to the HJW Theorem, if eq.(2.175)
+and eq.(2.176) are both satisfied then there is a unitary matrix Vµi
+such that
+√qµ |ϕµ⟩=
+�
+
+i
+
+√pi Vµi|αi⟩.
+(2.178)
+
+You may also use (but need not prove) Horn’s Lemma: if q ≺p,
+then there exists a unitary (in fact, orthogonal) matrix Uµi such
+that q = Dp and Dµi = |Uµi|2.
+
+2.7 Alice does Bob a favor
+
+
+2.8 Exercises
+49
+
+Alice, in Anaheim, and Bob, in Boston, share a bipartite pure state
+|Ψ⟩, which can be expressed in the Schmidt form
+
+|Ψ⟩=
+�
+
+i
+
+√pi |αi⟩⊗|βi⟩,
+(2.179)
+
+where {|αi⟩} is an orthonormal basis for Alice’s system A, {|βi⟩}
+is an orthonormal basis for Bob’s system B, and the {pi} are non-
+negative real numbers summing to 1. Bob is supposed to perform a
+complete orthogonal local measurement on B, characterized by the
+set of projectors {EB
+a } — if the measurement outcome is a, then
+Bob’s measurement prepares the state
+
+|Ψ⟩�→|Ψa⟩=
+
+�
+I ⊗EB
+a
+�
+|Ψ⟩
+
+⟨Ψ|
+�
+I ⊗EB
+a
+�
+|Ψ⟩1/2 .
+(2.180)
+
+|Ψa⟩can also be expressed in the Schmidt form if we choose ap-
+propriate orthonormal bases for A and B that depend on the mea-
+surement outcome. The new Schmidt basis elements can be written
+as
+|α′
+a,i⟩= U A
+a |αi⟩,
+|β′
+a,i⟩= U B
+a |βi⟩,
+(2.181)
+
+where U A
+a , U B
+a are unitary.
+
+Unfortunately, Bob’s measurement apparatus is broken, though he
+still has the ability to perform local unitary transformations on B.
+Show that Alice can help Bob out by performing a measurement
+that is “locally equivalent” to Bob’s. That is, there are orthogonal
+projectors {EA
+a } and unitary transformations V A
+a , V B
+a such that
+
+|Ψa⟩= V A
+a ⊗V B
+a
+
+�
+�
+EA
+a ⊗I
+�
+|Ψ⟩
+
+⟨Ψ|
+�
+EA
+a ⊗I
+�
+|Ψ⟩1/2
+
+�
+
+(2.182)
+
+for each a, and furthermore, both Alice’s measurement and Bob’s
+yield outcome a with the same probability. This means that instead
+of Bob doing the measurement, the same effect can be achieved if
+Alice measures instead, tells Bob the outcome, and both Alice and
+Bob perform the appropriate unitary transformations. Construct
+EA
+a (this is most conveniently done by expressing both EA
+a and EB
+a
+in the Schmidt bases for |Ψ⟩) and express V A
+a and V B
+a in terms of
+U A
+a and U B
+a .
+
+Remark: This result shows that for any protocol involving local
+operations and “two-way” classical communication (2-LOCC) that
+transforms an initial bipartite pure state to a final bipartite pure
+
+
+50
+2 Foundations I: States and Ensembles
+
+state, the same transformation can be achieved by a “one-way” (1-
+LOCC) protocol in which all classical communication is from Alice
+to Bob (the Lo-Popescu Theorem). In a two-way LOCC protocol,
+Alice and Bob take turns manipulating the state for some finite
+(but arbitrarily large) number of rounds. In each round, one party
+or the other performs a measurement on her/his local system and
+broadcasts the outcome to the other party. Either party might use
+a local “ancilla” system in performing the measurement, but we
+may include all ancillas used during the protocol in the bipartite
+pure state |Ψ⟩. Though a party might discard information about
+the measurement outcome, or fail to broadcast the information to
+the other party, we are entitled to imagine that the complete in-
+formation about the outcomes is known to both parties at each
+step (incomplete information is just equivalent to the special case
+in which the parties choose not to use all the information). Thus
+the state is pure after each step.
+
+The solution to the exercise shows that a round of a 2-LOCC pro-
+tocol in which Bob measures can be simulated by an operation per-
+formed by Alice and a local unitary applied by Bob. Thus, we can
+allow Alice to perform all the measurements herself. When she is
+through she sends all the outcomes to Bob, and he can apply the
+necessary product of unitary transformations to complete the pro-
+tocol.
+
+2.8 The power of noncontextuality
+
+We may regard a quantum state as an assignment of probabilities
+to projection operators. That is, according to Born’s rule, if ρ is a
+density operator and E is a projector, then p(E) = tr (ρE) is the
+probability that the outcome E occurs, if E is one of a complete
+set of orthogonal projectors associated with a particular quantum
+measurement. A notable feature of this rule is that the assignment of
+a probability p(E) to E is noncontextual. This means that, while the
+probability p(E) depends on the state ρ, it does not depend on how
+we choose the rest of the projectors that complete the orthogonal
+set containing E.
+
+In a hidden variable theory, the probabilistic description of quantum
+measurement is derived from a more fundamental and complete de-
+terministic description. The outcome of a measurement could be
+perfectly predicted if the values of the hidden variables were pre-
+cisely known — then the probability p(E) could take only the values
+0 and 1. The standard probabilistic predictions of quantum theory
+arise when we average over the unknown values of the hidden vari-
+
+
+2.8 Exercises
+51
+
+ables. The purpose of this exercise is to show that such deterministic
+assignments conflict with noncontextuality. Thus a hidden variable
+theory, if it is to agree with the predictions of quantum theory after
+averaging, must be contextual.
+
+Let {I, X, Y , Z} denote the single-qubit observables
+
+I
+=
+�
+1
+0
+0
+1
+
+�
+,
+X
+=
+�
+0
+1
+1
+0
+
+�
+,
+
+Y
+=
+�
+0
+−i
+i
+0
+
+�
+,
+Z
+=
+�
+1
+0
+0
+−1
+
+�
+,
+(2.183)
+
+and consider the nine two-qubit observables:
+
+X ⊗I
+I ⊗X
+X ⊗X
+I ⊗Y
+Y ⊗I
+Y ⊗Y
+X ⊗Y
+Y ⊗X
+Z ⊗Z
+.
+(2.184)
+
+The three observables in each row and in each column are mutu-
+ally commuting, and so can be simultaneously diagonalized. In fact
+the simultaneous eigenstates of any two operators in a row or col-
+umn (the third operator is not independent of the other two) are
+a complete basis for the four-dimensional Hilbert space of the two
+qubits. Thus we can regard the array eq.(2.184) as a way of present-
+ing six different ways to choose a complete set of one-dimensional
+projectors for two qubits.
+
+Each of these observables has eigenvalues ±1, so that in a determin-
+istic and noncontextual model of measurement (for a fixed value of
+the hidden variables), each can be assigned a definite value, either
++1 or −1.
+
+a) Any noncontextual deterministic assignment has to be consis-
+tent with the multiplicative structure of the observables. For
+example, the product of the three observables in the top row is
+the identity I ⊗I. Therefore, if we assign a value ±1 to each
+operator, the number of −1’s assigned to the first row must be
+even. Compute the product of the three observables in each
+row and each column to find the corresponding constraints.
+
+b) Show that there is no way to satisfy all six constraints simulta-
+neously.
+
+Thus a deterministic and noncontextual assignment does not exist.
+
+2.9 Schmidt-decomposable states
+
+
+52
+2 Foundations I: States and Ensembles
+
+We have seen that any vector in a bipartite Hilbert space HAB =
+HA ⊗HB can be expressed in the Schmidt form: Given the vector
+|ψ⟩AB ∈HA ⊗HB, where HA and HB are both d-dimensional, we
+can choose orthonormal bases {|i⟩A} for HA and {|i⟩B} for HB so
+that
+
+|ψ⟩AB =
+
+d−1
+�
+
+i=0
+
+�
+
+λi |i⟩A ⊗|i⟩B,
+(2.185)
+
+where the λi’s are real and nonnegative. (We’re not assuming here
+that the vector has unit norm, so the sum of the λi’s is not con-
+strained.)
+Eq.(2.185) is called the Schmidt decomposition of the
+vector |ψ⟩AB.
+Of course, the bases in which the vector has the
+Schmidt form depend on which vector |ψ⟩AB is being decomposed.
+
+A unitary transformation acting on HAB is called a local unitary
+if it is a tensor product U A ⊗U B, where U A, U B are unitary
+transformations acting on HA, HB respectively. The word “local”
+is used because if the two parts A and B of the system are widely
+separated from one another, so that Alice can access only part A
+and Bob can access only part B, then Alice and Bob can apply this
+transformation by each acting locally on her or his part.
+
+a) Now suppose that Alice and Bob choose standard fixed bases
+{|i⟩A} and {|i⟩B} for their respective Hilbert spaces, and are
+presented with a vector |ψAB⟩that is not necessarily in the
+Schmidt form when expressed in the standard bases.
+Show
+that there is a local unitary U A ⊗U B that Alice and Bob can
+apply so that the resulting vector
+
+|ψ⟩′
+AB = U A ⊗U B|ψ⟩AB
+(2.186)
+
+does have the form eq.(2.185) when expressed in the standard
+bases.
+
+b) Let’s verify that the result of (a) makes sense from the point
+of view of parameter counting.
+For a generic vector in the
+Schmidt form, all λi’s are nonvanishing and no two λi’s are
+equal. Consider the orbit that is generated by letting arbitrary
+local unitaries act on one fixed generic vector in the Schmidt
+form. What is the dimension of the orbit, that is, how many
+real parameters are needed to specify one particular vector
+on the orbit? (Hint: To do the counting, consider the local
+unitaries that differ infinitesimally from the identity IA ⊗IB.
+Choose a basis for these, and count the number of independent
+linear combinations of the basis elements that annihilate the
+
+
+2.8 Exercises
+53
+
+Schmidt-decomposed vector.) Compare the dimension of the
+orbit to the (real) dimension of HAB, and check the consistency
+with the number of free parameters in eq.(2.185).
+
+A vector |ψ⟩A1...Ar in a Hilbert space HA1 ⊗· · · ⊗HAr with r parts
+is said to be Schmidt decomposable if it is possible to choose or-
+thonormal bases for HA1, . . . HAr such that vector can be expressed
+as
+|ψ⟩A1...Ar =
+�
+
+i
+
+�
+
+λi |i⟩A1 ⊗|i⟩A2 ⊗· · · ⊗|i⟩Ar.
+(2.187)
+
+Though every vector in a bipartite Hilbert space is Schmidt decom-
+posable, this isn’t true for vectors in Hilbert spaces with three or
+more parts.
+
+c) Consider a generic Schmidt-decomposable vector in the tripartite
+Hilbert space of three qubits. Find the dimension of the orbit
+generated by local unitaries acting on this vector.
+
+d) By considering the number of free parameters in the Schmidt
+form eq.(2.187), and the result of (c), find the (real) dimension
+of the space of Schmidt-decomposable vectors for three qubits.
+What is the real codimension of this space in the three-qubit
+Hilbert space C8?
+
+

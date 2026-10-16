@@ -1,0 +1,51 @@
+20
+5 Classical and quantum circuits
+
+5.2.3 Saving space: the pebble game
+
+We have seen that with Toffoli and NOT gates we can compute any in-
+vertible function using very little scratch space, and also that by fixing
+constant input bits and ignoring output bits, we can simulate any (irre-
+versible) Boolean circuit using only reversible Toffoli gates. In the latter
+case, though, we generate two bits of junk every time we simulate an
+AND gate.
+Our memory gradually fills with junk, until we reach the
+stage where we cannot continue with the computation without erasing
+some bits to clear some space. At that stage, we will finally have to pay
+the power bill for the computing we have performed, just as Landauer
+had warned.
+Fortunately, there is a general procedure for simulating an irreversible
+circuit using reversible gates, in which we can erase the junk without
+using any power. We accumulate and save all the junk output bits as
+the simulation proceeds, and when we reach the end of the computation
+we make a copy of the output. The COPY operation, which is logically
+reversible, can be done with a CNOT or Toffoi gate. Then we run the
+full computation in reverse, executing the circuit in the opposite order
+and replacing each gate by its inverse. This procedure cleans up all the
+junk bits, and returns all registers to their original settings, without any
+irreversible erasure steps.
+Yet the result of the computation has been
+retained, because we copied it before reversing the circuit.
+Because we need to run the computation both forward and backward,
+the reversible simulation uses roughly twice as many gates as the irre-
+versible circuit it simulates. Far worse than that, this simulation method
+requires a substantial amount of memory, since we need to be able to
+store about as many bits as the number of gates in the circuit before we
+finally start to clear the memory by reversing the computation.
+It is possible, though, at the cost of modestly increasing the simula-
+tion time, to substantially reduce the space required.
+The trick is to
+clear space during the course of the simulation by running a part of the
+computation backward. The resulting tradeoff between time and space is
+worth discussing, as it illustrates both the value of “uncomputing” and
+the concept of a recursive simulation.
+We imagine dividing the computation into steps of roughly equal size.
+When we run step k forward, the first thing we do is make a copy of
+the output from the previous step, then we execute the gates of step k,
+retaining all the junk accumulated by those gates. We cannot run step k
+forward unless we have previously completed step k −1. Furthermore, we
+will not be able to run step k backward if we have already run step k −1
+backward. The trouble is that we will not be able to reverse the COPY
+step at the very beginning of step k unless we have retained the output
+
+

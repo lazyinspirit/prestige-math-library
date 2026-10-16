@@ -1,0 +1,1269 @@
+
+[PDF page 1]
+arXiv:0712.2545v1  [quant-ph]  15 Dec 2007
+A Quantum Time-Space Lower Bound for the Counting Hierarchy∗
+Dieter van Melkebeek
+Thomas Watson
+University of Wisconsin - Madison
+August 13, 2021
+Abstract
+We obtain the ﬁrst nontrivial time-space lower bound for quantum algorithms solving prob-
+lems related to satisﬁability. Our bound applies to MajSAT and MajMajSAT, which are com-
+plete problems for the ﬁrst and second levels of the counting hierarchy, respectively. We prove
+that for every real d and every positive real ǫ there exists a real c > 1 such that either:
+• MajMajSAT does not have a quantum algorithm with bounded two-sided error that runs
+in time nc, or
+• MajSAT does not have a quantum algorithm with bounded two-sided error that runs in
+time nd and space n1−ǫ.
+In particular, MajMajSAT cannot be solved by a quantum algorithm with bounded two-sided
+error running in time n1+o(1) and space n1−ǫ for any ǫ > 0.
+The key technical novelty is a time- and space-eﬃcient simulation of quantum computations
+with intermediate measurements by probabilistic machines with unbounded error.
+We also
+develop a model that is particularly suitable for the study of general quantum computations
+with simultaneous time and space bounds. However, our arguments hold for any reasonable
+uniform model of quantum computation.
+1
+Introduction
+Satisﬁability, the problem of deciding whether a given Boolean formula has at least one satisfying
+assignment, has tremendous practical and theoretical importance. It emerged as a central problem
+in complexity theory with the advent of NP-completeness in the 1970’s. Proving lower bounds on
+the complexity of satisﬁability remains a major open problem. Complexity theorists conjecture
+that satisﬁability requires exponential time and linear space to solve in the worst case. Despite
+decades of eﬀort, the best single-resource lower bounds for satisﬁability on general-purpose models
+of computation are still the trivial ones – linear for time and logarithmic for space. However, since
+the late 1990’s we have seen a number of results that rule out certain nontrivial combinations of
+time and space complexity.
+One line of research [6, 7, 19, 5, 20], initiated by Fortnow, focuses on proving stronger and
+stronger time lower bounds for deterministic algorithms that solve satisﬁability in small space. For
+subpolynomial (i.e., no(1)) space bounds, the current record states that no such algorithm can run in
+time nc for any c < 2 cos (π/7) ≈1.8019. A second research direction aims to strengthen the lower
+∗Research partially supported by NSF awards CCR-0133693 and CCF-0523680.
+1
+
+
+[PDF page 2]
+bounds by considering more powerful models of computation than the standard deterministic one.
+Diehl and Van Melkebeek [5] initiated the study of lower bounds for problems related to satisﬁability
+on randomized models with bounded error. They showed that for every integer ℓ≥2, ΣℓSAT
+cannot be solved in time nc by subpolynomial-space randomized algorithms with bounded two-
+sided error for any c < ℓ, where ΣℓSAT denotes the problem of deciding the validity of a given fully
+quantiﬁed Boolean formula with ℓalternating blocks of quantiﬁers beginning with an existential
+quantiﬁer.
+ΣℓSAT represents the analogue of satisﬁability for the ℓth level of the polynomial-
+time hierarchy; Σ1SAT corresponds to satisﬁability. Proving nontrivial time-space lower bounds
+for satisﬁability on randomized algorithms with bounded two-sided error remains open. Allender
+et al. [2] considered the even more powerful (but physically unrealistic) model of probabilistic
+algorithms with unbounded error1. They settled for problems that are even harder than ΣℓSAT for
+any ﬁxed ℓ, namely MajSAT and MajMajSAT, the equivalents of satisﬁability and Σ2SAT in the
+counting hierarchy. MajSAT is the problem of deciding whether a given Boolean formula is satisﬁed
+for at least half of the assignments to its variables. MajMajSAT is the problem of deciding whether
+a given Boolean formula ϕ on disjoint variable sets x and y has the property that for at least half of
+the assignments to x, ϕ is satisﬁed for at least half of the assignments to y. Recall that Toda [16]
+proved that the polynomial-time hierarchy reduces to the class PP, which represents polynomial-
+time probabilistic computations with unbounded two-sided error and forms the ﬁrst level of the
+counting hierarchy. Apart from dealing with harder problems, the quantitative strength of the lower
+bounds by Allender et al. is also somewhat weaker. In particular, they showed that no probabilistic
+algorithm can solve MajMajSAT in time n1+o(1) and space n1−ǫ for any positive constant ǫ. We
+refer to [13] for a detailed survey of the past work on time-space lower bounds for satisﬁability
+and related problems, including a presentation of the Allender et al. lower bound that is slightly
+diﬀerent from the original one.
+In this paper we study the most powerful model that is considered physically realistic, namely
+quantum algorithms with bounded error. We obtain the ﬁrst nontrivial time-space lower bound
+for quantum algorithms solving problems related to satisﬁability. In the bounded two-sided error
+randomized setting, the reason we can get lower bounds for ΣℓSAT for ℓ≥2 but not for ℓ= 1 relates
+to the fact that we know eﬃcient simulations of such randomized computations in the second level
+of the polynomial-time hierarchy but not in the ﬁrst level. In the quantum setting the situation
+is worse: we know of no eﬃcient simulations in any level of the polynomial-time hierarchy. The
+best simulations to date are due to Adleman et al. [1], who showed that polynomial-time quantum
+computations with bounded two-sided error can be simulated in PP. Building on this connection,
+we bring the lower bounds of Allender et al. to bear on bounded-error quantum algorithms. Our
+main result shows that either a time lower bound holds for quantum algorithms solving MajMajSAT
+or a time-space lower bound holds for MajSAT.
+Theorem 1. For every real d and every positive real ǫ there exists a real c > 1 such that either:
+• MajMajSAT does not have a quantum algorithm with bounded two-sided error that runs in
+time nc, or
+• MajSAT does not have a quantum algorithm with bounded two-sided error that runs in time
+nd and space n1−ǫ.
+1Throughout this paper, we use the word “randomized” for the bounded-error setting and “probabilistic” for the
+unbounded-error setting.
+2
+
+
+[PDF page 3]
+As a corollary, we obtain a single time-space lower bound for MajMajSAT.
+Corollary 1. MajMajSAT cannot be solved by a quantum algorithm with bounded two-sided error
+running in time n1+o(1) and space n1−ǫ for any ǫ > 0.
+Unlike in the deterministic and randomized cases, it is not obvious how to deﬁne a model
+of quantum computation that allows us to accurately measure both time and space complexity.
+The existing models give rise to various issues. For example, intermediate measurements play a
+critical role as they are needed for time-space eﬃcient simulations of randomized computations by
+quantum computations. Several of the known models only allow measurements at the end of the
+computation but not during the computation. As another example, the classical time-space lower
+bounds hold for models with random access to the input and memory. This makes the lower bounds
+more meaningful as they do not exploit artifacts due to sequential access. Extending the standard
+quantum Turing machine model [3] to accommodate random access leads to complications that
+make the model inconvenient to work with. In Section 2 we discuss these and other issues in detail,
+and we survey the known models from the literature. We present a model that addresses all issues
+and is capable of eﬃciently simulating all other uniform models that may be physically realizable
+in the foreseeable future. Thus, lower bounds in our model reﬂect true problem hardness.
+The main technical novelty for establishing Theorem 1 consists of an improved time- and space-
+eﬃcient simulation of quantum computations by unbounded-error probabilistic computations. The
+previously known simulations, such as the one by Adleman et al., do not deal with intermediate
+measurements in a space-eﬃcient way. We show how to cope with intermediate measurements in
+a space-eﬃcient way and without loss in running time. Our construction works even when the
+sequence of local quantum operations can depend on previous measurement outcomes; i.e., we
+handle more powerful models than uniform quantum circuits. Our simulation makes use of a result
+on approximating quantum gates due to Solovay and Kitaev [11]. Theorem 1 follows from our
+simulation and the Allender et al. lower bound. The quantitative strength of our lower bound
+derives from the latter; our translation does not induce any further weakening.
+The rest of this paper is organized as follows.
+We start with a discussion of the model in
+Section 2, we derive our results in Section 3, and we conclude with some open problems in Section
+4. Throughout we assume basic background in quantum computation; see for example [14, 12].
+2
+Models of Quantum Computation
+In this section we develop the model that we use for the exposition of our arguments. Section 2.1
+contains a discussion of the issues that arise in choosing a model of quantum computation that
+accurately reﬂects time and space complexity. In Section 2.2 we describe how previously studied
+models ﬁt into our taxonomy. We motivate and precisely deﬁne our chosen model in Section 2.3.
+Although we consider the development of such a model as a contribution of our paper, the crux of
+our main result can be understood at an abstract level. As such, a reader who would like to quickly
+get to the heart of our paper can skip Section 2.
+2.1
+Issues
+Our model should capture the notion of a quantum algorithm as viewed by the computer science
+and physics communities and allow us to accurately measure the resources of time and space. For
+3
+
+
+[PDF page 4]
+example, the model should allow us to express important quantum algorithms such as Shor’s [15]
+and Grover’s [9] in a way that is natural and faithfully represents their complexities. This forms
+the overarching issue in choosing a model. Below we discuss eight speciﬁc aspects of quantum
+computation models and describe how the corresponding issues are handled in the classical setting.
+Sublinear space bounds. Many algorithms have the property that the amount of work space
+needed is less than the size of the input. Models such as one-tape Turing machines do not allow
+us to accurately measure the space usage of such algorithms because they charge for the space
+required to store the input. In the deterministic and randomized settings, sublinear space bounds
+are accommodated by considering Turing machines with a read-only input tape that does not count
+toward the space bound and read-write work tapes that do. In the quantum setting, we need a
+model with an analogous capability.
+Random access to the input and memory. In order to accurately reﬂect the complexity of
+computational problems, our model should include a mechanism for random access, i.e., the ability
+to access any part of the input or memory in a negligible amount of time (say, linear in the length
+of the address). For example, there is a trivial algorithm for the language of palindromes that runs
+in quasilinear time and logarithmic space on standard models with random access, but the time-
+space product of any traditional sequential-access Turing machine deciding palindromes is at least
+quadratic. The latter result does not reﬂect the complexity of deciding palindromes, but rather
+exploits the fact that sequential-access machines may have to waste a lot of time moving their tape
+heads back and forth. Classical Turing machines can be augmented with a mechanism to support
+random access; our quantum model should also have such a mechanism.
+Intermediate measurements. Unlike the previous two issues, intermediate measurements are
+speciﬁc to the quantum setting. In time-bounded quantum computations, it is customary to as-
+sume that all measurements occur at the end. This is because intermediate measurements can
+be postponed by introducing ancilla qubits to store what would be the result of the measurement,
+thus preventing computation paths with diﬀerent measurement outcomes from interfering with each
+other. However, this has a high cost in space – a computation running in time t may make up to
+t measurements, so the space overhead could be as large as t, which could be exponential in the
+original space bound. Hence, to handle small space bounds our model should allow intermediate
+measurements. Indeed, this is crucial for our model to meet the expectation of being at least as
+strong as randomized algorithms with comparable eﬃciency parameters; the standard way to “ﬂip
+a coin” in the quantum setting is to apply a Hadamard gate to a qubit in a basis state and then
+measure it.
+Also, many quantum algorithms, such as Shor’s factoring algorithm, are naturally
+described using intermediate measurements.
+We also need to decide which measurements to allow. Projective measurements in the com-
+putational basis are the most natural choice. Should we allow projective measurements in other
+bases? How about fully general measurements (see Section 2.2.3 in [14]), where the measurement
+operators need not be projections? General measurements can be performed by introducing ancilla
+qubits (at a cost in space), performing a change of basis (at a cost in time), and doing a projec-
+tive measurement in the computational basis, one qubit at a time. It is reasonable to charge the
+complexity of these operations to the algorithm designer, so we are satisﬁed with allowing only
+single-qubit measurements in the computational basis.
+4
+
+
+[PDF page 5]
+Obliviousness to the computation history. Computations proceed by applying a sequence of
+local operations to data. We call a computation nonoblivious if at each step, which local operation
+to use and which operands to apply it to may depend on the computation history.
+A generic
+deterministic Turing machine computation is nonoblivious. We can view each state as deﬁning an
+operation on a ﬁxed number of tape cells, where the operands are given by the tape head locations.
+In each step, the outcome of the applied operation aﬀects the next state and tape head locations,
+so both the operation and the operands can depend on the computation history. In contrast, a
+classical circuit computation is oblivious because neither the operation (gate) nor the operands
+(wires connected to the gate inputs) depend on the computation history (values carried on the
+wires).
+In the randomized and quantum settings, the notion of a computation history becomes more
+complicated because there can be many computation paths. In the randomized setting, applying
+a randomized operation to a conﬁguration may split it into a distribution over conﬁgurations, and
+the randomized Turing machine model allows the next state and tape head locations to depend
+on which computation path was taken. In the quantum setting, applying a quantum operation to
+a basis state may split it into a superposition over several basis states, and general nonoblivious
+behavior would allow the next operation and operands to depend on which computation path was
+taken. However, it is unclear whether such behavior is physically realizable, as currently envisioned
+technologies all select quantum operations classically. An intermediate notion of nonobliviousness,
+where the operations and operands may depend on previous measurement outcomes but not on the
+quantum computation path, does seem physically realistic.
+Classical control. There is a wide spectrum of degrees of interaction between a quantum com-
+putation and its classical control.
+On the one hand, one can imagine a quantum computation
+that is entirely “self-suﬃcient,” other than the interaction needed to provide the input and observe
+the output. On the other hand, one can imagine a quantum computation that is guided classi-
+cally every step of the way. Self-suﬃciency is inherent to computations that are nonoblivious to the
+quantum computation path, whereas measurements are inherently classically controlled operations.
+Incorporating intermediate measurements into computations that are nonoblivious to the quantum
+computation path would require some sort of global coordination among the quantum computation
+paths to determine when a measurement should take place.
+Syntax. Our model should be syntactic, meaning that identifying valid programs in the model
+is decidable. If we are interested in bounded-error computations, then we cannot hope to decid-
+ably distinguish programs satisfying the bounded-error promise from those that do not. However,
+we should be able to distinguish programs that evolve according to the postulates of quantum
+mechanics from those that do not. Allowing nonobliviousness to the quantum computation path
+complicates this syntax check. If diﬀerent components of the superposition can undergo diﬀerent
+unitary operations then the overall operation is not automatically unitary, due to interference.
+Extra conditions on the transition function are needed to guarantee unitarity.
+Complexity of the transition amplitudes. Care should be taken in specifying the allowable
+transition amplitudes.
+In the randomized setting, it is possible to solve undecidable languages
+by encoding the characteristic sequences of these languages in the transition probabilities. This
+problem is usually handled by using a certain universal set of elementary randomized operations,
+e.g., an unbiased coin ﬂip. In the quantum setting, the same problem arises with unrestricted
+5
+
+
+[PDF page 6]
+amplitudes. Again, one can solve the problem by restricting the elementary quantum operations
+to a universal set. However, unlike in the randomized setting, there is no single standard universal
+set like the unbiased coin ﬂip with which all quantum algorithms are easy to describe. Algorithm
+designers should be allowed to use arbitrary local operations provided they do not smuggle hard-
+to-compute information into the amplitudes.
+Absolute halting. In order to measure time complexity, we should use a model that naturally
+allows any algorithm to halt absolutely within some time bound t. In the randomized setting, one
+can design algorithms whose running times are random variables and may actually run forever. We
+can handle such algorithms by clocking them, so that they are forced to halt within some ﬁxed
+number of time steps. Our quantum model should provide a similar mechanism.
+2.2
+Earlier Models
+Now that we have spelled out the relevant issues and criteria, we consider several previously studied
+models as candidates.
+Bernstein and Vazirani [3] laid the foundations for studying quantum complexity theory using
+quantum Turing machines. Their model uses a single tape and therefore cannot handle sublinear
+space bounds. Like classical one-tape Turing machines, their model is sequential-access. It does
+not allow intermediate measurements. On the other hand, their model is fully nonoblivious: the
+transition function produces a superposition over basis conﬁgurations, and the state and tape head
+location may be diﬀerent for diﬀerent components of the superposition. Their model represents the
+self-suﬃcient extreme of the classical control spectrum. In their paper, Bernstein and Vazirani prove
+that their model is syntactic by giving a few orthogonality constraints on the entries of the transition
+function table that are necessary and suﬃcient for the overall evolution to be unitary.
+These
+conditions are somewhat unnatural, and can be traced back to the possibility of nonobliviousness
+to the quantum computation path. Bernstein and Vazirani restrict the transition amplitudes by
+requiring that the ﬁrst k bits of each amplitude are computable deterministically in time poly(k).
+Their model is nontrivial to clock; they require that the transition function be designed in such
+a way that the machine always halts, meaning that it reaches a superposition in which all non-
+halting basis conﬁgurations have zero amplitude. Bernstein and Vazirani detail how to design such
+mechanisms.
+In [18], Watrous considers a model similar to Bernstein and Vazirani’s, but with one read-
+write work tape and a read-only input tape not counting toward the space bound. The model
+naturally allows for sublinear space bounds, but it is still sequential-access. It allows intermediate
+measurements but only for the halting mechanism: a special register is measured after each time
+step, with the outcome indicating “halt and output 1”, “halt and output 0”, or “continue”. The
+model is nonoblivious like the Bernstein-Vazirani model. It has more classical interaction due to
+the halting mechanism, but this is arguably not “classical control.” The syntax conditions on the
+transition function are similar to those for the Bernstein-Vazirani model. The results in [18] require
+the transition amplitudes to be rational, which is somewhat unappealing since one may often wish
+to use Hadamard gates, which have irrational amplitudes. Similar to the Bernstein-Vazirani model,
+the model is nontrivial to clock. In fact, the results in [18] rely on counting an inﬁnite computation
+as a rejection.
+The main issue with the above models for our purposes is their sequential-access nature. It is
+possible to handle this problem by imposing a random-access mechanism. However, the conditions
+6
+
+
+[PDF page 7]
+on the entries of the transition function table characterizing unitary evolution become more com-
+plicated and unnatural, making the model inconvenient to work with. Again, the culprit is the
+nonobliviousness to the quantum computation path. Since this behavior does not appear to be
+physically realizable in the foreseeable future anyway, the complications arising from it are in some
+sense unjustiﬁed.
+In [17], Watrous considers a diﬀerent model of space-bounded quantum computation.
+This
+model is essentially a classical Turing machine with an additional quantum work tape and a ﬁxed-
+size quantum register. Sublinear space bounds are handled by charging for the space of the classical
+work tape and the quantum work tape but not the input tape. All three tape heads move sequen-
+tially. This model handles intermediate measurements. It is oblivious to the quantum computation
+path; the state and tape head locations cannot be in superposition with the contents of the quantum
+work tape. However, the computation is nonoblivious to the classical computation history, includ-
+ing the measurement outcomes. The ﬁnite control is classical; in each step it selects a quantum
+operation and applies it to the combination of the qubit under the quantum work tape head together
+with the ﬁxed-size register. The register is needed because there is only one head on the quantum
+work tape, but a quantum operation needs to act on multiple qubits to create entanglement. The
+allowed operations come from the so-called quantum operations formalism (see Chapter 8 of [14]),
+which encompasses unitary operations and general measurements, as well as interaction with an
+external environment. Each quantum operation produces an output from a ﬁnite alphabet – the
+measurement outcome in the case of a measurement. This outcome inﬂuences the next (classical)
+transition. This model is syntactic just like classical Turing machines, with the additional step of
+testing that each quantum operation satisﬁes the deﬁnition of a valid quantum operation. For his
+constructions, Watrous needs the transition amplitudes to be algebraic. This model is trivial to
+clock, since all the control is done classically and thus the machine can halt in a ﬁxed number of
+steps, just as in the classical setting.
+The latter model is convenient to work with since the essence of the quantum aspects of a
+computation are isolated into local operations that are chosen classically and applied to a simple
+quantum register. This models the currently envisioned realizations of quantum computers. We
+adopt this model for the exposition of our results, but we need to make some modiﬁcations in order
+to address the following issues.
+• Algorithms like Grover’s require quantum access to the input, i.e., an operation that allows
+diﬀerent basis states in a superposition to access diﬀerent bits of the input simultaneously.
+On inputs of length n, this is done with a query gate that eﬀects the transformation |i⟩|b⟩7→
+|i⟩|b ⊕xi⟩where i ∈{0, 1}⌈log n⌉, b ∈{0, 1}, and xi is the ith bit of the input. The model
+from [17] does not have such an operation and thus cannot express algorithms like Grover’s.
+While this operation seems no more physically realistic than nonobliviousness to the quantum
+computation path if we view the input as stored in a classical memory, it does make sense
+when the input is actually the output of another computation. For these reasons, we include
+such an operation in our model.
+• We want our model to have random access to emphasize the fact that our time-space lower
+bound does not exploit any model artifacts due to sequential access.
+We can make the
+model from [17] random-access by allowing each of the tape heads to jump in unit time to
+a location whose address we have classically computed, just as can be done for deterministic
+and randomized Turing machines.
+7
+
+
+[PDF page 8]
+• The quantum operations used in the model from [17] are more general than we wish to
+consider. Since we are focusing on the computational aspects of the model, we choose to
+restrict the set of allowed operations to unitary operations and projective measurements in
+the computational basis. The quantum operations formalism models the evolution of open
+quantum systems, which is of information-theoretic rather than algorithmic concern and can
+be simulated with unitary operations by introducing an additional “environment” system at
+a cost in space.
+• The restriction to algebraic transition amplitudes is unnecessary in the present setting. We
+feel that a reasonable way to restrict the amplitudes is the one chosen by Bernstein and
+Vazirani; i.e., the ﬁrst k bits of each amplitude should be computable deterministically in
+time poly(k).
+2.3
+Our Model
+For concreteness, we now describe and motivate the particular model we use for the exposition of
+our arguments. Our model addresses all the issues listed in Section 2.1, and is an adaptation of
+Watrous’s model from [17], as described at the end of Section 2.2.
+In terms of obliviousness, our model corresponds to the physically realistic middle ground
+where a classical mechanism determines which quantum operation to apply based on the previous
+measurement outcomes but independent of the actual quantum computation path. Our arguments
+are robust with respect to the details of the model as long as it has the latter property. In particular,
+we can handle uniform quantum circuits. Our results also hold for more general models allowing
+nonobliviousness to the quantum computation path, but this requires more technical work; see the
+remarks in Section 3.4.
+2.3.1
+Model Deﬁnition
+We deﬁne a quantum Turing machine as follows. There are three semi-inﬁnite tapes: the input
+tape, the classical work tape, and the quantum work tape.
+Each cell on the input tape holds
+one bit or a blank symbol. Each cell on the classical work tape holds one bit. Each cell on the
+quantum work tape holds one qubit. The input tape contains the input, a string in {0, 1}n, followed
+by blanks, and the classical and quantum work tapes are initialized to all 0’s. There are a ﬁxed
+number of tape heads, each of which is restricted to one of the three tapes. There may be multiple
+heads moving independently on the same tape.
+The ﬁnite control, the operations on the classical work tape, and all head movements are
+classical; each operation on the quantum work tape can be either a unitary operation or a single-
+qubit projective measurement in the computational basis. In each step of the computation, the
+ﬁnite control of the machine is in one of a ﬁnite number of states. Each state has an associated
+classical function, which is applied to the contents of the cells under the heads on the classical work
+tape, and an associated quantum operation, which is applied to the contents of the cells under the
+heads on the quantum work tape. The next state of the ﬁnite control and the head movements are
+determined by the current state, the contents of the cells under the input tape heads and classical
+work tape heads at the beginning of the computation step, and the measurement outcome if the
+quantum operation was a measurement.
+Each head moves left one cell, moves right one cell, stays where it is, or jumps to a new location
+at a precomputed address that is written on the classical work tape between two of the classical
+8
+
+
+[PDF page 9]
+work tape heads. The latter type of move is classical random access. We also allow “quantum
+random access” to the input by optionally performing a query that eﬀects the transformation
+|i⟩|b⟩7→|i⟩|b ⊕xi⟩on the qubits between two of the quantum work tape heads, where i ∈{0, 1}∗
+is an address located on the quantum work tape, b ∈{0, 1}, and xi is the ith bit of the input of
+length n or 0 if i > n.
+Among the states of the ﬁnite control are an “accept” state and a “reject” state, which cause the
+machine to halt. Although not needed in this paper, the machine can be augmented with a one-way
+sequential-access write-only classical output tape in order to compute nonboolean functions.
+Let us motivate our model deﬁnition. In terms of physical computing systems, the input tape
+corresponds to an external input source, the classical work tape corresponds to classical memory,
+and the quantum work tape corresponds to quantum memory. The bits and qubits under the heads
+correspond to the data being operated on in the CPU.
+We use multiple heads on each tape for several reason. One reason is that creating entanglement
+requires multiple-qubit operations and hence multiple quantum work tape heads. Another reason
+is that having multiple heads oﬀers a convenient way of formalizing random access. Since we are
+studying how algorithm performance scales with the input size, addresses have non-constant length
+and thus cannot ﬁt under the tape heads all at once. A number of mechanisms are possible for
+indicating where an address is stored for random access. The one we have chosen, namely that the
+address is delimited by two tape heads, is artiﬁcial and is chosen only for convenience because it
+makes the model simple and clean. Another possible mechanism is to associate with each head a
+special index tape used for writing addresses; see [13] for a discussion of this type of model.
+A minor issue arises with our multiple head approach: an operation on a work tape may not
+be well-deﬁned if two of the heads are over the same cell. Rather than requiring programs to avoid
+this situation, which would make the model non-syntactic, we can just assume that no operation
+is performed on the violating work tape when this situation arises.
+We allow the heads to move sequentially because if we only allowed random access, then con-
+structing an address would require storing a pointer to the location where that address is stored.
+The pointer would have have nonconstant size, so we would need a pointer to that pointer, and so
+on. This chicken-and-egg problem does not appear in physical computing systems, and we explicitly
+avoid it by allowing sequential traversal of memory without having to “remember” where the head
+is.
+2.3.2
+Complexity Classes
+The running time of a quantum Turing machine at input length n is the maximum over all inputs
+of length n and over all computation paths of the number of steps before the machine halts. The
+space usage is the maximum over all inputs of length n and over all computation paths of the
+largest address of a classical work tape head or quantum work tape head during the computation.
+Either the time or the space may be inﬁnite. Note that we maximize over all computation paths,
+even ones that occur with probability 0 due to destructive interference.
+Our deﬁnition of space usage allows the space to be exponential in the running time, since in
+time t a machine can write an address that is exponential in t and move a head to that location
+using the random-access mechanism. However, the space usage can be reduced to at most the
+running time with at most a polylogarithmic factor increase in the latter by compressing the data
+9
+
+
+[PDF page 10]
+and using an appropriate data structure to store (old address, new address) pairs. (See Section
+2.3.1 of [13] for a similar construction.)
+We are now set up to deﬁne quantum complexity classes within our model.
+Deﬁnition. BQTISP(t, s) is the class of languages L such that for some quantum Turing machine
+M running in time O(t) and space O(s),
+• if x ∈L then Pr(M accepts x) ≥2
+3, and
+• if x ̸∈L then Pr(M accepts x) ≤1
+3.
+We also require that for each entry in the matrix representation of each unitary operation of M in the
+computational basis, the ﬁrst k bits of the real and imaginary parts are computable deterministically
+in time poly(k). We deﬁne BQTIME(t) similarly but without the space restriction.
+As evidence in support of our model of choice, we note that the following results hold in our
+model.
+• Recall that BPTISP(t, s) is the class of languages solvable in time O(t) and space O(s) by a
+randomized algorithm with error probability at most 1/3. Then BPTISP(t, s) ⊆BQTISP(t, s)
+holds because a quantum algorithm in our model can directly simulate a randomized algo-
+rithm; the only issue is producing unbiased coin ﬂips. For this, the simulation can apply a
+Hadamard gate to one qubit on the quantum work tape and then measure it. This qubit can
+be reused to generate as many random bits as needed.
+• Grover’s algorithm shows that OR ∈BQTISP(n1/2 · polylog(n), log n), where OR denotes
+the problem of computing the disjunction of the n input bits.
+• Shor’s algorithm shows that a nontrivial factor of an integer of bit length n can be computed
+in time O(n3 · polylog(n)) and space O(n) with error probability at most 1/3 in our model.
+3
+Time-Space Lower Bound
+In this section we prove our results. Section 3.1 contains an outline of the two main steps of the
+proof. In Section 3.2 we argue that we can restrict our attention to a special case of our model
+using a ﬁnite universal set of gates. We show in Section 3.3 how to eﬃciently simulate this special
+case on unbounded-error probabilistic algorithms.
+3.1
+Results and Proof Outline
+Using the notation introduced in Section 2.3.2, we can formalize Theorem 1 and Corollary 1 as
+follows.
+Theorem 1 (restated). For every real d and every positive real ǫ there exists a real c > 1 such
+that either:
+• MajMajSAT ̸∈BQTIME(nc), or
+• MajSAT ̸∈BQTISP(nd, n1−ǫ).
+10
+
+
+[PDF page 11]
+Corollary 1 (restated). For all ǫ > 0, MajMajSAT ̸∈BQTISP(n1+o(1), n1−ǫ).
+Theorem 1 follows immediately from the following two results. The ﬁrst gives a lower bound for
+MajSAT and MajMajSAT on unbounded-error probabilistic algorithms, and the second translates
+this lower bound to the quantum setting by giving a time- and space-eﬃcient simulation of quantum
+algorithms by unbounded-error probabilistic algorithms. Recall that PTISP(t, s) denotes the class
+of languages decidable by unbounded-error probabilistic algorithms running in time O(t) and space
+O(s).
+Lemma 1 (Allender et al. [2]). For every real d and every positive real ǫ there exists a real
+c > 1 such that either:
+• MajMajSAT ̸∈PTIME(nc), and
+• MajSAT ̸∈PTISP(nd, n1−ǫ).
+Lemma 2. For all suﬃciently constructible t ≥log n and s ≥log n,
+BQTISP(t, s) ⊆PTISP(t · polylog(t), s + polylog(t)).
+Lemma 2 is our main technical contribution, and its proof occupies the remainder of Section 3.
+The ﬁrst step is to show that we can assume without loss of generality that our model only uses a
+certain ﬁnite universal set of quantum gates. A key ingredient is the Solovay-Kitaev theorem [11],
+which shows how to approximate any single-qubit unitary gate to within ǫ in the 2-norm sense using
+only polylog(1/ǫ) gates from a ﬁnite universal set. The eﬃciency aﬀorded by the Solovay-Kitaev
+theorem is critical for obtaining our lower bound.
+The second step is to simulate this special case of our model time- and space-eﬃciently with
+unbounded-error probabilistic algorithms. Our strategy builds on known simulations of quantum
+computations without intermediate measurements by probabilistic machines with unbounded error
+[1, 8]. The basic idea of these simulations is to write the ﬁnal amplitude of a basis state as a
+simple linear combination of #P functions, where each #P function counts the number of quantum
+computation paths leading to that state with a certain path amplitude. Taking advantage of our
+choice of universal set, we can use simple algebraic manipulations to express the probability of
+acceptance as the diﬀerence between two #P functions, up to a simple common scaling factor.
+Standard techniques then result in a time- and space-eﬃcient simulation by an unbounded-error
+probabilistic machine.
+The above approach only handles unitary operations with one ﬁnal measurement. To handle
+intermediate measurements, we ﬁrst adapt this approach to capture the probability of observing any
+particular sequence of measurement outcomes. The acceptance probability can then be expressed as
+a sum over all sequences of measurement outcomes that lead to acceptance, where each term is the
+scaled diﬀerence of two #P functions. We can combine those terms into a single one using the closure
+of #P under uniform exponential sums. However, the usual way of doing this – nondeterministically
+guess and store a sequence and then run the computation corresponding to that sequence – is too
+space-ineﬃcient. To address this problem, we note that the crux of the construction corresponds to
+multiplying two #P functions on the same input. The standard approach runs the two computations
+in sequence, accepting iﬀboth accept. We argue that we can run these two computations in parallel
+and keep them in synch so that they access each bit of the guessed sequence at the same time,
+11
+
+
+[PDF page 12]
+allowing us to reference each bit only once. We can then guess each bit when needed during the
+ﬁnal simulation and overwrite it with the next guess bit, allowing us to meet the space constraint.
+Regarding the conditions in Lemma 2, we assume t and s are at least logarithmic so that they
+dominate any logarithmic terms arising from indexed access to the input. We henceforth ignore
+the technical constructibility constraints on t and s. For Theorem 1, we only need to consider
+“ordinary” polynomially-bounded functions, which are computable in time polynomial in the length
+of the output written in binary, which is suﬃcient for our purposes.
+3.2
+Eﬃcient Approximation With a Universal Set
+A BQTISP(t, s) computation can be viewed as applying a sequence of O(t) classically selected
+quantum gates to a register of O(s) qubits. There are three types of gates:
+• Unitary gates selected from a ﬁnite library of gates associated with the machine.
+• Query gates, which eﬀect the transformation |i⟩|b⟩7→|i⟩|b ⊕xi⟩, where i is an index into the
+input x.
+• Measurement gates, which perform a single-qubit projective measurement in the computa-
+tional basis.
+The ﬁrst step in the proof of Lemma 2 is to show that we can restrict our attention to ma-
+chines whose library is a ﬁxed universal set. It is well-known that every unitary transformation
+can be eﬀected exactly using CNOT gates and single-qubit gates. Deﬁning BQTISP′(t, s) to be
+BQTISP(t, s) with the restriction that each gate in the library either is CNOT or acts on only one
+qubit, we have the following.
+Lemma 3. For all t and all s,
+BQTISP(t, s) = BQTISP′(t, s).
+For completeness, we sketch a proof of Lemma 3 in Appendix B.
+It is also well-known that ﬁnite universal sets exist which can approximate any unitary operation
+to arbitrary accuracy. We say that a single-qubit unitary operation eU ǫ-approximates a single-qubit
+unitary operation U if ||eU −eiθU|| ≤ǫ for some (irrelevant) global phase factor eiθ. We say that a
+set S of single-qubit unitary gates is universal for single-qubit unitary gates if for all single-qubit
+unitary gates U and all ǫ > 0 there is a sequence eU1, . . . , eUℓof gates from S such that the operation
+eU1 · · · eUℓǫ-approximates U.
+We use the fact that the set {F, H} is universal for single-qubit unitary gates2, where H is the
+Hadamard gate and
+F =
+1
+0
+0
+3
+5 + 4
+5i
+
+in the computational basis. We can restrict our attention to quantum Turing machines with library
+{CNOT, F, H} by replacing each single-qubit gate in the library of a BQTISP′ machine with an
+approximation using F and H gates.
+2This is shown on page 196 in [14] with a relative phase shift by π/4 instead of the F gate; however, F is a relative
+phase shift by an irrational multiple of 2π and hence can approximate the π/4 phase shift to arbitrary accuracy.
+12
+
+
+[PDF page 13]
+We need to satisfy the following requirements:
+• The transformation should not increase the number of gates applied by too much.
+• The new sequence of gates should still be eﬃciently computable by a classical algorithm.
+• The probability an input x is accepted should not change by too much when we apply the
+transformation.
+The following key theorem allows us to meet these constraints.
+Lemma 4 (Solovay and Kitaev [11]). If S is universal for single-qubit unitary gates and is
+closed under adjoint, then for all single-qubit unitary gates U and all ǫ > 0 there is a sequence of at
+most polylog(1/ǫ) gates from S that ǫ-approximates U. Moreover, such a sequence can be computed
+deterministically in time polylog(1/ǫ) provided the ﬁrst k bits of the matrix entries of U and the
+gates in S are computable in time poly(k).
+The proof by Solovay and Kitaev gives an algorithm for computing an approximation in time
+polylog(1/ǫ), ignoring the complexity of arithmetic (see [4] and Section 8.3 of [12]). We cannot do
+exact arithmetic since the entries of our gates may require inﬁnitely many bits to specify, but in
+each step of the algorithm it suﬃces to work with poly(ǫ)-approximations to all of the matrices.
+Computing each matrix entry to O(log (1/ǫ)) bits suﬃces for this because the matrices have only
+constant size. By our complexity constraint on the transition amplitudes and the fact that the
+entries of F and H are also eﬃciently computable, this incurs only a polylog(1/ǫ) time (and space)
+overhead.
+We argue that approximating each single-qubit unitary gate to within Θ(1/t) ensures that
+the probability of acceptance of a quantum Turing machine running in time t only changes by
+a small amount. Note that our model is nonoblivious to measurement outcomes, so there may
+be exponentially many classical computation paths corresponding to the diﬀerent measurement
+outcomes. A simple union bound over these paths does not work since it would require exponentially
+small precision in the approximations, which we cannot aﬀord. However, the approximation errors
+are relative to the probability weights of the paths. As a result, the overall error cannot grow too
+large.
+Deﬁne BQTISP′′(t, s) to be BQTISP(t, s) with the restriction that the library of gates is
+{CNOT, F, F †, H, I}. We include “identity gates” I for technical reasons – we need to allow com-
+putation steps that do not change the state of the quantum tape. We include F † gates because the
+Solovay-Kitaev theorem requires the universal set to be closed under adjoint.
+Lemma 5. For all suﬃciently constructible t and all s,
+BQTISP′(t, s) ⊆BQTISP′′(t · polylog(t), s + polylog(t)).
+We defer the proof of Lemma 5 to Appendix A.
+3.3
+Eﬃcient Probabilistic Simulation
+We now prove Lemma 2. By Lemmas 3 and 5, it suﬃces to show that
+BQTISP′′(t, s) ⊆PTISP(t, s + log t).
+13
+
+
+[PDF page 14]
+So consider a language L ∈BQTISP′′(t, s) and an associated quantum Turing machine M. We ﬁx
+an arbitrary input x and assume for simplicity of notation that on input x, M uses exactly s qubits
+and always applies exactly t quantum gates, exactly m of which are measurements, regardless of the
+observed sequence of measurement outcomes. This can be achieved by padding the computation
+with gates that do not aﬀect the accept/reject decision of M.
+3.3.1
+Computation Tree
+PP can be characterized as the class of languages consisting of inputs for which the diﬀerence of
+two #P functions exceeds a certain polynomial-time computable threshold. Thus, we would like
+to express the acceptance probability of M on input x as the ratio of the diﬀerence of two #P
+functions and some polynomial-time computable function. To facilitate the argument, we model
+the computation of M on input x as a tree, analogous to the usual computation trees one associates
+with randomized or nondeterministic computations. We can express the ﬁnal amplitude of a basis
+state as a linear combination of #P functions, where each #P function counts the number of
+root-to-leaf paths in the tree that lead to that basis state and have a particular path amplitude.
+The coeﬃcients in this linear combination are the path amplitudes, which are the products of the
+transition amplitudes along the path. In order to rewrite the linear combination as a ratio of the
+above type, we guarantee certain properties of the transition amplitudes in the tree.
+• First, our choice of universal set allows us to cancel a common denominator out of any given
+gate in such a way that the numerators become Gaussian integers. We can make the product
+of the common denominators the same for all full computation paths, and we will eventually
+absorb it in the polynomial-time computable threshold function.
+• Second, the Gaussian integers, such as the 3 + 4i numerator in the F gate, are handled by
+separating out real and imaginary parts, as well as positive and negative parts, and by mul-
+tiplicating nodes such that we eﬀectively only need to consider numerators in {1, −1, i, −i}.
+By multiplicating nodes we mean that we allow one node to have multiple children represent-
+ing the same computational basis state. For example, the 3 + 4i numerator results in seven
+children.
+We formally deﬁne the computation tree for our ﬁxed input x as follows. It has depth t. Each
+level τ = 0, . . . , t represents the state of the quantum tape after the τth gate is applied and before
+the (τ + 1)st gate is applied. Each node v has ﬁve labels:
+• τ(v) ∈{0, . . . , t}, representing the level of v
+• µ(v) ∈{0, 1}≤m, representing the sequence of measurement outcomes that leads to v
+• σ(v) ∈{0, 1}s, representing a computational basis state
+• α(v) ∈{1, −1, i, −i}, representing the numerator of the amplitude of v
+• β(v) ∈R+, representing the denominator of the amplitude of v
+Note that α(v) will be the product of the numerators of the transition amplitudes along the path
+that leads to v, and similarly for β(v). Labels of nodes across a given level need not be unique; if v
+and u are at the same level and σ(v) = σ(u) and µ(v) = µ(u), then v and u represent interference.
+14
+
+
+[PDF page 15]
+We now deﬁne the tree inductively as follows. The root node v is at level τ(v) = 0 and has
+µ(v) = ǫ representing that no measurements have been performed yet, σ(v) = 0s representing the
+initial state, and α(v) = β(v) = 1 representing that |0s⟩has amplitude 1 initially. Now consider
+an arbitrary node v. If τ(v) = t then v is a leaf. Otherwise, v has children at level τ(v) + 1 that
+depend on the type and operands of (τ(v) + 1)st gate applied given that µ(v) is observed. Let G
+denote this gate.
+• If G = H then v has two children v0 and v1. Suppose G is applied to the jth qubit and let σ(v0)
+and σ(v1) be obtained from σ(v) by setting the jth bit to 0 for σ(v0) and to 1 for σ(v1). Let
+σ(v)j denote the jth bit of σ(v). If σ(v)j = 0 then put α(v0) = α(v1) = α(v), and if σ(v)j = 1
+then put α(v0) = α(v) and α(v1) = −α(v). In each case put β(v0) = β(v1) =
+√
+2β(v). The 1
+and −1 multipliers for the α-labels correspond to the transition amplitudes of G, except that
+the common 1/
+√
+2 has been factored out and absorbed in the β-label.
+• If G = F then we consider two cases. Suppose G is applied to the jth qubit. If σ(v)j = 1 then
+v has seven children, all with the same σ-label σ(v). Three of the children have α-label α(v)
+and the other four have α-label i·α(v), and all children have β-label 5β(v). This corresponds
+to an amplitude of 3+4i
+5 , where the numerator 3 + 4i has been spread out across multiple
+children so as to maintain the property that all α-labels are in {1, −1, i, −i}. If σ(v)j = 0
+then v has ﬁve children, again all with the same σ-label σ(v), and now all with the same
+α-label α(v) and all with β-label 5β(v). This corresponds to an amplitude of 5/5, so that a
+common denominator of 5 can be used for all nodes resulting from the application of G.
+• If G = F † then the children of v are constructed as in the case G = F except that the children
+with α-label i · α(v) now have α-label −i · α(v).
+• If G = I, CNOT, a query gate, or a measurement gate, then applying G to |σ(v)⟩yields
+another computational basis state |σ⟩, so v has a single child u with σ(u) = σ, α(u) = α(v),
+and β(u) = β(v).
+For the cases where G is unitary, we put µ(u) = µ(v) for all children u. If G is a measurement
+gate then we put µ(u) = µ(v)σ(v)j, where u is the unique child of v and j is the index of the qubit
+measured by G.
+Note that the denominator β(v) can be written as 5f(v)√
+2
+h(v), where f(v) denotes the number
+of F and F † gates along the path from the root to v, and h(v) the number of H gates. In fact,
+f(v) and h(v) can be viewed as functions of τ(v) and µ(v) only, and we will write f(τ, µ) and
+h(τ, µ) accordingly. This is because the sequence of gates that leads to a node v only depends on
+µ(v) (and on the ﬁxed input x). The latter reﬂects the obliviousness of the model to the quantum
+computation path.
+In order to describe how the computation tree reﬂects the evolution of the quantum tape, we
+introduce the following notation:
+• Vτ,µ,σ,α = {v : τ(v) = τ, µ(v) = µ, σ(v) = σ, α(v) = α}
+• Vτ,µ,σ = S
+α Vτ,µ,σ,α
+• Vτ,µ = S
+σ Vτ,µ,σ
+15
+
+
+[PDF page 16]
+Suppose we run M but do not renormalize state vectors after measurements. Then after τ gates
+have been applied, we have a vector for each sequence of measurement outcomes µ that could have
+occurred during the ﬁrst τ steps. The nodes in Vτ,µ together with their amplitudes
+α(v)
+5f(τ,µ)√
+2
+h(τ,µ)
+give the vector for µ, since these are exactly the nodes whose computation paths are consistent
+with the measurement outcomes µ1 · · · µ|µ|. More precisely, an inductive argument shows that the
+vector for µ equals
+P
+v∈Vτ,µ α(v)|σ(v)⟩
+5f(τ,µ)√
+2
+h(τ,µ)
+.
+The squared 2-norm of each such vector equals the probability pµ of observing µ. In particular, at
+the end of the computation we obtain the following key property.
+Claim 1. For all µ ∈{0, 1}m,
+pµ =
+P
+σ∈{0,1}s
+ P
+v∈Vt,µ,σ α(v)
+2
+25f(t,µ)2h(t,µ)
+.
+We present a formal proof of Claim 1 in Appendix A.
+3.3.2
+Machine Construction
+With Claim 1 in hand, we now show how to construct a probabilistic machine N running in time
+O(t) and space O(s + log t) such that for all inputs x,
+• if Pr(M accepts x) > 1/2 then Pr(N accepts x) > 1/2, and
+• if Pr(M accepts x) < 1/2 then Pr(N accepts x) < 1/2.
+This suﬃces to prove Lemma 2.
+We ﬁrst construct nondeterministic machines M1, M−1, Mi, M−i, each taking as input a triple
+(x, µ, σ) where x ∈{0, 1}n, µ ∈{0, 1}m, and σ ∈{0, 1}s. (Recall that most of our notation, such
+as m and s, is with reference to the particular input x.) For each α ∈{1, −1, i, −i}, Mα will run in
+time O(t) and space O(s + log t) and satisfy #Mα(x, µ, σ) = |Vt,µ,σ,α|, where #Mα(x, µ, σ) denotes
+the number of accepting computation paths of Mα on input (x, µ, σ). Since t is constructible, we
+can assume without loss of generality that all machines are constructed so as to have exactly 2g
+computation paths for some constructible function g = O(t). This allows us to compare numbers
+of accepting paths to numbers of rejecting paths.
+We simply have Mα(x, µ, σ) nondeterministically guess a root-to-leaf path in the computation
+tree. The only information about the current node v it needs to keep track of is σ(v) and α(v),
+taking space O(s).
+It keeps a pointer into µ, taking space O(log t).
+It determines the correct
+sequence of gates by simulating the classical part of M, taking O(t) time and O(s) space. When
+processing a measurement gate G, Mα checks that applying G to the current σ(v) yields the next
+bit of µ. It rejects if not and otherwise continues, using that bit of µ as the measurement outcome.
+When it reaches a leaf v, Mα checks that σ(v) = σ and α(v) = α and accepts if so and rejects
+otherwise. As constructed, Mα has the desired behavior.
+16
+
+
+[PDF page 17]
+Fix µ ∈{0, 1}m. By Claim 1, the probability of observing µ satisﬁes
+pµ =
+X
+σ∈{0,1}s
+ P
+v∈Vt,µ,σ α(v)
+2
+25f(t,µ)2h(t,µ)
+=
+X
+σ∈{0,1}s
+ P
+α α · #Mα(x, µ, σ)
+2
+25f(t,µ)2h(t,µ)
+=
+X
+σ∈{0,1}s
+ P
+α #Mα(x, µ, σ)2
+−
+ P
+α #Mα(x, µ, σ) · #M−α(x, µ, σ)
+
+25f(t,µ)2h(t,µ)
+=
+X
+σ∈{0,1}s
+#M+(x, µ, σ) −#M−(x, µ, σ)
+25f(t,µ)2h(t,µ)
+,
+where M+ is a nondeterministic machine that guesses α ∈{1, −1, i, −i} and then runs two copies of
+Mα, accepting iﬀboth accept, and M−is a nondeterministic machine that guesses α ∈{1, −1, i, −i}
+and then runs a copy of Mα and a copy of M−α, accepting iﬀboth accept. We run the copies in
+parallel, keeping them in synch so that they access each bit of µ at the same time. Note that since
+M+ and M−can reject after seeing a single disagreement with µ, the two copies being run will
+apply the same sequence of gates and thus access each bit of µ at the same time. It follows that
+both M+ and M−need to reference each bit of µ only once. As we show shortly, this is critical for
+preserving the space bound. Both M+ and M−run in time O(t) and space O(s + log t).
+In order to capture the probability of acceptance of M, we would like to sum over all complete
+sequences of measurement outcomes µ that cause M to accept. We assume without loss of generality
+that f(t, µ) and h(t, µ) are independent of µ, say f(t, µ) = f and h(t, µ) = h for all µ, so that the
+scaling factor 1/25f(t,µ)2h(µ) can be factored out of this sum. To achieve this, we can modify M
+so that it counts the number of F and F † gates and the number of H gates it applies during the
+computation and then applies some dummy gates at the end to bring the counts up to the ﬁxed
+values f and h.
+We construct nondeterministic machines N+ and N−, both running in time O(t) and space
+O(s + log t), such that
+#N+(x) =
+X
+µ ∈{0, 1}m causing
+M to accept
+X
+σ∈{0,1}s
+#M+(x, µ, σ)
+and
+#N−(x) =
+X
+µ ∈{0, 1}m causing
+M to accept
+X
+σ∈{0,1}s
+#M−(x, µ, σ).
+We have N+(x) run M+(x, µ, σ) for a nondeterministically guessed µ ∈{0, 1}m and σ ∈{0, 1}s
+and accept iﬀM+ accepts and µ causes M to accept, and similarly for N−. Since every accepting
+execution of M+ or M−follows an execution of M with measurement outcomes µ, we know at the
+end whether µ causes M to accept.
+However, letting N+ just nondeterministically guess µ and σ and then run M+(x, µ, σ) does
+not work because it takes too much space to store µ. Since M+ and M−were constructed in such
+17
+
+
+[PDF page 18]
+a way that each bit of µ is only referenced once, we can nondeterministically guess each µj when
+needed and overwrite the previous µj−1. The space usage of σ is not an issue, so σ can be guessed
+and stored at any time. Constructed in this way, N+ and N−have the desired properties.
+It follows that the probability M accepts x is
+#N+(x) −#N−(x)
+25f2h
+.
+Thus,
+• if Pr(M accepts x) > 1/2 then #N+(x) −#N−(x) > 25f2h−1, and
+• if Pr(M accepts x) < 1/2 then #N+(x) −#N−(x) < 25f2h−1.
+We can now use a standard technique to obtain the ﬁnal PTISP simulation N. We assume
+without loss of generality that h ≥1. Recall that we assume N+ and N−each always have exactly
+2g computation paths for some constructible function g = O(t). By nondeterministically picking N+
+or N−to run, and ﬂipping the answer if N−was chosen, we get
+ #N+(x)−#N−(x)
+
++2g accepting
+computation paths. We can generate 2g+1 dummy computation paths, exactly 2g + 25f2h−1 of
+which reject, to shift the critical number of accepting paths to exactly half the total number of
+computation paths. To do this very time- and space-eﬃciently, we take advantage of our use of
+a universal set, which gives the number of rejecting dummy paths a simple form. We have N
+nondeterministically guess g + 1 bits; if the ﬁrst bit is 0 it rejects, and otherwise it ignores the next
+h −1 bits, groups the next 6f bits into groups of 6 forming a number in {0, . . . , 31}, accepts if any
+group is at least 25, and otherwise rejects iﬀthe remaining guess bits are 0. Since t is constructible,
+we can take f = O(t) and h = O(t) to be constructible functions so that N can compute f and h
+without aﬀecting the complexity parameters.
+As constructed, N runs in time O(t) and space O(s + log t) and accepts x with probability
+greater than 1/2 if x ∈L and with probability less than 1/2 if x ̸∈L. This ﬁnishes the proof of
+Lemma 2.
+3.4
+Remarks
+Notice that the proof of Lemma 2 shows that the unbounded-error version of BQTISP′′(t, s) is
+contained in PTISP(t, s + log t). Since Theorem 1 only operates at the granularity of polynomial
+time and space bounds, it would suﬃce to have Lemma 5 show that BQTISP′(t, s) is contained in
+the unbounded-error version of BQTISP′′(t1+o(1), s + to(1)). This allows us to prove Theorem 1
+under a more relaxed deﬁnition of BQTISP(t, s):
+• We could relax the error probability to 1/2 −1/poly(t) and relax the time for comput-
+ing the ﬁrst k bits of the amplitudes to 2o(k), since the overhead in computing amplitudes
+would still be subpolynomial and the Solovay-Kitaev algorithm could still produce 1/poly(t)-
+approximations, for arbitrarily high degree polynomials, in to(1) time.
+The argument in
+Lemma 5 still proves that the error probability remains less than 1/2 in this case.
+• Alternatively, we could keep the amplitude eﬃciency at poly(k) and relax the error proba-
+bility to 1/2 −1/2to(1); then the Solovay-Kitaev algorithm would need to compute 1/2to(1)-
+approximations, which would still only take to(1) time.
+18
+
+
+[PDF page 19]
+A natural goal is to strengthen Lemma 2 to unbounded-error quantum algorithms; the problem
+is that the error probability gets degraded during the approximation process of Lemma 5 and thus
+needs to be bounded away from 1/2 by a nonnegligible amount to begin with.
+Finally, we remark that nothing prevents our proof of Lemma 2 from carrying over to any
+reasonable model of quantum computation that is nonoblivious to the quantum computation path.
+In this case, the sequence of gates leading to a node v in the computation tree does not only depend
+on µ(v), but this fact does not present a problem for our proof. However, the proof becomes more
+technical since, e.g., approximating each local unitary operation may lead to overall nonunitary
+evolution since the local operations are themselves applied in a superposition. These complications
+arise for the same reason as the unnatural conditions on the transition function in the models from
+[3] and [18]. We feel that working out the details of such a result would not be well-motivated
+since the currently envisioned realizations of quantum computers do not support such nonoblivious
+behavior.
+4
+Conclusion
+Several questions remain open regarding time-space lower bounds on quantum models of computa-
+tion. An obvious goal is to obtain a quantitative improvement to our lower bound. It would be nice
+to get a particular constant c > 1 such that MajMajSAT cannot be solved by quantum algorithms
+running in nc time and subpolynomial space. The lower bound of Allender et al. does yield this;
+however, the constant c is very close to 1, and determining it would require a complicated analysis
+involving constant-depth threshold circuitry for iterated multiplication [10]. Perhaps there is a way
+to remove the need for this circuitry in the quantum setting.
+A major goal is to prove quantum time-space lower bounds for problems that are simpler than
+MajMajSAT. Ideally we would like lower bounds for satisﬁability itself, although lower bounds
+for its cousins in PH and ⊕P would also be very interesting.
+The diﬃculty in obtaining such
+lower bounds arises from the fact that we know of no simulations of quantum computations in
+these classes. The known time-space lower bounds for satisﬁability and related problems follow the
+indirect diagonalization paradigm, which involves assuming the lower bound does not hold and then
+deriving a contradiction with a direct diagonalization result. For example, applying this paradigm
+to quantum algorithms solving ΣℓSAT would entail assuming that ΣℓSAT has an eﬃcient quantum
+algorithm. Since ΣℓSAT is complete for the class ΣℓP under very eﬃcient reductions, this hypothesis
+gives a general simulation of the latter class on quantum algorithms. To reach a contradiction with
+a direct diagonalization result, we seem to need a way to convert these quantum computations back
+into polynomial-time hierarchy computations.
+Strengthening Corollary 1 to MajSAT instead of MajMajSAT may currently be within reach.
+Recall that the result of [2] only needs the following two types of hypotheses to derive a contradic-
+tion:
+• MajMajSAT ∈PTIME(nc), and
+• MajSAT ∈PTISP(nd, n1−ǫ).
+Under the hypothesis MajSAT ∈BQTISP(n1+o(1), n1−ǫ), Lemma 2 yields the second inclusion but
+not the ﬁrst. One can use the hypothesis to replace the second majority quantiﬁer of a MajMajSAT
+formula with a quantum computation. However, we do not know how to use the hypothesis again
+19
+
+
+[PDF page 20]
+to remove the ﬁrst majority quantiﬁer, because the hypothesis only applies to majority-quantiﬁed
+deterministic computations. Fortnow and Rogers [8] prove that PPBQP = PP, and their proof shows
+how to absorb the “quantumness” into the majority quantiﬁer so that we can apply the hypothesis
+again. However, their proof critically uses time-expensive ampliﬁcation and is not eﬃcient enough
+to yield a lower bound for MajSAT via the result of [2].
+It might be possible to exploit the
+space bound to obtain a more eﬃcient inclusion. It might also be possible to exploit more special
+properties of the construction in [2] to circumvent the need for the ampliﬁcation component.
+Acknowledgments
+We would like to thank Scott Diehl for helpful comments.
+References
+[1] L. Adleman, J. DeMarrais, and M. Huang. Quantum Computability. SIAM Journal on Com-
+puting, 26(5): 1524-1540, 1997.
+[2] E. Allender, M. Koucky, D. Ronneburger, S. Roy, and V. Vinay. Time-Space Tradeoﬀs in the
+Counting Hierarchy. In Proceedings of the 16th IEEE Conference on Computational Complex-
+ity, pages 295-302, 2001.
+[3] E. Bernstein and U. Vazirani. Quantum Complexity Theory. SIAM Journal on Computing,
+26(5): 1411-1473, 1997.
+[4] C. M. Dawson and M. A. Nielsen. The Solovay-Kitaev Algorithm. arXiv:quant-ph/0505030
+[5] S. Diehl and D. van Melkebeek. Time-Space Lower Bounds for the Polynomial-Time Hierarchy
+on Randomized Machines. SIAM Journal on Computing, 36: 563-594, 2006.
+[6] L. Fortnow. Time-Space Tradeoﬀs for Satisﬁability. Journal of Computer and System Sciences,
+60(2): 337-353, 2000.
+[7] L. Fortnow, R. Lipton, D. van Melkebeek, and A. Viglas.
+Time-Space Lower Bounds for
+Satisﬁability. Journal of the ACM, 52: 835-865, 2005.
+[8] L. Fortnow and J. Rogers. Complexity Limitations on Quantum Computation. Journal of
+Computer and System Sciences, 59(2): 240-252, 1999.
+[9] L. K. Grover. A Fast Quantum Mechanical Algorithm for Database Search. In Proceedings of
+the 28th ACM Symposium on Theory of Computing, pages 212-219, 1996.
+[10] W. Hesse. Division is in Uniform TC0. In Proceedings of the 28th International Colloquium
+On Automata, Languages, and Programming, pages 104-114, 2001
+[11] A. Kitaev. Quantum Computations: Algorithms and Error Correction. Russian Mathematical
+Surveys, 52(6): 1191-1249, 1997.
+[12] A. Kitaev, A. Shen, and M. Vyalyi. Classical and Quantum Computation. American Mathe-
+matical Society, 2002.
+20
+
+
+[PDF page 21]
+[13] D. van Melkebeek. A Survey of Lower Bounds for Satisﬁability and Related Problems. Foun-
+dations and Trends in Theoretical Computer Science, 2: 197-303, 2007.
+[14] M. A. Nielsen and I. L. Chuang. Quantum Computation and Quantum Information. Cambridge
+University Press, 2000.
+[15] P. Shor. Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a
+Quantum Computer. SIAM Journal on Computing, 26(5): 1484-1509, 1997.
+[16] S. Toda. PP is as Hard as the Polynomial Time Hierarchy. SIAM Journal on Computing,
+20(5): 865-877, 1991.
+[17] J. Watrous. On the Complexity of Simulating Space-Bounded Quantum Computations. Com-
+putational Complexity, 12: 48-84, 2003.
+[18] J. Watrous. Space-Bounded Quantum Complexity. Journal of Computer and System Sciences,
+59(2): 281-326, 1999.
+[19] R. Williams. Inductive Time-Space Lower Bounds for SAT and Related Problems. Computa-
+tional Complexity, 15(4): 433-470, 2006.
+[20] R. Williams. Time-Space Tradeoﬀs for Counting NP Solutions Modulo Integers. In Proceedings
+of the 22nd IEEE Conference on Computational Complexity, pages 70-82, 2007.
+A
+Postponing Measurements
+In this appendix we describe a framework for analyzing quantum algorithms with intermediate
+measurements by implicitly postponing the measurements and tracking the unitary evolution of
+the resulting puriﬁcation. We stress that we are doing so for reasons of analysis only; our actual
+simulations do not involve postponing measurements.
+This framework facilitates the proofs of
+Claim 1 and Lemma 5. We ﬁrst describe the common framework and then use it for those two
+proofs.
+Consider a quantum Turing machine M running in time t and space s. We ﬁx an arbitrary
+input x and assume for simplicity of notation that on input x, M uses exactly s qubits and always
+applies exactly t quantum gates, exactly m of which are measurements, regardless of the observed
+sequence of measurement outcomes. This can be achieved by padding the computation with gates
+that do not aﬀect the accept/reject decision of M.
+We conceptually postpone the measurements in the computation by
+• introducing m ancilla qubits initialized to all 0’s,
+• replacing the ith measurement on each classical computation path by an operation that
+entangles the ith ancilla qubit with the qubit being measured (by applying a CNOT to the
+ancilla with the measured qubit as the control), and
+• measuring the m ancilla qubits at the end.
+21
+
+
+[PDF page 22]
+In the τth step of the simulation, we apply a unitary operation Uτ on a system of s + m
+qubits, where Uτ acts independently on each of the subspaces corresponding to distinct sequences
+of measurement outcomes that can be observed before time step τ. More precisely, consider the set
+of µ ∈{0, 1}≤m such that given that µ is observed, the τth gate is applied after µ is observed but
+not after the (|µ| + 1)st measurement gate is applied. Let Uτ be the set of µ such that the τth gate
+is unitary, and let Mτ be the set of µ such that the τth gate is a measurement. For ν ∈{0, 1}m, let
+Pν denote the projection on the state space of the ancilla qubits to the one-dimensional subspace
+spanned by |ν⟩.
+For µ ∈Uτ, let Gτ,µ denote the unitary operator on the state space of s qubits induced by the
+τth gate applied given that µ is observed. Then Uτ acts as Gτ,µ ⊗I on the range of I ⊗Pµ0m−|µ|.
+For each µ ∈Mτ, Uτ applies an entangling operation Eτ,µ that acts only on the range of I ⊗
+(Pµ0m−|µ| + Pµ10m−1−|µ|). The behavior of Uτ on the remaining subspaces does not matter; we can
+set it arbitrarily to the identity operator. Thus,
+Uτ =
+ X
+µ∈Uτ
+Gτ,µ ⊗Pµ0m−|µ|
+
++
+ X
+µ∈Mτ
+Eτ,µ
+
++ R,
+where R is a term that expresses the behavior on the remaining subspaces.
+It is well-known, and can be veriﬁed from ﬁrst principles, that the probability of observing any
+sequence of measurement outcomes µ ∈{0, 1}m when M is run equals the probability of observing
+µ after the evolution U = UtUt−1 · · · U2U1 with all of the ancilla qubits initialized to 0. That is,
+Pr(µ observed) =
+(I ⊗Pµ)U|0s+m⟩
+2.
+We next prove Claim 1 and Lemma 5. These proofs both use the above framework but are
+otherwise independent of each other.
+A.1
+Proof of Claim 1
+Recall that we have a tree expressing the computation of M on the ﬁxed input x, and we wish to
+show that the probability of observing any complete sequence of measurement outcomes µ ∈{0, 1}m
+satisﬁes
+pµ =
+P
+σ∈{0,1}s
+ P
+v∈Vt,µ,σ α(v)
+2
+25f(t,µ)2h(t,µ)
+.
+Consider the above postponed measurement framework. The state of the system after τ steps is
+given by Uτ · · · U1|0s+m⟩. We can also write this state as a sum of contributions from all nodes in
+the τth level of the tree. More precisely, we claim that
+Uτ · · · U1|0s+m⟩=
+X
+v∈Vτ
+|ψ(v)⟩,
+(1)
+where Vτ = S
+µ Vτ,µ and for each node v,
+|ψ(v)⟩= α(v)
+β(v)|σ(v)µ(v)0m−|µ(v)|⟩= α(v)|σ(v)µ(v)0m−|µ(v)|⟩
+5f(τ(v),µ(v))√
+2
+h(τ(v),µ(v)) .
+Note that |ψ(v)⟩is the basis state of v multiplied by its amplitude, with the ancilla qubits set to
+indicate the sequence of measurement outcomes that leads to v.
+22
+
+
+[PDF page 23]
+We argue that the decomposition (1) holds by induction on τ = 0, . . . , t. The base case τ = 0
+is trivial. For τ > 0, by induction it suﬃces to show that for each node v ∈Vτ−1, Uτ|ψ(v)⟩=
+P
+u∈c(v) |ψ(u)⟩, where c(v) denotes the set of children of v. There are two cases. If µ(v) ∈Uτ then
+it can be veriﬁed directly from the construction of the tree that
+Uτ|ψ(v)⟩=
+ Gτ,µ(v) ⊗Pµ(v)0m−|µ(v)|
+
+|ψ(v)⟩=
+X
+u∈c(v)
+|ψ(u)⟩.
+If µ(v) ∈Mτ then it can be directly veriﬁed that Uτ|ψ(v)⟩= Eτ,µ(v)|ψ(v)⟩= |ψ(u)⟩, where u is
+the child of v. This completes the induction step.
+Given decomposition (1) for τ = t, we obtain that for all µ ∈{0, 1}m,
+pµ =
+(I ⊗Pµ)U|0s+m⟩
+2 =
+
+
+X
+v∈Vt,µ
+|ψ(v)⟩
+
+
+2
+=
+P
+σ∈{0,1}s
+ P
+v∈Vt,µ,σ α(v)
+2
+25f(t,µ)2h(t,µ)
+.
+A.2
+Proof of Lemma 5
+Consider a language L ∈BQTISP′(t, s) and an associated quantum Turing machine M′, and ﬁx
+an arbitrary input x. We assume as above that on input x, M′ uses exactly s qubits and always
+applies exactly t gates, exactly m of which are measurements. We transform M′ into a machine M′′
+running in time t · polylog(t) and space s + polylog(t) accepting L with error probability bounded
+away from 1/2 by a constant. By standard ampliﬁcation techniques, the error probability can be
+made at most 1/3, so L ∈BQTISP′′(t · polylog(t), s + polylog(t)).
+Using Lemma 4, we have M′′ run M′ but replace each single-qubit unitary gate with a 1/20t-
+approximation consisting of at most polylog(t) gates from the set {F, F †, H}. The time and space
+overhead is polylog(t), so M′′ runs in time t·polylog(t) and space s+polylog(t) and still operates on
+s qubits. We now show that the probability M′′ accepts x diﬀers from the probability M′ accepts
+x by at most 1/10. This suﬃces to prove the lemma.
+Let U ′ = U ′
+t · · · U ′
+1 be the evolution on the state space of s + m qubits obtained by implicitly
+postponing measurements in the computation of M′ as described above, and let the notation Uτ
+and Gτ,µ be as above for this computation. Since the value of µ uniquely determines whether M′
+accepts, we have that Pr(M′ accepts) =
+PU ′|0s+m⟩
+2, where P denotes sum of I ⊗Pµ over all µ
+consistent with acceptance.
+Now let U ′′ = U ′′
+t · · · U ′′
+1 be the same evolution as U ′ but where each unitary operation Gτ,µ
+is replaced by the operation eGτ,µ that uses the 1/20t-approximation of the τth gate M′ applies
+given that µ is observed, found by the Solovay-Kitaev algorithm. Since multiplying by global phase
+factors does not aﬀect a computation, we can assume that the approximation used in eGτ,µ is at
+distance at most 1/20t from the original gate of M′. Tensoring with the identity does not change
+the 2-norm of an operator, so we also have
+ eGτ,µ−Gτ,µ
+ ≤1/20t. Now since U ′′ is equivalent to the
+postponed measurement transformation applied to M′′, we have Pr(M′′ accepts) =
+PU ′′|0s+m⟩
+2.
+By standard applications of the triangle inequality (see Box 4.1 in [14]), we have that
+ Pr(M′′ accepts) −Pr(M′ accepts)
+ ≤2
+U ′′ −U ′ ≤2
+t
+X
+τ=1
+U ′′
+τ −U ′
+τ
+.
+23
+
+
+[PDF page 24]
+Thus in order to show that the acceptance probability of M′ and M′′ on input x diﬀer by at most
+1/10, it suﬃces to show that
+U ′′
+τ −U ′
+τ
+ ≤1/20t for all τ. The latter holds since for any unit
+vector |ψ⟩in the state space of s + m qubits, we have
+
+(U ′′
+τ −U ′
+τ)|ψ⟩
+
+
+2
+=
+
+
+X
+µ∈Uτ
+  eGτ,µ ⊗Pµ0m−|µ|
+
+−
+ Gτ,µ ⊗Pµ0m−|µ|
+
+|ψ⟩
+
+
+2
+=
+X
+µ∈Uτ
+
+
+  eGτ,µ −Gτ,µ
+
+⊗I
+ I ⊗Pµ0m−|µ|
+
+|ψ⟩
+
+
+2
+≤
+X
+µ∈Uτ
+ 1
+20t
+2
+
+ I ⊗Pµ0m−|µ|
+
+|ψ⟩
+
+
+2
+≤
+ 1
+20t
+2
+.
+B
+Decomposing Quantum Gates
+In this appendix we prove Lemma 3, which follows from results proven in Chapter 4 of [14]. We
+include a proof for reasons of completeness.
+For the nontrivial inclusion, consider a language L ∈BQTISP(t, s) and an associated quantum
+Turing machine M. We convert M into another machine M′ by replacing each application of a
+library gate U with a sequence of gates that eﬀects the same operation as U, where each either
+is CNOT or acts on only one qubit. Then M′ accepts an input x with the same probability as
+M, so to show that L ∈BQTISP′(t, s) we just need to check that the eﬃciency parameters are
+only aﬀected by constant factors and that the matrix entries of the new gates are still eﬃciently
+computable in the required sense. The time parameter clearly only goes up by a constant factor
+that depends on the gates in the library of M.
+The transformation is done in two steps and uses results proven in Sections 4.3 and 4.5 of [14].
+First, it is shown in [14] that every unitary gate can be decomposed as the product of unitary gates
+each of which acts nontrivially on only two computational basis states (two-level gates). Applying
+this transformation to the library gates associated with the family does not aﬀect s. The matrix
+entries of these two-level gates are obtained via standard math operations from the matrix entries
+of the original gates and are thus eﬃciently computable.
+Second, it is shown in [14] that each two-level gate can be decomposed into a product of CNOTs
+and single-qubit gates. This transformation can be done in three steps.
+• First, a two-level gate can be decomposed into a product of operations each of which is
+a controlled single-qubit operation that conditions on many qubits. This is done by using
+controlled X gates to interchange adjacent computational basis states in a Gray code order so
+that the two basis states acted on by the two-level gate diﬀer only in a single qubit. Then a
+controlled single-qubit gate is used to carry out the nontrivial 2×2 submatrix of the two-level
+gate, and then the basis states are mapped back to their original values (Figure 4.16 in [14]).
+This does not increase the number of qubits, and all entries in these gates are 0 or 1 or come
+from the two-level gate, and are hence eﬃciently computable.
+• Second, each large controlled operation can be reduced to X gates, Toﬀoli gates, and a
+controlled single-qubit gate that conditions on one qubit (Figure 4.10 in [14]). To accomplish
+24
+
+
+[PDF page 25]
+this, X gates are ﬁrst used on some of the control qubits to make the controlled operation
+condition on all qubits being 1. Then these control qubits are ANDed together into some
+ancilla qubits using a series of Toﬀoli gates, and the heart of the operation is carried out by
+a controlled single-qubit gate that conditions on the ancilla qubit holding the AND of the
+original control qubits. The ANDing operations are reversed so that the ancilla qubits are
+reset to 0 and can hence be reused and only increase the number of qubits by an additive
+constant.
+• Third, the Toﬀoli and controlled single-qubit gates can be implemented with special-purpose
+circuits using only CNOTs and single-qubit gates (Figures 4.9 and 4.6 in [14]). This does not
+increase the number of qubits, and the matrix entries in this implementation of a controlled-U
+gate are obtained from the matrix entries for U via standard math operations and are thus
+eﬃciently computable.
+This ﬁnishes the proof of Lemma 3.
+25

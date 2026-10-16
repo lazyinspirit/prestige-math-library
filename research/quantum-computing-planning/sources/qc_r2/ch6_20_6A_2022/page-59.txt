@@ -1,0 +1,135 @@
+6.10 QMA-completeness of the local Hamiltonian problem
+53
+
+and of another state that it might reject. But Merlin cannot fool Arthur into accepting
+after many trials unless there is some state occuring in the ensemble of pure states that
+is accepted with high probability in each trial.
+So now we have seen that for a problem in QMA such that the verifier accepts with
+high probability, the corresponding Hamiltonian H has an eigenvector with eigenvalue
+close to zero. There are two things left to show:
+
+• If the verifier rejects with high probability, then
+
+E0 ≥1/poly(n)
+(6.250)
+
+(then we can choose the promise gap of size 1/poly(n), such that E0 ≤Elow for a
+YES answer and E0 > Ehigh for a NO answer)
+• So far Hprop is not local! It acts on the clock register, which is a (T + 1)-dimensional
+system, and T = poly(n). We need to show we can encode the clock using qubits such
+that Hprop + Hclock is k-local.
+
+We’ll come back to the issue of encoding the clock later. First let’s try to understand
+better the spectrum of H = Hin + Hout + Hprop.
+
+Diagonalizing Hprop
+Let’s start by considering Hprop. We’ve seen that a valid history state is a null vector of
+Hprop (has eigenvalue zero). What are the other eigenspaces and eigenvalues of Hprop?
+It’s easier to compute the spectrum of Hprop by transforming to a rotating frame basis
+that freezes the motion of the state |ψ(t)⟩. That is, let
+
+Vt = UtUt−1 . . . U1
+(6.251)
+
+(the unitary applied after the first t steps of the circuit). And consider V = �T
+t=0 Vt ⊗
+|t⟩⟨t|. The the history state η =
+1
+√T+1
+�T
+t=0 Vt|ψ(0)⟩⊗|t⟩⟨t| is mapped by V † to the
+“history” state for the case where |ψ(t)⟩does not depend on t at all:
+
+V †|η⟩
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+V †
+t Vt|ψ(0)⟩⊗|t⟩⟨t| = |ψ(0)⟩⊗
+
+T
+�
+
+t=0
+|t⟩⟨t|.
+(6.252)
+
+Under this basis change, the Hamiltonian transforms as
+
+H′
+prop = V †HpropV =
+
+T
+�
+
+t=0
+
+1
+2 (I ⊗|t⟩⟨t| + I ⊗|t −1⟩⟨t|)
+(6.253)
+
+−
+
+T
+�
+
+t=0
+
+1
+2
+
+�
+V †
+t Vt−1 ⊗|t⟩⟨t −1| + V †
+t−1Vt−1 ⊗|t −1⟩⟨t|
+�
+
+=
+
+T
+�
+
+t=0
+
+1
+2 (|t⟩⟨t| + |t −1⟩⟨t −1| −|t⟩⟨t −1| −|t −1⟩⟨t|) .
+
+This transformed Hamiltonian H′
+prop acts nontrivially only on the clock register. It is a
+sum of overlapping 2 × 2 blocks:
+
+H′
+prop =
+
+T
+�
+
+t=1
+
+�
+1
+2
+−1
+
+2
+−1
+
+2
+1
+2
+
+�
+
+t−1,t
+,
+(6.254)
+
+where the subscript means the matrix acts on the space spanned by {|t−1⟩, |t⟩}. Because
+
+

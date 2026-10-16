@@ -1,0 +1,487 @@
+{
+  "group": "h",
+  "batches": ["47"],
+  "pages_read": [
+    "quantum-signal-processing",
+    "quantum-signal-processing-examples"
+  ],
+  "items_read": [
+    "lem-qa-23-polynomial-interval-sign-certificate",
+    "lem-qa-23-sturm-root-counting",
+    "lem-qa-23-exact-interval-boundedness-decision",
+    "alg-qa-23-polynomial-root-isolation",
+    "thm-qa-23-polynomial-root-isolation-correctness",
+    "alg-qa-23-bounded-height-numerical-roots",
+    "thm-qa-23-bounded-height-root-arithmetic-cost",
+    "def-qa-23-qsp-signal-sequence",
+    "alg-qa-23-certified-phase-approximation",
+    "def-qa-23-qsp-admissible-polynomial-pair",
+    "lem-qa-23-hermitian-signal-convention-conversion",
+    "lem-qa-23-phase-sequence-unitarity",
+    "lem-qa-23-positive-polynomial-complement-factorization",
+    "thm-qa-23-certified-phase-approximation-correctness",
+    "thm-qa-23-qsp-phase-factorization",
+    "thm-qa-23-real-polynomial-completion",
+    "lem-qa-23-qsp-completion-peel-arithmetic-cost",
+    "alg-qa-23-qsp-phase-synthesis",
+    "thm-qa-23-qsp-phase-implementation-error",
+    "thm-qa-23-qsp-query-cost",
+    "thm-qa-23-qsp-synthesis-correctness",
+    "ex-qa-23-degree-one-qsp"
+  ],
+  "conventions": [
+    {
+      "convention": "The signal is W_R(x)=[[x,s],[s,-x]], with x∈[-1,1] and s the nonnegative square root of 1-x². Phases are Z(φ)=diag(exp(iφ),exp(-iφ)).",
+      "fixed_by": "def-qa-23-qsp-signal-sequence",
+      "matters_for": [
+        "lem-qa-23-hermitian-signal-convention-conversion",
+        "lem-qa-23-phase-sequence-unitarity",
+        "thm-qa-23-qsp-phase-factorization",
+        "alg-qa-23-qsp-phase-synthesis",
+        "ex-qa-23-degree-one-qsp"
+      ]
+    },
+    {
+      "convention": "Phase lists are in matrix order: Z(φ₀)∏_{j=1}^d(W_R Z(φ_j)), with increasing j written left to right and the rightmost factor acting first. Degree zero has one phase and no signal.",
+      "fixed_by": "def-qa-23-qsp-signal-sequence",
+      "matters_for": [
+        "thm-qa-23-qsp-phase-factorization",
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-query-cost",
+        "thm-qa-23-qsp-phase-implementation-error"
+      ]
+    },
+    {
+      "convention": "P* means coefficient conjugation, not conjugation of the polynomial argument. Admissibility requires the formal identity PP*+(1-x²)QQ*=1, degree bounds d,d-1, and parities d,d-1. Zero satisfies every bound and both parities.",
+      "fixed_by": "def-qa-23-qsp-admissible-polynomial-pair",
+      "matters_for": [
+        "thm-qa-23-qsp-phase-factorization",
+        "lem-qa-23-positive-polynomial-complement-factorization",
+        "thm-qa-23-real-polynomial-completion",
+        "alg-qa-23-qsp-phase-synthesis"
+      ]
+    },
+    {
+      "convention": "For d≥1 the reflection sequence equals i^d times the SU(2) sequence after shifts ψ₀=φ₀+π/4, ψ_j=φ_j-π/2 internally, and ψ_d=φ_d-3π/4. The scalar i^d is retained under control.",
+      "fixed_by": "lem-qa-23-hermitian-signal-convention-conversion",
+      "matters_for": [
+        "thm-qa-23-qsp-phase-factorization",
+        "lem-qa-23-qsp-completion-peel-arithmetic-cost",
+        "alg-qa-23-qsp-phase-synthesis"
+      ]
+    },
+    {
+      "convention": "Sturm variation deletes zero entries; endpoints must not be roots of the square-free polynomial being counted. Counts are of distinct roots in the open interval.",
+      "fixed_by": "lem-qa-23-sturm-root-counting",
+      "matters_for": [
+        "lem-qa-23-exact-interval-boundedness-decision",
+        "alg-qa-23-polynomial-root-isolation",
+        "thm-qa-23-polynomial-root-isolation-correctness",
+        "thm-qa-23-bounded-height-root-arithmetic-cost"
+      ]
+    },
+    {
+      "convention": "Rectangle winding counts traverse boundaries counterclockwise, count upward positive-real-ray crossings positively, require root-free boundaries, nonzero imaginary vertex values, and nonidentically-zero imaginary edge restrictions.",
+      "fixed_by": "alg-qa-23-polynomial-root-isolation",
+      "matters_for": [
+        "thm-qa-23-polynomial-root-isolation-correctness",
+        "alg-qa-23-bounded-height-numerical-roots",
+        "thm-qa-23-bounded-height-root-arithmetic-cost"
+      ]
+    },
+    {
+      "convention": "The efficient numerical resource claim charges ideal exact field/equality/order operations and permits extension-tower/DAG descriptors. Input encoding/access, operation implementation, flattened minimal-polynomial conversion, and finite-basis compilation have separate costs.",
+      "fixed_by": "alg-qa-23-qsp-phase-synthesis",
+      "matters_for": [
+        "lem-qa-23-qsp-completion-peel-arithmetic-cost",
+        "thm-qa-23-qsp-synthesis-correctness",
+        "thm-qa-23-qsp-query-cost"
+      ]
+    },
+    {
+      "convention": "Numerical synthesis caps the tolerance at δ₀=min(δ,8), budgets target error δ₀/8, and budgets angle approximation and optional compiler error separately at δ₀/(16(d+1)) per phase.",
+      "fixed_by": "alg-qa-23-qsp-phase-synthesis",
+      "matters_for": [
+        "thm-qa-23-qsp-synthesis-correctness",
+        "thm-qa-23-qsp-phase-implementation-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qa-23-qsp-signal-sequence",
+      "statement": "For d≥0, U_Φ(x)=Z(φ₀)∏_{j=1}^d(W_R(x)Z(φ_j)), with the stated Hermitian-reflection signal, nonnegative square root, and matrix order.",
+      "used_by": [
+        "def-qa-23-qsp-admissible-polynomial-pair",
+        "lem-qa-23-phase-sequence-unitarity",
+        "lem-qa-23-hermitian-signal-convention-conversion",
+        "thm-qa-23-qsp-phase-factorization",
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-query-cost"
+      ]
+    },
+    {
+      "id": "thm-qa-23-polynomial-root-isolation-correctness",
+      "statement": "For every nonzero rational or exact-algebraic complex polynomial p and integer b≥1, under the declared exact algebraic operation model, the algorithm terminates and returns pairwise-disjoint open rational rectangles of diameter at most 2^-b, each containing exactly one distinct root and together containing every root, with original multiplicities. REALROOTS and SIGNCERT also terminate and return their stated certificates.",
+      "used_by": [
+        "thm-qa-23-bounded-height-root-arithmetic-cost",
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-synthesis-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-23-positive-polynomial-complement-factorization",
+      "statement": "An even real polynomial A of degree at most 2d that is nonnegative on [-1,1] has A=B²+(1-x²)C², with degree bounds d,d-1 and parities d,d-1.",
+      "used_by": [
+        "thm-qa-23-real-polynomial-completion",
+        "lem-qa-23-qsp-completion-peel-arithmetic-cost",
+        "alg-qa-23-qsp-phase-synthesis"
+      ]
+    },
+    {
+      "id": "thm-qa-23-qsp-phase-factorization",
+      "statement": "For every integer d≥0, a pair P,Q is QSP-admissible of degree bound d if and only if a real phase list of length d+1 realizes the displayed determinant-(-1)^d matrix with upper row [P,sQ]. The converse is constructive.",
+      "used_by": [
+        "lem-qa-23-qsp-completion-peel-arithmetic-cost",
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-synthesis-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-23-exact-interval-boundedness-decision",
+      "statement": "For an ordered subfield K⊆R with charged ideal exact field/equality/order operations, whether |p(x)|≤1 throughout [-1,1], for p∈K[x] of degree at most d, can be decided in O((d+1)^4) such operations without root isolation or coefficient-height assumptions.",
+      "used_by": [
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-synthesis-correctness"
+      ]
+    },
+    {
+      "id": "thm-qa-23-bounded-height-root-arithmetic-cost",
+      "statement": "GRID-ROOTS(P,b) has ROOTS correctness and uses poly(n,H,b) exact rational arithmetic/comparison operations for nonzero real rational P with primitive integer coefficient height H. ROUND-QSP returns a parity-preserving dyadic target with the stated strict interval margin, approximation error, and height polynomial in degree and logarithmic precision.",
+      "used_by": [
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-synthesis-correctness"
+      ]
+    },
+    {
+      "id": "lem-qa-23-qsp-completion-peel-arithmetic-cost",
+      "statement": "Given the complete exact root list of R=1-h² for rational parity-compatible h of degree at most d with |h|<1 on [-1,1], completion and phase peeling use poly(d,H) ideal exact algebraic operations and polynomially many tower/DAG descriptor nodes and written index bits; root generation and the separately named implementation costs are excluded.",
+      "used_by": [
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-synthesis-correctness"
+      ]
+    },
+    {
+      "id": "thm-qa-23-certified-phase-approximation-correctness",
+      "statement": "Given a represented unit scalar u+iv and rational η>0, PHASEAPPROX returns a certified rational t with |exp(it)-(u+iv)|<h=min(η,1), using O((1+log(1/h))²) rational operations and O(1+log(1/h)) exact field operations/comparisons, under its declared interfaces.",
+      "used_by": [
+        "alg-qa-23-qsp-phase-synthesis",
+        "thm-qa-23-qsp-synthesis-correctness"
+      ]
+    },
+    {
+      "id": "thm-qa-23-qsp-phase-implementation-error",
+      "statement": "For unitary implemented phase and signal factors with respective operator errors ζ_j and η_k, the complete product error is at most Σζ_j+Ση_k; with exact signals it is at most Σζ_j.",
+      "used_by": [
+        "thm-qa-23-qsp-query-cost",
+        "thm-qa-23-qsp-synthesis-correctness"
+      ]
+    },
+    {
+      "id": "thm-qa-23-qsp-synthesis-correctness",
+      "statement": "On SUCCESS, synthesis realizes p exactly in real part in exact mode and approximates it within δ₀/8 ideally in numerical modes; numerical phase implementation gives real-entry error at most δ₀/4≤δ. Promised executions terminate under the stated compiler assumption. Efficient numerical synthesis without supplied complement or compiler has the stated polynomial charged-arithmetic and tower/DAG certificate bound.",
+      "used_by": [
+        "alg-qa-25-qubitized-hamiltonian-simulation",
+        "thm-qa-25-qubitized-simulation-correctness"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-field",
+      "used_for": "Coefficient-field arithmetic and Euclidean polynomial operations.",
+      "opened": true
+    },
+    {
+      "id": "def-ordered-field",
+      "used_for": "Exact sign/order operations and characteristic-zero arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-real-numbers",
+      "used_for": "The real coefficient and coordinate domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-field",
+      "used_for": "Real coefficient division and factor arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-ordered-field",
+      "used_for": "Real sign tests and positive multiplicity integers.",
+      "opened": true
+    },
+    {
+      "id": "def-polynomial-ring-over-a-commutative-ring",
+      "used_for": "Coefficient arrays, polynomial identities, and zero-polynomial conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-polynomial-degree-leading-coefficient-and-monic",
+      "used_for": "Degree, leading coefficient, and the absence of a degree for zero.",
+      "opened": true
+    },
+    {
+      "id": "def-formal-derivative-of-a-polynomial",
+      "used_for": "Square-free reduction, multiplicity strata, and critical-point validation.",
+      "opened": true
+    },
+    {
+      "id": "thm-polynomial-division-algorithm-over-a-field",
+      "used_for": "Euclidean descent, factor-at-root arguments, and exact quotient construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+      "used_for": "Finite complex factorization for root isolation and complement construction.",
+      "opened": true
+    },
+    {
+      "id": "lem-polynomial-gcd-is-stable-under-field-extension",
+      "used_for": "Transferring base-field multiplicity gcd calculations to complex roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+      "used_for": "Finding a nonroot among finitely many rational samples.",
+      "opened": true
+    },
+    {
+      "id": "lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs",
+      "used_for": "Root-class symmetry; equal multiplicities are additionally derived locally.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Polynomial continuity and sign constancy away from roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Sign constancy between polynomial zeros.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Nonnegative real radicals in signals, complements, and half-angle descriptors.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Coefficient conjugation, coordinates, and modulus conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Cauchy root bounds, conjugation identities, and phase-error estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Complex polynomial division and scalar arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "thm-polar-form-with-unique-principal-argument",
+      "used_for": "Existence of exact phases and argument lifts in winding counting.",
+      "opened": true
+    },
+    {
+      "id": "def-discriminant-of-a-monic-polynomial",
+      "used_for": "The integer coefficient-polynomial discriminant used in separation bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-discriminant-root-formula-and-repeated-root-criterion",
+      "used_for": "A nonzero integer discriminant lower-bounds products of root separations.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "The root pairing is linear in the first argument.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Coordinate norm calculations for phase and matrix-entry errors.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Operator-error and matrix-entry bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "The telescoping product error estimate.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Vector and induced operator triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-exponential",
+      "used_for": "The exponential series in the certified angular-error estimate.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-exponential-series-converges-everywhere",
+      "used_for": "Absolute convergence of that exponential series.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Combining diagonal phases and converting angular to scalar errors.",
+      "opened": true
+    },
+    {
+      "id": "thm-eulers-formula",
+      "used_for": "Unit-circle phases and exact convention-conversion identities.",
+      "opened": true
+    },
+    {
+      "id": "def-sine-and-cosine-by-power-series",
+      "used_for": "Rational Taylor approximations in PHASEAPPROX.",
+      "opened": true
+    },
+    {
+      "id": "lem-sine-and-cosine-series-converge-everywhere",
+      "used_for": "Convergence of the Taylor approximations.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-parametrize-the-unit-circle",
+      "used_for": "Existence and quadrant selection of unit-scalar angles.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "The first-quadrant angular bracket.",
+      "opened": true
+    },
+    {
+      "id": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+      "used_for": "The bound |sin t|≥|t|/3 for |t|≤2, closing buffered comparisons.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-subtraction-formulas",
+      "used_for": "The determinant identity sin(θ-m) in angular bisection.",
+      "opened": true
+    },
+    {
+      "id": "def-principal-inverse-tangent",
+      "used_for": "Principal tangent injectivity in the Machin identity derivation.",
+      "opened": true
+    },
+    {
+      "id": "thm-principal-inverse-tangent-calculus",
+      "used_for": "Arctangent series, integral bounds, and rational π enclosures.",
+      "opened": true
+    },
+    {
+      "id": "thm-cofunction-supplementary-and-reflection-identities",
+      "used_for": "Quadrant reconstruction and tangent identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Exact quarter-turn phases and axis cases.",
+      "opened": true
+    },
+    {
+      "id": "lem-integral-elementary-bounds",
+      "used_for": "The explicit proof that 2<π<4.",
+      "opened": true
+    },
+    {
+      "id": "thm-alternating-series-test",
+      "used_for": "Consecutive partial sums enclose the arctangent values.",
+      "opened": true
+    },
+    {
+      "id": "thm-polynomial-degree-of-a-product-over-a-domain",
+      "used_for": "Leading-degree cancellation and polynomial root-count arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-r",
+      "used_for": "Complete-mode interval validation on the nonempty compact interval [-1,1].",
+      "opened": true
+    },
+    {
+      "id": "thm-fermat-interior-extremum",
+      "used_for": "Detecting interval-bound violations at interior critical points.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Identifying the polynomial-function derivative with the formal derivative.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-qa-23-polynomial-root-isolation",
+      "concern": "Instruction 6 says: “Test common-root membership by a gcd followed by the same certified rectangle count.” Admissibility for q does not imply admissibility for that gcd. For a concrete rational example put ε=1/16, p(z)=(z²+1)²((z-ε)²+4), and q(z)=(z²+1)((z-ε)²+4). The rectangle R=(0,1/8)+i(15/8,17/8) contains exactly the simple root ε+2i, has diameter²=5/64<1/4, and is admissible for q: its boundary contains none of q's four roots, all four vertex imaginary values are nonzero, and no edge imaginary restriction is identically zero. At m=1, gcd(q,p')=z²+1. On R's left edge z=iy, this gcd is real throughout, so its imaginary restriction is identically zero and both left-vertex imaginary values vanish. The stipulated rectangle-count routine therefore cannot be invoked there. Root-free boundaries alone do pass to a divisor, but the additional imaginary-part conditions do not. Nonzero constant gcds likewise need a zero-count branch. I have not established that this particular rectangle is selected by the deterministic schedule; it disproves the unstated inheritance implication needed by instruction 6. Neither that instruction nor thm-qa-23-polynomial-root-isolation-correctness supplies a new admissibility procedure for these gcd recounts. This leaves multiplicity correctness/termination unsupported as written, and the bounded-grid algorithm inherits the same multiplicity test.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "thm-qa-23-qsp-phase-factorization",
+      "concern": "Proof 3.1 applies the induction hypothesis directly to the SU(2)-form pair (P',Q') from 2.1 and then appends a W_S factor. The induction hypothesis as stated supplies a reflection-convention factorization. A short convention transport is omitted: at k=d-1 apply the reflection induction hypothesis to (i^k P', i^(k+1) Q'), then use F3's affine phase conversion to obtain the required SU(2) list before appending the peeled phase. The cited conversion closes this gap, but the current text does not state it.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-signal-processing",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The synthesis, implementation-error, and query-count items preserve def-qc-circuit-cost-model's separation of oracle calls, gates, preprocessing, description bits, and precision. No finite-basis or Turing-time bound is inferred from the arithmetic model."
+    },
+    {
+      "from": "quantum-signal-processing",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "The signal definition respects the relative-phase domain restriction. Conversion uses explicitly supplied control-first access and correctly retains i^d on the active branch."
+    },
+    {
+      "from": "quantum-signal-processing",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Matrix-order phases are explicitly distinguished from chronological application, consistently with reverse-order denotation."
+    },
+    {
+      "from": "quantum-signal-processing",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "The root pairing/Dirac conversion and ordered orthonormal coordinate conventions are compatible with the displayed matrices and entry-error calculations."
+    },
+    {
+      "from": "quantum-singular-value-transformation",
+      "to": "quantum-signal-processing",
+      "faithful": true,
+      "note": "The QSVT algorithm and singular-space/extraction theorems quote the reflection signal, product order, parity, completion, and factorization statements faithfully. Their Φ/-Φ averaging uses the real signal and coefficient conjugation correctly. Citation fidelity is separate from the root-routine concern recorded above."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "quantum-signal-processing",
+      "faithful": true,
+      "note": "The signal-lifting theorem preserves the scalar convention and controlled i^d. The simulator selects efficient numerical synthesis and uses a conservative δ_qsp bound on polynomial plus phase error; its resource theorem preserves d signal factors and d+1 phase factors with separately charged controls and implementation."
+    }
+  ]
+}

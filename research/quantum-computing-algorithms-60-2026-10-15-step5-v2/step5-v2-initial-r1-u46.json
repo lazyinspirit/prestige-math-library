@@ -1,0 +1,325 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "46",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "lem-qa-22-block-compression-contraction",
+      "model": "gpt-6-luna",
+      "context_sha256": "f9d5177eecdcb621a0588682cbf4aecaa5fe74020b3f39f75bfef8af8c593306",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 and step 2.1 incorrectly identify the d-by-d compression with rectangular A/alpha. The contraction argument is valid. Supplier def-qa-22-block-encoding, Proof 3.1, already proves ||E_out A E_in^dagger||=||A||, so this is a locally closable nonfatal citation/padding error. Replaced A=alpha B_U by widehat A=alpha B_U and applied that norm identity; the Statement and dependencies are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qa-22-block-encoding-access-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "7362fd69e9fb1c5a312be9ffed54cfbb08a1e0dafd8cafcb6546a36bec36ef7c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The unrestricted family may contain U_0=I_1 (a_0=0,d=1) and U_1=I_2 (a_1=1,d=1), both exact encodings of the scalar 1. The displayed SELECT then sums branches with different target dimensions and defines no operator on a selector tensor a common target. This is a fatal definition/interface well-definedness defect, classified other. Added explicit common-register identity extensions, required explicit system identifications when necessary, and completed unused selector labels by the identity. No encoding claim or access capability is weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-22-block-compression-contraction",
+      "disposition": "repaired",
+      "post_sha256": "71becd8a083c04e029e24423153c55500c8709b5188c823cab4eee8cf1b05cae",
+      "review_context_sha256": "b157978a54b8d0fca3cc130370ff3bca35bf83cc43d16f18efb04ed326f86561",
+      "reason": "Checked coordinate projection contractivity and unitary norm preservation. Supplier Proof 1.2 and 3.1 show the input adjoint is contractive, both embeddings are isometries, and evaluating the padded operator on E_in x yields equality of operator norms. The repaired exact-case step now applies this identity to alpha B_U for all declared rectangular encodings. No choice or new prerequisite is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qa-22-block-encoding-access-model",
+      "disposition": "repaired",
+      "post_sha256": "ae857e8bb5ea47bd643e73dba385215344a891c246d1928309f99e30f964ceba",
+      "review_context_sha256": "bfc773300879ca2007de7a282550b18d71de8f1539dd6f95104ae3a630d55441",
+      "reason": "Checked each actual access prerequisite and the ordered tensor convention. I_extra tensor U_j is unitary and compressing its extra zero ancillas returns the original B_Uj. The completed selector is a direct sum of common-size unitaries, including identity on unused labels, and hence is unitary; m=0 gives the identity on the declared positive-dimensional selector. Differing system spaces require explicit extension data rather than inferred access. All forward, inverse, controlled, routing, relative-phase, precision and classical costs remain separately declared.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-qa-22-product-block-encoding",
+    "thm-qa-22-adjoint-block-encoding",
+    "alg-qa-22-lcu-block-encoding",
+    "thm-qa-22-block-encoding-error-and-query-cost",
+    "def-qa-25-qubitization-access-model",
+    "def-qa-27-block-encoded-qlsp",
+    "lem-qa-27-lcu-projected-block-identity",
+    "alg-qa-28-qsvt-matrix-function"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "row": {
+        "defect_id": "quantum-computing-algorithms-60-2026-10-15-step5-initial-r1-u46-D001",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "lem-qa-22-block-compression-contraction",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "item_sha256": "71becd8a083c04e029e24423153c55500c8709b5188c823cab4eee8cf1b05cae",
+        "subclass_note": "F1 and Proof 2.1 replaced the padded exact block by rectangular A/alpha. Corrected to widehat A/alpha and applied the padding norm identity already established in supplier Proof 3.1. The original Statement is byte-for-byte unchanged.",
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u46.json",
+            "anchor": "lem-qa-22-block-compression-contraction"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "row": {
+        "defect_id": "quantum-computing-algorithms-60-2026-10-15-step5-initial-r1-u46-D002",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "ill-typed-construction",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-qa-22-block-encoding-access-model",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "item_sha256": "ae857e8bb5ea47bd643e73dba385215344a891c246d1928309f99e30f964ceba",
+        "subclass_note": "A family may contain scalar-target encodings with a_0=0 and a_1=1, so the original SELECT branches have incompatible dimensions. Added explicit common-target extensions, ordered unused ancillas, system-identification requirements, identity completion on unused selector labels and their implementation costs. Fatal type other records an ill-defined interface.",
+        "evidence": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-initial-r1-u46.json",
+            "anchor": "def-qa-22-block-encoding-access-model"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "All eight direct item consumers found by dependency/reference search are draft frozen-frontier items. No published item is a direct consumer of the changed access-model Definition, and the compression lemma Statement is unchanged. No published repair or maintenance claim is made."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Reviewed in assigned dependency order: compression lemma, then access model. Both are assigned draft members of the frozen frontier; no other item file was edited. No new item, logical dependency, assumption or choice principle was needed.",
+    "The compression lemma uses def-qa-22-block-encoding Proof 1.2 and 3.1, def-operator-norm-on-a-finite-dimensional-inner-product-space Definition, and def-linear-isometry-and-orthogonal-or-unitary-operator Definition. Its F1 and step 2.1 now distinguish A from widehat A. Direct comparison with the original Statement confirms no interface change, hence no lemma propagation.",
+    "The access-model repair retains all five actual suppliers: block encoding, controlled access, inverse access, circuit cost model, and full-list uniform circuit family. The tensor ordering and identity-extension calculation use their finite-coordinate interfaces. All eight direct dependency/reference consumers were read and examined, including all consumers in other batches; none requires a mathematical item repair. Three exact contract quotes require owner-lane refresh and are listed separately. No unchanged consumer Statement/Definition was used to expand the examination inventory.",
+    "Updated only the compression lemma step-2-1 derivation claim in research/quantum-computing-algorithms-60-2026-10-15-batch-46.proof-contracts.json. Acquired the shared-write lock, reread the current carrier, made the matching claim edit, ran the focused strict contract check successfully, and released the lock. Unassigned consumer contract rows were left for their frontier owners.",
+    "No authoritative external source was consulted or claimed read: the finite-coordinate norm and direct-sum calculations are familiar, and all relevant local definitions and arguments were inspected. The repaired items have not received an independent review of these repairs; rejudgment and certification remain engine work.",
+    "Completed focused checks: precheck exit 0 (two files, one proof checked and passed, definition not applicable); rendercheck exit 0 (two files, no errors or warnings); strict proof-contract exit 0 for the assigned proof-bearing lemma; final batched proof-layout exit 0 (two items, two steps, zero defects). No formatter or item edit followed the proof-layout run.",
+    "Review hashes were captured immediately after each mathematical repair, before editing another supplier. No old review context was refreshed after a supplier change. No gate diagnostics were assigned, so gate_resolutions is empty. This report completes this dispatch only; consumer quote refresh, collection, independent rejudgment and certification remain with the engine and assigned owners."
+  ],
+  "downstream_reviews": [
+    {
+      "id": "alg-qa-22-product-block-encoding",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/alg-qa-22-product-block-encoding.md",
+      "location": "Definition, Inputs",
+      "source_excerpt": "Their access and implementation costs are supplied separately under [[def-qa-22-block-encoding-access-model]].",
+      "affected_use": "Uses separate calls to U_A and U_B; its construction already extends them on distinct A and B ancillas. It never forms a family SELECT, so the common-target clarification imposes no new condition.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. No consumer edit is necessary.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "batch": "46",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-22-adjoint-block-encoding",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/thm-qa-22-adjoint-block-encoding.md",
+      "location": "Facts F2; Proof 1.1",
+      "source_excerpt": "$U^{\\dagger}$ is a separate supplied operation with its own access cost.",
+      "affected_use": "Uses only the separately supplied inverse of a single encoding; padding and selector labels do not affect the adjoint compression identity. Its F2 contract quote must be refreshed.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. Refresh only the stale exact source quote in its owning proof contract.",
+      "disposition": "metadata_update_required",
+      "route": "frontier-owner",
+      "batch": "46",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-22-lcu-block-encoding",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/alg-qa-22-lcu-block-encoding.md",
+      "location": "Definition, Instructions",
+      "source_excerpt": "Extend each component unitary to the common ordered ancilla register by identities on its unused ancillas, so its all-zero block is unchanged.",
+      "affected_use": "Already requires a common square system, pads to max a_j, and completes unused coefficient labels by identity. Its coefficient phases are explicitly included in SELECT and costed. These instructions satisfy the repaired interface.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. No consumer edit is necessary.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "batch": "46",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-22-block-encoding-error-and-query-cost",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/thm-qa-22-block-encoding-error-and-query-cost.md",
+      "location": "Facts F1; Proof 1.1 and 2.1",
+      "source_excerpt": "each supplied operation has its own declared cost, and a call to one operation does not imply access to another.",
+      "affected_use": "Uses the preserved separate-cost rule; its Statement already charges explicit wire permutations and control wrappers. No numerical normalization or error claim changes. Its F1 contract quote must be refreshed.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. Refresh only the stale exact source quote in its owning proof contract.",
+      "disposition": "metadata_update_required",
+      "route": "frontier-owner",
+      "batch": "46",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qa-25-qubitization-access-model",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/def-qa-25-qubitization-access-model.md",
+      "location": "Definition, second paragraph",
+      "source_excerpt": "Any PREPARE, SELECT, sparse-location, value, or coefficient operation used by a construction is a separately supplied, reversible interface with its inverse and cost recorded.",
+      "affected_use": "Its qubiterate selects between U and U* on the same target register. The general mention of SELECT demands a separately supplied reversible operation and gives no automatic assembly or incompatible-register construction.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. No consumer edit is necessary.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "batch": "49",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qa-27-block-encoded-qlsp",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/def-qa-27-block-encoded-qlsp.md",
+      "location": "Definition, first paragraph",
+      "source_excerpt": "under the access contract of [[def-qa-22-block-encoding-access-model]]",
+      "affected_use": "The input uses one declared rectangular block encoding and separately supplied calls. The new SELECT conditions do not alter its padding, singular-gap promise or normalized output target.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. No consumer edit is necessary.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "batch": "51",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qa-27-lcu-projected-block-identity",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/lem-qa-27-lcu-projected-block-identity.md",
+      "location": "Facts F2; Proof 1.1 and 2.1",
+      "source_excerpt": "access to SELECT and its component circuits is separately supplied and costed.",
+      "affected_use": "The lemma assumes a supplied unitary SELECT on a common component/data target. The access dependency now explicitly identifies its branches with zero-block-preserving extensions when a_j differ. Compression of each extension still gives A_j/alpha_j, so both matrix steps remain sound. Its F2 contract quote must be refreshed.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. Refresh only the stale exact source quote in its owning proof contract.",
+      "disposition": "metadata_update_required",
+      "route": "frontier-owner",
+      "batch": "51",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-28-qsvt-matrix-function",
+      "supplier": "def-qa-22-block-encoding-access-model",
+      "path": "items/alg-qa-28-qsvt-matrix-function.md",
+      "location": "Definition, Additional input and final LCU call",
+      "source_excerpt": "An LCU access record that supplies or compiles the coefficient-preparation unitary $P$, its inverse, and the required SELECT from the active component circuits",
+      "affected_use": "The active component circuits act on the same Hermitian system and are combined by alg-qa-22-lcu-block-encoding, which explicitly pads component ancillas and completes unused selector labels. Separate preparation, SELECT and implementation costs remain required.",
+      "invalidated_claim": "No mathematical claim is invalidated: the supplied common-target operations or single-unitary costs satisfy the explicit interface.",
+      "minimality": "Leave the item Statement/Definition and proof unchanged. No consumer edit is necessary.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "batch": "52",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "metadata_repairs_required": [
+    {
+      "id": "thm-qa-22-adjoint-block-encoding",
+      "path": "research/quantum-computing-algorithms-60-2026-10-15-batch-46.proof-contracts.json",
+      "fact": "F2",
+      "source": "def-qa-22-block-encoding-access-model",
+      "reason": "The stored quote includes the original unextended SELECT formula and is no longer an exact substring of the repaired Definition. Replace only this quote with the current Definition (or a sufficient exact cost/access excerpt); the consuming mathematics remains valid.",
+      "route": "frontier-owner",
+      "uncertain": false
+    },
+    {
+      "id": "thm-qa-22-block-encoding-error-and-query-cost",
+      "path": "research/quantum-computing-algorithms-60-2026-10-15-batch-46.proof-contracts.json",
+      "fact": "F1",
+      "source": "def-qa-22-block-encoding-access-model",
+      "reason": "The stored quote includes the original unextended SELECT formula and is no longer an exact substring of the repaired Definition. Replace only this quote with the current Definition (or a sufficient exact cost/access excerpt); the consuming mathematics remains valid.",
+      "route": "frontier-owner",
+      "uncertain": false
+    },
+    {
+      "id": "lem-qa-27-lcu-projected-block-identity",
+      "path": "research/quantum-computing-algorithms-60-2026-10-15-batch-51.proof-contracts.json",
+      "fact": "F2",
+      "source": "def-qa-22-block-encoding-access-model",
+      "reason": "The stored quote includes the original unextended SELECT formula and is no longer an exact substring of the repaired Definition. Replace only this quote with the current Definition (or a sufficient exact cost/access excerpt); the consuming mathematics remains valid.",
+      "route": "frontier-owner",
+      "uncertain": false
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/quantum-algorithms/block-encodings.md",
+      "reason": "The page advertises explicit SELECT and separate resource costs; requiring common targets and charging routing preserves its interface. The item placement and all mathematical claims remain valid.",
+      "disposition": "unaffected"
+    },
+    {
+      "path": "library/quantum-algorithms/block-encodings-examples.md",
+      "reason": "The companion advertises a two-term LCU with supplied component calls and explicit costs. Its common-system construction is compatible with the clarified SELECT interface.",
+      "disposition": "unaffected"
+    }
+  ],
+  "validation": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-22-block-compression-contraction.md items/def-qa-22-block-encoding-access-model.md --json",
+      "exit_code": 0,
+      "result": "2 files; 1 checked proof; 0 failures; access definition not applicable"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-qa-22-block-compression-contraction.md items/def-qa-22-block-encoding-access-model.md --json",
+      "exit_code": 0,
+      "result": "2 checked; no errors or warnings"
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-46.proof-contracts.json --items lem-qa-22-block-compression-contraction --strict --json",
+      "exit_code": 0,
+      "result": "ok true; no errors or warnings"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-qa-22-block-compression-contraction.md items/def-qa-22-block-encoding-access-model.md",
+      "exit_code": 0,
+      "result": "2 items, 2 steps, 0 defects"
+    }
+  ]
+}

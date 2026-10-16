@@ -1,0 +1,20 @@
+# Final focused native norm-interface supplement
+
+All44 effective consumer dispositions remain valid under the current complete actual supplier interfaces:17 overrides and27 retained reviewed proposals. There are **no assumption, conclusion or admissible-domain deltas**, and no unresolved changed-interface issue. This is the second/final focused reconciliation cycle. The original effective-manifest.json, historical guards and all proposal/preimage carriers remain unchanged.
+
+Current source comparison verifies six of the eight originally guarded suppliers are still raw-byte identical. Two actual native Step5 changes are exactly bounded:
+
+- Complex normed-subspace adds “linear” to its title. The complete mathematical body, including Definition and restriction proof, is byte-identical. Every admissible W was already complex-linear; the restricted norm, zero/full subspace cases and homogeneity for every complex scalar remain identical. Apart from title/verification, all parsed metadata is identical.
+- Equivalent-complex-norms adds the existing concrete real-completeness corollary to dependencies and the completeness annotation. Removing the precise added citation recovers the complete former body byte-for-byte; removing that new dependency and verification recovers the former parsed metadata. The full predicate is still existence of positive real c,C with cM(v)<=N(v)<=CM(v) for every v, for two finite-real-valued complex norms on the same complex vector space. Neither V nor the norms acquire completeness, finite-dimensionality or other hypotheses. All comparison constants, metric consequences and zero-space instances remain identical.
+
+The existing cor-cauchy-reals-lub-complete Statement actually supplies the concrete real LUB/completeness annotation. That citation documents the already-fixed real field; it does not add an assumption to norm equivalence or to a consumer.
+
+The original44 per-item source-use justifications are retained individually in final-disposition.json, with the same effective proposal and original published-preimage hashes. The subspace-dependent uses still require exactly linear restriction; the norm-comparison uses still require exactly uniform positive real bounds. Every other mathematical supplier carrier is unchanged, so the prior actual metric, realification, full complex scalar, coordinate-norm and zero-dimensional justifications remain applicable without a fresh whole-proof audit. This is full-domain interface preservation, not an inference of proof validity from graph membership.
+
+The genuine native Step5 repair report and positive Sol keep verdicts for the two changed definitions were read and hash-bound. Their native meanings remain native; this supplement creates no acceptance, audit or rejudgment record. Native Step6 draft closeout is pending and no completed-run claim is made.
+
+All71 pending effective proposal hashes and their archived original published preimage hashes were checked without modification. All71 live published carriers still match those preimages. The separate preserved-pending71-guards.json records this bounded raw-byte guard check; it is not a source audit or integration receipt. All44 reviewed proposal preimages and the original effective-manifest guard also match.
+
+Current supplier snapshots record raw hashes, itemHashGuard values (verification excluded), and complete-body hashes separately. Step6 may change verification fields, which can change raw bytes without changing mathematical hashes. The two known Step5 changes legitimately change itemHashGuard as documented; they are not falsely classified as verification-only. Unknown mathematical drift must be assessed explicitly.
+
+No source, proposal, live metadata, receipt, stamp, native state, plan, ledger or release authorization was written. No gate or repeated mathematical audit was attempted. Root must check actual closeout/completion and final current-byte/mathematical guards after native closeout before integration or release. The final-disposition supplement intentionally retains this hold.

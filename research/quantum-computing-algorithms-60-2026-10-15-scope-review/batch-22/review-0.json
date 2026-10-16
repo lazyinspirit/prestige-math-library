@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "22",
+  "round": 0,
+  "reviewed_items": [
+    "def-qc-binary-adjacency-matrix",
+    "def-qc-j-gate-and-equatorial-basis",
+    "lem-qc-j-basis-and-phase-identities",
+    "def-qc-graph-state",
+    "lem-qc-cz-matching-pauli-frame-action",
+    "def-qc-normalized-transport-schedule",
+    "lem-qc-one-bit-teleportation",
+    "lem-qc-r-y-r-z-multiplexor-gray-code",
+    "lem-qc-graph-state-amplitude-formula",
+    "lem-qc-graph-state-edge-gates-commute",
+    "def-qc-adaptive-measurement-pattern",
+    "lem-qc-adaptive-angle-pauli-frame-update",
+    "lem-qc-normalized-rounds-preserve-circuit",
+    "lem-qc-transport-encoding-is-simple-and-size-bounded",
+    "thm-qc-exact-unitary-synthesis-from-qsd",
+    "lem-qc-graph-state-stabilizer-generators",
+    "lem-qc-measurement-pattern-for-cz",
+    "thm-qc-pattern-branch-probabilities-and-zero-branches",
+    "def-qc-circuit-to-graph-resource-encoding",
+    "thm-qc-pattern-is-measurement-circuit",
+    "thm-qc-circuit-simulated-by-adaptive-pattern",
+    "thm-qc-circuit-pattern-equivalence-and-universality",
+    "thm-qc-graph-state-unique-stabilizer-ray",
+    "ex-qc-one-edge-graph-state"
+  ],
+  "reviewed_pages": [
+    "graph-states-and-measurement-based-computation",
+    "graph-states-and-measurement-based-computation-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found local prerequisite/convention omissions and a proof exposition gap; these can be addressed in one same-page repair without owner escalation.",
+  "findings": [
+    {
+      "id": "thm-qc-circuit-pattern-equivalence-and-universality",
+      "type": "prerequisite",
+      "reason": "The universality claim says every finite-dimensional unitary channel, while its QSD supplier proves synthesis on ordered n-qubit registers of dimension 2^n (and the 0-qubit identity channel). State that domain explicitly."
+    },
+    {
+      "id": "def-qc-normalized-transport-schedule",
+      "type": "prerequisite",
+      "reason": "Circuit syntax indexes wires 0 through n−1, but the schedule uses 1 through n without giving the correspondence. State j↔circuit wire j−1 and use it consistently in the encoding."
+    },
+    {
+      "id": "def-qc-circuit-to-graph-resource-encoding",
+      "type": "prerequisite",
+      "reason": "The graph vertices and frame recurrences use 1-based wire indices; specify their correspondence to the ordered circuit wires so the encoded branch maps use the same factor order."
+    },
+    {
+      "id": "def-qc-graph-state",
+      "type": "prerequisite",
+      "reason": "The definition multiplies CZ operators on the full register but gives only their two-qubit matrices. Cite or define the full-register local embedding, including the ordered factors."
+    },
+    {
+      "id": "def-qc-adaptive-measurement-pattern",
+      "type": "prerequisite",
+      "reason": "The input insertion and tensor product of measurement bras are linear maps; make their ordered construction explicit and include the tensor-map supplier."
+    },
+    {
+      "id": "lem-qc-cz-matching-pauli-frame-action",
+      "type": "prerequisite",
+      "reason": "The matching lemma uses A_Mx and binary dot products without stating their coordinate conventions. The same gap occurs in lem-qc-graph-state-stabilizer-generators and def-qc-circuit-to-graph-resource-encoding; cite the matrix-product and binary-dot conventions or give the coordinate formulas and wire order."
+    },
+    {
+      "id": "thm-qc-pattern-branch-probabilities-and-zero-branches",
+      "type": "local",
+      "reason": "The induction introduces prefix maps K_c and contractions L_b without defining them from the full branch-map formula. Define the recursive maps and verify that the terminal map is the stated K_b before applying completeness and trace preservation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "graph-states-and-measurement-based-computation",
+      "decision": "repair",
+      "reason": "Its objective summarizes universality without the n-qubit domain; align that nonlogical use with the corrected theorem scope."
+    }
+  ]
+}

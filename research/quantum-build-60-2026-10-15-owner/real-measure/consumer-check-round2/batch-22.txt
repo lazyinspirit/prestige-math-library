@@ -1,0 +1,300 @@
+FILE thm-higher-eigenvalues-by-orthogonality-constrained-minimisation
+
+STATEMENT Assume the Axiom of Choice, the ultrafilter lemma, DC and HB ([[def-axiom-of-choice]], [[def-ultrafilter-extension-principle]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]). Let $n\ge1$, let $\Omega\subseteq\mathbb R^n$ be a nonempty bounded open set, let $\lambda_1\le\lambda_2\le\cdots$ and $\{e_j\}$ be the eigenvalues and orthonormal eigenbasis of the real Dirichlet Laplacian, supplied by [[thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator]] with $a_0(v,w)=\int_\Omega Dv\cdot Dw$ ([[def-ltwo-operator-associated-with-a-symmetric-elliptic-form]], [[def-symmetric-elliptic-weak-eigenpair]], [[def-hk-and-hk-zero-notation]]), and fix $k\ge2$. Put $S_k=\{u\in H^1_0(\Omega;\mathbb R):\|u\|_{L^2}=1,\ (u,e_j)_{L^2}=0\ \text{for }j<k\}$ and $E(u)=\int_\Omega|Du|^2$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-orthogonality-and-orthogonal-complement]]). Then $S_k$ is nonempty, $E$ attains its infimum $\mu_k$ on $S_k$, every minimiser is a weak eigenpair with eigenvalue $\mu_k$, and $\mu_k=\lambda_k$ (eigenvalues counted with multiplicity); moreover every minimiser lies in the eigenspace $E_{\lambda_k}$ and is orthogonal in $L^2$ to $e_1,\dots,e_{k-1}$.
+
+LINE 93 4.1 By weak lower semicontinuity [F3] we get $E(v_0)\le\liminf_lE(v_{j_l})=\mu_k$, and $v_0\in S_k$ gives $E(v_0)\ge\mu_k$; hence $E(v_0)=\mu_k$, so $E$ attains its infimum on $S_k$. [step 1.2, step 2.1, step 3.1, F3]
+
+5.1 Let $v_0\in S_k$ be any minimiser and define $G:X\to\mathbb R^k$ on $X=H^1_0(\Omega)$ by $G(u)=(\|u\|_{L^2}^2-1,(u,e_1)_{L^2},\dots,(u,e_{k-1})_{L^2})$; then $\{G=0\}=S_k=\{G=G(v_0)\}$, $E$ and $G$ are Fréchet differentiable at $v_0$ with $DE(v_0)h=2\int_\Omega Dv_0\cdot Dh$ and $DG(v_0)h=(2(v_0,h)_{L^2},(h,e_1)_{L^2},\dots,(h,e_{k-1})_{L^2})$, because the remainders are $\int_\Omega|Dh|^2$ and the pairings $\int_\Omega h^2$. Surjectivity is explicit: $DG(v_0)(v_0/2)=(1,0,\dots,0)$ and $DG(v_0)e_j$ is the standard coordinate vector with its $1$ in position $j+1$, for $j<k$, using orthonormality and the constraints. The derivative formula holds at every $u\in X$, its first component varies by at most $2\|u-v\|_{L^2}\|h\|_{L^2}\le2\|u-v\|_{H^1}\|h\|_{H^1}$, and its other components are constant bounded functionals. Hence $G$ is $C^1$ with surjective derivative at $v_0$, and [F7] gives unique multipliers $\alpha,\eta_1,\dots,\eta_{k-1}\in\mathbb R$ with $2a_0(v_0,h)=2\alpha(v_0,h)_{L^2}+\sum_{j<k}\eta_j(h,e_j)_{L^2}$ for every $h\in H^1_0(\Omega)$. [step 4.1, F1, F6, F7]
+
+6.1 Test the identity of step 5.1 at $h=e_j$ with $j<k$. Symmetry and [F1] give $2a_0(v_0,e_j)=2\lambda_j(v_0,e_j)_{L^2}=0$, whereas its right-hand side is $\eta_j$ by the constraints and orthonormality, so $\eta_j=0$. Testing at $h=v_0$ gives $2E(v_0)=2\alpha\|v_0\|_{L^2}^2$, so $\alpha=\mu_k$. Therefore $a_0(v_0,h)=\mu_k(v_0,h)_{L^2}$ for every $h\in H^1_0(\Omega)$, and every minimiser is a weak eigenpair with eigenvalue $\mu_k$. [step 4.1, step 5.1, F1]
+
+FILE thm-hoeffding-independent-bounded-sums
+
+STATEMENT Assume AC. Let $n\ge1$ and let $X_1,\ldots,X_n$ be independent integrable real random variables on one probability space. Suppose finite real numbers $a_i\le b_i$ satisfy $a_i\le X_i\le b_i$ almost surely for every $i$. Put $V=\sum_{i=1}^n(b_i-a_i)^2$ and $S=\sum_{i=1}^n(X_i-\mathbb E X_i)$. For every $t>0$, if $V>0$ then
+$$\mathbb P(|S|\ge t)\le 2\exp\!\left(-\frac{2t^2}{V}\right),$$
+and if $V=0$ then $\mathbb P(|S|\ge t)=0$. The two one-sided tails are each bounded by $\exp(-2t^2/V)$ when $V>0$.
+
+LINE 84 
+[F13] Sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+## Proof
+
+FILE thm-iid-sample-mean-consistency
+
+STATEMENT Let $\mathcal X=\mathbb R$ with its Borel sigma-algebra, and let $\mathsf P$ be a parametric statistical experiment on $\mathcal X$. Define the mean estimand by $\mu(\theta)=\int x\,P_\theta(dx)$ and suppose it is finite for every $\theta$. For a fixed $\theta$, suppose an IID sequence $(X_i)_{i\ge1}$ with one-observation law $P_\theta$ is given and $\mathbb E_\theta|X_1|<\infty$. The sample-mean estimator $T_n(x_1,\ldots,x_n)=n^{-1}\sum_{i=1}^n x_i$ is consistent in probability for $\mu$ at $\theta$ in the IID sample-size experiments.
+
+The assertion is pointwise in $\theta$. The existence of a common probability space carrying the IID sequence is part of the hypothesis.
+
+LINE 51 
+[F9] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Finite sums and scalar multiples of measurable real-valued functions are measurable whenever the operations are pointwise defined.
+
+[F10] [[thm-change-of-variables-for-expectation]]: If a real random variable $X$ has law $P_\theta$, $g:\mathbb R\to\mathbb R$ is Borel measurable, and $g(X)$ is integrable, then $\mathbb E_\theta[g(X)]=\int g(x)\,P_\theta(dx)$.
+
+FILE thm-independent-process-symmetrization
+
+STATEMENT Let $n\ge1$, let $Z_1,\ldots,Z_n$ be IID observations with law $P$, and let $Z_1',\ldots,Z_n'$ be an independent IID copy. Let $\sigma_1,\ldots,\sigma_n$ be independent uniform signs, independent of both samples. Let $\mathcal F$ be a nonempty countable class of measurable $P$-integrable real functions. Assume the two suprema below are finite almost surely. If $\Phi:[0,\infty)\to[0,\infty)$ is finite, convex, and nondecreasing, then
+
+$$\mathbb E\Phi\!\left(\sup_{f\in\mathcal F}\left|\sum_{i=1}^n(f(Z_i)-Pf)\right|\right)\le \mathbb E\Phi\!\left(2\sup_{f\in\mathcal F}\left|\sum_{i=1}^n\sigma_i f(Z_i)\right|\right).$$
+
+The same statement holds for an uncountable class when a specified countable subclass gives the same three displayed suprema almost surely for the data, copy, and signs. This is an expectation inequality only; a tail form requires separate assumptions.
+
+LINE 68 
+[F8] For finite subclasses, coordinate lifts, sums, absolute values, maxima, and their compositions with a Borel map are measurable. Since $\Phi$ is nondecreasing, each strict upper level set is an upper interval and hence Borel; composition with $\Phi$ therefore preserves measurability ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]], [[thm-composition-with-borel-functions-preserves-measurability]]).
+
+## Proof
+
+FILE thm-inhomogeneous-heat-cauchy-formula
+
+STATEMENT Assume Countable Choice. Let $n\ge1$, $T>0$, $1\le p<\infty$,
+$u_0\in L^p(\mathbb R^n)$ and $f\in C([0,T];L^p(\mathbb R^n))$. Define
+$$u(t):=H_tu_0+Df(t)=H_tu_0+\int_0^tH_{t-s}f(s)\,ds\qquad(0\le t\le T).$$
+Then $u\in C([0,T];L^p(\mathbb R^n))$, $u(0)=u_0$, and $u$ satisfies the forced
+relation
+$$u(t)=H_{t-s}u(s)+\int_s^tH_{t-\tau}f(\tau)\,d\tau\qquad(0<s<t\le T);$$
+conversely every $w\in C([0,T];L^p(\mathbb R^n))$ with $w(0)=u_0$ satisfying this
+relation equals $u$. If $u_0$ is bounded and uniformly continuous and $f$ is
+bounded and jointly continuous and uniformly spatially Hölder on $[0,T]$ as in
+the Duhamel theorem, then $u$ is a classical solution of $u_t-\Delta u=f$ with
+$u(\cdot,0)=u_0$, and it is the unique classical solution in the Gaussian
+growth class. For bounded uniformly continuous $u_0$ and bounded jointly
+uniformly continuous $f$ without the Hölder assumption, the same scalar formula
+remains a bounded continuous mild solution with the forced semigroup relation
+and initial trace $u_0$; the $C^{1,2}$ upgrade is not claimed for that general
+forcing class.
+
+LINE 88 1.1 In the mild setting $u=H_\cdot u_0+Df\in C([0,T];L^p(\mathbb R^n))$ and $u(0)=u_0$: the curve $t\mapsto H_tu_0$ is continuous by the strong continuity and semigroup law of [F1], the curve $Df$ is continuous with $Df(0)=0$ by [F2], and $H_0u_0=u_0$; a sum of continuous curves is continuous. [A1, F1, F2, given]
+
+1.2 In the bounded-continuous setting the same scalar formula is well defined, bounded and continuous with initial trace $u_0$. Boundedness: $|u(t,x)|\le\|u_0\|_\infty+t\|f\|_\infty$. Continuity and initial trace: the homogeneous term is continuous in $(t,x)$ for $t>0$ and converges to $u_0$ locally uniformly as $t\downarrow0$ by [F3], while the potential can be written $\int_0^T\mathbf1_{\{\tau<t\}}(\Gamma_\tau*f(\cdot,t-\tau))(x)d\tau$. For $(x_j,t_j)\to(x,t)$, joint uniform continuity of $f$ gives convergence of the integrands at each fixed $\tau\ne t$; they are bounded by $\|f\|_\infty$, so [[thm-dominated-convergence]] gives continuity. Its bound $t\|f\|_\infty$ also gives uniform vanishing at zero; finally the scalar forced relation $u(t,x)=\int\Gamma(x-y,t-s)u(s,y)\,dy+\int_s^t\int\Gamma(x-y,t-\tau)f(y,\tau)\,dy\,d\tau$ for $0<s<t\le T$ follows from the semigroup law and Fubini-Tonelli applied to the real and imaginary positive and negative parts of the absolutely integrable iterated integrands (bounded by kernel masses times the data bounds), using [[thm-tonelli-and-fubini-for-completed-product-measures]]: the homogeneous term convolves to $\Gamma_t*u_0=\Gamma_{t-s}*(\Gamma_s*u_0)$ and the double integral splits at $s$. No differentiation of $f$ is used, so no $C^{1,2}$ claim is made here. [F3, F5, given]
+
+2.1 In the classical setting, $u$ is a classical solution with the stated data and is unique in the Gaussian growth class. Indeed $H_tu_0$ is, by [F3], $C^\infty$ in positive time with $\partial_t(H_tu_0)=\Delta(H_tu_0)$ and initial data $u_0$, while the scalar potential $u^*$ of [F2] is $C^{1,2}$ with $u^*_t-\Delta u^*=f$ and zero initial data; hence the scalar formula $u=H_\cdot u_0+u^*$ is $C^{1,2}$ on $\mathbb R^n\times(0,T]$ with $u_t-\Delta u=f$ and $u(\cdot,0)=u_0$. If $\tilde u$ is another classical solution with the same data and $|\tilde u|\le Ce^{a|x|^2}$, then $w:=\tilde u-u$ is a $C^{1,2}$ solution of the homogeneous equation with zero initial data and Gaussian growth (the sum of the two growth bounds), so [F3] forces $w\equiv0$ and $\tilde u=u$. [step 1.1, F2, F3, given]
+
+FILE thm-irreducibility-and-k-types-of-the-discrete-series
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). For every integer $n\ge2$, the representations $D_n^-=(\pi_n,\mathcal H_n^+)$ and $D_n^+=(\pi_n^-,\mathcal H_n^-)$ of $G=\mathrm{SL}_2(\mathbb R)$ are irreducible strongly continuous unitary representations. Their K-type decompositions are
+$$\mathcal H_n^+=\overline{\bigoplus_{j\ge0}\mathbb C f_{n,j}},\qquad \pi_n(k_\theta)f_{n,j}=e^{-i(n+2j)\theta}f_{n,j},\qquad \mathcal H_n^-=\overline{\bigoplus_{j\ge0}\mathbb C\widetilde f_{n,j}},\qquad \pi_n^-(k_\theta)\widetilde f_{n,j}=e^{i(n+2j)\theta}\widetilde f_{n,j},$$
+each character occurring with multiplicity one. The displayed algebraic K-finite subspaces $V_n^-,V_n^+$ of [[def-holomorphic-and-antiholomorphic-discrete-series-models]] are isomorphic as $(\mathfrak g,K)$-modules to $M^+_{-n}$ and $M^-_n$, the extremal submodules of [[lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points]](b) at $\nu=n-1$; in particular, the Casimir $\Omega$ of [[def-k-finite-and-smooth-vectors-for-sl2-r]] acts on these algebraic modules by $\tfrac18((n-1)^2-1)$.
+
+LINE 37 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For every integer $n\ge2$, the representations $D_n^-=(\pi_n,\mathcal H_n^+)$ and $D_n^+=(\pi_n^-,\mathcal H_n^-)$ of $G=\mathrm{SL}_2(\mathbb R)$ are irreducible strongly continuous unitary representations. Their K-type decompositions are
+$$\mathcal H_n^+=\overline{\bigoplus_{j\ge0}\mathbb C f_{n,j}},\qquad \pi_n(k_\theta)f_{n,j}=e^{-i(n+2j)\theta}f_{n,j},\qquad \mathcal H_n^-=\overline{\bigoplus_{j\ge0}\mathbb C\widetilde f_{n,j}},\qquad \pi_n^-(k_\theta)\widetilde f_{n,j}=e^{i(n+2j)\theta}\widetilde f_{n,j},$$
+each character occurring with multiplicity one. The displayed algebraic K-finite subspaces $V_n^-,V_n^+$ of [[def-holomorphic-and-antiholomorphic-discrete-series-models]] are isomorphic as $(\mathfrak g,K)$-modules to $M^+_{-n}$ and $M^-_n$, the extremal submodules of [[lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points]](b) at $\nu=n-1$; in particular, the Casimir $\Omega$ of [[def-k-finite-and-smooth-vectors-for-sl2-r]] acts on these algebraic modules by $\tfrac18((n-1)^2-1)$.
+
+LINE 38 
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For every integer $n\ge2$, the representations $D_n^-=(\pi_n,\mathcal H_n^+)$ and $D_n^+=(\pi_n^-,\mathcal H_n^-)$ of $G=\mathrm{SL}_2(\mathbb R)$ are irreducible strongly continuous unitary representations. Their K-type decompositions are
+$$\mathcal H_n^+=\overline{\bigoplus_{j\ge0}\mathbb C f_{n,j}},\qquad \pi_n(k_\theta)f_{n,j}=e^{-i(n+2j)\theta}f_{n,j},\qquad \mathcal H_n^-=\overline{\bigoplus_{j\ge0}\mathbb C\widetilde f_{n,j}},\qquad \pi_n^-(k_\theta)\widetilde f_{n,j}=e^{i(n+2j)\theta}\widetilde f_{n,j},$$
+each character occurring with multiplicity one. The displayed algebraic K-finite subspaces $V_n^-,V_n^+$ of [[def-holomorphic-and-antiholomorphic-discrete-series-models]] are isomorphic as $(\mathfrak g,K)$-modules to $M^+_{-n}$ and $M^-_n$, the extremal submodules of [[lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points]](b) at $\nu=n-1$; in particular, the Casimir $\Omega$ of [[def-k-finite-and-smooth-vectors-for-sl2-r]] acts on these algebraic modules by $\tfrac18((n-1)^2-1)$.
+
+
+LINE 39 Assume the Axiom of Choice ([[def-axiom-of-choice]]). For every integer $n\ge2$, the representations $D_n^-=(\pi_n,\mathcal H_n^+)$ and $D_n^+=(\pi_n^-,\mathcal H_n^-)$ of $G=\mathrm{SL}_2(\mathbb R)$ are irreducible strongly continuous unitary representations. Their K-type decompositions are
+$$\mathcal H_n^+=\overline{\bigoplus_{j\ge0}\mathbb C f_{n,j}},\qquad \pi_n(k_\theta)f_{n,j}=e^{-i(n+2j)\theta}f_{n,j},\qquad \mathcal H_n^-=\overline{\bigoplus_{j\ge0}\mathbb C\widetilde f_{n,j}},\qquad \pi_n^-(k_\theta)\widetilde f_{n,j}=e^{i(n+2j)\theta}\widetilde f_{n,j},$$
+each character occurring with multiplicity one. The displayed algebraic K-finite subspaces $V_n^-,V_n^+$ of [[def-holomorphic-and-antiholomorphic-discrete-series-models]] are isomorphic as $(\mathfrak g,K)$-modules to $M^+_{-n}$ and $M^-_n$, the extremal submodules of [[lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points]](b) at $\nu=n-1$; in particular, the Casimir $\Omega$ of [[def-k-finite-and-smooth-vectors-for-sl2-r]] acts on these algebraic modules by $\tfrac18((n-1)^2-1)$.
+
+## Facts & Assumptions
+
+LINE 47 [F1] The displayed vectors are smooth and have derived actions $L_{E_+}f_{n,j}=-j f_{n,j-1}$ (zero for $j=0$), $L_{E_-}f_{n,j}=(n+j)f_{n,j+1}$; on conjugates, $L_{E_+}\widetilde f_{n,j}=(n+j)\widetilde f_{n,j+1}$ and $L_{E_-}\widetilde f_{n,j}=-j\widetilde f_{n,j-1}$ ([[def-holomorphic-and-antiholomorphic-discrete-series-models]]).
+
+[F2] The $f_{n,j}$ form a complete orthogonal K-eigenbasis of $\mathcal H_n^+$, the projections $P_j$ have range $\mathbb C f_{n,j}$, and the conjugate family has the analogous properties ([[lem-the-weighted-discrete-series-space-is-a-hilbert-space]]).
+
+[F3] The model actions are strongly continuous unitary representations on the Hilbert spaces ([[lem-the-weighted-area-form-is-sl2-r-invariant]]).
+
+LINE 51 [F3] The model actions are strongly continuous unitary representations on the Hilbert spaces ([[lem-the-weighted-area-form-is-sl2-r-invariant]]).
+
+[F4] At $\nu=n-1$, the extremal modules $M^+_{-n}$ and $M^-_n$ are irreducible with the same K-weights and ladder actions; the Casimir acts on them by $\tfrac18((n-1)^2-1)$ ([[lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points]](b)). The model's algebraic K-finite spans identify with these modules ([[def-holomorphic-and-antiholomorphic-discrete-series-models]]).
+
+## Proof
+
+LINE 59 **Given:** The assumptions and notation of the Statement.
+
+1.1 Let $W\subseteq\mathcal H_n^+$ be a nonzero closed $G$-invariant subspace and choose $0\ne v\in W$. It is K-invariant. By [F2], $v=\sum_{j\ge0}P_jv$ in Hilbert norm, so some $P_jv$ is nonzero; each $P_jv$ belongs to $W$ because its defining K-orbit integral is a norm limit of sums of vectors in $W$. Thus $f_{n,j}\in W$ for some $j$. [F2, F3, algebra]
+
+2.1 Since $W$ is closed and G-invariant, for every real $X\in\mathfrak g$ and smooth $w\in W$ the difference quotients $(\pi_n(\exp(tX))w-w)/t$ lie in $W$ and converge in norm to $L_Xw$; hence $L_Xw\in W$. Applying the complex-linear combinations $E_+$ and $E_-$ to the smooth K-finite vectors in [F1] shows that $W$ contains $f_{n,j-1}$ whenever $j>0$, and contains $f_{n,j+1}$ for every $j\ge0$, since the coefficients $-j$ and $n+j$ are nonzero in those cases. Iteration gives every $f_{n,k}\in W$. Their span is dense by [F2], so closedness yields $W=\mathcal H_n^+$. [F1, F2, step 1.1, algebra]
+
+LINE 61 1.1 Let $W\subseteq\mathcal H_n^+$ be a nonzero closed $G$-invariant subspace and choose $0\ne v\in W$. It is K-invariant. By [F2], $v=\sum_{j\ge0}P_jv$ in Hilbert norm, so some $P_jv$ is nonzero; each $P_jv$ belongs to $W$ because its defining K-orbit integral is a norm limit of sums of vectors in $W$. Thus $f_{n,j}\in W$ for some $j$. [F2, F3, algebra]
+
+2.1 Since $W$ is closed and G-invariant, for every real $X\in\mathfrak g$ and smooth $w\in W$ the difference quotients $(\pi_n(\exp(tX))w-w)/t$ lie in $W$ and converge in norm to $L_Xw$; hence $L_Xw\in W$. Applying the complex-linear combinations $E_+$ and $E_-$ to the smooth K-finite vectors in [F1] shows that $W$ contains $f_{n,j-1}$ whenever $j>0$, and contains $f_{n,j+1}$ for every $j\ge0$, since the coefficients $-j$ and $n+j$ are nonzero in those cases. Iteration gives every $f_{n,k}\in W$. Their span is dense by [F2], so closedness yields $W=\mathcal H_n^+$. [F1, F2, step 1.1, algebra]
+
+3.1 The same argument applies to $\mathcal H_n^-$: from any nonzero closed invariant subspace, a nonzero character projection gives some $\widetilde f_{n,j}$; the nonzero coefficients $n+j$ upward and $-j$ downward generate all $\widetilde f_{n,k}$, whose span is dense. Thus both representations are irreducible. Their strong continuity and unitarity are [F3]. [F1, F2, F3, step 1.1, step 2.1]
+
+LINE 63 2.1 Since $W$ is closed and G-invariant, for every real $X\in\mathfrak g$ and smooth $w\in W$ the difference quotients $(\pi_n(\exp(tX))w-w)/t$ lie in $W$ and converge in norm to $L_Xw$; hence $L_Xw\in W$. Applying the complex-linear combinations $E_+$ and $E_-$ to the smooth K-finite vectors in [F1] shows that $W$ contains $f_{n,j-1}$ whenever $j>0$, and contains $f_{n,j+1}$ for every $j\ge0$, since the coefficients $-j$ and $n+j$ are nonzero in those cases. Iteration gives every $f_{n,k}\in W$. Their span is dense by [F2], so closedness yields $W=\mathcal H_n^+$. [F1, F2, step 1.1, algebra]
+
+3.1 The same argument applies to $\mathcal H_n^-$: from any nonzero closed invariant subspace, a nonzero character projection gives some $\widetilde f_{n,j}$; the nonzero coefficients $n+j$ upward and $-j$ downward generate all $\widetilde f_{n,k}$, whose span is dense. Thus both representations are irreducible. Their strong continuity and unitarity are [F3]. [F1, F2, F3, step 1.1, step 2.1]
+
+4.1 The module identifications in [F4] match the K-weights and both ladder operators, and therefore identify the algebraic K-finite modules of $D_n^-$ and $D_n^+$ with $M^+_{-n}$ and $M^-_n$. The same supplier gives the stated Casimir scalar on these modules, with the normalization of [[def-k-finite-and-smooth-vectors-for-sl2-r]]. [F4, algebra] ∎
+
+LINE 65 3.1 The same argument applies to $\mathcal H_n^-$: from any nonzero closed invariant subspace, a nonzero character projection gives some $\widetilde f_{n,j}$; the nonzero coefficients $n+j$ upward and $-j$ downward generate all $\widetilde f_{n,k}$, whose span is dense. Thus both representations are irreducible. Their strong continuity and unitarity are [F3]. [F1, F2, F3, step 1.1, step 2.1]
+
+4.1 The module identifications in [F4] match the K-weights and both ladder operators, and therefore identify the algebraic K-finite modules of $D_n^-$ and $D_n^+$ with $M^+_{-n}$ and $M^-_n$. The same supplier gives the stated Casimir scalar on these modules, with the normalization of [[def-k-finite-and-smooth-vectors-for-sl2-r]]. [F4, algebra] ∎
+
+FILE thm-jump-functions-have-derivative-zero-almost-everywhere
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]).
+
+Let $F : [a,b] \to \mathbb{R}$ be nondecreasing, and let $J_F$ be its jump
+function. Then $J_F$ is differentiable almost everywhere on $(a,b)$ and
+
+$$
+J_F'(x) = 0
+$$
+
+for almost every $x \in (a,b)$.
+
+LINE 50 **Proof technique:** direct.
+
+1.1 By [[thm-froda]], the discontinuity set of $F$ in $(a,b)$ is at most countable; enumerate it as $(s_n)_{n \ge 1}$. Define two discrete finite measures on $[a,b]$ by $$\mu_L:=\sum_{n \ge 1}\bigl(F(s_n)-F(s_n^-)\bigr)\delta_{s_n}, \qquad \mu_R:=\beta_a\delta_a+\sum_{n \ge 1}\bigl(F(s_n^+)-F(s_n)\bigr)\delta_{s_n},$$ and put $\mu:=\mu_L+\mu_R$. The masses are nonnegative, and for every $x>a$ the definition of [[def-jump-function-of-an-increasing-function]] gives $$J_F(x)=\mu_L((a,x])+\mu_R([a,x)).$$ Because $\mu$ is concentrated on the countable set $\{a,s_1,s_2,\dots\}$, it is singular with respect to Lebesgue measure. [given, construct]
+
+2.1 Fix $x \in (a,b)$ and $h>0$ small. From the representation in step 1.1 one gets $$0 \le J_F(x+h)-J_F(x) \le \mu([x,x+h]), \qquad 0 \le J_F(x)-J_F(x-h) \le \mu([x-h,x]).$$ Apply [[thm-differentiation-of-borel-measures-finite-on-compact-sets-on-r-n]] to $\mu$ and the interval families $[x,x+h]$ and $[x-h,x]$. Since the absolutely continuous part of $\mu$ is zero, the two interval ratios $\mu([x,x+h])/h$ and $\mu([x-h,x])/h$ tend to $0$ for almost every $x$. Therefore the right and left difference quotients of $J_F$ both tend to $0$ for almost every $x \in (a,b)$. [step 1.1]
+
+FILE thm-kac-integral-formula-for-excursions
+
+STATEMENT In an ergodic probability-preserving system, let $\mu(E)>0$. For nonnegative measurable $f:X\to[0,\infty]$, define $S_Ef(x)=\sum_{j=0}^{r_E(x)-1}f(T^jx)$ on E, using the infinite nonnegative sum when $r_E(x)=\infty$. Then $\int_E S_Ef\,d\mu=\int_Xf\,d\mu$. For integrable real or complex f the excursion is absolutely summable a.e. on E; setting it to zero on its measurable null failure set gives the same identity.
+
+LINE 52 3.1 For arbitrary nonnegative f use $f_m=\min(f,m)$. These increase pointwise to f, and $S_Ef_m\uparrow S_Ef$: one inequality is termwise, and the other follows by first restricting to any finite number of excursion terms and then increasing m. Monotone convergence on X and E proves the equality, including infinite values. [step 2.1, F4]
+
+4.1 For integrable real or complex f, apply step 3.1 to $|f|$: $\int_E S_E|f|=\int|f|<\infty$. Thus $S_E|f|$ is finite a.e. (otherwise its integral is at least $K$ times the positive measure of its infinity set for every K). On this conull set the excursion is absolutely summable. Apply step 3.1 to the positive and negative parts of the real and imaginary components, each bounded by $|f|$. Their excursion integrals are finite, so linearity yields the asserted identity without subtracting infinities. Null-set values have no effect. [step 3.1, F5] ∎
+
+FILE thm-karlin-rubin-one-sided-ump-test
+
+STATEMENT Assume AC. Let $\mathcal E=((\mathcal X,\mathcal A),\Theta,(P_\theta))$ have
+MLR in a real statistic $T$, let $\theta_0\in\Theta$, and let
+$0<\alpha<1$. A randomized test is a binary-action probability kernel as in
+[[def-randomized-test]]; write $\psi(x)=K(x,\{1\})$ for its measurable
+rejection function. For nonempty, disjoint null and alternative sets,
+power, size, and level have the conventions in
+[[def-test-size-and-power]]: $\beta_\psi(\theta)=E_\theta\psi$,
+size $\sup_{\theta\in\Theta_0}\beta_\psi(\theta)$, and level $\alpha$ when
+the size is at most $\alpha$. Here a level-$\alpha$ test is **uniformly most
+powerful (UMP)** when it has at least as large a power as every other
+level-$\alpha$ test at every parameter in the alternative set; if an
+alternative set is empty, define level by the same null-supremum formula and
+the pointwise UMP comparison is vacuous.
+
+Choose $c_+,\gamma_+$ and $c_-,\gamma_-$ such that
+$$P_{\theta_0}(T>c_+)+\gamma_+P_{\theta_0}(T=c_+)=\alpha,\qquad P_{\theta_0}(T<c_-)+\gamma_-P_{\theta_0}(T=c_-)=\alpha.$$
+Such choices exist by [[lem-randomized-threshold-has-exact-level]]. Then
+$$\phi_+=\mathbf1_{\{T>c_+\}}+\gamma_+\mathbf1_{\{T=c_+\}}$$
+defines a UMP randomized test of level $\alpha$ for
+$H_0:\theta\le\theta_0$ against
+$H_1:\theta>\theta_0$, and
+$$\phi_-=\mathbf1_{\{T<c_-\}}+\gamma_-\mathbf1_{\{T=c_-\}}$$
+defines a UMP randomized test of level $\alpha$ for
+$H_0:\theta\ge\theta_0$ against
+$H_1:\theta<\theta_0$. All hypotheses are intersected with $\Theta$.
+
+LINE 99 2.2 Fix $\theta_1>\theta_0$ with densities $p_0,p_1$, let $q$ be their Borel MLR function, and let $N$ be its pairwise $\mu$-null exceptional set from [F1]. By [F5], $P_{\theta_0}(N)=0$ and $P_{\theta_0}(p_0>0)=1$. Put $k=q(c_+)$. The value $k$ is finite: if $P_{\theta_0}(T=c_+)>0$, there is a point of this boundary outside $N$ with $p_0>0$ and finite $p_1$; otherwise $P_{\theta_0}(T>c_+)=\alpha>0$ gives such a point above the threshold and monotonicity forces $q(c_+)<\infty$. On $\{p_0>0\}\setminus N$, $p_1-kp_0=p_0(q(T)-k)$ is nonnegative above $c_+$, nonpositive below it, and zero at $T=c_+$. On $\{p_0=0<p_1\}\setminus N$, $q(T)=+\infty$; finite $k$ and monotonicity force $T>c_+$, where $\phi_+=1$. Where both densities vanish, $p_1-kp_0=0$. By [F9], the products and differences are measurable, so every competing test $\psi$ satisfies $(\phi_+-\psi)(p_1-kp_0)\ge0$ $\mu$-almost everywhere. [given, F1, F5, F7, F9, step 1.1]
+
+3.1 The measurable product in step 2.2 is integrable because $|\phi_+-\psi|\le1$ and $p_0,p_1$ each integrate to one. Apply [F5] to the positive and negative parts of $\phi_+-\psi$; linearity [F6] then gives $E_{\theta_1}(\phi_+-\psi)-kE_{\theta_0}(\phi_+-\psi)=\int(\phi_+-\psi)(p_1-kp_0)\,d\mu\ge0$. For a level-$\alpha$ competitor, [F8] and step 1.1 give $E_{\theta_0}\psi\le\alpha=E_{\theta_0}\phi_+$, while $k\ge0$; thus $E_{\theta_1}\phi_+\ge E_{\theta_1}\psi$. Since $\theta_1>\theta_0$ was arbitrary, $\phi_+$ is UMP for the upper alternative. [step 1.1, step 2.1, step 2.2, F5, F6, F8, F9, algebra]
+
+4.1 Reparameterize by $\eta=-\theta$ and put $S=-T$. For $\eta_1<\eta_2$, let $q$ represent $p_{-\eta_1}/p_{-\eta_2}$ as in [F1]. Define $h(u)=1/u$ for $0<u<+\infty$, $h(0)=+\infty$, and $h(+\infty)=0$. The function $s\mapsto h(q(-s))$ is Borel and nondecreasing, since reflection and $h$ both reverse order. Outside the original pairwise exceptional set on the union of supports, it represents $p_{-\eta_2}/p_{-\eta_1}$, including points where either density is zero; where both vanish no ratio is required. Thus the reflected family has MLR in $S$. Apply the upper-tail result of steps 1.1–3.1 at $\eta_0=-\theta_0$ with cutoff $-c_-$ and boundary probability $\gamma_-$, calibrated by step 1.1. The resulting UMP test is exactly $\phi_-$ for the original lower alternative. [F1, step 1.1, step 3.1, construct, algebra] ∎
+
+LINE 85 
+[F9] Sums, scalar multiples, and products of measurable extended-real functions are measurable whenever the pointwise operations are defined. ([[thm-arithmetic-and-lattice-operations-preserve-measurability]])
+
+[F10] A probability kernel assigns a probability measure to each $x$ and has a measurable event-evaluation function $x\mapsto K(x,B)$ for each action event $B$. ([[def-measure-kernel-and-probability-kernel]])
+
+FILE thm-kde-global-mise-upper-rate
+
+STATEMENT Assume $\mathrm{AC}_\omega$. Let $X_1,\ldots,X_n$ be iid with a Borel density
+version $f\in W^{2,2}(\mathbb R^d)$. Let $K:\mathbb R^d\to\mathbb R$ be
+Borel, $K\in L^1\cap L^2$, $\int K(u)du=1$,
+$\int u_jK(u)du=0$ for every $j$, and
+$M_2(K):=\int|K(u)|\|u\|^2du<\infty$. For every $h>0$ define
+$$\operatorname{MISE}(\widehat f_h) :=\mathbb E\int_{\mathbb R^d}(\widehat f_h(x)-f(x))^2dx.$$
+Then
+$$\operatorname{MISE}(\widehat f_h) \le\frac{h^4}{4}M_2(K)^2\|D^2f\|_{2,F}^2+ \frac{\|K\|_2^2}{nh^d}.$$
+In particular, $h_n=n^{-1/(d+4)}$ gives
+$\operatorname{MISE}(\widehat f_{h_n})=O(n^{-4/(d+4)})$, where $O(n^{-4/(d+4)})$
+means bounded by a finite constant times $n^{-4/(d+4)}$ for all sufficiently
+large $n$. This is an upper rate under the displayed hypotheses; it is not a
+minimax lower bound.
+
+LINE 94 1.1 For fixed $h$, [F2] makes $(z,x)\mapsto\widehat f_h(x)$ Borel, and [F1] makes $f(x)$ Borel as a function of $(z,x)$. Arithmetic measurability in [F2] therefore makes the squared error product-measurable and nonnegative. Tonelli [F6] identifies MISE with the integral over $x$ of its expected pointwise squared error, even before finiteness has been established. [given, F1, F2, F6]
+
+2.1 Write $q_h(x,z)=h^{-d}K((x-z)/h)$. By Tonelli and the substitution $z+hu$ in [F8], $\int_{\mathbb R^d}\mathbb E|q_h(x,X_1)|dx=\|K\|_1, \qquad \int_{\mathbb R^d}\mathbb E[q_h(x,X_1)^2]dx =h^{-d}\|K\|_2^2.$ Consequently, [F9] makes the summands integrable and square-integrable for almost every $x$. For such $x$, put $g(z)=q_h(x,z)$ and $g^+=\max(g,0)$, $g^-=\max(-g,0)$. The nonnegative density formula [F7] applied to $|g|$ shows $\int|g|f<\infty$. Thus both parts have finite density integrals, and [F7] applied separately to them, followed by subtraction using [F11], gives $\mathbb E q_h(x,X_1)=\int g(z)f(z)dz$. Signed substitution [F8] then identifies this integral with $S_hf(x)$, and identical laws plus finite-sum linearity [F11] give $\mathbb E\widehat f_h(x)=S_hf(x)$. [given, A1, F4, F6, F7, F8, F9, F11, step 1.1]
+
+3.1 At almost every $x$ from step 2.1, the variables $q_h(x,X_i)$ are iid and square-integrable. Set $W_i=q_h(x,X_i)-\mathbb E q_h(x,X_i)$. These are independent, integrable and square-integrable by [F5] and step 2.1; for $i\ne j$, [F5] makes $W_iW_j$ integrable and gives $\mathbb E[W_iW_j]=\mathbb EW_i\,\mathbb EW_j=0$. Expanding the finite square in the variance definition [F10] and applying [F11] gives $\operatorname{Var}(\widehat f_h(x))=n^{-2}\sum_i\mathbb EW_i^2=\operatorname{Var}(q_h(x,X_1))/n$. Expanding one centered square using [F10]–[F11] gives $\operatorname{Var}(q_h(x,X_1))=\mathbb E[q_h(x,X_1)^2]-(\mathbb E q_h(x,X_1))^2\le\mathbb E[q_h(x,X_1)^2]$. Integrating and using step 2.1 bounds the integrated variance by $\|K\|_2^2/(nh^d)$. [step 2.1, F4, F5, F10, F11, algebra]
+
+LINE 69 
+[F2] The estimator is jointly Borel in the sample and evaluation point ([[lem-kde-jointly-measurable-in-sample-and-evaluation-point]]); arithmetic operations preserve measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F3] The convolution bias satisfies $\|S_hf-f\|_2\le h^2M_2(K)\|D^2f\|_{2,F}/2$ ([[lem-second-order-kernel-convolution-l2-bias-bound]]).
+
+FILE thm-kde-pointwise-second-order-bias
+
+STATEMENT Assume $\mathrm{AC}_\omega$. Let $X_1,\ldots,X_n$ be iid with a Borel
+probability density version $f$ on $\mathbb R^d$. Let
+$K:\mathbb R^d\to\mathbb R$ be Borel with $K\in L^1\cap L^2$,
+$\int K(u)du=1$, $\int u_jK(u)du=0$ for each $j$, and
+$\int|K(u)|\|u\|^2du<\infty$. Suppose $f$ has continuous second partial
+derivatives and a globally bounded continuous Hessian. At each fixed
+$x\in\mathbb R^d$, as $h\downarrow0$,
+$$\mathbb E\widehat f_h(x)-f(x) =\frac{h^2}{2}\sum_{j,k=1}^d\mu_{jk}\,\partial_{jk}f(x)+o(h^2), \qquad \mu_{jk}:=\int_{\mathbb R^d}u_ju_kK(u)du.$$
+Here $r(h)=o(h^2)$ means $r(h)/h^2\to0$ as $h\downarrow0$.
+
+LINE 80 
+
+1.1 By [F2], $Z_i:=K((x-X_i)/h)$ is a measurable real random variable. By [F3], $f$ is bounded. Applying [F5] to $|Z_i|$, then [F6] to $u\mapsto x-hu$, gives $\mathbb E|Z_i|=\int|K((x-t)/h)|f(t)dt =h^d\int|K(u)|f(x-hu)du \le h^d\|f\|_\infty\|K\|_1<\infty.$ Thus every $Z_i$ is integrable. Put $g(t)=K((x-t)/h)$ and $g^+=\max(g,0)$, $g^-=\max(-g,0)$. Both parts are nonnegative and their density integrals are finite, being bounded by the absolute integral just established. Apply [F5] separately to $g^+$ and $g^-$, then subtract their finite integrals using [F7]: $\mathbb EZ_i=\int g^+f-\int g^-f=\int gf$. This derives the signed density identity without applying the nonnegative density theorem directly to $g$. Since the $X_i$ have the same law, the $Z_i$ have the same expectation. Linearity [F7] and the signed substitution in [F6] therefore yield $\mathbb E\widehat f_h(x)=\frac1{h^d}\mathbb E Z_1 =\int_{\mathbb R^d}K(u)f(x-hu)du.$ [given, A1, F1, F2, F3, F4, F5, F6, F7]
+
+1.2 For fixed $u$, set $q(t)=f(x-thu)$ on $[0,1]$. By [F9], $q'(0)=-h\nabla f(x)\cdot u$ and $q''(t)=h^2u^TD^2f(x-thu)u$. Integration by parts with $1-t$ and $q'$, then the second fundamental theorem, gives $f(x-hu)=f(x)-h\nabla f(x)\cdot u+ h^2\int_0^1(1-t)u^TD^2f(x-thu)u\,dt.$ For $u\ne0$, subtracting $\frac{h^2}{2}u^TD^2f(x)u$ defines a remainder $h^2\|u\|^2\rho(h,u)$, where $\rho(h,u)=\int_0^1(1-t) \frac{u^T(D^2f(x-thu)-D^2f(x))u}{\|u\|^2}dt.$ Continuity of the Hessian at $x$ gives $\rho(h,u)\to0$ for each fixed $u$; the global Hessian bound gives $|\rho(h,u)|\le H$ uniformly in $h,u$. Set $\rho(h,0)=0$. [given, F9, algebra]
+
+FILE thm-kde-pointwise-variance
+
+STATEMENT Assume $\mathrm{AC}_\omega$. Let $X_1,\ldots,X_n$ be iid with bounded
+continuous Borel density version $f$ on $\mathbb R^d$. Let
+$K:\mathbb R^d\to\mathbb R$ be Borel, $K\in L^1\cap L^2$, and
+$\int K(u)du=1$. For fixed $x\in\mathbb R^d$, along bandwidths $h=h_n>0$
+with $h_n\to0$ and $nh_n^d\to\infty$,
+$$\operatorname{Var}(\widehat f_{h_n}(x)) =\frac{f(x)\|K\|_2^2}{nh_n^d}+o((nh_n^d)^{-1}).$$
+
+LINE 84 2.1 Let $W_i=Z_i-\mathbb E Z_i$. For $i\ne j$, [F5] applied to the independent integrable variables $W_i,W_j$ gives $\mathbb E[W_iW_j]=\mathbb E[W_i]\mathbb E[W_j]=0$. Expanding the finite square and using expectation linearity [F11] therefore gives $\operatorname{Var}(\widehat f_h(x)) =\frac{1}{nh^{2d}}\left(\mathbb E[Z_1^2]-(\mathbb EZ_1)^2\right).$ [step 1.1, F3, F5, F6, F11, algebra]
+
+3.1 Step 1.1 shows that $t\mapsto K((x-t)/h)f(t)$ is integrable. Put $g(t)=K((x-t)/h)$ and decompose $g=g^+-g^-$ into its nonnegative parts. The density integrals of both parts are finite because $\int|g|f<\infty$ by step 1.1. Apply the nonnegative density identity [F7] to each part and subtract using [F11], obtaining $\mathbb EZ_1=\int gf$. Applying the signed substitution [F9] to this integrable product gives $\mathbb E Z_1=h^d\int K(u)f(x-hu)du$, so $|\mathbb EZ_1|\le h^d\|f\|_\infty\|K\|_1$. Along any sequence $h_n\to0$, [F10] gives $\int K(u)^2f(x-h_nu)du\longrightarrow f(x)\|K\|_2^2.$ Thus the first term in step 2.1 is $f(x)\|K\|_2^2/(nh_n^d)+o((nh_n^d)^{-1})$. The subtracted mean-square term is $O(n^{-1})=o((nh_n^d)^{-1})$ because $h_n^d\to0$. The additional $nh_n^d\to\infty$ condition places the expansion in the vanishing-variance regime. This proves the formula. [step 1.1, step 2.1, F7, F9, F10, F11, algebra] ∎
+
+
+FILE thm-khintchine-inequality-for-finite-rademacher-sums
+
+STATEMENT Assume Countable Choice ([[def-countable-choice]]). For every finite sequence
+$(a_j)_{j\in J}$ of complex numbers, indexed by a finite set
+$J\subset\{0,1,2,\dots\}$, and every $0<p<\infty$ there are constants
+$0<c_p\le C_p<\infty$, depending only on $p$, such that
+$$c_p\Bigl(\sum_{j\in J}|a_j|^2\Bigr)^{1/2}\le\Bigl(\int_0^1\Bigl|\sum_{j\in J}\varepsilon_j(t)a_j\Bigr|^pdt\Bigr)^{1/p}\le C_p\Bigl(\sum_{j\in J}|a_j|^2\Bigr)^{1/2},$$
+and the constants do not depend on the finite set $J$. For $p=2$ both
+inequalities hold with constants $1$:
+$$\int_0^1\Bigl|\sum_{j\in J}\varepsilon_j(t)a_j\Bigr|^2dt=\sum_{j\in J}|a_j|^2.$$
+The empty sum is zero and the empty case is trivial.
+
+LINE 55 
+[F6] Applying real arithmetic closure to real and imaginary parts shows that sums and products of measurable complex functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[F7] For every $s>0$ the Euler integral $\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}\,dt$ converges, so it is a finite positive number ([[def-real-gamma-function-by-the-euler-integral]], [[thm-real-gamma-euler-integral-convergence]]). The monotone $C^1$ substitution $t=2s\sqrt{\tau}$ on $(0,\infty)$ is valid on compact truncations and at both improper ends by [[thm-substitution-for-improper-integrals]].
+
+FILE thm-kolmogorov-maximal-inequality
+
+STATEMENT Let $X_1,\ldots,X_n$ be independent centered square-integrable real random variables, $n\ge1$, and $S_k=\sum_{j=1}^kX_j$. For every $\lambda>0$,
+$$\mathbb P\left(\max_{1\le k\le n}|S_k|\ge\lambda\right)\le\frac{\operatorname{Var}(S_n)}{\lambda^2}=\frac{\sum_{j=1}^n\operatorname{Var}(X_j)}{\lambda^2}.$$
+Thus controlling the whole finite maximum costs no larger bound than controlling the final sum by Chebyshev.
+
+LINE 41 [F3] [[lem-variance-and-covariance-identities-for-random-variables]]: Let $X,Y$ be square-integrable real random variables on one probability space. Then $\operatorname{Var}(X)=\mathbb E[X^2]-\mathbb E[X]^2,$ $\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].$ Moreover, covariance is symmetric and bilinear on finite linear combinations. On finite full-power-set probability spaces these formulas reduce to the published finite identities.
+
+[F4] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then: 1. $cf$ is measurable for every real scalar $c$; 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable; 3. if $f+g$ is pointwise defined, then $f+g$ is measurable; 4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
+
+## Proof
+
+FILE thm-l-one-approximate-identities-converge-in-l-p
+
+STATEMENT Assume the Axiom of Countable Choice.
+
+Let $(K_\varepsilon)_{\varepsilon>0}$ be an $L^1$ approximate identity on
+$\mathbb{R}^n$. If $1 \le p < \infty$ and $f \in L^p(\mathbb{R}^n)$, then
+
+$$\|f*K_\varepsilon - f\|_p \longrightarrow 0 \qquad(\varepsilon \to 0^+).$$
+
+LINE 31 $\mathbb{R}^n$. If $1 \le p < \infty$ and $f \in L^p(\mathbb{R}^n)$, then
+
+$$\|f*K_\varepsilon - f\|_p \longrightarrow 0 \qquad(\varepsilon \to 0^+).$$
+
+## Facts & Assumptions
+
+LINE 51 2.1 Let $\eta > 0$ be arbitrary. If $\|f\|_p=0$, then $f=0$ in $L^p$ and step [L1, L2, L3, step 1.1, choose, algebra] 1.1 gives $\|f*K_\varepsilon-f\|_p=0<\eta$ for every $\varepsilon>0$. Assume now $\|f\|_p>0$, and put $M := \sup_\varepsilon \|K_\varepsilon\|_1 < \infty$. By [L2], choose $\delta > 0$ so that $\|\tau_y f-f\|_p < \eta/(2M)$ whenever $|y|<\delta$. By [L1], choose $\varepsilon_0>0$ so that $$ \int_{|y|\ge\delta} |K_\varepsilon(y)|\,dy < \frac{\eta}{4\|f\|_p} \qquad (0<\varepsilon<\varepsilon_0). $$ For such $\varepsilon$, split the integral from step 1.1 into $|y|<\delta$ and $|y|\ge\delta$. The near part is at most $\eta/2$. For the far part, [L3] gives $\|\tau_y f-f\|_p \le 2\|f\|_p$, so $$ \int_{|y|\ge\delta} |K_\varepsilon(y)|\,\|\tau_y f-f\|_p\,dy \le 2\|f\|_p \int_{|y|\ge\delta} |K_\varepsilon(y)|\,dy < \eta/2. $$ Hence $\|f*K_\varepsilon-f\|_p<\eta$ whenever $0<\varepsilon<\varepsilon_0$. [L1, L2, L3, step 1.1, choose, algebra]
+
+3.1 Because $\eta>0$ was arbitrary, $\|f*K_\varepsilon-f\|_p \to 0$ as [step 2.1] $\varepsilon \to 0^+$, proving the convergence in $L^p$. [step 2.1] ∎

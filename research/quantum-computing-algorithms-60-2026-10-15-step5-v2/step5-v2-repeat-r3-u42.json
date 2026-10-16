@@ -1,0 +1,132 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 3,
+  "unit": "42",
+  "input_sha256": "de658813ab931c905b0a071064a69258f841fa024279ee38ce92d3cf8d472df2",
+  "decisions": [
+    {
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "2a097f3db39e5be38a0587578e06ce2c7f2999beb8d4c6c726eef624a61395a5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The complete capped wrapper charges a fixed number of fresh preparations, each costing G_subset. Its O(S_0+...) supplier bound does not imply G_subset+O(other costs) with coefficient one: G_subset is unrestricted and may dominate every other term. Moved G_subset inside the existing O bound and explicitly summed setup costs in proof 7.1–8.1. This corrects resource accounting without changing the search, its hypotheses or the conditional polylogarithmic specialization.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/quant-ph/0608026"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "disposition": "repaired",
+      "post_sha256": "b8e6187ec56f2d7830c62812677eb838f975e53b4f95ce510c8d8cf0e9a18fae",
+      "review_context_sha256": "e7bc790195477ccee44d2ef5b310ad5dc5367f927e84654c5f0a55e9666b495a",
+      "reason": "The wrapper at rho=1/2 has O(1) fresh setups. Each charges G_subset+r polylog(N+M)+O(G_row); summing these and O(N^(2/3)) walk-access calls proves O(G_subset+r polylog(N+M)+N^(2/3)(G_row+polylog(N+M))). For r=Theta(N^(2/3)), repeated value loads remain O(N^(2/3)); the seed-error hybrid still uses T=O(N^(2/3)). Current proof 4.1 supplies the separate top-level occupancy bound missing in the Step-4 digest, and 5.1 includes it in eta_N. Checked canonical storage, capped operations, supplied row access, exact-rotation convention and compiler bounds against their cited contracts. No new axiom or prerequisite. This is a repair review, not independent acceptance of my own edits.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/quant-ph/0608026"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "locus": "Statement gate-time display; proof steps 7.1 and 8.1",
+      "reason": "Repeated fresh stationary setups cannot have a coefficient-one G_subset charge for an unrestricted supplied cost. Statement now places G_subset inside O, and the proof sums every setup, including edge-row preparation. The complete-wrapper asymptotic claim, query bound and conditional efficient-cost specialization remain intact.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/quant-ph/0608026"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-qa-18-reversible-search-cost",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "open",
+      "route": "frontier owner of thm-qa-18-reversible-search-cost; outside unit 42 assignment",
+      "locus": "Statement single-outer-trial display S_0+O(...), against alg-qa-18-reversible-walk-finding, tolerant finding wrapper steps 1–2",
+      "reason": "The single-trial coefficient-one setup claim has the same accounting defect: the defining wrapper first prepares and tests a fresh stationary sample, then prepares a fresh stationary walk state if the first test fails. On an empty marked set both preparations occur. With unrestricted setup cost S_0, 2S_0 cannot in general be bounded by S_0+O(update/check costs). The separate complete-wrapper O(S_0+...) claim used by this assigned repair remains sound. This supplier was inspected but neither edited nor adjudicated here.",
+      "source_excerpt": "$$S_0+O\\!\\left(\\frac{1}{\\sqrt{\\varepsilon_0}}\\left(\\frac{U_0}{\\sqrt{\\delta_0}}+C\\right)\\right).$$",
+      "affected_use": "Only the single-outer-trial coefficient-one claim is unsupported by the stated two-preparation procedure. The assigned QRAM theorem uses the complete-wrapper O(S_0+...) claim and now correctly sums all fresh setups.",
+      "minimality": "Owner should change the single-trial setup accounting to O(S_0+...) and inspect direct consumers only if that Statement changes. No change to the procedure, error proof or complete-wrapper claim is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+      "research/quantum-computing-algorithms-60-2026-10-15-batch-42.proof-contracts.json"
+    ],
+    "claim": "The corrected profile is O(G_subset+r polylog(N+M)+N^(2/3)(G_row+polylog(N+M))) with the original supplied-cost interfaces, fixed failure target, seed-preserving capped access, exact-rotation convention and no Choice use.",
+    "contract_integration": "Acquired step5-shared-write lock as step5-v2-repeat-r3-u42, reread the current contract, updated only this item’s derivations 7.1 and 8.1 and risk_review, passed the scoped strict check, and released the lock. No manifest, dependency or page change was required.",
+    "source_evidence": "Read local reversible-search-cost theorem and its proof, the complete reversible-walk-finding Definition and canonical-storage Definition. Contract citation excerpts supply the other relevant dependency statements. Consulted MNRS https://arxiv.org/pdf/quant-ph/0608026, section 1.2, PDF p.3, for setup/update/check cost conventions only; no claim of independent source-proof verification. The defect and repair follow directly from the local procedure and cost summation.",
+    "statement_change": {
+      "section": "Statement",
+      "before": "G_subset+O(r polylog(N+M)+N^(2/3)(G_row+polylog(N+M)))",
+      "after": "O(G_subset+r polylog(N+M)+N^(2/3)(G_row+polylog(N+M)))",
+      "direct_item_consumers": []
+    },
+    "consumer_examination": [
+      {
+        "path": "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md",
+        "affected_use": "Item list entry and final summary paragraph: records uniform-subset and complete row-access gate costs as explicit inputs.",
+        "disposition": "unaffected",
+        "reason": "The page states no coefficient-one preparation cost or quantitative display; both supplied cost interfaces remain explicit and its summary stays accurate."
+      }
+    ],
+    "consumer_inventory_evidence": "Searched all current item/page carriers for the exact ID, its title and preparation-cost notation. The only external exact-ID occurrence is the owning page. Frozen pack before_aliases has no alias resolving to this item. No direct dependency/reference item consumer exists, so downstream is empty.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-42.proof-contracts.json --items thm-qa-18-element-distinctness-qr-access-gate-cost --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; one scoped item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-18-element-distinctness-qr-access-gate-cost.md --json",
+        "exit_code": 0,
+        "result": "one proof checked; direct strategy pass; zero failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qa-18-element-distinctness-qr-access-gate-cost.md --json",
+        "exit_code": 0,
+        "result": "one item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qa-18-element-distinctness-qr-access-gate-cost.md",
+        "exit_code": 0,
+        "result": "one item; 14 steps; zero defects"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run quantum-computing-algorithms-60-2026-10-15 --items thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "exit_code": 0,
+        "result": "Hashes copied immediately after completed repair review; no subsequent item edit."
+      }
+    ],
+    "published_ledger_updates": [],
+    "unresolved_assigned_mathematics": [],
+    "outside_assignment_findings": [
+      "Single-trial setup accounting in thm-qa-18-reversible-search-cost is routed to its frontier owner through ledger_updates. No published consumer or published supplier was edited."
+    ],
+    "next_action": "Engine collects this report, routes the separate supplier finding, and obtains independent current judgments and required closure; no judge, gate cycle, stamp or certificate was launched or written here."
+  }
+}

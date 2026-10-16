@@ -1,0 +1,2605 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-qa-binary-field-f2-is-a-field",
+    "def-qa-binary-vector-space",
+    "alg-qa-f2-gaussian-elimination",
+    "lem-qa-computational-basis-measurement-law",
+    "def-qa-simon-promise",
+    "lem-qa-simon-annihilator-subspace-basis",
+    "alg-qa-simon-one-sample",
+    "def-qa-simon-random-instance-distribution",
+    "thm-qa-simon-postquery-coset-state",
+    "thm-qa-f2-gaussian-elimination-correct-and-cost",
+    "thm-qa-simon-classical-randomized-query-lower-bound",
+    "thm-qa-simon-hadamard-sampling-law",
+    "def-qa-simon-rank-process",
+    "thm-qa-simon-rank-growth-probability",
+    "alg-qa-simon-recovery-with-budget",
+    "thm-qa-simon-recovery-correctness-and-query-bound",
+    "ex-qa-simon-finite-rank-and-sampling"
+  ],
+  "contracts": {
+    "thm-qa-binary-field-f2-is-a-field": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-binary-field-f2",
+          "source_section": "Definition",
+          "quote": "Set\n$$\n\\mathbb F_2:=\\mathbb Z/2\\mathbb Z=\\{[0]_2,[1]_2\\},\n$$\nwith addition and multiplication induced by the quotient operations\n$$\n[r]_2+[s]_2=[r+s]_2,\\qquad [r]_2[s]_2=[rs]_2\n$$\nfrom [[def-addition-and-multiplication-modulo-n]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-prime",
+          "source_section": "Definition",
+          "quote": "An\ninteger $n$ with $n > 1$ that is not prime is **composite**; unfolding the\ndefinition, $n$ is composite exactly when $n > 1$ and $n$ has a positive divisor\n$d$ with $d \\ne 1$ and $d \\ne n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The integer $2$ is greater than $1$. If a positive integer $d$ divides $2$, write $2=dq$ with positive integer $q$. If $d=1$ it is the first allowed divisor; if $d\\ne1$, then $d\\ge2$, which forces $q=1$ and $d=2$. Thus the only positive divisors are $1$ and $2$, so $2$ is prime by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply [F3] with $p=2$ using step 1.1. The carrier and both operations in [F1] are exactly those of $\\mathbb Z/2\\mathbb Z$, so every field axiom supplied by that specialization holds for $\\mathbb F_2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The quotient carrier is the specified two-element set, not an empty carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: the quotient carrier contains the additive identity [0]_2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: the positive divisors 1 and 2 are checked explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no rank or dimension parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: divisors are checked in the finite list and p=2 is substituted directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement does not make an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement does not make an iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "mod-two-quotient-field-specialization",
+          "asserts": "The carrier is [0]_2,[1]_2; the finite addition and multiplication tables close and 2 has positive divisors 1,2.",
+          "checked_in": "Steps 1.1–2.1"
+        }
+      ],
+      "axioms": []
+    },
+    "def-qa-binary-vector-space": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-binary-field-f2",
+          "source_section": "Definition",
+          "quote": "Set\n$$\n\\mathbb F_2:=\\mathbb Z/2\\mathbb Z=\\{[0]_2,[1]_2\\},\n$$\nwith addition and multiplication induced by the quotient operations\n$$\n[r]_2+[s]_2=[r+s]_2,\\qquad [r]_2[s]_2=[rs]_2\n$$\nfrom [[def-addition-and-multiplication-modulo-n]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qa-binary-field-f2-is-a-field",
+          "source_section": "Statement",
+          "quote": "The quotient operations on $\\mathbb Z/2\\mathbb Z$ make the carrier $\\mathbb F_2$ of [[def-qa-binary-field-f2]] a field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-vector-space",
+          "source_section": "Definition",
+          "quote": "- a set $V$, whose elements are called **vectors**;\n- a binary operation $+ : V \\times V \\to V$ on $V$ ([[def-binary-operation]]),\n  the **vector addition**;\n- an element $0_V \\in V$, the **zero vector**;\n- a map $\\cdot \\,:\\, F \\times V \\to V$, the **scalar multiplication**, written\n  $\\lambda v := \\cdot(\\lambda, v)$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "**The injectivity clause is not decoration.** A linear combination in\n[[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$,\nwhich is **not** required to be injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "### Linear combinations",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "for the set of linear combinations of elements of $S$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The coordinate operations are closed because each coordinate operation is an operation in $\\mathbb F_2$ by [F1]. Each vector-space axiom in [F2] holds coordinate by coordinate by the corresponding field axiom in [F1]; coordinatewise equality then gives the vector identity. For $n=0$ there is only the empty tuple, and all coordinate identities hold vacuously.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For $i<n$, let $e_i$ have coordinate $1$ at $i$ and $0$ elsewhere. Every $x\\in\\mathbb F_2^n$ equals $\\sum_{i<n}x_i e_i$ coordinatewise, so these vectors span. If $\\sum_{i<n}c_i e_i=0$, coordinate $j$ equals $c_j$, hence every $c_j=0$ and the list is independent by [F3]. It is a basis by [F4]–[F5], so its size gives dimension $n$. When $n=0$, the only vector is $0$; the empty list is independent vacuously and its span is $\\{0\\}$ by [F4], so it is the empty basis.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: n=0 has one empty tuple and the empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: the all-zero coordinate vector is the zero vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: the n=1 standard basis is the one vector e_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: the zero-dimensional vector space is handled."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: each standard basis vector is explicitly defined from its coordinate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "coordinate-space-n0-n1",
+          "asserts": "F2^0 has one empty tuple and empty basis; F2^1 has standard basis {e0} and two vectors.",
+          "checked_in": "Steps 1.1–2.1"
+        }
+      ],
+      "axioms": []
+    },
+    "alg-qa-f2-gaussian-elimination": {
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: n=1 gives a zero-row matrix and returns the one-bit vector 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero residual row is discarded and insufficient pivot rank returns FAIL."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the n=1 case is stated explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the n=1 zero-row matrix is the rank-zero boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each pivot is the least admissible row/column in a finite order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm definition makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm definition makes no iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-qa-computational-basis-measurement-law": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "In particular, $P_u$ is a density operator.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "Write $\\mathcal L(H)$ for its complex-linear endomorphisms ([[def-vector-space-of-linear-maps]]) and let $\\Omega$ be a finite nonempty outcome set.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [F1] and [F2], $P_y|z\\rangle=\\delta_{y,z}|y\\rangle$; hence the $P_y$ are pairwise orthogonal self-adjoint idempotents and sum to the identity, as can be checked on every basis vector. For $z=\\sum_w b_w|w\\rangle$, $\\langle P_yz,z\\rangle_{\\rm root}=|b_y|^2\\ge0$, so these projections are POVM effects by [F4]–[F5]. Also $\\langle y,\\psi\\rangle_{\\rm root}=\\overline{a_y}$, so $\\rho P_y|z\\rangle=0$ for $z\\ne y$ and $\\rho P_y|y\\rangle=\\overline{a_y}\\psi$. The coefficient of $|y\\rangle$ in this last vector is $|a_y|^2$. Thus the only nonzero diagonal entry of $\\rho P_y$ in this basis is $|a_y|^2$, and [F6] gives $\\operatorname{tr}(\\rho P_y)=|a_y|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The vector projector $\\rho$ is a density operator by [F3]. The computational-basis projective measurement and its associated POVM law [F4]–[F5] therefore assign weight $\\operatorname{tr}(\\rho P_y)=|a_y|^2$ to outcome $y$. Since the basis is orthonormal and $\\|\\psi\\|=1$, $\\sum_y|a_y|^2=1$; each term is nonnegative. Hence the weights form a probability distribution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The basis and outcome set are finite and nonempty by the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: a zero amplitude gives zero diagonal weight."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: the squared basis coefficients sum to one for a unit vector, including a one-element basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma has no rank or multiplicity parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: all computations use the supplied finite basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma makes no iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "two-outcome-born-trace",
+          "asserts": "For unit vector a|0>+b|1>, the two trace weights are |a|^2 and |b|^2 and sum to one.",
+          "checked_in": "Steps 1.1–2.1"
+        }
+      ],
+      "axioms": []
+    },
+    "def-qa-simon-promise": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-task-and-promise-domain",
+          "source_section": "Definition",
+          "quote": "A **search task** is a pair $(D,R)$ where $D\\subseteq\\{0,1\\}^*$ is the promise domain and $R\\subseteq\\{0,1\\}^*\\times\\{0,1\\}^*$ is a witness relation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-promise-query-instance",
+          "source_section": "Definition",
+          "quote": "For each encoded promised instance $z\\in P_n$ of length $n$ (with $P_n$ as in [[def-qa-input-encoding-and-size]] and its task promise as in [[def-qa-task-and-promise-domain]]), a **query instance** specifies nonnegative integer widths $a(n),b(n)$ and a total function\n$$\nf_z:\\{0,1\\}^{a(n)}\\to\\{0,1\\}^{b(n)}.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-binary-field-f2",
+          "source_section": "Definition",
+          "quote": "Set\n$$\n\\mathbb F_2:=\\mathbb Z/2\\mathbb Z=\\{[0]_2,[1]_2\\},\n$$\nwith addition and multiplication induced by the quotient operations\n$$\n[r]_2+[s]_2=[r+s]_2,\\qquad [r]_2[s]_2=[rs]_2\n$$\nfrom [[def-addition-and-multiplication-modulo-n]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Set $s=(1,0,\\ldots,0)$, which is a nonzero $n$-bit string because $n\\ge1$. For every $x$, $x\\oplus s\\ne x$ and $(x\\oplus s)\\oplus s=x$, so this involution partitions the $2^n$ addresses into disjoint two-element fibers; there are $2^{n-1}$ fibers.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The set of $m$-bit labels has $2^m$ elements: it has one empty word at width zero, and appending either $0$ or $1$ doubles the count at each additional bit. Since $m\\ge n-1$, there are at least $2^{n-1}$ labels. Order the fibers by their least address and assign the first $2^{n-1}$ labels in lexicographic order; this constructs a total function satisfying the iff condition, so the promised family is nonempty.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The displayed iff condition makes the output fiber of $x$ exactly $\\{x,x\\oplus s\\}$. Since $s\\ne0$, the two members are distinct. Any other nonzero period must equal the unique other member $x\\oplus s$ for every $x$, so it is $s$. This verifies the uniqueness clause in the Definition.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: width m=0 is included at n=1, with the single empty label."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the selected mask is nonzero and pairs x with a distinct address."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: n=1 has one pair and one output label."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: the minimum output width m=n−1 is sufficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: fibers and labels are explicitly ordered and assigned."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1: paired addresses receive the same label."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1: injective labels give exactly the two addresses in the pair."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n1-m0-promised-oracle",
+          "asserts": "At n=1,m=0, the constant map from {0,1} to the unique empty string has hidden mask 1.",
+          "checked_in": "Steps 1.1–1.3"
+        }
+      ],
+      "axioms": []
+    },
+    "lem-qa-simon-annihilator-subspace-basis": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-simon-promise",
+          "source_section": "Definition",
+          "quote": "A total function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ satisfies the **Simon hidden-XOR-period promise** if there is a unique nonzero string $s\\in\\{0,1\\}^n$ such that for all $x,y\\in\\{0,1\\}^n$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-binary-vector-space",
+          "source_section": "Statement",
+          "quote": "Give it coordinatewise addition $(x+y)_i=x_i+y_i$ and scalar multiplication $(c x)_i=cx_i$ using the operations of [[def-qa-binary-field-f2]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-binary-field-f2-is-a-field",
+          "source_section": "Statement",
+          "quote": "The quotient operations on $\\mathbb Z/2\\mathbb Z$ make the carrier $\\mathbb F_2$ of [[def-qa-binary-field-f2]] a field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-vector-space",
+          "source_section": "Definition",
+          "quote": "- a set $V$, whose elements are called **vectors**;\n- a binary operation $+ : V \\times V \\to V$ on $V$ ([[def-binary-operation]]),\n  the **vector addition**;\n- an element $0_V \\in V$, the **zero vector**;\n- a map $\\cdot \\,:\\, F \\times V \\to V$, the **scalar multiplication**, written\n  $\\lambda v := \\cdot(\\lambda, v)$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "**The injectivity clause is not decoration.** A linear combination in\n[[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$,\nwhich is **not** required to be injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "for the set of linear combinations of elements of $S$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Consequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Choose the least coordinate $j<n$ with $s_j=1$, which exists by [F1]. For each $i\\ne j$, let $u^{(i)}$ have coordinate $1$ at $i$, coordinate $s_i$ at $j$, and zero elsewhere. Then $s\\cdot u^{(i)}=s_i\\oplus(s_j\\land s_i)=s_i\\oplus s_i=0$, so every $u^{(i)}$ belongs to $s^\\perp$. When $n=1$, the index set $i\\ne j$ is empty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For any $y\\in s^\\perp$, the equation $s\\cdot y=0$ and $s_j=1$ give $y_j=\\bigoplus_{i\\ne j}(s_i\\land y_i)$; hence $y=\\sum_{i\\ne j}y_i u^{(i)}$, checking each coordinate. Conversely, distributing [F4] over the finite sum gives $s\\cdot(\\sum c_i u^{(i)})=\\sum c_i(s\\cdot u^{(i)})=0$, so the span equals $s^\\perp$ and makes it a subspace by [F5] and [F7]. For $\\sum_{i\\ne j}c_i u^{(i)}=0$, coordinate $\\ell\\ne j$ equals $c_\\ell$, so every coefficient is zero. The same coordinate check applies to any injective list from these vectors, so they are an independent set by [F6] and span by [F7].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The independent spanning set from step 2.1 is a basis by [F8], and has exactly $n-1=d$ elements, so $\\dim s^\\perp=d$. Its coefficient map is bijective by the coordinate formula and independence, so $|s^\\perp|=2^d$ because there are $2^d$ binary coefficient lists. For $n=1$, the empty list gives only $0$, and the same count is $2^0=1$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 and step 3.1: n=1 has an empty basis and one zero vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: the zero vector belongs to the span and annihilator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: n=1 gives dimension zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: the d=0 annihilator is handled."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: the least nonzero coordinate is selected from a finite list."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement does not make an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement does not make an iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "annihilator-n1-and-n2",
+          "asserts": "For n=1,s=1, s-perp={0}; for n=2,s=11, the basis is {11}, of size 2.",
+          "checked_in": "Steps 1.1–3.1"
+        }
+      ],
+      "axioms": []
+    },
+    "alg-qa-simon-one-sample": {
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: a target width m=0 is a one-dimensional register and the finite measurement still has one outcome."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: both registers are initialized to their zero computational-basis states."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one standard query is used in every branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: m=0 is allowed when n=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite register bases and outcome maps are explicitly ordered."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm definition makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm definition makes no iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-qa-simon-random-instance-distribution": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-simon-promise",
+          "source_section": "Definition",
+          "quote": "A total function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ satisfies the **Simon hidden-XOR-period promise** if there is a unique nonzero string $s\\in\\{0,1\\}^n$ such that for all $x,y\\in\\{0,1\\}^n$,",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For every nonzero $s$, the map $x\\mapsto x\\oplus s$ is a fixed-point-free involution, so its $2^n$ addresses split into $C=2^{n-1}$ two-element cosets. Since $m\\ge n-1$, $L=2^m\\ge C$, and the number of injections from a $C$-element set into an $L$-element set is $L(L-1)\\cdots(L-C+1)>0$, the sample space is finite and nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Give every pair $(s,\\lambda)$ weight $1/((2^n-1)L(L-1)\\cdots(L-C+1))$. There are exactly the denominator's many pairs, so the weights are nonnegative and sum to one by [F2]. Because the number of injections is constant for each $s$, the induced hidden mask is uniform and, conditional on it, every injection is equally likely.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "If $x\\oplus s=y$, the two addresses lie in the same coset and receive the same label. Conversely, if $f_{s,\\lambda}(x)=f_{s,\\lambda}(y)$, injectivity of $\\lambda$ gives equal cosets, hence $y=x$ or $y=x\\oplus s$. Since $s\\ne0$, this is exactly the Simon promise with unique hidden mask $s$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: n=1,m=0 gives one mask, one coset, and one injection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the distribution ranges only over nonzero masks."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: n=1 has one nonzero mask."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: the minimal output width L=C is permitted and has injections."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: the injection family is explicitly finite and nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1: points in one coset receive the same label."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1: injectivity forces equal labels to come from one coset."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-simon-postquery-coset-state": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-simon-promise",
+          "source_section": "Definition",
+          "quote": "Each fiber is exactly $\\{x,x\\oplus s\\}$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-standard-bit-query",
+          "source_section": "Definition",
+          "quote": "The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-qa-simon-one-sample",
+          "source_section": "Definition",
+          "quote": "Use the Lüders branch maps $\\mathcal I_v(X)=P_vXP_v$, where $P_v=I_{\\rm address}\\otimes|v\\rangle\\langle v|$, under the instrument and conditional-state interface [[def-qc-instrument-and-conditional-state]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-povm-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "A **finite POVM** on $H$ with outcomes $\\Omega$ is a family $E=(E_a)_{a\\in\\Omega}$ with each $E_a$ nonnegative and $\\sum_{a\\in\\Omega}E_a=I_H$; after any enumeration of $\\Omega$, these operators form the finite complete positive family of [[def-qc-finite-positive-effect-family]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Then there exists a unique non-negative operator\n$R:V\\to V$ such that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "source_section": "Statement",
+          "quote": "Let $(E_a)_{a\\in\\Omega}$ be a finite POVM on $H$, and let $M_a=E_a^{1/2}$ be the nonnegative square root of each effect.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "For a density operator $\\rho$ on $H$ (nonnegative with trace one, [[def-qc-density-operator]]), define the outcome weight $p_a(\\rho):=\\operatorname{tr}_K(\\mathcal I_a(\\rho))$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-instrument-outcome-law-normalizes",
+          "source_section": "Statement",
+          "quote": "For a finite instrument $(\\mathcal I_a)_{a\\in\\Omega}$ and a density operator $\\rho$ on its input space, the branch weights $p_a=\\operatorname{tr}(\\mathcal I_a(\\rho))$ form a probability distribution on $\\Omega$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-qa-hadamard-f2-kernel",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $z\\in\\{0,1\\}^n$, with the binary dot product of [[def-qa-binary-dot-product]],\n$$\n\\sum_{x\\in\\{0,1\\}^n}(-1)^{x\\cdot z}=\\begin{cases}2^n,&z=0^n,\\\\0,&z\\ne0^n.\\end{cases}\n$$\nConsequently, for every $x\\in\\{0,1\\}^n$,\n$$\nH^{\\otimes n}|x\\rangle=2^{-n/2}\\sum_{y\\in\\{0,1\\}^n}(-1)^{x\\cdot y}|y\\rangle,\n$$\nwhere $H$ is the exact one-qubit gate of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and tensor factors follow the ordered register convention of [[def-qc-tensor-register-and-permutation]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-qc-unit-vector-projector-is-density",
+          "source_section": "Statement",
+          "quote": "In particular, $P_u$ is a density operator.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The Hadamard-character formula [F14] gives $H^{\\otimes n}|0^n\\rangle=2^{-n/2}\\sum_x|x\\rangle$. Applying [F2] to this vector and the zero target produces the displayed joint vector $\\Psi$. Its $2^n$ orthogonal terms all have squared coefficient $2^{-n}$ by [F10]–[F11], so $\\|\\Psi\\|=1$ and $|\\Psi\\rangle\\langle\\Psi|$ is a density operator by [F15].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F10",
+            "F11",
+            "F14",
+            "F15",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "For each $v$, the maps in [F3] have projectors $P_v$. By [F10]–[F11], computational basis vectors are orthonormal, so the $P_v$ are self-adjoint idempotents, pairwise orthogonal, and sum to the identity. Also $\\langle P_vz,z\\rangle=\\langle P_vz,P_vz\\rangle\\ge0$, so these projectors form a POVM by [F4]–[F5]. The nonnegative square root of each projector is itself by [F6]; hence [F7] makes the branch maps a valid instrument with the probabilities and conditional states of [F8].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Fix $v$ in the image and let $x_0$ be one preimage. Set $w_v:=2^{-n/2}(|x_0\\rangle+|x_0\\oplus s\\rangle)\\otimes|v\\rangle$. The post-query vector projected into branch $v$ is\n$$2^{-n/2}\\sum_{x:f(x)=v}|x\\rangle|v\\rangle=w_v$$\nby [F1]. The two address basis vectors are distinct and orthonormal by [F1] and [F11].",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F11",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The branch operator is the rank-one map $|w_v\\rangle\\langle w_v|$ for the projected vector $w_v$ in step 1.3. In the product basis its only nonzero diagonal entries are the two squared coefficients $2^{-n}$, by [F12]–[F13]. Thus the branch probability is $\\operatorname{tr}(|w_v\\rangle\\langle w_v|)=2^{1-n}$. An output outside the image has zero projected vector and therefore zero trace.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F12",
+            "F13",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Dividing the projected vector in step 1.3 by its norm $2^{(1-n)/2}$ gives the normalized conditional state in the Statement; it factors into an address vector and the fixed output basis vector $|v\\rangle$. Its rank-one outer product is a density operator by [F15], and its probability is positive, so it is the conditional state in [F8]. There are exactly $2^{n-1}$ image values by the fiber partition in [F1], and their probabilities sum to one as required by [F9].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "F9",
+            "F15",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: m=0 leaves a single target outcome when n=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: an outcome outside the image has zero branch vector and weight."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: n=1 gives one branch of probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: the single-fiber case is covered by the 2^{1−n} formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: one preimage is selected from each finite fiber."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem does not make an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem does not make an iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-f2-gaussian-elimination-correct-and-cost": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-f2-gaussian-elimination",
+          "source_section": "Definition",
+          "quote": "Otherwise find the sole nonpivot column $q$, set the free variable $x_q=1$, and solve each pivot variable from its reduced row.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-binary-field-f2-is-a-field",
+          "source_section": "Statement",
+          "quote": "The quotient operations on $\\mathbb Z/2\\mathbb Z$ make the carrier $\\mathbb F_2$ of [[def-qa-binary-field-f2]] a field.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-simon-promise",
+          "source_section": "Definition",
+          "quote": "A total function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ satisfies the **Simon hidden-XOR-period promise** if there is a unique nonzero string $s\\in\\{0,1\\}^n$ such that for all $x,y\\in\\{0,1\\}^n$,",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gaussian-elimination-produces-row-echelon-form",
+          "source_section": "Statement",
+          "quote": "Every finite matrix over a field is row equivalent to a matrix in row echelon form.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-classical-bit-cost",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]], bit-operation cost is the number of transitions of a declared multitape Turing machine over a fixed finite alphabet; the $k$-tape transition reads and writes one symbol on each of its $k\\ge1$ tapes and moves each head once per transition ([[def-multitape-and-nondeterministic-machines]]).",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qa-binary-vector-space",
+          "source_section": "Statement",
+          "quote": "Give it coordinatewise addition $(x+y)_i=x_i+y_i$ and scalar multiplication $(c x)_i=cx_i$ using the operations of [[def-qa-binary-field-f2]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-matrix-equation-augmented-matrix-and-linear-system",
+          "source_section": "Definition",
+          "quote": "The **matrix equation** $Ax=b$ asks for columns $x\\in F^n$ satisfying the displayed equality.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$, the matrix rank of $A$ equals the rank of the linear map $L_A:F^n\\to F^m$ defined by $L_A(x)=Ax$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and let\n$S \\subseteq V$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qa-binary-field-f2",
+          "source_section": "Definition",
+          "quote": "Set\n$$\n\\mathbb F_2:=\\mathbb Z/2\\mathbb Z=\\{[0]_2,[1]_2\\},\n$$\nwith addition and multiplication induced by the quotient operations\n$$\n[r]_2+[s]_2=[r+s]_2,\\qquad [r]_2[s]_2=[rs]_2\n$$\nfrom [[def-addition-and-multiplication-modulo-n]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "source_section": "Definition",
+          "quote": "Its **row space** $\\operatorname{Row}(A)\\subseteq F^n$ is the span of its rows, its **column space** $\\operatorname{Col}(A)\\subseteq F^m$ is the span of its columns, and its **nullspace** is\n$$N(A):=\\{x\\in F^n:Ax=0\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Swapping two rows or replacing a row by its XOR with another preserves both the homogeneous solution set and row space: each operation has an inverse of the same form, and the new row is a combination of old rows. Thus the rank and kernel of $Y$ are preserved by [F13] and [F9]. The loops visit $n$ columns and at most $n-1$ pivot rows, with finite row scans, so they terminate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F9",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "At each pivot the selected entry is $1$, earlier pivot columns are zero below it, and XORing the pivot row clears its column in every other row. At termination the pivot columns form an identity block and all remaining rows are zero. The nonzero rows are independent because their pivot columns form an identity matrix, and they span the row space because every other row is zero. By [F13], the pivot count equals $\\operatorname{rank}(Y)$; step 1.1 preserves this rank from the input. The procedure returns FAIL precisely when this rank is below $n-1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "F13",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "If the pivot count is $n-1$, there is exactly one nonpivot column. Setting its coordinate to $1$ and solving each pivot equation gives a vector in the reduced system with that coordinate nonzero. By step 1.1, it lies in the kernel of the original $Y$ and is nonzero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Whenever $\\operatorname{rank}(Y)=n-1$, the associated map has rank $n-1$ by [F10] and domain dimension $n$ by [F8]; rank-nullity [F3] gives a one-dimensional kernel. A basis of that kernel has one vector $u$, so every vector is $c u$ by [F11]; [F12] gives $c\\in\\{0,1\\}$, hence $u$ is its unique nonzero vector. The algorithm's output from step 3.1 is therefore the unique nonzero kernel vector. In the Simon case, every row has dot product zero with $s$, so [F5] and [F9] give $s\\in\\ker Y$, and [F4] gives $s\\ne0$; thus the output is $s$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Store the $n-1$ rows consecutively on an input work tape. To find pivots, a multitape machine may scan the whole $O(n^2)$-bit matrix once for each of at most $n$ columns; this costs $O(n^3)$ transitions including head movement. For each of at most $n-1$ pivots, copy its $n$ bits to a work tape, then scan each of at most $n-2$ other rows and XOR the copied pivot row into it when required; each scan and row update costs $O(n)$ transitions, so all row operations cost $O(n^3)$. Swaps, pivot bookkeeping, and back-substitution require at most $O(n^3)$ further transitions under the same scan representation. The finite-alphabet multitape convention [F7] therefore gives the stated $O(n^3)$ classical bit cost.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: the n=1 zero-row case has one free coordinate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: a zero matrix has pivot count zero and fails when n>1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: n=1 returns the unique nonzero kernel vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1–4.1: rank n−1 and rank below n−1 are separated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: least pivots and a fixed free coordinate use finite ordered sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1: failure occurs exactly when rank is below n−1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1: rank below n−1 is exactly the procedure’s FAIL condition."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-row-mask11",
+          "asserts": "For Y=[11], pivot column 0 and free variable x1=1 give the unique nonzero kernel vector 11.",
+          "checked_in": "Steps 2.1–4.1"
+        }
+      ],
+      "axioms": []
+    },
+    "thm-qa-simon-classical-randomized-query-lower-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-simon-random-instance-distribution",
+          "source_section": "Definition",
+          "quote": "Choose $s$ uniformly from the $2^n-1$ nonzero binary masks.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-classical-query-algorithm",
+          "source_section": "Definition",
+          "quote": "Each query chooses an address from the encoding of [[def-qa-input-encoding-and-size]], earlier replies, and any random bits used so far; it receives the entire $b(n)$-bit reply $f_z(x)$ as one query answer.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**.",
+          "uses": [
+            "2.1",
+            "6.1",
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Assume, for contradiction, that $q\\le\\lfloor\\sqrt N/4\\rfloor$. Put $S=N-1$ and $B=\\binom q2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "assume-contra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Fix one finite random tape, making the algorithm deterministic. Repeated addresses can be answered from the earlier reply and removed without changing the output, so the resulting at most $q$ queries are distinct.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "The assumption in step 1.1 gives $B\\le q^2/2\\le N/32$. Hence $S-B\\ge31N/32-1>0$, since $N=2^n\\ge256$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Consider a collision-free transcript of $t\\le q$ queries. A mask is inconsistent with it only if it is the XOR difference of a pair of queried addresses, so at most $\\binom t2\\le B$ masks are excluded and at least $S-B$ remain. For each remaining $s$, the queried addresses lie in distinct $s$-cosets. Write $(L)_t=L(L-1)\\cdots(L-t+1)$, where $L=2^m$ and $C=2^{n-1}$. For a specified ordered list of $t$ distinct replies, the number of injections extending those assignments is $(L-t)_{C-t}$ out of $(L)_C$ total injections, giving likelihood $1/(L)_t$, independent of $s$. Because the deterministic query addresses are functions of earlier replies, the transcript has the same likelihood for every consistent mask. The posterior on those masks is therefore uniform.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "At the $j$th fresh query, a collision with a previous address $x_i$ requires $s=x_j\\oplus x_i$. There are at most $j-1$ candidate masks, and after any collision-free transcript at least $S-B$ masks remain equally likely by step 3.1. Thus the probability that the first collision occurs at query $j$ is at most $(j-1)/(S-B)$. Summing over $j=2,\\ldots,q$ bounds the total collision probability by $\\sum_{j=2}^q(j-1)/(S-B)=B/(S-B)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "On a collision-free transcript, the deterministic final guess is correct with probability at most $1/(S-B)$, since at least that many masks remain equally likely. On transcripts with a collision, success is at most one. Therefore average success under [F1] is at most $B/(S-B)+1/(S-B)=(B+1)/(S-B)$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "By steps 1.1 and 2.2, with $S-B>0$, $(B+1)/(S-B)\\le(N/32+1)/(31N/32-1)<2/3$. The strict inequality is equivalent to $5<59N/32$, which holds because $N\\ge256$. Thus every fixed random tape has average success strictly below $2/3$ under the finite oracle distribution.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.2",
+            "step 5.1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-7-1",
+          "claim": "Averaging over the algorithm's finite random tapes keeps its average success below $2/3$. But success at least $2/3$ on every promised function implies average success at least $2/3$ under [F1], since every function in that distribution is promised. This contradiction proves $q>\\lfloor\\sqrt N/4\\rfloor$ and hence the stated $\\Omega(2^{n/2})$ lower bound.",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 6.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 covers q=0, where B=0 and no collision is possible."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hard-instance distribution is explicitly restricted to nonzero masks."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n≥8; the n=1 instance is outside its quantitative range."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.2 and 6.1 establish positive denominators at the endpoint N=256."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 6.1 averages over finite oracle and random-tape spaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "smallest-allowed-N-constant",
+          "asserts": "At N=256,q=4, S=255,B=6 and (B+1)/(S-B)=7/249<2/3.",
+          "checked_in": "Steps 2.1,5.1–6.1"
+        }
+      ],
+      "axioms": []
+    },
+    "thm-qa-simon-hadamard-sampling-law": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-simon-postquery-coset-state",
+          "source_section": "Statement",
+          "quote": "For each output value $v$ in the image of $f$, the target Lüders instrument has probability $2^{1-n}$ and its conditional joint state factors as",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-hadamard-f2-kernel",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $z\\in\\{0,1\\}^n$, with the binary dot product of [[def-qa-binary-dot-product]],\n$$\n\\sum_{x\\in\\{0,1\\}^n}(-1)^{x\\cdot z}=\\begin{cases}2^n,&z=0^n,\\\\0,&z\\ne0^n.\\end{cases}\n$$\nConsequently, for every $x\\in\\{0,1\\}^n$,\n$$\nH^{\\otimes n}|x\\rangle=2^{-n/2}\\sum_{y\\in\\{0,1\\}^n}(-1)^{x\\cdot y}|y\\rangle,\n$$\nwhere $H$ is the exact one-qubit gate of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and tensor factors follow the ordered register convention of [[def-qc-tensor-register-and-permutation]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-qa-simon-one-sample",
+          "source_section": "Definition",
+          "quote": "Apply $H^{\\otimes n}$ to the address register and measure it in the computational basis.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-computational-basis-measurement-law",
+          "source_section": "Statement",
+          "quote": "Let $(|y\\rangle)_{y\\in\\mathcal Y}$ be a finite ordered orthonormal computational basis, let $\\psi=\\sum_{y\\in\\mathcal Y}a_y|y\\rangle$ be a unit vector, and put $\\rho=|\\psi\\rangle\\langle\\psi|$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-simon-annihilator-subspace-basis",
+          "source_section": "Statement",
+          "quote": "Then $s^\\perp$ is a linear subspace of dimension $d=n-1$ and has exactly $2^d$ elements.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Apply [F2] to the two terms in [F1]. The amplitude at $y$ is\n$$2^{-(n+1)/2}\\left((-1)^{x_0\\cdot y}+(-1)^{(x_0\\oplus s)\\cdot y}\\right).$$\nBy [F3], $(x_0\\oplus s)\\cdot y=(x_0\\cdot y)\\oplus(s\\cdot y)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "If $s\\cdot y=1$, the two signs in step 1.1 are opposites and the amplitude is zero. If $s\\cdot y=0$, they agree and the amplitude is $2^{-(n-1)/2}(-1)^{x_0\\cdot y}$. Thus its squared modulus is $2^{-(n-1)}$ on every allowed $y$ and zero otherwise.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "There are $2^{n-1}$ allowed strings by [F6]. The vector after the final Hadamards has squared norm $2^{n-1}2^{-(n-1)}=1$ by step 2.1 and orthonormality [F7]. This also covers $n=1$, when the only allowed string is $0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "The measured vector is unit by step 3.1, so [F5] gives probability $2^{-(n-1)}$ for each allowed string and zero for every disallowed string. These weights sum to one; the phase depends on $x_0$ but the probabilities do not. Thus every fresh execution has the same uniform sample law regardless of the observed coset.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires n≥1, so no zero-qubit address register is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: the allowed sample set includes y=0, with zero rise at rank zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: for n=1 the sole sample is y=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: s-perp has dimension d=0 when n=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The final proof invokes the explicit annihilator-basis item and makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-bit-sample",
+          "asserts": "For n=1,s=1, only y=0 satisfies s·y=0 and its probability is 1.",
+          "checked_in": "Steps 2.1–3.1"
+        }
+      ],
+      "axioms": []
+    },
+    "def-qa-simon-rank-process": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the process begins with the empty accepted list and V_0={0}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero sample lies in V_0 and is discarded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=1 gives target rank d=0, so the process is already stopped."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the d=0 process has no sampling round."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each finite prefix is a product experiment on finite outcomes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-simon-rank-growth-probability": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-simon-rank-process",
+          "source_section": "Definition",
+          "quote": "Start with the zero subspace $V_0=\\{0\\}$ and an empty ordered list of accepted rows.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-simon-hadamard-sampling-law",
+          "source_section": "Statement",
+          "quote": "$$s^\\perp:=\\{y\\in\\{0,1\\}^n:s\\cdot y=0\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-simon-annihilator-subspace-basis",
+          "source_section": "Statement",
+          "quote": "Then $s^\\perp$ is a linear subspace of dimension $d=n-1$ and has exactly $2^d$ elements.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-binary-vector-space",
+          "source_section": "Statement",
+          "quote": "For $n\\ge0$, let $\\mathbb F_2^n=\\{0,1\\}^n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-binary-field-f2",
+          "source_section": "Definition",
+          "quote": "Set\n$$\n\\mathbb F_2:=\\mathbb Z/2\\mathbb Z=\\{[0]_2,[1]_2\\},\n$$\nwith addition and multiplication induced by the quotient operations\n$$\n[r]_2+[s]_2=[r+s]_2,\\qquad [r]_2[s]_2=[rs]_2\n$$\nfrom [[def-addition-and-multiplication-modulo-n]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-binary-field-f2-is-a-field",
+          "source_section": "Statement",
+          "quote": "The quotient operations on $\\mathbb Z/2\\mathbb Z$ make the carrier $\\mathbb F_2$ of [[def-qa-binary-field-f2]] a field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "**The injectivity clause is not decoration.** A linear combination in\n[[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$,\nwhich is **not** required to be injective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "### Linear combinations",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "for the set of linear combinations of elements of $S$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [F1], each accepted row was outside the span of its predecessors. In a zero linear combination, if the last nonzero coefficient were $1$, that row would be a combination of its predecessors, contradicting acceptance; since the only nonzero scalar is $1$, this proves inductively that the accepted list is independent by [F6]. It spans $V_k$ by [F7], hence is a basis by [F8]. The coefficient map from $\\mathbb F_2^k$ to $V_k$ is injective by independence and surjective by span; [F4] gives $2^k$ possible coefficient lists, so $|V_k|=2^k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [F2]–[F3], samples are uniform on the $2^d$ elements of $s^\\perp$, and [F1] gives $V_k\\subseteq s^\\perp$. Exactly $2^k$ lie in $V_k$ by step 1.1, so the probability the next sample is accepted is $(2^d-2^k)/2^d=1-2^{k-d}=p_k$, while the failure probability is $q_k=2^{k-d}\\le1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Condition on any rank-$k$ history. Fresh runs are independent, so each of the next $r$ samples fails with conditional probability $q_k$ regardless of the earlier failures; multiplying these finite conditional probabilities gives $\\Pr(W_k>r)=q_k^r$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "For each finite horizon $M$, the truncated waiting count is a function on the finite experiment by [F9]–[F10], and it equals $\\sum_{j=0}^{M-1}\\mathbf1_{\\{W_k>j\\}}$. The expectation definition [F11] and step 3.1 give $\\mathbb E[W_{k,M}]=\\sum_{j=0}^{M-1}q_k^j$. Since $0\\le q_k\\le1/2$, [F12] bounds these partial sums by $1/(1-q_k)=1/p_k\\le2$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: at rank zero the span contains the empty linear combination."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: the zero sample is in V_k and is rejected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: d=1,k=0 gives p_0=1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no k<d when d=0; the theorem hypothesis excludes that case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: accepted vectors and coefficient lists are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "rank-rise-small-d",
+          "asserts": "At d=1,k=0 the rise probability is 1/2; at d=2,k=0 it is 3/4 and k=1 it is 1/2.",
+          "checked_in": "Steps 1.1–2.2"
+        }
+      ],
+      "axioms": []
+    },
+    "alg-qa-simon-recovery-with-budget": {
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: n=1 has d=0 and returns 1 without a sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: exhausted cap returns the explicit FAIL value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the unique one-bit nonzero mask is returned at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: d=0 is a separate zero-query branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: δ is required to satisfy 0<δ<1; endpoints are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: binary multiplication/division and pivot choices are finite and explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm definition makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm definition makes no iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-qa-simon-recovery-correctness-and-query-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-simon-rank-process",
+          "source_section": "Definition",
+          "quote": "The sample law [[thm-qa-simon-hadamard-sampling-law]] places every row in $s^\\perp$, and [[lem-qa-simon-annihilator-subspace-basis]] proves that this subspace has dimension $d$, so this stopping target is attainable and never exceeds the available rank.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-simon-rank-growth-probability",
+          "source_section": "Statement",
+          "quote": "Writing $q_k=2^{k-d}$, the conditional probability that the next $r$ samples all fail to raise rank is $q_k^r$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-expected-query-cost",
+          "source_section": "Definition",
+          "quote": "Hence the supremum of its finite-round expected query counts equals the displayed finite-step supremum.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-qa-simon-recovery-with-budget",
+          "source_section": "Definition",
+          "quote": "If all $M$ trials are used before rank $d$ is reached, return FAIL.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-f2-gaussian-elimination-correct-and-cost",
+          "source_section": "Statement",
+          "quote": "In particular, if the rows are independent and each row $y_i$ satisfies $y_i\\cdot s=0$ for a fixed nonzero Simon mask $s$, then the returned vector is $s$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "An outcome of weight zero remains an outcome.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-markov-inequality",
+          "source_section": "Statement",
+          "quote": "If $X$ is a nonnegative real random variable on a finite probability space and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$\nThe weak threshold $X\\ge a$ is part of the statement.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "The series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qa-classical-bit-cost",
+          "source_section": "Definition",
+          "quote": "For a classical query algorithm [[def-qa-classical-query-algorithm]], bit-operation cost is the number of transitions of a declared multitape Turing machine over a fixed finite alphabet; the $k$-tape transition reads and writes one symbol on each of its $k\\ge1$ tapes and moves each head once per transition ([[def-multitape-and-nondeterministic-machines]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "If $d=0$, the unique nonzero element of $\\mathbb F_2^1$ is $1$, so the budgeted algorithm returns the correct mask with zero queries. The rank process has already reached its target rank zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Suppose $d\\ge1$. If $R<d$, then $\\Pr(T>R)\\le1\\le d$. Otherwise put $r=\\lfloor R/d\\rfloor\\ge1$ and $q_k=1-p_k\\le1/2$ for $k<d$. Use a finite product experiment with $r$ independent one-sample outcomes reserved for each of the $d$ possible rank stages, revealing a stage's block only when that rank is reached. While the first outcomes at rank $k$ fail, the span stays fixed at $V_k$; independence and [F2] then give probability $q_k^r\\le2^{-r}$ that the first $r$ all fail. If every reached stage has a rank-increasing outcome in its block, each stage uses at most $r$ samples and the process finishes within $dr\\le R$ queries. Thus $T>R$ forces a reached stage whose block has $r$ failures. A union bound over the $d$ stages gives $\\Pr(T>R)\\le d\\,2^{-\\lfloor R/d\\rfloor}$; the same bound holds for $R<d$ by the initial estimate. It tends to zero as $R\\to\\infty$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Fix a finite query cap $M$. On its finite sample experiment, let $V_k$ be the number of trials spent at rank $k$, or zero if rank $k$ is not reached. Conditional on reaching rank $k$ with $r$ trials remaining, its truncated wait has expectation $\\sum_{j=0}^{r-1}q_k^j\\le1/p_k\\le2$ by [F2] and [F8]. Thus $\\mathbb E[V_k]\\le2$ for every $k<d$, and the capped query count $T_M=\\min(T,M)=\\sum_{k<d}V_k$ has expectation at most $2d$. Taking the supremum over finite query prefixes as in [F3] proves the expected query-cost bound.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For $d\\ge1$, the initial rank is below the target, so $\\Pr(T>0)=1$. For each $t\\ge1$, the finite-prefix events satisfy $\\{T>t-1\\}=\\{T=t\\}\\,\\dot\\cup\\,\\{T>t\\}$, so assign mass $\\Pr(T=t)=\\Pr(T>t-1)-\\Pr(T>t)$; these probabilities are defined on finite experiments by [F6]. The partial sums telescope to $1-\\Pr(T>R)$, and step 1.2 makes the residual mass at infinity zero. The resulting countable masses sum to one. For $d=0$, step 1.1 gives $T=0$. Thus the process terminates almost surely without assuming a measure on infinite histories.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "In the finite $M$-sample experiment, failure means $T>M$, which implies $T_M=M$. The variable $T_M$ is nonnegative and bounded, so Markov's inequality [F7] gives $\\Pr(\\text{FAIL})\\le\\Pr(T_M\\ge M)\\le\\mathbb E[T_M]/M\\le2d/M\\le\\delta$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "If rank $d$ is reached, all collected rows are independent and lie in $s^\\perp$ by [F1]–[F2]. The recovery routine therefore returns $s$ by [F5]. Combining this with step 2.2 proves success probability at least $1-\\delta$. The finite cap makes at most $M$ sampling rounds. In each round, reducing an incoming row against at most $d$ pivot rows and clearing a new pivot from at most $d-1$ rows requires $O(n^2)$ bit operations; so basis maintenance costs $O(Mn^2)$. The final reduction costs $O(n^3)$ by [F5]. To compute $M$, the algorithm multiplies binary integers of total length $O(B+\\log n)$ and performs long division on integers of at most that length; the schoolbook multiplication, comparisons, shifts, and long division each use $O((B+\\log n)^2)$ bit operations. These counts use the finite-alphabet Turing-machine convention [F9], giving the stated postprocessing bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F9",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: d=0 terminates immediately with zero queries."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.2: the failure probability is bounded on the incomplete-rank event."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: n=1 returns the unique nonzero mask."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: the d=0 case is separated from d≥1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires δ∈(0,1), so δ=0 and δ=1 are excluded from the cap claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2: the tail proof uses a finite product experiment only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem makes no iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "d1-delta-half-cap",
+          "asserts": "At d=1,delta=1/2, M=4; the failure event has probability 1/16.",
+          "checked_in": "Steps 2.2–3.1"
+        }
+      ],
+      "axioms": []
+    },
+    "ex-qa-simon-finite-rank-and-sampling": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-simon-promise",
+          "source_section": "Definition",
+          "quote": "A total function $f:\\{0,1\\}^n\\to\\{0,1\\}^m$ satisfies the **Simon hidden-XOR-period promise** if there is a unique nonzero string $s\\in\\{0,1\\}^n$ such that for all $x,y\\in\\{0,1\\}^n$,",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-binary-dot-product",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-simon-postquery-coset-state",
+          "source_section": "Statement",
+          "quote": "Hence the address register conditional state is the normalized coset-pair vector shown above.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-simon-hadamard-sampling-law",
+          "source_section": "Statement",
+          "quote": "The set $s^\\perp$ has $2^{n-1}$ elements.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-simon-rank-process",
+          "source_section": "Definition",
+          "quote": "Its measurement outcomes are independent across these freshly initialized executions: every finite $R$-round history is an outcome in a finite probability space [[def-finite-probability-space-and-event]] with the product of its one-sample probabilities.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-simon-rank-growth-probability",
+          "source_section": "Statement",
+          "quote": "The next independent sample increases the rank with probability",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qa-f2-gaussian-elimination-correct-and-cost",
+          "source_section": "Statement",
+          "quote": "The algorithm [[alg-qa-f2-gaussian-elimination]] terminates, returns FAIL exactly when $\\operatorname{rank}(Y)<n-1$, and otherwise returns the unique nonzero vector in $\\ker Y$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-qa-simon-recovery-with-budget",
+          "source_section": "Definition",
+          "quote": "If all $M$ trials are used before rank $d$ is reached, return FAIL.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qa-simon-recovery-correctness-and-query-bound",
+          "source_section": "Statement",
+          "quote": "For the finite algorithm with $M=\\lceil2d/\\delta\\rceil$, the probability of returning the hidden mask is at least $1-\\delta$, and its worst-case query count is at most $M=O(n/\\delta)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "At $n=1$, XOR with $s=1$ pairs the only two addresses, and the unique output string labels their single coset. Since $d=0$, [F7] returns $1$ before any sample; it is the only nonzero one-bit mask.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "At $n=2$, the table pairs exactly $00$ with $11$ and $01$ with $10$, so it obeys [F1] and has hidden mask $11$. The dot-product parity [F2] gives $11\\cdot00=11\\cdot11=0$ and $11\\cdot01=11\\cdot10=1$. By [F3], both output branches have probability $1/2$ and the address states are $(|00\\rangle+|11\\rangle)/\\sqrt2$ and $(|01\\rangle+|10\\rangle)/\\sqrt2$, as displayed.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "By [F4], the two allowed rows are equiprobable; at rank zero only row $11$ is nonzero and outside the zero span, so the rank-rise probability is $1/2$, also the value $1-2^{0-1}$ from [F5].",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-4",
+          "claim": "Row $11$ has pivot column $0$; the row equation is $x_0\\oplus x_1=0$. Setting the unique free coordinate $x_1=1$ gives $x_0=1$, so the nonzero kernel vector is $11$ by direct calculation, agreeing with [F6].",
+          "step": "1.4",
+          "inputs": [
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For $\\delta=1/2$, [F7] gives $M=4$. The cap fails exactly when its first four independent potential rows are all $00$, an event of probability $(1/2)^4=1/16$ by [F4]; therefore its success probability is $15/16$, consistent with the general lower bound [F8].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 verifies the m=0 empty-output string at n=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 use the zero row as a sample and kernel boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 gives the exact n=1, zero-query case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 cover d=0 and rank-zero boundaries."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: δ=1/2 is strictly inside the algorithm’s allowed interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the finite tables, rows, and potential outcomes are explicitly listed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.2 verifies equal outputs for the two addresses differing by 11."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2 verifies the only equal-output pairs are 00/11 and 01/10."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n1-n2-examples-and-cap",
+          "asserts": "n=1 uses zero queries; n=2,s=11 has rows {00,11}, rise probability 1/2, and cap failure 1/16.",
+          "checked_in": "Steps 1.1–2.1"
+        }
+      ],
+      "axioms": []
+    }
+  }
+}

@@ -1,0 +1,2004 @@
+Semidefinite programming strong converse bounds for classical capacity
+
+Xin Wang1,∗Wei Xie1,† and Runyao Duan1,2‡
+
+1Centre for Quantum Software and Information,
+Faculty of Engineering and Information Technology,
+University of Technology Sydney, NSW 2007, Australia and
+2UTS-AMSS Joint Research Laboratory for Quantum Computation and Quantum Information Processing,
+Academy of Mathematics and Systems Science,
+Chinese Academy of Sciences, Beijing 100190, China§
+
+We investigate the classical communication over quantum channels when assisted by
+no-signalling (NS) and PPT-preserving (PPT) codes, for which both the optimal success
+probability of a given transmission rate and the one-shot ϵ-error capacity are formalized as
+semidefinite programs (SDPs). Based on this, we obtain improved SDP finite blocklength
+converse bounds of general quantum channels for entanglement-assisted codes and unas-
+sisted codes. Furthermore, we derive two SDP strong converse bounds for the classical
+capacity of general quantum channels: for any code with a rate exceeding either of the two
+bounds of the channel, the success probability vanishes exponentially fast as the number of
+channel uses increases. In particular, applying our efficiently computable bounds, we de-
+rive an improved upper bound on the classical capacity of the amplitude damping channel.
+We also establish the strong converse property for the classical and private capacities of a
+new class of quantum channels. We finally study the zero-error setting and provide effi-
+ciently computable upper bounds on the one-shot zero-error capacity of a general quantum
+channel.
+
+I.
+INTRODUCTION
+
+The reliable transmission of classical information via noisy quantum channels is central to
+quantum information theory. The classical capacity of a noisy quantum channel is the highest rate
+at which it can convey classical information reliably over asymptotically many uses of the channel.
+The Holevo-Schumacher-Westmoreland (HSW) theorem [2–4] gives a full characterization of the
+classical capacity of quantum channels:
+
+C(N ) := sup
+n≥1
+
+χ(N ⊗n)
+
+n
+,
+(1)
+
+where
+χ(N )
+is
+the
+Holevo
+capacity
+of
+the
+channel
+N
+given
+by
+χ(N )
+:=
+max{(pi,ρi)} H (∑i piN (ρi)) −∑i piH(N (ρi)), {(pi, ρi)}i is an ensemble of quantum states on
+A and H(σ) = −Tr σ log σ is the von Neumann entropy of a quantum state. Throughout this
+paper, log denotes the binary logarithm.
+For certain classes of quantum channels (depolarizing channel [5], erasure channel [6], unital
+qubit channel [7], etc. [8–11]), the classical capacity of the channel is equal to the Holevo capac-
+ity, since their Holevo capacities are all additive. However, for a general quantum channel, our
+understanding of the classical capacity is still limited. The work of Hastings [12] shows that the
+
+∗Electronic address: xin.wang-8@student.uts.edu.au
+†Electronic address: xievvvei@gmail.com
+‡Electronic address: runyao.duan@uts.edu.au
+§A preliminary version of this paper was presented at the 20th Annual Conference on Quantum Information Processing
+and the IEEE International Symposium on Information Theory in 2017 [1].
+
+arXiv:1610.06381v4  [quant-ph]  12 Jul 2018
+
+
+2
+
+Holevo capacity is generally not additive, and thus the regularization in Eq. (1) is necessary in
+general. Since the complexity of computing the Holevo capacity is NP-complete [13], the regular-
+ized Holevo capacity of a general quantum channel is notoriously difficult to calculate. Even for
+the qubit amplitude damping channel, the classical capacity remains unknown.
+The converse part of the HSW theorem states that if the communication rate exceeds the ca-
+pacity, then the error probability of any coding scheme cannot approach zero in the limit of many
+channel uses. This kind of “weak” converse suggests the possibility for one to increase com-
+munication rates by allowing an increased error probability. A strong converse property leaves no
+such room for the trade-off; i.e., the error probability necessarily converges to one in the limit
+of many channel uses whenever the rate exceeds the capacity of the channel. For classical chan-
+nels, the strong converse property for the classical capacity was established by Wolfowitz [14].
+For quantum channels, the strong converse property for the classical capacity has been confirmed
+for several classes of channels [15–19]. Winter [16] and Ogawa and Nagaoka [15] independently
+established the strong converse property for the classical capacity of classical-quantum channels.
+Koenig and Wehner [17] proved the strong converse property for particular covariant quantum
+channels. Recently, for the entanglement-breaking and Hadamard channels, the strong converse
+property was proved by Wilde, Winter and Yang [19]. Moreover, the strong converse property for
+the pure-loss bosonic channel was proved by Wilde and Winter [18]. Unfortunately, for a general
+quantum channel, less is known about the strong converse property of the classical capacity, and
+it remains open whether this property holds for all quantum channels. A strong converse bound
+for the classical capacity is a quantity such that the success probability of transmitting classical
+messages vanishes exponentially fast as the number of channel uses increases if the rate of com-
+munication exceeds this quantity, which forbids the trade-off between rate and error in the limit
+of many channel uses.
+Another fundamental problem, of both theoretical and practical interest, is the trade-off be-
+tween the channel uses, communication rate and error probability in the non-asymptotic (or finite
+blocklength) regime. In a realistic setting, the number of channel uses is necessarily limited in
+quantum information processing. Therefore one has to make a trade-off between the transmis-
+sion rate and error tolerance. Note that one only needs to study one-shot communication over
+the channel since it can correspond to a finite blocklength and one can also study the asymptotic
+capacity via the finite blocklength approach. The study of finite blocklength regime has recently
+garnered great interest in classical information theory (e.g., [20–22]) as well as in quantum in-
+formation theory (e.g., [23–35]). For classical channels, Polyanskiy, Poor, and Verdú [20] derive
+the finite blocklength converse bound via hypothesis testing and Matthews [22] provides an al-
+ternative proof of this converse bound via classical no-signalling codes. For classical-quantum
+channels, the one-shot converse and achievability bounds are given in [24, 25, 36]. Recently, the
+one-shot converse bounds for entanglement-assisted and unassisted codes were given in [23],
+which generalizes the hypothesis testing approach in [20] to quantum channels.
+To gain insights into the generally intractable problem of evaluating the capacities of quantum
+channels, a natural approach is to study the performance of extra free resources in the coding
+scheme. This scheme, called a code, is equivalently a bipartite operation performed jointly by the
+sender Alice and the receiver Bob to assist the communication [28]. The PPT-preserving codes, i.e.
+the PPT-preserving bipartite operations, include all operations that can be implemented by local
+operations and classical communication (LOCC) and were introduced to study entanglement dis-
+tillation in an early paper by Rains [37]. The no-signalling (NS) codes refer to the bipartite quantum
+operations with the no-signalling constraints, which arise in the research of the relativistic causal-
+ity of quantum operations [38–41]. Recently these general codes have been used to study the
+zero-error classical communication [42] and quantum communication [28] over quantum chan-
+nels. Our work follows this approach and focuses on classical communication via quantum chan-
+
+
+3
+
+nels assisted by NS and NS∩PPT codes.
+
+II.
+SUMMARY OF RESULTS
+
+In this paper, we focus on the reliable classical communication over quantum channels assisted
+by no-signalling and PPT-preserving codes under both non-asymptotic (or finite blocklength) and
+asymptotic settings. The summary of our results is as follows.
+In Section IV, we formalize the optimal average success probability of transmitting classical
+messages over a quantum channel assisted by NS or NS∩PPT codes as SDPs. Using these SDPs,
+we establish the one-shot NS-assisted (or NS∩PPT-assisted) ϵ-error capacity, i.e., the maximum
+rate of classical communication with a fixed error threshold. We further compare these one-shot
+ϵ-error capacities with the previous SDP-computable entanglement-assisted (or unassisted) con-
+verse bound derived by the technique of quantum hypothesis testing in [23]. Our one-shot ϵ-error
+capacities, which consider potentially stronger assistances, are always no larger than the previ-
+ous SDP bounds, and the inequalities can be strict even for qubit channels or classical-quantum
+channels. This means that our one-shot ϵ-error capacities can provide tighter finite blocklength
+converse bounds for the entanglement-assisted and unassisted classical capacity. Moreover, our
+one-shot ϵ-error capacities also reduce to the Polyanskiy-Poor-Verdú (PPV) converse bound [20]
+for classical channels. Furthermore, in common with the quantum hypothesis testing converse
+bound [23] and the bound of Datta and Hsieh [43], the large block length behaviour of our one-
+shot NS-assisted ϵ-error capacity also recovers the converse part of the formula for entanglement-
+assisted capacity [44] and implies that no-signalling-assisted classical capacity coincides with the
+entanglement-assisted classical capacity.
+In Section V, we derive two SDP strong converse bounds for the NS∩PPT-assisted classical
+capacity of a general quantum channel based on the one-shot characterization of the optimal suc-
+cess probability. These bounds also provide efficiently computable strong converse bounds for the
+classical capacity. As a special case, we show that log(1 + √1 −γ) is a strong converse bound for
+the classical capacity of the amplitude damping channel with parameter γ, and this improves the
+best previously known upper bound in [45]. Furthermore, applying our strong converse bounds,
+we also prove the strong converse property for the classical and private capacities of a new class
+of quantum channels.
+In Section VI, we consider the zero-error communication problem [46], which requires that the
+communication is with zero probability of error. To be specific, based on our SDPs of optimal
+success probability, we derive the one-shot NS-assisted (or NS∩PPT-assisted) zero-error capacity
+of general quantum channels. Our result of the NS-assisted capacity provides an alternative proof
+of the NS-assisted zero-error capacity in [42]. Moreover, our one-shot NS∩PPT-assisted zero-error
+capacity gives an SDP-computable upper bound on the one-shot unassisted zero-error capacity,
+and it can be strictly smaller than the previous upper bound in [47].
+Finally, in Section VII, we make a conclusion and leave some interesting open questions.
+
+III.
+PRELIMINARIES
+
+In the following, we will frequently use symbols such as A (or A′) and B (or B′) to denote
+(finite-dimensional) Hilbert spaces associated with Alice and Bob, respectively. We use dA to
+denote the dimension of system A. The set of linear operators over A is denoted by L(A). We
+usually write an operator with subscript indicating the system that the operator acts on, such
+as TAB, and write TA := TrB TAB. Note that for a linear operator R ∈L(A), we define |R| =
+
+
+4
+
+√
+
+R†R, where R† is the conjugate transpose of R, and the trace norm of R is given by ∥R∥1 =
+Tr |R|. The operator norm ∥R∥∞is defined as the maximum eigenvalue of |R|. A deterministic
+quantum operation (quantum channel) N (A′ →B) is simply a completely positive (CP) and
+trace-preserving (TP) linear map from L(A′) to L(B). The Choi-Jamiołkowski matrix [48, 49] of
+N is given by JN = ∑ij |iA⟩⟨jA| ⊗N (|iA′⟩⟨jA′|), where {|iA⟩} and {|iA′⟩} are orthonormal bases on
+isomorphic Hilbert spaces A and A′, respectively. A positive semidefinite operator E ∈L(A ⊗B)
+is said to be a positive partial transpose operator (or simply PPT) if ETB ≥0, where TB means
+the partial transpose with respect to the party B, i.e., (|ij⟩⟨kl|)TB = |il⟩⟨kj|. As shown in [37],
+a bipartite operation Π(AiBi →AoBo) is PPT-preserving if and only if its Choi-Jamiołkowski
+matrix ZAiBiAoBo is PPT. We sometimes omit the identity operator or operation 1, for example,
+E(A →B)(XAC) ≡(E(A →B) ⊗1C)(XAC).
+The constraints of PPT and NS can be mathematically characterized as follows. A bipartite op-
+eration Π(AiBi →AoBo) is no-signalling and PPT-preserving if and only if its Choi-Jamiołkowski
+matrix ZAiBiAoBo satisfies [28]:
+
+ZAiBiAoBo ≥0,
+(CP)
+
+ZAiBi = 1AiBi,
+(TP)
+
+Z
+TBiBo
+AiBiAoBo ≥0,
+(PPT)
+
+ZAiBiBo = 1Ai
+
+dAi
+⊗ZBiBo,
+(A ̸→B)
+
+ZAiBiAo = 1Bi
+
+dBi
+⊗ZAiAo,
+(B ̸→A)
+
+(2)
+
+where the five lines correspond to characterize that Π is completely positive, trace-preserving,
+PPT-preserving, no-signalling from A to B, no-signalling from B to A, respectively. The structure
+of no-signalling codes is also studied in [42].
+Semidefinite programming [50] is a subfield of convex optimization and is a powerful tool
+in quantum information theory with many applications (e.g., [23, 28, 37, 42, 51–56]). There are
+known polynomial-time algorithms for semidefinite programming [57]. In this work, we use the
+CVX software (a Matlab-based convex modeling framework) [58] and QETLAB (A Matlab Tool-
+box for Quantum Entanglement) [59] to solve the SDPs. Details about semidefinite programming
+can be found in [60].
+
+IV.
+CLASSICAL COMMUNICATION ASSISTED BY NS AND PPT CODES
+
+A.
+Semidefinite programs for optimal success probability
+
+Suppose Alice wants to send the classical message labeled by {1, . . . , m} to Bob using the com-
+posite channel M = Π ◦N , where Π is a bipartite operation that generalizes the usual encoding
+scheme E and decoding scheme D, see Fig. 1 for details. In this paper, we consider Π as the
+bipartite operation implementing the NS ∩PPT or NS assistance. After the action of E and N ,
+the message results in quantum state at Bob’s side. Bob then performs a POVM with m outcomes
+on the resulting quantum state. The POVM is a component of the operation D. Since the results
+of the POVM and the input messages are both classical, it is natural to assume that M is with
+classical registers throughout this paper, that is, ∆◦M ◦∆= M for some completely dephasing
+channel ∆. If the outcome k ∈{1, . . . , m} happens, he concludes that the message with label k was
+sent. Let Ωbe some class of bipartite operations. The average success probability of the general
+code Π and the Ω-class code is defined as follows.
+
+
+5
+
+Ai
+Ao
+Bi
+Bo
+
+C
+
+E
+
+N
+
+D
+
+Π
+
+Ai
+Bo
+
+E
+D
+
+Ao
+Bi
+N
+
+Π
+
+M
+
+FIG. 1: Bipartite operation Π(AiBi →AoBo) is equivalently the coding scheme (E,D) with free extra re-
+sources, such entanglement or no-signalling correlations. The whole operation is to emulate a noiseless
+classical (or quantum) channel M(Ai →Bo) using a given noisy quantum channel N (Ao →Bi) and the
+bipartite operation Π.
+
+Definition 1 The average success probability of N to transmit m messages assisted with the code Π is
+defined by
+
+f (N , Π, m) = 1
+
+m
+
+m
+∑
+k=1
+Tr(M(|k⟩⟨k|)|k⟩⟨k|),
+(3)
+
+where M ≡Π ◦N and {|k⟩} is the computational basis in system Ai.
+Furthermore, the optimal average success probability of N to transmit m messages assisted with Ω-class
+code is defined by
+
+fΩ(N , m) = sup
+Π
+f (N , Π, m),
+(4)
+
+where the maximum is over the codes in class Ω.
+
+We now define the Ω-assisted classical capacity of a quantum channel as follows.
+
+Definition 2
+
+CΩ(N ) := sup
+�
+r : lim
+n→∞fΩ(N ⊗n, 2rn) = 1
+�
+.
+(5)
+
+As described above, one can simulate a channel M with the channel N and code Π, where Π
+is a bipartite CPTP operation from AiBi to AoBo which is no-signalling (NS) and PPT-preserving
+(PPT). In this work we shall also consider other classes of codes, such as entanglement-assisted
+(EA) code, unassisted (UA) code. The class of entanglement-assisted codes corresponds to bi-
+partite operations of the form Π(AiBi →AoBo) = D(Bi ˆB →Bo)E(Ai ˆA →Ao)ϕ ˆA ˆB, where
+E, D are encoding and decoding operations respectively, and ϕ ˆA ˆB can be any shared entan-
+gled state of arbitrary systems ˆA and ˆB. we use Ωto denote specific class of codes such as
+Ω∈{NS, PPT, NS ∩PPT, EA, UA} in the following.
+Let M(Ai →Bo) denote the resulting composition channel of Π and N , written M = Π ◦
+N . As both M and N are quantum channels, there exist quantum channels E(Ai →AoC) and
+D(BiC →Bo), where E is an isometry operation and C is a quantum register, such that [61]
+
+M(Ai →Bo) = D(BiC →B0) ◦N (Ao →Bi) ◦E(Ai →AoC).
+(6)
+
+Based on this, the Choi-Jamiołkowski matrix of M is given by [28]
+
+JM = TrAoBi(JT
+N ⊗1AiBo)ZAiAoBiBo.
+(7)
+
+
+6
+
+The operations E and D can be considered as generalized encoding and decoding operations
+respectively, except that the register C may be not possessed by Alice or Bob. If the Hilbert space
+with C is trivial, E and D become the unassisted local encoding/decoding operations. Moreover,
+the coding schemes E, D with register C can be designed to be forward-assisted codes [28].
+We are now able to derive the one-shot characterization of classical communication assisted by
+NS (or NS∩PPT) codes.
+
+Theorem 3 For a given quantum channel N , the optimal success probability of N to transmit m messages
+assisted by NS∩PPT codes is given by
+
+fNS∩PPT(N , m) = max Tr JN FAB
+s. t. 0 ≤FAB ≤ρA ⊗1B,
+
+Tr ρA = 1,
+
+TrA FAB = 1B/m,
+
+0 ≤FTB
+AB ≤ρA ⊗1B (PPT).
+
+(8)
+
+Similarly, when assisted by NS codes, one can remove the PPT constraint to obtain the optimal success
+probability as follows:
+
+fNS(N , m) = max Tr JN FAB
+s. t. 0 ≤FAB ≤ρA ⊗1B,
+
+Tr ρA = 1,
+
+TrA FAB = 1B/m.
+
+(9)
+
+Proof
+In this proof, we first use the Choi-Jamiołkowski representations of quantum channels
+to refine the average success probability and then exploit symmetry to simplify the optimization
+over all possible codes. Finally, we impose the no-signalling and PPT-preserving constraints to
+obtain the semidefinite program of the optimal average success probability.
+Without loss of generality, we assume that Ai and Bo are classical registers with size m, i.e., the
+inputs and outputs are {|k⟩Ai}m
+k=1 and {|k′⟩Bi}m
+k′=1, respectively. For some NS∩PPT code Π, the
+Choi-Jamiołkowski matrix of M = Π ◦N is given by JM = ∑ij |i⟩⟨j|Ai ⊗M(|i⟩⟨j|A′
+i), where A′
+i is
+isometric to Ai. Then, we can simplify f (N , Π, m) to
+
+f (N , Π, m)
+
+= 1
+
+m
+
+m
+∑
+k=1
+Tr
+�
+M(|k⟩⟨k|A′
+i)|k⟩⟨k|Bo
+�
+
+= 1
+
+m Tr
+
+�
+m
+∑
+i,j=1
+(|i⟩⟨j|Ai ⊗M(|i⟩⟨j|A′
+i))
+m
+∑
+k=1
+|kk⟩⟨kk|AiBo
+
+�
+
+= 1
+
+m Tr JM
+
+m
+∑
+k=1
+|kk⟩⟨kk|AiBo.
+
+(10)
+
+Then, denoting DAiBo = ∑m
+k=1 |kk⟩⟨kk|AiBo, we have
+
+fNS∩PPT(N , m) =
+max
+M=Π◦N
+1
+m Tr(JMDAiBo),
+
+where M = Π ◦N and Π is any feasible NS∩PPT bipartite operation . (See FIG. 1 for the imple-
+mentation of M.) Noting that JM = TrAoBi(JT
+N ⊗1AiBo)ZAiAoBiBo, we can further simplify f (N , m)
+
+
+7
+
+as
+
+fNS∩PPT(N , m)
+
+= max Tr(JT
+N ⊗1AiBo)ZAiAoBiBo(1AoBi ⊗DAiBo)/m,
+
+s. t. ZAiAoBiBo satisfies Eq. (2).
+
+(11)
+
+The next step is to simplify f (N , m) by exploiting symmetry. For any permutation τ ∈Sm,
+where Sm is the symmetric group of degree m, if ZAiAoBiBo is feasible (satisfying the constraints in
+Eq. (2)), then it is not difficult to check that
+
+Z′
+AiAoBiBo = (τAi ⊗τBo ⊗1AoBi)ZAiAoBiBo(τAi ⊗τBo ⊗1AoBi)†
+(12)
+
+is also feasible. And any convex combination λZ′ + (1 −λ)Z′′(0 ≤λ ≤1) of two operators
+satisfying Eq. (2) can also checked to be feasible. Therefore, if ZAiAoBiBo is feasible, so is
+
+�ZAiAoBiBo = PAiBo(ZAiAoBiBo)
+
+:= 1
+
+m!
+∑
+τAi,τBo∈Sm
+(τAi ⊗τBo)ZAiAoBiBo(τAi ⊗τBo)†,
+(13)
+
+where PAiBo is a twirling operation on AiBo.
+Noticing that PAiBo(DAiBo) = DAiBo, we have
+
+TrAiBo(ZAiBiAoBo(1AoBi ⊗DAiBo))
+= TrAiBo(ZAiBiAoBo(1AoBi ⊗PAiBo(DAiBo))
+
+= TrAiBo(�ZAiAoBiBo(1AoBi ⊗DAiBo)).
+
+(14)
+
+Thus, it is easy to see that the optimal success probability equals to
+
+fNS∩PPT(N , m)
+
+= max Tr(JT
+N ⊗1AiBo)�ZAiAoBiBo(1AoBi ⊗DAiBo)/m
+
+s. t. �ZAiAoBiBo satisfies Eq. (2).
+
+It is worth noting that �ZAiAoBiBo can be rewritten as [42]
+
+�ZAiAoBiBo = FAoBi ⊗DAiBo + EAoBi ⊗(1 −DAiBo),
+
+for some operators EAoBi and FAoBi. Thus, the objective function can be simplified to Tr JT
+N F. Also,
+the CP and PPT constraints are equivalent to
+
+EAoBi ≥0, FAoBi ≥0, E
+TBi
+AoBi ≥0, F
+TBi
+AoBi ≥0.
+(15)
+
+Furthermore, the B ̸→A constraint is equivalent to TrBo �ZAiAoBiBo = TrBoBi �ZAiAoBiBo ⊗1Bi/dBi, i.e.
+
+FAoBi + (m −1)EAoBi
+
+= TrBi(FAoBi + (m −1)EAoBi) ⊗1Bi
+
+dBi
+=: ρAo ⊗1Bi.
+(16)
+
+and the TP constraint holds if and only if TrAoBo ZAiAoBiBo = 1AiBi, i.e.,
+
+TrAo(FAoBi + (m −1)EAoBi) = 1Bi,
+(17)
+
+
+8
+
+which is equivalent to
+
+Tr ρAo = Tr(FAoBi + (m −1)EAoBi)/dBi = Tr 1Bi/dBi = 1.
+(18)
+
+As Π is no-signalling from A to B, we have TrAo �ZAiAoBiBo = TrAoAi �ZAiAoBiBo ⊗
+1Ai
+
+m , i.e.,
+
+TrAo FAoBi ⊗DAiBo + TrAo EAoBi ⊗(1 −DAiBo)
+
+= TrAo(FAoBi + (m −1)EAoBi) ⊗1AiBo
+
+m
+= 1AiBiBo/m.
+(19)
+
+Since DAiBo and 1 −DAiBo are orthogonal positive operators, we have
+
+TrAo FAoBi = TrAo EAoBi = 1Bi/m.
+(20)
+
+Finally, combining Eq. (15), (16), (18), (20), we have that
+
+fNS∩PPT(N , m) = max Tr JN FAoBi
+s.t. 0 ≤FAoBi ≤ρAo ⊗1Bi,
+
+Tr ρAo = 1,
+
+TrAo FAoBi = 1Bi/m,
+
+0 ≤F
+TBi
+AoBi ≤ρAo ⊗1Bi.
+
+(21)
+
+This gives the SDP in Theorem 3, where we assume that Ao = A and Bi = B for simplification.
+⊓⊔
+Remark: The dual SDP for fNS∩PPT(N , m) is given by
+
+fNS∩PPT(N , m) = min t + Tr SB/m
+
+s.t.JN ≤XAB + 1A ⊗SB + (WAB −YAB)TB,
+
+TrB(XAB + WAB) ≤t1A,
+
+XAB, YAB, WAB ≥0, SB = S†
+B.
+
+(22)
+
+To remove the PPT constraint, set YAB = WAB = 0. It is worth noting that the strong duality
+holds here since the Slater’s condition can be easily checked. Indeed, choosing XAB = YAB =
+WAB = ∥JN ∥∞1AB, SB = 1B and t = 3dB∥JN ∥∞in SDP (22), we have (XAB, YAB, WAB, SB, t) is in
+the relative interior of the feasible region.
+It is worthing noting that fNS(N , m) can be obtained by removing the PPT constraint and it
+corresponds with the optimal NS-assisted channel fidelity in [28].
+
+B.
+Improved SDP converse bounds in finite blocklength
+
+For given 0 ≤ϵ < 1, the one-shot ϵ-error classical capacity assisted by Ω-class codes is defined as
+
+C(1)
+Ω(N , ϵ) := sup{log λ : 1 −fΩ(N , λ) ≤ϵ}.
+(23)
+
+We now derive the one-shot ϵ-error classical capacity assisted by NS or NS∩PPT codes as
+follows.
+
+
+9
+
+Theorem 4 For given channel N and error threshold ϵ, the one-shot ϵ-error NS∩PPT-assisted and NS-
+assisted capacities are given by
+
+C(1)
+NS∩PPT(N , ϵ) = −log min η
+
+s. t. 0 ≤FAB ≤ρA ⊗1B,
+
+Tr ρA = 1, TrA FAB = η1B,
+
+Tr JN FAB ≥1 −ϵ,
+
+0 ≤FTB
+AB ≤ρA ⊗1B (PPT),
+
+(24)
+
+and
+
+C(1)
+NS(N , ϵ) = −log min η
+
+s.t. 0 ≤FAB ≤ρA ⊗1B, Tr ρA = 1,
+
+TrA FAB = η1B, Tr JN FAB ≥1 −ϵ,
+
+(25)
+
+respectively.
+
+Proof When assisted by NS∩PPT codes, by Eq. (23), we have that
+
+C(1)
+NS∩PPT(N , ϵ) = log max λ s.t.fNS∩PPT(N , ˘) ≥1 −ffl.
+(26)
+
+To simplify Eq. (26), we suppose that
+
+Υ(N , ϵ) = −log min η
+
+s. t. 0 ≤FAB ≤ρA ⊗1B,
+
+Tr ρA = 1, TrA FAB = η1B,
+
+Tr JN FAB ≥1 −ϵ,
+
+0 ≤FTB
+AB ≤ρA ⊗1B (PPT).
+
+(27)
+
+On one hand, for given ϵ, suppose that the optimal solution to the SDP (27) of Υ(N , ϵ) is
+{ρ, F, η}. Then, it is clear that {ρ, F} is a feasible solution of the SDP (8) of fNS∩PPT(N , η−1), which
+means that fNS∩PPT(N , η−1) ≥Tr JN F ≥1 −ϵ. Therefore,
+
+C(1)
+NS∩PPT(N , ϵ) ≥log η−1 = Υ(N , ϵ).
+(28)
+
+On the other hand, for given ϵ, suppose that the value of C(1)
+NS∩PPT(N , ϵ) is log λ and the optimal
+solution of fNS∩PPT(N , λ) is {ρ, F}. It is easy to check that {ρ, F, λ−1} satisfies the constrains in
+SDP (27) of Υ(N , ϵ). Therefore,
+
+Υ(N , ϵ) ≥−log λ−1 = C(1)
+NS∩PPT(N , ϵ).
+(29)
+
+Hence, combining Eqs. (27), (28) and (29), it is clear that
+
+C(1)
+NS∩PPT(N , ϵ) = Υ(N , ϵ)
+= −log min η
+
+s.t. 0 ≤FAB ≤ρA ⊗1B,
+
+Tr ρA = 1, TrA FAB = η1B,
+
+Tr JN FAB ≥1 −ϵ,
+
+0 ≤FTB
+AB ≤ρA ⊗1B (PPT).
+
+(30)
+
+
+10
+
+And one can obtain C(1)
+NS(N , ϵ) by removing the PPT constraint.
+⊓⊔
+Noticing that no-signalling-assisted codes are potentially stronger than the entanglement-
+assisted codes, C(1)
+NS(N , ϵ) and C(1)
+NS∩PPT(N , ϵ) provide converse bounds of classical communica-
+tion for entanglement-assisted and unassisted codes, respectively.
+
+Corollary 5 For a given channel N and error threshold ϵ,
+
+C(1)
+E (N , ϵ) ≤C(1)
+NS(N , ϵ),
+
+C(1)(N , ϵ) ≤C(1)
+NS∩PPT(N , ϵ).
+
+We further compare our one-shot ϵ-error capacities with the previous SDP converse bounds
+derived by the quantum hypothesis testing technique in [23]. To be specific, for a given channel
+N (A →B) and error thresold ϵ, Matthews and Wehner [23] establish that
+
+C(1)
+E (N , ϵ) ≤RE(N , ϵ)
+= max
+ρA min
+σB Dϵ
+H((idA′ ⊗N )(ρA′A)||ρA′ ⊗σB)
+
+= −log min η
+
+s.t.0 ≤FAB ≤æA ⊗1B, Tr æA = 1,
+
+TrA FAB ≤η1B, Tr JN FAB ≥1 −ϵ,
+
+(31)
+
+and
+
+C(1)(N , ϵ) ≤RE∩PPT(N , ϵ)
+= max
+ρA min
+σB Dϵ
+H,PPT((idA′ ⊗N )(ρA′A)||ρA′ ⊗σB)
+
+= −log min η
+
+s.t. 0 ≤FAB ≤ρA ⊗1B, Tr ρA = 1,
+
+TrA FAB ≤η1B, Tr JN FAB ≥1 −ϵ,
+
+0 ≤FTB
+AB ≤ρA ⊗1B,
+
+(32)
+
+where ρA′A = (1A′ ⊗ρ
+
+1
+2
+A)ΦA′A(1A′ ⊗ρ
+
+1
+2
+A) is a purification of ρA and ρA′ = TrA ρA′A. Moreover,
+
+Dϵ
+H(ρ0||ρ1) = −log min Tr Tρ1
+s.t. 1 −Tr Tρ0 ≤ϵ, 0 ≤T ≤1
+(33)
+
+is the hypothesis testing relative entropy [23, 24] and Dϵ
+H,PPT(ρ0||ρ1) is the similar quantity with a
+PPT constraint on the POVM.
+Interestingly, our one-shot ϵ-error capacities are similar to these quantum hypothesis test-
+ing relative entropy converse bounds. However, there is a crucial difference that our quanti-
+ties require that a stricter condition, i.e., TrA FAB = η1B. This makes one-shot ϵ-error capacities
+(C(1)
+NS∩PPT(N , ϵ) and C(1)
+NS(N , ϵ)) always smaller than or equal to the SDP converse bounds in [23],
+and the inequalities can be strict.
+
+Proposition 6 For a given channel N (A →B) and error threshold ϵ,
+
+C(1)
+NS(N , ϵ) ≤RE(N , ϵ)
+= max
+ρA min
+σB Dϵ
+H((idA′ ⊗N )(ρA′A)||ρA′ ⊗σB),
+
+C(1)
+NS∩PPT(N , ϵ) ≤RE∩PPT(N , ϵ)
+= max
+ρA min
+σB Dϵ
+H,PPT((idA′ ⊗N )(ρA′A)||ρA′ ⊗σB).
+
+
+11
+
+In particular, both inequalities can be strict for some quantum channels such as the amplitude damping
+channels and the simplest classical-quantum channels.
+
+Proof
+This can be proved by the fact that any feasible solution of the SDP (25) of C(1)
+NS(N , ϵ) (or
+
+C(1)
+NS∩PPT(N , ϵ)) is also feasible to the SDP (31) of RE(N , ϵ) (or RE∩PPT(N , ϵ)).
+We further show that the inequality can be strict by the example of qubit amplitude damping
+channel N AD
+γ
+= ∑1
+i=0 Ei · E†
+i (0 ≤γ ≤1), with E0 = |0⟩⟨0| + √1 −γ|1⟩⟨1| and E1 = √γ|0⟩⟨1|. We
+compare the above bounds in FIG. 2 and FIG. 3. It is clear that our bounds can be strictly better
+than the quantum hypothesis testing bounds in [23] in this case.
+
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+ from 0.5 to 1
+
+0
+
+0.05
+
+0.1
+
+0.15
+
+0.2
+
+0.25
+
+0.3
+
+0.35
+
+0.4
+
+Bits
+
+FIG. 2:
+The red solid and dash-dot lines de-
+pict C(1)
+NS(N AD
+γ
+, 0.01) and C(1)
+NS(N AD
+γ
+, 0.005), respec-
+tively.
+The blue dashed and dotted lines depict
+RE(N AD
+γ
+, 0.01) and RE(N AD
+γ
+, 0.005).
+
+0.2
+0.4
+0.6
+0.8
+1
+ from 0.1 to 1
+
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+Bits
+
+FIG. 3:
+The red solid and dash-dot lines depict
+
+C(1)
+NS∩PPT(N AD
+γ
+, 0.01) and C(1)
+NS∩PPT(N AD
+γ
+, 0.005), re-
+spectively. The blue dashed and dotted lines de-
+pict RE∩PPT(N AD
+γ
+, 0.01) and RE∩PPT(N AD
+γ
+, 0.005),
+respectively.
+
+Another example is the simplest classical-quantum channel N cq
+a
+which has only two inputs
+and two pure output states |ψi⟩⟨ψi|, w.l.o.g.
+
+|ψ0⟩= a|0⟩+ b|1⟩,
+|ψ1⟩= a|0⟩−b|1⟩,
+
+with a ≥b =
+√
+
+1 −a2. The comparison is presented in FIG. 4 and it is clear that our bound can be
+strictly tighter for this class of classical-quantum channels.
+⊓⊔
+We then consider the asymptotic performance of the one-shot NS-assisted ϵ-error capacity.
+Interestingly, in common with the bound RE(N , ϵ) [23] and the bound of Datta and Hsieh
+[43], the asymptotic behaviour of RNS(N , ϵ) also recovers the converse part of the formula for
+entanglement-assisted capacity [44] and it implies that CNS(N ) = CE(N ). (See Corollary 7.) In
+[28], Leung and Matthews have already shown that the entanglement-assisted quantum capacity
+of a quantum channel is equal to the NS-assisted quantum capacity. It is worth noting that our
+result is equivalent to their result due to superdense coding [62] and teleportation [63].
+
+Corollary 7 For any quantum channel N (A →B),
+
+lim
+ϵ→0 lim
+n→∞
+1
+nC(1)
+NS(N ⊗n, ϵ) ≤max
+ρA I(ρA; N ),
+
+
+12
+
+FIG. 4: When ϵ = 0.005, C(1)
+NS(N cq
+a , ϵ) (red solid line) can be strictly smaller than the previous SDP bound
+
+RE(N cq
+a , ϵ) (blue dashed line). Note that C(1)
+NS∩PPT(N cq
+a , ϵ) = C(1)
+NS(N cq
+a , ϵ) and RE∩PPT(N cq
+a , ϵ) = RE(N cq
+a , ϵ)
+in this case.
+
+where I(ρA; N ) := H(ρA) + H(N (ρA)) −H((id ⊗N )ŒæA), and φρA is a purification of ρA. As a
+consequence,
+
+CNS(N ) = CE(N ).
+
+Proof In [23], Matthews and Wehner prove that
+
+lim
+ϵ→0 lim
+n→∞
+1
+n RE(N ⊗n, ϵ) ≤max
+ρA I(ρA; N ).
+
+By Proposition 6, we immediately obtain that
+
+lim
+ϵ→0 lim
+n→∞
+1
+nC(1)
+NS(N ⊗n, ϵ) ≤lim
+ϵ→0 lim
+n→∞
+1
+n RE(N ⊗n, ϵ)
+
+≤max
+ρA I(ρA; N ),
+(34)
+
+which means that CNS(N ) ≤CE(N ). Noticing that no-signalling codes are potentially stronger
+than the entanglement codes, it holds that CNS(N ) ≥CE(N ). Therefore, we have that CNS(N ) =
+CE(N ).
+⊓⊔
+
+C.
+Reduction to Polyanskiy-Poor-Verdú converse bound
+
+For classical-quantum channels, the one-shot ϵ-error NS-assisted (or NS∩PPT-assisted) capac-
+ity can be further simplified based on the structure of the channel.
+
+Proposition 8 For the classical-quantum channel that acts as N : x →ρx, the Choi matrix of N is given
+by JN = ∑x |x⟩⟨x| ⊗ρx. Then, the SDP (25) of C(1)
+NS(N , ϵ) and the SDP (24) of C(1)
+NS∩PPT(N , ϵ) can be
+
+
+13
+
+simplified to
+
+C(1)
+NS(N , ϵ) = C(1)
+NS∩PPT(N , ϵ)
+
+= log max ∑sx
+s.t. 0 ≤Qx ≤sx1B, ∀x,
+∑
+x
+Qx = 1B,
+
+∑
+x
+Tr Qxρx ≥∑
+x
+(1 −ϵ)sx.
+
+(35)
+
+Proof When JN = ∑x |x⟩⟨x| ⊗ρx, the SDP (25) easily simplifies to
+
+C(1)
+NS(N , ϵ) = −log min η
+
+s.t. 0 ≤Fx ≤px1B, ∀x,
+∑
+x
+px = 1,
+
+∑
+x
+Fx/η = 1B,
+
+∑
+x
+Tr Fxρx ≥(1 −ϵ).
+
+(36)
+
+By assuming that Qx = Fx/η and sx = px/η, the above SDP simplifies to
+
+C(1)
+NS(N , ϵ) = log max ∑sx
+s.t. 0 ≤Qx ≤sx1B, ∀x,
+∑
+x
+Qx = 1B,
+
+∑
+x
+Tr Qxρx ≥(1 −ϵ)∑sx,
+
+(37)
+
+where we use the fact ∑sx = ∑px/η = 1/η.
+One can use a similar method to simplify
+C(1)
+NS∩PPT(N , ϵ) as well.
+⊓⊔
+Furthermore, for the classical channels, Polyanskiy, Poor, and Verdú [20] derive the finite block-
+length converse via hypothesis testing. In [22], an alternative proof of PPV converse was provided
+by considering the assistance of the classical no-signalling correlations. Here, we are going to
+show that both C(1)
+NS(N , ϵ) and C(1)
+NS∩PPT(N , ϵ) will reduce to the PPV converse.
+Let us first recall the linear program for the PPV converse bound of a classical channel N (y|x)
+[20, 22]:
+
+RPPV(N , ϵ) = max ∑
+x
+sx
+
+s.t. Qxy ≤sx, ∀x, y,
+∑
+x
+Qxy ≤1, ∀y,
+
+∑
+x,y
+N (y|x)Qxy ≥(1 −ϵ)∑
+x
+sx.
+
+(38)
+
+For classical channels, we can further simplify the SDP (35) to a linear program which coincides
+with the Polyanskiy-Poor-Verdú converse bound.
+
+
+14
+
+Proposition 9 For a classical channel N (y|x),
+
+C(1)
+NS(N , ϵ) = C(1)
+NS∩PPT(N , ϵ) = RPPV(N , ϵ).
+(39)
+
+Proof
+The idea is to further simplify the SDP (35) via the structure of classical channels. For
+input x, the corresponding outputs can be seemed as ρx = ∑y N (y|x)|y⟩⟨y|. Then, Qx should be
+diagonal for any x, i.e., Qx = ∑y Qxy. Thus, SDP (35) can be easily simplified to
+
+C(1)
+NS(N , ϵ) = C(1)
+NS∩PPT(N , ϵ)
+
+= log max ∑
+x
+sx
+
+s.t. Qxy ≤sx, ∀x, y,
+∑
+x
+Qxy = 1, ∀y,
+
+∑
+x,y
+N (y|x)Qxy ≥(1 −ϵ)∑
+x
+sx.
+
+(40)
+
+Using the similar technique in [22], the constraint ∑x Qxy = 1 can be relaxed to ∑x Qxy ≤1 in this
+case, which means that the linear program (40) is equal to the linear program (38).
+⊓⊔
+
+V.
+STRONG CONVERSE BOUNDS FOR CLASSICAL COMMUNICATION
+
+A.
+SDP strong converse bounds for the classical capacity
+
+It is well known that evaluating the classical capacity of a general channel is extremely difficult.
+To the best of our knowledge, the only known nontrivial strong converse bound for the classical
+capacity is the entanglement-assisted capacity [44] and there is also computable single-shot upper
+bound derived from entanglement measures [45]. In this section, we will derive two SDP strong
+converse bounds for the classical capacity of a general quantum channel. Our bounds are effi-
+ciently computable and do not depend on any special properties of the channel. We also show that
+for some classes of quantum channels, our bound can be strictly smaller than the entanglement-
+assisted capacity and the previous bound in [45].
+Before introducing the strong converse bounds, we first show a single-shot SDP to estimate
+the optimal success probability of classical communication via multiple uses of the channel.
+
+Proposition 10 For any quantum channel N and given m,
+
+fNS∩PPT(N , m) ≤f +(N , m),
+
+where
+
+f +(N , m) = min Tr ZB
+
+s.t. −RAB ≤JTB
+N ≤RAB,
+
+−m1A ⊗ZB ≤RTB
+AB ≤m1A ⊗ZB.
+
+(41)
+
+Furthermore, it holds that fNS∩PPT(N1 ⊗N2, m1m2) ≤f +(N1, m1) f +(N2, m2). Consequently,
+
+fNS∩PPT(N ⊗n, mn) ≤f +(N , m)n.
+(42)
+
+
+15
+
+Proof We utilize the duality theory of semidefinite programming in the proof. To be specific, the
+dual SDP of f +(N , m) is given by
+
+f +(N , m) = max Tr JN (VAB −XAB)TB
+
+s.t. VAB + XAB ≤(WAB −YAB)TB,
+
+TrA(WAB + YAB) ≤1B/m,
+
+VAB, XAB, WAB, YAB ≥0.
+
+(43)
+
+It is worth noting that the optimal values of the primal and the dual SDPs above coincide. This is
+a consequence of strong duality. By Slater’s condition, one simply needs to show that there exists
+positive definite VAB, XAB, WAB and YAB such that VAB + XAB < (WAB −YAB)TB and TrA(WAB +
+YAB) < 1B/m, which holds for WAB = 2YAB = 5VAB = XAB = 1AB/2mdA.
+In SDP (43), let us choose XAB = YAB = 0 and VTB
+AB = WAB, then we have that
+
+f +(N , m) ≥K ≥fNS∩PPT(N , m),
+(44)
+
+where K := max{Tr JN WAB : WAB, WTB
+AB ≥0, TrA WAB ≤1B/m}. This means that the SDP (43) of
+f +(N , m) is a relaxation of the SDP (8) of fNS∩PPT(N , m).
+To see fNS∩PPT(N1 ⊗N2, m1m2) ≤f +(N1, m1) f +(N2, m2), we first suppose that the optimal
+solution to SDP (41) of f +(N1, m1) is {Z1, R1} and the optimal solution to SDP (41) of f +(N2, m2)
+is {Z2, R2}. Let us denote the Choi-Jamiołkowski matrix of N1 and N2 by J1 and J2, respectively.
+It is easy to see that R1 ⊗R2 ± JTB
+1 ⊗JTB′
+2
+≥0 since
+
+R1 ⊗R2 + JTB
+1 ⊗JTB′
+2
+
+=1
+
+2[(R1 + JTB
+1 ) ⊗(R2 + JTB′
+2 ) + (R1 −JTB
+1 ) ⊗(R2 −JTB′
+2 )],
+
+R1 ⊗R2 −JTB
+1 ⊗JTB′
+2
+
+=1
+
+2[(R1 + JTB
+1 ) ⊗(R2 −JTB′
+2 ) + (R1 −JTB
+1 ) ⊗(R2 + JTB′
+2 )].
+
+Therefore, we have that
+
+−R1 ⊗R2 ≤JTB
+1 ⊗JTB′
+2
+≤R1 ⊗R2.
+
+Applying similar techniques, it is easy to prove that
+
+−m1m21AA′ ⊗Z1 ⊗Z2 ≤RTB
+1 ⊗RTB′
+2
+≤m1m21AA′ ⊗Z1 ⊗Z2.
+
+Hence, {Z1 ⊗Z2, R1 ⊗R2} is a feasible solution to the SDP (41) of f +(N1 ⊗N2, m1m2), which
+means that
+
+fNS∩PPT(N1 ⊗N2, m1m2) ≤f +(N1 ⊗N2, m1m2)
+≤Tr Z1 ⊗Z2 = f +(N1, m1) f +(N2, m2).
+
+⊓⊔
+Now, we are able to derive the strong converse bounds of the classical capacity.
+
+
+16
+
+Theorem 11 For any quantum channel N ,
+
+C(N ) ≤CNS∩PPT(N ) ≤Cβ(N ) = log β(N ) ≤log(dB∥JTB
+N ∥∞),
+
+where
+
+β(N ) = min Tr SB
+
+s.t. −RAB ≤JTB
+N ≤RAB,
+
+−1A ⊗SB ≤RTB
+AB ≤1A ⊗SB.
+
+(45)
+
+In particular, when the communication rate exceeds Cβ(N ), the error probability goes to one exponen-
+tially fast as the number of channel uses increases.
+
+Proof For n uses of the channel, we suppose that the rate of the communication is r. By Proposi-
+tion 10, we have that
+
+fNS∩PPT(N ⊗n, 2rn) ≤f +(N , 2r)n.
+(46)
+
+Therefore, the n-shot error probability satisfies that
+
+ϵn = 1 −fNS∩PPT(N ⊗n, 2rn) ≥1 −f +(N , 2r)n.
+(47)
+
+Suppose that the optimal solution to the SDP (45) of β(N ) is {S0, R0}. It is easy to verify that
+{S0/ Tr S0, R0} is a feasible solution to the SDP (41) of f +(N , Tr S0). Therefore,
+
+f +(N , β(N )) ≤Tr(S0/ Tr S0) = 1.
+
+It is not difficult to see that f +(N , m) monotonically decreases when m increases. Thus, for any
+2r > β(N ), we have f +(N , 2r) < 1. Then, by Eq. (47), it is clear that the corresponding n-shot
+error probability ϵn will go to one exponentially fast as n increases. Hence, Cβ(N ) = log β(N ) is
+a strong converse bound for the NS∩PPT-assisted classical capacity of N .
+Furthermore, let us choose RAB = ∥JTB
+N ∥∞1AB and SB = ∥JTB
+N ∥∞1B. It is clear that {RAB, SB} is
+a feasible solution to the SDP (45) of β(N ), which means that β(N ) ≤dB∥JTB
+N ∥∞.
+⊓⊔
+Remark Cβ has some remarkable properties.
+For example, it is additive: Cβ(N1 ⊗N2) =
+Cβ(N1) + Cβ(N2) for different quantum channels N1 and N2. This can be proved by utilizing
+semidefinite programming duality.
+With similar techniques, we are going to show another SDP strong converse bound for the
+classical capacity of a general quantum channel.
+
+Theorem 12 For a quantum channel N , we derive the following strong converse bound for the NS∩PPT
+assisted classical capacity, i.e.,
+
+C(N ) ≤CNS∩PPT(N ) ≤Cζ(N ) = log ζ(N )
+
+with
+
+ζ(N ) = min Tr SB
+
+s.t.VAB ≥JN , −1A ⊗SB ≤VTB
+AB ≤1A ⊗SB
+(48)
+
+And if the communication rate exceeds Cζ(N ), the error probability will go to one exponentially fast as
+the number of channel uses increase.
+
+
+17
+
+Proof We first introduce the following SDP to estimate the optimal success probability:
+
+�f +(N , m) = min Tr SB
+s.t. VAB ≥JN ,
+
+−m1A ⊗SB ≤VTB
+AB ≤m1A ⊗SB.
+
+(49)
+
+Similar to Proposition 10, we can prove that
+
+fNS∩PPT(N ⊗n, mn) ≤�f +(N , m)n.
+(50)
+
+Then, when the communication rate exceeds Cζ(N ), we can use the technique in Theorem 11
+to prove that the error probability will go to one exponentially fast as the number of channel uses
+increase.
+⊓⊔
+As an example, we first apply our bounds to the qudit noiseless channel. In this case, the
+bounds are tight and strictly smaller than the entanglement-assisted classical capacity.
+
+Proposition 13 For the qudit noiseless channel Id(ρ) = ρ, it holds that
+
+C(Id) = Cβ(Id) = Cζ(Id) = log d < 2 log d = CE(Id).
+(51)
+
+Proof
+It is clear that C(Id) ≥log d. By the fact that ∥JTB
+Id ∥∞= 1, it is easy to see that Cβ(Id) ≤
+
+log d∥JTB
+Id ∥∞= log d. Similarly, we also have Cζ(Id) ≤log d. And CE(Id) = 2 log d is due to the
+superdense coding [62].
+⊓⊔
+
+B.
+Amplitude damping channel
+
+For the amplitude damping channel N AD
+γ
+= ∑1
+i=0 Ei · E†
+i (0 ≤γ ≤1) with E0 = |0⟩⟨0| +
+√1 −γ|1⟩⟨1| and E1 = √γ|0⟩⟨1|, the Holevo capacity χ(N AD
+γ
+) is given in [64]. However, its
+classical capacity remains unknown. The only known nontrivial and meaningful upper bound for
+the classical capacity of the amplitude damping channel was established in [45]. As an application
+of theorems 11 and 12, we show a strong converse bound for the classical capacity of the qubit
+amplitude damping channel. Remarkably, our bound improves the best previously known upper
+bound [45].
+
+Theorem 14 For amplitude damping channel N AD
+γ
+,
+
+CNS∩PPT(N AD
+γ
+) ≤Cζ(N AD
+γ
+) = Cβ(N AD
+γ
+) = log(1 +
+�
+
+1 −γ).
+
+As a consequence,
+
+C(N AD
+γ
+) ≤log(1 +
+�
+
+1 −γ).
+
+Proof Suppose that
+
+SB =
+√1 −γ + 1 + γ
+
+2
+|0⟩⟨0| +
+√1 −γ + 1 −γ
+
+2
+|1⟩⟨1|
+
+and
+
+VAB = JAD
+γ
++ (
+�
+
+1 −γ −1 + γ)|v⟩⟨v|
+
+
+18
+
+with |v⟩=
+1
+√
+
+2(|00⟩+ |11⟩).
+
+It is clear that VAB ≥JAD
+γ
+. Moreover, it is easy to see that
+
+1A ⊗SB −VTB
+AB =
+√1 −γ + 1 −γ
+
+2
+(|01⟩−|10⟩)(⟨01| −⟨10|) ≥0
+
+and 1A ⊗SB + VTB
+AB = (√1 −γ + 1 + γ)|00⟩⟨00| + (√1 −γ + 1 −γ)|11⟩⟨11| +
+√1−γ+1−γ
+
+2
+(|01⟩⟨01| +
+|01⟩⟨10| + |10⟩⟨01|) +
+√1−γ+1+3γ
+
+2
+|10⟩⟨10| ≥0.
+Therefore, {SB, VAB} is a feasible solution to SDP (48), which means that
+
+Cζ(N AD
+γ
+) ≤log Tr SB = log(1 +
+�
+
+1 −γ).
+
+One can also use the dual SDP of Cβ to show that Cβ(N AD
+γ
+) ≥log(1 + √1 −γ). Hence, we have
+that Cζ(N AD
+γ
+) = log(1 + √1 −γ).
+Similarly, it can also be calculated that Cβ(N AD
+γ
+) = log(1 + √1 −γ).
+⊓⊔
+Remark: It is worth noting that our bound is strictly smaller than the entanglement-assisted ca-
+pacity when γ ≤0.75 as shown in the following FIG. 5. We further compare our bound with the
+previous upper bound [45] and lower bound [64] in FIG. 6. The authors of [64] showed that
+
+C(N AD
+γ
+) ≥max
+0≤p≤1{H2[(1 −γ)p] −H2[(1 +
+�
+
+1 −4(1 −γ)γp2)/2]},
+
+where H2 is the binary entropy. It is clear that our bound provides a tighter bound to the classical
+capacity than the previous bound [45].
+
+FIG. 5: The solid line depicts Cβ(N AD
+γ
+) while the
+dashed line depicts CE(N AD
+γ
+). It is worth noting
+that Cβ(N AD
+γ
+) is strictly smaller than CE(N AD
+γ
+) for
+any γ ≤0.75.
+
+FIG. 6: The solid line depicts Cβ(N AD
+γ
+), the dashed
+line depicts the previous bound of C(N AD
+γ
+) [45],
+and the dotted line depicts the lower bound [64].
+Our bound is tighter than the previous bound in
+[45].
+
+C.
+Strong converse property for a new class of quantum channels
+
+In [65], a class of qutrit-to-qutrit channels was introduced to show the separation between
+quantum Lovász number and entanglement-assisted zero-error classical capacity. It turns out that
+
+
+19
+
+this class of channels also has strong converse property for classical or private communication. To
+be specific, the channel from register A to B is given by Nα(ρ) = E0ρE†
+0 + E1ρE†
+1 (0 < α ≤π/4)
+with
+
+E0 = sin α|0⟩⟨1| + |1⟩⟨2|, E1 = cos α|2⟩⟨1| + |1⟩⟨0|.
+
+It follows that the complementary channel of Nα is N c
+α(ρ) = ∑2
+i=0 FiρF†
+i with
+
+F0 = sin α|0⟩⟨1|, F1 = |0⟩⟨2| + |1⟩⟨0|, F2 = cos α|1⟩⟨1|.
+
+Proposition 15 For Nα (0 < α ≤π/4), we have that
+
+C(Nα) = CNS∩PPT(Nα) = Cβ(Nα) = 1.
+
+Proof Suppose the ZB = sin2 α|0⟩⟨0| + cos2 α|2⟩⟨2| + |1⟩⟨1| and
+
+RAB = |01⟩⟨01| + |11⟩⟨11| + |21⟩⟨21| + sin2 α(|10⟩⟨10| + |20⟩⟨20|)
+
++ cos2 α(|02⟩⟨02| + |12⟩⟨12|) + sin α cos α(|02⟩⟨20| + |20⟩⟨02|).
+
+It is easy to check that
+
+−RAB ≤JTB
+Nα ≤RAB and −1A ⊗ZB ≤RTB
+AB ≤1A ⊗ZB,
+
+where JNα is the Choi-Jamiołkowski matrix of Nα.
+Therefore, {ZB, RAB} is a feasible solution of SDP (45) of β(Nα), which means that
+
+β(Nα) ≤Tr ZB = 2.
+
+Noticing that we can use input |0⟩⟨0| and |1⟩⟨1| to transmit two messages via N , we can conclude
+that
+
+C(Nα) = CNS∩PPT(Nα) = 1.
+
+⊓⊔
+Remark In [65], the entanglement-assisted capacity of Nα is shown to be
+
+CE(Nα) = 2.
+
+Therefore, for Nα (0 < α ≤π/4), our bound Cβ is strictly smaller than the entanglement-assisted
+capacity. In this case, we also note that Cβ(Nα) < Cζ(Nα). However, it remains unknown whether
+Cβ is always smaller than or equal to Cζ.
+Furthermore, it is easy to see that Nα is neither an entanglement-breaking channel nor a
+Hadamard channel. Note also that Nα is not belong to the three classes in [17], for which the
+strong converse for classical capacity has been established. Thus, our results show a new class of
+quantum channels which satisfy the strong converse property for classical capacity.
+⊓⊔
+Moreover, we find that the strong converse property also holds for the private classical capacity
+[66, 67] of Nα. Note that private capacity requires that no information leaked to the environment
+and is usually called P(N ). Recently, several converse bounds for private communication were
+established in [68–72].
+
+Proposition 16 The private capacity of Nα is exactly one bit, i.e., P(Nα) = 1. In particular,
+
+Q(Nα) ≤log(1 + cos α) < 1 = P(Nα) = C(Nα) = 1
+
+2CE(Nα).
+
+
+20
+
+Proof On one hand, it is easy to see that P(Nα) ≤C(Nα) = Cβ(Nα) = 1.
+On the other hand, Alice can choose two input states |ψ0⟩= |1⟩and |ψ1⟩= cos α|0⟩+ sin α|2⟩,
+then the corresponding output states Bob received are
+
+Nα(|ψ0⟩⟨ψ0|) = sin α2|0⟩⟨0| + cos α2|2⟩⟨2|,
+Nα(|ψ1⟩⟨ψ1|) = |1⟩⟨1|.
+
+It is clear that Bob can perfectly distinguish these two output states. Meanwhile, the correspond-
+ing outputs of the complementary channel N c
+α are same, i.e.,
+
+N c
+α(|ψ0⟩⟨ψ0|) = N c
+α(|ψ1⟩⟨ψ1|) = sin α2|0⟩⟨0| + cos α2|1⟩⟨1|,
+
+which means that the environment obtain zero information during the communication.
+Applying the SDP bound of the quantum capacity in [73], the quantum capacity of Nα is strictly
+smaller than log(1 + cos α).
+⊓⊔
+Our result establishes the strong converse property for both the classical and private capacities
+of Nα. For the classical capacity, such a property was previously only known for classical channels,
+identity channel, entanglement-breaking channels, Hadamard channels and particular covariant
+quantum channels [17, 19]. For the private capacity, such a property was previously only known
+for generalized dephasing channels and quantum erasure channels [68]. Moreover, our result also
+shows a simple example of the distinction between the private and the quantum capacities, which
+were discussed in [74, 75].
+
+VI.
+ZERO-ERROR CAPACITY
+
+While ordinary information theory focuses on sending messages with asymptotically vanish-
+ing errors [76], Shannon also investigated this problem in the zero-error setting and described the
+zero-error capacity of a channel as the maximum rate at which it can be used to transmit infor-
+mation with zero probability of error [46]. Recently the zero-error information theory has been
+studied in the quantum setting and many new interesting phenomena have been found [47, 77–
+83].
+The one-shot zero-error capacity of a quantum channel N is the maximum number of inputs
+such that the receiver can perfectly distinguish the corresponding output states. Cubitt et al.
+[84] first introduced the zero-error communication via classical channels assisted by classical no-
+signalling correlations. Recently, no-signalling-assisted zero-error communication over quantum
+channels was introduced in [42].
+Using the expression (24) for our one-shot ϵ-error capacity, we are going to show a formula for
+the one-shot zero-error classical capacity assisted by NS (or NS∩PPT) codes.
+
+Theorem 17 The one-shot zero-error classical capacity (quantified as messages) of N assisted by
+NS ∩PPT codes is given by
+
+M0,NS∩PPT(N ) = max Tr SA
+s.t. 0 ≤UAB ≤SA ⊗1B,
+
+TrA UAB = 1B,
+
+Tr JN (SA ⊗1B −UAB) = 0,
+
+0 ≤UTB
+AB ≤SA ⊗1B (PPT).
+
+(52)
+
+
+21
+
+To obtain M0,NS(N ), one only needs to remove the PPT constraint. By the regularization, the Ω-assisted
+zero-error classical capacity is
+
+C0,Ω(N ) = sup
+n≥1
+
+1
+n log M0,Ω(N ⊗n).
+
+Proof When ϵ = 0, it is easy to see that
+
+C(1)
+NS∩PPT(N , 0) = −log min η
+
+s.t. 0 ≤FAB ≤ρA ⊗1B,
+
+Tr ρA = 1, TrA FAB = η1B,
+
+Tr JN FAB ≥1,
+
+0 ≤FTB
+AB ≤ρA ⊗1B.
+
+(53)
+
+Then, assuming that x = 1/η, UAB = xFAB and SA = xρA, we have that
+
+M0,NS∩PPT(N ) = 2C(1)
+NS∩PPT(N ,0)
+
+= max Tr SA
+s.t. 0 ≤UAB ≤SA ⊗1B,
+
+TrA UAB = 1B,
+
+Tr JN UAB ≥Tr SA,
+
+0 ≤UTB
+AB ≤SA ⊗1B.
+
+(54)
+
+By the fact that Tr SA = Tr JN (SA ⊗1B), the third constraint in Eq.
+(54) is equivalent to
+Tr JN (SA ⊗1B −UAB) ≤0. Noticing that SA ⊗1B −UAB ≥0, we can simplify Eq. (54) to
+
+M0,NS∩PPT(N ) = max Tr SA
+s.t. 0 ≤UAB ≤SA ⊗1B,
+
+TrA UAB = 1B,
+
+Tr JN (SA ⊗1B −UAB) = 0,
+
+0 ≤UTB
+AB ≤SA ⊗1B.
+
+(55)
+
+⊓⊔
+Remark It is worth noting that M0,NS(N ) coincides with the no-signalling assisted zero-error
+capacity in [42]. Also, it can be proved that M0,NS∩PPT also depends only on the non-commutative
+bipartite graph [42] of N .
+⊓⊔
+A natural application of M0,Ω(N ) is to upper bound the one-shot zero-error capacity, i.e.,
+
+M0(N ) ≤M0,NS∩PPT(N ) ≤M0,NS(N ).
+
+It is known that computing the one-shot zero-error capacity of a quantum channel is QMA-
+complete [13]. However, our bounds can be efficiently solved by semidefinite programming. To
+the best of our knowledge, for a general quantum channel N = ∑i Ei · E†
+i , the best known bound
+of the one-shot zero-error capacity is the naive form of the Lovász number ϑ(N ) in [47], i.e.,
+
+ϑ(N ) = ϑ(S) = max{∥1 + T∥∞: T ∈S⊥, 1 + T ≥0},
+
+where S = span{E†
+j Ek} is the non-commutative graph of N .
+In the next Proposition, we show that M0,NS∩PPT(N ) can be strictly smaller than ϑ(N ) for some
+quantum channel N . This implies that M0,NS∩PPT(N ) can provide a more accurate estimation of
+the one-shot zero-error capacity of some general quantum channels.
+
+
+22
+
+Proposition 18 For Nα (0 < α ≤π/4),
+
+M0,NS∩PPT(Nα) < ϑ(Nα).
+
+Proof
+One one hand, one can also use the prime and dual SDPs of M0,NS∩PPT to prove
+M0,NS∩PPT(Nα) ≤2. Indeed, this is also easy to see by Proposition 15.
+On the other hand, we are going to prove ϑ(Nα) ≥1 + cos−2 α. Suppose that T0 = −|0⟩⟨0| +
+cos−2 α|1⟩⟨1| + (1 −cos−2 α)|2⟩⟨2|. It is clear that T0 ∈S⊥and 1 + T0 ≥0. Thus,
+
+ϑ(Nα) ≥∥1 + T0∥∞= ⟨1|(1 + T0)|1⟩= 1 + cos−2 α > 2.
+
+⊓⊔
+For this class of quantum channels, it is worth noting that the private zero-error capacity is also
+one bit while its quantum zero-error capacity is strictly smaller than one qubit, i.e., Q0(Nα) < 1 =
+P0(Nα) = C0(Nα). This shows a difference between the quantum and the private capacities of
+a quantum channel in the zero-error setting, which relates to the work about maximum privacy
+without coherence in the zero-error case [85].
+
+VII.
+CONCLUSIONS AND DISCUSSIONS
+
+In summary, we have established fundamental limits for classical communication over quan-
+tum channels by considering general codes with NS constraint or NS∩PPT constraint. New SDP
+bounds for classical communication under both finite blocklength and asymptotic settings are
+obtained in this work.
+We first study the finite blocklength regime.
+By imposing both no-signalling and PPT-
+preserving constraints, we have obtained the optimal success probabilities of transmitting clas-
+sical information assisted by NS and NS∩PPT codes. Based on this, we have also derived the one-
+shot ϵ-error NS-assisted and NS∩PPT-assisted capacities. In particular, all of these one-shot char-
+acterizations are in the form of semidefinite programs. The one-shot NS-assisted and NS∩PPT-
+assisted) ϵ-error capacities provide an improved finite blocklength estimation of the classical com-
+munication than the previous quantum hypothesis testing converse bounds in [23]. Moreover, for
+classical channels, the one-shot NS-assisted and NS∩PPT-assisted ϵ-error capacities are equal to
+the linear program for the Polyanskiy-Poor-Verdú converse bound [20, 22], thus giving an alter-
+native proof of that result. Furthermore, in the asymptotic regime, we derive two SDP strong
+converse bounds of the classical capacity of a general quantum channel, which are efficiently
+computable and can be strictly smaller than the entanglement-assisted capacity. As an example,
+we have shown an improved upper bound on the classical capacity of the qubit amplitude damp-
+ing channel. Moreover, we have proved that the strong converse property holds for both classical
+and private capacities for a new class of quantum channels. This result may help us deepen the
+understanding of the limit ability of a quantum channel to transmit classical information.
+Finally, we apply our results to the study of zero-error capacity. To be specific, based on
+our SDPs of optimal success probability, we have derived the one-shot NS-assisted (or NS∩PPT-
+assisted ) zero-error capacity. Our result of NS-assisted capacity provides an alternative derivation
+for the NS-assisted zero-error capacity in [42]. Moreover, the one-shot NS∩PPT-assisted zero-error
+capacity also provide some insights in quantum zero-error information theory.
+It would be interesting to study the asymptotic capacity CNS∩PPT using such techniques as
+quantum hypothesis testing. Maybe it also has a single-letter formula similar to entanglement-
+assisted classical capacity.
+Perhaps one can obtain tighter converse bounds via the study of
+CNS∩PPT. Another direction is to further tighten the one-shot and strong converse bounds by
+involving the separable constraint [52]. It would also be interesting to study how to implement
+the no-signalling and PPT-preserving codes.
+
+
+23
+
+Acknowledgement
+
+The authors are grateful to Jens Eisert, Stefano Pirandola, Mark M. Wilde and Dong Yang
+for their helpful suggestions. Xin Wang would like to thank Mario Berta, Hao-Chung Cheng,
+Omar Fawzi, William Matthews, Volkher B. Scholz, Marco Tomamichel and Andreas Winter for
+helpful discussions. We also thank the Associate Editor and the anonymous referees for valuable
+comments that helped improving the paper. This work was partly supported by the Australian
+Research Council under Grant Nos. DP120103776 and FT120100449.
+
+[1] X. Wang, W. Xie, and R. Duan, “Semidefinite programming converse bounds for classical communi-
+cation over quantum channels,” 2017 IEEE International Symposium on Information Theory (ISIT). pp.
+1728–1732, 2017.
+[2] A. S. Holevo, “Bounds for the quantity of information transmitted by a quantum communication
+channel,” Problemy Peredachi Informatsii (Problems of Information Transmission), vol. 9, no. 3, pp. 3–11,
+1973.
+[3] ——, “The capacity of the quantum channel with general signal states,” IEEE Transactions on Informa-
+tion Theory, vol. 44, no. 1, pp. 269–273, 1998.
+[4] B. Schumacher and M. D. Westmoreland, “Sending classical information via noisy quantum chan-
+nels,” Physical Review A, vol. 56, no. 1, p. 131, 1997.
+[5] C. King, “The capacity of the quantum depolarizing channel,” IEEE Transactions on Information Theory,
+vol. 49, no. 1, pp. 221–229, 2003.
+[6] C. H. Bennett, D. P. DiVincenzo, and J. A. Smolin, “Capacities of quantum erasure channels,” Physical
+Review Letters, vol. 78, no. 16, p. 3217, 1997.
+[7] C. King, “Additivity for unital qubit channels,” Journal of Mathematical Physics, vol. 43, no. 10, pp.
+4641–4653, 2002.
+[8] G. G. Amosov, A. S. Holevo, and R. F. Werner, “On Some Additivity Problems in Quantum Informa-
+tion Theory,” Problemy Peredachi Informatsii, vol. 36, no. 4, pp. 25–34, 2000.
+[9] N. Datta, A. S. Holevo, and Y. Suhov, “Additivity for transpose depolarizing channels,” International
+Journal of Quantum Information, vol. 4, no. 01, pp. 85–98, 2006.
+[10] M. Fukuda, “Extending additivity from symmetric to asymmetric channels,” Journal of Physics A:
+Mathematical and General, vol. 38, no. 45, p. L753, 2005.
+[11] R. Konig, S. Wehner, and J. Wullschleger, “Unconditional security from noisy quantum storage,” IEEE
+Transactions on Information Theory, vol. 58, no. 3, pp. 1962–1984, 2012.
+[12] M. B. Hastings, “Superadditivity of communication capacity using entangled inputs,” Nature Physics,
+vol. 5, no. 4, pp. 255–257, apr 2009.
+[13] S. Beigi and P. W. Shor, “On the complexity of computing zero-error and Holevo capacity of quantum
+channels,” arXiv:0709.2090, 2007.
+[14] J. Wolfowitz, “Coding theorems of information theory,” Mathematics of Computation, 1978.
+[15] T. Ogawa and H. Nagaoka, “Strong converse to the quantum channel coding theorem,” IEEE Transac-
+tions on Information Theory, vol. 45, no. 7, pp. 2486–2489, 1999.
+[16] A. Winter, “Coding theorem and strong converse for quantum channels,” IEEE Transactions on Infor-
+mation Theory, vol. 45, no. 7, pp. 2481–2485, 1999.
+[17] R. Koenig and S. Wehner, “A strong converse for classical channel coding using entangled inputs,”
+Physical Review Letters, vol. 103, no. 7, p. 70504, 2009.
+[18] M. M. Wilde and A. Winter, “Strong converse for the classical capacity of the pure-loss bosonic chan-
+nel,” Problems of Information Transmission, vol. 50, no. 2, pp. 117–132, 2013.
+[19] M. M. Wilde, A. Winter, and D. Yang, “Strong converse for the classical capacity of entanglement-
+breaking and Hadamard channels via a sandwiched Rényi relative entropy,” Communications in Math-
+ematical Physics, vol. 331, no. 2, pp. 593–622, 2014.
+[20] Y. Polyanskiy, H. V. Poor, and S. Verdú, “Channel coding rate in the finite blocklength regime,” IEEE
+Transactions on Information Theory, vol. 56, no. 5, pp. 2307–2359, 2010.
+
+
+24
+
+[21] M. Hayashi, “Information spectrum approach to second-order coding rate in channel coding,” IEEE
+Transactions on Information Theory, vol. 55, no. 11, pp. 4947–4966, 2009.
+[22] W. Matthews, “A linear program for the finite block length converse of polyanskiy-poor-verdú via
+nonsignaling codes,” IEEE Transactions on Information Theory, vol. 58, no. 12, pp. 7036–7044, 2012.
+[23] W. Matthews and S. Wehner, “Finite blocklength converse bounds for quantum channels,” IEEE Trans-
+actions on Information Theory, vol. 60, no. 11, pp. 7317–7329, 2014.
+[24] L. Wang and R. Renner, “One-shot classical-quantum capacity and hypothesis testing,” Physical Review
+Letters, vol. 108, no. 20, p. 200501, 2012.
+[25] J. M. Renes and R. Renner, “Noisy channel coding via privacy amplification and information recon-
+ciliation,” IEEE Transactions on Information Theory, vol. 57, no. 11, pp. 7377–7385, 2011.
+[26] M. Tomamichel and M. Hayashi, “A hierarchy of information quantities for finite block length analysis
+of quantum tasks,” IEEE Transactions on Information Theory, vol. 59, no. 11, pp. 7693–7710, 2013.
+[27] M. Berta, M. Christandl, and R. Renner, “The quantum reverse Shannon theorem based on one-shot
+information theory,” Communications in Mathematical Physics, vol. 306, no. 3, pp. 579–615, 2011.
+[28] D. Leung and W. Matthews, “On the power of PPT-preserving and non-signalling codes,” IEEE Trans-
+actions on Information Theory, vol. 61, no. 8, pp. 4486–4499, 2015.
+[29] M. Tomamichel and V. Y. F. Tan, “Second-order asymptotics for the classical capacity of image-additive
+quantum channels,” Communications in Mathematical Physics, vol. 338, no. 1, pp. 103–137, 2015.
+[30] S. Beigi, N. Datta, and F. Leditzky, “Decoding quantum information via the Petz recovery map,”
+Journal of Mathematical Physics, vol. 57, no. 8, p. 082203, aug 2016.
+[31] M. Tomamichel, Quantum Information Processing with Finite Resources:
+Mathematical Foundations.
+Springer, 2015, vol. 5.
+[32] M. Tomamichel, M. Berta, and J. M. Renes, “Quantum coding with finite resources,” Nature Commu-
+nications, vol. 7, p. 11419, 2016.
+[33] K. Fang, X. Wang, M. Tomamichel, and R. Duan, “Non-asymptotic entanglement distillation,”
+arXiv:1706.06221, pp. 1–20, jun 2017.
+[34] H.-C. Cheng and M.-H. Hsieh, “Moderate Deviation Analysis for Classical-Quantum Channels and
+Quantum Hypothesis Testing,” arXiv:1701.03195, 2017.
+[35] C. T. Chubb, V. Y. F. Tan, and M. Tomamichel, “Moderate deviation analysis for classical communica-
+tion over quantum channels,” arXiv:1701.03114, 2017.
+[36] M. Mosonyi and N. Datta, “Generalized relative entropies and the capacity of classical-quantum chan-
+nels,” Journal of Mathematical physics, vol. 50, no. 7, p. 72104, 2009.
+[37] E. M. Rains, “A semidefinite program for distillable entanglement,” IEEE Transactions on Information
+Theory, vol. 47, no. 7, pp. 2921–2933, 2001.
+[38] D. Beckman, D. Gottesman, M. A. Nielsen, and J. Preskill, “Causal and localizable quantum opera-
+tions,” Physical Review A, vol. 64, no. 5, p. 52309, 2001.
+[39] T. Eggeling, D. Schlingemann, and R. F. Werner, “Semicausal operations are semilocalizable,” EPL
+(Europhysics Letters), vol. 57, no. 6, p. 782, 2002.
+[40] M. Piani, M. Horodecki, P. Horodecki, and R. Horodecki, “Properties of quantum non-signaling
+boxes,” Physical Review A, vol. 74, no. 1, p. 12305, 2006.
+[41] O. Oreshkov, F. Costa, and ˇC. Brukner, “Quantum correlations with no causal order,” Nature Commu-
+nications, vol. 3, p. 1092, 2012.
+[42] R. Duan and A. Winter, “No-signalling-assisted zero-error capacity of quantum channels and an infor-
+mation theoretic interpretation of the Lovász number,” IEEE Transactions on Information Theory, vol. 62,
+no. 2, pp. 891–914, 2016.
+[43] N. Datta and M.-H. Hsieh, “One-shot entanglement-assisted quantum and classical communication,”
+IEEE Transactions on Information Theory, vol. 59, no. 3, pp. 1929–1939, 2013.
+[44] C. H. Bennett, P. W. Shor, J. A. Smolin, and A. V. Thapliyal, “Entanglement-assisted classical capacity
+of noisy quantum channels,” Physical Review Letters, vol. 83, no. 15, p. 3081, 1999.
+[45] F. G. S. L. Brandao, J. Eisert, M. Horodecki, and D. Yang, “Entangled inputs cannot make imperfect
+quantum channels perfect,” Physical Review Letters, vol. 106, no. 23, p. 230502, 2011.
+[46] C. E. Shannon, “The zero error capacity of a noisy channel,” IRE Trans. Inf. Theory, vol. 2, no. 3, pp.
+8–19, 1956.
+[47] R. Duan, S. Severini, and A. Winter, “Zero-error communication via quantum channels, noncommu-
+tative graphs, and a quantum Lovász number,” IEEE Transactions on Information Theory, vol. 59, no. 2,
+
+
+25
+
+pp. 1164–1174, 2013.
+[48] A. Jamiołkowski, “Linear transformations which preserve trace and positive semidefiniteness of op-
+erators,” Reports on Mathematical Physics, vol. 3, no. 4, pp. 275–278, 1972.
+[49] M.-D. Choi, “Completely positive linear maps on complex matrices,” Linear algebra and its applications,
+vol. 10, no. 3, pp. 285–290, 1975.
+[50] L. Vandenberghe and S. Boyd, “Semidefinite programming,” SIAM Review, vol. 38, no. 1, pp. 49–95,
+1996.
+[51] X. Wang and R. Duan, “Improved semidefinite programming upper bound on distillable entangle-
+ment,” Physical Review A, vol. 94, no. 5, p. 050301, nov 2016.
+[52] A. W. Harrow, A. Natarajan, and X. Wu, “An Improved Semidefinite Programming Hierarchy for
+Testing Entanglement,” Communications in Mathematical Physics, vol. 352, no. 3, pp. 881–904, jun 2017.
+[53] X. Wang and R. Duan, “Nonadditivity of Rains’ bound for distillable entanglement,” Physical Review
+A, vol. 95, no. 6, p. 062322, jun 2017.
+[54] Y. Li, X. Wang, and R. Duan, “Indistinguishability of bipartite states by positive-partial-transpose
+operations in the many-copy scenario,” Physical Review A, vol. 95, no. 5, p. 052346, may 2017.
+[55] M. Berta and M. Tomamichel, “The Fidelity of Recovery Is Multiplicative,” IEEE Transactions on Infor-
+mation Theory, vol. 62, no. 4, pp. 1758–1763, apr 2016.
+[56] W. Xie, K. Fang, X. Wang, and R. Duan, “Approximate broadcasting of quantum correlations,” Physical
+Review A, vol. 96, p. 022302, aug 2017.
+[57] L. G. Khachiyan, “Polynomial algorithms in linear programming,” USSR Computational Mathematics
+and Mathematical Physics, vol. 20, no. 1, pp. 53–72, 1980.
+[58] M. Grant and S. Boyd, “CVX: Matlab software for disciplined convex programming,” 2008.
+[59] Nathaniel Johnston, “QETLAB: A MATLAB toolbox for quantum entanglement, version 0.9,” 2016.
+[60] J. Watrous, Theory of quantum information.
+University of Waterloo, 2011.
+[61] G. Chiribella, G. M. D’Ariano, and P. Perinotti, “Transforming quantum operations: Quantum su-
+permaps,” EPL (Europhysics Letters), vol. 83, no. 3, p. 30004, 2008.
+[62] C. H. Bennett and S. J. Wiesner, “Communication via one-and two-particle operators on Einstein-
+Podolsky-Rosen states,” Physical Review Letters, vol. 69, no. 20, p. 2881, 1992.
+[63] C. H. Bennett, G. Brassard, C. Crépeau, R. Jozsa, A. Peres, and W. K. Wootters, “Teleporting an un-
+known quantum state via dual classical and Einstein-Podolsky-Rosen channels,” Physical Review Let-
+ters, vol. 70, no. 13, p. 1895, 1993.
+[64] V. Giovannetti and R. Fazio, “Information-capacity description of spin-chain correlations,” Physical
+Review A, vol. 71, no. 3, p. 32314, 2005.
+[65] X. Wang and R. Duan, “Separation between quantum Lovász number and entanglement-assisted
+zero-error classical capacity,” IEEE Transactions on Information Theory, vol. 64, no. 3, pp. 1454–1460,
+2018.
+[66] I. Devetak, “The private classical capacity and quantum capacity of a quantum channel,” IEEE Trans-
+actions on Information Theory, vol. 51, no. 1, pp. 44–55, 2005.
+[67] N. Cai, A. Winter, and R. W. Yeung, “Quantum privacy and quantum wiretap channels,” Problems of
+Information Transmission, vol. 40, no. 4, pp. 318–336, 2004.
+[68] M. M. Wilde, M. Tomamichel, and M. Berta, “Converse bounds for private communication over quan-
+tum channels,” IEEE Transactions on Information Theory, vol. 63, no. 3, pp. 1792–1817, feb 2016.
+[69] S. Pirandola, R. Laurenza, C. Ottaviani, and L. Banchi, “Fundamental limits of repeaterless quantum
+communications,” Nature Communications, vol. 8, p. 15043, apr 2017.
+[70] M. M. Wilde, “Squashed entanglement and approximate private states,” Quantum Information Process-
+ing, pp. 1–18, 2016.
+[71] M. Takeoka, S. Guha, and M. M. Wilde, “The squashed entanglement of a quantum channel,” IEEE
+Transactions on Information Theory, vol. 60, no. 8, pp. 4987–4998, 2014.
+[72] M. Christandl and A. Müller-Hermes, “Relative Entropy Bounds on Quantum, Private and Repeater
+Capacities,” Communications in Mathematical Physics, vol. 353, no. 2, pp. 821–852, apr 2016.
+[73] X. Wang and R. Duan, “A semidefinite programming upper bound of quantum capacity,” in 2016
+IEEE International Symposium on Information Theory (ISIT), jul 2016, pp. 1690–1694.
+[74] K. Horodecki, M. Horodecki, P. Horodecki, and J. Oppenheim, “Secure key from bound entangle-
+ment,” Physical Review Letters, vol. 94, no. 16, p. 160502, 2005.
+[75] D. Leung, K. Li, G. Smith, and J. A. Smolin, “Maximal privacy without coherence,” Physical Review
+
+
+26
+
+Letters, vol. 113, no. 3, p. 30502, 2014.
+[76] C. E. Shannon, “A mathematical theory of communication,” ACM SIGMOBILE Mobile Computing and
+Communications Review, vol. 5, no. 1, pp. 3–55, 1948.
+[77] R. Duan and Y. Shi, “Entanglement between two uses of a noisy multipartite quantum channel enables
+perfect transmission of classical information,” Physical Review Letters, vol. 101, no. 2, p. 20501, 2008.
+[78] T. S. Cubitt, D. Leung, W. Matthews, and A. Winter, “Improving zero-error classical communication
+with entanglement,” Physical Review Letters, vol. 104, no. 23, p. 230503, 2010.
+[79] T. S. Cubitt, J. Chen, and A. W. Harrow, “Superactivation of the asymptotic zero-error classical ca-
+pacity of a quantum channel,” IEEE Transactions on Information Theory, vol. 57, no. 12, pp. 8114–8126,
+2011.
+[80] D. Leung, L. Mancinska, W. Matthews, M. Ozols, and A. Roy, “Entanglement can increase asymptotic
+rates of zero-error classical communication over classical channels,” Communications in Mathematical
+Physics, vol. 311, no. 1, pp. 97–111, 2012.
+[81] T. S. Cubitt and G. Smith, “An extreme form of superactivation for quantum zero-error capacities,”
+IEEE Transactions on Information Theory, vol. 58, no. 3, pp. 1953–1961, 2012.
+[82] R. Duan and X. Wang, “Activated zero-error classical capacity of quantum channels in the presence
+of quantum no-signalling correlations,” arXiv:1510.05437, 2015.
+[83] R. Duan, S. Severini, and A. Winter, “On zero-error communication via quantum channels in the
+presence of noiseless feedback,” IEEE Transactions on Information Theory, vol. 62, no. 9, pp. 5260–5277,
+2016.
+[84] T. S. Cubitt, D. Leung, W. Matthews, and A. Winter, “Zero-error channel capacity and simulation
+assisted by non-local correlations,” IEEE Transactions on Information Theory, vol. 57, no. 8, pp. 5509–
+5523, 2011.
+[85] D. Leung and N. Yu, “Maximum privacy without coherence, zero-error,” Journal of Mathematical
+Physics, vol. 57, no. 9, 2016.
+
+

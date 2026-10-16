@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-bounded-coercive-and-symmetric-sesquilinear-forms.json
 id: "def-bounded-coercive-and-symmetric-sesquilinear-forms"
 kind: "definition"
 title: "Bounded, coercive and symmetric sesquilinear forms"
@@ -6,22 +8,10 @@ status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0
-deps:
-  - "def-complex-conjugate-real-imaginary-part-and-modulus"
-  - "def-hilbert-space"
-  - "def-linear-map"
-  - "def-norm-and-normed-space"
-  - "def-real-and-complex-inner-product-space"
-  - "def-sesquilinear-and-hermitian-forms-over-a-field-with-involution"
-  - "rem-real-and-complex-normed-space-convention"
+deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-hilbert-space, def-linear-map, def-norm-and-normed-space, def-real-and-complex-inner-product-space, def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]
 provenance:
   statement: "literature-derived"
   proof: "not-applicable"
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)"

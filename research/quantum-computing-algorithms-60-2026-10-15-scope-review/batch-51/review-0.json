@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "51",
+  "round": 0,
+  "reviewed_items": [
+    "lem-qa-27-even-sign-window",
+    "def-qa-27-variable-time-model",
+    "def-qa-27-block-encoded-qlsp",
+    "lem-qa-27-lcu-projected-block-identity",
+    "lem-qa-27-supported-pseudoinverse-target",
+    "alg-qa-27-qsvt-pseudoinverse",
+    "def-qa-27-cks-sparse-oracle-model",
+    "thm-qa-27-pseudoinverse-polynomial-degree",
+    "lem-qa-coherent-amplitude-grid-rounding",
+    "alg-qa-relative-probability-estimation",
+    "thm-qa-relative-probability-guarantee",
+    "alg-qa-27-capped-lower-bound-amplification",
+    "lem-qa-27-capped-lower-bound-amplification",
+    "lem-qa-27-low-target-amplification",
+    "thm-qa-27-vtaa-amplification",
+    "thm-qa-27-qsvt-inverse-state-cost",
+    "alg-qa-27-cks-variable-time-linear-solver",
+    "lem-qa-27-cks-stopping-time-instantiation",
+    "thm-qa-27-cks-linear-condition-guarantee",
+    "ex-qa-27-sparse-diagonal-qlsp",
+    "ex-qa-27-fixed-vs-variable-time-cost"
+  ],
+  "reviewed_pages": [
+    "block-encoding-linear-systems-and-variable-time-amplification",
+    "block-encoding-linear-systems-and-variable-time-amplification-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete substantive review found local prerequisite and scope obligations that need one repair pass before acceptance.",
+  "findings": [
+    {
+      "id": "alg-qa-27-qsvt-pseudoinverse",
+      "type": "prerequisite",
+      "reason": "The used QA23 correctness proof establishes existence of a phase list but does not link it to the list emitted by its peeling procedure. Verify the returned exact phase product against the target polynomial before QSVT success, charge that check, and propagate its failure."
+    },
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "type": "prerequisite",
+      "reason": "The QLSP input permits B to leave a fixed nonzero work state, but the final all-zero-work test follows only (A')† and can reject valid outputs. Specify the exact good-or-unfinished projector and preserve or exempt B's fixed work factor, or require clean B work; update the stopping proof accordingly."
+    },
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "type": "prerequisite",
+      "reason": "The CKS access model permits finite-precision values, while the cited QA25 simulator correctness contract is for exact block encodings. The listed ε_BE bounds cover inverse stages but do not derive the simulator error budget η_S for QPE calls. Require exact simulation access or allocate a proved aggregate simulator error from the value precision."
+    },
+    {
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "type": "scope",
+      "reason": "The gate-efficient conclusion is conditional on an unnamed efficient access/implementation specialization, but the input model permits arbitrary recorded costs. State explicit bounds for the preparation, sparse access, controlled/inverse encodings, and phase/circuit implementations; keep the query result separate."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qa-27-pseudoinverse-polynomial-degree",
+      "decision": "repair",
+      "reason": "Its QSVT approximation conclusion uses the phase-generated transform; recheck it against an exact verified phase-product certificate."
+    },
+    {
+      "id": "thm-qa-27-qsvt-inverse-state-cost",
+      "decision": "repair",
+      "reason": "Its output and success bounds rely on the generated QSVT block matching the target polynomial."
+    },
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "decision": "repair",
+      "reason": "It consumes the phase generator and QA25 simulator and must specify the validation, precision, and failure branches."
+    },
+    {
+      "id": "lem-qa-27-cks-stopping-time-instantiation",
+      "decision": "repair",
+      "reason": "Its clean-work output and simulator-error estimates depend on the CKS workspace and precision conventions."
+    },
+    {
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "decision": "repair",
+      "reason": "Its output/error and gate-resource conclusions depend on the repaired CKS algorithm and explicit implementation assumptions."
+    },
+    {
+      "id": "block-encoding-linear-systems-and-variable-time-amplification",
+      "decision": "repair",
+      "reason": "Recheck the CKS summary against the repaired workspace and gate-efficiency conditions."
+    },
+    {
+      "id": "ex-qa-27-fixed-vs-variable-time-cost",
+      "decision": "accept",
+      "reason": "It substitutes the stated asymptotic cost expressions and explicitly makes no finite-instance or universal speedup claim."
+    }
+  ]
+}

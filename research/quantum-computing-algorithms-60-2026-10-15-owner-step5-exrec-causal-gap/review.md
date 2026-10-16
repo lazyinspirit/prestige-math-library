@@ -1,0 +1,37 @@
+# Focused review: EC classical fan-out and causal contraction
+
+Proposal/evidence only; no source repair, closure, native acceptance, or whole-item verification is claimed. Native Step-5.1 unit 21 was actively writing while this review ran. Its earlier report `step5-v2-initial-r1-u21.json` genuinely identified the defect in the earlier Step 2.2; the latest source now begins Step 2.2 with a last-fault/bypass argument. These observations concern different source versions. No source or native report was edited here.
+
+## Finding
+
+The earlier inference from explicit ports to a causal owner quotient was false. An abstract EC-to-C-to-B path together with EC-to-B is a finite acyclic circuit; identifying EC with B creates B-to-C-to-B. Explicit ports and private syndrome records alone do not exclude this graph. Nor does calling the grouped object a comb prove an atomic local-channel replacement: an open comb must retain its intermediate ports and cannot in general be contracted to one location.
+
+The current source's stronger route is viable under its **actual existing** fault and EC identities. Every nontrivial unencoded retained logical classical output is fixed by decoded recovery, and the identity `D E_1 P_0 = D P_0` includes that output. The noise supplier permits an arbitrary CPTP replacement on the entire declared support of any one location, including a classical control register. Let a retained classical factor occur in any such support inside an elementary EC, and choose its last supported slot. Replace that slot by its ideal map followed by reset of this factor to 0, or instead to 1. These are two permitted one-fault maps. Every later EC slot acts as identity on that factor. Consequently their retained outputs have different certain values. Both cannot equal the same required ideal output on the same encoded quantum input. This contradicts the EC identity. Thus no EC slot supports such a factor at all. Read-only control use, copying from it, and a declared idle on it count as support and are excluded by the same argument. A newly emitted nontrivial retained classical factor fails the same two-reset test; one need not assume its ideal value is 1.
+
+Therefore every allowed retained logical classical wire through an EC is structurally a bypass from its earlier source. Its fan-out remains present, but is routed outside EC ownership. This is a consequence of the checked identities and the arbitrary-local-fault model, not a new restriction on the Statement. It does not hold for syndrome/ancilla records that are discarded inside EC, for a classical quantity only decoded from an encoded block later, or for output decoding that corrects classical errors. Those cases are respectively internal, part of the quantum block bundle, and outside the stipulated identity-on-classical-ports meaning of D.
+
+## Finite construction and remaining precision
+
+`candidate-patch.md` gives a fully explicit local graph lemma and a proposed replacement of Step 2.2. Bypass normalization makes no channel change and moves no location. After normalization a transferred one-block EC has only its quantum block outlet to the immediate following root; its internal ancilla records are not boundary ports. Ordinary recursive replacement has an acyclic parent graph by the existing refinement hypothesis. Descend the finite collars one scale at a time and transfer their output-terminal pieces to their unique following owner. A terminal-transfer lemma proves acyclicity at each transfer. Arbitrary quantum inputs, entanglement, and fault maps do not enter this combinatorial proof. Whole multi-register locations remain indivisible.
+
+The native author's present sentence about replacing new edges by old forward paths should preferably be replaced by the explicit terminal-transfer lemma: a new edge from a predecessor of the old owner into the new owner is not literally an old path bypassing that old owner. The lemma below supplies the intended rigorous argument. The collar induction must explicitly retain the invariant that an already-transferred next component belongs to the same claiming owner; an edge may terminate there rather than directly at its outer core.
+
+This review finds no surviving classical-fan-out obstruction **on the strict typed reading stated above**. It does not independently accept the separate syndrome-sector/domain induction, ideal-completion scan invariance, or full recursive-correctness proof. In particular this is not the adjacent sparse-fault recursive-substitution concern in `owner-step4-concern-review/recursive-fault-gap/`; that proposal supplies no premise used in this repair.
+
+## Sources actually inspected
+
+Read the current lemma, its threshold consumer, `def-qc-noise-channel-model`, and `def-qc-finite-channel-location-schedule`; the last two explicitly allow arbitrary same-support replacements and treat classical record registers as register factors. Read the adjacent recursive-fault-gap review/proposal to distinguish its obligation.
+
+Downloaded the authoritative complete AGP PDF https://arxiv.org/pdf/quant-ph/0504218 and read PDF pages 13–18, including Sections 5.2.1–5.2.2 in full. Section 5.2.1 gives descending collar truncation; Section 5.2.2 retains invertible syndrome coordinates and discusses fault memory. These passages do not prove a general logical-classical fan-out quotient. Page 13–14 also explicitly notes the final unprotected classical-output last-fault obstruction. The proof here derives its EC bypass consequence independently from the repository's particular stronger classical-port identities; it is not attributed to AGP.
+
+## Actual consumer closure
+
+- `thm-qc-t1-extended-rectangle-threshold`: Statement, F1, Proof 1.1 and 3.1 use the lemma. The probability envelope and overhead arithmetic do not consume owner convexity. Proof 3.1 only needs every all-good fault pattern to give the ideal instrument. A proof-only causal repair preserves its Statement and requires no numerical change. The same native reviewer must check this use after the actual edit.
+- `thm-qc-proper-code-concatenated-threshold`: Remarks cites the t=1 threshold as the separate overlapping-exRec route; its proper-code theorem does not logically use this supplier. Preserve this separation.
+- `thm-qc-explicit-proper-code-and-universal-gadgets`: Statement says a Steane t=1 route needs a separately proved exRec analysis. This remains a condition, not a claim that the present repair proves concrete t=1 gadgets.
+- `library/quantum-computing/noise-fault-tolerance-concatenation-and-thresholds.md`: lists both t=1 items and describes their independent explicit-port scope. No prose change is needed for a proof-only repair.
+- `def-qc-fault-location-path-and-rectangle`: contextual extended-rectangle terminology only; it does not assert the causal quotient or consume this proof.
+
+Searches of actual item/page carriers found no further uses of either t=1 item ID. No aliases are declared on these two carriers. Any Statement/Definition change, including a new supplier contract, requires the same repair reviewer to repeat the complete consumer search and own its checks; this handoff supplies no native consumer coverage.
+
+No tests, validators, hashes, recertification, gates, manifests, proof contracts, ledgers, runtime state, or native reports were run or edited. Only this review and its companion candidate proposal were written.

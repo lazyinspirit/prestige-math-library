@@ -1,0 +1,366 @@
+===== PDF PAGE 11 =====
+
+Christopher M. Dawson and Michael A. Nielsen. . .
+11
+
+group commutator of V and W only approximates ∆. In particular, we have
+
+d(Vn−1Wn−1V †
+n−1W †
+n−1, ∆)
+≤
+d(Vn−1Wn−1V †
+n−1W †
+n−1, V WV †W †) + d(V WV †W †, ∆)
+
+(21)
+
+<
+(cgc′ + capprox) ǫ3/2
+n−1,
+(22)
+
+where capprox is the same constant that arose in the qubit algorithm (Subsection 4.2), where
+we estimated capprox ≈8cgc′′, in the notation of the current section. Thus, just as for the
+qubit algorithm, the qudit algorithm returns a sequence Un which provides an ǫn = O(ǫ3/2
+n−1)-
+approximation to the desired unitary, U. Furthermore, the five constituents in the sequence
+are all obtained by calling the function at the n −1th level of recursion, just as in the qubit
+algorithm.
+The analysis of the accuracy and running time of the qudit SK algorithm proceeds in
+a fashion analogous to the qubit algorithm, giving lǫ = O
+�
+lnln 5/ ln(3/2)(1/ǫ)
+�
+and tǫ =
+
+O
+�
+lnln 3/ ln(3/2)(1/ǫ)
+�
+. An important practical caveat concerns the difficulty of construct-
+ing the lookup table used to obtain the basic ǫ0-approximations. This is done by enumerating
+all possible gate sequences up to some sufficient length. SU(d) is a manifold of dimension
+d2 −1, so if we wish to approximate every gate in SU(d) to within ǫ0 then we generate
+O(1/ǫd2−1
+0
+) sequences. For an instruction set G there are O(|G|l) sequences of length ≤l,
+some fraction of which may be redundant. We will therefore need to enumerate all sequences
+up to a length l0 satisfying
+
+l0 ≥O
+�d2 −1
+
+log |G| log(1/ǫ0)
+�
+.
+(23)
+
+The complexity of the enumeration is exponential in l0 and thus scales quite poorly with
+d. While our algorithm is practical for the small values of d of most interest in applications
+to fault-tolerance (e.g., d = 2, 3, 4), it will require great computational effort to scale it to
+substantially larger values of d.
+
+5.2
+Balanced commutators in SU(d)
+
+In this subsection our goal is to show that if U satisfies d(I, U) < ǫ then there exist V and
+W satisfying d(V WV †W †, U) < cgc′ǫ3/2 and such that d(I, V ), d(I, W) < cgc′′√ǫ, for some
+constants cgc′ and cgc′′. The proof combines two lemmas.
+Lemma 2 (Based on Theorem 4.5.2 on page 288 of [11]) Let H be a traceless d-dimensional
+Hermitian matrix. Then we can find Hermitian F and G such that:
+
+[F, G]
+=
+iH
+(24)
+
+∥F∥, ∥G∥
+≤
+d1/4
+�d −1
+
+2
+
+�1/2 �
+
+∥H∥.
+(25)
+
+A variant of this lemma may be found in Problem 8.15 on page 79 of [14]. The variant
+in [14] has the advantage that the prefactor to
+�
+
+∥H∥on the right-hand side of Eq. (25) is
+replaced by a constant that does not depend on d. We use the present version since the proof
+is a little simpler, and it suffices to establish the correctness of the SK algorithm. Readers
+serious about optimizing this aspect of the SK algorithm should consult [14] for details.
+
+
+===== PDF PAGE 12 =====
+
+12
+The Solovay-Kitaev algorithm . . .
+
+Proof: It is convenient to work in a basis which is Fourier conjugate to the basis in which
+H is diagonal. (This can, of course, be done, since the commutator bracket is preserved under
+conjugation, i.e., S[A, B]S† = [SAS†, SBS†] for any matrices A and B, and any unitary S.)
+In this basis H has the representation
+
+H = Wdiag(E1, . . . , Ed)W †,
+(26)
+
+where E1, . . . , Ed are the eigenvalues of H, and W is the Fourier matrix, with elements
+Wjk ≡ωjk/
+√
+
+d, where ω ≡exp(2πi/d) is a dth root of unity. From Eq. (26) we see that in
+this basis the diagonal matrix elements of H vanish:
+
+Hjj =
+�
+
+k ωjkEkωjk∗
+
+d
+=
+�
+
+k Ek
+
+d
+= tr(H)
+
+d
+= 0.
+(27)
+
+As a trial solution to the equation [F, G] = iH we will assume that G is some diagonal matrix,
+with real entries. The condition [F, G]iH is then equivalent to iHjk = Fjk(Gkk −Gjj). This
+suggests imposing the condition that the diagonal entries of G all be distinct, and defining
+
+Fjk ≡
+
+�
+iHjk
+Gkk−Gjj
+if j ̸= k;
+0
+if j = k.
+(28)
+
+It is easy to see that with these choices F and G are Hermitian, and satisfy [F, G] = iH.
+What of the norms ∥F∥and ∥G∥? Suppose we choose the diagonal entries of G as −(d −
+1)/2, −(d −1)/2 + 1, . . . , (d −1)/2. With this choice it is clear from our definition that the
+entries of F satisfy |Fjk| ≤|Hjk|, and we have
+
+∥F∥2
+≤
+tr(F 2)
+(29)
+
+≤
+tr(H2)
+(30)
+
+≤
+d∥H∥2,
+(31)
+
+where the first and third inequalities follow easily from the definitions, and the second in-
+equality follows from the fact that |Fjk| ≤|Hjk|.
+With these choices we therefore have
+∥F∥≤
+�
+
+d∥H∥and ∥G∥= (d −1)/2. Rescaling F and G appropriately we can ensure that
+the equation [F, G] = iH remains satisfied, while satisfying Eq. (25). This completes the
+proof.
+
+Lemma 3 Suppose F and G are Hermitian matrices such that ∥F∥, ∥G∥< δ. Then:
+
+d (exp(iF) exp(iG) exp(−iF) exp(−iG), exp(i × i[F, G])) ≤c1δ3,
+(32)
+
+for some constant c1 ≈4.
+
+Proof: This is easily verified using the standard series expansion for matrix exponentials.
+Alternately, this is also a standard result in the theory of Lie groups. See, e.g., Proposition 2
+on page 25 in Section 1.3 of [21].
+The result we desire may be obtained by combining these two lemmas. Suppose d(I, U) <
+ǫ.
+We can find Hermitian H such that U exp(iH) and d(I, U) = ∥H∥+ O(∥H∥3).
+By
+Lemma 2 we can find Hermitian F and G such that [F, G] = iH, and ∥F∥, ∥G∥≤cgc′′√ǫ
+
+
+===== PDF PAGE 13 =====
+
+Christopher M. Dawson and Michael A. Nielsen. . .
+13
+
+for cgc′′ ≈d1/4�
+
+(d −1)/2. Setting V ≡exp(iF), W ≡exp(iG), δ ≡cgc′′√ǫ and applying
+Lemma 3, we obtain:
+
+d(V WV †W †, U) < c1(cgc′′√ǫ)3 = cgc′ǫ3/2,
+(33)
+
+where cgc′ = c1c3
+gc′′ ≈4d3/4((d −1)/2)3/2. Furthermore, we have d(I, V ), d(I, W) < cgc′′√ǫ,
+as desired.
+
+6
+Prior work
+
+The treatment of the SK theorem and algorithm given in this paper is based upon Appendix 3
+in [19]. That appendix gave a detailed description of the SK theorem, and included an exercise
+(Exercise A3.6) asking the reader to find an algorithm for efficiently finding accurate sequences
+of instructions approximating a desired unitary. Reader feedback on [19] suggests that this
+was not one of the easier exercises in that volume, a fact that partially inspired the present
+review paper.
+The history of the SK theorem and algorithm is interesting. For SU(2) the SK theorem
+was announced by Solovay in 1995 on an email discussion list, but no paper has subsequently
+appeared. Independently, in 1997 Kitaev [12] outlined a proof in a review paper, for the gen-
+eral case of SU(d). After hearing of this result, Solovay announced that he had generalized his
+proof in a similar fashion. Kitaev’s paper also addressed the question of efficient implementa-
+tion, sketching out an algorithm to quickly find accurate instruction sequences approximating
+a desired gate. The proof of the SK theorem given in [19] was based on [12], discussions with
+Kitaev, Solovay, and M. Freedman, and on a 1999 lecture by Freedman, based on Kitaev’s
+proof.
+Kitaev’s 1997 discussion [12] of the SK theorem and algorithm is described and extended
+in the 2002 text by Kitaev, Shen and Vyalyi [14]. Indeed, that text actually presents two
+different approaches to the problem. The first approach, described in Section 8.3 of [14], uses
+very similar ideas to the description we have given, with a few technical differences resulting
+in somewhat different behaviour for the algorithm’s running time, and for the length of the
+instruction sequences produced.
+In particular, the algorithm in [14] has a running time
+O(log3+δ(1/ǫ)) and produces an instruction sequence of length O(log3+δ(1/ǫ), where δ can
+be chosen to be any positive real number.
+The second approach, described in Section 13.7 of [14], is quite different in flavour. It
+modifies our setting for the SK theorem and algorithm in two ways: (1) it makes use of
+ancilla qubits, and (2) it constrains the allowed instruction set somewhat, for example,
+to Clifford group gates, together with the Toffoli gate; certain other instruction sets are
+also possible, but not an arbitrary instruction set.
+A variant of Kitaev’s phase estima-
+tion algorithm [15, 13] is used to construct instruction sequences providing exponentially
+accurate conditional phase shifts.
+Standard constructions (e.g. [2]), together with these
+phase shift gates, can then be used to approximate the desired gates.
+The running time
+for this approach is O(log2(1/ǫ) log(log(1/ǫ))), and the length of the instruction sequence is
+O(log2(1/ǫ) log(log(1/ǫ))). This approach also has the advantage of being easily parallelizable,
+when acting on multiple qubits.
+A non-constructive approach to the SK theorem was taken by Harrow, Recht and Chuang
+in [9], based on Harrow’s undergraduate thesis [10] and papers by Arnold and Krylov [1],
+
+
+===== PDF PAGE 14 =====
+
+14
+The Solovay-Kitaev algorithm . . .
+
+and by Lubotsky, Phillips and Sarnak [17, 18] (c.f. [6]). In particular, [9] proves that for
+a suitable choice of instruction set, an approximation of accuracy ǫ may be achieved using
+a sequence of O(log(1/ǫ)) instructions. It does not yet seem to be well understood exactly
+which instruction sets achieve such a fast rate of convergence. Furthermore, [9] describe a
+simple volume argument establishing that, up to a constant factor, it is not possible to obtain
+shorter approximating sequences, and so this result is optimal. However, they do not provide
+a constructive means of efficiently finding these short instruction sequences.
+We conclude by noting two papers that, while not directly concerned with the SK theorem
+or algorithm, are likely of interest to anyone interested in quantum compilation. The first is a
+paper by Freedman, Kitaev, and Lurie [5], who develop some general conditions under which
+a subset G of a semisimple Lie group G must generate a dense subset of G. In particular, they
+introduce a natural family of metrics defined for any semisimple Lie group G, and show that
+there is a universal constant c, independent of G, so that provided all points in G are within
+a distance c of G, then G must generate a dense subset of G. Roughly speaking, provided G
+“fills” G sufficiently well, it is guaranteed to generate a dense subset of G.
+The second paper of interest is by Fowler [4], who investigates the feasibility of compil-
+ing Shor’s algorithm into fault-tolerant form using a search technique that, while while not
+“efficient” in the sense of the SK algorithm, in practice seems to yield promising results.
+
+7
+Conclusion
+
+The Solovay-Kitaev theorem and algorithm are fundamental results in the theory of quan-
+tum computation, and it seems likely that variants of these results will be used in future
+implementations of quantum computers to compile quantum algorithms such as Shor’s into a
+fault-tolerant form. The discussion of these results in the present review paper has been ped-
+agogical, aimed at a formulation that brings out the key ideas, rather than being optimized
+for accuracy and efficiency. It is an interesting open problem to determine the extent to which
+these constructions can be improved, perhaps even developing a version of the Solovay-Kitaev
+algorithm achieving optimal or near-optimal accuracy and efficiency.
+
+Acknowledgments
+
+We thank Mike Freedman, Aram Harrow, and Alexei Kitaev for enlightening discussions
+about the Solovay-Kitaev theorem and algorithm, and to Mark de Burgh, Mark Dowling, and
+Yeong Cherng Liang for helpful comments on a draft of the paper.
+
+1. V. I. Arnold and A. L. Krylov. Soviet Math. Dokl., 4:1, 1962.
+2. A. Barenco, C. H. Bennett, R. Cleve, D. P. DiVincenzo, N. Margolus, P. Shor, T. Sleator, J. A.
+Smolin, and H. Weinfurter. Elementary gates for quantum computation. Phys. Rev. A, 52:3457–
+3467, 1995. arXiv:quant-ph/9503016.
+3. E. Bernstein and U. Vazirani. Quantum complexity theory. SIAM J. Comp., 26(5):1411–1473,
+1997. arXiv:quant-ph/9701001.
+4. A. G. Fowler. Constructing arbitrary single-qubit fault-tolerant gates. arXiv:quant-ph/0411206,
+2004.
+5. M. Freedman, A. Kitaev, and J. Lurie.
+Diameters of homogeneous spaces.
+arXiv:quant-
+ph/0209113, 2002.
+6. A. Gamburd, D. Jakobson, and P. Sarnak. Spectra of elements in the group ring of su(2). J. Eur.
+math. Soc., 1(1):51–85, 1999.
+
+
+===== PDF PAGE 15 =====
+
+Christopher M. Dawson and Michael A. Nielsen. . .
+15
+
+7. Lov K. Grover. A fast quantum mechanical algorithm for database search. In 28th ACM Sympo-
+sium on Theory of Computation, page 212, New York, 1996. Association for Computing Machinery.
+8. Lov K. Grover. Quantum mechanics helps in searching for a needle in a haystack. Phys. Rev.
+Lett., 79(2):325, 1997. arXiv:quant-ph/9706033.
+9. A. Harrow, B. Recht, and I. L. Chuang.
+Efficient discrete approximations of quantum gates.
+J. Math. Phys., 43:4445, 2002. arXiv:quant-ph/0111031.
+10. A. W. Harrow. Quantum compiling. MIT undergraduate thesis, 2001.
+11. R. A. Horn and C. R. Johnson. Topics in matrix analysis. Cambridge University Press, Cambridge,
+1991.
+12. A. Y. Kitaev.
+Quantum computations: algorithms and error correction.
+Russ. Math. Surv.,
+52(6):1191–1249, 1997.
+13. A. Y. Kitaev. Quantum error correction with imperfect gates. In A. S. Holevo O. Hirota and
+C. M. Caves, editors, Quantum Communication, Computing, and Measurement, pages 181–188,
+New York, 1997. Plenum Press.
+14. A. Y. Kitaev, A. H. Shen, and M. N. Vyalyi. Classical and quantum computation, volume 47 of
+Graduate Studies in Mathematics. American Mathematical Society, Providence, Rhode Island,
+2002.
+15. A. Yu. Kitaev.
+Quantum measurements and the Abelian stabilizer problem.
+arXiv:quant-
+ph/9511026,, 1995.
+16. D. E. Knuth. Computer science and its relation to mathematics. Amer. Math. Month., 81(4),
+April 1974.
+17. A. Lubotsky, R. Phillips, and P. Sarnak. Hecke operators and distributing points on the sphere i.
+I. Comm. Pure Appl. Math., 39:S149–S186, 1986.
+18. A. Lubotsky, R. Phillips, and P. Sarnak. Hecke operators and distributing points on the sphere
+ii. I. Comm. Pure Appl. Math., 40:401–420, 1987.
+19. M. A. Nielsen and I. L. Chuang. Quantum computation and quantum information. Cambridge
+University Press, Cambridge, 2000.
+20. J. Preskill.
+Reliable quantum computers.
+Proc. Roy. Soc. A: Math., Phys. and Eng.,
+454(1969):385–410, 1998.
+21. W. Rossmann. Lie Groups: An Introduction Through Linear Groups. Oxford University Press,
+Oxford, 2002.
+22. P. W. Shor. Algorithms for quantum computation: discrete logarithms and factoring. In Proceed-
+ings, 35th Annual Symposium on Fundamentals of Computer Science, Los Alamitos, 1994. IEEE
+Press.
+23. P. W. Shor.
+Polynomial-time algorithms for prime factorization and discrete logarithms on a
+quantum computer. SIAM J. Comp., 26(5):1484–1509, 1997.
+

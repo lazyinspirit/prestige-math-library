@@ -1,0 +1,598 @@
+[
+  {
+    "order": 2226,
+    "id": "quantum-phase-estimation",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Quantum Phase Estimation",
+    "companion": "quantum-phase-estimation-examples",
+    "requires": [
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "quantum-fourier-transform-circuits",
+      "the-complex-exponential-and-eulers-formula",
+      "field-extensions-and-the-complex-numbers",
+      "registers-tensor-products-and-partial-trace",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "controlled-gates-phase-and-entanglement",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "measurements-povms-and-instruments",
+      "finite-fourier-analysis-and-the-fast-fourier-transform",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "lem-qa-phase-estimation-geometric-sum",
+        "kind": "lemma",
+        "title": "Finite geometric sum for phase-estimation amplitudes",
+        "statement": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+        "deps": [
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "def-complex-integer-powers",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-induction-principle",
+          "def-canonical-natural",
+          "def-complex-exponential",
+          "thm-kernel-and-fibres-of-complex-exponential"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "induction",
+        "dependency_level": 0,
+        "axiom_use": "None; the proof uses finite sums, recursion, and field laws."
+      },
+      {
+        "id": "lem-qa-phase-estimation-sine-chord-bounds",
+        "kind": "lemma",
+        "title": "Sine chord and linear bounds",
+        "statement": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+        "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-sine-and-cosine-derivatives",
+          "cor-mean-value-theorem",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "thm-algebra-of-derivatives",
+          "def-derivative"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "None; the proof uses calculus on compact real intervals and no choice."
+      },
+      {
+        "id": "def-qa-circular-phase-distance",
+        "kind": "definition",
+        "title": "Circular phase distance modulo one",
+        "statement": "For a real $x\\in[-1,1]$, define its circular distance to the nearest integer by\n$$d_{\\mathbb T}(x):=\\min\\{|x|,\\,1-|x|\\}.$$\nHere $|x|$ is the real absolute value and $\\min$ is the minimum of the displayed finite set ([[def-real-order]], [[def-max-min]]); existence of this finite minimum follows from [[lem-finite-set-has-max]]. Both entries lie in $[0,1]$, so the value lies in $[0,1/2]$. If $|x|\\le1/2$, the nearest integer is $0$; if $x>1/2$, it is $1$; if $x<-1/2$, it is $-1$, so the formula is the distance to the nearest integer. For phases $\\theta,\\phi\\in[0,1)$, their circular distance is $d_{\\mathbb T}(\\theta-\\phi)$; the difference belongs to $(-1,1)$, the stated domain.",
+        "deps": [
+          "def-max-min",
+          "def-real-order",
+          "lem-finite-set-has-max"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "axiom_use": "None; this is a finite minimum of two real numbers."
+      },
+      {
+        "id": "def-qa-eigenphase-estimation-model",
+        "kind": "definition",
+        "title": "Eigenphase estimation access model",
+        "statement": "Let $H$ be a finite-dimensional complex inner-product space, $U:H\\to H$ a unitary, and $\\psi\\in H$ a unit vector with a promised phase $\\theta\\in[0,1)$ such that\n$$U\\psi=\\exp(2\\pi i\\theta)\\psi.$$\nFor an integer $m\\ge1$, let $Q=2^m$. The phase register is $(\\mathbb C^2)^{\\otimes m}$ with ordered computational basis indexed big-endian by\n$x=\\sum_{k=0}^{m-1}b_k2^{m-1-k}$, where $b_k\\in\\{0,1\\}$ ([[def-qc-register-and-computational-basis]], [[def-qc-ordered-bitstring-encoding]]).\nThus the wire of weight $2^j$ is $q_{m-1-j}$.\n\nThere are distinct forward-access options:\n\n1. **Controlled-power access.** The model explicitly supplies one controlled $U^{2^j}$ operation for each $j=0,\\ldots,m-1$. Each use is counted as one controlled-power query; an implementation's ordinary gate cost is recorded separately.\n2. **Single controlled-unitary access.** The model supplies calls to $C(U)=\\operatorname{diag}(I_H,U)$ in the control-first order of [[def-qc-controlled-unitary-access]]. A controlled $U^{2^j}$ may be implemented by $2^j$ sequential calls to $C(U)$; those calls are charged individually.\n\nOptional **controlled inverse-power access** is a separate capability that explicitly supplies $C(U^{-2^j})$ for each required $j$. It is not implied by either forward option. It is needed only by a consuming procedure that reverses the controlled-power portion of a coherent QPE prefix. Reversing the inverse-QFT gate list does not use $U^{-1}$.\n\nFinite ordered-register syntax is specified by [[def-qc-circuit-syntax-and-register-order]], gate action by [[def-qc-circuit-denotational-semantics]], and projective measurement outcomes by [[def-qc-projective-measurement]]. The definition is an access-model promise: it does not assert that the supplied controlled powers have an efficient construction or that $\\theta$ has an exact $m$-bit expansion.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-pure-state-and-ray",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-projective-measurement",
+          "def-qc-tensor-register-and-permutation",
+          "def-complex-exponential"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "axiom_use": "None; the definition fixes finite-dimensional input data and access capabilities."
+      },
+      {
+        "id": "alg-qa-quantum-phase-estimation",
+        "kind": "algorithm",
+        "title": "Quantum phase estimation",
+        "statement": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified L\u00fcders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+        "deps": [
+          "def-qa-eigenphase-estimation-model",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-controlled-unitary-access",
+          "alg-qa-exact-binary-qft-circuit",
+          "thm-qa-exact-binary-qft-circuit-correct",
+          "def-qc-circuit-denotational-semantics",
+          "def-qa-cyclic-quantum-fourier-transform",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-projective-measurement",
+          "def-non-negative-and-positive-operator",
+          "def-qc-povm-and-outcome-law",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "def-qc-completely-positive-map",
+          "def-qc-instrument-and-conditional-state"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "axiom_use": "None; the procedure uses finite registers and supplied unitary access."
+      },
+      {
+        "id": "lem-qa-phase-estimation-outcome-kernel",
+        "kind": "lemma",
+        "title": "Phase-estimation finite outcome law",
+        "statement": "Let $m\\ge1$, $Q=2^m$, and let the input be an eigenvector with\n$U\\psi=\\exp(2\\pi i\\theta)\\psi$, where $\\theta\\in[0,1)$.\nFor each $y\\in\\{0,\\ldots,Q-1\\}$, the probability of measuring $y$ in the algorithm of [[alg-qa-quantum-phase-estimation]] is\n$$P_\\theta(y)=Q^{-2}\\left|\\sum_{j=0}^{Q-1}\\exp\\!\\left(2\\pi i j(\\theta-y/Q)\\right)\\right|^2.$$\nThus the finite outcome kernel is defined at every phase, including $Q\\theta\\in\\mathbb Z$; no quotient with a zero denominator is needed in this formula.",
+        "deps": [
+          "alg-qa-quantum-phase-estimation",
+          "def-qa-eigenphase-estimation-model",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-dirac-notation-coordinate-identity",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-projective-measurement",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qa-exact-binary-qft-circuit-correct",
+          "lem-qa-phase-estimation-geometric-sum",
+          "def-qc-circuit-denotational-semantics",
+          "def-qa-cyclic-quantum-fourier-transform",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-qc-povm-and-outcome-law",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-induction-principle",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-complex-numbers-form-a-field",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 13,
+        "axiom_use": "None; the normalization check is a finite sum and the measurement law is finite-dimensional."
+      },
+      {
+        "id": "thm-qa-phase-estimation-access-cost",
+        "kind": "theorem",
+        "title": "Phase-estimation query and gate costs",
+        "statement": "Let $m\\ge1$ and $Q=2^m$. Count costs in the ideal continuous-rotation submodel, where each exact controlled phase used by the binary QFT is one gate. If the controlled powers $C(U^{2^j})$, $0\\le j<m$, are supplied as one query each, one run uses exactly $m$ controlled-power queries. If the only oracle is $C(U)$, the repeated implementation uses exactly $Q-1$ controlled-$U$ queries. If the supplied controlled-power circuits have ordinary gate counts $C_j$, the unitary gate count after the eigenstate input is provided is\n$$\\sum_{j=0}^{m-1}C_j+2m+\\frac{m(m-1)}2+\\left\\lfloor\\frac m2\\right\\rfloor.$$\nThe final register measurement reads $m$ bits and is not included in this unitary gate count. No cost-free power construction, fixed finite gate alphabet, uniform family, or state-preparation bound is asserted.",
+        "deps": [
+          "alg-qa-quantum-phase-estimation",
+          "def-qa-eigenphase-estimation-model",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-controlled-unitary-access",
+          "thm-qa-exact-binary-qft-gate-count",
+          "def-nat-addition",
+          "def-nat-finite-sum-and-product",
+          "def-nat-multiplication",
+          "def-nat-power",
+          "lem-nat-add-associative",
+          "lem-nat-add-commutative",
+          "lem-nat-mult-identity",
+          "thm-induction-principle"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 13,
+        "axiom_use": "None; the counts are finite sums of the explicitly supplied operations."
+      },
+      {
+        "id": "lem-qa-phase-estimation-nearest-grid-bound",
+        "kind": "lemma",
+        "title": "Nearest-grid probability in phase estimation",
+        "statement": "For every $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$, a nearest grid label $y\\in\\{0,\\ldots,Q-1\\}$, minimizing $d_{\\mathbb T}(\\theta-y/Q)$, exists. Every nearest label satisfies\n$$P_\\theta(y)\\ge\\frac4{\\pi^2}.$$\nIn particular, this holds at ties between adjacent labels and at the wrap-around between $Q-1$ and $0$.",
+        "deps": [
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "lem-qa-phase-estimation-sine-chord-bounds",
+          "def-qa-circular-phase-distance",
+          "lem-integer-part",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 14,
+        "axiom_use": "None; the nearest label is constructed using the integer-part lemma."
+      },
+      {
+        "id": "lem-qa-phase-estimation-tail-bound",
+        "kind": "lemma",
+        "title": "Circular-distance tail bound in phase estimation",
+        "statement": "Let $m\\ge1$, $Q=2^m$, $\\theta\\in[0,1)$, $\\eta\\in\\mathbb R$, and\n$K=\\lfloor Q\\eta\\rfloor\\ge2$. With\n$d_{\\mathbb T}(\\theta-y/Q)$ as in [[def-qa-circular-phase-distance]],\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$",
+        "deps": [
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "lem-qa-phase-estimation-sine-chord-bounds",
+          "def-qa-circular-phase-distance",
+          "lem-integer-part",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 14,
+        "axiom_use": "None; the annulus count and series estimate are finite."
+      },
+      {
+        "id": "thm-qa-phase-estimation-exact-grid",
+        "kind": "theorem",
+        "title": "Exact phase recovery on the QPE grid",
+        "statement": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. If $Q\\theta=t\\in\\mathbb Z$, then $t\\in\\{0,\\ldots,Q-1\\}$, phase estimation returns $y=t$ with probability $1$, and every other output has probability $0$.",
+        "deps": [
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 14,
+        "axiom_use": "None; the proof uses finite cyclic-character orthogonality."
+      },
+      {
+        "id": "thm-qa-phase-estimation-superposition-law",
+        "kind": "theorem",
+        "title": "Phase estimation on a superposition of eigenspaces",
+        "statement": "Let $U$ be a unitary on a nonzero finite-dimensional complex inner-product space $H$. Let $\\Theta\\subset[0,1)$ be its finite set of distinct eigenphases, and let $\\Pi_\\theta$ denote the orthogonal projection onto the full eigenspace for eigenvalue $\\exp(2\\pi i\\theta)$; degeneracies are grouped in one projection. For $Q=2^m$, $m\\ge1$, define\n$$a_y(\\theta):=Q^{-1}\\sum_{j=0}^{Q-1}\\exp(2\\pi ij(\\theta-y/Q)),\\qquad K_y:=\\sum_{\\theta\\in\\Theta}a_y(\\theta)\\Pi_\\theta.$$\nFor a unit input $\\psi=\\sum_{\\theta\\in\\Theta}\\Pi_\\theta\\psi$, the unnormalized branch vector is $K_y\\psi$ and\n$$p_y=\\|K_y\\psi\\|^2=\\sum_{\\theta\\in\\Theta}|a_y(\\theta)|^2\\|\\Pi_\\theta\\psi\\|^2.$$\nIf $p_y>0$, the conditional vector is $K_y\\psi/\\sqrt{p_y}$; if $p_y=0$, no conditional vector is assigned. The outcome law is an eigenspace-weighted mixture, while the conditional branch can retain coherent cross terms between distinct eigenspaces.\n\nAfter discarding the phase register, the induced system instrument has branch maps $\\mathcal I_y(X)=K_yXK_y^\\dagger$ for operators $X$ on $H$. More generally, for a density operator $\\rho$ on $H\\otimes R$, where $R$ is a nonzero finite-dimensional reference space, the unnormalized reference-preserving branch after measuring and discarding the phase register is\n$$\\mathcal I_y^{(R)}(\\rho)=(K_y\\otimes I_R)\\rho(K_y^\\dagger\\otimes I_R).$$\nIts probability is $\\operatorname{tr}\\mathcal I_y^{(R)}(\\rho)$, and the conditional state is $\\mathcal I_y^{(R)}(\\rho)/\\operatorname{tr}\\mathcal I_y^{(R)}(\\rho)$ exactly when that probability is positive. With $w_\\theta=\\operatorname{tr}((\\Pi_\\theta\\otimes I_R)\\rho)$, the reference outcome law is $p_y=\\sum_{\\theta\\in\\Theta}|a_y(\\theta)|^2w_\\theta$, where $w_\\theta\\ge0$ and $\\sum_\\theta w_\\theta=1$. If every eigenphase is on the $Q$-grid, then $K_y=\\Pi_{y/Q}$ when $y/Q\\in\\Theta$ and $K_y=0$ otherwise, so the instrument branch is $X\\mapsto K_yXK_y^\\dagger$. If any eigenphase is off-grid, its nonzero coefficient has modulus less than one in every $K_y$, so $K_y^\\dagger K_y$ is not a projection and the induced instrument is not the spectral projection instrument.",
+        "deps": [
+          "alg-qa-quantum-phase-estimation",
+          "def-qa-eigenphase-estimation-model",
+          "def-qc-controlled-unitary-access",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-dirac-notation-coordinate-identity",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-projective-measurement",
+          "thm-qc-projective-measurement-outcome-law",
+          "def-qc-circuit-denotational-semantics",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "thm-qc-tensor-map-composition-and-adjoint",
+          "lem-qc-finite-ancilla-amplification-is-block-map",
+          "def-qc-instrument-and-conditional-state",
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "def-qa-cyclic-quantum-fourier-transform",
+          "thm-qa-exact-binary-qft-circuit-correct",
+          "def-qc-density-operator",
+          "def-qc-partial-trace",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-completely-positive-map",
+          "def-non-negative-and-positive-operator",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "def-orthogonal-projection",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "prop-trace-is-linear",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-finite-dimensional-isometry-characterisations",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 14,
+        "axiom_use": "None; the proof uses finite-dimensional spectral decomposition and finite sums."
+      },
+      {
+        "id": "thm-qa-phase-estimation-success-and-tail",
+        "kind": "theorem",
+        "title": "Phase-estimation nearest-grid and tail bounds",
+        "statement": "Let $m\\ge1$, $Q=2^m$, and $\\theta\\in[0,1)$. Every nearest grid label $y$ has $P_\\theta(y)\\ge4/\\pi^2$. For any $\\eta\\in\\mathbb R$ with $K=\\lfloor Q\\eta\\rfloor\\ge2$,\n$$\\Pr_{y\\sim P_\\theta}\\!\\left[d_{\\mathbb T}(\\theta-y/Q)\\ge\\eta\\right]\\le\\frac1{2(K-1)}.$$\nIf $Q\\theta$ is an integer $t$, then $P_\\theta(t)=1$ and all other labels have probability $0$.",
+        "deps": [
+          "lem-qa-phase-estimation-outcome-kernel",
+          "thm-qa-phase-estimation-exact-grid",
+          "lem-qa-phase-estimation-nearest-grid-bound",
+          "lem-qa-phase-estimation-tail-bound",
+          "def-qa-circular-phase-distance"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 15,
+        "axiom_use": "None; this theorem combines finite probability bounds."
+      }
+    ]
+  },
+  {
+    "order": 2227,
+    "id": "quantum-phase-estimation-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Quantum Phase Estimation \u2014 Examples",
+    "companion": "quantum-phase-estimation",
+    "requires": [
+      "quantum-phase-estimation"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-exact-phase-estimation",
+        "kind": "example",
+        "title": "Exact estimation of a binary phase",
+        "statement": "Take a valid eigenphase-estimation input with $m=3$ and eigenphase\n$\\theta=5/8$. Compute the complete output law and the returned estimate.",
+        "deps": [
+          "alg-qa-quantum-phase-estimation",
+          "lem-qa-phase-estimation-outcome-kernel",
+          "thm-qa-phase-estimation-exact-grid"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 15
+      },
+      {
+        "id": "ex-qa-phase-estimation-nearest-grid-and-tail",
+        "kind": "example",
+        "title": "Nearest-grid and tail estimates in phase estimation",
+        "statement": "Take a valid eigenphase-estimation input with $m=3$, $Q=8$, and\n$\\theta=3/16$. Compute the nearest-label probabilities and the exact circular\ntail probability at threshold $\\eta=1/4$.",
+        "deps": [
+          "thm-qa-phase-estimation-success-and-tail",
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "def-qa-circular-phase-distance",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 16
+      }
+    ]
+  }
+]

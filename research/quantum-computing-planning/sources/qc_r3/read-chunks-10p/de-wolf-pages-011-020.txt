@@ -1,0 +1,583 @@
+===== PDF PAGE 11 =====
+
+B Some other Useful Math and CS
+199
+B.1
+Some notation, equalities and inequalities . . . . . . . . . . . . . . . . . . . . . . . . 199
+B.2
+Algorithms and probabilities
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 200
+
+C Hints for Exercises
+203
+
+xi
+
+
+===== PDF PAGE 12 =====
+
+xii
+
+
+===== PDF PAGE 13 =====
+
+Chapter 1
+
+Quantum Computing
+
+1.1
+Introduction
+
+Today’s computers—both in theory (Turing machines) and practice (PCs, HPCs, laptops, tablets,
+smartphones, . . . )—are based on classical physics. They are limited by locality (operations have
+only local effects) and by the classical fact that systems can be in only one state at a time. However,
+modern quantum physics tells us that the world behaves quite differently. A quantum system can
+be in a superposition of many different states at the same time, and can exhibit interference effects
+during the course of its evolution. Moreover, spatially separated quantum systems may be entangled
+with each other and operations may have “non-local” effects because of this (though they won’t
+signal faster than the speed of light).
+Quantum computation is the field that investigates the computational power and other proper-
+ties of computers based on quantum-mechanical principles. It combines two of the most important
+strands of 20th-century science: quantum mechanics (developed by Planck, Einstein, Bohr, Heisen-
+berg, Schr¨odinger and others in the period 1900–1925) and computer science (whose birth may be
+dated to Turing’s 1936 paper [251]). An important objective is to find quantum algorithms that
+are significantly faster than any classical algorithm solving the same problem.
+Quantum computation started in the early 1980s with suggestions for analog quantum comput-
+ers by Yuri Manin [195] (and appendix of [196]), Richard Feynman [116, 117], and Paul Benioff [49],
+and reached more digital ground when in 1985 David Deutsch defined the universal quantum Tur-
+ing machine [102]. See Preskill [211] for more on this early history. The following years saw only
+sparse activity, notably the development of the first algorithms by Deutsch and Jozsa [104] and by
+Simon [243], and the development of quantum complexity theory by Bernstein and Vazirani [55].
+However, interest in the field increased tremendously after Peter Shor’s very surprising discovery
+of efficient quantum algorithms for the problems of integer factorization and discrete logarithms
+in 1994 [241], which was inspired by Simon’s work. Since most of classical cryptography is based
+on the assumption that these two problems are computationally hard, the ability to actually build
+and use a quantum computer would allow us to break most current classical cryptographic systems,
+notably the RSA system [223, 224]. In contrast, a quantum form of cryptography due to Bennett
+and Brassard [53] is unbreakable even by quantum computers: it is information-theoretically secure
+under some (idealizing) assumptions.
+Here are three reasons to study quantum computers, from practical to more philosophical:
+
+1. The process of miniaturization that has made current classical computers so powerful and
+
+1
+
+
+===== PDF PAGE 14 =====
+
+cheap, has already reached micro-levels where quantum effects occur. Chipmakers tend to go
+to great lengths to suppress those quantum effects, forcing their bits and logical operations
+to behave classically, but instead one might also try to work with them, enabling further
+miniaturization.
+
+2. Making use of quantum effects allows one to speed up certain computations enormously
+(sometimes exponentially), and even enables some things that are impossible for classical
+computers. The main purpose of these lecture notes is to explain these advantages of quantum
+computing (algorithms, crypto, etc.) in detail.
+
+3. Finally, one might say that the main goal of theoretical computer science is to “study the
+power and limitations of the strongest-possible computational devices that Nature allows
+us.” Since our current understanding of Nature is quantum mechanical, theoretical computer
+science should arguably be studying the power of quantum computers, not classical ones.
+
+Before limiting ourselves to theory, let us say a few words about practice: to what extent will large
+quantum computers ever be built?
+At this point in time, it is just too early to tell.
+The first
+small 2-qubit quantum computer was built in 1997 and in 2001 a 5-qubit quantum computer was
+used to successfully factor the number 15 [254]. Since then, experimental progress on a number of
+different technologies has been steady but slow. The most advanced implementations currently use
+superconducting qubits and trapped-ion qubits, and typically act on 100–200 qubits. The arguably
+first actual quantum computation that is beyond current-day classical computers, was Google’s
+“quantum supremacy” experiment [31]. This performs a complicated but rather useless sampling
+task on 53 superconducting qubits. This task (especially in later versions of the experiment with
+more qubits) appears to be no longer simulatable in a reasonable amount of the time on even the
+largest existing classical supercomputer.
+The practical problems facing physical realizations of quantum computers seem formidable. The
+problems of noise and decoherence have to some extent been solved in theory by the discovery of
+quantum error-correcting codes and fault-tolerant computing (see, e.g., Chapter 21 in these notes).
+Experiments with small fault-tolerant quantum computations have also been done in the last few
+years, and they behave as predicted, but scaling this up to thousands or millions of qubits is an
+enormous task.
+On the other hand, we should realize that the field of physical realization of quantum computing
+is still in its infancy and that classical computing had to face and solve many formidable technical
+problems as well in the course of many decades—interestingly, often these problems were even
+of the same nature as those now faced by quantum computing (e.g., noise-reduction and error-
+correction). Moreover, while the difficulties facing the implementation of a full quantum computer
+may seem daunting, more limited applications involving quantum communication have already been
+implemented with some success, for example teleportation (which is the process of sending qubits
+using entanglement and classical communication), and versions of BB84 quantum key distribution
+are nowadays even commercially available.
+Even if the theory of quantum computing never materializes to a real large-scale physical com-
+puter, quantum-mechanical computers are still an extremely interesting idea which will bear fruit
+in other areas than practical fast computing. On the physics side, it may improve our understand-
+ing of quantum mechanics. The emerging theories of entanglement and of Hamiltonian complexity
+have already done this to some extent.
+On the computer science side, the theory of quantum
+
+2
+
+
+===== PDF PAGE 15 =====
+
+computation generalizes and enriches classical complexity theory and may help resolve some of its
+problems (see Section 15.3 for an example).
+
+1.2
+Quantum mechanics
+
+Here we give a brief and abstract introduction to quantum mechanics. In short: a quantum state is
+a superposition of classical states, written as a vector of amplitudes, to which we can apply either
+a measurement or a unitary operation. For the required linear algebra we refer to Appendix A.
+
+1.2.1
+Superposition
+
+Consider some physical system that can be in N different, mutually exclusive classical states.
+Because we will typically start counting from 0 in these notes, we call these states |0⟩, |1⟩, . . . , |N−1⟩.
+Roughly, by a “classical” state we mean a state in which the system can be found if we observe it.
+A pure quantum state (usually just called state) |ϕ⟩is a superposition of classical states, written
+
+|ϕ⟩= α0|0⟩+ α1|1⟩+ · · · + αN−1|N −1⟩.
+
+Here αi is a complex number that is called the amplitude of |i⟩in |ϕ⟩. Intuitively, a system in
+quantum state |ϕ⟩is “in all classical states at the same time,” each state having a certain amplitude.
+It is in state |0⟩with amplitude α0, in state |1⟩with amplitude α1, and so on. Mathematically,
+the states |0⟩, . . . , |N −1⟩form an orthonormal basis of an N-dimensional Hilbert space (i.e., an
+N-dimensional vector space equipped with an inner product). A quantum state |ϕ⟩is a vector in
+this space, usually written as an N-dimensional column vector of its amplitudes:
+
+|ϕ⟩=
+
+
+
+
+
+
+α0
+...
+αN−1
+
+
+
+
+.
+
+Such a vector is sometimes called a “ket.” Its conjugate transpose is the following row vector,
+sometimes called a “bra”:
+
+⟨ϕ| =
+�
+α∗
+0, . . . , α∗
+N−1
+�
+.
+
+The reason for this terminology (often called “Dirac notation” after Paul Dirac) is that an inner
+product ⟨ϕ|ψ⟩between two states corresponds to the dot product between a bra and a ket vector
+(“bracket”): ⟨ϕ|ψ⟩= ⟨ϕ| · |ψ⟩.
+We can combine different Hilbert spaces using tensor product: if |0⟩, . . . , |N −1⟩are an or-
+thonormal basis of space HA and |0⟩, . . . , |M −1⟩are an orthonormal basis of space HB, then the
+tensor product space H = HA ⊗HB is an NM-dimensional space spanned by the set of states
+{|i⟩⊗|j⟩| i ∈{0, . . . , N −1}, j ∈{0, . . . , M −1}}.
+An arbitrary state in H is of the form
+�N−1
+i=0
+�M−1
+j=0 αij|i⟩⊗|j⟩. Such a state is called bipartite. Similarly we can have tripartite states
+that “live” in a Hilbert space that is the tensor product of three smaller Hilbert spaces, etc.
+There are two things we can do with a quantum state: measure it or let it evolve unitarily
+without measuring it. We will deal with measurement first.
+
+3
+
+
+===== PDF PAGE 16 =====
+
+1.2.2
+Measurement
+
+Measurement in the computational basis
+
+Suppose we measure state |ϕ⟩. We cannot “see” a superposition itself, but only classical states.
+Accordingly, if we measure state |ϕ⟩we will see one and only one classical state |j⟩. Which specific
+|j⟩will we see?
+This is not determined in advance; the only thing we can say is that we will
+see state |j⟩with probability |αj|2, which is the squared norm of the corresponding amplitude αj.
+This is known as “Born’s rule.” Accordingly, observing a quantum state induces a probability
+distribution on the classical states, given by the squared norms of the amplitudes. This implies
+�N−1
+j=0 |αj|2 = 1, so the vector of amplitudes has (Euclidean) norm 1. If we measure |ϕ⟩and get
+outcome j as a result1, then |ϕ⟩itself has “disappeared,” and all that is left is |j⟩. In other words,
+observing |ϕ⟩“collapses” the quantum superposition |ϕ⟩to the classical state |j⟩that we saw, and
+all “information” that might have been contained in the amplitudes αi is gone. Note that the
+probabilities of the various measurement outcomes are exactly the same when we measure the state
+|ϕ⟩or when we measure the state eiθ|ϕ⟩; because of this we sometimes say that the “global phase”
+eiθ has no physical significance.
+
+Projective measurement
+
+For most of the topics in these notes, the above “measurement in the computational (or standard)
+basis” suffices. However, somewhat more general kinds of measurement than the above are possible
+and sometimes useful. The remainder of this subsection may be skipped on a first reading, but will
+become more relevant in the later parts of these notes, starting from Chapter 15.
+A projective measurement on some space, with m possible outcomes, is a collection of projectors
+P1, . . . , Pm that all act on that same space and that sum to identity, �m
+j=1 Pj = I.2 These projectors
+are then pairwise orthogonal, meaning that PiPj = 0 if i ̸= j. The projector Pj projects on some
+subspace Vj of the total Hilbert space V , and every state |ϕ⟩∈V can be decomposed in a unique
+way as |ϕ⟩= �m
+j=1 |ϕj⟩, with |ϕj⟩= Pj|ϕ⟩∈Vj.
+Because the projectors are orthogonal, the
+subspaces Vj are orthogonal as well, as are the states |ϕj⟩. When we apply this measurement to
+the pure state |ϕ⟩, then we will get outcome j with probability ∥|ϕj⟩∥2 = Tr(Pj|ϕ⟩⟨ϕ|) = ⟨ϕ|Pj|ϕ⟩
+and the measured state will then “collapse” to the new state |ϕj⟩/∥|ϕj⟩∥= Pj|ϕ⟩/∥Pj|ϕ⟩∥.3 The
+probabilities sum to 1 thanks to our assumption that �m
+j=1 Pj = I and the fact that trace is a
+linear function:
+
+m
+�
+
+j=1
+Tr(Pj|ϕ⟩⟨ϕ|) = Tr((
+
+m
+�
+
+j=1
+Pj)|ϕ⟩⟨ϕ|) = Tr(|ϕ⟩⟨ϕ|) = ⟨ϕ|ϕ⟩= 1.
+
+Note carefully that we cannot choose which Pj will be applied to the state but can only give a
+probability distribution. However, if the state |ϕ⟩that we measure lies fully within one of the
+subspaces Vj, then the measurement outcome will be that j with certainty.
+For example, a measurement in the computational basis on an N-dimensional state is the specific
+projective measurement where m = N and Pj = |j⟩⟨j|. That is, Pj projects onto the computational
+
+1Don’t use the ambiguous phrase “we measure j” in this case, since it’s not clear in that phrasing whether |j⟩is
+the state you’re applying the measurement to, or the outcome of the measurement.
+2The m projectors together form one measurement; don’t use the word “measurement” for individual Pjs.
+3Don’t confuse the outcome of the measurement, which is the label j of the projector Pj that was applied, and
+the post-measurement state, which is Pj|ϕ⟩/∥Pj|ϕ⟩∥.
+
+4
+
+
+===== PDF PAGE 17 =====
+
+basis state |j⟩and the corresponding subspace Vj ⊆V is the 1-dimensional subspace spanned by
+|j⟩. Consider the state |ϕ⟩= �N−1
+j=0 αj|j⟩. Note that Pj|ϕ⟩= αj|j⟩, so applying our measurement
+to |ϕ⟩will give outcome j with probability ∥αj|j⟩∥2 = |αj|2, and in that case the state collapses
+to αj|j⟩/∥αj|j⟩∥=
+αj
+|αj||j⟩. The norm-1 factor
+αj
+|αj| may be disregarded because it has no physical
+significance, so we end up with the state |j⟩as we saw before.
+Instead of the standard orthonormal basis, with basis states |0⟩, . . . , |N −1⟩, we may consider
+any other orthonormal basis B of states |ψ0⟩, . . . , |ψN−1⟩, and consider the projective measurement
+defined by the projectors Pj = |ψj⟩⟨ψj|. This is called “measuring in basis B.” Applying this
+measurement to state |ϕ⟩gives outcome j with probability ⟨ϕ|Pj|ϕ⟩= |⟨ϕ|ψj⟩|2. Note that if |ϕ⟩
+equals one of the basis vectors |ψj⟩, then the measurement gives that outcome j with probability 1.
+In the previous two examples the projectors had rank 1 (i.e., project on 1-dimensional sub-
+spaces), but this is not necessary.
+For example, a measurement that distinguishes between |j⟩
+with j < N/2 and |j⟩with j ≥N/2 corresponds to the two projectors P1 = �
+j<N/2 |j⟩⟨j| and
+P2 = �
+j≥N/2 |j⟩⟨j|, each of rank N/2 (assume N is even). Applying this measurement to the state
+
+|ϕ⟩=
+1
+√
+
+3|0⟩+
+�
+
+2
+3|N −1⟩gives outcome 1 with probability ∥P1|ϕ⟩∥2 = 1/3, in which case the
+
+state collapses to |0⟩. It gives outcome 2 with probability ∥P2|ϕ⟩∥2 = 2/3, the state then collapses
+to |N −1⟩.
+
+Observables
+
+A projective measurement with projectors P1, . . . , Pm and associated distinct outcomes λ1, . . . , λm ∈
+R, can be written as one matrix M = �m
+i=1 λiPi, which is called an observable. This is a succinct
+way of writing down the projective measurement in one matrix, and has the added advantage that
+the expected value of the outcome can be easily calculated: if we are measuring a state |ϕ⟩, then
+the probability of outcome λi is ∥Pi|ϕ⟩∥2 = Tr(Pi|ϕ⟩⟨ϕ|), so the expected value of the outcome is
+�m
+i=1 λiTr(Pi|ϕ⟩⟨ϕ|) = Tr(�m
+i=1 λiPi|ϕ⟩⟨ϕ|) = Tr(M|ϕ⟩⟨ϕ|). Note that M is Hermitian: M = M∗.
+Conversely, since every Hermitian M has a spectral decomposition M = �m
+i=1 λiPi, there is a direct
+correspondence between observables and Hermitian matrices.
+The Pauli matrices I, X, Y, Z (see Appendix A.9) are examples of 2-dimensional observables,
+with eigenvalues ±1. For example, Z = |0⟩⟨0| −|1⟩⟨1| corresponds to measurement in the compu-
+tational basis (with measurement outcomes +1 and −1 for |0⟩and |1⟩, respectively).
+Suppose we have a bipartite state. An observable A on the first part of the state corresponds
+to an observable A ⊗I on the bipartite state. Similarly, an observable B on the second part of the
+state corresponds to an observable I ⊗B on the bipartite state. Separately measuring observables
+A and B on the two parts of a bipartite state is different from measuring the joint observable
+A ⊗B: the separate measurements give one outcome each, while the joint measurement gives
+only one outcome, and the distribution on the post-measurement state may be different. What is
+true, however, is that the measurement statistics of the product of outcomes is the same as the
+measurement statistics of the outcome of the joint measurement. For example consider the case
+when A = B = Z (these correspond to measurement in the computational basis), and the bipartite
+state is |ϕ⟩=
+1
+√
+
+2(|0⟩⊗|0⟩+ |1⟩⊗|1⟩). With the separate measurements, the outcomes will be
+++ or −−(note that in both cases the product of the two outcomes is +1) and the state |ϕ⟩will
+collapse to either |0⟩⊗|0⟩or |1⟩⊗|1⟩. Yet |ϕ⟩remains undisturbed by a joint measurement with
+±1-valued observable Z ⊗Z, because |ϕ⟩is a +1-eigenstate of Z ⊗Z.
+
+5
+
+
+===== PDF PAGE 18 =====
+
+POVM measurement
+
+If we only care about the final probability distribution on the m outcomes, not about the result-
+ing post-measurement state, then the most general type of measurement we can do is a so-called
+positive-operator-valued measure (POVM). This is specified by m positive semidefinite (psd) ma-
+trices E1, . . . , Em that sum to identity. When measuring a state |ϕ⟩, the probability of outcome
+i is given by Tr(Ei|ϕ⟩⟨ϕ|). A projective measurement is the special case of a POVM where the
+measurement elements Ei are projectors.4
+
+There are situations where a POVM can do things a projective measurement cannot do.5 For
+example, suppose you have a state in a 2-dimensional space, and you know it is either in state |0⟩
+or in state |+⟩=
+1
+√
+
+2(|0⟩+ |1⟩). These two states are not orthogonal, so there is no measurement
+that distinguishes them perfectly. However, there is a POVM measurement that never makes a
+mistake, but sometimes gives another outcome 2, meaning “I don’t know.” That is, you would like
+to do a measurement with three possible outcome: 0, 1, and 2, such that:
+
+• If the state is |0⟩, then you get correct outcome 0 with probability 1/4, and outcome 2 with
+probability 3/4, but never get incorrect outcome 1.
+
+• If the state is |+⟩, then you get correct outcome 1 with probability 1/4, and outcome 2 with
+probability 3/4, but never get incorrect outcome 0.
+
+You cannot achieve this with a projective measurement on the qubit, but the following 3-outcome
+POVM does the job:
+
+E0 = 1
+
+2|−⟩⟨−| (where |−⟩=
+1
+√
+
+2(|0⟩−|1⟩), which is orthogonal to the |+⟩state);
+
+E1 = 1
+
+2|1⟩⟨1| (note that this is orthogonal to the |0⟩state);
+E2 = I −E0 −E1.
+
+You can check that E0, E1, E2 are psd and add up to identity, so they form a valid POVM. None of
+the 3 matrices is a projector. The success probability 1/4 can be improved further, see Exercise 11.
+
+1.2.3
+Unitary evolution
+
+Instead of measuring |ϕ⟩, we can also apply some operation to it, i.e., change the state to some
+
+|ψ⟩= β0|0⟩+ β1|1⟩+ · · · + βN−1|N −1⟩.
+
+Quantum mechanics only allows linear operations to be applied to quantum states in a closed
+system. What this means is: if we view a state like |ϕ⟩as an N-dimensional vector (α0, . . . , αN−1)T ,
+then applying an operation that changes |ϕ⟩to |ψ⟩corresponds to multiplying |ϕ⟩with an N × N
+complex-valued matrix U:
+
+U
+
+
+
+
+
+
+α0
+...
+αN−1
+
+
+
+
+=
+
+
+
+
+
+
+β0
+...
+βN−1
+
+
+
+
+.
+
+4Note that if Ei is a projector, then Tr(Ei|ϕ⟩⟨ϕ|) = Tr(E2
+i |ϕ⟩⟨ϕ|) = Tr(Ei|ϕ⟩⟨ϕ|Ei) = ∥Ei|ϕ⟩∥2, using the fact
+that Ei = E2
+i and the cyclic property of the trace. These equalities can fail if Ei is psd but not a projector.
+5Even though POVMs strictly generalize projective measurements, one can show that every POVM can be “sim-
+ulated” by a projective measurement on a slightly larger space that yields the exact same probability distribution
+over measurement outcomes (this follows from Neumark’s theorem).
+
+6
+
+
+===== PDF PAGE 19 =====
+
+Note that by linearity we have |ψ⟩= U|ϕ⟩= U (�
+i αi|i⟩) = �
+i αiU|i⟩.
+Because measuring |ψ⟩should also give a probability distribution, we have the constraint
+�N−1
+j=0 |βj|2 = 1 on the new state. This implies that the operation U must preserve the norm
+of vectors, and hence must be a unitary transformation (often just called “a unitary”). A matrix
+U is unitary if its inverse U−1 equals its conjugate transpose U∗. This is equivalent to saying that
+U always maps a vector of norm 1 to a vector of norm 1. Because a unitary transformation always
+has an inverse, it follows that any (non-measuring) operation on quantum states must be reversible:
+by applying U−1 we can always “undo” the action of U, and nothing is lost in the process. On the
+other hand, a measurement is clearly non-reversible, because we cannot reconstruct |ϕ⟩from the
+observed classical state |j⟩.
+
+1.3
+Qubits and quantum memory
+
+In classical computation, the unit of information is a bit, which can be 0 or 1. In quantum compu-
+tation, this unit is a quantum bit (qubit), which is a superposition of 0 and 1. Consider a system
+with 2 basis states, call them |0⟩and |1⟩. We identify these basis states with the two orthogonal
+
+vectors
+�1
+0
+
+�
+and
+�0
+1
+
+�
+, respectively. A single qubit can be in any superposition
+
+α0|0⟩+ α1|1⟩, |α0|2 + |α1|2 = 1.
+
+Accordingly, a single qubit “lives” in the vector space C2.
+Similarly we can think of systems of more than 1 qubit, which “live” in the tensor product
+space of several qubit systems. For instance, a 2-qubit system has 4 basis states: |0⟩⊗|0⟩, |0⟩⊗|1⟩,
+|1⟩⊗|0⟩, |1⟩⊗|1⟩. Here for instance |1⟩⊗|0⟩means that the first qubit is in its basis state |1⟩and
+the second qubit is in its basis state |0⟩. We will often abbreviate this to |1⟩|0⟩, |1, 0⟩, or even |10⟩.
+More generally, a register of n qubits has 2n basis states, each of the form |b1⟩⊗|b2⟩⊗. . .⊗|bn⟩,
+with bi ∈{0, 1}. We can abbreviate this to |b1b2 . . . bn⟩. We will often abbreviate 0 . . . 0 to 0n. Since
+bitstrings of length n can be viewed as integers between 0 and 2n −1 (see Appendix B.2), we can
+also write the basis states as numbers |0⟩, |1⟩, |2⟩, . . . , |2n −1⟩. Note that the vector corresponding
+to n-qubit basis state |x⟩is the 2n-dimensional vector that has a 1 at the x-th position and 0s
+elsewhere (here we view x as an integer in {0, . . . , 2n −1} and we count the positions in the vector
+starting from position 0). This implies that two n-qubit basis states |x⟩and |y⟩are orthogonal iff
+x ̸= y. A different way to see this orthogonality is to use the rules of tensor product (Appendix A.6):
+
+⟨x|y⟩= ⟨x1|y1⟩⊗· · · ⊗⟨xn|yn⟩= ⟨x1|y1⟩· · · ⟨xn|yn⟩.
+
+Since ⟨xk|yk⟩= δxk,yk, we see that basis states |x⟩and |y⟩will be orthogonal as soon as there is at
+least one position k at which the bits of x and y differ.
+A quantum register of n qubits can be in any superposition6
+
+α0|0⟩+ α1|1⟩+ · · · + α2n−1|2n −1⟩,
+
+2n−1
+�
+
+j=0
+|αj|2 = 1.
+
+6Don’t call such a multi-qubit state or register a “qubit” or an “n-qubit”—the term “qubit” only refers to the
+state of a 2-dimensional system. You can use “n-qubit” as an adjective but not as a noun.
+
+7
+
+
+===== PDF PAGE 20 =====
+
+Measuring this in the computational basis, we obtain the n-bit state |j⟩with probability |αj|2.
+Measuring just the first qubit of a state would correspond to the projective measurement that
+has the two projectors P0 = |0⟩⟨0| ⊗I2n−1 and P1 = |1⟩⟨1| ⊗I2n−1. For example, applying this
+
+measurement to the state
+1
+√
+
+3|0⟩|ϕ⟩+
+�
+
+2
+3|1⟩|ψ⟩gives outcome 0 with probability 1/3; the state then
+becomes |0⟩|ϕ⟩. We get outcome 1 with probability 2/3; the state then becomes |1⟩|ψ⟩. Similarly,
+measuring the first n qubits of an (n + m)-qubit state in the computational basis corresponds to
+the projective measurement that has 2n projectors Pj = |j⟩⟨j| ⊗I2m for j ∈{0, 1}n.
+An important property that deserves to be mentioned is entanglement, which refers to quantum
+correlations between different qubits. For instance, consider a 2-qubit register that is in the state
+
+1
+√
+
+2|00⟩+ 1
+√
+
+2|11⟩.
+
+Such 2-qubit states are sometimes called EPR-pairs in honor of Einstein, Podolsky, and Rosen [111],
+who examined such states and their seemingly paradoxical properties. Initially neither of the two
+qubits has a classical value |0⟩or |1⟩. However, if we measure the first qubit and observe, say, a
+|0⟩, then the whole state collapses to |00⟩. Thus observing the first qubit immediately fixes also
+the second, unobserved qubit to a classical value. Since the two qubits that make up the register
+may be far apart, this example illustrates some of the non-local effects that quantum systems can
+exhibit. In general, a bipartite state |ϕ⟩is called entangled if it cannot be written as a tensor
+product |ϕA⟩⊗|ϕB⟩where |ϕA⟩lives in the first space and |ϕB⟩lives in the second.7
+
+At this point, a comparison with classical probability distributions may be helpful. Suppose
+we have two probability spaces, A and B, the first with 2n possible outcomes, the second with 2m
+
+possible outcomes. A probability distribution on the first space can be described by 2n numbers
+(nonnegative reals summing to 1; actually there are only 2n −1 degrees of freedom here) and a
+distribution on the second by 2m numbers. Accordingly, a product distribution on the joint space
+can be described by 2n + 2m numbers. However, an arbitrary (non-product) distribution on the
+joint space takes 2n+m real numbers, since there are 2n+m possible outcomes in total. Analogously,
+an n-qubit state |ϕA⟩can be described by 2n numbers (complex numbers whose squared moduli
+sum to 1), an m-qubit state |ϕB⟩by 2m numbers, and their tensor product |ϕA⟩⊗|ϕB⟩by 2n + 2m
+
+numbers. However, an arbitrary (possibly entangled) state in the joint space takes 2n+m numbers,
+since it lives in a 2n+m-dimensional space.
+We see that the number of parameters required to
+describe quantum states is the same as the number of parameters needed to describe probability
+distributions. Also note the analogy between statistical independence8 of two random variables A
+and B and non-entanglement of the product state |ϕA⟩⊗|ϕB⟩. However, despite the similarities
+between probabilities and amplitudes, quantum states are much more powerful than distributions,
+because amplitudes may have negative (or even complex) parts which can lead to interference
+effects. Amplitudes only become probabilities when we square them. The art of quantum computing
+is to use these special properties for interesting computational purposes.
+
+7We often omit the tensor product symbol for such unentangled states, abbreviating |ϕA⟩⊗|ϕB⟩to |ϕA⟩|ϕB⟩(you
+shouldn’t abbreviate this further to |ϕAϕB⟩though, unless both |ϕA⟩and |ϕB⟩are computational basis states). Note
+that there cannot be ambiguity between tensor product and the usual matrix product in this abbreviation, because
+both |ϕA⟩and |ϕB⟩are column vectors and hence their matrix product wouldn’t even be well-defined (the dimensions
+“don’t fit”).
+8Two random variables A and B are independent if their joint probability distribution can be written as a product
+of individual distributions for A and for B: Pr[A = a ∧B = b] = Pr[A = a] · Pr[B = b] for all possible values a, b.
+
+8
+

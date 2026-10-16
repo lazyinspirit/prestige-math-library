@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-existence-of-complex-line-integrals-on-rectifiable-paths.json
 id: thm-existence-of-complex-line-integrals-on-rectifiable-paths
 kind: theorem
 title: "Continuous integrands have complex and absolute line integrals along every rectifiable path"
@@ -7,17 +9,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-complex-line-integral-over-a-rectifiable-path, def-absolute-line-integral-over-a-rectifiable-path, thm-rectifiable-iff-coordinate-functions-have-bounded-variation, lem-arc-length-function-is-continuous-and-nondecreasing, thm-riemann-stieltjes-existence-continuous-bv]
+deps: [thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed, def-complex-line-integral-over-a-rectifiable-path, def-absolute-line-integral-over-a-rectifiable-path, thm-rectifiable-iff-coordinate-functions-have-bounded-variation, lem-arc-length-function-is-continuous-and-nondecreasing, thm-riemann-stieltjes-existence-continuous-bv]
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-16
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -36,9 +31,9 @@ Let $\gamma:[a,b]\to\mathbb C$ be rectifiable and let $f$ be continuous on its t
 
 **Given:** A rectifiable $\gamma=x+iy$ and a continuous $f=u+iv$ on its trace.
 
-[L1] A planar path is rectifiable if and only if each coordinate function has bounded variation ([[thm-rectifiable-iff-coordinate-functions-have-bounded-variation]]).
+[L1] A complex path is rectifiable if and only if its two coordinates have bounded variation, by [[thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed]], transporting [[thm-rectifiable-iff-coordinate-functions-have-bounded-variation]] to its coordinate path.
 
-[L2] The arc-length function of a rectifiable path is continuous and nondecreasing ([[lem-arc-length-function-is-continuous-and-nondecreasing]]).
+[L2] The arc-length function $s_\gamma=s_{\Phi\circ\gamma}$ defined in [[def-absolute-line-integral-over-a-rectifiable-path]] is continuous and nondecreasing by the Euclidean assertion applied to the coordinate path ([[lem-arc-length-function-is-continuous-and-nondecreasing]]).
 
 [L3] If a real integrand is continuous and a real integrator has bounded variation, then its Riemann–Stieltjes integral exists ([[thm-riemann-stieltjes-existence-continuous-bv]]).
 

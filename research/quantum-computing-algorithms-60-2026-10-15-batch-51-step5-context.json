@@ -1,0 +1,337 @@
+{
+  "group": "i",
+  "batches": [
+    "51"
+  ],
+  "pages_read": [
+    "block-encoding-linear-systems-and-variable-time-amplification",
+    "block-encoding-linear-systems-and-variable-time-amplification-examples"
+  ],
+  "items_read": [
+    "lem-qa-27-even-sign-window",
+    "def-qa-27-variable-time-model",
+    "def-qa-27-block-encoded-qlsp",
+    "lem-qa-27-lcu-projected-block-identity",
+    "lem-qa-27-supported-pseudoinverse-target",
+    "alg-qa-27-qsvt-pseudoinverse",
+    "def-qa-27-cks-sparse-oracle-model",
+    "thm-qa-27-pseudoinverse-polynomial-degree",
+    "lem-qa-coherent-amplitude-grid-rounding",
+    "alg-qa-relative-probability-estimation",
+    "thm-qa-relative-probability-guarantee",
+    "alg-qa-27-capped-lower-bound-amplification",
+    "lem-qa-27-capped-lower-bound-amplification",
+    "lem-qa-27-low-target-amplification",
+    "thm-qa-27-vtaa-amplification",
+    "thm-qa-27-qsvt-inverse-state-cost",
+    "alg-qa-27-cks-variable-time-linear-solver",
+    "lem-qa-27-cks-stopping-time-instantiation",
+    "thm-qa-27-cks-linear-condition-guarantee",
+    "ex-qa-27-sparse-diagonal-qlsp",
+    "ex-qa-27-fixed-vs-variable-time-cost"
+  ],
+  "conventions": [
+    {
+      "convention": "The normalized gap is δ=γ/α. The promise concerns singular vectors supported by b; unsupported singular values may lie in (0,δ). The target is the normalized domain vector A⁺b, obtained by applying odd QSVT to the adjoint encoding.",
+      "fixed_by": "def-qa-27-block-encoded-qlsp",
+      "matters_for": [
+        "lem-qa-27-supported-pseudoinverse-target",
+        "alg-qa-27-qsvt-pseudoinverse",
+        "thm-qa-27-qsvt-inverse-state-cost"
+      ]
+    },
+    {
+      "convention": "Stopping branches are orthogonal, later stages leave stopped branches unchanged, and every reachable branch stops by the last stage. T_av is the root-mean-square stopping time, not the mean.",
+      "fixed_by": "def-qa-27-variable-time-model",
+      "matters_for": [
+        "thm-qa-27-vtaa-amplification",
+        "lem-qa-27-cks-stopping-time-instantiation",
+        "ex-qa-27-fixed-vs-variable-time-cost"
+      ]
+    },
+    {
+      "convention": "The tight VTAA production expression assumes supplied finite probability/schedule certificates and separately charges their acquisition. The uniform estimated regime instead supplies a positive floor, confidence budget and deterministic resource cap.",
+      "fixed_by": "def-qa-27-variable-time-model",
+      "matters_for": [
+        "thm-qa-27-vtaa-amplification",
+        "ex-qa-27-fixed-vs-variable-time-cost"
+      ]
+    },
+    {
+      "convention": "Relative probability estimation uses Q=−AS₀A* S_good, explicitly supplied controlled operations, fresh measured estimation workspaces, and a fresh subsequent sampler execution. Its promise is p=0 or p≥p_min.",
+      "fixed_by": "alg-qa-relative-probability-estimation",
+      "matters_for": [
+        "thm-qa-relative-probability-guarantee",
+        "thm-qa-27-vtaa-amplification",
+        "alg-qa-27-cks-variable-time-linear-solver"
+      ]
+    },
+    {
+      "convention": "Sparse CKS access includes reversible in-place location and reverse-location capabilities; ordinary XOR row/value access does not supply these at constant cost.",
+      "fixed_by": "def-qa-27-cks-sparse-oracle-model",
+      "matters_for": [
+        "alg-qa-27-cks-variable-time-linear-solver",
+        "lem-qa-27-cks-stopping-time-instantiation",
+        "thm-qa-27-cks-linear-condition-guarantee"
+      ]
+    },
+    {
+      "convention": "The efficient CKS mode retains actual simulator work coherently, compares against an ideal clean trajectory, records success before internal uncomputation, and finally tests every work register for zero. Quantum query/gate costs remain separate from coefficient, phase, compiler and arithmetic construction costs.",
+      "fixed_by": "alg-qa-27-cks-variable-time-linear-solver",
+      "matters_for": [
+        "lem-qa-27-cks-stopping-time-instantiation",
+        "thm-qa-27-cks-linear-condition-guarantee"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-relative-probability-guarantee",
+      "statement": "For every promised input of alg-qa-relative-probability-estimation, the procedure terminates. If p=0, it returns p̂=0 with certainty. If p>0, Pr{|p̂−p|≤cp}≥1−β. Every execution satisfies C<65rM_L/c<4160r/(c√p_min), with the separately stated expected and joint high-probability instance-dependent bounds.",
+      "used_by": [
+        "thm-qa-27-vtaa-amplification",
+        "alg-qa-27-cks-variable-time-linear-solver",
+        "lem-qa-27-cks-stopping-time-instantiation",
+        "thm-qa-27-cks-linear-condition-guarantee"
+      ]
+    },
+    {
+      "id": "lem-qa-27-low-target-amplification",
+      "statement": "For n≥1, q>0, |q̂−q|≤q/100 and q̂≤1/(9n), choose the least k≥0 with (2k+1)²q̂≥1/(9n). With d=2k+1 and y=d²q, the amplified weight satisfies y(1−2/(5n))≤r≤y and r≥1/(16n), preserves the conditional good state, and uses exactly d sampler/inverse calls. Across at most n such amplifications, the product loss is at least 3/5.",
+      "used_by": [
+        "thm-qa-27-vtaa-amplification",
+        "alg-qa-27-cks-variable-time-linear-solver",
+        "lem-qa-27-cks-stopping-time-instantiation",
+        "thm-qa-27-cks-linear-condition-guarantee"
+      ]
+    },
+    {
+      "id": "thm-qa-27-pseudoinverse-polynomial-degree",
+      "statement": "For rational 0<e≤δ≤1/2, the uncapped bare-gap OP1A construction terminates and returns an odd real polynomial p of degree O(δ⁻¹ log(1/e)) satisfying |p(x)|≤1 on [−1,1], p(0)=0, and sup over x∈[δ,1] of |p(x)−δ/(2x)|≤e. Its returned exact phase product passes the coefficientwise check before execution.",
+      "used_by": [
+        "thm-qa-27-qsvt-inverse-state-cost",
+        "alg-qa-27-cks-variable-time-linear-solver",
+        "lem-qa-27-cks-stopping-time-instantiation"
+      ]
+    },
+    {
+      "id": "lem-qa-27-capped-lower-bound-amplification",
+      "statement": "Under the inputs and promise of alg-qa-27-capped-lower-bound-amplification, the finite procedure succeeds with probability at least 1−β and returns exactly the original conditional good-state density operator. Its deterministic caps are 2RM sampler/inverse calls, R(M−1) zero reflections and R(M+1) good reflections.",
+      "used_by": [
+        "thm-qa-27-vtaa-amplification",
+        "alg-qa-27-cks-variable-time-linear-solver",
+        "thm-qa-27-cks-linear-condition-guarantee"
+      ]
+    },
+    {
+      "id": "lem-qa-27-cks-stopping-time-instantiation",
+      "statement": "In the declared efficient-qsvt mode, the proof establishes T_av≤5H‖A⁺b‖, T_max≤2Hα, p≥‖A⁺b‖²/(4α²), T_av/√p≤10Hα, the estimator probability floors, and the final zero-work conditional-state error bound, under the algorithm's stated error budgets.",
+      "used_by": [
+        "thm-qa-27-cks-linear-condition-guarantee"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "The four Penrose equations used to identify the finite singular-coordinate inverse.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Uniqueness of the singular-coordinate pseudoinverse.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Supported input expansion, domain/codomain orientation and normalization bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "The singular-value upper bound σ_j≤α.",
+      "opened": true
+    },
+    {
+      "id": "thm-gaussian-integral",
+      "used_for": "Normalization of erf in the constructive sign-polynomial argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-laurent-expansion-annulus",
+      "used_for": "Laurent expansion underlying the ellipse/Chebyshev coefficient estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-laurent-coefficient-formula-and-uniqueness",
+      "used_for": "Contour coefficient bounds for the sign approximant.",
+      "opened": true
+    },
+    {
+      "id": "thm-principal-inverse-tangent-calculus",
+      "used_for": "Machin identity and finite rational arctangent approximation in coherent rounding.",
+      "opened": true
+    },
+    {
+      "id": "def-principal-inverse-tangent",
+      "used_for": "Principal branch and monotonicity in the Machin identity.",
+      "opened": true
+    },
+    {
+      "id": "lem-tangent-principal-branch-is-bijective",
+      "used_for": "Injectivity fixing the angle in the Machin identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-addition-and-subtraction-formulas-for-tangent-cotangent-secant-and-cosecant",
+      "used_for": "Tangent doubling and subtraction in the Machin identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Taylor rounding, Lipschitz estimates and low-target amplification inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+      "used_for": "Trigonometric bounds and parity in coherent rounding.",
+      "opened": true
+    },
+    {
+      "id": "thm-cofunction-supplementary-and-reflection-identities",
+      "used_for": "Quarter-turn and reflection conventions in coherent rounding.",
+      "opened": true
+    },
+    {
+      "id": "cor-taylor-remainder-bound",
+      "used_for": "Explicit finite sine-polynomial error bound.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Sine increment bounds and elementary low-target amplification estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Finite trigonometric sums and amplification bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-double-angle-and-power-reduction-identities",
+      "used_for": "Averaging randomized amplification success probabilities.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Uniform sine/cosine bounds in amplification arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The logarithmic finite trial-count bound.",
+      "opened": true
+    },
+    {
+      "id": "def-principal-inverse-sine-and-cosine",
+      "used_for": "The principal amplification angle θ=arcsin√q.",
+      "opened": true
+    },
+    {
+      "id": "thm-principal-inverse-sine-and-cosine-derivatives",
+      "used_for": "Upper and lower bounds for the amplification angle.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Derivative calculations proving the elementary sine lower bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-bernoulli-inequality",
+      "used_for": "The finite product-loss bound across low-target amplification stages.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-qa-27-cks-variable-time-linear-solver",
+      "concern": "The finite-precision paragraph asserts: “Construct the exact sparse block encoding with compression [tilde A]/d” while retaining location maps that “enumerate the support of A”. No explicit condition requires the decoded matrix to vanish outside those lists. A norm-error certificate and Hermiticity alone do not imply that condition. For example, take A=(1/2)I₂, d=2, diagonal-only location lists with padded sentinels, and decoded tilde A=(1/2)I₂+τX for arbitrarily small positive rational τ. The decoded matrix is Hermitian, 2-sparse, has entries bounded by one and norm error τ, but the supplied neighbor-state construction omits its off-diagonal entries and compresses to A/2 rather than tilde A/2. The exact-block assertion and the same assertion in lem-qa-27-cks-stopping-time-instantiation Proof 1.1 therefore need an explicit support-preservation/list-coverage hypothesis or a separately justified decoded-matrix construction.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "thm-qa-27-cks-linear-condition-guarantee",
+      "concern": "Proof 1.2 concludes H=O(d polylog(dκ/ε,1/ρ)) from stage errors e_j≤min(δ_j/2,η_I/8), η_I≤e_*/(4096mα), and ζ,η_S bounded above by the displayed budgets. These are only upper bounds on errors; they provide no upper bound on log(1/e_j), log(1/ζ), or simulator precision costs. The algorithm specifies least QPE scales and repetition counts only after ζ is selected. Holding d,κ,ε,ρ fixed, choosing the permitted ζ=2^(−L) makes even that least coherent repetition count Θ(L), with correspondingly unbounded sparse-access calls, whereas the stated query bound is independent of L. The efficient constructor needs specified precision choices of controlled size, or the resource theorem needs to retain their actual dependence. This also affects the source-scale cost specialization in lem-qa-27-cks-stopping-time-instantiation.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "quantum-singular-value-transformation",
+      "faithful": false,
+      "note": "Adjoint orientation, real extraction, phase-product convention and block-error formula match the suppliers. However, the CKS resource proof specializes the supplier degree O(δ_j⁻¹ log(1/e_j)) to a bound in ε without bounding the chosen precision from below; see the resource concern."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "hhl-phase-estimation-linear-systems",
+      "faithful": true,
+      "note": "The normalized state-output task, supported singular gap and separately supplied preparation/access contracts are preserved."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Chronological product order, projective outcome laws, positive-probability conditioning and separate resource coordinates are used consistently."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The rounding helper supplies an explicit finite Boolean computation before invoking compute-copy-reverse. CKS explicitly requires clean preparation work and retains actual simulator work."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled/inverse access is explicit; reflection signs and controlled scalar phases are retained."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "block-encodings",
+      "faithful": true,
+      "note": "Normalized compression error, rectangular padding and LCU coefficient weights match the supplied definitions. The local LCU lemma is explicitly conditional on supplied PREPARE and SELECT."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Dirac bras and outer products consistently use the root-linear-first conversion; pseudoinverse input/output spaces are correctly oriented."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Query, gate, full construction, compiler and arithmetic costs remain distinct. The rounding helper supplies an actual polynomial-time gate-list generator."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "amplitude-estimation-and-counting",
+      "faithful": true,
+      "note": "The generic sampler estimator uses dyadic M≥4, the signed controlled iterate, the k=1 error guarantee and exact repeated-call accounting. It does not substitute Boolean counting for arbitrary sampler estimation."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "qubitization-and-optimal-hamiltonian-simulation",
+      "faithful": false,
+      "note": "Clean-input simulation, actual adjoints/controls and hybrid error accumulation are faithfully retained. The sparse-encoding specialization does not explicitly ensure that its retained location lists cover the decoded matrix, as required for the claimed exact compression; see the support concern."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "block-encoding-linear-systems-and-variable-time-amplification",
+      "faithful": true,
+      "note": "Opened the flagged-trace theorem and the SDP solver's trace-label construction. They use actual probability floors, relative tolerance θ/36, finite caps, explicit controlled/inverse access and charged efficient-grid rounding. Coherent uses retain histories and reverse the entire padded circuit."
+    }
+  ]
+}

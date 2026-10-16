@@ -1,0 +1,88 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 3,
+  "unit": "58",
+  "input_sha256": "de658813ab931c905b0a071064a69258f841fa024279ee38ce92d3cf8d472df2",
+  "decisions": [
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0783827f03bd76f6fbd1ef12578815d60403d7bdea6f7fef17a3885453adf261",
+      "outcome": "false_positive",
+      "reason": "F1 explicitly cites thm-qa-34-modfkv-low-rank-approximation AND its proof. That proof's step 1.1 chooses q=ceil(10^6 K^4/(eta epsilon^2)^2 (1+sqrt(2 log(2/delta'))) ^2), with delta'=delta/3 here, and obtains BOTH Gram errors <=t F^2 from lem-qa-34-exponential-gram-concentration, where t=eta epsilon^2/(1000 K^2). Step 2.1 applies the two-sketch lemma on this same event. The algorithm uses precisely those normalized sketches. Moreover V^T V-I=Sigma^{-1} U^T(SS^T-WW^T)U Sigma^{-1}, whose operator norm is <=t F^2/sigma^2=tK<=1/2. Thus steps 4.1 and 5.1 have their required simultaneous near-isometry premise with probability at least 1-delta/3. The approximation conclusion alone would not imply it, but the explicitly cited local proof establishes it. No item edit is warranted.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "disposition": "unaffected",
+      "post_sha256": "67a8f41c1544bc2eb8d9dcb61ce2c2083ab1e3b2235175697f68e8becec4b7f3",
+      "review_context_sha256": "cb66320185154c74dcdb454e5bb8f02efd84f1c0250829f8772aae1310e3b4be",
+      "reason": "Reviewed the current statement, all eight proof steps, actual sampling procedures, relevant supplier arguments/statements, owning contract and both pages. The cited ModFKV proof supplies the common Gram event; eigenvalues in [1/2,3/2] give ||x-y||/||y||<=sqrt(3)e/||z|| and cancellation C<=2K/q. Hence the stopping rule yields TV<=sqrt(3)epsilon/16 and the cap ceil(2K log(3/delta)) bounds rejection failure by delta/3. Summable stage budgets give simultaneous accuracy with probability >=1-delta/3 and almost-sure eventual accuracy, using the expressly assumed countable/dependent choice product law. The nonzero realized row ensures termination; confidence is not inferred by conditioning on that promise. Recomputed q, Kq^2 and q^3 resource exponents and the row-norm refinement factor. Current step 1.1 obtains k before testing it; F2 and its supplier both require entry queries. No confirmed defect or interface change remains in this assigned item; its guard equals the frozen before guard.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "outcome": "false_positive",
+      "reason": "The rejected F1 premise is proved in the explicitly cited ModFKV proof, steps 1.1-2.1: both Gram bounds hold simultaneously at the declared sample count and failure budget. The two-sketch lemma's hypotheses therefore hold for the actual sketches; no repair or fatal defect should be recorded for this tuple.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete_no_repair_required",
+    "changed_items": [],
+    "statement_or_definition_changed": false,
+    "source_evidence": "Consulted Tang v3, complete proof of Proposition 4.6 in Appendix A, PDF page 26, and the complete proof of Theorem 1 in section 4.3, PDF pages 17-18. The former derives near-orthonormality from the second Gram error; the latter uses that property for row estimation and rejection sampling. Exact constants and simultaneous confidence here were checked against the local concentration and two-sketch proofs, not inferred from the paper's asymptotic notation.",
+    "digest_findings": "The digest's same-item uninitialized-k concern is already absent from current step 1.1. Its inner-product entry-query concern is already resolved in the current supplier statement and F2. The separate published channel alert was not adjudicated or edited in this lane; it remains with its owner/maintenance route.",
+    "published_ledger_updates": [],
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run quantum-computing-algorithms-60-2026-10-15 --items thm-qa-34-tang-recommendation-sampler",
+        "exit_code": 0,
+        "result": "Copied both returned hashes immediately after mathematical review; post guard equals pack.before for this item."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-34-tang-recommendation-sampler.md --json",
+        "exit_code": 0,
+        "result": "One proof checked; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qa-34-tang-recommendation-sampler.md --json",
+        "exit_code": 0,
+        "result": "One item checked; zero errors and zero warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-58.proof-contracts.json --strict --items thm-qa-34-tang-recommendation-sampler --json",
+        "exit_code": 0,
+        "result": "Selected contract passes with zero errors and zero warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qa-34-tang-recommendation-sampler.md",
+        "exit_code": 0,
+        "result": "One item, eight steps, zero defects; item was unchanged."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection of this report; no judges, stamps, certificates or round state were written."
+  }
+}

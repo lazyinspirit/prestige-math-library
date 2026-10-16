@@ -1,0 +1,407 @@
+{
+  "group": "c",
+  "batches": [
+    "32"
+  ],
+  "pages_read": [
+    "quantum-order-finding-and-rational-reconstruction",
+    "quantum-order-finding-and-rational-reconstruction-examples"
+  ],
+  "items_read": [
+    "lem-qa-finite-rational-legendre-criterion",
+    "lem-qa-rational-reconstruction-candidate-uniqueness",
+    "lem-qa-totient-ratio-logarithmic-lower-bound",
+    "def-qa-rational-phase-reconstruction",
+    "alg-qa-rational-reconstruction-from-phase-sample",
+    "thm-qa-rational-reconstruction-correctness",
+    "alg-qa-modular-multiplication-circuit",
+    "thm-qa-modular-multiplication-circuit-correctness",
+    "alg-qa-modular-order-finding",
+    "thm-qa-modular-arithmetic-cost",
+    "thm-qa-modular-order-finding-success",
+    "thm-qa-rational-reconstruction-bit-cost",
+    "thm-qa-modular-order-finding-cost",
+    "ex-qa-rational-reconstruction-boundary",
+    "ex-qa-order-finding-noncoprime-phase"
+  ],
+  "conventions": [
+    {
+      "convention": "Reconstruction uses the normalized finite continued fraction, includes its terminal convergent, requires N ≥ 1 and Q > 4N², and accepts exactly when 1 ≤ q ≤ N and 2|yq − pQ| ≤ q.",
+      "fixed_by": "def-qa-rational-phase-reconstruction",
+      "matters_for": [
+        "alg-qa-rational-reconstruction-from-phase-sample",
+        "thm-qa-rational-reconstruction-correctness",
+        "thm-qa-rational-reconstruction-bit-cost",
+        "ex-qa-rational-reconstruction-boundary"
+      ]
+    },
+    {
+      "convention": "The finite-rational Legendre bridge requires reduced fractions, positive denominators, D > 2q, and the strict inequality |A/D − p/q| < 1/(2q²).",
+      "fixed_by": "lem-qa-finite-rational-legendre-criterion",
+      "matters_for": [
+        "thm-qa-rational-reconstruction-correctness",
+        "ex-qa-rational-reconstruction-boundary"
+      ]
+    },
+    {
+      "convention": "Nearest phase labels are defined using circular distance; reconstruction correctness separately removes endpoint wrapping for nonzero reduced k/r and treats k = 0, r = 1 explicitly.",
+      "fixed_by": "thm-qa-rational-reconstruction-correctness",
+      "matters_for": [
+        "thm-qa-modular-order-finding-success",
+        "ex-qa-order-finding-noncoprime-phase"
+      ]
+    },
+    {
+      "convention": "The modular multiplier fixes invalid n-bit encodings and control-zero inputs. Registers use most-significant-first port order, while internal arithmetic arrays are indexed from least significant bit zero. Work registers are clean.",
+      "fixed_by": "alg-qa-modular-multiplication-circuit",
+      "matters_for": [
+        "thm-qa-modular-multiplication-circuit-correctness",
+        "thm-qa-modular-arithmetic-cost",
+        "alg-qa-modular-order-finding",
+        "thm-qa-modular-order-finding-success"
+      ]
+    },
+    {
+      "convention": "Order finding takes N ≥ 3, a standard unit representative, and integer b ≥ 1; it sets n = ceil(log₂N), m = 2n + 3, Q = 2^m, and t = 4(n + 1)b.",
+      "fixed_by": "alg-qa-modular-order-finding",
+      "matters_for": [
+        "thm-qa-modular-order-finding-success",
+        "thm-qa-modular-order-finding-cost",
+        "ex-qa-order-finding-noncoprime-phase"
+      ]
+    },
+    {
+      "convention": "Each order-finding sample starts from |1⟩, uses the QPE gate list through its superposition law, retains a denominator only after x^q = 1 modulo N, and returns the smallest retained denominator.",
+      "fixed_by": "alg-qa-modular-order-finding",
+      "matters_for": [
+        "thm-qa-modular-order-finding-success",
+        "ex-qa-order-finding-noncoprime-phase"
+      ]
+    },
+    {
+      "convention": "Gate bounds use ideal exact arbitrary-angle QFT gates. Compiled modular-multiplier calls, bare controlled-U queries, gates, and multitape classical transitions are separate coordinates; no finite-alphabet, uniform-family, or generator-time bound is asserted.",
+      "fixed_by": "thm-qa-modular-order-finding-cost",
+      "matters_for": [
+        "thm-qa-modular-arithmetic-cost",
+        "thm-qa-rational-reconstruction-bit-cost",
+        "thm-qa-shor-factoring-cost"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-rational-reconstruction-correctness",
+      "statement": "For integers N ≥ 1, m ≥ 0, Q = 2^m > 4N², 1 ≤ r ≤ N, and 0 ≤ k < r with gcd(k,r) = 1, every nearest circular grid label y reconstructs k/r. For every phase label y, there is at most one passing candidate with denominator at most N.",
+      "used_by": [
+        "thm-qa-modular-order-finding-success",
+        "ex-qa-order-finding-noncoprime-phase"
+      ]
+    },
+    {
+      "id": "thm-qa-modular-order-finding-success",
+      "statement": "For N ≥ 3 and a unit x modulo N of order r, one independent phase sample yields denominator r with probability at least (4/π²)φ(r)/r ≥ 4/[π²(1 + log₂N)]. With b ≥ 1, after t = 4(n + 1)b independent samples the algorithm returns the exact order with probability at least 1 − 2^(−b). For any 0 < δ < 1, b = ceil(log₂(1/δ)) gives success probability at least 1 − δ.",
+      "used_by": [
+        "ex-qa-order-finding-noncoprime-phase",
+        "thm-qa-shor-factoring-success"
+      ]
+    },
+    {
+      "id": "thm-qa-modular-multiplication-circuit-correctness",
+      "statement": "For N ≥ 2, n = ceil(log₂N), and a unit a modulo N with supplied inverse, the specified circuit is unitary, fixes the control, multiplies valid z by a when c = 1, fixes z otherwise, restores all Boolean value, target, and scratch registers to zero, and extends coherently to superpositions.",
+      "used_by": [
+        "thm-qa-modular-arithmetic-cost",
+        "alg-qa-modular-order-finding",
+        "thm-qa-modular-order-finding-success"
+      ]
+    },
+    {
+      "id": "lem-qa-finite-rational-legendre-criterion",
+      "statement": "Let A,p be integers and D,q positive integers, with A/D and p/q reduced and D > 2q. If |A/D − p/q| < 1/(2q²), then p/q is a convergent of the normalized finite regular continued fraction of A/D.",
+      "used_by": [
+        "thm-qa-rational-reconstruction-correctness",
+        "ex-qa-rational-reconstruction-boundary"
+      ]
+    },
+    {
+      "id": "lem-qa-rational-reconstruction-candidate-uniqueness",
+      "statement": "Let N ≥ 1, Q > 4N² be integers and 0 ≤ y < Q. There is at most one reduced fraction p/q with 1 ≤ q ≤ N satisfying 2|yq − pQ| ≤ q.",
+      "used_by": [
+        "def-qa-rational-phase-reconstruction",
+        "alg-qa-rational-reconstruction-from-phase-sample",
+        "thm-qa-rational-reconstruction-correctness",
+        "ex-qa-rational-reconstruction-boundary"
+      ]
+    },
+    {
+      "id": "thm-qa-modular-arithmetic-cost",
+      "statement": "For N ≥ 2, n = ceil(log₂N), and a standard representative of a known unit, each explicit controlled constant multiplier has S,E = O(n²), uses O(n²) elementary gates and clean work bits after reversible compilation, and O(n) repeated-squaring constants and inverses can be computed in O(n³) deterministic multitape bit transitions. No depth bound is asserted.",
+      "used_by": [
+        "alg-qa-modular-order-finding",
+        "thm-qa-modular-order-finding-cost",
+        "thm-qa-shor-factoring-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-totient-ratio-logarithmic-lower-bound",
+      "statement": "For every integer r ≥ 1, φ(r)/r ≥ 1/(1 + log₂r), with φ(1) = 1.",
+      "used_by": [
+        "thm-qa-modular-order-finding-success",
+        "thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost"
+      ]
+    },
+    {
+      "id": "thm-qa-rational-reconstruction-bit-cost",
+      "statement": "For integers N ≥ 1, m ≥ 0, Q = 2^m > 4N², and 0 ≤ y < Q, set L = ceil(log₂(Q + 1)). The reconstruction algorithm uses O(L) Euclidean divisions and O(L³) deterministic multitape bit transitions, without real-number arithmetic.",
+      "used_by": [
+        "thm-qa-modular-order-finding-cost"
+      ]
+    },
+    {
+      "id": "thm-qa-modular-order-finding-cost",
+      "statement": "For N ≥ 3, n = ceil(log₂N), b ≥ 1, and δ = 2^(−b), the explicit-arithmetic, ideal exact-angle algorithm uses O(n²b) controlled modular-multiplier circuits, O(n⁴b) elementary gates, and O(n⁴b) schoolbook classical bit transitions. With only controlled-U_x access, its query count is exactly t(Q − 1), where t = 4(n + 1)b and Q = 2^(2n + 3). No finite-alphabet, uniform-family, or generator-time bound is asserted.",
+      "used_by": [
+        "thm-qa-shor-factoring-cost"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-regular-continued-fraction",
+      "used_for": "Finite continued-fraction digit and evaluation conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-convergents-of-regular-continued-fraction",
+      "used_for": "Initial numerator/denominator indices and convergent recurrences.",
+      "opened": true
+    },
+    {
+      "id": "def-continued-fraction-complete-quotients",
+      "used_for": "Positive tails, integer-part digits, and terminal versus nonterminal tail inequalities.",
+      "opened": true
+    },
+    {
+      "id": "lem-continued-fraction-convergent-recurrence",
+      "used_for": "Finite-prefix evaluation and terminal convergent identity.",
+      "opened": true
+    },
+    {
+      "id": "lem-continued-fraction-determinant-identity",
+      "used_for": "Reducedness and the unimodular adjacent-convergent coordinate calculation.",
+      "opened": true
+    },
+    {
+      "id": "lem-continued-fraction-complete-quotient-formula",
+      "used_for": "The tail formula in the finite-rational Legendre argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-rational-continued-fraction-termination",
+      "used_for": "Euclidean termination and rational continued-fraction digit lists.",
+      "opened": true
+    },
+    {
+      "id": "thm-normalized-finite-continued-fraction-uniqueness",
+      "used_for": "Canonical finite expansion, including integer inputs.",
+      "opened": true
+    },
+    {
+      "id": "def-coprime",
+      "used_for": "Reduced-fraction and coprime-phase hypotheses, including gcd(0,1) = 1.",
+      "opened": true
+    },
+    {
+      "id": "lem-coprime-divides-product",
+      "used_for": "Identifying the terminal reduced denominator in the finite-rational criterion.",
+      "opened": true
+    },
+    {
+      "id": "lem-rat-triangle",
+      "used_for": "Rational absolute-value estimates and candidate uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "def-rat-operations",
+      "used_for": "Cross multiplication in candidate separation.",
+      "opened": true
+    },
+    {
+      "id": "def-common-divisor-and-gcd",
+      "used_for": "Reducedness and positive-denominator gcd conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-euler-totient-product-formula",
+      "used_for": "The finite prime product for φ(r)/r and its r = 1 boundary.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-arithmetic",
+      "used_for": "Prime factorization and bounding the number of distinct prime divisors.",
+      "opened": true
+    },
+    {
+      "id": "def-prime",
+      "used_for": "Positivity, integrality, and lower bounds for ordered distinct primes.",
+      "opened": true
+    },
+    {
+      "id": "thm-int-comm-ring",
+      "used_for": "Regrouping integer prime products and elementary arithmetic identities.",
+      "opened": true
+    },
+    {
+      "id": "def-divides-in-z",
+      "used_for": "The distinct-prime product divisibility argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-standard-representatives-modulo-n",
+      "used_for": "Canonical residue labels, modular constants, and finite residue cardinality.",
+      "opened": true
+    },
+    {
+      "id": "def-integers-modulo-n",
+      "used_for": "Residue classes and equality modulo N.",
+      "opened": true
+    },
+    {
+      "id": "def-addition-and-multiplication-modulo-n",
+      "used_for": "Well-defined residue arithmetic in the multiplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-integers-modulo-n-basic-algebra",
+      "used_for": "Modular multiplication, inverse cleanup, and inverse-loop congruence invariants.",
+      "opened": true
+    },
+    {
+      "id": "def-unit-group-modulo-n-and-euler-totient",
+      "used_for": "Finite unit groups and counting coprime phase indices.",
+      "opened": true
+    },
+    {
+      "id": "thm-unit-criterion-modulo-n",
+      "used_for": "Equivalence of unit membership and gcd one.",
+      "opened": true
+    },
+    {
+      "id": "thm-division-algorithm-in-z",
+      "used_for": "Exact Euclidean division, remainders, and arithmetic loops.",
+      "opened": true
+    },
+    {
+      "id": "lem-order-characterisation",
+      "used_for": "Distinct orbit elements and x^q = 1 exactly when r divides q.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-algorithm",
+      "used_for": "Termination and final gcd in modular-inverse preprocessing.",
+      "opened": true
+    },
+    {
+      "id": "cor-order-of-element-divides-group-order",
+      "used_for": "Existence of finite order and r ≤ φ(N) ≤ N.",
+      "opened": true
+    },
+    {
+      "id": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+      "used_for": "Orthonormal orbit eigenvectors and the uniform Fourier decomposition of |1⟩.",
+      "opened": true
+    },
+    {
+      "id": "thm-archimedean-polygon-perimeter-characterization-of-pi",
+      "used_for": "Deriving π < 4 from the circumscribed square for the repetition constant.",
+      "opened": true
+    },
+    {
+      "id": "thm-cofunction-supplementary-and-reflection-identities",
+      "used_for": "Equality of sine and cosine at π/4.",
+      "opened": true
+    },
+    {
+      "id": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+      "used_for": "Trigonometric identities cited in the repetition-constant derivation.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Positivity of sine and cosine at π/4.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Endpoint trigonometric values in the π < 4 argument.",
+      "opened": true
+    },
+    {
+      "id": "def-tangent-cotangent-secant-cosecant",
+      "used_for": "Computing tan(π/4) from positive equal sine and cosine.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "The positive π convention in the repetition proof.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "quantum-phase-estimation",
+      "faithful": true,
+      "note": "Checked the QPE procedure, circular-distance definition, superposition law, nearest-grid guarantee, and access-cost theorem. The orbit Fourier sign yields positive eigenphase k/r; the consumer uses an eigenspace mixture and preserves the distinction between powered access and repeated base-unitary queries."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The explicit bounded-fanin Boolean DAG meets the reversible compiler interface, including repeated-source ports. Both XOR computations restore their work, and compute-swap-inverse clears the target. Compiler gate/work bounds are used with the stated output width."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Dirac notation is compatible with the root inner product being linear in its first argument. The orbit eigenvector and orthogonality calculations preserve that convention."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "The multiplier's chronological compute, swap, and cleanup sequence agrees with the circuit-denotation convention. QPE measurement is consumed through its stated outcome law."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Register port order remains big-endian despite least-significant-first internal arithmetic arrays. Valid and invalid encodings partition the full data basis, and the orbit calculation uses distinct orthonormal computational-basis vectors."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The cost consumer keeps elementary gates, clean workspace, oracle queries, description generation, and classical work separate. It explicitly limits its QFT count to ideal exact-angle gates and makes no uniform-family claim."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Classical arithmetic is charged in the declared multitape transition model. Reconstruction, inverse preprocessing, and modular verification are counted separately from quantum gates and oracle calls."
+    },
+    {
+      "from": "shors-factoring-algorithm",
+      "to": "quantum-order-finding-and-rational-reconstruction",
+      "faithful": true,
+      "note": "The factoring algorithm establishes unit membership before calling order finding with b = 2. Its success proof uses the pointwise exact-order probability of at least 3/4; its cost theorem preserves the ideal-QFT qualification and exponential bare-unitary query count."
+    },
+    {
+      "from": "period-hidden-shift-and-number-theoretic-algorithms",
+      "to": "quantum-order-finding-and-rational-reconstruction",
+      "faithful": true,
+      "note": "The discrete-logarithm success theorem applies φ(q)/q ≥ 1/(1 + log₂q) with integer q ≥ 2. It does not import an order-finding oracle or stronger arithmetic interface from this batch."
+    }
+  ]
+}

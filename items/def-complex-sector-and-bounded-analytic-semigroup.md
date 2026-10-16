@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-complex-sector-and-bounded-analytic-semigroup.json
 id: def-complex-sector-and-bounded-analytic-semigroup
 kind: definition
 title: Complex sector and bounded analytic semigroup
@@ -6,7 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2
-deps: [def-banach-space, def-bounded-linear-operator, def-space-of-bounded-linear-operators, def-strongly-continuous-semigroup, def-infinitesimal-generator-of-a-c-zero-semigroup, def-complex-domain, def-complex-differentiability-holomorphic-and-entire, lem-canonical-banach-complexification-of-a-real-banach-space, rem-real-and-complex-normed-space-convention]
+deps: [def-banach-space, def-bounded-linear-operator, def-space-of-bounded-linear-operators, def-strongly-continuous-semigroup, def-infinitesimal-generator-of-a-c-zero-semigroup, def-complex-domain, def-complex-differentiability-holomorphic-and-entire, lem-canonical-banach-complexification-of-a-real-banach-space, def-complex-norm-and-complex-normed-space]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -19,8 +21,6 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: 'Chapter 2 Section 2.3, Definition 2.24, printed p. 63'
-verification:
-  precheck: n/a
 ---
 
 ## Definition
@@ -59,7 +59,7 @@ Strong continuity is required only at the vertex and only in the strong
 operator topology; holomorphy is asserted on the open sector, not at $0$. For a
 real Banach space $X$ the definition is applied through a complexification
 ([[lem-canonical-banach-complexification-of-a-real-banach-space]],
-[[rem-real-and-complex-normed-space-convention]]).
+[[def-complex-norm-and-complex-normed-space]]).
 
 ### Remarks
 

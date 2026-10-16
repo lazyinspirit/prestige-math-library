@@ -1,0 +1,324 @@
+{
+  "group": "p",
+  "batches": [
+    "10"
+  ],
+  "pages_read": [
+    "reversible-computation-ancillas-and-coherent-oracles",
+    "reversible-computation-ancillas-and-coherent-oracles-examples"
+  ],
+  "items_read": [
+    "def-qc-clean-and-dirty-ancillas",
+    "def-qc-toffoli-and-fredkin",
+    "lem-qc-ancilla-identities-stable-under-reference-and-mixtures",
+    "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+    "alg-qc-reversible-embedding",
+    "lem-qc-fresh-target-not-and-or-gadgets",
+    "lem-qc-toffoli-clean-target-and-uncomputation",
+    "thm-qc-clean-uncomputation-restores-workspace",
+    "thm-qc-reversible-embedding-cost",
+    "def-qc-coherent-function-oracle",
+    "thm-qc-reversible-embedding-parallel-depth",
+    "thm-qc-reversible-xor-oracle-unitary",
+    "thm-qc-phase-kickback-from-xor-oracle",
+    "thm-qc-oracle-phase-query-cost-boundary",
+    "ex-qc-reversible-and-oracle-compute-copy-uncompute"
+  ],
+  "conventions": [
+    {
+      "convention": "Clean ancillas start and return exactly to the joint zero vector for every data vector, with the same declared data unitary. Dirty restoration is the full operator identity U = V ⊗ I_A. Zero ancilla qubits give the scalar tensor unit.",
+      "fixed_by": "def-qc-clean-and-dirty-ancillas",
+      "matters_for": [
+        "lem-qc-ancilla-identities-stable-under-reference-and-mixtures",
+        "thm-qc-clean-uncomputation-restores-workspace",
+        "thm-qc-reversible-embedding-cost",
+        "ex-qc-reversible-and-oracle-compute-copy-uncompute"
+      ]
+    },
+    {
+      "convention": "Toffoli uses two distinct control wires followed by a distinct target; Fredkin uses its first wire as control. Negative controls require explicit X conjugations. These gates are fixed arity-three alphabet labels.",
+      "fixed_by": "def-qc-toffoli-and-fredkin",
+      "matters_for": [
+        "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+        "alg-qc-reversible-embedding",
+        "lem-qc-fresh-target-not-and-or-gadgets",
+        "lem-qc-toffoli-clean-target-and-uncomputation",
+        "thm-qc-reversible-embedding-parallel-depth"
+      ]
+    },
+    {
+      "convention": "The compiler accepts a finite topologically ordered Boolean DAG with constants and NOT/AND/OR nodes, multiple ordered output ports, and repeated sources or outputs. Repeated sources receive distinct physical scratch wires before a two-control gate.",
+      "fixed_by": "alg-qc-reversible-embedding",
+      "matters_for": [
+        "thm-qc-reversible-embedding-cost",
+        "def-qc-coherent-function-oracle",
+        "thm-qc-reversible-embedding-parallel-depth"
+      ]
+    },
+    {
+      "convention": "S counts all non-input nodes, including constants; E counts gate input-port uses with multiplicity. Each X, CNOT, or Toffoli occurrence costs one elementary gate and one serial layer.",
+      "fixed_by": "thm-qc-reversible-embedding-cost",
+      "matters_for": [
+        "thm-qc-reversible-embedding-parallel-depth",
+        "thm-qc-oracle-phase-query-cost-boundary",
+        "ex-qc-reversible-and-oracle-compute-copy-uncompute"
+      ]
+    },
+    {
+      "convention": "Parallel DAG layers include every non-input node, grouped by longest non-input-node path ending there. F measures maximum per-source input-port multiplicity within one layer; F = 0 when there are no gate input ports.",
+      "fixed_by": "thm-qc-reversible-embedding-parallel-depth",
+      "matters_for": [
+        "thm-qc-reversible-embedding-parallel-depth"
+      ]
+    },
+    {
+      "convention": "An XOR oracle represents a total function on all ordered input strings, permits n or m to be zero, and preserves the input while XORing the output into an arbitrary target. Query costs and controlled-access capabilities require explicit access contracts.",
+      "fixed_by": "def-qc-coherent-function-oracle",
+      "matters_for": [
+        "thm-qc-reversible-xor-oracle-unitary",
+        "thm-qc-phase-kickback-from-xor-oracle",
+        "thm-qc-oracle-phase-query-cost-boundary"
+      ]
+    },
+    {
+      "convention": "Character-target phases use the binary dot product modulo two: the phase is (−1)^(s·f(x)); the one-bit s = 1 target is |−⟩ = H|1⟩.",
+      "fixed_by": "thm-qc-phase-kickback-from-xor-oracle",
+      "matters_for": [
+        "thm-qc-oracle-phase-query-cost-boundary"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qc-reversible-embedding-cost",
+      "statement": "For the stated finite Boolean DAG with S non-input nodes including constants, E input-port uses counted with multiplicity, and m ordered output ports, the reversible embedding implements |x,y,0^w⟩ ↦ |x,y ⊕ f(x),0^w⟩ using at most 6S+4E+m elementary gate occurrences, at most S+E clean work bits, and serial depth at most 6S+4E+m. The action extends coherently to superpositions and any finite reference register.",
+      "used_by": [
+        "def-qc-coherent-function-oracle",
+        "thm-qc-reversible-embedding-parallel-depth",
+        "thm-qc-oracle-phase-query-cost-boundary",
+        "ex-qc-reversible-and-oracle-compute-copy-uncompute"
+      ]
+    },
+    {
+      "id": "def-qc-clean-and-dirty-ancillas",
+      "statement": "Clean restoration requires U(ψ_D ⊗ |0_A⟩) = Vψ_D ⊗ |0_A⟩ for every data vector. Dirty restoration requires U = V ⊗ I_A on the entire joint space.",
+      "used_by": [
+        "lem-qc-ancilla-identities-stable-under-reference-and-mixtures",
+        "alg-qc-reversible-embedding",
+        "lem-qc-toffoli-clean-target-and-uncomputation",
+        "thm-qc-clean-uncomputation-restores-workspace",
+        "thm-qc-reversible-embedding-cost",
+        "ex-qc-reversible-and-oracle-compute-copy-uncompute"
+      ]
+    },
+    {
+      "id": "lem-qc-x-cnot-toffoli-and-fredkin-are-involutions",
+      "statement": "On the ordered computational basis, X, CNOT, Toffoli T, and Fredkin F are involutions. Their linear extensions are unitary. With chronological order meaning the gates are applied in the written order, Fredkin is implemented by CNOT(a,b), then T(c,b,a), then CNOT(a,b).",
+      "used_by": [
+        "alg-qc-reversible-embedding",
+        "lem-qc-fresh-target-not-and-or-gadgets",
+        "lem-qc-toffoli-clean-target-and-uncomputation",
+        "thm-qc-clean-uncomputation-restores-workspace",
+        "thm-qc-reversible-embedding-cost",
+        "thm-qc-reversible-embedding-parallel-depth"
+      ]
+    },
+    {
+      "id": "lem-qc-ancilla-identities-stable-under-reference-and-mixtures",
+      "statement": "The clean identity extends to conjugation of every matrix X on R ⊗ D with the ancilla factor fixed to its zero projector. The dirty identity extends to conjugation of every matrix Y on R ⊗ D ⊗ A by I_R ⊗ V ⊗ I_A, for every finite ordered reference register R.",
+      "used_by": [
+        "thm-qc-clean-uncomputation-restores-workspace",
+        "thm-qc-reversible-embedding-cost"
+      ]
+    },
+    {
+      "id": "thm-qc-reversible-xor-oracle-unitary",
+      "statement": "For every total Boolean function f:{0,1}^n → {0,1}^m, including noninjective functions, the coherent XOR oracle O_f|x,y⟩ = |x,y ⊕ f(x)⟩ is unitary and satisfies O_f² = I. Hence O_f⁻¹ = O_f.",
+      "used_by": [
+        "thm-qc-phase-kickback-from-xor-oracle",
+        "thm-qc-oracle-phase-query-cost-boundary"
+      ]
+    },
+    {
+      "id": "thm-qc-phase-kickback-from-xor-oracle",
+      "statement": "For total f:{0,1}^n → {0,1}^m and s ∈ {0,1}^m, the normalized character target χ_s gives O_f(|x⟩|χ_s⟩) = (−1)^(s·f(x))|x⟩|χ_s⟩. For one-bit output and s = 1, χ_s = |−⟩ = H|1⟩; the phase action uses one declared XOR-oracle invocation, with preparation charged separately.",
+      "used_by": [
+        "thm-qc-oracle-phase-query-cost-boundary"
+      ]
+    },
+    {
+      "id": "thm-qc-reversible-embedding-parallel-depth",
+      "statement": "For the stated finite bounded-fan-in Boolean DAG and its full-node layer parameters D,F, there is a layer-respecting clean XOR embedding with O(S+E+m) gates and work bits and depth at most 2D(2L+3)+2L_m+1, where L = ceil(log₂(F+1)) and L_m = ceil(log₂(m+1)).",
+      "used_by": [
+        "thm-qa-18-element-distinctness-qr-access-gate-cost"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-boolean-circuit-size-depth-fanin-and-basis",
+      "used_for": "The finite Boolean-DAG basis, constants, fan-in restrictions, topological evaluation, and size/depth conventions. The assigned compiler explicitly extends the published single-output convention to multiple ordered output ports.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "reversible-computation-ancillas-and-coherent-oracles",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Chronological products, explicit layer counts, and inverse reversal retain the supplier's ordered-wire and explicitly available inverse-call hypotheses."
+    },
+    {
+      "from": "reversible-computation-ancillas-and-coherent-oracles",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "CNOT retains control-first ordering; ordinary oracle calls are not treated as automatically providing controlled access."
+    },
+    {
+      "from": "reversible-computation-ancillas-and-coherent-oracles",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "X and H use the exact supplied matrices; H|1⟩ has the stated minus-target sign."
+    },
+    {
+      "from": "reversible-computation-ancillas-and-coherent-oracles",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Uses preserve big-endian labels, ordered tensor factors, orthonormal product bases, first-argument-linear inner products, and the scalar zero-qubit register."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Query-instance and algorithm definitions require total address functions and correctly distinguish involutive XOR access, controlled access, and nonoracle costs."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Standard-query unitarity, Toffoli arithmetic, and compute-copy-uncompute cite the matching actions and compiler bounds."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Modular multiplication uses explicit total Boolean DAGs, both XOR computations, swaps, and clean restoration; its cost theorem retains the serial compiler's parameters."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Encoded hiding values are XORed into the target through a total Boolean extension; supplied queries and compiled implementation costs remain separate."
+    },
+    {
+      "from": "amplitude-amplification",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Exact-success constructions use the stated Toffoli action on distinct registers and separately charge clean scratch and controlled reflection access."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The consistency-reflection construction requires scratch initialization and exact restoration; the page separately charges its two ordinary XOR queries."
+    },
+    {
+      "from": "quantum-walk-search-and-element-distinctness",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Value encoding, XOR cancellation, serial gate bounds, and parallel depth match the suppliers; the parallel parameters explicitly include non-output nodes."
+    },
+    {
+      "from": "continuous-time-quantum-walks",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Complete-graph search supplies a total Boolean marking oracle, including unused labels, and keeps Hamiltonian access and implementation costs separate."
+    },
+    {
+      "from": "hamiltonian-simulation-and-product-formulas",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Simulator interfaces require exact clean or dirty contracts for an induced target unitary; sparse oracles are total XOR maps with declared encoded outputs."
+    },
+    {
+      "from": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Access and work costs remain explicit. The Taylor dilation retains segment workspace and expressly avoids claiming exact final cleanup."
+    },
+    {
+      "from": "block-encodings",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The LCU construction explicitly states that a function-valued XOR oracle does not itself implement unitary-valued SELECT."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Parity and sparse-access uses preserve total-function XOR action, involutivity, charged reversal, and the distinction from in-place permutation access."
+    },
+    {
+      "from": "block-encoding-linear-systems-and-variable-time-amplification",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Coherent finite-grid rounding invokes the finite Boolean-DAG compiler with its linear gate/work overhead and clean restoration."
+    },
+    {
+      "from": "quantum-optimization-sdp-and-variational-algorithms",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The sparse SDP oracle model cites precisely reversible encoded-value XOR evaluation."
+    },
+    {
+      "from": "period-hidden-shift-and-number-theoretic-algorithms",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Hidden-function and cyclic-multiplication uses preserve encoded XOR action, clean restoration, and the explicit 6S+4E+m and S+E bounds."
+    },
+    {
+      "from": "quantum-complexity-classes-and-oracle-separations",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Exact Boolean compilation retains the compiler's gate/work bounds; Simon's total XOR oracle is correctly unitary without injectivity."
+    },
+    {
+      "from": "quantum-communication-and-fingerprinting",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The fingerprint correctness theorem uses Fredkin's control-zero identity and control-one swap actions."
+    },
+    {
+      "from": "continuous-gate-universality-and-exact-synthesis",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Borrowed-bit and multicontrol constructions retain exact restoration obligations and distinguish clean from arbitrary borrowed states."
+    },
+    {
+      "from": "clifford-t-exact-and-approximate-synthesis",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Controlled-T correctness uses the exact Toffoli basis action and the clean ancilla return contract."
+    },
+    {
+      "from": "uniform-circuit-families-promise-problems-and-complexity",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Zero-initialized auxiliary wires are explicitly distinguished from clean ancillas; clean/dirty resource coordinates require a declared partition, target unitary, and exact contract."
+    },
+    {
+      "from": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Composition, optimization policies, and multicontrol tradeoffs preserve exact ancilla return for every data input."
+    },
+    {
+      "from": "state-preparation-isometry-synthesis-and-limits",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Isometry completion uses zero-initialized clean inputs; state preparation uses the stated Toffoli action under an explicitly declared gate-family model."
+    }
+  ]
+}

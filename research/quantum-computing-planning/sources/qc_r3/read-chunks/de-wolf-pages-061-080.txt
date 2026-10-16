@@ -1,0 +1,1576 @@
+===== PDF PAGE 61 =====
+
+The phases χs(g) do not affect the probabilities of the final measurement, since |χs(g)|2 = 1. The
+above algorithm thus samples uniformly from the (labels of) elements of H⊥. Each such element
+χg ∈H⊥gives us a constraint on H because χg(h) = 1 for all h ∈H.4 Generating a small number
+of such elements will give sufficient information to find the generators of H itself. Consider our
+earlier examples of Abelian HSP:
+
+Simon’s problem.
+Recall that G = Zn
+2 = {0, 1}n and H = {0, s} for the HSP corresponding
+to Simon’s problem. Setting up the uniform superposition over G can be done by applying H⊗n
+
+to the initial state |0n⟩of the first register. The QFT corresponding to G is just H⊗n. The 2n
+
+characters are χg(x) = (−1)x·g. The algorithm will uniformly sample from labels of elements of
+
+H⊥= {χg | χg(h) = 1 for all h ∈H} = {χg | g · s = 0}.
+
+Accordingly, the algorithm samples uniformly from the g ∈{0, 1}n such that g · s = 0 (mod 2).
+Doing this an expected O(n) times gives n −1 linearly independent equations about s, from which
+we can find s using Gaussian elimination.
+
+Period-finding.
+For the HSP corresponding to period-finding, G = Zϕ(N) and H = ⟨r⟩, and
+
+H⊥= {χb | e2πibh/ϕ(N) = 1 for all h ∈H} = {χb | br/ϕ(N) ∈{0, . . . , r −1}}.
+
+Accordingly, the output of the algorithm is an integer multiple b = cϕ(N)/r of ϕ(N)/r, for uniformly
+random c ∈{0, . . . , r −1}.
+Notice that the algorithm doesn’t actually know ϕ(N), which creates two problems. First, of
+the 4 numbers b, c, ϕ(N), r involved in the equation b = cϕ(N)/r we only know the measurement
+outcome b, which is not enough to compute r. Second, step 5 of the algorithm wants to do a QFT
+corresponding to the group Zϕ(N) but it doesn’t know ϕ(N); and even if we knew ϕ(N), we’ve
+only seen how to efficiently implement a QFT over Zq when q is a power of 2. Fortunately, if we
+actually use the QFT over Zq for q a power of 2 that is roughly N2 (and in step 1 set up a uniform
+superposition over Zq instead of over G), then one can show that the above algorithm still works:
+the measurement yields an integer b that (with constant probability) is close to an integer multiple
+of q/r.5 This is basically just Shor’s algorithm as described in Chapter 5.
+
+Discrete logarithm.
+For the HSP corresponding to the discrete log problem, where G = ZN×ZN
+and H = ⟨(a, 1)⟩, a small calculation shows that H⊥= {χ(c,−ac) | c ∈ZN} (see Exercise 2). Hence
+sampling from H⊥yields some label (c, −ac) ∈G of an element of H⊥, from which we can compute
+the discrete logarithm a if gcd(c, N) = 1 (repeating a small number of times will give such a c
+with high probability). The QFT corresponding to G is FN ⊗FN, which we don’t know how to
+implement efficiently for arbitrary N, but which we can replace by Fq ⊗Fq for some power-of-2 q
+chosen to be somewhat larger than N.
+
+4This is a linear constraint mod N. For example, say G = ZN1 × ZN2, and g = (g1, g2) is the label of an element
+of H⊥. Then 1 = χg(h) = ωg1h1
+N1
+ωg2h2
+N2
+for all h = (h1, h2) ∈H, equivalently g1h1N2 + g2h2N1 = 0 mod N1N2.
+5There is something that needs to be proved here, but we will skip the details. In fact one can even use a Fourier
+transform for q = O(N) instead of O(N 2) [134]. Note that this also reduces the number of qubits used by Shor’s
+algorithm from roughly 3 log N to roughly 2 log N.
+
+49
+
+
+===== PDF PAGE 62 =====
+
+In the above algorithm we assumed G is a finite Abelian group. These techniques have been much
+extended to the case of infinite groups such as G = Z and even Rd, to obtain efficient quantum
+algorithms for problems like Pell’s equation [135], and computing properties in number fields [61].
+
+6.3
+General non-Abelian HSP
+
+6.3.1
+The symmetric group and the graph isomorphism problem
+
+The Abelian HSP covers a number of interesting computational problems, including period-finding
+and discrete log. However, there are also some interesting computational problems that can be cast
+as an instance of HSP with a non-Abelian G. Unfortunately we do not have an efficient algorithm
+for most non-Abelian HSPs.
+A good example is the graph isomorphism (GI) problem: given two undirected n-vertex graphs
+G1 and G2, decide whether there exists a bijection taking the vertices of G1 to those of G2 that
+makes the two graphs equal. No efficient classical algorithm is known for GI, so it would be great
+if we could solve this efficiently on a quantum computer.6
+
+How can we try to solve this via the HSP? Let G be the 2n-vertex graph that is the disjoint
+union of the two graphs G1 and G2. Let G = S2n. Let f map π ∈S2n to π(G), which means that
+edge (i, j) becomes edge (π(i), π(j)). Let H be the automorphism group Aut(G) of G, which is the
+set of all π ∈S2n that map G to itself. This gives an instance of the HSP, and solving it would give
+us a generating set of H = Aut(G).
+Assume for simplicity that each of G1 and G2 is connected. If G1 and G2 are not isomorphic,
+then the only automorphisms of G are the ones that permute vertices inside G1 and inside G2:
+Aut(G) = Aut(G1) × Aut(G2). However, if the two graphs are isomorphic, then Aut(G) will also
+contain a permutation that swaps the first n with the second n vertices. Accordingly, if we were
+able to find a generating set of the hidden subgroup H = Aut(G), then we can just check whether
+all generators are in Aut(G1) × Aut(G2) and decide graph isomorphism.
+
+6.3.2
+Non-Abelian QFT on coset states
+
+One can try to design a quantum algorithm for general, non-Abelian instances of the HSP along the
+lines of the earlier standard algorithm: set up a uniform superposition over a random coset of H,
+apply the QFT corresponding to G, measure the final state, and hope that the result gives useful
+information about H. QFTs corresponding to non-Abelian G are much more complicated than in
+the Abelian case, because the irreducible representations ρ can now have dimension d > 1. For
+completeness, let’s write down the QFT anyway. Let �G denote the set of irreducible representations
+of G, and dim(ρ) be the dimension of a particular ρ ∈�G. We can assume without loss of generality
+that the dim(ρ) × dim(ρ) matrices ρ(g) are unitary. The QFT corresponding to G is defined as
+follows:
+
+|g⟩�−→
+�
+
+ρ∈�G
+
+�
+
+dim(ρ)
+
+|G|
+|ρ⟩
+
+dim(ρ)
+�
+
+i,j=1
+ρ(g)ij|i, j⟩,
+
+where |ρ⟩denotes a name or label of ρ. It can be shown that this map is unitary. In particular,
+|G| = �
+
+ρ∈�G dim(ρ)2, which implies that the dimensions on the left and the right are the same,
+
+6For a long time, the best algorithm for GI took time roughly 2
+√n [34], but in a recent breakthrough Babai gave a
+“quasi-polynomial” algorithm, which is 2(log n)O(1) time [33]. That’s not yet polynomial, but a lot faster than before.
+
+50
+
+
+===== PDF PAGE 63 =====
+
+and that the right-hand state has norm 1.
+In many cases this QFT can still be implemented
+with an efficient quantum circuit, including for the symmetric group G = S2n that is relevant for
+graph isomorphism [38, 200]. However, that is not enough for an efficient algorithm: the standard
+algorithm does not always yield much information about the hidden H ≤S2n [131, 201, 136].
+There are some special cases of non-Abelian HSP that can be computed efficiently, for instance
+for normal subgroups [137], solvable groups [258, 148], and nil-2 groups [149].
+
+6.3.3
+Query-efficient algorithm
+
+While we do not have a general efficient quantum algorithm for the non-Abelian HSP, there does
+exist an algorithm that needs to compute f only a few times, i.e., a query-efficient algorithm, due
+to Ettinger et al. [113]. We will sketch this now.
+Consider steps 1–3 of the standard algorithm for the Abelian case. Even in the general non-
+Abelian case, this produces a coset state, i.e., a two-register superposition where the second register
+ranges over the values of f, and the first register will be a uniform superposition over the coset of
+H that corresponds to that value of f. Suppose we do this m times, producing a state |ψH⟩which
+is the tensor product of m coset states for the same unknown H (for simplicity, below we’ll ignore
+the fact that this state also depends on the particular values f takes on the cosets of H). One can
+show that the coset states corresponding to different possible H are pairwise almost orthogonal:
+|⟨ψH|ψH′⟩| is exponentially small in m. How large should we take m to ensure that these states are
+“sufficiently orthogonal” to enable us to learn H from |ψH⟩? The hidden subgroup H is generated
+by a set of ≤log |G| elements. Hence the total number of possible H that we want to distinguish is
+at most
+�|G|
+log |G|
+�
+≤2(log |G|)2. This upper bound on the number of possible H allows us to define a
+POVM measurement {EH} (see Section 1.2.2 for the definition of POVM), with one element for each
+possible hidden subgroup H, such that if we measure |ψH⟩with this POVM, then we are likely to
+get the correct outcome H. Choosing m = O((log |G|)2) makes the states “sufficiently orthogonal”
+for this idea to work (see Exercise 4). This POVM need not be efficiently implementable: circuits
+to implement it (using only a computational-basis measurement at the end) may require a number
+of elementary gates that’s polynomial in |G|. But at least the number of times we need to query
+the function f is only polylogarithmic in |G|.
+
+For those interested in more HSP results, a good source is Childs’s lecture notes [87, Chapter 4–14].
+
+Exercises
+
+1. Show that the Deutsch-Jozsa problem for n = 1 (i.e., where f : {0, 1} →{0, 1}) is an instance
+of the HSP. Explicitly say what G, f, H, and H⊥are, and how sampling from H⊥allows you
+to solve the problem.
+
+2. Show that for the HSP corresponding to discrete log, we indeed have H⊥= {χ(c,−ac) | c ∈ZN}
+as claimed near the end of Section 6.2.2.
+
+3. This exercise explains Diffie-Hellman key exchange, which is secure under the assumption
+that the adversary cannot efficiently compute discrete logarithms. Alice and Bob choose a
+public key consisting of a large prime p (say, of 1000 or 2000 bits) and generator γ of the
+group Z∗
+p, which has size ϕ(p) = p −1. To agree on a shared secret key K, Alice chooses a
+uniformly random a ∈{0, . . . , p −2} and sends Bob the group element A = γa; Bob chooses
+
+51
+
+
+===== PDF PAGE 64 =====
+
+a uniformly random b ∈{0, . . . , p−2} and sends Alice B = γb. Alice and Bob use K = γab as
+their secret key, which they can use for instance to encrypt messages using a one-time pad.
+
+(a) Show that both Alice and Bob can efficiently compute K given the communication.
+
+(b) Show that an adversary who can efficiently compute discrete logarithms, can compute
+K from the public key and the communication tapped from the channel (i.e., A, B, p
+and γ, but not a and b).
+
+4. Suppose we are given an unknown state |ψi⟩from a known set of K states {|ψj⟩| j ∈[K]}.
+
+(a) Suppose the states are pairwise orthogonal: ⟨ψj|ψk⟩= δjk. Give a projective measure-
+ment that determines i with probability 1.
+
+(b) (H) Suppose the states are pairwise almost orthogonal: |⟨ψj|ψk⟩| ≤1/100K2 for all
+distinct j, k ∈[K]. Define Ei = 2
+
+3|ψi⟩⟨ψi|. Show that I−�K
+i=1 Ei is positive semidefinite.
+
+(c) Under the same assumption as (b), give a POVM that determines i with success prob-
+ability at least 2/3.
+
+5. (H) Suppose we have an efficient algorithm to produce, from a given undirected n-vertex
+graph G, the following n2-qubit state:
+
+aG
+�
+
+π∈Sn
+|π(G)⟩,
+
+where the basis states correspond to n×n adjacency matrices. Here aG is a scalar that makes
+the norm equal to 1. Use this procedure to efficiently decide (with high success probability)
+whether two given graphs G1 and G2 are isomorphic or not.
+
+52
+
+
+===== PDF PAGE 65 =====
+
+Chapter 7
+
+Grover’s Search Algorithm
+
+The second-most important quantum algorithm after Shor’s is Grover’s search algorithm [132]. It
+doesn’t provide an exponential speed-up, only a quadratic speed-up, but it is much more widely
+applicable than Shor.
+
+7.1
+The problem
+
+The search problem:
+For N = 2n, we are given an arbitrary x ∈{0, 1}N. The goal is to find an i such that xi = 1 (and
+to output ‘no solutions’ if there are no such i). We denote the number of solutions in x by t (i.e.,
+t is the Hamming weight of x).
+
+This problem may be viewed as a simplification of the problem of searching an N-slot unordered
+database or search space, modeled by an N-bit string. Classically, a randomized algorithm would
+need Θ(N) queries to solve the search problem. Grover’s algorithm solves it in O(
+√
+
+N) queries,
+and O(
+√
+
+N log N) other gates (the number of gates can be reduced a bit further, see Exercise 9).
+
+7.2
+Grover’s algorithm
+
+Let Ox,±|i⟩= (−1)xi|i⟩denote the ±-type oracle for the input x (i.e., a phase-query), and R0 be
+the unitary transformation that puts a −1 in front of all basis states |i⟩where i ̸= 0n, and that
+does nothing to the basis state |0n⟩.1 The Grover iterate is
+
+G = H⊗nR0H⊗nOx,±.
+(7.1)
+
+Note that 1 Grover iterate makes 1 query, and uses O(log N) other gates.
+Grover’s algorithm starts in the n-bit state |0n⟩, applies a Hadamard transformation to each
+qubit to get the uniform superposition |U⟩=
+1
+√
+
+N
+�
+i |i⟩of all N indices, applies G to this state k
+times (for some k to be chosen later), and then measures the final state. Intuitively, what happens
+is that in each iteration some amplitude is moved from the indices of the 0-bits to the indices of
+the 1-bits. The algorithm stops when almost all of the amplitude is on the 1-bits, in which case a
+measurement of the final state will probably give the index of a 1-bit. Figure 7.1 illustrates this.
+
+1This unitary R0 is independent of x, and can be implemented using O(n) elementary gates (Exercise 2.9.a).
+
+53
+
+
+===== PDF PAGE 66 =====
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+|0⟩
+
+|0⟩
+
+|0⟩
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+measure
+
+H
+
+H
+
+H
+
+G
+G
+
+. . .
+
+. . .
+
+. . .
+
+G
+
+�
+��
+�
+k
+
+Figure 7.1: Grover’s algorithm, with k Grover iterates
+
+In order to analyze this, define the following “good” and “bad” states, corresponding to the
+solutions and non-solutions, respectively:
+
+|G⟩= 1
+√
+
+t
+
+�
+
+i:xi=1
+|i⟩and |B⟩=
+1
+√
+
+N −t
+
+�
+
+i:xi=0
+|i⟩.
+
+Then the uniform state over all indices can be written as
+
+|U⟩=
+1
+√
+
+N
+
+N−1
+�
+
+i=0
+|i⟩= sin(θ)|G⟩+ cos(θ)|B⟩,
+for θ = arcsin
+�
+
+t/N.
+
+The Grover iterate G is actually the product of two reflections. A reflection through a subspace V
+is a unitary A such that Av = v for all vectors v ∈V , and Aw = −w for all w that are orthogonal
+to V . Note that we can write A = 2PV −I, where PV is the projector onto subspace V . If V is
+1-dimensional, spanned by vector u, we also call this a reflection through u.
+Firstly, Ox,± is a reflection through the subspace V spanned by the basis states that are not
+solutions; restricted to the 2-dimensional space spanned by |G⟩and |B⟩this is in fact just a reflection
+through the state |B⟩.2 Secondly,
+
+H⊗nR0H⊗n = H⊗n(2|0n⟩⟨0n| −I)H⊗n = 2H⊗n|0n⟩⟨0n|H⊗n −H⊗nIH⊗n = 2|U⟩⟨U| −I
+
+is a reflection through |U⟩.
+Here is Grover’s algorithm restated, assuming we know the fraction of solutions is ε = t/N:
+
+1. Set up the starting state |U⟩= H⊗n|0⟩
+
+2. Repeat the following k = O(1/√ε) times:
+
+(a) Reflect through |B⟩(i.e., apply Ox,±)
+
+(b) Reflect through |U⟩(i.e., apply H⊗nR0H⊗n)
+
+3. Measure the first register and check that the resulting i is a solution
+
+2Note that Ox,± is not (and is not claimed to be, and does not need to be for our purposes) a reflection through |B⟩
+in the full N-dimensional space. For example, if 3 and 4 are non-solutions, then the state
+1
+√
+
+2(|3⟩−|4⟩) is orthogonal
+to |B⟩, yet Ox,± maps that state to itself rather than to minus itself (the latter is what a reflection through |B⟩in
+the full N-dimensional space would do).
+
+54
+
+
+===== PDF PAGE 67 =====
+
+Geometric argument:
+There is a fairly simple geometric argument why the algorithm works.
+The analysis is in the 2-dimensional real plane spanned by |B⟩and |G⟩. We start with
+
+|U⟩= sin(θ)|G⟩+ cos(θ)|B⟩.
+
+The two reflections (a) and (b) increase the angle from θ to 3θ, moving us towards the good state
+as illustrated in Figure 7.2.
+
+|B⟩
+
+|G⟩
+
+θ
+|U⟩
+
+✻
+
+✲
+✿
+|B⟩
+
+|G⟩
+
+θ
+θ
+
+|U⟩
+
+Ox,±|U⟩
+
+✻
+
+✲
+✿
+
+③
+|B⟩
+
+|G⟩
+
+θ
+2θ
+|U⟩
+
+G|U⟩
+✻
+
+✲
+✿
+
+✣
+
+Figure 7.2: The first iteration of Grover: (picture on the left) start with |U⟩; (middle) reflect
+through |B⟩to get Ox,±|U⟩; (right) reflect through |U⟩to get G|U⟩
+
+The next two reflections (a) and (b) increase the angle with another 2θ, etc. More generally,
+after k applications of (a) and (b) our state has become
+
+sin((2k + 1)θ)|G⟩+ cos((2k + 1)θ)|B⟩.
+
+If we now measure, then the probability of seeing a solution is Pk = sin((2k + 1)θ)2. We want Pk
+to be as close to 1 as possible. Note that if we can choose ˜k = π
+
+4θ −1/2, then (2˜k + 1)θ = π/2 and
+hence P˜k = sin(π/2)2 = 1. An example where this works is if t = N/4, for then θ = π/6 and ˜k = 1.
+Unfortunately ˜k = π
+
+4θ −1/2 will usually not be an integer, and we can only do an integer number
+of Grover iterations. However, if we choose k to be the integer closest to ˜k, then our final state will
+still be close to |G⟩and the failure probability will still be small (assuming t ≪N):
+
+1 −Pk
+=
+cos((2k + 1)θ)2 = cos((2˜k + 1)θ + 2(k −˜k)θ)2
+
+=
+cos(π/2 + 2(k −˜k)θ)2 = sin(2(k −˜k)θ)2 ≤sin(θ)2 = t
+
+N ,
+
+where we used |k −˜k| ≤1/2. Since θ = arcsin
+�
+
+t/N ≥
+�
+
+t/N, the number of queries is k ≤π
+
+4θ ≤
+
+π
+4
+
+�
+
+N
+
+t .
+
+Algebraic argument:
+For those who don’t like geometry, here’s an alternative (but equivalent)
+algebraic argument.
+Let ak denote the amplitude of the indices of the t 1-bits after k Grover
+iterates, and bk the amplitude of the indices of the 0-bits. Initially, for the uniform superposition
+|U⟩we have a0 = b0 = 1/
+√
+
+N. Using that H⊗nR0H⊗n =
+2
+N J −I, where J is the N × N all-1s
+matrix, we find the following recursion:
+
+ak+1
+=
+N −2t
+
+N
+ak + 2(N −t)
+
+N
+bk
+
+bk+1
+=
+−2t
+
+N ak + N −2t
+
+N
+bk
+
+55
+
+
+===== PDF PAGE 68 =====
+
+The following formulas, due to Boyer et al. [64], provide a closed form for ak and bk (which may be
+verified by substituting them into the recursion). With θ = arcsin
+�
+
+t/N as before, define
+
+ak
+=
+1
+√
+
+t sin((2k + 1)θ)
+
+bk
+=
+1
+√
+
+N −t cos((2k + 1)θ)
+
+Accordingly, after k iterations the success probability (the sum of squares of the amplitudes of the
+locations of the t 1-bits) is the same as in the geometric analysis
+
+Pk = t · a2
+k = (sin((2k + 1)θ))2.
+
+Thus we have a bounded-error quantum search algorithm with O(
+�
+
+N/t) queries, assuming we
+know t. We now list (without full proofs) a number of useful variants of Grover:
+
+• If we know t exactly, then the algorithm can be tweaked to end up in exactly the good state.
+Roughly speaking, you can make the angle θ slightly smaller, such that ˜k = π/4θ −1/2
+becomes an integer (see Exercise 5).
+
+• If we do not know t, then there is a problem: we do not know which k to use, so we do
+not know when to stop doing the Grover iterates. Note that if k gets too big, the success
+probability Pk = (sin((2k + 1)θ))2 goes down again! However, a slightly more complicated
+algorithm due to [64] (basically running the above algorithm with exponentially increasing
+guesses for k) shows that an expected number of O(
+�
+
+N/t) queries still suffices to find a
+solution if there are t solutions. If there is no solution (t = 0), then we can easily detect that
+by checking xi for the i’s that the algorithm outputs.
+
+• If we know a lower bound τ on the actual (possibly unknown) number of solutions t, then the
+above algorithm uses an expected number of O(
+�
+
+N/τ) queries. If we run this algorithm for up
+to three times its expected number of queries, then (by Markov’s inequality) with probability
+at least 2/3 it will have found a solution. This way we can turn an expected runtime into a
+worst-case runtime.
+
+• If we do not know t but would like to reduce the probability of not finding a solution to some
+small ε > 0, then we can do this using O(
+�
+
+N log(1/ε)) queries (see Exercise 6).
+NB: The important part here is that the log(1/ε) is inside the square-root; usual error-
+reduction by O(log(1/ε)) repetitions of basic Grover would give the worse upper bound of
+O(
+√
+
+N log(1/ε)) queries.
+
+7.3
+Amplitude amplification
+
+The analysis that worked for Grover’s algorithm is actually much more generally applicable (we
+will also see it again in the next chapter). In this section we describe a very similar procedure that
+allows us to amplify the “good” part of the outcome of an algorithm. Quite abstractly, suppose we
+have a quantum circuit A (without measurements) that acts on m qubits, such that
+
+A|0m⟩= √p|ψ1⟩+
+�
+
+1 −p|ψ0⟩,
+
+56
+
+
+===== PDF PAGE 69 =====
+
+where |ψ1⟩and |ψ0⟩are normalized m-qubit states that are orthogonal to each other; it could for
+instance be that the last qubit of |ψ1⟩is |1⟩and the last qubit of |ψ0⟩is |0⟩. For some reason we
+like the state |ψ1⟩and we want to increase its “weight” √p in the superposition. The following
+procedure achieves this.
+In analogy with the analysis of Grover, think of |ψ1⟩as the “good state” and |ψ0⟩as the “bad
+state,” and view these two states as the vertical and horizontal axes in a 2-dimensional picture. Our
+starting state will be |U⟩= A|0m⟩, which plays the role that the uniform state played in Grover,
+and which is of course easy to obtain by applying A once to basis state |0m⟩. The angle between
+|U⟩and the horizontal axis is θ = arcsin √p. We would like to rotate this initial state towards the
+good state, i.e., towards the vertical axis. As for Grover, we could implement the desired rotation
+as a product of two reflections: a reflection through the bad state and a reflection through |U⟩.
+For the first reflection, suppose we have a circuit RG that can somehow distinguish the good
+state from the bad state by putting a “−” in front of |ψ1⟩and leaving |ψ0⟩alone. For example, if
+the last qubit of |ψ1⟩is |1⟩and the last qubit of |ψ0⟩is |0⟩, then RG would be extremely easy: it
+would just apply a Z-gate to the last qubit. The second reflection can be implemented as
+
+AR0A−1.
+
+It is easy to check that this maps the state |U⟩= A|0m⟩to itself, while every state orthogonal
+to |U⟩gets a “−” in front of it, so indeed this reflects through |U⟩. Like before, the product of
+these two reflections corresponds to a rotation by an angle of 2θ in the 2-dimensional picture. Since
+we need A−1 for this reflection, it is important that A is just a unitary, and does not involve any
+measurements.
+The following amplitude amplification procedure from [68] increases the amplitude of the good
+state to be close to 1:
+
+1. Setup the starting state |U⟩= A|0m⟩
+
+2. Repeat the following O(1/√p) times:
+
+(a) Reflect through the bad state |ψ0⟩(i.e., apply RG)
+
+(b) Reflect through |U⟩(i.e., apply AR0A−1)
+
+The analysis is the same as for Grover: the initial angle between our algorithm’s state and the
+horizontal axis is θ and every iteration increases this angle by 2θ, so after k iterations our state is
+
+sin((2k + 1)θ)|ψ1⟩+ cos((2k + 1)θ)|ψ0⟩.
+
+We would like to end up with angle (2k + 1)θ ≈π/2, because then the amplitude of the good state
+|ψ1⟩would be close to sin(π/2) = 1. Hence, like before, we choose k to be π
+
+4θ −1/2 rounded to the
+nearest integer. This is O(1/√p). If we do not know in advance what p is, then we can try out
+exponentially decreasing guesses for its value, similar to how we handle the case of Grover with
+unknown number of solutions.
+Note that the Hadamard transform H⊗n can be viewed as an algorithm with success probability
+p = t/N for a search problem of size N with t solutions, because H⊗n|0n⟩is the uniform superpo-
+sition over all N locations. Hence Grover’s algorithm is a special case of amplitude amplification,
+where m = n, A = A−1 = H⊗n, and RG corresponds to a phase-query to x.
+
+57
+
+
+===== PDF PAGE 70 =====
+
+Amplitude amplification allows to speed up a large class of classical algorithms: any unitary
+algorithm A that has some non-trivial probability p of finding a solution to whatever problem
+we’re trying to solve, and where we can efficiently recognize a solution, can be amplified to success
+probability nearly 1 by O(1/√p) runs of A and A−1. In contrast, classically we would need to
+repeat A O(1/p) times before we have success probability close to 1.
+
+7.4
+Application: faster solution for satisfiability
+
+Grover’s algorithm has many applications: basically any classical algorithm that has some search-
+component can be improved using Grover’s algorithm as a subroutine. This includes many basic
+computer applications such as finding shortest paths and minimum spanning trees, various other
+graph algorithms, etc.
+
+We can also use it to speed up the computation of NP-complete problems (see Chapter 13 for
+the complexity class NP), albeit only quadratically, not exponentially. As an example, consider
+the satisfiability problem: we are given a Boolean formula ϕ(i1, . . . , in) and want to know if it has
+a satisfying assignment, i.e., a setting of the bits i1, . . . , in that makes ϕ(i1, . . . , in) = 1. A classical
+brute-force search along all 2n possible assignments takes time roughly 2n.
+
+To find a satisfying assignment faster, define the N = 2n-bit input to Grover’s algorithm by
+xi = ϕ(i), where i ∈{0, 1}n.
+For a given assignment i = i1 . . . in it is easy to compute ϕ(i)
+classically in polynomial time. We can write that computation as a reversible circuit (using only
+Toffoli gates), corresponding to a unitary Uϕ that maps |i, 0, 0⟩�→|i, ϕ(i), wi⟩, where the third
+register holds some classical workspace the computation may have needed. To apply Grover we
+need an oracle that puts the answer in the phase and doesn’t leave workspace around (because that
+could mess up the intended interference effects, see Exercise 2.11 for an example). Define Ox as the
+unitary that first applies Uϕ, then applies a Z-gate to the second register, and then applies U−1
+ϕ
+to “clean up” the workspace again. This has the form we need for Grover: Ox,±|i⟩= (−1)xi|i⟩;
+here we did not explicitly write the workspace qubits, which start and end in |0⟩. Now we can run
+Grover and find a satisfying assignment with high probability if there is one, using a number of
+elementary operations that is
+√
+
+2n times some polynomial factor.
+
+If brute-force search is basically the best thing we can do classically to solve some particular NP-
+hard problem, then that computation can be sped up quadratically on a quantum computer using
+Grover search like above. However, there are also NP-hard problems where we know algorithms
+that still run in exponential time, but that are much faster than brute-force search. For example,
+consider the famous Traveling Salesman Problem (TSP): given an n-vertex graph with weights
+(distances) on the edges, find the shortest tour in this graph that visits every node exactly once.
+Since there are (n −1)! many different tours, classical brute-force search would take time (n −1)!,
+times some polynomial in n. Grover’s algorithm could speed this up quadratically. However, there
+are much more clever classical algorithms for TSP. In particular, the Bellman-Held-Karp dynamic
+programming algorithm solves TSP in time 2n, times a polynomial in n. This algorithm is much
+faster than the Grover-based O(
+√
+
+n!) (n! ≈(n/e)n by Stirling’s approximation), and is not amenable
+to a straightforward speed-up using Grover. Nevertheless, it turns out quantum computers can still
+solve TSP polynomially faster than the best known classical algorithms, albeit in a much more
+complicated way than by just applying Grover [17].
+
+58
+
+
+===== PDF PAGE 71 =====
+
+Exercises
+
+1.
+(a) Suppose n = 2, and x = x00x01x10x11 = 0001. Give the specific initial state, three
+intermediate states, and final state in Grover’s algorithm, for k = 1 iterations (using
+the decomposition of one Grover iterate into a product of four unitaries from Eq. (7.1)).
+What is the success probability?
+
+(b) Give the final state after k = 2 iterations. What is now the success probability?
+
+2.
+(a) Suppose you have a quantum algorithm for some computational problem that takes
+√
+
+N operations on inputs of size N, each operation of constant cost C. And the best-
+possible classical algorithm for the same computational problem takes N operations,
+each of constant cost c. Suppose C is much larger than c (which is certainly the case in
+the current state of quantum technology: doing one elementary quantum gate is much
+more expensive than doing one classical logic gate). How large does the input-size N
+have to be before the quantum algorithm has lower cost than the best-possible classical
+algorithm?
+
+(b) Suppose you have a quantum algorithm of cost C
+√
+
+2n for satisfiability of n-variable
+Boolean formulas, where the best-possible classical algorithm has cost c2n, and again C
+is much larger than c. How large does n have to be before the quantum algorithm has
+lower cost than the best-possible classical algorithm?
+
+3. Show that if the number of solutions is t = N/4, then Grover’s algorithm always finds a
+solution with certainty after just one query. How many queries would a classical algorithm
+need to find a solution with certainty if t = N/4? And if we allow the classical algorithm
+error probability 1/10?
+
+4. Suppose we have a string of N = 2n bits, containing t ones (solutions) and N −t zeroes. You
+may assume you know the number t.
+
+(a) Show that we can use Grover’s algorithm to find the positions of all t ones, using an
+expected number of O(t
+√
+
+N) queries. You can argue on a high level, no need to draw
+actual quantum circuits.
+
+(b) (H) Show that this can be improved to an expected number of O(
+√
+
+tN) queries.
+
+5. At the end of Section 7.2 we claimed without proof that Grover’s algorithm can be tweaked to
+work with probability 1 if we know the number of solutions exactly. For N = 2n, this question
+asks you to provide such an exact algorithm for an x ∈{0, 1}N with a unique solution (so we
+are promised that there is exactly one i ∈{0, 1}n with xi = 1, and our goal is to find this i).
+
+(a) Give the success probability of the basic version of Grover’s algorithm after k iterations.
+
+(b) Suppose the optimal number of iterations ˜k =
+π
+4 arcsin(1/
+√
+
+N) −1
+
+2 is not an integer. Show
+
+that if we round ˜k up to the nearest integer, doing ⌈˜k⌉iterations, then the algorithm
+will have success probability strictly less than 1.
+
+(c) Define a new 2N-bit string y ∈{0, 1}2N, indexed by (n + 1)-bit strings j = j1 . . . jnjn+1,
+by setting
+
+yj =
+�1
+if xj1...jn = 1 and jn+1 = 0,
+0
+otherwise.
+
+59
+
+
+===== PDF PAGE 72 =====
+
+Show how you can implement the following (n + 1)-qubit unitary
+
+Sy : |j⟩�→(−1)yj|j⟩,
+
+using one query to x (of the usual form Ox : |i, b⟩�→|i, b ⊕xi⟩) and a few elementary
+gates.
+
+(d) Let γ ∈[0, 2π) and let Uγ =
+�cos γ
+−sin γ
+sin γ
+cos γ
+
+�
+be the corresponding rotation matrix.
+
+Let A = H⊗n ⊗Uγ be an (n + 1)-qubit unitary. What is the probability (as a function
+of γ) that measuring the state A|0n+1⟩in the computational basis gives a solution
+j ∈{0, 1}n+1 for y (i.e., such that yj = 1)?
+
+(e) (H) Give a quantum algorithm that finds the unique solution in string x with probabil-
+ity 1 using O(
+√
+
+N) queries to x.
+
+6. Given query access to x ∈{0, 1}N, with unknown Hamming weight t = |x|, we want to find
+a solution, i.e., an index i ∈{0, . . . , N −1} such that xi = 1. If x = 0N then our search
+algorithm should output “no solution.”
+
+(a) (H) Suppose we know an integer s such that t ∈{1, . . . , s}. Give a quantum algorithm
+that finds a solution with probability 1, using O(
+√
+
+sN) queries to x.
+
+(b) Suppose we know that t ∈{s + 1, . . . , N}.
+Give a quantum algorithm that finds a
+solution with probability at least 1 −2−s, using O(
+√
+
+sN) queries to x.
+
+(c) For given ε > 2−N, give a quantum algorithm that solves the search problem with
+probability ≥1 −ε using O(
+�
+
+N log(1/ε)) queries, without assuming anything about t.
+
+7. (H) Here we will approximately count the number of 1s in a string x ∈{0, 1}N. Let t = |x|
+denote that (unknown) number.
+
+(a) Given an integer m ∈{1, . . . , N}, describe a quantum algorithm that makes O(
+�
+
+N/m)
+queries to x and decides between the cases t ≤m/2 and t ∈[m, 2m] with probability
+at least 2/3. That is, the algorithm has to output 0 with probability ≥2/3 whenever
+t ≤m/2, has to output 1 with probability ≥2/3 whenever t ∈[m, 2m], and can output
+whatever it wants for other values of t.
+
+(b) Give a quantum algorithm that uses O(
+√
+
+N log log N) queries to x and that outputs an
+integer m such that, with probability ≥2/3, the unknown t lies between m/2 and 2m.
+
+8. Suppose we have a quantum circuit A acting on m qubits, such that
+
+A|0m⟩= √a|ϕ1⟩|1⟩+
+√
+
+1 −a|ϕ0⟩|0⟩,
+
+where |ϕ1⟩and |ϕ0⟩are arbitrary normalized (m −1)-qubit states, and a ∈[0, 1/4] is an
+unknown number. Our goal is to estimate a (this is known as amplitude estimation). Let S
+be the 2-dimensional subspace spanned by |ϕ1⟩|1⟩and |ϕ0⟩|0⟩.
+
+(a) Show that in S, the unitary I ⊗Z (where I is the identity on m −1 qubits and Z is the
+phase-flip gate) is a reflection through |ϕ0⟩|0⟩.
+
+(b) Let R0 = 2|0m⟩⟨0m| −I be a reflection through |0m⟩.
+Show that in S, the unitary
+AR0A−1 is a reflection through A|0m⟩.
+
+60
+
+
+===== PDF PAGE 73 =====
+
+(c) Show that in S, the unitary U = AR0A−1 · (I ⊗Z) is a rotation over angle 2θ, where
+θ = arcsin √a.
+
+(d) (H) Given some ε ∈(0, 1/2), show how you can use phase estimation (Section 4.6) with
+O(1/ε) applications of U to find an approximation ˜a of a such that |
+√
+
+˜a −√a| ≤ε.
+
+(e) (H) Suppose we have query-access to a string x ∈{0, 1}N of unknown Hamming weight
+t = |x|. Use (d) to compute an integer ˜t such that |˜t −t| ≤
+√
+
+N with success probability
+≥2/3, using O(
+√
+
+N) queries to x.
+
+(f) Suppose x ∈{0, 1}N has |x| ∈{0, 1}. Use (d) to compute |x| with success probability
+≥2/3, using O(
+√
+
+N) queries to x (you may not invoke Grover here).
+
+9. Suppose you are given query access to x ∈{0, 1}N, where |x| = 1 and N = 2n. You want to
+find the unique index i = in−1 . . . i0 ∈{0, 1}n such that xi = 1.
+
+(a) Let k ∈{1, . . . , n −1}. Fix the first n −k bits of the n-bit index in−1 . . . i0 to specific
+values i∗
+n−1 . . . i∗
+k. Give a quantum algorithm to find a solution with success probability 1
+(if one exists) among the 2k indices i ∈{0, 1}n that start with i∗
+n−1 . . . i∗
+k, using O(
+√
+
+2k)
+queries and O(
+√
+
+2k k) other gates.
+
+(b) Give a quantum algorithm that solves the search problem on x using O(
+√
+
+N) queries
+and O(
+√
+
+N log log N) other gates.
+
+Comment: The O(
+√
+
+N log log N) gates achieved here is better than standard Grover, which uses O(
+√
+
+N log N)
+
+gates. The log log N can be reduced a bit further, to nearly-constant [29].
+
+10. (H) Let x = x0 . . . xN−1 be a sequence of distinct real numbers, where N = 2n, and each xi
+can be written exactly using b bits. We can query these in the usual way, i.e., we can apply
+(n + b)-qubit unitary Ox : |i, 0b⟩�→|i, xi⟩, as well as its inverse. The minimum of x is defined
+as min{xi | i ∈{0, . . . , N −1}}. Give a quantum algorithm that finds (with probability
+≥2/3) an index achieving the minimum, using at most O(
+√
+
+N log N) queries to the input,
+and prove that this algorithm works.
+
+Bonus: give a quantum algorithm that uses O(
+√
+
+N) queries.
+
+11. Let x = x0 . . . xN−1, where N = 2n and xi ∈{0, 1}n, be an input that we can query in the
+usual way. We are promised that this input is 2-to-1: for each i there is exactly one other j
+such that xi = xj.3 Such an (i, j)-pair is called a collision.
+
+(a) Suppose S is a uniformly randomly chosen set of s ≤N/2 elements of {0, . . . , N −1}.
+What is the probability that there exists a collision in S?
+
+(b) (H) Give a classical randomized algorithm that finds a collision (with probability ≥2/3)
+using O(
+√
+
+N) queries to x.
+
+(c) (H) Give a quantum algorithm that finds a collision (with probability ≥2/3) using
+O(N1/3) queries.
+
+12. Consider an undirected graph G = (V, E), with vertex set V = {1, . . . , n} and edge-set E.
+We say G is connected if, for every pair of vertices i, j ∈V , there is a path between i and
+
+3The 2-to-1 inputs for Simon’s algorithm are a very special case of this, where the collisions are determined by a
+secret string s ∈{0, 1}n: xi equals xj if i = j ⊕s.
+
+61
+
+
+===== PDF PAGE 74 =====
+
+j in the graph. The adjacency matrix of G is the n × n Boolean matrix M where Mij = 1
+iff (i, j) ∈E (note that M is a symmetric matrix because G is undirected). Suppose we are
+given input graph G in the form of a unitary that allows us to query whether an edge (i, j)
+is present in G or not:
+OM : |i, j, b⟩�→|i, j, b ⊕Mij⟩.
+
+(a) Assume G is connected. Suppose we have a set A of edges which we already know to be
+in the graph (so A ⊆E; you can think of A as given classically, you don’t have to query
+it). Let GA = (V, A) be the subgraph induced by only these edges, and suppose GA is
+not connected, so it consists of c > 1 connected components. Call an edge (i, j) ∈E
+“good” if it connects two of these components. Give a quantum algorithm that finds a
+good edge with an expected number of O(n/√c −1) queries to M.
+
+(b) Give a quantum algorithm that uses at most O(n3/2) queries to M and decides (with
+success probability at least 2/3) whether G is connected or not.
+
+(c) Show that classical algorithms for deciding (with success probability at least 2/3) whether
+G is connected, need to make Ω(n2) queries to M.
+
+13. This exercise is about reducing the error probability in Simon’s algorithm (Chapter 3) to 0.
+
+(a) (H) Suppose we already have k ≤n −2 linearly independent strings j1, . . . , jk ∈{0, 1}n
+
+that are orthogonal to the hidden string s (i.e., jℓ· s = 0 mod 2, for all ℓ∈{1, . . . , k}).
+Let V be the subspace of 2k strings that they span (with bitwise addition mod 2). In
+the setting of Simon’s problem, give a quantum algorithm that uses O(1) queries and
+with probability 1 outputs some j ̸∈V such that j · s = 0 mod 2. You don’t need to
+write out the circuit fully, but be precise about what you’re applying, what the different
+components are etc.
+
+(b) Give a quantum algorithm that finds s with probability 1, using O(n) queries.
+
+62
+
+
+===== PDF PAGE 75 =====
+
+Chapter 8
+
+Quantum Walk Algorithms
+
+8.1
+Classical random walks
+
+Consider an undirected graph G with N vertices. Suppose at least an ε-fraction of the vertices are
+“marked,” and we would like to find a marked vertex. One way to do this is with a random walk:
+
+Start at some specific vertex y of the graph.
+Repeat the following a number of times: Check if y is marked, and if not then choose
+one of its neighbors at random and set y to be that neighbor.
+
+This may seem like a stupid algorithm, but it has certain advantages. For instance, it only needs
+space O(log N), because you only need to keep track of the current vertex y, and maybe a counter
+that keeps track of how many steps you’ve already taken.1 Such an algorithm can for example
+decide whether there is a path from a specific vertex y to a specific vertex x using O(log N) space.
+We’d start the walk at y and only x would be marked; one can show that if there exists a path
+from y to x in G, then we will reach x in poly(N) steps.
+Let us restrict attention to d-regular graphs without self-loops, so each vertex has exactly d
+neighbors. A random walk on such a graph G corresponds to an N × N symmetric matrix P,
+where Px,y = 1/d if (x, y) is an edge in G, and Px,y = 0 otherwise. This P is the normalized
+adjacency matrix of G. If v ∈RN is a vector with a 1 at position y and 0s elsewhere, then Pv is
+a vector whose x-th entry is (Pv)x = 1/d if (x, y) is an edge, and (Pv)x = 0 otherwise. In other
+words, Pv is the uniform probability distribution over the neighbors of y, which is what you get by
+taking one step of the random walk starting at y. More generally, if v is a probability distribution
+on the vertices, then Pv is the new probability distribution on vertices after taking one step of the
+random walk, and P kv is the probability distribution after taking k steps.
+Suppose we start with some probability-distribution vector v (which may or may not be concen-
+trated at one vertex y). We will assume G is connected and not bipartite. Then P kv will converge
+to the uniform distribution over all vertices, and the speed of convergence is determined by the
+“gap” between the first eigenvalue of P and all other eigenvalues. This can be seen as follows. Let
+λ1 ≥λ2 ≥· · · ≥λN be the eigenvalues of P, ordered by size, and v1, . . . , vN be corresponding
+orthonormal eigenvectors.2 The largest eigenvalue is λ1 = 1, and corresponds to the eigenvector
+
+1Here we’re assuming the neighbors of a given vertex are efficiently computable, so you don’t actually need to
+keep the whole graph in memory. This will be true for all graphs we consider here.
+2Analyzing graphs by looking at the eigenvalues and eigenvectors of their adjacency matrix is called “algebraic
+graph theory” or “spectral graph theory,” see for instance [73].
+
+63
+
+
+===== PDF PAGE 76 =====
+
+v1, which is
+√
+
+N times u = (1/N), the uniform distribution over all vertices. One can show that
+our assumption that G is connected implies λ2 < 1, and our assumption that G is not bipartite
+implies λN > −1. Hence all eigenvalues λi for i ∈{2, . . . , N} will be in (−1, 1); the corresponding
+eigenvector vi will be orthogonal to the uniform vector v1, so the sum of its entries is 0. Let δ > 0
+be the difference between λ1 = 1 and maxi≥2 |λi| (hence |λi| ≤1 −δ for all i ≥2). This δ is called
+the “spectral gap” of the graph.
+Now decompose the starting distribution v as v = �N
+i=1 αivi. Since the sum of v’s entries is 1,
+and each eigenvector vi with i ≥2 has entries summing to 0, it follows that α1v1 = u. Now let us
+see what happens if we apply the random walk for k steps, starting from v:
+
+P kv = P k
+��
+
+i
+αivi
+
+�
+
+=
+�
+
+i
+αiλk
+i vi = u +
+�
+
+i≥2
+αiλk
+i vi.
+
+Consider the squared norm of the difference between P kv and u:
+
+���P kv −u
+���
+2
+=
+
+������
+
+�
+
+i≥2
+αiλk
+i vi
+
+������
+
+2
+
+=
+�
+
+i≥2
+|αi|2|λi|2k ≤∥v∥2(1 −δ)2k.
+
+Since v is a probability distribution, we have ∥v∥2 ≤1.
+By choosing k = ln(1/η)/δ, we get
+��P kv −u
+��≤η. In particular, if δ is not too small, then we get quick convergence of the random
+walk to the uniform distribution u, no matter which distribution v we started with.3 Once we are
+close to the uniform distribution, we have probability roughly ε of hitting a marked vertex. Of
+course, the same happens if we just pick a vertex uniformly at random, but that may not always
+be an option if the graph is given implicitly.
+Suppose it costs S to set up an initial state v; it costs U to update the current vertex, i.e., to
+perform one step of the random walk; and it costs C to check whether a given vertex is marked.
+“Cost” is left undefined for now, but typically it will count number of queries to some input, or
+number of elementary operations. Consider a classical search algorithm that starts at v, and then
+repeats the following until it finds a marked vertex: check if the current vertex is marked, and if
+not run a random walk for roughly 1/δ steps to get close to the uniform distribution. Ignoring
+constant factors, the expected cost before this procedure finds a marked item, is on the order of
+
+S + 1
+
+ε
+
+�
+C + 1
+
+δ U
+�
+.
+(8.1)
+
+8.2
+Quantum walks
+
+We will now modify the classical random walk algorithm preceding Eq. (8.1) to a quantum algo-
+rithm, where the distribution-preserving matrix P is changed to a norm-preserving matrix W(P)
+(i.e., a unitary). This is due to Magniez et al. [192], inspired by Szegedy [247]; our presentation is
+mostly based on Santha’s survey paper [229], to which we refer for more details and references.
+While the basis state of a classical random walk is the current vertex we are at, a basis state
+of a quantum walk has two registers, the first corresponding to the current vertex and the second
+
+3Convergence in total variation distance can be derived from this by Cauchy-Schwarz, choosing η ≪1/
+√
+
+N.
+
+64
+
+
+===== PDF PAGE 77 =====
+
+corresponding to the previous vertex. Equivalently, a basis state of a quantum walk corresponds
+to an edge of the graph.
+Our resulting quantum walk algorithm for search will actually be quite analogous to Grover’s
+algorithm. We’ll call a basis state |x⟩|y⟩“good” if x is a marked vertex, and “bad” otherwise.
+Define |px⟩= �
+y
+�
+
+Pxy|y⟩to be the uniform superposition over the neighbors of x. As for Grover,
+define “good” and “bad” states as the superpositions over good and bad basis states:
+
+|G⟩=
+1
+�
+
+|M|
+
+�
+
+x∈M
+|x⟩|px⟩and |B⟩=
+1
+�
+
+N −|M|
+
+�
+
+x̸∈M
+|x⟩|px⟩,
+
+where M denotes the set of marked vertices. Note that |G⟩is just the uniform superposition over
+all edges (x, y) where the first coordinate is marked, and |B⟩is just the uniform superposition over
+all edges (x, y) where the first coordinate is not marked.
+If ε = |M|/N and θ := arcsin √ε, then the uniform state over all edges can be written as
+
+|U⟩=
+1
+√
+
+N
+
+�
+
+x
+|x⟩|px⟩= sin(θ)|G⟩+ cos(θ)|B⟩.
+
+Here is the algorithm for searching a marked vertex if an ε-fraction is marked4:
+
+1. Setup the starting state |U⟩
+
+2. Repeat the following O(1/√ε) times:
+
+(a) Reflect through |B⟩
+
+(b) Reflect through |U⟩
+
+3. Measure the first register and check that the resulting vertex x is marked.
+
+The description and analysis of this algorithm takes places in the 2-dimensional space spanned
+by |G⟩and |B⟩. We’ll explain in a moment how to implement (a) and (b). Assuming we know
+how to do that, the proof that this algorithm finds a marked vertex is the same as for Grover and
+for amplitude amplification (Chapter 7). We start with |U⟩= sin(θ)|G⟩+ cos(θ)|B⟩. The two
+reflections (a) and (b) increase the angle from θ to 3θ, moving us towards the good state (similarly
+to the analysis for Grover, you can draw a 2-dimensional picture with axes |B⟩and |G⟩to see this).
+More generally, after k applications of (a) and (b) our state has become
+
+sin((2k + 1)θ)|G⟩+ cos((2k + 1)θ)|B⟩.
+
+Choosing k ≈
+π
+4θ = O(1/√ε), we will have sin((2k + 1)θ) ≈1, at which point measuring the first
+register will probably yield a vertex x that is marked. We now look more closely how to implement
+the two kinds of reflections.
+
+(a) Reflect through |B⟩.
+Reflecting through |B⟩is relatively straightforward: we just have
+to “recognize” whether the first register contains a marked x, and put a −1 if so (note that this
+is really a reflection through the subspace spanned by the bad basis states, but restricted to the
+2-dimensional subspace spanned by |G⟩and |B⟩that’s the same as a reflection through |B⟩).
+
+4As in Grover, if we don’t know ε then we just run the algorithm repeatedly with exponentially decreasing guesses
+for ε (1/2, 1/4, 1/8, . . . ). If at the end we still haven’t found a marked item, we’ll conclude that probably none exists.
+
+65
+
+
+===== PDF PAGE 78 =====
+
+(b) Reflect through |U⟩.
+This is where the quantum walk comes in. Let A be the subspace
+span{|x⟩|px⟩} and B be span{|py⟩|y⟩}. Let ref(A) and ref(B) denote reflections through A and B,
+respectively. Define W(P) = ref(B)ref(A) to be the product of these two reflections. This may be
+viewed as an indirect unitary analogue of the classical random-walk operator P. Suppose we are
+able to implement the following two operations (in a controlled manner):
+
+(1) |x⟩|0⟩�→|x⟩|px⟩
+(2) |0⟩|y⟩�→|py⟩|y⟩
+
+Since (1) and (2) prepare a uniform superposition over the neighbors of x and y, respectively, one
+can think of them as taking one classical walk step “in superposition.” Note that ref(A) can be
+implemented by applying the inverse of (1), putting a minus if the second register is not |0⟩, and
+applying (1). We can similarly implement ref(B) using (2) and its inverse. Hence we can think of
+W(P) = ref(B)ref(A) as corresponding to four steps of the classical walk in superposition.
+Let us sketch the main idea for how to implement the reflection through |U⟩up to small error.
+Consider the eigenvalues and eigenvectors of W(P). The eigenvalues of W(P) can be related to
+the eigenvalues λ1, λ2, . . . of P as follows. Let θj ∈[0, π/2] be such that |λj| = cos(θj). We won’t
+prove it here, but it turns out that the eigenvalues of W(P) are of the form e±2iθj. The state |U⟩
+is an eigenvalue-1 eigenvector of W(P), corresponding to θ1 = 0. The spectral gap of P is δ, so
+all eigenvectors of W(P) that do not have eigenvalue 1, have eigenvalue e±2iθj where θj ≥
+√
+
+2δ,
+because 1 −δ ≥|λj| = cos(θj) ≥1 −θ2
+j/2. We now want to implement a reflection R(P) through
+the subspace spanned by the eigenvalue-1 eigenvectors of W(P); restricted to the 2-dimensional
+subspace spanned by |G⟩and |B⟩this will be the desired reflection through |U⟩.
+We will implement R(P) by using phase estimation (see Section 4.6) with precision
+√
+
+δ/2 on
+W(P) to distinguish the eigenvalue-1 eigenvectors from the other eigenvectors.
+This precision
+requires O(1/
+√
+
+δ) applications of W(P), and O(log(1/δ)) auxiliary qubits that start in |0⟩and where
+the estimate will be stored. Assume for simplicity that phase estimation always gives an estimate
+˜θj of θj that is within precision
+√
+
+δ/2.5 Because the nonzero θj are at least
+√
+
+2δ, approximating
+them within additive error
+√
+
+δ/2 is good enough to determine whether the actual value θj itself is 0
+or not. We then multiply the state with a −1 if the estimate is sufficiently far from 0, and finally
+reverse the phase estimation to put the auxiliary qubits back to 0. Applied to some eigenvector
+|w⟩of W(P) with corresponding eigenvalue e±2iθj, R(P) maps
+
+R(P) : |w⟩|0⟩PE
+�→
+|w⟩|˜θj⟩�→(−1)[θj̸=0]|w⟩|˜θj⟩PE
+−1
+�→
+(−1)[θj̸=0]|w⟩|0⟩.
+
+This has the desired effect: ignoring the auxiliary qubits (which start and end in 0), R(P) maps
+eigenvalue-1 eigenvectors of W(P) to themselves, and puts a −1 in front of the other eigenvectors.
+
+Now that we know how to implement the algorithm, let us look at its complexity. Consider the
+following setup, update, and checking costs:
+
+• Setup cost S: the cost of constructing |U⟩
+
+• Checking cost C: the cost of the unitary map |x⟩|y⟩�→mx|x⟩|y⟩, where mx = −1 if x is
+marked, and mx = 1 otherwise
+
+5Phase estimation will actually give a superposition over estimates ˜θj, with small but nonzero amplitudes on bad
+estimates, but we’ll skip the technical details that are needed to deal with this.
+
+66
+
+
+===== PDF PAGE 79 =====
+
+• Update cost U: the cost of one step of the quantum walk, i.e., of W(P)
+
+The cost of part (a) of the algorithm is C. Since R(P) uses O(1/
+√
+
+δ) applications of W(P), and
+a few other gates, the cost of part (b) of the algorithm is essentially O(U/
+√
+
+δ). Ignoring constant
+factors, the total cost of the algorithm is then
+
+S + 1
+√ε
+
+�
+C + 1
+√
+
+δ
+U
+�
+.
+(8.2)
+
+Compare this with the classical cost of Eq. (8.1): quantum search square-roots both ε and δ.
+
+8.3
+Applications
+
+There are a number of interesting quantum walk algorithms that beat the best classical algorithms.
+We’ll give three examples here. More can be found in [229].
+
+8.3.1
+Grover search
+
+Let us first derive a quantum algorithm for search. Suppose we have an N-bit string x of weight t,
+and we know t/N ≥ε. Consider the complete graph G on N vertices. Then the matrix P for the
+random walk on G has 0s on its diagonal, and its off-diagonal entries are all equal to 1/(N −1).
+This can be written as P =
+1
+N−1J −
+1
+N−1I, where J is the all-1 matrix and I is the identity. The
+only nonzero eigenvalue of J is N, and adding a multiple of I just shifts the eigenvalues of a matrix,
+hence the largest eigenvalue of P is λ1 = N/(N −1)−1/(N −1) = 1 (corresponding to the uniform
+vector) and all its other eigenvalues are −1/(N −1). Note that the spectral gap δ is very large
+here: δ = 1 −1/(N −1) ≈1. We’ll mark a vertex i iff xi = 1. Then, measuring cost by number
+of queries, a quantum walk on G will have S = U = 0 and C = 1. Plugging this into Eq. (8.2),
+the quantum walk will find a marked vertex (with high probability) using O(1/√ε) queries. The
+worst case is ε = 1/N, in which case we’ll use O(
+√
+
+N) queries. Not surprisingly, we’ve essentially
+rederived Grover’s algorithm.
+
+8.3.2
+Finding collisions
+
+Consider the following problem:
+
+Input: x = x0, . . . , xn−1, where each xi is an integer.6
+
+Goal: find distinct i and j such that xi = xj if these exist, otherwise output “all elements
+are distinct.”
+
+The problem of finding collisions is important in cryptography, in particular if the map i �→xi is
+a so-called “hash function.” The decision version of this problem (deciding if there exists at least
+one collision) is also known as element distinctness.
+Consider the graph whose vertices correspond to the sets R ⊆{0, . . . , n −1} of r elements. The
+total number of vertices is N =
+�n
+r
+�
+. We’ll put an edge between the vertices for R and R′ iff these
+two sets differ in exactly two elements; in other words, you can get from R to R′ by removing one
+element i from R and replacing it by a new element j. The resulting graph J(n, r) is known as
+
+6Say, all xi ≤n2 to avoid having to use too much space to store these numbers.
+
+67
+
+
+===== PDF PAGE 80 =====
+
+the Johnson graph. It is r(n −r)-regular, since every R has r(n −r) different neighbors R′. Its
+spectral gap is known to be δ =
+n
+r(n−r) [73, Sec. 12.3.2]; we won’t prove that here, just note that if
+r ≪n, then δ ≈1/r. For each set R we also keep track of the corresponding sequence of x-values,
+xR = (xi)i∈R. Hence the full “name” of a vertex is the pair (R, xR).
+We’ll call a vertex in J(n, r) marked if it contains a collision, i.e., the corresponding set R
+contains distinct i, j such that xi = xj. In the worst case there is exactly one colliding pair i, j
+(more collisions only make the problem easier). The probability that i and j are both in a random
+r-set R, is ε = r
+
+n
+r−1
+n−1. Hence the fraction of marked vertices is at least ε ≈(r/n)2.
+We will now determine the setup, checking, and update costs. The setup cost (measured in
+terms of queries) is S = r + 1: we have to create a uniform superposition |U⟩over all edges R, R′,
+and for each such basis state query all r + 1 elements of R ∪R′ to add the information xR and xR′.
+Checking whether a given vertex R, xR contains a collision doesn’t take any queries because we
+already have xR, hence C = 0. To determine the update cost, note that mapping the second register
+of |R, xR⟩|0⟩to a superposition of all neighbors R′, xR′ requires querying (in superposition for all
+neighbors R′) the value xj of the element j that was added to get R′, as well as “unquerying” the
+value xi of the element i that was removed from R (since xi’s value shouldn’t be present anymore
+in the information we write down for R′). Hence U = 2. Plugging this into Eq. (8.2), the cost of a
+quantum walk algorithm for collision-finding is
+
+S + 1
+√ε
+
+�
+C + 1
+√
+
+δ
+U
+�
+= O(r + n/√r).
+
+This cost is O(n2/3) if we choose to set r = n2/3 (rounded to an integer). What the quantum walk
+produces at the end is a superposition where, if we measure the first register, with high probability
+we’ll see a marked vertex. That way we obtain a set R that contains a collision; and because R is
+small, we can now cheaply find the colliding indices i, j ∈R.
+This query complexity O(n2/3) turns out to be the optimal quantum query complexity for
+finding collisions [5]. By some more work involving efficient data structures, using a quantum-
+accessible classical RAM, the time complexity (= total number of elementary quantum gates plus
+total number of queries) can be brought down to n2/3(log n)O(1) [15].
+
+8.3.3
+Finding a triangle in a graph
+
+Consider the following triangle-finding problem:
+
+Input: the adjacency matrix of a graph H on n vertices.
+Goal: find vertices u, v, w that form a triangle (i.e., (u, v), (v, w), (w, u) are all edges in
+the graph), if they exist.
+
+We’ll assume we have query access to the entries of the adjacency matrix of H, which tells us
+whether (u, v) is an edge or not. There are
+�n
+2
+�
+bits in this oracle, one for each potential edge
+of H. It is not hard to see that a classical algorithm needs Ω(n2) queries before it can decide
+with good probability whether a graph contains a triangle or not. For example, take a bipartite
+graph consisting of 2 sets of n/2 vertices each, such that any pair of vertices from different sets is
+connected by an edge. Such a graph is triangle-free, but adding any one edge will create a triangle.
+A classical algorithm would have to query all those edges separately.
+Let us try a quantum walk approach. Again consider the Johnson graph J(n, r). Each vertex
+will correspond to a set R ⊆{0, . . . , n −1} of r vertices, annotated with the result of querying
+
+68
+

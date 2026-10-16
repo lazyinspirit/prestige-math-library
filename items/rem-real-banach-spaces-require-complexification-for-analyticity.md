@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/rem-real-banach-spaces-require-complexification-for-analyticity.json
 id: rem-real-banach-spaces-require-complexification-for-analyticity
 kind: remark
 title: Real Banach spaces require complexification for analyticity
@@ -6,7 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9
-deps: [def-complex-sector-and-bounded-analytic-semigroup, lem-canonical-banach-complexification-of-a-real-banach-space, def-complexification-of-a-real-linear-map, def-complexification-of-a-real-vector-space, def-resolvent-of-a-closed-operator, def-sectorial-operator-with-the-semigroup-sign-convention, thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups, rem-real-and-complex-normed-space-convention, def-dependent-choice]
+deps: [def-complex-sector-and-bounded-analytic-semigroup, lem-canonical-banach-complexification-of-a-real-banach-space, def-complexification-of-a-real-linear-map, def-complexification-of-a-real-vector-space, def-resolvent-of-a-closed-operator, def-sectorial-operator-with-the-semigroup-sign-convention, thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups, def-dependent-choice]
 justified_by: []
 proof_strategy: not-applicable
 provenance:
@@ -17,8 +19,6 @@ sources:
     - title: "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)"
       url: "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf"
       locator: 'Chapter II Section 4.a, the complexification and real-operator formalism underlying sectoriality, printed pp. 95-108'
-verification:
-  precheck: n/a
 ---
 
 ## Statement

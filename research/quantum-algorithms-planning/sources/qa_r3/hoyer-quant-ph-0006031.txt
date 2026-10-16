@@ -1,0 +1,522 @@
+arXiv:quant-ph/0006031v1  7 Jun 2000
+
+On Arbitrary Phases in Quantum
+Amplitude Amplification
+
+Peter Høyer∗
+
+BRICS† , Department of Computer Science, University of Aarhus,
+Ny Munkegade, Bldg. 540, DK-8000 Aarhus C, Denmark.
+
+We consider the use of arbitrary phases in quantum amplitude amplification which is a generali-
+zation of quantum searching. We prove that the phase condition in amplitude amplification is given
+by tan(ϕ/2) = tan(φ/2)(1 −2a), where φ and ϕ are the phases used and where a is the success
+probability of the given algorithm. Thus the choice of phases depends nontrivially and nonlinearly
+on the success probability.
+Utilizing this condition, we give methods for constructing quantum
+algorithms that succeed with certainty and for implementing arbitrary rotations. We also conclude
+that phase errors of order up to
+1
+√a can be tolerated in amplitude amplification.
+
+PACS numbers: 03.67.Hk
+
+I. INTRODUCTION
+
+Most quantum algorithms developed so far are based on two techniques: Quantum Fourier Transforms and Ampli-
+tude Amplification. The latter technique is a generalization of Grover’s quantum algorithm for searching an unordered
+database [1], and it allows a quadratic speedup over any classical algorithm for many computational problems. Since
+amplitude amplification is fundamental for quantum algorithms it has received a great deal of attention. This includes
+a study of its robustness to errors and modifications. In particular, the effects of using arbitrary phases in amplitude
+amplification have been studied in a sequence of papers by Long et al. [2–5].
+In this paper, we also consider the question of when arbitrary phases can be utilized in amplitude amplification. Our
+results complement the results of Long et al. whom are primarily interested in the question of how large phase errors we
+can tolerate and still obtain a quantum algorithm for searching that succeeds with high probability. We are primarily
+interested in the question of what restrictions we need to put on the two angles used in amplitude amplification and
+still obtain quantum algorithms that succeed with certainty.
+To illustrate our results, consider a database of size N with a unique marked element. In each iteration of Grover’s
+algorithm, we rotate the phase of some states by angles φ and ϕ, respectively. The main result in [2–5] is that if the
+two angles differ by at most
+c
+√
+
+N for some appropriate constant c, that is, if |ϕ −φ| ≤
+c
+√
+
+N , then we can still find the
+
+marked element with high probability using only Θ(
+√
+
+N) iterations. Our main result is that if the two angles satisfy
+the equation tan(ϕ/2) = tan(φ/2)(1 −2
+
+N ) then we can find the marked element with certainty using only Θ(
+√
+
+N)
+iterations. Together with the result of Long et al., this provides a description of the use of arbitrary phases for
+bounded-error and exact quantum algorithms. It is possible to rederive the main result of Long et al. from our results
+by considering the case φ = ϕ an approximation to the perfect case tan(ϕ/2) = tan(φ/2)(1 −2
+
+N ). (See Secs. III–V
+below for rigorous statements.)
+We thus prove that there is phase condition in amplitude amplification, and that this condition is not that the
+phases are equal, but that they satisfy the trigonometric equation mentioned above. We believe that our approach is
+intuitive and that it yields short and straightforward proofs.
+
+II. AMPLITUDE AMPLIFICATION
+
+Amplitude amplification is a generalization of Grover’s quantum searching algorithm that allows a speed up of
+many classical algorithms. The heart of amplitude amplification is an operator Q defined similarly to the operator
+used in Grover’s algorithm [1]. We refer the reader to [6] and the references therein for a throughly introduction to
+amplitude amplification. Here we give only a concise description of all the objects we require.
+
+∗email: hoyer@brics.dk.
+† Basic Research in Computer Science, Centre of the Danish National Research Foundation.
+
+1
+
+
+Let H be Hilbert space of dimension N and let {|0⟩, . . . , |N −1⟩} be an orthonormal basis for H. Let A be a unitary
+operator on H. We may think of A as a quantum algorithm that uses no measurements. Let χ : {0, . . . , N−1} →{0, 1}
+be a Boolean function. We say that a basis state |x⟩is good if χ(x) = 1, and otherwise we say that |x⟩is bad. Given
+two angles 0 ≤φ, ϕ < 2π, define
+
+Q = Q(A, χ, φ, ϕ) = −AS0(φ)A−1 Sχ(ϕ).
+(1)
+
+Here, the operator Sχ(ϕ) conditionally changes the phase of the amplitudes of the good states,
+
+|x⟩�−→
+
+�
+eıϕ|x⟩
+if χ(x) = 1
+|x⟩
+if χ(x) = 0.
+(2)
+
+Similarly, the operator S0(φ) multiplies the amplitude by a factor of eıφ if and only if the state is the zero state |0⟩.
+Here and elsewhere we use ı to denote the principal square root of −1.
+Let |Ψ⟩= A|0⟩denote the superposition obtained by applying algorithm A on the initial state |0⟩. Let |Ψ1⟩=
+Pgood|Ψ⟩where Pgood = �
+x:χ(x)=1 |x⟩⟨x| denotes the projection onto the subspace spanned by the good basis states,
+and similarly let |Ψ0⟩= Pbad|Ψ⟩where Pbad = �
+x:χ(x)=0 |x⟩⟨x|. Let a = ⟨Ψ1|Ψ1⟩denote the probability that a
+measurement of |Ψ⟩= A|0⟩yields a good state, and let b = ⟨Ψ0|Ψ0⟩denote the probability that a measurement of
+|Ψ⟩yields a bad state. We then have that |Ψ⟩= |Ψ1⟩+ |Ψ0⟩and 1 = a+ b. Finally, let angle θ be so that 0 ≤θ ≤π/2
+and a = sin2(θ).
+As an example, for N = 2n, we obtain Grover’s searching algorithm [1] by setting A to be the Walsh-Hadamard
+transform on n qubits, letting χ(x) be 1 if and only if the database holds a 1 at position x, and picking phases
+φ = ϕ = π. If the database contains a 1 at t different positions then a = t/N.
+The operator Q implements a unitary operation on the subspace spanned by |Ψ1⟩and |Ψ0⟩. This subspace has
+dimension 2 if 0 < a < 1.
+With respect to the ordered orthonormal basis
+�1
+√a|Ψ1⟩,
+1
+√
+
+b|Ψ0⟩
+�
+, we can represent
+Q = Q(A, χ, φ, ϕ) by the 2 × 2 unitary matrix
+
+M =
+�−{(1 −eıφ)a + eıφ} (1 −eıφ)√a√1 −aeıϕ
+
+(1 −eıφ)√a√1 −a
+{(1 −eıφ)a −1}eıϕ
+
+�
+.
+(3)
+
+If φ = ϕ = π, then this simplifies to [7]
+
+M =
+�cos(2θ) −sin(2θ)
+sin(2θ)
+cos(2θ)
+
+�
+.
+(4)
+
+That is, if we pick φ = ϕ = π, then each application of Q implements a rotation by angle 2θ. A natural question then
+is, what happens if at least one of the two angles φ and ϕ is not equal to π?
+
+III. ARBITRARY ROTATIONS
+
+Consider the matrix M defined by Eq. (3). Our primary objective is to ensure that the diagonal elements of M are
+equal.
+
+Theorem 1 (Optimal angles) Suppose φ ̸= π. Then the two diagonal elements of M are equal if and only if
+
+tan(ϕ/2) = tan(φ/2)(1 −2a)
+(5)
+
+where matrix M is defined by Eq. (3).
+
+Equation (5) expresses the phase condition we want to impose on φ and ϕ. Theorem 1 can be proven straight-
+forwardly using standard identities of the trigonometric functions. Figure 1 illustrates the proof for the case that
+0 ≤φ < π and 0 ≤a ≤1
+
+2. The other cases are proven similarly.
+
+2
+
+
+�
+
+a
+
+�
+
+�
+
+1
+2 −a
+
+�
+
+φ
+ϕ
+
+FIG. 1. Angle ϕ as a function of φ and a. Let ℓbe the length of the dotted line. Then tan(ϕ/2) =
+�1
+
+2 −a
+�1
+
+ℓand tan(φ/2) = 1
+
+2
+1
+ℓ,
+and hence tan(ϕ/2) = tan(φ/2)(1 −2a).
+
+We now show how to implement arbitrary rotations (up to certain phase factors) by appropriate choices of φ and ϕ.
+Let 0 ≤ϑ < 2π be any angle for which | sin(ϑ)| ≤sin(2θ). First we pick angle φ so that the absolute value of the
+lower left entry of M equals | sin(ϑ)|. Then we pick angle ϕ so that Eq. (5) holds. This ensures that the two diagonal
+elements of M are equal. With these choices of φ and ϕ, matrix M can thus be written in the form
+
+H = eıv
+�1
+eıu
+
+��cos(ϑ) −sin(ϑ)
+sin(ϑ)
+cos(ϑ)
+
+��1
+e−ıu
+
+�
+(6)
+
+for some angles 0 ≤u, v < 2π. We denote this matrix by H. Here and elsewhere, missing matrix entries are assumed
+equal to 0.
+To summarize, we have just shown that for all a (0 < a < 1) and for all angles ϑ (0 ≤ϑ < 2π) so that | sin(ϑ)| ≤
+sin(2θ) there exist angles 0 ≤φ, ϕ < 2π so that M = H for some angles 0 ≤u, v < 2π, where M is given by Eq. (3)
+and H by Eq. (6). Matrix H represents a rotation by angle ϑ which is conjugated by a conditional phase change by
+angle u, up to a global phase factor of eıv.
+In many applications, applying H will be equally good to applying a rotation by angle ϑ. For instance, we can use H
+to implement arbitrary rotations as follows. Suppose a is known. Let x be any angle (0 ≤x < 2π). We implement
+a rotation by angle x as follows. First, we check if x is a multiple of 2θ. If so, we simply just apply Q(A, χ, π, π) a
+total number of x/(2θ) times and stop [7]. Otherwise, we compute the smallest integer m larger than x/(2θ) and we
+set ϑ = x/m. Then we find angles φ and ϕ so that M = H, and we compute the angles u and v. With these choices
+of angles, we can factorize the rotation by angle x as
+�cos(x) −sin(x)
+sin(x)
+cos(x)
+
+�
+= e−ımv
+�1
+e−ıu
+
+�
+M m
+�1
+eıu
+
+�
+.
+(7)
+
+Thus, to implement a rotation by angle x, we first apply a conditional phase-change of the bad states by angle u. Then
+we apply Q(A, χ, φ, ϕ) a total number of m times, apply a conditional phase-change of the bad states by angle −u,
+and finally apply a global phase-change by angle −mv.
+
+IV. OBTAINING SUCCESS PROBABILITY 1
+
+We now show that if we pick nontrivial angles φ and ϕ so that Eq. (5) holds, then we can find a good solution with
+certainty. That is, we can use any set of angles (φ, ϕ) ̸= (0, 0) for which Eq. (5) holds.
+Let angle 0 ≤ϑ ≤π/2 be defined so that sin(ϑ) = | sin(φ/2) sin(2θ)|. Since φ and ϕ satisfy Eq. (5), we can write
+Q(A, χ, φ, ϕ) in the form
+
+eıv
+�1
+eıu
+
+��cos(ϑ) −sin(ϑ)
+sin(ϑ)
+cos(ϑ)
+
+��1
+e−ıu
+
+�
+(8)
+
+for some angles 0 ≤u, v < 2π. That is, operator Q(A, χ, φ, ϕ) implements a rotation by angle ϑ, up to phase factors.
+Our idea for finding a good solution with certainty is as follows: Let m =
+�π/2−θ
+
+ϑ
+�
+and θinit = π
+
+2 −mϑ. Then
+−θ < θinit ≤θ. We first set up a superposition representing the initial angle θinit. This is possible since |θinit| ≤θ.
+Then we apply operator Q(A, χ, φ, ϕ) a total number of m times and finally we measure. This produces a good
+solution with certainty.
+A realization of this idea is as follows: Let |Ψinit⟩denote the state sin(θinit) 1
+√a|Ψ1⟩+ cos(θinit)
+1
+√1−a|Ψ0⟩. First we
+apply A on the first register of the state |0⟩|0⟩|0⟩, producing the state |Ψ⟩|0⟩|0⟩. Then we unitarily map |Ψ⟩|0⟩|0⟩to
+
+3
+
+
+the state α|Ψinit⟩|0⟩|0⟩+β|0⟩|Ψ1⟩|1⟩for some complex numbers α, β ∈C. Then we apply operator Q(A, χ, φ, ϕ) a total
+number of m times on the first register, producing the state α′|Ψ1⟩|0⟩|0⟩+ β′|E⟩|Ψ1⟩|1⟩for some complex numbers
+α′, β′ ∈C and some state |E⟩. Finally, we swap the contents of the first two registers conditionally to that the third
+register contains a 1, producing the final tensor product state |Ψ1⟩|E′⟩2,3, for some state |E′⟩2,3 that represents the
+joint state of registers 2 and 3.
+We may summarize this section by saying that for fixed known rotational angle ϑ, we can modify the angle of the
+initial state so that we succeed with certainty.
+
+V. THE PHASE CONDITION
+
+Our condition that tan(ϕ/2) = tan(φ/2)(1 −2a) implies unfortunately that φ and ϕ depend nontrivially on a. Put
+formally, for all angles 0 < φ < 2π so that φ ̸= π, the following holds: For all angles 0 ≤ϕ < 2π with ϕ ̸= π, there
+exists a unique a ∈ℜso that Eq. (5) holds, and for all 0 ≤a ≤1, there exists a unique angle 0 ≤ϕ < 2π so that
+Eq. (5) holds. If the success probability a is known in advance, then for any angle φ we may want to pick, we can
+easily compute the angle ϕ to use. However, if a is not known, then this is not possible unless φ ∈{0, π}. Thus for
+angles φ ̸∈{0, π}, we need to know a to compute ϕ so that Eq. (5) holds.
+If we do not know a in advance, then a subsidiary strategy could be to utilize a set of angles (φ, ϕ) so that
+Eq. (5) almost holds. If a is small then we could for example approximate ϕ by φ. In the papers [2–5], Long et al.
+consider the question of when arbitrary phases can be utilized successfully in quantum searching. Their conclusion
+is that the angles have to equal (φ = ϕ) “to construct an efficient quantum search algorithm” [8]. Our condition
+that tan(ϕ/2) = tan(φ/2)(1 −2a) is obviously different from their condition (that φ = ϕ) whenever 0 < a < 1 and
+φ ̸∈{0, π}. The explanation for these different results is that Long et al. consider when the quantum search algorithm
+succeeds with high probability, whereas we, in the previous section, consider when the quantum search algorithm
+succeeds with certainty. In particular, all our calculations are exact. A main proof technical idea used by Long et al.
+for example in [3] is approximations of the type K1 ≈eK2 for 2 × 2 matrices K1 and K2.
+Long et al. [3,4] prove their result via an SO(3) rotational interpretation of operator Q(A, χ, φ, ϕ). We now reprove
+the theorem of Long et al. that if we use phases φ = ϕ, then we can find a good solution with high probability. The
+main idea in our alternative proof is to consider the case φ = ϕ an approximation to the perfect case in which Eq. (5)
+holds, and then lower bound how well this approximation works. We do that by upper bounding the norm of the
+difference of two operators. This idea provides a short and straightforward proof.
+
+Lemma 1
+(Equal angles) Let 0 < φ < π. Let angle 0 < ϑ ≤π/2 be so that sin(ϑ) = sin(φ/2) sin(2θ).
+Let
+m =
+�π/2
+
+ϑ −1
+
+2
+�
+and let Q′ = Q(A, χ, φ, φ). Then
+
+|⟨Ψ′
+1|Q′mA|0⟩| ≥1 −a(2 + 4π2m)
+(9)
+
+where |Ψ′
+1⟩=
+1
+√a|Ψ1⟩.
+
+Let angle −π < ϕ < π be so that tan(ϕ/2) = tan(φ/2)(1 −2a). Then |φ −ϕ| ≤2πa. Let Q = Q(A, χ, φ, ϕ)
+and let H denote the Hilbert space that Q and Q′ act upon. Let ∥· ∥denote the operator norm on H defined by
+∥O∥= sup{|O|Γ⟩| : ||Γ⟩| = 1} for any operator O on H. Then
+
+��Q′ −Q
+��=
+����
+
+�1
+eıφ
+
+�
+−
+�
+1
+eıϕ
+
+�����=
+��1 −eı(φ−ϕ)��≤4π2a,
+(10)
+
+and thus
+��Q′m −Qm��≤4π2am.
+By definition of m we have that
+��π
+
+2 −mϑ
+��≤ϑ
+
+2 ≤θ, so sin(mϑ) ≥√1 −a and hence
+��⟨Ψ′
+1|Qm|Ψ⟩
+��≥1 −2a. Thus,
+��⟨Ψ′
+1|Q′m|Ψ⟩
+��≥
+��⟨Ψ′
+1|Qm|Ψ⟩
+��−4π2am ≥1 −a(2 + 4π2m).
+(11)
+
+Lemma 1 follows.
+If we measure the state Q′mA|0⟩, then the outcome is good with probability at least 1 −4a(1 + 2π2m), which is
+at least 1 −4a( π3
+
+ϑ + 11). The probability of measuring a bad state is thus upper bounded by 4π3 a
+
+ϑ + 44a, which is
+O
+�√a
+
+φ
+�
+for 0 < a ≤1 and 0 < φ < π. Theorem 2 follows.
+
+4
+
+
+Theorem 2 (Equal angles) Let A be any quantum algorithm that uses no measurements. Let a denote the success
+probability of A and let angle 0 < θ ≤π/2 be so that sin2(θ) = a. Let φ be any angle so that θ ≤φ < π. Let
+m =
+�π/2
+
+ϑ
+−1
+
+2
+�
+where angle 0 < ϑ ≤π/2 is so that sin(ϑ) = sin(φ/2) sin(2θ). Let Q′ = Q(A, χ, φ, φ). Then a
+measurement of Q′mA|0⟩will provide a good solution with probability 1 −O
+�1
+
+φ
+√a
+�
+.
+
+Theorem 2 relies on two properties: Firstly, that operator Q(A, χ, φ, φ) approximates operator Q = Q(A, χ, φ, ϕ)
+sufficiently well. Secondly, that each application of Q implements a rotation by a sufficiently large angle ϑ. Any
+set of angles (φ, ϕ) so that these two properties are fulfilled will provide a quantum amplitude amplification scheme.
+In general, the closer we pick the rotational angle ϑ to the maximal angle 2θ, the worse approximation for Q can
+we allow ourselves to use, and vice versa. In the next theorem, which is proven almost identically to Theorem 2, we
+express one way of capturing this duality.
+
+Theorem 3 (Any angles) Let A be any quantum algorithm that uses no measurements. Let a denote the success
+probability of A and let angle 0 < θ ≤π/2 be so that sin2(θ) = a. Let 0 < φ < π and −π < ϕ′ < π be given angles.
+Let m =
+�π/2
+
+ϑ
+−1
+
+2
+�
+where angle 0 < ϑ ≤π/2 is so that sin(ϑ) = sin(φ/2) sin(2θ). Let −π < ϕ < π be defined
+so that tan(ϕ/2) = tan(φ/2)(1 −2a) and let δ = |ϕ′ −ϕ|. Let Q′ = Q(A, χ, φ, ϕ′) denote our approximation to
+Q(A, χ, φ, ϕ). Then a measurement of Q′mA|0⟩will provide a good solution with error probability at most 4a + ǫ,
+provided δ ≤ǫ
+√
+
+3
+2π2(
+√
+
+3+π) φ√a.
+
+The above theorem put bounds on the error δ = |ϕ′ −ϕ| that we can tolerate to still obtaining a quantum algorithm
+that succeeds with high probability. Suppose φ is a constant, say φ =
+π
+10, then whenever δ is at most c√a, for some
+appropriate constant c, the above algorithm finds a good solution with bounded error probability. Furthermore, if δ
+is at most O(a), as it is if we pick ϕ′ = φ, then the error probability drops to being in O(√a). Thus, the smaller
+error in the choice of angles from the perfect case as expressed by Eq. (5), the smaller is the error probability of the
+algorithm.
+Theorem 3 is similar to the main result in [5] where it is proven that for quantum searching, the distance |φ −ϕ|
+must be at most of order
+1
+√
+
+N for finding the marked element with constant success probability. Our result generalizes
+their result as it measures the error probability of the overall algorithm in terms of the distance from the perfect
+case in which Eq. (5) holds. The case φ = ϕ is already an approximation, which by itself introduces an error in δ in
+the order of Θ(a). In addition, Theorem 3 includes the cases that the angles φ and ϕ are not constants but depend
+on a. However, the main benefit of Theorem 3 is that it is so easy to prove when one is given Theorem 1. Essentially,
+the proof of Theorem 3 reduces to bounding the distance between the two operators Q(A, χ, φ, ϕ) and Q(A, χ, φ, ϕ′),
+which is easy.
+
+VI. CONCLUSION
+
+Amplitude amplification is besides quantum Fourier transforms the most successfully used tool in quantum algo-
+rithms. It is a generalization of Grover’s quantum searching algorithm and it allows a quadratic speed up of many
+algorithms.
+We prove that the phase condition in amplitude amplification can be expressed by the equation tan(ϕ/2) =
+tan(φ/2)(1 −2a), where a denotes the success probability of the original algorithm. We show how to implement
+arbitrary rotations and how to boost quantum algorithms to succeed with certainty by utilizing angles (φ, ϕ) that
+satisfy the above equation. In both cases, the number of iterations required increases linearly in the inverse of angle φ.
+For instance, if we choose φ = π
+
+c for some constant c > 1, then we require Θ
+�
+c 1
+√a
+�
+iterations to find a solution with
+certainty.
+Whenever the success probability a is not known a priori, we can approximate the above trigonometric equation
+by the linear equation φ = ϕ. This case has been studied by Long et al. [2–5] and in particular, they have shown that
+equal angles can be utilized in quantum searching. By considering the case φ = ϕ an approximation to the perfect
+case tan(ϕ/2) = tan(φ/2)(1 −2a), we can reprove the main results by Long et al. We believe that this approach
+makes the analysis and proofs straightforward and easy to understand.
+
+ACKNOWLEDGEMENTS
+
+I am grateful to Gilles Brassard and Richard Cleve for comments.
+
+5
+
+
+[1] L. K. Grover, “Quantum mechanics helps in searching for a needle in a haystack,” Phys. Rev. Lett. 79, 325 (1997).
+[2] G. L. Long, W. L. Zhang, Y. S. Li, and L. Niu, “Arbitrary phase rotation of the marked state cannot be used for Grover’s
+quantum search algorithm” (Rapid Communications), Commun. Theor. Phys. 32(3), 335 (1999).
+[3] G. L. Long, Y. S. Li, W. L. Zhang, and L. Niu, “Phase matching in quantum searching,” Phys. Lett. A 262(1), 27 (1999).
+[4] G. L. Long, C. C. Tu, Y. S. Li, W. L. Zhang, and H. Y. Yan, “A novel SO(3) picture for quantum searching,” Available at
+Los Alamos e-Print archive as <http://arXiv.org/abs/quant-ph/9911004>.
+[5] G. L. Long, Y. S. Li, W. L. Zhang, and C. C. Tu, “Dominant gate imperfection in Grover’s quantum search algorithm,” Phys.
+Rev. A 61(4), 042305 (2000).
+[6] G. Brassard, P. Høyer, M. Mosca, and A. Tapp, “Quantum amplitude amplification and estimation.” Available at Los
+Alamos e-Print archive as <http://arXiv.org/abs/quant-ph/0005055>.
+[7] M. Boyer, G. Brassard, P. Høyer, and A. Tapp, “Tight bounds on quantum searching,” Fortschr. Phys. 46, 493 (1998).
+[8] See for example the first paragraph on page 042305-2 in [5]. Please note that the notation used in [2–5] is slightly different
+from ours: their θ denotes our ϕ, and their ϕ denotes our φ.
+
+6
+
+

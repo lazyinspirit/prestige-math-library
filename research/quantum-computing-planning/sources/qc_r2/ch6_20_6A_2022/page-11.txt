@@ -1,0 +1,87 @@
+6.1 Some Quantum Algorithms
+5
+
+If only classical queries are allowed, we acquire only one bit of information from each
+query, and it takes n queries to determine the value of a. Therefore, we have a clear
+separation between the quantum and classical difficulty of the problem. Even so, this
+example does not probe the relation of BPP to BQP, because the classical problem is
+not hard. The number of queries required classically is only linear in the input size, not
+exponential.
+Simon’s problem. Bernstein and Vazirani managed to formulate a variation on the
+above problem that is hard classically, and so establish for the first time a “relativized”
+separation between quantum and classical complexity. We will find it more instructive
+to consider a simpler example proposed somewhat later by Daniel Simon.
+Once again we are presented with a quantum black box, and this time we are assured
+that the box computes a function
+
+f : {0, 1}n →{0, 1}n,
+(6.19)
+
+that is 2-to-1. Furthermore, the function has a “period” given by the n-bit string a; that
+is
+
+f(x) = f(y)
+iff
+y = x ⊕a,
+(6.20)
+
+where here ⊕denotes the bitwise XOR operation. (So a is the period if we regard x
+as taking values in (Z2)n rather than Z2n.) This is all we know about f. Our job is to
+determine the value of a.
+Classically this problem is hard. We need to query the oracle an exponentially large
+number of times to have any reasonable probability of finding a. We don’t learn anything
+until we are fortunate enough to choose two queries x and y that happen to satisfy
+x ⊕y = a. Suppose, for example, that we choose 2n/4 queries. The number of pairs of
+queries is less than (2n/4)2, and for each pair {x, y}, the probability that x ⊕y = a is
+2−n. Therefore, the probability of successfully finding a is less than
+
+2−n(2n/4)2 = 2−n/2;
+(6.21)
+
+even with exponentially many queries, the success probability is exponentially small.
+If we wish, we can frame the question as a decision problem: Either f is a 1-1 function,
+or it is 2-to-1 with some randomly chosen period a, each occurring with an a priori
+probability 1
+
+2. We are to determine whether the function is 1-to-1 or 2-to-1. Then, after
+2n/4 classical queries, our probability of making a correct guess is
+
+P(success) < 1
+
+2 +
+1
+2n/2 ,
+(6.22)
+
+which does not remain bounded away from 1
+
+2 as n gets large.
+But with quantum queries the problem is easy! The circuit we use is essentially the
+same as above, but now both registers are expanded to n qubits. We prepare the equally
+weighted superposition of all n-bit strings (by acting on |0⟩with H(n)), and then we
+query the oracle:
+
+Uf :
+
+�2n−1
+�
+
+x=0
+|x⟩
+
+�
+
+|0⟩→
+
+2n−1
+�
+
+x=0
+|x⟩|f(x)⟩.
+(6.23)
+
+Now we measure the second register. (This step is not actually necessary, but I include
+it here for the sake of pedagogical clarity.) The measurement outcome is selected at
+random from the 2n−1 possible values of f(x), each occurring equiprobably. Suppose the
+
+

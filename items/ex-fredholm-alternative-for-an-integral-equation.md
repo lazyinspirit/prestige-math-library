@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/ex-fredholm-alternative-for-an-integral-equation.json
 id: ex-fredholm-alternative-for-an-integral-equation
 kind: example
 title: Fredholm alternative for an integral equation
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval, thm-fredholm-alternative-for-identity-minus-compact, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-dependent-choice, thm-c-k-complete-in-the-sup-metric, thm-uniform-limit-continuous-real-functions, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, cor-finite-dimensional-normed-spaces-are-banach, def-metric-space, def-complete-metric-space, def-banach-space, def-bounded-linear-operator, def-transpose-of-a-bounded-operator, lem-transpose-reverses-composition, def-continuity-real, def-continuous-map-top, thm-heine-borel-rn, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus, def-linear-subspace, def-linear-map]
+deps: [ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval, thm-fredholm-alternative-for-identity-minus-compact, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-dependent-choice, thm-c-k-complete-in-the-sup-metric, thm-uniform-limit-continuous-real-functions, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, cor-finite-dimensional-normed-spaces-are-banach, def-metric-space, def-complete-metric-space, def-banach-space, def-bounded-linear-operator, def-transpose-of-a-bounded-operator, lem-transpose-reverses-composition, def-continuity-real, def-continuous-map-top, thm-heine-borel-rn, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus, def-linear-subspace, def-linear-map]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -16,8 +18,6 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 p.198, Remark 4.42"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
-verification:
-  audited: 2026-09-22
 ---
 
 ## Example
@@ -44,7 +44,7 @@ $C([a,b],\mathbb K)^*$ ([[def-transpose-of-a-bounded-operator]]). Then:
 
 [A1] $[a,b]$ is a nonempty compact metric space ([[thm-heine-borel-rn]]); $C([a,b],\mathbb R)$ with the supremum metric is complete ([[thm-c-k-complete-in-the-sup-metric]]), and a uniform limit of continuous real functions is continuous ([[thm-uniform-limit-continuous-real-functions]]).
 
-[A2] On $C([a,b],\mathbb K)$ the supremum norm $\|f\|_\infty=\sup_x|f(x)|$ makes it a normed space, using the real definition when $\mathbb K=\mathbb R$ and the complex scalar convention when $\mathbb K=\mathbb C$ ([[def-norm-and-normed-space]], [[rem-real-and-complex-normed-space-convention]]); for complex-valued functions $|f|\le|\operatorname{Re}f|+|\operatorname{Im}f|$ and both parts are bounded by $|f|$ ([[lem-complex-conjugation-and-modulus-laws]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]); a metric space is complete when every Cauchy sequence converges ([[def-complete-metric-space]], [[def-metric-space]]).
+[A2] On $C([a,b],\mathbb K)$ the supremum norm $\|f\|_\infty=\sup_x|f(x)|$ makes it a normed space, using the real definition when $\mathbb K=\mathbb R$ and the complex norm definition when $\mathbb K=\mathbb C$ ([[def-norm-and-normed-space]], [[def-complex-norm-and-complex-normed-space]]); for complex-valued functions $|f|\le|\operatorname{Re}f|+|\operatorname{Im}f|$ and both parts are bounded by $|f|$ ([[lem-complex-conjugation-and-modulus-laws]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]); a metric space is complete when every Cauchy sequence converges ([[def-complete-metric-space]], [[def-metric-space]]).
 
 [A3] $\mathcal K$ is a compact operator on $C([a,b],\mathbb K)$ ([[ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval]]), and $\mathbb K$ is a Banach space by finite-dimensional completeness ([[cor-finite-dimensional-normed-spaces-are-banach]], [[def-banach-space]]); $A^*=I-\mathcal K^*$ for $A=I-\mathcal K$ ([[lem-transpose-reverses-composition]], [[def-transpose-of-a-bounded-operator]]).
 

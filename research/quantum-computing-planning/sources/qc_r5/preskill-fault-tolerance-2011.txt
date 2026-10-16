@@ -1,0 +1,292 @@
+Ph/CS 219c, 24 January 2011
+
+Toric code recovery
+
+Last time we discussed the toric code. This is a CSS code, where the qubits are associated with the edges of an 
+L X L square lattice on a 2D torus (i.e., with periodic boundary conditions). The Z-type generators of the code 
+stabilizer are weight four, with support on the four edges making up an elementary square ("plaquette") of the 
+lattice, and the X-type generators are weight four with support on the four edges that meet at a site. There are two 
+encoded qubits, and the logical Pauli operators Z_1, Z_2 are weight L with support on a cycle winding around the 
+torus in the vertical and horizontal direction respectively. The logical Pauli operators X_1, X_2 are weight L with 
+support on a cycle of the dual lattice winding around the torus in the horizontal and veritcal direction respectively. 
+The code has length n=2L^2, distance L, and k=2 encoded qubits.
+
+The code is highly degenerate. A Z-type operator can be viewed as a 1-chain on the lattice, and it commutes with 
+the stabilizer if the 1-chain is a cycle (has a trivial boundary). The operator lies in the stabilizer if the cycle is 
+homologically trivial (is the boundary of a 2-chain); otherwise it is a nontrivial operation acting on the code space. 
+Similarly, an X-type operator can be viewed as a 1-chain on the dual lattice;  it commutes with the stabilizer if the 1-
+chain is a cycle, and is contained in the stabilizer if the cycle is homologically trivial.
+
+Now consider recovery from Z-type errors (recovery from X-type errors can be described similarly, with lattice and 
+dual lattice interchanged). Suppose errors occur on a chain E. 
+
+
+
+As with the concatenated codes discussed last time, we find that the distance L of the toric code is too pessimistic an 
+indicator of the code's performance. It is possible for L/2 errors to cause a recovery failure if the locations of the 
+errors are strategically chosen, but such error patterns are highly atypical. For randomly distibuted errors, recovery 
+succeeds with high probability even if the errors occur at a constant rate up to 2.7% (so that the total number of 
+errors in the code block is O(L^2), far greater than the code distance). Numerical simulations show that recovery 
+succeeds for errors occuring at an even higher rate, up to about 10.6%. 
+
+
+Fault-tolerant error recovery
+
+Up until now we have discussed protecting quantum information using quantum error-correcting codes, where we 
+have assumed that the recovery procedure can be performed perfectly. Next we want to consider how to use 
+quantum error-correcting codes to protect a quantum computer from noise. There are two key issues that we need 
+to address:
+
+1) Aside from just protecting quantum information, we will need to process it. So we must figure out how to perform 
+nontrivial quantum gates without leaving the code space, and so without losing the protection afforded by the code.
+
+2) We will need to do the error recovery and the information processing using the imperfect gates that are 
+achievable in a realistic quantum computer.
+
+We will discuss issue (2) first, and postpone issue (1) for later. Specifically, if we use a stabilizer code to protect 
+quantum information, we will need to measure the stabilizer generators (check operators) of the code. In principle 
+this can be done by executing a quantum circuit (including qubit measurements and preparations). But the gates 
+and measurements themselves will be prone to error (including the "identity gate" -- even qubits that are not being 
+processed may suffer "storage errors"). Will the error recovery work if the recovery procedure itself is noisy?
+
+For now, let's not worry about processing the encoded information; we'll just try to use a QECC to operate a reliable 
+quantum memory. Furthermore, for now, let's suppose that we have an ideal encoder that we can use once to store 
+quantum information in the memory, and a decoder that can perform an idealized error-correction and decoding 
+step once when we are ready to retrieve a quantum state from the memory. But in between we are to protect the 
+information in the memory by repeatedly performing cycles of error recovery using noisy gates. If we store the 
+information for all together T error correction cycles, with what fidelity will we be able to retrieve the quantum 
+information from the memory at the end?
+
+How should we describe the noise in the gates? Though we could consider more general noise models, let's use this 
+simple model: each gate (or preparation or measurement) in a quantum circuit is either ideal with probability 1-
+epsilon, or faulty with probability epsilon. If the gate is faulty, it is replaced by an arbitrary TPCP map. With this 
+model we can hope to use successfully a QECC that corrects t errors. The rough idea is that if the fault rate epsilon 
+is small, the number of errors occuring during a cycle of error correction will only rarely exceed the number that the 
+code can protect against.
+
+Let's try to be more precise. What properties should an error correction "gadget" have to protect a quantum state 
+successfully. Two fundamental properties are needed, which I will call "Property 0" and "Property 1". Before 
+explaining the properties, we introduce some terminology. 
+
+We will say that a quantum circuit (possibly including state preparation steps and measurement steps) is "r-good" if 
+the circuit contains no more than r faults.
+
+We will say that the quantum state of a code block is "s-deviated" from the code space if the state can be obtained 
+by acting on a codeword (a state in the code space) with an error whose weight is at most s. That is, the "error" can 
+be expanded in terms of Pauli operators of weight up to s.
+
+
+
+
+
+Now .. how can we build an error correction gadget that obeys the properties 0 and 1. To be concrete, consider 
+the t=1 case -- a code that corrects one error. In particular, consider the property 1b: we are to ensure that, that 
+if the incoming state is a codeword, then a single fault in the EC will cause only a single (hence correctable) error 
+in the code block.
+
+If we are not careful, this will not be true. A single faulty gate in the EC might have two effects.
+-- an error in the code block.
+-- a nontrivial and incorrect syndrome.
+Then, guided by the incorrect syndrome, we will flip the wrong qubit in a misguided effort to correct the error; this 
+will introduce a second error in the block, overwhelming the codes error-correction capability.
+
+A general approach to avoid being misled by incorrect syndrome information is to measure the syndrome 
+multiple times. For the t=1 case, it suffices to measure the complete error syndrome twice. 
+-- if the syndrome is trivial (indicates no error) the first time, then we need not repeat the syndrome 
+measurement, nor do we take any action to recover from error.
+-- if the syndrome is nontrivial, we repeat the syndrome measurement. If we obtain the same error syndrome 
+twice in a row, then we trust the syndrome and apply the indicated recovery step. But if we obtain a different 
+syndrome when we measure a second time, then we do not trust the syndrome and we do not attempt to 
+recover.
+
+Let's check that this procedure really has the required properties, starting with property 1. 
+
+
+First, suppose that the full EC (including the repetition of the syndrome measurement) is 0-good (no faults). Then 
+if the incoming block is 0-deviated, the syndrome will be trivial, and if it is 1-deviated, the block will be projeced 
+onto a state with a definite Pauli error that can be correctly inferred from the syndrome. The second syndrome 
+measurement (also with no faults) is guarenteed to give the same result, and recovery succeeds.
+
+Next suppose that the EC is 1-good, and that the incoming state is a codeword. Then if the first syndrome 
+measurement has no faults, the trivial syndrome is measured correctly, and no action is taken to recover. If the 
+first syndrome measurement has a fault, then the syndrome measurement is repeated and the second syndrome 
+measurement has no fault. If the syndrome measurement procedure has the property that a single fault 
+introduces only a single error in the block, then the second syndrome measurement will identify this error 
+correctly, and it will be corrected successfully. 
+
+Now let's check property 0, in the case where the incoming state is arbitrary. If the EC has no faults, we will 
+obtain a valid syndrome, and we can correct the state to the codespace successfully. But what if the EC has one 
+fault? Again, if the first syndrome measurement has a fault and yields a nontrivial syndrome, then the second one 
+has no fault and yields a valid syndrome. Therefore we can correct to the codespace successfully. 
+
+It may be that the first syndrome measurement has a fault, and yields a trivial syndrome that is incorrect. In that 
+case the syndrome measurement will not be repeated. We need to be sure to design our syndrome measurement 
+procedure so that in this case the actual state of the block is only 1-deviated.
+
+But suppose the first syndrome measurement has no fault, and yields a (correct) nontrivial syndrome. Then the 
+second syndrome measurement might have a fault. We need to be sure to design our syndrome measurement 
+procedure so that, although a fault in the second syndrome measurement might cause both an error in the block 
+and an invalid syndrome, that nevertheless after recovery the state of the block is only 1-deviated. 
+
+====================================
+
+Now, note that we assumed above, in the case where the incoming state is a codeword, that a single fault in the 
+syndrome measurement results in just one error in the block. But how to we make sure this is true? If we are not 
+careful, even gates in the EC correction that do not have faults might propagate errors from one qubit to another.
+
+
+
+
+But, we are not done yet with designing a fault-tolerant procedure --- we need to worry about the preparation of the 
+ancilla cat state. Z errors in the ancilla state can cause the syndrome to be incorrect, a problem we can address by 
+repeating the syndrome measurement. More serious are X errors in the ancilla, because these can propagate to 
+the code block. Therefore, when we encode the cat state, we don't want to allow a single fault during the encoding 
+circuit to result in two X errors in the state.
+
+A circuit that encodes the cat state is:
+
+
+We now have a complete design for an EC gadget for the [[7,1,3]] code; it is a 5-step procedure with spread 1, 
+satisfying properties 0 and 1. 
+
+1) prepare ancilla
+2) verify ancilla
+3) measure syndrome
+4) repeat if necessary
+5) recover
+
+=================================
+Here is another design of a fault-tolerant EC gadget for the [[7,1,3]] code. This time, instead of encoding the 
+ancilla using the repetition code, the ancilla is encoded using the same [[7,1,3]] code that corrects the data. 
+
+This gadget uses a general property of CSS codes which we will derive in the next lecture: an encoded CNOT 
+can be executed transversally. This means that the circuit for the encoded CNOT is
+
+
+This procedure has the advantage that it is highly parallelized --- for both the X and Z syndrome, the interaction 
+between data block and ancilla block occurs in a single time step. A further advantage is that repetition of of the 
+syndrome measurement is not necessary. A single faulty CNOT gate might cause an X error in the data and an X 
+error in the ancilla, or a Z error in the data and a Z error in the ancilla. But, the error occurs in the same "position" 
+in both the data block and the ancilla block. For example, if a single fault introduces an error in the first qubit of the 
+data block and the first qubit of the ancilla block, we can't obtain an incorrect syndrome that instructs us to flip 
+another qubit in the data block at a position other than the first position. Rather if the syndrome indicates there is 
+an error, the indicated error will be in the first position, and no weight-two error can occur.
+
+Of course, we need to encode and test the ancilla. A single fault in the encoding circuit might cause a high-weight 
+error, so when we try to prepare the encoded |0> we get the encoded |1> instead (or a state one-deviated from the 
+encoded |1>). We test the encoded ancilla by using yet another encoded ancilla, and reject the ancilla if it fails the 
+test.
+
+
+If there is only one fault in the preparation and verification of the two ancilla states, then if there is a fault in the 
+preparation of one block (which might have a high-weight error) the other block has no errors. Therefore, if the 
+ancilla being tested has an encoded error, the error will be detected and the ancilla will be rejected. The procedure 
+checks only for X errors, not Z errors, but only the X error can propagate to the data when an accepted ancilla 
+interacts with the data.
+
+The full fault-tolerant procedures for Z and X error correction are:
+
+Two other noteworthy points:
+
+-- It is not actually necessary to apply the Z or X recovery operations. An efficient classical computation suffices to 
+propagate the Z and X errors found in each syndrome measurement forward through the circuit, so we can 
+interpret the measurement of a logical Z or logical X at the end of the circuit.
+
+-- We can make the syndrome measurement procedure deterministic (i.e. avoid throwing away ancillas that fail the 
+test) by preparing three ancilla blocks and consuming two of them in two tests of the third block. If both tests 
+indicate that the ancilla is an encoded |1> rather than an encoded |0>, then we either perform a logical X to correct 
+the ancilla, or we record that the ancilla is actually a |1> and propagate the logical error through the circuit by an 
+efficient classical computation.
+
+
+Fault-tolerant quantum gates
+Ph/CS 219
+2 February 2011
+
+Last time we considered the requirements for fault-tolerant quantum gates that act nontrivially on the codespace of a 
+quantum error-correcting code. In the special case of a code that corrects t=1 error, the requirements are:
+
+-- if the gate gadget is ideal (has no faults) and its input is a codeword, then the gadget realizes the encoded 
+operation U acting on the code space.
+-- if the gate gadget is ideal and its input has at most one error (is one-deviated from the codespace), then the 
+output has at most one error in each output block.
+-- if the gate has one fault and its input has no errors, then the output has at most one error in each block (the errors 
+are correctable).
+
+We considered the Clifford group, the finite subgroup of the m-qubit unitary group generated by the Hadamard gate 
+H, the phase gate P (rotation by Pi/2 about the z-axis) and the CNOT gate. For a special class of codes, the 
+generators of the Clifford group can be executed transversally (i.e., bitwise). The logical U can be done by applying a
+product of n U (or inverse of U) gates in parallel (where n is the code's length). If we suppose that the number of 
+encoded qubits is k=1, then:
+
+-- the CNOT gate is transversal for any CSS code.
+-- the H gate is transversal for a CSS code that uses the same classical code to correct X errors and Z errors. 
+-- the P gate is transversal if the stabilizer generators have weight a multiple of 4, and the logical Pauli operators X 
+and Z have weight = 1 (mod 4), or have weight = 3 (mod 4).  (In the latter case we do the transversal inverse of P to 
+execute the logical P.)
+
+In particular, Steane's [[7,1,3]] code has all of these properties, so we can do Clifford group computation 
+transversally for that code. Transversal operations are fault tolerant: they don't propagate errors from one qubit in a 
+block to another qubit in the same block, and a single faulty gate damages at most one qubit in each block.
+
+Of course, the Clifford group is discrete so that the Clifford generators are not a universal gate set for quantum 
+computing; in fact Clifford group computation can be simulated efficiently on a classical computer. So we need to 
+consider how to augment our fault-tolerant Clifford gates with another gate that completes a universal set. But before
+we do that, let's generalize the observation that we can do Clifford group computation fault tolerantly. We will show 
+this is possible for any stabilizer code. 
+
+Specifically, we will show  (an observation that has useful applications even beyond the study of fault-tolerance):
+The following operations suffice for realizing the Clifford group:
+-- preparing the Z eigenstate |0>.
+-- applying the Pauli operators X, Z to any qubit.
+-- measuring weight-1 Pauli operators X, Y and measuring weight-two Pauli operators XX, ZZ, ZX.
+
+This observation is useful in the study of fault tolerance because, for any stabilizer code, any logical Pauli operator 
+can be realized as a Pauli operator (a tensor product of Pauli matrices) which is fault tolerant (r faults cause at most 
+r errors in the block). Furthermore, we have seen that Pauli operators can be measured fault tolerantly, e.g. by using 
+the cat-state method, repeating measurements, and doing majority voting on the observed outcomes. This is true 
+even for the measurement of the tensor product of two logical Pauli operators in the same code block, since the 
+weight-two logical Pauli operator is also just a tensor product of Pauli operators acting on qubits in the block.
+
+As we already saw last time, since Clifford gates acting by conjugation take Pauli operators to Pauli operators, it is 
+quite convenient to describe these gates in the "Heisenberg picture" -- i.e., in terms of their action on operators 
+rather than states. 
+
+
+
+And ... if the state preparations and measurements can be done fault tolerantly, so can the CNOT gate, if 
+we insert an error correction state after each preparation or measurement. Furthermore, we can apply a 
+CNOT gate from any encoded qubit in the control block to any encoded qubit in the target block, as long as 
+we can measure the corresponding weight-two logical Pauli operators. 
+
+Next, a circuit for the Hadamard gate H:
+
+
+
+Now we have seen how to apply fault-tolerant Clifford group gates for any stabilizer code (since we can do 
+Pauli operators, Pauli operator eigenstate preparations and Pauli operator  measurements fault-tolerantly).
+
+
+But how do we go beyond the Clifford group and complete a universal fault-tolerant logical gate set? One thing we 
+should recognize is that we cannot expect to be able to do all the logical gates in a universal set transversally. If the 
+transversal operations that preserve the code space are actually universal, then these operations surely are a 
+continuous set, so we can consider the infinitesimal operations in this set --- those that are very close to the identity 
+operation. Because a transversal operation acting on a length-n codeblock is a product of n operations, each of which 
+acts on only one qubit in the codeblock, an infinitesimal transversal operation V has the form
+
+
+To complete the universal logical gate set, we will instead borrow the idea we have used to make error 
+correction fault tolerant, and also to realize Clifford gates for arbitrary stabilizer codes. We prepare "offline" a 
+special encoded ancilla state that can be verified, then use joint measurement on the data block and the ancilla 
+to realize the desired gate. The principle behind this strategy is that it is easier to verify a known quantum state 
+than to certify that a known unitary transformation has been properly applied to an unknown state. If the 
+verification of the state fails, we can either repair the state or discard it and attempt to prepare again, without 
+endangering the data.
+
+When we think about how to complete the fault-tolerant gate set, it is useful to keep in mind a hierarchical 
+classification of unitary gates --- the C_r classification.
+
+
+
+
+

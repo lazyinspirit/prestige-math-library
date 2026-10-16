@@ -1,0 +1,137 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "21",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "thm-qc-explicit-proper-code-and-universal-gadgets",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "70130481eed408941a285dc17efe17a40a650eafe76679f8ff4469b282fa3d57",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Original proof 5.2 incorrectly commuted whole refresh maps across operations sharing fault memory. For example, a refresh with memory action H and an intervening other-port fault with memory action X give different retained memory states on |0> when their order is reversed. This invalidates its claimed substitution identity and leaves the recursive conclusions unsupported. The proof repair retains the correctable-range isometry, expands chronological Kraus products into data and syndrome/memory factors, and absorbs only data factors on unused wires. All memory coefficients retain their original multiplication order. The supplier one-fault proofs apply linearly to these local matrix terms; positivity and normalization are inherited from the original circuit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/quant-ph/9611025",
+        "https://www.preskill.caltech.edu/ph219/fault-tolerance-2011.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qc-explicit-proper-code-and-universal-gadgets",
+      "disposition": "repaired",
+      "post_sha256": "87c3fc05c90dafc73e3bd1b79ce3f09a7aeb412ecb80e82b0e2c93ab582d92e0",
+      "review_context_sha256": "68d29467c7c50921900ce7bd92b695c4fda2ac7ee2a3b2f2d00ccd71475cf64b",
+      "reason": "Retained the 49-qubit distance-nine code, capacity two, spread one, exact universal alphabet, protected classical ports and unknown-input boundary. Revised 5.2 and added chronological tensor expansion and termwise absorption in 6.1-7.1; updated the finite correction, residual-port and simultaneous induction arguments in 8.1-13.1. Scalar sector identities hold for every absorbed local operator, hence for their coherent sums with ordered shared-memory coefficients. Summands are not normalized branches or relocated CPTP faults. Unused unencoded data outputs remain within the already counted residual coordinates. The Statement is unchanged. This is adjudication with repair self-check, not an independent review of the repair. All four focused checks pass.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/quant-ph/9611025",
+        "https://www.preskill.caltech.edu/ph219/fault-tolerance-2011.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "row": {
+        "defect_id": "quantum-computing-algorithms-60-2026-10-15-step5-repeat-r1-u21-shared-memory-commutation",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T08:03:08Z",
+        "class": "accuracy",
+        "subclass": "invalid-inference",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "thm-qc-explicit-proper-code-and-universal-gadgets",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "evidence": "Original step 5.2 asserts that maps on different physical ports commute, but their auxiliary fault-memory actions need not commute. Current steps 5.2, 6.1 and 7.1 preserve the Gram factorization, expand chronological Kraus products and commute only disjoint data matrices while retaining the original syndrome/memory multiplication order. Original dependent steps 6-11 are now 8-13 and use this Kraus-span certificate.",
+        "adjudication_ref": [
+          "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-repeat-r1-u21.json"
+        ],
+        "repair_cost": "repair+rejudge"
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "This assigned carrier and its repair are draft frontier work. Its Statement is byte-identical, no new prerequisite interface is introduced, and no potentially defective published consumer was identified in this scoped review. No published repair or maintenance propagation is proposed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "completed",
+    "changed_paths": [
+      "items/thm-qc-explicit-proper-code-and-universal-gadgets.md",
+      "research/quantum-computing-algorithms-60-2026-10-15-batch-21.proof-contracts.json"
+    ],
+    "before_raw_sha256": "f439e27a856d82973302eafc753c3639b1fb8317cc731afa0aa3daf5878e4d31",
+    "after_raw_sha256": "4792cfc5be67203087fc657212c1e6c046d86bc8357bbfbf777c319295e7f97a",
+    "statement_comparison": {
+      "byte_identical": true,
+      "before_raw_sha256": "79d00b2e7b0e3be368cf7813225bbe83e9408539c6bfc3e5e47dfb526aa990e5",
+      "after_raw_sha256": "79d00b2e7b0e3be368cf7813225bbe83e9408539c6bfc3e5e47dfb526aa990e5",
+      "downstream_required": false
+    },
+    "mathematical_evidence": [
+      "For fixed outcome and Kraus indices, expand K_t as a finite sum of A_talpha tensor B_talpha. In the product K_N ... K_1, each coefficient remains B_NalphaN ... B_1alpha1 in precisely that order. Attached syndrome indices may be contracted, but their noncommuting memory factors are never permuted.",
+      "At an unrestricted port the good first-use refresh has admitted output by attraction. Its pure data matrix can be absorbed backwards along the unused output wire into the marked data matrix; every intervening data matrix has disjoint support. This absorption preserves the marked input/output labels. A port never used again is discarded or charged to the residual support.",
+      "The supplier arguments prove homogeneous local-operator sector identities. Every local matrix is a scalar multiple of a Kraus operator in some CPTP family, so the identities apply to each expanded data term. Reassemble coherent terms before forming branch CP maps; trace preservation and outcome probabilities are those of the actual chronological circuit. No effective single relocated CPTP fault or independent probabilistic expansion is asserted."
+    ],
+    "source_evidence": [
+      {
+        "url": "https://arxiv.org/pdf/quant-ph/9611025",
+        "local_path": "research/quantum-computing-planning/sources/qc_r5/aaronov-ben-or-9611025.txt",
+        "locator": "Appendix C, complete Lemma 2 proof, printed pp. 13-15; local lines 846-949",
+        "establishes": "The simultaneous recursive computation, correction and arbitrary-input attraction assertions provide comparison. They do not establish the disputed shared-memory commutation; the replacement tensor-product calculation is proved locally."
+      },
+      {
+        "url": "https://www.preskill.caltech.edu/ph219/fault-tolerance-2011.pdf",
+        "locator": "Extracted PDF text for fault-tolerant error recovery, especially PDF pp. 4 and 8-15",
+        "establishes": "Compared recovery, attraction and verified-cat requirements in the extracted text. No claim to have checked every handwritten diagram or to obtain the new shared-memory identity from these notes."
+      }
+    ],
+    "contract_update": "Only the assigned theorem contract was changed: derivation mirrors and citation-use lists now match all 20 steps; current boundary references were renumbered; the stale commutation claim in its risk notes is explicitly superseded. Historical template_review records were preserved. Shared lock was acquired, current metadata reread, edited, checked and released.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qc-explicit-proper-code-and-universal-gadgets.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failed; direct proof passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qc-explicit-proper-code-and-universal-gadgets.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-21.proof-contracts.json --items thm-qc-explicit-proper-code-and-universal-gadgets --strict --json",
+        "exit_code": 0,
+        "result": "Assigned item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qc-explicit-proper-code-and-universal-gadgets.md",
+        "exit_code": 0,
+        "result": "1 item, 20 steps, 0 defects; run once after the final item edit."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run quantum-computing-algorithms-60-2026-10-15 --items thm-qc-explicit-proper-code-and-universal-gadgets",
+        "exit_code": 0,
+        "result": "Captured the post and review-context hashes in reviews immediately after completing the mathematical review; no subsequent supplier edit."
+      }
+    ],
+    "intermediate_check_repairs": [
+      "Precheck initially requested canonical phase ordering after adding same-phase dependencies; the two new proof phases and downstream references were renumbered, and the final check passes.",
+      "The first contract synchronization omitted prose-only proof references; these mirrors were restored under the shared lock, and the strict focused contract check then passed."
+    ],
+    "unresolved_obligations": [],
+    "handoff": "Controller owns independent rejudgment, fatal-round convergence, shared ledger integration and certification. No judge, stamp, central certificate or round state was written."
+  }
+}

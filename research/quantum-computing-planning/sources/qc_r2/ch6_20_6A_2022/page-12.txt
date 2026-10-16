@@ -1,0 +1,82 @@
+6
+Quantum Algorithms
+
+outcome is f(x0). Then because both x0 and x0 ⊕a, and only these values, are mapped
+by f to f(x0), we have prepared the state
+
+1
+√
+
+2(|x0⟩+ |x0 ⊕a⟩)
+(6.24)
+
+in the first register.
+Now we want to extract some information about a. Clearly it would do us no good to
+measure the register (in the computational basis) at this point. We would obtain either
+the outcome x0 or x0 ⊕a, each occurring with probability 1
+
+2, but neither outcome would
+reveal anything about the value of a.
+But suppose we apply the Hadamard transform H(n) to the register before we mea-
+sure:
+
+H(n) : 1
+√
+
+2(|x0⟩+ |x0 + a⟩)
+
+→
+1
+2(n+1)/2
+
+2n−1
+�
+
+y=0
+
+�
+(−1)x0·y + (−1)(x0⊕a)·y�
+|y⟩
+
+=
+1
+2(n−1)/2
+�
+
+a·y=0
+(−1)x0·y|y⟩.
+(6.25)
+
+If a · y = 1, then the terms in the coefficient of |y⟩interfere destructively. Hence only
+states |y⟩with a · y = 0 survive in the sum over y. The measurement outcome, then, is
+selected at random from all possible values of y such that a · y = 0, each occurring with
+probability 2−(n−1).
+We run this algorithm repeatedly, each time obtaining another value of y satisfying
+y · a = 0. Once we have found n such linearly independent values {y1, y2, y3 . . . yn} (that
+is, linearly independent over (Z2)n), we can solve the equations
+
+y1 · a = 0
+
+y2 · a = 0
+...
+
+yn · a = 0,
+(6.26)
+
+to determine a unique value of a, and our problem is solved. It is easy to see that with
+O(n) repetitions, we can attain a success probability that is exponentially close to 1.
+So we finally have found an example where, given a particular type of quantum oracle,
+we can solve a problem in polynomial time by exploiting quantum superpositions, while
+exponential time is required if we are limited to classical queries. As a computer scientist
+might put it:
+
+There exists an oracle relative to which BQP ̸= BPP.
+
+Note that whenever we compare classical and quantum complexity relative to an
+oracle, we are considering a quantum oracle (queries and replies are states in Hilbert
+space), but with a preferred orthonormal basis. If we submit a classical query (an element
+of the preferred basis) we always receive a classical response (another basis element).
+The issue is whether we can achieve a significant speedup by choosing more general
+quantum queries.
+
+

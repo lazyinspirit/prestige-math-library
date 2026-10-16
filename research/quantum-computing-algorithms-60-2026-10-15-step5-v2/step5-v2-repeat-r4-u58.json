@@ -1,0 +1,82 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 4,
+  "unit": "58",
+  "input_sha256": "3df0ac2134526d61a7ca1a595f74f091f04c44576c9eb4d93930719d5c230540",
+  "decisions": [
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0783827f03bd76f6fbd1ef12578815d60403d7bdea6f7fef17a3885453adf261",
+      "outcome": "false_positive",
+      "reason": "F1 explicitly cites thm-qa-34-modfkv-low-rank-approximation and its proof. That supplier's Proof 1.1 sets t=eta epsilon^2/(1000 K^2), chooses q at the concentration threshold, and establishes BOTH Gram errors <=t F^2 outside a failure event of probability delta_s. Its Proof 2.1 applies the two-sketch lemma on that same event. Taking delta_s=delta/3 supplies the successful sketch used here. The deterministic lemma's Proof 1.1 gives V^T V-I=Sigma^{-1} U^T(SS^T-WW^T)U Sigma^{-1}, with operator norm <=tK<=1/2. This supplies eigenvalues in [1/2,3/2], the sqrt(3) factor in 4.1, and the denominator lower bound in 5.1. The approximation inequality alone would be insufficient, but the existing explicit citation to the supplier's proof supplies the stronger joint event. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "disposition": "unaffected",
+      "post_sha256": "67a8f41c1544bc2eb8d9dcb61ce2c2083ab1e3b2235175697f68e8becec4b7f3",
+      "review_context_sha256": "cb66320185154c74dcdb454e5bb8f02efd84f1c0250829f8772aae1310e3b4be",
+      "reason": "Checked the complete assigned proof, actual ModFKV procedure, concentration and two-sketch arguments, estimator and capped-sampler interfaces, probability suppliers, owning contract and page. Summable beta_l gives simultaneous accuracy with failure <=delta/3 and eventual accuracy almost surely; nonzero D_i implies z!=0. The computable stopping rule bounds e/||z|| by epsilon/32; the Gram event established in the cited supplier proof gives the relative-error factor sqrt(3), cancellation ratio <=2K/q, and rejection failure <=delta/3. Probability budgets, conditional accepted law, zero-row caveat, choice assumptions and cost powers agree. Current step 1.1 already obtains k before testing it, resolving the historical digest concern. No item or metadata edit is required.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "reason": "The rejected Gram premise is established in the explicitly cited ModFKV supplier proof 1.1 and 2.1, at failure budget delta/3; the deterministic two-sketch proof then supplies exactly the near-isometry needed in steps 4.1 and 5.1. No confirmed defect or published-consumer change was found.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_required",
+    "changed_paths": [],
+    "statement_definition_changed": false,
+    "published_ledger_updates": [],
+    "source_reading": "Consulted Tang v3 Algorithm 2 and Theorem 4.4, Proposition 4.6 and its complete Appendix A proof, and the complete Section 4.3 argument including its refinement variant. These corroborate the sampling structure. The exact constants and probability events in this decision were checked directly in the local proofs, rather than attributed to Tang.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-34-tang-recommendation-sampler.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qa-34-tang-recommendation-sampler.md",
+        "exit_code": 0,
+        "result": "1 file; math and frontmatter parse under real KaTeX and renderer YAML"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-58.proof-contracts.json --items thm-qa-34-tang-recommendation-sampler --strict",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qa-34-tang-recommendation-sampler.md",
+        "exit_code": 0,
+        "result": "1 item, 8 steps, 0 defects"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary convergence accounting; no judges or state transitions launched."
+  }
+}

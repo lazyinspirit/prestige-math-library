@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "56",
+  "round": 0,
+  "reviewed_items": [
+    "def-qa-32-promise-bpp",
+    "lem-qa-32-indexed-to-full-list-conversion",
+    "lem-qa-32-simon-function-register-instrument",
+    "def-qa-32-eqp-promise-class",
+    "def-qa-32-zqp-promise-class",
+    "lem-qa-32-exact-clifford-t-boolean-circuit-embedding",
+    "rem-qa-32-bqp-pp-pspace-proof-obligations",
+    "thm-qa-32-eqp-zqp-bqp-containments",
+    "thm-qa-32-promise-classical-containments",
+    "def-qa-32-simon-decision-oracle-promise",
+    "alg-qa-32-simon-query-rank-test",
+    "thm-qa-32-simon-classical-randomized-query-lower-bound",
+    "thm-qa-32-simon-sample-rank-correctness",
+    "cex-qa-32-oracle-separation-is-not-gate-separation",
+    "ex-qa-32-simon-small-instance"
+  ],
+  "reviewed_pages": [
+    "quantum-complexity-classes-and-oracle-separations",
+    "quantum-complexity-classes-and-oracle-separations-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch and relevant supplier interfaces were reviewed. Request one local repair covering the instrument-proof correction and explicit one-tape generator constructions in the two containment proofs; neither requires changing a public Statement or Definition.",
+  "findings": [
+    {
+      "id": "simon-instrument-branch-matrix",
+      "type": "local",
+      "reason": "In lem-qa-32-simon-function-register-instrument, proof step 2.2, the projected vector retains amplitudes across the unmeasured register, so its outer-product branch matrix generally has off-diagonal entries within that subspace. The statement that it has the displayed diagonal entries and is zero elsewhere is false if it asserts the whole matrix is diagonal. Clarify that the specified values are the diagonal entries and that other diagonal entries vanish; the trace calculation and result remain valid."
+    },
+    {
+      "id": "one-tape-full-list-generator",
+      "type": "prerequisite",
+      "reason": "def-qc-uniform-circuit-family requires one fixed deterministic one-tape generator, but the polynomial-time generator/compiler suppliers cited by the containment proofs do not establish that machine convention. Add a local construction or proof of a one-tape polynomial-time simulation for their composition. Exact consumers: thm-qa-32-eqp-zqp-bqp-containments step 1.1; thm-qa-32-promise-classical-containments steps 2.1, 3.1, and 4.1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-qa-32-simon-query-rank-test",
+      "decision": "accept",
+      "reason": "Its measurement uses need only the instrument branch probabilities and conditional states, not the inaccurate claim that the branch matrix is diagonal."
+    },
+    {
+      "id": "thm-qa-32-simon-sample-rank-correctness",
+      "decision": "accept",
+      "reason": "Its fiber-state and output-probability calculations use the unchanged instrument result; the proof clarification does not alter that interface."
+    },
+    {
+      "id": "thm-qa-32-eqp-zqp-bqp-containments",
+      "decision": "repair",
+      "reason": "Step 1.1 needs an explicit one-tape polynomial-time generator to witness the QC14 full-list uniformity condition."
+    },
+    {
+      "id": "thm-qa-32-promise-classical-containments",
+      "decision": "repair",
+      "reason": "Steps 2.1, 3.1, and 4.1 construct and use a full-list family without establishing the one-tape generator required by its definition."
+    }
+  ]
+}

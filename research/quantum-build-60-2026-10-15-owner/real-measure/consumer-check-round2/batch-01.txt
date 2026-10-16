@@ -1,0 +1,275 @@
+FILE alg-fisher-scoring-irls
+
+STATEMENT Inputs are an observed response vector $y$ with $f_i(y_i;\theta_i,\phi)>0$ for every $i$, a finite design matrix $X$, an admissible finite current parameter $\beta$, and a GLM with common scale $a(\phi)>0$. Require each $\dot\mu_i=d\mu_i/d\eta_i$ to be finite and nonzero and each $V_i=b''(\theta_i)$ to be finite and positive.
+
+1. Compute $\eta_i=x_i^\mathsf T\beta$ and $\mu_i=g^{-1}(\eta_i)$.
+2. Compute the **working response** and positive weight
+$$z_i=\eta_i+\frac{y_i-\mu_i}{\dot\mu_i},\qquad w_i=\frac{\dot\mu_i^2}{a(\phi)V_i}.$$
+3. Form $W^{1/2}=\operatorname{diag}(\sqrt{w_i})$ using [[thm-of-square-roots]], and put $A=W^{1/2}X$, $r=W^{1/2}z$. By [[def-moore-penrose-pseudoinverse]] and [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]], form $A^+$. Return $\beta_{\mathrm{new}}=A^+r$, the unique minimum-Euclidean-norm member of the nonempty weighted least-squares minimizer set by [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]].
+
+The Moore--Penrose convention makes the procedure single-valued even when $X$ is rank deficient; the underlying least-squares minimizer need not then be unique. Existence and the minimum-norm property follow from [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]] and [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]. The output need not lie in $\Theta$, and this definition makes no claim that repeated updates terminate or converge to a maximizer.
+
+LINE 42 2. Compute the **working response** and positive weight
+$$z_i=\eta_i+\frac{y_i-\mu_i}{\dot\mu_i},\qquad w_i=\frac{\dot\mu_i^2}{a(\phi)V_i}.$$
+3. Form $W^{1/2}=\operatorname{diag}(\sqrt{w_i})$ using [[thm-of-square-roots]], and put $A=W^{1/2}X$, $r=W^{1/2}z$. By [[def-moore-penrose-pseudoinverse]] and [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]], form $A^+$. Return $\beta_{\mathrm{new}}=A^+r$, the unique minimum-Euclidean-norm member of the nonempty weighted least-squares minimizer set by [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]].
+
+The Moore--Penrose convention makes the procedure single-valued even when $X$ is rank deficient; the underlying least-squares minimizer need not then be unique. Existence and the minimum-norm property follow from [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]] and [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]. The output need not lie in $\Theta$, and this definition makes no claim that repeated updates terminate or converge to a maximizer.
+
+FILE cex-a-bounded-harmonic-boundary-value-problem-can-be-nonunique-without-almost-sure-boundary-hitting
+
+STATEMENT Let $E=\{a,b\}$ and take the identity transition matrix
+$$p(a,a)=p(b,b)=1,\qquad p(a,b)=p(b,a)=0.$$ Set $A=\{a\}$ and prescribe
+the boundary value $f(a)=1$. For every $c\in[0,1]$, the bounded function
+$v_c(a)=1$, $v_c(b)=c$ satisfies $v_c=f$ on $A$ and $v_c=Pv_c$ on $A^c$,
+where $Pq(x):=\sum_{y\in E}p(x,y)q(y)$ for $q:E\to\mathbb R$,
+but under the deterministic start at $b$,
+$$\mathbb P_b(T_A<\infty)=0.$$
+Thus, without almost-sure boundary hitting, the bounded harmonic extension
+need not be unique. This finite witness uses no choice and remains valid when
+AC is assumed for the general Dirichlet theorem it illustrates.
+
+LINE 61 1.2 For any $c\in[0,1]$, $v_c$ takes values in $[0,1]$, so it is bounded. Its value on $A$ is $v_c(a)=1=f(a)$. [given]
+
+2.1 Since $A^c=\{b\}$, the local row-sum definition of $P$ and the matrix entries give $$Pv_c(b)=p(b,a)v_c(a)+p(b,b)v_c(b)=0\cdot1+1\cdot c=c=v_c(b).$$ Thus every $v_c$ solves both the boundary and harmonic equations. Taking $c=0$ and $c=1$ gives distinct solutions, since their values at $b$ differ. [step 1.2, given]
+
+2.2 Under $\mathbb P_b=\delta_b$, step 1.1 gives $X_n=b\notin A$ for every $n\ge0$. More precisely, $\{n\ge0:X_n(\omega)\in A\}$ is empty at $\omega=b$, and $\mathbb P_b(\{b\})=1$; by [F1], $T_A=+\infty$ almost surely and $\mathbb P_b(T_A<\infty)=0$. In contrast, under $\mathbb P_a$, the initial state lies in $A$, so $T_A=0$. [F1, step 1.1, given]
+
+FILE cex-a-limit-of-discrete-series-is-not-square-integrable
+
+STATEMENT None
+
+LINE 56 ## Statement refuted
+
+The claim that every limit of discrete series is square-integrable in the all-matrix-coefficients sense of [[thm-the-limits-of-discrete-series-are-not-square-integrable]] is false. In the fixed Haar normalization of [[def-left-haar-integral-and-left-haar-measure]] and [[lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r]], the limit $D_1^+$ has a unit matrix coefficient whose squared modulus has infinite integral. By contrast, for each genuine discrete-series parameter $n\ge2$, the corresponding normalized extremal coefficient has finite squared integral.
+
+## Facts & Assumptions
+
+LINE 62 **Given:** AC, $G=\mathrm{SL}_2(\mathbb R)$, its fixed left Haar measure, the odd compact-picture model $I_{1,0}$, and the holomorphic discrete-series models for $n\ge2$.
+
+[F1] The unit vector $f_1(k_\theta)=e^{i\theta}$ lies in the closed limit summand $D_1^+$ of $I_{1,0}$, and $D_1^+$ is an irreducible strongly continuous unitary representation ([[def-limits-of-discrete-series-for-sl2-r]], [[thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series]]).
+
+[F2] Matrix coefficients are $c_{v,w}(g)=\langle\pi(g)v,w\rangle$ with pairing linear in the first variable, and they are continuous for strongly continuous unitary representations ([[def-matrix-coefficient-of-a-unitary-representation]]).
+
+LINE 84 **Given:** The assumptions and notation above.
+
+1.1 Let $\pi$ be the restriction of $I_{1,0}$ to $D_1^+$ and set $c(g)=\langle\pi(g)f_1,f_1\rangle$. By [F1], this is a matrix coefficient of an irreducible unitary limit representation; by [F2] it is continuous, and [F3] gives $c(a_\tau)=\operatorname{sech}(\tau/2)$. If $\chi(k_\theta)=e^{i\theta}$, unitarity and $\pi(k)f_1=\chi(k)f_1$ give $c(k_1gk_2)=\chi(k_1)\chi(k_2)c(g)$. Thus [F4] applies to $|c|^2$. [F1, F2, F3, F4, A1]
+
+2.1 The KAK formula and $\sinh\tau=2\sinh(\tau/2)\cosh(\tau/2)$ give $\int_G|c(g)|^2\,dg=2\pi\int_0^\infty\operatorname{sech}^2(\tau/2)\sinh\tau\,d\tau=2\pi\int_0^\infty2\tanh(\tau/2)\,d\tau$. For $\tau\ge\log3$, $2\tanh(\tau/2)\ge1$. The indicators $\mathbf1_{[\log3,\log3+m]}$ increase to $\mathbf1_{[\log3,\infty)}$ and their integrals are $m$, so [F7] shows the last nonnegative integral is infinite. [F1, F3, F4, F7, step 1.1, algebra]
+
+LINE 88 2.1 The KAK formula and $\sinh\tau=2\sinh(\tau/2)\cosh(\tau/2)$ give $\int_G|c(g)|^2\,dg=2\pi\int_0^\infty\operatorname{sech}^2(\tau/2)\sinh\tau\,d\tau=2\pi\int_0^\infty2\tanh(\tau/2)\,d\tau$. For $\tau\ge\log3$, $2\tanh(\tau/2)\ge1$. The indicators $\mathbf1_{[\log3,\log3+m]}$ increase to $\mathbf1_{[\log3,\infty)}$ and their integrals are $m$, so [F7] shows the last nonnegative integral is infinite. [F1, F3, F4, F7, step 1.1, algebra]
+
+3.1 By [F6], the irreducible unitary representation $D_1^+$ is not square-integrable because the coefficient in step 2.1 is not in $L^2(G)$. For $n\ge2$, [F4] and [F5] give the corresponding extremal coefficient integral $2\pi\int_0^\infty\cosh^{-2n}(\tau/2)\sinh\tau\,d\tau$. With $u=\tanh(\tau/2)$ this equals $8\pi\int_0^1u(1-u^2)^{n-2}\,du=4\pi/(n-1)<\infty$, confirming the endpoint contrast and refuting the claim in the Statement. [F4, F5, F6, step 2.1, algebra] ∎
+
+FILE cex-a-smooth-density-can-have-infinite-total-mass
+
+STATEMENT None
+
+LINE 31 ## Facts & Assumptions
+
+**Given:** The Axiom of Countable Choice as in the Statement. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Independent B-page witness: compact-finite Euclidean density with total mass infinity.
+
+[F2] [[thm-density-measure-is-independent-of-the-chart-gluing]]: The identity-chart density one integrates to Lebesgue measure.
+
+FILE cex-a-transient-chain-can-return-with-positive-probability
+
+STATEMENT None
+
+LINE 49 $$
+For each fixed $x\in\mathbb Z$, let $\mathbb P_x$ be the canonical law with
+$X_0=x$, put $r=q/p$, and let $T_x^+=\inf\{n\ge1:X_n=x\}$.
+
+[A1] AC is the principle that every family of nonempty sets has a choice
+
+LINE 69 
+[F5] For a transient state with return probability
+$\rho_x=\mathbb P_x(T_x^+<\infty)$, the expected visit count equals the
+diagonal transition series and is $1/(1-\rho_x)$.
+([[thm-recurrence-transience-equivalent-criteria]])
+
+LINE 77 1.1 Fix any $x\in\mathbb Z$. AC [A1] and the already constructed walk [F1] give its canonical deterministic-start law. Since $p>q>0$, the diagonal value in [F2] is finite and positive: $$G(x,x)=\frac{1}{p-q}<\infty.$$ [A1, F1, F2, given]
+
+2.1 By [F2], this finite value is the series $\sum_{n\ge0}p^{(n)}(x,x)$. The recurrence criterion [F3] therefore rules out recurrence. The alternatives in [F4] then give $\rho_x:=\mathbb P_x(T_x^+<\infty)<1$, so $x$ is transient. [F2, F3, F4, step 1.1, given]
+
+3.1 For this transient state, [F5] identifies the same visit series with $\mathbb E_xN_x=1/(1-\rho_x)$. Equating it to [F2] gives $$\frac{1}{1-\rho_x}=\frac{1}{p-q},\qquad \rho_x=1-(p-q)=2q,$$ using $p+q=1$. Since $0<q<p$ and $p+q=1$, we have $0<2q<1$. Thus the state is transient, yet its probability of a positive-time return is strictly positive. Translation invariance makes the calculation valid for every $x\in\mathbb Z$; the Green series counts the initial visit, whereas $T_x^+$ starts at time one. [F2, F5, step 1.1, step 2.1, given] ∎
+
+LINE 79 2.1 By [F2], this finite value is the series $\sum_{n\ge0}p^{(n)}(x,x)$. The recurrence criterion [F3] therefore rules out recurrence. The alternatives in [F4] then give $\rho_x:=\mathbb P_x(T_x^+<\infty)<1$, so $x$ is transient. [F2, F3, F4, step 1.1, given]
+
+3.1 For this transient state, [F5] identifies the same visit series with $\mathbb E_xN_x=1/(1-\rho_x)$. Equating it to [F2] gives $$\frac{1}{1-\rho_x}=\frac{1}{p-q},\qquad \rho_x=1-(p-q)=2q,$$ using $p+q=1$. Since $0<q<p$ and $p+q=1$, we have $0<2q<1$. Thus the state is transient, yet its probability of a positive-time return is strictly positive. Translation invariance makes the calculation valid for every $x\in\mathbb Z$; the Green series counts the initial visit, whereas $T_x^+$ starts at time one. [F2, F5, step 1.1, step 2.1, given] ∎
+
+FILE cex-an-hone-atom-need-not-be-smooth
+
+STATEMENT None
+
+LINE 35 Assume Countable Choice ([[def-countable-choice]]). The claim refuted is that every $(1,\infty,0)$-atom is continuous (or smooth).
+Let $Q\subseteq\mathbb R^n$ be a nondegenerate closed axis-parallel cube and let
+$Q^+,Q^-$ be the two halves of $Q$ cut by a coordinate hyperplane through the
+centre $c_Q$ of $Q$; write
+$$a=|Q|^{-1}\bigl(\mathbf 1_{Q^+}-\mathbf 1_{Q^-}\bigr).$$
+
+LINE 37 $Q^+,Q^-$ be the two halves of $Q$ cut by a coordinate hyperplane through the
+centre $c_Q$ of $Q$; write
+$$a=|Q|^{-1}\bigl(\mathbf 1_{Q^+}-\mathbf 1_{Q^-}\bigr).$$
+Then $a$ is a $(1,\infty,0)$-atom
+([[def-hp-atom-with-moment-order]]) but is discontinuous at every point of the
+
+LINE 45 ## Facts & Assumptions
+
+**Given:** Countable Choice and $n\ge1$, a nondegenerate closed axis-parallel cube $Q$ with centre $c_Q$ and volume $|Q|$, the halving hyperplane $H=\{x:x_0=c_{Q,0}\}$ through the centre, and the sets $Q^+=Q\cap\{x_0>c_{Q,0}\}$, $Q^-=Q\cap\{x_0<c_{Q,0}\}$.
+
+[L1] A $(1,\infty,0)$-atom is a measurable $a$ with $\operatorname{supp}a\subseteq Q$, $|a|\le|Q|^{-1}$ a.e. and $\int a=0$; no regularity is required ([[def-hp-atom-with-moment-order]]).
+
+LINE 49 [L1] A $(1,\infty,0)$-atom is a measurable $a$ with $\operatorname{supp}a\subseteq Q$, $|a|\le|Q|^{-1}$ a.e. and $\int a=0$; no regularity is required ([[def-hp-atom-with-moment-order]]).
+
+[F1] $Q^\pm$ are axis-parallel boxes each of volume $|Q|/2$, and $Q$ is the disjoint union of $Q^+$, $Q^-$ and $Q\cap H$ up to a Lebesgue-null set; consequently $\int_{Q^\pm}\mathbf 1=|Q|/2$ ([[def-multidimensional-rectangle-and-volume]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]).
+
+[F2] A function $g:\mathbb R^n\to\mathbb C$ is continuous at $z$ if and only if for every neighbourhood $V$ of $g(z)$ there is a neighbourhood $U$ of $z$ with $g[U]\subseteq V$ ([[def-continuous-map-top]]).
+
+LINE 55 
+
+The witness is $a=|Q|^{-1}(\mathbf 1_{Q^+}-\mathbf 1_{Q^-})$.
+
+## Counterexample
+
+LINE 63 1.1 **$a$ is a $(1,\infty,0)$-atom.** Clearly $\operatorname{supp}a\subseteq Q$ and $|a|\le|Q|^{-1}$ almost everywhere. For the zeroth moment, [F1] gives $\int a=|Q|^{-1}(|Q|/2-|Q|/2)=0$. Hence $a$ satisfies [L1] and is a $(1,\infty,0)$-atom. [L1, F1, algebra]
+
+2.1 **$a$ is discontinuous across the cutting hyperplane.** Fix $z\in H\cap\operatorname{int}Q$ and let $r>0$ be smaller than the distance from $z$ to $\partial Q$; then $z+se_0\in Q^+$ and $z-se_0\in Q^-$ for every $0<s<r$, and $a(z+se_0)=|Q|^{-1}$, $a(z-se_0)=-|Q|^{-1}$. Both sequences tend to $z$, so continuity of $a$ at $z$ would force the two values to be equal: by [F2] applied to the neighbourhood $V=\{w:|w-a(z)|<|Q|^{-1}/2\}$ of $a(z)$, every point of a sufficiently small neighbourhood $U$ of $z$ would satisfy $a(z+se_0)\in V$ and $a(z-se_0)\in V$, which is impossible because the two values differ by $2|Q|^{-1}>|Q|^{-1}$. Hence $a$ is discontinuous at every $z\in H\cap\operatorname{int}Q$, which is the relative interior of the cutting slice, and in particular is not continuous, hence not smooth. [step 1.1, F2, given, algebra]
+
+3.1 **Conclusion.** Step 1.1 exhibits a $(1,\infty,0)$-atom and step 2.1 shows that it has a jump discontinuity on the cutting hyperplane; therefore the atomic size and cancellation conditions do not imply continuity or smoothness, and no regularity of atoms may be assumed in the atomic characterisation. In particular a proof producing $L^\infty$ atoms with jumps is not deficient on that account. [step 1.1, step 2.1] ∎
+
+FILE cex-an-unbounded-predictable-transform-may-lose-integrability
+
+STATEMENT None
+
+LINE 56 2.1 Set $M_0=0$, $M_n(j,e)=e$ for $n\ge1$. These variables are adapted and bounded by one. For any $A\in\mathcal F_0$, its positive-sign and negative-sign portions have equal probability: each equals $\sum_{j:B_j\subseteq A}2^{-j-1}$. Thus $\int_Ae\,dP=0$, a finite subtraction, so the zero function meets all CE event identities. Consequently $E[M_1\mid\mathcal F_0]=0=M_0$. At later times $M_{n+1}=M_n=e$ is already known and integrable, so it conditions to itself. Thus $M$ is a bounded martingale [[def-martingale-submartingale-and-supermartingale]]. [F3, F4, step 1.1]
+
+3.1 Define $H_1(j,e)=2^j$ and $H_k=0$ for $k\ge2$. Every value is finite, $H_1$ is constant on each block and hence $\mathcal F_0$-measurable, and later H values are known constants. Thus $H$ is predictable [[def-predictable-discrete-time-process]] and unbounded. The algebraic gain at every positive time is $G_n(j,e)=2^je$. For $f_m=2^j\mathbf1_{\{j\le m\}}$, the finite simple integral is $Ef_m=\sum_{j=1}^m\sum_{e=\pm1}2^j2^{-j-1}=m$. To justify the limiting step locally, augment every finite disjoint simple display by its complement with coefficient $0$; intersections of two augmented displays partition $\Omega$ and carry equal coefficients, so finite additivity and $0\cdot(+\infty)=0$ prove representation independence. Common refinements give monotonicity. For any $0\le u_r\uparrow u$, a simple $s\le u$, and $0<c<1$, the sets $A_r=\{u_r\ge cs\}$ increase to $\Omega$, including on the zero level of $s$, and continuity from below for the finite-sum measure $A\mapsto\int_A s$ gives $c\int s\le\sup_r\int u_r$. Let $c\uparrow1$ and take the supremum over $s$ to obtain MCT. Applying this to $f_m\uparrow|G_1|$ gives $E|G_1|=\infty$. Hence the product at time one is not integrable and violates [F7], and the gains cannot be a martingale. No signed conditional expectation of $G_1$ is formed. AC is inherited only from the CE notation used for the bounded M; all masses and factors are explicit. [F5, F6, F7, step 1.1, step 2.1, construct] ∎
+
+FILE cex-calderon-zygmund-operators-need-not-map-linfinity-to-linfinity
+
+STATEMENT None
+
+LINE 56 **Proof technique:** direct.
+
+1.1 The function $q$ is unbounded above and below on every punctured neighbourhood of the endpoints: for $0<x<1$, $\frac{|x|}{|x-1|}=\frac{x}{1-x}$, which tends to $0$ as $x\to0^+$ and to $+\infty$ as $x\to1^-$; since $\log$ is continuous, strictly increasing, with $\lim_{u\downarrow0}\log u=-\infty$ and $\lim_{u\to\infty}\log u=+\infty$, one has $q(x)\to-\infty$ as $x\to0^+$ and $q(x)\to+\infty$ as $x\to1^-$. Hence for every $M>0$ the sets $\{q>M\}$ and $\{q<-M\}$ contain nondegenerate intervals, so both have positive Lebesgue measure and $q$ is not essentially bounded. [F1, given, algebra]
+
+2.1 Suppose $T:L^\infty(\mathbb R;\mathbb C)\to L^\infty(\mathbb R;\mathbb C)$ were bounded and agreed with the $L^2$ Hilbert transform on $L^\infty\cap L^2$. Since $f\in L^\infty\cap L^2$ by [F1], the class $Tf$ would equal the class $Hf=q$; but $q$ is not essentially bounded by step 1.1, whereas every class in $L^\infty$ is essentially bounded. This contradiction shows that no bounded $L^\infty\to L^\infty$ extension compatible on $L^\infty\cap L^2$ exists, which is the asserted failure; nothing here concerns a BMO-valued estimate. [F1, step 1.1, algebra] ∎
+
+FILE cex-cantor-function-is-not-w-one-one-despite-being-absolutely-continuous-off-a-null-set
+
+STATEMENT Assume the Axiom of Choice. Let $C\subseteq[0,1]$ be the middle-thirds Cantor set, let $c:[0,1]\to[0,1]$ be the Cantor staircase, and let $\mu_c$ be its Cantor measure. Then $C$ is null, and $c$ is constant on the closure of every complementary interval of $C$, hence absolutely continuous there with classical derivative zero off $C$. On $(0,1)$ the distributional derivative of $c$ is the restriction of $\mu_c$, a nonzero singular measure with $\mu_c((0,1))=1$. In particular,
+
+$$c\notin W^{1,1}((0,1)).$$
+
+The phrase “absolutely continuous off a null set” here means absolutely continuous on each complementary interval separately; it does not assert absolute continuity across the Cantor set.
+
+LINE 105 [F6] Under Countable Choice, $\mu_c$ is the Lebesgue–Stieltjes measure of the continuous nondecreasing extension $F_c$ of $c$ to $\mathbb R$; it is a probability measure, has no atoms, is concentrated on $C$, and is singular with respect to Lebesgue measure ([[def-cantor-measure]], [[thm-existence-of-the-lebesgue-stieltjes-measure]], [[prop-cantor-measure-is-a-singular-atomless-probability-measure]]).
+
+[F7] For the Cantor measure, $\mu_c((a,b))=F_c(b^-)-F_c(a)$; applying this interval formula at $a=0,b=1$ and using [F3]–[F4] gives $\mu_c((0,1))=1$ ([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]]).
+
+[F8] Every open subset of $\mathbb R$ is the union of an at most countable pairwise disjoint family of open interval components ([[thm-open-subsets-of-r-structure]]).
+
+FILE cex-clt-can-fail-with-infinite-variance-under-square-root-n-scaling
+
+STATEMENT None
+
+LINE 72 [F20] Continuous functions on compact intervals are Riemann integrable. [[thm-continuous-implies-integrable]].
+
+[F21] Real integrals are defined by positive and negative parts, and complex integrals by real and imaginary parts. [[def-integrable-real-and-complex-functions-and-their-integrals]].
+
+## Counterexample
+
+LINE 78 **Given:** Assume AC. There are iid real variables with density $c(x)=1/[\pi(1+x^2)]$ and infinite second moment such that $n^{-1/2}\sum_{k=1}^nX_k$ has no weak limit. In particular square-root-n scaling need not produce a normal limit when finite variance is dropped.
+
+1.1 First construct the symmetric Laplace density $l(x)=e^{-|x|}/2$. On [0,R] the primitive of $e^{-x}$ is $-e^{-x}$, so [F1]–[F3], [F5] and [F20] give integral $1-e^{-R}$; the other half interval gives the same value by the primitive $e^x$. The bridge [F2] and MCT [F6] yield $\int l=1$. The elementary exponential series bound $e^R\ge1+R$ makes $e^{-R}\to0$. Thus [F8] defines a probability with density l. For every bounded measurable complex $h=u+iv$, apply [F9] to $u^+,u^-,v^+,v^-$; these four functions are bounded by $|h|$, so their products with $l$ have finite integral. The real/imaginary definition [F21] then gives $\int h\,d(l\,d\lambda)=\int hl\,d\lambda$. In particular the characteristic function of the constructed law is its density integral. For real t, componentwise differentiation using [F3]–[F5] gives the primitive $e^{(-1+it)x}/(-1+it)$ on the positive half-line and $e^{(1+it)x}/(1+it)$ on the negative half-line. Their nonzero denominators have modulus at least one. Taking integer R limits with DCT majorant $e^{-|x|}$ and [F19] gives $\varphi_l(t)=\tfrac12((1-it)^{-1}+(1+it)^{-1})=1/(1+t^2)$. [F1, F2, F3, F4, F5, F6, F7, F8, F9, F19, F20, F21]
+
+2.1 By [F10]–[F11], $\int_{-R}^R(1+t^2)^{-1}\,dt=\arctan R-\arctan(-R)<\pi$. The integrands are continuous, so the bridge and MCT make $\varphi_l$ Lebesgue integrable. [F12] supplies the continuous density $f(y)=(2\pi)^{-1}\int e^{-ity}/(1+t^2)\,dt$ for the Laplace law. It equals l everywhere: both are continuous and have the same integral on every interval, whereas any nonzero value of f-l would, by continuity, have one strict sign bounded away from zero on a nonempty interval, contradicting that integral equality and [F13]. At y=0 this identity gives $\int(1+t^2)^{-1}\,dt=\pi$. Therefore [F8] makes c a probability density. At y=-u the same identity, multiplied by two, gives $\int e^{iux}c(x)\,dx=e^{-|u|}$. No contour integral is used. [step 1.1, F1, F2, F6, F8, F10, F11, F12, F13, F20]
+
+FILE cex-conformal-rare-subgroup-poor-conditional-coverage
+
+STATEMENT None
+
+LINE 49 ## Counterexample
+
+1.1 For $m=9$ and $\alpha=1/10$, $k=\lceil10\cdot9/10\rceil=9$, so $q$ is the maximum of the nine calibration scores. Each score is $1$ with probability $1/100$ and $0$ with probability $99/100$. The events $\{G_i=B\}$ are measurable from their respective examples, so [F1] makes them mutually independent and independent of $\{G_{10}=A\}$. Conditional on $G_{10}=A$, no calibration example is in group $A$ with probability $\prod_{i=1}^9\mathbb P(G_i=B)=(99/100)^9$. The test score is $1$ and is covered exactly when at least one calibration example has group $A$; thus the conditional coverage is $1-(99/100)^9\approx864827/10^7<9/10$. [given, F1, F2]
+
+2.1 A group-$B$ test has score $0\le q$ and is always covered. Hence marginal coverage is $99/100+(1/100)(1-(99/100)^9)\approx9908648/10^7\ge9/10$, consistent with [F3], while the rare-group conditional coverage violates the refuted claim. [given, F2, F3, step 1.1] ∎
+
+FILE cex-continuous-calculus-does-not-contain-discontinuous-spectral-projections
+
+STATEMENT None
+
+LINE 52 2.1 If $P=f(T)$ for a continuous $f\in C([0,1])$, then $M_f=P=M_{\mathbf 1_{(0,1/2)}}$ by the multiplication form of the calculus, so the two bounded functions agree as elements of $L^2(0,1)$, that is $f=\mathbf 1_{(0,1/2)}$ almost everywhere. [step 1.1, A1]
+
+3.1 A continuous function agreeing almost everywhere with an indicator of a proper subinterval is impossible: $f=1$ a.e. on $(0,1/2)$ and $f=0$ a.e. on $(1/2,1)$, so continuity at $1/2$ would give $f(1/2)=\lim_{t\to1/2^-}f(t)=1$ and simultaneously $f(1/2)=\lim_{t\to1/2^+}f(t)=0$; the two limits are computed along intervals where the continuous function is a.e. constant, hence constant there. [step 2.1, A2, algebra]
+
+4.1 Hence no continuous $f$ satisfies $P=f(T)$, so the commuting projection $P$ demonstrates that the continuous calculus does not contain every spectral projection of $T$. [step 1.1, step 3.1, A4] ∎
+
+FILE cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux
+
+STATEMENT Assume Countable Choice ([[def-countable-choice]]) for the analytic prerequisites used below.
+
+Let $f(u)=u^3$ and take the Riemann data $u_L=1$ for $x<0$, $u_R=-1$ for
+$x>0$. The single jump
+$$u(t,x)=\begin{cases}1,&x<t,\\[2pt]-1,&x>t\end{cases}$$
+has Rankine--Hugoniot speed $s=1$ and is a distributional weak solution with
+these data: integration by parts on the two sides leaves only the interface
+coefficient $s[u]-[f]=1(-2)-(-2)=0$. Its strong local $L^1$ trace is the
+stated datum because the discrepancy is supported on $0<x<t$ and has amplitude
+$2$. It is not a Kruzhkov entropy solution. For $k=-\tfrac12$, the Kruzhkov
+pair has $\eta_k(1)=\tfrac32$, $\eta_k(-1)=\tfrac12$, $q_k(1)=\tfrac98$, and
+$q_k(-1)=\tfrac78$, hence
+$$[q_k]-s[\eta_k]=-\tfrac14-(-1)=\tfrac34>0,$$
+violating the required nonpositive entropy production. Equivalently, the chord
+from $(-1,-1)$ to $(1,1)$ is $z\mapsto z$, while $z^3-z>0$ on $(-1,0)$ and
+$z^3-z<0$ on $(0,1)$, so the graph fails the required one-sided condition in
+[[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]. The
+strictly convex Riemann solver theorem does not apply: $f''(u)=6u$ changes sign
+and $f'$ is not monotone on $[-1,1]$. Thus its formula does not extend to this
+nonconvex flux; the concave-hull construction gives the corresponding
+composite entropy wave
+([[def-self-similar-riemann-problem]],
+[[def-kruzhkov-entropy-solution]]).
+
+LINE 80 
+
+2.1 **Chord condition and nonconvexity.** With $u^-=1$, $u^+= -1$ and $s=1$, the chord residual is $F(z)=f(z)-f(1)-s(z-1)=z^3-1-(z-1)=z^3-z$, and the criterion of [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]] requires $F(z)(u^+-u^-)\ge0$, that is, $F(z)\le0$ on $[-1,1]$. But $F(z)=z(z-1)(z+1)>0$ for $z\in(-1,0)$, so the chord condition fails, independently confirming the entropy failure of step 1.2. Moreover $f''(u)=6u$ changes sign on $[-1,1]$, so $f'$ is not increasing and the hypotheses of the strictly convex Riemann solver [[thm-riemann-solver-for-strictly-convex-scalar-flux]] are not satisfied. [F3, step 1.2]
+
+
+
+FILE cex-curved-normal-family-statistic-incomplete
+
+STATEMENT None
+
+LINE 97 1.1 The map $T$ is polynomial and hence a statistic by [F2]. Let $\lambda_B$ be one-dimensional Lebesgue measure restricted to $\mathcal B(\mathbb R)$; the Borel half-open intervals $(-k,k]$ give it a sigma-finite cover of finite measure by [F5]. By [F4] and the affine change of variables [F10] for $z\mapsto\theta+\theta z$, each $X_i$ has Borel density $q_\theta(x_i)=(\sqrt{2\pi}\theta)^{-1}e^{-(x_i-\theta)^2/(2\theta^2)}$ relative to $\lambda_B$. Independence [F5] gives the joint law $P_\theta^{X_1}\times P_\theta^{X_2}$. The measure with density $q_\theta(x_1)q_\theta(x_2)$ relative to $\lambda_B\times\lambda_B$ exists by [F9]; Tonelli [F6] shows that it has total mass one and agrees with this product law on every measurable rectangle. By [F11], these rectangles generate the Borel sigma-algebra of $\mathbb R^2$, so the product-measure uniqueness clause [F9] identifies this density measure with the joint law. Expanding its density gives $p_\theta(x_1,x_2)=(2\pi)^{-1}\theta^{-2}\exp\left(-S_2/(2\theta^2)+S_1/\theta-1\right)$. Put $u=1/\theta$, $h(x_1,x_2)=(2\pi)^{-1}$, $\Omega=\{(u,-u^2/2):u>0\}$, and $A(u,-u^2/2)=1-2\log u$. Then $p_\theta=h\exp\{uS_1-u^2S_2/2-A(u,-u^2/2)\}$, with normalizer $Z(u,-u^2/2)=e^{A}=e/u^2$; the normalization follows from the product normal density just derived. Thus the canonical statistic is $(S_1,S_2)$, and the natural parameter set lies on $\eta_2=-\eta_1^2/2$, so it contains no open subset of $\mathbb R^2$. Both densities are strictly positive, so $P_\theta\ll P_{\theta_0}$ for any fixed $\theta_0>0$. Their ratio is a Borel function of $T$; since $P_{\theta_0}$ is a model member, [F7] proves sufficiency. [A1, F1, F2, F4, F5, F6, F7, F9, F10, F11, given, algebra]
+
+2.1 From $X_i=\theta+\theta Z_i$ and [F4], $E_\theta X_i=\theta$ and $E_\theta X_i^2=2\theta^2$. The bound $|z|\le1+z^2$ gives $E|Z_i|\le1+E Z_i^2=2$, hence $E_\theta|X_i|<\infty$. Let $q_\theta$ be the one-dimensional normal density from step 1.1 and write $x^+=\max(x,0)$, $x^- =\max(-x,0)$. Independence [F5] identifies the joint law with the product of the two marginal laws, each having density $q_\theta$. Tonelli [F6] therefore gives, for every $a,b\in\{+,-\}$, $E_\theta[X_1^aX_2^b]=\left(\int_{\mathbb R}x^a q_\theta(x)\,dx\right)\left(\int_{\mathbb R}x^b q_\theta(x)\,dx\right)$, where all four factors are finite by $E_\theta|X_i|<\infty$. Subtracting the four finite identities yields $E_\theta[X_1X_2]=(E_\theta X_1)(E_\theta X_2)$; linearity [F8] now gives $E_\theta S_1^2=E X_1^2+E X_2^2+2E X_1E X_2=6\theta^2$, while $E_\theta S_2=4\theta^2$. Hence $E_\theta g(T)=6\theta^2-\tfrac32(4\theta^2)=0$ for every $\theta>0$. Also $|g(T)|\le S_1^2+\tfrac32S_2$, whose expectation is finite, so $g(T)$ is integrable. [F3, F4, F5, F6, F8, step 1.1, given, algebra]
+
+3.1 At $(x_1,x_2)=(1,0)$, $g(T)=-1/2$. By continuity it is nonzero on a neighborhood. The density in step 1.1 is continuous and strictly positive at this point, so there is a smaller nondegenerate rectangle inside that neighborhood on which the density is bounded below by half its value at $(1,0)$. The rectangle has positive $\lambda_B\times\lambda_B$ measure by the one-dimensional box formula and the product rectangle formula [F5, F9], hence it has positive probability under every $\theta>0$. Therefore $g(T)$ is not zero almost surely, contradicting completeness [F3]. [F3, F5, F9, step 2.1, given, algebra, step 1.1] ∎
+
+FILE cex-degenerate-ellipticity-allows-nonconstant-solutions-with-interior-zero-sets
+
+STATEMENT None
+
+LINE 34 **Statement refuted.** The strong maximum principle of [[cor-strong-maximum-principle-for-weak-elliptic-solutions]] holds for every divergence-form equation with bounded measurable symmetric coefficient matrix that is positive semidefinite, $\sum_{i,j=1}^na^{ij}(x)\xi_i\xi_j\ge0$ for a.e. $x\in\Omega$ and all $\xi\in\mathbb R^n$: degeneracy of the coefficients does not affect the conclusion.
+
+**Counterexample.** On $\Omega=B_1(0)\subset\mathbb R^3$ take $A=\operatorname{diag}(1,0,0)$ (so the matrix is positive semidefinite but degenerate: the uniform ellipticity inequality fails for $\xi=e_2$) and $u(x)=x_2^+:=\max\{x_2,0\}$. Then $u$ is Lipschitz, nonnegative and nonconstant on $\Omega$, and its zero set contains the lower half-ball $\{x_2<0\}$ of positive measure. Its weak gradient is $(0,\mathbf1_{\{x_2>0\}},0)$, so $A\nabla u=0$ a.e. and the weak identity $\int_{B_1}A\nabla u\cdot\nabla v\,dx=0$ holds for every $v\in H^1_0(B_1)$ — the integral identity of [[def-local-weak-solution-for-a-divergence-form-operator]] applied to the degenerate matrix. The analogue of [[cor-strong-maximum-principle-for-weak-elliptic-solutions]] fails: uniform ellipticity is a hypothesis of the theorem.
+
+## Facts & Assumptions
+
+LINE 38 ## Facts & Assumptions
+
+**Given:** The Axiom of Choice and Countable Choice; the unit ball $B_1(0)\subset\mathbb R^3$; the coefficient matrix $A=\operatorname{diag}(1,0,0)$; and the function $u(x)=x_2^+$.
+
+[F1] The coefficient matrix is bounded, measurable, symmetric and positive semidefinite, but not uniformly elliptic: $\xi^TA\xi=\xi_1^2\ge0$ for all $\xi$, while for $\xi=e_2$ one has $\xi^TA\xi=0<\theta|\xi|^2$ for every $\theta>0$, so the ellipticity hypothesis of [[def-uniformly-elliptic-divergence-form-operator]] fails ([[def-hk-and-hk-zero-notation]]).
+
+LINE 42 [F1] The coefficient matrix is bounded, measurable, symmetric and positive semidefinite, but not uniformly elliptic: $\xi^TA\xi=\xi_1^2\ge0$ for all $\xi$, while for $\xi=e_2$ one has $\xi^TA\xi=0<\theta|\xi|^2$ for every $\theta>0$, so the ellipticity hypothesis of [[def-uniformly-elliptic-divergence-form-operator]] fails ([[def-hk-and-hk-zero-notation]]).
+
+[F2] The function $u(x)=x_2^+$ is Lipschitz and nonnegative on $B_1(0)\subset\mathbb R^3$, nonconstant, and its zero set contains the lower half-ball $\{x\in B_1(0):x_2<0\}$, an open interior set of positive measure; moreover $u(x)>0$ on the upper half-ball ([[def-weak-derivative-of-a-locally-integrable-function]], [[def-connected-space]]).
+
+[F3] The weak gradient of $u$ is $Du=(0,\mathbf1_{\{x_2>0\}},0)$ a.e. on $B_1(0)\subset\mathbb R^3$, so $u\in H^1(B_1(0))$. For $A=\operatorname{diag}(1,0,0)$ one has $A Du=0$ a.e., hence the degenerate form $a_0(u,v)=\int_{B_1}A Du\cdot Dv\,dx$ is zero for every $v\in H^1_0(B_1)$ ([[def-weak-derivative-of-a-locally-integrable-function]], [[def-local-weak-solution-for-a-divergence-form-operator]]).
+
+LINE 50 ## Counterexample
+
+1.1 The degenerate matrix and the function. By [F1] the matrix satisfies the stated boundedness and positive-semidefiniteness but violates uniform ellipticity, and by [F2] the function $u(x)=x_2^+$ is nonnegative, nonconstant and has a half-ball of interior zeros; by [F3] its weak gradient is $(0,\mathbf1_{\{x_2>0\}},0)$ and $A Du=0$, so $u\in H^1(B_1(0))$. [given, F1, F2, F3]
+
+2.1 The weak identity holds. For every $v\in H^1_0(B_1(0))$, the matrix-vector product is $A Du=0$ a.e.; therefore $\int_{B_1(0)}A Du\cdot Dv\,dx=0$ directly. No distributional derivative of a sign function is involved. Hence $u$ is a weak solution of the degenerate equation in the integral sense of [[def-local-weak-solution-for-a-divergence-form-operator]]. [step 1.1, F3]

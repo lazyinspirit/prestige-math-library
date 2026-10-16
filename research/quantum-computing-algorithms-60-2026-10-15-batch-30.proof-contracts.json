@@ -1,0 +1,2155 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-binary-qft-product-factorization",
+    "thm-qa-projective-operator-closeness-bounds-output-distribution",
+    "lem-qa-pi-over-two-exceeds-sqrt-two",
+    "lem-qa-tensor-extension-preserves-operator-norm",
+    "lem-qa-swap-is-three-cnot-circuit",
+    "thm-qa-exact-binary-qft-circuit-correct",
+    "thm-qa-exact-binary-qft-gate-count",
+    "thm-qa-truncated-qft-operator-norm-error",
+    "thm-qa-truncated-qft-gate-count",
+    "thm-qa-qft-finite-gate-set-compile-cost",
+    "ex-qa-qft-fourier-circuit-order-and-truncation"
+  ],
+  "contracts": {
+    "lem-qa-binary-qft-product-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-bitstring-index-is-bijection",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the map\n$\\operatorname{enc}_n:\\{0,1\\}^n\\to\\{0,\\ldots,2^n-1\\}$ of\n[[def-qc-ordered-bitstring-encoding]] is a bijection. Any permutation of the\n$n$ bit positions therefore induces a permutation of the corresponding\ncomputational basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-ordered-bitstring-encoding",
+          "source_section": "Definition",
+          "quote": "For $n\\ge0$ and a binary word $x=(x_0,\\ldots,x_{n-1})\\in\\{0,1\\}^n$, define its\n**big-endian index**\n\n$$\\operatorname{enc}_n(x):=\\sum_{k<n}x_k\\,2^{\\,n-1-k}.$$\n\nThus the first wire is the most significant bit. For $n=0$, the domain\n$\\{0,1\\}^0$ consists only of the empty word $()$, and the empty sum gives\n$\\operatorname{enc}_0(())=0$. In an ordered $n$-qubit\ncomputational basis, the word $x$ occupies the slot numbered\n$\\operatorname{enc}_n(x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For an integer $N\\ge1$, let $\\mathcal F_N$ be the negative-sign, $N^{-1/2}$-normalized transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Define the **cyclic quantum Fourier transform** by $\\operatorname{QFT}_N:=\\mathcal F_N^{-1}$. The inverse exists by [[thm-finite-fourier-inversion]], and its matrix on the standard basis indexed by $0,\\ldots,N-1$ is\n\n$$\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle,\\qquad 0\\le x<N.$$\n\nHere the standard-basis ket convention is the one specified by [[def-qc-dirac-notation-conversion]]. Thus the transform has the positive sign and the same $N^{-1/2}$ normalization as the inverse Fourier formula. At $N=1$ it is the identity on the one-dimensional register. In the binary specialization $N=2^n$, the circuit page writes each index in its unique base-two expansion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-controlled-phase-rotation",
+          "source_section": "Definition",
+          "quote": "For a real angle $\\theta$, define the one-qubit phase matrix $P_\\theta=\\operatorname{diag}(1,e^{i\\theta})$. In control-first order define\n\n$$CP(\\theta):=C(P_\\theta)=\\operatorname{diag}(1,1,1,e^{i\\theta})$$\n\nin the ordered basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$. This is the exact controlled phase; no circuit cost or controlled access to an arbitrary black-box unitary is implied.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n\\ge1$, bijectivity [F1] lets us index the output basis by all bit words $(y_{n-1},\\ldots,y_0)$ in wire order; [F2] gives $y=\\sum_{j=0}^{n-1}y_j2^j$. Then $xy/2^n=\\sum_j y_jx/2^{n-j}$. In the term indexed by $y_j$, put $k=n-1-j$. The fractional part of $x/2^{n-j}$ is $\\sum_{i=0}^{k}x_i2^{-(k-i+1)}$: terms with $i>k$ are integers and the remaining powers have exactly these denominators. Thus the phase attached to output bit $y_j$ is the phase of $R_{n-1-j}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consequently $e^{2\\pi ixy/2^n}=\\prod_j e^{2\\pi iy_j\\sum_{i=0}^{n-1-j}x_i2^{-(n-j-i)}}$. Summing over all bit strings $y$ factors as a tensor product of the two-term sums for the individual $y_j$; the normalization $2^{-n/2}$ is the product of the $n$ factors $2^{-1/2}$. By [F3], in wire order $q_{n-1},\\ldots,q_0$ the factor sequence is $R_0\\otimes\\cdots\\otimes R_{n-1}$, and [F4] identifies these coordinate factors with the corresponding kets.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the descending-target circuit, the block on $q_j$ applies $H$ followed by $CP(2\\pi/2^{j-i+1})$ from each control $q_i$ with $i<j$. Before this block, all lower wires are still in the basis states $|x_i\\rangle$: previous blocks target only higher wires, and [F6] leaves basis controls unchanged. By [F5], the Hadamard contributes relative phase $(-1)^{x_j}=e^{2\\pi i x_j/2}$; by [F6], the controlled phases multiply it by $\\prod_{i<j}e^{2\\pi i x_i/2^{j-i+1}}$. Thus the block prepares $R_j$ without changing the lower wires or previously prepared higher factors. Induction down the finite loop gives $R_{n-1}\\otimes\\cdots\\otimes R_0$ before reversal. By [F3], reversal gives the output of step 2.1. At $n=0$, the loop is empty, $N=1$, and both states are the empty tensor $1$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The n=0 empty tensor and N=1 identity are handled in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The binary expansion in step 1.1 includes x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 register is included in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-wire case is checked in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All input and output indices in the inclusive finite ranges are covered in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The output is a finite sum over all bit strings; no choice is used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a factorization identity, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a factorization identity, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all proof steps and exact encoding, tensor, ket, QFT and gate definitions. The bit y_j has fractional phase x/2^(n-j), giving R_(n-1-j), hence R_0 first on the most significant output wire. The reader source locator is accurate: De Wolf v6 section 4.5 PDF pages 44–45, lines 2168–2361, derives the product and descending Hadamard/phase construction followed by reversal. Amended the repair because a literature citation alone did not supply the required local proof of the pre-reversal clause: step 3.1 now traces each block and proves the finite-loop invariant from the exact gate matrices. Checked n=0 scalar identity, n=1 Hadamard, all bit values, and no choice. Statement unchanged; added direct gate suppliers and synchronized manifest."
+      },
+      "repair_confidence": 1
+    },
+    "thm-qa-projective-operator-closeness-bounds-output-distribution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-bessel-inequality-and-finite-parseval-identity",
+          "source_section": "Statement",
+          "quote": "If $(e_0,\\ldots,e_{r-1})$ is a finite orthonormal list and $v$ is any vector, then\n\n$$\\sum_{i<r}|\\langle v,e_i\\rangle|^2\\le\\lVert v\\rVert^2.$$\n\nEquality holds exactly when $v\\in\\operatorname{span}(e_0,\\ldots,e_{r-1})$. If the list is an orthonormal basis, then for all $v,w$,\n\n$$v=\\sum_{i<r}\\langle v,e_i\\rangle e_i,\\qquad \\langle v,w\\rangle=\\sum_{i<r}\\langle v,e_i\\rangle\\overline{\\langle w,e_i\\rangle},$$\n\nand\n\n$$\\lVert v\\rVert^2=\\sum_{i<r}|\\langle v,e_i\\rangle|^2.$$\n\nThe empty-list case is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix any $\\lambda$ with $|\\lambda|=1$, and set $\\alpha=U\\psi$ and $\\beta=\\lambda V\\psi$. By [F4], [F7] and $|\\lambda|=1$, both vectors have norm $1$. Parseval [F6] makes their squared coordinate moduli nonnegative weights summing to $1$, so [F1] gives the output probability laws. For each $b\\in B$, [F5] applied to $\\alpha_b=(\\alpha_b-\\beta_b)+\\beta_b$ and then to the reversed pair gives $\\bigl||\\alpha_b|-|\\beta_b|\\bigr|\\le|\\alpha_b-\\beta_b|$. Factoring a difference of squares and applying [F2] gives $d_{\\rm TV}(p_U^\\psi,p_{\\lambda V}^\\psi)\\le\\tfrac12\\|\\alpha-\\beta\\|_2(\\sum_b(|\\alpha_b|+|\\beta_b|)^2)^{1/2}$. Expanding the last squared sum and applying [F2] to the two nonnegative coordinate lists bounds its square root by $\\|\\alpha\\|_2+\\|\\beta\\|_2=2$, so the total variation is at most $\\|\\alpha-\\beta\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\gamma_b$ is the $b$-th coordinate of $V\\psi$, then $\\beta_b=\\lambda\\gamma_b$ and $|\\beta_b|^2=|\\lambda|^2|\\gamma_b|^2=|\\gamma_b|^2$ by modulus multiplicativity in [F5]. Hence $p_{\\lambda V}^\\psi=p_V^\\psi$. Also $\\|\\alpha-\\beta\\|_2=\\|(U-\\lambda V)\\psi\\|_2\\le\\|U-\\lambda V\\|$ by [F3] and $\\|\\psi\\|_2=1$. Combining with step 1.1 gives $d_{\\rm TV}(p_U^\\psi,p_V^\\psi)\\le\\|U-\\lambda V\\|$ for every unit scalar $\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking the infimum over all $|\\lambda|=1$ in step 2.1 gives $d_{\\rm TV}(p_U^\\psi,p_V^\\psi)\\le d_{\\rm pr}(U,V)\\le\\varepsilon$. No minimizing phase is required.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonzero space and a finite orthonormal basis.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "Statement assumes a unit input in a nonzero finite space and a complete orthonormal basis B; hence B cannot be empty. The finite output sum has that same basis domain, not an arbitrary possibly-empty outcome family.",
+            "item_sha256": "a462517c9e791d054311710a732870e0f3eb7a5de7a9d18489d22840751e8967",
+            "row_sha256": "dad6c292c066309c105b8228b3fe2df99461e982bc0abb97a598dfee4290419d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-early.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "Statement assumes a unit input in a nonzero finite space and a complete orthonormal basis B; hence B cannot be empty. The finite output sum has that same basis domain, not an arbitrary possibly-empty outcome family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case epsilon=0 is covered by the same inequalities in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-dimensional nonzero space is included by the finite-basis argument in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement requires a unit input in a nonzero space, excluding a zero vector or zero-dimensional space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The case d_pr=epsilon, including epsilon=0, follows in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses an infimum phase bound and chooses no minimizing phase."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper bound, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all three proof steps and ten supplier statements. Parseval gives normalized laws for unit inputs, reverse triangle and real Cauchy-Schwarz give TV<=||Upsi-lambda Vpsi|| with constant one. Scalar multiplicativity preserves each output weight for every unit lambda. Operator-norm domination holds on the nonzero domain; taking the infimum is valid because the fixed TV is a lower bound of the nonempty phase family. Includes epsilon=0, one-dimensional spaces and zero coordinates; no attained infimum or choice is assumed. Reader and refuter report no finding for this item."
+      }
+    },
+    "lem-qa-tensor-extension-preserves-operator-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the specified orthonormal bases as $f_0,\\ldots,f_{a-1}$ for $S$ and $e_0,\\ldots,e_{d-1}$ for $R$; $a,d\\ge1$. By [F1], $f_k\\otimes e_j$ form an orthonormal basis of $S\\otimes R$. Expand $v=\\sum_{k<a,j<d}c_{kj}f_k\\otimes e_j$ and set $v_j=\\sum_{k<a}c_{kj}f_k$. Grouping this finite sum gives $v=\\sum_{j<d}v_j\\otimes e_j$, while orthonormality gives $\\lVert v\\rVert^2=\\sum_{j<d}\\lVert v_j\\rVert^2$. By [F2], $(T\\otimes I_R)v=\\sum_{j<d}Tv_j\\otimes e_j$. Hence [F3] gives $\\lVert(T\\otimes I_R)v\\rVert^2=\\sum_{j<d}\\lVert Tv_j\\rVert^2\\le\\lVert T\\rVert^2\\sum_{j<d}\\lVert v_j\\rVert^2=\\lVert T\\rVert^2\\lVert v\\rVert^2$, so $\\lVert T\\otimes I_R\\rVert\\le\\lVert T\\rVert$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose a unit vector $s\\in S$ attaining the maximum in [F3], and choose a unit vector $e\\in R$. The product inner product gives $\\lVert s\\otimes e\\rVert=1$, and [F2] gives $\\lVert(T\\otimes I_R)(s\\otimes e)\\rVert=\\lVert Ts\\rVert=\\lVert T\\rVert$. Thus $\\lVert T\\otimes I_R\\rVert\\ge\\lVert T\\rVert$, proving the first equality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the tensor register is zero-dimensional, both $A$ and $PAP^{-1}$ have operator norm $0$ by [F3], proving the conjugation equality. Otherwise [F5] shows that $P$ and $P^{-1}$ preserve norms, so each has operator norm $1$ by [F3]. Submultiplicativity [F4] gives $\\lVert PAP^{-1}\\rVert\\le\\lVert A\\rVert$. Applying the same inequality to $A=P^{-1}(PAP^{-1})P$ gives the reverse inequality. Therefore $\\lVert PAP^{-1}\\rVert=\\lVert A\\rVert$ in every case.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty ordered tensor register is the one-dimensional scalar space, so its identity permutation is included in the nonzero-register case of step 3.1. S and R are nonzero in the tensor equality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The tensor equality assumes nonzero S,R. The independent conjugation clause allows a zero-dimensional register; step 3.1 treats it explicitly, with both operator norms zero by F3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-dimensional spectator basis has d=1 and is included in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-operator case is covered by the upper and lower bounds in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The maximizing unit vector and unit spectator vector attain the lower bound in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The specified finite bases are used directly in steps 1.1 and 2.1; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an equality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an equality, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all three steps and the six supplier interfaces. Expansion along the specified spectator orthonormal basis gives the upper bound by a sum of squared component norms, including zero components and T=0. Nonzero S and R supply a maximizing unit vector and a spectator basis vector for the lower bound. Conjugation invariance follows in both directions from submultiplicativity and unit norm of the unitary permutation and its inverse. The tensor-product basis result allows empty or zero factors, while this statement correctly excludes zero-dimensional S,R for the equality; empty spectators are the nonzero scalar register. No choice axiom is needed. No reader/refuter finding. Step-5 adjudication step5-v2-initial-r1-u30 corrects the preceding unit-norm assertion: it holds only on a nonzero register; the zero-register conjugation equality now follows separately from the zero-domain operator-norm convention. This repair does not change either statement clause."
+      }
+    },
+    "lem-qa-swap-is-three-cnot-circuit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both CNOT maps are involutions: applying either twice uses $x\\oplus x=0$ and returns every basis vector to itself, so their linear extensions permute the orthonormal basis [F3] and are exact unitary gates. Now for any $a,b\\in\\{0,1\\}$, apply the three maps from right to left: $C_{12}|a,b\\rangle=|a,b\\oplus a\\rangle$, then $C_{21}$ sends this to $|a\\oplus(b\\oplus a),b\\oplus a\\rangle=|b,b\\oplus a\\rangle$, and the final $C_{12}$ sends it to $|b,(b\\oplus a)\\oplus b\\rangle=|b,a\\rangle$. The last equalities use $a\\oplus a=b\\oplus b=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This is exactly the action of $S$ in [F2] on every vector of the basis [F3]. Two linear maps agreeing on a basis agree on every vector, so $S=C_{12}C_{21}C_{12}$. The displayed product contains three CNOTs on the same two wires and uses no ancillary register.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "swap-three-cnot-table",
+          "input": "00, 01, 10, 11 on ordered wires 1,2",
+          "expected": "00->00, 01->10, 10->01, 11->11",
+          "status": "computed by the arbitrary (a,b) calculation in step 1.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma fixes two qubit wires."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no numerical parameter equal to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "All four one-bit values in each wire are covered by the arbitrary labels a,b in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The full computational basis action is calculated in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two-wire gate list and the arbitrary basis labels are explicit in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an operator identity, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an operator identity, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "repair_confidence": 1
+    },
+    "thm-qa-exact-binary-qft-circuit-correct": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-binary-qft-product-factorization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, $N=2^n$, and take the input word $(x_{n-1},\\ldots,x_0)$ in wire order $q_{n-1},\\ldots,q_0$. By the big-endian index convention, its integer is $x=\\sum_{i=0}^{n-1}x_i2^i$, with $x_i\\in\\{0,1\\}$. For $0\\le j<n$, set\n\n$$R_j:=2^{-1/2}\\bigl(|0\\rangle+e^{2\\pi i\\sum_{i=0}^{j}x_i2^{-(j-i+1)}}|1\\rangle\\bigr).$$\n\nWith the register order $q_{n-1},\\ldots,q_0$, the standard-basis output $\\operatorname{QFT}_{2^n}|x\\rangle$ is $R_0\\otimes R_1\\otimes\\cdots\\otimes R_{n-1}$. The ordered factors immediately before the final wire-reversal permutation of the exact circuit are $R_{n-1}\\otimes\\cdots\\otimes R_0$. For $n=0$, both are the empty tensor product, interpreted as the scalar $1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate, for integer $s\\ge2$, where\n\n$$H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad \\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s}).$$\n\nA named SWAP, the wire permutation from [[def-qc-tensor-register-and-permutation]], counts as one two-qubit gate. If the implementation expands each SWAP into three exact CNOT gates of [[def-qc-cnot-and-control-target-order]], count those three CNOTs in place of that SWAP. These conventions refine the one-qubit alphabet, controlled-phase rotation and elementary circuit-resource interfaces of [[def-qc-one-qubit-gate-alphabet-and-rotations]], [[def-qc-controlled-phase-rotation]] and [[def-qc-elementary-circuit-resources]].\n\nThe **finite-set synthesis model** keeps ideal gate count separate from compiled gate count. A one- or two-qubit target block is assigned a projective operator-error tolerance $\\delta>0$; a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit. Each CNOT expanded from a SWAP is exact in this model. Any compiled-count theorem must state the fixed-arity decomposition, finite alphabet, inverse-closure, density, exact-arithmetic and compiler-threshold hypotheses it uses. In particular, it makes no claim about classical bit-time for computing an arbitrary target-angle description. This is a cost convention; correctness and compiler resource bounds are separate theorems.\n\nThe adjoint $\\mathrm{CP}_s^\\dagger=\\operatorname{diag}(1,1,1,e^{-2\\pi i/2^s})$ also counts as one ideal gate when it occurs in an inverse circuit.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-inverse-unitary-access",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional unitary $U$, **inverse access** is the explicitly granted operation $U^\\dagger=U^{-1}$. Its availability and query or gate charge are recorded separately from forward access, including any controlled access in [[def-qc-controlled-unitary-access]]. For a chronological sequence of length $k\\ge0$ that applies $U_1$ first and $U_k$ last, the total operator is $W=U_k\\cdots U_1$ when $k>0$ and $W=I_H$ when $k=0$. For $k>0$, the inverse sequence applies $U_k^\\dagger$ first, then $U_{k-1}^\\dagger$, down to $U_1^\\dagger$; for $k=0$ it is the empty sequence.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge r\\ge1$, let $w=(w_0,\\ldots,w_{r-1})$ be an ordered tuple of distinct wires in $[n]$, and let $U:\\mathcal Q_r\\to\\mathcal Q_r$ be unitary. There is a unique unitary $\\widetilde U_w:\\mathcal Q_n\\to\\mathcal Q_n$ that applies $U$ to the ordered wires $w_0,\\ldots,w_{r-1}$ and acts as the identity on the other wires.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For an integer $N\\ge1$, let $\\mathcal F_N$ be the negative-sign, $N^{-1/2}$-normalized transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Define the **cyclic quantum Fourier transform** by $\\operatorname{QFT}_N:=\\mathcal F_N^{-1}$. The inverse exists by [[thm-finite-fourier-inversion]], and its matrix on the standard basis indexed by $0,\\ldots,N-1$ is\n\n$$\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle,\\qquad 0\\le x<N.$$\n\nHere the standard-basis ket convention is the one specified by [[def-qc-dirac-notation-conversion]]. Thus the transform has the positive sign and the same $N^{-1/2}$ normalization as the inverse Fourier formula. At $N=1$ it is the identity on the one-dimensional register. In the binary specialization $N=2^n$, the circuit page writes each index in its unique base-two expansion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, the exact algorithm has no gates, so [A1] gives the identity on the one-dimensional register; by [F1], $\\operatorname{QFT}_1$ is also the identity. Thus the claimed basis action holds in this case. Now suppose $n\\ge1$ and fix a basis input $|x_{n-1}\\cdots x_0\\rangle$. In the descending loop, before the step targeting $q_j$, every lower wire $q_i$ with $i<j$ is still in its original basis state $|x_i\\rangle$: earlier gates targeted only higher wires, and the lower wires occur only as controls, which the diagonal controlled-phase matrix in [F2] leaves unchanged. The local embedding action [F6] therefore leaves those control bits unchanged. The Hadamard on $q_j$ contributes relative phase $(-1)^{x_j}=e^{2\\pi i x_j/2}$, while the controlled phases from lower controls contribute $e^{2\\pi i\\sum_{i<j}x_i2^{-(j-i+1)}}$. Thus target $q_j$ has state $R_j$. The state before the final swaps is $R_{n-1}\\otimes\\cdots\\otimes R_0$. The tensor order and coordinate-ket convention are [F3] and [F4]; interpreting this finite gate trace as the circuit's operator product requires [A1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n\\ge1$, the final swaps reverse those ordered factors by [F3], producing $R_0\\otimes\\cdots\\otimes R_{n-1}$; [F1] identifies this with the positive-sign Fourier output on $|x\\rangle$. Together with the $n=0$ case established in step 1.1, the circuit agrees with $\\operatorname{QFT}_{2^n}$ on every basis vector.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both the circuit denotation and $\\operatorname{QFT}_{2^n}$ are linear operators by [A1], so equality on the standard basis [F4] implies equality on every finite linear combination of basis vectors. Reversing the gate sequence and taking adjoints is its inverse by [F5]; the reverse list has the same number of gates, and each adjoint is still a Hadamard, controlled phase of opposite angle, or SWAP. The adjoint controlled phases have unit ideal cost by [F2], so the inverse QFT has the same ideal gate count and uses the negative-sign convention by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "L1",
+            "A1",
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The n=0 empty-register case is handled in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The all-zero basis input is included in the arbitrary basis trace of step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 circuit is covered by steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-wire circuit is checked in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The argument applies to every basis index in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite basis and gate lists are explicit in steps 1.1–3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is circuit correctness, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is circuit correctness, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read each step and exact algorithm, factorization, matrix cost model, ket/tensor convention, inverse-list, denotation and embedding interfaces. Descending j keeps lower controls in their basis states; the diagonal CP only phases target |1>, so each prepared R_j stays a separate factor and the final disjoint swaps reverse them. The n=0 list and QFT_1 are both scalar identity. Basis equality extends linearly. H and SWAP are self-adjoint; negative-angle CP adjoints have unit ideal cost under the reader-added explicit convention, so inverse-list cardinality and negative Fourier sign both follow. No choice, outer-controlled synthesis, or approximate gate access is assumed. Reader repair accepted and no refuter finding for this carrier."
+      },
+      "repair_confidence": 1
+    },
+    "thm-qa-exact-binary-qft-gate-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-exact-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "Input: an $n$-qubit register with ordered wires $q_{n-1},\\ldots,q_0$, $n\\ge0$. The input integer is encoded by $x=\\sum_{j=0}^{n-1}x_j2^j$ in the computational basis, as specified by [[def-qc-ordered-bitstring-encoding]].\n\nOutput: the following finite gate list, defining a unitary by the circuit semantics of [[def-qc-circuit-denotational-semantics]] on the ordered-register syntax of [[def-qc-circuit-syntax-and-register-order]], and using no ancillas.\n\n1. For $j=n-1,n-2,\\ldots,0$, complete the following block before proceeding to the next $j$: apply $H$ to target $q_j$; then, for $i=0,1,\\ldots,j-1$ in that order, apply $\\mathrm{CP}_{j-i+1}$ to the pair $(q_i,q_j)$, with $q_i$ as control and $q_j$ as target. Here $\\mathrm{CP}_s$ is the ideal controlled phase defined in [[def-qa-qft-gate-cost-model]].\n2. After completing every block in the descending $j$ loop, for $j=0,1,\\ldots,\\lfloor n/2\\rfloor-1$, swap $q_j$ with $q_{n-1-j}$.\n\nThe chronological order is exactly the order listed. If $n=0$, all loops are empty and the output is the empty circuit, i.e. the identity on the one-dimensional register.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate, for integer $s\\ge2$, where\n\n$$H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad \\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s}).$$\n\nA named SWAP, the wire permutation from [[def-qc-tensor-register-and-permutation]], counts as one two-qubit gate. If the implementation expands each SWAP into three exact CNOT gates of [[def-qc-cnot-and-control-target-order]], count those three CNOTs in place of that SWAP. These conventions refine the one-qubit alphabet, controlled-phase rotation and elementary circuit-resource interfaces of [[def-qc-one-qubit-gate-alphabet-and-rotations]], [[def-qc-controlled-phase-rotation]] and [[def-qc-elementary-circuit-resources]].\n\nThe **finite-set synthesis model** keeps ideal gate count separate from compiled gate count. A one- or two-qubit target block is assigned a projective operator-error tolerance $\\delta>0$; a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit. Each CNOT expanded from a SWAP is exact in this model. Any compiled-count theorem must state the fixed-arity decomposition, finite alphabet, inverse-closure, density, exact-arithmetic and compiler-threshold hypotheses it uses. In particular, it makes no claim about classical bit-time for computing an arbitrary target-angle description. This is a cost convention; correctness and compiler resource bounds are separate theorems.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "On two ordered qubit wires, let $S$ be the wire-swap permutation $|a,b\\rangle\\mapsto|b,a\\rangle$. Let $C_{12}$ be the CNOT with wire 1 controlling wire 2, so $C_{12}|a,b\\rangle=|a,b\\oplus a\\rangle$, and define the reverse orientation by $C_{21}|a,b\\rangle=|a\\oplus b,b\\rangle$, extending both actions linearly; here $\\oplus$ is addition modulo two. The operator identity\n\n$$S=C_{12}C_{21}C_{12}$$\n\nholds, where products act right to left. Therefore the swap of two wires has an exact three-CNOT implementation with no ancillas.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The loop has one Hadamard for each of the $n$ wires. Its controlled phases are indexed by pairs $(i,j)$ with $0\\le i<j<n$; summing the $j$ possible lower controls for each target gives $\\sum_{j=0}^{n-1}j=n(n-1)/2$. The final reversal consists of exactly one swap for each pair $(j,n-1-j)$ with $j<\\lfloor n/2\\rfloor$, hence $\\lfloor n/2\\rfloor$ swaps.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the ideal count is the displayed sum and there are no other gates or ancillas. For $n\\ge1$, the sum is at most $n+n(n-1)/2+n/2\\le 3n^2/2$, so it is $O(n^2)$; at $n=0$ all counts vanish. Replacing each counted SWAP by the exact identity [F3] gives exactly $3\\lfloor n/2\\rfloor$ CNOTs.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "All loops and counts vanish at n=0, as noted in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "All gate counts vanish at n=0, as checked in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the sum has one Hadamard and no pair or swap, covered in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-wire register has no gates, covered in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The last target and the reversal endpoint are counted in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The pair set is finite and counted by the triangular sum in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an exact gate count, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an exact gate count, not an iff."
+        }
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-qa-truncated-qft-operator-norm-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-exact-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "Input: an $n$-qubit register with ordered wires $q_{n-1},\\ldots,q_0$, $n\\ge0$. The input integer is encoded by $x=\\sum_{j=0}^{n-1}x_j2^j$ in the computational basis, as specified by [[def-qc-ordered-bitstring-encoding]].\n\nOutput: the following finite gate list, defining a unitary by the circuit semantics of [[def-qc-circuit-denotational-semantics]] on the ordered-register syntax of [[def-qc-circuit-syntax-and-register-order]], and using no ancillas.\n\n1. For $j=n-1,n-2,\\ldots,0$, complete the following block before proceeding to the next $j$: apply $H$ to target $q_j$; then, for $i=0,1,\\ldots,j-1$ in that order, apply $\\mathrm{CP}_{j-i+1}$ to the pair $(q_i,q_j)$, with $q_i$ as control and $q_j$ as target. Here $\\mathrm{CP}_s$ is the ideal controlled phase defined in [[def-qa-qft-gate-cost-model]].\n2. After completing every block in the descending $j$ loop, for $j=0,1,\\ldots,\\lfloor n/2\\rfloor-1$, swap $q_j$ with $q_{n-1-j}$.\n\nThe chronological order is exactly the order listed. If $n=0$, all loops are empty and the output is the empty circuit, i.e. the identity on the one-dimensional register.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "Input: an $n$-qubit ordered register as in [[alg-qa-exact-binary-qft-circuit]] and an integer cutoff $m\\ge1$.\n\nOutput: run the exact binary QFT circuit except omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$. Retain every Hadamard and every final reversal SWAP. The resulting gate list is finite and unitary for every $n\\ge0,m\\ge1$ under [[def-qc-circuit-denotational-semantics]]. If $m\\ge n$, no controlled phase is omitted and the circuit is exactly the full circuit. The ideal gate-count convention is [[def-qa-qft-gate-cost-model]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate, for integer $s\\ge2$, where\n\n$$H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad \\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s}).$$\n\nA named SWAP, the wire permutation from [[def-qc-tensor-register-and-permutation]], counts as one two-qubit gate. If the implementation expands each SWAP into three exact CNOT gates of [[def-qc-cnot-and-control-target-order]], count those three CNOTs in place of that SWAP. These conventions refine the one-qubit alphabet, controlled-phase rotation and elementary circuit-resource interfaces of [[def-qc-one-qubit-gate-alphabet-and-rotations]], [[def-qc-controlled-phase-rotation]] and [[def-qc-elementary-circuit-resources]].\n\nThe **finite-set synthesis model** keeps ideal gate count separate from compiled gate count. A one- or two-qubit target block is assigned a projective operator-error tolerance $\\delta>0$; a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit. Each CNOT expanded from a SWAP is exact in this model. Any compiled-count theorem must state the fixed-arity decomposition, finite alphabet, inverse-closure, density, exact-arithmetic and compiler-threshold hypotheses it uses. In particular, it makes no claim about classical bit-time for computing an arbitrary target-angle description. This is a cost convention; correctness and compiler resource bounds are separate theorems.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n\n$$|\\sin u-\\sin v|\\le|u-v|,$$\n\nand\n\n$$|\\cos u-\\cos v|\\le|u-v|.$$\n\nThus sine and cosine are Lipschitz functions on $\\mathbb R$, each with\nLipschitz constant $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-double-angle-and-power-reduction-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(2x)=2\\sin x\\cos x,\\quad \\cos(2x)=\\cos^2x-\\sin^2x=2\\cos^2x-1=1-2\\sin^2x,$$\nand\n$$\\sin^2x=(1-\\cos2x)/2,\\qquad \\cos^2x=(1+\\cos2x)/2.$$\nWhen defined, $\\tan(2x)=2\\tan x/(1-\\tan^2x)$. The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qa-exact-binary-qft-circuit-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the exact binary circuit of [[alg-qa-exact-binary-qft-circuit]] implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$: it maps each computational basis vector $|x\\rangle$, $0\\le x<2^n$, to\n\n$$2^{-n/2}\\sum_{y=0}^{2^n-1}e^{2\\pi ixy/2^n}|y\\rangle,$$\n\nwith the declared output register order. Hence its denotation is $\\operatorname{QFT}_{2^n}$ on every state. Reversing the gate list and replacing every gate by its adjoint gives the negative-sign inverse QFT with the same ideal gate count.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-qa-tensor-extension-preserves-operator-norm",
+          "source_section": "Statement",
+          "quote": "Let $S$ and $R$ be nonzero finite-dimensional complex inner-product spaces with specified finite orthonormal bases, and let $T:S\\to S$ be linear. With the product inner product on $S\\otimes R$,\n\n$$\\lVert T\\otimes I_R\\rVert=\\lVert T\\rVert.$$\n\nIf $P$ is a unitary wire permutation on a finite ordered tensor register, then conjugating an endomorphism $A$ by $P$ preserves its operator norm: $\\lVert PAP^{-1}\\rVert=\\lVert A\\rVert$. Thus a one- or two-register gate has the same operator norm after identity factors are added on spectators and its wires are moved to their declared positions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-bessel-inequality-and-finite-parseval-identity",
+          "source_section": "Statement",
+          "quote": "If $(e_0,\\ldots,e_{r-1})$ is a finite orthonormal list and $v$ is any vector, then\n\n$$\\sum_{i<r}|\\langle v,e_i\\rangle|^2\\le\\lVert v\\rVert^2.$$\n\nEquality holds exactly when $v\\in\\operatorname{span}(e_0,\\ldots,e_{r-1})$. If the list is an orthonormal basis, then for all $v,w$,\n\n$$v=\\sum_{i<r}\\langle v,e_i\\rangle e_i,\\qquad \\langle v,w\\rangle=\\sum_{i<r}\\langle v,e_i\\rangle\\overline{\\langle w,e_i\\rangle},$$\n\nand\n\n$$\\lVert v\\rVert^2=\\sum_{i<r}|\\langle v,e_i\\rangle|^2.$$\n\nThe empty-list case is included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge r\\ge1$, let $w=(w_0,\\ldots,w_{r-1})$ be an ordered tuple of distinct wires in $[n]$, and let $U:\\mathcal Q_r\\to\\mathcal Q_r$ be unitary. There is a unique unitary $\\widetilde U_w:\\mathcal Q_n\\to\\mathcal Q_n$ that applies $U$ to the ordered wires $w_0,\\ldots,w_{r-1}$ and acts as the identity on the other wires.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For real $t$, [F7] and [F10] give $|1-e^{it}|^2=(1-\\cos t)^2+\\sin^2t=2(1-\\cos t)=4\\sin^2(t/2)$. By [F8]–[F9], $|\\sin(t/2)|=|\\sin(t/2)-\\sin0|\\le|t|/2$, hence $|1-e^{it}|\\le|t|$.",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an omitted gate at level $s$, set $t_s=2\\pi/2^s$ and $D_s=\\mathrm{CP}_s-I$ on its two-qubit target. By [F2], $D_s$ has only one nonzero diagonal entry, $e^{it_s}-1$, in the orthonormal basis [F15]. For any unit vector, Bessel's inequality [F16] bounds its $|11\\rangle$ coordinate in modulus by $1$, so $\\|D_s v\\|\\le|e^{it_s}-1|$; equality is attained at $v=|11\\rangle$. Thus $\\|D_s\\|=|e^{it_s}-1|\\le2\\pi/2^s$ by step 1.1, and embedding it on the full register preserves this norm by [F13].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F13",
+            "F15",
+            "F16",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [A1], let $G_1,\\ldots,G_K$ be the embedded operators in chronological order, so the exact circuit product is $G_K\\cdots G_1$ and the truncated product replaces omitted $G_r$ by $\\widetilde G_r=I$. The local embedding action is [F17]. By [F11], the exact product is $\\operatorname{QFT}_{2^n}$. Their difference telescopes as $\\sum_{r=1}^{K}G_K\\cdots G_{r+1}(G_r-\\widetilde G_r)\\widetilde G_{r-1}\\cdots\\widetilde G_1$. Each $H$ is unitary by direct multiplication of its matrix in [F2]; each $\\mathrm{CP}_s$ is unitary because it is diagonal with unit-modulus entries by [F2,F7]; each SWAP is unitary by [F12], and each omitted gate is replaced by $I$. A local unitary $U$ tensored with $I$ has inverse $U^{-1}\\otimes I$ by [F14], and conjugating by the unitary wire permutation preserves unitarity. Thus every outside product is unitary and has norm $1$ by [F3,F5]. For any operators $X,Y$, [F6] and the definition [F3] give $\\|X+Y\\|\\le\\|X\\|+\\|Y\\|$; submultiplicativity [F4] therefore bounds the telescoping sum by the sum of the omitted-gate norms from step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F11",
+            "F12",
+            "F14",
+            "F17",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At level $s$, the pairs $0\\le i<j<n$ satisfying $j-i+1=s$ have $i=0,\\ldots,n-s$, so there are $n-s+1$ such gates. Summing step 2.1 over the omitted levels gives the first bound. Since $n-s+1\\le n$ and $\\sum_{s=m+1}^{n}2^{-s}\\le2^{-m}$, this is at most $2\\pi n2^{-m}$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $m\\ge n$, no gate is omitted by [F1], so the error is zero. Otherwise the displayed sum bound applies. For $m=\\lceil\\log_2(2\\pi n/\\varepsilon)\\rceil<n$, $2^m\\ge2\\pi n/\\varepsilon$, hence $2\\pi n2^{-m}\\le\\varepsilon$; taking $m=\\min\\{n,\\lceil\\log_2(2\\pi n/\\varepsilon)\\rceil\\}$ selects either this case or $m=n$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 5.1 explicitly handles m≥n: the omitted controlled-phase list is empty and the exact and truncated circuits coincide, so error0. n≥1 does not exclude this empty omitted-gate family.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "Proof step 5.1 explicitly handles m≥n: the omitted controlled-phase list is empty and the exact and truncated circuits coincide, so error0. n≥1 does not exclude this empty omitted-gate family.",
+            "item_sha256": "4b73aaf3678d3683348da5c4045c7ee35b997ae0f18c0e62d319db43dba2372f",
+            "row_sha256": "269938ad5e2a7e779bdb5e86e0ff38cd5df6156d3837484ecf028670299b1163",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-early.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The logarithmic cutoff assumes 0<epsilon<1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 every m>=1 is exact by step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The m>=n no-omission branch is checked in step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The empty omission range at m=n and last level s=n are covered in steps 4.1–5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite product telescope is explicit in step 3.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper error bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an upper error bound, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all five steps and the exact nineteen supplier interfaces, reader/refuter evidence and corrected F15 product-basis source. Trigonometric identities and the sine Lipschitz estimate give |1-exp(it)|<=|t| for every real t. The local diagonal difference attains its norm at |11>; the product-basis theorem, not the coordinate-register theorem, supplies the typed two-qubit orthonormal basis. Spectator extension/conjugation applies on nonzero qubit registers. Checked the exact telescoping order with exact suffixes and truncated prefixes, all surrounding unitary norms, and the vector-derived operator triangle inequality. Level s has n-s+1 gates; the finite geometric tail is <=2^-m. The n=1, m=1, m>=n zero-error cases and ceiling/min cutoff all satisfy stated domains. No choice or uncontrolled scalar phase is used."
+      },
+      "repair_confidence": 1
+    },
+    "thm-qa-truncated-qft-gate-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "Input: an $n$-qubit ordered register as in [[alg-qa-exact-binary-qft-circuit]] and an integer cutoff $m\\ge1$.\n\nOutput: run the exact binary QFT circuit except omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$. Retain every Hadamard and every final reversal SWAP. The resulting gate list is finite and unitary for every $n\\ge0,m\\ge1$ under [[def-qc-circuit-denotational-semantics]]. If $m\\ge n$, no controlled phase is omitted and the circuit is exactly the full circuit. The ideal gate-count convention is [[def-qa-qft-gate-cost-model]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate, for integer $s\\ge2$, where\n\n$$H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad \\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s}).$$\n\nA named SWAP, the wire permutation from [[def-qc-tensor-register-and-permutation]], counts as one two-qubit gate. If the implementation expands each SWAP into three exact CNOT gates of [[def-qc-cnot-and-control-target-order]], count those three CNOTs in place of that SWAP. These conventions refine the one-qubit alphabet, controlled-phase rotation and elementary circuit-resource interfaces of [[def-qc-one-qubit-gate-alphabet-and-rotations]], [[def-qc-controlled-phase-rotation]] and [[def-qc-elementary-circuit-resources]].\n\nThe **finite-set synthesis model** keeps ideal gate count separate from compiled gate count. A one- or two-qubit target block is assigned a projective operator-error tolerance $\\delta>0$; a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit. Each CNOT expanded from a SWAP is exact in this model. Any compiled-count theorem must state the fixed-arity decomposition, finite alphabet, inverse-closure, density, exact-arithmetic and compiler-threshold hypotheses it uses. In particular, it makes no claim about classical bit-time for computing an arbitrary target-angle description. This is a cost convention; correctness and compiler resource bounds are separate theorems.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "On two ordered qubit wires, let $S$ be the wire-swap permutation $|a,b\\rangle\\mapsto|b,a\\rangle$. Let $C_{12}$ be the CNOT with wire 1 controlling wire 2, so $C_{12}|a,b\\rangle=|a,b\\oplus a\\rangle$, and define the reverse orientation by $C_{21}|a,b\\rangle=|a\\oplus b,b\\rangle$, extending both actions linearly; here $\\oplus$ is addition modulo two. The operator identity\n\n$$S=C_{12}C_{21}C_{12}$$\n\nholds, where products act right to left. Therefore the swap of two wires has an exact three-CNOT implementation with no ancillas.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-truncated-qft-operator-norm-error",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $N=2^n$, and let $m\\ge1$ be an integer. For $1\\le m<n$,\n\n$$\\|\\operatorname{QFT}_{2^n}-\\operatorname{QFT}^{(m)}_{2^n}\\|\\le\\sum_{s=m+1}^{n}(n-s+1)\\frac{2\\pi}{2^s}\\le2\\pi n\\,2^{-m}.$$\n\nFor $m\\ge n$, the truncated circuit is exact and the error is zero. In particular, for $0<\\varepsilon<1$, the cutoff $m=\\min\\{n,\\lceil\\log_2(2\\pi n/\\varepsilon)\\rceil\\}$ gives operator-norm error at most $\\varepsilon$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each target $q_j$, the exact circuit has $j$ controlled phases. A retained denominator level $s$ corresponds to pairs with $j-i+1=s$, namely $i=0,\\ldots,n-s$, and so has $n-s+1$ gates. The cutoff retains precisely $s=2,\\ldots,\\widetilde m$. If $m\\ge n$, then $\\widetilde m=n$ and every phase is retained.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "There are $n$ target wires, $\\lfloor n/2\\rfloor$ final swaps, and no other gates or ancillas by [F1]. Summing their costs by [F2] gives the formula. Since $\\sum_{s=2}^{\\widetilde m}(n-s+1)\\le n(\\widetilde m-1)$ and $\\lfloor n/2\\rfloor\\le n/2$, the total is at most $n\\widetilde m+n/2$, hence $O(n\\widetilde m+n)$. Under the cutoff in [F4] and $\\varepsilon\\ge n^{-c}$, $m\\le\\lceil\\log_2(2\\pi n^{c+1})\\rceil=O_c(\\log n)$, so $\\widetilde m=O_c(\\log n)$. The CNOT expansion is exact by [F3] and changes only the final reversal term; it does not compile any rotation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement assumes n>=1, so the empty-register case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement requires 0<epsilon<1 for the asymptotic cutoff branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, tilde m=1 and the sum over phase levels is empty, as covered in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The m>=n exact branch is counted by setting tilde m=n in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The final retained phase level and all reversal swaps are included in steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The retained pair set is finite and counted directly in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a count and asymptotic bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a count and asymptotic bound, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read both proof steps, all four supplier interfaces and reader/refuter evidence. The level-s pairs solve j-i+1=s and number n-s+1. Hadamard and reversal counts are n and floor(n/2), with no additional wires. Checked empty phase sum for m=1 and n=1; m>=n retains all phases. The upper count n min(m,n)+n/2 and epsilon>=n^-c imply the stated O_c(n log n) only under n>=2 and fixed c>0. Expanding a SWAP replaces one gate by three CNOTs, without synthesizing any rotation. No choice or inverse-cost assumptions are used."
+      }
+    },
+    "thm-qa-qft-finite-gate-set-compile-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "Input: an $n$-qubit ordered register as in [[alg-qa-exact-binary-qft-circuit]] and an integer cutoff $m\\ge1$.\n\nOutput: run the exact binary QFT circuit except omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$. Retain every Hadamard and every final reversal SWAP. The resulting gate list is finite and unitary for every $n\\ge0,m\\ge1$ under [[def-qc-circuit-denotational-semantics]]. If $m\\ge n$, no controlled phase is omitted and the circuit is exactly the full circuit. The ideal gate-count convention is [[def-qa-qft-gate-cost-model]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-truncated-qft-operator-norm-error",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $N=2^n$, and let $m\\ge1$ be an integer. For $1\\le m<n$,\n\n$$\\|\\operatorname{QFT}_{2^n}-\\operatorname{QFT}^{(m)}_{2^n}\\|\\le\\sum_{s=m+1}^{n}(n-s+1)\\frac{2\\pi}{2^s}\\le2\\pi n\\,2^{-m}.$$\n\nFor $m\\ge n$, the truncated circuit is exact and the error is zero. In particular, for $0<\\varepsilon<1$, the cutoff $m=\\min\\{n,\\lceil\\log_2(2\\pi n/\\varepsilon)\\rceil\\}$ gives operator-norm error at most $\\varepsilon$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate, for integer $s\\ge2$, where\n\n$$H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad \\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s}).$$\n\nA named SWAP, the wire permutation from [[def-qc-tensor-register-and-permutation]], counts as one two-qubit gate. If the implementation expands each SWAP into three exact CNOT gates of [[def-qc-cnot-and-control-target-order]], count those three CNOTs in place of that SWAP. These conventions refine the one-qubit alphabet, controlled-phase rotation and elementary circuit-resource interfaces of [[def-qc-one-qubit-gate-alphabet-and-rotations]], [[def-qc-controlled-phase-rotation]] and [[def-qc-elementary-circuit-resources]].\n\nThe **finite-set synthesis model** keeps ideal gate count separate from compiled gate count. A one- or two-qubit target block is assigned a projective operator-error tolerance $\\delta>0$; a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit. Each CNOT expanded from a SWAP is exact in this model. Any compiled-count theorem must state the fixed-arity decomposition, finite alphabet, inverse-closure, density, exact-arithmetic and compiler-threshold hypotheses it uses. In particular, it makes no claim about classical bit-time for computing an arbitrary target-angle description. This is a cost convention; correctness and compiler resource bounds are separate theorems.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-projective-operator-closeness-bounds-output-distribution",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonzero finite-dimensional complex inner-product space ([[def-inner-product-space]]) with a fixed orthonormal computational basis $B$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]), and let $U,V:\\mathcal H\\to\\mathcal H$ be unitary operators, meaning invertible linear isometries ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]). For a unit vector $\\psi$, write $U\\psi=\\sum_{b\\in B}\\alpha_b|b\\rangle$ and $V\\psi=\\sum_{b\\in B}\\beta_b|b\\rangle$, and define their output laws by $p_U^\\psi(b)=|\\alpha_b|^2$ and $p_V^\\psi(b)=|\\beta_b|^2$. Unitarity and orthonormality make these finite probability laws ([[def-finite-probability-space-and-event]]). For laws $p,q$ on $B$, define total variation by $d_{\\rm TV}(p,q):=\\tfrac12\\sum_{b\\in B}|p(b)-q(b)|$. Define projective operator distance by $d_{\\rm pr}(U,V):=\\inf_{|\\lambda|=1}\\|U-\\lambda V\\|$, where $\\|\\cdot\\|$ is the operator norm. If $d_{\\rm pr}(U,V)\\le\\varepsilon$ for $\\varepsilon\\ge0$, then\n\n$$d_{\\rm TV}(p_U^\\psi,p_V^\\psi)\\le\\varepsilon.$$\n\nThe same bound therefore holds for every computational-basis output law of the two operators. The proof verifies directly that multiplying a vector by a unit scalar leaves these coordinate probabilities unchanged.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "source_section": "Statement",
+          "quote": "For compatible linear maps between finite-dimensional real or complex inner\nproduct spaces,\n\n$$\\lVert ST\\rVert\\le \\lVert S\\rVert\\,\\lVert T\\rVert.$$\n\nFor every such linear map $T$,\n\n$$\\lVert T^*T\\rVert=\\lVert T\\rVert^2.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-qc-solovay-kitaev-unitary-compiler",
+          "source_section": "Definition",
+          "quote": "**Inputs:** A fixed inverse-closed dense gate package $G$ with the finite\nbase-net certificate $(\\mathcal N_0,\\eta_0,L_0)$ from\n[[def-qc-inverse-closed-dense-su2-gate-set]], an exact-real target\n$U\\in SU(2)$, and a rational $0<\\varepsilon\\le\\eta_0$. This is an ideal\nexact-real procedure: fixed-dimensional exact matrix arithmetic, matrix\nlogarithm/exponential, and exact comparisons are unit-cost operations. It is\nnot, by this definition alone, a finite Turing algorithm.\n\nSet $\\eta_{j+1}=64\\eta_j^{3/2}$ for $j\\ge0$. Choose the least integer\n$J\\ge0$ with $\\eta_J\\le\\varepsilon$. Define $\\operatorname{Compile}(U,j)$\nrecursively:\n\n1. If $j=0$, return the first word $A\\in\\mathcal N_0$ with\n   $\\|U-A\\|\\le\\eta_0$.\n2. If $j>0$, set $A=\\operatorname{Compile}(U,j-1)$ and $D=UA^*$.\n   If $D=I$, set $V=W=I$. Otherwise apply the Pauli-coordinate construction\n   in [[lem-qc-su2-balanced-commutator]] to $D$ and $\\eta_{j-1}$, obtaining\n   $V,W\\in SU(2)$ with $D$ approximated by $VWV^*W^*$.\n3. Set $B=\\operatorname{Compile}(V,j-1)$ and\n   $C=\\operatorname{Compile}(W,j-1)$. Return the word\n   $BCB^*C^*A$. Store concatenations and inverses as a shared expression DAG;\n   an inverse word is formed by reversing its label order and replacing each\n   label by its listed inverse. Expanding the DAG writes the ordinary gate word.\n\nReturn $\\operatorname{Compile}(U,J)$. The recursion depth is finite because\neach call decreases the nonnegative integer $j$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-solovay-kitaev-error-and-resource-bound",
+          "source_section": "Statement",
+          "quote": "For a fixed inverse-closed dense $G\\subset SU(2)$ and a certified base net of\nradius $0<\\eta_0<64^{-2}$ and a target $U\\in SU(2)$, the level recursion\n$\\operatorname{Compile}(U,J)$ of\n[[alg-qc-solovay-kitaev-unitary-compiler]] returns, for every real\n$0<\\varepsilon\\le\\eta_0$, a word $W$ with\n$\\|U-W\\|\\le\\varepsilon$, where $J$ is the least nonnegative integer\nwith $\\eta_J\\le\\varepsilon$. For a real tolerance this means selecting\n$J$ by ideal exact-real comparisons and calling the level subroutine\ndirectly; the algorithm's top-level tolerance input is rational.\nThe level errors may be chosen as\n$$\\eta_j=64^{-2}(64^2\\eta_0)^{(3/2)^j}.$$\nThe word length is at most $L_0 5^j$ at level $j$, hence\n$O(\\log^{\\log_{3/2}5}(1/\\varepsilon))=O(\\log^{3.97}(1/\\varepsilon))$.\nWith shared recursive words, the exact-real arithmetic count is\n$O(\\log^{\\log_{3/2}3}(1/\\varepsilon))=O(\\log^{2.71}(1/\\varepsilon))$;\nprinting the expanded word takes $O(\\log^{3.97}(1/\\varepsilon))$ time.\nThe latter are exact-real arithmetic bounds, not bit-complexity bounds.",
+          "uses": [
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-inverse-closed-dense-su2-gate-set",
+          "source_section": "Definition",
+          "quote": "Write $SU(2):=\\{M\\in M_2(\\mathbb C):M^*M=I_2,\\det M=1\\}$. An\n**inverse-closed dense $SU(2)$ gate package** consists of a finite set\n$G\\subset SU(2)$ of exact matrices with finite labels such that $g^{-1}=g^*$\nbelongs to $G$ for each $g\\in G$ and the subgroup $\\langle G\\rangle$ of finite\nproducts is dense in $SU(2)$ in operator norm. A word is a finite ordered list\nof labels; its value is the corresponding matrix product, and its length is\nthe number of labels.\n\nFor a compiler package, also fix a rational $0<\\eta_0<1/4096$, a finite list\n$\\mathcal N_0$ of words, and an integer $L_0$ such that every $U\\in SU(2)$ is\nwithin operator-norm distance $\\eta_0/4$ of the value of some word in\n$\\mathcal N_0$, and every listed word has length at most $L_0$. This is a\nfinite **base-net certificate**. Density proves that such a certificate\nexists, but does not compute the list or its maximum word length.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+          "source_section": "Statement",
+          "quote": "The orthogonal operators on a finite-dimensional real inner product space form a group under composition, as do the unitary operators on a finite-dimensional complex inner product space. Every such operator $T$ satisfies\n\n$$|\\det T|=1.$$\n\nOver $\\mathbb R$, this says $\\det T\\in\\{-1,1\\}$. In dimension zero, the unique determinant is $1$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-every-complex-number-has-a-square-root",
+          "source_section": "Statement",
+          "quote": "Every $z=a+bi\\in\\mathbb C$ has a square root. If $b\\ne0$, one square root is\n$$u+vi,\\qquad u=\\sqrt{\\frac{|z|+a}{2}},\\qquad v=\\frac{b}{2u}.$$\nIf $b=0$, one may take $\\sqrt a$ when $a\\ge0$, and\n$i\\sqrt{-a}$ when $a<0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-qa-tensor-extension-preserves-operator-norm",
+          "source_section": "Statement",
+          "quote": "Let $S$ and $R$ be nonzero finite-dimensional complex inner-product spaces with specified finite orthonormal bases, and let $T:S\\to S$ be linear. With the product inner product on $S\\otimes R$,\n\n$$\\lVert T\\otimes I_R\\rVert=\\lVert T\\rVert.$$\n\nIf $P$ is a unitary wire permutation on a finite ordered tensor register, then conjugating an endomorphism $A$ by $P$ preserves its operator norm: $\\lVert PAP^{-1}\\rVert=\\lVert A\\rVert$. Thus a one- or two-register gate has the same operator norm after identity factors are added on spectators and its wires are moved to their declared positions.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "On two ordered qubit wires, let $S$ be the wire-swap permutation $|a,b\\rangle\\mapsto|b,a\\rangle$. Let $C_{12}$ be the CNOT with wire 1 controlling wire 2, so $C_{12}|a,b\\rangle=|a,b\\oplus a\\rangle$, and define the reverse orientation by $C_{21}|a,b\\rangle=|a\\oplus b,b\\rangle$, extending both actions linearly; here $\\oplus$ is addition modulo two. The operator identity\n\n$$S=C_{12}C_{21}C_{12}$$\n\nholds, where products act right to left. Therefore the swap of two wires has an exact three-CNOT implementation with no ancillas.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge r\\ge1$, let $w=(w_0,\\ldots,w_{r-1})$ be an ordered tuple of distinct wires in $[n]$, and let $U:\\mathcal Q_r\\to\\mathcal Q_r$ be unitary. There is a unique unitary $\\widetilde U_w:\\mathcal Q_n\\to\\mathcal Q_n$ that applies $U$ to the ordered wires $w_0,\\ldots,w_{r-1}$ and acts as the identity on the other wires.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qc-one-control-unitary-two-cnot",
+          "source_section": "Statement",
+          "quote": "For every $U\\in U(2)$, the exact controlled matrix $C(U)=\\operatorname{diag}(I_2,U)$ is realized with two CNOTs and one-qubit gates only. The scalar phase of $U$ is implemented as a phase gate on the control and is not discarded.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-controlled-phase-rotation",
+          "source_section": "Definition",
+          "quote": "For a real angle $\\theta$, define the one-qubit phase matrix $P_\\theta=\\operatorname{diag}(1,e^{i\\theta})$. In control-first order define\n\n$$CP(\\theta):=C(P_\\theta)=\\operatorname{diag}(1,1,1,e^{i\\theta})$$\n\nin the ordered basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$. This is the exact controlled phase; no circuit cost or controlled access to an arbitrary black-box unitary is implied.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-qc-elementary-circuit-resources",
+          "source_section": "Definition",
+          "quote": "Fix a finite gate alphabet $G$ with maximum arity $k:=\\max(\\{r(g):g\\in G\\}\\cup\\{0\\})$ and a circuit from [[def-qc-circuit-syntax-and-register-order]]. The declared **size** is the number of gate occurrences, equivalently $\\sum_{t=1}^d|L_t|$; the declared **depth** is the number $d$ of explicit layers, not a minimum over alternate layerings; the **width** is the number $n$ of all wires, including workspace wires. The operation model may also assign weighted gate costs, classical bit costs, and query costs; these are separate coordinates and are summed over the calls actually made.\n\nA workspace wire is an ancilla. A **clean-ancilla promise** specifies computational-basis zero states for the ancillas and requires their exact return for every allowed data input: if $U$ is the implemented unitary, $V_D$ is the declared data unitary, and $|0_A\\rangle$ is the specified joint zero vector, then $U(x\\otimes|0_A\\rangle)=V_Dx\\otimes|0_A\\rangle$ for every allowed data vector $x$. A **dirty-ancilla promise** permits an arbitrary ancilla state independent of the data input; it may be correlated with an untouched reference. Exact dirty-ancilla restoration means the implemented unitary on data and ancillas is $V_D\\otimes I_A$ on the entire joint space, where $V_D$ is the declared unitary on data. The same operator equality then holds after tensoring with the identity on any finite untouched reference. Consequently, product input between the data and the combined ancilla/reference system remains product after the operation. No uncorrelated-output claim is made for an initially data-correlated ancilla.\n\nA controlled or inverse operation is counted only when the operation model explicitly grants that access or supplies a construction; its charge is recorded separately from an ordinary call. Inverse availability and query or gate charges are also recorded separately from controlled forward access. In particular, the matrix of $U$ alone supplies neither a controlled call nor an inverse query, in accordance with [[def-qc-controlled-unitary-access]] and [[def-qc-inverse-unitary-access]].",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "thm-qc-controlled-global-phase-is-relative-phase",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex-inner-product space and $U:H\\to H$ a unitary. Let $\\theta\\in\\mathbb R$, and suppose the model separately grants controlled access to both $U$ and $e^{i\\theta}U$. There is a normalized eigenvector $\\phi$ with $U\\phi=\\mu\\phi$ and $|\\mu|=1$. Let $C=Q_2=\\mathbb C^2$ be the control qubit with ordered computational basis $|0\\rangle,|1\\rangle$; define $|\\pm\\rangle=(|0\\rangle\\pm|1\\rangle)/\\sqrt2$ and prepare $(|0\\rangle+\\overline\\mu|1\\rangle)/\\sqrt2$ with target $\\phi$. The two joint effects are $E_\\pm=|\\pm\\rangle\\langle\\pm|\\otimes I_H$. The $E_+$ outcome has probability $1$ after $C(U)$ and $\\cos^2(\\theta/2)$ after $C(e^{i\\theta}U)$. Thus the two controlled maps give different outcome laws exactly when $\\theta\\notin2\\pi\\mathbb Z$; when $\\theta\\in2\\pi\\mathbb Z$, the controlled maps coincide. This is a mathematical witness; it does not assert that controlled access or the witness-state preparation is free.",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $m<n$, then $2^m\\ge4\\pi n/\\eta$, so [F2] gives truncation error at most $\\eta/2$. If $m=n$, the truncated circuit is exact by [F2]. Thus in either case the ideal truncated unitary is within $\\eta/2$ of the exact QFT.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "There are $L$ retained one- or two-qubit blocks. For $m\\ge1$, each summand in $L$ is at most $n$, hence $L\\le n+n(m-1)=nm$. The final reversal uses $\\lfloor n/2\\rfloor$ swaps, or $3\\lfloor n/2\\rfloor=O(n)$ exact CNOTs by [F15] and the resource convention [A2].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F15",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For any factor $U\\in U(2)$, [F10] gives $|\\det U|=1$. Choose $\\lambda\\in\\mathbb C$ with $\\lambda^2=\\det U$ by [F11]. Then [F12] gives $|\\lambda|^2=|\\det U|=1$, so $|\\lambda|=1$. The matrix $S=\\lambda^{-1}U$ is unitary and has determinant $1$, hence $S\\in SU(2)$. By [F7]–[F9] and $0<\\delta\\le\\kappa\\le\\eta_0$, compile $S$ to a word $W$ with $\\|S-W\\|\\le\\delta$ and $O(\\log^{3.97}(1/\\delta))$ gates. Thus $\\|U-\\lambda W\\|\\le\\delta$. The local error lifts to the full register with the same operator norm by [F13]. By [F14], the embedded scalar $\\lambda$ remains one scalar on the entire standalone circuit.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [A1] to each retained block: use one gate for a Hadamard and, for $C(P_\\theta)$, the three target gates $A,B,C$ and one control phase gate from the controlled-unitary proof, with its two exact CNOTs. The phase gate is retained, so this is the complete controlled phase. These lists prove the uniform bound with $c=4$, independently of the angle. For any chosen lists bounded by $c$ as in the statement, the total number $K$ of one-qubit factors obeys $K\\le cL$, and at most $cL$ CNOTs occur. Keep the Hadamards as one-gate lists, so $K\\ge n\\ge1$. No ancilla or unproved QSD optimization is used.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the circuit denotation interface [A3], compose the compiled factors in chronological order, leaving every decomposition CNOT exact. The global embeddings act on their specified wires by [F16]. The exact-minus-compiled product telescopes with one local difference per one-qubit factor. Every surrounding factor is unitary and has norm one by [F6]; [F5] bounds the norm of the sum by the sum of local errors, at most $K\\delta\\le cL\\delta\\le\\eta/2$. The product of the $K$ scalars from step 1.3 is one scalar for the whole standalone circuit.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A3",
+            "F3",
+            "F5",
+            "F6",
+            "F16",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $C$ be the compiled circuit and let $\\lambda$ be the total scalar from step 3.1. The triangle inequality, step 1.1 and step 3.1 give $\\|\\operatorname{QFT}_{2^n}-\\lambda C\\|\\le\\eta$. By the max-over-unit-vectors definition in [F5], operator-norm homogeneity gives $\\|C-\\overline\\lambda\\operatorname{QFT}_{2^n}\\|=\\|\\overline\\lambda(\\operatorname{QFT}_{2^n}-\\lambda C)\\|=\\|\\operatorname{QFT}_{2^n}-\\lambda C\\|\\le\\eta$; the first vectors differ by the scalar $-1$, and $|\\lambda|=1$. Choosing $\\overline\\lambda$ in the defining infimum proves $d_{\\rm pr}(C,\\operatorname{QFT}_{2^n})\\le\\eta$. Applying [F4] gives the asserted total-variation bound for every unit input.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "The scalar in step 3.1 is harmless for this standalone output law because the conclusion uses projective distance and [F4]. It cannot be silently discarded if this entire compiled block is placed under outer control, by [A4]; no outer-controlled compilation claim is made.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F4",
+            "A4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F8], the $K\\le cL$ compiled one-qubit factors use $O(cL\\log^{3.97}(1/\\delta))$ gates. The decomposition CNOTs contribute at most $cL$ and the final SWAP expansion contributes $3\\lfloor n/2\\rfloor$ exact CNOTs by [A2,F15]. Since $L\\le nm$ and $1/\\delta=\\max\\{2cL/\\eta,1/\\kappa\\}$ with fixed $c,\\kappa$, $\\log(1/\\delta)=O(\\log(2nm/\\eta))$. Therefore the total is $O(nm\\log^{3.97}(2nm/\\eta))$. No step bounds the classical bit-time for target-angle descriptions.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F8",
+            "F15",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.2 counts n(n-1)/2 controlled phases, which is0 at n=1;2.1 still has n Hadamards so total L≥1 and no error allocation divides by0. The empty rotation subfamily compiles to identity while the one-wire transform remains H.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-early)",
+            "reason": "Proof step 1.2 counts n(n-1)/2 controlled phases, which is0 at n=1;2.1 still has n Hadamards so total L≥1 and no error allocation divides by0. The empty rotation subfamily compiles to identity while the one-wire transform remains H.",
+            "item_sha256": "1cc4f9dd8e2a8008dc1de3c7932678203279e1c3782c41db47902efd896db235",
+            "row_sha256": "2b3fe05c156609781100f39f09cb08c83162918940d71fb69b905e1927699aa9",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-early.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target accuracy satisfies 0<eta<1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the cutoff is m=n and truncation is exact by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The m=n exact branch is handled in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both m<n and m=n cases are included in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many gate factors are considered; their local compilation is specified in step 1.3 and the decomposition list is finite by step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a conditional compiler bound, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a conditional compiler bound, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex owner Step-3 boundary/risk repair, batches 16–30",
+        "notes": "Read the complete current compilation Statement, F1–F16, A1–A4 and all nine proof steps, with the complete current QC12 compiler, its error/resource proof, balanced-commutator proof and commutator-cancellation proof, the exact two-CNOT controlled-unitary construction, the truncated-circuit/error suppliers, gate-cost definition, projective-output-law proof and tensor-extension proof. The prior alpha escalation is resolved in the actual current suppliers: lem-qc-commutator-error-cancellation step 3.1 keeps V-tilde fixed in the second replacement and obtains 4 eta^(3/2)+2 eta^2<=5 eta^(3/2) for eta<=1/16; thm-qc-solovay-kitaev-error-and-resource-bound F3/step 2.1 now uses 5, so the total 40+5=45 is below the unchanged recurrence constant 64. The base radius eta_0<64^(-2) keeps every recursive call in that domain. For this consumer, m>=1 and L>=n>=1 make rational delta=min(eta/(2cL),kappa) positive and <=eta_0. Step 1.1 allocates eta/2 to truncation, including exact m=n. The controlled-unitary supplier steps 1.1–3.1 gives three target U(2) factors, one control phase factor and two CNOTs, so consumer 2.1 really has c=4 uniformly and retains the complete controlled phase. Consumer 1.3 removes determinants only from these one-qubit factors: each selected scalar has modulus 1, the residual is SU(2), and local norm error lifts unchanged. The chronological product in 3.1 telescopes with K<=cL local errors, hence <=eta/2; scalar factors combine into one standalone scalar. Step 4.1 therefore gives projective distance <=eta and the inspected output-law supplier proves TV<=eta for each unit input without needing an attained minimizing phase. Step 4.2 correctly excludes outer control, where the inspected relative-phase theorem applies. At n=m=1 there are no controlled phases or swaps, L=1, and the same positive error allocation compiles H. Step 5.1 includes exact decomposition CNOTs and three CNOTs per reversal SWAP; L<=nm and fixed c,kappa give the stated finite-set gate count. Finite root choices need no choice axiom. This is an exact-real gate-count result and asserts no bit-time bound. No remaining mathematical gap found in the assigned consumer or these actual supplier uses; no source edits or tests performed."
+      }
+    },
+    "ex-qa-qft-fourier-circuit-order-and-truncation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate, for integer $s\\ge2$, where\n\n$$H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad \\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s}).$$\n\nA named SWAP, the wire permutation from [[def-qc-tensor-register-and-permutation]], counts as one two-qubit gate. If the implementation expands each SWAP into three exact CNOT gates of [[def-qc-cnot-and-control-target-order]], count those three CNOTs in place of that SWAP. These conventions refine the one-qubit alphabet, controlled-phase rotation and elementary circuit-resource interfaces of [[def-qc-one-qubit-gate-alphabet-and-rotations]], [[def-qc-controlled-phase-rotation]] and [[def-qc-elementary-circuit-resources]].\n\nThe **finite-set synthesis model** keeps ideal gate count separate from compiled gate count. A one- or two-qubit target block is assigned a projective operator-error tolerance $\\delta>0$; a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit. Each CNOT expanded from a SWAP is exact in this model. Any compiled-count theorem must state the fixed-arity decomposition, finite alphabet, inverse-closure, density, exact-arithmetic and compiler-threshold hypotheses it uses. In particular, it makes no claim about classical bit-time for computing an arbitrary target-angle description. This is a cost convention; correctness and compiler resource bounds are separate theorems.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-qa-exact-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "Input: an $n$-qubit register with ordered wires $q_{n-1},\\ldots,q_0$, $n\\ge0$. The input integer is encoded by $x=\\sum_{j=0}^{n-1}x_j2^j$ in the computational basis, as specified by [[def-qc-ordered-bitstring-encoding]].\n\nOutput: the following finite gate list, defining a unitary by the circuit semantics of [[def-qc-circuit-denotational-semantics]] on the ordered-register syntax of [[def-qc-circuit-syntax-and-register-order]], and using no ancillas.\n\n1. For $j=n-1,n-2,\\ldots,0$, complete the following block before proceeding to the next $j$: apply $H$ to target $q_j$; then, for $i=0,1,\\ldots,j-1$ in that order, apply $\\mathrm{CP}_{j-i+1}$ to the pair $(q_i,q_j)$, with $q_i$ as control and $q_j$ as target. Here $\\mathrm{CP}_s$ is the ideal controlled phase defined in [[def-qa-qft-gate-cost-model]].\n2. After completing every block in the descending $j$ loop, for $j=0,1,\\ldots,\\lfloor n/2\\rfloor-1$, swap $q_j$ with $q_{n-1-j}$.\n\nThe chronological order is exactly the order listed. If $n=0$, all loops are empty and the output is the empty circuit, i.e. the identity on the one-dimensional register.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-qa-truncated-binary-qft-circuit",
+          "source_section": "Definition",
+          "quote": "Input: an $n$-qubit ordered register as in [[alg-qa-exact-binary-qft-circuit]] and an integer cutoff $m\\ge1$.\n\nOutput: run the exact binary QFT circuit except omit every controlled phase $\\mathrm{CP}_s$ with denominator index $s>m$. Retain every Hadamard and every final reversal SWAP. The resulting gate list is finite and unitary for every $n\\ge0,m\\ge1$ under [[def-qc-circuit-denotational-semantics]]. If $m\\ge n$, no controlled phase is omitted and the circuit is exactly the full circuit. The ideal gate-count convention is [[def-qa-qft-gate-cost-model]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-qa-cyclic-quantum-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For an integer $N\\ge1$, let $\\mathcal F_N$ be the negative-sign, $N^{-1/2}$-normalized transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Define the **cyclic quantum Fourier transform** by $\\operatorname{QFT}_N:=\\mathcal F_N^{-1}$. The inverse exists by [[thm-finite-fourier-inversion]], and its matrix on the standard basis indexed by $0,\\ldots,N-1$ is\n\n$$\\operatorname{QFT}_N|x\\rangle=N^{-1/2}\\sum_{y=0}^{N-1}e^{2\\pi ixy/N}|y\\rangle,\\qquad 0\\le x<N.$$\n\nHere the standard-basis ket convention is the one specified by [[def-qc-dirac-notation-conversion]]. Thus the transform has the positive sign and the same $N^{-1/2}$ normalization as the inverse Fourier formula. At $N=1$ it is the identity on the one-dimensional register. In the binary specialization $N=2^n$, the circuit page writes each index in its unique base-two expansion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qa-pi-over-two-exceeds-sqrt-two",
+          "source_section": "Statement",
+          "quote": "With $\\pi$ defined by the first positive zero of cosine, one has\n$$\\sqrt2<\\frac\\pi2.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-swap-is-three-cnot-circuit",
+          "source_section": "Statement",
+          "quote": "On two ordered qubit wires, let $S$ be the wire-swap permutation $|a,b\\rangle\\mapsto|b,a\\rangle$. Let $C_{12}$ be the CNOT with wire 1 controlling wire 2, so $C_{12}|a,b\\rangle=|a,b\\oplus a\\rangle$, and define the reverse orientation by $C_{21}|a,b\\rangle=|a\\oplus b,b\\rangle$, extending both actions linearly; here $\\oplus$ is addition modulo two. The operator identity\n\n$$S=C_{12}C_{21}C_{12}$$\n\nholds, where products act right to left. Therefore the swap of two wires has an exact three-CNOT implementation with no ancillas.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-qft-gate-cost-model",
+          "source_section": "Definition",
+          "quote": "The **ideal binary-QFT gate-count model** treats each Hadamard $H$ and each exact controlled phase $\\mathrm{CP}_s$ as one elementary gate, for integer $s\\ge2$, where\n\n$$H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad \\mathrm{CP}_s=\\operatorname{diag}(1,1,1,e^{2\\pi i/2^s}).$$\n\nA named SWAP, the wire permutation from [[def-qc-tensor-register-and-permutation]], counts as one two-qubit gate. If the implementation expands each SWAP into three exact CNOT gates of [[def-qc-cnot-and-control-target-order]], count those three CNOTs in place of that SWAP. These conventions refine the one-qubit alphabet, controlled-phase rotation and elementary circuit-resource interfaces of [[def-qc-one-qubit-gate-alphabet-and-rotations]], [[def-qc-controlled-phase-rotation]] and [[def-qc-elementary-circuit-resources]].\n\nThe **finite-set synthesis model** keeps ideal gate count separate from compiled gate count. A one- or two-qubit target block is assigned a projective operator-error tolerance $\\delta>0$; a scalar phase returned by the compiler is retained as metadata for the whole standalone circuit. Each CNOT expanded from a SWAP is exact in this model. Any compiled-count theorem must state the fixed-arity decomposition, finite alphabet, inverse-closure, density, exact-arithmetic and compiler-threshold hypotheses it uses. In particular, it makes no claim about classical bit-time for computing an arbitrary target-angle description. This is a cost convention; correctness and compiler resource bounds are separate theorems.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qc-local-gate-wire-embedding",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge r\\ge1$, let $w=(w_0,\\ldots,w_{r-1})$ be an ordered tuple of distinct wires in $[n]$, and let $U:\\mathcal Q_r\\to\\mathcal Q_r$ be unitary. There is a unique unitary $\\widetilde U_w:\\mathcal Q_n\\to\\mathcal Q_n$ that applies $U$ to the ordered wires $w_0,\\ldots,w_{r-1}$ and acts as the identity on the other wires.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-dimensional-isometry-characterisations",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional real or complex inner product space $V$, the following are equivalent:\n\n1. $T$ preserves norms.\n2. $T$ preserves inner products.\n3. $T$ sends every orthonormal basis to an orthonormal basis.\n4. $T$ sends some orthonormal basis to an orthonormal basis.\n5. $T^*T=I$.\n\nWhenever these conditions hold, $T$ is invertible and $T^{-1}=T^*$, so also $TT^*=I$. The zero-dimensional case is included.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-eulers-formula",
+          "source_section": "Statement",
+          "quote": "For every real $\\theta$, $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-qa-truncated-qft-operator-norm-error",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $N=2^n$, and let $m\\ge1$ be an integer. For $1\\le m<n$,\n\n$$\\|\\operatorname{QFT}_{2^n}-\\operatorname{QFT}^{(m)}_{2^n}\\|\\le\\sum_{s=m+1}^{n}(n-s+1)\\frac{2\\pi}{2^s}\\le2\\pi n\\,2^{-m}.$$\n\nFor $m\\ge n$, the truncated circuit is exact and the error is zero. In particular, for $0<\\varepsilon<1$, the cutoff $m=\\min\\{n,\\lceil\\log_2(2\\pi n/\\varepsilon)\\rceil\\}$ gives operator-norm error at most $\\varepsilon$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qc-circuit-denotational-semantics",
+          "source_section": "Definition",
+          "quote": "For a gate occurrence $g=(\\gamma,w)$ in a circuit on $\\mathcal Q_n$, let $\\widetilde U_g$ be the global embedding from [[lem-qc-local-gate-wire-embedding]]. For a layer $L_t=(g_1,\\ldots,g_s)$, define\n$$U_{L_t}:=\\widetilde U_{g_s}\\cdots\\widetilde U_{g_1}.$$\nFor a circuit with chronological layers $L_1,\\ldots,L_d$, define\n$$U_C:=U_{L_d}\\cdots U_{L_1}.$$\nThe empty circuit and every empty layer denote the identity on $\\mathcal Q_n$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On basis input $|x_1x_0\\rangle$, after $H(q_1)$ and $\\mathrm{CP}_2(q_0,q_1)$ the $q_1$ factor is $2^{-1/2}(|0\\rangle+(-1)^{x_1}i^{x_0}|1\\rangle)$; after $H(q_0)$ the $q_0$ factor is $2^{-1/2}(|0\\rangle+(-1)^{x_0}|1\\rangle)$. The local gate actions are [F4], and their composition in chronological order requires [A1]. Euler's formula and the quarter-turn values [F6,F7] give $e^{i\\pi/2}=i$, $e^{i\\pi}=-1$, and $e^{3\\pi i/2}=-i$. For the nonnegative integer $xy$, iterating [F12] gives $e^{\\pi ixy/2}=(e^{i\\pi/2})^{xy}=i^{xy}$, with both sides $1$ when $xy=0$. After the final swap the factors are ordered as the $q_0$ factor followed by the $q_1$ factor. Substituting $x_1x_0=00,01,10,11$ gives the four columns $[1,1,1,1]^T$, $[1,i,-1,-i]^T$, $[1,-1,1,-1]^T$, and $[1,-i,-1,i]^T$, each divided by $2$; these are the amplitudes in [L3].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L5",
+            "F4",
+            "F6",
+            "F7",
+            "F12",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L2,A1], the difference of exact and cutoff operators is $S H(q_0)(\\mathrm{CP}_2-I)H(q_1)$, where the left and right factors are unitary: $H^*H=I$, $\\mathrm{CP}_2$ is diagonal with unit-modulus entries, and $S$ permutes an orthonormal basis [L1,F5,F9,F10]. Thus left multiplication preserves norms and right multiplication maps the unit sphere onto itself, so the difference has operator norm $\\|\\mathrm{CP}_2-I\\|$ by [F5,F8]. Write a unit vector as $v=\\sum_{a,b\\in\\{0,1\\}}c_{ab}|ab\\rangle$. By [F10], $\\sum_{a,b}|c_{ab}|^2=1$. The operator $\\mathrm{CP}_2-I$ sends $v$ to $(i-1)c_{11}|11\\rangle$, and [F9] gives $|i-1|^2=(i-1)(-i-1)=2$. Hence $\\|(\\mathrm{CP}_2-I)v\\|^2=2|c_{11}|^2\\le2$, with equality at $v=|11\\rangle$; [F8] gives $\\|\\mathrm{CP}_2-I\\|=\\sqrt2$. The bound in [F11] is $(2-2+1)2\\pi/2^2=\\pi/2$ for $n=2,m=1$, and [F1] gives $\\sqrt2<\\pi/2$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5",
+            "F1",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Reversing the displayed wire order permutes both the input and output basis by $P$, so the matrix is $PF_4^+P$ by the tensor-register convention [L4]. Swapping rows and columns $2$ and $3$ gives $\\frac12\\begin{pmatrix}1&1&1&1\\\\1&1&-1&-1\\\\1&-1&i&-i\\\\1&-1&-i&i\\end{pmatrix}$, which is the displayed reversed-order matrix.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact list has $2+1+1=4$ ideal gates, and its one SWAP adds three CNOTs by [F2]; the ideal convention is [F3]. The cutoff list has $2+1=3$ ideal gates and the same three-CNOT expansion. Neither circuit introduces an ancilla.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The x=00 column is calculated in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-qubit register, not N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch occurs for n=2,m=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All four basis inputs, including 00 and 11, are calculated in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The four basis inputs and finite gate lists are explicitly enumerated in steps 1.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a finite example, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a finite example, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "qft4-standard-wire-order",
+          "input": "x=00,01,10,11; ordered wires q1,q0",
+          "expected_matrix": "1/2[[1,1,1,1],[1,i,-1,-i],[1,-1,1,-1],[1,-i,-1,i]]",
+          "status": "computed in step 1.1"
+        },
+        {
+          "name": "qft4-reversed-wire-order",
+          "input": "P F4+ P with P exchanging 01 and 10",
+          "expected_matrix": "1/2[[1,1,1,1],[1,1,-1,-1],[1,-1,i,-i],[1,-1,-i,i]]",
+          "status": "computed in step 2.1"
+        },
+        {
+          "name": "qft4-cutoff-m1",
+          "input": "n=2,m=1; omit CP2",
+          "operator_norm_error": "sqrt(2)",
+          "omitted_level_sum": "pi/2",
+          "status": "computed in step 1.2"
+        },
+        {
+          "name": "qft4-gate-count",
+          "input": "n=2 exact and m=1 truncated",
+          "expected": "4 ideal exact; 3 ideal truncated; 3 CNOTs per expanded SWAP; no ancillas",
+          "status": "computed in step 3.1"
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all four verification steps and all eighteen exact supplier statements. Evaluated all four Fourier columns with exp(i pi/2)=i and the exponential addition law, including zero products. The descending two-wire sequence gives the stated positive-sign F4 matrix; reversing displayed wire order conjugates by P on both sides and swaps rows/columns 2 and 3. Removing CP2 leaves a single diagonal defect conjugated left/right by unitary factors, so its norm is |i-1|=sqrt(2), attained at the |11> input of the diagonal difference; the general upper bound is pi/2 and the independently reviewed cosine lemma gives strictness. Counts are 4/3 ideal and 6/5 with SWAP expansion, with no ancillas. No choice or QC12 compilation theorem is used."
+      }
+    },
+    "lem-qa-pi-over-two-exceeds-sqrt-two": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cosine-has-a-smallest-positive-zero",
+          "source_section": "Statement",
+          "quote": "There is a unique $\\gamma\\in(0,2)$ with $\\cos\\gamma=0$. It is the smallest positive zero of cosine.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma$ be the unique smallest positive zero of cosine supplied by [[thm-cosine-has-a-smallest-positive-zero]]. Define\n$$\\pi:=2\\gamma.$$\n\nThus $\\pi>0$ and $\\pi/2=\\gamma$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$\n\nThese are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "For $0<x\\le2$, $\\sin x\\ge x-x^3/6\\ge x/3>0$. Also $\\cos2\\le-1/3$. Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-alternating-series-test",
+          "source_section": "Statement",
+          "quote": "Let $(\\varepsilon_k)$ be the alternating sequence of [[lem-alternating-sequence]],\nthat is the unique sequence of reals with $\\varepsilon_0 = 1$ and\n$\\varepsilon_{k+1} = -\\varepsilon_k$, which is what is usually written\n$\\varepsilon_k = (-1)^k$; let $e$ and $o$ be its even and odd index maps, so that\n$\\varepsilon_{e_j} = 1$, $\\varepsilon_{o_j} = -1$, and every natural number is\n$e_j$ for exactly one $j$ or $o_j$ for exactly one $j$.\n\nLet $(b_k)$ be a sequence of reals that is nonincreasing\n([[def-monotone-sequence]]) and converges to $0$ ([[def-real-limit]]); then\n$b_k \\ge 0$ for every $k$. Write $t_n := \\sum_{k<n} \\varepsilon_k b_k$ for the\npartial sums ([[def-series]]). Then:\n\n1. the series $\\sum \\varepsilon_k b_k$ converges; write $L$ for its sum;\n2. $t_{e_j} \\le L \\le t_{o_j}$ for every $j \\in \\mathbb{N}$, and for every\n   $n \\in \\mathbb{N}$ the sum $L$ lies between the two consecutive partial sums\n   $t_n$ and $t_{n+1}$;\n3. $|L - t_n| \\le b_n$ for every $n \\in \\mathbb{N}$.\n\nClaim 3 is the error bound: the partial sum $t_n$, which uses the $n$ terms\n$\\varepsilon_0 b_0, \\dots, \\varepsilon_{n-1}b_{n-1}$, differs from the sum by at\nmost the first term omitted.\n\n**Only claim 1 is a corollary of [[thm-dirichlet-test]].** Claims 2 and 3 are not:\nthey come from the interlacing of the even-index and odd-index partial sums, and\nthat argument is carried out below rather than smuggled into the Dirichlet\nestimate, which produces no bracketing at all.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber. Together with [[thm-reals-ordered-field]], this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $x=\\sqrt2$, so $x>0$ and $x^2=2$ by [F4]. For $k\\ge2$ put $a_k=x^{2k}/(2k)!$; then $a_{k+1}/a_k=2/((2k+1)(2k+2))\\le1/15<1$, so $(a_k)_{k\\ge2}$ decreases to zero. In the cosine series [F2], the terms for $k=0,1$ cancel because $1-x^2/2=0$. Reindexing the remaining tail as an alternating series gives first two partial sums $a_2$ and $a_2-a_3$; [F3] bounds its sum below by $a_2-a_3>0$. Thus $\\cos x>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "One has $x<2$: otherwise $x\\ge2$ and $x+2>0$ would imply $x^2-4=(x-2)(x+2)\\ge0$, contradicting $x^2=2<4$ from step 1.1. Hence $x\\in(0,2)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], $\\gamma=\\pi/2\\in(0,2)$ and $\\cos\\gamma=0$. If $x\\ge\\gamma$, strict decrease of cosine on $[0,2]$ from [F2] would give $\\cos x\\le\\cos\\gamma=0$, contradicting step 1.1. Therefore $\\sqrt2=x<\\gamma=\\pi/2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "cosine-tail-first-ratio",
+          "input": "k=2 and x^2=2",
+          "expected": "a_3/a_2=1/15",
+          "status": "computed exactly in step 1.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma has no finite-list or empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The strict comparison concerns the fixed positive constants sqrt(2) and pi/2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No parameter takes a one-valued endpoint branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The first zero gamma lies in (0,2), and its comparison with sqrt(2) is completed in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The fixed alternating tail indexed by k>=2 is handled directly in step 1.1, with no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a strict inequality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a strict inequality, not an iff."
+        }
+      ],
+      "unresolved_suppliers": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all three proof steps and the seven supplier statements. At x=sqrt(2), k=0,1 cancel and the tail has ratio at most 1/15, hence tends to zero; its lower alternating partial sum is 1/6-1/90=7/45>0. x is strictly between 0 and 2; strict cosine decrease and the unique zero gamma in (0,2) imply x<gamma=pi/2. Checked square-root positivity and endpoints; no choice or unproved numerical estimate is used. Reader and refuter report no finding for this item."
+      }
+    }
+  }
+}

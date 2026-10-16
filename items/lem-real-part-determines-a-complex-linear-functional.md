@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-real-part-determines-a-complex-linear-functional.json
 id: lem-real-part-determines-a-complex-linear-functional
 kind: lemma
 title: "A complex linear functional is recovered from its real part by f(x)=u(x)-iu(ix)"
@@ -7,17 +9,9 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-algebraic-dual-and-linear-functional,
-       rem-real-and-complex-normed-space-convention]
+deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-algebraic-dual-and-linear-functional, def-realification-of-a-complex-vector-space, thm-complex-numbers-are-the-real-coordinate-plane]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -50,7 +44,7 @@ complex linear functional is uniquely determined by its real part.
 
 [L1] A linear functional is additive and homogeneous over the relevant scalar field ([[def-algebraic-dual-and-linear-functional]]).
 
-[L2] On this page, complex vector-space language is read by the scalar convention recorded in [[rem-real-and-complex-normed-space-convention]].
+[L2] The underlying real vector space is the realification of [[def-realification-of-a-complex-vector-space]]. Complex coordinate arithmetic gives $i^2=-1$ and $\operatorname{Re}(a+ib)=a$ for real $a,b$ ([[thm-complex-numbers-are-the-real-coordinate-plane]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).
 
 ## Proof
 

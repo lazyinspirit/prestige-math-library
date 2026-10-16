@@ -1,0 +1,608 @@
+===== PDF PAGE 161 =====
+
+We now give the quantum strategy for this game. Let I, X, Y , Z be the 2 × 2 Pauli matrices
+from Appendix A.9. Each is a 1-qubit observable with eigenvalues in {+1, −1}.6 That is, each
+can be written as P+ −P−where P+ and P−are orthogonal projectors that sum to identity,
+and hence define a two-outcome measurement with outcomes +1 and −1.
+For example, Z =
+|0⟩⟨0| −|1⟩⟨1|, corresponding to a measurement in the computational basis (with state |b⟩giving
+rise to measurement outcome (−1)b). And X = |+⟩⟨+|−|−⟩⟨−|, corresponding to a measurement in
+the Hadamard basis. The Pauli matrices are self-inverse, distinct non-identity Paulis anti-commute
+(e.g., XY = −Y X), and we have X = iZY , Y = iXZ, Z = iY X. Consider the following table,
+where each entry is a tensor product of two Paulis:
+
+X ⊗X
+Y ⊗Z
+Z ⊗Y
+Y ⊗Y
+Z ⊗X
+X ⊗Z
+Z ⊗Z
+X ⊗Y
+Y ⊗X
+
+Because (P+ −P−) ⊗(Q+ −Q−) = (P+ ⊗Q+ + P−⊗Q−) −(P+ ⊗Q−+ P−⊗Q+), each such
+product is itself a {+1, −1}-valued observable. Hence each product of Pauli matrices corresponds
+to a measurement on a 2-qubit space, with outcomes +1 and −1.
+Note that the observables along each row commute and their product is I ⊗I, and the ob-
+servables along each column commute and their product is −I ⊗I.
+This implies that for any
+2-qubit state, performing the three measurements along any row results in three {+1, −1}-valued
+bits whose product is +1. Also, performing the three measurements along any column results in
+three {+1, −1}-valued bits whose product is −1.
+We can now describe the quantum protocol. It uses two pairs of entangled qubits, each of which
+is in initial state
+1
+√
+
+2(|01⟩−|10⟩)
+
+(again, such states can be obtained from EPR-pairs by local operations). Alice, on input x, applies
+three 2-qubit measurements corresponding to the observables in row x of the above table. For each
+measurement, if the result is +1 then she outputs 0, and if the result is −1 then she outputs 1.
+Similarly, Bob, on input y, applies the measurements corresponding to the observables in column y,
+and converts the ±1-outcomes into bits.
+We have already established that Alice and Bob’s output bits satisfy the required parity con-
+straints. It remains to show that Alice and Bob’s output bits agree at the point where the row
+meets the column. For that measurement, Alice and Bob are measuring with respect to the same
+observable in the above table. Because all the observables in each row and in each column com-
+mute, we may assume that the place where they intersect is the first observable applied. Those
+bits are obtained by Alice and Bob each measuring 1
+
+2(|01⟩−|10⟩)(|01⟩−|10⟩) with respect to the
+observable in entry (x, y) of the table. To show that their measurements will agree for all cases of
+xy, we consider the individual Pauli measurements on the individual entangled pairs of the form
+1
+√
+
+2(|01⟩−|10⟩). Let a′ and b′ denote the 0/1-valued outcomes of the first measurement, and a′′
+
+and b′′ denote the outcomes of the second. The measurement associated with the tensor product of
+two observables gives the same distribution over outcomes as measuring each individual observable
+and then taking the product of the two results. Hence we have ay = a′ ⊕a′′ and bx = b′ ⊕b′′. It
+
+6See Section 1.2.2. In particular, a ±1-valued observable A can be written as A = P −Q, where P and Q are
+projectors on two orthogonal subspaces such that P + Q = I. This corresponds to a two-outcome measurement
+specified by projectors P and Q with outcomes +1 and −1, respectively.
+
+149
+
+
+===== PDF PAGE 162 =====
+
+is straightforward to verify that if the same measurement from {X, Y, Z} is applied to each qubit
+of
+1
+√
+
+2(|01⟩−|10⟩) then the outcomes will be distinct: a′ ⊕b′ = 1 and a′′ ⊕b′′ = 1. We now have
+ay = bx, because
+
+ay ⊕bx = (a′ ⊕a′′) ⊕(b′ ⊕b′′) = (a′ ⊕b′) ⊕(a′′ ⊕b′′) = 1 ⊕1 = 0.
+(17.3)
+
+17.4
+A non-local version of distributed Deutsch-Jozsa
+
+The previous two examples used small amounts of entanglement: one EPR-pair for CHSH, two
+EPR-pairs for magic square. In both cases we could show that classical protocols need at least
+some communication if they want to achieve the same as what entanglement-based protocols can
+achieve without any communication. We will now give a non-locality game that’s parametrized
+by a number n, and where Alice and Bob’s quantum strategy uses log n EPR-pairs [67].
+The
+advantage is that we can show that classical protocols for this game actually need much classical
+communication rather than at least some nonzero amount.
+
+Non-local DJ problem: Alice and Bob receive n-bit inputs x and y that satisfy the
+DJ promise: either x = y, or x and y differ in exactly n/2 positions. The task is for
+Alice and Bob to provide outputs a, b ∈{0, 1}log n such that if x = y then a = b, and if
+x and y differ in exactly n/2 positions then a ̸= b.
+
+They achieve this as follows
+
+1. Alice and Bob share log n EPR-pairs, i.e., the maximally entangled state
+1
+√n
+�n−1
+i=0 |i⟩|i⟩.7
+
+2. They both apply locally a conditional phase to obtain:
+1
+√n
+�n−1
+i=0 (−1)xi|i⟩(−1)yi|i⟩.
+
+3. They both apply a Hadamard transform, obtaining
+
+1
+n√n
+
+n−1
+�
+
+i=0
+(−1)xi+yi
+�
+
+a∈{0,1}log n
+(−1)i·a|a⟩
+�
+
+b∈{0,1}log n
+(−1)i·b|b⟩
+
+=
+1
+n√n
+
+�
+
+a,b∈{0,1}log n
+
+�n−1
+�
+
+i=0
+(−1)xi+yi+i·(a⊕b)
+�
+
+|a⟩|b⟩.
+
+4. They measure in the computational basis and output the results a and b, respectively.
+
+For every a, the amplitude of the basis state |a⟩|a⟩in the state before the measurement is
+
+1
+n√n
+
+n−1
+�
+
+i=0
+(−1)xi+yi.
+
+7Note that k EPR-pairs
+�
+1
+√
+
+2(|0⟩A|0⟩B + |1⟩A|1⟩B)
+�⊗k
+can also be written as
+1
+√
+
+2k
+
+�
+
+i∈{0,1}k
+|i⟩A|i⟩B if we reorder
+
+the qubits, putting Alice’s k qubits on the left and Bob’s on the right. While these two ways of writing the state
+strictly speaking correspond to two different vectors of amplitudes, they still represent the same bipartite physical
+state, and we will typically view them as equal.
+
+150
+
+
+===== PDF PAGE 163 =====
+
+This equals 1/√n if x = y, and equals 0 otherwise. There are n possible values a, so the probability
+that Bob’s measurement outcome equals Alice’s measurement outcome n · (1/√n)2 = 1 if x = y,
+and equals 0 otherwise. This solves the problem perfectly, using an n-dimensional entangled state
+at the start (namely log n EPR-pairs).
+What about classical protocols? Suppose there is a classical protocol that uses C bits of com-
+munication, and that wins the non-local Deutsch-Jozsa problem with success probability 1.
+If
+Alice and Bob ran this protocol, and then Alice communicated her output a to Bob (using an
+additional log n bits), then they could solve the distributed Deutsch-Jozsa problem since Bob could
+then check whether a = b or a ̸= b. But we know from Section 16.3 that solving the distributed
+Deutsch-Jozsa problem requires at least 0.007n bits of communication. Hence C + log n ≥0.007n,
+so C ≥0.007n −log n = Ω(n). Thus we have a non-locality problem that can be solved perfectly
+without any communication if Alice and Bob share log n EPR-pairs, while classically it needs not
+just some communication, but actually a lot of communication if we want to solve it perfectly.
+
+Exercises
+
+1. Suppose Alice and Bob share an EPR-pair
+1
+√
+
+2(|00⟩+ |11⟩).
+
+(a) Let U be a 1-qubit unitary. Show that the following two states are the same: (1) the
+state obtained if Alice applies U to her qubit of the EPR-pair;
+(2) the state obtained if Bob applies the transpose UT to his qubit of the EPR-pair.
+
+(b) (H) What state do you get if each of Alice and Bob applies a Hadamard transform to
+their qubit of the EPR-pair?
+
+2. Alice and Bob share an EPR-pair,
+1
+√
+
+2(|00⟩+|11⟩). Suppose they each measure their qubit with
+an X-observable (which corresponds to a particular projective measurement with possible
+outcomes +1, −1).
+
+(a) Show that Alice’s measurement outcome is uniformly distributed, so 50% probability of
+outcome +1 and 50% probability of outcome −1.
+
+(b) (H) Show that Alice’s and Bob’s measurement outcomes are always equal.
+
+(c) Suppose we view X ⊗X as one 2-qubit observable (with possible outcomes +1, −1)
+instead of two 1-qubit observables.
+What is the probability distribution on the two
+possible outcomes?
+
+3. Alice and Bob share n EPR-pairs. Call their shared 2n-qubit state |ψ⟩AB.
+
+(a) Let U be an arbitrary n-qubit unitary and ¯U be U after conjugating its entries (without
+transposing). Prove that (U ⊗¯U)|ψ⟩AB = |ψ⟩AB.
+
+(b) Suppose Alice receives some input x, and she does an n-qubit unitary Ux on her part of
+the state and then measures in the computational basis, obtaining a classical outcome
+a ∈{0, 1}n. What is the probability distribution over Alice’s measurement outcomes,
+and why?
+
+(c) Suppose Bob receives the same input x as Alice already received. How can he learn
+Alice’s measurement outcome a from part (b) without communication? (you may assume
+Bob knows the map x �→Ux)
+
+151
+
+
+===== PDF PAGE 164 =====
+
+4. (H) Give a classical strategy using shared randomness for the CHSH game, such that Alice
+and Bob win the game with probability at least 3/4 for every possible input x, y (note the
+order of quantification: the same strategy has to work for every x, y).
+
+5. “Mermin’s game” (a.k.a. the GHZ game) is the following. Consider three space-like separated
+players: Alice, Bob, and Charlie. Alice receives input bit x, Bob receives input bit y, and
+Charlie receives input bit z. The input satisfies the promise that x ⊕y ⊕z = 0. The goal of
+the players is to output bits a, b, c, respectively, such that a ⊕b ⊕c = OR(x, y, z). In other
+words, the outputs should sum to 0 (mod 2) if x = y = z = 0, and should sum to 1 (mod 2)
+if x + y + z = 2.
+
+(a) Show that every classical deterministic strategy will fail on at least one of the 4 allowed
+inputs.
+
+(b) Show that every classical randomized strategy has success probability at most 3/4 under
+the uniform distribution on the four allowed inputs xyz.
+
+(c) Suppose the players share the following entangled 3-qubit state:
+
+1
+2(|000⟩−|011⟩−|101⟩−|110⟩).
+
+Suppose each player does the following: if his/her input bit is 1, apply H to his/her
+qubit, otherwise do nothing. Describe the resulting 3-qubit superposition.
+
+(d) Using (c), give a quantum strategy that wins the above game with probability 1 on every
+input that satisfies the promise.
+
+6. Suppose Alice, Bob, and Charlie share the 3-qubit “GHZ-state”
+1
+√
+
+2(|000⟩+ |111⟩), each of
+them holding one qubit.
+
+(a) What is the local density matrix of Charlie’s qubit (viewing the 2 qubits of Alice and
+Bob as one party)?
+
+(b) What is the local density matrix of the 2-qubit state held by Alice and Bob?
+
+(c) Give a protocol where Charlie measures his qubit in some way, communicates the out-
+come (one classical bit) to Bob, who then applies a local operation so that Alice and
+Bob end up with an EPR-pair
+1
+√
+
+2(|00⟩+ |11⟩).
+
+7. (H) This question examines how well the best quantum protocol can do for CHSH (resulting
+in the so-called “Tsirelson bound”). Consider a protocol where Alice and Bob share a 2k-
+qubit state |ψ⟩= |ψ⟩AB with k qubits for Alice and k for Bob (the state can be arbitrary and
+need not consist of EPR-pairs). Alice has two possible ±1-valued observables A0 and A1, and
+Bob has two possible ±1-valued observables B0 and B1. Each of these observables acts on k
+qubits. On inputs x ∈{0, 1} and y ∈{0, 1}, respectively, Alice measures her half of |ψ⟩with
+Ax and outputs the resulting sign a ∈{+1, −1}, and Bob measures his half of |ψ⟩with By
+and outputs the resulting sign b. Note that we treat the output bits as signs instead of 0/1
+now. However, the winning condition is the same: the AND of the input bits should equal
+the parity (XOR) of the output bits. So Alice and Bob win the game if (−1)xy = ab.
+
+(a) Show that the expected value of the product ab on inputs x, y is ⟨ψ|Ax ⊗By|ψ⟩(this is
+the same as Tr [(Ax ⊗By)|ψ⟩⟨ψ|]).
+
+152
+
+
+===== PDF PAGE 165 =====
+
+(b) Define 2k-qubit operator C = A0 ⊗B0 + A0 ⊗B1 + A1 ⊗B0 −A1 ⊗B1. Show that the
+winning probability of the protocol (averaged over all 4 inputs pairs x, y) is 1
+
+2 + 1
+
+8⟨ψ|C|ψ⟩.
+
+(c) Show that C2 = 4I + (A0A1 −A1A0) ⊗(B1B0 −B0B1), where I is the 2k-qubit identity
+matrix.
+
+(d) Show that ⟨ψ|C|ψ⟩≤
+√
+
+8.
+
+(e) What can you conclude about the best-possible winning probability among all possible
+quantum protocols for CHSH?
+
+153
+
+
+===== PDF PAGE 166 =====
+
+154
+
+
+===== PDF PAGE 167 =====
+
+Chapter 18
+
+Quantum Cryptography
+
+18.1
+Saving cryptography from Shor
+
+Most classical public-key cryptography in use today can be broken by a large quantum computer.
+In particular, the RSA system relies on the hardness of factoring integers and hence is broken
+by Shor’s factoring algorithm (see Exercise 5.3); and Diffie-Hellman key exchange relies on the
+hardness of the discrete logarithm problem which was also broken by Shor (see Exercise 6.3). This
+could clearly become a huge problem for society if and when a large quantum computer is realized:
+if we cannot securely send messages, make payments or sign transactions online anymore, then
+much of our economy and society breaks down, or will at least need to be heavily reconfigured.
+There are two ways to address this problem. On the one hand we can try to design other classical
+cryptographic systems, not based on factoring or discrete log. This part of classical cryptography
+is—slightly confusingly—called post-quantum cryptography (PQC) [54]. It relies on the assumed
+hardness (even for quantum computers) of certain specific computational problems, for instance
+related to finding short vectors in integer lattices, such as “learning with errors” (LWE) [217]. PQC
+is by now a big subfield, and we won’t cover it here.
+On the other hand, we can also try to design cryptographic systems that explicitly rely on quan-
+tum effects. This area is called quantum cryptography and is the topic of this chapter. Compared
+to post-quantum cryptography, this has the disadvantage that even the honest users of the scheme
+need to have a (simple) quantum computer at their disposal, but it has the advantage that the
+security against adversaries in some cases is information-theoretic, not predicated on the assumed
+but unproven hardness of some computational problems.
+
+18.2
+Quantum key distribution
+
+One of the most basic tasks of cryptography is to allow Alice to send a message to Bob (whom
+she trusts) over a public channel, without allowing a third party Eve (for “eavesdropper”) to
+get any information about M from tapping the channel. Suppose Alice wants to send message
+M ∈{0, 1}n to Bob. The goal here is not minimal communication, but secrecy. This is often done
+by public-key cryptography such as RSA. Such schemes, however, are only computationally secure,
+not information-theoretically secure: all the information about the private key can be computed
+from the public key, it just appears to take a lot of time to compute it—assuming of course that
+problems like factoring are classically hard, and that nobody builds a quantum computer. . .
+
+155
+
+
+===== PDF PAGE 168 =====
+
+In contrast, the following “one-time pad” scheme is information-theoretically secure. If Alice
+and Bob share a secret key K ∈{0, 1}n then Alice can send C = M ⊕K over the channel. By adding
+K to what he received, Bob learns M. On the other hand, if Eve didn’t know anything about K
+then she learns nothing about M from tapping the message M ⊕K that goes over the channel.
+How can we make Alice and Bob share a secret key, about which Eve will have no or negligibly
+little information? In the classical world this is impossible, but with quantum communication it
+can be done!
+Below we describe the famous BB84 quantum key distribution (QKD) protocol of Bennett and
+Brassard [53]. Consider two possible bases: basis 0 is the computational basis {|0⟩, |1⟩}, and basis 1
+is the Hadamard basis {|+⟩, |−⟩}. The main property of quantum mechanics that we’ll use, is
+that if a bit b is encoded in an unknown basis, then Eve cannot get information about b without
+disturbing the state, and the latter can be detected by Alice and Bob.1
+
+1. Alice chooses n random bits a1, . . . , an and n random bases b1, . . . , bn. She sends ai to Bob
+in basis bi over the public quantum channel. For example, if ai = 0 and bi = 1 then the i-th
+qubit that she sends is in state |+⟩.
+
+2. Bob chooses random bases b′
+1, . . . , b′
+n and measures the qubits he received in those bases,
+yielding bits a′
+1, . . . , a′
+n.
+
+3. Bob sends Alice all b′
+i (this also signals to Alice that Bob has measured the qubits he received),
+and Alice sends Bob all bi. Note that for roughly n/2 of the is, Alice and Bob used the same
+basis bi = b′
+i. For those i Bob should have a′
+i = ai (if there was no noise and Eve didn’t
+tamper with the i-th qubit on the channel). Both Alice and Bob know for which is this holds.
+Let’s call these roughly n/2 positions the “shared string.”
+
+4. Alice randomly selects n/4 locations in the shared string, and sends Bob those locations as
+well as the values ai at those locations. Bob then checks whether they have the same bits in
+those positions. If the fraction of errors is significantly higher than the error rate induced by
+the natural noise in the channel, then they suspect some eavesdropper was tampering with
+the channel, and they abort.
+
+5. If the test is passed, then they discard the n/4 test-bits, and have roughly n/4 bits left in their
+shared string. This is called the “raw key.” Now they do some classical postprocessing on the
+raw key: “information reconciliation” to ensure they end up with exactly the same shared
+string, and “privacy amplification” to ensure that Eve has negligible information about that
+shared string.2
+
+The communication is n qubits in step 1, 2n bits in step 3, O(n) bits in step 4, and O(n) bits in
+step 5. So the required amount of communication is linear in the length of the shared secret key
+that Alice and Bob end up with.
+
+1Quantum key distribution might in fact better be called “quantum eavesdropper detection.” There is another
+important assumption underlying BB84 that should be made explicit: we assume that the classical channel used in
+steps 3–5 is “authenticated,” meaning that Alice and Bob know they are talking to each other, and Eve can listen
+but not change the bits sent over the classical channel (in contrast to the qubits sent during step 1 of the protocol,
+which Eve is allowed to manipulate in any way she wants). One can authenticate a classical communication channel
+by using some shared secret key; if this is used, then one may think of QKD as something that allows to grow an
+initial shared secret key, rather than as something that conjures up a shared random key out of nothing.
+2This can be done for instance by something called the “leftover hash lemma.”
+
+156
+
+
+===== PDF PAGE 169 =====
+
+It’s quite hard to formally prove that this protocol yields (with high probability) a shared key
+about which Eve has negligible information. In fact it took more than 12 years before BB84 was
+finally proven secure [198, 185]. The main reason it works is that when the qubits that encode
+a1, . . . , an are going over the public channel, Eve doesn’t know yet in which bases b1, . . . , bn these
+are encoded (she will learn the bi later from tapping the classical communication in step 3, but
+at that point this information is not of much use to her anymore). She could try to get as much
+information as she can about a1, . . . , an by some measurement, but there’s an information-vs-
+disturbance tradeoff : the more information Eve learns about a1, . . . , an by measuring the qubits,
+the more she will disturb the state, and the more likely it is that Alice and Bob will detect her
+presence in step 4.
+We won’t go into the full proof details here, just illustrate the information-disturbance tradeoff
+for the case where Eve individually attacks the qubits encoding each bit in step 1 of the protocol.3
+
+In Fig. 18.1 we give the four possible states for one BB84-qubit. If Alice wants to send ai = 0,
+then she sends a uniform mixture of |0⟩and |+⟩across the channel; if Alice wants to send ai = 1
+she sends a uniform mixture of |1⟩and |−⟩. Suppose Eve tries to learn ai from the qubit on the
+channel. The best way for her to do this is to measure in the orthonormal basis corresponding to
+state cos(π/8)|0⟩+ sin(π/8)|1⟩and −sin(π/8)|0⟩+ cos(π/8)|1⟩. Note that the first state is halfway
+between the two encodings of 0, and the second state is halfway between the two encodings of 1
+(remember that |−⟩and −|−⟩are physically indistinguishable because they only differ by a global
+phase). This will give her the value of ai with probability cos(π/8)2 ≈0.85 (remember the 2-to-1
+quantum random access code from Exercise 2 of Chapter 15). However, this measurement will
+change the state of the qubit by an angle of at least π/8, so if Bob now measures the qubit he
+receives in the same basis as Alice, then his probability of recovering the incorrect value of ai is
+at least sin(π/8)2 ≈0.15 (if Bob measured in a different basis than Alice, then the result will be
+discarded anyway). If this i is among the test-bits Alice and Bob use in step 4 of the protocol
+(which happens with probability 1/2), then they will detect an error. Eve can of course try a less
+disturbing measurement to reduce the probability of being detected, but such a measurement will
+also have lower probability of telling her ai.
+
+|0⟩
+
+|1⟩
+
+|+⟩
+
+|−⟩
+
+✻
+
+✲
+
+✒
+
+❘
+
+Figure 18.1: The four possible states in BB84 encoding: |0⟩and |+⟩are two different encodings
+of 0, and |1⟩and |−⟩are two different encodings of 1.
+
+3The more complicated situation where Eve does an n-qubit measurement on all qubits of step 1 simultaneously
+can be reduced to the case of individual-qubit measurements by something called the quantum De Finetti theorem,
+but we won’t go into the details here.
+
+157
+
+
+===== PDF PAGE 170 =====
+
+18.3
+Reduced density matrices and the Schmidt decomposition
+
+Suppose Alice and Bob share some pure state |ϕ⟩. If this state is entangled, it cannot be written
+as a tensor product |ϕA⟩⊗|ϕB⟩of separate pure states for Alice and Bob. Still, there is a way to
+describe Alice’s local state as a mixed state, by tracing out Bob’s part. Formally, if C ⊗D is a
+tensor product matrix then TrB(C ⊗D) = C ·Tr(D). By extending this linearly to matrices that are
+not of product form, the operation TrB is well-defined on all mixed states. Note that TrB removes
+Bob’s part of the state, leaving just Alice’s part of the state. If ρAB is some bipartite state (mixed
+or pure, entangled or not), then ρA = TrB(ρAB) is Alice’s local density matrix. This describes all
+the information she has. For example, for an EPR-pair |ϕ⟩=
+1
+√
+
+2(|00⟩+ |11⟩), the corresponding
+density matrix is
+
+ρAB
+=
+1
+2(|00⟩⟨00| + |00⟩⟨11| + |11⟩⟨00| + |11⟩⟨11|)
+
+=
+1
+2(|0⟩⟨0| ⊗|0⟩⟨0| + |0⟩⟨1| ⊗|0⟩⟨1| + |1⟩⟨0| ⊗|1⟩⟨0| + |1⟩⟨1| ⊗|1⟩⟨1|),
+
+and since Tr(|a⟩⟨b|) = 1 if a = b and Tr(|a⟩⟨b|) = 0 if |a⟩and |b⟩are orthogonal, we have
+
+ρA = TrB(ρAB) = 1
+
+2(|0⟩⟨0| + |1⟩⟨1|).
+
+In other words, Alice’s local state is the same as a random coin flip! Similarly we can compute Bob’s
+local state by tracing out Alice’s part of the space: ρB = TrA(ρAB). Note that the original 2-qubit
+density matrix ρAB is not equal to ρA ⊗ρB, because the tracing-out operation has “removed” the
+entanglement between the two qubits.
+The Schmidt decomposition is a very useful way to write bipartite pure states, and allows us to
+easily calculate the local density matrices of Alice and Bob. It says the following: for every bipartite
+pure state |ϕ⟩there is a unique integer d (called the Schmidt rank of |ϕ⟩), an orthonormal set of
+states |a1⟩, . . . , |ad⟩for Alice’s space, an orthonormal set of states |b1⟩, . . . , |bd⟩for Bob’s space, and
+positive reals λ1, . . . , λd whose squares sum to 1, such that
+
+|ϕ⟩=
+
+d
+�
+
+i=1
+λi|ai⟩|bi⟩.
+(18.1)
+
+For example, an EPR-pair has Schmidt coefficients λ1 = λ2 = 1/
+√
+
+2 and hence has Schmidt rank 2.
+The Schmidt rank and the Schmidt coefficients of a state |ϕ⟩are unique, but there is some freedom
+in the choice of bases if the λj are not all distinct. For example
+
+1
+√
+
+2(|00⟩+ |11⟩) =
+1
+√
+
+2(| + +⟩+ | −−⟩)
+
+are two distinct Schmidt decompositions of the EPR-pair.
+The existence of the Schmidt decomposition is shown as follows. Let ρA = TrB(|ϕ⟩⟨ϕ|) be Alice’s
+local density matrix. This is Hermitian, so it has a spectral decomposition ρA = �d
+i=1 µi|ai⟩⟨ai|
+with orthonormal eigenvectors |ai⟩and positive real eigenvalues µi. Note that d is the rank of ρA,
+and �
+i µi = Tr(ρA) = 1. Then there are cij such that
+
+|ϕ⟩=
+
+d
+�
+
+i=1
+
+D
+�
+
+j=1
+
+√µicij|ai⟩|j⟩,
+
+158
+

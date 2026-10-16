@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "28",
+  "round": 0,
+  "reviewed_items": [
+    "thm-qa-binary-field-f2-is-a-field",
+    "def-qa-binary-vector-space",
+    "alg-qa-f2-gaussian-elimination",
+    "lem-qa-computational-basis-measurement-law",
+    "def-qa-simon-promise",
+    "lem-qa-simon-annihilator-subspace-basis",
+    "alg-qa-simon-one-sample",
+    "def-qa-simon-random-instance-distribution",
+    "thm-qa-simon-postquery-coset-state",
+    "thm-qa-f2-gaussian-elimination-correct-and-cost",
+    "thm-qa-simon-classical-randomized-query-lower-bound",
+    "thm-qa-simon-hadamard-sampling-law",
+    "def-qa-simon-rank-process",
+    "thm-qa-simon-rank-growth-probability",
+    "alg-qa-simon-recovery-with-budget",
+    "thm-qa-simon-recovery-correctness-and-query-bound",
+    "ex-qa-simon-finite-rank-and-sampling"
+  ],
+  "reviewed_pages": [
+    "simon-algorithm-and-finite-field-recovery",
+    "simon-algorithm-and-finite-field-recovery-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch and direct-supplier review found the approved QA04 scope preserved and no unresolved outside prerequisite gap. Request one local repair for the proof and definition clarifications below.",
+  "findings": [
+    {
+      "id": "def-qa-binary-vector-space",
+      "type": "local",
+      "reason": "The verification establishes independence of the full ordered list, while the basis supplier defines independence of a set by quantifying over every injective finite list into it. Add the coordinate argument for arbitrary such lists, including the empty case, before concluding the standard basis has dimension n."
+    },
+    {
+      "id": "def-qa-simon-rank-process",
+      "type": "local",
+      "reason": "The Definition starts with d=n−1 without binding the Simon oracle parameters, and updates V using V_k+span{y} without defining subspace addition. Bind n≥1, m≥n−1 and the fixed promised oracle; define the update explicitly, for example as span(V_k∪{y}). Check all affected consumers listed below."
+    },
+    {
+      "id": "thm-qa-simon-rank-growth-probability",
+      "type": "local",
+      "reason": "Steps 3.1–4.1 use W_k and W_{k,M} without defining them. Define the first-r-failures event and the truncated waiting count on a finite prefix experiment, so the probability and expectation claims do not rely on an undefined variable or an infinite-history probability space."
+    },
+    {
+      "id": "thm-qa-simon-recovery-correctness-and-query-bound",
+      "type": "local",
+      "reason": "Step 1.2 uses separate sample blocks for rank stages but does not establish that this block experiment has the actual process's stopping-time law. Justify that equivalence from fresh independent samples and rank-dependent rise probabilities, or derive the tail directly from the finite-prefix bound E[T_R]≤2d and E[T_R]≥R·Pr(T>R)."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qa-simon-rank-growth-probability",
+      "decision": "repair",
+      "reason": "Directly uses the rank-process Definition and also needs the finite-prefix waiting-variable clarification in the findings."
+    },
+    {
+      "id": "alg-qa-simon-recovery-with-budget",
+      "decision": "accept",
+      "reason": "Its capped row-basis procedure is consistent with the rank-increase process and the promised-oracle parameters; the Definition clarification does not change its algorithm."
+    },
+    {
+      "id": "thm-qa-simon-recovery-correctness-and-query-bound",
+      "decision": "repair",
+      "reason": "Its rank-process and rank-growth uses are consistent, and its separate finite-prefix tail argument needs the repair described in the findings."
+    },
+    {
+      "id": "ex-qa-simon-finite-rank-and-sampling",
+      "decision": "accept",
+      "reason": "The n=1 and n=2 calculations use the same rank-increase and sample laws and remain valid under the explicit process definition."
+    },
+    {
+      "id": "simon-algorithm-and-finite-field-recovery",
+      "decision": "accept",
+      "reason": "The A-page summary's rank-growth and recovery claims remain unchanged under the clarified process definition."
+    },
+    {
+      "id": "simon-algorithm-and-finite-field-recovery-examples",
+      "decision": "accept",
+      "reason": "The B-page summary's finite rank and sampling claims remain unchanged under the clarified process definition."
+    }
+  ]
+}

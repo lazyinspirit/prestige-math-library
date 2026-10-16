@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-vector-operations-are-continuous-in-a-normed-space.json
 id: lem-vector-operations-are-continuous-in-a-normed-space
 kind: lemma
 title: "Vector addition and scalar multiplication are continuous in a normed space"
@@ -7,18 +9,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [rem-real-and-complex-normed-space-convention,
-       lem-reverse-triangle-inequality-in-a-normed-space,
-       def-continuous-map-top, def-product-topology,
-       lem-real-line-is-a-metric-space,
-       thm-complex-numbers-are-the-real-coordinate-plane]
+deps: [def-complex-norm-and-complex-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, def-continuous-map-top, def-product-topology, lem-real-line-is-a-metric-space, thm-complex-numbers-are-the-real-coordinate-plane, def-norm-and-normed-space, lem-complex-norm-realification-is-a-real-norm]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -46,7 +41,7 @@ the target.
 
 **Given:** Scalars $\lambda,\alpha\in\mathbb{K}$ and vectors $x,y,h,k\in V$.
 
-[L1] The scalar field on this page is either $\mathbb{R}$ with its usual absolute value or $\mathbb{C}$ with its modulus, and the same norm estimates are valid in both cases ([[rem-real-and-complex-normed-space-convention]]).
+[L1] The scalar field on this page is either $\mathbb{R}$ with its usual absolute value or $\mathbb{C}$ with its modulus, and the same norm estimates are valid in both cases ([[def-norm-and-normed-space]], [[def-complex-norm-and-complex-normed-space]]). The norm topology is that of $d(x,y)=\|x-y\|$; in the complex case this is the same metric after realification ([[lem-complex-norm-realification-is-a-real-norm]]).
 
 [L2] The norm is $1$-Lipschitz for its metric, so in particular $\|u+v\|\le \|u\|+\|v\|$ for all vectors and $\bigl|\|u\|-\|v\|\bigr|\le \|u-v\|$ ([[lem-reverse-triangle-inequality-in-a-normed-space]]).
 

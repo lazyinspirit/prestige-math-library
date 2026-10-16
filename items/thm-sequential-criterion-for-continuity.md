@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-hopf-hecke-75-2026-10-15-owner/published-repairs/thm-sequential-criterion-for-continuity.json
 id: thm-sequential-criterion-for-continuity
 kind: theorem
 title: "$f$ is continuous at $c \\in A$ if and only if $f(x_k) \\to f(c)$ for every sequence in $A$ converging to $c$, the converse direction costing countable choice"
@@ -7,21 +9,13 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-continuity-real, thm-sequential-criterion-for-function-limits, rem-heine-criterion-choice-cost, def-countable-choice, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-sequence, def-real-limit, lem-rat-embeds-dense, lem-of-abs-value]
+deps: [def-continuity-real, thm-sequential-criterion-for-function-limits, def-countable-choice, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-sequence, def-real-limit, lem-rat-embeds-dense, lem-of-abs-value]
 justified_by: []
 aliases: [thm-heine-criterion-for-continuity]
 forward_refs: [cex-dirichlet-is-nowhere-continuous]
 landmark: true
 short: "sequential criterion for continuity"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -54,9 +48,8 @@ proved in ZF: the sequence is handed to the proof and nothing is selected. The
 implication from 2 to 1 is obtained below from
 [[thm-sequential-criterion-for-function-limits]], and therefore inherits the one
 use of the axiom of countable choice ([[def-countable-choice]]) made in that
-theorem's converse direction. What this library does and does not claim about
-that cost is recorded once, in [[rem-heine-criterion-choice-cost]], and is not
-restated here.
+theorem's converse direction. This is a statement about the proof given here,
+not a claim that countable choice is necessary.
 
 **Nothing else on this page is routed through this theorem.** The algebra of
 continuous functions, composition, the intermediate value theorem, the extreme

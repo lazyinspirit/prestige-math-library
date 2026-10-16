@@ -1,0 +1,2391 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-15-continuous-markov-derivative-bound",
+    "lem-qa-15-grid-return-derivative",
+    "lem-qa-15-discrete-markov-ehlich-zeller",
+    "def-qa-15-bit-oracle-query-model",
+    "def-qa-15-acceptance-polynomial",
+    "def-qa-15-bit-oracle-query-complexity",
+    "lem-qa-15-branch-density-degree",
+    "lem-qa-15-query-amplitude-degree",
+    "lem-qa-15-symmetrization",
+    "prop-qa-15-promise-domain-scope",
+    "thm-qa-15-acceptance-degree-bound",
+    "thm-qa-15-exact-degree-or",
+    "thm-qa-15-or-approximate-degree-lower-bound",
+    "thm-qa-15-parity-approximate-degree",
+    "ex-qa-15-or-polynomial-small-n",
+    "cex-qa-15-off-cube-values-are-unconstrained"
+  ],
+  "contracts": {
+    "lem-qa-15-continuous-markov-derivative-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(X)=\\sum_{k=0}^{n}a_kX^k$. The list, rather than the function it induces, is the polynomial object. Its **evaluation** at $x\\in\\mathbb R$ is the real number $p(x):=\\sum_{k=0}^{n}a_kx^k$.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Thus degree and leading coefficient are defined from the displayed finite list, without asserting that distinct formal polynomials define distinct functions. The conventions for finite sums and integer powers used in the evaluation are recorded in [[def-finite-sum]], [[def-integer-power]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-formal-derivative-of-a-polynomial",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $f=\\sum_{i\\ge0}a_i x^i\\in R[x]$. Its **formal derivative** is\n\n$$ f':=\\sum_{i\\ge1} i a_i x^{i-1}. $$\n\nHere $i a_i$ means the sum of $i$ copies of $a_i$ in the additive group of $R$. Equivalently, the coefficient of $x^n$ in $f'$ is $(n+1)a_{n+1}$. The sequence defining $f'$ has finite support because the coefficient sequence of $f$ does ([[def-polynomial-ring-over-a-commutative-ring]]). This is an algebraic operation and does not use a limit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-chebyshev-polynomials-first-and-second-kind",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal P_{\\mathbb R}$ be the set of formal real polynomials of\n[[def-real-polynomial-degree-leading-coefficient-and-monic]]. Associate to every\n$P\\in\\mathcal P_{\\mathbb R}$ an eventually zero coefficient sequence $(p_k)$:\nuse its displayed finite coefficient list and extend it by zeros when $P\\ne0$,\nand put $p_k=0$ for every $k$ when $P=0$. Do the same for $Q$, with coefficients\n$(q_k)$. Define $P+Q$ coefficientwise and define $PQ$ by the convolution\ncoefficients\n$$ (P+Q)_k=p_k+q_k,\\qquad (PQ)_k=\\sum_{j=0}^{k}p_jq_{k-j}. $$\nusing the real finite sum of [[def-finite-sum]]. In either construction, discard\ntrailing zero coefficients; if every coefficient is zero, the result is the zero\npolynomial. Scalar multiplication and subtraction are the corresponding\ncoefficientwise operations. Thus these formulas define operations on the formal\ncoefficient-list objects, independently of evaluation.\n\nWrite $1=(1)$ and $X=(0,1)$, and define\n$$ \\Phi(P,Q):=(Q,2XQ-P)\\qquad(P,Q\\in\\mathcal P_{\\mathbb R}). $$\nApply [[thm-recursion]] to the set\n$\\mathcal P_{\\mathbb R}\\times\\mathcal P_{\\mathbb R}$, first with initial value\n$(1,X)$ and then with initial value $(1,2X)$, always using the function $\\Phi$.\nThis gives unique pair sequences $H^T,H^U$. Define $T_n$ and $U_n$ to be the\nfirst coordinates of $H^T_n$ and $H^U_n$, respectively. Since the first\ncoordinate of $\\Phi(P,Q)$ is $Q$, the second coordinate of $H^T_n$ is\n$T_{n+1}$ and the second coordinate of $H^U_n$ is $U_{n+1}$. Consequently\n$$ T_0=1,\\quad T_1=X,\\quad T_{n+2}=2XT_{n+1}-T_n, $$\n$$ U_0=1,\\quad U_1=2X,\\quad U_{n+2}=2XU_{n+1}-U_n $$\nfor every $n\\in\\mathbb N$. These unique sequences are the **Chebyshev\npolynomials of the first and second kinds**.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-chebyshev-degree-leading-coefficients-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $T_n$ has degree $n$ and leading coefficient $2^{n-1}$, while $U_n$ has degree $n$ and leading coefficient $2^n$. The conventions and prerequisite facts used below are recorded in [[def-chebyshev-polynomials-first-and-second-kind]], [[thm-induction-principle]], [[def-integer-power]].",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chebyshev-multiple-angle-identities",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$ and real $\\theta$,\n$$T_n(\\cos\\theta)=\\cos(n\\theta),\\qquad U_n(\\cos\\theta)\\sin\\theta=\\sin((n+1)\\theta).$$ In particular, for $n\\ge1$ and $0\\le j\\le n$, $T_n(\\cos(j\\pi/n))=(-1)^j$. The conventions and prerequisite facts used below are recorded in [[def-chebyshev-polynomials-first-and-second-kind]], [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-induction-principle]].",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cofunction-supplementary-and-reflection-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(\\pi/2-x)=\\cos x,\\quad \\cos(\\pi/2-x)=\\sin x,\\quad \\sin(\\pi-x)=\\sin x,\\quad \\cos(\\pi-x)=-\\cos x,$$\nand the quarter-turn and reflection formulas are\n$$\\sin(x+\\pi/2)=\\cos x,\\quad \\cos(x+\\pi/2)=-\\sin x,\\quad \\sin(-x)=-\\sin x,\\quad \\cos(-x)=\\cos x.$$\nOn the common natural domains of the two sides,\n$$\\tan(\\pi/2-x)=\\cot x,\\quad \\cot(\\pi/2-x)=\\tan x,\\quad \\sec(\\pi/2-x)=\\csc x,\\quad \\csc(\\pi/2-x)=\\sec x,$$\nand\n$$\\tan(\\pi-x)=-\\tan x,\\quad \\cot(\\pi-x)=-\\cot x,\\quad \\sec(\\pi-x)=-\\sec x,\\quad \\csc(\\pi-x)=\\csc x.$$\nThe conventions and prerequisite facts used below are recorded in [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[thm-quarter-turn-values-and-shift-formulas]], [[thm-sine-and-cosine-addition-formulas]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-real-polynomial-factor-at-a-root",
+          "source_section": "Statement",
+          "quote": "If $p(x)=\\sum_{k<n}a_kx^k$ and $p(a)=0$, then there is a real polynomial $q$ with $p(x)=(x-a)q(x)$ for every real $x$. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-power-difference-factorisation]], [[lem-finite-sum-laws]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\sin ^2x+\\cos ^2x=1$, $\\sin(-x)=-\\sin x$, and $\\cos(-x)=\\cos x$. Wherever the displayed quotients are defined, $\\tan(-x)=-\\tan x$, $\\cot(-x)=-\\cot x$, $\\sec(-x)=\\sec x$, $\\csc(-x)=-\\csc x$, $1+\\tan^2x=\\sec^2x$, and $1+\\cot^2x=\\csc^2x$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $p$ and each polynomial $r$ below are finite real polynomials; [F2] and [F9] make $p,p'$ continuous and attain their extrema on $[-1,1]$. For any such $r$, $S_r(\\theta):=\\sin\\theta\\,r(\\cos\\theta)$ is continuous by [F6], [F9], and [F10], and is $2\\pi$-periodic by [F15]; hence [F9] gives a maximum of $|S_r|$ on $[0,2\\pi]$. If $d=0$ or $p=0$, then $p'=0$ and $h=0$; assume $d\\ge1$. For $j=1,\\ldots,d$, put $\\theta_j=(2j-1)\\pi/(2d)$ and $x_j=\\cos\\theta_j$. By [F4], $T_d(x_j)=\\cos(d\\theta_j)=0$. Monotonicity and reflection in [F5] show $x_1>\\cdots>x_d$ in $(-1,1)$ and $x_d=-x_1$. Also [F5] gives $\\sin\\theta_j>0$. Since $d\\theta_j=(j-1)\\pi+\\pi/2$, repeated use of the shift-by-$\\pi$ identity in [F5], with finite induction [F13], gives $\\sin(d\\theta_j)=(-1)^{j-1}$. The chain rule [F6] applied to [F4] now gives $T_d'(x_j)=d\\sin(d\\theta_j)/\\sin\\theta_j=d(-1)^{j-1}/\\sin\\theta_j\\ne0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F13",
+            "F15"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix any polynomial $r$ supported in degrees at most $d-1$. For $x\\in[-x_1,x_1]$, choose $\\theta\\in[0,\\pi]$ with $x=\\cos\\theta$. Monotonicity and reflection in [F5] imply $\\pi/(2d)\\le\\theta\\le\\pi-\\pi/(2d)$, so $\\sin\\theta\\ge\\sin(\\pi/(2d))$. For every positive integer $n$, $|\\sin(n\\phi)|\\le n|\\sin\\phi|$: equality holds for $n=1$; the sine addition formula [F8] and $|\\sin|,|\\cos|\\le1$ from [F5] give $|\\sin((n+1)\\phi)|\\le|\\sin(n\\phi)|+|\\sin\\phi|$, so induction [F13] proves the claim. At $\\phi=\\pi/(2d)$ this yields $1=|\\sin(d\\phi)|\\le d\\sin\\phi$, hence $\\sin(\\pi/(2d))\\ge1/d$. Therefore $|r(x)|\\le d|\\sin\\theta\\,r(\\cos\\theta)|\\le d\\max_{\\eta\\in[0,2\\pi]}|S_r(\\eta)|$ throughout this central interval.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F5",
+            "F8",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the factor theorem [F7] and $T_d(x_j)=0$ from step 1.1, each quotient $T_d(X)/(X-x_j)$ is a polynomial of degree $d-1$, so the Lagrange polynomials $L_j(X):=T_d(X)/((X-x_j)T_d'(x_j))$ have degree at most $d-1$. At $x_i$ with $i\\ne j$, $L_j(x_i)=0$; at $x_j$, factorization $T_d(X)=(X-x_j)s_j(X)$ and product rule [F11] give $s_j(x_j)=T_d'(x_j)$, so $L_j(x_j)=1$. Thus every $r$ as in step 2.1 satisfies $r(X)=\\sum_{j=1}^d r(x_j)L_j(X)$, since the difference has degree at most $d-1$ and $d$ distinct roots, hence vanishes by [F7]. Repeated factorization by [F7] gives $T_d(X)=c\\prod_j(X-x_j)$ with $c\\ne0$ (degree $d$ by [F3]); repeated product rule gives $T_d'(X)=c\\sum_j\\prod_{k\\ne j}(X-x_k)$. Therefore the polynomial $\\sum_j T_d(X)/(X-x_j)-T_d'(X)$ vanishes for every $X$ away from the nodes, an infinite set, so it is zero by the root bound [F7]. Substituting $1/T_d'(x_j)=(-1)^{j-1}\\sin\\theta_j/d$ from step 1.1 gives $r(X)=\\frac1d\\sum_{j=1}^d(-1)^{j-1}\\sin\\theta_j\\,r(x_j)\\frac{T_d(X)}{X-x_j}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "F3",
+            "F7",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $W:=\\max_{\\eta\\in[0,2\\pi]}|S_r(\\eta)|$. At each node, $\\sin\\theta_j|r(x_j)|=|S_r(\\theta_j)|\\le W$. For $x\\in(x_1,1]$, all $x-x_j>0$, and the interpolation formula of step 3.1 gives $|r(x)|\\le(W/d)|T_d(x)|\\sum_j1/(x-x_j)=(W/d)|T_d'(x)|$. For $x\\in[-1,-x_1)$ all denominators are negative, so the summands $T_d(x)/(x-x_j)$ have a common sign and their absolute values sum to $|T_d'(x)|$; the same interpolation and node bounds give $|r(x)|\\le(W/d)|T_d'(x)|$. For interior $x=\\cos\\theta$, $0<\\theta<\\pi$, differentiating [F4] by [F6] gives $|T_d'(x)|=d|\\sin(d\\theta)|/\\sin\\theta\\le d^2$ by the sine estimate of step 2.1. Continuity extends this bound to the outer endpoints; the central boundary nodes are covered by step 2.1. Hence $|r(x)|\\le dW$ on the outer intervals. Combining this with step 2.1 proves $\\|r\\|_{[-1,1]}\\le d\\max_{\\eta\\in[0,2\\pi]}|S_r(\\eta)|$ on all of $[-1,1]$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "F2",
+            "F4",
+            "F6",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For continuous $g$ on $[-1,1]$ write $\\|g\\|:=\\max_{[-1,1]}|g|$; for continuous $2\\pi$-periodic $S$ write $\\|S\\|_{\\rm trig}:=\\max_{[0,2\\pi]}|S|$. Let $S$ be a real trigonometric polynomial of degree at most $d$, meaning a finite real linear combination of $1,\\cos(k\\theta),\\sin(k\\theta)$ for $1\\le k\\le d$. Its sine and cosine terms and their derivatives are continuous by [F6] and [F10], and are $2\\pi$-periodic by [F15], so all maxima just defined, including that of $|S'|$, exist by [F9]. For fixed $\\alpha$, $F_\\alpha(\\theta):=(S(\\alpha+\\theta)-S(\\alpha-\\theta))/2$ is a linear combination of $\\sin(k\\theta)$: the constant term cancels, each cosine term contributes $-\\sin(k\\alpha)\\sin(k\\theta)$, and each sine term contributes $\\cos(k\\alpha)\\sin(k\\theta)$ by the addition formulas [F8] and parity [F14]. By [F4], $\\sin(k\\theta)=\\sin\\theta\\,U_{k-1}(\\cos\\theta)$, so $F_\\alpha(\\theta)=\\sin\\theta\\,r(\\cos\\theta)$ for a polynomial $r$ supported in degrees at most $d-1$ by [F3]. By the chain rule [F6], differentiating the centered difference at $0$ gives $F_\\alpha'(0)=(S'(\\alpha)+S'(\\alpha))/2=S'(\\alpha)$. Differentiating the factorization using polynomial differentiability [F2], [F6], and [F11] gives $F_\\alpha'(0)=r(1)$, because $\\sin0=0$ and $\\cos0=1$ by [F6]. Thus $S'(\\alpha)=r(1)$. By steps 2.1 and 4.1, $|r(1)|\\le\\|r\\|\\le d\\|F_\\alpha\\|_{\\rm trig}$. Also $\\|F_\\alpha\\|_{\\rm trig}\\le\\|S\\|_{\\rm trig}$ by [F12], since $F_\\alpha$ is the half-difference of two values of $S$. As this holds for every $\\alpha$, $\\|S'\\|_{\\rm trig}\\le d\\|S\\|_{\\rm trig}$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 4.1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F14",
+            "F15"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Put $S(\\theta):=p(\\cos\\theta)$. Applying [F8] at $(u,v)$ and $(u,-v)$ and using [F14] gives $\\cos u\\cos v=(\\cos(u+v)+\\cos(u-v))/2$. Induction now gives that each power $\\cos^k\\theta$ is a linear combination of $\\cos(j\\theta)$ for $0\\le j\\le k$: multiplying a term $\\cos(j\\theta)$ by $\\cos\\theta$ gives frequencies $j+1$ and $j-1$ when $j\\ge1$, while the constant term gives $\\cos\\theta$. Thus $S$ is a real trigonometric polynomial of degree at most $d$. Cosine decreases from $1$ to $-1$ on $[0,\\pi]$ by [F5] and its endpoint values [F6], [F5], so its range on $[0,2\\pi]$ is $[-1,1]$; with [F15] this gives $\\|S\\|_{\\rm trig}=\\|p\\|$. The chain rule [F6] and polynomial differentiability [F2] give $S'(\\theta)=-\\sin\\theta\\,p'(\\cos\\theta)$, so step 5.1 gives $\\max_{\\theta\\in[0,2\\pi]}|\\sin\\theta\\,p'(\\cos\\theta)|\\le d\\|p\\|$. Applying the inequality proved in steps 2.1 and 4.1 to $r=p'$, whose degree is at most $d-1$ by [F2], yields $\\|p'\\|\\le d\\max_{\\theta\\in[0,2\\pi]}|\\sin\\theta\\,p'(\\cos\\theta)|\\le d^2\\|p\\|$. Finally, let $M=\\max p$ and $m=\\min p$, attained by [F9], and apply this derivative bound to $p-(M+m)/2$. Its range height is $h$ and its supremum norm is $h/2$, while its derivative is $p'$. Thus $\\max|p'|\\le d^2h/2$, as claimed.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F14",
+            "F15",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed interval [-1,1] is nonempty; no empty-domain case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial and d=0 cases are handled in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The d=1 case is included in the node and induction arguments in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant and zero polynomials are handled in step 1.1; extrema and range height are addressed in step 6.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Outer endpoint limits are extended by continuity in step 4.1; central boundary nodes are covered in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Nodes and sums are finite and interval maxima are attained; see steps 1.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an inequality, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is an inequality, not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "d=0",
+          "calculation": "For constant p, h=0 and D=0, so D=d²h/2."
+        },
+        {
+          "case": "d=1",
+          "calculation": "For p(x)=x on [-1,1], h=2 and max|p′|=1=d²h/2."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "lem-qa-15-grid-return-derivative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(X)=\\sum_{k=0}^{n}a_kX^k$. The list, rather than the function it induces, is the polynomial object. Its **evaluation** at $x\\in\\mathbb R$ is the real number $p(x):=\\sum_{k=0}^{n}a_kx^k$.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Thus degree and leading coefficient are defined from the displayed finite list, without asserting that distinct formal polynomials define distinct functions. The conventions for finite sums and integer powers used in the evaluation are recorded in [[def-finite-sum]], [[def-integer-power]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1]–[F3], both $q$ and $|q'|$ are continuous on the compact interval $[0,N]$. Thus there exist $u,v\\in[0,N]$ with $q(u)=\\max q=:M$, $q(v)=\\min q=:m$, and $D=\\max|q'|$. In particular $h=M-m\\ge0$ and $D\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any $x\\in[0,N]$, some grid integer $k\\in\\{0,\\ldots,N\\}$ satisfies $|x-k|\\le1/2$ (choose a nearest integer, with an endpoint grid point at either boundary). Applying [F4] on the interval between $x$ and $k$ when they differ gives $|q(x)-q(k)|\\le D|x-k|\\le D/2$; equality of the points gives the same inequality directly.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $h\\le1$, then $\\max\\{0,h-1\\}=0\\le D$. It remains to consider $h>1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply step 1.2 at a maximizer $u$ and a minimizer $v$. The grid bounds give $M\\le1+D/2$ and $m\\ge-D/2$, so $h=M-m\\le1+D$. Rearranging yields $D\\ge h-1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints or boundary layer are included. See step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=1, q(t)=t",
+          "calculation": "Grid values are 0,1; h=1, D=1, and D≥max(0,h−1)=0."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "lem-qa-15-discrete-markov-ehlich-zeller": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-15-continuous-markov-derivative-bound",
+          "source_section": "Statement",
+          "quote": "If $p$ is a real polynomial with no supported monomial of degree greater than $d\\in\\mathbb N_0$, and $h:=\\max_{[-1,1]}p-\\min_{[-1,1]}p$, then\n$$\\max_{[-1,1]}|p'|\\le \\frac{d^2h}{2}.$$\nThe zero polynomial is allowed under the support-degree convention.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-15-grid-return-derivative",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ be an integer and let $q$ be a real polynomial. On $[0,N]$, set\n$$h:=\\max q-\\min q,\\qquad D:=\\max |q'|.$$\nIf $0\\le q(k)\\le1$ for every integer $k=0,\\ldots,N$, then\n$$D\\ge \\max\\{0,h-1\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The polynomial functions $q,q'$ are continuous and attain extrema on $[0,N]$ by [F3], so $h,D$ are defined. Put $p(u):=q(N(u+1)/2)$ for $u\\in[-1,1]$. It has no supported monomial above degree $d$ and the same range height $h$ as $q$ on $[0,N]$. By the chain rule in [F3], $p'(u)=(N/2)q'(N(u+1)/2)$, hence $\\max|p'|=(N/2)D$. Applying [F1] gives $(N/2)D\\le(d^2/2)h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $N>0$, multiplying the inequality of step 1.1 by $2/N$ yields $D\\le d^2h/N$. The grid-return estimate [F2] is compatible with this bound and gives the additional consequence $h\\le1+D$ that will be used in the OR lower-bound proof.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints or boundary layer are included. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=1, d=1, q(t)=t",
+          "calculation": "h=1 and D=1, so D≤d²h/N is equality."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "def-qa-15-bit-oracle-query-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The oracle-only algorithm is defined independently of the promise D; for empty D the success condition is vacuous and the function-minimum cost is 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "N=0 has the singleton empty address with identically zero oracle; no query is needed to compute a Boolean function on its at-most-singleton promise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "N=1 permits one one-hot address; reading its bit gives an exact one-query solver."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant functions and empty promises allow zero-query solvers with fixed accepting subsets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition uses finite data and no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance. The QA15 oracle-only specialization and its function-level minimum are explicit; no identification with unrestricted direct-input QA01 costs is asserted."
+    },
+    "def-qa-15-acceptance-polynomial": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement assumes a positive parameter or makes no zero-size claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-coordinate or one-query parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate case is part of this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition uses finite data and no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=1, D={0,1}",
+          "calculation": "δ_0=1−X and δ_1=X, so the point-indicator extension interpolates either Boolean function exactly."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "def-qa-15-bit-oracle-query-complexity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The oracle-only algorithm is defined independently of the promise D; for empty D the success condition is vacuous and the function-minimum cost is 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "N=0 has the singleton empty address with identically zero oracle; no query is needed to compute a Boolean function on its at-most-singleton promise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "N=1 permits one one-hot address; reading its bit gives an exact one-query solver."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant functions and empty promises allow zero-query solvers with fixed accepting subsets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition uses finite data and no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance. The QA15 oracle-only specialization and its function-level minimum are explicit; no identification with unrestricted direct-input QA01 costs is asserted."
+    },
+    "lem-qa-15-branch-density-degree": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-bit-oracle-query-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge0$ and a promise domain $D\\subseteq\\{0,1\\}^N$ as in [[def-qa-task-and-promise-domain]]. For each full-cube input $x=(x_0,\\ldots,x_{N-1})$, define the total address function $g_x:\\{0,1\\}^N\\to\\{0,1\\}$ by $g_x(e_i)=x_i$ for the one-hot word $e_i$ ($0\\le i<N$), and $g_x(a)=0$ for every other address. If $N=0$, the address set has only the empty word and $g_x$ is identically zero. A **local bit-query algorithm** is a finite rooted execution tree on one fixed finite ordered register, starting in the all-zero computational-basis state $|0^m\\rangle$ for its fixed register length $m$. The tree topology and each node label are fixed independently of $x$. Each non-oracle node is either a fixed unitary or a fixed finite instrument, with its observed outcomes retained for later control; every such operation is independent of $x$. Each query node acts on a declared $N$-bit address register and a disjoint one-bit target register by the standard XOR oracle $U_{g_x}$ of [[def-qa-standard-bit-query]], tensored with the identity on all other wires. Every terminal node uses the same ordered output-wire tuple and the same fixed accepting subset $S\\subseteq\\{0,1\\}^r$, independent of $x$; the output law sums over all unmeasured labels and all terminal branch histories as in [[def-qa-finite-branch-output-law]].\n\nThe **query count of a branch** is the number of query nodes on its root-to-terminal path. The algorithm makes at most $T$ queries when every such path contains at most $T$ query nodes. A local bit-query algorithm has **no direct input access**: there is no input register containing $x$, no $x$-dependent non-oracle operation or initial state, and no $x$-dependent terminal predicate. Thus $x$ enters only through the stated bit oracle. This is the oracle-only specialization used for the QA15 polynomial-method results.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-finite-branch-output-law",
+          "source_section": "Definition",
+          "quote": "Fix an encoded input $x$ and a finite rooted execution tree on the same declared finite register $H_n$ at every node. Its root state is the density operator of the standard input basis state with zero-initialized work registers. Every nonterminal node is either a unitary endomorphism $U:H_n\\to H_n$ or a finite instrument $(\\mathcal I_a)_{a\\in\\Omega_h}$ whose branch maps are from $\\mathcal L(H_n)$ to $\\mathcal L(H_n)$. The observed outcome label $a$ is retained for classical feed-forward, while a hidden Kraus label is not a branch. The tree has finite depth and finite outcome sets.\n\nAssign the root weight $w(\\varnothing)=1$. At a unitary edge set $\\rho_{h'}=U\\rho_hU^\\dagger$ and $w(h')=w(h)$. At an instrument node set $q_{h,a}=\\operatorname{tr}(\\mathcal I_a(\\rho_h))$ and $w(ha)=w(h)q_{h,a}$. If $q_{h,a}>0$, set $\\rho_{ha}=\\mathcal I_a(\\rho_h)/q_{h,a}$; if $q_{h,a}=0$, that child and its descendants have weight zero and contribute no state or output weight. The instrument and conditional-state conventions are those of [[def-qc-instrument-and-conditional-state]].\n\nAt each positive-weight leaf $\\ell$, the ordered output wires have a fixed length $m$ and are disjoint from the remaining wires $W_\\ell$. For $z\\in\\{0,1\\}^m$ and a bit string $v$ on $W_\\ell$, let $e_{\\ell,z,v}$ be the full-register computational-basis vector with those bits in their declared wire positions. Define the leaf output weight and total output law by\n$$q_\\ell(z):=\\sum_{v\\in\\{0,1\\}^{|W_\\ell|}}\\langle \\rho_\\ell e_{\\ell,z,v},e_{\\ell,z,v}\\rangle_{\\rm root},\\qquad P(z\\mid x):=\\sum_{\\ell\\text{ positive-weight leaf}}w(\\ell)q_\\ell(z).$$\nThe classical output predicate $A_n(x,z)$ selects the acceptance event by summing $P(z\\mid x)$ over the finite set of accepted strings. This definition extends the terminal-output convention of [[def-qc-promise-computation-model]] to finite instrument branches; the verification proves that $P(\\cdot\\mid x)$ is a normalized probability law and every acceptance probability lies in $[0,1]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-standard-bit-query",
+          "source_section": "Definition",
+          "quote": "Let $a,b\\ge 0$ and let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be a total function. The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register. Here $\\oplus$ is componentwise addition modulo two, and words label the ordered computational basis as in [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]]. The address is unchanged. One invocation is one query under [[def-qa-promise-query-instance]]; its query cost is separate from elementary gate cost.\n\nThe map is an involution and is unitary by [[thm-qc-reversible-xor-oracle-unitary]]. No injectivity of $f$ is assumed.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-instrument-and-conditional-state",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex-inner-product space, let $K$ be a finite-dimensional complex-inner-product space, and let $\\Omega$ be a finite nonempty outcome set. A **finite instrument** from $H$ to $K$ is a family of complex-linear maps $\\mathcal I_a:\\mathcal L(H)\\to\\mathcal L(K)$, one for each $a\\in\\Omega$, such that each $\\mathcal I_a$ is completely positive ([[def-qc-completely-positive-map]]) and\n\n$$\\sum_{a\\in\\Omega}\\operatorname{tr}_K(\\mathcal I_a(X))=\\operatorname{tr}_H(X)\\qquad\\text{for every }X\\in\\mathcal L(H).$$\n\nFor a density operator $\\rho$ on $H$ (nonnegative with trace one, [[def-qc-density-operator]]), define the outcome weight $p_a(\\rho):=\\operatorname{tr}_K(\\mathcal I_a(\\rho))$. The **conditional state** for outcome $a$ is\n\n$$\\rho_a:=\\begin{cases}\\mathcal I_a(\\rho)/p_a(\\rho),&p_a(\\rho)>0,\\\\[2pt]\\bot,&p_a(\\rho)=0.\\end{cases}$$\n\nHere $\\bot$ is a symbol meaning that no conditional density operator is assigned; it is not a state. Positivity and normalization of the outcome weights, and density of every positive-probability conditional state, are proved in [[thm-qc-instrument-outcome-law-normalizes]] and [[thm-qc-instrument-conditional-state-is-density]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional complex inner-product spaces and write $\\mathcal L(H)$ and $\\mathcal L(K)$ for their vector spaces of complex-linear endomorphisms with pointwise operations ([[def-dimension]], [[def-real-and-complex-inner-product-space]], [[def-vector-space-of-linear-maps]], [[prop-linear-maps-form-a-vector-space]]). Let $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. For each integer $r\\ge1$, put $R=\\mathbb C^r$ with its standard ordered register basis ([[def-qc-register-and-computational-basis]]). Write an operator $X\\in\\mathcal L(H\\otimes R)$ in its unique $r\\times r$ block form $X=[X_{ij}]$ with $X_{ij}\\in\\mathcal L(H)$, and define $\\Phi^{(r)}(X)$ to have blocks $[\\Phi(X_{ij})]$ on $K\\otimes R$. Lemma [[lem-qc-finite-ancilla-amplification-is-block-map]] proves that this block rule defines a linear map on the full operator space for every finite $r$. For $r=1$, the extension is $\\Phi$ under the canonical unitary identifications $x\\mapsto x\\otimes e_0$ and $y\\mapsto y\\otimes e_0$ proved in that lemma.\n\nThe map $\\Phi$ is **completely positive** if, for every finite $r\\ge1$, $\\Phi^{(r)}$ sends every nonnegative operator on $H\\otimes R$ to a nonnegative operator on $K\\otimes R$ ([[def-non-negative-and-positive-operator]]). The quantifier includes $r=1$; complete positivity therefore implies positivity. No Kraus, Choi, or Stinespring characterization is part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At the root, the branch weight is one and the state is the fixed all-zero basis-state projector, so every entry of $\\sigma_\\varnothing$ is constant and has no supported monomial above degree zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Induction hypothesis: at a history $h$ with $t(h)$ queries, each entry of $\\sigma_h(x)$ has no supported monomial of degree greater than $2t(h)$.",
+          "step": "1.2",
+          "inputs": [
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a fixed unitary edge, multiplying the branch weight into the conditional-state update gives $\\sigma_{h'}=U\\sigma_hU^\\dagger$, a fixed linear map on entries, so the support degree does not increase and the query count remains $t(h)$. At instrument outcome $a$ of a positive-weight history, if $q_a>0$, then $\\sigma_{ha}=w_hq_a(\\mathcal I_a(\\rho_h)/q_a)=\\mathcal I_a(\\sigma_h)$. If $q_a=0$, [F6] makes $\\mathcal I_a(\\rho_h)$ nonnegative with trace zero; its nonnegative eigenvalues sum to zero, so the operator is zero and $\\sigma_{ha}=0=\\mathcal I_a(\\sigma_h)$. A zero-weight parent also maps to zero by linearity. Since all non-oracle maps are fixed independently of $x$ by [F1], every such instrument branch is a fixed linear map on entries and preserves the support degree bound in [step 1.2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At an oracle node, the matrix entries of $U_{g_x}$ in the computational basis are constants, $x_i$, or $1-x_i$: a one-hot address $e_i$ toggles the target exactly when $x_i=1$, and every other address leaves it unchanged. The same holds for $U_{g_x}^\\dagger$, which equals $U_{g_x}$ because an XOR query is an involution. Therefore each entry of $U_{g_x}\\sigma_hU_{g_x}^\\dagger$ is a finite sum of products of one affine entry, one entry with support degree at most $2t(h)$ from [step 1.2], and one affine entry. By [F4]–[F5] its support degree is at most $2t(h)+2$, and the new history has $t(h)+1$ queries.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Induct on the finite execution-tree depth from [F1]. Step 1.1 proves the root case. At each successor edge, step 2.1 preserves the degree bound when the query count is unchanged, and step 2.2 raises its upper bound by exactly two when a query is added. Therefore every history $h$ satisfies the claimed support degree bound $2t(h)$; zero-weight histories satisfy it because all their entries are zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "ih",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance. The QA15 oracle-only specialization and its function-level minimum are explicit; no identification with unrestricted direct-input QA01 costs is asserted. The directly used finite-branch output-law supplier is currently escalated pending its 38-item transitive root-source audit; the local branch-density proof remains draft until that audit is reconciled."
+    },
+    "lem-qa-15-query-amplitude-degree": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-bit-oracle-query-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge0$ and a promise domain $D\\subseteq\\{0,1\\}^N$ as in [[def-qa-task-and-promise-domain]]. For each full-cube input $x=(x_0,\\ldots,x_{N-1})$, define the total address function $g_x:\\{0,1\\}^N\\to\\{0,1\\}$ by $g_x(e_i)=x_i$ for the one-hot word $e_i$ ($0\\le i<N$), and $g_x(a)=0$ for every other address. If $N=0$, the address set has only the empty word and $g_x$ is identically zero. A **local bit-query algorithm** is a finite rooted execution tree on one fixed finite ordered register, starting in the all-zero computational-basis state $|0^m\\rangle$ for its fixed register length $m$. The tree topology and each node label are fixed independently of $x$. Each non-oracle node is either a fixed unitary or a fixed finite instrument, with its observed outcomes retained for later control; every such operation is independent of $x$. Each query node acts on a declared $N$-bit address register and a disjoint one-bit target register by the standard XOR oracle $U_{g_x}$ of [[def-qa-standard-bit-query]], tensored with the identity on all other wires. Every terminal node uses the same ordered output-wire tuple and the same fixed accepting subset $S\\subseteq\\{0,1\\}^r$, independent of $x$; the output law sums over all unmeasured labels and all terminal branch histories as in [[def-qa-finite-branch-output-law]].\n\nThe **query count of a branch** is the number of query nodes on its root-to-terminal path. The algorithm makes at most $T$ queries when every such path contains at most $T$ query nodes. A local bit-query algorithm has **no direct input access**: there is no input register containing $x$, no $x$-dependent non-oracle operation or initial state, and no $x$-dependent terminal predicate. Thus $x$ enters only through the stated bit oracle. This is the oracle-only specialization used for the QA15 polynomial-method results.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qa-standard-bit-query",
+          "source_section": "Definition",
+          "quote": "Let $a,b\\ge 0$ and let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be a total function. The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register. Here $\\oplus$ is componentwise addition modulo two, and words label the ordered computational basis as in [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]]. The address is unchanged. One invocation is one query under [[def-qa-promise-query-instance]]; its query cost is separate from elementary gate cost.\n\nThe map is an involution and is unitary by [[thm-qc-reversible-xor-oracle-unitary]]. No injectivity of $f$ is assumed.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Before any query, every basis amplitude is a coordinate of the fixed initial state, hence is a constant polynomial whose support has no degree above zero. Suppose at a prefix with $t$ queries every amplitude has a representative with no supported monomial of degree greater than $t$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A fixed unitary $U$ sends an amplitude vector $(\\alpha_v(x))_v$ to $\\alpha'_u(x)=\\sum_v U_{uv}\\alpha_v(x)$. This is a finite complex linear combination by [F2]–[F3], so each new amplitude has no supported monomial of degree greater than $t$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At a query, if the address is one-hot $e_i$, the target bit amplitude update is $\\alpha'_{e_i,b,w}(x)=(1-x_i)\\alpha_{e_i,b,w}(x)+x_i\\alpha_{e_i,b\\oplus1,w}(x)$; at a non-one-hot address the amplitude is unchanged. Each coefficient is affine in $x_i$, so the new amplitude has no supported monomial of degree greater than $t+1$. This includes $N=0$, when there are no one-hot addresses and the query leaves the target unchanged.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Traverse the finite circuit in its chronological order. A non-oracle layer preserves the support degree bound by step 2.1; each query raises that bound by at most one by step 2.2. Induction on the finite prefix length therefore gives no supported monomial above the query count at every prefix, and in particular none above $T$ at termination.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "ih",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance. The QA15 oracle-only specialization and its function-level minimum are explicit; no identification with unrestricted direct-input QA01 costs is asserted. The QA01 interface check remains unresolved for identifying this local theorem with the broader query-algorithm carrier."
+    },
+    "lem-qa-15-symmetrization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction",
+          "source_section": "Statement",
+          "quote": "For every polynomial $f\\in F[x_1,\\dots,x_n]$, its multilinear reduction\n$\\widetilde f$ is multilinear, agrees with $f$ at every point of the cube\n$\\{0,1\\}^n$, satisfies $\\deg\\widetilde f\\le\\deg f$ whenever $\\widetilde f\\ne0$,\nand is the unique multilinear polynomial with that agreement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Replace $p$ by its multilinear reduction $\\widetilde p$ from [F2]. It agrees at every Boolean point and has no monomial of degree greater than $d$. Write $\\widetilde p(X)=\\sum_{S\\subseteq[N],\\,|S|\\le d}c_S X_S$, where $X_S:=\\prod_{i\\in S}X_i$ and $X_\\varnothing=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $\\bar p(x):=\\frac1{N!}\\sum_{\\pi\\in S_N}\\widetilde p(x_{\\pi(0)},\\ldots,x_{\\pi(N-1)})$. For $x\\in D$, each permuted point is in $D$ and has $f(\\pi x)=f(x)$, so [F1] gives $|\\widetilde p(\\pi x)-f(x)|\\le\\epsilon$ for every $\\pi$. The triangle inequality for this finite average yields $|\\bar p(x)-f(x)|\\le\\epsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix a set $S$ of size $s$. Under the average over $S_N$, each subset $R$ of size $s$ occurs as the permuted image of $S$ exactly $s!(N-s)!$ times. Hence the average of $X_S$ is $\\binom Ns^{-1}\\sum_{|R|=s}X_R$, a polynomial of degree at most $s$. Summing with coefficients $c_S$ shows that $\\bar p$ has degree at most $d$ and is invariant under all coordinate permutations.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $x$ has Hamming weight $t$, exactly $\\binom ts$ of the squarefree monomials $x_R$ with $|R|=s$ equal $1$ (their index sets must lie inside the $t$ coordinates equal to $1$); all others equal $0$. Therefore the average of each degree-$s$ monomial at $x$ is $\\binom ts/\\binom Ns=(t)_s/(N)_s$, where $(t)_s=t(t-1)\\cdots(t-s+1)$ and $(t)_0=1$. The denominator $(N)_s$ is nonzero for $s\\le N$ by [F4]. Thus $\\bar p(x)=q(|x|)$ for the univariate polynomial $q(t)=\\sum_S c_S(t)_{|S|}/(N)_{|S|}$, with the $s=0$ term interpreted as $1$. Each summand has degree $|S|\\le d$, so $\\deg q\\le d$. By step 2.1 it retains the approximation bound on $D$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-domain or zero-dimensional boundary is included in the stated convention. See step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=2, p(x)=x_0",
+          "calculation": "The two permutations average to (x_0+x_1)/2=t/2 on weight t."
+        },
+        {
+          "case": "N=2, p(x)=x_0x_1",
+          "calculation": "The monomial is invariant and its layer values 0,0,1 are represented by t(t−1)/2."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "prop-qa-15-promise-domain-scope": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first assertion is the defining predicate in [F1], whose universal quantifier ranges over $x\\in D$ only.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $y=(y_0,\\ldots,y_{N-1})$, define $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$, an empty product equal to $1$ when $N=0$. This is a polynomial by [F2]. At a Boolean point $x$, its $i$th factor equals $1$ if $x_i=y_i$ and $0$ otherwise, so $\\delta_y(x)=1$ exactly when $x=y$ and equals $0$ at every other cube point.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $y\\notin D$, step 1.2 gives $\\delta_y(x)=0$ on all $x\\in D$ and $\\delta_y(y)=1$. Therefore $p+\\delta_y$ agrees with $p$ on $D$ but differs from $p$ at $y$. This proves the off-promise freedom claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-domain or zero-dimensional boundary is included in the stated convention. See step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "thm-qa-15-acceptance-degree-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-bit-oracle-query-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge0$ and a promise domain $D\\subseteq\\{0,1\\}^N$ as in [[def-qa-task-and-promise-domain]]. For each full-cube input $x=(x_0,\\ldots,x_{N-1})$, define the total address function $g_x:\\{0,1\\}^N\\to\\{0,1\\}$ by $g_x(e_i)=x_i$ for the one-hot word $e_i$ ($0\\le i<N$), and $g_x(a)=0$ for every other address. If $N=0$, the address set has only the empty word and $g_x$ is identically zero. A **local bit-query algorithm** is a finite rooted execution tree on one fixed finite ordered register, starting in the all-zero computational-basis state $|0^m\\rangle$ for its fixed register length $m$. The tree topology and each node label are fixed independently of $x$. Each non-oracle node is either a fixed unitary or a fixed finite instrument, with its observed outcomes retained for later control; every such operation is independent of $x$. Each query node acts on a declared $N$-bit address register and a disjoint one-bit target register by the standard XOR oracle $U_{g_x}$ of [[def-qa-standard-bit-query]], tensored with the identity on all other wires. Every terminal node uses the same ordered output-wire tuple and the same fixed accepting subset $S\\subseteq\\{0,1\\}^r$, independent of $x$; the output law sums over all unmeasured labels and all terminal branch histories as in [[def-qa-finite-branch-output-law]].\n\nThe **query count of a branch** is the number of query nodes on its root-to-terminal path. The algorithm makes at most $T$ queries when every such path contains at most $T$ query nodes. A local bit-query algorithm has **no direct input access**: there is no input register containing $x$, no $x$-dependent non-oracle operation or initial state, and no $x$-dependent terminal predicate. Thus $x$ enters only through the stated bit oracle. This is the oracle-only specialization used for the QA15 polynomial-method results.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-15-branch-density-degree",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a local bit-query algorithm, allowing finite input-independent instrument branches, and let $h$ be any execution history containing $t(h)$ oracle calls. Write $\\sigma_h(x):=w_h(x)\\rho_h(x)$ for the unnormalized branch operator: $w_h$ is the probability weight of the history and $\\rho_h$ its conditional density operator when $w_h>0$; set $\\sigma_h=0$ when $w_h=0$. In the fixed computational basis, every matrix entry of $\\sigma_h(x)$ on $x\\in\\{0,1\\}^N$ is represented by a complex polynomial whose support has no monomial of total degree greater than $2t(h)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-15-bit-oracle-query-complexity",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\{0,1\\}$ be a promise function and $0\\le\\epsilon<1/2$. Its **local bounded-error bit-query complexity** is\n$$Q^{\\mathrm{bit}}_{\\epsilon}(f;D):=\\min\\{T\\in\\mathbb N_0:\\text{some local bit-query algorithm making at most }T\\text{ queries has }|\\Pr[A\\text{ accepts }x]-f(x)|\\le\\epsilon\\text{ for every }x\\in D\\}.$$\nThe feasible set is nonempty. Query the one-hot addresses $e_0,\\ldots,e_{N-1}$ in order, measuring each target bit and copying its result to a fresh, initially zero output wire by a fixed outcome-controlled bit flip; the outcomes are deterministically $x_0,\\ldots,x_{N-1}$. Fixed branch operations reset the target between calls and set the next one-hot address, so the terminal output tuple is exactly the recorded $N$-bit word. The fixed terminal accepting subset $\\{y\\in D:f(y)=1\\}$ then accepts exactly on yes-inputs in $D$, so this is an exact $N$-query algorithm (for $N=0$, the fixed output predicate suffices without a query). Thus the minimum is finite and at most $N$; it exists because the feasible counts below this one form a nonempty finite set of naturals, which has a least element by [[lem-finite-set-has-max]] applied to their negatives. The query count is the minimum worst-branch query count and does not charge non-oracle operations. “Local” refers exactly to the oracle-only interface in [[def-qa-15-bit-oracle-query-model]]. If $D=\\varnothing$, a zero-query algorithm is feasible and the minimum is $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction",
+          "source_section": "Statement",
+          "quote": "For every polynomial $f\\in F[x_1,\\dots,x_n]$, its multilinear reduction\n$\\widetilde f$ is multilinear, agrees with $f$ at every point of the cube\n$\\{0,1\\}^n$, satisfies $\\deg\\widetilde f\\le\\deg f$ whenever $\\widetilde f\\ne0$,\nand is the unique multilinear polynomial with that agreement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each terminal history $\\ell$, the accepting probability contribution is the finite sum of the diagonal entries of $\\sigma_\\ell(x)$ over accepting output strings and all unmeasured basis labels. This is the output law of [F1], with the unnormalized branch operator of [F2]. Every summand has a complex polynomial representative of degree at most $2t(\\ell)\\le2T$, so their finite sum $G(x)$ has degree at most $2T$ on the Boolean cube.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each Boolean input $x$, the sum in step 1.1 is the real probability $P_A(x)$. Replace each coefficient of $G$ by its real part to obtain a real polynomial $p_0$; for Boolean $x$, $p_0(x)=\\operatorname{Re}G(x)=P_A(x)$, and no supported monomial has degree greater than $2T$. Let $p$ be its multilinear reduction from [F5]. Each monomial is replaced by a squarefree monomial of no larger degree, so $p$ is real multilinear with the same support degree bound, including when it is zero or $N=0$. It agrees with $p_0$ on the Boolean cube and is therefore an acceptance polynomial by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $A$ has error at most $\\epsilon$ on $D$, then [F3] makes $p$ an $\\epsilon$-approximant, so $\\widetilde{\\deg}_{\\epsilon}(f;D)\\le2T$. This holds for every feasible $T$, in particular for the minimum query count [F4]. Since query counts are integers, the result is the displayed ceiling inequality.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-domain or zero-dimensional boundary is included in the stated convention. See step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval endpoint or limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance. The QA15 oracle-only specialization and its function-level minimum are explicit; no identification with unrestricted direct-input QA01 costs is asserted."
+    },
+    "thm-qa-15-exact-degree-or": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-15-symmetrization",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\{0,1\\}^N$ be invariant under coordinate permutations and let $f:D\\to\\{0,1\\}$ satisfy $f(\\pi x)=f(x)$ for every permutation $\\pi$ and $x\\in D$. If a real polynomial $p$ of total degree at most $d$ is an $\\epsilon$-approximant to $f$ on $D$, then there is a univariate real polynomial $q(t)$ of degree at most $d$ such that $q(|x|)$ is also an $\\epsilon$-approximant on $D$, where $|x|:=\\sum_{i<N}x_i$ is Hamming weight.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The polynomial $P(X)=1-\\prod_{i=0}^{N-1}(1-X_i)$ has total degree at most $N$ by [F4]. At a Boolean vector $x$, the product is $1$ exactly when all bits are zero and is $0$ otherwise, so $P(x)=\\mathrm{OR}_N(x)$. Thus [F1] gives $\\widetilde{\\deg}_0(\\mathrm{OR}_N)\\le N$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $p$ be any exact polynomial approximant of degree at most $d$. Since OR is invariant under coordinate permutations, [F2] gives a univariate $q$ of degree at most $d$ with $q(0)=0$ and $q(k)=1$ for each integer $1\\le k\\le N$. Therefore the nonzero polynomial $q-1$ has the $N$ distinct roots $1,\\ldots,N$ and is nonzero because $(q-1)(0)=-1$. By [F3], its degree is at least $N$, so $d\\ge N$. Hence every exact approximant has degree at least $N$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The upper and lower bounds of steps 1.1 and 1.2 coincide, proving the equality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints or boundary layer are included. See step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=1",
+          "calculation": "OR_1(X)=X, degree 1."
+        },
+        {
+          "case": "N=2",
+          "calculation": "OR_2(X)=X_0+X_1−X_0X_1, degree 2."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "thm-qa-15-or-approximate-degree-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-15-symmetrization",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\{0,1\\}^N$ be invariant under coordinate permutations and let $f:D\\to\\{0,1\\}$ satisfy $f(\\pi x)=f(x)$ for every permutation $\\pi$ and $x\\in D$. If a real polynomial $p$ of total degree at most $d$ is an $\\epsilon$-approximant to $f$ on $D$, then there is a univariate real polynomial $q(t)$ of degree at most $d$ such that $q(|x|)$ is also an $\\epsilon$-approximant on $D$, where $|x|:=\\sum_{i<N}x_i$ is Hamming weight.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-15-discrete-markov-ehlich-zeller",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $q$ be a real polynomial with no supported monomial of degree greater than $d\\in\\mathbb N_0$. Put $h=\\max_{[0,N]}q-\\min_{[0,N]}q$ and $D=\\max_{[0,N]}|q'|$. If $0\\le q(k)\\le1$ for every integer $k=0,\\ldots,N$, then\n$$D\\le\\frac{d^2}{N}h.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-15-grid-return-derivative",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ be an integer and let $q$ be a real polynomial. On $[0,N]$, set\n$$h:=\\max q-\\min q,\\qquad D:=\\max |q'|.$$\nIf $0\\le q(k)\\le1$ for every integer $k=0,\\ldots,N$, then\n$$D\\ge \\max\\{0,h-1\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-15-acceptance-degree-bound",
+          "source_section": "Statement",
+          "quote": "If a local bit-query algorithm makes at most $T$ queries on every branch, then its full-cube acceptance probability $P_A(x)$ is represented on $\\{0,1\\}^N$ by a real multilinear polynomial of total degree at most $2T$. Consequently, if it computes $f:D\\to\\{0,1\\}$ with error at most $\\epsilon$ on a promise domain $D$, then $\\widetilde{\\deg}_{\\epsilon}(f;D)\\le2T$ and\n$$Q^{\\mathrm{bit}}_{\\epsilon}(f;D)\\ge\\left\\lceil\\frac{\\widetilde{\\deg}_{\\epsilon}(f;D)}2\\right\\rceil.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose an $\\epsilon$-approximating polynomial of degree at most $d$ from [F1]. Apply [F2] to obtain a univariate polynomial $q(t)$ of degree at most $d$ whose values at integer $k$ approximate $\\mathrm{OR}_N$ on the weight-$k$ layer. Define $r(t):=(q(t)+\\epsilon)/(1+2\\epsilon)$ and $c:=(1-2\\epsilon)/(1+2\\epsilon)$. At $k=0$, $q(0)\\in[-\\epsilon,\\epsilon]$, so $r(0)\\in[0,2\\epsilon/(1+2\\epsilon)]$; at each $1\\le k\\le N$, $q(k)\\in[1-\\epsilon,1+\\epsilon]$, so $r(k)\\in[1/(1+2\\epsilon),1]$. Thus all grid values lie in $[0,1]$ and $r(1)-r(0)\\ge c>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $h=\\max_{[0,N]}r-\\min_{[0,N]}r$ and $D=\\max_{[0,N]}|r'|$. By [F4] on $[0,1]$, $D\\ge r(1)-r(0)\\ge c$. By [F3], $D\\le a h$ with $a:=d^2/N$, and $h\\le1+D$. If $a\\ge1$, then $a\\ge c/(1+c)$ since $0<c\\le1$. If $a<1$, then $D\\le a(1+D)$, so $(1-a)D\\le a$ and $D\\le a/(1-a)$. Combining $c\\le D\\le a/(1-a)$ gives $a\\ge c/(1+c)$. In both cases $a\\ge c/(1+c)=(1-2\\epsilon)/2$, proving $d^2\\ge(1-2\\epsilon)N/2$ by ordered-field algebra [F6].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The local query lower bound follows from [F5]. Since $d\\ge\\sqrt{(1-2\\epsilon)N/2}$ by step 2.1, monotonicity of the ceiling gives the displayed explicit query estimate.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints or boundary layer are included. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=1, ε=0",
+          "calculation": "The inequality gives d²≥1/2, so integer d≥1."
+        },
+        {
+          "case": "N=2, ε=1/3",
+          "calculation": "The inequality gives d²≥1/3, consistent with integer d≥1."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance. The QA15 oracle-only specialization and its function-level minimum are explicit; no identification with unrestricted direct-input QA01 costs is asserted."
+    },
+    "thm-qa-15-parity-approximate-degree": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-15-symmetrization",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\{0,1\\}^N$ be invariant under coordinate permutations and let $f:D\\to\\{0,1\\}$ satisfy $f(\\pi x)=f(x)$ for every permutation $\\pi$ and $x\\in D$. If a real polynomial $p$ of total degree at most $d$ is an $\\epsilon$-approximant to $f$ on $D$, then there is a univariate real polynomial $q(t)$ of degree at most $d$ such that $q(|x|)$ is also an $\\epsilon$-approximant on $D$, where $|x|:=\\sum_{i<N}x_i$ is Hamming weight.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-15-acceptance-degree-bound",
+          "source_section": "Statement",
+          "quote": "If a local bit-query algorithm makes at most $T$ queries on every branch, then its full-cube acceptance probability $P_A(x)$ is represented on $\\{0,1\\}^N$ by a real multilinear polynomial of total degree at most $2T$. Consequently, if it computes $f:D\\to\\{0,1\\}$ with error at most $\\epsilon$ on a promise domain $D$, then $\\widetilde{\\deg}_{\\epsilon}(f;D)\\le2T$ and\n$$Q^{\\mathrm{bit}}_{\\epsilon}(f;D)\\ge\\left\\lceil\\frac{\\widetilde{\\deg}_{\\epsilon}(f;D)}2\\right\\rceil.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose an $\\epsilon$-approximant $p$ of degree at most $d=\\widetilde{\\deg}_{\\epsilon}(\\mathrm{PARITY}_N)$ by [F1]. By [F2] it yields a univariate polynomial $q(t)$ of degree at most $d$ with $|q(k)- (k\\bmod 2)|\\le\\epsilon$ for every integer $0\\le k\\le N$. Hence $q(k)-1/2<0$ for even $k$ and $q(k)-1/2>0$ for odd $k$, because $\\epsilon<1/2$ and [F7].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The polynomial $q(t)-1/2$ is continuous by [F3]. For each $k=0,\\ldots,N-1$, its values at $k$ and $k+1$ have opposite signs by step 1.1. The intermediate value theorem [F3] gives a root in each open interval $(k,k+1)$; the root is interior because neither endpoint value is zero. These $N$ open intervals are disjoint, so the roots are $N$ distinct real numbers. Since $q-1/2$ is not the zero polynomial (its value at $0$ is negative), [F4] implies its degree is at least $N$, and therefore $d\\ge N$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The polynomial $P(X)=\\frac12(1-\\prod_{i=0}^{N-1}(1-2X_i))$ has degree at most $N$ by [F6] and equals parity on the Boolean cube, since each factor $1-2x_i$ is $1$ for bit $0$ and $-1$ for bit $1$. Thus the approximate degree is at most $N$; with step 2.1 it equals $N$. The query lower bound follows from [F5].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints or boundary layer are included. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=1",
+          "calculation": "PARITY_1(X)=X has exact degree 1."
+        },
+        {
+          "case": "N=2",
+          "calculation": "PARITY_2(X)=X_0+X_1−2X_0X_1 has degree 2 and alternates at weights 0,1,2."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance. The QA15 oracle-only specialization and its function-level minimum are explicit; no identification with unrestricted direct-input QA01 costs is asserted."
+    },
+    "ex-qa-15-or-polynomial-small-n": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-bit-oracle-query-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge0$ and a promise domain $D\\subseteq\\{0,1\\}^N$ as in [[def-qa-task-and-promise-domain]]. For each full-cube input $x=(x_0,\\ldots,x_{N-1})$, define the total address function $g_x:\\{0,1\\}^N\\to\\{0,1\\}$ by $g_x(e_i)=x_i$ for the one-hot word $e_i$ ($0\\le i<N$), and $g_x(a)=0$ for every other address. If $N=0$, the address set has only the empty word and $g_x$ is identically zero. A **local bit-query algorithm** is a finite rooted execution tree on one fixed finite ordered register, starting in the all-zero computational-basis state $|0^m\\rangle$ for its fixed register length $m$. The tree topology and each node label are fixed independently of $x$. Each non-oracle node is either a fixed unitary or a fixed finite instrument, with its observed outcomes retained for later control; every such operation is independent of $x$. Each query node acts on a declared $N$-bit address register and a disjoint one-bit target register by the standard XOR oracle $U_{g_x}$ of [[def-qa-standard-bit-query]], tensored with the identity on all other wires. Every terminal node uses the same ordered output-wire tuple and the same fixed accepting subset $S\\subseteq\\{0,1\\}^r$, independent of $x$; the output law sums over all unmeasured labels and all terminal branch histories as in [[def-qa-finite-branch-output-law]].\n\nThe **query count of a branch** is the number of query nodes on its root-to-terminal path. The algorithm makes at most $T$ queries when every such path contains at most $T$ query nodes. A local bit-query algorithm has **no direct input access**: there is no input register containing $x$, no $x$-dependent non-oracle operation or initial state, and no $x$-dependent terminal predicate. Thus $x$ enters only through the stated bit oracle. This is the oracle-only specialization used for the QA15 polynomial-method results.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-standard-bit-query",
+          "source_section": "Definition",
+          "quote": "Let $a,b\\ge 0$ and let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be a total function. The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register. Here $\\oplus$ is componentwise addition modulo two, and words label the ordered computational basis as in [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]]. The address is unchanged. One invocation is one query under [[def-qa-promise-query-instance]]; its query cost is separate from elementary gate cost.\n\nThe map is an involution and is unitary by [[thm-qc-reversible-xor-oracle-unitary]]. No injectivity of $f$ is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-clifford-t-gate-library",
+          "source_section": "Definition",
+          "quote": "Let $\\omega=e^{i\\pi/4}$. The one-qubit generators and exact matrices in the\nordered computational basis are\n\n$$H=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad T=\\begin{pmatrix}1&0\\\\0&\\omega\\end{pmatrix},\\qquad T^\\dagger=\\begin{pmatrix}1&0\\\\0&\\omega^{-1}\\end{pmatrix}.$$\n\nOn basis vectors, $H|q\\rangle=(|0\\rangle+(-1)^q|1\\rangle)/\\sqrt2$ and\n$T^k|q\\rangle=\\omega^{kq}|q\\rangle$ for $q\\in\\{0,1\\}$.\n\nWrite $S=T^2=\\operatorname{diag}(1,i)$ and\n$Z=T^4=\\operatorname{diag}(1,-1)$. Pauli $X,Y,Z$ are as in\n[[def-qc-pauli-matrices]]. On two ordered wires,\n$\\operatorname{CNOT}|a,b\\rangle=|a,b\\mathbin\\oplus a\\rangle$; the first wire\nis control and the second target. A circuit is a finite chronological word of\nthese gates at stated wire positions; its matrix is the product with later\ngates on the left. No extra wire or controlled-$T$ operation is implicit.\n\nThe scalar phase $\\omega I$ is an allowed Clifford phase in the one-qubit\nmatrix-word convention. Its scalar factor is retained in exact matrix products;\nthe convention that an overall scalar does not affect a resource count is\nstated separately from matrix equality. It does not grant a controlled-$T$\noperation or allow a scalar on a target wire to be discarded under control.\n\nThe exact one-qubit H/T algebra is generated by $H,T,T^\\dagger$; $S$ and $Z$\nare aliases for the displayed powers. The distinction between exact matrix\nequality and [[def-qc-global-phase-equivalence|global-phase equivalence]] is\nmaintained. Resource costs are supplied by\n[[def-qc-elementary-circuit-resources]] and remain separate from this matrix\ndefinition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-15-bit-oracle-query-complexity",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\{0,1\\}$ be a promise function and $0\\le\\epsilon<1/2$. Its **local bounded-error bit-query complexity** is\n$$Q^{\\mathrm{bit}}_{\\epsilon}(f;D):=\\min\\{T\\in\\mathbb N_0:\\text{some local bit-query algorithm making at most }T\\text{ queries has }|\\Pr[A\\text{ accepts }x]-f(x)|\\le\\epsilon\\text{ for every }x\\in D\\}.$$\nThe feasible set is nonempty. Query the one-hot addresses $e_0,\\ldots,e_{N-1}$ in order, measuring each target bit and copying its result to a fresh, initially zero output wire by a fixed outcome-controlled bit flip; the outcomes are deterministically $x_0,\\ldots,x_{N-1}$. Fixed branch operations reset the target between calls and set the next one-hot address, so the terminal output tuple is exactly the recorded $N$-bit word. The fixed terminal accepting subset $\\{y\\in D:f(y)=1\\}$ then accepts exactly on yes-inputs in $D$, so this is an exact $N$-query algorithm (for $N=0$, the fixed output predicate suffices without a query). Thus the minimum is finite and at most $N$; it exists because the feasible counts below this one form a nonempty finite set of naturals, which has a least element by [[lem-finite-set-has-max]] applied to their negatives. The query count is the minimum worst-branch query count and does not charge non-oracle operations. “Local” refers exactly to the oracle-only interface in [[def-qa-15-bit-oracle-query-model]]. If $D=\\varnothing$, a zero-query algorithm is feasible and the minimum is $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrices in [F3] and [F4] satisfy $H^*H=I$ and $X^*X=I$ by direct multiplication; the CNOT action in [F3] permutes the four computational-basis vectors, so it is unitary. Starting at $|00,0\\rangle$, apply $X$ to the second address bit, then $H$ to the first and CNOT from the first to the second. The basis actions in [F3]–[F4] give $\\frac1{\\sqrt2}(|01,0\\rangle+|10,0\\rangle)=\\frac1{\\sqrt2}(|e_1,0\\rangle+|e_0,0\\rangle)$. These are fixed input-independent unitaries permitted by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "One oracle call and [F2] transform this to $\\frac1{\\sqrt2}(|e_1,x_1\\rangle+|e_0,x_0\\rangle)$. Measuring the target and accepting exactly when it is $1$ has probability $\\frac12|x_1|^2+\\frac12|x_0|^2=(x_0+x_1)/2$, because the orthogonal address basis states have no cross terms and each $x_i$ is a bit. This gives the stated acceptance polynomial.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $00$ the acceptance probability is $0=f(00)$, and on $11$ it is $1=f(11)$, so the algorithm is exact on $D$ with one query. The polynomial $p$ has total degree one by [F7]. No constant polynomial can be exact on $D$ because a constant has the same value at $00$ and $11$, while $f$ differs there. Thus $\\widetilde{\\deg}_0(f;D)=1$ by [F5], and the one-query construction verifies $Q^{\\mathrm{bit}}_0(f;D)\\le1$ by [F6].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-domain or zero-dimensional boundary is included in the stated convention. See step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints or boundary layer are included. See step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "Boolean cube N=2",
+          "calculation": "p(00),p(01),p(10),p(11)=(0,1/2,1/2,1); on D={00,11} the values are (0,1)."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    },
+    "cex-qa-15-off-cube-values-are-unconstrained": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-15-bit-oracle-query-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge0$ and a promise domain $D\\subseteq\\{0,1\\}^N$ as in [[def-qa-task-and-promise-domain]]. For each full-cube input $x=(x_0,\\ldots,x_{N-1})$, define the total address function $g_x:\\{0,1\\}^N\\to\\{0,1\\}$ by $g_x(e_i)=x_i$ for the one-hot word $e_i$ ($0\\le i<N$), and $g_x(a)=0$ for every other address. If $N=0$, the address set has only the empty word and $g_x$ is identically zero. A **local bit-query algorithm** is a finite rooted execution tree on one fixed finite ordered register, starting in the all-zero computational-basis state $|0^m\\rangle$ for its fixed register length $m$. The tree topology and each node label are fixed independently of $x$. Each non-oracle node is either a fixed unitary or a fixed finite instrument, with its observed outcomes retained for later control; every such operation is independent of $x$. Each query node acts on a declared $N$-bit address register and a disjoint one-bit target register by the standard XOR oracle $U_{g_x}$ of [[def-qa-standard-bit-query]], tensored with the identity on all other wires. Every terminal node uses the same ordered output-wire tuple and the same fixed accepting subset $S\\subseteq\\{0,1\\}^r$, independent of $x$; the output law sums over all unmeasured labels and all terminal branch histories as in [[def-qa-finite-branch-output-law]].\n\nThe **query count of a branch** is the number of query nodes on its root-to-terminal path. The algorithm makes at most $T$ queries when every such path contains at most $T$ query nodes. A local bit-query algorithm has **no direct input access**: there is no input register containing $x$, no $x$-dependent non-oracle operation or initial state, and no $x$-dependent terminal predicate. Thus $x$ enters only through the stated bit oracle. This is the oracle-only specialization used for the QA15 polynomial-method results.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-standard-bit-query",
+          "source_section": "Definition",
+          "quote": "Let $a,b\\ge 0$ and let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be a total function. The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register. Here $\\oplus$ is componentwise addition modulo two, and words label the ordered computational basis as in [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]]. The address is unchanged. One invocation is one query under [[def-qa-promise-query-instance]]; its query cost is separate from elementary gate cost.\n\nThe map is an involution and is unitary by [[thm-qc-reversible-xor-oracle-unitary]]. No injectivity of $f$ is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-15-acceptance-polynomial",
+          "source_section": "Definition",
+          "quote": "For a local bit-query algorithm $A$ on $N$ input bits, an **acceptance polynomial** is a real polynomial $p(X_0,\\ldots,X_{N-1})$ such that $p(x)=\\Pr[A\\text{ accepts }x]$ for every $x\\in\\{0,1\\}^N$. The probability is the finite output law of [[def-qa-15-bit-oracle-query-model]].\n\nFor a promise function $f:D\\to\\{0,1\\}$ with $D\\subseteq\\{0,1\\}^N$ and $\\epsilon\\ge0$, a polynomial $p$ is an **$\\epsilon$-approximant on $D$** if $|p(x)-f(x)|\\le\\epsilon$ for every $x\\in D$. Its **total degree is at most $d$** when each monomial with nonzero coefficient has total degree at most $d$. This support convention includes the zero polynomial at every $d\\ge0$, although the formal zero polynomial has no degree ([[def-monomials-multidegree-and-total-degree]]).\n\nThe **$\\epsilon$-approximate degree** $\\widetilde{\\deg}_{\\epsilon}(f;D)$ is the least $d\\in\\mathbb N_0$ for which some real polynomial of total degree at most $d$ is an $\\epsilon$-approximant on $D$. This minimum exists: for $y\\in\\{0,1\\}^N$ set $\\delta_y(X)=\\prod_{i<N}(y_iX_i+(1-y_i)(1-X_i))$. For Boolean $x$, each factor is $1$ exactly when $x_i=y_i$ and otherwise is $0$, so $\\delta_y(x)=1$ exactly for $x=y$. Therefore $p_D(X)=\\sum_{y\\in D}f(y)\\delta_y(X)$ equals $f$ on $D$ and has degree at most $N$; if $D=\\varnothing$, the empty sum is zero and is vacuously an approximant. The admissible degree bounds in $\\{0,\\ldots,N\\}$ form a nonempty finite set (it contains $N$), so it has a least element by [[lem-finite-set-has-max]] applied to its negatives. No choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-15-symmetrization",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\{0,1\\}^N$ be invariant under coordinate permutations and let $f:D\\to\\{0,1\\}$ satisfy $f(\\pi x)=f(x)$ for every permutation $\\pi$ and $x\\in D$. If a real polynomial $p$ of total degree at most $d$ is an $\\epsilon$-approximant to $f$ on $D$, then there is a univariate real polynomial $q(t)$ of degree at most $d$ such that $q(|x|)$ is also an $\\epsilon$-approximant on $D$, where $|x|:=\\sum_{i<N}x_i$ is Hamming weight.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Pauli $X$ in [F5] toggles a basis bit and is a fixed unitary because it permutes the two basis vectors. Start at the all-zero address, target, and two-bit output register. In the first round, apply $X$ to the first address bit to set the address to $e_0$, query and measure the target; since it began at zero, the outcome is deterministically $x_0$ by [F2]. If the outcome is $1$, apply $X$ to the first output bit and to the target; if it is $0$, leave both unchanged. This copies the result and resets the target. Apply $X$ to both address bits to change $e_0$ into $e_1$; repeat the query and measurement, copying the second outcome into the second output bit and resetting the target in the same way. Every outcome-controlled operation is a fixed unitary on its branch by [F1] and [F5]; the output is deterministically $(x_0,x_1)$. This finite tree uses exactly two queries. Accept on the fixed subset $\\{00,01,10\\}$, so the algorithm computes NAND.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The resulting acceptance polynomial is $p(X_0,X_1)=1-X_0X_1$: its values are $1,1,1,0$ at $00,01,10,11$, respectively, exactly the NAND acceptance law. In particular it lies in $[0,1]$ on the Boolean cube.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Averaging $p$ over the two coordinate permutations leaves its constant term $1$ fixed and sends $X_0X_1$ to itself. By [F4], the associated Hamming-weight polynomial is $q(t)=1-\\binom{t}{2}=1-t(t-1)/2$, since it takes values $1,1,0$ at weights $0,1,2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At the noninteger point $t=1/2$, $q(1/2)=1-((1/2)(-1/2))/2=9/8>1$. Thus the symmetrized polynomial is not constrained to remain in $[0,1]$ between integer Hamming weights, refuting the claim.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-domain or zero-dimensional boundary is included in the stated convention. See step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-parameter or zero-polynomial case is explicitly addressed. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate or one-query boundary is included. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant, zero-weight, or extremal case is explicitly handled. See step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints or boundary layer are included. See step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All constructions use finite data and no arbitrary-family selection; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "N=2 NAND",
+          "calculation": "p(00),p(01),p(10),p(11)=(1,1,1,0); q(0),q(1),q(2)=(1,1,0); q(1/2)=9/8."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Supplier excerpts are quoted from exact supplier Statement or Definition sections. Local claims, arguments, and calculations remain draft and have not received independent acceptance."
+    }
+  }
+}

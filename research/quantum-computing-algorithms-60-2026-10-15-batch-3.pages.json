@@ -1,0 +1,691 @@
+[
+  {
+    "order": 2170,
+    "id": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Pure and Mixed States, Ensembles, and Schmidt Decomposition",
+    "companion": "pure-and-mixed-states-ensembles-and-schmidt-decomposition-examples",
+    "requires": [
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "hilbert-space-geometry-and-riesz-representation",
+      "linear-independence-bases-and-dimension",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "registers-tensor-products-and-partial-trace",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-qc-density-operator",
+        "kind": "definition",
+        "title": "Density operator",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "def-trace-of-an-endomorphism",
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-linear-subspace"
+        ],
+        "justified_by": [
+          "thm-qc-density-operator-existence"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+        "strategy": "definition/interface",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2–2.1.3",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "forward_refs": [
+          "ex-qc-bell-state-schmidt-reduction"
+        ]
+      },
+      {
+        "id": "def-qc-finite-positive-effect-family",
+        "kind": "definition",
+        "title": "Finite positive effect family",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "def-real-and-complex-inner-product-space",
+          "def-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, and let $I_H:H\\to H$ denote the identity map $x\\mapsto x$. An **effect** on $H$ is an endomorphism $E$ such that both $E$ and $I_H-E$ are non-negative in the sense of [[def-non-negative-and-positive-operator]]. A **finite complete positive family** is a nonempty finite list $(E_1,\\ldots,E_n)$ of non-negative endomorphisms with $\\sum_{a=1}^n E_a=I_H$. The next lemma proves that every member of such a family is an effect, so the family is a finite complete effect family. This is algebraic data only; it does not assert a measurement law.",
+        "strategy": "definition/interface",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, Chapters 1–3",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ]
+      },
+      {
+        "id": "def-qc-pure-state-and-ray",
+        "kind": "definition",
+        "title": "Pure state and ray",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [
+          "thm-qc-ray-projector-well-defined-and-bijective"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.",
+        "strategy": "definition/interface",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ]
+      },
+      {
+        "id": "lem-qc-complete-effect-family-members-are-effects",
+        "kind": "lemma",
+        "title": "A complete positive family consists of effects",
+        "deps": [
+          "def-qc-finite-positive-effect-family",
+          "def-non-negative-and-positive-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For a nonzero finite-dimensional complex-inner-product space $H$, if $E_1,\\ldots,E_n$ is a finite complete positive family as defined in [[def-qc-finite-positive-effect-family]], then each $E_a$ is an effect: $E_a$ and $I_H-E_a$ are non-negative.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, Chapters 1–3",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-density-operator-existence",
+        "kind": "theorem",
+        "title": "Every nonzero finite-dimensional complex inner-product space admits a density operator",
+        "deps": [
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "prop-trace-is-linear",
+          "def-dimension",
+          "def-real-and-complex-inner-product-space",
+          "def-non-negative-and-positive-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Every nonzero finite-dimensional complex inner-product space $H$ admits a density operator; specifically, if $d=\\dim_{\\mathbb C}H$, then $I_H/d$ is a density operator on $H$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-ray-projector-well-defined-and-bijective",
+        "kind": "theorem",
+        "title": "Ray-to-projector is well-defined and bijective",
+        "deps": [
+          "def-qc-pure-state-and-ray",
+          "def-qc-dirac-notation-conversion",
+          "def-non-negative-and-positive-operator",
+          "def-trace-of-an-endomorphism",
+          "def-trace-of-a-square-matrix",
+          "def-orthogonal-projection",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-real-and-complex-inner-product-space",
+          "def-dimension",
+          "def-rank-and-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-schmidt-decomposition",
+        "kind": "theorem",
+        "title": "Schmidt decomposition",
+        "deps": [
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-dirac-notation-conversion",
+          "thm-singular-value-decomposition",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $H,K$ be finite-dimensional complex-inner-product spaces with the tensor-product convention of [[def-qc-tensor-register-and-permutation]]. For every $\\Psi\\in H\\otimes K$ there are an integer $r\\ge0$, positive numbers $s_1,\\ldots,s_r$, and orthonormal families $u_1,\\ldots,u_r\\in H$ and $v_1,\\ldots,v_r\\in K$ such that\n\n$$\\Psi=\\sum_{j=1}^r s_j u_j\\otimes v_j,\\qquad \\|\\Psi\\|^2=\\sum_{j=1}^r s_j^2.$$\n\nFor $\\Psi=0$ take $r=0$ and the empty sum. For any chosen ordered pair of orthonormal bases, the construction below obtains the $s_j$ as the positive singular values of the coefficient matrix of $\\Psi$ in their ordered product basis.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §1.1.3, PDF pp.31–32",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §18.3, PDF pp.158–159",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-ensemble-and-purification",
+        "kind": "definition",
+        "title": "Ensemble and purification",
+        "deps": [
+          "def-qc-density-operator",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-partial-trace"
+        ],
+        "justified_by": [
+          "thm-qc-ensemble-barycenter-is-density",
+          "thm-qc-purification-existence-and-unitary-equivalence"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $H$ be a nonzero finite-dimensional complex-inner-product space. A **finite ensemble of density operators** on $H$ is a positive integer $n$, weights $p_1,\\ldots,p_n\\ge0$ with $\\sum_{a=1}^np_a=1$, and density operators $\\rho_1,\\ldots,\\rho_n$ on $H$. Its **barycenter** is $\\bar\\rho=\\sum_{a=1}^np_a\\rho_a$. A zero-weight component still names a density operator but contributes zero to the barycenter.\n\nLet $K$ be any finite-dimensional complex-inner-product space. A **purification** of a density operator $\\rho$ on $H$ is a unit vector $\\Psi\\in H\\otimes K$ such that\n\n$$\\operatorname{Tr}_K(|\\Psi\\rangle\\langle\\Psi|)=\\rho.$$\n\nThe tensor factors are ordered $H$ then $K$. Tensor products, outer products and partial trace have the conventions of [[def-qc-tensor-register-and-permutation]], [[def-qc-dirac-notation-conversion]] and [[def-qc-partial-trace]]. The auxiliary space may be any finite dimension that supports such a unit vector.",
+        "strategy": "definition/interface",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2–2.1.3",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §§15.1 and 18.3",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ]
+      },
+      {
+        "id": "thm-qc-density-spectral-ensemble",
+        "kind": "theorem",
+        "title": "Density operators have an orthogonal spectral ensemble",
+        "deps": [
+          "def-qc-density-operator",
+          "thm-non-negative-operator-characterisations",
+          "def-trace-of-an-endomorphism",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-rank-and-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex-inner-product space $H$. Then there are $m=\\operatorname{rank}(\\rho)\\ge1$, positive numbers $\\lambda_1,\\ldots,\\lambda_m$ with $\\sum_{j=1}^m\\lambda_j=1$, and orthonormal unit vectors $e_1,\\ldots,e_m$ such that\n\n$$\\rho=\\sum_{j=1}^m\\lambda_j|e_j\\rangle\\langle e_j|.$$\n\nThe eigenvectors with eigenvalue zero are omitted; the displayed pure-state projectors are pairwise orthogonal.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-ensemble-barycenter-is-density",
+        "kind": "theorem",
+        "title": "Finite ensemble barycenters are density operators",
+        "deps": [
+          "def-qc-ensemble-and-purification",
+          "def-qc-density-operator",
+          "thm-qc-density-operator-existence",
+          "def-non-negative-and-positive-operator",
+          "def-trace-of-an-endomorphism",
+          "prop-trace-is-linear"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For a finite ensemble $(p_a,\\rho_a)_{a=1}^n$ of density operators on a nonzero finite-dimensional complex-inner-product space $H$, its barycenter $\\bar\\rho=\\sum_{a=1}^np_a\\rho_a$ is a density operator. Regrouping the finite outcomes into blocks and assigning each block its normalized barycenter when its total weight is positive preserves the overall barycenter; zero-total-weight blocks contribute zero.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-purification-existence-and-unitary-equivalence",
+        "kind": "theorem",
+        "title": "Purifications exist and are unitarily equivalent after padding",
+        "deps": [
+          "def-qc-ensemble-and-purification",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-qc-density-spectral-ensemble",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "thm-qc-schmidt-decomposition",
+          "def-dimension",
+          "def-linear-combination-and-span",
+          "def-orthogonal-complement",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-dimension-of-a-linear-subspace",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "cor-dimension-of-a-direct-sum",
+          "lem-standard-basis-of-f-n",
+          "prop-standard-coordinate-inner-products",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "def-rank-and-nullity",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Every density operator $\\rho$ on a nonzero finite-dimensional complex-inner-product space $H$ has a purification on some finite-dimensional auxiliary space. More precisely, if $r=\\operatorname{rank}(\\rho)$, it has one on an auxiliary space of dimension $r$. If $\\Psi_i\\in H\\otimes K_i$ ($i=1,2$) are any two purifications of the same $\\rho$, then for every integer $m\\ge\\max(\\dim K_1,\\dim K_2)$ and every pair of linear isometric embeddings $\\iota_i:K_i\\to\\mathbb C^m$, where $\\mathbb C^m$ has its standard complex inner product, there is a unitary $U$ on $\\mathbb C^m$ such that\n\n$$ (I_H\\otimes U)(I_H\\otimes\\iota_2)\\Psi_2=(I_H\\otimes\\iota_1)\\Psi_1. $$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §§2.1.2–2.1.3, Thms. 2.10–2.12",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles, §§2.4–2.5",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §18.3",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-rank-one-density-operator",
+        "kind": "theorem",
+        "title": "Rank-one density operators are pure-state projectors",
+        "deps": [
+          "def-qc-pure-state-and-ray",
+          "def-qc-density-operator",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "thm-qc-density-spectral-ensemble",
+          "def-trace-of-an-endomorphism",
+          "prop-trace-is-linear",
+          "def-rank-and-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Every pure-state ray projector on a nonzero finite-dimensional complex-inner-product space is a density operator. Conversely, every rank-one density operator is the projector of a unique pure-state ray.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-ensemble-purification-correspondence",
+        "kind": "theorem",
+        "title": "Every finite state ensemble is obtainable from a purification",
+        "deps": [
+          "def-qc-ensemble-and-purification",
+          "thm-qc-ensemble-barycenter-is-density",
+          "def-qc-density-operator",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-dirac-notation-coordinate-identity",
+          "thm-qc-schmidt-decomposition",
+          "def-qc-finite-positive-effect-family",
+          "lem-qc-complete-effect-family-members-are-effects",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-tensor-map",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-linear-combination-and-span",
+          "def-orthogonal-complement",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-dimension-of-a-linear-subspace",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Let $(p_a,\\sigma_a)_{a=1}^n$ be a finite ensemble of density operators on a nonzero finite-dimensional complex-inner-product space $H$, with barycenter $\\rho=\\sum_ap_a\\sigma_a$. For every finite-dimensional auxiliary space $K$ and every purification $\\Psi\\in H\\otimes K$ of $\\rho$, there is a finite complete effect family $(E_a)_{a=1}^n$ on $K$ such that\n\n$$\\operatorname{Tr}_K\\!\\left[(I_H\\otimes\\sqrt{E_a})|\\Psi\\rangle\\langle\\Psi|(I_H\\otimes\\sqrt{E_a})\\right]=p_a\\sigma_a$$\n\nfor each $a$. In particular, for a pure-state ensemble $\\sigma_a=|u_a\\rangle\\langle u_a|$, the corresponding output is $p_a|u_a\\rangle\\langle u_a|$. A zero weight has $E_a=0$. The statement is a finite-dimensional operator identity and assumes no measurement postulate or outcome law.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §§2.1.2–2.1.3",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles, §2.5",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §§15.1 and 18.3",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-density-operator-convexity",
+        "kind": "theorem",
+        "title": "The set of density operators is convex",
+        "deps": [
+          "def-qc-ensemble-and-purification",
+          "def-qc-density-operator",
+          "thm-qc-ensemble-barycenter-is-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "For a nonzero finite-dimensional complex-inner-product space $H$, the set of density operators on $H$ is convex: if $\\rho,\\sigma$ are density operators and $t\\in[0,1]$, then $t\\rho+(1-t)\\sigma$ is a density operator.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.2",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles, §2.5.1",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §15.1",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-purification-minimal-environment-dimension",
+        "kind": "theorem",
+        "title": "The least purification environment dimension is the density rank",
+        "deps": [
+          "thm-qc-purification-existence-and-unitary-equivalence",
+          "thm-qc-schmidt-decomposition",
+          "def-qc-ensemble-and-purification",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-dimension",
+          "def-linear-combination-and-span",
+          "def-orthogonal-complement",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-dimension-of-a-linear-subspace",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-orthogonal-nonzero-vectors-are-linearly-independent",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "def-rank-and-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "For a density operator $\\rho$ on a nonzero finite-dimensional complex-inner-product space $H$, the least possible dimension of a finite auxiliary space $K$ for which $\\rho$ has a purification in $H\\otimes K$ is $\\operatorname{rank}(\\rho)$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.3, Theorem 2.10",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles, §§2.4–2.5",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §18.3",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2171,
+    "id": "pure-and-mixed-states-ensembles-and-schmidt-decomposition-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Pure and Mixed States, Ensembles, and Schmidt Decomposition — Examples",
+    "companion": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+    "requires": [
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-bell-state-schmidt-reduction",
+        "kind": "example",
+        "title": "Bell-state Schmidt decomposition and reduced density",
+        "deps": [
+          "def-qc-density-operator",
+          "thm-qc-density-operator-existence",
+          "def-qc-ensemble-and-purification",
+          "thm-qc-ray-projector-well-defined-and-bijective",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-partial-trace",
+          "lem-standard-basis-of-f-n",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For $H=K=\\mathbb C^2$ with ordered standard bases $e_0,e_1$, the Bell vector $\\Psi=(e_0\\otimes e_0+e_1\\otimes e_1)/\\sqrt2$ is already in Schmidt form: it is a finite sum $\\sum_j s_j u_j\\otimes v_j$ with positive coefficients and orthonormal families in both factors, here $s_0=s_1=1/\\sqrt2$ and $u_j=v_j=e_j$. Its reduced state on either factor is $I_2/2$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "John Watrous, The Theory of Quantum Information, §2.1.3, Example 2.8",
+            "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf",
+            "locator": "§2.1.3, PDF pp.76–77, Example 2.8 (maximally entangled vector and partial trace)."
+          },
+          {
+            "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles, §2.4",
+            "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf",
+            "locator": "§2.4, PDF pp.23–25 (Schmidt decomposition and maximally entangled two-qubit example)."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §18.3",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§18.3, PDF pp.158–159 (EPR pair and equal reduced states)."
+          }
+        ],
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

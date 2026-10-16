@@ -1,0 +1,2614 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-finite-character-values-have-unit-modulus",
+    "lem-qa-cyclic-group-has-n-characters",
+    "lem-qa-character-dual-of-a-product-factors",
+    "thm-qa-finite-abelian-dual-has-same-cardinality",
+    "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+    "thm-qa-finite-abelian-dual-character-orthogonality",
+    "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+    "lem-qa-finite-abelian-annihilators-are-subgroups",
+    "thm-qa-finite-abelian-fourier-transform-is-unitary",
+    "thm-qa-finite-abelian-fourier-convolution",
+    "thm-qa-finite-abelian-evaluation-map-isomorphism",
+    "thm-qa-finite-abelian-coset-fourier-transform",
+    "thm-qa-finite-abelian-fourier-inversion",
+    "thm-qa-finite-abelian-parseval",
+    "thm-qa-finite-abelian-double-annihilator",
+    "ex-qa-finite-abelian-fourier-tables-and-convolution"
+  ],
+  "contracts": {
+    "lem-qa-finite-character-values-have-unit-modulus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-order-in-a-group",
+          "source_section": "Definition",
+          "quote": "**Every element of a finite group has finite order.** If $G$ is finite then $S_g \\ne \\varnothing$ for every $g \\in G$, by [[lem-order-of-element-exists]], so $\\operatorname{ord}(g)$ is a natural number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-group-homomorphism-basic-properties",
+          "source_section": "Statement",
+          "quote": "Let $G$ and $G'$ be groups with identities $e$ and $e'$, and let $f : G \\to G'$ be a group homomorphism ([[def-group-homomorphism]]), so $f(xy) = f(x)f(y)$ for all $x, y \\in G$. Then:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-nth-roots-and-roots-of-unity",
+          "source_section": "Statement",
+          "quote": "Write $\\iota_{\\mathbb R}:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. If $n\\in\\mathbb N$ with $n\\ge1$ and $z=re^{i\\theta}\\ne0$, its $n$ distinct roots are $$r^{1/n}\\exp\\!\\left(i\\frac{\\theta+2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right),\\qquad k\\in\\mathbb N,\\quad 0\\le k<n.$$ For $z=0$, the only $n$th root is $0$. Thus the $n$th roots of unity are precisely $\\exp\\!\\left(i\\frac{2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right)$ for $k\\in\\mathbb N$ with $0\\le k<n$. The conventions and prerequisite facts used below are recorded in [[thm-polar-form-with-unique-principal-argument]], [[cor-complex-de-moivre-formula]], [[thm-kernel-and-fibres-of-complex-exponential]], [[thm-nth-roots-exist]], [[def-canonical-natural]], [[def-complex-integer-powers]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Put $n:=\\operatorname{ord}(x)\\ge1$. By [F1] and [F3], $\\chi(x)^n=\\chi(nx)=\\chi(0)=1$, with $\\chi(0)=1$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [F4], $\\chi(x)=\\exp(2\\pi i k/n)$ for some $0\\le k<n$. Therefore [F5] gives $|\\chi(x)|=1$. The argument includes $x=0$, for which $n=1$ and $\\chi(0)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 2.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The x=0 case, whose order is 1, is explicitly included in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "lem-qa-cyclic-group-has-n-characters": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-group-homomorphism-basic-properties",
+          "source_section": "Statement",
+          "quote": "$f(g^{n}) = f(g)^{n}$ for every $g \\in G$ and every $n \\in \\mathbb{Z}$, powers being those of [[def-group-power]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-classification-of-cyclic-groups",
+          "source_section": "Statement",
+          "quote": "- if $g$ has infinite order, $G\\cong(\\mathbb Z,+)$; - if $g$ has finite order $n$, necessarily $n\\ge1$, then $G\\cong(\\mathbb Z/n,+)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-nth-roots-and-roots-of-unity",
+          "source_section": "Statement",
+          "quote": "Write $\\iota_{\\mathbb R}:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. If $n\\in\\mathbb N$ with $n\\ge1$ and $z=re^{i\\theta}\\ne0$, its $n$ distinct roots are $$r^{1/n}\\exp\\!\\left(i\\frac{\\theta+2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right),\\qquad k\\in\\mathbb N,\\quad 0\\le k<n.$$ For $z=0$, the only $n$th root is $0$. Thus the $n$th roots of unity are precisely $\\exp\\!\\left(i\\frac{2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right)$ for $k\\in\\mathbb N$ with $0\\le k<n$. The conventions and prerequisite facts used below are recorded in [[thm-polar-form-with-unique-principal-argument]], [[cor-complex-de-moivre-formula]], [[thm-kernel-and-fibres-of-complex-exponential]], [[thm-nth-roots-exist]], [[def-canonical-natural]], [[def-complex-integer-powers]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-finite-abelian-character-dual",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is $$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$ where an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-group-power-laws",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{Z}$:\n\n1. $g^{m+n} = g^{m} g^{n}$;\n2. $g^{-m} = (g^{m})^{-1}$;\n3. $(g^{m})^{n} = g^{mn}$;",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "If $\\chi\\in\\widehat{C_n}$ as defined in [F4], then $\\chi(g)^n=\\chi(ng)=\\chi(0)=1$ by [F1] and the given relation $ng=0$, so evaluation at $g$ maps this character set into the set in [F3]. Every element is $jg$ by [F2], and [F1] gives $\\chi(jg)=\\chi(g)^j$; thus evaluation at $g$ is injective.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F1",
+            "F3",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Conversely, for each $n$th root of unity $z$, define $\\chi_z(jg):=z^j$ for $j\\in\\mathbb Z$. If $jg=kg$, [F2] gives $j-k=qn$ for some integer $q$, so $z^j=z^k(z^n)^q=z^k$ by [F3, F5]; hence the value is well defined. Also $\\chi_z(jg+kg)=z^{j+k}=\\chi_z(jg)\\chi_z(kg)$ by [F5], so $\\chi_z$ is an additive character in [F4], and $\\chi_z(g)=z$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Steps 1.1 and 1.2 make evaluation at $g$ a bijection from the character set [F4] to the $n$ distinct roots in [F3]. This also covers $n=1$: the quotient is trivial and the sole root is $1$. Therefore $|\\widehat{C_n}|=n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 2.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The trivial cyclic factor, empty product, or trivial-group case is included explicitly in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The roots are indexed over the full range 0≤k<n, including k=0 and k=n−1, in steps 1.2 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "lem-qa-character-dual-of-a-product-factors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-external-direct-product-of-groups",
+          "source_section": "Definition",
+          "quote": "The fact that this operation makes $G\\times H$ a group, with the indicated identity and inverses, is proved in [[thm-external-direct-product-is-a-group]]. Until that result is used, this definition introduces only the set and its componentwise binary operation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-external-direct-product-is-a-group",
+          "source_section": "Statement",
+          "quote": "For groups $G$ and $H$, the componentwise operation of [[def-external-direct-product-of-groups]] makes $G\\times H$ a group. Its identity is $(e_G,e_H)$, and",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-finite-abelian-character-dual",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is $$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$ where an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For $\\chi\\in\\widehat P$ as defined in [F4], put $\\chi_i(g_i):=\\chi(0,\\ldots,0,g_i,0,\\ldots,0)$. The coordinate embedding preserves addition by the componentwise operation in [F2], so [F1] shows each $\\chi_i$ is a character.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For a tuple $(\\chi_i)$, define $\\sigma((\\chi_i))(g_1,\\ldots,g_r):=\\prod_i\\chi_i(g_i)$. The componentwise operation and each homomorphism law give $\\sigma((\\chi_i))(g+h)=\\sigma((\\chi_i))(g)\\sigma((\\chi_i))(h)$, so this is a character of $P$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Restricting $\\sigma((\\chi_i))$ to the $i$th coordinate gives $\\chi_i$, because all other coordinates are zero and every character takes the identity to $1$. Thus restriction after $\\sigma$ is the identity on the product of duals.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "Every $(g_1,\\ldots,g_r)$ is the sum of its coordinate vectors. Applying a homomorphism $\\chi$ to this sum gives $\\chi(g_1,\\ldots,g_r)=\\prod_i\\chi_i(g_i)$, so $\\sigma$ after restriction is the identity on $\\widehat P$. For $r=0$, the sole group element and sole character give the stated singleton bijection.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Steps 2.1 and 2.2 show the two displayed maps are inverse bijections between the character sets in [F4], including the empty-product case.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty product case, with one element and one character, is handled explicitly in step 2.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 2.2 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The trivial cyclic factor, empty product, or trivial-group case is included explicitly in step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All selections are single finite witnesses or coordinates and are made explicitly in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Restriction after the constructed product character is the identity in step 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The coordinate character decomposition reconstructs the original character in step 2.2."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-dual-has-same-cardinality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+          "source_section": "Statement",
+          "quote": "For every finite abelian group $G$ there is a unique list $$1<n_1\\mid\\cdots\\mid n_r$$ such that $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$. Moreover $|G|=n_1\\cdots n_r$. The trivial group corresponds to the empty list and empty product.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-character-dual-of-a-product-factors",
+          "source_section": "Statement",
+          "quote": "Let $G_1,\\ldots,G_r$ be finite abelian groups and let $P=G_1\\times\\cdots\\times G_r$ be their recursively parenthesized external direct product. By convention, $P$ is the trivial group when $r=0$. Restriction to the coordinate factors gives a bijection $$\\widehat P\\longrightarrow\\widehat{G_1}\\times\\cdots\\times\\widehat{G_r}.$$ Its inverse sends $(\\chi_1,\\ldots,\\chi_r)$ to $\\chi(g_1,\\ldots,g_r)=\\prod_{i=1}^r\\chi_i(g_i)$. For $r=0$, both sides are singletons.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-cyclic-group-has-n-characters",
+          "source_section": "Statement",
+          "quote": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-of-finite-direct-product",
+          "source_section": "Statement",
+          "quote": "If $G$ and $H$ are finite groups, then their external direct product is finite and has order $|G\\times H|=|G|\\,|H|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$ ([[def-finite-cardinality]]). 2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$ Then $\\prod_{i<m} A_i$ is finite and $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the right-hand product being the $\\mathbb{N}$-valued one of [[def-nat-finite-sum-and-product]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-group-isomorphism-and-automorphism",
+          "source_section": "Definition",
+          "quote": "An **isomorphism** $f:G\\to H$ is a bijective group homomorphism ([[def-group-homomorphism]], [[def-injection-surjection-bijection]]). When $G=H$, it is an **automorphism** of $G$. Write",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-order-in-a-group",
+          "source_section": "Definition",
+          "quote": "**Every element of a finite group has finite order.** If $G$ is finite then $S_g \\ne \\varnothing$ for every $g \\in G$, by [[lem-order-of-element-exists]], so $\\operatorname{ord}(g)$ is a natural number.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-inverse-of-bijective-group-homomorphism",
+          "source_section": "Statement",
+          "quote": "If $f:G\\to H$ is a bijective group homomorphism, then its set-theoretic inverse $f^{-1}:H\\to G$ is a group homomorphism.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qa-finite-abelian-character-dual",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is $$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$ where an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "If the invariant-factor list is empty, [F1] identifies $G$ with the trivial group, which is cyclic of order $1$. By [F3] it has one character and one element, so $|\\widehat G|=|G|=1$ for the character set in [F8].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F8"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Otherwise fix one isomorphism $\\varphi:G\\to P$, where $P=C_{n_1}\\times\\cdots\\times C_{n_r}$ is the finite iterated product. By [F6] and [F7], both $\\varphi$ and $\\varphi^{-1}$ are group homomorphisms. Thus $\\chi\\mapsto\\chi\\circ\\varphi^{-1}$ and $\\psi\\mapsto\\psi\\circ\\varphi$ preserve the character sets in [F8] and are inverse bijections between $\\widehat G$ and $\\widehat P$.",
+          "step": "1.2",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "By [F2], $\\widehat P$ is in bijection with $\\prod_i\\widehat{C_{n_i}}$. Each factor has $n_i$ elements by [F3], and repeated application of [F5] to the finite Cartesian products gives $|\\widehat P|=\\prod_i n_i$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The same repeated product-order formula gives $|P|=\\prod_i n_i$ by [F4]; the isomorphism in step 1.2 preserves finite cardinality by [F6]. Hence $|G|=\\prod_i n_i=|\\widehat G|$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "F6",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty invariant-factor list is the trivial group and is handled explicitly in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 1.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The trivial cyclic factor, empty product, or trivial-group case is included explicitly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All selections are single finite witnesses or coordinates and are made explicitly in step 1.2; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-character-dual-is-finite-abelian-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-finite-abelian-character-dual",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is $$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$ where an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of $\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$, and $$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$ $$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$ If $a+bi\\ne0$, then $$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-group-homomorphism-basic-properties",
+          "source_section": "Statement",
+          "quote": "Let $G$ and $G'$ be groups with identities $e$ and $e'$, and let $f : G \\to G'$ be a group homomorphism ([[def-group-homomorphism]]), so $f(xy) = f(x)f(y)$ for all $x, y \\in G$. Then:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group with invariant-factor decomposition $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$, then $|\\widehat G|=\\prod_i n_i=|G|$. The empty product is allowed: it represents the trivial group and has value $1$. This is a finite-set cardinality assertion; it does not choose an isomorphism $G\\cong\\widehat G$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For $\\chi,\\psi\\in\\widehat G$, $x,y\\in G$, and pointwise product as in [F1], $(\\chi\\psi)(x+y)=\\chi(x)\\chi(y)\\psi(x)\\psi(y)=\\chi(x)\\psi(x)\\chi(y)\\psi(y)$ by commutativity in [F2]. Thus $\\chi\\psi$ is again a homomorphism. The constant-one function is a homomorphism because it sends every sum to $1\\cdot1=1$; [F3] also confirms each character takes the identity to $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "The pointwise inverse is a homomorphism because $(\\chi(x+y))^{-1}=(\\chi(x)\\chi(y))^{-1}=\\chi(x)^{-1}\\chi(y)^{-1}$ in the abelian group $\\mathbb C^{\\times}$. Associativity and commutativity of pointwise product, its identity law, and the inverse laws follow by evaluating at each $x$ and using the corresponding laws in [F2]. Hence $\\widehat G$ is an abelian group.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The dual is finite by [F4], and its order is $|G|$ by the same result. Thus it is a finite abelian group of the asserted order.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 2.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-dual-character-orthogonality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+          "source_section": "Statement",
+          "quote": "For every finite abelian group $G$ there is a unique list $$1<n_1\\mid\\cdots\\mid n_r$$ such that $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$. Moreover $|G|=n_1\\cdots n_r$. The trivial group corresponds to the empty list and empty product.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-character-dual-of-a-product-factors",
+          "source_section": "Statement",
+          "quote": "Let $G_1,\\ldots,G_r$ be finite abelian groups and let $P=G_1\\times\\cdots\\times G_r$ be their recursively parenthesized external direct product. By convention, $P$ is the trivial group when $r=0$. Restriction to the coordinate factors gives a bijection $$\\widehat P\\longrightarrow\\widehat{G_1}\\times\\cdots\\times\\widehat{G_r}.$$ Its inverse sends $(\\chi_1,\\ldots,\\chi_r)$ to $\\chi(g_1,\\ldots,g_r)=\\prod_{i=1}^r\\chi_i(g_i)$. For $r=0$, both sides are singletons.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-cyclic-group-has-n-characters",
+          "source_section": "Statement",
+          "quote": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-nth-roots-and-roots-of-unity",
+          "source_section": "Statement",
+          "quote": "Write $\\iota_{\\mathbb R}:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. If $n\\in\\mathbb N$ with $n\\ge1$ and $z=re^{i\\theta}\\ne0$, its $n$ distinct roots are $$r^{1/n}\\exp\\!\\left(i\\frac{\\theta+2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right),\\qquad k\\in\\mathbb N,\\quad 0\\le k<n.$$ For $z=0$, the only $n$th root is $0$. Thus the $n$th roots of unity are precisely $\\exp\\!\\left(i\\frac{2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right)$ for $k\\in\\mathbb N$ with $0\\le k<n$. The conventions and prerequisite facts used below are recorded in [[thm-polar-form-with-unique-principal-argument]], [[cor-complex-de-moivre-formula]], [[thm-kernel-and-fibres-of-complex-exponential]], [[thm-nth-roots-exist]], [[def-canonical-natural]], [[def-complex-integer-powers]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-finite-character-values-have-unit-modulus",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group, $\\chi:G\\to\\mathbb C^{\\times}$ is an additive character, and $x\\in G$, then $|\\chi(x)|=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying $$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$ For every $z,w\\in\\mathbb C$, $$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$ $$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group with invariant-factor decomposition $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$, then $|\\widehat G|=\\prod_i n_i=|G|$. The empty product is allowed: it represents the trivial group and has value $1$. This is a finite-set cardinality assertion; it does not choose an isomorphism $G\\cong\\widehat G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-group-isomorphism-and-automorphism",
+          "source_section": "Definition",
+          "quote": "An **isomorphism** $f:G\\to H$ is a bijective group homomorphism ([[def-group-homomorphism]], [[def-injection-surjection-bijection]]). When $G=H$, it is an **automorphism** of $G$. Write",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-inverse-of-bijective-group-homomorphism",
+          "source_section": "Statement",
+          "quote": "If $f:G\\to H$ is a bijective group homomorphism, then its set-theoretic inverse $f^{-1}:H\\to G$ is a group homomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qa-finite-abelian-character-dual",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is $$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$ where an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "If $G$ is trivial, every additive character sends its identity to $1$ by [F7], so [F10] makes the character set a singleton; the sum is $1=|G|$ and the formula holds. Otherwise fix an invariant-factor isomorphism $\\varphi:G\\to P=\\prod_i C_{n_i}$ from [F1]. By [F8] and [F9], composition with $\\varphi$ and $\\varphi^{-1}$ gives inverse bijections of the character sets [F10], taking $x,y$ to $a=\\varphi(x),b=\\varphi(y)$. Thus it suffices to compute the sum for $P$.",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "F10",
+            "F1",
+            "F8",
+            "F9",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "In each cyclic factor write $a_i=r_i g_i$ and $b_i=s_i g_i$, with $0\\le r_i,s_i<n_i$. By [F3] and [F7], a character whose value on $g_i$ is $\\omega_{n_i}^k$ has values $\\omega_{n_i}^{kr_i}$ and $\\omega_{n_i}^{ks_i}$ on $a_i$ and $b_i$. By [F4], $|\\omega_{n_i}|=1$, so $\\overline{\\omega_{n_i}^{ks_i}}=\\omega_{n_i}^{-ks_i}$. The character-indexed sum in this coordinate is therefore $\\sum_{k=0}^{n_i-1}\\omega_{n_i}^{k(r_i-s_i)}$. If $r_i=s_i$ modulo $n_i$, this equals $n_i$. Otherwise $q:=\\omega_{n_i}^{r_i-s_i}\\ne1$ by distinctness of the roots in [F3], and $q^{n_i}=1$, so $\\sum_{k=0}^{n_i-1}q^k=(1-q^{n_i})/(1-q)=0$ by the geometric-sum identity. For $n_i=1$ the first case applies and the sum is $1$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F7",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Under the product-character bijection, finite-sum factorization [F5] makes the sum over $\\widehat P$ the product of these cyclic sums. It is therefore $\\prod_i n_i$ exactly when every coordinate of $a$ equals the corresponding coordinate of $b$, and is zero otherwise.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "The coordinate map $\\varphi$ is injective, so all coordinates agree exactly when $x=y$; and [F1] gives $|G|=|P|=\\prod_i n_i$. The empty product case was handled in step 1.1. This proves the formula.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty invariant-factor list is the trivial group and is handled explicitly in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 1.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The trivial cyclic factor, empty product, or trivial-group case is included explicitly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-subgroup-annihilator-cardinality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-subgroups-of-abelian-groups-are-normal",
+          "source_section": "Statement",
+          "quote": "Every subgroup of an abelian group is normal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-quotient-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $N\\mathrel{\\trianglelefteq}G$ be a normal subgroup ([[def-normal-subgroup]]). The **quotient group**, or **factor group**, $G/N$ has the left cosets $$G/N:=\\{gN:g\\in G\\}$$ as its elements ([[def-coset]], [[def-index]]), with product",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-quotient-group-laws",
+          "source_section": "Statement",
+          "quote": "Let $N\\mathrel{\\trianglelefteq}G$. The left cosets form a group $G/N$ under",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-index",
+          "source_section": "Definition",
+          "quote": "Let $H\\le G$. The **left coset set** is $$G/H:=\\{gH:g\\in G\\}.$$ By [[lem-coset-partition]], its elements are exactly the blocks of the coset partition of $G$. The **index** of $H$ in $G$ is $$[G:H]:=|G/H|$$ when $G/H$ is finite, with finite cardinality as in [[def-finite-cardinality]]. If $G/H$ is not finite, write $[G:H]=\\infty$. Here $\\infty$ is a symbol, not a natural number, and no arithmetic with it is defined. The right coset set has the same finite or infinite size because [[lem-left-and-right-cosets-equinumerous]] gives an explicit bijection between the two coset sets. Thus the index does not depend on choosing left rather than right cosets.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-quotient-of-an-abelian-group-is-abelian",
+          "source_section": "Statement",
+          "quote": "If $G$ is abelian and $N\\mathrel{\\trianglelefteq}G$, then $G/N$ is abelian.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-coset-membership-and-equality",
+          "source_section": "Statement",
+          "quote": "Let $H\\le G$ and let $a,b,x\\in G$. Then $$x\\in aH\\iff a^{-1}x\\in H,$$ and $$aH=bH\\iff a^{-1}b\\in H.$$ The corresponding right-coset criterion is $Ha=Hb$ if and only if $ab^{-1}\\in H$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group with invariant-factor decomposition $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$, then $|\\widehat G|=\\prod_i n_i=|G|$. The empty product is allowed: it represents the trivial group and has value $1$. This is a finite-set cardinality assertion; it does not choose an isomorphism $G\\cong\\widehat G$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lagrange",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and $H\\le G$. Then $$|G|=[G:H]\\,|H|.$$ Consequently, under the canonical embedding $\\iota:\\mathbb N\\to\\mathbb Z$, $\\iota(|H|)$ divides $\\iota(|G|)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is a **subgroup** of $G$, written $H \\le G$, when",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by $$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$ For any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define $$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$ The pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "By [F1] the quotient is defined; [F2] gives its group law, and [F3] makes $Q:=G/H$ finite abelian. Finiteness also follows from the finite coset partition in [F6].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Let $\\pi:G\\to Q$ be $\\pi(g)=g+H$. The quotient law in [F2] gives $\\pi(g+g')=(g+H)+(g'+H)=\\pi(g)+\\pi(g')$, so $\\pi$ is a homomorphism. For $h\\in H$, $\\pi(h)=H$, the identity coset; every character sends the identity to $1$. Thus for $\\psi\\in\\widehat Q$, $\\psi\\circ\\pi$ is a character by [F8] and is trivial on $H$, so [F9] shows inflation maps $\\widehat Q$ into $H^\\perp$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F8",
+            "F9",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "For $\\chi\\in H^\\perp$, define $\\widetilde\\chi(g+H):=\\chi(g)$. If $g+H=g'+H$, [F4] gives $g'-g\\in H$, hence $\\chi(g')=\\chi(g)\\chi(g'-g)=\\chi(g)$; so $\\widetilde\\chi$ is well defined. For cosets $g+H,g'+H$, the quotient law [F2] gives $\\widetilde\\chi((g+H)+(g'+H))=\\chi(g+g')=\\chi(g)\\chi(g')$, so $\\widetilde\\chi$ is a character of $Q$.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For every $g\\in G$, $(\\widetilde\\chi\\circ\\pi)(g)=\\widetilde\\chi(g+H)=\\chi(g)$; for every $\\psi\\in\\widehat Q$ and coset $g+H$, descent of its inflation returns $\\widetilde{(\\psi\\circ\\pi)}(g+H)=(\\psi\\circ\\pi)(g)=\\psi(g+H)$. Thus inflation and descent are inverse bijections. By [F5], $|H^\\perp|=|\\widehat Q|=|Q|$, and by [F2], $|Q|=[G:H]$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F2",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Lagrange [F6] gives $|G|=[G:H]|H|$. Combining with step 2.1 gives $|H^\\perp|\\,|H|=|G|$, and division by the positive integer $|H|$ from [F7] gives $|H^\\perp|=|G|/|H|$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 3.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof allows H={0} and H=G: quotient, annihilator cardinality, and cancellation are valid since subgroup orders are positive; see steps 2.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All selections are single finite witnesses or coordinates and are made explicitly in step 2.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Inflation maps quotient characters to H-perp in step 1.2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Descent is well-defined in step 1.3 and is inverse to inflation in step 2.1."
+        }
+      ]
+    },
+    "lem-qa-finite-abelian-annihilators-are-subgroups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$, the pointwise product, constant-one identity and pointwise inverse on $\\widehat G$ make it a finite abelian group. Its order is $|\\widehat G|=|G|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is a **subgroup** of $G$, written $H \\le G$, when",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The trivial character is in $H^\\perp$. If $\\chi,\\psi\\in H^\\perp$ and $h\\in H$, then $(\\chi\\psi)(h)=\\chi(h)\\psi(h)=1$, and $\\chi^{-1}(h)=\\chi(h)^{-1}=1$. Thus $H^\\perp$ contains the identity and is closed under pointwise product and inverse in the group $\\widehat G$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "The identity $0$ of $G$ lies in $K^\\perp$ by [F3]. If $g,h\\in K^\\perp$, then for every $\\chi\\in K$, $\\chi(g+h)=\\chi(g)\\chi(h)=1$ and $\\chi(-g)=\\chi(g)^{-1}=1$. Therefore $K^\\perp$ is closed under addition and inverses in $G$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By the subgroup criterion in [F2], steps 1.1 and 1.2 show respectively that $H^\\perp\\le\\widehat G$ and $K^\\perp\\le G$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 2.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-fourier-transform-is-unitary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-normalized-finite-abelian-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by $$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$ Here $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group with invariant-factor decomposition $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$, then $|\\widehat G|=\\prod_i n_i=|G|$. The empty product is allowed: it represents the trivial group and has value $1$. This is a finite-set cardinality assertion; it does not choose an isomorphism $G\\cong\\widehat G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-additive-character-orthogonality-from-representation-orthogonality",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group and let $\\chi,\\psi:G\\to\\mathbb C^{\\times}$ be additive characters of $G$ ([[def-additive-character-of-a-finite-abelian-group]]). Then $$\\frac{1}{|G|}\\sum_{g\\in G}\\chi(g)\\,\\overline{\\psi(g)} =\\begin{cases}1&\\chi=\\psi,\\\\ 0&\\chi\\ne\\psi,\\end{cases}$$ the sum being the finite sum over $G$ of complex-valued terms ([[def-finite-sum-in-a-commutative-monoid]]). In particular, if $\\chi$ is not the trivial additive character then $\\sum_{g\\in G}\\chi(g)=0$. The normalized inner product is linear in its first argument, exactly as on the published representation-character page ([[def-standard-inner-product-on-complex-class-functions]]).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-finite-abelian-dual-character-orthogonality",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$ and $x,y\\in G$, $$\\sum_{\\chi\\in\\widehat G}\\chi(x)\\overline{\\chi(y)}=\\begin{cases}|G|,&x=y,\\\\0,&x\\ne y.\\end{cases}$$ This is orthogonality of the columns indexed by group elements. It is proved from cyclic root sums and is not inferred from row orthogonality.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-rational-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$ with $a > 0$ and let $r \\in \\mathbb{Q}$ ([[def-rationals]]). Every rational has a representative with positive denominator ([[lem-rat-positive-denominator]]), so write $r = m/n$ with $m \\in \\mathbb{Z}$ and $n$ a positive integer; a positive integer is the image of a unique natural $\\ge 1$ ([[lem-nat-embeds-int]]), and we write $n$ for that natural too. Define",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-rational-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a, b > 0$ and let $r, s \\in \\mathbb{Q}$, with rational powers as in [[def-rational-power]]. Then:",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "By [F1], the transform acts on a function $f$ by the coefficient formula defining $U$. By [F2], its row and column index sets have equal finite cardinality, so $U$ is square.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For $x,y\\in G$, the $(x,y)$ entry of $U^*U$ is $N_{\\mathbb R}^{-1}\\sum_{\\chi\\in\\widehat G}\\chi(x)\\overline{\\chi(y)}$, because [F6] gives $(N_{\\mathbb R}^{-1/2})^2=N_{\\mathbb R}^{-1}$. By [F4], this is $1$ when $x=y$ and $0$ otherwise, exactly the entry of $I_G$. Hence $U^*U=I_G$.",
+          "step": "1.2",
+          "inputs": [
+            "F6",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "For $\\chi,\\psi\\in\\widehat G$, the $(\\chi,\\psi)$ entry of $UU^*$ is $N_{\\mathbb R}^{-1}\\sum_{x\\in G}\\overline{\\chi(x)}\\psi(x)$. By [F6] and [F3], this is $1$ when $\\chi=\\psi$ and $0$ otherwise, exactly the entry of $I_{\\widehat G}$. Hence $UU^*=I_{\\widehat G}$.",
+          "step": "1.3",
+          "inputs": [
+            "F6",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [F1], the action of this coefficient matrix on the function values of any $f\\in\\mathbb C^G$ is exactly $F_Gf$. The two identities in steps 1.2 and 1.3 therefore prove the asserted unitarity of the transform as defined here.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 2.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-fourier-convolution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-finite-abelian-convolution",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]), written additively, and let $f,g\\in\\mathbb C^G$ be functions ([[def-function-space]]). Their (unnormalized) convolution is the function $$ (f*g)(z):=\\sum_{x\\in G}f(x)g(z-x),\\qquad z\\in G. $$ The sum is the finite sum of [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of $\\mathbb C$; it is independent of any enumeration of $G$. No factor of $|G|^{-1}$ is included. The Fourier convolution theorem below proves the resulting normalization factor.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-normalized-finite-abelian-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by $$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$ Here $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying $$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$ For every $z,w\\in\\mathbb C$, $$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$ $$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-rational-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a, b > 0$ and let $r, s \\in \\mathbb{Q}$, with rational powers as in [[def-rational-power]]. Then:",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Substitute [F1] into [F2] and distribute the finite sums; [F5] permits the iterated sum, giving $F_G(f*g)(\\chi)=N_{\\mathbb R}^{-1/2}\\sum_{z\\in G}\\sum_{x\\in G}f(x)g(z-x)\\overline{\\chi(z)}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The map $(z,x)\\mapsto(x,y)$ with $y=z-x$ is a bijection $G\\times G\\to G\\times G$, with inverse $(x,y)\\mapsto(x+y,x)$. Reindexing by this bijection and using [F3] and [F4] gives $F_G(f*g)(\\chi)=N_{\\mathbb R}^{-1/2}\\sum_{x,y}f(x)g(y)\\overline{\\chi(x)}\\,\\overline{\\chi(y)}=N_{\\mathbb R}^{-1/2}(\\sum_x f(x)\\overline{\\chi(x)})(\\sum_y g(y)\\overline{\\chi(y)})$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "By [F2], each parenthesized sum in step 2.1 equals $N_{\\mathbb R}^{1/2}$ times the corresponding transform value. The coefficient is therefore $N_{\\mathbb R}^{-1/2}N_{\\mathbb R}^{1/2}N_{\\mathbb R}^{1/2}=N_{\\mathbb R}^{1/2}$ by [F6], which proves the formula.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 3.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-evaluation-map-isomorphism": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$, the pointwise product, constant-one identity and pointwise inverse on $\\widehat G$ make it a finite abelian group. Its order is $|\\widehat G|=|G|$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-finite-abelian-dual-has-same-cardinality",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group with invariant-factor decomposition $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$, then $|\\widehat G|=\\prod_i n_i=|G|$. The empty product is allowed: it represents the trivial group and has value $1$. This is a finite-set cardinality assertion; it does not choose an isomorphism $G\\cong\\widehat G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+          "source_section": "Statement",
+          "quote": "For every finite abelian group $G$ there is a unique list $$1<n_1\\mid\\cdots\\mid n_r$$ such that $G\\cong C_{n_1}\\times\\cdots\\times C_{n_r}$. Moreover $|G|=n_1\\cdots n_r$. The trivial group corresponds to the empty list and empty product.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-character-dual-of-a-product-factors",
+          "source_section": "Statement",
+          "quote": "Let $G_1,\\ldots,G_r$ be finite abelian groups and let $P=G_1\\times\\cdots\\times G_r$ be their recursively parenthesized external direct product. By convention, $P$ is the trivial group when $r=0$. Restriction to the coordinate factors gives a bijection $$\\widehat P\\longrightarrow\\widehat{G_1}\\times\\cdots\\times\\widehat{G_r}.$$ Its inverse sends $(\\chi_1,\\ldots,\\chi_r)$ to $\\chi(g_1,\\ldots,g_r)=\\prod_{i=1}^r\\chi_i(g_i)$. For $r=0$, both sides are singletons.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-cyclic-group-has-n-characters",
+          "source_section": "Statement",
+          "quote": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-nth-roots-and-roots-of-unity",
+          "source_section": "Statement",
+          "quote": "Write $\\iota_{\\mathbb R}:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. If $n\\in\\mathbb N$ with $n\\ge1$ and $z=re^{i\\theta}\\ne0$, its $n$ distinct roots are $$r^{1/n}\\exp\\!\\left(i\\frac{\\theta+2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right),\\qquad k\\in\\mathbb N,\\quad 0\\le k<n.$$ For $z=0$, the only $n$th root is $0$. Thus the $n$th roots of unity are precisely $\\exp\\!\\left(i\\frac{2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right)$ for $k\\in\\mathbb N$ with $0\\le k<n$. The conventions and prerequisite facts used below are recorded in [[thm-polar-form-with-unique-principal-argument]], [[cor-complex-de-moivre-formula]], [[thm-kernel-and-fibres-of-complex-exponential]], [[thm-nth-roots-exist]], [[def-canonical-natural]], [[def-complex-integer-powers]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Clause 3 is the finite form of the Dedekind statement: a finite set is not equinumerous with a proper subset of itself. Clause 4 is its working form, and **finiteness is exactly the hypothesis that fails in general**: the successor map is an injection of $\\mathbb{N}$ into itself that is not surjective, which is the false statement recorded on this page's companion.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**Why exactly one, which is the whole content of the definition.** At least one such $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists: if $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$, because the inverse of a bijection is a bijection, and hence $n \\approx m$, because a composition of bijections is a bijection ([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by claim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number and not a family of choices.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-group-isomorphism-and-automorphism",
+          "source_section": "Definition",
+          "quote": "An **isomorphism** $f:G\\to H$ is a bijective group homomorphism ([[def-group-homomorphism]], [[def-injection-surjection-bijection]]). When $G=H$, it is an **automorphism** of $G$. Write",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-finite-abelian-character-dual",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is $$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$ where an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "Since $G$ and $\\mathbb C^{\\times}$ are groups, every additive character automatically satisfies $\\chi(0)=1$ and $\\chi(-x)=\\chi(x)^{-1}$ ([[lem-group-homomorphism-basic-properties]]), so multiplicativity is the whole requirement.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For each $g\\in G$, evaluation on the dual group [F7] is a character: if $\\chi,\\psi\\in\\widehat G$, then $\\operatorname{ev}(g)(\\chi\\psi)=\\chi(g)\\psi(g)=\\operatorname{ev}(g)(\\chi)\\operatorname{ev}(g)(\\psi)$. Thus $\\operatorname{ev}(g)\\in\\widehat{\\widehat G}$.",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Evaluation is a homomorphism from $G$ to the pointwise group $\\widehat{\\widehat G}$, since for every $\\chi$, $\\operatorname{ev}(g+h)(\\chi)=\\chi(g+h)=\\chi(g)\\chi(h)=(\\operatorname{ev}(g)\\operatorname{ev}(h))(\\chi)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "If $G$ is nontrivial, fix the isomorphism $\\varphi:G\\to\\prod_i C_{n_i}$ from [F3]. For any nonzero $g$, some coordinate is $\\varphi(g)_j=[m]$ with $1\\le m<n_j$. In the product, the character trivial on every coordinate except $j$, with generator value $\\omega_{n_j}$ on that factor, exists by [F4]. Its composite $\\chi$ with $\\varphi$ is a character of $G$ and satisfies $\\chi(g)=\\omega_{n_j}^m\\ne1$, because the listed $n_j$ roots are distinct and $m$ is nonzero modulo $n_j$. Thus every nonzero element is detected by a character. The trivial-group case has no nonzero element and satisfies this statement vacuously.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "claim": "If $\\operatorname{ev}(g)=\\operatorname{ev}(h)$, then for every $\\chi\\in\\widehat G$, [F7] and [F8] give $\\chi(g-h)=\\chi(g)\\chi(h)^{-1}=1$. If $g-h\\ne0$, step 3.1 supplies a character with $\\chi(g-h)\\ne1$, a contradiction. Hence $g=h$ and evaluation is injective.",
+          "step": "3.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "By [F2], $|\\widehat G|=|G|$ and, applying [F2] to the finite abelian group $\\widehat G$ from [F1], $|\\widehat{\\widehat G}|=|\\widehat G|$. Thus the finite domain and codomain of the injective map in step 3.2 have equal cardinality.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "The image of $\\operatorname{ev}$ is a subset of $\\widehat{\\widehat G}$ with the same finite cardinality as that codomain, because $\\operatorname{ev}$ is injective. By [F5] the image is the whole codomain, so $\\operatorname{ev}$ is bijective. Together with step 2.1 and the definition [F6], it is a group isomorphism.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "F6",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 3.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All selections are single finite witnesses or coordinates and are made explicitly in step 3.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-coset-fourier-transform": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-normalized-finite-abelian-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by $$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$ Here $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by $$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$ For any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define $$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$ The pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+          "source_section": "Statement",
+          "quote": "For a subgroup $H\\le G$ of a finite abelian group, restriction and inflation identify $H^\\perp$ with the character dual of $G/H$. Consequently $$|H^\\perp|=|G/H|=[G:H]=\\frac{|G|}{|H|},\\qquad |H^\\perp|\\,|H|=|G|.$$ The quotient convention is left cosets, with additive notation.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-additive-character-orthogonality-from-representation-orthogonality",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group and let $\\chi,\\psi:G\\to\\mathbb C^{\\times}$ be additive characters of $G$ ([[def-additive-character-of-a-finite-abelian-group]]). Then $$\\frac{1}{|G|}\\sum_{g\\in G}\\chi(g)\\,\\overline{\\psi(g)} =\\begin{cases}1&\\chi=\\psi,\\\\ 0&\\chi\\ne\\psi,\\end{cases}$$ the sum being the finite sum over $G$ of complex-valued terms ([[def-finite-sum-in-a-commutative-monoid]]). In particular, if $\\chi$ is not the trivial additive character then $\\sum_{g\\in G}\\chi(g)=0$. The normalized inner product is linear in its first argument, exactly as on the published representation-character page ([[def-standard-inner-product-on-complex-class-functions]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-finite-character-values-have-unit-modulus",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group, $\\chi:G\\to\\mathbb C^{\\times}$ is an additive character, and $x\\in G$, then $|\\chi(x)|=1$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$. 2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$. 3. If $a:S\\times T\\to M$, then $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying $$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$ For every $z,w\\in\\mathbb C$, $$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$ $$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-rational-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a, b > 0$ and let $r, s \\in \\mathbb{Q}$, with rational powers as in [[def-rational-power]]. Then:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-rational-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$ with $a > 0$ and let $r \\in \\mathbb{Q}$ ([[def-rationals]]). Every rational has a representative with positive denominator ([[lem-rat-positive-denominator]]), so write $r = m/n$ with $m \\in \\mathbb{Z}$ and $n$ a positive integer; a positive integer is the image of a unique natural $\\ge 1$ ([[lem-nat-embeds-int]]), and we write $n$ for that natural too. Define",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-rational-power-well-defined",
+          "source_section": "Statement",
+          "quote": "Consequently the value $a^{r}$ of [[def-rational-power]] depends only on the rational $r$ and not on the representative $m/n$ chosen for it, so [[def-rational-power]] really does define a function $(a, r) \\mapsto a^{r}$ on $\\{a > 0\\} \\times \\mathbb{Q}$. The same conclusion holds in the supplementary case $a = 0$ with $r > 0$ ([[def-rat-order]]), where every representative gives the value $0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "In the sum defining $F_G1_{x_0+H}$, only points of $x_0+H$ contribute; the bijective reindexing [F6] gives $F_G1_{x_0+H}(\\chi)=N^{-1/2}\\sum_{h\\in H}\\overline{\\chi(x_0+h)}$.",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The character homomorphism law and conjugation law [F7] factor each summand as $\\overline{\\chi(x_0)}\\,\\overline{\\chi(h)}$. If $\\chi\\in H^\\perp$, [F2] makes every $\\chi(h)=1$, so the sum is $|H|\\overline{\\chi(x_0)}$. If $\\chi\\notin H^\\perp$, some $h_0\\in H$ has $\\chi(h_0)\\ne1$; hence $\\overline\\chi|_H$ is a nontrivial character of $H$. Applying [F4] to the finite group $H$ makes its sum zero. Substitution in step 1.1 proves the indicator formula.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Multiplying the indicator formula by $|H|^{-1/2}$ gives amplitude $|H|^{1/2}N^{-1/2}\\overline{\\chi(x_0)}$ on $H^\\perp$. From [F3] and positivity, $N=|H||H^\\perp|$; [F8] and well-definedness [F9] of positive rational powers therefore give the scalar as $|H^\\perp|^{-1/2}$. Since $|\\chi(x_0)|=1$ by [F5], its squared norm is $|H^\\perp|\\cdot |H^\\perp|^{-1}=1$. The translation in [F6] also shows the original normalized coset indicator has squared norm $|H|^{-1}|x_0+H|=1$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F8",
+            "F9",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "If $H=G$, then $H^\\perp$ consists only of the trivial character and the normalized amplitude is $1$. If $H=\\{0\\}$, then $H^\\perp=\\widehat G$ and the normalized delta function has amplitude $N^{-1/2}\\overline{\\chi(x_0)}$ at every character, again with squared norm $1$. These boundary cases agree with the formula.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 4.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The extreme subgroups H=G and H={0} are evaluated in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both extreme subgroup cases H=G and H={0} are checked in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-fourier-inversion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-fourier-transform-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $N_{\\mathbb R}$ be the canonical positive real image of $|G|$ from [[def-qa-normalized-finite-abelian-fourier-transform]]. Define the finite coefficient matrix $U$, with rows indexed by $\\widehat G$ and columns by $G$, by\n$$U_{\\chi,x}=N_{\\mathbb R}^{-1/2}\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G,\\ x\\in G.$$\nIt is square and satisfies $U^*U=I_G$ and $UU^*=I_{\\widehat G}$, where $U^*$ is the conjugate transpose and $I_X$ is the identity matrix indexed by $X$, with $(I_X)_{x,y}=1$ when $x=y$ and $0$ otherwise. These two identities are the meaning of “unitary” here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-normalized-finite-abelian-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by $$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$ Here $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Write $F_Gf=Uf$ in the point-mass coordinate bases. From [F1], $U^*$ is a two-sided inverse of $U$, so $f=U^*(F_Gf)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The $x$ coordinate of $U^*(F_Gf)$ is $\\sum_{\\chi\\in\\widehat G}\\overline{U_{\\chi,x}}(F_Gf)(\\chi)$. By [F2], $\\overline{U_{\\chi,x}}=N_{\\mathbb R}^{-1/2}\\chi(x)$, which gives exactly the displayed formula.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 1.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-parseval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-fourier-transform-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $N_{\\mathbb R}$ be the canonical positive real image of $|G|$ from [[def-qa-normalized-finite-abelian-fourier-transform]]. Define the finite coefficient matrix $U$, with rows indexed by $\\widehat G$ and columns by $G$, by\n$$U_{\\chi,x}=N_{\\mathbb R}^{-1/2}\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G,\\ x\\in G.$$\nIt is square and satisfies $U^*U=I_G$ and $UU^*=I_{\\widehat G}$, where $U^*$ is the conjugate transpose and $I_X$ is the identity matrix indexed by $X$, with $(I_X)_{x,y}=1$ when $x=y$ and $0$ otherwise. These two identities are the meaning of “unitary” here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-normalized-finite-abelian-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by $$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$ Here $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Expanding the left side in point-mass coordinates using [F2] gives $\\sum_{\\chi}(\\sum_x U_{\\chi,x}f(x))\\overline{(\\sum_y U_{\\chi,y}g(y))}=\\sum_{x,y}f(x)\\overline{g(y)}(\\sum_\\chi U_{\\chi,x}\\overline{U_{\\chi,y}})$. The inner finite sum is the conjugate of the $(x,y)$ entry of $U^*U$, so [F1] makes it $1$ if $x=y$ and $0$ otherwise.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The diagonal terms remaining from step 1.1 are exactly $\\sum_x f(x)\\overline{g(x)}$. Taking $g=f$ gives preservation of the squared counting norm as well.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 1.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    },
+    "thm-qa-finite-abelian-double-annihilator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-finite-abelian-evaluation-map-isomorphism",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$, give $\\widehat G$ its pointwise multiplication. Its dual $\\widehat{\\widehat G}$ consists of functions $\\Phi:\\widehat G\\to\\mathbb C^{\\times}$ satisfying $\\Phi(\\chi\\psi)=\\Phi(\\chi)\\Phi(\\psi)$. The evaluation map\n$$\\operatorname{ev}:G\\longrightarrow\\widehat{\\widehat G},\\qquad \\operatorname{ev}(g)(\\chi):=\\chi(g),$$\nis a group isomorphism. The map itself is canonical; a decomposition into cyclic factors is used only to prove it is injective.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by $$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$ For any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define $$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$ The pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$, the pointwise product, constant-one identity and pointwise inverse on $\\widehat G$ make it a finite abelian group. Its order is $|\\widehat G|=|G|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-finite-abelian-annihilators-are-subgroups",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite abelian group. For every subgroup $H\\le G$, $H^\\perp$ is a subgroup of $\\widehat G$. For every subgroup $K\\le\\widehat G$, $K^\\perp$ is a subgroup of $G$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-finite-abelian-subgroup-annihilator-cardinality",
+          "source_section": "Statement",
+          "quote": "For a subgroup $H\\le G$ of a finite abelian group, restriction and inflation identify $H^\\perp$ with the character dual of $G/H$. Consequently $$|H^\\perp|=|G/H|=[G:H]=\\frac{|G|}{|H|},\\qquad |H^\\perp|\\,|H|=|G|.$$ The quotient convention is left cosets, with additive notation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Clause 3 is the finite form of the Dedekind statement: a finite set is not equinumerous with a proper subset of itself. Clause 4 is its working form, and **finiteness is exactly the hypothesis that fails in general**: the successor map is an injection of $\\mathbb{N}$ into itself that is not surjective, which is the false statement recorded on this page's companion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is a **subgroup** of $G$, written $H \\le G$, when",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Put $A:=(H^\\perp)^{\\perp_{\\widehat G}}=\\{\\Phi\\in\\widehat{\\widehat G}:\\Phi(\\chi)=1\\text{ for every }\\chi\\in H^\\perp\\}$, the character annihilator of the subgroup $H^\\perp$ inside the group $\\widehat G$. If $h\\in H$, every $\\chi\\in H^\\perp$ has $\\chi(h)=1$ by [F2], so $\\operatorname{ev}(h)(\\chi)=1$ for every such $\\chi$ and $\\operatorname{ev}(h)\\in A$. Thus $\\operatorname{ev}(H)\\subseteq A$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [F3], $H^\\perp$ is a subgroup of the finite abelian group $\\widehat G$; [F6] gives $|H^\\perp|\\ge1$. Applying [F4] to $G,H$ and then to $\\widehat G,H^\\perp$ gives $|H^\\perp||H|=|G|$ and $|A||H^\\perp|=|\\widehat G|=|G|$, the last equality following from [F1]. Cancellation gives $|A|=|H|$. The injective evaluation isomorphism [F1] gives $|\\operatorname{ev}(H)|=|H|$; with step 1.1, the finite-subset result [F5] yields $A=\\operatorname{ev}(H)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F4",
+            "F1",
+            "step 1.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "By definition [F2], $g\\in(H^\\perp)^\\perp$ exactly when $\\chi(g)=1$ for every $\\chi\\in H^\\perp$, which is exactly when $\\operatorname{ev}(g)\\in A$. Since step 2.1 proves $A=\\operatorname{ev}(H)$ and [F1] makes evaluation injective, its preimage is $H$; hence $(H^\\perp)^\\perp=H$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the group has one element, every index set is a singleton and the positive normalization is 1; the general argument at step 2.1 applies, with explicit trivial cases where stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof allows H={0} and H=G: quotient, annihilator cardinality, and cancellation are valid since subgroup orders are positive; see steps 2.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite group sums and contains no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The inclusion ev(H)⊆A is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The equality A=ev(H) and its pullback are proved in steps 2.1 and 3.1."
+        }
+      ]
+    },
+    "ex-qa-finite-abelian-fourier-tables-and-convolution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-additive-character-of-a-finite-abelian-group",
+          "source_section": "Definition",
+          "quote": "An **additive character** of $G$ is a group homomorphism ([[def-group-homomorphism]]) $$\\chi:G\\longrightarrow\\mathbb C^{\\times},\\qquad \\chi(x+y)=\\chi(x)\\,\\chi(y)\\quad(x,y\\in G).$$",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-finite-abelian-character-dual",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]) written additively. Its set of additive characters is $$\\widehat G:=\\{\\chi:G\\to\\mathbb C^{\\times}:\\chi(x+y)=\\chi(x)\\chi(y)\\text{ for all }x,y\\in G\\},$$ where an additive character is the group homomorphism of [[def-additive-character-of-a-finite-abelian-group]]. For $\\chi,\\psi\\in\\widehat G$, define their pointwise product by $(\\chi\\psi)(x):=\\chi(x)\\psi(x)$. The constant-one function is denoted $1$, and the pointwise inverse is $\\chi^{-1}(x):=\\chi(x)^{-1}$.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-normalized-finite-abelian-fourier-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathbb C^G$, define $F_Gf\\in\\mathbb C^{\\widehat G}$ by $$ (F_Gf)(\\chi):=N_{\\mathbb R}^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\chi(x)},\\qquad \\chi\\in\\widehat G. $$ Here $\\mathbb C^X$ is the space of all functions $X\\to\\mathbb C$ ([[def-function-space]]) and the sum is the finite sum in $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]). This fixes the negative-character sign and uses the same factor $N_{\\mathbb R}^{-1/2}$ in both directions. Unitarity is proved separately; it is not part of this definition.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-finite-abelian-convolution",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group ([[def-group]]), written additively, and let $f,g\\in\\mathbb C^G$ be functions ([[def-function-space]]). Their (unnormalized) convolution is the function $$ (f*g)(z):=\\sum_{x\\in G}f(x)g(z-x),\\qquad z\\in G. $$ The sum is the finite sum of [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of $\\mathbb C$; it is independent of any enumeration of $G$. No factor of $|G|^{-1}$ is included. The Fourier convolution theorem below proves the resulting normalization factor.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-finite-abelian-subgroup-annihilator",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite abelian group with character dual $\\widehat G$ ([[def-qa-finite-abelian-character-dual]]). For a subgroup $H\\le G$ ([[def-subgroup]]), define its character annihilator by $$H^{\\perp}:=\\{\\chi\\in\\widehat G:\\chi(h)=1\\text{ for every }h\\in H\\}.$$ For any subset $K\\subseteq\\widehat G$ (in particular, for any subgroup once $\\widehat G$ has been proved to be a group), define $$K^{\\perp}:=\\{g\\in G:\\chi(g)=1\\text{ for every }\\chi\\in K\\}.$$ The pairing is evaluation, and the same convention is used in both directions. `lem-qa-finite-abelian-annihilators-are-subgroups` proves that these sets are subgroups when the input is a subgroup.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-nth-roots-and-roots-of-unity",
+          "source_section": "Statement",
+          "quote": "Write $\\iota_{\\mathbb R}:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. If $n\\in\\mathbb N$ with $n\\ge1$ and $z=re^{i\\theta}\\ne0$, its $n$ distinct roots are $$r^{1/n}\\exp\\!\\left(i\\frac{\\theta+2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right),\\qquad k\\in\\mathbb N,\\quad 0\\le k<n.$$ For $z=0$, the only $n$th root is $0$. Thus the $n$th roots of unity are precisely $\\exp\\!\\left(i\\frac{2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right)$ for $k\\in\\mathbb N$ with $0\\le k<n$. The conventions and prerequisite facts used below are recorded in [[thm-polar-form-with-unique-principal-argument]], [[cor-complex-de-moivre-formula]], [[thm-kernel-and-fibres-of-complex-exponential]], [[thm-nth-roots-exist]], [[def-canonical-natural]], [[def-complex-integer-powers]].",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying $$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$ For every $z,w\\in\\mathbb C$, $$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$ $$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-external-direct-product-of-groups",
+          "source_section": "Definition",
+          "quote": "The fact that this operation makes $G\\times H$ a group, with the indicated identity and inverses, is proved in [[thm-external-direct-product-is-a-group]]. Until that result is used, this definition introduces only the set and its componentwise binary operation.",
+          "uses": [
+            "1.3",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-external-direct-product-is-a-group",
+          "source_section": "Statement",
+          "quote": "For groups $G$ and $H$, the componentwise operation of [[def-external-direct-product-of-groups]] makes $G\\times H$ a group. Its identity is $(e_G,e_H)$, and",
+          "uses": [
+            "1.3",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qa-cyclic-group-has-n-characters",
+          "source_section": "Statement",
+          "quote": "Write $C_n=\\langle g\\rangle$ additively, so $jg$ denotes the sum of $j$ copies of $g$ and $ng=0$. If $C_n$ has order $n\\ge1$, then its set $\\widehat{C_n}$ of additive characters has cardinality $n$. Each character is uniquely determined by $\\chi(g)$, and the possible values are exactly the $n$ distinct complex $n$th roots of unity. For each such root $z$, the corresponding character is $\\chi_z(jg)=z^j$ for every $j\\in\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qa-character-dual-of-a-product-factors",
+          "source_section": "Statement",
+          "quote": "Let $G_1,\\ldots,G_r$ be finite abelian groups and let $P=G_1\\times\\cdots\\times G_r$ be their recursively parenthesized external direct product. By convention, $P$ is the trivial group when $r=0$. Restriction to the coordinate factors gives a bijection $$\\widehat P\\longrightarrow\\widehat{G_1}\\times\\cdots\\times\\widehat{G_r}.$$ Its inverse sends $(\\chi_1,\\ldots,\\chi_r)$ to $\\chi(g_1,\\ldots,g_r)=\\prod_{i=1}^r\\chi_i(g_i)$. For $r=0$, both sides are singletons.",
+          "uses": [
+            "1.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-order-of-finite-direct-product",
+          "source_section": "Statement",
+          "quote": "If $G$ and $H$ are finite groups, then their external direct product is finite and has order $|G\\times H|=|G|\\,|H|$.",
+          "uses": [
+            "1.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$ ([[def-finite-cardinality]]). 2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$ Then $\\prod_{i<m} A_i$ is finite and $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the right-hand product being the $\\mathbb{N}$-valued one of [[def-nat-finite-sum-and-product]].",
+          "uses": [
+            "1.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-qa-finite-character-values-have-unit-modulus",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite abelian group, $\\chi:G\\to\\mathbb C^{\\times}$ is an additive character, and $x\\in G$, then $|\\chi(x)|=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of $\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$, and $$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$ $$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$ If $a+bi\\ne0$, then $$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is a **subgroup** of $G$, written $H \\le G$, when",
+          "uses": [
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-qa-finite-abelian-character-dual-is-finite-abelian-group",
+          "source_section": "Statement",
+          "quote": "For a finite abelian group $G$, the pointwise product, constant-one identity and pointwise inverse on $\\widehat G$ make it a finite abelian group. Its order is $|\\widehat G|=|G|$.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For $n=2,3,4$, the cyclic table is given by $\\chi_k([j])=\\omega_n^{kj}$, $0\\le k,j<n$. The cyclic-character lemma [F8] proves these are characters; their values on $[1]$ are distinct roots, so all $n$ rows occur. For $C_2\\times C_3$ and $C_2\\times C_2$, apply the inverse product-character map [F9] to the cyclic characters: it gives the displayed formulas $\\chi_{a,b}(u,v)=(-1)^{au}\\omega^{bv}$ and $\\chi_{a,b}(u,v)=(-1)^{au+bv}$. Their rows are distinct, since values at $(1,0)$ distinguish $a$, while values at $(0,1)$ distinguish $b$. The product-character bijection and cardinalities in [F9] show that the six and four displayed rows are complete.",
+          "step": "1.1",
+          "inputs": [
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Every entry of each table has modulus one by [F12]. For $C_2,C_3,C_4$, the row sum for labels $k,k'$ is $\\sum_{j=0}^{n-1}\\omega_n^{(k-k')j}$, and the column sum for labels $j,j'$ is $\\sum_{k=0}^{n-1}\\omega_n^{k(j-j')}$. In each case the sum is $n$ when the labels agree modulo $n$. Otherwise $q:=\\omega_n^{k-k'}$ (or $\\omega_n^{j-j'}$) is not $1$, has $q^n=1$, and $(1-q)\\sum_{r=0}^{n-1}q^r=1-q^n=0$; cancellation in the field [F13] gives zero. This proves both orthogonality directions for the three cyclic tables, including the explicit $C_2$ and $C_3$ entries.",
+          "step": "1.2",
+          "inputs": [
+            "F12",
+            "F13",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "On $C_2\\times C_2$, both orthogonality sums factor into two $C_2$ sums from step 1.2, so they equal $4$ for equal labels and $0$ otherwise. On $C_2\\times C_3$, each row and column sum factors into its $C_2$ and $C_3$ cyclic sums from step 1.2, so they equal $6$ for equal labels and $0$ otherwise. Thus all five tables have orthogonal rows and orthogonal columns, with squared row and column norm equal to the group order.",
+          "step": "1.3",
+          "inputs": [
+            "step 1.2",
+            "F7",
+            "F10"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any of the five groups, the column-orthogonality formula in steps 1.2 and 1.3 gives $\\sum_{\\chi}\\chi(y)\\overline{\\chi(x)}=|G|\\delta_{x,y}$. Substituting [F3] and reordering finite sums [F10] yields $|G|^{-1/2}\\sum_{\\chi}(F_Gf)(\\chi)\\chi(y)=|G|^{-1}\\sum_x f(x)\\sum_{\\chi}\\overline{\\chi(x)}\\chi(y)=f(y)$. This verifies inversion for each displayed table.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F3",
+            "F10"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "For functions $f,g$ on any of the five groups, expanding both transforms and reordering finite sums gives $\\sum_\\chi(F_Gf)(\\chi)\\overline{(F_Gg)(\\chi)}=|G|^{-1}\\sum_{x,y}f(x)\\overline{g(y)}\\sum_\\chi\\overline{\\chi(x)}\\chi(y)=\\sum_x f(x)\\overline{g(x)}$, using the column sums from steps 1.2 and 1.3 and conjugation's additivity from [F6]. This verifies Parseval for these tables.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F6",
+            "F3",
+            "F10"
+          ]
+        },
+        {
+          "id": "derivation-2.3",
+          "claim": "Let $\\delta_0$ be $1$ at the identity and $0$ elsewhere. From [F4], $(\\delta_0*\\delta_0)(z)=\\sum_x\\delta_0(x)\\delta_0(z-x)=\\delta_0(z)$, and [F3] gives $(F_G\\delta_0)(\\chi)=|G|^{-1/2}$ because $\\chi(0)=1$ by [F1]. The convolution-side expression is $|G|^{1/2}(|G|^{-1/2})^2=|G|^{-1/2}$, so the unnormalized-convolution factor is $\\sqrt{|G|}$ for orders $2,3,4,4,6$. More generally, substituting [F4] into [F3], the map $(z,x)\\mapsto(x,y=z-x)$ is a bijection with inverse $(x,y)\\mapsto(x+y,x)$; reindexing by [F10] and using [F1], [F6], and [F10] gives $F_G(f*g)(\\chi)=|G|^{1/2}(F_Gf)(\\chi)(F_Gg)(\\chi)$.",
+          "step": "2.3",
+          "inputs": [
+            "F4",
+            "F3",
+            "F1",
+            "F10",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "In $C_2\\times C_3$, $H_{23}=\\{(0,0),(1,0)\\}$ contains the identity; the nonidentity element satisfies $(1,0)+(1,0)=(0,0)$ and is its own inverse, so [F14] makes $H_{23}$ a subgroup. The table gives $\\chi_{a,b}(1,0)=(-1)^a$, hence $H_{23}^\\perp=\\{\\chi_{0,0},\\chi_{0,1},\\chi_{0,2}\\}$ and $|H_{23}^\\perp|=3=6/2$. For $b,b'\\in\\{0,1,2\\}$, $\\chi_{0,b}\\chi_{0,b'}=\\chi_{0,(b+b')\\bmod3}$ and $\\chi_{0,b}^{-1}=\\chi_{0,(-b)\\bmod3}$, so this annihilator is a subgroup of the group $\\widehat G$ by [F14, F15]. Its annihilator consists of $(u,v)$ with $\\omega^v=1$, which forces $v=0$ while $u$ is arbitrary; this is exactly $H_{23}$.",
+          "step": "3.1",
+          "inputs": [
+            "F14",
+            "F15",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "claim": "In $C_4$, $H_4=\\{[0],[2]\\}$ contains the identity, is closed because $[2]+[2]=[0]$, and each element is its own inverse; hence [F14] makes it a subgroup of order $2$. The table gives $\\chi_k([2])=\\eta^{2k}=(-1)^k$, so $H_4^\\perp=\\{\\chi_0,\\chi_2\\}$ has size $2=4/2$. Its identity is $\\chi_0$; the table formula gives $\\chi_k\\chi_{k'}=\\chi_{(k+k')\\bmod4}$ and $\\chi_k^{-1}=\\chi_{(-k)\\bmod4}$, which keep even indices even, so it is a subgroup of $\\widehat G$ by [F14, F15]. Its annihilator consists of residues $[j]$ with $\\chi_2([j])=(-1)^j=1$, namely $[0],[2]$; thus $(H_4^\\perp)^\\perp=H_4$.",
+          "step": "3.2",
+          "inputs": [
+            "F14",
+            "F15",
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.3",
+          "claim": "In $C_2\\times C_2$, $H_{22}=\\{(0,0),(1,0)\\}$ contains the identity and $(1,0)+(1,0)=(0,0)$, with each element its own inverse; hence [F14] makes it a subgroup of order $2$. The table gives $\\chi_{a,b}(1,0)=(-1)^a$, so $H_{22}^\\perp=\\{\\chi_{0,0},\\chi_{0,1}\\}$ has size $2=4/2$. Its identity is $\\chi_{0,0}$, and the table formula gives $\\chi_{a,b}\\chi_{a',b'}=\\chi_{(a+a')\\bmod2,(b+b')\\bmod2}$ with each inverse equal to itself; hence products and inverses of the two listed rows remain among them, so it is a subgroup of $\\widehat G$ by [F14, F15]. Its annihilator consists of $(u,v)$ with $\\chi_{0,1}(u,v)=(-1)^v=1$, exactly the pairs with $v=0$, so $(H_{22}^\\perp)^\\perp=H_{22}$.",
+          "step": "3.3",
+          "inputs": [
+            "F14",
+            "F15",
+            "F2",
+            "F5",
+            "F7",
+            "F9",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A group carrier and a subgroup contain an identity, so the empty set cannot be the input group or subgroup in this statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The additive identity/zero case is included in the universal formula or closure argument in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked tables are for groups of orders 2, 3, and 6; no order-one group is asserted as an example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate parameter case occurs beyond the identity case already covered in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The listed residue labels include 0 and the maximal representatives 1 or 2 in steps 1.1 and 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct finite sum or closure calculation and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not formulated as an if-and-only-if equivalence."
+        }
+      ]
+    }
+  }
+}

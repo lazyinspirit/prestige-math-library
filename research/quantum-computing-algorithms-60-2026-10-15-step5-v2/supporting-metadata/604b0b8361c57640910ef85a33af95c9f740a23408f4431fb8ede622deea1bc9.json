@@ -1,0 +1,657 @@
+[
+  {
+    "order": 2246,
+    "id": "discrete-quantum-walks-and-szegedy-theory",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Discrete Quantum Walks and Szegedy Theory",
+    "companion": "discrete-quantum-walks-and-szegedy-theory-examples",
+    "requires": [
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "recurrence-transience-and-hitting-times-for-markov-chains",
+      "stationary-markov-chains-and-ergodic-limits",
+      "registers-tensor-products-and-partial-trace",
+      "inner-product-spaces-and-orthogonality",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "controlled-gates-phase-and-entanglement",
+      "circuit-syntax-denotational-semantics-and-measurement"
+    ],
+    "items": [
+      {
+        "id": "def-qa-17-finite-stochastic-kernel",
+        "kind": "definition",
+        "title": "Finite row-stochastic kernel",
+        "statement": "A **finite row-stochastic kernel** is a finite set $X$ and a matrix $P=(P_{xy})_{x,y\\in X}$ with $P_{xy}\\in[0,1]$ and\n\n$$\\sum_{y\\in X}P_{xy}=1\\qquad(x\\in X).$$\n\nThe row convention is $P_{xy}=\\Pr(Y=y\\mid X=x)$: distributions are row vectors and one transition sends $\\mu$ to $\\mu P$. If $X=\\varnothing$, the row conditions are vacuous and there is no probability distribution on $X$. No stationary distribution, reversibility, irreducibility, aperiodicity, or efficient circuit access is part of this definition.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-17-finite-reversible-chain",
+        "kind": "definition",
+        "title": "Finite reversible Markov chain with positive stationary law",
+        "statement": "A **finite reversible Markov chain** is a finite row-stochastic kernel $(X,P)$ together with a supplied probability vector $\\pi=(\\pi_x)_{x\\in X}$ such that $\\pi_x>0$ for every $x$, $\\sum_x\\pi_x=1$, $\\pi P=\\pi$, and\n\n$$\\pi_xP_{xy}=\\pi_yP_{yx}\\qquad(x,y\\in X).$$\n\nThe stationary law and detailed balance are explicit input hypotheses; the definition does not invoke a theorem that produces a stationary law. No irreducibility or aperiodicity is assumed. In particular, a periodic reversible chain is included.",
+        "deps": [
+          "def-qa-17-finite-stochastic-kernel",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-reversible-measure-and-detailed-balance"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-17-szegedy-transition-isometry",
+        "kind": "definition",
+        "title": "Szegedy row-preparation map and discriminant",
+        "statement": "For a finite row-stochastic kernel $(X,P)$, let $\\mathbb C^X$ and $\\mathbb C^{X\\times X}$ carry the standard orthonormal label and ordered-product bases. If $X\\ne\\varnothing$, these coordinate spaces are implemented as two ordered registers; if $X=\\varnothing$, they are zero spaces and every map below is the unique zero-dimensional map. Define the row-preparation linear map $T:\\mathbb C^X\\to\\mathbb C^{X\\times X}$ and the swap $S$ on basis vectors by\n\n$$T|x\\rangle=|x\\rangle\\otimes\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,\\qquad S|x,y\\rangle=|y,x\\rangle.$$\n\nEvery scalar square root is the unique nonnegative real root. Define the **discriminant** by $D:=T^*ST$, using the adjoint characterized by $\\langle Tv,w\\rangle=\\langle v,T^*w\\rangle$ for the root inner product, which is linear in its first argument. The row-preparation map is an isometry; its complete verification is [[thm-qa-17-discriminant-self-adjoint]]. This is the general row-stochastic construction and assumes no reversibility.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "thm-of-square-roots",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-qa-17-finite-stochastic-kernel",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [
+          "thm-qa-17-discriminant-self-adjoint"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §§18.2–18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-17-stochastic-l2-contraction",
+        "kind": "lemma",
+        "title": "Finite stationary Markov operators contract in weighted L2",
+        "statement": "Let $(X,P,\\pi)$ be a finite reversible chain and let $f:X\\to\\mathbb C$. Define $\\|f\\|_{2,\\pi}^2:=\\sum_x\\pi_x|f_x|^2$ and $(Pf)_x:=\\sum_yP_{xy}f_y$. Then\n\n$$\\|Pf\\|_{2,\\pi}^2\\le\\|f\\|_{2,\\pi}^2,$$\n\nso $P$ is a contraction on the finite weighted inner-product space $L^2(X,\\pi)$. Detailed balance is not needed for this inequality beyond the stated stationary-law hypotheses.",
+        "deps": [
+          "def-qa-17-finite-reversible-chain",
+          "def-inner-product-space",
+          "def-inner-product-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-qa-17-reversible-transition-self-adjoint-on-l2-pi",
+        "kind": "lemma",
+        "title": "A finite reversible transition operator is self-adjoint on weighted L2",
+        "statement": "For a finite reversible chain $(X,P,\\pi)$, equip $\\mathbb C^X$ with $\\langle f,g\\rangle_\\pi:=\\sum_x\\pi_x f_x\\overline{g_x}$. Then $P$ is self-adjoint for this inner product, and the mean-zero subspace\n\n$$H_0:=\\{f:\\sum_x\\pi_xf_x=0\\}=\\{f:\\langle f,\\mathbf 1\\rangle_\\pi=0\\}$$\n\nis invariant under $P$. The restriction $P|_{H_0}$ is therefore a well-defined endomorphism and is self-adjoint for the restricted inner product.",
+        "deps": [
+          "def-qa-17-finite-reversible-chain",
+          "def-inner-product-space",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "def-self-adjoint-and-normal-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-qa-17-absolute-spectral-gap",
+        "kind": "definition",
+        "title": "Absolute spectral gap of a finite reversible chain",
+        "statement": "For a finite reversible chain $(X,P,\\pi)$, let $H_0=\\{f:\\sum_x\\pi_xf_x=0\\}$ with the weighted inner product from [[lem-qa-17-reversible-transition-self-adjoint-on-l2-pi]]. Define its **absolute spectral gap** by\n\n$$\\delta_{\\mathrm{abs}}(P):=1-\\|P|_{H_0}\\|_{2,\\pi}.$$\n\nThe norm of the restriction to the zero subspace is $0$ by [[def-operator-norm-on-a-finite-dimensional-inner-product-space]], so a one-state chain has absolute gap $1$. No irreducibility or aperiodicity is built into this definition: a reducible chain with a nonconstant stationary vector in $H_0$ can have gap $0$, and a periodic chain can have gap $0$ because of an eigenvalue $-1$. The eigenvalue form of the definition is proved in [[thm-qa-17-absolute-gap-eigenvalue-characterization]].",
+        "deps": [
+          "def-qa-17-finite-reversible-chain",
+          "lem-qa-17-reversible-transition-self-adjoint-on-l2-pi",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-17-absolute-gap-eigenvalue-characterization",
+        "kind": "theorem",
+        "title": "Absolute gap equals one minus the largest nonconstant eigenvalue modulus",
+        "statement": "Let $(X,P,\\pi)$ be a finite reversible chain and let $H_0=\\{f:\\sum_x\\pi_xf_x=0\\}$. If $H_0=\\{0\\}$, then $\\delta_{\\mathrm{abs}}(P)=1$. Otherwise,\n\n$$\\delta_{\\mathrm{abs}}(P)=1-\\max\\{|\\lambda|:\\lambda\\in\\sigma(P|_{H_0})\\},$$\n\nand $0\\le\\delta_{\\mathrm{abs}}(P)\\le1$. If there is a fixed function $f\\notin\\operatorname{span}\\{\\mathbf1\\}$, then its nonzero mean-zero component is fixed by $P$, so the gap is $0$.",
+        "deps": [
+          "def-qa-17-absolute-spectral-gap",
+          "lem-qa-17-reversible-transition-self-adjoint-on-l2-pi",
+          "lem-qa-17-stochastic-l2-contraction",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-inner-product-space",
+          "def-qa-17-finite-reversible-chain"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qa-17-discriminant-self-adjoint",
+        "kind": "theorem",
+        "title": "The Szegedy discriminant is self-adjoint and contractive",
+        "statement": "For every finite row-stochastic kernel, the map $T$ of [[def-qa-17-szegedy-transition-isometry]] satisfies $T^*T=I$ and is an isometry, and the matrix entries of $D=T^*ST$ are\n\n$$D_{xy}=\\sqrt{P_{xy}P_{yx}}.$$\n\nHence $D$ is real symmetric, self-adjoint, and $\\|D\\|\\le1$. If $(X,P,\\pi)$ is also finite reversible, then\n\n$$D=\\operatorname{diag}(\\sqrt\\pi)\\,P\\,\\operatorname{diag}(1/\\sqrt\\pi).$$\n\nEvery eigenvalue of $D$ is real and belongs to $[-1,1]$. The empty state set has the zero endomorphism and empty spectrum; the similarity assertion is only made when a positive stationary probability vector is supplied.",
+        "deps": [
+          "def-qa-17-szegedy-transition-isometry",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "thm-of-square-roots",
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "def-qa-17-finite-stochastic-kernel",
+          "def-qa-17-finite-reversible-chain",
+          "def-inner-product-space",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §§18.2–18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-qa-17-szegedy-walk",
+        "kind": "definition",
+        "title": "Szegedy reflection walk and its two-reflection square",
+        "statement": "For the finite row-stochastic kernel and row-preparation map of [[def-qa-17-szegedy-transition-isometry]], let $\\Pi:=TT^*$, the orthogonal projection onto $\\operatorname{ran}(T)$, and choose the reflection sign\n\n$$R_A:=2\\Pi-I.$$\n\nWith $S$ the two-register swap, define the one-reflection Szegedy step and its square by\n\n$$U:=S R_A,\\qquad W:=U^2=(S R_A S)R_A=(2S\\Pi S-I)(2\\Pi-I).$$\n\nProducts act right to left. This fixes $U$ and $W$ as different operators. Algebraically, if $Uv=\\mu v$, then $Wv=\\mu^2v$ on the same vector. The other common reflection sign is $I-2\\Pi=-R_A$ and is not interchangeable inside a controlled operation.",
+        "deps": [
+          "def-qa-17-szegedy-transition-isometry",
+          "def-qc-reflection",
+          "def-qa-17-finite-stochastic-kernel"
+        ],
+        "justified_by": [
+          "lem-qa-17-walk-reflection-unitarity"
+        ],
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §§18.2–18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-17-walk-reflection-unitarity",
+        "kind": "lemma",
+        "title": "Szegedy reflections and walk operators are unitary",
+        "statement": "For the projection $\\Pi=TT^*$ onto $A=\\operatorname{ran}(T)$, the operators $R_A=2\\Pi-I$ and $S$ are self-adjoint involutions. Hence $U=SR_A$ and $W=U^2$ are unitary. On $A^\\perp$, $\\Pi=0$ and therefore $U=-S$.",
+        "deps": [
+          "def-qa-17-szegedy-walk",
+          "def-qa-17-szegedy-transition-isometry",
+          "thm-qa-17-discriminant-self-adjoint",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "def-qc-reflection",
+          "def-orthogonal-complement",
+          "def-qa-17-finite-stochastic-kernel",
+          "def-inner-product-space"
+        ],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §§18.2–18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-qa-17-invariant-eigenplane",
+        "kind": "lemma",
+        "title": "Szegedy walk invariant subspaces from discriminant eigenvectors",
+        "statement": "For any eigenpair $Dv=\\lambda v$ with $v\\ne0$ and $\\lambda\\in[-1,1]$, put $a:=Tv$ and $b:=STv$. Then $\\operatorname{span}\\{a,b\\}$ is invariant under $U$, and\n\n$$U a=b,\\qquad U b=-a+2\\lambda b.$$\n\nAll eigenvalues of $D$ satisfy the displayed interval hypothesis by [[thm-qa-17-discriminant-self-adjoint]]. If $\\lambda=1$ or $\\lambda=-1$, then $b=\\lambda a$ and the span is one-dimensional. If $-1<\\lambda<1$, the two vectors are linearly independent and the invariant subspace is two-dimensional.",
+        "deps": [
+          "def-qa-17-szegedy-walk",
+          "def-qa-17-szegedy-transition-isometry",
+          "thm-qa-17-discriminant-self-adjoint",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-linear-combination-and-span",
+          "def-qa-17-finite-stochastic-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-qa-17-walk-access-model",
+        "kind": "definition",
+        "title": "Finite row-preparation access model for a Szegedy walk",
+        "statement": "For a nonempty finite row-stochastic kernel $(X,P)$, a **row-preparation access model** supplies an explicit bijection $\\eta:X\\to\\{0,\\ldots,|X|-1\\}$; write $\\kappa_x$ for the image of $x$ under this bijection. Every ket $|x\\rangle$ below denotes the basis vector $|\\kappa_x\\rangle$. The model supplies a finite work register $W$ with a specified clean unit vector $|0_W\\rangle$ and a unitary $V_P$ on the ordered register product $\\mathbb C^X\\otimes\\mathbb C^X\\otimes W$ satisfying\n\n$$V_P\\bigl(|x\\rangle\\otimes|0\\rangle\\otimes|0_W\\rangle\\bigr)=\\left(|x\\rangle\\otimes\\sum_y\\sqrt{P_{xy}}|y\\rangle\\right)\\otimes|0_W\\rangle\\qquad(x\\in X).$$\n\nThe state encoding and its description are part of the supplied circuit interface and are included in the circuit description or uniform generator. The model separately declares access and costs for the forward call $V_P$, inverse call $V_P^*$, controlled $V_P$, controlled $V_P^*$, a direct range-reflection call, controlled range-reflection access, the clean-state reflection $R_0$, controlled $R_0$, the swap on the first two registers, and controlled swap access. The clean-state reflection is\n\n$$R_0:=2\\bigl(I_X\\otimes|0,0_W\\rangle\\langle0,0_W|\\bigr)-I,$$\n\nwhere the second register and work register are in their specified clean states. When range reflection is implemented from row preparation, the supplied circuit word is $V_PR_0V_P^*$; the access-cost theorem proves that on the clean-work subspace it realizes the logical reflection $2TT^*-I$. The swap acts as $S$ on the first two registers and as the identity on $W$.\n\nQuery calls, gate counts, circuit-description bits, uniform-generation time, and precision are separate cost coordinates. A controlled walk implemented factor by factor needs controlled access to each constituent, including the preparation calls, $R_0$, and the swap. A matrix $P$ by itself supplies none of these circuits or efficient costs. For a family of encoded chains, a uniform circuit family is an additional explicit input, not a consequence of the finite matrix definition.",
+        "deps": [
+          "def-qa-17-szegedy-walk",
+          "def-qa-17-finite-stochastic-kernel",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-reflection",
+          "def-qc-circuit-cost-model",
+          "def-qc-uniform-circuit-family",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [
+          "thm-qa-17-walk-access-cost"
+        ],
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.2",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-17-szegedy-spectral-mapping",
+        "kind": "theorem",
+        "title": "Szegedy spectral mapping for one and two reflections",
+        "statement": "Let $D=T^*ST$ be the discriminant of a finite row-stochastic kernel and let $U=S(2TT^*-I)$ and $W=U^2$. For every eigenvalue $\\lambda\\in(-1,1)$ of $D$, counted with multiplicity, its invariant planes contribute eigenvalues\n\n$$\\exp(i\\arccos\\lambda),\\ \\exp(-i\\arccos\\lambda)\\quad\\text{for }U,\\qquad \\exp(2i\\arccos\\lambda),\\ \\exp(-2i\\arccos\\lambda)\\quad\\text{for }W.$$\n\nFor each eigendirection with $\\lambda=1$ (respectively $\\lambda=-1$), the plane collapses to a line on which $U$ acts as $+I$ (respectively $-I$), so $W$ acts as $+I$. On the remaining subspace $K=(\\operatorname{ran}T+\\operatorname{ran}(ST))^\\perp$, $U=-S$ and its eigenvalues lie in $\\{+1,-1\\}$; therefore all eigenvalues of $W$ there are $+1$. If $X=\\varnothing$, both spaces are zero and the statements about eigenvalues are vacuous.",
+        "deps": [
+          "lem-qa-17-invariant-eigenplane",
+          "thm-qa-17-discriminant-self-adjoint",
+          "lem-qa-17-walk-reflection-unitarity",
+          "def-qa-17-szegedy-transition-isometry",
+          "def-qa-17-szegedy-walk",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-orthogonal-complement",
+          "def-kernel-and-image-of-a-linear-map",
+          "thm-linear-kernel-image-and-injectivity",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-of-square-roots",
+          "def-principal-inverse-sine-and-cosine",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-eulers-formula",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "def-qa-17-finite-stochastic-kernel"
+        ],
+        "dependency_level": 11,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-qa-17-walk-access-cost",
+        "kind": "theorem",
+        "title": "Exact row-preparation access count for one and two walk steps",
+        "statement": "For a nonempty chain in the row-preparation implementation of [[def-qa-17-walk-access-model]], the full-workspace word $S V_P R_0 V_P^*$ restricts on the clean-work subspace to the logical one-reflection step $U=S(2TT^*-I)$. One such uncontrolled step uses exactly one call each to $V_P^*$ and $V_P$, one clean-state reflection $R_0$, and one swap $S$. The factorwise controlled implementation controls each constituent, including both row-preparation calls, $R_0$, and $S$; this count describes that implementation. A $W=U^2$ step uses exactly two such $U$ implementations. Query calls, gate counts, description bits, uniform-generation time, and precision are recorded as separate cost coordinates.",
+        "deps": [
+          "def-qa-17-walk-access-model",
+          "def-qa-17-szegedy-walk",
+          "thm-qa-17-discriminant-self-adjoint",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-circuit-cost-model",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-tensor-register-and-permutation",
+          "prop-adjoint-algebra",
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections"
+        ],
+        "dependency_level": 12,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.2",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2247,
+    "id": "discrete-quantum-walks-and-szegedy-theory-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Discrete Quantum Walks and Szegedy Theory — Examples",
+    "companion": "discrete-quantum-walks-and-szegedy-theory",
+    "requires": [
+      "discrete-quantum-walks-and-szegedy-theory",
+      "stationary-markov-chains-and-ergodic-limits"
+    ],
+    "items": [
+      {
+        "id": "cex-qa-17-zero-stationary-weight",
+        "kind": "counterexample",
+        "title": "A zero stationary weight makes the full-state similarity undefined",
+        "statement": "For every finite chain and every stationary probability vector $\\pi$, including one with zero coordinates, the full-state matrix $\\operatorname{diag}(\\sqrt\\pi)P\\operatorname{diag}(1/\\sqrt\\pi)$ is defined and equals the discriminant.",
+        "deps": [
+          "def-qa-17-finite-stochastic-kernel",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-qa-17-szegedy-transition-isometry"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-qa-17-nonreversible-discriminant",
+        "kind": "counterexample",
+        "title": "A stationary directed cycle is not similar to its discriminant",
+        "statement": "For every finite row-stochastic kernel with a strictly positive stationary distribution, the discriminant equals the stationary similarity transform $\\operatorname{diag}(\\sqrt\\pi)P\\operatorname{diag}(1/\\sqrt\\pi)$, even when detailed balance fails.",
+        "deps": [
+          "def-qa-17-finite-stochastic-kernel",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-reversible-measure-and-detailed-balance",
+          "thm-qa-17-discriminant-self-adjoint"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §§18.2–18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-qa-17-period-two-walk",
+        "kind": "example",
+        "title": "The two-vertex deterministic swap has absolute gap zero",
+        "statement": "Let $X=\\{0,1\\}$ and let\n\n$$P=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\pi=(1/2,1/2).$$\n\nThe chain alternates deterministically between the two states. The absolute spectral gap is defined by [[def-qa-17-absolute-spectral-gap]] on the mean-zero subspace.",
+        "deps": [
+          "def-qa-17-finite-reversible-chain",
+          "def-qa-17-absolute-spectral-gap",
+          "thm-qa-17-absolute-gap-eigenvalue-characterization",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-period-of-a-state"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §§8.1–8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-qa-17-two-state-reversible-walk",
+        "kind": "example",
+        "title": "Two-state reversible walk and its endpoint phases",
+        "statement": "For $a\\in[0,1]$, take\n\n$$P_a=\\begin{pmatrix}1-a&a\\\\a&1-a\\end{pmatrix},\\qquad \\pi=(1/2,1/2).$$\n\nCompute the discriminant and the complete eigenvalue multisets of the one-reflection walk $U$ and its square $W=U^2$, including both endpoint parameters.",
+        "deps": [
+          "def-qa-17-finite-reversible-chain",
+          "def-qa-17-szegedy-transition-isometry",
+          "thm-qa-17-discriminant-self-adjoint",
+          "def-qa-17-szegedy-walk",
+          "lem-qa-17-invariant-eigenplane",
+          "lem-qa-17-walk-reflection-unitarity",
+          "thm-qa-17-szegedy-spectral-mapping",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-kernel-and-image-of-a-linear-map",
+          "thm-linear-kernel-image-and-injectivity",
+          "def-orthogonal-complement",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, §18.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

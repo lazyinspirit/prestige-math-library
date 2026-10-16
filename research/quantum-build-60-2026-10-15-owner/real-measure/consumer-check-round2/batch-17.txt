@@ -1,0 +1,334 @@
+FILE lem-spherical-surface-integrals-project-onto-weighted-ball-integrals
+
+STATEMENT Assume the Axiom of Countable Choice. Let $n\ge1$ and $g\in C^0(\mathbb R^n)$, and let $G(\xi,z):=g(\xi)$ be the extension of $g$ to $\mathbb R^{n+1}$ independent of the last coordinate. For $r>0$ and $x\in\mathbb R^n$, with $S^n_r(x)=\{(\xi,z)\in\mathbb R^{n+1}:|\xi-x|^2+z^2=r^2\}$ the sphere of radius $r$ in $\mathbb R^{n+1}$ and $\omega_n=|S^n|$ its total polar measure ([[def-polar-surface-measure-on-the-unit-sphere]]),
+$$\int_{S^n_r(x)}G\,dS=2r\int_{B_r^n(x)}\frac{g(y)}{\sqrt{r^2-|y-x|^2}}\,dy ,$$
+and the spherical mean of $G$ over $S^n_r(x)$ equals $\dfrac{2}{\omega_nr^{n-1}}\displaystyle\int_{B_r^n(x)}\dfrac{g(y)}{\sqrt{r^2-|y-x|^2}}dy$. In particular, for even $n=2k$, every $c>0$ and $t>0$, with $W_g$ the weighted ball integral of [[def-spherical-mean-of-space-dependent-data]],
+$$t^{n-1}M_G\bigl((x,0),ct\bigr)=\frac{(n-1)!!}{c^{n-1}}\,W_g(x,ct),$$
+where $M_G$ is the $(n+1)$-dimensional spherical mean of $G$ with centre $(x,0)$. The connecting constant identity is $2\,n!!V_n/\omega_n=(n-1)!!$.
+
+LINE 57 
+
+1.2 Integrating the two sheets gives $\int_{S_r^n(x)}G\,dS=2r\int_{B_r^n(x)}g(y)(r^2-|y-x|^2)^{-1/2}\,dy$. These integrals are absolutely convergent: $g$ is bounded on the closed ball by [[thm-extreme-value-metric]], and [F2] reduces the weight integral to $\omega_{n-1}\int_0^rs^{n-1}(r^2-s^2)^{-1/2}ds$, bounded by $\omega_{n-1}r^{n-1}\int_0^r(r^2-s^2)^{-1/2}ds=\omega_{n-1}r^{n-1}\pi/2$. Thus the graph computation applies separately to positive and negative parts. [F1, F2, algebra]
+
+
+
+FILE lem-surface-integral-is-independent-of-c-one-boundary-charts
+
+STATEMENT Assume $\mathrm{AC}_\omega$. Every regular chart density is continuous and strictly positive. The chart integral on a compact embedded $C^1$ hypersurface defines a finite Borel measure independent of the finite charts and subordinate partitions. In graph coordinates $X(y)=(y,h(y))$ its density is $\sqrt{1+|Dh|^2}$. On a one-sided domain boundary the outward unit normal agrees on chart overlaps and is continuous.
+
+LINE 51 1.1 On an overlap write $X=Y\circ T$, where T is the C1 coordinate transition. F2 gives $DX=(DY\circ T)DT$, so F3–F5 yield $J_X(y)=J_Y(T(y))|\det DT(y)|$. Both Gram determinants are positive because the tangent columns have full rank. F6 in dimension n-1, applied to any nonnegative Borel f supported in this overlap, now gives $\int f(X(y))J_X(y)\,dy=\int f(Y(z))J_Y(z)\,dz$. Restriction to Borel subsets is obtained by multiplying f by their indicators. Continuity of DX and the polynomial determinant, followed by the positive square root, also proves continuity of each J. For a two-dimensional surface with Gram matrix $\begin{pmatrix}E&F\\F&G\end{pmatrix}$, the same definition reads $J=\sqrt{EG-F^2}$. [given, F2, F3, F4, F5, F6]
+
+2.1 For two partitions chi_j and eta_k, insert $\sum_k\eta_k=1$ into each chi_j integral in F1. This produces the finite sum of integrals of $\chi_j\eta_k f$ on overlaps. Step 1.1 transfers each term to the eta_k chart. Summing first in j gives $\sum_j\chi_j=1$, recovering exactly the second proposed integral. Every term is nonnegative, so this works also for infinite integrals. Applying the conclusion to positive and negative parts gives agreement for integrable signed f. [step 1.1, F1]
+
+3.1 Each chart term defines a measure: for disjoint Borel sets the indicators of the finite partial unions increase to the indicator of the union, and monotone convergence of the weighted chart integrals gives countable additivity. For finiteness, the parameter preimage of the support of chi_j on S is compact inside V_j because X_j is a homeomorphism onto the chart image. J_X is continuous and bounded there and the compact set is bounded, so its weighted integral is finite. There are finitely many charts. Empty S gives the zero measure. [step 2.1, F1, F7]
+
+FILE lem-the-obstacle-admissible-set-is-closed-convex-and-weakly-closed
+
+STATEMENT Assume Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), inherited through the truncation and trace suppliers named below. Let $n\ge1$; when $n=1$ use a bounded interval and the endpoint trace of [[lem-one-dimensional-trace-truncation-compatibility]], and when $n\ge2$ use a bounded $C^1$ domain with the published trace definitions ([[def-bounded-c-k-domain-and-boundary-charts]]). Let $\psi\in H^1(\Omega;\mathbb R)$ satisfy $T\psi\le0$ (componentwise at the endpoints for $n=1$, almost everywhere on $\partial\Omega$ for $n\ge2$), so that $K=\{v\in H^1_0(\Omega):v\ge\psi\text{ a.e.}\}$ is the admissible set of [[def-closed-convex-obstacle-set-and-variational-inequality]] ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]). Then $K$ is nonempty, convex, closed in the norm of $H^1_0(\Omega)$ and weakly sequentially closed: if $(v_j)\subseteq K$ and $v_j\rightharpoonup v$ in $H^1_0(\Omega)$, then $v\in K$ ([[def-weak-convergence-of-nets-and-sequences]]).
+
+LINE 48 [F1] [[def-closed-convex-obstacle-set-and-variational-inequality]]: the boundary condition $T\psi\le0$ is equivalent to $\psi^+\in H^1_0(\Omega)$ (through the interval lemma for $n=1$ and [[lem-positive-part-of-a-zero-trace-function-has-zero-trace]] for $n\ge2$), and $K$ is defined by the representative-independent almost-everywhere inequality $v\ge\psi$.
+
+[F2] [[cor-positive-negative-part-and-truncation-calculus-in-w-one-p]]: $\psi^+=\max\{\psi,0\}$ is the class of the pointwise maximum, and on representatives $\psi^+\ge\psi$ pointwise.
+
+[F3] [[cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences]]: a sequence converging in $L^2(\Omega)$ has a subsequence converging almost everywhere on $\Omega$; a sequence converging in $H^1_0(\Omega)$ therefore has such a subsequence, since the $H^1_0$ norm dominates the $L^2$ norm ([[def-sobolev-space-wkp-and-its-norm]]).
+
+FILE lem-the-weighted-area-form-is-sl2-r-invariant
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the notation of [[def-holomorphic-and-antiholomorphic-discrete-series-models]], for every integer $n\ge2$ and $g\in G=\mathrm{SL}_2(\mathbb R)$:
+
+**(1)** The weighted density attached to the model action is invariant: for every $f\in\mathcal H_n^+$, the change of variables $z=g\cdot w$ gives
+$$|\pi_n(g)f(z)|^2(\operatorname{Im}z)^{n-2}dx_zdy_z=|f(w)|^2(\operatorname{Im}w)^{n-2}dx_wdy_w$$
+after pullback. Thus $\pi_n(g)$ is a bijective linear isometry of $\mathcal H_n^+$, and $\pi_n$ is a unitary representation on this Hilbert space; the conjugate action $\pi_n^-$ is also unitary.
+
+**(2)** These unitary representations are strongly continuous on $G$.
+
+LINE 39 Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the notation of [[def-holomorphic-and-antiholomorphic-discrete-series-models]], for every integer $n\ge2$ and $g\in G=\mathrm{SL}_2(\mathbb R)$:
+
+**(1)** The weighted density attached to the model action is invariant: for every $f\in\mathcal H_n^+$, the change of variables $z=g\cdot w$ gives
+$$|\pi_n(g)f(z)|^2(\operatorname{Im}z)^{n-2}dx_zdy_z=|f(w)|^2(\operatorname{Im}w)^{n-2}dx_wdy_w$$
+after pullback. Thus $\pi_n(g)$ is a bijective linear isometry of $\mathcal H_n^+$, and $\pi_n$ is a unitary representation on this Hilbert space; the conjugate action $\pi_n^-$ is also unitary.
+
+LINE 41 **(1)** The weighted density attached to the model action is invariant: for every $f\in\mathcal H_n^+$, the change of variables $z=g\cdot w$ gives
+$$|\pi_n(g)f(z)|^2(\operatorname{Im}z)^{n-2}dx_zdy_z=|f(w)|^2(\operatorname{Im}w)^{n-2}dx_wdy_w$$
+after pullback. Thus $\pi_n(g)$ is a bijective linear isometry of $\mathcal H_n^+$, and $\pi_n$ is a unitary representation on this Hilbert space; the conjugate action $\pi_n^-$ is also unitary.
+
+**(2)** These unitary representations are strongly continuous on $G$.
+
+LINE 57 [F4] A C1 diffeomorphism between open Euclidean sets changes variables for every nonnegative Lebesgue-measurable integrand ([[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]]).
+
+[F5] $\mathcal H_n^+$ is Hilbert and the span of the vectors $f_{n,j}$ is dense; the analogous conjugate span is dense in $\mathcal H_n^-$ ([[lem-the-weighted-discrete-series-space-is-a-hilbert-space]], [[def-holomorphic-and-antiholomorphic-discrete-series-models]]).
+
+[F6] A unitary representation is a group action by bijective linear isometries on a Hilbert space whose orbit maps are norm-continuous ([[def-strongly-continuous-unitary-representation]]).
+
+LINE 73 1.2 Set $w=(z-i)/(z+i)$ and $F_f(w)=(z+i)^nf(z)$. The inverse $z=i(1+w)/(1-w)$ gives $y=(1-|w|^2)/|1-w|^2$ and $|dz/dw|^2=4/|1-w|^4$, so [F3] and [F4] give $\|f\|_n^2=2^{2-2n}\int_{\mathbb D}|F_f(w)|^2(1-|w|^2)^{n-2}dA(w)$. Here $F_{f_{n,j}}=w^j$. Write $g^{-1}=\begin{pmatrix}A&B\\C&D\end{pmatrix}$ and put $P_g(w)=i(A-iC)(1+w)+(B-iD)(1-w)$ and $R_g(w)=i(A+iC)(1+w)+(B+iD)(1-w)$. Substitution in [F1] gives $F_{\pi_n(g)f_{n,j}}(w)=(2i)^nP_g(w)^j/R_g(w)^{n+j}$. At $g=e$ one has $P_e(w)=2iw$ and $R_e(w)=2i$. Continuity of their coefficients makes $|R_g(w)|\ge1$ on $|w|\le1$ for $g$ sufficiently close to $e$, and the displayed rational functions converge uniformly there to $w^j$. Since $n\ge2$, the disk weight has finite integral, at most $\pi$; hence this uniform convergence implies $\|\pi_n(g)f_{n,j}-f_{n,j}\|_n\to0$. Linearity proves continuity at $e$ on their finite span. [F1, F3, F4, algebra, A1]
+
+2.1 The map $\phi_g:\mathfrak H\to\mathfrak H$ is a C1 diffeomorphism with inverse $\phi_{g^{-1}}$. Apply [F4] to the nonnegative measurable function $z\mapsto|\pi_n(g)f(z)|^2(\operatorname{Im}z)^{n-2}$; the pullback identity of step 1.1 gives $\|\pi_n(g)f\|_n^2=\|f\|_n^2$, including the extended integral identity when either side is infinite. For $f\in\mathcal H_n^+$ this is finite, so $\pi_n(g)$ maps that space into itself and is an isometry. By [F1], $\pi_n(g^{-1})$ is its inverse and the maps obey the group law. Thus they are bijective linear isometries; conjugation gives the same claims for $\pi_n^-$. [F1, F4, step 1.1, algebra, A1]
+
+3.1 This span is dense by [F5], and every $\pi_n(g)$ is an isometry by step 2.1. For arbitrary $f$ and a vector $p$ in the span, $\|\pi_n(g)f-f\|_n\le2\|f-p\|_n+\|\pi_n(g)p-p\|_n$. First approximate $f$ and then use step 1.2 to obtain continuity at $e$. At $g_0$, the group law gives $\|\pi_n(g)f-\pi_n(g_0)f\|_n=\|\pi_n(g_0^{-1}g)f-f\|_n\to0$. Thus [F6] gives strong continuity on $G$; complex conjugation gives the same conclusion for $\pi_n^-$. [F1, F5, F6, step 2.1, step 1.2, algebra] ∎
+
+LINE 75 2.1 The map $\phi_g:\mathfrak H\to\mathfrak H$ is a C1 diffeomorphism with inverse $\phi_{g^{-1}}$. Apply [F4] to the nonnegative measurable function $z\mapsto|\pi_n(g)f(z)|^2(\operatorname{Im}z)^{n-2}$; the pullback identity of step 1.1 gives $\|\pi_n(g)f\|_n^2=\|f\|_n^2$, including the extended integral identity when either side is infinite. For $f\in\mathcal H_n^+$ this is finite, so $\pi_n(g)$ maps that space into itself and is an isometry. By [F1], $\pi_n(g^{-1})$ is its inverse and the maps obey the group law. Thus they are bijective linear isometries; conjugation gives the same claims for $\pi_n^-$. [F1, F4, step 1.1, algebra, A1]
+
+3.1 This span is dense by [F5], and every $\pi_n(g)$ is an isometry by step 2.1. For arbitrary $f$ and a vector $p$ in the span, $\|\pi_n(g)f-f\|_n\le2\|f-p\|_n+\|\pi_n(g)p-p\|_n$. First approximate $f$ and then use step 1.2 to obtain continuity at $e$. At $g_0$, the group law gives $\|\pi_n(g)f-\pi_n(g_0)f\|_n=\|\pi_n(g_0^{-1}g)f-f\|_n\to0$. Thus [F6] gives strong continuity on $G$; complex conjugation gives the same conclusion for $\pi_n^-$. [F1, F5, F6, step 2.1, step 1.2, algebra] ∎
+
+FILE lem-the-weighted-discrete-series-space-is-a-hilbert-space
+
+STATEMENT Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the notation of [[def-holomorphic-and-antiholomorphic-discrete-series-models]], for every integer $n\ge2$:
+
+**(1)** $\mathcal H_n^+$ is a complex Hilbert space with inner product $\langle f,h\rangle_n=\int_{\mathfrak H}f\bar h\,y^{n-2}dx\,dy$, and point evaluations $f\mapsto f(z)$ are bounded, uniformly on compact subsets of $\mathfrak H$.
+
+**(2)** The vectors $f_{n,j}$, $j\ge0$, are nonzero, mutually orthogonal, and have finite norm; their closed linear span is $\mathcal H_n^+$. The action of $K$ on this Hilbert space is strongly continuous and its irreducible K-types are exactly the one-dimensional lines $\mathbb C f_{n,j}$ with characters $\chi_j(k_\theta)=e^{-i(n+2j)\theta}$, each with multiplicity one. The analogous statements hold for $\mathcal H_n^-$ with $\widetilde f_{n,j}$ and characters $e^{i(n+2j)\theta}$.
+
+**(3)** For $j\ge0$, the corresponding isotypic projection is the Bochner integral
+$$P_jf=\int_K\chi_j(k)^{-1}\pi_n(k)f\,dk,$$
+where $dk$ is normalized Haar probability; every $f\in\mathcal H_n^+$ is the orthogonal sum $f=\sum_{j\ge0}P_jf$ in Hilbert norm.
+
+LINE 51 Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the notation of [[def-holomorphic-and-antiholomorphic-discrete-series-models]], for every integer $n\ge2$:
+
+**(1)** $\mathcal H_n^+$ is a complex Hilbert space with inner product $\langle f,h\rangle_n=\int_{\mathfrak H}f\bar h\,y^{n-2}dx\,dy$, and point evaluations $f\mapsto f(z)$ are bounded, uniformly on compact subsets of $\mathfrak H$.
+
+**(2)** The vectors $f_{n,j}$, $j\ge0$, are nonzero, mutually orthogonal, and have finite norm; their closed linear span is $\mathcal H_n^+$. The action of $K$ on this Hilbert space is strongly continuous and its irreducible K-types are exactly the one-dimensional lines $\mathbb C f_{n,j}$ with characters $\chi_j(k_\theta)=e^{-i(n+2j)\theta}$, each with multiplicity one. The analogous statements hold for $\mathcal H_n^-$ with $\widetilde f_{n,j}$ and characters $e^{i(n+2j)\theta}$.
+
+LINE 53 **(1)** $\mathcal H_n^+$ is a complex Hilbert space with inner product $\langle f,h\rangle_n=\int_{\mathfrak H}f\bar h\,y^{n-2}dx\,dy$, and point evaluations $f\mapsto f(z)$ are bounded, uniformly on compact subsets of $\mathfrak H$.
+
+**(2)** The vectors $f_{n,j}$, $j\ge0$, are nonzero, mutually orthogonal, and have finite norm; their closed linear span is $\mathcal H_n^+$. The action of $K$ on this Hilbert space is strongly continuous and its irreducible K-types are exactly the one-dimensional lines $\mathbb C f_{n,j}$ with characters $\chi_j(k_\theta)=e^{-i(n+2j)\theta}$, each with multiplicity one. The analogous statements hold for $\mathcal H_n^-$ with $\widetilde f_{n,j}$ and characters $e^{i(n+2j)\theta}$.
+
+**(3)** For $j\ge0$, the corresponding isotypic projection is the Bochner integral
+
+LINE 57 **(3)** For $j\ge0$, the corresponding isotypic projection is the Bochner integral
+$$P_jf=\int_K\chi_j(k)^{-1}\pi_n(k)f\,dk,$$
+where $dk$ is normalized Haar probability; every $f\in\mathcal H_n^+$ is the orthogonal sum $f=\sum_{j\ge0}P_jf$ in Hilbert norm.
+
+## Facts & Assumptions
+
+LINE 91 1.2 Set $w=(z-i)/(z+i)$ for $z\in\mathfrak H$. Then $|w|^2-1=-4y/|z+i|^2<0$, so $w\in\mathbb D$, and solving $w=(z-i)/(z+i)$ gives the inverse $z=i(1+w)/(1-w)$ with $\operatorname{Im}z=(1-|w|^2)/|1-w|^2>0$ for $w\in\mathbb D$; hence $z\mapsto w$ is a bijection $\mathfrak H\to\mathbb D$. Since $z+i=2i/(1-w)$ and $dz/dw=2i/(1-w)^2$, the real Jacobian of $w\mapsto z$ is $|dz/dw|^2=4/|1-w|^4$, and [F2] gives $\|f\|_n^2=2^{2-2n}\int_{\mathbb D}|F(w)|^2(1-|w|^2)^{n-2}dA(w)$ for $F(w):=(z+i)^nf(z)$. For $f_{n,j}$ one has $F(w)=(z-i)^j(z+i)^{-j}=w^j$, and consequently $\|f_{n,j}\|_n^2=2^{2-2n}2\pi\int_0^1\rho^{2j+1}(1-\rho^2)^{n-2}d\rho$, which is finite since $(1-\rho^2)^{n-2}\le1$ and $\int_0^1\rho^{2j+1}d\rho=(2j+2)^{-1}$, and is positive since the integrand is positive on $(0,1)$. Distinct monomials are orthogonal because $\int_0^{2\pi}e^{i(j-k)\theta}d\theta=0$ for $j\ne k$. [F2, F5, algebra]
+
+2.1 On $\mathbb R^2$ give the measure $\mu_n$ the density $\mathbf1_{\mathfrak H}(x,y)y^{n-2}$ relative to Lebesgue measure, and extend functions on $\mathfrak H$ by zero below the real axis. The map $\mathcal H_n^+\to$ the weighted square-integrable function space for $\mu_n$ is injective: a zero class has norm zero, and the estimate of step 1.1 then makes every point value zero. The integral pairing thus restricts to a positive-definite inner product. If $(f_m)$ is Cauchy in this norm, [F5] gives a limit class $h$; step 1.1 makes $(f_m)$ uniformly Cauchy on every compact subset of $\mathfrak H$, so it converges locally uniformly to a holomorphic $f$ by [F4]. On each compact $Q\Subset\mathfrak H$, the density is bounded and $Q$ has finite area, so local uniform convergence gives convergence in the restricted weighted integral norm on $Q$. Restriction of $f_m\to h$ to $Q$ and uniqueness of limits imply $f=h$ a.e. on $Q$. The compact exhaustion $Q_m=\{z:|z|\le m,\ \operatorname{Im}z\ge1/m\}$ covers $\mathfrak H$, so $f=h$ a.e. globally; hence $f\in\mathcal H_n^+$ and $\|f_m-f\|_n\to0$. Thus $\mathcal H_n^+$ is a complex Hilbert space. [F4, F5, step 1.1, algebra, A1]
+
+2.2 Expand $F(w)=\sum_{j\ge0}a_jw^j$ by [F3]. For each $0<\rho<1$ this series converges uniformly on $|w|=\rho$; integrating finite partial sums and using orthogonality of exponentials, then taking the uniform limit, gives $(2\pi)^{-1}\int_0^{2\pi}|F(\rho e^{i\theta})|^2d\theta=\sum_{j\ge0}|a_j|^2\rho^{2j}$. Integrating radially and applying [F6] to the increasing finite partial sums yields $\int_{\mathbb D}|F(w)|^2(1-|w|^2)^{n-2}dA(w)=\sum_{j\ge0}|a_j|^2\,2\pi\int_0^1\rho^{2j+1}(1-\rho^2)^{n-2}d\rho$. This sum is finite by step 1.2; applying the same identity to $F-\sum_{j=0}^Na_jw^j$ shows that the squared norm of the remainder is its series tail, which tends to zero. Thus the $f_{n,j}$ have dense algebraic span in $\mathcal H_n^+$, and step 1.2 makes them a complete orthogonal family. [F3, F6, step 1.2, algebra, A1]
+
+LINE 93 2.1 On $\mathbb R^2$ give the measure $\mu_n$ the density $\mathbf1_{\mathfrak H}(x,y)y^{n-2}$ relative to Lebesgue measure, and extend functions on $\mathfrak H$ by zero below the real axis. The map $\mathcal H_n^+\to$ the weighted square-integrable function space for $\mu_n$ is injective: a zero class has norm zero, and the estimate of step 1.1 then makes every point value zero. The integral pairing thus restricts to a positive-definite inner product. If $(f_m)$ is Cauchy in this norm, [F5] gives a limit class $h$; step 1.1 makes $(f_m)$ uniformly Cauchy on every compact subset of $\mathfrak H$, so it converges locally uniformly to a holomorphic $f$ by [F4]. On each compact $Q\Subset\mathfrak H$, the density is bounded and $Q$ has finite area, so local uniform convergence gives convergence in the restricted weighted integral norm on $Q$. Restriction of $f_m\to h$ to $Q$ and uniqueness of limits imply $f=h$ a.e. on $Q$. The compact exhaustion $Q_m=\{z:|z|\le m,\ \operatorname{Im}z\ge1/m\}$ covers $\mathfrak H$, so $f=h$ a.e. globally; hence $f\in\mathcal H_n^+$ and $\|f_m-f\|_n\to0$. Thus $\mathcal H_n^+$ is a complex Hilbert space. [F4, F5, step 1.1, algebra, A1]
+
+2.2 Expand $F(w)=\sum_{j\ge0}a_jw^j$ by [F3]. For each $0<\rho<1$ this series converges uniformly on $|w|=\rho$; integrating finite partial sums and using orthogonality of exponentials, then taking the uniform limit, gives $(2\pi)^{-1}\int_0^{2\pi}|F(\rho e^{i\theta})|^2d\theta=\sum_{j\ge0}|a_j|^2\rho^{2j}$. Integrating radially and applying [F6] to the increasing finite partial sums yields $\int_{\mathbb D}|F(w)|^2(1-|w|^2)^{n-2}dA(w)=\sum_{j\ge0}|a_j|^2\,2\pi\int_0^1\rho^{2j+1}(1-\rho^2)^{n-2}d\rho$. This sum is finite by step 1.2; applying the same identity to $F-\sum_{j=0}^Na_jw^j$ shows that the squared norm of the remainder is its series tail, which tends to zero. Thus the $f_{n,j}$ have dense algebraic span in $\mathcal H_n^+$, and step 1.2 makes them a complete orthogonal family. [F3, F6, step 1.2, algebra, A1]
+
+3.1 In the disk coordinate the K-action is $F_{\pi_n(k_\theta)f}(w)=e^{-in\theta}F_f(e^{-2i\theta}w)$. The orbit map of each polynomial in $w$ is therefore norm-continuous. The maps $\pi_n(k)$ are isometries by [F1], and polynomials are dense by step 2.2; approximating $f$ by a polynomial $p$ and using $\|\pi_n(k)f-\pi_n(k_0)f\|_n\le2\|f-p\|_n+\|\pi_n(k)p-\pi_n(k_0)p\|_n$ proves strong continuity on all of $\mathcal H_n^+$. Since each $\pi_n(k)$ has inverse $\pi_n(k^{-1})$, this is a strongly continuous unitary representation of compact $K$. [F1, step 2.2, algebra]
+
+LINE 95 2.2 Expand $F(w)=\sum_{j\ge0}a_jw^j$ by [F3]. For each $0<\rho<1$ this series converges uniformly on $|w|=\rho$; integrating finite partial sums and using orthogonality of exponentials, then taking the uniform limit, gives $(2\pi)^{-1}\int_0^{2\pi}|F(\rho e^{i\theta})|^2d\theta=\sum_{j\ge0}|a_j|^2\rho^{2j}$. Integrating radially and applying [F6] to the increasing finite partial sums yields $\int_{\mathbb D}|F(w)|^2(1-|w|^2)^{n-2}dA(w)=\sum_{j\ge0}|a_j|^2\,2\pi\int_0^1\rho^{2j+1}(1-\rho^2)^{n-2}d\rho$. This sum is finite by step 1.2; applying the same identity to $F-\sum_{j=0}^Na_jw^j$ shows that the squared norm of the remainder is its series tail, which tends to zero. Thus the $f_{n,j}$ have dense algebraic span in $\mathcal H_n^+$, and step 1.2 makes them a complete orthogonal family. [F3, F6, step 1.2, algebra, A1]
+
+3.1 In the disk coordinate the K-action is $F_{\pi_n(k_\theta)f}(w)=e^{-in\theta}F_f(e^{-2i\theta}w)$. The orbit map of each polynomial in $w$ is therefore norm-continuous. The maps $\pi_n(k)$ are isometries by [F1], and polynomials are dense by step 2.2; approximating $f$ by a polynomial $p$ and using $\|\pi_n(k)f-\pi_n(k_0)f\|_n\le2\|f-p\|_n+\|\pi_n(k)p-\pi_n(k_0)p\|_n$ proves strong continuity on all of $\mathcal H_n^+$. Since each $\pi_n(k)$ has inverse $\pi_n(k^{-1})$, this is a strongly continuous unitary representation of compact $K$. [F1, step 2.2, algebra]
+
+4.1 The compact-group decomposition [F7] applies by steps 2.1 and 3.1. Its irreducible K-types are finite-dimensional; because $K=\mathrm{SO}(2)$ is abelian, the commuting unitary operators on any such finite-dimensional space have a common eigenline, and irreducibility forces that line to be the whole space. Thus every K-type is a character line. The complete orthogonal family from step 2.2 consists of eigenvectors with distinct characters $\chi_j(k_\theta)=e^{-i(n+2j)\theta}$ by [F1]. An eigenvector for a different character is orthogonal to every $f_{n,j}$ by unitarity and therefore vanishes by density. Each listed isotypic subspace is exactly $\mathbb C f_{n,j}$, since it is orthogonal to all other character lines and the family is complete. [F1, F7, step 2.2, step 3.1, algebra]
+
+LINE 99 4.1 The compact-group decomposition [F7] applies by steps 2.1 and 3.1. Its irreducible K-types are finite-dimensional; because $K=\mathrm{SO}(2)$ is abelian, the commuting unitary operators on any such finite-dimensional space have a common eigenline, and irreducibility forces that line to be the whole space. Thus every K-type is a character line. The complete orthogonal family from step 2.2 consists of eigenvectors with distinct characters $\chi_j(k_\theta)=e^{-i(n+2j)\theta}$ by [F1]. An eigenvector for a different character is orthogonal to every $f_{n,j}$ by unitarity and therefore vanishes by density. Each listed isotypic subspace is exactly $\mathbb C f_{n,j}$, since it is orthogonal to all other character lines and the family is complete. [F1, F7, step 2.2, step 3.1, algebra]
+
+5.1 For each $j$, [F7] gives the type projection $P_jf=\int_K\overline{\chi_j(k)}\pi_n(k)f\,dk$, where $\overline{\chi_j}=\chi_j^{-1}$. The point-evaluation map $E_z:f\mapsto f(z)$ is bounded by step 1.1, so [F8] lets it pass through the Bochner integral. In disk coordinates, the scalar integrand is $\sum_{\ell\ge0}a_\ell w^\ell\overline{\chi_j(k)}\chi_\ell(k)$ by step 3.1; for fixed $|w|<1$ this series converges uniformly in $k$. Haar invariance makes the integral of every nontrivial character zero (translate by an element where its value is not $1$), while the trivial character has integral $1$. Thus $E_z(P_jf)$ corresponds to $a_jw^j$, so $P_jf=a_jf_{n,j}$. The Hilbert expansion of step 2.2 is therefore $f=\sum_{j\ge0}P_jf$. Complex conjugation gives the same Hilbert and K-type conclusions for $\mathcal H_n^-$. [F7, F8, step 1.1, step 2.2, step 3.1, A1] ∎
+
+FILE lem-truncated-wave-cone-geometry-and-frustum-presentation
+
+STATEMENT Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\ge1$,
+$c>0$, $x_0\in\mathbb R^n$, $t_0>0$ and $0<t_1<t_2<t_0$. In space-time
+$\mathbb R^{n+1}$ with coordinates $(x,t)$ (Euclidean, so $(0,-1)$ and $(0,1)$
+below have zero space part) put
+
+$$K(t_1,t_2):=\{(x,t):t_1<t<t_2,\ |x-x_0|<c(t_0-t)\}.$$
+
+Then:
+
+(i) $K(t_1,t_2)$ is a nonempty open bounded convex set
+([[def-convex-subset-of-euclidean-space]]);
+
+(ii) it has the finite piecewise $C^1$ presentation of
+[[def-bounded-piecewise-c-one-euclidean-domain]] whose non-edge faces are the
+bottom disk $\overline B_{c(t_0-t_1)}(x_0)\times\{t_1\}$, the top disk
+$\overline B_{c(t_0-t_2)}(x_0)\times\{t_2\}$ and the lateral frustum
+$$L:=\{(x,t):|x-x_0|=c(t_0-t),\ t_1\le t\le t_2\},$$
+the edge set being the two boundary circles
+$S_{c(t_0-t_1)}(x_0)\times\{t_1\}$ and $S_{c(t_0-t_2)}(x_0)\times\{t_2\}$;
+
+(iii) the corresponding outward unit normals are $(0,-1)$ on the bottom disk,
+$(0,1)$ on the top disk, and
+$$\nu_{\mathrm{lat}}(x,t)=\left(\frac{x-x_0}{|x-x_0|},\,c\right)\Big/\sqrt{1+c^2}$$
+at points of $L$;
+
+(iv) the closed backward cone
+$K^-(x_0,t_0)=\{(x,t):0\le t\le t_0,\ |x-x_0|\le c(t_0-t)\}$ is compact and
+convex, and $K(t_1,t_2)$ is its interior intersected with the slab
+$\{t_1<t<t_2\}$.
+
+All statements are also true at $c=1$, and
+$n=1$ is the characteristic trapezium.
+
+LINE 24     - title: "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)"
+      url: "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf"
+      locator: "§9.2.3, printed p. 292: the backward cone $K^-(y,\\tau)=\\{(x,t):t\\le\\tau,\\ |y-x|<c(\\tau-t)\\}$ and its characteristic mantle"
+    - title: "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)"
+      url: "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf"
+
+LINE 64 
+(iv) the closed backward cone
+$K^-(x_0,t_0)=\{(x,t):0\le t\le t_0,\ |x-x_0|\le c(t_0-t)\}$ is compact and
+convex, and $K(t_1,t_2)$ is its interior intersected with the slab
+$\{t_1<t<t_2\}$.
+
+LINE 111 5.2 The outward normals: on the bottom disk the region lies locally in $\{t>t_1\}$, so the outward unit normal is $(0,-1)$; on the top disk it is $(0,1)$; on $L$ the field $\nabla\varphi=\bigl((x-x_0)/|x-x_0|,c\bigr)$ is continuous and nonvanishing near $L$ because $|x-x_0|=c(t_0-t)\ge c(t_0-t_2)>0$ there, $K$ is locally the side $\{\varphi<ct_0\}$ and $L\subseteq\{\varphi=ct_0\}$, so the outward unit normal is $\nabla\varphi/|\nabla\varphi|=\bigl((x-x_0)/|x-x_0|,c\bigr)/\sqrt{1+c^2}$, using the outward-normal convention for one-sided graph boundaries [F2] and the gradient of [[def-jacobian-matrix-and-gradient]]. This is (iii). [given, F2, step 4.1, algebra]
+
+6.1 The closed cone: $K^-=\{\varphi\le ct_0\}\cap\{t\ge0\}\cap\{t\le t_0\}$ is closed because $\varphi$ is continuous, bounded because $0\le t\le t_0$ and $|x-x_0|\le ct_0$, and thus compact by [F10], and convex because the sublevel set is convex by the inequality of step 1.1 and the two half-spaces are convex [F9]; its interior is $\{0<t<t_0,\ \varphi<ct_0\}$: the inclusion $\supseteq$ is openness of the right-hand set inside $K^-$, and conversely a point with $\varphi=ct_0$ is not interior, since for $z:=(x_0,0)$ with $\varphi(z)=0<ct_0$ the points $r(\sigma):=z+\sigma(p-z)$, $\sigma>1$, satisfy $p=\frac1\sigma r(\sigma)+(1-\frac1\sigma)z$, so convexity gives $\varphi(p)\le\frac1\sigma\varphi(r(\sigma))+(1-\frac1\sigma)\varphi(z)$ and hence $\varphi(r(\sigma))\ge ct_0+(\sigma-1)(ct_0-\varphi(z))>ct_0$, with $r(\sigma)\to p$ as $\sigma\downarrow1$; a point with $t=0$ or $t=t_0$ is not interior because $p-\delta e_t$, respectively $p+\delta e_t$, lies outside $K^-$ for every $\delta>0$. Intersecting $\operatorname{int}K^-$ with the slab $\{t_1<t<t_2\}\subseteq\{0<t<t_0\}$ gives exactly $K(t_1,t_2)$, which is (iv). [step 1.1, step 2.1, F9, F10, algebra] ∎ 
+
+## Remarks
+
+FILE lem-two-common-diagonalizations-are-related-by-a-base-isomorphism-and-a-measurable-field-of-unitaries
+
+STATEMENT Assume the Axiom of Choice. Let $(X,\mathcal B_X,\mu)$ and $(Y,\mathcal B_Y,\nu)$ be sigma-finite standard-Borel measure spaces, let $(H_x)$ and $(K_y)$ be measurable complex Hilbert fields with countable fundamental families and all fibres nonzero, and put
+$$\mathcal H=\int_X^\oplus H_x\,d\mu(x),\qquad \mathcal K=\int_Y^\oplus K_y\,d\nu(y).$$
+Let $\mathcal D_X$ and $\mathcal D_Y$ be the respective algebras of scalar multiplication operators. If a unitary $W:\mathcal H\to\mathcal K$ satisfies $W\mathcal D_XW^{-1}=\mathcal D_Y$, then there are conull Borel sets $X_0\subseteq X$, $Y_0\subseteq Y$, a bimeasurable bijection $c:X_0\to Y_0$, and a measurable field of unitaries $u_x:H_x\to K_{c(x)}$ such that $\lambda:=c_*(\mu|_{X_0})$ is equivalent to $\nu|_{Y_0}$. If $r=d\lambda/d(\nu|_{Y_0})$ and $J:\int_{Y_0}^\oplus K_y\,d\lambda(y)\to\int_{Y_0}^\oplus K_y\,d\nu(y)$ is the square-root Radon–Nikodym unitary $(J\eta)(y)=\sqrt{r(y)}\,\eta(y)$, then
+$$\bigl(J^{-1}W\xi\bigr)_{c(x)}=u_x\xi_x\qquad\text{for }\mu\text{-almost every }x\in X_0.$$
+The diagonal-model identity is preserved, $WI_{\mathcal H}W^{-1}=I_{\mathcal K}$, and the implementing base map and fibre field are unique up to null-set modification.
+
+LINE 112 [F18] The nonnegative integral is monotone, positively homogeneous for a positive scalar, and agrees with the simple integral on indicators ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]], [[prop-the-nonnegative-integral-agrees-with-the-simple-integral]]).
+
+[F19] A real integrable function has integral $\int f=\int f^+-\int f^-$, where $f^+=\max(f,0)$ and $f^-=\max(-f,0)$ ([[def-integrable-real-and-complex-functions-and-their-integrals]]).
+
+[F20] Squaring is strictly increasing on nonnegative real numbers ([[lem-of-square-monotone]]).
+
+FILE lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator
+
+STATEMENT Assume the Axiom of Choice. Let $G$ be a compact connected Lie group with
+maximal torus $T$, and let $T_p$ be the maximal torus of the finite central
+cover $Z(G)^0\times G_{\mathrm{der}}^{\mathrm{sc}}$. For every dominant
+$\lambda\in X^*(T)$, viewed as a character of $T_p$, one has
+$$A_\rho\,\chi_\lambda=A_{\lambda+\rho}$$
+as functions on $T_p$, where $\chi_\lambda$ is the character of the irreducible
+representation of highest weight $\lambda$ and $A_\nu=\sum_{w\in W}\det(w)e^{w\nu}$.
+
+LINE 29 Assume the Axiom of Choice. Let $G$ be a compact connected Lie group with
+maximal torus $T$, and let $T_p$ be the maximal torus of the finite central
+cover $Z(G)^0\times G_{\mathrm{der}}^{\mathrm{sc}}$. For every dominant
+$\lambda\in X^*(T)$, viewed as a character of $T_p$, one has
+$$A_\rho\,\chi_\lambda=A_{\lambda+\rho}$$
+
+LINE 43 [L1] On the covering torus, $\rho$ is a character, $A_\rho=e^\rho\prod_{\alpha>0}(1-e^{-\alpha})$, and the $A_\eta$ indexed by strictly dominant characters form a $\mathbb Z$-basis of the anti-invariant integral group algebra. Its proof establishes that regular orbits have trivial stabilizers and a unique strictly dominant representative, and that distinct characters are independent as functions ([[lem-weyl-denominator-and-anti-invariant-orbit-sum-basis]]).
+
+[L2] Compact-group irreducibles are classified by dominant actual characters, and a semisimple highest-weight module has a one-dimensional top and all other weights below it in root order ([[thm-highest-weight-classification-for-a-compact-connected-lie-group]], [[lem-highest-weight-modules-have-weights-below-the-top-weight]], [[prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one]]). The finite central cover is a surjective homomorphism $Z(G)^0\times G_{\mathrm{der}}^{sc}\to G$ ([[thm-compact-connected-lie-groups-are-classified-by-root-data]]).
+
+[L3] Weyl integration holds on every compact connected group, in particular on the cover, and irreducible unitary characters have squared norm one for normalized Haar measure. Every finite-dimensional continuous compact-group representation is unitarizable ([[thm-weyl-integration-formula]], [[cor-irreducible-characters-are-orthonormal-class-functions]], [[thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable]]).
+
+FILE prop-distributional-weak-solutions-are-not-unique
+
+STATEMENT Take $n=1$, $f(u)=u^2$ and $u_0\equiv0$. For every $\delta>0$ define, for
+$t>0$,
+$$u_\delta(t,x)=\begin{cases}0,&x<-\delta t,\\-\delta,&-\delta t<x<0,\\+\delta,&0<x<\delta t,\\0,&x>\delta t.\end{cases}$$
+This is a bounded distributional weak solution of $u_t+(u^2)_x=0$ on $\Pi_T$
+with strong local $L^1$ initial trace $u_0=0$, and it is not identically zero.
+At its three jumps the speeds $s=[u^2]/[u]$ are, respectively, $-\delta$, $0$
+and $+\delta$, so each jump coefficient $[u^2]-s[u]$ in the weak equation
+vanishes. The middle stationary jump violates the Kruzhkov entropy inequality
+for $k=0$: with $\eta_0(u)=|u|$ and $q_0(u)=\operatorname{sgn}(u)u^2$ its entropy
+production is $[q_0]-0\cdot[\eta_0]=\delta^2-(-\delta^2)=2\delta^2>0$, whereas
+the entropy inequality requires this coefficient to be nonpositive
+([[def-kruzhkov-entropy-solution]]). Hence $u_\delta$ is a weak solution but
+not an entropy solution, and the zero solution is a distinct weak solution with
+the same initial data: distributional weak solutions are not unique
+([[def-distributional-weak-solution-of-a-scalar-conservation-law]],
+[[def-piecewise-smooth-shock-and-one-sided-traces]]).
+
+LINE 46 vanishes. The middle stationary jump violates the Kruzhkov entropy inequality
+for $k=0$: with $\eta_0(u)=|u|$ and $q_0(u)=\operatorname{sgn}(u)u^2$ its entropy
+production is $[q_0]-0\cdot[\eta_0]=\delta^2-(-\delta^2)=2\delta^2>0$, whereas
+the entropy inequality requires this coefficient to be nonpositive
+([[def-kruzhkov-entropy-solution]]). Hence $u_\delta$ is a weak solution but
+
+FILE prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density
+
+STATEMENT Under countable choice, the density $\mu_g$ defines a compact-finite, locally finite, sigma-finite Radon Borel measure $\operatorname{vol}_g$. Its completion has a separately specified completed domain. Smooth compact-support integrals agree with smooth density integration, and finite-radius metric balls are Borel.
+
+LINE 41 [F4] [[thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure]]: If $r$ is a finite-valued positive smooth density, $\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\overline{\mathcal B(M)},\overline\mu_r)$ and is not identified with its Borel domain.
+
+[F5] [[thm-density-measure-integration-agrees-with-smooth-density-integration]]: For a nonnegative Borel $f:M\to[0,\infty]$ and any chart partition $(x_i,\varphi_i)$, $$\int_M f\,d\mu_r=\sum_i\int_{x_i(U_i)}(\varphi_i f r)_{x_i}\,d\lambda_n,$$ with values in $[0,\infty]$ and all zero-times-infinity products equal to zero. For positive smooth $r$ and compactly supported smooth real $f$, this equals the smooth density integral $\int_Mfr$. For real or complex $f\in L^1(\mu_r)$ the same chart formula holds, interpreted by real and imaginary positive and negative parts; the series converges absolutely. On the completion, nonnegative measurable functions and real or complex $L^1$ functions have Borel representatives modulo completed null sets, and the formulas are applied to those representatives.
+
+[F6] [[def-countable-choice]]: The **Axiom of Countable Choice**, written $\mathrm{AC}_\omega$, is the following statement. > For every family $(X_n)_{n \in \mathbb{N}}$ of nonempty sets indexed by > $\mathbb{N}$ there is a function $f$ with domain $\mathbb{N}$ such that > $f(n) \in X_n$ for every $n \in \mathbb{N}$. Equivalently, in the vocabulary of def-choice-function: every at most countable family of nonempty sets (def-countable) has a choice function.
+
+FILE prop-the-radon-nikodym-derivative-is-integrable-exactly-when-the-absolutely-continuous-part-is-finite
+
+STATEMENT Assume the Axiom of Choice. Let $\mu$ be a sigma-finite positive measure and let $\nu_a$ be the absolutely
+continuous part of a signed measure under the common finite-exhaustion
+hypothesis relative to $\mu$. Then
+$$\frac{d\nu_a}{d\mu}\in L^1(\mu)\qquad\Longleftrightarrow\qquad \nu_a\text{ is finite.}$$
+
+LINE 43 [L3] Under the stated Axiom of Choice, an absolutely continuous finite signed or complex measure has total-variation density $|d\nu_a/d\mu|$ ([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]], [[def-axiom-of-choice]]).
+
+[L4] For a finite signed measure, $|\nu_a|(X)=\nu_a^+(X)+\nu_a^-(X)$ ([[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]]).
+
+[L5] Total variation is the supremum of absolute-value sums over measurable partitions ([[def-total-variation-of-a-signed-or-complex-measure]]).
+
+FILE rem-meyers-serrin-does-not-assert-density-for-p-infinity
+
+STATEMENT None
+
+LINE 60 where the sign equals $-1$, gives $g_m'\le-1/2$ on $(-1,0)$. Continuity of
+$g_m'$ at $0$ then forces the two incompatible limits
+$g_m'(0)=\lim_{x\to0^+}g_m'(x)\ge1/2$ and
+$g_m'(0)=\lim_{x\to0^-}g_m'(x)\le-1/2$, a contradiction.
+
+
+LINE 61 $g_m'$ at $0$ then forces the two incompatible limits
+$g_m'(0)=\lim_{x\to0^+}g_m'(x)\ge1/2$ and
+$g_m'(0)=\lim_{x\to0^-}g_m'(x)\le-1/2$, a contradiction.
+
+The same phenomenon separates the exponents for local approximation: the
+
+FILE thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure
+
+STATEMENT Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. If $r$ is a finite-valued positive smooth density, $\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\overline{\mathcal B(M)},\overline\mu_r)$ and is not identified with its Borel domain.
+
+LINE 32 ## Facts & Assumptions
+
+**Given:** Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Positive finite smooth coefficients; local boundedness before regularity.
+
+[F1] [[thm-density-measure-is-independent-of-the-chart-gluing]]: Every Borel subset of a chart has measure equal to the integral of its coefficient.
+
+FILE thm-abel-means-converge-in-lp-uniformly-and-at-lebesgue-points
+
+STATEMENT Assume the Axiom of Countable Choice.
+
+Let $f:\mathbb R\to\mathbb C$ be one-periodic with $f|_{[0,1]}\in L^1([0,1])$.
+
+1. If $1\le p<\infty$ and $f|_{[0,1]}\in L^p([0,1])$, then
+   $$\|A_rf-f\|_{L^p([0,1])}\longrightarrow0 \qquad (r\uparrow1).$$
+2. If $f$ is continuous, then
+   $$\sup_{x\in\mathbb R}|A_rf(x)-f(x)|\longrightarrow0 \qquad (r\uparrow1).$$
+3. If $x$ is a Lebesgue point of $f$, then
+   $$A_rf(x)\longrightarrow f(x) \qquad (r\uparrow1).$$
+
+In particular, $A_rf(x)\to f(x)$ for almost every $x$.
+
+LINE 52 [L2] The Poisson kernels are nonnegative, have integral $1$, and their mass on $[\delta,1-\delta]$ tends to $0$ as $r\uparrow1$ ([[lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity]]).
+
+[L3] At a Lebesgue point, $$\lim_{h\to0^+}\frac1{2h}\int_{-h}^h |f(x-t)-f(x)|\,dt=0$$ ([[def-lebesgue-point-and-lebesgue-set]]).
+
+[L4] Assuming the Axiom of Countable Choice, almost every point is a Lebesgue point ([[thm-almost-every-point-is-a-lebesgue-point]]).
+
+FILE thm-acl-characterisation-of-w-one-p
+
+STATEMENT Assume the Axiom of Choice, used through the cited Countable-Choice and
+Dependent-Choice interfaces (completed-product Fubini, approximate identities,
+the fundamental theorem of calculus for absolutely continuous functions), for
+the countable selections of cutoffs and mollifier scales below, and through the
+earlier ACL reconstruction lemma. Let $\Omega\subseteq\mathbb R^n$ be
+open, $n\ge1$, let $1\le p<\infty$, and let $\mathbb K\in\{\mathbb R,\mathbb C\}$.
+For an almost-everywhere class $u$ on $\Omega$ the following are equivalent:
+
+1. $u\in W^{1,p}(\Omega;\mathbb K)$;
+2. $u\in L^p(\Omega;\mathbb K)$ and $u$ has one measurable ACL representative
+   $u^*$ whose classical coordinate derivatives $\partial_i u^*$ exist almost
+   everywhere, are measurable, and belong to $L^p(\Omega;\mathbb K)$.
+
+In that case $\partial_i u^*$ is a representative of $D_i u$ for every
+$i$, that is, $D_i u=\partial_i u^*$ almost everywhere.
+
+If $\Omega=\varnothing$, there is only the zero class, its representative
+$u^*=0$ is ACL, and every displayed assertion holds vacuously.
+
+LINE 72 [F6] Assume countable choice. For the unit-mass mollifier $\rho_\varepsilon$ the convolution $\rho_\varepsilon*f$ of a locally integrable $f$ is smooth with $\partial^\alpha(\rho_\varepsilon*f)=(\partial^\alpha\rho_\varepsilon)*f$; for every $K\in L^1$ with $\int K=1$ the scaled family $K_\varepsilon(x)=\varepsilon^{-n}K(x/\varepsilon)$ satisfies $K_\varepsilon*f\to f$ in $L^p$ for $p<\infty$ whenever $f\in L^p$ ([[lem-complex-translation-and-approximate-identity-interfaces]]).
+
+[F7] For nonnegative measurable $f$ and measurable $E$, integration over $E$ means integrating $f\chi_E$ ([[def-integral-over-a-measurable-set]]). For integrable real or complex $f$, the same convention follows by applying the nonnegative restriction definition to positive and negative parts, then real and imaginary parts ([[def-integrable-real-and-complex-functions-and-their-integrals]]). Integrable sums may be split by [[thm-linearity-of-the-lebesgue-integral-on-l-one]].
+
+[F8] Let $\overline{\mu\times\nu}$ be a completed product of sigma-finite measures. If $f$ is $\overline{\mu\times\nu}$-integrable, then outside measurable null sets its sections are integrable and the iterated integrals agree with the product integral ([[thm-tonelli-and-fubini-for-completed-product-measures]]).

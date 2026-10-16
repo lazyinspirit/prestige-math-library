@@ -1,0 +1,349 @@
+{
+  "group": "c",
+  "batches": ["33"],
+  "pages_read": [
+    "shors-factoring-algorithm",
+    "shors-factoring-algorithm-examples"
+  ],
+  "items_read": [
+    "alg-qa-shor-uniform-residue-sampler",
+    "lem-qa-crt-sign-vector-factorization",
+    "lem-qa-even-order-square-root",
+    "lem-qa-prime-power-order-two-adic-law",
+    "lem-qa-shor-residue-gcd-branch",
+    "thm-qa-order-to-factor-success",
+    "alg-qa-shor-factoring",
+    "def-qa-shor-cost-accounting",
+    "lem-qa-shor-perfect-power-precheck",
+    "thm-qa-shor-residue-sampler-correct-and-cost",
+    "thm-qa-order-to-factor-correctness",
+    "thm-qa-shor-factoring-cost",
+    "thm-qa-shor-factoring-success",
+    "ex-qa-shor-factorization-of-fifteen",
+    "ex-qa-shor-factorization-retry-branches"
+  ],
+  "conventions": [
+    {
+      "convention": "The factoring input is a promised composite integer N ≥ 4; the confidence input is a reduced binary rational δ = u/v with 0 < u < v. Output is a verified proper divisor or FAIL.",
+      "fixed_by": "alg-qa-shor-factoring",
+      "matters_for": [
+        "lem-qa-shor-perfect-power-precheck",
+        "thm-qa-order-to-factor-correctness",
+        "thm-qa-shor-factoring-cost",
+        "thm-qa-shor-factoring-success"
+      ]
+    },
+    {
+      "convention": "Residues are sampled uniformly from 1 through N−1 by rejection from h-bit blocks, with h = ceil(log₂(N−1)); the first block bit is most significant. Countable choice and dependent choice supply the independent fair-bit tape.",
+      "fixed_by": "alg-qa-shor-uniform-residue-sampler",
+      "matters_for": [
+        "thm-qa-shor-residue-sampler-correct-and-cost",
+        "alg-qa-shor-factoring",
+        "thm-qa-shor-factoring-success",
+        "thm-qa-shor-factoring-cost"
+      ]
+    },
+    {
+      "convention": "The outer cap is the least positive T satisfying 5^T v ≤ 8^T u. Each unit attempt calls order finding with b = 2, uses fresh randomness, and rechecks the candidate exponent and every returned divisor.",
+      "fixed_by": "alg-qa-shor-factoring",
+      "matters_for": [
+        "thm-qa-order-to-factor-correctness",
+        "thm-qa-shor-factoring-success",
+        "thm-qa-shor-factoring-cost"
+      ]
+    },
+    {
+      "convention": "Explicit arithmetic gates, ideal exact-angle QFT gates, modular-multiplier calls, bare controlled-unitary queries, and classical bit transitions are separate resource coordinates. No finite-alphabet compilation or uniform-family claim follows from the ideal gate count.",
+      "fixed_by": "def-qa-shor-cost-accounting",
+      "matters_for": ["thm-qa-shor-factoring-cost"]
+    },
+    {
+      "convention": "An accepted even exponent need only satisfy a^q = 1 modulo N for output correctness; the stronger nonidentity half-power conclusion requires q to be the true order.",
+      "fixed_by": "lem-qa-even-order-square-root",
+      "matters_for": [
+        "thm-qa-order-to-factor-correctness",
+        "thm-qa-order-to-factor-success",
+        "thm-qa-shor-factoring-success"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-order-to-factor-success",
+      "statement": "For an odd composite N that is not a perfect power, a uniform unit's true-order reduction succeeds with probability at least 1−2^{−(k−1)} ≥ 1/2, where k is the number of distinct prime factors; on that event both gcds give proper factors.",
+      "used_by": ["thm-qa-shor-factoring-success"]
+    },
+    {
+      "id": "alg-qa-shor-factoring",
+      "statement": "On a promised composite N ≥ 4 and reduced rational confidence δ, perform even and perfect-power preprocessing, then at most T independent residue attempts; use order finding with b = 2 on units, verify candidate exponents and divisors, and return a proper-divisor candidate or FAIL.",
+      "used_by": [
+        "lem-qa-shor-perfect-power-precheck",
+        "thm-qa-order-to-factor-correctness",
+        "thm-qa-shor-factoring-cost",
+        "thm-qa-shor-factoring-success",
+        "ex-qa-shor-factorization-of-fifteen",
+        "ex-qa-shor-factorization-retry-branches"
+      ]
+    },
+    {
+      "id": "lem-qa-prime-power-order-two-adic-law",
+      "statement": "For an odd prime p and e ≥ 1, if A is uniform in the unit group modulo p^e, every possible value j of v₂(ord(A)) has probability at most 1/2.",
+      "used_by": ["thm-qa-order-to-factor-success"]
+    },
+    {
+      "id": "lem-qa-crt-sign-vector-factorization",
+      "statement": "For N a product of distinct odd prime powers, if z² ≡ 1 modulo N but z is neither global sign, both gcd(z−1,N) and gcd(z+1,N) are proper nontrivial divisors. For one prime-power component the hypotheses cannot hold.",
+      "used_by": [
+        "thm-qa-order-to-factor-success",
+        "thm-qa-order-to-factor-correctness"
+      ]
+    },
+    {
+      "id": "thm-qa-shor-residue-sampler-correct-and-cost",
+      "statement": "For every N ≥ 3, the sampler halts almost surely and returns each representative 1 through N−1 with probability exactly 1/(N−1). Its expected random-bit use is at most 2h and its expected total classical bit transitions are O(h), where h = ceil(log₂(N−1)).",
+      "used_by": [
+        "thm-qa-shor-factoring-success",
+        "thm-qa-shor-factoring-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-shor-perfect-power-precheck",
+      "statement": "For promised composite N ≥ 4, preprocessing returns only proper factors; even inputs return 2, odd perfect powers are detected by the integer-root search, and the schoolbook bit cost is O(n^5).",
+      "used_by": [
+        "thm-qa-order-to-factor-correctness",
+        "thm-qa-shor-factoring-success",
+        "thm-qa-shor-factoring-cost",
+        "ex-qa-shor-factorization-retry-branches"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit axiom assumption for the countable fair-bit product model.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Explicit axiom assumption for the countable fair-bit product model.",
+      "opened": true
+    },
+    {
+      "id": "thm-countable-product-of-probability-spaces",
+      "used_for": "Existence of the fair-bit tape law with the prescribed finite marginals.",
+      "opened": true
+    },
+    {
+      "id": "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+      "used_for": "Independence of tape coordinates and disjoint rejection blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "The probability of rejecting every block is zero.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expected sampler runtime and bit use.",
+      "opened": true
+    },
+    {
+      "id": "cor-layer-cake-formulas-for-random-variables",
+      "used_for": "The geometric tail-sum calculation of the expected number of blocks.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Uniform residue and local-unit probability laws.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-probability",
+      "used_for": "Conditioning on unit samples and preceding attempt failures.",
+      "opened": true
+    },
+    {
+      "id": "def-product-of-finite-probability-spaces",
+      "used_for": "Finite coordinate probability laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-product-probability-has-independent-coordinate-events",
+      "used_for": "Independent CRT coordinates and finite repetition laws.",
+      "opened": true
+    },
+    {
+      "id": "def-unit-group-modulo-n-and-euler-totient",
+      "used_for": "Unit-group domain, finiteness, and totient cardinality.",
+      "opened": true
+    },
+    {
+      "id": "thm-unit-criterion-modulo-n",
+      "used_for": "Equivalence of gcd one and unit membership.",
+      "opened": true
+    },
+    {
+      "id": "thm-unit-group-chinese-remainder-decomposition",
+      "used_for": "Product decomposition of the unit group and uniform local components.",
+      "opened": true
+    },
+    {
+      "id": "thm-chinese-remainder-theorem",
+      "used_for": "Componentwise arithmetic and injectivity of the CRT map.",
+      "opened": true
+    },
+    {
+      "id": "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+      "used_for": "Cyclic local groups of even order and their two square roots of one.",
+      "opened": true
+    },
+    {
+      "id": "def-order-in-a-group",
+      "used_for": "Least positive identity exponent and the order-one boundary.",
+      "opened": true
+    },
+    {
+      "id": "def-group-power",
+      "used_for": "Natural and integer powers, including exponent zero.",
+      "opened": true
+    },
+    {
+      "id": "lem-order-characterisation",
+      "used_for": "Identity powers are precisely multiples of the element order.",
+      "opened": true
+    },
+    {
+      "id": "cor-order-of-element-divides-group-order",
+      "used_for": "Existence and finiteness of unit orders.",
+      "opened": true
+    },
+    {
+      "id": "def-p-adic-valuation",
+      "used_for": "Two-adic valuations of positive orders; valuation at zero is not used.",
+      "opened": true
+    },
+    {
+      "id": "def-common-divisor-and-gcd",
+      "used_for": "Nonnegative gcd and common-divisor properties.",
+      "opened": true
+    },
+    {
+      "id": "lem-gcd-basic-values",
+      "used_for": "Gcd with zero and identity inputs.",
+      "opened": true
+    },
+    {
+      "id": "def-divides-in-z",
+      "used_for": "Divisibility and exact remainder checks.",
+      "opened": true
+    },
+    {
+      "id": "lem-divisor-bound",
+      "used_for": "A sampled nonunit gcd is less than N and odd prime powers cannot divide 2.",
+      "opened": true
+    },
+    {
+      "id": "def-coprime",
+      "used_for": "Coprimality in order and cancellation arguments.",
+      "opened": true
+    },
+    {
+      "id": "lem-coprime-criterion",
+      "used_for": "Bézout characterization of coprimality.",
+      "opened": true
+    },
+    {
+      "id": "lem-coprime-divides-product",
+      "used_for": "Cancellation of coprime odd and power-of-two factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-bezout-identity",
+      "used_for": "Reduced exponent coprimality and gcd divisibility arguments.",
+      "opened": true
+    },
+    {
+      "id": "lem-int-cancellation",
+      "used_for": "Cancellation of nonzero integer factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-int-comm-ring",
+      "used_for": "Integer arithmetic and power identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-int-ordered-ring",
+      "used_for": "Strict divisor bounds and monotonicity of positive integer powers.",
+      "opened": true
+    },
+    {
+      "id": "def-integers-modulo-n",
+      "used_for": "Congruence classes and representative equality.",
+      "opened": true
+    },
+    {
+      "id": "thm-integers-modulo-n-basic-algebra",
+      "used_for": "Multiplication and powers of residue classes.",
+      "opened": true
+    },
+    {
+      "id": "thm-standard-representatives-modulo-n",
+      "used_for": "Unique representatives and conditional uniformity on units.",
+      "opened": true
+    },
+    {
+      "id": "def-prime",
+      "used_for": "Positive prime and composite conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-arithmetic",
+      "used_for": "Existence and uniqueness of prime factorization.",
+      "opened": true
+    },
+    {
+      "id": "thm-canonical-prime-factorisation",
+      "used_for": "Distinct-prime-power factorization and its exponents.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Natural exponent and loop-index conventions, including zero.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-order",
+      "used_for": "Natural exponent ranges and bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-embeds-int",
+      "used_for": "Compatibility of natural exponents with integer order and arithmetic.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-qa-crt-sign-vector-factorization",
+      "concern": "Fact F3 says, “In a cyclic group of order M, g^t=1 exactly when M divides t,” without specifying that g is a generator. For an arbitrary element this is false, for example the identity in a cyclic group of order two. The cited lem-order-characterisation uses the element's order. Proof step 1.1 explicitly chooses a generator, so the actual application is sound; F3 needs that qualification.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "shors-factoring-algorithm",
+      "to": "quantum-order-finding-and-rational-reconstruction",
+      "faithful": true,
+      "note": "The supplied algorithm accepts a standard unit representative and integer confidence parameter b. Its success theorem gives exact order with probability at least 1−2^(−b) for each fixed unit, so b=2 supplies the pointwise 3/4 bound used in factoring. Its cost theorem supplies the stated separate multiplier, ideal-gate, classical-bit, and bare-unitary query bounds. The consumer rechecks candidates and does not assume every accepted exponent is minimal."
+    },
+    {
+      "from": "shors-factoring-algorithm",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The cost definition separates gates, queries, classical work, descriptions, and generator time. The uniform-family definition requires a polynomial-time full-list generator over a fixed finite gate library. The factoring page and cost theorem explicitly disclaim such a generator and finite-alphabet compilation for their ideal exact-angle QFT bound, preserving the supplier's distinctions."
+    }
+  ]
+}

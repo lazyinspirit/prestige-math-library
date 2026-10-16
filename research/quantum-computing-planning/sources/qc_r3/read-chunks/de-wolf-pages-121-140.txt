@@ -1,0 +1,1287 @@
+===== PDF PAGE 121 =====
+
+Chapter 13
+
+Quantum Complexity Theory
+
+13.1
+Most functions need exponentially many gates
+
+As we have seen, quantum computers seem to provide enormous speed-ups for problems like fac-
+toring, and square-root speed-ups for various search-related problems.
+Could they be used to
+significantly speed up all or almost all problems? Here we will show that this is not the case:
+quantum computers are not significantly better than classical computers for most problems.
+Consider the problem of computing a Boolean function f : {0, 1}n →{0, 1} by means of a
+quantum circuit. Ideally, most such functions would be computable by efficient quantum circuits
+(i.e., using at most poly(n) elementary gates). Instead, we will show by means of a simple counting
+argument that almost all such functions f have circuit complexity nearly 2n. This is a variant of a
+well-known counting argument for classical Boolean circuits due to Riordan and Shannon [222].
+Let us fix some finite set of elementary gates, for instance the Shor basis {H, T, CNOT} or
+{H, Toffoli}. Suppose this set has k types of gates, each acting on at most 3 qubits. Let us try
+to count the number of distinct circuits that have at most C elementary gates. For simplicity we
+include the initial qubits (the n input bits as well as workspace qubits, which are initially |0⟩) as a
+(k + 1)st type among those C gates. First we need to choose which type of elementary gate each
+of the C gates is; this can be done in (k + 1)C ways. Now every gate has at most 3 ingoing and 3
+outgoing wires. For each of its 3 outgoing wires we can choose an ingoing wire into one of the gates
+in the following level; this can be done in at most (3C)3 ways. Hence the total number of circuits
+with up to C elementary gates is at most (k + 1)C(3C)3C = CO(C). We are clearly overcounting
+here, but that’s OK because we want an upper bound on the number of circuits.
+We’ll say that a specific circuit computes a Boolean function f : {0, 1}n →{0, 1} if for every
+input x ∈{0, 1}n, a measurement of the first qubit of the final state (obtained by applying the circuit
+to initial state |x, 0⟩) gives value f(x) with probability at least 2/3. Each of our CO(C) circuits
+can compute at most one f (in fact some of those circuits don’t compute any Boolean function
+at all).
+Accordingly, with C gates we can compute at most CO(C) distinct Boolean functions
+f : {0, 1}n →{0, 1}. Hence even if we just want to be able to compute 1% of all 22n Boolean
+functions, then we already need
+
+CO(C) ≥
+1
+10022n, which implies C ≥Ω(2n/n).
+
+Accordingly, very few computational problems will be efficiently solvable on a quantum computer.
+Below we will try to classify those that are efficiently solvable, using the tools of complexity theory.
+
+109
+
+
+===== PDF PAGE 122 =====
+
+13.2
+Classical and quantum complexity classes
+
+A computational decision problem on binary strings corresponds to what is often called a “language”
+in complexity theory: a language L ⊆{0, 1}∗is a set of binary strings of arbitrary lengths, and the
+corresponding decision problem is to determine whether a given string is an element of L or not.
+For example, L could be the set of prime numbers encoded in binary (corresponding to the problem
+of deciding whether a given number is prime or not) or the set of satisfiable Boolean formulas. It
+is often convenient to think of such a decision problem as corresponding to a sequence of Boolean
+functions fn : {0, 1}n →{0, 1}, one for each input-length n, where fn takes value 1 exactly on the
+n-bit strings that are in L.
+A “complexity class” is a set of decision problems (i.e., languages) that all have similar com-
+plexity in some sense, for instance the ones that can be solved with polynomial time or polynomial
+space. Let us first mention four of the most important classical complexity classes:
+
+• P.
+The class of problems that can be solved by classical deterministic computers using
+polynomial time.
+
+• BPP. The class of problems that can be solved by classical randomized computers using
+polynomial time (and with error probability ≤1/3 on every input).
+
+• NP. The class of problems where the ‘yes’-instances can be verified in polynomial time if
+some prover gives us a polynomial-length “witness.” More precisely, a language L is in NP
+iff there exists a deterministic polynomial-time algorithm A, with two inputs x, y (where y
+is at most polynomially longer than x), such that x ∈L iff there is a y such that A(x, y)
+outputs 1.
+
+Some problems L in this class are NP-complete, meaning that any other problem L′ ∈NP
+can be reduced to L in polynomial time: there exists a polynomial-time computable function
+f such that x ∈L′ iff f(x) ∈L. Hence the NP-complete problems are the hardest problems in
+NP. An example is the problem of satisfiability: we can verify that a given Boolean formula
+is satisfiable if a prover gives us a satisfying assignment y, so the satisfiability-problem is
+in NP, but one can even show that it is NP-complete. Other examples of NP-complete
+problems are integer linear programming, travelling salesman, graph-colorability, etc.
+
+• PSPACE. The class of problems that can be solved by classical deterministic computers
+using polynomial space.
+
+We can consider quantum analogues of all such classes, an enterprise that was started by Bernstein
+and Vazirani [55]:
+
+• EQP. The class of problems that can be solved exactly by quantum computers using poly-
+nomial time. This class depends on the set of elementary gates one allows, and therefore is
+not so interesting.
+
+• BQP. The class of problems that can be solved by quantum computers using polynomial time
+(and with error probability ≤1/3 on every input). This class is the accepted formalization
+of “efficiently solvable by quantum computers.”
+
+• “quantum NP”. In analogy with the above definition of NP, one could define quantum NP
+as the class of problems where the ‘yes’-instances can be verified efficiently if some prover
+
+110
+
+
+===== PDF PAGE 123 =====
+
+gives us a “quantum witness” of a polynomial number of qubits. For every ‘yes’-instance
+there should be a quantum witness that passes the verification with probability 1, while for
+‘no’-instances every quantum witness should be rejected with probability 1. This class is
+again dependent on the elementary gates one allows, and not so interesting.
+
+Allowing error probability ≤1/3 on every input, we get a class called QMA (“quantum
+Merlin-Arthur”). This is a more robust and more interesting quantum version of NP. In
+particular, like NP, QMA has complete problems: problems in QMA to which every other
+QMA-problem can be efficiently reduced. The most famous example of such a problem is
+deciding whether the ground state energy (i.e., lowest eigenvalue) of a given k-local Hamilto-
+nian (see Chapter 9) is at most some given number a or at least a + 1/poly(n). Determining
+the ground state energy of a given physical system is extremely important in physics and
+chemistry. It is not hard to see that the problem is in QMA: we can just let the quantum
+witness be the ground state (i.e., an eigenstate for the lowest eigenvalue) and measure its
+energy using the Hamiltonian, which is the observable corresponding to total energy. The
+problem turns out to be QMA-complete already for k = 2 [165, 156], so every other prob-
+lem in QMA can be efficiently reduced to the 2-local Hamiltonian problem. We will devote
+Chapter 14 to this.
+
+• QPSPACE. The class of problems that can be solved by quantum computers using polyno-
+mial space, with error probability ≤1/3 on every input. Despite allowing quantum computing
+and small error probabilities on top of the classical complexity class PSPACE, it turns out
+we don’t get a larger class: QPSPACE = PSPACE.
+
+As explained in Appendix B.2, in all the above cases the error probability 1/3 can be reduced
+efficiently to much smaller constant ε > 0: just run the computation O(log(1/ε)) times and take
+the majority of the answers given by these runs.
+We should be a bit careful about what we mean by a “polynomial-time [or space] quantum
+algorithm.” Our model for computation has been quantum circuits, and we need a separate quan-
+tum circuit for each new input-length. So a quantum algorithm of time p(n) would correspond to
+a family of quantum circuits {Cn}, where Cn is the circuit that is used for inputs of length n; it
+should have at most p(n) elementary gates.1
+
+We have BPP ⊆BQP, because a BPP-machine on a fixed input-length n can be written
+as a polynomial-size reversible circuit (i.e., consisting of Toffoli gates) that starts from a state
+that involves some coin flips. Quantum computers can generate those coin flips using Hadamard
+transforms, then run the reversible circuit, and measure the final answer bit. It is believed that
+BQP contains problems that aren’t in BPP, for example factoring large integers: this problem
+(or rather the decision-version thereof) is in BQP because of Shor’s algorithm, and is generally
+believed not to be in BPP. In the next section we will prove that BQP ⊆PSPACE. Thus we
+get the following sequence of inclusions:
+
+P ⊆BPP ⊆BQP ⊆PSPACE.
+
+It is generally believed that P = BPP [147], while the other inclusions are believed to be strict.
+Note that a proof that BQP is strictly greater than BPP (for instance, a proof that factoring
+
+1To avoid smuggling loads of hard-to-compute information into this definition (e.g., Cn could contain information
+about whether the n-th Turing machine halts or not), we will require this family to be efficiently describable: there
+should be a classical Turing machine which, on input n and j, outputs (in time polynomial in n) the j-th elementary
+gate of Cn, with information about where its incoming and outgoing wires go.
+
+111
+
+
+===== PDF PAGE 124 =====
+
+cannot be solved efficiently by classical randomized computers) would imply that P ̸= PSPACE,
+solving what has been one of the main open problems in computer science since the 1960s. Hence
+such a proof—if it exists at all—will probably be very hard.
+What about the relation between BQP and NP? It’s generally believed that NP-complete
+problems are probably not in BQP. The main evidence for this is the lower bound for Grover
+search: a quantum brute-force search on all 2n possible assignments to an n-variable formula gives
+a square-root speed-up, but not more. This is of course not a proof, since there might be some
+more clever, non-brute-force methods that exploit the structure of the problem to solve satisfiability.
+However, neither in the classical nor in the quantum case do we know clever methods that solve
+the general satisfiability problem much faster than brute-force search.
+Finally, there could also be problems in BQP that are not in NP, so it may well be that BQP
+and NP are incomparable. Much more can be said about quantum complexity classes; see for
+instance Watrous’s survey [260].
+
+13.3
+Classically simulating quantum computers in polynomial space
+
+When Richard Feynman first came up with quantum computers [116], he motivated them by
+
+“the full description of quantum mechanics for a large system with R particles is given by
+a function q(x1, x2, . . . , xR, t) which we call the amplitude to find the particles x1, . . . , xR
+[RdW: think of xi as one qubit], and therefore, because it has too many variables, it
+cannot be simulated with a normal computer with a number of elements proportional
+to R or proportional to N.” [. . . ]
+“Can a quantum system be probabilistically simulated by a classical (probabilistic, I’d
+assume) universal computer?
+In other words, a computer which will give the same
+probabilities as the quantum system does. If you take the computer to be the classical
+kind I’ve described so far (not the quantum kind described in the last section) and there
+are no changes in any laws, and there’s no hocus-pocus, the answer is certainly, No!”
+
+The suggestion to devise a quantum computer to simulate quantum physics is of course a brilliant
+one, but the main motivation is not quite accurate. As it turns out, it is not necessary to keep
+track of all (exponentially many) amplitudes in the state to classically simulate a quantum system.
+Here will prove the result of Bernstein and Vazirani [55] that quantum computers can actually be
+simulated efficiently in terms of space (though not necessarily in terms of time).
+Consider a circuit with T = poly(n) gates that acts on S qubits, where the first n of those
+S qubits give the classical input string.
+Assume for simplicity that all gates are either the 1-
+qubit Hadamard or the 3-qubit Toffoli gate (as mentioned in Section 2.2, these two gates together
+suffice for universal quantum computation), and that the classical output (0 or 1) of the algorithm
+is determined by a measurement of the first qubit of the final state. Without loss of generality
+S ≤3T, because T Toffoli gates won’t affect more than 3T qubits. Let Uj be the unitary that
+applies the j-th gate to its (1 or 3) qubits, and applies identity to all other qubits. The entries of
+this matrix are of a simple form (0, 1/
+√
+
+2, or −1/
+√
+
+2 for Hadamard; 0 or 1 for Toffoli) and easy to
+compute. Let |i0⟩= |x⟩|0S−n⟩be the starting state, where x ∈{0, 1}n is the classical input, and
+the second register contains the workspace qubits the algorithm uses. The final state will be
+
+|ψx⟩= UT UT−1 · · · U2U1|i0⟩.
+
+112
+
+
+===== PDF PAGE 125 =====
+
+The amplitude of basis state |iT ⟩in this final state is
+
+⟨iT |ψx⟩= ⟨iT |UT UT−1UT−2 · · · U2U1|i0⟩.
+
+Inserting an identity matrix I = �
+i∈{0,1}S |i⟩⟨i| between the gates, we can rewrite this as2
+
+⟨iT |ψx⟩= ⟨iT |UT
+
+
+
+
+�
+
+iT −1∈{0,1}S
+|iT−1⟩⟨iT−1|
+
+
+
+UT−1
+
+
+
+�
+
+iT −2
+|iT−2⟩⟨iT−2|
+
+
+
+UT−2 · · · U2
+
+��
+
+i1
+|i1⟩⟨i1|
+
+�
+
+U1|x, 0⟩
+
+=
+�
+
+iT −1∈{0,1}S,...,i1∈{0,1}S
+
+T
+�
+
+j=1
+⟨ij|Uj|ij−1⟩.
+
+The term ⟨ij|Uj|ij−1⟩is just one entry of the matrix Uj and hence easy to calculate because Uj acts
+non-trivially on only 1 or 3 qubits (see Exercise 2). Then �T
+j=1⟨ij|Uj|ij−1⟩is also easy to compute,
+in polynomial space (and even in polynomial time). If ℓof the T gates are Hadamards, then each
+such term is either 0 or ±1/
+√
+
+2ℓ.
+Adding up �T
+j=1⟨ij|Uj|ij−1⟩for all iT−1, . . . , i1 is also easy to do in polynomial space if we
+reuse space for each new iT−1, . . . , i1. Hence the amplitude ⟨iT |ψx⟩can be computed exactly using
+polynomial space.3 We assume that the BQP machine’s answer is obtained by measuring the first
+qubit of the final state. Then its acceptance probability is the sum of squares of all amplitudes of
+basis states starting with a 1: �
+iT :(iT )1=1 |⟨iT |ψx⟩|2. Since we can compute each amplitude ⟨iT |ψx⟩
+in polynomial space, and we can loop over all iT ∈{0, 1}S whose first bit is 1 to sum their squared
+amplitudes, the acceptance probability of a BQP-circuit on classical input x can also be computed
+in polynomial space. This proves the inclusion BQP ⊆PSPACE.
+
+Exercises
+
+1. (H) The following problem is a decision version of the factoring problem:
+
+Given positive integers N and k, decide if N has a prime factor p ∈{k, . . . , N −1}.
+
+Show that if you can solve this decision problem efficiently (i.e., in time polynomial in the
+input-length n = ⌈log N⌉), then you can also find the prime factors of N efficiently.
+
+2.
+(a) Let U be an S-qubit unitary which applies a Hadamard gate to the k-th qubit, and
+identity gates to the other S −1 qubits.
+Let i, j ∈{0, 1}S.
+Show an efficient way
+(i.e., using time polynomial in S) to classically calculate the matrix-entry Ui,j = ⟨i|U|j⟩
+(note: even though U is a tensor product of 2 × 2 matrices, it’s still a 2S × 2S matrix,
+so calculating U completely isn’t efficient).
+
+(b) Let U be an S-qubit unitary which applies a CNOT gate to the k-th and ℓ-th qubits,
+and identity gates to the other S −2 qubits. Let i, j ∈{0, 1}S. Show an efficient way to
+classically calculate the matrix-entry Ui,j = ⟨i|U|j⟩. Here k and ℓneed not be adjacent,
+but to simplify your notation you may assume that they are adjacent.
+
+2For the physicists: this is very similar to a path integral.
+3Of course, the calculation will take exponential time, because there are 2S(T −1) different sequences iT −1, . . . , i1
+that we need to go over sequentially.
+
+113
+
+
+===== PDF PAGE 126 =====
+
+3. This exercise shows how to use BQP-algorithms as subroutines in other BQP-algorithms.
+
+(a) (H) Suppose L is a language in BQP. Let f be the corresponding Boolean function, so
+f(x) = 1 iff x ∈L. Show that there is a w ≤poly(n) and a polynomial-size quantum
+circuit U that implements the following map for all x ∈{0, 1}n:
+
+|x, 0w+1⟩�→√p|x, f(x)⟩|ϕ(x)⟩+
+�
+
+1 −p|x, 1 −f(x)⟩|ψ(x)⟩,
+
+where p ≥1 −exp(−n), and |ϕ(x)⟩and |ψ(x)⟩are states of the w-qubit workspace.
+
+(b) Show that there is a polynomial-size quantum circuit V that (when restricted to the
+subspace of input states where the workspace qubits are |0⟩) is exp(−n)-close in operator
+norm to the following unitary:
+
+Of : |x, b, 0w⟩�→|x, b ⊕f(x), 0w⟩,
+
+for all x ∈{0, 1}n and b ∈{0, 1}.
+
+(c) (H) Suppose L is a language in BQP, and you have a polynomial-size quantum circuit
+for another language L′ that uses queries to the language L (i.e., applications of the
+unitary Of). Show that the language L′ is also in BQP: there is a polynomial-size
+quantum circuit for L′ that doesn’t need queries to L.
+
+4. (H) Consider a circuit C with T = poly(n) elementary gates (only Hadamards and Toffolis)
+acting on S = poly(n) qubits.
+Suppose this circuit computes f : {0, 1}n →{0, 1} with
+bounded error probability: for every x ∈{0, 1}n, when we start with basis state |x, 0S−n⟩,
+run the circuit and measure the first qubit, then the result equals f(x) with probability at
+least 2/3.
+
+(a) Consider the following quantum algorithm: start with basis state |x, 0S−n⟩, run the
+above circuit C without the final measurement, apply a Z gate to the first qubit, and
+reverse the circuit C. Denote the resulting final state by |ψx⟩. Show that if f(x) = 0
+then the amplitude of basis state |x, 0S−n⟩in |ψx⟩is in the interval [1/3, 1], while if
+f(x) = 1 then the amplitude of |x, 0S−n⟩in |ψx⟩is in [−1, −1/3].
+
+(b) PP is the class of computational decision problems that can be solved by classical
+randomized polynomial-time computers with success probability > 1/2 (however, the
+success probability could be exponentially close to 1/2, i.e., PP is BPP without the ‘B’
+for bounded-error). Show that BQP ⊆PP.
+
+5. (H) Consider the following computational problem, called the “entanglement-detection prob-
+lem”: given a classical description of a polynomial-sized quantum circuit C (say with H, T
+and CNOT gates), decide whether the (n + 1)-qubit state C|0n+1⟩is entangled, where you
+think of the first n qubits as “Alice” and the last qubit as “Bob”. Show that if you can
+efficiently (i.e., in time polynomial in the length of the input, which is the number of bits
+used in the description of C) solve this decision problem on a classical computer, then you
+can efficiently solve every problem in NP on a classical computer.
+
+114
+
+
+===== PDF PAGE 127 =====
+
+Chapter 14
+
+QMA and the Local Hamiltonian
+Problem
+
+14.1
+Quantum Merlin-Arthur (QMA)
+
+One can think of the complexity class NP as formalizing the standard notion of an efficiently-
+verifiable proof. For example, to prove that a given formula ϕ is satisfiable we give a satisfying
+assignment: this is easy to verify but hard to find (unless P=NP). The theory of NP-completeness
+shows that many very different computational problems (satisfiability, TSP, integer linear program-
+ming, etc.) are essentially the same computational problem, in the sense that instances from one
+can easily be translated to instances of another in deterministic polynomial time.
+We can relax the notion of proof slightly by allowing the prover and verifier the use of random-
+ness, and allowing them some error probability, say 1/3. For every x ∈L the prover should be
+able to provide a polynomial-size proof or “witness” that convinces the randomized verifier (with
+probability ≥2/3) that x ∈L; while for x ̸∈L, no matter what purported “witness” the prover
+sends, the verifier should only accept with probability ≤1/3. For historical reasons [35], the com-
+plexity class corresponding to such L is called Merlin-Arthur (MA), with Merlin referring to the
+omniscient prover and Arthur referring to the mere mortal (i.e., randomized and polynomial-time)
+king who is supposed to verify Merlin’s proofs.
+Quantum Merlin-Arthur (QMA) is the proper quantum analogue of NP. We already mentioned
+it in the previous chapter, but let us formally define QMA here. In contrast to NP, which consists
+of languages L where every string x is either in or out of L, QMA is a class of promise problems. A
+promise problem L partitions the set {0, 1}∗of all binary strings into L1, L0, and L∗. An algorithm
+is “promised” that it never receives inputs from L∗; if it gets an input from Lb for b ∈{0, 1}, then
+it has to determine b. The usual languages are promise problems where L∗= ∅.
+
+Definition 1 A promise problem L = (L1, L0, L∗) is in the class QMA, if there exists a uniform
+family {Cn} of polynomial-size quantum circuits with two input registers and one output qubit, and
+a polynomial w (for “witness length”), such that for all x ∈{0, 1}∗:
+
+• Completeness: If x ∈L1 ∩{0, 1}n, then there exists a w(n)-qubit state |ψ⟩(a “proof” or
+“witness” state) such that the circuit Cn outputs 1 with probability ≥2/3 when run on x, |ψ⟩.
+
+• Soundness: If x ∈L0 ∩{0, 1}n, then for every w(n)-qubit state |ψ⟩, the circuit Cn outputs 1
+with probability ≤1/3 when run on x, |ψ⟩.
+
+115
+
+
+===== PDF PAGE 128 =====
+
+If we force |ψ⟩to be classical, then we get a class called QCMA. If we additionally force the verifier
+to be classical, then we get MA. And if we additionally replace success probability 2/3 by 1, then
+we get NP.1 Hence NP ⊆MA ⊆QCMA ⊆QMA follows immediately from the definitions. It
+is believed that MA=NP [167], for similar reasons as why we believe BPP=P [147]. However,
+QMA is strongly believed to be a larger class than NP, meaning that “quantum proofs” can
+prove more than classical proofs can. Moreover, as we will see later, we can identify important
+QMA-complete problems, none of which is in NP (unless NP=QMA).
+
+We have fixed the error probability here to 1/3 rather arbitrarily. We can easily reduce this to
+a much smaller δ like we would for a randomized algorithm: repeat the protocol O(log(1/δ)) times
+and output the majority output bit of those runs (see Appendix B.2). If done naively, we’d need a
+new witness state |ψ⟩in each run, because the measurement that produces the verifier’s output bit
+in each run can collapse the state. One has to be careful about soundness here, since the prover can
+send a large entangled state instead of a tensor product of witness states for the individual runs;
+however, it is not too hard to show that this cannot help the prover. This approach increases the
+verifier’s runtime but also the required witness-size w(n) by a factor O(log(1/δ)). However, there
+is a beautiful and quite surprising technique (which we will not explain here) due to Marriott and
+Watrous [197] that achieves the same error reduction using the same witness state! The verifier’s
+runtime in that amplified protocol will still go up by a factor O(log(1/δ)), but the witness-size
+remains w(n).
+
+14.2
+The local Hamiltonian problem
+
+The quintessential NP-complete problem is satisfiability (SAT): given a formula ϕ(x1, . . . , xn) of
+n Boolean variables x1, . . . , xn,2 decide if there is an assignment of truth values to x1, . . . , xn that
+makes the formula true. The famous Cook-Levin theorem [97, 177] says this is NP-complete.
+
+A special case of this is k-SAT, where we restrict the formula ϕ to be the conjunction of clauses,
+each of which is the disjunction of k literals (a literal is a variable xi or its negation). For example,
+the following is a 3-SAT instance with 4 clauses on n = 5 Boolean variables:
+
+(x1 ∨¬x2 ∨x3) ∧(¬x1 ∨x2 ∨x5) ∧(¬x2 ∨¬x3 ∨¬x5) ∧(x3 ∨x4 ∨¬x5).
+(14.1)
+
+It is well-known that k-SAT is still NP-complete if k ≥3, while 2-SAT is actually in P.
+
+Let us try to reformulate k-SAT in a way that looks “more quantum,” by relating it to the
+minimal eigenvalue of a particular Hamiltonian that is diagonal in the computational basis (recall
+from Section 9.1 that the Hamiltonian for a physical system is the observable corresponding to
+total energy). For concreteness we will fix k = 3. Consider a clause C = x1 ∨¬x2 ∨x3. This has
+one non-satisfying assignment, namely x1 = 0, x2 = 1, x3 = 0. With this clause let us associate
+
+1As mentioned in the previous chapter, requiring success probability 1 instead of 2/3 in QMA itself (like in NP)
+leads to an unsatisfactory complexity class because it depends on what set of elementary gates one uses.
+2To remain consistent with the literature we now use n for the number of Boolean variables, not for the actual
+length of the input, which would be the number of bits needed to describe the instance ϕ, which will be larger than n
+now. However, the input-length should be at most polynomial in n.
+
+116
+
+
+===== PDF PAGE 129 =====
+
+the following diagonal Hamiltonian:
+
+HC =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+0
+1
+0
+0
+0
+0
+0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note that the 1 sits at the location indexed by x1x2x3 = 010, the unique non-satisfying assignment
+for C. Think of HC as giving a “penalty” of 1 to x if x doesn’t satisfy clause C. We will implicitly
+treat HC as an n-qubit Hamiltonian, by tensoring it with identity for the other n −3 qubits. That
+way, we have ⟨x|HC|x⟩= 0 if clause C is satisfied by assignment x, and ⟨x|HC|x⟩= 1 if not.
+Now suppose we have a 3-SAT formula ϕ = C1 ∧· · · ∧Cm that is the conjunction of m clauses,
+each with 3 literals. To this we associate the following Hamiltonian:
+
+Hϕ =
+
+m
+�
+
+j=1
+HCj.
+
+Note that the eigenvalues of Hϕ lie in the interval [0, m], and that Hϕ is a 3-local Hamiltonian: each
+term involves only 3 of the qubits non-trivially (more generally, if we start with a k-SAT instance,
+then Hϕ is k-local). Also note that the “energy” of assignment x ∈{0, 1}n is
+
+⟨x|Hϕ|x⟩=
+
+m
+�
+
+j=1
+⟨x|HCj|x⟩,
+
+which exactly counts the number of unsatisfied clauses under assignment x. The “minimal energy”
+(lowest eigenvalue λmin) of Hϕ is equal to the minimal number of unsatisfied clauses (= m−the
+maximal number of satisfied clauses). In particular, ϕ is satisfiable iff λmin = 0.
+The above Hamiltonian is diagonal, and hence rather “classical,” because it is the sum of
+diagonal 3-local terms.
+If instead we allow the terms to be arbitrary 3-local (or even k-local)
+Hamiltonians, we arrive at the central problem of this chapter.
+
+Definition 2 The k-local Hamiltonian problem is the following: given a classical description of
+an n-qubit Hamiltonian
+
+H =
+
+m
+�
+
+j=1
+Hj
+(14.2)
+
+where each Hj is k-local (i.e., it acts nontrivially on only k of the n qubits) and 0 ⪯Hj ⪯I, and
+given parameters a, b ∈[0, m] with b −a ≥1/poly(n), promised that H’s minimal eigenvalue λmin
+is either ≤a or ≥b, decide which is the case.
+
+Note that this is a promise problem: some H of the form of Eq. (14.2) will have λmin in (a, b)
+and hence won’t satisfy the promise. Such instances will form the set L∗of this promise problem,
+while the “≤a” instances will form L1 and the “≥b” instances will form L0. The input H is
+
+117
+
+
+===== PDF PAGE 130 =====
+
+a 2n × 2n matrix, but because it is k-local we do not need to describe it literally. Instead the
+description of H that is given as input will just consist of each of the m terms as a 2k × 2k matrix
+(m·22k complex numbers) and m⌈log
+�n
+k
+�
+⌉bits telling us for each of the m terms on which k qubits
+that term acts non-trivially. Accordingly, if m = poly(n), k = O(log n), and each complex entry is
+represented with poly(n) bits, then the actual input-length is poly(n) bits.
+The assumption that each Hj (and therefore H as well) is positive semidefinite, is not essential.
+If we were instead to start with the weaker condition −I ⪯Hj ⪯I, then by defining psd matrices
+H′
+j = (Hj + I)/2 we obtain an instance where 0 ⪯H′
+j ⪯I with a simple relation between the
+minimal eigenvalues λmin of H = �
+j Hj and λ′
+min of H′ = �
+j H′
+j, namely λ′
+min = (λmin + m)/2.
+This allows us to also model negative energies.
+The minimal eigenvalue λmin is known as the “ground state energy” of the Hamiltonian: it is
+the energy of the state(s) we get if we cool an n-qubit system governed by H to temperature 0.
+Distinguishing λmin ≤a or λmin ≥b is essentially equivalent to approximating λmin up to an ad-
+ditive error O(b −a) (see Exercise 3). Finding information about λmin, and more generally about
+the lowest eigenvalues of H and about the structure of the “ground states” (the eigenstates for
+eigenvalue λmin) is important for many problems in physics and chemistry, for instance in deter-
+mining the properties of materials at low temperatures (including poorly-understood phenomena
+such as superconductivity) and the reaction speeds of chemical reactions. Much work in computa-
+tional science is expended on solving such problems for particular Hamiltonians corresponding to
+physical systems of interest. Such Hamiltonians are typically indeed k-local for small k, at least
+approximately, since particles tend to significantly influence only the particles close to them.
+Unfortunately the local Hamiltonian problem is NP-hard already for k ≥2 and very large
+gap between a and b. This follows from our above translation from SAT: we can convert a 2-SAT
+instance ϕ to 2-local Hamiltonian Hϕ where λmin = m−the maximal number of satisfied clauses.
+Computing the maximal number of satisfied clauses is known as the MAX-2-SAT problem, and
+distinguishing between different values that are Ω(m) apart for its value is already known to be
+an NP-hard problem [143]. Since it is generally believed that NP ̸⊆BQP, it is unlikely that
+a quantum computer can solve local Hamiltonian efficiently in general. Even worse, as we will
+see next, k-local Hamiltonian turns out to be complete for the complexity class QMA (which is
+presumably larger than NP), already for k ≥2, but with polynomially small gap between a and b.
+
+14.3
+Local Hamiltonian is QMA-complete
+
+In this section we will show that k-local Hamiltonian is a QMA-complete problem, proving a
+quantum analogue of the Cook-Levin theorem.
+First, it is not too hard to see that the problem is in QMA. The witness |ψ⟩for the instances
+x ∈L1 would be a ground state, and there are several efficient ways to approximate its energy in
+order to verify that it is indeed ≤a and not ≥b (see Exercise 4).
+Second, we need to show that k-local Hamiltonian is QMA-hard, meaning that any other
+problem in QMA can be reduced to it. So consider an arbitrary L = (L1, L0, L∗) ∈QMA as in
+Definition 1, and fix an n-bit input x ∈L1 ∪L0. We would like to convert the circuit Cn into a
+Hamiltonian H, such that H has a small eigenvalue iff Cn has high acceptance probability on some
+states |ψ⟩. We will assume the error probability is ≤1/4T rather than 1/3.
+The circuit Cn acts on n + s + w(n) qubits, where the first n qubits contain the fixed classical
+input x (which we will omit below for simplicity), the circuit uses s workspace qubits (which start
+
+118
+
+
+===== PDF PAGE 131 =====
+
+out as |0⟩), and the third register contains the purported w(n)-qubit witness state.
+Since Cn
+consists of some T = poly(n) gates, we can write it as a product Cn = UT · · · U1 where each Ut
+is an elementary gate on 1 or 2 qubits, tensored with identity on the other qubits. For a given
+w(n)-qubit state |ψ⟩, let |ψ0⟩= |0s⟩|ψ⟩and |ψt⟩= Ut|ψt−1⟩for t ∈[T] be the initial, intermediate,
+and final states of the algorithm. The output qubit of the circuit is obtained by measuring the first
+qubit of the final state |ψT ⟩in the computational basis.
+We will now describe a Hamiltonian H that “follows” the state and gives “penalties” for every
+deviation from the proper sequence of states |ψ0⟩, . . . , |ψT ⟩, as well as penalizing a 0-output in
+the final measurement. In addition to the register that U acts on, we will add another register of
+log(T + 1) qubits that acts like a “clock,” ranging from 0 to T (assume for simplicity that T + 1
+is a power of 2). We will subscript the first s + w(n) qubits by integers in {1, . . . , s + w(n)}, and
+subscript the clock register by ‘C’. Define
+
+Hinit
+=
+
+s
+�
+
+i=1
+|1⟩⟨1|i ⊗|0⟩⟨0|C
+
+Ht
+=
+1
+2 (I ⊗(|t −1⟩⟨t −1|C + |t⟩⟨t|C) −Ut ⊗|t⟩⟨t −1|C −U∗
+t ⊗|t −1⟩⟨t|C) , for t ∈[T]
+
+Hfinal
+=
+|0⟩⟨0|1 ⊗|T⟩⟨T|C
+
+H
+=
+Hinit +
+
+T
+�
+
+t=1
+Ht + Hfinal.
+
+The number of terms in H is m = s + T + 1. The idea behind this Hamiltonian H is that Hinit
+checks that the s workspace qubits are all 0 in the initial state, where the clock register is 0 (giving
+an “energy penalty” if some of those workspace qubits are 1); Ht checks that Ut is applied properly
+in the t-th step (the factor 1/2 is to ensure Ht ⪯1); and Hfinal checks that the output qubit in the
+final state is 1 (giving a penalty if it’s 0). Because the clock register uses ⌈log(T + 1)⌉bits, and
+each gate Ut acts on at most 2 qubits, the locality of H is k = ⌈log(T + 1)⌉+ 2 = O(log n). We
+will reduce this to a constant later.
+
+14.3.1
+Completeness and soundness
+
+We now want to show that we can distinguish x ∈L1 and x ∈L0 by considering the smallest
+eigenvalue λmin of the above Hamiltonian H. First, for completeness we want to show that if
+x ∈L1 then there is a state with small eigenvalue. Since x ∈L1, there is a w(n)-qubit witness
+state |ψ⟩that leads U with initial state |ψ0⟩= |0s⟩|ψ⟩to accept (i.e., output 1) with probability
+≥1 −1/4T. Consider the following state:
+
+|ψ′⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+|ψt⟩|t⟩.
+
+This state is sometimes called the “history state” of the circuit U, and you can think of it as the
+quantum analogue of a satisfying assignment in classical SAT. It faithfully “follows” the intermedi-
+ate states of the computation. This means |ψ′⟩gets penalty 0 from Hinit and from each Ht. Since
+the probability of getting (the incorrect) measurement outcome 0 is ≤1/4T, we have
+
+λmin ≤⟨ψ′|H|ψ′⟩=
+1
+T + 1⟨ψT |⟨T| Hfinal |ψT ⟩|T⟩=
+1
+T + 1⟨ψT | (|0⟩⟨0|1 ⊗I) |ψT ⟩≤
+1
+4T(T + 1) := a.
+
+119
+
+
+===== PDF PAGE 132 =====
+
+Second, to prove soundness we’ll show that if x ∈L0, then λmin is at least b := 2a. Consider any
+purported witness state |ψ′⟩. We can write this as
+
+|ψ′⟩=
+
+T
+�
+
+t=0
+αt|ϕt⟩|t⟩
+
+for some nonnegative reals αt and normalized states |ϕt⟩. Note that
+
+⟨ψ′|Ht|ψ′⟩= (αt−1⟨ϕt−1|⟨t −1| + αt⟨ϕt|⟨t|) Ht (αt−1|ϕt−1⟩|t −1⟩+ αt|ϕt⟩|t⟩)
+
+= 1
+
+2
+�
+α2
+t−1 + α2
+t −αt−1αt⟨ϕt|Ut|ϕt−1⟩−αt−1αt⟨ϕt−1|U∗
+t |ϕt⟩
+�
+
+= 1
+
+2∥αt|ϕt⟩−αt−1Ut|ϕt−1⟩∥2.
+(14.3)
+
+So intuitively, assuming αt ≈αt−1, the Hamiltonian term Ht gives an energy penalty proportional
+to how much |ϕt⟩deviates from Ut|ϕt−1⟩, i.e., from a correct application of the t-th gate of Cn.
+For ease of presentation we will now make the following three simplifying assumptions.3
+
+• All αt are equal to 1/
+√
+
+T + 1, as they would be in the history state. This assumption is
+reasonable because |ϕt⟩and Ut|ϕt−1⟩both have norm 1, so differences between αt and αt−1
+will only make the penalty of Eq. (14.3) bigger.
+
+• |ϕ0⟩starts with s 0s, so |ϕ0⟩= |0s⟩|ψ⟩for some w(n)-qubit state |ψ⟩. This is reasonable
+because if |ϕ0⟩deviates significantly from this form, then Hinit will give a large energy penalty.
+
+• |ϕT ⟩has acceptance probability close to 1. This is reasonable because if |ϕT ⟩has low accep-
+tance probability, then Hfinal will give a large energy penalty.
+
+Because of the second item and the fact that x ∈L0, the state Cn|ϕ0⟩must have acceptance
+probability close to 0. Comparing with the third item, it follows that |ϕT ⟩and Cn|ϕ0⟩must be
+nearly orthogonal, so their distance is close to
+√
+
+2, and in particular at least 1. This implies
+
+1 ≤∥|ϕT ⟩−Cn|ϕ0⟩∥=
+
+�����
+
+T
+�
+
+t=1
+UT · · · Ut+1|ϕt⟩−UT · · · Ut|ϕt−1⟩
+
+�����
+
+≤
+
+T
+�
+
+t=1
+∥UT · · · Ut+1|ϕt⟩−UT · · · Ut|ϕt−1⟩∥=
+
+T
+�
+
+t=1
+∥|ϕt⟩−Ut|ϕt−1⟩∥.
+
+Here the first equality uses a telescoping sum, the second inequality is the triangle inequality, and
+the last equality is because the operator norm is unitarily invariant (∥Uv −Uw∥= ∥v −w∥).
+Using Eq. (14.3) with αt = αt−1 = 1/
+√
+
+T + 1, and Cauchy-Schwarz, we now have:
+
+⟨ψ′|H|ψ′⟩≥
+
+T
+�
+
+t=1
+⟨ψ′|Ht|ψ′⟩=
+1
+2(T + 1)
+
+T
+�
+
+t=1
+∥|ϕt⟩−Ut|ϕt−1⟩∥2
+
+≥
+1
+2T(T + 1)
+
+�T
+�
+
+t=1
+∥|ϕt⟩−Ut|ϕt−1⟩∥
+
+�2
+
+≥
+1
+2T(T + 1) = b.
+
+Accordingly, if x ∈L0 then λmin = min|ψ′⟩⟨ψ′|H|ψ′⟩≥b. If x ∈L1, then the history state witnesses
+λmin ≤a = 1/(4T(T + 1)). We also have b −a = a = 1/(4T(T + 1)) ≥1/poly(n), as required.
+
+3Exercise 5 shows this is without loss of generality, though the lower bound on b −a becomes a worse polynomial
+(1/T 6 instead of 1/T 2) if we drop these three assumptions and take the unary clock of the next section into account.
+
+120
+
+
+===== PDF PAGE 133 =====
+
+14.3.2
+Reducing the locality
+
+The above construction of H, with the history state as witness for x ∈L1, is due to Kitaev [165],
+who was inspired by an earlier clock construction of Feynman [117] (our proof of soundness is a
+bit different from Kitaev’s). He also showed that the locality can be reduced from O(log n) to 5
+by representing the clock in unary: t = 0 would now be represented by |0T ⟩C, t = 1 by |10T−1⟩C,
+t = 2 by |110T−2⟩C, etc. This now requires T qubits to represent the clock instead of ⌈log(T + 1)⌉.
+Denoting the t-th qubit of the clock by ‘Ct’, for t ∈[T], the previous terms in H now become
+
+Hinit
+=
+
+s
+�
+
+i=1
+|1⟩⟨1|i ⊗|0⟩⟨0|C1
+
+Ht
+=
+1
+2
+�
+I ⊗|100⟩⟨100|Ct−1,Ct,Ct+1 + I ⊗|110⟩⟨110|Ct−1,Ct,Ct+1+
+−Ut ⊗|110⟩⟨100|Ct−1,Ct,Ct+1 −U∗
+t ⊗|100⟩⟨110|Ct−1,Ct,Ct+1
+�
+
+Hfinal
+=
+|0⟩⟨0|1 ⊗|1⟩⟨1|CT
+
+(H1 and HT have a slightly different form than the Ht written above, because the clock register
+starts resp. ends there.) We also add the following to penalize a T-bit clock register that doesn’t
+conform to the proper 1s-followed-by-0s format of a unary number:
+
+Hclock
+=
+
+T−1
+�
+
+t=1
+|01⟩⟨01|Ct,Ct+1.
+
+Note that the terms in the Hamiltonian now only “touch” at most 5 qubits: in particular, each Ht
+touches 1 or 2 qubits for the gate Ut, and 3 qubits of the clock. This shows k-local Hamiltonian
+is QMA-complete for k ≥5. Subsequently, Kempe, Kitaev, and Regev [156] showed that k-local
+Hamiltonian is QMA-complete already for k = 2 (in contrast to 2-SAT, which is in P).
+All of these results assume a polynomially small gap b −a. Intuitively, the local Hamiltonian
+problem becomes easier if the gap between a and b becomes bigger, since the 1-instances and
+0-instances are further apart and should be easier to distinguish. One may ask whether k-local
+Hamiltonian is still QMA-complete if b −a ≥Ω(m) instead of ≥1/poly(n). We know that it is
+at least NP-hard for all k ≥2 because of the connection with MAX-2-SAT mentioned at the end
+of Section 14.2, but whether it is also QMA-hard is a longstanding open problem in the field of
+Hamiltonian complexity [124], known as the “quantum PCP conjecture” [7].
+
+14.4
+Other interesting problems in QMA
+
+The main reason NP-completeness is a prominent notion in computer science, is that very many in-
+teresting and practically important computational problems are NP-complete: satisfiability, Trav-
+eling Salesman, scheduling problems, integer linear programming, protein folding, and many more.
+See [122] for an already very extensive list from the late-70s. Similarly (though not yet as exten-
+sively) there is a growing list of QMA-complete problems, often from physics or chemistry. Below
+we list a few without proof of their QMA-hardness; the fact that these problems are in QMA is
+usually easy to show. See [9, 63] for more.
+
+• The local Hamiltonian problem for Hamiltonians corresponding to actual physical
+systems, such as 2-local Ising model with 1-local transverse field and a tunable 2-local
+transverse coupling [60], the 2D Heisenberg Hamiltonian with local magnetic fields [233], the
+2D Hubbard Hamiltonian with local magnetic fields [233], and the Bose-Hubbard model [89].
+
+121
+
+
+===== PDF PAGE 134 =====
+
+• Non-Identity check [151]. Given a polynomial-size quantum circuit U on n qubits, deter-
+mine whether U is not close to the identity up to some global phase:
+(1) for all ϕ ∈[0, 2π) we have
+��U −eiϕI
+��≥b or
+(0) there is a ϕ ∈[0, 2π) such that
+��U −eiϕI
+��≤a,
+promised one of these is the case, and b −a ≥1/poly(n).
+
+• k-local density matrix consistency [180, 181, 71].4 Given m = poly(n) density matrices
+ρ1, . . . , ρm where the state of ρi is only on qubits Ci ⊆[n] with |Ci| ≤k, determine whether:
+(1) there is an n-qubit density matrix ρ such that for all i ∈[m], Tr[n]\Ci(ρ) = ρi, or
+(0) for all n-qubit density matrices ρ there is an i ∈[m] such that
+��Tr[n]\Ci(ρ) −ρi
+��
+tr ≥b,
+promised one of these is the case, and b ≥1/poly(n).
+
+The following problem is in QMA, is not known to be QMA-complete, but also not known to be
+in NP (in contrast, group membership is known to be in NP).
+
+• Group non-membership [257]. Given a finite group G, subgroup H ≤G, and an element
+g ∈G, determine whether:
+(1) g ̸∈H, or
+(0) g ∈H.
+
+Here each group could be given for instance as a generating subset of elements, together with the
+multiplication tables for those elements. The witness state for case (1) is the uniform superposition
+over H. Exercise 9 asks you to show completeness; proving soundness is a bit harder.
+
+14.5
+Quantum interactive proofs
+
+The prover-verifier protocols in QMA, just like NP and MA, only allow one message from the
+prover to the verifier.
+This is akin to submitting a proof to a journal, where the referee then
+verifies the correctness of the proof without further interaction with the prover. One can also allow
+multiple rounds of interaction, formalizing the back-and-forth situation that often occurs when a
+mathematician (the prover) proves a complicated theorem in front of a colleague (the verifier): the
+verifier can raise objections or ask questions about steps of the proof, which the prover answers
+(hopefully to the verifier’s satisfaction) before proceeding with the next steps. A “proof” here is a
+very general notion: it’s any polynomial interaction that convinces the verifier of true statements
+and cannot convince the verifier about any false statements. (i.e., it cannot make them accept an
+x ̸∈L with high probability).
+The complexity class IP consists of those languages that can be decided by a polynomial
+interaction between an unbounded prover and a polynomial-time classical verifier. Again, if x ∈L1
+then the prover should succeed in convincing the verifier to accept (with probability ≥2/3), and if
+x ∈L0 then no matter what the prover does, the verifier should reject with probability ≥2/3. A
+fundamental classical complexity theory result says that IP=PSPACE [191, 237, 238].
+One can define quantum IP (QIP) analogously. The two main results known about QIP are:
+
+1. Every QIP protocol can be implemented with only 3 messages, with the prover starting [259,
+
+163]. Roughly speaking, the 3-message protocol starts from a poly(n)-message protocol for
+an L ∈QIP, using the 3 messages to check one randomly chosen one among the poly(n)
+
+4A density matrix is a generalization of a pure state. See Chapters 15 and 18 for the notation used here.
+
+122
+
+
+===== PDF PAGE 135 =====
+
+messages. This results in a 3-message protocol with 1/poly(n) gap between completeness and
+soundness parameters for the same L. This small gap can then be amplified to a constant
+gap by repeating the protocol in parallel; this repetition increases the communication per
+message but not the number of messages, which remains 3. In contrast, it is widely believed
+that IP restricted to 3-message protocols is a much smaller class than the full class IP.
+
+2. QIP=IP [150]. Roughly speaking, this is proved by showing that the acceptance probability
+of the optimal strategy of the prover in a QIP-protocol can be described implicitly by an
+exponential-size semidefinite program. Its optimal value (which is either ≥2/3 or ≤1/3) can
+then be approximated by an exponential-size but polynomial-depth circuit. Such circuits can
+be implemented in PSPACE, and we already knew that IP=PSPACE.
+
+Accordingly, adding quantum to the model of interactive proofs does not change the class of lan-
+guages that can be decided, but does reduce the required number of messages between prover and
+verifier from polynomial to constant. See [256] for much more about quantum proof systems.
+
+Exercises
+
+1. Give a satisfying assignment for the 3-SAT instance of Eq. (14.1).
+
+2. Show that 1-local Hamiltonian is in P.
+
+3. (H) Suppose you had an efficient quantum algorithm for the k-local Hamiltonian problem for
+every a, b that satisfy b −a ≥1/n. Give an efficient quantum algorithm that approximates
+λmin to within additive error ±2/n.
+
+4. Show that k-local Hamiltonian is in QMA in two different ways, by providing details for the
+following two sketches:
+
+(a) Choose a j ∈[m] uniformly at random and measure the observable Hj on the witness
+state. Repeat this a few times (using new witness states each time) to approximate the
+expected value.
+
+(b) Apply phase estimation (Section 4.6) to the unitary U = eiH/m with the given witness
+state; U can be implemented using Hamiltonian simulation (Chapter 9).
+
+5. This long exercise completes the proof of the soundness for the Hamiltonian of Section 14.3.2,
+with the unary clock and without the three simplifying assumptions of Section 14.3.1. The
+gap b −a between completeness and soundness will now be Ω(1/T 6) instead of Ω(1/T 2).
+
+(a) Assume the error probability of the QMA-protocol for L is ≪1/T 5. Let |ψ′′′⟩be an
+arbitrary ground state (with energy λmin) for the Hamiltonian of Section 14.3.2. Show
+that if x ∈L1, then λmin ≪1/T 6.
+
+(b) (H) For the remainder of the exercise assume x ∈L0. Let Pbc be the projector on the
+subspace of bad (i.e., non-unary) clock states. Show that ∥Pbc|ψ′′′⟩∥2 ≤λmin.
+
+(c) Show that ∥H∥≤O(T).
+
+(d) (H) Let |ψ′′⟩be the state obtained from |ψ′′′⟩by removing Pbc|ψ′′′⟩and renormalizing.
+Show that its energy λ′′ cannot be much larger than λmin: λ′′ ≤O(Tλmin).
+
+123
+
+
+===== PDF PAGE 136 =====
+
+(e) (H) Write |ψ′′⟩= �T
+t=0 αt|ϕt⟩|t⟩for nonnegative reals αt and normalized states |ϕt⟩.
+Show that �T
+t=1 |αt −αt−1|2 ≤2λ′′.
+
+(f) (H) Show that for all t, t′ we have |αt′ −αt|2 ≤2λ′′T.
+
+(g) (H) Let |ψ′⟩=
+1
+√T+1
+�T
+t=0 |ϕt⟩|t⟩be the state after making all amplitudes equal in |ψ′′⟩.
+
+Show that ∥|ψ′′⟩−|ψ′⟩∥2 ≤O(T 2λ′′).
+
+(h) Modify |ϕ0⟩and |ϕT ⟩to satisfy the second and third simplifying assumptions.
+
+(i) Show that the energy λ′ of |ψ′⟩cannot be much larger than λ′′: λ′ ≤O(T 3λ′′).
+
+(j) (H) Show that λmin ≥Ω(1/T 6).
+
+6. Consider a promise problem L = (L1, L0, L∗) ∈QMA and a protocol as in Definition 1 with
+witness states of w(n) qubits.
+
+(a) (H) Show that there is a QMA protocol for L with witness states of w(n) qubits and
+error probability ≤1
+
+32−w(n).
+
+(b) Suppose we now replace the w(n) qubits of the protocol of (a) with a uniformly random
+w(n)-bit basis state. Show that if x ∈L1, then the acceptance probability (i.e., the
+probability of output 1) is ≥2
+
+32−w(n), while if x ∈L0 then it is ≤1
+
+32−w(n).
+
+(c) Use (b) to show that the class QMA with witness states restricted to w(n) = O(log n)
+qubits equals the class BQP.
+
+7. (H) Let PP be the class of promise problems L = (L1, L0, L∗) that can be decided by a
+polynomial-time classical algorithm with success probability > 1/2 (meaning that for in-
+puts x ∈L1 the algorithm accepts with probability > 1/2, and for x ∈L0 it accepts with
+probability < 1/2). Show that QMA ⊆PP.
+
+8. Consider the following computational decision problem. We are given a Hamiltonian H of
+the form of page 119, with the additional property that w(n) = 0. We are promised that the
+smallest eigenvalue λmin of H is either ≤1/(4T(T + 1)) (“yes-instance”) or ≥1/(2T(T + 1))
+(“no-instance”), and the problem is to decide which of these two cases we are in.
+
+(a) (H) Show that this problem is in BQP.
+
+(b) Show that this problem is BQP-hard, meaning that for every promise problem L =
+(L1, L0, L∗) in BQP there exists a classical deterministic polynomial-time algorithm
+that maps every x ∈L1 to a yes-instance of the above problem and every x ∈L0 to a
+no-instance.
+
+9. Suppose we are given (in some form) a finite group G, a subgroup H ≤G, and an element
+g ∈G, and we can efficiently implement the unitary map V corresponding to multiplication
+with g (i.e., the map V : |h⟩�→|h ◦g⟩). Let
+
+|ψ⟩=
+1
+�
+
+|H|
+
+�
+
+h∈H
+|h⟩
+
+be the uniform superposition over H.
+The prover for the non-membership problem can
+construct this state, though not necessarily efficiently.
+
+124
+
+
+===== PDF PAGE 137 =====
+
+(a) Show that if g ∈H, then V |ψ⟩= |ψ⟩.
+
+(b) Show that if g ̸∈H, then V |ψ⟩is orthogonal to |ψ⟩.
+
+(c) Consider the following procedure that the verifier can use to test if g ∈H or not:
+(1) prepare an auxiliary qubit in state H|0⟩,
+(2) conditioned on that qubit apply V to |ψ⟩,
+(3) apply H to the auxiliary qubit and measure it.
+Show that the probability of measurement outcome 0 is 1 if g ∈H, and is 1/2 if g ̸∈H.
+
+125
+
+
+===== PDF PAGE 138 =====
+
+126
+
+
+===== PDF PAGE 139 =====
+
+Chapter 15
+
+Quantum Encodings, with a
+Non-Quantum Application
+
+15.1
+Mixed states and general measurements
+
+So far, we have restricted our states to so-called pure states: unit vectors of amplitudes. In the
+classical world we often have uncertainty about the state of a system, which can be expressed by
+viewing the state as a random variable that has a certain probability distribution over the set
+of basis states. Similarly we can define a mixed quantum state as a probability distribution (or
+“mixture”) over pure states. While pure states are written as vectors, it is most convenient to write
+mixed states as density matrices. A pure state |ϕ⟩corresponds to the density matrix |ϕ⟩⟨ϕ|, which
+is the outer product of the vector |ϕ⟩with itself. For example, the pure state |ϕ⟩= α|0⟩+ β|1⟩
+corresponds to the density matrix
+
+|ϕ⟩⟨ϕ| =
+�α
+β
+
+�
+· (α∗
+β∗) =
+�|α|2
+αβ∗
+
+α∗β
+|β|2
+
+�
+.
+
+A mixed state that is in pure states |ϕ1⟩, . . . , |ϕℓ⟩with probabilities p1, . . . , pℓ, respectively, corre-
+sponds to the density matrix ρ = �ℓ
+i=1 pi|ϕi⟩⟨ϕi|. This ρ is sometimes called a “mixture” of the
+states |ϕ1⟩, . . . , |ϕℓ⟩.1 The set of density matrices is exactly the set of positive semidefinite (psd)
+matrices of trace 1. A mixed state is pure if, and only if, it has rank 1.
+You can always write a mixed state ρ as a probability distribution over orthogonal pure states,
+using the diagonalization of ρ (see Appendix A.5) plus the observations that (1) the eigenvalues of
+a trace-1 psd matrix form a probability distribution, and (2) that the eigenvectors of a Hermitian
+matrix can be assumed to form an orthonormal set without loss of generality. But you can also
+write ρ as a convex combination of non-orthogonal states (see Exercise 1.c).
+Applying a unitary U to a pure state |ϕ⟩gives pure state U|ϕ⟩. Written in terms of rank-1
+density matrices, this corresponds to the map
+
+|ϕ⟩⟨ϕ| �→U|ϕ⟩⟨ϕ|U∗.
+
+1Note that applying the probabilities pi to the vectors |ϕi⟩(rather than to the matrices |ϕi⟩⟨ϕi|) does not make
+sense in general, because �ℓ
+i=1 pi|ϕi⟩need not be a unit vector. Using square roots of the probabilities also doesn’t
+work, because �ℓ
+i=1
+√pi|ϕi⟩need not be a unit vector either if the |ϕi⟩are not pairwise orthogonal.
+
+127
+
+
+===== PDF PAGE 140 =====
+
+By linearity, this actually tells us that a unitary acts on an arbitrary mixed state by conjugation:
+
+ρ �→UρU∗.
+
+What about measurements? Recall from Section 1.2.2 that an m-outcome projective measurement
+corresponds to m orthogonal projectors P1, . . . , Pm that satisfy �m
+i=1 Pi = I. When applying this
+measurement to a mixed state ρ, the probability to see outcome i is given by pi = Tr(Piρ). If we
+get outcome i, then the state collapses to PiρPi/pi (the division by pi renormalizes the state to have
+trace 1). This may look weird, but let’s recover our familiar measurement in the computational
+basis in this framework. Suppose we measure a state |ϕ⟩= �d
+j=1 αj|j⟩using d projectors Pi = |i⟩⟨i|
+(note that �
+i Pi is the identity on the d-dimensional space). The probability to get outcome i is
+given by pi = Tr(Pi|ϕ⟩⟨ϕ|) = |⟨i|ϕ⟩|2 = |αi|2.
+If we get outcome i then the state collapses to
+Pi|ϕ⟩⟨ϕ|Pi/pi = αi|i⟩⟨i|α∗
+i /pi = |i⟩⟨i|. This is exactly the measurement in the computational basis
+as we have used it until now. Similarly, a measurement of the first register of a two-register state
+corresponds to projectors Pi = |i⟩⟨i| ⊗I, where i goes over all basis states of the first register.
+If we only care about the final probability distribution on the m outcomes, not about the
+resulting state, then the most general thing we can do is a POVM. This is specified by m positive
+semidefinite matrices E1, . . . , Em satisfying �m
+i=1 Ei = I. When measuring a state ρ, the probability
+of outcome i is given by Tr(Eiρ).
+
+15.2
+Quantum encodings and their limits
+
+Quantum information theory studies the quantum generalizations of familiar notions from classical
+information theory such as Shannon entropy, mutual information, channel capacities, etc. Here we
+will discuss a few quantum information-theoretic results that all have the same flavor: they say
+that a low-dimensional quantum state (i.e., a small number of qubits) cannot contain too much
+accessible information.
+
+Holevo’s Theorem:
+The mother of all such results is Holevo’s theorem from 1973 [145], which
+predates the area of quantum computing by several decades. Its proper technical statement is
+in terms of a quantum generalization of mutual information, but the following consequence of it
+(derived by Cleve et al. [95]) about two communicating parties, suffices for our purposes.
+
+Theorem 3 (Holevo, CDNT) Suppose Alice wants to communicate some classical string x to
+Bob.
+
+• If Alice sends Bob m qubits, and they did not share any prior entanglement, then Bob receives
+at most m bits of information about x.
+
+• If Alice sends Bob m qubits, and they did share some prior entangled state, then Bob receives
+at most 2m bits of information about x, no matter how many qubits Bob sent to Alice.
+
+• If Alice sends Bob m classical bits, and they did share some prior entangled state, then Bob
+receives at most m bits of information about x, no matter how many qubits Bob sent to Alice.
+
+This theorem is slightly imprecisely stated here, but the intuition should be clear: if Bob makes
+any measurement on his state after the communication, then the mutual information between his
+
+128
+

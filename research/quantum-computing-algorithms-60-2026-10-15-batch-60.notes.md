@@ -1,0 +1,61 @@
+# Batch 60 authoring notes — Adiabatic Computation and Circuit Equivalence
+
+Run: `quantum-computing-algorithms-60-2026-10-15` · batch: `60` · role: beta
+
+## Scope, authority, and planning decisions
+
+- The assigned task says `design: none found`; no pair-specific design section governed this pair. The owner-authoring direction was read first and makes the current audited quantum-algorithms exports authoritative over stale task/design text.
+- Page IDs, order (2284/2285), category, and the A page's twelve prerequisites match `research/plan-spec.json`. Its item arrays are empty at this pre-authoring stage; the current audited QA36 proposal supplied the original 14 A items and 3 B examples. Two local A-page results were added because their proofs are used by later claims: `lem-qa-36-jrs-finite-band-estimates` and `lem-qa-36-partial-trace-contracts-trace-distance`. The final inventory is 16 A and 3 B items, below the 100-item cap.
+- The assigned construction defines `H_clock0=sum_j |1><1|_j`, whose legal-clock restriction is the linear potential `diag(0,...,N)`. Aharonov et al.'s displayed restricted-gap argument uses a first-clock-bit penalty and does not apply verbatim. This is a source-route difference, not a plan conflict: the linear-potential case is proved locally with a monotone ground vector, ground-state transform, and reversible path chain.
+- Batch 60 remains dependency level 13 with prerequisites 1, 2, 3, 4, 6, 14, 43, and 44. Current scheduling input: `d63e4218fb1ccb60e0ff71096e37391ecc9824c4dcf111b70f219fa5d0642df6`. The shared schedule, plan, and engine state were not edited.
+
+## Item inventory and dependency levels
+
+Levels were computed from actual current-run logical dependencies before authoring and recomputed after the final dependency edits. The scoped recomputation reports no batch-60 cycle, missing carrier, or label mismatch. Suppliers within the pair are listed before consumers.
+
+| Item | Level | Direct dependencies |
+|---|---:|---|
+| `thm-qa-36-finite-cheeger-bound` | 0 | def-transition-matrix-and-n-step-transition-probabilities, def-invariant-and-stationary-distribution-for-a-markov-kernel, def-reversible-measure-and-detailed-balance, def-self-adjoint-and-normal-endomorphism, thm-complex-spectral-theorem-for-normal-endomorphisms |
+| `lem-qa-36-clock-penalty-gap-perturbation` | 0 | def-self-adjoint-and-normal-endomorphism, def-operator-norm-on-a-finite-dimensional-inner-product-space, thm-complex-spectral-theorem-for-normal-endomorphisms |
+| `lem-qa-36-partial-trace-contracts-trace-distance` | 5 | def-qc-partial-trace, thm-qc-partial-trace-characterization-and-basis-independence, thm-qc-partial-trace-positive-and-trace-preserving, def-qc-trace-distance, def-qc-trace-norm, thm-qc-trace-norm-spectral-formula, def-qc-tensor-map, def-qc-tensor-register-and-permutation, lem-qc-tensor-product-basis-and-dimension, thm-complex-spectral-theorem-for-normal-endomorphisms |
+| `def-qa-36-finite-adiabatic-path-model` | 11 | def-self-adjoint-and-normal-endomorphism, def-linear-map, def-adjoint-of-a-linear-map-between-inner-product-spaces, thm-adjoint-exists-and-is-unique-in-finite-dimension, prop-adjoint-algebra, def-non-negative-and-positive-operator, def-trace-of-an-endomorphism, thm-trace-of-ab-equals-trace-of-ba, thm-complex-spectral-theorem-for-normal-endomorphisms, def-operator-norm-on-a-finite-dimensional-inner-product-space, def-qc-pure-state-and-ray, def-qc-density-operator, def-qc-trace-distance, def-qc-projective-measurement, def-qc-povm-and-outcome-law, thm-qc-projective-measurement-outcome-law, thm-qc-povm-probabilities-normalize, def-qc-circuit-cost-model, def-qc-uniform-circuit-family, lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval |
+| `lem-qa-36-gapped-projection-regularity` | 12 | def-qa-36-finite-adiabatic-path-model, thm-complex-spectral-theorem-for-normal-endomorphisms, def-functional-calculus-for-a-normal-endomorphism, cor-operator-norm-submultiplicative-and-t-star-t-identity |
+| `def-qa-36-adiabatic-resource-model` | 13 | def-qa-36-finite-adiabatic-path-model, def-qa-20-simulation-error-and-cost-model, def-qa-20-term-list-access-model, def-qc-uniform-circuit-family, def-qc-circuit-cost-model |
+| `lem-qa-36-jrs-finite-band-estimates` | 13 | def-qa-36-finite-adiabatic-path-model, lem-qa-36-gapped-projection-regularity, def-adjoint-of-a-linear-map-between-inner-product-spaces, def-self-adjoint-and-normal-endomorphism, def-operator-norm-on-a-finite-dimensional-inner-product-space, thm-complex-spectral-theorem-for-normal-endomorphisms |
+| `thm-qa-36-jrs-finite-adiabatic-bound` | 14 | def-qa-36-finite-adiabatic-path-model, lem-qa-36-gapped-projection-regularity, lem-qa-36-jrs-finite-band-estimates, def-adjoint-of-a-linear-map-between-inner-product-spaces, def-self-adjoint-and-normal-endomorphism, def-operator-norm-on-a-finite-dimensional-inner-product-space, cor-operator-norm-submultiplicative-and-t-star-t-identity, thm-complex-spectral-theorem-for-normal-endomorphisms, lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval |
+| `alg-qa-36-five-local-history-path` | 14 | def-qa-36-finite-adiabatic-path-model, def-qa-36-adiabatic-resource-model, def-qc-uniform-circuit-family, def-qc-circuit-cost-model, def-qc-register-and-computational-basis, def-qc-tensor-register-and-permutation, lem-qc-tensor-product-basis-and-dimension, def-qc-dirac-notation-conversion, def-qc-partial-trace |
+| `lem-qa-36-history-state-ground-and-output` | 15 | alg-qa-36-five-local-history-path, def-qc-partial-trace, def-qc-density-operator, def-qc-trace-distance, thm-qc-trace-distance-range-and-equality, def-qc-dirac-notation-conversion |
+| `lem-qa-36-history-path-ground-vector-monotonicity` | 15 | alg-qa-36-five-local-history-path, thm-complex-spectral-theorem-for-normal-endomorphisms |
+| `alg-qa-36-discretized-path-simulation` | 15 | def-qa-36-adiabatic-resource-model, def-qa-20-term-list-access-model, thm-qa-20-first-order-commutator-error, def-qa-19-finite-matrix-dynamics, def-qc-uniform-circuit-family, def-qc-circuit-cost-model, cor-operator-norm-submultiplicative-and-t-star-t-identity, def-operator-norm-on-a-finite-dimensional-inner-product-space, def-qa-36-finite-adiabatic-path-model |
+| `lem-qa-36-history-path-restricted-gap` | 16 | alg-qa-36-five-local-history-path, lem-qa-36-history-state-ground-and-output, thm-qa-36-finite-cheeger-bound, lem-qa-36-history-path-ground-vector-monotonicity, thm-complex-spectral-theorem-for-normal-endomorphisms |
+| `thm-qa-36-adiabatic-path-to-circuit-simulation` | 16 | alg-qa-36-discretized-path-simulation, def-qa-36-adiabatic-resource-model, def-qa-19-finite-matrix-dynamics, def-qc-uniform-circuit-family, def-qc-circuit-cost-model, def-qa-36-finite-adiabatic-path-model |
+| `lem-qa-36-history-path-full-gap` | 17 | lem-qa-36-history-path-restricted-gap, lem-qa-36-clock-penalty-gap-perturbation, alg-qa-36-five-local-history-path, lem-qa-36-history-state-ground-and-output, lem-qa-36-history-path-ground-vector-monotonicity, thm-complex-spectral-theorem-for-normal-endomorphisms |
+| `thm-qa-36-circuit-to-adiabatic-simulation` | 18 | alg-qa-36-five-local-history-path, alg-qa-36-discretized-path-simulation, def-qa-36-adiabatic-resource-model, lem-qa-36-history-state-ground-and-output, lem-qa-36-history-path-full-gap, thm-qa-36-jrs-finite-adiabatic-bound, lem-qa-36-partial-trace-contracts-trace-distance, lem-qc-pure-state-trace-distance, def-qc-trace-distance, def-qc-partial-trace, def-qc-uniform-circuit-family, def-qc-circuit-cost-model |
+
+The B page has three examples: ex-qa-36-two-level-avoided-crossing (level 15; JRS theorem, path definition and spectral theorem), cex-qa-36-gap-closing-failure (level 15; JRS theorem, path definition and spectral theorem), and ex-qa-36-two-gate-history-state (level 16; history-state lemma, construction and Dirac convention).
+
+## Mathematical route and constants
+
+- The legal zero-input clock block is `H0(s)=(1-s)diag(0,...,N)+(s/2)L_N`. Its gap is at least `1/(48N^2)`: min-max gives the small-s case; for larger s the ground-state transform and a reversible path chain give conductance at least `1/(2N)`.
+- The positive ground vector is monotone by its tridiagonal difference recurrence. The input penalty raises every nonzero computational-input block by at least `1/[144N^2(N+1)]`. Thus the legal compression gap is at least `1/[144N^2(N+1)] >= 1/[216(N+1)^3] = Delta0`.
+- With `K0=n+3N` and `J=2K0+4K0^2/Delta0+1`, the additive illegal-clock perturbation is below `Delta0/4`; the full gap exceeds `3Delta0/4=1/[288(N+1)^3]`. The linear clock penalty and polynomial coefficient remain explicit.
+- The circuit-to-adiabatic runtime uses rank-one JRS with `||H'||<=3N`, `H''=0`, and the proved full gap. Its bound is `A1(1)<=(6N/gamma^2+63N^2/gamma^3)/T`; choosing `T=ceil(4 B_T/epsilon)` allocates at most `epsilon/4` to adiabatic error, with separate `epsilon/4` simulation and `epsilon/2` padding budgets.
+- Preparation, term calls, controlled/inverse access, coefficient precision, circuit descriptions, generator time, and output costs remain explicit. No cost is inferred from a matrix or spectral projector.
+
+## Cross-batch prerequisite review
+
+- `batch-60.cross-batch-dependencies.json` records 12 required pages and 48 direct item edges to other run batches. The item edges use batches 1, 2, 3, 4, 6, 14, 43, 44; all required page carriers exist, and all listed supplier levels match recomputation. Supplier excerpts, status, level, and consuming uses are retained. These checks are authoring evidence, not acceptance.
+- A transitive dependency walk traversed 1222 item carriers, including 67 current-run suppliers. Missing or malformed carriers: 0; in-run level mismatches: 0. Direct supplier bodies/proofs and the transitive theorem chains used by the mathematical arguments were reviewed; the broad root closure is not a claim of independent approval.
+
+## Sources and reading evidence
+
+Three full-text treatments were inspected, including a complete lecture-note source: Jansen–Ruskai–Seiler (all 15 PDF pages; Theorem 3 and Lemmas 2, 5–8); Aharonov et al. (all 30 pages; §§2.3–2.5 and §§3.1.1–3.1.4); and Childs, *Lecture Notes on Quantum Algorithms* (complete 191-page notes; Chapters 27, 30, and 33). The source inventory maps each locator to supported items and records included/altered/context dispositions. Final source check: 6/6 records fetch-verified and resolved, 0 newly stamped, 0 retries, no retrieval failures, no drops, and empty `source_resolution`.
+
+## Proof contracts and scoped checks
+
+- Strict proof-contract validation: 19/19 items, 0 errors, 0 warnings. Contracts preserve exact supplier excerpts, fact-to-step citations, every numbered proof step, all eight standard boundary dispositions, applicable finite checks, and axiom-use records.
+- `precheck.mts`: 19 files inspected, 16 proof-bearing items checked, 0 failing. `rendercheck.mjs`: all 19 changed items and both assigned pages checked, 0 errors and 0 warnings. Focused `depcheck.mjs`: 0 errors and 0 warnings.
+- `proof-layout.mjs` on all 19 changed item files: 19 items, 80 numbered steps, 0 defects.
+- Scoped item-level recomputation: 19/19 labels correct, no owned dependency errors. The whole-run dependency command exits 1 for unrelated defects only: the empty scaffold inventory for `quantum-sampling-expectation-and-monte-carlo-examples`, plus six batch-34 dependency-level mismatches (`lem-qa-34-exponential-gram-concentration`, `lem-qa-34-two-sketch-threshold-band-bound`, `thm-qa-34-modfkv-low-rank-approximation`, `thm-qa-34-tang-recommendation-sampler`, `rem-qa-34-dequantization-scope`, and `cex-qa-34-tang-without-sampling-access`). No batch-60 item is reported.
+- All 19 batch-60 items have non-owner Step 1 ready records; individual current-hash checks close 19/19. These are authoring decisions only and do not constitute independent approval.
+- The run-wide `step1-decisions.mjs check` cannot load unrelated malformed YAML at `items/lem-product-prior-predictive-and-fixed-truth-data-laws-equivalent.md:24` (`verification: {, judge: ...`). That item is outside batch-60 ownership and was left untouched; the 19 owned readiness records were checked individually.

@@ -1,0 +1,2341 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qa-26-hermitian-dilation",
+    "lem-qa-26-hhl-filter-geometry",
+    "lem-qa-26-hhl-filter-perturbation",
+    "lem-qa-26-hhl-sine-window-prefix-masses",
+    "lem-qa-26-qlsp-target-is-well-defined",
+    "lem-qa-26-hhl-prefix-table-synthesis-error",
+    "lem-qa-26-hhl-sine-window-kernel-moment",
+    "lem-qa-26-phase-to-eigenvalue-unwrapping",
+    "lem-qa-26-hhl-capped-amplification",
+    "lem-qa-26-hhl-success-amplitude",
+    "thm-qa-26-hhl-amplified-postselection-cost",
+    "thm-qa-26-hhl-simulator-cost",
+    "lem-qa-26-postselection-normalization-bound",
+    "thm-qa-26-hhl-state-correctness",
+    "thm-qa-26-hhl-query-cost",
+    "cex-qa-26-hhl-classical-vector-output",
+    "ex-qa-26-diagonal-hhl"
+  ],
+  "contracts": {
+    "lem-qa-26-hermitian-dilation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The block matrix of $H_A$ is $\\begin{pmatrix}0&A\\\\A^*&0\\end{pmatrix}$. Its adjoint, by [F2], is the same block matrix, so $H_A^*=H_A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Multiplying the SVD in [F1] gives $Av_j=\\sigma_j u_j$ and $A^*u_j=\\sigma_jv_j$. Therefore $H_A(u_j,v_j)=\\sigma_j(u_j,v_j)$ and $H_A(u_j,-v_j)=-\\sigma_j(u_j,-v_j)$. After division by $\\sqrt2$ these are unit eigenvectors. Orthonormality of the singular pairs makes all such vectors mutually orthogonal.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the SVD bases, write $A=U\\Sigma V^*$ with positive diagonal entries $\\sigma_j$. The diagonal matrix $\\Sigma^+$ that replaces each positive entry by $1/\\sigma_j$ and leaves zero entries zero satisfies $\\Sigma\\Sigma^+\\Sigma=\\Sigma$, $\\Sigma^+\\Sigma\\Sigma^+=\\Sigma^+$, and both products $\\Sigma\\Sigma^+$ and $\\Sigma^+\\Sigma$ are diagonal projections. Unitary transport shows $V\\Sigma^+U^*$ satisfies the four equations in [F3], so uniqueness gives $A^+=V\\Sigma^+U^*$ and $A^+u_j=v_j/\\sigma_j$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The equation $H_A(x,y)=0$ is equivalent to $Ay=0$ and $A^*x=0$, so $\\ker H_A=\\ker(A^*)\\oplus\\ker(A)$. Together with step 1.2, the nonzero eigenvalue magnitudes are exactly the positive singular values, each appearing with both signs. Thus when there is positive rank their maximum-to-minimum ratio is unchanged.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vectors from step 1.2 together with orthonormal bases of $\\ker(A^*)$ and $\\ker(A)$ form an orthonormal eigenbasis of the direct sum. Define $G$ on this basis by $Gw_{j,+}=w_{j,+}/\\sigma_j$, $Gw_{j,-}=-w_{j,-}/\\sigma_j$, and $G=0$ on the kernel. Then $H_AG$ and $GH_A$ are self-adjoint projections, while diagonal multiplication gives $H_AGH_A=H_A$ and $GH_AG=G$. Thus $G$ satisfies [F3], and uniqueness gives $G=H_A^+$. Since $(u_j,0)=(w_{j,+}+w_{j,-})/\\sqrt2$, this definition gives $H_A^+(u_j,0)=(0,v_j/\\sigma_j)$. Complete the positive left singular vectors to the left singular basis from [F1]. The remaining basis vectors have zero singular coordinates, so the diagonal SVD gives $A^*u_j=0$ for each; hence they span the complementary part $\\ker(A^*)$. Thus every $b\\in\\mathbb C^m$ has a decomposition $b=\\sum_{j:\\sigma_j>0}\\beta_j u_j+b_0$ with $b_0\\in\\ker(A^*)$. Since $A^*b_0=0$, its positive left-singular coordinates vanish, so $\\Sigma^+U^*b_0=0$ and the formula in step 1.3 gives $A^+b_0=0$. By step 2.1 $(b_0,0)\\in\\ker(H_A)$, so $H_A^+(b_0,0)=G(b_0,0)=0$. Applying the positive-pair calculation to the other summands gives $H_A^+(b,0)=(0,A^+b)$ for arbitrary $b$, including $b\\notin\\operatorname{ran}(A)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 of Hermitian dilation for a rectangular linear system: the zero-size or empty interval case is covered by the stated kernel/interval convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 of Hermitian dilation for a rectangular linear system: rank zero places the whole direct sum in the displayed kernel; condition-number language is restricted to positive rank."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Hermitian dilation for a rectangular linear system has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 of Hermitian dilation for a rectangular linear system: rank deficiency is represented by ker(A*) direct-sum ker(A), with the positive-rank condition-number caveat."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 of Hermitian dilation for a rectangular linear system: zero singular values are handled by the kernel, and only positive singular values enter the inverse."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 of Hermitian dilation for a rectangular linear system: the eigenbasis comes from one finite SVD; the argument invokes no axiom of choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Hermitian dilation for a rectangular linear system states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Hermitian dilation for a rectangular linear system states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read all five steps and actual SVD, adjoint, Penrose existence/uniqueness and Dirac interfaces. Block adjoint is self-adjoint; normalized (u_j,±v_j) give ±sigma_j, with both kernel complements. The four Penrose equations verify both diagonal pseudoinverses and H_A^+(b,0)=(0,A^+b), even for b outside the range. Rank zero leaves no positive condition number, explicitly restricted to positive rank. All choices are finite; no AC."
+      }
+    },
+    "lem-qa-26-hhl-filter-geometry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-26-hhl-reciprocal-filter",
+          "source_section": "Definition",
+          "quote": "For $\\kappa\\ge1$ and real estimate $z$, put $u=|z|$ and define the odd well amplitude $f_\\kappa$ and even ill amplitude $g_\\kappa$ by\n$$f_\\kappa(z)=\\begin{cases}\\operatorname{sgn}(z)/(2\\kappa u),&u\\ge1/\\kappa,\\\\[2pt]\\tfrac12\\operatorname{sgn}(z)\\sin(\\pi\\kappa(u-1/(2\\kappa))),&1/(2\\kappa)\\le u<1/\\kappa,\\\\[2pt]0,&u<1/(2\\kappa),\\end{cases}\\qquad g_\\kappa(z)=\\begin{cases}0,&u\\ge1/\\kappa,\\\\[2pt]\\tfrac12\\cos(\\pi\\kappa(u-1/(2\\kappa))),&1/(2\\kappa)\\le u<1/\\kappa,\\\\[2pt]1/2,&u<1/(2\\kappa),\\end{cases}$$\nwhere $\\operatorname{sgn}(z)=1$ for $z>0$, $-1$ for $z<0$, and $0$ for $z=0$. The three flag amplitudes are $(h(z),f_\\kappa(z),g_\\kappa(z))$, where $h(z)=\\sqrt{1-f_\\kappa(z)^2-g_\\kappa(z)^2}$. Labels are nothing, well, ill, respectively. This definition applies to every real decoded grid point, including points outside the supported spectrum.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $|z|\\ge1/\\kappa$, then $g_\\kappa(z)=0$ and $|f_\\kappa(z)|=1/(2\\kappa|z|)\\le1/2$, so their squared sum is at most $1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $1/(2\\kappa)\\le|z|<1/\\kappa$, the identity $\\sin^2\\theta+\\cos^2\\theta=1$ gives $f_\\kappa(z)^2+g_\\kappa(z)^2=1/4$. If $|z|<1/(2\\kappa)$, the sum is $0+(1/2)^2=1/4$. Thus all cases give the bound, and $1-f^2-g^2\\ge3/4>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reciprocal filter defines valid three-outcome amplitudes has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 of The reciprocal filter defines valid three-outcome amplitudes: z=0 lies in the lower plateau and gives f=0,g=1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 of The reciprocal filter defines valid three-outcome amplitudes: on the well plateau the reciprocal amplitude is at most one half, including |z|=1/kappa."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The reciprocal filter defines valid three-outcome amplitudes contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 of The reciprocal filter defines valid three-outcome amplitudes: the thresholds |z|=1/kappa and |z|=1/(2kappa) agree with the continuous branch limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The reciprocal filter defines valid three-outcome amplitudes uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The reciprocal filter defines valid three-outcome amplitudes states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reciprocal filter defines valid three-outcome amplitudes states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-qa-26-hhl-filter-perturbation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-26-hhl-reciprocal-filter",
+          "source_section": "Definition",
+          "quote": "For $\\kappa\\ge1$ and real estimate $z$, put $u=|z|$ and define the odd well amplitude $f_\\kappa$ and even ill amplitude $g_\\kappa$ by\n$$f_\\kappa(z)=\\begin{cases}\\operatorname{sgn}(z)/(2\\kappa u),&u\\ge1/\\kappa,\\\\[2pt]\\tfrac12\\operatorname{sgn}(z)\\sin(\\pi\\kappa(u-1/(2\\kappa))),&1/(2\\kappa)\\le u<1/\\kappa,\\\\[2pt]0,&u<1/(2\\kappa),\\end{cases}\\qquad g_\\kappa(z)=\\begin{cases}0,&u\\ge1/\\kappa,\\\\[2pt]\\tfrac12\\cos(\\pi\\kappa(u-1/(2\\kappa))),&1/(2\\kappa)\\le u<1/\\kappa,\\\\[2pt]1/2,&u<1/(2\\kappa),\\end{cases}$$\nwhere $\\operatorname{sgn}(z)=1$ for $z>0$, $-1$ for $z<0$, and $0$ for $z=0$. The three flag amplitudes are $(h(z),f_\\kappa(z),g_\\kappa(z))$, where $h(z)=\\sqrt{1-f_\\kappa(z)^2-g_\\kappa(z)^2}$. Labels are nothing, well, ill, respectively. This definition applies to every real decoded grid point, including points outside the supported spectrum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qa-26-hhl-filter-geometry",
+          "source_section": "Statement",
+          "quote": "For every real $z$ and $\\kappa\\ge1$, $f_\\kappa(z)^2+g_\\kappa(z)^2\\le1/4$. Hence $h(z)$ in [[def-qa-26-hhl-reciprocal-filter]] is real, and the three displayed amplitudes have squared moduli summing to one.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n\n$$|\\sin u-\\sin v|\\le|u-v|,$$\n\nand\n\n$$|\\cos u-\\cos v|\\le|u-v|.$$\n\nThus sine and cosine are Lipschitz functions on $\\mathbb R$, each with\nLipschitz constant $1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-13-pi-rational-bounds",
+          "source_section": "Statement",
+          "quote": "The circle constant satisfies $3<\\pi<22/7$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $u=1/(2\\kappa)$ the transition angle is $0$, so [F5] makes the transition values $(0,1/2)$, matching the lower plateau; at $u=1/\\kappa$ the angle is $\\pi/2$, so [F4] makes them $(\\operatorname{sgn}(z)/2,0)$, matching the reciprocal branch. Hence $m$ is continuous on each fixed-sign half-line. On the reciprocal branch, for $u,u'\\ge1/\\kappa$, $$\\left|\\frac1{2\\kappa u}-\\frac1{2\\kappa u'}\\right|=\\frac{|u-u'|}{2\\kappa uu'}\\le\\frac\\kappa2|u-u'|.$$ On the transition branch, [F2] bounds each coordinate change by $(\\pi\\kappa/2)|u-u'|$, so the two-coordinate norm changes by at most $(\\pi\\kappa/\\sqrt2)|u-u'|$. The lower plateau is constant, and $\\kappa/2\\le\\pi\\kappa/\\sqrt2$ by [F3]. Splitting any same-sign interval at the two breakpoints and adding these bounds proves the global same-sign Lipschitz estimate $\\|m(z)-m(z')\\|_2\\le(\\pi\\kappa/\\sqrt2)|z-z'|$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $\\Delta=|\\widetilde\\lambda-\\lambda|=|\\delta|/t_0$. If $\\widetilde\\lambda$ has the same sign as $\\lambda$ and $|\\widetilde\\lambda|\\ge1/\\kappa$, both values use the reciprocal branch, and $$\\frac{\\|m(\\widetilde\\lambda)-m(\\lambda)\\|_2}{|f_\\kappa(\\lambda)|}=\\frac{\\Delta}{|\\widetilde\\lambda|}\\le\\kappa\\Delta.$$ If the signs differ (including zero), then $\\Delta\\ge|\\lambda|$, and the norm difference is at most $1/2+|f_\\kappa(\\lambda)|$ by [F1]. Dividing by $|f_\\kappa(\\lambda)|=1/(2\\kappa|\\lambda|)$ gives at most $1+\\kappa|\\lambda|\\le2\\kappa\\Delta$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "It remains that the signs agree and $|\\widetilde\\lambda|<1/\\kappa$. If $|\\lambda|\\le2/\\kappa$, step 1.1 gives a norm difference at most $\\pi\\kappa\\Delta/\\sqrt2$. Since $|f_\\kappa(\\lambda)|=1/(2\\kappa|\\lambda|)\\ge1/4$, the ratio is at most $2\\sqrt2\\pi\\kappa\\Delta<(48/5)\\kappa\\Delta<10\\kappa\\Delta$, using $\\sqrt2<3/2$ and [F3]. If $|\\lambda|>2/\\kappa$, crossing below $1/\\kappa$ implies $\\Delta>|\\lambda|/2$ and $\\kappa\\Delta>1$. By [F1] the ratio is at most $1+\\kappa|\\lambda|<1+2\\kappa\\Delta<3\\kappa\\Delta<10\\kappa\\Delta$. These cases establish the claimed inequality.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Relative stability of the HHL filter on supported eigenvalues has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 of Relative stability of the HHL filter on supported eigenvalues: a decoded estimate equal to zero is handled in the sign-crossing case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Relative stability of the HHL filter on supported eigenvalues has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Relative stability of the HHL filter on supported eigenvalues contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement assumes t0>0; steps 1.1–3.1 cover delta=0 and the supported endpoints |lambda|=1/kappa and |lambda|=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Relative stability of the HHL filter on supported eigenvalues uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Relative stability of the HHL filter on supported eigenvalues states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Relative stability of the HHL filter on supported eigenvalues states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Exact native preimage offsets 1389944–1394532 match immutable pre raw SHA-256. Reader added kappa>=1, t0>0 and real lambda,delta; these are necessary for the filter domain and Delta=|delta|/t0. Proof unchanged and sound: endpoints match after signed filter repair; same-sign Lipschitz constant pi*kappa/sqrt(2), reciprocal ratio <=kappa*Delta, sign-crossing ratio <=2*kappa*Delta, and remaining cases <10*kappa*Delta. delta=0 and both support endpoints included. Actual trig, Lipschitz and pi interfaces checked; 22/7<16/5 supports the quoted bound. No choice or limiting assumption."
+      }
+    },
+    "lem-qa-26-hhl-sine-window-prefix-masses": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-phase-estimation-geometric-sum",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-26-hhl-sine-window",
+          "source_section": "Definition",
+          "quote": "For a power of two $T\\ge2$, the **sine-window vector** is\n$$|\\Psi_T\\rangle=\\sqrt{\\frac2T}\\sum_{\\tau=0}^{T-1}\\sin\\!\\left(\\frac{\\pi(\\tau+1/2)}T\\right)|\\tau\\rangle.$$\nFor any integer interval $0\\le a\\le b\\le T$, define its unnormalized sine mass\n$$W_T(a,b):=\\sum_{\\tau=a}^{b-1}\\sin^2\\!\\left(\\frac{\\pi(\\tau+1/2)}T\\right).$$\nThe closed trigonometric formula for $W_T(a,b)$ is proved by the assigned prefix-mass lemma. The chosen OP5 table variant stores these interval masses and their conditional split angles; it charges its full $O(T)$ table and rotation size, arithmetic, interval-refinement, angle-bit, and finite gate-synthesis costs. This definition does not assign a polylogarithmic implementation cost.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-double-angle-and-power-reduction-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(2x)=2\\sin x\\cos x,\\quad \\cos(2x)=\\cos^2x-\\sin^2x=2\\cos^2x-1=1-2\\sin^2x,$$\nand\n$$\\sin^2x=(1-\\cos2x)/2,\\qquad \\cos^2x=(1+\\cos2x)/2.$$\nWhen defined, $\\tan(2x)=2\\tan x/(1-\\tan^2x)$. The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-phase-estimation-sine-chord-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cofunction-supplementary-and-reflection-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(\\pi/2-x)=\\cos x,\\quad \\cos(\\pi/2-x)=\\sin x,\\quad \\sin(\\pi-x)=\\sin x,\\quad \\cos(\\pi-x)=-\\cos x,$$\nand the quarter-turn and reflection formulas are\n$$\\sin(x+\\pi/2)=\\cos x,\\quad \\cos(x+\\pi/2)=-\\sin x,\\quad \\sin(-x)=-\\sin x,\\quad \\cos(-x)=\\cos x.$$\nOn the common natural domains of the two sides,\n$$\\tan(\\pi/2-x)=\\cot x,\\quad \\cot(\\pi/2-x)=\\tan x,\\quad \\sec(\\pi/2-x)=\\csc x,\\quad \\csc(\\pi/2-x)=\\sec x,$$\nand\n$$\\tan(\\pi-x)=-\\tan x,\\quad \\cot(\\pi-x)=-\\cot x,\\quad \\sec(\\pi-x)=-\\sec x,\\quad \\csc(\\pi-x)=\\csc x.$$\nThe conventions and prerequisite facts used below are recorded in [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[thm-quarter-turn-values-and-shift-formulas]], [[thm-sine-and-cosine-addition-formulas]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $z=e^{2\\pi i/T}$. By [F4], $z^T=e^{2\\pi i}=1$. Also [F5] gives $\\sin(\\pi/T)\\ge2/T>0$, so $1-z\\ne0$. Reindexing [F1] gives $$\\sum_{\\tau=a}^{b-1}e^{2\\pi i(\\tau+1/2)/T}=e^{2\\pi i(a+1/2)/T}\\frac{1-z^{b-a}}{1-z}=e^{i\\pi(a+b)/T}\\frac{\\sin(\\pi(b-a)/T)}{\\sin(\\pi/T)}.$$ The real part of the last expression is $[\\sin(2\\pi b/T)-\\sin(2\\pi a/T)]/[2\\sin(\\pi/T)]$ by the sine addition formula [F4]. Applying [F3] to the defining sum [F2] proves the displayed formula for $W_T(a,b)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Setting $a=0,b=T$ in the formula of step 1.1 makes its sine difference zero, so $W_T(0,T)=T/2$. The squared norm of $|\\Psi_T\\rangle$ is $(2/T)W_T(0,T)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $a<b$, choose an integer $\\tau$ in $[a,b)$. Then $\\tau+1/2$ lies between $1/2$ and $T-1/2$, so its angle lies in $[\\pi/(2T),\\pi-\\pi/(2T)]$. The chord bound [F5] gives $\\sin(\\pi/(2T))\\ge1/T$, and [F6] reflects this lower bound to the upper half of the interval. That summand is at least $T^{-2}$ and all other summands are nonnegative by [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 of Sine-window normalization and positive prefix weights: the zero-size or empty interval case is covered by the stated kernel/interval convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 of Sine-window normalization and positive prefix weights: a=b gives the empty interval mass zero; only nonempty intervals receive the positive lower bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 of Sine-window normalization and positive prefix weights: a one-leaf interval contains one positive summand, which is at least T^-2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Sine-window normalization and positive prefix weights contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Sine-window normalization and positive prefix weights has no interval or piecewise endpoint separate from the hypotheses in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 of Sine-window normalization and positive prefix weights: one tau is selected from a finite nonempty integer interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Sine-window normalization and positive prefix weights states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Sine-window normalization and positive prefix weights states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "The cited definition provides W_T and Psi_T only for power-of-two T>=2. The original standalone Statement omitted this domain, so the normalization clause was ill-typed at T=3. Explicitly restrict T to that domain; the proof and closed mass formula remain unchanged. Empty intervals give zero, full interval T/2, and every nonempty interval has a leaf with sine>=1/T by chord/reflection. Direct consumers must supply power-of-two T. All three proof steps and eight supplier interfaces read; geometric sum denominator is nonzero since sin(pi/T)>0, including T=2 and a=b. Finite selection needs no AC."
+      }
+    },
+    "lem-qa-26-qlsp-target-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose $x$ with $b=Ax$. The Penrose equation in [F2] gives $AA^+b=AA^+Ax=Ax=b$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $A^+b=0$, then $AA^+b=0$, contradicting step 1.1 and the hypothesis $b\\ne0$. Hence $A^+b\\ne0$ and the normalized QLSP target is defined.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The QLSP target is nonzero has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 of The QLSP target is nonzero: the hypothesis excludes b=0 and the proof shows A+b cannot vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The QLSP target is nonzero has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 of The QLSP target is nonzero: rank deficiency is allowed because b is assumed in ran(A), and the Penrose equation applies to every matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 of The QLSP target is nonzero: the support lower bound is positive and the only excluded endpoint is b=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 of The QLSP target is nonzero: the witness x is selected from the explicit existential definition of b in ran(A); no family-wide choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The QLSP target is nonzero states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The QLSP target is nonzero states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read both steps and exact kernel/image and Penrose interfaces. Given b in ran(A) minus zero, a single witness x gives AA^+b=b; hence A^+b cannot be zero. This proves normalization without circular use of the normalized target, for rectangular and singular matrices alike. Rank-zero and empty-domain cases cannot satisfy nonzero range input. No AC is used. The Definition now links this result by justified_by, without adding a deps cycle."
+      }
+    },
+    "lem-qa-26-hhl-prefix-table-synthesis-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-phase-estimation-sine-chord-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-26-hhl-sine-window",
+          "source_section": "Definition",
+          "quote": "For a power of two $T\\ge2$, the **sine-window vector** is\n$$|\\Psi_T\\rangle=\\sqrt{\\frac2T}\\sum_{\\tau=0}^{T-1}\\sin\\!\\left(\\frac{\\pi(\\tau+1/2)}T\\right)|\\tau\\rangle.$$\nFor any integer interval $0\\le a\\le b\\le T$, define its unnormalized sine mass\n$$W_T(a,b):=\\sum_{\\tau=a}^{b-1}\\sin^2\\!\\left(\\frac{\\pi(\\tau+1/2)}T\\right).$$\nThe closed trigonometric formula for $W_T(a,b)$ is proved by the assigned prefix-mass lemma. The chosen OP5 table variant stores these interval masses and their conditional split angles; it charges its full $O(T)$ table and rotation size, arithmetic, interval-refinement, angle-bit, and finite gate-synthesis costs. This definition does not assign a polylogarithmic implementation cost.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qa-26-hhl-sine-window-prefix-masses",
+          "source_section": "Statement",
+          "quote": "For a power of two $T\\ge2$ and integers $0\\le a\\le b\\le T$,\n$$W_T(a,b)=\\frac{b-a}{2}-\\frac{\\sin(2\\pi b/T)-\\sin(2\\pi a/T)}{4\\sin(\\pi/T)}.$$\nIn particular, $W_T(0,T)=T/2$, so $|\\Psi_T\\rangle$ is normalized, and every nonempty interval has $W_T(a,b)\\ge T^{-2}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cofunction-supplementary-and-reflection-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(\\pi/2-x)=\\cos x,\\quad \\cos(\\pi/2-x)=\\sin x,\\quad \\sin(\\pi-x)=\\sin x,\\quad \\cos(\\pi-x)=-\\cos x,$$\nand the quarter-turn and reflection formulas are\n$$\\sin(x+\\pi/2)=\\cos x,\\quad \\cos(x+\\pi/2)=-\\sin x,\\quad \\sin(-x)=-\\sin x,\\quad \\cos(-x)=\\cos x.$$\nOn the common natural domains of the two sides,\n$$\\tan(\\pi/2-x)=\\cot x,\\quad \\cot(\\pi/2-x)=\\tan x,\\quad \\sec(\\pi/2-x)=\\csc x,\\quad \\csc(\\pi/2-x)=\\sec x,$$\nand\n$$\\tan(\\pi-x)=-\\tan x,\\quad \\cot(\\pi-x)=-\\cot x,\\quad \\sec(\\pi-x)=-\\sec x,\\quad \\csc(\\pi-x)=\\csc x.$$\nThe conventions and prerequisite facts used below are recorded in [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[thm-quarter-turn-values-and-shift-formulas]], [[thm-sine-and-cosine-addition-formulas]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The real $Y$-rotation matrix is $R_y(\\theta)=\\begin{pmatrix}\\cos(\\theta/2)&-\\sin(\\theta/2)\\\\\\sin(\\theta/2)&\\cos(\\theta/2)\\end{pmatrix}$. For any unit vector $x$, [F5] and [F4] give $$\\|(R_y(\\beta)-R_y(\\alpha))x\\|^2=\\|(R_y(\\beta-\\alpha)-I)x\\|^2=4\\sin^2((\\beta-\\alpha)/4).$$ Taking the supremum over unit $x$ and using [F3] and [F4] yields $\\|R_y(\\beta)-R_y(\\alpha)\\|\\le|\\beta-\\alpha|$. A controlled rotation is block diagonal with identity and this rotation on its control subspaces, so its operator error obeys the same bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each leaf $\\tau$, put $x_\\tau=\\pi(\\tau+1/2)/T\\in(0,\\pi)$. If $x_\\tau\\le\\pi/2$, [F3] gives $\\sin x_\\tau\\ge2x_\\tau/\\pi>0$; if $x_\\tau>\\pi/2$, [F8] reduces positivity to $\\pi-x_\\tau\\in(0,\\pi/2)$ and the same bound. Thus each leaf weight is positive, and [F7] makes every split ratio lie in $(0,1)$. The rotation sends $|0\\rangle$ to $\\sqrt{1-r}|0\\rangle+\\sqrt r|1\\rangle$, so its branch amplitudes are exactly the square roots of the right- and left-child mass fractions. Induction from the root shows that leaf $\\tau$ has amplitude $\\sqrt{w_\\tau/W_T(0,T)}=\\sqrt{2/T}\\sin x_\\tau$, by [F6] and [F7]. With left encoded by $1$, interval leaf $\\tau$ has computational label $T-1-\\tau$. Its amplitude equals that of label $\\tau$ because $x_{T-1-\\tau}=\\pi-x_\\tau$ and [F8] gives $\\sin x_{T-1-\\tau}=\\sin x_\\tau$. Hence the ideal circuit prepares $|\\Psi_T\\rangle$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For products $\\widetilde U_N\\cdots\\widetilde U_1$ and $U_N\\cdots U_1$, insert and subtract one factor at a time. This writes their difference as a sum of $N$ terms, each containing one $\\widetilde U_j-U_j$ between unitary products. By [F1] the outer products preserve norm, and [F2] bounds the sum by $N\\delta$. For $\\epsilon_\\Psi>0$, $N=T-1$ and $\\delta=\\epsilon_\\Psi/(100T)$ this is less than $\\epsilon_\\Psi/100$. Applying the same estimate to the inverse rotation list, whose ideal angles are negated and whose synthesis uses the same per-angle tolerance, gives the same bound for inverse preparation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Operator error for the finite sine-prefix rotation table has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: The general product estimate includes delta=0 and gives zero error. The strict OP5 specialization explicitly requires epsilon_Psi>0, excluding the false zero-tolerance inequality 0<0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Operator error for the finite sine-prefix rotation table has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Operator error for the finite sine-prefix rotation table contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1: For T=2 there is one rotation and (T-1)/T=1/2<1. For all T>=2 and epsilon_Psi>0 the strict bound follows from (T-1)/T<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Operator error for the finite sine-prefix rotation table uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Operator error for the finite sine-prefix rotation table states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Operator error for the finite sine-prefix rotation table states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u50",
+        "notes": "Local repair review, not independent acceptance: prefix-mass induction gives square-root leaf weights, with reversed leaf labels harmless by sine reflection. Unitary telescoping bounds N rotation errors by N delta, including the inverse. The strict OP5 specialization now explicitly requires epsilon_Psi>0; no new choice assumption."
+      }
+    },
+    "lem-qa-26-hhl-sine-window-kernel-moment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-exact-binary-qft-circuit-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the exact binary circuit of [[alg-qa-exact-binary-qft-circuit]] implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$: it maps each computational basis vector $|x\\rangle$, $0\\le x<2^n$, to\n\n$$2^{-n/2}\\sum_{y=0}^{2^n-1}e^{2\\pi ixy/2^n}|y\\rangle,$$\n\nwith the declared output register order. Hence its denotation is $\\operatorname{QFT}_{2^n}$ on every state. Reversing the gate list and replacing every gate by its adjoint gives the negative-sign inverse QFT with the same ideal gate count.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-phase-estimation-geometric-sum",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ and $z\\in\\mathbb C$, define\n$$S_n(z):=\\sum_{j=0}^{n-1}z^j,$$\nwith the empty sum $S_0(z)=0$. Then\n$$S_n(z)=\\begin{cases}\\iota_{\\mathbb C}(n),&z=1,\\\\[2pt](1-z^n)/(1-z),&z\\ne1,\\end{cases}$$\nwhere $\\iota_{\\mathbb C}$ is the canonical natural embedding of $\\mathbb N$ into $\\mathbb C$.\n\nFor $Q=2^m$, $\\theta\\in[0,1)$, and integer $y$, setting\n$z=\\exp(2\\pi i(\\theta-y/Q))$ gives\n$z^Q=\\exp(2\\pi iQ\\theta)$; moreover $z=1$ exactly when\n$Q\\theta-y\\in Q\\mathbb Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-13-pi-rational-bounds",
+          "source_section": "Statement",
+          "quote": "The circle constant satisfies $3<\\pi<22/7$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-phase-estimation-sine-chord-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n\n$$|\\sin u-\\sin v|\\le|u-v|,$$\n\nand\n\n$$|\\cos u-\\cos v|\\le|u-v|.$$\n\nThus sine and cosine are Lipschitz functions on $\\mathbb R$, each with\nLipschitz constant $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qa-phase-estimation-sine-chord-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\theta=\\lambda t_0/(2\\pi)$ and $\\delta=2\\pi(\\theta-k)$. Expanding sine into its two exponentials and summing the two geometric series from [F2] gives the amplitude $$\\alpha_k=-\\frac{\\sqrt2}{T}e^{i\\delta(1-1/T)/2}\\,\\frac{\\cos(\\delta/2)\\cos(\\delta/(2T))\\sin(\\pi/(2T))}{\\sin((\\delta+\\pi)/(2T))\\sin((\\delta-\\pi)/(2T))}.$$ At a removable zero this formula means its continuous limit. By [F1], $p_k=|\\alpha_k|^2$ and $\\sum_kp_k=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $|\\delta|\\ge2\\pi$, set $x=|\\delta|/(2T)$ and $a=\\pi/(2T)$. Signed decoding and $|\\lambda|\\le1$ give $x\\le\\pi/2+t_0/(2T)<\\pi/2+1/16$; also $x\\ge2a$. Since $t_0\\ge2048$, $a<1/100$, hence $x+a<\\pi/2+1/10$. On $[0,\\pi/2+1/10]$ one has $\\sin u\\ge u/2$: on $[0,\\pi/2]$ put $s=v/\\pi\\in[0,1/2]$ and apply [F7] to get $\\sin v\\ge2v/\\pi>v/2$ using [F3]; on the remaining interval, $\\sin u=\\cos(u-\\pi/2)\\ge1-1/10=9/10$ by [F5] and [F6], while $u/2<(16/5)/4+1/20=17/20<9/10$. Therefore $$|\\sin^2x-\\sin^2a|=\\sin(x+a)\\sin(x-a)\\ge\\tfrac14(x^2-a^2)\\ge\\tfrac{3\\delta^2}{64T^2}.$$ Using $|\\cos|\\le1$ and $\\sin a\\le a$ in step 1.1 yields $p_k\\le(2048\\pi^2/9)\\delta^{-4}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The outcomes with $|\\delta|<2\\pi$ contribute at most $4\\pi^2$ because their total probability is at most one. For the rest, group integers by $n\\le|\\theta-k|<n+1$, $n\\ge1$; each shell has at most two integers. Step 2.1 gives $$\\sum_{|\\delta_k|\\ge2\\pi}p_k\\delta_k^2\\le\\frac{2048\\pi^2}{9}\\frac{2}{4\\pi^2}\\sum_{n=1}^{\\infty}\\frac1{n^2}\\le\\frac{2048}{9},$$ where $\\sum_{n\\ge1}n^{-2}\\le1+\\int_1^\\infty x^{-2}dx=2$. By [F3], $4\\pi^2<4(16/5)^2<41$, so the total is less than $41+2048/9<300$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 of Second moment of the signed sine-window phase kernel: the zero-size or empty interval case is covered by the stated kernel/interval convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 of Second moment of the signed sine-window phase kernel: lambda=0 is included and contributes within the central |delta|<2pi shell."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 of Second moment of the signed sine-window phase kernel: the endpoint eigenvalues lambda=+/-1 satisfy the same signed-label bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Second moment of the signed sine-window phase kernel contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 of Second moment of the signed sine-window phase kernel: the near/far partition uses the strict threshold |delta|=2pi without leaving a label unbounded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Second moment of the signed sine-window phase kernel uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Second moment of the signed sine-window phase kernel states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Second moment of the signed sine-window phase kernel states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read all three steps and seven supplier interfaces. With t0>=2048 and T>=8(t0+1), signed decoding yields x=|delta|/(2T)<pi/2+1/16 and a=pi/(2T)<1/100. For |delta|>=2pi, x>=2a and sin(x+a)sin(x-a)>=(x²-a²)/4>=3delta²/(64T²); this yields 2048pi²/(9delta^4). Each half-open unit distance shell contains at most two integers, so the tail moment <=2048/9; the near part <41, total <300. Removable zeros use the original finite sum; normalization follows from unitary QFT on the normalized sine window, whose mass proof was checked. Signed endpoints and lambda=0,±1 are covered. No AC."
+      }
+    },
+    "lem-qa-26-phase-to-eigenvalue-unwrapping": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-qa-quantum-phase-estimation",
+          "source_section": "Definition",
+          "quote": "**Input.** An integer $m\\ge1$; an $m$-qubit phase register; a finite-dimensional system register $H$; a unitary $U:H\\to H$; a unit eigenvector $\\psi$ with promised phase $\\theta\\in[0,1)$; and one of the forward access capabilities in [[def-qa-eigenphase-estimation-model]].\n\n**Output.** A classical label $y\\in\\{0,\\ldots,Q-1\\}$ and its phase estimate $y/Q$, where $Q=2^m$.\n\n**Instructions.**\n\n1. Initialize the phase register in $|0^m\\rangle$ and the system register in $\\psi$.\n2. Apply the Hadamard $H=(X+Z)/\\sqrt2$ of [[def-qc-one-qubit-gate-alphabet-and-rotations]] to each phase wire. This prepares $Q^{-1/2}\\sum_{x=0}^{Q-1}|x\\rangle\\otimes\\psi$ in the declared big-endian order.\n3. For $j=0,\\ldots,m-1$, apply the supplied controlled $U^{2^j}$ to control wire $q_{m-1-j}$ and the system. Under single controlled-unitary access, implement that operation with $2^j$ sequential calls to $C(U)$, as specified by the access model.\n4. Apply the inverse of the positive-sign exact binary QFT circuit of [[def-qa-cyclic-quantum-fourier-transform]] and [[thm-qa-exact-binary-qft-circuit-correct]]. Construct it by reversing the chronological gate list and replacing each gate by its adjoint, including the final swaps and negating controlled-phase angles.\n5. Perform the computational-basis projective measurement on the phase register. Its specified Lüders instrument has branch map $Z\\mapsto (|y\\rangle\\langle y|\\otimes I_H)Z(|y\\rangle\\langle y|\\otimes I_H)$ for each label $y$ ([[def-qc-projective-measurement]], [[def-qc-instrument-and-conditional-state]]). Output the observed label $y$ and the ratio $y/Q$.\n\nThe inverse in step 4 is the inverse QFT, not $U^{-1}$; a forward QPE run makes no controlled inverse-unitary query. The coherent prefix is the circuit through step 4 before measurement. A consumer that coherently uncomputes this prefix needs the separate controlled inverse-power capability from [[def-qa-eigenphase-estimation-model]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qa-exact-binary-qft-circuit-correct",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, the exact binary circuit of [[alg-qa-exact-binary-qft-circuit]] implements [[def-qa-cyclic-quantum-fourier-transform]] at $N=2^n$: it maps each computational basis vector $|x\\rangle$, $0\\le x<2^n$, to\n\n$$2^{-n/2}\\sum_{y=0}^{2^n-1}e^{2\\pi ixy/2^n}|y\\rangle,$$\n\nwith the declared output register order. Hence its denotation is $\\operatorname{QFT}_{2^n}$ on every state. Reversing the gate list and replacing every gate by its adjoint gives the negative-sign inverse QFT with the same ideal gate count.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-13-pi-rational-bounds",
+          "source_section": "Statement",
+          "quote": "The circle constant satisfies $3<\\pi<22/7$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose an orthonormal eigenbasis and let $H|u\\rangle=\\lambda|u\\rangle$. The root inner product is linear in its first argument and conjugate-linear in the second ([[def-qc-dirac-notation-conversion]]). Self-adjointness therefore gives $$\\lambda\\|u\\|^2=\\langle Hu,u\\rangle=\\langle u,H^*u\\rangle=\\langle u,Hu\\rangle=\\overline\\lambda\\|u\\|^2,$$ so $\\lambda$ is real. Also $|\\lambda|\\|u\\|=\\|Hu\\|\\le\\|H\\|\\|u\\|\\le\\|u\\|$, so $\\lambda\\in[-1,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On this eigenvector, $e^{+iHt_0/T}$ has eigenvalue $e^{i\\lambda t_0/T}=e^{2\\pi i\\theta}$, where $\\theta$ is the unique representative of $\\lambda t_0/(2\\pi T)$ modulo $1$ in $[0,1)$. Each controlled power has eigenphase $\\lambda 2^jt_0/T$, so phase estimation encodes this same phase modulo one.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $T\\ge8(t_0+1)$, $|\\lambda t_0/T|\\le t_0/T<1/8<\\pi$ by [F4]. Thus the centered representative of the phase angle is exactly $\\lambda t_0/T$, with no alias by a multiple of $2\\pi$. Centered decoding gives the stated signed integer $k$ and adjacent eigenvalue grid values differ by $2\\pi/t_0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Signed phase decoding has no alias on the promised spectrum has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Signed phase decoding has no alias on the promised spectrum contains no zero-valued argument at which its claimed operation becomes undefined; its stated domain covers the relevant inputs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 of Signed phase decoding has no alias on the promised spectrum: the spectral endpoint |lambda|=1 remains strictly within the centered phase interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Signed phase decoding has no alias on the promised spectrum contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 of Signed phase decoding has no alias on the promised spectrum: the bound t0/T<1/8 is strict at the least allowed T, so no endpoint aliases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Signed phase decoding has no alias on the promised spectrum uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Signed phase decoding has no alias on the promised spectrum states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Signed phase decoding has no alias on the promised spectrum states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read all three steps and eight interfaces. Self-adjointness makes every eigenvalue real under the root inner-product convention and the operator bound gives |lambda|<=1. The base phase is lambda*t0/(2*pi*T) modulo one (missing T corrected in 2.1). Its centered angle is lambda*t0/T, strictly inside (-1/8,1/8); thus there is no spectral alias, and Fourier labels decoded in [-T/2,T/2-1] have eigenvalue spacing 2*pi/t0. The Nyquist grid boundary has a unique half-open label; this does not exclude measurement tails there. Statement unchanged; no consumer interface propagation or AC.",
+        "repair_confidence": 1
+      }
+    },
+    "lem-qa-26-hhl-capped-amplification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-12-amplification-plane-invariant",
+          "source_section": "Statement",
+          "quote": "Let $A,\\Pi_{\\mathrm{good}},a,|G\\rangle,|B\\rangle$ be as in [[def-qa-12-prepared-success-subspace]], with $0<a<1$, and let $\\theta\\in(0,\\pi/2)$ be the unique angle satisfying $\\sin^2\\theta=a$. For\n$\nQ:=-A S_0 A^\\dagger S_{\\mathrm{good}},\n$\nthe subspace $\\operatorname{span}\\{|B\\rangle,|G\\rangle\\}$ is invariant. In the ordered orthonormal basis $(|B\\rangle,|G\\rangle)$, the restriction of $Q$ is\n$\n\\begin{pmatrix}\n\\cos(2\\theta)&-\\sin(2\\theta)\\\\\n\\sin(2\\theta)&\\cos(2\\theta)\n\\end{pmatrix}.\n$\nFor $a=0$ the prepared vector spans an invariant bad line and $Q|\\psi\\rangle=|\\psi\\rangle$; for $a=1$ it spans an invariant good line and $Q|\\psi\\rangle=-|\\psi\\rangle$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-12-amplification-rotation-correctness",
+          "source_section": "Statement",
+          "quote": "Let $a\\in[0,1]$ be the initial success weight and let $\\theta\\in[0,\\pi/2]$ be the unique angle satisfying $\\sin^2\\theta=a$. After exactly $k\\ge0$ standard amplitude-amplification iterates, the probability of the good outcome of $\\{\\Pi_{\\mathrm{good}},I-\\Pi_{\\mathrm{good}}\\}$ is\n$\n\\sin^2((2k+1)\\theta).\n$\nThe endpoints $a=0$ and $a=1$ are included by direct evaluation, without normalizing a zero component.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-qa-12-amplitude-amplification",
+          "source_section": "Definition",
+          "quote": "Input a coherent sampler $A$, an orthogonal success projection $\\Pi_{\\mathrm{good}}$, and a fixed integer $k\\ge0$, under the access contract of [[def-qa-12-prepared-success-subspace]]. Additionally supply the good/bad projective instrument $\\{\\Pi_{\\mathrm{good}},I-\\Pi_{\\mathrm{good}}\\}$, charging each measurement and its implementation costs separately. Prepare $|\\psi\\rangle=A|0\\rangle$. In the displayed right-to-left operator convention, set\n$\nQ:=-A(I-2|0\\rangle\\langle0|)A^\\dagger(I-2\\Pi_{\\mathrm{good}}).\n$\nApply $Q$ exactly $k$ times. Then apply the projective instrument $\\{\\Pi_{\\mathrm{good}},I-\\Pi_{\\mathrm{good}}\\}$. On a positive-probability good outcome return its conditional quantum state; on the bad outcome return fail. The conditional state exists only on a positive-probability branch, as in [[thm-qc-projective-conditional-state]].\n\nFor the classical-output specialization, additionally require $\\Pi_{\\mathrm{good}}$ to be diagonal in the designated output basis and supply a costed verifier. Measure that basis only after the success-projector instrument has accepted; verify the resulting candidate and return it or fail. No arbitrary-projector-to-classical-predicate conversion is implicit.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-inverse-unitary-access",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional unitary $U$, **inverse access** is the explicitly granted operation $U^\\dagger=U^{-1}$. Its availability and query or gate charge are recorded separately from forward access, including any controlled access in [[def-qc-controlled-unitary-access]]. For a chronological sequence of length $k\\ge0$ that applies $U_1$ first and $U_k$ last, the total operator is $W=U_k\\cdots U_1$ when $k>0$ and $W=I_H$ when $k=0$. For $k>0$, the inverse sequence applies $U_k^\\dagger$ first, then $U_{k-1}^\\dagger$, down to $U_1^\\dagger$; for $k=0$ it is the empty sequence.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-phase-estimation-sine-chord-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\le u\\le1/2$ and $v\\ge0$,\n$$\\sin(\\pi u)\\ge2u,\\qquad \\sin(v)\\le v.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-double-angle-and-power-reduction-identities",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(2x)=2\\sin x\\cos x,\\quad \\cos(2x)=\\cos^2x-\\sin^2x=2\\cos^2x-1=1-2\\sin^2x,$$\nand\n$$\\sin^2x=(1-\\cos2x)/2,\\qquad \\cos^2x=(1+\\cos2x)/2.$$\nWhen defined, $\\tan(2x)=2\\tan x/(1-\\tan^2x)$. The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0<\\sin(2\\phi)$, the addition identity in [F6] gives $\\sin((4j+4)\\phi)-\\sin(4j\\phi)=2\\cos((4j+2)\\phi)\\sin(2\\phi)$. Summing over $j=0,\\ldots,K-1$ telescopes, so $\\sum_j\\cos((4j+2)\\phi)=\\sin(4K\\phi)/(2\\sin(2\\phi))$. The double-angle identities in [F6] therefore give $\\sum_{j=0}^{K-1}\\sin^2((2j+1)\\phi)=K/2-\\sin(4K\\phi)/(4\\sin(2\\phi))$, and the corresponding cosine-square sum has a plus sign. Here the denominators are positive except at the separately treated endpoint $p=1$. Put $\\theta=\\arcsin\\sqrt p$. For $p\\le1/2$, $\\sin(2\\theta)=2\\sqrt{p(1-p)}\\ge\\sqrt{2p}\\ge1/(2\\sqrt2\\kappa)$. The finite sine-square identity from [F6] gives average success $$\\frac1K\\sum_{j=0}^{K-1}\\sin^2((2j+1)\\theta)=\\frac12-\\frac{\\sin(4K\\theta)}{4K\\sin(2\\theta)}\\ge\\frac12-\\frac1{4K\\sin(2\\theta)}\\ge\\frac12-\\frac1{4\\sqrt2}>\\frac14.$$ For $1/2<p<1$, put $\\theta'=\\pi/2-\\theta\\in[0,\\pi/4)$. The cosine-square version of [F6] gives average success $\\frac12+\\frac{\\sin(4K\\theta')}{4K\\sin(2\\theta')}$. If its sine numerator is nonnegative this is at least $1/2$. If it is negative, then $4K\\theta'>\\pi$, and [F5] gives $\\sin(2\\theta')\\ge4\\theta'/\\pi$, so the magnitude of the fraction is at most $\\pi/(16K\\theta')<1/4$. The average is again greater than $1/4$. At $p=1$, every iteration succeeds. Thus uniform accepted $j$ has average success at least $1/4$ for every $p\\ge p_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $K\\le2^b<2K$, the random-bit draw is accepted with probability $K/2^b>1/2$ and, conditioned on acceptance, is uniform on $\\{0,\\ldots,K-1\\}$. Each fresh round therefore succeeds with probability at least $1/8$. Independence of fresh preparation, bits and verification gives total failure at most $(7/8)^R\\le e^{-R/8}$, since [F7] gives $\\ln(8/7)=\\int_1^{8/7}dt/t\\ge(1/7)(7/8)=1/8$ and $R\\ge16\\ln(1/\\rho)$. Therefore the failure is at most $e^{-2\\ln(1/\\rho)}=\\rho^2\\le\\rho$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At most $K-1$ iterations occur in one round, each using one $V$ and one $V^\\dagger$ besides the initial $V$; hence each call count is at most $RK$, and their sum is at most $2RK$. The good component remains collinear by [F1, F3]; its scalar rotation coefficient may be negative, but every positive-probability well branch therefore has the same pure-state ray as the normalized initial well component.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Finite capped amplification succeeds with a supplied lower bound has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 of Finite capped amplification succeeds with a supplied lower bound: p=0 is excluded by the stated positive lower bound p0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 of Finite capped amplification succeeds with a supplied lower bound: p=1 is handled separately and every iteration succeeds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Finite capped amplification succeeds with a supplied lower bound contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 of Finite capped amplification succeeds with a supplied lower bound: p=p0 and p=1 are both included in the two success-probability cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 of Finite capped amplification succeeds with a supplied lower bound: fresh random bits are finite uniform draws; no infinite choice or rejection loop is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Finite capped amplification succeeds with a supplied lower bound states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Finite capped amplification succeeds with a supplied lower bound states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read all three steps and eight supplier interfaces. Telescoping cosines yields the finite sine-square average. For p<=1/2, K>=4*kappa and sin(2theta)>=1/(2sqrt(2)*kappa) give average>1/4. For p>1/2 the complementary angle yields the same bound, including p=1 by direct evaluation. The uniform b-bit integer is accepted with probability>1/2, so each fresh round succeeds with probability>=1/8. R>=16ln(1/rho) gives failure<=rho²<=rho; each direction uses <=RK calls. Plane invariance preserves the successful ray even for negative rotation coefficients. Applies to any declared orthogonal success subspace, including the joint well/domain subspace. All randomness and choices are finite, no AC."
+      }
+    },
+    "lem-qa-26-hhl-success-amplitude": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-26-hhl-reciprocal-filter",
+          "source_section": "Definition",
+          "quote": "For $\\kappa\\ge1$ and real estimate $z$, put $u=|z|$ and define the odd well amplitude $f_\\kappa$ and even ill amplitude $g_\\kappa$ by\n$$f_\\kappa(z)=\\begin{cases}\\operatorname{sgn}(z)/(2\\kappa u),&u\\ge1/\\kappa,\\\\[2pt]\\tfrac12\\operatorname{sgn}(z)\\sin(\\pi\\kappa(u-1/(2\\kappa))),&1/(2\\kappa)\\le u<1/\\kappa,\\\\[2pt]0,&u<1/(2\\kappa),\\end{cases}\\qquad g_\\kappa(z)=\\begin{cases}0,&u\\ge1/\\kappa,\\\\[2pt]\\tfrac12\\cos(\\pi\\kappa(u-1/(2\\kappa))),&1/(2\\kappa)\\le u<1/\\kappa,\\\\[2pt]1/2,&u<1/(2\\kappa),\\end{cases}$$\nwhere $\\operatorname{sgn}(z)=1$ for $z>0$, $-1$ for $z<0$, and $0$ for $z=0$. The three flag amplitudes are $(h(z),f_\\kappa(z),g_\\kappa(z))$, where $h(z)=\\sqrt{1-f_\\kappa(z)^2-g_\\kappa(z)^2}$. Labels are nothing, well, ill, respectively. This definition applies to every real decoded grid point, including points outside the supported spectrum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-26-qlsp-task",
+          "source_section": "Definition",
+          "quote": "Let $A:\\mathbb C^n\\to\\mathbb C^m$ be a finite-dimensional linear map, $m,n\\ge1$, and let $b\\in\\operatorname{ran}(A)\\setminus\\{0\\}$, where $\\operatorname{ran}(A)$ is the image defined in [[def-kernel-and-image-of-a-linear-map]]. The **quantum linear-systems state-output task (QLSP)** is to prepare the normalized domain-register state\n$$|x\\rangle:=\\frac{A^+b}{\\|A^+b\\|}\\in\\mathbb C^n,$$\nwhere $A^+$ is the Moore–Penrose pseudoinverse. By [[thm-singular-value-decomposition]], write $b=\\sum_{j:\\sigma_j>0}\\beta_j u_j$ in left singular vectors; the promised support gap is a supplied rational or exactly represented $\\gamma>0$ such that every $j$ with $\\beta_j\\ne0$ has singular value $\\sigma_j\\ge\\gamma$. The input includes a costed unitary $B$ mapping its designated all-zero input to $|b/\\|b\\|\\rangle$ in the codomain register, tensored with a fixed work state. Its inverse, controlled access, and resource coordinates are specified in the separate HHL access model. If $b$ is multiplied by $c\\ne0$, the normalized representative is multiplied by $c/|c|$, so its pure-state ray is unchanged. The task returns a quantum state (and may return a success flag); it does not promise a classical list of coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the eigenbasis from [F1], if $H u_j=\\lambda_j u_j$, self-adjointness and [F5] give $$\\lambda_j\\|u_j\\|^2=\\langle Hu_j,u_j\\rangle=\\langle u_j,H^*u_j\\rangle=\\langle u_j,Hu_j\\rangle=\\overline{\\lambda_j}\\|u_j\\|^2,$$ so every $\\lambda_j$ is real. Define $G u_j=\\lambda_j^{-1}u_j$ for $\\lambda_j\\ne0$ and $G u_j=0$ for $\\lambda_j=0$. Diagonal multiplication gives $HGH=H$, $GHG=G$, and $HG=GH$ equal to the orthogonal projection onto the nonzero-eigenvalue span; both products are self-adjoint. Thus $G$ satisfies [F2], and uniqueness gives $H^+=G$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expand $|b\\rangle=\\sum_j\\beta_j|u_j\\rangle$ in [F1], with $\\sum_j|\\beta_j|^2=1$. Put $J=\\{j:\\beta_j\\ne0\\}$; then $\\sum_{j\\in J}|\\beta_j|^2=1$ and every $j\\in J$ has $1/\\kappa\\le|\\lambda_j|\\le1$, so [F3] multiplies it by $(2\\kappa\\lambda_j)^{-1}$. Step 1.1 therefore gives the well vector $v=\\sum_{j\\in J}\\beta_j(2\\kappa\\lambda_j)^{-1}|u_j\\rangle=(2\\kappa)^{-1}H^+|b\\rangle$. Its normalization is the state in [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Orthonormality gives $p=\\sum_{j\\in J}|\\beta_j|^2/(4\\kappa^2|\\lambda_j|^2)$. For $j\\in J$, $1\\le|\\lambda_j|^{-1}\\le\\kappa$, so each weight factor lies in $[1/(4\\kappa^2),1/4]$. Their convex average lies in the same interval, proving $1/(4\\kappa^2)\\le p\\le1/4$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Ideal inverse amplitude and HHL postselection probability has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 sets the pseudoinverse to zero on zero eigenvalues. Steps 2.1 and 3.1 restrict all reciprocal expressions to J={j:beta_j!=0}, where the support promise excludes lambda_j=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Ideal inverse amplitude and HHL postselection probability has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 of Ideal inverse amplitude and HHL postselection probability: H may be singular off the supported subspace; the pseudoinverse is used and only supported eigenvalues are inverted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For j in J, |lambda_j|=1 gives probability factor 1/(4kappa^2), and |lambda_j|=1/kappa gives 1/4. Both endpoints enter the convex-average calculation of step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Ideal inverse amplitude and HHL postselection probability uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Ideal inverse amplitude and HHL postselection probability states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Ideal inverse amplitude and HHL postselection probability states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u50",
+        "notes": "Local repair review, not independent acceptance: diagonal G satisfies the four Penrose equations, including the kernel branch. Restricting reciprocal and probability sums to nonzero input coefficients removes undefined 0/0 terms without changing any vector or claim. Supported coefficients retain total squared mass one and the probability interval follows. No choice axiom."
+      }
+    },
+    "thm-qa-26-hhl-amplified-postselection-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-26-hhl-capped-amplification",
+          "source_section": "Statement",
+          "quote": "Let a unitary flagged preparation $V$ have well probability $p\\ge p_0:=1/(16\\kappa^2)$, $\\kappa\\ge1$, and exact inverse access. Set $K=\\lceil4\\kappa\\rceil$, $R=\\lceil16\\ln(1/\\rho)\\rceil+16$ for $0<\\rho<1$. In each of $R$ fresh rounds, draw $b=\\lceil\\log_2K\\rceil$ uniform bits; reject the round without queries if the resulting integer $j\\ge K$, and otherwise run $j$ amplitude-amplification iterations from $V|0\\rangle$, then verify the well flag. The probability that all rounds fail is at most $\\rho$. The conditional well state in every successful round is the same pure-state ray as the normalized well component of $V|0\\rangle$. The total number of $V,V^\\dagger$ calls is at most $2RK$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-qa-26-hhl-phase-estimation",
+          "source_section": "Definition",
+          "quote": "Input a self-adjoint $H$ with $\\|H\\|\\le1$, a unit input state $|b\\rangle$ supported only on eigenvalues satisfying $1/\\kappa\\le|\\lambda|\\le1$, and a supplied finite exact representation of the cutoff $\\kappa\\ge1$ that supports certified arithmetic and rational comparisons. Supply costed $B,B^\\dagger$ and controlled/inverse simulation access as in [[def-qa-26-hhl-access-model]]. The accuracy and failure inputs are exact rational values $\\epsilon=p_\\epsilon/q_\\epsilon$ and $\\rho=p_\\rho/q_\\rho$, with positive binary-encoded integers and $0<p_\\epsilon\\le q_\\epsilon$, $0<p_\\rho<q_\\rho$. Rectangular systems $A:\\mathbb C^n\\to\\mathbb C^m$ use [[lem-qa-26-hermitian-dilation]]: choose a supplied rational scale $\\Lambda\\ge\\|H_A\\|$, use $H=H_A/\\Lambda$, and set $\\kappa=\\Lambda/\\gamma$ from the QLSP support gap $\\gamma$. The QLSP definition supplies $\\sigma_j\\ge\\gamma$ whenever the left singular coefficient of $b$ is nonzero; the dilation eigenvalues on this input support are $\\pm\\sigma_j/\\Lambda$, so $1/\\kappa\\le|\\lambda|\\le1$. On $(\\mathbb C^m\\otimes W)\\oplus(\\mathbb C^n\\otimes W)$ prepare the normalized codomain-supported input $(b/\\|b\\|,0)$ with the tagged preparation $B_A:=B\\oplus I_{\\mathbb C^n\\otimes W}$. Implement its $B$ block with the supplied tag-controlled form of $B$ and charge that controlled preparation cost. The QLSP promise $b\\in\\operatorname{ran}(A)$ removes the kernel component, and the output is tagged in the domain summand. All parameter comparisons, reversible arithmetic and finite-precision synthesis use the separately charged routines in the access model. The algorithm is the finite OP5 program:\n\n1. Apply the supplied $B$ (or $B_A$ for a rectangular system) to prepare the input and its fixed work state, set $t_0=2048\\kappa/\\epsilon$, choose the least power of two $T\\ge8(t_0+1)$ by certified comparisons, and let $L=\\log_2T$. Initialize the phase register to $|0^L\\rangle$ in big-endian order $q_{L-1}\\cdots q_0$. This carrier chooses OP5's explicit table variant for preparing [[def-qa-26-hhl-sine-window]]. Build the complete binary prefix tree on the $T$ leaves. At each level $\\ell=0,\\ldots,L-1$ and for each interval node $[a,b)$ at that level, put $m=(a+b)/2$ and compute the child masses $W_T(a,m)$ and $W_T(m,b)$ from the formula in [[lem-qa-26-hhl-sine-window-prefix-masses]]. Store $r=W_T(a,m)/W_T(a,b)$ and apply $R_y(2\\arcsin\\sqrt r)$ to wire $q_{L-1-\\ell}$, controlled on the preceding $\\ell$ wires matching the path to $[a,b)$; encode bit $1$ as the left child and bit $0$ as the right child. The root has no controls. Thus the ideal circuit prepares $|\\Psi_T\\rangle$ by [[lem-qa-26-hhl-prefix-table-synthesis-error]]. Put $\\epsilon_\\Psi=\\epsilon/(4096\\kappa)$. Each nonempty mass is at least $T^{-2}$ by [[lem-qa-26-hhl-sine-window-prefix-masses]]. Use certified interval arithmetic with absolute mass error at most $\\epsilon_\\Psi^2/(10^6L^2T^4)$; refine until each stored angle and its finite gate synthesis together give controlled-rotation operator error at most $\\epsilon_\\Psi/(100T)$. The cases $r=0$ and $r=1$ use the identity and $\\pi$ rotations, respectively. Store each other angle with at least $\\lceil\\log_2(100\\pi T/\\epsilon_\\Psi)\\rceil+2$ bits. There are $T-1$ rotations; [[lem-qa-26-hhl-prefix-table-synthesis-error]] bounds their total operator error by $\\epsilon_\\Psi/100$ from the displayed combined per-node operator tolerance. The table contains $O(T\\log(T/\\epsilon_\\Psi))$ bits and $T-1$ controlled rotations. Charge its one-time construction/data cost $G_\\Psi(T,\\epsilon_\\Psi)$ and each forward/inverse preparation cost $C_\\Psi(T,\\epsilon_\\Psi)$ from [[def-qa-26-hhl-access-model]], including reversible lookup, control and finite gate synthesis. Thus the sine-preparation unitary and its inverse each have operator error at most $\\epsilon_\\Psi$; this variant pays linear-in-$T$ table and rotation resources rather than assuming a loaded amplitude table.\n\n2. In either the original full-space or alternative clean-workspace simulation mode, initialize all simulator work in zero and retain it coherently. For $j=0,\\ldots,L-1$, set $t_j=2^jt_0/T$ and allocate $\\eta_j=\\epsilon/(8192\\kappa L)$ to both its forward controlled call $S_H(t_j,\\eta_j)$ and its reverse call. Apply $S_H(t_j,\\eta_j)$ to the system controlled on wire $q_j$ being $1$, and act as identity on its $0$ branch. In the declared order $q_{L-1}\\cdots q_0$, a phase label $\\tau$ has bits $x_j$ with $\\tau=\\sum_{j=0}^{L-1}2^jx_j$, so the ideal controlled list applies $e^{+iH\\tau t_0/T}$. Apply the negative-sign QFT, decode $y$ to signed $k=y$ for $y<T/2$ and $k=y-T$ otherwise, and set $\\widetilde\\lambda=2\\pi k/t_0$. The total forward evolution time is $\\sum_{j<L}t_j=t_0(1-1/T)<t_0$, and the sum of the $2L$ simulation error allocations is $\\epsilon/(4096\\kappa)$. This uses the signed convention in [[lem-qa-26-phase-to-eigenvalue-unwrapping]].\n\n3. Reversibly compute the flag angles and sign from $\\widetilde\\lambda$ using [[def-qa-26-hhl-reciprocal-filter]]. Use the two-qubit computational basis $|q_1q_0\\rangle$ with labels $|\\mathrm{nothing}\\rangle=|00\\rangle$, $|\\mathrm{well}\\rangle=|01\\rangle$, $|\\mathrm{ill}\\rangle=|10\\rangle$, and unused label $|11\\rangle$. Write $p=|f_\\kappa(\\widetilde\\lambda)|$, $r=\\sqrt{1-p^2}$, $\\alpha=2\\arcsin p$, and $\\beta=2\\arcsin(g_\\kappa(\\widetilde\\lambda)/r)$. These are defined at every decoded grid point because [[lem-qa-26-hhl-filter-geometry]] gives $p\\le1/2$, $0\\le g\\le1/2$, and $r\\ge\\sqrt3/2$, so $g/r\\le1/\\sqrt3<1$. First apply $R_y(\\alpha)$ to $q_0$ conditioned on $q_1=0$, acting as identity on the $q_1=1$ subspace. Next apply $R_y(\\beta)$ to $q_1$ conditioned on $q_0=0$, acting as identity on the $q_0=1$ subspace. Here $R_y(\\theta)=\\exp(-i\\theta Y/2)$ with the exact convention and unitary formula of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and [[thm-qc-axis-rotation-pauli-formula]]. Finally apply $D_s=\\operatorname{diag}(1,s,1,1)$ in the ordered flag basis, where $s=-1$ if $\\widetilde\\lambda<0$ and $s=+1$ otherwise (in particular at zero, where $f_\\kappa(0)=0$). The resulting full flag unitary is $D_sG_{02}(\\beta)G_{01}(\\alpha)$: the two conditional rotations act as $R_y$ on the indicated two-label subspaces and as identity on their orthogonal complements, and $D_s$ is diagonal unitary. All three factors fix the unused label $|11\\rangle$. On $|00\\rangle$ the product gives $h(\\widetilde\\lambda)|00\\rangle+f_\\kappa(\\widetilde\\lambda)|01\\rangle+g_\\kappa(\\widetilde\\lambda)|10\\rangle$, since $\\cos(\\beta/2)=h/r$ and $\\sin(\\beta/2)=g/r$. Uncompute the arithmetic. Synthesize the phase-controlled map with uniform operator error at most $\\eta_R:=\\epsilon/(4096\\kappa)$, charged through $C_{\\rm flag}$ and $C_{\\rm arith}$.\n\n4. Reverse the QFT, every actual controlled simulation circuit, and sine preparation, retaining the flag and all simulator work. In clean-workspace mode the ideal trajectory has this work in zero; [[lem-qa-25-clean-subspace-unitary-hybrid]] bounds the complete attempt on that ideal trajectory without assuming actual intermediate work is clean. This gives a unitary flagged preparation $V$ and its exact circuit inverse $V^\\dagger$. Let $\\Pi_{\\rm good}$ be the well-flag projection in Hermitian mode and the product of the well-flag projection and tagged domain projection in rectangular mode; these two projections act on distinct registers and commute. Let $p=\\|\\Pi_{\\rm good}V|0\\rangle\\|^2$. Apply the finite capped amplification procedure proved in [[lem-qa-26-hhl-capped-amplification]] with success projection $\\Pi_{\\rm good}$, lower bound $p_{\\mathrm{low}}=1/(16\\kappa^2)$ and failure target $\\rho$. Its success reflection and verification test both the well flag and the domain tag in rectangular mode; charge their actual costs to $C_{\\rm ref}$ and $C_{\\rm ver}$. Measure $\\{\\Pi_{\\rm good},I-\\Pi_{\\rm good}\\}$ and return the conditional state, tagged output and success bit on success; return FAIL otherwise.\n\nThe circuit uses no uniform-register phase-tail estimate: its phase distribution is the sine-window kernel proved in [[lem-qa-26-hhl-sine-window-kernel-moment]]. Its $G_\\Psi,C_\\Psi,C_{\\rm sim},C_{\\rm QFT}^{+/-},C_{\\rm flag}$, reflection, verification and $B/B^\\dagger$ costs remain separate inputs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, and $w(C)$ its total number of wires.\n\nEach clean or dirty ancilla coordinate additionally requires a declared ordered partition of the circuit wires into data register $D$ and ancilla register $A$, and a declared target unitary $V$ on $D$. In that factor order, the complete circuit unitary must satisfy the corresponding exact contract of [[def-qc-clean-and-dirty-ancillas]]. For such a supplied clean contract set $a_{\\rm clean}(C)=|A|$, and for such a supplied dirty contract set $a_{\\rm dirty}(C)=|A|$; the notation suppresses the declared interface, which is part of the cost instance and may differ between the two coordinates. If no corresponding contract is supplied, mark that coordinate not applicable. These are counts of declared contract registers, not maxima over possible partitions. Zero initialization alone supplies neither return contract. Every auxiliary wire remains counted in $w(C)$ ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the total number of preparation and inverse-preparation calls is bounded separately by $RK$ each. Since $K=\\lceil4\\kappa\\rceil\\le5\\kappa$ for $\\kappa\\ge1$ and $R\\le16\\ln(1/\\rho)+17$, each count is $O(\\kappa(1+\\log(1/\\rho)))$ with an absolute constant.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each preparation call invokes the supplied preparation form once, and each inverse preparation invokes its actual inverse once by [F2]. Their circuit/query/gate costs therefore multiply the two counts separately and add by [F3]. No call to a controlled form, simulator, reflection, or verifier is included unless it appears in the declared circuit.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost contains no zero-valued argument at which its claimed operation becomes undefined; its stated domain covers the relevant inputs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost has no interval or piecewise endpoint separate from the hypotheses in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "HHL capped postselection amplification cost states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read both proof steps and all four dependency interfaces. At most RK forward attempts and RK adjoints give separately at most RK supplied preparations and inverses. For kappa>=1, ceil(4kappa)<=5kappa and R<=16ln(1/rho)+17, so the stated O(kappa(1+log(1/rho))) follows uniformly as rho tends to 1. The joint rectangular success projector changes actual reflection/verification costs only, already separate; it adds no B or inverse B calls. The theorem explicitly assumes the success lower bound established later, so there is no prerequisite cycle. No AC."
+      }
+    },
+    "thm-qa-26-hhl-simulator-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qa-26-hhl-phase-estimation",
+          "source_section": "Definition",
+          "quote": "Input a self-adjoint $H$ with $\\|H\\|\\le1$, a unit input state $|b\\rangle$ supported only on eigenvalues satisfying $1/\\kappa\\le|\\lambda|\\le1$, and a supplied finite exact representation of the cutoff $\\kappa\\ge1$ that supports certified arithmetic and rational comparisons. Supply costed $B,B^\\dagger$ and controlled/inverse simulation access as in [[def-qa-26-hhl-access-model]]. The accuracy and failure inputs are exact rational values $\\epsilon=p_\\epsilon/q_\\epsilon$ and $\\rho=p_\\rho/q_\\rho$, with positive binary-encoded integers and $0<p_\\epsilon\\le q_\\epsilon$, $0<p_\\rho<q_\\rho$. Rectangular systems $A:\\mathbb C^n\\to\\mathbb C^m$ use [[lem-qa-26-hermitian-dilation]]: choose a supplied rational scale $\\Lambda\\ge\\|H_A\\|$, use $H=H_A/\\Lambda$, and set $\\kappa=\\Lambda/\\gamma$ from the QLSP support gap $\\gamma$. The QLSP definition supplies $\\sigma_j\\ge\\gamma$ whenever the left singular coefficient of $b$ is nonzero; the dilation eigenvalues on this input support are $\\pm\\sigma_j/\\Lambda$, so $1/\\kappa\\le|\\lambda|\\le1$. On $(\\mathbb C^m\\otimes W)\\oplus(\\mathbb C^n\\otimes W)$ prepare the normalized codomain-supported input $(b/\\|b\\|,0)$ with the tagged preparation $B_A:=B\\oplus I_{\\mathbb C^n\\otimes W}$. Implement its $B$ block with the supplied tag-controlled form of $B$ and charge that controlled preparation cost. The QLSP promise $b\\in\\operatorname{ran}(A)$ removes the kernel component, and the output is tagged in the domain summand. All parameter comparisons, reversible arithmetic and finite-precision synthesis use the separately charged routines in the access model. The algorithm is the finite OP5 program:\n\n1. Apply the supplied $B$ (or $B_A$ for a rectangular system) to prepare the input and its fixed work state, set $t_0=2048\\kappa/\\epsilon$, choose the least power of two $T\\ge8(t_0+1)$ by certified comparisons, and let $L=\\log_2T$. Initialize the phase register to $|0^L\\rangle$ in big-endian order $q_{L-1}\\cdots q_0$. This carrier chooses OP5's explicit table variant for preparing [[def-qa-26-hhl-sine-window]]. Build the complete binary prefix tree on the $T$ leaves. At each level $\\ell=0,\\ldots,L-1$ and for each interval node $[a,b)$ at that level, put $m=(a+b)/2$ and compute the child masses $W_T(a,m)$ and $W_T(m,b)$ from the formula in [[lem-qa-26-hhl-sine-window-prefix-masses]]. Store $r=W_T(a,m)/W_T(a,b)$ and apply $R_y(2\\arcsin\\sqrt r)$ to wire $q_{L-1-\\ell}$, controlled on the preceding $\\ell$ wires matching the path to $[a,b)$; encode bit $1$ as the left child and bit $0$ as the right child. The root has no controls. Thus the ideal circuit prepares $|\\Psi_T\\rangle$ by [[lem-qa-26-hhl-prefix-table-synthesis-error]]. Put $\\epsilon_\\Psi=\\epsilon/(4096\\kappa)$. Each nonempty mass is at least $T^{-2}$ by [[lem-qa-26-hhl-sine-window-prefix-masses]]. Use certified interval arithmetic with absolute mass error at most $\\epsilon_\\Psi^2/(10^6L^2T^4)$; refine until each stored angle and its finite gate synthesis together give controlled-rotation operator error at most $\\epsilon_\\Psi/(100T)$. The cases $r=0$ and $r=1$ use the identity and $\\pi$ rotations, respectively. Store each other angle with at least $\\lceil\\log_2(100\\pi T/\\epsilon_\\Psi)\\rceil+2$ bits. There are $T-1$ rotations; [[lem-qa-26-hhl-prefix-table-synthesis-error]] bounds their total operator error by $\\epsilon_\\Psi/100$ from the displayed combined per-node operator tolerance. The table contains $O(T\\log(T/\\epsilon_\\Psi))$ bits and $T-1$ controlled rotations. Charge its one-time construction/data cost $G_\\Psi(T,\\epsilon_\\Psi)$ and each forward/inverse preparation cost $C_\\Psi(T,\\epsilon_\\Psi)$ from [[def-qa-26-hhl-access-model]], including reversible lookup, control and finite gate synthesis. Thus the sine-preparation unitary and its inverse each have operator error at most $\\epsilon_\\Psi$; this variant pays linear-in-$T$ table and rotation resources rather than assuming a loaded amplitude table.\n\n2. In either the original full-space or alternative clean-workspace simulation mode, initialize all simulator work in zero and retain it coherently. For $j=0,\\ldots,L-1$, set $t_j=2^jt_0/T$ and allocate $\\eta_j=\\epsilon/(8192\\kappa L)$ to both its forward controlled call $S_H(t_j,\\eta_j)$ and its reverse call. Apply $S_H(t_j,\\eta_j)$ to the system controlled on wire $q_j$ being $1$, and act as identity on its $0$ branch. In the declared order $q_{L-1}\\cdots q_0$, a phase label $\\tau$ has bits $x_j$ with $\\tau=\\sum_{j=0}^{L-1}2^jx_j$, so the ideal controlled list applies $e^{+iH\\tau t_0/T}$. Apply the negative-sign QFT, decode $y$ to signed $k=y$ for $y<T/2$ and $k=y-T$ otherwise, and set $\\widetilde\\lambda=2\\pi k/t_0$. The total forward evolution time is $\\sum_{j<L}t_j=t_0(1-1/T)<t_0$, and the sum of the $2L$ simulation error allocations is $\\epsilon/(4096\\kappa)$. This uses the signed convention in [[lem-qa-26-phase-to-eigenvalue-unwrapping]].\n\n3. Reversibly compute the flag angles and sign from $\\widetilde\\lambda$ using [[def-qa-26-hhl-reciprocal-filter]]. Use the two-qubit computational basis $|q_1q_0\\rangle$ with labels $|\\mathrm{nothing}\\rangle=|00\\rangle$, $|\\mathrm{well}\\rangle=|01\\rangle$, $|\\mathrm{ill}\\rangle=|10\\rangle$, and unused label $|11\\rangle$. Write $p=|f_\\kappa(\\widetilde\\lambda)|$, $r=\\sqrt{1-p^2}$, $\\alpha=2\\arcsin p$, and $\\beta=2\\arcsin(g_\\kappa(\\widetilde\\lambda)/r)$. These are defined at every decoded grid point because [[lem-qa-26-hhl-filter-geometry]] gives $p\\le1/2$, $0\\le g\\le1/2$, and $r\\ge\\sqrt3/2$, so $g/r\\le1/\\sqrt3<1$. First apply $R_y(\\alpha)$ to $q_0$ conditioned on $q_1=0$, acting as identity on the $q_1=1$ subspace. Next apply $R_y(\\beta)$ to $q_1$ conditioned on $q_0=0$, acting as identity on the $q_0=1$ subspace. Here $R_y(\\theta)=\\exp(-i\\theta Y/2)$ with the exact convention and unitary formula of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and [[thm-qc-axis-rotation-pauli-formula]]. Finally apply $D_s=\\operatorname{diag}(1,s,1,1)$ in the ordered flag basis, where $s=-1$ if $\\widetilde\\lambda<0$ and $s=+1$ otherwise (in particular at zero, where $f_\\kappa(0)=0$). The resulting full flag unitary is $D_sG_{02}(\\beta)G_{01}(\\alpha)$: the two conditional rotations act as $R_y$ on the indicated two-label subspaces and as identity on their orthogonal complements, and $D_s$ is diagonal unitary. All three factors fix the unused label $|11\\rangle$. On $|00\\rangle$ the product gives $h(\\widetilde\\lambda)|00\\rangle+f_\\kappa(\\widetilde\\lambda)|01\\rangle+g_\\kappa(\\widetilde\\lambda)|10\\rangle$, since $\\cos(\\beta/2)=h/r$ and $\\sin(\\beta/2)=g/r$. Uncompute the arithmetic. Synthesize the phase-controlled map with uniform operator error at most $\\eta_R:=\\epsilon/(4096\\kappa)$, charged through $C_{\\rm flag}$ and $C_{\\rm arith}$.\n\n4. Reverse the QFT, every actual controlled simulation circuit, and sine preparation, retaining the flag and all simulator work. In clean-workspace mode the ideal trajectory has this work in zero; [[lem-qa-25-clean-subspace-unitary-hybrid]] bounds the complete attempt on that ideal trajectory without assuming actual intermediate work is clean. This gives a unitary flagged preparation $V$ and its exact circuit inverse $V^\\dagger$. Let $\\Pi_{\\rm good}$ be the well-flag projection in Hermitian mode and the product of the well-flag projection and tagged domain projection in rectangular mode; these two projections act on distinct registers and commute. Let $p=\\|\\Pi_{\\rm good}V|0\\rangle\\|^2$. Apply the finite capped amplification procedure proved in [[lem-qa-26-hhl-capped-amplification]] with success projection $\\Pi_{\\rm good}$, lower bound $p_{\\mathrm{low}}=1/(16\\kappa^2)$ and failure target $\\rho$. Its success reflection and verification test both the well flag and the domain tag in rectangular mode; charge their actual costs to $C_{\\rm ref}$ and $C_{\\rm ver}$. Measure $\\{\\Pi_{\\rm good},I-\\Pi_{\\rm good}\\}$ and return the conditional state, tagged output and success bit on success; return FAIL otherwise.\n\nThe circuit uses no uniform-register phase-tail estimate: its phase distribution is the sine-window kernel proved in [[lem-qa-26-hhl-sine-window-kernel-moment]]. Its $G_\\Psi,C_\\Psi,C_{\\rm sim},C_{\\rm QFT}^{+/-},C_{\\rm flag}$, reflection, verification and $B/B^\\dagger$ costs remain separate inputs.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-26-hhl-capped-amplification",
+          "source_section": "Statement",
+          "quote": "Let a unitary flagged preparation $V$ have well probability $p\\ge p_0:=1/(16\\kappa^2)$, $\\kappa\\ge1$, and exact inverse access. Set $K=\\lceil4\\kappa\\rceil$, $R=\\lceil16\\ln(1/\\rho)\\rceil+16$ for $0<\\rho<1$. In each of $R$ fresh rounds, draw $b=\\lceil\\log_2K\\rceil$ uniform bits; reject the round without queries if the resulting integer $j\\ge K$, and otherwise run $j$ amplitude-amplification iterations from $V|0\\rangle$, then verify the well flag. The probability that all rounds fail is at most $\\rho$. The conditional well state in every successful round is the same pure-state ray as the normalized well component of $V|0\\rangle$. The total number of $V,V^\\dagger$ calls is at most $2RK$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-20-simulation-error-and-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional complex inner-product space and let $H=H^*$ be a specified endomorphism. Its exact time-$t$ evolution is $U_H(t)=e^{-itH}$ as defined by [[def-qa-19-finite-matrix-dynamics]]. The notation $\\|T\\|$ denotes the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. The target register's Hilbert space is identified with $V$ as part of the input. A **Hamiltonian simulator at encoded time $t$ and tolerance $0<\\epsilon<1$** is a declared procedure whose output is a unitary $W$ on the stated target register satisfying $\\|W-U_H(t)\\|\\le\\epsilon$. If its circuit uses auxiliary registers, the exact clean or dirty contract of [[def-qc-clean-and-dirty-ancillas]] must make the induced target unitary $W$ well-defined; the error is measured on that target unitary. The scalar time and tolerance have exact finite descriptions under the declared input convention; their description lengths are recorded.\n\nThe resource record lists, separately, the number of calls to each named oracle, controlled calls, inverse calls, elementary gate occurrences, clean and dirty ancillary wires, coefficient bits, full circuit-description bits, and classical generation time. A coordinate not supplied by the access contract is unavailable, not zero. No matrix description supplies a circuit, oracle, controlled call, inverse call, or term exponential for free; uniform-family and cost conventions are those of [[def-qc-uniform-circuit-family]], [[def-qc-circuit-cost-model]], [[def-qc-controlled-unitary-access]], and [[def-qc-inverse-unitary-access]]. No polynomial resource bound is asserted by this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-circuit-cost-model",
+          "source_section": "Definition",
+          "quote": "Fix the finite circuit syntax and its complete self-delimiting binary description ([[def-qc-circuit-syntax-and-register-order]], [[def-effective-binary-encoding-and-decoder]]). For a circuit $C$, let $L(C)$ be the number of bits in that complete description, $g(C)$ its number of gate occurrences, and $w(C)$ its total number of wires.\n\nEach clean or dirty ancilla coordinate additionally requires a declared ordered partition of the circuit wires into data register $D$ and ancilla register $A$, and a declared target unitary $V$ on $D$. In that factor order, the complete circuit unitary must satisfy the corresponding exact contract of [[def-qc-clean-and-dirty-ancillas]]. For such a supplied clean contract set $a_{\\rm clean}(C)=|A|$, and for such a supplied dirty contract set $a_{\\rm dirty}(C)=|A|$; the notation suppresses the declared interface, which is part of the cost instance and may differ between the two coordinates. If no corresponding contract is supplied, mark that coordinate not applicable. These are counts of declared contract registers, not maxima over possible partitions. Zero initialization alone supplies neither return contract. Every auxiliary wire remains counted in $w(C)$ ([[def-qc-elementary-circuit-resources]]).\n\nThe gate sequence and supports determine a finite dependency order: each earlier gate occurrence must precede every later occurrence that acts on a shared wire. A **layering** assigns a positive integer layer to each gate occurrence, strictly increasing along those shared-wire precedence relations. Gates in one layer therefore have pairwise disjoint supports. Define the depth $d(C)$ to be the least number of layers in such a layering; if $C$ has no gates, set $d(C)=0$. If layers are written $L_1,\\ldots,L_d$ in chronological order, the denotation is $U_{L_d}\\cdots U_{L_1}$, as in [[def-qc-circuit-denotational-semantics]].\n\nFor a family $(C_n)$ with a specified full-list generator $G$, let $t_G(n)$ be the worst-case number of Turing-machine transitions used by $G$ on unary input $1^n$. For a total acceptance predicate $A_n(x,z)$, let $t_A(n)$ and $s_A(n)$ be its worst-case deterministic transition count and tape-space use over all valid length-$n$ inputs and measured outputs, using a fixed effective encoding of the pair $(x,z)$. Any effective input description, classical preprocessing, or threshold computation has its own bit length and time/space bounds; these costs are not included in $t_G$ or $t_A$ unless the same machine performs them. The machine conventions are those of [[def-deterministic-one-tape-turing-machine]], [[def-partial-function-computed-by-a-machine]], and [[def-worst-case-time-and-space-complexity]].\n\nIf the access model explicitly supplies a named oracle gate $\\mathcal O$, let $q_{\\mathcal O}(C)$ be the number of calls to it. With several named oracles, record a separate query coordinate for each. Ordinary finite-basis gates, oracle calls, circuit-description length, generator time, and classical bit costs remain separate; no oracle, controlled-oracle, inverse-oracle, or data-loading operation is assigned zero cost unless its interface explicitly says so.\n\nFor an approximate task with declared rational tolerance $0<\\epsilon<1$, let $\\ell(\\epsilon)$ be the bit length of that exact binary-rational encoding. Exact finite-gate computations have no precision field. The **cost record** consists of all applicable coordinates\n$$\\bigl(L(C_n),g(C_n),d(C_n),w(C_n),a_{\\rm clean}(C_n),a_{\\rm dirty}(C_n),t_G(n),t_A(n),s_A(n),q_{\\mathcal O}(C_n),\\epsilon,\\ell(\\epsilon)\\bigr).$$\nAn inapplicable coordinate is marked not applicable, not silently charged as zero. This definition records the resource model; separate theorems establish polynomial bounds.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-26-hhl-access-model",
+          "source_section": "Definition",
+          "quote": "For a Hermitian $H$ on a finite-dimensional register, with operator norm as in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]], the **HHL access instance** supplies: (i) a unitary $B$ with $B|0_{I,W}\\rangle=|b/\\|b\\|\\rangle_I|g_B\\rangle_W$ for a fixed normalized work state $|g_B\\rangle$ (which may be $|0_W\\rangle$) and declared costs for $B,B^\\dagger$ and any controlled forms used; (ii) for every requested real $t$ and tolerance $\\eta$, a controlled simulation circuit $S_H(t,\\eta)$ with operator-norm error at most $\\eta$ from $e^{+iHt}$, and separately declared inverse/negative-time costs; and (iii) separate actual resource functions $C_B,C_{B^\\dagger}$, $C_{\\rm sim}(t,\\eta)$, $C_\\Psi(T,\\epsilon_\\Psi)$ for each forward or inverse sine-table preparation, $G_\\Psi(T,\\epsilon_\\Psi)$ for its one-time classical table generation/data bits, $C_{\\rm QFT}^{+/-}(T)$, $C_{\\rm flag}(\\kappa,\\eta_R)$, $C_{\\rm arith}(T,\\kappa,\\epsilon)$, $C_{\\rm ref}$, and $C_{\\rm ver}$, and costs for reversible arithmetic, registers and finite-precision gate synthesis. Here $C_{\\rm QFT}^{-}$ is the negative-sign Fourier circuit and $C_{\\rm QFT}^{+}$ its positive-sign inverse, $C_{\\rm arith}$ is the per-attempt reversible decode/filter arithmetic cost, and $C_{\\rm ref},C_{\\rm ver}$ are the per-call reflection and well-verification costs. These functions count the stated circuit implementation in the chosen gate/access model; they assert no polylogarithmic bound on table generation or rotation synthesis. The positive exponential sign is the OP5 convention. An implementation of $H$ from matrix entries or a sparse oracle is additional data and must include its own proof and cost. A bare matrix, sparsity promise, or list of amplitudes is not a circuit. A rational scale $\\Lambda\\ge\\|H\\|$ may be supplied; after replacing $H$ by $H/\\Lambda$, the supported gap $\\gamma$ gives $\\kappa=\\Lambda/\\gamma$.\n\n**Clean-workspace simulation mode.** The original full-operator-norm access mode remains admissible. Alternatively, supply a unitary dilation $S$ with a fixed clean-work embedding $J$ and $\\|SJ-Je^{+iHt}\\|_{\\rm op}\\le\\eta$, including arbitrary timing/control/reference registers. The ideal operation leaves this simulator workspace in zero; other ideal HHL operations do not touch it. Actual output work may be dirty. Supply actual circuit inverses and controls and charge their full workspace and query costs. [[lem-qa-25-clean-subspace-unitary-hybrid]] proves the same clean-input error for the actual adjoint, coherent controls and arbitrary references, and proves accumulation along the ideal all-clean trajectory. The inverse used in HHL uncomputation/amplification is the literal reverse physical circuit, not a separately approximated negative-time routine. Include simulator work in the joint output comparison and the ideal all-zero algorithm registers. A full-space error on arbitrary dirty inputs is neither required nor inferred in this alternative mode.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The geometric sum of forward times is $\\sum_{j=0}^{L-1}2^jt_0/T=(T-1)t_0/T<t_0$. The reverse list has the same absolute times, so one $V$ or $V^\\dagger$ call uses less than $2t_0$. By [F2], there are at most $RK$ calls in each direction, giving total absolute time below $4RKt_0$. Since $K\\le5\\kappa$, $R\\le16\\ln(1/\\rho)+17$, and $t_0=2048\\kappa/\\epsilon$, the stated order follows.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $V$ or $V^\\dagger$ circuit contains one forward and one inverse QFT, two sine-table circuits, one flag circuit, and one forward/reverse simulation list by [F1]. Multiplying their actual counts by the separate cost functions in [F3] gives the displayed additive charge; the fixed table $G_\\Psi$ is generated once, and every B, inverse B, reflection, and verifier use is counted in its own coordinate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "HHL cost under direct controlled-simulation access has no empty object as an admissible input; its definition or statement fixes positive finite data.",
+          "evidence": "The statement fixes T>=8(t0+1) with t0>0, so L=log2 T is positive and its phase-simulation sum is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "HHL cost under direct controlled-simulation access contains no zero-valued argument at which its claimed operation becomes undefined; its stated domain covers the relevant inputs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "HHL cost under direct controlled-simulation access has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "HHL cost under direct controlled-simulation access contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "HHL cost under direct controlled-simulation access has no interval or piecewise endpoint separate from the hypotheses in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "HHL cost under direct controlled-simulation access uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "HHL cost under direct controlled-simulation access states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "HHL cost under direct controlled-simulation access states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read both proof steps and all five dependency interfaces. The geometric forward time is (T-1)t0/T<t0; including literal reversed calls gives <2t0 per V or adjoint and <4RKt0 overall. Each call has two sine-table circuits, one QFT each sign, one flag circuit and 2L simulation calls, with B versus B-adjoint charged separately. G_Psi is generated once and the O(Tlog(T/epsilon_Psi)) stored data and T-1 controlled rotations are explicitly charged. Rectangular well/domain verification and reflection use the same declared actual C_ref and C_ver coordinates, without adding a simulation or preparation call. No hidden polylog table or gate claim, no AC."
+      }
+    },
+    "lem-qa-26-postselection-normalization-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-26-hhl-success-amplitude",
+          "source_section": "Statement",
+          "quote": "For the ideal exact-eigenvalue version of [[alg-qa-26-hhl-phase-estimation]], on a normalized $|b\\rangle$ supported on $1/\\kappa\\le|\\lambda|\\le1$, the well-flag vector is $v=(2\\kappa)^{-1}H^+|b\\rangle$. Its probability $p=\\|v\\|^2$ satisfies $1/(4\\kappa^2)\\le p\\le1/4$, and its normalized state is the QLSP target.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the absolute-error alternative, the reverse triangle inequality from [F2] gives $\\|u\\|\\ge\\|v\\|-\\|u-v\\|\\ge(1/2-1/8)/\\kappa=3/(8\\kappa)>0$. Under the relative alternative, $\\|u\\|\\ge(1-9\\epsilon/100)\\|v\\|>0$ because $9\\epsilon/100<1$. Thus both normalizations exist.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Add and subtract $u/\\|v\\|$ and use [F2]: $$\\left\\|\\frac{u}{\\|u\\|}-\\frac{v}{\\|v\\|}\\right\\|\\le\\frac{|\\|v\\|-\\|u\\||}{\\|v\\|}+\\frac{\\|u-v\\|}{\\|v\\|}\\le\\frac{2\\|u-v\\|}{\\|v\\|}.$$ The absolute alternative makes this at most $2(\\epsilon/(8\\kappa))/(1/(2\\kappa))=\\epsilon/2$. The relative alternative makes it at most $18\\epsilon/100<\\epsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Normalization is stable under a small flagged-vector error has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 of Normalization is stable under a small flagged-vector error: u=0 is ruled out by the reverse triangle inequality under either error alternative."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Normalization is stable under a small flagged-vector error has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Normalization is stable under a small flagged-vector error contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 of Normalization is stable under a small flagged-vector error: epsilon=1 still satisfies the strict relative alternative 9epsilon/100<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Normalization is stable under a small flagged-vector error uses no existentially selected nonempty family; all objects are fixed finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Normalization is stable under a small flagged-vector error states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Normalization is stable under a small flagged-vector error states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qa-26-hhl-state-correctness": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-26-hhl-success-amplitude",
+          "source_section": "Statement",
+          "quote": "For the ideal exact-eigenvalue version of [[alg-qa-26-hhl-phase-estimation]], on a normalized $|b\\rangle$ supported on $1/\\kappa\\le|\\lambda|\\le1$, the well-flag vector is $v=(2\\kappa)^{-1}H^+|b\\rangle$. Its probability $p=\\|v\\|^2$ satisfies $1/(4\\kappa^2)\\le p\\le1/4$, and its normalized state is the QLSP target.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-26-hhl-sine-window-kernel-moment",
+          "source_section": "Statement",
+          "quote": "Let $t_0=2048\\kappa/\\epsilon$, $0<\\epsilon\\le1$, $\\kappa\\ge1$, and let $T$ be the least power of two at least $8(t_0+1)$. For any $\\lambda\\in[-1,1]$, prepare [[def-qa-26-hhl-sine-window]], apply the controlled phases $e^{i\\lambda\\tau t_0/T}$ and the negative-sign Fourier transform, then decode $y$ to signed $k$. With probability $p_k(\\lambda)$, put $\\delta_k=\\lambda t_0-2\\pi k$. Then\n$$\\sum_{k=-T/2}^{T/2-1}p_k(\\lambda)\\,\\delta_k^2<300.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-26-hhl-filter-perturbation",
+          "source_section": "Statement",
+          "quote": "Let $\\kappa\\ge1$, $t_0>0$, and $\\lambda,\\delta\\in\\mathbb R$ with $1/\\kappa\\le|\\lambda|\\le1$. Set $\\widetilde\\lambda=\\lambda-\\delta/t_0$. For the well/ill amplitude pair $m(z)=(f_\\kappa(z),g_\\kappa(z))$ from [[def-qa-26-hhl-reciprocal-filter]],\n$$\\|m(\\widetilde\\lambda)-m(\\lambda)\\|_2\\le10\\kappa\\frac{|\\delta|}{t_0}|f_\\kappa(\\lambda)|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-26-hhl-capped-amplification",
+          "source_section": "Statement",
+          "quote": "Let a unitary flagged preparation $V$ have well probability $p\\ge p_0:=1/(16\\kappa^2)$, $\\kappa\\ge1$, and exact inverse access. Set $K=\\lceil4\\kappa\\rceil$, $R=\\lceil16\\ln(1/\\rho)\\rceil+16$ for $0<\\rho<1$. In each of $R$ fresh rounds, draw $b=\\lceil\\log_2K\\rceil$ uniform bits; reject the round without queries if the resulting integer $j\\ge K$, and otherwise run $j$ amplitude-amplification iterations from $V|0\\rangle$, then verify the well flag. The probability that all rounds fail is at most $\\rho$. The conditional well state in every successful round is the same pure-state ray as the normalized well component of $V|0\\rangle$. The total number of $V,V^\\dagger$ calls is at most $2RK$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-qa-26-postselection-normalization-bound",
+          "source_section": "Statement",
+          "quote": "Let $v$ be an ideal flagged vector with $\\|v\\|\\ge1/(2\\kappa)$. If $0<\\epsilon\\le1$ and either $\\|u-v\\|\\le\\epsilon/(8\\kappa)$ or $\\|u-v\\|\\le(9\\epsilon/100)\\|v\\|$, then $u\\ne0$ and $\\|u/\\|u\\|-v/\\|v\\|\\|\\le\\epsilon$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-qa-26-hhl-phase-estimation",
+          "source_section": "Definition",
+          "quote": "Input a self-adjoint $H$ with $\\|H\\|\\le1$, a unit input state $|b\\rangle$ supported only on eigenvalues satisfying $1/\\kappa\\le|\\lambda|\\le1$, and a supplied finite exact representation of the cutoff $\\kappa\\ge1$ that supports certified arithmetic and rational comparisons. Supply costed $B,B^\\dagger$ and controlled/inverse simulation access as in [[def-qa-26-hhl-access-model]]. The accuracy and failure inputs are exact rational values $\\epsilon=p_\\epsilon/q_\\epsilon$ and $\\rho=p_\\rho/q_\\rho$, with positive binary-encoded integers and $0<p_\\epsilon\\le q_\\epsilon$, $0<p_\\rho<q_\\rho$. Rectangular systems $A:\\mathbb C^n\\to\\mathbb C^m$ use [[lem-qa-26-hermitian-dilation]]: choose a supplied rational scale $\\Lambda\\ge\\|H_A\\|$, use $H=H_A/\\Lambda$, and set $\\kappa=\\Lambda/\\gamma$ from the QLSP support gap $\\gamma$. The QLSP definition supplies $\\sigma_j\\ge\\gamma$ whenever the left singular coefficient of $b$ is nonzero; the dilation eigenvalues on this input support are $\\pm\\sigma_j/\\Lambda$, so $1/\\kappa\\le|\\lambda|\\le1$. On $(\\mathbb C^m\\otimes W)\\oplus(\\mathbb C^n\\otimes W)$ prepare the normalized codomain-supported input $(b/\\|b\\|,0)$ with the tagged preparation $B_A:=B\\oplus I_{\\mathbb C^n\\otimes W}$. Implement its $B$ block with the supplied tag-controlled form of $B$ and charge that controlled preparation cost. The QLSP promise $b\\in\\operatorname{ran}(A)$ removes the kernel component, and the output is tagged in the domain summand. All parameter comparisons, reversible arithmetic and finite-precision synthesis use the separately charged routines in the access model. The algorithm is the finite OP5 program:\n\n1. Apply the supplied $B$ (or $B_A$ for a rectangular system) to prepare the input and its fixed work state, set $t_0=2048\\kappa/\\epsilon$, choose the least power of two $T\\ge8(t_0+1)$ by certified comparisons, and let $L=\\log_2T$. Initialize the phase register to $|0^L\\rangle$ in big-endian order $q_{L-1}\\cdots q_0$. This carrier chooses OP5's explicit table variant for preparing [[def-qa-26-hhl-sine-window]]. Build the complete binary prefix tree on the $T$ leaves. At each level $\\ell=0,\\ldots,L-1$ and for each interval node $[a,b)$ at that level, put $m=(a+b)/2$ and compute the child masses $W_T(a,m)$ and $W_T(m,b)$ from the formula in [[lem-qa-26-hhl-sine-window-prefix-masses]]. Store $r=W_T(a,m)/W_T(a,b)$ and apply $R_y(2\\arcsin\\sqrt r)$ to wire $q_{L-1-\\ell}$, controlled on the preceding $\\ell$ wires matching the path to $[a,b)$; encode bit $1$ as the left child and bit $0$ as the right child. The root has no controls. Thus the ideal circuit prepares $|\\Psi_T\\rangle$ by [[lem-qa-26-hhl-prefix-table-synthesis-error]]. Put $\\epsilon_\\Psi=\\epsilon/(4096\\kappa)$. Each nonempty mass is at least $T^{-2}$ by [[lem-qa-26-hhl-sine-window-prefix-masses]]. Use certified interval arithmetic with absolute mass error at most $\\epsilon_\\Psi^2/(10^6L^2T^4)$; refine until each stored angle and its finite gate synthesis together give controlled-rotation operator error at most $\\epsilon_\\Psi/(100T)$. The cases $r=0$ and $r=1$ use the identity and $\\pi$ rotations, respectively. Store each other angle with at least $\\lceil\\log_2(100\\pi T/\\epsilon_\\Psi)\\rceil+2$ bits. There are $T-1$ rotations; [[lem-qa-26-hhl-prefix-table-synthesis-error]] bounds their total operator error by $\\epsilon_\\Psi/100$ from the displayed combined per-node operator tolerance. The table contains $O(T\\log(T/\\epsilon_\\Psi))$ bits and $T-1$ controlled rotations. Charge its one-time construction/data cost $G_\\Psi(T,\\epsilon_\\Psi)$ and each forward/inverse preparation cost $C_\\Psi(T,\\epsilon_\\Psi)$ from [[def-qa-26-hhl-access-model]], including reversible lookup, control and finite gate synthesis. Thus the sine-preparation unitary and its inverse each have operator error at most $\\epsilon_\\Psi$; this variant pays linear-in-$T$ table and rotation resources rather than assuming a loaded amplitude table.\n\n2. In either the original full-space or alternative clean-workspace simulation mode, initialize all simulator work in zero and retain it coherently. For $j=0,\\ldots,L-1$, set $t_j=2^jt_0/T$ and allocate $\\eta_j=\\epsilon/(8192\\kappa L)$ to both its forward controlled call $S_H(t_j,\\eta_j)$ and its reverse call. Apply $S_H(t_j,\\eta_j)$ to the system controlled on wire $q_j$ being $1$, and act as identity on its $0$ branch. In the declared order $q_{L-1}\\cdots q_0$, a phase label $\\tau$ has bits $x_j$ with $\\tau=\\sum_{j=0}^{L-1}2^jx_j$, so the ideal controlled list applies $e^{+iH\\tau t_0/T}$. Apply the negative-sign QFT, decode $y$ to signed $k=y$ for $y<T/2$ and $k=y-T$ otherwise, and set $\\widetilde\\lambda=2\\pi k/t_0$. The total forward evolution time is $\\sum_{j<L}t_j=t_0(1-1/T)<t_0$, and the sum of the $2L$ simulation error allocations is $\\epsilon/(4096\\kappa)$. This uses the signed convention in [[lem-qa-26-phase-to-eigenvalue-unwrapping]].\n\n3. Reversibly compute the flag angles and sign from $\\widetilde\\lambda$ using [[def-qa-26-hhl-reciprocal-filter]]. Use the two-qubit computational basis $|q_1q_0\\rangle$ with labels $|\\mathrm{nothing}\\rangle=|00\\rangle$, $|\\mathrm{well}\\rangle=|01\\rangle$, $|\\mathrm{ill}\\rangle=|10\\rangle$, and unused label $|11\\rangle$. Write $p=|f_\\kappa(\\widetilde\\lambda)|$, $r=\\sqrt{1-p^2}$, $\\alpha=2\\arcsin p$, and $\\beta=2\\arcsin(g_\\kappa(\\widetilde\\lambda)/r)$. These are defined at every decoded grid point because [[lem-qa-26-hhl-filter-geometry]] gives $p\\le1/2$, $0\\le g\\le1/2$, and $r\\ge\\sqrt3/2$, so $g/r\\le1/\\sqrt3<1$. First apply $R_y(\\alpha)$ to $q_0$ conditioned on $q_1=0$, acting as identity on the $q_1=1$ subspace. Next apply $R_y(\\beta)$ to $q_1$ conditioned on $q_0=0$, acting as identity on the $q_0=1$ subspace. Here $R_y(\\theta)=\\exp(-i\\theta Y/2)$ with the exact convention and unitary formula of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and [[thm-qc-axis-rotation-pauli-formula]]. Finally apply $D_s=\\operatorname{diag}(1,s,1,1)$ in the ordered flag basis, where $s=-1$ if $\\widetilde\\lambda<0$ and $s=+1$ otherwise (in particular at zero, where $f_\\kappa(0)=0$). The resulting full flag unitary is $D_sG_{02}(\\beta)G_{01}(\\alpha)$: the two conditional rotations act as $R_y$ on the indicated two-label subspaces and as identity on their orthogonal complements, and $D_s$ is diagonal unitary. All three factors fix the unused label $|11\\rangle$. On $|00\\rangle$ the product gives $h(\\widetilde\\lambda)|00\\rangle+f_\\kappa(\\widetilde\\lambda)|01\\rangle+g_\\kappa(\\widetilde\\lambda)|10\\rangle$, since $\\cos(\\beta/2)=h/r$ and $\\sin(\\beta/2)=g/r$. Uncompute the arithmetic. Synthesize the phase-controlled map with uniform operator error at most $\\eta_R:=\\epsilon/(4096\\kappa)$, charged through $C_{\\rm flag}$ and $C_{\\rm arith}$.\n\n4. Reverse the QFT, every actual controlled simulation circuit, and sine preparation, retaining the flag and all simulator work. In clean-workspace mode the ideal trajectory has this work in zero; [[lem-qa-25-clean-subspace-unitary-hybrid]] bounds the complete attempt on that ideal trajectory without assuming actual intermediate work is clean. This gives a unitary flagged preparation $V$ and its exact circuit inverse $V^\\dagger$. Let $\\Pi_{\\rm good}$ be the well-flag projection in Hermitian mode and the product of the well-flag projection and tagged domain projection in rectangular mode; these two projections act on distinct registers and commute. Let $p=\\|\\Pi_{\\rm good}V|0\\rangle\\|^2$. Apply the finite capped amplification procedure proved in [[lem-qa-26-hhl-capped-amplification]] with success projection $\\Pi_{\\rm good}$, lower bound $p_{\\mathrm{low}}=1/(16\\kappa^2)$ and failure target $\\rho$. Its success reflection and verification test both the well flag and the domain tag in rectangular mode; charge their actual costs to $C_{\\rm ref}$ and $C_{\\rm ver}$. Measure $\\{\\Pi_{\\rm good},I-\\Pi_{\\rm good}\\}$ and return the conditional state, tagged output and success bit on success; return FAIL otherwise.\n\nThe circuit uses no uniform-register phase-tail estimate: its phase distribution is the sine-window kernel proved in [[lem-qa-26-hhl-sine-window-kernel-moment]]. Its $G_\\Psi,C_\\Psi,C_{\\rm sim},C_{\\rm QFT}^{+/-},C_{\\rm flag}$, reflection, verification and $B/B^\\dagger$ costs remain separate inputs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qa-26-hhl-prefix-table-synthesis-error",
+          "source_section": "Statement",
+          "quote": "Let $T=2^L\\ge2$, and let $W_T(a,b)$ and $|\\Psi_T\\rangle$ be as in [[def-qa-26-hhl-sine-window]]. In the binary prefix tree, order the register bits from root to leaf. At level $\\ell=0,\\ldots,L-1$, each interval node $[a,b)$ has midpoint $m=(a+b)/2$ and split $r=W_T(a,m)/W_T(a,b)$. Apply $R_y(2\\arcsin\\sqrt r)$ to the next bit, controlled on the preceding prefix that names $[a,b)$, encoding bit $1$ as the left child and bit $0$ as the right child. Starting from $|0^L\\rangle$, this ideal prefix circuit prepares $|\\Psi_T\\rangle$. If a finite state-preparation circuit contains $N$ controlled $Y$ rotations and each implemented rotation differs from its ideal rotation by operator norm at most $\\delta$, the product unitary differs from the ideal product by operator norm at most $N\\delta$. In the OP5 table variant let $\\epsilon_\\Psi>0$, $N=T-1$ and $\\delta=\\epsilon_\\Psi/(100T)$, so the preparation error is less than $\\epsilon_\\Psi/100$; using the same bound for its inverse gives the stated unpreparation cost.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qa-25-clean-subspace-unitary-hybrid",
+          "source_section": "Statement",
+          "quote": "Let $J:H\\to K$ be an isometry of nonzero finite-dimensional complex Hilbert spaces, $V$ a unitary on $H$, and $U$ a unitary on $K$. If $\\|UJ-JV\\|_{\\rm op}\\le\\eta$, then $\\|U^*J-JV^*\\|_{\\rm op}\\le\\eta$. The same inequalities hold after adjoining an arbitrary finite reference space or coherently controlling $U$ and $V$ against identity.\n\nMore generally, let $U_1,\\ldots,U_s$ be actual unitaries on $K$ and $V_1,\\ldots,V_s$ ideal unitaries on $H$, with $\\|U_jJ-JV_j\\|_{\\rm op}\\le\\eta_j$. Then\n$$\\|U_s\\cdots U_1J-JV_s\\cdots V_1\\|_{\\rm op}\\le\\sum_{j=1}^s\\eta_j.$$\nThe empty products give zero error. Each bound concerns the clean input subspace $\\operatorname{ran}J$; none assumes that an actual intermediate state belongs to that subspace or claims a full-space approximation on arbitrary dirty-work inputs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qa-26-hermitian-dilation",
+          "source_section": "Statement",
+          "quote": "For $A:\\mathbb C^n\\to\\mathbb C^m$, define $H_A:\\mathbb C^m\\oplus\\mathbb C^n\\to\\mathbb C^m\\oplus\\mathbb C^n$ using the adjoint $A^*$ of [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] by $H_A(x,y)=(Ay,A^*x)$. Then $H_A$ is Hermitian; its nonzero eigenvalues are $+\\sigma_j,-\\sigma_j$ for the positive singular values of $A$, its kernel is $\\ker(A^*)\\oplus\\ker(A)$, and $H_A^+(b,0)=(0,A^+b)$. When $A$ has positive rank, its nonzero condition number is preserved; the output is tagged in the domain summand.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First take the exact sine preparation, exact simulations and exact flag rotation. Before reversing phase estimation, different decoded labels are orthogonal. For a fixed eigenvalue $\\lambda$, the well-flag projection keeps only the $f_\\kappa$ coordinate, so the squared error is $$\\sum_y p_y(\\lambda)\\,|f_\\kappa(\\widetilde\\lambda_y)-f_\\kappa(\\lambda)|^2\\le\\sum_y p_y(\\lambda)\\,\\|m(\\widetilde\\lambda_y)-m(\\lambda)\\|_2^2.$$ By [F2] and [F3], this is at most $(10\\kappa/t_0)^2\\,300\\,|f_\\kappa(\\lambda)|^2$. Summing with the eigenbasis weights shows that the exact-kernel well vector differs from $v$ by at most $(10\\sqrt{300}\\kappa/t_0)\\|v\\|$. Reversing the phase transform is unitary and preserves this norm bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replacing the exact preparation, simulations and flag map by their implementations changes the attempt on its clean initial input by at most the sum of their norm errors. In the full-space mode this is ordinary unitary telescoping; in the clean-workspace mode [F7] applies because all ideal other gates leave simulator work untouched and ideal simulations return it to zero. The actual intermediate work need not be clean. In either mode the sum consists of two sine-table preparation uses, the total forward/reverse simulation budget, and one flag map, at most $4\\epsilon/(4096\\kappa)$. The success projection is contractive and fixes $v$: in rectangular mode this follows from [F8], and otherwise it is just the well flag. Applying it to both the exact-kernel comparison and the implementation error therefore gives $$\\frac{\\|u-v\\|}{\\|v\\|}\\le\\frac{10\\sqrt{300}\\kappa}{t_0}+\\frac{4\\epsilon/(4096\\kappa)}{1/(2\\kappa)}<\\left(\\frac{180}{2048}+\\frac{1}{512}\\right)\\epsilon<0.09\\epsilon=:q,$$ using $t_0=2048\\kappa/\\epsilon$ and $\\sqrt{300}<18$. Hence $\\|u\\|\\ge(1-q)\\|v\\|>1/(4\\kappa)$ and the implemented well probability exceeds $1/(16\\kappa^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact filter on supported eigenvalues is $v=(2\\kappa)^{-1}H^+|b\\rangle$, so $v/\\|v\\|$ is the target. The normalization inequality in [L1] applies because step 2.1 gives relative error below $0.09\\epsilon$: directly, $\\|u/\\|u\\|-v/\\|v\\|\\|\\le2q/(1-q)<\\epsilon$. By [F4], every successful amplified branch is the same ray as $u/\\|u\\|$; choose the representative $u/\\|u\\|$ to obtain the stated distance. The preparation work factors as $|g_B\\rangle$ and is untouched by the HHL circuit; the ideal uncomputation leaves the other algorithmic registers zero and the measured flag in $|\\mathrm{well}\\rangle$. Tensoring these unit vectors does not change any norm above. For a rectangular map with $H=H_A/\\Lambda$ and $\\Lambda>0$, [[lem-qa-26-hermitian-dilation]] gives $H_A^+(b,0)=(0,A^+b)$; the singular values of the scaled dilation are $\\sigma_j/\\Lambda$, so $H^+(b,0)=\\Lambda(0,A^+b)$. This positive scalar cancels on normalization, leaving the ideal QLSP ray in the tagged domain summand. The actual successful vector $u$ also lies in that summand because $\\Pi_{\\rm good}$ includes its domain projection. Tracing out work gives the corresponding output density state.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F8",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The OP5 input is a normalized supported state; an empty supported eigenspace cannot supply it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves ||v||>=1/(2kappa) and ||u||>1/(4kappa), so step 3.1 never normalizes zero; padded zero eigenvalues have no input weight."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The OP5 kappa>=1 promise includes kappa=1; the lower norms and relative-error estimate in step 2.1 remain positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats rectangular Hermitian dilation and retains preparation work; repeated supported eigenvalues do not change the scalar filter estimate in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1 include |lambda|=1/kappa and epsilon=1; rho is strictly between zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The supported input, implementations and precision allocations are supplied; the unit ray representative in step 3.1 is explicitly u/||u||."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is HHL normalized conditional joint-state correctness; it asserts no biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is HHL normalized conditional joint-state correctness; it asserts no biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read all three steps and twelve dependency interfaces, including the full clean-subspace hybrid proof. Exact kernel plus relative filter bound gives 10sqrt(300)*kappa/t0 times ||v||. Sine forward/inverse, simulation forward/reverse sum and flag map contribute <=4epsilon/(4096kappa); ||v||>=1/(2kappa) yields relative error <(180/2048+1/512)epsilon<0.09epsilon. The new success projector fixes ideal v (domain identity from dilation) and contracts both errors, so ||u||>1/(4kappa), normalized error <epsilon and capped failure<=rho. Good-ray invariance applies to the full joint success subspace, not a reduced mixed state. Positive scaling Lambda cancels on normalization. Clean-work errors accumulate on the ideal trajectory without assuming actual work stays clean. Includes singular rectangular matrices with range-supported nonzero input, both signs, exact support endpoints, and all allocated error sources. No AC. Step-5 local interface check: OP5 now accepts the exact rational endpoint epsilon=1; its relative-error estimate remains below 0.09epsilon, so no theorem carrier change is necessary. This checks the supplier repair, not an independent acceptance of it."
+      }
+    },
+    "thm-qa-26-hhl-query-cost": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-25-sorted-xor-sparse-access-isometries",
+          "source_section": "Statement",
+          "quote": "Let $H$ have the exact sorted $d$-sparse Hermitian XOR-location/value interface of [[def-qa-20-sparse-hamiltonian-oracle-model]], with $N,d\\ge1$. An optional support-list variant is also admissible: each row lists at most $d$ distinct columns in strictly increasing order, contains every nonzero column exactly once, and may additionally list zero-valued columns. Its row and column support lists agree under transposition; in the Hermitian case the row list at $j$ supplies the column list at $j$. The total XOR value oracle gives the exact decoded matrix, including any listed zeros. Missing slots use the same distinguished sentinel. No zero test on the matrix values is needed to form a supplied support union. An approximation to a different target matrix requires a separate operator-error bound. Put $M=2^{\\lceil\\log_2(N+d)\\rceil}$ and $\\widetilde H=H\\oplus0$ on the $M$-label register. Given a positive certified bound $h\\ge\\max_{i,j}|H_{ij}|$, an exact costed preparation $d^{-1/2}\\sum_{l<d}|l\\rangle$, and costed exact value-decoding and flag-rotation arithmetic, one can construct a unitary whose clean block is $\\widetilde H/(dh)$. It and its actual adjoint and coherent controlled versions use $O(\\log(d+1))$ QA20 location calls and $O(1)$ value calls each. Index bits, reversible workspace, search arithmetic, comparisons, uniform preparation, flags and gate precision remain separately charged. In particular $h=1$ is admissible when $\\|H\\|_{\\rm op}\\le1$, without computing the global maximum entry. The stronger separately supplied in-place-location interface keeps its original constant location-call count.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-25-qubitized-simulation-resource-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\tau=\\alpha|t|$ and $L=\\ln(1/\\epsilon)$, with $0<\\epsilon<1$. In the nontrivial branch $\\tau>\\epsilon$, put $S=\\tau+L/\\ln(e+L/\\tau)$. The small-time-aware simulator of [[alg-qa-25-small-time-aware-simulator]] uses zero signal queries when $\\tau\\le\\epsilon$. When $\\tau>\\epsilon$, the OP4 degree satisfies $d=O(S)$. The complete OAA circuit uses at most $3(d_E+d_O)\\le6d$ ordinary $U/U^*$ signal calls, where $d_E,d_O\\le d$ are the even and odd QSP degrees. It uses $3(d_E+d_O+2)$ projector-phase slots and therefore $6(d_E+d_O+2)$ controlled-reflection calls, by [[thm-qa-24-qsvt-query-count]]. Coherent selection of each real sequence against identity uses exactly one controlled signal call when that sequence degree is odd and none when it is even; because the selection occurs in each of the three OAA blocks $W,W^*,W$, the total is $3(\\mathbf1_{d_E\\text{ odd}}+\\mathbf1_{d_O\\text{ odd}})\\le6$ controlled signal calls. The $\\Phi/-\\Phi$ branch itself controls phases, not signal calls. Any external control of the complete simulator controls and charges the whole block.\n\nGate, depth, width, ancilla, classical bit, precision, PREPARE/SELECT, phase-list-generation, and sparse-location/value costs remain separate coordinates. For a $d_H$-row-sparse input with supplied-permutation bound $h\\ge h_{\\max}$, the $h=0$ branch encodes $H=0$ with normalization $1$ and uses no location or value calls. If $h>0$, [[thm-qa-25-sparse-hamiltonian-block-encoding-correctness]] gives normalization $\\alpha=d_Hh$; choosing the tight bound $h=h_{\\max}$ gives $\\alpha=d_Hh_{\\max}$. Multiply the signal-query count by the actual supplied sparse-encoding cost, including any location-permutation completion. The optional sorted-XOR mode has the same normalization $d_Hh$ for a supplied positive entry bound $h$ and multiplies the signal count by $O(\\log(d_H+1))$ location calls and $O(1)$ value calls per signal, including inverses and coherent controls. No cost-free conversion from XOR row-location access is claimed. If $\\tau$ is bounded above and below by positive constants as $\\epsilon\\to0$, the query bound specializes to $O(\\tau+L/\\ln L)=O(\\tau+\\ln(1/\\epsilon)/\\ln\\ln(1/\\epsilon))$. This is an upper bound; no matching lower bound for arbitrary block-encoding access or for the additive precision term is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-25-small-time-aware-simulator-correctness",
+          "source_section": "Statement",
+          "quote": "For every promised input of [[alg-qa-25-small-time-aware-simulator]], a successful output satisfies the clean-input isometry error bound $\\|V_{\\rm impl}J_{\\rm clean}-J_{\\rm out}e^{-itH}\\|_{\\rm op}\\le\\epsilon$. It also satisfies the corresponding reference-system trace-distance bound after tracing the work registers.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-25-clean-subspace-unitary-hybrid",
+          "source_section": "Statement",
+          "quote": "Let $J:H\\to K$ be an isometry of nonzero finite-dimensional complex Hilbert spaces, $V$ a unitary on $H$, and $U$ a unitary on $K$. If $\\|UJ-JV\\|_{\\rm op}\\le\\eta$, then $\\|U^*J-JV^*\\|_{\\rm op}\\le\\eta$. The same inequalities hold after adjoining an arbitrary finite reference space or coherently controlling $U$ and $V$ against identity.\n\nMore generally, let $U_1,\\ldots,U_s$ be actual unitaries on $K$ and $V_1,\\ldots,V_s$ ideal unitaries on $H$, with $\\|U_jJ-JV_j\\|_{\\rm op}\\le\\eta_j$. Then\n$$\\|U_s\\cdots U_1J-JV_s\\cdots V_1\\|_{\\rm op}\\le\\sum_{j=1}^s\\eta_j.$$\nThe empty products give zero error. Each bound concerns the clean input subspace $\\operatorname{ran}J$; none assumes that an actual intermediate state belongs to that subspace or claims a full-space approximation on arbitrary dirty-work inputs.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-qa-26-hhl-phase-estimation",
+          "source_section": "Definition",
+          "quote": "Input a self-adjoint $H$ with $\\|H\\|\\le1$, a unit input state $|b\\rangle$ supported only on eigenvalues satisfying $1/\\kappa\\le|\\lambda|\\le1$, and a supplied finite exact representation of the cutoff $\\kappa\\ge1$ that supports certified arithmetic and rational comparisons. Supply costed $B,B^\\dagger$ and controlled/inverse simulation access as in [[def-qa-26-hhl-access-model]]. The accuracy and failure inputs are exact rational values $\\epsilon=p_\\epsilon/q_\\epsilon$ and $\\rho=p_\\rho/q_\\rho$, with positive binary-encoded integers and $0<p_\\epsilon\\le q_\\epsilon$, $0<p_\\rho<q_\\rho$. Rectangular systems $A:\\mathbb C^n\\to\\mathbb C^m$ use [[lem-qa-26-hermitian-dilation]]: choose a supplied rational scale $\\Lambda\\ge\\|H_A\\|$, use $H=H_A/\\Lambda$, and set $\\kappa=\\Lambda/\\gamma$ from the QLSP support gap $\\gamma$. The QLSP definition supplies $\\sigma_j\\ge\\gamma$ whenever the left singular coefficient of $b$ is nonzero; the dilation eigenvalues on this input support are $\\pm\\sigma_j/\\Lambda$, so $1/\\kappa\\le|\\lambda|\\le1$. On $(\\mathbb C^m\\otimes W)\\oplus(\\mathbb C^n\\otimes W)$ prepare the normalized codomain-supported input $(b/\\|b\\|,0)$ with the tagged preparation $B_A:=B\\oplus I_{\\mathbb C^n\\otimes W}$. Implement its $B$ block with the supplied tag-controlled form of $B$ and charge that controlled preparation cost. The QLSP promise $b\\in\\operatorname{ran}(A)$ removes the kernel component, and the output is tagged in the domain summand. All parameter comparisons, reversible arithmetic and finite-precision synthesis use the separately charged routines in the access model. The algorithm is the finite OP5 program:\n\n1. Apply the supplied $B$ (or $B_A$ for a rectangular system) to prepare the input and its fixed work state, set $t_0=2048\\kappa/\\epsilon$, choose the least power of two $T\\ge8(t_0+1)$ by certified comparisons, and let $L=\\log_2T$. Initialize the phase register to $|0^L\\rangle$ in big-endian order $q_{L-1}\\cdots q_0$. This carrier chooses OP5's explicit table variant for preparing [[def-qa-26-hhl-sine-window]]. Build the complete binary prefix tree on the $T$ leaves. At each level $\\ell=0,\\ldots,L-1$ and for each interval node $[a,b)$ at that level, put $m=(a+b)/2$ and compute the child masses $W_T(a,m)$ and $W_T(m,b)$ from the formula in [[lem-qa-26-hhl-sine-window-prefix-masses]]. Store $r=W_T(a,m)/W_T(a,b)$ and apply $R_y(2\\arcsin\\sqrt r)$ to wire $q_{L-1-\\ell}$, controlled on the preceding $\\ell$ wires matching the path to $[a,b)$; encode bit $1$ as the left child and bit $0$ as the right child. The root has no controls. Thus the ideal circuit prepares $|\\Psi_T\\rangle$ by [[lem-qa-26-hhl-prefix-table-synthesis-error]]. Put $\\epsilon_\\Psi=\\epsilon/(4096\\kappa)$. Each nonempty mass is at least $T^{-2}$ by [[lem-qa-26-hhl-sine-window-prefix-masses]]. Use certified interval arithmetic with absolute mass error at most $\\epsilon_\\Psi^2/(10^6L^2T^4)$; refine until each stored angle and its finite gate synthesis together give controlled-rotation operator error at most $\\epsilon_\\Psi/(100T)$. The cases $r=0$ and $r=1$ use the identity and $\\pi$ rotations, respectively. Store each other angle with at least $\\lceil\\log_2(100\\pi T/\\epsilon_\\Psi)\\rceil+2$ bits. There are $T-1$ rotations; [[lem-qa-26-hhl-prefix-table-synthesis-error]] bounds their total operator error by $\\epsilon_\\Psi/100$ from the displayed combined per-node operator tolerance. The table contains $O(T\\log(T/\\epsilon_\\Psi))$ bits and $T-1$ controlled rotations. Charge its one-time construction/data cost $G_\\Psi(T,\\epsilon_\\Psi)$ and each forward/inverse preparation cost $C_\\Psi(T,\\epsilon_\\Psi)$ from [[def-qa-26-hhl-access-model]], including reversible lookup, control and finite gate synthesis. Thus the sine-preparation unitary and its inverse each have operator error at most $\\epsilon_\\Psi$; this variant pays linear-in-$T$ table and rotation resources rather than assuming a loaded amplitude table.\n\n2. In either the original full-space or alternative clean-workspace simulation mode, initialize all simulator work in zero and retain it coherently. For $j=0,\\ldots,L-1$, set $t_j=2^jt_0/T$ and allocate $\\eta_j=\\epsilon/(8192\\kappa L)$ to both its forward controlled call $S_H(t_j,\\eta_j)$ and its reverse call. Apply $S_H(t_j,\\eta_j)$ to the system controlled on wire $q_j$ being $1$, and act as identity on its $0$ branch. In the declared order $q_{L-1}\\cdots q_0$, a phase label $\\tau$ has bits $x_j$ with $\\tau=\\sum_{j=0}^{L-1}2^jx_j$, so the ideal controlled list applies $e^{+iH\\tau t_0/T}$. Apply the negative-sign QFT, decode $y$ to signed $k=y$ for $y<T/2$ and $k=y-T$ otherwise, and set $\\widetilde\\lambda=2\\pi k/t_0$. The total forward evolution time is $\\sum_{j<L}t_j=t_0(1-1/T)<t_0$, and the sum of the $2L$ simulation error allocations is $\\epsilon/(4096\\kappa)$. This uses the signed convention in [[lem-qa-26-phase-to-eigenvalue-unwrapping]].\n\n3. Reversibly compute the flag angles and sign from $\\widetilde\\lambda$ using [[def-qa-26-hhl-reciprocal-filter]]. Use the two-qubit computational basis $|q_1q_0\\rangle$ with labels $|\\mathrm{nothing}\\rangle=|00\\rangle$, $|\\mathrm{well}\\rangle=|01\\rangle$, $|\\mathrm{ill}\\rangle=|10\\rangle$, and unused label $|11\\rangle$. Write $p=|f_\\kappa(\\widetilde\\lambda)|$, $r=\\sqrt{1-p^2}$, $\\alpha=2\\arcsin p$, and $\\beta=2\\arcsin(g_\\kappa(\\widetilde\\lambda)/r)$. These are defined at every decoded grid point because [[lem-qa-26-hhl-filter-geometry]] gives $p\\le1/2$, $0\\le g\\le1/2$, and $r\\ge\\sqrt3/2$, so $g/r\\le1/\\sqrt3<1$. First apply $R_y(\\alpha)$ to $q_0$ conditioned on $q_1=0$, acting as identity on the $q_1=1$ subspace. Next apply $R_y(\\beta)$ to $q_1$ conditioned on $q_0=0$, acting as identity on the $q_0=1$ subspace. Here $R_y(\\theta)=\\exp(-i\\theta Y/2)$ with the exact convention and unitary formula of [[def-qc-one-qubit-gate-alphabet-and-rotations]] and [[thm-qc-axis-rotation-pauli-formula]]. Finally apply $D_s=\\operatorname{diag}(1,s,1,1)$ in the ordered flag basis, where $s=-1$ if $\\widetilde\\lambda<0$ and $s=+1$ otherwise (in particular at zero, where $f_\\kappa(0)=0$). The resulting full flag unitary is $D_sG_{02}(\\beta)G_{01}(\\alpha)$: the two conditional rotations act as $R_y$ on the indicated two-label subspaces and as identity on their orthogonal complements, and $D_s$ is diagonal unitary. All three factors fix the unused label $|11\\rangle$. On $|00\\rangle$ the product gives $h(\\widetilde\\lambda)|00\\rangle+f_\\kappa(\\widetilde\\lambda)|01\\rangle+g_\\kappa(\\widetilde\\lambda)|10\\rangle$, since $\\cos(\\beta/2)=h/r$ and $\\sin(\\beta/2)=g/r$. Uncompute the arithmetic. Synthesize the phase-controlled map with uniform operator error at most $\\eta_R:=\\epsilon/(4096\\kappa)$, charged through $C_{\\rm flag}$ and $C_{\\rm arith}$.\n\n4. Reverse the QFT, every actual controlled simulation circuit, and sine preparation, retaining the flag and all simulator work. In clean-workspace mode the ideal trajectory has this work in zero; [[lem-qa-25-clean-subspace-unitary-hybrid]] bounds the complete attempt on that ideal trajectory without assuming actual intermediate work is clean. This gives a unitary flagged preparation $V$ and its exact circuit inverse $V^\\dagger$. Let $\\Pi_{\\rm good}$ be the well-flag projection in Hermitian mode and the product of the well-flag projection and tagged domain projection in rectangular mode; these two projections act on distinct registers and commute. Let $p=\\|\\Pi_{\\rm good}V|0\\rangle\\|^2$. Apply the finite capped amplification procedure proved in [[lem-qa-26-hhl-capped-amplification]] with success projection $\\Pi_{\\rm good}$, lower bound $p_{\\mathrm{low}}=1/(16\\kappa^2)$ and failure target $\\rho$. Its success reflection and verification test both the well flag and the domain tag in rectangular mode; charge their actual costs to $C_{\\rm ref}$ and $C_{\\rm ver}$. Measure $\\{\\Pi_{\\rm good},I-\\Pi_{\\rm good}\\}$ and return the conditional state, tagged output and success bit on success; return FAIL otherwise.\n\nThe circuit uses no uniform-register phase-tail estimate: its phase distribution is the sine-window kernel proved in [[lem-qa-26-hhl-sine-window-kernel-moment]]. Its $G_\\Psi,C_\\Psi,C_{\\rm sim},C_{\\rm QFT}^{+/-},C_{\\rm flag}$, reflection, verification and $B/B^\\dagger$ costs remain separate inputs.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qa-26-hhl-simulator-cost",
+          "source_section": "Statement",
+          "quote": "Let $L=\\log_2T$, $t_j=2^jt_0/T$, $K=\\lceil4\\kappa\\rceil$, and $R=\\lceil16\\ln(1/\\rho)\\rceil+16$. The capped HHL circuit uses at most $RK$ calls to each of $V$ and $V^\\dagger$, at most $RK$ calls to each supplied preparation form (the tagged $B_A$ in dilation mode) and its inverse, and one table construction $G_\\Psi(T,\\epsilon_\\Psi)$. Each $V$ or $V^\\dagger$ contains two sine-table preparation/unpreparation circuits, one forward and one inverse QFT, the flag circuit, and $2L$ controlled simulation calls at signed times $\\pm t_j$; its absolute evolution times sum to less than $2t_0$. Therefore the total absolute simulation time is less than $4RKt_0=O(\\kappa^2\\epsilon^{-1}(1+\\log(1/\\rho)))$. More precisely, the simulation charge is the actual sum over all $V,V^\\dagger$ calls of $\\sum_{j<L}(C_{\\rm sim}(t_j,\\eta_j)+C_{\\rm sim}(-t_j,\\eta_j))$. The remaining charge is\n$$G_\\Psi(T,\\epsilon_\\Psi)+n_VC_B+n_{V^\\dagger}C_{B^\\dagger}+2(n_V+n_{V^\\dagger})C_\\Psi(T,\\epsilon_\\Psi)+(n_V+n_{V^\\dagger})(C_{\\rm QFT}^{+}(T)+C_{\\rm QFT}^{-}(T)+C_{\\rm flag}(\\kappa,\\eta_R)+C_{\\rm arith}(T,\\kappa,\\epsilon))+N_{\\rm ref}C_{\\rm ref}+N_{\\rm ver}C_{\\rm ver},$$\nwhere $n_V,n_{V^\\dagger}\\le RK$ and $N_{\\rm ref},N_{\\rm ver}$ are the actual reflection and verification counts. The table itself has $O(T\\log(T/\\epsilon_\\Psi))$ data bits and $T-1$ controlled rotations; no polylogarithmic table-generation or finite-rotation synthesis bound is asserted.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qa-26-hhl-state-correctness",
+          "source_section": "Statement",
+          "quote": "Under the promises and precision allocations in [[alg-qa-26-hhl-phase-estimation]], let $u=\\Pi_{\\rm good}V|0\\rangle$ be the actual joint success vector for one prepared attempt, where rectangular-mode success includes the domain-tag projection. Write $v_{\\rm sys}=(2\\kappa)^{-1}H^+|b\\rangle$ and $v=v_{\\rm sys}\\otimes|g_B\\rangle\\otimes|0_{\\rm alg}\\rangle\\otimes|\\mathrm{well}\\rangle$ for the ideal joint vector, including the unchanged preparation work and clean algorithmic registers. For $0<\\epsilon\\le1$ and $0<\\rho<1$, the conditional returned joint pure-state ray (including unchanged preparation work) has a unit representative within vector norm $\\epsilon$ of the normalized QLSP target tensored with the preparation work, clean algorithmic registers and well flag, and the capped amplification returns FAIL with probability at most $\\rho$. The same assertion holds for the Hermitian dilation, with the output in its tagged domain summand.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qa-19-matrix-exponential-unitary-properties",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a self-adjoint endomorphism of a finite-dimensional complex\ninner-product space $V$. For real $t,s$, the evolution from\n[[def-qa-19-finite-matrix-dynamics]] satisfies\n$$U_H(0)=I_V,\\qquad U_H(t)^*U_H(t)=I_V,\\qquad U_H(t+s)=U_H(t)U_H(s),\\qquad \\frac{d}{dt}U_H(t)=-iHU_H(t).$$\nMoreover, $U_H$ is the unique differentiable map $Y:\\mathbb R\\to\n\\operatorname{End}(V)$ satisfying $Y'(t)=-iHY(t)$ and $Y(0)=I_V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] with $h=1$, valid because $|H_{ij}|\\le\\|H\\|\\le1$. The extra padded system labels carry zero eigenvalues; the input remains in the original supported subspace, so its nonzero gap and inverse-state target do not change. The full unitary oracle circuits, controls and reversals act on all physical labels, including invalid labels, as constructed in [F1]; no padded-branch overlap contributes a matrix value.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\eta=\\epsilon/(8192\\kappa L)$. For each phase time $t_j$, certified arithmetic selects a rational $q_j\\in[0,t_j]$ with $t_j-q_j\\le\\eta/2$ and a rational simulator tolerance $\\zeta_j$ with $\\eta/4\\le\\zeta_j\\le\\eta/2$; their construction cost remains in the separately charged arithmetic/phase-generation coordinates. Invoke QA25 at rational signed time $-q_j$ and tolerance $\\zeta_j$. By [F2], its clean-input error from $e^{+iHq_j}$ is at most $\\zeta_j$, and by [F6]–[F7] the time-rounding error from $e^{+iHt_j}$ is at most $t_j-q_j$. Thus each effective forward call has clean-input error at most $\\eta$. Use its actual adjoint for the reverse call; [F3] gives the same clean-input error without assuming full-space accuracy on dirty inputs. The $2L$ effective errors sum to $\\epsilon/(4096\\kappa)$ as required in OP5, so [F5] applies with the stated state and failure guarantees.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In one $V$ or $V^\\dagger$, sum the loose signal-call bound in [F2] over all signed rational times $\\pm q_j$. Since $q_j\\le t_j$, their absolute values sum to less than $2t_0$ by [F4], so this uses $O(dt_0+L\\log(32768\\kappa L/\\epsilon))$ signal calls; also $\\zeta_j\\ge\\eta/4$ makes $\\log(1/\\zeta_j)=O(\\log(1/\\eta))$. Multiplying by [F1]'s location/value conversion and then by the at most $2RK$ preparation/inverse-preparation calls gives $$O\\!\\left(R\\kappa\\left[dt_0+L\\log(32768\\kappa L/\\epsilon)\\right]\\log(d+1)\\right)$$ sparse-oracle calls, with a possibly smaller constant value-query count. Literal reversals and coherent controls change only constants already covered by [F1]–[F3].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $T<16(t_0+1)$, $L=O(\\log(2+\\kappa/\\epsilon))$. With $d,\\kappa\\ge1$, $0<\\epsilon\\le1$, and $t_0=2048\\kappa/\\epsilon$, the expression in step 3.1 is $O(d\\kappa^2\\epsilon^{-1}(1+\\log(1/\\rho))\\operatorname{polylog}(2+d\\kappa/\\epsilon))$. For fixed constant $\\rho$ this gives the displayed order. The separate $B$ and $B^\\dagger$ counts are at most $RK$ each by [F4]. Padding only appends clean high index bits to their input/output register convention; no extra sparse query is needed for this embedding. Their actual implementation and any controls used remain charged as supplied costs. All other direct-simulation resource coordinates stay in [F4]'s explicit sum, so no table, phase-generation, gate or bit-time claim is inferred from the sparse-query bound.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The instance has d>=1 and a normalized supported input; padding adds zero labels instead of admitting an empty input system."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes padded zero eigenvalues from input support; step 2.1 chooses positive simulator tolerances and avoids a zero reciprocal."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly uses d,kappa>=1, so d=1 and kappa=1 obey the same count."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 preserves the inverse target under zero padding and total oracle controls; dirty-work intermediate states are handled by the clean-subspace lemma in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 includes epsilon=1; step 2.1 allows q_j=0 and uses the small-time-aware simulator at its declared nonnegative rounded time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses rational time/tolerance certificates within explicit intervals, with their construction costs retained separately."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current claim is HHL sorted-sparse oracle query specialization; it asserts no biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current claim is HHL sorted-sparse oracle query specialization; it asserts no biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read all four proof steps and fourteen dependency interfaces. h=1 is valid since every entry magnitude<=||H||<=1; sorted-XOR encoding pads by zero without changing supported input or target. Rational q_j in [0,t_j] within eta/2 and zeta_j in [eta/4,eta/2] split time and simulator errors; derivative integration gives the time bound and the full clean-subspace hybrid supplies actual adjoints/controls/references. The certified phase-generation mode remains an explicit input condition. Summing O(d|q_j|+log(1/zeta_j)) gives O(dt0+Llog(32768kappa L/epsilon)) per attempt, with the O(log(d+1)) location conversion and 2RK calls. T<16(t0+1) gives L=O(log(2+kappa/epsilon)); fixed rho absorbs failure factor, variable rho needs 1+log(1/rho) uniformly near rho=1. Corrected the Statement to retain 1+log(1/rho), including rho approaching 1, as in proof 4.1. Domain-tag success reflection/verification requires no sparse-oracle calls and remains separately charged. No claim about polylog table/gate/bit cost, and no AC.",
+        "repair_confidence": 1
+      }
+    },
+    "cex-qa-26-hhl-classical-vector-output": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-26-qlsp-task",
+          "source_section": "Definition",
+          "quote": "Let $A:\\mathbb C^n\\to\\mathbb C^m$ be a finite-dimensional linear map, $m,n\\ge1$, and let $b\\in\\operatorname{ran}(A)\\setminus\\{0\\}$, where $\\operatorname{ran}(A)$ is the image defined in [[def-kernel-and-image-of-a-linear-map]]. The **quantum linear-systems state-output task (QLSP)** is to prepare the normalized domain-register state\n$$|x\\rangle:=\\frac{A^+b}{\\|A^+b\\|}\\in\\mathbb C^n,$$\nwhere $A^+$ is the Moore–Penrose pseudoinverse. By [[thm-singular-value-decomposition]], write $b=\\sum_{j:\\sigma_j>0}\\beta_j u_j$ in left singular vectors; the promised support gap is a supplied rational or exactly represented $\\gamma>0$ such that every $j$ with $\\beta_j\\ne0$ has singular value $\\sigma_j\\ge\\gamma$. The input includes a costed unitary $B$ mapping its designated all-zero input to $|b/\\|b\\|\\rangle$ in the codomain register, tensored with a fixed work state. Its inverse, controlled access, and resource coordinates are specified in the separate HHL access model. If $b$ is multiplied by $c\\ne0$, the normalized representative is multiplied by $c/|c|$, so its pure-state ray is unchanged. The task returns a quantum state (and may return a success flag); it does not promise a classical list of coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $x$, the ratios $(b_x)_j/(b_x)_1=c_j/a$ are $1$ or $4$ when $a=1$, and $1/2$ or $2$ when $a=2$. Since $N\\ge2$, at least one ratio determines $a$; each ratio then determines its corresponding $c_j$. Thus the $2^N$ inputs give $2^N$ distinct solution rays, with no ambiguity from a global phase.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $z$ be a classical coordinate output for one of these rays, phase-fixed so that its first coordinate is positive real. If $|z_j-(b_x)_j|<\\delta:=1/(100\\sqrt N)$ for every $j$, then $(b_x)_1\\ge1/(4\\sqrt N)$ because $a\\ge1$ and $\\|a e_1+\\sum_{j\\ge2}c_je_j\\|\\le4\\sqrt N$. Hence $|z_1|\\ge6/(25\\sqrt N)$. For each $j\\ge2$, $$\\left|\\frac{z_j}{z_1}-\\frac{(b_x)_j}{(b_x)_1}\\right|\\le\\frac{\\delta}{|z_1|}\\left(1+\\frac{(b_x)_j}{(b_x)_1}\\right)\\le\\frac5{24}<\\frac14.$$ The four candidate ratios have pairwise separation at least $1/2$, so nearest-ratio decoding recovers $a$ and every $c_j$, hence all $N$ bits. Any unambiguous classical output code for all these rays therefore needs at least $2^N$ codewords and at least $N$ bits. This output-length requirement is independent of the ability to prepare or measure the corresponding quantum state.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "State preparation does not print all coordinates has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves (b_x)_1>=1/(4sqrt(N)) and |z_1|>=6/(25sqrt(N)); both ratio denominators are strictly positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qa-late)",
+            "reason": "Step 2.1 proves (b_x)_1>=1/(4sqrt(N)) and |z_1|>=6/(25sqrt(N)); both ratio denominators are strictly positive.",
+            "item_sha256": "92853f0d9e08a5cd199335afc8764e7b39a2ddacb4261f99b4014e248fedeffb",
+            "row_sha256": "f72a79e52f7b9d12e57d37e7b3cbea50098fdd51ebb807679f791351bf48ac5e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qa-late.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "State preparation does not print all coordinates has no separate singleton case; the statement uses arbitrary finite data and the proof does not divide by a cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "State preparation does not print all coordinates contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "State preparation does not print all coordinates has no interval or piecewise endpoint separate from the hypotheses in its statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 of State preparation does not print all coordinates: the finite sign string is explicit and the coordinate sign is uniquely recovered."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "State preparation does not print all coordinates states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "State preparation does not print all coordinates states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=2 sign family",
+          "method": "exact finite enumeration",
+          "input": {
+            "N": 2
+          },
+          "calculation": "The four vectors are (1,1)/sqrt(2), (1,-1)/sqrt(2), (-1,1)/sqrt(2), and (-1,-1)/sqrt(2); any coordinatewise error below 1/(2sqrt(2)) determines both signs.",
+          "expected": {
+            "distinct_vectors": 4,
+            "required_sign_bits": 2
+          }
+        }
+      ]
+    },
+    "ex-qa-26-diagonal-hhl": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-26-hhl-success-amplitude",
+          "source_section": "Statement",
+          "quote": "For the ideal exact-eigenvalue version of [[alg-qa-26-hhl-phase-estimation]], on a normalized $|b\\rangle$ supported on $1/\\kappa\\le|\\lambda|\\le1$, the well-flag vector is $v=(2\\kappa)^{-1}H^+|b\\rangle$. Its probability $p=\\|v\\|^2$ satisfies $1/(4\\kappa^2)\\le p\\le1/4$, and its normalized state is the QLSP target.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct inversion gives $H^+|b\\rangle=(|0\\rangle+\\kappa|1\\rangle)/\\sqrt2$. Its norm is $\\sqrt{1+\\kappa^2}/\\sqrt2$, so the target is $(|0\\rangle+\\kappa|1\\rangle)/\\sqrt{1+\\kappa^2}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the well vector is $(|0\\rangle+\\kappa|1\\rangle)/(2\\sqrt2\\kappa)$ and its probability is $(1+\\kappa^2)/(8\\kappa^2)$, which satisfies $1/8<p\\le1/4$. For OP5, the eigenvalue grid spacing is $2\\pi/t_0=\\pi\\epsilon/(1024\\kappa)$. The sine window has nonzero tails, so this spacing is a grid resolution and not a hard error guarantee; the kernel moment and filter proof supply the error bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two-dimensional diagonal HHL inversion has no empty object as an admissible input; its definition or statement fixes positive finite data."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Two-dimensional diagonal HHL inversion contains no zero-valued argument at which its claimed operation becomes undefined; its stated domain covers the relevant inputs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 of Two-dimensional diagonal HHL inversion: kappa=1 makes both eigenvalues one and the computed ideal success probability is 1/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Two-dimensional diagonal HHL inversion contains no algebraic degeneracy in its statement beyond the cases explicitly listed there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 of Two-dimensional diagonal HHL inversion: the example computes the endpoint kappa=1 and the general kappa>=1 range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 of Two-dimensional diagonal HHL inversion: the two basis coordinates are explicit and no witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Two-dimensional diagonal HHL inversion states no biconditional, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Two-dimensional diagonal HHL inversion states no biconditional, so there is no reverse implication to discharge."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "kappa=2 diagonal instance",
+          "method": "exact finite calculation",
+          "input": {
+            "kappa": 2,
+            "H": "diag(1,1/2)",
+            "b": "(1,1)/sqrt(2)"
+          },
+          "calculation": "H^+b=(1,2)/sqrt(2), its norm is sqrt(5/2), normalized target is (1,2)/sqrt(5), and p=(1+4)/(8*4)=5/32.",
+          "expected": {
+            "target": "(1,2)/sqrt(5)",
+            "success_probability": "5/32"
+          }
+        }
+      ]
+    }
+  }
+}

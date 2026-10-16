@@ -1,14 +1,10 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-finite-probability-maximal-ergodic-inequality.json
 id: lem-finite-probability-maximal-ergodic-inequality
 kind: lemma
 title: The maximal ergodic inequality on a probability space
 deps: ["def-measure-preserving-transformation-and-system", "thm-integrals-are-invariant-under-measure-preserving-maps", "thm-arithmetic-and-lattice-operations-preserve-measurability", "thm-linearity-of-the-lebesgue-integral-on-l-one", "thm-integral-triangle-inequality", "thm-dominated-convergence", "prop-order-and-scalar-rules-for-the-nonnegative-integral"]
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: 'Durrett, Probability: Theory and Examples, 5th ed., Lemma 6.2.2, printed p.335; complete proof read'
@@ -34,7 +30,7 @@ Let $T$ preserve a probability measure $P$, and let $f$ be integrable, real-valu
 1. $cf$ is measurable for every real scalar $c$;
 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;
 3. if $f+g$ is pointwise defined, then $f+g$ is measurable;
-4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
+4. with the total function-product convention declared in that theorem, the pointwise product $fg$ is measurable.
 
 [F3] [[thm-integrals-are-invariant-under-measure-preserving-maps]]: If $T$ preserves $\mu$ and $f:X\to[0,\infty]$ is measurable, then $\int f\circ T\,d\mu=\int f\,d\mu$, allowing infinity. If $f$ is integrable real or complex valued, $f\circ T$ is integrable and the same equality holds. Conversely, for a measurable self-map, equality for every measurable indicator implies measure preservation.
 

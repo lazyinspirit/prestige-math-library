@@ -1,0 +1,223 @@
+{
+  "group": "g",
+  "batches": ["44"],
+  "pages_read": [
+    "hamiltonian-simulation-and-product-formulas",
+    "hamiltonian-simulation-and-product-formulas-examples"
+  ],
+  "items_read": [
+    "def-qa-20-simulation-error-and-cost-model",
+    "def-qa-20-term-list-access-model",
+    "def-qa-20-sparse-hamiltonian-oracle-model",
+    "def-qa-20-first-order-product-formula",
+    "def-qa-20-symmetric-second-order-formula",
+    "rem-qa-20-higher-order-formula-proof-obligations",
+    "thm-qa-20-first-order-commutator-error",
+    "alg-qa-20-first-order-term-list-simulation",
+    "thm-qa-20-second-order-conservative-error",
+    "alg-qa-20-suzuki-recursive-product-formula",
+    "thm-qa-20-first-order-resource-bound",
+    "lem-qa-20-suzuki-order-cancellation",
+    "thm-qa-20-suzuki-conservative-error-and-resources",
+    "ex-qa-20-commuting-two-term-simulation",
+    "cex-qa-20-sparse-oracle-does-not-give-term-list",
+    "ex-qa-20-noncommuting-pauli-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Evolution is U_H(t)=exp(-itH) for finite-dimensional complex self-adjoint H. Simulation error is operator norm on the induced target unitary; auxiliary registers require exact clean or dirty contracts.",
+      "fixed_by": "def-qa-20-simulation-error-and-cost-model",
+      "matters_for": [
+        "thm-qa-20-first-order-commutator-error",
+        "thm-qa-20-second-order-conservative-error",
+        "thm-qa-20-first-order-resource-bound",
+        "thm-qa-20-suzuki-conservative-error-and-resources"
+      ]
+    },
+    {
+      "convention": "S1(h)=exp(-ihH1)⋯exp(-ihHm); the rightmost factor acts first. Implementations therefore execute terms chronologically in reverse displayed order.",
+      "fixed_by": "def-qa-20-first-order-product-formula",
+      "matters_for": [
+        "alg-qa-20-first-order-term-list-simulation",
+        "def-qa-20-symmetric-second-order-formula",
+        "alg-qa-20-suzuki-recursive-product-formula",
+        "thm-qa-20-first-order-commutator-error"
+      ]
+    },
+    {
+      "convention": "Term-list access explicitly supplies supported signed-time calls and their costs. Controlled and inverse access are separate capabilities. Time codes permit rational arithmetic expressions and positive odd roots of 4.",
+      "fixed_by": "def-qa-20-term-list-access-model",
+      "matters_for": [
+        "alg-qa-20-first-order-term-list-simulation",
+        "alg-qa-20-suzuki-recursive-product-formula",
+        "thm-qa-20-first-order-resource-bound",
+        "thm-qa-20-suzuki-conservative-error-and-resources",
+        "cex-qa-20-sparse-oracle-does-not-give-term-list"
+      ]
+    },
+    {
+      "convention": "Sparse access uses exact finite entry codes and total XOR oracles. Nonzero columns are sorted; missing and invalid slots return a distinguished sentinel, and invalid value labels return encoded zero.",
+      "fixed_by": "def-qa-20-sparse-hamiltonian-oracle-model",
+      "matters_for": [
+        "cex-qa-20-sparse-oracle-does-not-give-term-list"
+      ]
+    },
+    {
+      "convention": "The Suzuki recursion uses five copies with coefficients p,p,1-4p,p,p, where p=(4-4^(1/(2j-1)))^(-1). Expanded occurrences are counted without merging adjacent factors; t=0 returns identity without term calls.",
+      "fixed_by": "alg-qa-20-suzuki-recursive-product-formula",
+      "matters_for": [
+        "lem-qa-20-suzuki-order-cancellation",
+        "thm-qa-20-suzuki-conservative-error-and-resources"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qa-20-term-list-access-model",
+      "statement": "A term-list input specifies m≥1 self-adjoint terms with exact target H=Σj Hj, supported exact time codes, supplied exact operations or certified unitary implementations, and separately declared access and resource costs.",
+      "used_by": [
+        "def-qa-20-first-order-product-formula",
+        "def-qa-20-symmetric-second-order-formula",
+        "alg-qa-20-first-order-term-list-simulation",
+        "alg-qa-20-suzuki-recursive-product-formula",
+        "thm-qa-20-first-order-resource-bound",
+        "thm-qa-20-suzuki-conservative-error-and-resources",
+        "cex-qa-20-sparse-oracle-does-not-give-term-list"
+      ]
+    },
+    {
+      "id": "thm-qa-20-first-order-commutator-error",
+      "statement": "For finite-dimensional complex V, self-adjoint H1,…,Hm with m≥1, H=Σj Hj, every real t and integer r≥1 satisfy ||S1(t/r)^r−U_H(t)|| ≤ t²/(2r) Σj<k ||[Hj,Hk]||.",
+      "used_by": [
+        "thm-qa-20-first-order-resource-bound",
+        "ex-qa-20-noncommuting-pauli-error",
+        "thm-qa-36-adiabatic-path-to-circuit-simulation"
+      ]
+    },
+    {
+      "id": "lem-qa-20-suzuki-order-cancellation",
+      "statement": "For fixed finite-dimensional self-adjoint matrices H1,…,Hm, m≥1, the recursive formulas S2k have the same Taylor coefficients as exp(-ihΣj Hj) through degree 2k at h=0 and satisfy S2k(-h)=S2k(h)^(-1) for all real h.",
+      "used_by": [
+        "thm-qa-20-suzuki-conservative-error-and-resources"
+      ]
+    },
+    {
+      "id": "def-qa-20-simulation-error-and-cost-model",
+      "statement": "A Hamiltonian simulator at encoded time t and tolerance 0<ε<1 outputs a unitary W on the stated target register satisfying ||W−U_H(t)||≤ε, with access, gate, auxiliary-register, coefficient, description and generation resources recorded separately.",
+      "used_by": [
+        "def-qa-20-term-list-access-model",
+        "def-qa-20-sparse-hamiltonian-oracle-model",
+        "def-qa-21-lcu-input-and-access-model",
+        "def-qa-26-hhl-access-model",
+        "def-qa-28-spectral-estimation-access",
+        "def-qa-36-adiabatic-resource-model"
+      ]
+    },
+    {
+      "id": "thm-qa-20-second-order-conservative-error",
+      "statement": "For finite-dimensional V, self-adjoint H1,…,Hm with m≥1, H=Σj Hj and M=Σj ||Hj||, every real t and integer r≥1 satisfy ||S2(t/r)^r−U_H(t)||≤|t|³M³/(3r²).",
+      "used_by": []
+    },
+    {
+      "id": "thm-qa-20-suzuki-conservative-error-and-resources",
+      "statement": "For k,m,r≥1 and finite-dimensional complex self-adjoint terms, let q=2k+1 and Bk=Σν |cν| ||Hjν|| for the expanded recursive segment. For every real t, ||S2k(t/r)^r−U_H(t)||≤(Bk^q+M^q)|t|^q/(q! r^(q−1)). The expanded term count per segment is (2m−1)5^(k−1).",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Operator-norm error, unitary norm invariance, triangle bounds and the zero-domain convention.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Submultiplicative bounds, telescoping product estimates and Pauli operator norms.",
+      "opened": true
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "used_for": "The self-adjoint term requirement and its compatibility with finite Hermitian dynamics.",
+      "opened": true
+    },
+    {
+      "id": "thm-nth-roots-exist",
+      "used_for": "Existence, uniqueness and positivity of the real roots used in supported time codes and Suzuki coefficients.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-monotone",
+      "used_for": "The inequality 4^(1/q)<4 for odd q≥3, ensuring that Suzuki coefficient denominators are positive and central coefficients are negative.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "cex-qa-20-sparse-oracle-does-not-give-term-list",
+      "concern": "Under '## Statement refuted', the text begins 'The row/value interface for a sparse Hermitian matrix by itself supplies neither the term-list contract nor term-evolution calls' and then states the canonical-list lower bounds. These are the conclusions proved by the counterexample, rather than a false statement being refuted. The heading/formulation polarity is reversed; the underlying qualified lower-bound argument is sound.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-qa-20-noncommuting-pauli-error",
+      "concern": "The Given specifies 'its standard inner product ⟨u,v⟩=u*v', which is conjugate-linear in the first argument. The library's published def-real-and-complex-inner-product-space and the finite-dynamics supplier use linearity in the first argument. The example should explain the conversion or use the library convention. Its conjugate-transpose, norm and commutator computations remain unchanged.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hamiltonian-simulation-and-product-formulas",
+      "to": "continuous-time-quantum-walks",
+      "faithful": true,
+      "note": "Finite dynamics and its proved unitary, differential and composition identities use the same negative exponential sign and finite-dimensional domain, including the zero space."
+    },
+    {
+      "from": "hamiltonian-simulation-and-product-formulas",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "Full-list generation and separate query, gate, description and classical costs are preserved; no efficient generator follows from a matrix description."
+    },
+    {
+      "from": "hamiltonian-simulation-and-product-formulas",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "Controlled access is the separately granted control-first block operator. Inverse access and its costs are also explicitly separate."
+    },
+    {
+      "from": "hamiltonian-simulation-and-product-formulas",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "Target-unitary simulation requires exact clean or dirty auxiliary-register contracts. Sparse oracles are total coherent XOR maps, consistent with their involutivity and unitarity supplier."
+    },
+    {
+      "from": "lcu-oblivious-amplitude-amplification-and-taylor-simulation",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "LCU uses the separate resource coordinates faithfully. Its Taylor guarantee explicitly uses a clean-input isometry with possible retained leakage and does not claim exact cleanup or a target-only unitary."
+    },
+    {
+      "from": "qubitization-and-optimal-hamiltonian-simulation",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "Sparse consumers preserve exact sorted XOR access, sentinel behavior and charged arithmetic. Supplied in-place permutations are identified as stronger access, and the optional support-superset variant is explicit additional data."
+    },
+    {
+      "from": "hhl-phase-estimation-linear-systems",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "HHL explicitly adopts the positive exponential sign and separately declares controls and inverses. Its alternative clean-workspace mode is stated separately from full-operator simulation; sparse-query specialization uses the costed sorted-XOR bridge."
+    },
+    {
+      "from": "quantum-spectral-estimation-and-matrix-functions",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "The access definition correctly identifies exp(iH) with QA20 time -1 and retains signed-time support, controlled/inverse capabilities and error/cost allocations."
+    },
+    {
+      "from": "adiabatic-computation-and-circuit-equivalence",
+      "to": "hamiltonian-simulation-and-product-formulas",
+      "faithful": true,
+      "note": "The discretized algorithm executes terms in reverse displayed order. Its theorem applies the first-order commutator bound to real-coefficient self-adjoint frozen summands and separately accumulates provider errors and costs."
+    }
+  ]
+}

@@ -1,0 +1,2116 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+    "lem-qa-35-log-tangent-bound",
+    "lem-qa-35-kl-event-separation",
+    "lem-qa-35-smp-prior-message-decomposition",
+    "lem-qa-35-smp-entropy-drop",
+    "def-qa-35-swap-test-effect",
+    "lem-qa-35-identity-matrix-packing",
+    "lem-qa-35-trace-norm-tensor-density-identity",
+    "thm-qa-35-swap-test-measurement-effect",
+    "def-qa-35-finite-communication-protocol",
+    "def-qa-35-equality-promise",
+    "def-qa-35-code-fingerprint-state",
+    "lem-qa-35-private-coin-error-reduction",
+    "thm-qa-35-deterministic-smp-equality-lower-bound",
+    "thm-qa-35-quantum-fingerprint-message-lower-bound",
+    "lem-qa-35-random-code-existence-nonuniform",
+    "thm-qa-35-code-fingerprint-state-properties",
+    "thm-qa-35-private-coin-equality-lower-bound",
+    "alg-qa-35-swap-test-fingerprint",
+    "rem-qa-35-private-coin-lower-bound-unresolved",
+    "thm-qa-35-fingerprint-correctness-and-cost",
+    "cex-qa-35-public-vs-private-randomness",
+    "ex-qa-35-length-eight-fingerprints"
+  ],
+  "contracts": {
+    "def-qa-35-finite-probability-entropy-and-stochastic-matrices": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-valued boundary parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element specialization is part of this qualitative definition or remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-log-tangent-bound": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "If $t\\ge1$, then $1/u\\le1$ for $u\\in[1,t]$. Thus $\\ln t=\\int_1^t du/u\\le t-1$, with strict inequality for $t>1$ because $1/u<1$ on the nonempty interval $(1,t)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "If $0<t<1$, then $1/u>1$ on $(t,1)$, so $\\ln t=-\\int_t^1du/u<-(1-t)=t-1$. At $t=1$ both sides are zero. This proves the claim and equality case.",
+          "step": "2.1",
+          "inputs": [
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypothesis is t>0, so t=0 is outside the logarithm domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument verifies equality at t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument handle t≥1 and 0<t<1 separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-kl-event-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-35-log-tangent-bound",
+          "source_section": "Statement",
+          "quote": "For every $t>0$, $\\ln t\\le t-1$, with equality exactly when $t=1$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "If $D(Q\\|P)=+\\infty$, the result holds. Otherwise form distributions on $[m]\\times\\{0,1\\}$ by $\\widetilde Q(i,1)=Q_iX_i$, $\\widetilde Q(i,0)=Q_i(1-X_i)$ and the analogous formulas for $\\widetilde P$. Expanding the defining finite sum and summing the common two-outcome kernel gives $D(\\widetilde Q\\|\\widetilde P)=D(Q\\|P)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Group the terms of this divergence according to the second coordinate $z$. For each $z$, the group equals $q_z\\ln(q_z/p_z)+q_zD(\\widetilde Q(\\cdot\\mid z)\\|\\widetilde P(\\cdot\\mid z))$, where $q_z=\\widetilde Q(z)$ and $p_z=\\widetilde P(z)$; the conditional divergence is nonnegative by applying [F2] to each ratio, and zero-mass cases follow by the stated $+\\infty$ convention. Hence $D(Q\\|P)\\ge D_{\\rm Ber}(QX^{\\mathsf T}\\|PX^{\\mathsf T})$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "For $0<q<p<1$, the binary divergence $K(p,q)=p\\ln(p/q)+(1-p)\\ln((1-p)/(1-q))$ has $\\partial_pK=\\ln\\frac{p(1-q)}{q(1-p)}>0$ and $\\partial_qK=\\frac{q-p}{q(1-q)}<0$. Therefore the hypotheses imply $K(QX^{\\mathsf T},PX^{\\mathsf T})\\ge K(0.94,0.06)=0.88\\ln(47/3)>1$, since $47/3>9>e^2$. Boundary values follow by limits or give infinite divergence. Combining with step 2.1 proves $D(Q\\|P)\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument handles zero coordinates and infinite divergence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: the argument handles probability endpoints by limits."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: the argument uses p≥0.94>0.06≥q, excluding p=q."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1: the argument include zero-mass and limiting endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-smp-prior-message-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For each message index $j$, set $q_j=\\sum_xD_xB_{xj}$. If $q_j>0$, put $D^{(j)}_x=D_xB_{xj}/q_j$; if $q_j=0$, put $D^{(j)}=D$. Then each $D^{(j)}$ is a probability vector, $\\sum_jq_j=1$, and $\\sum_jq_jD^{(j)}=D$, because $\\sum_jB_{xj}=1$; zero-weight terms contribute nothing.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Let $X_j$ be column $j$ of $M$. Reordering finite sums gives $\\sum_jq_j(D^{(j)}A)X_j^{\\mathsf T}=\\sum_xD_x(AMB^{\\mathsf T})_{xx}\\ge0.99.$ Also $\\sum_jq_j(DA)X_j^{\\mathsf T}=DAMB^{\\mathsf T}D^{\\mathsf T}$. Write $C=I+E$. Since all entries of $C$ are probabilities, $|E_{xy}|\\le0.01$; hence this last quantity is at most $\\sum_xD_x^2+0.01(\\sum_xD_x)^2\\le0.02$. These are the required decomposition and acceptance bounds.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument defines zero-weight q_j terms without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument normalizes the finite probability weights."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument treats q_j=0 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument chooses D_j=D for a zero-weight message; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-smp-entropy-drop": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-35-smp-prior-message-decomposition",
+          "source_section": "Statement",
+          "quote": "Let A,B be N×m row-stochastic matrices, M∈[0,1]^{m×m}, and let C=AMBᵀ satisfy C_xx≥0.99 and C_xy≤0.01 for x≠y. For every probability row vector D with ||D||₂²≤0.01 there are weights q_j and probability rows D_j with D=Σ_jq_jD_j such that, for columns X_j of M, Σ_j q_j(DA)X_jᵀ≤0.02 and Σ_jq_j(D_jA)X_jᵀ≥0.99.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-35-kl-event-separation",
+          "source_section": "Statement",
+          "quote": "For finite distributions P,Q and a vector X∈[0,1]^m, if P·X≤0.06 and Q·X≥0.94, then D(Q∥P)≥1 (with +∞ allowed).\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Put $P=DA$ and $Q_j=D^{(j)}A$. These are probability vectors and $P=\\sum_jq_jQ_j$. The weighted acceptance gap in [F1] is at least $0.97$. Since every difference $\\beta_j=(Q_j-P)X_j^{\\mathsf T}$ lies in $[-1,1]$, the set $U=\\{j:\\beta_j\\ge0.94\\}$ has weight at least $1/2$: otherwise the weighted average is less than $0.94+0.06\\cdot(1/2)=0.97$. For $j\\in U$, $Q_jX_j^{\\mathsf T}\\ge0.94$ and $PX_j^{\\mathsf T}=Q_jX_j^{\\mathsf T}-\\beta_j\\le0.06$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "By [F2], $D(Q_j\\|P)\\ge1$ for each $j\\in U$. Direct expansion of the finite sums, using $P_i=\\sum_jq_j(Q_j)_i$, gives $H(P)-\\sum_jq_jH(Q_j)=\\sum_jq_jD(Q_j\\|P).$ If $P_i=0$, every positive-weight $(Q_j)_i$ is zero, so no undefined logarithm enters. The right side is at least the weight of $U$, hence at least $1/2$. Substituting $P=DA$ and $Q_j=D^{(j)}A$ proves the entropy drop.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument handles P_i=0 and positive-weight posterior coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument uses the full probability-vector range [0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument uses the endpoint bound β_j≤1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument allow zero-weight messages and endpoint acceptance values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "def-qa-35-swap-test-effect": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-valued boundary parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element specialization is part of this qualitative definition or remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-identity-matrix-packing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-35-smp-entropy-drop",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and decomposition of [[lem-qa-35-smp-prior-message-decomposition]], the weights and posteriors can be chosen so that Σ_jq_j H(D_jA)≤H(DA)−1/2.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-35-smp-prior-message-decomposition",
+          "source_section": "Statement",
+          "quote": "Let A,B be N×m row-stochastic matrices, M∈[0,1]^{m×m}, and let C=AMBᵀ satisfy C_xx≥0.99 and C_xy≤0.01 for x≠y. For every probability row vector D with ||D||₂²≤0.01 there are weights q_j and probability rows D_j with D=Σ_jq_jD_j such that, for columns X_j of M, Σ_j q_j(DA)X_jᵀ≤0.02 and Σ_jq_j(D_jA)X_jᵀ≥0.99.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qa-35-log-tangent-bound",
+          "source_section": "Statement",
+          "quote": "For every $t>0$, $\\ln t\\le t-1$, with equality exactly when $t=1$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Let $D$ be any probability row with $\\|D\\|_2\\le0.1$. Its output entropy satisfies $H(DA)\\le\\ln m$, because $D(DA\\|u)=\\ln m-H(DA)\\ge0$ for uniform $u$, and nonnegativity follows by summing [F3]. Apply [F2]. Set $L=\\{j:H(D^{(j)}A)\\le H(DA)-1/4\\}$ and $s=\\sum_{j\\in L}q_j$. Since the average child entropy is nonnegative and at most $H(DA)-1/2$, first $H(DA)\\ge1/2$; then we have $(1-s)(H(DA)-1/4)\\le H(DA)-1/2$, so $s\\ge1/(4\\ln m)$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Nonnegative coordinates and $D=\\sum_jq_jD^{(j)}$ imply $\\sum_{j\\in L}q_j\\|D^{(j)}\\|_2\\le\\sqrt m\\|D\\|_2.$ Indeed Cauchy–Schwarz bounds the left side by $\\sqrt m(\\sum_jq_j^2\\|D^{(j)}\\|_2^2)^{1/2}$, and the square under the radical is at most $\\|\\sum_jq_jD^{(j)}\\|_2^2$ because all pairwise coordinate inner products are nonnegative. Dividing by $s$ shows some $j\\in L$ with positive weight has both entropy drop at least $1/4$ and $\\|D^{(j)}\\|_2\\le R\\|D\\|_2$, where $R=4\\sqrt m\\ln m$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Start from the uniform distribution $D^{(0)}$ on $[N]$, of norm $N^{-1/2}$. While the norm is at most $0.1$, step 2.1 selects a child with entropy reduced by at least $1/4$ and norm multiplied by at most $R$. Since the initial entropy is at most $\\ln m$, after at most $K=\\lfloor4\\ln m\\rfloor+1$ such reductions the entropy would be negative; therefore either $N<100$ initially, or some $D^{(k)}$ with $k\\le K$ has norm greater than $0.1$. In the latter case $0.1<N^{-1/2}R^K$, so $N<100R^{2K}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "For $m\\ge2$, $K\\le5.45\\ln m$, $\\ln R=\\ln4+\\frac12\\ln m+\\ln\\ln m\\le3.5\\ln m$, and $\\ln100\\le9.6(\\ln m)^2$. Thus $\\ln(100R^{2K})\\le47.8(\\ln m)^2<60(\\ln m)^2$. The initial case $N<100$ also satisfies this bound. Therefore $N\\le\\exp(60(\\ln m)^2)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument includes zero probability coordinates in entropy and the uniform distribution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1: the argument include N=1 and m≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1: the argument separates the initial norm-above-threshold case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1: the argument verifies the claimed exponential estimate for every m≥2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1: the argument selects one positive-weight child from a nonempty finite set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-trace-norm-tensor-density-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-trace-norm-spectral-formula",
+          "source_section": "Statement",
+          "quote": "For every linear map $A:H\\to K$ ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces,\n\n$$\\|A\\|_1=\\operatorname{tr}_H\\!\\left(\\sqrt{A^*A}\\right).$$\n\nHere $A^*A$ and its non-negative square root are endomorphisms of the domain\n$H$; the trace is taken on $H$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qc-trace-distance",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **trace distance** is\n$$D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1,$$\nwhere $\\|\\cdot\\|_1$ is the trace norm ([[def-qc-trace-norm]]). The factor $1/2$ is part of this state-distance convention. The diamond norm below is an unhalved norm on maps.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "By [F4] and [F2], tensor products of orthonormal eigenbases diagonalize $\\rho\\otimes\\tau$ with nonnegative eigenvalues whose sum is $\\operatorname{tr}(\\rho)\\operatorname{tr}(\\tau)=1$; the same holds for $\\sigma\\otimes\\tau$. Trace is the sum of these diagonal eigenvalues, so both tensor products are density operators. The difference $\\Delta=\\rho-\\sigma$ is self-adjoint, hence normal by [F5], and has an orthonormal eigenbasis $(e_i)$ with real eigenvalues $\\lambda_i$ by [F6]. Choose an orthonormal eigenbasis $(f_j)$ for $\\tau$ with eigenvalues $t_j\\ge0$ and $\\sum_jt_j=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F2",
+            "F5",
+            "F6",
+            "F1",
+            "F9"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The product vectors $e_i\\otimes f_j$ form an orthonormal basis by [F2], and $\\Delta\\otimes\\tau$ is diagonal there with eigenvalues $\\lambda_it_j$. The operator $(\\Delta\\otimes\\tau)^*(\\Delta\\otimes\\tau)$ has diagonal entries $(\\lambda_it_j)^2$ in this basis, so its unique nonnegative square root has entries $|\\lambda_i|t_j$ by [F7]. The same computation on $(e_i)$ gives $\\|\\Delta\\|_1=\\sum_i|\\lambda_i|$. Therefore [F3] gives $\\|\\Delta\\otimes\\tau\\|_1=\\sum_{i,j}|\\lambda_i|t_j=\\sum_i|\\lambda_i|=\\|\\Delta\\|_1$. Dividing by two and using [F8] proves $D(\\rho\\otimes\\tau,\\sigma\\otimes\\tau)=D(\\rho,\\sigma)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "F3",
+            "F8",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument includes zero eigenvalues in the sums."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument use finite bases, including one-dimensional factors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument yields distance zero when ρ=σ."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument chooses finite-dimensional orthonormal eigenbases."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "thm-qa-35-swap-test-measurement-effect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-swap-test-effect",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space. On $H\\otimes H$ define the **swap** $F$ by $F(u\\otimes v)=v\\otimes u$ and linear extension. Define the symmetric and antisymmetric effects\n$$P_+=(I+F)/2,\\qquad P_-=(I-F)/2.$$\nThe “equal” outcome corresponds to $P_+$ and “unequal” to $P_-$. The following theorem proves well-definedness as a two-outcome projective measurement and calculates its pure-product law.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-dirac-notation-conversion",
+          "source_section": "Definition",
+          "quote": "All complex inner products in this track use the root convention: they are\nlinear in the first argument and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]). For vectors $x,y$ in the same\nspace, define the Dirac pairing by\n\n$$\\langle x|y\\rangle_D:=\\langle y,x\\rangle_{\\mathrm{root}}.$$\n\nThe ket $|x\\rangle$ denotes the vector $x$. The bra $\\langle x|$ denotes the\nlinear functional $z\\mapsto\\langle z,x\\rangle_{\\mathrm{root}}$.\n\nFor finite-dimensional complex inner-product spaces $H,K$, vectors $y\\in H$ and\n$x\\in K$, define the rank-one linear map\n\n$$|x\\rangle\\langle y|:H\\to K,\\qquad z\\mapsto\\langle z,y\\rangle_{H,\\mathrm{root}}x.$$\n\nGiven ordered orthonormal bases of $H$ and $K$, its coordinate matrix is\n$[x][y]^\\dagger$, where $[x]$ and $[y]$ are the corresponding coordinate\ncolumns and $M^\\dagger:=\\overline M^{\\mathsf T}$ is the conjugate transpose.\nThe coordinate assertion is established in\n[[thm-qc-dirac-notation-coordinate-identity]].\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-pure-state-and-ray",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Two nonzero vectors $x,y\\in H$ represent the same **ray** when $y=\\alpha x$ for some nonzero $\\alpha\\in\\mathbb C$. A **pure state** is such a ray. If $u$ is a unit representative, its associated operator is $P_u=|u\\rangle\\langle u|$, with the bra, ket and outer-product convention of [[def-qc-dirac-notation-conversion]]. The theorem [[thm-qc-ray-projector-well-defined-and-bijective]] proves that this operator is a rank-one orthogonal projection independent of the chosen unit representative, so it is the operator representative of the pure state.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-bessel-inequality-and-finite-parseval-identity",
+          "source_section": "Statement",
+          "quote": "If $(e_0,\\ldots,e_{r-1})$ is a finite orthonormal list and $v$ is any vector, then\n\n$$\\sum_{i<r}|\\langle v,e_i\\rangle|^2\\le\\lVert v\\rVert^2.$$\n\nEquality holds exactly when $v\\in\\operatorname{span}(e_0,\\ldots,e_{r-1})$. If the list is an orthonormal basis, then for all $v,w$,\n\n$$v=\\sum_{i<r}\\langle v,e_i\\rangle e_i,\\qquad \\langle v,w\\rangle=\\sum_{i<r}\\langle v,e_i\\rangle\\overline{\\langle w,e_i\\rangle},$$\n\nand\n\n$$\\lVert v\\rVert^2=\\sum_{i<r}|\\langle v,e_i\\rangle|^2.$$\n\nThe empty-list case is included.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "On the orthonormal product basis in [F2], $F(e_i\\otimes e_j)=e_j\\otimes e_i$. This basis permutation is unitary and is its own inverse, so $F^*=F$ and $F^2=I$. Direct expansion now gives $P_\\pm^*=P_\\pm$, $P_\\pm^2=P_\\pm$, $P_+P_-=0$, and $P_++P_-=I$. Thus they form a complementary projective two-outcome measurement.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Put $v=\\psi\\otimes\\phi$, which is a unit vector by the tensor inner product. By [F3], $|v\\rangle\\langle v|$ sends $z$ to $\\langle z,v\\rangle v$, and [F4]–[F5] make this a density operator. In an orthonormal basis $(e_k)$, the diagonal coefficient of $|v\\rangle\\langle v|P_-$ at $e_k$ is $\\langle P_-e_k,v\\rangle\\langle v,e_k\\rangle$. If $[P_-]_{ik}$ and $v_i$ are the matrix and vector coordinates, this coefficient is $\\sum_i[P_-]_{ik}\\overline{v_i}v_k$; summing over $k$ by [F7] gives $\\sum_{i,k}[P_-]_{ik}v_k\\overline{v_i}=\\langle P_-v,v\\rangle$. This is the coordinate expansion asserted by [F8], and yields $\\operatorname{tr}(|v\\rangle\\langle v|P_-)=\\sum_k\\langle P_-e_k,v\\rangle\\langle v,e_k\\rangle=\\langle P_-v,v\\rangle,$ so [F6] makes this the outcome probability. Also $\\langle Fv,v\\rangle=\\langle\\phi,\\psi\\rangle\\langle\\psi,\\phi\\rangle=|\\langle\\psi,\\phi\\rangle|^2$ by the tensor inner product and [F1]. Hence $\\Pr[-]=\\langle P_-v,v\\rangle=\\frac{1-|\\langle\\psi,\\phi\\rangle|^2}{2}.$ The complementary outcome has the remaining probability.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F6",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument gives anti probability zero when ψ=φ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument is valid when H has dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument directly covers identical unit states."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument yields zero for identical states and one-half for orthogonal states."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument uses the finite tensor-product basis; the argument chooses a finite orthonormal basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "def-qa-35-finite-communication-protocol": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-valued boundary parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element specialization is part of this qualitative definition or remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "def-qa-35-equality-promise": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-valued boundary parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element specialization is part of this qualitative definition or remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "def-qa-35-code-fingerprint-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-valued boundary parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element specialization is part of this qualitative definition or remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-private-coin-error-reduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-chernoff-bound-for-bernoulli-trials",
+          "source_section": "Statement",
+          "quote": "Let $X_1,\\dots,X_k$ be independent Bernoulli$(p)$ random variables, let $S:=X_1+\\cdots+X_k$, let $\\mu:=pk$, and let $0<\\alpha<1$. Then\n\n$$\\mathbb P\\!\\left(S\\le (1-\\alpha)\\mu\\right)\\le \\exp\\!\\left(-\\frac{\\alpha^2\\mu}{2}\\right).$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Fix a promised input. Let $X_i$ indicate that copy $i$ is correct. The independent private random tapes make these Bernoulli variables independent with common success probability $p\\ge2/3$. Thus $\\mu=pt\\ge2t/3$. Since $t$ is odd, majority is wrong only if $S<t/2$, an event contained in $S\\le(3/4)\\mu$ because $(3/4)\\mu\\ge t/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Apply [F1] with $\\alpha=1/4$: the error is at most $\\exp(-\\mu/32)\\le\\exp(-t/48)$. Each original message is a binary string of length at most $c$, so has fewer than $2^{c+1}$ possibilities. A tuple of $t$ such messages has at most $2^{t(c+1)}$ possibilities and can be injectively encoded by a fixed-length string of at most $t(c+1)$ bits. Thus repetition preserves private independence, yields the stated error, and charges at most $t(c+1)$ bits to each sender.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument permits c=0 and the singleton original message alphabet."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument is valid for odd t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: The statement allows every odd t≥1 and the argument retains the exact exponential bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "thm-qa-35-deterministic-smp-equality-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-equality-promise",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, the **Equality promise problem** has $X=Y=\\{0,1\\}^n$, YES set $\\{(x,x):x\\in\\{0,1\\}^n\\}$ and NO set $\\{(x,y):x\\ne y\\}$. The required output is $1$ on YES and $0$ on NO. This is a total promise problem, and a bounded-error protocol must meet its error bound on every pair.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-communication-protocol",
+          "source_section": "Definition",
+          "quote": "A **finite communication problem** consists of nonempty finite input sets $X,Y$ and a nonempty promise $P=YES\\sqcup NO\\subseteq X\\times Y$ with disjoint YES and NO sets ([[def-promise-problem]]), and a required output bit on promised pairs. A protocol specifies who receives each input, the message schedule and number of rounds, each message alphabet or finite-dimensional register ([[def-qc-register-and-computational-basis]]), the local maps that produce messages, the referee's finite POVM ([[def-qc-povm-and-outcome-law]]) and output rule, and any shared randomness or entanglement. A quantum message state is a density operator, meaning nonnegative with trace one ([[def-qc-density-operator]]). Its worst-case error is the supremum of the probability of a wrong output over promised input pairs; its communication cost is the maximum total number of transmitted bits or qubits on any promised input. Local computation, referee computation, and shared resources are separately declared and are not silently included in that communication count.\n\nIn a simultaneous-message protocol (SMP), Alice and Bob each send one message to a referee without seeing the other's message. For classical private-coin SMP with no shared resource, conditional on inputs $x,y$ the two messages are independent, so their joint law is a product of their individual message distributions. For quantum SMP with no shared entanglement or randomness, the received state is a product of the two locally prepared density operators. These factorization properties are part of the stated resource model.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Alice's message map must be injective. If $x\\ne x'$ had the same Alice message, compare inputs $(x,x)$ and $(x',x)$. Bob's message is the same on both because Bob's input is $x$, and Alice's messages agree by assumption; the referee therefore receives identical transcripts although [F1] requires outputs $1$ and $0$. This contradiction proves injectivity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "With fixed length $b$, Alice has at most $2^b$ messages, so injectivity gives $2^n\\le2^b$ and $b\\ge n$. If all strings of length at most $b$ are allowed, their number is $\\sum_{j=0}^b2^j=2^{b+1}-1$; injectivity gives $2^n\\le2^{b+1}-1$, which forces $b\\ge n$. Alice alone therefore sends at least $n$ bits in the worst case.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument rules out b=0 for n≥1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument proves the n=1 case using the exact message count."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument counts all strings of length at most b, including the empty string."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "thm-qa-35-quantum-fingerprint-message-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-communication-protocol",
+          "source_section": "Definition",
+          "quote": "A **finite communication problem** consists of nonempty finite input sets $X,Y$ and a nonempty promise $P=YES\\sqcup NO\\subseteq X\\times Y$ with disjoint YES and NO sets ([[def-promise-problem]]), and a required output bit on promised pairs. A protocol specifies who receives each input, the message schedule and number of rounds, each message alphabet or finite-dimensional register ([[def-qc-register-and-computational-basis]]), the local maps that produce messages, the referee's finite POVM ([[def-qc-povm-and-outcome-law]]) and output rule, and any shared randomness or entanglement. A quantum message state is a density operator, meaning nonnegative with trace one ([[def-qc-density-operator]]). Its worst-case error is the supremum of the probability of a wrong output over promised input pairs; its communication cost is the maximum total number of transmitted bits or qubits on any promised input. Local computation, referee computation, and shared resources are separately declared and are not silently included in that communication count.\n\nIn a simultaneous-message protocol (SMP), Alice and Bob each send one message to a referee without seeing the other's message. For classical private-coin SMP with no shared resource, conditional on inputs $x,y$ the two messages are independent, so their joint law is a product of their individual message distributions. For quantum SMP with no shared entanglement or randomness, the received state is a product of the two locally prepared density operators. These factorization properties are part of the stated resource model.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-equality-promise",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, the **Equality promise problem** has $X=Y=\\{0,1\\}^n$, YES set $\\{(x,x):x\\in\\{0,1\\}^n\\}$ and NO set $\\{(x,y):x\\ne y\\}$. The required output is $1$ on YES and $0$ on NO. This is a total promise problem, and a bounded-error protocol must meet its error bound on every pair.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-measurement-variation-at-most-trace-distance",
+          "source_section": "Statement",
+          "quote": "Let $\\rho,\\sigma$ be density operators on a finite-dimensional complex Hilbert space and let $\\{E_a\\}_{a\\in\\mathcal A}$ be any finite POVM. If $p_a=\\operatorname{tr}(\\rho E_a)$ and $q_a=\\operatorname{tr}(\\sigma E_a)$, then\n$$\\frac12\\sum_{a\\in\\mathcal A}|p_a-q_a|\\le D(\\rho,\\sigma).$$\nThe two-effect projective measurement from the Holevo–Helstrom theorem attains equality.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-trace-distance",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **trace distance** is\n$$D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1,$$\nwhere $\\|\\cdot\\|_1$ is the trace norm ([[def-qc-trace-norm]]). The factor $1/2$ is part of this state-distance convention. The diamond norm below is an unhalved norm on maps.\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qa-35-trace-norm-tensor-density-identity",
+          "source_section": "Statement",
+          "quote": "For density operators $\\rho,\\sigma$ on $H$ and $\\tau$ on $K$, $D(\\rho\\otimes\\tau,\\sigma\\otimes\\tau)=D(\\rho,\\sigma)$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-trace-norm",
+          "source_section": "Definition",
+          "quote": "Let $A:H\\to K$ be a linear map ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces. Its singular values are the eigenvalues of\n$|A|:=\\sqrt{A^*A}:H\\to H$, counted with multiplicity, as defined in\n[[def-singular-values-of-an-endomorphism]]. Define the **trace norm**, or\nSchatten-$1$ norm, by\n\n$$\\|A\\|_1:=\\sum_{j<\\dim H}s_j(A).$$\n\nThe sum includes zero singular values and is $0$ when $H$ is the zero space.\nFor this definition, $A$ may be rectangular; the singular values are those of\n$|A|$ on the domain $H$. The spectral trace formula is proved in\n[[thm-qc-trace-norm-spectral-formula]].\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.\n\n",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The operator $T$ is **non-negative** when $T$ is\nself-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and\n\n$$\\langle Tv,v\\rangle\\ge 0$$\n\nfor every $v\\in V$.\n\nThe operator $T$ is **positive** when $T$ is self-adjoint and\n\n$$\\langle Tv,v\\rangle>0$$\n\nfor every nonzero $v\\in V$.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Fix Bob's input $y$. On inputs $(y,y)$ and $(x,y)$ with $x\\ne y$, the referee receives $\\rho_y\\otimes\\sigma_y$ and $\\rho_x\\otimes\\sigma_y$ by [F1]. Group all referee outcomes assigned answer $1$ into one effect and the remaining outcomes into its complement, giving the protocol's two-outcome POVM. Its accepting probabilities differ by at least $1/3$ by [F2] and the worst-case error bound. The total variation of this binary law is that absolute difference, so [F3]–[F5] imply $D(\\rho_x,\\rho_y)\\ge1/3$. As $x,y$ were arbitrary, the $2^n$ states $\\rho_x$ are pairwise separated by at least $1/3$. [given, F1, F2, F3, F4, F5, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Fix an orthonormal basis of the $d=2^{q_A}$ dimensional message space. By [F11], $\\rho$ is self-adjoint, and by [F1] and [F10] its diagonal entries are nonnegative and sum to one, so each lies in $[0,1]$. Let $R=\\sqrt\\rho$, which exists by [F9]. For basis vectors $e_i,e_j$, $\\rho_{ij}=\\langle\\rho e_j,e_i\\rangle=\\langle R e_j,R e_i\\rangle$; [F8] gives $|\\rho_{ij}|^2\\le\\|R e_j\\|^2\\|R e_i\\|^2=\\rho_{jj}\\rho_{ii}\\le1$. Thus the $d^2$ real coordinates (diagonal, and real and imaginary parts above the diagonal) lie in $[-1,1]$.",
+          "step": "1.2",
+          "inputs": [
+            "F11",
+            "F1",
+            "F10",
+            "F9",
+            "F8"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Partition each coordinate interval into half-open cells of width at most $h=1/(12d^{3/2})$, assigning the endpoint $1$ to the last cell. There are at most $\\lceil2/h\\rceil+1\\le26d^{3/2}$ choices per coordinate and thus at most $(26d^{3/2})^{d^2}$ matrix cells. If two states lie in one cell, their diagonal entries differ by at most $h$, and each off-diagonal real and imaginary part differs by at most $h$. Therefore their difference $Z$ satisfies $\\|Z\\|_F\\le\\sqrt2\\,d h$.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "By [F6]–[F8] and Cauchy–Schwarz on the at most $d$ singular values, $\\|Z\\|_1\\le\\sqrt d\\,\\|Z\\|_F$. Their trace distance is consequently at most $\\frac12\\sqrt d(\\sqrt2 d h)=\\sqrt2/24<1/3$, contradicting step 1.1. Each cell contains at most one code state, so $2^n\\le(26d^{3/2})^{d^2}.$ For $d=2^{q_A}$ this gives $n\\ln2\\le4^{q_A}(\\ln26+\\tfrac32q_A\\ln2)$. If $q_A<\\frac14\\log_2n$, the right side is $O(\\sqrt n\\log n)<n\\ln2$ for all sufficiently large $n$, a contradiction. Hence $q_A=\\Omega(\\log n)$. Interchanging Alice and Bob proves $q_B=\\Omega(\\log n)$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "F4",
+            "F7",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument allow q_A=0 or q_B=0; then d=1 and the packing contradiction applies for large n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: the argument specializes the grid bound to d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: the argument handles every distinct pair and the fixed Bob state."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1: the argument assigns boundary coordinates −1 and 1 to grid cells."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: the argument chooses the finite-dimensional square root and the grid partition uses finitely many cells."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-qa-35-random-code-existence-nonuniform": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-chernoff-bound-for-bernoulli-trials",
+          "source_section": "Statement",
+          "quote": "Let $X_1,\\dots,X_k$ be independent Bernoulli$(p)$ random variables, let $S:=X_1+\\cdots+X_k$, let $\\mu:=pk$, and let $0<\\alpha<1$. Then\n\n$$\\mathbb P\\!\\left(S\\le (1-\\alpha)\\mu\\right)\\le \\exp\\!\\left(-\\frac{\\alpha^2\\mu}{2}\\right).$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Fix distinct $x,y$. In each coordinate, the independent random bits $E_i(x),E_i(y)$ disagree with probability $1/2$, independently across the $32n$ coordinates. Thus their Hamming distance $S$ is a sum of independent Bernoulli$(1/2)$ variables with mean $16n$. By [F1] with $\\alpha=1/2$, $\\Pr(S\\le8n)\\le e^{-2n}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "There are $\\binom{2^n}{2}<2^{2n}$ distinct input pairs, so the probability that any pair has distance below $8n$ is at most $2^{2n}e^{-2n}=e^{(2\\ln2-2)n}<1$, since $\\ln2=\\int_1^2du/u<1$. Hence some finite codebook has every pairwise distance at least $8n$, which is relative distance at least $1/4$. For each $n$, order all finite codebooks lexicographically and choose the first one with this property; this defines a nonuniform family without an arbitrary-choice axiom. The exhaustive selection gives no polynomial-time construction or uniform encoder.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n≥1 and a positive code length 32n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument verifies the union bound remains strict for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument selects the lexicographically first code satisfying the distance condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument uses the exact Chernoff threshold S≤8n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument chooses the lexicographically first member of a finite nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "thm-qa-35-code-fingerprint-state-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-code-fingerprint-state",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, let $E:\\{0,1\\}^n\\to\\{0,1\\}^N$ be a binary code of positive length $N$. Its relative distance is the minimum Hamming distance between distinct codewords divided by $N$. If that distance is at least $\\delta>0$, let $m=\\lceil\\log_2N\\rceil$ and use the ordered computational basis of the $m$-qubit index register, padding unused indices by zero amplitude. The **fingerprint state** of $x$ is\n$$|h_x\\rangle:=\\frac1{\\sqrt N}\\sum_{i=0}^{N-1}|i\\rangle|E_i(x)\\rangle,$$\na vector in the $(m+1)$-qubit index-and-data register. The following theorem proves it is normalized and computes its overlap. This is a state definition; it makes no uniformity or encoder-time claim.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. In particular, the\none-dimensional zero-qubit register has the basis $\\{1\\}$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The $N$ summands in [F1] are distinct orthonormal basis vectors by [F2]–[F3], even when code bits repeat, because their index labels differ. Therefore $\\|h_x\\|^2=N^{-1}\\sum_{i<N}1=1$. Its ambient register has $m+1=\\lceil\\log_2N\\rceil+1$ qubits by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Expanding the inner product using [F1] and orthonormality gives $\\langle h_x|h_y\\rangle=\\frac1N\\sum_{i,j<N}\\langle i|j\\rangle\\langle E_i(x)|E_j(y)\\rangle=\\frac1N\\sum_{i<N}\\mathbf1_{E_i(x)=E_i(y)}.$ The last sum counts agreeing code coordinates, proving the overlap identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument permits a zero-qubit index register when N=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument include N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument permits identical codewords and overlap one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument includes both full agreement and coordinate disagreement cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "thm-qa-35-private-coin-equality-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qa-35-private-coin-error-reduction",
+          "source_section": "Statement",
+          "quote": "If a private-coin simultaneous-message Equality protocol has worst-case error at most 1/3 and each sender sends at most c bits, then for any fixed odd t independent repetitions followed by majority have error at most exp(−t/48) and each sender sends at most t(c+1) bits under a fixed-length encoding.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-35-identity-matrix-packing",
+          "source_section": "Statement",
+          "quote": "If A,B are N×m row-stochastic matrices and M∈[0,1]^{m×m} satisfies (AMBᵀ)_xx≥0.99 and (AMBᵀ)_xy≤0.01 for x≠y, then for every m≥2, N≤exp(60(ln m)²).\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Choose any fixed odd integer $t>48\\ln400$. By [F1], repetition gives error less than $1/400$. Each sender's repeated transcript takes at most $2^{t(c+1)}$ possible values. Let $N=2^n$ and $m=2^{t(c+1)}$; define row $x$ of $A$ and row $y$ of $B$ as the probability distributions of Alice's and Bob's transcript, padding unused message labels with zeroes. Independence of their private random tapes makes the joint transcript law the product $A_x(i)B_y(j)$. Let $M_{ij}$ be the referee's acceptance probability on transcript pair $(i,j)$; then $M\\in[0,1]^{m\\times m}$ and $(AMB^{\\mathsf T})_{xy}$ is the acceptance probability on $(x,y)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Repeated-protocol correctness gives diagonal acceptance at least $399/400>0.99$ and off-diagonal acceptance at most $1/400<0.01$. Apply [F2] to obtain $2^n\\le\\exp(60(t(c+1)\\ln2)^2)$. Taking logarithms and rearranging yields $c+1\\ge\\frac1t\\sqrt{\\frac{n}{60\\ln2}}.$ Since $t$ is a fixed constant, $c=\\Omega(\\sqrt n)$ as $n\\to\\infty$, and the total communication is at least $c$. The proof uses only finite message distributions and finite conditioning; it invokes no choice axiom.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument includes c=0 message lengths."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument uses N=2^n for every n≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument chooses a fixed odd t above the stated threshold."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument uses strict inequalities 399/400>0.99 and 1/400<0.01."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument constructs finite message distributions; no arbitrary selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "alg-qa-35-swap-test-fingerprint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-code-fingerprint-state",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, let $E:\\{0,1\\}^n\\to\\{0,1\\}^N$ be a binary code of positive length $N$. Its relative distance is the minimum Hamming distance between distinct codewords divided by $N$. If that distance is at least $\\delta>0$, let $m=\\lceil\\log_2N\\rceil$ and use the ordered computational basis of the $m$-qubit index register, padding unused indices by zero amplitude. The **fingerprint state** of $x$ is\n$$|h_x\\rangle:=\\frac1{\\sqrt N}\\sum_{i=0}^{N-1}|i\\rangle|E_i(x)\\rangle,$$\na vector in the $(m+1)$-qubit index-and-data register. The following theorem proves it is normalized and computes its overlap. This is a state definition; it makes no uniformity or encoder-time claim.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-35-code-fingerprint-state-properties",
+          "source_section": "Statement",
+          "quote": "For every binary code E:{0,1}ⁿ→{0,1}ᴺ and x,y, |h_x⟩ has norm one, uses ceil(log₂N)+1 qubits, and ⟨h_x|h_y⟩=N^(−1)|{i:E_i(x)=E_i(y)}|.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-toffoli-and-fredkin",
+          "source_section": "Definition",
+          "quote": "All bits are in $\\mathbb F_2=\\{0,1\\}$, with addition denoted by $\\oplus$ and multiplication by juxtaposition. On three distinct ordered computational-basis wires, define the Toffoli gate $T$ and Fredkin gate $F$ by\n$$\nT|a,b,t\\rangle=|a,b,t\\oplus ab\\rangle,\n$$\nand\n$$\nF|0,a,b\\rangle=|0,a,b\\rangle,\\qquad F|1,a,b\\rangle=|1,b,a\\rangle.\n$$\nThese basis actions extend linearly. Wire order is exactly the order displayed; the first two wires of $T$ are controls and the third is its target, while the first wire of $F$ is its control and the other two are conditionally swapped. Negative-control variants mean conjugating the chosen positive control by $X$ before and after the gate. These are fixed arity-three labels in the declared finite gate alphabet, not implicit access to arbitrary multicontrol gates. Their reversibility is established in [[lem-qc-x-cnot-toffoli-and-fredkin-are-involutions]].\n\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Alice prepares and sends $|h_x\\rangle$; Bob prepares and sends $|h_y\\rangle$. Write $L=m+1$ for the number of message wires in each register. The referee appends a control qubit $|0\\rangle$, applies $H=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$, which satisfies $H^*H=I$ by multiplication, and applies one Fredkin gate to the control and each corresponding pair of the $L$ message wires. By [F3], on each computational-basis pair this leaves the registers in place when the control is $0$ and swaps the full registers when it is $1$; linearity therefore maps $|0\\rangle|h_xh_y\\rangle$ after the first Hadamard and controlled swaps to $2^{-1/2}(|0\\rangle|h_xh_y\\rangle+|1\\rangle|h_yh_x\\rangle)$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Applying $H$ again gives $\\tfrac12\\bigl(|0\\rangle(|h_xh_y\\rangle+|h_yh_x\\rangle)+|1\\rangle(|h_xh_y\\rangle-|h_yh_x\\rangle)\\bigr).$ The probability of control outcome $1$ is $\\frac14\\||h_xh_y\\rangle-|h_yh_x\\rangle\\|^2=(1-|\\langle h_x|h_y\\rangle|^2)/2$, so the protocol implements the antisymmetric swap-test outcome exactly. It sends $L$ qubits per party; the referee uses $L$ Fredkin gates and two Hadamards per test. State-preparation and local computation costs are separate, and no shared randomness or entanglement is assumed.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument pads unused index labels with zero amplitude through the code state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: The statement allows N=1, with L=m+1=1 message wire."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument gives zero anti outcome for equal fingerprints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument gives anti probability zero on equality and at most one-half."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "rem-qa-35-private-coin-lower-bound-unresolved": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-valued boundary parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element specialization is part of this qualitative definition or remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "thm-qa-35-fingerprint-correctness-and-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-35-code-fingerprint-state-properties",
+          "source_section": "Statement",
+          "quote": "For every binary code E:{0,1}ⁿ→{0,1}ᴺ and x,y, |h_x⟩ has norm one, uses ceil(log₂N)+1 qubits, and ⟨h_x|h_y⟩=N^(−1)|{i:E_i(x)=E_i(y)}|.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-35-swap-test-measurement-effect",
+          "source_section": "Statement",
+          "quote": "The operators $P_\\pm=(I\\pm F)/2$ are complementary orthogonal projections, and on unit vectors $\\psi,\\phi$ the antisymmetric outcome on $|\\psi\\otimes\\phi\\rangle$ has probability $(1-|\\langle\\psi|\\phi\\rangle|^2)/2$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-qa-35-swap-test-fingerprint",
+          "source_section": "Statement",
+          "quote": "On inputs x,y and a supplied code E, Alice and Bob send |h_x⟩ and |h_y⟩, each using m+1 qubits where m=ceil(log₂N). The referee appends control |0⟩, applies H, applies one controlled Fredkin swap to each corresponding pair of the m+1 message wires, applies H again, and measures the control; outcome 1 means unequal. Repeating on r fresh pairs and declaring unequal iff any test returns 1 is the confidence protocol. All transmitted qubits and local/referee gate counts are separate; no shared randomness or entanglement is used.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qa-35-random-code-existence-nonuniform",
+          "source_section": "Statement",
+          "quote": "For every n≥1 there is a map E:{0,1}ⁿ→{0,1}^(32n) of relative distance at least 1/4. Choosing the lexicographically first such codebook defines a nonuniform family; this argument gives no efficient or uniform encoder.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qc-tensor-product-basis-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered list of finite-dimensional\ncomplex inner-product spaces with specified ordered orthonormal bases of\nsizes $d_0,\\ldots,d_{n-1}$, allowing $d_k=0$. The elementary tensors of the\nfactor bases, ordered lexicographically, form an orthonormal basis of the\ntensor register, and\n\n$$\\dim(H_0\\otimes\\cdots\\otimes H_{n-1})=\\prod_{k<n}d_k.$$\n\nFor the empty list the product is $1$ and the tensor space is $\\mathbb C$; if\nany $d_k=0$, the tensor space is zero and the product basis is empty.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-ray-projector-well-defined-and-bijective",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex-inner-product $H$, the map sending a ray $[u]$ to the rank-one projector $P_u=|u\\rangle\\langle u|$ of any unit representative is well-defined and bijective onto the rank-one orthogonal projections on $H$. Each $P_u$ is non-negative and has trace one.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qa-35-swap-test-effect",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space. On $H\\otimes H$ define the **swap** $F$ by $F(u\\otimes v)=v\\otimes u$ and linear extension. Define the symmetric and antisymmetric effects\n$$P_+=(I+F)/2,\\qquad P_-=(I-F)/2.$$\nThe “equal” outcome corresponds to $P_+$ and “unequal” to $P_-$. The following theorem proves well-definedness as a two-outcome projective measurement and calculates its pure-product law.\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Assume $0<\\delta\\le1$. If $x=y$, then [F1] gives $|\\langle h_x|h_y\\rangle|=1$, so [F2] gives anti probability zero. If $x\\ne y$, their agreement fraction is at most $1-\\delta$, so the one-test anti probability $p$ satisfies $p=\\frac{1-|\\langle h_x|h_y\\rangle|^2}{2}\\ge p_0:=\\frac{1-(1-\\delta)^2}{2}=\\delta-\\delta^2/2>0.$ Because $0<\\delta\\le1$, $p_0\\le1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "On equal inputs no test returns anti, so the protocol never errs. On unequal inputs the $r$ fresh pairs have joint state $\\Omega^{\\otimes r}$, where $\\Omega=|h_xh_y\\rangle\\langle h_xh_y|$, and the all-symmetric event has effect $P_+^{\\otimes r}$. The vector $h_x\\otimes h_y$ is unit by [F1], so its rank-one projector $\\Omega$ is a density operator by [F8]; the tensor power is the projector of the unit vector $(h_x\\otimes h_y)^{\\otimes r}$ and is also a density operator. By [F9], $P_+^{\\otimes r}$ is the all-symmetric projective effect. The tensor maps multiply factor by factor, so $\\Omega^{\\otimes r}P_+^{\\otimes r}=(\\Omega P_+)^{\\otimes r}$. The projective outcome law [F7] and the product basis [F5] give $\\Pr[\\text{all symmetric}]=\\operatorname{tr}(\\Omega^{\\otimes r}P_+^{\\otimes r})=\\sum_{i_1,\\ldots,i_r}\\prod_{j=1}^r(\\Omega P_+)_{i_ji_j}=(\\operatorname{tr}(\\Omega P_+))^r=(1-p)^r.$ Thus the error is at most $(1-p_0)^r$. Taking $r=\\left\\lceil\\ln(1/\\epsilon)/[-\\ln(1-p_0)]\\right\\rceil$ makes this at most $\\epsilon$, including the endpoint $\\delta=1$ where $p_0=1/2$. Each party transmits exactly $r(\\lceil\\log_2N\\rceil+1)$ qubits. If $N\\le Cn$ for fixed $C$ and $\\delta$ is fixed positive, then $r=O(1+\\ln(1/\\epsilon))$ and $\\lceil\\log_2N\\rceil+1=O(1+\\log n)$, giving the stated product bound. Efficient uniform preparation needs a separate explicit code construction; [F4] supplies only a nonuniform family.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "F9",
+            "F7",
+            "F5",
+            "F4",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypothesis requires δ>0, so p₀=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument covers δ=1 and gives p₀=1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument distinguish equal and unequal inputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument requires 0<ε<1 and explicitly handles δ=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "cex-qa-35-public-vs-private-randomness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-equality-promise",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, the **Equality promise problem** has $X=Y=\\{0,1\\}^n$, YES set $\\{(x,x):x\\in\\{0,1\\}^n\\}$ and NO set $\\{(x,y):x\\ne y\\}$. The required output is $1$ on YES and $0$ on NO. This is a total promise problem, and a bounded-error protocol must meet its error bound on every pair.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-communication-protocol",
+          "source_section": "Definition",
+          "quote": "A **finite communication problem** consists of nonempty finite input sets $X,Y$ and a nonempty promise $P=YES\\sqcup NO\\subseteq X\\times Y$ with disjoint YES and NO sets ([[def-promise-problem]]), and a required output bit on promised pairs. A protocol specifies who receives each input, the message schedule and number of rounds, each message alphabet or finite-dimensional register ([[def-qc-register-and-computational-basis]]), the local maps that produce messages, the referee's finite POVM ([[def-qc-povm-and-outcome-law]]) and output rule, and any shared randomness or entanglement. A quantum message state is a density operator, meaning nonnegative with trace one ([[def-qc-density-operator]]). Its worst-case error is the supremum of the probability of a wrong output over promised input pairs; its communication cost is the maximum total number of transmitted bits or qubits on any promised input. Local computation, referee computation, and shared resources are separately declared and are not silently included in that communication count.\n\nIn a simultaneous-message protocol (SMP), Alice and Bob each send one message to a referee without seeing the other's message. For classical private-coin SMP with no shared resource, conditional on inputs $x,y$ the two messages are independent, so their joint law is a product of their individual message distributions. For quantum SMP with no shared entanglement or randomness, the received state is a product of the two locally prepared density operators. These factorization properties are part of the stated resource model.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Let public shared seeds $r_1,r_2$ be independent uniform vectors in $\\mathbb F_2^n$. Alice sends $(r_1\\cdot x,r_2\\cdot x)$ and Bob sends $(r_1\\cdot y,r_2\\cdot y)$; the referee outputs equality exactly when both bits match. If $x=y$, both match surely. If $z=x+y\\ne0$, choose a coordinate $k$ with $z_k=1$; flipping $r_k$ pairs seeds bijectively with opposite values of $r\\cdot z$, so each $r_i\\cdot z$ is uniform, and independence gives collision probability $1/4$. The protocol uses two transmitted bits per sender and a shared seed of $2n$ bits, which [F2] keeps separate from communication.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "If the parties instead use independent private seed pairs, take the equal input $x=y=e_1$. Each sender's two-bit message is uniform on $\\mathbb F_2^2$, independently of the other's, so the messages disagree with probability $3/4$. This violates any bounded-error Equality guarantee such as error at most $1/3$, showing that the common seed is doing real work.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument treats x=y with zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument include n=1 and e_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument gives failure probability 3/4 on the equal input e_1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument distinguishes collision probabilities zero on YES and one-quarter on NO."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "ex-qa-35-length-eight-fingerprints": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qa-35-code-fingerprint-state-properties",
+          "source_section": "Statement",
+          "quote": "For every binary code E:{0,1}ⁿ→{0,1}ᴺ and x,y, |h_x⟩ has norm one, uses ceil(log₂N)+1 qubits, and ⟨h_x|h_y⟩=N^(−1)|{i:E_i(x)=E_i(y)}|.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qa-35-swap-test-measurement-effect",
+          "source_section": "Statement",
+          "quote": "The operators $P_\\pm=(I\\pm F)/2$ are complementary orthogonal projections, and on unit vectors $\\psi,\\phi$ the antisymmetric outcome on $|\\psi\\otimes\\phi\\rangle$ has probability $(1-|\\langle\\psi|\\phi\\rangle|^2)/2$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Direct coordinate comparison gives the six pairwise distances $d(u_0,u_1)=4$, $d(u_0,u_2)=4$, $d(u_0,u_3)=8$, $d(u_1,u_2)=8$, $d(u_1,u_3)=4$, and $d(u_2,u_3)=4$. In particular $u_0,u_1$ agree in their first four positions and differ in the last four; [F1] gives $\\langle h_{u_0}|h_{u_1}\\rangle=4/8=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "By [F2], one swap test declares unequal with probability $(1-(1/2)^2)/2=3/8$. For any equal codeword pair the overlap is one and the same formula gives probability zero. The index needs $\\lceil\\log_2 8\\rceil=3$ qubits and the data bit adds one, so each fingerprint uses four qubits.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite inputs are nonempty; no empty-object conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument gives zero anti probability for equal words."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument counts the 3-bit index and one data bit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument computes the equal-codeword endpoint."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the argument verifies all six pairwise codeword distances."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no selection or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    }
+  }
+}

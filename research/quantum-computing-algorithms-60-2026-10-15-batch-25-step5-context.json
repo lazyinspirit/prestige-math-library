@@ -1,0 +1,354 @@
+{
+  "group": "a",
+  "batches": [
+    "25"
+  ],
+  "pages_read": [
+    "computational-problems-promises-and-cost-models",
+    "computational-problems-promises-and-cost-models-examples"
+  ],
+  "items_read": [
+    "def-qa-expected-query-cost",
+    "def-qa-task-and-promise-domain",
+    "def-qa-input-encoding-and-size",
+    "def-qa-finite-branch-output-law",
+    "def-qa-promise-query-instance",
+    "def-qa-classical-query-algorithm",
+    "def-qa-quantum-query-algorithm",
+    "def-qa-bounded-error-promise-correctness",
+    "def-qa-classical-bit-cost",
+    "def-qa-exact-promise-correctness",
+    "def-qa-nonoracle-gate-cost",
+    "def-qa-classical-query-complexity",
+    "def-qa-quantum-query-complexity",
+    "thm-qa-promise-preserving-query-reduction-composition",
+    "ex-qa-promise-and-cost-models"
+  ],
+  "conventions": [
+    {
+      "convention": "Decision correctness is required only on disjoint yes/no promise sets; search correctness requires a witness in the declared relation only on its promise domain.",
+      "fixed_by": "def-qa-task-and-promise-domain",
+      "matters_for": [
+        "def-qa-exact-promise-correctness",
+        "def-qa-bounded-error-promise-correctness",
+        "thm-qa-promise-preserving-query-reduction-composition",
+        "ex-qa-promise-and-cost-models"
+      ]
+    },
+    {
+      "convention": "Input encoding is injective, and input size is the encoded string length; the hidden encoding labels the instance without granting readable input access.",
+      "fixed_by": "def-qa-input-encoding-and-size",
+      "matters_for": [
+        "def-qa-promise-query-instance",
+        "def-qa-classical-query-algorithm",
+        "def-qa-quantum-query-algorithm",
+        "thm-qa-promise-preserving-query-reduction-composition"
+      ]
+    },
+    {
+      "convention": "Each oracle function is total on its complete address domain. One coherent XOR invocation counts as one query regardless of reply width; its inverse is the same ordinary query, while controlled access requires an explicit capability and charge.",
+      "fixed_by": "def-qa-promise-query-instance",
+      "matters_for": [
+        "def-qa-classical-query-algorithm",
+        "def-qa-quantum-query-algorithm",
+        "thm-qa-promise-preserving-query-reduction-composition",
+        "ex-qa-promise-and-cost-models"
+      ]
+    },
+    {
+      "convention": "At fixed encoded length and public data, the quantum protocol, initial state, nonoracle operations, instruments, branch rules, and output rules are independent of the hidden instance. Additional instance-dependent access must be explicitly supplied and charged.",
+      "fixed_by": "def-qa-quantum-query-algorithm",
+      "matters_for": [
+        "def-qa-quantum-query-complexity",
+        "thm-qa-promise-preserving-query-reduction-composition"
+      ]
+    },
+    {
+      "convention": "Finite instrument branches use observed outcome labels, retain density states only on positive-probability branches, and sum terminal diagonal weights over all unmeasured wires. Zero-probability descendants contribute no output weight.",
+      "fixed_by": "def-qa-finite-branch-output-law",
+      "matters_for": [
+        "def-qa-quantum-query-algorithm",
+        "def-qa-exact-promise-correctness",
+        "def-qa-bounded-error-promise-correctness",
+        "ex-qa-promise-and-cost-models"
+      ]
+    },
+    {
+      "convention": "Bounded error means success probability at least 2/3 on every promised instance, rather than an input-distribution average.",
+      "fixed_by": "def-qa-bounded-error-promise-correctness",
+      "matters_for": [
+        "def-qa-classical-query-complexity",
+        "def-qa-quantum-query-complexity",
+        "thm-qa-promise-preserving-query-reduction-composition"
+      ]
+    },
+    {
+      "convention": "Worst-case quantum query cost maximizes over promised instances and all measurement branches; an empty length-specific promise has cost zero. Expected query cost is a separate coordinate.",
+      "fixed_by": "def-qa-quantum-query-complexity",
+      "matters_for": [
+        "thm-qa-promise-preserving-query-reduction-composition",
+        "ex-qa-promise-and-cost-models"
+      ]
+    },
+    {
+      "convention": "Expected query cost is the supremum of finite-prefix expected call counts. No probability measure on infinite histories is presumed; the round-end identification assumes a fixed finite elementary-step bound per padded round.",
+      "fixed_by": "def-qa-expected-query-cost",
+      "matters_for": [
+        "def-qa-classical-query-complexity",
+        "def-qa-quantum-query-complexity"
+      ]
+    },
+    {
+      "convention": "Nonoracle elementary gates, preparation, measurements, classical processing, and oracle calls have separate resource coordinates; classical bit cost counts transitions of a declared fixed-alphabet multitape machine.",
+      "fixed_by": "def-qa-classical-bit-cost",
+      "matters_for": [
+        "def-qa-nonoracle-gate-cost",
+        "thm-qa-promise-preserving-query-reduction-composition",
+        "ex-qa-promise-and-cost-models"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qa-quantum-query-algorithm",
+      "statement": "At each encoded length n and declared public data p, a quantum query algorithm is a finite circuit protocol fixed independently of the hidden instance. A T-query algorithm makes at most T designated oracle calls on every execution branch for every promised instance.",
+      "used_by": [
+        "def-qa-bounded-error-promise-correctness",
+        "def-qa-exact-promise-correctness",
+        "def-qa-nonoracle-gate-cost",
+        "def-qa-quantum-query-complexity",
+        "thm-qa-promise-preserving-query-reduction-composition"
+      ]
+    },
+    {
+      "id": "def-qa-finite-branch-output-law",
+      "statement": "For the specified finite execution tree of unitary and finite instrument nodes, the terminal output weights form a normalized probability law, and every predicate-selected acceptance probability lies in [0,1].",
+      "used_by": [
+        "def-qa-quantum-query-algorithm",
+        "def-qa-bounded-error-promise-correctness",
+        "def-qa-exact-promise-correctness",
+        "ex-qa-promise-and-cost-models"
+      ]
+    },
+    {
+      "id": "def-qa-promise-query-instance",
+      "statement": "Each encoded promised instance selects a total function from a(n)-bit addresses to b(n)-bit replies. Its standard quantum query is the coherent XOR action, and one invocation is one query regardless of output width.",
+      "used_by": [
+        "def-qa-classical-query-algorithm",
+        "def-qa-quantum-query-algorithm",
+        "ex-qa-promise-and-cost-models"
+      ]
+    },
+    {
+      "id": "def-qa-task-and-promise-domain",
+      "statement": "A decision task has disjoint yes/no promise sets. A search task has a promise domain D and witness relation R, requiring a witness w with (z,w) in R for each z in D. Neither imposes correctness outside its promise.",
+      "used_by": [
+        "def-qa-input-encoding-and-size",
+        "def-qa-promise-query-instance",
+        "def-qa-bounded-error-promise-correctness",
+        "def-qa-exact-promise-correctness",
+        "thm-qa-promise-preserving-query-reduction-composition"
+      ]
+    },
+    {
+      "id": "def-qa-expected-query-cost",
+      "statement": "Expected query cost on a fixed promised input is sup over M in the natural numbers of E[C_M], where C_M counts calls in the normalized finite length-M execution-prefix experiment.",
+      "used_by": [
+        "def-qa-classical-query-complexity",
+        "def-qa-quantum-query-complexity"
+      ]
+    },
+    {
+      "id": "thm-qa-promise-preserving-query-reduction-composition",
+      "statement": "Under the stated promise-preserving decision or computable search maps, exact admissible target initialization and witness lifting, and direct target access or exact charged query simulation, composition preserves the target solver's per-instance correctness. Source query bounds are T or sT with no additional initialization/lifting queries, and u+T+v or u+sT+v with the stated additive overhead.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Normalized finite execution-prefix spaces and their nonnegative weights.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-real-random-variable-and-distribution",
+      "used_for": "Treating each bounded finite-prefix call count as a finite real random variable.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Finite weighted-sum expectations and monotonicity of prefix expected query counts.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-reindexing-and-fubini",
+      "used_for": "Summing child weights, preserving prefix marginals, and interchanging terminal leaf and output sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite-prefix normalization and finite execution-tree normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-promise-problem",
+      "used_for": "Disjoint decision promise sets and absence of off-promise correctness obligations.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Positivity of density operators, unitary state updates, and terminal diagonal weights.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Root-linear-first adjoint identities in unitary density-state updates.",
+      "opened": true
+    },
+    {
+      "id": "prop-adjoint-algebra",
+      "used_for": "Self-adjointness of unitary-conjugated density operators.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Meaning of the explicitly declared unitary execution-tree edges.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-isometry-characterisations",
+      "used_for": "The unitary identity U-adjoint times U equals identity.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Trace-one state normalization and terminal probabilities as sums of computational-basis diagonal entries.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Preservation of trace under unitary conjugation.",
+      "opened": true
+    },
+    {
+      "id": "def-probabilistic-polynomial-time-machine-interface",
+      "used_for": "Finite fair-bit random-tape semantics and the distinction between branch bounds and expected cost.",
+      "opened": true
+    },
+    {
+      "id": "def-multitape-and-nondeterministic-machines",
+      "used_for": "The declared multitape transition model for classical bit costs.",
+      "opened": true
+    },
+    {
+      "id": "def-promise-preserving-reduction",
+      "used_for": "Total polynomial-time decision many-one reductions preserving both promise sides.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "The example's direct calculation that two Hadamard gates compose to identity.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The base promise model supplies terminal conventions; intermediate instruments are explicitly added locally. Uniformity and resource coordinates remain separately declared."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The total XOR oracle, involutive inverse, and separation of black-box access from circuit implementation are preserved."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Big-endian ordering, orthonormal product bases, and the one-dimensional zero-qubit register agree with the suppliers."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "The root pairing is linear first; Dirac notation reverses its arguments, consistently with the diagonal probability calculation."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Wire order, later-on-left composition, and separate elementary/query costs are used faithfully."
+    },
+    {
+      "from": "computational-problems-promises-and-cost-models",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Instrument normalization and conditional-state density are applied only to density inputs and positive-probability branches."
+    },
+    {
+      "from": "reversible-arithmetic-and-oracle-conversion",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Standard XOR calls, explicit preparation gates, and controlled-phase capability retain their distinct charges."
+    },
+    {
+      "from": "exact-oracle-algorithms",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Promise definitions, truth-table input length, terminal output laws, and preparation-inclusive gate counts match the cited interfaces."
+    },
+    {
+      "from": "simon-algorithm-and-finite-field-recovery",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Classical lower bounds fix oracle-only access; unbounded rank collection uses finite-prefix expected cost separately from the capped procedure."
+    },
+    {
+      "from": "quantum-order-finding-and-rational-reconstruction",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Arithmetic and reconstruction claims use the declared multitape bit-transition coordinate separately from gates and controlled calls."
+    },
+    {
+      "from": "grover-search-and-invariant-plane-rotations",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Finite query bounds include candidate verification; BBHT expected cost uses finite prefixes and remains distinct from gate and preprocessing costs."
+    },
+    {
+      "from": "amplitude-amplification",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Declared preparation, inverse, reflection, and measurement accesses are charged separately; unbounded procedures use finite-prefix expected cost."
+    },
+    {
+      "from": "amplitude-estimation-and-counting",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Controlled-power and repeated-controlled-call modes are explicitly declared, with separate query and classical postprocessing coordinates."
+    },
+    {
+      "from": "quantum-query-lower-bounds-and-search-optimality",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "The local Boolean search model preserves hidden-input independence, per-instance 2/3 correctness, and worst-branch query accounting."
+    },
+    {
+      "from": "polynomial-method-and-approximate-degree",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "The local oracle-only specialization preserves finite instrument semantics and explicitly distinguishes one algorithm's cost from minimization over feasible algorithms."
+    },
+    {
+      "from": "adversary-methods-and-quantum-query-complexity",
+      "to": "computational-problems-promises-and-cost-models",
+      "faithful": true,
+      "note": "Normal-form and adversary uses retain the worst-branch query coordinate, fixed bounded-error convention, and separate nonoracle synthesis costs."
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "44",
+  "round": 0,
+  "reviewed_items": [
+    "def-qa-20-simulation-error-and-cost-model",
+    "def-qa-20-term-list-access-model",
+    "def-qa-20-sparse-hamiltonian-oracle-model",
+    "def-qa-20-first-order-product-formula",
+    "def-qa-20-symmetric-second-order-formula",
+    "rem-qa-20-higher-order-formula-proof-obligations",
+    "thm-qa-20-first-order-commutator-error",
+    "alg-qa-20-first-order-term-list-simulation",
+    "thm-qa-20-second-order-conservative-error",
+    "alg-qa-20-suzuki-recursive-product-formula",
+    "thm-qa-20-first-order-resource-bound",
+    "lem-qa-20-suzuki-order-cancellation",
+    "thm-qa-20-suzuki-conservative-error-and-resources",
+    "ex-qa-20-commuting-two-term-simulation",
+    "cex-qa-20-sparse-oracle-does-not-give-term-list",
+    "ex-qa-20-noncommuting-pauli-error"
+  ],
+  "reviewed_pages": [
+    "hamiltonian-simulation-and-product-formulas",
+    "hamiltonian-simulation-and-product-formulas-examples"
+  ],
+  "decision": "repair",
+  "reason": "The mathematical arguments and inspected supplier uses are sound. Request one local A-page repair to align finite-code time scope and make signed-call availability explicit; consumer dispositions are below.",
+  "findings": [
+    {
+      "id": "alg-qa-20-first-order-term-list-simulation",
+      "type": "scope",
+      "reason": "The procedure design admits real times with finite descriptions, and the term-list model permits algebraic codes such as ρ_q; Input restricts t to rationals. Broaden the time input and specify a finite step-count selection rule, such as exact comparison or a certified rational upper bound."
+    },
+    {
+      "id": "alg-qa-20-suzuki-recursive-product-formula",
+      "type": "scope",
+      "reason": "The procedure design admits real times with finite descriptions, but Input restricts t to rationals despite the supported expression codes. Broaden Input to supported finite time codes."
+    },
+    {
+      "id": "thm-qa-20-first-order-resource-bound",
+      "type": "scope",
+      "reason": "Facts & Assumptions restrict t to rationals, narrowing the designed finite-code time scope. Align its hypotheses and step-count argument with the broadened procedure input."
+    },
+    {
+      "id": "alg-qa-20-first-order-term-list-simulation",
+      "type": "prerequisite",
+      "reason": "Step 3 calls each term at h=t/r, but admissible inputs do not explicitly require supported calls at that code. Require declared implementations and costs at h, or specify the unsupported-input branch."
+    },
+    {
+      "id": "alg-qa-20-suzuki-recursive-product-formula",
+      "type": "prerequisite",
+      "reason": "Input requires codes for the coefficients, while Steps 3–4 invoke expanded calls at cνt/r, including half-time and negative central calls. Require support and declared access for every actual signed call time."
+    },
+    {
+      "id": "thm-qa-20-suzuki-conservative-error-and-resources",
+      "type": "prerequisite",
+      "reason": "The error bound is mathematical for every real t, but the resource claim needs term access at every expanded signed time cνt/r. Add this access condition to the resource claim; the model charges only supported calls."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qa-20-first-order-resource-bound",
+      "decision": "repair",
+      "reason": "Its rational-only hypothesis and step-count argument need alignment with the broadened finite-code time input; its per-call cost premise already assumes calls at h=t/r."
+    },
+    {
+      "id": "lem-qa-20-suzuki-order-cancellation",
+      "decision": "accept",
+      "reason": "The proof uses the ideal analytic recursion for real h and does not infer that term calls are available."
+    },
+    {
+      "id": "thm-qa-20-suzuki-conservative-error-and-resources",
+      "decision": "repair",
+      "reason": "The analytic error proof is sound; its resource clauses need the explicit supported-call condition for every expanded signed time."
+    },
+    {
+      "id": "hamiltonian-simulation-and-product-formulas",
+      "decision": "accept",
+      "reason": "Its summary remains accurate after broadening the procedure inputs and stating call admissibility."
+    },
+    {
+      "id": "hamiltonian-simulation-and-product-formulas-examples",
+      "decision": "accept",
+      "reason": "The examples do not rely on the procedures' restricted input domains or term-call access."
+    }
+  ]
+}

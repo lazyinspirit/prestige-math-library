@@ -1,0 +1,593 @@
+[
+  {
+    "order": 2216,
+    "id": "reversible-arithmetic-and-oracle-conversion",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Reversible Arithmetic and Oracle Conversion",
+    "companion": "reversible-arithmetic-and-oracle-conversion-examples",
+    "requires": [
+      "computational-problems-promises-and-cost-models",
+      "congruences-and-the-chinese-remainder-theorem",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "registers-tensor-products-and-partial-trace",
+      "controlled-gates-phase-and-entanglement",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "circuit-syntax-denotational-semantics-and-measurement"
+    ],
+    "items": [
+      {
+        "id": "def-qa-binary-field-f2",
+        "kind": "definition",
+        "title": "Binary residue carrier and operations",
+        "statement_or_definition": "Set\n$$\n\\mathbb F_2:=\\mathbb Z/2\\mathbb Z=\\{[0]_2,[1]_2\\},\n$$\nwith addition and multiplication induced by the quotient operations\n$$\n[r]_2+[s]_2=[r+s]_2,\\qquad [r]_2[s]_2=[rs]_2\n$$\nfrom [[def-addition-and-multiplication-modulo-n]]. This item fixes the two residue classes and their operations. It does not assert the field axioms; those must be established separately before an argument uses field properties.",
+        "deps": [
+          "def-integers-modulo-n",
+          "def-addition-and-multiplication-modulo-n",
+          "def-congruence-modulo-an-integer"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Verify the two residues are distinct and both quotient operations close on the two-element carrier; do not assert field laws here."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Appendix A.1, PDF p. 205: the binary vector space with entrywise addition modulo two and the notation F_2={0,1}."
+          }
+        ],
+        "existing_supplier_checks": [],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-binary-dot-product",
+        "kind": "definition",
+        "title": "Binary dot product as parity",
+        "statement_or_definition": "For $n\\ge0$ and $a,x\\in\\{0,1\\}^{n}$, define the one-bit **binary dot product**\n$$\na\\cdot x:=\\bigoplus_{i=0}^{n-1}(a_i\\land x_i),\n$$\nwhere $\\land$ is Boolean conjunction and $\\bigoplus$ is the left-to-right fold of XOR, with empty fold $0$. It is the parity of the number of coordinates where both bits are $1$. Under the quotient operations of [[def-qa-binary-field-f2]], this bit represents the sum $\\sum_{i=0}^{n-1}[a_i]_2[x_i]_2$ in $\\mathbb Z/2\\mathbb Z$; the equality uses only the operation definitions, not the field axioms.",
+        "deps": [
+          "def-qa-input-encoding-and-size",
+          "def-qa-binary-field-f2",
+          "def-integers-modulo-n",
+          "def-addition-and-multiplication-modulo-n"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_obligations": [
+          "Verify Boolean conjunction is multiplication on bits and the left-to-right XOR fold represents the quotient sum, including the empty fold."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-input-encoding-and-size"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "induction"
+      },
+      {
+        "id": "alg-qa-reversible-binary-dot-product",
+        "kind": "algorithm",
+        "title": "Reversible binary dot-product query",
+        "statement_or_definition": "**Input:** An integer $n\\ge0$, ordered $n$-bit registers $|a\\rangle,|x\\rangle$, a one-bit target $|z\\rangle$, and one distinct clean work bit $r=0$.\n\n**Output:** The reversible map\n$$\n|a\\rangle|x\\rangle|z\\rangle|0\\rangle_r\\longmapsto|a\\rangle|x\\rangle|z\\oplus(a\\cdot x)\\rangle|0\\rangle_r.\n$$\n\n**Gate model:** Use an operation model whose declared finite nonoracle gate alphabet contains and permits Toffoli and CNOT as callable gates; each listed occurrence counts once under [[def-qc-elementary-circuit-resources]]. This procedure makes no black-box oracle call.\n\n**Instructions:** For $i=0,1,\\ldots,n-1$, apply Toffoli with controls $a_i,x_i$ and target $r$. Apply CNOT from $r$ to $z$. Then apply those same Toffoli gates in reverse order, from $i=n-1$ down to $0$. All gates act on the ordered computational-basis registers of [[def-qc-register-and-computational-basis]]; their basis actions are fixed in [[def-qc-toffoli-and-fredkin]] and [[def-qc-cnot-and-control-target-order]]. For $n=0$, the forward and reverse loops are empty and the XOR fold is $0$.\n\nThe procedure uses $2n$ Toffoli occurrences and one CNOT occurrence, with one clean work bit. It has no failure branch.",
+        "deps": [
+          "def-qa-binary-dot-product",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-toffoli-and-fredkin",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_obligations": [
+          "State the ordered inputs, target, clean work, exact forward/copy/reverse instructions, output, cost, and n=0 behavior."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-toffoli-and-fredkin",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-qa-reversible-binary-dot-product-correct-and-cost",
+        "kind": "theorem",
+        "title": "Reversible binary dot product: correctness and exact cost",
+        "statement_or_definition": "For every $n\\ge0$, the algorithm [[alg-qa-reversible-binary-dot-product]] maps every computational-basis input to\n$$\n|a\\rangle|x\\rangle|z\\rangle|0\\rangle_r\\longmapsto|a\\rangle|x\\rangle|z\\oplus(a\\cdot x)\\rangle|0\\rangle_r.\n$$\nIt therefore implements the same linear map on superpositions. Its exact cost is $2n$ Toffoli gates, one CNOT, and one clean work bit; it has no failure branch.",
+        "deps": [
+          "alg-qa-reversible-binary-dot-product",
+          "def-qa-binary-dot-product",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-toffoli-and-fredkin",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "dependency_level": 11,
+        "proof_obligations": [
+          "Track the forward parity invariant, target toggle, reverse cleanup, linear extension, exact counts, and empty-input boundary."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-toffoli-and-fredkin",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "induction"
+      },
+      {
+        "id": "def-qa-standard-bit-query",
+        "kind": "definition",
+        "title": "Standard bit-flip query convention",
+        "statement_or_definition": "Let $a,b\\ge 0$ and let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be a total function. The **standard bit-flip query** for $f$ is the coherent XOR action\n$$\nU_f|x\\rangle|y\\rangle=|x\\rangle|y\\oplus f(x)\\rangle\n$$\non the ordered $a$-bit address register followed by the ordered $b$-bit target register. Here $\\oplus$ is componentwise addition modulo two, and words label the ordered computational basis as in [[def-qc-register-and-computational-basis]] and [[def-qc-ordered-bitstring-encoding]]. The address is unchanged. One invocation is one query under [[def-qa-promise-query-instance]]; its query cost is separate from elementary gate cost.\n\nThe map is an involution and is unitary by [[thm-qc-reversible-xor-oracle-unitary]]. No injectivity of $f$ is assumed.",
+        "deps": [
+          "def-qa-promise-query-instance",
+          "def-qc-coherent-function-oracle",
+          "thm-qc-reversible-xor-oracle-unitary",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_obligations": [
+          "State the total-function domain, address and target widths, register order, XOR action, and one-call query charge."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-promise-query-instance",
+          "def-qc-coherent-function-oracle",
+          "thm-qc-reversible-xor-oracle-unitary",
+          "def-qc-register-and-computational-basis",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-phase-query",
+        "kind": "definition",
+        "title": "Binary phase-query convention",
+        "statement_or_definition": "For a Boolean function $f:\\{0,1\\}^{a}\\to\\{0,1\\}$, the **phase query** is the linear operator on the address register defined on its ordered computational basis by\n$$\nP_f|x\\rangle=(-1)^{f(x)}|x\\rangle.\n$$\nThis definition supplies uncontrolled access only. Controlled access to $P_f$ is a separate promise and is not implied by an uncontrolled call.",
+        "deps": [
+          "def-qa-promise-query-instance",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "proof_obligations": [
+          "Check the phase action is unitary and involutive on the full address register."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qa-promise-query-instance",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "def-qc-ordered-bitstring-encoding",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-phase-kickback",
+        "kind": "theorem",
+        "title": "Phase kickback from the standard bit query",
+        "statement_or_definition": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be a total Boolean function. If the one-bit target of its standard query is prepared in\n$$\n|-\\rangle:=\\frac{|0\\rangle-|1\\rangle}{\\sqrt2},\n$$\nthen one standard query acts on every address basis vector by\n$$\nU_f(|x\\rangle|-\\rangle)=(-1)^{f(x)}|x\\rangle|-\\rangle.\n$$\nThus the address acquires exactly the phase query $P_f$, while the target returns unchanged. The same identity holds for every address superposition.",
+        "deps": [
+          "def-qa-standard-bit-query",
+          "def-qa-phase-query",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-pure-state-and-ray",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "Check both Boolean values on the target basis and extend the exact identity to arbitrary finite address superpositions."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+            "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+            "locator": "§6.1, PDF pp. 7–8: standard function oracle and phase kickback."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qc-pure-state-and-ray",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-compute-copy-uncompute-clean-query",
+        "kind": "theorem",
+        "title": "Compute-copy-uncompute yields a clean coherent function query",
+        "statement_or_definition": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}^{b}$ be total. Suppose a finite nonoracle gate circuit $V$ preserves the address and, from zero value and workspace registers, computes\n$$\nV|x\\rangle|0^b\\rangle|0^w\\rangle=|x\\rangle|f(x)\\rangle|0^w\\rangle\n$$\nfor every $x$, with gate count $G$. Suppose its exact inverse circuit is available with the same gate count and acts only on the address, value, and workspace registers. Applying $V$, copying the $b$ output bits to a fresh target by $b$ CNOTs, and applying $V^{-1}$ implements the standard query, restores the value and workspace registers to zero, and uses exactly $2G+b$ gate occurrences. Any query calls in a different implementation must be charged separately.\n\nFor a finite Boolean DAG with $S$ noninput nodes, $E$ input-port uses counted with multiplicity, and $b$ ordered output ports, the current QC10 reversible-embedding construction itself already implements the clean XOR query. Its local cost theorem gives at most $6S+4E+b$ gates and $S+E$ clean work bits. Thus its size is $O(S+E+b)$, and is $O(S+b)$ when $E=O(S)$, as for the stated bounded-fan-in graphs. No depth bound is inferred from the classical Boolean DAG.",
+        "deps": [
+          "alg-qc-reversible-embedding",
+          "thm-qc-reversible-embedding-cost",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-inverse-unitary-access",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-elementary-circuit-resources",
+          "def-qa-standard-bit-query",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "Prove the generic clean-evaluator sequence and exact 2G+b count; use the actual QC10 complete-query bound without charging its copy/uncompute twice."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "alg-qc-reversible-embedding",
+          "thm-qc-reversible-embedding-cost",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-inverse-unitary-access",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-global-phase-under-control",
+        "kind": "theorem",
+        "title": "A constant phase query is invisible alone and relative under control",
+        "statement_or_definition": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be constant with value $c\\in\\{0,1\\}$. Its phase query is $P_f=(-1)^cI$. A standalone call therefore leaves every pure-state measurement law unchanged. If the model explicitly grants controlled phase-query access, the two constant cases are distinguishable: on address $|0^a\\rangle$ and control $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$, control of $P_f$ returns $|+\\rangle|0^a\\rangle$ when $c=0$ and $|-\\rangle|0^a\\rangle$ when $c=1$. Measuring the control in the $\\{|+\\rangle,|-\\rangle\\}$ basis distinguishes them with certainty. No controlled access is inferred from a bare phase-query call.",
+        "deps": [
+          "def-qa-phase-query",
+          "def-qc-controlled-unitary-access",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-standalone-global-phase-invariance",
+          "thm-qc-controlled-global-phase-is-relative-phase"
+        ],
+        "dependency_level": 17,
+        "proof_obligations": [
+          "Verify constant phase on every basis vector, standalone invariance, explicit controlled access, and the finite distinguishing measurement."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+            "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+            "locator": "§6.1, PDF pp. 7–8: standard function oracle and phase kickback."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qc-controlled-unitary-access",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "thm-qc-standalone-global-phase-invariance",
+          "thm-qc-controlled-global-phase-is-relative-phase"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-bit-query-to-phase-query",
+        "kind": "theorem",
+        "title": "One standard query implements one phase query",
+        "statement_or_definition": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be total. Starting a target qubit in $|0\\rangle$, apply $X$ and then $H$, and make one standard bit query. Since $HX|0\\rangle=|-\\rangle$, phase kickback implements $P_f$ on the address and returns the target to $|-\\rangle$. This conversion uses one query plus exactly two nonoracle one-qubit gates; the target preparation is explicit and assumes no preprepared state or generic amplitude loading.",
+        "deps": [
+          "def-qa-standard-bit-query",
+          "def-qa-phase-query",
+          "thm-qa-phase-kickback",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "def-qa-nonoracle-gate-cost"
+        ],
+        "dependency_level": 18,
+        "proof_obligations": [
+          "Verify the explicit preparation H X |0> = |-> and charge the one oracle call separately from the two preparation gates."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qc-dirac-notation-conversion",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "def-qa-nonoracle-gate-cost"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-controlled-phase-query-to-bit-query",
+        "kind": "theorem",
+        "title": "Controlled phase access implements a standard bit query",
+        "statement_or_definition": "Let $f:\\{0,1\\}^{a}\\to\\{0,1\\}$ be total. Assume the operation model explicitly supplies the controlled phase call\n$$\nC(P_f)=\\begin{pmatrix}I&0\\\\0&P_f\\end{pmatrix}\n$$\nwith the output qubit as the first, control register. On address $|x\\rangle$ and output $|y\\rangle$, apply $H$ to the output, make one controlled phase call, and apply $H$ again. The result is $|x\\rangle|y\\oplus f(x)\\rangle$, so this implements one standard query with one controlled phase call and two nonoracle $H$ gates. Bare uncontrolled $P_f$ access does not satisfy the stated access hypothesis.",
+        "deps": [
+          "def-qa-standard-bit-query",
+          "def-qa-phase-query",
+          "def-qc-controlled-unitary-access",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qa-nonoracle-gate-cost"
+        ],
+        "dependency_level": 18,
+        "proof_obligations": [
+          "Verify output control values 0 and 1, the H diag(1,-1) H identity, and the explicit controlled-access hypothesis."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qc-controlled-unitary-access",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "def-qc-elementary-circuit-resources",
+          "def-qa-nonoracle-gate-cost"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2217,
+    "id": "reversible-arithmetic-and-oracle-conversion-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Reversible Arithmetic and Oracle Conversion — Examples",
+    "companion": "reversible-arithmetic-and-oracle-conversion",
+    "requires": [
+      "reversible-arithmetic-and-oracle-conversion"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-oracle-conversion-and-uncomputation",
+        "kind": "example",
+        "title": "Oracle conversion and uncomputation examples",
+        "statement_or_definition": "For the one-bit function $f(x)=x$, compute the standard XOR query with a clean work bit, copy its value to the target, and uncompute the work. On input address $|+\\rangle$, target $|-\\rangle$, and work $|0\\rangle$, the address becomes $|-\\rangle$ and the work returns to zero; a final Hadamard on the address yields outcome $1$ with certainty. For the two-bit dot product, take $a=11$, $x=10$, and target $z=0$. The reversible Toffoli circuit outputs target $1$ and resets its work bit. If the one-bit circuit omits its final uncomputation, residual address-dependent work makes the same final address measurement uniform instead of deterministic. Finally, a constant-one phase query has no standalone measurement effect, but its controlled call changes a control $|+\\rangle$ to $|-\\rangle$.",
+        "deps": [
+          "def-qa-standard-bit-query",
+          "def-qa-phase-query",
+          "thm-qa-phase-kickback",
+          "def-qa-binary-dot-product",
+          "alg-qa-reversible-binary-dot-product",
+          "thm-qa-reversible-binary-dot-product-correct-and-cost",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-toffoli-and-fredkin",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "thm-qa-global-phase-under-control"
+        ],
+        "justified_by": [],
+        "dependency_level": 18,
+        "proof_obligations": [
+          "Check the one-bit clean query, two-bit dot product, dirty-work interference failure, and controlled constant-phase calculation directly."
+        ],
+        "sources": [
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes (arXiv:1907.09415v6)",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "Chapter 2, §§2.1.2–2.4, PDF pp. 25–33: reversible function queries, phase kickback, and query conventions."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms (17 April 2025)",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 1, §1.4, PDF pp. 10–11; Chapter 21, §§21.1–21.2, PDF pp. 105–106: reversible computation and oracle queries."
+          },
+          {
+            "title": "John Preskill, Quantum Information, Chapter 6: Quantum Algorithms (updated November 2020)",
+            "url": "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf",
+            "locator": "§6.1, PDF pp. 7–8: standard function oracle and phase kickback."
+          }
+        ],
+        "existing_supplier_checks": [
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-register-and-computational-basis",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-toffoli-and-fredkin",
+          "def-qc-cnot-and-control-target-order",
+          "def-qc-one-qubit-gate-alphabet-and-rotations"
+        ],
+        "unresolved_obligations": [],
+        "audit_authoring_status": "authored draft with local argument where applicable; no independent review or mathematical acceptance",
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

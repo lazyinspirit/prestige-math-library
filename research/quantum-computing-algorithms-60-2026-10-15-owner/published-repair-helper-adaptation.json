@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "kind": "run-local-published-repair-helper-yaml-identity-adaptation",
+  "original_helper": "research/quantum-hopf-hecke-75-2026-10-15-owner/integrate-published-repair.mjs",
+  "original_sha256": "8779186f5cd97adf502dddd56a9785a30ef8b254283b7dd7b0e6d729ba046244",
+  "adapted_helper": "research/quantum-computing-algorithms-60-2026-10-15-owner/integrate-published-repair.mjs",
+  "adapted_sha256": "a8976248c3746303bffbb1f1c0ac5a988d35ef8e69051150091985367739fe9d",
+  "reason": "Decode the existing proposal id as its YAML scalar so quoted ids retain the same identity. The original helper and reviewed proposals are unchanged.",
+  "changes": [
+    {
+      "anchor": "import { recordedPublishedRepair } from '../../tools/published-repair-policy.mjs';",
+      "append": "\nimport { yaml, split } from '../../tools/pathway-lib.mjs';"
+    },
+    {
+      "before": "const id = /^id:\\s*(\\S+)/m.exec(candidate)?.[1];",
+      "after": "const id = yaml().parse(split(candidate).fm)?.id;"
+    }
+  ],
+  "preserved_conditions": [
+    "exact live preimage equality",
+    "existing published status",
+    "native repair ownership claim",
+    "local precheck/render/proof-layout",
+    "authentic before archive and recorded repair receipt"
+  ],
+  "mathematical_review_performed": false,
+  "source_changes_performed": false
+}

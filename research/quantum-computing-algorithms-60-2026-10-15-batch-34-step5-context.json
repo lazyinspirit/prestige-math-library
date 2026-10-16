@@ -1,0 +1,219 @@
+{
+  "group": "d",
+  "batches": [
+    "34"
+  ],
+  "pages_read": [
+    "finite-abelian-hidden-subgroup-algorithms",
+    "finite-abelian-hidden-subgroup-algorithms-examples"
+  ],
+  "items_read": [
+    "rem-qa-nonabelian-hidden-subgroup-scope",
+    "lem-qa-annihilator-restriction-cut",
+    "lem-qa-common-kernel-repetition-bound",
+    "def-qa-finite-abelian-hidden-subgroup-problem",
+    "alg-qa-finite-abelian-hidden-subgroup-sample",
+    "lem-qa-hidden-coset-state-law",
+    "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+    "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+    "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+    "thm-qa-finite-abelian-hidden-subgroup-cost",
+    "ex-qa-hsp-common-kernel-recovery",
+    "ex-qa-hsp-cyclic-subgroup-annihilator"
+  ],
+  "conventions": [
+    {
+      "convention": "Groups are supplied in explicit invariant-factor coordinates; the empty product is the trivial group. Coordinate residues use fixed-width big-endian encoding, concatenated in coordinate order, for both group elements and character labels.",
+      "fixed_by": "def-qa-finite-abelian-hidden-subgroup-problem",
+      "matters_for": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ]
+    },
+    {
+      "convention": "The hiding promise is F(g)=F(g′) iff g−g′ belongs to H. The output encoding is injective, and the XOR oracle acts on a declared total Boolean extension, including invalid group codes.",
+      "fixed_by": "def-qa-finite-abelian-hidden-subgroup-problem",
+      "matters_for": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "lem-qa-hidden-coset-state-law",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law"
+      ]
+    },
+    {
+      "convention": "The exact supplied QFT uses coefficients N^(−1/2) times the conjugate of χ(g), and is a unitary on the full encoded register. Preparation and QFT availability and efficiency are input assumptions.",
+      "fixed_by": "alg-qa-finite-abelian-hidden-subgroup-sample",
+      "matters_for": [
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+        "thm-qa-finite-abelian-hidden-subgroup-cost",
+        "ex-qa-hsp-cyclic-subgroup-annihilator"
+      ]
+    },
+    {
+      "convention": "Recovery outputs character constraints denoting their common kernel; the empty constraint list denotes G. Success means that this constraint set equals H; generator extraction is excluded.",
+      "fixed_by": "def-qa-finite-abelian-hidden-subgroup-problem",
+      "matters_for": [
+        "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+        "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+        "thm-qa-finite-abelian-hidden-subgroup-cost",
+        "ex-qa-hsp-common-kernel-recovery"
+      ]
+    },
+    {
+      "convention": "Reconstruction consumes a supplied positive integer M and uses independent fresh sampling executions. For |G|=1 it returns the empty list without oracle calls.",
+      "fixed_by": "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+      "matters_for": [
+        "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ]
+    },
+    {
+      "convention": "Named oracle queries, ordinary gates, measurement, discarding, classical output, confidence preprocessing and circuit generation are separate cost coordinates. Exactly M hiding queries requires preparation and QFT circuits to make no hiding-oracle accesses.",
+      "fixed_by": "thm-qa-finite-abelian-hidden-subgroup-cost",
+      "matters_for": [
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+      "statement": "For every finite abelian hidden-subgroup instance with hidden subgroup H≤G, one execution of the exact sample procedure returns a valid character code with probability one. Each χ∈H⊥ has probability 1/|H⊥|=|H|/|G|, every character outside H⊥ has probability zero, and every invalid b-bit code has probability zero.",
+      "used_by": [
+        "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+        "ex-qa-hsp-common-kernel-recovery",
+        "ex-qa-hsp-cyclic-subgroup-annihilator"
+      ]
+    },
+    {
+      "id": "def-qa-finite-abelian-hidden-subgroup-problem",
+      "statement": "The input supplies explicit invariant-factor coordinates, an injectively encoded hiding function satisfying F(g)=F(g′) iff g−g′∈H, and a total Boolean extension for coherent XOR access. Output is a finite character-label list denoting the common kernel; success means that kernel equals H.",
+      "used_by": [
+        "alg-qa-finite-abelian-hidden-subgroup-sample",
+        "lem-qa-hidden-coset-state-law",
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law",
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ]
+    },
+    {
+      "id": "lem-qa-annihilator-restriction-cut",
+      "statement": "Let G be a finite abelian group, and let H⊊K≤G. Choose a character χ uniformly from H⊥. Then P(χ restricted to K is nontrivial)≥1/2. For every such outcome, K∩ker χ contains H and has index at least two in K.",
+      "used_by": [
+        "lem-qa-common-kernel-repetition-bound",
+        "alg-qa-finite-abelian-hidden-subgroup-reconstruction",
+        "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success"
+      ]
+    },
+    {
+      "id": "lem-qa-common-kernel-repetition-bound",
+      "statement": "For the stated independent common-kernel process with |G|=N≥2 and H≤K₀≤G, put s=ceil(log₂N) and M=ceil(4s+16 ln(1/δ)), where 0<δ<1. Then P(K_M≠H)≤δ. If H=K₀, failure probability is zero.",
+      "used_by": [
+        "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success"
+      ]
+    },
+    {
+      "id": "lem-qa-hidden-coset-state-law",
+      "statement": "Starting with the uniform group state, evaluating an exact hiding oracle into a fresh output register and discarding that register gives ρ_G=(h/N)Σ_C |C⟩⟨C|, where the sum ranges over distinct H-cosets and |C⟩=h^(−1/2)Σ_{g∈C}|g⟩.",
+      "used_by": [
+        "thm-qa-finite-abelian-hidden-subgroup-sample-law"
+      ]
+    },
+    {
+      "id": "thm-qa-finite-abelian-hidden-subgroup-reconstruction-success",
+      "statement": "The common-kernel output always denotes a subgroup containing H. For |G|=1 it equals H=G without queries. For |G|≥2 and M=ceil(4 ceil(log₂|G|)+16 ln(1/δ)), it equals H with probability at least 1−δ.",
+      "used_by": [
+        "thm-qa-finite-abelian-hidden-subgroup-cost"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-additive-character-of-a-finite-abelian-group",
+      "used_for": "Character homomorphism, identity and inverse laws in the restriction-cut argument.",
+      "opened": true
+    },
+    {
+      "id": "def-subgroup",
+      "used_for": "Subgroup closure, identity membership, and nonemptiness in common-kernel recovery.",
+      "opened": true
+    },
+    {
+      "id": "lem-chernoff-bound-for-independent-bernoulli-trials",
+      "used_for": "The independent Binomial(M,1/2) lower-tail bound with deviation parameter 1/2, after the locally proved adaptive coupling.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Nonnegativity of coset-state and transformed rank-one density operators.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Computing density normalization and projective-measurement weights in encoded orthonormal coordinates.",
+      "opened": true
+    },
+    {
+      "id": "prop-trace-is-linear",
+      "used_for": "Finite-mixture trace normalization and averaging the identical per-coset measurement distributions.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "uniform-circuit-families-promise-problems-and-complexity",
+      "faithful": true,
+      "note": "The cost theorem preserves the supplier's separate query, gate, generation and classical-cost coordinates; it does not infer uniformity or BQP membership from supplied exact circuits."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "finite-abelian-fourier-analysis",
+      "faithful": true,
+      "note": "Checked character labels, negative-character normalization, normalized coset amplitudes, annihilator cardinality and double annihilation against the actual supplier statements and arguments."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "faithful": true,
+      "note": "Outer products and coordinate matrices respect the root linear-first pairing and the reversed Dirac pairing."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "reversible-computation-ancillas-and-coherent-oracles",
+      "faithful": true,
+      "note": "The supplied total XOR oracle and its explicit-circuit alternative retain separate access and implementation charges; no controlled access is inferred."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Encoded basis orthonormality, big-endian ordering, empty registers and contraction of equal output indices match the suppliers."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "The full computational-basis projective measurement uses tr(ρP); invalid labels have zero weight because the transformed state is supported on valid codes."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Preparation, oracle and QFT are composed chronologically as supplied operations; discarding and terminal readout are explicit and separately costed."
+    },
+    {
+      "from": "finite-abelian-hidden-subgroup-algorithms",
+      "to": "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "faithful": true,
+      "note": "The coset mixture and transformed rank-one operators have unit trace and nonnegative quadratic forms on positive-dimensional encoded registers, including zero-qubit registers."
+    },
+    {
+      "from": "period-hidden-shift-and-number-theoretic-algorithms",
+      "to": "finite-abelian-hidden-subgroup-algorithms",
+      "faithful": true,
+      "note": "The discrete-log consumer supplies exact preparation, full-register QFT and coherent function access on Z_q². Its fiber subgroup is generated by (−a,1); uniform annihilator sampling gives d=ac modulo q and uniform c, without a primality assumption."
+    }
+  ]
+}

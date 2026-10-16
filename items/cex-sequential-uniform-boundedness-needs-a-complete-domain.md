@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/cex-sequential-uniform-boundedness-needs-a-complete-domain.json
 id: cex-sequential-uniform-boundedness-needs-a-complete-domain
 kind: counterexample
 title: "A complete domain is necessary for sequential uniform boundedness"
 status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
-deps: [def-c-zero-and-ell-infinity, def-normed-subspace, def-bounded-linear-operator, def-operator-norm, def-banach-space, cor-cauchy-reals-lub-complete, thm-of-archimedean, cor-archimedean-reciprocal, def-countable, def-nat-order, lem-nat-trichotomy, thm-induction-principle, thm-subset-of-a-finite-set, rem-real-and-complex-normed-space-convention, lem-complex-conjugation-and-modulus-laws]
+deps: [def-complex-normed-subspace, def-c-zero-and-ell-infinity, def-bounded-linear-operator, def-operator-norm, def-banach-space, cor-cauchy-reals-lub-complete, thm-of-archimedean, cor-archimedean-reciprocal, def-countable, def-nat-order, lem-nat-trichotomy, thm-induction-principle, thm-subset-of-a-finite-set, def-complex-norm-and-complex-normed-space, lem-complex-conjugation-and-modulus-laws, def-norm-and-normed-space, lem-complex-norm-realification-is-a-real-norm]
 justified_by: []
 forward_refs: []
 external_refs: []
@@ -16,12 +18,6 @@ provenance:
   proof: ai-altered
 generation:
   role: counterexample
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   scraped: []
   references:
@@ -39,7 +35,7 @@ Every pointwise bounded sequence of bounded linear operators between normed spac
 
 [F1] $c_0(\mathbb K)$ is the normed space of bounded null sequences with coordinatewise operations and supremum norm ([[def-c-zero-and-ell-infinity]]).
 
-[F2] A linear subspace carries the restriction of the ambient norm ([[def-normed-subspace]]).
+[F2] A linear subspace carries the restriction of the ambient norm: in the real case, restriction preserves separation, real absolute homogeneity and the triangle inequality directly from the ambient norm axioms ([[def-norm-and-normed-space]]); in the complex case use [[def-complex-normed-subspace]].
 
 [F3] The real field has the least-upper-bound property and is a complete ordered field ([[cor-cauchy-reals-lub-complete]]).
 
@@ -49,7 +45,7 @@ Every pointwise bounded sequence of bounded linear operators between normed spac
 
 [F6] The zero base and successor implication prove a property for every natural ([[thm-induction-principle]]).
 
-[F7] Complex norm terminology uses modulus and the same norm metric ([[rem-real-and-complex-normed-space-convention]]); scalar modulus is multiplicative and subadditive ([[lem-complex-conjugation-and-modulus-laws]]).
+[F7] Complex norm terminology uses modulus ([[def-complex-norm-and-complex-normed-space]]); the norm metric is $d(x,y)=\|x-y\|$, supplied over $\mathbb R$ by [[def-norm-and-normed-space]] and over $\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]]; scalar modulus is multiplicative and subadditive ([[lem-complex-conjugation-and-modulus-laws]]).
 
 [F8] A bound $\|Tx\|\le C\|x\|$ makes a linear map bounded ([[def-bounded-linear-operator]]), and its operator norm is the unit-ball supremum ([[def-operator-norm]]).
 

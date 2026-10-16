@@ -1,0 +1,97 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "32",
+  "input_sha256": "d23dda1488be643603328de91e0bfb6477b03a1eb49ede19fac9872ac281253d",
+  "decisions": [
+    {
+      "id": "def-qa-rational-phase-reconstruction",
+      "model": "gpt-6-luna",
+      "context_sha256": "c2b2c21916727c0a2912991e71fde88a05116ccc931d8bf2a6b99f343ce3f331",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The candidate predicate and reconstruction value are sound, but the final paragraph duplicates executable Euclidean search instructions inside a definition. Removed those instructions while retaining the exact candidate window, all convergents including the terminal one, and the same unique value or FAIL; the existing alg-qa-rational-reconstruction-from-phase-sample supplies the procedure. This is a classification/editorial defect, not a false mathematical claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-modular-order-finding",
+      "model": "gpt-6-luna",
+      "context_sha256": "3754b4136f9bde58abba24a3c7a9badff4dc928cb57e1e128a1b3148956e127b",
+      "outcome": "false_positive",
+      "reason": "The cited thm-qa-modular-arithmetic-cost explicitly proves this exact loop in proof step 1.2: R congruent to Ux and S congruent to Vx are preserved by h=(U-qV) mod N; Euclidean descent ends at (1,0) for a unit; hence Ux=1 mod N. Every two positive remainders halve, all intermediates have O(n) bits, and O(n) schoolbook iterations cost O(n^3). Its repeated-squaring statement includes these inverses, and its proof supplies their computation. The rejection overlooks this local proved argument; no repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-qa-rational-phase-reconstruction",
+      "disposition": "repaired",
+      "post_sha256": "603ed7c9377893f9ca6a12609ea6db9d937df59e1166a7c6cadca7de1d071f45",
+      "review_context_sha256": "e6db5e69d79b11b909a11c36dc7fd67bfc54beb20fdcccec989c45f34ca172f1",
+      "reason": "Reviewed normalized finite continued fractions, positive convergent denominators, determinant reducedness and candidate uniqueness. Two passing fractions differ by at most 1/Q, whereas distinct fractions with denominators at most N differ by at least 1/N^2. Thus the unique-candidate value is well defined, agrees with the previous first-candidate rule, and retains arbitrary integer Q>4N^2 and the terminal convergent. Only duplicated execution prose was removed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-modular-order-finding",
+      "disposition": "unaffected",
+      "post_sha256": "a3285e9cc4d785586329302258da833b7a9f2baea6c42ec36b0d13a17fb9b7aa",
+      "review_context_sha256": "b9a2ded37b27b6f9f814f4bc0060c79241626ec8daba45f181e4025cbdf434af",
+      "reason": "Checked the exact inverse loop against thm-qa-modular-arithmetic-cost proof 1.2, unit and residue hypotheses, and clean controlled multiplier inputs (a_j,b_j). Repeated squaring preserves a_j b_j=1 mod N. The QPE gate list is explicitly used through the superposition law, which permits |1> without an eigenvector promise. Q=2^(2n+3)>4N^2 admits reconstruction; the binary powering loop computes x^q, and only a verified positive denominator is retained. The edited reconstruction supplier preserves the same result. The algorithm and its guard remain unchanged; no independent judgment of a repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-qa-rational-reconstruction-from-phase-sample",
+    "thm-qa-rational-reconstruction-correctness",
+    "ex-qa-rational-reconstruction-boundary"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_record",
+      "id": "def-qa-rational-phase-reconstruction",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "locus": "definition",
+      "reason": "The original final Definition paragraph duplicated an executable Euclidean search under kind definition. Replaced that paragraph by the unique candidate value or FAIL, preserving the entire predicate and terminal convergent. The separate existing alg-qa-rational-reconstruction-from-phase-sample retains the instructions. No false mathematical claim or missing prerequisite was found.",
+      "evidence": "items/def-qa-rational-phase-reconstruction.md; items/alg-qa-rational-reconstruction-from-phase-sample.md; SCHEMA.md Algorithms",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_rejection_disposition",
+      "id": "alg-qa-modular-order-finding",
+      "outcome": "false_positive",
+      "reason": "thm-qa-modular-arithmetic-cost proof step 1.2 establishes the exact inverse loop invariant, termination, inverse output, O(n^3) bit cost and repeated-squaring inverse constants; the rejected dependency citation is accurate. No defect row or repair is proposed.",
+      "evidence": "items/thm-qa-modular-arithmetic-cost.md, Proof 1.2",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update_required",
+      "reason": "The only changed interface belongs to a draft frontier definition. Its direct item consumers are the three draft batch-32 carriers in downstream; the owning pages are draft. Every exact use remains sound, and no published or outside-frontier consumer was found by searching current items and library references. No published repair or maintenance route is required.",
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Repaired only items/def-qa-rational-phase-reconstruction.md. Its Definition now defines the unique candidate value or FAIL, retaining the exact window and terminal convergent; the existing separate algorithm retains all executable instructions. No ID, kind, dependency, source, hypothesis, output value, or AC assumption changed. No verification.judge stamp was present. No proof contracts exist for the two assigned non-proof carriers; owning manifest and pages need no change.",
+    "Supplier review hashes were captured immediately after the definition repair, before completing the later algorithm review. The second review hashes were captured immediately after its mathematical review. No later item edits were made.",
+    "Focused validation: node tools/rendercheck.mjs items/def-qa-rational-phase-reconstruction.md items/alg-qa-modular-order-finding.md --json exited 0: 2 files, no errors or warnings. node tools/tsx-run.mjs tools/precheck.mts on the same paths with --json exited 0: 2 files, 0 checked proofs, 0 failures, both not-applicable. Required final node tools/proof-layout.mjs items/def-qa-rational-phase-reconstruction.md exited 0: 1 item, 0 numbered steps, 0 defects.",
+    "All assigned tuples and items are reviewed. No unresolved mathematics, prerequisite additions, outside-frontier item discoveries, or published-consumer defects. The definition section changed textually, so every direct dependency/reference item consumer is inventoried below even though its use stays sound. No consumer Statement/Definition change is required and no further hop propagates.",
+    "Direct consumer alg-qa-rational-reconstruction-from-phase-sample, items/alg-qa-rational-reconstruction-from-phase-sample.md, Definition: \"the resulting normalized finite expansion is the one in [[def-qa-rational-phase-reconstruction]]\", \"this lists all convergents including the terminal one\", and \"Return the first accepted candidate, or FAIL if none exists.\" Disposition: unchanged and sound. The retained predicate, terminal inclusion and uniqueness make first and unique candidate the same rational value; all operational steps already reside here.",
+    "Direct consumer thm-qa-rational-reconstruction-correctness, items/thm-qa-rational-reconstruction-correctness.md, Facts F2: \"tests the exact condition $2|yq-pQ|\\le q$ on normalized finite-CF convergents with $q\\le N$\"; Proof 1.1, 2.1, 2.2 and 3.1 use terminal inclusion, the same test and uniqueness. Disposition: unchanged and sound. Neither the hypotheses nor this predicate changed, and the procedural portion of F2 remains supplied by its other cited item alg-qa-rational-reconstruction-from-phase-sample.",
+    "Direct consumer ex-qa-rational-reconstruction-boundary, items/ex-qa-rational-reconstruction-boundary.md, Given and F1: \"A candidate has reduced denominator $1\\le q\\le N$ and passes exactly when $2|yq-pQ|\\le q$\"; Proof 1.1 and 2.1 evaluate the N=2,Q=17,y=9 candidates. Disposition: unchanged and sound. The predicate remains verbatim, Q is still allowed to be a non-power of two, and 1/2 still uniquely passes at equality.",
+    "Page use library/quantum-algorithms/quantum-order-finding-and-rational-reconstruction.md: the item list places def-qa-rational-phase-reconstruction before alg-qa-rational-reconstruction-from-phase-sample; summary \"defines denominator-bounded rational reconstruction using normalized finite continued fractions and an exact integer window.\" Disposition: unchanged and sound; the distinct value and procedure carriers now match that page organization. Companion library/quantum-algorithms/quantum-order-finding-and-rational-reconstruction-examples.md retains its exact weak-inequality example summary; it does not directly cite the edited definition. No page repair is required.",
+    "Consulted local mathematical evidence: items/lem-qa-rational-reconstruction-candidate-uniqueness.md (Statement and Proof 1.1\u20132.1); items/def-regular-continued-fraction.md; items/def-convergents-of-regular-continued-fraction.md; items/lem-continued-fraction-determinant-identity.md; items/thm-normalized-finite-continued-fraction-uniqueness.md; items/thm-standard-representatives-modulo-n.md; items/thm-euclidean-algorithm.md; items/thm-division-algorithm-in-z.md; items/thm-unit-criterion-modulo-n.md; items/def-unit-group-modulo-n-and-euler-totient.md; items/alg-qa-modular-multiplication-circuit.md and its correctness theorem; items/alg-qa-quantum-phase-estimation.md; items/thm-qa-phase-estimation-superposition-law.md; items/lem-order-characterisation.md; items/def-qc-dirac-notation-conversion.md; items/thm-qa-modular-arithmetic-cost.md, especially Proof 1.2; items/thm-qa-modular-order-finding-cost.md. These are familiar finite continued-fraction, Euclidean, modular-arithmetic and QPE composition arguments; no external source reading is claimed."
+  ]
+}

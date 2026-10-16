@@ -1,0 +1,1963 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "17",
+  "scope": [
+    "thm-qc-bell-transform-inverse",
+    "thm-qc-teleportation-bell-expansion",
+    "thm-qc-teleportation-equiprobable-outcomes",
+    "thm-qc-teleportation-correction-identity",
+    "thm-qc-dense-coding-correctness-and-resource-count",
+    "thm-qc-teleportation-reference-stability",
+    "thm-qc-teleportation-correctness-and-resource-count",
+    "ex-qc-teleportation-branch-correction"
+  ],
+  "contracts": {
+    "thm-qc-bell-transform-inverse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-bell-basis",
+          "source_section": "Definition",
+          "quote": "Let $Q_2=\\mathbb C^2$ be the ordered qubit register with computational basis\n$(|0\\rangle,|1\\rangle)$, and use the ordered two-factor register\n$Q_2\\otimes Q_2$ from [[def-qc-tensor-register-and-permutation]]. Define the\nfour **Bell vectors** by\n\n$$|\\Phi^+\\rangle:=\\frac{|00\\rangle+|11\\rangle}{\\sqrt2},\\qquad |\\Phi^-\\rangle:=\\frac{|00\\rangle-|11\\rangle}{\\sqrt2},\\qquad |\\Psi^+\\rangle:=\\frac{|01\\rangle+|10\\rangle}{\\sqrt2},\\qquad |\\Psi^-\\rangle:=\\frac{|01\\rangle-|10\\rangle}{\\sqrt2}.$$\n\nThe ordered label convention is\n$|00\\rangle\\mapsto|\\Phi^+\\rangle$,\n$|01\\rangle\\mapsto|\\Psi^+\\rangle$,\n$|10\\rangle\\mapsto|\\Phi^-\\rangle$, and\n$|11\\rangle\\mapsto|\\Psi^-\\rangle$. Thus the first label is the phase/sign\nbit and the second is the bit-flip bit. The next theorem verifies that these\nvectors form an orthonormal basis and gives the corresponding preparation and\ndecoding maps.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix in [F2] gives $H|a\\rangle=(|0\\rangle+(-1)^a|1\\rangle)/\\sqrt2$ for each bit $a$. By [F6], $(H\\otimes I)|ab\\rangle=(|0,b\\rangle+(-1)^a|1,b\\rangle)/\\sqrt2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From [F3], applying CNOT twice fixes every basis vector because $(t\\oplus a)\\oplus a=t$. Its matrix permutes the orthonormal basis [F4], so its inverse is its transpose and equals itself. The matrix of $H\\otimes I$ in [F4] is real symmetric and its square is the identity by [F2]. Thus both factors are self-adjoint involutions, and direct composition gives $(H\\otimes I)\\operatorname{CNOT}_{1\\to2}B=I=B(H\\otimes I)\\operatorname{CNOT}_{1\\to2}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the control-first action in [F3] to the two terms of step 1.1. The control-zero term is fixed, while the control-one term changes its target from $b$ to $b\\oplus1$. Therefore $B|ab\\rangle=(|0,b\\rangle+(-1)^a|1,b\\oplus1\\rangle)/\\sqrt2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting $00,01,10,11$ into step 2.1 gives $\\Phi^+,\\Psi^+,\\Phi^-,\\Psi^-$ in that order, exactly as defined in [F1]. Each has norm one because it is a signed sum of two distinct orthonormal computational basis vectors from [F5], divided by $\\sqrt2$. The inner product of $\\Phi^+$ with $\\Phi^-$ and of $\\Psi^+$ with $\\Psi^-$ is $(1-1)/2=0$; cross-pair inner products are zero because their computational supports are disjoint.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The four vectors in step 3.1 are an orthonormal set of four vectors in the four-dimensional space whose product basis is listed in [F4]; hence they are an orthonormal basis.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In matrices, $(AB)_{ij}=\\sum_k A_{ik}B_{kj}$, so conjugating and transposing this finite sum gives $(AB)^\\dagger=B^\\dagger A^\\dagger$. By [F7]\u2013[F8] this is the adjoint product rule in the register pairing. Since both factors in [F6] and [F3] are self-adjoint by step 1.2, $B^\\dagger=(H\\otimes I)\\operatorname{CNOT}_{1\\to2}$. Applying CNOT sends the four Bell vectors to $\\frac{|0\\rangle+|1\\rangle}{\\sqrt2}\\otimes|0\\rangle$, $\\frac{|0\\rangle+|1\\rangle}{\\sqrt2}\\otimes|1\\rangle$, $\\frac{|0\\rangle-|1\\rangle}{\\sqrt2}\\otimes|0\\rangle$, and $\\frac{|0\\rangle-|1\\rangle}{\\sqrt2}\\otimes|1\\rangle$, respectively. By the matrix in [F2], $H$ sends the first factors in these expressions to $|0\\rangle,|0\\rangle,|1\\rangle,|1\\rangle$, respectively, so the reverse sequence recovers $00,01,10,11$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.2",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes B on Q_2 tensor Q_2, a four-dimensional space. Step 4.1 requires exactly four Bell vectors to form its basis; a zero-wire register is outside this B.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement fixes B on Q_2 tensor Q_2, a four-dimensional space. Step 4.1 requires exactly four Bell vectors to form its basis; a zero-wire register is outside this B.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "2365960a073cd6f5b19226c511eba43568ab47bcdfd6d6c76dfb80fa275113ef",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes a=0 or b=0 and a=1 or b=1. Step 2.1 applies the CNOT rule to both terms and step 3.1 explicitly enumerates all four labels; zero here is a bit label, not a zero normalized Bell vector.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement includes a=0 or b=0 and a=1 or b=1. Step 2.1 applies the CNOT rule to both terms and step 3.1 explicitly enumerates all four labels; zero here is a bit label, not a zero normalized Bell vector.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "68b49ca02654593183f7d14643ddeedd5a8bf09ec7ff22708c758cab9b50c46c",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes a=0 or b=0 and a=1 or b=1. Step 2.1 applies the CNOT rule to both terms and step 3.1 explicitly enumerates all four labels; zero here is a bit label, not a zero normalized Bell vector.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement includes a=0 or b=0 and a=1 or b=1. Step 2.1 applies the CNOT rule to both terms and step 3.1 explicitly enumerates all four labels; zero here is a bit label, not a zero normalized Bell vector.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "e709ba053fd6eb59c74a5d128989e761fc2cf0dcffb76794dcb5105e0fcd15c6",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 computes all Bell norms as one and pairwise inner products as zero. Thus neither the minus signs nor any label coincidence produces a zero or repeated Bell vector.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 3.1 computes all Bell norms as one and pairwise inner products as zero. Thus neither the minus signs nor any label coincidence produces a zero or repeated Bell vector.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "dd707f84306214250e7c2dc2c9a1687a6f5f1f2e22159de55e822c4d25bf5fa6",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 substitutes every bit pair 00,01,10,11 into B|ab>, covering both values of each discrete label; step 5.1 supplies the inverse on all four vectors.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 3.1 substitutes every bit pair 00,01,10,11 into B|ab>, covering both values of each discrete label; step 5.1 supplies the inverse on all four vectors.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "bcf82c85e3714c20f5b35016f3f20a77a2795cf69145a312ff1d65421e17b62d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 3.1 enumerates Phi+,Psi+,Phi-,Psi- from the four supplied bit pairs. Step 4.1 counts this already specified family, rather than selecting a basis.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 3.1 enumerates Phi+,Psi+,Phi-,Psi- from the four supplied bit pairs. Step 4.1 counts this already specified family, rather than selecting a basis.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "0bc3e127137e98108b603199f549fa6d4485d27d03fdd4e901073131f5eb98dd",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that B maps all four bit labels to the ordered Bell basis and B-dagger decodes them. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that B maps all four bit labels to the ordered Bell basis and B-dagger decodes them. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "eaf5d89daff3df698983217b6c4954207b797c33680c4250bb62f4760596507d",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that B maps all four bit labels to the ordered Bell basis and B-dagger decodes them. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that B maps all four bit labels to the ordered Bell basis and B-dagger decodes them. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "376749d4150dcb53891a8f25265cb0696a879fd7cd42b551a202116458dc6f43",
+            "row_sha256": "0980d2ce83090d025355c6900b02113388bcedf8dc927eaebf6878a575fe3b27",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-bell-transform-inverse-finite-cases",
+          "description": "Enumerates all four Bell labels and checks all vector norms and pairwise inner products.",
+          "steps": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed all six proof steps and all eight actual cited suppliers. With control-first CNOT and right-to-left products, H|a>=(|0>+(-1)^a|1>)/sqrt(2) gives the four ordered columns Phi+,Psi+,Phi-,Psi-. Their supports and signs give the identity Gram matrix; CNOT and H tensor I are self-adjoint involutions, giving the stated inverse. The explicit four post-CNOT vectors in repaired step 5.1 decode exactly to 00,01,10,11 including 11, without undefined +/- kets. Pauli X flips and Z signs also verify the Statement second equality. Both factors are Q2, so no empty/zero-dimensional case or choice is involved; there is no iff or quotient construction despite heuristic risk signals. Cleve F26 V6 section 7.2, PDF pp.61-62, equations (81)-(82), checked from retrieved PDF: his labels are flip then phase, whereas this item uses phase then flip and its own exact inverse. Reader and refuter report no remaining defect. Current item raw SHA256 987c44b52e83b0eb719c72f24b919a282c8da9ab5dcc0bb2787fabe2956096c4 equals frozen reader-post; statement/dependencies and manifest fingerprint are unchanged."
+      }
+    },
+    "thm-qc-teleportation-bell-expansion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-teleportation",
+          "source_section": "Definition",
+          "quote": "The **teleportation procedure** has input a normalized qubit vector $|\\psi\\rangle_A\\in Q_2$ and a preshared resource $|\\Phi^+\\rangle_{BC}$, with Alice holding wires $A,B$ and Bob holding $C$. The wire order is $A,B,C$. It uses $|\\Phi^+\\rangle$ from [[def-qc-bell-basis]], CNOT with $A$ control and $B$ target from [[def-qc-cnot-and-control-target-order]], the Hadamard $H$ from [[def-qc-one-qubit-gate-alphabet-and-rotations]], the Pauli matrices from [[def-qc-pauli-matrices]], and the finite projective measurement convention of [[def-qc-projective-measurement]].\n\n1. Alice applies $\\operatorname{CNOT}_{A\\to B}$ and then $H_A$, so the combined operator is $V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, with the rightmost gate applied first.\n2. Alice measures $A,B$ in their ordered computational basis and records the pair $(a,b)\\in\\{0,1\\}^2$, in that wire order.\n3. Alice sends the two classical bits $a,b$ to Bob.\n4. Bob applies $X_C^b$ and then $Z_C^a$, whose operator product is $Z_C^aX_C^b$.\n\nThe output is the corrected state on Bob's wire $C$. The shared Bell pair is an\ninput resource; its preparation and physical realization are outside this\nprocedure. A zero-probability measurement label has no conditional state and\nis assigned no branch output; the normalized-input hypotheses here are later\nshown to make all four labels positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-bell-basis",
+          "source_section": "Definition",
+          "quote": "Let $Q_2=\\mathbb C^2$ be the ordered qubit register with computational basis\n$(|0\\rangle,|1\\rangle)$, and use the ordered two-factor register\n$Q_2\\otimes Q_2$ from [[def-qc-tensor-register-and-permutation]]. Define the\nfour **Bell vectors** by\n\n$$|\\Phi^+\\rangle:=\\frac{|00\\rangle+|11\\rangle}{\\sqrt2},\\qquad |\\Phi^-\\rangle:=\\frac{|00\\rangle-|11\\rangle}{\\sqrt2},\\qquad |\\Psi^+\\rangle:=\\frac{|01\\rangle+|10\\rangle}{\\sqrt2},\\qquad |\\Psi^-\\rangle:=\\frac{|01\\rangle-|10\\rangle}{\\sqrt2}.$$\n\nThe ordered label convention is\n$|00\\rangle\\mapsto|\\Phi^+\\rangle$,\n$|01\\rangle\\mapsto|\\Psi^+\\rangle$,\n$|10\\rangle\\mapsto|\\Phi^-\\rangle$, and\n$|11\\rangle\\mapsto|\\Psi^-\\rangle$. Thus the first label is the phase/sign\nbit and the second is the bit-flip bit. The next theorem verifies that these\nvectors form an orthonormal basis and gives the corresponding preparation and\ndecoding maps.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-one-qubit-gate-alphabet-and-rotations",
+          "source_section": "Definition",
+          "quote": "In the computational basis $(|0\\rangle,|1\\rangle)$, use $X,Y,Z$ from [[def-qc-pauli-matrices]] and define\n$$H:=\\frac{X+Z}{\\sqrt2}=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad S:=\\begin{pmatrix}1&0\\\\0&i\\end{pmatrix},\\qquad T:=\\begin{pmatrix}1&0\\\\0&e^{i\\pi/4}\\end{pmatrix}.$$\nThe phases displayed in these matrices are exact; they are not identified modulo a scalar when the matrices are later placed under a control.\n\nFor real $\\theta$ and a real unit vector $\\mathbf n=(n_x,n_y,n_z)$, define the axis rotation\n$$R_{\\mathbf n}(\\theta):=\\exp\\!\\left(-\\frac{i\\theta}{2}\\mathbf n\\cdot\\boldsymbol{\\sigma}\\right),\\qquad R_z(\\theta):=R_{(0,0,1)}(\\theta).$$\nHere $\\mathbf n\\cdot\\boldsymbol{\\sigma}$ and $\\|\\mathbf n\\|_2$ have the meanings fixed in [[def-qc-bloch-coordinate-map]]. For a bounded endomorphism $B$ of $Q_2$, the notation $\\exp(B)$ means the operator-norm series $\\sum_{k=0}^{\\infty}B^k/k!$ of [[lem-exponential-series-of-a-bounded-operator]] at scalar parameter $1$. Its convergence applies here because $Q_2$ is finite-dimensional and complete and every linear endomorphism of $Q_2$ is bounded ([[cor-finite-dimensional-normed-spaces-are-banach]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]).\n\nThe unitary identities for the fixed matrices are verified below. The following theorem proves the closed form and unitarity of each $R_{\\mathbf n}(\\theta)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-cnot-and-control-target-order",
+          "source_section": "Definition",
+          "quote": "In the ordered two-qubit basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, the controlled-NOT with first wire control and second wire target is\n\n$$\\operatorname{CNOT}_{1\\to2}|a,t\\rangle=|a,t\\mathbin{\\oplus}a\\rangle,\\qquad a,t\\in\\{0,1\\}.$$\n\nEquivalently, it is the control block $C(X)=\\operatorname{diag}(I,X)$ of [[def-qc-controlled-unitary-access]], where $X$ is the Pauli bit-flip matrix. The wire order is part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the initial vector is $2^{-1/2}(\\alpha|000\\rangle+\\alpha|011\\rangle+\\beta|100\\rangle+\\beta|111\\rangle)$ in wire order $A,B,C$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F4] to the four basis vectors gives $2^{-1/2}(\\alpha|000\\rangle+\\alpha|011\\rangle+\\beta|110\\rangle+\\beta|101\\rangle)$ after CNOT: the first two terms have control bit $0$ and are fixed, while the last two have control bit $1$ and their target bits flip.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3] and [F6], $H_A$ sends each first-wire $|0\\rangle$ to $(|0\\rangle+|1\\rangle)/\\sqrt2$ and each $|1\\rangle$ to $(|0\\rangle-|1\\rangle)/\\sqrt2$. Regrouping the resulting eight terms by the first two wires gives $\\frac12\\bigl(|00\\rangle(\\alpha|0\\rangle+\\beta|1\\rangle)+|01\\rangle(\\alpha|1\\rangle+\\beta|0\\rangle)+|10\\rangle(\\alpha|0\\rangle-\\beta|1\\rangle)+|11\\rangle(\\alpha|1\\rangle-\\beta|0\\rangle)\\bigr)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The four receiver vectors in step 3.1 are respectively $|\\psi\\rangle$, $X|\\psi\\rangle$, $Z|\\psi\\rangle$, and $XZ|\\psi\\rangle$ by the actions in [F5]. These are exactly $X^bZ^a|\\psi\\rangle$ for labels $00,01,10,11$, so step 3.1 is the sum in the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "The sum in the Statement has the four labels in {0,1}^2; step 4.1 identifies its four receiver terms. Even psi=0 leaves a four-index zero sum, not an empty label family."
+          },
+          "reason": "The sum in the Statement has the four labels in {0,1}^2; step 4.1 identifies its four receiver terms. Even psi=0 leaves a four-index zero sum, not an empty label family.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "The sum in the Statement has the four labels in {0,1}^2; step 4.1 identifies its four receiver terms. Even psi=0 leaves a four-index zero sum, not an empty label family.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "4ca751b0d6fddd1584e77cb908ad4429fb790b3beb44a0568dce81c31e070b36",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement allows arbitrary coefficients alpha,beta, including a vanishing coefficient or the zero vector. Steps 1.1\u20134.1 are linear expansions and the final four receiver terms specialize directly to either computational basis input.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement allows arbitrary coefficients alpha,beta, including a vanishing coefficient or the zero vector. Steps 1.1\u20134.1 are linear expansions and the final four receiver terms specialize directly to either computational basis input.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "d77f82f4b45faf583a98ff8336e99df01a5d96c612396b9090e84201e26031b5",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows arbitrary coefficients alpha,beta, including a vanishing coefficient or the zero vector. Steps 1.1\u20134.1 are linear expansions and the final four receiver terms specialize directly to either computational basis input.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement allows arbitrary coefficients alpha,beta, including a vanishing coefficient or the zero vector. Steps 1.1\u20134.1 are linear expansions and the final four receiver terms specialize directly to either computational basis input.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "d042a0fad419da2b1e5a403293b3dc0840c100d4fc2714d37ed4ac5cfb86d7a5",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement explicitly allows unnormalized psi. Setting alpha=beta=0 makes each term in step 1.1 and every receiver term in step 4.1 zero; no normalization or coefficient division is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement explicitly allows unnormalized psi. Setting alpha=beta=0 makes each term in step 1.1 and every receiver term in step 4.1 zero; no normalization or coefficient division is used.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "b8dd0175654b10387dde72fd39aba5692ae954cfe51d9345870394bc871a2b87",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement quantifies alpha,beta over all of C without a norm bound. Step 3.1 is an eight-term linear expansion, so there is no parameter interval with endpoint restrictions.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement quantifies alpha,beta over all of C without a norm bound. Step 3.1 is an eight-term linear expansion, so there is no parameter interval with endpoint restrictions.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "c7f749791c38f3e048ddd00b3529edcd29c6114da3dee1ec3b38b98fdd46e378",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 4.1 identifies the receiver terms in the fixed order psi,Xpsi,Zpsi,XZpsi from the expanded vector in step 3.1. No measurement result or vector is selected.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 4.1 identifies the receiver terms in the fixed order psi,Xpsi,Zpsi,XZpsi from the expanded vector in step 3.1. No measurement result or vector is selected.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "047b75ee8d4997c5d3d93301fade0d4d315c7f76c063e9239f1f9e8836810f35",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that the premeasurement vector is the displayed four-label sum with receiver byproducts X^bZ^a. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that the premeasurement vector is the displayed four-label sum with receiver byproducts X^bZ^a. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "714e330f2d85babd9de02b749a5c3c0622d5bdff1d855189182944e0c0cd5cdc",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that the premeasurement vector is the displayed four-label sum with receiver byproducts X^bZ^a. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that the premeasurement vector is the displayed four-label sum with receiver byproducts X^bZ^a. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "61802d1ae2f2ffa42620c182124da4c0e754a8373429b69b67239d95729c0b43",
+            "row_sha256": "86b08185d24d82fbd1ae2380cd4de9be270c4e5dab608efec2ad1b2369b49741",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-bell-expansion-finite-cases",
+          "description": "Expands the computational terms and identifies labels 00, 01, 10, 11.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read the four authored proof steps and all six cited suppliers, including the full teleportation instructions and tensor extension. Initial coefficients on 000,011,100,111 acquire CNOT targets 000,011,110,101. Applying H to wire A and grouping AB gives receiver vectors psi,X psi,Z psi,XZ psi with coefficient 1/2 in phase/flip order. This proves the stated identity for all complex alpha,beta, including either zero and the zero vector; no probabilistic normalization is used here. The algorithm input is normalized for its eventual measurement, but the explicit linear gate calculation legitimately extends this vector identity to arbitrary vectors. No iff, empty-factor selection or AC. Cleve section 10.3 equations (135)-(138), PDF pp.82-83, supports the expansion (equation 138 agrees exactly); its adjacent Bell-decoder table has inconsistent middle labels, so that table is not used to justify our independently calculated gate action. Read Watrous Example 6.50 printed pp.365-366 for the Bell-projector protocol. Reader/refuter report no defect; no current repair needed."
+      }
+    },
+    "thm-qc-teleportation-equiprobable-outcomes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "For arbitrary $\\alpha,\\beta\\in\\mathbb C$, put\n$|\\psi\\rangle=\\alpha|0\\rangle+\\beta|1\\rangle$ and\n$V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\rangle_{BC})=\\frac12\\sum_{a,b\\in\\{0,1\\}}|ab\\rangle_{AB}\\otimes X_C^bZ_C^a|\\psi\\rangle_C.$$\n\nNo normalization assumption on $|\\psi\\rangle$ is needed for this vector\nidentity.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $(a,b)$, let $P_{ab}$ be the diagonal projection onto the two basis vectors $|ab0\\rangle,|ab1\\rangle$ of the ordered three-wire register. These four projections are self-adjoint idempotents, their ranges are pairwise orthogonal, and their sum is the identity because the eight orthonormal computational basis vectors from [F8] are partitioned by their first two bits. Hence they form a projective measurement as in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write the post-gate vector in [F1] as $\\Omega=\\sum_i c_i e_i$ in the orthonormal basis [F4]. For the matrix $\\rho$ with entries $\\rho_{ij}=c_i\\overline{c_j}$, self-adjointness is immediate; for any coordinate vector $z$, $\\langle\\rho z,z\\rangle=|\\sum_j z_j\\overline{c_j}|^2\\ge0$. The matrix [F6] sends $(\\alpha,\\beta)$ to $(\\beta,\\alpha)$ under $X$ and to $(\\alpha,-\\beta)$ under $Z$, so each preserves $|\\alpha|^2+|\\beta|^2$ and every $X^bZ^a$ preserves norm. The branch vectors in [F1] have orthogonal $AB$ labels, hence $\\operatorname{tr}(\\rho)=\\sum_i|c_i|^2=\\|\\Omega\\|^2=\\|\\psi\\|^2=1$ by [A1] and [F7]. Thus $\\rho$ is a density operator by [F9], since the preceding calculation establishes nonnegativity and trace one.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and [F7], the probability weight of label $(a,b)$ is $\\operatorname{tr}(\\rho P_{ab})=|c_{ab0}|^2+|c_{ab1}|^2$, the sum of the two diagonal entries selected by $P_{ab}$. The branch vector in [F1] has these two coefficients equal to those of $\\frac12X^bZ^a|\\psi\\rangle$, so this sum is $\\frac14\\|X^bZ^a\\psi\\|^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The matrices in [F6] are unitary: direct multiplication gives $X^*X=I$ and $Z^*Z=I$. Hence $\\|X^bZ^a\\psi\\|^2=\\|\\psi\\|^2=1$, so every weight in step 2.1 is $1/4$. By [F3] these are the outcome probabilities, and the four weights sum to one.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Step 1.1 partitions the eight three-qubit basis vectors into four rank-two projections P_ab. An empty projector family would not sum to the identity and is not the measurement in the Statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 1.1 partitions the eight three-qubit basis vectors into four rank-two projections P_ab. An empty projector family would not sum to the identity and is not the measurement in the Statement.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "93d9bd3c0687950afbb2ba663d7e04ffac381056e97a58b172540218decf98d4",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires a normalized input, so the zero vector is excluded; vanishing individual amplitudes remain covered because step 2.1 uses the full branch norm, which step 3.1 makes 1/4.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement requires a normalized input, so the zero vector is excluded; vanishing individual amplitudes remain covered because step 2.1 uses the full branch norm, which step 3.1 makes 1/4.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "0ad9c389889117a52d1724d4dd57610c6443125d3e4a90a9b650592f064dd005",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits either normalized basis input. Steps 2.1 and 3.1 give weight (1/4)||X^bZ^a psi||^2=1/4 independently of its coordinates.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement permits either normalized basis input. Steps 2.1 and 3.1 give weight (1/4)||X^bZ^a psi||^2=1/4 independently of its coordinates.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "c611265a5babce8daf4b9fcb9ac2f597aaaa427855ed21f231065b47c3b1a96a",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes a branch norm as (1/4)||X^bZ^a psi||^2; step 3.1 makes it 1/4 even if either input coordinate vanishes. Thus every admitted branch remains nonzero.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 2.1 computes a branch norm as (1/4)||X^bZ^a psi||^2; step 3.1 makes it 1/4 even if either input coordinate vanishes. Thus every admitted branch remains nonzero.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "574e8cb5e0cfb5c757598aa9cdb0f6cfa9aa57582e653ba6b21efb60288e2c9e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement fixes every outcome probability to 1/4. Step 3.1 obtains it from the norm-one input, so neither probability endpoint 0 nor 1 is an allowed value of this outcome law.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement fixes every outcome probability to 1/4. Step 3.1 obtains it from the norm-one input, so neither probability endpoint 0 nor 1 is an allowed value of this outcome law.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "5824af6f377ce80dabb337cc039c3afcdf31a0833c3e35842c042b9bc44bd55f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 defines P_ab as the projection onto the two explicitly indexed vectors |ab0>,|ab1>. The four projections are constructed from coordinates, without a choice of measurement basis.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 1.1 defines P_ab as the projection onto the two explicitly indexed vectors |ab0>,|ab1>. The four projections are constructed from coordinates, without a choice of measurement basis.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "4c0e6c27b0a09c070e75bb84b5668d201489038dde2e644393b368f26fb14c59",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that each of the four teleportation labels has probability 1/4 for every normalized input. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that each of the four teleportation labels has probability 1/4 for every normalized input. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "52d0ffd78316c12c224521d65160f35f45741e08f17339c50d66c7aae6bafb23",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that each of the four teleportation labels has probability 1/4 for every normalized input. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that each of the four teleportation labels has probability 1/4 for every normalized input. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "099c3b44e10300390159e76e497dc2ef6043f4d7c9a1d2bccdc8613842c02d43",
+            "row_sha256": "079f3dd03d7163d481f09f2d51b4dd76428c74467aa4dd0106b3044dd39eec23",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-equiprobable-outcomes-finite-cases",
+          "description": "The four diagonal projectors select branches of squared norm 1/4.",
+          "steps": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read every proof step and ten actual dependencies. The eight ordered computational vectors partition into four rank-two projections Pab summing to I. For c coordinates of the post-gate vector, rho_ij=c_i conjugate(c_j) is self-adjoint and has first-linear quadratic form |sum_j z_j conjugate(c_j)|^2. Orthogonal AB labels and norm-preserving explicit X,Z actions make trace rho=norm(psi)^2=1. Trace rho Pab selects two diagonal entries, equal to norm(X^b Z^a psi)^2/4=1/4. All four outcomes, including 00 and 11, are positive even if one input amplitude vanishes; zero input is excluded by normalization. No conditional-state division is used, no AC or iff or empty measurement case. Read Cleve section 10.3 equation (139), PDF p.84, and Watrous Example 6.50 (6.327)-(6.331), with label translation. Reader/refuter evidence has no finding; no defect remains."
+      }
+    },
+    "thm-qc-teleportation-correction-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "For arbitrary $\\alpha,\\beta\\in\\mathbb C$, put\n$|\\psi\\rangle=\\alpha|0\\rangle+\\beta|1\\rangle$ and\n$V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\rangle_{BC})=\\frac12\\sum_{a,b\\in\\{0,1\\}}|ab\\rangle_{AB}\\otimes X_C^bZ_C^a|\\psi\\rangle_C.$$\n\nNo normalization assumption on $|\\psi\\rangle$ is needed for this vector\nidentity.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From the matrices in [F2], direct multiplication gives $X^2=I$ and $Z^2=I$. Therefore $X^bX^b=I$ and $Z^aZ^a=I$ for the two possible values of each bit.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Keeping the operator order fixed, $Z^aX^bX^bZ^a=Z^a(X^bX^b)Z^a=Z^aIZ^a=Z^aZ^a=I$ by step 1.1. This also covers $a=b=1$ without using an anticommutation swap.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying the identity in step 2.1 to the byproduct vector from [F1] yields $Z^aX^b(X^bZ^a|\\psi\\rangle)=|\\psi\\rangle$ for every qubit vector.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement concerns the fixed product Z^aX^bX^bZ^a on one qubit. A zero exponent means the identity factor in step 1.1, not an empty-dimensional input or missing branch label.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement concerns the fixed product Z^aX^bX^bZ^a on one qubit. A zero exponent means the identity factor in step 1.1, not an empty-dimensional input or missing branch label.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "0fa3300aa906f38010627cf6e24874fe37d9cea660016f762fe2ac2fda4ba335",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement quantifies over every qubit vector and both bit values. Step 1.1 proves X^bX^b=Z^aZ^a=I for b,a=0,1, and step 2.1 explicitly retains the a=b=1 operator order; applying it to zero also gives zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement quantifies over every qubit vector and both bit values. Step 1.1 proves X^bX^b=Z^aZ^a=I for b,a=0,1, and step 2.1 explicitly retains the a=b=1 operator order; applying it to zero also gives zero.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "498bf7e8f21e1ec7d0f02aaba2af3fbf3779ed51398e49c00b77c8f9d29eb2aa",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement quantifies over every qubit vector and both bit values. Step 1.1 proves X^bX^b=Z^aZ^a=I for b,a=0,1, and step 2.1 explicitly retains the a=b=1 operator order; applying it to zero also gives zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement quantifies over every qubit vector and both bit values. Step 1.1 proves X^bX^b=Z^aZ^a=I for b,a=0,1, and step 2.1 explicitly retains the a=b=1 operator order; applying it to zero also gives zero.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "330af51e78500eacf1e7a20bcb01fff620236d3000d1a562bc9cd62d6d8ac34f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the entire correction/byproduct product equals I before applying it to psi in step 3.1. The equality therefore holds also for psi=0 and has no singular-vector exception.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 2.1 proves the entire correction/byproduct product equals I before applying it to psi in step 3.1. The equality therefore holds also for psi=0 and has no singular-vector exception.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "0163d9d16d40342692c6f281e0a1a67560c2f8e32011b5ae97325c21a5582d48",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves X^bX^b=I and Z^aZ^a=I for both bit values; step 2.1 explicitly covers the a=b=1 corner without commuting X and Z.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 1.1 proves X^bX^b=I and Z^aZ^a=I for both bit values; step 2.1 explicitly covers the a=b=1 corner without commuting X and Z.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "d197fee96abac33cf0e5a467de62409e5e6bc28b862b029b7d6b3341e9dc1d17",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1\u20132.1 multiply the supplied Pauli matrices in the prescribed order. The bits a,b and vector psi are given; no inverse is selected from a family.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Steps 1.1\u20132.1 multiply the supplied Pauli matrices in the prescribed order. The bits a,b and vector psi are given; no inverse is selected from a family.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "0a348015f877aa63fff54aabc4240a8dc238b764f8921c9dbc5e496dc5287809",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that the prescribed fixed-order correction satisfies Z^aX^bX^bZ^a=I. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that the prescribed fixed-order correction satisfies Z^aX^bX^bZ^a=I. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "451359c672e549869ddadb0860acbb3b2931d157b27e27c3c19bf2db13cbd580",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that the prescribed fixed-order correction satisfies Z^aX^bX^bZ^a=I. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that the prescribed fixed-order correction satisfies Z^aX^bX^bZ^a=I. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "f6e730a4f0574e747bc63846e5e8623bf18fd41f7b63eef52cbd7d213722b6c3",
+            "row_sha256": "fccf4a63d5292072dcb3b6828d1ec024b41706e34cf5a1bb2bab142a70825a40",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-correction-identity-finite-cases",
+          "description": "Checks all bit exponents; label 11 retains the exact Z-X-X-Z order.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    },
+    "thm-qc-dense-coding-correctness-and-resource-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-dense-coding",
+          "source_section": "Definition",
+          "quote": "The **dense-coding procedure** takes classical input bits $a,b\\in\\{0,1\\}$ and\na preshared pair $|\\Phi^+\\rangle_{AB}$, with Alice holding $A$ and Bob holding\n$B$. The local convention is that $a$ is the phase bit and $b$ the flip bit.\n\n1. Alice applies $X_A^b$ and then $Z_A^a$, so the encoding operator is $Z_A^aX_A^b$.\n2. Alice sends the single qubit $A$ to Bob.\n3. Bob applies $\\operatorname{CNOT}_{A\\to B}$, then $H_A$, and measures the ordered register $A,B$ in the computational basis.\n4. Bob outputs the ordered pair of measured bits.\n\nIf a surrounding measurement model assigns an outcome zero weight, no\nconditional state is assigned for that outcome. For each of the four possible input pairs, the decoded output equals that pair with weight one and the other three outcomes have weight zero, as computed in the correctness theorem.\n\nThe Bell resource, Pauli matrices, Hadamard, CNOT wire order, and projective\nmeasurement use the conventions of [[def-qc-bell-basis]],\n[[def-qc-pauli-matrices]], [[def-qc-one-qubit-gate-alphabet-and-rotations]],\n[[def-qc-cnot-and-control-target-order]], and\n[[def-qc-projective-measurement]]. No optimality claim is part of this\nprocedure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-bell-basis",
+          "source_section": "Definition",
+          "quote": "Let $Q_2=\\mathbb C^2$ be the ordered qubit register with computational basis\n$(|0\\rangle,|1\\rangle)$, and use the ordered two-factor register\n$Q_2\\otimes Q_2$ from [[def-qc-tensor-register-and-permutation]]. Define the\nfour **Bell vectors** by\n\n$$|\\Phi^+\\rangle:=\\frac{|00\\rangle+|11\\rangle}{\\sqrt2},\\qquad |\\Phi^-\\rangle:=\\frac{|00\\rangle-|11\\rangle}{\\sqrt2},\\qquad |\\Psi^+\\rangle:=\\frac{|01\\rangle+|10\\rangle}{\\sqrt2},\\qquad |\\Psi^-\\rangle:=\\frac{|01\\rangle-|10\\rangle}{\\sqrt2}.$$\n\nThe ordered label convention is\n$|00\\rangle\\mapsto|\\Phi^+\\rangle$,\n$|01\\rangle\\mapsto|\\Psi^+\\rangle$,\n$|10\\rangle\\mapsto|\\Phi^-\\rangle$, and\n$|11\\rangle\\mapsto|\\Psi^-\\rangle$. Thus the first label is the phase/sign\nbit and the second is the bit-flip bit. The next theorem verifies that these\nvectors form an orthonormal basis and gives the corresponding preparation and\ndecoding maps.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-bell-transform-inverse",
+          "source_section": "Statement",
+          "quote": "On the ordered two-qubit register, let\n$B:=\\operatorname{CNOT}_{1\\to2}(H\\otimes I)$, where operator products act\nright-to-left. For $a,b\\in\\{0,1\\}$,\n\n$$B|ab\\rangle=\\frac{|0,b\\rangle+(-1)^a|1,b\\mathbin\\oplus1\\rangle}{\\sqrt2}=(I\\otimes X^b)(Z^a\\otimes I)|\\Phi^+\\rangle.$$\n\nIn the label order $00,01,10,11$, these are respectively\n$|\\Phi^+\\rangle,|\\Psi^+\\rangle,|\\Phi^-\\rangle,|\\Psi^-\\rangle$. They form an\northonormal basis of $Q_2\\otimes Q_2$, and\n$B^\\dagger=(H\\otimes I)\\operatorname{CNOT}_{1\\to2}$ maps those four vectors\nback to their labels.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying $Z_A^aX_A^b$ to $|\\Phi^+\\rangle=(|00\\rangle+|11\\rangle)/\\sqrt2$ and using [F4] gives the four cases: $00\\mapsto\\Phi^+$, $01\\mapsto\\Psi^+$, $10\\mapsto\\Phi^-$, and $11\\mapsto\\Psi^-$. In the last case, $Z_A X_A|00\\rangle=-|10\\rangle$ and $Z_A X_A|11\\rangle=|01\\rangle$, so the state is exactly $\\Psi^-$ in the chosen convention.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x\\in\\{0,1\\}$, [F4] gives $Z^a|x\\rangle=(-1)^{ax}|x\\rangle$. Expanding the left side and then substituting $y=x\\oplus b$ gives $(Z^aX^b\\otimes I)|\\Phi^+\\rangle=2^{-1/2}\\sum_x(-1)^{a(x\\oplus b)}|x\\oplus b,x\\rangle=2^{-1/2}\\sum_y(-1)^{ay}|y,y\\oplus b\\rangle=(I\\otimes X^bZ^a)|\\Phi^+\\rangle$. The same matrices give $XZ=-ZX$, hence $X^bZ^a=(-1)^{ab}Z^aX^b$. The scalar $\\lambda=(-1)^{ab}$ leaves the rank-one projector unchanged because $(\\lambda v)(\\lambda v)^*=|\\lambda|^2vv^*=vv^*$; it changes no projective outcome weight, while the direct four-case vectors in step 1.1 fix the exact label phase.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F3], the four encoded vectors in step 1.1 are $B|ab\\rangle$, and $B^\\dagger$ sends each to $|ab\\rangle$. The output projectors are the orthogonal basis projections in [F8]. The rank-one matrix of $|ab\\rangle$ has a single diagonal entry $1$ at label $(a,b)$, so its quadratic form is nonnegative and its trace is one by [F7]; it is a density operator by [F9]. Then [F5] and [F7] give weight one at $(a,b)$ and zero at the other labels. By [F6] this is a deterministic output law.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The procedure [F1] begins with one shared pair, sends only wire $A$ once, and outputs the two input bits at Bob's measurement. Its instructions contain at most two conditional Pauli gate occurrences for Alice's encoding, one CNOT and one Hadamard for Bob, and two final measured wires. Thus it achieves the stated resource exchange for this procedure; no optimality statement is used.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires one preshared Bell pair and a two-bit message. Step 3.1 counts the actual transmitted wire A; removing that pair or all message labels is a different protocol.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement requires one preshared Bell pair and a two-bit message. Step 3.1 counts the actual transmitted wire A; removing that pair or all message labels is a different protocol.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "78aabeb490c165604a63ce6de87c004717cb5cd694c8aa24361767b7df75c656",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes messages 00 and 11. Step 1.1 enumerates the four exact Bell encodings; step 2.2 shows the selected label has probability one and the other labels probability zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement includes messages 00 and 11. Step 1.1 enumerates the four exact Bell encodings; step 2.2 shows the selected label has probability one and the other labels probability zero.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "ee7d03fdcedb0b97b043ec29e506af397fff6ffec9923663ceb5da174dc96eb4",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes messages 00 and 11. Step 1.1 enumerates the four exact Bell encodings; step 2.2 shows the selected label has probability one and the other labels probability zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement includes messages 00 and 11. Step 1.1 enumerates the four exact Bell encodings; step 2.2 shows the selected label has probability one and the other labels probability zero.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "e0ced678fd7bafcaccd57954003608c2c4078b1505911bdec2b0ca95ffbb5478",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 maps the four encoded Bell states to four distinct computational basis vectors. Their output laws may have zero entries, but the selected entry is one and no two messages share a decoded label.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 2.2 maps the four encoded Bell states to four distinct computational basis vectors. Their output laws may have zero entries, but the selected entry is one and no two messages share a decoded label.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "14cd2c934b631da239c493ac006f8f2aebed5f03c7e81c5d5e50669387dc88ee",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 lists all messages 00 through 11. Step 2.2 computes the decoded basis-state law as probability one on the chosen label and zero on every other label, including the probability endpoints exactly.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 1.1 lists all messages 00 through 11. Step 2.2 computes the decoded basis-state law as probability one on the chosen label and zero on every other label, including the probability endpoints exactly.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "66b4cf1285782ce75101d4741d521e854e0bfdecfb39f7782a60001145e8446e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 explicitly computes the four Z_A^aX_A^b encodings and step 2.2 applies the specified B-dagger. Bob performs that fixed measurement rather than selecting a decoding map.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 1.1 explicitly computes the four Z_A^aX_A^b encodings and step 2.2 applies the specified B-dagger. Bob performs that fixed measurement rather than selecting a decoding map.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "56f5a52a52cb5fc815a5a814ff9f746375ca2bc6bcde0926de0e7d8e2cde8f04",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that the four phase/flip encodings decode with probability one using a Bell pair and one transmitted qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that the four phase/flip encodings decode with probability one using a Bell pair and one transmitted qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "b46bc935959e5ba2d356544e4746f3959c91159290df6caf5a83bafae52f7253",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that the four phase/flip encodings decode with probability one using a Bell pair and one transmitted qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that the four phase/flip encodings decode with probability one using a Bell pair and one transmitted qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "479547290b0e5be68ba43e00590588ad6be8d2db7a823ff16597035b0c1046ed",
+            "row_sha256": "135e8f8fac7a4272f311823772aad3aff346148e3434176e295411f9da708723",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-dense-coding-correctness-and-resource-count-finite-cases",
+          "description": "Enumerates the four encodings, phase relation, decoder labels, and resource counts.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all four proof steps, all nine cited suppliers and the exact dense-coding procedure plus its gate/control semantics. For every bit pair, ZA^a XA^b gives the exact Bell column of B, including 11=(|01>-|10>)/sqrt(2). Reindexing y=x xor b proves the transferred X^b Z^a order; reversing that Pauli order changes only (-1)^(ab), whose projector is unchanged. B-dagger returns |ab>; its density matrix is positive trace one and the four computational projectors have weights 1,0,0,0. No conditioning on zero weights occurs. One preshared pair, one transmitted wire and two output bits are counted directly from the finite procedure, without optimality or preparation-cost claims. Fixed Q2 factors and four labels exclude empty-register cases; no AC or iff. Checked Cleve section 7.2 pp.61-62 and Watrous section 6.3.1 Scenario 6.53, full Proposition 6.54 proof and Example 6.55 (printed pp.367-369), translating their label conventions. Reader/refuter identify no defect; independent review concurs."
+      }
+    },
+    "thm-qc-teleportation-reference-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-map",
+          "source_section": "Definition",
+          "quote": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "For arbitrary $\\alpha,\\beta\\in\\mathbb C$, put\n$|\\psi\\rangle=\\alpha|0\\rangle+\\beta|1\\rangle$ and\n$V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\rangle_{BC})=\\frac12\\sum_{a,b\\in\\{0,1\\}}|ab\\rangle_{AB}\\otimes X_C^bZ_C^a|\\psi\\rangle_C.$$\n\nNo normalization assumption on $|\\psi\\rangle$ is needed for this vector\nidentity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-teleportation-correction-identity",
+          "source_section": "Statement",
+          "quote": "For every qubit vector $|\\psi\\rangle$ and bits $a,b\\in\\{0,1\\}$, the\nteleportation branch byproduct is $X^bZ^a|\\psi\\rangle$, and the prescribed\ncorrection returns it exactly:\n\n$$Z^aX^bX^bZ^a|\\psi\\rangle=|\\psi\\rangle.$$\n\nThe operator order is part of the statement; no Pauli factors are commuted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-projective-measurement",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\Omega$ be a finite nonempty outcome set ([[def-dimension]], [[def-real-and-complex-inner-product-space]]). Its **endomorphisms** are its complex-linear maps $H\\to H$ ([[def-vector-space-of-linear-maps]]); for an endomorphism $P$, $P^*$ denotes its adjoint, which exists uniquely in finite dimension ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[thm-adjoint-exists-and-is-unique-in-finite-dimension]]). A **finite projective measurement** on $H$ with outcomes $\\Omega$ is a family $(P_a)_{a\\in\\Omega}$ of endomorphisms such that\n\n$$P_a^*=P_a,\\qquad P_a^2=P_a,\\qquad P_aP_b=0\\ (a\\ne b),\\qquad \\sum_{a\\in\\Omega}P_a=I_H.$$\n\nThe products above are compositions, the sum is pointwise addition of endomorphisms, and $I_H$ is the identity map; these operations preserve linear maps ([[prop-linear-maps-form-a-vector-space]], [[lem-composition-and-identity-linear-maps]]). The projections $P_a=0$ are permitted. For a density operator $\\rho$ on $H$ (nonnegative and trace one, [[def-qc-density-operator]]), the associated outcome weights are $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$; their nonnegativity and normalization are proved in [[thm-qc-projective-measurement-outcome-law]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-projective-measurement-outcome-law",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator on a nonzero finite-dimensional complex inner-product space $H$, and let $(P_a)_{a\\in\\Omega}$ be a finite projective measurement on $H$. Then $p_\\rho(a)=\\operatorname{tr}(\\rho P_a)$ lies in $[0,1]$ for every $a$, and $\\sum_{a\\in\\Omega}p_\\rho(a)=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qc-projective-conditional-state",
+          "source_section": "Statement",
+          "quote": "Let $\\rho$ be a density operator and $(P_a)_{a\\in\\Omega}$ a finite projective measurement on a nonzero finite-dimensional complex inner-product space $H$. Put $p_a=\\operatorname{tr}(\\rho P_a)$. If $p_a>0$, then\n\n$$\\rho_a:=\\frac{P_a\\rho P_a}{p_a}$$\n\nis a density operator whose image $\\operatorname{im}(\\rho_a):=\\{\\rho_a x:x\\in H\\}$ is contained in $\\operatorname{im}(P_a)$ ([[def-kernel-and-image-of-a-linear-map]]). This statement assigns a conditional state only on positive-probability branches.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qc-computational-basis-orthonormal",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge1$, the ordered computational basis $(e_0,\\ldots,e_{d-1})$ of\nthe register $Q_d$ from [[def-qc-register-and-computational-basis]] is an\northonormal basis for its declared inner product. Separately, the one-dimensional\nzero-qubit register has the basis $\\{1\\}$ by definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any instance of the theorem, choose an ordered orthonormal basis $\\mathcal E_R=(e_j)_{j<d}$ of $R$ using [F11]. This supplies the reference-factor basis required by [F1]; together with the qubit computational bases, it gives product bases for the initial order $A,R,B,C$ and the stated global order $A,B,C,R$. Write $|\\Psi\\rangle_{AR}=\\sum_{j<d}|\\psi_j\\rangle_A\\otimes e_j$, where $|\\psi_j\\rangle=\\alpha_j|0\\rangle+\\beta_j|1\\rangle$. The canonical wire permutation in [F1] sends the initial vector to $\\sum_j|\\psi_j\\rangle_A\\otimes|\\Phi^+\\rangle_{BC}\\otimes e_j$. By [F3], for each (not necessarily normalized) qubit vector $|\\psi_j\\rangle$, the pre-measurement gates give $\\frac12\\sum_{a,b}|ab\\rangle_{AB}\\otimes X^bZ^a|\\psi_j\\rangle_C$. Tensoring these identities with $e_j$ using [F2] and summing yields $$|\\Omega\\rangle_{ABCR}=\\frac12\\sum_{a,b}|ab\\rangle_{AB}\\otimes (X^bZ^a\\otimes I_R)|\\Psi\\rangle_{CR}.$$",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $P_{ab}$ on $A,B,C,R$ as the diagonal projection onto product-basis vectors whose first two bits are $ab$. These four projections form a PVM because they partition the product basis from step 1.1; that product basis is orthonormal by [F1] and [F10]. Write $|\\Omega\\rangle=\\sum_i c_i e_i$ in this basis and define $\\rho_{ij}=c_i\\overline{c_j}$. This rank-one matrix is self-adjoint and has nonnegative quadratic form $\\langle\\rho z,z\\rangle=|\\sum_j z_j\\overline{c_j}|^2$. For each label, write $|\\chi_{ab}\\rangle=(X^bZ^a\\otimes I_R)|\\Psi\\rangle$. The product inner product and the chosen basis of $R$ give $$\\|\\chi_{ab}\\|^2=\\sum_{j<d}\\|X^bZ^a|\\psi_j\\rangle\\|^2=\\sum_{j<d}\\|\\psi_j\\|^2=\\|\\Psi\\|^2=1,$$ since [F9] shows that $X$ and $Z$ each preserve the qubit norm. The four $AB$ labels in step 1.1 are orthogonal, so $\\|\\Omega\\|^2=\\frac14\\sum_{a,b}\\|\\chi_{ab}\\|^2=1$. Thus [F8] gives $\\operatorname{tr}(\\rho)=\\sum_i|c_i|^2=1$, and $\\rho$ is a density operator by [F12]. The weight $\\operatorname{tr}(\\rho P_{ab})$ is the sum of the diagonal entries selected by $P_{ab}$, equal to $\\|P_{ab}|\\Omega\\rangle\\|^2=\\frac14$; by [F6] these weights are probabilities.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying $P_{ab}$ to step 1.1 gives $\\frac12|ab\\rangle\\otimes|\\chi_{ab}\\rangle$. Since $\\|\\chi_{ab}\\|=1$ by step 2.1, this projected vector has norm $1/2$ and its normalized branch vector is exactly $|ab\\rangle\\otimes|\\chi_{ab}\\rangle$. Equivalently, [F7] gives conditional density $|ab\\rangle\\langle ab|_{AB}\\otimes|\\chi_{ab}\\rangle\\langle\\chi_{ab}|_{CR}$ after division by the outcome weight $1/4$. Thus the conditional vector on $C\\otimes R$ before Bob's correction is $|\\chi_{ab}\\rangle$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Bob's correction acts on the $C$ factor as $Z^aX^b$. By [F2] and [F4], on every elementary tensor $x_C\\otimes r_R$ its composition with $X^bZ^a\\otimes I_R$ is $x_C\\otimes r_R$; elementary tensors span by [F1], so it fixes the whole joint vector $|\\Psi\\rangle_{CR}$. The corrected normalized branch vector is therefore $|ab\\rangle_{AB}\\otimes|\\Psi\\rangle_{CR}$, whose $C\\otimes R$ factor is exactly the original input vector for every label.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a normalized vector on Q_2 tensor R. Fact F11 expressly rules out R={0}; step 1.1 therefore chooses a finite nonempty reference basis for each actual instance, while allowing zero individual coefficients.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement requires a normalized vector on Q_2 tensor R. Fact F11 expressly rules out R={0}; step 1.1 therefore chooses a finite nonempty reference basis for each actual instance, while allowing zero individual coefficients.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "9b9b7e8e6e45fe8a96ead9fc4f1f8277b1319575dc75c4aa1775c3c5c0fef14f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires a normalized vector on Q_2 tensor R. Fact F11 expressly rules out R={0}; step 1.1 therefore chooses a finite nonempty reference basis for each actual instance, while allowing zero individual coefficients.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement requires a normalized vector on Q_2 tensor R. Fact F11 expressly rules out R={0}; step 1.1 therefore chooses a finite nonempty reference basis for each actual instance, while allowing zero individual coefficients.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "f9e9f8b680050e1c7f1f34351fc2744183cf3814d4b6dfa63a28ec245c9e8fc5",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits dim R=1. The sum in step 1.1 then has one term and the correction identity in step 4.1 leaves that sole reference factor untouched.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement permits dim R=1. The sum in step 1.1 then has one term and the correction identity in step 4.1 leaves that sole reference factor untouched.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "ff5a8e65d3a34dbba25f01806911b6586adaa22988ab24a4861f96d437efadb0",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires a normalized vector on Q_2 tensor R. Fact F11 expressly rules out R={0}; step 1.1 therefore chooses a finite nonempty reference basis for each actual instance, while allowing zero individual coefficients.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement requires a normalized vector on Q_2 tensor R. Fact F11 expressly rules out R={0}; step 1.1 therefore chooses a finite nonempty reference basis for each actual instance, while allowing zero individual coefficients.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "b8748bc3878a21e364e7597de93b0b2cefe8d34de803c7fe36e1ae4637f7c6c1",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits every finite reference dimension compatible with normalized Psi. Fact F11 excludes dimension zero, and step 1.1 with dim R=1 has one reference term; step 4.1 still fixes the full C tensor R vector.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement permits every finite reference dimension compatible with normalized Psi. Fact F11 excludes dimension zero, and step 1.1 with dim R=1 has one reference term; step 4.1 still fixes the full C tensor R vector.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "0aba042443d891f0a46e1ad85b39226a250473d8142f1216ec3d32272dbfc70c",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact F11 and step 1.1 obtain the finite reference basis by Gram\u2013Schmidt; normalization rules out R={0}. This finite basis choice requires no arbitrary-index choice.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Fact F11 and step 1.1 obtain the finite reference basis by Gram\u2013Schmidt; normalization rules out R={0}. This finite basis choice requires no arbitrary-index choice.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "6ebfcef59a98c2a1bb153db7857cf7b2db7a82880908a13d5634ba8f0150452f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that each corrected branch preserves the entire finite-reference-entangled input vector. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that each corrected branch preserves the entire finite-reference-entangled input vector. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "ec750b4bc1cd2769d3f78eb1efe598a980d2f6df66bffce57462fc8a3d7bcef7",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that each corrected branch preserves the entire finite-reference-entangled input vector. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that each corrected branch preserves the entire finite-reference-entangled input vector. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "e8b66f8b9223417478c0e96b18e70f433726d71cdbf2740e2284b422c41c3377",
+            "row_sha256": "701c81a48289174abe80b49aad96dcc55a840afe77fbde31135b0944e0c3688c",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-reference-stability-finite-cases",
+          "description": "Decomposes an arbitrary joint vector into two reference coefficients and checks every branch.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all four proof steps, eleven cited supplier carriers and the elementary F11 basis argument. Finite Gram-Schmidt gives one orthonormal basis of the given reference (no family requiring AC); R=0 has no normalized instance. Expansion Psi=sum_j psi_j tensor e_j allows zero/unnormalized psi_j, permitted by the already reviewed expansion. The ARBC-to-ABCR permutation is the specified linear basis permutation; gates leave R fixed. Orthogonality gives norm of each chi_ab=(X^b Z^a tensor I)Psi equal to one, total density trace one, and all four weights 1/4. Thus conditioning divides only by positive weight; normalized projected vector is exactly |ab> tensor chi_ab. Keeping Pauli order, (Z^a X^b X^b Z^a) tensor I_R fixes every elementary tensor and hence every entangled Psi. Covers d=1, arbitrary finite d, zero coefficient vectors and all labels, without product-state or infinite-dimensional claim. Watrous Theorem 6.47 and Example 6.50 establish the identity-channel protocol; the explicit local tensor argument supplies reference preservation. Cleve discussion on PDF p.85 concerns loss of Alice copy, not an independent proof of reference stability, and was not used as such. Reader/refuter reports were considered; no defect remains."
+      }
+    },
+    "thm-qc-teleportation-correctness-and-resource-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qc-teleportation",
+          "source_section": "Definition",
+          "quote": "The **teleportation procedure** has input a normalized qubit vector $|\\psi\\rangle_A\\in Q_2$ and a preshared resource $|\\Phi^+\\rangle_{BC}$, with Alice holding wires $A,B$ and Bob holding $C$. The wire order is $A,B,C$. It uses $|\\Phi^+\\rangle$ from [[def-qc-bell-basis]], CNOT with $A$ control and $B$ target from [[def-qc-cnot-and-control-target-order]], the Hadamard $H$ from [[def-qc-one-qubit-gate-alphabet-and-rotations]], the Pauli matrices from [[def-qc-pauli-matrices]], and the finite projective measurement convention of [[def-qc-projective-measurement]].\n\n1. Alice applies $\\operatorname{CNOT}_{A\\to B}$ and then $H_A$, so the combined operator is $V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, with the rightmost gate applied first.\n2. Alice measures $A,B$ in their ordered computational basis and records the pair $(a,b)\\in\\{0,1\\}^2$, in that wire order.\n3. Alice sends the two classical bits $a,b$ to Bob.\n4. Bob applies $X_C^b$ and then $Z_C^a$, whose operator product is $Z_C^aX_C^b$.\n\nThe output is the corrected state on Bob's wire $C$. The shared Bell pair is an\ninput resource; its preparation and physical realization are outside this\nprocedure. A zero-probability measurement label has no conditional state and\nis assigned no branch output; the normalized-input hypotheses here are later\nshown to make all four labels positive.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-teleportation-equiprobable-outcomes",
+          "source_section": "Statement",
+          "quote": "For every normalized input qubit vector $|\\psi\\rangle$, the projective\nmeasurement of the first two wires after the pre-measurement gates in\n[[alg-qc-teleportation]] has\n$\\Pr[(a,b)]=1/4$ for each $(a,b)\\in\\{0,1\\}^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-teleportation-correction-identity",
+          "source_section": "Statement",
+          "quote": "For every qubit vector $|\\psi\\rangle$ and bits $a,b\\in\\{0,1\\}$, the\nteleportation branch byproduct is $X^bZ^a|\\psi\\rangle$, and the prescribed\ncorrection returns it exactly:\n\n$$Z^aX^bX^bZ^a|\\psi\\rangle=|\\psi\\rangle.$$\n\nThe operator order is part of the statement; no Pauli factors are commuted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qc-teleportation-reference-stability",
+          "source_section": "Statement",
+          "quote": "Let $R$ be any finite-dimensional complex inner-product space and let\n$|\\Psi\\rangle_{AR}$ be any normalized vector on $Q_2\\otimes R$, with no\nproduct-state assumption. Run teleportation on $A$ using a shared\n$|\\Phi^+\\rangle_{BC}$, keeping the global wire order $A,B,C,R$ and applying\nthe canonical ordered tensor identifications. For every measured label $(a,b)$,\nthe corrected joint vector on $C\\otimes R$ is exactly\n$|\\Psi\\rangle_{CR}$, with $A$ relabelled as the output wire $C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-teleportation-protocol-resource-count",
+          "source_section": "Definition",
+          "quote": "For the procedure [[alg-qc-teleportation]], define a protocol-specific resource\nrecord with separate coordinates as follows. A **shared-pair use** is one\ninitial Bell pair supplied as an input resource; its preparation is excluded.\nA **classical communication bit** is one bit sent from Alice to Bob; the record\ncontains two. A **transmitted qubit** is a qubit sent during the protocol after\nthe shared pair is available; the record contains zero. A **measurement-record\nbit** is one of the two ordered computational-basis outcomes measured by Alice;\nthe record contains two such bits. A **local gate occurrence** is counted by\nthe size convention of [[def-qc-elementary-circuit-resources]], namely as one\ngate occurrence in the declared circuit: Alice uses one CNOT and one Hadamard,\nand Bob uses at most two conditional Pauli gate occurrences, $X^b$ and $Z^a$.\nThe pair preparation is not included among those gate occurrences. This record\ncounts the stated procedure only; it asserts no optimality or physical\nrealization.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "For arbitrary $\\alpha,\\beta\\in\\mathbb C$, put\n$|\\psi\\rangle=\\alpha|0\\rangle+\\beta|1\\rangle$ and\n$V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\rangle_{BC})=\\frac12\\sum_{a,b\\in\\{0,1\\}}|ab\\rangle_{AB}\\otimes X_C^bZ_C^a|\\psi\\rangle_C.$$\n\nNo normalization assumption on $|\\psi\\rangle$ is needed for this vector\nidentity.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], each of the four possible labels has probability $1/4$, so every branch has positive probability and the conditional branch is defined. The Bell expansion [F6] identifies its receiver vector as $X^bZ^a|\\psi\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the correction from [F1] to the byproduct in step 1.1 gives $Z^aX^bX^bZ^a|\\psi\\rangle=|\\psi\\rangle$ by [F3]. Hence every branch has the exact corrected output.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a joint input with any finite reference, the same branchwise output statement is the conclusion of [F4]. This verifies the protocol preserves the full input-reference vector, not only its reduced input state.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The resource record [F5] separates one preshared Bell-pair use, the two classical bits sent from Alice to Bob, zero qubits sent after the pair is available, the two Alice gates, the two-bit Alice measurement record, and up to two conditional Bob Pauli gates. These are counts of the stated procedure only; no lower bound or physical preparation claim follows.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Step 1.1 uses four positive-probability branches supplied by the Bell expansion. Its normalized-input protocol cannot replace the shared Bell pair or the ordered two-bit record by an empty resource or record.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 1.1 uses four positive-probability branches supplied by the Bell expansion. Its normalized-input protocol cannot replace the shared Bell pair or the ordered two-bit record by an empty resource or record.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "a4d4ffe3f0e55de6e3736d2ca7330abd558b09e7b78648fe0462500bd63030db",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement counts zero transmitted qubits and permits basis inputs with a zero coefficient. Step 4.1 explicitly separates zero transmitted qubits from the preshared Bell-pair use; step 1.1 keeps every branch probability positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement counts zero transmitted qubits and permits basis inputs with a zero coefficient. Step 4.1 explicitly separates zero transmitted qubits from the preshared Bell-pair use; step 1.1 keeps every branch probability positive.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "297a03e294717f92c156ccadaff4fcb6be93b5bc0c96b05ffd2f614d1e11da38",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement uses one shared Bell pair and arbitrary normalized input. Steps 1.1\u20132.1 cover basis inputs and step 4.1 counts that single shared resource.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement uses one shared Bell pair and arbitrary normalized input. Steps 1.1\u20132.1 cover basis inputs and step 4.1 counts that single shared resource.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "63279ff9b269ca8b94cc013fd07595dc08e1c7ba8da6d7996f9d6c74d87e7a5e",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 makes every conditional branch well-defined because its weight is 1/4; step 3.1 extends the corrected identity to reference-entangled inputs. Product-state input and zero individual amplitudes require no separate normalization.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 1.1 makes every conditional branch well-defined because its weight is 1/4; step 3.1 extends the corrected identity to reference-entangled inputs. Product-state input and zero individual amplitudes require no separate normalization.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "9fab0e81f7fdfe80b689a8549b2d42aa3c8baca87168c8fc1887af3f41fb7bc5",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement is an exact resource and channel claim, with four fixed probabilities 1/4. Step 4.1 counts one shared pair, two sent bits and zero sent qubits; there is no noise-rate or accuracy interval.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Statement is an exact resource and channel claim, with four fixed probabilities 1/4. Step 4.1 counts one shared pair, two sent bits and zero sent qubits; there is no noise-rate or accuracy interval.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "30ead5a3fb2f0e06b1f7bd5866ccc4a677b82e10efc3d8f391288ff4b7bda9fe",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 2.1 applies the algorithmically prescribed Z^aX^b correction for each given label, and step 4.1 reads the supplied resource record. No recovery or shared state is chosen existentially.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Step 2.1 applies the algorithmically prescribed Z^aX^b correction for each given label, and step 4.1 reads the supplied resource record. No recovery or shared state is chosen existentially.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "58be8ef56bd10d9e0e092dd55ccfb875015b1a78eed9e96e8cdd6a1009e986a0",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that all corrected teleportation branches preserve the input and reference with the stated one-pair/two-classical-bit resource count. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that all corrected teleportation branches preserve the input and reference with the stated one-pair/two-classical-bit resource count. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "df7b747d382996b85db250b8e165b188cbbf14183a50bca20075ba78dcbd8616",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that all corrected teleportation branches preserve the input and reference with the stated one-pair/two-classical-bit resource count. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that all corrected teleportation branches preserve the input and reference with the stated one-pair/two-classical-bit resource count. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "d7a66b8a680ba4757f6db27267eecff54468654e5fc528a7faa9d75bd9f56665",
+            "row_sha256": "be9f690b614bcb7c413265888d506c2d4ab333409ff25c0fe5bd79596592269f",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "thm-qc-teleportation-correctness-and-resource-count-finite-cases",
+          "description": "Combines all label probabilities and corrections with the operation-by-operation count.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all four proof steps and all six suppliers in dependency order, plus the resource-record elementary accounting supplier. Normalized input gives four strictly positive 1/4 branches, so the receiver byproduct from the vector expansion can be normalized without zero division. Correction Z^a X^b cancels adjacent X^b X^b and Z^a Z^a exactly, including 11, without a phase-changing commutation. The finite-reference supplier proves joint branch equality for arbitrary entangled vectors and handles zero-dimensional R vacuously. Resource record counts one initially supplied Bell pair, exactly two transmitted classical bits, zero qubits transmitted after availability of the pair, one Alice CNOT, one Hadamard, two measurement bits and at most two Bob Pauli occurrences. No hidden Bell preparation, optimality, infinite reference, AC or iff assumption is asserted. Source Cleve sections 10.2-10.3, equations (139)-(140), PDF pp.81-85, and Watrous section 6.3.1 Theorem 6.47/Corollary 6.49/Example 6.50 agree with the implemented protocol after label translation. Reader/refuter have no finding; no repair required."
+      }
+    },
+    "ex-qc-teleportation-branch-correction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-teleportation-bell-expansion",
+          "source_section": "Statement",
+          "quote": "For arbitrary $\\alpha,\\beta\\in\\mathbb C$, put\n$|\\psi\\rangle=\\alpha|0\\rangle+\\beta|1\\rangle$ and\n$V_{AB}=(H_A\\otimes I_{BC})\\operatorname{CNOT}_{A\\to B}$, in wire order\n$A,B,C$. Then\n\n$$V_{AB}(|\\psi\\rangle_A\\otimes|\\Phi^+\\rangle_{BC})=\\frac12\\sum_{a,b\\in\\{0,1\\}}|ab\\rangle_{AB}\\otimes X_C^bZ_C^a|\\psi\\rangle_C.$$\n\nNo normalization assumption on $|\\psi\\rangle$ is needed for this vector\nidentity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-teleportation-equiprobable-outcomes",
+          "source_section": "Statement",
+          "quote": "For every normalized input qubit vector $|\\psi\\rangle$, the projective\nmeasurement of the first two wires after the pre-measurement gates in\n[[alg-qc-teleportation]] has\n$\\Pr[(a,b)]=1/4$ for each $(a,b)\\in\\{0,1\\}^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-pauli-matrices",
+          "source_section": "Definition",
+          "quote": "In the ordered computational basis $(|0\\rangle,|1\\rangle)$ of [[def-qc-qubit-and-bloch-representation]], define the identity and Pauli endomorphisms of $Q_2$ by\n$$I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix},\\qquad X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nThe displayed sign in $Y$ fixes all later orientation and rotation conventions.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding the input with the Bell resource and applying CNOT $A\\to B$ gives $2^{-1/2}(\\alpha|000\\rangle+\\alpha|011\\rangle+\\beta|110\\rangle+\\beta|101\\rangle)$. Applying $H_A$ and grouping by $AB$ yields $\\frac12\\bigl(|00\\rangle(\\alpha|0\\rangle+\\beta|1\\rangle)+|01\\rangle(\\alpha|1\\rangle+\\beta|0\\rangle)+|10\\rangle(\\alpha|0\\rangle-\\beta|1\\rangle)+|11\\rangle(\\alpha|1\\rangle-\\beta|0\\rangle)\\bigr)$, which is [F1]'s expansion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each label, the receiver vector is respectively $\\psi$, $X\\psi$, $Z\\psi$, and $XZ\\psi$ by [F3]. Each has the same norm as $\\psi$, since $X$ swaps its two coordinates and $Z$ changes only the sign of the second. Thus each projected branch has squared norm $\\frac14\\|\\psi\\|^2=1/4$, agreeing with the probability in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For label $00$, the correction is $I$ and leaves $\\alpha|0\\rangle+\\beta|1\\rangle$ unchanged. For $01$, it is $X$, and $X(\\alpha|1\\rangle+\\beta|0\\rangle)=\\alpha|0\\rangle+\\beta|1\\rangle$. For $10$, it is $Z$, and $Z(\\alpha|0\\rangle-\\beta|1\\rangle)=\\alpha|0\\rangle+\\beta|1\\rangle$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For label $11$, the branch is $\\alpha|1\\rangle-\\beta|0\\rangle=XZ|\\psi\\rangle$ and the correction is $ZX$. Hence $ZX(XZ|\\psi\\rangle)=Z(XX)Z|\\psi\\rangle=Z^2|\\psi\\rangle=|\\psi\\rangle$ using [F3]; this fixed order has no residual phase. Together the four calculations return the input on every branch.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes three wires A,B,C and all four AB labels. Verification step 1.1 expands their Bell-resource state; no zero-wire or empty-label variation is requested.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Example fixes three wires A,B,C and all four AB labels. Verification step 1.1 expands their Bell-resource state; no zero-wire or empty-label variation is requested.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "98c492ce7445ee72aee08b7b3d6507972ef570fca1169945a5151ef37d4f3fbe",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example assumes |alpha|^2+|beta|^2=1, excluding the zero vector but permitting alpha=0 or beta=0. Steps 2.2 and 3.1 verify each correction without dividing by either coefficient, so both basis inputs are covered.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Example assumes |alpha|^2+|beta|^2=1, excluding the zero vector but permitting alpha=0 or beta=0. Steps 2.2 and 3.1 verify each correction without dividing by either coefficient, so both basis inputs are covered.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "bf722b841cdef8c90b4c182adadc48d95f7038b81f4638e5d566193371a32674",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example assumes |alpha|^2+|beta|^2=1, excluding the zero vector but permitting alpha=0 or beta=0. Steps 2.2 and 3.1 verify each correction without dividing by either coefficient, so both basis inputs are covered.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Example assumes |alpha|^2+|beta|^2=1, excluding the zero vector but permitting alpha=0 or beta=0. Steps 2.2 and 3.1 verify each correction without dividing by either coefficient, so both basis inputs are covered.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "27c44a935d73b024952199c03928af7cb390363c2253a7b635ff669e9597cdaf",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 2.1 uses the sum |alpha|^2+|beta|^2=1 rather than either coefficient separately. Hence a vanishing alpha or beta never causes a zero branch or division by that coefficient.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Verification step 2.1 uses the sum |alpha|^2+|beta|^2=1 rather than either coefficient separately. Hence a vanishing alpha or beta never causes a zero branch or division by that coefficient.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "1a65e86593a0a76ad9a3e1134309ef31ef825c6cade257ff6afe486e5ec8d7a9",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 2.2 checks labels 00,01,10 and step 3.1 checks 11. The norm constraint in the Example permits alpha=0 or beta=0, and the displayed corrections still return the corresponding basis input.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Verification step 2.2 checks labels 00,01,10 and step 3.1 checks 11. The norm constraint in the Example permits alpha=0 or beta=0, and the displayed corrections still return the corresponding basis input.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "4b052315d978d46877c297dedbadfc256acc7d10d50873f8e6a25c6280356521",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Verification steps 2.2 and 3.1 explicitly test I,X,Z,ZX on their respective four receiver vectors. The correction table is computed, with no representative chosen from an unspecified family.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex same-reviewer QC17\u201324 boundary refinement",
+            "reason": "Verification steps 2.2 and 3.1 explicitly test I,X,Z,ZX on their respective four receiver vectors. The correction table is computed, with no representative chosen from an unspecified family.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "ab7b64c79992f8c5fc742320353c00d60bb304e666bb7d468ea92c50a3b944df",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-refinement-qc-late.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts that each of the four explicitly computed teleportation labels is corrected to the supplied normalized qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that each of the four explicitly computed teleportation labels is corrected to the supplied normalized qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate forward characterization to establish.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "d216b98bb4edce2ca5cce1a19322577fe67942694b8ef141c786d8cd6947bf43",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts that each of the four explicitly computed teleportation labels is corrected to the supplied normalized qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex delegated boundary review (qc)",
+            "reason": "Statement asserts that each of the four explicitly computed teleportation labels is corrected to the supplied normalized qubit. This is the stated definition, identity, existence claim or sufficient implication, without a separate reverse characterization to establish.",
+            "item_sha256": "4e55659f3b136bd9aa7edf1c050769cd941e09640a32db5cfe986c591398c660",
+            "row_sha256": "2e34252c83070a0d57c62c924e3ab17f48eb9d5a9f862887bcf18d398e8fc023",
+            "proposal": "research/quantum-computing-algorithms-60-2026-10-15-owner-step2-boundary-proposal-qc.json"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "ex-qc-teleportation-branch-correction-finite-cases",
+          "description": "Expands arbitrary normalized amplitudes and checks each correction, including 11.",
+          "steps": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "unresolved_supplier_checks": []
+    }
+  }
+}

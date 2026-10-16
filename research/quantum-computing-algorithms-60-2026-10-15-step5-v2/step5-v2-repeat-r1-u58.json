@@ -1,0 +1,148 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "58",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "lem-qa-34-modfkv-sampling-gram-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "343755bacf70a144247f7b1caaa49742e6d5884d6a74d4bda6a0b4b2626bf777",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The original alpha-weighted row estimate and its transpose are valid, but the advertised sequential sketches and conditional second-stage result were absent. Added exact S,W definitions, deterministic norms F, unbiasedness and second moments F^4/p at each stage (second conditional on S), and the joint tail 2/(p theta^2). The existing variance argument applies with alpha=1 twice; averaging conditional tails requires no independence of the two errors.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-34-error-budget-allocation-correctness",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "4e48430eb8d8db63630c0457b33a005db3e47714b5bd52dec6b8917688172b1e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed a false resource inequality: take L=1 and a two-wire identity stage with both wires declared data (clean count 0), no auxiliary ancillas, and a total identity circuit declaring one wire data and one restored clean ancilla (clean count 1). Stage workspaces are disjoint vacuously, yet 1<=0 fails. The cost-model definition explicitly counts declared partitions, not a maximum over valid partitions. Added physical-wire coverage and consistent category restrictions, requiring compatible supplied ancilla partitions and exact return contracts separately for clean and dirty coordinates. This is the missing accounting hypothesis, not a change to the channel or failure budget conclusions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0783827f03bd76f6fbd1ef12578815d60403d7bdea6f7fef17a3885453adf261",
+      "outcome": "false_positive",
+      "reason": "F1 explicitly cites thm-qa-34-modfkv-low-rank-approximation AND ITS PROOF. That supplier Proof 1.1 chooses t=eta epsilon^2/(1000K^2) and q=ceil(t^(-2)(1+sqrt(2log(2/delta)))^2), and obtains both Gram errors <=tF^2 on the same event of probability >=1-delta. Its Proof 2.1 checks tK<=1/2 and invokes lem-qa-34-two-sketch-threshold-band-bound on that event. With failure budget delta/3 the same event has probability >=1-delta/3. Moreover V^T V-I=Sigma^(-1) U^T(SS^T-WW^T)U Sigma^(-1), so its operator norm is <=tF^2/sigma^2=tK. Thus the eigenvalues lie in [1-tK,1+tK], supplying precisely the relative-row and cancellation premises in Tang 4.1 and 5.1. The premise is available from an explicitly cited local proof, even though the ModFKV Statement does not repeat the eigenvalue conclusion. No edit is warranted.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-34-modfkv-sampling-gram-bound",
+      "disposition": "repaired",
+      "post_sha256": "350f9e4228a4bd30c4faefb49905197320be5b2aa66c0b3340a90095953d016f",
+      "review_context_sha256": "9000a6e65ca632d22b1005ad0f5494a34d25d173821d4eb1b33c9a46ba9db99a",
+      "reason": "Checked the entrywise outer-product expectation, reciprocal-probability second moment, cancellation of centered independent cross terms and positive Markov threshold. Extended the same proof to exact normalized row-then-column sketches, with conditional second-stage law and finite averaging. The owning proof contract passes strictly; this is a local repair check, not independent review of the authored addition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-34-error-budget-allocation-correctness",
+      "disposition": "repaired",
+      "post_sha256": "5f824e2e8e16ce3ff2edfb0b4d655e1249312872a583603459245d0dff2fd0c5",
+      "review_context_sha256": "fc02b6049d52e1556393aecbd28b0b7098917d48995a093b36287e178870fa3e",
+      "reason": "Checked normalized channel errors with matching nonzero spaces, the finite conditional first-failure sum, operation accounting and chronological concatenation of minimum block layerings. For workspace counts the corrected hypotheses imply T_s is contained in A_s union the stage W_j,s, proving the cardinality bound without reclassifying data as ancillas. Supplied exact return contracts remain required; an incompatible or inapplicable coordinate receives no bound. Strict owning proof-contract validation passed. This is a local repair check, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "disposition": "unaffected",
+      "post_sha256": "67a8f41c1544bc2eb8d9dcb61ce2c2083ab1e3b2235175697f68e8becec4b7f3",
+      "review_context_sha256": "cb66320185154c74dcdb454e5bb8f02efd84f1c0250829f8772aae1310e3b4be",
+      "reason": "Traced F1 to the explicit common Gram event in ModFKV Proof 1.1 and its lemma application in 2.1, then verified the near-isometry identity and the sqrt(3) relative-row bound in Tang 4.1. The exact input access supplies all entry queries required by the current inner-product estimator. The summable beta_l events give simultaneous confidence and eventual accurate estimates; nonzero D_i implies z nonzero and almost-sure stopping, using the expressly assumed countable/dependent choice suppliers. At the stop, ||z||>=32e/epsilon; cancellation is <=2K/q, so q-term rejection with cap ceil(2K log(3/delta)) misses with probability <=delta/3. Checked the unconditional union bound and Kq^2, q^3 powers with the b^2/||D_i||^2 refinement factor. The current order computes k before testing k=0, so the digest ordering concern is already absent. Consulted Tang Algorithm 2, Proposition 4.6 with Appendix A proof, and Algorithm 3/Section 4.3; the local adaptive refinement is justified by its local proof, not attributed to that source. No item or contract edit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1807.04271v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-qa-34-exponential-gram-concentration",
+    "thm-qa-34-modfkv-low-rank-approximation",
+    "alg-qa-34-error-budget-allocation"
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "lem-qa-34-modfkv-sampling-gram-bound",
+      "id": "lem-qa-34-exponential-gram-concentration",
+      "path": "items/lem-qa-34-exponential-gram-concentration.md",
+      "affected_use": "Statement names the exact normalized two-stage sketches; F1 and Proof 4.1 apply the second-moment bound conditional on S.",
+      "disposition": "unaffected",
+      "reason": "The new exact S,W construction agrees with the mixture law used in Proof 4.1. It now explicitly supplies both conditional moments and deterministic F norms. Its independent bounded-differences proof and exponential tail are unchanged."
+    },
+    {
+      "supplier": "lem-qa-34-modfkv-sampling-gram-bound",
+      "id": "thm-qa-34-modfkv-low-rank-approximation",
+      "path": "items/thm-qa-34-modfkv-low-rank-approximation.md",
+      "affected_use": "The deps list includes the Gram lemma; F1 and Proof 1.1 obtain the two Gram bounds through the exponential concentration supplier.",
+      "disposition": "unaffected",
+      "reason": "All original row/transpose conclusions remain, and the added exact two-stage construction matches the algorithm. The theorem uses the stronger exponential bound, so no proof or Statement change is needed."
+    },
+    {
+      "supplier": "thm-qa-34-error-budget-allocation-correctness",
+      "id": "alg-qa-34-error-budget-allocation",
+      "path": "items/alg-qa-34-error-budget-allocation.md",
+      "affected_use": "The final paragraph of its Definition says the correctness theorem composes recorded costs under explicit stage and pipeline accounting assumptions. The Output paragraph likewise defers additive bounds to that theorem.",
+      "disposition": "unaffected",
+      "reason": "The algorithm only returns stage and auxiliary records and expressly subjects the cost bound to the theorem accounting assumptions. It asserts no unconditional clean/dirty sum, so the explicit compatible-partition condition requires no procedural or interface change."
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "id": "lem-qa-34-modfkv-sampling-gram-bound",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "locus": "statement",
+      "reason": "Added missing advertised exact two-stage interface and conditional Gram calculation; existing single-stage theorem was sound."
+    },
+    {
+      "ledger": "defect",
+      "id": "thm-qa-34-error-budget-allocation-correctness",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "locus": "statement",
+      "reason": "Confirmed a false resource inequality: take L=1 and a two-wire identity stage with both wires declared data (clean count 0), no auxiliary ancillas, and a total identity circuit declaring one wire data and one restored clean ancilla (clean count 1). Stage workspaces are disjoint vacuously, yet 1<=0 fails. The cost-model definition explicitly counts declared partitions, not a maximum over valid partitions. Added physical-wire coverage and consistent category restrictions, requiring compatible supplied ancilla partitions and exact return contracts separately for clean and dirty coordinates. This is the missing accounting hypothesis, not a change to the channel or failure budget conclusions."
+    },
+    {
+      "ledger": "defect",
+      "id": "thm-qa-34-tang-recommendation-sampler",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "locus": "facts-block",
+      "reason": "F1 explicitly cites thm-qa-34-modfkv-low-rank-approximation AND ITS PROOF. That supplier Proof 1.1 chooses t=eta epsilon^2/(1000K^2) and q=ceil(t^(-2)(1+sqrt(2log(2/delta)))^2), and obtains both Gram errors <=tF^2 on the same event of probability >=1-delta. Its Proof 2.1 checks tK<=1/2 and invokes lem-qa-34-two-sketch-threshold-band-bound on that event. With failure budget delta/3 the same event has probability >=1-delta/3. Moreover V^T V-I=Sigma^(-1) U^T(SS^T-WW^T)U Sigma^(-1), so its operator norm is <=tF^2/sigma^2=tK. Thus the eigenvalues lie in [1-tK,1+tK], supplying precisely the relative-row and cancellation premises in Tang 4.1 and 5.1. The premise is available from an explicitly cited local proof, even though the ModFKV Statement does not repeat the eigenvalue conclusion. No edit is warranted."
+    },
+    {
+      "ledger": "published-consumer",
+      "updates": [],
+      "reason": "No published consumer is affected by either changed Statement: the complete direct item inventory is exponential Gram concentration, ModFKV approximation, and the allocator algorithm, all draft frontier items. The Step-4 channel-hybrid alert names a draft supplier, whose current Statement now explicitly requires nonzero spaces; no new published repair or audit is proposed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Only the two confirmed items and their own contract entries were edited. The Gram Statement gained an explicit exact sequential specialization; its original general-alpha and transpose claims are preserved. The allocation Statement now requires consistent physical wire classification and compatible declared partitions for its workspace bound. Tang Statement, proof, metadata and contract were untouched; its guard equals the frozen assignment before guard.",
+    "Consumer examination: rg over current items and library found precisely the three item consumers listed in downstream and the owning A-page placements. Each exact affected use and soundness reason is in downstream_reviews. The A-page summary asserts valid normalized Gram and conditional resource composition results; the B-page summary invokes neither changed clause. No necessary consumer change, outside-consumer maintenance target, added prerequisite, or further propagation hop was found.",
+    "Validation: focused precheck for the two changed items passed (2 checked, 0 failing), focused rendercheck passed (2 checked, 0 errors/warnings), and separate strict proof-contract checks passed for both changed items. Tang also passed its focused precheck, rendercheck and strict contract check. The initial Gram precheck proposed phase renumbering 4.2 to 5.1; that exact renumbering was adopted before all passing checks and before its review hashes were captured.",
+    "Final required batched command: node tools/proof-layout.mjs items/lem-qa-34-modfkv-sampling-gram-bound.md items/thm-qa-34-error-budget-allocation-correctness.md. Result: 2 items, 10 steps, 0 defects (exit 0). No item edits or formatter followed it. Each review-context command ran immediately after that item review/repair and before work moved to another supplier; no review hash was refreshed.",
+    "Each shared contract edit used tools/step5-shared-write-lock.mjs acquire, reread the current JSON, edited only the assigned contract, ran the strict focused check, and released. Shared ledgers, prior reports, judges, stamps and round state were not edited. Repairs are author-origin local checks requiring the normal engine review/certification. No unresolved mathematical obligations remain in this assignment."
+  ]
+}

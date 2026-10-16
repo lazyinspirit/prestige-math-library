@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-local-holomorphic-logarithm-nonvanishing-function-on-disc.json
 id: lem-local-holomorphic-logarithm-nonvanishing-function-on-disc
 kind: lemma
 title: "A nonvanishing holomorphic function on a disc has a holomorphic logarithm"
@@ -7,20 +9,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-holomorphic-primitive-on-star-shaped-domain, def-star-shaped-open-subset-of-rn, thm-cauchy-integral-formula-higher-derivatives, thm-algebra-of-complex-derivatives, thm-chain-rule-for-complex-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, thm-complex-exponential-addition-and-real-extension, thm-zero-complex-derivative-on-a-domain-implies-constant, thm-classification-of-complex-logarithms, rem-plane-star-shaped-and-convex-dictionary, lem-euclidean-polygonal-paths-are-continuous, thm-path-connected-implies-connected]
+deps: [thm-holomorphic-primitive-on-star-shaped-domain, def-complex-domain, def-star-shaped-open-subset-of-rn, def-convex-subset-of-euclidean-space, thm-complex-coordinate-isometry-and-topology-transport, thm-cauchy-integral-formula-higher-derivatives, thm-algebra-of-complex-derivatives, thm-chain-rule-for-complex-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, thm-complex-exponential-addition-and-real-extension, thm-zero-complex-derivative-on-a-domain-implies-constant, thm-classification-of-complex-logarithms, lem-euclidean-polygonal-paths-are-continuous, thm-path-connected-implies-connected]
 justified_by: []
 forward_refs: []
 aliases: []
 landmark: true
 short: "A nonvanishing disc function has a logarithm"
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
-    verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
 sources:
   scraped: []
   references:
@@ -33,11 +28,11 @@ pipeline_run: null
 
 If $h$ is nowhere zero and holomorphic on a disc, then there is a holomorphic $L$ on that disc with $\exp L=h$.
 
-Precisely, if $D(a,r)$ is an open disc with $r>0$ and $h:D(a,r)\to\mathbb C$ is holomorphic and nowhere zero, then there is a holomorphic function $L:D(a,r)\to\mathbb C$ satisfying $\exp(L(z))=h(z)$ for every $z\in D(a,r)$.
+Precisely, if $D(a,r)=\{z\in\mathbb C:|z-a|<r\}$ with $r>0$ and $h:D(a,r)\to\mathbb C$ is holomorphic and nowhere zero, then there is a holomorphic function $L:D(a,r)\to\mathbb C$ satisfying $\exp(L(z))=h(z)$ for every $z\in D(a,r)$.
 
 ## Facts & Assumptions
 
-**Given:** A disc $D(a,r)$ with $r>0$ and a nowhere-zero holomorphic function $h$ on it. For $z,w\in D(a,r)$ and $t\in[0,1]$ the triangle inequality gives $|((1-t)z+tw)-a|\le(1-t)|z-a|+t|w-a|<r$, so every segment between two points of the disc stays in it; taking $z=a$ makes the disc star-shaped with respect to $a$ in the sense of [[rem-plane-star-shaped-and-convex-dictionary]] and [[def-star-shaped-open-subset-of-rn]], and [L4] makes the disc a connected, hence a complex, domain. Also $h'$ is itself holomorphic on the disc, because a holomorphic function has complex derivatives of all orders locally ([[thm-cauchy-integral-formula-higher-derivatives]]), so the quotient rule makes $h'/h$ holomorphic there, $h$ being nowhere zero ([[thm-algebra-of-complex-derivatives]]); and the complex chain rule, the derivative of $\exp$, and the exponential addition law are supplied by [[thm-chain-rule-for-complex-derivatives]], [[thm-complex-exponential-is-entire-with-derivative-itself]], and [[thm-complex-exponential-addition-and-real-extension]].
+**Given:** A disc $D(a,r)=\{z:|z-a|<r\}$ with $r>0$ and a nowhere-zero holomorphic function $h$ on it. It is nonempty since it contains $a$. For each $z$ in it, $\varepsilon=r-|z-a|>0$ and $|w-z|<\varepsilon$ imply $|w-a|<r$ by the triangle inequality, so the disc is open in $d_{\mathbb C}$. For $z,w\in D(a,r)$ and $t\in[0,1]$ the triangle inequality gives $|((1-t)z+tw)-a|\le(1-t)|z-a|+t|w-a|<r$, so every segment between two points of the disc stays in it. By affine-segment and openness transport in [[thm-complex-coordinate-isometry-and-topology-transport]], its coordinate image is a convex open subset of $\mathbb R^2$ in [[def-convex-subset-of-euclidean-space]], hence star-shaped at $\Phi(a)$ in [[def-star-shaped-open-subset-of-rn]]. Each coordinate segment is a continuous path by [L4]; composing it with the coordinate homeomorphism inverse gives a continuous path in the disc. Thus the disc is path connected, hence connected by [L4]; together with nonemptiness and openness this makes it a complex domain in [[def-complex-domain]]. Also $h'$ is itself holomorphic on the disc, because a holomorphic function has complex derivatives of all orders locally ([[thm-cauchy-integral-formula-higher-derivatives]]), so the quotient rule makes $h'/h$ holomorphic there, $h$ being nowhere zero ([[thm-algebra-of-complex-derivatives]]); and the complex chain rule, the derivative of $\exp$, and the exponential addition law are supplied by [[thm-chain-rule-for-complex-derivatives]], [[thm-complex-exponential-is-entire-with-derivative-itself]], and [[thm-complex-exponential-addition-and-real-extension]].
 
 [L1] Every holomorphic function on an open set star-shaped with respect to $a$ has a primitive there ([[thm-holomorphic-primitive-on-star-shaped-domain]]).
 

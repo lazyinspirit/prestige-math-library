@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-sard-slicing-for-compact-null-sections.json
 id: lem-sard-slicing-for-compact-null-sections
 kind: lemma
 title: "Compact null sections imply a compact set is null"
@@ -13,14 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (lem-sard-slicing-for-compact-null-sections). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -51,10 +45,10 @@ subset of $\mathbb R^{n+1}$.
 
 1.1 If $a=b$, compactness bounds $K$ inside $\{a\}\times[-R,R]^n$ for some $R>0$. Divide the $n$-dimensional base into a finite grid of cubes of side at most $\delta$ and cover each corresponding point of $K$ by an $(n+1)$-cube of side $\delta$ centred in the first coordinate at $a$. The number of grid cubes is at most $(2R/\delta+2)^n$, so their total $(n+1)$-volume is at most $(2R+2\delta)^n\delta\to0$. By [F1], $K$ is null. Assume henceforth that $a<b$. [F1, given, cases]
 
-1.2 Fix $\varepsilon>0$ and put $L:=b-a+1$. For each $t\in[a,b]$, [F1] supplies the following covers. [F1, given, choose] There are finitely many closed $n$-cubes $Q_{t,1},\ldots,Q_{t,m_t}$ covering the compact section $K_t$ with total $n$-volume below $\varepsilon/(2^{n+3}L)$. Enlarge them slightly to open $n$-cubes $\widetilde Q_{t,\ell}\supseteq Q_{t,\ell}$ so that, with $$ O_t:=\bigcup_{\ell=1}^{m_t}\widetilde Q_{t,\ell}, $$ one still has $$ \sum_{\ell=1}^{m_t}\operatorname{vol}_n(\widetilde Q_{t,\ell}) <\frac{\varepsilon}{2^{n+2}L}. $$ Thus each section has an open finite cube cover with the stated uniform volume budget. [F1, given, choose]
+1.2 Fix $\varepsilon>0$, put $L:=b-a+1$, and set $B:=\varepsilon/(2^{n+2}L)$. For a fixed $t$, nullity [F1] gives a sequence of closed cubes covering $K_t$, with sides $\ell_i$ and total volume below $B/4$. Enlarge cube $i$ concentrically to an open cube of side $\ell_i+2h_i$, where $h_i=\min\{1,B2^{-i-4}/(3^n(1+\ell_i)^{n-1})\}$ for $i\ge0$. The binomial formula gives $(\ell_i+2h_i)^n-\ell_i^n\le3^nh_i(1+\ell_i)^{n-1}\le B2^{-i-4}$. Thus the enlarged open cover has total covering cost below $B/4+B/8<B$, where an open cube of side $s$ has covering cost $s^n$. Compactness of $K_t$ supplies a finite subcover, still of cost below $B$. This proves existence separately for each $t$; no family of chosen covers indexed by $t$ is formed. [F1, given, construct, algebra]
 
-2.1 Since $K_t\subseteq O_t$ and $O_t$ is open, compactness of $K$ gives the following interval. [step 1.2, given, contradiction] There is an open interval $I_t$ about $t$ such that $$ K\cap(I_t\times\mathbb R^n)\subseteq I_t\times O_t. $$ Otherwise one could find $(t_j,y_j)\in K$ with $t_j\to t$ and $y_j\notin O_t$; passing to a convergent subsequence inside the compact set $K$ yields a limit point $(t,y)\in K$ with $y\in K_t\setminus O_t$, contradiction. [step 1.2, given, contradiction]
+2.1 Let $\mathcal P$ be the set of all pairs $(I,\mathcal Q)$ such that $I$ is an open interval, $\mathcal Q$ is a finite list of open $n$-cubes of total covering cost below $B$, and $K\cap(I\times\mathbb R^n)\subseteq I\times O_{\mathcal Q}$, where $O_{\mathcal Q}$ is their union. Every $t\in[a,b]$ lies in the interval of at least one such pair. Indeed, take just one finite cover of $K_t$ supplied by step 1.2 and write $O$ for its union. The open sets $\mathbb R\times O$ and $\{(x,y):|x-t|>1/r\}$ for positive integers $r$ cover $K$: points over $t$ lie in the first, and every other point lies in one of the latter. A finite subcover exists. Taking $r$ at least as large as its finitely many indices shows that $K\cap((t-1/r,t+1/r)\times\mathbb R^n)$ lies in $\mathbb R\times O$. Thus this interval and the finite cube list belong to $\mathcal P$. This construction proves coverage by the set of all witnessed intervals without selecting one pair for every $t$. [step 1.2, given, construct]
 
-3.1 By [L1], the cover $\{I_t:t\in[a,b]\}$ has a Lebesgue number. Choose a finite partition of $[a,b]$ into closed intervals $J_1,\ldots,J_r$ of positive length smaller than that number, and for each $j$ choose $t_j$ with $J_j\subseteq I_{t_j}$. Then $\sum_j|J_j|=b-a<L$. For each prism $J_j\times\widetilde Q_{t_j,\ell}$, use the following subdivision. [L1, step 2.1, choose] Let $\lambda_j:=|J_j|$ and let $s_{j,\ell}$ be the side length of $\widetilde Q_{t_j,\ell}$. If $\lambda_j\ge s_{j,\ell}$, partition the interval direction into at most $\lceil \lambda_j/s_{j,\ell}\rceil$ pieces of length at most $s_{j,\ell}$; if $\lambda_j\le s_{j,\ell}$, partition each of the $n$ base directions into at most $\lceil s_{j,\ell}/\lambda_j\rceil$ pieces of length at most $\lambda_j$. In either case the prism is covered by finitely many closed $(n+1)$-cubes of total volume at most $$ 2^n\lambda_j s_{j,\ell}^n =2^n|J_j|\,\operatorname{vol}_n(\widetilde Q_{t_j,\ell}). $$ These cubes cover $K$, and their total volume is at most $$ 2^n\sum_{j=1}^r |J_j| \sum_{\ell=1}^{m_{t_j}}\operatorname{vol}_n(\widetilde Q_{t_j,\ell}) <2^nL\cdot \frac{\varepsilon}{2^{n+2}L}<\varepsilon. $$ By [F1], $K$ is null. [F1, L1, step 2.1, algebra]
+3.1 By [L1], the open cover $\{I:(I,\mathcal Q)\in\mathcal P\}$ of $[a,b]$ has a Lebesgue number. Take a finite partition into closed intervals $J_1,\ldots,J_r$ of positive length smaller than that number. For each of these finitely many intervals take a witnessing pair $(I_j,\mathcal Q_j)\in\mathcal P$ with $J_j\subseteq I_j$. Write $\widetilde Q_{j,1},\ldots,\widetilde Q_{j,m_j}$ for its list. Only finitely many witnesses are used, which needs no choice axiom. Then $\sum_j|J_j|=b-a<L$. For each prism $J_j\times\widetilde Q_{j,\ell}$, use the following subdivision. [L1, step 2.1, choose] Let $\lambda_j:=|J_j|$ and let $s_{j,\ell}$ be the side length of $\widetilde Q_{j,\ell}$. If $\lambda_j\ge s_{j,\ell}$, partition the interval direction into at most $\lceil \lambda_j/s_{j,\ell}\rceil$ pieces of length at most $s_{j,\ell}$; if $\lambda_j\le s_{j,\ell}$, partition each of the $n$ base directions into at most $\lceil s_{j,\ell}/\lambda_j\rceil$ pieces of length at most $\lambda_j$. In either case the prism is covered by finitely many closed $(n+1)$-cubes of total volume at most $$ 2^n\lambda_j s_{j,\ell}^n =2^n|J_j|\,\operatorname{vol}_n(\widetilde Q_{j,\ell}). $$ These cubes cover $K$, and their total volume is at most $$ 2^n\sum_{j=1}^r |J_j| \sum_{\ell=1}^{m_j}\operatorname{vol}_n(\widetilde Q_{j,\ell}) <2^nL\cdot \frac{\varepsilon}{2^{n+2}L}<\varepsilon. $$ By [F1], $K$ is null. [F1, L1, step 2.1, algebra]
 
 4.1 Therefore compact null sections imply the whole compact set is null. [step 1.1, step 3.1] ∎ 

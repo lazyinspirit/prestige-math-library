@@ -1,0 +1,107 @@
+6.6 Quantum Searching
+31
+
+in T ≈π/4
+�
+
+N/r queries. Again, the speedup is quadratic: The number of quantum
+queries needed to find a solution is
+
+#quantum queries = O(
+�
+
+#classical queries).
+(6.161)
+
+What if r is not known a priori? As a function of the number of queries the success
+probability oscillates, where the period of the oscillation is T ≈π/2
+�
+
+N/r. If we choose
+T uniformly at random in the interval T = {0, 1, 2, .., Tmax ≈π/4
+√
+
+N}, then if there is
+a solution (r > 0), a solution will be found with Prob ≥1/2 + O(1/N). If we repeat m
+times, sampling a different random value of T each time, we will find a solution apart
+from a small failure probability ≈2−m. Therefore, we can use Grover’s algorithm to
+solve a decision problem in NP with high success probability, in
+
+time = O(
+√
+
+NpolylogN),
+(6.162)
+
+since we can compute the circuit that evaluates f(x) in (classical or quantum) time
+O(polylogN).
+
+6.6.1 Generalized Search
+
+In some cases, the problem may have structure that can be exploited to search faster for
+a solution. In that case, some strings are better candidates than others to be solutions,
+and so we ought to be able to search more efficiently by spending more time testing
+likely solutions instead of less likely ones.
+For the case of Grover’s exhaustive search of a function without any apparent struc-
+ture, we started the algorithm by preparing
+
+|s⟩= H⊗n|0⟩=
+1
+√
+
+N
+
+N−1
+�
+
+x=0
+|x⟩,
+(6.163)
+
+which has overlap sin θ = 1/
+√
+
+N with the solution |w⟩, and hence would yield the
+uniform distribution on x if we measured in the computational basis. For a function
+with structure we may be able to construct an efficiently computable unitary U such
+that U|0⟩= sin θ|w⟩+ cos θ|ψ⊥⟩where sin2 θ > 1/N. In that case, we can conduct
+Grover’s algorithm with H⊗n replaced by U, and Us replaced by
+
+˜Us = U(2|0⟩⟨0| −I)U†.
+(6.164)
+
+Thus ˜Us reflects in the axis U|0⟩rather than |s⟩. The analysis of the algorithm is the
+same as before, and in the case where there exists a unique solution,we can find it with
+high probability in T ≈π
+
+4θ < π
+
+4
+√
+
+N queries.
+Specifically, because of the structure of the function, we might be able to exclude all
+except M < N inputs as potential solutions. Then, classically, we could find the solution
+in O(M) queries, while quantumly only O(
+√
+
+M) queries suffice, if we can construct U
+such that
+
+U|0⟩=
+1
+√
+
+M
+
+M
+�
+
+i=1
+|xi⟩,
+(6.165)
+
+the uniform superposition of the candidate solutions.
+For example, suppose that classical search for a solution can be accelerated by a
+
+

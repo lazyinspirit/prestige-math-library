@@ -1,0 +1,129 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 4,
+  "unit": "42",
+  "input_sha256": "3df0ac2134526d61a7ca1a595f74f091f04c44576c9eb4d93930719d5c230540",
+  "decisions": [
+    {
+      "id": "thm-qa-18-reversible-search-cost",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "1e60ca6cc905a19c01285d74cfc6f07041c1b047ce5caa99893bfca2a2607728",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 omitted the one-state convention: its maximum over nonstationary eigenvalues is undefined for P=[1], whereas the declared restriction norm is zero and the gap is 1. Added that case explicitly and restricted the maximum formula to ergodic chains with at least two states. This is nonfatal because proof 1.1 only needs the bound on each nonstationary eigenvalue, which is vacuous for one state; steps 6.1 and 7.1 still cover empty and fully marked one-state inputs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qa-18-element-distinctness-unique-collision",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "b298cc71829f382c66776361d4eab1f6e197deac4b96e9b7a83634529dbfd7ff",
+      "outcome": "false_positive",
+      "reason": "The asymptotic query bound alone would not determine a setup count, but that is not the only evidence in F2's cited supplier: thm-qa-18-element-distinctness-query-cost proof 3.1 explicitly counts its two fresh stationary preparations at at most 2(r+2) queries. This is substantiated by the finding theorem proof 7.1 and algorithm wrapper steps 1-3: two preparations, then retained-state recursion containing no preparation call. Thus the example's at-most-two claim is supported by the actual cited argument. Also binomial(6,2)/binomial(8,4)=3/14, and r=Theta(N^(2/3)) balances both terms.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qa-18-reversible-search-cost",
+      "disposition": "repaired",
+      "post_sha256": "b6f95fe8400f859af9b1b1ef57cf178a11af7eb3f053596e18203b6c22a50bad",
+      "review_context_sha256": "649d5d0aff580890c00578c53cb084a835c906bebc160f9f1119a1b9587b34c2",
+      "reason": "Compared the norm definition and eigenvalue-characterization theorem, including their zero-dimensional case. F2 now gives gap 1 for one state and the eigenvalue maximum only when nonstationary eigenvalues exist. The spectral phase bound is then either valid or vacuous; the algorithm's direct sample handles actual marked mass 1 and its verification excludes outputs for mass 0. The theorem's Statement, proof steps, dependencies and page interface are unchanged; this is a focused repair review, not independent acceptance of my edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qa-18-element-distinctness-unique-collision",
+      "disposition": "unaffected",
+      "post_sha256": "052211db349a4ca067537b8f0035d7f8b90ac96a1d237de8acece578effe9908",
+      "review_context_sha256": "56e5e86db5ee05ef78df48e185756a120b08fd8264b8cb1c0864a3d5f8f780fb",
+      "reason": "Checked the unique-pair inclusion count 15/70=3/14 and the N=8,r=4 clamp. The cited query theorem proof 3.1 explicitly gives the two stationary preparations, with the edge-setup additive 4 absorbed by O(N/sqrt(r)); the algorithm's recursion adds no further setups. The two terms have order N^(2/3) at the stated parameter. The preceding supplier edit only corrects its one-state gap fact and changes none of these Johnson-walk interfaces. No item or metadata edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-qa-18-reversible-search-cost",
+      "outcome": "confirmed_nonfatal",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "The unqualified F2 eigenvalue maximum has an empty indexing set for a permitted one-state chain. Added the explicit gap-1 case without changing the Statement; the nonstationary phase estimates remain vacuously true in that case.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "ex-qa-18-element-distinctness-unique-collision",
+      "outcome": "false_positive",
+      "status": "not-a-defect",
+      "reason": "The cited query theorem proof 3.1 explicitly counts two stationary preparations. Its own supplier proof 7.1 and algorithm wrapper steps 1-3 justify the count independently of the displayed asymptotic expression. Preserve the example unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "thm-qa-18-reversible-search-cost",
+      "ex-qa-18-element-distinctness-unique-collision"
+    ],
+    "claim_and_conventions": "Finite ergodic reversible chains, including one state, with supplied positive dyadic lower absolute-gap and marked-mass bounds. Only F2's gap convention changed; all original guarantees and Foundations/choice requirements are preserved.",
+    "local_evidence": [
+      "items/def-qa-17-absolute-spectral-gap.md: Definition, restriction to the zero subspace has norm 0",
+      "items/thm-qa-17-absolute-gap-eigenvalue-characterization.md: Statement and proof 1.1, separate zero-dimensional case",
+      "items/alg-qa-18-reversible-walk-finding.md: tolerant finding wrapper and recursive circuit",
+      "items/thm-qa-18-reversible-search-cost.md: proof 1.1, 6.1 and 7.1",
+      "research/quantum-computing-algorithms-60-2026-10-15-batch-42.proof-contracts.json: F2 source quotes already include the one-state convention",
+      "library/quantum-algorithms/quantum-walk-search-and-element-distinctness.md: finite-chain and resource interface",
+      "items/thm-qa-18-element-distinctness-query-cost.md: proof 1.1 inclusion count and proof 3.1 explicit two-preparation accounting",
+      "items/ex-qa-18-element-distinctness-unique-collision.md: F2 and proof 1.1-2.1",
+      "library/quantum-algorithms/quantum-walk-search-and-element-distinctness-examples.md: unique-collision and balanced-cost interface"
+    ],
+    "source_reading": "Local mathematical arguments consulted; no external source reading claimed.",
+    "statement_definition_changes": [],
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-18-reversible-search-cost.md items/ex-qa-18-element-distinctness-unique-collision.md --json",
+        "exit_code": 0,
+        "result": "2 files, 2 checked proofs, 0 failures; both pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-qa-18-reversible-search-cost.md items/ex-qa-18-element-distinctness-unique-collision.md --json",
+        "exit_code": 0,
+        "result": "2 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-42.proof-contracts.json --items thm-qa-18-reversible-search-cost,ex-qa-18-element-distinctness-unique-collision --strict --json",
+        "exit_code": 0,
+        "result": "Both scoped contracts pass with no errors or warnings; their unchanged supplier quotes and step mirrors remain current."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-qa-18-reversible-search-cost.md",
+        "exit_code": 0,
+        "result": "1 changed item, 10 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment where required; no independent acceptance of the repair is claimed.",
+    "repair_complete": true,
+    "published_ledger_updates": "None: no published item was repaired or found defective in the assigned reviews, and no Statement/Definition interface changed.",
+    "scope": "Both assigned carriers are draft and present in the frozen frontier. No new prerequisites, shared metadata edits, judgments, stamps, certificates, round-state changes, or worker launches.",
+    "operational_checks": "A direct node invocation of precheck.mts failed with ERR_UNKNOWN_FILE_EXTENSION before validation; corrected by using the repository's tools/tsx-run.mjs wrapper, whose scoped check passed. A rendercheck --help probe began the tool's default scan and was interrupted with exit 130; it supplies no validation evidence. The subsequent explicit two-item rendercheck passed.",
+    "propagation": "Compared the edited F2 against the original carrier: it is the sole changed paragraph. The complete Statement and all proof steps are unchanged; the example carrier is unchanged. No direct-consumer propagation is licensed by this facts-only repair."
+  }
+}

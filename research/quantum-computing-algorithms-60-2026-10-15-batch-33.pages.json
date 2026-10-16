@@ -1,0 +1,643 @@
+[
+  {
+    "order": 2230,
+    "id": "shors-factoring-algorithm",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Shor’s Factoring Algorithm",
+    "companion": "shors-factoring-algorithm-examples",
+    "requires": [
+      "quantum-order-finding-and-rational-reconstruction",
+      "divisibility-gcd-and-bezout",
+      "primitive-roots-and-unit-groups-modulo-n",
+      "congruences-and-the-chinese-remainder-theorem",
+      "monoids-groups-and-subgroups",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "primes-and-the-fundamental-theorem-of-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "alg-qa-shor-uniform-residue-sampler",
+        "kind": "algorithm",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-countable-product-of-probability-spaces"
+        ],
+        "dependency_level": 0,
+        "title": "Exact uniform sampling from the nonzero residue representatives",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "axiom_use": "Countable choice and dependent choice are used only to form the countable independent fair-bit tape."
+      },
+      {
+        "id": "lem-qa-crt-sign-vector-factorization",
+        "kind": "lemma",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "thm-unit-group-chinese-remainder-decomposition",
+          "thm-chinese-remainder-theorem",
+          "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "def-order-in-a-group",
+          "def-group-power",
+          "lem-order-characterisation",
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "def-prime",
+          "def-integers-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-int-ordered-ring",
+          "lem-divisor-bound"
+        ],
+        "dependency_level": 0,
+        "title": "Mixed CRT signs yield proper gcd factors",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, “Quantum Fourier transforms,” and §5, “Prime factorization” (order-finding and the factor reduction)."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.4, “Factoring,” “Reduction from factoring to period-finding,” “Shor’s period-finding algorithm,” and “Continued fractions.”"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $N=\\prod_{i<k}p_i^{e_i}$, where $k\\ge1$, the $p_i$ are distinct odd primes, and every $e_i\\ge1$. If $z^2\\equiv1\\pmod N$ but $z\\not\\equiv1,-1\\pmod N$, then both $\\gcd(z-1,N)$ and $\\gcd(z+1,N)$ are proper nontrivial divisors of $N$. When $k=1$, the hypotheses cannot hold, because the proof below shows the only roots are the two global signs."
+      },
+      {
+        "id": "lem-qa-even-order-square-root",
+        "kind": "lemma",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "lem-order-characterisation",
+          "def-order-in-a-group",
+          "def-group-power",
+          "def-integers-modulo-n",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "thm-integers-modulo-n-basic-algebra"
+        ],
+        "dependency_level": 0,
+        "title": "Half an even order gives a square root of one",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-prime-power-order-two-adic-law",
+        "kind": "lemma",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "def-order-in-a-group",
+          "def-group-power",
+          "lem-order-characterisation",
+          "def-p-adic-valuation",
+          "def-finite-probability-space-and-event",
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "def-divides-in-z",
+          "def-coprime",
+          "lem-coprime-criterion",
+          "lem-coprime-divides-product",
+          "thm-bezout-identity",
+          "thm-int-comm-ring",
+          "lem-int-cancellation"
+        ],
+        "dependency_level": 0,
+        "title": "Two-adic order distribution in odd prime-power unit groups",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-shor-residue-gcd-branch",
+        "kind": "lemma",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "def-unit-group-modulo-n-and-euler-totient",
+          "thm-unit-criterion-modulo-n",
+          "def-integers-modulo-n",
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "lem-divisor-bound",
+          "def-finite-probability-space-and-event",
+          "def-conditional-probability",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "dependency_level": 0,
+        "title": "Random residue gcd branch for factoring",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-order-to-factor-success",
+        "kind": "theorem",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "lem-qa-prime-power-order-two-adic-law",
+          "lem-qa-even-order-square-root",
+          "lem-qa-crt-sign-vector-factorization",
+          "thm-unit-group-chinese-remainder-decomposition",
+          "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+          "thm-canonical-prime-factorisation",
+          "thm-fundamental-theorem-of-arithmetic",
+          "def-finite-probability-space-and-event",
+          "def-product-of-finite-probability-spaces",
+          "def-order-in-a-group",
+          "def-group-power",
+          "lem-order-characterisation",
+          "def-p-adic-valuation",
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "def-coprime",
+          "lem-coprime-criterion",
+          "lem-coprime-divides-product",
+          "thm-bezout-identity",
+          "thm-int-comm-ring",
+          "lem-int-cancellation",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "def-integers-modulo-n",
+          "cor-order-of-element-divides-group-order",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-product-probability-has-independent-coordinate-events"
+        ],
+        "dependency_level": 1,
+        "title": "Classical randomized order-to-factor success bound",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; only finitely many components and finite probability spaces occur."
+      },
+      {
+        "id": "alg-qa-shor-factoring",
+        "kind": "algorithm",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "alg-qa-modular-order-finding",
+          "alg-qa-modular-multiplication-circuit",
+          "alg-qa-shor-uniform-residue-sampler",
+          "def-integers-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "thm-bezout-identity",
+          "thm-standard-representatives-modulo-n",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "thm-unit-criterion-modulo-n",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-countable-product-of-probability-spaces",
+          "def-natural-numbers",
+          "def-nat-order"
+        ],
+        "dependency_level": 20,
+        "title": "Shor factoring with verified output and bounded outer retries",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "axiom_use": "Countable choice and dependent choice supply the sampler's countable fair-bit tapes; the number-theoretic reductions use finite arguments."
+      },
+      {
+        "id": "def-qa-shor-cost-accounting",
+        "kind": "definition",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "def-qa-classical-bit-cost"
+        ],
+        "dependency_level": 18,
+        "title": "Shor factoring cost-accounting branches",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-shor-perfect-power-precheck",
+        "kind": "lemma",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "alg-qa-shor-factoring",
+          "def-divides-in-z",
+          "def-natural-numbers",
+          "def-nat-order",
+          "lem-nat-embeds-int",
+          "def-group-power",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "def-qa-shor-cost-accounting"
+        ],
+        "dependency_level": 21,
+        "title": "Even and perfect-power preprocessing returns a proper factor",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-shor-residue-sampler-correct-and-cost",
+        "kind": "theorem",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "alg-qa-shor-uniform-residue-sampler",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-countable-product-of-probability-spaces",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "def-finite-probability-space-and-event",
+          "thm-continuity-from-above-for-measures",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-layer-cake-formulas-for-random-variables",
+          "def-qa-shor-cost-accounting",
+          "def-qa-classical-bit-cost"
+        ],
+        "dependency_level": 19,
+        "title": "Rejection sampling is uniform, almost surely terminating, and has expected linear bit cost",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable choice and dependent choice are used only to form the countable fair-bit product space."
+      },
+      {
+        "id": "thm-qa-order-to-factor-correctness",
+        "kind": "theorem",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "alg-qa-shor-factoring",
+          "lem-qa-shor-perfect-power-precheck",
+          "lem-qa-shor-residue-gcd-branch",
+          "lem-qa-even-order-square-root",
+          "lem-qa-crt-sign-vector-factorization",
+          "thm-unit-group-chinese-remainder-decomposition",
+          "thm-chinese-remainder-theorem",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-integers-modulo-n",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "thm-unit-criterion-modulo-n",
+          "thm-fundamental-theorem-of-arithmetic",
+          "thm-canonical-prime-factorisation"
+        ],
+        "dependency_level": 22,
+        "title": "Order-to-factor output correctness",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-shor-factoring-cost",
+        "kind": "theorem",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "alg-qa-shor-factoring",
+          "thm-qa-modular-order-finding-cost",
+          "thm-qa-modular-arithmetic-cost",
+          "def-qa-shor-cost-accounting",
+          "lem-qa-shor-perfect-power-precheck",
+          "thm-qa-shor-residue-sampler-correct-and-cost",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-qa-classical-bit-cost",
+          "def-qc-circuit-cost-model",
+          "alg-qa-modular-order-finding"
+        ],
+        "dependency_level": 22,
+        "title": "Separate Shor factoring bit, gate, and query costs",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable choice and dependent choice are used only for the expected-cost rejection sampler."
+      },
+      {
+        "id": "thm-qa-shor-factoring-success",
+        "kind": "theorem",
+        "page": "shors-factoring-algorithm",
+        "deps": [
+          "alg-qa-shor-factoring",
+          "lem-qa-shor-perfect-power-precheck",
+          "lem-qa-shor-residue-gcd-branch",
+          "thm-qa-modular-order-finding-success",
+          "thm-qa-order-to-factor-success",
+          "thm-qa-order-to-factor-correctness",
+          "thm-qa-shor-residue-sampler-correct-and-cost",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "thm-unit-criterion-modulo-n",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-countable-product-of-probability-spaces",
+          "def-finite-probability-space-and-event",
+          "def-conditional-probability",
+          "def-product-of-finite-probability-spaces",
+          "thm-product-probability-has-independent-coordinate-events"
+        ],
+        "dependency_level": 23,
+        "title": "Bounded-error success of Shor factoring",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§4, order finding, and §5, ‘Prime factorization’, PDF pp. 16–19."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §§5.1–5.2, period finding and factoring, PDF pp. 49–56."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable choice and dependent choice are used only for the sampler's countable independent fair-bit tapes."
+      }
+    ]
+  },
+  {
+    "order": 2231,
+    "id": "shors-factoring-algorithm-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Shor’s Factoring Algorithm — Examples",
+    "companion": "shors-factoring-algorithm",
+    "requires": [
+      "shors-factoring-algorithm"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-shor-factorization-of-fifteen",
+        "kind": "example",
+        "page": "shors-factoring-algorithm-examples",
+        "deps": [
+          "alg-qa-shor-factoring",
+          "thm-qa-order-to-factor-correctness",
+          "def-integers-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-group-power",
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z"
+        ],
+        "dependency_level": 23,
+        "title": "A Shor order sample for factoring fifteen",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§5, ‘Prime factorization’, PDF pp. 16–19; local arithmetic example."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §5.2, factoring, PDF pp. 49–56; local arithmetic example."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all computations are finite integer arithmetic."
+      },
+      {
+        "id": "ex-qa-shor-factorization-retry-branches",
+        "kind": "example",
+        "page": "shors-factoring-algorithm-examples",
+        "deps": [
+          "alg-qa-shor-factoring",
+          "lem-qa-shor-perfect-power-precheck",
+          "lem-qa-shor-residue-gcd-branch",
+          "thm-qa-order-to-factor-correctness",
+          "def-integers-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-group-power",
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "thm-unit-criterion-modulo-n"
+        ],
+        "dependency_level": 23,
+        "title": "Shor factoring preprocessing and retry branches",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter W. Shor, Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+              "url": "https://arxiv.org/pdf/quant-ph/9508027",
+              "locator": "§5, ‘Prime factorization’, PDF pp. 16–19; local branch examples."
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415",
+              "locator": "Chapter 5, §5.2, factoring, PDF pp. 49–56; local branch examples."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all computations are finite integer arithmetic."
+      }
+    ]
+  }
+]

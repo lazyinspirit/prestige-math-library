@@ -1,0 +1,115 @@
+10
+Quantum Algorithms
+
+for each of the r values of y that satisfy eq. (6.40). Therefore, with a probability of at
+least 4/π2, the measured value of y will satisfy
+
+kN
+
+r −1
+
+2 ≤y ≤kN
+
+r + 1
+
+2,
+(6.47)
+
+or
+k
+r −1
+
+2N ≤y
+
+N ≤k
+
+r + 1
+
+2N ,
+(6.48)
+
+where k is an integer chosen from {0, 1, . . . , r −1}. The output of the computation is
+reasonable likely to be within distance 1/2 of an integer multiple of N/r.
+Suppose that we know that r < M ≪N. Thus N/r is a rational number with a
+denominator less than M. Two distinct rational numbers, each with denominator less
+than M, can be no closer together than 1/M 2, since a
+
+b −c
+
+d = ad−bc
+
+bd . If the measurement
+outcome y satisfies eq. (6.47), then there is a unique value of k/r (with r < M) deter-
+mined by y/N, provided that N ≥M2. This value of k/r can be efficiently extracted
+from the measured y/N, by the continued fraction method.
+Now, with probability exceeding 4/π2, we have found a value of k/r where k is selected
+(roughly equiprobably) from {0, 1, 2, . . . , r −1}. It is reasonably likely that k and r are
+relatively prime (have no common factor), so that we have succeeded in finding r. With
+a query of the oracle, we may check whether f(x) = f(x + r). But if GCD(k, r) ̸= 1, we
+have found only a factor (r1) of r.
+If we did not succeed, we could test some nearby values of y (the measured value
+might have been close to the range −r/2 ≤yr(mod N) ≤r/2 without actually lying
+inside), or we could try a few multiples of r (the value of GCD(k, r), if not 1, is probably
+not large). That failing, we resort to a repetition of the quantum circuit, this time (with
+probability at least 4/π2) obtaining a value k′/r. Now k′, too, may have a common
+factor with r, in which case our procedure again determines a factor (r2) of r. But it is
+reasonably likely that GCD(k, k′) = 1, in which case r = LCM(r1, r2). Indeed, we can
+estimate the probability that randomly selected k and k′ are relatively prime as follows:
+Since a prime number p divides a fraction 1/p of all numbers, the probability that p
+divides both k and k′ is 1/p2. And k and k′ are coprime if and only if there is no prime
+p that divides both. Therefore,
+
+Prob(k, k′ coprime) =
+�
+
+prime p
+
+�
+1 −1
+
+p2
+
+�
+=
+1
+ζ(2) = 6
+
+π2 ≃.607
+(6.49)
+
+(where ζ(z) denotes the Riemann zeta function). Therefore, we are likely to succeed in
+finding the period r after some constant number (independent of N) of repetitions of
+the algorithm.
+
+6.2.2 From FFT to QFT
+
+Now let’s consider the implementation of the quantum Fourier transform. The Fourier
+transform
+�
+
+x
+f(x)|x⟩→
+�
+
+y
+
+�
+1
+√
+
+N
+
+�
+
+x
+e2πixy/Nf(x)
+
+�
+
+|y⟩,
+(6.50)
+
+is multiplication by an N × N unitary matrix, where the (x, y) matrix element is
+(e2πi/N)xy. Naively, this transform requires O(N2) elementary operations. But there is a
+
+

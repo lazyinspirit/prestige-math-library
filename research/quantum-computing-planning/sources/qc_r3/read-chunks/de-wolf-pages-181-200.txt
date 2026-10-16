@@ -1,0 +1,1300 @@
+===== PDF PAGE 181 =====
+
+19.4.1
+Variational quantum algorithms
+
+One approach that has received a lot of attention is to optimize over parametrized circuits. Suppose
+we have a quantum circuit U(θ) with a vector θ of parameters. This could for instance be a circuit
+where CNOTs and single-qubit rotations are already in place, but the angles of the single-qubit
+gates are parameters that we can tweak. This U(θ) is then applied to a fixed starting state, say |0⟩,
+yielding a final state |ψ(θ)⟩= U(θ)|0⟩. The goal is now to minimize the expected value of some
+observable M, i.e., to find a θ to minimize the function f(θ) = ⟨ψ(θ)|M|ψ(θ)⟩. In the case of
+supervised learning applications, U(θ) could for instance represent some hypothesis (i.e., a way to
+predict labels of x’s), M could incorporate the given labeled examples (x, f(x)), and f(θ) could be
+the “empirical error”: the fraction of mis-predicted labels among the given examples.
+Note that f(θ) can be computed approximately (for classically given θ) on a quantum computer
+by repeatedly preparing |ψ(θ)⟩and measuring the observable M. If the circuits U(θ) are relatively
+simple (say, few qubits, few gates, low depth) and M is relatively easy to measure (say, a sum
+of a few n-qubit Pauli matrices with few non-identity terms) then this could already be done
+on a relatively small and simple quantum computer.
+Variational quantum algorithms (VQAs)
+are typically hybrid classical-quantum algorithms: the minimization over θ is usually done by a
+classical outer loop that iteratively improves θ. Using the ability to approximately compute f we
+can for instance try to do approximate gradient descent (move θ by some step-size in the direction
+of steepest descent of f) or some other method. This is analogous to the iterative way the weights
+in neural networks are optimized, and these variational quantum approaches are sometimes (with
+a keen sense for marketing) called “quantum neural networks” or “quantum deep learning.” For
+combinatorial optimization, a very structured version of the variational approach is the Quantum
+Approximate Optimization Algorithm (QAOA) [114]. See [82] for a general overview of VQAs.
+One interesting application of this variational idea is in trying to find the smallest eigenvalue of a
+given Hamiltonian H. For example, H could describe the energy of a chemical system as a function
+of the locations of the particles (nuclei and electrons) of the system; the smallest eigenvalue of H
+would be the “ground-state energy” of the system, which is an important quantity in chemistry. We
+know from Chapter 14 that in general this problem of determining or even well-approximating this
+ground state energy is QMA-hard, even in the special case where H is a sum of 2-local terms, so in
+general this shouldn’t be efficiently solvable on a quantum computer. However, suppose that from
+some general physics or chemistry intuition we have a rough idea of what the ground state of our
+particular Hamiltonian H should look like, something we can prepare using a simple parametrized
+circuit U(θ). The set of states |ψ(θ)⟩= U(θ)|0⟩that we are limiting ourselves to, is called an
+“Ansatz” (German for “approach” or “attempt”). We can now try to optimize the parameters θ
+in order to minimize the expected value f(θ) = ⟨ψ(θ)|H|ψ(θ)⟩, i.e., the energy of the state |ψ(θ)⟩.
+This approach is called the “variational quantum eigensolver” (VQE) [209], and is one of the best
+hopes for applying smallish, near-term quantum computers to problems in chemistry.
+
+19.4.2
+Some provable quantum speed-ups for optimization
+
+The variational approach is rather heuristic: it very much depends on how good the “Ansatz” (the
+choice of the class of parametrized circuits U(θ)) happens to be for the particular problem at hand.
+Here we mention some other approaches, which yield provable (albeit usually only polynomial)
+quantum speed-ups under some assumptions on how the input is given.
+
+• There are many quantum speed-ups for optimization problems on graphs, typically using
+
+169
+
+
+===== PDF PAGE 182 =====
+
+Grover search (Section 7.2), Grover-based minimum-finding (Exercise 7.10), amplitude am-
+plification (Section 7.3), or amplitude estimation (Exercise 7.8) as a subroutine. Examples
+are finding shortest paths [107] and approximating minimum cuts or graph sparsification [25].
+
+• Solving linear systems and other basic linear algebra is ubiquitous in classical optimization
+algorithms.
+Since quantum states are vectors and quantum operations are matrices, one
+can try to improve such classical algorithms using quantum algorithms. Examples are phase
+estimation (Section 4.6), the block-encoding approach (Section 9.4 and [125, Section 3.2.4]),
+and HHL (Chapter 10). The trouble with this approach is that it often assumes the input
+is a quantum state (which is not always practical) and/or that it produces the output as a
+quantum state (which is not always useful). For example, HHL and quantum PCA have both
+features. See [2] for more discussion, and [84] for a small (but optimal) polynomial speed-up
+for PCA with classical input and output.
+
+One interesting application of “quantum linear algebra” (with classical inputs and outputs!)
+is the quantum recommendation system of Kerenidis and Prakash [159], which can generate
+recommendations of type “you might also like” to a user of systems like Amazon or Netflix,
+based on the user’s and other users’ earlier behavior.
+Initially [159] was believed to give
+an exponential speed-up over classical recommendation systems, until Tang showed how to
+“dequantize” their quantum algorithm under similar classical access assumptions [248, 86].
+
+• In convex optimization we minimize a convex function f : Rn →R, either over all x ∈Rn
+
+or over all x that are constrained to lie in some convex domain X ⊂Rn.
+This covers a
+big part of continuous optimization. Convexity ensures that the only local minima are also
+global minima, but such methods often still work to find good local minima for non-convex
+problems (such as training neural networks). First-order methods such as gradient descent
+use the gradient of f at a given point, which in some cases can be computed more efficiently
+by quantum algorithms [153, 126, 100] (see Exercise 6). Second-order methods often solve
+a linear system involving the Hessian (the n × n matrix of partial second derivatives at a
+given point), and we can try to use quantum linear algebra for that as well. If the matrix is
+symmetric and diagonally dominant and the output needs to be classical, then we could use
+the linear-system solver of [25].
+
+Quantum algorithms are known for the specific cases of linear programming (LPs) and
+semidefinite programming (SDPs) [66, 23, 65, 24, 22], for learning support vector machines
+(SVMs) [216, 234, 226, 10, 227], for least-squares linear regression with an ℓ1-regularizer [85],
+and for PCA with classical output [84] (in contrast to the quantum output of Section 19.3).
+
+Exercises
+
+1. Suppose that for some unknown Boolean function f : {0, 1}n →{0, 1} and amplitude-vector
+(αx)x∈{0,1}n, you are given one copy of the (n + 1)-qubit state
+�
+
+x∈{0,1}n
+αx|x⟩|f(x)⟩.
+
+Show how you can convert this into state
+�
+
+x∈{0,1}n
+αx(−1)f(x)|x⟩|1⟩
+
+170
+
+
+===== PDF PAGE 183 =====
+
+with success probability 1/2, in such a way that you know when you succeeded.
+
+2. Consider again the concept class C of linear functions mod 2.
+
+(a) Give a classical learning algorithm to learn a linear function exactly with high success
+probability (ε = 0, δ = 1/3) using O(n) uniform random examples and O(n3) time.
+
+(b) Argue that every classical PAC learner for C under uniform D, with ε < 1/4, needs Ω(n)
+examples.
+
+3. In the model of exact learning with membership queries, the goal is to exactly learn a target
+function f ∈C from queries to f (so there are no examples in this setting, or rather the
+learner can choose their own examples).
+
+Show that if C is the concept class of linear functions, then a target function f ∈C can be
+learned with 1 quantum membership query, but requires Ω(n) classical membership queries.
+
+4. Consider a concept class C of functions f : X →{0, 1}, with |X| = N and V Cdim(C) = d.
+
+(a) Consider the following simple (and probably not very time-efficient) learning algorithm:
+
+Draw m examples for target function f; output an h ∈C consistent with these examples.
+
+Let h ∈C be a function with errD(f, h) > ε. Show that at the end of this algorithm, the
+probability that this particular h is still consistent with the m examples is < (1 −ε)m.
+
+(b) Set m = ⌈log(3|C|)/ log(1/(1 −ε))⌉. Show that with probability ≥2/3, the only h that
+are consistent with the m examples have errD(f, h) ≤ε.
+
+(c) Derive an upper bound m = O(d log(N)/ε) on the classical sample complexity of (ε, 1/3)-
+PAC learning the class C using Sauer’s lemma, which says that |C| ≤�d
+i=0
+�N
+i
+�
+.
+
+5. Suppose the set S = {x1, . . . , xd} ⊆X is shattered by concept class C. Consider a distribution
+D that puts 1 −4ε probability on x1 and 4ε/(d −1) probability on each of x2, . . . , xd.
+
+(a) Let f ∈C be the target function. Show that you need Ω((d −1)/ε) examples ∼D to see
+(with probability ≥2/3) (xi, f(xi)) for at least 50% of the i ∈{2, . . . , d}.
+
+(b) Show that the sample complexity of every (ε, 1/3)-PAC learner for the class C is at least
+Ω((d −1)/ε).
+
+6. This exercise is about efficiently finding the gradient ∇f(z) of a function f : Rd →R at
+a point z ∈Rd. The gradient is the d-dimensional real vector of the d partial derivatives
+∂f/∂xi, evaluated at the point z.
+
+(a) (H) Let f(x) = a + bx be a linear (strictly speaking, affine-linear) function from R to
+R, where the real number b ∈[0, 1) can be written with n bits of precision. Suppose we
+have a unitary Of that maps |x, 0⟩→|x, f(x)⟩(assume we have enough qubits to write
+down x and f(x)). Give a quantum algorithm to compute b using one application of Of
+and one application of O−1
+f , and some unitaries that do not depend on f.
+
+(b) Let f(x1, . . . , xd) = a + b1x1 + · · · + bdxd be a linear function from Rd to R, where
+a, b1, . . . , bd ∈R. Show that the gradient ∇f(z) is equal to (b1, . . . , bd) for every z ∈Rd.
+
+171
+
+
+===== PDF PAGE 184 =====
+
+(c) Assume that for the function f in (b), each coefficient bk is ∈[0, 1) and can be written
+with n bits of precision. Suppose we have a unitary Of that maps |x1, . . . , xd, 0⟩→
+|x1, . . . , xd, f(x1, . . . , xd)⟩. Give a quantum algorithm that computes the gradient ∇f(z)
+using one application of Of and O−1
+f , and some unitaries that do not depend on f.
+
+Comment: The quantum algorithm of (c) is somewhat reminiscent of the Bernstein-Vazirani algorithm (Sec-
+
+tion 2.4.2), though that one is for functions over Fd
+2 rather than Rd. Variants of the algorithm of (c) can also
+
+efficiently approximate the gradient of a sufficiently smooth non-linear function f : Rd →R at a given point
+
+z ∈Rd, since a smooth f can be well-approximated around z by a linear function whose coefficients are the
+
+entries of ∇f(z). The algorithm is due to Jordan [153] and was further analyzed by Gily´en et al. [126, 100].
+
+7. (H) Let σ and ρ be k-qubit mixed states, ε > 0 small, t ≥0, and U = eiρ be a unitary. Our
+goal in this exercise is to apply Ut to σ at the expense of using some copies of the state ρ.
+The final state should have error ≤ε in trace norm compared to the intended state UtσU−t.
+
+(a) Show that for small η ≥0, UησU−η = σ + iη(ρσ −σρ) + E, where ∥E∥1 = O(η2).
+
+(b) Let W be the 2k-qubit unitary that swaps the first k qubits with the last k qubits, i.e.,
+it maps |a⟩|b⟩→|b⟩|a⟩for all a, b ∈{0, 1}k. Let σ′ be the k-qubit local state of the
+first register after applying the unitary eiWη to the 2k-qubit state σ ⊗ρ. Show that
+σ′ = σ + iη(ρσ −σρ) + E′, where ∥E′∥1 = O(η2).
+
+(c) Show that ∥σ′ −UησU−η∥1 = O(η2).
+
+(d) Show you can implement Ut on σ with error ε in trace norm, using O(t2/ε) copies of ρ.
+
+Comment: O(kt2/ε) elementary gates suffice to implement this, but you don’t have to show that.
+
+8. Suppose |ϕ⟩and |ψ⟩are unknown n-qubit pure states.
+
+(a) (H) Show how a quantum computer can estimate the overlap |⟨ϕ|ψ⟩| (in absolute value)
+up to additive error 1/100 using O(1) given copies of |ϕ⟩and |ψ⟩, and O(n) elementary
+gates.
+
+(b) Assume the inner product ⟨ϕ|ψ⟩is a real number. Show that ∥|ϕ⟩−|ψ⟩∥2 = 2 −2⟨ϕ|ψ⟩.
+
+(c) Assume ⟨ϕ|ψ⟩is real and positive. Show how a quantum computer can estimate the
+distance ∥|ϕ⟩−|ψ⟩∥up to additive error 1/100 using O(1) copies of |ϕ⟩and |ψ⟩, and
+O(n) gates.
+
+(d) Can a quantum computer detect the difference between the two cases |ψ⟩= |ϕ⟩and
+|ψ⟩= −|ϕ⟩, given arbitrarily many copies of these two states? Explain your answer.
+
+172
+
+
+===== PDF PAGE 185 =====
+
+Chapter 20
+
+Stabilizer States, Clifford Circuits,
+and One-Way Quantum Computing
+
+20.1
+Stabilizer states
+
+In this chapter we will look at a useful and important subset of the set of all n-qubit pure states,
+namely the stabilizer states. They make appearances everywhere in quantum computing, in par-
+ticular in circuit-design and in quantum error-correction. Consider the 1-qubit Paulis I, X, Y, Z
+(Appendix A.9).
+These matrices are unitary and Hermitian, and hence self-inverse, so their
+eigenvalues are ±1. Non-identity Paulis anti-commute (XZ = −ZX etc.) and Y = iXZ. Let
+Pn = {+1, −1, +i, −i} · {I, X, Y, Z}⊗n be the set of n-qubit Paulis with phases, which has 4n+1
+
+elements; the phases ensure that Pn is a group under multiplication.1
+
+If an n-qubit state |ψ⟩is an eigenstate of P ∈Pn\{±I} with eigenvalue +1 (i.e., |ψ⟩= P|ψ⟩)
+then we say that |ψ⟩is stabilized by P. One can think of the equation |ψ⟩= P|ψ⟩as cutting
+the 2n-dimensional space of all pure states in half: the set {|ψ⟩: P|ψ⟩= |ψ⟩} is a subspace of
+dimension 2n−1. If we had another equation P ′|ψ⟩= |ψ⟩, where P and P ′ are independent2, then
+the remaining subspace {|ψ⟩: P|ψ⟩= P ′|ψ⟩= |ψ⟩} that is stabilized by both P and P ′, has
+dimension 2n−2. Continuing with this, if we know |ψ⟩is stabilized by a set P (1), . . . , P (n) of n
+independent Paulis, then that determines a subspace of dimension 2n−n = 1, so it determines the
+state |ψ⟩up to an irrelevant global phase.3
+Such a state that is determined by n independent
+elements of Pn is called a stabilizer state. For example, for n = 1, the basis state |0⟩is stabilized
+by Z, and |1⟩is stabilized by −Z. For n = 2, the basis state |01⟩is stabilized by Z ⊗I and −I ⊗Z.
+In general, every basis state is a stabilizer state. Superpositions can also be stabilizer states. For
+example, |+⟩is stabilized by X, and |−⟩is stabilized by −X. Stabilizer states can be entangled, for
+instance an EPR-pair (Exercise 1) and tensor products of n EPR-pairs (Exercise 2) are stabilizer
+states.
+It is easy to see that the n independent stabilizers must be pairwise commuting because two
+anti-commuting matrices can’t have the same +1-eigenstate, and that −I cannot be written as a
+product of some of them. If some P ∈{I, X, Y, Z}⊗n commutes with all n of those stabilizers, then
+that P is a product of some of the P (1), possibly with a phase. Hence |ψ⟩will be an eigenstate of
+
+1Section 6.1.1 gives an introduction to group theory but isn’t necessary for understanding this chapter.
+2S ⊆Pn is “independent” if we can’t write one P ∈S as a product of some other elements ∈S, times ±1, ±i.
+3This global phase wouldn’t even be there if we took the density matrix view ρ = |ψ⟩⟨ψ|.
+
+173
+
+
+===== PDF PAGE 186 =====
+
+that P as well (with eigenvalue +1 or −1, because P is Hermitian).
+
+20.2
+Clifford circuits
+
+An n-qubit Clifford circuit U consists of Pauli gates, Hadamard gates (H), S =
+�1
+0
+0
+i
+
+�
+-gates,
+
+and CNOT gates. These are exactly the unitaries that preserve the Pauli group: they map (by
+conjugation) all elements of Pn to (possibly other) elements of Pn. For example, conjugation by H
+maps 1-qubit Paulis to 1-qubit Paulis as in Figure 20.1: HXH = Z, HY H = −Y etc. Conjugation
+
+I ←→I, X ←→Z, Z ←→X, Y ←→−Y
+
+Figure 20.1: The way conjugation by H maps the 4 1-qubit Paulis
+
+by CNOT maps the 2-qubit Paulis as depicted in Figure 20.2 (adapted from [157]).
+
+II
+IX
+IY
+IZ
+
+XI
+XX
+XY
+XZ
+
+Y I
+Y X
+Y Y
+Y Z
+
+ZI
+ZX
+ZY
+ZZ
+
+Figure 20.2: The way that conjugation by CNOT maps the 16 2-qubit Paulis (tensor product
+omitted and phases ±1, ±i omitted)
+
+See Exercise 3 for how the S-gate acts on Paulis.
+Since CNOT, H, and S map Paulis to Paulis, and since every Clifford circuit consists of those
+3 types of gates, every n-qubit Clifford circuit C maps n-qubit Paulis to n-qubit Paulis.4 This also
+implies that Clifford circuits map stabilizer states to stabilizer states, as follows. Suppose U is an
+n-qubit unitary which is one Clifford gate (CNOT, H, or S) tensored with identities on the other
+qubits. Suppose we apply this to a state |ψ⟩stabilized by P 1, . . . , P n ∈Pn. Then it is easy to see
+that the new state U|ψ⟩is stabilized by the n unitaries UP 1U∗, . . . , UP nU∗. Because the gate is
+a Clifford, the latter are still elements of Pn and they are easy to compute using the rules from
+the previous section about how conjugation by CNOT, H, or S changes a Pauli. For example, if
+2-qubit state |ψ⟩is stabilized by P 1 = X ⊗X and P 2 = Z ⊗Z, and we conjugate by the 2-qubit
+Clifford circuit U = H ⊗I, then U|ψ⟩is stabilized by P ′1 = Z ⊗X and P ′2 = X ⊗Z.
+In addition to unitary gates, we may also add the ability to measure a Pauli M ∈{I, X, Y, Z}⊗n
+
+during the computation, i.e., doing the projective measurement with operators M+ and M−with
+outcomes +1 and −1 corresponding to the positive and negative eigenspaces of M. For example,
+measuring the first qubit in the computational basis would correspond to M = Z ⊗I2n−1, with
+
+4Conversely, one can show that every unitary C that has this “Pauli-preserving” property can be written as a
+Clifford circuit of O(n2) gates (see Exercise 5).
+
+174
+
+
+===== PDF PAGE 187 =====
+
+M+ = |0⟩⟨0| ⊗I2n−1 and M−= |1⟩⟨1| ⊗I2n−1. We can then let the next gate depend on the earlier
+measurement outcomes, using some polynomial-time classical (possibly randomized) algorithm to
+compute what the next gate or measurement would be. This way the algorithm does not deter-
+ministically generate one specific stabilizer state at the end (as a circuit made up only of Clifford
+gates would), but rather it samples from a probability distribution over stabilizer states. To dis-
+tinguish such potentially more powerful circuits from the purely unitary Clifford circuits, we will
+use the term measurement-controlled Clifford circuits for such circuits that have intermediate Pauli
+measurements and classical control. Note that strictly speaking we’d have to talk about families
+of circuits {Cn} here, one for each number of qubits n, otherwise it doesn’t make sense to speak of
+“polynomial time” for the classical control computations, but that’s a technicality.
+
+20.3
+Efficient simulation of Cliffords: Gottesman-Knill theorem
+
+We saw in Section 13.3 that we can simulate a polynomial-size quantum circuit classically in
+polynomial space and exponential time. The polynomial space is nice (and initially surprising,
+since writing down the amplitude-vector of an arbitrary n-qubit state takes exponential space).
+The exponential time is terrible, but it is probably also unavoidable to a large extent: if the
+factoring problem does not have a polynomial-time classical algorithm (which is so widely believed
+that it underlies much of our current public-key cryptography) then there cannot be a time-efficient
+classical simulation of Shor’s quantum factoring algorithm.
+While we do not expect all quantum circuits to be efficiently simulable, it is still interesting and
+useful to try to delineate where the boundary for efficient simulability lies, because beyond that
+boundary lies the power of quantum computing. In other words, we would like to identify special
+classes of quantum circuits that can be efficiently simulated. One prominent example of such a
+special case is the class of Clifford circuits. This was proved by Gottesman and Knill [129] (see [4]
+for more efficient simulation).
+
+Theorem 6 (Gottesman-Knill) There exists a classical polynomial-time algorithm that, given
+an n-qubit measurement-controlled Clifford circuit C and an n-qubit initial basis state |x⟩, samples
+from the same final probability distribution over stabilizer states as C. The classical simulator will
+output a stabilizer description of the sampled final state.
+
+The key idea is to keep track of the state via n stabilizers (which can be written down with
+n × (2n + 2) = O(n2) bits) rather than via the state’s exponentially large vector of amplitudes.
+Suppose our quantum algorithm starts with a particular stabilizer state, for instance a computa-
+tional basis state |x⟩, whose stabilizer description is easy to write down. Then it applies a (possibly
+measurement-controlled) Clifford circuit. We can efficiently update the stabilizer representation of
+the state step-by-step, for each of the Clifford gates and Pauli measurements that are applied. We
+already saw in the previous section how to update when a unitary Clifford-gate (H, S, CNOT) is
+applied, but we also have to deal with the intermediate Pauli measurements.
+
+Updating the stabilizer representation after a measurement.
+Now suppose that at some
+point in our circuit we have an n-qubit state |ψ⟩stabilized by independent pairwise-commuting
+Paulis P (1), . . . , P (n) ∈Pn, and suppose we measure a Pauli M ∈{I, X, Y, Z}⊗n. This is a pro-
+jective measurement with outcome +1 and −1, and associated projectors M+ = (I + M)/2 and
+
+175
+
+
+===== PDF PAGE 188 =====
+
+M−= (I −M)/2, which correspond to the +1-eigenspace and −1-eigenspace of M, respectively.
+There are now two possibilities.
+Case 1. M commutes with all P (j). Because the P (j) form a maximal set of pairwise-commuting
+Paulis, M can be written as a product of some of the P (j)s times some phase m ∈{±1} (the
+phase can’t be ±i, because M is Hermitian and thus has real eigenvalues). Hence M|ψ⟩= m|ψ⟩.
+Accordingly, one of the two possible measurement outcomes (+1 or −1) has probability 1. We can
+compute what this deterministic measurement outcome m is, and the state doesn’t change after
+the measurement so its stabilizer description remains P (1), . . . , P (n). The computed measurement
+outcome may affect which gates we will do further on, but that is not a problem for the simulation.
+Case 2. M anti-commutes with at least one of the P (j)s, say MP (1) = −P (1)M. By multiplying
+all other P (j) that anti-commute with M by P (1), we may assume P (1) is the only one that anti-
+commutes with M. Using the fact that P (1) stabilizes |ψ⟩, and the cyclic property of the trace, the
+measurement outcome m ∈{±1} satisfies
+
+Pr[m = 1]
+=
+Tr
+�(I + M)
+
+2
+|ψ⟩⟨ψ|
+�
+= Tr
+�(I + M)
+
+2
+P (1)|ψ⟩⟨ψ|
+�
+= Tr
+�
+P (1) (I −M)
+
+2
+|ψ⟩⟨ψ|
+�
+
+=
+Tr
+�(I −M)
+
+2
+|ψ⟩⟨ψ|P (1)
+�
+= Tr
+�(I −M)
+
+2
+|ψ⟩⟨ψ|
+�
+= Pr[m = −1].
+
+Hence the measurement outcome m is distributed uniformly: both probabilities are equal to 1/2.
+We can simulate this simply by picking m by a fair coin flip. With that measurement outcome,
+the post-measurement state |ψ′⟩=
+1
+√
+
+2(I + mM)|ψ⟩has collapsed to the eigenspace of M that has
+eigenvalue m, so it will be stabilized by mM. Note that every stabilizer of |ψ⟩that commutes
+with M (that is, all except P (1)), also stabilizes |ψ′⟩.
+We update the stabilizer description by
+replacing P (1) by mM, resulting in n independent and pairwise-commuting stabilizers of |ψ′⟩.
+Note that computing the next operation (Clifford gate or Pauli measurement) from the earlier
+measurement outcomes was assumed to be classical polynomial-time computable in the measurement-
+controlled Clifford circuit that we’re simulating, so we can do the same computation during our
+simulation. Putting everything together, we end up with exactly the same probability distribu-
+tion over the final states as the quantum circuit, except that the final output is now a classical
+description of the final state in the form of n stabilizers, rather than an actual n-qubit state.
+
+20.4
+T-gates and magic states
+
+The Clifford gates do not form a universal set in the sense of Section 2.2, and in fact Clifford circuits
+on classical basis states can be efficiently simulated classically, as we just saw in the Gottesman-
+Knill theorem.
+One can show that adding just one non-Clifford gate to the available gate set
+{H, S, CNOT} already gives us a universal model of computation. The most common choice of a
+
+gate to add is the T =
+�1
+0
+0
+eiπ/4
+
+�
+-gate, often one sees circuits described as “Clifford+T” for that
+
+reason. To see that T is not Clifford, observe for instance that TXT ∗=
+�
+0
+e−iπ/4
+
+eiπ/4
+0
+
+�
+̸∈P1,
+
+so conjugation-by-T does not send Paulis to Paulis.
+The T-gate looks rather straightforward, it just adds a relatively simple phase eiπ/4 to |1⟩
+similarly to the Clifford-gates Z (which adds −1) and S (which adds i). However, it turns out
+that in the setting of quantum error-correction (Chapter 21), Clifford gates are usually easy to
+
+176
+
+
+===== PDF PAGE 189 =====
+
+do and non-Clifford gates (such as T) are often hard. Instead of actually doing a T-gate, there
+is a very nice trick that allows us to simulate a T-gate by a Clifford circuit (incl. an intermediate
+measurement used to control a subsequent gate) starting from one copy of the state
+
+|T⟩= T|+⟩=
+1
+√
+
+2(|0⟩+ eπi/4|1⟩).
+
+See Exercise 6 for how this is done. Accordingly, we can still do universal quantum computation
+with only measurement-controlled Clifford circuits if we start with a number of copies of |T⟩equal
+to the number of T-gates that we’d like to simulate. Somehow the |T⟩-states “magically” add
+universality to Clifford circuits; |T⟩is called a “magic state” for that reason. We can think of
+the |T⟩-states as a resource that we can consume during the computation, somewhat similar to
+how shared EPR-pairs are a bipartite resource that can be consumed when doing teleportation or
+non-locality experiments. We can thus move the cost of doing T-gates from the actual circuit to a
+pre-processing phase where we produce many copies of |T⟩. Alternatively, the |T⟩-states might be
+produced on-demand by some side-process during the computation, called a “magic-state factory.”
+
+20.5
+Efficient simulation of circuits with few T-gates
+
+A quantum algorithm will typically need to do a lot of T-gates, and in general we don’t believe
+we can simulate such an algorithm efficiently. But what if (besides Clifford operations) we only
+need a small number t of T-gates or |T⟩-states? Intuitively such circuits are “not very far” from
+Cliffords, and one might hope that efficient simulation is still possible. This indeed turns out to
+be the case. The trick is to take the non-stabilizer resource state |R⟩= |T⟩⊗t, and to write it as a
+linear combination of some r stabilizer states
+
+|R⟩=
+
+r
+�
+
+j=1
+αj|Sj⟩.
+
+Suppose we want to run an n-qubit measurement-controlled Clifford circuit with t T-gates on an
+initial n-qubit basis state |x⟩. We can equivalently run a measurement-controlled Clifford circuit
+without T-gates on an initial (n+t)-qubit state |x⟩|R⟩. We can now run a variant of the Gottesman-
+Knill algorithm r times in parallel, once for each |x⟩|Sj⟩, keeping track of the r stabilizer descriptions
+of the (n+t)-qubit states |S′
+j⟩that evolved starting from |x⟩|Sj⟩. We have to be careful here about
+the intermediate measurements. Suppose we want to measure a Pauli M on intermediate state
+|ψ⟩= �r
+j=1 α′
+j|S′
+j⟩, where we have a classical description of the α′
+js and stabilizer descriptions of
+the |S′
+j⟩. We can compute the expectation value
+
+v = ⟨ψ|M|ψ⟩=
+
+r
+�
+
+j,k=1
+α′∗
+j α′
+k⟨S′
+j|M|S′
+k⟩
+
+by computing all r2 values ⟨S′
+j|M|S′
+k⟩. This, however, would take time linear in r2. There is a better
+way to calculate this v in time proportional to r that we will not describe here, see [70]. The v that
+we calculated is the difference between measurement outcomes m = 1 and m = −1. We can now
+sample an m ∈{±1} according to that distribution, and for all j update the stabilizer description
+of |S′
+j⟩according to that measurement outcome m (mM will be one of the new stabilizers for each
+
+177
+
+
+===== PDF PAGE 190 =====
+
+of the r states), and update the coefficient α′
+j depending on the probability of outcome m for that
+particular stabilizer state (some α′
+j may even become 0). This gives a classical simulation of a
+measurement-controlled Clifford circuit that has t additional T-gates, in time r times a polynomial
+in the circuit size.
+
+Stabilizer rank.
+Clearly, the smaller we can make the number of terms r in the decomposition
+of |R⟩, the faster the above simulation will be. The minimal r possible (as a function of t) is called
+the “stabilizer rank” of the state |R⟩, and a fair amount of research has gone into proving upper and
+lower bounds on it. Tight bounds are not known, but the best known upper bound on the stabilizer
+rank of |R⟩is 3t/4 ≈20.3963t, which comes from writing |T⟩⊗4 as the sum of 3 stabilizer states [212].
+The best stabilizer rank of a good approximation of |R⟩(which is still good enough for classical
+simulation with small error) is roughly 20.228t [70]; see Exercise 8 for a weaker but already non-
+trivial upper bound of 20.61t. This is still exponential in t, but better than the trivial 2t, and it does
+imply that Clifford+T circuits that have only O(log n) T-gates, or measurement-controlled Clifford
+circuits that start from t = O(log n) copies of the magic state |T⟩, can be classically simulated in
+polynomial time.
+
+20.6
+One-way quantum computing
+
+We know that 1-qubit and 2-qubit gates suffice for universal quantum computing. If we start with
+a basis state, or any other product state, then the 2-qubit gates are essential: without them we
+would never get away from product states, and those are easy to describe classically (2n complex
+numbers suffice rather than 2n). Also in Clifford+T circuits where we replaced the T-gates by
+little measurement-controlled Clifford-computations on magic states, we still need to do the 2-
+qubit CNOT gates. 2-qubit gates are much harder to implement in practice than 1-qubit gates,
+because they require us to interact two different physical systems (two electrons, two photons, two
+atoms, or whatever system is used to realize qubits).
+There is an interesting way to avoid doing any 2-qubit operations at all during the computation,
+called one-way quantum computing (1WQC). This was introduced by Raussendorf and Briegel [213,
+214], and is the most prominent example of “measurement-based” quantum computing (MBQC).
+In 1WQC the computation consists only of single-qubit measurements in bases that are controlled
+by (i.e., that may depend on) the classical outcomes of earlier single-qubit measurements. The trick
+that makes this possible is that we start the computation in a rather large entangled resource state,
+called a “cluster state,” which we will explain below. If we have some good way to build a cluster
+state, either fully ready before the start of the computation, or on the fly during the computation,
+then we can avoid having to do 2-qubit gates during the rest of the computation (similar to how
+preparing magic states beforehand avoids having to do T-gates during the rest of the computation).
+How does this work? Suppose we have an n-qubit circuit C of depth d that we would like to
+convert to the one-way model. Suppose the initial state on which we want to apply C is |+⟩⊗n;
+this is without loss of generality, since an initial product state, including any basis state, can be
+obtained from |+⟩⊗n by single-qubit unitaries. Suppose the circuit C uses only controlled-Zs (CZs)
+and single-qubit gates of the form
+
+J(α) = H
+�1
+0
+0
+eiα
+
+�
+,
+
+178
+
+
+===== PDF PAGE 191 =====
+
+for α ∈[0, 2π). This maps |0⟩to |+⟩, and |1⟩to eiα|−⟩. Note that J(0) = H, J(0)J(π/2) = S,
+J(0)J(π/4) = T, so this gate-set can implement Clifford+T and hence is universal in the sense of
+Section 2.2: it can do any kind of quantum computation up to arbitrarily small error.
+
+Implementing 1-qubit J(α)-gates by measurement.
+Let’s start with the simple case of one
+qubit on which we want to apply one gate J(α), so n = 1 and d = 1. The 2-qubit cluster state we
+would start from in this case is
+
+CZ|+⟩|+⟩=
+1
+√
+
+2(|0⟩|+⟩+ |1⟩|−⟩).
+
+In order to apply J(α), we measure the first (= leftmost) qubit in the basis
+
+B(α) =
+�
+|0⟩α = J−1(α)|0⟩=
+1
+√
+
+2(|0⟩+ e−iα|1⟩), |1⟩α = J−1(α)|1⟩=
+1
+√
+
+2(|0⟩−e−iα|1⟩)
+�
+.
+
+If the measurement outcome is b ∈{0, 1}, then the state has collapsed to
+
+|b⟩α ⊗1
+√
+
+2(|+⟩+ (−1)beiα|−⟩) = |b⟩α ⊗XbJ(α)|+⟩.
+
+So it is as if we applied the intended gate J(α) to the second |+⟩, with an additional Pauli X if we
+saw measurement outcome b = 1. We will discard the first qubit, and keep track of the additional
+“Pauli corrections” until the end of the computation.
+Now suppose our circuit consists of two single-qubit gates, first J(α) and then J(β) (n = 1 and
+d = 2). Now the initial three-qubit cluster state is
+
+CZ23CZ12|+⟩|+⟩|+⟩.
+
+The subscripts on the CZ-gates indicate the qubits they act on; note that the CZ-gates commute,
+so the order in which we apply them to create the cluster state from |+⟩|+⟩|+⟩doesn’t matter.
+There is also no difference between which qubit is the control and which is the target for a CZ,
+since the only nontrivial thing CZ does, is put a minus in front of |11⟩. We execute the two gates by
+measurement, as follows. We start by measuring the leftmost qubit in the basis B(α) like before.
+With measurement outcome b ∈{0, 1}, the state has now collapsed to
+
+|b⟩α ⊗CZ23(XbJ(α)|+⟩|+⟩).
+
+Note that the CZ23 commutes with what we just did, since we only acted on the first qubit. We
+now would like to measure in basis B(β) in order to apply the gate J(β), but we have to adapt
+if b = 1, because we don’t want to end up applying J(β)XJ(α). Note that J(−β)X = ZJ(β).
+Accordingly, we measure the second qubit in the basis B(β) if b = 0 but in the basis B(−β) if
+b = 1 (here we see how the earlier measurement result b influences the next measurement basis).
+Let’s say we got measurement outcome c ∈{0, 1} from this. We discard the second qubit, and the
+state of the third qubit is now XcZbJ(β)J(α)|+⟩(see Exercise 9), so we have applied the intended
+J(β)J(α) to the initial state |+⟩, up to a “Pauli correction” XcZb that we know.5
+
+5We should also be able to do single-qubit identity gates. These can be implemented by means of a measurement
+in the B(0) basis. This is like applying H, not I, but this H can be absorbed in the next single-qubit gate.
+
+179
+
+
+===== PDF PAGE 192 =====
+
+Implementing a 2-qubit CZ-gate by measurement.
+Now suppose somewhere in the compu-
+tation we would like to do a CZ-gate on the state |ψ⟩on the first two qubits. The relevant part of
+the half-consumed cluster state is now
+
+CZ12CZ13CZ24|ψ⟩12|+⟩3|+⟩4
+
+So not only do we have CZs between the two qubits of |ψ⟩and their horizontal neighbors on the right
+(numbered 3 and 4 above), but we also have a “vertical” CZ between those two qubits (numbered
+1 and 2) themselves. We now measure the first two qubits in the J(0)-basis, say with measurement
+outcomes b1, b2 ∈{0, 1}. A small calculation (Exercise 10) shows that the state on qubits 3 and 4
+is now
+(Xb1H ⊗Xb2H)CZ|ψ⟩.
+
+This is the intended 2-qubit CZ-gate applied on |ψ⟩(implemented by means of single-qubit mea-
+surements on the current cluster state, made possible by the CZs that were used earlier to make
+the initial cluster state), up to Pauli corrections that we keep track of, and Hadamards that can
+be absorbed in the next single-qubit gates.
+
+One-way quantum computing.
+By combining these two types of steps we can implement all
+gates of the original circuit step-by-step by means of single-qubit measurements, starting from a
+n×(d+1) rectangular quantum state where all qubits start as |+⟩and CZs are applied beforehand
+on each horizontal edge, and on each vertical edge that corresponds to a CZ in the original circuit.
+The idea is that the first “column” of n qubits corresponds to the initial state, and each subsequent
+column corresponds to the qubits after the next layer of gates.6
+
+The Paulis X and Z that we accumulate for each of the n qubits during the computation only
+affect a final measurement in the computational basis in trivial ways: the Z-gate only changes the
+signs of amplitudes so it doesn’t affect the measurement probabilities at all, and the X-gate on
+some qubit is easy to correct for by just flipping the binary measurement outcome on that qubit.
+
+Exercises
+
+1. Show that an EPR-pair
+1
+√
+
+2(|00⟩+ |11⟩) is a stabilizer state by exhibiting two independent
+2-qubit Paulis that stabilize that state.
+
+6Note that the cluster state is a stabilizer state, and has a lot of entanglement.
+Because CZs commute and
+because each qubit in the rectangular grid of the cluster state has only O(1) neighbors, we can prepare it with a
+constant-depth circuit. Of course, we need 2-qubit CZ gates to prepare the cluster state, but the selling point of
+1WQC is that this initial state can be pre-prepared and stored somewhere before we need it for the computation.
+This shifts some of the hard work of doing a quantum computation to a pre-processing phase that could be done at
+our leisure. As explained here, 1WQC needs a lot more than the n qubits used in the standard circuit model because
+the full cluster state contains n(d + 1) qubits, which we will “consume” from left to right with our measurements.
+However, it is not necessary to have the full depth-(d + 1) cluster state present at the start. One may start instead
+with a small O(1)-depth cluster state, start the one-way computation, and recycle the qubits that were measured
+on the left side to grow additional layers to the right side of the cluster state on the fly, in some sort of “conveyor
+belt” architecture [74]. This way, only O(n) qubits are present in the system at any one time. This conveyor-belt
+idea is useful when doing 1WQC with photons because we can recover from failed attempts to add qubits to the
+cluster state, and try again (in contrast, a failed gate in the middle of a circuit can irretrievably destroy the whole
+computation).
+
+180
+
+
+===== PDF PAGE 193 =====
+
+2. Show that if |ϕ⟩is an n-qubit stabilizer state and |ψ⟩is an m-qubit stabilizer state, then their
+tensor product |ϕ⟩⊗|ψ⟩is an (n + m)-qubit stabilizer state.
+
+3. Show how conjugation by the S-gate changes the 4 Pauli matrices, i.e. compute SXS∗, SY S∗,
+and SZS∗.
+
+4.
+(a) (H) Show that every n-qubit Clifford circuit corresponds to an invertible linear map C :
+F2n
+2
+→F2n
+2 , if we represent Paulis as binary strings via I = 00, X = 10, Y = 11, Z = 01
+and ignore the phases ±1, ±i.
+
+(b) Show that the total number of n-qubit unitaries that can be written as a Clifford circuit,
+is 2O(n2).
+
+5. (H) Show that every n-qubit unitary circuit that maps (by conjugation) elements from Pn to
+elements of Pn, can be written as a circuit of O(n2) Clifford gates.
+
+6. Suppose we have a qubit |ϕ⟩= α|0⟩+ β|1⟩to which we would like to apply a T-gate, but for
+some reason we cannot. However, we have a second qubit available in state |T⟩=
+1
+√
+
+2(|0⟩+
+
+eiπ/4|1⟩), and we can apply a CNOT-gate and an S-gate.
+
+(a) What state do we get if we apply a CNOT to the first and second qubit (with, as usual,
+the first qubit as the control)?
+
+(b) Suppose we then measure the second qubit in the computational basis. What are the
+probabilities of outcomes 0 and 1, respectively?
+
+(c) Suppose the measurement of part (b) gives outcome 0. Show how we can get T|ϕ⟩in
+the first qubit.
+
+(d) Suppose the measurement of part (b) gives outcome 1. Show how we can get T|ϕ⟩in
+the first qubit, up to an (irrelevant) global phase.
+
+Comment: This method still works in the same way if the qubit to which we want to apply the T-gate is
+
+entangled with other qubits. This way of implementing the T-gate is very helpful in fault-tolerant computing
+
+(Chapter 21), where often CNOT and S are easy to do on encoded states but T is not. This exercise shows
+
+that we can prepare (encodings of) the “magic state” |T⟩=
+1
+√
+
+2(|0⟩+ eiπ/4|1⟩) beforehand, and use those to
+
+indirectly implement a T-gate using only CNOT and S-gates.
+
+7. Algorithms like Deutsch-Jozsa (Chapter 2) and Simon (Chapter 3) achieve exponential speed-
+up over the best possible classical algorithms, and seem to do so using only Clifford gates.
+Why does this not contradict the Gottesman-Knill theorem?
+
+8. This exercise gives a non-trivial upper bound on the stabilizer rank of good approximations
+of |T⟩⊗t, which is t copies of the magic state |T⟩.
+
+(a) Show that e−iπ/8H|T⟩= cos(π/8)|0⟩−i sin(π/8)|1⟩.
+
+(b) (H) Suppose you flip t independent coins, each with probability p = sin(π/8)2 of coming
+up 1. The expected number of 1s in the resulting t-bit string is exactly pt. Let ε be
+a small positive constant. Show that the probability that the resulting t-bit string has
+more than (p+ε)t 1s in it, is exponentially small in t, where the constant in the exponent
+may depend on ε.
+
+181
+
+
+===== PDF PAGE 194 =====
+
+(c) How many t-bit strings are there with at most (p+ε)t 1s? Think of ε > 0 as an arbitrarily
+small constant.
+
+(d) Show that there exists a t-qubit state that is a linear combination of at most 20.61t basis
+states, and that is exponentially (in t) close to (cos(π/8)|0⟩−i sin(π/8)|1⟩)⊗t.
+
+(e) What can you conclude about the stabilizer rank of good approximations of |T⟩⊗t?
+
+9. Write out the sequence of 3-qubit states that you get from applying J(α), J(β) on the 3-qubit
+cluster state for n = 1, d = 2, following Section 20.6, and assuming measurement outcomes
+b = c = 1.
+
+10. Write out the sequence of 4-qubit states that you get when implementing a CZ on 2-qubit state
+|ψ⟩as sketched at the end of Section 20.6, assuming measurement outcomes b1 = 0, b2 = 1.
+
+182
+
+
+===== PDF PAGE 195 =====
+
+Chapter 21
+
+Error-Correction and Fault-Tolerance
+
+21.1
+Introduction
+
+When Shor’s algorithm had just appeared in 1994, most people (especially experimental physicists,
+who were very aware of the difficulties in manipulating subatomic particles) were extremely skeptical
+about the prospects of actually building a quantum computer. In their view, it would be impossible
+to avoid errors when manipulating small quantum systems, and such errors would very quickly
+overwhelm the computation, rendering it no more useful than classical computation. However, in
+the few years that followed, the theory of quantum error-correction and fault-tolerant computation
+was developed. This shows, roughly speaking, that if the error-rate per operation can be brought
+down to something reasonably small (say 1%), and the errors between different qubits are not
+very correlated, then we can actually do near-perfect quantum computing for as long as we want.
+Below we give a succinct and somewhat sketchy introduction to this important but complex area,
+just explaining the main ideas. See the surveys by Gottesman [130] and Terhal [249] for more (in
+particular the latter for the important “surface code,” which we won’t cover here).
+
+21.2
+Classical error-correction
+
+In the early days of classical computing, errors were all over the place: memory-errors, errors in
+bits sent over a channel, incorrectly applied instructions, little animals creeping into the machine,
+etc. Nowadays hardware is much more reliable, but we also have much better “software solutions”
+for errors, in particular error-correcting codes. Such codes take a string of data and encode it in a
+larger string (the “codeword”), adding a lot of redundancy so that a small fraction of errors on the
+codeword won’t be able to reduce the information about the encoded data.
+The simplest example is of course the repetition code. If we want to protect a bit b, we could
+repeat it three times:
+b �→bbb.
+
+If we want to decode the encoded bit b from the (possibly corrupted) 3-bit codeword, we just take
+the majority value of the 3 bits.
+Consider a very simple noise model: every bit is flipped (independently of the other bits) with
+probability p. Then initially, before applying the code, b has probability p to be flipped. But if
+we apply the repetition code, the probability that the majority-value of the three bits is different
+from b, is the probability of 2 or 3 bitflips, which is 3p2(1 −p) + p3 < 3p2. Hence the error-rate
+
+183
+
+
+===== PDF PAGE 196 =====
+
+has been reduced from p to less than 3p2. If the initial error-rate p0 was < 1/3, then the new
+error-rate p1 < 3p2
+0 is less than p0 and we have made progress: the error-rate on the encoded bit
+is smaller than the error-rate on the unencoded bits. If we’d like it to be even smaller, we could
+concatenate the code with itself, i.e., repeat each of the three bits in the code three times, so the
+codelength becomes 9. This would give error-rate p2 = 3p2
+1(1 −p1) + p3
+1 < 3p2
+1 < 27p4
+0, giving a
+further improvement. As we can see, as long as the initial error-rate p was at most 1/3, we can
+reduce the error-rate to whatever we want: k levels of concatenation encode one “logical bit” into
+3k “physical bits,” but the error-rate for each logical bit has been reduced to 1
+
+3(3p0)2k.1 This is a
+very good thing: if the initial error is below 1/3, then k levels of concatenation increase the number
+of bits exponentially (in k) but reduce the error-rate double-exponentially fast!
+Typically, already a small choice of k gets the error-rate down to negligible levels. For example,
+suppose we want to protect some polynomial (in some n) number of bits for some polynomial
+number of time-steps, and our physical error-rate is some fixed p0 < 1/3. Choosing k = 2 log log n
+levels of concatenation already suffices for this, because then pk ≤1
+
+3(3p0)2k ∼2−(log n)2 = n−log n
+
+goes to 0 faster than any polynomial. In that case, by the union bound, even the probability that
+there exists an error anywhere among our polynomially many logical bits in polynomially many
+time-steps, will be negligibly small. With this choice of k, each logical bit would be encoded in
+3k = (log n)2 log(3) physical bits, so we only increase the number of bits by a polylogarithmic factor.
+
+21.3
+Quantum errors
+
+The need for error-correction is far greater for quantum computers than for classical computers,
+because “quantum hardware” is much more fragile than classical hardware. Unfortunately, error-
+correction is also substantially more difficult in the quantum world, for several reasons:
+
+• The classical solution of just repeating a state is not available in general in the quantum
+world, because of the no-cloning theorem.
+
+• The classical world has basically only bitflip-errors, while the quantum world is continuous
+and hence has infinitely many different possible errors.
+
+• Measurements that test whether a state is correct can collapse the state, losing information.
+
+Depending on the specific model of errors that one adopts, it is possible to deal with all of these
+issues.
+We will consider the following simple error model.
+Consider quantum circuits with S
+qubits, and T time-steps; in each time-step, several gates on disjoint sets of qubits may be applied
+in parallel. After each time-step, at each qubit, independently from the other qubits, some unitary
+error hits that qubit with probability p. Note that we assume the gates themselves to operate
+perfectly; a perfect gate followed by the unitary errors of our model may be viewed as an imperfect
+gate, though this doesn’t fully cover every way in which a gate could fail.
+Let’s investigate what kind of (unitary) errors we could get on one qubit. Consider the four
+Pauli matrices from Appendix A.9:
+
+I =
+�1
+0
+0
+1
+
+�
+, X =
+�0
+1
+1
+0
+
+�
+, Y =
+�0
+−i
+i
+0
+
+�
+, Z =
+�1
+0
+0
+−1
+
+�
+.
+
+1With a bit more work we can show that this even works if the initial error-rate p is only strictly less than 1/2
+rather than ≤1/3. See Exercise 9.
+
+184
+
+
+===== PDF PAGE 197 =====
+
+These have an interpretation as possible errors: I corresponds to no-error, X is a bitflip-error, Z is
+a phaseflip-error, and Y = iXZ is a phaseflip-error followed by a bitflip-error (and a global phase
+of i, which doesn’t matter). These four matrices span the space of all possible 2 × 2 matrices, so
+every possible error-operation E on a qubit is some linear combination E = α0I +α1X +α2Y +α3Z
+of the 4 Pauli matrices. More generally, every 2k × 2k matrix can be written uniquely as a linear
+combination of matrices that each are the tensor product of k Pauli matrices.
+Consider for example the error which puts a small phase ϕ on |1⟩:
+
+E =
+�1
+0
+0
+eiϕ
+
+�
+= eiϕ/2 cos(ϕ/2)I −ieiϕ/2 sin(ϕ/2)Z.
+
+Note that for small ϕ most of the weight in this linear combination sits on I, which corresponds to
+the fact that E is close to I. The sum of squared moduli of the two coefficients is 1 in this case.
+That’s not a coincidence: whenever we write a unitary as a linear combination of Pauli matrices,
+the sum of squares of the coefficients will be 1 (see Exercise 1).
+The fact that all 1-qubit errors are linear combinations of I, X, Y, Z, together with the linearity
+of quantum mechanics, implies that if we can correct bitflip-errors (X), phaseflip-errors (Z), and
+their product (Y ) on a qubit, then we can correct all possible unitary errors on that qubit.2 So
+typically, quantum error-correcting codes are designed to correct bitflip and phaseflip-errors (their
+product is then typically also correctable), and all other possible errors are then also handled
+without further work.
+Our noise model does not explicitly consider errors on multiple qubits that are not a product
+of errors on individual qubits. However, even such a joint error on, say, k qubits simultaneously
+can still be written as a linear combination of products of k Pauli matrices. So also here the main
+observation applies: if we can just correct bitflip and phaseflip-errors on individual qubits, then we
+can correct all possible errors!
+
+21.4
+Quantum error-correcting codes
+
+Quantum error-correcting codes encode a number of “logical qubits” into a larger number of “phys-
+ical qubits,” in such a way that errors on some number of its physical qubits can be corrected. The
+first and simplest is Peter Shor’s 9-qubit code [240], which encodes 1 logical qubit into 9 physical
+qubits, and can correct an error on any one of the 9 physical qubits. Here are the codewords for
+the two logical basis states:
+
+|0⟩�→|0⟩=
+1
+√
+
+8(|000⟩+ |111⟩)(|000⟩+ |111⟩)(|000⟩+ |111⟩)
+
+|1⟩�→|1⟩=
+1
+√
+
+8(|000⟩−|111⟩)(|000⟩−|111⟩)(|000⟩−|111⟩)
+
+These two quantum codewords |0⟩and |1⟩span a 2-dimensional space {α|0⟩+ β|1⟩}.
+This 2-
+dimensional subspace of the overall 29-dimensional space is called the “codespace” and corresponds
+to one logical qubit.
+Suppose an error happens on one of these 9 qubits. We would like to have a procedure that
+maps the resulting state back to the codespace. By linearity, it suffices if we can do this for the
+basis states |0⟩and |1⟩. First consider bitflip and phaseflip-errors.
+
+2We can even correct the non-unitary errors that arise from undesired interaction between qubits of our circuit
+with the environment, but we won’t talk about such errors here.
+
+185
+
+
+===== PDF PAGE 198 =====
+
+Detecting a bitflip-error.
+If a bitflip-error occurs on one the first 3 qubits, then we can detect
+its location by noting which of the 3 positions is the minority bit. We can do this for each of the
+three 3-qubit blocks. Hence there is a unitary that writes down in 4 auxiliary qubits (which are all
+initially |0⟩) a number eb ∈{0, 1, . . . , 9}. Here eb = 0 means that no bitflip-error was detected, and
+eb ∈{1, . . . , 9} means that a bitflip-error was detected on qubit number eb. Note that we don’t
+specify what should happen if more than one bitflip-error occurred.
+
+Detecting a phaseflip-error.
+To detect a phaseflip-error, we can consider the relative phase
+for each of the three blocks |000⟩± |111⟩, and if they are not all the same, unitarily write down
+in 2 more auxiliary qubits (again, initially |0⟩) a number ep ∈{0, 1, 2, 3}. Here ep = 0 means that
+no phaseflip-error was detected, and ep ∈{1, 2, 3} means that a phaseflip-error was detected in the
+ep-th block. Note that we are not discovering exactly on which of the 9 qubits the phaseflip-error
+happened (in contrast to the case of bitflips), but that’s not needed anyway: we can correct the
+phaseflip-error by applying Z to any one of the 3 qubits in the block where the affected qubit sits.
+
+Together the above two procedures form one unitary U (i.e., one circuit) that acts on 9+4+2 = 15
+qubits, and that “writes down” eb in 4 auxiliary qubits and ep in 2 auxiliary qubits. For example,
+suppose we have the state |0⟩. If Xi denotes a bitflip-error on the i-th qubit (i ∈[9]) and Zj denotes
+a phaseflip-error on the j-th qubit (let j′ ∈[3] denote the number of the block in which qubit j
+lies). Then after these errors our state is XiZj|0⟩. After fresh auxiliary qubits |04⟩|02⟩are added,
+U maps
+XiZj|0⟩|04⟩|02⟩�→XiZj|0⟩|i⟩|j′⟩.
+
+Together, eb = i and ep = j′ form the “error syndrome”; this tells us which error occurred where.
+The error-correction procedure can now measure this syndrome in the computational basis, and
+take corrective action depending on the classical outcomes eb and ep: apply an X to qubit eb (or
+no X if eb = 0), and apply a Z to one qubit in the ep-th block (or no Z if ep = 0). The case of a
+Y -error on the i-th qubit corresponds to the case where i = j (i.e., the i-th qubit is hit by both a
+phaseflip and a bitflip); our procedure still works in this case. Hence we can perfectly correct one
+Pauli-error on any one of the 9 codeword qubits.
+As we argued before, the ability to correct Pauli-errors on a qubit suffices to correct all possible
+errors on that qubit. Let’s see in more detail how this works. Consider for instance some 9-qubit
+unitary error E that is a linear combination of X/Z errors on at most one of the 9 qubits. Assume
+it can be decomposed as
+
+E = (α0I +
+
+9
+�
+
+i=1
+αiXi)(β0I +
+
+9
+�
+
+j=1
+βjZj).
+
+Suppose this error E occurs on |0⟩:
+
+E|0⟩= (α0I +
+
+9
+�
+
+i=1
+αiXi)(β0I +
+
+9
+�
+
+j=1
+βjZj)|0⟩=
+
+9
+�
+
+i,j=0
+αiβjXiZj|0⟩,
+
+where we denote X0 = Z0 = I.
+If we now add auxiliary qubits |04⟩|02⟩and apply the above unitary U, then we go into a
+superposition of error syndromes:
+
+U(E ⊗I⊗6)|0⟩|04⟩|02⟩=
+
+9
+�
+
+i,j=0
+αiβjXiZj|0⟩|i⟩|j′⟩.
+
+186
+
+
+===== PDF PAGE 199 =====
+
+Measuring the 6 auxiliary qubits will now probabilistically give us one of the syndromes |i⟩|j′⟩, with
+i ∈{0, 1, . . . , 9} and j′ ∈{0, 1, 2, 3}, and it will collapse the state to
+
+XiZj|0⟩|i⟩|j′⟩.
+
+In a way, this measurement of the syndrome “discretizes” the continuously many possible errors to
+the finite set of Pauli-errors. Once the syndrome has been measured, we can apply a corrective X
+and/or Z to the first 9 qubits to undo the specific error corresponding to the specific syndrome we
+got as outcome of our measurement. It is also possible that the measurement outcome is 04, 02; in
+that case the state has collapsed to |0⟩|04⟩|02⟩, so the syndrome measurement itself already removed
+the error!
+So now we can correct an error on one qubit. To achieve this, however, we have substantially
+increased the number of locations where such an error could occur: the number of qubits has gone
+from 1 to 9 (even to 15 if we also count the 6 auxiliary qubits used for the syndrome measurements),
+and we need a number of time-steps to compute and measure the syndrome, and to correct a
+detected error. Hence this procedure only gains us something if the error-rate p is so small that
+the probability of 2 or more errors on the larger encoded system is smaller than the probability
+of 1 error in the unencoded qubit. We will get back to this issue below, when talking about the
+threshold theorem. Note also that each new application of the correction-procedure needs a new,
+fresh 6-qubit register initialized to |04⟩|02⟩. After one run of the error-correction procedure these
+auxiliary qubits will contain the measured error syndrome, and we can just discard this. In a way,
+error correction acts like a refrigerator: a fridge pumps heat out of its system and dumps it into the
+environment, and error-correction pumps noise out of its system and dumps it in the environment
+in the form of the discarded auxiliary qubits.
+The above 9-qubit code is just one example of a quantum error-correcting code. Better codes
+exist, and a lot of work has gone into simultaneously optimizing the different parameters: we want
+to encode a large number of logical qubits into a not-much-larger number of physical qubits, while
+being able to correct as many errors as possible. The shortest code that encodes one logical qubit
+and protects against one error, has five physical qubits.
+There are also “asymptotically good”
+quantum error-correcting codes; these encode k logical qubits into O(k) physical qubits and can
+correct errors on a constant fraction of the physical qubits (rather than just an error on one qubit).
+
+21.5
+Fault-tolerant quantum computation
+
+Encoding a quantum state in a quantum error-correcting code to protect it against noise is good,
+but not enough: we also need to be able to do operations on the encoded qubits (Hadamards,
+CNOTs, etc.). One way is to decode the logical qubits, do the operation on them, and then re-
+encode them. This, however, is a recipe for disaster: if an error occurs in the interval between
+the decoding and subsequent encoding, then we’re unprotected and we cannot detect (let alone
+undo) errors happening during that interval. Accordingly, we need to be able to do operations on
+the logical qubits while they are encoded. Additionally, we need operations for regular stages of
+error-correction, i.e., measuring the syndrome and then correcting errors based on the outcomes
+of those measurements. These operations may also introduce errors, and the big worry is that
+error-correction steps may themselves introduce more errors than they correct.3
+
+3It’s like being inside a leaky boat on the open seas, using a leaky bucket to scoop out water all the time to prevent
+the boat from filling up with water and sinking. It’s doable if the holes in the boat and in the bucket aren’t too big,
+
+187
+
+
+===== PDF PAGE 200 =====
+
+There is a 7-qubit code due to Steane [245] (see Exercise 5) which has some nice properties: a
+Hadamard on the logical qubit corresponds to H⊗7 on the physical qubits, and a CNOT between
+two logical qubits corresponds to applying CNOTs between the 7 pairs of the two blocks of physical
+qubits (i.e., between the 1st qubit of one block and the 1st qubit of the other block, etc.). Such
+implementations are called transversal. Adding the T-gate (|b⟩�→eibπ/4|b⟩) to H and CNOT would
+yield a gate-set that suffices for universal quantum computation. Unfortunately, implementing the
+T-gate fault-tolerantly takes more work, and we won’t go into detail here (see Exercise 20.6 for the
+main idea of using (encoded) “magic states”).
+When designing schemes for fault-tolerant computing, it is very important to ensure that errors
+do not spread too quickly. Consider for instance a logical CNOT: if its control-bit is erroneous but
+its target bit is not, then after doing the CNOT both bits will be erroneous. The trick is to keep
+the errors on the physical qubits under control in such a way that regular stages of error-correction
+don’t get overwhelmed by the errors. For example, suppose we have a code that is able to correct
+up to one error in each encoded block (logical qubit); then the implementation of a logical CNOT
+may convert two encoded blocks where only one physical qubit has an error, into two blocks each
+of which has a single error, but not to multiple errors within one block, because our code will be
+able to handle two blocks with one error each but not one block with two errors (this is why the
+transversal implementation of the CNOT for Steane’s code is nice). In addition, we need to be able
+to fault-tolerantly prepare states, and measure logical qubits in the computational basis. We won’t
+go into the many further details of fault-tolerant quantum computing here.
+
+21.6
+Concatenated codes and the threshold theorem
+
+The idea to concatenate a code with itself, described at the end of Section 21.2 for classical codes,
+also applies to quantum codes as we will sketch now. Suppose we have some code that encodes
+one qubit into C qubits, suppose that it can correct one error on any one of its C qubits, and
+uses D time-steps per stage of error-correcting (each time-step may involve a number of elementary
+gates in parallel).
+Instead of only 1, we now have CD locations where an error could occur!
+Assuming error-rate p per-qubit-per-time-step, the probability for the code to fail on a specific
+logical qubit at a specific time (i.e., to have more than 1 physical error on its CD locations) is
+p′ = �CD
+i=2
+�CD
+i
+�
+pi(1 −p)CD−i. If p is a sufficiently small constant, then this sum is dominated by
+the term for i = 2, and we have p′ ≈(CD)2p2. Accordingly, if the initial error-rate p is below
+some magical constant ≈1/(CD)2, then p′ < p and hence each level of error-correction reduces the
+error-rate by a constant factor.
+More generally, suppose we concatenate this code k times with itself.
+Then every “logical
+qubit” gets encoded into Ck qubits, but (by the same calculation as in Section 21.2) the error-
+rate for each logical qubit gets reduced to O((CDp)2k). Suppose we want to be able to “survive”
+T = poly(n) time-steps without any error on the logical qubits; that is what we would need to
+run an efficient quantum algorithm on faulty quantum hardware. Then it suffices if we reduce the
+error rate to ≪1/T, for which k = O(log log T) levels of concatenation are enough. These layers
+of error-correction increase the number of qubits and the computation time by a factor which is
+exponential in k, but that is still only a polylogarithmic overhead, since 2O(log log T) = (log T)O(1).4
+
+The above sketch (when implemented precisely) gives us the famous “threshold theorem” [8,
+
+but it’s not easy.
+4One can even bring the overhead down to O(1) [115].
+
+188
+

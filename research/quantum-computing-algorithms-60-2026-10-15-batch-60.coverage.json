@@ -1,0 +1,745 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "60",
+  "dependency_level": 13,
+  "scheduling_input_sha256": "d63e4218fb1ccb60e0ff71096e37391ecc9824c4dcf111b70f219fa5d0642df6",
+  "pages": [
+    {
+      "page": "adiabatic-computation-and-circuit-equivalence",
+      "canonical": [
+        {
+          "name": "Finite reversible Cheeger inequality",
+          "item": "thm-qa-36-finite-cheeger-bound",
+          "disposition": "included",
+          "detail": "Let $\\Omega$ be a finite set with $|\\Omega|\\ge2$. Let $P=(P(x,y))_{x,y\\in\\Omega}$ be an irreducible row-stochastic matrix and let $\\pi$ be a strictly positive stationary probability satisfying detailed balance $$\\pi(x)P(x,y)=\\pi(y)P(y,x).$$ For $S\\subseteq\\Omega$, put $Q(S,S^c)=\\sum_{x\\in S,\\,y\\notin S}\\pi(x)P(x,y)$, and define the conductance $$\\phi=\\min_{0<\\pi(S)\\le1/2}\\frac{Q(S,S^c)}{\\pi(S)}.$$ If $1=\\lambda_1>\\lambda_2\\ge\\cdots$ are the eigenvalues of $P$ in the weighted inner product $\\langle f,g\\rangle_\\pi=\\sum_x\\pi(x)f(x)g(x)$, then the algebraic gap satisfies $$1-\\lambda_2\\ge\\frac{\\phi^2}{2}.$$ No absolute-gap or aperiodicity assertion is made."
+        },
+        {
+          "name": "Large clock-penalty perturbation",
+          "item": "lem-qa-36-clock-penalty-gap-perturbation",
+          "disposition": "included",
+          "detail": "Let $\\mathcal H=S\\oplus S^\\perp$ be finite-dimensional, let $H_1=H_1^*$ with $\\|H_1\\|\\le K$, and let $H_2=H_2^*\\ge0$ satisfy $H_2|_S=0$ and $H_2|_{S^\\perp}\\ge I$. For $J>2K$, set $H_J=H_1+JH_2$, and let $\\mu_1\\le\\mu_2\\le\\cdots$ be the eigenvalues of the compression $A=P_SH_1|_S$, where $\\dim S\\ge2$. With $\\epsilon_J=K^2/(J-2K)$, the two smallest eigenvalues of $H_J$ obey $$\\mu_k-\\epsilon_J\\le\\lambda_k(H_J)\\le\\mu_k\\quad(k=1,2).$$ Consequently $\\lambda_2(H_J)-\\lambda_1(H_J)\\ge(\\mu_2-\\mu_1)-\\epsilon_J$; positivity of this bound requires the separate condition $\\epsilon_J<\\mu_2-\\mu_1$. Every unit eigenvector $x=s+t$ of $H_J$ with eigenvalue $\\lambda\\le K$ also satisfies $\\|t\\|\\le K\\|s\\|/(J-2K)$. Thus $J>2K$ alone supplies no general gap conclusion."
+        },
+        {
+          "name": "Partial trace contracts trace distance",
+          "item": "lem-qa-36-partial-trace-contracts-trace-distance",
+          "disposition": "included",
+          "detail": "Let $H_A,H_B$ be nonzero finite-dimensional complex inner-product spaces and let $\\rho,\\sigma$ be density operators on $H_A\\otimes H_B$. Then $$D(\\operatorname{Tr}_{H_B}\\rho,\\operatorname{Tr}_{H_B}\\sigma)\\le D(\\rho,\\sigma).$$"
+        },
+        {
+          "name": "Finite adiabatic path model",
+          "item": "def-qa-36-finite-adiabatic-path-model",
+          "disposition": "included",
+          "detail": "Let $V$ be a nonzero finite-dimensional complex inner-product space with inner product linear in its first argument. A **finite adiabatic path** is a family of linear endomorphisms $H(s):V\\to V$ ([[def-linear-map]]) whose matrix entries are twice continuously differentiable and such that $H(s)=H(s)^*$ at every $s. A **coherently followed spectral band** is a norm-continuous family $P(s)$ of orthogonal projections of one fixed rank $m\\ge1$, commuting with $H(s)$, whose range is a sum of full eigenspaces and which locally continues the same isolated cluster. For a finite union of positively oriented circles $\\Gamma$, define $\\oint_\\Gamma F(z)\\,dz$ as the sum of the parameterized integrals $\\int_0^{2\\pi}F(c+re^{it})ire^{it}\\,dt$ over its circle components. Local continuation means that on each neighborhood there is such a contour enclosing exactly the selected cluster and $$P(s)=-\\frac1{2\\pi i}\\oint_\\Gamma(H(s)-zI)^{-1}\\,dz.$$ With $Q(s)=I-P(s)$, define the **full gap** $$g(s)=\\min\\{|\\lambda-\\mu|:\\lambda\\in\\sigma(H(s)|_{\\operatorname{ran}P(s)}),\\ \\mu\\in\\sigma(H(s)|_{\\operatorname{ran}Q(s)})\\}.$$ If $Q(s)=0$, the full gap is $+\\infty$. Admissible gapped paths have a uniform full gap $\\inf_{s\\in[0,1]}g(s)>0$. Distinct eigenvalues inside the band may cross; its total rank remains $m$. The slow-time propagator $U_T$ is the unique solution of $$i\\frac{d}{ds}U_T(s)=T H(s)U_T(s),\\qquad U_T(0)=I.$$ Identifying complex coordinates with real and imaginary parts reduces this to a real finite matrix ODE ([[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]]); differentiating $U_T(s)^*U_T(s)$ shows it stays unitary."
+        },
+        {
+          "name": "Finite gapped spectral projection regularity",
+          "item": "lem-qa-36-gapped-projection-regularity",
+          "disposition": "included",
+          "detail": "For a $C^2$ finite-dimensional Hermitian path with a coherently followed spectral cluster separated from the complementary spectrum by a positive gap, the spectral projection $P(s)$ is $C^2$ on $[0,1]$."
+        },
+        {
+          "name": "Adiabatic path access and resource model",
+          "item": "def-qa-36-adiabatic-resource-model",
+          "disposition": "included",
+          "detail": "An **adiabatic path access instance** consists of a finite path model ([[def-qa-36-finite-adiabatic-path-model]]), its exact initial preparation circuit $A_0$ and cost $C_{\\rm init}$, a finite term count $r$, and a uniform description $$H(s)=\\sum_{j=1}^r c_j(s)H_j,$$ where the $H_j$ are stated finite-dimensional self-adjoint operators and the real coefficient functions $c_j$ have explicit rational binary inputs, uniform evaluation procedures, certified value errors and certified first-derivative bound $M_1\\ge\\sup_s\\|H'(s)\\|$. The access declaration provides, for every allowed time code $u$, either the exact term operation $e^{-iuH_j}$ as a named oracle with its query charge, or a full-list uniform circuit family $V_j(u)$ with a certified bound $\\|V_j(u)-e^{-iuH_j}\\|\\le\\eta_j(u)$. Each inverse or controlled call is available only when separately declared. This is the finite term-list access interface of [[def-qa-20-simulation-error-and-cost-model]] and [[def-qa-20-term-list-access-model]]. The resource record lists separately: $C_{\\rm init}$; the term count $r$; all term-oracle queries; controlled and inverse calls; gate, clean-ancilla and dirty-ancilla counts; coefficient-precision bits; full circuit-description bits; uniform generator time; and the continuous evolution time $T$. If a physical energy-normalized action is used, it also records $T\\sup_s\\|H(s)\\|$. A missing coordinate is unavailable, not zero. No arbitrary matrix description or spectral projector supplies an initial preparation, term exponential, controlled call, inverse, coefficient evaluator, or circuit generator for free."
+        },
+        {
+          "name": "Finite spectral-band derivative estimates for adiabatic paths",
+          "item": "lem-qa-36-jrs-finite-band-estimates",
+          "disposition": "included",
+          "detail": "Let $H(s)$ be a $C^2$ finite-dimensional Hermitian path and $P(s)$ a $C^2$ spectral projection of fixed rank $m\\ge1$ separated from its complement by gap $g(s)>0$. Put $Q=I-P$. For any operator $X$ define its reduced-resolvent transform at $s$ by $$\\widetilde X=-\\sum_{\\lambda\\in\\Lambda_P}\\left(P_\\lambda X\\widehat R_\\lambda+\\widehat R_\\lambda XP_\\lambda\\right),\\qquad \\widehat R_\\lambda=Q(H|_{\\operatorname{ran}Q}-\\lambda I)^{-1}Q,$$ where $\\Lambda_P$ is the set of distinct eigenvalues in $\\operatorname{ran}P$ and $P_\\lambda$ is the corresponding eigenspace projection. Then $$\\dot P=\\widetilde{\\dot H},\\quad \\|\\widetilde X\\|\\le\\frac{\\sqrt m\\|X\\|}{g},\\quad \\|Q\\widetilde X P\\|\\le\\frac{\\sqrt m\\|QXP\\|}{g},\\quad \\|P\\widetilde X Q\\|\\le\\frac{\\sqrt m\\|PXQ\\|}{g},$$ $$\\|\\dot P\\|\\le\\frac{\\sqrt m\\|\\dot H\\|}{g},\\quad \\|Q\\ddot P P\\|\\le\\frac{\\sqrt m\\|\\ddot H\\|}{g}+\\frac{4m\\|\\dot H\\|^2}{g^2},$$ and $$\\|Q\\dot{\\widetilde{\\dot P}}P\\|\\le\\frac{\\sqrt m\\|Q\\ddot P P\\|}{g}+\\frac{2m\\|\\dot H\\|\\|\\dot P\\|}{g^2}.$$ The rank $m$ may count multiplicity; the argument only uses that the number of distinct band eigenvalues is at most $m$."
+        },
+        {
+          "name": "Finite JRS adiabatic projector bound",
+          "item": "thm-qa-36-jrs-finite-adiabatic-bound",
+          "disposition": "included",
+          "detail": "Let $H:[0,1]\\to\\mathcal L(V)$ be a $C^2$ finite-dimensional Hermitian path, and let $P(s)$ be a coherently followed spectral projection of constant rank $m\\ge1$, separated from its complement by full gap $g(s)>0$. Let $U_T$ solve $iU_T'(s)=TH(s)U_T(s)$ with $U_T(0)=I$, where $T>0$. Define $$A_m(s)=\\frac1T\\left[\\frac{m\\|H'(0)\\|}{g(0)^2}+\\frac{m\\|H'(s)\\|}{g(s)^2}+\\int_0^s\\left(\\frac{m\\|H''(r)\\|}{g(r)^2}+\\frac{7m\\sqrt m\\|H'(r)\\|^2}{g(r)^3}\\right)dr\\right].$$ Then $$\\|U_T(s)P(0)U_T(s)^*-P(s)\\|\\le A_m(s).$$ For every unit $\\psi\\in\\operatorname{ran}P(0)$, its transition probability out of the band at time $s$ is at most $A_m(s)^2$. The rank $m$ may be larger than the number of distinct eigenvalues in the band; using rank in the constants is a valid upper bound."
+        },
+        {
+          "name": "Five-local history-state adiabatic path",
+          "item": "alg-qa-36-five-local-history-path",
+          "disposition": "included",
+          "detail": "**Input:** A full-list uniform circuit on $n\\ge1$ qubits with $L\\ge1$ listed gates $U_1,\\ldots,U_L$, each acting on at most two data qubits, and a rational tolerance $0<\\varepsilon\\le1$. Circuit products act right to left ([[def-qc-uniform-circuit-family]]). The computation is applied to the explicitly supplied all-zero input preparation $A_0$; its wire and preparation cost $C_{\\rm init}$ is recorded by [[def-qc-circuit-cost-model]] and [[def-qa-36-adiabatic-resource-model]]. 1. Set $K=\\lceil2L/\\varepsilon\\rceil$ and $N=L+K$. Append $K$ identity gates, writing $U_\\ell=I$ for $L<\\ell\\le N$. Use data space $(\\mathbb C^2)^{\\otimes n}$ and an ordered $N$-qubit clock register ([[def-qc-register-and-computational-basis]], [[def-qc-tensor-register-and-permutation]]). Its legal unary clock basis is $$|c_\\ell\\rangle=|1^\\ell0^{N-\\ell}\\rangle,\\qquad0\\le\\ell\\le N.$$"
+        },
+        {
+          "name": "History state and padded output",
+          "item": "lem-qa-36-history-state-ground-and-output",
+          "disposition": "included",
+          "detail": "Let the five-local path in [[alg-qa-36-five-local-history-path]] have $N=L+K$ gates, including its $K$ identity gates, and let $V_0=I$ and $V_\\ell=U_\\ell\\cdots U_1$. On the legal unary-clock space, the propagation Hamiltonian has kernel $$\\left\\{\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell\\xi\\otimes|c_\\ell\\rangle:\\xi\\in(\\mathbb C^2)^{\\otimes n}\\right\\}.$$ After adding $H_{\\rm input}$, this kernel is one-dimensional and its unit vector is $$|\\eta\\rangle=\\frac1{\\sqrt{N+1}}\\sum_{\\ell=0}^{N}V_\\ell|0^n\\rangle\\otimes|c_\\ell\\rangle.$$ The full $H_{\\rm final}$ also has this unique ground state. Its data-register marginal is at trace distance at most $L/(N+1)\\le\\varepsilon/2$ from the specified circuit output state."
+        },
+        {
+          "name": "Positive monotone ground vector of the history path",
+          "item": "lem-qa-36-history-path-ground-vector-monotonicity",
+          "disposition": "included",
+          "detail": "Let $N\\ge1$, $a=1-s$, $t=s/2$, and let $L_N$ be the graph Laplacian of the path with vertices $0,1,\\ldots,N$. The restriction of the interpolated clock Hamiltonian to legal unary clocks, after removing the data register and propagation unitaries, is $$H_0(s)=a\\,\\operatorname{diag}(0,1,\\ldots,N)+tL_N.$$ For each $s\\in[0,1]$, its smallest eigenvalue is simple and has a normalized nonnegative eigenvector $v(s)=(v_0,\\ldots,v_N)$ satisfying $$v_0\\ge v_1\\ge\\cdots\\ge v_N>0.$$ At $s=0$ this vector is $e_0$; at $s=1$ it is the uniform vector."
+        },
+        {
+          "name": "Discretized adiabatic path circuit",
+          "item": "alg-qa-36-discretized-path-simulation",
+          "disposition": "included",
+          "detail": "**Input:** An adiabatic path access instance from [[def-qa-36-adiabatic-resource-model]], evolution time $T\\ge0$, and rational tolerance $0<\\varepsilon\\le1$. Write $M$ for the term count, and suppose the instance provides a certified $M_1\\ge\\sup_{s\\in[0,1]}\\|H'(s)\\|$. 1. If $T=0$, apply the supplied initial preparation $A_0$ and perform the declared output procedure."
+        },
+        {
+          "name": "Restricted history-path gap",
+          "item": "lem-qa-36-history-path-restricted-gap",
+          "disposition": "included",
+          "detail": "Let $N\\ge1$ be the number of propagation steps. On the legal-clock block with the zero data input, remove the input penalty and conjugate by the prefix unitaries as in [[lem-qa-36-history-state-ground-and-output]]. The resulting clock matrix is $$H_0(s)=(1-s)\\operatorname{diag}(0,1,\\ldots,N)+\\frac{s}{2}L_N,$$ where $L_N$ is the path Laplacian. Its ground eigenvalue is simple and its spectral gap is at least $1/(48N^2)$ for every $s\\in[0,1]$. In particular, the restricted clock gap is $\\Omega(N^{-2})$ uniformly along the path."
+        },
+        {
+          "name": "Adiabatic path-to-circuit simulation",
+          "item": "thm-qa-36-adiabatic-path-to-circuit-simulation",
+          "disposition": "included",
+          "detail": "Let $H(s)$ be a finite-dimensional Hermitian path with a finite term-list access instance, a certified $M_1\\ge\\sup_s\\|H'(s)\\|$, and a supplied exact preparation circuit $A_0$ of cost $C_{\\rm init}$. Suppose all coefficient evaluations, supported term-time calls, and commutator bounds required by [[alg-qa-36-discretized-path-simulation]] are available. For every $T\\ge0$ and rational $0<\\varepsilon\\le1$, a uniform circuit applies $A_0$ and approximates $U_T(1)$ in operator norm to error at most $\\varepsilon$. Its cost record contains $C_{\\rm init}$ plus all grid, term-query, gate, ancillary-wire, coefficient-bit, description-bit, and generator-time costs supplied by the access instance."
+        },
+        {
+          "name": "Full-space history-path gap",
+          "item": "lem-qa-36-history-path-full-gap",
+          "disposition": "included",
+          "detail": "For the path in [[alg-qa-36-five-local-history-path]], put $N=L+K$, $K_0=n+3N$, and $$\\Delta_0=\\frac1{216(N+1)^3},\\qquad J=2K_0+\\frac{4K_0^2}{\\Delta_0}+1.$$ For every $s\\in[0,1]$, the full Hamiltonian has a unique ground state and its gap is greater than $3\\Delta_0/4$. Consequently the minimum gap is $\\Omega(N^{-3})$."
+        },
+        {
+          "name": "Circuit-to-adiabatic simulation",
+          "item": "thm-qa-36-circuit-to-adiabatic-simulation",
+          "disposition": "included",
+          "detail": "Let a uniform circuit have $n\\ge1$ data qubits and $L\\ge1$ gates, each on at most two data qubits. For rational $0<\\varepsilon\\le1$, set $K=\\lceil2L/\\varepsilon\\rceil$ and $N=L+K$. The construction in [[alg-qa-36-five-local-history-path]] is a five-local finite Hermitian path with a product initial ground state, a unique ground state along the path, gap greater than $3/[864(N+1)^3]$, derivative bound $\\|H'\\|\\le3N$, and $H''=0$. If its term-time providers, coefficient evaluations and output operations are declared with polynomial cost, the initial ground state can be evolved and the clock discarded to produce a data state at trace distance at most $\\varepsilon$ from the circuit output, using $$T=O(N^{11}/\\varepsilon)=O(L^{11}\\varepsilon^{-12})$$ continuous evolution time and polynomially many charged term calls, gates, coefficient bits and generator steps. The initial preparation cost, local term access costs, precision costs and output costs are recorded separately by [[def-qa-36-adiabatic-resource-model]]."
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "kind": "paper",
+          "title": "Sabine Jansen, Mary-Beth Ruskai, and Ruedi Seiler, Bounds for the adiabatic approximation with applications to quantum computation",
+          "locator": "Lemmas 2, 5–8, PDF pp. 6–12.; Theorem 3 and its proof, PDF pp. 5–11.",
+          "source_kind_detail": "Author-hosted complete research paper; complete relevant proof sections re-inspected.",
+          "read_evidence": {
+            "local_pdf": "research/quantum-algorithms-planning/sources/qa_r4/jansen-ruskai-seiler-quant-ph-0603175.pdf",
+            "local_text": "research/quantum-algorithms-planning/sources/qa_r4/jansen-ruskai-seiler-quant-ph-0603175.txt",
+            "pdf_sha256": "b96b67d4c7dae9d3e996d8f39bd8e5a93f4279246956a67a708f80077dc86d7c",
+            "text_sha256": "0382fc43e1870db722547a6cf1ad6c7a7bfb1a0bc92c357951e83ec9af2c37cd",
+            "pdf_bytes": 258329,
+            "pdf_pages": 15,
+            "text_bytes": 36125,
+            "extent": "Complete paper read sequentially; all relevant proof sections re-inspected for this batch.",
+            "locators": [
+              {
+                "name": "Finite-band derivatives and reduced resolvent",
+                "disposition": "included",
+                "items": [
+                  "lem-qa-36-gapped-projection-regularity",
+                  "lem-qa-36-jrs-finite-band-estimates",
+                  "thm-qa-36-jrs-finite-adiabatic-bound"
+                ],
+                "locator": "Lemmas 2, 5–8, PDF pp. 6–12. included; finite spectral sums, contour residues, derivative bounds and integration by parts are proved locally."
+              },
+              {
+                "name": "Finite-rank adiabatic projector estimate",
+                "disposition": "included",
+                "items": [
+                  "thm-qa-36-jrs-finite-adiabatic-bound",
+                  "ex-qa-36-two-level-avoided-crossing"
+                ],
+                "locator": "Theorem 3 and its proof, PDF pp. 5–11. included; finite-dimensional specialization and constants are derived locally."
+              }
+            ]
+          },
+          "contents": [
+            {
+              "name": "Finite-band derivatives and reduced resolvent",
+              "disposition": "included",
+              "items": [
+                "lem-qa-36-gapped-projection-regularity",
+                "lem-qa-36-jrs-finite-band-estimates",
+                "thm-qa-36-jrs-finite-adiabatic-bound"
+              ],
+              "locator": "Lemmas 2, 5–8, PDF pp. 6–12. included; finite spectral sums, contour residues, derivative bounds and integration by parts are proved locally.",
+              "item": "lem-qa-36-gapped-projection-regularity"
+            },
+            {
+              "name": "Finite-rank adiabatic projector estimate",
+              "disposition": "included",
+              "items": [
+                "thm-qa-36-jrs-finite-adiabatic-bound",
+                "ex-qa-36-two-level-avoided-crossing"
+              ],
+              "locator": "Theorem 3 and its proof, PDF pp. 5–11. included; finite-dimensional specialization and constants are derived locally.",
+              "item": "thm-qa-36-jrs-finite-adiabatic-bound"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/quant-ph/0603175",
+              "at": "2026-10-14T09:09:30.461Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T09:09:30.462Z",
+            "bytes": 258329,
+            "sha256_16": "b96b67d4c7dae9d3",
+            "kind": "pdf",
+            "pages": 15
+          }
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "kind": "paper",
+          "title": "Dorit Aharonov, Wim van Dam, Julia Kempe, Zeph Landau, Seth Lloyd, and Oded Regev, Adiabatic Quantum Computation is Equivalent to Standard Quantum Computation",
+          "locator": "Theorem 2.5, PDF p. 10.; §§3.1.1–3.1.2 and Lemma 3.10, PDF pp. 10–15.; Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14.; Lemmas 3.11–3.19, PDF pp. 15–20.",
+          "source_kind_detail": "Author-hosted complete research paper; complete relevant proof sections re-inspected.",
+          "read_evidence": {
+            "local_pdf": "research/quantum-algorithms-planning/sources/qa_r4/aharonov-adiabatic-equivalence.pdf",
+            "local_text": "research/quantum-algorithms-planning/sources/qa_r4/aharonov-adiabatic-equivalence.txt",
+            "pdf_sha256": "9591c674b14bdcbcf7722f4cdf0269b05777c041da56289a7d6ae91787e407dd",
+            "text_sha256": "7d379dc006f24f6e6ea47b27336ae2b541c8fd4af8831d1f81aaa2eda6a630d7",
+            "pdf_bytes": 380316,
+            "pdf_pages": 30,
+            "text_bytes": 92393,
+            "extent": "Complete paper read sequentially; all relevant proof sections re-inspected for this batch.",
+            "locators": [
+              {
+                "name": "Finite reversible-chain conductance inequality",
+                "disposition": "included",
+                "items": [
+                  "thm-qa-36-finite-cheeger-bound"
+                ],
+                "locator": "Theorem 2.5, PDF p. 10. included as source context; the complete coarea proof is supplied locally."
+              },
+              {
+                "name": "Unary-clock circuit history and output extraction",
+                "disposition": "included",
+                "items": [
+                  "alg-qa-36-five-local-history-path",
+                  "lem-qa-36-history-state-ground-and-output",
+                  "ex-qa-36-two-gate-history-state"
+                ],
+                "locator": "§§3.1.1–3.1.2 and Lemma 3.10, PDF pp. 10–15. included; local terms, history kernel and padding trace are proved locally."
+              },
+              {
+                "name": "Restricted gap and positive monotone clock ground state",
+                "disposition": "altered",
+                "items": [
+                  "lem-qa-36-history-path-ground-vector-monotonicity",
+                  "lem-qa-36-history-path-restricted-gap"
+                ],
+                "locator": "Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14. altered for the assigned sum-of-clock-bits potential: the source uses a first-clock-bit penalty, while this batch proves the linear-potential case by a ground-state transform and reversible chain."
+              },
+              {
+                "name": "Input penalty and illegal-clock gap transfer",
+                "disposition": "included",
+                "items": [
+                  "lem-qa-36-clock-penalty-gap-perturbation",
+                  "lem-qa-36-history-path-full-gap",
+                  "thm-qa-36-circuit-to-adiabatic-simulation"
+                ],
+                "locator": "Lemmas 3.11–3.19, PDF pp. 15–20. included as proof-route context; exact additive perturbation and sum-penalty constants are proved locally."
+              }
+            ]
+          },
+          "contents": [
+            {
+              "name": "Finite reversible-chain conductance inequality",
+              "disposition": "included",
+              "items": [
+                "thm-qa-36-finite-cheeger-bound"
+              ],
+              "locator": "Theorem 2.5, PDF p. 10. included as source context; the complete coarea proof is supplied locally.",
+              "item": "thm-qa-36-finite-cheeger-bound"
+            },
+            {
+              "name": "Unary-clock circuit history and output extraction",
+              "disposition": "included",
+              "items": [
+                "alg-qa-36-five-local-history-path",
+                "lem-qa-36-history-state-ground-and-output",
+                "ex-qa-36-two-gate-history-state"
+              ],
+              "locator": "§§3.1.1–3.1.2 and Lemma 3.10, PDF pp. 10–15. included; local terms, history kernel and padding trace are proved locally.",
+              "item": "alg-qa-36-five-local-history-path"
+            },
+            {
+              "name": "Restricted gap and positive monotone clock ground state",
+              "disposition": "included",
+              "items": [
+                "lem-qa-36-history-path-ground-vector-monotonicity",
+                "lem-qa-36-history-path-restricted-gap"
+              ],
+              "locator": "Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14. altered for the assigned sum-of-clock-bits potential: the source uses a first-clock-bit penalty, while this batch proves the linear-potential case by a ground-state transform and reversible chain.",
+              "adaptation_note": "Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14. altered for the assigned sum-of-clock-bits potential: the source uses a first-clock-bit penalty, while this batch proves the linear-potential case by a ground-state transform and reversible chain.",
+              "item": "lem-qa-36-history-path-ground-vector-monotonicity"
+            },
+            {
+              "name": "Input penalty and illegal-clock gap transfer",
+              "disposition": "included",
+              "items": [
+                "lem-qa-36-clock-penalty-gap-perturbation",
+                "lem-qa-36-history-path-full-gap",
+                "thm-qa-36-circuit-to-adiabatic-simulation"
+              ],
+              "locator": "Lemmas 3.11–3.19, PDF pp. 15–20. included as proof-route context; exact additive perturbation and sum-penalty constants are proved locally.",
+              "item": "lem-qa-36-clock-penalty-gap-perturbation"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/quant-ph/0405098",
+              "at": "2026-10-14T09:23:35.299Z",
+              "outcome": "full-text PDF body fetched"
+            },
+            {
+              "url": "https://arxiv.org/pdf/quant-ph/0405098",
+              "at": "2026-10-14T09:23:39.625Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T09:23:39.626Z",
+            "bytes": 380316,
+            "sha256_16": "9591c674b14bdcbc",
+            "kind": "pdf",
+            "pages": 30
+          }
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "kind": "lecture-notes",
+          "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+          "locator": "Chapter 27, PDF pp. 141–143 (printed pp. 133–135).; Chapter 30, PDF pp. 159–164 (printed pp. 151–156).; Chapter 33, PDF pp. 179–184 (printed pp. 171–176).",
+          "source_kind_detail": "Author-hosted full lecture-note PDF; complete relevant chapters re-inspected.",
+          "read_evidence": {
+            "local_pdf": "research/quantum-algorithms-planning/sources/qa_r6/childs-lecture-notes.pdf",
+            "local_text": "research/quantum-algorithms-planning/sources/qa_r6/childs-lecture-notes.txt",
+            "pdf_sha256": "6e3a32f0aede35e954d665c909fec41f716b955f041957e723e2724ae3efabd1",
+            "text_sha256": "f7456fdbf599429bf093c9345c45536cbeb979d37be762819a151e6d2497c8b5",
+            "pdf_bytes": 1438768,
+            "pdf_pages": 191,
+            "text_bytes": 462433,
+            "extent": "Complete course corpus was read in the shared ledger; all relevant chapters re-inspected for this batch.",
+            "locators": [
+              {
+                "name": "Hamiltonian simulation and term-list formulas",
+                "disposition": "included",
+                "items": [
+                  "def-qa-36-adiabatic-resource-model",
+                  "alg-qa-36-discretized-path-simulation",
+                  "thm-qa-36-adiabatic-path-to-circuit-simulation",
+                  "thm-qa-36-circuit-to-adiabatic-simulation"
+                ],
+                "locator": "Chapter 27, PDF pp. 141–143 (printed pp. 133–135). included for finite simulation context; error budgets and cost additions are proved or stated locally."
+              },
+              {
+                "name": "Finite-dimensional adiabatic theorem",
+                "disposition": "included",
+                "items": [
+                  "def-qa-36-finite-adiabatic-path-model",
+                  "lem-qa-36-gapped-projection-regularity",
+                  "thm-qa-36-jrs-finite-adiabatic-bound",
+                  "ex-qa-36-two-level-avoided-crossing",
+                  "cex-qa-36-gap-closing-failure"
+                ],
+                "locator": "Chapter 30, PDF pp. 159–164 (printed pp. 151–156). included as an independent lecture-note treatment; the JRS proof and gap-closing example are supplied locally."
+              },
+              {
+                "name": "Universal adiabatic path and clock construction",
+                "disposition": "included",
+                "items": [
+                  "alg-qa-36-five-local-history-path",
+                  "lem-qa-36-history-state-ground-and-output",
+                  "lem-qa-36-history-path-ground-vector-monotonicity",
+                  "lem-qa-36-history-path-restricted-gap",
+                  "lem-qa-36-history-path-full-gap",
+                  "thm-qa-36-circuit-to-adiabatic-simulation"
+                ],
+                "locator": "Chapter 33, PDF pp. 179–184 (printed pp. 171–176). included for construction context; the linear clock potential is handled by the local proof."
+              }
+            ]
+          },
+          "contents": [
+            {
+              "name": "Hamiltonian simulation and term-list formulas",
+              "disposition": "included",
+              "items": [
+                "def-qa-36-adiabatic-resource-model",
+                "alg-qa-36-discretized-path-simulation",
+                "thm-qa-36-adiabatic-path-to-circuit-simulation",
+                "thm-qa-36-circuit-to-adiabatic-simulation"
+              ],
+              "locator": "Chapter 27, PDF pp. 141–143 (printed pp. 133–135). included for finite simulation context; error budgets and cost additions are proved or stated locally.",
+              "item": "def-qa-36-adiabatic-resource-model"
+            },
+            {
+              "name": "Finite-dimensional adiabatic theorem",
+              "disposition": "included",
+              "items": [
+                "def-qa-36-finite-adiabatic-path-model",
+                "lem-qa-36-gapped-projection-regularity",
+                "thm-qa-36-jrs-finite-adiabatic-bound",
+                "ex-qa-36-two-level-avoided-crossing",
+                "cex-qa-36-gap-closing-failure"
+              ],
+              "locator": "Chapter 30, PDF pp. 159–164 (printed pp. 151–156). included as an independent lecture-note treatment; the JRS proof and gap-closing example are supplied locally.",
+              "item": "def-qa-36-finite-adiabatic-path-model"
+            },
+            {
+              "name": "Universal adiabatic path and clock construction",
+              "disposition": "included",
+              "items": [
+                "alg-qa-36-five-local-history-path",
+                "lem-qa-36-history-state-ground-and-output",
+                "lem-qa-36-history-path-ground-vector-monotonicity",
+                "lem-qa-36-history-path-restricted-gap",
+                "lem-qa-36-history-path-full-gap",
+                "thm-qa-36-circuit-to-adiabatic-simulation"
+              ],
+              "locator": "Chapter 33, PDF pp. 179–184 (printed pp. 171–176). included for construction context; the linear clock potential is handled by the local proof.",
+              "item": "alg-qa-36-five-local-history-path"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "at": "2026-10-14T09:09:06.007Z",
+              "outcome": "full-text body fetched; shared fetch stamp reused after PDF and extracted text inspection."
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T09:09:06.007Z",
+            "bytes": 1438768,
+            "sha256_16": "6e3a32f0aede35e9",
+            "kind": "pdf",
+            "pages": 191
+          }
+        }
+      ]
+    },
+    {
+      "page": "adiabatic-computation-and-circuit-equivalence-examples",
+      "canonical": [
+        {
+          "name": "Two-level avoided crossing",
+          "item": "ex-qa-36-two-level-avoided-crossing",
+          "disposition": "included",
+          "detail": "Consider $H(s)=(s-1/2)Z+X/2$ on $\\mathbb C^2$, where $X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ and $Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. Compute its full ground-to-excited gap, derivative bounds, and rank-one JRS error bound."
+        },
+        {
+          "name": "Gap closing invalidates a uniform adiabatic bound",
+          "item": "cex-qa-36-gap-closing-failure",
+          "disposition": "included",
+          "detail": "The $C^2$ path $H(s)=(s-1/2)Z$ has a closing gap and its exact evolution from the initial ground state ends orthogonal to the final ground state. Thus $C^2$ regularity alone does not imply ground-state following or satisfy the uniform-gap hypothesis of the finite JRS theorem."
+        },
+        {
+          "name": "Two-gate padded history state",
+          "item": "ex-qa-36-two-gate-history-state",
+          "disposition": "included",
+          "detail": "Take the one-qubit circuit $U_1=X$, $U_2=Z$ and tolerance $\\varepsilon=1$. The prescribed padding has $K=4$, $N=6$, and $U_3=\\cdots=U_6=I$. Write its legal clocks as $c_0=000000,c_1=100000,\\ldots,c_6=111111$. The normalized history state is $$|\\eta\\rangle=\\frac1{\\sqrt7}\\bigl(|0\\rangle|c_0\\rangle+|1\\rangle|c_1\\rangle-|1\\rangle|c_2\\rangle-|1\\rangle|c_3\\rangle-|1\\rangle|c_4\\rangle-|1\\rangle|c_5\\rangle-|1\\rangle|c_6\\rangle\\bigr).$$"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0603175",
+          "kind": "paper",
+          "title": "Sabine Jansen, Mary-Beth Ruskai, and Ruedi Seiler, Bounds for the adiabatic approximation with applications to quantum computation",
+          "locator": "Lemmas 2, 5–8, PDF pp. 6–12.; Theorem 3 and its proof, PDF pp. 5–11.",
+          "source_kind_detail": "Author-hosted complete research paper; complete relevant proof sections re-inspected.",
+          "read_evidence": {
+            "local_pdf": "research/quantum-algorithms-planning/sources/qa_r4/jansen-ruskai-seiler-quant-ph-0603175.pdf",
+            "local_text": "research/quantum-algorithms-planning/sources/qa_r4/jansen-ruskai-seiler-quant-ph-0603175.txt",
+            "pdf_sha256": "b96b67d4c7dae9d3e996d8f39bd8e5a93f4279246956a67a708f80077dc86d7c",
+            "text_sha256": "0382fc43e1870db722547a6cf1ad6c7a7bfb1a0bc92c357951e83ec9af2c37cd",
+            "pdf_bytes": 258329,
+            "pdf_pages": 15,
+            "text_bytes": 36125,
+            "extent": "Complete paper read sequentially; all relevant proof sections re-inspected for this batch.",
+            "locators": [
+              {
+                "name": "Finite-band derivatives and reduced resolvent",
+                "disposition": "included",
+                "items": [
+                  "lem-qa-36-gapped-projection-regularity",
+                  "lem-qa-36-jrs-finite-band-estimates",
+                  "thm-qa-36-jrs-finite-adiabatic-bound"
+                ],
+                "locator": "Lemmas 2, 5–8, PDF pp. 6–12. included; finite spectral sums, contour residues, derivative bounds and integration by parts are proved locally."
+              },
+              {
+                "name": "Finite-rank adiabatic projector estimate",
+                "disposition": "included",
+                "items": [
+                  "thm-qa-36-jrs-finite-adiabatic-bound",
+                  "ex-qa-36-two-level-avoided-crossing"
+                ],
+                "locator": "Theorem 3 and its proof, PDF pp. 5–11. included; finite-dimensional specialization and constants are derived locally."
+              }
+            ]
+          },
+          "contents": [
+            {
+              "name": "Finite-band derivatives and reduced resolvent",
+              "disposition": "included",
+              "items": [
+                "lem-qa-36-gapped-projection-regularity",
+                "lem-qa-36-jrs-finite-band-estimates",
+                "thm-qa-36-jrs-finite-adiabatic-bound"
+              ],
+              "locator": "Lemmas 2, 5–8, PDF pp. 6–12. included; finite spectral sums, contour residues, derivative bounds and integration by parts are proved locally.",
+              "item": "lem-qa-36-gapped-projection-regularity"
+            },
+            {
+              "name": "Finite-rank adiabatic projector estimate",
+              "disposition": "included",
+              "items": [
+                "thm-qa-36-jrs-finite-adiabatic-bound",
+                "ex-qa-36-two-level-avoided-crossing"
+              ],
+              "locator": "Theorem 3 and its proof, PDF pp. 5–11. included; finite-dimensional specialization and constants are derived locally.",
+              "item": "thm-qa-36-jrs-finite-adiabatic-bound"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/quant-ph/0603175",
+              "at": "2026-10-14T09:09:30.461Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T09:09:30.462Z",
+            "bytes": 258329,
+            "sha256_16": "b96b67d4c7dae9d3",
+            "kind": "pdf",
+            "pages": 15
+          }
+        },
+        {
+          "url": "https://arxiv.org/pdf/quant-ph/0405098",
+          "kind": "paper",
+          "title": "Dorit Aharonov, Wim van Dam, Julia Kempe, Zeph Landau, Seth Lloyd, and Oded Regev, Adiabatic Quantum Computation is Equivalent to Standard Quantum Computation",
+          "locator": "Theorem 2.5, PDF p. 10.; §§3.1.1–3.1.2 and Lemma 3.10, PDF pp. 10–15.; Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14.; Lemmas 3.11–3.19, PDF pp. 15–20.",
+          "source_kind_detail": "Author-hosted complete research paper; complete relevant proof sections re-inspected.",
+          "read_evidence": {
+            "local_pdf": "research/quantum-algorithms-planning/sources/qa_r4/aharonov-adiabatic-equivalence.pdf",
+            "local_text": "research/quantum-algorithms-planning/sources/qa_r4/aharonov-adiabatic-equivalence.txt",
+            "pdf_sha256": "9591c674b14bdcbcf7722f4cdf0269b05777c041da56289a7d6ae91787e407dd",
+            "text_sha256": "7d379dc006f24f6e6ea47b27336ae2b541c8fd4af8831d1f81aaa2eda6a630d7",
+            "pdf_bytes": 380316,
+            "pdf_pages": 30,
+            "text_bytes": 92393,
+            "extent": "Complete paper read sequentially; all relevant proof sections re-inspected for this batch.",
+            "locators": [
+              {
+                "name": "Finite reversible-chain conductance inequality",
+                "disposition": "included",
+                "items": [
+                  "thm-qa-36-finite-cheeger-bound"
+                ],
+                "locator": "Theorem 2.5, PDF p. 10. included as source context; the complete coarea proof is supplied locally."
+              },
+              {
+                "name": "Unary-clock circuit history and output extraction",
+                "disposition": "included",
+                "items": [
+                  "alg-qa-36-five-local-history-path",
+                  "lem-qa-36-history-state-ground-and-output",
+                  "ex-qa-36-two-gate-history-state"
+                ],
+                "locator": "§§3.1.1–3.1.2 and Lemma 3.10, PDF pp. 10–15. included; local terms, history kernel and padding trace are proved locally."
+              },
+              {
+                "name": "Restricted gap and positive monotone clock ground state",
+                "disposition": "altered",
+                "items": [
+                  "lem-qa-36-history-path-ground-vector-monotonicity",
+                  "lem-qa-36-history-path-restricted-gap"
+                ],
+                "locator": "Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14. altered for the assigned sum-of-clock-bits potential: the source uses a first-clock-bit penalty, while this batch proves the linear-potential case by a ground-state transform and reversible chain."
+              },
+              {
+                "name": "Input penalty and illegal-clock gap transfer",
+                "disposition": "included",
+                "items": [
+                  "lem-qa-36-clock-penalty-gap-perturbation",
+                  "lem-qa-36-history-path-full-gap",
+                  "thm-qa-36-circuit-to-adiabatic-simulation"
+                ],
+                "locator": "Lemmas 3.11–3.19, PDF pp. 15–20. included as proof-route context; exact additive perturbation and sum-penalty constants are proved locally."
+              }
+            ]
+          },
+          "contents": [
+            {
+              "name": "Finite reversible-chain conductance inequality",
+              "disposition": "included",
+              "items": [
+                "thm-qa-36-finite-cheeger-bound"
+              ],
+              "locator": "Theorem 2.5, PDF p. 10. included as source context; the complete coarea proof is supplied locally.",
+              "item": "thm-qa-36-finite-cheeger-bound"
+            },
+            {
+              "name": "Unary-clock circuit history and output extraction",
+              "disposition": "included",
+              "items": [
+                "alg-qa-36-five-local-history-path",
+                "lem-qa-36-history-state-ground-and-output",
+                "ex-qa-36-two-gate-history-state"
+              ],
+              "locator": "§§3.1.1–3.1.2 and Lemma 3.10, PDF pp. 10–15. included; local terms, history kernel and padding trace are proved locally.",
+              "item": "alg-qa-36-five-local-history-path"
+            },
+            {
+              "name": "Restricted gap and positive monotone clock ground state",
+              "disposition": "included",
+              "items": [
+                "lem-qa-36-history-path-ground-vector-monotonicity",
+                "lem-qa-36-history-path-restricted-gap"
+              ],
+              "locator": "Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14. altered for the assigned sum-of-clock-bits potential: the source uses a first-clock-bit penalty, while this batch proves the linear-potential case by a ground-state transform and reversible chain.",
+              "adaptation_note": "Lemma 3.5 and Claims 3.7–3.8, PDF pp. 12–14. altered for the assigned sum-of-clock-bits potential: the source uses a first-clock-bit penalty, while this batch proves the linear-potential case by a ground-state transform and reversible chain.",
+              "item": "lem-qa-36-history-path-ground-vector-monotonicity"
+            },
+            {
+              "name": "Input penalty and illegal-clock gap transfer",
+              "disposition": "included",
+              "items": [
+                "lem-qa-36-clock-penalty-gap-perturbation",
+                "lem-qa-36-history-path-full-gap",
+                "thm-qa-36-circuit-to-adiabatic-simulation"
+              ],
+              "locator": "Lemmas 3.11–3.19, PDF pp. 15–20. included as proof-route context; exact additive perturbation and sum-penalty constants are proved locally.",
+              "item": "lem-qa-36-clock-penalty-gap-perturbation"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/quant-ph/0405098",
+              "at": "2026-10-14T09:23:35.299Z",
+              "outcome": "full-text PDF body fetched"
+            },
+            {
+              "url": "https://arxiv.org/pdf/quant-ph/0405098",
+              "at": "2026-10-14T09:23:39.625Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T09:23:39.626Z",
+            "bytes": 380316,
+            "sha256_16": "9591c674b14bdcbc",
+            "kind": "pdf",
+            "pages": 30
+          }
+        },
+        {
+          "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+          "kind": "lecture-notes",
+          "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+          "locator": "Chapter 27, PDF pp. 141–143 (printed pp. 133–135).; Chapter 30, PDF pp. 159–164 (printed pp. 151–156).; Chapter 33, PDF pp. 179–184 (printed pp. 171–176).",
+          "source_kind_detail": "Author-hosted full lecture-note PDF; complete relevant chapters re-inspected.",
+          "read_evidence": {
+            "local_pdf": "research/quantum-algorithms-planning/sources/qa_r6/childs-lecture-notes.pdf",
+            "local_text": "research/quantum-algorithms-planning/sources/qa_r6/childs-lecture-notes.txt",
+            "pdf_sha256": "6e3a32f0aede35e954d665c909fec41f716b955f041957e723e2724ae3efabd1",
+            "text_sha256": "f7456fdbf599429bf093c9345c45536cbeb979d37be762819a151e6d2497c8b5",
+            "pdf_bytes": 1438768,
+            "pdf_pages": 191,
+            "text_bytes": 462433,
+            "extent": "Complete course corpus was read in the shared ledger; all relevant chapters re-inspected for this batch.",
+            "locators": [
+              {
+                "name": "Hamiltonian simulation and term-list formulas",
+                "disposition": "included",
+                "items": [
+                  "def-qa-36-adiabatic-resource-model",
+                  "alg-qa-36-discretized-path-simulation",
+                  "thm-qa-36-adiabatic-path-to-circuit-simulation",
+                  "thm-qa-36-circuit-to-adiabatic-simulation"
+                ],
+                "locator": "Chapter 27, PDF pp. 141–143 (printed pp. 133–135). included for finite simulation context; error budgets and cost additions are proved or stated locally."
+              },
+              {
+                "name": "Finite-dimensional adiabatic theorem",
+                "disposition": "included",
+                "items": [
+                  "def-qa-36-finite-adiabatic-path-model",
+                  "lem-qa-36-gapped-projection-regularity",
+                  "thm-qa-36-jrs-finite-adiabatic-bound",
+                  "ex-qa-36-two-level-avoided-crossing",
+                  "cex-qa-36-gap-closing-failure"
+                ],
+                "locator": "Chapter 30, PDF pp. 159–164 (printed pp. 151–156). included as an independent lecture-note treatment; the JRS proof and gap-closing example are supplied locally."
+              },
+              {
+                "name": "Universal adiabatic path and clock construction",
+                "disposition": "included",
+                "items": [
+                  "alg-qa-36-five-local-history-path",
+                  "lem-qa-36-history-state-ground-and-output",
+                  "lem-qa-36-history-path-ground-vector-monotonicity",
+                  "lem-qa-36-history-path-restricted-gap",
+                  "lem-qa-36-history-path-full-gap",
+                  "thm-qa-36-circuit-to-adiabatic-simulation"
+                ],
+                "locator": "Chapter 33, PDF pp. 179–184 (printed pp. 171–176). included for construction context; the linear clock potential is handled by the local proof."
+              }
+            ]
+          },
+          "contents": [
+            {
+              "name": "Hamiltonian simulation and term-list formulas",
+              "disposition": "included",
+              "items": [
+                "def-qa-36-adiabatic-resource-model",
+                "alg-qa-36-discretized-path-simulation",
+                "thm-qa-36-adiabatic-path-to-circuit-simulation",
+                "thm-qa-36-circuit-to-adiabatic-simulation"
+              ],
+              "locator": "Chapter 27, PDF pp. 141–143 (printed pp. 133–135). included for finite simulation context; error budgets and cost additions are proved or stated locally.",
+              "item": "def-qa-36-adiabatic-resource-model"
+            },
+            {
+              "name": "Finite-dimensional adiabatic theorem",
+              "disposition": "included",
+              "items": [
+                "def-qa-36-finite-adiabatic-path-model",
+                "lem-qa-36-gapped-projection-regularity",
+                "thm-qa-36-jrs-finite-adiabatic-bound",
+                "ex-qa-36-two-level-avoided-crossing",
+                "cex-qa-36-gap-closing-failure"
+              ],
+              "locator": "Chapter 30, PDF pp. 159–164 (printed pp. 151–156). included as an independent lecture-note treatment; the JRS proof and gap-closing example are supplied locally.",
+              "item": "def-qa-36-finite-adiabatic-path-model"
+            },
+            {
+              "name": "Universal adiabatic path and clock construction",
+              "disposition": "included",
+              "items": [
+                "alg-qa-36-five-local-history-path",
+                "lem-qa-36-history-state-ground-and-output",
+                "lem-qa-36-history-path-ground-vector-monotonicity",
+                "lem-qa-36-history-path-restricted-gap",
+                "lem-qa-36-history-path-full-gap",
+                "thm-qa-36-circuit-to-adiabatic-simulation"
+              ],
+              "locator": "Chapter 33, PDF pp. 179–184 (printed pp. 171–176). included for construction context; the linear clock potential is handled by the local proof.",
+              "item": "alg-qa-36-five-local-history-path"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf",
+              "at": "2026-10-14T09:09:06.007Z",
+              "outcome": "full-text body fetched; shared fetch stamp reused after PDF and extracted text inspection."
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T09:09:06.007Z",
+            "bytes": 1438768,
+            "sha256_16": "6e3a32f0aede35e9",
+            "kind": "pdf",
+            "pages": 191
+          }
+        }
+      ]
+    }
+  ]
+}

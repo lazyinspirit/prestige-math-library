@@ -1,0 +1,170 @@
+{
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "57",
+  "input_sha256": "6bd67b8a5053559e4356bcb5a8e2e205e9954511bfbea293b60cda757cdede6e",
+  "decisions": [
+    {
+      "id": "lem-qa-33-finite-dimensional-unitary-synthesis",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "2bd9b0dfc85ce3b19f88259d2b2d2782dc97439bad62fc2df90fd921b55e1cb1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The rejected bit-time claim is overstrong: eta=(2^m+1)/(4*2^m) is reduced, stays near 1/4, and has unbounded binary numerator/denominator length while 1/eta remains bounded. The stated procedure parses eta and computes rational mesh sizes and compiler tolerances; this work is not bounded by a polynomial in the matrix-description length and 1/eta alone. The actual Solovay–Kitaev Statement explicitly charges s_epsilon. This is a logic defect in the resource inference of step 4.1, rather than a missing dependency. Repaired the Statement to charge b+ell(eta)+1/eta in bit time, clarified F3, and proved the parsing and derived-tolerance bounds in step 4.1; the gate-count bound and synthesis guarantee are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qa-33-finite-dimensional-unitary-synthesis",
+      "disposition": "repaired",
+      "post_sha256": "7a984d96a5759fe25075051302f7fda4486acf885c4ded1ae876255c39c14226",
+      "review_context_sha256": "ff401a6535db926138d059598a7b074ea1b8b0ee50acd45d44dea8f25955feec",
+      "reason": "Checked all four proof steps against their actual supplier interfaces: positive robust pivots and conditioned Givens arithmetic, ordered Gray-path actions, exact parity-phase Toffoli and negative controls, finite Euler search and controlled-rotation identities, recursive diagonal phases on data wires, and exact clean-workspace return. The eta/4+eta/4+eta/2 error budget and unconditional global-phase use remain valid. The corrected bit-time bound includes the exact rational tolerance encoding, with fixed-dimension query arithmetic and compiler calls polynomial in b+ell(eta)+1/eta; the fixed number of compiled factors retains gate count polynomial in b+1/eta. This is adjudication with a local repair, not independent review of that repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-qa-33-fixed-arity-local-measurement-synthesis",
+    "lem-qa-33-uniform-programmed-circuit-interpreter",
+    "thm-qa-33-local-hamiltonian-in-qma",
+    "thm-qa-33-2-local-hamiltonian-qma-complete"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "row": {
+        "defect_id": "qca60-b57-step5-repeat-r1-tolerance-encoding-cost",
+        "run": "quantum-computing-algorithms-60-2026-10-15",
+        "at": "2026-10-16T08:02:27.960063+00:00",
+        "batch": "57",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "lem-qa-33-finite-dimensional-unitary-synthesis",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "description": "The rejected bit-time claim is overstrong: eta=(2^m+1)/(4*2^m) is reduced, stays near 1/4, and has unbounded binary numerator/denominator length while 1/eta remains bounded. The stated procedure parses eta and computes rational mesh sizes and compiler tolerances; this work is not bounded by a polynomial in the matrix-description length and 1/eta alone. The actual Solovay–Kitaev Statement explicitly charges s_epsilon. This is a logic defect in the resource inference of step 4.1, rather than a missing dependency. Repaired the Statement to charge b+ell(eta)+1/eta in bit time, clarified F3, and proved the parsing and derived-tolerance bounds in step 4.1; the gate-count bound and synthesis guarantee are preserved.",
+        "adjudication_ref": [
+          {
+            "path": "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-repeat-r1-u57.json",
+            "obligation": "lem-qa-33-finite-dimensional-unitary-synthesis|gpt-6.1-sol|2bd9b0dfc85ce3b19f88259d2b2d2782dc97439bad62fc2df90fd921b55e1cb1"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "items/lem-qa-33-finite-dimensional-unitary-synthesis.md",
+            "note": "Statement and proof step 4.1 explicitly charge the rational-tolerance encoding length."
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "All four discovered direct item consumers are draft members of the frozen frontier; their exact affected uses remain sound as documented below. No published consumer or outside-frontier maintenance subject was discovered."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_files": [
+      "items/lem-qa-33-finite-dimensional-unitary-synthesis.md",
+      "research/quantum-computing-algorithms-60-2026-10-15-batch-57.proof-contracts.json",
+      "research/quantum-computing-algorithms-60-2026-10-15-step5-v2/step5-v2-repeat-r1-u57.json"
+    ],
+    "interface_change": {
+      "section": "Statement",
+      "before": "The procedure has polynomial bit cost and polynomial gate count in the description length and $1/\\eta$.",
+      "after": "Writing $b$ for the matrix-description length and $\\ell(\\eta)$ for the binary numerator/denominator encoding length of the rational tolerance, the procedure has bit cost polynomial in $b+\\ell(\\eta)+1/\\eta$ and gate count polynomial in $b+1/\\eta$.",
+      "preserved": "The unitary, tolerance domain, error guarantee, global-scalar convention, clean-ancilla return, decomposition, and exact Toffoli interface are unchanged."
+    },
+    "contract_repair": "Under the shared-write lock, reread the current batch-57 contract, updated only this item's step-4-1 claim mirror and risk notes, ran its focused strict check, and released the lock. No shared ledger was edited.",
+    "dependencies_checked": [
+      "def-qa-33-effective-finite-matrix-encoding",
+      "lem-qa-33-normalized-clifford-t-su2-package-dense",
+      "thm-qc-solovay-kitaev-bit-complexity",
+      "def-qc-circuit-cost-model",
+      "def-qc-tensor-register-and-permutation",
+      "thm-qc-one-qubit-euler-decomposition",
+      "def-qc-one-qubit-gate-alphabet-and-rotations",
+      "def-qc-cnot-and-control-target-order",
+      "lem-qc-fixed-dimension-interval-arithmetic",
+      "def-qc-two-level-unitary"
+    ],
+    "source_evidence": "Used the current local supplier Statements/Definitions and the complete local compiler proof. No external source was consulted; these finite matrix constructions and binary rational cost arguments are familiar.",
+    "downstream_reviews": [
+      {
+        "id": "lem-qa-33-fixed-arity-local-measurement-synthesis",
+        "path": "items/lem-qa-33-fixed-arity-local-measurement-synthesis.md",
+        "affected_use": "Statement invokes synthesis of I direct-sum U_acc; F3 and proof 3.1 compile Q at eta/4 and the selector-controlled dilation.",
+        "disposition": "unaffected",
+        "reason": "Its Statement already charges b+ell(eta)+1/eta. Dividing eta by fixed constants produces tolerances of O(ell(eta)+1) encoding length; target descriptions and all calls remain within that bound. No consumer repair is required."
+      },
+      {
+        "id": "lem-qa-33-uniform-programmed-circuit-interpreter",
+        "path": "items/lem-qa-33-uniform-programmed-circuit-interpreter.md",
+        "affected_use": "F5 and proof 1.2 use exact Toffoli; proof 2.1 and 3.1 synthesize fixed controlled gate templates at xi=delta(n)/(2P(n)).",
+        "disposition": "unaffected",
+        "reason": "The Statement explicitly requires delta(n) to be polynomial-time generated with polynomial bit length. P(n) is polynomial, so ell(xi) is polynomial in n and the stated polynomial generator bound survives. The exact Toffoli interface is unchanged."
+      },
+      {
+        "id": "thm-qa-33-local-hamiltonian-in-qma",
+        "path": "items/thm-qa-33-local-hamiltonian-in-qma.md",
+        "affected_use": "F6 and proof 1.1 compile full selector-controlled blocks at g_*(N)/(32m); proof 2.1 synthesizes a threshold-normalizing coin to inverse-polynomial error.",
+        "disposition": "unaffected",
+        "reason": "Here g_*(N)=1/(4Q(N)^2P(N)) for fixed polynomial envelopes and m is polynomially bounded. These explicitly constructed tolerances have polynomial encoding length. The instance-dependent coin parameter is computed by rational arithmetic on the input thresholds. Adding ell(tolerance) leaves both uses polynomial-time."
+      },
+      {
+        "id": "thm-qa-33-2-local-hamiltonian-qma-complete",
+        "path": "items/thm-qa-33-2-local-hamiltonian-qma-complete.md",
+        "affected_use": "F12 and proof 1.1 use the exact parity-phase Toffoli decomposition to implement Boolean terminal predicates over QC14.",
+        "disposition": "unaffected",
+        "reason": "Only the exact Toffoli subconstruction is used directly, with no tolerance input or approximate synthesis call. That subconstruction and its constant cost remain unchanged."
+      }
+    ],
+    "page_review": {
+      "path": "library/quantum-algorithms/qma-verification-and-local-hamiltonian.md",
+      "affected_use": "The page lists the synthesis lemma in its item inventory and describes generated finite-arity measurements and circuit uniformization.",
+      "disposition": "unaffected",
+      "reason": "The page states no bound omitting tolerance length; polynomial-length inverse-polynomial tolerances still support its uniformization description."
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-qa-33-finite-dimensional-unitary-synthesis.md --json",
+        "exit_code": 0,
+        "result": "1 checked proof, 0 failures; direct strategy passes without automatic repair."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-qa-33-finite-dimensional-unitary-synthesis.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/quantum-computing-algorithms-60-2026-10-15-batch-57.proof-contracts.json --items lem-qa-33-finite-dimensional-unitary-synthesis --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; the assigned contract passes with no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-qa-33-finite-dimensional-unitary-synthesis.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; run after the final item edit."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run quantum-computing-algorithms-60-2026-10-15 --items lem-qa-33-finite-dimensional-unitary-synthesis",
+        "exit_code": 0,
+        "result": "Recorded the exact post_sha256 and review_context_sha256 below immediately after mathematical review; no later item or supplier edit."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Controller to collect this report and route the changed Statement through ordinary frontier effects and independent rejudgment. No judges, stamps, certificates, or round state were written."
+  }
+}

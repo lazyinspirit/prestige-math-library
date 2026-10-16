@@ -1,0 +1,2386 @@
+arXiv:quant-ph/0405098v2  26 Mar 2005
+Adiabatic Quantum Computation is Equivalent to Standard
+Quantum Computation
+Dorit Aharonov
+School of Computer Science and Engineering,
+Hebrew University, Jerusalem, Israel
+Wim van Dam
+Department of Computer Science,
+UC Santa Barbara, CA
+Julia Kempe
+CNRS-LRI UMR 8623,
+Universit´e de Paris-Sud, Orsay, France
+Zeph Landau
+Department of Mathematics,
+City College of New York, NY
+Seth Lloyd
+Department of Mechanical Engineering,
+MIT, Cambridge, MA
+Oded Regev
+Computer Science Department,
+Tel Aviv University, Israel
+February 1, 2008
+Abstract
+Adiabatic quantum computation has recently attracted attention in the physics and com-
+puter science communities, but its computational power was unknown. We describe an eﬃ-
+cient adiabatic simulation of any given quantum algorithm, which implies that the adiabatic
+computation model and the conventional quantum computation model are polynomially equiv-
+alent. Our result can be extended to the physically realistic setting of particles arranged on a
+two-dimensional grid with nearest neighbor interactions. The equivalence between the models
+provides a new vantage point from which to tackle the central issues in quantum computation,
+namely designing new quantum algorithms and constructing fault tolerant quantum computers.
+In particular, by translating the main open questions in the area of quantum algorithms to the
+language of spectral gaps of sparse matrices, the result makes these questions accessible to a
+wider scientiﬁc audience, acquainted with mathematical physics, expander theory and rapidly
+mixing Markov chains.
+1
+Introduction
+The study of adiabatic quantum computation was initiated several years ago by Farhi, Goldstone,
+Gutmann and Sipser [14], who suggested a novel quantum algorithm for solving classical optimiza-
+tion problems such as Satisfiability (Sat). Their algorithm is based on a celebrated theorem
+in quantum mechanics known as the adiabatic theorem [19, 25].
+Although the exact worst-case
+behavior of this algorithm is not known, several simulations (see, e.g., [13]) on random instances
+of up to 20 quantum bits led to various optimistic speculations. The bad news is that there is now
+mounting evidence [9, 10, 29] that the algorithm of [14] takes exponential time in the worst-case
+for NP-complete problems. Nevertheless, adiabatic computation was since shown to be promising
+in other less ambitious directions: it possesses several interesting algorithmic capabilities, as we
+will soon review, and in addition, it exhibits inherent robustness against certain types of quan-
+tum errors [8].
+We note that a small scale adiabatic algorithm has already been implemented
+experimentally, using a Nuclear Magnetic Resonance (NMR) system [36].
+1
+We brieﬂy describe the model of adiabatic computation (a more precise description appears
+in Section 2.2). A computation in this model is speciﬁed by two Hamiltonians named Hinit and
+Hﬁnal (a Hamiltonian is simply a Hermitian matrix). The eigenvector with smallest eigenvalue (also
+known as the ground state) of Hinit is required to be an easy to prepare state, such as a tensor
+product state. The output of the adiabatic computation is the ground state of the ﬁnal Hamiltonian
+Hﬁnal. Hence, we choose an Hﬁnal whose ground state represents the solution to our problem. We
+require the Hamiltonians to be local, i.e., we require them to only involve interactions between a
+constant number of particles (this can be seen as the equivalent of allowing gates operating on
+a constant number of qubits in the standard model).
+This, in particular, makes sure that the
+Hamiltonians have a short classical description, by simply listing the matrix entries of each local
+term.
+The running time of the adiabatic computation is determined by the minimal spectral gap1
+of all the Hamiltonians on the straight line connecting Hinit and Hﬁnal: H(s) = (1−s)Hinit+sHﬁnal
+for s ∈[0, 1]. More precisely, the adiabatic computation is polynomial time if this minimal spectral
+gap is at least inverse polynomial.
+The motivation for the above deﬁnition is physical. The Hamiltonian operator corresponds to
+the energy of the quantum system, and for it to be physically realistic and implementable it must
+be local. Its ground state is the state of lowest energy. We can set up a quantum system in the
+ground state of Hinit (which is supposed to be easy to generate) and apply the Hamiltonian Hinit
+to the system. We then slowly modify the Hamiltonian along the straight line from Hinit towards
+Hﬁnal. It follows from the adiabatic theorem that if this transformation is performed slowly enough
+(how slow is determined by the minimal spectral gap), the ﬁnal state of the system will be in the
+ground state of Hﬁnal, as required.
+What is the computational power of this model? In order to refer to the adiabatic model as a
+computational model that computes classical functions (rather than quantum states), we consider
+the result of the adiabatic computation to be the outcome of a measurement of one or more of
+the qubits, performed on the ﬁnal ground state. It is known that adiabatic computation can be
+eﬃciently simulated by standard quantum computers [9, 13]. Hence, its computational power is
+not greater than that of standard quantum computers. Several positive results are also known.
+In [9,30] it was shown that Grover’s quadratic speed-up for an unsorted search [16] can be realized
+as an adiabatic computation. Moreover, [11,29,32] showed that adiabatic computation can ‘tunnel’
+through wide energy barriers and thus outperform simulated annealing, a classical counterpart of the
+adiabatic model. However, whether adiabatic computation can achieve the full power of quantum
+computation was not known. In fact, even the question of whether adiabatic computation can
+simulate general classical computations eﬃciently was unknown. The focus of this paper is the
+exact characterization of the computational power of adiabatic computation.
+Before we describe our results, let us clarify one subtle point. Most of the previous work on the
+subject focused on a restricted class of adiabatic algorithms that can be referred to as adiabatic
+optimization algorithms. In these algorithms, Hﬁnal is chosen to be a diagonal matrix, corresponding
+to a combinatorial optimization problem. In particular, this implies that the ground state of Hﬁnal
+(which is the output of the computation) is a classical state, i.e., a state in the computational
+basis. In this paper, however, we associate the term adiabatic computation with the more general
+class of adiabatic algorithms, where the only restriction on Hﬁnal is that it is a local Hamiltonian.
+We do this because, from a physical point of view, there is no reason to force the physical process
+described above to have a diagonal Hﬁnal, when all other Hamiltonians are not restricted this way.
+Thus, our deﬁnition of adiabatic computation seems to be the natural one to use. It is this natural
+deﬁnition that allows us to prove our results.
+1The spectral gap is the diﬀerence between the lowest and second lowest eigenvalue.
+2
+1.1
+Results – Computational Complexity of the Adiabatic Model
+Our main result clariﬁes the question of the computational power of adiabatic algorithms. We
+show:
+Theorem 1.1 The model of adiabatic computation is polynomially equivalent to the standard model
+of quantum computation.
+As mentioned above, one direction of the equivalence is already known [13,9]. Our contribution
+is to show that standard quantum computation can be eﬃciently simulated by adiabatic compu-
+tation. We do this by using adiabatic computation with 3-local Hamiltonians. We note that [4]
+made a preliminary step in the direction of Theorem 1.1 but the model that they considered was
+quite diﬀerent.2
+One corollary of our main theorem is the following. We can consider the model of adiabatic
+computation with a more general set of Hamiltonians known as explicit sparse Hamiltonians. These
+are Hermitian matrices that have at most polynomially many nonzero elements in each row and
+column, and, moreover, there is an eﬃcient Turing machine that can generate a list of all nonzero
+entries in a given row or column. Clearly, local Hamiltonians are a special case of explicit sparse
+Hamiltonians. It was shown in [4] that adiabatic computation with explicit sparse Hamiltonians
+can still be simulated by standard quantum computation (this extends the result of [9, 14] in a
+non-trivial way). Hence, we obtain the following result.
+Corollary 1.2 The model of adiabatic computation with explicit sparse Hamiltonians is polynomi-
+ally equivalent to the standard model of quantum computation.
+Explicit sparse matrices are pervasive in computer science and combinatorics, and hence this corol-
+lary might be more useful than Theorem 1.1 in the context of the design of quantum algorithms
+and the study of quantum complexity.
+To summarize, our results show that questions about quantum computation can be equivalently
+considered in the model of adiabatic computation, a model that is quite diﬀerent from the more
+common circuit-based models. There are two reasons why it seems worthwhile to try to design
+quantum algorithms in the adiabatic framework. First, there are several known powerful techniques
+to analyze spectral gaps of matrices, including expander theory [15] and rapidly mixing Markov
+chains [24,34]. Indeed, probability theory is often used in mathematical physics to analyze spectral
+gaps of Hamiltonians (see, e.g., [35]), and our proofs also make extensive use of Markov chain tools.
+Second, it is known that many interesting algorithmic problems in quantum computation can be
+cast as quantum state generation problems [4]. The problem of generating special quantum states
+seems more natural in the adiabatic model than in the standard model.
+1.2
+Results – Towards Experimental Implications
+Theorem 1.1 uses 3-local Hamiltonians that act on particles that may be arbitrarily far apart. From
+a practical point of view, it is often diﬃcult to create controlled interactions between particles
+located far-away from each other. Moreover, three-particle Hamiltonians are technologically very
+diﬃcult to realize. If one wants to physically realize the adiabatic algorithms, it would be much
+better to have only two-local interactions between nearest neighbor particles. To this end we prove
+2Namely, [4] showed that adiabatic computation using simulatable Hamiltonians is as powerful as standard quan-
+tum computation. Simulatable Hamiltonians are Hamiltonians that can be simulated eﬃciently by a quantum circuit.
+They are very diﬀerent from local Hamiltonians, and they cannot even be written explicitly. Instead, such Hamilto-
+nians are speciﬁed using products of local unitary matrices.
+3
+the following theorem. This, we believe, brings the adiabatic computation model one step closer to
+physical realization.
+Theorem 1.3 Any quantum computation can be eﬃciently simulated by an adiabatic computation
+with two-local nearest neighbor Hamiltonians operating on six-state particles set on a two dimen-
+sional grid.
+The need for six-state particles arises from our construction. It is an open question whether this
+can be improved.
+Theorems 1.1 and 1.3 open up the possibility of physically realizing universal quantum com-
+putation using adiabatically evolving quantum systems. As mentioned before, there are possible
+advantages to this approach: adiabatic quantum computation is resilient to certain types of noise [8].
+An important component of this resilience is the existence of a spectral gap in the Hamiltonian.
+It is well known in physics that such a gap plays an important role in the context of protecting
+quantum systems from noise. However, it remains to be further studied, both experimentally and
+theoretically, what the right model for noisy adiabatic computation is, and whether fault tolerant
+adiabatic computation can be achieved. We refer the reader to further discussion in Subsection 1.6.
+1.3
+Proof of Theorem 1.1: Overview
+Given an arbitrary quantum circuit [26], our goal is to design an adiabatic computation whose
+output is the same as that of the quantum circuit.
+Some similarities between the models are
+obvious: one model involves unitary gates on a constant number of qubits, while the other involves
+local Hamiltonians. However, after some thought, one eventually arrives at the following diﬃculty.
+The output state of the adiabatic computation is the ground state of Hﬁnal. The output state of
+the quantum circuit is its ﬁnal state, which is unknown to us. How can we specify Hﬁnal without
+knowing the output state of the quantum circuit? Notice that this state can be some complicated
+quantum superposition. One might wonder why our task is not trivial, since this state does have
+an eﬃcient local classical description, namely the quantum circuit. However, local quantum gates,
+which operate in sequence to generate a non-local overall action, are very diﬀerent from local
+Hamiltonians, which correspond to simultaneous local constraints. To explain the solution, we ﬁrst
+set some notations.
+Without loss of generality we assume that the input to the quantum circuit consists of n qubits
+all initialized to |0⟩’s.3 Then, a sequence of L unitary gates, U1, . . . , UL, each operating on one or
+two qubits, is applied to the state. The system’s state after the ℓ’th gate is |α(ℓ)⟩. The output
+of the quantum circuit is in general a complicated quantum state |α(L)⟩of n qubits, which is
+then measured in the standard basis. We now want to associate with it a corresponding adiabatic
+computation.
+A ﬁrst natural attempt would be to deﬁne Hﬁnal as a local Hamiltonian with |α(L)⟩as its ground
+state. However, this attempt encounters the diﬃculty mentioned above: not knowing |α(L)⟩, it
+seems impossible to explicitly specify Hﬁnal. The key to resolve this diﬃculty is the observation that
+the ground state of Hﬁnal need not necessarily be the state |α(L)⟩. It is suﬃcient (under some mild
+restrictions) that the ground state has a non-negligible inner product with |α(L)⟩. This gives us
+signiﬁcant ﬂexibility in designing Hﬁnal. Our idea is to base our solution on a seemingly unrelated
+ingenious result of Kitaev [22], in which he provides the ﬁrst quantum NP-complete problem,
+namely, local Hamiltonians. This result can be viewed as the quantum analogue of the Cook-
+Levin theorem [28], which states that 3-Sat is NP-complete. For his proof, Kitaev deﬁned a local
+3Otherwise, the ﬁrst n gates can be used to ﬂip the qubits to the desired input.
+4
+Hamiltonian that checks the time propagation of a quantum circuit. Kitaev’s local Hamiltonian
+has as its ground state the entire history of the quantum computation, in superposition:
+|η⟩
+:=
+1
+√
+L + 1
+L
+X
+ℓ=0
+|α(ℓ)⟩⊗|1ℓ0L−ℓ⟩c.
+(1)
+The right (L qubits) register is a clock that counts the steps by adding 1s from left to right. The
+superscript c denotes clock qubits. We note that this state has a non-negligible projection on our
+desired state |α(L)⟩. Hence, instead of designing a Hamiltonian that has the ﬁnal unknown state
+of the circuit as its ground state, a task that seems impossible, we can deﬁne Hﬁnal to be Kitaev’s
+local Hamiltonian. Why is it possible to deﬁne a local Hamiltonian whose ground state is |η⟩,
+whereas the same task seems impossible with |α(L)⟩? The idea is that the unary representation of
+the clock enables a local veriﬁcation of correct propagation of the computation from one step to
+the next, which cannot be done without the intermediate computational steps.
+We thus choose Kitaev’s Hamiltonian [22] to be our Hﬁnal. This Hamiltonian involves ﬁve body
+interactions (three clock particles and two computation particles).
+For the initial Hamiltonian
+Hinit we require that it has |α(0)⟩⊗|0L⟩c, the ﬁrst term in the history state, as its unique ground
+state. It is easy to deﬁne such a local Hamiltonian, because |α(0)⟩⊗|0L⟩c is a tensor product
+state. Crucially, Hinit and Hﬁnal can be constructed eﬃciently from the given quantum circuit; no
+knowledge of |α(L)⟩is required for the construction.
+A technical problem lies in showing that the spectral gap of the intermediate Hamiltonian H(s)
+is lower bounded by some inverse polynomial (more speciﬁcally, we show it is larger than 1/L2). To
+do this, we use a mapping of the Hamiltonian to a Markov chain corresponding to a random walk
+on the L + 1 time steps. We then apply the conductance bound from the theory of rapidly mixing
+Markov chains [34] to bound the spectral gap of this chain. We note that, in general, applying the
+conductance bound requires knowing the limiting distribution of the chain, which in our case is
+hard since it corresponds to knowing the coeﬃcients of the ground state for all the Hamiltonians
+H(s). We circumvent this problem by noticing that it is actually suﬃcient in our case to know very
+little about the limiting distribution of the Markov chain, namely that it is monotone (in a certain
+sense to be deﬁned later). This allows us to apply the conductance bound, and deduce that the
+spectral gap is Ω(1/L2). From this it follows that the running time of the adiabatic computation is
+polynomial. Extracting the output of the quantum circuit from the history state eﬃciently is easy:
+Measure all the qubits of the clock and if the clock is in the state |1ℓ⟩, the computational qubits
+carry the result of the circuit. Otherwise, start from scratch.4
+The above scheme gives a proof of Theorem 1.1 that uses 5-local Hamiltonians, and runs in
+time roughly O(L5). The improvement to 3-locality is based on a simple idea (used in [20] to prove
+that the 3-local Hamiltonian problem is quantum NP-complete) but obtaining a lower bound on
+the spectral gap is signiﬁcantly more involved technically. We postpone its explanation to the body
+of the paper. The running time we achieve in this case is roughly O(L14).
+1.4
+Proof of Theorem 1.3: Overview
+The idea underlying the proof of Theorem 1.1 by itself does not suﬃce to prove Theorem 1.3.
+The basic problem lies in arranging suﬃcient interaction between the computational and the clock
+4This gives an overhead factor of L which can be avoided by adding O( 1
+ǫ L) identity gates to the quantum circuit
+at the end, which has the eﬀect that most of the history state |η⟩is concentrated on the ﬁnal state |α(L)⟩. See
+Subsection 3.1.3 for more details.
+5
+particles, since if the particles are set on a grid, each clock particle can only interact with four neigh-
+bors. We circumvent this problem as follows. Instead of having separate clock and computational
+particles, we now assign to each particle both clock and computational degrees of freedom (this is
+what makes our particles six-state). We then construct a computation that propagates locally over
+the entire set of particles, snaking up and down each column of the lattice. The adiabatic evolution
+now ends up in the history state of this snake-like sequence of states.
+The lower bound on the spectral gap is obtained in an essentially identical way as in the 3-local
+Hamiltonian case.
+1.5
+Related Work
+After the preliminary version of this paper appeared [2], the results regarding Quantum-NP com-
+pleteness were tightened by [21] to show that the 2-local Hamiltonian problem is Quantum-NP
+complete. Following the ideas presented in the current paper, [21] used their result to show that
+Theorem 1.1 holds when the Hamiltonians are 2-local.
+The idea to use an inverse polynomial spectral gap for fault tolerance is certainly not new. It is
+a crucial ingredient in topological (and later, geometrical) quantum computation [18,23,27]. Note,
+however, that in those models the spectral gap has no eﬀect on the running time or on any other
+algorithmic aspects, and it is used only to separate the computational subspace from the “noisy”
+subspace. In contrast, the spectral gap in adiabatic computation is crucial from the algorithmic
+point of view, since it determines the time complexity of the computation.
+1.6
+Open Questions
+This paper demonstrates that quantum computation can be studied and implemented entirely
+within the adiabatic computation model, without losing its computational power.
+This result
+raises many open questions in various directions. First, it would be interesting to determine if the
+parameters presented in this work can be improved. For example, it might be possible to shorten
+the running time of our adiabatic simulation. Decreasing the dimensionality of the particles used
+in Theorem 1.3 from six to two or three might be important for implementation applications. An
+interesting question is whether Theorem 1.3 can be achieved using a one dimensional instead of a
+two dimensional grid.
+Second, the possibility of fault tolerant adiabatic computation deserves to be studied both
+experimentally and theoretically. Since the publication of the preliminary version of the current
+paper [2], several researchers have begun to study adiabatic computation in the presence of noise
+[1,31,33]. However, it is still unclear whether adiabatic evolution might be helpful for the physical
+implementation of quantum computers.
+Our results imply the equivalence between standard quantum computation and various other
+variants of adiabatic computation that have been considered in the literature and that are more
+general than our model. These include adiabatic computation with a general path between Hinit
+and Hﬁnal, rather than a straight line (see [4] and [12] for a rigorous deﬁnition), and adiabatic
+computation with explicit sparse Hamiltonians [4] (see Corollary 1.2). A problem we leave open
+is to characterize the computational power of adiabatic optimization, studied in [9,10,14]. In this
+model, the initial state is a tensor product of qubits in the state
+1
+√
+2(|0⟩+|1⟩), the ﬁnal Hamiltonian
+is diagonal, and the evolution is carried out on a straight line.
+It is still possible that such a
+computation can be simulated eﬃciently by a classical Turing Machine.
+Finally, we hope that the adiabatic framework might lead to the discovery of new quantum
+algorithms. As shown in this paper, as well as in [4], tools from probability theory, mathematical
+6
+physics and spectral gap analysis might turn out to be relevant and useful. In order to improve
+our understanding of the beneﬁts of the adiabatic paradigm, it might be insightful to see adiabatic
+versions of known quantum algorithms, presented in a meaningful way.
+Organization:
+In Section 2 we describe the model of adiabatic computation and state some
+relevant facts about Markov chains. Section 3 shows how adiabatic systems with local Hamilto-
+nians allowing ﬁve- and later three-body interactions, can eﬃciently simulate standard quantum
+computations. Section 4 shows how to adapt the construction to a two-dimensional grid.
+2
+Preliminaries
+2.1
+Hamiltonians of n-Particle Systems
+For background on n-qubit systems, quantum circuits and Hamiltonians, see [26]. An n-particle sys-
+tem is described by a state in Hilbert space of dimension dn, the tensor product of n d-dimensional
+Hilbert spaces. For simplicity, we restrict our discussion in this subsection to quantum systems
+composed of 2-dimensional particles, i.e., qubits; a similar discussion holds for higher dimensional
+particles (such as the 6-dimensional case we consider later).
+In the standard model of quantum computation, the state of n qubits evolves in discrete time
+steps by unitary operations. In fact, the underlying physical description of this evolution is con-
+tinuous, and is governed by Schr¨odinger’s equation: −i d
+dt|ψ(t)⟩= H(t)|ψ(t)⟩. Here |ψ(t)⟩is the
+state of the n qubits at time t, and H(t) is a Hermitian 2n × 2n matrix operating on the space
+of n qubits. This H(t) is the Hamiltonian operating on a system; it governs the dynamics of the
+system. Given that the state of the system at time t = 0 is equal to |ψ(0)⟩, one can in principle
+solve Schr¨odinger’s equation with this initial condition, to get |ψ(T)⟩, the state of the system at a
+later time t = T. The fact that the Hamiltonian is Hermitian corresponds to the familiar fact that
+the discrete time evolution of the quantum state from time t1 to a later time t2 is unitary.
+We sometimes refer to eigenvalues of Hamiltonians as energies. The ground energy of a Hamil-
+tonian is its lowest eigenvalue and the corresponding eigenvector(s) are called ground state(s). We
+deﬁne ∆(H), the spectral gap of a Hamiltonian H, to be the diﬀerence between the lowest eigen-
+value of H and its second lowest eigenvalue. (∆(H) = 0 if the lowest eigenvalue is degenerate,
+namely, has more than one eigenvector associated with it). We deﬁne the restriction of H to some
+subspace S, denoted HS, as ΠSHΠS where ΠS is the orthogonal projection on S.
+A Hamiltonian on an n-particle system represents a certain physical operation that one can, in
+principle, apply to an n-particle system. However, it is clear that one cannot eﬃciently apply any
+arbitrary Hamiltonian (just describing it requires roughly 22n space). We say that a Hamiltonian
+H is k-local if H can be written as P
+A HA where A runs over all subsets of k particles, and HA
+operates trivially on all but the particles in A (i.e., it is a tensor product of a Hamiltonian on A
+with identity on the particles outside of A). Notice that for any constant k, a k-local Hamiltonian
+on n-qubits can be described by 22knk = poly(n) numbers. We say that H is local if H is k-local
+for some constant k.
+In this paper we restrict our attention to k-local Hamiltonians. This requirement corresponds to
+the fact that all known interactions in nature involve a constant number of particles. We attempt
+to make k as small as possible to make the Hamiltonian easier to implement.
+7
+2.2
+The Model of Adiabatic Computation
+The cornerstone of the adiabatic model of computation is the celebrated adiabatic theorem [19,25].
+Consider a time-dependent Hamiltonian H(s), s ∈[0, 1], and a system initialized at time t = 0
+in the ground state of H(0) (here and in the following we assume that for all s ∈[0, 1], H(s) has
+a unique ground state). Let the system evolve according to the Hamiltonian H(t/T) from time
+t = 0 to time T. We refer to such a process as an adiabatic evolution according to H for time
+T. The adiabatic theorem aﬃrms that for large enough T the ﬁnal state of the system is very
+close to the ground state of H(1). Just how large T should be for this to happen is determined by
+the spectral gap of the Hamiltonians H(s). Such an upper bound on T is given in the following
+theorem, adapted from [29] (whose proof in turn is based on [6]; see also [5] for a recent elementary
+proof of a slightly weaker version).
+Theorem 2.1 (The Adiabatic Theorem (adapted from [29])) Let Hinit and Hﬁnal be two Hamil-
+tonians acting on a quantum system and consider the time-dependent Hamiltonian H(s) := (1 −
+s)Hinit + sHﬁnal. Assume that for all s, H(s) has a unique ground state. Then for any ﬁxed δ > 0,
+if
+T
+≥
+Ω
+
+∥Hﬁnal −Hinit∥1+δ
+ǫδ mins∈[0,1]{∆2+δ(H(s))}
+
+(2)
+then the ﬁnal state of an adiabatic evolution according to H for time T (with an appropriate setting
+of global phase) is ǫ-close in ℓ2-norm to the ground state of Hﬁnal. The matrix norm is the spectral
+norm ∥H∥:= maxw ∥Hw∥/∥w∥.
+One should think of δ as being some ﬁxed constant, say, 0.1. We cannot take δ = 0 because of the
+constant hidden in the Ωnotation, which goes to inﬁnity as δ goes to 0.
+Let us now describe the model of adiabatic computation. In this paper we use the following
+deﬁnition of adiabatic computation that slightly generalizes that of Farhi et al. [14]. The adiabatic
+‘circuit’ is determined by Hinit and Hﬁnal and the output of the computation is (close to) the ground
+state of Hﬁnal.
+Deﬁnition 2.2 A k-local adiabatic computation AC(n, d, Hinit, Hﬁnal, ǫ) is speciﬁed by two k-local
+Hamiltonians, Hinit and Hﬁnal acting on n d-dimensional particles, such that both Hamiltonians
+have unique ground states. The ground state of Hinit is a tensor product state. The output is a
+state that is ǫ-close in ℓ2-norm to the ground state of Hﬁnal. Let T be the smallest time such that
+the ﬁnal state of an adiabatic evolution according to H(s) := (1 −s)Hinit + sHﬁnal for time T is
+ǫ-close in ℓ2-norm to the ground state of Hﬁnal. The running time of the adiabatic algorithm is
+deﬁned to be T · maxs ∥H(s)∥.
+Observe that we have chosen our deﬁnition of running time to be T · maxs ∥H(s)∥and not T.
+Notice that if the Hamiltonians are multiplied by some factor, this divides the bound of Equation
+2, and hence T, by the same factor. Hence, if the running time is deﬁned to be T one would be able
+to achieve arbitrarily small running times, by multiplying the Hamiltonians by large factors. Our
+deﬁnition, on the other hand, is invariant under a multiplication of the Hamiltonian by an overall
+factor, and so takes into account the known physical trade-oﬀbetween time and energy.5
+5This trade-oﬀbetween time and the norm of the Hamiltonian (namely, the energy), is manifested in Schr¨odinger’s
+equation whose solution does not change if time is divided by some factor and at the same time the Hamiltonian is
+multiplied by the same factor.
+8
+The right hand side of Equation 2 can be used to provide an upper bound on the running time
+of an adiabatic computation. Hence, in order to show that an adiabatic algorithm is eﬃcient, it is
+enough to use Hamiltonians of at most poly(n) norm, and show that for all s ∈[0, 1] the spectral
+gap ∆(H(s)) is at least inverse polynomial in n.
+We note that in certain cases, it is possible to obtain a stronger upper bound on the running
+time. Indeed, assume there exists a subspace S such that for all s ∈[0, 1], H(s) leaves S invariant,
+i.e., H(s)(S) ⊆S. Equivalently, H(s) is block diagonal in S and its orthogonal space S⊥. Consider
+HS(s), the restriction of H(s) to S. Then, starting from a state inside S, an adiabatic evolution
+according to H is identical to an adiabatic evolution according to HS (this follows from Schr¨odinger’s
+equation). Hence, we can potentially obtain a stronger upper bound by replacing ∆(H(s)) with
+∆(HS(s)) in Equation 2. This stronger upper bound will be used in our ﬁrst adiabatic algorithm.
+Finally, let us mention that one can deﬁne more general models of adiabatic computation. For
+example, one might consider non-local Hamiltonians (see [4]). Another possible extension is to
+consider more general paths between Hinit and Hﬁnal (see, e.g., [12, 8, 4]). Obviously, our main
+results, such as Theorem 1.1, hold also for these more general models.
+2.3
+Markov Chains and Hermitian Matrices
+Under certain conditions, there exists a standard mapping of Hamiltonians to Markov chains (for
+background on Markov chains, see [24]). The following fact is useful to show that this mapping
+applies in the case we analyze.
+Fact 2.3 (Adapted from Perron’s Theorem, Theorem 8.2.11 in [17]) Let G be a Hermitian
+matrix with real non-negative entries. If there exists a ﬁnite k such that all entries of Gk are posi-
+tive, then G’s largest eigenvalue is positive, and all other eigenvalues are strictly smaller in absolute
+value. Moreover, the corresponding eigenvector is unique, and all its entries are positive.
+We deﬁne the mapping for G, a Hermitian matrix operating on an L + 1 dimensional Hilbert
+space. Suppose that all the entries of G are real and non-negative, that its eigenvector (α0, . . . , αL)
+with largest eigenvalue µ satisﬁes αi > 0 for all 0 ≤i ≤L and that µ > 0. Deﬁne P by:
+Pij
+:=
+αj
+µαi
+Gij.
+(3)
+The matrix P is well deﬁned, and is stochastic because all its entries are non-negative and each of
+its rows sums up to one. It is easy to verify the following fact:
+Fact 2.4 The vector (v0, . . . , vL) is an eigenvector of G with eigenvalue δ if and only if (α0v0, . . . , αLvL)
+is a left eigenvector of P with eigenvalue δ/µ.
+We will consider G of the form G = I −H for some Hamiltonian H. The above fact implies that
+if (α0, . . . , αL) is the ground state of H with eigenvalue λ then (α2
+0, . . . , α2
+L) is a left eigenvector
+of P with maximal eigenvalue 1. By normalizing, we obtain that π := (α2
+0/Z, . . . , α2
+L/Z) is the
+limiting distribution of P, where Z = P α2
+i . Moreover, the gap between P’s largest and second
+largest eigenvalues is equal to ∆(H)/(1 −λ).
+2.4
+Spectral Gaps of Markov Chains
+Given a stochastic matrix P with limiting distribution π, and a subset B ⊆{0, . . . , L}, the ﬂow
+from B is given by F(B) := P
+i∈B,j /∈B πiPij. Deﬁne the π-weight of B as π(B) := P
+i∈B πi. The
+conductance of P is deﬁned by ϕ(P) := minB F(B)/π(B), where we minimize over all non-empty
+subsets B ⊆{0, . . . , L} with π(B) ≤1
+2.
+9
+Theorem 2.5 (The conductance bound [34])) The eigenvalue gap of P is at least 1
+2ϕ(P)2.
+3
+Equivalence of Adiabatic and Quantum Computation
+Here we prove Theorem 1.1, by showing how to simulate a quantum circuit with L two-qubit gates
+on n qubits by an adiabatic computation on n+L qubits (the other direction was shown in [14,9]).
+We ﬁrst allow ﬁve qubit interactions. We later show how to reduce it to three, using techniques
+that will also be used in Section 4.
+3.1
+Five-local Hamiltonian
+Theorem 3.1 Given a quantum circuit on n qubits with L two-qubit gates implementing a uni-
+tary U, and ǫ > 0, there exists a 5-local adiabatic computation AC(n + L, 2, Hinit, Hﬁnal, ǫ) whose
+running time is poly(L, 1
+ǫ) and whose output (after tracing out some ancilla qubits) is ǫ-close (in
+trace distance) to U|0n⟩. Moreover, Hinit and Hﬁnal can be computed by a polynomial time Turing
+machine.
+The running time we obtain here is O(ǫ−(5+3δ)L5+2δ) for any ﬁxed δ > 0.
+3.1.1
+The Hamiltonian
+For our construction we use the Hamiltonian deﬁned in [22]. Denote |γℓ⟩:= |α(ℓ)⟩⊗|1ℓ0L−ℓ⟩c,
+where |α(ℓ)⟩denotes the state of the circuit after the ℓth gate and the superscript c denotes the
+clock qubits. We would like to deﬁne a local Hamiltonian Hinit with ground state |γ0⟩= |0n⟩⊗|0L⟩c,
+and a local Hamiltonian Hﬁnal with ground state |η⟩=
+1
+√L+1
+PL
+ℓ=0 |γℓ⟩as in Equation 1. To do
+this, we write Hinit and Hﬁnal as a sum of terms:
+Hinit := Hclockinit + Hinput + Hclock
+Hﬁnal := 1
+2
+L
+X
+ℓ=1
+Hℓ+ Hinput + Hclock.
+The terms in Hﬁnal (and likewise in Hinit) are deﬁned such that the only state whose energy (i.e.,
+eigenvalue) is 0 is the desired ground state. This is done by assigning an energy penalty to any
+state that does not satisfy the required properties of the ground state. The diﬀerent terms, which
+correspond to diﬀerent properties of the ground states, are described in the following paragraphs.
+The adiabatic evolution then follows the time-dependent Hamiltonian
+H(s)
+=
+(1 −s)Hinit + sHﬁnal.
+(4)
+Notice that as s goes from 0 to 1, Hclockinit is slowly replaced by 1
+2
+PL
+ℓ=1 Hℓwhile Hinput and Hclock
+are held constant.
+We now describe each of the terms. First, Hclock checks that the clock’s state is of the form
+|1ℓ0L−ℓ⟩c for some 0 ≤ℓ≤L. This is achieved by assigning an energy penalty to any basis state
+on the clock qubits that contains the sequence 01,
+Hclock
+:=
+L−1
+X
+ℓ=1
+|01⟩⟨01|c
+ℓ,ℓ+1,
+10
+where the subscript indicates which clock qubits the projection operates on. Note that illegal clock
+states are eigenstates of Hclock with eigenvalue at least 1; legal clock states have eigenvalue 0.
+Next, Hinput checks that if the clock is |0L⟩c, the computation qubits must be in the state |0n⟩,
+Hinput :=
+n
+X
+i=1
+|1⟩⟨1|i ⊗|0⟩⟨0|c
+1.
+We complete the description of Hinit with Hclockinit whose goal is to check that the clock’s state
+is |0L⟩c,
+Hclockinit
+:=
+|1⟩⟨1|c
+1.
+Claim 3.2 The state |γ0⟩is a ground state of Hinit with eigenvalue 0.6
+Proof: It is easy to verify that Hinit|γ0⟩= 0. As a sum of projectors, Hinit is positive semideﬁnite
+and hence |γ0⟩is a ground state of Hinit.
+We now proceed to the ﬁrst term in Hﬁnal. The Hamiltonian Hℓchecks that the propagation
+from step ℓ−1 to ℓis correct, i.e., that it corresponds to the application of the gate Uℓ. For
+1 < ℓ< L, it is deﬁned as
+Hℓ
+:=
+I ⊗|100⟩⟨100|c
+ℓ−1,ℓ,ℓ+1 −Uℓ⊗|110⟩⟨100|c
+ℓ−1,ℓ,ℓ+1
+−U†
+ℓ⊗|100⟩⟨110|c
+ℓ−1,ℓ,ℓ+1 + I ⊗|110⟩⟨110|c
+ℓ−1,ℓ,ℓ+1.
+(5)
+Intuitively, the three-qubit terms above move the state of the clock one step forward, one step
+backward, or leave it unchanged. The accompanying matrices Uℓ, U†
+ℓdescribe the associated time
+evolution. For the boundary cases ℓ= 1, L, we omit one clock qubit from these terms and deﬁne
+H1
+:=
+I ⊗|00⟩⟨00|1,2 −U1 ⊗|10⟩⟨00|1,2 −U†
+1 ⊗|00⟩⟨10|1,2 + I ⊗|10⟩⟨10|1,2
+HL
+:=
+I ⊗|10⟩⟨10|L−1,L −UL ⊗|11⟩⟨10|L−1,L −U†
+L ⊗|10⟩⟨11|L−1,L + I ⊗|11⟩⟨11|L−1,L. (6)
+Claim 3.3 The history state |η⟩is a ground state of Hﬁnal with eigenvalue 0.
+Proof: It is easy to verify that Hﬁnal|η⟩= 0. It remains to notice that for all 1 ≤ℓ≤L, Hℓis
+positive semideﬁnite and hence so is Hﬁnal.
+Remark: Strictly speaking, Theorem 3.1 holds even if we remove the terms Hclock and Hinput from
+both Hinit and Hﬁnal. We include them mainly for consistency with the rest of the paper.
+3.1.2
+Spectral Gap in a Subspace
+Let S0 be the L+1-dimensional subspace spanned by |γ0⟩, . . . , |γL⟩. It is easy to verify the following
+claim.
+Claim 3.4 The subspace S0 is invariant under H(s), i.e., H(s)(S0) ⊆S0
+In this subsection, we show that the spectral gap of HS0(s), the restriction of H to S0, is inverse
+polynomial in L. As mentioned in Subsection 2.2, this, together with Claim 3.4, is enough to obtain
+a bound on the running time of the adiabatic algorithm.
+6The state |γ0⟩is in fact the unique ground state of Hinit as will become apparent from the proof of the spectral
+gap. A similar statement holds for Claim 3.3.
+11
+Lemma 3.5 The spectral gap of the restriction of H(s) to S0 satisﬁes ∆(HS0(s)) = Ω(L−2) for all
+s ∈[0, 1].
+Proof: Let us write the Hamiltonians HS0,init and HS0,ﬁnal in the basis |γ0⟩, . . . , |γL⟩of S0. Both
+Hclock and Hinput are 0 on S0 and can thus be ignored. We have the following (L + 1) × (L + 1)
+matrices:
+HS0,init
+=
+
+
+
+
+
+0
+0
+. . .
+0
+0
+1
+. . .
+0
+...
+...
+...
+...
+0
+0
+. . .
+1
+
+
+
+
+,
+(7)
+HS0,ﬁnal
+=
+1
+2|γ0⟩⟨γ0| −1
+2|γ0⟩⟨γ1| −1
+2|γL⟩⟨γL-1| + 1
+2|γL⟩⟨γL|
++
+L−1
+X
+ℓ=1
+(−1
+2|γℓ⟩⟨γℓ−1| + |γℓ⟩⟨γℓ| −1
+2|γℓ⟩⟨γℓ+1|)
+=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+2
+-1
+2
+0
+· · ·
+0
+-1
+2
+1
+-1
+2
+0
+...
+...
+0
+-1
+2
+1
+-1
+2
+0
+...
+...
+...
+...
+...
+...
+...
+...
+0
+-1
+2
+1
+- 1
+2
+0
+0
+- 1
+2
+1
+-1
+2
+0
+· · ·
+0
+- 1
+2
+1
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(8)
+We now lower bound ∆(HS0(s)). We consider two cases:
+The case s < 1/3: Here, HS0(s) is suﬃciently close to HS0,init (whose spectral gap is 1) so we can
+apply the following standard lemma (see, e.g., [7], Page 244).
+Lemma 3.6 (Gerschgorin’s Circle Theorem) Let A be any matrix with entries aij. Consider
+the discs in the complex plane given by
+Di =
+n
+z | |z −aii| ≤
+X
+j̸=i
+|aij|
+o
+,
+1 ≤i ≤n.
+Then the eigenvalues of A are contained in ∪Di and any connected component of ∪Di contains as
+many eigenvalues of A as the number of discs that form this component.
+For s < 1/3, HS0(s)1,1 < 1/6 and P
+j̸=1 HS0(s)1,j < 1/6. Moreover, for any i ̸= 1, HS0(s)i,i >
+5/6 and P
+j̸=i HS0(s)i,j < 1/6. By the above lemma, we obtain that there is one eigenvalue smaller
+than 1/3 while all other eigenvalues are larger than 2/3. Hence, the spectral gap is at least 1/3.
+The case s ≥1/3: We note that HS0,ﬁnal is the Laplacian of the simple random walk [24] of a
+particle on a line of length L + 1. A standard result in Markov chain theory implies ∆(HS0,ﬁnal) =
+Ω(1/L2) [24]. For s ≥1/3, HS0(s) is suﬃciently close to HS0,ﬁnal to apply Markov chain techniques,
+as we show next.
+Let (α0, . . . , αL)† be the ground state of HS0(s) with eigenvalue λ. Deﬁne the Hermitian matrix
+G(s) = I −HS0(s). It is easy to see that G(s) satisﬁes the conditions of Fact 2.3 for all s > 0.
+12
+We obtain that the largest eigenvalue µ = 1 −λ of G(s) is positive and non-degenerate and the
+corresponding eigenvector (α0, . . . , αL)† has positive entries. We can now map the matrix G(s) to
+a stochastic matrix P(s) as described in Subsection 2.3. The transition matrix P(s) describes a
+random walk on the line of L + 1 sites (Fig. 1). Fact 2.4 implies that the limiting distribution of
+P(s) is given by π = (α2
+0/Z, . . . , α2
+L/Z) where Z = P
+i α2
+i .
+Pk,k−1
+k −1
+k + 1
+k
+Pk,k+1
+. . .
+1
+0
+L
+. . .
+Figure 1: The random walk of P(s)
+We bound the spectral gap of P(s) using the conductance bound (see Subsection 2.4). To do
+this we need to know that π is monotone. We ﬁrst show:
+Claim 3.7 For all 0 ≤s ≤1, the ground state of HS0(s) is monotone, namely α0 ≥α1 ≥. . . ≥
+αL ≥0.
+Proof: The case s = 0 is obvious, so assume s > 0.
+We ﬁrst claim that the ground state
+(α0, . . . , αL)† of HS0(s) = I −G(s) can be written as the limit
+1
+c0
+lim
+ℓ→∞(G(s)/µ)ℓ(1, . . . , 1)†
+for some constant c0 > 0. To see this, let |v0⟩, . . . , |vL⟩be an orthonormal set of eigenvectors of
+G(s), with corresponding eigenvalues µ0 ≥µ1 ≥. . . ≥µL. By Fact 2.3, the largest eigenvalue
+corresponds to a unique eigenvector, and hence we have |v0⟩= (α0, . . . , αL)†, and µ0 = µ.
+The set of eigenvectors |vi⟩forms an orthonormal basis, and we can write (1, . . . , 1)† in terms
+of this basis: (1, . . . , 1)† = P
+i ci|vi⟩. Now, we have that (G(s)/µ)ℓ(1, . . . , 1)† = P
+i ci(µi
+µ )ℓ|vi⟩. By
+Fact 2.3 we have |µi| < µ for all i ̸= 0, and µ > 0. We thus have that limℓ→∞(G(s)/µ)ℓ(1, . . . , 1)† =
+c0|v0⟩.
+It is easy to check that G(s) preserves monotonicity, namely, if G(s) is applied to a monotone
+vector, the result is a monotone vector. Hence, when G(s)/µ is applied to the monotone vector
+(1, . . . , 1)†, the result is a monotone vector. Thus, c0|v0⟩is monotone. Finally, we observe that
+c0 > 0. This is because c0 is the inner product between the all 1 vector, and |v0⟩whose entries are
+all positive by Fact 2.3. This implies that |v0⟩is also monotone, as desired.
+It follows that π is also monotone. We use this and simple combinatorial arguments to prove
+the following claim.
+Claim 3.8 For all 1/3 ≤s ≤1, ϕ(P(s)) ≥
+1
+6L.
+Proof: We show that for any nonempty B ⊆{0, . . . , L}, F(B)/π(B) ≥
+1
+6L. We consider two cases.
+First, assume that 0 ∈B. Let k be the smallest such that k ∈B but k + 1 /∈B. Then,
+F(B) ≥πkP(s)k,k+1 = πk ·
+√πk+1
+µ√πk
+G(s)k,k+1 =
+√πkπk+1
+1 −λ
+G(s)k,k+1 ≥πk+1
+1 −λG(s)k,k+1
+where the last inequality follows from the monotonicity of π. Using the deﬁnition of G and the
+assumption that s ≥1/3 we get that G(s)k,k+1 ≥1/6. We also have 0 < 1 −λ ≤1, where the
+13
+second inequality follows from the fact that HS0(s) is positive semideﬁnite, and the ﬁrst follows
+from µ > 0 which we previously deduced from Fact 2.3. Hence,
+F(B)
+π(B) ≥πk+1
+6π(B)
+(9)
+By π(B) ≤1/2, we have π({k + 1, . . . , L}) ≥1/2. Together with π({k + 1, . . . , L}) ≤Lπk+1 we
+obtain πk+1 ≥1/(2L). This yields the desired bound F(B)/π(B) ≥1/(6L).
+Now assume that 0 /∈B and let k be the smallest such that k /∈B and k + 1 ∈B. It is easy to
+see that πkP(s)k,k+1 = πk+1P(s)k+1,k. Hence, using the same argument as before we can see that
+Equation 9 holds in this case too. Since B ⊆{k + 1, . . . , L}, we have π({k + 1, . . . , L}) ≥π(B).
+Hence, πk+1 ≥π(B)/L. Again, this yields the bound F(B)/π(B) ≥1/(6L).
+By Theorem 2.5, we have that the spectral gap of P(s) is larger than 1/(2 · (6)2 · L2). By Sub-
+section 2.3, we have that ∆(HS0) ≥µ/(2 · (6)2L2). Finally, notice that µ = 1 −λ ≥1
+2, because
+λ ≤⟨γ0|HS0(s)|γ0⟩= s
+2 ≤1
+2.
+3.1.3
+Running Time
+We now complete the proof of Theorem 3.1. Note that we have already proved something which is
+very close to Theorem 3.1.
+Claim 3.9 Given a quantum circuit on n qubits with L gates, the adiabatic algorithm with Hinit
+and Hﬁnal as deﬁned in the previous section, with T = O(ǫ−δL4+2δ) for some ﬁxed δ > 0, outputs
+a ﬁnal state that is within ℓ2-distance ǫ of the history state of the circuit, |η⟩. The running time of
+the algorithm is O(T · L).
+Proof: Claim 3.4 shows that S0 is invariant under H. Hence, as mentioned in Subsection 2.2, an
+adiabatic evolution according to H is identical to an adiabatic evolution according to HS0. Using
+Lemma 3.5 and Theorem 2.1 (with ∥Hinit −Hﬁnal∥= O(1)), we obtain that for T as above the
+ﬁnal state (with global phase adjusted appropriately) is indeed ǫ-close in ℓ2-norm to |η⟩. By our
+deﬁnition, the running time of the adiabatic algorithm is O(T · L) since ∥H(s)∥≤(1 −s)∥Hinit∥+
+s∥Hﬁnal∥= O(L + n) = O(L). The last equality follows from n = O(L), because each qubit is
+assumed to participate in the computation (otherwise we can omit it).
+In fact, one might be satisﬁed with this claim, which enables generating adiabatically a state
+which is very close to |η⟩, instead of our desired |α(L)⟩. To see why this might be suﬃcient to
+simulate quantum circuits, suppose for a moment that ǫ is 0, and the ﬁnal state is exactly |η⟩.
+As mentioned in the introduction, we can now measure the clock qubits of the history state, and
+with probability 1/L the outcome is ℓ= L, which means that the state of the ﬁrst register is the
+desired state |α(L)⟩. If the measurement yields another value, we repeat the adiabatic algorithm
+from scratch. To get ℓ= L with suﬃciently high probability, we repeat the process O(L) times,
+which introduces an overhead factor of L. The above discussion is also true with ǫ > 0, as long as
+it is much smaller than 1/L, the weight of |α(L)⟩in |η⟩.
+However, this is not suﬃcient to complete the proof of Theorem 3.1. Indeed, the theorem as
+stated follows our deﬁnition of the model of adiabatic computation, which allows to perform one
+adiabatic evolution and then measure (and possibly trace out some qubits). Classical postprocessing
+such as conditioning on ℓbeing equal to L, and repeating the computation if it is not, are not
+allowed. Hence, we need to adiabatically generate a state that is close to |α(L)⟩.
+14
+This technical issue can be resolved with the following simple trick, which at the same time
+allows us to avoid the overhead factor of L introduced before.
+We simply add another O(1
+ǫ L)
+identity gates to the original quantum circuit at the end of its computation and then apply the
+adiabatic simulation to this modiﬁed circuit. This modiﬁcation increases the weight of |α(L)⟩in
+the history state. The following lemma makes this precise.
+Lemma 3.10 Assume we can transform any given quantum circuit with L two-qubit gates on n
+qubits into a k-local adiabatic computation on n+L d-dimensional particles whose output is ǫ close
+in ℓ2-norm to the history state of the quantum circuit and whose running time is f(L, ǫ) for some
+function f. Then, we can transform any given quantum circuit with L two-qubit gates on n qubits
+into a k-local adiabatic computation on n+2L/ǫ d-dimensional particles whose output (after tracing
+out some ancilla qubits) is ǫ close in trace distance to the ﬁnal state of the circuit and whose running
+time is f(2L/ǫ, ǫ/2).
+Proof: Given a quantum circuit on n qubits with L gates, consider the circuit obtained by ap-
+pending to it (2
+ǫ −1)L identity gates. Let L′ = 2L/ǫ be the number of gates in the modiﬁed circuit
+and let |η⟩denote its history state. By our assumption, we can transform this modiﬁed circuit
+into an adiabatic computation whose output is ǫ/2 close in ℓ2-norm to |η⟩and whose running time
+is f(L′, ǫ/2). Since the trace distance between two pure states is bounded from above by the ℓ2-
+distance (see, e.g., [3]), we obtain that the output of the adiabatic computation is also ǫ/2 close
+in trace distance to |η⟩⟨η|. In addition, it is easy to check that after we trace out the clock qubits
+from |η⟩, we are left with a state that is ǫ/2 close in trace distance to the ﬁnal state of the circuit.
+We complete the proof by applying the triangle inequality.
+We can now apply this lemma on the result of Claim 3.9. This completes the proof of Theorem
+3.1, with the running time being O(ǫ−(5+3δ)L5+2δ).
+3.1.4
+Spectral Gap
+In the previous subsections, we presented a Hamiltonian H(s) and showed that inside a preserved
+subspace S0 it has a non-negligible spectral gap. This was enough for the adiabatic algorithm since
+the entire adiabatic evolution is performed inside this subspace.
+In this subsection, we show that the spectral gap of H(s) in the entire Hilbert space is also
+non-negligible. The purpose of this result is twofold. First, the existence of a non-negligible spectral
+gap in the entire Hilbert space might have some relevance when dealing with adiabatic computation
+in the presence of noise (see, e.g., [8]). Second, the techniques that we use here, and in particular
+Lemma 3.12, are used again in the next subsection, but are easier to present in this simpler context.
+Lemma 3.11 For all 0 ≤s ≤1, ∆(H(s)) = Ω(L−3).
+Proof: Let S be the subspace of dimension (L + 1) · 2n spanned by all legal clock states. Observe
+that S is preserved by H(s), i.e., H(s)(S) ⊆S. Hence, the eigenstates of H(s) belong either to S
+or to its orthogonal subspace S⊥. We can therefore analyze the spectrum of HS(s) and of HS⊥(s)
+separately.
+First, due to the term Hclock and the fact that all other terms are positive semideﬁnite, the
+ground energy of HS⊥(s) is at least 1. Second, as we will show next using Lemma 3.12, the spectral
+gap of HS(s) is Ω(L−3). To establish the same spectral gap for H(s), it is enough to show that
+the ground energy of HS(s) is smaller than 1
+2, which would mean that the spectral gap of H(s) is
+exactly that of HS(s). Indeed, observe that
+⟨γ0|HS(s)|γ0⟩= ⟨γ0|HS0(s)|γ0⟩= s/2 ≤1/2
+15
+where the ﬁrst equality holds because |γ0⟩∈S0 and the second follows from Equations 7 and 8.
+Therefore, the smallest eigenvalue of HS(s) is bounded from above by 1/2.
+Lemma 3.12 Let S denote the subspace spanned by all legal clock states. Then the ground state
+of HS(0) is |γ0⟩, and that of HS(1) is |η⟩. Moreover, for all 0 ≤s ≤1, ∆(HS(s)) = Ω(L−3).
+Proof: We can write S as the direct sum of 2n orthogonal subspaces S0, S1, . . . , S2n−1, deﬁned as
+follows. For 0 ≤j ≤2n −1 and 0 ≤ℓ≤L deﬁne |γj
+ℓ⟩:= |αj(ℓ)⟩⊗|1ℓ0L−ℓ⟩, where |αj(ℓ)⟩is the
+state of the quantum circuit at time ℓif the input state corresponds to the binary representation j.
+Note that |γ0
+ℓ⟩= |γℓ⟩. The space Sj is spanned by {|γj
+0⟩, . . . , |γj
+L⟩}. It is easy to check the following
+claim (see Figure 2).
+Claim 3.13 The Hamiltonian HS(s) is block diagonal in the Sj’s.
+HS0
+HS1
+HS2n−1
+0
+0
+Figure 2: HS(s) is block diagonal.
+By Claims 3.2, 3.3, 3.5, and 3.13, it suﬃces to argue that the ground energy of HSj(s) for any
+j ̸= 0 is larger than the ground energy of HS0(s) by at least Ω(1/L3). Essentially, this follows from
+the penalty given by the term Hinput to nonzero input states. The proof, however, is slightly subtle
+since Hinput assigns a penalty only to states |γj
+ℓ⟩with ℓ= 0.
+Notice that
+HSj(s) = HS0(s) + HSj,input.
+Moreover, for 1 ≤j ≤2n −1, HSj,input is diagonal, with its top-left element at least 1 (it actually
+equals the number of 1’s in the binary representation of j) and all other diagonal elements zero.
+Hence, if we deﬁne M as
+M
+:=
+
+
+
+
+
+1
+0
+. . .
+0
+0
+0
+. . .
+0
+...
+...
+...
+...
+0
+0
+. . .
+0
+
+
+
+
+
+then HSj,input −M is positive deﬁnite and therefore we can lower bound the ground energy of
+HSj(s) with the ground energy of HS0(s) + M. For this, we apply the following geometrical lemma
+by Kitaev (Lemma 14.4 in [22]).
+Lemma 3.14 Let H1, H2 be two Hamiltonians with ground energies a1, a2, respectively. Suppose
+that for both Hamiltonians the diﬀerence between the energy of the (possibly degenerate) ground
+space and the next highest eigenvalue is larger than Λ, and that the angle between the two ground
+spaces is θ. Then the ground energy of H1 + H2 is at least a1 + a2 + 2Λ sin2(θ/2).
+16
+We now apply this lemma to HS0(s) and M. By Claim 3.5, the spectral gap of HS0(s) is Ω(1/L2).
+The spectral gap of M is clearly 1. Moreover, using Claim 3.7, we obtain that the angle between
+the two ground spaces satisﬁes cos(θ) ≤1 −1/L by the monotonicity property of the ground state
+of HS0(s) (see Claim 3.7). It follows that the ground energy of HSj(s) is higher by at least Ω(1/L3)
+than that of HS0(s).
+Remark: Notice that we only used the following properties of Hinput: its restriction to S0 is 0 and
+its restriction to Sj for any j ̸= 0 is a diagonal matrix in the basis |γj
+0⟩, . . . , |γj
+L⟩whose top-left
+entry is at least 1 and all other entries are non-negative. This observation will be useful in Section
+4.
+3.2
+Three-local Hamiltonian
+We now show that adiabatic computation with 3-local Hamiltonians is suﬃcient to simulate stan-
+dard quantum computations.
+Theorem 3.15 Given a quantum circuit on n qubits with L two-qubit gates implementing a unitary
+U, and ǫ > 0, there exists a 3-local adiabatic computation AC(n+L, 2, Hinit, Hﬁnal, ǫ) whose running
+time is poly(L, 1
+ǫ) and whose output state is ǫ-close (in trace distance) to U|0n⟩. Moreover, Hinit
+and Hﬁnal can be computed by a polynomial time Turing machine.
+The proof of this theorem builds on techniques developed in previous subsections. The tech-
+niques developed in this section will be used in Section 4.
+3.2.1
+The Hamiltonian
+Consider the Hamiltonian constructed in Subsection 3.1.1. Notice that all terms except Hℓare
+already 3-local (some are even 2-local or 1-local). In order to obtain a 3-local Hamiltonian, we
+remove two clock qubits from the 5-local terms in Hℓand leave only the ℓth clock qubit. More
+precisely, for 1 < ℓ< L deﬁne
+H′
+ℓ
+:=
+I ⊗|100⟩⟨100|c
+ℓ−1,ℓ,ℓ+1 −Uℓ⊗|1⟩⟨0|c
+ℓ−U†
+ℓ⊗|0⟩⟨1|c
+ℓ+ I ⊗|110⟩⟨110|c
+ℓ−1,ℓ,ℓ+1.
+For the boundary cases l = 1, L we deﬁne
+H′
+1 := I ⊗|00⟩⟨00|c
+1,2 −U1 ⊗|1⟩⟨0|c
+1 −U†
+1 ⊗|0⟩⟨1|c
+1 + I ⊗|10⟩⟨10|c
+1,2
+H′
+L := I ⊗|10⟩⟨10|c
+L−1,L −Uℓ⊗|1⟩⟨0|c
+L −U†
+L ⊗|0⟩⟨1|c
+L + I ⊗|11⟩⟨11|c
+L−1,L.
+Note that because of the terms |1⟩⟨0|c and |0⟩⟨1|c, these Hamiltonians no longer leave the
+subspace S invariant. To mend this, we assign a much larger energy penalty to illegal clock states.
+As we will see soon, this makes the lower part of the spectrum of our Hamiltonians behave essentially
+like in their restriction to S. Set J = ǫ−2L6 and deﬁne
+H′
+init
+:=
+Hclockinit + Hinput + J · Hclock
+H′
+ﬁnal
+:=
+1
+2
+L
+X
+ℓ=1
+H′
+ℓ+ Hinput + J · Hclock.
+The Hamiltonian we use here is thus
+H′(s) = (1 −s)H′
+init + sH′
+ﬁnal.
+17
+Essentially the same proof as that of Claim 3.2 shows that |γ0⟩is a ground state of H′
+init. However,
+it turns out that |η⟩is no longer a ground state of H′
+ﬁnal (the proof of Claim 3.3 does not apply
+since H′
+ℓis no longer positive semideﬁnite). However, as we shall see later, |η⟩is very close to the
+ground state of H′
+ﬁnal.
+3.2.2
+The Spectral Gap
+Our ﬁrst claim is that, when restricted to S, H′ and H are identical.
+Claim 3.16 For any 0 ≤s ≤1, HS(s) = H′
+S(s).
+Proof: Let ΠS be the orthogonal projection on S. Then our goal is to show that ΠSH(s)ΠS =
+ΠSH′(s)ΠS. The only diﬀerence between H(s) and H′(s) is the factor of J in Hclock, and that the
+Hℓterms are replaced by H′
+ℓ. We note that HS,clock is zero. Hence, it suﬃces to show that for all
+1 ≤ℓ≤L,
+ΠSHℓΠS = ΠSH′
+ℓΠS.
+For this, observe that for any 1 < ℓ< L,
+ΠS|1⟩⟨0|c
+ℓΠS = |1ℓ0L−ℓ⟩⟨1ℓ−10L−(ℓ−1)|c = ΠS|110⟩⟨100|c
+ℓ−1,ℓ,ℓ+1ΠS
+and similarly for |0⟩⟨1|c
+ℓ. A similar statement holds for ℓ= 1, L with the right hand term modiﬁed
+appropriately.
+Lemma 3.12 and Claim 3.16 imply that ∆(H′
+S(s)) = Ω(L−3). We now want to deduce from
+this a lower bound on ∆(H′(s)), without the restriction to S. For this we use the following claim.
+Essentially, it says that if J is large enough, then the lower part of the spectrum of H′(s) is similar
+to that of H′
+S(s). More precisely, it shows that the lowest eigenvalues, the second lowest eigenvalues,
+and the ground states of the two Hamiltonians are close. Intuitively, this holds since the energy
+penalty given to states in S⊥, the orthogonal space to S, is very high and hence any eigenvector
+with low eigenvalue must be almost orthogonal to S⊥(and hence almost inside S). We note that
+a similar lemma was used in [20] in the context of quantum NP-complete problems.
+Lemma 3.17 Let H = H1 + H2 be the sum of two Hamiltonians operating on some Hilbert space
+H = S + S⊥. The Hamiltonian H2 is such that S is a zero eigenspace and the eigenvectors in S⊥
+have eigenvalue at least J > 2K where K = ∥H1∥. Let a and b be the lowest and the second lowest
+eigenvalues of HS and let a′ and b′ be the corresponding quantities for H. Then the lowest eigenvalue
+of H satisﬁes a −
+K2
+J−2K ≤a′ ≤a and the second lowest eigenvalue of H satisﬁes b′ ≥b −
+K2
+J−2K . If,
+moreover, b > a then the ground states |ξ⟩, |ξ′⟩of HS, H respectively satisfy
+|⟨ξ|ξ′⟩|2
+≥
+1 −
+K2
+(b −a)(J −2K).
+Proof: First, we show that a′ ≤a. Using H2|ξ⟩= 0,
+⟨ξ|H|ξ⟩
+=
+⟨ξ|H1|ξ⟩+ ⟨ξ|H2|ξ⟩= a
+and hence H must have an eigenvector of eigenvalue at most a.
+18
+We now show the lower bound on a′. We can write any unit vector |v⟩∈H as |v⟩= α1|v1⟩+
+α2|v2⟩where |v1⟩∈S and |v2⟩∈S⊥are two unit vectors and α1, α2 are two non-negative reals
+satisfying α2
+1 + α2
+2 = 1. Then we have,
+⟨v|H|v⟩
+≥
+⟨v|H1|v⟩+ Jα2
+2
+=
+(1 −α2
+2)⟨v1|H1|v1⟩+ 2α1α2Re⟨v1|H1|v2⟩+ α2
+2⟨v2|H1|v2⟩+ Jα2
+2
+≥
+⟨v1|H1|v1⟩−Kα2
+2 −2Kα2 −Kα2
+2 + Jα2
+2
+=
+⟨v1|H1|v1⟩+ (J −2K)α2
+2 −2Kα2
+where we used α2
+1 = 1−α2
+2 and α1 ≤1. Since (J−2K)α2
+2−2Kα2 is minimized for α2 = K/(J−2K),
+we have
+⟨v|H|v⟩
+≥
+⟨v1|H1|v1⟩−
+K2
+J −2K .
+(10)
+We obtain the required lower bound by noting that ⟨v1|H1|v1⟩≥a.
+Consider now the two-dimensional space L spanned by the two eigenvectors of H corresponding
+to a′ and b′. For any unit vector |v⟩∈L we have ⟨v|H|v⟩≤b′. Hence, if L contains a vector |v⟩
+orthogonal to S, then we have b′ ≥⟨v|H|v⟩≥J −K > K ≥b and we are done. Otherwise, the
+projection of L on S must be a two-dimensional space. Being two-dimensional, this space must
+contain a vector orthogonal to |ξ⟩. Let |v⟩be a vector in L whose projection on S is orthogonal to
+|ξ⟩. By (10), b′ ≥⟨v|H|v⟩≥b −
+K2
+J−2K , as required.
+Finally, let β = |⟨ξ|ξ′⟩|2. Then we can write |ξ⟩= √β|ξ′⟩+ √1 −β|ξ′⊥⟩for some unit vector
+|ξ′⊥⟩orthogonal to |ξ′⟩. Since |ξ′⟩is an eigenvector of H,
+a = ⟨ξ|H|ξ⟩
+=
+β⟨ξ′|H|ξ′⟩+ (1 −β)⟨ξ′⊥|H|ξ′⊥⟩
+≥
+βa′ + (1 −β)b′
+≥
+β
+
+a −
+K2
+J −2K
+
++ (1 −β)
+
+b −
+K2
+J −2K
+
+=
+a + (1 −β)(b −a) −
+K2
+J −2K .
+Rearranging, we obtain the required bound.
+We can now bound the spectral gap of H′(s).
+Lemma 3.18 For all 0 ≤s ≤1, ∆(H′(s)) = Ω(L−3).
+Proof: We apply Lemma 3.17 by setting H2 = J · Hclock and H1 to be the remaining terms such
+that H′(s) = H1 + H2. Note that Lemma 3.17 implies that the spectral gap of H′(s) is smaller
+than that of H′
+S(s) (which is Ω(1/L3) by Lemma 3.12) by at most K2/(J −2K). But it is easy to
+see that K = O(L), due to the fact that H1 consists of O(L) terms, each of constant norm. The
+result follows since J = ǫ−2L6.
+This shows the desired bound on the spectral gap. Before we complete the proof, we must show
+that the ﬁnal ground state is close to the history state.
+Lemma 3.19 The ground state of H′(1) is ǫ-close to |η⟩.
+19
+Proof: Apply Lemma 3.17 as in the proof of Lemma 3.18, for the case s = 1. We obtain that
+the inner product squared between the ground state of H′(1) and |η⟩, is at least 1 −δ, with
+δ =
+K2
+(b−a)(J−2K) = O(L−1ǫ2), where we have used K = O(L), J = ǫ−2L6, and b −a = Ω(1/L3)
+by Lemma 3.12. This implies that the ℓ2-distance between the ground state of H′(1) and |η⟩is
+O(ǫ/
+√
+L) ≤ǫ.
+We now complete the proof of Theorem 3.15. The adiabatic algorithm starts with |γ0⟩and
+evolves according to H′(s) for T = θ(ǫ−δL7+3δ). Such a T satisﬁes the adiabatic condition (Equation
+2), using ∥H′
+ﬁnal −H′
+init∥= O(L). By Theorem 2.1 the ﬁnal state is ǫ-close in ℓ2-distance to the
+ground state of H′
+ﬁnal. Lemma 3.19 implies that this state is ǫ-close in ℓ2-distance to |η⟩. Using
+the triangle inequality we note that the output of the adiabatic computation is 2ǫ-close to |η⟩. The
+running time of this algorithm is O(T · J · L) = O(T · ǫ−2L7) = O(ǫ−(2+δ)L14+3δ).
+We can now apply Lemma 3.10 to obtain a modiﬁed adiabatic computation whose output
+state after tracing out the clock qubits is ǫ-close in trace distance to U|0n⟩. The running time is
+O(ǫ−(16+4δ)L14+3δ) for any ﬁxed δ > 0.
+4
+Two Local Hamiltonians on a Two-Dimensional Lattice
+In this section we prove Theorem 1.3. We simulate a given quantum circuit by an adiabatic evolution
+of a system of 6-dimensional quantum particles arranged on a two-dimensional grid. More precisely,
+we prove the following theorem:
+Theorem 4.1 Given a quantum circuit on n qubits with L two-qubit gates implementing a unitary
+U, and ǫ > 0, there exists a 2-local adiabatic computation AC(poly(n, L), 6, Hinit, Hﬁnal, ǫ) such
+that Hinit and Hﬁnal involve only nearest neighbors on a 2-dimensional grid, its running time is
+poly(L, 1
+ǫ), and its output (after performing a partial measurement on each particle) is ǫ-close (in
+trace distance) to U|0n⟩. Moreover, Hinit and Hﬁnal can be computed by a polynomial time Turing
+machine.
+As mentioned in the introduction, the main problem in proving this theorem, and more precisely,
+in moving to a two dimensional grid, is the notion of a clock. In the constructions of the previous
+section, the clock is represented by an additional register that counts the clock steps in unary
+representation. The terms Hℓ, which check the correct propagation in the ℓth time step, interact
+between the ℓth qubit of the clock and the corresponding qubits on which Uℓoperates. If we want
+to restrict the interaction to nearest neighbors in two dimensions using this idea, then no matter
+how the clock qubits are arranged on the grid, we run into problems interacting the qubits with
+the corresponding clock qubits in a local way. The solution to this problem lies in the way we
+represent the clock. Instead of using an extra register, we embed the clock into the same particles
+that perform the computation by deﬁning the notion of a shape of a state, to be deﬁned later. We
+then create a sequence of legal shapes, and show how states can evolve from one legal shape to
+another.
+Although the construction of this section is more involved than the ones of the previous section,
+its analysis follows almost immediately from the analysis carried out in Theorem 3.15. To achieve
+this, we make sure that the Hamiltonians and some relevant subspaces are as similar as possible to
+those in the previous section.
+20
+4.1
+Assumptions on the Input Circuit
+To simplify the construction of our adiabatic evolution, we ﬁrst assume without loss of generality
+that the quantum circuit we wish to simulate has a particular layout of its gates. Namely, it consists
+of R rounds, where each round is composed of n nearest neighbor gates (some can be the identity
+gate), followed by n identity gates, as in Figure 3. More speciﬁcally, the ﬁrst gate in each round
+is a one-qubit gate applied to the ﬁrst qubit. For i = 2, . . . , n, the ith gate is a two-qubit gate
+applied to qubits i −1 and i. For i = n + 1, . . . , 2n the ith gate is an identity gate applied to the
+(2n + 1−i)th qubit. These identity gates are included for convenience of notation. Any circuit can
+be transformed to such a form by introducing extra identity and swap gates. Let L = 2nR be the
+total number of gates in the circuit so obtained. Clearly, L is at most polynomially larger than the
+number of gates in the original circuit.
+|0⟩
+|0⟩
+|0⟩
+|0⟩
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+Figure 3: The modiﬁed circuit with R = 3.
+4.2
+The Particles of the Adiabatic Quantum System
+The adiabatic computation is performed on 6-dimensional particles, arranged on a two-dimensional
+square lattice with n rows and R + 1 columns. We number the rows from 1 (top) to n (bottom)
+and the columns from 0 (left) to R (right). Columns number 0 and 1 are used to simulate the ﬁrst
+round of the circuit. Columns number 1 and 2 are used for the second round of computation, and
+so on. We denote the six internal states of a particle by |⃝⟩, | ↑⃝⟩, | ↓⃝⟩, | ⇑
+⃝⟩, | ⇓
+⃝⟩, and |×
+⃝⟩. These
+six states are divided into four phases: the unborn phase |⃝⟩, the ﬁrst phase | ↑⃝⟩, | ↓⃝⟩, the second
+phase | ⇑
+⃝⟩, | ⇓
+⃝⟩, and the dead phase |×
+⃝⟩. The two states in the ﬁrst phase and the two states in
+the second phase correspond to computational degrees of freedom, namely to the |0⟩and |1⟩states
+of a qubit. We write | ↑↓⃝⟩to denote an arbitrary state in the subspace spanned by | ↑⃝⟩and | ↓⃝⟩.
+Similarly, | ⇕⃝⟩denotes a state in the space spanned by | ⇑
+⃝⟩and | ⇓
+⃝⟩. The phases are used to deﬁne
+the shape of the basis states. A shape of a basis state is simply an assignment of one of the four
+phases to each particle, ignoring the computational degrees of freedom inside the ﬁrst and second
+phase. These shapes will be used instead of the clock states of the previous section.
+4.3
+Geometrical Clock
+We now describe the way we represent clock using shapes. In the previous constructions, the space
+S of dimension 2n(L + 1) was the ground space of the clock, i.e., the space spanned by legal clock
+states. Inside the clock register there were L + 1 legal clock states. Note that each such clock state
+can be described, essentially, in a geometric way by the “shape” of the clock particles: how many
+1’s precede how many 0’s.
+We now describe the corresponding subspaces involved in our construction for the two dimen-
+sional case. For each 0 ≤ℓ≤L, we have a 2n-dimensional subspace corresponding to that clock
+state. Each of these L + 1 subspaces can be described by its shape, that is, a setting of one of the
+four phases to each particle. See Figure 4 for an illustration with n = 6, R = 6. The six shapes
+shown correspond to clock states ℓ= 0, ℓ= 4n, ℓ= 4n + 3, ℓ= 5n + 2, ℓ= 6n, and ℓ= 2nR
+21
+respectively. Notice that each shape has exactly n particles in the ﬁrst or second phase. Hence, the
+dimension of the subspace induced by each shape is 2n. As ℓgoes from 0 to L, the shape changes
+from that shown in Fig. 4a to that shown in Fig. 4. The locations at which the changes occur form
+a snake-like pattern winding down and up the lattice, following the layout of the gates in the input
+circuit Fig. 3.
+a)
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+b)
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+c)
+×
+⃝
+×
+⃝
+⇕⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+⇕⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+⇕⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+⃝
+d)
+×
+⃝
+×
+⃝
+⇕⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+⇕⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+⇕⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+⇕⃝
+⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+e)
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+⃝
+⃝
+⃝
+f)
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+×
+⃝
+↑↓⃝
+Figure 4: Legal clock states
+We now describe the legal shapes more formally.
+1. The shape corresponding to clock state ℓ= 2nr + k for 0 ≤k ≤n has its r leftmost columns
+in the dead phase. The top k particles in the r + 1st column are in their second phase while
+the bottom n −k are in the ﬁrst phase. Particles in the remaining R −r columns are all in
+the unborn phase.
+2. The shape corresponding to clock state ℓ= 2nr + n + k for 1 ≤k ≤n −1 has, as before, its
+r leftmost columns in the dead phase. The r + 1st column has its n −k topmost particles
+in the second phase, and its remaining k particles in the dead phase. The r + 2nd column
+has its n −k topmost particles in the unborn phase and its remaining k particles in the ﬁrst
+phase. All remaining particles are in the unborn phase.
+The subspace S is deﬁned as the (L + 1)2n-dimensional space spanned by all legal shapes. As
+in previous sections we partition S into 2n subspaces Sj. Each subspace Sj is spanned by L + 1
+orthogonal states |γj
+0⟩, . . . , |γj
+L⟩, deﬁned as follows. For each 0 ≤ℓ≤L and 0 ≤j ≤2n −1, the
+shape of |γj
+ℓ⟩corresponds to ℓ. The state of the n active particles (i.e., those in either the ﬁrst or
+the second phase), when read from top to bottom, corresponds to the state of the circuit after the
+22
+↑⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+↑⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+⃝
+Figure 5: The initial state
+ﬁrst ℓgates are applied to an initial state corresponding to the binary representation of j; i.e., it
+corresponds to the state Uℓ· Uℓ−1 · · · U1|j⟩. More precisely, these particles are in a superposition
+obtained by mapping this state to the state of the n active particles in the following way: |0⟩to
+↑⃝(or ⇑
+⃝for a second phase particle) and |1⟩to ↓⃝(or ⇓
+⃝for a second phase particle). We often
+denote |γ0
+ℓ⟩, which corresponds to the all 0 input, by |γℓ⟩. For example, |γ0⟩is shown in Figure 5.
+With the risk of being somewhat redundant, let us now give an alternative description of the
+states |γj
+0⟩, . . . , |γj
+L⟩. This description is more helpful in understanding the Hamiltonians H′′
+ℓwhich
+we will deﬁne shortly. Consider a state |γj
+ℓ⟩for some ℓ= 2rn. The n particles in the rth column
+are in their ﬁrst phase and their computational degrees of freedom correspond to the state of the
+circuit’s qubits at the beginning of the rth round. Particles to the left of this column are dead,
+those to the right of this column are unborn. The state |γj
+ℓ+1⟩is obtained from |γj
+ℓ⟩by changing
+the topmost particle in the rth column to a second phase particle and applying the ﬁrst gate in
+the rth round (a one-qubit gate) to its computational degrees of freedom. Next, the state |γj
+ℓ+2⟩
+is obtained from |γj
+ℓ+1⟩by changing the second particle from above in the rth column to a second
+phase particle and applying the second gate in the rth round (a two-qubit gate) to both this particle
+and the one on top of it. We continue in a similar fashion until we reach |γj
+ℓ+n⟩, in which the entire
+rth column is in the second phase. We refer to these steps as the downward stage.
+Next, let us describe the upward stage. The state |γj
+ℓ+n+1⟩is obtained from |γj
+ℓ+n⟩by ‘moving’
+the bottommost particle in the rth column one location to the right. More precisely, the bottommost
+particle changes to the dead phase and the one to the right of it changes to the ﬁrst phase. The
+computational degrees of freedom are the same in both states. This corresponds to the fact that the
+n + 1st gate in a round of the circuit is the identity gate.7 Continuing in a similar fashion, we see
+that the upwards stage ends in the state |γj
+ℓ+n+n⟩= |γj
+2(r+1)n⟩that matches the above description
+of the ﬁrst state in a round.
+4.4
+The Hamiltonian
+The initial and ﬁnal Hamiltonians are deﬁned as
+H′′
+init
+:=
+H′′
+clockinit + H′′
+input + J · H′′
+clock
+H′′
+ﬁnal
+:=
+1
+2
+L
+X
+ℓ=1
+H′′
+ℓ+ H′′
+input + J · H′′
+clock,
+where J = ǫ−2 ·L6. These Hamiltonians are chosen to be as similar as possible to the corresponding
+Hamiltonians in previous sections. For example, H′′
+clock has as its ground space the space of legal
+7We could allow arbitrary one-qubit gates here instead of identity gates. This leads to a slightly more eﬃcient
+construction but also to more cumbersome Hamiltonians.
+23
+clock states, S.
+As before, it allows us to essentially project all other Hamiltonians on S, by
+assigning a large energy penalty to states with illegal shape. Also, the Hamiltonians H′′
+ℓ(once
+projected to S) check correct propagation from one step to the next. Other terms also serve similar
+roles as before.
+Let us start with the simplest terms. Deﬁne
+H′′
+input :=
+n
+X
+i=1
+(| ↓⃝⟩⟨↓⃝|)i,1.
+The indices indicate the row and column of the particle on which the Hamiltonian operates. This
+Hamiltonian checks that none of the particles in the leftmost column are in | ↓⃝⟩. Then, deﬁne
+H′′
+clockinit = (I −| ↑⃝⟩⟨↑⃝| −| ↓⃝⟩⟨↓⃝|)1,1.
+This Hamiltonian checks that the top-left particle is in a | ↑↓⃝⟩state.
+The remaining terms are
+described in the following subsections.
+4.4.1
+The Clock Hamiltonian
+The shapes we deﬁne satisfy the following important property: there exists a two-local way to verify
+that a shape is legal. This allows us to deﬁne a two-local clock Hamiltonian, H′′
+clock, whose ground
+space is exactly S, the (L + 1)2n-dimensional space spanned by all legal shapes.
+Forbidden
+Guarantees that
+⃝↑↓⃝, ⃝⇕⃝, ⃝×
+⃝
+⃝is to the right of all other qubits
+⃝×
+⃝, ↑↓⃝×
+⃝, ⇕⃝×
+⃝
+×
+⃝is to the left of all other qubits
+⃝×
+⃝, ×
+⃝⃝
+⃝and ×
+⃝are not horizontally adjacent
+↑↓⃝↑↓⃝, ↑↓⃝⇕⃝,
+⇕⃝↑↓⃝, ⇕⃝⇕⃝
+only one of ↑↓⃝, ⇕⃝per row
+⃝
+⇕⃝,
+↑↓⃝
+⇕⃝, ×
+⃝
+⇕⃝
+only ⇕⃝above ⇕⃝
+↑↓⃝
+⃝,
+↑↓⃝
+⇕⃝,
+↑↓⃝
+×
+⃝
+only ↑↓⃝below ↑↓⃝
+⃝
+×
+⃝, ×
+⃝
+⃝
+⃝and ×
+⃝are not vertically adjacent
+⇕⃝
+⃝, ×
+⃝
+↑↓⃝
+no ⃝below ⇕⃝and no ↑↓⃝below ×
+⃝
+Table 1: Local rules for basis state to be in S
+Claim 4.2 A shape is legal if and only if it contains none of the forbidden conﬁgurations of Table 1.
+Proof: It is easy to check that any legal shape contains none of the forbidden conﬁgurations. For
+the other direction, consider any shape that contains none of these conﬁgurations. Observe that
+each row must be of the form ×
+⃝∗[ ↑↓⃝, ⇕⃝]⃝∗, that is, it starts with a sequence of zero or more ×
+⃝,
+it then contains either ↑↓⃝or ⇕⃝, and then ends with a sequence of zero or more ⃝. Columns can
+be of three diﬀerent forms. Read from top to bottom, it is either ⇕⃝∗↑↓⃝∗, ⇕⃝∗×
+⃝∗, or ⃝∗↑↓⃝∗. It is
+now easy to verify that such a shape must be one of the legal shapes.
+24
+Using this claim, we can deﬁne a two-local nearest-neighbor Hamiltonian that guarantees a
+legal shape. For example, if the rule forbids a particle at location (i, j) in state ⃝to the left
+of a particle at location (i, j + 1) in state ×
+⃝, then the corresponding term in the Hamiltonian is
+(|⃝, ×
+⃝⟩⟨⃝, ×
+⃝|)(i,j),(i,j+1). Summing over all the forbidden conﬁgurations of Table 1 and over all
+relevant pairs of particles, we have
+H′′
+clock :=
+X
+r∈rules
+Hr.
+Note that the ground space of H′′
+clock is the (L + 1)2n-dimensional space S.
+4.4.2
+The Propagation Hamiltonian
+The choice of legal shapes has the following important property: the shape of ℓand that of ℓ+ 1
+diﬀer in at most two locations. This means that for any ℓand j, the shape of |γj
+ℓ−1⟩and that of
+|γj
+ℓ⟩diﬀer in at most two locations. Moreover, if we consider the state of the n active particles in
+both states we see that these diﬀer on at most two particles, namely, those on which the ℓth gate
+in the circuit acts. Crucially, and this is where we use our assumption on the form of the circuit
+(Figure 3), the particle(s) on which the ℓth gate acts are at the same location as the particle(s)
+whose phase changes. It is this structure that allows us to deﬁne the Hamiltonians H′′
+ℓ. These
+Hamiltonians act on two particles and ‘simultaneously’ advance the clock (by changing the shape)
+and advance the computational state (by modifying the state of the active particles). Since |γℓ⟩
+diﬀers from |γℓ−1⟩in at most two adjacent lattice sites, this can be done using a two-body nearest
+neighbor Hamiltonian.
+The deﬁnition of H′′
+ℓdepends on whether ℓis in the downward phase (i.e., is of the form 2rn+k
+for 1 ≤k ≤n) or in the upward phase (i.e., is of the form 2rn + n + k for 1 ≤k ≤n).
+We ﬁrst
+deﬁne H′′
+ℓfor the upward phase. Assume ℓ= 2rn + n + k for some 0 ≤r < R, 1 < k < n and let
+i = n −k + 1 be the row in which |γℓ−1⟩and |γℓ⟩diﬀer. Then,
+H′′
+ℓ
+:=
+ ⇑
+⃝
+×
+⃝
+ED ⇑⃝
+×
+⃝
+i,r
+i+1,r +
+⃝
+↑⃝
+ED⃝
+↑⃝
+i−1,r+1
+i,r+1
+−(| ⇑
+⃝, ⃝⟩⟨×
+⃝, ↑⃝| + |×
+⃝, ↑⃝⟩⟨⇑
+⃝, ⃝|)(i,r)(i,r+1)
++
+ ⇓
+⃝
+×
+⃝
+ED ⇓⃝
+×
+⃝
+i,r
+i+1,r +
+⃝
+↓⃝
+ED⃝
+↓⃝
+i−1,r+1
+i,r+1
+−(| ⇓
+⃝, ⃝⟩⟨×
+⃝, ↓⃝| + |×
+⃝, ↓⃝⟩⟨⇓
+⃝, ⃝|)(i,r)(i,r+1) .
+The ﬁrst line corresponds to changing the state | ⇑
+⃝, ⃝⟩into |×
+⃝, ↑⃝⟩. The second line is similar
+for | ⇓
+⃝, ⃝⟩and |×
+⃝, ↓⃝⟩. The purpose of the ﬁrst two terms in each line is the same as that of
+|100⟩⟨100|c and |110⟩⟨110|c in Hℓfrom previous sections.8 The diﬀerence is that here, to uniquely
+identify the current clock state, we need to consider particles on top of each other. The remaining
+terms in each line correspond to |100⟩⟨110|c and |100⟩⟨110|c in Hℓ
+8There are other (equally good) ways to deﬁne these terms. For example, it is possible to deﬁne them so that
+they both act on the rth column.
+25
+For the case k = 1, n, the deﬁnition is
+H′′
+2rn+n+1
+:=
+| ⇑
+⃝⟩⟨⇑
+⃝|n,r +
+⃝
+↑⃝
+ED⃝
+↑⃝
+n−1,r+1
+n,r+1
+−(| ⇑
+⃝, ⃝⟩⟨×
+⃝, ↑⃝| + |×
+⃝, ↑⃝⟩⟨⇑
+⃝, ⃝|)(n,r)(n,r+1)
++
+| ⇓
+⃝⟩⟨⇓
+⃝|n,r +
+⃝
+↓⃝
+ED⃝
+↓⃝
+n−1,r+1
+n,r+1
+−(| ⇓
+⃝, ⃝⟩⟨×
+⃝, ↓⃝| + |×
+⃝, ↓⃝⟩⟨⇓
+⃝, ⃝|)(n,r)(n,r+1)
+H′′
+2rn+2n
+:=
+ ⇑
+⃝
+×
+⃝
+ED ⇑
+⃝
+×
+⃝
+1,r
+2,r + | ↑⃝⟩⟨↑⃝|1,r+1 −(| ⇑
+⃝, ⃝⟩⟨×
+⃝, ↑⃝| + |×
+⃝, ↑⃝⟩⟨⇑
+⃝, ⃝|)(1,r)(1,r+1)
++
+ ⇓
+⃝
+×
+⃝
+ED ⇓
+⃝
+×
+⃝
+1,r
+2,r + | ↓⃝⟩⟨↓⃝|1,r+1 −(| ⇓
+⃝, ⃝⟩⟨×
+⃝, ↓⃝| + |×
+⃝, ↓⃝⟩⟨⇓
+⃝, ⃝|)(1,r)(1,r+1) .
+For the downward stage, H′′
+ℓchecks that a gate is applied correctly.
+For ℓ= 2nr + k and
+1 < k < n we deﬁne
+H′′
+ℓ:=
+
+0
+−Uℓ
+−U†
+ℓ
+0
+
++
+ ⇑⃝
+↑⃝
+ED ⇑
+⃝
+↑⃝
+ +
+ ⇑
+⃝
+↓⃝
+ED ⇑
+⃝
+↓⃝
+ +
+ ⇓
+⃝
+↑⃝
+ED ⇓
+⃝
+↑⃝
+ +
+ ⇓
+⃝
+↓⃝
+ED ⇓⃝
+↓⃝
+
+
+k−1,r
+k,r
++
+ ⇑⃝
+↑⃝
+ED ⇑
+⃝
+↑⃝
+ +
+ ⇑
+⃝
+↓⃝
+ED ⇑
+⃝
+↓⃝
+ +
+ ⇓
+⃝
+↑⃝
+ED ⇓
+⃝
+↑⃝
+ +
+ ⇓
+⃝
+↓⃝
+ED ⇓⃝
+↓⃝
+
+
+k,r
+k+1,r .
+The last two terms are meant, as before, to replace the terms |110⟩⟨110|c and |100⟩⟨100|c. Once
+again, to uniquely identify the current clock state, we need to consider particles on top of each
+other. The ﬁrst term represents a Hamiltonian that acts on the two particles in positions (k, r)
+and (k + 1, r). These particles span a 36-dimensional space. The matrix shown above is in fact the
+restriction of this Hamiltonian to the 8 dimensional space spanned by
+ ⇑
+⃝
+↑⃝
+E  ⇑
+⃝
+↓⃝
+E  ⇓
+⃝
+↑⃝
+E  ⇓
+⃝
+↓⃝
+E
+ ⇑
+⃝
+⇑
+⃝
+E  ⇑
+⃝
+⇓
+⃝
+E  ⇓
+⃝
+⇑
+⃝
+E  ⇓
+⃝
+⇓
+⃝
+E
+(recall that Uℓacts on two qubits and is therefore a 4 × 4 matrix). Everywhere else in this 36
+dimensional subspace, this Hamiltonian acts trivially, i.e., is 0.
+For the case k = n we slightly modify the terms that identify the clock states,
+H′′
+2nr+n :=
+
+0
+−U2nr+n
+−U†
+2nr+n
+0
+
++
+ ⇑⃝
+↑⃝
+ED ⇑
+⃝
+↑⃝
+ +
+ ⇑⃝
+↓⃝
+ED ⇑
+⃝
+↓⃝
+ +
+ ⇓
+⃝
+↑⃝
+ED ⇓
+⃝
+↑⃝
+ +
+ ⇓
+⃝
+↓⃝
+ED ⇓
+⃝
+↓⃝
+
+
+n−1,r
+n,r
++ (| ⇑
+⃝⟩⟨⇑
+⃝| + | ⇓
+⃝⟩⟨⇓
+⃝|)n,r .
+For the case k = 1 we have
+H′′
+2nr+1 :=
+
+0
+−U2nr+1
+−U†
+2nr+1
+0
+
++ (| ↑⃝⟩⟨↑⃝| + | ↓⃝⟩⟨↓⃝|)1,r
++
+ ⇑⃝
+↑⃝
+ED ⇑
+⃝
+↑⃝
+ +
+ ⇑⃝
+↓⃝
+ED ⇑
+⃝
+↓⃝
+ +
+ ⇓⃝
+↑⃝
+ED ⇓
+⃝
+↑⃝
+ +
+ ⇓
+⃝
+↓⃝
+ED ⇓
+⃝
+↓⃝
+
+
+1,r
+2,r ,
+where the ﬁrst term shows the restriction an operator acting on the particle (1, r) to the four
+dimensional space spanned by | ↑⃝⟩, | ↓⃝⟩, | ⇑
+⃝⟩, | ⇓
+⃝⟩(recall that U2nr+1 is a one-qubit gate).
+4.5
+Spectral Gap
+The analysis of the spectral gap follows almost immediately from that in Subsection 3.2.2. The
+main eﬀort is in verifying that the restriction of each of our Hamiltonians to S is identical to the
+26
+restriction of the corresponding Hamiltonian in previous sections to S, when both are constructed
+according to the modiﬁed quantum circuit of Subsection 4.1. This, in fact, does not hold for H′′
+input,
+whose projection is not quite the same as that of Hinput; still, it is similar enough for the analysis
+in Subsection 3.2.2 to hold.
+Claim 4.3 H′′
+S,clockinit = HS,clockinit
+Proof: Both Hamiltonians are diagonal in the basis |γj
+ℓ⟩with eigenvalue 0 for ℓ= 0 and eigenvalue
+1 for any ℓ> 0.
+Claim 4.4 For any 1 ≤ℓ≤L, H′′
+S,ℓ= HS,ℓ.
+Proof: It is straightforward to verify that both Hamiltonians, when restricted to S, are equal to
+2n−1
+X
+j=0
+[|γj
+ℓ⟩⟨γj
+ℓ| + |γj
+ℓ−1⟩⟨γj
+ℓ−1| −|γj
+ℓ⟩⟨γj
+ℓ−1| −|γj
+ℓ−1⟩⟨γj
+ℓ|].
+For H′′
+input the situation is similar, although in this case the restriction to S is not exactly the
+same. Still, the resemblance is enough for the same analysis to hold:
+Claim 4.5 Both HS,input and H′′
+S,input are diagonal in the basis |γj
+ℓ⟩. Moreover, the eigenvalue
+in both Hamiltonians corresponding to |γj
+ℓ⟩for ℓ= 0 is exactly the number of 1’s in the binary
+representation of j.
+Proof: Easy to verify.
+The similarity between the two Hamiltonians breaks down as follows. While the eigenvalues cor-
+responding to |γj
+ℓ⟩for ℓ> 0 are 0 in HS,input, those in H′′
+S,input might be positive (namely, for
+0 ≤ℓ≤n, the eigenvalue of |γj
+ℓ⟩is the number of 1’s in the last n −ℓdigits in the binary repre-
+sentation of j). Nevertheless, due to the remark at the end of Subsection 3.1.4, Lemma 3.12 holds
+here as well. We get:
+Lemma 4.6 For any 0 ≤s ≤1, H′′
+S(s) has a spectral gap of Ω(L−3). Moreover, the ground state
+of H′′
+S,ﬁnal is |η⟩.
+The rest of the proof of Theorem 1.3 is essentially the same as in Subsection 3.2.2. By applying
+Lemma 3.17, we obtain that
+Lemma 4.7 For all 0 ≤s ≤1, ∆(H′′(s)) = Ω(L−3). Moreover, the ground state of H′′(1) is
+ǫ-close to |η⟩.
+The proof is similar to that of Lemmas 3.18 and 3.19. This enables us to adiabatically generate
+the history state with exactly the same running time as in the three-local case (when the number
+of gates is that of the modiﬁed circuit of Subsection 4.1).
+Finally, we would like to apply Lemma 3.10 as before. However, we cannot quite do this due
+to a technical issue: our Hilbert space is no longer a tensor product of computation qubits and
+clock qubits and tracing out the clock qubits is meaningless. Nevertheless, a minor modiﬁcation of
+that lemma still applies. We ﬁrst add, say, L/ǫ identity gates to the end of the (modiﬁed) circuit.
+Now, the adiabatic computation produces a state close to the history state. We then measure the
+shape of the system without measuring the inner computational degrees of freedom. Due to the
+additional identity gates, with all but ǫ probability, the outcome of the measurement is a shape ℓ
+for ℓ≥L. If this is the case then the state of the system is such that the active particles are in the
+ﬁnal state of the circuit, as desired. This completes the proof of the theorem.
+27
+5
+Acknowledgments
+We wish to thank Dave Bacon, Ed Farhi, Leonid Gurvitz and Umesh Vazirani for inspiring discus-
+sions. DA’s work is supported in part by ARO grant DAAD19-03-1-0082, NSF ITR grant CCR-
+0121555, ISF grant 032-9738 and an Alon fellowship. WvD work was supported in part by the U.S.
+Department of Energy (DOE) and cooperative research agreement DF-FC02-94ER40818, a CMI
+postdoctoral fellowship, and an HP/MSRI fellowship. JK’s eﬀort is partly sponsored by DARPA
+and AFL, Air Force Material Command, USAF, under agreement number F30602-01-2-0524 and
+FDN00014-01-1-0826 and by ACI S´ecurit´e Informatique, 2003-n24, projet “R´eseaux Quantiques”,
+ACI-CR 2002-40 and EU 5th framework program RESQ IST-2001-37559. OR’s eﬀort is supported
+by an Alon Fellowship, the Israeli Science Foundation, ARO grant DAAD19-03-1-0082, and NSF
+grant CCR-9987845. Part of this work was done while DA, WvD, JK, ZL were members of the
+MSRI, Berkeley, CA.
+References
+[1] J. Aberg, D. Kult and E. Sjoqvist, Robustness of adiabatic quantum search, arXiv:quant-
+ph/0412124, 2004.
+[2] D. Aharonov, W. van Dam, J. Kempe, Z. Landau, S. Lloyd, O. Regev, Adiabatic quantum
+computation is equaivalent to standard quantum computation, in Proc. 45th FOCS, pages
+42–51, 2004.
+[3] D. Aharonov, A. Kitaev, and N. Nisan, Quantum circuits with mixed states, in Proc. 30th
+STOC, pages 20–30, 1998.
+[4] D. Aharonov and A. Ta-Shma, Adiabatic quantum state generation and statistical zero-
+knowledge, in Proc. 35th STOC, pages 20–29, 2003.
+[5] A. Ambainis and O. Regev, An elementary proof of the quantum adiabatic theorem,
+arXiv:quant-ph/0411152, 2004.
+[6] Y. Avron and A. Elgart, Adiabatic theorem without a gap condition, Commun. Math. Phys.
+203, pp. 445–463, 1999.
+[7] R. Bhatia, Matrix Analysis, Number 169 in Graduate Texts in Mathematics. Springer-Verlag,
+New York, 1997.
+[8] A. Childs, E. Farhi, and J. Preskill, Robustness of adiabatic quantum computation, Physical
+Review A, 65:012322, 2002.
+[9] W. van Dam, M. Mosca, and U. Vazirani, How powerful is adiabatic quantum computation?,
+in Proc. 42nd FOCS, pages 279–287, 2001.
+[10] W. van Dam and U. Vazirani, More on the power of adiabatic computation, Unpublished,
+2001.
+[11] E. Farhi, J. Goldstone, and S. Gutmann, Quantum adiabatic evolution algorithms versus
+simulated annealing, arXiv:quant-ph/0201031, 2002.
+[12] E. Farhi, J. Goldstone, and S. Gutmann, Quantum adiabatic evolution algorithms with diﬀer-
+ent paths, arXiv:quant-ph/0208135, 2002.
+28
+[13] E. Farhi, J. Goldstone, S. Gutmann, J. Lapan, A. Lundgren, and D. Preda, A quantum adi-
+abatic evolution algorithm applied to random instances of an NP-complete problem, Science,
+292(5516):472–476, 2001.
+[14] E. Farhi, J. Goldstone, S. Gutmann, and M. Sipser, Quantum computation by adiabatic
+evolution, arXiv:quant-ph/0001106, 2000.
+[15] J. Friedman, Expanding Graphs, Series in Discrete Mathematics and Theoretical Computer
+Science, American Mathematical Society, 1993.
+[16] L. Grover, Quantum mechanics helps in searching for a needle in a haystack, Physical Review
+Letters, 79:325, 1997.
+[17] R.A. Horn and C.R. Johnson, Matrix Analysis, Cambridge University Press, Cambridge, 1985.
+[18] J.A. Jones, V. Vedral, A. Ekert, and G. Castagnoli, Geometric quantum computation with
+NMR, Nature, 403:869–871, 2000.
+[19] T. Kato, On the adiabatic theorem of quantum mechanics, J. Phys. Soc. Jap., 5:435–439, 1951.
+[20] J. Kempe and O. Regev, 3-local Hamiltonian is QMA-complete, Quantum Inf. Comput.,
+3(3):258–264, 2003.
+[21] J. Kempe, A. Kitaev and O. Regev, The complexity of the local Hamiltonian problem, Proc.
+24th FSTTCS, pages 372–383, 2004.
+[22] A. Kitaev, A. Shen, and M. Vyalyi, Classical and Quantum Computation, Number 47 in
+Graduate Series in Mathematics. AMS, Providence, RI, 2002.
+[23] A. Y. Kitaev, Fault-tolerant quantum computation by anyons, Ann. Physics, 303(1):2–30,
+2003.
+[24] L. Lov´asz, Random walks on graphs: a survey, in Combinatorics, Paul Erd˝os is eighty, Vol.
+2 (Keszthely, 1993), volume 2 of Bolyai Soc. Math. Stud., pages 353–397, J´anos Bolyai Math.
+Soc., Budapest, 1996.
+[25] A. Messiah, Quantum Mechanics, John Wiley & Sons, New York, 1958.
+[26] M. Nielsen and I. Chuang, Quantum Computation and Quantum Information, Cambridge
+University Press, Cambridge, UK, 2000.
+[27] J. Pachos and P. Zanardi, Quantum holonomies for quantum computing, Int.J.Mod.Phys. B,
+15:1257–1286, 2001.
+[28] C. Papadimitriou, Computational Complexity, Addison Wesley, Reading, Massachusetts, 1994.
+[29] B. Reichardt, The quantum adiabatic optimization algorithm and local minima, in Proc. 36th
+STOC, pages 502–510, 2004.
+[30] J. Roland and N. Cerf, Quantum search by local adiabatic evolution, Phys. Rev. A, 65:042308,
+2002.
+[31] J. Roland and N. Cerf, Noise resistance of adiabatic quantum computation using random
+matrix theory, to appear in Physical Review A, arXiv:quant-ph/0409127, 2004.
+29
+[32] G. Santoro, R. Martonak, E. Tosatti, and R. Car, Theory of quantum annealing of an Ising
+spin glass, Science, 295:2427–30, 2002.
+[33] M.S. Sarandy and D. Lidar, Adiabatic quantum computation in open systems, arXiv:quant-
+ph/0502014, 2005.
+[34] A. Sinclair and M. Jerrum, Approximate counting, uniform generation and rapidly mixing
+Markov chains (extended abstract), in Graph-theoretic concepts in computer science (Staﬀel-
+stein, 1987), volume 314 of Lecture Notes in Comput. Sci., pages 134–148. Springer, Berlin,
+1988.
+[35] W. Spitzer and S. Starr, Improved bounds on the spectral gap above frustration-free ground
+states of quantum spin chains, Lett. Math. Phys., 63(2):165–177, 2003.
+[36] M. Steﬀen, W. van Dam, T. Hogg, G. Breyta and I. Chuang, Experimental implementation of
+an adiabatic quantum optimization algorithm, Physical Review Letters, 90(6), 067903, 2003.
+30

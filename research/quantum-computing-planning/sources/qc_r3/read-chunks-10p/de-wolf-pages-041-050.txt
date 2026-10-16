@@ -1,0 +1,972 @@
+===== PDF PAGE 41 =====
+
+Chapter 4
+
+The Fourier Transform
+
+4.1
+The classical discrete Fourier transform
+
+The Fourier transform occurs in many different versions throughout classical computing, in areas
+ranging from signal-processing to data compression to complexity theory.
+For our purposes, the Fourier transform is going to be an N × N unitary matrix, all of whose
+entries have the same magnitude. For N = 2, it’s just our familiar Hadamard transform:
+
+F2 = H =
+1
+√
+
+2
+
+�1
+1
+1
+−1
+
+�
+.
+
+Doing something similar in 3 dimensions is impossible with real numbers: we can’t give three
+orthogonal vectors in {+1, −1}3. However, using complex numbers allows us to define the Fourier
+transform for any N. Let ωN = e2πi/N be an N-th primitive root of unity (“root of unity” means
+that ωk
+N = 1 for some integer k, in this case k = N). The rows of the matrix will be indexed by
+j ∈{0, . . . , N −1} and the columns by k ∈{0, . . . , N −1}. Define the (j, k)-entry of the matrix
+FN by
+1
+√
+
+N ωjk
+N , where the exponent jk is the usual product of two integers:
+
+FN =
+1
+√
+
+N
+
+
+
+
+
+
+
+...
+· · ·
+ωjk
+N
+· · ·
+...
+
+
+
+
+
+
+
+This FN is a unitary matrix, because each column has norm 1 and any two distinct columns (say
+those indexed by k and k′) are orthogonal:
+
+N−1
+�
+
+j=0
+
+1
+√
+
+N
+(ωjk
+N )∗1
+√
+
+N
+ωjk′
+N = 1
+
+N
+
+N−1
+�
+
+j=0
+ωj(k′−k)
+N
+=
+�1
+if k = k′
+
+0
+otherwise
+
+using the formula for geometric sums from Appendix B.1.
+Since FN is unitary and symmetric, the inverse F −1
+N
+= F ∗
+N only differs from FN by having minus
+signs in the exponent of the entries. For a vector v ∈RN, the vector �v = FNv is called the Fourier
+transform of v.1 Its entries are given by �vj =
+1
+√
+
+N
+�N−1
+k=0 ωjk
+N vk.
+
+1One often sees the Fourier transform of a function rather than of a vector, but on finite domains that’s just a
+notational variant: a vector v ∈RN can also be viewed as a function v : {0, . . . , N −1} →R defined by v(i) = vi.
+Also, sometimes the term “Fourier transform” is used for for what we call the inverse Fourier transform.
+
+29
+
+
+===== PDF PAGE 42 =====
+
+4.2
+The Fast Fourier Transform
+
+The naive way of computing the Fourier transform �v = FNv of v ∈RN just does the matrix-
+vector multiplication to compute all the entries of �v. This would take O(N) steps (additions and
+multiplications) per entry, and O(N2) steps to compute the whole vector �v. However, there is a
+more efficient way of computing �v. This algorithm is called the Fast Fourier Transform (FFT, due
+to Cooley and Tukey in 1965 [98]), and takes only O(N log N) steps. This difference between the
+quadratic N2 steps and the near-linear N log N is tremendously important in practice when N is
+large, and is the main reason that Fourier transforms are widely used in practice.
+We will assume N = 2n, which is usually fine because we can add zeroes to our vector to make
+its dimension a power of 2 (but similar FFTs can be given also directly for most N that aren’t a
+power of 2). The key to the FFT is to rewrite the entries of �v as follows:
+
+�vj
+=
+1
+√
+
+N
+
+N−1
+�
+
+k=0
+ωjk
+N vk =
+1
+√
+
+N
+
+��
+
+even k
+ωjk
+N vk + ωj
+N
+�
+
+odd k
+ωj(k−1)
+N
+vk
+
+�
+
+(4.1)
+
+=
+1
+√
+
+2
+
+�
+1
+�
+
+N/2
+
+�
+
+even k
+ωjk/2
+N/2 vk + ωj
+N
+1
+�
+
+N/2
+
+�
+
+odd k
+ωj(k−1)/2
+N/2
+vk
+
+�
+
+(4.2)
+
+Note that we’ve rewritten the entries of the N-dimensional Fourier transform �v in terms of two
+N/2-dimensional Fourier transforms, one of the even-numbered entries of v, and one of the odd-
+numbered entries of v.
+This suggests a recursive procedure for computing �v: first separately compute the Fourier
+transform �
+veven of the N/2-dimensional vector of even-numbered entries of v, and the Fourier
+transform �
+vodd of the N/2-dimensional vector of odd-numbered entries, then compute the N entries
+
+�vj =
+1
+√
+
+2(�
+vevenj + ωj
+N �
+voddj).
+
+Strictly speaking this is not well-defined, because �
+veven and �
+vodd are just N/2-dimensional vectors
+while �v is N-dimensional. However, note that ωjk/2
+N/2 (for even k) and ωj(k−1)/2
+N/2
+(for odd k) don’t
+change if we add N/2 to j. Hence we can just put two identical copies �
+veven on top of each other
+to get an N-dimensional vector (i.e., defining �
+vevenj+N/2 = �
+vevenj), and similarly for �
+vodd, then it
+all works out in the sense of reproducing the N entries given by Eq. (4.2).
+The time T(N) it takes to implement FN this way can be written recursively as T(N) =
+2T(N/2) + O(N), because we need to compute two N/2-dimensional Fourier transforms and do
+O(N) additional operations to compute �v. This recursion works out to time T(N) = O(N log N),
+as promised. Similarly, we have an equally efficient algorithm for the inverse Fourier transform
+F −1
+N
+= F ∗
+N, whose entries are
+1
+√
+
+N ω−jk
+N
+.
+
+4.3
+Application: multiplying two polynomials
+
+Suppose we are given two real-valued polynomials p and q, each of degree at most d:
+
+p(x) =
+
+d
+�
+
+j=0
+ajxj and q(x) =
+
+d
+�
+
+k=0
+bkxk
+
+30
+
+
+===== PDF PAGE 43 =====
+
+We would like to compute the product of these two polynomials, which is
+
+(p · q)(x) =
+
+
+
+
+d
+�
+
+j=0
+ajxj
+
+
+
+
+
+�d
+�
+
+k=0
+bkxk
+�
+
+=
+
+2d
+�
+
+ℓ=0
+(
+
+2d
+�
+
+j=0
+ajbℓ−j
+
+�
+��
+�
+cℓ
+
+)xℓ,
+
+where implicitly we set aj = bj = 0 for j > d and bℓ−j = 0 if j > ℓ. Clearly, each coefficient cℓby
+itself takes O(d) steps (additions and multiplications) to compute, which suggests an algorithm for
+computing the coefficients of p·q that takes O(d2) steps. However, using the fast Fourier transform
+we can do this in O(d log d) steps, as follows.
+The convolution of two vectors a, b ∈RN is a vector a ∗b ∈RN whose ℓ-th entry is defined by
+(a∗b)ℓ=
+1
+√
+
+N
+�N−1
+j=0 ajbℓ−jmodN. Let us set N to 2d+1 (the number of nonzero coefficients of p·q),
+rounded up to the nearest power of 2. Make the above (d + 1)-dimensional vectors of coefficients a
+and b N-dimensional by adding zeroes. Then the coefficients of the polynomial p·q are proportional
+to the entries of the convolution: cℓ=
+√
+
+N(a ∗b)ℓ. It is easy to show (Exercise 2) that the Fourier
+coefficients of the convolution of a and b are the products of the Fourier coefficients of a and b: for
+every ℓ∈{0, . . . , N −1} we have
+�
+�
+a ∗b
+�
+
+ℓ= �aℓ· �bℓ. This immediately suggests an algorithm for
+
+computing the vector of coefficients cℓ: apply the FFT to a and b to get �a and �b, multiply those
+two vectors entrywise to get �
+a ∗b, apply the inverse FFT to get a∗b, and finally multiply a∗b with
+√
+
+N to get the vector c of the coefficients of p·q. Since the FFTs and their inverse take O(N log N)
+steps, and pointwise multiplication of two N-dimensional vectors takes O(N) steps, this algorithm
+takes O(N log N) = O(d log d) steps.
+Note that if two numbers ad · · · a1a0 and bd · · · b1b0 are given in decimal notation, then we can
+interpret their digits as coefficients of single-variate degree-d polynomials p and q, respectively:
+p(x) = �d
+j=0 ajxj and q(x) = �d
+k=0 bkxk. The two numbers will now be p(10) and q(10). Their
+product is the evaluation of the product-polynomial p · q at the point x = 10. This suggests that
+we can use the above procedure (for fast multiplication of polynomials) to multiply two numbers in
+O(d log d) steps, which would be a lot faster than the standard O(d2) algorithm for multiplication
+that one learns in primary school. However, in this case we have to be careful since the steps of the
+above algorithm are themselves multiplications between numbers, which we cannot count at unit
+cost anymore if our goal is to implement a multiplication between numbers! Still, it turns out that
+implementing this idea carefully allows one to multiply two d-digit numbers in O(d log d log log d)
+elementary operations. This is known as the Sch¨onhage-Strassen algorithm [231] (slightly improved
+further by F¨urer [121] and Harvey and van der Hoeven [142], who made it O(d log d) elementary
+operations), and is one of the ingredients of Shor’s algorithm (Chapter 5). We’ll skip the details.
+
+4.4
+The quantum Fourier transform
+
+Since FN is an N × N unitary matrix, we can interpret it as a quantum operation, mapping an N-
+dimensional vector of amplitudes to another N-dimensional vector of amplitudes. This is called the
+quantum Fourier transform (QFT). In case N = 2n (which is the only case we will care about), this
+will be an n-qubit unitary. Notice carefully that this quantum operation does something different
+from the classical Fourier transform: in the classical case we are given a vector v, written on a piece
+of paper so to say, and we compute the vector �v = FNv, and also write the result on a piece of
+
+31
+
+
+===== PDF PAGE 44 =====
+
+paper. In the quantum case, we are working on quantum states; these are vectors of amplitudes, but
+we don’t have those written down anywhere—they only exist as the amplitudes in a superposition.
+We will see below that the QFT can be implemented by a quantum circuit using O(n2) elementary
+gates. This is exponentially faster than even the FFT (which takes O(N log N) = O(2nn) steps),
+but it achieves something different: computing the QFT won’t give us the entries of the Fourier
+transform written down on a piece of paper, but only as the amplitudes of the resulting state.
+
+4.5
+An efficient quantum circuit
+
+Here we will describe the efficient circuit for the n-qubit QFT. The elementary gates we will allow
+ourselves are Hadamards and controlled-Rs gates, where
+
+Rs =
+�1
+0
+0
+e2πi/2s
+�
+.
+
+Note that R1 = Z =
+�1
+0
+0
+−1
+
+�
+, R2 =
+�1
+0
+0
+i
+
+�
+. For large s, e2πi/2s is close to 1 and hence the
+
+Rs-gate is close to the identity-gate I. For simplicity we will just treat each Rs as an elementary
+gate, rather than building them up out of some finite gate set.
+Since the QFT is linear, it suffices if our circuit implements it correctly on all n-qubit basis
+states |k⟩, i.e., it should map
+
+|k⟩�→FN|k⟩=
+1
+√
+
+N
+
+N−1
+�
+
+j=0
+ωjk
+N |j⟩.
+
+The key to doing this efficiently is to rewrite FN|k⟩, which turns out to be a product state (so FN
+does not introduce entanglement when applied to a basis state |k⟩), as follows. Let |k⟩= |k1 . . . kn⟩,
+k1 being the most significant bit. Note that for integer j = j1 . . . jn, we can write j/2n = �n
+ℓ=1 jℓ2−ℓ.
+For example, binary 0.101 is 1 · 2−1 + 0 · 2−2 + 1 · 2−3 = 5/8. We have the following sequence of
+equalities (which is probably most easily verified by working backwards from the last formula):
+
+FN|k⟩
+=
+1
+√
+
+N
+
+N−1
+�
+
+j=0
+e2πijk/2n|j⟩
+
+=
+1
+√
+
+2n
+�
+
+j∈{0,1}n
+e2πi(�n
+ℓ=1 jℓ2−ℓ)k|j1 . . . jn⟩
+
+=
+1
+√
+
+2n
+�
+
+j∈{0,1}n
+
+n
+�
+
+ℓ=1
+e2πijℓk/2ℓ|j1 . . . jn⟩
+
+=
+
+n
+�
+
+ℓ=1
+
+1
+√
+
+2
+
+�
+|0⟩+ e2πik/2ℓ|1⟩
+�
+.
+
+Note that e2πik/2ℓ= e2πi k1...kn−ℓ.kn−ℓ+1...kn = e2πi 0.kn−ℓ+1...kn: the n −ℓmost significant bits of k
+don’t matter for this value, because e2πim = 1 if m is an integer.
+As an example, for n = 2 we have the 2-qubit product state
+
+F4|k1k2⟩=
+1
+√
+
+2(|0⟩+ e2πi0.k2|1⟩) ⊗1
+√
+
+2(|0⟩+ e2πi0.k1k2|1⟩).
+
+32
+
+
+===== PDF PAGE 45 =====
+
+And for n = 3 we have the 3-qubit product state
+
+F8|k1k2k3⟩=
+1
+√
+
+2(|0⟩+ e2πi0.k3|1⟩) ⊗1
+√
+
+2(|0⟩+ e2πi0.k2k3|1⟩) ⊗1
+√
+
+2(|0⟩+ e2πi0.k1k2k3|1⟩).
+
+These examples suggest what the circuit should be. To prepare the first qubit of the desired state
+F8|k1k2k3⟩, we can just apply a Hadamard to |k3⟩, giving state
+1
+√
+
+2(|0⟩+(−1)k3|1⟩) and observe that
+
+(−1)k3 = e2πi0.k3. To prepare the second qubit of the desired state, apply a Hadamard to |k2⟩, giving
+1
+√
+
+2(|0⟩+ e2πi0.k2|1⟩), and then conditioned on k3 (before we apply the Hadamard to |k3⟩) apply R2.
+
+This multiplies |1⟩with a phase e2πi0.0k3, producing the correct qubit
+1
+√
+
+2(|0⟩+e2πi0.k2k3|1⟩). Finally,
+to prepare the third qubit of the desired state, we apply a Hadamard to |k1⟩, apply R2 conditioned
+on k2, and R3 conditioned on k3. This produces the correct qubit
+1
+√
+
+2(|0⟩+e2πi0.k1k2k3|1⟩). We have
+now produced all three qubits of the desired state F8|k1k2k3⟩, but in the wrong order: the first
+qubit should be the third and vice versa. So the final step is just to swap qubits 1 and 3. Figure 4.1
+illustrates the circuit in the case n = 3. Here the black circles indicate the control-qubits for each
+of the controlled-Rs operations, and the operation at the end of the circuit swaps qubits 1 and 3.
+The general case works analogously: starting with ℓ= 1, we apply a Hadamard to |kℓ⟩and then
+“rotate in” the additional phases required, conditioned on the values of the later bits kℓ+1 . . . kn.
+Some swap-gates at the end then put the qubits in the right order (recall that we can implement
+a swap with 3 CNOTs by Exercise 2.3).
+
+Figure 4.1: The circuit for the 3-qubit QFT
+
+Since the circuit involves n qubits, and at most n gates are applied to each qubit, the overall
+circuit uses at most n2 gates. In fact, many of those gates are phase gates Rs with s ≫log n, which
+are very close to the identity and hence don’t do much anyway. As observed by Coppersmith [99],
+we can actually omit those from the circuit, keeping only O(log n) gates per qubit and O(n log n)
+gates overall. Intuitively, the overall error caused by these omissions will be small (Exercise 4 asks
+you to make this precise). Finally, note that by inverting the circuit (i.e., reversing the order of
+the gates and taking the adjoint U∗of each gate U) we obtain an equally efficient circuit for the
+inverse Fourier transform F −1
+N
+= F ∗
+N.
+
+4.6
+Application: phase estimation
+
+An important application of the QFT is in phase estimation. This was originally due to Kitaev [164],
+it was put in a broader context by Cleve et al. [96], and is now a very common subroutine in many
+quantum algorithms.
+
+33
+
+
+===== PDF PAGE 46 =====
+
+Suppose we can apply a unitary U and we are given an eigenvector |ψ⟩of U with corresponding
+unknown eigenvalue λ (i.e., U|ψ⟩= λ|ψ⟩), and we would like to compute or at least approximate
+this λ. Since U is unitary, λ must have magnitude 1, so we can write it as λ = e2πiϕ for some real
+number ϕ ∈[0, 1). Here is the algorithm for phase estimation, illustrated in Figure 4.2:
+
+1. Start with |0n⟩|ψ⟩.
+
+2. For N = 2n, apply FN to the first n qubits to get
+1
+√
+
+2n
+�N−1
+j=0 |j⟩|ψ⟩;
+in fact, H⊗n ⊗I would have the same effect.
+
+3. Apply the map |j⟩|ψ⟩�→|j⟩Uj|ψ⟩= e2πiϕj|j⟩|ψ⟩. In other words, apply U to the second
+register for a number of times given by the first register. We can split this into a number of
+controlled applications of powers of 2 of U: controlled on the most significant bit of j, apply
+U2n−1; conditioned on the next most significant bit of j, apply U2n−2, etc.
+
+4. Apply the inverse Fourier transform F −1
+N
+to the first n qubits and measure the result.
+
+|0⟩1
+
+|0⟩2
+
+|0⟩n
+
+|ψ⟩
+
+phase
+register
+
+H
+
+H
+
+H
+
+...
+
+...
+
+U 2n−1
+U 2n−2
+· · ·
+U
+
+F −1
+N
+
+�ϕ1
+
+�ϕ2
+...
+�ϕn
+
+n-bit phase
+estimate
+
+Figure 4.2: Estimating the phase of the eigenvalue of U’s eigenstate |ψ⟩with n bits of precision
+
+There are 1 + 2 + · · · + 2n−1 = 2n −1 controlled applications of U in total.
+The actual
+cost of this depends on the application. Note that after step 3, the first n qubits are in state
+1
+√
+
+N
+�N−1
+j=0 e2πiϕj|j⟩= FN|2nϕ⟩. Hence, in the special case that ϕ can be written exactly with n
+bits, the inverse Fourier transform is going to give us |2nϕ⟩= |ϕ1 . . . ϕn⟩with probability 1!
+In the general case that ϕ cannot be written exactly with n bits of precision, then one can
+show that this procedure still (with high probability) spits out a good n-bit approximation to ϕ,
+with additive error O(2−n); we’ll omit the reasonably straightforward calculation that proves this.
+Accordingly, if we want to compute an estimate of ϕ within additive error ±ε, then we could run
+phase estimation with n = ⌈log(1/ε)⌉bits of precision. The main cost of this would be the number
+of applications of U in the phase-estimation circuit, which is ≤2n = O(1/ε).
+
+Exercises
+
+1. For ω = e2πi/3 and F3 =
+1
+√
+
+3
+
+
+
+
+1
+1
+1
+1
+ω
+ω2
+
+1
+ω2
+ω
+
+
+
+, calculate F3
+
+
+
+
+0
+1
+0
+
+
+
+and F3
+
+
+
+
+1
+ω2
+
+ω
+
+
+
+
+
+34
+
+
+===== PDF PAGE 47 =====
+
+2. Prove that the Fourier coefficients of the convolution of vectors a and b are the product of the
+Fourier coefficients of a and b. In other words, prove that for every a, b ∈RN and every ℓ∈
+{0, . . . , N −1} we have
+�
+�
+a ∗b
+�
+
+ℓ= �aℓ·�bℓ. Here the Fourier transform �a is defined as the vector
+
+FNa, and the j-th entry of the convolution-vector a ∗b is (a ∗b)j =
+1
+√
+
+N
+�N−1
+k=0 akb(j−k)modN.
+
+3. (H) The total variation distance between two probability distributions P and Q on the same
+set, is defined as dTV D(P, Q) = 1
+
+2
+�
+i |P(i) −Q(i)|. An equivalent alternative way to define
+this: dTV D(P, Q) is the maximum, over all events E, of |P(E) −Q(E)|. Hence dTV D(P, Q)
+is small iff all events have roughly the same probability under P and under Q.
+
+The Euclidean distance between two states |ϕ⟩= �
+i αi|i⟩and |ψ⟩= �
+i βi|i⟩is defined as
+∥|ϕ⟩−|ψ⟩∥=
+��
+i |αi −βi|2. Assume the two states are unit vectors with (for simplicity)
+real amplitudes. Suppose the Euclidean distance is small: ∥|ϕ⟩−|ψ⟩∥= ϵ. If we measure |ϕ⟩
+in the computational basis then the probability distribution over the outcomes is given by
+the |αi|2, and if we measure |ψ⟩then the probabilities are |βi|2. Show that these distributions
+are close: the total variation distance 1
+
+2
+�
+i
+��α2
+i −β2
+i
+��is ≤ϵ.
+
+4. (H) The operator norm of a matrix A is defined as ∥A∥= max
+v:∥v∥=1 ∥Av∥.
+
+An equivalent definition is that ∥A∥is the largest singular value of A (see Appendix A.5).
+
+The distance between two matrices A and B is defined as ∥A −B∥.
+
+(a) What is the distance between the 2 × 2 identity matrix and the phase-gate
+�1
+0
+0
+eiϕ
+
+�
+?
+
+(b) What is the distance between the 4 × 4 identity matrix and the controlled version of the
+phase gate of (a)?
+
+(c) What is the distance between the 2n × 2n identity matrix I2n and the controlled phase
+gate of (b) tensored with I2n−2?
+
+(d) Suppose we have a product of n-qubit unitaries U = UT UT−1 · · · U1 (for instance, each Ui
+could be an elementary gate on a few qubits, tensored with identity on the other qubits).
+Suppose we drop the j-th gate from this sequence: U′ = UT UT−1 · · · Uj+1Uj−1 · · · U1.
+Show that ∥U′ −U∥= ∥I −Uj∥.
+
+(e) Now we also drop the k-th unitary: U′′ = UT UT−1 · · · Uj+1Uj−1 · · · · · · Uk+1Uk−1 · · · U1.
+Show that ∥U′′ −U∥≤∥I −Uj∥+ ∥I −Uk∥.
+
+(f) Give a quantum circuit with O(n log n) elementary gates that has distance less than 1/n
+from the Fourier transform F2n.
+
+Comment: The above exercise shows the important fact that if we have a quantum circuit C that has various
+
+subparts (“subroutines”), then a circuit ˜C where those subroutines are implemented with small operator-norm
+
+error, rather than perfectly, still works well: if
+���C −˜C
+���is small then (by definition of operator norm) for all
+
+initial states |ϕ⟩the states C|ϕ⟩and ˜C|ϕ⟩are close in Euclidean distance. By Exercise 3 then also the final
+
+output distributions are close (in total variation distance).
+
+5. Suppose a ∈RN is a vector (indexed by ℓ= 0, . . . , N −1) which is r-periodic in the following
+sense: there exists an integer r such that aℓ= 1 whenever ℓis an integer multiple of r, and
+aℓ= 0 otherwise. Compute the Fourier transform FN a of this vector, i.e., write down a
+
+35
+
+
+===== PDF PAGE 48 =====
+
+formula for the entries of the vector FNa. Assuming r divides N, write down a simple closed
+form for the formula for the entries. Which are the nonzero entries in the vector FN a, and
+what is their magnitude?
+
+6.
+(a) The squared Fourier transform, F 2
+N, turns out to map computational basis states to
+computational basis states. Describe this map, i.e., determine to which basis state a
+basis state |k⟩gets mapped for each k ∈{0, 1}n.
+
+(b) Show that F 4
+N = I. What can you conclude about the eigenvalues of FN?
+
+36
+
+
+===== PDF PAGE 49 =====
+
+Chapter 5
+
+Shor’s Factoring Algorithm
+
+5.1
+Factoring
+
+Probably the most important quantum algorithm so far is Shor’s factoring algorithm [241]. It can
+find a factor of a composite number N in roughly (log N)2 steps, which is polynomial in the length
+log N of the input. On the other hand, there is no known classical (deterministic or randomized)
+algorithm that can factor N in polynomial time. The best known classical randomized algorithms
+run in time roughly
+2(log N)α,
+
+where α = 1/3 for a heuristic upper bound [175] and α = 1/2 for a less-heuristic but still not fully
+proven upper bound [176]. In fact, much of modern cryptography is based on the conjecture that
+no fast classical factoring algorithm exists [224]. All this cryptography (for example RSA) would
+be broken if Shor’s algorithm could be physically realized. In terms of complexity classes: factoring
+(rather, the decision problem equivalent to it) is provably in BQP but is not known to be in BPP.
+If indeed factoring is not in BPP, then the quantum computer would be the first counterexample
+to the “strong” Church-Turing thesis, which states that all “reasonable” models of computation
+are polynomially equivalent (see [112] and [208, p.31,36]).
+
+5.2
+Reduction from factoring to period-finding
+
+The crucial observation of Shor was that there is an efficient quantum algorithm for the problem
+of period-finding and that factoring can be reduced to this, in the sense that an efficient algorithm
+for period-finding implies an efficient algorithm for factoring.
+We first explain the reduction. Suppose we want to find factors of the composite number N > 1.
+We may assume N is odd and not a prime power, since those cases can easily be filtered out by a
+classical algorithm. Now choose some integer x ∈{2, . . . , N −1} uniformly at random, and compute
+its greatest common divisor with N.1 If x is not coprime to N, then gcd(x, N) is a nontrivial factor
+
+1The greatest common divisor (gcd) of two integers a and b is the largest positive integer c that divides both a
+and b. If gcd(a, b) = 1, then a and b are called coprime. The gcd can be computed in time roughly quadratic in the
+number of bits of a and b on a classical computer by the over-2000-year-old Euclid’s algorithm, and in nearly linear
+time by a slightly more recent improved algorithm [246]. More generally, the extended Euclidean algorithm allows to
+efficiently find integers x and y such that ax + by = gcd(a, b).
+
+37
+
+
+===== PDF PAGE 50 =====
+
+of N, so then we are already done. From now on consider x and N are coprime, so x is an element
+of the multiplicative group Z∗
+N. Consider the sequence
+
+1 = x0
+(mod N),
+x1
+(mod N),
+x2
+(mod N), . . .
+
+Because x generates a cyclic subgroup of Z∗
+N, this sequence will cycle after a while: there is a least
+0 < r ≤N such that xr = 1 (mod N). This r is called the period of the sequence (a.k.a. the order
+of the element x in the group Z∗
+N). Assuming N is odd and not a prime power (those cases are easy
+to factor anyway), it can be shown that with probability ≥1/2, the period r is even and xr/2 + 1
+and xr/2 −1 are not multiples of N [206, Theorem A4.13]. In that case we have:
+
+xr
+≡
+1
+mod N
+⇐⇒
+
+(xr/2)2
+≡
+1
+mod N
+⇐⇒
+
+(xr/2 + 1)(xr/2 −1)
+≡
+0
+mod N
+⇐⇒
+
+(xr/2 + 1)(xr/2 −1)
+=
+kN for some k.
+
+Note that k > 0 because both xr/2 + 1 > 0 and xr/2 −1 > 0 (x > 1). Hence xr/2 + 1 or xr/2 −1
+will share a factor with N. Because xr/2 + 1 and xr/2 −1 are not multiples of N this factor will
+be < N, and in fact both these numbers will share a non-trivial factor with N. Accordingly, if we
+have r then we can compute the greatest common divisors gcd(xr/2 + 1, N) and gcd(xr/2 −1, N),
+and both of these two numbers will be non-trivial factors of N. If we are unlucky we might have
+chosen an x that does not give a factor (which we can detect efficiently), but trying a few different
+random x gives a high probability of finding a factor.
+Thus the problem of factoring reduces to finding the period r of the function given by modular
+exponentiation f(a) = xa mod N. In general, the period-finding problem can be stated as follows:
+
+The period-finding problem:
+We are given some function f : N →{0, . . . , N −1} with the property that there is some unknown
+r ∈{1, . . . , N} such that f(a) = f(b) iff a = b mod r. The goal is to find r.
+
+One might think that if f itself is efficiently computable, then period-finding is an easy problem to
+solve even on a classical computer: just compute f(0), f(1), f(2), . . . until we encounter the value
+f(0) for the second time. The input at which this happens is the period r that we’re trying to
+find. The problem with this approach is that r could be huge, for instance N1/2 or N1/100, which
+is exponentially large in the number of inputs bits. To be efficient, we would like a runtime that
+is polynomial in log N, since that is the bitsize of the inputs to f. It is generally believed that
+classical computers cannot solve period-finding efficiently.
+We will show below how we can solve this problem efficiently on a quantum computer, using
+only O(log log N) evaluations of f and O(log log N) quantum Fourier transforms. An evaluation
+of f can be viewed as analogous to the application of a query in the algorithms of the previous
+chapters. Even a somewhat more general kind of period-finding can be solved by Shor’s algorithm
+with very few f-evaluations, whereas any classical bounded-error algorithm would need to evaluate
+the function Ω(N1/3/√log N) times in order to find the period [93].
+How many steps (elementary gates) does Shor’s algorithm take? For a = NO(1), we can com-
+pute f(a) = xa mod N in O((log N)2 log log N log log log N) steps by the “square-and-multiply”
+method, using known algorithms for fast integer multiplication mod N, see Exercise 1.
+
+38
+

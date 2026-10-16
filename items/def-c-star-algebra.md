@@ -1,21 +1,17 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-c-star-algebra.json
 id: def-c-star-algebra
 kind: definition
 title: C star algebra
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-banach-space, rem-real-and-complex-normed-space-convention, def-bounded-bilinear-map, def-bounded-linear-operator, def-complex-conjugate-real-imaginary-part-and-modulus]
+deps: [def-banach-space, def-complex-norm-and-complex-normed-space, def-bounded-bilinear-map, def-bounded-linear-operator, def-complex-conjugate-real-imaginary-part-and-modulus]
 justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Definitions 2.1.1, 2.1.18 and §3.1, printed pp. 11–13 and 54–61"
@@ -30,7 +26,7 @@ A **possibly nonunital complex Banach algebra** is a complex vector space $A$
 equipped with an associative complex-bilinear multiplication
 $A \times A \to A$ ([[def-bounded-bilinear-map]] for the bilinearity convention)
 and a norm under which $A$ is a Banach space ([[def-banach-space]],
-[[rem-real-and-complex-normed-space-convention]]), such that the norm is
+[[def-complex-norm-and-complex-normed-space]]), such that the norm is
 **submultiplicative**:
 
 $$\|ab\| \le \|a\|\,\|b\| \qquad (a,b \in A).$$

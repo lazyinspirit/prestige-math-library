@@ -1,0 +1,116 @@
+[
+  {
+    "id": "thm-qc-two-qubit-unitary-three-cnot-synthesis",
+    "index": 0,
+    "obligation": {
+      "id": "cartan-three-cnot-matrix",
+      "case": "(a,b,c)=(0.23,-0.4,0.71), (0,0,0), (\u03c0/4,\u03c0/8,-\u03c0/5)",
+      "status": "checked",
+      "evidence": "Independent 4\u00d74 floating-point multiplication of the stated CNOT/rotation factors agreed with the Pauli exponential matrix; maximum entrywise residuals were 3.51e-16, 2.78e-16, and 1.11e-16. Exact equality is proved symbolically in step 1.1; this is only a consistency check.",
+      "check": "qc-cartan-three-cnot-matrix",
+      "asserts": "The Pauli matrices in [F4] give commuting products $XX,YY,ZZ$. On the even-parity subspace with ordered basis $(|00\\rangle,|11\\rangle)$, $XX$ and $YY$ restrict to $X$ and $-X$, while $ZZ$ restricts to $I$. Hence $N$ restricts there to $e^{ic}e^{i(a-b)X}$, whose entries are $e^{ic}\\cos(a-b)$ on the diagonal and $ie^{ic}\\sin(a-b)$ off diagonal. On the odd-parity basis $(|01\\rangle,|10\\rangle)$, $XX$ and $YY$ both restrict to $X$ and $ZZ$ restricts to $-I$, so the block is $e^{-ic}e^{i(a+b)X}$. These two blocks give $N(a,b,c)=\\begin{pmatrix}e^{ic}\\cos(a-b)&0&0&ie^{ic}\\sin(a-b)\\\\0&e^{-ic}\\cos(a+b)&ie^{-ic}\\sin(a+b)&0\\\\0&ie^{-ic}\\sin(a+b)&e^{-ic}\\cos(a+b)&0\\\\ie^{ic}\\sin(a-b)&0&0&e^{ic}\\cos(a-b)\\end{pmatrix}.$ In basis $00,01,10,11$, the two CNOT orientations are $C_{12}=\\begin{pmatrix}1&0&0&0\\\\0&1&0&0\\\\0&0&0&1\\\\0&0&1&0\\end{pmatrix},\\qquad C_{21}=\\begin{pmatrix}1&0&0&0\\\\0&0&0&1\\\\0&0&1&0\\\\0&1&0&0\\end{pmatrix}.$ Here $C_{12}$ is the gate from [F5] and $C_{21}$ is obtained by interchanging the wire names. Both displayed permutations are unitary because they permute the orthonormal basis in [F8]. Using [F3] with the Pauli matrices [F4] gives the QC7 rotation convention in [F2]; multiplication of those rotations and the displayed CNOT permutations gives exactly $N(a,b,c)=e^{i\\pi/4}(R_z(\\pi/2)\\otimes I)C_{21}(I\\otimes R_y(\\pi/2-2b))C_{12}(R_z(\\pi/2-2c)\\otimes R_y(2a-\\pi/2))C_{21}(I\\otimes R_z(-\\pi/2)).$ All entries agree with the two parity blocks above; thus this is an exact identity, including its scalar.",
+      "fixture": "qc11-three-cartan-triples-v1"
+    }
+  },
+  {
+    "id": "thm-qc-generic-unitary-cnot-lower-bound",
+    "index": 0,
+    "obligation": {
+      "id": "generic-lower-bound-n2",
+      "case": "n=2",
+      "status": "checked",
+      "evidence": "M=ceil((16\u22126\u22121)/4)=3; m=2 gives 3n+4m+1=15<16 and m=3 does not meet the strict inequality.",
+      "check": "qc-generic-cnot-lower-bound-n2",
+      "asserts": "If $n=1$, the claimed lower bound is $\\lceil(4-3-1)/4\\rceil=0$ and holds because gate counts are nonnegative. Suppose $n\\ge2$ and put $M=\\left\\lceil(4^n-3n-1)/4\\right\\rceil$, which is positive. For every integer $m<M$, the ceiling property gives $4m<4^n-3n-1$, hence $3n+4m+1<4^n$.",
+      "n": 2
+    }
+  },
+  {
+    "id": "ex-qc-two-level-unitary-synthesis",
+    "index": 0,
+    "obligation": {
+      "id": "two-level-example-matrix",
+      "case": "basis 00,01,10,11",
+      "status": "checked",
+      "evidence": "Step 1.1 verifies the two active columns have norm one and are orthogonal; step 2.1 writes the full 4\u00d74 matrix and checks the complement entries.",
+      "check": "qc-two-level-example-matrix",
+      "asserts": "Inserting this block at basis positions $|00\\rangle,|01\\rangle$ and fixing $|10\\rangle,|11\\rangle$ gives $T_{00,01}(V)=\\begin{pmatrix}1/\\sqrt2&-1/\\sqrt2&0&0\\\\1/\\sqrt2&1/\\sqrt2&0&0\\\\0&0&1&0\\\\0&0&0&1\\end{pmatrix}.$ Its exact entries show the identity action on the orthogonal complement and retain no hidden phase quotient. The matrix is exact, not merely equal up to scalar phase.",
+      "fixture": "qc11-two-level-00-01-v1"
+    }
+  },
+  {
+    "id": "prop-qc-controlled-t-clean-ancilla-correct",
+    "index": 0,
+    "obligation": {
+      "name": "three-wire Toffoli basis action",
+      "command": "python3 research/quantum-computing-algorithms-60-2026-10-15-batch-13-finite-certificates.py",
+      "result": "All 8 basis inputs checked; exact outputs and phases are retained in quantum-computing-algorithms-60-2026-10-15-batch-13-finite-certificates.json.",
+      "check": "qc-three-wire-toffoli-exact",
+      "asserts": "Fix the controls $a,b$ and let $q$ be the target bit immediately after the first $H_t$. The seven phase gates in [F1] contribute exponent\n$E_{a,b}(q)=-(q\\oplus b)+(q\\oplus a\\oplus b)-(q\\oplus a)+b+q\\pmod8$.\nFor $(a,b)=00,01,10,11$, the pairs $(E(0),E(1))$ are respectively $(0,0),(1,1),(0,0),(7,3)$. Conjugating these diagonal phases by the final $H_t$ therefore gives, for the four control values, $I,\\omega I,I,\\omega^7X$ on the target. The last CNOT\u2013$T_a$\u2013$T_b^\\dagger$\u2013CNOT block contributes data phase $\\omega^{a-(a\\oplus b)}$, which is $1,\\omega^{-1},1,\\omega$ in the same order. The combined action is exactly $|a,b,t\\rangle\\mapsto|a,b,t\\oplus ab\\rangle$ with phase $1$ in all eight cases, proving the displayed word is Toffoli in the sense of [F7]. By [F3,F4], these basis actions give the denotational matrix of the displayed chronological circuit.",
+      "wires": 3
+    }
+  },
+  {
+    "id": "lem-qc-clifford-t-denominator-descent-and-base",
+    "index": 0,
+    "obligation": {
+      "name": "mod-8 residue descent",
+      "command": "python3 research/quantum-computing-algorithms-60-2026-10-15-batch-13-finite-certificates.py",
+      "result": "393216 normalized residue pairs; 1179648 negative-power and 1179648 positive-power targets; 0 failures.",
+      "check": "qc-clifford-t-mod8-residue-descent",
+      "asserts": "The squared-entry identity [F2] gives $s=2r-j$. If $r\\ge3$, then $x\\bar x+y\\bar y=2^r$, so the integer forms $P(x),Q(x),P(y),Q(y)$ satisfy $P(x)+P(y)\\equiv Q(x)+Q(y)\\equiv0\\pmod8$. For a real element $P+\\sqrt2Q$, direct successive division by $\\sqrt2$ gives\n$\\nu\\ge1\\iff2\\mid P$, $\\nu\\ge2\\iff2\\mid P,Q$, $\\nu\\ge3\\iff4\\mid P$ and $2\\mid Q$, and $\\nu\\ge4\\iff4\\mid P,Q$. These tests depend only on the four coefficients modulo $8$ for every requested exponent through $4$. The finite checker enumerates all $4096$ vectors in $(\\mathbb Z/8)^4$, groups the $3072$ vectors with $\\nu=0$ or $1$, and checks all $393216$ compatible residue pairs. For every pair and each $d=1,2,3$, it finds a $k\\in\\{0,1,2,3\\}$ with $\\nu(|x+\\omega^{-k}y|^2)=j+d$; all $1,179,648$ negative-power targets pass. Taking $d=3$ yields\n$\\operatorname{sde}(|(u+\\omega^{-k}v)/\\sqrt2|^2)=2(r+1)-(j+3)=s-1$.\nThe same code checks the positive-power form as a cross-check.",
+      "modulus": 8
+    }
+  },
+  {
+    "id": "lem-qc-clifford-t-denominator-descent-and-base",
+    "index": 1,
+    "obligation": {
+      "name": "sde-4 boundary",
+      "command": "python3 research/quantum-computing-algorithms-60-2026-10-15-batch-13-finite-certificates.py",
+      "result": "256 normalized columns at coefficient bound 2; descent k exists for all: true.",
+      "check": "qc-clifford-t-sde4-boundary",
+      "asserts": "The only remaining case with $s>3$ is $r=2,j=0$, so $s=4$. Here $x=2u,y=2v$ satisfy $|x|^2+|y|^2=4$. The four embedding bounds and Fourier coefficient formula in [F4] give $|x_i|,|y_i|\\le2$. The checker therefore exhausts all integral coefficient vectors in $[-2,2]^4$ for both columns, retains the $256$ normalized pairs with $\\nu(|x|^2)=0$, and verifies for each a $k\\in\\{0,1,2,3\\}$ that $\\operatorname{sde}(|(x+\\omega^{-k}y)/(\\sqrt2)^3|^2)=3$. This proves descent at the boundary $s=4$.",
+      "coefficient_bound": 2
+    }
+  },
+  {
+    "id": "lem-qc-clifford-t-denominator-descent-and-base",
+    "index": 2,
+    "obligation": {
+      "name": "base-column synthesis table",
+      "command": "python3 research/quantum-computing-algorithms-60-2026-10-15-batch-13-finite-certificates.py",
+      "result": "208 columns reached by exact BFS; 7660 states; maximum shortest word 16.",
+      "check": "qc-clifford-t-base-column-table",
+      "asserts": "Suppose $s\\le3$. If $u\\ne0$, [F2] gives $\\operatorname{sde}(u)\\le2$; if $u=0$, its assigned exponent is $-\\infty$. If $v=0$, the unit-circle result [F7] gives $u=\\omega^j$, so its power-basis coefficients have absolute value at most $1$. If $u=0$, [F7] gives $v=\\omega^j$, with the same coefficient bound. In the remaining case both entries are nonzero. The embedding bounds from step 1.2 and [F4] give nonnegative exponents for both. If either exponent is positive, the unequal-exponent contradiction in step 1.2 forces them equal, so both are at most $2$; if neither is positive, both are $0$. Thus [F4] bounds every numerator coefficient by $2$. The exact enumeration in the certificate contains all such columns: it finds $1537$ possible entries and exactly $208$ normalized columns, with squared-entry exponents $-\\infty,0,2,3$ occurring $8,8,64,128$ times. Exact breadth-first search from $(1,0)$ using $H,T,T^\\dagger$ reaches every one of the $208$ columns; the stored shortest words have maximum length $16$ and the search visits $7660$ states. Every stored word is re-evaluated by exact rational coefficient arithmetic. Therefore the table prepares every base column.",
+      "coefficient_bound": 2,
+      "maximum_entry_exponent": 2
+    }
+  },
+  {
+    "id": "thm-qc-exact-single-qubit-synthesis-correct",
+    "index": 0,
+    "obligation": {
+      "name": "finite compiler base table",
+      "command": "python3 research/quantum-computing-algorithms-60-2026-10-15-batch-13-finite-certificates.py",
+      "result": "The correctness proof's terminal lookup covers all 208 base columns and their stored words.",
+      "check": "qc-clifford-t-compiler-base-table",
+      "asserts": "Let $W_0$ be the table word for the first column of the terminal $M$.\nThen $W_0^*M$ is unitary with first column $(1,0)^T$, hence is\n$\\operatorname{diag}(1,\\lambda)$ for a unit scalar $\\lambda$. Its entries\nlie in $D$, so [F3] gives $\\lambda=\\omega^j$ for some $j\\in\\{0,\\ldots,7\\}$.\nConsequently $M=W_0T^j$.",
+      "coefficient_bound": 2,
+      "phase_order": 8
+    }
+  },
+  {
+    "id": "ex-qc-clifford-t-exact-period-and-phase",
+    "index": 0,
+    "obligation": {
+      "name": "T period and exact target degree",
+      "command": "Exact matrix/cyclotomic calculation in the item Verification section",
+      "result": "T^8=I and the diagonal entry zeta_64 has degree 32, whereas Q(zeta_8) has degree 4.",
+      "check": "qc-clifford-t-period-and-degree",
+      "asserts": "The lower-right entry of $R_z(\\pi/16)$ is $e^{i\\pi/32}=\\zeta_{64}$. If an exact H/T word equaled this rotation, [F1] would put $\\zeta_{64}$ in $\\mathbb Q(\\zeta_8)$. But $\\zeta_8=\\zeta_{64}^8$, so $\\mathbb Q(\\zeta_8)\\subseteq\\mathbb Q(\\zeta_{64})$; containing $\\zeta_{64}$ in the smaller field would force equality. By [F2]\u2013[F3], these fields have degrees $\\varphi(8)=4$ and $\\varphi(64)=32$ respectively: among residues modulo $2^m$, exactly the $2^{m-1}$ odd residues are coprime. The unequal degrees contradict equality, so no exact H/T word implements this rotation.",
+      "period": 8,
+      "target_order": 64
+    }
+  }
+]

@@ -1,0 +1,188 @@
+{
+  "group": "r",
+  "batches": [
+    "17"
+  ],
+  "pages_read": [
+    "bell-states-teleportation-and-dense-coding",
+    "bell-states-teleportation-and-dense-coding-examples"
+  ],
+  "items_read": [
+    "def-qc-bell-basis",
+    "thm-qc-bell-transform-inverse",
+    "alg-qc-teleportation",
+    "thm-qc-teleportation-bell-expansion",
+    "alg-qc-dense-coding",
+    "def-qc-teleportation-protocol-resource-count",
+    "thm-qc-teleportation-equiprobable-outcomes",
+    "thm-qc-teleportation-correction-identity",
+    "thm-qc-dense-coding-correctness-and-resource-count",
+    "thm-qc-teleportation-reference-stability",
+    "thm-qc-teleportation-correctness-and-resource-count",
+    "ex-qc-teleportation-branch-correction"
+  ],
+  "conventions": [
+    {
+      "convention": "Bell labels 00,01,10,11 denote Φ+, Ψ+, Φ−, Ψ− respectively: the first bit is phase and the second bit is flip.",
+      "fixed_by": "def-qc-bell-basis",
+      "matters_for": [
+        "thm-qc-bell-transform-inverse",
+        "alg-qc-dense-coding",
+        "thm-qc-dense-coding-correctness-and-resource-count"
+      ]
+    },
+    {
+      "convention": "Teleportation uses ordered wires A,B,C, measures A,B in that order, and applies CNOT A→B followed by H on A. Products act right to left.",
+      "fixed_by": "alg-qc-teleportation",
+      "matters_for": [
+        "thm-qc-teleportation-bell-expansion",
+        "thm-qc-teleportation-equiprobable-outcomes",
+        "thm-qc-teleportation-reference-stability",
+        "ex-qc-teleportation-branch-correction"
+      ]
+    },
+    {
+      "convention": "Bob applies X^b followed by Z^a, giving correction Z^aX^b against byproduct X^bZ^a, without commuting Pauli factors.",
+      "fixed_by": "alg-qc-teleportation",
+      "matters_for": [
+        "thm-qc-teleportation-correction-identity",
+        "thm-qc-teleportation-reference-stability",
+        "thm-qc-teleportation-correctness-and-resource-count",
+        "ex-qc-teleportation-branch-correction"
+      ]
+    },
+    {
+      "convention": "Dense coding encodes on Alice's first factor with X^b followed by Z^a and decodes using CNOT A→B followed by H on A.",
+      "fixed_by": "alg-qc-dense-coding",
+      "matters_for": [
+        "thm-qc-dense-coding-correctness-and-resource-count"
+      ]
+    },
+    {
+      "convention": "Resource counts exclude shared-pair preparation, count communication after that pair is available, and assert achievability without optimality or physical-realization claims.",
+      "fixed_by": "def-qc-teleportation-protocol-resource-count",
+      "matters_for": [
+        "thm-qc-teleportation-correctness-and-resource-count"
+      ]
+    },
+    {
+      "convention": "The finite-reference statement uses global wire order A,B,C,R and canonical tensor identifications; a zero-dimensional reference admits no normalized input.",
+      "fixed_by": "thm-qc-teleportation-reference-stability",
+      "matters_for": [
+        "thm-qc-teleportation-correctness-and-resource-count"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-qc-teleportation-bell-expansion",
+      "statement": "For arbitrary α,β ∈ C and ψ=α|0⟩+β|1⟩, V_AB(ψ_A⊗Φ+_BC)=(1/2)Σ_{a,b∈{0,1}}|ab⟩_AB⊗X_C^b Z_C^a ψ_C, in wire order A,B,C. No normalization assumption is needed.",
+      "used_by": [
+        "thm-qc-teleportation-equiprobable-outcomes",
+        "thm-qc-teleportation-correction-identity",
+        "thm-qc-teleportation-reference-stability",
+        "thm-qc-teleportation-correctness-and-resource-count",
+        "ex-qc-teleportation-branch-correction"
+      ]
+    },
+    {
+      "id": "thm-qc-bell-transform-inverse",
+      "statement": "B=CNOT_{1→2}(H⊗I) sends |ab⟩ to (|0,b⟩+(-1)^a|1,b⊕1⟩)/√2=(I⊗X^b)(Z^a⊗I)Φ+. These four vectors form an orthonormal basis, and B†=(H⊗I)CNOT_{1→2} maps them back to their labels.",
+      "used_by": [
+        "alg-qc-dense-coding",
+        "thm-qc-dense-coding-correctness-and-resource-count"
+      ]
+    },
+    {
+      "id": "thm-qc-teleportation-correction-identity",
+      "statement": "For every qubit vector ψ and bits a,b, the teleportation byproduct is X^bZ^aψ and Z^aX^bX^bZ^aψ=ψ exactly, without commuting Pauli factors.",
+      "used_by": [
+        "thm-qc-teleportation-reference-stability",
+        "thm-qc-teleportation-correctness-and-resource-count"
+      ]
+    },
+    {
+      "id": "thm-qc-teleportation-equiprobable-outcomes",
+      "statement": "For every normalized input qubit vector, measurement of the first two wires after the teleportation pre-measurement gates has probability 1/4 for each label (a,b)∈{0,1}².",
+      "used_by": [
+        "thm-qc-teleportation-correctness-and-resource-count",
+        "ex-qc-teleportation-branch-correction"
+      ]
+    },
+    {
+      "id": "thm-qc-teleportation-reference-stability",
+      "statement": "For any finite-dimensional complex inner-product space R and normalized vector Ψ_AR, without a product-state assumption, every corrected teleportation branch on C⊗R is exactly Ψ_CR, with A relabelled C.",
+      "used_by": [
+        "thm-qc-teleportation-correctness-and-resource-count"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The defining adjoint identity used in the Bell preparation inverse proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "used_for": "Identifying adjoints with conjugate-transpose matrices in orthonormal bases and deriving the reversed adjoint product in the Bell-transform proof.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Computing pure-state traces and diagonal projective outcome weights in equiprobability, dense-coding correctness, and reference stability.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-qc-dense-coding",
+      "concern": "The Definition says, “The four decoded output weights in the correctness theorem are positive/deterministic as computed there.” For each fixed input, the correctness proof computes one weight equal to one and three equal to zero. The wording should distinguish the four possible input cases from the four outcome weights for one input.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-qc-teleportation-reference-stability",
+      "concern": "F11 invokes “take a finite basis and apply Gram--Schmidt,” and Proof 1.1 uses the resulting orthonormal basis of arbitrary R. This prerequisite has no cited supplier or declared dependency; the tensor-register definition requires a supplied orthonormal basis rather than establishing its existence. The standard finite-dimensional argument closes the mathematics, but the implicit Gram--Schmidt dependency should be declared.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "circuit-syntax-denotational-semantics-and-measurement",
+      "faithful": true,
+      "note": "Chronological gate products, finite classical branch control, and separately counted resource coordinates agree with the opened circuit definitions."
+    },
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "controlled-gates-phase-and-entanglement",
+      "faithful": true,
+      "note": "CNOT consistently uses first-wire control and second-wire target; its explicit permutation supports the preparation and decoding calculations."
+    },
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "measurements-povms-and-instruments",
+      "faithful": true,
+      "note": "Outcome weights use tr(ρP); conditional states use PρP/p only for positive p. Teleportation proves p=1/4, and dense coding computes the deterministic law."
+    },
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates",
+      "faithful": true,
+      "note": "Exact H, X, and Z matrices and their application order are preserved; the 11 branches have the stated signs without a residual correction phase."
+    },
+    {
+      "from": "bell-states-teleportation-and-dense-coding",
+      "to": "registers-tensor-products-and-partial-trace",
+      "faithful": true,
+      "note": "Ordered lexicographic product bases, first-argument-linear inner products, tensor maps, and wire permutations are used consistently. The zero-reference case is explicitly vacuous."
+    },
+    {
+      "from": "graph-states-and-measurement-based-computation",
+      "to": "bell-states-teleportation-and-dense-coding",
+      "faithful": true,
+      "note": "The graph page lists this prerequisite without quoting a stronger Bell-protocol claim. Its one-bit teleportation lemma independently derives K_b=2^(-1/2)X^bJ(α), probability 1/2, and reference extension; it does not identify that distinct procedure with the Bell protocol."
+    }
+  ]
+}

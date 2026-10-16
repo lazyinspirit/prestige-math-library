@@ -1,0 +1,388 @@
+===== PDF PAGE 25 =====
+
+x
+
+x
+
+accept
+or
+reject
+V1
+V2
+V3
+V4
+
+P1
+P2
+P3
+
+1
+3
+5
+2
+4
+6
+
+Figure 11: A quantum interactive proof system. There are six messages in this example, labelled
+1, . . . , 6. (There may be polynomially many messages in general.) The arrows each represent a
+collection of qubits, rather than single qubits as in previous figures. The superscript n is omitted
+in the names of the prover and verifier circuits (which can safely be done when the input length n
+is determined by context).
+
+and so the verifier must be specified in such a way that it is not convinced that false statements
+are true.
+Quantum interactive proof systems [104, 69] are interactive proof systems in which the prover
+and verifier may exchange and process quantum information. This ability of both the prover and
+verifier to exchange and process quantum information endows quantum interactive proofs with
+interesting properties that distinguish them from classical interactive proofs, and illustrate unique
+features of quantum information.
+
+VI.1
+Definition of quantum interactive proofs and the class QIP
+
+A quantum interactive proof system involves an interaction between a prover and verifier as sug-
+gested by Figure 11.
+The verifier is described by a polynomial-time generated family
+
+V =
+�
+Vn
+j
+: n ∈N, j ∈{1, . . . , p(n)}
+�
+
+of quantum circuits, for some polynomial-bounded function p.
+On an input string x having
+length n, the sequence of circuits Vn
+1 , . . . , Vn
+p(n) determine the actions of the verifier over the course
+of the interaction, with the value p(n) representing the number of turns the verifier takes. For
+instance, p(n) = 4 in the example depicted in Figure 11. The inputs and outputs of the verifier’s
+circuits are divided into two categories: private memory qubits and message qubits. The message
+qubits are sent to, or received from, the prover, while the memory qubits are retained by the veri-
+fier as illustrated in the figure. It is always assumed that the verifier receives the last message; so if
+the number of messages is to be m = m(n), then it must be the case that p(n) = ⌊m/2⌋+ 1.
+The prover is defined in a similar way to the verifier, although no computational assumptions
+are made: the prover is a family of arbitrary quantum operations
+
+P =
+�
+Pn
+j : n ∈N, j ∈{1, . . . , q(n)}
+�
+
+that interface with a given verifier in the natural way (assuming the number and sizes of the
+message spaces are compatible). Again, this is as suggested by Figure 11.
+
+25
+
+
+===== PDF PAGE 26 =====
+
+Now, on a given input string x, the prover P and verifier V have an interaction by composing
+their circuits as described above, after which the verifier measures an output qubit to determine
+acceptance or rejection. In direct analogy to the classes NP, MA, and QMA, one defines quantum
+complexity classes based on the completeness and soundness properties of such interactions.
+
+QIP
+Let A = (Ayes, Ano) be a promise problem, let m be a polynomial-bounded func-
+tion, and let a, b : N →[0, 1] be polynomial-time computable functions. Then
+A ∈QIP(m, a, b) if and only if there exists an m-message quantum verifier V with
+the following properties:
+
+1. Completeness. For all x ∈Ayes, there exists a quantum prover P that causes V
+to accept x with probability at least a(|x|).
+
+2. Soundness. For all x ∈Ano, every quantum prover P causes V to accept x with
+probability at most b(|x|).
+
+Also define QIP(m) = QIP(m, 2/3, 1/3) for each polynomial-bounded function m
+and define QIP = �
+m QIP(m), where the union is over all polynomial-bounded
+functions m.
+
+VI.2
+Properties of quantum interactive proofs
+
+Classical interactive proofs can trivially be simulated by quantum interactive proofs, and so the
+containment PSPACE ⊆QIP follows directly from IP = PSPACE [79, 92]. Unlike classical interac-
+tive proofs, quantum interactive proofs are not known to be simulatable in PSPACE. Simulation is
+possible in EXP through the use of semidefinite programming [69].
+
+Theorem 11. QIP ⊆EXP.
+
+Quantum interactive proofs, like ordinary classical interactive proofs, are quite robust with
+respect to the choice of completeness and soundness probabilities. In particular, the following
+facts hold [69, 58].
+
+1. Every quantum interactive proof can be transformed into an equivalent quantum interactive
+proof with perfect completeness: the completeness probability is 1 and the soundness proba-
+bility is bounded away from 1. The precise bound obtained for the soundness probability
+depends on the completeness and soundness probabilities of the original proof system. This
+transformation to a perfect-completeness proof system comes at the cost of one additional
+round (i.e., two messages) of communication.
+
+2. Parallel repetition of quantum interactive proofs with perfect completeness gives an expo-
+nential reduction in soundness error. An exponential reduction in completeness and sound-
+ness error is also possible for quantum interactive proofs not having perfect completeness,
+but the procedure is slightly more complicated than for the perfect completeness case.
+
+One of the major differences between quantum and classical interactive proof systems is that
+quantum interactive proofs can be parallelized: every quantum interactive proof system, possi-
+bly having polynomially many rounds of communication, can be transformed into an equivalent
+quantum interactive proof system with three messages [69]. This transformation comes at the cost
+of weakening the error bounds. However, it preserves perfect completeness, and the soundness
+
+26
+
+
+===== PDF PAGE 27 =====
+
+error can subsequently be reduced by parallel repetition without increasing the number of mes-
+sages beyond three. If classical interactive proof systems could be parallelized in this way, then it
+would follow that AM = PSPACE; a collapse that would surprise most complexity theorists and
+have major implications to the theory.
+The following theorem summarizes the implications of the facts just discussed to the complex-
+ity classes QIP(m, a, b) defined above.
+
+Theorem 12. Let a, b : N →[0, 1] be polynomial-time computable functions and let p be a polynomial-
+bounded function such that a(n) −b(n) ≥
+1
+p(n) for all but finitely many n ∈N. Also let m and r be
+polynomial-bounded functions. Then QIP(m, a, b) ⊆QIP(3, 1, 2−r).
+
+For a wide range of completeness and soundness probabilities this leaves just four complexity
+classes among those defined above: QIP(0) = BQP, QIP(1) = QMA, QIP(2), and QIP(3) = QIP.
+The final property of quantum interactive proofs that will be discussed in this section is the
+existence of an interesting complete promise problem [90]. The problem is to determine whether
+the operations induced by two quantum circuits are significantly different, or are approximately
+the same, with respect to the same metric on quantum operations discussed in Section III.2.
+
+THE QUANTUM CIRCUIT DISTINGUISHABILITY PROBLEM
+
+Input:
+Quantum circuits Q0 and Q1, both taking n input qubits and producing m output qubits.
+
+Yes:
+δ(Q0, Q1) ≥2/3.
+
+No:
+δ(Q0, Q1) ≤1/3.
+
+Theorem 13. The quantum circuit distinguishability problem is QIP-complete with respect to Karp reduc-
+tions.
+
+VI.3
+Zero-knowledge quantum interactive proofs
+
+Interactive proof systems can sometimes be made to have a cryptographically motivated property
+known as the zero-knowledge property [56]. Informally speaking, an interactive proof system is
+zero-knowledge if a verifier “learns nothing” from an interaction with the prover on an input
+x ∈Ayes, beyond the fact that it is indeed the case that x ∈Ayes. This should hold even if the
+verifier deviates from the actions prescribed to it by the interactive proof being considered. At
+first this notion seems paradoxical, but nevertheless there are many interesting examples of such
+proof systems. For an introductory survey on zero-knowledge, see [98].
+Several variants of zero-knowledge are often studied in the classical setting that differ in the
+particular way that the notion of “learning nothing” is formalized. This article will only consider
+statistical zero-knowledge, which is the variant of zero-knowledge that is most easily adapted to
+the quantum setting.
+Suppose that A = (Ayes, Ano) is a promise problem, and (V, P) is a quantum interactive proof
+system for A. By this it is meant that V is the honest verifier and P is the honest prover that behave
+precisely as the proof system specifies. Whether or not this proof system possesses the zero-
+knowledge property depends on the characteristics of interactions between a cheating verifier V′
+
+with the honest prover P on inputs x ∈Ayes. Figure 12 illustrates such an interaction, wherein it
+is viewed that the cheating verifier V′ is using the interaction with P on input x to compute some
+quantum operation Φx. Informally speaking, the input to this operation represents the verifier’s
+state of knowledge before the protocol is run, while the output represents the verifier’s state of
+knowledge after.
+
+27
+
+
+===== PDF PAGE 28 =====
+
+ρ
+
+x
+
+x
+
+Φx(ρ)
+V′
+1
+V′
+2
+V′
+3
+V′
+4
+
+P1
+P2
+P3
+
+Figure 12: A cheating verifier V′ performs a quantum operation Φx with the unintentional help of
+the honest prover.
+
+Now, the proof system (V, P) is said to be quantum statistical zero-knowledge if, for any choice of
+a polynomial-time cheating verifier V′, the quantum operation Φx can be efficiently approximated
+for all x ∈Ayes. More precisely, the assumption that V′ is described by polynomial-time generated
+quantum circuits must imply that there exists a polynomial-time generated family {Qx : x ∈Σ∗}
+of quantum circuits for which δ(Φx, Qx) is negligible for every x ∈Ayes. Intuitively this definition
+captures the notion of learning nothing—for anything that the cheating verifier could compute in
+polynomial time with the help of the prover could equally well have been computed in polynomial
+time without the prover’s help.
+The class of promise problems having statistical zero-knowledge quantum interactive proofs
+is denoted QSZK.
+
+QSZK
+A promise problem A = (Ayes, Ano) is in QSZK if and only if it has a statistical
+zero-knowledge quantum interactive proof system.
+
+Although it has not been proved, it is reasonable to conjecture that QSZK is properly contained in
+QIP; for the zero-knowledge property seems to be quite restrictive. Indeed, it was only recently
+established that there exist non-trivial quantum interactive proof systems that are statistical zero-
+knowledge [105]. The following facts [102, 105] are among those known about QSZK.
+
+1. Statistical zero-knowledge quantum interactive proof systems can be parallelized to two
+messages. It follows that QSZK ⊆QIP(2).
+
+2. The class QSZK is closed under complementation: a given promise problem A has a quan-
+tum statistical zero-knowledge proof if and only if the same is true for the problem obtained
+by exchanging the yes- and no-instances of A.
+
+3. Statistical zero-knowledge quantum interactive proof systems can be simulated in polyno-
+mial space: QSZK ⊆PSPACE.
+
+Classical analogues to the first and second facts in this list were shown first [91]. (The classical
+analogue to the third fact is SZK ⊆PSPACE, which follows trivially from IP ⊆PSPACE.) A key
+step toward proving the above properties (which is also similar to the classical case) is to establish
+that the following promise problem is complete for QSZK. The problem is a restricted version of
+the QIP-complete quantum circuit distinguishability problem.
+
+28
+
+
+===== PDF PAGE 29 =====
+
+THE QUANTUM STATE DISTINGUISHABILITY PROBLEM
+Input:
+Quantum circuits Q0 and Q1, both taking no input qubits and producing m output qubits.
+Let ρ0 and ρ1 be the density matrices corresponding to the outputs of these circuits.
+
+Yes:
+δ(ρ0, ρ1) ≥2/3.
+
+No:
+δ(ρ0, ρ1) ≤1/3.
+
+Theorem 14. The quantum state distinguishability problem is QSZK-complete with respect to Karp re-
+ductions.
+
+A quantum analogue of a different SZK-complete problem known as the entropy difference problem
+[54] has recently been shown to be complete for QSZK [26].
+Kobayashi [72] has recently proved several interesting properties of quantum computational
+zero-knowledge proof systems.
+
+VI.4
+Multiple-prover quantum interactive proofs
+
+Multiple-prover interactive proof systems are variants of interactive proofs where a verifier in-
+teracts with two or more provers that are not able to communicate with one another during the
+course of the interaction. Classical multiple-prover interactive proofs are extremely powerful: the
+class of promise problems having multiple-prover interactive proofs (denoted MIP) coincides with
+NEXP [19]. This is true even for two-prover interactive proofs wherein the verifier exchanges just
+one round of communication with each prover in parallel [47]. The key to the power of multiple-
+prover interactive proofs is the inability of the provers to communicate during the execution of the
+proof system. Similar to a detective interrogating two suspects in separate rooms in a police sta-
+tion, the verifier can ask questions of the provers that require strongly correlated answers, limiting
+the ability of cheating provers to convince the verifier of a false statement.
+The identification of MIP with NEXP assumes a completely classical description of the provers.
+Quantum information, however, delivers a surprising twist for this model: even when the verifier
+is classical, an entangled quantum state shared between two provers can allow for non-classical
+correlations between their answers to the verifier’s questions. This phenomenon is better known
+as a Bell-inequality violation [24] in the quantum physics literature. Indeed, there exist two-prover
+interactive proof systems that are sound against classical provers, but can be cheated by entangled
+quantum provers [37].
+
+MIP∗
+A promise problem A = (Ayes, Ano) is in MIP∗if and only if there exists a
+multiple-prover interactive proof system for A wherein the verifier is classical
+and the provers may share an arbitrary entangled state.
+
+One may also consider fully quantum variants of multiple-prover interactive proofs, which were
+first studied by Kobayashi and Matsumoto [73].
+
+QMIP
+A promise problem A = (Ayes, Ano) is in QMIP if and only if there exists a
+multiple-prover quantum interactive proof system for A.
+
+Various refinements on these classes have been studied, where parameters such as the number
+of provers, number of rounds of communication, completeness and soundness probabilities, and
+bounds on the amount of entanglement shared between provers are taken into account.
+The results proved in both [37] and [73] support the claim that it is entanglement shared be-
+tween provers that is the key issue in multiple-prover quantum interactive proofs. Both models
+
+29
+
+
+===== PDF PAGE 30 =====
+
+are equivalent in power to MIP when provers are forbidden to share entanglement before the
+proof system is executed.
+At the time of the writing of this article, research into these complexity classes and general
+properties of multiple-prover quantum interactive proofs is highly active and has led to several
+interesting results (such as [38, 65, 63, 64], among others). Despite this effort, little can be said
+at this time about the relationship among the above classes and other known complexity classes.
+For instance, only the trivial lower bounds PSPACE ⊆MIP∗and QIP ⊆QMIP, and no good
+upper bounds, are known. It has not even been ruled out that non-computable languages could
+have multiple-prover quantum interactive proof systems. These difficulties seem to stem from two
+issues: (i) no bounds are known for the size of entangled states needed for provers to perform well
+in an interactive proof, and (ii) the possible correlations that can be induced with entanglement
+are not well-understood.
+One highly restricted variant of MIP∗that has been studied, along with its unentangled coun-
+terpart, is as follows.
+
+⊕MIP∗
+A promise problem A = (Ayes, Ano) is in ⊕MIP∗if and only if there exists a
+one-round two-prover interactive proof system for A wherein the provers each
+send a single bit to the verifier, and the verifier’s decision to accept or reject is
+determined by the questions asked along with the XOR of these bits. The verifier
+is classical and the provers are quantum and share an arbitrary entangled state.
+
+⊕MIP
+This class is similar to ⊕MIP∗, except that the provers may not share entangle-
+ment (and therefore can be assumed to be classical without loss of generality).
+
+It holds that ⊕MIP = NEXP for some choices of completeness and soundness probabilities [59, 25].
+On the other hand, it has been proved [106] that ⊕MIP∗⊆QIP(2) and therefore ⊕MIP∗⊆EXP.
+
+VI.5
+Other variants of quantum interactive proofs
+
+Other variants of quantum interactive proof systems have been studied, including public-coin
+quantum interactive proofs and quantum interactive proofs with competing provers.
+
+Public-coin quantum interactive proofs
+
+Public-coin interactive proof systems are a variant of interactive proofs wherein the verifier per-
+forms no computations until all messages with the prover have been exchanged. In place of the
+verifier’s messages are sequences of random bits, visible to both the prover and verifier. Such
+interactive proof systems are typically called Arthur–Merlin games [17, 20], and the verifier and
+prover are called Arthur and Merlin, respectively, in this setting.
+Quantum variants of such proof systems and their corresponding classes are easily defined.
+For instance, QAM is defined as follows [80].
+
+QAM
+A promise problem A = (Ayes, Ano) is in QAM if and only if it has a quantum in-
+teractive proof system of the following restricted form. Arthur uniformly chooses
+some polynomial-bounded number of classical random bits, and sends a copy of
+these bits to Merlin.
+Merlin responds with a quantum state on a polynomial-
+bounded number of qubits. Arthur then performs a polynomial-time quantum
+computation on the input, the random bits, and the state sent by Merlin to deter-
+mine acceptance or rejection.
+
+30
+

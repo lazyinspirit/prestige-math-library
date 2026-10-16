@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/cor-finite-dimensional-normed-spaces-are-banach.json
 id: cor-finite-dimensional-normed-spaces-are-banach
 kind: corollary
 title: "Every finite-dimensional normed space is Banach"
@@ -7,7 +9,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-coordinate-map-for-a-finite-dimensional-normed-space,
+deps: [lem-complex-coordinate-l1-is-a-norm, lem-complex-norm-realification-is-a-real-norm, thm-coordinate-map-for-a-finite-dimensional-normed-space,
        thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent,
        def-banach-space, thm-componentwise-convergence-and-completeness,
        thm-complex-numbers-are-the-real-coordinate-plane]
@@ -15,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -42,7 +41,7 @@ sense of [[def-banach-space]].
 
 [L2] For $m\ge1$, $\mathbb R^m$ is complete in every norm ([[thm-componentwise-convergence-and-completeness]]).
 
-[L3] $\mathbb C$ is the real coordinate plane ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L3] $\mathbb C$ is the real coordinate plane with coordinate arithmetic ([[thm-complex-numbers-are-the-real-coordinate-plane]]). The coordinate $\ell^1$ function is a complex norm ([[lem-complex-coordinate-l1-is-a-norm]]), and realification preserves its metric ([[lem-complex-norm-realification-is-a-real-norm]]).
 
 [L4] A Banach space is a normed space complete for its norm metric ([[def-banach-space]]).
 
@@ -54,7 +53,7 @@ sense of [[def-banach-space]].
 
 1.2 In the real case $\mathbb K=\mathbb R$, if $n=0$ then $\mathbb R^0=\{0\}$ is complete trivially. If $n\ge1$, [L2] applies directly to the $\ell^1$ norm on $\mathbb R^n$, so $\mathbb R^n$ is complete. [L2]
 
-1.3 In the complex case $\mathbb K=\mathbb C$, if $n=0$ the same trivial argument applies. If $n\ge1$, [L3] identifies $\mathbb C^n$ with $\mathbb R^{2n}$ by real and imaginary parts, and the proof of [[thm-coordinate-map-for-a-finite-dimensional-normed-space]] already shows that the complex coordinate $\ell^1$ norm is equivalent to a real norm on $\mathbb R^{2n}$. By [L2], that real norm is complete, hence so is $\mathbb C^n$ with the complex coordinate $\ell^1$ norm. [L2, L3]
+1.3 In the complex case, if $n=0$ the coordinate space is a singleton and complete. If $n\ge1$, let $\Psi:\mathbb C^n\to\mathbb R^{2n}$ send each coordinate to its real and imaginary parts. By [L3] it is a real-linear bijection, and $Q(u):=\|\Psi^{-1}u\|_1$ is a real norm on $\mathbb R^{2n}$. It is complete by [L2]. Since $Q(\Psi a-\Psi b)=\|a-b\|_1$, the bijection $\Psi$ transports Cauchy sequences and limits exactly; thus $\mathbb C^n$ is complete in its complex coordinate norm metric. [L2, L3, algebra]
 
 2.1 Let $(x_m)$ be a Cauchy sequence in $X$, and write $a_m:=T^{-1}x_m$. Since $T^{-1}$ is bounded, $(a_m)$ is Cauchy in $\mathbb K^n$; by steps 1.2 and 1.3 it converges to some $a\in\mathbb K^n$. Since $T$ is bounded, $x_m=T(a_m)\to T(a)$ in $X$. Thus every Cauchy sequence in $X$ converges in $X$. [step 1.1, step 1.2, step 1.3, L1]
 

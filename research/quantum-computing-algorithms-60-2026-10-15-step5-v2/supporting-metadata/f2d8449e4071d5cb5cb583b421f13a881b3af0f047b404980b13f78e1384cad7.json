@@ -1,0 +1,1252 @@
+[
+  {
+    "order": 2244,
+    "id": "adversary-methods-and-quantum-query-complexity",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Adversary Methods and Quantum Query Complexity",
+    "companion": "adversary-methods-and-quantum-query-complexity-examples",
+    "requires": [
+      "reversible-arithmetic-and-oracle-conversion",
+      "quantum-phase-estimation",
+      "convex-and-semicontinuous-functions-on-rn",
+      "inner-product-spaces-and-orthogonality",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "controlled-gates-phase-and-entanglement",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "computational-problems-promises-and-cost-models",
+      "registers-tensor-products-and-partial-trace",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "amplitude-estimation-and-counting"
+    ],
+    "items": [
+      {
+        "id": "lem-qa-16-finite-sdp-strong-duality",
+        "kind": "lemma",
+        "title": "Finite real semidefinite programs satisfy strong duality under strict feasibility",
+        "statement_or_definition": "Let $n\\ge1$, $m\\ge0$, $A:\\mathbb S^n\\to\\mathbb R^m$ be linear, $b\\in\\mathbb R^m$, and $C\\in\\mathbb S^n$, where $\\mathbb S^n$ is the space of real symmetric $n\\times n$ matrices with Frobenius pairing $\\langle X,Y\\rangle_F=\\sum_{r,s}X_{rs}Y_{rs}$. Define the primal and dual values\n$$p^*=\\sup\\{\\langle C,X\\rangle_F:A(X)=b,\\ X\\succeq0\\},\\qquad d^*=\\inf\\{b^Ty:A^*y-C\\succeq0\\},$$\nwhere $A^*$ is the Euclidean adjoint in these finite-dimensional coordinates. Suppose both feasible sets contain strict points, meaning $A(X_0)=b$ with $X_0\\succ0$ and $A^*y_0-C\\succ0$, and suppose both optimal values are finite. Then $p^*=d^*$, and both extrema are attained.\n\nHere $X\\succeq0$ means $v^TXv\\ge0$ for every $v\\in\\mathbb R^n$, while $X\\succ0$ means strict inequality for nonzero $v$.",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-operator-characterisations",
+          "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-trace-of-a-square-matrix",
+          "def-metric-interior-closure-boundary",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-heine-borel-rn",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-extreme-value-metric",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "State the exact primal/dual cones, affine constraints, objective maps, and sign convention for the filtered-γ₂/adversary SDPs.",
+          "Exhibit strict feasible primal and dual points for these particular programs; prove feasibility, finite optimal values, and attainment hypotheses rather than assuming them.",
+          "Construct the exact finite-dimensional closed convex epigraph/separation set and prove it is closed; apply the existing point-versus-closed-convex separation theorem only after checking its nonempty/closed/convex hypotheses.",
+          "Derive the separating functional, identify its components with a dual feasible point and objective bound, and prove weak duality plus the reverse inequality/attainment for this SDP pair."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1 and proof route through Theorems 3.4 and 4.1 (PDF pp. 2, 5–10): Boolean-function specialization Q(f)=Θ(Adv±(f))."
+          },
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the argument is finite-dimensional and uses no choice principle.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-schur-product-psd",
+        "kind": "lemma",
+        "title": "Entrywise products of finite positive semidefinite matrices are positive semidefinite",
+        "statement_or_definition": "If $A,B\\in\\mathbb R^{n\\times n}$ are positive semidefinite, then their entrywise product $A\\circ B$, defined by $(A\\circ B)_{jk}=A_{jk}B_{jk}$, is positive semidefinite.",
+        "deps": [
+          "def-inner-product-space",
+          "thm-non-negative-operator-characterisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Choose Gram vector factorizations and represent A∘B as the Gram matrix of tensor-product vectors; prove the finite Gram representation from the spectral theorem."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1 and proof route through Theorems 3.4 and 4.1 (PDF pp. 2, 5–10): Boolean-function specialization Q(f)=Θ(Adv±(f))."
+          },
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; only finite Gram factorizations are used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-effective-spectral-gap",
+        "kind": "lemma",
+        "title": "Effective spectral gap for a product of two reflections",
+        "statement_or_definition": "Let H be a finite-dimensional complex inner-product space, Π and Δ orthogonal projections on H, R_Π=2Π-I and R_Δ=2Δ-I, and U=R_ΠR_Δ. For 0≤ω≤π, let E_ω be the spectral projection of U onto eigenvalues e^{iφ} whose principal arguments satisfy |φ|≤ω. If Δw=0, then\n$$\\|E_\\omega\\Pi w\\|\\le \\frac{\\omega}{2}\\|w\\|.$$",
+        "deps": [
+          "def-qc-reflection",
+          "def-inner-product-space",
+          "def-qc-dirac-notation-conversion",
+          "thm-qc-reflection-unitary-involution",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "proof_obligations": [
+          "Use Jordan's lemma to decompose into invariant one- and two-dimensional blocks; compute the 2×2 rotation and bound |sin(φ/2)|≤|φ|/2.",
+          "Handle rank-zero/full blocks explicitly."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§4.2, Theorem 4.3 and Appendix A (PDF pp. 6–10, 18–19): effective spectral gap for products of reflections."
+          },
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-query-unitary-normal-form",
+        "kind": "lemma",
+        "title": "Unitary normal form for finite bit-query algorithms without extra queries",
+        "statement_or_definition": "For any finite-input standard XOR bit-query algorithm using at most T queries on every branch, there is an algorithm with the same output probabilities whose evolution consists of an input-independent initial state, input-independent unitaries between exactly T unconditional calls to O_x, and a final measurement. It uses no controlled access to O_x and no more than T oracle calls.",
+        "deps": [
+          "def-qa-quantum-query-algorithm",
+          "def-qa-standard-bit-query",
+          "thm-qc-deferred-measurement",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "Apply the finite deferred-measurement dilation and retain outcome records.",
+          "For each of T query slots, route active branches through their actual address/reply registers and inactive branches through a scratch reply |+>, which is fixed by every bit-flip X; this implements branch control with one ordinary XOR call.",
+          "Pad halted/shorter branches with inactive |+> queries and verify terminal branch probabilities are unchanged."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "Chapter 21 §§21.1–21.2, printed pp.105–106 (PDF pp.113–114): XOR query slots and the finite unitary query model."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§2.1–2.4, printed pp.25–33 (PDF pp.34–42): reversible XOR and phase query conventions."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 17,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-16-boolean-query-domain",
+        "kind": "definition",
+        "title": "Finite Boolean query problem and error model for adversary bounds",
+        "statement_or_definition": "Fix an integer N≥1, a nonempty finite set D⊆{0,1}^N, and a Boolean function f:D→{0,1}. A Boolean query problem is the tuple (N,D,f) with input x∈D and standard XOR oracle\n$$O_x|i,b,w\\rangle=|i,b\\oplus x_i,w\\rangle\\quad (i\\in[N],\\ b\\in\\{0,1\\}).$$\nThe local address register is $\\mathbb C^N$ with ordered basis $|i\\rangle=e_{i-1}$, $i\\in[N]$. For its qubit realization, set $a=\\lceil\\log_2N\\rceil$ and encode $i$ by the $a$-bit binary word for $i-1$. Define the total bit function $\\widetilde x$ on all $a$-bit words by $\\widetilde x(j)=x_{j+1}$ for $0\\le j<N$ and $\\widetilde x(j)=0$ for $N\\le j<2^a$. The standard bit-flip query for $\\widetilde x$ restricts to $O_x$ on the encoded local register and acts as the identity on unused address codewords. Algorithms in the local model use the $N$-address register at query calls.\n\nFor 0≤ε<1/2, Q_ε(f) is the least worst-case number of these oracle calls of an algorithm outputting f(x) with probability at least 1−ε for every x∈D. The input promise does not restrict the oracle address. Only query calls are counted here; no gate-efficiency assertion is part of this definition.",
+        "deps": [
+          "def-qa-task-and-promise-domain",
+          "def-qa-standard-bit-query",
+          "def-qa-quantum-query-complexity",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 19,
+        "proof_obligations": [
+          "Bind all later matrices to the finite input set D and the same query convention.",
+          "This local interface consumes the already defined query/polynomial setting without importing a physics model."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1 and proof route through Theorems 3.4 and 4.1 (PDF pp. 2, 5–10): Boolean-function specialization Q(f)=Θ(Adv±(f))."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-16-controlled-consistency-reflection",
+        "kind": "algorithm",
+        "title": "Controlled input-consistency reflection from a bit query",
+        "statement_or_definition": "**Inputs.** A Boolean query problem with $N\\ge1$, promised input $x\\in D$ accessed by its standard XOR oracle, a finite work space $K$, a one-bit control $c$, and a data register with orthogonal decomposition\n$$\\mathcal H=\\operatorname{span}\\{|start\\rangle\\}\\oplus(\\mathbb C^N\\otimes K\\otimes\\mathbb C^2),$$\nwhere the address basis is $|i\\rangle=e_{i-1}$ for $i\\in[N]$ and $|start\\rangle$ is a specified unit vector orthogonal to the query summand,\nand one clean scratch bit $u=0$. Fix a known address $i_0\\in[N]$. Define the consistency sum\n$$\\Pi_x=|start\\rangle\\langle start|+\\sum_{i=1}^N|i\\rangle\\langle i|\\otimes I_K\\otimes|x_i\\rangle\\langle x_i|.$$\n\n**Output.** A gate list for the controlled plus-on-range reflection $2\\Pi_x-I$ on the data register, returning the scratch bit to zero.\n\n**Instructions.** In query mode route address $i$ to the oracle and use $u$ as its target. In start mode route the oracle address to the fixed $i_0$ and apply a Hadamard to $u$, so its query target is $|+\\rangle$. Make one unconditional standard XOR oracle call. Apply phase $-1$ exactly when $c=1$, the mode is query, and the response bit $z$ differs from $u$; disable this phase on start and when $c=0$. Make a second unconditional XOR call with the same address routing. In start mode apply the Hadamard to $u$ again. Return the data and control registers and the scratch. No controlled unknown-oracle call is invoked.",
+        "deps": [
+          "def-qa-16-boolean-query-domain",
+          "def-qa-standard-bit-query",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-reflection",
+          "def-qa-quantum-query-algorithm",
+          "thm-qc-reflection-unitary-involution",
+          "def-qc-register-and-computational-basis"
+        ],
+        "justified_by": [
+          "thm-qa-16-controlled-consistency-reflection-correct"
+        ],
+        "dependency_level": 20,
+        "proof_obligations": [
+          "Specify the finite orthogonal start/query mode, response/work factors, clean scratch and comparison phase.",
+          "Give the exact two-query procedure and state that both calls are ordinary standard XOR calls, not controlled black-box access.",
+          "Defer its correctness and exact two-query property to the separate theorem items."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§24.6, printed pp. 119–120 (PDF pp. 127–128): reflection 2Π_x−I about query/output-consistent states is implemented using two oracle queries."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional."
+      },
+      {
+        "id": "def-qa-16-input-mismatch-matrices",
+        "kind": "definition",
+        "title": "Input-mismatch masks and entrywise filtering",
+        "statement_or_definition": "For a finite Boolean query problem (N,D,f), all matrices below are indexed by the same fixed ordering of D. For i∈[N], define the input-mismatch matrix\n$$(\\Delta_i)_{xy}:=\\mathbf 1[x_i\\ne y_i].$$\nFor same-size matrices define the entrywise product $(A\\circ B)_{xy}:=A_{xy}B_{xy}$. Define the same-output mask $F_{xy}:=\\mathbf 1[f(x)=f(y)]$ and the all-ones matrix $J_{xy}:=1$. Thus $J-F$ is the opposite-output mask.",
+        "deps": [
+          "def-qa-16-boolean-query-domain"
+        ],
+        "justified_by": [],
+        "dependency_level": 20,
+        "proof_obligations": [
+          "Fix matrix indexing/order, real versus complex entries, and the zero-input/constant-function convention."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1 and proof route through Theorems 3.4 and 4.1 (PDF pp. 2, 5–10): Boolean-function specialization Q(f)=Θ(Adv±(f))."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-16-query-address-projectors",
+        "kind": "definition",
+        "title": "Query-address projectors for bit-oracle algorithms",
+        "statement_or_definition": "Let an N-address bit-query algorithm act on\n$$\\mathcal H=\\mathbb C^N\\otimes\\mathcal H_{\\rm response}\\otimes\\mathcal H_{\\rm work},$$\nwhere the first factor has computational basis $\\{|i\\rangle:i\\in[N]\\}$. The query-address projector is\n$$\\Pi_i=|i\\rangle\\langle i|\\otimes I_{\\rm response}\\otimes I_{\\rm work}.$$\nIt projects onto every state whose query address is i, regardless of response or work state.",
+        "deps": [
+          "def-qa-16-boolean-query-domain",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-computational-basis-orthonormal"
+        ],
+        "justified_by": [],
+        "dependency_level": 20,
+        "proof_obligations": [
+          "Specify address encoding and all response/work tensor factors.",
+          "Verify pairwise orthogonality and the identity resolution."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/quant-ph/9701001",
+            "locator": "§3.1, Theorem 3.3 proof (PDF pp. 7–8): query-address decomposition used in the query-magnitude hybrid argument."
+          },
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§23.2, printed pp. 110–112 (PDF pp. 118–120): adversary query-register decomposition."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-16-filtered-gamma2",
+        "kind": "definition",
+        "title": "Filtered γ₂ factorization norm for query mismatch masks",
+        "statement_or_definition": "Let $D\\subseteq\\{0,1\\}^N$ be a nonempty finite domain with $N\\ge1$, and let $\\Delta=\\{\\Delta_i\\}_{i=1}^N$ be its input-mismatch masks from [[def-qa-16-input-mismatch-matrices]]. For any complex matrix $A$ indexed by $D\\times D$, define\n$$\n\\gamma_2(A\\mid\\Delta):=\\inf \\max\\!\\left\\{\\max_{x\\in D}\\sum_i\\|u_{x,i}\\|^2,\\ \\max_{y\\in D}\\sum_i\\|v_{y,i}\\|^2\\right\\},\n$$\nwhere the infimum is over finite-dimensional complex inner-product spaces and vector families satisfying\n$$A_{xy}=\\sum_i(\\Delta_i)_{xy}\\langle u_{x,i}|v_{y,i}\\rangle_D\\quad(x,y\\in D).$$\nSet the value to $+\\infty$ if no such families exist. Every feasible family may be taken in dimension at most $2|D|$ for each i.",
+        "deps": [
+          "def-qa-16-input-mismatch-matrices",
+          "def-inner-product-space",
+          "def-qc-dirac-notation-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 21,
+        "proof_obligations": [
+          "State linear-first/Dirac convention, finite dimension sufficiency, attainment conditions and infeasible-support cases."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§§2.2–3.2 and Theorem 3.4 (PDF pp. 3–6): filtered-γ₂ formulation and its comparison with the adversary bound."
+          },
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-general-adversary-finite-and-attained",
+        "kind": "lemma",
+        "title": "Finite, attained general adversary value for nonconstant Boolean functions",
+        "statement_or_definition": "For a finite Boolean query problem (N,D,f), restrict to real symmetric Γ indexed by D with Γ∘F=0 and denominator d(Γ)=max_i||Γ∘Δ_i||. If f is nonconstant, every nonzero admissible Γ has d(Γ)>0, the ratio ||Γ||/d(Γ) is finite, and its supremum is a maximum. For constant f define Adv±(f)=0.",
+        "deps": [
+          "def-qa-16-input-mismatch-matrices",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qa-16-boolean-query-domain",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "Show a zero denominator forces Γ=0 because the mismatch masks cover every off-diagonal input pair and Γ has zero diagonal.",
+          "Use Frobenius/operator-norm inequalities to bound the ratio, then compactness of the normalized feasible set to prove a maximizer exists."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–23.2, printed pp.109–112 (PDF pp.117–120): real symmetric adversary matrices, spectral norm and finite progress formulation."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.2, printed pp.99–101 (PDF pp.111–113): finite Boolean domain, adversary constraints and dual program."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 21,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-16-controlled-consistency-reflection-correct",
+        "kind": "theorem",
+        "title": "The controlled input-consistency circuit realizes the exact reflection",
+        "statement_or_definition": "Assume the distinguished vector $|start\\rangle$ in the input decomposition is unit, as required by [[alg-qa-16-controlled-consistency-reflection]]. For every promised input x, that circuit realizes the control-first block operator\n$$\\operatorname{diag}(I_{\\mathcal H},R_{\\Pi_x}),\\qquad R_{\\Pi_x}=2\\Pi_x-I,$$\nwhere $\\Pi_x$ projects onto the start vector and all query states whose response equals x_i. The controlled operation uses the plus-on-range sign, including on the distinguished start state.\n\nThe displayed consistency sum is an orthogonal projection. For arbitrary control/data superpositions, the supplied circuit restores its scratch qubit to zero, including the start mode protected by a $|+\\rangle$ scratch during both unconditional calls; no controlled unknown-oracle call is required.",
+        "deps": [
+          "alg-qa-16-controlled-consistency-reflection",
+          "def-qc-reflection",
+          "thm-qc-reflection-unitary-involution",
+          "def-qa-standard-bit-query",
+          "def-qa-16-query-address-projectors",
+          "def-qa-16-boolean-query-domain",
+          "def-qc-clean-and-dirty-ancillas",
+          "def-qc-dirac-notation-conversion",
+          "def-qa-quantum-query-algorithm",
+          "def-qc-register-and-computational-basis"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "Check the circuit on an orthonormal basis of start/query, address, reply, work, scratch and control registers.",
+          "Show the scratch bit returns to zero because the standard XOR query is self-inverse; identify the exact +1/−1 eigenspaces of 2Π_x−I."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§24.6, printed pp.119–120 (PDF pp.127–128): two-query implementation of the input-consistency reflection."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§12.3, printed pp.102–104 (PDF pp.114–116): dual-witness reflection evaluator."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 21
+      },
+      {
+        "id": "def-qa-16-general-adversary-bound",
+        "kind": "definition",
+        "title": "General adversary matrix and spectral bound",
+        "statement_or_definition": "For a nonconstant finite Boolean query problem define\n$$\\operatorname{Adv}^{\\pm}(f):= \\max_{\\substack{\\Gamma\\in\\mathbb R^{D\\times D},\\ \\Gamma=\\Gamma^{\\mathsf T},\\ \\Gamma\\ne0\\\\ \\Gamma\\circ F=0}} \\frac{\\|\\Gamma\\|}{\\max_{i\\in[N]}\\|\\Gamma\\circ\\Delta_i\\|}.$$\nNegative entries are allowed. The denominator is positive and the maximum is finite and attained by [[lem-qa-16-general-adversary-finite-and-attained]]. For constant f set $\\operatorname{Adv}^{\\pm}(f)=0$. The **nonnegative adversary value** $\\operatorname{Adv}(f)$ is the same maximum with the additional constraint $\\Gamma_{xy}\\ge0$ for all x,y; it is also set to zero for constant f.",
+        "deps": [
+          "def-qa-16-input-mismatch-matrices",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "lem-qa-16-general-adversary-finite-and-attained"
+        ],
+        "justified_by": [],
+        "dependency_level": 22,
+        "proof_obligations": [
+          "Prove the ratio is finite for nonconstant f and define the optimum/maximizer in finite dimension.",
+          "Explain signed/negative weights and distinguish this from the nonnegative Ambainis bound."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1 and proof route through Theorems 3.4 and 4.1 (PDF pp. 2, 5–10): Boolean-function specialization Q(f)=Θ(Adv±(f))."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-filtered-gamma2-well-defined",
+        "kind": "lemma",
+        "title": "Finite-dimensional well-definedness of the filtered γ₂ program",
+        "statement_or_definition": "For the Boolean mismatch masks, $\\gamma_2(A\\mid\\Delta)<\\infty$ if and only if $A_{xx}=0$ for every x. Whenever finite, the infimum is attained by finite vector families. A minimizing family can be taken in dimension at most $2|D|$ for each coordinate i.",
+        "deps": [
+          "def-qa-16-filtered-gamma2",
+          "def-qa-16-input-mismatch-matrices",
+          "def-qa-16-boolean-query-domain",
+          "def-inner-product-space",
+          "def-qc-dirac-notation-conversion",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "Prove infeasibility when an A-entry is outside every filter support and construct a feasible factorization when all entries are covered.",
+          "Represent factor families by finite positive-semidefinite Gram blocks, compress their dimensions, and prove compactness of a bounded objective sublevel set."
+        ],
+        "sources": [
+          {
+            "title": "Lee, Mittal, Reichardt, Špalek, and Szegedy, Quantum Query Complexity of State Conversion",
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§3.1 and Appendix A.1, PDF pp.4–5, 18: finite filtered-γ₂ semidefinite program, feasibility condition and attainment."
+          },
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§24.1, printed pp.115–116 (PDF pp.123–124): finite vector formulation of the dual adversary."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 22,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-16-controlled-consistency-reflection-query-cost",
+        "kind": "theorem",
+        "title": "Controlled consistency reflection uses two bit queries",
+        "statement_or_definition": "For every x and every control value, the controlled input-consistency reflection circuit makes exactly two standard XOR bit-query calls. Equality tests, the phase operation, and scratch-register operations are nonoracle gates and are not included in this query count.",
+        "deps": [
+          "alg-qa-16-controlled-consistency-reflection",
+          "thm-qa-16-controlled-consistency-reflection-correct",
+          "def-qa-quantum-query-complexity"
+        ],
+        "justified_by": [],
+        "dependency_level": 22,
+        "proof_obligations": [
+          "Count one query to compute x_i into a clean bit and one identical self-inverse query to uncompute it.",
+          "Keep nonoracle gate cost separate."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§24.6, printed pp. 119–120 (PDF pp. 127–128): two-query implementation of 2Π_x−I."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-16-nonnegative-adversary-bound",
+        "kind": "definition",
+        "title": "Nonnegative-weight adversary bound",
+        "statement_or_definition": "For nonconstant f let\n$$\\operatorname{Adv}(f):= \\max_{\\substack{\\Gamma=\\Gamma^{\\mathsf T}\\in\\mathbb R^{D\\times D},\\ \\Gamma\\ne0,\\ \\Gamma\\circ F=0\\\\ \\Gamma_{xy}\\ge0\\ \\forall x,y}} \\frac{\\|\\Gamma\\|}{\\max_i\\|\\Gamma\\circ\\Delta_i\\|}.$$\nSet $\\operatorname{Adv}(f)=0$ if f is constant. This is the nonnegative-weight adversary bound under exactly the same masks and query normalization as $\\operatorname{Adv}^{\\pm}(f)$.",
+        "deps": [
+          "def-qa-16-input-mismatch-matrices",
+          "lem-qa-16-general-adversary-finite-and-attained",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-qa-16-general-adversary-bound",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "State the nonnegative entry restriction, matrix symmetry, same-output mask, mismatch masks, and constant-function convention.",
+          "Use the local finite-attainment lemma to justify that the maximum exists for every nonconstant f."
+        ],
+        "sources": [
+          {
+            "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§24.1, printed pp.115–116 (PDF pp.123–124): nonnegative versus signed adversary bounds."
+          },
+          {
+            "title": "Høyer, Lee, and Špalek, Negative Weights Make Adversaries Stronger",
+            "url": "https://arxiv.org/pdf/quant-ph/0611054",
+            "locator": "§2.1, PDF pp.2–3: spectral nonnegative and general adversary definitions."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 23,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-adversary-progress-endpoints",
+        "kind": "lemma",
+        "title": "Adversary progress at initial and bounded-error final states",
+        "statement_or_definition": "For a standard XOR query algorithm that outputs $f(x)$ with probability at least $1-\\epsilon$ for every $x\\in D$, where $0\\le\\epsilon<1/2$, purify its final states and define\n$$W_t=\\sum_{x,y\\in D}\\Gamma_{xy}\\alpha_x\\alpha_y\\langle\\psi_x^t|\\psi_y^t\\rangle_D,$$\nwhere α is a real unit eigenvector of Γ with eigenvalue of magnitude ||Γ||. Then |W_0|=||Γ|| and\n$$|W_T|\\le 2\\sqrt{\\epsilon(1-\\epsilon)}\\,\\|\\Gamma\\|.$$",
+        "deps": [
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-boolean-query-domain",
+          "def-qc-pure-state-and-ray",
+          "def-qc-quantum-acceptance-probability",
+          "def-qa-quantum-query-algorithm",
+          "lem-qa-16-query-unitary-normal-form",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 23,
+        "proof_obligations": [
+          "Define W_t=Σ_{x,y}Γ_{xy}α_x*α_y⟨ψ_x^t,ψ_y^t⟩.",
+          "Prove the terminal overlap bound from opposite-output acceptance probabilities, including signed Γ and the chosen conjugation convention."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-nonconstant-adversary-at-least-one",
+        "kind": "lemma",
+        "title": "Nonconstant Boolean functions have adversary value at least one",
+        "statement_or_definition": "If f is nonconstant, then $\\operatorname{Adv}^{\\pm}(f)\\ge1$. In particular the finite optimal adversary value A used by the reflection evaluator may be taken with A≥1.",
+        "deps": [
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-input-mismatch-matrices",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 23,
+        "proof_obligations": [
+          "Show opposite-output x,y differ on at least one coordinate, so max_i||Γ∘Δ_i||=1.",
+          "Check Γ is nonzero, real symmetric, and Γ∘F=0 under the stated same-output mask convention."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1, PDF p.2: finite Boolean function query-complexity characterization; the elementary ≥1 normalization is local."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-16-one-query-progress-change",
+        "kind": "lemma",
+        "title": "One oracle call changes adversary progress by at most filtered spectral norm",
+        "statement_or_definition": "In a standard XOR bit-query algorithm, one oracle call changes the progress $W_t$ of [[lem-qa-16-adversary-progress-endpoints]] by at most\n$$|W_{t+1}-W_t|\\le2\\max_{i\\in[N]}\\|\\Gamma\\circ\\Delta_i\\|.$$",
+        "deps": [
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-input-mismatch-matrices",
+          "def-qa-16-query-address-projectors",
+          "def-qa-standard-bit-query",
+          "def-qa-quantum-query-algorithm",
+          "lem-qa-16-query-unitary-normal-form",
+          "lem-qa-16-adversary-progress-endpoints",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-trace-of-an-endomorphism",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "proof_obligations": [
+          "Insert the query-address projectors, cancel equal-bit pairs, and use the operator norm on each filtered block.",
+          "Prove the constant 2 in the fixed bit/phase oracle convention."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-16-dual-vector-characterization",
+        "kind": "theorem",
+        "title": "Dual vector formulation of the general adversary bound",
+        "statement_or_definition": "For every finite nonconstant partial Boolean function $f:D\\to\\{0,1\\}$,\n$$\\operatorname{Adv}^{\\pm}(f)=\\min_{\\{v_{x,i}\\}}\\max\\{C_0,C_1\\},\\qquad C_b:=\\max_{x:f(x)=b}\\sum_i\\|v_{x,i}\\|^2.$$\nThe vectors lie in a common finite-dimensional complex inner-product space and satisfy, for all distinct $x,y$,\n$$\\sum_{i:x_i\\ne y_i}\\langle v_{x,i}|v_{y,i}\\rangle_D=\\mathbf1[f(x)\\ne f(y)].$$\nThe minimum is attained. If only opposite-output constraints are initially required, tensoring each vector with $|x_i\\oplus f(x)\\rangle$ imposes the equal-output zero constraints without changing costs or cross-output values.",
+        "deps": [
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-input-mismatch-matrices",
+          "def-qa-16-filtered-gamma2",
+          "lem-qa-16-finite-sdp-strong-duality",
+          "def-qc-dirac-notation-conversion",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-non-negative-operator-characterisations",
+          "def-non-negative-and-positive-operator",
+          "lem-qa-16-schur-product-psd",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 23,
+        "proof_obligations": [
+          "Derive the SDP dual from the signed symmetric Γ program entry by entry.",
+          "Use the finite SDP duality lemma and show feasibility/attainment under the nonconstant Boolean hypotheses.",
+          "Explain balancing the 0/1 vector-family costs by reciprocal scaling.",
+          "To impose zero equal-output constraints without raising the objective, replace v_(x,i) by v_(x,i)⊗|x_i xor f(x)⟩. For terms with x_i≠y_i, the added labels coincide iff f(x)≠f(y); cross-output inner products remain unchanged and equal-output products vanish. An output-label factor alone would instead kill the required cross-output products."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§§3.2–4.2, Theorems 3.4, 4.1 and 4.3 (PDF pp. 5–10): dual witnesses, two-reflection state-conversion algorithm, effective gap, and phase detection."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-16-dual-adversary-reflection-evaluator",
+        "kind": "algorithm",
+        "title": "Bounded-error evaluation from a dual adversary certificate",
+        "statement_or_definition": "**Inputs.** A finite nonconstant Boolean function $f:D\\to\\{0,1\\}$ on $N\\ge1$ input bits and a supplied finite dual-vector certificate $\\{v_{x,i}\\}$ in a finite-dimensional complex inner-product space $V$, meaning that for every distinct $x,y\\in D$,\n$$\\sum_{i:x_i\\ne y_i}\\langle v_{x,i}|v_{y,i}\\rangle_D=\\mathbf1[f(x)\\ne f(y)].$$\nIts class costs $C_b:=\\max_{x:f(x)=b}\\sum_i\\|v_{x,i}\\|^2$ satisfy $C_0,C_1\\le A$ for a supplied bound $A\\ge1$. The declared standard XOR input oracle is available. The input-independent controlled witness-span reflection specified below is a nonoracle operation in this query model; no efficient gate implementation for it is assumed.\n\n**Output.** A Boolean estimate of $f(x)$ for the promised input $x\\in D$.\n\n**Instructions.** Use the finite work space\n$$\\mathcal H=\\operatorname{span}\\{|start\\rangle\\}\\oplus(\\mathbb C^N\\otimes V\\otimes\\mathbb C^2).$$\nHere the address basis is $|i\\rangle=e_{i-1}$ for $i\\in[N]$, and $|start\\rangle$ is a specified unit vector orthogonal to the query summand.\nThe witness family is classical instance data used to specify a subspace, not an input-dependent state preparation. Define\n$$\\nu_x=1+\\frac1{2A}\\sum_i\\|v_{x,i}\\|^2,\\qquad |\\psi_x\\rangle=\\nu_x^{-1/2}\\left(|start\\rangle+\\frac1{\\sqrt{2A}}\\sum_i|i\\rangle|v_{x,i}\\rangle|x_i\\rangle\\right).$$\nLet $\\Delta$ project onto the span of all $|\\psi_y\\rangle$ with $f(y)=1$, and let\n$$\\Pi_x=|start\\rangle\\langle start|+\\sum_{i=1}^N|i\\rangle\\langle i|\\otimes I_V\\otimes|x_i\\rangle\\langle x_i|$$\nproject onto $|start\\rangle$ plus query states whose response is $x_i$. Form the exact ordered product\n$$U_x=(2\\Pi_x-I)(2\\Delta-I).$$\n\nChoose $M=2^m$ as the least power of two satisfying $M\\ge512A$. Initialize the data register to $|start\\rangle$ and apply the coherent QPE gate list followed by its projective readout on $U_x$. Implement controlled $U_x$ in chronological order by controlled $(2\\Delta-I)$, then controlled $(2\\Pi_x-I)$, retaining both plus-on-range signs. Repeat that complete controlled circuit $2^j$ times for the required power $U_x^{2^j}$ at each $j=0,\\ldots,m-1$. Each controlled input-dependent reflection is the two-unconditional-query consistency-reflection circuit of [[alg-qa-16-controlled-consistency-reflection]]. For the measured phase label $y$, return $1$ exactly when $y=0$ and return $0$ otherwise. No gate-complexity bound is asserted for the input-independent reflection about the full witness span or the remaining nonoracle gates.",
+        "deps": [
+          "thm-qa-16-dual-vector-characterization",
+          "def-qc-controlled-unitary-access",
+          "def-qc-reflection",
+          "thm-qa-phase-estimation-access-cost",
+          "thm-qc-standalone-global-phase-invariance",
+          "thm-qc-controlled-global-phase-is-relative-phase",
+          "def-qc-dirac-notation-conversion",
+          "def-qa-16-boolean-query-domain",
+          "alg-qa-16-controlled-consistency-reflection",
+          "thm-qa-16-controlled-consistency-reflection-correct",
+          "alg-qa-quantum-phase-estimation",
+          "def-qa-quantum-query-algorithm",
+          "lem-qa-16-nonconstant-adversary-at-least-one",
+          "thm-qc-reflection-unitary-involution"
+        ],
+        "justified_by": [
+          "thm-qa-16-dual-evaluator-success"
+        ],
+        "dependency_level": 24,
+        "proof_obligations": [
+          "Specify all tensor registers, the orthogonal start/query mode, certificate balance and normalization ν_x.",
+          "Define the phase-estimation circuit and output threshold y=0 exactly; M is the least power of two with M≥512A.",
+          "For f(x)=1, use |ψ_x⟩ in both ranges and show |⟨start|ψ_x⟩|²=1/ν_x≥2/3.",
+          "For f(x)=0, construct |φ_x⟩=μ_x^{-1/2}(|start⟩−√(2A)Σ_i|i⟩|v_{x,i}⟩|1−x_i⟩), μ_x=1+2AΣ_i||v_{x,i}||²≤1+2A²; prove Δ|φ_x⟩=0 and Π_x|φ_x⟩=|start⟩/√μ_x.",
+          "Apply the effective spectral-gap bound with angular threshold ω=1/(4A); bound the nonzero-phase QPE probability at y=0 using the geometric-sum tail and show the combined false-positive probability is below 1/3 for M≥512A.",
+          "Do not assert an efficient gate implementation of reflection about the full witness span.",
+          "Apply the exact QC reflection sign/unitarity theorem to both R_x and R_Δ before controlling their product; preserve U_x=(2Π_x−I)(2Δ−I) exactly."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§24.6, printed pp. 119–120 (PDF pp. 127–128): dual-certificate reflection evaluator, normalization, two-query consistency reflection and effective-gap correctness route."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§§3.2–4.2, Theorems 3.4, 4.1 and 4.3 (PDF pp. 5–10): dual-witness conversion to a two-reflection query algorithm and tight Boolean upper bound."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional."
+      },
+      {
+        "id": "lem-qa-16-nonnegative-dual-overlap-upper-bound",
+        "kind": "lemma",
+        "title": "Input-distribution certificates upper-bound the nonnegative adversary value",
+        "statement_or_definition": "For a nonconstant finite Boolean query problem (N,D,f), let each p_x be a probability distribution on [N]. If\n$$\\eta:=\\min_{f(x)\\ne f(y)}\\sum_{i:x_i\\ne y_i}\\sqrt{p_x(i)p_y(i)}>0,$$\nthen the nonnegative adversary value satisfies $\\operatorname{Adv}(f)\\le1/\\eta$.",
+        "deps": [
+          "def-qa-16-nonnegative-adversary-bound",
+          "def-qa-16-input-mismatch-matrices",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "Choose a nonnegative unit top eigenvector for an arbitrary feasible Γ.",
+          "Insert the pairwise overlap inequality into its Rayleigh quotient and bound each filtered term by ||Γ∘Δ_i|| times the squared norm of its weighted vector."
+        ],
+        "sources": [
+          {
+            "title": "Høyer, Lee, and Špalek, Negative Weights Make Adversaries Stronger",
+            "url": "https://arxiv.org/pdf/quant-ph/0611054",
+            "locator": "§6.3, PDF pp.20–21: minimax dual expression for the nonnegative adversary and its composition upper bound."
+          },
+          {
+            "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§12.2, printed pp.101–102 (PDF pp.113–114): adversary dual vector formulation."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 24,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-qa-16-general-versus-nonnegative-adversary",
+        "kind": "proposition",
+        "title": "Signed weights extend the nonnegative adversary certificate",
+        "statement_or_definition": "For every finite Boolean query problem, $\\operatorname{Adv}^{\\pm}(f)\\ge\\operatorname{Adv}(f)$ under the same mismatch masks and normalization.",
+        "deps": [
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-nonnegative-adversary-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "proof_obligations": [
+          "Compare feasible sets under identical normalization and query masks.",
+          "Give a finite signed-weight example if strictness is asserted; otherwise state only monotonicity."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-16-filtered-gamma-adversary-equality",
+        "kind": "theorem",
+        "title": "Boolean-output filtered γ₂ equals the general adversary value",
+        "statement_or_definition": "For every finite nonconstant partial Boolean function,\n$$\\gamma_2(J-F\\mid\\Delta)=\\operatorname{Adv}^{\\pm}(f).$$\nHere F is the same-output mask, J is all ones, and Δ is the family of input-mismatch masks. The equality is exact for Boolean outputs; no larger-alphabet factor is asserted.",
+        "deps": [
+          "def-qa-16-filtered-gamma2",
+          "lem-qa-16-filtered-gamma2-well-defined",
+          "def-qa-16-general-adversary-bound",
+          "lem-qa-16-schur-product-psd",
+          "lem-qa-16-finite-sdp-strong-duality",
+          "thm-qa-16-dual-vector-characterization"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "proof_obligations": [
+          "Write primal and dual filtered-factorization SDPs and verify the finite output-code inequality.",
+          "Show the Boolean output specialization has factor exactly one."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§§2.2–3.2 and Theorem 3.4 (PDF pp. 3–6): filtered-γ₂ formulation and its comparison with the adversary bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          },
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-16-general-adversary-lower-bound",
+        "kind": "theorem",
+        "title": "General adversary spectral lower bound for quantum queries",
+        "statement_or_definition": "For every finite Boolean query problem and 0≤ε<1/2,\n$$Q_\\epsilon(f)\\ge\\left(\\frac12-\\sqrt{\\epsilon(1-\\epsilon)}\\right)\\operatorname{Adv}^{\\pm}(f).$$\nIn particular, at ε=1/3 the coefficient is $1/2-\\sqrt2/3>0$.",
+        "deps": [
+          "lem-qa-16-adversary-progress-endpoints",
+          "lem-qa-16-one-query-progress-change",
+          "def-qa-16-boolean-query-domain",
+          "def-qa-quantum-query-complexity",
+          "def-qa-16-general-adversary-bound",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 25,
+        "proof_obligations": [
+          "Combine the endpoint and one-query progress estimates by telescoping.",
+          "Optimize over the attained adversary ratio and check the ε=1/3 coefficient."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2 and Theorems 6.1–6.2, PDF pp. 9–11 and 27–32: span-program/adversary formulations; Theorem 10.1 and §11 (PDF pp. 54–57, 62–64) record the logarithmic gap and conjecture."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-qa-16-ambainis-base-separation",
+        "kind": "proposition",
+        "title": "The four-bit Ambainis function separates nonnegative and signed adversary bounds",
+        "statement_or_definition": "Let f:{0,1}^4→{0,1} equal 1 exactly on the sorted strings\n$$0000,0001,0011,0111,1111,1110,1100,1000.$$\nThen the nonnegative adversary value is exactly $\\operatorname{Adv}(f)=5/2$, while an explicit signed-weight matrix gives\n$$\\operatorname{Adv}^{\\pm}(f)>2.511486>5/2.$$\nThe distributions and matrices used to certify both bounds are given in the proof.",
+        "deps": [
+          "def-qa-16-boolean-query-domain",
+          "def-qa-16-input-mismatch-matrices",
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-nonnegative-adversary-bound",
+          "lem-qa-16-nonnegative-dual-overlap-upper-bound",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "List the eight one-inputs and eight zero-inputs and the full 8×8 cross matrix by Hamming-distance type.",
+          "For the nonnegative bound, verify a positive primal matrix with value 5/2 and a finite input-distribution certificate with overlap at least 2/5 on every cross-output pair.",
+          "For the signed bound, give exact rational weights, the four invariant 2×2 blocks of each filtered matrix, and a strict norm bound below 1 while the principal Rayleigh quotient exceeds 2.51."
+        ],
+        "sources": [
+          {
+            "title": "Høyer, Lee, and Špalek, Negative Weights Make Adversaries Stronger",
+            "url": "https://arxiv.org/pdf/quant-ph/0611054",
+            "locator": "§7.1, PDF pp.22–23, Theorem 20 and matrix table (9): the sorted four-bit Ambainis function, positive value 5/2 and signed adversary witness."
+          },
+          {
+            "title": "Ben W. Reichardt, Span Programs and Quantum Query Complexity",
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2, PDF pp.9–11: Ambainis iterates f_k with 2.5^k and signed value at least 2.51^k."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 25
+      },
+      {
+        "id": "thm-qa-16-adversary-composition-lower-bound",
+        "kind": "theorem",
+        "title": "Nonnegative and signed adversary bounds compose from below",
+        "statement_or_definition": "Let $f:D_f\\to\\{0,1\\}$ be a finite partial Boolean function on $N$ bits and let $g:D_g\\to\\{0,1\\}$ be a finite partial Boolean function on $m$ bits. Define the block domain and composed function by\n$$D_h=\\{(x_1,\\ldots,x_N)\\in D_g^N:(g(x_1),\\ldots,g(x_N))\\in D_f\\},\\qquad h=f\\circ g^N.$$\nAssume $D_h\\ne\\varnothing$, as required for $h$ to be a Boolean query problem under [[def-qa-16-boolean-query-domain]]. Then both adversary bounds satisfy\n$$\\operatorname{Adv}^{\\pm}(h)\\ge\\operatorname{Adv}^{\\pm}(f)\\operatorname{Adv}^{\\pm}(g),\\qquad \\operatorname{Adv}(h)\\ge\\operatorname{Adv}(f)\\operatorname{Adv}(g).$$",
+        "deps": [
+          "def-qa-16-boolean-query-domain",
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-nonnegative-adversary-bound",
+          "def-qa-16-input-mismatch-matrices",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "justified_by": [],
+        "proof_obligations": [
+          "Construct the composed adversary matrix from the outer matrix and the input-output blocks of the inner matrix, with norm-scaled identity blocks on equal-output subspaces.",
+          "Prove its norm and every filtered norm factor exactly by the finite singular-vector block decomposition.",
+          "Check that nonnegative component matrices yield a nonnegative composite matrix."
+        ],
+        "sources": [
+          {
+            "title": "Høyer, Lee, and Špalek, Negative Weights Make Adversaries Stronger",
+            "url": "https://arxiv.org/pdf/quant-ph/0611054",
+            "locator": "§6.2, PDF pp.19–20, Lemma 16 and Lemma 17: block-composed adversary matrix and signed/nonnegative lower composition."
+          },
+          {
+            "title": "Ben W. Reichardt, Span Programs and Quantum Query Complexity",
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2, PDF pp.9–11: iterated Boolean-function adversary values."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "dependency_level": 24
+      },
+      {
+        "id": "thm-qa-16-dual-evaluator-success",
+        "kind": "theorem",
+        "title": "Dual reflection evaluator has bounded-error correctness",
+        "statement_or_definition": "For every x∈D, the dual reflection evaluator outputs f(x) with probability at least 2/3. On 1-inputs its exact common witness vector has zero phase and squared overlap with |start⟩ at least 2/3. On 0-inputs its false-positive probability is at most $3/64+1/38<1/3$.\n\nFor every supplied finite certificate with class costs at most $A\\ge1$ and a unit distinguished vector $|start\\rangle$ as required by [[alg-qa-16-dual-adversary-reflection-evaluator]], the witness vectors are normalized, both specified projections and their exact plus-on-range reflections are well-defined, and the stated ordered controlled product and finite QPE circuit define the evaluator. The input-independent witness-span reflection and other nonoracle gates carry no asserted efficient gate implementation.",
+        "deps": [
+          "alg-qa-16-dual-adversary-reflection-evaluator",
+          "lem-qa-16-effective-spectral-gap",
+          "thm-qa-phase-estimation-success-and-tail",
+          "thm-qc-reflection-unitary-involution",
+          "lem-qa-13-pi-rational-bounds",
+          "thm-qa-16-dual-vector-characterization",
+          "def-qc-controlled-unitary-access",
+          "def-qc-reflection",
+          "thm-qa-phase-estimation-access-cost",
+          "thm-qc-standalone-global-phase-invariance",
+          "thm-qc-controlled-global-phase-is-relative-phase",
+          "def-qc-dirac-notation-conversion",
+          "def-qa-16-boolean-query-domain",
+          "alg-qa-16-controlled-consistency-reflection",
+          "thm-qa-16-controlled-consistency-reflection-correct",
+          "alg-qa-quantum-phase-estimation",
+          "def-qa-quantum-query-algorithm",
+          "lem-qa-16-nonconstant-adversary-at-least-one"
+        ],
+        "justified_by": [],
+        "dependency_level": 25,
+        "proof_obligations": [
+          "Verify ν_x≤3/2 on 1-inputs from C_1≤A.",
+          "Verify μ_x≤1+2A² and Δ|φ_x⟩=0 on 0-inputs from the dual constraints.",
+          "Use ω=1/(4A), the effective-gap norm bound, and the QPE geometric-sum bound to show false-positive probability <1/3 with M≥512A.",
+          "Track the phase-label-zero event and all normalization constants exactly."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§§3.2–4.2, Theorems 3.4, 4.1 and 4.3 (PDF pp. 5–10): dual witnesses, two-reflection state-conversion algorithm, effective gap, and phase detection."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-16-dual-evaluator-query-cost",
+        "kind": "theorem",
+        "title": "Dual reflection evaluator query complexity",
+        "statement_or_definition": "For a supplied balanced dual certificate of cost A≥1, the evaluator uses exactly\n$$2(M-1)\\quad\\text{queries},\\qquad M=2^m=\\text{least power of two with }M\\ge512A.$$\nThus its query cost is less than $2048A$. The phase-estimation and input-independent witness-span reflections carry no asserted gate bound.",
+        "deps": [
+          "alg-qa-16-dual-adversary-reflection-evaluator",
+          "thm-qa-16-dual-evaluator-success",
+          "thm-qa-phase-estimation-access-cost",
+          "thm-qa-16-controlled-consistency-reflection-query-cost",
+          "def-qa-quantum-query-complexity"
+        ],
+        "justified_by": [],
+        "dependency_level": 26,
+        "proof_obligations": [
+          "The QPE schedule uses Σ_{j=0}^{m−1}2^j=M−1 controlled U_x calls.",
+          "Each controlled U_x contains one controlled input-consistency reflection costing exactly two bit queries and one input-independent span reflection costing zero queries.",
+          "Separate query count from witness preparation, span reflection, equality gates, phase-detection gates, and classical preprocessing."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "§§3.2–4.2, Theorems 3.4, 4.1 and 4.3 (PDF pp. 5–10): dual witnesses, two-reflection state-conversion algorithm, effective gap, and phase detection."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-16-general-adversary-tightness",
+        "kind": "theorem",
+        "title": "General adversary bound characterizes Boolean quantum query complexity",
+        "statement_or_definition": "For every finite partial Boolean function f:D→{0,1}, bounded-error quantum query complexity at error at most 1/3 satisfies\n$$Q_{1/3}(f)=\\Theta(\\operatorname{Adv}^{\\pm}(f)).$$\nFor nonconstant f, the lower coefficient is $1/2-\\sqrt2/3$ and the reflection evaluator gives an upper bound below $2048\\operatorname{Adv}^{\\pm}(f)$. For constant f both quantities are zero.",
+        "deps": [
+          "thm-qa-16-general-adversary-lower-bound",
+          "thm-qa-16-filtered-gamma-adversary-equality",
+          "thm-qa-16-dual-evaluator-query-cost",
+          "def-qa-16-boolean-query-domain",
+          "def-qa-quantum-query-complexity",
+          "thm-qa-16-dual-vector-characterization",
+          "lem-qa-16-nonconstant-adversary-at-least-one",
+          "def-qa-16-general-adversary-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 27,
+        "proof_obligations": [
+          "Combine the signed-weight progress lower bound, exact Boolean filtered-γ₂/SDP duality, and reflection/phase-detection upper algorithm.",
+          "State that the 2009 span-program proof alone has a logarithmic overhead; use the later state-conversion/reflection proof for the tight upper bound.",
+          "For constant functions, both Q(f) and Adv±(f) are zero and the empty algorithm is exact; use the nonconstant dual evaluator only when Adv±(f)≥1."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1 and proof route through Theorems 3.4 and 4.1 (PDF pp. 2, 5–10): Boolean-function specialization Q(f)=Θ(Adv±(f))."
+          },
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1907.09415",
+            "locator": "§§12.1–12.3, printed pp. 99–103 (PDF pp. 111–115): general adversary bound, dual formulation, and algorithmic upper bound."
+          },
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "Theorem 10.1 and §11, PDF pp. 54–57 and 62–64: the 2009 upper bound retains a logarithmic factor and its removal is conjectured."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2245,
+    "id": "adversary-methods-and-quantum-query-complexity-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Adversary Methods and Quantum Query Complexity — Examples",
+    "companion": "adversary-methods-and-quantum-query-complexity",
+    "requires": [
+      "adversary-methods-and-quantum-query-complexity"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-16-or-dual-certificate",
+        "kind": "example",
+        "title": "Dual adversary certificate for OR_N",
+        "statement_or_definition": "For the partial OR problem $D=\\{0,e_1,\\ldots,e_N\\}$, define $v_{0,i}=N^{-1/4}$ and $v_{e_j,i}=N^{1/4}\\mathbf1[i=j]$. This is a balanced dual certificate with $C_0=C_1=\\sqrt N$. The matrix with only the symmetric edges $(0,e_j)$ has norm $\\sqrt N$ and each filtered norm 1. Hence\n$$\\operatorname{Adv}^{\\pm}(\\mathrm{OR}_N)=\\sqrt N.$$",
+        "deps": [
+          "def-qa-16-boolean-query-domain",
+          "def-qa-16-input-mismatch-matrices",
+          "def-qa-16-general-adversary-bound",
+          "thm-qa-16-dual-vector-characterization"
+        ],
+        "justified_by": [],
+        "dependency_level": 24,
+        "proof_obligations": [
+          "Check every ordered cross-output and same-output vector constraint and both class costs.",
+          "Write the matching symmetric star matrix, calculate its norm and every filtered norm, and conclude equality."
+        ],
+        "sources": [
+          {
+            "url": "https://cs.umd.edu/~amchilds/qa/qa.pdf",
+            "locator": "§§23.1–24.6, printed pp. 109–120 (PDF pp. 117–128): adversary method, dual characterization, effective-gap/reflection algorithm; especially §24.6, PDF pp. 127–128."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1011.3020",
+            "locator": "Theorem 1.1 and proof route through Theorems 3.4 and 4.1 (PDF pp. 2, 5–10): Boolean-function specialization Q(f)=Θ(Adv±(f))."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-16-negative-weights-matter",
+        "kind": "counterexample",
+        "title": "A nonnegative-only adversary estimate need not capture the general bound",
+        "statement_or_definition": "For the partial iterates $f^{(1)}=f$ and $f^{(k+1)}=f\\circ(f^{(k)},f^{(k)},f^{(k)},f^{(k)})$ of the sorted four-bit function,\n$$\\operatorname{Adv}^{\\pm}(f^{(k)})>(2.511486)^k,\\qquad \\operatorname{Adv}(f^{(k)})\\le(5/2)^k.$$\nThus signed adversary weights give a strict separation already at k=1 and an exponentially increasing ratio under iteration.",
+        "deps": [
+          "def-qa-16-general-adversary-bound",
+          "def-qa-16-nonnegative-adversary-bound",
+          "prop-qa-16-general-versus-nonnegative-adversary",
+          "prop-qa-16-ambainis-base-separation",
+          "lem-qa-16-nonnegative-dual-overlap-upper-bound",
+          "thm-qa-16-adversary-composition-lower-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 26,
+        "proof_obligations": [
+          "Define the recursive domain and block composition exactly.",
+          "Use the explicit base matrices and dual distributions, the positive-adversary overlap lemma and the composition theorem to prove the two family bounds for every k≥1."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/0904.2759",
+            "locator": "§2.2, PDF pp. 9–11: Ambainis-function example distinguishing positive-weight and signed adversary values."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all spaces, matrices, decompositions and optimization variables are finite-dimensional.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

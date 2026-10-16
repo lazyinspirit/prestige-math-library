@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-invariance-of-complex-line-integrals-under-increasing-reparametrization.json
 id: thm-invariance-of-complex-line-integrals-under-increasing-reparametrization
 kind: theorem
 title: "Complex and absolute line integrals are invariant under increasing continuous reparametrization"
@@ -7,13 +9,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-complex-line-integral-over-a-rectifiable-path, def-absolute-line-integral-over-a-rectifiable-path, thm-riemann-stieltjes-change-of-variable, thm-arc-length-is-invariant-under-monotone-reparametrization, thm-line-integrals-under-oriented-reparametrization]
+deps: [thm-complex-path-length-invariant-under-monotone-reparametrization, def-complex-line-integral-over-a-rectifiable-path, def-absolute-line-integral-over-a-rectifiable-path, thm-riemann-stieltjes-change-of-variable, thm-arc-length-is-invariant-under-monotone-reparametrization, thm-line-integrals-under-oriented-reparametrization]
 aliases: []
 landmark: true
 proof_strategy: cases
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -34,7 +33,7 @@ For singleton source and target intervals the same identities hold by the zero-i
 
 [L1] Under a strictly increasing continuous bijection between nondegenerate compact intervals, the real Riemann–Stieltjes change-of-variable formula holds ([[thm-riemann-stieltjes-change-of-variable]]).
 
-[L2] Arc length is invariant under continuous surjective monotone reparametrization, including the stated singleton cases ([[thm-arc-length-is-invariant-under-monotone-reparametrization]]).
+[L2] Complex arc length is invariant under continuous surjective monotone reparametrization, including singleton cases ([[thm-complex-path-length-invariant-under-monotone-reparametrization]]), by coordinate transport of [[thm-arc-length-is-invariant-under-monotone-reparametrization]]. Applied to every restriction this gives $s_{\gamma\circ\phi}(t)=s_\gamma(\phi(t))$.
 
 [L3] Published piecewise-$C^1$ line integrals are invariant under orientation-preserving reparametrization and change sign under orientation reversal ([[thm-line-integrals-under-oriented-reparametrization]]).
 
@@ -50,4 +49,4 @@ For singleton source and target intervals the same identities hold by the zero-i
 
 2.1 For the absolute integral in [L4], [L2] identifies the reparametrized arc-length integrator, and [L1] gives the same Stieltjes integral. [step 1.1, L1, L2, L4]
 
-3.1 The cases exhaust the Statement and prove both identities. On piecewise-$C^1$ contours this is exactly the increasing half of [L3]; decreasing reparametrization is excluded and instead changes the complex integral's sign. [step 1.1, step 2.1, step 1.2, L3, cases-exhaustive] ∎
+3.1 The cases exhaust the Statement and prove both identities. On piecewise-$C^1$ contours apply [L3] to the coordinate path and coordinate vector fields; it gives exactly the increasing identity; decreasing reparametrization is excluded and instead changes the complex integral's sign. [step 1.1, step 2.1, step 1.2, L3, cases-exhaustive] ∎

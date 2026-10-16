@@ -1,0 +1,62 @@
+16
+Quantum Algorithms
+
+then, r = 2c· (odd) where c ∈{0, 1}, each occuring equiprobably. Therefore, if p1 and
+p2 are both of this (unfavorable) type, and a1, a2 are chosen randomly, the probability
+that c1 ̸= c2 is 1
+
+2. Hence, once we have found r, our probability of successfully finding
+a factor is at least 1
+
+2, if N is a product of two distinct primes. If N has more than two
+distinct prime factors, our odds are even better. The method fails if N is a prime power,
+N = pα, but prime powers can be efficiently factored by other methods.
+
+6.3.2 RSA
+
+Does anyone care whether factoring is easy or hard? Well, yes, some people do.
+The presumed difficulty of factoring is the basis of the security of the widely used
+RSA (for Rivest, Shamir, and Adleman) scheme for public key cryptography, which you
+may have used yourself if you have ever sent your credit card number over the internet.
+The idea behind public key cryptography is to avoid the need to exchange a secret key
+(which might be intercepted and copied) between the parties that want to communicate.
+The enciphering key is public knowledge. But using the enciphering key to infer the
+deciphering key involves a prohibitively difficult computation. Therefore, Bob can send
+the enciphering key to Alice and everyone else, but only Bob will be able to decode
+the message that Alice (or anyone else) encodes using the key. Encoding is a “one-way
+function” that is easy to compute but very hard to invert.
+(Of course, Alice and Bob could have avoided the need to exchange the public key if
+they had decided on a private key in their previous clandestine meeting. For example,
+they could have agreed to use a long random string as a one-time pad for encoding and
+decoding. But perhaps Alice and Bob never anticipated that they would someday need
+to communicate privately. Or perhaps they did agree in advance to use a one-time pad,
+but they have now used up their private key, and they are loath to reuse it for fear that
+an eavesdropper might then be able to break their code. Now they are too far apart to
+safely exchange a new private key; public key cryptography appears to be their most
+secure option.)
+To construct the public key Bob chooses two large prime numbers p and q. But he
+does not publicly reveal their values. Instead he computes the product
+
+N = pq.
+(6.74)
+
+Since Bob knows the prime factorization of N, he also knows the value of the Euler
+function ϕ(N) – the number of number less than N that are coprime with N. In the
+case of a product of two primes it is
+
+ϕ(N) = N −p −q + 1 = (p −1)(q −1),
+(6.75)
+
+(only multiples of p and q share a factor with N). It is easy to find ϕ(N) if you know
+the prime factorization of N, but it is hard if you know only N.
+Bob then pseudo-randomly selects e < ϕ(N) that is coprime with ϕ(N). He reveals
+to Alice (and anyone else who is listening) the value of N and e, but nothing else.
+Alice converts her message to ASCII, a number a < N. She encodes the message by
+computing
+
+b = f(a) = ae(mod N),
+(6.76)
+
+which she can do quickly by repeated squaring. How does Bob decode the message?
+
+

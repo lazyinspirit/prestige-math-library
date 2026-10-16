@@ -1,0 +1,772 @@
+[
+  {
+    "order": 2248,
+    "id": "quantum-walk-search-and-element-distinctness",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Quantum-Walk Search and Element Distinctness",
+    "companion": "quantum-walk-search-and-element-distinctness-examples",
+    "requires": [
+      "quantum-phase-estimation",
+      "discrete-quantum-walks-and-szegedy-theory",
+      "the-polynomial-hierarchy-and-relativization",
+      "measurements-povms-and-instruments",
+      "recurrence-transience-and-hitting-times-for-markov-chains",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "registers-tensor-products-and-partial-trace",
+      "circuit-syntax-denotational-semantics-and-measurement",
+      "uniform-circuit-families-promise-problems-and-complexity",
+      "controlled-gates-phase-and-entanglement",
+      "reversible-computation-ancillas-and-coherent-oracles",
+      "finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "def-qa-18-marked-set-and-stationary-mass",
+        "kind": "definition",
+        "title": "Marked sets, stationary mass, and walk-search tasks",
+        "statement": "Let $(X,P,\\pi)$ be a finite reversible Markov chain with positive stationary law, as in [[def-qa-17-finite-reversible-chain]], and let $\\mathcal M\\subseteq X$ be a set of marked states. Its **stationary marked mass** is\n\n$$\\varepsilon:=\\pi(\\mathcal M)=\\sum_{x\\in\\mathcal M}\\pi_x.$$\n\nFor a specified threshold $\\varepsilon_0\\in(0,1]$, the **marked-set detection promise problem** has yes-instances with $\\mathcal M\\ne\\varnothing$ and $\\varepsilon\\ge\\varepsilon_0$, and no-instances with $\\mathcal M=\\varnothing$. The required classical output is one bit distinguishing these two cases; its permitted failure probability is a separate algorithm input. In the uniform-chain case, $\\pi_x=1/|X|$, so $\\varepsilon=|\\mathcal M|/|X|$.\n\nThe **marked-state finding promise problem** has inputs with $\\varepsilon\\ge\\varepsilon_0$ and requires a classical output $x\\in\\mathcal M$. It is a different output relation from detection. A claimed output is checked by the declared finite projective measurement and marked predicate; the corresponding outcome law is [[def-qc-projective-measurement]] and [[def-qc-povm-and-outcome-law]]. The encoding of $X$, the coherent marked predicate, and all state-preparation and transition circuits are supplied input data, not consequences of the finite chain matrix.",
+        "deps": [
+          "def-qa-17-finite-reversible-chain",
+          "def-promise-problem",
+          "def-qc-projective-measurement",
+          "def-qc-povm-and-outcome-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapters 18 and 20",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-18-classical-hitting-time",
+        "kind": "definition",
+        "title": "Finite-chain hitting time and survival law",
+        "statement": "Let $X$ be the finite state set, $P$ its row-transition matrix, $\\mathcal M\\subseteq X$ the marked set, $U=X\\setminus\\mathcal M$, and $P_{UU}$ the principal submatrix indexed by $U$. For an initial probability row vector $\\mu$, the **hitting-time survival law** is\n\n$$\\Pr_\\mu(\\tau_{\\mathcal M}>t):=\\mu_U P_{UU}^{\\,t}\\mathbf 1_U,\\qquad t\\in\\mathbb N_0,$$\n\nwhere $\\mu_U$ is the restriction of $\\mu$ to $U$ and $\\mathbf 1_U$ is the all-ones column vector on $U$. This is the finite sum of probabilities of all length-$t$ paths that remain in $U$; it does not require a path-space construction. For $U=\\varnothing$ the right side is $0$; for $\\mathcal M=\\varnothing$ it is $1$.\n\nThe hitting time $\\tau_{\\mathcal M}:=\\inf\\{t\\ge0:X_t\\in\\mathcal M\\}$ is the $\\mathbb N_0\\cup\\{\\infty\\}$-valued variable determined by this survival law. Its extended expectation is $\\mathbb E_\\mu\\tau_{\\mathcal M}=\\sum_{t\\ge0}\\Pr_\\mu(\\tau_{\\mathcal M}>t)$, and a constant-success hitting bound is a specified integer $t$ for which $\\Pr_\\mu(\\tau_{\\mathcal M}\\le t)$ is bounded below by a positive constant. These resource conventions are kept separate.",
+        "deps": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-18-absorbing-walk-discriminant-decomposition",
+        "kind": "lemma",
+        "title": "Discriminant of the marked-state absorbing walk",
+        "statement": "Let $P$ be a finite symmetric row-stochastic matrix on $X$, and let $\\mathcal M\\subseteq X$, $U=X\\setminus\\mathcal M$. Define the row-stochastic absorbing matrix\n\n$$P'_{xy}=\\begin{cases}1,&x=y\\in\\mathcal M,\\\\0,&x\\in\\mathcal M,\\ y\\ne x,\\\\P_{xy},&x\\in U.\\end{cases}$$\n\nFor the general row-stochastic discriminant $D(P')_{xy}=\\sqrt{P'_{xy}P'_{yx}}$ of [[def-qa-17-szegedy-transition-isometry]],\n\n$$D(P')=P_{UU}\\oplus I_{\\mathcal M},$$\n\nwhere $P_{UU}$ is the principal submatrix on $U$. In general $P'$ need not be symmetric or reversible.",
+        "deps": [
+          "def-qa-17-finite-stochastic-kernel",
+          "def-qa-17-szegedy-transition-isometry",
+          "thm-qa-17-discriminant-self-adjoint",
+          "def-qa-18-marked-set-and-stationary-mass"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk, §2",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the proof is a finite entrywise calculation.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-18-symmetric-compressed-walk-bound",
+        "kind": "lemma",
+        "title": "Spectral bound for a symmetric lazy walk killed on a marked set",
+        "statement": "Let $X$ be a finite set of size $n\\ge2$, and let $P=(I+Q)/2$ where $Q$ is a symmetric row-stochastic matrix. Let $\\mathbf u=n^{-1/2}\\mathbf 1_X$. Assume the second-largest eigenvalue of $P$ is at most $1-\\delta$, where $0<\\delta\\le1$. For $\\mathcal M\\subseteq X$, put $\\varepsilon=|\\mathcal M|/n$, $U=X\\setminus\\mathcal M$, and let $\\Pi_U$ be the coordinate orthogonal projection defined by $\\Pi_Ue_x=e_x$ for $x\\in U$ and $\\Pi_Ue_x=0$ for $x\\notin U$. Let $P_U=\\Pi_UP\\Pi_U$ restricted to vectors supported on $U$. Then $P$ has spectrum in $[0,1]$ and\n\n$$\\|P_U\\|\\le 1-\\delta\\varepsilon.$$\n\nThe empty compression has norm $0$ by convention.",
+        "deps": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-17-finite-stochastic-kernel",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18, §18.4, Lemma 18.2",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk, Proposition 1 and §3",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the proof uses finite-dimensional spectral decomposition and Cauchy–Schwarz.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-18-classical-spectral-hitting-bound",
+        "kind": "theorem",
+        "title": "Classical marked-set hitting bound from a spectral gap",
+        "statement": "Under the hypotheses of [[lem-qa-18-symmetric-compressed-walk-bound]], suppose $\\varnothing\\ne\\mathcal M\\ne X$ and start uniformly on $U=X\\setminus\\mathcal M$. Then\n\n$$\\Pr(\\tau_{\\mathcal M}>t)\\le(1-\\delta\\varepsilon)^t\\qquad(t\\in\\mathbb N_0),$$\n\nso $\\mathbb E\\tau_{\\mathcal M}\\le1/(\\delta\\varepsilon)$ and $O(1/(\\delta\\varepsilon))$ steps give constant success probability. If $\\mathcal M=X$, the hitting time is $0$.",
+        "deps": [
+          "lem-qa-18-symmetric-compressed-walk-bound",
+          "def-qa-18-classical-hitting-time",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.1",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk, Proposition 1",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the proof uses finite matrix powers and the geometric series.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-18-random-access-gate-model",
+        "kind": "definition",
+        "title": "Random-access quantum-memory gate model",
+        "statement": "Let a QRAM contain an ordered classical memory word $z=(z_0,\\ldots,z_{L-1})\\in\\{0,1\\}^L$, with $L\\ge1$. Its **random-access quantum-memory gate** acts on an address register encoding $i\\in\\{0,\\ldots,L-1\\}$, a target bit $b$, and the memory register by\n\n$$|i,b,z_0\\cdots z_{L-1}\\rangle\\longmapsto |i,z_i,z_0\\cdots z_{i-1}b z_{i+1}\\cdots z_{L-1}\\rangle.$$\n\nFor address superpositions, this basis action is extended linearly. On valid addresses it swaps the target with the addressed memory bit, so the gate is an involutive permutation of the ordered computational basis and hence unitary; unused address encodings, if any, are fixed. One call has cost one QRAM gate-time unit by this model's convention. A read into a clean scratch target followed by copying and restoring the addressed bit uses the corresponding additional calls. The memory word itself, its address width, the circuit used to construct or update it, and the other ordinary gates are separate charged resources. This is a quantum random-access memory model; it does not assert an implementation by a bounded-arity ordinary circuit of the same gate count.",
+        "deps": [
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-qc-circuit-syntax-and-register-order",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, §6.2",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-qa-18-reversible-walk-finding",
+        "kind": "algorithm",
+        "title": "MNRS finite reversible-walk finding",
+        "statement": "This is the finite-generation and execution procedure OP2 in `research/quantum-algorithms-planning/operational-contracts.md`, section “OP2 — MNRS approximate reflection and finite tolerant recursive finding”, transcribed with its declared constants and charged branches.\n\n**Input.** A finite ergodic reversible row chain $(X,P,\\pi)$ with $\\pi_x>0$, a supplied positive dyadic rational lower absolute-gap bound $\\delta_0$, a dyadic rational marked-mass lower bound $\\varepsilon_0>0$ with promise $\\pi(\\mathcal M)=0$ or $\\pi(\\mathcal M)\\ge\\varepsilon_0$, a coherent marked-bit check of cost $C$, and a dyadic rational failure target $\\rho\\in(0,1)$. These finite parameter encodings suffice for real positive promises: choose dyadic lower bounds within a factor of two of the gap and nonzero marked-mass bounds, and a dyadic target in $(\\rho_*/2,\\rho_*]$ for desired failure probability $\\rho_*$.  Write $|\\sqrt\\pi\\rangle=\\sum_{x\\in X}\\sqrt{\\pi_x}|x\\rangle$ and let $T|x\\rangle=|x\\rangle\\sum_y\\sqrt{P_{xy}}|y\\rangle$ be the row isometry of [[def-qa-17-szegedy-transition-isometry]]. The supplied clean preparation $A_\\pi$ maps its specified blank input to the **stationary edge state**\n$$|\\pi_{\\rm edge}\\rangle=T|\\sqrt\\pi\\rangle=\\sum_{x\\in X}\\sqrt{\\pi_x}|x\\rangle\\sum_{y\\in X}\\sqrt{P_{xy}}|y\\rangle,$$\nreturns all its work registers to their specified blank states, and has charged cost $S$. The row-access interface of [[def-qa-17-walk-access-model]] supplies the row-preparation unitary $V_P$, its inverse, controlled forward and inverse calls, the clean-state reflection $R_0$ and its controlled call, and the swap $S$ and its controlled call. On the clean-work logical walk space these implement $R_A=2TT^*-I=V_PR_0V_P^*$, $U=SR_A$, and $W=U^2$, with each constituent charged. Supply controlled calls to $W$ and $W^*$ for the coherent QPE circuits and an exact controlled $R_A$ for the all-zero branch. A single bound $U_0$ covers each controlled $W$ or $W^*$ call and the controlled $R_A$ call, including their factorwise implementation costs. A matrix $P$ alone supplies none of these circuits.\n\n**Marked check and retained-state instrument.** Write $m(x)=\\mathbf1_{\\mathcal M}(x)$. The supplied exact coherent check is a unitary $B_{\\mathcal M}$ with separately supplied inverse and specified fresh flag $F$ and scratch $J$. On the declared logical encoding it satisfies, for every $x\\in X$, $b\\in\\{0,1\\}$, and vector $\\eta$ of all existing remaining registers,\n$$B_{\\mathcal M}(|x\\rangle|\\eta\\rangle|b\\rangle_F|0\\rangle_J)=|x\\rangle|\\eta\\rangle|b\\mathbin\\oplus m(x)\\rangle_F|0\\rangle_J.$$\nIts unitary extension outside the logical encoding is supplied too. Thus it preserves the first label and every existing walk, phase, data, and work auxiliary on clean new scratch. In the relevant query/check cost coordinates, $C$ bounds each forward and inverse check call; declare the flag-readout cost separately and include it in $C$ in any coordinate that counts readout as a check. A flag readout uses no value-oracle query. Gate, output-bit, and new flag/scratch costs are separately priced.\n\nOn the whole existing register space set $\\Pi_1=\\Pi_{\\mathcal M}=(\\sum_{x\\in\\mathcal M}|x\\rangle\\langle x|)\\otimes I_{\\rm rest}$ and $\\Pi_0=I-\\Pi_{\\mathcal M}$, with identity on every existing auxiliary, including every retained $K_j$. Every marked/unmarked test below uses the **specified Lüders instrument**\n$$\\mathcal I_a(Z)=\\Pi_aZ\\Pi_a,\\qquad a\\in\\{0,1\\},$$\nin the sense of [[def-qc-instrument-and-conditional-state]]: its positive-probability conditional density is $\\mathcal I_a(Z)/\\operatorname{tr}(\\mathcal I_a(Z))$; no conditional state is assigned when that trace is zero. Execute the test by appending $|0\\rangle_F|0\\rangle_J$, applying $B_{\\mathcal M}$, reading only the fresh flag with the explicitly chosen computational-basis Lüders maps $Y\\mapsto Q_aYQ_a$, where $Q_a=I\\otimes|a\\rangle\\langle a|_F\\otimes I_J$, storing $a$ in the classical output record, and applying $B_{\\mathcal M}^*$ to return the fresh flag and scratch to zero. Retain every pre-existing register; on an unmarked result read no finer first-label information. A marked result may then be followed by label readout and verification for output. Charge one forward check, one inverse check, and one flag readout per test, hence $O(C)$ in the stated query/check profile. The recursive marked phase flip is implemented by $B_{\\mathcal M}$, a phase $-1$ on flag $1$, and $B_{\\mathcal M}^*$, also with both calls charged.\n\n**Approximate stationary reflection $R(\\beta)$.** Set $s=\\min\\{q\\ge1:4^q\\delta_0\\ge64\\}$ and $k=\\min\\{j\\ge1:2^j\\beta\\ge2\\}$, using exact integer/rational comparisons. With $Q=2^s$, these comparisons give $Q\\ge8/\\sqrt{\\delta_0}>2\\pi/\\sqrt{\\delta_0}$ using $\\pi<4$ from [[thm-gregory-leibniz-series-for-pi-from-a-finite-remainder]]. Append $k$ separate $s$-bit zero phase registers. Coherently execute the finite QPE circuit prefix from [[alg-qa-quantum-phase-estimation]] on $W$ in each register, using the declared controlled powers. This prefix is a unitary circuit on the full walk register and is executed on arbitrary walk states, including superpositions; the eigenvector input in the QPE analysis is not a restriction on the circuit's action. Do not measure these phase registers. If at least one phase register is nonzero, apply $-I$ to the walk state. If all are zero, apply the exact controlled row-space reflection $R_A=2TT^*-I$ using the charged row-preparation, inverse, and clean-state reflection calls. Reverse the $k$ coherent QPE prefixes in reverse chronological order, using the supplied controlled inverse powers. Charge $2k(2^s-1)$ controlled $W$ and $W^*$ calls, the controlled $R_A$ branch, all-zero comparisons, phase-register gates, and the allocated classical arithmetic. The all-zero branch is required: $W$ has the extra zero-phase subspace $A^\\perp\\cap B^\\perp$, where $R_A=-I$, while $R_A=+I$ on the stationary state.\n\n**Recursive circuit $A_i$.** Let $\\gamma=1/120$, $\\beta_i=\\gamma/(16i^2)$ for $i\\ge1$, and $A_0=I$. For $i>0$, allocate a fresh $K_i$ for $R(\\beta_i)$ and execute chronologically: (i) $A_{i-1}$, the marked phase flip, and $A_{i-1}^\\dagger$; (ii) coherently test every older $K_j$, $j<i$, applying $-I$ if any is nonzero and otherwise applying $R(\\beta_i)$ on the walk and fresh $K_i$; compute and uncompute the control predicate; (iii) apply $A_{i-1}$. Each $\\beta_i$ is rational, and the $k_i$ loop in $R(\\beta_i)$ is an exact rational comparison. An inverse means the exact reversed finite gate list, not a reset of measured work.\n\n**Tolerant finding wrapper.** If $\\varepsilon_0\\ge1/2$, take $n_s=\\min\\{n\\ge1:2^{-n}\\le\\rho\\}$ fresh stationary samples, verify each label, return the first marked label, and output `NO MARKED` if all fail. Otherwise, let $t_{\\max}$ be the least integer $t\\ge0$ such that $3^t\\arcsin\\sqrt{\\varepsilon_0}\\ge\\pi/4$. Determine it by the exact algebraic threshold comparison $\\varepsilon_0\\ge\\sin^2(\\pi/(4\\cdot3^t))$; equality takes the $\\ge$ branch. Let $n_{\\rm out}=\\min\\{n\\ge1:(19/20)^n\\le\\rho\\}$, found by exact rational comparisons. In each outer trial:\n\n1. Prepare a fresh stationary sample, test its first label, and return it if marked.\n2. Prepare a fresh stationary walk state with all $K_1,\\ldots,K_{t_{\\max}}$ zero.\n3. For $i=1,\\ldots,t_{\\max}$, apply $A_i$, execute the marked/unmarked Lüders test specified above, and on a marked outcome read, verify, and return the label. On an unmarked outcome retain the conditional current state and all auxiliary registers, and continue; do not reprepare or reset them.\n4. If no level succeeds, discard the trial and begin the next fresh outer trial.\n\nIf all trials fail, output `NO MARKED`. Every loop has a finite cap; all confidence calculations, comparisons, reversible predicates, retained auxiliary space, state preparation, update, inverse, controlled, reflection, and check costs are charged. In the $\\varepsilon_0\\ge1/2$ branch, the cap above gives false-negative probability at most $\\rho$; in the other branch correctness and the sharper cost are proved separately in [[thm-qa-18-reversible-search-cost]].",
+        "deps": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-17-absolute-spectral-gap",
+          "def-qa-17-szegedy-transition-isometry",
+          "def-qa-17-szegedy-walk",
+          "def-qa-17-walk-access-model",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-reflection",
+          "def-qc-projective-measurement",
+          "def-qc-instrument-and-conditional-state",
+          "def-qc-elementary-circuit-resources",
+          "alg-qa-quantum-phase-estimation",
+          "def-qa-eigenphase-estimation-model",
+          "thm-qa-17-walk-access-cost",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk, §§3.2–4",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §20.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the procedure uses finite circuits and explicitly supplied forward, inverse, and controlled access."
+      },
+      {
+        "id": "def-qa-18-element-distinctness-johnson-walk",
+        "kind": "definition",
+        "title": "Element-distinctness Johnson walk and value access",
+        "statement": "Let $N\\ge2$, let $\\mathcal V$ be a finite nonempty value set, and let $f:[N]\\to\\mathcal V$, where $[N]=\\{1,\\ldots,N\\}$. A **coherent value oracle** is a supplied finite unitary $O_f$ with an explicitly specified injective encoding $\\operatorname{enc}:\\mathcal V\\to\\{0,1\\}^b$ for some finite $b$, and action $|i,z\\rangle\\mapsto|i,z\\mathbin\\oplus\\operatorname{enc}(f(i))\\rangle$ on valid addresses and target strings, as in [[def-qc-coherent-function-oracle]]. Injectivity ensures that stored encodings compare equal exactly when the underlying values do. Oracle-query cost and ordinary gate-occurrence cost are separate coordinates under [[def-qc-elementary-circuit-resources]]. The function table or name alone supplies no oracle circuit.\n\nFor $N\\ge4$ and $2\\le r\\le\\lfloor N/2\\rfloor$, the **lazy Johnson walk** has state space $\\Omega_r=\\{S\\subseteq[N]:|S|=r\\}$ and transitions\n\n$$P(S,S)=\\tfrac12,\\qquad P(S,S\\setminus\\{i\\}\\cup\\{j\\})=\\frac{1}{2r(N-r)}\\quad(i\\in S,\\ j\\notin S),$$\n\nwith all other entries zero. Its marked vertices are\n\n$$\\mathcal M_f:=\\{S\\in\\Omega_r:\\exists i,j\\in S,\\ i\\ne j,\\ f(i)=f(j)\\}.$$\n\nThe stored data at $S$ are the $r$ labeled values $(f(i))_{i\\in S}$. Preparing the uniform $r$-subset state and loading these values has value-query cost $S_0=r$, with subset preparation gates charged separately. A neighbor update erases the removed value and loads the added value, so its value-query cost is $U_0=2$; the XOR oracle is its own inverse. Checking whether the stored subset is marked uses no further value queries, so $C_0=0$, but comparison gates and memory accesses are charged. After measuring a marked subset, scanning its stored values outputs a colliding pair with no additional value query; the scan's gate/time cost remains separate. For $N\\le3$, use direct pairwise comparison rather than the $r$-subset walk. The lower bound $r\\ge2$ is essential: a one-element subset cannot contain a collision pair.",
+        "deps": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qc-coherent-function-oracle",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, §§2–4",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §§20.1–20.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-qa-18-canonical-skip-list-for-element-distinctness",
+        "kind": "definition",
+        "title": "Canonical hash-bucket and nested skip-list storage",
+        "statement": "Let $N\\ge4096$, $2\\le r\\le\\lfloor N/2\\rfloor$, and $f:[N]\\to[M]$ with the injective value encoding in [[def-qa-18-element-distinctness-johnson-walk]]. Put $H=\\lceil\\log_2N\\rceil$, $d=C=16\\lceil\\log_2(N+2)\\rceil$, $R=2^{\\lceil\\log_2r\\rceil}$, and $q=2^H$, and assume $d\\le N$. Fix as part of the representation a monic irreducible polynomial of degree $H$ over $\\mathbb F_2$ and its polynomial-basis field $\\mathbb F_q$; the storage is canonical relative to this fixed field representation and the hash seed. Choose $H+1$ independent uniform coefficient tuples in $\\mathbb F_q^d$ and use them as coefficients of degree-at-most-$(d-1)$ polynomials $p_{-1},p_0,\\ldots,p_{H-1}$. For each $i\\in[N]$, let $\\mathsf{enc}(i)$ be the field element whose $H$-bit polynomial-basis coordinate string is the $H$-bit binary encoding of $i-1$; these elements are distinct. Let $h(i)$ be the integer represented by the low $\\log_2R$ bits of $p_{-1}(\\mathsf{enc}(i))$, and let $b_\\ell(i)$ be the low bit of $p_\\ell(\\mathsf{enc}(i))$. The **height** of $i$ is the number of consecutive $1$ bits starting at $b_0(i)$, capped at $H$; equivalently, $\\operatorname{height}(i)\\ge\\ell$ exactly when $b_0(i)=\\cdots=b_{\\ell-1}(i)=1$.\n\nFor a subset $S\\in\\binom{[N]}r$, the fixed memory word has $R$ hash buckets, each with $C$ slots, and one overflow bit. If no bucket exceeds capacity, every $i\\in S$ is stored in bucket $h(i)$; occupied slots are sorted by index, and each record contains $i$, $f(i)$, and its skip-list fields. A node identifier is the input index $i$; resolving it means computing $h(i)$ and scanning that bucket. If any bucket would exceed capacity, set the overflow bit and put the same fixed sentinel in the data slots. Thus the represented word is a total, unique function of the subset and seed; the skip-list structure is valid exactly when the overflow bit is zero.\n\nThe storage also contains two **nested skip lists**, one in increasing index order and one in lexicographic order of $(f(i),i)$. Level $\\ell$ of either list, for $0\\le\\ell\\le H$, contains exactly the keys with height at least $\\ell$; level $0$ contains all keys. Each forward pointer names a node identifier and stores its **span**, the difference between the source and target ranks in level $0$ (the head sentinel has rank $-1$). These spans support rank and select operations. The two lists, bucket positions, pointers, and spans are the unique ones determined by $(S,f|_S,p_{-1},p_0,\\ldots,p_{H-1})$; they do not depend on the path used to reach $S$. A capped search inspects at most $D=2\\lfloor d/2\\rfloor+1$ forward entries at each level before raising an overrun flag. This definition specifies a finite representation and search convention; it does not assert a probability or cost bound.",
+        "deps": [
+          "def-qa-18-element-distinctness-johnson-walk",
+          "def-qa-18-random-access-gate-model",
+          "thm-existence-of-finite-fields",
+          "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, §6.2 and Lemmas 5–6",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-qa-18-johnson-walk-spectrum",
+        "kind": "lemma",
+        "title": "Spectrum of the lazy Johnson walk",
+        "statement": "Let $N\\ge4$ and $2\\le r\\le\\lfloor N/2\\rfloor$. For the lazy Johnson transition matrix $P$ on the $r$-subsets of $[N]$ from [[def-qa-18-element-distinctness-johnson-walk]], all eigenvalues, counted with multiplicity, are\n\n$$\\lambda_j=1-\\frac{j(N+1-j)}{2r(N-r)},\\qquad 0\\le j\\le r,$$\n\nwith multiplicity $\\binom Nj-\\binom N{j-1}$, where $\\binom N{-1}=0$. They are nonnegative, and for the uniform stationary law the absolute spectral gap, in the sense of [[def-qa-17-absolute-spectral-gap]], is\n\n$$\\delta(P)=1-\\lambda_1=\\frac{N}{2r(N-r)}.$$",
+        "deps": [
+          "def-qa-18-element-distinctness-johnson-walk",
+          "def-inner-product-space",
+          "thm-rank-nullity",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-orthogonal-complement",
+          "prop-adjoint-algebra",
+          "def-qa-17-finite-reversible-chain",
+          "def-qa-17-absolute-spectral-gap"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §20.2",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, §§3–4",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; all spaces are finite coordinate spaces and the proof uses finite incidence maps.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-18-reversible-search-cost",
+        "kind": "theorem",
+        "title": "Finite reversible-walk finding cost",
+        "statement": "Let $(X,P,\\pi)$ be a finite ergodic reversible chain with actual absolute spectral gap $\\delta_{\\rm act}\\in(0,1]$. Supply the algorithm with a dyadic rational lower bound $\\delta_0\\in(0,\\delta_{\\rm act}]$ and suppose the marked set is empty or has stationary mass at least the dyadic rational lower bound $\\varepsilon_0\\in(0,1]$. Let the dyadic rational failure target be $\\rho\\in(0,1)$. Let $S_0$ be the cost of preparing the stationary walk state, $U_0$ a common upper bound for one controlled $W$ or $W^*$ update and the exact controlled row-space reflection $R_A$ used by the construction, and $C$ the cost of a coherent marked check. For $0<\\varepsilon_0<1/2$, one outer trial of [[alg-qa-18-reversible-walk-finding]] with gap input $\\delta_0$ has one-sided error, finds a marked state with a fixed positive probability when one exists, and uses\n\n$$S_0+O\\!\\left(\\frac{1}{\\sqrt{\\varepsilon_0}}\\left(\\frac{U_0}{\\sqrt{\\delta_0}}+C\\right)\\right).$$\n\nin the corresponding query/update/check cost coordinates. The capped wrapper with failure target $\\rho\\in(0,1)$ uses $O((S_0+\\varepsilon_0^{-1/2}(U_0/\\sqrt{\\delta_0}+C))(1+\\ln(1/\\rho)))$ in that profile. When $\\varepsilon_0\\ge1/2$, its direct-sampling branch uses $O((S_0+C)(1+\\ln(1/\\rho)))$. If the actual gap is dyadic and supplied exactly, one may set $\\delta_0=\\delta_{\\rm act}$; otherwise a dyadic lower bound within a factor of two gives the same asymptotic bound in the actual gap. For gate, width, precision, and bit-time coordinates, the phase-register gates, controlled reflection, comparisons, numerical generation, and retained workspace are charged separately.",
+        "deps": [
+          "alg-qa-18-reversible-walk-finding",
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-17-absolute-spectral-gap",
+          "thm-qa-17-absolute-gap-eigenvalue-characterization",
+          "thm-qa-17-szegedy-spectral-mapping",
+          "thm-qa-17-discriminant-self-adjoint",
+          "alg-qa-quantum-phase-estimation",
+          "def-qa-eigenphase-estimation-model",
+          "def-qa-circular-phase-distance",
+          "lem-qa-phase-estimation-outcome-kernel",
+          "lem-qa-phase-estimation-geometric-sum",
+          "lem-qa-phase-estimation-sine-chord-bounds",
+          "thm-qa-phase-estimation-exact-grid",
+          "thm-qa-phase-estimation-superposition-law",
+          "thm-qa-phase-estimation-access-cost",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-triple-angle-identities",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "thm-double-angle-and-power-reduction-identities",
+          "def-qc-projective-measurement",
+          "thm-qc-projective-measurement-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-projective-conditional-state",
+          "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "def-qc-povm-and-outcome-law",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-qc-dirac-notation-conversion",
+          "def-trace-of-an-endomorphism",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk, Theorem 3, §3.2 Theorem 6, and §4 Lemmas 1–2",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §20.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the proof uses finite-dimensional spectral decomposition, finite probability bounds, and explicit finite unitaries.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-18-szegedy-phase-detection",
+        "kind": "algorithm",
+        "title": "Szegedy-walk marked-set detection",
+        "statement": "**Input.** A finite symmetric lazy row-stochastic matrix $P$ on nonempty $X$, with uniform stationary law and, when $|X|\\ge2$, real promised lower gap $\\delta_0\\in(0,1]$ satisfying $\\delta(P)=1-\\lambda_2(P)\\ge\\delta_0$; a marked predicate with promise $\\mathcal M=\\varnothing$ or $|\\mathcal M|/|X|\\ge\\varepsilon_0$ for real $\\varepsilon_0\\in(0,1]$; and a real failure target $\\beta\\in(0,1)$. Supply an exact two-outcome projective test on the first register with its Lüders instrument and declared cost $C_{\\rm mark}$; this cost includes the marked-branch label readout and verification. The finite classical input supplies, for each $z\\in\\{\\delta_0,\\varepsilon_0,\\beta\\}$, a certified dyadic bracket $[z_-,z_+]$ encoded by finite binary numerators and exponents, with\n$$0<z_-\\le z\\le z_+\\le\\min(1,2z_-).$$\nThe bracket containments are input promises; every endpoint bit and all subsequent comparison, precision, and bit-time costs are charged. Such a finite bracket exists for every real parameter in the stated interval. The numerical input model also supplies terminating exact comparisons for rational values and the algebraic real parts of roots of unity used below; it declares and charges their bit-time and description costs. Write $\\underline\\delta=(\\delta_0)_-$, $\\underline\\varepsilon=(\\varepsilon_0)_-$, and $\\underline\\beta=\\beta_-$. Also supply a circuit $A_{\\rm unif}$ preparing $|s\\rangle=|X|^{-1/2}\\sum_{x\\in X}|x\\rangle$ with its cost and a row-preparation access model for the absorbing chain $P'$ of [[lem-qa-18-absorbing-walk-discriminant-decomposition]]. The model supplies $V_{P'}$, its inverse and controlled forms, the clean-state reflection and its controlled form, and the swap and controlled swap needed for the one-reflection walk; each constituent is separately charged. If $|X|=1$, the procedure measures its sole label with the marked predicate and terminates exactly, without using the gap parameter or walk. Marked-check, preparation, controlled-walk, inverse, gate, precision, comparison, and description-bit costs are separate declared inputs. A matrix alone supplies none of these circuits.\n\n**Output.** `NONEMPTY` if a marked label is found or the phase test accepts; otherwise `EMPTY`. A found label is returned and checked against the supplied predicate.\n\n**Instructions.**\n\n1. If $|X|=1$, measure its only label, evaluate the supplied predicate and return the exact answer. Otherwise set $\\gamma_0=\\arccos(1-\\underline\\delta\\,\\underline\\varepsilon)$. Start at $m=6$ and increment until the exact comparison\n$$1-\\underline\\delta\\,\\underline\\varepsilon\\le\\cos(\\pi 2^{5-m}),$$\nand set $Q=2^m$. Since the compared cosine is the real part of a root of unity, this is a finite exact algebraic comparison; it is equivalent to $m=\\lceil\\log_2(32\\pi/\\gamma_0)\\rceil$. Start at $k=1$ and increment until the exact rational comparison $6^k\\underline\\beta\\ge1$ holds, equivalently $k=\\lceil\\ln(1/\\underline\\beta)/\\ln6\\rceil$. Both loops terminate because $\\underline\\delta\\,\\underline\\varepsilon>0$ and $\\underline\\beta>0$. All comparisons and their bit costs are part of the declared input cost model.\n2. Repeat the following fresh-state run $k$ times, stopping early if `NONEMPTY` is returned.\n3. Prepare $|s\\rangle$ with $A_{\\rm unif}$ and apply the supplied row preparation $V_{P'}$ to obtain the two-register row state. On the first register, use the supplied two-outcome projective measurement with $\\Pi_1=\\sum_{x\\in\\mathcal M}|x\\rangle\\langle x|\\otimes I_{\\rm rest}$ and $\\Pi_0=I-\\Pi_1$, with Lüders branch maps $Z\\mapsto\\Pi_aZ\\Pi_a$. These maps form a valid instrument: the projections are non-negative, sum to identity, and equal their own non-negative square roots, so [[thm-qc-luders-instrument-of-a-povm-is-valid]] applies. If outcome $1$ occurs, measure the first register in its computational basis, verify the resulting label $x\\in\\mathcal M$, and output `NONEMPTY` and $x$ immediately. If outcome $0$ occurs with positive probability, continue with its normalized projected state; this preserves coherence among all unmarked labels. Outcome $0$ is impossible when $\\mathcal M=X$, so no conditional state is needed there.\n4. On the unmarked branch, apply the coherent QPE circuit prefix from [[alg-qa-quantum-phase-estimation]] to the conditioned two-register state for the one-reflection walk $U'=S(2T'T'^*-I)$, where $T'$ is the row-preparation map for $P'$. The QPE prefix is a finite unitary circuit and acts on this arbitrary conditioned superposition; its eigenvector input in the outcome analysis does not restrict the circuit's input domain. Measure the phase register only after the controlled-power and inverse-QFT circuit has run. Use supplied controlled powers if available; otherwise implement each controlled $U'^{2^j}$ by $2^j$ sequential controlled one-step $U'$ calls. The factorwise controlled call charges controlled $V_{P'}^\\dagger$, controlled $V_{P'}$, the controlled clean-state reflection, and controlled swap. No controlled inverse of $U'$ is used.\n5. For the measured integer $y\\in\\{0,\\ldots,Q-1\\}$, compute $d(y)=\\min(y/Q,1-y/Q)$ using exact rational arithmetic. Since $0<\\underline\\delta\\,\\underline\\varepsilon\\le1$, the principal inverse-cosine convention and cosine monotonicity give $0<\\gamma_0\\le\\pi/2$. Return `NONEMPTY` exactly when $d(y)>\\gamma_0/(4\\pi)$; equality takes the `EMPTY` branch. This strict comparison is finite: if $d(y)>1/8$ accept, and if $d(y)\\le1/8$ compare the algebraic numbers $\\cos(4\\pi d(y))$ and $1-\\underline\\delta\\,\\underline\\varepsilon$, accepting exactly when the former is strictly smaller. Here $4\\pi d(y)$ is a rational multiple of $\\pi$, so its cosine is the real part of a root of unity; monotonicity of cosine on $[0,\\pi]$ gives the stated comparison. Charge the exact comparison and all phase-register/inverse-QFT gates.\n6. If all $k$ fresh runs fail to return `NONEMPTY`, output `EMPTY`. A run uses one marked check, the supplied uniform-state and one row-preparation costs, one $m$-bit QPE, and its explicitly charged controlled-walk calls. With only one-step controlled access, QPE uses exactly $Q-1$ controlled $U'$ calls. Gate synthesis, bracket-description bits, exact comparison arithmetic, and classical threshold bits are additional charged costs.",
+        "deps": [
+          "def-qa-18-marked-set-and-stationary-mass",
+          "def-qa-17-finite-stochastic-kernel",
+          "def-qa-17-szegedy-walk",
+          "def-qa-17-walk-access-model",
+          "lem-qa-18-absorbing-walk-discriminant-decomposition",
+          "lem-qa-18-symmetric-compressed-walk-bound",
+          "alg-qa-quantum-phase-estimation",
+          "thm-qa-phase-estimation-success-and-tail",
+          "thm-qa-phase-estimation-superposition-law",
+          "thm-qa-phase-estimation-exact-grid",
+          "def-qc-dirac-notation-conversion",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qc-coherent-function-oracle",
+          "def-qc-projective-measurement",
+          "def-qc-elementary-circuit-resources",
+          "thm-qc-projective-measurement-outcome-law",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "thm-qc-projective-conditional-state",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-qa-phase-estimation-access-cost",
+          "thm-qa-17-walk-access-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §§8.1–8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk, §§2–3",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the procedure uses finite registers and supplied unitary access."
+      },
+      {
+        "id": "lem-qa-18-johnson-stored-data-query-access",
+        "kind": "lemma",
+        "title": "Coherent Johnson row access with stored values",
+        "statement": "For the lazy Johnson chain and XOR value oracle in [[def-qa-18-element-distinctness-johnson-walk]], write $d_f(S)$ for the values at the indices of $S$, in increasing index order. In the pure value-query model, encoded vertex preparation costs $r$ queries. Coherent row preparation and its inverse, including controlled versions, cost at most two queries each. The corresponding controlled row-space reflection costs at most four queries, and a controlled $W=U^2$ step and its inverse cost at most eight. A stationary two-register walk state costs at most $r+2$ queries, and its marked check uses zero value queries. Gates, memory, uniform generation, and exact coefficient preparation are separate resources; no gate-time bound is asserted.",
+        "deps": [
+          "def-qa-18-element-distinctness-johnson-walk",
+          "def-qc-coherent-function-oracle",
+          "def-qc-controlled-unitary-access",
+          "def-qc-inverse-unitary-access",
+          "def-qa-17-walk-access-model",
+          "thm-qa-17-walk-access-cost",
+          "thm-gram-schmidt-orthonormalisation"
+        ],
+        "justified_by": [],
+        "proof_strategy": "constructive",
+        "sources": {
+          "references": [
+            {
+              "title": "Magniez, Nayak, Roland, Santha, Search via Quantum Walk, Section 1.3 and Proposition 2",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            },
+            {
+              "title": "Ambainis, Quantum walk algorithm for element distinctness, Sections 3-4",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 15
+      },
+      {
+        "id": "thm-qa-18-element-distinctness-query-cost",
+        "kind": "theorem",
+        "title": "Element-distinctness O(N^{2/3}) query bound",
+        "statement": "Let $N\\ge4$, $f:[N]\\to\\mathcal V$ be given by the coherent value oracle in [[def-qa-18-element-distinctness-johnson-walk]], and suppose some distinct $a,b$ satisfy $f(a)=f(b)$. For any $2\\le r\\le\\lfloor N/2\\rfloor$, the lazy Johnson walk has absolute gap $\\delta=N/[2r(N-r)]$, marked stationary mass at least $\\varepsilon=r(r-1)/[N(N-1)]$, stored-vertex setup value-query cost $r$, elementary replacement-update cost $2$, and check cost $0$. The controlled row-access construction of [[lem-qa-18-johnson-stored-data-query-access]] supplies stationary edge-state setup at most $r+2$, controlled row reflection at most $4$, and controlled two-reflection walk/inverse at most $8$ value queries. The reversible-walk finding theorem therefore gives a constant-success marked-subset finder with\n\n$$r+O\\!\\left(\\frac{N}{\\sqrt r}\\right)$$\n\nvalue queries. Taking $r=\\min\\{\\lfloor N/2\\rfloor,\\max\\{2,\\lfloor N^{2/3}\\rfloor\\}\\}$ gives $O(N^{2/3})$ queries. A measured marked subset contains a colliding pair among its stored values, which can be output without further value queries; comparison gates are separate resources.",
+        "deps": [
+          "def-qa-18-element-distinctness-johnson-walk",
+          "thm-qa-18-reversible-search-cost",
+          "lem-qa-18-johnson-walk-spectrum",
+          "lem-qa-18-johnson-stored-data-query-access"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, Theorems 4–5 and §§3–4",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §§20.1–20.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the argument uses finite subset counts and the finite reversible-walk search theorem.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-18-detection-correctness-cost",
+        "kind": "theorem",
+        "title": "Walk detection correctness and cost",
+        "statement": "Let $P=(I+Q)/2$ be a finite symmetric lazy transition matrix on a nonempty finite set $X$, with uniform stationary law. Fix real promise parameters $\\delta_0,\\varepsilon_0\\in(0,1]$ and $\\beta\\in(0,1)$. When $|X|\\ge2$, suppose $\\lambda_2(P)\\le1-\\delta_0$; the marked-set promise is $\\mathcal M=\\varnothing$ or $|\\mathcal M|/|X|\\ge\\varepsilon_0$. The finite algorithm input includes certified dyadic brackets $[z_-,z_+]$ for $z\\in\\{\\delta_0,\\varepsilon_0,\\beta\\}$ with $0<z_-\\le z\\le z_+\\le\\min(1,2z_-)$; the containment is an input promise and every endpoint bit and comparison cost is charged separately. Such brackets exist for every allowed real parameter. For $|X|=1$, the promise parameters are unused. Write $\\underline\\delta=(\\delta_0)_-$, $\\underline\\varepsilon=(\\varepsilon_0)_-$, and $\\underline\\beta=\\beta_-$. Give the algorithm the stated uniform-state circuit, a row-preparation access model for the absorbing chain $P'$, its controlled and inverse calls needed for the one-reflection walk, the marked check, and all their separate costs. Put\n\n$$\\gamma_0=\\arccos(1-\\underline\\delta\\,\\underline\\varepsilon),\\quad m=\\min\\{j\\ge6:1-\\underline\\delta\\,\\underline\\varepsilon\\le\\cos(\\pi2^{5-j})\\},\\quad Q=2^m,\\quad k=\\min\\{j\\ge1:6^j\\underline\\beta\\ge1\\},$$\n\nwhere the least-integer formulas are exactly the finite comparisons used by the algorithm. Then [[alg-qa-18-szegedy-phase-detection]] has no false positive on an empty marked set and outputs `NONEMPTY` with probability at least $1-\\beta$ on every promised nonempty instance. For $|X|\\ge2$, let $C_{\\rm init}=C_{\\rm unif}+C_{\\rm row}$, where the terms are the supplied uniform-state and one row-preparation costs, $C_{\\rm mark}$ an upper bound for the initial marked/unmarked Lüders test and its marked-branch label readout and verification, $C_{\\rm walk}$ the cost of one controlled one-reflection walk call, and $G_{\\rm QPE}(m)$ the phase-register preparation and inverse-QFT gate cost. Its worst-case charged quantum cost is at most\n\n$$k\\bigl(C_{\\rm init}+C_{\\rm mark}+(Q-1)C_{\\rm walk}+G_{\\rm QPE}(m)\\bigr),$$\n\nwhen only one-step controlled-walk access is supplied. The factorwise implementation of $C_{\\rm walk}$ charges one controlled row-preparation inverse, one controlled row preparation, the controlled clean-state reflection, and the controlled swap. With separately supplied controlled powers, replace $(Q-1)C_{\\rm walk}$ by the sum of their $m$ declared costs. The bracket ratios imply $Q=O((\\delta_0\\varepsilon_0)^{-1/2})$ and $k=O(1+\\ln(1/\\beta))$, so the approved all-real parameter scope retains the same asymptotic resource bound. This is a detection result; a `NONEMPTY` phase-test outcome does not supply a marked label. Synthesis, endpoint bits, exact algebraic/rational comparisons, description bits and precision remain separate coordinates.",
+        "deps": [
+          "alg-qa-18-szegedy-phase-detection",
+          "thm-qa-17-szegedy-spectral-mapping",
+          "lem-qa-18-symmetric-compressed-walk-bound",
+          "lem-qa-18-absorbing-walk-discriminant-decomposition",
+          "thm-qa-phase-estimation-success-and-tail",
+          "thm-qa-phase-estimation-superposition-law",
+          "thm-qa-phase-estimation-exact-grid",
+          "thm-qa-phase-estimation-access-cost",
+          "thm-qa-17-walk-access-cost",
+          "def-qc-dirac-notation-conversion",
+          "def-qa-circular-phase-distance",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-double-angle-and-power-reduction-identities",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "thm-qa-17-discriminant-self-adjoint",
+          "def-qc-projective-measurement",
+          "thm-qc-projective-measurement-outcome-law",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-instrument-and-conditional-state",
+          "def-non-negative-and-positive-operator",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-qc-luders-instrument-of-a-povm-is-valid",
+          "thm-qc-projective-conditional-state"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 18, §18.4",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §§8.1–8.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Frédéric Magniez, Ashwin Nayak, Jérémie Roland, and Miklos Santha, Search via Quantum Walk, §§2–3",
+              "url": "https://arxiv.org/pdf/quant-ph/0608026"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the proof uses finite-dimensional spectral decomposition, the supplied unitary interfaces, and finite probability bounds.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-18-element-distinctness-qr-access-gate-cost",
+        "kind": "theorem",
+        "title": "Element-distinctness gate cost in the QRAM model",
+        "statement": "Fix an injective encoding of values in $[M]$ by $b=O(\\log(M+1))$ bits and take the parameter $r$ from [[thm-qa-18-element-distinctness-query-cost]]. For $N\\ge4096$, the finite canonical storage of [[def-qa-18-canonical-skip-list-for-element-distinctness]] has hash-table lookup, rank/select, complement-unranking, value insertion/deletion, and collision-check subroutines with $\\operatorname{polylog}(N+M)$ QRAM gate-time when their bounded searches do not overrun; the table uses $O(N^{2/3}\\log^3(N+M))$ memory bits. A fixed threshold $N_0\\ge4096$ is chosen below; the search uses this storage for $N\\ge N_0$ and direct value comparison for the finite range $4\\le N<N_0$.\n\nFor $N\\ge N_0$, let $G_{\\rm subset}$ be the gate-time of the supplied uniform $r$-subset preparation. Assume an explicit compatible realization of the controlled/inverse Johnson-walk access used by reversible finding exists on this canonical storage, uses the local operations proved below with their reversible overflow/overrun caps, and preserves the hash seed. Let $G_{\\rm row}$ be the maximum gate-time of one charged walk-update unit in that realization, including the forward, inverse, controlled, reflection, and swap capabilities supplied for the lazy Johnson walk in [[def-qa-17-walk-access-model]] and any encoding conversion. Under this explicit interface assumption, the complete search has value-query cost $O(N^{2/3})$ and gate-time\n\n$$G_{\\rm subset}+O\\!\\left(r\\operatorname{polylog}(N+M)+N^{2/3}\\bigl(G_{\\rm row}+\\operatorname{polylog}(N+M)\\bigr)\\right).$$\n\nThe local storage operations are proved below; this item does not construct the compatible full row-access circuit or derive polylogarithmic bounds for $G_{\\rm subset}$ and $G_{\\rm row}$. The unconditional $O(N^{2/3}\\operatorname{polylog}(N+M))$ gate-time conclusion requires $G_{\\rm subset}=O(N^{2/3}\\operatorname{polylog}(N+M))$ and $G_{\\rm row}=O(\\operatorname{polylog}(N+M))$.\n\nThe phase-estimation part of this gate-time profile uses the ideal continuous-rotation submodel of [[thm-qa-phase-estimation-access-cost]], where each exact controlled phase is one gate occurrence. Any synthesis overhead for a fixed finite gate alphabet is a separate cost.\n\nFor a Boolean value circuit with $S$ non-input nodes, including constants, $E$ input-port uses counted with multiplicity, and $m$ output bits, the serial compiler [[alg-qc-reversible-embedding]] implements one reversible XOR value query using at most $6S+4E+m$ ordinary gate occurrences. With the full DAG-layer parameters $D,F$ of [[thm-qc-reversible-embedding-parallel-depth]] (including any non-output nodes), its alternative parallel implementation uses at most $6S+4E+3m$ occurrences and has depth at most\n\n$$2D\\bigl(2\\lceil\\log_2(F+1)\\rceil+3\\bigr)+2\\lceil\\log_2(m+1)\\rceil+1.$$\n\nThis bounds the written depth of the supplied parallel schedule under [[def-qc-elementary-circuit-resources]]. It does not claim minimum-layer depth or include the other ordinary gates used by the walk data structure.",
+        "deps": [
+          "thm-qa-18-element-distinctness-query-cost",
+          "thm-qa-18-reversible-search-cost",
+          "thm-qa-phase-estimation-access-cost",
+          "def-qa-18-random-access-gate-model",
+          "def-qa-18-element-distinctness-johnson-walk",
+          "def-qa-18-canonical-skip-list-for-element-distinctness",
+          "def-qa-17-walk-access-model",
+          "def-qc-coherent-function-oracle",
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "alg-qc-reversible-embedding",
+          "thm-qc-reversible-embedding-cost",
+          "thm-qc-reversible-embedding-parallel-depth",
+          "def-qc-elementary-circuit-resources",
+          "def-qc-toffoli-and-fredkin",
+          "thm-existence-of-finite-fields",
+          "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qc-deferred-measurement",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "lem-reverse-triangle-inequality-in-a-normed-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, §6.2 and Lemmas 5–6",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §§20.1–20.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes, Chapter 8, §8.3.2",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; hash families are finite polynomial families and all data bounds count finite operations.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2249,
+    "id": "quantum-walk-search-and-element-distinctness-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Quantum-Walk Search and Element Distinctness — Examples",
+    "companion": "quantum-walk-search-and-element-distinctness",
+    "requires": [
+      "quantum-walk-search-and-element-distinctness"
+    ],
+    "items": [
+      {
+        "id": "cex-qa-18-query-cost-is-not-gate-cost",
+        "kind": "counterexample",
+        "title": "One oracle query can require many ordinary gates",
+        "statement": "For each $m\\ge1$, let $f_m:\\{0,1\\}^m\\to\\{0,1\\}$ be parity, $f_m(i)=i_1\\oplus\\cdots\\oplus i_m$, and consider its coherent XOR oracle\n\n$$O_{f_m}|i,b\\rangle=|i,b\\oplus f_m(i)\\rangle.$$\n\nIn the value-oracle query model this is one oracle call. In the ordinary circuit model with bounded-arity two-wire gates, every exact implementation using product clean ancillas requires at least $m$ two-wire gate occurrences that connect the $m$ address wires to the target component. By contrast, in the declared random-access-memory model of [[def-qa-18-random-access-gate-model]], one addressed swap reads the precomputed parity bit into a clean scratch location; two such calls with an intermediate copy restore memory and implement the XOR action, with the constant number of RAM calls charged separately. Memory construction and maintenance remain separate costs. Thus a query count alone does not bound ordinary gate count, and unit-cost QRAM access is a distinct model.",
+        "deps": [
+          "def-qa-18-random-access-gate-model",
+          "def-qc-coherent-function-oracle",
+          "def-qc-elementary-circuit-resources"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, §6",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the counterexample is a finite circuit-support argument.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-18-johnson-walk-parameters",
+        "kind": "example",
+        "title": "Small Johnson-walk spectra and marked fractions",
+        "statement": "For $N=5,r=2$ and $N=6,r=3$, compute the lazy Johnson spectrum, its gap, and the marked fraction from one fixed colliding pair. Also compute the marked fraction for two disjoint colliding pairs in the $N=6,r=3$ case.",
+        "deps": [
+          "thm-qa-18-element-distinctness-query-cost",
+          "lem-qa-18-johnson-walk-spectrum",
+          "def-qa-18-element-distinctness-johnson-walk"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, §§3–4",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §20.2",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; all checks are finite subset and eigenvalue calculations.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-18-element-distinctness-unique-collision",
+        "kind": "example",
+        "title": "Unique-collision element-distinctness parameters",
+        "statement": "Suppose exactly one pair of distinct indices has equal values. Compute its marked fraction for $N=8,r=4$, and verify the balanced setup/update expression for $r$ of order $N^{2/3}$.",
+        "deps": [
+          "thm-qa-18-element-distinctness-query-cost",
+          "def-qa-18-element-distinctness-johnson-walk"
+        ],
+        "justified_by": [],
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "Andris Ambainis, Quantum walk algorithm for element distinctness, Theorems 4–5 and §§3–4",
+              "url": "https://arxiv.org/pdf/quant-ph/0311001"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms, Chapter 20, §§20.1–20.3",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the example uses a finite inclusion count and the stated query theorem.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

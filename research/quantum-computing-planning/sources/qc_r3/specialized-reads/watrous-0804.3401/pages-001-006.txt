@@ -1,0 +1,408 @@
+===== PDF PAGE 1 =====
+arXiv:0804.3401v1  [quant-ph]  21 Apr 2008
+
+Quantum Computational Complexity
+
+John Watrous
+
+Institute for Quantum Computing and School of Computer Science
+University of Waterloo, Waterloo, Ontario, Canada.
+
+Article outline
+
+I.
+Definition of the subject and its importance
+II.
+Introduction
+
+III.
+The quantum circuit model
+
+IV.
+Polynomial-time quantum computations
+V.
+Quantum proofs
+
+VI.
+Quantum interactive proof systems
+VII.
+Other selected notions in quantum complexity
+
+VIII.
+Future directions
+IX.
+References
+
+Glossary
+
+Quantum circuit.
+
+A quantum circuit is an acyclic network of quantum gates connected by wires: the gates represent
+quantum operations and the wires represent the qubits on which these operations are performed.
+The quantum circuit model is the most commonly studied model of quantum computation.
+
+Quantum complexity class.
+
+A quantum complexity class is a collection of computational problems that are solvable by a cho-
+sen quantum computational model that obeys certain resource constraints. For example, BQP is
+the quantum complexity class of all decision problems that can be solved in polynomial time by a
+quantum computer.
+
+Quantum proof.
+
+A quantum proof is a quantum state that plays the role of a witness or certificate to a quan-
+tum computer that runs a verification procedure. The quantum complexity class QMA is defined
+by this notion: it includes all decision problems whose yes-instances are efficiently verifiable by
+means of quantum proofs.
+
+Quantum interactive proof system.
+
+A quantum interactive proof system is an interaction between a verifier and one or more provers,
+involving the processing and exchange of quantum information, whereby the provers attempt to
+convince the verifier of the answer to some computational problem.
+
+1
+
+
+===== PDF PAGE 2 =====
+
+I
+Definition of the subject and its importance
+
+The inherent difficulty, or hardness, of computational problems is a fundamental concept in com-
+putational complexity theory. Hardness is typically formalized in terms of the resources required
+by different models of computation to solve a given problem, such as the number of steps of a
+deterministic Turing machine. A variety of models and resources are often considered, including
+deterministic, nondeterministic and probabilistic models; time and space constraints; and inter-
+actions among models of differing abilities. Many interesting relationships among these different
+models and resource constraints are known.
+One common feature of the most commonly studied computational models and resource con-
+straint is that they are physically motivated. This is quite natural, given that computers are physical
+devices, and to a significant extent it is their study that motivates and directs research on compu-
+tational complexity. The predominant example is the class of polynomial-time computable func-
+tions, which ultimately derives its relevance from physical considerations; for it is a mathematical
+abstraction of the class of functions that can be efficiently computed without error by physical
+computing devices.
+In light of its close connection to the physical world, it seems only natural that modern physical
+theories should be considered in the context of computational complexity. In particular, quantum
+mechanics is a clear candidate for a physical theory to have the potential for implications, if not to
+computational complexity then at least to computation more generally. Given the steady decrease
+in the size of computing components, it is inevitable that quantum mechanics will become increas-
+ingly relevant to the construction of computers—for quantum mechanics provides a remarkably
+accurate description of extremely small physical systems (on the scale of atoms) where classical
+physical theories have failed completely. Indeed, an extrapolation of Moore’s Law predicts sub-
+atomic computing components within the next two decades [83, 78]; a possibility inconsistent with
+quantum mechanics as it is currently understood.
+That quantum mechanics should have implications to computational complexity theory, how-
+ever, is much less clear. It is only through the remarkable discoveries and ideas of several re-
+searchers, including Richard Feynman [50], David Deutsch [41, 42], Ethan Bernstein and Umesh
+Vazirani [30, 31], and Peter Shor [93, 94], that this potential has become evident. In particular,
+Shor’s polynomial-time quantum factoring and discrete-logarithm algorithms [94] give strong
+support to the conjecture that quantum and classical computers yield differing notions of compu-
+tational hardness. Other quantum complexity-theoretic concepts, such as the efficient verification
+of quantum proofs, suggest a wider extent to which quantum mechanics influences computational
+complexity.
+It may be said that the principal aim of quantum computational complexity theory is to un-
+derstand the implications of quantum physics to computational complexity theory. To this end, it
+considers the hardness of computational problems with respect to models of quantum computa-
+tion, classifications of problems based on these models, and their relationships to classical models
+and complexity classes.
+
+II
+Introduction
+
+This article surveys quantum computational complexity, with a focus on three fundamental no-
+tions: polynomial-time quantum computations, the efficient verification of quantum proofs, and
+quantum interactive proof systems. Based on these notions one defines quantum complexity
+classes, such as BQP, QMA, and QIP, that contain computational problems of varying hardness.
+
+2
+
+
+===== PDF PAGE 3 =====
+
+Properties of these complexity classes, and the relationships among these classes and classical
+complexity classes, are presented. As these notions and complexity classes are typically defined
+within the quantum circuit model, this article includes a section that focuses on basic properties
+of quantum circuits that are important in the setting of quantum complexity. A selection of other
+topics in quantum complexity, including quantum advice, space-bounded quantum computation,
+and bounded-depth quantum circuits, is also presented.
+Two different but closely related areas of study are not discussed in this article: quantum query
+complexity and quantum communication complexity. Readers interested in learning more about these
+interesting and active areas of research may find the surveys of Brassard [35], Cleve [36], and
+de Wolf [107] to be helpful starting points.
+It is appropriate that brief discussions of computational complexity theory and quantum in-
+formation precede the main technical portion of the article. These discussions are intended only
+to highlight the aspects of these topics that are non-standard, require clarification, or are of partic-
+ular importance in quantum computational complexity. In the subsequent sections of this article,
+the reader is assumed to have basic familiarity with both topics, which are covered in depth by
+several text books [14, 44, 61, 68, 84, 87].
+
+II.1
+Computational complexity
+
+Throughout this article the binary alphabet {0, 1} is denoted Σ, and all computational problems
+are assumed to be encoded over this alphabet. As usual, a function f : Σ∗→Σ∗is said to
+be polynomial-time computable if there exists a polynomial-time deterministic Turing machine that
+outputs f(x) for every input x ∈Σ∗. Two related points on the terminology used throughout this
+article are as follows.
+
+1. A function of the form p : N →N (where N = {0, 1, 2, . . .}) is said to be a polynomial-
+bounded function if and only if there exists a polynomial-time deterministic Turing machine
+that outputs 1f (n) on input 1n for every n ∈N. Such functions are upper-bounded by some
+polynomial, and are efficiently computable.
+
+2. A function of the particular form a : N →[0, 1] is said to be polynomial-time computable if and
+only if there exists a polynomial-time deterministic Turing machine that outputs a binary
+representation of a(n) on input 1n for each n ∈N. References to functions of this form in
+this article typically concern bounds on probabilities that are functions of the length of an
+input string to some problem.
+
+The notion of promise problems [45, 53] is central to quantum computational complexity. These
+are decision problems for which the input is assumed to be drawn from some subset of all possible
+input strings. More formally, a promise problem is a pair A = (Ayes, Ano), where Ayes, Ano ⊆Σ∗
+
+are sets of strings satisfying Ayes ∩Ano = ∅. The strings contained in the sets Ayes and Ano
+are called the yes-instances and no-instances of the problem, and have answers yes and no, re-
+spectively. Languages may be viewed as promise problems that obey the additional constraint
+Ayes ∪Ano = Σ∗. Although complexity theory has traditionally focused on languages rather than
+promise problems, little is lost and much is gained in shifting one’s focus to promise problems.
+Karp reductions (also called polynomial-time many-to-one reductions) and the notion of com-
+pleteness are defined for promise problems in the same way as for languages.
+Several classical complexity classes are referred to in this article, and compared with quantum
+complexity classes when relations are known. The following classical complexity classes, which
+should hereafter be understood to be classes of promise problems and not just languages, are
+among those discussed.
+
+3
+
+
+===== PDF PAGE 4 =====
+
+P
+A promise problem A = (Ayes, Ano) is in P if and only if there exists a polynomial-
+time deterministic Turing machine M that accepts every string x ∈Ayes and rejects
+every string x ∈Ano.
+
+NP
+A promise problem A = (Ayes, Ano) is in NP if and only if there exists a
+polynomial-bounded function p and a polynomial-time deterministic Turing ma-
+chine M with the following properties. For every string x ∈Ayes, it holds that M
+accepts (x, y) for some string y ∈Σp(|x|), and for every string x ∈Ano, it holds that
+M rejects (x, y) for all strings y ∈Σp(|x|).
+
+BPP
+A promise problem A = (Ayes, Ano) is in BPP if and only if there exists a
+polynomial-time probabilistic Turing machine M that accepts every string x ∈Ayes
+with probability at least 2/3, and accepts every string x ∈Ano with probability at
+most 1/3.
+
+PP
+A promise problem A = (Ayes, Ano) is in PP if and only if there exists a polynomial-
+time probabilistic Turing machine M that accepts every string x ∈Ayes with prob-
+ability strictly greater than 1/2, and accepts every string x ∈Ano with probability
+at most 1/2.
+
+MA
+A promise problem A = (Ayes, Ano) is in MA if and only if there exists a
+polynomial-bounded function p and a probabilistic polynomial-time Turing ma-
+chine M with the following properties. For every string x ∈Ayes, it holds that
+Pr[M accepts (x, y)] ≥2
+
+3 for some string y ∈Σp(|x|); and for every string x ∈Ano,
+it holds that Pr[M accepts (x, y)] ≤1
+
+3 for all strings y ∈Σp(|x|).
+
+AM
+A promise problem A = (Ayes, Ano) is in AM if and only if there exist polynomial-
+bounded functions p and q and a polynomial-time deterministic Turing machine
+M with the following properties. For every string x ∈Ayes, and at least 2/3 of all
+strings y ∈Σp(|x|), there exists a string z ∈Σq(|x|) such that M accepts (x, y, z); and
+for every string x ∈Ano, and at least 2/3 of all strings y ∈Σp(|x|), there are no
+strings z ∈Σq(|x|) such that M accepts (x, y, z).
+
+SZK
+A promise problem A = (Ayes, Ano) is in SZK if and only if it has a statistical zero-
+knowledge interactive proof system.
+
+PSPACE
+A promise problem A = (Ayes, Ano) is in PSPACE if and only if there exists a
+deterministic Turing machine M running in polynomial space that accepts every
+string x ∈Ayes and rejects every string x ∈Ano.
+
+EXP
+A promise problem A = (Ayes, Ano) is in EXP if and only if there exists a determin-
+istic Turing machine M running in exponential time (meaning time bounded by 2p,
+for some polynomial-bounded function p), that accepts every string x ∈Ayes and
+rejects every string x ∈Ano.
+
+NEXP
+A promise problem A = (Ayes, Ano) is in NEXP if and only if there exists an
+exponential-time non-deterministic Turing machine N for A.
+
+4
+
+
+===== PDF PAGE 5 =====
+
+PL
+
+NC
+
+P
+
+NP
+
+PP
+
+BPP
+
+MA
+SZK
+
+AM
+
+PSPACE
+
+EXP
+
+NEXP
+
+Figure 1: A diagram illustrating known inclusions among most of the classical complexity classes
+discussed in this paper. Lines indicate containments going upward; for example, AM is contained
+in PSPACE.
+
+PL
+A promise problem A = (Ayes, Ano) is in PL if and only if there exists a probabilistic
+Turing machine M running in polynomial time and logarithmic space that accepts
+every string x ∈Ayes with probability strictly greater than 1/2 and accepts every
+string x ∈Ano with probability at most 1/2.
+
+NC
+A promise problem A = (Ayes, Ano) is in NC if and only if there exists a
+logarithmic-space generated family C = {Cn : n ∈N} of poly-logarithmic depth
+Boolean circuits such that C(x) = 1 for all x ∈Ayes and C(x) = 0 for all x ∈Ano.
+
+For most of the complexity classes listed above, there is a standard way to attach an oracle
+to the machine model that defines the class, which provides a subroutine for solving instances
+of a chosen problem B = (Byes, Bno). One then denotes the existence of such an oracle with a
+superscript—for example, PB is the class of promise problems that can be solved in polynomial
+time by a deterministic Turing machine equipped with an oracle that solves instances of B (at unit
+cost). When classes of problems appear as superscripts, one takes the union, as in the following
+example:
+PNP =
+�
+
+B∈NP
+PB.
+
+5
+
+
+===== PDF PAGE 6 =====
+
+II.2
+Quantum information
+
+The standard general description of quantum information is used in this article: mixed states of
+systems are represented by density matrices and operations are represented by completely pos-
+itive trace-preserving linear maps. The choice to use this description of quantum information is
+deserving of a brief discussion, for it will likely be less familiar to many non-experts than the
+simplified picture of quantum information where states are represented by unit vectors and op-
+erations are represented by unitary matrices. This simplified picture is indeed commonly used in
+the study of both quantum algorithms and quantum complexity theory; and it is often adequate.
+However, the general picture has major advantages: it unifies quantum information with classical
+probability theory, brings with it powerful mathematical tools, and allows for simple and intuitive
+descriptions in many situations where this is not possible with the simplified picture.
+Classical simulations of quantum computations, which are discussed below in Section IV.5,
+may be better understood through a fairly straightforward representation of quantum operations
+by matrices. This representation begins with a representation of density matrices as vectors based
+on the function defined as vec(|x⟩⟨y|) = |x⟩|y⟩for each choice of n ∈N and x, y ∈Σn, and
+extended by linearity to all matrices indexed by Σn. The effect of this mapping is to form a column
+vector by reading the entries of a matrix in rows from left to right, starting at the top. For example,
+
+vec
+�α
+β
+γ
+δ
+
+�
+=
+
+
+
+
+
+
+
+α
+β
+γ
+δ
+
+
+
+
+
+.
+
+Now, the effect of a general quantum operation Φ, represented in the typical Kraus form as
+
+Φ(ρ) =
+k
+∑
+j=1
+AjρA∗
+j ,
+
+is expressed as a matrix by means of the equality
+
+vec(Φ(ρ)) =
+
+�
+k
+∑
+j=1
+Aj ⊗Aj
+
+�
+
+vec(ρ).
+
+The matrix
+
+KΦ =
+k
+∑
+j=1
+Aj ⊗Aj
+
+is sometimes called the natural representation (or linear representation) of the operation Φ. Although
+this matrix could have negative or complex entries, one can reasonably view it as being analogous
+to a stochastic matrix that describes a probabilistic computation.
+For example, the complete phase-damping channel for a single qubit can be written
+
+D(ρ) = |0⟩⟨0|ρ|0⟩⟨0| + |1⟩⟨1|ρ|1⟩⟨1| .
+
+The effect of this mapping is to zero-out the off-diagonal entries of a density matrix:
+
+D
+�α
+β
+γ
+δ
+
+�
+=
+�α
+0
+0
+δ
+
+�
+.
+
+6
+

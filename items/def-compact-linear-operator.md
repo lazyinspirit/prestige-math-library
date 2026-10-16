@@ -1,20 +1,16 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/def-compact-linear-operator.json
 id: def-compact-linear-operator
 kind: definition
 title: Compact linear operator
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-bounded-linear-operator, def-metric-compactness, def-metric-bounded-diameter, def-metric-ball, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, def-linear-map, thm-compactness-under-continuous-maps, thm-compact-subset-is-closed-and-bounded, lem-vector-operations-are-continuous-in-a-normed-space]
+deps: [def-bounded-linear-operator, def-metric-compactness, def-metric-bounded-diameter, def-metric-ball, def-norm-and-normed-space, def-complex-norm-and-complex-normed-space, def-linear-map, thm-compactness-under-continuous-maps, thm-compact-subset-is-closed-and-bounded, lem-vector-operations-are-continuous-in-a-normed-space, lem-complex-norm-realification-is-a-real-norm]
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.183, Definition 4.20"
@@ -25,12 +21,12 @@ sources:
 
 Let $X$ and $Y$ be normed spaces over the same scalar field $\mathbb K$, read in
 the real case from [[def-norm-and-normed-space]] and in the complex case from
-[[rem-real-and-complex-normed-space-convention]]. A linear map $T:X\to Y$
+[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\to Y$
 ([[def-linear-map]]) is a **compact operator** when the image of every bounded
 subset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$
 ([[def-metric-compactness]]); explicitly, for every bounded $A\subseteq X$ the
 closure $\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact
-operators $X\to Y$ is written $\mathcal K(X,Y)$.
+operators $X\to Y$ is written $\mathcal K(X,Y)$. The metric used here is $d(x,y)=\|x-y\|$, supplied over $\mathbb R$ by [[def-norm-and-normed-space]] and over $\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].
 
 **The closed unit ball suffices.** Put
 $\overline B_X:=\{x\in X:\|x\|\le 1\}$

@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "quantum-computing-algorithms-60-2026-10-15",
+  "batch": "31",
+  "round": 1,
+  "reviewed_items": [
+    "lem-qa-phase-estimation-geometric-sum",
+    "lem-qa-phase-estimation-sine-chord-bounds",
+    "def-qa-circular-phase-distance",
+    "def-qa-eigenphase-estimation-model",
+    "alg-qa-quantum-phase-estimation",
+    "lem-qa-phase-estimation-outcome-kernel",
+    "thm-qa-phase-estimation-access-cost",
+    "lem-qa-phase-estimation-nearest-grid-bound",
+    "lem-qa-phase-estimation-tail-bound",
+    "thm-qa-phase-estimation-exact-grid",
+    "thm-qa-phase-estimation-superposition-law",
+    "thm-qa-phase-estimation-success-and-tail",
+    "ex-qa-exact-phase-estimation",
+    "ex-qa-phase-estimation-nearest-grid-and-tail"
+  ],
+  "reviewed_pages": [
+    "quantum-phase-estimation",
+    "quantum-phase-estimation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The single repair resolved the earlier findings: the Lüders instrument is now justified, the natural query sum is proved, and the POVM positivity and coherence witness are explicit. This full second review found a remaining missing tensor-map prerequisite in three assigned items; under the two-review limit, escalation is required.",
+  "findings": [
+    {
+      "id": "alg-qa-quantum-phase-estimation",
+      "type": "prerequisite",
+      "reason": "Definition step 5 and the Remarks use P_y=|y><y|⊗I_H. The tensor-register definition fixes spaces and factor order but does not define tensor products of operators. Add def-qc-tensor-map to the dependencies."
+    },
+    {
+      "id": "lem-qa-phase-estimation-outcome-kernel",
+      "type": "prerequisite",
+      "reason": "Fact F4 and proof step 3.2 use P_y=|y><y|⊗I_H without the supplier defining tensor products of operators. Add def-qc-tensor-map to the dependencies."
+    },
+    {
+      "id": "thm-qa-phase-estimation-superposition-law",
+      "type": "prerequisite",
+      "reason": "The statement and proof use K_y⊗I_R, Π_θ⊗I_R and V⊗I_R, but the dependencies omit def-qc-tensor-map. Add that supplier; the tensor-register definition alone does not define these operator maps."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-qa-phase-estimation-outcome-kernel",
+      "decision": "escalate",
+      "reason": "The previous instrument-related disposition is resolved, but this item still uses tensor-product operators without def-qc-tensor-map."
+    },
+    {
+      "id": "thm-qa-phase-estimation-superposition-law",
+      "decision": "escalate",
+      "reason": "The previous POVM and witness repairs are sound; its tensor-product operator uses remain unsupported by a listed dependency."
+    },
+    {
+      "id": "thm-qa-phase-estimation-access-cost",
+      "decision": "accept",
+      "reason": "The repair now proves the natural geometric sum by induction and derives Q−1 using the truncated-difference definition."
+    },
+    {
+      "id": "ex-qa-exact-phase-estimation",
+      "decision": "accept",
+      "reason": "Its complete output law and estimate follow from the reviewed exact-grid result."
+    },
+    {
+      "id": "ex-qa-phase-estimation-nearest-grid-and-tail",
+      "decision": "accept",
+      "reason": "Its tied-label probabilities, circular-tail labels and exact total are consistent with the reviewed kernel and bounds."
+    }
+  ]
+}

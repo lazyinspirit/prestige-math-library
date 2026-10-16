@@ -1,10 +1,12 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/lem-relative-compact-closed-sets-have-a-positive-distance-gap.json
 id: lem-relative-compact-closed-sets-have-a-positive-distance-gap
 kind: lemma
 title: A compact set and a disjoint closed set have a positive norm-distance gap
 status: published
 origin: pipeline
-deps: [rem-real-and-complex-normed-space-convention, def-metric-compactness, def-metric-topology, lem-finite-choice, lem-finite-set-has-max]
+deps: [def-complex-norm-and-complex-normed-space, def-metric-compactness, def-metric-topology, lem-finite-choice, lem-finite-set-has-max, def-norm-and-normed-space, lem-complex-norm-realification-is-a-real-norm]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -16,13 +18,6 @@ sources:
       url: https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
-verification:
-  audited: 2026-09-09
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 ---
 
 ## Statement
@@ -41,7 +36,7 @@ No convexity, completeness, HB, or infinite choice principle is required.
 
 [F4] Every nonempty finite list of real numbers has a maximum and a minimum ([[lem-finite-set-has-max]]).
 
-[F5] The induced metric is $d(x,y)=\|x-y\|$ over either scalar field, with the norm triangle inequality ([[rem-real-and-complex-normed-space-convention]]).
+[F5] The induced metric is $d(x,y)=\|x-y\|$ over either scalar field, with the norm triangle inequality, using [[def-norm-and-normed-space]] over $\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] together with [[lem-complex-norm-realification-is-a-real-norm]] over $\mathbb C$.
 
 ## Proof
 

@@ -1,0 +1,83 @@
+14
+Quantum Algorithms
+
+So only m −1 (classical) mod N multiplications are needed to assemble a table of all
+a2j’s.
+The computation of ax(mod N) is carried out by executing a routine:
+
+INPUT 1
+For j = 0 to m −1, if xj = 1, MULTIPLY a2j.
+
+This routine requires at most m mod N multiplications, each requiring of order
+(log N)2 elementary operations. (Using tricks for performing efficient multiplication
+of very large numbers, the number of elementary operations can be reduced to
+O(log N log log N log log log N); thus, asymptotically for large N, a circuit family with
+size O(log2 N log log N log log log N) can compute fN,a.) Since r < N, we will have a
+reasonable chance of success at extracting the period if we choose m ∼2 log N. Hence,
+the computation of fN,a can be carried out by a circuit family of size O((log N)3).
+Schematically, the circuit has the structure:
+
+|x2⟩
+
+|x1⟩
+
+|x0⟩
+
+|1⟩
+
+s
+
+s
+
+s
+
+a
+a2
+a4
+
+Multiplication by a2j is performed if the control qubit xj has the value 1.
+Suppose we have found the period r of a mod N. Then if r is even, we have
+
+N divides
+�
+a
+r
+2 + 1
+��
+a
+r
+2 −1
+�
+.
+(6.65)
+
+We know that N does not divide ar/2 −1; if it did, the order of a would be ≤r/2. Thus,
+if it is also the case that N does not divide ar/2 + 1, or
+
+ar/2 ̸= −1 (mod N),
+(6.66)
+
+then N must have a nontrivial common factor with each of ar/2 ± 1. Therefore,
+GCD(N, ar/2 + 1) ̸= 1 is a factor (that we can find efficiently by a classical compu-
+tation), and we are done.
+We see that, once we have found r, we succeed in factoring N unless either (1) r is
+odd or (2) r is even and ar/2 ≡−1 (mod N). How likely is success?
+Let’s suppose that N is a product of two prime factors p1 ̸= p2,
+
+N = p1p2
+(6.67)
+
+(this is actually the least favorable case). For each a < p1p2, there exist unique a1 < p1
+and a2 < p2 such that
+
+a ≡a1
+(mod p1)
+
+a ≡a2
+(mod p2).
+(6.68)
+
+Choosing a random a < N is, therefore, equivalent to choosing random a, < p1 and
+a2 < p2.
+
+

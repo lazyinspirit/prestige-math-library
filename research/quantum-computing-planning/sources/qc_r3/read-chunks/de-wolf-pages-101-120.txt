@@ -1,0 +1,1458 @@
+===== PDF PAGE 101 =====
+
+Chapter 11
+
+Quantum Query Lower Bounds
+
+11.1
+Introduction
+
+Most of the algorithms we have seen so far worked in the query model. Here the goal usually is
+to compute some function f : {0, 1}N →{0, 1} on a given input x = x0 . . . xN−1 ∈{0, 1}N. The
+distinguishing feature of the query model is the way x is accessed: x is not given explicitly, but
+is stored in a random access memory, and we’re being charged unit cost for each query that we
+make to this memory. Informally, a query asks for and receives the i-th element xi of the input.
+Formally, we model a query unitarily as the following 2-register quantum operation Ox, where the
+first register is N-dimensional and the second is 2-dimensional1:
+
+Ox : |i, b⟩�→|i, b ⊕xi⟩.
+
+In particular, |i, 0⟩�→|i, xi⟩. This only states what Ox does on basis states, but by linearity this
+determines the full unitary. Note that a quantum algorithm can apply Ox to a superposition of
+basis states, gaining some sort of access to several input bits xi at the same time.
+A T-query quantum algorithm starts in a fixed state, say the all-0 state |0 . . . 0⟩, and then in-
+terleaves fixed unitary transformations U0, U1, . . . , UT with queries. The algorithm’s fixed unitaries
+may act on a workspace-register, in addition to the two registers on which Ox acts. In this case we
+implicitly extend Ox by tensoring it with the identity operation on this extra register, so it maps
+
+Ox : |i, b, w⟩�→|i, b ⊕xi, w⟩.
+
+Hence the final state of the algorithm can be written as the following matrix-vector product:
+
+UT OxUT−1Ox · · · OxU1OxU0|0 . . . 0⟩.
+
+This state depends on the input x only via the T queries. The output of the algorithm is obtained
+by a measurement of the final state. For instance, if the output is Boolean, the algorithm could
+just measure the final state in the computational basis and output the first bit of the result.
+The query complexity of some function f is now the minimal number of queries needed for an
+algorithm that outputs the correct value f(x) for every x in the domain of f (with error probability
+
+1If the input x consists of non-binary items xi (as is the case for instance with the input for Simon’s algorithm)
+then those can be simulated by querying individual bits of each xi.
+
+89
+
+
+===== PDF PAGE 102 =====
+
+at most 1/3, say). Note that we just count queries to measure the complexity of the algorithm2,
+while the intermediate fixed unitaries are treated as costless.
+In many cases, the overall computation time of quantum query algorithms (as measured by
+the total number of elementary gates, say) is not much bigger than the query complexity. This
+justifies analyzing the latter as a proxy for the former. This is the model in which essentially all
+the quantum algorithms we’ve seen work: Deutsch-Jozsa, Simon, Grover, the various random walk
+algorithms. Even the period-finding algorithm that is the quantum core of Shor’s algorithm works
+because it needs only few queries to the periodic function.
+
+11.2
+The polynomial method
+
+From quantum query algorithms to polynomials.
+An N-variate multilinear polynomial p
+is a function p : CN →C that can be written as
+
+p(x0, . . . , xN−1) =
+�
+
+S⊆{0,...,N−1}
+aS
+�
+
+i∈S
+xi,
+
+for some complex numbers aS. The degree of p is deg(p) = max{|S| : aS ̸= 0}. It is easy to show
+that every function f : {0, 1}N →C has a unique representation as such a polynomial; deg(f) is
+defined as the degree of that polynomial (see Exercise 1). For example, the 2-bit AND function is
+p(x0, x1) = x0x1, and the 2-bit Parity function is p(x0, x1) = x0 + x1 −2x0x1. Both polynomials
+have degree 2. Sometimes a lower degree suffices for a polynomial to approximate the function.
+For example, p(x0, x1) = 1
+
+3(x0 + x1) approximates the 2-bit AND function up to error 1/3 for all
+inputs, using degree 1.
+A very useful property of T-query algorithms is that the amplitudes of their final state are
+degree-T N-variate polynomials of x [118, 39]. More precisely: consider a T-query algorithm with
+input x ∈{0, 1}N acting on an m-qubit space. Then its final state can be written
+
+�
+
+z∈{0,1}m
+αz(x)|z⟩,
+
+where each αz is a multilinear complex-valued polynomial in x of degree at most T.
+
+Proof.
+The proof is by induction on T. The base case (T = 0) trivially holds: the algorithm’s
+state U0|0 . . . 0⟩is independent of x, so its amplitudes are constants (i.e., polynomials of degree 0).
+For the induction step, suppose we have already done T queries. Then by the induction hy-
+pothesis the state after UT can be written as
+
+�
+
+z∈{0,1}m
+αz(x)|z⟩,
+
+where each αz is a multilinear polynomial in x of degree at most T. Each basis state |z⟩= |i, b, w⟩
+consists of 3 registers: the two registers |i, b⟩of the query, and a workspace register containing basis
+state |w⟩. The algorithm now makes another query Ox followed by a unitary UT+1. The query
+
+2Clearly, N queries always suffice since we can just query each of the N input bits separately, thus learning x
+completely, and then look up and output whatever the correct value is for that input.
+
+90
+
+
+===== PDF PAGE 103 =====
+
+swaps basis states |i, 0, w⟩and |i, 1, w⟩if xi = 1, and doesn’t do anything to these basis states if
+xi = 0. This changes amplitudes as follows:
+
+αi,0,w(x)|i, 0, w⟩+ αi,1,w(x)|i, 1, w⟩�→
+
+((1 −xi)αi,0,w(x) + xiαi,1,w(x))|i, 0, w⟩+ (xiαi,0,w(x) + (1 −xi)αi,1,w(x))|i, 1, w⟩.
+
+Now the new amplitudes are of the form (1−xi)αi,0,w(x)+xiαi,1,w(x) or xiαi,0,w(x)+(1−xi)αi,1,w(x).
+The new amplitudes are still polynomials in x0, . . . , xN−1. Their degree is at most 1 more than
+the degree of the old amplitudes, so at most T + 1. Finally, since UT+1 is a linear map that is
+independent of x, it does not increase the degree of the amplitudes further (each amplitude after
+UT+1 is a linear combination of the amplitudes before UT+1). This concludes the induction step.
+Note that this construction could introduce degrees higher than 1, e.g., terms of the form x2
+i .
+However, our inputs xi are 0/1-valued, so we have xk
+i = xi for all integers k ≥1. Accordingly, we
+can reduce higher degrees to 1, making the polynomials multilinear without increasing degree.
+2
+
+Suppose our algorithm acts on an m-qubit state. If we measure the first qubit of the final state
+and output the resulting bit, then the probability of output 1 is given by
+
+p(x) =
+�
+
+z∈{1}×{0,1}m−1
+|αz(x)|2.
+
+This is a real-valued polynomial of x of degree at most 2T, because |αz(x)|2 is the sum of the squares
+of the real and imaginary parts of the amplitude αz(x), and each of those two parts is a polynomial
+of degree ≤T. Note that if the algorithm computes f with error ≤1/3, then p is an approximating
+polynomial for f: if f(x) = 0 then p(x) ∈[0, 1/3] and if f(x) = 1 then p(x) ∈[2/3, 1]. This gives
+a method to lower bound the minimal number of queries needed to compute f: if one can show
+that every polynomial that approximates f has degree at least d, then every quantum algorithm
+computing f with error ≤1/3 must use at least d/2 queries.
+
+Applications of the polynomial method.
+For our examples we will restrict attention to sym-
+metric functions.3 Those are the ones where the function value f(x) only depends on the Hamming
+weight (number of 1s) in the input x. Examples are N-bit OR, AND, Parity, Majority, etc.
+Suppose we have a polynomial p(x0, . . . , xN−1) that approximates f with error ≤1/3. Then
+it is easy to see that a polynomial that averages over all permutations π of the N input bits
+x0, . . . , xN−1:
+
+q(x) = 1
+
+N!
+
+�
+
+π∈SN
+p(π(x)),
+
+still approximates f. As it turns out, we can define a single-variate polynomial r(z) of the same
+degree as q, such that q(x) = r(|x|).4 This r is defined on all real numbers, and we know something
+
+3One can also use the polynomial method for non-symmetric functions, for instance to prove a tight lower bound of
+Ω(N 2/3) queries for the general problem of collision-finding; this matches the quantum walk algorithm of Section 8.3.2.
+However, that lower bound proof is substantially more complicated and we won’t give it here (see [5]).
+4To see why this is the case, note that for every degree i, all degree-i monomials in the symmetrized polynomial
+q have the same coefficient ai. Moreover, on input x ∈{0, 1}N of Hamming weight z, exactly
+�z
+i
+�
+of the degree-i
+monomials are 1, while the others are 0. Hence q(x) = �d
+i=0 ai
+�|x|
+i
+�
+. Since
+�z
+d
+�
+= z(z −1) · · · (z −d + 1)/d! is a
+
+91
+
+
+===== PDF PAGE 104 =====
+
+about its behavior on integer points {0, . . . , N}. Thus it suffices to lower bound the degree of
+single-variate polynomials with the appropriate behavior.
+For an important example, consider the N-bit OR function. Grover’s algorithm can find an i
+such that xi = 1 (if such an i exists) and hence can compute the OR function with error proba-
+bility ≤1/3 using O(
+√
+
+N) queries. By the above reasoning, any T-query quantum algorithm that
+computes the OR with error ≤1/3 induces a single-variate polynomial r satisfying
+
+r(0) ∈[0, 1/3], and r(t) ∈[2/3, 1] for all integers t ∈{1, . . . , N}.
+
+This polynomial r(x) “jumps” between x = 0 and x = 1 (i.e., it has a derivative r′(x) ≥1/3
+for some x ∈[0, 1]), while it remains fairly constant on the domain {1, . . . , N}. By a classical
+theorem from approximation theory (proved independently around the same time by Ehlich and
+Zeller [110], and by Rivlin and Cheney [225]), such polynomials must have degree d ≥Ω(
+√
+
+N).
+Hence T ≥Ω(
+√
+
+N) as well. Accordingly, Grover’s algorithm is optimal (up to a constant factor) in
+terms of number of queries.
+What about exact algorithms for OR? Could we tweak Grover’s algorithm so that it always
+finds a solution with probability 1 (if one exists), using O(
+√
+
+N) queries? This turns out not to be
+the case: a T-query exact algorithm for OR induces a polynomial r of degree ≤2T that satisfies
+
+r(0) = 0, and r(t) = 1 for all integers t ∈{1, . . . , N}.
+
+It is not hard to see that such a polynomial needs degree at least N: observe that r(x) −1 is a
+non-constant polynomial with at least N roots.5 Hence T ≥N/2 (this can be improved to T ≥N,
+see Exercise 5). Accordingly, Grover cannot be made exact without losing the square-root speed-up!
+Using the polynomial method, one can in fact show for every symmetric function f that is
+defined on all 2N inputs, that quantum algorithms cannot provide a more-than-quadratic speed-up
+over classical algorithms. More generally, for every function f (symmetric or non-symmetric) that
+is defined on all inputs6, quantum algorithms cannot provide more than a power-6 speed-up over
+classical algorithms (see Exercise 11). The polynomial method has recently been strengthened by
+Arunachalam et al. [27] to an optimal lower bound method, by imposing more constraints on the
+polynomial (which can increase the required degree, while still giving a lower bound on quantum
+query complexity).
+
+11.3
+The quantum adversary method
+
+The polynomial method has a strength which is also a weakness: it applies even to a stronger (and
+less physically meaningful) model of computation where we allow any linear transformation on the
+state space, not just unitary ones. As a result, it does not always provide the strongest possible
+lower bound for quantum query algorithms.
+
+single-variate polynomial in z of degree d, we can define r(z) = �d
+i=0 ai
+�z
+i
+�
+. For example, if q(x0, x1) = x0x1 then r
+would be the unique univariate polynomial such that r(0) = 0, r(1) = 0 and r(2) = 1, i.e., r(z) = z(z −1)/2 =
+�z
+2
+�
+.
+The degree of r will be equal to that of q, while the degree of q is less than or equal to that of p; an example where
+the degree actually goes down is p(x0, x1) = x0 −x1, which symmetrizes to the 0 polynomial (so the degree goes
+down from 1 to 0).
+5A “root” is an x such that r(x) = 0. It is a well-known fact from algebra that every univariate non-constant
+polynomial of degree d has at most d roots (over any field). Note that this is not true for multivariate polynomials;
+for example the polynomial x0 · · · xN−1 has 2N −1 roots in {0, 1}N but its degree is only N.
+6Note that this doesn’t include functions where the input has to satisfy a certain promise, such as Deutsch-Jozsa
+and Simon’s problem.
+
+92
+
+
+===== PDF PAGE 105 =====
+
+Ambainis [13, 14] provided an alternative method for quantum lower bounds, the quantum
+adversary. This exploits unitarity in a crucial way and in certain cases yields a provably better
+bound than the polynomial method [14]. We will present a very simple version of the adversary
+method here, a much stronger (in fact optimal!) version is given in Chapter 12.
+Recall that a quantum query algorithm is a sequence
+
+UT OxUT−1Ox · · · OxU1OxU0,
+
+applied to the fixed starting state |0 . . . 0⟩, where the basic “query transformation” Ox depends
+on the input x, and U0, U1, . . . , UT are arbitrary unitaries that don’t depend on x. Consider the
+evolution of our quantum state under all possible choices of x. Let |ψt
+x⟩denote the state after
+applying Ut when the input is x. In particular, |ψ0
+x⟩= U0|0 . . . 0⟩for all x (and hence ⟨ψ0
+x|ψ0
+y⟩= 1
+for each x, y), and |ψT
+x ⟩is the final state of the algorithm on input x before the final measurement.
+Now if the algorithm computes the Boolean function f with success probability 2/3 on every input,
+then the final measurement must accept (i.e., output 1) every x ∈f−1(0) with probability ≤1/3,
+and must accept every y ∈f−1(1) with probability ≥2/3. This means the two states |ψT
+x ⟩and
+|ψT
+y ⟩cannot be too close together, or equivalently their inner product cannot be too close to 1.
+Specifically, we must have |⟨ψT
+x |ψT
+y ⟩| ≤17
+
+18.7 This suggests that we find a set R ⊆f−1(0) × f−1(1)
+of hard-to-distinguish (x, y)-pairs, and consider the following progress measure
+
+St =
+�
+
+(x,y)∈R
+|⟨ψt
+x|ψt
+y⟩|
+
+as a function of t. By our observations, initially we have S0 = |R|, and in the end we must have
+ST ≤17
+
+18|R|. Also, crucially, the progress measure is unaffected by each application of a unitary Ut,
+since each Ut is independent of the input and unitary transformations preserve inner products.
+If we can determine an upper bound ∆on the change |St+1 −St| in the progress measure at
+each step, we can conclude that the number T of queries is at least
+|R|
+18∆. Ambainis proved the
+following. Suppose that
+
+(i) each x ∈f−1(0) appearing in R, appears at least m0 times in pairs (x, y) in R;
+
+(ii) each y ∈f−1(1) appearing in R, appears at least m1 times in pairs (x, y) in R;
+
+(iii) for each x ∈f−1(0) and i ∈{0, . . . , N −1}, there are at most ℓ0 inputs y ∈f−1(1) such that
+(x, y) ∈R and xi ̸= yi;
+
+(iv) for each y ∈f−1(1) and i ∈{0, . . . , N −1}, there are at most ℓ1 inputs x ∈f−1(0) such that
+(x, y) ∈R and xi ̸= yi.
+
+Then for all t ≥0, |St+1 −St| = O
+��
+
+ℓ0
+m0 · ℓ1
+
+m1 · |R|
+�
+=: ∆. We will not prove this inequality
+here, though it is a reasonably straightforward generalization of the answer to Exercise 12, and
+
+7Remember Exercise 3 from Chapter 4 for states |ϕ⟩and |ψ⟩: if ∥ϕ −ψ∥= ε, then the total variation distance
+between the probability distributions you get from measuring |ϕ⟩and |ψ⟩, respectively, is at most ε. Hence, if we
+know there is a two-outcome measurement that accepts |ϕ⟩with probability ≤1/3 and accepts |ψ⟩with probability
+≥2/3, then we must have total variation distance at least 1/3 and hence ε ≥1/3. Assume for simplicity that the
+inner product ⟨ϕ|ψ⟩is real. Via the equation ε2 = ∥ϕ −ψ∥2 = 2 −2⟨ϕ|ψ⟩, this translates into an upper bound
+|⟨ϕ|ψ⟩| ≤1 −ε2/2 ≤17/18 (this upper bound can be improved to 2
+√
+
+2/3 with more careful analysis).
+
+93
+
+
+===== PDF PAGE 106 =====
+
+we will see a stronger result in the next chapter. This upper bound ∆on the progress-per-query
+immediately implies a lower bound on the number of queries:
+
+T = Ω
+��m0
+
+ℓ0
+· m1
+
+ℓ1
+
+�
+.
+(11.1)
+
+Intuitively, conditions (i)-(iv) imply that |St+1 −St| is small relative to |R| by bounding the “dis-
+tinguishing ability” of any query. The art in applying this technique lies in choosing the relation R
+carefully to maximize this quantity, i.e., make m0 and/or m1 large, while keeping ℓ0 and ℓ1 small.
+Note that for the N-bit OR function this method easily gives the optimal Ω(
+√
+
+N) lower bound,
+as follows. Choose R = {(x, y) : x = 0N, y has Hamming weight 1}. Then m0 = N while m1 =
+ℓ0 = ℓ1 = 1. Plugging this into Eq. (11.1) gives the right Ω(
+√
+
+N) bound.
+Let us give another application, a lower bound that is much harder to prove using the polynomial
+method. Suppose f : {0, 1}N →{0, 1} is a 2-level AND-OR tree, with N = k2 input bits: f is the
+AND of k ORs, each of which has its own set of k inputs bits. By carefully doing 2 levels of Grover
+search (search for a subtree which is 0k), one can construct a quantum algorithm that computes f
+with small error probability and O(
+√
+
+k·
+√
+
+k) = O(
+√
+
+N) queries. It was long an open problem to give
+a matching lower bound on the approximate degree, and this was proved only in 2013 [239, 80]. In
+contrast, the adversary method gives the optimal lower bound on the quantum query complexity
+quite easily: choose the relation R as follows
+
+R consists of those pairs (x, y) where
+x has one subtree with input 0k and the other k −1 subtrees have an arbitrary k-bit
+input of Hamming weight 1 (note f(x) = 0)
+y is obtained from x by changing one of the bits of the 0k-subtree to 1 (note f(y) = 1).
+
+Then m0 = m1 = k and ℓ0 = ℓ1 = 1, and we get a lower bound of Ω
+��
+
+m0m1
+
+ℓ0ℓ1
+
+�
+= Ω(k) = Ω(
+√
+
+N).
+
+Another lower bound one can prove fairly easily using a strengthened version of the adversary
+method is for inverting a permutation, see Exercise 9.
+
+Exercises
+
+1. Consider a function f : {0, 1}N →R. Show that this function can be represented by an
+N-variate multilinear polynomial of degree ≤N, and that this representation is unique.
+
+2. Consider a 2-bit input x = x0x1 with phase-oracle Ox,± : |i⟩�→(−1)xi|i⟩. Write out the final
+state of the following 1-query quantum algorithm: HOx,±H|0⟩. Give a degree-2 polynomial
+p(x0, x1) that equals the probability that this algorithm outputs 1 on input x. What function
+does this algorithm compute?
+
+3. Consider polynomial p(x0, x1) = 0.3 + 0.4x0 + 0.5x1, which approximates the 2-bit OR func-
+tion. Write down the symmetrized polynomial q(x0, x1) = 1
+
+2(p(x0, x1) + p(x1, x0)). Give a
+single-variate polynomial r such that q(x) = r(|x|) for all x ∈{0, 1}2.
+
+4. (H) Let f be the N-bit Parity function, which is 1 if its input x ∈{0, 1}N has odd Hamming
+weight, and 0 if the input has even Hamming weight (assume N is an even number).
+
+(a) Give a quantum algorithm that computes Parity with success probability 1 on every
+input x, using N/2 queries.
+
+94
+
+
+===== PDF PAGE 107 =====
+
+(b) Show that this is optimal, even for quantum algorithms that have error probability ≤1/3
+on every input
+
+5. Suppose we have a T-query quantum algorithm that computes the N-bit AND function with
+success probability 1 on all inputs x ∈{0, 1}N. In Section 11.2 we showed that such an
+algorithm has T ≥N/2 (we showed it for OR, but the same argument works for AND).
+Improve this lower bound to T ≥N.
+
+6. Consider the following 3-bit function f : {0, 1}3 →{0, 1}:
+f(x0, x1, x2) = 1 if x0 = x1 = x2, and f(x0, x1, x2) = 0 otherwise
+
+(a) How many queries does a classical deterministic algorithm need to compute f? Explain
+your answer.
+
+(b) Give a quantum algorithm that computes f with success probability 1 using 2 queries.
+
+(c) (H) Show that 2 queries is optimal: there is no quantum algorithm that computes f
+with success probability 1 using only 1 query.
+
+7. Let f be the N-bit Majority function, which is 1 if its input x ∈{0, 1}N has Hamming weight
+> N/2, and 0 if the input has Hamming weight ≤N/2 (assume N is even).
+
+(a) Prove that deg(f) ≥N/2.
+What does this imply for the query complexity of exact
+quantum algorithms that compute majority?
+
+(b) (H) Use the adversary method to show that every bounded-error quantum algorithm
+for computing Majority, needs Ω(N) queries. Be explicit about what relation R you’re
+using, and about the values of the parameters m0, m1, ℓ0, ℓ1.
+
+8. Let k be an odd natural number, N = k2, and define the Boolean function f : {0, 1}N →{0, 1}
+as the k-bit majority of k separate k-bit OR functions. In other words, the N-bit input is
+x = x(1) . . . x(k) with x(i) ∈{0, 1}k for each i ∈[k], and f(x) is the majority value of the k
+bits OR(x(1)), . . . , OR(x(k)). Use the adversary method to prove that computing this f with
+error probability ≤1/3 requires Ω(N3/4) quantum queries. Be explicit about what relation
+R you’re using, and about the values of the parameters m0, m1, ℓ0, ℓ1.
+
+9. This question is about the quantum complexity of inverting a permutation, which is an
+important problem in cryptography. Let N be a power of 2 and S = {0, . . . , N −1}. Let
+x ∈SN correspond to a permutation on S, meaning that each j ∈S occurs exactly once as
+an entry of x (so the map i �→xi is a permutation). Suppose we can query x, i.e., we have a
+unitary Ox that maps |i, j⟩→|i, xi + j mod N⟩for all i, j ∈S, and we can also apply O−1
+x .
+
+(a) Show how we can find the unique index i ∈S for which xi = 0, with success probability
+≥2/3, using O(
+√
+
+N) queries to Ox and O−1
+x .
+
+(b) (H) The adversary lower bound of Section 11.3 still works with the following modifica-
+tions:
+(1) the x’s and y’s are not binary strings, but strings over a larger alphabet, such as S,
+and (2) let ℓx,i be the number of y ∈Y such that (x, y) ∈R and xi ̸= yi; ℓy,i be the
+number of x ∈X such that (x, y) ∈R and xi ̸= yi; and ℓmax = max{ℓx,i · ℓy,i : (x, y) ∈
+R, i ∈{0, . . . , N −1}, xi ̸= yi}.
+
+95
+
+
+===== PDF PAGE 108 =====
+
+In this case the quantum query lower bound is Ω(
+�
+
+m0m1/ℓmax). You may assume this
+without proof.
+Use this strengthened adversary bound to show a lower bound of Ω(
+√
+
+N) quantum
+queries for computing the task of part (a).
+
+10. (H) Consider the sorting problem: there are N numbers a1, . . . , aN and we want to sort these.
+We can only access the numbers by making comparisons. A comparison is similar to a black-
+box query: it takes 2 indices i, j as input and outputs whether ai < aj or not. The output
+of a sorting algorithm should be the list of N indices, sorted in increasing order. It is known
+that for classical computers, N log(N) + O(N) comparisons are necessary and sufficient for
+sorting. Prove that a quantum algorithm needs at least Ω(N) comparisons for sorting, even
+if it is allowed an error probability ≤1/3.
+
+11. Consider a total Boolean function f : {0, 1}N →{0, 1}. Given an input x ∈{0, 1}N and
+subset B ⊆{0, . . . , N −1} of indices of variables, let xB denote the N-bit input obtained
+from x by flipping all bits xi whose index i is in B. The block sensitivity bs(f, x) of f at
+input x, is the maximal integer k such that there exist disjoint sets B1, . . . , Bk satisfying
+f(x) ̸= f(xBi) for all i ∈[k]. The block sensitivity bs(f) of f is maxx∈{0,1}N bs(f, x).
+
+(a) (H) Show that the bounded-error quantum query complexity of f is Ω(
+�
+
+bs(f)).
+
+(b) It is known that for every total Boolean function f, there is a classical deterministic
+algorithm that computes it using O(bs(f)3) many queries.
+What can you conclude
+from this and part (a) about the relation between deterministic and quantum query
+complexity for total functions?
+
+12. (H) In this exercise we will derive the quantum lower bound for the search problem in a self-
+contained way, without using the polynomial or adversary method (this exercise uses what is
+called the “hybrid method”).
+
+Let N = 2n. Consider an input x ∈{0, 1}N that we can query. Assume x has Hamming
+weight 0 or 1, and suppose we would like to find the unique solution to the search prob-
+lem (if a solution exists). Let A be any T-query quantum algorithm for this. Suppose for
+simplicity that the algorithm acts on only n qubits (so there are no auxiliary qubits), and
+A = UT Ox,±UT−1Ox,± · · · U1Ox,±U0, so A interleaves phase-queries to x and unitaries that
+are independent of x. The initial state is |0n⟩. Let |ψt
+x⟩denote the n-qubit state right after
+applying Ut, when we run A on input x, so the final state is |ψT
+x ⟩. Let ei ∈{0, 1}N be the
+input that has a 1 only at position i. Assume the algorithm A is successful in finding the right
+solution i after T queries in the following sense:
+��|ψT
+ei⟩−|i⟩
+��≤1/4 and
+��|ψT
+0N ⟩−|i⟩
+��≥3/4
+for all i ∈{0, . . . , N −1} (note that the basic Grover algorithm is an example of such an A).
+
+(a) Consider the run of algorithm A on input x = 0N, and for t ∈{0, . . . , T −1} let the
+amplitudes αt,i be such that |ψt
+0N ⟩= �N−1
+i=0 αt,i|i⟩.
+Prove that
+��|ψ1
+0N ⟩−|ψ1
+ei⟩
+��≤2|α0,i|, for all i ∈{0, . . . , N −1}.
+
+(b) Prove that
+��|ψT
+0N ⟩−|ψT
+ei⟩
+��≤2 �T−1
+t=0 |αt,i|, for all i ∈{0, . . . , N −1}.
+
+(c) Prove that 1/2 ≤
+��|ψT
+0N ⟩−|ψT
+ei⟩
+��, for all i ∈{0, . . . , N −1}.
+
+(d) Prove that T ≥
+√
+
+N/4.
+
+96
+
+
+===== PDF PAGE 109 =====
+
+13. Consider a standard quantum query algorithm: it makes T queries to a string x ∈{0, 1}N,
+with arbitrary unitaries U0, U1, . . . , UT (that are independent of x) around the queries, and
+then measures a two-outcome POVM {M, I −M} on the final m-qubit state |ψx⟩.
+
+(a) Show that the probability P(x) of getting the first measurement outcome (on input x)
+is ⟨ψx|M|ψx⟩, and that this can be written as an N-variate multilinear polynomial in
+the bits of x of degree ≤2T.
+
+(b) (H) A k-wise independent distribution D is a probability distribution over {0, 1}N, such
+that for each set S ⊆[N] of at most k coordinates, the distribution on the k-bit substring
+xS = (xi)i∈S is uniformly random (i.e, for each z ∈{0, 1}|S|, the probability under
+distribution D of the event that xS = z, is 1/2|S|).
+Show that a T-query quantum algorithm cannot distinguish the uniform distribution
+U on its input x from a 2T-wise independent distribution D on x, in the sense that
+no matter what binary measurement the algorithm does at the end, the probability of
+output 1 is the same under U and under D.
+
+97
+
+
+===== PDF PAGE 110 =====
+
+98
+
+
+===== PDF PAGE 111 =====
+
+Chapter 12
+
+Quantum Algorithms from the
+Generalized Adversary Bound
+
+12.1
+The generalized adversary bound
+
+In the previous chapter we saw two different lower bound methods for the quantum query complexity
+of a given function f: the polynomial method and the adversary method. Neither is optimal for
+every possible f.
+For example, the polynomial method doesn’t give optimal lower bounds for
+iterations of some small functions [14] (see Exercise 1), while the adversary bound of Section 11.3
+cannot prove optimal lower bounds for instance for distinguishing 2-to-1 from 1-to-1 inputs.
+In this chapter we will look at a stronger version of the adversary bound, which turns out to
+give optimal quantum query complexity lower bounds for all Boolean functions. The beauty of
+an optimal lower bound method is that it can also produce algorithms: if the best-possible lower
+bound on the query complexity of f is T, then there must actually exist a T-query algorithm for f!
+Suppose f : D →{0, 1}, with D ⊆{0, 1}N, is a Boolean function whose quantum query complex-
+ity we’d like to determine.1 Consider a T-query quantum algorithm A = UT OxUT−1 · · · U1OxU0,
+with initial state |0m⟩, that computes f with error probability ≤ε < 1/2 for each x ∈D. Let |ψt
+x⟩
+denote the algorithm’s state after Ut has been applied, given input x. Note that |ψ0
+x⟩= U0|0m⟩is
+independent of x. The crucial property, already used in the earlier version of the adversary bound,
+is that ⟨ψt
+x|ψt
+y⟩is 1 at the start (t = 0), but has to be small at the end (t = T) for every (x, y)-pair
+with different function values f(x) ̸= f(y).
+The generalized adversary matrix puts weights αx ∈C on the inputs x ∈D, with the constraint
+�
+x∈D |αx|2 = 1 for normalization. It also puts real (but possibly negative!) weights Γxy on (x, y)-
+pairs with different function values.
+We impose the constraint that Γxy = Γyx, and Γxy = 0
+whenever f(x) = f(y). A |D| × |D| matrix Γ with these properties is called an adversary matrix.
+Let us use these weights to define a progress measure:2
+
+St =
+�
+
+x,y∈D
+Γxyα∗
+xαy⟨ψt
+x|ψt
+y⟩.
+
+In the same spirit as Section 11.3, we will show that |S0| is large, that |ST | is much smaller, and
+
+1If the domain is D = {0, 1}N then f is called a total function, otherwise it’s a partial function.
+2We could have just absorbed the α∗
+xαy into the Γxy and dispensed with the αx’s altogether, but it will be cleaner
+to have separate weights on the x’s and separate weights Γxy on the pairs.
+
+99
+
+
+===== PDF PAGE 112 =====
+
+that St+1 can’t be much smaller than St (i.e., St can’t decrease very fast if we spend one more
+query). This will give the lower bound on T.
+At the start of the algorithm (t = 0), before any queries have been made, we have ⟨ψ0
+x|ψ0
+y⟩= 1
+for all x, y and hence S0 = �
+x,y Γxyα∗
+xαy = α∗Γα. Since α is restricted to a unit vector, the biggest
+we can make |S0| is
+|S0| = ∥Γ∥,
+
+the operator norm (largest singular value) of Γ, by choosing α to be an eigenvector of Γ correspond-
+ing to the largest eigenvalue in absolute value.
+At the end of the algorithm (t = T), the final states |ψT
+x ⟩and |ψT
+y ⟩must be distinguishable
+with success probability ≥1 −ε whenever f(x) ̸= f(y). The following claim, proved in Exercise 2,
+shows that this forces |ST | to be significantly smaller than |S0|.
+
+Claim 1 |ST | ≤2
+�
+
+ε(1 −ε) ∥Γ∥.
+
+For example, if our algorithm has error probability ε = 1/3, then |ST | < 0.95 ∥Γ∥. Accordingly, the
+progress measure has to change significantly in the course of the T-query algorithm. How much can
+one more query change St? This is upper bounded by the following claim, proved in Exercise 3.
+
+Claim 2 Let Γi denote the |D| × |D| matrix obtained from Γ by setting Γxy to 0 if xi = yi. For all
+t ∈{0, . . . , T −1} we have |St −St+1| ≤2 maxi∈[N] ∥Γi∥.
+
+These two claims, together with our value for the initial |S0|, imply
+
+�
+1 −2
+�
+
+ε(1 −ε)
+�
+∥Γ∥≤|S0|−|ST | ≤|S0 −ST | = |
+
+T−1
+�
+
+t=0
+St −St+1| ≤
+
+T−1
+�
+
+t=0
+|St −St+1| ≤2T max
+i∈[N] ∥Γi∥.
+
+We get the following lower bound on quantum query complexity, due to Høyer, Lee, and ˇSpalek [146]:
+
+Theorem 2 (Generalized adversary bound) Let f : D →{0, 1}, with D ⊆{0, 1}N, and Γ
+be an adversary matrix for f. Every quantum algorithm that computes f with worst-case error
+
+probability ≤ε, needs at least
+�1
+
+2 −
+�
+
+ε(1 −ε)
+�
+∥Γ∥
+maxi∈[N] ∥Γi∥queries.
+
+As an example, let us (again) prove the Ω(
+√
+
+N) lower bound for search. Consider the domain
+D = {0N, e1, . . . , eN} of inputs of weight 0 or 1 (ej is the N-bit string that has a 1 only at position j).
+Define (N + 1) × (N + 1) adversary matrix
+
+Γ =
+
+
+
+
+
+
+
+
+0
+1
+· · ·
+1
+1
+0
+· · ·
+0
+...
+...
+...
+...
+1
+0
+· · ·
+0
+
+
+
+
+
+
+.
+
+Then ∥Γ∥≥
+��Γ(1, 0, . . . , 0)T ��=
+√
+
+N. Each Γi is the 2 × 2 X-matrix padded with extra rows and
+columns of 0s, so ∥Γi∥= 1. Hence we obtain the familiar lower bound of Ω(
+√
+
+N) queries for search.
+More generally, we can recover the lower bound of Section 11.3 by constructing an appropriate
+adversary matrix Γ based on the relation R. The rows and columns of Γ are indexed by D =
+
+100
+
+
+===== PDF PAGE 113 =====
+
+f−1(0) ∪f−1(1). Define dx = |{y : (x, y) ∈R}| and similarly define dy. Define Γxy = 1/
+�
+
+dxdy if
+(x, y) ∈R or (y, x) ∈R, and Γxy = 0 otherwise. Let v be the vector with entries √dx, and note that
+
+∥v∥2 = 2|R|. We have ∥Γ∥≥
+1
+∥v∥2 vT Γv =
+1
+2|R|
+�
+(x,y)∈R 2 = 1. We can also show ∥Γi∥≤
+�
+
+ℓ0ℓ1
+m0m1
+for all i.3 Now Theorem 2 gives the Ω
+��
+
+m0m1
+
+ℓ0ℓ1
+
+�
+bound of Eq. (11.1).
+
+12.2
+The dual of the generalized adversary bound
+
+Consider the best-possible lower bound that we can obtain by optimizing over adversary matrix Γ:
+
+max
+∥Γ∥
+s.t.
+∥Γi∥≤1
+∀i ∈[N]
+Γ is symmetric
+Γxy = 0
+∀x, y ∈D with f(x) = f(y)
+
+We will call the optimal value the generalized adversary bound for f (a.k.a. the negative-weights
+adversary bound), and denote it by ADV±(f). Because the statement ∥Γi∥≤1 is equivalent to
+the matrix inequality −I ⪯Γi ⪯I, the above maximization problem can be written in the form
+of a so-called semidefinite program: an optimization problem over real-valued variables, typically
+arranged in one or more matrices, with an objective function that’s linear in the variables, and
+psd constraints that are linear in the variables as well. Every maximization-SDP has an associated
+minimization-SDP which (under mild assumptions that hold in our case) has the same optimal
+value. The first SDP is called the primal SDP, the second is called the dual SDP.4 The equality of
+the optimal values of these two SDPs is called strong duality (see Exercise 4 for a proof of the easy
+half of this equality). This generalizes the better-known strong duality of linear programs, which
+correspond to SDPs with diagonal matrices.
+With some effort that we will skip here, one can show that the dual of the above maximization-
+SDP can be written as the following minimization-SDP:
+
+min
+max
+x∈D max
+
+
+
+�
+
+j∈[N]
+∥uxj∥2,
+�
+
+j∈[N]
+∥vxj∥2
+
+
+
+
+
+s.t.
+�
+
+j:xj̸=yj
+⟨uxj|vyj⟩= [f(x) ̸= f(y)]
+∀x, y ∈D
+
+The truth-value [f(x) ̸= f(y)] is 1 if f(x) ̸= f(y), and 0 if f(x) = f(y). This SDP associates with
+every x ∈D and every j ∈[N] two vectors uxj and vxj (of some dimension d that will implicitly be
+optimized over). We can write this more explicitly as an optimization problem over psd matrices
+
+3Define two |D| × |D| matrices A, B by Axy = 1/√dx if xi ̸= yi and ((x, y) ∈R or (y, x) ∈R), and Axy = 0
+otherwise; and Bxy = 1/
+�
+
+dy if xi ̸= yi and ((x, y) ∈R or (y, x) ∈R), and Bxy = 0 otherwise. Note that Γi = A ◦B,
+where ‘◦’ denotes the entrywise product. For matrices with nonnegative entries, it is known [244, Appendix A] that
+∥A ◦B∥is at most the largest norm among the rows of A (which is ≤
+�
+
+ℓ0/m0, because each row of A has at most
+ℓ0 nonzero entries, each of which is at most 1/√m0) times the largest norm among the columns of B (which is
+
+≤
+�
+
+ℓ1/m1). Hence ∥Γi∥≤
+�
+
+ℓ0ℓ1
+m0m1 .
+
+4Strictly speaking the maximum in the primal should be a supremum and the minimum in the dual should be an
+infimum, because the optimal value need not always be attained; it could be that there’s only an infinite sequence of
+feasible solutions whose objective values converge to the optimum without ever reaching it.
+
+101
+
+
+===== PDF PAGE 114 =====
+
+by defining, for each j ∈[N], a 2|D| × 2|D| psd matrix Zj whose entries are given by the pairwise
+inner products of the 2|D| vectors uxj, vxj (these vectors are the “Gram vectors” of Zj). Then the
+optimization is over psd matrices Z1, . . . , ZN, the objective function is the largest diagonal entry
+of the matrix �
+j∈[N] Zj, and the constraints are linear functions of the entries of the Zj’s.
+By strong duality, the optimal value of this minimization-SDP is ADV±(f) as well. A feasible so-
+lution Γ to the primal gives a lower bound on ADV±(f), while a feasible solution {uxj, vxj}x∈D,j∈[N]
+for the dual gives an upper bound on ADV±(f). The central result of this chapter is that ADV±(f)
+is not only a lower bound on the quantum query complexity of f (which follows from Theorem 2)
+but also an upper bound, as we will see in the next section. This means that a feasible solution to
+the dual SDP actually gives us an algorithm for f!
+
+12.3
+ADV± is an upper bound on quantum query complexity
+
+In this section we will construct a bounded-error quantum algorithm for computing f, derived from
+a feasible solution {uxj, vxj}x∈D,j∈[N] of the dual SDP for ADV±(f).5 Let’s say the objective value
+of this feasible solution is A; the query complexity of our algorithm will turn out to be O(A). Below
+x, y always range over D, and j always ranges over [N].
+Our algorithm will act on 3 registers. The first register is spanned by |j⟩, j ∈[N], and |0⟩, the
+second is 1 qubit, and the third contains the states |vxj⟩∈span{|1⟩, . . . , |d⟩} and the special state
+|0⟩(so the third register has ⌈log(d + 1)⌉qubits). For each x, define the following two 3-register
+states:
+
+|t+
+x ⟩=
+1
+√
+
+2(|0⟩|0⟩|0⟩+ |1⟩|f(x)⟩|0⟩)
+and
+|t−
+x ⟩=
+1
+√
+
+2(|0⟩|0⟩|0⟩−|1⟩|f(x)⟩|0⟩).
+
+The algorithm starts with the all-0 state
+
+|0⟩|0⟩|0⟩=
+1
+√
+
+2(|t+
+x ⟩+ |t−
+x ⟩).
+
+The goal of the algorithm is to (approximately) multiply |t+
+x ⟩with +1 and |t−
+x ⟩with −1, which
+rather magically gives a final state that tells us f(x):
+
+1
+√
+
+2(|t+
+x ⟩−|t−
+x ⟩) = |1⟩|f(x)⟩|0⟩.
+
+The key will be to use phase estimation (Section 4.6) with a well-chosen unitary Ux that depends
+on x, to distinguish |t+
+x ⟩and |t−
+x ⟩. Define Ux = (2Πx −I)(2Λ −I) as the product of two reflections:
+
+• Consider (unnormalized) states |ψy⟩= 0.01
+√
+
+A
+|t−
+y ⟩−
+�
+
+j
+|j⟩|yj⟩|vyj⟩, where yj = 1 −yj.
+
+Note that ∥|ψy⟩∥≤0.01
+√
+
+A +
+√
+
+A, using triangle inequality and the fact that �
+j ∥vyj∥2 ≤A. Let
+Λ be the projector on the subspace that is orthogonal to the span of these |ψy⟩’s, and 2Λ −I
+
+5Note that we only focus on query complexity here, not total number of gates.
+Our presentation follows the
+approach of [174], modified and simplified for our special case of computing Boolean functions rather than their more
+general case of state-transformation. For other generalizations of the adversary bound to different scenarios, see [46].
+Reichardt’s first proof of the optimality of the generalized adversary bound [218, 220] went through so-called “span
+programs,” but we won’t need those here.
+
+102
+
+
+===== PDF PAGE 115 =====
+
+be the reflection through this subspace. In other words, the unitary 2Λ −I puts a −in front
+of all |ψy⟩’s and leaves states alone if they are orthogonal to all |ψy⟩’s. This reflection costs
+no queries to implement, since it doesn’t depend on the actual input x.
+
+• Let Πx be the projector on the subspace spanned by states that have |j⟩|xj⟩in their first two
+registers (with arbitrary states in the third register) and by states having |0⟩in their third
+register. Then the reflection 2Πx−I through this subspace puts a −in front of states |j⟩|xj⟩|v⟩
+if ⟨v|0⟩= 0, and leaves the states alone that are in the subspace of Πx. This reflection can
+be implemented with 1 query to x (Exercise 5).
+
+We now relate |t+
+x ⟩and |t−
+x ⟩to the eigenstates of this unitary Ux. In the next two claims, the
+informal “close” should be read as “within small constant Euclidean distance.”
+
+Claim 3 |t+
+x ⟩is close to an eigenstate |ϕ⟩of Ux that has eigenvalue 1 (i.e., phase 0).
+
+Proof.
+Define
+
+|ϕ⟩= |t+
+x ⟩+ 0.01
+√
+
+A
+
+�
+
+j
+|j⟩|xj⟩|uxj⟩.
+
+The second term on the right-hand side has norm ≤0.01 because �
+j ∥uxj∥2 ≤A, so |t+
+x ⟩is indeed
+close to |ϕ⟩(|ϕ⟩’s norm is close to but not equal to 1, but this doesn’t matter).
+Note that ⟨ϕ|ψy⟩= 0 for all y, because ⟨t+
+x |t−
+y ⟩= 1
+
+2[f(x) ̸= f(y)] and
+
+
+
+�
+
+j
+|j⟩|xj⟩|uxj⟩
+
+
+
+
+
+∗
+�
+
+j
+|j⟩|yj⟩|vyj⟩=
+�
+
+j
+⟨xj|yj⟩· ⟨uxj|vyj⟩=
+�
+
+j:xj̸=yj
+⟨uxj|vyj⟩= [f(x) ̸= f(y)],
+
+and because |t+
+x ⟩, |t−
+x ⟩have |0⟩in the third register and so are orthogonal to all |j⟩|b⟩|uxj⟩, |j⟩|b⟩|vxj⟩,
+b ∈{0, 1}. This shows that |ϕ⟩lies in the subspace of Λ, so it is an eigenvalue-1 eigenvector of 2Λ−I.
+Also, |ϕ⟩is a linear combination of |t+
+x ⟩(which has |0⟩in its third register) and states that have
+|j⟩|xj⟩in their first two registers, so |ϕ⟩lies in the subspace of Πx and hence is also an eigenvalue-1
+eigenvector of 2Πx −I. Hence |ϕ⟩is an eigenvalue-1 eigenvector of Ux = (2Πx −I)(2Λ −I).
+2
+
+Claim 4 |t−
+x ⟩is close to a superposition of eigenstates of Ux with eigenvalues of the form eiθ with
+θ ∈(−π, π] and |θ| > Θ = 1/(1000A).
+
+Proof.
+Let {|β⟩} be a complete orthonormal set of eigenvectors of Ux, with respective eigenvalues
+eiθβ, θβ ∈(−π, π]. Let PΘ = �
+β:|θβ|≤Θ |β⟩⟨β| be the projector on the eigenvectors with small
+
+eigenphase. Define vectors w = 100
+√
+
+A|ψx⟩and v = PΘΠxw = PΘ|t−
+x ⟩. Our goal is to show that v
+has small norm.
+To that end, define v′ = (2Λ −I)v and v′′ = (2Πx −I)v′ = Uxv, and note that
+
+��v −v′′��2 =
+
+������
+
+�
+
+β:|θβ|≤Θ
+(1 −eiθβ)⟨β|v⟩|β⟩
+
+������
+
+2
+
+=
+�
+
+β:|θβ|≤Θ
+|1−eiθβ|2·|⟨β|v⟩|2 ≤2(1−cos Θ)∥v∥2 ≤Θ2∥v∥2.
+
+103
+
+
+===== PDF PAGE 116 =====
+
+Because v + v′ = 2Λv, the vector v + v′ lies in the subspace corresponding to Λ and hence is
+orthogonal to |ψx⟩and to w = 100
+√
+
+A|ψx⟩. We then have
+
+0 = ⟨v + v′|w⟩= ⟨v + v′|Πx|w⟩+ ⟨v + v′|(I −Πx)|w⟩= ⟨v + v′′|Πx|w⟩+ ⟨v −v′′|(I −Πx)|w⟩,
+
+where the last equality used that v′ + v′′ = 2Πxv′ (hence Πx(v′ + v′′) = 2Πxv′ and so Πxv′ = Πxv′′)
+and v′ −v′′ = 2(I −Πx)v′ (hence (I −Πx)v′ = −(I −Πx)v′′). We can now upper bound ∥v∥by
+
+∥v∥2 = |⟨v|PΘΠx|w⟩| = |⟨v|Πx|w⟩|
+
+= 1
+
+2|⟨v −v′′|Πx|w⟩+ ⟨v + v′′|Πx|w⟩| = 1
+
+2|⟨v −v′′|(2Πx −I)|w⟩|
+
+≤1
+
+2
+
+��v −v′′��· ∥w∥≤1
+
+2Θ∥v∥· 100
+√
+
+A∥ψx∥
+
+≤1
+
+2
+1
+1000A∥v∥· 100
+√
+
+A
+�0.01
+√
+
+A
++
+√
+
+A
+�
+=
+�1
+
+20 +
+1
+2000A
+
+�
+∥v∥,
+
+where the first inequality is Cauchy-Schwarz. This implies ∥v∥≤1/20 + 1/(2000A), which is small
+(we may assume A ≥1).
+2
+
+Phase estimation with precision Θ/2 can distinguish between these two cases (eigenphase 0 vs
+≥Θ). This allows us to put a + in front of |t+
+x ⟩and a −in front of |t−
+x ⟩: run phase estimation,
+multiply with −1 whenever the absolute value of the phase estimate is > Θ/2, and then invert
+the phase estimation. Phase estimation uses O(1/Θ) = O(A) applications of Ux, and hence O(A)
+queries to x, as promised. There are small errors in this process due to the fact that Claims 3 and 4
+say “close to” rather than “equal,” and due to the small approximation errors of phase estimation.
+Accordingly, our final state will be close to |1⟩|f(x)⟩|0⟩but not necessarily equal to it, and we end
+up with an O(A)-query quantum algorithm for f that has a small error probability.
+It should be noted that the upper bound is on the algorithm’s query complexity, not on its
+gate complexity. The number of gates of the algorithm is O(A) times the number of gates needed
+to implement the reflection 2Λ −I (the reflection 2Πx −I is relatively easy to implement, see
+Exercise 5). In general this number of gates could be very large, though in some cases it can be
+made quite small, for instance [18].
+
+12.4
+Applications
+
+Let us see how we can derive an O(
+√
+
+N)-query quantum algorithm for the N-bit OR function from
+the dual adversary, for the special case where the N-bit input x is promised to have at most one
+1-bit. Consider the set D = {0N, e1, . . . , eN} of possible inputs. For the dual adversary bound
+we need to choose vectors uxj, vxj for each x ∈D and j ∈[N]. Here vectors of dimension 1 (i.e.,
+numbers) already suffice: we define u0Nj = v0Nj = 1/N1/4 for all j, and uekj = vekj = N1/4 if
+j = k and uekj = vekj = 0 otherwise. For the objective function, note that for each x, �
+j u2
+ekj =
+�
+j v2
+ekj =
+√
+
+N; for x = 0N this is because each of the N j’s contributes (1/N1/4)2 = 1/
+√
+
+N to the
+sum, while for x = ek there is only one nonzero contribution, namely (N1/4)2 =
+√
+
+N for j = k. It
+is also easy to verify that �
+j:xj̸=yj uxjvyj = [f(x) ̸= f(y)] for all x, y ∈D.
+A number of new quantum algorithms have been derived from the dual SDP for ADV±, for
+instance for finding k-collisions [42], learning and testing “juntas” (functions that only depend on
+
+104
+
+
+===== PDF PAGE 117 =====
+
+few coordinates) [45, 18], st-connectivity in graphs [48], and formula evaluation [221, 19]. In general
+it is often quite hard and non-intuitive to come up with a feasible solution {uxj, vxj} for the dual
+SDP with a small objective value, but Belovs’s learning graphs [43] can sometimes help with more
+intuitive constructions of feasible solutions.
+
+12.5
+Perfect composition and AND-OR trees
+
+If we have two Boolean functions f : {0, 1}n →{0, 1} and g : {0, 1}m →{0, 1}, then we can define
+the function F = f ◦gn (on N = nm bits) which is their composition, as
+
+F(x1, . . . , xn) = f(g(x1), . . . , g(xn))
+
+where each xi ∈{0, 1}m. One beautiful property of the adversary bound is perfect composition:
+
+ADV±(F) = ADV±(f)ADV±(g).
+
+There are no hidden constant factors here! The upper bound ADV±(F) ≤ADV±(f)ADV±(g)
+of this composition property can be proved by combining feasible solutions for the dual SDPs for
+f and g to a feasible solution for the dual SDP for F. Similarly, the lower bound ADV±(F) ≥
+ADV±(f)ADV±(g) can be proved by combining feasible solutions for the primal SDPs for f and g.
+We will skip the rather technical details, see [47] for proof of a stronger and more general result.
+Because of the optimality of the generalized adversary bound, it follows from the composition
+property that the quantum query complexity of F equals the product of the query complexities of f
+and g, up to a constant factor. For example, for the 2-level AND-OR tree on N = k2 bits mentioned
+at the end of Chapter 11, we immediately get an optimal O(
+√
+
+N)-query quantum algorithm from the
+fact that the k-bit AND and OR functions each have quantum query complexity (and hence ADV±)
+equal to Θ(
+√
+
+k). Note that we are not directly composing bounded-error algorithms here (e.g.,
+trying to put Grover on top of another Grover to compute the AND-OR tree): reasoning about the
+composed function at the level of the adversary bound and then only translating to quantum query
+algorithms at the end, cleanly circumvents the problem of how the error probabilities of composed
+bounded-error algorithms for f and g affect the error probability of the resulting algorithm for F.
+This composition result, used in a more subtle way, can also give a quantum speed-up for
+evaluating game trees. Imagine a two-player game, such as chess. First white chooses one of several
+possible moves, then black chooses one of several moves, etc. We can picture this as a tree where
+the root is the initial position and the leaves are the final positions (which are win, lose, or draw).
+If we assign a binary value to each leaf indicating whether white wins, then the evaluation of the
+game as a whole is a large, multilevel, unbalanced, AND-OR tree. If it’s white’s turn and at least
+one subtree evaluates to 1, then the current position is a 1 as well: there is a winning move for white
+(this corresponds to an OR function). If it’s black’s turn and one of the subtrees from the current
+position is labeled 0, then the current position is also labeled 0 because black has a non-losing move
+(this is an AND function). The value at the root of the tree indicates whether white has a sequence
+of moves guaranteed to win or not. Using the adversary bound to do a more subtle AND-OR
+composition, there is a quantum algorithm that evaluates this tree using roughly
+√
+
+N queries to
+the binary values at the leaves [19, 219]. In contrast, a classical algorithm has to evaluate nearly
+all N leaves in the worst case unless the fan-out of the tree is very small [228].
+
+105
+
+
+===== PDF PAGE 118 =====
+
+Exercises
+
+1. Consider the 4-bit Boolean function g(x0, x1, x2, x3) which is 1 iff the 4-bit input x is increasing
+or decreasing, i.e., if x ∈{0000, 0001, 0011, 0111, 1111, 1110, 1100, 1000}. Let f be the function
+on N = 4d input bits obtained by composing g with itself d times, in a tree of depth d, where
+the value of each internal node is obtained by applying g to the values of its 4 children, and
+with the input bits at the N leaves.
+
+(a) Show that deg(g) ≤2 and deg(f) ≤2d.
+
+(b) Show that the polynomial method cannot prove a lower bound better than O(
+√
+
+N) on
+the bounded-error quantum query complexity of f.
+
+(c) It is known that ADV±(g) > 2.51 . . . (see [44, Example 3.35] for a proof, or you could
+use an SDP-solver). Use this to show that ADV±(f) ≥Nc for some c > 1/2.
+
+Comment:
+This exercise shows that the generalized adversary bound can sometimes prove substantially
+
+stronger lower bounds than the polynomial method. Incidentally,
+[44, Example 3.3] also shows that if we
+
+restrict the adversary matrix to have nonnegative entries, then the best adversary lower bound we can prove
+
+for g is 2.5, and hence the best lower bound we can prove for the quantum query complexity f with such
+
+restricted Γ, is at most Ω(2.5d).
+So this example also shows that the “negative weights” ADV± can give
+
+substantially better bounds than the “nonnegative weights” version of the adversary bound.
+
+2. (H) This exercise justifies Claim 1. Below, the x, y always range over D.
+
+(a) Let P1, P0 denote the projectors on the subspaces corresponding to outputs 1 and 0,
+respectively. Suppose inputs x, y have f(x) ̸= f(y).
+Show that ⟨ψt
+x|ψt
+y⟩= ⟨ψt
+x|Pf(x) · P1−f(y)|ψt
+y⟩+ ⟨ψt
+x|P1−f(x) · Pf(y)|ψt
+y⟩for all t, x, y.
+
+(b) Define unnormalized states |ϕ⟩= �
+x αxPf(x)|ψT
+x ⟩|x⟩and |ϕ⊥⟩= �
+x αxP1−f(x)|ψT
+x ⟩|x⟩.
+
+Show that ∥|ϕ⟩∥2 +
+��|ϕ⊥⟩
+��2 = 1,
+��|ϕ⊥⟩
+��2 ≤ε, and ∥|ϕ⟩∥·
+��|ϕ⊥⟩
+��≤
+�
+
+ε(1 −ε).
+
+(c) Show that |ST | ≤2|⟨ϕ|(I ⊗Γ)|ϕ⊥⟩|.
+
+(d) Show that |ST | ≤2
+�
+
+ε(1 −ε) ∥Γ∥.
+
+3. (H) This exercise justifies Claim 2. It will be convenient for the proof to assume a phase-
+oracle, so the T-query algorithm will be of the form UT Ox,±UT−1 · · · U1Ox,±U0, applied to
+initial state |0m⟩and followed by a measurement of the first qubit to produce the output bit.
+Below, the x, y always range over D and the i ranges over [N].
+
+(a) Show that St −St+1 = �
+x,y Γxyα∗
+xαy⟨ψt
+x|(I −Ox,±Oy,±)|ψt
+y⟩.
+
+(b) Let Pi = |i⟩⟨i|⊗I be the projector on the subspace where the query register is |i⟩. Define
+|ϕt
+i⟩= �
+x αxPi|ψt
+x⟩|x⟩. Show that �
+i
+��|ϕt
+i⟩
+��2 = 1.
+
+(c) Show that St −St+1 = 2 �
+i⟨ϕt
+i|(I ⊗Γi)|ϕt
+i⟩.
+
+(d) Show that |St −St+1| ≤2 maxi ∥Γi∥.
+
+4. (H) The following is a primal-dual pair of SDPs in so-called standard form:
+
+min
+Tr(CX)
+max
+bT y
+s.t.
+Tr(AiX) = bi ∀i ∈[m]
+s.t.
+�m
+i=1 yiAi ⪯C
+X ⪰0
+
+106
+
+
+===== PDF PAGE 119 =====
+
+The input here consists of Hermitian n × n matrices C, A1, . . . , Am and vector b ∈Rm. The
+n × n matrix X is the variable of the primal, and the vector y ∈Rm is the variable of the
+dual. Prove that “weak duality” always holds: for every feasible solution X for the primal
+and every feasible solution y for the dual, we have Tr(CX) ≥bT y.
+
+5. Show how the reflection 2Πx −I can be implemented with 1 phase-query to x, a Z-gate, and
+a circuit that decides if the third register is |0⟩.
+
+107
+
+
+===== PDF PAGE 120 =====
+
+108
+

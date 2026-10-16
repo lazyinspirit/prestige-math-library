@@ -1,0 +1,439 @@
+===== PDF PAGE 25 =====
+
+In this case, we obtain a linear simulation of a transformation congruent modulo
+
+phase shifts to the n-bit Toffoli gate ∧n−1(σx).
+
+7.5
+Linear Simulation of General ∧n−2(U) Gates on n-Bit Net-
+works With One Bit Fixed
+
+Lemma 7.11: For any unitary U, a ∧n−2(U) gate can be simulated by an n-bit
+
+network of the form
+
+0
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+t
+
+U
+
+=
+
+0
+❤
+❤
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+t
+t
+
+U
+
+(illustrated for n = 9), where the initial value of one bit (the second to last) is fixed
+
+at 0 (and it incurs no net change).
+
+Proof:
+By inspection.✷
+
+Combining Lemma 7.11 with Corollary 7.4, we obtain the following.
+
+Corollary 7.12: For any unitary U, a ∧n−2(U) gate can be simulated by Θ(n) basic
+
+operations in n-bit network, where the initial value of one bit is fixed and incurs no
+
+net change.
+
+Note that the “extra” bit above may be reused in the course of several simulations of
+
+∧m(U) gates.
+
+25
+
+
+===== PDF PAGE 26 =====
+
+8
+Efficient general gate constructions
+
+In this final discussion we will change the ground rules slightly by considering the
+
+“basic operation” to be any two-bit operation. This may or may not be a physically
+
+reasonable choice in various particular implementations of quantum computing, but
+
+for the moment this should be considered as just a mathematical convenience which
+
+will permit us to address somewhat more general questions than the ones considered
+
+above.
+When the arbitrary two-bit gate is taken as the basic operation, then as
+
+we have seen, 5 operations suffice to produce the Toffoli gate (recall Lemma 6.1), 3
+
+produce the Toffoli gate modulo phases (we permit a merging of the operations in the
+
+construction of Sec. 6.2), and 13 can be used to produce the 4-bit Toffoli gate (see
+
+Lemma 7.1). In no case do we have a proof that this is the most economical method
+
+for producing each of these functions; however, for most of these examples we have
+
+compelling evidence from numerical study that these are in fact minimal[44].
+
+In the course of doing these numerical investigations we discovered a number of
+
+interesting additional facts about two-bit gate constructions. It is natural to ask, how
+
+many two-bit gates are required to perform any arbitrary three-bit unitary operation,
+
+if the two-bit gates were permitted to implement any member of U(4)? The answer
+
+is six, as in the gate arrangement shown here.
+
+16
+
+28
+
+37
+
+46
+
+55
+
+64
+
+We find an interesting regularity in how the U(8) operation is built up by this se-
+
+quence of gates, which is summarized by the “dimensionalities” shown in the diagram.
+
+The first U(4) operation has 42 = 16 free angle parameters; this is the dimensionality
+
+of the space accessible with a single gate, as indicated. With the second gate, this
+
+dimensionality increases only by 12, to 28. It does not double to 32, for two reasons.
+
+First, there is a single global phase shared by the two gates. Second, there is a set
+
+26
+
+
+===== PDF PAGE 27 =====
+
+of operations acting only on the bit shared by the two gates, which accounts for the
+
+additional reduction of 3. Formally, this is summarized by noting that 12 is the di-
+
+mension of the coset space SU(4)/SU(2). The action of the third gate increases the
+
+dimensionality by another 9 = 16 −1 −3 −3. 9 is the dimension of the coset space
+
+SU(4)/SU(2)×SU(2). The further subtraction by 3 results from the duplication of
+
+one-bit operations on both bits of the added gate. At this point the dimensionality
+
+increases by nine for each succeeding gate, until the dimensionality reaches exactly 64,
+
+the dimension of U(8), at the sixth gate. In preliminary tests on four-bit operations,
+
+we found that the same rules for the increase of dimensionality applied. This permits
+
+us to make a conjecture, just based on dimension counting, of a lower bound on the
+
+number of two-bit gates required to produce an arbitrary n-bit unitary transforma-
+
+tion: Ω(n) = 1
+
+94n−1
+
+3n−1
+
+9. It is clear that “almost all” unitary transformations will be
+
+computationally uninteresting, since they will require exponentially many operations
+
+to implement.
+
+Finally, we mention that by combining the quantum gate constructions introduced
+
+here with the decomposition formulas for unitary matrices as used by Reck al.[15], an
+
+explicit, exact simulation of any unitary operator on n bits can be constructed using
+
+a finite number (Θ(n34n)) of two-bit gates, and using no work bits. In outline, the
+
+procedure is as follows: Reck et al.[15] note that a formula exists for the decomposition
+
+of any unitary matrix into matrices only involving a U(2) operation acting in the space
+
+of pairs of states (not bits):
+
+U = (
+�
+
+x1,x2∈{0,1}m, x1>x2
+T(x1, x2)) · D.
+
+T(x1, x2) performs a U(2) rotation involving the two basis states x1 and x2, and leaves
+
+all other states unchanged; D is a diagonal matrix involving only phase factors, and
+
+thus can also be thought of as a product of 2n−1 matrices which perform rotations in
+
+two-dimensional subspaces. Using the methods introduced above, each T(x1, x2) can
+
+be simulated in polynomial time, as follows: write a grey code connecting x1 and x2;
+
+for example, if n = 8, x1 = 00111010, and x2 = 00100111:
+
+27
+
+
+===== PDF PAGE 28 =====
+
+1
+00111010
+x1
+2
+00111011
+3
+00111111
+4
+00110111
+5
+00100111
+x2
+Operations involving adjacent steps in this grey code require a simple modification of
+
+the ∧n−1 gates introduced earlier. The (n −1) control bits which remain unchanged
+
+are not all 1 as in our earlier constructions, but they can be made so temporarily by
+
+the appropriate use of “NOT” gates (∧0(σx)) before and after the application of the
+
+∧n−1 operation. Now, the desired T(x1, x2) operation is constructed as follows: first,
+
+permute states down through the grey code, performing the permutations (1,2), (2,3),
+
+(3,4), ... (m-2,m-1). These numbers refer to the grey code elements as in the table
+
+above, where m, the number of elements in the grey code, is 5 in the example. Each of
+
+these permutations is accomplished by a modified ∧n−1(σx). Second, the desired U(2)
+
+rotation is performed by applying a modified ∧n−1(U) involving the states (m−1) and
+
+(m). Third, the permutations are undone in reverse order: (m-2,m-1), (m-3,m-2), ...
+
+(2,3), (1,2).
+
+The number of basic operations to perform all these steps may be easily estimated.
+
+Each T(x1, x2) involves 2m −3 (modified) ∧n−1 gates, each of which can be done in
+
+Θ(n2) operations. Since m, the number of elements in the grey code sequence, cannot
+
+exceed n + 1, the number of operations to simulate T(x1, x2) is Θ(n3). There are
+
+O(4n) T’s in the product above, so the total number of basic operations to simulate
+
+any U(2n) matrix exactly is Θ(n34n). (The number of steps to simulate the D matrix
+
+is smaller and does not affect the count.) So, we see that this strict upper bound
+
+differs only by a polynomial factor (which likely can be made better than n3) from the
+
+expected lower bound quoted earlier, so this Reck procedure is relatively “efficient”
+
+(if something which scales exponentially may be termed so). A serious problem with
+
+this procedure is that it is extremely unlikely, so far as we can tell, to provide a
+
+polynomial-time simulation of those special U(2n) which permit it, which of course
+
+are exactly the ones which are of most interest in quantum computation.
+It still
+
+28
+
+
+===== PDF PAGE 29 =====
+
+remains to find a truly efficient and useful design methodology for quantum gate
+
+construction.
+
+Acknowledgments
+
+We are very grateful to H.-F. Chau, D. Coppersmith, D. Deutsch, A. Ekert and T.
+
+Toffoli for helpful discussions. We are also most happy to thank the Institute for
+
+Scientific Interchange in Torino, and its director Professor Mario Rasetti, for making
+
+possible the workshop on quantum computation in October, 1994, at which much of
+
+this work was performed. A. B. thanks the financial support of the Berrow’s fund in
+
+Lincoln College (Oxford).
+
+References
+
+[1] P. A. M. Dirac, The Principles of Quantum Mechanics, (Oxford, 1958), Chap. 5; for a
+modern treatment, see A. Peres, Quantum Theory: Concepts and Methods, (Kluwer,
+1993), Chap. 8.6.
+[2] R. Landauer, “Irreversibility and heat generation in the computing process”, IBM
+J. Res. Dev. 5, 183 (1961); C. H. Bennett, “Logical reversibility of computation”,
+IBM Journal of Research and Development, 17, 525 (1973); Yves Lecerf, “Machines
+de Turing reversibles. Recursive insolubilite en nεN de l’equation u = θn ou θ est
+un “isomorphism de codes”. Comptes Rendus 257, 2597-2600 (1963); C. H. Bennett,
+“Time/space trade-offs for reversible computation”, SIAM J. Comput. 18, 766 (1989).
+For a review, see C. H. Bennett and R. Landauer, “Physical limits of computation”,
+Scientific American, July, 1985, p. 48.
+[3] E. Fredkin and T. Toffoli, “Conservative Logic”, Internat. J. Theoret. Phys. 21, 219
+(1982).
+[4] T. Toffoli “Reversible Computing”, in Automata, Languages and Programming, eds.
+J. W. de Bakker and J. van Leeuwen (Springer, New York, 1980), p. 632; Technical
+Memo MIT/LCS/TM-151, MIT Lab. for Comp. Sci. (unpublished).
+[5] P. Benioff, “Quantum mechanical Hamiltonian models of Turing machines”, J. Stat.
+Phys. 29, 515 (1982).
+[6] A. Peres, “Reversible logic and quantum computers”, Phys. Rev. A 32, 3266 (1985).
+[7] R. P. Feynman, “Quantum mechanical computers”, Optics News, February 1985, 11,
+p. 11.
+[8] N. Margolus, “Parallel Quantum Computation”, in Complexity, Entropy, and the
+Physics of Information, Santa Fe Institute studies in the Sciences of Complexity, vol.
+VIII, ed. W. H. Zurek, (Addison-Wesley, 1990), p. 273.
+[9] Tycho Sleator and Harald Weinfurter, “Realizable universal quantum logic gates”,
+preprint (1994).
+
+29
+
+
+===== PDF PAGE 30 =====
+
+[10] A. Barenco, D. Deutsch, A. Ekert, and R. Jozsa, “Logic gates for quantum circuits”,
+preprint (1994).
+[11] J. I. Cirac and P. Zoller, “Quantum computations with cold trapped ions”, preprint
+(November 1994).
+[12] I. Chuang and Y. Yamamoto, “A simple quantum computer”, submitted to Phys. Rev.
+A (November 1994).
+[13] Y. Yamamoto, M. Kitegawa, and K. Igeta, in Proc. 3rd Asia-Pacific Phys. Conf.
+(World Scientific, Singapore, 1988); G. J. Milburn, Phys. Rev. Lett. 62, 2124 (1989).
+[14] S. Lloyd, “A potentially realizable quantum computer”, Science, 261, 1569 (1993);
+“Envisioning a quantum supercomputer”, Science, 263, 695 (1994).
+[15] M. Reck, A. Zeilinger, H. J. Bernstein, and P. Bertani, “Experimental realization of
+any discrete unitary operator”, Phys. Rev. Lett. 73, 58 (1994).
+[16] D. Deutsch, “Quantum theory, the Church-Turing principle and the universal quantum
+computer”, Proc. R. Soc. Lond. A 400, 97 (1985).
+[17] Deutsch, D. and Jozsa, R., “Rapid solution of problems by quantum computation”,
+Proceedings of the Royal Society, London, vol. A439, 1992, pp. 553 – 558.
+[18] Berthiaume, A. and Brassard, G., “Oracle quantum computing”, Proceedings of the
+Workshop on Physics and Computation — PhysComp ’92, October 1992, IEEE Press,
+pp. 195 – 199.
+[19] Simon, D., “On the power of quantum computation”, Proceedings of the 35th Annual
+Symposium on the Foundations of Computer Science (IEEE Computer Society Press,
+Los Alamitos, CA, 1994), p. 116.
+[20] Bernstein, E. and Vazirani, U., “Quantum complexity theory”, Proceedings of the 25th
+Annual ACM Symposium on Theory of Computing, (ACM Press, New York, 1993),
+pp. 11 – 20.
+[21] P. W. Shor, “Algorithms for quantum computation: discrete log and factoring”, Pro-
+ceedings of the 35th Annual Symposium on the Foundations of Computer Science
+(IEEE Computer Society Press, Los Alamitos, CA, 1994), p. 124.
+[22] For a review see A. Ekert and R. Jozsa, “Shor’s quantum algorithm for factorising
+numbers”, in preparation for Reviews of Modern Physics (1995); see also J. Brown,
+New Scientist 133, No. 1944, p. 21 (1994).
+[23] For an interesting recent prespective, see G. Brassard, “Cryptography Column —
+Quantum Computing: The End of Classical Cryptography?” SIGACT News 25 (4),
+15 (1994).
+[24] D. Deutsch, “Quantum computational networks”, Proc. Roy. Soc. Lond. A 425, 73
+(1989).
+[25] B. Schumacher, “On Quantum Coding,” Phys. Rev. A (in press to appear 1995).
+[26] R. Jozsa and B. Schumacher, “A New Proof of the Quantum Noiseless Coding Theo-
+rem,”J. Modern Optics 41, 2343-2349, (1994).
+[27] A. C.-C. Yao, “Quantum Circuit Complexity”, Proceedings of the 34th Annual Sym-
+posium on the Foundations of Computer Science (IEEE Computer Society Press, Los
+Alamitos, CA, 1993), p. 352.
+[28] D. P. DiVincenzo, “Two-bit gates are universal for quantum computation”, Phys. Rev.
+A 50, 1015 (1995). (cond-mat/9407022)
+[29] A. Barenco, “A universal two-bit gate for quantum computation”, preprint (1994).
+
+30
+
+
+===== PDF PAGE 31 =====
+
+[30] S. Lloyd, “Almost any quantum logic gate is universal”, preprint (1994).
+[31] D. Deutsch, A. Barenco, and A. Ekert, “Universality in quantum computation”, sub-
+mitted to Proc. R. Soc. Lond. (1995).
+[32] H. F. Chau and F. Wilczek, “Realization of the Fredkin gate using a series of one- and
+two-body operators”, Report IASSNS-HEP-95/15, (1995). (quant-ph/9503005)
+[33] D. Coppersmith, “An approximate Fourier transform useful in quantum factoring”,
+IBM Research Report RC19642 (1994); R. Cleve, “A note on computing Fourier trans-
+forms by quantum programs”, unpublished note (1994).
+[34] A. Berthiaume, D. Deutsch, and R. Jozsa, “The stabilisation of quantum computa-
+tions”, Proceedings of the Workshop on Physics and Computation, PhysComp ’94 (Los
+Alamitos: IEEE Comp. Soc. Press, 1994), p. 60.
+[35] W. G. Unruh, “Maintaining coherence in quantum computers”, Phys. Rev. A 51, 992
+(1995). (hep-th/9406058)
+[36] I. L. Chuang, R. Laflamme, P. Shor, and W. H. Zurek, “Quantum Computers, Factor-
+ing and Decoherence”, Report LA-UR-95-241 (1995). (quant-ph/9503007)
+[37] R. Landauer, “Is quantum mechanics useful?”, Proc. Roy. Soc. Lond., (to be pub-
+lished).
+[38] The only non-trivial one-bit classical invertible operation is
+�0
+1
+1
+0
+
+�
+.
+[39] D. Coppersmith and E. Grossman, “Generators for Certain Alternating Groups with
+Applications to Cryptography”, SIAM J. Applied Math. 29, No. 4, pp. 624-627 (1975).
+[40] Richard Cleve, “Reversible Programs and Simple Product Ciphers” in Methodologies
+for Designing Block Ciphers and Cryptographic Protocols, PhD Thesis, University of
+Toronto, pp. 2-56 (1989).
+[41] Michael Ben-Or and Richard Cleve, “Computing algebraic formulas using a constant
+number of registers”, SIAM J. Comput. 21, 54 (1992).
+[42] Corresponding with the definition in the previous section, the top two wires contain
+the input bits x1 and x2, and the third wire contains the input y.
+[43] The angle-halving of this definition conforms to the usual relation between operations
+in SO(3) and SU(2). See J. Mathews and R. L. Walker, Mathematical Methods of
+Physics, (2nd edition, W. A. Benjamin, Menlo Park, CA, 1970), p. 464, for the use of
+SO(3) language (rigid body rotations) to describe SU(2) operations.
+[44] D. P. DiVincenzo and J. Smolin, “Results on two-bit gate design for quantum comput-
+ers”, Proceedings of the Workshop on Physics and Computation, PhysComp ’94 (Los
+Alamitos: IEEE Comp. Soc. Press, 1994), p. 14. (cond-mat/9409111)
+
+31
+

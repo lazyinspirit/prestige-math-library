@@ -1,0 +1,40 @@
+# Batch 20 authoring notes
+
+Run `quantum-computing-algorithms-60-2026-10-15`, role beta, batch 20. The assigned pair is A `stabilizer-css-codes-syndromes-and-procedures` (order 2204) and B `stabilizer-css-codes-syndromes-and-procedures-examples` (order 2205). The pages contain 16 A-page items (15 in `items`, one example) and one B-page example. The A page remains below the 100-item cap.
+
+## Plan and inventory reconciliation
+
+The controlling QC track row at `research/plan-quantum-computing-track.md:94` assigns stabilizer/CSS codes, syndromes, encoders/decoders, and worked small codes. The current audited `research/quantum-computing-planning/proposed-items.json` contains 13 A contracts and one B contract for this page. The current `research/plan-spec.json` has empty item arrays on both QC20 page records, so it does not carry that audited inventory. The assigned batch manifest and proposal export control this draft inventory; the plan-spec omission is recorded here and was not repaired outside the assigned files.
+
+Three A-page support items were added so the planned arguments have explicit local prerequisites: `lem-qc-binary-dual-dimension` proves the dual-dimension equality used in CSS commutation and the Steane example; `thm-qc-stabilizer-logical-pauli-quotient-dimension` proves the quotient dimension needed to define distance; and `thm-qc-stabilizer-encoder-terminates-with-quadratic-gate-count` gives the termination and gate bound before encoder correctness. Each has explicit dependencies and a complete proof where proof-bearing. No planned claim was dropped.
+
+The CSS convention is the general nesting `C2 ⊆ C1`; it does not assume an additional `C2^perp ⊆ C1` inclusion. Cleve's §37.3 special CSS presentation adds a dual-containment hypothesis, while the controlling QC20 proposal and Preskill's general CSS treatment use the nested-code construction. The extra Cleve hypothesis is therefore recorded as a source-specific convention, not imported into the item statements. The Pauli convention is phase-aware `i^k X^x Z^z`, with Hermitian `Y=iXZ`; Preskill's older notes use an anti-Hermitian `Y` convention, so phase identities were checked against the local matrices. The planar patch fixes left/right rough boundaries and top/bottom dual boundaries; source drawings with a rotated orientation do not set the local coordinates.
+
+The CSS correction statement distinguishes its local radius `δ(C)` from the classical `d(C)`: the classical zero-code sentinel is `n+1`, while the CSS correction radius for an empty logical error set is `+infinity`. The zero-code decoder proof now uses the exact parity-map kernels and treats those cases directly; it invokes the classical distance theorem only for nonzero classical codes.
+
+## Dependency and supplier evidence
+
+The dispatch listed prerequisite batches `2, 5, 7, 8, 9, 15, 16, 18, 19` and scheduling hash `5853a948dc662edf4f617f17513f4733c3faab723214e776cad31c223b0b0a60`. At the current cross-batch recomputation, batch 20 remains dependency level 7 and has direct requirements `2, 4, 7, 8, 9, 15, 16, 18, 19`; batch 4 is an additional item edge from the projective-measurement outcome and conditional-state suppliers used in CSS syndrome extraction. Batch 5 remains transitive through batches 9 and 19. The current scheduling-input hash is recorded in `batch-20.cross-batch-dependencies.json`; the shared scheduler artifact was not edited.
+
+Current QC09 syntax/denotation/control and QC04 projective-measurement bodies were inspected before use. In particular, QC09 fixes finite ordered wires, chronological layers with the first applied first, and the denotation `U_Ld ... U_L1`; the measurement suppliers distinguish observed outcomes from hidden Kraus indices and give deterministic projective outcome probabilities and conditional states. QC16's actual stabilizer-subgroup, average-projector, label/order, and projector-rank suppliers were inspected, along with the QC18 classical-code/distance interfaces and QC19 explicit Knill–Laflamme recovery. These remain drafts where marked draft; interface inspection is not independent approval.
+
+One unplaced same-run support carrier remains visible in the transitive closure: `def-qc-pauli-group-on-zero-qubits` exists as a draft and supplies the scalar `P_0` convention, but appears in no current run manifest or audited proposal item home. QC16's `def-qc-stabilizer-subgroup` cites it for its `n=0` clause. QC20 code spaces use `n≥1`, matching the phase-aware `P_n` interface, so this branch is outside the assigned claims and does not block their readiness. The exact excerpt, status, and owner reconciliation action are in the cross-batch dependency record; no QC16 file was changed.
+
+The current QC21 cross-batch record still labels seven QC20 supplier carriers `current-body-render-invalid` based on the now-fixed unquoted source titles and multiline display formulas. The current QC20 scoped content-policy check passes all 17 carriers, and the assigned display-math scan finds no multiline formula bodies. Those QC21 records were left untouched. QC21 separately records that the surface-code distance theorem's 809-carrier transitive consumer closure (520 proof-bearing) is not reconciled; that consumer-side issue remains for its owner. The seven stale render records and their dependent QC21 claims are listed in the cross-batch dependency input.
+
+## Sources and proof evidence
+
+The source evidence covers Cleve's complete relevant §§37.1.1–37.1.3 and §§37.2–37.3; Preskill §§7.6–7.10 and §§7.18.1–7.18.5; de Wolf §§20.1 and 20.3; Aaronson–Gottesman §§II and VI; and Dennis et al. §III.A–B. Exact URLs, printed/PDF locators, source-specific conventions, harvested result dispositions, fetch hashes, and cache/source history are in `batch-20.coverage.json` and `batch-20.source-evidence.json`. The coverage checklist reports 2 pages, 18 harvested results, 0 errors, and 0 warnings. Source fetch reports 9/9 source records verified, 0 newly stamped, 9/9 resolved, and 0 documented drops. There were no retrieval failures or `source-resolution` dispositions.
+
+Proof contracts cover all 17 manifest items. Current strict validation reports 0 errors and 0 warnings. Regeneration updated citations and derivations for 15 items; the stabilizer-code-space definition and encoder algorithm have no in-item Facts/proof-step blocks, with the algorithm's termination and correctness discharged by separate assigned theorems. The three unsupported hand-entered finite-smoke labels were removed: the registered smoke catalog has no applicable QC checks. Their bounded matrix, syndrome, surface-patch, and nested-code calculations remain explicit in the item Verification sections; the finite-smoke command reports 0 registered checks over 0/17 items.
+
+## Scoped checks and readiness
+
+- `manifest-deps`: 17 items, 0 missing dependency arrays, 0 errors.
+- `content-policy`: 17 scoped items, 0 errors, 0 warnings.
+- Normative phase precheck: 15 proof-bearing items checked, 0 failing; 2 items are not applicable because they have no phase proof body.
+- `proof-layout` on all 17 assigned item files: 66 numbered steps, 0 defects.
+- Scoped dependency recomputation: all 17 assigned item levels match the current run graph, with no assigned-item cycle or level error. The full-run check still reports empty scaffold inventories and stale item levels in other batches; the exact current breakdown is recorded in the cross-batch evidence. No other batch manifest was edited.
+- `proof-contract-coverage` cannot complete globally because the current frontier has an empty/invalid `simon-algorithm-and-finite-field-recovery` inventory. The batch-20 proof-contract strict check itself passes.
+
+All 17 assigned items have current `ready` Step 1 records with their examined direct dependencies recorded. These are authoring-readiness records only; they do not grant mathematical approval or independent review. No published content, shared plan, other pair's carrier, engine state, or verdict was changed.

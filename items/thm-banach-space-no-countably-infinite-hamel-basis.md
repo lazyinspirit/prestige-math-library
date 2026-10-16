@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-banach-space-no-countably-infinite-hamel-basis.json
 id: thm-banach-space-no-countably-infinite-hamel-basis
 kind: theorem
 title: "A Banach space has no countably infinite Hamel basis"
@@ -7,25 +9,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-banach-space, cor-finite-dimensional-normed-spaces-are-banach,
-       def-linear-basis, def-countable, thm-rationals-countable,
-       thm-n-cross-n-countable, lem-q-and-irrationals-dense-r,
-       thm-recursion, thm-well-ordering-principle,
-       cor-archimedean-reciprocal, lem-geometric-sequence-null,
-       rem-real-and-complex-normed-space-convention,
-       thm-complex-numbers-are-the-real-coordinate-plane]
+deps: [def-banach-space, cor-finite-dimensional-normed-spaces-are-banach, def-linear-basis, def-countable, thm-rationals-countable, thm-n-cross-n-countable, lem-q-and-irrationals-dense-r, thm-recursion, thm-well-ordering-principle, cor-archimedean-reciprocal, lem-geometric-sequence-null, lem-complex-norm-realification-is-a-real-norm, thm-complex-numbers-are-the-real-coordinate-plane]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-astra
-    verdict: locally-repaired
-    date: 2026-09-09
-    scope: owner-authorized-local-ZF-proof-and-dependency-repair
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -64,7 +52,7 @@ equinumerous with $\mathbb N$ ([[def-countable]]).
 
 [L6] For every $\eta>0$ there is an integer $k\ge1$ with $1/k<\eta$ ([[cor-archimedean-reciprocal]]); also $(1/2)^n\to0$ ([[lem-geometric-sequence-null]], clause 1).
 
-[L7] A complex normed space has the same complete metric on restriction to real scalars ([[rem-real-and-complex-normed-space-convention]]). Every complex scalar uniquely has the form $a+ib$ with $a,b\in\mathbb R$ ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L7] A complex Banach space retains its complete norm metric on restriction to real scalars ([[lem-complex-norm-realification-is-a-real-norm]], [[def-banach-space]]). Every complex scalar uniquely has the form $a+ib$ with $a,b\in\mathbb R$ ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
 ## Proof
 

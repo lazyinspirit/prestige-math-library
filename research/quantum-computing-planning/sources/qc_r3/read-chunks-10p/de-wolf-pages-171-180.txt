@@ -1,0 +1,630 @@
+===== PDF PAGE 171 =====
+
+where the |j⟩are the computational basis states for Bob’s D-dimensional overall space. Define
+λi = √µi and |bi⟩= �D
+j=1 cij|j⟩. This gives the decomposition of |ϕ⟩of Eq. (18.1). It only remains
+to show that {|bi⟩} is an orthonormal set, which we do as follows. The density matrix version of
+Eq. (18.1) is
+
+|ϕ⟩⟨ϕ| =
+
+d
+�
+
+i,j=1
+λiλj|ai⟩⟨aj| ⊗|bi⟩⟨bj|.
+
+We know that if we trace out the B-part from |ϕ⟩⟨ϕ|, then we should get ρA = �
+i λ2
+i |ai⟩⟨ai|, but
+that can only happen if ⟨bj|bi⟩= Tr(|bi⟩⟨bj|) = 1 for i = j and ⟨bj|bi⟩= 0 for i ̸= j. Hence the
+|bi⟩form an orthonormal set. Note that from Eq. (18.1) it easily follows that Bob’s local density
+matrix is ρB = �
+i λ2
+i |bi⟩⟨bi|.
+
+18.4
+The impossibility of perfect bit commitment
+
+Key distribution is just one of the many tasks cryptographers would like to solve. Another important
+primitive is bit commitment. In this scenario there is no eavesdropper, but Alice and Bob don’t
+trust each other. Suppose Alice has a bit b which for the time being she doesn’t want to reveal
+to Bob, though she would like to somehow convince Bob that she has already made up her mind
+about b and won’t change its value later. A protocol for bit commitment comes in two stages, each
+of which may involve several rounds of communication:
+
+1. In the “commit” phase Alice gives Bob a state which is supposed to commit her to the value
+of b (without informing Bob about the value of b).
+
+2. In the “reveal” phase Alice sends b to Bob, and possibly some other information to allow him
+to check that this is indeed the same value b that Alice committed to before.
+
+A protocol is binding if Alice can’t change her mind, meaning she can’t get Bob to “open” 1 −b.
+A protocol is concealing if Bob cannot get any information about b before the “reveal phase.”4
+
+A good protocol for bit commitment would be a very useful building block for many other
+cryptographic applications. For instance, it would allow Alice and Bob (who still don’t trust each
+other) to jointly flip a fair coin. Maybe they’re going through a divorce, and need to decide who
+gets to keep their joint car. Alice can’t just flip the coin by herself because Bob doesn’t trust her
+to do this honestly, and vice versa. Instead, Alice would pick a random coin b and commit to it.
+Bob would then pick a random coin c and send it to Alice. Alice then reveals b, and the outcome of
+the coin flip is defined to be b ⊕c. As long as at least one of the two parties follows this protocol,
+the result will be a fair coin flip.
+Perfect coin flipping (and hence also perfect bit commitment) are known to be impossible in
+the classical world. After BB84 there was some hope that perfect bit commitment (and hence
+also perfect coin flipping) would be possible in the quantum world, and there were some seemingly
+information-theoretically secure proposals for quantum protocols to achieve this. Unfortunately it
+turns out that there is no quantum protocol for bit commitment that is both perfectly binding and
+perfectly concealing.
+
+4A good metaphor to think about this: in the commit phase Alice locks b inside a safe which she sends to Bob.
+This commits her to the value of b, since the safe is no longer in her hands. During the reveal phase she sends Bob
+the key to the safe, who can then open it and learn b.
+
+159
+
+
+===== PDF PAGE 172 =====
+
+To show that a protocol for perfect bit commitment is impossible, consider the joint pure
+state |ϕb⟩that Alice and Bob would have if Alice wants to commit to bit-value b, and they both
+honestly followed the protocol.5 If the protocol is perfectly concealing, then the reduced density
+matrix on Bob’s side should be independent of b, i.e., TrA(|ϕ0⟩⟨ϕ0|) = TrA(|ϕ1⟩⟨ϕ1|). The way we
+constructed the Schmidt decomposition in the previous section now implies that there exist Schmidt
+decompositions of |ϕ0⟩and |ϕ1⟩with the same λi’s and the same bi’s: there exist orthonormal bases
+{ai} and {a′
+i} such that
+
+|ϕ0⟩=
+
+d
+�
+
+i=1
+λi|ai⟩|bi⟩and |ϕ1⟩=
+
+d
+�
+
+i=1
+λi|a′
+i⟩|bi⟩
+
+Now Alice can locally switch from |ϕ0⟩to |ϕ1⟩by just applying on her part of the state the map
+|ai⟩�→|a′
+i⟩. Alice’s map is unitary because it takes one orthonormal basis to another orthonormal
+basis. But then the protocol is not binding at all: Alice can still freely change her mind about the
+value of b after the “commit” phase is over! Accordingly, if a quantum protocol for bit commitment
+is perfectly concealing, it cannot be binding at all.
+
+18.5
+More quantum cryptography
+
+Quantum cryptography is by now a pretty large subset of the area of quantum information and
+computation. Here we just briefly mention a few other topics in quantum crypto (see [72]):
+
+• There are quantum protocols for bit commitment that are partially concealing and partially
+binding—something which is still impossible in the classical world. A primitive called “weak
+coin flipping” can be implemented almost perfectly in the quantum world, and cannot be
+implemented at all in the classical world.
+
+• Under assumptions on the fraction of dishonest players among a set of k parties, it is possible
+to implement secure multi-party quantum computation. This is a primitive that allows the
+players to compute any function of their k inputs, without revealing more information to
+player i than can be inferred from i’s input plus the function value.
+
+• One can actually do nearly perfect bit commitment, coin flipping, etc., assuming the dishonest
+party has bounded quantum storage, meaning that it can’t keep large quantum states coher-
+ent for longer times. At the present state of quantum technology this is a very reasonable
+assumption, though a breakthrough in physical realization of quantum computers could wipe
+out this approach.
+
+• In device-independent cryptography, Alice and Bob want to solve certain cryptographic tasks
+like key distribution or randomness generation without trusting their own devices (for instance
+because they don’t trust the vendor of their apparatuses). Roughly speaking, the idea here
+is to use Bell-inequality violations to prove the presence of entanglement, and then use this
+entanglement for cryptographic purposes.
+Even if Alice or Bob’s apparatuses have been
+tampered with, they can still only violate things like the CHSH inequality if they actually
+share an entangled state.
+
+5The assumption that the state is pure rather than mixed is without loss of generality.
+
+160
+
+
+===== PDF PAGE 173 =====
+
+• Experimentally it is much easier to realize quantum key distribution than general quantum
+computation, because you basically just need to prepare qubits (usually photons) in either the
+computational or the Hadamard basis, send them across a channel (usually an optical fibre,
+but sometimes free space), and measure them in either the computational or the Hadamard
+basis. Many sophisticated experiments have already been done. Somewhat surprisingly, you
+can already commercially buy quantum key distribution machinery. Unfortunately the im-
+plementations are typically not perfect (for instance, we don’t have perfect photon sources or
+perfect photon detectors), and once in a while another loophole is exposed in the implemen-
+tation, which the vendor then tries to patch, etc.
+
+Exercises
+
+1. Here we will consider in more detail the information-disturbance tradeoff for measuring a
+qubit in one of the four BB84 states (each of which occurs with probability 25%).
+
+(a) Suppose Eve measures the qubit in the orthonormal basis given by cos(θ)|0⟩+ sin(θ)|1⟩
+and sin(θ)|0⟩−cos(θ)|1⟩, for some parameter θ ∈[0, π/4]. The first basis vector corre-
+sponds to output 0, the second to output 1. For each of the four possible BB84 states,
+give the probabilities of outcome 0 and outcome 1 (so your answer should consist of
+8 numbers, each of which is a function of θ).
+
+(b) What is the average probability that Eve’s measurement outcome equals the encoded
+bit ai, as a function of θ? (average taken both over the uniform distribution over the
+four BB84 states, and over the probabilities calculated in part (a))
+
+(c) By what angle does the state change in each of the 8 cases of (a)?
+
+2.
+(a) What is the Schmidt rank of the state 1
+
+2(|00⟩+ |01⟩+ |10⟩+ |11⟩)?
+
+(b) Suppose Alice and Bob share k EPR-pairs. What is the Schmidt rank of their joint
+state?
+
+(c) Prove that a pure state |ϕ⟩is entangled if, and only if, its Schmidt rank is greater than 1.
+
+3. Give the Schmidt decomposition of the state 1
+
+2(|0⟩A|0⟩B + |0⟩A|1⟩B + |1⟩A|1⟩B + |1⟩A|2⟩B).
+Here Alice’s space has dimension 2, and Bob’s space has dimension 3. It suffices if you write
+down your Schmidt decomposition, being explicit about the values of the λi’s and what are
+the states |ai⟩and |bi⟩. You can add your calculation (involving local density matrices etc.)
+as a justification, but you don’t have to.
+
+4. Consider a density matrix ρ on Alice’s Hilbert space. A bipartite pure state |ψ⟩AB is called a
+purification of ρ, if ρ = TrB(|ψ⟩⟨ψ|). The B-register in |ψ⟩AB is called the purifying register.
+
+(a) Show that an EPR-pair is a purification of the 1-qubit mixed state ρ = I/2.
+
+(b) Show that if ρ is a density matrix of rank r, then there exists a purification of ρ where
+the purifying register has at most ⌈log r⌉qubits.
+
+(c) Show that if |ψ⟩AB and |ψ′⟩AB are purifications of the same ρ, then there exists a unitary
+U on Bob’s space such that |ψ′⟩AB = (I ⊗U)|ψ⟩AB.
+
+5. Suppose Alice has a 1-qubit state ρ.
+
+161
+
+
+===== PDF PAGE 174 =====
+
+(a) Suppose Alice chooses a uniformly random Pauli matrix (see Appendix A.9) and applies
+it to ρ. What is the resulting density matrix, averaged over the four cases?
+
+(b) Suppose Alice and Bob shared a uniformly distributed secret 2-bit string ab, which is
+unknown to Eve. How can Alice send ρ to Bob over a public quantum channel, without
+leaking any information to Eve (i.e., the quantum state sent over the channel should by
+itself be independent of ρ), in such a way that Bob can recover ρ?
+
+Comment: This may be called a “quantum one-time pad”: we use two classical bits of secret key to hide
+
+one qubit, while the classical one-time pad uses one classical bit of secret key to hide one classical bit.
+
+6. (H) Suppose we have a qubit in mixed state ρ that we want to hide from Alice and Bob
+individually, but in such a way that if Alice and Bob cooperate, then they can recover ρ.
+
+Describe how we can change ρ into some other 1-qubit state ρ′, what secret keys we give to
+Alice and Bob, why individually they can get no information about ρ from the qubit ρ′, and
+why jointly they can fully recover the qubit in state ρ from ρ′. The keys should be classical.
+
+7. (H) Prove that Alice cannot give information to Bob by doing a unitary operation on her
+part of an entangled pure state.
+
+8. Suppose Alice sends two n-bit messages M1 and M2 with the one-time pad scheme, reusing
+the same n-bit key K. Show that Eve can now get some information about M1, M2 from
+tapping the classical channel.
+
+9.
+(a) (H) Consider a bipartite pure state shared between Alice and Bob, where Alice and
+Bob’s local spaces have dimension d each:
+�
+
+i,j∈{1,...,d}
+αij|i⟩A|j⟩B.
+
+The state is given to you classically, as a list of d2 amplitudes, each described by O(d)
+bits. Give a classical polynomial-time algorithm to find the Schmidt coefficients and to
+find Alice and Bob’s basis for a Schmidt decomposition.
+
+(b) Give a classical polynomial-time algorithm that decides whether a given bipartite pure
+state (given as in (a)) is entangled or not.
+
+Comment: If the given state were mixed instead of pure, this decision problem is known to be NP-hard
+
+and hence probably not polynomial-time solvable.
+
+162
+
+
+===== PDF PAGE 175 =====
+
+Chapter 19
+
+Quantum Machine Learning
+
+19.1
+Introduction
+
+Machine learning tries to extract patterns and regularities from given data for the purposes of
+prediction and understanding. In a slogan, one could say: ML = data + optimization. The data is
+what you learn from; the optimization finds a good model or hypothesis for the given data, which
+hopefully has some generalization power. ML has gone through several ups and downs over the
+years, but currently is booming thanks to the success of so-called “deep learning,” based on neural
+networks.1 ML is often subdivided into three subareas, depending on the data one has:
+
+1. In supervised learning we are given labelled data, for instance pictures of animals annotated
+with the kind of animal that’s on the picture, and we want to learn how to predict the label.
+
+2. In unsupervised learning we are just given unlabeled data, and need to find patterns in it. The
+canonical example is the clustering problem, where we are given unlabelled data items that
+we want to group into “similar” subsets. For example, it could be that our data consists of
+pictures of different kinds of animals (not labeled with the type of animal), and we somehow
+want to cluster the cat-pictures together, the wolf-pictures together, etc. We may or may not
+know in advance what the number of clusters should be.
+
+3. In reinforcement learning the learner actually interacts with the environment, receiving re-
+wards or penalties for desirable or undesirable behavior, and tries to learn from this interactive
+data to behave more successfully in the environment. This is roughly how a child learns.2
+
+It is a very interesting question to see how quantum computing changes and helps machine learn-
+ing. Here the learner would be a quantum computer, and the data may be classical or quantum.
+Quantum ML is by now a rather large area, and in this chapter we will go over a few representa-
+tive results and methods for supervised and unsupervised learning, mostly with classical output.
+See [106] for quantum applications to reinforcement learning, and [59, 28, 235] for much more.
+
+1Machine learning based on neural networks has been studied for decades but quite suddenly became much more
+successful starting around 2012, due to the availability of more data, stronger computing hardware (incl. special-
+purpose GPUs for fast parallel matrix-vector calculations), and better software to do the training.
+2It’s also how a computer can learn to play games. One of the big breakthroughs of machine learning was in 2016
+when the AlphaGo program learned to play the game of Go so well that it beat one of the world’s best human Go
+players. Computers have been better than humans at chess already since the late 1990s (the IBM program “Deep
+Blue” beat Kasparov in 1997), but Go was viewed as a much more complicated game than chess.
+
+163
+
+
+===== PDF PAGE 176 =====
+
+19.2
+Supervised learning from quantum data
+
+19.2.1
+The PAC model of learning
+
+Let us first describe a mathematical model of what it means to learn from labeled data. This is
+Valiant’s PAC model [252], for “probably approximately correct” learning (see [236, 199] for more).
+Assume for simplicity that the labels are just binary: 0 or 1. Our goal is to learn a Boolean
+function f : X →{0, 1} from examples of the form (x, f(x)), where x ∈X. A typical case would
+be X = {0, 1}n. The last bit f(x) of the example is called the label. Think for instance about the
+case where we are given 1000 × 1000-pixel black-and-white pictures (n = 1000, 000) whose labels
+f(x) indicate whether x is the picture of a wolf or not. We would like to learn f, or some good
+approximation of it, to be able to recognize pictures of wolves in the future. Some x’s are more
+important and more likely to appear as examples than others: many 1000×1000-grids don’t depict
+anything. The assumption in PAC learning is that the examples are generated (independent and
+identically distributed) according to some distribution D on X. The idea is that this D represents
+“the world” or “Nature,” which provides us with examples. We assume f cannot be completely
+arbitrary (in that case there would be an f consistent with every possible sequence of labeled
+examples) but comes from some known “concept class” C of Boolean functions. For instance, C
+could be a set of small logical formulas f on n Boolean variables, or a set of small-depth or small-size
+decision trees on n input bits, or neural networks with a restricted number of nodes or depth.
+A learning algorithm should generate a “hypothesis” h : X →{0, 1} that has small error
+compared to the unknown f that we’re trying to learn, measured under the same distribution D
+that generated the data.3 The generalization error of h w.r.t. the target function f is defined as
+
+errD(f, h) = Pr
+x∼D[f(x) ̸= h(x)].
+
+This error measures how well we’ve generalized the examples, and how well we can predict the labels
+of future examples. We say that h is “approximately correct” if this error is small, at most some
+specified ε. The goal in PAC learning is to output an h that is probably approximately correct:
+
+Definition 4 An (ε, δ)-PAC learner for a concept class C w.r.t. distribution D on X, is an al-
+gorithm that receives m labeled examples (x1, f(x1)), . . . , (xm, f(xm)) for a target function f ∈C,
+where each xi ∼D, and that outputs a hypothesis h such that
+
+Pr[errD(f, h) ≤ε] ≥1 −δ.
+
+The learning algorithm has to satisfy the above for every possible target function f ∈C, and the
+probability is over both the choice of the examples and over the internal randomness of the algorithm.
+An (ε, δ)-PAC learner for a concept class C is an algorithm that is an (ε, δ)-PAC learner for C
+w.r.t. every possible distribution D.
+
+Note that the first part of the definition is about learners that are only required to work correctly
+for one specific distribution D (for instance, the uniform distribution over X), while the second
+part is “distribution-independent”: here we want a learner that works well irrespective of what
+
+3It is important to be taught and tested according to the same distribution D. Imagine a quantum-computing
+course whose lectures focused on the mathematics of quantum algorithms, but with an exam that focuses on physics
+questions about how to implement qubits and gates—that would clearly be very unreasonable.
+
+164
+
+
+===== PDF PAGE 177 =====
+
+(unknown) distribution D generates the data. This is in keeping with the usual attitude towards
+algorithms in computer science: these should work well even for a worst-case input. We don’t
+require the class H of possible hypotheses h to equal the class C of possible target functions f (if
+we add this requirement, then it’s called proper PAC learning). This allows us for instance to use
+neural networks to learn target functions that come from some other class C, say logical formulas.
+The number of examples m that a particular learning algorithm uses is called its “sample
+complexity,” and the overall time or number of elementary operations it takes to output h is its
+“time complexity.” Clearly the latter upper bounds the former, since we need at least one operation
+to process one example. The sample complexity of a concept class C (as a function of ε, δ) is the
+minimal sample complexity among all PAC learners for C. Ideally, a good learner for C has both
+small sample complexity and small time complexity (say, polynomial in n). For some concept classes
+C efficient distribution-independent PAC learners exist, for example the class of logical formulas
+in k-Conjunctive Normal Form (i.e., each f would be the AND of several ORs, each of at most k
+variables or negated variables) or the class of regular languages (with the added help of so-called
+“membership queries”), but there are also many C that are not efficiently learnable.
+
+19.2.2
+Learning from quantum examples under the uniform distribution
+
+There are different ways to define learning from quantum data. One natural way, due to Bshouty and
+Jackson [75], is to replace each classical random example (x, f(x)), with x ∼D, by a superposition.
+Focusing on the typical case X = {0, 1}n, a quantum example would be the (n + 1)-qubit state
+
+�
+
+x∈{0,1}n
+
+�
+
+D(x)|x, f(x)⟩.
+
+Of course, the world doesn’t usually present us with quantum examples, in contrast to the abun-
+dance of classical data for machine learning. So this model is only relevant in special cases, for
+example if we have a physical experiment producing such states.
+One thing we could do with such a quantum example is measure it in the computational basis,
+but that would just give us back a classical example (x, f(x)) with x ∼D. A more clever thing we
+can do is Fourier sampling. Suppose D is the uniform distribution. Exercise 1 shows how to convert
+a quantum example (with probability 1/2) into an n-qubit state where the labels are ±1-phases:
+
+1
+√
+
+2n
+�
+
+x∈{0,1}n
+(−1)f(x)|x⟩.
+
+If we apply n Hadamard gates to this state, then we get
+
+�
+
+s∈{0,1}n
+
+1
+2n
+�
+
+x∈{0,1}n
+(−1)x·s(−1)f(x)|s⟩=
+�
+
+s∈{0,1}n
+αs|s⟩.
+
+If we measure this state, then we’ll see outcome s ∈{0, 1}n with probability α2
+s. The amplitudes αs
+are called the Fourier coefficients of the function (−1)f(x), whence the name “Fourier sampling.”
+In some cases Fourier sampling gives a lot of information about the f we’re trying to learn.
+
+165
+
+
+===== PDF PAGE 178 =====
+
+Learning linear functions.
+A perfect illustration of Fourier sampling is for the following class:
+
+C = {fa | a ∈{0, 1}n, ∀x : fa(x) = a · x mod 2 =
+
+n
+�
+
+i=1
+aixi mod 2},
+
+these are the linear functions modulo 2. It is easy to calculate that if we do Fourier sampling
+on a quantum example for function fa, then αa = 1 and αs = 0 for all s ̸= a. So one Fourier
+sample already tells us what a is! Hence we can learn fa exactly (i.e., with ε = 0), with high
+probability, using O(1) examples and O(n) elementary gates. In contrast, learning linear functions
+from classical examples under the uniform distribution requires Θ(n) examples (see Exercise 2).
+
+Learning DNF.
+A richer concept class that can be learned efficiently from uniform quantum
+examples is the class of s-term Disjunctive Normal Form (DNF) formulas on n Boolean variables.
+These are formulas of the form f(x) = (x1 ∧¬x3) ∨(x2 ∧x3 ∧x5), i.e., an OR of up to s different
+ANDs of variables or negations of variables. The concept class C of s-term DNF is not known to
+be efficiently PAC learnable w.r.t. the uniform distribution D classically. However, Bshouty and
+Jackson [75] showed that s-term DNF can be learned in polynomial time (in s and n) from uniform
+quantum examples. Roughly speaking, they use Fourier sampling to produce a linear function that
+is weakly correlated with the target DNF function f, and then use a classical “boosting” algorithm
+to combine multiple such weak hypotheses into one good hypothesis h. We’ll skip the details here.
+
+19.2.3
+Learning from quantum examples under all distributions
+
+We saw a few cases where quantum examples reduce the sample and/or time complexity of learning
+algorithms w.r.t. a fixed data-generating distribution D, namely uniform D. But in the PAC model
+we ideally want a distribution-independent learner that works well for every possible distribution D.
+Can allowing quantum instead of classical examples significantly reduce the sample complexity of
+learning a class C in the distribution-independent setting? It turns out the answer is ‘no’.
+Classically, the number of examples that is necessary and sufficient for (ε, δ)-PAC learning a
+concept class C is known to be [62, 139]
+
+m = Θ
+�V Cdim(C)
+
+ε
++ log(1/δ)
+
+ε
+
+�
+,
+(19.1)
+
+where V Cdim(C) is the so-called VC-dimension of C, named after Vapnik and Chervonenkis [255]
+and defined as follows. We say that a set S ⊆{0, 1}n is shattered by C if for each of the 2|S|
+
+possible labelings ℓ: S →{0, 1}, there is a function f ∈C that has the same labeling of S (i.e.,
+f|S = ℓ). V Cdim(C) is the size of a largest S shattered by C. Intuitively, larger VC-dimension
+corresponds to a more complex or “richer” (and hence harder to learn) concept class. We won’t
+prove the characterization of Eq. (19.1) here, but Exercises 4 and 5 go most of the way towards the
+claimed upper and lower bounds on m, respectively.
+It was proven in [30] that in fact the same formula Eq. (19.1) determines the number of quantum
+examples that are necessary and sufficient for learning C. The sufficiency is trivial: just measure the
+quantum examples and run the best classical PAC learner. The necessity was proved by reducing
+a quantum measurement problem to the problem of PAC learning C from quantum examples, and
+showing that the number of copies of the example-state required to solve that measurement problem
+is at least the expression of Eq. (19.1). So, up to constant factors, quantum examples are not more
+useful than classical examples for distribution-independent PAC learning.
+
+166
+
+
+===== PDF PAGE 179 =====
+
+19.2.4
+Learning quantum states from classical data
+
+One can generalize PAC learning from Boolean-valued to real-valued target functions f : X →[0, 1],
+and then consider a hypothesis h : X →[0, 1] to be approximately correct (for some small γ) if
+
+errD,γ(f, h) = Pr
+x∼D[|f(x) −h(x)| > γ] ≤ε.
+
+So now a good hypothesis h is supposed to be close to f (rather than equal) for most x.
+An interesting example is the problem of learning an unknown n-qubit quantum state ρ from
+measurement data. Let X be the set of measurement elements, i.e., psd matrices M with ∥M∥≤1.
+If we measure ρ with some POVM of which M is one element, then the probability to get the
+outcome corresponding to M, is Tr(Mρ). Accordingly, we can define f : X →[0, 1] as f(M) =
+Tr(Mρ) and consider the class C of all such functions (one f for each possible ρ, so this class is
+uncountable). Aaronson [1] showed that this C is classically PAC learnable from O(n) examples
+of the form (x, f(x)) (with some polynomial dependence of the sample complexity on γ, ε, and
+exponential time complexity). Note that we are not really learning ρ itself, but rather learn to
+predict the measurement probabilities. In contrast, learning a good approximation of ρ itself (with
+small error in trace distance) requires a number of copies of ρ that is exponential in n [133, 207].
+Some positive results for learning specific classes of quantum states can be found in [190, 21, 171].
+
+19.3
+Unsupervised learning from quantum data
+
+In this section we will look at an example of unsupervised learning from quantum data: dimension-
+reduction via Principal Component Analysis. Suppose we are given m vectors v1, . . . , vm ∈Rd, say
+unit vectors for simplicity. Let’s say the dimension d of the data-vectors is very large, and we would
+like to reduce it to some much smaller k, say at most k = polylog(d). Many machine learning tasks,
+for example clustering, become much easier if we can significantly reduce this dimension.
+One way to achieve this dimension-reduction is to find k suitable unit vectors c1, . . . , ck ∈Rd
+
+(which may or may not be in the set {vi} themselves), such that the projection PSvi of the vi’s
+on the k-dimensional space S = span{c1, . . . , ck} typically doesn’t lose much, i.e., PSvi is close to
+vi for most i ∈[m]. Then we can replace each vi by the k-dimensional vector PSvi = �k
+j=1 αjcj,
+expressed as the vector of coefficients (αj) ∈Rk (note that αj = ⟨cj|vi⟩). How to find those k
+“directions” c1, . . . , ck? One method that often (though not always) works well is to find the k
+eigenvectors corresponding to the k largest eigenvalues of the following d × d “correlation matrix”:
+
+A =
+
+m
+�
+
+i=1
+vivT
+i .
+
+Those k eigenvectors are called the k “principal components” of A. They intuitively correspond to
+the k most important directions in the data, and we can choose them for dimension-reduction.
+Classically, we can find those k eigenvectors by diagonalizing A, which takes time polynomial
+in d. In the quantum case we can do something very different, under the (very strong) assumption
+that we can efficiently, say in time polylog(d), prepare the ⌈log(d)⌉-qubit quantum states |vi⟩
+corresponding to the vectors vi. By choosing i ∈[m] uniformly at random and preparing |vi⟩, we
+prepare the following ⌈log(d)⌉-qubit mixed state, which is proportional to the correlation matrix:
+
+ρ = 1
+
+m
+
+m
+�
+
+i=1
+|vi⟩⟨vi| = 1
+
+mA.
+
+167
+
+
+===== PDF PAGE 180 =====
+
+Let’s say this has (unknown) spectral decomposition ρ = �d
+j=1 λj|cj⟩⟨cj| with λ1 ≥· · · ≥λd ≥0.
+We would now like to find the top-k eigenstates |c1⟩, . . . , |ck⟩of this ρ, with the associated
+eigenvalues. We will sketch the main idea here. Assume the first k eigenvalues sum to something
+close to 1, and are not too close together, at least 1/poly(k) apart.4 Note that the unitary U = eiρ
+
+has the same eigenstates as ρ itself, with every eigenvalue λj of ρ translating into eigenvalue eiλj
+of U. Lloyd, Mohseni, and Rebentrost [184] (with more precise analysis and matching lower bound
+in [162]) showed that we can actually implement the power Ut up to error ε using O(t2/ε) copies
+of the state ρ (see Exercise 7). We now use phase estimation with the unitary U on a copy of ρ
+itself, with additive error δ = 1/poly(k). By Section 4.6, phase estimation with additive error δ
+corresponds to running controlled versions of Ut for t up to O(1/δ). Under our earlier assumptions,
+this only takes poly(k) = polylog(d) time. Ignoring for simplicity the small errors (≤δ) that phase
+estimation makes in estimating the values λj, phase estimation transforms the copy of ρ and a few
+auxiliary |0⟩-qubits into the state
+
+d
+�
+
+j=1
+λj|cj⟩⟨cj| ⊗|λj⟩⟨λj|.
+
+If we measure the second register, then we obtain state |cj⟩⊗|λj⟩with probability λj.5 Doing this
+poly(k) many times, we learn the k largest values λ1, . . . , λk, and for each of those λj’s we’ll have a
+number of copies of the eigenstate |cj⟩. This is a quantum form of Principal Component Analysis.
+This collection of eigenstates determines a k-dimensional subspace on which we could re-express
+the vi’s (approximately), but it is not very explicit: we only have the k basis vectors of this space
+as quantum states! Suppose we want to express some unit vector v (which again we assume we can
+prepare efficiently as a state |v⟩) as a linear combination of the cj’s. One thing we can do is use a
+few copies of each |cj⟩to approximate |⟨cj|v⟩|2 for each i using the SWAP-test, which gives us at
+least partial information about the coefficients ⟨cj|v⟩(see Exercise 8).
+“Quantum PCA” has a lot of drawbacks, but at least it shows some genuinely quantum tricks
+that we can use under the assumption that our input vectors can be efficiently prepared as quantum
+states. There have also been some quantum approaches for the prominent unsupervised learning
+problem of clustering, but we will not describe those here (see for instance [183, 158]).
+
+19.4
+Optimization
+
+In the previous two sections we assumed quantum data: either the data is already given as a
+superposition, or we can efficiently put given classical data in superposition. However, in most
+real-world applications of machine learning we have classical data without the means to efficiently
+make this quantum. Remembering the slogan ML = data + optimization, if there’s any room
+left for quantum improvements when data is classical, it would be in the optimization to find a
+well-fitting model for the data. We’ll look at some examples where quantum computing might help.
+
+4These assumptions make this principal-component analysis more like a heuristic method for clustering, not
+something that provably always works. It is anyway not clear in this case what a correct or optimal output would
+be: because this is unlabeled data, we do not have a clear standard for correctness.
+5Actually, in the second register we will see (with high probability) a δ-close approximation of λj rather than
+λj itself, but if we assume δ is much smaller than the spacing between the eigenvalues λ1, . . . , λk, then such a
+δ-approximation is good enough to “recognize” the state in the first register as the j-th principal component.
+
+168
+

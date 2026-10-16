@@ -1,0 +1,234 @@
+
+[PDF page 1]
+arXiv:0712.2545v1  [quant-ph]  15 Dec 2007
+A Quantum Time-Space Lower Bound for the Counting Hierarchy∗
+Dieter van Melkebeek
+Thomas Watson
+University of Wisconsin - Madison
+August 13, 2021
+Abstract
+We obtain the ﬁrst nontrivial time-space lower bound for quantum algorithms solving prob-
+lems related to satisﬁability. Our bound applies to MajSAT and MajMajSAT, which are com-
+plete problems for the ﬁrst and second levels of the counting hierarchy, respectively. We prove
+that for every real d and every positive real ǫ there exists a real c > 1 such that either:
+• MajMajSAT does not have a quantum algorithm with bounded two-sided error that runs
+in time nc, or
+• MajSAT does not have a quantum algorithm with bounded two-sided error that runs in
+time nd and space n1−ǫ.
+In particular, MajMajSAT cannot be solved by a quantum algorithm with bounded two-sided
+error running in time n1+o(1) and space n1−ǫ for any ǫ > 0.
+The key technical novelty is a time- and space-eﬃcient simulation of quantum computations
+with intermediate measurements by probabilistic machines with unbounded error.
+We also
+develop a model that is particularly suitable for the study of general quantum computations
+with simultaneous time and space bounds. However, our arguments hold for any reasonable
+uniform model of quantum computation.
+1
+Introduction
+Satisﬁability, the problem of deciding whether a given Boolean formula has at least one satisfying
+assignment, has tremendous practical and theoretical importance. It emerged as a central problem
+in complexity theory with the advent of NP-completeness in the 1970’s. Proving lower bounds on
+the complexity of satisﬁability remains a major open problem. Complexity theorists conjecture
+that satisﬁability requires exponential time and linear space to solve in the worst case. Despite
+decades of eﬀort, the best single-resource lower bounds for satisﬁability on general-purpose models
+of computation are still the trivial ones – linear for time and logarithmic for space. However, since
+the late 1990’s we have seen a number of results that rule out certain nontrivial combinations of
+time and space complexity.
+One line of research [6, 7, 19, 5, 20], initiated by Fortnow, focuses on proving stronger and
+stronger time lower bounds for deterministic algorithms that solve satisﬁability in small space. For
+subpolynomial (i.e., no(1)) space bounds, the current record states that no such algorithm can run in
+time nc for any c < 2 cos (π/7) ≈1.8019. A second research direction aims to strengthen the lower
+∗Research partially supported by NSF awards CCR-0133693 and CCF-0523680.
+1
+
+
+[PDF page 2]
+bounds by considering more powerful models of computation than the standard deterministic one.
+Diehl and Van Melkebeek [5] initiated the study of lower bounds for problems related to satisﬁability
+on randomized models with bounded error. They showed that for every integer ℓ≥2, ΣℓSAT
+cannot be solved in time nc by subpolynomial-space randomized algorithms with bounded two-
+sided error for any c < ℓ, where ΣℓSAT denotes the problem of deciding the validity of a given fully
+quantiﬁed Boolean formula with ℓalternating blocks of quantiﬁers beginning with an existential
+quantiﬁer.
+ΣℓSAT represents the analogue of satisﬁability for the ℓth level of the polynomial-
+time hierarchy; Σ1SAT corresponds to satisﬁability. Proving nontrivial time-space lower bounds
+for satisﬁability on randomized algorithms with bounded two-sided error remains open. Allender
+et al. [2] considered the even more powerful (but physically unrealistic) model of probabilistic
+algorithms with unbounded error1. They settled for problems that are even harder than ΣℓSAT for
+any ﬁxed ℓ, namely MajSAT and MajMajSAT, the equivalents of satisﬁability and Σ2SAT in the
+counting hierarchy. MajSAT is the problem of deciding whether a given Boolean formula is satisﬁed
+for at least half of the assignments to its variables. MajMajSAT is the problem of deciding whether
+a given Boolean formula ϕ on disjoint variable sets x and y has the property that for at least half of
+the assignments to x, ϕ is satisﬁed for at least half of the assignments to y. Recall that Toda [16]
+proved that the polynomial-time hierarchy reduces to the class PP, which represents polynomial-
+time probabilistic computations with unbounded two-sided error and forms the ﬁrst level of the
+counting hierarchy. Apart from dealing with harder problems, the quantitative strength of the lower
+bounds by Allender et al. is also somewhat weaker. In particular, they showed that no probabilistic
+algorithm can solve MajMajSAT in time n1+o(1) and space n1−ǫ for any positive constant ǫ. We
+refer to [13] for a detailed survey of the past work on time-space lower bounds for satisﬁability
+and related problems, including a presentation of the Allender et al. lower bound that is slightly
+diﬀerent from the original one.
+In this paper we study the most powerful model that is considered physically realistic, namely
+quantum algorithms with bounded error. We obtain the ﬁrst nontrivial time-space lower bound
+for quantum algorithms solving problems related to satisﬁability. In the bounded two-sided error
+randomized setting, the reason we can get lower bounds for ΣℓSAT for ℓ≥2 but not for ℓ= 1 relates
+to the fact that we know eﬃcient simulations of such randomized computations in the second level
+of the polynomial-time hierarchy but not in the ﬁrst level. In the quantum setting the situation
+is worse: we know of no eﬃcient simulations in any level of the polynomial-time hierarchy. The
+best simulations to date are due to Adleman et al. [1], who showed that polynomial-time quantum
+computations with bounded two-sided error can be simulated in PP. Building on this connection,
+we bring the lower bounds of Allender et al. to bear on bounded-error quantum algorithms. Our
+main result shows that either a time lower bound holds for quantum algorithms solving MajMajSAT
+or a time-space lower bound holds for MajSAT.
+Theorem 1. For every real d and every positive real ǫ there exists a real c > 1 such that either:
+• MajMajSAT does not have a quantum algorithm with bounded two-sided error that runs in
+time nc, or
+• MajSAT does not have a quantum algorithm with bounded two-sided error that runs in time
+nd and space n1−ǫ.
+1Throughout this paper, we use the word “randomized” for the bounded-error setting and “probabilistic” for the
+unbounded-error setting.
+2
+
+
+[PDF page 3]
+As a corollary, we obtain a single time-space lower bound for MajMajSAT.
+Corollary 1. MajMajSAT cannot be solved by a quantum algorithm with bounded two-sided error
+running in time n1+o(1) and space n1−ǫ for any ǫ > 0.
+Unlike in the deterministic and randomized cases, it is not obvious how to deﬁne a model
+of quantum computation that allows us to accurately measure both time and space complexity.
+The existing models give rise to various issues. For example, intermediate measurements play a
+critical role as they are needed for time-space eﬃcient simulations of randomized computations by
+quantum computations. Several of the known models only allow measurements at the end of the
+computation but not during the computation. As another example, the classical time-space lower
+bounds hold for models with random access to the input and memory. This makes the lower bounds
+more meaningful as they do not exploit artifacts due to sequential access. Extending the standard
+quantum Turing machine model [3] to accommodate random access leads to complications that
+make the model inconvenient to work with. In Section 2 we discuss these and other issues in detail,
+and we survey the known models from the literature. We present a model that addresses all issues
+and is capable of eﬃciently simulating all other uniform models that may be physically realizable
+in the foreseeable future. Thus, lower bounds in our model reﬂect true problem hardness.
+The main technical novelty for establishing Theorem 1 consists of an improved time- and space-
+eﬃcient simulation of quantum computations by unbounded-error probabilistic computations. The
+previously known simulations, such as the one by Adleman et al., do not deal with intermediate
+measurements in a space-eﬃcient way. We show how to cope with intermediate measurements in
+a space-eﬃcient way and without loss in running time. Our construction works even when the
+sequence of local quantum operations can depend on previous measurement outcomes; i.e., we
+handle more powerful models than uniform quantum circuits. Our simulation makes use of a result
+on approximating quantum gates due to Solovay and Kitaev [11]. Theorem 1 follows from our
+simulation and the Allender et al. lower bound. The quantitative strength of our lower bound
+derives from the latter; our translation does not induce any further weakening.
+The rest of this paper is organized as follows.
+We start with a discussion of the model in
+Section 2, we derive our results in Section 3, and we conclude with some open problems in Section
+4. Throughout we assume basic background in quantum computation; see for example [14, 12].
+2
+Models of Quantum Computation
+In this section we develop the model that we use for the exposition of our arguments. Section 2.1
+contains a discussion of the issues that arise in choosing a model of quantum computation that
+accurately reﬂects time and space complexity. In Section 2.2 we describe how previously studied
+models ﬁt into our taxonomy. We motivate and precisely deﬁne our chosen model in Section 2.3.
+Although we consider the development of such a model as a contribution of our paper, the crux of
+our main result can be understood at an abstract level. As such, a reader who would like to quickly
+get to the heart of our paper can skip Section 2.
+2.1
+Issues
+Our model should capture the notion of a quantum algorithm as viewed by the computer science
+and physics communities and allow us to accurately measure the resources of time and space. For
+3
+
+
+[PDF page 4]
+example, the model should allow us to express important quantum algorithms such as Shor’s [15]
+and Grover’s [9] in a way that is natural and faithfully represents their complexities. This forms
+the overarching issue in choosing a model. Below we discuss eight speciﬁc aspects of quantum
+computation models and describe how the corresponding issues are handled in the classical setting.
+Sublinear space bounds. Many algorithms have the property that the amount of work space
+needed is less than the size of the input. Models such as one-tape Turing machines do not allow
+us to accurately measure the space usage of such algorithms because they charge for the space
+required to store the input. In the deterministic and randomized settings, sublinear space bounds
+are accommodated by considering Turing machines with a read-only input tape that does not count
+toward the space bound and read-write work tapes that do. In the quantum setting, we need a
+model with an analogous capability.
+Random access to the input and memory. In order to accurately reﬂect the complexity of
+computational problems, our model should include a mechanism for random access, i.e., the ability
+to access any part of the input or memory in a negligible amount of time (say, linear in the length
+of the address). For example, there is a trivial algorithm for the language of palindromes that runs
+in quasilinear time and logarithmic space on standard models with random access, but the time-
+space product of any traditional sequential-access Turing machine deciding palindromes is at least
+quadratic. The latter result does not reﬂect the complexity of deciding palindromes, but rather
+exploits the fact that sequential-access machines may have to waste a lot of time moving their tape
+heads back and forth. Classical Turing machines can be augmented with a mechanism to support
+random access; our quantum model should also have such a mechanism.
+Intermediate measurements. Unlike the previous two issues, intermediate measurements are
+speciﬁc to the quantum setting. In time-bounded quantum computations, it is customary to as-
+sume that all measurements occur at the end. This is because intermediate measurements can
+be postponed by introducing ancilla qubits to store what would be the result of the measurement,
+thus preventing computation paths with diﬀerent measurement outcomes from interfering with each
+other. However, this has a high cost in space – a computation running in time t may make up to
+t measurements, so the space overhead could be as large as t, which could be exponential in the
+original space bound. Hence, to handle small space bounds our model should allow intermediate
+measurements. Indeed, this is crucial for our model to meet the expectation of being at least as
+strong as randomized algorithms with comparable eﬃciency parameters; the standard way to “ﬂip
+a coin” in the quantum setting is to apply a Hadamard gate to a qubit in a basis state and then
+measure it.
+Also, many quantum algorithms, such as Shor’s factoring algorithm, are naturally
+described using intermediate measurements.
+We also need to decide which measurements to allow. Projective measurements in the com-
+putational basis are the most natural choice. Should we allow projective measurements in other
+bases? How about fully general measurements (see Section 2.2.3 in [14]), where the measurement
+operators need not be projections? General measurements can be performed by introducing ancilla
+qubits (at a cost in space), performing a change of basis (at a cost in time), and doing a projec-
+tive measurement in the computational basis, one qubit at a time. It is reasonable to charge the
+complexity of these operations to the algorithm designer, so we are satisﬁed with allowing only
+single-qubit measurements in the computational basis.
+4
+
+
+[PDF page 5]
+Obliviousness to the computation history. Computations proceed by applying a sequence of
+local operations to data. We call a computation nonoblivious if at each step, which local operation
+to use and which operands to apply it to may depend on the computation history.
+A generic
+deterministic Turing machine computation is nonoblivious. We can view each state as deﬁning an
+operation on a ﬁxed number of tape cells, where the operands are given by the tape head locations.
+In each step, the outcome of the applied operation aﬀects the next state and tape head locations,
+so both the operation and the operands can depend on the computation history. In contrast, a
+classical circuit computation is oblivious because neither the operation (gate) nor the operands
+(wires connected to the gate inputs) depend on the computation history (values carried on the
+wires).
+In the randomized and quantum settings, the notion of a computation history becomes more
+complicated because there can be many computation paths. In the randomized setting, applying
+a randomized operation to a conﬁguration may split it into a distribution over conﬁgurations, and
+the randomized Turing machine model allows the next state and tape head locations to depend
+on which computation path was taken. In the quantum setting, applying a quantum operation to
+a basis state may split it into a superposition over several basis states, and general nonoblivious
+behavior would allow the next operation and operands to depend on which computation path was
+taken. However, it is unclear whether such behavior is physically realizable, as currently envisioned
+technologies all select quantum operations classically. An intermediate notion of nonobliviousness,
+where the operations and operands may depend on previous measurement outcomes but not on the
+quantum computation path, does seem physically realistic.
+Classical control. There is a wide spectrum of degrees of interaction between a quantum com-
+putation and its classical control.
+On the one hand, one can imagine a quantum computation
+that is entirely “self-suﬃcient,” other than the interaction needed to provide the input and observe
+the output. On the other hand, one can imagine a quantum computation that is guided classi-
+cally every step of the way. Self-suﬃciency is inherent to computations that are nonoblivious to the
+quantum computation path, whereas measurements are inherently classically controlled operations.
+Incorporating intermediate measurements into computations that are nonoblivious to the quantum
+computation path would require some sort of global coordination among the quantum computation
+paths to determine when a measurement should take place.
+Syntax. Our model should be syntactic, meaning that identifying valid programs in the model
+is decidable. If we are interested in bounded-error computations, then we cannot hope to decid-
+ably distinguish programs satisfying the bounded-error promise from those that do not. However,
+we should be able to distinguish programs that evolve according to the postulates of quantum
+mechanics from those that do not. Allowing nonobliviousness to the quantum computation path
+complicates this syntax check. If diﬀerent components of the superposition can undergo diﬀerent
+unitary operations then the overall operation is not automatically unitary, due to interference.
+Extra conditions on the transition function are needed to guarantee unitarity.
+Complexity of the transition amplitudes. Care should be taken in specifying the allowable
+transition amplitudes.
+In the randomized setting, it is possible to solve undecidable languages
+by encoding the characteristic sequences of these languages in the transition probabilities. This
+problem is usually handled by using a certain universal set of elementary randomized operations,
+e.g., an unbiased coin ﬂip. In the quantum setting, the same problem arises with unrestricted
+5

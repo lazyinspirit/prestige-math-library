@@ -1,0 +1,70 @@
+6.10 QMA-completeness of the local Hamiltonian problem
+51
+
+exists a poly-size uniform quantum circuit family (the verifier V ) and a single-qubit
+measurement {Π0, Π1} such that:
+1. If x ∈L there is a witness |ψx⟩such that:
+
+⟨Ψ|Π1|Ψ⟩≥2/3
+where
+|Ψ⟩= V (|ψx⟩⊗|x⟩⊗|0⟩∗).
+(6.240)
+
+2. If x /∈L, then ⟨Ψ|Π1|Ψ⟩≤1/3 for all |ψx⟩.
+We claim: the k-local Hamiltonian problem is QMA-complete for k ≥5 (famously
+proved by Kitaev: see Chap. 14 of KSV). The result can be improved to geometrically
+2-local H in 2D (for qubits) or geometrically 2-local H in 1D (for higher dimensional
+qudits, with the local dimension d sufficiently large).
+To verify this claim, we need to show:
+
+1. the k-local Hamiltonian problem is in QMA.
+2. Any problem in QMA is reducible to the k-local Hamiltonian problem. We’ll show
+this for k = 5 and without geometrical constraints, as in Kitaev’s original discovery.
+
+We have already shown part (1). We have seen that if the ground state |ψ0⟩is provided as
+a witness, then we can compute E0 to 1/poly(n) accuracy using a circuit of size poly(n)
+that performs the phase estimation algorithm. But how to achieve the reduction (2)?
+For the reduction, we’ll follow the strategy used to show that 3-SAT is NP-complete:
+For any problem in QMA, we’ll construct a witness that encodes the whole history of
+the computation performed by the verifier, and a Hamiltonian H such that computing
+the ground state energy of H amounts to checking that each step in the computation is
+valid.
+For a given problem in QMA, suppose that the verifier circuit VT has T gates:
+U1, U2, . . . UT chosen from a universal set, where each Ut acts on at most two qubits. For
+the corresponding k-local Hamiltonian problem, we’ll suppose that Merlin provides the
+history state encoding the computation performed by the verifier:
+
+|η⟩=
+1
+√
+
+T + 1
+
+T
+�
+
+t=0
+|ψ(t)⟩⊗|t⟩,
+(6.241)
+
+where |ψ(t)⟩= (UtUt−1 . . . U1)|ψinitial⟩; here |ψinitial⟩= |x⟩⊗|0⟩∗⊗|ψx⟩, where |x⟩
+specifies the instance of the QMA problem, |0⟩∗is the initial state of scratch space used
+by the verifier, |ψx⟩is the quantum witness testifying that x should be accepted, and
+|ψ(t)⟩is state of the quantum computer obtained after the first t steps of the verifier
+circuit have been executed. The state |t⟩is the state of a clock register that records the
+time t ∈{0, 1, · · · , T}; since ⟨t|s⟩= δts, the T + 1 states appearing in superposition in
+state |η⟩are mutually orthogonal, so |η⟩is properly normalized: ⟨η|η⟩= 1.
+
+6.10.4 Constructing and analyzing the Hamiltonian
+
+Now we want to choose our Hamiltonian H so that it locally “checks” the history encoded
+in |η⟩; that is, H will impose an energetic penalty if a step in the circuit is invalid, or if
+the input is not accepted.
+We will choose H to be of the form
+
+H = Hin + Hout + Hprop + Hclock.
+(6.242)
+
+The purpose of Hin is to enforce that the verifier circuit’s input qubits (other than the
+
+

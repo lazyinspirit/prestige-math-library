@@ -1,0 +1,656 @@
+===== PDF PAGE 181 =====
+
+19.4.1
+Variational quantum algorithms
+
+One approach that has received a lot of attention is to optimize over parametrized circuits. Suppose
+we have a quantum circuit U(θ) with a vector θ of parameters. This could for instance be a circuit
+where CNOTs and single-qubit rotations are already in place, but the angles of the single-qubit
+gates are parameters that we can tweak. This U(θ) is then applied to a fixed starting state, say |0⟩,
+yielding a final state |ψ(θ)⟩= U(θ)|0⟩. The goal is now to minimize the expected value of some
+observable M, i.e., to find a θ to minimize the function f(θ) = ⟨ψ(θ)|M|ψ(θ)⟩. In the case of
+supervised learning applications, U(θ) could for instance represent some hypothesis (i.e., a way to
+predict labels of x’s), M could incorporate the given labeled examples (x, f(x)), and f(θ) could be
+the “empirical error”: the fraction of mis-predicted labels among the given examples.
+Note that f(θ) can be computed approximately (for classically given θ) on a quantum computer
+by repeatedly preparing |ψ(θ)⟩and measuring the observable M. If the circuits U(θ) are relatively
+simple (say, few qubits, few gates, low depth) and M is relatively easy to measure (say, a sum
+of a few n-qubit Pauli matrices with few non-identity terms) then this could already be done
+on a relatively small and simple quantum computer.
+Variational quantum algorithms (VQAs)
+are typically hybrid classical-quantum algorithms: the minimization over θ is usually done by a
+classical outer loop that iteratively improves θ. Using the ability to approximately compute f we
+can for instance try to do approximate gradient descent (move θ by some step-size in the direction
+of steepest descent of f) or some other method. This is analogous to the iterative way the weights
+in neural networks are optimized, and these variational quantum approaches are sometimes (with
+a keen sense for marketing) called “quantum neural networks” or “quantum deep learning.” For
+combinatorial optimization, a very structured version of the variational approach is the Quantum
+Approximate Optimization Algorithm (QAOA) [114]. See [82] for a general overview of VQAs.
+One interesting application of this variational idea is in trying to find the smallest eigenvalue of a
+given Hamiltonian H. For example, H could describe the energy of a chemical system as a function
+of the locations of the particles (nuclei and electrons) of the system; the smallest eigenvalue of H
+would be the “ground-state energy” of the system, which is an important quantity in chemistry. We
+know from Chapter 14 that in general this problem of determining or even well-approximating this
+ground state energy is QMA-hard, even in the special case where H is a sum of 2-local terms, so in
+general this shouldn’t be efficiently solvable on a quantum computer. However, suppose that from
+some general physics or chemistry intuition we have a rough idea of what the ground state of our
+particular Hamiltonian H should look like, something we can prepare using a simple parametrized
+circuit U(θ). The set of states |ψ(θ)⟩= U(θ)|0⟩that we are limiting ourselves to, is called an
+“Ansatz” (German for “approach” or “attempt”). We can now try to optimize the parameters θ
+in order to minimize the expected value f(θ) = ⟨ψ(θ)|H|ψ(θ)⟩, i.e., the energy of the state |ψ(θ)⟩.
+This approach is called the “variational quantum eigensolver” (VQE) [209], and is one of the best
+hopes for applying smallish, near-term quantum computers to problems in chemistry.
+
+19.4.2
+Some provable quantum speed-ups for optimization
+
+The variational approach is rather heuristic: it very much depends on how good the “Ansatz” (the
+choice of the class of parametrized circuits U(θ)) happens to be for the particular problem at hand.
+Here we mention some other approaches, which yield provable (albeit usually only polynomial)
+quantum speed-ups under some assumptions on how the input is given.
+
+• There are many quantum speed-ups for optimization problems on graphs, typically using
+
+169
+
+
+===== PDF PAGE 182 =====
+
+Grover search (Section 7.2), Grover-based minimum-finding (Exercise 7.10), amplitude am-
+plification (Section 7.3), or amplitude estimation (Exercise 7.8) as a subroutine. Examples
+are finding shortest paths [107] and approximating minimum cuts or graph sparsification [25].
+
+• Solving linear systems and other basic linear algebra is ubiquitous in classical optimization
+algorithms.
+Since quantum states are vectors and quantum operations are matrices, one
+can try to improve such classical algorithms using quantum algorithms. Examples are phase
+estimation (Section 4.6), the block-encoding approach (Section 9.4 and [125, Section 3.2.4]),
+and HHL (Chapter 10). The trouble with this approach is that it often assumes the input
+is a quantum state (which is not always practical) and/or that it produces the output as a
+quantum state (which is not always useful). For example, HHL and quantum PCA have both
+features. See [2] for more discussion, and [84] for a small (but optimal) polynomial speed-up
+for PCA with classical input and output.
+
+One interesting application of “quantum linear algebra” (with classical inputs and outputs!)
+is the quantum recommendation system of Kerenidis and Prakash [159], which can generate
+recommendations of type “you might also like” to a user of systems like Amazon or Netflix,
+based on the user’s and other users’ earlier behavior.
+Initially [159] was believed to give
+an exponential speed-up over classical recommendation systems, until Tang showed how to
+“dequantize” their quantum algorithm under similar classical access assumptions [248, 86].
+
+• In convex optimization we minimize a convex function f : Rn →R, either over all x ∈Rn
+
+or over all x that are constrained to lie in some convex domain X ⊂Rn.
+This covers a
+big part of continuous optimization. Convexity ensures that the only local minima are also
+global minima, but such methods often still work to find good local minima for non-convex
+problems (such as training neural networks). First-order methods such as gradient descent
+use the gradient of f at a given point, which in some cases can be computed more efficiently
+by quantum algorithms [153, 126, 100] (see Exercise 6). Second-order methods often solve
+a linear system involving the Hessian (the n × n matrix of partial second derivatives at a
+given point), and we can try to use quantum linear algebra for that as well. If the matrix is
+symmetric and diagonally dominant and the output needs to be classical, then we could use
+the linear-system solver of [25].
+
+Quantum algorithms are known for the specific cases of linear programming (LPs) and
+semidefinite programming (SDPs) [66, 23, 65, 24, 22], for learning support vector machines
+(SVMs) [216, 234, 226, 10, 227], for least-squares linear regression with an ℓ1-regularizer [85],
+and for PCA with classical output [84] (in contrast to the quantum output of Section 19.3).
+
+Exercises
+
+1. Suppose that for some unknown Boolean function f : {0, 1}n →{0, 1} and amplitude-vector
+(αx)x∈{0,1}n, you are given one copy of the (n + 1)-qubit state
+�
+
+x∈{0,1}n
+αx|x⟩|f(x)⟩.
+
+Show how you can convert this into state
+�
+
+x∈{0,1}n
+αx(−1)f(x)|x⟩|1⟩
+
+170
+
+
+===== PDF PAGE 183 =====
+
+with success probability 1/2, in such a way that you know when you succeeded.
+
+2. Consider again the concept class C of linear functions mod 2.
+
+(a) Give a classical learning algorithm to learn a linear function exactly with high success
+probability (ε = 0, δ = 1/3) using O(n) uniform random examples and O(n3) time.
+
+(b) Argue that every classical PAC learner for C under uniform D, with ε < 1/4, needs Ω(n)
+examples.
+
+3. In the model of exact learning with membership queries, the goal is to exactly learn a target
+function f ∈C from queries to f (so there are no examples in this setting, or rather the
+learner can choose their own examples).
+
+Show that if C is the concept class of linear functions, then a target function f ∈C can be
+learned with 1 quantum membership query, but requires Ω(n) classical membership queries.
+
+4. Consider a concept class C of functions f : X →{0, 1}, with |X| = N and V Cdim(C) = d.
+
+(a) Consider the following simple (and probably not very time-efficient) learning algorithm:
+
+Draw m examples for target function f; output an h ∈C consistent with these examples.
+
+Let h ∈C be a function with errD(f, h) > ε. Show that at the end of this algorithm, the
+probability that this particular h is still consistent with the m examples is < (1 −ε)m.
+
+(b) Set m = ⌈log(3|C|)/ log(1/(1 −ε))⌉. Show that with probability ≥2/3, the only h that
+are consistent with the m examples have errD(f, h) ≤ε.
+
+(c) Derive an upper bound m = O(d log(N)/ε) on the classical sample complexity of (ε, 1/3)-
+PAC learning the class C using Sauer’s lemma, which says that |C| ≤�d
+i=0
+�N
+i
+�
+.
+
+5. Suppose the set S = {x1, . . . , xd} ⊆X is shattered by concept class C. Consider a distribution
+D that puts 1 −4ε probability on x1 and 4ε/(d −1) probability on each of x2, . . . , xd.
+
+(a) Let f ∈C be the target function. Show that you need Ω((d −1)/ε) examples ∼D to see
+(with probability ≥2/3) (xi, f(xi)) for at least 50% of the i ∈{2, . . . , d}.
+
+(b) Show that the sample complexity of every (ε, 1/3)-PAC learner for the class C is at least
+Ω((d −1)/ε).
+
+6. This exercise is about efficiently finding the gradient ∇f(z) of a function f : Rd →R at
+a point z ∈Rd. The gradient is the d-dimensional real vector of the d partial derivatives
+∂f/∂xi, evaluated at the point z.
+
+(a) (H) Let f(x) = a + bx be a linear (strictly speaking, affine-linear) function from R to
+R, where the real number b ∈[0, 1) can be written with n bits of precision. Suppose we
+have a unitary Of that maps |x, 0⟩→|x, f(x)⟩(assume we have enough qubits to write
+down x and f(x)). Give a quantum algorithm to compute b using one application of Of
+and one application of O−1
+f , and some unitaries that do not depend on f.
+
+(b) Let f(x1, . . . , xd) = a + b1x1 + · · · + bdxd be a linear function from Rd to R, where
+a, b1, . . . , bd ∈R. Show that the gradient ∇f(z) is equal to (b1, . . . , bd) for every z ∈Rd.
+
+171
+
+
+===== PDF PAGE 184 =====
+
+(c) Assume that for the function f in (b), each coefficient bk is ∈[0, 1) and can be written
+with n bits of precision. Suppose we have a unitary Of that maps |x1, . . . , xd, 0⟩→
+|x1, . . . , xd, f(x1, . . . , xd)⟩. Give a quantum algorithm that computes the gradient ∇f(z)
+using one application of Of and O−1
+f , and some unitaries that do not depend on f.
+
+Comment: The quantum algorithm of (c) is somewhat reminiscent of the Bernstein-Vazirani algorithm (Sec-
+
+tion 2.4.2), though that one is for functions over Fd
+2 rather than Rd. Variants of the algorithm of (c) can also
+
+efficiently approximate the gradient of a sufficiently smooth non-linear function f : Rd →R at a given point
+
+z ∈Rd, since a smooth f can be well-approximated around z by a linear function whose coefficients are the
+
+entries of ∇f(z). The algorithm is due to Jordan [153] and was further analyzed by Gily´en et al. [126, 100].
+
+7. (H) Let σ and ρ be k-qubit mixed states, ε > 0 small, t ≥0, and U = eiρ be a unitary. Our
+goal in this exercise is to apply Ut to σ at the expense of using some copies of the state ρ.
+The final state should have error ≤ε in trace norm compared to the intended state UtσU−t.
+
+(a) Show that for small η ≥0, UησU−η = σ + iη(ρσ −σρ) + E, where ∥E∥1 = O(η2).
+
+(b) Let W be the 2k-qubit unitary that swaps the first k qubits with the last k qubits, i.e.,
+it maps |a⟩|b⟩→|b⟩|a⟩for all a, b ∈{0, 1}k. Let σ′ be the k-qubit local state of the
+first register after applying the unitary eiWη to the 2k-qubit state σ ⊗ρ. Show that
+σ′ = σ + iη(ρσ −σρ) + E′, where ∥E′∥1 = O(η2).
+
+(c) Show that ∥σ′ −UησU−η∥1 = O(η2).
+
+(d) Show you can implement Ut on σ with error ε in trace norm, using O(t2/ε) copies of ρ.
+
+Comment: O(kt2/ε) elementary gates suffice to implement this, but you don’t have to show that.
+
+8. Suppose |ϕ⟩and |ψ⟩are unknown n-qubit pure states.
+
+(a) (H) Show how a quantum computer can estimate the overlap |⟨ϕ|ψ⟩| (in absolute value)
+up to additive error 1/100 using O(1) given copies of |ϕ⟩and |ψ⟩, and O(n) elementary
+gates.
+
+(b) Assume the inner product ⟨ϕ|ψ⟩is a real number. Show that ∥|ϕ⟩−|ψ⟩∥2 = 2 −2⟨ϕ|ψ⟩.
+
+(c) Assume ⟨ϕ|ψ⟩is real and positive. Show how a quantum computer can estimate the
+distance ∥|ϕ⟩−|ψ⟩∥up to additive error 1/100 using O(1) copies of |ϕ⟩and |ψ⟩, and
+O(n) gates.
+
+(d) Can a quantum computer detect the difference between the two cases |ψ⟩= |ϕ⟩and
+|ψ⟩= −|ϕ⟩, given arbitrarily many copies of these two states? Explain your answer.
+
+172
+
+
+===== PDF PAGE 185 =====
+
+Chapter 20
+
+Stabilizer States, Clifford Circuits,
+and One-Way Quantum Computing
+
+20.1
+Stabilizer states
+
+In this chapter we will look at a useful and important subset of the set of all n-qubit pure states,
+namely the stabilizer states. They make appearances everywhere in quantum computing, in par-
+ticular in circuit-design and in quantum error-correction. Consider the 1-qubit Paulis I, X, Y, Z
+(Appendix A.9).
+These matrices are unitary and Hermitian, and hence self-inverse, so their
+eigenvalues are ±1. Non-identity Paulis anti-commute (XZ = −ZX etc.) and Y = iXZ. Let
+Pn = {+1, −1, +i, −i} · {I, X, Y, Z}⊗n be the set of n-qubit Paulis with phases, which has 4n+1
+
+elements; the phases ensure that Pn is a group under multiplication.1
+
+If an n-qubit state |ψ⟩is an eigenstate of P ∈Pn\{±I} with eigenvalue +1 (i.e., |ψ⟩= P|ψ⟩)
+then we say that |ψ⟩is stabilized by P. One can think of the equation |ψ⟩= P|ψ⟩as cutting
+the 2n-dimensional space of all pure states in half: the set {|ψ⟩: P|ψ⟩= |ψ⟩} is a subspace of
+dimension 2n−1. If we had another equation P ′|ψ⟩= |ψ⟩, where P and P ′ are independent2, then
+the remaining subspace {|ψ⟩: P|ψ⟩= P ′|ψ⟩= |ψ⟩} that is stabilized by both P and P ′, has
+dimension 2n−2. Continuing with this, if we know |ψ⟩is stabilized by a set P (1), . . . , P (n) of n
+independent Paulis, then that determines a subspace of dimension 2n−n = 1, so it determines the
+state |ψ⟩up to an irrelevant global phase.3
+Such a state that is determined by n independent
+elements of Pn is called a stabilizer state. For example, for n = 1, the basis state |0⟩is stabilized
+by Z, and |1⟩is stabilized by −Z. For n = 2, the basis state |01⟩is stabilized by Z ⊗I and −I ⊗Z.
+In general, every basis state is a stabilizer state. Superpositions can also be stabilizer states. For
+example, |+⟩is stabilized by X, and |−⟩is stabilized by −X. Stabilizer states can be entangled, for
+instance an EPR-pair (Exercise 1) and tensor products of n EPR-pairs (Exercise 2) are stabilizer
+states.
+It is easy to see that the n independent stabilizers must be pairwise commuting because two
+anti-commuting matrices can’t have the same +1-eigenstate, and that −I cannot be written as a
+product of some of them. If some P ∈{I, X, Y, Z}⊗n commutes with all n of those stabilizers, then
+that P is a product of some of the P (1), possibly with a phase. Hence |ψ⟩will be an eigenstate of
+
+1Section 6.1.1 gives an introduction to group theory but isn’t necessary for understanding this chapter.
+2S ⊆Pn is “independent” if we can’t write one P ∈S as a product of some other elements ∈S, times ±1, ±i.
+3This global phase wouldn’t even be there if we took the density matrix view ρ = |ψ⟩⟨ψ|.
+
+173
+
+
+===== PDF PAGE 186 =====
+
+that P as well (with eigenvalue +1 or −1, because P is Hermitian).
+
+20.2
+Clifford circuits
+
+An n-qubit Clifford circuit U consists of Pauli gates, Hadamard gates (H), S =
+�1
+0
+0
+i
+
+�
+-gates,
+
+and CNOT gates. These are exactly the unitaries that preserve the Pauli group: they map (by
+conjugation) all elements of Pn to (possibly other) elements of Pn. For example, conjugation by H
+maps 1-qubit Paulis to 1-qubit Paulis as in Figure 20.1: HXH = Z, HY H = −Y etc. Conjugation
+
+I ←→I, X ←→Z, Z ←→X, Y ←→−Y
+
+Figure 20.1: The way conjugation by H maps the 4 1-qubit Paulis
+
+by CNOT maps the 2-qubit Paulis as depicted in Figure 20.2 (adapted from [157]).
+
+II
+IX
+IY
+IZ
+
+XI
+XX
+XY
+XZ
+
+Y I
+Y X
+Y Y
+Y Z
+
+ZI
+ZX
+ZY
+ZZ
+
+Figure 20.2: The way that conjugation by CNOT maps the 16 2-qubit Paulis (tensor product
+omitted and phases ±1, ±i omitted)
+
+See Exercise 3 for how the S-gate acts on Paulis.
+Since CNOT, H, and S map Paulis to Paulis, and since every Clifford circuit consists of those
+3 types of gates, every n-qubit Clifford circuit C maps n-qubit Paulis to n-qubit Paulis.4 This also
+implies that Clifford circuits map stabilizer states to stabilizer states, as follows. Suppose U is an
+n-qubit unitary which is one Clifford gate (CNOT, H, or S) tensored with identities on the other
+qubits. Suppose we apply this to a state |ψ⟩stabilized by P 1, . . . , P n ∈Pn. Then it is easy to see
+that the new state U|ψ⟩is stabilized by the n unitaries UP 1U∗, . . . , UP nU∗. Because the gate is
+a Clifford, the latter are still elements of Pn and they are easy to compute using the rules from
+the previous section about how conjugation by CNOT, H, or S changes a Pauli. For example, if
+2-qubit state |ψ⟩is stabilized by P 1 = X ⊗X and P 2 = Z ⊗Z, and we conjugate by the 2-qubit
+Clifford circuit U = H ⊗I, then U|ψ⟩is stabilized by P ′1 = Z ⊗X and P ′2 = X ⊗Z.
+In addition to unitary gates, we may also add the ability to measure a Pauli M ∈{I, X, Y, Z}⊗n
+
+during the computation, i.e., doing the projective measurement with operators M+ and M−with
+outcomes +1 and −1 corresponding to the positive and negative eigenspaces of M. For example,
+measuring the first qubit in the computational basis would correspond to M = Z ⊗I2n−1, with
+
+4Conversely, one can show that every unitary C that has this “Pauli-preserving” property can be written as a
+Clifford circuit of O(n2) gates (see Exercise 5).
+
+174
+
+
+===== PDF PAGE 187 =====
+
+M+ = |0⟩⟨0| ⊗I2n−1 and M−= |1⟩⟨1| ⊗I2n−1. We can then let the next gate depend on the earlier
+measurement outcomes, using some polynomial-time classical (possibly randomized) algorithm to
+compute what the next gate or measurement would be. This way the algorithm does not deter-
+ministically generate one specific stabilizer state at the end (as a circuit made up only of Clifford
+gates would), but rather it samples from a probability distribution over stabilizer states. To dis-
+tinguish such potentially more powerful circuits from the purely unitary Clifford circuits, we will
+use the term measurement-controlled Clifford circuits for such circuits that have intermediate Pauli
+measurements and classical control. Note that strictly speaking we’d have to talk about families
+of circuits {Cn} here, one for each number of qubits n, otherwise it doesn’t make sense to speak of
+“polynomial time” for the classical control computations, but that’s a technicality.
+
+20.3
+Efficient simulation of Cliffords: Gottesman-Knill theorem
+
+We saw in Section 13.3 that we can simulate a polynomial-size quantum circuit classically in
+polynomial space and exponential time. The polynomial space is nice (and initially surprising,
+since writing down the amplitude-vector of an arbitrary n-qubit state takes exponential space).
+The exponential time is terrible, but it is probably also unavoidable to a large extent: if the
+factoring problem does not have a polynomial-time classical algorithm (which is so widely believed
+that it underlies much of our current public-key cryptography) then there cannot be a time-efficient
+classical simulation of Shor’s quantum factoring algorithm.
+While we do not expect all quantum circuits to be efficiently simulable, it is still interesting and
+useful to try to delineate where the boundary for efficient simulability lies, because beyond that
+boundary lies the power of quantum computing. In other words, we would like to identify special
+classes of quantum circuits that can be efficiently simulated. One prominent example of such a
+special case is the class of Clifford circuits. This was proved by Gottesman and Knill [129] (see [4]
+for more efficient simulation).
+
+Theorem 6 (Gottesman-Knill) There exists a classical polynomial-time algorithm that, given
+an n-qubit measurement-controlled Clifford circuit C and an n-qubit initial basis state |x⟩, samples
+from the same final probability distribution over stabilizer states as C. The classical simulator will
+output a stabilizer description of the sampled final state.
+
+The key idea is to keep track of the state via n stabilizers (which can be written down with
+n × (2n + 2) = O(n2) bits) rather than via the state’s exponentially large vector of amplitudes.
+Suppose our quantum algorithm starts with a particular stabilizer state, for instance a computa-
+tional basis state |x⟩, whose stabilizer description is easy to write down. Then it applies a (possibly
+measurement-controlled) Clifford circuit. We can efficiently update the stabilizer representation of
+the state step-by-step, for each of the Clifford gates and Pauli measurements that are applied. We
+already saw in the previous section how to update when a unitary Clifford-gate (H, S, CNOT) is
+applied, but we also have to deal with the intermediate Pauli measurements.
+
+Updating the stabilizer representation after a measurement.
+Now suppose that at some
+point in our circuit we have an n-qubit state |ψ⟩stabilized by independent pairwise-commuting
+Paulis P (1), . . . , P (n) ∈Pn, and suppose we measure a Pauli M ∈{I, X, Y, Z}⊗n. This is a pro-
+jective measurement with outcome +1 and −1, and associated projectors M+ = (I + M)/2 and
+
+175
+
+
+===== PDF PAGE 188 =====
+
+M−= (I −M)/2, which correspond to the +1-eigenspace and −1-eigenspace of M, respectively.
+There are now two possibilities.
+Case 1. M commutes with all P (j). Because the P (j) form a maximal set of pairwise-commuting
+Paulis, M can be written as a product of some of the P (j)s times some phase m ∈{±1} (the
+phase can’t be ±i, because M is Hermitian and thus has real eigenvalues). Hence M|ψ⟩= m|ψ⟩.
+Accordingly, one of the two possible measurement outcomes (+1 or −1) has probability 1. We can
+compute what this deterministic measurement outcome m is, and the state doesn’t change after
+the measurement so its stabilizer description remains P (1), . . . , P (n). The computed measurement
+outcome may affect which gates we will do further on, but that is not a problem for the simulation.
+Case 2. M anti-commutes with at least one of the P (j)s, say MP (1) = −P (1)M. By multiplying
+all other P (j) that anti-commute with M by P (1), we may assume P (1) is the only one that anti-
+commutes with M. Using the fact that P (1) stabilizes |ψ⟩, and the cyclic property of the trace, the
+measurement outcome m ∈{±1} satisfies
+
+Pr[m = 1]
+=
+Tr
+�(I + M)
+
+2
+|ψ⟩⟨ψ|
+�
+= Tr
+�(I + M)
+
+2
+P (1)|ψ⟩⟨ψ|
+�
+= Tr
+�
+P (1) (I −M)
+
+2
+|ψ⟩⟨ψ|
+�
+
+=
+Tr
+�(I −M)
+
+2
+|ψ⟩⟨ψ|P (1)
+�
+= Tr
+�(I −M)
+
+2
+|ψ⟩⟨ψ|
+�
+= Pr[m = −1].
+
+Hence the measurement outcome m is distributed uniformly: both probabilities are equal to 1/2.
+We can simulate this simply by picking m by a fair coin flip. With that measurement outcome,
+the post-measurement state |ψ′⟩=
+1
+√
+
+2(I + mM)|ψ⟩has collapsed to the eigenspace of M that has
+eigenvalue m, so it will be stabilized by mM. Note that every stabilizer of |ψ⟩that commutes
+with M (that is, all except P (1)), also stabilizes |ψ′⟩.
+We update the stabilizer description by
+replacing P (1) by mM, resulting in n independent and pairwise-commuting stabilizers of |ψ′⟩.
+Note that computing the next operation (Clifford gate or Pauli measurement) from the earlier
+measurement outcomes was assumed to be classical polynomial-time computable in the measurement-
+controlled Clifford circuit that we’re simulating, so we can do the same computation during our
+simulation. Putting everything together, we end up with exactly the same probability distribu-
+tion over the final states as the quantum circuit, except that the final output is now a classical
+description of the final state in the form of n stabilizers, rather than an actual n-qubit state.
+
+20.4
+T-gates and magic states
+
+The Clifford gates do not form a universal set in the sense of Section 2.2, and in fact Clifford circuits
+on classical basis states can be efficiently simulated classically, as we just saw in the Gottesman-
+Knill theorem.
+One can show that adding just one non-Clifford gate to the available gate set
+{H, S, CNOT} already gives us a universal model of computation. The most common choice of a
+
+gate to add is the T =
+�1
+0
+0
+eiπ/4
+
+�
+-gate, often one sees circuits described as “Clifford+T” for that
+
+reason. To see that T is not Clifford, observe for instance that TXT ∗=
+�
+0
+e−iπ/4
+
+eiπ/4
+0
+
+�
+̸∈P1,
+
+so conjugation-by-T does not send Paulis to Paulis.
+The T-gate looks rather straightforward, it just adds a relatively simple phase eiπ/4 to |1⟩
+similarly to the Clifford-gates Z (which adds −1) and S (which adds i). However, it turns out
+that in the setting of quantum error-correction (Chapter 21), Clifford gates are usually easy to
+
+176
+
+
+===== PDF PAGE 189 =====
+
+do and non-Clifford gates (such as T) are often hard. Instead of actually doing a T-gate, there
+is a very nice trick that allows us to simulate a T-gate by a Clifford circuit (incl. an intermediate
+measurement used to control a subsequent gate) starting from one copy of the state
+
+|T⟩= T|+⟩=
+1
+√
+
+2(|0⟩+ eπi/4|1⟩).
+
+See Exercise 6 for how this is done. Accordingly, we can still do universal quantum computation
+with only measurement-controlled Clifford circuits if we start with a number of copies of |T⟩equal
+to the number of T-gates that we’d like to simulate. Somehow the |T⟩-states “magically” add
+universality to Clifford circuits; |T⟩is called a “magic state” for that reason. We can think of
+the |T⟩-states as a resource that we can consume during the computation, somewhat similar to
+how shared EPR-pairs are a bipartite resource that can be consumed when doing teleportation or
+non-locality experiments. We can thus move the cost of doing T-gates from the actual circuit to a
+pre-processing phase where we produce many copies of |T⟩. Alternatively, the |T⟩-states might be
+produced on-demand by some side-process during the computation, called a “magic-state factory.”
+
+20.5
+Efficient simulation of circuits with few T-gates
+
+A quantum algorithm will typically need to do a lot of T-gates, and in general we don’t believe
+we can simulate such an algorithm efficiently. But what if (besides Clifford operations) we only
+need a small number t of T-gates or |T⟩-states? Intuitively such circuits are “not very far” from
+Cliffords, and one might hope that efficient simulation is still possible. This indeed turns out to
+be the case. The trick is to take the non-stabilizer resource state |R⟩= |T⟩⊗t, and to write it as a
+linear combination of some r stabilizer states
+
+|R⟩=
+
+r
+�
+
+j=1
+αj|Sj⟩.
+
+Suppose we want to run an n-qubit measurement-controlled Clifford circuit with t T-gates on an
+initial n-qubit basis state |x⟩. We can equivalently run a measurement-controlled Clifford circuit
+without T-gates on an initial (n+t)-qubit state |x⟩|R⟩. We can now run a variant of the Gottesman-
+Knill algorithm r times in parallel, once for each |x⟩|Sj⟩, keeping track of the r stabilizer descriptions
+of the (n+t)-qubit states |S′
+j⟩that evolved starting from |x⟩|Sj⟩. We have to be careful here about
+the intermediate measurements. Suppose we want to measure a Pauli M on intermediate state
+|ψ⟩= �r
+j=1 α′
+j|S′
+j⟩, where we have a classical description of the α′
+js and stabilizer descriptions of
+the |S′
+j⟩. We can compute the expectation value
+
+v = ⟨ψ|M|ψ⟩=
+
+r
+�
+
+j,k=1
+α′∗
+j α′
+k⟨S′
+j|M|S′
+k⟩
+
+by computing all r2 values ⟨S′
+j|M|S′
+k⟩. This, however, would take time linear in r2. There is a better
+way to calculate this v in time proportional to r that we will not describe here, see [70]. The v that
+we calculated is the difference between measurement outcomes m = 1 and m = −1. We can now
+sample an m ∈{±1} according to that distribution, and for all j update the stabilizer description
+of |S′
+j⟩according to that measurement outcome m (mM will be one of the new stabilizers for each
+
+177
+
+
+===== PDF PAGE 190 =====
+
+of the r states), and update the coefficient α′
+j depending on the probability of outcome m for that
+particular stabilizer state (some α′
+j may even become 0). This gives a classical simulation of a
+measurement-controlled Clifford circuit that has t additional T-gates, in time r times a polynomial
+in the circuit size.
+
+Stabilizer rank.
+Clearly, the smaller we can make the number of terms r in the decomposition
+of |R⟩, the faster the above simulation will be. The minimal r possible (as a function of t) is called
+the “stabilizer rank” of the state |R⟩, and a fair amount of research has gone into proving upper and
+lower bounds on it. Tight bounds are not known, but the best known upper bound on the stabilizer
+rank of |R⟩is 3t/4 ≈20.3963t, which comes from writing |T⟩⊗4 as the sum of 3 stabilizer states [212].
+The best stabilizer rank of a good approximation of |R⟩(which is still good enough for classical
+simulation with small error) is roughly 20.228t [70]; see Exercise 8 for a weaker but already non-
+trivial upper bound of 20.61t. This is still exponential in t, but better than the trivial 2t, and it does
+imply that Clifford+T circuits that have only O(log n) T-gates, or measurement-controlled Clifford
+circuits that start from t = O(log n) copies of the magic state |T⟩, can be classically simulated in
+polynomial time.
+
+20.6
+One-way quantum computing
+
+We know that 1-qubit and 2-qubit gates suffice for universal quantum computing. If we start with
+a basis state, or any other product state, then the 2-qubit gates are essential: without them we
+would never get away from product states, and those are easy to describe classically (2n complex
+numbers suffice rather than 2n). Also in Clifford+T circuits where we replaced the T-gates by
+little measurement-controlled Clifford-computations on magic states, we still need to do the 2-
+qubit CNOT gates. 2-qubit gates are much harder to implement in practice than 1-qubit gates,
+because they require us to interact two different physical systems (two electrons, two photons, two
+atoms, or whatever system is used to realize qubits).
+There is an interesting way to avoid doing any 2-qubit operations at all during the computation,
+called one-way quantum computing (1WQC). This was introduced by Raussendorf and Briegel [213,
+214], and is the most prominent example of “measurement-based” quantum computing (MBQC).
+In 1WQC the computation consists only of single-qubit measurements in bases that are controlled
+by (i.e., that may depend on) the classical outcomes of earlier single-qubit measurements. The trick
+that makes this possible is that we start the computation in a rather large entangled resource state,
+called a “cluster state,” which we will explain below. If we have some good way to build a cluster
+state, either fully ready before the start of the computation, or on the fly during the computation,
+then we can avoid having to do 2-qubit gates during the rest of the computation (similar to how
+preparing magic states beforehand avoids having to do T-gates during the rest of the computation).
+How does this work? Suppose we have an n-qubit circuit C of depth d that we would like to
+convert to the one-way model. Suppose the initial state on which we want to apply C is |+⟩⊗n;
+this is without loss of generality, since an initial product state, including any basis state, can be
+obtained from |+⟩⊗n by single-qubit unitaries. Suppose the circuit C uses only controlled-Zs (CZs)
+and single-qubit gates of the form
+
+J(α) = H
+�1
+0
+0
+eiα
+
+�
+,
+
+178
+

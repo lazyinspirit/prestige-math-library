@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-wirtinger-chain-rule-for-real-differentiable-maps.json
 id: thm-wirtinger-chain-rule-for-real-differentiable-maps
 kind: theorem
 title: "The Wirtinger chain rule for compositions of real-differentiable complex-valued maps"
@@ -7,14 +9,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-wirtinger-derivatives, thm-chain-rule-for-total-derivatives,
+deps: [thm-complex-coordinate-map-preserves-real-total-differentiability, def-wirtinger-derivatives, thm-chain-rule-for-total-derivatives,
        lem-complex-conjugation-and-modulus-laws]
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -39,7 +38,7 @@ at $a$. If both maps are holomorphic, these formulas reduce to the complex chain
 
 [F1] For a real-differentiable complex-valued map, $Df(h)=f_zh+f_{\bar z}\bar h$ ([[def-wirtinger-derivatives]]).
 
-[L1] The total derivative of a composite is the composite of the total derivatives ([[thm-chain-rule-for-total-derivatives]]).
+[L1] Apply [[thm-chain-rule-for-total-derivatives]] to $f_{\mathbb R}$ and $g_{\mathbb R}$ on their open coordinate domains. By [[thm-complex-coordinate-map-preserves-real-total-differentiability]], conjugating the resulting identity by $\Phi^{-1}$ and $\Phi$ gives $D_{\mathbb R}(g\circ f)(a)=D_{\mathbb R}g(f(a))\circ D_{\mathbb R}f(a)$.
 
 [L2] Complex conjugation satisfies $\overline{z+w}=\bar z+\bar w$ and $\overline{zw}=\bar z\bar w$ ([[lem-complex-conjugation-and-modulus-laws]]).
 
@@ -53,4 +52,4 @@ at $a$. If both maps are holomorphic, these formulas reduce to the complex chain
 
 2.1 By [L1] and [L2], $$D(g\circ f)(a)h=(CA+D\bar B)h+(CB+D\bar A)\bar h.$$ [step 1.1, L1, L2, algebra]
 
-3.1 Comparing step 2.1 with the unique Wirtinger expansion [F1] gives the two displayed formulas. For holomorphic $f,g$, the barred coefficients vanish, leaving $(g\circ f)_z=(g_w\circ f)f_z$. [step 2.1, F1, algebra] ∎
+3.1 A real-linear map has unique coefficients $P,Q$ in $Ph+Q\bar h$: its values at $1$ and $i$ give $P+Q$ and $i(P-Q)$, which determine $P,Q$. Comparing step 2.1 with this unique expansion [F1] gives the two displayed formulas. For holomorphic $f,g$, the barred coefficients vanish, leaving $(g\circ f)_z=(g_w\circ f)f_z$. [step 2.1, F1, algebra] ∎
